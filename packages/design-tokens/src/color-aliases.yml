@@ -1,0 +1,66 @@
+positive:
+  color:
+    100:
+      value: "{color.espelkamp-green.100}"
+    200:
+      value: "{color.espelkamp-green.200}"
+    300:
+      value: "{color.espelkamp-green.300}"
+    400:
+      value: "{color.espelkamp-green.400}"
+    500:
+      value: "{color.espelkamp-green.500}"
+    600:
+      value: "{color.espelkamp-green.600}"
+    700:
+      value: "{color.espelkamp-green.700}"
+    800:
+      value: "{color.espelkamp-green.800}"
+    900:
+      value: "{color.espelkamp-green.900}"
+    1000:
+      value: "{color.espelkamp-green.1000}"
+    1100:
+      value: "{color.espelkamp-green.1100}"
+    visual:
+      color:
+        value: "{positive.color.600}"
+
+informative:
+  color:
+    100:
+      value: "{color.hosting-blue.100}"
+    200:
+      value: "{color.hosting-blue.200}"
+    300:
+      value: "{color.hosting-blue.300}"
+    400:
+      value: "{color.hosting-blue.400}"
+    500:
+      value: "{color.hosting-blue.500}"
+    600:
+      value: "{color.hosting-blue.600}"
+    700:
+      value: "{color.hosting-blue.700}"
+    800:
+      value: "{color.hosting-blue.800}"
+    900:
+      value: "{color.hosting-blue.900}"
+    1000:
+      value: "{color.hosting-blue.1000}"
+    1100:
+      value: "{color.hosting-blue.1100}"
+  visual:
+    color:
+      value: "{informative.color.700}"
+
+interactive:
+  quiet:
+    background:
+      color:
+        default:
+          value: transparent
+        hover:
+          value: "{color.gray.300}"
+        selected:
+          value: "{color.gray.300}"

@@ -1,0 +1,99 @@
+color:
+  gray:
+    100:
+      value: rgb(255,255,255)
+    200:
+      value: rgb(253,253,253)
+    300:
+      value: rgb(248,248,248)
+    400:
+      value: rgb(230,230,230)
+    500:
+      value: rgb(213,213,213)
+    600:
+      value: rgb(177,177,177)
+    700:
+      value: rgb(144,144,144)
+    800:
+      value: rgb(109,109,109)
+    900:
+      value: rgb(70,70,70)
+    1000:
+      value: rgb(34,34,34)
+    1100:
+      value: rgb(0,0,0)
+
+  hosting-blue:
+    100:
+      value: "#DEE9FF"
+    200:
+      value: "#CCDEFF"
+    300:
+      value: "#A8C6FF"
+    400:
+      value: "#85AFFF"
+    500:
+      value: "#6197FF"
+    600:
+      value: "#3D80FF"
+    700:
+      value: "#1A68FF"
+    800:
+      value: "#0054F5"
+    900:
+      value: "#003CAE"
+    1000:
+      value: "#002366"
+    1100:
+      value: "#001743"
+
+  navy-blue:
+    100:
+      value: "#D9DEF3"
+    200:
+      value: "#C8CFEE"
+    300:
+      value: "#A5B0E2"
+    400:
+      value: "#8291D7"
+    500:
+      value: "#5F73CC"
+    600:
+      value: "#3D55C1"
+    700:
+      value: "#32459E"
+    800:
+      value: "#27367B"
+    900:
+      value: "#1D285C"
+    1000:
+      value: "#131B3D"
+    1100:
+      value: "#0E142E"
+
+  espelkamp-green:
+    100:
+      value: "#C0FFEC"
+    200:
+      value: "#A6FFE4"
+    300:
+      value: "#73FFD5"
+    400:
+      value: "#40FFC5"
+    500:
+      value: "#0DFFB6"
+    600:
+      value: "#00D998"
+    700:
+      value: "#00A674"
+    800:
+      value: "#00825B"
+    900:
+      value: "#005F42"
+    1000:
+      value: "#003B29"
+    1100:
+      value: "#00291D"
+
+  white:
+    value: rgb(255,255,255)

@@ -1,0 +1,30 @@
+inline-alert:
+  border:
+    color:
+      informative:
+        value: "{informative.visual.color}"
+    width:
+      default:
+        value: 1px
+      accented:
+        value: 2px
+    rounding:
+      value: 2px
+
+  icon:
+    size:
+      value: 16px
+    color:
+      informative:
+        value: "{informative.visual.color}"
+
+  background:
+    color:
+      # ??? dark mode
+      value: "{color.white}"
+
+  edge-to-text:
+    value: 8px
+
+  icon-to-text:
+    value: 8px

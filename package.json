@@ -1,0 +1,43 @@
+{
+  "name": "@mittwald/flow-next-project",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "components:build": "lerna run build --scope=@mittwald/flow-components",
+    "components:build:watch": "lerna watch --scope=@mittwald/flow-components --include-dependencies -- run lerna:build:watch:base \\$LERNA_PACKAGE_NAME",
+    "components:dev": "concurrently 'yarn:components:build:watch --ignore=@mittwald/flow-components' 'yarn:components:dev:base'",
+    "components:dev:base": "lerna run dev --scope=@mittwald/flow-components",
+    "docs:build": "lerna run build --scope=@mittwald/flow-documentation",
+    "docs:build:watch": "lerna watch --scope=@mittwald/flow-documentation --include-dependencies -- run lerna:build:watch:base \\$LERNA_PACKAGE_NAME",
+    "docs:dev": "concurrently 'yarn:docs:build:watch --ignore=@mittwald/flow-documentation' 'yarn:docs:dev:base'",
+    "docs:dev:base": "lerna run dev --scope=@mittwald/flow-documentation",
+    "format": "prettier --write $@ '**/*.{ts,tsx,yaml,yml,json,md,mdx}'",
+    "lerna:build:watch:base": "lerna run build --include-dependents --scope=$0",
+    "tokens:build": "lerna run build --scope=@mittwald/flow-design-tokens",
+    "tokens:build:watch": "lerna watch --scope=@mittwald/flow-design-tokens --include-dependencies -- run lerna:build:watch:base \\$LERNA_PACKAGE_NAME"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "lerna": "^7.4.2",
+    "nx": "16.10.0",
+    "nx-cloud": "^16.5.2",
+    "prettier": "^2.8.8",
+    "prettier-plugin-jsdoc": "^0.4.2",
+    "prettier-plugin-package": "^1.3.1",
+    "prettier-plugin-sort-json": "^1.0.0",
+    "typescript": "^5.2.2"
+  },
+  "resolutions": {
+    "@vitejs/plugin-react": "^4.2.0"
+  },
+  "dependenciesMeta": {
+    "@types/react@18.2.37": {
+      "unplugged": true
+    }
+  },
+  "packageManager": "yarn@4.0.1",
+  "workspaces": [
+    "packages/*"
+  ]
+}

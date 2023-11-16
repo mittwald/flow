@@ -1,0 +1,31 @@
+{
+  "affected": {
+    "defaultBase": "master"
+  },
+  "namedInputs": {
+    "default": ["{projectRoot}/src/**/*"],
+    "production": ["default"]
+  },
+  "targetDefaults": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["default", "^default"],
+      "outputs": ["{projectRoot}/dist"]
+    },
+    "dev": {
+      "dependsOn": ["^build"]
+    },
+    "start": {
+      "dependsOn": ["build"]
+    }
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "nx-cloud",
+      "options": {
+        "cacheableOperations": ["build"],
+        "accessToken": "ZTRhMTQzNWUtZGY5Mi00OWVjLTg4ZjAtNzM3ZjRmZjJiNDRifHJlYWQ="
+      }
+    }
+  }
+}
