@@ -1,7 +1,7 @@
 import { defineConfig, mergeConfig } from "vite";
 import dts from "vite-plugin-dts";
 import prefixer from "postcss-prefix-selector";
-import baseConfig from "./vite.config.js";
+import baseConfig from "./vite.config";
 
 export default defineConfig(
   mergeConfig(baseConfig, {

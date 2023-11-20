@@ -12,8 +12,9 @@
     "docs:build:watch": "lerna watch --scope=@mittwald/flow-documentation --include-dependencies -- run lerna:build:watch:base \\$LERNA_PACKAGE_NAME",
     "docs:dev": "concurrently 'yarn:docs:build:watch --ignore=@mittwald/flow-documentation' 'yarn:docs:dev:base'",
     "docs:dev:base": "lerna run dev --scope=@mittwald/flow-documentation",
-    "format": "prettier --write $@ '**/*.{ts,tsx,yaml,yml,json,md,mdx}'",
+    "format": "prettier --write '**/*.{ts,tsx,yaml,yml,json,md,mdx,js,cjs,mjs}'",
     "lerna:build:watch:base": "lerna run build --include-dependents --scope=$0",
+    "test:format": "run format --check",
     "tokens:build": "lerna run build --scope=@mittwald/flow-design-tokens",
     "tokens:build:watch": "lerna watch --scope=@mittwald/flow-design-tokens --include-dependencies -- run lerna:build:watch:base \\$LERNA_PACKAGE_NAME"
   },

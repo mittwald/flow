@@ -1,5 +1,6 @@
 import { defineConfig } from "vite";
 import postcssNesting from "postcss-nesting";
+import { cssModuleClassNameGenerator } from "./dev/cssModuleClassNameGenerator";
 
 export default defineConfig({
   resolve: {
@@ -12,25 +13,7 @@ export default defineConfig({
       plugins: [postcssNesting],
     },
     modules: {
-      generateScopedName: (name, filename) => {
-        if (name === "flow") {
-          return name;
-        }
-
-        const parts = Array.from(
-          filename.matchAll(/.*components\/(.*?)\/styles.module.css/gm),
-        ).map((p) => p[1]);
-
-        if (parts.length > 0) {
-          if (name !== "root") {
-            parts.push(name);
-          }
-
-          return "flow-" + parts.map((p) => p.toLowerCase()).join("-");
-        }
-
-        return name;
-      },
+      generateScopedName: cssModuleClassNameGenerator,
     },
   },
 });

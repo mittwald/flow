@@ -3,7 +3,9 @@
     "defaultBase": "master"
   },
   "namedInputs": {
-    "default": ["{projectRoot}/src/**/*"],
+    "src": ["{projectRoot}/{src,dev}/**/!(*.test).ts"],
+    "test": ["{projectRoot}/{src,dev}/**/*.test.ts"],
+    "default": ["src"],
     "production": ["default"]
   },
   "targetDefaults": {
@@ -15,6 +17,10 @@
     "dev": {
       "dependsOn": ["^build"]
     },
+    "test": {
+      "inputs": ["test", "default", "^default"],
+      "dependsOn": ["^build"]
+    },
     "start": {
       "dependsOn": ["build"]
     }
@@ -23,7 +29,7 @@
     "default": {
       "runner": "nx-cloud",
       "options": {
-        "cacheableOperations": ["build"],
+        "cacheableOperations": ["build", "test"],
         "accessToken": "ZTRhMTQzNWUtZGY5Mi00OWVjLTg4ZjAtNzM3ZjRmZjJiNDRifHJlYWQ="
       }
     }
