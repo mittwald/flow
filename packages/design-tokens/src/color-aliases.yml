@@ -1,7 +1,7 @@
 positive:
   color:
     100:
-      value: "{color.espelkamp-green.300}"
+      value: "{color.espelkamp-green.100}"
     200:
       value: "{color.espelkamp-green.200}"
     300:
