@@ -3,8 +3,8 @@
     "defaultBase": "master"
   },
   "namedInputs": {
-    "src": ["{projectRoot}/{src,dev}/**/!(*.test).ts"],
-    "test": ["{projectRoot}/{src,dev}/**/*.test.ts"],
+    "src": ["{projectRoot}/{src,dev}/**/!(*.test).*"],
+    "test": ["{projectRoot}/{src,dev}/**/*.test.*"],
     "default": ["src"],
     "production": ["default"]
   },
