@@ -6,7 +6,8 @@
     "src": ["{projectRoot}/{src,dev}/**/!(*.test).*"],
     "test": ["{projectRoot}/{src,dev}/**/*.test.*"],
     "default": ["src"],
-    "production": ["default"]
+    "production": ["default"],
+    "nx-cloud-version-1:": ["default"]
   },
   "targetDefaults": {
     "build": {

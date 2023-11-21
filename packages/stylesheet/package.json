@@ -1,0 +1,18 @@
+{
+  "name": "@mittwald/flow-stylesheet",
+  "version": "0.0.0",
+  "type": "module",
+  "exports": {
+    ".": "./dist/style.css"
+  },
+  "scripts": {
+    "build": "node build.js"
+  },
+  "files": [
+    "./dist"
+  ],
+  "devDependencies": {
+    "@mittwald/flow-components": "workspace:*",
+    "resolve-package-path": "^4.0.3"
+  }
+}

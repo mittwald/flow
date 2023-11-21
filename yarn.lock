@@ -2604,6 +2604,7 @@ __metadata:
   resolution: "@mittwald/flow-documentation@workspace:packages/docs"
   dependencies:
     "@mittwald/flow-components": "workspace:*"
+    "@mittwald/flow-stylesheet": "workspace:*"
     "@types/node": "npm:^20.9.2"
     "@types/react": "npm:^18.2.37"
     "@types/react-dom": "npm:^18.2.15"
@@ -2632,6 +2633,15 @@ __metadata:
   dependenciesMeta:
     "@types/react@18.2.37":
       unplugged: true
+  languageName: unknown
+  linkType: soft
+
+"@mittwald/flow-stylesheet@workspace:*, @mittwald/flow-stylesheet@workspace:packages/stylesheet":
+  version: 0.0.0-use.local
+  resolution: "@mittwald/flow-stylesheet@workspace:packages/stylesheet"
+  dependencies:
+    "@mittwald/flow-components": "workspace:*"
+    resolve-package-path: "npm:^4.0.3"
   languageName: unknown
   linkType: soft
 
@@ -13786,6 +13796,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"path-root-regex@npm:^0.1.0":
+  version: 0.1.2
+  resolution: "path-root-regex@npm:0.1.2"
+  checksum: 27651a234f280c70d982dd25c35550f74a4284cde6b97237aab618cb4b5745682d18cdde1160617bb4a4b6b8aec4fbc911c4a2ad80d01fa4c7ee74dae7af2337
+  languageName: node
+  linkType: hard
+
+"path-root@npm:^0.1.1":
+  version: 0.1.1
+  resolution: "path-root@npm:0.1.1"
+  dependencies:
+    path-root-regex: "npm:^0.1.0"
+  checksum: aed5cd290df84c46c7730f6a363e95e47a23929b51ab068a3818d69900da3e89dc154cdfd0c45c57b2e02f40c094351bc862db70c2cb00b7e6bd47039a227813
+  languageName: node
+  linkType: hard
+
 "path-scurry@npm:^1.10.1, path-scurry@npm:^1.6.1":
   version: 1.10.1
   resolution: "path-scurry@npm:1.10.1"
@@ -14816,6 +14842,15 @@ __metadata:
   version: 4.0.0
   resolution: "resolve-from@npm:4.0.0"
   checksum: 8408eec31a3112ef96e3746c37be7d64020cda07c03a920f5024e77290a218ea758b26ca9529fd7b1ad283947f34b2291c1c0f6aa0ed34acfdda9c6014c8d190
+  languageName: node
+  linkType: hard
+
+"resolve-package-path@npm:^4.0.3":
+  version: 4.0.3
+  resolution: "resolve-package-path@npm:4.0.3"
+  dependencies:
+    path-root: "npm:^0.1.1"
+  checksum: d2e7883a075b21fbf084f7615f9201e4d5aea6c22ba670dc66503a256c5eba5983d0822b9d51ef33303bfe9b0025916f622f6d780c42d7c020d826f8a9bc58fa
   languageName: node
   linkType: hard
 

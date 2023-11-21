@@ -8,6 +8,8 @@
     "components:build:watch": "lerna watch --scope=@mittwald/flow-components --include-dependencies -- run lerna:build:watch:base \\$LERNA_PACKAGE_NAME",
     "components:dev": "concurrently 'yarn:components:build:watch --ignore=@mittwald/flow-components' 'yarn:components:dev:base'",
     "components:dev:base": "lerna run dev --scope=@mittwald/flow-components",
+    "components:test:base": "lerna run test --scope=@mittwald/flow-components",
+    "components:test:watch": "concurrently 'yarn:components:build:watch --ignore=@mittwald/flow-components' 'yarn:components:test:base -- --watch'",
     "docs:build": "lerna run build --scope=@mittwald/flow-documentation",
     "docs:build:watch": "lerna watch --scope=@mittwald/flow-documentation --include-dependencies -- run lerna:build:watch:base \\$LERNA_PACKAGE_NAME",
     "docs:dev": "concurrently 'yarn:docs:build:watch --ignore=@mittwald/flow-documentation' 'yarn:docs:dev:base'",

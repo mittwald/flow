@@ -24,15 +24,20 @@ const RAW_RUNTIME_STATE =
     {\
       "name": "@mittwald/flow-documentation",\
       "reference": "workspace:packages/docs"\
+    },\
+    {\
+      "name": "@mittwald/flow-stylesheet",\
+      "reference": "workspace:packages/stylesheet"\
     }\
   ],\
   "enableTopLevelFallback": true,\
   "ignorePatternData": "(^(?:\\\\.yarn\\\\/sdks(?:\\\\/(?!\\\\.{1,2}(?:\\\\/|$))(?:(?:(?!(?:^|\\\\/)\\\\.{1,2}(?:\\\\/|$)).)*?)|$))$)",\
   "fallbackExclusionList": [\
-    ["@mittwald/flow-components", ["virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#workspace:packages/components", "workspace:packages/components"]],\
+    ["@mittwald/flow-components", ["virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#workspace:packages/components", "virtual:f09e910c1b508d3d7569e5bd3d1b58e6c8eedf483d3ecb00a35f3e6fff907cff61fcf2c7acd90c04d26e337186c1afc7265f77161911bcd5beabe7070df91545#workspace:packages/components", "workspace:packages/components"]],\
     ["@mittwald/flow-design-tokens", ["workspace:packages/design-tokens"]],\
     ["@mittwald/flow-documentation", ["workspace:packages/docs"]],\
-    ["@mittwald/flow-next-project", ["workspace:."]]\
+    ["@mittwald/flow-next-project", ["workspace:."]],\
+    ["@mittwald/flow-stylesheet", ["workspace:packages/stylesheet"]]\
   ],\
   "fallbackPool": [\
   ],\
@@ -4216,6 +4221,43 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "SOFT"\
       }],\
+      ["virtual:f09e910c1b508d3d7569e5bd3d1b58e6c8eedf483d3ecb00a35f3e6fff907cff61fcf2c7acd90c04d26e337186c1afc7265f77161911bcd5beabe7070df91545#workspace:packages/components", {\
+        "packageLocation": "./.yarn/__virtual__/@mittwald-flow-components-virtual-85e2e474c0/1/packages/components/",\
+        "packageDependencies": [\
+          ["@mittwald/flow-components", "virtual:f09e910c1b508d3d7569e5bd3d1b58e6c8eedf483d3ecb00a35f3e6fff907cff61fcf2c7acd90c04d26e337186c1afc7265f77161911bcd5beabe7070df91545#workspace:packages/components"],\
+          ["@jest/globals", "npm:29.7.0"],\
+          ["@mittwald/flow-design-tokens", "workspace:packages/design-tokens"],\
+          ["@nx/storybook", "npm:16.10.0"],\
+          ["@storybook/addon-essentials", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:7.5.3"],\
+          ["@storybook/addon-interactions", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:7.5.3"],\
+          ["@storybook/addon-links", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:7.5.3"],\
+          ["@storybook/addon-onboarding", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:1.0.8"],\
+          ["@storybook/blocks", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:7.5.3"],\
+          ["@storybook/react", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:7.5.3"],\
+          ["@storybook/react-vite", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:7.5.3"],\
+          ["@storybook/testing-library", "npm:0.2.2"],\
+          ["@types/jest", "npm:29.5.8"],\
+          ["@types/postcss-prefix-selector", "npm:1.16.3"],\
+          ["@types/prop-types", "npm:15.7.10"],\
+          ["@types/react", "npm:18.2.37"],\
+          ["@types/react-dom", "npm:18.2.15"],\
+          ["jest", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:29.7.0"],\
+          ["postcss", "npm:8.4.31"],\
+          ["postcss-nested-import", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:1.3.0"],\
+          ["postcss-nesting", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:12.0.1"],\
+          ["postcss-prefix-selector", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:1.16.0"],\
+          ["prop-types", "npm:15.8.1"],\
+          ["react", "npm:18.2.0"],\
+          ["react-dom", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:18.2.0"],\
+          ["storybook", "npm:7.5.3"],\
+          ["ts-jest", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:29.1.1"],\
+          ["typescript", "patch:typescript@npm%3A5.2.2#optional!builtin<compat/typescript>::version=5.2.2&hash=f3b441"],\
+          ["typescript-plugin-css-modules", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:5.0.2"],\
+          ["vite", "virtual:88c964aa97edce2305477c1ccad1fd6b98295045522fd43b778e64d2437f154ae67fec5a5aad05c574dd609f1e730c55f88969906249d2cb1af99023fb817c59#npm:5.0.0"],\
+          ["vite-plugin-dts", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:3.6.3"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
       ["workspace:packages/components", {\
         "packageLocation": "./packages/components/",\
         "packageDependencies": [\
@@ -4272,6 +4314,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@mittwald/flow-documentation", "workspace:packages/docs"],\
           ["@mittwald/flow-components", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#workspace:packages/components"],\
+          ["@mittwald/flow-stylesheet", "workspace:packages/stylesheet"],\
           ["@types/node", "npm:20.9.2"],\
           ["@types/react", "npm:18.2.37"],\
           ["@types/react-dom", "npm:18.2.15"],\
@@ -4299,6 +4342,17 @@ const RAW_RUNTIME_STATE =
           ["prettier-plugin-package", "virtual:293d93f0dab39a9cb110260f7247420c230cdd19f40de541518b0c0bf8cd4537ab2d1f6cc813f83c1428d6fb37d8de496941cc588e7a64bfbcb303780e1f6334#npm:1.3.1"],\
           ["prettier-plugin-sort-json", "virtual:293d93f0dab39a9cb110260f7247420c230cdd19f40de541518b0c0bf8cd4537ab2d1f6cc813f83c1428d6fb37d8de496941cc588e7a64bfbcb303780e1f6334#npm:1.0.0"],\
           ["typescript", "patch:typescript@npm%3A5.2.2#optional!builtin<compat/typescript>::version=5.2.2&hash=f3b441"]\
+        ],\
+        "linkType": "SOFT"\
+      }]\
+    ]],\
+    ["@mittwald/flow-stylesheet", [\
+      ["workspace:packages/stylesheet", {\
+        "packageLocation": "./packages/stylesheet/",\
+        "packageDependencies": [\
+          ["@mittwald/flow-stylesheet", "workspace:packages/stylesheet"],\
+          ["@mittwald/flow-components", "virtual:f09e910c1b508d3d7569e5bd3d1b58e6c8eedf483d3ecb00a35f3e6fff907cff61fcf2c7acd90c04d26e337186c1afc7265f77161911bcd5beabe7070df91545#workspace:packages/components"],\
+          ["resolve-package-path", "npm:4.0.3"]\
         ],\
         "linkType": "SOFT"\
       }]\
@@ -17682,6 +17736,25 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["path-root", [\
+      ["npm:0.1.1", {\
+        "packageLocation": "./.yarn/cache/path-root-npm-0.1.1-624088cb93-aed5cd290d.zip/node_modules/path-root/",\
+        "packageDependencies": [\
+          ["path-root", "npm:0.1.1"],\
+          ["path-root-regex", "npm:0.1.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["path-root-regex", [\
+      ["npm:0.1.2", {\
+        "packageLocation": "./.yarn/cache/path-root-regex-npm-0.1.2-14181162e0-27651a234f.zip/node_modules/path-root-regex/",\
+        "packageDependencies": [\
+          ["path-root-regex", "npm:0.1.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["path-scurry", [\
       ["npm:1.10.1", {\
         "packageLocation": "./.yarn/cache/path-scurry-npm-1.10.1-52bd946f2e-e5dc78a734.zip/node_modules/path-scurry/",\
@@ -19105,6 +19178,16 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/resolve-from-npm-5.0.0-15c9db4d33-b21cb7f1fb.zip/node_modules/resolve-from/",\
         "packageDependencies": [\
           ["resolve-from", "npm:5.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["resolve-package-path", [\
+      ["npm:4.0.3", {\
+        "packageLocation": "./.yarn/cache/resolve-package-path-npm-4.0.3-00b03b45c0-d2e7883a07.zip/node_modules/resolve-package-path/",\
+        "packageDependencies": [\
+          ["resolve-package-path", "npm:4.0.3"],\
+          ["path-root", "npm:0.1.1"]\
         ],\
         "linkType": "HARD"\
       }]\
