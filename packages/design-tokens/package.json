@@ -6,7 +6,7 @@
     ".": "./dist/variables.css"
   },
   "scripts": {
-    "build": "style-dictionary build -c style-dictionary.config.cjs"
+    "build": "run style-dictionary build -c style-dictionary.config.cjs"
   },
   "files": [
     "dist"

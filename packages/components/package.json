@@ -9,11 +9,13 @@
     "./style/init": "./dist/index.js"
   },
   "scripts": {
-    "build": "vite build --config vite.build.config.ts",
+    "build": "run vite build --config vite.build.config.ts",
+    "build:deps": "",
+    "build:watch:dependents": "run -T lerna watch --scope=@mittwald/flow-components --include-dependencies -- lerna run build:deps --scope=@mittwald/flow-components",
     "dev": "run storybook:start",
-    "storybook:build": "storybook build",
-    "storybook:start": "storybook dev -p 6006",
-    "test": "jest"
+    "storybook:build": "run storybook build",
+    "storybook:start": "run storybook dev -p 6006",
+    "test": "run jest"
   },
   "files": [
     "dist"

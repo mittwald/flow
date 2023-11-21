@@ -15,6 +15,9 @@
       "inputs": ["default", "^default"],
       "outputs": ["{projectRoot}/dist"]
     },
+    "build:deps": {
+      "dependsOn": ["^build"]
+    },
     "dev": {
       "dependsOn": ["^build"]
     },

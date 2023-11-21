@@ -4,21 +4,14 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "components:build": "lerna run build --scope=@mittwald/flow-components",
-    "components:build:watch": "lerna watch --scope=@mittwald/flow-components --include-dependencies -- run lerna:build:watch:base \\$LERNA_PACKAGE_NAME",
-    "components:dev": "concurrently 'yarn:components:build:watch --ignore=@mittwald/flow-components' 'yarn:components:dev:base'",
-    "components:dev:base": "lerna run dev --scope=@mittwald/flow-components",
-    "components:test:base": "lerna run test --scope=@mittwald/flow-components",
-    "components:test:watch": "concurrently 'yarn:components:build:watch --ignore=@mittwald/flow-components' 'yarn:components:test:base -- --watch'",
-    "docs:build": "lerna run build --scope=@mittwald/flow-documentation",
-    "docs:build:watch": "lerna watch --scope=@mittwald/flow-documentation --include-dependencies -- run lerna:build:watch:base \\$LERNA_PACKAGE_NAME",
-    "docs:dev": "concurrently 'yarn:docs:build:watch --ignore=@mittwald/flow-documentation' 'yarn:docs:dev:base'",
-    "docs:dev:base": "lerna run dev --scope=@mittwald/flow-documentation",
+    "components:dev": "concurrently yarn:components:dev:base yarn:components:dev:watch",
+    "components:dev:base": "yarn workspace @mittwald/flow-components run dev",
+    "components:dev:watch": "yarn workspace @mittwald/flow-components run build:watch:dependents",
+    "docs:dev": "concurrently yarn:docs:dev:base yarn:docs:dev:watch",
+    "docs:dev:base": "yarn workspace @mittwald/flow-documentation run dev",
+    "docs:dev:watch": "yarn workspace @mittwald/flow-documentation run build:watch:dependents",
     "format": "prettier --write '**/*.{ts,tsx,yaml,yml,json,md,mdx,js,cjs,mjs}'",
-    "lerna:build:watch:base": "lerna run build --include-dependents --scope=$0",
-    "test:format": "run format --check",
-    "tokens:build": "lerna run build --scope=@mittwald/flow-design-tokens",
-    "tokens:build:watch": "lerna watch --scope=@mittwald/flow-design-tokens --include-dependencies -- run lerna:build:watch:base \\$LERNA_PACKAGE_NAME"
+    "test:format": "run format --check"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",

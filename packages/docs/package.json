@@ -4,10 +4,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "next build",
-    "dev": "next dev",
-    "lint": "next lint",
-    "start": "next start"
+    "build": "run next build",
+    "build:deps": "",
+    "build:watch:dependents": "run -T lerna watch --scope=@mittwald/flow-documentation --include-dependencies -- lerna run build:deps --scope=@mittwald/flow-documentation",
+    "dev": "run next dev",
+    "lint": "run next lint",
+    "start": "run next start"
   },
   "dependencies": {
     "@mittwald/flow-components": "workspace:*",
