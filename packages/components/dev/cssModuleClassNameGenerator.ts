@@ -1,3 +1,8 @@
+import { dirname } from "path";
+import * as _dirname from "./dirname.cjs";
+
+const parentDir = dirname(_dirname.default);
+
 export const cssModuleClassNameGenerator = (
   name: string,
   filename: string,
@@ -6,13 +11,17 @@ export const cssModuleClassNameGenerator = (
     return name;
   }
 
-  if (!filename.endsWith(".module.css")) {
+  const relativeFilename = filename.startsWith(parentDir)
+    ? filename.slice(parentDir.length)
+    : filename;
+
+  if (!relativeFilename.endsWith(".module.css")) {
     return name;
   }
 
-  const parts = Array.from(filename.matchAll(/(components\/(.+?)\/)/g)).map(
-    (p) => p[2],
-  );
+  const parts = Array.from(
+    relativeFilename.matchAll(/(components\/(.+?)\/)/g),
+  ).map((p) => p[2]);
 
   if (parts.length > 0) {
     if (name !== "root") {
