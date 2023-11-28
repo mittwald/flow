@@ -10,7 +10,7 @@
     "docs:dev": "concurrently yarn:docs:dev:base yarn:docs:dev:watch",
     "docs:dev:base": "yarn workspace @mittwald/flow-documentation run dev",
     "docs:dev:watch": "yarn workspace @mittwald/flow-documentation run build:watch:dependents",
-    "format": "prettier --write '**/*.{ts,tsx,yaml,yml,json,md,mdx,js,cjs,mjs}'",
+    "format": "prettier --write '**/*.{ts,tsx,yaml,yml,json,md,mdx,js,cjs,mjs,css}'",
     "test:format": "run format --check"
   },
   "devDependencies": {

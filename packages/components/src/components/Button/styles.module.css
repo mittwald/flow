@@ -1,10 +1,10 @@
 @import "@/styles";
 
 .root {
-    border: 1px solid;
-    border-color: var(--informative-color-100);
+  border: 1px solid;
+  border-color: var(--informative-color-100);
 
-    .foo {
-        color: var(--positive-color-500)
-    }
+  .foo {
+    color: var(--positive-color-500);
+  }
 }
