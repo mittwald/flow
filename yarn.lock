@@ -2565,7 +2565,6 @@ __metadata:
     "@storybook/react-vite": "npm:^7.5.3"
     "@storybook/testing-library": "npm:^0.2.2"
     "@types/jest": "npm:^29.5.8"
-    "@types/postcss-prefix-selector": "npm:^1.16.3"
     "@types/prop-types": "npm:^15.7.10"
     "@types/react": "npm:^18.2.37"
     "@types/react-dom": "npm:^18.2.15"
@@ -2573,7 +2572,6 @@ __metadata:
     postcss: "npm:^8.4.31"
     postcss-nested-import: "npm:^1.3.0"
     postcss-nesting: "npm:^12.0.1"
-    postcss-prefix-selector: "npm:^1.16.0"
     prop-types: "npm:^15.8.1"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
@@ -5497,15 +5495,6 @@ __metadata:
   dependencies:
     postcss: "npm:^8.0.0"
   checksum: 6364674e429143fd686e0238d071377cf9ae1780a77f99e99292a06adc93057609146aaf55c09310ae99526c37e56be5a8a843086c0ff95513bd34c6bc4c7480
-  languageName: node
-  linkType: hard
-
-"@types/postcss-prefix-selector@npm:^1.16.3":
-  version: 1.16.3
-  resolution: "@types/postcss-prefix-selector@npm:1.16.3"
-  dependencies:
-    postcss: "npm:^8.4.27"
-  checksum: 4c05190936914704d1f1c6dfa37f4363df703c362dd3567c32f56245e18f456db40a3875d686e5587ca2523d869e7312942e6aef1707fb7f5e6dd1ee99fd1f21
   languageName: node
   linkType: hard
 
@@ -14029,15 +14018,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-prefix-selector@npm:^1.16.0":
-  version: 1.16.0
-  resolution: "postcss-prefix-selector@npm:1.16.0"
-  peerDependencies:
-    postcss: ">4 <9"
-  checksum: edc78fd0d8885ad77907044cb25afb6b49c81170810025afca47d6984f86479503a63293910cd4e9b296a7e5d876ab7473c481180774e7e7a55a6edf02746469
-  languageName: node
-  linkType: hard
-
 "postcss-selector-parser@npm:^6.0.13, postcss-selector-parser@npm:^6.0.2, postcss-selector-parser@npm:^6.0.4":
   version: 6.0.13
   resolution: "postcss-selector-parser@npm:6.0.13"
@@ -14055,7 +14035,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:8.4.31, postcss@npm:^8.0.0, postcss@npm:^8.4.21, postcss@npm:^8.4.27, postcss@npm:^8.4.31":
+"postcss@npm:8.4.31, postcss@npm:^8.0.0, postcss@npm:^8.4.21, postcss@npm:^8.4.31":
   version: 8.4.31
   resolution: "postcss@npm:8.4.31"
   dependencies:
