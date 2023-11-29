@@ -13,7 +13,7 @@ export default function Home() {
           <code className={styles.code}>src/app/page.tsx</code>
         </p>
         <div className="flow">
-          <Slider foo />
+          <Slider foo={false} />
         </div>
         <div>
           <a
