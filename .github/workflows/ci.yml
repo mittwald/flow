@@ -20,4 +20,5 @@ jobs:
       - uses: nrwl/nx-set-shas@v3
       - if: github.ref != 'refs/heads/main'
         run: git branch --track main origin/main
+      - run: yarn lint
       - run: yarn nx affected -t test,build --parallel=3
