@@ -1,7 +1,7 @@
 {
   "name": "@mittwald/flow-documentation",
-  "version": "0.1.0",
   "private": true,
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "build": "run next build",

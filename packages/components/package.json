@@ -8,6 +8,9 @@
     "./style": "./dist/style.css",
     "./style/init": "./dist/index.js"
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "run vite build --config vite.build.config.ts",
     "build:deps": "",
@@ -16,13 +19,6 @@
     "storybook:build": "run storybook build",
     "storybook:start": "run storybook dev -p 6006",
     "test": "run jest"
-  },
-  "files": [
-    "dist"
-  ],
-  "peerDependencies": {
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
   },
   "dependencies": {
     "@mittwald/flow-design-tokens": "workspace:*"
@@ -55,6 +51,10 @@
     "typescript-plugin-css-modules": "^5.0.2",
     "vite": "^5.0.0",
     "vite-plugin-dts": "^3.6.3"
+  },
+  "peerDependencies": {
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
   },
   "nx": {
     "targets": {

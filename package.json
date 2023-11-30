@@ -1,9 +1,10 @@
 {
   "name": "@mittwald/flow-next-project",
-  "version": "1.0.0",
   "private": true,
-  "license": "MIT",
+  "version": "1.0.0",
+  "packageManager": "yarn@4.0.1",
   "type": "module",
+  "license": "MIT",
   "scripts": {
     "components:dev": "concurrently yarn:components:dev:base yarn:components:dev:watch",
     "components:dev:base": "yarn workspace @mittwald/flow-components run dev",
@@ -33,7 +34,6 @@
       "unplugged": true
     }
   },
-  "packageManager": "yarn@4.0.1",
   "workspaces": [
     "packages/*"
   ]

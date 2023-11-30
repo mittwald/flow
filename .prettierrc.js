@@ -1,29 +1,29 @@
-/** @type {import('prettier').Config} */
+/** @type {import("prettier").Config} */
 
 const config = {
   semi: true,
   singleQuote: false,
   printWidth: 80,
   tabWidth: 2,
-  quoteProps: 'as-needed',
+  quoteProps: "as-needed",
   jsxSingleQuote: false,
-  trailingComma: 'all',
+  trailingComma: "all",
   bracketSpacing: true,
-  arrowParens: 'always',
-  proseWrap: 'always',
-  htmlWhitespaceSensitivity: 'css',
+  arrowParens: "always",
+  proseWrap: "always",
+  htmlWhitespaceSensitivity: "css",
   overrides: [
     {
-      files: ['*.json', '*.yaml', '*.yml'],
+      files: ["*.json", "*.yaml", "*.yml"],
       options: {
         tabWidth: 2,
       },
     },
   ],
   plugins: [
-    await import('prettier-plugin-sort-json'),
-    await import('prettier-plugin-jsdoc'),
-    await import('prettier-plugin-pkgsort'),
+    await import("prettier-plugin-sort-json"),
+    await import("prettier-plugin-jsdoc"),
+    await import("prettier-plugin-pkgsort"),
   ],
 };
 
