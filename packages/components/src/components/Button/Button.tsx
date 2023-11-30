@@ -4,6 +4,8 @@ import { testLib } from "@/lib/testLib.js";
 
 interface Props {
   foo: boolean;
+  /** This is a bar description */
+  bar: string;
 }
 
 export const Button: FC<Props> = (props) => {
