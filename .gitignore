@@ -8,3 +8,6 @@ dist
 !.yarn/sdks
 !.yarn/versions
 nx-cloud.env
+
+# Misc
+/packages/components/src/dev/doc-gen.json
