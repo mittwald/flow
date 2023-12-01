@@ -4,11 +4,11 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "build": "run build:scripts && run next build",
+    "build": "run next build",
     "build:deps": "",
-    "build:scripts": "tsc --project tsconfig.scripts.json",
+    "build:imports": "yarn pnpify ts-node --esm dev/generateImports.ts",
     "build:watch:dependents": "run -T lerna watch --scope=@mittwald/flow-documentation --include-dependencies -- lerna run build:deps --scope=@mittwald/flow-documentation",
-    "dev": "run build:scripts && run next dev",
+    "dev": "run next dev",
     "start": "run next start"
   },
   "dependencies": {
@@ -30,16 +30,32 @@
     "@types/node": "^20.9.2",
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
+    "@yarnpkg/pnpify": "^4.0.1",
     "acorn": "^8.11.2",
     "acorn-jsx": "^5.3.2",
     "eslint": "^8.54.0",
     "eslint-config-next": "14.0.3",
     "glob": "^10.3.10",
+    "ts-node": "^10.9.1",
     "typescript": "^5.2.2"
   },
   "nx": {
     "targets": {
+      "dev": {
+        "dependsOn": [
+          "^build",
+          "build:imports"
+        ]
+      },
+      "build:imports": {
+        "input": "{projectRoot}/dev/generateImports.ts",
+        "output": "{projectRoot}/src/lib/generatedImports.ts"
+      },
       "build": {
+        "dependsOn": [
+          "^build",
+          "build:imports"
+        ],
         "outputs": [
           "{projectRoot}/.next"
         ]

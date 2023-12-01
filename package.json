@@ -38,6 +38,9 @@
   "dependenciesMeta": {
     "@types/react@18.2.37": {
       "unplugged": true
+    },
+    "ts-node@10.9.1": {
+      "unplugged": true
     }
   },
   "workspaces": [
