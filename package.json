@@ -1,7 +1,9 @@
 {
   "name": "@mittwald/flow-next-project",
-  "version": "1.0.0",
   "private": true,
+  "version": "1.0.0",
+  "packageManager": "yarn@4.0.1",
+  "type": "module",
   "license": "MIT",
   "scripts": {
     "components:dev": "concurrently yarn:components:dev:base yarn:components:dev:watch",
@@ -11,17 +13,23 @@
     "docs:dev:base": "yarn workspace @mittwald/flow-documentation run dev",
     "docs:dev:watch": "yarn workspace @mittwald/flow-documentation run build:watch:dependents",
     "format": "prettier --write '**/*.{ts,tsx,yaml,yml,json,md,mdx,js,cjs,mjs,css}'",
-    "test:format": "run format --check"
+    "lint": "eslint ."
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.13.1",
+    "@typescript-eslint/parser": "^6.13.1",
     "concurrently": "^8.2.2",
+    "eslint": "^8.54.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-json": "^3.1.0",
+    "eslint-plugin-prettier": "^5.0.1",
     "lerna": "^7.4.2",
     "nx": "16.10.0",
     "nx-cloud": "^16.5.2",
-    "prettier": "^2.8.8",
-    "prettier-plugin-jsdoc": "^0.4.2",
-    "prettier-plugin-package": "^1.3.1",
-    "prettier-plugin-sort-json": "^1.0.0",
+    "prettier": "^3.1.0",
+    "prettier-plugin-jsdoc": "^1.1.1",
+    "prettier-plugin-pkgsort": "^0.2.1",
+    "prettier-plugin-sort-json": "^3.1.0",
     "typescript": "^5.2.2"
   },
   "resolutions": {
@@ -32,7 +40,6 @@
       "unplugged": true
     }
   },
-  "packageManager": "yarn@4.0.1",
   "workspaces": [
     "packages/*"
   ]

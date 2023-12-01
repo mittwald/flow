@@ -1,14 +1,13 @@
 {
   "name": "@mittwald/flow-documentation",
-  "version": "0.1.0",
   "private": true,
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "build": "run next build",
     "build:deps": "",
     "build:watch:dependents": "run -T lerna watch --scope=@mittwald/flow-documentation --include-dependencies -- lerna run build:deps --scope=@mittwald/flow-documentation",
     "dev": "run next dev",
-    "lint": "run next lint",
     "start": "run next start"
   },
   "dependencies": {

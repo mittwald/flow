@@ -5,12 +5,12 @@
   "exports": {
     ".": "./dist/variables.css"
   },
-  "scripts": {
-    "build": "run style-dictionary build -c style-dictionary.config.cjs"
-  },
   "files": [
     "dist"
   ],
+  "scripts": {
+    "build": "run style-dictionary build -c style-dictionary.config.cjs"
+  },
   "devDependencies": {
     "@types/js-yaml": "^4.0.9",
     "js-yaml": "^4.1.0",

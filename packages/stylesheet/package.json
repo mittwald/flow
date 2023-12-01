@@ -5,12 +5,12 @@
   "exports": {
     ".": "./dist/style.css"
   },
-  "scripts": {
-    "build": "node build.js"
-  },
   "files": [
     "./dist"
   ],
+  "scripts": {
+    "build": "node build.js"
+  },
   "devDependencies": {
     "@mittwald/flow-components": "workspace:*",
     "resolve-package-path": "^4.0.3"
