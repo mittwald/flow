@@ -1,8 +1,8 @@
 import fs from "node:fs";
-import { sync } from "glob";
-import * as acorn from "acorn";
-import jsx from "acorn-jsx";
+import { globSync } from "glob";
 import * as path from "node:path";
+import * as acorn from "acorn";
+import acornJsx from "acorn-jsx";
 import { ImportDeclaration, Literal } from "acorn";
 
 interface ImportDefinition {
@@ -10,10 +10,11 @@ interface ImportDefinition {
   source: Literal["value"];
 }
 
-export function extractRawImports(moduleCode: string): ImportDefinition[] {
-  const JSXParser = acorn.Parser.extend(jsx());
+// @todo remove duplicated code (./src/lib/generateImports)
+export function extractRawImports(code: string): ImportDefinition[] {
+  const JSXParser = acorn.Parser.extend(acornJsx());
 
-  const tree = JSXParser.parse(moduleCode, {
+  const tree = JSXParser.parse(code, {
     ecmaVersion: 14,
     sourceType: "module",
   });
@@ -30,25 +31,35 @@ export function extractRawImports(moduleCode: string): ImportDefinition[] {
   });
 }
 
-export default function generateImportMappings() {
-  const imports = sync("./src/app/**/_examples/*.tsx").flatMap((path) =>
+export default function generateImportMappings(
+  pattern: string,
+  outputPath: string,
+) {
+  const imports = globSync(pattern).flatMap((path) =>
     extractRawImports(fs.readFileSync(path, { encoding: "utf-8" })),
   );
 
-  let generatedFileContents = `/* auto-generated file */\n\nexport const componentsImports: Record<string, any> = {\n`;
+  let generatedFileContents = `
+/* @eslint-ignore */
+/* auto-generated file */
+import { ImportMapping } from "@/lib/types";
+
+export const componentsImports: ImportMapping = {
+`;
 
   imports.forEach((definition) => {
-    definition.names.forEach((name) => {
-      generatedFileContents += `    "${name}:${definition.source}": () => import("${definition.source}"),\n`;
+    definition.names.forEach((name: string) => {
+      generatedFileContents += `  "${name}:${definition.source}": () => import("${definition.source}"),\n`;
     });
   });
 
   generatedFileContents += "};";
 
-  const outputFile = "./src/lib/componentImports.ts";
-  if (!fs.existsSync(path.resolve(outputFile, ".."))) {
-    fs.mkdirSync(path.resolve(outputFile, ".."));
+  const outputDir = path.basename(path.dirname(outputPath));
+
+  if (!fs.existsSync(outputDir)) {
+    fs.mkdirSync(outputDir);
   }
 
-  fs.writeFileSync(outputFile, generatedFileContents);
+  fs.writeFileSync(outputPath, generatedFileContents.trim());
 }
