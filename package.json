@@ -9,6 +9,7 @@
     "components:dev": "concurrently yarn:components:dev:base yarn:components:dev:watch",
     "components:dev:base": "yarn workspace @mittwald/flow-components run dev",
     "components:dev:watch": "yarn workspace @mittwald/flow-components run build:watch:dependents",
+    "dev:init-githooks": "yarn dlx simple-git-hooks",
     "docs:dev": "concurrently yarn:docs:dev:base yarn:docs:dev:watch",
     "docs:dev:base": "yarn workspace @mittwald/flow-documentation run dev",
     "docs:dev:watch": "yarn workspace @mittwald/flow-documentation run build:watch:dependents",
@@ -16,7 +17,8 @@
     "lint": "eslint ."
   },
   "simple-git-hooks": {
-    "post-checkout": "yarn install"
+    "post-checkout": "yarn install",
+    "post-merge": "yarn install"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^6.13.1",
