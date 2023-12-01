@@ -6,7 +6,7 @@
   "scripts": {
     "build": "run next build",
     "build:deps": "",
-    "build:imports": "yarn pnpify ts-node --esm dev/generateImports.ts",
+    "build:imports": "yarn pnpify ts-node --esm dev/generateLiveCodeEditorGlobalImports.ts",
     "build:watch:dependents": "run -T lerna watch --scope=@mittwald/flow-documentation --include-dependencies -- lerna run build:deps --scope=@mittwald/flow-documentation",
     "dev": "run next dev",
     "start": "run next start"
@@ -48,8 +48,8 @@
         ]
       },
       "build:imports": {
-        "input": "{projectRoot}/dev/generateImports.ts",
-        "output": "{projectRoot}/src/lib/generatedImports.ts"
+        "input": "{projectRoot}/dev/generateLiveCodeEditorGlobalImports.ts",
+        "output": "{projectRoot}/src/lib/liveCodeEditorGlobalImports.ts"
       },
       "build": {
         "dependsOn": [

@@ -1,11 +1,11 @@
 import dynamic from "next/dynamic";
-import { generatedImports } from "@/lib/generatedImports";
+import { liveCodeEditorGlobalImports } from "@/lib/liveCodeEditorGlobalImports";
 import { ComponentType } from "react";
 
 export const getDynamicComponent = (name: string): ComponentType => {
-  if (!(name in generatedImports)) {
+  if (!(name in liveCodeEditorGlobalImports)) {
     throw new Error(`Could not find ${name} in generatedImports.`);
   }
-  const component = generatedImports[name];
+  const component = liveCodeEditorGlobalImports[name];
   return dynamic(component, { ssr: false });
 };

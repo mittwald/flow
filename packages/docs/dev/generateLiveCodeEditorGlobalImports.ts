@@ -41,7 +41,7 @@ async function generateImportMappings(pattern: string, outputPath: string) {
 /* auto-generated file */
 import { ImportMapping } from "@/lib/types";
 
-export const generatedImports: ImportMapping = {
+export const liveCodeEditorGlobalImports: ImportMapping = {
   ${importStatements.join("\r\n")}
 };
 `;
@@ -57,5 +57,5 @@ export const generatedImports: ImportMapping = {
 
 void generateImportMappings(
   "./src/app/**/_examples/*.tsx",
-  "./src/lib/generatedImports.ts",
+  "./src/lib/liveCodeEditorGlobalImports.ts",
 );
