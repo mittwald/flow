@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "module": "NodeNext",
+    "moduleResolution": "nodenext",
+    "outDir": "./scripts/out",
+    "target": "ESNext"
+  },
+  "include": ["./scripts/**/*.ts"]
+}
