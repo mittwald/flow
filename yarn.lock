@@ -2706,6 +2706,7 @@ __metadata:
     prettier-plugin-jsdoc: "npm:^1.1.1"
     prettier-plugin-pkgsort: "npm:^0.2.1"
     prettier-plugin-sort-json: "npm:^3.1.0"
+    simple-git-hooks: "npm:^2.9.0"
     typescript: "npm:^5.2.2"
   dependenciesMeta:
     "@types/react@18.2.37":
@@ -16803,6 +16804,15 @@ __metadata:
   bin:
     sigstore: bin/sigstore.js
   checksum: 64091a95f7a2073ab833bc172aadae0768b84c513a4e3dd3c6f55a1120ea774c293521b7eb6de510dd00562b4351acc2b9295b604c725a9c524fe4f81e4e8203
+  languageName: node
+  linkType: hard
+
+"simple-git-hooks@npm:^2.9.0":
+  version: 2.9.0
+  resolution: "simple-git-hooks@npm:2.9.0"
+  bin:
+    simple-git-hooks: cli.js
+  checksum: 4ccc501810b5102b4d7fdb2a2707e0ea9241c708152cf36c30c816ba04a1a06bf3e94efd6f1699f5fba6c191bdd6d65ff026836d12f4c292130cfda5b60a5ba0
   languageName: node
   linkType: hard
 
