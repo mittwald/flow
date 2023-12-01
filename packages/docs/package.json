@@ -4,11 +4,11 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "build": "run next build",
+    "build": "run build:scripts && run next build",
     "build:deps": "",
+    "build:scripts": "tsc --project tsconfig.scripts.json",
     "build:watch:dependents": "run -T lerna watch --scope=@mittwald/flow-documentation --include-dependencies -- lerna run build:deps --scope=@mittwald/flow-documentation",
-    "dev": "run scripts:build && run next dev",
-    "scripts:build": "tsc --project tsconfig.scripts.json",
+    "dev": "run build:scripts && run next dev",
     "start": "run next start"
   },
   "dependencies": {

@@ -57,7 +57,7 @@ export default function generateImportMappings(
   );
 
   let generatedFileContents = `
-/* @eslint-ignore */
+/* eslint-disable */
 /* auto-generated file */
 import { ImportMapping } from "@/lib/types";
 
