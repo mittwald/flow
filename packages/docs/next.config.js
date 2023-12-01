@@ -10,7 +10,7 @@ console.error = (...args) => {
 /** @type {import("next").NextConfig} */
 const nextConfig = {
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx", "example"],
-  webpack: (config, options) => {
+  webpack: (config, _) => {
     config.module.rules.push({
       test: /_examples\/.*$/i,
       use: "raw-loader",
