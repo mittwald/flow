@@ -1,6 +1,9 @@
 <component name="InspectionProjectProfileManager">
   <profile version="1.0">
     <option name="myName" value="Project Default" />
+    <inspection_tool class="BadExpressionStatementJS" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <scope name="Docs Code Examples" level="INFORMATION" enabled="true" editorAttributes="WRONG_REFERENCES_ATTRIBUTES" />
+    </inspection_tool>
     <inspection_tool class="Eslint" enabled="true" level="WARNING" enabled_by_default="true" />
   </profile>
 </component>
