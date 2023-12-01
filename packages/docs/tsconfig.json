@@ -1,22 +1,30 @@
 {
   "compilerOptions": {
-    "target": "ES5",
+    "allowArbitraryExtensions": true,
     "allowJs": true,
-    "noEmit": true,
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "resolveJsonModule": true,
+    "baseUrl": ".",
     "isolatedModules": true,
     "jsx": "preserve",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "noEmit": true,
+    "paths": {
+      "@/*": ["src/*"]
+    },
     "plugins": [
       {
         "name": "next"
       }
     ],
-    "paths": {
-      "@mittwald/flow-components/*": ["packages/components/*"]
-    }
+    "resolveJsonModule": true,
+    "target": "ES5"
   },
   "extends": "../../tsconfig.json",
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"]
+  "include": [
+    "types.d.ts",
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ]
 }

@@ -18,8 +18,12 @@
     "@next/mdx": "^14.0.3",
     "@types/mdx": "^2.0.10",
     "next": "14.0.3",
+    "parse-es-import": "^0.6.0",
+    "raw-loader": "^4.0.2",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-live": "^4.1.5",
+    "webpack": "^5.89.0"
   },
   "devDependencies": {
     "@types/node": "^20.9.2",
