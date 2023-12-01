@@ -60,6 +60,7 @@ const RAW_RUNTIME_STATE =
           ["prettier-plugin-jsdoc", "virtual:293d93f0dab39a9cb110260f7247420c230cdd19f40de541518b0c0bf8cd4537ab2d1f6cc813f83c1428d6fb37d8de496941cc588e7a64bfbcb303780e1f6334#npm:1.1.1"],\
           ["prettier-plugin-pkgsort", "virtual:293d93f0dab39a9cb110260f7247420c230cdd19f40de541518b0c0bf8cd4537ab2d1f6cc813f83c1428d6fb37d8de496941cc588e7a64bfbcb303780e1f6334#npm:0.2.1"],\
           ["prettier-plugin-sort-json", "virtual:293d93f0dab39a9cb110260f7247420c230cdd19f40de541518b0c0bf8cd4537ab2d1f6cc813f83c1428d6fb37d8de496941cc588e7a64bfbcb303780e1f6334#npm:3.1.0"],\
+          ["simple-git-hooks", "npm:2.9.0"],\
           ["typescript", "patch:typescript@npm%3A5.2.2#optional!builtin<compat/typescript>::version=5.2.2&hash=f3b441"]\
         ],\
         "linkType": "SOFT"\
@@ -4443,6 +4444,7 @@ const RAW_RUNTIME_STATE =
           ["prettier-plugin-jsdoc", "virtual:293d93f0dab39a9cb110260f7247420c230cdd19f40de541518b0c0bf8cd4537ab2d1f6cc813f83c1428d6fb37d8de496941cc588e7a64bfbcb303780e1f6334#npm:1.1.1"],\
           ["prettier-plugin-pkgsort", "virtual:293d93f0dab39a9cb110260f7247420c230cdd19f40de541518b0c0bf8cd4537ab2d1f6cc813f83c1428d6fb37d8de496941cc588e7a64bfbcb303780e1f6334#npm:0.2.1"],\
           ["prettier-plugin-sort-json", "virtual:293d93f0dab39a9cb110260f7247420c230cdd19f40de541518b0c0bf8cd4537ab2d1f6cc813f83c1428d6fb37d8de496941cc588e7a64bfbcb303780e1f6334#npm:3.1.0"],\
+          ["simple-git-hooks", "npm:2.9.0"],\
           ["typescript", "patch:typescript@npm%3A5.2.2#optional!builtin<compat/typescript>::version=5.2.2&hash=f3b441"]\
         ],\
         "linkType": "SOFT"\
@@ -21353,6 +21355,15 @@ const RAW_RUNTIME_STATE =
           ["@sigstore/sign", "npm:1.0.0"],\
           ["@sigstore/tuf", "npm:1.0.3"],\
           ["make-fetch-happen", "npm:11.1.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["simple-git-hooks", [\
+      ["npm:2.9.0", {\
+        "packageLocation": "./.yarn/cache/simple-git-hooks-npm-2.9.0-4354a7c11a-4ccc501810.zip/node_modules/simple-git-hooks/",\
+        "packageDependencies": [\
+          ["simple-git-hooks", "npm:2.9.0"]\
         ],\
         "linkType": "HARD"\
       }]\
