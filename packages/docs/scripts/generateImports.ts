@@ -11,7 +11,7 @@ interface ImportDefinition {
 }
 
 // @todo remove duplicated code (./src/lib/generateImports)
-export function extractRawImports(code: string): ImportDefinition[] {
+function extractRawImports(code: string): ImportDefinition[] {
   const JSXParser = acorn.Parser.extend(acornJsx());
 
   const tree = JSXParser.parse(code, {
@@ -31,12 +31,29 @@ export function extractRawImports(code: string): ImportDefinition[] {
   });
 }
 
+function mapImports(imports: ImportDefinition[]): Record<string, string> {
+  const mapping: Record<string, string> = {};
+
+  imports.forEach((definition) => {
+    definition.names.forEach((name) => {
+      const key = `${name}:${definition.source}`;
+      if (!(key in mapping)) {
+        mapping[key] = definition.source!.toString();
+      }
+    });
+  });
+
+  return mapping;
+}
+
 export default function generateImportMappings(
   pattern: string,
   outputPath: string,
 ) {
-  const imports = globSync(pattern).flatMap((path) =>
-    extractRawImports(fs.readFileSync(path, { encoding: "utf-8" })),
+  const imports = mapImports(
+    globSync(pattern).flatMap((path) =>
+      extractRawImports(fs.readFileSync(path, { encoding: "utf-8" })),
+    ),
   );
 
   let generatedFileContents = `
@@ -44,13 +61,11 @@ export default function generateImportMappings(
 /* auto-generated file */
 import { ImportMapping } from "@/lib/types";
 
-export const componentsImports: ImportMapping = {
+export const generatedImports: ImportMapping = {
 `;
 
-  imports.forEach((definition) => {
-    definition.names.forEach((name: string) => {
-      generatedFileContents += `  "${name}:${definition.source}": () => import("${definition.source}"),\n`;
-    });
+  Object.keys(imports).forEach((key) => {
+    generatedFileContents += `  "${key}": () => import("${imports[key]}"),\n`;
   });
 
   generatedFileContents += "};";

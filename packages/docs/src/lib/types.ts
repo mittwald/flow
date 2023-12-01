@@ -1,3 +1,5 @@
 import { Loader } from "next/dynamic";
 
-export interface ImportMapping extends Record<string, Loader<any>> {}
+// eslint-disable-next-line
+type AnyLoader = Loader<any>;
+export interface ImportMapping extends Record<string, AnyLoader> {}

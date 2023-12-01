@@ -7,7 +7,8 @@
     "build": "run next build",
     "build:deps": "",
     "build:watch:dependents": "run -T lerna watch --scope=@mittwald/flow-documentation --include-dependencies -- lerna run build:deps --scope=@mittwald/flow-documentation",
-    "dev": "run next dev",
+    "dev": "run scripts:build && run next dev",
+    "scripts:build": "tsc --project tsconfig.scripts.json",
     "start": "run next start"
   },
   "dependencies": {
@@ -29,8 +30,11 @@
     "@types/node": "^20.9.2",
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
+    "acorn": "^8.11.2",
+    "acorn-jsx": "^5.3.2",
     "eslint": "^8.54.0",
     "eslint-config-next": "14.0.3",
+    "glob": "^10.3.10",
     "typescript": "^5.2.2"
   },
   "nx": {

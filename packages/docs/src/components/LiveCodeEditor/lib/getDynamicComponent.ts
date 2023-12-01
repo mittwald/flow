@@ -1,13 +1,11 @@
 import dynamic from "next/dynamic";
-import { componentsImports } from "./componentsImports";
+import { generatedImports } from "@/lib/generatedImports";
 import { ComponentType } from "react";
 
 export const getDynamicComponent = (name: string): ComponentType => {
-  if (!(name in componentsImports)) {
-    throw new Error(
-      `Could not find ${name} in componentImports. Update "componentImport.ts" or check the code example.`,
-    );
+  if (!(name in generatedImports)) {
+    throw new Error(`Could not find ${name} in generatedImports.`);
   }
-  const component = componentsImports[name as keyof typeof componentsImports];
+  const component = generatedImports[name];
   return dynamic(component, { ssr: false });
 };

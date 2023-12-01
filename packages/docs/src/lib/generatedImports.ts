@@ -2,7 +2,7 @@
 /* auto-generated file */
 import { ImportMapping } from "@/lib/types";
 
-export const componentsImports: ImportMapping = {
+export const generatedImports: ImportMapping = {
   "Button:@mittwald/flow-components/Button": () =>
     import("@mittwald/flow-components/Button"),
 };
