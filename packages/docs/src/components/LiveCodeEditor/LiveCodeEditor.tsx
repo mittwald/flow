@@ -5,6 +5,13 @@ import { extractEditorScope } from "@/components/LiveCodeEditor/lib/extractEdito
 import { stripImports } from "@/components/LiveCodeEditor/lib/stripImports";
 import { LiveCodeEditorProps } from "@/components/LiveCodeEditor/types";
 
+// Waiting for https://github.com/FormidableLabs/react-live/issues/339
+const error = console.error;
+console.error = (...args) => {
+  if (/defaultProps/.test(args[0])) return;
+  error(...args);
+};
+
 const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
   const { code } = props;
 
