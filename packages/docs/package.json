@@ -6,7 +6,7 @@
   "scripts": {
     "build": "run next build",
     "build:deps": "",
-    "build:imports": "yarn pnpify ts-node --esm dev/generateLiveCodeEditorGlobalImports.ts",
+    "build:imports": "yarn pnpify node --loader ts-node/esm dev/generateLiveCodeEditorGlobalImports.ts",
     "build:watch:dependents": "run -T lerna watch --scope=@mittwald/flow-documentation --include-dependencies -- lerna run build:deps --scope=@mittwald/flow-documentation",
     "dev": "run next dev",
     "start": "run next start"
