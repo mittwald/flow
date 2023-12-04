@@ -48,6 +48,9 @@
         ]
       },
       "build:imports": {
+        "dependsOn": [
+          "^build"
+        ],
         "input": "{projectRoot}/dev/generateLiveCodeEditorGlobalImports.ts",
         "output": "{projectRoot}/src/lib/liveCodeEditorGlobalImports.ts"
       },
