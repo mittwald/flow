@@ -5,6 +5,9 @@
   "packageManager": "yarn@4.0.1",
   "type": "module",
   "license": "MIT",
+  "engines": {
+    "node": "^20.10.0"
+  },
   "scripts": {
     "components:dev": "concurrently yarn:components:dev:base yarn:components:dev:watch",
     "components:dev:base": "yarn workspace @mittwald/flow-components run dev",
