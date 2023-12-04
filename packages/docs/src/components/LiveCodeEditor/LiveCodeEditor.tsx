@@ -2,8 +2,8 @@
 import React, { FC } from "react";
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from "react-live";
 import { extractEditorScope } from "@/components/LiveCodeEditor/lib/extractEditorScope";
-import { stripImports } from "@/components/LiveCodeEditor/lib/stripImports";
 import { LiveCodeEditorProps } from "@/components/LiveCodeEditor/types";
+import extractDefaultExport from "@/lib/extractDefaultExport";
 
 // Waiting for https://github.com/FormidableLabs/react-live/issues/339
 const error = console.error;
@@ -21,8 +21,16 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
 
   const scope = extractEditorScope(code);
 
+  const transformCode = (code: string) => {
+    try {
+      return extractDefaultExport(code);
+    } catch (error) {
+      return "<p>Example could not be parsed.</p>";
+    }
+  };
+
   return (
-    <LiveProvider code={code} scope={scope} transformCode={stripImports}>
+    <LiveProvider code={code} scope={scope} transformCode={transformCode}>
       <LiveEditor />
       <LiveError />
       <LivePreview />

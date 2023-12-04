@@ -1,0 +1,45 @@
+diff --git a/dist/acorn.d.mts b/dist/acorn.d.mts
+index 6ad58121195c96dab6b6c704ae0c0a31fefc2778..386631c03128490856cf493d968f187def49e2bb 100644
+--- a/dist/acorn.d.mts
++++ b/dist/acorn.d.mts
+@@ -519,6 +519,9 @@ export type Declaration =
+ | FunctionDeclaration
+ | VariableDeclaration
+ | ClassDeclaration
++export interface JSXElement extends Node {
++  type: "JSXElement"
++}
+ 
+ export type Expression = 
+ | Identifier
+@@ -547,6 +550,7 @@ export type Expression =
+ | ChainExpression
+ | ImportExpression
+ | ParenthesizedExpression
++| JSXElement
+ 
+ export type Pattern = 
+ | Identifier
+diff --git a/dist/acorn.d.ts b/dist/acorn.d.ts
+index 6ad58121195c96dab6b6c704ae0c0a31fefc2778..b2321be5483ddcd8826086b9a22d228238f5e3bd 100644
+--- a/dist/acorn.d.ts
++++ b/dist/acorn.d.ts
+@@ -520,6 +520,10 @@ export type Declaration =
+ | VariableDeclaration
+ | ClassDeclaration
+ 
++export interface JSXElement extends Node {
++  type: "JSXElement"
++}
++
+ export type Expression = 
+ | Identifier
+ | Literal
+@@ -547,6 +551,7 @@ export type Expression =
+ | ChainExpression
+ | ImportExpression
+ | ParenthesizedExpression
++| JSXElement
+ 
+ export type Pattern = 
+ | Identifier

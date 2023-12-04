@@ -1,3 +1,3 @@
 import Button from "@mittwald/flow-components/Button";
 
-<Button>Button</Button>;
+export default <Button>Button</Button>;
