@@ -17,7 +17,9 @@
     "docs:dev:base": "yarn workspace @mittwald/flow-documentation run dev",
     "docs:dev:watch": "yarn workspace @mittwald/flow-documentation run build:watch:dependents",
     "format": "prettier --write '**/*.{ts,tsx,yaml,yml,json,md,mdx,js,cjs,mjs,css}'",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "build": "lerna run build",
+    "test": "lerna run test"
   },
   "simple-git-hooks": {
     "post-checkout": "yarn install",
