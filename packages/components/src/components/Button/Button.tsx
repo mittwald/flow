@@ -1,18 +1,24 @@
-import React, { FC } from "react";
+import React, { FC, PropsWithChildren } from "react";
 import styles from "./styles.module.css";
-import { testLib } from "@/lib/testLib.js";
+import * as Aria from "react-aria-components";
+import clsx from "clsx";
 
-interface Props {
-  foo: boolean;
+export interface ButtonProps extends Omit<Aria.ButtonProps, "children"> {
+  variant: "accent" | "primary" | "secondary" | "negative";
 }
 
-export const Button: FC<Props> = (props) => {
-  testLib();
+export const Button: FC<PropsWithChildren<ButtonProps>> = (props) => {
+  const { variant, children, ...rest } = props;
+
+  const className = clsx(props.className, styles.root, {
+    [styles.primary]: variant === "primary",
+    [styles.accent]: variant === "accent",
+  });
+
   return (
-    <div className={styles.root}>
-      Button {props.foo ? "with" : "without"}{" "}
-      <span className={styles.foo}>foo</span>
-    </div>
+    <Aria.Button {...rest} className={className}>
+      {children}
+    </Aria.Button>
   );
 };
 

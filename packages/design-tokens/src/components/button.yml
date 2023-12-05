@@ -1,0 +1,13 @@
+button:
+  border-radius:
+    value: "2px"
+  background-color:
+    primary:
+      value: "{color.hosting-blue.900}"
+    accent:
+      value: "{color.espelkamp-green.900}"
+  content-color:
+    primary:
+      value: "{color.white}"
+    accent:
+      value: "{color.white}"
