@@ -11,27 +11,27 @@ export default meta;
 
 type Story = StoryObj<typeof Button>;
 
-export const Primary: Story = {
-  args: {
-    variant: "primary",
-  },
-};
-
 export const Accent: Story = {
   args: {
     variant: "accent",
   },
 };
 
-export const Negative: Story = {
+export const Primary: Story = {
   args: {
-    variant: "negative",
+    variant: "primary",
   },
 };
 
 export const Secondary: Story = {
   args: {
     variant: "secondary",
+  },
+};
+
+export const Negative: Story = {
+  args: {
+    variant: "negative",
   },
 };
 
