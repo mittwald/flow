@@ -22,3 +22,21 @@ export const Accent: Story = {
     variant: "accent",
   },
 };
+
+export const Negative: Story = {
+  args: {
+    variant: "negative",
+  },
+};
+
+export const Secondary: Story = {
+  args: {
+    variant: "secondary",
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    isDisabled: true,
+  },
+};

@@ -1,13 +1,59 @@
 button:
+  primary-background-color:
+    default:
+      value: "{informative.color.700}"
+    hover:
+      value: "{informative.color.900}"
+    pressed:
+      value: "{informative.color.1000}"
+  accent-background-color:
+    default:
+      value: "{accent.color.700}"
+    hover:
+      value: "{accent.color.900}"
+    pressed:
+      value: "{accent.color.1000}"
+  negative-background-color:
+    default:
+      value: "{negative.color.700}"
+    hover:
+      value: "{negative.color.900}"
+    pressed:
+      value: "{negative.color.1000}"
+  secondary-background-color:
+    default:
+      value: "{color.gray.400}"
+    hover:
+      value: "{color.gray.500}"
+    pressed:
+      value: "{color.gray.600}"
+  disabled-background-color:
+    value: "{color.gray.400}"
+  accent-color:
+    value: "{color.white}"
+  primary-color:
+    value: "{color.white}"
+  negative-color:
+    value: "{color.white}"
+  secondary-color:
+    default:
+      value: "{informative.color.700}"
+    hover:
+      value: "{informative.color.900}"
+    pressed:
+      value: "{informative.color.1000}"
+  disabled-color:
+    value: "{color.white}"
+  font-size:
+    value: 16px;
+  line-height:
+    value: 24px;
   border-radius:
-    value: "2px"
-  background-color:
-    primary:
-      value: "{color.hosting-blue.900}"
-    accent:
-      value: "{color.espelkamp-green.900}"
-  content-color:
-    primary:
-      value: "{color.white}"
-    accent:
-      value: "{color.white}"
+    value: 4px
+  inset:
+    x:
+      value: 16px;
+    y:
+      value: 8px;
+  gap:
+    value: 8px;

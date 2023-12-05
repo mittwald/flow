@@ -1,20 +1,74 @@
 @import "@/styles";
 
 .root {
-  border-color: transparent;
+  border: none;
   border-radius: var(--button-border-radius);
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 0.3em 0.5em;
-}
+  padding: var(--button-inset-y) var(--button-inset-x);
+  column-gap: var(--button-gap);
+  font-weight: bold;
+  font-size: var(--button-font-size);
+  line-height: var(--button-line-height);
 
-.accent {
-  background-color: var(--button-background-color-accent);
-  color: var(--button-content-color-accent);
+  &[disabled] {
+    background-color: var(--button-disabled-background-color);
+    color: var(--button-disabled-color);
+    pointer-events: none;
+  }
 }
 
 .primary {
-  background-color: var(--button-background-color-primary);
-  color: var(--button-content-color-primary);
+  background-color: var(--button-primary-background-color-default);
+  color: var(--button-primary-color);
+
+  &:hover {
+    background-color: var(--button-primary-background-color-hover);
+  }
+
+  &[data-pressed] {
+    background-color: var(--button-primary-background-color-pressed);
+  }
+}
+
+.accent {
+  background-color: var(--button-accent-background-color-default);
+  color: var(--button-accent-color);
+
+  &:hover {
+    background-color: var(--button-accent-background-color-hover);
+  }
+
+  &[data-pressed] {
+    background-color: var(--button-accent-background-color-pressed);
+  }
+}
+
+.negative {
+  background-color: var(--button-negative-background-color-default);
+  color: var(--button-negative-color);
+
+  &:hover {
+    background-color: var(--button-negative-background-color-hover);
+  }
+
+  &[data-pressed] {
+    background-color: var(--button-negative-background-color-pressed);
+  }
+}
+
+.secondary {
+  background-color: var(--button-secondary-background-color-default);
+  color: var(--button-secondary-color-default);
+
+  &:hover {
+    background-color: var(--button-secondary-background-color-hover);
+    color: var(--button-secondary-color-hover);
+  }
+
+  &[data-pressed] {
+    background-color: var(--button-secondary-background-color-pressed);
+    color: var(--button-secondary-color-pressed);
+  }
 }

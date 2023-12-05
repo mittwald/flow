@@ -54,6 +54,56 @@ informative:
     color:
       value: "{informative.color.700}"
 
+accent:
+  color:
+    100:
+      value: "{color.espelkamp-green.100}"
+    200:
+      value: "{color.espelkamp-green.200}"
+    300:
+      value: "{color.espelkamp-green.300}"
+    400:
+      value: "{color.espelkamp-green.400}"
+    500:
+      value: "{color.espelkamp-green.500}"
+    600:
+      value: "{color.espelkamp-green.600}"
+    700:
+      value: "{color.espelkamp-green.700}"
+    800:
+      value: "{color.espelkamp-green.800}"
+    900:
+      value: "{color.espelkamp-green.900}"
+    1000:
+      value: "{color.espelkamp-green.1000}"
+    1100:
+      value: "{color.espelkamp-green.1100}"
+
+negative:
+  color:
+    100:
+      value: "red"
+    200:
+      value: "red"
+    300:
+      value: "red"
+    400:
+      value: "red"
+    500:
+      value: "red"
+    600:
+      value: "red"
+    700:
+      value: "red"
+    800:
+      value: "red"
+    900:
+      value: "red"
+    1000:
+      value: "red"
+    1100:
+      value: "red"
+
 interactive:
   quiet:
     background:

@@ -4,16 +4,13 @@ import * as Aria from "react-aria-components";
 import clsx from "clsx";
 
 export interface ButtonProps extends Omit<Aria.ButtonProps, "children"> {
-  variant: "accent" | "primary" | "secondary" | "negative";
+  variant?: "primary" | "accent" | "secondary" | "negative";
 }
 
 export const Button: FC<PropsWithChildren<ButtonProps>> = (props) => {
-  const { variant, children, ...rest } = props;
+  const { variant = "primary", children, ...rest } = props;
 
-  const className = clsx(props.className, styles.root, {
-    [styles.primary]: variant === "primary",
-    [styles.accent]: variant === "accent",
-  });
+  const className = clsx(props.className, styles.root, styles[variant]);
 
   return (
     <Aria.Button {...rest} className={className}>
