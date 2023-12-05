@@ -2,73 +2,73 @@
 
 .root {
   border: none;
-  border-radius: var(--button-border-radius);
+  border-radius: var(--button--border-radius);
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: var(--button-inset-y) var(--button-inset-x);
-  column-gap: var(--button-gap);
+  padding: var(--button--inset-y) var(--button--inset-x);
+  column-gap: var(--button--gap);
   font-weight: bold;
-  font-size: var(--button-font-size);
-  line-height: var(--button-line-height);
+  font-size: var(--button--font-size);
+  line-height: var(--button--line-height);
 
   &[disabled] {
-    background-color: var(--button-disabled-background-color);
-    color: var(--button-disabled-color);
+    background-color: var(--button--disabled-background-color);
+    color: var(--button--disabled-color);
     pointer-events: none;
   }
 }
 
 .primary {
-  background-color: var(--button-primary-background-color-default);
-  color: var(--button-primary-color);
+  background-color: var(--button--primary-background-color--default);
+  color: var(--button--primary-color);
 
   &:hover {
-    background-color: var(--button-primary-background-color-hover);
+    background-color: var(--button--primary-background-color--hover);
   }
 
   &[data-pressed] {
-    background-color: var(--button-primary-background-color-pressed);
+    background-color: var(--button--primary-background-color--pressed);
   }
 }
 
 .accent {
-  background-color: var(--button-accent-background-color-default);
-  color: var(--button-accent-color);
+  background-color: var(--button--accent-background-color--default);
+  color: var(--button--accent-color);
 
   &:hover {
-    background-color: var(--button-accent-background-color-hover);
+    background-color: var(--button--accent-background-color--hover);
   }
 
   &[data-pressed] {
-    background-color: var(--button-accent-background-color-pressed);
+    background-color: var(--button--accent-background-color--pressed);
   }
 }
 
 .negative {
-  background-color: var(--button-negative-background-color-default);
-  color: var(--button-negative-color);
+  background-color: var(--button--negative-background-color--default);
+  color: var(--button--negative-color);
 
   &:hover {
-    background-color: var(--button-negative-background-color-hover);
+    background-color: var(--button--negative-background-color--hover);
   }
 
   &[data-pressed] {
-    background-color: var(--button-negative-background-color-pressed);
+    background-color: var(--button--negative-background-color--pressed);
   }
 }
 
 .secondary {
-  background-color: var(--button-secondary-background-color-default);
-  color: var(--button-secondary-color-default);
+  background-color: var(--button--secondary-background-color--default);
+  color: var(--button--secondary-color--default);
 
   &:hover {
-    background-color: var(--button-secondary-background-color-hover);
-    color: var(--button-secondary-color-hover);
+    background-color: var(--button--secondary-background-color--hover);
+    color: var(--button--secondary-color--hover);
   }
 
   &[data-pressed] {
-    background-color: var(--button-secondary-background-color-pressed);
-    color: var(--button-secondary-color-pressed);
+    background-color: var(--button--secondary-background-color--pressed);
+    color: var(--button--secondary-color--pressed);
   }
 }

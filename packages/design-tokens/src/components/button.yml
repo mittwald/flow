@@ -50,10 +50,9 @@ button:
     value: 24px;
   border-radius:
     value: 4px
-  inset:
-    x:
-      value: 16px;
-    y:
-      value: 8px;
+  inset-x:
+    value: 16px;
+  inset-y:
+    value: 8px;
   gap:
     value: 8px;
