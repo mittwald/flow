@@ -4,6 +4,7 @@ import * as Aria from "react-aria-components";
 import clsx from "clsx";
 
 export interface ButtonProps extends Omit<Aria.ButtonProps, "children"> {
+  /** @default "primary" */
   variant?: "primary" | "accent" | "secondary" | "negative";
 }
 
