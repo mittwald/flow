@@ -7,7 +7,10 @@ export default defineConfig(
     plugins: [dts({ rollupTypes: true })],
     build: {
       lib: {
-        entry: ["./src/components/Button/Button.tsx"],
+        entry: [
+          "./src/components/Button/Button.tsx",
+          "./src/components/Dummy/Dummy.tsx",
+        ],
         formats: ["es"],
       },
       rollupOptions: {

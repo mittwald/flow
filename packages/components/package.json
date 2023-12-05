@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "type": "module",
   "exports": {
-    "./Slider": "./dist/Slider.js",
     "./Button": "./dist/Button.js",
     "./style": "./dist/style.css",
     "./style/init": "./dist/index.js"
