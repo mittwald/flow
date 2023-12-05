@@ -6,17 +6,10 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: var(--button--inset-y) var(--button--inset-x);
-  column-gap: var(--button--gap);
+  padding: var(--button--padding-y) var(--button--padding-x);
   font-weight: bold;
   font-size: var(--button--font-size);
   line-height: var(--button--line-height);
-
-  &[disabled] {
-    background-color: var(--button--disabled-background-color);
-    color: var(--button--disabled-color);
-    pointer-events: none;
-  }
 }
 
 .primary {
@@ -71,4 +64,9 @@
     background-color: var(--button--secondary-background-color--pressed);
     color: var(--button--secondary-color--pressed);
   }
+}
+
+.root[disabled] {
+  background-color: var(--button--disabled-background-color);
+  color: var(--button--disabled-color);
 }
