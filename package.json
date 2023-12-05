@@ -50,6 +50,9 @@
     "@types/react": {
       "unplugged": true
     },
+    "react-aria-components": {
+      "unplugged": true
+    },
     "ts-node": {
       "unplugged": true
     }

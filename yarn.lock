@@ -3162,6 +3162,8 @@ __metadata:
   dependenciesMeta:
     "@types/react":
       unplugged: true
+    react-aria-components:
+      unplugged: true
     ts-node:
       unplugged: true
   languageName: unknown
