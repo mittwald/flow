@@ -1,4 +1,4 @@
-import { PluginOption } from "vite";
+import { Plugin } from "vite";
 import path from "path";
 import * as fs from "fs";
 
@@ -29,7 +29,7 @@ export default {
       });
     }
   },
-  async transform(source, id) {
+  transform: (id) => {
     if (!id.endsWith("intl/*.json")) {
       return;
     }
@@ -39,7 +39,7 @@ export default {
       map: null,
     };
   },
-  async load(id) {
+  load: (id) => {
     if (!id.endsWith("intl/*.json")) {
       return;
     }
@@ -53,4 +53,4 @@ export default {
       };
     }
   },
-} as PluginOption;
+} as Plugin;
