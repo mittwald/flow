@@ -68,6 +68,5 @@
       "cache": true
     }
   },
-  "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "nxCloudAccessToken": "ZTRhMTQzNWUtZGY5Mi00OWVjLTg4ZjAtNzM3ZjRmZjJiNDRifHJlYWQ="
 }

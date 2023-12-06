@@ -13,7 +13,9 @@
   ],
   "scripts": {
     "build": "run vite build --config vite.build.config.ts",
-    "build:watch": "run -T nx watch --includeDependentProjects --projects=@mittwald/flow-components -- run -T nx build \\$NX_PROJECT_NAME",
+    "build:watch": "run -T nx watch --includeDependentProjects --projects=@mittwald/flow-components -- run -T nx run-many -t build -p tag:type:lib",
+    "build:watch:dependents": "run -T nx watch --includeDependentProjects --projects=@mittwald/flow-components -- run -T nx run-many -t build -p tag:type:lib --exclde @mittwald/flow-components",
+    "components:dev:watch": "run storybook:start",
     "dev": "run storybook:start",
     "storybook:build": "run storybook build",
     "storybook:start": "run storybook dev -p 6006",
@@ -58,6 +60,9 @@
     "react-dom": "18.2.0"
   },
   "nx": {
+    "tags": [
+      "type:lib"
+    ],
     "targets": {
       "build": {
         "inputs": [

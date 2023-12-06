@@ -6,7 +6,7 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "components:dev": "nx run-many -t=components:dev:watch,build:watch --projects=@mittwald/flow-documentation,@mittwald/flow-components",
+    "components:dev": "nx run-many --t components:dev:watch,build:watch -p @mittwald/flow-components",
     "dev:init-githooks": "yarn dlx simple-git-hooks",
     "docs:dev": "nx run-many -t=docs:dev:watch,build:watch --projects=@mittwald/flow-documentation,@mittwald/flow-components",
     "format": "prettier --write '**/*.{ts,tsx,yaml,yml,json,md,mdx,js,cjs,mjs,css}'",
@@ -19,11 +19,10 @@
     "pre-commit": "yarn lint"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^6.13.2",
-    "@typescript-eslint/parser": "^6.13.2",
-    "concurrently": "^8.2.2",
-    "eslint": "^8.55.0",
-    "eslint-config-prettier": "^9.1.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.1",
+    "@typescript-eslint/parser": "^6.13.1",
+    "eslint": "^8.54.0",
+    "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-json": "^3.1.0",
     "eslint-plugin-prettier": "^5.0.1",
     "nx": "17.1.3",

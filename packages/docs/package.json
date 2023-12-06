@@ -38,6 +38,9 @@
     "typescript": "^5.3.2"
   },
   "nx": {
+    "tags": [
+      "type:application"
+    ],
     "targets": {
       "dev": {
         "dependsOn": [
