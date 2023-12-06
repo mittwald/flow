@@ -34,7 +34,6 @@ export default {
   },
   resolveId: (id, source) => {
     if (id === "./intl/*.json" && source) {
-      console.log("id", `${path.join(source, "..", id)}`);
       return {
         id: `${path.join(source, "..", id)}`,
         external: "relative",
