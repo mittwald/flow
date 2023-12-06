@@ -1,5 +1,5 @@
 import React, { FC, PropsWithChildren } from "react";
-import styles from "./styles.module.css";
+import styles from "./Button.module.css";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 
