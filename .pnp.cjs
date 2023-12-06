@@ -76,10 +76,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@adobe/css-tools", [\
-      ["npm:4.3.1", {\
-        "packageLocation": "./.yarn/cache/@adobe-css-tools-npm-4.3.1-8afe87e987-05672719b5.zip/node_modules/@adobe/css-tools/",\
+      ["npm:4.3.2", {\
+        "packageLocation": "./.yarn/cache/@adobe-css-tools-npm-4.3.2-779f6c743d-296a03dd29.zip/node_modules/@adobe/css-tools/",\
         "packageDependencies": [\
-          ["@adobe/css-tools", "npm:4.3.1"]\
+          ["@adobe/css-tools", "npm:4.3.2"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -24736,7 +24736,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/stylus-npm-0.59.0-b6301a4933-77888e4bf6.zip/node_modules/stylus/",\
         "packageDependencies": [\
           ["stylus", "npm:0.59.0"],\
-          ["@adobe/css-tools", "npm:4.3.1"],\
+          ["@adobe/css-tools", "npm:4.3.2"],\
           ["debug", "virtual:1ff4b5f90832ba0a9c93ba1223af226e44ba70c1126a3740d93562b97bc36544e896a5e95908196f7458713e6a6089a34bfc67362fc6df7fa093bd06c878be47#npm:4.3.4"],\
           ["glob", "npm:7.2.3"],\
           ["sax", "npm:1.2.4"],\
