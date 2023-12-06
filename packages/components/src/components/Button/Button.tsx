@@ -3,12 +3,13 @@ import styles from "./styles.module.css";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 
-export interface ButtonProps extends Omit<Aria.ButtonProps, "children"> {
+export interface ButtonProps
+  extends PropsWithChildren<Omit<Aria.ButtonProps, "children">> {
   /** @default "primary" */
   variant?: "primary" | "accent" | "secondary" | "negative";
 }
 
-export const Button: FC<PropsWithChildren<ButtonProps>> = (props) => {
+export const Button: FC<ButtonProps> = (props) => {
   const { variant = "primary", children, ...rest } = props;
 
   const className = clsx(props.className, styles.root, styles[variant]);
