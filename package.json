@@ -2,7 +2,7 @@
   "name": "@mittwald/flow-next-project",
   "private": true,
   "version": "1.0.0",
-  "packageManager": "yarn@4.0.1",
+  "packageManager": "yarn@4.0.2",
   "type": "module",
   "license": "MIT",
   "engines": {
@@ -17,18 +17,20 @@
     "docs:dev:base": "yarn workspace @mittwald/flow-documentation run dev",
     "docs:dev:watch": "yarn workspace @mittwald/flow-documentation run build:watch:dependents",
     "format": "prettier --write '**/*.{ts,tsx,yaml,yml,json,md,mdx,js,cjs,mjs,css}'",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "build": "lerna run build",
+    "test": "lerna run test"
   },
   "simple-git-hooks": {
     "post-checkout": "yarn install",
     "post-merge": "yarn install"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^6.13.1",
-    "@typescript-eslint/parser": "^6.13.1",
+    "@typescript-eslint/eslint-plugin": "^6.13.2",
+    "@typescript-eslint/parser": "^6.13.2",
     "concurrently": "^8.2.2",
-    "eslint": "^8.54.0",
-    "eslint-config-prettier": "^9.0.0",
+    "eslint": "^8.55.0",
+    "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-json": "^3.1.0",
     "eslint-plugin-prettier": "^5.0.1",
     "lerna": "^7.4.2",
@@ -39,16 +41,16 @@
     "prettier-plugin-pkgsort": "^0.2.1",
     "prettier-plugin-sort-json": "^3.1.0",
     "simple-git-hooks": "^2.9.0",
-    "typescript": "^5.2.2"
+    "typescript": "^5.3.2"
   },
   "resolutions": {
     "@vitejs/plugin-react": "^4.2.0"
   },
   "dependenciesMeta": {
-    "@types/react@18.2.37": {
+    "@types/react": {
       "unplugged": true
     },
-    "ts-node@10.9.1": {
+    "ts-node": {
       "unplugged": true
     }
   },

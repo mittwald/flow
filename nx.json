@@ -4,8 +4,9 @@
   },
   "namedInputs": {
     "src": ["{projectRoot}/{src,dev}/**/!(*.test).*"],
+    "config": ["{projectRoot}/*.config.{cjs,js,ts,mjs,json}"],
     "test": ["{projectRoot}/{src,dev}/**/*.test.*"],
-    "default": ["src"],
+    "default": ["src", "config"],
     "production": ["default"],
     "nx-cloud-version-1:": ["default"]
   },
