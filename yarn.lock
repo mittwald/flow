@@ -2339,7 +2339,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/js@npm:8.55.0":
+"@eslint/js@npm:8.55.0, @eslint/js@npm:^8.55.0":
   version: 8.55.0
   resolution: "@eslint/js@npm:8.55.0"
   checksum: 88ab9fc57a651becd2b32ec40a3958db27fae133b1ae77bebd733aa5bbd00a92f325bb02f20ad680d31c731fa49b22f060a4777dd52eb3e27da013d940bd978d
@@ -3167,6 +3167,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@mittwald/flow-next-project@workspace:."
   dependencies:
+    "@eslint/js": "npm:^8.55.0"
+    "@types/eslint__js": "npm:^8"
     "@typescript-eslint/eslint-plugin": "npm:^6.13.2"
     "@typescript-eslint/parser": "npm:^6.13.2"
     concurrently: "npm:^8.2.2"
@@ -7394,6 +7396,15 @@ __metadata:
     "@types/estree": "npm:*"
     "@types/json-schema": "npm:*"
   checksum: 610966753add984f6ac9f00eeb766691e141e66a7e20b724a45ad077f60e8cd8fd7874b7e655e93537e54873cc5711cd6f57728474e08b478407cd942f098263
+  languageName: node
+  linkType: hard
+
+"@types/eslint__js@npm:^8":
+  version: 8.42.3
+  resolution: "@types/eslint__js@npm:8.42.3"
+  dependencies:
+    "@types/eslint": "npm:*"
+  checksum: ccc5180b92155929a089ffb03ed62625216dcd5e46dd3197c6f82370ce8b52c7cb9df66c06b0a3017995409e023bc9eafe5a3f009e391960eacefaa1b62d9a56
   languageName: node
   linkType: hard
 

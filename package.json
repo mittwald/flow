@@ -26,6 +26,8 @@
     "post-merge": "yarn install"
   },
   "devDependencies": {
+    "@eslint/js": "^8.55.0",
+    "@types/eslint__js": "^8",
     "@typescript-eslint/eslint-plugin": "^6.13.2",
     "@typescript-eslint/parser": "^6.13.2",
     "concurrently": "^8.2.2",
