@@ -1,6 +1,7 @@
 import "@mittwald/flow-stylesheet";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import "@mittwald/flow-stylesheet";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });

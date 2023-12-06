@@ -5,12 +5,8 @@
   "type": "module",
   "scripts": {
     "build": "run next build",
-    "build:deps": "",
-    "build:deps:base": "yarn run -T lerna run build:deps --scope=@mittwald/flow-documentation",
-    "build:deps:run": "yarn run -T lerna run build:deps --scope=@mittwald/flow-documentation",
-    "build:imports": "yarn pnpify node --loader ts-node/esm dev/generateLiveCodeEditorGlobalImports.ts",
-    "build:watch:dependents": "yarn build:deps:run && run -T lerna watch --scope=@mittwald/flow-documentation --include-dependencies -- lerna run build:deps --scope=@mittwald/flow-documentation",
     "dev": "run next dev",
+    "docs:dev:watch": "run dev",
     "start": "run next start"
   },
   "dependencies": {
@@ -44,6 +40,12 @@
   "nx": {
     "targets": {
       "dev": {
+        "dependsOn": [
+          "^build",
+          "build:imports"
+        ]
+      },
+      "docs:dev:watch": {
         "dependsOn": [
           "^build",
           "build:imports"

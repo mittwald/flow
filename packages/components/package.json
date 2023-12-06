@@ -13,9 +13,7 @@
   ],
   "scripts": {
     "build": "run vite build --config vite.build.config.ts",
-    "build:deps": "",
-    "build:deps:run": "yarn run -T lerna run build:deps --scope=@mittwald/flow-components",
-    "build:watch:dependents": "yarn build:deps:run && run -T lerna watch --scope=@mittwald/flow-components --include-dependencies -- lerna run build:deps --scope=@mittwald/flow-components",
+    "build:watch": "run -T nx watch --includeDependentProjects --projects=@mittwald/flow-components -- run -T nx build \\$NX_PROJECT_NAME",
     "dev": "run storybook:start",
     "storybook:build": "run storybook build",
     "storybook:start": "run storybook dev -p 6006",
@@ -68,7 +66,8 @@
           "{projectRoot}/*.ts",
           "{projectRoot}/dev/"
         ]
-      }
+      },
+      "build:watch": {}
     }
   }
 }
