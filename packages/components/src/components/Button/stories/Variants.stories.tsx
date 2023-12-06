@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Button from "./Button";
+import Button from "../Button";
 
 const meta: Meta<typeof Button> = {
+  title: "Button/Variants",
   component: Button,
   args: {
     children: "Button",
@@ -32,11 +33,5 @@ export const Secondary: Story = {
 export const Negative: Story = {
   args: {
     variant: "negative",
-  },
-};
-
-export const Disabled: Story = {
-  args: {
-    isDisabled: true,
   },
 };
