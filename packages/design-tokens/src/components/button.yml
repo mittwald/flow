@@ -1,14 +1,14 @@
 button:
   font-size:
-    value: 16px;
+    value: "{size-rem.m}"
   line-height:
-    value: 24px;
+    value: "{line-height.default}"
   border-radius:
-    value: 4px
+    value: "{size-px.xs}"
   padding-x:
-    value: 16px;
+    value: "{size-px.m}"
   padding-y:
-    value: 8px;
+    value: "{size-px.s}"
 
   # Accent
   accent-background-color:
