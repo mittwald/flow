@@ -15,9 +15,9 @@ button:
     default:
       value: "{accent.color.700}"
     hover:
-      value: "{accent.color.900}"
+      value: "{accent.color.800}"
     pressed:
-      value: "{accent.color.1000}"
+      value: "{accent.color.900}"
   accent-color:
     value: "{color.white}"
 
@@ -26,20 +26,20 @@ button:
     default:
       value: "{informative.color.700}"
     hover:
-      value: "{informative.color.900}"
+      value: "{informative.color.800}"
     pressed:
-      value: "{informative.color.1000}"
+      value: "{informative.color.900}"
   primary-color:
     value: "{color.white}"
 
   # Secondary
   secondary-background-color:
     default:
-      value: "{color.gray.400}"
+      value: "{neutral.color.400}"
     hover:
-      value: "{color.gray.500}"
+      value: "{neutral.color.500}"
     pressed:
-      value: "{color.gray.600}"
+      value: "{neutral.color.600}"
   secondary-color:
     default:
       value: "{informative.color.700}"
@@ -53,14 +53,14 @@ button:
     default:
       value: "{negative.color.700}"
     hover:
-      value: "{negative.color.900}"
+      value: "{negative.color.800}"
     pressed:
-      value: "{negative.color.1000}"
+      value: "{negative.color.900}"
   negative-color:
     value: "{color.white}"
 
   # Disabled
   disabled-background-color:
-    value: "{color.gray.400}"
+    value: "{neutral.color.400}"
   disabled-color:
     value: "{color.white}"
