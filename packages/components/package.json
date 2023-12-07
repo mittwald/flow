@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "type": "module",
   "exports": {
-    "./Slider": "./dist/Slider.js",
     "./Button": "./dist/Button.js",
     "./style": "./dist/style.css",
     "./style/init": "./dist/index.js"
@@ -21,7 +20,9 @@
     "test": "run jest"
   },
   "dependencies": {
-    "@mittwald/flow-design-tokens": "workspace:*"
+    "@mittwald/flow-design-tokens": "workspace:*",
+    "clsx": "^2.0.0",
+    "react-aria-components": "^1.0.0-rc.0"
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",
