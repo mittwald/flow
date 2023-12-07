@@ -10,6 +10,7 @@ export default defineConfig(
         entry: [
           "./src/components/Slider/Slider.tsx",
           "./src/components/Button/Button.tsx",
+          "./src/components/Text/Text.tsx",
         ],
         formats: ["es"],
       },

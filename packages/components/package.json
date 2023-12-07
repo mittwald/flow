@@ -5,6 +5,7 @@
   "exports": {
     "./Slider": "./dist/Slider.js",
     "./Button": "./dist/Button.js",
+    "./Text": "./dist/Text.js",
     "./style": "./dist/style.css",
     "./style/init": "./dist/index.js"
   },
