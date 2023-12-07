@@ -3,39 +3,70 @@
     "defaultBase": "master"
   },
   "namedInputs": {
-    "src": ["{projectRoot}/{src,dev}/**/!(*.test).*"],
-    "test": ["{projectRoot}/{src,dev}/**/*.test.*"],
-    "default": ["src"],
-    "production": ["default"],
-    "nx-cloud-version-1:": ["default"]
+    "src": [
+      "{projectRoot}/{src,dev}/**/!(*.test).*"
+    ],
+    "config": [
+      "{projectRoot}/*.config.{cjs,js,ts,mjs,json}"
+    ],
+    "test": [
+      "{projectRoot}/{src,dev}/**/*.test.*"
+    ],
+    "default": [
+      "src",
+      "config"
+    ],
+    "production": [
+      "default"
+    ],
+    "nx-cloud-version-1:": [
+      "default"
+    ]
   },
   "targetDefaults": {
     "build": {
-      "dependsOn": ["^build"],
-      "inputs": ["default", "^default"],
-      "outputs": ["{projectRoot}/dist"]
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        "default",
+        "^default"
+      ],
+      "outputs": [
+        "{projectRoot}/dist"
+      ],
+      "cache": true
     },
     "build:deps": {
-      "dependsOn": ["^build"]
+      "dependsOn": [
+        "^build"
+      ]
     },
     "dev": {
-      "dependsOn": ["^build"]
+      "dependsOn": [
+        "^build"
+      ]
     },
     "test": {
-      "inputs": ["test", "default", "^default"],
-      "dependsOn": ["^build"]
+      "inputs": [
+        "test",
+        "default",
+        "^default"
+      ],
+      "dependsOn": [
+        "^build"
+      ],
+      "cache": true
     },
     "start": {
-      "dependsOn": ["build"]
+      "dependsOn": [
+        "build"
+      ]
+    },
+    "build:imports": {
+      "cache": true
     }
   },
-  "tasksRunnerOptions": {
-    "default": {
-      "runner": "nx-cloud",
-      "options": {
-        "cacheableOperations": ["build", "test", "build:imports"],
-        "accessToken": "ZTRhMTQzNWUtZGY5Mi00OWVjLTg4ZjAtNzM3ZjRmZjJiNDRifHJlYWQ="
-      }
-    }
-  }
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "nxCloudAccessToken": "ZTRhMTQzNWUtZGY5Mi00OWVjLTg4ZjAtNzM3ZjRmZjJiNDRifHJlYWQ="
 }
