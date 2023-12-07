@@ -25,7 +25,7 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
     try {
       return extractDefaultExport(code);
     } catch (error) {
-      return "<p>Example could not be parsed.</p>";
+      return `<p><em>Example could not be parsed:</em> ${String(error)}</p>`;
     }
   };
 
