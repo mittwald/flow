@@ -54,6 +54,81 @@ informative:
     color:
       value: "{informative.color.700}"
 
+accent:
+  color:
+    100:
+      value: "{color.espelkamp-green.100}"
+    200:
+      value: "{color.espelkamp-green.200}"
+    300:
+      value: "{color.espelkamp-green.300}"
+    400:
+      value: "{color.espelkamp-green.400}"
+    500:
+      value: "{color.espelkamp-green.500}"
+    600:
+      value: "{color.espelkamp-green.600}"
+    700:
+      value: "{color.espelkamp-green.700}"
+    800:
+      value: "{color.espelkamp-green.800}"
+    900:
+      value: "{color.espelkamp-green.900}"
+    1000:
+      value: "{color.espelkamp-green.1000}"
+    1100:
+      value: "{color.espelkamp-green.1100}"
+
+neutral:
+  color:
+    100:
+      value: "{color.gray.100}"
+    200:
+      value: "{color.gray.200}"
+    300:
+      value: "{color.gray.300}"
+    400:
+      value: "{color.gray.400}"
+    500:
+      value: "{color.gray.500}"
+    600:
+      value: "{color.gray.600}"
+    700:
+      value: "{color.gray.700}"
+    800:
+      value: "{color.gray.800}"
+    900:
+      value: "{color.gray.900}"
+    1000:
+      value: "{color.gray.1000}"
+    1100:
+      value: "{color.gray.1100}"
+
+negative:
+  color:
+    100:
+      value: "{color.amaranth-red.100}"
+    200:
+      value: "{color.amaranth-red.200}"
+    300:
+      value: "{color.amaranth-red.300}"
+    400:
+      value: "{color.amaranth-red.400}"
+    500:
+      value: "{color.amaranth-red.500}"
+    600:
+      value: "{color.amaranth-red.600}"
+    700:
+      value: "{color.amaranth-red.700}"
+    800:
+      value: "{color.amaranth-red.800}"
+    900:
+      value: "{color.amaranth-red.900}"
+    1000:
+      value: "{color.amaranth-red.1000}"
+    1100:
+      value: "{color.amaranth-red.1100}"
+
 interactive:
   quiet:
     background:

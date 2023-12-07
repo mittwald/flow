@@ -10,7 +10,7 @@ https://www.joshwcomeau.com/css/custom-css-reset/
   }
 
   & * {
-    margin: 0px;
+    margin: 0;
   }
 
   & body {
@@ -28,7 +28,6 @@ https://www.joshwcomeau.com/css/custom-css-reset/
   }
 
   & input,
-  & button,
   & textarea,
   & select {
     font: inherit;

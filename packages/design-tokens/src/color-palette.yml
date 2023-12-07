@@ -95,5 +95,29 @@ color:
     1100:
       value: "#00291D"
 
+  amaranth-red:
+    100:
+      value: "#F7C5D2"
+    200:
+      value: "#F5B4C3"
+    300:
+      value: "#F090A6"
+    400:
+      value: "#EB6C89"
+    500:
+      value: "#E6486B"
+    600:
+      value: "#E1244C"
+    700:
+      value: "#BD1A3B"
+    800:
+      value: "#95142D"
+    900:
+      value: "#6C0F20"
+    1000:
+      value: "#440914"
+    1100:
+      value: "#30070"
+
   white:
     value: rgb(255,255,255)
