@@ -5,6 +5,7 @@
   "exports": {
     "./Slider": "./dist/Slider.js",
     "./Button": "./dist/Button.js",
+    "./Icon": "./dist/Icon.js",
     "./style": "./dist/style.css",
     "./style/init": "./dist/index.js"
   },
@@ -21,7 +22,12 @@
     "test": "run jest"
   },
   "dependencies": {
-    "@mittwald/flow-design-tokens": "workspace:*"
+    "@fortawesome/fontawesome-svg-core": "^6.5.1",
+    "@fortawesome/free-regular-svg-icons": "^6.5.1",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "@mittwald/flow-design-tokens": "workspace:*",
+    "clsx": "^2.0.0",
+    "html-react-parser": "^5.0.7"
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",

@@ -1,0 +1,9 @@
+@import "@/styles";
+
+.root {
+  height: 1em;
+
+  :global(.flow-button) & {
+    color: var(--color-white);
+  }
+}
