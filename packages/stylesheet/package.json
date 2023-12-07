@@ -6,7 +6,7 @@
     ".": "./dist/style.css"
   },
   "files": [
-    "./dist"
+    "dist"
   ],
   "scripts": {
     "build": "node build.js"
