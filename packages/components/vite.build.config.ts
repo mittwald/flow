@@ -10,7 +10,7 @@ export default defineConfig(
         entry: [
           "./src/components/Button/Button.tsx",
           "./src/components/Icon/Icon.tsx",
-          "./src/components/Dummy/Dummy.tsx",
+          "./src/components/Text/Text.tsx",
         ],
         formats: ["es"],
       },

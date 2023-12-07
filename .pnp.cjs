@@ -6087,8 +6087,8 @@ const RAW_RUNTIME_STATE =
           ["@types/react", "npm:18.2.42"],\
           ["@types/react-dom", "npm:18.2.17"],\
           ["@yarnpkg/pnpify", "npm:4.0.1"],\
-          ["acorn", "npm:8.11.2"],\
-          ["acorn-jsx", "virtual:a50722a5a9326b6a5f12350c494c4db3aa0f4caeac45e3e9e5fe071da20014ecfe738fe2ebe2c9c98abae81a4ea86b42f56d776b3bd5ec37f9ad3670c242b242#npm:5.3.2"],\
+          ["acorn", "patch:acorn@npm%3A8.11.2#~/.yarn/patches/acorn-npm-8.11.2-a470f49bb6.patch::version=8.11.2&hash=eac067"],\
+          ["acorn-jsx", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:5.3.2"],\
           ["eslint", "npm:8.55.0"],\
           ["eslint-config-next", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:14.0.3"],\
           ["glob", "npm:10.3.10"],\
@@ -14249,6 +14249,13 @@ const RAW_RUNTIME_STATE =
           ["acorn", "npm:8.11.2"]\
         ],\
         "linkType": "HARD"\
+      }],\
+      ["patch:acorn@npm%3A8.11.2#~/.yarn/patches/acorn-npm-8.11.2-a470f49bb6.patch::version=8.11.2&hash=eac067", {\
+        "packageLocation": "./.yarn/cache/acorn-patch-68739978fd-becd7f0f6c.zip/node_modules/acorn/",\
+        "packageDependencies": [\
+          ["acorn", "patch:acorn@npm%3A8.11.2#~/.yarn/patches/acorn-npm-8.11.2-a470f49bb6.patch::version=8.11.2&hash=eac067"]\
+        ],\
+        "linkType": "HARD"\
       }]\
     ]],\
     ["acorn-import-assertions", [\
@@ -14287,6 +14294,19 @@ const RAW_RUNTIME_STATE =
           ["acorn-jsx", "virtual:a50722a5a9326b6a5f12350c494c4db3aa0f4caeac45e3e9e5fe071da20014ecfe738fe2ebe2c9c98abae81a4ea86b42f56d776b3bd5ec37f9ad3670c242b242#npm:5.3.2"],\
           ["@types/acorn", null],\
           ["acorn", "npm:8.11.2"]\
+        ],\
+        "packagePeers": [\
+          "@types/acorn",\
+          "acorn"\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:5.3.2", {\
+        "packageLocation": "./.yarn/__virtual__/acorn-jsx-virtual-435946978d/0/cache/acorn-jsx-npm-5.3.2-d7594599ea-4c54868fbe.zip/node_modules/acorn-jsx/",\
+        "packageDependencies": [\
+          ["acorn-jsx", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:5.3.2"],\
+          ["@types/acorn", null],\
+          ["acorn", "patch:acorn@npm%3A8.11.2#~/.yarn/patches/acorn-npm-8.11.2-a470f49bb6.patch::version=8.11.2&hash=eac067"]\
         ],\
         "packagePeers": [\
           "@types/acorn",\
