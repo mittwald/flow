@@ -6,8 +6,10 @@
   "scripts": {
     "build": "run next build",
     "build:deps": "",
+    "build:deps:base": "yarn run -T lerna run build:deps --scope=@mittwald/flow-documentation",
+    "build:deps:run": "yarn run -T lerna run build:deps --scope=@mittwald/flow-documentation",
     "build:imports": "yarn pnpify node --loader ts-node/esm dev/generateLiveCodeEditorGlobalImports.ts",
-    "build:watch:dependents": "run -T lerna watch --scope=@mittwald/flow-documentation --include-dependencies -- lerna run build:deps --scope=@mittwald/flow-documentation",
+    "build:watch:dependents": "yarn build:deps:run && run -T lerna watch --scope=@mittwald/flow-documentation --include-dependencies -- lerna run build:deps --scope=@mittwald/flow-documentation",
     "dev": "run next dev",
     "start": "run next start"
   },
