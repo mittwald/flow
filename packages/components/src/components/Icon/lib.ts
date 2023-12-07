@@ -1,6 +1,5 @@
 import { Children, ReactNode } from "react";
 import parse from "html-react-parser";
-import { array } from "prop-types";
 
 export const extractSvgFromString = (svgString: string): ReactNode => {
   const svg = Children.toArray(parse(svgString)).find(
