@@ -5,7 +5,7 @@ declare module "*.module.css" {
   export default classes;
 }
 
-declare module "./intl/*.json" {
+declare module "*.locale.json" {
   import { LocalizedStrings } from "react-aria";
   const langFile: LocalizedStrings;
   export default langFile;

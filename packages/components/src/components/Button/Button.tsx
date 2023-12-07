@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import styles from "./styles.module.css";
 import { testLib } from "@/lib/testLib.js";
-import intlMessages from "./intl/*.json";
+import intlMessages from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 
 interface Props {
