@@ -9,8 +9,12 @@ export default meta;
 
 type Story = StoryObj<typeof Icon>;
 
-export const Default: Story = {
-  args: { faIcon: faStar },
+export const FontAwesomeIcon: Story = {
+  args: { faIcon: faStar, "aria-label": "star" },
+};
+
+export const AnimatedFontAwesomeIcon: Story = {
+  args: { faIcon: faStar, faAnimation: "bounce" },
 };
 
 export const CustomString: Story = {
