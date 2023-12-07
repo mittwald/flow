@@ -8,9 +8,8 @@ export default defineConfig(
     build: {
       lib: {
         entry: [
-          "./src/components/Slider/Slider.tsx",
           "./src/components/Button/Button.tsx",
-          "./src/components/Text/Text.tsx",
+          "./src/components/Dummy/Dummy.tsx",
         ],
         formats: ["es"],
       },
