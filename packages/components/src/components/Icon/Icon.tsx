@@ -7,7 +7,7 @@ import parse from "html-react-parser";
 export interface IconProps extends PropsWithChildren {
   faIcon?: IconLookup;
   faAnimation?: "bounce" | "spin" | "shake" | "beat";
-  "aria-label": string;
+  "aria-label"?: string;
 }
 
 export const Icon: FC<IconProps> = (props) => {
