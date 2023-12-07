@@ -1,56 +1,88 @@
 import plugin from "./viteI18nPlugin";
 import { expect } from "@jest/globals";
 import path from "path";
+import type {
+  PartialResolvedId,
+  PluginContext,
+  TransformPluginContext,
+  SourceDescription,
+} from "rollup";
+
 describe("vite i18n plugin", () => {
   it("resolve will return correct id", async () => {
     if (plugin.resolveId && typeof plugin.resolveId === "function") {
-      const resolve = await plugin.resolveId.apply({} as any, [
-        "./intl/*.json",
+      const resolve = (await plugin.resolveId.apply({} as PluginContext, [
+        "./locales/*.locale.json",
         "./foo/foo.ts",
         {} as any,
-      ]);
+      ])) as PartialResolvedId;
 
-      expect(resolve).toMatchObject({
-        id: "foo/intl/*.json",
-      });
+      expect(resolve).toBeDefined();
+      expect(typeof resolve).toBe("object");
+      expect(resolve.id.startsWith("\x00.locale.json@")).toBeTruthy();
+      expect(resolve.id.endsWith("/foo/locales/*.locale.json")).toBeTruthy();
     }
   });
 
   it("resolve will return nothing when importer is not known", async () => {
     if (plugin.resolveId && typeof plugin.resolveId === "function") {
-      const resolve = await plugin.resolveId.apply({} as any, [
-        "./intl/*.json",
+      const resolve = (await plugin.resolveId.apply({} as PluginContext, [
+        "./locales/*.locale.json",
         "",
         {} as any,
-      ]);
+      ])) as PartialResolvedId;
 
       expect(resolve).toBeUndefined();
     }
   });
 
-  it("test intl files will be generated", () => {
+  it("test multi intl files will be generated", () => {
     if (plugin.load && typeof plugin.load === "function") {
-      const load = plugin.load.apply({} as any, [
-        path.join(__dirname, "test", "intl", "*.json"),
-      ]) as string;
+      const load = plugin.load.apply({} as PluginContext, [
+        path.join(__dirname, "test", "locales", "*.locale.json"),
+      ]) as SourceDescription;
 
-      expect(JSON.parse(load)).toMatchObject({
+      expect(JSON.parse(load.code)).toMatchObject({
         bar: { bar: "baz" },
         foo: { foo: "bar" },
       });
     }
   });
 
-  it("test intl files will be transformed", async () => {
+  it("test single intl files will be generated", () => {
+    if (plugin.load && typeof plugin.load === "function") {
+      const load = plugin.load.apply({} as PluginContext, [
+        path.join(__dirname, "test", "locales", "bar.locale.json"),
+      ]) as SourceDescription;
+
+      expect(JSON.parse(load.code)).toMatchObject({
+        bar: { bar: "baz" },
+      });
+    }
+  });
+
+  it("test multi intl files will be transformed", () => {
     if (plugin.transform && typeof plugin.transform === "function") {
-      const transform = await plugin.transform.apply({} as any, [
-        path.join(__dirname, "test", "intl", "*.json"),
+      const transform = plugin.transform.apply({} as TransformPluginContext, [
         "",
-      ]);
-      expect(typeof transform).toBe("object");
-      expect(JSON.parse((transform as any).code)).toMatchObject({
+        path.join(__dirname, "test", "locales", "*.locale.json"),
+      ]) as SourceDescription;
+
+      expect(JSON.parse(transform.code)).toMatchObject({
         bar: { bar: "baz" },
         foo: { foo: "bar" },
+      });
+    }
+  });
+
+  it("test single intl files will be transformed", () => {
+    if (plugin.load && typeof plugin.load === "function") {
+      const load = plugin.load.apply({} as PluginContext, [
+        path.join(__dirname, "test", "locales", "bar.locale.json"),
+      ]) as SourceDescription;
+
+      expect(JSON.parse(load.code)).toMatchObject({
+        bar: { bar: "baz" },
       });
     }
   });
