@@ -4,7 +4,7 @@
   "type": "module",
   "exports": {
     "./Button": "./dist/Button.js",
-    "./Text": "./dist/Button.js",
+    "./Text": "./dist/Text.js",
     "./style": "./dist/style.css",
     "./style/init": "./dist/index.js"
   },
