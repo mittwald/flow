@@ -8,7 +8,6 @@
     },
     "plugins": [{ "name": "typescript-plugin-css-modules" }],
   },
-  "exclude": ["node_modules"],
   "extends": "../../tsconfig.json",
   "include": ["types.d.ts", "**/*.ts", "**/*.tsx"]
 }

@@ -1,23 +1,23 @@
-import React, { FC } from "react";
-import styles from "./styles.module.css";
-import { testLib } from "@/lib/testLib.js";
-import intlMessages from "./locales/*.locale.json";
-import { useLocalizedStringFormatter } from "react-aria";
+import React, { FC, PropsWithChildren } from "react";
+import styles from "./Button.module.css";
+import * as Aria from "react-aria-components";
+import clsx from "clsx";
 
-interface Props {
-  foo: boolean;
+export interface ButtonProps
+  extends PropsWithChildren<Omit<Aria.ButtonProps, "children">> {
+  /** @default "primary" */
+  variant?: "primary" | "accent" | "secondary" | "negative";
 }
 
-export const Button: FC<Props> = (props) => {
-  testLib();
+export const Button: FC<ButtonProps> = (props) => {
+  const { variant = "primary", children, ...rest } = props;
 
-  const stringFormatter = useLocalizedStringFormatter(intlMessages);
+  const className = clsx(props.className, styles.root, styles[variant]);
 
   return (
-    <div className={styles.root}>
-      Button {stringFormatter.format("example")}{" "}
-      {props.foo ? "with" : "without"} <span className={styles.foo}>foo</span>
-    </div>
+    <Aria.Button {...rest} className={className}>
+      {children}
+    </Aria.Button>
   );
 };
 

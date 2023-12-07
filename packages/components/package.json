@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "type": "module",
   "exports": {
-    "./Slider": "./dist/Slider.js",
     "./Button": "./dist/Button.js",
+    "./Text": "./dist/Text.js",
     "./style": "./dist/style.css",
     "./style/init": "./dist/index.js"
   },
@@ -14,7 +14,8 @@
   "scripts": {
     "build": "run vite build --config vite.build.config.ts",
     "build:deps": "",
-    "build:watch:dependents": "run -T lerna watch --scope=@mittwald/flow-components --include-dependencies -- lerna run build:deps --scope=@mittwald/flow-components",
+    "build:deps:run": "yarn run -T lerna run build:deps --scope=@mittwald/flow-components",
+    "build:watch:dependents": "yarn build:deps:run && run -T lerna watch --scope=@mittwald/flow-components --include-dependencies -- lerna run build:deps --scope=@mittwald/flow-components",
     "dev": "run storybook:start",
     "storybook:build": "run storybook build",
     "storybook:start": "run storybook dev -p 6006",
@@ -22,11 +23,13 @@
   },
   "dependencies": {
     "@mittwald/flow-design-tokens": "workspace:*",
+    "clsx": "^2.0.0",
+    "react-aria-components": "^1.0.0-rc.0",
     "react-aria": "^3.30.0"
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",
-    "@nx/storybook": "^16.10.0",
+    "@nx/storybook": "^17.1.3",
     "@storybook/addon-essentials": "^7.6.4",
     "@storybook/addon-interactions": "^7.6.4",
     "@storybook/addon-links": "^7.6.4",
@@ -35,7 +38,7 @@
     "@storybook/react": "^7.6.4",
     "@storybook/react-vite": "^7.6.4",
     "@storybook/testing-library": "^0.2.2",
-    "@types/jest": "^29.5.10",
+    "@types/jest": "^29.5.11",
     "@types/prop-types": "^15.7.11",
     "@types/react": "^18.2.42",
     "@types/react-dom": "^18.2.17",
@@ -52,7 +55,7 @@
     "ts-jest": "^29.1.1",
     "typescript": "^5.3.2",
     "typescript-plugin-css-modules": "^5.0.2",
-    "vite": "^5.0.5",
+    "vite": "^5.0.6",
     "vite-plugin-dts": "^3.6.4"
   },
   "peerDependencies": {

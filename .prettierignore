@@ -4,3 +4,5 @@ dist
 .yarn
 .next
 .pnp*
+
+/.nx/cache
