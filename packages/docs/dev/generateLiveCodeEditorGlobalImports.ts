@@ -2,12 +2,12 @@ import fsAsync from "node:fs/promises";
 import fs from "node:fs";
 import { glob } from "glob";
 import * as path from "node:path";
-import { Literal } from "acorn";
 import { extractRawImports } from "../src/lib/extractImports.js";
+import { StringLiteral } from "@babel/types";
 
 interface ImportDefinition {
   names: string[];
-  source: Literal["value"];
+  source: StringLiteral["value"];
 }
 
 function mapImports(imports: ImportDefinition[]): Record<string, string> {

@@ -1,32 +1,28 @@
-import * as acorn from "acorn";
-import acornJsx from "acorn-jsx";
+import * as babelParser from "@babel/parser";
 import {
-  AnonymousFunctionDeclaration,
   ExportDefaultDeclaration,
   Expression,
   ExpressionStatement,
   FunctionDeclaration,
   ReturnStatement,
-} from "acorn";
+} from "@babel/types";
 
 export default function extractDefaultExport(code: string): string {
-  const JSXParser = acorn.Parser.extend(acornJsx());
-
-  const tree = JSXParser.parse(code, {
-    ecmaVersion: 14,
+  const tree = babelParser.parse(code, {
     sourceType: "module",
+    plugins: ["jsx", "typescript"],
   });
 
-  const defaultExport = tree.body.find(
+  const defaultExport = tree.program.body.find(
     (it): it is ExportDefaultDeclaration =>
       it.type === "ExportDefaultDeclaration",
   );
 
   if (
     defaultExport === undefined &&
-    tree.body.some((it) => it.type === "ExpressionStatement")
+    tree.program.body.some((it) => it.type === "ExpressionStatement")
   ) {
-    const expressionStatement = tree.body.find(
+    const expressionStatement = tree.program.body.find(
       (it): it is ExpressionStatement => it.type === "ExpressionStatement",
     );
     if (expressionStatement == undefined) {
@@ -41,7 +37,8 @@ export default function extractDefaultExport(code: string): string {
   if (
     defaultExport.declaration.type === "ArrowFunctionExpression" ||
     defaultExport.declaration.type === "JSXElement" ||
-    defaultExport.declaration.type === "FunctionDeclaration"
+    defaultExport.declaration.type === "FunctionDeclaration" ||
+    defaultExport.declaration.type === "JSXFragment"
   ) {
     return extractCode(code, defaultExport!.declaration);
   }
@@ -51,13 +48,20 @@ export default function extractDefaultExport(code: string): string {
 
 function extractCode(
   code: string,
-  expression: Expression | FunctionDeclaration | AnonymousFunctionDeclaration,
+  expression: Expression | FunctionDeclaration,
 ) {
+  console.log(expression);
   if (expression.type === "JSXElement") {
-    return code.slice(expression.start, expression.end);
+    return code.slice(expression.start!, expression.end!);
+  }
+  if (expression.type === "JSXFragment") {
+    return code.slice(
+      expression.children.reduce((a, b) => Math.min(a, b.start!), 0),
+      expression.children.reduce((a, b) => Math.max(a, b.end!), 0),
+    );
   }
   if (expression.type === "ArrowFunctionExpression") {
-    return code.slice(expression.start, expression.end);
+    return code.slice(expression.start!, expression.end!);
   }
   if (expression.type === "FunctionDeclaration") {
     const returnStatement = expression.body.body.find(
@@ -66,9 +70,28 @@ function extractCode(
     if (returnStatement == undefined || returnStatement.argument == undefined) {
       throw Error("Function does not have return statement.");
     }
+    if (returnStatement.argument.type === "JSXFragment") {
+      const trimmedCode = code
+        .slice(
+          returnStatement.argument.children.reduce(
+            (a, b) => Math.min(a, b.start!),
+            returnStatement.argument.end!,
+          ),
+          returnStatement.argument.children.reduce(
+            (a, b) => Math.max(a, b.end!),
+            returnStatement.argument.start!,
+          ),
+        )
+        .trim()
+        .split("\n")
+        .map((it) => it.trim())
+        .join("\n");
+      console.log(trimmedCode);
+      return trimmedCode;
+    }
     return code.slice(
-      returnStatement.argument.start,
-      returnStatement.argument.end,
+      returnStatement.argument.start!,
+      returnStatement.argument.end!,
     );
   }
 

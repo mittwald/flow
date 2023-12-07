@@ -1,5 +1,5 @@
 "use client";
-import React, { FC } from "react";
+import React, { ChangeEventHandler, FC, useState } from "react";
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from "react-live";
 import { extractEditorScope } from "@/components/LiveCodeEditor/lib/extractEditorScope";
 import { LiveCodeEditorProps } from "@/components/LiveCodeEditor/types";
@@ -19,7 +19,16 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
     throw new Error("Expected code prop to be of type 'string'.");
   }
 
+  const [codeExpanded, setCodeExpanded] = useState(false);
+
   const scope = extractEditorScope(code);
+
+  const transformRenderedCode = (code: string) => {
+    if (!codeExpanded) {
+      return `<>${code}</>`;
+    }
+    return `<>${transformCode(code)}</>`;
+  };
 
   const transformCode = (code: string) => {
     try {
@@ -29,11 +38,25 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
     }
   };
 
+  const handleCheckboxChange: ChangeEventHandler<HTMLInputElement> = (
+    event,
+  ) => {
+    setCodeExpanded(event.currentTarget.checked);
+  };
+
   return (
-    <LiveProvider code={code} scope={scope} transformCode={transformCode}>
-      <LiveEditor />
+    <LiveProvider
+      code={codeExpanded ? code : transformCode(code)}
+      scope={scope}
+      transformCode={transformRenderedCode}
+    >
       <LiveError />
       <LivePreview />
+      <div>
+        <input type="checkbox" onChange={handleCheckboxChange} />
+        <label>Expand Code</label>
+      </div>
+      <LiveEditor />
     </LiveProvider>
   );
 };

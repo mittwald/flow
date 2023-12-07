@@ -1,23 +1,22 @@
-import * as acorn from "acorn";
-import jsx from "acorn-jsx";
-import { ImportDeclaration, Literal } from "acorn";
+import * as babelParser from "@babel/parser";
+import { ImportDeclaration, StringLiteral } from "@babel/types";
 
 interface ImportDefinition {
   names: string[];
-  source: Literal["value"];
+  source: StringLiteral["value"];
 }
 
 export function extractRawImports(moduleCode: string): ImportDefinition[] {
-  const JSXParser = acorn.Parser.extend(jsx());
-
-  const tree = JSXParser.parse(moduleCode, {
-    ecmaVersion: 14,
+  const tree = babelParser.parse(moduleCode, {
     sourceType: "module",
+    plugins: ["jsx", "typescript"],
   });
 
-  const imports = tree.body.filter((node): node is ImportDeclaration => {
-    return node.type === "ImportDeclaration";
-  });
+  const imports = tree.program.body.filter(
+    (node): node is ImportDeclaration => {
+      return node.type === "ImportDeclaration";
+    },
+  );
 
   return imports.map((declaration) => {
     return {
