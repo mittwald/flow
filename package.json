@@ -23,7 +23,8 @@
   },
   "simple-git-hooks": {
     "post-checkout": "yarn install",
-    "post-merge": "yarn install"
+    "post-merge": "yarn install",
+    "pre-commit": "yarn lint"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^6.13.2",
