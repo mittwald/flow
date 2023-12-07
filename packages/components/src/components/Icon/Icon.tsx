@@ -2,7 +2,7 @@ import React, { FC, PropsWithChildren, useMemo } from "react";
 import styles from "./styles.module.css";
 import { IconLookup } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import parse from "html-react-parser";
+import { extractSvgFromString } from "@/components/Icon/lib";
 
 export interface IconProps extends PropsWithChildren {
   faIcon?: IconLookup;
@@ -12,6 +12,7 @@ export interface IconProps extends PropsWithChildren {
 export const Icon: FC<IconProps> = (props) => {
   const { faIcon, "aria-label": ariaLabel, children } = props;
 
+  console.log(children);
   const iconProps = {
     className: styles.root,
     "aria-hidden": !ariaLabel,
@@ -27,10 +28,7 @@ export const Icon: FC<IconProps> = (props) => {
   const isCustomSvgString = typeof children === "string";
 
   const iconElement = useMemo(
-    () =>
-      isCustomSvgString
-        ? parse(children).find((child) => child && child.type === "svg")
-        : children,
+    () => (isCustomSvgString ? extractSvgFromString(children) : children),
     [isCustomSvgString, children],
   );
 

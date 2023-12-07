@@ -16,9 +16,23 @@ export const FontAwesomeIcon: Story = {
 
 export const CustomSvgString: Story = {
   args: {
-    children: atob(
-      "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDI2LjMuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeD0iMHB4IgoJIHk9IjBweCIKCSB2aWV3Qm94PSIwIDAgMTc0Ni43IDEyMzIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDE3NDYuNyAxMjMyOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxnPgoJPGc+CgkJPGc+CgkJCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xMTE3LjIsMjg1LjRjLTEwMi41LDAtMjI2LjUsNTIuMS0yOTEuMywxNjBjLTQ2LjctMTAwLjctMTM0LjgtMTYwLTI3Ni45LTE2MAoJCQkJYy0xMDEuNCwwLTIwMS4yLDUwLjgtMjU2LjEsMTI0LjFsLTI5LjgtMTUxLjNMMTcuNCwzMDYuM2wyOS45LDE1Mi4ybDAuMSwyLjRsLTAuMSw3NDEuM2gyNDAuOVY3MzYuNwoJCQkJYzAtMTE4LjcsNjEuMS0yMjIuOSwxODMuNC0yMjIuOUM2MDEsNTEzLjgsNjI4LDYwMS45LDYyOCw3MjAuNnY0ODEuOGgyNDAuOVY3MjcuN2MwLTExOC43LDY0LjctMjEzLjksMTgzLjQtMjEzLjkKCQkJCWMxMjcuNiwwLDE1Ni40LDg4LjEsMTU2LjQsMjA2Ljh2NDk5LjhsMjQwLjktNDcuMlY2OTBDMTQ0OS44LDQ1OS44LDEzNzAuNywyODUuNCwxMTE3LjIsMjg1LjR6Ii8+CgkJPC9nPgogICAgICAgIDxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xNTY5LjIsMjMuN2MtODMsMC0xNTIuNCw2OS41LTE1Mi40LDE1NC4zYzAsODMsNjkuNSwxNTIuNCwxNTIuNCwxNTIuNGM4NC45LDAsMTU0LjQtNjkuNSwxNTQuNC0xNTIuNAoJCQlDMTcyMy41LDkzLjEsMTY1NC4xLDIzLjcsMTU2OS4yLDIzLjd6Ii8+Cgk8L2c+CjwvZz4KPC9zdmc+Cg==",
-    ),
+    children:
+      '<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px"\n' +
+      '\t y="0px"\n' +
+      '\t viewBox="0 0 1746.7 1232" style="enable-background:new 0 0 1746.7 1232;" xml:space="preserve">\n' +
+      "<g>\n" +
+      "\t<g>\n" +
+      "\t\t<g>\n" +
+      '\t\t\t<path class="st0" d="M1117.2,285.4c-102.5,0-226.5,52.1-291.3,160c-46.7-100.7-134.8-160-276.9-160\n' +
+      "\t\t\t\tc-101.4,0-201.2,50.8-256.1,124.1l-29.8-151.3L17.4,306.3l29.9,152.2l0.1,2.4l-0.1,741.3h240.9V736.7\n" +
+      "\t\t\t\tc0-118.7,61.1-222.9,183.4-222.9C601,513.8,628,601.9,628,720.6v481.8h240.9V727.7c0-118.7,64.7-213.9,183.4-213.9\n" +
+      '\t\t\t\tc127.6,0,156.4,88.1,156.4,206.8v499.8l240.9-47.2V690C1449.8,459.8,1370.7,285.4,1117.2,285.4z"/>\n' +
+      "\t\t</g>\n" +
+      '        <path class="st0" d="M1569.2,23.7c-83,0-152.4,69.5-152.4,154.3c0,83,69.5,152.4,152.4,152.4c84.9,0,154.4-69.5,154.4-152.4\n' +
+      '\t\t\tC1723.5,93.1,1654.1,23.7,1569.2,23.7z"/>\n' +
+      "\t</g>\n" +
+      "</g>\n" +
+      "</svg>",
   },
 };
 
