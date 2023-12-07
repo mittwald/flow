@@ -14,8 +14,6 @@ export const Button: FC<Props> = (props) => {
     <div className={styles.root}>
       Button {props.foo ? "with" : "without"}{" "}
       <span className={styles.foo}>foo</span>
-      <IconCustomer />
-      <IconLoading />
     </div>
   );
 };
