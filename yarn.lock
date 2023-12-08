@@ -3106,6 +3106,7 @@ __metadata:
     "@jest/globals": "npm:^29.7.0"
     "@mittwald/flow-design-tokens": "workspace:*"
     "@nx/storybook": "npm:^17.1.3"
+    "@react-aria/utils": "npm:^3.22.0"
     "@storybook/addon-a11y": "npm:^7.6.4"
     "@storybook/addon-essentials": "npm:^7.6.4"
     "@storybook/addon-interactions": "npm:^7.6.4"
