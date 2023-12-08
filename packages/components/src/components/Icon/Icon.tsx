@@ -12,7 +12,6 @@ export interface IconProps extends PropsWithChildren {
 export const Icon: FC<IconProps> = (props) => {
   const { faIcon, "aria-label": ariaLabel, children } = props;
 
-  console.log(children);
   const iconProps = {
     className: styles.root,
     "aria-hidden": !ariaLabel,

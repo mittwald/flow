@@ -17,9 +17,7 @@ export const FontAwesomeIcon: Story = {
 export const CustomSvgString: Story = {
   args: {
     children:
-      '<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px"\n' +
-      '\t y="0px"\n' +
-      '\t viewBox="0 0 1746.7 1232" style="enable-background:new 0 0 1746.7 1232;" xml:space="preserve">\n' +
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1746.7 1232">\n' +
       "<g>\n" +
       "\t<g>\n" +
       "\t\t<g>\n" +
