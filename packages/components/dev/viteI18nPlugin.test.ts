@@ -7,6 +7,7 @@ import type {
   TransformPluginContext,
   SourceDescription,
 } from "rollup";
+import { HmrContext, ModuleGraph, ViteDevServer, WebSocketServer } from "vite";
 
 describe("vite i18n plugin", () => {
   it("resolve will return correct id", async () => {
@@ -90,6 +91,63 @@ describe("vite i18n plugin", () => {
       expect(JSON.parse(load.code)).toMatchObject({
         bar: { bar: "baz" },
       });
+    }
+  });
+
+  it("test hot reload will not triggered on non locale files", () => {
+    if (
+      plugin.handleHotUpdate &&
+      typeof plugin.handleHotUpdate === "function"
+    ) {
+      const hmrContext = {
+        server: {
+          ws: {
+            send: jest.fn(),
+          } as unknown as WebSocketServer,
+          moduleGraph: {
+            getModuleById: jest.fn(),
+          } as unknown as ModuleGraph,
+        } as ViteDevServer,
+        timestamp: Date.now(),
+        file: "/button/button.tsx",
+        read: jest.fn(),
+        modules: [],
+      } as HmrContext;
+
+      plugin.handleHotUpdate.apply(this, [hmrContext]);
+      expect(hmrContext.server.moduleGraph.getModuleById).toBeCalledTimes(0);
+      expect(hmrContext.server.ws.send).toBeCalledTimes(0);
+    }
+  });
+
+  it("test hot reload will gets triggered for locale files", () => {
+    if (
+      plugin.handleHotUpdate &&
+      typeof plugin.handleHotUpdate === "function"
+    ) {
+      const moduleMock = jest.fn().mockReturnValue("module");
+      const hmrContext = {
+        server: {
+          ws: {
+            send: jest.fn(),
+          } as unknown as WebSocketServer,
+          moduleGraph: {
+            getModuleById: moduleMock,
+            invalidateModule: jest.fn(),
+          } as unknown as ModuleGraph,
+        } as ViteDevServer,
+        timestamp: Date.now(),
+        file: "/button/locales/foo.locale.json",
+        read: jest.fn(),
+        modules: [],
+      } as HmrContext;
+
+      plugin.handleHotUpdate.apply(this, [hmrContext]);
+      expect(hmrContext.server.moduleGraph.getModuleById).toBeCalledTimes(2);
+      expect(hmrContext.server.moduleGraph.invalidateModule).toBeCalledWith(
+        "module",
+      );
+      expect(hmrContext.server.ws.send).toBeCalledTimes(1);
     }
   });
 });
