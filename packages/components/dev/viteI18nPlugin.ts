@@ -82,7 +82,7 @@ export default {
   enforce: "pre",
   handleHotUpdate: async ({ file, server }) => {
     const { matches, filePath, directory } = getImportPathInfos(file);
-    console.log("foo", file, matches);
+
     if (matches) {
       let moduleFound = false;
       [
