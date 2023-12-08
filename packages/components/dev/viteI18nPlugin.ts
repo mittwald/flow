@@ -10,13 +10,16 @@ const importPathInfosRegEx = new RegExp(
   `^(.+/${localeDirectory})/((.+)${moduleSuffix.replaceAll(".", "\\.")})$`,
 );
 
-interface ImportPathInfos {
+interface ImportPathData {
   directory: string;
   filePath: string;
   fileName: string;
   languageKey: string;
-  matches: boolean;
 }
+
+type ImportPathInfos =
+  | ({ matches: true } & ImportPathData)
+  | ({ matches: false } & Partial<ImportPathData>);
 
 const getImportPathInfos = (
   id: string,
@@ -47,19 +50,21 @@ const generateComponentIntlContent = (
   importPathInfos: ImportPathInfos,
 ): string => {
   const langObject: string[] = [];
-  const { languageKey, filePath, directory } = importPathInfos;
+  const { matches, languageKey, filePath, directory } = importPathInfos;
 
-  if (languageKey === "*") {
-    fs.readdirSync(directory).forEach((file) => {
-      const filePath = path.join(directory, file);
-      const { languageKey } = getImportPathInfos(filePath);
+  if (matches) {
+    if (languageKey === "*") {
+      fs.readdirSync(directory).forEach((file) => {
+        const filePath = path.join(directory, file);
+        const { languageKey } = getImportPathInfos(filePath);
 
+        const fileContent = fs.readFileSync(filePath, "utf8");
+        langObject.push(`"${languageKey}":${fileContent}`);
+      });
+    } else {
       const fileContent = fs.readFileSync(filePath, "utf8");
       langObject.push(`"${languageKey}":${fileContent}`);
-    });
-  } else {
-    const fileContent = fs.readFileSync(filePath, "utf8");
-    langObject.push(`"${languageKey}":${fileContent}`);
+    }
   }
 
   return `{${langObject.join(",")}}`;
