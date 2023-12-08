@@ -1,0 +1,34 @@
+radio:
+  border-width:
+    value: 1px
+  border-color:
+    default:
+      value: "{neutral.color.500}"
+    selected:
+      value: "{informative.color.700}"
+    disabled:
+      value: "{neutral.color.500}"
+    selected-disabled:
+      value: "{neutral.color.600}"
+  border-radius:
+    value: "{size-px.xs}"
+  padding:
+    value: "{size-px.s}"
+  background-color:
+    default:
+      value: "{color.white}"
+    selected:
+      value: "{informative.color.100}"
+    disabled:
+      value: "{neutral.color.300}"
+    selected-disabled:
+      value: "{neutral.color.400}"
+  color:
+    default:
+      value: "{neutral.color.1000}"
+    selected:
+      value: "{informative.color.700}"
+    disabled:
+      value: "{neutral.color.500}"
+    selected-disabled:
+      value: "{neutral.color.600}"

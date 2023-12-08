@@ -1,0 +1,56 @@
+@import "@/styles";
+
+.radio {
+  border: var(--radio--border-width) solid var(--radio--border-color--default);
+  padding: var(--radio--padding);
+  flex: 1;
+  background-color: var(--radio--background-color--default);
+  color: var(--radio--color--default);
+
+  &:has(:global(.flow-text)) {
+    display: grid;
+    grid-template-areas:
+      "label"
+      "description";
+    gap: 8px;
+    > :global(.react-aria-Label) {
+      font-weight: bold;
+    }
+  }
+
+  :global(.react-aria-Label) {
+    grid-area: label;
+  }
+
+  :global(.flow-text) {
+    grid-area: description;
+  }
+
+  &:first-child {
+    border-top-left-radius: var(--radio--border-radius);
+    border-bottom-left-radius: var(--radio--border-radius);
+  }
+
+  &:last-child {
+    border-top-right-radius: var(--radio--border-radius);
+    border-bottom-right-radius: var(--radio--border-radius);
+  }
+
+  &[data-selected] {
+    border-color: var(--radio--border-color--selected);
+    background-color: var(--radio--background-color--selected);
+    color: var(--radio--color--selected);
+  }
+
+  &[data-disabled] {
+    border-color: var(--radio--border-color--disabled);
+    background-color: var(--radio--background-color--disabled);
+    color: var(--radio--color--disabled);
+  }
+
+  &[data-disabled]&[data-selected] {
+    border-color: var(--radio--border-color--selected-disabled);
+    background-color: var(--radio--background-color--selected-disabled);
+    color: var(--radio--color--selected-disabled);
+  }
+}

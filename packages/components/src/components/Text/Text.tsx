@@ -1,11 +1,21 @@
 import React, { FC, PropsWithChildren } from "react";
 import styles from "./styles.module.css";
 import * as Aria from "react-aria-components";
+import clsx from "clsx";
+
+export interface TextProps
+  extends PropsWithChildren<Omit<Aria.TextProps, "children">> {}
 
 export const Text: FC<PropsWithChildren> = (props) => {
-  const { children } = props;
+  const { children, className, ...rest } = props;
 
-  return <Aria.Text className={styles.root}>{children}</Aria.Text>;
+  const rootClassName = clsx(className, styles.root);
+
+  return (
+    <Aria.Text {...rest} className={rootClassName}>
+      {children}
+    </Aria.Text>
+  );
 };
 
 export default Text;
