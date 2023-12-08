@@ -50,7 +50,6 @@ function extractCode(
   code: string,
   expression: Expression | FunctionDeclaration,
 ) {
-  console.log(expression);
   if (expression.type === "JSXElement") {
     return code.slice(expression.start!, expression.end!);
   }
@@ -86,7 +85,6 @@ function extractCode(
         .split("\n")
         .map((it) => it.trim())
         .join("\n");
-      console.log(trimmedCode);
       return trimmedCode;
     }
     return code.slice(

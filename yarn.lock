@@ -3175,6 +3175,7 @@ __metadata:
     glob: "npm:^10.3.10"
     next: "npm:14.0.3"
     parse-es-import: "npm:^0.6.0"
+    prism-react-renderer: "npm:^2.3.0"
     raw-loader: "npm:^4.0.2"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
@@ -18183,7 +18184,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prism-react-renderer@npm:^2.0.6":
+"prism-react-renderer@npm:^2.0.6, prism-react-renderer@npm:^2.3.0":
   version: 2.3.0
   resolution: "prism-react-renderer@npm:2.3.0"
   dependencies:

@@ -6108,6 +6108,7 @@ const RAW_RUNTIME_STATE =
           ["glob", "npm:10.3.10"],\
           ["next", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:14.0.3"],\
           ["parse-es-import", "npm:0.6.0"],\
+          ["prism-react-renderer", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:2.3.0"],\
           ["raw-loader", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:4.0.2"],\
           ["react", "npm:18.2.0"],\
           ["react-dom", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:18.2.0"],\
@@ -25455,10 +25456,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:97eb22880f65bfd9bda012fb86ce6b0887cf5d2c7bdc930e91e1c3a1421525d6c88d4e40617207b92a142900825b258169245cbe8011dfd196b962d44a06af98#npm:2.3.0", {\
-        "packageLocation": "./.yarn/__virtual__/prism-react-renderer-virtual-0da7d87df1/0/cache/prism-react-renderer-npm-2.3.0-47266bd402-aa8fb176e1.zip/node_modules/prism-react-renderer/",\
+      ["virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:2.3.0", {\
+        "packageLocation": "./.yarn/__virtual__/prism-react-renderer-virtual-2e6b65fb5d/0/cache/prism-react-renderer-npm-2.3.0-47266bd402-aa8fb176e1.zip/node_modules/prism-react-renderer/",\
         "packageDependencies": [\
-          ["prism-react-renderer", "virtual:97eb22880f65bfd9bda012fb86ce6b0887cf5d2c7bdc930e91e1c3a1421525d6c88d4e40617207b92a142900825b258169245cbe8011dfd196b962d44a06af98#npm:2.3.0"],\
+          ["prism-react-renderer", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:2.3.0"],\
           ["@types/prismjs", "npm:1.26.3"],\
           ["@types/react", "npm:18.2.42"],\
           ["clsx", "npm:2.0.0"],\
@@ -26148,7 +26149,7 @@ const RAW_RUNTIME_STATE =
           ["react-live", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:4.1.5"],\
           ["@types/react", "npm:18.2.42"],\
           ["@types/react-dom", "npm:18.2.17"],\
-          ["prism-react-renderer", "virtual:97eb22880f65bfd9bda012fb86ce6b0887cf5d2c7bdc930e91e1c3a1421525d6c88d4e40617207b92a142900825b258169245cbe8011dfd196b962d44a06af98#npm:2.3.0"],\
+          ["prism-react-renderer", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:2.3.0"],\
           ["react", "npm:18.2.0"],\
           ["react-dom", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:18.2.0"],\
           ["sucrase", "npm:3.34.0"],\

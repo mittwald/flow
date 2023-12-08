@@ -1,9 +1,18 @@
 "use client";
-import React, { ChangeEventHandler, FC, useState } from "react";
+import React, {
+  ChangeEventHandler,
+  FC,
+  MouseEventHandler,
+  useRef,
+  useState,
+} from "react";
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from "react-live";
 import { extractEditorScope } from "@/components/LiveCodeEditor/lib/extractEditorScope";
 import { LiveCodeEditorProps } from "@/components/LiveCodeEditor/types";
 import extractDefaultExport from "@/lib/extractDefaultExport";
+import styles from "./LiveCodeEditor.module.css";
+import { themes } from "prism-react-renderer";
+import { PreviewWrapper } from "@/components/LiveCodeEditor/components/PreviewWrapper";
 
 // Waiting for https://github.com/FormidableLabs/react-live/issues/339
 const error = console.error;
@@ -20,6 +29,7 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
   }
 
   const [codeExpanded, setCodeExpanded] = useState(false);
+  const checkboxRef = useRef<HTMLInputElement>(null);
 
   const scope = extractEditorScope(code);
 
@@ -32,7 +42,7 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
 
   const transformCode = (code: string) => {
     try {
-      return extractDefaultExport(code);
+      return extractDefaultExport(code).trim();
     } catch (error) {
       return `<p><em>Example could not be parsed:</em> ${String(error)}</p>`;
     }
@@ -44,20 +54,36 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
     setCodeExpanded(event.currentTarget.checked);
   };
 
+  const handleCheckboxWrapperClick: MouseEventHandler<HTMLDivElement> = () => {
+    checkboxRef.current?.click();
+  };
+
   return (
-    <LiveProvider
-      code={codeExpanded ? code : transformCode(code)}
-      scope={scope}
-      transformCode={transformRenderedCode}
-    >
-      <LiveError />
-      <LivePreview />
-      <div>
-        <input type="checkbox" onChange={handleCheckboxChange} />
-        <label>Expand Code</label>
-      </div>
-      <LiveEditor />
-    </LiveProvider>
+    <div className={styles.wrapper}>
+      <LiveProvider
+        code={codeExpanded ? code.trim() : transformCode(code)}
+        scope={scope}
+        transformCode={transformRenderedCode}
+      >
+        <LiveError className={styles.error} />
+        <LivePreview Component={PreviewWrapper} />
+        <div
+          className={styles.expandCodeWrapper}
+          onClick={handleCheckboxWrapperClick}
+        >
+          <input
+            type="checkbox"
+            onChange={handleCheckboxChange}
+            className={styles.expandCodeCheckbox}
+            ref={checkboxRef}
+          />
+          <span className={styles.expandCodeText}>
+            {codeExpanded ? "Simplify Code" : "Expand Code"}
+          </span>
+        </div>
+        <LiveEditor className={styles.editor} theme={themes.vsDark} />
+      </LiveProvider>
+    </div>
   );
 };
 
