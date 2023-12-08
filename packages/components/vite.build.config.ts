@@ -9,6 +9,7 @@ export default defineConfig(
       lib: {
         entry: [
           "./src/components/Button/Button.tsx",
+          "./src/components/Icon/Icon.tsx",
           "./src/components/Text/Text.tsx",
         ],
         formats: ["es"],
