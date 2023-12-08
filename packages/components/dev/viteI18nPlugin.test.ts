@@ -144,6 +144,12 @@ describe("vite i18n plugin", () => {
 
       plugin.handleHotUpdate.apply(this, [hmrContext]);
       expect(hmrContext.server.moduleGraph.getModuleById).toBeCalledTimes(2);
+      expect(hmrContext.server.moduleGraph.getModuleById).toBeCalledWith(
+        "\x00.locale.json@/button/locales/*.locale.json",
+      );
+      expect(hmrContext.server.moduleGraph.getModuleById).toBeCalledWith(
+        "\x00.locale.json@/button/locales/foo.locale.json",
+      );
       expect(hmrContext.server.moduleGraph.invalidateModule).toBeCalledWith(
         "module",
       );
