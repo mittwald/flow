@@ -38,10 +38,6 @@ const getImportPathInfos = (
   }
 
   return {
-    directory: "",
-    filePath: "",
-    languageKey: "",
-    fileName: "",
     matches: false,
   };
 };
