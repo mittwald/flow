@@ -105,7 +105,7 @@ export default {
 
     if (matches && source) {
       return {
-        id: `${moduleId}${path.resolve(path.dirname(source), filePath)}`,
+        id: moduleId + path.resolve(path.dirname(source), filePath),
       };
     }
   },
