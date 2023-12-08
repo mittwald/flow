@@ -1,0 +1,8 @@
+icon:
+  size:
+    s:
+      value: 1rem
+    m:
+      value: 1.5rem
+    xl:
+      value: 4rem
