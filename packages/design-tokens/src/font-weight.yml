@@ -1,0 +1,5 @@
+font-weight:
+  normal:
+    value: 300
+  bold:
+    value: 600
