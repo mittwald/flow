@@ -5108,6 +5108,62 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@fortawesome/fontawesome-common-types", [\
+      ["npm:6.5.1", {\
+        "packageLocation": "./.yarn/cache/@fortawesome-fontawesome-common-types-npm-6.5.1-1efaf0654d-afd4e6de0a.zip/node_modules/@fortawesome/fontawesome-common-types/",\
+        "packageDependencies": [\
+          ["@fortawesome/fontawesome-common-types", "npm:6.5.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@fortawesome/fontawesome-svg-core", [\
+      ["npm:6.5.1", {\
+        "packageLocation": "./.yarn/cache/@fortawesome-fontawesome-svg-core-npm-6.5.1-8a58ea1915-ba4f4f4f1a.zip/node_modules/@fortawesome/fontawesome-svg-core/",\
+        "packageDependencies": [\
+          ["@fortawesome/fontawesome-svg-core", "npm:6.5.1"],\
+          ["@fortawesome/fontawesome-common-types", "npm:6.5.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@fortawesome/free-regular-svg-icons", [\
+      ["npm:6.5.1", {\
+        "packageLocation": "./.yarn/cache/@fortawesome-free-regular-svg-icons-npm-6.5.1-9331a4ef57-6e35a9b054.zip/node_modules/@fortawesome/free-regular-svg-icons/",\
+        "packageDependencies": [\
+          ["@fortawesome/free-regular-svg-icons", "npm:6.5.1"],\
+          ["@fortawesome/fontawesome-common-types", "npm:6.5.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@fortawesome/react-fontawesome", [\
+      ["npm:0.2.0", {\
+        "packageLocation": "./.yarn/cache/@fortawesome-react-fontawesome-npm-0.2.0-a36215138f-cf1bd3840d.zip/node_modules/@fortawesome/react-fontawesome/",\
+        "packageDependencies": [\
+          ["@fortawesome/react-fontawesome", "npm:0.2.0"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:0.2.0", {\
+        "packageLocation": "./.yarn/__virtual__/@fortawesome-react-fontawesome-virtual-d75dda2999/0/cache/@fortawesome-react-fontawesome-npm-0.2.0-a36215138f-cf1bd3840d.zip/node_modules/@fortawesome/react-fontawesome/",\
+        "packageDependencies": [\
+          ["@fortawesome/react-fontawesome", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:0.2.0"],\
+          ["@fortawesome/fontawesome-svg-core", "npm:6.5.1"],\
+          ["@types/fortawesome__fontawesome-svg-core", null],\
+          ["@types/react", "npm:18.2.42"],\
+          ["prop-types", "npm:15.8.1"],\
+          ["react", "npm:18.2.0"]\
+        ],\
+        "packagePeers": [\
+          "@fortawesome/fontawesome-svg-core",\
+          "@types/fortawesome__fontawesome-svg-core",\
+          "@types/react",\
+          "react"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@gar/promisify", [\
       ["npm:1.1.3", {\
         "packageLocation": "./.yarn/cache/@gar-promisify-npm-1.1.3-ac1a325862-0b3c9958d3.zip/node_modules/@gar/promisify/",\
@@ -5878,6 +5934,9 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/__virtual__/@mittwald-flow-components-virtual-9f3a131550/1/packages/components/",\
         "packageDependencies": [\
           ["@mittwald/flow-components", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#workspace:packages/components"],\
+          ["@fortawesome/fontawesome-svg-core", "npm:6.5.1"],\
+          ["@fortawesome/free-regular-svg-icons", "npm:6.5.1"],\
+          ["@fortawesome/react-fontawesome", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:0.2.0"],\
           ["@jest/globals", "npm:29.7.0"],\
           ["@mittwald/flow-design-tokens", "workspace:packages/design-tokens"],\
           ["@nx/storybook", "npm:17.1.3"],\
@@ -5894,6 +5953,7 @@ const RAW_RUNTIME_STATE =
           ["@types/react", "npm:18.2.42"],\
           ["@types/react-dom", "npm:18.2.17"],\
           ["clsx", "npm:2.0.0"],\
+          ["html-react-parser", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:5.0.7"],\
           ["jest", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:29.7.0"],\
           ["postcss", "npm:8.4.32"],\
           ["postcss-nested-import", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:1.3.0"],\
@@ -5921,6 +5981,9 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/__virtual__/@mittwald-flow-components-virtual-85e2e474c0/1/packages/components/",\
         "packageDependencies": [\
           ["@mittwald/flow-components", "virtual:f09e910c1b508d3d7569e5bd3d1b58e6c8eedf483d3ecb00a35f3e6fff907cff61fcf2c7acd90c04d26e337186c1afc7265f77161911bcd5beabe7070df91545#workspace:packages/components"],\
+          ["@fortawesome/fontawesome-svg-core", "npm:6.5.1"],\
+          ["@fortawesome/free-regular-svg-icons", "npm:6.5.1"],\
+          ["@fortawesome/react-fontawesome", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:0.2.0"],\
           ["@jest/globals", "npm:29.7.0"],\
           ["@mittwald/flow-design-tokens", "workspace:packages/design-tokens"],\
           ["@nx/storybook", "npm:17.1.3"],\
@@ -5937,6 +6000,7 @@ const RAW_RUNTIME_STATE =
           ["@types/react", "npm:18.2.42"],\
           ["@types/react-dom", "npm:18.2.17"],\
           ["clsx", "npm:2.0.0"],\
+          ["html-react-parser", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:5.0.7"],\
           ["jest", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:29.7.0"],\
           ["postcss", "npm:8.4.32"],\
           ["postcss-nested-import", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:1.3.0"],\
@@ -5958,6 +6022,9 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./packages/components/",\
         "packageDependencies": [\
           ["@mittwald/flow-components", "workspace:packages/components"],\
+          ["@fortawesome/fontawesome-svg-core", "npm:6.5.1"],\
+          ["@fortawesome/free-regular-svg-icons", "npm:6.5.1"],\
+          ["@fortawesome/react-fontawesome", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:0.2.0"],\
           ["@jest/globals", "npm:29.7.0"],\
           ["@mittwald/flow-design-tokens", "workspace:packages/design-tokens"],\
           ["@nx/storybook", "npm:17.1.3"],\
@@ -5974,6 +6041,7 @@ const RAW_RUNTIME_STATE =
           ["@types/react", "npm:18.2.42"],\
           ["@types/react-dom", "npm:18.2.17"],\
           ["clsx", "npm:2.0.0"],\
+          ["html-react-parser", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:5.0.7"],\
           ["jest", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:29.7.0"],\
           ["postcss", "npm:8.4.32"],\
           ["postcss-nested-import", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:1.3.0"],\
@@ -17081,6 +17149,49 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["dom-serializer", [\
+      ["npm:2.0.0", {\
+        "packageLocation": "./.yarn/cache/dom-serializer-npm-2.0.0-378ebc7200-d5ae2b7110.zip/node_modules/dom-serializer/",\
+        "packageDependencies": [\
+          ["dom-serializer", "npm:2.0.0"],\
+          ["domelementtype", "npm:2.3.0"],\
+          ["domhandler", "npm:5.0.3"],\
+          ["entities", "npm:4.5.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["domelementtype", [\
+      ["npm:2.3.0", {\
+        "packageLocation": "./.yarn/cache/domelementtype-npm-2.3.0-02de7cbfba-686f5a9ef0.zip/node_modules/domelementtype/",\
+        "packageDependencies": [\
+          ["domelementtype", "npm:2.3.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["domhandler", [\
+      ["npm:5.0.3", {\
+        "packageLocation": "./.yarn/cache/domhandler-npm-5.0.3-3ede73dc10-bba1e5932b.zip/node_modules/domhandler/",\
+        "packageDependencies": [\
+          ["domhandler", "npm:5.0.3"],\
+          ["domelementtype", "npm:2.3.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["domutils", [\
+      ["npm:3.1.0", {\
+        "packageLocation": "./.yarn/cache/domutils-npm-3.1.0-66c92ef7eb-342d64cf4d.zip/node_modules/domutils/",\
+        "packageDependencies": [\
+          ["domutils", "npm:3.1.0"],\
+          ["dom-serializer", "npm:2.0.0"],\
+          ["domelementtype", "npm:2.3.0"],\
+          ["domhandler", "npm:5.0.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["dot-case", [\
       ["npm:3.0.4", {\
         "packageLocation": "./.yarn/cache/dot-case-npm-3.0.4-09675b5521-5b859ea650.zip/node_modules/dot-case/",\
@@ -17259,6 +17370,15 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["enquirer", "npm:2.3.6"],\
           ["ansi-colors", "npm:4.1.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["entities", [\
+      ["npm:4.5.0", {\
+        "packageLocation": "./.yarn/cache/entities-npm-4.5.0-7cdb83b832-5b039739f7.zip/node_modules/entities/",\
+        "packageDependencies": [\
+          ["entities", "npm:4.5.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -19520,6 +19640,17 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["html-dom-parser", [\
+      ["npm:5.0.4", {\
+        "packageLocation": "./.yarn/cache/html-dom-parser-npm-5.0.4-7f518f96c6-a860b19b0a.zip/node_modules/html-dom-parser/",\
+        "packageDependencies": [\
+          ["html-dom-parser", "npm:5.0.4"],\
+          ["domhandler", "npm:5.0.3"],\
+          ["htmlparser2", "npm:9.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["html-escaper", [\
       ["npm:2.0.2", {\
         "packageLocation": "./.yarn/cache/html-escaper-npm-2.0.2-38e51ef294-208e8a12de.zip/node_modules/html-escaper/",\
@@ -19529,11 +19660,50 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["html-react-parser", [\
+      ["npm:5.0.7", {\
+        "packageLocation": "./.yarn/cache/html-react-parser-npm-5.0.7-3249837e21-4f72386bd4.zip/node_modules/html-react-parser/",\
+        "packageDependencies": [\
+          ["html-react-parser", "npm:5.0.7"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:5.0.7", {\
+        "packageLocation": "./.yarn/__virtual__/html-react-parser-virtual-4d305ce614/0/cache/html-react-parser-npm-5.0.7-3249837e21-4f72386bd4.zip/node_modules/html-react-parser/",\
+        "packageDependencies": [\
+          ["html-react-parser", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:5.0.7"],\
+          ["@types/react", "npm:18.2.42"],\
+          ["domhandler", "npm:5.0.3"],\
+          ["html-dom-parser", "npm:5.0.4"],\
+          ["react", "npm:18.2.0"],\
+          ["react-property", "npm:2.0.2"],\
+          ["style-to-js", "npm:1.1.10"]\
+        ],\
+        "packagePeers": [\
+          "@types/react",\
+          "react"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["html-tags", [\
       ["npm:3.3.1", {\
         "packageLocation": "./.yarn/cache/html-tags-npm-3.3.1-c8f411791b-680165e12b.zip/node_modules/html-tags/",\
         "packageDependencies": [\
           ["html-tags", "npm:3.3.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["htmlparser2", [\
+      ["npm:9.0.0", {\
+        "packageLocation": "./.yarn/cache/htmlparser2-npm-9.0.0-ceeb665083-100d24059a.zip/node_modules/htmlparser2/",\
+        "packageDependencies": [\
+          ["htmlparser2", "npm:9.0.0"],\
+          ["domelementtype", "npm:2.3.0"],\
+          ["domhandler", "npm:5.0.3"],\
+          ["domutils", "npm:3.1.0"],\
+          ["entities", "npm:4.5.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -25564,6 +25734,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["react-property", [\
+      ["npm:2.0.2", {\
+        "packageLocation": "./.yarn/cache/react-property-npm-2.0.2-55c6f95f6b-27a3dfa68d.zip/node_modules/react-property/",\
+        "packageDependencies": [\
+          ["react-property", "npm:2.0.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["react-refresh", [\
       ["npm:0.14.0", {\
         "packageLocation": "./.yarn/cache/react-refresh-npm-0.14.0-78ef5eeb73-b8ae07ad15.zip/node_modules/react-refresh/",\
@@ -27189,6 +27368,16 @@ const RAW_RUNTIME_STATE =
           ["jsonc-parser", "npm:3.2.0"],\
           ["lodash", "npm:4.17.21"],\
           ["tinycolor2", "npm:1.6.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["style-to-js", [\
+      ["npm:1.1.10", {\
+        "packageLocation": "./.yarn/cache/style-to-js-npm-1.1.10-6bfbcdf6ab-bb0603f50b.zip/node_modules/style-to-js/",\
+        "packageDependencies": [\
+          ["style-to-js", "npm:1.1.10"],\
+          ["style-to-object", "npm:1.0.5"]\
         ],\
         "linkType": "HARD"\
       }]\

@@ -4,6 +4,7 @@
   "type": "module",
   "exports": {
     "./Button": "./dist/Button.js",
+    "./Icon": "./dist/Icon.js",
     "./Text": "./dist/Text.js",
     "./style": "./dist/style.css",
     "./style/init": "./dist/index.js"
@@ -22,8 +23,12 @@
     "test": "run jest"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.5.1",
+    "@fortawesome/free-regular-svg-icons": "^6.5.1",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@mittwald/flow-design-tokens": "workspace:*",
     "clsx": "^2.0.0",
+    "html-react-parser": "^5.0.7",
     "react-aria-components": "^1.0.0-rc.0"
   },
   "devDependencies": {
