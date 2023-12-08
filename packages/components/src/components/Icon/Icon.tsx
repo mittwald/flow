@@ -1,5 +1,5 @@
 import React, { FC, PropsWithChildren, useMemo } from "react";
-import styles from "./styles.module.css";
+import styles from "./Icon.module.css";
 import { IconLookup } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { extractSvgFromString } from "@/components/Icon/lib";
