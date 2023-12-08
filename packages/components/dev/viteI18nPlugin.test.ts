@@ -11,6 +11,9 @@ import { HmrContext, ModuleGraph, ViteDevServer, WebSocketServer } from "vite";
 
 describe("vite i18n plugin", () => {
   it("resolve will return correct id", async () => {
+    expect(plugin.resolveId).toBeDefined();
+    expect(typeof plugin.resolveId).toBe("function");
+
     if (plugin.resolveId && typeof plugin.resolveId === "function") {
       const resolve = (await plugin.resolveId.apply({} as PluginContext, [
         "./locales/*.locale.json",
@@ -29,6 +32,9 @@ describe("vite i18n plugin", () => {
   });
 
   it("resolve will return nothing when importer is not known", async () => {
+    expect(plugin.resolveId).toBeDefined();
+    expect(typeof plugin.resolveId).toBe("function");
+
     if (plugin.resolveId && typeof plugin.resolveId === "function") {
       const resolve = (await plugin.resolveId.apply({} as PluginContext, [
         "./locales/*.locale.json",
@@ -44,6 +50,9 @@ describe("vite i18n plugin", () => {
   });
 
   it("test multi intl files will be generated", () => {
+    expect(plugin.load).toBeDefined();
+    expect(typeof plugin.load).toBe("function");
+
     if (plugin.load && typeof plugin.load === "function") {
       const load = plugin.load.apply({} as PluginContext, [
         path.join(__dirname, "test", "locales", "*.locale.json"),
@@ -57,6 +66,9 @@ describe("vite i18n plugin", () => {
   });
 
   it("test single intl files will be generated", () => {
+    expect(plugin.handleHotUpdate).toBeDefined();
+    expect(typeof plugin.handleHotUpdate).toBe("function");
+
     if (plugin.load && typeof plugin.load === "function") {
       const load = plugin.load.apply({} as PluginContext, [
         path.join(__dirname, "test", "locales", "bar.locale.json"),
@@ -69,6 +81,9 @@ describe("vite i18n plugin", () => {
   });
 
   it("test multi intl files will be transformed", () => {
+    expect(plugin.handleHotUpdate).toBeDefined();
+    expect(typeof plugin.handleHotUpdate).toBe("function");
+
     if (plugin.transform && typeof plugin.transform === "function") {
       const transform = plugin.transform.apply({} as TransformPluginContext, [
         "",
@@ -83,6 +98,9 @@ describe("vite i18n plugin", () => {
   });
 
   it("test single intl files will be transformed", () => {
+    expect(plugin.handleHotUpdate).toBeDefined();
+    expect(typeof plugin.handleHotUpdate).toBe("function");
+
     if (plugin.load && typeof plugin.load === "function") {
       const load = plugin.load.apply({} as PluginContext, [
         path.join(__dirname, "test", "locales", "bar.locale.json"),
@@ -95,6 +113,9 @@ describe("vite i18n plugin", () => {
   });
 
   it("test hot reload will not triggered on non locale files", () => {
+    expect(plugin.handleHotUpdate).toBeDefined();
+    expect(typeof plugin.handleHotUpdate).toBe("function");
+
     if (
       plugin.handleHotUpdate &&
       typeof plugin.handleHotUpdate === "function"
@@ -121,6 +142,9 @@ describe("vite i18n plugin", () => {
   });
 
   it("test hot reload will gets triggered for locale files", () => {
+    expect(plugin.handleHotUpdate).toBeDefined();
+    expect(typeof plugin.handleHotUpdate).toBe("function");
+
     if (
       plugin.handleHotUpdate &&
       typeof plugin.handleHotUpdate === "function"
