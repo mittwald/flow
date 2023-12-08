@@ -8,3 +8,4 @@ dist
 !.yarn/sdks
 !.yarn/versions
 nx-cloud.env
+*.log
