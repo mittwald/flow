@@ -14,7 +14,10 @@ describe("vite i18n plugin", () => {
       const resolve = (await plugin.resolveId.apply({} as PluginContext, [
         "./locales/*.locale.json",
         "./foo/foo.ts",
-        {} as any,
+        {
+          isEntry: false,
+          attributes: {},
+        },
       ])) as PartialResolvedId;
 
       expect(resolve).toBeDefined();
@@ -29,7 +32,10 @@ describe("vite i18n plugin", () => {
       const resolve = (await plugin.resolveId.apply({} as PluginContext, [
         "./locales/*.locale.json",
         "",
-        {} as any,
+        {
+          isEntry: false,
+          attributes: {},
+        },
       ])) as PartialResolvedId;
 
       expect(resolve).toBeUndefined();
