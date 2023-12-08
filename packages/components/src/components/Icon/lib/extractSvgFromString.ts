@@ -7,7 +7,7 @@ export const extractSvgFromString = (svgString: string): ReactNode => {
   );
 
   if (!svg) {
-    throw new Error("invalid svg string");
+    throw new Error(`Invalid SVG string (got ${String(svgString)})`);
   }
 
   return svg;

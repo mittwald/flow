@@ -48,6 +48,12 @@
     "@vitejs/plugin-react": "^4.2.1"
   },
   "dependenciesMeta": {
+    "@fortawesome/fontawesome-common-types": {
+      "unplugged": true
+    },
+    "@fortawesome/react-fontawesome": {
+      "unplugged": true
+    },
     "@types/react": {
       "unplugged": true
     },

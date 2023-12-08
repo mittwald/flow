@@ -1,23 +1,32 @@
-import React, { FC, PropsWithChildren, useMemo } from "react";
+import React, { FC, PropsWithChildren, SVGAttributes, useMemo } from "react";
 import styles from "./Icon.module.css";
 import { IconLookup } from "@fortawesome/fontawesome-svg-core";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { extractSvgFromString } from "@/components/Icon/lib";
+import {
+  BackwardCompatibleOmit,
+  FontAwesomeIcon,
+} from "@fortawesome/react-fontawesome";
+import clsx from "clsx";
+import { extractSvgFromString } from "@/components/Icon/lib/extractSvgFromString";
 
-export interface IconProps extends PropsWithChildren {
+type SvgAttributeProps = BackwardCompatibleOmit<
+  SVGAttributes<SVGSVGElement>,
+  "children" | "mask" | "transform"
+>;
+
+export interface IconProps extends PropsWithChildren<SvgAttributeProps> {
   faIcon?: IconLookup;
-  "aria-label"?: string;
 }
 
 export const Icon: FC<IconProps> = (props) => {
-  const { faIcon, "aria-label": ariaLabel, children } = props;
+  const { faIcon, "aria-label": ariaLabel, children, ...svgAttributes } = props;
 
-  const iconProps = {
-    className: styles.root,
-    "aria-hidden": !ariaLabel,
-    "aria-label": ariaLabel,
+  const iconProps: SvgAttributeProps = {
+    ...svgAttributes,
+    className: clsx(svgAttributes.className, styles.root),
     focusable: "false",
     role: "img",
+    "aria-hidden": !ariaLabel,
+    "aria-label": ariaLabel,
   };
 
   if (faIcon) {
@@ -30,6 +39,14 @@ export const Icon: FC<IconProps> = (props) => {
     () => (isCustomSvgString ? extractSvgFromString(children) : children),
     [isCustomSvgString, children],
   );
+
+  if (!React.isValidElement(iconElement)) {
+    throw new Error(
+      `Expected children of Icon component to be a valid React element (got ${String(
+        iconElement,
+      )})`,
+    );
+  }
 
   return React.cloneElement(iconElement, iconProps);
 };

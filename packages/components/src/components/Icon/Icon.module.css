@@ -3,8 +3,4 @@
 .root {
   height: 1em;
   width: 1em;
-
-  :global(.flow-button) & {
-    color: var(--color-white);
-  }
 }
