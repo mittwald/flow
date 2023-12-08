@@ -7,31 +7,22 @@ const moduleSuffix = ".locale.json";
 const moduleId = `\x00${moduleSuffix}@`;
 const localeDirectory = "locales";
 const importPathInfosRegEx = new RegExp(
-  `^(.+/${localeDirectory})/((.+)${moduleSuffix.replaceAll(".", ".")})$`,
+  `^(.+/${localeDirectory})/((.+)${moduleSuffix.replaceAll(".", "\\.")})$`,
 );
+
+interface ImportPathInfos {
+  directory: string;
+  filePath: string;
+  fileName: string;
+  languageKey: string;
+  matches: boolean;
+}
 
 const getImportPathInfos = (
   id: string,
   stripModuleId: boolean = false,
-):
-  | {
-      directory: string;
-      filePath: string;
-      fileName: string;
-      languageKey: string;
-      matches: true;
-    }
-  | {
-      directory: string;
-      filePath: string;
-      fileName: string;
-      languageKey: string;
-      matches: false;
-    } => {
-  let idToMatch = id;
-  if (stripModuleId) {
-    idToMatch = idToMatch.replace(moduleId, "");
-  }
+): ImportPathInfos => {
+  const idToMatch = stripModuleId ? id.replace(moduleId, "") : id;
   const matches = idToMatch.match(importPathInfosRegEx);
   if (matches) {
     return {
@@ -52,14 +43,13 @@ const getImportPathInfos = (
   };
 };
 
-const generateComponentIntlContent = (importPath: string): string => {
+const generateComponentIntlContent = (
+  importPathInfos: ImportPathInfos,
+): string => {
   const langObject: string[] = [];
-  const { languageKey, filePath, directory } = getImportPathInfos(importPath);
+  const { languageKey, filePath, directory } = importPathInfos;
 
-  if (languageKey !== "*") {
-    const fileContent = fs.readFileSync(filePath, "utf8");
-    langObject.push(`"${languageKey}":${fileContent}`);
-  } else {
+  if (languageKey === "*") {
     fs.readdirSync(directory).forEach((file) => {
       const filePath = path.join(directory, file);
       const { languageKey } = getImportPathInfos(filePath);
@@ -67,17 +57,20 @@ const generateComponentIntlContent = (importPath: string): string => {
       const fileContent = fs.readFileSync(filePath, "utf8");
       langObject.push(`"${languageKey}":${fileContent}`);
     });
+  } else {
+    const fileContent = fs.readFileSync(filePath, "utf8");
+    langObject.push(`"${languageKey}":${fileContent}`);
   }
 
   return `{${langObject.join(",")}}`;
 };
 
 const generateSourceResponse = (id: string): SourceDescription | undefined => {
-  const { matches, filePath } = getImportPathInfos(id, true);
+  const pathInfo = getImportPathInfos(id, true);
 
-  if (matches) {
+  if (pathInfo.matches) {
     return {
-      code: generateComponentIntlContent(filePath),
+      code: generateComponentIntlContent(pathInfo),
       map: null,
     };
   }
@@ -91,8 +84,8 @@ export default {
 
     if (matches) {
       [
-        `${moduleId}${path.join(directory, `*${moduleSuffix}`)}`,
-        `${moduleId}${filePath}`,
+        moduleId + path.join(directory, `*${moduleSuffix}`),
+        moduleId + filePath,
       ].forEach((id) => {
         const module = server.moduleGraph.getModuleById(id);
         if (module) {
