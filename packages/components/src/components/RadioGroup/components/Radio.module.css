@@ -22,6 +22,24 @@
     border-bottom-right-radius: var(--radio--border-radius);
   }
 
+  :global(.flow-description) {
+    grid-area: description;
+    font-weight: normal;
+  }
+
+  :global(.flow-additionalinfo) {
+    grid-area: additionalInfo;
+    justify-self: end;
+  }
+
+  :global(.flow-text:not(.flow-additionalinfo):not(.flow-description)) {
+    grid-area: title;
+  }
+
+  :global(.flow-icon) {
+    grid-area: icon;
+  }
+
   &:has(:global(.flow-description)),
   &:has(:global(.flow-icon)) {
     border-radius: var(--radio--border-radius);
@@ -40,43 +58,27 @@
       "title"
       "description";
     justify-items: start;
-  }
 
-  &:has(:global(.flow-icon)):has(:global(.flow-description)) {
-    grid-template-areas:
-      "icon title"
-      ". description";
-    grid-template-columns: auto 1fr;
-  }
+    &:has(:global(.flow-additionalinfo)) {
+      grid-template-areas:
+        "title"
+        "description"
+        "additionalInfo";
+    }
 
-  &:has(:global(.flow-description)):has(:global(.flow-additionalinfo)) {
-    grid-template-areas:
-      "title"
-      "description"
-      "additionalInfo";
-  }
+    &:has(:global(.flow-icon)) {
+      grid-template-areas:
+        "icon title"
+        ". description";
+      grid-template-columns: auto 1fr;
 
-  &:has(:global(.flow-icon)):has(:global(.flow-description)):has(
-      :global(.flow-additionalinfo)
-    ) {
-    grid-template-areas:
-      "icon title"
-      ". description"
-      ". additionalInfo";
-  }
-
-  :global(.flow-description) {
-    grid-area: description;
-    font-weight: normal;
-  }
-
-  :global(.flow-additionalinfo) {
-    grid-area: additionalInfo;
-    justify-self: end;
-  }
-
-  :global(.flow-text:not(.flow-additionalinfo):not(.flow-description)) {
-    grid-area: title;
+      &:global(.flow-additionalinfo) {
+        grid-template-areas:
+          "icon title"
+          ". description"
+          ". additionalInfo";
+      }
+    }
   }
 
   &[data-selected] {
