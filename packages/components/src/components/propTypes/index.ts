@@ -1,6 +1,6 @@
-import { TextProps } from "@/components/Text";
-import { ButtonProps } from "@/components/Button";
-import { IconProps } from "@/components/Icon";
+import type { TextProps } from "@/components/Text";
+import type { ButtonProps } from "@/components/Button";
+import type { IconProps } from "@/components/Icon";
 
 export * from "./types";
 
