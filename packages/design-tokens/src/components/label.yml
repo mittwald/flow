@@ -1,0 +1,7 @@
+label:
+  font-size:
+    value: "{size-rem.s}"
+  font-weight:
+    value: "{font-weight.bold}"
+  color:
+    value: "{neutral.color.700}"
