@@ -4,7 +4,7 @@
   display: flex;
   &:has(:global(.flow-description)),
   &:has(:global(.flow-icon)) {
-    gap: 16px;
+    gap: var(--radiogroup--radio-to-radio);
   }
   &:has(:global(.flow-label)) {
     flex-wrap: wrap;
@@ -12,6 +12,6 @@
   :global(.flow-label) {
     width: 100%;
     display: block;
-    margin-bottom: 4px;
+    margin-bottom: var(--radiogroup--label-to-radio);
   }
 }

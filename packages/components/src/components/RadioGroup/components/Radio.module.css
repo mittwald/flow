@@ -1,25 +1,25 @@
 @import "@/styles";
 
 .radio {
-  border: var(--radio--border-width) solid var(--radio--border-color--default);
-  padding: var(--radio--padding-y) var(--radio--padding-x);
+  border: var(--radiogroup--border-width) solid
+    var(--radiogroup--border-color--default);
+  padding: var(--radiogroup--padding-y) var(--radiogroup--padding-x);
   flex: 1;
-  background-color: var(--radio--background-color--default);
-  color: var(--radio--color--default);
+  background-color: var(--radiogroup--background-color--default);
+  color: var(--radiogroup--color--default);
   display: grid;
   grid-template-areas: "title";
-  line-height: var(--radio--line-height);
-  row-gap: var(--radio--text-to-text);
-  column-gap: var(--radio--icon-to-text);
+  row-gap: var(--radiogroup--text-to-text);
+  column-gap: var(--radiogroup--icon-to-text);
 
   &:first-of-type {
-    border-top-left-radius: var(--radio--border-radius);
-    border-bottom-left-radius: var(--radio--border-radius);
+    border-top-left-radius: var(--radiogroup--border-radius);
+    border-bottom-left-radius: var(--radiogroup--border-radius);
   }
 
   &:last-of-type {
-    border-top-right-radius: var(--radio--border-radius);
-    border-bottom-right-radius: var(--radio--border-radius);
+    border-top-right-radius: var(--radiogroup--border-radius);
+    border-bottom-right-radius: var(--radiogroup--border-radius);
   }
 
   :global(.flow-description) {
@@ -46,7 +46,7 @@
       "icon"
       "title";
     justify-items: center;
-    border-radius: var(--radio--border-radius);
+    border-radius: var(--radiogroup--border-radius);
   }
 
   &:has(:global(.flow-description)) {
@@ -54,7 +54,7 @@
       "title"
       "description";
     justify-items: start;
-    border-radius: var(--radio--border-radius);
+    border-radius: var(--radiogroup--border-radius);
 
     :global(.flow-text:not(.flow-additionalinfo):not(.flow-description)) {
       font-weight: bold;
@@ -83,20 +83,20 @@
   }
 
   &[data-selected] {
-    border-color: var(--radio--border-color--selected);
-    background-color: var(--radio--background-color--selected);
-    color: var(--radio--color--selected);
+    border-color: var(--radiogroup--border-color--selected);
+    background-color: var(--radiogroup--background-color--selected);
+    color: var(--radiogroup--color--selected);
   }
 
   &[data-disabled] {
-    border-color: var(--radio--border-color--disabled);
-    background-color: var(--radio--background-color--disabled);
-    color: var(--radio--color--disabled);
+    border-color: var(--radiogroup--border-color--disabled);
+    background-color: var(--radiogroup--background-color--disabled);
+    color: var(--radiogroup--color--disabled);
   }
 
   &[data-disabled]&[data-selected] {
-    border-color: var(--radio--border-color--selected-disabled);
-    background-color: var(--radio--background-color--selected-disabled);
-    color: var(--radio--color--selected-disabled);
+    border-color: var(--radiogroup--border-color--selected-disabled);
+    background-color: var(--radiogroup--background-color--selected-disabled);
+    color: var(--radiogroup--color--selected-disabled);
   }
 }
