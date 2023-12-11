@@ -57,7 +57,7 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-prettier", "virtual:293d93f0dab39a9cb110260f7247420c230cdd19f40de541518b0c0bf8cd4537ab2d1f6cc813f83c1428d6fb37d8de496941cc588e7a64bfbcb303780e1f6334#npm:5.0.1"],\
           ["lerna", "npm:8.0.0"],\
           ["nx", "virtual:350095aba56d6ea01d6d7958449978350bb1321e651e7df690062cfd885857fdb60be567039a0030d2700f3b2224770fbb10c7ee460cae5dc0b3a757cc4cfd68#npm:17.1.3"],\
-          ["prettier", "npm:3.1.0"],\
+          ["prettier", "npm:3.1.1"],\
           ["prettier-plugin-jsdoc", "virtual:293d93f0dab39a9cb110260f7247420c230cdd19f40de541518b0c0bf8cd4537ab2d1f6cc813f83c1428d6fb37d8de496941cc588e7a64bfbcb303780e1f6334#npm:1.1.1"],\
           ["prettier-plugin-pkgsort", "virtual:293d93f0dab39a9cb110260f7247420c230cdd19f40de541518b0c0bf8cd4537ab2d1f6cc813f83c1428d6fb37d8de496941cc588e7a64bfbcb303780e1f6334#npm:0.2.1"],\
           ["prettier-plugin-sort-json", "virtual:293d93f0dab39a9cb110260f7247420c230cdd19f40de541518b0c0bf8cd4537ab2d1f6cc813f83c1428d6fb37d8de496941cc588e7a64bfbcb303780e1f6334#npm:3.1.0"],\
@@ -6135,7 +6135,7 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-prettier", "virtual:293d93f0dab39a9cb110260f7247420c230cdd19f40de541518b0c0bf8cd4537ab2d1f6cc813f83c1428d6fb37d8de496941cc588e7a64bfbcb303780e1f6334#npm:5.0.1"],\
           ["lerna", "npm:8.0.0"],\
           ["nx", "virtual:350095aba56d6ea01d6d7958449978350bb1321e651e7df690062cfd885857fdb60be567039a0030d2700f3b2224770fbb10c7ee460cae5dc0b3a757cc4cfd68#npm:17.1.3"],\
-          ["prettier", "npm:3.1.0"],\
+          ["prettier", "npm:3.1.1"],\
           ["prettier-plugin-jsdoc", "virtual:293d93f0dab39a9cb110260f7247420c230cdd19f40de541518b0c0bf8cd4537ab2d1f6cc813f83c1428d6fb37d8de496941cc588e7a64bfbcb303780e1f6334#npm:1.1.1"],\
           ["prettier-plugin-pkgsort", "virtual:293d93f0dab39a9cb110260f7247420c230cdd19f40de541518b0c0bf8cd4537ab2d1f6cc813f83c1428d6fb37d8de496941cc588e7a64bfbcb303780e1f6334#npm:0.2.1"],\
           ["prettier-plugin-sort-json", "virtual:293d93f0dab39a9cb110260f7247420c230cdd19f40de541518b0c0bf8cd4537ab2d1f6cc813f83c1428d6fb37d8de496941cc588e7a64bfbcb303780e1f6334#npm:3.1.0"],\
@@ -18293,7 +18293,7 @@ const RAW_RUNTIME_STATE =
           ["@types/prettier", null],\
           ["eslint", "npm:8.55.0"],\
           ["eslint-config-prettier", "virtual:293d93f0dab39a9cb110260f7247420c230cdd19f40de541518b0c0bf8cd4537ab2d1f6cc813f83c1428d6fb37d8de496941cc588e7a64bfbcb303780e1f6334#npm:9.1.0"],\
-          ["prettier", "npm:3.1.0"],\
+          ["prettier", "npm:3.1.1"],\
           ["prettier-linter-helpers", "npm:1.0.0"],\
           ["synckit", "npm:0.8.6"]\
         ],\
@@ -25124,10 +25124,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["npm:3.1.0", {\
-        "packageLocation": "./.yarn/unplugged/prettier-npm-3.1.0-708d6027b1/node_modules/prettier/",\
+      ["npm:3.1.1", {\
+        "packageLocation": "./.yarn/unplugged/prettier-npm-3.1.1-072c31ec21/node_modules/prettier/",\
         "packageDependencies": [\
-          ["prettier", "npm:3.1.0"]\
+          ["prettier", "npm:3.1.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -25176,7 +25176,7 @@ const RAW_RUNTIME_STATE =
           ["binary-searching", "npm:2.0.5"],\
           ["comment-parser", "npm:1.4.1"],\
           ["mdast-util-from-markdown", "npm:2.0.0"],\
-          ["prettier", "npm:3.1.0"]\
+          ["prettier", "npm:3.1.1"]\
         ],\
         "packagePeers": [\
           "@types/prettier",\
@@ -25198,7 +25198,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["prettier-plugin-pkgsort", "virtual:293d93f0dab39a9cb110260f7247420c230cdd19f40de541518b0c0bf8cd4537ab2d1f6cc813f83c1428d6fb37d8de496941cc588e7a64bfbcb303780e1f6334#npm:0.2.1"],\
           ["@types/prettier", null],\
-          ["prettier", "npm:3.1.0"],\
+          ["prettier", "npm:3.1.1"],\
           ["prettier-package-json", "npm:2.8.0"]\
         ],\
         "packagePeers": [\
@@ -25221,7 +25221,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["prettier-plugin-sort-json", "virtual:293d93f0dab39a9cb110260f7247420c230cdd19f40de541518b0c0bf8cd4537ab2d1f6cc813f83c1428d6fb37d8de496941cc588e7a64bfbcb303780e1f6334#npm:3.1.0"],\
           ["@types/prettier", null],\
-          ["prettier", "npm:3.1.0"]\
+          ["prettier", "npm:3.1.1"]\
         ],\
         "packagePeers": [\
           "@types/prettier",\
