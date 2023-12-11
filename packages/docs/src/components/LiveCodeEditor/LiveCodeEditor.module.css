@@ -1,57 +1,41 @@
-.wrapper {
-  min-height: 200px;
+.root {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: var(--size-px--xs);
   background: var(--color--gray--300);
-  border-radius: 5px;
+  border-radius: var(--button--border-radius);
   border: 1px solid var(--color--gray--400);
 }
 
 .preview {
-  padding: 20px;
+  padding: var(--size-px--l);
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 20px;
-  height: 100px;
+  gap: var(--size-px--l);
+  /* TODO: remove when flickering is fixed, currently makes it less flashy */
+  min-height: 100px;
 }
 
 .error {
   color: red;
-  padding: 20px;
+  padding: var(--size-px--l);
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: var(--size-px--l);
 }
 
 .editor {
-  min-height: 50px;
 }
 
 .editor pre {
-  padding: 10px;
-  border-radius: 5px;
-  border: 2px solid var(--color--gray--900);
+  border-radius: var(--size-px--xs);
+  border: var(--size-px--xs) solid var(--color--gray--900);
 }
 
-.expandCodeWrapper {
-  align-self: start;
-  padding: 5px;
-  display: flex;
-  gap: 5px;
-  align-items: center;
-  background: var(--color--gray--400);
-  border-radius: var(--button--border-radius);
-  flex-shrink: 1;
+.expandCodeButton {
   cursor: pointer;
-}
-
-.expandCodeCheckbox {
-  display: none;
-}
-
-.expandCodeText {
-  display: block;
+  align-self: start;
 }

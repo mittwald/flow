@@ -1,11 +1,5 @@
 "use client";
-import React, {
-  ChangeEventHandler,
-  FC,
-  MouseEventHandler,
-  useRef,
-  useState,
-} from "react";
+import React, { FC, useState } from "react";
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from "react-live";
 import { extractEditorScope } from "@/components/LiveCodeEditor/lib/extractEditorScope";
 import { LiveCodeEditorProps } from "@/components/LiveCodeEditor/types";
@@ -13,6 +7,7 @@ import extractDefaultExport from "@/lib/extractDefaultExport";
 import styles from "./LiveCodeEditor.module.css";
 import { themes } from "prism-react-renderer";
 import { PreviewWrapper } from "@/components/LiveCodeEditor/components/PreviewWrapper";
+import { Button } from "@mittwald/flow-components/Button";
 
 // Waiting for https://github.com/FormidableLabs/react-live/issues/339
 const error = console.error;
@@ -29,7 +24,6 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
   }
 
   const [codeExpanded, setCodeExpanded] = useState(false);
-  const checkboxRef = useRef<HTMLInputElement>(null);
 
   const scope = extractEditorScope(code);
 
@@ -48,18 +42,12 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
     }
   };
 
-  const handleCheckboxChange: ChangeEventHandler<HTMLInputElement> = (
-    event,
-  ) => {
-    setCodeExpanded(event.currentTarget.checked);
-  };
-
-  const handleCheckboxWrapperClick: MouseEventHandler<HTMLDivElement> = () => {
-    checkboxRef.current?.click();
+  const handleCodeExpandedClick = () => {
+    setCodeExpanded(!codeExpanded);
   };
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.root}>
       <LiveProvider
         code={codeExpanded ? code.trim() : transformCode(code)}
         scope={scope}
@@ -67,20 +55,13 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
       >
         <LiveError className={styles.error} />
         <LivePreview Component={PreviewWrapper} />
-        <div
-          className={styles.expandCodeWrapper}
-          onClick={handleCheckboxWrapperClick}
+        <Button
+          variant={codeExpanded ? "primary" : "secondary"}
+          onPress={handleCodeExpandedClick}
+          className={styles.expandCodeButton}
         >
-          <input
-            type="checkbox"
-            onChange={handleCheckboxChange}
-            className={styles.expandCodeCheckbox}
-            ref={checkboxRef}
-          />
-          <span className={styles.expandCodeText}>
-            {codeExpanded ? "Simplify Code" : "Expand Code"}
-          </span>
-        </div>
+          {codeExpanded ? "Simplify Code" : "Expand Code"}
+        </Button>
         <LiveEditor className={styles.editor} theme={themes.vsDark} />
       </LiveProvider>
     </div>
