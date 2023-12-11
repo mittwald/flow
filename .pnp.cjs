@@ -5942,6 +5942,7 @@ const RAW_RUNTIME_STATE =
           ["@jest/globals", "npm:29.7.0"],\
           ["@mittwald/flow-design-tokens", "workspace:packages/design-tokens"],\
           ["@nx/storybook", "npm:17.2.0"],\
+          ["@storybook/addon-a11y", "npm:7.6.4"],\
           ["@storybook/addon-essentials", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:7.6.4"],\
           ["@storybook/addon-interactions", "npm:7.6.4"],\
           ["@storybook/addon-links", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:7.6.4"],\
@@ -5993,6 +5994,7 @@ const RAW_RUNTIME_STATE =
           ["@jest/globals", "npm:29.7.0"],\
           ["@mittwald/flow-design-tokens", "workspace:packages/design-tokens"],\
           ["@nx/storybook", "npm:17.2.0"],\
+          ["@storybook/addon-a11y", "npm:7.6.4"],\
           ["@storybook/addon-essentials", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:7.6.4"],\
           ["@storybook/addon-interactions", "npm:7.6.4"],\
           ["@storybook/addon-links", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:7.6.4"],\
@@ -6038,6 +6040,7 @@ const RAW_RUNTIME_STATE =
           ["@jest/globals", "npm:29.7.0"],\
           ["@mittwald/flow-design-tokens", "workspace:packages/design-tokens"],\
           ["@nx/storybook", "npm:17.2.0"],\
+          ["@storybook/addon-a11y", "npm:7.6.4"],\
           ["@storybook/addon-essentials", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:7.6.4"],\
           ["@storybook/addon-interactions", "npm:7.6.4"],\
           ["@storybook/addon-links", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:7.6.4"],\
@@ -11309,6 +11312,17 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@storybook/addon-a11y", [\
+      ["npm:7.6.4", {\
+        "packageLocation": "./.yarn/cache/@storybook-addon-a11y-npm-7.6.4-929743f8c6-a4195ce784.zip/node_modules/@storybook/addon-a11y/",\
+        "packageDependencies": [\
+          ["@storybook/addon-a11y", "npm:7.6.4"],\
+          ["@storybook/addon-highlight", "npm:7.6.4"],\
+          ["axe-core", "npm:4.8.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@storybook/addon-actions", [\
       ["npm:7.6.4", {\
         "packageLocation": "./.yarn/cache/@storybook-addon-actions-npm-7.6.4-e7aa5fa641-7819060571.zip/node_modules/@storybook/addon-actions/",\
@@ -15243,6 +15257,13 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/axe-core-npm-4.7.0-a095cfe0ae-89ac5712b5.zip/node_modules/axe-core/",\
         "packageDependencies": [\
           ["axe-core", "npm:4.7.0"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:4.8.2", {\
+        "packageLocation": "./.yarn/cache/axe-core-npm-4.8.2-d69866ceee-ad9e1125ba.zip/node_modules/axe-core/",\
+        "packageDependencies": [\
+          ["axe-core", "npm:4.8.2"]\
         ],\
         "linkType": "HARD"\
       }]\
