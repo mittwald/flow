@@ -24,12 +24,12 @@
 
   :global(.flow-description) {
     grid-area: description;
-    font-weight: normal;
   }
 
   :global(.flow-additionalinfo) {
     grid-area: additionalInfo;
     justify-self: end;
+    font-weight: bold;
   }
 
   :global(.flow-text:not(.flow-additionalinfo):not(.flow-description)) {
@@ -38,11 +38,7 @@
 
   :global(.flow-icon) {
     grid-area: icon;
-  }
-
-  &:has(:global(.flow-description)),
-  &:has(:global(.flow-icon)) {
-    border-radius: var(--radio--border-radius);
+    align-self: center;
   }
 
   &:has(:global(.flow-icon)) {
@@ -50,14 +46,19 @@
       "icon"
       "title";
     justify-items: center;
+    border-radius: var(--radio--border-radius);
   }
 
   &:has(:global(.flow-description)) {
-    font-weight: bold;
     grid-template-areas:
       "title"
       "description";
     justify-items: start;
+    border-radius: var(--radio--border-radius);
+
+    :global(.flow-text:not(.flow-additionalinfo):not(.flow-description)) {
+      font-weight: bold;
+    }
 
     &:has(:global(.flow-additionalinfo)) {
       grid-template-areas:
@@ -72,7 +73,7 @@
         ". description";
       grid-template-columns: auto 1fr;
 
-      &:global(.flow-additionalinfo) {
+      &:has(:global(.flow-additionalinfo)) {
         grid-template-areas:
           "icon title"
           ". description"

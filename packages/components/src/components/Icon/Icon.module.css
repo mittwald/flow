@@ -5,10 +5,6 @@
   width: 1em;
   flex-shrink: 0;
 
-  :global(.flow-radiogroup-radio) & {
-    grid-area: icon;
-    align-self: center;
-  }
   :global(.flow-radiogroup-radio):not([data-selected]):not([data-disabled]) & {
     color: grey;
   }

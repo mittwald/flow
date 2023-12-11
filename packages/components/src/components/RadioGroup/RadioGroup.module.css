@@ -12,5 +12,6 @@
   :global(.flow-label) {
     width: 100%;
     display: block;
+    margin-bottom: 4px;
   }
 }
