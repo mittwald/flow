@@ -6081,7 +6081,7 @@ const RAW_RUNTIME_STATE =
           ["@mittwald/flow-design-tokens", "workspace:packages/design-tokens"],\
           ["@types/js-yaml", "npm:4.0.9"],\
           ["js-yaml", "npm:4.1.0"],\
-          ["style-dictionary", "npm:3.9.0"]\
+          ["style-dictionary", "npm:3.9.1"]\
         ],\
         "linkType": "SOFT"\
       }]\
@@ -27589,15 +27589,15 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["style-dictionary", [\
-      ["npm:3.9.0", {\
-        "packageLocation": "./.yarn/unplugged/style-dictionary-npm-3.9.0-2c73f9cae0/node_modules/style-dictionary/",\
+      ["npm:3.9.1", {\
+        "packageLocation": "./.yarn/unplugged/style-dictionary-npm-3.9.1-7b10f895a2/node_modules/style-dictionary/",\
         "packageDependencies": [\
-          ["style-dictionary", "npm:3.9.0"],\
+          ["style-dictionary", "npm:3.9.1"],\
           ["chalk", "npm:4.1.2"],\
           ["change-case", "npm:4.1.2"],\
           ["commander", "npm:8.3.0"],\
           ["fs-extra", "npm:10.1.0"],\
-          ["glob", "npm:7.2.3"],\
+          ["glob", "npm:10.3.10"],\
           ["json5", "npm:2.2.3"],\
           ["jsonc-parser", "npm:3.2.0"],\
           ["lodash", "npm:4.17.21"],\
