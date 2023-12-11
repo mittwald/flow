@@ -9,6 +9,8 @@ button:
     value: "{size-px.m}"
   padding-y:
     value: "{size-px.s}"
+  icon-to-text-spacing:
+    value: 0.5em
 
   # Accent
   accent-background-color:

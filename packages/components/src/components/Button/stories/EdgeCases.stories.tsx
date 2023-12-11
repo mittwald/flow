@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Button from "../Button";
 import React from "react";
+import { Icon, Text } from "@/components";
+import { faStar } from "@fortawesome/free-regular-svg-icons/faStar";
 
 const meta: Meta<typeof Button> = {
   title: "Button/Edge Cases",
@@ -28,5 +30,16 @@ export const WithBreak: Story = {
         Line 2
       </>
     ),
+  },
+};
+
+export const WithBreakAndIcon: Story = {
+  args: {
+    children: [
+      <Icon faIcon={faStar} key="icon" />,
+      <Text key="text">
+        Add to <br /> favorites
+      </Text>,
+    ],
   },
 };
