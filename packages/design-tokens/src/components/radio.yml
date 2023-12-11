@@ -12,8 +12,17 @@ radio:
       value: "{neutral.color.600}"
   border-radius:
     value: "{size-px.xs}"
-  padding:
+  padding-x:
+    value: "{size-px.m}"
+  padding-y:
     value: "{size-px.s}"
+  line-height:
+    value: "{line-height.default}"
+  text-to-text:
+    value: "{size-px.xs}"
+  icon-to-text:
+    value: "{size-px.m}"
+
   background-color:
     default:
       value: "{color.white}"

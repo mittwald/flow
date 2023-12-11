@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import RadioGroup from "../RadioGroup";
 import Radio from "../components/Radio";
+import { Text } from "@/components";
 
 const meta: Meta<typeof RadioGroup> = {
   title: "RadioGroup",
@@ -13,11 +14,18 @@ type Story = StoryObj<typeof RadioGroup>;
 
 export const Default: Story = {
   args: {
+    label: "Label",
     children: (
       <>
-        <Radio value="a">A</Radio>
-        <Radio value="b">B</Radio>
-        <Radio value="c">C</Radio>
+        <Radio value="a">
+          <Text>Option A</Text>
+        </Radio>
+        <Radio value="b">
+          <Text>Option B</Text>
+        </Radio>
+        <Radio value="c">
+          <Text>Option C</Text>
+        </Radio>
       </>
     ),
   },
@@ -25,34 +33,17 @@ export const Default: Story = {
 
 export const Disabled: Story = {
   args: {
+    label: "Label",
     children: (
       <>
         <Radio isDisabled value="a">
-          A
+          <Text>Option A</Text>
         </Radio>
         <Radio isDisabled value="b">
-          B
+          <Text>Option B</Text>
         </Radio>
         <Radio isDisabled value="c">
-          C
-        </Radio>
-      </>
-    ),
-  },
-};
-
-export const WithDescription: Story = {
-  args: {
-    children: (
-      <>
-        <Radio value="a" description="Beschreibung...">
-          A
-        </Radio>
-        <Radio value="b" description="Beschreibung...">
-          B
-        </Radio>
-        <Radio value="c" description="Beschreibung...">
-          C
+          <Text>Option C</Text>
         </Radio>
       </>
     ),

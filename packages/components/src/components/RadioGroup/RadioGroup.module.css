@@ -2,4 +2,15 @@
 
 .root {
   display: flex;
+  &:has(.description),
+  &:has(:global(.flow-icon)) {
+    gap: 16px;
+  }
+  &:has(:global(.flow-label)) {
+    flex-wrap: wrap;
+  }
+  :global(.flow-label) {
+    width: 100%;
+    display: block;
+  }
 }

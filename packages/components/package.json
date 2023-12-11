@@ -6,6 +6,7 @@
     "./Button": "./dist/Button.js",
     "./Icon": "./dist/Icon.js",
     "./Text": "./dist/Text.js",
+    "./Radio": "./dist/RadioGroup.js",
     "./style": "./dist/style.css",
     "./style/init": "./dist/index.js"
   },

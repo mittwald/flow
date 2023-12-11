@@ -11,6 +11,7 @@ export default defineConfig(
           "./src/components/Button/Button.tsx",
           "./src/components/Icon/Icon.tsx",
           "./src/components/Text/Text.tsx",
+          "./src/components/RadioGroup/RadioGroup.tsx",
         ],
         formats: ["es"],
       },

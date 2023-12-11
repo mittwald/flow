@@ -6,10 +6,18 @@ import clsx from "clsx";
 export interface TextProps
   extends PropsWithChildren<Omit<Aria.TextProps, "children">> {}
 
-export const Text: FC<PropsWithChildren> = (props) => {
+export const Text: FC<TextProps> = (props) => {
   const { children, className, ...rest } = props;
 
   const rootClassName = clsx(className, styles.root);
+
+  if (!props.slot) {
+    return (
+      <span {...rest} className={rootClassName}>
+        {children}
+      </span>
+    );
+  }
 
   return (
     <Aria.Text {...rest} className={rootClassName}>
