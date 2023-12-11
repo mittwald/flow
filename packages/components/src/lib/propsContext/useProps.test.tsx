@@ -1,5 +1,11 @@
-import { describe, expect, test } from "@jest/globals";
-import { FC } from "react";
+import { beforeEach, describe, expect, test } from "@jest/globals";
+import {
+  DependencyList,
+  FC,
+  PropsWithChildren,
+  useEffect,
+  useState,
+} from "react";
 import useProps from "@/lib/propsContext/useProps";
 import React from "react";
 import { render, screen } from "@testing-library/react";
@@ -18,8 +24,13 @@ declare module "../../components/propTypes" {
   }
 }
 
+let renderCount: number;
+let renderedPropHistory: Array<string | undefined>;
+
 const ComponentUsingProps: FC<TestComponentProps> = (props) => {
   const { testProp } = useProps("test", props);
+  renderCount++;
+  renderedPropHistory.push(testProp);
   return <span data-testid="prop-value">{testProp ?? "undefined"}</span>;
 };
 
@@ -31,6 +42,11 @@ const contextProps: PropsContext = {
     testProp: "context",
   },
 };
+
+beforeEach(() => {
+  renderCount = 0;
+  renderedPropHistory = [];
+});
 
 test("The local property is returned, if property is not in context", () => {
   render(<ComponentUsingProps testProp="local" />);
@@ -102,5 +118,79 @@ describe("Dynamic Props", () => {
       </PropsContextProvider>,
     );
     expectPropertyToBe("Not dynamic...");
+  });
+});
+
+describe("Context memoization", () => {
+  interface TestSetup {
+    getDependencies: () => DependencyList | undefined;
+  }
+
+  const runTest = (setup: TestSetup) => {
+    const { getDependencies } = setup;
+
+    const ComponentWithStateChange: FC<PropsWithChildren> = (props) => {
+      const [state, setState] = useState(0);
+      useEffect(() => {
+        setState(1);
+      }, []);
+
+      // This context should be memoized
+      const contextProps: PropsContext = {
+        test: {
+          testProp: `state-${state}`,
+        },
+      };
+
+      return (
+        <PropsContextProvider
+          props={contextProps}
+          dependencies={getDependencies()}
+        >
+          {props.children}
+        </PropsContextProvider>
+      );
+    };
+
+    render(
+      <ComponentWithStateChange>
+        <ComponentUsingProps />
+      </ComponentWithStateChange>,
+    );
+  };
+
+  test("Renders only once if dependencies is empty array", () => {
+    runTest({
+      getDependencies: () => [],
+    });
+    expect(renderCount).toBe(1);
+  });
+
+  test("Renders only once if dependencies is not defined", () => {
+    runTest({
+      getDependencies: () => undefined,
+    });
+    expect(renderCount).toBe(1);
+  });
+
+  test("Renders again if dependency changes", () => {
+    runTest({
+      getDependencies: () => [renderCount],
+    });
+    expect(renderCount).toBe(2);
+  });
+
+  test("Context property is memoized if dependency does not change", () => {
+    runTest({
+      getDependencies: () => [],
+    });
+    expect(renderedPropHistory).toEqual(["state-0"]);
+  });
+
+  test("Context property changes if dependency changes", () => {
+    runTest({
+      getDependencies: () => [renderCount],
+    });
+    expect(renderedPropHistory).toEqual(["state-0", "state-1"]);
   });
 });
