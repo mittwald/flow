@@ -7,6 +7,7 @@ import {
 } from "@fortawesome/react-fontawesome";
 import clsx from "clsx";
 import { extractSvgFromString } from "@/components/Icon/lib/extractSvgFromString";
+import { useProps } from "@/lib/propsContext";
 
 type SvgAttributeProps = BackwardCompatibleOmit<
   SVGAttributes<SVGSVGElement>,
@@ -18,11 +19,17 @@ export interface IconProps extends PropsWithChildren<SvgAttributeProps> {
 }
 
 export const Icon: FC<IconProps> = (props) => {
-  const { faIcon, "aria-label": ariaLabel, children, ...svgAttributes } = props;
+  const {
+    faIcon,
+    className: classNameFromProps,
+    "aria-label": ariaLabel,
+    children,
+    ...svgAttributes
+  } = useProps("icon", props);
 
   const iconProps: SvgAttributeProps = {
     ...svgAttributes,
-    className: clsx(svgAttributes.className, styles.root),
+    className: clsx(classNameFromProps, styles.root),
     focusable: "false",
     role: "img",
     "aria-hidden": !ariaLabel,
