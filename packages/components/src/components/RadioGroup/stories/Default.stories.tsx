@@ -1,9 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Radio, RadioGroup } from "../index";
-import { Icon, Label, Text } from "@/components";
 import React from "react";
 import { Content } from "@/components/Content";
 import { faStar } from "@fortawesome/free-regular-svg-icons/faStar";
+import { Label } from "@/components/Label";
+import { Text } from "@/components/Text";
+import { Icon } from "@/components/Icon";
 
 const meta: Meta<typeof RadioGroup> = {
   title: "RadioGroup",
@@ -63,6 +65,10 @@ export const WithIcon: Story = {
         <Radio value="wordpress">
           <Icon faIcon={faStar} />
           <Text>WordPress</Text>
+          <Content>
+            <Icon faIcon={faStar} />
+            <Text>WordPress</Text>
+          </Content>
         </Radio>
         <Radio value="typo3">
           <Icon faIcon={faStar} />

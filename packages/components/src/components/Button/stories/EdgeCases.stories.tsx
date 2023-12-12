@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Button from "../Button";
 import React from "react";
-import { Icon, Text } from "@/components";
 import { faStar } from "@fortawesome/free-regular-svg-icons/faStar";
+import { Icon } from "@/components/Icon";
+import { Text } from "@/components/Text";
 
 const meta: Meta<typeof Button> = {
   title: "Button/Edge Cases",

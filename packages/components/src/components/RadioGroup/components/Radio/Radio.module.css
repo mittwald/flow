@@ -106,3 +106,11 @@
     color: var(--radiogroup--color--selected-disabled);
   }
 }
+
+.icon {
+  color: pink;
+}
+
+.label {
+  color: greenyellow;
+}

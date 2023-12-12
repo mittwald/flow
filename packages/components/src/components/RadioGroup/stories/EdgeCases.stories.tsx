@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Radio, RadioGroup } from "../index";
-import { Icon } from "@/components";
 import { faStar } from "@fortawesome/free-regular-svg-icons/faStar";
 import { Content } from "@/components/Content";
 import { Text } from "@/components/Text";
 import React from "react";
+import { Icon } from "@/components/Icon";
 
 const meta: Meta<typeof RadioGroup> = {
   title: "RadioGroup/EdgeCases",

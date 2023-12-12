@@ -1,17 +1,22 @@
-import React, { FC } from "react";
+import React, { FC, HTMLAttributes, PropsWithChildren } from "react";
 import styles from "./Content.module.css";
 import clsx from "clsx";
-import { Text, TextProps } from "@/components";
+import { ClearPropsContext } from "@/lib/propsContext";
 
-export const Content: FC<TextProps> = (props) => {
+export interface ContentProps
+  extends PropsWithChildren<HTMLAttributes<HTMLDivElement>> {}
+
+export const Content: FC<ContentProps> = (props) => {
   const { children, className, ...rest } = props;
 
   const rootClassName = clsx(className, styles.root);
 
   return (
-    <Text {...rest} className={rootClassName}>
-      {children}
-    </Text>
+    <ClearPropsContext>
+      <div {...rest} className={rootClassName}>
+        {children}
+      </div>
+    </ClearPropsContext>
   );
 };
 
