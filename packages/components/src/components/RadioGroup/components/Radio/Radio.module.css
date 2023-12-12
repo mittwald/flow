@@ -8,7 +8,7 @@
   background-color: var(--radiogroup--background-color--default);
   color: var(--radiogroup--color--default);
   display: grid;
-  grid-template-areas: "title checkmark";
+  grid-template-areas: "label checkmark";
   grid-template-columns: 1fr auto;
   row-gap: var(--radiogroup--text-to-text);
   column-gap: var(--radiogroup--icon-to-text);
@@ -23,29 +23,16 @@
     border-bottom-right-radius: var(--radiogroup--border-radius);
   }
 
-  :global(.flow-content) {
-    grid-area: content;
-    font-weight: var(--font-weight--normal);
-  }
-
   :global(.flow-checkmark) {
     grid-area: checkmark;
-  }
-
-  > :global(.flow-text:not(.flow-content)) {
-    grid-area: title;
   }
 
   > :global(.flow-icon) {
     height: var(--line-height--default);
   }
 
-  > :global(.flow-icon:not(.flow-checkmark)) {
-    grid-area: icon;
-  }
-
-  &:has(> :global(.flow-icon:not(.flow-checkmark))),
-  &:has(:global(.flow-content)) {
+  &:has(.icon),
+  &:has(.content) {
     border-radius: var(--radiogroup--border-radius);
     font-weight: var(--font-weight--bold);
 
@@ -54,24 +41,24 @@
     }
   }
 
-  &:has(> :global(.flow-icon:not(.flow-checkmark))) {
+  &:has(.icon) {
     grid-template-areas:
       "icon"
-      "title";
+      "label";
     justify-items: center;
   }
 
-  &:has(:global(.flow-content)) {
+  &:has(.content) {
     grid-template-areas:
-      "title"
+      "label"
       "content";
     justify-items: start;
     grid-template-columns: auto 1fr;
 
-    &:has(> :global(.flow-icon:not(.flow-checkmark))) {
+    &:has(.icon) {
       grid-template-areas:
-        "icon title"
-        ". content";
+        "icon label"
+        ".    content";
       grid-template-columns: auto 1fr;
       grid-template-rows: auto 1fr;
       justify-items: start;
@@ -108,9 +95,14 @@
 }
 
 .icon {
-  color: pink;
+  grid-area: icon;
 }
 
 .label {
-  color: greenyellow;
+  grid-area: label;
+}
+
+.content {
+  grid-area: content;
+  font-weight: var(--font-weight--normal);
 }

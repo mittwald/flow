@@ -20,6 +20,9 @@ export const Radio: FC<RadioProps> = (props) => {
     text: {
       className: styles.label,
     },
+    content: {
+      className: styles.content,
+    },
   };
 
   return (

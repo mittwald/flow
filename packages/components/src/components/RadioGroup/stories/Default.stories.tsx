@@ -65,10 +65,6 @@ export const WithIcon: Story = {
         <Radio value="wordpress">
           <Icon faIcon={faStar} />
           <Text>WordPress</Text>
-          <Content>
-            <Icon faIcon={faStar} />
-            <Text>WordPress</Text>
-          </Content>
         </Radio>
         <Radio value="typo3">
           <Icon faIcon={faStar} />

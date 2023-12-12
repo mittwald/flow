@@ -9,8 +9,8 @@
     margin-bottom: var(--radiogroup--label-to-radio);
   }
 
-  &:has(:global(.flow-content)),
-  &:has(:global(.flow-icon:not(.flow-checkmark))) {
+  &:has(:global(.flow-radiogroup-radio-content)),
+  &:has(:global(.flow-radiogroup-radio-icon)) {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
     gap: var(--radiogroup--radio-to-radio);
