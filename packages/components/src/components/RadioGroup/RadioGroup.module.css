@@ -2,18 +2,24 @@
 
 .root {
   display: flex;
-  &:has(:global(.flow-content)),
-  &:has(:global(.flow-icon)) {
-    gap: var(--radiogroup--radio-to-radio);
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
-  }
-  &:has(:global(.flow-label)) {
-    flex-wrap: wrap;
-  }
+  flex-wrap: wrap;
+
   :global(.flow-label) {
     width: 100%;
-    display: block;
     margin-bottom: var(--radiogroup--label-to-radio);
+  }
+
+  &:has(:global(.flow-content)),
+  &:has(:global(.flow-icon:not(.flow-checkmark))) {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+    gap: var(--radiogroup--radio-to-radio);
+    :global(.flow-label) {
+      grid-column: 1 / -1;
+      margin-bottom: calc(
+        (var(--radiogroup--radio-to-radio) - var(--radiogroup--label-to-radio)) *
+          -1
+      );
+    }
   }
 }

@@ -19,7 +19,7 @@ radiogroup:
     default:
       value: "{neutral.color.500}"
     selected:
-      value: "{informative.color.800}"
+      value: "{informative.color.900}"
     disabled:
       value: "{neutral.color.500}"
     selected-disabled:
@@ -28,16 +28,18 @@ radiogroup:
     default:
       value: "{color.white}"
     selected:
-      value: "{informative.color.100}"
+      value: "{informative.color.200}"
     disabled:
       value: "{neutral.color.300}"
     selected-disabled:
       value: "{neutral.color.400}"
+    hover:
+      value: "{informative.color.100}"
   color:
     default:
       value: "{neutral.color.1000}"
     selected:
-      value: "{informative.color.800}"
+      value: "{informative.color.900}"
     disabled:
       value: "{neutral.color.500}"
     selected-disabled:

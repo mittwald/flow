@@ -8,7 +8,8 @@
   background-color: var(--radiogroup--background-color--default);
   color: var(--radiogroup--color--default);
   display: grid;
-  grid-template-areas: "title";
+  grid-template-areas: "title checkmark";
+  grid-template-columns: 1fr auto;
   row-gap: var(--radiogroup--text-to-text);
   column-gap: var(--radiogroup--icon-to-text);
 
@@ -24,24 +25,40 @@
 
   :global(.flow-content) {
     grid-area: content;
+    font-weight: var(--font-weight--normal);
   }
 
-  :global(.flow-text:not(.flow-content)) {
+  :global(.flow-checkmark) {
+    grid-area: checkmark;
+  }
+
+  > :global(.flow-text:not(.flow-content)) {
     grid-area: title;
   }
 
   > :global(.flow-icon) {
-    grid-area: icon;
     height: var(--line-height--default);
   }
 
-  &:has(> :global(.flow-icon)) {
+  > :global(.flow-icon:not(.flow-checkmark)) {
+    grid-area: icon;
+  }
+
+  &:has(> :global(.flow-icon:not(.flow-checkmark))),
+  &:has(:global(.flow-content)) {
+    border-radius: var(--radiogroup--border-radius);
+    font-weight: var(--font-weight--bold);
+
+    :global(.flow-checkmark) {
+      display: none;
+    }
+  }
+
+  &:has(> :global(.flow-icon:not(.flow-checkmark))) {
     grid-template-areas:
       "icon"
       "title";
     justify-items: center;
-    border-radius: var(--radiogroup--border-radius);
-    font-weight: var(--font-weight--bold);
   }
 
   &:has(:global(.flow-content)) {
@@ -49,20 +66,26 @@
       "title"
       "content";
     justify-items: start;
-    border-radius: var(--radiogroup--border-radius);
-    font-weight: var(--font-weight--bold);
+    grid-template-columns: auto 1fr;
 
-    :global(.flow-content) {
-      font-weight: var(--font-weight--normal);
-    }
-
-    &:has(> :global(.flow-icon)) {
+    &:has(> :global(.flow-icon:not(.flow-checkmark))) {
       grid-template-areas:
         "icon title"
         ". content";
       grid-template-columns: auto 1fr;
       grid-template-rows: auto 1fr;
+      justify-items: start;
     }
+  }
+
+  &:not([data-selected]) {
+    :global(.flow-checkmark) {
+      display: none;
+    }
+  }
+
+  &:hover {
+    background-color: var(--radiogroup--background-color--hover);
   }
 
   &[data-selected] {

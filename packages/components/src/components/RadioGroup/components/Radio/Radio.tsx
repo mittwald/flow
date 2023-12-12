@@ -2,6 +2,7 @@ import React, { FC, PropsWithChildren } from "react";
 import styles from "./Radio.module.css";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
+import { CheckMark } from "@/components/CheckMark";
 
 export interface RadioProps
   extends PropsWithChildren<Omit<Aria.RadioProps, "children">> {}
@@ -14,6 +15,7 @@ export const Radio: FC<RadioProps> = (props) => {
   return (
     <Aria.Radio {...rest} className={rootClassName}>
       {children}
+      <CheckMark />
     </Aria.Radio>
   );
 };

@@ -9,7 +9,8 @@
     > & {
     color: grey;
   }
-  :global(.flow-radiogroup-radio):not(:has(:global(.flow-content))) > & {
+  :global(.flow-radiogroup-radio):not(:has(:global(.flow-content)))
+    > &:not(:global(.flow-checkmark)) {
     height: var(--icon--size--xl);
     width: var(--icon--size--xl);
   }
