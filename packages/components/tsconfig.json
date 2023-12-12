@@ -6,7 +6,7 @@
     "paths": {
       "@/*": ["packages/components/src/*"]
     },
-    "plugins": [{ "name": "typescript-plugin-css-modules" }],
+    "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
   "extends": "../../tsconfig.json",
   "include": ["types.d.ts", "**/*.ts", "**/*.tsx"]
