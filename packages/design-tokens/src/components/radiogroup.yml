@@ -19,7 +19,7 @@ radiogroup:
     default:
       value: "{neutral.color.500}"
     selected:
-      value: "{informative.color.700}"
+      value: "{informative.color.800}"
     disabled:
       value: "{neutral.color.500}"
     selected-disabled:
@@ -37,7 +37,7 @@ radiogroup:
     default:
       value: "{neutral.color.1000}"
     selected:
-      value: "{informative.color.700}"
+      value: "{informative.color.800}"
     disabled:
       value: "{neutral.color.500}"
     selected-disabled:

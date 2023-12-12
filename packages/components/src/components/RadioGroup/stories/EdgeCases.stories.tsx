@@ -36,11 +36,7 @@ export const LongTexts: Story = {
         </Radio>
         <Radio value="b">
           <Icon faIcon={faStar} />
-          <Text>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-            erat, sed diam voluptua.
-          </Text>
+          <Text>Lorem ipsum dolor sit amet, consetetur sadipscing elitr.</Text>
           <Content>
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
             nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
@@ -59,9 +55,6 @@ export const LongTexts: Story = {
           <Content>
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
             nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-            et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-            Lorem ipsum dolor sit amet.
           </Content>
         </Radio>
       </>

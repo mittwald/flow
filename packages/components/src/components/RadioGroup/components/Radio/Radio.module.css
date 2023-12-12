@@ -32,7 +32,7 @@
 
   > :global(.flow-icon) {
     grid-area: icon;
-    padding-top: calc((var(--line-height--default) - 1) / 2);
+    height: var(--line-height--default);
   }
 
   &:has(> :global(.flow-icon)) {
@@ -41,6 +41,7 @@
       "title";
     justify-items: center;
     border-radius: var(--radiogroup--border-radius);
+    font-weight: var(--font-weight--bold);
   }
 
   &:has(:global(.flow-content)) {
@@ -49,9 +50,10 @@
       "content";
     justify-items: start;
     border-radius: var(--radiogroup--border-radius);
+    font-weight: var(--font-weight--bold);
 
-    :global(.flow-text:not(.flow-content)) {
-      font-weight: bold;
+    :global(.flow-content) {
+      font-weight: var(--font-weight--normal);
     }
 
     &:has(> :global(.flow-icon)) {
@@ -59,6 +61,7 @@
         "icon title"
         ". content";
       grid-template-columns: auto 1fr;
+      grid-template-rows: auto 1fr;
     }
   }
 

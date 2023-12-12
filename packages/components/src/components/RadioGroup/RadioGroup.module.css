@@ -2,7 +2,7 @@
 
 .root {
   display: flex;
-  &:has(:global(.flow-dcontent)),
+  &:has(:global(.flow-content)),
   &:has(:global(.flow-icon)) {
     gap: var(--radiogroup--radio-to-radio);
     display: grid;
