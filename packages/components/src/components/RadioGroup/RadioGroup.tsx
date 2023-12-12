@@ -1,11 +1,13 @@
-import React, { FC, PropsWithChildren } from "react";
+import React, { FC, PropsWithChildren, ReactNode } from "react";
 import styles from "./RadioGroup.module.css";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import { Label } from "@/components/Label";
 
 export interface RadioGroupProps
-  extends PropsWithChildren<Omit<Aria.RadioGroupProps, "children">> {}
+  extends PropsWithChildren<Omit<Aria.RadioGroupProps, "children">> {
+  label: ReactNode;
+}
 
 export const RadioGroup: FC<RadioGroupProps> = (props) => {
   const { children, className, label, ...rest } = props;

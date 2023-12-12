@@ -2,9 +2,11 @@
 
 .root {
   display: flex;
-  &:has(:global(.flow-description)),
+  &:has(:global(.flow-dcontent)),
   &:has(:global(.flow-icon)) {
     gap: var(--radiogroup--radio-to-radio);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
   }
   &:has(:global(.flow-label)) {
     flex-wrap: wrap;

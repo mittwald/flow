@@ -1,9 +1,9 @@
 import React, { FC } from "react";
-import styles from "./AdditionalInfo.module.css";
+import styles from "./Content.module.css";
 import clsx from "clsx";
 import { Text, TextProps } from "@/components";
 
-export const AdditionalInfo: FC<TextProps> = (props) => {
+export const Content: FC<TextProps> = (props) => {
   const { children, className, ...rest } = props;
 
   const rootClassName = clsx(className, styles.root);
@@ -15,4 +15,4 @@ export const AdditionalInfo: FC<TextProps> = (props) => {
   );
 };
 
-export default AdditionalInfo;
+export default Content;

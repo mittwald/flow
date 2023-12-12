@@ -1,6 +1,6 @@
-@import "@/styles";
+@import "../../../../styles/index.css";
 
-.radio {
+.root {
   border: var(--radiogroup--border-width) solid
     var(--radiogroup--border-color--default);
   padding: var(--radiogroup--padding-y) var(--radiogroup--padding-x);
@@ -22,26 +22,20 @@
     border-bottom-right-radius: var(--radiogroup--border-radius);
   }
 
-  :global(.flow-description) {
-    grid-area: description;
+  :global(.flow-content) {
+    grid-area: content;
   }
 
-  :global(.flow-additionalinfo) {
-    grid-area: additionalInfo;
-    justify-self: end;
-    font-weight: bold;
-  }
-
-  :global(.flow-text:not(.flow-additionalinfo):not(.flow-description)) {
+  :global(.flow-text:not(.flow-content)) {
     grid-area: title;
   }
 
-  :global(.flow-icon) {
+  > :global(.flow-icon) {
     grid-area: icon;
-    align-self: center;
+    padding-top: calc((var(--line-height--default) - 1) / 2);
   }
 
-  &:has(:global(.flow-icon)) {
+  &:has(> :global(.flow-icon)) {
     grid-template-areas:
       "icon"
       "title";
@@ -49,36 +43,22 @@
     border-radius: var(--radiogroup--border-radius);
   }
 
-  &:has(:global(.flow-description)) {
+  &:has(:global(.flow-content)) {
     grid-template-areas:
       "title"
-      "description";
+      "content";
     justify-items: start;
     border-radius: var(--radiogroup--border-radius);
 
-    :global(.flow-text:not(.flow-additionalinfo):not(.flow-description)) {
+    :global(.flow-text:not(.flow-content)) {
       font-weight: bold;
     }
 
-    &:has(:global(.flow-additionalinfo)) {
-      grid-template-areas:
-        "title"
-        "description"
-        "additionalInfo";
-    }
-
-    &:has(:global(.flow-icon)) {
+    &:has(> :global(.flow-icon)) {
       grid-template-areas:
         "icon title"
-        ". description";
+        ". content";
       grid-template-columns: auto 1fr;
-
-      &:has(:global(.flow-additionalinfo)) {
-        grid-template-areas:
-          "icon title"
-          ". description"
-          ". additionalInfo";
-      }
     }
   }
 
