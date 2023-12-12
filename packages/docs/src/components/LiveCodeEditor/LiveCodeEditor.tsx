@@ -3,7 +3,7 @@ import React, { FC, useState } from "react";
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from "react-live";
 import { extractEditorScope } from "@/components/LiveCodeEditor/lib/extractEditorScope";
 import { LiveCodeEditorProps } from "@/components/LiveCodeEditor/types";
-import extractDefaultExport from "@/lib/extractDefaultExport";
+import parseExample from "@/lib/parseExample";
 import styles from "./LiveCodeEditor.module.css";
 import { themes } from "prism-react-renderer";
 import { PreviewWrapper } from "@/components/LiveCodeEditor/components/PreviewWrapper";
@@ -36,7 +36,7 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
 
   const transformCode = (code: string) => {
     try {
-      return extractDefaultExport(code).trim();
+      return parseExample(code).trim();
     } catch (error) {
       return `<p><em>Example could not be parsed:</em> ${String(error)}</p>`;
     }
