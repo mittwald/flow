@@ -43,7 +43,7 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
   };
 
   const handleCodeExpandedClick = () => {
-    setCodeExpanded(!codeExpanded);
+    setCodeExpanded((expanded) => !expanded);
   };
 
   return (
