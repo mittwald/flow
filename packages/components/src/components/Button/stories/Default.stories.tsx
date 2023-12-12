@@ -26,10 +26,12 @@ export const Disabled: Story = {
 
 export const WithIcon: Story = {
   args: {
-    children: [
-      <Icon faIcon={faStar} key="icon" />,
-      <Text key="text">Add to favorites</Text>,
-    ],
+    children: (
+      <>
+        <Icon faIcon={faStar} />
+        <Text>Add to favorites</Text>
+      </>
+    ),
   },
 };
 

@@ -35,11 +35,13 @@ export const WithBreak: Story = {
 
 export const WithBreakAndIcon: Story = {
   args: {
-    children: [
-      <Icon faIcon={faStar} key="icon" />,
-      <Text key="text">
-        Add to <br /> favorites
-      </Text>,
-    ],
+    children: (
+      <>
+        <Icon faIcon={faStar} />
+        <Text>
+          Add to <br /> favorites
+        </Text>
+      </>
+    ),
   },
 };
