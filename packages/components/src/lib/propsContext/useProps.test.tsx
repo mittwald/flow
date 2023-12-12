@@ -12,17 +12,7 @@ import { render, screen } from "@testing-library/react";
 import PropsContextProvider from "@/lib/propsContext/PropsContextProvider";
 import dynamic from "@/lib/propsContext/dynamicProps/dynamic";
 import { PropsContext } from "@/lib/propsContext/types";
-
-interface TestComponentProps {
-  testProp?: string;
-  testDynamicProp?: boolean;
-}
-
-declare module "../../components/propTypes" {
-  export interface FlowComponentPropsTypes {
-    test: TestComponentProps;
-  }
-}
+import { TestComponentProps } from "@/lib/propsContext/test";
 
 let renderCount: number;
 let renderedPropHistory: Array<string | undefined>;
