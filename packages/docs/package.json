@@ -11,7 +11,8 @@
     "build:imports": "yarn pnpify node --loader ts-node/esm dev/generateLiveCodeEditorGlobalImports.ts",
     "build:watch:dependents": "yarn build:deps:run && run -T lerna watch --scope=@mittwald/flow-documentation --include-dependencies -- lerna run build:deps --scope=@mittwald/flow-documentation",
     "dev": "run next dev",
-    "start": "run next start"
+    "start": "run next start",
+    "test": "jest"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.0.0",
@@ -29,16 +30,23 @@
     "webpack": "^5.89.0"
   },
   "devDependencies": {
+    "@babel/parser": "^7.23.5",
+    "@babel/types": "^7.23.5",
+    "@testing-library/jest-dom": "^6.1.5",
+    "@testing-library/react": "^14.1.2",
+    "@types/jest": "^29.5.11",
     "@types/node": "^20.10.3",
     "@types/react": "^18.2.42",
     "@types/react-dom": "^18.2.17",
     "@yarnpkg/pnpify": "^4.0.1",
-    "acorn": "patch:acorn@npm%3A8.11.2#~/.yarn/patches/acorn-npm-8.11.2-a470f49bb6.patch",
-    "acorn-jsx": "^5.3.2",
     "eslint": "^8.55.0",
     "eslint-config-next": "14.0.3",
     "glob": "^10.3.10",
-    "ts-node": "^10.9.1",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "prism-react-renderer": "^2.3.0",
+    "ts-jest": "^29.1.1",
+    "ts-node": "^10.9.2",
     "typescript": "^5.3.2"
   },
   "nx": {
