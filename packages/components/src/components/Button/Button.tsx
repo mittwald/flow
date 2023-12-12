@@ -2,6 +2,7 @@ import React, { FC, PropsWithChildren } from "react";
 import styles from "./Button.module.css";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
+import { useProps } from "@/lib/propsContext";
 
 export interface ButtonProps
   extends PropsWithChildren<Omit<Aria.ButtonProps, "children">> {
@@ -10,12 +11,17 @@ export interface ButtonProps
 }
 
 export const Button: FC<ButtonProps> = (props) => {
-  const { variant = "primary", children, ...rest } = props;
+  const {
+    variant = "primary",
+    children,
+    className: classNameFromProps,
+    ...restProps
+  } = useProps("button", props);
 
-  const className = clsx(props.className, styles.root, styles[variant]);
+  const className = clsx(classNameFromProps, styles.root, styles[variant]);
 
   return (
-    <Aria.Button {...rest} className={className}>
+    <Aria.Button className={className} {...restProps}>
       {children}
     </Aria.Button>
   );
