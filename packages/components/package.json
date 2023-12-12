@@ -6,7 +6,7 @@
     "./Button": "./dist/Button.js",
     "./Icon": "./dist/Icon.js",
     "./Text": "./dist/Text.js",
-    "./Radio": "./dist/RadioGroup.js",
+    "./Label": "./dist/Label.js",
     "./style": "./dist/style.css",
     "./style/init": "./dist/index.js"
   },
@@ -36,6 +36,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.5.1",
     "@jest/globals": "^29.7.0",
     "@nx/storybook": "^17.1.3",
+    "@storybook/addon-a11y": "^7.6.4",
     "@storybook/addon-essentials": "^7.6.4",
     "@storybook/addon-interactions": "^7.6.4",
     "@storybook/addon-links": "^7.6.4",

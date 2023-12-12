@@ -84,19 +84,23 @@ export default {
     const { matches, filePath, directory } = getImportPathInfos(file);
 
     if (matches) {
+      let moduleFound = false;
       [
         moduleId + path.join(directory, `*${moduleSuffix}`),
         moduleId + filePath,
       ].forEach((id) => {
         const module = server.moduleGraph.getModuleById(id);
         if (module) {
+          moduleFound = true;
           server.moduleGraph.invalidateModule(module);
         }
       });
 
-      server.ws.send({
-        type: "full-reload",
-      });
+      if (moduleFound) {
+        server.ws.send({
+          type: "full-reload",
+        });
+      }
     }
   },
   transform: (_, id) => generateSourceResponse(id),

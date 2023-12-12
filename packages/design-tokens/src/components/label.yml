@@ -3,7 +3,5 @@ label:
     value: "{size-rem.s}"
   font-weight:
     value: "{font-weight.bold}"
-  line-height:
-    value: "{line-height.default}"
   color:
     value: "{neutral.color.700}"

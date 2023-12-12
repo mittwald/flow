@@ -7,12 +7,12 @@ export interface LabelProps
   extends PropsWithChildren<Omit<Aria.LabelProps, "children">> {}
 
 export const Label: FC<LabelProps> = (props) => {
-  const { children, ...rest } = props;
+  const { children, className, ...rest } = props;
 
-  const className = clsx(props.className, styles.root);
+  const rootClassName = clsx(className, styles.root);
 
   return (
-    <Aria.Label {...rest} className={className}>
+    <Aria.Label {...rest} className={rootClassName}>
       {children}
     </Aria.Label>
   );
