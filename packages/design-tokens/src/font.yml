@@ -3,3 +3,6 @@ font-weight:
     value: 300
   bold:
     value: 600
+line-height:
+  default:
+    value: 1.5

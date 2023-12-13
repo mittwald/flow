@@ -3,4 +3,17 @@
 .root {
   height: 1em;
   width: 1em;
+  flex-shrink: 0;
+
+  :global(.flow-radiogroup-radio):not([data-selected]):not([data-disabled]) & {
+    color: grey;
+  }
+
+  :global(.flow-radiogroup-radio):not(
+      :has(:global(.flow-radiogroup-radio-content))
+    )
+    > &:global(.flow-radiogroup-radio-icon) {
+    height: var(--icon--size--xl);
+    width: var(--icon--size--xl);
+  }
 }

@@ -1,0 +1,52 @@
+radiogroup:
+  radio-to-radio-spacing:
+    value: "{size-px.m}"
+  label-to-radio-spacing:
+    value: "{size-px.xs}"
+  text-to-text-spacing:
+    value: "{size-px.xs}"
+  icon-to-text-spacing:
+    value: "{size-px.m}"
+  padding-x:
+    value: "{size-px.m}"
+  padding-y:
+    value: "{size-px.s}"
+  border-radius:
+    value: "{border-radius.default}"
+  border-width:
+    value: "{border-width.default}"
+  border-style:
+    value: "{border-style.default}"
+  border-color:
+    default:
+      value: "{neutral.color.500}"
+    selected:
+      value: "{informative.color.900}"
+    disabled:
+      value: "{neutral.color.500}"
+    selected-disabled:
+      value: "{neutral.color.600}"
+  background-color:
+    default:
+      value: "{color.white}"
+    selected:
+      value: "{informative.color.200}"
+    disabled:
+      value: "{neutral.color.300}"
+    selected-disabled:
+      value: "{neutral.color.400}"
+    hover:
+      value: "{informative.color.100}"
+  color:
+    default:
+      value: "{neutral.color.1000}"
+    selected:
+      value: "{informative.color.900}"
+    disabled:
+      value: "{neutral.color.500}"
+    selected-disabled:
+      value: "{neutral.color.600}"
+  label-font-weight-with-content-or-icon:
+    value: "{font-weight.bold}"
+  label-font-weight-without-content-and-icon:
+    value: "{font-weight.normal}"

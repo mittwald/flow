@@ -1,1 +1,1 @@
-export * from "./Text";
+export { type TextProps, Text } from "./Text";
