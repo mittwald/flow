@@ -1,11 +1,11 @@
 radiogroup:
-  radio-to-radio:
+  radio-to-radio-spacing:
     value: "{size-px.m}"
-  label-to-radio:
+  label-to-radio-spacing:
     value: "{size-px.xs}"
-  text-to-text:
+  text-to-text-spacing:
     value: "{size-px.xs}"
-  icon-to-text:
+  icon-to-text-spacing:
     value: "{size-px.m}"
   padding-x:
     value: "{size-px.m}"

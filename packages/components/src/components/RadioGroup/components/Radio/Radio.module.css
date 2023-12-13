@@ -1,4 +1,4 @@
-@import "../../../../styles/index.css";
+@import "@/styles";
 
 .root {
   border: var(--radiogroup--border-width) solid
@@ -10,8 +10,8 @@
   display: grid;
   grid-template-areas: "label checkmark";
   grid-template-columns: 1fr auto;
-  row-gap: var(--radiogroup--text-to-text);
-  column-gap: var(--radiogroup--icon-to-text);
+  row-gap: var(--radiogroup--text-to-text-spacing);
+  column-gap: var(--radiogroup--icon-to-text-spacing);
 
   &:first-of-type {
     border-top-left-radius: var(--radiogroup--border-radius);
