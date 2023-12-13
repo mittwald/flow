@@ -26,7 +26,6 @@
 
   .content {
     grid-area: content;
-    font-weight: var(--radiogroup--label-font-weight-without-content-and-icon);
   }
 
   .checkmark {
@@ -89,7 +88,9 @@
     grid-template-columns: 1fr;
     justify-items: center;
     border-radius: var(--radiogroup--border-radius);
-    font-weight: var(--radiogroup--label-font-weight-with-content-or-icon);
+    .label {
+      font-weight: var(--radiogroup--label-font-weight-with-content-or-icon);
+    }
   }
 
   /* With content */
@@ -102,7 +103,9 @@
     grid-template-rows: auto 1fr;
     justify-items: start;
     border-radius: var(--radiogroup--border-radius);
-    font-weight: var(--radiogroup--label-font-weight-with-content-or-icon);
+    .label {
+      font-weight: var(--radiogroup--label-font-weight-with-content-or-icon);
+    }
   }
 
   /* With icon and content */
@@ -131,13 +134,15 @@
     z-index: 1;
   }
 
-  &[aria-disabled] {
+  &[data-disabled],
+  [aria-disabled] & {
     border-color: var(--radiogroup--border-color--disabled);
     background-color: var(--radiogroup--background-color--disabled);
     color: var(--radiogroup--color--disabled);
   }
 
-  &[aria-disabled][data-selected] {
+  &[data-disabled][data-selected],
+  [aria-disabled] &[date-selected] {
     border-color: var(--radiogroup--border-color--selected-disabled);
     background-color: var(--radiogroup--background-color--selected-disabled);
     color: var(--radiogroup--color--selected-disabled);

@@ -6,7 +6,7 @@
   container-type: size;
   z-index: 0;
 
-  :global(.flow-label) {
+  > :global(.flow-label) {
     width: 100%;
     margin-bottom: var(--radiogroup--label-to-radio-spacing);
   }
