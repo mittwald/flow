@@ -1,4 +1,6 @@
 banner:
+  padding:
+    value: "{size-px.m}"
   border-radius:
     value: "{border-radius.default}"
   border-width:
@@ -8,9 +10,19 @@ banner:
       value: "{size-px.s}"
   border-style:
     value: "{border-style.default}"
+  text-to-text-spacing:
+    value: "{size-px.xs}"
+  icon-to-text-spacing:
+    value: "{size-px.m}"
   info-border-color:
     value: "{informative.color.700}"
+  info-heading-color:
+    value: "{informative.color.800}"
   warning-border-color:
     value: "{warning.color.700}"
+  warning-heading-color:
+    value: "{warning.color.800}"
   danger-border-color:
     value: "{negative.color.700}"
+  danger-heading-color:
+    value: "{negative.color.800}"

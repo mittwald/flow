@@ -5,4 +5,18 @@
   border: var(--banner--border-width--default) var(--banner--border-style)
     var(--banner--info-border-color);
   border-inline-start-width: var(--banner--border-width--main);
+  padding: var(--banner--padding);
+  display: grid;
+
+  .heading {
+    grid-area: heading;
+  }
+
+  .icon {
+    grid-area: icon;
+  }
+
+  .content {
+    grid-area: content;
+  }
 }
