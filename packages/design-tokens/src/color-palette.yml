@@ -119,5 +119,29 @@ color:
     1100:
       value: "#30070"
 
+  royal-orange:
+    100:
+      value: "#FFF9F1"
+    200:
+      value: "#FEEFE3"
+    300:
+      value: "#FFE4D0"
+    400:
+      value: "#FFC9A1"
+    500:
+      value: "#FFAE72"
+    600:
+      value: "#FF9343"
+    700:
+      value: "#D4573E"
+    800:
+      value: "#BF393C"
+    900:
+      value: "#BF393C"
+    1000:
+      value: "#BF393C"
+    1100:
+      value: "#BF393C"
+
   white:
     value: rgb(255,255,255)
