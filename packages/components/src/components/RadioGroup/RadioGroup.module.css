@@ -12,7 +12,6 @@
   &:has(:global(.flow-radiogroup-radio-content)),
   &:has(:global(.flow-radiogroup-radio-icon)) {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
     gap: var(--radiogroup--radio-to-radio);
     :global(.flow-label) {
       grid-column: 1 / -1;
@@ -21,5 +20,13 @@
           -1
       );
     }
+  }
+
+  &:has(:global(.flow-radiogroup-radio-icon)) {
+    grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+  }
+
+  &:has(:global(.flow-radiogroup-radio-content)) {
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
   }
 }

@@ -23,10 +23,6 @@
     border-bottom-right-radius: var(--radiogroup--border-radius);
   }
 
-  :global(.flow-checkmark) {
-    grid-area: checkmark;
-  }
-
   > :global(.flow-icon) {
     height: var(--line-height--default);
   }
@@ -35,10 +31,6 @@
   &:has(.content) {
     border-radius: var(--radiogroup--border-radius);
     font-weight: var(--font-weight--bold);
-
-    :global(.flow-checkmark) {
-      display: none;
-    }
   }
 
   &:has(.icon) {
@@ -65,12 +57,6 @@
     }
   }
 
-  &:not([data-selected]) {
-    :global(.flow-checkmark) {
-      display: none;
-    }
-  }
-
   &:hover {
     background-color: var(--radiogroup--background-color--hover);
   }
@@ -79,6 +65,12 @@
     border-color: var(--radiogroup--border-color--selected);
     background-color: var(--radiogroup--background-color--selected);
     color: var(--radiogroup--color--selected);
+
+    &:not(:has(.icon)):not(:has(.content)) {
+      .checkmark {
+        display: block;
+      }
+    }
   }
 
   &[data-disabled] {
@@ -105,4 +97,9 @@
 .content {
   grid-area: content;
   font-weight: var(--font-weight--normal);
+}
+
+.checkmark {
+  grid-area: checkmark;
+  display: none;
 }

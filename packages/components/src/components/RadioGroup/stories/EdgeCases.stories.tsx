@@ -5,6 +5,7 @@ import { Content } from "@/components/Content";
 import { Text } from "@/components/Text";
 import React from "react";
 import { Icon } from "@/components/Icon";
+import { dummyText } from "@/lib/DummyText";
 
 const meta: Meta<typeof RadioGroup> = {
   title: "RadioGroup/EdgeCases",
@@ -21,41 +22,18 @@ export const LongTexts: Story = {
       <>
         <Radio value="a">
           <Icon faIcon={faStar} />
-          <Text>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-            erat, sed diam voluptua.
-          </Text>
-          <Content>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-            et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-            Lorem ipsum dolor sit amet.
-          </Content>
+          <Text>{dummyText.medium}</Text>
+          <Content>{dummyText.medium}</Content>
         </Radio>
         <Radio value="b">
           <Icon faIcon={faStar} />
-          <Text>Lorem ipsum dolor sit amet, consetetur sadipscing elitr.</Text>
-          <Content>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-            et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-            Lorem ipsum dolor sit amet.
-          </Content>
+          <Text>{dummyText.medium}</Text>
+          <Content>{dummyText.short}</Content>
         </Radio>
         <Radio value="c">
           <Icon faIcon={faStar} />
-          <Text>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-            erat, sed diam voluptua.
-          </Text>
-          <Content>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-          </Content>
+          <Text>{dummyText.short}</Text>
+          <Content>{dummyText.medium}</Content>
         </Radio>
       </>
     ),
@@ -64,51 +42,14 @@ export const LongTexts: Story = {
 
 export const MultipleElements: Story = {
   args: {
-    children: (
-      <>
-        <Radio value="a">
+    children: Array(9)
+      .fill("")
+      .map((value, index) => (
+        <Radio value={index.toString()}>
           <Icon faIcon={faStar} />
-          <Text>Option A</Text>
-          <Content>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          </Content>
+          <Text>Option {index + 1}</Text>
+          <Content>{dummyText.medium}</Content>
         </Radio>
-        <Radio value="b">
-          <Icon faIcon={faStar} />
-          <Text>Option B</Text>
-          <Content>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          </Content>
-        </Radio>
-        <Radio value="c">
-          <Icon faIcon={faStar} />
-          <Text>Option C</Text>
-          <Content>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          </Content>
-        </Radio>
-        <Radio value="d">
-          <Icon faIcon={faStar} />
-          <Text>Option A</Text>
-          <Content>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          </Content>
-        </Radio>
-        <Radio value="e">
-          <Icon faIcon={faStar} />
-          <Text>Option B</Text>
-          <Content>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          </Content>
-        </Radio>
-        <Radio value="f">
-          <Icon faIcon={faStar} />
-          <Text>Option C</Text>
-          <Content>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          </Content>
-        </Radio>
-      </>
-    ),
+      )),
   },
 };
