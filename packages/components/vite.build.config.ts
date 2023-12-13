@@ -13,6 +13,7 @@ export default defineConfig(
           "./src/components/Text/Text.tsx",
           "./src/components/RadioGroup/RadioGroup.tsx",
           "./src/components/Label/Label.tsx",
+          "./src/components/Heading/Heading.tsx",
           "./src/components/Banner/Banner.tsx",
         ],
         formats: ["es"],

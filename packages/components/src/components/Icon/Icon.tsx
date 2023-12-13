@@ -37,7 +37,7 @@ export const Icon: FC<IconProps> = (props) => {
   };
 
   if (faIcon) {
-    return <FontAwesomeIcon icon={faIcon} {...iconProps} />;
+    return <FontAwesomeIcon fixedWidth icon={faIcon} {...iconProps} />;
   }
 
   const isCustomSvgString = typeof children === "string";

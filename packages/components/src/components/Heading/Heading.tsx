@@ -5,11 +5,16 @@ import { useProps } from "@/lib/propsContext";
 
 export interface HeadingProps
   extends PropsWithChildren<HTMLAttributes<HTMLHeadingElement>> {
-  level: number;
+  level?: number;
 }
 
 export const Heading: FC<HeadingProps> = (props) => {
-  const { children, className, level, ...rest } = useProps("heading", props);
+  const {
+    children,
+    className,
+    level = 3,
+    ...rest
+  } = useProps("heading", props);
 
   const rootClassName = clsx(className, styles.root);
 

@@ -19,15 +19,26 @@
     font-size: var(--banner--heading-font-size);
   }
 
-  .icon {
+  .customIcon,
+  .defaultIcon {
     grid-area: icon;
     color: var(--banner--info-heading-color);
     width: var(--banner--icon-size);
     height: var(--banner--icon-size);
+    padding-top: calc(
+      (var(--size-rem--m) * var(--line-height--default) - var(--icon--size--m)) /
+        2
+    );
   }
 
   .content {
     grid-area: content;
+  }
+
+  /* With custom icon */
+
+  &:has(.customIcon) .defaultIcon {
+    display: none;
   }
 
   /* Without content */
@@ -47,4 +58,18 @@
 
 .warning {
   border-color: var(--banner--warning-border-color);
+  .heading,
+  .customIcon,
+  .defaultIcon {
+    color: var(--banner--warning-heading-color);
+  }
+}
+
+.danger {
+  border-color: var(--banner--danger-border-color);
+  .heading,
+  .customIcon,
+  .defaultIcon {
+    color: var(--banner--danger-heading-color);
+  }
 }
