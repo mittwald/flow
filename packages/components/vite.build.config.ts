@@ -12,6 +12,7 @@ export default defineConfig(
           "./src/components/Icon/Icon.tsx",
           "./src/components/Text/Text.tsx",
           "./src/components/Label/Label.tsx",
+          "./src/components/Banner/Banner.tsx",
         ],
         formats: ["es"],
       },
