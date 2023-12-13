@@ -92,8 +92,8 @@
       font-weight: var(--radiogroup--label-font-weight-with-content-or-icon);
     }
     .icon {
-      height: var(--icon--size--xl);
-      width: var(--icon--size--xl);
+      height: var(--radiogroup--icon-size-without-content);
+      width: var(--radiogroup--icon-size-without-content);
     }
   }
 
