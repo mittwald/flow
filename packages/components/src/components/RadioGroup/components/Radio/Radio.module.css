@@ -14,7 +14,7 @@
   row-gap: var(--radiogroup--text-to-text-spacing);
   column-gap: var(--radiogroup--icon-to-text-spacing);
 
-  /* elements */
+  /* Elements */
 
   .icon {
     grid-area: icon;
@@ -35,12 +35,13 @@
     padding-top: var(--icon-padding-top);
   }
 
-  /* without icon and content */
+  /* Without icon and content */
 
   &:not(:has(.content)):not(:has(.icon)) {
     grid-template-areas: "label checkmark";
     grid-template-columns: 1fr auto;
     flex: 1;
+    margin-right: -1px; /* Collapse borders */
 
     &:first-of-type {
       border-radius: 0;
@@ -52,6 +53,7 @@
       border-radius: 0;
       border-start-end-radius: var(--radiogroup--border-radius);
       border-end-end-radius: var(--radiogroup--border-radius);
+      margin: 0;
     }
 
     &[data-selected] .checkmark {
@@ -61,7 +63,7 @@
     @container (max-width: 600px) {
       flex: auto;
       width: 100%;
-      margin-top: -1px; /* Collapse borders */
+      margin: 0 0 -1px; /* Collapse borders */
 
       &:first-of-type {
         border-radius: 0;
@@ -73,11 +75,12 @@
         border-radius: 0;
         border-end-end-radius: var(--radiogroup--border-radius);
         border-end-start-radius: var(--radiogroup--border-radius);
+        margin: 0;
       }
     }
   }
 
-  /* with icon */
+  /* With icon */
 
   &:has(.icon) {
     grid-template-areas:
@@ -89,7 +92,7 @@
     font-weight: var(--font-weight--bold);
   }
 
-  /* with content */
+  /* With content */
 
   &:has(.content) {
     grid-template-areas:
@@ -102,7 +105,7 @@
     font-weight: var(--font-weight--bold);
   }
 
-  /* with icon and content */
+  /* With icon and content */
 
   &:has(.content):has(.icon) {
     grid-template-areas:
@@ -115,7 +118,7 @@
     }
   }
 
-  /* states */
+  /* States */
 
   &:hover {
     background-color: var(--radiogroup--background-color--hover);

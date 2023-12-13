@@ -42,6 +42,7 @@ export const LongTexts: Story = {
 
 export const MultipleElements: Story = {
   args: {
+    defaultValue: "0",
     children: Array(9)
       .fill("")
       .map((value, index) => (
@@ -49,6 +50,20 @@ export const MultipleElements: Story = {
           <Icon faIcon={faStar} />
           <Text>Option {index + 1}</Text>
           <Content>{dummyText.medium}</Content>
+        </Radio>
+      )),
+  },
+};
+
+export const SmallSpace: Story = {
+  args: {
+    style: { width: "600px" },
+    defaultValue: "0",
+    children: Array(3)
+      .fill("")
+      .map((value, index) => (
+        <Radio value={index.toString()}>
+          <Text>Option {index + 1}</Text>
         </Radio>
       )),
   },
