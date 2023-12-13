@@ -5,7 +5,7 @@
     (var(--size-rem--m) * var(--line-height--default) - var(--size-rem--m)) / 2
   );
 
-  border: var(--radiogroup--border-width) solid
+  border: var(--radiogroup--border-width) var(--radiogroup--border-style)
     var(--radiogroup--border-color--default);
   padding: var(--radiogroup--padding-y) var(--radiogroup--padding-x);
   background-color: var(--radiogroup--background-color--default);
@@ -26,7 +26,7 @@
 
   .content {
     grid-area: content;
-    font-weight: var(--font-weight--normal);
+    font-weight: var(--radiogroup--label-font-weight-without-content-and-icon);
   }
 
   .checkmark {
@@ -89,7 +89,7 @@
     grid-template-columns: 1fr;
     justify-items: center;
     border-radius: var(--radiogroup--border-radius);
-    font-weight: var(--font-weight--bold);
+    font-weight: var(--radiogroup--label-font-weight-with-content-or-icon);
   }
 
   /* With content */
@@ -102,7 +102,7 @@
     grid-template-rows: auto 1fr;
     justify-items: start;
     border-radius: var(--radiogroup--border-radius);
-    font-weight: var(--font-weight--bold);
+    font-weight: var(--radiogroup--label-font-weight-with-content-or-icon);
   }
 
   /* With icon and content */

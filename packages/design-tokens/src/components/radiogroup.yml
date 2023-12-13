@@ -12,9 +12,11 @@ radiogroup:
   padding-y:
     value: "{size-px.s}"
   border-radius:
-    value: "{size-px.xs}"
+    value: "{border-radius.default}"
   border-width:
-    value: 1px
+    value: "{border-width.default}"
+  border-style:
+    value: "{border-style.default}"
   border-color:
     default:
       value: "{neutral.color.500}"
@@ -44,3 +46,7 @@ radiogroup:
       value: "{neutral.color.500}"
     selected-disabled:
       value: "{neutral.color.600}"
+  label-font-weight-with-content-or-icon:
+    value: "{font-weight.bold}"
+  label-font-weight-without-content-and-icon:
+    value: "{font-weight.normal}"
