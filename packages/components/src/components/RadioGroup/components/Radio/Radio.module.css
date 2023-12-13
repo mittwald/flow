@@ -43,17 +43,37 @@
     flex: 1;
 
     &:first-of-type {
+      border-radius: 0;
       border-start-start-radius: var(--radiogroup--border-radius);
       border-end-start-radius: var(--radiogroup--border-radius);
     }
 
     &:last-of-type {
+      border-radius: 0;
       border-start-end-radius: var(--radiogroup--border-radius);
       border-end-end-radius: var(--radiogroup--border-radius);
     }
 
     &[data-selected] .checkmark {
       display: block;
+    }
+
+    @container (max-width: 600px) {
+      flex: auto;
+      width: 100%;
+      margin-top: -1px; /* Collapse borders */
+
+      &:first-of-type {
+        border-radius: 0;
+        border-start-start-radius: var(--radiogroup--border-radius);
+        border-start-end-radius: var(--radiogroup--border-radius);
+      }
+
+      &:last-of-type {
+        border-radius: 0;
+        border-end-end-radius: var(--radiogroup--border-radius);
+        border-end-start-radius: var(--radiogroup--border-radius);
+      }
     }
   }
 
@@ -105,6 +125,7 @@
     border-color: var(--radiogroup--border-color--selected);
     background-color: var(--radiogroup--background-color--selected);
     color: var(--radiogroup--color--selected);
+    z-index: 1;
   }
 
   &[aria-disabled] {
