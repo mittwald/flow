@@ -23,7 +23,8 @@
     border-end-end-radius: var(--radiogroup--border-radius);
   }
 
-  > :global(.flow-icon) {
+  .checkmark,
+  &:has(.content) .icon {
     padding-top: calc(
       (var(--size-rem--m) * var(--line-height--default) - var(--size-rem--m)) /
         2
