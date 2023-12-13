@@ -59,6 +59,23 @@ test.each<{ first: PropsContext; second: PropsContext; merged: PropsContext }>([
       },
     },
   },
+  {
+    first: {
+      button: {
+        className: "first-class",
+      },
+    },
+    second: {
+      button: {
+        className: "second-class",
+      },
+    },
+    merged: {
+      button: {
+        className: "first-class second-class",
+      },
+    },
+  },
 ])(
   "Expect merged result is correct for test case: %o",
   ({ first, second, merged }) => {

@@ -9,7 +9,7 @@ export function isDynamicProp<
   P extends FlowComponentPropName<C>,
 >(something: unknown): something is DynamicProp<C, P> {
   return (
-    typeof something === "object" && !!something && "__dynamicProp" in something
+    !!something && typeof something === "object" && "__dynamicProp" in something
   );
 }
 
