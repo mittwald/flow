@@ -1,1 +1,1 @@
-export * from "./Banner";
+export { type BannerProps, Banner } from "./Banner";

@@ -1,7 +1,40 @@
-import React, { FC } from "react";
+import React, { FC, HTMLAttributes, PropsWithChildren } from "react";
+import {
+  PropsContext,
+  PropsContextProvider,
+  useProps,
+} from "@/lib/propsContext";
+import styles from "./Banner.module.css";
+import clsx from "clsx";
 
-export const Banner: FC = () => {
-  return <aside></aside>;
+export interface BannerProps
+  extends PropsWithChildren<HTMLAttributes<HTMLElement>> {
+  severity?: "danger" | "warning" | "info";
+}
+
+export const Banner: FC<BannerProps> = (props) => {
+  const {
+    children,
+    className,
+    severity = "info",
+    ...rest
+  } = useProps("banner", props);
+
+  const rootClassName = clsx(className, styles.root, styles[severity]);
+
+  const propsContext: PropsContext = {
+    heading: {
+      className: styles.heading,
+    },
+  };
+
+  return (
+    <aside {...rest} className={rootClassName}>
+      <PropsContextProvider props={propsContext}>
+        {children}
+      </PropsContextProvider>
+    </aside>
+  );
 };
 
 export default Banner;

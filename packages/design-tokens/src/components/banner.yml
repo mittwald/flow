@@ -1,0 +1,16 @@
+banner:
+  border-radius:
+    value: "{border-radius.default}"
+  border-width:
+    default:
+      value: "{border-width.default}"
+    main:
+      value: "{size-px.s}"
+  border-style:
+    value: "{border-style.default}"
+  info-border-color:
+    value: "{informative.color.700}"
+  warning-border-color:
+    value: "{warning.color.700}"
+  danger-border-color:
+    value: "{negative.color.700}"

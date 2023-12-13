@@ -1,0 +1,8 @@
+@import "@/styles";
+
+.root {
+  border-radius: var(--banner--border-radius);
+  border: var(--banner--border-width--default) var(--banner--border-style)
+    var(--banner--info-border-color);
+  border-inline-start-width: var(--banner--border-width--main);
+}
