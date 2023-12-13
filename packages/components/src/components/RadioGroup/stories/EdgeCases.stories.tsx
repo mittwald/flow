@@ -5,7 +5,7 @@ import { Content } from "@/components/Content";
 import { Text } from "@/components/Text";
 import React from "react";
 import { Icon } from "@/components/Icon";
-import { dummyText } from "@/lib/DummyText";
+import { dummyText } from "@/lib/dummyText";
 
 const meta: Meta<typeof RadioGroup> = {
   title: "RadioGroup/EdgeCases",
