@@ -1,6 +1,10 @@
 @import "@/styles";
 
 .root {
+  --icon-padding-top: calc(
+    (var(--size-rem--m) * var(--line-height--default) - var(--size-rem--m)) / 2
+  );
+
   border: var(--radiogroup--border-width) solid
     var(--radiogroup--border-color--default);
   padding: var(--radiogroup--padding-y) var(--radiogroup--padding-x);
@@ -28,10 +32,7 @@
   .checkmark {
     grid-area: checkmark;
     display: none;
-    padding-top: calc(
-      (var(--size-rem--m) * var(--line-height--default) - var(--size-rem--m)) /
-        2
-    );
+    padding-top: var(--icon-padding-top);
   }
 
   /* without icon and content */
@@ -40,6 +41,7 @@
     grid-template-areas: "label checkmark";
     grid-template-columns: 1fr auto;
     flex: 1;
+
     &:first-of-type {
       border-start-start-radius: var(--radiogroup--border-radius);
       border-end-start-radius: var(--radiogroup--border-radius);
@@ -48,6 +50,10 @@
     &:last-of-type {
       border-start-end-radius: var(--radiogroup--border-radius);
       border-end-end-radius: var(--radiogroup--border-radius);
+    }
+
+    &[data-selected] .checkmark {
+      display: block;
     }
   }
 
@@ -85,10 +91,7 @@
     grid-template-columns: auto 1fr;
 
     .icon {
-      padding-top: calc(
-        (var(--size-rem--m) * var(--line-height--default) - var(--size-rem--m)) /
-          2
-      );
+      padding-top: var(--icon-padding-top);
     }
   }
 
@@ -102,21 +105,15 @@
     border-color: var(--radiogroup--border-color--selected);
     background-color: var(--radiogroup--background-color--selected);
     color: var(--radiogroup--color--selected);
-
-    &:not(:has(.icon)):not(:has(.content)) {
-      .checkmark {
-        display: block;
-      }
-    }
   }
 
-  &[data-disabled] {
+  &[aria-disabled] {
     border-color: var(--radiogroup--border-color--disabled);
     background-color: var(--radiogroup--background-color--disabled);
     color: var(--radiogroup--color--disabled);
   }
 
-  &[data-disabled]&[data-selected] {
+  &[aria-disabled][data-selected] {
     border-color: var(--radiogroup--border-color--selected-disabled);
     background-color: var(--radiogroup--background-color--selected-disabled);
     color: var(--radiogroup--color--selected-disabled);
