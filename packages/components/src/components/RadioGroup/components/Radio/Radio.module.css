@@ -24,7 +24,10 @@
   }
 
   > :global(.flow-icon) {
-    height: var(--line-height--default);
+    padding-top: calc(
+      (var(--size-rem--m) * var(--line-height--default) - var(--size-rem--m)) /
+        2
+    );
   }
 
   &:has(.icon),
