@@ -11,7 +11,7 @@
     margin-bottom: var(--radiogroup--label-to-radio-spacing);
   }
 
-  /* With Icon or Content */
+  /* With icon or content */
 
   &:has(:global(.flow-radiogroup-radio-content)),
   &:has(:global(.flow-radiogroup-radio-icon)) {
@@ -28,13 +28,13 @@
     }
   }
 
-  /* With Icon */
+  /* With icon */
 
   &:has(:global(.flow-radiogroup-radio-icon)) {
     grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr));
   }
 
-  /* With Content */
+  /* With content */
 
   &:has(:global(.flow-radiogroup-radio-content)) {
     grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
