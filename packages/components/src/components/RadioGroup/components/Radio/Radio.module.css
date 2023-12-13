@@ -38,6 +38,7 @@
       "icon"
       "label";
     justify-items: center;
+    grid-template-columns: 1fr;
   }
 
   &:has(.content) {
@@ -45,7 +46,7 @@
       "label"
       "content";
     justify-items: start;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: 1fr;
 
     &:has(.icon) {
       grid-template-areas:

@@ -58,10 +58,10 @@ export const Disabled: Story = {
 
 export const WithIcon: Story = {
   args: {
-    "aria-label": "app",
     defaultValue: "wordpress",
     children: (
       <>
+        <Label>App</Label>
         <Radio value="wordpress">
           <Icon faIcon={faStar} />
           <Text>WordPress</Text>

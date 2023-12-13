@@ -1,1 +1,1 @@
-export * from "./Content";
+export { type ContentProps, Content } from "./Content";

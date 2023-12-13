@@ -23,10 +23,10 @@
   }
 
   &:has(:global(.flow-radiogroup-radio-icon)) {
-    grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr));
   }
 
   &:has(:global(.flow-radiogroup-radio-content)) {
-    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
   }
 }
