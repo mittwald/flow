@@ -1,8 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Button from "../Button";
 import React from "react";
-import { Icon, Text } from "@/components";
 import { faStar } from "@fortawesome/free-regular-svg-icons/faStar";
+import { Icon } from "@/components/Icon";
+import { Text } from "@/components/Text";
+import { dummyText } from "@/lib/dummyText";
 
 const meta: Meta<typeof Button> = {
   title: "Button/Edge Cases",
@@ -17,7 +19,7 @@ type Story = StoryObj<typeof Button>;
 
 export const LongText: Story = {
   args: {
-    children: "Button ".repeat(50),
+    children: dummyText.long,
   },
 };
 

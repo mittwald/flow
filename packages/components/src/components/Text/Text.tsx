@@ -1,25 +1,23 @@
-import React, { FC, PropsWithChildren } from "react";
+import { createElement, FC, PropsWithChildren } from "react";
 import styles from "./Text.module.css";
 import * as Aria from "react-aria-components";
-import useProps from "@/lib/propsContext/useProps";
 import clsx from "clsx";
+import { useProps } from "@/lib/propsContext";
 
-export interface TextProps extends PropsWithChildren<Aria.TextProps> {}
+export interface TextProps
+  extends PropsWithChildren<Omit<Aria.TextProps, "children">> {}
 
 export const Text: FC<TextProps> = (props) => {
-  const {
+  const { children, className, elementType, ...rest } = useProps("text", props);
+
+  const rootClassName = clsx(className, styles.root);
+
+  return createElement(props.slot ? Aria.Text : elementType ?? "span", {
+    ...rest,
+    className: rootClassName,
+    elementType,
     children,
-    className: classNameFromProps,
-    ...restProps
-  } = useProps("text", props);
-
-  const className = clsx(classNameFromProps, styles.root);
-
-  return (
-    <Aria.Text className={className} {...restProps}>
-      {children}
-    </Aria.Text>
-  );
+  });
 };
 
 export default Text;

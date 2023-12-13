@@ -4,4 +4,4 @@ label:
   font-weight:
     value: "{font-weight.bold}"
   color:
-    value: "{neutral.color.700}"
+    value: "{neutral.color.800}"

@@ -1,0 +1,42 @@
+@import "@/styles";
+
+.root {
+  display: flex;
+  flex-wrap: wrap;
+  container-type: size;
+  z-index: 0;
+
+  > :global(.flow-label) {
+    width: 100%;
+    margin-bottom: var(--radiogroup--label-to-radio-spacing);
+  }
+
+  /* With icon or content */
+
+  &:has(:global(.flow-radiogroup-radio-content)),
+  &:has(:global(.flow-radiogroup-radio-icon)) {
+    display: grid;
+    gap: var(--radiogroup--radio-to-radio-spacing);
+    :global(.flow-label) {
+      grid-column: 1 / -1;
+      margin-bottom: calc(
+        (
+            var(--radiogroup--radio-to-radio-spacing) -
+              var(--radiogroup--label-to-radio-spacing)
+          ) * -1
+      );
+    }
+  }
+
+  /* With icon */
+
+  &:has(:global(.flow-radiogroup-radio-icon)) {
+    grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr));
+  }
+
+  /* With content */
+
+  &:has(:global(.flow-radiogroup-radio-content)) {
+    grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+  }
+}

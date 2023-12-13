@@ -2,44 +2,42 @@
 Josh's Custom CSS Reset
 https://www.joshwcomeau.com/css/custom-css-reset/
 */
-.flow {
-  *,
-  *::before,
-  *::after {
-    box-sizing: border-box;
-  }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
-  & * {
-    margin: 0;
-  }
+* {
+  margin: 0;
+}
 
-  & body {
-    line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
-  }
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
 
-  & img,
-  & picture,
-  & video,
-  & canvas,
-  & svg {
-    display: block;
-    max-width: 100%;
-  }
+img,
+picture,
+video,
+svg,
+canvas {
+  display: block;
+  max-width: 100%;
+}
 
-  & input,
-  & textarea,
-  & select {
-    font: inherit;
-  }
+input,
+textarea,
+select {
+  font: inherit;
+}
 
-  & p,
-  & h1,
-  & h2,
-  & h3,
-  & h4,
-  & h5,
-  & h6 {
-    overflow-wrap: break-word;
-  }
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
 }
