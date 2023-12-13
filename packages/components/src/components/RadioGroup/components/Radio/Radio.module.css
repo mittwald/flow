@@ -81,7 +81,7 @@
 
   /* With icon */
 
-  &:has(.icon) {
+  &:has(.icon):not(:has(.content)) {
     grid-template-areas:
       "icon"
       "label";
@@ -90,6 +90,10 @@
     border-radius: var(--radiogroup--border-radius);
     .label {
       font-weight: var(--radiogroup--label-font-weight-with-content-or-icon);
+    }
+    .icon {
+      height: var(--icon--size--xl);
+      width: var(--icon--size--xl);
     }
   }
 
@@ -146,5 +150,9 @@
     border-color: var(--radiogroup--border-color--selected-disabled);
     background-color: var(--radiogroup--background-color--selected-disabled);
     color: var(--radiogroup--color--selected-disabled);
+  }
+
+  &:not([data-selected]):not([data-disabled]) .icon {
+    color: var(--radiogroup--icon-color--default);
   }
 }
