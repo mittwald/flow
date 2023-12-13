@@ -7,16 +7,44 @@
   border-inline-start-width: var(--banner--border-width--main);
   padding: var(--banner--padding);
   display: grid;
+  grid-template-columns: auto 1fr;
+  grid-column-gap: var(--banner--icon-to-text-spacing);
+  grid-row-gap: var(--banner--text-to-text-spacing);
+
+  /* Elements */
 
   .heading {
     grid-area: heading;
+    color: var(--banner--info-heading-color);
+    font-size: var(--banner--heading-font-size);
   }
 
   .icon {
     grid-area: icon;
+    color: var(--banner--info-heading-color);
+    width: var(--banner--icon-size);
+    height: var(--banner--icon-size);
   }
 
   .content {
     grid-area: content;
   }
+
+  /* Without content */
+
+  &:not(:has(.content)) {
+    grid-template-areas: "icon heading";
+  }
+
+  /* With content */
+
+  &:has(.content) {
+    grid-template-areas:
+      "icon heading"
+      ".    content";
+  }
+}
+
+.warning {
+  border-color: var(--banner--warning-border-color);
 }

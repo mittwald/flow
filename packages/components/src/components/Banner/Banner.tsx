@@ -23,8 +23,14 @@ export const Banner: FC<BannerProps> = (props) => {
   const rootClassName = clsx(className, styles.root, styles[severity]);
 
   const propsContext: PropsContext = {
+    icon: {
+      className: styles.icon,
+    },
     heading: {
       className: styles.heading,
+    },
+    content: {
+      className: styles.content,
     },
   };
 
