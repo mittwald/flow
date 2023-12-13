@@ -14,13 +14,13 @@
   column-gap: var(--radiogroup--icon-to-text-spacing);
 
   &:first-of-type {
-    border-top-left-radius: var(--radiogroup--border-radius);
-    border-bottom-left-radius: var(--radiogroup--border-radius);
+    border-start-start-radius: var(--radiogroup--border-radius);
+    border-end-start-radius: var(--radiogroup--border-radius);
   }
 
   &:last-of-type {
-    border-top-right-radius: var(--radiogroup--border-radius);
-    border-bottom-right-radius: var(--radiogroup--border-radius);
+    border-start-end-radius: var(--radiogroup--border-radius);
+    border-end-end-radius: var(--radiogroup--border-radius);
   }
 
   > :global(.flow-icon) {
