@@ -3111,7 +3111,6 @@ __metadata:
     "@storybook/addon-essentials": "npm:^7.6.4"
     "@storybook/addon-interactions": "npm:^7.6.4"
     "@storybook/addon-links": "npm:^7.6.4"
-    "@storybook/addon-onboarding": "npm:^1.0.9"
     "@storybook/blocks": "npm:^7.6.4"
     "@storybook/react": "npm:^7.6.4"
     "@storybook/react-vite": "npm:^7.6.4"
@@ -3137,6 +3136,7 @@ __metadata:
     react-element-to-jsx-string: "npm:^15.0.0"
     rollup: "npm:^4.6.1"
     storybook: "npm:^7.6.4"
+    storybook-addon-rtl-direction: "npm:^0.0.19"
     ts-jest: "npm:^29.1.1"
     typescript: "npm:^5.3.2"
     typescript-plugin-css-modules: "npm:^5.0.2"
@@ -6378,19 +6378,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-onboarding@npm:^1.0.9":
-  version: 1.0.9
-  resolution: "@storybook/addon-onboarding@npm:1.0.9"
-  dependencies:
-    "@storybook/telemetry": "npm:^7.1.0"
-    react-confetti: "npm:^6.1.0"
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0 || ^18.0.0
-    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: 647dd4641f023ca701356287ce2ac5cec663c8f818a06ae70707ce30c2abc2c0e93fa5b46a8cd476e3ee44afede527c0b445876fb9aa1a00b32362a4f1b570b2
-  languageName: node
-  linkType: hard
-
 "@storybook/addon-outline@npm:7.6.4":
   version: 7.6.4
   resolution: "@storybook/addon-outline@npm:7.6.4"
@@ -6414,6 +6401,27 @@ __metadata:
   dependencies:
     memoizerific: "npm:^1.11.3"
   checksum: 91481ce2c209f91bad7f35389b1348190ae11e150f56326189145b2136a59dc3c84e131211307aa8d7969652941bf510ad507f1f467d109bca7df28e5de07a64
+  languageName: node
+  linkType: hard
+
+"@storybook/addons@npm:*":
+  version: 7.6.4
+  resolution: "@storybook/addons@npm:7.6.4"
+  dependencies:
+    "@storybook/manager-api": "npm:7.6.4"
+    "@storybook/preview-api": "npm:7.6.4"
+    "@storybook/types": "npm:7.6.4"
+  checksum: 303722abe0e537ad252cc8381b3016d5f2dc0934f498f15b4d2acd7381ef72e0ec6bf54ad80fe82280810746ba810a37da742e1910f30d08b5aa24f098c47083
+  languageName: node
+  linkType: hard
+
+"@storybook/api@npm:*":
+  version: 7.6.4
+  resolution: "@storybook/api@npm:7.6.4"
+  dependencies:
+    "@storybook/client-logger": "npm:7.6.4"
+    "@storybook/manager-api": "npm:7.6.4"
+  checksum: 48274c6687f9f0671fd486b18c2e4064dfcced4c7cb27a945f32b5ab1d4314e006797bb4c5a8db38f700397577507db7829fa6e9ee9b9ce607b3026bb47562e0
   languageName: node
   linkType: hard
 
@@ -6667,7 +6675,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/components@npm:7.6.4":
+"@storybook/components@npm:*, @storybook/components@npm:7.6.4":
   version: 7.6.4
   resolution: "@storybook/components@npm:7.6.4"
   dependencies:
@@ -6760,21 +6768,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@storybook/core-events@npm:*, @storybook/core-events@npm:7.6.4":
+  version: 7.6.4
+  resolution: "@storybook/core-events@npm:7.6.4"
+  dependencies:
+    ts-dedent: "npm:^2.0.0"
+  checksum: df87c293aaebb4cb9c8b723af955986a38ea34caaae37c5cad4c57e6d2de4085c99f675977824e9e953d5da33577e7cb38228f680ffcd35d3348e6ec00760f0d
+  languageName: node
+  linkType: hard
+
 "@storybook/core-events@npm:7.6.3":
   version: 7.6.3
   resolution: "@storybook/core-events@npm:7.6.3"
   dependencies:
     ts-dedent: "npm:^2.0.0"
   checksum: 56304674342ad7a932e4735fd3ad347a277bb7e6407602f848e968cc7dd8e8eaa92c93dbfe2f42a4efb0853ae67491d76feefcab1fc0212b2596e33f5422888c
-  languageName: node
-  linkType: hard
-
-"@storybook/core-events@npm:7.6.4":
-  version: 7.6.4
-  resolution: "@storybook/core-events@npm:7.6.4"
-  dependencies:
-    ts-dedent: "npm:^2.0.0"
-  checksum: df87c293aaebb4cb9c8b723af955986a38ea34caaae37c5cad4c57e6d2de4085c99f675977824e9e953d5da33577e7cb38228f680ffcd35d3348e6ec00760f0d
   languageName: node
   linkType: hard
 
@@ -7171,22 +7179,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/telemetry@npm:^7.1.0":
-  version: 7.6.3
-  resolution: "@storybook/telemetry@npm:7.6.3"
-  dependencies:
-    "@storybook/client-logger": "npm:7.6.3"
-    "@storybook/core-common": "npm:7.6.3"
-    "@storybook/csf-tools": "npm:7.6.3"
-    chalk: "npm:^4.1.0"
-    detect-package-manager: "npm:^2.0.1"
-    fetch-retry: "npm:^5.0.2"
-    fs-extra: "npm:^11.1.0"
-    read-pkg-up: "npm:^7.0.1"
-  checksum: 197ec4a77d8f119ac03c986653b2d9a00adc22b3ee8d70753c5fd4365cfc82dca3d097048d3b3b917414389d41fe161d6b383f6c2edad457301856644160ed3a
-  languageName: node
-  linkType: hard
-
 "@storybook/testing-library@npm:^0.2.2":
   version: 0.2.2
   resolution: "@storybook/testing-library@npm:0.2.2"
@@ -7198,7 +7190,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/theming@npm:7.6.4":
+"@storybook/theming@npm:*, @storybook/theming@npm:7.6.4":
   version: 7.6.4
   resolution: "@storybook/theming@npm:7.6.4"
   dependencies:
@@ -18781,17 +18773,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-confetti@npm:^6.1.0":
-  version: 6.1.0
-  resolution: "react-confetti@npm:6.1.0"
-  dependencies:
-    tween-functions: "npm:^1.2.0"
-  peerDependencies:
-    react: ^16.3.0 || ^17.0.1 || ^18.0.0
-  checksum: 5b4eb23eef564695f6db1d25b294ed31d5fa21ff4092c6a38e641f85cd10e3e0b50014366e3ac0f7cf772e73faaecd14614e5b11a5531336fa769dda8068ab59
-  languageName: node
-  linkType: hard
-
 "react-docgen-typescript@npm:^2.2.2":
   version: 2.2.2
   resolution: "react-docgen-typescript@npm:2.2.2"
@@ -20187,6 +20168,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"storybook-addon-rtl-direction@npm:^0.0.19":
+  version: 0.0.19
+  resolution: "storybook-addon-rtl-direction@npm:0.0.19"
+  peerDependencies:
+    "@storybook/addons": ^6.5.8
+    "@storybook/api": ^6.5.8
+    "@storybook/components": ^6.5.8
+    "@storybook/core-events": ^6.5.8
+    "@storybook/theming": ^6.5.8
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+  peerDependenciesMeta:
+    react:
+      optional: true
+    react-dom:
+      optional: true
+  checksum: 47afc1336f155fbe9e01ddf6182cdf73cfa36719672f629c602e858b02fea55167db2ef7de56feff2d6f691ebf1c9c44a390373e2f50614c5a7f38f55d7a4ec0
+  languageName: node
+  linkType: hard
+
 "storybook@npm:^7.6.4":
   version: 7.6.4
   resolution: "storybook@npm:7.6.4"
@@ -21100,13 +21101,6 @@ __metadata:
   version: 0.0.6
   resolution: "tunnel@npm:0.0.6"
   checksum: e27e7e896f2426c1c747325b5f54efebc1a004647d853fad892b46d64e37591ccd0b97439470795e5262b5c0748d22beb4489a04a0a448029636670bfd801b75
-  languageName: node
-  linkType: hard
-
-"tween-functions@npm:^1.2.0":
-  version: 1.2.0
-  resolution: "tween-functions@npm:1.2.0"
-  checksum: 7e59295b8b0ee4132ed2fe335f56a9db5c87056dad6b6fd3011be72239fd20398003ddb4403bc98ad9f5c94468890830f64016edbbde35581faf95b32cda8305
   languageName: node
   linkType: hard
 
