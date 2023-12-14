@@ -71,11 +71,11 @@
   color: var(--button--disabled-color);
 }
 
-.root > :global(.flow-icon) {
+.icon {
   order: 0;
 }
 
-.root:has(> :global(.flow-icon)) {
+.root:has(.icon) {
   /* Apply line-height when empty */
   &::after {
     content: "\200B";
@@ -83,7 +83,7 @@
   }
 }
 
-.root > :global(.flow-text) {
+.text {
   order: 1;
   margin-inline-start: var(--button--icon-to-text-spacing);
 }
