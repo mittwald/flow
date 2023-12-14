@@ -42,7 +42,7 @@ export const Warning: Story = {
   },
 };
 
-export const Danger: Story = {
+export const Negative: Story = {
   args: {
     variant: "negative",
     children: (
