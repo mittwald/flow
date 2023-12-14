@@ -31,8 +31,8 @@ note:
   warning-heading-color:
     value: "{warning.color.900}"
 
-  # Error
-  danger-border-color:
+  # Negative
+  negative-border-color:
     value: "{negative.color.700}"
-  danger-heading-color:
+  negative-heading-color:
     value: "{negative.color.900}"

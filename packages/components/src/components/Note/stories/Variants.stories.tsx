@@ -3,16 +3,11 @@ import Note from "../Note";
 import React from "react";
 import { Heading } from "@/components/Heading";
 import { Content } from "@/components/Content";
+import defaultMeta from "./Default.stories";
 
 const meta: Meta<typeof Note> = {
+  ...defaultMeta,
   title: "Note/Variants",
-  component: Note,
-  argTypes: {
-    variant: {
-      control: "inline-radio",
-    },
-  },
-  args: { variant: "info" },
 };
 
 export default meta;
@@ -33,8 +28,9 @@ export const Info: Story = {
 
 // ToDo: variant als arg?
 export const Warning: Story = {
+  args: { variant: "warning" },
   render: (props) => (
-    <Note {...props} variant="warning">
+    <Note {...props}>
       <Heading>Storage is almost exceeded</Heading>
       <Content>
         Your storage space is over 80% utilized. We recommend that you upgrade
@@ -45,8 +41,9 @@ export const Warning: Story = {
 };
 
 export const Negative: Story = {
+  args: { variant: "negative" },
   render: (props) => (
-    <Note variant="negative" {...props}>
+    <Note {...props}>
       <Heading>No SSL certificate could be issued</Heading>
       <Content>
         No SSL certificate could be issued for this domain because the domain IP

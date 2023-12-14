@@ -66,10 +66,10 @@
 }
 
 .negative {
-  border-color: var(--note--danger-border-color);
+  border-color: var(--note--negative-border-color);
   .heading,
   .customIcon,
   .defaultIcon {
-    color: var(--note--danger-heading-color);
+    color: var(--note--negative-heading-color);
   }
 }

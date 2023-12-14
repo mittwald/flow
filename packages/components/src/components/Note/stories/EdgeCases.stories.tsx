@@ -4,16 +4,11 @@ import React from "react";
 import { Heading } from "@/components/Heading";
 import { Content } from "@/components/Content";
 import { dummyText } from "@/lib/dummyText";
+import defaultMeta from "./Default.stories";
 
 const meta: Meta<typeof Note> = {
+  ...defaultMeta,
   title: "Note/Edge Cases",
-  component: Note,
-  argTypes: {
-    variant: {
-      control: "inline-radio",
-    },
-  },
-  args: { variant: "info" },
 };
 
 export default meta;
