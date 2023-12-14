@@ -4,7 +4,7 @@ import {
   PropsContextProvider,
   useProps,
 } from "@/lib/propsContext";
-import styles from "./Banner.module.css";
+import styles from "./Note.module.css";
 import clsx from "clsx";
 import { Icon } from "@/components/Icon";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons/faInfoCircle";
@@ -19,18 +19,18 @@ import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
 //    CallOut
 
 // ToDo: warning oder notice?
-export interface BannerProps
+export interface NoteProps
   extends PropsWithChildren<HTMLAttributes<HTMLElement>> {
   variant?: "info" | "warning" | "negative";
 }
 
-export const Banner: FC<BannerProps> = (props) => {
+export const Note: FC<NoteProps> = (props) => {
   const {
     children,
     className,
     variant = "info",
     ...rest
-  } = useProps("banner", props);
+  } = useProps("note", props);
 
   const rootClassName = clsx(className, styles.root, styles[variant]);
 
@@ -68,4 +68,4 @@ export const Banner: FC<BannerProps> = (props) => {
   );
 };
 
-export default Banner;
+export default Note;

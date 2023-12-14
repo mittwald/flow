@@ -1,24 +1,24 @@
 @import "@/styles";
 
 .root {
-  border-radius: var(--banner--border-radius);
-  border: var(--banner--border-width--default) var(--banner--border-style)
-    var(--banner--info-border-color);
-  border-inline-start-width: var(--banner--border-width--main);
-  padding: var(--banner--padding);
+  border-radius: var(--note--border-radius);
+  border: var(--note--border-width--default) var(--note--border-style)
+    var(--note--info-border-color);
+  border-inline-start-width: var(--note--border-width--main);
+  padding: var(--note--padding);
   display: grid;
   grid-template-columns: auto 1fr;
-  grid-column-gap: var(--banner--icon-to-text-spacing);
-  grid-row-gap: var(--banner--text-to-text-spacing);
+  grid-column-gap: var(--note--icon-to-text-spacing);
+  grid-row-gap: var(--note--text-to-text-spacing);
 
   /* Elements */
 
   .customIcon,
   .defaultIcon {
     grid-area: icon;
-    color: var(--banner--info-heading-color);
-    width: var(--banner--icon-size);
-    height: var(--banner--icon-size);
+    color: var(--note--info-heading-color);
+    width: var(--note--icon-size);
+    height: var(--note--icon-size);
     padding-top: calc(
       (var(--size-rem--m) * var(--line-height--default) - var(--icon--size--m)) /
         2
@@ -27,8 +27,8 @@
 
   .heading {
     grid-area: heading;
-    color: var(--banner--info-heading-color);
-    font-size: var(--banner--heading-font-size);
+    color: var(--note--info-heading-color);
+    font-size: var(--note--heading-font-size);
   }
 
   .content {
@@ -57,19 +57,19 @@
 }
 
 .warning {
-  border-color: var(--banner--warning-border-color);
+  border-color: var(--note--warning-border-color);
   .heading,
   .customIcon,
   .defaultIcon {
-    color: var(--banner--warning-heading-color);
+    color: var(--note--warning-heading-color);
   }
 }
 
 .negative {
-  border-color: var(--banner--danger-border-color);
+  border-color: var(--note--danger-border-color);
   .heading,
   .customIcon,
   .defaultIcon {
-    color: var(--banner--danger-heading-color);
+    color: var(--note--danger-heading-color);
   }
 }

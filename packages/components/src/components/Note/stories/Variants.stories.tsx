@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Banner from "../Banner";
+import Note from "../Note";
 import React from "react";
 import { Heading } from "@/components/Heading";
 import { Content } from "@/components/Content";
 
-const meta: Meta<typeof Banner> = {
-  title: "Banner/Variants",
-  component: Banner,
+const meta: Meta<typeof Note> = {
+  title: "Note/Variants",
+  component: Note,
   argTypes: {
     variant: {
       control: "inline-radio",
@@ -17,47 +17,41 @@ const meta: Meta<typeof Banner> = {
 
 export default meta;
 
-type Story = StoryObj<typeof Banner>;
+type Story = StoryObj<typeof Note>;
 
 export const Info: Story = {
   render: (props) => (
-    <Banner {...props}>
+    <Note {...props}>
       <Heading>Email address has been archived</Heading>
       <Content>
         As your domain has been deleted, this email address has been archived.
         To be able to send and receive emails, you must rename the address.
       </Content>
-    </Banner>
+    </Note>
   ),
 };
 
 // ToDo: variant als arg?
 export const Warning: Story = {
-  args: {
-    variant: "warning",
-  },
   render: (props) => (
-    <Banner {...props}>
+    <Note {...props} variant="warning">
       <Heading>Storage is almost exceeded</Heading>
       <Content>
         Your storage space is over 80% utilized. We recommend that you upgrade
         the storage space to avoid disruptions during backups.
       </Content>
-    </Banner>
+    </Note>
   ),
 };
 
 export const Negative: Story = {
-  args: {
-    variant: "negative",
-  },
   render: (props) => (
-    <Banner {...props}>
+    <Note variant="negative" {...props}>
       <Heading>No SSL certificate could be issued</Heading>
       <Content>
         No SSL certificate could be issued for this domain because the domain IP
         does not point to your server IP.
       </Content>
-    </Banner>
+    </Note>
   ),
 };

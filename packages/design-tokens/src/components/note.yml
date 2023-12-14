@@ -1,4 +1,4 @@
-banner:
+note:
   padding:
     value: "{size-px.m}"
   border-radius:

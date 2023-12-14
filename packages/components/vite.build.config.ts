@@ -14,7 +14,7 @@ export default defineConfig(
           "./src/components/RadioGroup/RadioGroup.tsx",
           "./src/components/Label/Label.tsx",
           "./src/components/Heading/Heading.tsx",
-          "./src/components/Banner/Banner.tsx",
+          "./src/components/Note/Note.tsx",
         ],
         formats: ["es"],
       },
