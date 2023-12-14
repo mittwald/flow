@@ -26,9 +26,14 @@ export const Banner: FC<BannerProps> = (props) => {
 
   const rootClassName = clsx(className, styles.root, styles[variant]);
 
+  // ToDo: Labels übersetzen?
+  const iconAriaLabel =
+    variant === "info" ? "Info" : variant === "warning" ? "Warning" : "Error";
+
   const propsContext: PropsContext = {
     icon: {
       className: styles.customIcon,
+      "aria-label": iconAriaLabel,
     },
     heading: {
       className: styles.heading,
@@ -39,18 +44,14 @@ export const Banner: FC<BannerProps> = (props) => {
     },
   };
 
-  // ToDo: Labels übersetzen?
-  const iconAriaLabel =
-    variant === "info" ? "Info" : variant === "warning" ? "Warning" : "Error";
-
-  const icon = variant === "info" ? faInfoCircle : faExclamationCircle;
+  const defaultIcon = variant === "info" ? faInfoCircle : faExclamationCircle;
 
   return (
     <aside {...rest} className={rootClassName}>
       <Icon
         className={styles.defaultIcon}
         aria-label={iconAriaLabel}
-        faIcon={icon}
+        faIcon={defaultIcon}
       />
       <PropsContextProvider props={propsContext}>
         {children}

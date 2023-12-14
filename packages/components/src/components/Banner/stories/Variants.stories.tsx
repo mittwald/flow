@@ -29,7 +29,7 @@ export const Info: Story = {
 
 export const Warning: Story = {
   args: {
-    severity: "warning",
+    variant: "warning",
     children: (
       <>
         <Heading>Storage is almost exceeded</Heading>
@@ -44,7 +44,7 @@ export const Warning: Story = {
 
 export const Danger: Story = {
   args: {
-    severity: "danger",
+    variant: "negative",
     children: (
       <>
         <Heading>No SSL certificate could be issued</Heading>
