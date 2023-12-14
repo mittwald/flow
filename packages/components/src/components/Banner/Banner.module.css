@@ -65,7 +65,7 @@
   }
 }
 
-.danger {
+.negative {
   border-color: var(--banner--danger-border-color);
   .heading,
   .customIcon,
