@@ -1,4 +1,10 @@
-import React, { FC, PropsWithChildren, SVGAttributes, useMemo } from "react";
+import React, {
+  FC,
+  HTMLAttributes,
+  PropsWithChildren,
+  SVGAttributes,
+  useMemo,
+} from "react";
 import styles from "./Icon.module.css";
 import { IconLookup } from "@fortawesome/fontawesome-svg-core";
 import {
@@ -29,15 +35,27 @@ export const Icon: FC<IconProps> = (props) => {
 
   const iconProps: SvgAttributeProps = {
     ...svgAttributes,
-    className: clsx(classNameFromProps, styles.root),
+    className: styles.icon,
     focusable: "false",
     role: "img",
     "aria-hidden": !ariaLabel,
     "aria-label": ariaLabel,
   };
 
+  /**
+   * Icon is wrapped inside span, so it always behaves as an inline element
+   * (line-height is applied), even if used in flex/grid layouts.
+   */
+  const spanProps: HTMLAttributes<HTMLSpanElement> = {
+    className: clsx(classNameFromProps, styles.root),
+  };
+
   if (faIcon) {
-    return <FontAwesomeIcon icon={faIcon} {...iconProps} />;
+    return (
+      <span {...spanProps}>
+        <FontAwesomeIcon icon={faIcon} {...iconProps} />
+      </span>
+    );
   }
 
   const isCustomSvgString = typeof children === "string";
@@ -55,7 +73,9 @@ export const Icon: FC<IconProps> = (props) => {
     );
   }
 
-  return React.cloneElement(iconElement, iconProps);
+  return (
+    <span {...spanProps}>{React.cloneElement(iconElement, iconProps)}</span>
+  );
 };
 
 export default Icon;
