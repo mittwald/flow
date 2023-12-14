@@ -46,7 +46,10 @@ radiogroup:
       value: "{neutral.color.500}"
     selected-disabled:
       value: "{neutral.color.600}"
+  icon-color:
+    default:
+      value: "{neutral.color.800}"
   label-font-weight-with-content-or-icon:
     value: "{font-weight.bold}"
-  label-font-weight-without-content-and-icon:
-    value: "{font-weight.normal}"
+  icon-size-without-content:
+    value: "{icon.size.xl}"

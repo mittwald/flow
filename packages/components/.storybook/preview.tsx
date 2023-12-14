@@ -9,6 +9,9 @@ const preview: Preview = {
       </div>
     ),
   ],
+  globalTypes: {
+    rtlDirection: {},
+  },
   parameters: {
     actions: { argTypesRegex: "^on[A-Z].*" },
     controls: {

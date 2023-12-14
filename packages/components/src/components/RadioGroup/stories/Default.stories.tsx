@@ -21,36 +21,40 @@ export const Default: Story = {
     children: (
       <>
         <Label>Role</Label>
-        <Radio value="admin">
-          <Text>Admin</Text>
-        </Radio>
-        <Radio value="member">
-          <Text>Member</Text>
-        </Radio>
-        <Radio value="accountant">
-          <Text>Accountant</Text>
-        </Radio>
+        <Radio value="admin">Admin</Radio>
+        <Radio value="member">Member</Radio>
+        <Radio value="accountant">Accountant</Radio>
       </>
     ),
   },
 };
 
-export const Disabled: Story = {
+export const RadioGroupDisabled: Story = {
   args: {
     defaultValue: "admin",
     isDisabled: true,
     children: (
       <>
         <Label>Role</Label>
-        <Radio value="admin">
-          <Text>Admin</Text>
+        <Radio value="admin">Admin</Radio>
+        <Radio value="member">Member</Radio>
+        <Radio value="accountant">Accountant</Radio>
+      </>
+    ),
+  },
+};
+
+export const RadioDisabled: Story = {
+  args: {
+    defaultValue: "admin",
+    children: (
+      <>
+        <Label>Role</Label>
+        <Radio value="admin">Admin</Radio>
+        <Radio value="member" isDisabled>
+          Member
         </Radio>
-        <Radio value="member">
-          <Text>Member</Text>
-        </Radio>
-        <Radio value="accountant">
-          <Text>Accountant</Text>
-        </Radio>
+        <Radio value="accountant">Accountant</Radio>
       </>
     ),
   },
