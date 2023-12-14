@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Heading from "../Heading";
+import React from "react";
 
 const meta: Meta<typeof Heading> = {
   title: "Heading",
@@ -12,13 +13,10 @@ const meta: Meta<typeof Heading> = {
     },
   },
   args: { level: 3 },
+  render: (props) => <Heading {...props}>Heading...</Heading>,
 };
 export default meta;
 
 type Story = StoryObj<typeof Heading>;
 
-export const Default: Story = {
-  args: {
-    children: "Heading",
-  },
-};
+export const Default: Story = {};
