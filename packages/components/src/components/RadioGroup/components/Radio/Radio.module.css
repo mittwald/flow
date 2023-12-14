@@ -1,10 +1,6 @@
 @import "@/styles";
 
 .root {
-  --icon-padding-top: calc(
-    (var(--size-rem--m) * var(--line-height--default) - var(--size-rem--m)) / 2
-  );
-
   border: var(--radiogroup--border-width) var(--radiogroup--border-style)
     var(--radiogroup--border-color--default);
   padding: var(--radiogroup--padding-y) var(--radiogroup--padding-x);
@@ -31,7 +27,6 @@
   .checkmark {
     grid-area: checkmark;
     display: none;
-    padding-top: var(--icon-padding-top);
   }
 
   /* Without icon and content */
@@ -92,8 +87,8 @@
       font-weight: var(--radiogroup--label-font-weight-with-content-or-icon);
     }
     .icon {
-      height: var(--radiogroup--icon-size-without-content);
-      width: var(--radiogroup--icon-size-without-content);
+      font-size: var(--icon--size--xl);
+      line-height: 0;
     }
   }
 
@@ -119,10 +114,6 @@
       "icon label"
       ".    content";
     grid-template-columns: auto 1fr;
-
-    .icon {
-      padding-top: var(--icon-padding-top);
-    }
   }
 
   /* States */
