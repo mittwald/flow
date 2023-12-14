@@ -17,12 +17,8 @@
   .defaultIcon {
     grid-area: icon;
     color: var(--note--info-heading-color);
-    width: var(--note--icon-size);
-    height: var(--note--icon-size);
-    padding-top: calc(
-      (var(--size-rem--m) * var(--line-height--default) - var(--icon--size--m)) /
-        2
-    );
+    font-size: var(--note--icon-size);
+    line-height: calc(var(--note--heading-font-size) * 1.5);
   }
 
   .heading {
