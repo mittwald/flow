@@ -4,13 +4,20 @@ import { faStar } from "@fortawesome/free-regular-svg-icons/faStar";
 import React from "react";
 import { Icon } from "@/components/Icon";
 import { Text } from "@/components/Text";
+import { action } from "@storybook/addon-actions";
 
 const meta: Meta<typeof Button> = {
   title: "Button",
   component: Button,
   args: {
-    children: "Button",
+    onPress: action("onPress"),
   },
+  argTypes: {
+    variant: {
+      control: "inline-radio",
+    },
+  },
+  render: (props) => <Button {...props}>Button</Button>,
 };
 
 export default meta;
@@ -26,19 +33,18 @@ export const Disabled: Story = {
 };
 
 export const WithIcon: Story = {
-  args: {
-    children: (
-      <>
-        <Icon faIcon={faStar} />
-        <Text>Add to favorites</Text>
-      </>
-    ),
-  },
+  render: (props) => (
+    <Button {...props}>
+      <Icon faIcon={faStar} />
+      <Text>Add to favorites</Text>
+    </Button>
+  ),
 };
 
 export const WithOnlyIcon: Story = {
-  args: {
-    "aria-label": "Add to favorites",
-    children: <Icon faIcon={faStar} />,
-  },
+  render: (props) => (
+    <Button {...props} aria-label="Add to favorites">
+      <Icon faIcon={faStar} />
+    </Button>
+  ),
 };

@@ -4,13 +4,12 @@ import Text from "../Text";
 const meta: Meta<typeof Text> = {
   title: "Text",
   component: Text,
+  args: {
+    children: "Text...",
+  },
 };
 export default meta;
 
 type Story = StoryObj<typeof Text>;
 
-export const Default: Story = {
-  args: {
-    children: "Text...",
-  },
-};
+export const Default: Story = {};

@@ -5,45 +5,37 @@ import { faStar } from "@fortawesome/free-regular-svg-icons/faStar";
 import { Icon } from "@/components/Icon";
 import { Text } from "@/components/Text";
 import { dummyText } from "@/lib/dummyText";
+import defaultMeta from "./Default.stories";
 
 const meta: Meta<typeof Button> = {
+  ...defaultMeta,
   title: "Button/Edge Cases",
-  component: Button,
-  args: {
-    children: "Button",
-  },
 };
 export default meta;
 
 type Story = StoryObj<typeof Button>;
 
 export const LongText: Story = {
-  args: {
-    children: dummyText.long,
-  },
+  render: (props) => <Button {...props}>{dummyText.long}</Button>,
 };
 
 export const WithBreak: Story = {
-  args: {
-    children: (
-      <>
-        Line 1
-        <br />
-        Line 2
-      </>
-    ),
-  },
+  render: (props) => (
+    <Button {...props}>
+      Line 1
+      <br />
+      Line 2
+    </Button>
+  ),
 };
 
 export const WithBreakAndIcon: Story = {
-  args: {
-    children: (
-      <>
-        <Icon faIcon={faStar} />
-        <Text>
-          Add to <br /> favorites
-        </Text>
-      </>
-    ),
-  },
+  render: (props) => (
+    <Button {...props}>
+      <Icon faIcon={faStar} />
+      <Text>
+        Add to <br /> favorites
+      </Text>
+    </Button>
+  ),
 };
