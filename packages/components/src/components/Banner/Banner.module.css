@@ -12,6 +12,7 @@
   grid-row-gap: var(--banner--text-to-text-spacing);
 
   /* Elements */
+
   .customIcon,
   .defaultIcon {
     grid-area: icon;
