@@ -11,14 +11,13 @@ const meta: Meta<typeof Text> = {
       defaultValue: "span",
     },
   },
-  args: { elementType: "span" },
+  args: {
+    elementType: "span",
+    children: "Text...",
+  },
 };
 export default meta;
 
 type Story = StoryObj<typeof Text>;
 
-export const Default: Story = {
-  args: {
-    children: "Text...",
-  },
-};
+export const Default: Story = {};

@@ -6,68 +6,65 @@ import { Text } from "@/components/Text";
 import React from "react";
 import { Icon } from "@/components/Icon";
 import { dummyText } from "@/lib/dummyText";
+import defaultMeta from "./Default.stories";
 
 const meta: Meta<typeof RadioGroup> = {
   title: "RadioGroup/EdgeCases",
-  component: RadioGroup,
-  args: { defaultValue: "a" },
+  ...defaultMeta,
 };
+
 export default meta;
 
 type Story = StoryObj<typeof RadioGroup>;
 
 export const LongTexts: Story = {
-  args: {
-    "aria-label": "label",
-    children: (
-      <>
-        <Radio value="a">
-          <Icon faIcon={faStar} />
-          <Text>{dummyText.medium}</Text>
-          <Content>{dummyText.medium}</Content>
-        </Radio>
-        <Radio value="b">
-          <Icon faIcon={faStar} />
-          <Text>{dummyText.medium}</Text>
-          <Content>{dummyText.short}</Content>
-        </Radio>
-        <Radio value="c">
-          <Icon faIcon={faStar} />
-          <Text>{dummyText.short}</Text>
-          <Content>{dummyText.medium}</Content>
-        </Radio>
-      </>
-    ),
-  },
+  render: (props) => (
+    <RadioGroup {...props} defaultValue="a" aria-label="label">
+      <Radio value="a">
+        <Icon faIcon={faStar} />
+        <Text>{dummyText.medium}</Text>
+        <Content>{dummyText.medium}</Content>
+      </Radio>
+      <Radio value="b">
+        <Icon faIcon={faStar} />
+        <Text>{dummyText.medium}</Text>
+        <Content>{dummyText.short}</Content>
+      </Radio>
+      <Radio value="c">
+        <Icon faIcon={faStar} />
+        <Text>{dummyText.short}</Text>
+        <Content>{dummyText.medium}</Content>
+      </Radio>
+    </RadioGroup>
+  ),
 };
 
 export const MultipleElements: Story = {
-  args: {
-    "aria-label": "label",
-    defaultValue: "0",
-    children: Array(9)
-      .fill("")
-      .map((value, index) => (
-        <Radio value={index.toString()} key={index}>
-          <Icon faIcon={faStar} />
-          <Text>Option {index + 1}</Text>
-          <Content>{dummyText.medium}</Content>
-        </Radio>
-      )),
-  },
+  render: (props) => (
+    <RadioGroup {...props} defaultValue="0" aria-label="label">
+      {Array(9)
+        .fill("")
+        .map((value, index) => (
+          <Radio value={index.toString()} key={index}>
+            <Icon faIcon={faStar} />
+            <Text>Option {index + 1}</Text>
+            <Content>{dummyText.medium}</Content>
+          </Radio>
+        ))}
+    </RadioGroup>
+  ),
 };
 
 export const SmallSpace: Story = {
-  args: {
-    "aria-label": "label",
-    style: { width: "600px" },
-    defaultValue: "0",
-    children: Array(3)
-      .fill("")
-      .map((value, index) => (
-        <Radio value={index.toString()} key={index}>
-          <Text>Option {index + 1}</Text>
-        </Radio>
-      )),
-  },
+  render: (props) => (
+    <RadioGroup {...props} defaultValue="0" aria-label="label" style={{ width: "600px" }}>
+      {Array(3)
+        .fill("")
+        .map((value, index) => (
+          <Radio value={index.toString()} key={index}>
+            <Text>Option {index + 1}</Text>
+          </Radio>
+        ))}
+    </RadioGroup>
+  ),
 };

@@ -5955,6 +5955,7 @@ const RAW_RUNTIME_STATE =
           ["@nx/storybook", "npm:17.2.0"],\
           ["@react-aria/utils", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:3.22.0"],\
           ["@storybook/addon-a11y", "npm:7.6.4"],\
+          ["@storybook/addon-actions", "npm:7.6.4"],\
           ["@storybook/addon-essentials", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:7.6.4"],\
           ["@storybook/addon-interactions", "npm:7.6.4"],\
           ["@storybook/addon-links", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:7.6.4"],\
@@ -6011,6 +6012,7 @@ const RAW_RUNTIME_STATE =
           ["@nx/storybook", "npm:17.2.0"],\
           ["@react-aria/utils", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:3.22.0"],\
           ["@storybook/addon-a11y", "npm:7.6.4"],\
+          ["@storybook/addon-actions", "npm:7.6.4"],\
           ["@storybook/addon-essentials", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:7.6.4"],\
           ["@storybook/addon-interactions", "npm:7.6.4"],\
           ["@storybook/addon-links", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:7.6.4"],\
@@ -6061,6 +6063,7 @@ const RAW_RUNTIME_STATE =
           ["@nx/storybook", "npm:17.2.0"],\
           ["@react-aria/utils", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:3.22.0"],\
           ["@storybook/addon-a11y", "npm:7.6.4"],\
+          ["@storybook/addon-actions", "npm:7.6.4"],\
           ["@storybook/addon-essentials", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:7.6.4"],\
           ["@storybook/addon-interactions", "npm:7.6.4"],\
           ["@storybook/addon-links", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:7.6.4"],\

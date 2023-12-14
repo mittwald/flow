@@ -13,6 +13,7 @@ const config: StorybookConfig = {
     getAbsolutePath("@storybook/addon-interactions"),
     getAbsolutePath("@storybook/addon-a11y"),
     getAbsolutePath("storybook-addon-rtl-direction"),
+    getAbsolutePath("@storybook/addon-actions"),
   ],
   framework: {
     name: "@storybook/react-vite",
