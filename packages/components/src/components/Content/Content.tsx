@@ -14,14 +14,16 @@ export interface ContentProps
 }
 
 export const Content: FC<ContentProps> = (props) => {
-  const { children, className, elementType, ...rest } = useProps(
-    "content",
-    props,
-  );
+  const {
+    children,
+    className,
+    elementType = "div",
+    ...rest
+  } = useProps("content", props);
 
   const rootClassName = clsx(className, styles.root);
 
-  return createElement(elementType ?? "div", {
+  return createElement(elementType, {
     ...rest,
     className: rootClassName,
     children: <ClearPropsContext>{children}</ClearPropsContext>,

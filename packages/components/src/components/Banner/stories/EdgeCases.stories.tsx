@@ -8,6 +8,12 @@ import { dummyText } from "@/lib/dummyText";
 const meta: Meta<typeof Banner> = {
   title: "Banner/Edge Cases",
   component: Banner,
+  argTypes: {
+    variant: {
+      control: "inline-radio",
+    },
+  },
+  args: { variant: "info" },
 };
 
 export default meta;
@@ -15,12 +21,10 @@ export default meta;
 type Story = StoryObj<typeof Banner>;
 
 export const LongTexts: Story = {
-  args: {
-    children: (
-      <>
-        <Heading>{dummyText.medium}</Heading>
-        <Content>{dummyText.long}</Content>
-      </>
-    ),
-  },
+  render: (props) => (
+    <Banner {...props}>
+      <Heading>{dummyText.medium}</Heading>
+      <Content>{dummyText.long}</Content>
+    </Banner>
+  ),
 };

@@ -4,6 +4,13 @@ import Content from "../Content";
 const meta: Meta<typeof Content> = {
   title: "Content",
   component: Content,
+  argTypes: {
+    elementType: {
+      control: "inline-radio",
+      options: ["div", "section"],
+    },
+  },
+  args: { elementType: "div" },
 };
 export default meta;
 

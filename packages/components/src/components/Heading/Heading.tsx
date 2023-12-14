@@ -5,7 +5,7 @@ import { useProps } from "@/lib/propsContext";
 
 export interface HeadingProps
   extends PropsWithChildren<HTMLAttributes<HTMLHeadingElement>> {
-  level?: number;
+  level?: 1 | 2 | 3 | 4 | 5 | 6;
 }
 
 export const Heading: FC<HeadingProps> = (props) => {

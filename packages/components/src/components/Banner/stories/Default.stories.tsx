@@ -9,6 +9,12 @@ import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 const meta: Meta<typeof Banner> = {
   title: "Banner",
   component: Banner,
+  argTypes: {
+    variant: {
+      control: "inline-radio",
+    },
+  },
+  args: { variant: "info" },
 };
 
 export default meta;
@@ -16,36 +22,34 @@ export default meta;
 type Story = StoryObj<typeof Banner>;
 
 export const Default: Story = {
-  args: {
-    children: <Heading>Email address has been archived</Heading>,
-  },
+  render: (props) => (
+    <Banner {...props}>
+      <Heading>Email address has been archived</Heading>
+    </Banner>
+  ),
 };
 
 export const WithContent: Story = {
-  args: {
-    children: (
-      <>
-        <Heading>Email address has been archived</Heading>
-        <Content>
-          As your domain has been deleted, this email address has been archived.
-          To be able to send and receive emails, you must rename the address.
-        </Content>
-      </>
-    ),
-  },
+  render: (props) => (
+    <Banner {...props}>
+      <Heading>Email address has been archived</Heading>
+      <Content>
+        As your domain has been deleted, this email address has been archived.
+        To be able to send and receive emails, you must rename the address.
+      </Content>
+    </Banner>
+  ),
 };
 
 export const WithCustomIcon: Story = {
-  args: {
-    children: (
-      <>
-        <Icon faIcon={faEnvelope} />
-        <Heading>Email address has been archived</Heading>
-        <Content>
-          As your domain has been deleted, this email address has been archived.
-          To be able to send and receive emails, you must rename the address.
-        </Content>
-      </>
-    ),
-  },
+  render: (props) => (
+    <Banner {...props}>
+      <Icon faIcon={faEnvelope} />
+      <Heading>Email address has been archived</Heading>
+      <Content>
+        As your domain has been deleted, this email address has been archived.
+        To be able to send and receive emails, you must rename the address.
+      </Content>
+    </Banner>
+  ),
 };
