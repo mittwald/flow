@@ -18,6 +18,7 @@ type Story = StoryObj<typeof RadioGroup>;
 
 export const LongTexts: Story = {
   args: {
+    "aria-label": "label",
     children: (
       <>
         <Radio value="a">
@@ -42,11 +43,12 @@ export const LongTexts: Story = {
 
 export const MultipleElements: Story = {
   args: {
+    "aria-label": "label",
     defaultValue: "0",
     children: Array(9)
       .fill("")
       .map((value, index) => (
-        <Radio value={index.toString()}>
+        <Radio value={index.toString()} key={index}>
           <Icon faIcon={faStar} />
           <Text>Option {index + 1}</Text>
           <Content>{dummyText.medium}</Content>
@@ -57,12 +59,13 @@ export const MultipleElements: Story = {
 
 export const SmallSpace: Story = {
   args: {
+    "aria-label": "label",
     style: { width: "600px" },
     defaultValue: "0",
     children: Array(3)
       .fill("")
       .map((value, index) => (
-        <Radio value={index.toString()}>
+        <Radio value={index.toString()} key={index}>
           <Text>Option {index + 1}</Text>
         </Radio>
       )),
