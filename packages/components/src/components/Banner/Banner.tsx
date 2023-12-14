@@ -10,6 +10,14 @@ import { Icon } from "@/components/Icon";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons/faInfoCircle";
 import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
 
+// ToDo: alternative Namen
+//    Banner
+//    InfoBox
+//    InfoCard
+//    NoteCard
+//    Note
+//    CallOut
+
 // ToDo: warning oder notice?
 export interface BannerProps
   extends PropsWithChildren<HTMLAttributes<HTMLElement>> {
