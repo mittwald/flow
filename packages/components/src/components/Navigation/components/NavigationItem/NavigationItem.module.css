@@ -1,0 +1,39 @@
+@import "../../../../styles/index.css";
+
+.root {
+}
+
+.link {
+  display: flex;
+  flex-direction: row;
+
+  border: none;
+  border-radius: var(--navigation-item--border-radius);
+  background-color: var(--navigation-item--background-color--default);
+  padding: var(--navigation-item--padding-y) var(--navigation-item--padding-x);
+
+  cursor: default;
+
+  color: var(--navigation-item--color--default);
+  text-decoration: none;
+  font-size: var(--navigation-item--font-size);
+
+  &:focus {
+    background-color: var(--navigation-item--background-color--hover);
+  }
+
+  &[aria-current="page"] {
+    background-color: var(--navigation-item--background-color--current);
+    font-weight: var(--navigation-item--font-weight--current);
+    color: var(--navigation-item--color--current);
+  }
+}
+
+.link :global(.flow-icon) {
+  order: 0;
+}
+
+.link > :global(.flow-text) {
+  margin-inline-start: var(--navigation-item--icon-to-text-spacing);
+  order: 1;
+}

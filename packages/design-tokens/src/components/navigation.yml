@@ -1,0 +1,39 @@
+navigation:
+  item-to-item-spacing:
+    value: "{size-px.s}"
+
+navigation-item:
+  font-weight:
+    current:
+      value: "{font-weight.bold}"
+  font-size:
+    value: "{size-rem.l}"
+  border-radius:
+    value: "{size-px.xs}"
+  padding-x:
+    value: "{size-px.m}"
+  padding-y:
+    value: "{size-px.s}"
+  icon-to-text-spacing:
+    value: 1em
+  color:
+    default:
+      value: "{informative.color.1000}"
+    current:
+      value: "{informative.color.800}"
+  icon-size:
+    value: "{icon.size.m}"
+
+  background-color:
+    default:
+      value: "{color.transparent}"
+    hover:
+      value: "{informative.color.100}"
+    current:
+      value: "{informative.color.100}"
+
+  # Disabled
+  disabled-background-color:
+    value: "{neutral.color.400}"
+  disabled-color:
+    value: "{color.white}"

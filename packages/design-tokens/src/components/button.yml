@@ -1,8 +1,4 @@
 button:
-  font-size:
-    value: "{size-rem.m}"
-  line-height:
-    value: "{line-height.default}"
   border-radius:
     value: "{size-px.xs}"
   padding-x:
