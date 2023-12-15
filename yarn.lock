@@ -3133,7 +3133,9 @@ __metadata:
     "@types/react": "npm:^18.2.42"
     "@types/react-dom": "npm:^18.2.17"
     "@types/rollup": "npm:^0.54.0"
+    "@yarnpkg/pnpify": "npm:^4.0.1"
     clsx: "npm:^2.0.0"
+    glob: "npm:^10.3.10"
     html-react-parser: "npm:^5.0.7"
     jest: "npm:^29.7.0"
     jest-environment-jsdom: "npm:^29.7.0"
@@ -3144,6 +3146,7 @@ __metadata:
     react: "npm:^18.2.0"
     react-aria: "npm:^3.30.0"
     react-aria-components: "npm:^1.0.0-rc.0"
+    react-docgen-typescript: "npm:^2.2.2"
     react-dom: "npm:^18.2.0"
     react-element-to-jsx-string: "npm:^15.0.0"
     react-stately: "npm:^3.28.0"
@@ -3152,6 +3155,7 @@ __metadata:
     storybook: "npm:^7.6.4"
     storybook-addon-rtl-direction: "npm:^0.0.19"
     ts-jest: "npm:^29.1.1"
+    ts-node: "npm:^10.9.2"
     typescript: "npm:^5.3.2"
     typescript-plugin-css-modules: "npm:^5.0.2"
     vite: "npm:^5.0.6"
@@ -3181,6 +3185,7 @@ __metadata:
     "@mittwald/flow-components": "workspace:*"
     "@mittwald/flow-stylesheet": "workspace:*"
     "@next/mdx": "npm:^14.0.3"
+    "@types/lodash": "npm:^4"
     "@types/mdx": "npm:^2.0.10"
     "@types/node": "npm:^20.10.3"
     "@types/react": "npm:^18.2.42"
@@ -3191,10 +3196,12 @@ __metadata:
     eslint: "npm:^8.55.0"
     eslint-config-next: "npm:14.0.4"
     glob: "npm:^10.3.10"
+    lodash: "npm:^4.17.21"
     next: "npm:14.0.3"
     parse-es-import: "npm:^0.6.0"
     raw-loader: "npm:^4.0.2"
     react: "npm:^18.2.0"
+    react-docgen-typescript: "npm:^2.2.2"
     react-dom: "npm:^18.2.0"
     react-live: "npm:^4.1.5"
     ts-node: "npm:^10.9.1"
@@ -3236,6 +3243,8 @@ __metadata:
     "@react-types/shared":
       unplugged: true
     "@types/react":
+      unplugged: true
+    "@yarnpkg/pnpify@4.0.1":
       unplugged: true
     react-aria-components:
       unplugged: true
@@ -7867,6 +7876,13 @@ __metadata:
   dependencies:
     "@types/node": "npm:*"
   checksum: ff8f54fc49621210291f815fe5b15d809fd7d032941b3180743440bd507ecdf08b9e844625fa346af568c84bf34114eb378dcdc3e921a08ba1e2a08d7e3c809c
+  languageName: node
+  linkType: hard
+
+"@types/lodash@npm:^4":
+  version: 4.14.202
+  resolution: "@types/lodash@npm:4.14.202"
+  checksum: 6064d43c8f454170841bd67c8266cc9069d9e570a72ca63f06bceb484cb4a3ee60c9c1f305c1b9e3a87826049fd41124b8ef265c4dd08b00f6766609c7fe9973
   languageName: node
   linkType: hard
 
@@ -21211,7 +21227,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-node@npm:^10.9.1":
+"ts-node@npm:^10.9.1, ts-node@npm:^10.9.2":
   version: 10.9.2
   resolution: "ts-node@npm:10.9.2"
   dependencies:
