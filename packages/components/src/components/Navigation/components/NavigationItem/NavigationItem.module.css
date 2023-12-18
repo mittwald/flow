@@ -14,8 +14,6 @@
 
   cursor: default;
 
-  text-decoration: none;
-
   &:focus {
     background-color: var(--navigation-item--background-color--hover);
   }
