@@ -46,7 +46,7 @@ const RAW_RUNTIME_STATE =
       [null, {\
         "packageLocation": "./",\
         "packageDependencies": [\
-          ["@eslint/js", "npm:8.55.0"],\
+          ["@eslint/js", "npm:8.56.0"],\
           ["@types/eslint__js", "npm:8.42.3"],\
           ["@typescript-eslint/eslint-plugin", "virtual:293d93f0dab39a9cb110260f7247420c230cdd19f40de541518b0c0bf8cd4537ab2d1f6cc813f83c1428d6fb37d8de496941cc588e7a64bfbcb303780e1f6334#npm:6.13.2"],\
           ["@typescript-eslint/parser", "virtual:293d93f0dab39a9cb110260f7247420c230cdd19f40de541518b0c0bf8cd4537ab2d1f6cc813f83c1428d6fb37d8de496941cc588e7a64bfbcb303780e1f6334#npm:6.13.2"],\
@@ -4970,6 +4970,13 @@ const RAW_RUNTIME_STATE =
           ["@eslint/js", "npm:8.55.0"]\
         ],\
         "linkType": "HARD"\
+      }],\
+      ["npm:8.56.0", {\
+        "packageLocation": "./.yarn/cache/@eslint-js-npm-8.56.0-b1de08cbff-60b3a1cf24.zip/node_modules/@eslint/js/",\
+        "packageDependencies": [\
+          ["@eslint/js", "npm:8.56.0"]\
+        ],\
+        "linkType": "HARD"\
       }]\
     ]],\
     ["@fal-works/esbuild-plugin-global-externals", [\
@@ -6139,7 +6146,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["@mittwald/flow-next-project", "workspace:."],\
-          ["@eslint/js", "npm:8.55.0"],\
+          ["@eslint/js", "npm:8.56.0"],\
           ["@types/eslint__js", "npm:8.42.3"],\
           ["@typescript-eslint/eslint-plugin", "virtual:293d93f0dab39a9cb110260f7247420c230cdd19f40de541518b0c0bf8cd4537ab2d1f6cc813f83c1428d6fb37d8de496941cc588e7a64bfbcb303780e1f6334#npm:6.13.2"],\
           ["@typescript-eslint/parser", "virtual:293d93f0dab39a9cb110260f7247420c230cdd19f40de541518b0c0bf8cd4537ab2d1f6cc813f83c1428d6fb37d8de496941cc588e7a64bfbcb303780e1f6334#npm:6.13.2"],\
