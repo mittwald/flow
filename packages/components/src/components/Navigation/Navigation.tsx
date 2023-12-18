@@ -26,7 +26,7 @@ export const Navigation: FC<NavigationProps> = (props) => {
 
   return (
     <nav {...desiredMenuProps} className={className} ref={ref}>
-      <ul>
+      <ul className={styles.list}>
         {Array.from(state.collection).map((item) => (
           <NavigationItemNodeFactory state={state} item={item} key={item.key} />
         ))}
