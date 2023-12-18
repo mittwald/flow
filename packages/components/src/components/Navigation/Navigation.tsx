@@ -1,10 +1,10 @@
-import * as R from "remeda";
 import React, { FC } from "react";
 import styles from "./Navigation.module.css";
 import clsx from "clsx";
-import { AriaMenuProps, useMenu } from "react-aria";
+import { AriaMenuProps } from "react-aria";
 import { useTreeState } from "react-stately";
 import { NavigationItemNodeFactory } from "./components/NavigationItem";
+import { useNavigation } from "@/hooks/useNavigation";
 
 export interface NavigationProps
   extends Pick<
@@ -20,12 +20,10 @@ export const Navigation: FC<NavigationProps> = (props) => {
   const className = clsx(classNameFromProps, styles.root);
   const state = useTreeState(props);
   const ref = React.useRef<HTMLElement>(null);
-  const { menuProps } = useMenu(props, state, ref);
-
-  const correctedMenuProps = R.omit(menuProps, ["role"]);
+  const { menuProps } = useNavigation(props, state, ref);
 
   return (
-    <nav {...correctedMenuProps} className={className} ref={ref}>
+    <nav {...menuProps} className={className} ref={ref}>
       <ul className={styles.list}>
         {Array.from(state.collection).map((item) => (
           <NavigationItemNodeFactory state={state} item={item} key={item.key} />
