@@ -1,28 +1,29 @@
 navigation:
   item-to-item-spacing:
-    value: "{size-px.s}"
+    value: "{size-px.xs}"
 
 navigation-item:
   font-weight:
     current:
       value: "{font-weight.bold}"
-  font-size:
-    value: "{size-rem.l}"
   border-radius:
     value: "{size-px.xs}"
   padding-x:
-    value: "{size-px.m}"
+    value: "{size-px.s}"
   padding-y:
     value: "{size-px.s}"
   icon-to-text-spacing:
-    value: 1em
+    value: 0.5em
   color:
-    default:
-      value: "{informative.color.1000}"
     current:
       value: "{informative.color.800}"
   icon-size:
-    value: "{icon.size.m}"
+    value: "{icon.size.s}"
+  icon-color:
+    default:
+      value: "{neutral.color.800}"
+    current:
+      value: "{informative.color.800}"
 
   background-color:
     default:

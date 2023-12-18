@@ -14,9 +14,7 @@
 
   cursor: default;
 
-  color: var(--navigation-item--color--default);
   text-decoration: none;
-  font-size: var(--navigation-item--font-size);
 
   &:focus {
     background-color: var(--navigation-item--background-color--hover);
@@ -31,6 +29,11 @@
 
 .icon {
   order: 0;
+
+  color: var(--navigation-item--icon-color--default);
+  .link[aria-current="page"] & {
+    color: var(--navigation-item--icon-color--current);
+  }
 }
 
 .text {
