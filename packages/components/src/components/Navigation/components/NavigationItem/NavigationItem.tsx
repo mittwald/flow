@@ -1,28 +1,19 @@
-import React, { ComponentType, FC } from "react";
-import { Item, ItemProps, TreeState } from "react-stately";
+import React, { FC } from "react";
+import { TreeState } from "react-stately";
 import { Node } from "@react-types/shared";
 import styles from "./NavigationItem.module.css";
 import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { useNavigationItem } from "@/hooks/useNavigationItem";
+import { NavigationCollectionItemProps } from "@/components/Navigation/components/NavigationItem/NavigationCollectionItem";
 
-interface AdditionalProps {
-  isCurrent?: boolean;
-}
-
-export interface NavigationItemProps<T = never>
-  extends ItemProps<T>,
-    AdditionalProps {}
-
-interface NavigationItemNodeFactoryProps<T = never> {
+interface NavigationItemProps<T = never> {
   state: TreeState<T>;
   item: Node<T>;
 }
 
-export const NavigationItemNodeFactory: FC<NavigationItemNodeFactoryProps> = (
-  props,
-) => {
+export const NavigationItem: FC<NavigationItemProps> = (props) => {
   const { item, state } = props;
-  const { isCurrent } = item.props as AdditionalProps;
+  const { isCurrent } = item.props as NavigationCollectionItemProps;
 
   const ref = React.useRef(null);
   const { menuItemProps } = useNavigationItem({ key: item.key }, state, ref);
@@ -51,5 +42,3 @@ export const NavigationItemNodeFactory: FC<NavigationItemNodeFactoryProps> = (
     </li>
   );
 };
-
-export const NavigationItem = Item as ComponentType<NavigationItemProps>;

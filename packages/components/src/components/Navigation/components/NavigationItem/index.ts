@@ -1,5 +1,5 @@
 export {
-  NavigationItem,
-  NavigationItemNodeFactory,
-  type NavigationItemProps,
-} from "./NavigationItem";
+  NavigationCollectionItem,
+  type NavigationCollectionItemProps,
+} from "./NavigationCollectionItem";
+export { NavigationItem } from "./NavigationItem";

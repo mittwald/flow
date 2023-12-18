@@ -3,7 +3,7 @@ import styles from "./Navigation.module.css";
 import clsx from "clsx";
 import { AriaMenuProps } from "react-aria";
 import { useTreeState } from "react-stately";
-import { NavigationItemNodeFactory } from "./components/NavigationItem";
+import { NavigationItem } from "./components/NavigationItem";
 import { useNavigation } from "@/hooks/useNavigation";
 
 export interface NavigationProps extends AriaMenuProps<never> {
@@ -22,7 +22,7 @@ export const Navigation: FC<NavigationProps> = (props) => {
     <nav {...menuProps} className={className} ref={ref}>
       <ul className={styles.list}>
         {Array.from(state.collection).map((item) => (
-          <NavigationItemNodeFactory state={state} item={item} key={item.key} />
+          <NavigationItem state={state} item={item} key={item.key} />
         ))}
       </ul>
     </nav>
