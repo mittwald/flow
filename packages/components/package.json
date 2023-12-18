@@ -21,7 +21,8 @@
     "dev": "run storybook:start",
     "storybook:build": "run storybook build",
     "storybook:start": "run storybook dev -p 6006",
-    "test": "run jest"
+    "test": "run jest",
+    "test:tsc": "tsc --noEmit"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
