@@ -22,10 +22,10 @@ export const Navigation: FC<NavigationProps> = (props) => {
   const ref = React.useRef<HTMLElement>(null);
   const { menuProps } = useMenu(props, state, ref);
 
-  const desiredMenuProps = R.omit(menuProps, ["role"]);
+  const correctedMenuProps = R.omit(menuProps, ["role"]);
 
   return (
-    <nav {...desiredMenuProps} className={className} ref={ref}>
+    <nav {...correctedMenuProps} className={className} ref={ref}>
       <ul className={styles.list}>
         {Array.from(state.collection).map((item) => (
           <NavigationItemNodeFactory state={state} item={item} key={item.key} />
