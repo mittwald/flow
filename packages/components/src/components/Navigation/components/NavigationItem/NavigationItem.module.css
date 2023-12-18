@@ -29,11 +29,11 @@
   }
 }
 
-.link :global(.flow-icon) {
+.icon {
   order: 0;
 }
 
-.link > :global(.flow-text) {
+.text {
   margin-inline-start: var(--navigation-item--icon-to-text-spacing);
   order: 1;
 }

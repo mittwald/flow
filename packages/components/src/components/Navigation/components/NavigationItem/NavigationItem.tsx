@@ -4,6 +4,7 @@ import * as R from "remeda";
 import { Node } from "@react-types/shared";
 import styles from "./NavigationItem.module.css";
 import { useMenuItem } from "react-aria";
+import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
 
 interface AdditionalProps {
   isCurrent?: boolean;
@@ -29,6 +30,15 @@ export const NavigationItemNodeFactory: FC<NavigationItemNodeFactoryProps> = (
 
   const correctedMenuItemProps = R.omit(menuItemProps, ["role"]);
 
+  const propsContext: PropsContext = {
+    text: {
+      className: styles.text,
+    },
+    icon: {
+      className: styles.icon,
+    },
+  };
+
   return (
     <li className={styles.root}>
       <a
@@ -37,7 +47,9 @@ export const NavigationItemNodeFactory: FC<NavigationItemNodeFactoryProps> = (
         className={styles.link}
         aria-current={isCurrent ? "page" : false}
       >
-        {item.rendered}
+        <PropsContextProvider props={propsContext}>
+          {item.rendered}
+        </PropsContextProvider>
       </a>
     </li>
   );
