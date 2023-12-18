@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import styles from "./Navigation.module.css";
 import clsx from "clsx";
 import { AriaMenuProps } from "react-aria";
