@@ -6,11 +6,7 @@ import { useTreeState } from "react-stately";
 import { NavigationItemNodeFactory } from "./components/NavigationItem";
 import { useNavigation } from "@/hooks/useNavigation";
 
-export interface NavigationProps
-  extends Pick<
-    AriaMenuProps<never>,
-    "children" | "disabledKeys" | "aria-label" | "aria-labelledby"
-  > {
+export interface NavigationProps extends AriaMenuProps<never> {
   className?: string;
 }
 
