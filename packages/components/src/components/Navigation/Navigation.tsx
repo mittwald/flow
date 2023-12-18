@@ -6,11 +6,11 @@ import { useTreeState } from "react-stately";
 import { NavigationItem } from "./components/NavigationItem";
 import { useNavigation } from "@/hooks/useNavigation";
 
-export interface NavigationProps extends AriaMenuProps<never> {
+export interface NavigationProps<T = never> extends AriaMenuProps<T> {
   className?: string;
 }
 
-export const Navigation: FC<NavigationProps> = (props) => {
+export function Navigation<T extends object>(props: NavigationProps<T>) {
   const { className: classNameFromProps } = props;
 
   const className = clsx(classNameFromProps, styles.root);
@@ -27,6 +27,6 @@ export const Navigation: FC<NavigationProps> = (props) => {
       </ul>
     </nav>
   );
-};
+}
 
 export default Navigation;

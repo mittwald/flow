@@ -11,7 +11,9 @@ interface NavigationItemProps<T = never> {
   item: Node<T>;
 }
 
-export const NavigationItem: FC<NavigationItemProps> = (props) => {
+export function NavigationItem<T extends object>(
+  props: NavigationItemProps<T>,
+) {
   const { item, state } = props;
   const { isCurrent } = item.props as NavigationCollectionItemProps;
 
@@ -41,4 +43,4 @@ export const NavigationItem: FC<NavigationItemProps> = (props) => {
       </a>
     </li>
   );
-};
+}
