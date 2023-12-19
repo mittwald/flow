@@ -20,13 +20,11 @@ const weights: { [key: string]: number } = {
 
 export const PropertiesTable: React.FC<PropertiesTableProps> = ({ name }) => {
   const docGen: ComponentDoc[][] = docGenFile;
-  console.log(docGen);
   const componentDocGens = docGen.find((doc) =>
     doc.some(
       (singleDoc) => singleDoc.displayName.toLowerCase() === name.toLowerCase(),
     ),
   );
-  console.log(componentDocGens);
 
   if (!componentDocGens) {
     return null;
@@ -53,8 +51,6 @@ export const PropertiesTable: React.FC<PropertiesTableProps> = ({ name }) => {
       return match[1];
     },
   );
-
-  console.log(properties);
 
   return (
     <div className={styles.root}>
