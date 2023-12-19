@@ -26,7 +26,6 @@ export const Info: Story = {
   ),
 };
 
-// ToDo: variant als arg?
 export const Warning: Story = {
   args: { variant: "warning" },
   render: (props) => (

@@ -9,16 +9,9 @@ import clsx from "clsx";
 import { Icon } from "@/components/Icon";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons/faInfoCircle";
 import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
+import locales from "./locales/*.locale.json";
+import { useLocalizedStringFormatter } from "react-aria";
 
-// ToDo: alternative Namen
-//    Banner
-//    InfoBox
-//    InfoCard
-//    NoteCard
-//    Note
-//    CallOut
-
-// ToDo: warning oder notice?
 export interface NoteProps
   extends PropsWithChildren<HTMLAttributes<HTMLElement>> {
   variant?: "info" | "warning" | "negative";
@@ -34,9 +27,9 @@ export const Note: FC<NoteProps> = (props) => {
 
   const rootClassName = clsx(className, styles.root, styles[variant]);
 
-  // ToDo: Labels übersetzen?
-  const iconAriaLabel =
-    variant === "info" ? "Info" : variant === "warning" ? "Warning" : "Error";
+  const iconAriaLabel = useLocalizedStringFormatter(locales).format(
+    `banner.${variant}`,
+  );
 
   const propsContext: PropsContext = {
     icon: {
