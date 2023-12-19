@@ -1,17 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Heading from "../Heading";
-import React from "react";
+import defaultMeta from "./Default.stories";
 
 const meta: Meta<typeof Heading> = {
+  ...defaultMeta,
   title: "Heading/Levels",
   component: Heading,
-  argTypes: {
-    level: {
-      control: "inline-radio",
-      options: [1, 2, 3, 4, 5, 6],
-    },
-  },
-  render: (props) => <Heading {...props}>Heading...</Heading>,
 };
 export default meta;
 
