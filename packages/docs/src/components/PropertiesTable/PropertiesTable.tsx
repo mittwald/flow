@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { ComponentDoc } from "react-docgen-typescript";
 import docGenFile from "@mittwald/flow-components/doc-properties";
 import _ from "lodash";
@@ -40,13 +40,13 @@ export const PropertiesTable: React.FC<PropertiesTableProps> = ({ name }) => {
     Object.entries(componentDocGen.props).sort(([_ignored, prop]) =>
       prop.required ? 1 : 0,
     ),
-    (it) => {
-      if (!it[1].parent) {
+    (item) => {
+      if (!item[1].parent) {
         return "Other";
       }
-      const match = nodeModuleRegex.exec(it[1].parent.fileName);
+      const match = nodeModuleRegex.exec(item[1].parent.fileName);
       if (!match) {
-        return componentRegex.exec(it[1].parent.fileName)?.[1] || "Other";
+        return componentRegex.exec(item[1].parent.fileName)?.[1] || "Other";
       }
       return match[1];
     },
@@ -67,12 +67,12 @@ export const PropertiesTable: React.FC<PropertiesTableProps> = ({ name }) => {
           if (key === "Other") return weights["other"];
           return weights[key] || weights["component"];
         }).map(([groupName, group]) => (
-          <>
+          <Fragment key={groupName}>
             <div className={styles.sectionHeadline}>
               <span>{groupName}</span>
             </div>
             {group.map(([, prop]) => (
-              <>
+              <Fragment key={prop.name}>
                 <span className={styles.col}>{prop.name}</span>
                 <span className={styles.col}>{prop.type.name}</span>
                 <span className={styles.col}>
@@ -84,9 +84,9 @@ export const PropertiesTable: React.FC<PropertiesTableProps> = ({ name }) => {
                 <span className={styles.col}>
                   {prop.description ? prop.description : "-"}
                 </span>
-              </>
+              </Fragment>
             ))}
-          </>
+          </Fragment>
         ))}
       </div>
     </div>
