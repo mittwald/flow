@@ -21,4 +21,4 @@ jobs:
       - if: github.ref != 'refs/heads/main'
         run: git branch --track main origin/main
       - run: yarn lint
-      - run: yarn nx affected -t test,build --parallel=3
+      - run: yarn nx affected -t test,test:tsc,build --parallel=3

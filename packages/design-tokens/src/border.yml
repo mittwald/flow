@@ -1,0 +1,9 @@
+border-radius:
+  default:
+    value: "{size-px.xs}"
+border-width:
+  default:
+    value: 1px
+border-style:
+  default:
+    value: "solid"

@@ -70,3 +70,20 @@
   background-color: var(--button--disabled-background-color);
   color: var(--button--disabled-color);
 }
+
+.icon {
+  order: 0;
+}
+
+.root:has(.icon) {
+  /* Apply line-height when empty */
+  &::after {
+    content: "\200B";
+    visibility: hidden;
+  }
+}
+
+.text {
+  order: 1;
+  margin-inline-start: var(--button--icon-to-text-spacing);
+}

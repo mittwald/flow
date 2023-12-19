@@ -1,1 +1,1 @@
-export * from "./Icon";
+export { type IconProps, Icon } from "./Icon";
