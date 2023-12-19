@@ -3114,6 +3114,7 @@ __metadata:
     "@mittwald/flow-design-tokens": "workspace:*"
     "@nx/storybook": "npm:^17.1.3"
     "@react-aria/utils": "npm:^3.22.0"
+    "@react-types/shared": "npm:^3.22.0"
     "@storybook/addon-a11y": "npm:^7.6.4"
     "@storybook/addon-actions": "npm:^7.6.4"
     "@storybook/addon-essentials": "npm:^7.6.4"
@@ -3142,6 +3143,8 @@ __metadata:
     react-aria-components: "npm:^1.0.0-rc.0"
     react-dom: "npm:^18.2.0"
     react-element-to-jsx-string: "npm:^15.0.0"
+    react-stately: "npm:^3.28.0"
+    remeda: "npm:^1.30.0"
     rollup: "npm:^4.6.1"
     storybook: "npm:^7.6.4"
     storybook-addon-rtl-direction: "npm:^0.0.19"
@@ -19479,6 +19482,13 @@ __metadata:
     mdast-util-to-string: "npm:^1.0.0"
     unist-util-visit: "npm:^2.0.0"
   checksum: 7cc2857936fce9c9c00b9c7d70de46d594cedf93bd8560fd006164dee7aacccdf472654ee35b33f4fb4bd0af882d89998c6d0c9088c2e95702a9fc15ebae002a
+  languageName: node
+  linkType: hard
+
+"remeda@npm:^1.30.0":
+  version: 1.30.0
+  resolution: "remeda@npm:1.30.0"
+  checksum: 469de08b0d335b2bc8e4f3c9e0d572b4b9a825b867b556e0891bf618374dd332c648b4e8407b23758a2acd136d5bb3eab7f0b8d347d98c5933994d78262c6a52
   languageName: node
   linkType: hard
 

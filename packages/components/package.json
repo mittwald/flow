@@ -7,6 +7,7 @@
     "./Icon": "./dist/Icon.js",
     "./Text": "./dist/Text.js",
     "./Label": "./dist/Label.js",
+    "./Navigation": "./dist/Navigation.js",
     "./style": "./dist/style.css",
     "./style/init": "./dist/index.js"
   },
@@ -29,10 +30,13 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@mittwald/flow-design-tokens": "workspace:*",
     "@react-aria/utils": "^3.22.0",
+    "@react-types/shared": "^3.22.0",
     "clsx": "^2.0.0",
     "html-react-parser": "^5.0.7",
     "react-aria": "^3.30.0",
-    "react-aria-components": "^1.0.0-rc.0"
+    "react-aria-components": "^1.0.0-rc.0",
+    "react-stately": "^3.28.0",
+    "remeda": "^1.30.0"
   },
   "devDependencies": {
     "@fortawesome/free-regular-svg-icons": "^6.5.1",
