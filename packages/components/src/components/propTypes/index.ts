@@ -7,7 +7,6 @@ import type {
   NavigationItemProps,
   NavigationProps,
 } from "@/components/Navigation";
-import { ContentProps } from "@/components/Content";
 import { NoteProps } from "@/components/Note";
 import { HeadingProps } from "@/components/Heading";
 
