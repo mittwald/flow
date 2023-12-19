@@ -3,7 +3,7 @@ import styles from "./Navigation.module.css";
 import clsx from "clsx";
 import { AriaMenuProps } from "react-aria";
 import { useTreeState } from "react-stately";
-import { NavigationItem } from "./components/NavigationItem";
+import { NavigationItem } from "./components/NavigationItem/NavigationItem";
 import { useNavigation } from "@/hooks/useNavigation";
 
 export interface NavigationProps<T = never> extends AriaMenuProps<T> {
