@@ -1,5 +1,6 @@
+import { NavigationCollectionItem as NavigationItem } from "./NavigationCollectionItem";
 export {
-  NavigationCollectionItem,
-  type NavigationCollectionItemProps,
+  NavigationCollectionItem as NavigationItem,
+  type NavigationCollectionItemProps as NavigationItemProps,
 } from "./NavigationCollectionItem";
-export { NavigationItem } from "./NavigationItem";
+export default NavigationItem;
