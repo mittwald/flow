@@ -145,3 +145,6 @@ color:
 
   white:
     value: rgb(255,255,255)
+
+  transparent:
+    value: transparent

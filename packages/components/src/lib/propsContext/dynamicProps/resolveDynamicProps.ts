@@ -6,7 +6,7 @@ export const resolveDynamicProps = <C extends FlowComponentName>(
   contextProps: ComponentPropsContext<C>,
   localProps: FlowComponentProps<C>,
 ): Partial<FlowComponentProps<C>> => {
-  const resolved: Partial<FlowComponentProps<C>> = {
+  const resolved = {
     ...contextProps,
   };
 
@@ -17,7 +17,7 @@ export const resolveDynamicProps = <C extends FlowComponentName>(
     }
   }
 
-  return resolved;
+  return resolved as Partial<FlowComponentProps<C>>;
 };
 
 export default resolveDynamicProps;
