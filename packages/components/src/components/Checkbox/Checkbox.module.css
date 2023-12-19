@@ -1,0 +1,89 @@
+@import "@/styles";
+
+.root {
+  border: var(--checkbox--border-width) var(--checkbox--border-style)
+    var(--checkbox--border-color--default);
+  border-radius: var(--checkbox--border-radius);
+  padding: var(--checkbox--padding-y) var(--checkbox--padding-x);
+  background-color: var(--checkbox--background-color--default);
+  color: var(--checkbox--color--default);
+  display: inline-grid;
+  row-gap: var(--checkbox--text-to-text-spacing);
+  column-gap: var(--checkbox--checkmark-to-text-spacing);
+
+  /* Elements */
+
+  .checked {
+    display: none;
+    grid-area: checkmark;
+  }
+
+  .unchecked {
+    grid-area: checkmark;
+    color: var(--checkbox--checkmark-color--default);
+  }
+
+  .label {
+    grid-area: label;
+  }
+
+  .content {
+    grid-area: content;
+  }
+
+  &[data-selected] {
+    border-color: var(--checkbox--border-color--selected);
+    background-color: var(--checkbox--background-color--selected);
+    color: var(--checkbox--color--selected);
+    z-index: 1;
+    .checked {
+      display: block;
+    }
+    .unchecked {
+      display: none;
+    }
+  }
+
+  /* Without content */
+
+  &:not(:has(.content)) {
+    grid-template-areas: "checkmark label";
+    grid-template-columns: auto 1fr;
+  }
+
+  /* With content */
+
+  &:has(.content) {
+    grid-template-areas:
+      "checkmark label"
+      ".         content";
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr;
+    justify-items: start;
+
+    .label {
+      font-weight: var(--checkbox--label-font-weight-with-content);
+    }
+  }
+
+  /* States */
+
+  &:hover {
+    background-color: var(--checkbox--background-color--hover);
+  }
+
+  &[data-disabled] {
+    border-color: var(--checkbox--border-color--disabled);
+    background-color: var(--checkbox--background-color--disabled);
+    color: var(--checkbox--color--disabled);
+    .unchecked {
+      color: var(--checkbox--checkmark-color--disabled);
+    }
+  }
+
+  &[data-disabled][data-selected] {
+    border-color: var(--checkbox--border-color--selected-disabled);
+    background-color: var(--checkbox--background-color--selected-disabled);
+    color: var(--checkbox--color--selected-disabled);
+  }
+}
