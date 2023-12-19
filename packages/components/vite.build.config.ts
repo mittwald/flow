@@ -8,13 +8,16 @@ export default defineConfig(
     build: {
       lib: {
         entry: {
-          Button: "./src/components/Button",
-          Content: "./src/components/Content",
-          Icon: "./src/components/Icon",
-          Label: "./src/components/Label",
-          Navigation: "./src/components/Navigation",
-          RadioGroup: "./src/components/RadioGroup",
-          Text: "./src/components/Text",
+          Button: "./src/components/Button/index.ts",
+          Content: "./src/components/Content/index.ts",
+          Icon: "./src/components/Icon/index.ts",
+          Label: "./src/components/Label/index.ts",
+          Navigation: "./src/components/Navigation/index.ts",
+          NavigationItem:
+            "./src/components/Navigation/components/NavigationItem/index.ts",
+          RadioGroup: "./src/components/RadioGroup/index.ts",
+          Radio: "./src/components/RadioGroup/components/Radio/index.ts",
+          Text: "./src/components/Text/index.ts",
         },
         formats: ["es"],
       },
