@@ -4,9 +4,7 @@
 }
 
 .list {
-  padding: 0;
   display: flex;
   flex-direction: column;
   row-gap: var(--navigation--item-to-item-spacing);
-  list-style-type: none;
 }
