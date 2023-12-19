@@ -7,13 +7,15 @@ export default defineConfig(
     plugins: [dts({ rollupTypes: true })],
     build: {
       lib: {
-        entry: [
-          "./src/components/Button/Button.tsx",
-          "./src/components/Icon/Icon.tsx",
-          "./src/components/Text/Text.tsx",
-          "./src/components/RadioGroup/RadioGroup.tsx",
-          "./src/components/Label/Label.tsx",
-        ],
+        entry: {
+          Button: "./src/components/Button",
+          Content: "./src/components/Content",
+          Icon: "./src/components/Icon",
+          Label: "./src/components/Label",
+          Navigation: "./src/components/Navigation",
+          RadioGroup: "./src/components/RadioGroup",
+          Text: "./src/components/Text",
+        },
         formats: ["es"],
       },
       rollupOptions: {
