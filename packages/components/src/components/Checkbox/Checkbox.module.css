@@ -16,10 +16,6 @@
   .checkmark {
     grid-area: checkmark;
     color: var(--checkbox--checkmark-color--default);
-
-    &:global(.selected) {
-      display: none;
-    }
   }
 
   .label {
@@ -62,13 +58,8 @@
     border-color: var(--checkbox--border-color--selected);
     background-color: var(--checkbox--background-color--selected);
     color: var(--checkbox--color--selected);
-    z-index: 1;
     .checkmark {
-      display: none;
       color: var(--checkbox--checkmark-color--selected);
-      &:global(.selected) {
-        display: block;
-      }
     }
   }
 
