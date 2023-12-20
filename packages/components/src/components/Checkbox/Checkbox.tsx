@@ -26,8 +26,11 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
 
   return (
     <Aria.Checkbox {...rest} className={rootClassName}>
-      <Icon className={styles.checked} faIcon={faCheckSquare} />
-      <Icon className={styles.unchecked} faIcon={faSquare} />
+      <Icon
+        className={clsx(styles.checkmark, "selected")}
+        faIcon={faCheckSquare}
+      />
+      <Icon className={styles.checkmark} faIcon={faSquare} />
       <PropsContextProvider props={propsContext}>
         {children}
       </PropsContextProvider>

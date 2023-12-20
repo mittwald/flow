@@ -13,14 +13,13 @@
 
   /* Elements */
 
-  .checked {
-    display: none;
-    grid-area: checkmark;
-  }
-
-  .unchecked {
+  .checkmark {
     grid-area: checkmark;
     color: var(--checkbox--checkmark-color--default);
+
+    &:global(.selected) {
+      display: none;
+    }
   }
 
   .label {
@@ -29,19 +28,6 @@
 
   .content {
     grid-area: content;
-  }
-
-  &[data-selected] {
-    border-color: var(--checkbox--border-color--selected);
-    background-color: var(--checkbox--background-color--selected);
-    color: var(--checkbox--color--selected);
-    z-index: 1;
-    .checked {
-      display: block;
-    }
-    .unchecked {
-      display: none;
-    }
   }
 
   /* Without content */
@@ -72,11 +58,25 @@
     background-color: var(--checkbox--background-color--hover);
   }
 
+  &[data-selected] {
+    border-color: var(--checkbox--border-color--selected);
+    background-color: var(--checkbox--background-color--selected);
+    color: var(--checkbox--color--selected);
+    z-index: 1;
+    .checkmark {
+      display: none;
+      color: var(--checkbox--checkmark-color--selected);
+      &:global(.selected) {
+        display: block;
+      }
+    }
+  }
+
   &[data-disabled] {
     border-color: var(--checkbox--border-color--disabled);
     background-color: var(--checkbox--background-color--disabled);
     color: var(--checkbox--color--disabled);
-    .unchecked {
+    .checkmark {
       color: var(--checkbox--checkmark-color--disabled);
     }
   }
@@ -85,5 +85,8 @@
     border-color: var(--checkbox--border-color--selected-disabled);
     background-color: var(--checkbox--background-color--selected-disabled);
     color: var(--checkbox--color--selected-disabled);
+    .checkmark {
+      color: var(--checkbox--checkmark-color--selected-disabled);
+    }
   }
 }

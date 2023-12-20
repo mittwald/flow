@@ -11,7 +11,7 @@ const meta: Meta<typeof Checkbox> = {
   args: {
     onChange: action("onChange"),
   },
-  render: (props) => <Checkbox {...props}>checkbox</Checkbox>,
+  render: (props) => <Checkbox {...props}>Activate spam protection</Checkbox>,
 };
 
 export default meta;
@@ -23,14 +23,17 @@ export const Default: Story = {};
 export const Disabled: Story = { args: { isDisabled: true } };
 
 export const DisabledSelected: Story = {
-  args: { isDisabled: true, defaultSelected: true },
+  args: { isDisabled: true, isSelected: true },
 };
 
 export const WithContent: Story = {
   render: (props) => (
     <Checkbox {...props}>
-      <Text>checkbox</Text>
-      <Content>checkbox content</Content>
+      <Text>Terms and conditions</Text>
+      <Content>
+        I agree to the validity of the GTC and have taken note of the data
+        protection conditions.
+      </Content>
     </Checkbox>
   ),
 };
