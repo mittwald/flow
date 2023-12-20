@@ -68,6 +68,9 @@
     "@types/react": {
       "unplugged": true
     },
+    "@yarnpkg/pnpify@4.0.1": {
+      "unplugged": true
+    },
     "react-aria-components": {
       "unplugged": true
     },
