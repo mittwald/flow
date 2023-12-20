@@ -1,0 +1,18 @@
+.root {
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 200px;
+  grid-template-rows: 100vh;
+
+  .menu {
+    padding: 10px;
+    grid-area: 1/1/2/2;
+  }
+
+  .content {
+    grid-area: 1/2/2/3;
+    padding: 15px;
+  }
+}
