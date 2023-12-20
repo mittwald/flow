@@ -3,7 +3,7 @@ import fs from "node:fs";
 import { glob } from "glob";
 import * as path from "node:path";
 import { Literal } from "acorn";
-import { extractRawImports } from "@/lib/extractImports";
+import { extractRawImports } from "../src/lib/extractImports.js";
 
 interface ImportDefinition {
   names: string[];
