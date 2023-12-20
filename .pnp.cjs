@@ -6134,6 +6134,7 @@ const RAW_RUNTIME_STATE =
           ["@yarnpkg/pnpify", "npm:4.0.1"],\
           ["acorn", "patch:acorn@npm%3A8.11.2#~/.yarn/patches/acorn-npm-8.11.2-a470f49bb6.patch::version=8.11.2&hash=eac067"],\
           ["acorn-jsx", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:5.3.2"],\
+          ["clsx", "npm:2.0.0"],\
           ["eslint", "npm:8.55.0"],\
           ["eslint-config-next", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:14.0.3"],\
           ["glob", "npm:10.3.10"],\
@@ -6143,6 +6144,7 @@ const RAW_RUNTIME_STATE =
           ["react", "npm:18.2.0"],\
           ["react-dom", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:18.2.0"],\
           ["react-live", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:4.1.5"],\
+          ["remeda", "npm:1.31.0"],\
           ["ts-node", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:10.9.2"],\
           ["typescript", "patch:typescript@npm%3A5.3.2#optional!builtin<compat/typescript>::version=5.3.2&hash=e012d7"],\
           ["webpack", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:5.89.0"]\
@@ -27176,6 +27178,13 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/remeda-npm-1.30.0-2b4d646369-469de08b0d.zip/node_modules/remeda/",\
         "packageDependencies": [\
           ["remeda", "npm:1.30.0"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:1.31.0", {\
+        "packageLocation": "./.yarn/cache/remeda-npm-1.31.0-add81263bd-55c501a506.zip/node_modules/remeda/",\
+        "packageDependencies": [\
+          ["remeda", "npm:1.31.0"]\
         ],\
         "linkType": "HARD"\
       }]\
