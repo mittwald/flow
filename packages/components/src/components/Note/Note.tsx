@@ -28,7 +28,7 @@ export const Note: FC<NoteProps> = (props) => {
   const rootClassName = clsx(className, styles.root, styles[variant]);
 
   const iconAriaLabel = useLocalizedStringFormatter(locales).format(
-    `banner.${variant}`,
+    `note.${variant}`,
   );
 
   const propsContext: PropsContext = {

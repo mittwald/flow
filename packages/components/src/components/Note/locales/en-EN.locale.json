@@ -1,5 +1,5 @@
 {
-  "banner.info": "Information",
-  "banner.negative": "Error",
-  "banner.warning": "Warning"
+  "note.info": "Information",
+  "note.negative": "Error",
+  "note.warning": "Warning"
 }
