@@ -1,0 +1,36 @@
+text-field:
+  label-to-input-spacing:
+    value: "{size-px.xs}"
+  padding-x:
+    value: "{size-px.m}"
+  padding-y:
+    value: "{size-px.s}"
+  border-radius:
+    value: "{border-radius.default}"
+  border-width:
+    value: "{border-width.default}"
+  border-style:
+    value: "{border-style.default}"
+  border-color:
+    default:
+      value: "{neutral.color.400}"
+    disabled:
+      value: "{neutral.color.500}"
+    hover:
+      value: "{neutral.color.600}"
+    invalid:
+      value: "{negative.color.700}"
+  background-color:
+    default:
+      value: "{neutral.color.400}"
+    disabled:
+      value: "{neutral.color.500}"
+    hover:
+      value: "{neutral.color.500}"
+    focused:
+      value: "{color.white}"
+    invalid:
+      value: "{negative.color.100}"
+  color:
+    disabled:
+      value: "{neutral.color.800}"

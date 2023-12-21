@@ -1,0 +1,5 @@
+field-description:
+  font-size:
+    value: "{size-rem.s}"
+  color:
+    value: "{neutral.color.800}"

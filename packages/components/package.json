@@ -8,6 +8,9 @@
     "./Text": "./dist/Text.js",
     "./Label": "./dist/Label.js",
     "./Navigation": "./dist/Navigation.js",
+    "./TextField": "./dist/TextField.js",
+    "./FieldError": "./dist/FieldError.js",
+    "./FieldDescription": "./dist/FieldDescription.js",
     "./style": "./dist/style.css",
     "./style/init": "./dist/index.js"
   },

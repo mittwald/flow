@@ -3,4 +3,5 @@
   line-height: var(--line-height--default);
   font-size: var(--size-rem--m);
   font-weight: var(--font-weight--normal);
+  color: var(--color--default);
 }

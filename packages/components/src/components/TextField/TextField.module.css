@@ -1,0 +1,59 @@
+@import "@/styles";
+
+.root {
+  display: grid;
+  grid-template-areas:
+    "label"
+    "input"
+    "info";
+
+  /* Elements */
+
+  .label {
+    grid-area: label;
+    margin-bottom: var(--text-field--label-to-input-spacing);
+  }
+
+  .fieldError,
+  .fieldDescription {
+    grid-area: info;
+    margin-top: var(--text-field--label-to-input-spacing);
+  }
+
+  &:has(.fieldError) {
+    .fieldDescription {
+      display: none;
+    }
+  }
+
+  input {
+    grid-area: input;
+    border: var(--text-field--border-width) var(--text-field--border-style)
+      var(--text-field--border-color--default);
+    border-radius: var(--text-field--border-radius);
+    padding: var(--text-field--padding-y) var(--text-field--padding-x);
+    background-color: var(--text-field--background-color--default);
+  }
+
+  /* States */
+
+  input:hover {
+    background-color: var(--text-field--background-color--hover);
+    border-color: var(--text-field--border-color--hover);
+  }
+
+  input[data-invalid] {
+    background-color: var(--text-field--background-color--invalid);
+    border-color: var(--text-field--border-color--invalid);
+  }
+
+  input:focus {
+    background-color: var(--text-field--background-color--focused);
+  }
+
+  input:disabled {
+    background-color: var(--text-field--background-color--disabled);
+    border-color: var(--text-field--border-color--disabled);
+    color: var(--text-field--color--disabled);
+  }
+}

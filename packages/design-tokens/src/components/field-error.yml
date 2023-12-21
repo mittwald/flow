@@ -1,0 +1,5 @@
+field-error:
+  font-size:
+    value: "{size-rem.s}"
+  color:
+    value: "{negative.color.700}"
