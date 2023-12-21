@@ -129,6 +129,31 @@ negative:
     1100:
       value: "{color.amaranth-red.1100}"
 
+warning:
+  color:
+    100:
+      value: "{color.royal-orange.100}"
+    200:
+      value: "{color.royal-orange.200}"
+    300:
+      value: "{color.royal-orange.300}"
+    400:
+      value: "{color.royal-orange.400}"
+    500:
+      value: "{color.royal-orange.500}"
+    600:
+      value: "{color.royal-orange.600}"
+    700:
+      value: "{color.royal-orange.700}"
+    800:
+      value: "{color.royal-orange.800}"
+    900:
+      value: "{color.royal-orange.900}"
+    1000:
+      value: "{color.royal-orange.1000}"
+    1100:
+      value: "{color.royal-orange.1100}"
+
 interactive:
   quiet:
     background:
