@@ -3236,6 +3236,12 @@ __metadata:
       unplugged: true
     "@fortawesome/react-fontawesome":
       unplugged: true
+    "@react-stately/tree":
+      unplugged: true
+    "@react-types/menu":
+      unplugged: true
+    "@react-types/shared":
+      unplugged: true
     "@types/react":
       unplugged: true
     react-aria-components:

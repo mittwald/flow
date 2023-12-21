@@ -1,2 +1,4 @@
+import { RadioGroup } from "./RadioGroup";
 export { type RadioGroupProps, RadioGroup } from "./RadioGroup";
-export { type RadioProps, Radio } from "./components/Radio/Radio";
+export * from "./components/Radio";
+export default RadioGroup;
