@@ -10,14 +10,19 @@ import { Button } from "@/components/Button";
 const meta: Meta<typeof TextField> = {
   title: "TextField",
   component: TextField,
-  args: {
-    onChange: action("onChange"),
-  },
   render: (props) => (
-    <TextField {...props} defaultValue="John">
+    <TextField
+      {...props}
+      defaultValue="John"
+      isRequired
+      onChange={action("onChange")}
+    >
       <Label>First name</Label>
     </TextField>
   ),
+  parameters: {
+    controls: { exclude: ["errorMessage"] },
+  },
 };
 
 export default meta;
@@ -28,9 +33,17 @@ export const Default: Story = {};
 
 export const Disabled: Story = { args: { isDisabled: true } };
 
+export const Optional: Story = {
+  render: (props) => (
+    <TextField {...props} defaultValue="John">
+      <Label>First name</Label>
+    </TextField>
+  ),
+};
+
 export const WithFieldDescription: Story = {
   render: (props) => (
-    <TextField {...props} defaultValue="https://mittwald.de">
+    <TextField {...props} defaultValue="https://mittwald.de" isRequired>
       <Label>URL</Label>
       <FieldDescription>Start with "https://"</FieldDescription>
     </TextField>
@@ -44,6 +57,7 @@ export const Invalid: Story = {
       isInvalid
       errorMessage="Invalid input"
       defaultValue="hello"
+      isRequired
     >
       <Label>URL</Label>
       <FieldDescription>Start with "https://"</FieldDescription>

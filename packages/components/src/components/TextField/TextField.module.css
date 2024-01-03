@@ -47,8 +47,11 @@
     border-color: var(--text-field--border-color--invalid);
   }
 
+  input:focus-visible,
   input:focus {
     background-color: var(--text-field--background-color--focused);
+    outline: none;
+    border-color: var(--text-field--border-color--focused);
   }
 
   input:disabled {

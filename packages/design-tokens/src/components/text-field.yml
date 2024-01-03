@@ -20,6 +20,8 @@ text-field:
       value: "{neutral.color.600}"
     invalid:
       value: "{negative.color.700}"
+    focused:
+      value: "{informative.color.700}"
   background-color:
     default:
       value: "{neutral.color.400}"
