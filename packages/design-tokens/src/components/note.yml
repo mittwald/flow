@@ -1,0 +1,38 @@
+note:
+  padding:
+    value: "{size-px.m}"
+  border-radius:
+    value: "{border-radius.default}"
+  border-width:
+    default:
+      value: "{border-width.default}"
+    main:
+      value: "{size-px.s}"
+  border-style:
+    value: "{border-style.default}"
+  text-to-text-spacing:
+    value: "{size-px.xs}"
+  icon-to-text-spacing:
+    value: "{size-px.m}"
+  heading-font-size:
+    value: "{size-rem.m}"
+  icon-size:
+    value: "{icon.size.m}"
+
+  # Info
+  info-border-color:
+    value: "{informative.color.700}"
+  info-heading-color:
+    value: "{informative.color.900}"
+
+  # Warning
+  warning-border-color:
+    value: "{warning.color.700}"
+  warning-heading-color:
+    value: "{warning.color.900}"
+
+  # Negative
+  negative-border-color:
+    value: "{negative.color.700}"
+  negative-heading-color:
+    value: "{negative.color.900}"

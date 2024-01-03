@@ -21,6 +21,8 @@ export default defineConfig(
           TextField: "./src/components/TextField/index.ts",
           FieldError: "./src/components/FieldError/index.ts",
           FieldDescription: "./src/components/FieldDescription/index.ts",
+          Heading: "./src/components/Heading/index.ts",
+          Note: "./src/components/Note/index.ts",
         },
         formats: ["es"],
       },

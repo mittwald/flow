@@ -1,0 +1,71 @@
+@import "@/styles";
+
+.root {
+  border-radius: var(--note--border-radius);
+  border: var(--note--border-width--default) var(--note--border-style)
+    var(--note--info-border-color);
+  border-inline-start-width: var(--note--border-width--main);
+  padding: var(--note--padding);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-column-gap: var(--note--icon-to-text-spacing);
+  grid-row-gap: var(--note--text-to-text-spacing);
+
+  /* Elements */
+
+  .customIcon,
+  .defaultIcon {
+    grid-area: icon;
+    color: var(--note--info-heading-color);
+    font-size: var(--note--icon-size);
+    line-height: calc(var(--note--heading-font-size) * 1.5);
+  }
+
+  .heading {
+    grid-area: heading;
+    color: var(--note--info-heading-color);
+    font-size: var(--note--heading-font-size);
+  }
+
+  .content {
+    grid-area: content;
+  }
+
+  /* With custom icon */
+
+  &:has(.customIcon) .defaultIcon {
+    display: none;
+  }
+
+  /* Without content */
+
+  &:not(:has(.content)) {
+    grid-template-areas: "icon heading";
+  }
+
+  /* With content */
+
+  &:has(.content) {
+    grid-template-areas:
+      "icon heading"
+      ".    content";
+  }
+}
+
+.warning {
+  border-color: var(--note--warning-border-color);
+  .heading,
+  .customIcon,
+  .defaultIcon {
+    color: var(--note--warning-heading-color);
+  }
+}
+
+.negative {
+  border-color: var(--note--negative-border-color);
+  .heading,
+  .customIcon,
+  .defaultIcon {
+    color: var(--note--negative-heading-color);
+  }
+}
