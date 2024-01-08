@@ -5239,6 +5239,14 @@ const RAW_RUNTIME_STATE =
           ["@swc/helpers", "npm:0.5.3"]\
         ],\
         "linkType": "HARD"\
+      }],\
+      ["npm:3.5.1", {\
+        "packageLocation": "./.yarn/cache/@internationalized-date-npm-3.5.1-8b6b6d48f5-9d40fd8b77.zip/node_modules/@internationalized/date/",\
+        "packageDependencies": [\
+          ["@internationalized/date", "npm:3.5.1"],\
+          ["@swc/helpers", "npm:0.5.3"]\
+        ],\
+        "linkType": "HARD"\
       }]\
     ]],\
     ["@internationalized/message", [\
@@ -5957,6 +5965,7 @@ const RAW_RUNTIME_STATE =
           ["@fortawesome/free-regular-svg-icons", "npm:6.5.1"],\
           ["@fortawesome/free-solid-svg-icons", "npm:6.5.1"],\
           ["@fortawesome/react-fontawesome", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:0.2.0"],\
+          ["@internationalized/date", "npm:3.5.1"],\
           ["@jest/globals", "npm:29.7.0"],\
           ["@mittwald/flow-design-tokens", "workspace:packages/design-tokens"],\
           ["@nx/storybook", "npm:17.2.0"],\
@@ -6017,6 +6026,7 @@ const RAW_RUNTIME_STATE =
           ["@fortawesome/free-regular-svg-icons", "npm:6.5.1"],\
           ["@fortawesome/free-solid-svg-icons", "npm:6.5.1"],\
           ["@fortawesome/react-fontawesome", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:0.2.0"],\
+          ["@internationalized/date", "npm:3.5.1"],\
           ["@jest/globals", "npm:29.7.0"],\
           ["@mittwald/flow-design-tokens", "workspace:packages/design-tokens"],\
           ["@nx/storybook", "npm:17.2.0"],\
@@ -6071,6 +6081,7 @@ const RAW_RUNTIME_STATE =
           ["@fortawesome/free-regular-svg-icons", "npm:6.5.1"],\
           ["@fortawesome/free-solid-svg-icons", "npm:6.5.1"],\
           ["@fortawesome/react-fontawesome", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:0.2.0"],\
+          ["@internationalized/date", "npm:3.5.1"],\
           ["@jest/globals", "npm:29.7.0"],\
           ["@mittwald/flow-design-tokens", "workspace:packages/design-tokens"],\
           ["@nx/storybook", "npm:17.2.0"],\

@@ -9,8 +9,11 @@ import type {
 } from "@/components/Navigation";
 import { FieldErrorProps } from "@/components/FieldError";
 import { FieldDescriptionProps } from "@/components/FieldDescription";
+import { DatePickerProps, DateRangePickerProps } from "@/components/DatePicker";
+import { PopoverProps } from "@/components/Popover";
 import { NoteProps } from "@/components/Note";
 import { HeadingProps } from "@/components/Heading";
+import { InputGroupProps } from "@/components/InputGroup";
 
 export * from "./types";
 
@@ -24,6 +27,10 @@ export interface FlowComponentPropsTypes {
   navigationItem: NavigationItemProps;
   fieldError: FieldErrorProps;
   fieldDescription: FieldDescriptionProps;
+  datePicker: DatePickerProps<any>;
+  dateRangePicker: DateRangePickerProps<any>;
+  popover: PopoverProps;
   heading: HeadingProps;
   note: NoteProps;
+  inputGroup: InputGroupProps;
 }

@@ -8,8 +8,6 @@
   align-items: center;
   padding: var(--button--padding-y) var(--button--padding-x);
   font-weight: bold;
-  font-size: var(--button--font-size);
-  line-height: var(--button--line-height);
 }
 
 .primary {
@@ -66,9 +64,28 @@
   }
 }
 
+.transparent {
+  background-color: var(--button--transparent-background-color--default);
+  color: var(--button--transparent-color--default);
+
+  &:hover {
+    background-color: var(--button--transparent-background-color--hover);
+    color: var(--button--transparent-color--hover);
+  }
+
+  &[data-pressed] {
+    background-color: var(--button--transparent-background-color--pressed);
+    color: var(--button--transparent-color--pressed);
+  }
+}
+
 .root[disabled] {
   background-color: var(--button--disabled-background-color);
   color: var(--button--disabled-color);
+  &.transparent {
+    background-color: var(--button--transparent-background-color--disabled);
+    color: var(--button--transparent-color--disabled);
+  }
 }
 
 .icon {
@@ -86,4 +103,13 @@
 .text {
   order: 1;
   margin-inline-start: var(--button--icon-to-text-spacing);
+}
+
+:global(.flow-datepicker) .root,
+:global(.flow-text-field) .root {
+  color: var(--text-field-button--color);
+  font-size: var(--text-field-button--font-size);
+  &:not(:disabled) {
+    cursor: pointer;
+  }
 }

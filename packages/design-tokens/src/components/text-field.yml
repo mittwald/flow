@@ -36,3 +36,9 @@ text-field:
   color:
     disabled:
       value: "{neutral.color.800}"
+
+text-field-button:
+  font-size:
+    value: "{size-rem.l}"
+  color:
+    value: "{neutral.color.800}"

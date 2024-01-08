@@ -10,7 +10,7 @@ import {
 
 export interface ButtonProps extends PropsWithChildren<Aria.ButtonProps> {
   /** @default "primary" */
-  variant?: "primary" | "accent" | "secondary" | "negative";
+  variant?: "primary" | "accent" | "secondary" | "negative" | "transparent";
 }
 
 export const Button: FC<ButtonProps> = (props) => {

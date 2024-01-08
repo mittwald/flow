@@ -6,6 +6,9 @@ font-weight:
 line-height:
   default:
     value: 1.5
+font-size:
+  default:
+    value: "{size-rem.m}"
 color:
   default:
     value: "{neutral.color.1000}"

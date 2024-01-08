@@ -1,0 +1,33 @@
+@import "@/styles";
+
+.root {
+  grid-template-columns: 1fr auto;
+
+  :global(.react-aria-DateInput) {
+    display: flex;
+    padding: var(--text-field--padding-y) var(--text-field--padding-x);
+  }
+
+  :global(.react-aria-DateSegment) {
+    border-radius: var(--date-picker--date-segment-border-radius);
+
+    &:focus {
+      background: var(--date-picker--date-segment-background-color--focused);
+      outline: none;
+    }
+  }
+
+  &:has([slot="start"]) {
+    grid-template-columns: auto auto 1fr auto;
+    > span {
+      display: flex;
+      align-items: center;
+    }
+    :global(.react-aria-DateInput):first-of-type {
+      padding-inline-end: 2px;
+    }
+    :global(.react-aria-DateInput):last-of-type {
+      padding-inline-start: 2px;
+    }
+  }
+}
