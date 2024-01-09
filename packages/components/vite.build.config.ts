@@ -18,6 +18,7 @@ export default defineConfig(
           RadioGroup: "./src/components/RadioGroup/index.ts",
           Radio: "./src/components/RadioGroup/components/Radio/index.ts",
           Text: "./src/components/Text/index.ts",
+          Link: "./src/components/Link/index.ts",
         },
         formats: ["es"],
       },

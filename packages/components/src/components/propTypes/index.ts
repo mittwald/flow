@@ -7,6 +7,7 @@ import type {
   NavigationItemProps,
   NavigationProps,
 } from "@/components/Navigation";
+import type { LinkProps } from "@/components/Link";
 
 export * from "./types";
 
@@ -18,4 +19,5 @@ export interface FlowComponentPropsTypes {
   content: ContentProps;
   navigation: NavigationProps;
   navigationItem: NavigationItemProps;
+  link: LinkProps;
 }
