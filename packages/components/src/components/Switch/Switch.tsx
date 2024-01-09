@@ -5,7 +5,9 @@ import clsx from "clsx";
 
 export interface SwitchProps
   extends PropsWithChildren<Omit<Aria.SwitchProps, "children">> {
-  order: "labelFirst" | "indicatorFirst";
+  /** @default "indicatorFirst" */
+  order: "indicatorFirst" | "labelFirst";
+  /** @default "accent" */
   variant: "accent" | "negative";
 }
 

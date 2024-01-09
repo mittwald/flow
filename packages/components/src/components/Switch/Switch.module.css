@@ -1,6 +1,7 @@
 .root {
   display: flex;
   align-items: center;
+  font-size: var(--switch--font-size);
   font-weight: var(--switch--font-weight);
   column-gap: var(--switch--label-to-indicator-spacing);
 

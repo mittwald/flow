@@ -1,19 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Switch } from "../index";
-import React from "react";
-import { action } from "@storybook/addon-actions";
+import defaultMeta from "./Default.stories";
 
 const meta: Meta<typeof Switch> = {
+  ...defaultMeta,
   title: "Switch/Variants",
-  component: Switch,
-  args: {
-    onChange: action("onChange"),
-  },
-  render: (props) => (
-    <Switch defaultSelected {...props}>
-      Autoresponder
-    </Switch>
-  ),
+  args: { defaultSelected: true },
 };
 
 export default meta;
