@@ -25,6 +25,8 @@
   &:has(.customIcon):not(:has(.label)) {
     padding-right: var(--pill--padding-x-icon-only);
     padding-left: var(--pill--padding-x-icon-only);
+    grid-template-areas: "icon";
+    grid-template-columns: auto;
   }
 
   /* Custom Icon */
