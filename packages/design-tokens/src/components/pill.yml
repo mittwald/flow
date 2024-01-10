@@ -1,0 +1,27 @@
+pill:
+  font-size:
+    value: "{size-rem.s}"
+  line-height:
+    value: "{size-rem.m}"
+  icon-size:
+    value: "{size-rem.m}"
+  border-radius:
+    value: "{size-rem.xs}"
+  padding-y:
+    value: "0.25rem"
+  padding-x:
+    value: "0.5rem"
+  padding-x-icon-only:
+    value: "0.25rem"
+  color:
+    value: "{color.white}"
+
+  # Variants
+  info-background-color:
+    value: "{informative.color.700}"
+  success-background-color:
+    value: "{accent.color.700}"
+  warning-background-color:
+    value: "{warning.color.700}"
+  negative-background-color:
+    value: "{negative.color.700}"

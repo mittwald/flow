@@ -8,6 +8,8 @@
     "./Text": "./dist/Text.js",
     "./Label": "./dist/Label.js",
     "./Navigation": "./dist/Navigation.js",
+    "./Pill": "./dist/Pill.js",
+    "./StatusIcon": "./dist/StatusIcon.js",
     "./style": "./dist/style.css",
     "./style/init": "./dist/index.js"
   },
@@ -27,6 +29,7 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
+    "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@mittwald/flow-design-tokens": "workspace:*",
     "@react-aria/utils": "^3.22.0",

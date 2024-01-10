@@ -1,0 +1,6 @@
+{
+  "statusIcon.info": "Information",
+  "statusIcon.negative": "Fehler",
+  "statusIcon.success": "Erfolg",
+  "statusIcon.warning": "Warnung"
+}
