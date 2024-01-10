@@ -19,7 +19,7 @@
     grid-area: icon;
   }
 
-  /* Icon only */
+  /* With icon only */
 
   &.iconOnly,
   &:has(.customIcon):not(:has(.label)) {
@@ -29,7 +29,7 @@
     grid-template-columns: auto;
   }
 
-  /* Custom Icon */
+  /* With custom icon */
 
   &:has(.customIcon) {
     .statusIcon {
