@@ -6,11 +6,7 @@ import {
 } from "@/lib/propsContext";
 import styles from "./Note.module.css";
 import clsx from "clsx";
-import { Icon } from "@/components/Icon";
-import { faInfoCircle } from "@fortawesome/free-solid-svg-icons/faInfoCircle";
-import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
-import locales from "./locales/*.locale.json";
-import { useLocalizedStringFormatter } from "react-aria";
+import { StatusIcon } from "@/components/StatusIcon";
 
 export interface NoteProps
   extends PropsWithChildren<HTMLAttributes<HTMLElement>> {
@@ -27,14 +23,9 @@ export const Note: FC<NoteProps> = (props) => {
 
   const rootClassName = clsx(className, styles.root, styles[variant]);
 
-  const iconAriaLabel = useLocalizedStringFormatter(locales).format(
-    `note.${variant}`,
-  );
-
   const propsContext: PropsContext = {
     icon: {
       className: styles.customIcon,
-      "aria-label": iconAriaLabel,
     },
     heading: {
       className: styles.heading,
@@ -45,15 +36,9 @@ export const Note: FC<NoteProps> = (props) => {
     },
   };
 
-  const defaultIcon = variant === "info" ? faInfoCircle : faExclamationCircle;
-
   return (
     <aside {...rest} className={rootClassName}>
-      <Icon
-        className={styles.defaultIcon}
-        aria-label={iconAriaLabel}
-        faIcon={defaultIcon}
-      />
+      <StatusIcon className={styles.statusIcon} variant={variant} />
       <PropsContextProvider props={propsContext}>
         {children}
       </PropsContextProvider>

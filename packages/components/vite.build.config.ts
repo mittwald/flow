@@ -20,6 +20,7 @@ export default defineConfig(
           Text: "./src/components/Text/index.ts",
           Heading: "./src/components/Heading/index.ts",
           Note: "./src/components/Note/index.ts",
+          StatusIcon: "./src/components/StatusIcon/index.ts",
         },
         formats: ["es"],
       },
