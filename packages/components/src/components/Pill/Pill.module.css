@@ -7,14 +7,16 @@
   border-radius: var(--pill--border-radius);
   padding: var(--pill--padding-y) var(--pill--padding-x);
   line-height: var(--pill--line-height);
-  display: inline-flex;
-  align-items: center;
   column-gap: var(--pill--icon-to-text-spacing);
-  justify-content: center;
+  display: grid;
+  grid-template-areas: "icon label";
+  grid-template-columns: auto 1fr;
+  width: fit-content;
 
   .statusIcon,
   .customIcon {
     font-size: var(--pill--icon-size);
+    grid-area: icon;
   }
 
   /* Icon only */
