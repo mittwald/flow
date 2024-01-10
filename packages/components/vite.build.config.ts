@@ -18,7 +18,7 @@ export default defineConfig(
           RadioGroup: "./src/components/RadioGroup/index.ts",
           Radio: "./src/components/RadioGroup/components/Radio/index.ts",
           Text: "./src/components/Text/index.ts",
-          Pill: "./src/components/Pill/index.ts",
+          Badge: "./src/components/Badge/index.ts",
           StatusIcon: "./src/components/StatusIcon/index.ts",
         },
         formats: ["es"],

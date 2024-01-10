@@ -1,4 +1,4 @@
-pill:
+badge:
   font-size:
     value: "{size-rem.s}"
   line-height:

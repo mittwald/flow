@@ -1,16 +1,16 @@
 import React, { FC, PropsWithChildren } from "react";
-import styles from "./Pill.module.css";
+import styles from "./Badge.module.css";
 import clsx from "clsx";
 import { StatusIcon } from "@/components/StatusIcon";
 import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
 
-export interface PillProps extends PropsWithChildren {
+export interface BadgeProps extends PropsWithChildren {
   /** @default "info" */
   variant?: "info" | "success" | "warning" | "negative";
   className: string;
 }
 
-export const Pill: FC<PillProps> = (props) => {
+export const Badge: FC<BadgeProps> = (props) => {
   const { children, className, variant = "info", ...rest } = props;
 
   const rootClassName = clsx(className, styles.root, styles[variant], {
@@ -36,4 +36,4 @@ export const Pill: FC<PillProps> = (props) => {
   );
 };
 
-export default Pill;
+export default Badge;

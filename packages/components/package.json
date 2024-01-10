@@ -8,7 +8,7 @@
     "./Text": "./dist/Text.js",
     "./Label": "./dist/Label.js",
     "./Navigation": "./dist/Navigation.js",
-    "./Pill": "./dist/Pill.js",
+    "./Badge": "./dist/Badge.js",
     "./StatusIcon": "./dist/StatusIcon.js",
     "./style": "./dist/style.css",
     "./style/init": "./dist/index.js"

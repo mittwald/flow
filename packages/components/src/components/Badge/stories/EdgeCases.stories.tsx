@@ -1,17 +1,17 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Pill from "../Pill";
+import Badge from "../Badge";
 import defaultMeta from "./Default.stories";
 import React from "react";
 import { dummyText } from "@/lib/dummyText";
 
-const meta: Meta<typeof Pill> = {
+const meta: Meta<typeof Badge> = {
   ...defaultMeta,
-  title: "Pill/EdgeCases",
+  title: "Badge/EdgeCases",
 };
 export default meta;
 
-type Story = StoryObj<typeof Pill>;
+type Story = StoryObj<typeof Badge>;
 
 export const LongText: Story = {
-  render: (props) => <Pill {...props}>{dummyText.long}</Pill>,
+  render: (props) => <Badge {...props}>{dummyText.long}</Badge>,
 };
