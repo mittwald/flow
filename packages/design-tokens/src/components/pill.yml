@@ -13,6 +13,8 @@ pill:
     value: "0.5rem"
   padding-x-icon-only:
     value: "0.25rem"
+  icon-to-text-spacing:
+    value: 0.5em
   color:
     value: "{color.white}"
 

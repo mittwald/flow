@@ -9,7 +9,7 @@
   line-height: var(--pill--line-height);
   display: inline-flex;
   align-items: center;
-  column-gap: 4px;
+  column-gap: var(--pill--icon-to-text-spacing);
   justify-content: center;
 
   .statusIcon,
