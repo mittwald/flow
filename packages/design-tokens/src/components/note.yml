@@ -4,10 +4,9 @@ note:
   border-radius:
     value: "{border-radius.default}"
   border-width:
-    default:
-      value: "{border-width.default}"
-    main:
-      value: "{size-px.s}"
+    value: "{border-width.default}"
+  border-inline-start-width:
+    value: "{size-px.s}"
   border-style:
     value: "{border-style.default}"
   text-to-text-spacing:

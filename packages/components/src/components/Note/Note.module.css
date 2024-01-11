@@ -2,34 +2,14 @@
 
 .root {
   border-radius: var(--note--border-radius);
-  border: var(--note--border-width--default) var(--note--border-style)
+  border: var(--note--border-width) var(--note--border-style)
     var(--note--info-border-color);
-  border-inline-start-width: var(--note--border-width--main);
+  border-inline-start-width: var(--note--border-inline-start-width);
   padding: var(--note--padding);
   display: grid;
   grid-template-columns: auto 1fr;
   grid-column-gap: var(--note--icon-to-text-spacing);
   grid-row-gap: var(--note--text-to-text-spacing);
-
-  /* Elements */
-
-  .customIcon,
-  .statusIcon {
-    grid-area: icon;
-    color: var(--note--info-heading-color);
-    font-size: var(--note--icon-size);
-    line-height: calc(var(--note--heading-font-size) * 1.5);
-  }
-
-  .heading {
-    grid-area: heading;
-    color: var(--note--info-heading-color);
-    font-size: var(--note--heading-font-size);
-  }
-
-  .content {
-    grid-area: content;
-  }
 
   /* With custom icon */
 
@@ -51,6 +31,28 @@
       ".    content";
   }
 }
+
+/* Elements */
+
+.customIcon,
+.statusIcon {
+  grid-area: icon;
+  color: var(--note--info-heading-color);
+  font-size: var(--note--icon-size);
+  line-height: calc(var(--note--heading-font-size) * 1.5);
+}
+
+.heading {
+  grid-area: heading;
+  color: var(--note--info-heading-color);
+  font-size: var(--note--heading-font-size);
+}
+
+.content {
+  grid-area: content;
+}
+
+/* Variants */
 
 .warning {
   border-color: var(--note--warning-border-color);
