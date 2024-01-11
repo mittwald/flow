@@ -19,7 +19,7 @@ type Story = StoryObj<typeof RadioGroup>;
 
 export const LongTexts: Story = {
   render: (props) => (
-    <RadioGroup {...props} defaultValue="a" aria-label="Rating">
+    <RadioGroup {...props} defaultValue="a" aria-label="Label">
       <Radio value="a">
         <Icon faIcon={faStar} />
         <Text>{dummyText.medium}</Text>
