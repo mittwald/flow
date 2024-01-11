@@ -47,7 +47,7 @@ export const MultipleElements: Story = {
         .map((value, index) => (
           <Radio value={index.toString()} key={index}>
             <Icon faIcon={faStar} />
-            <Text>Option {index + 1}</Text>
+            <Text>{index + 1} Star</Text>
             <Content>{dummyText.medium}</Content>
           </Radio>
         ))}
@@ -67,7 +67,7 @@ export const SmallSpace: Story = {
         .fill("")
         .map((value, index) => (
           <Radio value={index.toString()} key={index}>
-            <Text>Option {index + 1}</Text>
+            <Text>{index + 1} Star</Text>
           </Radio>
         ))}
     </RadioGroup>
