@@ -1,0 +1,26 @@
+tag-group:
+  tag-to-tag-spacing:
+    value: "{size-px.s}"
+
+tag:
+  font-size:
+    value: "{size-rem.s}"
+  font-weight:
+    selected:
+      value: "{font-weight.bold}"
+  border-radius:
+    value: "{border-radius.default}"
+  padding-x:
+    value: "{size-px.s}"
+  padding-y:
+    value: "{size-px.xxs}"
+  background-color:
+    default:
+      value: "{neutral.color.400}"
+    hover:
+      value: "{informative.color.100}"
+    selected:
+      value: "{informative.color.200}"
+  color:
+    selected:
+      value: "{informative.color.800}"

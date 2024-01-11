@@ -1,0 +1,6 @@
+@import "@/styles";
+
+.root {
+  display: flex;
+  gap: var(--tag-group--tag-to-tag-spacing);
+}
