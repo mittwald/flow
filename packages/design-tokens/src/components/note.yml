@@ -10,9 +10,9 @@ note:
   border-style:
     value: "{border-style.default}"
   text-to-text-spacing:
-    value: "{0.5rem}"
+    value: 0.5rem
   icon-to-text-spacing:
-    value: "{1rem}"
+    value: 1rem
   heading-font-size:
     value: "{size-rem.m}"
   icon-size:
