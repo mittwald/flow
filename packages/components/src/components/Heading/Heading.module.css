@@ -1,0 +1,30 @@
+@import "@/styles";
+
+.root {
+  font-weight: var(--heading--font-weight);
+  color: var(--heading--color);
+}
+
+h1.root {
+  font-size: var(--heading--h1-font-size);
+}
+
+h2.root {
+  font-size: var(--heading--h2-font-size);
+}
+
+h3.root {
+  font-size: var(--heading--h3-font-size);
+}
+
+h4.root {
+  font-size: var(--heading--h4-font-size);
+}
+
+h5.root {
+  font-size: var(--heading--h5-font-size);
+}
+
+h6.root {
+  font-size: var(--heading--h6-font-size);
+}
