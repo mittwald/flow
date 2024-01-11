@@ -1,8 +1,11 @@
 font-weight:
   normal:
-    value: 300
+    value: 400
   bold:
     value: 600
 line-height:
   default:
     value: 1.5
+color:
+  default:
+    value: "{neutral.color.900}"

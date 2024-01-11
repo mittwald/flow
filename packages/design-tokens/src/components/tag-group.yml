@@ -21,6 +21,10 @@ tag:
       value: "{informative.color.100}"
     selected:
       value: "{informative.color.200}"
+    disabled:
+      value: "{neutral.color.300}"
   color:
     selected:
       value: "{informative.color.800}"
+    disabled:
+      value: "{neutral.color.600}"

@@ -15,4 +15,9 @@
   &:hover {
     background-color: var(--tag--background-color--hover);
   }
+
+  &[data-disabled] {
+    background-color: var(--tag--background-color--disabled);
+    color: var(--tag--color--disabled);
+  }
 }
