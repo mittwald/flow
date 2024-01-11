@@ -5,6 +5,7 @@
   border-radius: var(--tag--border-radius);
   background-color: var(--tag--background-color--default);
   padding: var(--tag--padding-y) var(--tag--padding-x);
+  cursor: default;
 
   &[data-selected] {
     background-color: var(--tag--background-color--selected);

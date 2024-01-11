@@ -1,4 +1,17 @@
 @import "@/styles";
 
 .root {
+  display: grid;
+  grid-template-areas:
+    "label"
+    "tagList";
+
+  .label {
+    grid-area: label;
+    margin-bottom: var(--tag-group--label-to-tag-spacing);
+  }
+
+  .tagList {
+    grid-area: tagList;
+  }
 }
