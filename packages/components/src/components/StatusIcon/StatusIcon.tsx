@@ -19,7 +19,7 @@ export const StatusIcon: FC<StatusIconProps> = (props) => {
 
   const rootClassName = clsx(className, styles.root);
 
-  const iconAriaLabel = useLocalizedStringFormatter(locales).format(
+  const ariaLabel = useLocalizedStringFormatter(locales).format(
     `statusIcon.${variant}`,
   );
 
@@ -32,7 +32,7 @@ export const StatusIcon: FC<StatusIconProps> = (props) => {
 
   return (
     <Icon
-      aria-label={iconAriaLabel}
+      aria-label={ariaLabel}
       className={rootClassName}
       faIcon={defaultIcon}
     />
