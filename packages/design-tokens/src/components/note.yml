@@ -12,7 +12,7 @@ note:
   text-to-text-spacing:
     value: 0.5rem
   icon-to-text-spacing:
-    value: 1rem
+    value: "{size-rem.m}"
   heading-font-size:
     value: "{size-rem.m}"
   icon-size:
