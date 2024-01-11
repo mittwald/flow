@@ -1,6 +1,6 @@
 label:
   font-size:
-    value: "{size-rem.s}"
+    value: "{font-size.s}"
   font-weight:
     value: "{font-weight.bold}"
   color:

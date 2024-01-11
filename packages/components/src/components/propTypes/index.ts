@@ -8,6 +8,8 @@ import type {
   NavigationProps,
 } from "@/components/Navigation";
 import type { LinkProps } from "@/components/Link";
+import { NoteProps } from "@/components/Note";
+import { HeadingProps } from "@/components/Heading";
 
 export * from "./types";
 
@@ -20,4 +22,6 @@ export interface FlowComponentPropsTypes {
   navigation: NavigationProps;
   navigationItem: NavigationItemProps;
   link: LinkProps;
+  heading: HeadingProps;
+  note: NoteProps;
 }
