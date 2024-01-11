@@ -2,8 +2,9 @@
 
 .root {
   border-radius: var(--note--border-radius);
-  border: var(--note--border-width) var(--note--border-style)
-    var(--note--info-border-color);
+  border-width: var(--note--border-width);
+  border-style: var(--note--border-style);
+  border-color: var(--note--info-border-color);
   border-inline-start-width: var(--note--border-inline-start-width);
   padding: var(--note--padding);
   display: grid;
