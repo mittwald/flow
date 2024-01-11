@@ -11,7 +11,7 @@ import clsx from "clsx";
 export interface StatusIconProps {
   /** @default "info" */
   variant?: "info" | "success" | "warning" | "negative";
-  className: string;
+  className?: string;
 }
 
 export const StatusIcon: FC<StatusIconProps> = (props) => {
