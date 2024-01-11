@@ -10,11 +10,11 @@ note:
   border-style:
     value: "{border-style.default}"
   text-to-text-spacing:
-    value: 0.5rem
+    value: "{size-rem.xs}"
   icon-to-text-spacing:
     value: "{size-rem.m}"
   heading-font-size:
-    value: "{size-rem.m}"
+    value: "{font-size.m}"
   icon-size:
     value: "{icon.size.m}"
 

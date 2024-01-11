@@ -4,14 +4,14 @@ heading:
   font-weight:
     value: "{font-weight.bold}"
   h1-font-size:
-    value: "{size-rem.xxl}"
+    value: "{font-size.xxl}"
   h2-font-size:
-    value: "{size-rem.xl}"
+    value: "{font-size.xl}"
   h3-font-size:
-    value: "{size-rem.l}"
+    value: "{font-size.l}"
   h4-font-size:
-    value: "{size-rem.m}"
+    value: "{font-size.m}"
   h5-font-size:
-    value: "{size-rem.m}"
+    value: "{font-size.m}"
   h6-font-size:
-    value: "{size-rem.m}"
+    value: "{font-size.m}"
