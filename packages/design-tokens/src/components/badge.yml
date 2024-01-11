@@ -1,18 +1,18 @@
 badge:
   font-size:
-    value: "{size-rem.s}"
+    value: "{font-size.s}"
   line-height:
     value: "{size-rem.m}"
   icon-size:
     value: "{size-rem.m}"
   border-radius:
-    value: "{size-rem.xs}"
+    value: "{size-rem.m}"
   padding-y:
-    value: "0.25rem"
+    value: "{size-rem.xs}"
   padding-x:
-    value: "0.5rem"
+    value: "{size-rem.s}"
   padding-x-icon-only:
-    value: "0.25rem"
+    value: "{size-rem.xs}"
   icon-to-text-spacing:
     value: 0.5em
   color:
