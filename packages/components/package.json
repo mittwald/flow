@@ -7,6 +7,8 @@
     "./Icon": "./dist/Icon.js",
     "./Text": "./dist/Text.js",
     "./Label": "./dist/Label.js",
+    "./Heading": "./dist/Heading.js",
+    "./Note": "./dist/Note.js",
     "./Navigation": "./dist/Navigation.js",
     "./Badge": "./dist/Badge.js",
     "./StatusIcon": "./dist/StatusIcon.js",
@@ -29,7 +31,6 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
-    "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@mittwald/flow-design-tokens": "workspace:*",
     "@react-aria/utils": "^3.22.0",
@@ -43,6 +44,7 @@
   },
   "devDependencies": {
     "@fortawesome/free-regular-svg-icons": "^6.5.1",
+    "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@jest/globals": "^29.7.0",
     "@nx/storybook": "^17.1.3",
     "@storybook/addon-a11y": "^7.6.4",

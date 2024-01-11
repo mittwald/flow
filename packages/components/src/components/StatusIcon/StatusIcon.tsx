@@ -11,7 +11,7 @@ import clsx from "clsx";
 export interface StatusIconProps {
   /** @default "info" */
   variant?: "info" | "success" | "warning" | "negative";
-  className: string;
+  className?: string;
 }
 
 export const StatusIcon: FC<StatusIconProps> = (props) => {
@@ -19,11 +19,11 @@ export const StatusIcon: FC<StatusIconProps> = (props) => {
 
   const rootClassName = clsx(className, styles.root);
 
-  const iconAriaLabel = useLocalizedStringFormatter(locales).format(
+  const ariaLabel = useLocalizedStringFormatter(locales).format(
     `statusIcon.${variant}`,
   );
 
-  const defaultIcon =
+  const icon =
     variant === "info"
       ? faInfoCircle
       : variant === "success"
@@ -31,11 +31,7 @@ export const StatusIcon: FC<StatusIconProps> = (props) => {
         : faExclamationCircle;
 
   return (
-    <Icon
-      aria-label={iconAriaLabel}
-      className={rootClassName}
-      faIcon={defaultIcon}
-    />
+    <Icon aria-label={ariaLabel} className={rootClassName} faIcon={icon} />
   );
 };
 

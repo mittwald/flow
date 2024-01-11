@@ -7,6 +7,8 @@ import type {
   NavigationItemProps,
   NavigationProps,
 } from "@/components/Navigation";
+import { NoteProps } from "@/components/Note";
+import { HeadingProps } from "@/components/Heading";
 
 export * from "./types";
 
@@ -18,4 +20,6 @@ export interface FlowComponentPropsTypes {
   content: ContentProps;
   navigation: NavigationProps;
   navigationItem: NavigationItemProps;
+  heading: HeadingProps;
+  note: NoteProps;
 }
