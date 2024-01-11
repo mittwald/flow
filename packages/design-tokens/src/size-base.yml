@@ -1,18 +1,18 @@
 size-rem:
   xxs:
-    value: 0.625rem
+    value: 0.125rem
   xs:
-    value: 0.75rem
+    value: 0.25rem
   s:
-    value: 0.875rem
+    value: 0.5rem
   m:
     value: 1rem
   l:
-    value: 1.125rem
-  xl:
     value: 1.5rem
-  xxl:
+  xl:
     value: 2rem
+  xxl:
+    value: 4rem
 
 size-px:
   xxs:
