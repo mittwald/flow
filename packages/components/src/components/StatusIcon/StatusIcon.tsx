@@ -23,7 +23,7 @@ export const StatusIcon: FC<StatusIconProps> = (props) => {
     `statusIcon.${variant}`,
   );
 
-  const defaultIcon =
+  const icon =
     variant === "info"
       ? faInfoCircle
       : variant === "success"
@@ -31,11 +31,7 @@ export const StatusIcon: FC<StatusIconProps> = (props) => {
         : faExclamationCircle;
 
   return (
-    <Icon
-      aria-label={ariaLabel}
-      className={rootClassName}
-      faIcon={defaultIcon}
-    />
+    <Icon aria-label={ariaLabel} className={rootClassName} faIcon={icon} />
   );
 };
 
