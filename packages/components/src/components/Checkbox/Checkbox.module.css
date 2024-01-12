@@ -14,10 +14,6 @@
   grid-template-columns: auto 1fr;
   width: fit-content;
 
-  .checkmark {
-    color: var(--checkbox--checkmark-color--default);
-  }
-
   /* States */
 
   &:hover {
@@ -50,4 +46,8 @@
       color: var(--checkbox--checkmark-color--selected-disabled);
     }
   }
+}
+
+.checkmark {
+  color: var(--checkbox--checkmark-color--default);
 }
