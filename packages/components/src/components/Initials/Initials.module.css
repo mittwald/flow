@@ -1,4 +1,46 @@
 @import "@/styles";
 
 .root {
+  display: flex;
+  font-weight: bold;
+}
+
+.variant-1 {
+  background-color: var(--initials--variant-1-background-color);
+  :first-child {
+    color: var(--initials--variant-1-first-initial-color);
+  }
+  :last-child {
+    color: var(--initials--variant-1-second-initial-color);
+  }
+}
+
+.variant-2 {
+  background-color: var(--initials--variant-2-background-color);
+  :first-child {
+    color: var(--initials--variant-2-first-initial-color);
+  }
+  :last-child {
+    color: var(--initials--variant-2-second-initial-color);
+  }
+}
+
+.variant-3 {
+  background-color: var(--initials--variant-3-background-color);
+  :first-child {
+    color: var(--initials--variant-3-first-initial-color);
+  }
+  :last-child {
+    color: var(--initials--variant-3-second-initial-color);
+  }
+}
+
+.variant-4 {
+  background-color: var(--initials--variant-4-background-color);
+  :first-child {
+    color: var(--initials--variant-4-first-initial-color);
+  }
+  :last-child {
+    color: var(--initials--variant-4-second-initial-color);
+  }
 }

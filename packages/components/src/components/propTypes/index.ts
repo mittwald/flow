@@ -9,6 +9,8 @@ import type {
 } from "@/components/Navigation";
 import { NoteProps } from "@/components/Note";
 import { HeadingProps } from "@/components/Heading";
+import { InitialsProps } from "@/components/Initials";
+import { ImageProps } from "@/components/Image";
 
 export * from "./types";
 
@@ -22,4 +24,6 @@ export interface FlowComponentPropsTypes {
   navigationItem: NavigationItemProps;
   heading: HeadingProps;
   note: NoteProps;
+  initials: InitialsProps;
+  image: ImageProps;
 }

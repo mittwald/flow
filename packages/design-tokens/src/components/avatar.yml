@@ -1,0 +1,8 @@
+avatar:
+  size:
+    s:
+      value: 40px
+    m:
+      value: 96px
+    l:
+      value: 156px
