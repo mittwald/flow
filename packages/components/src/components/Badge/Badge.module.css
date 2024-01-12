@@ -7,12 +7,13 @@
   border-radius: var(--badge--border-radius);
   padding-block: var(--badge--padding-y);
   padding-inline: var(--badge--padding-x);
-  line-height: var(--badge--line-height);
+  height: var(--badge--height);
   column-gap: var(--badge--icon-to-text-spacing);
   display: grid;
   grid-template-areas: "icon label";
   grid-template-columns: auto 1fr;
-  width: fit-content;
+  max-width: fit-content;
+  line-height: var(--size-rem--m);
 
   /* With icon only */
 
@@ -53,4 +54,10 @@
 .customIcon {
   font-size: var(--badge--icon-size);
   grid-area: icon;
+}
+
+.label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

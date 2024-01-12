@@ -1,8 +1,8 @@
 badge:
   font-size:
     value: "{font-size.s}"
-  line-height:
-    value: "{size-rem.m}"
+  height:
+    value: "{size-rem.l}"
   icon-size:
     value: "{size-rem.m}"
   border-radius:

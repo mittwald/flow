@@ -2,6 +2,7 @@ import React, { FC, PropsWithChildren } from "react";
 import styles from "./Badge.module.css";
 import clsx from "clsx";
 import { StatusIcon } from "@/components/StatusIcon";
+import { Text } from "@/components/Text";
 import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
 
 export interface BadgeProps extends PropsWithChildren {
@@ -17,6 +18,8 @@ export const Badge: FC<BadgeProps> = (props) => {
     [styles.iconOnly]: !children,
   });
 
+  console.log(children);
+
   const propsContext: PropsContext = {
     icon: {
       className: styles.customIcon,
@@ -30,7 +33,7 @@ export const Badge: FC<BadgeProps> = (props) => {
     <div className={rootClassName} {...rest}>
       <StatusIcon className={styles.statusIcon} variant={variant} />
       <PropsContextProvider props={propsContext}>
-        {children}
+        {typeof children === "string" ? <Text>{children}</Text> : children}
       </PropsContextProvider>
     </div>
   );
