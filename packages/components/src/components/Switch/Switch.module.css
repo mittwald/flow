@@ -9,28 +9,6 @@
     flex-direction: row-reverse;
   }
 
-  /* Indicator */
-
-  .indicator {
-    width: var(--switch--indicator-width);
-    height: var(--switch--indicator-height);
-    background-color: var(--switch--indicator-color--default);
-    border-radius: var(--switch--indicator-border-radius);
-    transition: all 200ms;
-    padding: var(--switch--indicator-to-marker-spacing);
-    flex-shrink: 0;
-
-    &:before {
-      content: "";
-      display: block;
-      width: var(--switch--indicator-marker-size);
-      height: var(--switch--indicator-marker-size);
-      background-color: var(--switch--indicator-marker-color);
-      border-radius: var(--border-radius--round);
-      transition: all 200ms;
-    }
-  }
-
   /* States */
 
   &[data-pressed] .indicator {
@@ -45,7 +23,7 @@
   }
 }
 
-/* Accent */
+/* Variants */
 
 .root[data-selected] {
   .indicator {
@@ -65,8 +43,6 @@
   }
 }
 
-/* Negative */
-
 .negative[data-selected] {
   .indicator {
     background-color: var(--switch--negative-indicator-color--selected);
@@ -80,5 +56,32 @@
     background-color: var(
       --switch--negative-indicator-color--selected-disabled
     );
+  }
+}
+
+/* Elements */
+
+.indicator {
+  width: var(--switch--indicator-width);
+  height: var(--switch--indicator-height);
+  background-color: var(--switch--indicator-color--default);
+  border-radius: var(--switch--indicator-border-radius);
+  transition: all 200ms;
+  padding: var(--switch--indicator-to-marker-spacing);
+  flex-shrink: 0;
+  position: relative;
+
+  &:before {
+    content: "";
+    display: block;
+    width: var(--switch--indicator-marker-size);
+    height: var(--switch--indicator-marker-size);
+    background-color: var(--switch--indicator-marker-color);
+    border-radius: var(--border-radius--round);
+    transition: all 200ms;
+    transform: translateX(0);
+    position: absolute;
+    top: var(--switch--indicator-to-marker-spacing);
+    left: var(--switch--indicator-to-marker-spacing);
   }
 }
