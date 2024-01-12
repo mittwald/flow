@@ -13,6 +13,7 @@
     "./TextField": "./dist/TextField.js",
     "./FieldError": "./dist/FieldError.js",
     "./FieldDescription": "./dist/FieldDescription.js",
+    "./Checkbox": "./dist/Checkbox.js",
     "./StatusIcon": "./dist/StatusIcon.js",
     "./style": "./dist/style.css",
     "./style/init": "./dist/index.js"
