@@ -10,6 +10,7 @@
     "./Heading": "./dist/Heading.js",
     "./Note": "./dist/Note.js",
     "./Navigation": "./dist/Navigation.js",
+    "./Checkbox": "./dist/Checkbox.js",
     "./StatusIcon": "./dist/StatusIcon.js",
     "./style": "./dist/style.css",
     "./style/init": "./dist/index.js"
