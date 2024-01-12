@@ -13,6 +13,7 @@
     "./Content": "./dist/Content.js",
     "./RadioGroup": "./dist/RadioGroup.js",
     "./Switch": "./dist/Switch.js",
+    "./Checkbox": "./dist/Checkbox.js",
     "./StatusIcon": "./dist/StatusIcon.js",
     "./style": "./dist/style.css",
     "./style/init": "./dist/index.js"
