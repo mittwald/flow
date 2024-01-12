@@ -25,7 +25,7 @@
 
 /* Variants */
 
-.root[data-selected] {
+[data-selected] {
   .indicator {
     background-color: var(--switch--accent-indicator-color--selected);
 
