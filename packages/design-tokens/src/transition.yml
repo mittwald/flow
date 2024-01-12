@@ -1,3 +1,4 @@
 transition:
-  default:
-    value: "all 200ms"
+  duration:
+    default:
+      value: 200ms

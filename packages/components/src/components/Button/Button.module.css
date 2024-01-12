@@ -8,7 +8,7 @@
   align-items: center;
   padding: var(--button--padding-y) var(--button--padding-x);
   font-weight: bold;
-  transition: var(--transition--default);
+  transition: all var(--transition--duration--default);
 }
 
 .primary {

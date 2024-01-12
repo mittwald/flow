@@ -9,7 +9,7 @@
   display: grid;
   row-gap: var(--radiogroup--text-to-text-spacing);
   column-gap: var(--radiogroup--icon-to-text-spacing);
-  transition: var(--transition--default);
+  transition: all var(--transition--duration--default);
 
   /* Elements */
 
