@@ -1,94 +1,35 @@
-import React, { Fragment } from "react";
-import { ComponentDoc } from "react-docgen-typescript";
-import docGenFile from "@mittwald/flow-components/doc-properties";
-import _ from "lodash";
+import React from "react";
 import styles from "./PropertiesTable.module.css";
+import loadProperties from "@/components/PropertiesTable/lib/loadProperties";
+import { PropertyTableGroup } from "@/components/PropertiesTable/components/PropertyTableGroup";
 
 interface PropertiesTableProps {
   name: string;
 }
 
-const nodeModuleRegex = /.*\/node_modules\/([^/]*)/gm;
-const componentRegex = /src\/components\/([^/]*)/gm;
-
-const weights: { [key: string]: number } = {
-  component: 0,
-  "react-aria-components": 10,
-  "@react-types": 20,
-  other: 100,
-};
-
 export const PropertiesTable: React.FC<PropertiesTableProps> = ({ name }) => {
-  const docGen: ComponentDoc[][] = docGenFile;
-  const componentDocGens = docGen.find((doc) =>
-    doc.some(
-      (singleDoc) => singleDoc.displayName.toLowerCase() === name.toLowerCase(),
-    ),
-  );
-
-  if (!componentDocGens) {
-    return null;
-  }
-
-  const componentDocGen = componentDocGens[0];
-
-  if (!componentDocGen) {
-    return null;
-  }
-
-  const properties = _.groupBy(
-    Object.entries(componentDocGen.props).sort(([_ignored, prop]) =>
-      prop.required ? 1 : 0,
-    ),
-    (item) => {
-      if (!item[1].parent) {
-        return "Other";
-      }
-      const match = nodeModuleRegex.exec(item[1].parent.fileName);
-      if (!match) {
-        return componentRegex.exec(item[1].parent.fileName)?.[1] || "Other";
-      }
-      return match[1];
-    },
-  );
+  const properties = loadProperties(name);
 
   return (
-    <div className={styles.root}>
-      <div className={styles.headline}>
-        <span>Source</span>
-        <span>Property</span>
-        <span>Type</span>
-        <span>Required</span>
-        <span>Default</span>
-        <span>Description</span>
-      </div>
-      <div className={styles.rows}>
-        {_.sortBy(Object.entries(properties), ([key]) => {
-          if (key === "Other") return weights["other"];
-          return weights[key] || weights["component"];
-        }).map(([groupName, group]) => (
-          <Fragment key={groupName}>
-            <div className={styles.sectionHeadline}>
-              <span>{groupName}</span>
-            </div>
-            {group.map(([, prop]) => (
-              <Fragment key={prop.name}>
-                <span className={styles.col}>{prop.name}</span>
-                <span className={styles.col}>{prop.type.name}</span>
-                <span className={styles.col}>
-                  {prop.required ? "Yes" : "No"}
-                </span>
-                <span className={styles.col}>
-                  {prop.defaultValue ? prop.defaultValue.value : "-"}
-                </span>
-                <span className={styles.col}>
-                  {prop.description ? prop.description : "-"}
-                </span>
-              </Fragment>
-            ))}
-          </Fragment>
+    <table className={styles.root}>
+      <thead>
+        <tr>
+          <th className={styles.headline}>Source</th>
+          <th className={styles.headline}>Property</th>
+          <th className={styles.headline}>Type</th>
+          <th className={styles.headline}>Required</th>
+          <th className={styles.headline}>Default</th>
+          <th className={styles.headline}>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        {properties?.map((group) => (
+          <PropertyTableGroup
+            group={group}
+            key={group.name}
+          ></PropertyTableGroup>
         ))}
-      </div>
-    </div>
+      </tbody>
+    </table>
   );
 };

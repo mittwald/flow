@@ -17,7 +17,7 @@
     "./StatusIcon": "./dist/StatusIcon.js",
     "./style": "./dist/style.css",
     "./style/init": "./dist/index.js",
-    "./doc-properties": "./dist/doc-properties.json"
+    "./doc-properties": "./.build/doc-properties.json"
   },
   "files": [
     "dist"
@@ -26,7 +26,7 @@
     "build": "run vite build --config vite.build.config.ts && run build:docgen",
     "build:deps": "",
     "build:deps:run": "yarn run -T lerna run build:deps --scope=@mittwald/flow-components",
-    "build:docgen": "yarn run pnpify node --loader ts-node/esm dev/createDocProperteisJson.ts",
+    "build:docgen": "yarn run pnpify node --loader ts-node/esm dev/createDocPropertiesJson.ts",
     "build:watch:dependents": "yarn build:deps:run && run -T lerna watch --scope=@mittwald/flow-components --include-dependencies -- lerna run build:deps --scope=@mittwald/flow-components",
     "dev": "run storybook:start",
     "storybook:build": "run storybook build",

@@ -1,5 +1,6 @@
 import * as docgen from "react-docgen-typescript";
 import * as fs from "fs/promises";
+import * as fsSync from "fs";
 import { glob } from "glob";
 
 void (async () => {
@@ -18,8 +19,11 @@ void (async () => {
     .filter((component) => component.length > 0);
 
   console.log("📝 Writing to file");
+  if (!fsSync.existsSync("./.build/")) {
+    await fs.mkdir("./.build/");
+  }
   await fs.writeFile(
-    "./dist/doc-properties.json",
+    "./.build/doc-properties.json",
     JSON.stringify(components, null, 2),
   );
 

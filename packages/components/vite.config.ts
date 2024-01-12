@@ -19,7 +19,4 @@ export default defineConfig({
       generateScopedName: cssModuleClassNameGenerator,
     },
   },
-  build: {
-    emptyOutDir: false,
-  },
 });
