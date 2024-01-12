@@ -1,8 +1,6 @@
 checkbox:
-  text-to-text-spacing:
-    value: "{size-px.xs}"
   checkmark-to-text-spacing:
-    value: "{size-px.m}"
+    value: "{size-rem.m}"
   padding-x:
     value: "{size-px.m}"
   padding-y:
@@ -51,5 +49,3 @@ checkbox:
       value: "{neutral.color.500}"
     selected-disabled:
       value: "{neutral.color.600}"
-  label-font-weight-with-content:
-    value: "{font-weight.bold}"

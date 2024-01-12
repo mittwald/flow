@@ -5,7 +5,6 @@ import styles from "./Checkbox.module.css";
 import { Icon } from "@/components/Icon";
 import { faCheckSquare } from "@fortawesome/free-regular-svg-icons/faCheckSquare";
 import { faSquare } from "@fortawesome/free-regular-svg-icons/faSquare";
-import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
 
 export interface CheckboxProps
   extends PropsWithChildren<Omit<Aria.CheckboxProps, "children">> {}
@@ -15,15 +14,6 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
 
   const rootClassName = clsx(className, styles.root);
 
-  const propsContext: PropsContext = {
-    text: {
-      className: styles.label,
-    },
-    content: {
-      className: styles.content,
-    },
-  };
-
   return (
     <Aria.Checkbox {...rest} className={rootClassName}>
       {({ isSelected }) => (
@@ -32,9 +22,7 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
             className={styles.checkmark}
             faIcon={isSelected ? faCheckSquare : faSquare}
           />
-          <PropsContextProvider props={propsContext}>
-            {children}
-          </PropsContextProvider>
+          {children}
         </>
       )}
     </Aria.Checkbox>

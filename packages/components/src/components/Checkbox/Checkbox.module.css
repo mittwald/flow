@@ -1,51 +1,21 @@
 @import "@/styles";
 
 .root {
-  border: var(--checkbox--border-width) var(--checkbox--border-style)
-    var(--checkbox--border-color--default);
+  border-width: var(--checkbox--border-width);
+  border-style: var(--checkbox--border-style);
+  border-color: var(--checkbox--border-color--default);
   border-radius: var(--checkbox--border-radius);
-  padding: var(--checkbox--padding-y) var(--checkbox--padding-x);
+  padding-block: var(--checkbox--padding-y);
+  padding-inline: var(--checkbox--padding-x);
   background-color: var(--checkbox--background-color--default);
   color: var(--checkbox--color--default);
-  display: inline-grid;
-  row-gap: var(--checkbox--text-to-text-spacing);
+  display: grid;
   column-gap: var(--checkbox--checkmark-to-text-spacing);
-
-  /* Elements */
+  grid-template-columns: auto 1fr;
+  width: fit-content;
 
   .checkmark {
-    grid-area: checkmark;
     color: var(--checkbox--checkmark-color--default);
-  }
-
-  .label {
-    grid-area: label;
-  }
-
-  .content {
-    grid-area: content;
-  }
-
-  /* Without content */
-
-  &:not(:has(.content)) {
-    grid-template-areas: "checkmark label";
-    grid-template-columns: auto 1fr;
-  }
-
-  /* With content */
-
-  &:has(.content) {
-    grid-template-areas:
-      "checkmark label"
-      ".         content";
-    grid-template-columns: auto 1fr;
-    grid-template-rows: auto 1fr;
-    justify-items: start;
-
-    .label {
-      font-weight: var(--checkbox--label-font-weight-with-content);
-    }
   }
 
   /* States */
