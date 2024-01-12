@@ -7,7 +7,7 @@ switch:
     disabled:
       value: "{neutral.color.600}"
   label-to-indicator-spacing:
-    value: "{size-px.s}"
+    value: "{size-rem.s}"
 
   # Indicator
   indicator-height:

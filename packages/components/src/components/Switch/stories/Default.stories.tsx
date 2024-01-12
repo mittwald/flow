@@ -18,6 +18,6 @@ type Story = StoryObj<typeof Switch>;
 
 export const Default: Story = {};
 
-export const LabelFirst: Story = { args: { order: "labelFirst" } };
+export const LabelLeading: Story = { args: { labelPosition: "leading" } };
 
 export const Disabled: Story = { args: { isDisabled: true } };

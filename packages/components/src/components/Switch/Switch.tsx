@@ -5,8 +5,8 @@ import clsx from "clsx";
 
 export interface SwitchProps
   extends PropsWithChildren<Omit<Aria.SwitchProps, "children">> {
-  /** @default "indicatorFirst" */
-  order: "indicatorFirst" | "labelFirst";
+  /** @default "trailing" */
+  labelPosition: "leading" | "trailing";
   /** @default "accent" */
   variant: "accent" | "negative";
 }
@@ -15,7 +15,7 @@ export const Switch: FC<SwitchProps> = (props) => {
   const {
     children,
     className,
-    order = "indicatorFirst",
+    labelPosition = "trailing",
     variant = "accent",
     ...rest
   } = props;
@@ -23,7 +23,7 @@ export const Switch: FC<SwitchProps> = (props) => {
   const rootClassName = clsx(
     className,
     styles.root,
-    styles[order],
+    styles[`label-${labelPosition}`],
     styles[variant],
   );
 
