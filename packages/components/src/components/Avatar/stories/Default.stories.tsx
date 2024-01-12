@@ -10,7 +10,7 @@ const meta: Meta<typeof Avatar> = {
   component: Avatar,
   render: (props) => (
     <Avatar {...props}>
-      <Image alt="Gopher" src={dummyText.src} />
+      <Image alt="Gopher" src={dummyText.imageSrc} />
     </Avatar>
   ),
 };

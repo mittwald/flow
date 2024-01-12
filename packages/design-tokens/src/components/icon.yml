@@ -4,5 +4,5 @@ icon:
       value: 1rem
     m:
       value: 1.25rem
-    xl:
+    l:
       value: 4rem
