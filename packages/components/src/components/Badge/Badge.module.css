@@ -5,7 +5,8 @@
   font-size: var(--badge--font-size);
   background-color: var(--badge--info-background-color);
   border-radius: var(--badge--border-radius);
-  padding: var(--badge--padding-y) var(--badge--padding-x);
+  padding-block: var(--badge--padding-y);
+  padding-inline: var(--badge--padding-x);
   line-height: var(--badge--line-height);
   column-gap: var(--badge--icon-to-text-spacing);
   display: grid;
@@ -13,18 +14,12 @@
   grid-template-columns: auto 1fr;
   width: fit-content;
 
-  .statusIcon,
-  .customIcon {
-    font-size: var(--badge--icon-size);
-    grid-area: icon;
-  }
-
   /* With icon only */
 
   &.iconOnly,
   &:has(.customIcon):not(:has(.label)) {
-    padding-right: var(--badge--padding-x-icon-only);
-    padding-left: var(--badge--padding-x-icon-only);
+    padding-inline-end: var(--badge--padding-x-icon-only);
+    padding-inline-start: var(--badge--padding-x-icon-only);
     grid-template-areas: "icon";
     grid-template-columns: auto;
   }
@@ -50,4 +45,12 @@
 
 .negative {
   background-color: var(--badge--negative-background-color);
+}
+
+/* Elements */
+
+.statusIcon,
+.customIcon {
+  font-size: var(--badge--icon-size);
+  grid-area: icon;
 }
