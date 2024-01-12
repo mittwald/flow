@@ -6,34 +6,43 @@
     "label"
     "input"
     "info";
+}
 
-  /* States */
+/* Elements */
 
-  input:hover {
+input {
+  grid-area: input;
+  border-width: var(--text-field--border-width);
+  border-style: var(--text-field--border-style);
+  border-color: var(--text-field--border-color--default);
+  border-radius: var(--text-field--border-radius);
+  padding-block: var(--text-field--padding-y);
+  padding-inline: var(--text-field--padding-x);
+  background-color: var(--text-field--background-color--default);
+
+  &:hover {
     background-color: var(--text-field--background-color--hover);
     border-color: var(--text-field--border-color--hover);
   }
 
-  input[data-invalid] {
+  &[data-invalid] {
     background-color: var(--text-field--background-color--invalid);
     border-color: var(--text-field--border-color--invalid);
   }
 
-  input:focus-visible,
-  input:focus {
+  &:focus-visible,
+  &:focus {
     background-color: var(--text-field--background-color--focused);
     outline: none;
     border-color: var(--text-field--border-color--focused);
   }
 
-  input:disabled {
+  &:disabled {
     background-color: var(--text-field--background-color--disabled);
     border-color: var(--text-field--border-color--disabled);
     color: var(--text-field--color--disabled);
   }
 }
-
-/* Elements */
 
 .label {
   grid-area: label;
@@ -50,15 +59,4 @@
   .fieldDescription {
     display: none;
   }
-}
-
-input {
-  grid-area: input;
-  border-width: var(--text-field--border-width);
-  border-style: var(--text-field--border-style);
-  border-color: var(--text-field--border-color--default);
-  border-radius: var(--text-field--border-radius);
-  padding-block: var(--text-field--padding-y);
-  padding-inline: var(--text-field--padding-x);
-  background-color: var(--text-field--background-color--default);
 }
