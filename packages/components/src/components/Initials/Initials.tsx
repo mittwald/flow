@@ -1,9 +1,11 @@
 import React, { FC, PropsWithChildren } from "react";
 
-export const Avatar: FC<PropsWithChildren> = (props) => {
+export const Initials: FC<PropsWithChildren<{ children: string }>> = (
+  props,
+) => {
   const { children } = props;
 
   return <>{children}</>;
 };
 
-export default Avatar;
+export default Initials;
