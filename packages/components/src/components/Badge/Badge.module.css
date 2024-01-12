@@ -8,18 +8,17 @@
   padding-block: var(--badge--padding-y);
   padding-inline: var(--badge--padding-x);
   height: var(--badge--height);
-  column-gap: var(--badge--icon-to-text-spacing);
+  line-height: var(--size-rem--m);
   display: grid;
   grid-template-areas: "icon label";
   grid-template-columns: auto 1fr;
+  column-gap: var(--badge--icon-to-text-spacing);
   max-width: fit-content;
-  line-height: var(--size-rem--m);
 
   /* With icon only */
 
   &:not(:has(.label)) {
-    padding-inline-end: var(--badge--padding-x-icon-only);
-    padding-inline-start: var(--badge--padding-x-icon-only);
+    padding-inline: var(--badge--padding-x-icon-only);
     grid-template-areas: "icon";
     grid-template-columns: auto;
   }
