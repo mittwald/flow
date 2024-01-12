@@ -17,8 +17,7 @@
 
   /* With icon only */
 
-  &.iconOnly,
-  &:has(.customIcon):not(:has(.label)) {
+  &:not(:has(.label)) {
     padding-inline-end: var(--badge--padding-x-icon-only);
     padding-inline-start: var(--badge--padding-x-icon-only);
     grid-template-areas: "icon";
@@ -60,4 +59,5 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  grid-area: label;
 }

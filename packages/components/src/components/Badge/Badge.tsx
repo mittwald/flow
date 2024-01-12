@@ -14,11 +14,7 @@ export interface BadgeProps extends PropsWithChildren {
 export const Badge: FC<BadgeProps> = (props) => {
   const { children, className, variant = "info", ...rest } = props;
 
-  const rootClassName = clsx(className, styles.root, styles[variant], {
-    [styles.iconOnly]: !children,
-  });
-
-  console.log(children);
+  const rootClassName = clsx(className, styles.root, styles[variant]);
 
   const propsContext: PropsContext = {
     icon: {
