@@ -18,6 +18,7 @@ export default defineConfig(
           RadioGroup: "./src/components/RadioGroup/index.ts",
           Radio: "./src/components/RadioGroup/components/Radio/index.ts",
           Text: "./src/components/Text/index.ts",
+          Checkbox: "./src/components/Checkbox/index.ts",
           Heading: "./src/components/Heading/index.ts",
           Note: "./src/components/Note/index.ts",
           StatusIcon: "./src/components/StatusIcon/index.ts",
