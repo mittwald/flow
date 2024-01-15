@@ -10,6 +10,15 @@ const meta: Meta<typeof Link> = {
     onPress: action("onPress"),
   },
   render: (props) => <Link {...props}>Link</Link>,
+  argTypes: {
+    variant: {
+      control: "inline-radio",
+      defaultValue: "default",
+    },
+  },
+  parameters: {
+    controls: { exclude: ["onPress"] },
+  },
 };
 export default meta;
 

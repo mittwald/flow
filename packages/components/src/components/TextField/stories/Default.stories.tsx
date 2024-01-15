@@ -16,9 +16,6 @@ const meta: Meta<typeof TextField> = {
       <Label>First name</Label>
     </TextField>
   ),
-  parameters: {
-    controls: { exclude: ["errorMessage"] },
-  },
 };
 
 export default meta;

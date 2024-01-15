@@ -13,6 +13,9 @@ const meta: Meta<typeof Badge> = {
       control: "inline-radio",
     },
   },
+  parameters: {
+    controls: { exclude: ["className"] },
+  },
   render: (props) => <Badge {...props}>Info</Badge>,
 };
 export default meta;

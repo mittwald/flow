@@ -9,6 +9,17 @@ const meta: Meta<typeof Switch> = {
   args: {
     onChange: action("onChange"),
   },
+  parameters: {
+    controls: { exclude: ["onChange"] },
+  },
+  argTypes: {
+    variant: {
+      control: "inline-radio",
+    },
+    labelPosition: {
+      control: "inline-radio",
+    },
+  },
   render: (props) => <Switch {...props}>Autoresponder</Switch>,
 };
 
