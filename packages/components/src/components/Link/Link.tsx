@@ -16,7 +16,7 @@ export const Link: FC<LinkProps> = (props) => {
     className,
     variant = "default",
     ...rest
-  } = useProps("link", props);
+  } = useProps("Link", props);
 
   const rootClassName = clsx(className, styles.root, styles[variant]);
 
