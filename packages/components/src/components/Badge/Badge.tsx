@@ -8,7 +8,7 @@ import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
 export interface BadgeProps extends PropsWithChildren {
   /** @default "info" */
   variant?: "info" | "success" | "warning" | "negative";
-  className: string;
+  className?: string;
 }
 
 export const Badge: FC<BadgeProps> = (props) => {
