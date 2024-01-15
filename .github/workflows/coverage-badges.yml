@@ -1,4 +1,4 @@
-name: "coverage"
+name: "coverage-badges"
 on:
   push:
     branches:
