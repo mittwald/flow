@@ -21,10 +21,7 @@ jobs:
           package-manager: yarn
           test-script: yarn run test:unit
 
-      - name: Delete remote badges branch
-        run: git push origin --delete badges
-
-      - name: Create badges branch
+      - name: Checkout badges branch
         run: git checkout -b badges
 
       - name: Generating jest coverage badges
