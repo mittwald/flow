@@ -7,6 +7,8 @@ import type {
   NavigationItemProps,
   NavigationProps,
 } from "@/components/Navigation";
+import { FieldErrorProps } from "@/components/FieldError";
+import { FieldDescriptionProps } from "@/components/FieldDescription";
 import { NoteProps } from "@/components/Note";
 import { HeadingProps } from "@/components/Heading";
 
@@ -22,4 +24,6 @@ export interface FlowComponentPropsTypes {
   NavigationItem: NavigationItemProps;
   Heading: HeadingProps;
   Note: NoteProps;
+  FieldError: FieldErrorProps;
+  FieldDescription: FieldDescriptionProps;
 }

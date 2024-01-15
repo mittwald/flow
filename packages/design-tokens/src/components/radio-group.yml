@@ -1,4 +1,4 @@
-radiogroup:
+radio-group:
   radio-to-radio-spacing:
     value: "{size-px.m}"
   label-to-radio-spacing:

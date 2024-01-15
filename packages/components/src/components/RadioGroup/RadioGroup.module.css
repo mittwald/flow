@@ -8,7 +8,7 @@
 
   > :global(.flow-label) {
     width: 100%;
-    margin-bottom: var(--radiogroup--label-to-radio-spacing);
+    margin-bottom: var(--radio-group--label-to-radio-spacing);
   }
 
   /* With icon or content */
@@ -16,13 +16,13 @@
   &:has(:global(.flow-radiogroup-radio-content)),
   &:has(:global(.flow-radiogroup-radio-icon)) {
     display: grid;
-    gap: var(--radiogroup--radio-to-radio-spacing);
+    gap: var(--radio-group--radio-to-radio-spacing);
     :global(.flow-label) {
       grid-column: 1 / -1;
       margin-bottom: calc(
         (
-            var(--radiogroup--radio-to-radio-spacing) -
-              var(--radiogroup--label-to-radio-spacing)
+            var(--radio-group--radio-to-radio-spacing) -
+              var(--radio-group--label-to-radio-spacing)
           ) * -1
       );
     }
