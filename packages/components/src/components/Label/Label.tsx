@@ -12,7 +12,7 @@ export interface LabelProps
 }
 
 export const Label: FC<LabelProps> = (props) => {
-  const { children, className, optional, ...rest } = useProps("label", props);
+  const { children, className, optional, ...rest } = useProps("Label", props);
 
   const rootClassName = clsx(className, styles.root);
   const localizedOptionalString =
