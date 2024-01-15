@@ -9,7 +9,7 @@ export interface FieldDescriptionProps
   extends PropsWithChildren<Omit<Aria.TextProps, "children" | "slot">> {}
 
 export const FieldDescription: FC<FieldDescriptionProps> = (props) => {
-  const { children, className, ...rest } = useProps("fieldDescription", props);
+  const { children, className, ...rest } = useProps("FieldDescription", props);
 
   const rootClassName = clsx(className, styles.root);
 

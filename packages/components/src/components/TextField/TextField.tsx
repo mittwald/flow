@@ -15,14 +15,14 @@ export const TextField: FC<TextFieldProps> = (props) => {
   const rootClassName = clsx(className, styles.root);
 
   const propsContext: PropsContext = {
-    label: {
+    Label: {
       className: styles.label,
       optional: !props.isRequired,
     },
-    fieldDescription: {
+    FieldDescription: {
       className: styles.fieldDescription,
     },
-    fieldError: {
+    FieldError: {
       className: styles.customFieldError,
     },
   };

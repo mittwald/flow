@@ -8,7 +8,7 @@ export interface FieldErrorProps
   extends PropsWithChildren<Omit<Aria.FieldErrorProps, "children">> {}
 
 export const FieldError: FC<FieldErrorProps> = (props) => {
-  const { children, className, ...rest } = useProps("fieldError", props);
+  const { children, className, ...rest } = useProps("FieldError", props);
 
   const rootClassName = clsx(className, styles.root);
 
