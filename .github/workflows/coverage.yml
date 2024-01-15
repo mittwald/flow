@@ -27,10 +27,10 @@ jobs:
       - name: Create badges branch
         run: git checkout -b badges
 
-      - name: Generating coverage badges
+      - name: Generating jest coverage badges
         uses: jpb06/jest-badges-action@latest
         with:
-          branches: '*'
+          branches: main
           target-branch: badges
           coverage-summary-path: ./packages/components/coverage/coverage-summary.json
 
