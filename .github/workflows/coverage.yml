@@ -23,4 +23,4 @@ jobs:
         uses: jpb06/jest-badges-action@latest
         with:
           branches: chore/jest-badges
-          coverage-summary-path: report.json
+          coverage-summary-path: ./packages/components/report.json
