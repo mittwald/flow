@@ -13571,13 +13571,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"html-dom-parser@npm:5.0.5":
-  version: 5.0.5
-  resolution: "html-dom-parser@npm:5.0.5"
+"html-dom-parser@npm:5.0.7":
+  version: 5.0.7
+  resolution: "html-dom-parser@npm:5.0.7"
   dependencies:
     domhandler: "npm:5.0.3"
-    htmlparser2: "npm:9.0.0"
-  checksum: d27f2d01fb23a9152fa9ec70ff908409e9738fbf9ce4d6e4c0b8c810f95db8924c7ef0698e0f3e0d7605d3037fea498afc4c404015f0ab2705636b9d0efce96b
+    htmlparser2: "npm:9.1.0"
+  checksum: ff3fdbc538d81ed665619f3b5da513e577afb30648beceb649f13dace9f1f66f145e75c9eb7b15fb9e7951ba940c116913d8ab15d099caeabcb4c514ad4ca078
   languageName: node
   linkType: hard
 
@@ -13598,16 +13598,16 @@ __metadata:
   linkType: hard
 
 "html-react-parser@npm:^5.0.7":
-  version: 5.0.9
-  resolution: "html-react-parser@npm:5.0.9"
+  version: 5.1.1
+  resolution: "html-react-parser@npm:5.1.1"
   dependencies:
     domhandler: "npm:5.0.3"
-    html-dom-parser: "npm:5.0.5"
+    html-dom-parser: "npm:5.0.7"
     react-property: "npm:2.0.2"
     style-to-js: "npm:1.1.10"
   peerDependencies:
     react: 0.14 || 15 || 16 || 17 || 18
-  checksum: 9ef88bc6f0da89447ef006359e2ef0c17ba9e340e89e68a59bef3c69b2e368a6c45025d293b02427a321ff54dcd6ec316531c17eb137125f94c018e97951cfd1
+  checksum: b3c4ab88f2f2c0b30622bf03c3874e417eb9f04586182518273b36c4e8b0ae10ea54c6ef33d01f33f74aa35e24090eff2f3d55d52fee4677c5f22fad3a6c8e38
   languageName: node
   linkType: hard
 
@@ -13618,15 +13618,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"htmlparser2@npm:9.0.0":
-  version: 9.0.0
-  resolution: "htmlparser2@npm:9.0.0"
+"htmlparser2@npm:9.1.0":
+  version: 9.1.0
+  resolution: "htmlparser2@npm:9.1.0"
   dependencies:
     domelementtype: "npm:^2.3.0"
     domhandler: "npm:^5.0.3"
     domutils: "npm:^3.1.0"
     entities: "npm:^4.5.0"
-  checksum: 100d24059a267068c6e73b4df7b123936ad39c86203c42c43935a84965be566a4162402355ba48889c8b7a42b55f8843e673ee2b5d21f0fd67c08f074d921068
+  checksum: 394f6323efc265bbc791d8c0d96bfe95984e0407565248521ab92e2dc7668e5ceeca7bc6ed18d408b9ee3b25032c5743368a4280d280332d782821d5d467ad8f
   languageName: node
   linkType: hard
 

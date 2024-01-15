@@ -5971,7 +5971,7 @@ const RAW_RUNTIME_STATE =
           ["@types/react-dom", "npm:18.2.17"],\
           ["@types/rollup", "npm:0.54.0"],\
           ["clsx", "npm:2.0.0"],\
-          ["html-react-parser", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:5.0.9"],\
+          ["html-react-parser", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:5.1.1"],\
           ["jest", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:29.7.0"],\
           ["jest-environment-jsdom", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:29.7.0"],\
           ["postcss", "npm:8.4.32"],\
@@ -6031,7 +6031,7 @@ const RAW_RUNTIME_STATE =
           ["@types/react-dom", "npm:18.2.17"],\
           ["@types/rollup", "npm:0.54.0"],\
           ["clsx", "npm:2.0.0"],\
-          ["html-react-parser", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:5.0.9"],\
+          ["html-react-parser", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:5.1.1"],\
           ["jest", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:29.7.0"],\
           ["jest-environment-jsdom", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:29.7.0"],\
           ["postcss", "npm:8.4.32"],\
@@ -6085,7 +6085,7 @@ const RAW_RUNTIME_STATE =
           ["@types/react-dom", "npm:18.2.17"],\
           ["@types/rollup", "npm:0.54.0"],\
           ["clsx", "npm:2.0.0"],\
-          ["html-react-parser", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:5.0.9"],\
+          ["html-react-parser", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:5.1.1"],\
           ["jest", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:29.7.0"],\
           ["jest-environment-jsdom", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:29.7.0"],\
           ["postcss", "npm:8.4.32"],\
@@ -20303,12 +20303,12 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["html-dom-parser", [\
-      ["npm:5.0.5", {\
-        "packageLocation": "./.yarn/cache/html-dom-parser-npm-5.0.5-871fbc4fb5-d27f2d01fb.zip/node_modules/html-dom-parser/",\
+      ["npm:5.0.7", {\
+        "packageLocation": "./.yarn/cache/html-dom-parser-npm-5.0.7-502b2408a0-ff3fdbc538.zip/node_modules/html-dom-parser/",\
         "packageDependencies": [\
-          ["html-dom-parser", "npm:5.0.5"],\
+          ["html-dom-parser", "npm:5.0.7"],\
           ["domhandler", "npm:5.0.3"],\
-          ["htmlparser2", "npm:9.0.0"]\
+          ["htmlparser2", "npm:9.1.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -20333,20 +20333,20 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["html-react-parser", [\
-      ["npm:5.0.9", {\
-        "packageLocation": "./.yarn/cache/html-react-parser-npm-5.0.9-792dbf1413-9ef88bc6f0.zip/node_modules/html-react-parser/",\
+      ["npm:5.1.1", {\
+        "packageLocation": "./.yarn/cache/html-react-parser-npm-5.1.1-c2f5d6d41b-b3c4ab88f2.zip/node_modules/html-react-parser/",\
         "packageDependencies": [\
-          ["html-react-parser", "npm:5.0.9"]\
+          ["html-react-parser", "npm:5.1.1"]\
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:5.0.9", {\
-        "packageLocation": "./.yarn/__virtual__/html-react-parser-virtual-3b1756c31d/0/cache/html-react-parser-npm-5.0.9-792dbf1413-9ef88bc6f0.zip/node_modules/html-react-parser/",\
+      ["virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:5.1.1", {\
+        "packageLocation": "./.yarn/__virtual__/html-react-parser-virtual-8fb13cfc23/0/cache/html-react-parser-npm-5.1.1-c2f5d6d41b-b3c4ab88f2.zip/node_modules/html-react-parser/",\
         "packageDependencies": [\
-          ["html-react-parser", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:5.0.9"],\
+          ["html-react-parser", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:5.1.1"],\
           ["@types/react", "npm:18.2.42"],\
           ["domhandler", "npm:5.0.3"],\
-          ["html-dom-parser", "npm:5.0.5"],\
+          ["html-dom-parser", "npm:5.0.7"],\
           ["react", "npm:18.2.0"],\
           ["react-property", "npm:2.0.2"],\
           ["style-to-js", "npm:1.1.10"]\
@@ -20368,10 +20368,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["htmlparser2", [\
-      ["npm:9.0.0", {\
-        "packageLocation": "./.yarn/cache/htmlparser2-npm-9.0.0-ceeb665083-100d24059a.zip/node_modules/htmlparser2/",\
+      ["npm:9.1.0", {\
+        "packageLocation": "./.yarn/cache/htmlparser2-npm-9.1.0-5ef8394060-394f6323ef.zip/node_modules/htmlparser2/",\
         "packageDependencies": [\
-          ["htmlparser2", "npm:9.0.0"],\
+          ["htmlparser2", "npm:9.1.0"],\
           ["domelementtype", "npm:2.3.0"],\
           ["domhandler", "npm:5.0.3"],\
           ["domutils", "npm:3.1.0"],\
