@@ -14,7 +14,7 @@ export const Heading: FC<HeadingProps> = (props) => {
     className,
     level = 3,
     ...rest
-  } = useProps("heading", props);
+  } = useProps("Heading", props);
 
   const rootClassName = clsx(className, styles.root);
 

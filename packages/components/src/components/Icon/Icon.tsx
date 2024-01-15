@@ -31,7 +31,7 @@ export const Icon: FC<IconProps> = (props) => {
     "aria-label": ariaLabel,
     children,
     ...svgAttributes
-  } = useProps("icon", props);
+  } = useProps("Icon", props);
 
   const iconProps: SvgAttributeProps = {
     ...svgAttributes,

@@ -19,19 +19,19 @@ export const Note: FC<NoteProps> = (props) => {
     className,
     variant = "info",
     ...rest
-  } = useProps("note", props);
+  } = useProps("Note", props);
 
   const rootClassName = clsx(className, styles.root, styles[variant]);
 
   const propsContext: PropsContext = {
-    icon: {
+    Icon: {
       className: styles.customIcon,
     },
-    heading: {
+    Heading: {
       className: styles.heading,
       level: 3,
     },
-    content: {
+    Content: {
       className: styles.content,
     },
   };
