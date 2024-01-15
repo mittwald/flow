@@ -21,18 +21,9 @@ jobs:
           package-manager: yarn
           test-script: yarn run test:unit
 
-      - name: Checkout badges branch
-        run: git checkout -b badges
-
-      - name: Pull latest changes to badges branch
-        run: git pull
-
       - name: Generating jest coverage badges
         uses: jpb06/jest-badges-action@latest
         with:
           branches: main
           target-branch: badges
           coverage-summary-path: ./packages/components/coverage/coverage-summary.json
-
-      - name: Push badges branch
-        run: git push origin badges
