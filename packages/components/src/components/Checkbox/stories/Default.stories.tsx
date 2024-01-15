@@ -9,6 +9,9 @@ const meta: Meta<typeof Checkbox> = {
   args: {
     onChange: action("onChange"),
   },
+  parameters: {
+    controls: { exclude: ["onChange"] },
+  },
   render: (props) => <Checkbox {...props}>Activate spam protection</Checkbox>,
 };
 

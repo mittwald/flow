@@ -10,6 +10,7 @@
     "./Heading": "./dist/Heading.js",
     "./Note": "./dist/Note.js",
     "./Navigation": "./dist/Navigation.js",
+    "./Badge": "./dist/Badge.js",
     "./Link": "./dist/Link.js",
     "./TextField": "./dist/TextField.js",
     "./FieldError": "./dist/FieldError.js",

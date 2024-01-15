@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Switch } from "../index";
 import React from "react";
-import { dummyText } from "@/lib/dummyText";
+import { dummyText } from "@/lib/dev/dummyText";
 import defaultMeta from "./Default.stories";
 
 const meta: Meta<typeof Switch> = {

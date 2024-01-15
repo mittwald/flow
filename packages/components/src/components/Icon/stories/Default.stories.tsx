@@ -9,6 +9,9 @@ const meta: Meta<typeof Icon> = {
   args: {
     fontSize: 32,
   },
+  parameters: {
+    controls: { exclude: ["faIcon"] },
+  },
 };
 export default meta;
 
