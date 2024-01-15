@@ -7,6 +7,7 @@
   flex-direction: row;
   align-items: center;
   padding: var(--button--padding-y) var(--button--padding-x);
+  font-size: var(--font-size--default);
   font-weight: bold;
   transition-property: color, background-color;
   transition-duration: var(--transition--duration--default);
