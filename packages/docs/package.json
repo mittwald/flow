@@ -1,15 +1,15 @@
 {
-  "name": "@mittwald/flow-documentation",
+  "name": "@mittwald/flow-next-documentation",
   "private": true,
   "version": "0.1.0",
   "type": "module",
   "scripts": {
     "build": "run next build",
     "build:deps": "",
-    "build:deps:base": "yarn run -T lerna run build:deps --scope=@mittwald/flow-documentation",
-    "build:deps:run": "yarn run -T lerna run build:deps --scope=@mittwald/flow-documentation",
+    "build:deps:base": "yarn run -T lerna run build:deps --scope=@mittwald/flow-next-documentation",
+    "build:deps:run": "yarn run -T lerna run build:deps --scope=@mittwald/flow-next-documentation",
     "build:imports": "yarn pnpify node --loader ts-node/esm dev/generateLiveCodeEditorGlobalImports.ts",
-    "build:watch:dependents": "yarn build:deps:run && run -T lerna watch --scope=@mittwald/flow-documentation --include-dependencies -- lerna run build:deps --scope=@mittwald/flow-documentation",
+    "build:watch:dependents": "yarn build:deps:run && run -T lerna watch --scope=@mittwald/flow-next-documentation --include-dependencies -- lerna run build:deps --scope=@mittwald/flow-next-documentation",
     "dev": "run next dev",
     "start": "run next start",
     "test:tsc": "tsc --noEmit"
@@ -17,8 +17,8 @@
   "dependencies": {
     "@mdx-js/loader": "^3.0.0",
     "@mdx-js/react": "^3.0.0",
-    "@mittwald/flow-components": "workspace:^",
-    "@mittwald/flow-stylesheet": "workspace:^",
+    "@mittwald/flow-next-components": "workspace:^",
+    "@mittwald/flow-next-stylesheet": "workspace:^",
     "@next/mdx": "^14.0.4",
     "@types/mdx": "^2.0.10",
     "next": "^14.0.4",

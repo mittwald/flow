@@ -8,6 +8,8 @@
   align-items: center;
   padding: var(--button--padding-y) var(--button--padding-x);
   font-weight: bold;
+  transition-property: color, background-color;
+  transition-duration: var(--transition--duration--default);
 }
 
 .primary {
