@@ -14,6 +14,9 @@ const meta: Meta<typeof RadioGroup> = {
   args: {
     onChange: action("onChange"),
   },
+  parameters: {
+    controls: { exclude: ["onChange"] },
+  },
   render: (props) => (
     <RadioGroup {...props} defaultValue="admin">
       <Label>Role</Label>

@@ -17,6 +17,9 @@ const meta: Meta<typeof Button> = {
       control: "inline-radio",
     },
   },
+  parameters: {
+    controls: { exclude: ["onPress"] },
+  },
   render: (props) => <Button {...props}>Button</Button>,
 };
 
