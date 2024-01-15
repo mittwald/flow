@@ -1,0 +1,17 @@
+@import "@/styles";
+
+.root {
+  display: grid;
+  grid-template-areas:
+    "label"
+    "value";
+  row-gap: var(--labeled-value--label-to-value-spacing);
+}
+
+.label {
+  grid-area: label;
+}
+
+.value {
+  grid-area: value;
+}

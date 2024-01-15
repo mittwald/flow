@@ -5980,6 +5980,7 @@ const RAW_RUNTIME_STATE =
           ["@types/react-dom", "npm:18.2.18"],\
           ["@types/rollup", "npm:0.54.0"],\
           ["clsx", "npm:2.1.0"],\
+          ["copy-to-clipboard", "npm:3.3.3"],\
           ["html-react-parser", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:5.1.1"],\
           ["jest", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:29.7.0"],\
           ["jest-environment-jsdom", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:29.7.0"],\
@@ -6040,6 +6041,7 @@ const RAW_RUNTIME_STATE =
           ["@types/react-dom", "npm:18.2.18"],\
           ["@types/rollup", "npm:0.54.0"],\
           ["clsx", "npm:2.1.0"],\
+          ["copy-to-clipboard", "npm:3.3.3"],\
           ["html-react-parser", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:5.1.1"],\
           ["jest", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:29.7.0"],\
           ["jest-environment-jsdom", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:29.7.0"],\
@@ -6094,6 +6096,7 @@ const RAW_RUNTIME_STATE =
           ["@types/react-dom", "npm:18.2.18"],\
           ["@types/rollup", "npm:0.54.0"],\
           ["clsx", "npm:2.1.0"],\
+          ["copy-to-clipboard", "npm:3.3.3"],\
           ["html-react-parser", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:5.1.1"],\
           ["jest", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:29.7.0"],\
           ["jest-environment-jsdom", "virtual:622b9e402248d41f9152416cdfd18d0c7d03f97b0a1c801dc2b1955020a2ad17c03e46994e7992cf637cc749d5ccffdfbc35353aa1956f9a84cff32487265744#npm:29.7.0"],\
@@ -17073,6 +17076,16 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["copy-anything", "npm:2.0.6"],\
           ["is-what", "npm:3.14.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["copy-to-clipboard", [\
+      ["npm:3.3.3", {\
+        "packageLocation": "./.yarn/cache/copy-to-clipboard-npm-3.3.3-6964e6cfad-3ebf5e8ee0.zip/node_modules/copy-to-clipboard/",\
+        "packageDependencies": [\
+          ["copy-to-clipboard", "npm:3.3.3"],\
+          ["toggle-selection", "npm:1.0.6"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -28628,6 +28641,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/tocbot-npm-4.25.0-a25d976a1b-b6ca2ca5a3.zip/node_modules/tocbot/",\
         "packageDependencies": [\
           ["tocbot", "npm:4.25.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["toggle-selection", [\
+      ["npm:1.0.6", {\
+        "packageLocation": "./.yarn/cache/toggle-selection-npm-1.0.6-c506b73005-f2cf1f2c70.zip/node_modules/toggle-selection/",\
+        "packageDependencies": [\
+          ["toggle-selection", "npm:1.0.6"]\
         ],\
         "linkType": "HARD"\
       }]\

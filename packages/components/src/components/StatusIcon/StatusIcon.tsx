@@ -16,12 +16,11 @@ export interface StatusIconProps {
 
 export const StatusIcon: FC<StatusIconProps> = (props) => {
   const { variant = "info", className } = props;
+  const stringFormatter = useLocalizedStringFormatter(locales);
 
   const rootClassName = clsx(className, styles.root);
 
-  const ariaLabel = useLocalizedStringFormatter(locales).format(
-    `statusIcon.${variant}`,
-  );
+  const ariaLabel = stringFormatter.format(`statusIcon.${variant}`);
 
   const icon =
     variant === "info"

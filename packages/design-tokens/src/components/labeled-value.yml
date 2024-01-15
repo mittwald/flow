@@ -1,0 +1,3 @@
+labeled-value:
+  label-to-value-spacing:
+    value: "{size-rem.xs}"
