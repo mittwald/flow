@@ -6,7 +6,7 @@ import { useProps } from "@/lib/propsContext";
 export interface ImageProps extends ComponentProps<"img"> {}
 
 export const Image: FC<ImageProps> = (props) => {
-  const { className, ...rest } = useProps("image", props);
+  const { className, ...rest } = useProps("Image", props);
 
   const rootClassName = clsx(className, styles.root);
 

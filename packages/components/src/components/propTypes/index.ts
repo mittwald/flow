@@ -24,6 +24,6 @@ export interface FlowComponentPropsTypes {
   NavigationItem: NavigationItemProps;
   Heading: HeadingProps;
   Note: NoteProps;
-  initials: InitialsProps;
-  image: ImageProps;
+  Initials: InitialsProps;
+  Image: ImageProps;
 }

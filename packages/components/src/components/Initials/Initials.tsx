@@ -10,7 +10,7 @@ export interface InitialsProps extends PropsWithChildren<{ children: string }> {
 }
 
 export const Initials: FC<InitialsProps> = (props) => {
-  const { children, className } = useProps("initials", props);
+  const { children, className } = useProps("Initials", props);
 
   const initials = getInitialsFromString(children);
 

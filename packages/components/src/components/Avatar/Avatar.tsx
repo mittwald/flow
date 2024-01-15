@@ -15,10 +15,10 @@ export const Avatar: FC<AvatarProps> = (props) => {
   const rootClassName = clsx(className, styles.root, styles[`size-${size}`]);
 
   const propsContext: PropsContext = {
-    initials: {
+    Initials: {
       className: styles.initials,
     },
-    image: {
+    Image: {
       className: styles.image,
     },
   };
