@@ -52,4 +52,4 @@ radiogroup:
   label-font-weight-with-content-or-icon:
     value: "{font-weight.bold}"
   icon-size-without-content:
-    value: "{icon.size.xl}"
+    value: "{icon.size.l}"
