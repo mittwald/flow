@@ -10,7 +10,6 @@ import clsx from "clsx";
 import { StatusVariantProps } from "@/lib/types/props";
 
 export interface StatusIconProps extends StatusVariantProps {
-  /** @default "info" */
   className?: string;
 }
 

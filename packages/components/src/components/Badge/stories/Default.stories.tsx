@@ -8,6 +8,11 @@ import { Text } from "@/components/Text";
 const meta: Meta<typeof Badge> = {
   title: "Badge",
   component: Badge,
+  argTypes: {
+    variant: {
+      control: "inline-radio",
+    },
+  },
   render: (props) => <Badge {...props}>Info</Badge>,
 };
 export default meta;

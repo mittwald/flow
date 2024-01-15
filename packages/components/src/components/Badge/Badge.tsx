@@ -7,7 +7,6 @@ import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { StatusVariantProps } from "@/lib/types/props";
 
 export interface BadgeProps extends PropsWithChildren, StatusVariantProps {
-  /** @default "info" */
   className?: string;
 }
 
