@@ -58,7 +58,7 @@ export const WithPlaceholder: Story = {
   ),
 };
 
-export const Invalid: Story = {
+export const WithFieldError: Story = {
   render: (props) => (
     <TextField {...props} isInvalid defaultValue="hello">
       <Label>URL</Label>
