@@ -19,15 +19,15 @@ export const Button: FC<ButtonProps> = (props) => {
     children,
     className: classNameFromProps,
     ...restProps
-  } = useProps("button", props);
+  } = useProps("Button", props);
 
   const className = clsx(classNameFromProps, styles.root, styles[variant]);
 
   const propsContext: PropsContext = {
-    text: {
+    Text: {
       className: styles.text,
     },
-    icon: {
+    Icon: {
       className: styles.icon,
     },
   };

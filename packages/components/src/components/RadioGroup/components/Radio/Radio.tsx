@@ -15,13 +15,13 @@ export const Radio: FC<RadioProps> = (props) => {
   const rootClassName = clsx(className, styles.root);
 
   const propsContext: PropsContext = {
-    icon: {
+    Icon: {
       className: styles.icon,
     },
-    text: {
+    Text: {
       className: styles.label,
     },
-    content: {
+    Content: {
       className: styles.content,
     },
   };

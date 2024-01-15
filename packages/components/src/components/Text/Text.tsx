@@ -13,7 +13,7 @@ export const Text: FC<TextProps> = (props) => {
     className,
     elementType = "span",
     ...rest
-  } = useProps("text", props);
+  } = useProps("Text", props);
 
   const rootClassName = clsx(className, styles.root);
 
