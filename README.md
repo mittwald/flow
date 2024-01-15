@@ -1,5 +1,7 @@
 # mittwald Flow - The mittwald Design System
 
+![jest coverage](https://raw.githubusercontent.com/mittwald/flow/badges/badges/coverage-jest%20coverage.svg)
+
 > ⚠️ **EARLY DEVELOPMENT &mdash; STABILITY NOTICE**
 >
 > This project is in **early development** stage, and we do not offer any

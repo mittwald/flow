@@ -1,5 +1,5 @@
 {
-  "name": "@mittwald/flow-components",
+  "name": "@mittwald/flow-next-components",
   "version": "0.0.0",
   "type": "module",
   "exports": {
@@ -10,6 +10,8 @@
     "./Heading": "./dist/Heading.js",
     "./Note": "./dist/Note.js",
     "./Navigation": "./dist/Navigation.js",
+    "./Badge": "./dist/Badge.js",
+    "./Link": "./dist/Link.js",
     "./TextField": "./dist/TextField.js",
     "./FieldError": "./dist/FieldError.js",
     "./FieldDescription": "./dist/FieldDescription.js",
@@ -27,18 +29,19 @@
   "scripts": {
     "build": "run vite build --config vite.build.config.ts",
     "build:deps": "",
-    "build:deps:run": "yarn run -T lerna run build:deps --scope=@mittwald/flow-components",
-    "build:watch:dependents": "yarn build:deps:run && run -T lerna watch --scope=@mittwald/flow-components --include-dependencies -- lerna run build:deps --scope=@mittwald/flow-components",
+    "build:deps:run": "yarn run -T lerna run build:deps --scope=@mittwald/flow-next-components",
+    "build:watch:dependents": "yarn build:deps:run && run -T lerna watch --scope=@mittwald/flow-next-components --include-dependencies -- lerna run build:deps --scope=@mittwald/flow-next-components",
     "dev": "run storybook:start",
     "storybook:build": "run storybook build",
     "storybook:start": "run storybook dev -p 6006",
-    "test": "run jest",
-    "test:tsc": "tsc --noEmit"
+    "test": "concurrently yarn:test:compile yarn:test:unit",
+    "test:compile": "tsc --noEmit",
+    "test:unit": "run jest"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
-    "@mittwald/flow-design-tokens": "workspace:^",
+    "@mittwald/flow-next-design-tokens": "workspace:^",
     "@react-aria/utils": "^3.23.0",
     "@react-types/shared": "^3.22.0",
     "clsx": "^2.1.0",
@@ -68,6 +71,7 @@
     "@types/react": "^18.2.47",
     "@types/react-dom": "^18.2.18",
     "@types/rollup": "^0.54.0",
+    "concurrently": "^8.2.2",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "postcss": "^8.4.33",

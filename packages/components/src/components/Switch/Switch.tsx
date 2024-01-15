@@ -6,9 +6,9 @@ import clsx from "clsx";
 export interface SwitchProps
   extends PropsWithChildren<Omit<Aria.SwitchProps, "children">> {
   /** @default "trailing" */
-  labelPosition: "leading" | "trailing";
+  labelPosition?: "leading" | "trailing";
   /** @default "accent" */
-  variant: "accent" | "negative";
+  variant?: "accent" | "negative";
 }
 
 export const Switch: FC<SwitchProps> = (props) => {

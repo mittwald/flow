@@ -7,10 +7,9 @@ import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons/faExclama
 import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 import clsx from "clsx";
+import { StatusVariantProps } from "@/lib/types/props";
 
-export interface StatusIconProps {
-  /** @default "info" */
-  variant?: "info" | "success" | "warning" | "negative";
+export interface StatusIconProps extends StatusVariantProps {
   className?: string;
 }
 

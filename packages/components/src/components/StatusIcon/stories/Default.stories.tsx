@@ -4,6 +4,14 @@ import StatusIcon from "../StatusIcon";
 const meta: Meta<typeof StatusIcon> = {
   title: "StatusIcon",
   component: StatusIcon,
+  argTypes: {
+    variant: {
+      control: "inline-radio",
+    },
+  },
+  parameters: {
+    controls: { exclude: ["className"] },
+  },
 };
 
 export default meta;

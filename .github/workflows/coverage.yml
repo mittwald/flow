@@ -1,0 +1,19 @@
+name: "coverage"
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Jest coverage report
+        uses: ArtiomTr/jest-coverage-report-action@v2
+        with:
+          working-directory: ./packages/components/
+          package-manager: yarn
+          test-script: yarn run test:unit
