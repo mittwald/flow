@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, PropsWithChildren } from "react";
+import React, { ComponentProps, FC, PropsWithChildren } from "react";
 import {
   PropsContext,
   PropsContextProvider,
@@ -8,8 +8,7 @@ import styles from "./Note.module.css";
 import clsx from "clsx";
 import { StatusIcon } from "@/components/StatusIcon";
 
-export interface NoteProps
-  extends PropsWithChildren<HTMLAttributes<HTMLElement>> {
+export interface NoteProps extends PropsWithChildren<ComponentProps<"aside">> {
   variant?: "info" | "warning" | "negative";
 }
 

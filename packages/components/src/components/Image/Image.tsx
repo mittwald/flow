@@ -1,9 +1,9 @@
-import React, { FC, HTMLAttributes } from "react";
+import React, { ComponentProps, FC } from "react";
 import styles from "./Image.module.css";
 import clsx from "clsx";
 import { useProps } from "@/lib/propsContext";
 
-export interface ImageProps extends HTMLAttributes<HTMLImageElement> {}
+export interface ImageProps extends ComponentProps<"img"> {}
 
 export const Image: FC<ImageProps> = (props) => {
   const { className, ...rest } = useProps("image", props);
