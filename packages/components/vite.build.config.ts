@@ -27,6 +27,7 @@ export default defineConfig(
           Note: "./src/components/Note/index.ts",
           StatusIcon: "./src/components/StatusIcon/index.ts",
           Badge: "./src/components/Badge/index.ts",
+          Link: "./src/components/Link/index.ts",
         },
         formats: ["es"],
       },
