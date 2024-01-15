@@ -3,13 +3,27 @@ on:
   pull_request:
     branches:
       - main
+  push:
+    branches:
+      - main
+
 jobs:
   coverage:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: ArtiomTr/jest-coverage-report-action@v2
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Jest coverage report
+        uses: ArtiomTr/jest-coverage-report-action@v2
         with:
           working-directory: ./packages/components/
           package-manager: yarn
           test-script: yarn run test:unit
+
+      - name: Generating jest coverage badges
+        uses: jpb06/jest-badges-action@latest
+        with:
+          branches: main
+          target-branch: badges
+          coverage-summary-path: ./packages/components/coverage/coverage-summary.json
