@@ -3,9 +3,6 @@ on:
   pull_request:
     branches:
       - main
-  push:
-    branches:
-      - main
 
 jobs:
   coverage:
@@ -20,10 +17,3 @@ jobs:
           working-directory: ./packages/components/
           package-manager: yarn
           test-script: yarn run test:unit
-
-      - name: Generating jest coverage badges
-        uses: jpb06/jest-badges-action@latest
-        with:
-          branches: main
-          target-branch: badges
-          coverage-summary-path: ./packages/components/coverage/coverage-summary.json
