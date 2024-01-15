@@ -43,7 +43,7 @@ export const WithContent: Story = {
 
 export const WithCustomIcon: Story = {
   render: (props) => (
-    <Note {...props}>
+    <Note {...props} variant="negative">
       <Icon faIcon={faEnvelope} />
       <Heading>Email address has been archived</Heading>
       <Content>
