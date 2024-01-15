@@ -15,15 +15,15 @@ import { ImageProps } from "@/components/Image";
 export * from "./types";
 
 export interface FlowComponentPropsTypes {
-  text: TextProps;
-  button: ButtonProps;
-  icon: IconProps;
-  label: LabelProps;
-  content: ContentProps;
-  navigation: NavigationProps;
-  navigationItem: NavigationItemProps;
-  heading: HeadingProps;
-  note: NoteProps;
+  Text: TextProps;
+  Button: ButtonProps;
+  Icon: IconProps;
+  Label: LabelProps;
+  Content: ContentProps;
+  Navigation: NavigationProps;
+  NavigationItem: NavigationItemProps;
+  Heading: HeadingProps;
+  Note: NoteProps;
   initials: InitialsProps;
   image: ImageProps;
 }

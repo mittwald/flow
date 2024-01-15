@@ -21,10 +21,10 @@ export function NavigationItem<T extends object>(
   const { menuItemProps } = useNavigationItem({ key: item.key }, state, ref);
 
   const propsContext: PropsContext = {
-    text: {
+    Text: {
       className: styles.text,
     },
-    icon: {
+    Icon: {
       className: styles.icon,
     },
   };

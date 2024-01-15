@@ -18,7 +18,7 @@ export const Content: FC<ContentProps> = (props) => {
     className,
     elementType = "div",
     ...rest
-  } = useProps("content", props);
+  } = useProps("Content", props);
 
   const rootClassName = clsx(className, styles.root);
 
