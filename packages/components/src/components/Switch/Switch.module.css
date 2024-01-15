@@ -66,10 +66,11 @@
   height: var(--switch--indicator-height);
   background-color: var(--switch--indicator-color--default);
   border-radius: var(--switch--indicator-border-radius);
-  transition: all var(--transition--duration--default);
   padding: var(--switch--indicator-to-marker-spacing);
   flex-shrink: 0;
   position: relative;
+  transition-property: background-color;
+  transition-duration: var(--transition--duration--default);
 
   &:before {
     content: "";
@@ -78,7 +79,8 @@
     height: var(--switch--indicator-marker-size);
     background-color: var(--switch--indicator-marker-color);
     border-radius: var(--border-radius--round);
-    transition: all var(--transition--duration--default);
+    transition-property: transform;
+    transition-duration: var(--transition--duration--default);
     transform: translateX(0);
     position: absolute;
     top: var(--switch--indicator-to-marker-spacing);

@@ -4,7 +4,9 @@
   font-size: var(--link--font-size);
   font-weight: var(--link--font-weight);
   color: var(--link--color--default);
-  transition: all var(--transition--duration--default);
+  transition-property: color;
+  transition-duration: var(--transition--duration--default);
+
   &:not([aria-disabled]) {
     cursor: pointer;
   }
