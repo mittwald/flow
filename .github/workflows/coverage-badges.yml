@@ -30,7 +30,7 @@ jobs:
       - name: Tests
         uses: borales/actions-yarn@v4
         with:
-          cmd: test:unit
+          cmd: test:unit --ci --json --coverage --testLocationInResults --outputFile=report.json
           dir: packages/components
 
       - name: Generating coverage badges
@@ -38,6 +38,7 @@ jobs:
         with:
           branches: '*'
           target-branch: badges
+          coverage-summary-path: ./packages/components/report.json
 
       - name: Push badges branch
         run: git push origin badges
