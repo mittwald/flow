@@ -50,13 +50,22 @@ input {
 }
 
 .fieldError,
+.customFieldError,
 .fieldDescription {
   grid-area: info;
   margin-top: var(--text-field--label-to-input-spacing);
 }
 
+/* With field error */
+
 &:has(.fieldError) {
   .fieldDescription {
     display: none;
   }
+}
+
+/* With custom field error */
+
+&:has(.customFieldError) .fieldError {
+  display: none;
 }

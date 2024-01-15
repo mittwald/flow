@@ -6,17 +6,13 @@ import { action } from "@storybook/addon-actions";
 import FieldDescription from "@/components/FieldDescription/FieldDescription";
 import { Form } from "react-aria-components";
 import { Button } from "@/components/Button";
+import { FieldError } from "@/components/FieldError";
 
 const meta: Meta<typeof TextField> = {
   title: "TextField",
   component: TextField,
   render: (props) => (
-    <TextField
-      {...props}
-      defaultValue="John"
-      isRequired
-      onChange={action("onChange")}
-    >
+    <TextField onChange={action("onChange")} {...props}>
       <Label>First name</Label>
     </TextField>
   ),
@@ -33,33 +29,40 @@ export const Default: Story = {};
 
 export const Disabled: Story = { args: { isDisabled: true } };
 
-export const Optional: Story = {
-  render: (props) => (
-    <TextField {...props} defaultValue="John">
-      <Label>First name</Label>
-    </TextField>
-  ),
+export const Required: Story = {
+  args: { isRequired: true },
 };
 
 export const WithFieldDescription: Story = {
   render: (props) => (
-    <TextField {...props} defaultValue="https://mittwald.de" isRequired>
+    <TextField {...props}>
       <Label>URL</Label>
       <FieldDescription>Start with "https://"</FieldDescription>
     </TextField>
   ),
 };
 
+export const WithDefaultValue: Story = {
+  render: (props) => (
+    <TextField {...props} defaultValue="https://mittwald.de">
+      <Label>URL</Label>
+    </TextField>
+  ),
+};
+
+export const WithPlaceholder: Story = {
+  render: (props) => (
+    <TextField {...props} placeholder="https://">
+      <Label>URL</Label>
+    </TextField>
+  ),
+};
+
 export const Invalid: Story = {
   render: (props) => (
-    <TextField
-      {...props}
-      isInvalid
-      errorMessage="Invalid input"
-      defaultValue="hello"
-      isRequired
-    >
+    <TextField {...props} isInvalid defaultValue="hello">
       <Label>URL</Label>
+      <FieldError>Invalid input</FieldError>
       <FieldDescription>Start with "https://"</FieldDescription>
     </TextField>
   ),
