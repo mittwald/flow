@@ -1,5 +1,5 @@
 {
-  "name": "@mittwald/flow-components",
+  "name": "@mittwald/flow-next-components",
   "version": "0.0.0",
   "type": "module",
   "exports": {
@@ -27,8 +27,8 @@
   "scripts": {
     "build": "run vite build --config vite.build.config.ts",
     "build:deps": "",
-    "build:deps:run": "yarn run -T lerna run build:deps --scope=@mittwald/flow-components",
-    "build:watch:dependents": "yarn build:deps:run && run -T lerna watch --scope=@mittwald/flow-components --include-dependencies -- lerna run build:deps --scope=@mittwald/flow-components",
+    "build:deps:run": "yarn run -T lerna run build:deps --scope=@mittwald/flow-next-components",
+    "build:watch:dependents": "yarn build:deps:run && run -T lerna watch --scope=@mittwald/flow-next-components --include-dependencies -- lerna run build:deps --scope=@mittwald/flow-next-components",
     "dev": "run storybook:start",
     "storybook:build": "run storybook build",
     "storybook:start": "run storybook dev -p 6006",
@@ -39,7 +39,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
-    "@mittwald/flow-design-tokens": "workspace:^",
+    "@mittwald/flow-next-design-tokens": "workspace:^",
     "@react-aria/utils": "^3.23.0",
     "@react-types/shared": "^3.22.0",
     "clsx": "^2.1.0",
