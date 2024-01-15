@@ -38,7 +38,7 @@ jobs:
         with:
           branches: '*'
           target-branch: badges
-          coverage-summary-path: ./packages/components/report.json
+          coverage-summary-path: ./packages/components/coverage/coverage-summary.json
 
       - name: Push badges branch
         run: git push origin badges
