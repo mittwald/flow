@@ -21,6 +21,3 @@ jobs:
           test-script: yarn run test:unit
       - name: Generate jest coverage badges
         uses: jpb06/jest-badges-action@latest
-        with:
-          branches: main
-
