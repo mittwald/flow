@@ -17,10 +17,10 @@ export const Badge: FC<BadgeProps> = (props) => {
   const rootClassName = clsx(className, styles.root, styles[variant]);
 
   const propsContext: PropsContext = {
-    icon: {
+    Icon: {
       className: styles.customIcon,
     },
-    text: {
+    Text: {
       className: styles.label,
     },
   };
