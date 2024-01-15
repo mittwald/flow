@@ -1,0 +1,4 @@
+transition:
+  duration:
+    default:
+      value: 200ms

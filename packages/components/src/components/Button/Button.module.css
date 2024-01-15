@@ -8,8 +8,6 @@
   align-items: center;
   padding: var(--button--padding-y) var(--button--padding-x);
   font-weight: bold;
-  font-size: var(--button--font-size);
-  line-height: var(--button--line-height);
 }
 
 .primary {
