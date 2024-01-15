@@ -1,0 +1,49 @@
+switch:
+  font-size:
+    value: "{font-size.s}"
+  font-weight:
+    value: "{font-weight.bold}"
+  color:
+    disabled:
+      value: "{neutral.color.600}"
+  label-to-indicator-spacing:
+    value: "{size-rem.s}"
+
+  # Indicator
+  indicator-height:
+    value: "{size-rem.l}"
+  indicator-width:
+    value: 2.5rem
+  indicator-border-radius:
+    value: "{size-rem.m}"
+  indicator-to-marker-spacing:
+    value: "{size-rem.xs}"
+  indicator-marker-color:
+    value: "{color.white}"
+  indicator-marker-size:
+    value: "{size-rem.m}"
+  indicator-color:
+    default:
+      value: "{neutral.color.500}"
+    pressed:
+      value: "{neutral.color.600}"
+    disabled:
+      value: "{neutral.color.400}"
+
+  # Accent
+  accent-indicator-color:
+    selected:
+      value: "{accent.color.700}"
+    selected-pressed:
+      value: "{accent.color.800}"
+    selected-disabled:
+      value: "{accent.color.200}"
+
+  # Negative
+  negative-indicator-color:
+    selected:
+      value: "{negative.color.700}"
+    selected-pressed:
+      value: "{negative.color.800}"
+    selected-disabled:
+      value: "{negative.color.300}"
