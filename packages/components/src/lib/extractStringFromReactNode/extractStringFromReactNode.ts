@@ -1,6 +1,7 @@
-import React from "react";
+import { ReactNode } from "react";
 
-export const extractStringFromReactNode = (node: React.ReactNode): string => {
+export const extractStringFromReactNode = (node: ReactNode): string => {
+  console.log(node);
   if (typeof node === "string") {
     return node;
   } else if (typeof node === "number") {

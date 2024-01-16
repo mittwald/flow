@@ -6,6 +6,14 @@
     "label"
     "value";
   row-gap: var(--labeled-value--label-to-value-spacing);
+  column-gap: var(--labeled-value--value-to-copy-button-spacing);
+  width: fit-content;
+
+  &:has(.copyButton) {
+    grid-template-areas:
+      "label label"
+      "value copyButton";
+  }
 }
 
 .label {
@@ -14,4 +22,10 @@
 
 .value {
   grid-area: value;
+}
+
+.copyButton {
+  grid-area: copyButton;
+  margin-top: calc(var(--labeled-value--label-to-value-spacing) * -1);
+  align-self: start;
 }

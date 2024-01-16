@@ -57,6 +57,26 @@ button:
   negative-color:
     value: "{color.white}"
 
+  # Transparent
+  transparent-background-color:
+    default:
+      value: "{color.transparent}"
+    hover:
+      value: "{informative.color.200}"
+    pressed:
+      value: "{informative.color.300}"
+    disabled:
+      value: "{color.transparent}"
+  transparent-color:
+    default:
+      value: "{informative.color.700}"
+    hover:
+      value: "{informative.color.900}"
+    pressed:
+      value: "{informative.color.1000}"
+    disabled:
+      value: "{neutral.color.600}"
+
   # Disabled
   disabled-background-color:
     value: "{neutral.color.400}"

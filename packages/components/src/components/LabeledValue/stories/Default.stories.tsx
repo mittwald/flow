@@ -8,8 +8,8 @@ import { DateValue } from "@/components/DateValue";
 const meta: Meta<typeof LabeledValue> = {
   title: "Labeled Value",
   component: LabeledValue,
-  render: () => (
-    <LabeledValue value="My proSpace">
+  render: (props) => (
+    <LabeledValue {...props} value="My proSpace">
       <Label>Project</Label>
     </LabeledValue>
   ),
@@ -37,9 +37,5 @@ export const WithDateValue: Story = {
 };
 
 export const Copyable: Story = {
-  render: () => (
-    <LabeledValue value={<DateValue value={new Date()} />} copyable>
-      <Label>Date</Label>
-    </LabeledValue>
-  ),
+  args: { copyable: true },
 };

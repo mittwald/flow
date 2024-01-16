@@ -26,10 +26,8 @@ export const LabeledValue: FC<LabeledValueProps> = (props) => {
     <div className={rootClassName}>
       <PropsContextProvider props={propsContext}>
         {children}
-        <Text>
-          {value}
-          {copyable && <CopyButton value={value} />}
-        </Text>
+        <Text>{value}</Text>
+        {copyable && <CopyButton className={styles.copyButton} value={value} />}
       </PropsContextProvider>
     </div>
   );

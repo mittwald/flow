@@ -6,24 +6,31 @@ import { Icon } from "@/components/Icon";
 import { faCopy } from "@fortawesome/free-regular-svg-icons/faCopy";
 import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
+import styles from "./CopyButton.module.css";
+import clsx from "clsx";
 
 export interface CopyButtonProps {
   value: ReactNode;
+  className?: string;
 }
 
 export const CopyButton: FC<CopyButtonProps> = (props) => {
-  const { value } = props;
+  const { value, className } = props;
 
   const stringFormatter = useLocalizedStringFormatter(locales);
+
+  const rootClassName = clsx(className, styles.root);
 
   const ariaLabel = stringFormatter.format("copyButton.copy");
 
   return (
     <Button
+      className={rootClassName}
       onPress={() => {
         copy(extractStringFromReactNode(value));
       }}
       aria-label={ariaLabel}
+      variant="transparent"
     >
       <Icon faIcon={faCopy} />
     </Button>

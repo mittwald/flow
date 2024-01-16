@@ -1,3 +1,5 @@
 labeled-value:
   label-to-value-spacing:
     value: "{size-rem.xs}"
+  value-to-copy-button-spacing:
+    value: "{size-rem.xs}"
