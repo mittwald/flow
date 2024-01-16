@@ -1,9 +1,8 @@
 @import "@/styles";
-
 .root {
   border-radius: var(--border-radius--round);
-  width: var(--avatar--size--s);
-  height: var(--avatar--size--s);
+  width: var(--avatar-size);
+  height: var(--avatar-size);
   overflow: hidden;
 }
 
@@ -13,7 +12,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: calc(var(--avatar--size--s) * 0.4);
+  font-size: calc(var(--avatar-size) * 0.4);
 }
 
 .image {
@@ -22,18 +21,14 @@
   object-fit: cover;
 }
 
+.size-s {
+  --avatar-size: var(--avatar--size--s);
+}
+
 .size-m {
-  width: var(--avatar--size--m);
-  height: var(--avatar--size--m);
-  .initials {
-    font-size: calc(var(--avatar--size--m) * 0.4);
-  }
+  --avatar-size: var(--avatar--size--m);
 }
 
 .size-l {
-  width: var(--avatar--size--l);
-  height: var(--avatar--size--l);
-  .initials {
-    font-size: calc(var(--avatar--size--l) * 0.4);
-  }
+  --avatar-size: var(--avatar--size--l);
 }
