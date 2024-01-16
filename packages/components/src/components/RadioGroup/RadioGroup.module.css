@@ -12,12 +12,23 @@
   &:has(.radio-icon) {
     display: grid;
     gap: var(--radio-group--radio-to-radio-spacing);
-    :global(.flow-label) {
+    .label {
       grid-column: 1 / -1;
       margin-bottom: calc(
         (
             var(--radio-group--radio-to-radio-spacing) -
               var(--radio-group--label-to-radio-spacing)
+          ) * -1
+      );
+    }
+    .fieldError,
+    .customFieldError,
+    .fieldDescription {
+      grid-column: 1 / -1;
+      margin-top: calc(
+        (
+            var(--radio-group--radio-to-radio-spacing) -
+              var(--radio-group--radio-to-info-spacing)
           ) * -1
       );
     }
@@ -39,4 +50,25 @@
 .label {
   width: 100%;
   margin-bottom: var(--radio-group--label-to-radio-spacing);
+}
+
+.fieldError,
+.customFieldError,
+.fieldDescription {
+  margin-top: var(--radio-group--radio-to-info-spacing);
+  width: 100%;
+}
+
+/* With field error */
+
+&:has(.fieldError) {
+  .fieldDescription {
+    display: none;
+  }
+}
+
+/* With custom field error */
+
+&:has(.customFieldError) .fieldError {
+  display: none;
 }

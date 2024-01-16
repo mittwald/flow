@@ -3,6 +3,8 @@ radio-group:
     value: "{size-px.m}"
   label-to-radio-spacing:
     value: "{size-px.xs}"
+  radio-to-info-spacing:
+    value: "{size-px.xs}"
   text-to-text-spacing:
     value: "{size-px.xs}"
   icon-to-text-spacing:
