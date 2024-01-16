@@ -5,11 +5,14 @@ describe('"getVariantFromInitials()', () => {
     expect(getVariantFromInitials([])).toStrictEqual(1);
   });
 
-  test.each([[["A"]], [["B"]], [["C", "D"]], [["Z"]], [["Ä"]], [["1"]]])(
-    "does return number between 1 and 4 for any given initial",
-    (item) => {
-      expect(getVariantFromInitials(item)).toBeGreaterThan(0);
-      expect(getVariantFromInitials(item)).toBeLessThanOrEqual(4);
-    },
-  );
+  test.each([
+    [["A"], 2],
+    [["B"], 3],
+    [["C", "D"], 4],
+    [["Z"], 3],
+    [["Ä"], 1],
+    [["1"], 2],
+  ])("does get correct variant for given initial", (item, expectedVariant) => {
+    expect(getVariantFromInitials(item)).toBe(expectedVariant);
+  });
 });

@@ -5,15 +5,11 @@ describe('"getInitialsFromString()', () => {
     expect(getInitialsFromString("")).toStrictEqual([]);
   });
 
-  test("does return first character of the first two words", () => {
-    expect(getInitialsFromString("foo bar baz")).toStrictEqual(["F", "B"]);
-  });
-
-  test("does skip special characters", () => {
-    expect(getInitialsFromString("foo & bar")).toStrictEqual(["F", "B"]);
-  });
-
-  test("does return one character if only one word is given", () => {
-    expect(getInitialsFromString("foo")).toStrictEqual(["F"]);
+  test.each([
+    ["Max Mustermann", "MM"],
+    ["Max & (Mustermann)", "MM"],
+    ["Max", "M"],
+  ])("builds correct initials for %o", (item, expectedResult) => {
+    expect(getInitialsFromString(item).join("")).toBe(expectedResult);
   });
 });
