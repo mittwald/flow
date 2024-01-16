@@ -42,4 +42,10 @@ describe("extractStringFromReactNode function results are strings", () => {
   test("null input results in empty string", () => {
     expect(extractStringFromReactNode(null)).toMatchInlineSnapshot('""');
   });
+  test("undefined input results in empty string", () => {
+    expect(extractStringFromReactNode(undefined)).toMatchInlineSnapshot('""');
+  });
+  test("jsx input without text results in empty string", () => {
+    expect(extractStringFromReactNode(<div></div>)).toMatchInlineSnapshot('""');
+  });
 });
