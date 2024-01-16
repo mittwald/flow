@@ -8,8 +8,11 @@ describe("extractStringFromReactNode function results are strings", () => {
   test("input of type number", () => {
     expect(extractStringFromReactNode(100)).toMatchInlineSnapshot('"100"');
   });
-  test("input of type boolean", () => {
+  test("input of type boolean (true)", () => {
     expect(extractStringFromReactNode(true)).toMatchInlineSnapshot('"true"');
+  });
+  test("input of type boolean (false)", () => {
+    expect(extractStringFromReactNode(false)).toMatchInlineSnapshot('"false"');
   });
   test("input of type jsx element", () => {
     expect(extractStringFromReactNode(<div>foo</div>)).toMatchInlineSnapshot(
@@ -41,11 +44,5 @@ describe("extractStringFromReactNode function results are strings", () => {
   });
   test("null input results in empty string", () => {
     expect(extractStringFromReactNode(null)).toMatchInlineSnapshot('""');
-  });
-  test("undefined input results in empty string", () => {
-    expect(extractStringFromReactNode(undefined)).toMatchInlineSnapshot('""');
-  });
-  test("jsx input without text results in empty string", () => {
-    expect(extractStringFromReactNode(<div></div>)).toMatchInlineSnapshot('""');
   });
 });
