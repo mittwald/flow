@@ -8,6 +8,9 @@ import { DateValue } from "@/components/DateValue";
 const meta: Meta<typeof LabeledValue> = {
   title: "Labeled Value",
   component: LabeledValue,
+  parameters: {
+    controls: { exclude: ["value", "className", "copyable"] },
+  },
   render: (props) => (
     <LabeledValue {...props} value="My proSpace">
       <Label>Project</Label>

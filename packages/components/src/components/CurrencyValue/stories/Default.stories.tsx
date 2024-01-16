@@ -6,6 +6,16 @@ const meta: Meta<typeof CurrencyValue> = {
   title: "Currency Value",
   component: CurrencyValue,
   render: (props) => <CurrencyValue {...props} value={10} />,
+  argTypes: {
+    currency: {
+      control: "inline-radio",
+      options: ["EUR", "USD", "GBP", "THB"],
+      defaultValue: "EUR",
+    },
+  },
+  parameters: {
+    controls: { exclude: ["value"] },
+  },
 };
 export default meta;
 
