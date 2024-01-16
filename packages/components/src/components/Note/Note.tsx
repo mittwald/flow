@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, PropsWithChildren } from "react";
+import React, { ComponentProps, FC, PropsWithChildren } from "react";
 import {
   PropsContext,
   PropsContextProvider,
@@ -10,7 +10,7 @@ import { StatusIcon } from "@/components/StatusIcon";
 import { StatusVariantProps } from "@/lib/types/props";
 
 export interface NoteProps
-  extends PropsWithChildren<HTMLAttributes<HTMLElement>>,
+  extends PropsWithChildren<ComponentProps<"aside">>,
     StatusVariantProps<"success"> {}
 
 export const Note: FC<NoteProps> = (props) => {
