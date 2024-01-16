@@ -35,8 +35,8 @@ export const Negative: Story = {
   },
 };
 
-export const Transparent: Story = {
+export const Plain: Story = {
   args: {
-    variant: "transparent",
+    variant: "plain",
   },
 };

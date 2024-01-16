@@ -67,27 +67,27 @@
   }
 }
 
-.transparent {
-  background-color: var(--button--transparent-background-color--default);
-  color: var(--button--transparent-color--default);
+.plain {
+  background-color: var(--color--transparent);
+  color: var(--button--plain-color--default);
 
   &:hover {
-    background-color: var(--button--transparent-background-color--hover);
-    color: var(--button--transparent-color--hover);
+    background-color: var(--button--plain-background-color--hover);
+    color: var(--button--plain-color--hover);
   }
 
   &[data-pressed] {
-    background-color: var(--button--transparent-background-color--pressed);
-    color: var(--button--transparent-color--pressed);
+    background-color: var(--button--plain-background-color--pressed);
+    color: var(--button--plain-color--pressed);
   }
 }
 
 .root[disabled] {
   background-color: var(--button--disabled-background-color);
   color: var(--button--disabled-color);
-  &.transparent {
-    background-color: var(--button--transparent-background-color--disabled);
-    color: var(--button--transparent-color--disabled);
+  &.plain {
+    background-color: var(--color--transparent);
+    color: var(--button--plain-color--disabled);
   }
 }
 
