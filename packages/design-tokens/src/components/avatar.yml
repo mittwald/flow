@@ -1,8 +1,8 @@
 avatar:
   size:
     s:
-      value: 40px
+      value: 2.5rem
     m:
-      value: 96px
+      value: 6rem
     l:
-      value: 156px
+      value: 9.75rem
