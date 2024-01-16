@@ -143,6 +143,30 @@ color:
     1100:
       value: "#BF393C"
 
+  soft-contrast-violet:
+    100:
+      value: "#eeecff"
+    200:
+      value: "#eeecff"
+    300:
+      value: "#eeecff"
+    400:
+      value: "#dbd7f8"
+    500:
+      value: "#b8aef7"
+    600:
+      value: "#9485f2"
+    700:
+      value: "#715dee"
+    800:
+      value: "#5c50ca"
+    900:
+      value: "#4743a5"
+    1000:
+      value: "#4743a5"
+    1100:
+      value: "#4743a5"
+
   white:
     value: rgb(255,255,255)
 

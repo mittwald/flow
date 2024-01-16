@@ -12,6 +12,8 @@ import { FieldErrorProps } from "@/components/FieldError";
 import { FieldDescriptionProps } from "@/components/FieldDescription";
 import { NoteProps } from "@/components/Note";
 import { HeadingProps } from "@/components/Heading";
+import { InitialsProps } from "@/components/Initials";
+import { ImageProps } from "@/components/Image";
 
 export * from "./types";
 
@@ -26,6 +28,8 @@ export interface FlowComponentPropsTypes {
   Heading: HeadingProps;
   Note: NoteProps;
   Link: LinkProps;
+  Initials: InitialsProps;
+  Image: ImageProps;
   FieldError: FieldErrorProps;
   FieldDescription: FieldDescriptionProps;
 }
