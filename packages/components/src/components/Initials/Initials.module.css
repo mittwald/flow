@@ -6,11 +6,11 @@
   background-color: var(--background-color);
 }
 
-.root > *:nth-child(1) {
+.root > *:nth-child(odd) {
   color: var(--char-1-color);
 }
 
-.root > *:nth-child(2) {
+.root > *:nth-child(even) {
   color: var(--char-2-color);
 }
 
