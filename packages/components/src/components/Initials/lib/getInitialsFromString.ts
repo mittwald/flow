@@ -1,5 +1,7 @@
 export const getInitialsFromString = (initials: string): string[] => {
-  const parts = initials.split(" ");
+  const parts = initials
+    .replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>{}[\]\\/]/gi, "")
+    .split(" ");
 
   return parts
     .map((part) => part?.trim()[0])

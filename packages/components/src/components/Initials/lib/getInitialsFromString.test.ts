@@ -9,6 +9,10 @@ describe('"getInitialsFromString()', () => {
     expect(getInitialsFromString("foo bar baz")).toStrictEqual(["F", "B"]);
   });
 
+  test("does skip special characters", () => {
+    expect(getInitialsFromString("foo & bar")).toStrictEqual(["F", "B"]);
+  });
+
   test("does return one character if only one word is given", () => {
     expect(getInitialsFromString("foo")).toStrictEqual(["F"]);
   });
