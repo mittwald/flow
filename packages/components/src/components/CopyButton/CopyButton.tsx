@@ -20,7 +20,9 @@ export const CopyButton: FC<CopyButtonProps> = (props) => {
 
   return (
     <Button
-      onPress={() => copy(extractStringFromReactNode(value))}
+      onPress={() => {
+        copy(extractStringFromReactNode(value));
+      }}
       aria-label={ariaLabel}
     >
       <Icon faIcon={faCopy} />

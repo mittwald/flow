@@ -35,3 +35,11 @@ export const WithDateValue: Story = {
     </LabeledValue>
   ),
 };
+
+export const Copyable: Story = {
+  render: () => (
+    <LabeledValue value={<DateValue value={new Date()} />} copyable>
+      <Label>Date</Label>
+    </LabeledValue>
+  ),
+};

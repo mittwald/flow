@@ -8,11 +8,11 @@ import { CopyButton } from "@/components/CopyButton";
 export interface LabeledValueProps extends PropsWithChildren {
   className?: string;
   value: ReactNode;
-  copiable?: boolean;
+  copyable?: boolean;
 }
 
 export const LabeledValue: FC<LabeledValueProps> = (props) => {
-  const { children, value, className, copiable } = props;
+  const { children, value, className, copyable } = props;
 
   const rootClassName = clsx(className, styles.root);
 
@@ -28,7 +28,7 @@ export const LabeledValue: FC<LabeledValueProps> = (props) => {
         {children}
         <Text>
           {value}
-          {copiable && <CopyButton value={value} />}
+          {copyable && <CopyButton value={value} />}
         </Text>
       </PropsContextProvider>
     </div>
