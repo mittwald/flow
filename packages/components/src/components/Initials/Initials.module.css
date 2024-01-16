@@ -6,11 +6,11 @@
   background-color: var(--background-color);
 }
 
-.char-1 {
+.root > *:nth-child(1) {
   color: var(--char-1-color);
 }
 
-.char-2 {
+.root > *:nth-child(2) {
   color: var(--char-2-color);
 }
 

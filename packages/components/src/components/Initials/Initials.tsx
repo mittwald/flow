@@ -21,9 +21,7 @@ export const Initials: FC<InitialsProps> = (props) => {
   );
 
   const initialsElements = initials.map((initial, index) => (
-    <span className={styles[`char-${index + 1}`]} key={index}>
-      {initial}
-    </span>
+    <span key={index}>{initial}</span>
   ));
 
   return (
