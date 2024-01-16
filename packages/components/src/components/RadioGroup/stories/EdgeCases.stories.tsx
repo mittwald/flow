@@ -5,7 +5,7 @@ import { Content } from "@/components/Content";
 import { Text } from "@/components/Text";
 import React from "react";
 import { Icon } from "@/components/Icon";
-import { dummyText } from "@/lib/dummyText";
+import { dummyText } from "@/lib/dev/dummyText";
 import defaultMeta from "./Default.stories";
 
 const meta: Meta<typeof RadioGroup> = {

@@ -1,5 +1,5 @@
 {
-  "name": "@mittwald/flow-stylesheet",
+  "name": "@mittwald/flow-next-stylesheet",
   "version": "0.0.0",
   "type": "module",
   "exports": {
@@ -12,7 +12,7 @@
     "build": "node build.js"
   },
   "devDependencies": {
-    "@mittwald/flow-components": "workspace:^",
+    "@mittwald/flow-next-components": "workspace:^",
     "resolve-package-path": "^4.0.3"
   }
 }

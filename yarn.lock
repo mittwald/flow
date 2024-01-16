@@ -3115,16 +3115,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mittwald/flow-components@workspace:^, @mittwald/flow-components@workspace:packages/components":
+"@mittwald/flow-next-components@workspace:^, @mittwald/flow-next-components@workspace:packages/components":
   version: 0.0.0-use.local
-  resolution: "@mittwald/flow-components@workspace:packages/components"
+  resolution: "@mittwald/flow-next-components@workspace:packages/components"
   dependencies:
     "@fortawesome/fontawesome-svg-core": "npm:^6.5.1"
     "@fortawesome/free-regular-svg-icons": "npm:^6.5.1"
     "@fortawesome/free-solid-svg-icons": "npm:^6.5.1"
     "@fortawesome/react-fontawesome": "npm:^0.2.0"
     "@jest/globals": "npm:^29.7.0"
-    "@mittwald/flow-design-tokens": "workspace:^"
+    "@mittwald/flow-next-design-tokens": "workspace:^"
     "@nx/storybook": "npm:^17.2.8"
     "@react-aria/utils": "npm:^3.23.0"
     "@react-types/shared": "npm:^3.22.0"
@@ -3144,6 +3144,7 @@ __metadata:
     "@types/react-dom": "npm:^18.2.18"
     "@types/rollup": "npm:^0.54.0"
     clsx: "npm:^2.1.0"
+    concurrently: "npm:^8.2.2"
     copy-to-clipboard: "npm:^3.3.3"
     html-react-parser: "npm:^5.1.1"
     jest: "npm:^29.7.0"
@@ -3173,9 +3174,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@mittwald/flow-design-tokens@workspace:^, @mittwald/flow-design-tokens@workspace:packages/design-tokens":
+"@mittwald/flow-next-design-tokens@workspace:^, @mittwald/flow-next-design-tokens@workspace:packages/design-tokens":
   version: 0.0.0-use.local
-  resolution: "@mittwald/flow-design-tokens@workspace:packages/design-tokens"
+  resolution: "@mittwald/flow-next-design-tokens@workspace:packages/design-tokens"
   dependencies:
     "@types/js-yaml": "npm:^4.0.9"
     js-yaml: "npm:^4.1.0"
@@ -3183,14 +3184,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@mittwald/flow-documentation@workspace:packages/docs":
+"@mittwald/flow-next-documentation@workspace:packages/docs":
   version: 0.0.0-use.local
-  resolution: "@mittwald/flow-documentation@workspace:packages/docs"
+  resolution: "@mittwald/flow-next-documentation@workspace:packages/docs"
   dependencies:
     "@mdx-js/loader": "npm:^3.0.0"
     "@mdx-js/react": "npm:^3.0.0"
-    "@mittwald/flow-components": "workspace:^"
-    "@mittwald/flow-stylesheet": "workspace:^"
+    "@mittwald/flow-next-components": "workspace:^"
+    "@mittwald/flow-next-stylesheet": "workspace:^"
     "@next/mdx": "npm:^14.0.4"
     "@types/mdx": "npm:^2.0.10"
     "@types/node": "npm:^20.11.1"
@@ -3255,11 +3256,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@mittwald/flow-stylesheet@workspace:^, @mittwald/flow-stylesheet@workspace:packages/stylesheet":
+"@mittwald/flow-next-stylesheet@workspace:^, @mittwald/flow-next-stylesheet@workspace:packages/stylesheet":
   version: 0.0.0-use.local
-  resolution: "@mittwald/flow-stylesheet@workspace:packages/stylesheet"
+  resolution: "@mittwald/flow-next-stylesheet@workspace:packages/stylesheet"
   dependencies:
-    "@mittwald/flow-components": "workspace:^"
+    "@mittwald/flow-next-components": "workspace:^"
     resolve-package-path: "npm:^4.0.3"
   languageName: unknown
   linkType: soft

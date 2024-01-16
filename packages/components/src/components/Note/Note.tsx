@@ -7,11 +7,11 @@ import {
 import styles from "./Note.module.css";
 import clsx from "clsx";
 import { StatusIcon } from "@/components/StatusIcon";
+import { StatusVariantProps } from "@/lib/types/props";
 
 export interface NoteProps
-  extends PropsWithChildren<HTMLAttributes<HTMLElement>> {
-  variant?: "info" | "warning" | "negative";
-}
+  extends PropsWithChildren<HTMLAttributes<HTMLElement>>,
+    StatusVariantProps<"success"> {}
 
 export const Note: FC<NoteProps> = (props) => {
   const {
