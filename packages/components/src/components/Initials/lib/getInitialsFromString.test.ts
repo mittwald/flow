@@ -7,7 +7,8 @@ describe('"getInitialsFromString()', () => {
 
   test.each([
     ["Max Mustermann", "MM"],
-    ["Max & (Mustermann)", "MM"],
+    ["Max & Mustermann", "MM"],
+    ["Max (Mustermann)", "MM"],
     ["Max", "M"],
   ])("builds correct initials for %o", (item, expectedResult) => {
     expect(getInitialsFromString(item).join("")).toBe(expectedResult);
