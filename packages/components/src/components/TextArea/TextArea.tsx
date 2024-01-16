@@ -1,40 +1,26 @@
-import React, { FC, PropsWithChildren } from "react";
+import React, { FC } from "react";
 import * as Aria from "react-aria-components";
 import styles from "./TextArea.module.css";
 import clsx from "clsx";
-import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
-import { FieldError } from "@/components/FieldError";
+import { TextFieldBase, TextFieldBaseProps } from "@/components/TextFieldBase";
 
 export interface TextAreaProps
-  extends PropsWithChildren<Omit<Aria.TextFieldProps, "children">>,
-    Pick<Aria.TextAreaProps, "placeholder" | ""> {}
+  extends TextFieldBaseProps,
+    Pick<Aria.TextAreaProps, "placeholder" | "rows"> {}
 
 export const TextArea: FC<TextAreaProps> = (props) => {
-  const { children, className, placeholder, ...rest } = props;
+  const { children, className, placeholder, rows = 5, ...rest } = props;
 
   const rootClassName = clsx(className, styles.root);
 
-  const propsContext: PropsContext = {
-    Label: {
-      className: styles.label,
-      optional: !props.isRequired,
-    },
-    FieldDescription: {
-      className: styles.fieldDescription,
-    },
-    FieldError: {
-      className: styles.customFieldError,
-    },
-  };
-
   return (
-    <Aria.TextField {...rest} className={rootClassName}>
-      <Aria.TextArea height={300} placeholder={placeholder} />
-      <PropsContextProvider props={propsContext}>
-        {children}
-      </PropsContextProvider>
-      <FieldError className={styles.fieldError} />
-    </Aria.TextField>
+    <TextFieldBase
+      {...rest}
+      className={rootClassName}
+      input={<Aria.TextArea rows={rows} placeholder={placeholder} />}
+    >
+      {children}
+    </TextFieldBase>
   );
 };
 

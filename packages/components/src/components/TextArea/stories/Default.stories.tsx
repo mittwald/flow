@@ -4,8 +4,6 @@ import React from "react";
 import { Label } from "@/components/Label";
 import { action } from "@storybook/addon-actions";
 import FieldDescription from "@/components/FieldDescription/FieldDescription";
-import { Form } from "react-aria-components";
-import { Button } from "@/components/Button";
 import { FieldError } from "@/components/FieldError";
 
 const meta: Meta<typeof TextArea> = {
@@ -13,7 +11,7 @@ const meta: Meta<typeof TextArea> = {
   component: TextArea,
   render: (props) => (
     <TextArea onChange={action("onChange")} {...props}>
-      <Label>First name</Label>
+      <Label>Message</Label>
     </TextArea>
   ),
 };
@@ -33,24 +31,27 @@ export const Required: Story = {
 export const WithFieldDescription: Story = {
   render: (props) => (
     <TextArea {...props}>
-      <Label>URL</Label>
-      <FieldDescription>Start with "https://"</FieldDescription>
+      <Label>Public Key</Label>
+      <FieldDescription>Starts with ssh-rsa</FieldDescription>
     </TextArea>
   ),
 };
 
 export const WithDefaultValue: Story = {
   render: (props) => (
-    <TextArea {...props} defaultValue="https://mittwald.de">
-      <Label>URL</Label>
+    <TextArea
+      {...props}
+      defaultValue="ssh-rsa asdfkehbahrgvszuagfdashdfgsaghdfiuadsf"
+    >
+      <Label>Public Key</Label>
     </TextArea>
   ),
 };
 
 export const WithPlaceholder: Story = {
   render: (props) => (
-    <TextArea {...props} placeholder="https://">
-      <Label>URL</Label>
+    <TextArea {...props} placeholder="ssh-rsa...">
+      <Label>Public Key</Label>
     </TextArea>
   ),
 };
@@ -58,24 +59,8 @@ export const WithPlaceholder: Story = {
 export const WithFieldError: Story = {
   render: (props) => (
     <TextArea {...props} isInvalid defaultValue="hello">
-      <Label>URL</Label>
-      <FieldError>Invalid input</FieldError>
-      <FieldDescription>Start with "https://"</FieldDescription>
+      <Label>Public Key</Label>
+      <FieldError>Invalid Key</FieldError>
     </TextArea>
-  ),
-};
-
-// ToDo: submit fixen
-
-export const WithForm: Story = {
-  render: (props) => (
-    <Form onSubmit={() => {}}>
-      <TextArea {...props} type="email" inputMode="email" isRequired>
-        <Label>Email</Label>
-      </TextArea>
-      <Button style={{ marginTop: "16px" }} type="submit">
-        Submit
-      </Button>
-    </Form>
   ),
 };

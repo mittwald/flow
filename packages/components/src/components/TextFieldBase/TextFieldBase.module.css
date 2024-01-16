@@ -1,0 +1,69 @@
+@import "@/styles";
+
+.root {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Elements */
+
+.label {
+  order: 1;
+  margin-bottom: var(--input--label-to-input-spacing);
+}
+
+.fieldError,
+.customFieldError,
+.fieldDescription {
+  order: 3;
+  margin-top: var(--input--input-to-info-spacing);
+}
+
+input,
+textarea {
+  order: 2;
+  border-width: var(--input--border-width);
+  border-style: var(--input--border-style);
+  border-color: var(--input--border-color--default);
+  border-radius: var(--input--border-radius);
+  padding-block: var(--input--padding-y);
+  padding-inline: var(--input--padding-x);
+  background-color: var(--input--background-color--default);
+
+  &:hover {
+    background-color: var(--input--background-color--hover);
+    border-color: var(--input--border-color--hover);
+  }
+
+  &[data-invalid] {
+    background-color: var(--input--background-color--invalid);
+    border-color: var(--input--border-color--invalid);
+  }
+
+  &:focus-visible,
+  &:focus {
+    background-color: var(--input--background-color--focused);
+    outline: none;
+    border-color: var(--input--border-color--focused);
+  }
+
+  &:disabled {
+    background-color: var(--input--background-color--disabled);
+    border-color: var(--input--border-color--disabled);
+    color: var(--input--color--disabled);
+  }
+}
+
+/* With field error */
+
+&:has(.fieldError) {
+  .fieldDescription {
+    display: none;
+  }
+}
+
+/* With custom field error */
+
+&:has(.customFieldError) .fieldError {
+  display: none;
+}

@@ -1,5 +1,7 @@
-text-field:
+input:
   label-to-input-spacing:
+    value: "{size-rem.xs}"
+  input-to-info-spacing:
     value: "{size-rem.xs}"
   padding-x:
     value: "{size-px.m}"
