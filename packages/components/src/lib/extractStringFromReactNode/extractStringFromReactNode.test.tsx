@@ -39,4 +39,7 @@ describe("extractStringFromReactNode function results are strings", () => {
       ),
     ).toMatchInlineSnapshot('""');
   });
+  test("null input results in empty string", () => {
+    expect(extractStringFromReactNode(null)).toMatchInlineSnapshot('""');
+  });
 });
