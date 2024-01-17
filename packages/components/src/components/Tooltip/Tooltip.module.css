@@ -10,7 +10,9 @@
   max-width: var(--tooltip--max-width);
   transform: translate3d(0, 0, 0);
 
-  --translate-length: calc(var(--tooltip--tooltip-to-content-spacing) / 2);
+  --translate-origin-length: calc(
+    var(--tooltip--tooltip-to-content-spacing) / 2
+  );
 }
 
 .arrow {
@@ -26,12 +28,12 @@
 
 [data-placement="top"] {
   margin-bottom: var(--tooltip--tooltip-to-content-spacing);
-  --translate-origin: translateY(var(--translate-length));
+  --translate-origin: translateY(var(--translate-origin-length));
 }
 
 [data-placement="bottom"] {
   margin-top: var(--tooltip--tooltip-to-content-spacing);
-  --translate-origin: translateY(calc(var(--translate-length) * -1));
+  --translate-origin: translateY(calc(var(--translate-origin-length) * -1));
   .arrow svg {
     transform: rotate(180deg);
   }
@@ -39,7 +41,7 @@
 
 [data-placement="right"] {
   margin-left: var(--tooltip--tooltip-to-content-spacing);
-  --translate-origin: translateX(calc(var(--translate-length) * -1));
+  --translate-origin: translateX(calc(var(--translate-origin-length) * -1));
   .arrow svg {
     transform: rotate(90deg);
   }
@@ -47,7 +49,7 @@
 
 [data-placement="left"] {
   margin-right: var(--tooltip--tooltip-to-content-spacing);
-  --translate-origin: translateX(var(--translate-length));
+  --translate-origin: translateX(var(--translate-origin-length));
   .arrow svg {
     transform: rotate(-90deg);
   }
