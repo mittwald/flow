@@ -28,6 +28,9 @@ export default defineConfig(
           StatusIcon: "./src/components/StatusIcon/index.ts",
           Badge: "./src/components/Badge/index.ts",
           Link: "./src/components/Link/index.ts",
+          Tooltip: "./src/components/Tooltip/index.ts",
+          TooltipTrigger:
+            "./src/components/Tooltip/components/TooltipTrigger/index.ts",
         },
         formats: ["es"],
       },
