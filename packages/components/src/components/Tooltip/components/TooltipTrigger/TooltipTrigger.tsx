@@ -7,9 +7,9 @@ export interface TooltipTriggerProps
   > {}
 
 export const TooltipTrigger: FC<TooltipTriggerProps> = (props) => {
-  const { children } = props;
+  const { children, ...rest } = props;
 
-  return <Aria.TooltipTrigger {...props}>{children}</Aria.TooltipTrigger>;
+  return <Aria.TooltipTrigger {...rest}>{children}</Aria.TooltipTrigger>;
 };
 
 export default TooltipTrigger;

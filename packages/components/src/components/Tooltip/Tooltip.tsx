@@ -7,12 +7,12 @@ export interface TooltipProps
   extends PropsWithChildren<Omit<Aria.TooltipProps, "children">> {}
 
 export const Tooltip: FC<TooltipProps> = (props) => {
-  const { children, className } = props;
+  const { children, className, ...rest } = props;
 
   const rootClassName = clsx(className, styles.root);
 
   return (
-    <Aria.Tooltip {...props} className={rootClassName}>
+    <Aria.Tooltip {...rest} className={rootClassName}>
       <Aria.OverlayArrow className={styles.arrow}>
         <svg viewBox="0 0 8 8">
           <path d="M0 0 L4 4 L8 0" />
