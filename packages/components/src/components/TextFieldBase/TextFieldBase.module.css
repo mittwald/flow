@@ -9,14 +9,14 @@
 
 .label {
   order: 1;
-  margin-bottom: var(--form-control--label-to-form-control-spacing);
+  margin-bottom: var(--form-control--label-to-control-spacing);
 }
 
 .fieldError,
 .customFieldError,
 .fieldDescription {
   order: 3;
-  margin-top: var(--form-control--form-control-to-info-spacing);
+  margin-top: var(--form-control--control-to-info-spacing);
 }
 
 input,
