@@ -12,13 +12,11 @@ export interface LabelProps
 }
 
 export const Label: FC<LabelProps> = (props) => {
-  const { children, className, optional, ...rest } = useProps("label", props);
-
+  const { children, className, optional, ...rest } = useProps("Label", props);
+  const stringFormatter = useLocalizedStringFormatter(locales);
   const rootClassName = clsx(className, styles.root);
 
-  const optionalMarker = ` ${useLocalizedStringFormatter(locales).format(
-    "label.optional",
-  )}`;
+  const optionalMarker = " " + stringFormatter.format("label.optional");
 
   return (
     <Aria.Label {...rest} className={rootClassName}>

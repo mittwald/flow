@@ -1,6 +1,6 @@
 text-field:
   label-to-input-spacing:
-    value: "{size-px.xs}"
+    value: "{size-rem.xs}"
   padding-x:
     value: "{size-px.m}"
   padding-y:

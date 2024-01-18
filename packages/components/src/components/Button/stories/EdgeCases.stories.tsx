@@ -4,7 +4,7 @@ import React from "react";
 import { faStar } from "@fortawesome/free-regular-svg-icons/faStar";
 import { Icon } from "@/components/Icon";
 import { Text } from "@/components/Text";
-import { dummyText } from "@/lib/dummyText";
+import { dummyText } from "@/lib/dev/dummyText";
 import defaultMeta from "./Default.stories";
 
 const meta: Meta<typeof Button> = {

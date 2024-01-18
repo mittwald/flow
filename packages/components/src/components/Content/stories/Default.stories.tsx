@@ -12,7 +12,12 @@ const meta: Meta<typeof Content> = {
     },
   },
   args: { elementType: "div" },
-  render: (props) => <Content {...props}>Content...</Content>,
+  render: (props) => (
+    <Content {...props}>
+      Content is a wrapper without any styling. By default it is rendered as a
+      div.
+    </Content>
+  ),
 };
 export default meta;
 

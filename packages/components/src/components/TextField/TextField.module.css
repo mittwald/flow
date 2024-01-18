@@ -6,57 +6,66 @@
     "label"
     "input"
     "info";
+}
 
-  /* Elements */
+/* Elements */
 
-  .label {
-    grid-area: label;
-    margin-bottom: var(--text-field--label-to-input-spacing);
-  }
+input {
+  grid-area: input;
+  border-width: var(--text-field--border-width);
+  border-style: var(--text-field--border-style);
+  border-color: var(--text-field--border-color--default);
+  border-radius: var(--text-field--border-radius);
+  padding-block: var(--text-field--padding-y);
+  padding-inline: var(--text-field--padding-x);
+  background-color: var(--text-field--background-color--default);
 
-  .fieldError,
-  .fieldDescription {
-    grid-area: info;
-    margin-top: var(--text-field--label-to-input-spacing);
-  }
-
-  &:has(.fieldError) {
-    .fieldDescription {
-      display: none;
-    }
-  }
-
-  input {
-    grid-area: input;
-    border: var(--text-field--border-width) var(--text-field--border-style)
-      var(--text-field--border-color--default);
-    border-radius: var(--text-field--border-radius);
-    padding: var(--text-field--padding-y) var(--text-field--padding-x);
-    background-color: var(--text-field--background-color--default);
-  }
-
-  /* States */
-
-  input:hover {
+  &:hover {
     background-color: var(--text-field--background-color--hover);
     border-color: var(--text-field--border-color--hover);
   }
 
-  input[data-invalid] {
+  &[data-invalid] {
     background-color: var(--text-field--background-color--invalid);
     border-color: var(--text-field--border-color--invalid);
   }
 
-  input:focus-visible,
-  input:focus {
+  &:focus-visible,
+  &:focus {
     background-color: var(--text-field--background-color--focused);
     outline: none;
     border-color: var(--text-field--border-color--focused);
   }
 
-  input:disabled {
+  &:disabled {
     background-color: var(--text-field--background-color--disabled);
     border-color: var(--text-field--border-color--disabled);
     color: var(--text-field--color--disabled);
   }
+}
+
+.label {
+  grid-area: label;
+  margin-bottom: var(--text-field--label-to-input-spacing);
+}
+
+.fieldError,
+.customFieldError,
+.fieldDescription {
+  grid-area: info;
+  margin-top: var(--text-field--label-to-input-spacing);
+}
+
+/* With field error */
+
+&:has(.fieldError) {
+  .fieldDescription {
+    display: none;
+  }
+}
+
+/* With custom field error */
+
+&:has(.customFieldError) .fieldError {
+  display: none;
 }

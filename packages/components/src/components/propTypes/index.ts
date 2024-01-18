@@ -7,30 +7,33 @@ import type {
   NavigationItemProps,
   NavigationProps,
 } from "@/components/Navigation";
+import type { LinkProps } from "@/components/Link";
 import { FieldErrorProps } from "@/components/FieldError";
 import { FieldDescriptionProps } from "@/components/FieldDescription";
-import { DatePickerProps, DateRangePickerProps } from "@/components/DatePicker";
-import { PopoverProps } from "@/components/Popover";
 import { NoteProps } from "@/components/Note";
 import { HeadingProps } from "@/components/Heading";
-import { InputGroupProps } from "@/components/InputGroup";
+import { InitialsProps } from "@/components/Initials";
+import { ImageProps } from "@/components/Image";
+import { DatePickerProps, DateRangePickerProps } from "@/components/DatePicker";
 
 export * from "./types";
 
 export interface FlowComponentPropsTypes {
-  text: TextProps;
-  button: ButtonProps;
-  icon: IconProps;
-  label: LabelProps;
-  content: ContentProps;
-  navigation: NavigationProps;
-  navigationItem: NavigationItemProps;
-  fieldError: FieldErrorProps;
-  fieldDescription: FieldDescriptionProps;
+  Text: TextProps;
+  Button: ButtonProps;
+  Icon: IconProps;
+  Label: LabelProps;
+  Content: ContentProps;
+  Navigation: NavigationProps;
+  NavigationItem: NavigationItemProps;
+  Heading: HeadingProps;
+  Note: NoteProps;
+  Link: LinkProps;
+  Initials: InitialsProps;
+  Image: ImageProps;
+  FieldError: FieldErrorProps;
+  FieldDescription: FieldDescriptionProps;
   datePicker: DatePickerProps<any>;
   dateRangePicker: DateRangePickerProps<any>;
-  popover: PopoverProps;
-  heading: HeadingProps;
-  note: NoteProps;
-  inputGroup: InputGroupProps;
+
 }

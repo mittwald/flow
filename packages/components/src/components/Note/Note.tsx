@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, PropsWithChildren } from "react";
+import React, { ComponentProps, FC, PropsWithChildren } from "react";
 import {
   PropsContext,
   PropsContextProvider,
@@ -6,16 +6,12 @@ import {
 } from "@/lib/propsContext";
 import styles from "./Note.module.css";
 import clsx from "clsx";
-import { Icon } from "@/components/Icon";
-import { faInfoCircle } from "@fortawesome/free-solid-svg-icons/faInfoCircle";
-import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
-import locales from "./locales/*.locale.json";
-import { useLocalizedStringFormatter } from "react-aria";
+import { StatusIcon } from "@/components/StatusIcon";
+import { StatusVariantProps } from "@/lib/types/props";
 
 export interface NoteProps
-  extends PropsWithChildren<HTMLAttributes<HTMLElement>> {
-  variant?: "info" | "warning" | "negative";
-}
+  extends PropsWithChildren<ComponentProps<"aside">>,
+    StatusVariantProps<"success"> {}
 
 export const Note: FC<NoteProps> = (props) => {
   const {
@@ -23,37 +19,26 @@ export const Note: FC<NoteProps> = (props) => {
     className,
     variant = "info",
     ...rest
-  } = useProps("note", props);
+  } = useProps("Note", props);
 
   const rootClassName = clsx(className, styles.root, styles[variant]);
 
-  const iconAriaLabel = useLocalizedStringFormatter(locales).format(
-    `note.${variant}`,
-  );
-
   const propsContext: PropsContext = {
-    icon: {
+    Icon: {
       className: styles.customIcon,
-      "aria-label": iconAriaLabel,
     },
-    heading: {
+    Heading: {
       className: styles.heading,
       level: 3,
     },
-    content: {
+    Content: {
       className: styles.content,
     },
   };
 
-  const defaultIcon = variant === "info" ? faInfoCircle : faExclamationCircle;
-
   return (
     <aside {...rest} className={rootClassName}>
-      <Icon
-        className={styles.defaultIcon}
-        aria-label={iconAriaLabel}
-        faIcon={defaultIcon}
-      />
+      <StatusIcon className={styles.statusIcon} variant={variant} />
       <PropsContextProvider props={propsContext}>
         {children}
       </PropsContextProvider>

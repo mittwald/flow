@@ -10,6 +10,9 @@ import { Navigation, NavigationItem } from "@/components/Navigation";
 const meta: Meta<typeof Navigation> = {
   title: "Navigation",
   component: Navigation,
+  parameters: {
+    controls: { exclude: ["className"] },
+  },
 };
 
 export default meta;

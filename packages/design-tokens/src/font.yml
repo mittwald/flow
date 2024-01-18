@@ -8,7 +8,21 @@ line-height:
     value: 1.5
 font-size:
   default:
-    value: "{size-rem.m}"
+    value: "{font-size.m}"
+  xxs:
+    value: 0.625rem
+  xs:
+    value: 0.75rem
+  s:
+    value: 0.875rem
+  m:
+    value: 1rem
+  l:
+    value: 1.125rem
+  xl:
+    value: 1.5rem
+  xxl:
+    value: 2rem
 color:
   default:
     value: "{neutral.color.1000}"

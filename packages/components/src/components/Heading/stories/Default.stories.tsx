@@ -12,7 +12,9 @@ const meta: Meta<typeof Heading> = {
     },
   },
   args: { level: 3 },
-  render: (props) => <Heading {...props}>Heading...</Heading>,
+  render: (props) => (
+    <Heading {...props}>I am a H{props.level} Heading</Heading>
+  ),
 };
 export default meta;
 

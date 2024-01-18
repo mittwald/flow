@@ -4,7 +4,7 @@
   display: flex;
   flex-wrap: wrap;
   container-type: size;
-  z-index: 0;
+  isolation: isolate;
 
   > :global(.flow-label) {
     width: 100%;

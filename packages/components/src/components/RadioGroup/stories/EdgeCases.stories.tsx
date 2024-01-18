@@ -5,7 +5,7 @@ import { Content } from "@/components/Content";
 import { Text } from "@/components/Text";
 import React from "react";
 import { Icon } from "@/components/Icon";
-import { dummyText } from "@/lib/dummyText";
+import { dummyText } from "@/lib/dev/dummyText";
 import defaultMeta from "./Default.stories";
 
 const meta: Meta<typeof RadioGroup> = {
@@ -19,7 +19,7 @@ type Story = StoryObj<typeof RadioGroup>;
 
 export const LongTexts: Story = {
   render: (props) => (
-    <RadioGroup {...props} defaultValue="a" aria-label="label">
+    <RadioGroup {...props} defaultValue="a" aria-label="Label">
       <Radio value="a">
         <Icon faIcon={faStar} />
         <Text>{dummyText.medium}</Text>
@@ -41,13 +41,13 @@ export const LongTexts: Story = {
 
 export const MultipleElements: Story = {
   render: (props) => (
-    <RadioGroup {...props} defaultValue="0" aria-label="label">
+    <RadioGroup {...props} defaultValue="0" aria-label="Rating">
       {Array(9)
         .fill("")
         .map((value, index) => (
           <Radio value={index.toString()} key={index}>
             <Icon faIcon={faStar} />
-            <Text>Option {index + 1}</Text>
+            <Text>{index + 1} Star</Text>
             <Content>{dummyText.medium}</Content>
           </Radio>
         ))}
@@ -60,14 +60,14 @@ export const SmallSpace: Story = {
     <RadioGroup
       {...props}
       defaultValue="0"
-      aria-label="label"
+      aria-label="Rating"
       style={{ width: "600px" }}
     >
       {Array(3)
         .fill("")
         .map((value, index) => (
           <Radio value={index.toString()} key={index}>
-            <Text>Option {index + 1}</Text>
+            <Text>{index + 1} Star</Text>
           </Radio>
         ))}
     </RadioGroup>

@@ -1,5 +1,5 @@
 field-description:
   font-size:
-    value: "{size-rem.s}"
+    value: "{font-size.s}"
   color:
     value: "{neutral.color.800}"

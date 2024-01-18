@@ -1,15 +1,15 @@
 {
-  "name": "@mittwald/flow-documentation",
+  "name": "@mittwald/flow-next-documentation",
   "private": true,
   "version": "0.1.0",
   "type": "module",
   "scripts": {
     "build": "run next build",
     "build:deps": "",
-    "build:deps:base": "yarn run -T lerna run build:deps --scope=@mittwald/flow-documentation",
-    "build:deps:run": "yarn run -T lerna run build:deps --scope=@mittwald/flow-documentation",
+    "build:deps:base": "yarn run -T lerna run build:deps --scope=@mittwald/flow-next-documentation",
+    "build:deps:run": "yarn run -T lerna run build:deps --scope=@mittwald/flow-next-documentation",
     "build:imports": "yarn pnpify node --loader ts-node/esm dev/generateLiveCodeEditorGlobalImports.ts",
-    "build:watch:dependents": "yarn build:deps:run && run -T lerna watch --scope=@mittwald/flow-documentation --include-dependencies -- lerna run build:deps --scope=@mittwald/flow-documentation",
+    "build:watch:dependents": "yarn build:deps:run && run -T lerna watch --scope=@mittwald/flow-next-documentation --include-dependencies -- lerna run build:deps --scope=@mittwald/flow-next-documentation",
     "dev": "run next dev",
     "start": "run next start",
     "test:tsc": "tsc --noEmit"
@@ -17,11 +17,11 @@
   "dependencies": {
     "@mdx-js/loader": "^3.0.0",
     "@mdx-js/react": "^3.0.0",
-    "@mittwald/flow-components": "workspace:*",
-    "@mittwald/flow-stylesheet": "workspace:*",
-    "@next/mdx": "^14.0.3",
+    "@mittwald/flow-next-components": "workspace:^",
+    "@mittwald/flow-next-stylesheet": "workspace:^",
+    "@next/mdx": "^14.0.4",
     "@types/mdx": "^2.0.10",
-    "next": "14.0.3",
+    "next": "^14.0.4",
     "parse-es-import": "^0.6.0",
     "raw-loader": "^4.0.2",
     "react": "^18.2.0",
@@ -30,17 +30,17 @@
     "webpack": "^5.89.0"
   },
   "devDependencies": {
-    "@types/node": "^20.10.3",
-    "@types/react": "^18.2.42",
-    "@types/react-dom": "^18.2.17",
+    "@types/node": "^20.11.1",
+    "@types/react": "^18.2.47",
+    "@types/react-dom": "^18.2.18",
     "@yarnpkg/pnpify": "^4.0.1",
     "acorn": "patch:acorn@npm%3A8.11.2#~/.yarn/patches/acorn-npm-8.11.2-a470f49bb6.patch",
     "acorn-jsx": "^5.3.2",
-    "eslint": "^8.55.0",
-    "eslint-config-next": "14.0.3",
+    "eslint": "^8.56.0",
+    "eslint-config-next": "^14.0.4",
     "glob": "^10.3.10",
-    "ts-node": "^10.9.1",
-    "typescript": "^5.3.2"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
   },
   "nx": {
     "targets": {
