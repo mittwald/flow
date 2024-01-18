@@ -1,7 +1,7 @@
-input:
-  label-to-input-spacing:
+form-control:
+  label-to-form-control-spacing:
     value: "{size-rem.xs}"
-  input-to-info-spacing:
+  form-control-to-info-spacing:
     value: "{size-rem.xs}"
   padding-x:
     value: "{size-px.m}"
