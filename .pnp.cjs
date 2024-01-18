@@ -5959,6 +5959,7 @@ const RAW_RUNTIME_STATE =
           ["@fortawesome/free-regular-svg-icons", "npm:6.5.1"],\
           ["@fortawesome/free-solid-svg-icons", "npm:6.5.1"],\
           ["@fortawesome/react-fontawesome", "virtual:160c7a696a99b065a822859af8c18a938041a659df75ba6216e289a2ba885865ddea0afdd5ed1924ae3f379fc9ec188b83f6e71e756a0bac8e9ca356654a6a90#npm:0.2.0"],\
+          ["@internationalized/date", "npm:3.5.1"],\
           ["@jest/globals", "npm:29.7.0"],\
           ["@mittwald/flow-next-design-tokens", "workspace:packages/design-tokens"],\
           ["@nx/storybook", "npm:17.2.8"],\
@@ -6014,6 +6015,7 @@ const RAW_RUNTIME_STATE =
           ["@fortawesome/free-regular-svg-icons", "npm:6.5.1"],\
           ["@fortawesome/free-solid-svg-icons", "npm:6.5.1"],\
           ["@fortawesome/react-fontawesome", "virtual:160c7a696a99b065a822859af8c18a938041a659df75ba6216e289a2ba885865ddea0afdd5ed1924ae3f379fc9ec188b83f6e71e756a0bac8e9ca356654a6a90#npm:0.2.0"],\
+          ["@internationalized/date", "npm:3.5.1"],\
           ["@jest/globals", "npm:29.7.0"],\
           ["@mittwald/flow-next-design-tokens", "workspace:packages/design-tokens"],\
           ["@nx/storybook", "npm:17.2.8"],\
@@ -6075,6 +6077,7 @@ const RAW_RUNTIME_STATE =
           ["@fortawesome/free-regular-svg-icons", "npm:6.5.1"],\
           ["@fortawesome/free-solid-svg-icons", "npm:6.5.1"],\
           ["@fortawesome/react-fontawesome", "virtual:160c7a696a99b065a822859af8c18a938041a659df75ba6216e289a2ba885865ddea0afdd5ed1924ae3f379fc9ec188b83f6e71e756a0bac8e9ca356654a6a90#npm:0.2.0"],\
+          ["@internationalized/date", "npm:3.5.1"],\
           ["@jest/globals", "npm:29.7.0"],\
           ["@mittwald/flow-next-design-tokens", "workspace:packages/design-tokens"],\
           ["@nx/storybook", "npm:17.2.8"],\

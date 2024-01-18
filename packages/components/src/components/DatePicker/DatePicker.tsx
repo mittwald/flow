@@ -26,11 +26,11 @@ export const DatePicker: FC<DatePickerProps<any>> = (props) => {
   const rootClassName = clsx(className, styles.root);
 
   const propsContext: PropsContext = {
-    label: {
+    Label: {
       className: styles.label,
       optional: !props.isRequired,
     },
-    fieldDescription: {
+    FieldDescription: {
       className: styles.fieldDescription,
     },
   };

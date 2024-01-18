@@ -1,5 +1,5 @@
 import React, { FC, PropsWithChildren, ReactNode } from "react";
-import styles from "./DatePicker.module.css";
+import styles from "./DateRangePicker.module.css";
 import clsx from "clsx";
 import {
   PropsContext,

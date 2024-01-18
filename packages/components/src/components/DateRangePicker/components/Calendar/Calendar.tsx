@@ -6,7 +6,13 @@ import { Icon } from "@/components/Icon";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons/faChevronLeft";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons/faChevronRight";
 
-export const Calendar: FC = () => {
+export interface CalendarProps {
+  range?: boolean;
+}
+
+export const Calendar: FC<CalendarProps> = (props) => {
+  const { range } = props;
+
   const headerElement = (
     <header>
       <Button slot="previous" variant="transparent">
@@ -25,7 +31,12 @@ export const Calendar: FC = () => {
     </Aria.CalendarGrid>
   );
 
-  return (
+  return range ? (
+    <Aria.RangeCalendar className={styles.root}>
+      {headerElement}
+      {calendarElement}
+    </Aria.RangeCalendar>
+  ) : (
     <Aria.Calendar className={styles.root}>
       {headerElement}
       {calendarElement}

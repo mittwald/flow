@@ -15,7 +15,11 @@ export const DateInput: FC<DateInputProps> = (props) => {
 
   return (
     <InputGroup className={styles.root}>
-      <Aria.DateInput>
+      <Aria.DateInput slot="start">
+        {(segment) => <Aria.DateSegment segment={segment} />}
+      </Aria.DateInput>
+      <span aria-hidden="true">–</span>
+      <Aria.DateInput slot="end">
         {(segment) => <Aria.DateSegment segment={segment} />}
       </Aria.DateInput>
       <Button variant="transparent" isDisabled={isDisabled}>
