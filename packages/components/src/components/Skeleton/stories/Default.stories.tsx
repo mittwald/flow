@@ -28,3 +28,7 @@ export const OnDarkBackground: Story = {
     </div>
   ),
 };
+
+export const WithCustomSize: Story = {
+  render: (props) => <Skeleton {...props} width="50%" height={100} />,
+};

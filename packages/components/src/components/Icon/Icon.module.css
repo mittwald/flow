@@ -9,4 +9,7 @@
   height: 1em;
   width: 1em;
   display: inline-block;
+  &:global(.flow-skeleton) {
+    border-radius: 50%;
+  }
 }
