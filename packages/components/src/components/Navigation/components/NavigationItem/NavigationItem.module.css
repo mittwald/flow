@@ -1,8 +1,5 @@
 @import "@/styles";
 
-.root {
-}
-
 .link {
   display: flex;
   flex-direction: row;

@@ -30,7 +30,7 @@ export function NavigationItem<T extends object>(
   };
 
   return (
-    <li className={styles.root}>
+    <li>
       <a
         {...menuItemProps}
         ref={ref}

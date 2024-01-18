@@ -1,7 +1,5 @@
 import React, { FC } from "react";
 import * as Aria from "react-aria-components";
-import styles from "./TextField.module.css";
-import clsx from "clsx";
 import { TextFieldBase, TextFieldBaseProps } from "@/components/TextFieldBase";
 
 export interface TextFieldProps
@@ -9,16 +7,10 @@ export interface TextFieldProps
     Pick<Aria.InputProps, "placeholder"> {}
 
 export const TextField: FC<TextFieldProps> = (props) => {
-  const { children, className, placeholder, ...rest } = props;
-
-  const rootClassName = clsx(className, styles.root);
+  const { children, placeholder, ...rest } = props;
 
   return (
-    <TextFieldBase
-      {...rest}
-      className={rootClassName}
-      input={<Aria.Input placeholder={placeholder} />}
-    >
+    <TextFieldBase {...rest} input={<Aria.Input placeholder={placeholder} />}>
       {children}
     </TextFieldBase>
   );

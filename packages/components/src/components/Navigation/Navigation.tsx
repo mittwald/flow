@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./Navigation.module.css";
-import clsx from "clsx";
 import { AriaMenuProps } from "react-aria";
 import { useTreeState } from "react-stately";
 import { NavigationItem } from "./components/NavigationItem/NavigationItem";
@@ -11,9 +10,8 @@ export interface NavigationProps<T = never> extends AriaMenuProps<T> {
 }
 
 export function Navigation<T extends object>(props: NavigationProps<T>) {
-  const { className: classNameFromProps } = props;
+  const { className } = props;
 
-  const className = clsx(classNameFromProps, styles.root);
   const state = useTreeState(props);
   const ref = React.useRef<HTMLElement>(null);
   const { menuProps } = useNavigation(props, state, ref);
