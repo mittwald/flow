@@ -6,7 +6,7 @@
   overflow: hidden;
 }
 
-.root > :global(.flow-initials) {
+.initials {
   width: 100%;
   height: 100%;
   display: flex;
@@ -15,7 +15,7 @@
   font-size: calc(var(--avatar-size) * 0.4);
 }
 
-.root > :global(.flow-image) {
+.image {
   width: 100%;
   height: 100%;
   object-fit: cover;
