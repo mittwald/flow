@@ -14,6 +14,7 @@ import { NoteProps } from "@/components/Note";
 import { HeadingProps } from "@/components/Heading";
 import { InitialsProps } from "@/components/Initials";
 import { ImageProps } from "@/components/Image";
+import { SkeletonProps } from "@/components/Skeleton/Skeleton";
 
 export * from "./types";
 
@@ -32,4 +33,5 @@ export interface FlowComponentPropsTypes {
   Image: ImageProps;
   FieldError: FieldErrorProps;
   FieldDescription: FieldDescriptionProps;
+  Skeleton: SkeletonProps;
 }

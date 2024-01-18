@@ -5,6 +5,7 @@ import { Heading } from "@/components/Heading";
 import { Content } from "@/components/Content";
 import { Icon } from "@/components/Icon";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
+import { Skeleton } from "@/components/Skeleton";
 
 const meta: Meta<typeof Note> = {
   title: "Note",
@@ -49,6 +50,22 @@ export const WithCustomIcon: Story = {
       <Content>
         As your domain has been deleted, this email address has been archived.
         To be able to send and receive emails, you must rename the address.
+      </Content>
+    </Note>
+  ),
+};
+
+export const WithSkeletons: Story = {
+  render: (props) => (
+    <Note {...props}>
+      <Icon>
+        <Skeleton />
+      </Icon>
+      <Heading>
+        <Skeleton />
+      </Heading>
+      <Content>
+        <Skeleton />
       </Content>
     </Note>
   ),

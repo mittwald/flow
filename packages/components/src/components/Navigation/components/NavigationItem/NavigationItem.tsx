@@ -27,6 +27,9 @@ export function NavigationItem<T extends object>(
     Icon: {
       className: styles.icon,
     },
+    Skeleton: {
+      className: styles.skeleton,
+    },
   };
 
   return (

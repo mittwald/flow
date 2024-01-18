@@ -40,5 +40,10 @@
 
 .text {
   margin-inline-start: var(--navigation-item--icon-to-text-spacing);
+  flex-grow: 1;
   order: 1;
+}
+
+.skeleton {
+  flex-grow: 1;
 }

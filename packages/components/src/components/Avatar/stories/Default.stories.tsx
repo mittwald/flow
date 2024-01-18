@@ -4,6 +4,7 @@ import React from "react";
 import { Initials } from "@/components/Initials";
 import { Image } from "@/components/Image";
 import { dummyText } from "@/lib/dev/dummyText";
+import { Skeleton } from "@/components/Skeleton";
 
 const meta: Meta<typeof Avatar> = {
   title: "Avatar",
@@ -32,6 +33,14 @@ export const WithInitials: Story = {
   render: (props) => (
     <Avatar {...props}>
       <Initials>Max Mustermann</Initials>
+    </Avatar>
+  ),
+};
+
+export const WithSkeleton: Story = {
+  render: (props) => (
+    <Avatar {...props}>
+      <Skeleton />
     </Avatar>
   ),
 };

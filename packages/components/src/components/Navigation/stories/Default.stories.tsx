@@ -6,6 +6,7 @@ import { faStar } from "@fortawesome/free-regular-svg-icons/faStar";
 import { Icon } from "@/components/Icon";
 import { Text } from "@/components/Text";
 import { Navigation, NavigationItem } from "@/components/Navigation";
+import { Skeleton } from "@/components/Skeleton";
 
 const meta: Meta<typeof Navigation> = {
   title: "Navigation",
@@ -46,6 +47,22 @@ export const WithIcons: Story = {
       <NavigationItem textValue="Storage">
         <Icon faIcon={faHardDrive} />
         <Text>Storage</Text>
+      </NavigationItem>
+    </Navigation>
+  ),
+};
+
+export const WithSkeletons: Story = {
+  render: (props) => (
+    <Navigation aria-label="Main menu" {...props}>
+      <NavigationItem>
+        <Skeleton />
+      </NavigationItem>
+      <NavigationItem>
+        <Skeleton />
+      </NavigationItem>
+      <NavigationItem>
+        <Skeleton />
       </NavigationItem>
     </Navigation>
   ),

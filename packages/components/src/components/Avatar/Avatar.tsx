@@ -3,7 +3,7 @@ import styles from "./Avatar.module.css";
 import clsx from "clsx";
 import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
 
-interface AvatarProps extends PropsWithChildren {
+export interface AvatarProps extends PropsWithChildren {
   className?: string;
   /** @default "s" */
   size?: "s" | "m" | "l";
@@ -20,6 +20,9 @@ export const Avatar: FC<AvatarProps> = (props) => {
     },
     Image: {
       className: styles.image,
+    },
+    Skeleton: {
+      className: styles.skeleton,
     },
   };
 

@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Heading from "../Heading";
 import React from "react";
+import Text from "@/components/Text";
+import { Skeleton } from "@/components/Skeleton";
 
 const meta: Meta<typeof Heading> = {
   title: "Heading",
@@ -21,3 +23,11 @@ export default meta;
 type Story = StoryObj<typeof Heading>;
 
 export const Default: Story = {};
+
+export const WithSkeleton: Story = {
+  render: (props) => (
+    <Heading {...props}>
+      <Skeleton />
+    </Heading>
+  ),
+};
