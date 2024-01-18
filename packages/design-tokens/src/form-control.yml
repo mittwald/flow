@@ -1,7 +1,7 @@
 form-control:
-  label-to-form-control-spacing:
+  label-to-control-spacing:
     value: "{size-rem.xs}"
-  form-control-to-info-spacing:
+  control-to-info-spacing:
     value: "{size-rem.xs}"
   padding-x:
     value: "{size-px.m}"

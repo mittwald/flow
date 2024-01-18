@@ -17,7 +17,7 @@
       margin-bottom: calc(
         (
             var(--radio-group--radio-to-radio-spacing) -
-              var(--radio-group--label-to-radio-spacing)
+              var(--form-control--label-to-control-spacing)
           ) * -1
       );
     }
@@ -28,7 +28,7 @@
       margin-top: calc(
         (
             var(--radio-group--radio-to-radio-spacing) -
-              var(--radio-group--radio-to-info-spacing)
+              var(--form-control--control-to-info-spacing)
           ) * -1
       );
     }
@@ -49,13 +49,13 @@
 
 .label {
   width: 100%;
-  margin-bottom: var(--radio-group--label-to-radio-spacing);
+  margin-bottom: var(--form-control--label-to-control-spacing);
 }
 
 .fieldError,
 .customFieldError,
 .fieldDescription {
-  margin-top: var(--radio-group--radio-to-info-spacing);
+  margin-top: var(--form-control--control-to-info-spacing);
   width: 100%;
 }
 
