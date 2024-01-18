@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import styles from "./DateInput.module.css";
+import styles from "./DateRangeInput.module.css";
 import * as Aria from "react-aria-components";
 import { Button } from "@/components/Button";
 import { Icon } from "@/components/Icon";
@@ -10,7 +10,7 @@ export interface DateInputProps {
   isDisabled?: boolean;
 }
 
-export const DateInput: FC<DateInputProps> = (props) => {
+export const DateRangeInput: FC<DateInputProps> = (props) => {
   const { isDisabled } = props;
 
   return (
@@ -29,4 +29,4 @@ export const DateInput: FC<DateInputProps> = (props) => {
   );
 };
 
-export default DateInput;
+export default DateRangeInput;

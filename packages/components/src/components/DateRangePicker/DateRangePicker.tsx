@@ -8,8 +8,7 @@ import {
 } from "@/lib/propsContext";
 import * as Aria from "react-aria-components";
 import { Popover } from "@/components/Popover";
-import { Calendar } from "./components/Calendar";
-import { DateInput } from "./components/DateInput";
+import { RangeCalendar, DateRangeInput } from "./index";
 import { FieldError } from "@/components/FieldError";
 
 export interface DateRangePickerProps<T extends Aria.DateValue>
@@ -37,14 +36,14 @@ export const DateRangePicker: FC<DateRangePickerProps<any>> = (props) => {
 
   return (
     <Aria.DateRangePicker {...rest} className={rootClassName}>
-      <DateInput isDisabled={props.isDisabled} />
+      <DateRangeInput isDisabled={props.isDisabled} />
       <PropsContextProvider props={propsContext}>
         {children}
       </PropsContextProvider>
       <FieldError className={styles.fieldError}>{errorMessage}</FieldError>
       <Popover placement="bottom end">
         <Aria.Dialog>
-          <Calendar range />
+          <RangeCalendar />
         </Aria.Dialog>
       </Popover>
     </Aria.DateRangePicker>
