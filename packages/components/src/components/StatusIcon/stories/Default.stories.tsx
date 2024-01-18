@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import StatusIcon from "../StatusIcon";
 
 const meta: Meta<typeof StatusIcon> = {
-  title: "StatusIcon",
+  title: "Status/StatusIcon",
   component: StatusIcon,
   argTypes: {
     variant: {

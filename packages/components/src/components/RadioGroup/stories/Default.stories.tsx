@@ -9,7 +9,7 @@ import { Icon } from "@/components/Icon";
 import { action } from "@storybook/addon-actions";
 
 const meta: Meta<typeof RadioGroup> = {
-  title: "RadioGroup",
+  title: "Forms/RadioGroup",
   component: RadioGroup,
   args: {
     onChange: action("onChange"),

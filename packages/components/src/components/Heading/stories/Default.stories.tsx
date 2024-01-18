@@ -3,7 +3,7 @@ import Heading from "../Heading";
 import React from "react";
 
 const meta: Meta<typeof Heading> = {
-  title: "Heading",
+  title: "Content/Heading",
   component: Heading,
   argTypes: {
     level: {

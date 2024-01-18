@@ -6,7 +6,7 @@ import { Image } from "@/components/Image";
 import { dummyText } from "@/lib/dev/dummyText";
 
 const meta: Meta<typeof Avatar> = {
-  title: "Avatar",
+  title: "Content/Avatar",
   component: Avatar,
   render: (props) => (
     <Avatar {...props}>

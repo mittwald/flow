@@ -8,7 +8,7 @@ import defaultMeta from "./Default.stories";
 
 const meta: Meta<typeof Note> = {
   ...defaultMeta,
-  title: "Note/Edge Cases",
+  title: "Status/Note/Edge Cases",
 };
 
 export default meta;

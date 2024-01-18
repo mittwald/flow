@@ -4,7 +4,7 @@ import defaultMeta from "./Default.stories";
 
 const meta: Meta<typeof Button> = {
   ...defaultMeta,
-  title: "Button/Variants",
+  title: "Buttons/Button/Variants",
 };
 
 export default meta;
