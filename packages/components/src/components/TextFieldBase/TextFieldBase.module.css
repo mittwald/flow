@@ -1,0 +1,69 @@
+@import "@/styles";
+
+.root {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Elements */
+
+.label {
+  order: 1;
+  margin-bottom: var(--form-control--label-to-form-control-spacing);
+}
+
+.fieldError,
+.customFieldError,
+.fieldDescription {
+  order: 3;
+  margin-top: var(--form-control--form-control-to-info-spacing);
+}
+
+input,
+textarea {
+  order: 2;
+  border-width: var(--form-control--border-width);
+  border-style: var(--form-control--border-style);
+  border-color: var(--form-control--border-color--default);
+  border-radius: var(--form-control--border-radius);
+  padding-block: var(--form-control--padding-y);
+  padding-inline: var(--form-control--padding-x);
+  background-color: var(--form-control--background-color--default);
+
+  &:hover {
+    background-color: var(--form-control--background-color--hover);
+    border-color: var(--form-control--border-color--hover);
+  }
+
+  &[data-invalid] {
+    background-color: var(--form-control--background-color--invalid);
+    border-color: var(--form-control--border-color--invalid);
+  }
+
+  &:focus-visible,
+  &:focus {
+    background-color: var(--form-control--background-color--focused);
+    outline: none;
+    border-color: var(--form-control--border-color--focused);
+  }
+
+  &:disabled {
+    background-color: var(--form-control--background-color--disabled);
+    border-color: var(--form-control--border-color--disabled);
+    color: var(--form-control--color--disabled);
+  }
+}
+
+/* With field error */
+
+&:has(.fieldError) {
+  .fieldDescription {
+    display: none;
+  }
+}
+
+/* With custom field error */
+
+&:has(.customFieldError) .fieldError {
+  display: none;
+}
