@@ -1,0 +1,50 @@
+@import "index.css";
+
+.root {
+  padding: var(--calendar--padding);
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    h2 {
+      font-size: var(--font-size--default);
+      font-weight: var(--font-weight--normal);
+    }
+  }
+
+  :global(.react-aria-CalendarHeaderCell) {
+    color: var(--label--color);
+  }
+
+  :global(.react-aria-CalendarCell) {
+    width: var(--calendar--cell-size);
+    height: var(--calendar--cell-size);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: default;
+    border-radius: var(--button--border-radius);
+
+    &:hover {
+      background: var(--button--transparent-background-color--hover);
+    }
+
+    &[data-outside-month] {
+      display: none;
+    }
+
+    &[data-pressed] {
+      background: var(--button--transparent-background-color--pressed);
+    }
+
+    &[data-selected] {
+      background: var(--button--transparent-background-color--pressed);
+    }
+
+    &[data-disabled] {
+      background: var(--button--transparent-background-color--disabled);
+      color: var(--button--transparent-color--disabled);
+    }
+  }
+}

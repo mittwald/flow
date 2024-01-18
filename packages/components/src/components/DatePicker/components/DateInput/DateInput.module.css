@@ -2,10 +2,9 @@
 
 .root {
   grid-template-columns: 1fr auto;
-
+  order: 2;
   :global(.react-aria-DateInput) {
     display: flex;
-    padding: var(--text-field--padding-y) var(--text-field--padding-x);
   }
 
   :global(.react-aria-DateSegment) {

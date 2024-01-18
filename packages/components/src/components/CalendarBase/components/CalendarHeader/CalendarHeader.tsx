@@ -1,13 +1,12 @@
 import React, { FC } from "react";
-import * as Aria from "react-aria-components";
 import { Button } from "@/components/Button";
-import styles from "./Calendar.module.css";
 import { Icon } from "@/components/Icon";
+import * as Aria from "react-aria-components";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons/faChevronLeft";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons/faChevronRight";
 
-export const Calendar: FC = () => {
-  const headerElement = (
+export const CalendarHeader: FC = () => {
+  return (
     <header>
       <Button slot="previous" variant="transparent">
         <Icon faIcon={faChevronLeft} />
@@ -18,19 +17,6 @@ export const Calendar: FC = () => {
       </Button>
     </header>
   );
-
-  const calendarElement = (
-    <Aria.CalendarGrid>
-      {(date) => <Aria.CalendarCell date={date} />}
-    </Aria.CalendarGrid>
-  );
-
-  return (
-    <Aria.RangeCalendar className={styles.root}>
-      {headerElement}
-      {calendarElement}
-    </Aria.RangeCalendar>
-  );
 };
 
-export default Calendar;
+export default CalendarHeader;

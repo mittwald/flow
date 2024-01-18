@@ -112,6 +112,9 @@
 :global(.flow-text-field) .root {
   color: var(--text-field-button--color);
   font-size: var(--text-field-button--font-size);
+  margin-top: calc(var(--form-control--padding-y) * -1);
+  margin-bottom: calc(var(--form-control--padding-y) * -1);
+  margin-right: calc(var(--form-control--padding-x) * -1);
   &:not(:disabled) {
     cursor: pointer;
   }

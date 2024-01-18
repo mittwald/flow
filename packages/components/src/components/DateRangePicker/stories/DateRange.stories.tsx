@@ -6,7 +6,7 @@ import { FieldDescription } from "@/components/FieldDescription";
 import { today, getLocalTimeZone, parseDate } from "@internationalized/date";
 
 const meta: Meta<typeof DateRangePicker> = {
-  title: "DatePicker/Range",
+  title: "DateRangePicker",
   component: DateRangePicker,
   render: (props) => (
     <DateRangePicker {...props} isRequired>
@@ -27,7 +27,6 @@ export const Default: Story = {};
 export const Disabled: Story = { args: { isDisabled: true } };
 
 export const Invalid: Story = {
-  // @ts-expect-error ...
   args: { minValue: today(getLocalTimeZone()) },
   render: (props) => (
     <DateRangePicker
@@ -46,7 +45,6 @@ export const Invalid: Story = {
 };
 
 export const FutureDatesOnly: Story = {
-  // @ts-expect-error ...
   args: { minValue: today(getLocalTimeZone()) },
   render: (props) => (
     <DateRangePicker isRequired {...props}>
