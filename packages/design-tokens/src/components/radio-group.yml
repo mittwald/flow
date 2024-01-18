@@ -2,13 +2,13 @@ radio-group:
   radio-to-radio-spacing:
     value: "{size-px.m}"
   label-to-radio-spacing:
-    value: "{size-px.xs}"
+    value: "{size-rem.xs}"
   radio-to-info-spacing:
-    value: "{size-px.xs}"
+    value: "{size-rem.xs}"
   text-to-text-spacing:
-    value: "{size-px.xs}"
+    value: "{size-rem.xs}"
   icon-to-text-spacing:
-    value: "{size-px.m}"
+    value: "{size-rem.m}"
   padding-x:
     value: "{size-px.m}"
   padding-y:
