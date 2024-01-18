@@ -26,18 +26,18 @@ export const DateRangePicker: FC<DateRangePickerProps<any>> = (props) => {
   const rootClassName = clsx(className, styles.root);
 
   const propsContext: PropsContext = {
-    label: {
+    Label: {
       className: styles.label,
       optional: !props.isRequired,
     },
-    fieldDescription: {
+    FieldDescription: {
       className: styles.fieldDescription,
     },
   };
 
   return (
     <Aria.DateRangePicker {...rest} className={rootClassName}>
-      <DateInput isDisabled={props.isDisabled} range />
+      <DateInput isDisabled={props.isDisabled} />
       <PropsContextProvider props={propsContext}>
         {children}
       </PropsContextProvider>

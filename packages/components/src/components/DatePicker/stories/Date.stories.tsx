@@ -27,7 +27,6 @@ export const Default: Story = {};
 export const Disabled: Story = { args: { isDisabled: true } };
 
 export const Invalid: Story = {
-  // @ts-expect-error ...
   args: { minValue: today(getLocalTimeZone()) },
   render: (props) => (
     <DatePicker
@@ -43,7 +42,6 @@ export const Invalid: Story = {
 };
 
 export const FutureDatesOnly: Story = {
-  // @ts-expect-error ...
   args: { minValue: today(getLocalTimeZone()) },
   render: (props) => (
     <DatePicker isRequired {...props}>
