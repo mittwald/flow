@@ -5,7 +5,6 @@ import React from "react";
 import { Icon } from "@/components/Icon";
 import { Text } from "@/components/Text";
 import { action } from "@storybook/addon-actions";
-import { Skeleton } from "@/components/Skeleton";
 
 const meta: Meta<typeof Button> = {
   title: "Button",

@@ -4,7 +4,6 @@ import React from "react";
 import { faHourglass } from "@fortawesome/free-regular-svg-icons/faHourglass";
 import { Icon } from "@/components/Icon";
 import { Text } from "@/components/Text";
-import { Skeleton } from "@/components/Skeleton";
 
 const meta: Meta<typeof Badge> = {
   title: "Badge",
