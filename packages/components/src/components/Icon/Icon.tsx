@@ -35,7 +35,6 @@ export const Icon: FC<IconProps> = (props) => {
 
   const iconProps: SvgAttributeProps = {
     ...svgAttributes,
-    className: styles.icon,
     focusable: "false",
     role: "img",
     "aria-hidden": !ariaLabel,
