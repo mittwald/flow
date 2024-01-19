@@ -13,6 +13,47 @@
   --translate-origin-length: calc(
     var(--tooltip--tooltip-to-content-spacing) / 2
   );
+
+  /* Placement */
+
+  &[data-placement="top"] {
+    margin-bottom: var(--tooltip--tooltip-to-content-spacing);
+    --translate-origin: translateY(var(--translate-origin-length));
+  }
+
+  &[data-placement="bottom"] {
+    margin-top: var(--tooltip--tooltip-to-content-spacing);
+    --translate-origin: translateY(calc(var(--translate-origin-length) * -1));
+    .arrow svg {
+      transform: rotate(180deg);
+    }
+  }
+
+  &[data-placement="right"] {
+    margin-left: var(--tooltip--tooltip-to-content-spacing);
+    --translate-origin: translateX(calc(var(--translate-origin-length) * -1));
+    .arrow svg {
+      transform: rotate(90deg);
+    }
+  }
+
+  &[data-placement="left"] {
+    margin-right: var(--tooltip--tooltip-to-content-spacing);
+    --translate-origin: translateX(var(--translate-origin-length));
+    .arrow svg {
+      transform: rotate(-90deg);
+    }
+  }
+
+  /* Animation */
+
+  &[data-entering] {
+    animation: slide 200ms;
+  }
+
+  &[data-exiting] {
+    animation: slide 200ms reverse ease-in;
+  }
 }
 
 .arrow {
@@ -22,47 +63,6 @@
     display: block;
     fill: var(--tooltip--background-color);
   }
-}
-
-/* Placement */
-
-[data-placement="top"] {
-  margin-bottom: var(--tooltip--tooltip-to-content-spacing);
-  --translate-origin: translateY(var(--translate-origin-length));
-}
-
-[data-placement="bottom"] {
-  margin-top: var(--tooltip--tooltip-to-content-spacing);
-  --translate-origin: translateY(calc(var(--translate-origin-length) * -1));
-  .arrow svg {
-    transform: rotate(180deg);
-  }
-}
-
-[data-placement="right"] {
-  margin-left: var(--tooltip--tooltip-to-content-spacing);
-  --translate-origin: translateX(calc(var(--translate-origin-length) * -1));
-  .arrow svg {
-    transform: rotate(90deg);
-  }
-}
-
-[data-placement="left"] {
-  margin-right: var(--tooltip--tooltip-to-content-spacing);
-  --translate-origin: translateX(var(--translate-origin-length));
-  .arrow svg {
-    transform: rotate(-90deg);
-  }
-}
-
-/* Animation */
-
-&[data-entering] {
-  animation: slide 200ms;
-}
-
-&[data-exiting] {
-  animation: slide 200ms reverse ease-in;
 }
 
 @keyframes slide {
