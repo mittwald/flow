@@ -7,12 +7,16 @@ import { Label } from "@/components/Label";
 import { Text } from "@/components/Text";
 import { Icon } from "@/components/Icon";
 import { action } from "@storybook/addon-actions";
+import { FieldError } from "@/components/FieldError";
 
 const meta: Meta<typeof RadioGroup> = {
   title: "RadioGroup",
   component: RadioGroup,
   args: {
     onChange: action("onChange"),
+  },
+  parameters: {
+    controls: { exclude: ["onChange"] },
   },
   render: (props) => (
     <RadioGroup {...props} defaultValue="admin">
@@ -115,6 +119,27 @@ export const WithIconAndContent: Story = {
           on your server.
         </Content>
       </Radio>
+    </RadioGroup>
+  ),
+};
+
+export const WithFieldError: Story = {
+  render: (props) => (
+    <RadioGroup {...props} isInvalid>
+      <Label>App</Label>
+      <Radio value="wordpress">
+        <Icon faIcon={faStar} />
+        <Text>WordPress</Text>
+      </Radio>
+      <Radio value="typo3">
+        <Icon faIcon={faStar} />
+        <Text>TYPO3</Text>
+      </Radio>
+      <Radio value="magento">
+        <Icon faIcon={faStar} />
+        <Text>Magento</Text>
+      </Radio>
+      <FieldError>Select an app to continue</FieldError>
     </RadioGroup>
   ),
 };

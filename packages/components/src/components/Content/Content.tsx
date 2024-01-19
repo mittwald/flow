@@ -1,15 +1,14 @@
 import React, {
+  ComponentProps,
   createElement,
   FC,
-  HTMLAttributes,
   PropsWithChildren,
 } from "react";
 import styles from "./Content.module.css";
 import clsx from "clsx";
 import { ClearPropsContext, useProps } from "@/lib/propsContext";
 
-export interface ContentProps
-  extends PropsWithChildren<HTMLAttributes<HTMLDivElement>> {
+export interface ContentProps extends PropsWithChildren<ComponentProps<"div">> {
   elementType?: string;
 }
 
@@ -19,7 +18,7 @@ export const Content: FC<ContentProps> = (props) => {
     className,
     elementType = "div",
     ...rest
-  } = useProps("content", props);
+  } = useProps("Content", props);
 
   const rootClassName = clsx(className, styles.root);
 

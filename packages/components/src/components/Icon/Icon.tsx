@@ -1,6 +1,6 @@
 import React, {
+  ComponentProps,
   FC,
-  HTMLAttributes,
   PropsWithChildren,
   SVGAttributes,
   useMemo,
@@ -31,7 +31,7 @@ export const Icon: FC<IconProps> = (props) => {
     "aria-label": ariaLabel,
     children,
     ...svgAttributes
-  } = useProps("icon", props);
+  } = useProps("Icon", props);
 
   const iconProps: SvgAttributeProps = {
     ...svgAttributes,
@@ -46,7 +46,7 @@ export const Icon: FC<IconProps> = (props) => {
    * Icon is wrapped inside span, so it always behaves as an inline element
    * (line-height is applied), even if used in flex/grid layouts.
    */
-  const spanProps: HTMLAttributes<HTMLSpanElement> = {
+  const spanProps: ComponentProps<"span"> = {
     className: clsx(classNameFromProps, styles.root),
   };
 

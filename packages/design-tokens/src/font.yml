@@ -1,11 +1,28 @@
 font-weight:
   normal:
-    value: 400
+    value: 300
   bold:
     value: 600
 line-height:
   default:
     value: 1.5
+font-size:
+  default:
+    value: "{font-size.m}"
+  xxs:
+    value: 0.625rem
+  xs:
+    value: 0.75rem
+  s:
+    value: 0.875rem
+  m:
+    value: 1rem
+  l:
+    value: 1.125rem
+  xl:
+    value: 1.5rem
+  xxl:
+    value: 2rem
 color:
   default:
-    value: "{neutral.color.900}"
+    value: "{neutral.color.1000}"

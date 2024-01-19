@@ -4,25 +4,31 @@
   display: flex;
   flex-wrap: wrap;
   container-type: size;
-  z-index: 0;
-
-  > :global(.flow-label) {
-    width: 100%;
-    margin-bottom: var(--radiogroup--label-to-radio-spacing);
-  }
+  isolation: isolate;
 
   /* With icon or content */
 
-  &:has(:global(.flow-radiogroup-radio-content)),
-  &:has(:global(.flow-radiogroup-radio-icon)) {
+  &:has(.radio-content),
+  &:has(.radio-icon) {
     display: grid;
-    gap: var(--radiogroup--radio-to-radio-spacing);
-    :global(.flow-label) {
+    gap: var(--radio-group--radio-to-radio-spacing);
+    .label {
       grid-column: 1 / -1;
       margin-bottom: calc(
         (
-            var(--radiogroup--radio-to-radio-spacing) -
-              var(--radiogroup--label-to-radio-spacing)
+            var(--radio-group--radio-to-radio-spacing) -
+              var(--form-control--label-to-control-spacing)
+          ) * -1
+      );
+    }
+    .fieldError,
+    .customFieldError,
+    .fieldDescription {
+      grid-column: 1 / -1;
+      margin-top: calc(
+        (
+            var(--radio-group--radio-to-radio-spacing) -
+              var(--form-control--control-to-info-spacing)
           ) * -1
       );
     }
@@ -30,13 +36,39 @@
 
   /* With icon */
 
-  &:has(:global(.flow-radiogroup-radio-icon)) {
+  &:has(.radio-icon) {
     grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr));
   }
 
   /* With content */
 
-  &:has(:global(.flow-radiogroup-radio-content)) {
+  &:has(.radio-content) {
     grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
   }
+}
+
+.label {
+  width: 100%;
+  margin-bottom: var(--form-control--label-to-control-spacing);
+}
+
+.fieldError,
+.customFieldError,
+.fieldDescription {
+  margin-top: var(--form-control--control-to-info-spacing);
+  width: 100%;
+}
+
+/* With field error */
+
+&:has(.fieldError) {
+  .fieldDescription {
+    display: none;
+  }
+}
+
+/* With custom field error */
+
+&:has(.customFieldError) .fieldError {
+  display: none;
 }

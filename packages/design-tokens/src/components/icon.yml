@@ -3,6 +3,6 @@ icon:
     s:
       value: 1rem
     m:
-      value: 1.5rem
-    xl:
+      value: 1.25rem
+    l:
       value: 4rem

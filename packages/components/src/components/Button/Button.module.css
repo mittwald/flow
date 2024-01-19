@@ -7,9 +7,10 @@
   flex-direction: row;
   align-items: center;
   padding: var(--button--padding-y) var(--button--padding-x);
+  font-size: var(--font-size--default);
   font-weight: bold;
-  font-size: var(--button--font-size);
-  line-height: var(--button--line-height);
+  transition-property: color, background-color;
+  transition-duration: var(--transition--duration--default);
 }
 
 .primary {

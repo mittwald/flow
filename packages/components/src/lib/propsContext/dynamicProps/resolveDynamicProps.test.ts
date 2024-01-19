@@ -4,7 +4,7 @@ import { dynamic } from "@/lib/propsContext";
 
 test("Dynamic prop will be resolved", () => {
   expect(
-    resolveDynamicProps<"button">(
+    resolveDynamicProps<"Button">(
       { isDisabled: dynamic((p) => p.type === "submit") },
       {
         type: "submit",
@@ -15,7 +15,7 @@ test("Dynamic prop will be resolved", () => {
   });
 
   expect(
-    resolveDynamicProps<"button">(
+    resolveDynamicProps<"Button">(
       { isDisabled: dynamic((p) => p.type === "reset") },
       {
         type: "submit",
@@ -27,7 +27,7 @@ test("Dynamic prop will be resolved", () => {
 });
 
 test("Dynamic prop with undefined result works", () => {
-  const resolved = resolveDynamicProps<"button">(
+  const resolved = resolveDynamicProps<"Button">(
     { isDisabled: dynamic(() => undefined) },
     {
       type: "submit",

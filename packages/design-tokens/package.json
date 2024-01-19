@@ -1,5 +1,5 @@
 {
-  "name": "@mittwald/flow-design-tokens",
+  "name": "@mittwald/flow-next-design-tokens",
   "version": "0.0.0",
   "type": "module",
   "exports": {
@@ -14,6 +14,6 @@
   "devDependencies": {
     "@types/js-yaml": "^4.0.9",
     "js-yaml": "^4.1.0",
-    "style-dictionary": "^3.9.0"
+    "style-dictionary": "^3.9.1"
   }
 }
