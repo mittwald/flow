@@ -19,6 +19,7 @@ export default defineConfig(
           Radio: "./src/components/RadioGroup/components/Radio/index.ts",
           Text: "./src/components/Text/index.ts",
           TextField: "./src/components/TextField/index.ts",
+          TextArea: "./src/components/TextArea/index.ts",
           FieldError: "./src/components/FieldError/index.ts",
           FieldDescription: "./src/components/FieldDescription/index.ts",
           Switch: "./src/components/Switch/index.ts",
