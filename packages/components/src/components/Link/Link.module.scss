@@ -1,0 +1,36 @@
+@import "@/styles";
+
+.link {
+  font-size: var(--link--font-size);
+  font-weight: var(--link--font-weight);
+  transition-property: color;
+  transition-duration: var(--transition--duration--default);
+
+  @extend .default;
+}
+
+/* Variants */
+@mixin variant($v) {
+  .#{$v} {
+    color: var(--link--#{$v}-color--default);
+
+    &:hover {
+      color: var(--link--#{$v}-color--hover);
+    }
+
+    &[data-pressed] {
+      color: var(--link--#{$v}-color--pressed);
+    }
+
+    &:not([aria-disabled]) {
+      cursor: pointer;
+    }
+
+    &[aria-disabled] {
+      color: var(--link--default-color--disabled);
+    }
+  }
+}
+
+@include variant(default);
+@include variant(negative);

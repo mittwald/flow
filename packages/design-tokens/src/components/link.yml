@@ -3,7 +3,7 @@ link:
     value: "{font-size.s}"
   font-weight:
     value: "{font-weight.bold}"
-  color:
+  default-color:
     default:
       value: "{informative.color.700}"
     hover:

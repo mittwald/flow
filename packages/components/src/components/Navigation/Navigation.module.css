@@ -1,7 +1,0 @@
-@import "@/styles";
-
-.list {
-  display: flex;
-  flex-direction: column;
-  row-gap: var(--navigation--item-to-item-spacing);
-}

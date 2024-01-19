@@ -1,7 +1,7 @@
 import React from "react";
 import { TreeState } from "react-stately";
 import { Node } from "@react-types/shared";
-import styles from "./NavigationItem.module.css";
+import styles from "./NavigationItem.module.scss";
 import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { useNavigationItem } from "@/hooks/useNavigationItem";
 import { NavigationCollectionItemProps } from "@/components/Navigation/components/NavigationItem/NavigationCollectionItem";
@@ -30,13 +30,8 @@ export function NavigationItem<T extends object>(
   };
 
   return (
-    <li>
-      <a
-        {...menuItemProps}
-        ref={ref}
-        className={styles.link}
-        aria-current={isCurrent ? "page" : false}
-      >
+    <li className={styles.navigationItem}>
+      <a {...menuItemProps} ref={ref} aria-current={isCurrent ? "page" : false}>
         <PropsContextProvider props={propsContext}>
           {item.rendered}
         </PropsContextProvider>

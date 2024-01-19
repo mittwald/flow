@@ -36,6 +36,7 @@ export const WithContent: Story = {
       <Content>
         As your domain has been deleted, this email address has been archived.
         To be able to send and receive emails, you must rename the address.
+        <Icon faIcon={faEnvelope} />
       </Content>
     </Note>
   ),

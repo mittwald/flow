@@ -1,4 +1,4 @@
-.root {
+.switch {
   display: flex;
   align-items: center;
   font-size: var(--switch--font-size);
@@ -9,8 +9,9 @@
     flex-direction: row-reverse;
   }
 
-  /* States */
+  @extend .accent;
 
+  /* States */
   &[data-pressed] .indicator {
     background-color: var(--switch--indicator-color--pressed);
   }
@@ -23,44 +24,7 @@
   }
 }
 
-/* Variants */
-
-[data-selected] {
-  .indicator {
-    background-color: var(--switch--accent-indicator-color--selected);
-
-    &:before {
-      transform: translateX(100%);
-    }
-  }
-
-  &[data-pressed] .indicator {
-    background-color: var(--switch--accent-indicator-color--selected-pressed);
-  }
-
-  &[data-disabled] .indicator {
-    background-color: var(--switch--accent-indicator-color--selected-disabled);
-  }
-}
-
-.negative[data-selected] {
-  .indicator {
-    background-color: var(--switch--negative-indicator-color--selected);
-  }
-
-  &[data-pressed] .indicator {
-    background-color: var(--switch--negative-indicator-color--selected-pressed);
-  }
-
-  &[data-disabled] .indicator {
-    background-color: var(
-      --switch--negative-indicator-color--selected-disabled
-    );
-  }
-}
-
 /* Elements */
-
 .indicator {
   width: var(--switch--indicator-width);
   height: var(--switch--indicator-height);
@@ -87,3 +51,23 @@
     left: var(--switch--indicator-to-marker-spacing);
   }
 }
+
+/* Variants */
+@mixin variant($v) {
+  .#{$v}[data-selected] {
+    .indicator {
+      background-color: var(--switch--#{$v}-indicator-color--selected);
+    }
+
+    &[data-pressed] .indicator {
+      background-color: var(--switch--#{$v}-indicator-color--selected-pressed);
+    }
+
+    &[data-disabled] .indicator {
+      background-color: var(--switch--#{$v}-indicator-color--selected-disabled);
+    }
+  }
+}
+
+@include variant(accent);
+@include variant(negative);

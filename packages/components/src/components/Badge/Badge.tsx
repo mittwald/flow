@@ -1,5 +1,5 @@
 import React, { FC, PropsWithChildren } from "react";
-import styles from "./Badge.module.css";
+import styles from "./Badge.module.scss";
 import clsx from "clsx";
 import { StatusIcon } from "@/components/StatusIcon";
 import { Text } from "@/components/Text";
@@ -13,7 +13,7 @@ export interface BadgeProps extends PropsWithChildren, StatusVariantProps {
 export const Badge: FC<BadgeProps> = (props) => {
   const { children, className, variant = "info", ...rest } = props;
 
-  const rootClassName = clsx(className, styles.root, styles[variant]);
+  const rootClassName = clsx(styles.badge, styles[variant], className);
 
   const propsContext: PropsContext = {
     Icon: {

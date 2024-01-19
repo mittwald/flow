@@ -1,6 +1,6 @@
 @import "@/styles";
 
-.root {
+.badge {
   color: var(--badge--color);
   font-size: var(--badge--font-size);
   background-color: var(--badge--info-background-color);
@@ -15,8 +15,9 @@
   column-gap: var(--badge--icon-to-text-spacing);
   max-width: fit-content;
 
-  /* With icon only */
+  @extend .info;
 
+  /* With icon only */
   &:not(:has(.content)) {
     padding-inline: var(--badge--padding-x-icon-only);
     grid-template-areas: "icon";
@@ -24,7 +25,6 @@
   }
 
   /* With custom icon */
-
   &:has(.customIcon) {
     .statusIcon {
       display: none;
@@ -32,22 +32,7 @@
   }
 }
 
-/* Variants */
-
-.success {
-  background-color: var(--badge--success-background-color);
-}
-
-.warning {
-  background-color: var(--badge--warning-background-color);
-}
-
-.negative {
-  background-color: var(--badge--negative-background-color);
-}
-
 /* Elements */
-
 .statusIcon,
 .customIcon {
   font-size: var(--badge--icon-size);
@@ -60,3 +45,15 @@
   text-overflow: ellipsis;
   grid-area: content;
 }
+
+/* Variants */
+@mixin variant($v) {
+  .#{$v} {
+    background-color: var(--badge--#{$v}-background-color);
+  }
+}
+
+@include variant(info);
+@include variant(success);
+@include variant(warning);
+@include variant(negative);

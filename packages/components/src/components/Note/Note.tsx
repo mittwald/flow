@@ -4,7 +4,7 @@ import {
   PropsContextProvider,
   useProps,
 } from "@/lib/propsContext";
-import styles from "./Note.module.css";
+import styles from "./Note.module.scss";
 import clsx from "clsx";
 import { StatusIcon } from "@/components/StatusIcon";
 import { StatusVariantProps } from "@/lib/types/props";

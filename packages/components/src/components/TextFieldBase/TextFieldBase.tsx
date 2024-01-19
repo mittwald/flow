@@ -1,6 +1,6 @@
 import React, { FC, PropsWithChildren, ReactNode } from "react";
 import * as Aria from "react-aria-components";
-import styles from "./TextFieldBase.module.css";
+import styles from "./TextFieldBase.module.scss";
 import clsx from "clsx";
 import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { FieldError } from "@/components/FieldError";
@@ -13,7 +13,7 @@ export interface TextFieldBaseProps
 export const TextFieldBase: FC<TextFieldBaseProps> = (props) => {
   const { children, className, input, ...rest } = props;
 
-  const rootClassName = clsx(className, styles.root);
+  const rootClassName = clsx(styles.textFieldBase, className);
 
   const propsContext: PropsContext = {
     Label: {
