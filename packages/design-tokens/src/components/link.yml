@@ -5,19 +5,19 @@ link:
     value: "{font-weight.bold}"
   color:
     default:
-      value: "{informative.color.700}"
-    hover:
       value: "{informative.color.800}"
-    pressed:
+    hover:
       value: "{informative.color.900}"
+    pressed:
+      value: "{informative.color.1000}"
     disabled:
-      value: "{neutral.color.600}"
+      value: "{neutral.color.500}"
 
   # Negative
   negative-color:
     default:
-      value: "{negative.color.700}"
-    hover:
       value: "{negative.color.800}"
-    pressed:
+    hover:
       value: "{negative.color.900}"
+    pressed:
+      value: "{negative.color.1000}"

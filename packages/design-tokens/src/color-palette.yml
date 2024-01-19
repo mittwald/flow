@@ -1,33 +1,33 @@
 color:
   gray:
     100:
-      value: rgb(255,255,255)
+      value: "#FFFFFF"
     200:
-      value: rgb(253,253,253)
+      value: "#FDFDFD"
     300:
-      value: rgb(248,248,248)
+      value: "#F8F8F8"
     400:
-      value: rgb(230,230,230)
+      value: "#E6E6E6"
     500:
-      value: rgb(213,213,213)
+      value: "#D5D5D5"
     600:
-      value: rgb(177,177,177)
+      value: "#B1B1B1"
     700:
-      value: rgb(144,144,144)
+      value: "#909090"
     800:
-      value: rgb(109,109,109)
+      value: "#6D6D6D"
     900:
-      value: rgb(70,70,70)
+      value: "#464646"
     1000:
-      value: rgb(34,34,34)
+      value: "#222222"
     1100:
-      value: rgb(0,0,0)
+      value: "#000000"
 
   hosting-blue:
     100:
-      value: "#DEE9FF"
+      value: "#F0F5FF"
     200:
-      value: "#CCDEFF"
+      value: "#E0EBFF"
     300:
       value: "#A8C6FF"
     400:
@@ -41,134 +41,107 @@ color:
     800:
       value: "#0054F5"
     900:
-      value: "#003CAE"
+      value: "#003FB8"
     1000:
-      value: "#002366"
+      value: "#002A7B"
     1100:
-      value: "#001743"
-
-  navy-blue:
-    100:
-      value: "#D9DEF3"
-    200:
-      value: "#C8CFEE"
-    300:
-      value: "#A5B0E2"
-    400:
-      value: "#8291D7"
-    500:
-      value: "#5F73CC"
-    600:
-      value: "#3D55C1"
-    700:
-      value: "#32459E"
-    800:
-      value: "#27367B"
-    900:
-      value: "#1D285C"
-    1000:
-      value: "#131B3D"
-    1100:
-      value: "#0E142E"
+      value: "#00205C"
 
   espelkamp-green:
     100:
-      value: "#C0FFEC"
+      value: "#F8FFFD"
     200:
-      value: "#A6FFE4"
+      value: "#D9FFF4"
     300:
-      value: "#73FFD5"
+      value: "#99FFE0"
     400:
-      value: "#40FFC5"
+      value: "#2EFFC0"
     500:
-      value: "#0DFFB6"
+      value: "#00F5AB"
     600:
-      value: "#00D998"
+      value: "#00D192"
     700:
-      value: "#00A674"
+      value: "#00A673"
     800:
       value: "#00825B"
     900:
       value: "#005F42"
     1000:
-      value: "#003B29"
+      value: "#004732"
     1100:
-      value: "#00291D"
+      value: "#002E20"
 
   amaranth-red:
     100:
-      value: "#F7C5D2"
+      value: "#FDF0F3"
     200:
-      value: "#F5B4C3"
+      value: "#FBE0E6"
     300:
-      value: "#F090A6"
+      value: "#F7C1CC"
     400:
-      value: "#EB6C89"
+      value: "#F2A2B3"
     500:
-      value: "#E6486B"
+      value: "#EE8299"
     600:
-      value: "#E1244C"
+      value: "#EA637F"
     700:
-      value: "#BD1A3B"
+      value: "#E54366"
     800:
-      value: "#95142D"
+      value: "#E1244C"
     900:
-      value: "#6C0F20"
+      value: "#B4193A"
     1000:
-      value: "#440914"
+      value: "#8312AA"
     1100:
-      value: "#30070"
+      value: "#711226"
 
   royal-orange:
     100:
-      value: "#FFF9F1"
+      value: "#FFF4EB"
     200:
-      value: "#FEEFE3"
+      value: "#FFEBDC"
     300:
-      value: "#FFE4D0"
+      value: "#FFD9BD"
     400:
-      value: "#FFC9A1"
+      value: "#FFC89F"
     500:
-      value: "#FFAE72"
+      value: "#FFB680"
     600:
-      value: "#FF9343"
+      value: "#FFA562"
     700:
-      value: "#D4573E"
+      value: "#FF9343"
     800:
-      value: "#BF393C"
+      value: "#FF8225"
     900:
-      value: "#BF393C"
+      value: "#F56800"
     1000:
-      value: "#BF393C"
+      value: "#D25900"
     1100:
-      value: "#BF393C"
+      value: "#9A4100"
 
   soft-contrast-violet:
     100:
-      value: "#eeecff"
+      value: "#F4F3FE"
     200:
-      value: "#eeecff"
+      value: "#EAE7FD"
     300:
-      value: "#eeecff"
+      value: "#D6D0FA"
     400:
-      value: "#dbd7f8"
+      value: "#C2B9F8"
     500:
-      value: "#b8aef7"
+      value: "#AEA2F5"
     600:
-      value: "#9485f2"
+      value: "#998BF3"
     700:
-      value: "#715dee"
+      value: "#8574F0"
     800:
-      value: "#5c50ca"
+      value: "#715DEE"
     900:
-      value: "#4743a5"
+      value: "#5C50CA"
     1000:
-      value: "#4743a5"
+      value: "#534FB8"
     1100:
-      value: "#4743a5"
-
-  white:
-    value: rgb(255,255,255)
+      value: "#4743A5"
 
   transparent:
     value: transparent
