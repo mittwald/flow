@@ -1,5 +1,4 @@
 import React, { FC, PropsWithChildren, ReactNode } from "react";
-import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import styles from "./LabeledValue.module.css";
 import clsx from "clsx";
 import { Text } from "@/components/Text";
@@ -16,19 +15,11 @@ export const LabeledValue: FC<LabeledValueProps> = (props) => {
 
   const rootClassName = clsx(className, styles.root);
 
-  const propsContext: PropsContext = {
-    Label: {
-      className: styles.label,
-    },
-  };
-
   return (
     <div className={rootClassName}>
-      <PropsContextProvider props={propsContext}>
-        {children}
-        <Text>{value}</Text>
-        {copyable && <CopyButton className={styles.copyButton} value={value} />}
-      </PropsContextProvider>
+      {children}
+      <Text>{value}</Text>
+      {copyable && <CopyButton value={value} />}
     </div>
   );
 };
