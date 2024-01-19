@@ -20,7 +20,7 @@ export const Badge: FC<BadgeProps> = (props) => {
       className: styles.customIcon,
     },
     Text: {
-      className: styles.label,
+      className: styles.content,
     },
   };
 

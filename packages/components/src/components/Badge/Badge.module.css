@@ -10,14 +10,14 @@
   height: var(--badge--height);
   line-height: var(--size-rem--m);
   display: grid;
-  grid-template-areas: "icon label";
+  grid-template-areas: "icon content";
   grid-template-columns: auto 1fr;
   column-gap: var(--badge--icon-to-text-spacing);
   max-width: fit-content;
 
   /* With icon only */
 
-  &:not(:has(.label)) {
+  &:not(:has(.content)) {
     padding-inline: var(--badge--padding-x-icon-only);
     grid-template-areas: "icon";
     grid-template-columns: auto;
@@ -54,9 +54,9 @@
   grid-area: icon;
 }
 
-.label {
+.content {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  grid-area: label;
+  grid-area: content;
 }
