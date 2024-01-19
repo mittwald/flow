@@ -2,11 +2,11 @@ tag-group:
   tag-to-tag-spacing:
     value: "{size-px.s}"
   label-to-tag-spacing:
-    value: "{size-px.xs}"
+    value: "{size-rem.xs}"
 
 tag:
   font-size:
-    value: "{size-rem.s}"
+    value: "{font-size.s}"
   font-weight:
     selected:
       value: "{font-weight.bold}"

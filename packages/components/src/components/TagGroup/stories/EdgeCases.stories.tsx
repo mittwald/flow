@@ -2,11 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Tag, TagGroup, TagList } from "../index";
 import React from "react";
 import defaultMeta from "./Default.stories";
-import { dummyText } from "@/lib/dummyText";
-import { Radio } from "@/components/RadioGroup";
-import { Icon } from "@/components/Icon";
-import { Text } from "@/components/Text";
-import { Content } from "@/components/Content";
+import { dummyText } from "@/lib/dev/dummyText";
 
 const meta: Meta<typeof TagGroup> = {
   ...defaultMeta,
@@ -26,6 +22,16 @@ export const MultipleTags: Story = {
           .map((_, index) => (
             <Tag key={index}>{dummyText.short}</Tag>
           ))}
+      </TagList>
+    </TagGroup>
+  ),
+};
+
+export const LongText: Story = {
+  render: (props) => (
+    <TagGroup {...props} aria-label="filter">
+      <TagList>
+        <Tag>{dummyText.long}</Tag>
       </TagList>
     </TagGroup>
   ),
