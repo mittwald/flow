@@ -15,7 +15,7 @@ export const cssModuleClassNameGenerator = (
     ? filename.slice(parentDir.length)
     : filename;
 
-  if (!relativeFilename.endsWith(".module.css")) {
+  if (!/.*\.module\.s?css/.test(relativeFilename)) {
     return name;
   }
 

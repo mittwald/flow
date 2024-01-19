@@ -83,6 +83,7 @@
     "react-dom": "^18.2.0",
     "react-element-to-jsx-string": "^15.0.0",
     "rollup": "^4.9.5",
+    "sass": "^1.70.0",
     "storybook": "^7.6.8",
     "storybook-addon-rtl-direction": "^0.0.19",
     "ts-jest": "^29.1.1",

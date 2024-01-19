@@ -10,6 +10,13 @@ test.each([
   ],
   [
     {
+      filename: "src/foo/styles.modules.scss",
+      className: "foo",
+      expected: "foo",
+    },
+  ],
+  [
+    {
       filename: "src/components/Slider/styles.css",
       className: "foo",
       expected: "foo",
