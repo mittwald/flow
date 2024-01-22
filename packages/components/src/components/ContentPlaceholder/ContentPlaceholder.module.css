@@ -1,0 +1,59 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--content-placeholder--padding--default);
+}
+
+/* Elements */
+
+.icon {
+  font-size: var(--content-placeholder--icon-size);
+  color: var(--content-placeholder--info-icon-color);
+  line-height: 1;
+  margin-bottom: var(--content-placeholder--icon-to-heading-spacing);
+  order: 1;
+}
+
+.heading {
+  margin-bottom: var(--content-placeholder--heading-to-text-spacing);
+  text-align: center;
+  max-width: var(--content-placeholder--max-width);
+  order: 2;
+}
+
+.text {
+  margin-bottom: var(--content-placeholder--text-to-button-spacing);
+  text-align: center;
+  max-width: var(--content-placeholder--max-width);
+  order: 3;
+}
+
+.button {
+  order: 4;
+}
+
+/* Negative */
+
+.negative {
+  .icon {
+    color: var(--content-placeholder--negative-icon-color);
+  }
+
+  .heading {
+    color: var(--content-placeholder--negative-heading-color);
+  }
+}
+
+/* Scss variablen nutzen? */
+/*
+  breakpoints:
+  mobile-max: 550px
+  tablet-max: 1100px
+  laptop-max: 1500px
+*/
+@media (max-width: 550px) {
+  .root {
+    padding: var(--content-placeholder--padding--mobile);
+  }
+}

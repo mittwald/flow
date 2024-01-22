@@ -1,0 +1,28 @@
+content-placeholder:
+  padding:
+    default:
+      value: "{size-px.xxl}"
+    mobile:
+      value: "{size-px.l}"
+  max-width:
+    value: 400px
+  icon-to-heading-spacing:
+    value: "{size-rem.m}"
+  heading-to-text-spacing:
+    value: "{size-rem.s}"
+  text-to-button-spacing:
+    value: "{size-rem.m}"
+  icon-size:
+    value: "{icon.size.l}"
+
+  # Info
+  info-icon-color:
+    value: "{informative.color.800}"
+  info-heading-color:
+    value: "{informative.color.800}"
+
+  # Negative
+  negative-icon-color:
+    value: "{negative.color.800}"
+  negative-heading-color:
+    value: "{negative.color.900}"
