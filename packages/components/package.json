@@ -21,6 +21,7 @@
     "./Switch": "./dist/Switch.js",
     "./Checkbox": "./dist/Checkbox.js",
     "./StatusIcon": "./dist/StatusIcon.js",
+    "./ContentPlaceholder": "./dist/ContentPlaceholder.js",
     "./style": "./dist/style.css",
     "./style/init": "./dist/index.js"
   },

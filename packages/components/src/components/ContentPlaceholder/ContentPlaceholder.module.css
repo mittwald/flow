@@ -48,9 +48,10 @@
 /* Scss variablen nutzen? */
 /*
   breakpoints:
-  mobile-max: 550px
-  tablet-max: 1100px
-  laptop-max: 1500px
+  mobile-max: 550
+  tablet-max: 1100
+  laptop-max: 1500
+  ${breakpoints.mobile-max / 16}rem
 */
 @media (max-width: 550px) {
   .root {

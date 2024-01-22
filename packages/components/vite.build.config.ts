@@ -29,6 +29,7 @@ export default defineConfig(
           StatusIcon: "./src/components/StatusIcon/index.ts",
           Badge: "./src/components/Badge/index.ts",
           Link: "./src/components/Link/index.ts",
+          ContentPlaceholder: "./src/components/ContentPlaceholder/index.ts",
         },
         formats: ["es"],
       },
