@@ -3,24 +3,30 @@
 .root {
   color: var(--breadcrumb-item--color);
   font-size: var(--breadcrumb-item--font-size);
+  display: flex;
+  overflow: hidden;
+  min-width: var(--size-px--xxl);
+
+  .link {
+    padding-inline: var(--breadcrumb-item--padding-x);
+    font-weight: var(--breadcrumb-item--font-weight--default);
+    color: var(--breadcrumb-item--color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    &:not([aria-current="page"]):hover {
+      text-decoration: underline;
+    }
+
+    &[aria-current="page"] {
+      font-weight: var(--breadcrumb-item--font-weight--current);
+    }
+  }
 
   &:last-child {
     .icon {
       display: none;
     }
-  }
-}
-
-.link {
-  padding-inline: var(--breadcrumb-item--padding-x);
-  font-weight: var(--breadcrumb-item--font-weight--default);
-  color: var(--breadcrumb-item--color);
-
-  &:not([aria-current="page"]):hover {
-    text-decoration: underline;
-  }
-
-  &[aria-current="page"] {
-    font-weight: var(--breadcrumb-item--font-weight--current);
   }
 }
