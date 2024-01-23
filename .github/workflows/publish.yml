@@ -37,5 +37,7 @@ jobs:
       - run: yarn nx affected -t build --parallel=3
       - name: "Version and publish"
         run: |
-          yarn lerna version --conventional-commits --conventional-prerelease=* --yes --create-release github
-          yarn lerna publish from-git --yes --no-private
+          yarn lerna publish \
+            --conventional-commits --conventional-prerelease=* \
+            --create-release github \
+            --no-private --yes
