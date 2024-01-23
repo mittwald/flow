@@ -37,5 +37,5 @@ jobs:
           yarn lerna publish \
             --conventional-commits --conventional-prerelease=* \
             --create-release github \
-            --message "chore(release): publish %s"
+            --message "chore(release): publish %s" \
             --yes --no-private
