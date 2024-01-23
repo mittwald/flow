@@ -26,7 +26,7 @@ jobs:
       - name: Git Identity
         run: |
           git config user.name "${{ github.actor }}"
-          git config user.email "${{ github.actor}}@users.noreply.github.com"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
       - run: yarn install --immutable
       - uses: nrwl/nx-set-shas@v4
       - if: github.ref != 'refs/heads/main'
@@ -37,4 +37,5 @@ jobs:
           yarn lerna publish \
             --conventional-commits --conventional-prerelease=* \
             --create-release github \
+            --message "chore(release): publish %s"
             --yes --no-private
