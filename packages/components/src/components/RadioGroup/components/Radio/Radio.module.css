@@ -1,6 +1,6 @@
-@import "@/styles";
+@import "../../../../styles/index.css";
 
-.root {
+.radio {
   border: var(--radio-group--border-width) var(--radio-group--border-style)
     var(--radio-group--border-color--default);
   padding: var(--radio-group--padding-y) var(--radio-group--padding-x);
@@ -12,27 +12,7 @@
   transition-property: color, background-color, border-color;
   transition-duration: var(--transition--duration--default);
 
-  /* Elements */
-
-  .icon {
-    grid-area: icon;
-  }
-
-  .label {
-    grid-area: label;
-  }
-
-  .content {
-    grid-area: content;
-  }
-
-  .checkmark {
-    grid-area: checkmark;
-    display: none;
-  }
-
   /* Without icon and content */
-
   &:not(:has(.content)):not(:has(.icon)) {
     grid-template-areas: "label checkmark";
     grid-template-columns: 1fr auto;
@@ -77,7 +57,6 @@
   }
 
   /* With icon */
-
   &:has(.icon):not(:has(.content)) {
     grid-template-areas:
       "icon"
@@ -95,7 +74,6 @@
   }
 
   /* With content */
-
   &:has(.content) {
     grid-template-areas:
       "label"
@@ -110,7 +88,6 @@
   }
 
   /* With icon and content */
-
   &:has(.content):has(.icon) {
     grid-template-areas:
       "icon label"
@@ -119,7 +96,6 @@
   }
 
   /* States */
-
   &:hover {
     background-color: var(--radio-group--background-color--hover);
   }
@@ -148,4 +124,22 @@
   &:not([data-selected]):not([data-disabled]) .icon {
     color: var(--radio-group--icon-color--default);
   }
+}
+
+/* Elements */
+.icon {
+  grid-area: icon;
+}
+
+.label {
+  grid-area: label;
+}
+
+.content {
+  grid-area: content;
+}
+
+.checkmark {
+  grid-area: checkmark;
+  display: none;
 }

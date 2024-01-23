@@ -1,5 +1,5 @@
 import { ComponentProps, createElement, FC, PropsWithChildren } from "react";
-import styles from "./Heading.module.css";
+import styles from "./Heading.module.scss";
 import clsx from "clsx";
 import { useProps } from "@/lib/propsContext";
 
@@ -18,7 +18,7 @@ export const Heading: FC<HeadingProps> = (props) => {
     ...rest
   } = useProps("Heading", props);
 
-  const rootClassName = clsx(className, styles.root);
+  const rootClassName = clsx(styles.heading, className);
 
   return createElement(`h${level}`, {
     ...rest,

@@ -3,15 +3,17 @@ link:
     value: "{font-size.s}"
   font-weight:
     value: "{font-weight.bold}"
-  color:
+  disabled-color:
+    value: "{neutral.color.600}"
+
+  # Primary
+  primary-color:
     default:
       value: "{informative.color.700}"
     hover:
       value: "{informative.color.800}"
     pressed:
       value: "{informative.color.900}"
-    disabled:
-      value: "{neutral.color.600}"
 
   # Negative
   negative-color:
