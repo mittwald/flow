@@ -1,7 +1,6 @@
 import React, { FC, PropsWithChildren } from "react";
 import styles from "./LabeledValue.module.scss";
 import clsx from "clsx";
-import { CopyButton } from "@/components/CopyButton";
 import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
 
 export interface LabeledValueProps extends PropsWithChildren {
@@ -10,7 +9,7 @@ export interface LabeledValueProps extends PropsWithChildren {
 }
 
 export const LabeledValue: FC<LabeledValueProps> = (props) => {
-  const { children, className, copyValue } = props;
+  const { children, className } = props;
 
   const rootClassName = clsx(styles.labeledValue, className);
 
@@ -21,6 +20,9 @@ export const LabeledValue: FC<LabeledValueProps> = (props) => {
     Content: {
       className: styles.content,
     },
+    Button: {
+      className: styles.button,
+    },
   };
 
   return (
@@ -28,7 +30,6 @@ export const LabeledValue: FC<LabeledValueProps> = (props) => {
       <PropsContextProvider props={propsContext}>
         {children}
       </PropsContextProvider>
-      {copyValue && <CopyButton className={styles.copy} value={copyValue} />}
     </div>
   );
 };

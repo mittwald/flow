@@ -9,7 +9,7 @@
   column-gap: var(--labeled-value--value-to-copy-button-spacing);
   width: fit-content;
 
-  &:has(.copy) {
+  &:has(.button) {
     grid-template-areas:
       "label label"
       "value button";
@@ -24,7 +24,7 @@
   grid-area: value;
 }
 
-.copy {
+.button {
   grid-area: button;
   margin-top: calc(var(--labeled-value--label-to-value-spacing) * -1);
   align-self: start;
