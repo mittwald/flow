@@ -3,7 +3,7 @@ import Content from "../Content";
 import React from "react";
 
 const meta: Meta<typeof Content> = {
-  title: "Content",
+  title: "Content/Content",
   component: Content,
   argTypes: {
     elementType: {

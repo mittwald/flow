@@ -1,0 +1,12 @@
+@import "@/styles";
+
+.icon {
+  flex-shrink: 0;
+  display: inline-block;
+
+  svg {
+    height: 1em;
+    width: 1em;
+    display: inline-block;
+  }
+}

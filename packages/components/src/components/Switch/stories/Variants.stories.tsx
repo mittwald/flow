@@ -4,7 +4,7 @@ import defaultMeta from "./Default.stories";
 
 const meta: Meta<typeof Switch> = {
   ...defaultMeta,
-  title: "Switch/Variants",
+  title: "Forms/Switch/Variants",
   args: { defaultSelected: true },
 };
 

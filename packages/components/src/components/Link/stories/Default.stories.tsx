@@ -4,7 +4,7 @@ import { action } from "@storybook/addon-actions";
 import React from "react";
 
 const meta: Meta<typeof Link> = {
-  title: "Link",
+  title: "Navigation/Link",
   component: Link,
   args: {
     onPress: action("onPress"),

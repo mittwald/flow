@@ -1,7 +1,5 @@
 import React, { createElement, FC, PropsWithChildren } from "react";
-import styles from "./Text.module.css";
 import * as Aria from "react-aria-components";
-import clsx from "clsx";
 import { useProps } from "@/lib/propsContext";
 
 export interface TextProps
@@ -15,9 +13,7 @@ export const Text: FC<TextProps> = (props) => {
     ...rest
   } = useProps("Text", props);
 
-  const rootClassName = clsx(className, styles.root);
-
-  const textProps = { ...rest, className: rootClassName, children };
+  const textProps = { ...rest, className, children };
 
   if (!props.slot) {
     return createElement(elementType, textProps);
