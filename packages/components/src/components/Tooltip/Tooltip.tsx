@@ -1,6 +1,6 @@
 import * as Aria from "react-aria-components";
 import React, { FC, PropsWithChildren } from "react";
-import styles from "./Tooltip.module.css";
+import styles from "./Tooltip.module.scss";
 import clsx from "clsx";
 
 export interface TooltipProps
@@ -9,7 +9,7 @@ export interface TooltipProps
 export const Tooltip: FC<TooltipProps> = (props) => {
   const { children, className, ...rest } = props;
 
-  const rootClassName = clsx(className, styles.root);
+  const rootClassName = clsx(styles.tooltip, className);
 
   return (
     <Aria.Tooltip {...rest} className={rootClassName}>

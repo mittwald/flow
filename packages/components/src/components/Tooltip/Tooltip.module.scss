@@ -1,6 +1,6 @@
 @import "@/styles";
 
-.root {
+.tooltip {
   border-radius: var(--border-radius--default);
   background-color: var(--tooltip--background-color);
   color: var(--tooltip--color);
@@ -10,12 +10,9 @@
   max-width: var(--tooltip--max-width);
   transform: translate3d(0, 0, 0);
 
-  --translate-origin-length: calc(
-    var(--tooltip--tooltip-to-content-spacing) / 2
-  );
+  --translate-origin-length: var(--tooltip--tooltip-to-content-spacing) / 2;
 
   /* Placement */
-
   &[data-placement="top"] {
     margin-bottom: var(--tooltip--tooltip-to-content-spacing);
     --translate-origin: translateY(var(--translate-origin-length));
@@ -23,7 +20,7 @@
 
   &[data-placement="bottom"] {
     margin-top: var(--tooltip--tooltip-to-content-spacing);
-    --translate-origin: translateY(calc(var(--translate-origin-length) * -1));
+    --translate-origin: translateY(var(--translate-origin-length) * -1);
     .arrow svg {
       transform: rotate(180deg);
     }
@@ -31,7 +28,7 @@
 
   &[data-placement="right"] {
     margin-left: var(--tooltip--tooltip-to-content-spacing);
-    --translate-origin: translateX(calc(var(--translate-origin-length) * -1));
+    --translate-origin: translateX(var(--translate-origin-length) * -1);
     .arrow svg {
       transform: rotate(90deg);
     }
