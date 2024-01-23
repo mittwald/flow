@@ -67,9 +67,9 @@ color:
     900:
       value: "#005F42"
     1000:
-      value: "#004732"
+      value: "#003B29"
     1100:
-      value: "#002E20"
+      value: "#00291C"
 
   amaranth-red:
     100:
@@ -91,9 +91,9 @@ color:
     900:
       value: "#B4193A"
     1000:
-      value: "#8312AA"
+      value: "#83122A"
     1100:
-      value: "#711226"
+      value: "#6A0F22"
 
   royal-orange:
     100:
@@ -105,19 +105,19 @@ color:
     400:
       value: "#FFC89F"
     500:
-      value: "#FFB680"
-    600:
       value: "#FFA562"
-    700:
+    600:
       value: "#FF9343"
-    800:
+    700:
       value: "#FF8225"
-    900:
+    800:
       value: "#F56800"
+    900:
+      value: "#C25200"
     1000:
-      value: "#D25900"
+      value: "#8F3D00"
     1100:
-      value: "#9A4100"
+      value: "#763200"
 
   soft-contrast-violet:
     100:

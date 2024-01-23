@@ -26,9 +26,9 @@ note:
 
   # Warning
   warning-border-color:
-    value: "{warning.color.900}"
+    value: "{warning.color.800}"
   warning-heading-color:
-    value: "{warning.color.900}"
+    value: "{warning.color.800}"
 
   # Negative
   negative-border-color:

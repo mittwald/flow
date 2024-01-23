@@ -20,7 +20,7 @@ badge:
 
   # Variants
   info-background-color:
-    value: "{informative.color.900}"
+    value: "{informative.color.800}"
   success-background-color:
     value: "{accent.color.800}"
   warning-background-color:
