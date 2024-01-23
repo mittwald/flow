@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-next-components",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "exports": {
     "./Button": "./dist/Button.js",
@@ -37,7 +37,7 @@
     "storybook:start": "run storybook dev -p 6006",
     "test": "concurrently yarn:test:compile yarn:test:unit",
     "test:compile": "tsc --noEmit",
-    "test:unit": "run jest"
+    "test:unit": "yarn node --experimental-vm-modules $(yarn bin jest)"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
@@ -73,6 +73,7 @@
     "@types/react-dom": "^18.2.18",
     "@types/rollup": "^0.54.0",
     "concurrently": "^8.2.2",
+    "decamelize": "^6.0.0",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "postcss": "^8.4.33",
@@ -83,6 +84,7 @@
     "react-dom": "^18.2.0",
     "react-element-to-jsx-string": "^15.0.0",
     "rollup": "^4.9.6",
+    "sass": "^1.70.0",
     "storybook": "^7.6.10",
     "storybook-addon-rtl-direction": "^0.0.19",
     "ts-jest": "^29.1.2",

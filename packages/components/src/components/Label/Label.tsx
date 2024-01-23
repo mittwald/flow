@@ -1,5 +1,5 @@
 import React, { FC, PropsWithChildren } from "react";
-import styles from "./Label.module.css";
+import styles from "./Label.module.scss";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import { useProps } from "@/lib/propsContext";
@@ -14,7 +14,7 @@ export interface LabelProps
 export const Label: FC<LabelProps> = (props) => {
   const { children, className, optional, ...rest } = useProps("Label", props);
   const stringFormatter = useLocalizedStringFormatter(locales);
-  const rootClassName = clsx(className, styles.root);
+  const rootClassName = clsx(styles.label, className);
 
   const optionalMarker = " " + stringFormatter.format("label.optional");
 

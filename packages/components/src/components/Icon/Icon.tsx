@@ -5,7 +5,7 @@ import React, {
   SVGAttributes,
   useMemo,
 } from "react";
-import styles from "./Icon.module.css";
+import styles from "./Icon.module.scss";
 import { IconLookup } from "@fortawesome/fontawesome-svg-core";
 import {
   BackwardCompatibleOmit,
@@ -27,7 +27,7 @@ export interface IconProps extends PropsWithChildren<SvgAttributeProps> {
 export const Icon: FC<IconProps> = (props) => {
   const {
     faIcon,
-    className: classNameFromProps,
+    className,
     "aria-label": ariaLabel,
     children,
     ...svgAttributes
@@ -35,7 +35,6 @@ export const Icon: FC<IconProps> = (props) => {
 
   const iconProps: SvgAttributeProps = {
     ...svgAttributes,
-    className: styles.icon,
     focusable: "false",
     role: "img",
     "aria-hidden": !ariaLabel,
@@ -47,7 +46,7 @@ export const Icon: FC<IconProps> = (props) => {
    * (line-height is applied), even if used in flex/grid layouts.
    */
   const spanProps: ComponentProps<"span"> = {
-    className: clsx(classNameFromProps, styles.root),
+    className: clsx(styles.icon, className),
   };
 
   if (faIcon) {

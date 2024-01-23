@@ -1,7 +1,7 @@
 import React, { FC, PropsWithChildren } from "react";
 import { getVariantFromInitials } from "./lib/getVariantFromInitials";
 import { getInitialsFromString } from "./lib/getInitialsFromString";
-import styles from "./Initials.module.css";
+import styles from "./Initials.module.scss";
 import clsx from "clsx";
 import { useProps } from "@/lib/propsContext";
 
@@ -15,9 +15,9 @@ export const Initials: FC<InitialsProps> = (props) => {
   const initials = getInitialsFromString(children);
 
   const rootClassName = clsx(
-    className,
-    styles.root,
+    styles.initials,
     styles[`variant-${getVariantFromInitials(initials)}`],
+    className,
   );
 
   const initialsElements = initials.map((initial, index) => (
