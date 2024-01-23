@@ -27,8 +27,9 @@ jobs:
       - name: "Version and publish"
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
-          git config user.name "${{ github.actor }}"
-          git config user.email "${{ github.actor}}@users.noreply.github.com"
-          yarn lerna version --conventional-commits --conventional-graduate --yes
+          git config user.name "${{ secrets.RELEASE_USER }}"
+          git config user.email "${{ secrets.RELEASE_USER_EMAIL }}"
+          yarn lerna version --conventional-commits --conventional-prerelease=* --yes
           yarn lerna publish from-git --yes --no-private
