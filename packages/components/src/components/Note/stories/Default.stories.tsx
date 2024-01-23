@@ -7,7 +7,7 @@ import { Icon } from "@/components/Icon";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 
 const meta: Meta<typeof Note> = {
-  title: "Note",
+  title: "Status/Note",
   component: Note,
   argTypes: {
     variant: {

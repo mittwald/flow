@@ -4,7 +4,7 @@ import React from "react";
 import { dummyText } from "@/lib/dev/dummyText";
 
 const meta: Meta<typeof Image> = {
-  title: "Image",
+  title: "Content/Image",
   component: Image,
   render: (props) => <Image {...props} alt="Gopher" src={dummyText.imageSrc} />,
 };
