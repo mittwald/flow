@@ -3,7 +3,6 @@ import styles from "./Avatar.module.scss";
 import clsx from "clsx";
 import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
 
-// Publish test
 interface AvatarProps extends PropsWithChildren {
   className?: string;
   /** @default "s" */
