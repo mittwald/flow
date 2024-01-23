@@ -37,4 +37,4 @@ jobs:
           yarn lerna publish \
             --conventional-commits --conventional-prerelease=* \
             --create-release github \
-            --yes --no-private --dry-run
+            --yes --no-private
