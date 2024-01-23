@@ -2,7 +2,7 @@ tooltip:
   background-color:
     value: "{neutral.color.900}"
   color:
-    value: "{color.white}"
+    value: "{neutral.color.100}"
   padding-x:
     value: "{size-px.s}"
   padding-y:

@@ -7,7 +7,7 @@ import { Icon } from "@/components/Icon";
 import { faCopy } from "@fortawesome/free-regular-svg-icons/faCopy";
 
 const meta: Meta<typeof Tooltip> = {
-  title: "Tooltip",
+  title: "Overlays/Tooltip",
   component: Tooltip,
   render: () => (
     <TooltipTrigger>

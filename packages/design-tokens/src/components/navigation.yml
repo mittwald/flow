@@ -37,4 +37,4 @@ navigation-item:
   disabled-background-color:
     value: "{neutral.color.400}"
   disabled-color:
-    value: "{color.white}"
+    value: "{neutral.color.100}"
