@@ -32,7 +32,7 @@ form-control:
     hover:
       value: "{neutral.color.500}"
     focused:
-      value: "{color.white}"
+      value: "{neutral.color.100}"
     invalid:
       value: "{negative.color.100}"
   color:
