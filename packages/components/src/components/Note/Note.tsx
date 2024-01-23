@@ -21,7 +21,7 @@ export const Note: FC<NoteProps> = (props) => {
     ...rest
   } = useProps("Note", props);
 
-  const rootClassName = clsx(className, styles.root, styles[variant]);
+  const rootClassName = clsx(styles.note, styles[variant], className);
 
   const propsContext: PropsContext = {
     Icon: {
