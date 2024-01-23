@@ -1,0 +1,12 @@
+breadcrumb-item:
+  color:
+    value: "{color.default}"
+  padding-x:
+    value: "{size-px.s}"
+  font-size:
+    value: "{font-size.s}"
+  font-weight:
+    default:
+      value: "{font-weight.normal}"
+    current:
+      value: "{font-weight.bold}"
