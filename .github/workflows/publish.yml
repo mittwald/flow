@@ -1,9 +1,7 @@
 name: Publish
 on:
-  pull_request:
-    types: [closed]
-    branches:
-      - main
+  release:
+    types: [published]
 
 jobs:
   main:
