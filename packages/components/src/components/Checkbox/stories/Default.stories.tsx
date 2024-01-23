@@ -4,7 +4,7 @@ import React from "react";
 import { action } from "@storybook/addon-actions";
 
 const meta: Meta<typeof Checkbox> = {
-  title: "Checkbox",
+  title: "Forms/Checkbox",
   component: Checkbox,
   args: {
     onChange: action("onChange"),

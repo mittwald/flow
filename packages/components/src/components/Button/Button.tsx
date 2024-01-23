@@ -1,5 +1,5 @@
 import React, { FC, PropsWithChildren } from "react";
-import styles from "./Button.module.css";
+import styles from "./Button.module.scss";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import {
@@ -17,11 +17,11 @@ export const Button: FC<ButtonProps> = (props) => {
   const {
     variant = "primary",
     children,
-    className: classNameFromProps,
+    className,
     ...restProps
   } = useProps("Button", props);
 
-  const className = clsx(classNameFromProps, styles.root, styles[variant]);
+  const rootClassName = clsx(styles.button, styles[variant], className);
 
   const propsContext: PropsContext = {
     Text: {
@@ -33,7 +33,7 @@ export const Button: FC<ButtonProps> = (props) => {
   };
 
   return (
-    <Aria.Button className={className} {...restProps}>
+    <Aria.Button className={rootClassName} {...restProps}>
       <PropsContextProvider props={propsContext}>
         {children}
       </PropsContextProvider>
