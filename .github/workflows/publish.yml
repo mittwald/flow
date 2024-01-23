@@ -26,4 +26,4 @@ jobs:
           git config user.name "${{ github.actor }}"
           git config user.email "${{ github.actor}}@users.noreply.github.com"
           yarn lerna version --conventional-commits --conventional-graduate --yes
-          yarn lerna publish from-git --yes
+          yarn lerna publish from-git --yes --no-private
