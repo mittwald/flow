@@ -4,7 +4,7 @@ import defaultMeta from "./Default.stories";
 
 const meta: Meta<typeof Avatar> = {
   ...defaultMeta,
-  title: "Avatar/Variants",
+  title: "Content/Avatar/Variants",
 };
 export default meta;
 

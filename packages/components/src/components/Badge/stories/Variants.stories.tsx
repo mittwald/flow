@@ -5,7 +5,7 @@ import React from "react";
 
 const meta: Meta<typeof Badge> = {
   ...defaultMeta,
-  title: "Badge/Variants",
+  title: "Status/Badge/Variants",
 };
 export default meta;
 

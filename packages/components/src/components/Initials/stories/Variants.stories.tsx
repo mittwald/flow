@@ -5,7 +5,7 @@ import defaultMeta from "./Default.stories";
 
 const meta: Meta<typeof Initials> = {
   ...defaultMeta,
-  title: "Initials/Variants",
+  title: "Content/Initials/Variants",
 };
 export default meta;
 
