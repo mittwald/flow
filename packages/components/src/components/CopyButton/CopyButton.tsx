@@ -17,7 +17,7 @@ export const CopyButton: FC<CopyButtonProps> = (props) => {
 
   const stringFormatter = useLocalizedStringFormatter(locales);
 
-  const ariaLabel = stringFormatter.format("copyButton.copy");
+  const tooltip = stringFormatter.format("copyButton.copy");
 
   const copyValue = () => {
     copy(value);
@@ -28,12 +28,12 @@ export const CopyButton: FC<CopyButtonProps> = (props) => {
       <Button
         className={className}
         onPress={copyValue}
-        aria-label={ariaLabel}
+        aria-label={tooltip}
         variant="plain"
       >
         <Icon faIcon={faCopy} />
       </Button>
-      <Tooltip>{ariaLabel}</Tooltip>
+      <Tooltip>{tooltip}</Tooltip>
     </TooltipTrigger>
   );
 };
