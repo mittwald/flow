@@ -26,6 +26,6 @@
 
 .button {
   grid-area: button;
-  margin-top: calc(var(--labeled-value--label-to-value-spacing) * -1);
+  margin-top: calc(var(--size-px--xs) * -1);
   align-self: start;
 }
