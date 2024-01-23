@@ -16,9 +16,7 @@ export const StatusIcon: FC<StatusIconProps> = (props) => {
 
   const stringFormatter = useLocalizedStringFormatter(locales);
 
-  const ariaLabel = stringFormatter.format(
-    `statusIcon.${variant}`,
-  );
+  const ariaLabel = stringFormatter.format(`statusIcon.${variant}`);
 
   const icon =
     variant === "info"

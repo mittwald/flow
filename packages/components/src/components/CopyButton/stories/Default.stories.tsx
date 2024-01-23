@@ -5,7 +5,7 @@ import { CopyButton } from "../CopyButton";
 const meta: Meta<typeof CopyButton> = {
   title: "Buttons/CopyButton",
   component: CopyButton,
-  render: (props) => <CopyButton {...props} value="Copied Content" />,
+  render: (props) => <CopyButton {...props} value="Copied content" />,
   parameters: {
     controls: { exclude: ["value", "className"] },
   },
