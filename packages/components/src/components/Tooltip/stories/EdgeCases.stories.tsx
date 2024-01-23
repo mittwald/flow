@@ -10,7 +10,7 @@ import { dummyText } from "@/lib/dev/dummyText";
 
 const meta: Meta<typeof Tooltip> = {
   ...defaultMeta,
-  title: "Tooltip/Edge Cases",
+  title: "Overlays/Tooltip/Edge Cases",
   render: () => (
     <TooltipTrigger>
       <Button aria-label="copy">
