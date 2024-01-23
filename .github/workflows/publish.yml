@@ -11,25 +11,31 @@ on:
 jobs:
   main:
     runs-on: ubuntu-latest
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      PUBLISH_PAT: ${{ secrets.PUBLISH_PAT }}
+      GH_TOKEN: ${{ secrets.PUBLISH_PAT }}
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          token: ${{ secrets.PUBLISH_PAT }}
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: "yarn"
+          registry-url: "https://registry.npmjs.org"
+      - name: Git Identity
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor}}@users.noreply.github.com"
       - run: yarn install --immutable
       - uses: nrwl/nx-set-shas@v4
       - if: github.ref != 'refs/heads/main'
         run: git branch --track main origin/main
       - run: yarn nx affected -t build --parallel=3
       - name: "Version and publish"
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
-          git config user.name "${{ secrets.RELEASE_USER }}"
-          git config user.email "${{ secrets.RELEASE_USER_EMAIL }}"
-          yarn lerna version --conventional-commits --conventional-prerelease=* --yes
+          yarn lerna version --conventional-commits --conventional-prerelease=* --yes --create-release github
           yarn lerna publish from-git --yes --no-private
