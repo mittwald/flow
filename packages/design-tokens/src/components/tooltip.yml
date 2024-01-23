@@ -1,0 +1,17 @@
+tooltip:
+  background-color:
+    value: "{neutral.color.900}"
+  color:
+    value: "{color.white}"
+  padding-x:
+    value: "{size-px.s}"
+  padding-y:
+    value: "{size-px.xs}"
+  font-size:
+    value: "{font-size.s}"
+  max-width:
+    value: 300px
+  tooltip-to-content-spacing:
+    value: "{size-px.s}"
+  arrow-size:
+    value: "{size-px.s}"
