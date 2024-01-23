@@ -5,7 +5,6 @@ import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
 
 export interface LabeledValueProps extends PropsWithChildren {
   className?: string;
-  copyValue?: string;
 }
 
 export const LabeledValue: FC<LabeledValueProps> = (props) => {
