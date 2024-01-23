@@ -6,12 +6,20 @@
   transition-property: color;
   transition-duration: var(--transition--duration--default);
 
-  @extend .default;
+  &[aria-disabled] {
+    color: var(--link--disabled-color);
+  }
+
+  &:not([aria-disabled]) {
+    cursor: pointer;
+  }
+
+  @extend .primary;
 }
 
 /* Variants */
 @mixin variant($variant) {
-  .#{$variant} {
+  .#{$variant}:not([aria-disabled]) {
     color: var(--link--#{$variant}-color--default);
 
     &:hover {
@@ -21,16 +29,8 @@
     &[data-pressed] {
       color: var(--link--#{$variant}-color--pressed);
     }
-
-    &:not([aria-disabled]) {
-      cursor: pointer;
-    }
-
-    &[aria-disabled] {
-      color: var(--link--default-color--disabled);
-    }
   }
 }
 
-@include variant(default);
+@include variant(primary);
 @include variant(negative);
