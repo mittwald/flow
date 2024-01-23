@@ -26,9 +26,9 @@
 }
 
 /* Sizes */
-@mixin size($s) {
-  .size-#{$s} {
-    --avatar-size: var(--avatar--size--#{$s});
+@mixin size($size) {
+  .size-#{$size} {
+    --avatar-size: var(--avatar--size--#{$size});
   }
 }
 

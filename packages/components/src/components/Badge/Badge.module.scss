@@ -47,9 +47,9 @@
 }
 
 /* Variants */
-@mixin variant($v) {
-  .#{$v} {
-    background-color: var(--badge--#{$v}-background-color);
+@mixin variant($variant) {
+  .#{$variant} {
+    background-color: var(--badge--#{$variant}-background-color);
   }
 }
 

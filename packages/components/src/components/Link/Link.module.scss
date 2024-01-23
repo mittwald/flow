@@ -10,16 +10,16 @@
 }
 
 /* Variants */
-@mixin variant($v) {
-  .#{$v} {
-    color: var(--link--#{$v}-color--default);
+@mixin variant($variant) {
+  .#{$variant} {
+    color: var(--link--#{$variant}-color--default);
 
     &:hover {
-      color: var(--link--#{$v}-color--hover);
+      color: var(--link--#{$variant}-color--hover);
     }
 
     &[data-pressed] {
-      color: var(--link--#{$v}-color--pressed);
+      color: var(--link--#{$variant}-color--pressed);
     }
 
     &:not([aria-disabled]) {

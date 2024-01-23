@@ -53,18 +53,22 @@
 }
 
 /* Variants */
-@mixin variant($v) {
-  .#{$v}[data-selected] {
+@mixin variant($variant) {
+  .#{$variant}[data-selected] {
     .indicator {
-      background-color: var(--switch--#{$v}-indicator-color--selected);
+      background-color: var(--switch--#{$variant}-indicator-color--selected);
     }
 
     &[data-pressed] .indicator {
-      background-color: var(--switch--#{$v}-indicator-color--selected-pressed);
+      background-color: var(
+        --switch--#{$variant}-indicator-color--selected-pressed
+      );
     }
 
     &[data-disabled] .indicator {
-      background-color: var(--switch--#{$v}-indicator-color--selected-disabled);
+      background-color: var(
+        --switch--#{$variant}-indicator-color--selected-disabled
+      );
     }
   }
 }

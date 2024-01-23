@@ -1,11 +1,11 @@
 @import "@/styles";
 
-@mixin state($s) {
-  border-color: var(--checkbox--border-color--#{$s});
-  background-color: var(--checkbox--background-color--#{$s});
-  color: var(--checkbox--color--#{$s});
+@mixin state($state) {
+  border-color: var(--checkbox--border-color--#{$state});
+  background-color: var(--checkbox--background-color--#{$state});
+  color: var(--checkbox--color--#{$state});
   .checkmark {
-    color: var(--checkbox--checkmark-color--#{$s});
+    color: var(--checkbox--checkmark-color--#{$state});
   }
 }
 

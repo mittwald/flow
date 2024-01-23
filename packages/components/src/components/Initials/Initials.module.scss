@@ -21,11 +21,11 @@
 }
 
 /* Variants */
-@mixin variant($v) {
-  .variant-#{$v} {
-    --background-color: var(--initials--variant-#{$v}-background-color);
-    --char-1-color: var(--initials--variant-#{$v}-first-initial-color);
-    --char-2-color: var(--initials--variant-#{$v}-second-initial-color);
+@mixin variant($variant) {
+  .variant-#{$variant} {
+    --background-color: var(--initials--variant-#{$variant}-background-color);
+    --char-1-color: var(--initials--variant-#{$variant}-first-initial-color);
+    --char-2-color: var(--initials--variant-#{$variant}-second-initial-color);
   }
 }
 

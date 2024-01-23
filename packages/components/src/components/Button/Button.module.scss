@@ -39,17 +39,17 @@
 }
 
 /* Variants */
-@mixin variant($v) {
-  .#{$v} {
-    background-color: var(--button--#{$v}-background-color--default);
-    color: var(--button--#{$v}-color);
+@mixin variant($variant) {
+  .#{$variant} {
+    background-color: var(--button--#{$variant}-background-color--default);
+    color: var(--button--#{$variant}-color);
 
     &:hover {
-      background-color: var(--button--#{$v}-background-color--hover);
+      background-color: var(--button--#{$variant}-background-color--hover);
     }
 
     &[data-pressed] {
-      background-color: var(--button--#{$v}-background-color--pressed);
+      background-color: var(--button--#{$variant}-background-color--pressed);
     }
   }
 }

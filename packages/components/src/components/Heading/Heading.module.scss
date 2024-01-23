@@ -1,9 +1,9 @@
 @import "@/styles";
 
-@mixin level($l) {
+@mixin level($level) {
   @at-root {
-    h#{$l}#{&} {
-      font-size: var(--heading--h#{$l}-font-size);
+    h#{$level}#{&} {
+      font-size: var(--heading--h#{$level}-font-size);
     }
   }
 }

@@ -49,13 +49,13 @@
 }
 
 /* Variants */
-@mixin variant($v) {
-  .#{$v} {
-    border-color: var(--note--#{$v}-border-color);
+@mixin variant($variant) {
+  .#{$variant} {
+    border-color: var(--note--#{$variant}-border-color);
     .heading,
     .customIcon,
     .statusIcon {
-      color: var(--note--#{$v}-heading-color);
+      color: var(--note--#{$variant}-heading-color);
     }
   }
 }
