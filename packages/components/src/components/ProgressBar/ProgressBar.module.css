@@ -1,0 +1,64 @@
+@import "@/styles";
+
+.root {
+  display: grid;
+  grid-template-areas:
+    "label value"
+    "bar bar";
+  grid-template-columns: 1fr auto;
+  gap: var(--progress-bar--label-to-bar-spacing);
+  width: 100%;
+  font-size: var(--progress-bar--font-size);
+  font-weight: var(--progress-bar--font-weight);
+  color: var(--progress-bar--color);
+}
+
+.value {
+  grid-area: value;
+}
+
+.bar {
+  grid-area: bar;
+  height: var(--progress-bar--bar-height);
+  border-radius: var(--progress-bar--bar-border-radius);
+  overflow: hidden;
+  background: var(--progress-bar--info-bar-background-color);
+}
+
+.fill {
+  background: var(--progress-bar--info-fill-background-color);
+  height: 100%;
+  border-radius: var(--progress-bar--bar-border-radius);
+}
+
+/* Variants */
+
+.success {
+  .bar {
+    background: var(--progress-bar--success-bar-background-color);
+  }
+
+  .fill {
+    background: var(--progress-bar--success-fill-background-color);
+  }
+}
+
+.warning {
+  .bar {
+    background: var(--progress-bar--warning-bar-background-color);
+  }
+
+  .fill {
+    background: var(--progress-bar--warning-fill-background-color);
+  }
+}
+
+.negative {
+  .bar {
+    background: var(--progress-bar--negative-bar-background-color);
+  }
+
+  .fill {
+    background: var(--progress-bar--negative-fill-background-color);
+  }
+}

@@ -1,0 +1,35 @@
+progress-bar:
+  font-size:
+    value: "{font-size.s}"
+  font-weight:
+    value: "{font-weight.bold}"
+  color:
+    value: "{neutral.color.800}"
+  label-to-bar-spacing:
+    value: "{size-rem.xs}"
+
+  bar-height:
+    value: "{size-rem.s}"
+  bar-border-radius:
+    value: "{size-rem.xs}"
+
+  # Variants
+  info-bar-background-color:
+    value: "{informative.color.200}"
+  info-fill-background-color:
+    value: "{informative.color.700}"
+
+  success-bar-background-color:
+    value: "{accent.color.200}"
+  success-fill-background-color:
+    value: "{accent.color.700}"
+
+  warning-bar-background-color:
+    value: "{warning.color.200}"
+  warning-fill-background-color:
+    value: "{warning.color.700}"
+
+  negative-bar-background-color:
+    value: "{negative.color.200}"
+  negative-fill-background-color:
+    value: "{negative.color.700}"
