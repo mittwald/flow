@@ -7,7 +7,7 @@ import { Text } from "@/components/Text";
 import { action } from "@storybook/addon-actions";
 
 const meta: Meta<typeof Button> = {
-  title: "Button",
+  title: "Buttons/Button",
   component: Button,
   args: {
     onPress: action("onPress"),
