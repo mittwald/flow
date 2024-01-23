@@ -1,6 +1,6 @@
 @import "@/styles";
 
-.root {
+.labeledValue {
   display: grid;
   grid-template-areas:
     "label"
@@ -9,23 +9,23 @@
   column-gap: var(--labeled-value--value-to-copy-button-spacing);
   width: fit-content;
 
-  &:has(> :global(.flow-button)) {
+  &:has(.copy) {
     grid-template-areas:
       "label label"
       "value button";
   }
+}
 
-  :global(.flow-label) {
-    grid-area: label;
-  }
+.label {
+  grid-area: label;
+}
 
-  :global(.flow-text) {
-    grid-area: value;
-  }
+.content {
+  grid-area: value;
+}
 
-  & > :global(.flow-button) {
-    grid-area: button;
-    margin-top: calc(var(--labeled-value--label-to-value-spacing) * -1);
-    align-self: start;
-  }
+.copy {
+  grid-area: button;
+  margin-top: calc(var(--labeled-value--label-to-value-spacing) * -1);
+  align-self: start;
 }

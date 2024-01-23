@@ -1,15 +1,14 @@
-import React, { FC, ReactNode } from "react";
-import { extractStringFromReactNode } from "@/lib/extractStringFromReactNode/extractStringFromReactNode";
+import React, { FC } from "react";
 import copy from "copy-to-clipboard";
 import { Button } from "@/components/Button";
 import { Icon } from "@/components/Icon";
 import { faCopy } from "@fortawesome/free-regular-svg-icons/faCopy";
 import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
-import clsx from "clsx";
+import { Tooltip, TooltipTrigger } from "@/components/Tooltip";
 
 export interface CopyButtonProps {
-  value: ReactNode;
+  value: string;
   className?: string;
 }
 
@@ -18,23 +17,24 @@ export const CopyButton: FC<CopyButtonProps> = (props) => {
 
   const stringFormatter = useLocalizedStringFormatter(locales);
 
-  const rootClassName = clsx(className);
-
   const ariaLabel = stringFormatter.format("copyButton.copy");
 
   const copyValue = () => {
-    copy(extractStringFromReactNode(value));
+    copy(value);
   };
 
   return (
-    <Button
-      className={rootClassName}
-      onPress={copyValue}
-      aria-label={ariaLabel}
-      variant="plain"
-    >
-      <Icon faIcon={faCopy} />
-    </Button>
+    <TooltipTrigger>
+      <Button
+        className={className}
+        onPress={copyValue}
+        aria-label={ariaLabel}
+        variant="plain"
+      >
+        <Icon faIcon={faCopy} />
+      </Button>
+      <Tooltip>{ariaLabel}</Tooltip>
+    </TooltipTrigger>
   );
 };
 

@@ -13,6 +13,7 @@ export default defineConfig(
           Button: "./src/components/Button/index.ts",
           Checkbox: "./src/components/Checkbox/index.ts",
           Content: "./src/components/Content/index.ts",
+          CopyButton: "./src/components/CopyButton/index.ts",
           FieldDescription: "./src/components/FieldDescription/index.ts",
           FieldError: "./src/components/FieldError/index.ts",
           Heading: "./src/components/Heading/index.ts",
@@ -20,6 +21,7 @@ export default defineConfig(
           Image: "./src/components/Image/index.ts",
           Initials: "./src/components/Initials/index.ts",
           Label: "./src/components/Label/index.ts",
+          LabeledValue: "./src/components/LabeledValue/index.ts",
           Link: "./src/components/Link/index.ts",
           Navigation: "./src/components/Navigation/index.ts",
           NavigationItem:

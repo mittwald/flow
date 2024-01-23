@@ -4,17 +4,17 @@ import React from "react";
 import { Text } from "@/components/Text";
 import { Button } from "@/components/Button";
 import { Icon } from "@/components/Icon";
-import { faCopy } from "@fortawesome/free-regular-svg-icons/faCopy";
 import defaultMeta from "./Default.stories";
 import { dummyText } from "@/lib/dev/dummyText";
+import { faSave } from "@fortawesome/free-regular-svg-icons/faSave";
 
 const meta: Meta<typeof Tooltip> = {
   ...defaultMeta,
   title: "Overlays/Tooltip/Edge Cases",
   render: () => (
     <TooltipTrigger>
-      <Button aria-label="copy">
-        <Icon faIcon={faCopy} />
+      <Button aria-label="save">
+        <Icon faIcon={faSave} />
       </Button>
       <Tooltip>{dummyText.medium}</Tooltip>
     </TooltipTrigger>

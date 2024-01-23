@@ -3,7 +3,7 @@ import React from "react";
 import { CopyButton } from "../CopyButton";
 
 const meta: Meta<typeof CopyButton> = {
-  title: "CopyButton",
+  title: "Buttons/CopyButton",
   component: CopyButton,
   render: (props) => <CopyButton {...props} value="Copied Content" />,
   parameters: {

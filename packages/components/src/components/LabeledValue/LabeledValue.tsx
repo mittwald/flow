@@ -1,25 +1,34 @@
-import React, { FC, PropsWithChildren, ReactNode } from "react";
-import styles from "./LabeledValue.module.css";
+import React, { FC, PropsWithChildren } from "react";
+import styles from "./LabeledValue.module.scss";
 import clsx from "clsx";
-import { Text } from "@/components/Text";
 import { CopyButton } from "@/components/CopyButton";
+import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
 
 export interface LabeledValueProps extends PropsWithChildren {
   className?: string;
-  value: ReactNode;
-  copyable?: boolean;
+  copyValue?: string;
 }
 
 export const LabeledValue: FC<LabeledValueProps> = (props) => {
-  const { children, value, className, copyable } = props;
+  const { children, className, copyValue } = props;
 
-  const rootClassName = clsx(className, styles.root);
+  const rootClassName = clsx(styles.labeledValue, className);
+
+  const propsContext: PropsContext = {
+    Label: {
+      className: styles.label,
+    },
+    Content: {
+      className: styles.content,
+    },
+  };
 
   return (
     <div className={rootClassName}>
-      {children}
-      <Text>{value}</Text>
-      {copyable && <CopyButton value={value} />}
+      <PropsContextProvider props={propsContext}>
+        {children}
+      </PropsContextProvider>
+      {copyValue && <CopyButton className={styles.copy} value={copyValue} />}
     </div>
   );
 };
