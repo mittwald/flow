@@ -6,7 +6,7 @@ import defaultMeta from "./Default.stories";
 
 const meta: Meta<typeof Breadcrumb> = {
   ...defaultMeta,
-  title: "Breadcrumb/Edge Cases",
+  title: "Navigation/Breadcrumb/Edge Cases",
 };
 export default meta;
 

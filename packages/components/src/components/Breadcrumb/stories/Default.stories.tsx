@@ -3,7 +3,7 @@ import { Breadcrumb, BreadcrumbItem } from "../index";
 import React from "react";
 
 const meta: Meta<typeof Breadcrumb> = {
-  title: "Breadcrumb",
+  title: "Navigation/Breadcrumb",
   component: Breadcrumb,
   render: () => (
     <Breadcrumb>

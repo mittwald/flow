@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import * as Aria from "react-aria-components";
-import styles from "./Breadcrumb.module.css";
+import styles from "./Breadcrumb.module.scss";
 import clsx from "clsx";
 import { BreadcrumbItemProps } from "./components/BreadcrumbItem";
 
@@ -10,7 +10,7 @@ export interface BreadcrumbProps
 export const Breadcrumb: FC<BreadcrumbProps> = (props) => {
   const { children, className, ...rest } = props;
 
-  const rootClassName = clsx(className, styles.root);
+  const rootClassName = clsx(styles.breadcrumb, className);
 
   return (
     <Aria.Breadcrumbs {...rest} className={rootClassName}>

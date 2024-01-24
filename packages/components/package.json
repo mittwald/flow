@@ -5,6 +5,7 @@
   "exports": {
     "./Avatar": "./dist/Avatar.js",
     "./Badge": "./dist/Badge.js",
+    "./Breadcrumb": "./dist/Breadcrumb.js",
     "./Button": "./dist/Button.js",
     "./Checkbox": "./dist/Checkbox.js",
     "./Content": "./dist/Content.js",
