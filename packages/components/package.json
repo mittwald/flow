@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-next-components",
-  "version": "0.2.0-alpha.3",
+  "version": "0.0.0",
   "type": "module",
   "exports": {
     "./Avatar": "./dist/Avatar.js",
