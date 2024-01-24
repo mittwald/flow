@@ -9,7 +9,7 @@ import defaultMeta from "./Default.stories";
 
 const meta: Meta<typeof Button> = {
   ...defaultMeta,
-  title: "Button/Edge Cases",
+  title: "Buttons/Button/Edge Cases",
 };
 export default meta;
 

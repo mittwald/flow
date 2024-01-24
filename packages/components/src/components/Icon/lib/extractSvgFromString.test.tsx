@@ -1,6 +1,12 @@
 import { expect } from "@jest/globals";
 import { extractSvgFromString } from "./extractSvgFromString";
-import reactElementToJSXString from "react-element-to-jsx-string";
+import { default as reactElementToJSXStringToBeFixed } from "react-element-to-jsx-string";
+
+const reactElementToJSXString = (
+  reactElementToJSXStringToBeFixed as unknown as {
+    default: typeof reactElementToJSXStringToBeFixed;
+  }
+).default;
 
 const svgAsString =
   '<svg viewBox="0 0 1746.7 1232"><path d="M1117.2,285.4c-102.5,0-226.5"/></svg>';

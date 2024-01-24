@@ -1,9 +1,17 @@
+import { test } from "@jest/globals";
 import { cssModuleClassNameGenerator } from "./cssModuleClassNameGenerator";
 
 test.each([
   [
     {
       filename: "src/foo/styles.modules.css",
+      className: "foo",
+      expected: "foo",
+    },
+  ],
+  [
+    {
+      filename: "src/foo/styles.modules.scss",
       className: "foo",
       expected: "foo",
     },
@@ -18,29 +26,36 @@ test.each([
   [
     {
       filename: "src/components/Slider/styles.module.css",
-      className: "root",
-      expected: "flow-slider",
+      className: "slider",
+      expected: "flow--slider",
+    },
+  ],
+  [
+    {
+      filename: "src/components/AdvancedSlider/styles.module.css",
+      className: "advanced-slider",
+      expected: "flow--advanced-slider",
     },
   ],
   [
     {
       filename: "src/components/Slider/styles.module.css",
       className: "thumb",
-      expected: "flow-slider-thumb",
+      expected: "flow--slider--thumb",
     },
   ],
   [
     {
       filename: "src/components/Slider/components/Thumb/styles.module.css",
-      className: "root",
-      expected: "flow-slider-thumb",
+      className: "thumb",
+      expected: "flow--slider--thumb",
     },
   ],
   [
     {
       filename: "src/components/Slider/components/Thumb/styles.module.css",
       className: "tooltip",
-      expected: "flow-slider-thumb-tooltip",
+      expected: "flow--slider--thumb--tooltip",
     },
   ],
 ])(

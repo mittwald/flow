@@ -7,9 +7,12 @@ import viteI18nPlugin from "./dev/viteI18nPlugin";
 export default defineConfig({
   plugins: [viteI18nPlugin],
   resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "/src"),
-    },
+    alias: [
+      {
+        find: /@\//,
+        replacement: path.resolve(__dirname) + "/src/",
+      },
+    ],
   },
   css: {
     postcss: {

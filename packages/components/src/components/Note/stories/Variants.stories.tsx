@@ -7,7 +7,7 @@ import defaultMeta from "./Default.stories";
 
 const meta: Meta<typeof Note> = {
   ...defaultMeta,
-  title: "Note/Variants",
+  title: "Status/Note/Variants",
 };
 
 export default meta;

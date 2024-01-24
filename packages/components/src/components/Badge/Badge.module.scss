@@ -1,6 +1,6 @@
 @import "@/styles";
 
-.root {
+.badge {
   color: var(--badge--color);
   font-size: var(--badge--font-size);
   background-color: var(--badge--info-background-color);
@@ -10,21 +10,21 @@
   height: var(--badge--height);
   line-height: var(--size-rem--m);
   display: grid;
-  grid-template-areas: "icon label";
+  grid-template-areas: "icon content";
   grid-template-columns: auto 1fr;
   column-gap: var(--badge--icon-to-text-spacing);
   max-width: fit-content;
 
-  /* With icon only */
+  @extend .info;
 
-  &:not(:has(.label)) {
+  /* With icon only */
+  &:not(:has(.content)) {
     padding-inline: var(--badge--padding-x-icon-only);
     grid-template-areas: "icon";
     grid-template-columns: auto;
   }
 
   /* With custom icon */
-
   &:has(.customIcon) {
     .statusIcon {
       display: none;
@@ -32,31 +32,28 @@
   }
 }
 
-/* Variants */
-
-.success {
-  background-color: var(--badge--success-background-color);
-}
-
-.warning {
-  background-color: var(--badge--warning-background-color);
-}
-
-.negative {
-  background-color: var(--badge--negative-background-color);
-}
-
 /* Elements */
-
 .statusIcon,
 .customIcon {
   font-size: var(--badge--icon-size);
   grid-area: icon;
 }
 
-.label {
+.content {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  grid-area: label;
+  grid-area: content;
 }
+
+/* Variants */
+@mixin variant($variant) {
+  .#{$variant} {
+    background-color: var(--badge--#{$variant}-background-color);
+  }
+}
+
+@include variant(info);
+@include variant(success);
+@include variant(warning);
+@include variant(negative);

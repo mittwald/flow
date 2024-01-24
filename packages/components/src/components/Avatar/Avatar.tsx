@@ -1,8 +1,9 @@
 import React, { FC, PropsWithChildren } from "react";
-import styles from "./Avatar.module.css";
+import styles from "./Avatar.module.scss";
 import clsx from "clsx";
 import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
 
+// Test publish
 interface AvatarProps extends PropsWithChildren {
   className?: string;
   /** @default "s" */
@@ -12,14 +13,11 @@ interface AvatarProps extends PropsWithChildren {
 export const Avatar: FC<AvatarProps> = (props) => {
   const { children, className, size = "s" } = props;
 
-  const rootClassName = clsx(className, styles.root, styles[`size-${size}`]);
+  const rootClassName = clsx(styles.avatar, styles[`size-${size}`], className);
 
   const propsContext: PropsContext = {
     Initials: {
       className: styles.initials,
-    },
-    Image: {
-      className: styles.image,
     },
   };
 

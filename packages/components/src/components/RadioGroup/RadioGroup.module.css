@@ -1,15 +1,14 @@
 @import "@/styles";
 
-.root {
+.radioGroup {
   display: flex;
   flex-wrap: wrap;
   container-type: size;
   isolation: isolate;
 
   /* With icon or content */
-
-  &:has(.radio-content),
-  &:has(.radio-icon) {
+  &:has(.content),
+  &:has(.icon) {
     display: grid;
     gap: var(--radio-group--radio-to-radio-spacing);
     .label {
@@ -35,14 +34,12 @@
   }
 
   /* With icon */
-
-  &:has(.radio-icon) {
+  &:has(.icon) {
     grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr));
   }
 
   /* With content */
-
-  &:has(.radio-content) {
+  &:has(.content) {
     grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
   }
 }
@@ -60,7 +57,6 @@
 }
 
 /* With field error */
-
 &:has(.fieldError) {
   .fieldDescription {
     display: none;
@@ -68,7 +64,6 @@
 }
 
 /* With custom field error */
-
 &:has(.customFieldError) .fieldError {
   display: none;
 }

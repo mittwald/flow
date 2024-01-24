@@ -1,7 +1,7 @@
 {
   "name": "@mittwald/flow-next-documentation",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.1.1-alpha.1",
   "type": "module",
   "scripts": {
     "build": "run next build",
@@ -19,9 +19,9 @@
     "@mdx-js/react": "^3.0.0",
     "@mittwald/flow-next-components": "workspace:^",
     "@mittwald/flow-next-stylesheet": "workspace:^",
-    "@next/mdx": "^14.0.4",
+    "@next/mdx": "^14.1.0",
     "@types/mdx": "^2.0.10",
-    "next": "^14.0.4",
+    "next": "^14.1.0",
     "parse-es-import": "^0.6.0",
     "raw-loader": "^4.0.2",
     "react": "^18.2.0",
@@ -30,14 +30,14 @@
     "webpack": "^5.89.0"
   },
   "devDependencies": {
-    "@types/node": "^20.11.1",
-    "@types/react": "^18.2.47",
+    "@types/node": "^20.11.5",
+    "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
     "@yarnpkg/pnpify": "^4.0.1",
     "acorn": "patch:acorn@npm%3A8.11.2#~/.yarn/patches/acorn-npm-8.11.2-a470f49bb6.patch",
     "acorn-jsx": "^5.3.2",
     "eslint": "^8.56.0",
-    "eslint-config-next": "^14.0.4",
+    "eslint-config-next": "^14.1.0",
     "glob": "^10.3.10",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"

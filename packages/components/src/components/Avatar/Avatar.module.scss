@@ -1,11 +1,21 @@
 @import "@/styles";
-.root {
+
+.avatar {
   border-radius: var(--border-radius--round);
   width: var(--avatar-size);
   height: var(--avatar-size);
   overflow: hidden;
+
+  > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @extend .size-s;
 }
 
+/* Elements */
 .initials {
   width: 100%;
   height: 100%;
@@ -15,20 +25,13 @@
   font-size: calc(var(--avatar-size) * 0.4);
 }
 
-.image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+/* Sizes */
+@mixin size($size) {
+  .size-#{$size} {
+    --avatar-size: var(--avatar--size--#{$size});
+  }
 }
 
-.size-s {
-  --avatar-size: var(--avatar--size--s);
-}
-
-.size-m {
-  --avatar-size: var(--avatar--size--m);
-}
-
-.size-l {
-  --avatar-size: var(--avatar--size--l);
-}
+@include size(s);
+@include size(m);
+@include size(l);

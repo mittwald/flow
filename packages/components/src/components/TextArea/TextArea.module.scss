@@ -1,0 +1,5 @@
+@use "@/styles/mixins/textInput.scss";
+
+.textArea {
+  @include textInput.textInput();
+}
