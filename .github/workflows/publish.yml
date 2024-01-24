@@ -36,7 +36,7 @@ jobs:
         run: |
           yarn lerna publish \
             --conventional-commits --conventional-prerelease=* \
-            --preid alpha --create-release github \
+            --create-release github \
             --message "chore(release): bump version to %v" \
             --yes --no-private \
-            --dist-tag $(npx auto-dist-tag)
+            --tag-version-prefix ""
