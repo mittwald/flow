@@ -6004,6 +6004,7 @@ const RAW_RUNTIME_STATE =
           ["typescript", "patch:typescript@npm%3A5.3.3#optional!builtin<compat/typescript>::version=5.3.3&hash=e012d7"],\
           ["typescript-plugin-css-modules", "virtual:160c7a696a99b065a822859af8c18a938041a659df75ba6216e289a2ba885865ddea0afdd5ed1924ae3f379fc9ec188b83f6e71e756a0bac8e9ca356654a6a90#npm:5.0.2"],\
           ["vite", "virtual:160c7a696a99b065a822859af8c18a938041a659df75ba6216e289a2ba885865ddea0afdd5ed1924ae3f379fc9ec188b83f6e71e756a0bac8e9ca356654a6a90#npm:5.0.12"],\
+          ["vite-plugin-banner", "npm:0.7.1"],\
           ["vite-plugin-dts", "virtual:160c7a696a99b065a822859af8c18a938041a659df75ba6216e289a2ba885865ddea0afdd5ed1924ae3f379fc9ec188b83f6e71e756a0bac8e9ca356654a6a90#npm:3.7.1"]\
         ],\
         "linkType": "SOFT"\
@@ -6061,6 +6062,7 @@ const RAW_RUNTIME_STATE =
           ["typescript", "patch:typescript@npm%3A5.3.3#optional!builtin<compat/typescript>::version=5.3.3&hash=e012d7"],\
           ["typescript-plugin-css-modules", "virtual:160c7a696a99b065a822859af8c18a938041a659df75ba6216e289a2ba885865ddea0afdd5ed1924ae3f379fc9ec188b83f6e71e756a0bac8e9ca356654a6a90#npm:5.0.2"],\
           ["vite", "virtual:160c7a696a99b065a822859af8c18a938041a659df75ba6216e289a2ba885865ddea0afdd5ed1924ae3f379fc9ec188b83f6e71e756a0bac8e9ca356654a6a90#npm:5.0.12"],\
+          ["vite-plugin-banner", "npm:0.7.1"],\
           ["vite-plugin-dts", "virtual:160c7a696a99b065a822859af8c18a938041a659df75ba6216e289a2ba885865ddea0afdd5ed1924ae3f379fc9ec188b83f6e71e756a0bac8e9ca356654a6a90#npm:3.7.1"]\
         ],\
         "packagePeers": [\
@@ -6124,6 +6126,7 @@ const RAW_RUNTIME_STATE =
           ["typescript", "patch:typescript@npm%3A5.3.3#optional!builtin<compat/typescript>::version=5.3.3&hash=e012d7"],\
           ["typescript-plugin-css-modules", "virtual:160c7a696a99b065a822859af8c18a938041a659df75ba6216e289a2ba885865ddea0afdd5ed1924ae3f379fc9ec188b83f6e71e756a0bac8e9ca356654a6a90#npm:5.0.2"],\
           ["vite", "virtual:160c7a696a99b065a822859af8c18a938041a659df75ba6216e289a2ba885865ddea0afdd5ed1924ae3f379fc9ec188b83f6e71e756a0bac8e9ca356654a6a90#npm:5.0.12"],\
+          ["vite-plugin-banner", "npm:0.7.1"],\
           ["vite-plugin-dts", "virtual:160c7a696a99b065a822859af8c18a938041a659df75ba6216e289a2ba885865ddea0afdd5ed1924ae3f379fc9ec188b83f6e71e756a0bac8e9ca356654a6a90#npm:3.7.1"]\
         ],\
         "linkType": "SOFT"\
@@ -30011,6 +30014,15 @@ const RAW_RUNTIME_STATE =
           "stylus",\
           "sugarss",\
           "terser"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["vite-plugin-banner", [\
+      ["npm:0.7.1", {\
+        "packageLocation": "./.yarn/cache/vite-plugin-banner-npm-0.7.1-d34e69a97b-b638585503.zip/node_modules/vite-plugin-banner/",\
+        "packageDependencies": [\
+          ["vite-plugin-banner", "npm:0.7.1"]\
         ],\
         "linkType": "HARD"\
       }]\
