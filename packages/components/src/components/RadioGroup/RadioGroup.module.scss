@@ -42,6 +42,19 @@
   &:has(.content) {
     grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
   }
+
+  /* With field error */
+  &:has(.fieldError) {
+    .fieldDescription {
+      display: none;
+    }
+  }
+
+  /* With custom field error */
+  &:has(.customFieldError) .fieldError {
+    display: none;
+  }
+
 }
 
 .label {
@@ -56,14 +69,3 @@
   width: 100%;
 }
 
-/* With field error */
-&:has(.fieldError) {
-  .fieldDescription {
-    display: none;
-  }
-}
-
-/* With custom field error */
-&:has(.customFieldError) .fieldError {
-  display: none;
-}

@@ -1,5 +1,5 @@
 import React, { ComponentProps, FC } from "react";
-import styles from "./Skeleton.module.css";
+import styles from "./Skeleton.module.scss";
 import clsx from "clsx";
 import { useProps } from "@/lib/propsContext";
 
@@ -15,7 +15,7 @@ export const Skeleton: FC<SkeletonProps> = (props) => {
     props,
   );
 
-  const rootClassName = clsx(className, styles.root);
+  const rootClassName = clsx(styles.skeleton, className);
 
   return (
     <div

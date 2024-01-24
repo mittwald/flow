@@ -3,11 +3,11 @@ import Skeleton from "../Skeleton";
 import React from "react";
 
 const meta: Meta<typeof Skeleton> = {
-  title: "Skeleton",
+  title: "Content/Skeleton",
   component: Skeleton,
   render: (props) => <Skeleton {...props} />,
   parameters: {
-    controls: { exclude: ["className"] },
+    controls: { exclude: ["className", "fontSize", "width", "height"] },
   },
 };
 export default meta;
@@ -20,7 +20,7 @@ export const OnDarkBackground: Story = {
   render: (props) => (
     <div
       style={{
-        background: "var(--color--navy-blue--800)",
+        background: "var(--color--hosting-blue--1000)",
         padding: "var(--size-px--m)",
       }}
     >

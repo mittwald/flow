@@ -4,8 +4,10 @@
   flex-shrink: 0;
   display: inline-block;
 
-  &:global(.flow-skeleton) {
+  :global(.flow--skeleton) {
     border-radius: 50%;
+    height: 1em;
+    width: 1em;
   }
 
   svg {
