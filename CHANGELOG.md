@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.3](https://github.com/mittwald/flow/compare/v0.2.0-alpha.2...v0.2.0-alpha.3) (2024-01-24)
+
+### Bug Fixes
+
+- stuff
+  ([6c654b3](https://github.com/mittwald/flow/commit/6c654b3ee4e2a680b95ce4a9885ce259df80fc33))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.2.0-alpha.2](https://github.com/mittwald/flow/compare/v0.2.0-alpha.1...v0.2.0-alpha.2) (2024-01-24)
 
 ### Bug Fixes
