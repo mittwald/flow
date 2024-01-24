@@ -1,0 +1,44 @@
+@import "@/styles";
+
+.avatar {
+  border-radius: var(--border-radius--round);
+  width: var(--avatar-size);
+  height: var(--avatar-size);
+  overflow: hidden;
+
+
+
+  > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @extend .size-s;
+}
+
+/* Elements */
+  .skeleton {
+    width: 100%;
+    height: 100%;
+  }
+
+.initials {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: calc(var(--avatar-size) * 0.4);
+}
+
+/* Sizes */
+@mixin size($size) {
+  .size-#{$size} {
+    --avatar-size: var(--avatar--size--#{$size});
+  }
+}
+
+@include size(s);
+@include size(m);
+@include size(l);

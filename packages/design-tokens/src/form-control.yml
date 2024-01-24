@@ -1,0 +1,40 @@
+form-control:
+  label-to-control-spacing:
+    value: "{size-rem.xs}"
+  control-to-info-spacing:
+    value: "{size-rem.xs}"
+  padding-x:
+    value: "{size-px.m}"
+  padding-y:
+    value: "{size-px.s}"
+  border-radius:
+    value: "{border-radius.default}"
+  border-width:
+    value: "{border-width.default}"
+  border-style:
+    value: "{border-style.default}"
+  border-color:
+    default:
+      value: "{neutral.color.400}"
+    disabled:
+      value: "{neutral.color.500}"
+    hover:
+      value: "{neutral.color.600}"
+    invalid:
+      value: "{negative.color.700}"
+    focused:
+      value: "{informative.color.700}"
+  background-color:
+    default:
+      value: "{neutral.color.400}"
+    disabled:
+      value: "{neutral.color.500}"
+    hover:
+      value: "{neutral.color.500}"
+    focused:
+      value: "{neutral.color.100}"
+    invalid:
+      value: "{negative.color.100}"
+  color:
+    disabled:
+      value: "{neutral.color.800}"

@@ -13,7 +13,7 @@ checkbox:
     value: "{border-style.default}"
   border-color:
     default:
-      value: "{neutral.color.500}"
+      value: "{neutral.color.700}"
     selected:
       value: "{informative.color.900}"
     disabled:
@@ -22,7 +22,7 @@ checkbox:
       value: "{neutral.color.600}"
   background-color:
     default:
-      value: "{color.white}"
+      value: "{neutral.color.100}"
     selected:
       value: "{informative.color.200}"
     disabled:

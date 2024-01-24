@@ -4,7 +4,7 @@ import React from "react";
 import { Skeleton } from "@/components/Skeleton";
 
 const meta: Meta<typeof Label> = {
-  title: "Label",
+  title: "Content/Label",
   component: Label,
   render: (props) => <Label {...props}>Label</Label>,
 };

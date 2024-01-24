@@ -5,7 +5,7 @@ import React from "react";
 import { Skeleton } from "@/components/Skeleton";
 
 const meta: Meta<typeof Link> = {
-  title: "Link",
+  title: "Navigation/Link",
   component: Link,
   args: {
     onPress: action("onPress"),

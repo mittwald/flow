@@ -20,18 +20,18 @@ note:
 
   # Info
   info-border-color:
-    value: "{informative.color.700}"
+    value: "{informative.color.800}"
   info-heading-color:
-    value: "{informative.color.900}"
+    value: "{informative.color.800}"
 
   # Warning
   warning-border-color:
-    value: "{warning.color.700}"
+    value: "{warning.color.800}"
   warning-heading-color:
-    value: "{warning.color.900}"
+    value: "{warning.color.800}"
 
   # Negative
   negative-border-color:
-    value: "{negative.color.700}"
+    value: "{negative.color.800}"
   negative-heading-color:
-    value: "{negative.color.900}"
+    value: "{negative.color.800}"

@@ -1,0 +1,60 @@
+@import "@/styles";
+
+.button {
+  border: none;
+  border-radius: var(--button--border-radius);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: var(--button--padding-y) var(--button--padding-x);
+  font-size: var(--font-size--default);
+  font-weight: bold;
+  transition-property: color, background-color;
+  transition-duration: var(--transition--duration--default);
+
+  @extend .primary;
+
+  &[disabled] {
+    background-color: var(--button--disabled-background-color);
+    color: var(--button--disabled-color);
+  }
+
+  &:has(.icon) {
+    /* Apply line-height when empty */
+    &::after {
+      content: "\200B";
+      visibility: hidden;
+    }
+  }
+}
+
+/* Elements */
+.text {
+  order: 1;
+  margin-inline-start: var(--button--icon-to-text-spacing);
+}
+
+.icon {
+  order: 0;
+}
+
+/* Variants */
+@mixin variant($variant) {
+  .#{$variant} {
+    background-color: var(--button--#{$variant}-background-color--default);
+    color: var(--button--#{$variant}-color);
+
+    &:hover {
+      background-color: var(--button--#{$variant}-background-color--hover);
+    }
+
+    &[data-pressed] {
+      background-color: var(--button--#{$variant}-background-color--pressed);
+    }
+  }
+}
+
+@include variant(primary);
+@include variant(accent);
+@include variant(negative);
+@include variant(secondary);

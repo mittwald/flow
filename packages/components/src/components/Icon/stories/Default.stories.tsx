@@ -5,7 +5,7 @@ import React from "react";
 import { Skeleton } from "@/components/Skeleton";
 
 const meta: Meta<typeof Icon> = {
-  title: "Icon",
+  title: "Content/Icon",
   component: Icon,
   args: {
     fontSize: 32,

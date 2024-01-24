@@ -4,7 +4,7 @@ import React from "react";
 import { Skeleton } from "@/components/Skeleton";
 
 const meta: Meta<typeof Heading> = {
-  title: "Heading",
+  title: "Content/Heading",
   component: Heading,
   argTypes: {
     level: {

@@ -1,0 +1,77 @@
+.switch {
+  display: flex;
+  align-items: center;
+  font-size: var(--switch--font-size);
+  font-weight: var(--switch--font-weight);
+  column-gap: var(--switch--label-to-indicator-spacing);
+
+  &.label-leading {
+    flex-direction: row-reverse;
+  }
+
+  @extend .accent;
+
+  /* States */
+  &[data-pressed] .indicator {
+    background-color: var(--switch--indicator-color--pressed);
+  }
+
+  &[data-disabled] {
+    color: var(--switch--color--disabled);
+    .indicator {
+      background-color: var(--switch--indicator-color--disabled);
+    }
+  }
+}
+
+/* Elements */
+.indicator {
+  width: var(--switch--indicator-width);
+  height: var(--switch--indicator-height);
+  background-color: var(--switch--indicator-color--default);
+  border-radius: var(--switch--indicator-border-radius);
+  padding: var(--switch--indicator-to-marker-spacing);
+  flex-shrink: 0;
+  position: relative;
+  transition-property: background-color;
+  transition-duration: var(--transition--duration--default);
+
+  &:before {
+    content: "";
+    display: block;
+    width: var(--switch--indicator-marker-size);
+    height: var(--switch--indicator-marker-size);
+    background-color: var(--switch--indicator-marker-color);
+    border-radius: var(--border-radius--round);
+    transition-property: transform;
+    transition-duration: var(--transition--duration--default);
+    transform: translateX(0);
+    position: absolute;
+    top: var(--switch--indicator-to-marker-spacing);
+    left: var(--switch--indicator-to-marker-spacing);
+  }
+}
+
+/* Variants */
+@mixin variant($variant) {
+  .#{$variant}[data-selected] {
+    .indicator {
+      background-color: var(--switch--#{$variant}-indicator-color--selected);
+    }
+
+    &[data-pressed] .indicator {
+      background-color: var(
+        --switch--#{$variant}-indicator-color--selected-pressed
+      );
+    }
+
+    &[data-disabled] .indicator {
+      background-color: var(
+        --switch--#{$variant}-indicator-color--selected-disabled
+      );
+    }
+  }
+}
+
+@include variant(accent);
+@include variant(negative);

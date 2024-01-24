@@ -8,7 +8,7 @@ import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 import { Skeleton } from "@/components/Skeleton";
 
 const meta: Meta<typeof Note> = {
-  title: "Note",
+  title: "Status/Note",
   component: Note,
   argTypes: {
     variant: {

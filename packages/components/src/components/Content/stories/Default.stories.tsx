@@ -4,7 +4,7 @@ import React from "react";
 import { Skeleton } from "@/components/Skeleton";
 
 const meta: Meta<typeof Content> = {
-  title: "Content",
+  title: "Content/Content",
   component: Content,
   argTypes: {
     elementType: {

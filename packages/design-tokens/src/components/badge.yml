@@ -16,14 +16,14 @@ badge:
   icon-to-text-spacing:
     value: 0.5em
   color:
-    value: "{color.white}"
+    value: "{neutral.color.100}"
 
   # Variants
   info-background-color:
-    value: "{informative.color.700}"
+    value: "{informative.color.800}"
   success-background-color:
-    value: "{accent.color.700}"
+    value: "{accent.color.800}"
   warning-background-color:
-    value: "{warning.color.700}"
+    value: "{warning.color.800}"
   negative-background-color:
-    value: "{negative.color.700}"
+    value: "{negative.color.800}"
