@@ -36,6 +36,6 @@ jobs:
         run: |
           yarn lerna publish \
             --conventional-commits --conventional-prerelease=* \
-            --create-release github \
-            --message "chore(release): publish %v" \
+            --preid alpha --create-release github \
+            --message "chore(release): bump %v" \
             --yes --no-private
