@@ -55,9 +55,6 @@
     top: var(--switch--indicator-to-marker-spacing);
     left: var(--switch--indicator-to-marker-spacing);
   }
-
-
-
 }
 
 /* Variants */
@@ -68,15 +65,11 @@
     }
 
     &[data-pressed] .indicator {
-      background-color: var(
-                      --switch--#{$variant}-indicator-color--selected-pressed
-      );
+      background-color: var(--switch--#{$variant}-indicator-color--selected-pressed);
     }
 
     &[data-disabled] .indicator {
-      background-color: var(
-                      --switch--#{$variant}-indicator-color--selected-disabled
-      );
+      background-color: var(--switch--#{$variant}-indicator-color--selected-disabled);
     }
   }
 }
