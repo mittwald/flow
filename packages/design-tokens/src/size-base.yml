@@ -1,4 +1,6 @@
 size-rem:
+  xxxs:
+    value: 0.0625rem
   xxs:
     value: 0.125rem
   xs:
@@ -15,6 +17,8 @@ size-rem:
     value: 4rem
 
 size-px:
+  xxxs:
+    value: 1px
   xxs:
     value: 2px
   xs:

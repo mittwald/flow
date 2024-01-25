@@ -22,6 +22,10 @@
       background-color: var(--switch--indicator-color--disabled);
     }
   }
+
+  &[data-selected] .indicator:before {
+    transform: translate(100%);
+  }
 }
 
 /* Elements */
@@ -74,4 +78,4 @@
 }
 
 @include variant(accent);
-@include variant(negative);
+@include variant(danger);

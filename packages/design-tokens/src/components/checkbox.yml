@@ -15,7 +15,7 @@ checkbox:
     default:
       value: "{neutral.color.700}"
     selected:
-      value: "{informative.color.900}"
+      value: "{info.color.900}"
     disabled:
       value: "{neutral.color.500}"
     selected-disabled:
@@ -24,18 +24,18 @@ checkbox:
     default:
       value: "{neutral.color.100}"
     selected:
-      value: "{informative.color.200}"
+      value: "{info.color.200}"
     disabled:
       value: "{neutral.color.300}"
     selected-disabled:
       value: "{neutral.color.400}"
     hover:
-      value: "{informative.color.100}"
+      value: "{info.color.100}"
   color:
     default:
       value: "{neutral.color.1000}"
     selected:
-      value: "{informative.color.900}"
+      value: "{info.color.900}"
     disabled:
       value: "{neutral.color.500}"
     selected-disabled:
@@ -44,7 +44,7 @@ checkbox:
     default:
       value: "{neutral.color.800}"
     selected:
-      value: "{informative.color.900}"
+      value: "{info.color.900}"
     disabled:
       value: "{neutral.color.500}"
     selected-disabled:

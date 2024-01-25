@@ -20,41 +20,30 @@
   }
 
   &:has(.icon) {
-    /* Apply line-height when empty */
-    &::after {
-      content: "\200B";
-      visibility: hidden;
-    }
+    padding: var(--button--padding-with-icon);
   }
-}
-
-/* Elements */
-.text {
-  order: 1;
-  margin-inline-start: var(--button--icon-to-text-spacing);
-}
-
-.icon {
-  order: 0;
 }
 
 /* Variants */
 @mixin variant($variant) {
   .#{$variant} {
     background-color: var(--button--#{$variant}-background-color--default);
-    color: var(--button--#{$variant}-color);
+    color: var(--button--#{$variant}-color--default);
 
     &:hover {
       background-color: var(--button--#{$variant}-background-color--hover);
+      color: var(--button--#{$variant}-color--hover);
     }
 
     &[data-pressed] {
       background-color: var(--button--#{$variant}-background-color--pressed);
+      color: var(--button--#{$variant}-color--pressed);
     }
   }
 }
 
 @include variant(primary);
 @include variant(accent);
-@include variant(negative);
+@include variant(danger);
 @include variant(secondary);
+@include variant(plain);
