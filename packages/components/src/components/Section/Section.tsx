@@ -1,5 +1,5 @@
 import React, { ComponentProps, FC, PropsWithChildren } from "react";
-import styles from "./Section.module.css";
+import styles from "./Section.module.scss";
 import clsx from "clsx";
 
 export interface SectionProps
@@ -12,7 +12,7 @@ export const Section: FC<SectionProps> = (props) => {
     return null;
   }
 
-  const rootClassName = clsx(className, styles.root);
+  const rootClassName = clsx(styles.section, className);
 
   return (
     <section {...rest} className={rootClassName}>

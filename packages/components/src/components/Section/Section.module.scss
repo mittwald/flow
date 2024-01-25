@@ -1,6 +1,6 @@
 @import "@/styles";
 
-.root {
+.section {
   margin-block: var(--section--section-to-section-spacing);
   display: flex;
   flex-direction: column;
@@ -14,7 +14,7 @@
     margin-bottom: 0;
   }
 
-  + .root {
+  + .section {
     border-top-width: var(--section--border-width);
     border-top-style: var(--section--border-style);
     border-top-color: var(--section--border-color);
