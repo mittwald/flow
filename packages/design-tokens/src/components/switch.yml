@@ -19,7 +19,7 @@ switch:
   indicator-to-marker-spacing:
     value: "{size-rem.xs}"
   indicator-marker-color:
-    value: "{color.white}"
+    value: "{neutral.color.100}"
   indicator-marker-size:
     value: "{size-rem.m}"
   indicator-color:
@@ -33,17 +33,17 @@ switch:
   # Accent
   accent-indicator-color:
     selected:
-      value: "{accent.color.700}"
-    selected-pressed:
       value: "{accent.color.800}"
+    selected-pressed:
+      value: "{accent.color.900}"
     selected-disabled:
       value: "{accent.color.200}"
 
-  # Negative
-  negative-indicator-color:
+  # Danger
+  danger-indicator-color:
     selected:
-      value: "{negative.color.700}"
+      value: "{danger.color.800}"
     selected-pressed:
-      value: "{negative.color.800}"
+      value: "{danger.color.900}"
     selected-disabled:
-      value: "{negative.color.300}"
+      value: "{danger.color.300}"

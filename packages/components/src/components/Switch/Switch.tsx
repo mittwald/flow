@@ -1,6 +1,6 @@
 import React, { FC, PropsWithChildren } from "react";
 import * as Aria from "react-aria-components";
-import styles from "./Switch.module.css";
+import styles from "./Switch.module.scss";
 import clsx from "clsx";
 
 export interface SwitchProps
@@ -8,7 +8,7 @@ export interface SwitchProps
   /** @default "trailing" */
   labelPosition?: "leading" | "trailing";
   /** @default "accent" */
-  variant?: "accent" | "negative";
+  variant?: "accent" | "danger";
 }
 
 export const Switch: FC<SwitchProps> = (props) => {
@@ -21,10 +21,10 @@ export const Switch: FC<SwitchProps> = (props) => {
   } = props;
 
   const rootClassName = clsx(
-    className,
-    styles.root,
+    styles.switch,
     styles[`label-${labelPosition}`],
     styles[variant],
+    className,
   );
 
   return (

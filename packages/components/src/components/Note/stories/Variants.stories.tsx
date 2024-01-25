@@ -7,7 +7,7 @@ import defaultMeta from "./Default.stories";
 
 const meta: Meta<typeof Note> = {
   ...defaultMeta,
-  title: "Note/Variants",
+  title: "Status/Note/Variants",
 };
 
 export default meta;
@@ -39,8 +39,8 @@ export const Warning: Story = {
   ),
 };
 
-export const Negative: Story = {
-  args: { variant: "negative" },
+export const Danger: Story = {
+  args: { variant: "danger" },
   render: (props) => (
     <Note {...props}>
       <Heading>No SSL certificate could be issued</Heading>

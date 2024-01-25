@@ -1,0 +1,145 @@
+@import "../../../../styles/index.css";
+
+.radio {
+  border: var(--radio-group--border-width) var(--radio-group--border-style)
+    var(--radio-group--border-color--default);
+  padding: var(--radio-group--padding-y) var(--radio-group--padding-x);
+  background-color: var(--radio-group--background-color--default);
+  color: var(--radio-group--color--default);
+  display: grid;
+  row-gap: var(--radio-group--text-to-text-spacing);
+  column-gap: var(--radio-group--icon-to-text-spacing);
+  transition-property: color, background-color, border-color;
+  transition-duration: var(--transition--duration--default);
+
+  /* Without icon and content */
+  &:not(:has(.content)):not(:has(.icon)) {
+    grid-template-areas: "label checkmark";
+    grid-template-columns: 1fr auto;
+    flex: 1;
+    margin-right: -1px; /* Collapse borders */
+
+    &:first-of-type {
+      border-radius: 0;
+      border-start-start-radius: var(--radio-group--border-radius);
+      border-end-start-radius: var(--radio-group--border-radius);
+    }
+
+    &:last-of-type {
+      border-radius: 0;
+      border-start-end-radius: var(--radio-group--border-radius);
+      border-end-end-radius: var(--radio-group--border-radius);
+      margin: 0;
+    }
+
+    &[data-selected] .checkmark {
+      display: block;
+    }
+
+    @container (max-width: 600px) {
+      flex: auto;
+      width: 100%;
+      margin: 0 0 -1px; /* Collapse borders */
+
+      &:first-of-type {
+        border-radius: 0;
+        border-start-start-radius: var(--radio-group--border-radius);
+        border-start-end-radius: var(--radio-group--border-radius);
+      }
+
+      &:last-of-type {
+        border-radius: 0;
+        border-end-end-radius: var(--radio-group--border-radius);
+        border-end-start-radius: var(--radio-group--border-radius);
+        margin: 0;
+      }
+    }
+  }
+
+  /* With icon */
+  &:has(.icon):not(:has(.content)) {
+    grid-template-areas:
+      "icon"
+      "label";
+    grid-template-columns: 1fr;
+    justify-items: center;
+    border-radius: var(--radio-group--border-radius);
+    .label {
+      font-weight: var(--radio-group--label-font-weight-with-content-or-icon);
+    }
+    .icon {
+      font-size: var(--icon--size--l);
+      line-height: 0;
+    }
+  }
+
+  /* With content */
+  &:has(.content) {
+    grid-template-areas:
+      "label"
+      "content";
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    justify-items: start;
+    border-radius: var(--radio-group--border-radius);
+    .label {
+      font-weight: var(--radio-group--label-font-weight-with-content-or-icon);
+    }
+  }
+
+  /* With icon and content */
+  &:has(.content):has(.icon) {
+    grid-template-areas:
+      "icon label"
+      ".    content";
+    grid-template-columns: auto 1fr;
+  }
+
+  /* States */
+  &:hover {
+    background-color: var(--radio-group--background-color--hover);
+  }
+
+  &[data-selected] {
+    border-color: var(--radio-group--border-color--selected);
+    background-color: var(--radio-group--background-color--selected);
+    color: var(--radio-group--color--selected);
+    z-index: 1;
+  }
+
+  &[data-disabled],
+  [aria-disabled] & {
+    border-color: var(--radio-group--border-color--disabled);
+    background-color: var(--radio-group--background-color--disabled);
+    color: var(--radio-group--color--disabled);
+  }
+
+  &[data-disabled][data-selected],
+  [aria-disabled] &[date-selected] {
+    border-color: var(--radio-group--border-color--selected-disabled);
+    background-color: var(--radio-group--background-color--selected-disabled);
+    color: var(--radio-group--color--selected-disabled);
+  }
+
+  &:not([data-selected]):not([data-disabled]) .icon {
+    color: var(--radio-group--icon-color--default);
+  }
+}
+
+/* Elements */
+.icon {
+  grid-area: icon;
+}
+
+.label {
+  grid-area: label;
+}
+
+.content {
+  grid-area: content;
+}
+
+.checkmark {
+  grid-area: checkmark;
+  display: none;
+}
