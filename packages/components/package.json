@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-next-components",
-  "version": "0.1.0-alpha.0",
+  "version": "0.1.0-alpha.1",
   "type": "module",
   "exports": {
     "./Avatar": "./dist/Avatar.js",
@@ -26,8 +26,7 @@
     "./TextArea": "./dist/TextArea.js",
     "./TextField": "./dist/TextField.js",
     "./Tooltip": "./dist/Tooltip.js",
-    "./style": "./dist/style.css",
-    "./style/init": "./dist/index.js"
+    "./styles": "./dist/styles.css"
   },
   "files": [
     "dist"
