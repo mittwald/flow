@@ -5,6 +5,7 @@ import path from "path";
 import viteI18nPlugin from "./dev/viteI18nPlugin";
 
 export default defineConfig({
+  assetsInclude: ["/sb-preview/runtime.js"],
   plugins: [viteI18nPlugin],
   resolve: {
     alias: [

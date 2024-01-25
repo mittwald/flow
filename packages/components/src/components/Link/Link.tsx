@@ -7,7 +7,7 @@ import clsx from "clsx";
 export interface LinkProps
   extends PropsWithChildren<Omit<Aria.LinkProps, "children">> {
   /** @default "default" */
-  variant?: "default" | "negative";
+  variant?: "default" | "danger";
 }
 
 export const Link: FC<LinkProps> = (props) => {

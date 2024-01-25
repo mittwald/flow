@@ -21,9 +21,9 @@ form-control:
     hover:
       value: "{neutral.color.600}"
     invalid:
-      value: "{negative.color.700}"
+      value: "{danger.color.700}"
     focused:
-      value: "{informative.color.700}"
+      value: "{info.color.700}"
   background-color:
     default:
       value: "{neutral.color.400}"
@@ -34,7 +34,7 @@ form-control:
     focused:
       value: "{neutral.color.100}"
     invalid:
-      value: "{negative.color.100}"
+      value: "{danger.color.100}"
   color:
     disabled:
       value: "{neutral.color.800}"

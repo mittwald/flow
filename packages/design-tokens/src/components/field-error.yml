@@ -2,4 +2,4 @@ field-error:
   font-size:
     value: "{font-size.s}"
   color:
-    value: "{negative.color.700}"
+    value: "{danger.color.700}"
