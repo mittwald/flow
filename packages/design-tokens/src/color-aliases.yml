@@ -299,4 +299,4 @@ disabled-solid-foreground-color:
 
 # Disabled Plain
 disabled-plain-foreground-color:
-  value: "{neutral.color.1600}"
+  value: "{neutral.color.600}"
