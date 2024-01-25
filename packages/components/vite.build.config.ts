@@ -19,6 +19,8 @@ export default defineConfig(
           Button: "./src/components/Button/index.ts",
           Checkbox: "./src/components/Checkbox/index.ts",
           Content: "./src/components/Content/index.ts",
+          DatePicker: "./src/components/DatePicker/index.ts",
+          DateRangePicker: "./src/components/DaterRangePicker/index.ts",
           FieldDescription: "./src/components/FieldDescription/index.ts",
           FieldError: "./src/components/FieldError/index.ts",
           Heading: "./src/components/Heading/index.ts",
@@ -31,6 +33,7 @@ export default defineConfig(
           NavigationItem:
             "./src/components/Navigation/components/NavigationItem/index.ts",
           Note: "./src/components/Note/index.ts",
+          Popover: "./src/components/Popover/index.ts",
           Radio: "./src/components/RadioGroup/components/Radio/index.ts",
           RadioGroup: "./src/components/RadioGroup/index.ts",
           StatusIcon: "./src/components/StatusIcon/index.ts",

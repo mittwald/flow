@@ -1,5 +1,5 @@
 import React, { FC, PropsWithChildren } from "react";
-import styles from "./Popover.module.css";
+import styles from "./Popover.module.scss";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import { useProps } from "@/lib/propsContext";
@@ -10,7 +10,7 @@ export interface PopoverProps
 export const Popover: FC<PopoverProps> = (props) => {
   const { children, className, ...rest } = useProps("popover", props);
 
-  const rootClassName = clsx(className, styles.root);
+  const rootClassName = clsx(styles.popover, className);
 
   return (
     <Aria.Popover {...rest} className={rootClassName}>

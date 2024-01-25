@@ -1,6 +1,6 @@
-@import "../../styles/index.css";
+@import "@/styles";
 
-.root {
+.popover {
   box-shadow: var(--popover--box-shadow);
   border-radius: var(--popover--border-radius);
 }
