@@ -1,0 +1,31 @@
+@use "@/styles/mixins/textInput.scss";
+
+.dateRangeInput {
+  @include textInput.textInput();
+  display: grid;
+  grid-template-columns: auto auto 1fr auto;
+
+  :global(.react-aria-DateInput) {
+    display: flex;
+  }
+
+  :global(.react-aria-DateSegment) {
+    border-radius: var(--date-picker--date-segment-border-radius);
+
+    &:focus {
+      background: var(--date-picker--date-segment-background-color--focused);
+      outline: none;
+    }
+  }
+
+  > span {
+    display: flex;
+    align-items: center;
+  }
+  :global(.react-aria-DateInput):first-of-type {
+    padding-inline-end: 2px;
+  }
+  :global(.react-aria-DateInput):last-of-type {
+    padding-inline-start: 2px;
+  }
+}

@@ -1,5 +1,4 @@
 import React, { FC, PropsWithChildren, ReactNode } from "react";
-import styles from "./DatePicker.module.css";
 import clsx from "clsx";
 import {
   PropsContext,
@@ -11,6 +10,7 @@ import { Popover } from "@/components/Popover";
 import { Calendar } from "./components/Calendar";
 import { DateInput } from "./components/DateInput";
 import { FieldError } from "@/components/FieldError";
+import styles from "../FormField/FormField.module.scss";
 
 export interface DatePickerProps<T extends Aria.DateValue>
   extends PropsWithChildren<Omit<Aria.DatePickerProps<T>, "children">> {
@@ -23,7 +23,7 @@ export const DatePicker: FC<DatePickerProps<any>> = (props) => {
     props,
   );
 
-  const rootClassName = clsx(className, styles.root);
+  const rootClassName = clsx(styles.formField, className);
 
   const propsContext: PropsContext = {
     Label: {

@@ -31,11 +31,6 @@ export const Button: FC<ButtonProps> = (props) => {
 
   return (
     <Aria.Button className={rootClassName} {...restProps}>
-import styles from "./Button.module.scss";
-  variant?: "primary" | "accent" | "secondary" | "danger" | "plain";
-    className,
-  const rootClassName = clsx(styles.button, styles[variant], className);
-    <Aria.Button className={rootClassName} {...restProps}>
       <PropsContextProvider props={propsContext}>
         {children}
       </PropsContextProvider>

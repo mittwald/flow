@@ -8,11 +8,11 @@ import { faChevronRight } from "@fortawesome/free-solid-svg-icons/faChevronRight
 export const CalendarHeader: FC = () => {
   return (
     <header>
-      <Button slot="previous" variant="transparent">
+      <Button slot="previous" variant="plain">
         <Icon faIcon={faChevronLeft} />
       </Button>
       <Aria.Heading />
-      <Button slot="next" variant="transparent">
+      <Button slot="next" variant="plain">
         <Icon faIcon={faChevronRight} />
       </Button>
     </header>

@@ -39,7 +39,7 @@ form-control:
     disabled:
       value: "{neutral.color.800}"
 
-text-field-button:
+form-control-button:
   font-size:
     value: "{size-rem.l}"
   color:

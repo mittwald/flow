@@ -1,6 +1,6 @@
-@import "index.css";
+@import "../../styles/index.css";
 
-.root {
+.calendar {
   padding: var(--calendar--padding);
 
   header {
@@ -27,7 +27,7 @@
     border-radius: var(--button--border-radius);
 
     &:hover {
-      background: var(--button--transparent-background-color--hover);
+      background: var(--button--plain-background-color--hover);
     }
 
     &[data-outside-month] {
@@ -35,16 +35,16 @@
     }
 
     &[data-pressed] {
-      background: var(--button--transparent-background-color--pressed);
+      background: var(--button--plain-background-color--pressed);
     }
 
     &[data-selected] {
-      background: var(--button--transparent-background-color--pressed);
+      background: var(--button--plain-background-color--pressed);
     }
 
     &[data-disabled] {
-      background: var(--button--transparent-background-color--disabled);
-      color: var(--button--transparent-color--disabled);
+      background: var(--button--disabled-background-color);
+      color: var(--button--disabled-color);
     }
   }
 }

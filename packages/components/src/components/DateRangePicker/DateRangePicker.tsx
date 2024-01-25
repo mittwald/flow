@@ -1,5 +1,5 @@
 import React, { FC, PropsWithChildren, ReactNode } from "react";
-import styles from "./DateRangePicker.module.css";
+import styles from "../FormField/FormField.module.scss";
 import clsx from "clsx";
 import {
   PropsContext,
@@ -22,7 +22,7 @@ export const DateRangePicker: FC<DateRangePickerProps<any>> = (props) => {
     props,
   );
 
-  const rootClassName = clsx(className, styles.root);
+  const rootClassName = clsx(styles.formField, className);
 
   const propsContext: PropsContext = {
     Label: {
