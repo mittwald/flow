@@ -20,22 +20,8 @@
   }
 
   &:has(.icon) {
-    /* Apply line-height when empty */
-    &::after {
-      content: "\200B";
-      visibility: hidden;
-    }
+    padding: var(--button--padding-with-icon);
   }
-}
-
-/* Elements */
-.text {
-  order: 1;
-  margin-inline-start: var(--button--icon-to-text-spacing);
-}
-
-.icon {
-  order: 0;
 }
 
 /* Variants */
@@ -58,6 +44,6 @@
 
 @include variant(primary);
 @include variant(accent);
-@include variant(negative);
+@include variant(danger);
 @include variant(secondary);
 @include variant(plain);

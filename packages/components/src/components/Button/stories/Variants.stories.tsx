@@ -29,9 +29,15 @@ export const Secondary: Story = {
   },
 };
 
-export const Negative: Story = {
+export const Danger: Story = {
   args: {
-    variant: "negative",
+    variant: "danger",
+  },
+};
+
+export const Plain: Story = {
+  args: {
+    variant: "plain",
   },
 };
 

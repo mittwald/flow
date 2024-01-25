@@ -1,7 +1,7 @@
 {
   "name": "@mittwald/flow-next-project",
   "private": true,
-  "version": "1.0.0",
+  "version": "0.0.0",
   "packageManager": "yarn@4.0.2",
   "type": "module",
   "license": "MIT",
@@ -29,8 +29,8 @@
   "devDependencies": {
     "@eslint/js": "^8.56.0",
     "@types/eslint__js": "^8.42.3",
-    "@typescript-eslint/eslint-plugin": "^6.19.0",
-    "@typescript-eslint/parser": "^6.19.0",
+    "@typescript-eslint/eslint-plugin": "^6.19.1",
+    "@typescript-eslint/parser": "^6.19.1",
     "concurrently": "^8.2.2",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",

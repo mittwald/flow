@@ -1,10 +1,16 @@
 import { defineConfig, mergeConfig } from "vite";
+import banner from "vite-plugin-banner";
 import dts from "vite-plugin-dts";
 import baseConfig from "./vite.config";
 
 export default defineConfig(
   mergeConfig(baseConfig, {
-    plugins: [dts({ rollupTypes: true })],
+    plugins: [
+      banner((filename) =>
+        filename.endsWith(".js") ? '"use client"\r\n/* */' : "",
+      ),
+      dts({ rollupTypes: true }),
+    ],
     build: {
       lib: {
         entry: {
@@ -41,7 +47,19 @@ export default defineConfig(
         formats: ["es"],
       },
       rollupOptions: {
-        external: ["react", "react-dom"],
+        external: [
+          "react",
+          "react-dom",
+          "@fortawesome/react-fontawesome",
+          "@fortawesome/fontawesome-svg-core",
+          "@react-aria/utils",
+          "@react-types/shared",
+          "html-react-parser",
+          "react-aria",
+          "react-aria-components",
+          "react-stately",
+          "remeda",
+        ],
       },
     },
   }),

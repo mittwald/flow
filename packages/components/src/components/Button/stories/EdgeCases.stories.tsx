@@ -1,9 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Button from "../Button";
 import React from "react";
-import { faStar } from "@fortawesome/free-regular-svg-icons/faStar";
-import { Icon } from "@/components/Icon";
-import { Text } from "@/components/Text";
 import { dummyText } from "@/lib/dev/dummyText";
 import defaultMeta from "./Default.stories";
 
@@ -25,17 +22,6 @@ export const WithBreak: Story = {
       Line 1
       <br />
       Line 2
-    </Button>
-  ),
-};
-
-export const WithBreakAndIcon: Story = {
-  render: (props) => (
-    <Button {...props}>
-      <Icon faIcon={faStar} />
-      <Text>
-        Add to <br /> favorites
-      </Text>
     </Button>
   ),
 };

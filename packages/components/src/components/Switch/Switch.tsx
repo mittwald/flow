@@ -8,7 +8,7 @@ export interface SwitchProps
   /** @default "trailing" */
   labelPosition?: "leading" | "trailing";
   /** @default "accent" */
-  variant?: "accent" | "negative";
+  variant?: "accent" | "danger";
 }
 
 export const Switch: FC<SwitchProps> = (props) => {
