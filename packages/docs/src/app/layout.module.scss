@@ -1,0 +1,26 @@
+.root {
+  padding: var(--size-px--l);
+  background-color: var(--neutral--color--400);
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "nav      main"
+    "footer    .  ";
+  grid-template-columns: 200px 1fr;
+  grid-gap: var(--size-px--l);
+}
+
+.header {
+  grid-area: header;
+}
+
+.nav {
+  grid-area: nav;
+}
+
+.main {
+  grid-area: main;
+  padding: var(--size-px--m);
+  background-color: var(--neutral--color--100);
+  border-radius: var(--border-radius--default);
+}
