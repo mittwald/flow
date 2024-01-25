@@ -1,27 +1,21 @@
 import React, { FC, PropsWithChildren, ReactNode } from "react";
 import clsx from "clsx";
-import {
-  PropsContext,
-  PropsContextProvider,
-  useProps,
-} from "@/lib/propsContext";
+import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import * as Aria from "react-aria-components";
 import { Popover } from "@/components/Popover";
 import { Calendar } from "./components/Calendar";
 import { DateInput } from "./components/DateInput";
 import { FieldError } from "@/components/FieldError";
 import styles from "../FormField/FormField.module.scss";
+import { DateValue } from "@internationalized/date";
 
 export interface DatePickerProps<T extends Aria.DateValue>
   extends PropsWithChildren<Omit<Aria.DatePickerProps<T>, "children">> {
   errorMessage?: ReactNode;
 }
 
-export const DatePicker: FC<DatePickerProps<any>> = (props) => {
-  const { children, className, errorMessage, ...rest } = useProps(
-    "datePicker",
-    props,
-  );
+export const DatePicker: FC<DatePickerProps<DateValue>> = (props) => {
+  const { children, className, errorMessage, ...rest } = props;
 
   const rootClassName = clsx(styles.formField, className);
 

@@ -14,7 +14,6 @@ import { NoteProps } from "@/components/Note";
 import { HeadingProps } from "@/components/Heading";
 import { InitialsProps } from "@/components/Initials";
 import { ImageProps } from "@/components/Image";
-import { DatePickerProps, DateRangePickerProps } from "@/components/DatePicker";
 
 export * from "./types";
 
@@ -33,7 +32,4 @@ export interface FlowComponentPropsTypes {
   Image: ImageProps;
   FieldError: FieldErrorProps;
   FieldDescription: FieldDescriptionProps;
-  datePicker: DatePickerProps<any>;
-  dateRangePicker: DateRangePickerProps<any>;
-
 }
