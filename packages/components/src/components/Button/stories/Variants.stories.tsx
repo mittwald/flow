@@ -40,9 +40,3 @@ export const Plain: Story = {
     variant: "plain",
   },
 };
-
-export const Transparent: Story = {
-  args: {
-    variant: "transparent",
-  },
-};

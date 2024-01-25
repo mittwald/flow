@@ -38,9 +38,3 @@ form-control:
   color:
     disabled:
       value: "{neutral.color.800}"
-
-form-control-button:
-  font-size:
-    value: "{size-rem.l}"
-  color:
-    value: "{neutral.color.800}"
