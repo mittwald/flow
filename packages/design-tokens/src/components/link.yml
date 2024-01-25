@@ -4,7 +4,7 @@ link:
   font-weight:
     value: "{font-weight.bold}"
   disabled-color:
-    value: "{neutral.color.600}"
+    value: "{disabled-plain-foreground-color}"
 
   # Primary
   primary-color:

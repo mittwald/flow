@@ -290,3 +290,13 @@ warning-outline-foreground-color:
   value: "{warning.color.900}"
 warning-outline-border-color:
   value: "{warning.color.800}"
+
+# Disabled Solid
+disabled-solid-background-color:
+  value: "{neutral.color.500}"
+disabled-solid-foreground-color:
+  value: "{neutral.color.100}"
+
+# Disabled Plain
+disabled-plain-foreground-color:
+  value: "{neutral.color.1600}"
