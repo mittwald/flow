@@ -20,7 +20,7 @@ export default defineConfig(
           Checkbox: "./src/components/Checkbox/index.ts",
           Content: "./src/components/Content/index.ts",
           DatePicker: "./src/components/DatePicker/index.ts",
-          DateRangePicker: "./src/components/DaterRangePicker/index.ts",
+          DateRangePicker: "./src/components/DateRangePicker/index.ts",
           FieldDescription: "./src/components/FieldDescription/index.ts",
           FieldError: "./src/components/FieldError/index.ts",
           Heading: "./src/components/Heading/index.ts",
