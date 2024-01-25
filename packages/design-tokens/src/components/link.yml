@@ -9,17 +9,17 @@ link:
   # Primary
   primary-color:
     default:
-      value: "{informative.color.800}"
+      value: "{primary-plain-foreground-color.default}"
     hover:
-      value: "{informative.color.900}"
+      value: "{primary-plain-foreground-color.hover}"
     pressed:
-      value: "{informative.color.1000}"
+      value: "{primary-plain-foreground-color.pressed}"
 
-  # Negative
-  negative-color:
+  # Danger
+  danger-color:
     default:
-      value: "{negative.color.800}"
+      value: "{danger-plain-foreground-color.default}"
     hover:
-      value: "{negative.color.900}"
+      value: "{danger-plain-foreground-color.hover}"
     pressed:
-      value: "{negative.color.1000}"
+      value: "{danger-plain-foreground-color.pressed}"

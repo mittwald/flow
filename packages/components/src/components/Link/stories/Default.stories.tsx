@@ -28,6 +28,6 @@ export const Default: Story = {};
 
 export const Disabled: Story = { args: { isDisabled: true } };
 
-export const Negative: Story = {
-  args: { variant: "negative" },
+export const Danger: Story = {
+  args: { variant: "danger" },
 };

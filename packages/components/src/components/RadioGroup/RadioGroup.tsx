@@ -1,5 +1,5 @@
 import React, { FC, PropsWithChildren } from "react";
-import styles from "./RadioGroup.module.css";
+import styles from "./RadioGroup.module.scss";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
@@ -11,7 +11,7 @@ export interface RadioGroupProps
 export const RadioGroup: FC<RadioGroupProps> = (props) => {
   const { children, className, ...rest } = props;
 
-  const rootClassName = clsx(className, styles.root);
+  const rootClassName = clsx(styles.radioGroup, className);
 
   const propsContext: PropsContext = {
     Label: {
