@@ -16,22 +16,22 @@ navigation-item:
     value: 0.5em
   color:
     current:
-      value: "{informative.color.800}"
+      value: "{info.color.800}"
   icon-size:
     value: "{icon.size.s}"
   icon-color:
     default:
       value: "{neutral.color.800}"
     current:
-      value: "{informative.color.800}"
+      value: "{info.color.800}"
 
   background-color:
     default:
       value: "{color.transparent}"
     hover:
-      value: "{informative.color.100}"
+      value: "{info.color.100}"
     current:
-      value: "{informative.color.100}"
+      value: "{info.color.100}"
 
   # Disabled
   disabled-background-color:

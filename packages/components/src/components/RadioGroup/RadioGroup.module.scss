@@ -15,8 +15,9 @@
       grid-column: 1 / -1;
       margin-bottom: calc(
         (
-            var(--radio-group--radio-to-radio-spacing) -
-              var(--form-control--label-to-control-spacing)
+            var(--radio-group--radio-to-radio-spacing) - var(
+                --form-control--label-to-control-spacing
+              )
           ) * -1
       );
     }
@@ -26,8 +27,9 @@
       grid-column: 1 / -1;
       margin-top: calc(
         (
-            var(--radio-group--radio-to-radio-spacing) -
-              var(--form-control--control-to-info-spacing)
+            var(--radio-group--radio-to-radio-spacing) - var(
+                --form-control--control-to-info-spacing
+              )
           ) * -1
       );
     }
@@ -54,7 +56,6 @@
   &:has(.customFieldError) .fieldError {
     display: none;
   }
-
 }
 
 .label {
@@ -68,4 +69,3 @@
   margin-top: var(--form-control--control-to-info-spacing);
   width: 100%;
 }
-

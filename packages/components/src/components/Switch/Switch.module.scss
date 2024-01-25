@@ -18,14 +18,13 @@
 
   &[data-disabled] {
     color: var(--switch--color--disabled);
-
     .indicator {
       background-color: var(--switch--indicator-color--disabled);
     }
   }
 
   &[data-selected] .indicator:before {
-    transform: translateX(100%);
+    transform: translate(100%);
   }
 }
 
@@ -65,14 +64,18 @@
     }
 
     &[data-pressed] .indicator {
-      background-color: var(--switch--#{$variant}-indicator-color--selected-pressed);
+      background-color: var(
+        --switch--#{$variant}-indicator-color--selected-pressed
+      );
     }
 
     &[data-disabled] .indicator {
-      background-color: var(--switch--#{$variant}-indicator-color--selected-disabled);
+      background-color: var(
+        --switch--#{$variant}-indicator-color--selected-disabled
+      );
     }
   }
 }
 
 @include variant(accent);
-@include variant(negative);
+@include variant(danger);

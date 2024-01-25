@@ -20,18 +20,18 @@ note:
 
   # Info
   info-border-color:
-    value: "{informative.color.800}"
+    value: "{info-outline-border-color}"
   info-heading-color:
-    value: "{informative.color.800}"
+    value: "{info-outline-foreground-color}"
 
   # Warning
   warning-border-color:
-    value: "{warning.color.800}"
+    value: "{warning-outline-border-color}"
   warning-heading-color:
-    value: "{warning.color.800}"
+    value: "{warning-outline-foreground-color}"
 
-  # Negative
-  negative-border-color:
-    value: "{negative.color.800}"
-  negative-heading-color:
-    value: "{negative.color.800}"
+  # Danger
+  danger-border-color:
+    value: "{danger-outline-border-color}"
+  danger-heading-color:
+    value: "{danger-outline-foreground-color}"

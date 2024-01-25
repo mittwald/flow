@@ -37,5 +37,6 @@ jobs:
           yarn lerna publish \
             --conventional-commits --conventional-prerelease=* \
             --create-release github \
-            --message "chore(release): publish %v" \
-            --yes --no-private
+            --message "chore(release): bump version to %v" \
+            --yes --no-private \
+            --tag-version-prefix ""
