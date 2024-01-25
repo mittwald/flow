@@ -6,7 +6,7 @@ import defaultMeta from "./Default.stories";
 
 const meta: Meta<typeof Switch> = {
   ...defaultMeta,
-  title: "Switch/Edge Cases",
+  title: "Forms/Switch/Edge Cases",
 };
 
 export default meta;

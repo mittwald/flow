@@ -11,24 +11,24 @@ button:
   # Accent
   accent-background-color:
     default:
-      value: "{accent.color.700}"
-    hover:
       value: "{accent.color.800}"
-    pressed:
+    hover:
       value: "{accent.color.900}"
+    pressed:
+      value: "{accent.color.1000}"
   accent-color:
-    value: "{color.white}"
+    value: "{neutral.color.100}"
 
   # Primary
   primary-background-color:
     default:
-      value: "{informative.color.700}"
-    hover:
       value: "{informative.color.800}"
-    pressed:
+    hover:
       value: "{informative.color.900}"
+    pressed:
+      value: "{informative.color.1000}"
   primary-color:
-    value: "{color.white}"
+    value: "{neutral.color.100}"
 
   # Secondary
   secondary-background-color:
@@ -40,7 +40,7 @@ button:
       value: "{neutral.color.600}"
   secondary-color:
     default:
-      value: "{informative.color.700}"
+      value: "{informative.color.800}"
     hover:
       value: "{informative.color.900}"
     pressed:
@@ -49,16 +49,16 @@ button:
   # Negative
   negative-background-color:
     default:
-      value: "{negative.color.700}"
-    hover:
       value: "{negative.color.800}"
-    pressed:
+    hover:
       value: "{negative.color.900}"
+    pressed:
+      value: "{negative.color.1000}"
   negative-color:
-    value: "{color.white}"
+    value: "{neutral.color.100}"
 
   # Disabled
   disabled-background-color:
     value: "{neutral.color.400}"
   disabled-color:
-    value: "{color.white}"
+    value: "{neutral.color.100}"

@@ -3,7 +3,7 @@ import Text from "../Text";
 import React from "react";
 
 const meta: Meta<typeof Text> = {
-  title: "Text",
+  title: "Content/Text",
   component: Text,
   argTypes: {
     elementType: {

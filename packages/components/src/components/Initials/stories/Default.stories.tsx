@@ -3,7 +3,7 @@ import Initials from "../Initials";
 import React from "react";
 
 const meta: Meta<typeof Initials> = {
-  title: "Initials",
+  title: "Content/Initials",
   component: Initials,
   render: (props) => <Initials {...props}>Max Mustermann</Initials>,
   parameters: {
