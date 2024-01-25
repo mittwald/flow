@@ -6,7 +6,7 @@
     "label"
     "value";
   row-gap: var(--labeled-value--label-to-value-spacing);
-  column-gap: var(--labeled-value--value-to-copy-button-spacing);
+  column-gap: var(--labeled-value--value-to-button-spacing);
   width: fit-content;
 
   &:has(.button) {
