@@ -3,7 +3,7 @@
   "version": "0.1.0-alpha.0",
   "type": "module",
   "exports": {
-    ".": "./dist/style.css"
+    ".": "./dist/styles.css"
   },
   "files": [
     "dist"
