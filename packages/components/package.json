@@ -25,8 +25,7 @@
     "./TextArea": "./dist/TextArea.js",
     "./TextField": "./dist/TextField.js",
     "./Tooltip": "./dist/Tooltip.js",
-    "./style": "./dist/style.css",
-    "./style/init": "./dist/index.js"
+    "./styles": "./dist/styles.css"
   },
   "files": [
     "dist"
