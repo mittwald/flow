@@ -7,6 +7,7 @@ import Heading from "@mittwald/flow-next-components/Heading";
 import { usePathname } from "next/navigation";
 import styles from "./MainNavigation.module.scss";
 import { MdxFile, SerializedMdxFile } from "@/lib/docs/MdxFile";
+import { NextJsNavigationItemLink } from "@/app/_components/layout/MainNavigation/NextJsNavigationItemLink";
 
 interface Props {
   docs: SerializedMdxFile[];
@@ -25,6 +26,7 @@ const MainNavigation: FC<Props> = (props) => {
         key={mdx.pathname}
         href={href}
         isCurrent={href === currentPathname}
+        linkComponent={NextJsNavigationItemLink}
       >
         {mdx.getNavTitle()}
       </NavigationItem>
