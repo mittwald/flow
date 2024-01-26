@@ -11,17 +11,24 @@ import {
 export interface ButtonProps extends PropsWithChildren<Aria.ButtonProps> {
   /** @default "primary" */
   variant?: "primary" | "accent" | "secondary" | "danger" | "plain";
+  size?: "m" | "s";
 }
 
 export const Button: FC<ButtonProps> = (props) => {
   const {
     variant = "primary",
+    size = "m",
     children,
     className,
     ...restProps
   } = useProps("Button", props);
 
-  const rootClassName = clsx(styles.button, styles[variant], className);
+  const rootClassName = clsx(
+    styles.button,
+    styles[variant],
+    styles[size],
+    className,
+  );
 
   const propsContext: PropsContext = {
     Icon: {

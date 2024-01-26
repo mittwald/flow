@@ -45,7 +45,9 @@
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "@react-aria/toast": "3.0.0-beta.8",
     "@react-aria/utils": "^3.23.0",
+    "@react-stately/toast": "3.0.0-beta.1",
     "@react-types/shared": "^3.22.0",
     "clsx": "^2.1.0",
     "html-react-parser": "^5.1.1",

@@ -6,25 +6,21 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: var(--button--padding-y) var(--button--padding-x);
-  font-size: var(--font-size--default);
   font-weight: bold;
   transition-property: color, background-color;
   transition-duration: var(--transition--duration--default);
 
   @extend .primary;
+  @extend .m;
 
   &[disabled] {
     background-color: var(--button--disabled-background-color);
     color: var(--button--disabled-color);
   }
-
-  &:has(.icon) {
-    padding: var(--button--padding-with-icon);
-  }
 }
 
 /* Variants */
+
 @mixin variant($variant) {
   .#{$variant} {
     background-color: var(--button--#{$variant}-background-color--default);
@@ -47,3 +43,18 @@
 @include variant(danger);
 @include variant(secondary);
 @include variant(plain);
+
+/* Sizes */
+
+@mixin size($size) {
+  .#{$size} {
+    padding: var(--button--padding-y-#{$size}) var(--button--padding-x-#{$size});
+    font-size: var(--button--font-size-#{$size});
+    &:has(.icon) {
+      padding: var(--button--padding-with-icon-#{$size});
+    }
+  }
+}
+
+@include size(m);
+@include size(s);

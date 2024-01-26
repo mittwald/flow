@@ -3150,7 +3150,9 @@ __metadata:
     "@jest/globals": "npm:^29.7.0"
     "@mittwald/flow-next-design-tokens": "workspace:^"
     "@nx/storybook": "npm:^17.2.8"
+    "@react-aria/toast": "npm:3.0.0-beta.8"
     "@react-aria/utils": "npm:^3.23.0"
+    "@react-stately/toast": "npm:3.0.0-beta.1"
     "@react-types/shared": "npm:^3.22.0"
     "@storybook/addon-a11y": "npm:^7.6.10"
     "@storybook/addon-actions": "npm:^7.6.10"
@@ -4845,6 +4847,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-aria/landmark@npm:3.0.0-beta.8":
+  version: 3.0.0-beta.8
+  resolution: "@react-aria/landmark@npm:3.0.0-beta.8"
+  dependencies:
+    "@react-aria/utils": "npm:^3.23.0"
+    "@react-types/shared": "npm:^3.22.0"
+    "@swc/helpers": "npm:^0.5.0"
+    use-sync-external-store: "npm:^1.2.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
+  checksum: 25a47e76036a7e4ac76104b3ae16cb727465c440a7db232c27b84e2178c548a1488e16dffe055ce487b7f48950249d6ba9c7332991cf1e34b6572cf99661b8d6
+  languageName: node
+  linkType: hard
+
 "@react-aria/link@npm:^3.6.3":
   version: 3.6.3
   resolution: "@react-aria/link@npm:3.6.3"
@@ -5229,6 +5245,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-aria/toast@npm:3.0.0-beta.8":
+  version: 3.0.0-beta.8
+  resolution: "@react-aria/toast@npm:3.0.0-beta.8"
+  dependencies:
+    "@react-aria/i18n": "npm:^3.10.0"
+    "@react-aria/interactions": "npm:^3.20.1"
+    "@react-aria/landmark": "npm:3.0.0-beta.8"
+    "@react-aria/utils": "npm:^3.23.0"
+    "@react-stately/toast": "npm:3.0.0-beta.1"
+    "@react-types/button": "npm:^3.9.1"
+    "@react-types/shared": "npm:^3.22.0"
+    "@swc/helpers": "npm:^0.5.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
+  checksum: d0c0d4596bb9315282450d787b2ee9be858d1924ef628f1dc733ceb91c30adb43995e9030f78f3aa161a7f7f68ac43190ff35e17a210dd53e4d452710a36cb98
+  languageName: node
+  linkType: hard
+
 "@react-aria/toggle@npm:^3.10.0":
   version: 3.10.0
   resolution: "@react-aria/toggle@npm:3.10.0"
@@ -5605,6 +5639,18 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
   checksum: 408794e1fcde3677c5b9da7113c16268e5777fd2a75e337a9be08ed72591e6579da64efa132068dadeb0d4ee6fafe37f3d63081c5e8ac4719655645c1c3e092c
+  languageName: node
+  linkType: hard
+
+"@react-stately/toast@npm:3.0.0-beta.1":
+  version: 3.0.0-beta.1
+  resolution: "@react-stately/toast@npm:3.0.0-beta.1"
+  dependencies:
+    "@swc/helpers": "npm:^0.5.0"
+    use-sync-external-store: "npm:^1.2.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
+  checksum: f7b3c07c789884e589e7e3eacb45367fbac17d3f7f88920e15b3cbc85b85ef045ec54646ebbf1ea8847ed487dfb4b75485f009b128439c1f73ec057717dd84ab
   languageName: node
   linkType: hard
 

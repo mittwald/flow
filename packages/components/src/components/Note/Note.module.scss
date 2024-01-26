@@ -35,6 +35,7 @@
 .customIcon,
 .statusIcon {
   grid-area: icon;
+  align-self: center;
   font-size: var(--note--icon-size);
   line-height: calc(var(--note--heading-font-size) * 1.5);
 }

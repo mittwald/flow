@@ -1,0 +1,10 @@
+@import "@/styles";
+
+.toastRegion {
+  position: fixed;
+  top: 32px;
+  right: 32px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+}

@@ -1,12 +1,26 @@
 button:
   border-radius:
     value: "{size-px.xs}"
-  padding-x:
+
+  # Size M
+  padding-x-m:
     value: "{size-px.m}"
-  padding-y:
+  padding-y-m:
     value: "{size-px.s}"
-  padding-with-icon:
+  padding-with-icon-m:
     value: "{size-px.s}"
+  font-size-m:
+    value: "{font-size.m}"
+
+  # Size S
+  padding-x-s:
+    value: "{size-px.s}"
+  padding-y-s:
+    value: "{size-px.xs}"
+  padding-with-icon-s:
+    value: "{size-px.xs}"
+  font-size-s:
+    value: "{font-size.s}"
 
   # Accent
   accent-background-color:
