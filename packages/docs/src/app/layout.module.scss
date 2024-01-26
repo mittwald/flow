@@ -4,6 +4,7 @@
 }
 
 .center {
+  overflow: hidden;
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
@@ -13,6 +14,17 @@
     "footer    .  ";
   grid-template-columns: 200px 1fr;
   grid-gap: var(--size-px--l);
+}
+
+@media (max-width: 767px) {
+  .center {
+    grid-template-areas:
+      "header"
+      "nav   "
+      "main  "
+      "footer";
+    grid-template-columns: 1fr;
+  }
 }
 
 .header {

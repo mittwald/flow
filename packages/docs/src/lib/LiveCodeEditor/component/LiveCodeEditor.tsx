@@ -4,6 +4,7 @@ import { LiveEditor, LiveError, LivePreview, LiveProvider } from "react-live";
 import { extractEditorScope } from "@/lib/LiveCodeEditor/component/lib/extractEditorScope";
 import { LiveCodeEditorProps } from "@/lib/LiveCodeEditor/component/types";
 import extractDefaultExport from "@/lib/LiveCodeEditor/component/lib/extractDefaultExport";
+import styles from "./LiveCodeEditor.module.css";
 
 // Waiting for https://github.com/FormidableLabs/react-live/issues/339
 const error = console.error;
@@ -31,9 +32,11 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
 
   return (
     <LiveProvider code={code} scope={scope} transformCode={transformCode}>
-      <LiveEditor />
-      <LiveError />
-      <LivePreview />
+      <div className={styles.root}>
+        <LivePreview className={styles.preview} />
+        <LiveEditor className={styles.editor} />
+        <LiveError className={styles.error} />
+      </div>
     </LiveProvider>
   );
 };
