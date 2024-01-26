@@ -1,6 +1,11 @@
-.root {
+.body {
   padding: var(--size-px--l);
   background-color: var(--neutral--color--400);
+}
+
+.center {
+  max-width: 1200px;
+  margin: 0 auto;
   display: grid;
   grid-template-areas:
     "header header"
@@ -20,7 +25,4 @@
 
 .main {
   grid-area: main;
-  padding: var(--size-px--m);
-  background-color: var(--neutral--color--100);
-  border-radius: var(--border-radius--default);
 }

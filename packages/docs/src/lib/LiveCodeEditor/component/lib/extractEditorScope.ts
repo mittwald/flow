@@ -1,7 +1,7 @@
-import { getDynamicComponent } from "./getDynamicComponent";
+import { getDynamicComponent } from "../../getDynamicComponent";
 import { ComponentProps } from "react";
 import { LiveProvider } from "react-live";
-import { extractRawImports } from "@/lib/extractImports";
+import { extractRawImports } from "@/lib/LiveCodeEditor/extractImports";
 
 type Scope = ComponentProps<typeof LiveProvider>["scope"];
 

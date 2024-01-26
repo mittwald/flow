@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import { liveCodeEditorGlobalImports } from "@/lib/liveCodeEditorGlobalImports";
+import { liveCodeEditorGlobalImports } from "@/lib/LiveCodeEditor/liveCodeEditorGlobalImports";
 import { ComponentType } from "react";
 
 export const getDynamicComponent = (name: string): ComponentType => {

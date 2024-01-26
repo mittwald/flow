@@ -1,9 +1,9 @@
 "use client";
 import React, { FC } from "react";
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from "react-live";
-import { extractEditorScope } from "@/components/LiveCodeEditor/lib/extractEditorScope";
-import { LiveCodeEditorProps } from "@/components/LiveCodeEditor/types";
-import extractDefaultExport from "@/lib/extractDefaultExport";
+import { extractEditorScope } from "@/lib/LiveCodeEditor/component/lib/extractEditorScope";
+import { LiveCodeEditorProps } from "@/lib/LiveCodeEditor/component/types";
+import extractDefaultExport from "@/lib/LiveCodeEditor/component/lib/extractDefaultExport";
 
 // Waiting for https://github.com/FormidableLabs/react-live/issues/339
 const error = console.error;
