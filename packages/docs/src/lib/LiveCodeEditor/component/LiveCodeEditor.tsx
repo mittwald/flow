@@ -34,8 +34,14 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
     }
   };
 
+  const codeToDisplay = code.replace(/\r?\n$/, "");
+
   return (
-    <LiveProvider code={code} scope={scope} transformCode={transformCode}>
+    <LiveProvider
+      code={codeToDisplay}
+      scope={scope}
+      transformCode={transformCode}
+    >
       <div className={styles.root}>
         <LivePreview className={styles.preview} />
         <div className={styles.editorContainer}>
