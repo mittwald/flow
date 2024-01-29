@@ -1,6 +1,10 @@
-"use client";
 import React, { FC } from "react";
-import { LiveEditor, LiveError, LivePreview, LiveProvider } from "react-live";
+import {
+  LiveEditor,
+  LiveError,
+  LivePreview,
+  LiveProvider,
+} from "@mfalkenberg/react-live-ssr";
 import { extractEditorScope } from "@/lib/LiveCodeEditor/component/lib/extractEditorScope";
 import { LiveCodeEditorProps } from "@/lib/LiveCodeEditor/component/types";
 import extractDefaultExport from "@/lib/LiveCodeEditor/component/lib/extractDefaultExport";

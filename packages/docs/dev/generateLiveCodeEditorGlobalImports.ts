@@ -33,13 +33,14 @@ async function generateImportMappings(pattern: string, outputPath: string) {
   const imports = mapImports(fileContents.flatMap(extractRawImports));
 
   const importStatements = Object.entries(imports).map(
-    ([key, value]) => `"${key}": () => import("${value}"),`,
+    ([key, value]) => `"${key}": lazy(() => import("${value}")),`,
   );
 
   const generatedFileContents = `
 /* eslint-disable */
 /* auto-generated file */
 import { ImportMapping } from "@/lib/LiveCodeEditor/types";
+import { lazy } from "react";
 
 export const liveCodeEditorGlobalImports: ImportMapping = {
   ${importStatements.join("\r\n")}
@@ -57,5 +58,5 @@ export const liveCodeEditorGlobalImports: ImportMapping = {
 
 void generateImportMappings(
   "./src/docs/**/examples/*.tsx",
-  "./src/lib/liveCodeEditorGlobalImports.ts",
+  "./src/lib/LiveCodeEditor/dynamicImports.ts",
 );

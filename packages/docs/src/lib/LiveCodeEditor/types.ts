@@ -1,5 +1,3 @@
-import { Loader } from "next/dynamic";
+import { ComponentType } from "react";
 
-// eslint-disable-next-line
-type AnyLoader = Loader<any>;
-export interface ImportMapping extends Record<string, AnyLoader> {}
+export interface ImportMapping extends Record<string, ComponentType> {}
