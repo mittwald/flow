@@ -20,4 +20,5 @@
 
 .editor pre {
   white-space: pre !important;
+  font-size: var(--size-rem--m);
 }
