@@ -56,9 +56,6 @@
     "@fortawesome/react-fontawesome": {
       "unplugged": true
     },
-    "@react-stately/tree": {
-      "unplugged": true
-    },
     "@react-types/menu": {
       "unplugged": true
     },

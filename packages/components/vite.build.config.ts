@@ -28,8 +28,6 @@ export default defineConfig(
           Label: "./src/components/Label/index.ts",
           Link: "./src/components/Link/index.ts",
           Navigation: "./src/components/Navigation/index.ts",
-          NavigationItem:
-            "./src/components/Navigation/components/NavigationItem/index.ts",
           Note: "./src/components/Note/index.ts",
           Radio: "./src/components/RadioGroup/components/Radio/index.ts",
           RadioGroup: "./src/components/RadioGroup/index.ts",
