@@ -6311,7 +6311,6 @@ const RAW_RUNTIME_STATE =
           ["raw-loader", "virtual:c8483f40a294888f2cccf27b20488986eaec205ef7fbcdc8948dd935483985d3b2cbb1df52636fb2a6a95b012dba5f48b0003a220d2438618adabbbff5cc9ca4#npm:4.0.2"],\
           ["react", "npm:18.2.0"],\
           ["react-dom", "virtual:160c7a696a99b065a822859af8c18a938041a659df75ba6216e289a2ba885865ddea0afdd5ed1924ae3f379fc9ec188b83f6e71e756a0bac8e9ca356654a6a90#npm:18.2.0"],\
-          ["react-stately", "virtual:160c7a696a99b065a822859af8c18a938041a659df75ba6216e289a2ba885865ddea0afdd5ed1924ae3f379fc9ec188b83f6e71e756a0bac8e9ca356654a6a90#npm:3.29.1"],\
           ["remark-frontmatter", "npm:5.0.0"],\
           ["remark-mdx-frontmatter", "npm:4.0.0"],\
           ["remeda", "npm:1.39.0"],\
