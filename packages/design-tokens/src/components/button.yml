@@ -7,6 +7,14 @@ button:
     value: "{size-px.s}"
   padding-with-icon:
     value: "{size-px.s}"
+  padding-small-with-icon:
+    value: "{size-px.xs}"
+  padding-small-x:
+    value: "{size-px.s}"
+  padding-small-y:
+    value: "{size-px.xs}"
+  font-size-small:
+    value: "{font-size.s}"
 
   # Accent
   accent-background-color:

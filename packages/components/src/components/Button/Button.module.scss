@@ -24,6 +24,15 @@
   }
 }
 
+.small {
+  font-size: var(--button--font-size-small);
+  padding: var(--button--padding-small-y) var(--button--padding-small-x);
+
+  &:has(.icon) {
+    padding: var(--button--padding-small-with-icon);
+  }
+}
+
 /* Variants */
 @mixin variant($variant) {
   .#{$variant} {
