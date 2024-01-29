@@ -3,3 +3,9 @@
 p {
   margin-bottom: 1.5em;
 }
+
+@media screen and (max-device-width: 480px) {
+  body {
+    -webkit-text-size-adjust: 100%;
+  }
+}
