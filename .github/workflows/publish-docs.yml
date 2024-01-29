@@ -2,7 +2,7 @@ name: Publish docs
 on:
   push:
     branches:
-      - feature/first-docs
+      - main
 
 permissions:
   contents: read
