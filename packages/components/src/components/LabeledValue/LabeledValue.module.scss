@@ -7,7 +7,7 @@
     "value";
   row-gap: var(--labeled-value--label-to-value-spacing);
   column-gap: var(--labeled-value--value-to-button-spacing);
-  width: fit-content;
+  grid-template-columns: auto 1fr;
 
   &:has(.button) {
     grid-template-areas:
@@ -27,5 +27,5 @@
 .button {
   grid-area: button;
   margin-top: calc(var(--size-px--xs) * -1);
-  align-self: start;
+  justify-self: start;
 }

@@ -15,7 +15,16 @@ export default meta;
 
 type Story = StoryObj<typeof LabeledValue>;
 
-export const LongTexts: Story = {
+export const LongLabel: Story = {
+  render: (props) => (
+    <LabeledValue {...props}>
+      <Label>{dummyText.medium}</Label>
+      <Content>{dummyText.short}</Content>
+      <CopyButton value={dummyText.short} />
+    </LabeledValue>
+  ),
+};
+export const LongContent: Story = {
   render: (props) => (
     <LabeledValue {...props}>
       <Label>{dummyText.medium}</Label>
