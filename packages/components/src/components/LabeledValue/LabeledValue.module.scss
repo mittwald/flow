@@ -26,6 +26,5 @@
 
 .button {
   grid-area: button;
-  margin-top: calc(var(--size-px--xs) * -1);
   justify-self: start;
 }
