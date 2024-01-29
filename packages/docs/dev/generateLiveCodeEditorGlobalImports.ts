@@ -3,7 +3,7 @@ import fs from "node:fs";
 import { glob } from "glob";
 import * as path from "node:path";
 import { Literal } from "acorn";
-import { extractRawImports } from "../src/lib/extractImports.js";
+import { extractRawImports } from "../src/lib/LiveCodeEditor/extractImports.js";
 
 interface ImportDefinition {
   names: string[];
@@ -33,13 +33,14 @@ async function generateImportMappings(pattern: string, outputPath: string) {
   const imports = mapImports(fileContents.flatMap(extractRawImports));
 
   const importStatements = Object.entries(imports).map(
-    ([key, value]) => `"${key}": () => import("${value}"),`,
+    ([key, value]) => `"${key}": lazy(() => import("${value}")),`,
   );
 
   const generatedFileContents = `
 /* eslint-disable */
 /* auto-generated file */
-import { ImportMapping } from "@/lib/types";
+import { ImportMapping } from "@/lib/LiveCodeEditor/types";
+import { lazy } from "react";
 
 export const liveCodeEditorGlobalImports: ImportMapping = {
   ${importStatements.join("\r\n")}
@@ -56,6 +57,6 @@ export const liveCodeEditorGlobalImports: ImportMapping = {
 }
 
 void generateImportMappings(
-  "./src/app/**/_examples/*.tsx",
-  "./src/lib/liveCodeEditorGlobalImports.ts",
+  "./src/docs/**/examples/*.tsx",
+  "./src/lib/LiveCodeEditor/dynamicImports.ts",
 );

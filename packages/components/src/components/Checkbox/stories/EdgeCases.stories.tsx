@@ -2,10 +2,10 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Checkbox } from "../index";
 import React from "react";
 import defaultMeta from "./Default.stories";
-import { dummyText } from "@/lib/dummyText";
+import { dummyText } from "@/lib/dev/dummyText";
 
 const meta: Meta<typeof Checkbox> = {
-  title: "Checkbox/EdgeCases",
+  title: "Forms/Checkbox/EdgeCases",
   ...defaultMeta,
 };
 

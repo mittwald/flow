@@ -3,11 +3,10 @@ import Button from "../Button";
 import { faStar } from "@fortawesome/free-regular-svg-icons/faStar";
 import React from "react";
 import { Icon } from "@/components/Icon";
-import { Text } from "@/components/Text";
 import { action } from "@storybook/addon-actions";
 
 const meta: Meta<typeof Button> = {
-  title: "Button",
+  title: "Buttons/Button",
   component: Button,
   args: {
     onPress: action("onPress"),
@@ -16,6 +15,9 @@ const meta: Meta<typeof Button> = {
     variant: {
       control: "inline-radio",
     },
+  },
+  parameters: {
+    controls: { exclude: ["onPress"] },
   },
   render: (props) => <Button {...props}>Button</Button>,
 };
@@ -33,15 +35,6 @@ export const Disabled: Story = {
 };
 
 export const WithIcon: Story = {
-  render: (props) => (
-    <Button {...props}>
-      <Icon faIcon={faStar} />
-      <Text>Add to favorites</Text>
-    </Button>
-  ),
-};
-
-export const WithOnlyIcon: Story = {
   render: (props) => (
     <Button {...props} aria-label="Add to favorites">
       <Icon faIcon={faStar} />

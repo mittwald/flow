@@ -7,19 +7,29 @@ import type {
   NavigationItemProps,
   NavigationProps,
 } from "@/components/Navigation";
+import type { LinkProps } from "@/components/Link";
+import { FieldErrorProps } from "@/components/FieldError";
+import { FieldDescriptionProps } from "@/components/FieldDescription";
 import { NoteProps } from "@/components/Note";
 import { HeadingProps } from "@/components/Heading";
+import { InitialsProps } from "@/components/Initials";
+import { ImageProps } from "@/components/Image";
 
 export * from "./types";
 
 export interface FlowComponentPropsTypes {
-  text: TextProps;
-  button: ButtonProps;
-  icon: IconProps;
-  label: LabelProps;
-  content: ContentProps;
-  navigation: NavigationProps;
-  navigationItem: NavigationItemProps;
-  heading: HeadingProps;
-  note: NoteProps;
+  Text: TextProps;
+  Button: ButtonProps;
+  Icon: IconProps;
+  Label: LabelProps;
+  Content: ContentProps;
+  Navigation: NavigationProps;
+  NavigationItem: NavigationItemProps;
+  Heading: HeadingProps;
+  Note: NoteProps;
+  Link: LinkProps;
+  Initials: InitialsProps;
+  Image: ImageProps;
+  FieldError: FieldErrorProps;
+  FieldDescription: FieldDescriptionProps;
 }

@@ -19,11 +19,11 @@ void (async () => {
     .filter((component) => component.length > 0);
 
   console.log("📝 Writing to file");
-  if (!fsSync.existsSync("./.build/")) {
-    await fs.mkdir("./.build/");
+  if (!fsSync.existsSync("./dist/")) {
+    await fs.mkdir("./dist/");
   }
   await fs.writeFile(
-    "./.build/doc-properties.json",
+    "./dist/doc-properties.json",
     JSON.stringify(components, null, 2),
   );
 

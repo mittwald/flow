@@ -1,9 +1,9 @@
 {
-  "name": "@mittwald/flow-stylesheet",
-  "version": "0.0.0",
+  "name": "@mittwald/flow-next-stylesheet",
+  "version": "0.1.0-alpha.2",
   "type": "module",
   "exports": {
-    ".": "./dist/style.css"
+    ".": "./dist/styles.css"
   },
   "files": [
     "dist"
@@ -12,7 +12,7 @@
     "build": "node build.js"
   },
   "devDependencies": {
-    "@mittwald/flow-components": "workspace:*",
+    "@mittwald/flow-next-components": "workspace:^",
     "resolve-package-path": "^4.0.3"
   }
 }

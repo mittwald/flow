@@ -4,10 +4,13 @@ import { faStar } from "@fortawesome/free-regular-svg-icons/faStar";
 import React from "react";
 
 const meta: Meta<typeof Icon> = {
-  title: "Icon",
+  title: "Content/Icon",
   component: Icon,
   args: {
     fontSize: 32,
+  },
+  parameters: {
+    controls: { exclude: ["faIcon"] },
   },
 };
 export default meta;

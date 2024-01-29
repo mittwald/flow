@@ -1,0 +1,29 @@
+badge:
+  font-size:
+    value: "{font-size.s}"
+  height:
+    value: "{size-rem.l}"
+  icon-size:
+    value: "{size-rem.m}"
+  border-radius:
+    value: "{size-rem.m}"
+  padding-y:
+    value: "{size-rem.xs}"
+  padding-x:
+    value: "{size-rem.s}"
+  padding-x-icon-only:
+    value: "{size-rem.xs}"
+  icon-to-text-spacing:
+    value: 0.5em
+  color:
+    value: "{info-solid-foreground-color}"
+
+  # Variants
+  info-background-color:
+    value: "{info-solid-background-color.default}"
+  success-background-color:
+    value: "{success-solid-background-color.default}"
+  warning-background-color:
+    value: "{warning-solid-background-color.default}"
+  danger-background-color:
+    value: "{danger-solid-background-color.default}"

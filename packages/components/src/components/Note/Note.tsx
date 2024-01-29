@@ -1,17 +1,17 @@
-import React, { FC, HTMLAttributes, PropsWithChildren } from "react";
+import React, { ComponentProps, FC, PropsWithChildren } from "react";
 import {
   PropsContext,
   PropsContextProvider,
   useProps,
 } from "@/lib/propsContext";
-import styles from "./Note.module.css";
+import styles from "./Note.module.scss";
 import clsx from "clsx";
 import { StatusIcon } from "@/components/StatusIcon";
+import { StatusVariantProps } from "@/lib/types/props";
 
 export interface NoteProps
-  extends PropsWithChildren<HTMLAttributes<HTMLElement>> {
-  variant?: "info" | "warning" | "negative";
-}
+  extends PropsWithChildren<ComponentProps<"aside">>,
+    StatusVariantProps<"success"> {}
 
 export const Note: FC<NoteProps> = (props) => {
   const {
@@ -19,19 +19,19 @@ export const Note: FC<NoteProps> = (props) => {
     className,
     variant = "info",
     ...rest
-  } = useProps("note", props);
+  } = useProps("Note", props);
 
-  const rootClassName = clsx(className, styles.root, styles[variant]);
+  const rootClassName = clsx(styles.note, styles[variant], className);
 
   const propsContext: PropsContext = {
-    icon: {
+    Icon: {
       className: styles.customIcon,
     },
-    heading: {
+    Heading: {
       className: styles.heading,
       level: 3,
     },
-    content: {
+    Content: {
       className: styles.content,
     },
   };

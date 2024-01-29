@@ -1,6 +1,7 @@
 import { ComponentType } from "react";
-import { LiveCodeEditorProps } from "@/components/LiveCodeEditor/types";
+import PropertiesTableImport from "@/lib/PropertiesTable/PropertiesTable";
 
 declare global {
-  declare const LiveCodeEditor: ComponentType<LiveCodeEditorProps>;
+  declare const LiveCodeEditor: ComponentType<{ example?: string }>;
+  declare const PropertiesTable: typeof PropertiesTableImport;
 }

@@ -1,11 +1,11 @@
 import React, {
+  ComponentProps,
   FC,
-  HTMLAttributes,
   PropsWithChildren,
   SVGAttributes,
   useMemo,
 } from "react";
-import styles from "./Icon.module.css";
+import styles from "./Icon.module.scss";
 import { IconLookup } from "@fortawesome/fontawesome-svg-core";
 import {
   BackwardCompatibleOmit,
@@ -27,15 +27,14 @@ export interface IconProps extends PropsWithChildren<SvgAttributeProps> {
 export const Icon: FC<IconProps> = (props) => {
   const {
     faIcon,
-    className: classNameFromProps,
+    className,
     "aria-label": ariaLabel,
     children,
     ...svgAttributes
-  } = useProps("icon", props);
+  } = useProps("Icon", props);
 
   const iconProps: SvgAttributeProps = {
     ...svgAttributes,
-    className: styles.icon,
     focusable: "false",
     role: "img",
     "aria-hidden": !ariaLabel,
@@ -46,8 +45,8 @@ export const Icon: FC<IconProps> = (props) => {
    * Icon is wrapped inside span, so it always behaves as an inline element
    * (line-height is applied), even if used in flex/grid layouts.
    */
-  const spanProps: HTMLAttributes<HTMLSpanElement> = {
-    className: clsx(classNameFromProps, styles.root),
+  const spanProps: ComponentProps<"span"> = {
+    className: clsx(styles.icon, className),
   };
 
   if (faIcon) {

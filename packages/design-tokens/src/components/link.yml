@@ -1,0 +1,25 @@
+link:
+  font-size:
+    value: "{font-size.s}"
+  font-weight:
+    value: "{font-weight.bold}"
+  disabled-color:
+    value: "{disabled-plain-foreground-color}"
+
+  # Primary
+  primary-color:
+    default:
+      value: "{primary-plain-foreground-color.default}"
+    hover:
+      value: "{primary-plain-foreground-color.hover}"
+    pressed:
+      value: "{primary-plain-foreground-color.pressed}"
+
+  # Danger
+  danger-color:
+    default:
+      value: "{danger-plain-foreground-color.default}"
+    hover:
+      value: "{danger-plain-foreground-color.hover}"
+    pressed:
+      value: "{danger-plain-foreground-color.pressed}"

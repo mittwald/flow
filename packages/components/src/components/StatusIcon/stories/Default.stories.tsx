@@ -2,8 +2,16 @@ import type { Meta, StoryObj } from "@storybook/react";
 import StatusIcon from "../StatusIcon";
 
 const meta: Meta<typeof StatusIcon> = {
-  title: "StatusIcon",
+  title: "Status/StatusIcon",
   component: StatusIcon,
+  argTypes: {
+    variant: {
+      control: "inline-radio",
+    },
+  },
+  parameters: {
+    controls: { exclude: ["className"] },
+  },
 };
 
 export default meta;
@@ -22,6 +30,6 @@ export const Warning: Story = {
   args: { variant: "warning" },
 };
 
-export const Negative: Story = {
-  args: { variant: "negative" },
+export const Danger: Story = {
+  args: { variant: "danger" },
 };

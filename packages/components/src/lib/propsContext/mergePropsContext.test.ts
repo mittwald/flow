@@ -6,72 +6,72 @@ test.each<{ first: PropsContext; second: PropsContext; merged: PropsContext }>([
   { first: {}, second: {}, merged: {} },
   {
     first: {
-      button: {
+      Button: {
         type: "submit",
       },
     },
     second: {},
     merged: {
-      button: {
+      Button: {
         type: "submit",
       },
     },
   },
   {
     first: {
-      button: {
-        type: "submit",
-      },
-    },
-    second: {
-      button: {
-        type: "reset",
-      },
-    },
-    merged: {
-      button: {
-        type: "reset",
-      },
-    },
-  },
-  {
-    first: {
-      button: {
+      Button: {
         type: "submit",
       },
     },
     second: {
-      button: {
+      Button: {
+        type: "reset",
+      },
+    },
+    merged: {
+      Button: {
+        type: "reset",
+      },
+    },
+  },
+  {
+    first: {
+      Button: {
+        type: "submit",
+      },
+    },
+    second: {
+      Button: {
         type: "reset",
         isDisabled: true,
       },
-      text: {
+      Text: {
         rel: "price",
       },
     },
     merged: {
-      button: {
+      Button: {
         type: "reset",
         isDisabled: true,
       },
-      text: {
+      Text: {
         rel: "price",
       },
     },
   },
   {
     first: {
-      button: {
+      Button: {
         className: "first-class",
       },
     },
     second: {
-      button: {
+      Button: {
         className: "second-class",
       },
     },
     merged: {
-      button: {
+      Button: {
         className: "first-class second-class",
       },
     },
