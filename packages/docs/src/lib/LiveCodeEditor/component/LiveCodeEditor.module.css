@@ -2,7 +2,6 @@
   --border-color: var(--neutral--color--400);
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius--default);
-  overflow: hidden;
 }
 
 .preview {
@@ -10,6 +9,15 @@
   padding: var(--size-px--l);
 }
 
+.editorContainer {
+  overflow: scroll;
+}
+
 .editor {
   font-family: monospace;
+  min-width: min-content;
+}
+
+.editor pre {
+  white-space: pre !important;
 }

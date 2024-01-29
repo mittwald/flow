@@ -34,7 +34,9 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
     <LiveProvider code={code} scope={scope} transformCode={transformCode}>
       <div className={styles.root}>
         <LivePreview className={styles.preview} />
-        <LiveEditor className={styles.editor} />
+        <div className={styles.editorContainer}>
+          <LiveEditor className={styles.editor} />
+        </div>
         <LiveError className={styles.error} />
       </div>
     </LiveProvider>
