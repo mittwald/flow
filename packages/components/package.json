@@ -52,7 +52,7 @@
     "react-aria": "^3.31.1",
     "react-aria-components": "^1.0.1",
     "react-stately": "^3.29.1",
-    "remeda": "^1.38.0"
+    "remeda": "^1.39.0"
   },
   "devDependencies": {
     "@fortawesome/free-regular-svg-icons": "^6.5.1",
