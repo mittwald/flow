@@ -11,8 +11,11 @@ import { faSave } from "@fortawesome/free-regular-svg-icons/faSave";
 const meta: Meta<typeof Tooltip> = {
   ...defaultMeta,
   title: "Overlays/Tooltip/Edge Cases",
-  render: () => (
-    <TooltipTrigger>
+  args: {
+    defaultOpen: true,
+  },
+  render: (props) => (
+    <TooltipTrigger {...props}>
       <Button aria-label="save">
         <Icon faIcon={faSave} />
       </Button>
