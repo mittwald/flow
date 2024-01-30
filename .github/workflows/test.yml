@@ -22,3 +22,5 @@ jobs:
         run: git branch --track main origin/main
       - run: yarn lint
       - run: yarn nx affected -t test,build --parallel=3
+      # Check if working dir is clean after build
+      - run: git diff --exit-code
