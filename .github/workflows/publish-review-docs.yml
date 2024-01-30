@@ -1,15 +1,24 @@
-name: Publish packages to NPM
+name: Publish review docs
 
 on:
-  pull_request:
-    types:
-      - closed
-    branches:
+  push:
+    branches-ignore:
       - main
 
+permissions:
+  contents: read
+
+env:
+  TARGET_PATH: "/docs/${{ github.ref_name }}"
+  NEXT_BASE_PATH: "/flow-previews/docs/${{ github.ref_name }}"
+
 jobs:
-  publish:
+  deploy:
     runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages-preview
+      url: https://mittwald.github.io${{ env.NEXT_BASE_PATH }}
 
     env:
       NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -49,11 +58,16 @@ jobs:
       - name: Build 🔨
         run: yarn nx affected -t build --parallel=3
 
-      - name: Version and publish 🚀
-        run: |
-          yarn lerna publish \
-            --conventional-commits --conventional-prerelease=* \
-            --create-release github \
-            --message "chore(release): bump version to %v" \
-            --yes --no-private \
-            --tag-version-prefix ""
+      - name: Upload files to GitHub Pages 🚀
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.PUBLISH_PAT }}
+        with:
+          source-directory: packages/docs/out
+          destination-github-username: mittwald
+          destination-repository-name: flow-previews
+          target-branch: main
+          target-directory: "${{ env.TARGET_PATH }}"
+
+      - name: Output the URL
+        run: echo "${{ job.environment.url }}"
