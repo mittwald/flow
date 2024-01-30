@@ -26,16 +26,18 @@
     "./TextField": "./dist/TextField.js",
     "./Tooltip": "./dist/Tooltip.js",
     "./styles": "./dist/styles.css",
-    "./doc-properties": "./dist/doc-properties.json"
+    "./doc-properties": "./out/doc-properties.json"
   },
   "files": [
-    "dist"
+    "dist",
+    "out"
   ],
   "scripts": {
-    "build": "run vite build --config vite.build.config.ts && run build:docgen",
+    "build": "concurrently --group yarn:build:lib yarn:build:docgen",
     "build:deps": "",
     "build:deps:run": "yarn run -T lerna run build:deps --scope=@mittwald/flow-next-components",
     "build:docgen": "yarn run pnpify node --loader ts-node/esm dev/createDocPropertiesJson.ts",
+    "build:lib": "run vite build --config vite.build.config.ts ",
     "build:watch:dependents": "yarn build:deps:run && run -T lerna watch --scope=@mittwald/flow-next-components --include-dependencies -- lerna run build:deps --scope=@mittwald/flow-next-components",
     "dev": "run storybook:start",
     "storybook:build": "run storybook build",
