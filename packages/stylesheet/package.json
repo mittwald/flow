@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-next-stylesheet",
-  "version": "0.1.0-alpha.3",
+  "version": "0.1.0-alpha.4",
   "type": "module",
   "exports": {
     ".": "./dist/styles.css"
