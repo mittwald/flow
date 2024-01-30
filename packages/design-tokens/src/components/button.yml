@@ -1,12 +1,22 @@
 button:
   border-radius:
     value: "{size-px.xs}"
-  padding-x:
+  padding-squished-x:
     value: "{size-px.m}"
-  padding-y:
+  padding-squished-y:
     value: "{size-px.s}"
-  padding-with-icon:
+  padding:
     value: "{size-px.s}"
+
+  # Small
+  padding-small:
+    value: "{size-px.xs}"
+  padding-small-squished-x:
+    value: "{size-px.s}"
+  padding-small-squished-y:
+    value: "{size-px.xs}"
+  font-size-small:
+    value: "{font-size.s}"
 
   # Accent
   accent-background-color:

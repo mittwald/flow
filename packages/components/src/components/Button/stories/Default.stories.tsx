@@ -34,9 +34,23 @@ export const Disabled: Story = {
   },
 };
 
+export const Small: Story = {
+  args: {
+    small: true,
+  },
+};
+
 export const WithIcon: Story = {
   render: (props) => (
     <Button {...props} aria-label="Add to favorites">
+      <Icon faIcon={faStar} />
+    </Button>
+  ),
+};
+
+export const SmallWithIcon: Story = {
+  render: (props) => (
+    <Button {...props} aria-label="Add to favorites" small>
       <Icon faIcon={faStar} />
     </Button>
   ),

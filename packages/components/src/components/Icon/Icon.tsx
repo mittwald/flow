@@ -52,7 +52,7 @@ export const Icon: FC<IconProps> = (props) => {
   if (faIcon) {
     return (
       <span {...spanProps}>
-        <FontAwesomeIcon icon={faIcon} {...iconProps} />
+        <FontAwesomeIcon icon={faIcon} fixedWidth {...iconProps} />
       </span>
     );
   }

@@ -3,6 +3,67 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.3](https://github.com/mittwald/flow/compare/0.1.0-alpha.2...0.1.0-alpha.3) (2024-01-30)
+
+### Bug Fixes
+
+- **docs:** basepath is missing in nav links
+  ([ba4bdc6](https://github.com/mittwald/flow/commit/ba4bdc6dbc0cc0aee3020d40afa14787d4b0065b))
+- **docs:** fix layout shift
+  ([b37a168](https://github.com/mittwald/flow/commit/b37a168137bbe36ab45bad92d2674b508cdb2a9b))
+- **docs:** fix missing assets
+  ([75f97f3](https://github.com/mittwald/flow/commit/75f97f30cf79f6d7ce835ade19bda7596fb89058))
+- **docs:** fix overflowing issue
+  ([27cb741](https://github.com/mittwald/flow/commit/27cb741af95a2d7c6c78ce29482819b75b7f84ca))
+- **docs:** fix SSR of examples
+  ([d42e53e](https://github.com/mittwald/flow/commit/d42e53e282f0e9ec1085b85335a810e5aa1e6b0a))
+- **docs:** publish docs on `main` push
+  ([54fc7cf](https://github.com/mittwald/flow/commit/54fc7cfe4eeba93c3b57f546fc2837e3d1462f75))
+- **docs:** remove iOS auto font scale
+  ([30bebea](https://github.com/mittwald/flow/commit/30bebea78cf44594876503c56ed6fdcdd3c78c4b))
+- **docs:** remove trailing newline from codepreview
+  ([95284d4](https://github.com/mittwald/flow/commit/95284d460bca0111118c3ee2f0237ae7ddf07331))
+- **Icon:** use fixed FA width
+  ([7143b23](https://github.com/mittwald/flow/commit/7143b23fc5a3269b8248afd24a8207941bdf4332))
+
+### Features
+
+- Allow custom component for NavigationItem
+  ([dbbaf4e](https://github.com/mittwald/flow/commit/dbbaf4e2ce8b94c77043d780bea020c96e901c11))
+- **Button:** add small variant
+  ([19b82b3](https://github.com/mittwald/flow/commit/19b82b3d2bf7655df005b01e0e08c11ccb1cd23e))
+- **docs:** Auto-import MDX files
+  ([25173d0](https://github.com/mittwald/flow/commit/25173d0867d71b0e4be3e6225ea35b215a42e3b8))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.2](https://github.com/mittwald/flow/compare/0.1.0-alpha.1...0.1.0-alpha.2) (2024-01-29)
+
+### Features
+
+- **storybook:** Add pseudo states addon to storybook
+  ([bad87da](https://github.com/mittwald/flow/commit/bad87daf6443556911272b39aac2ee6329116579))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.1](https://github.com/mittwald/flow/compare/0.1.0-alpha.0...0.1.0-alpha.1) (2024-01-25)
+
+### Bug Fixes
+
+- **stylesheet:** fix export filename
+  ([e49864a](https://github.com/mittwald/flow/commit/e49864a12681054cf903d22e959d68124291a65f))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # 0.1.0-alpha.0 (2024-01-25)
 
 ### Bug Fixes
