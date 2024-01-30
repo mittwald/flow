@@ -3214,6 +3214,7 @@ __metadata:
     "@types/rollup": "npm:^0.54.0"
     clsx: "npm:^2.1.0"
     concurrently: "npm:^8.2.2"
+    copy-to-clipboard: "npm:^3.3.3"
     decamelize: "npm:^6.0.0"
     html-react-parser: "npm:^5.1.1"
     jest: "npm:^29.7.0"
@@ -10747,6 +10748,15 @@ __metadata:
   dependencies:
     is-what: "npm:^3.14.1"
   checksum: 2702998a8cc015f9917385b7f16b0d85f1f6e5e2fd34d99f14df584838f492f49aa0c390d973684c687e895c5c58d08b308a0400ac3e1e3d6fa1e5884a5402ad
+  languageName: node
+  linkType: hard
+
+"copy-to-clipboard@npm:^3.3.3":
+  version: 3.3.3
+  resolution: "copy-to-clipboard@npm:3.3.3"
+  dependencies:
+    toggle-selection: "npm:^1.0.6"
+  checksum: 3ebf5e8ee00601f8c440b83ec08d838e8eabb068c1fae94a9cda6b42f288f7e1b552f3463635f419af44bf7675afc8d0390d30876cf5c2d5d35f86d9c56a3e5f
   languageName: node
   linkType: hard
 
@@ -21565,6 +21575,13 @@ __metadata:
   version: 4.25.0
   resolution: "tocbot@npm:4.25.0"
   checksum: b6ca2ca5a3549e7c4007843e0b41cb113656006a59f5aa2328bcccdc8b780f25b642c1d0d64e02255c97a3ba5072ae5085a403cd2b560fb3ee30bd59924fe273
+  languageName: node
+  linkType: hard
+
+"toggle-selection@npm:^1.0.6":
+  version: 1.0.6
+  resolution: "toggle-selection@npm:1.0.6"
+  checksum: f2cf1f2c70f374fd87b0cdc8007453ba9e981c4305a8bf4eac10a30e62ecdfd28bca7d18f8f15b15a506bf8a7bfb20dbe3539f0fcf2a2c8396c1a78d53e1f179
   languageName: node
   linkType: hard
 

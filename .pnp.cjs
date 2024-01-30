@@ -6122,6 +6122,7 @@ const RAW_RUNTIME_STATE =
           ["@types/rollup", "npm:0.54.0"],\
           ["clsx", "npm:2.1.0"],\
           ["concurrently", "npm:8.2.2"],\
+          ["copy-to-clipboard", "npm:3.3.3"],\
           ["decamelize", "npm:6.0.0"],\
           ["html-react-parser", "virtual:160c7a696a99b065a822859af8c18a938041a659df75ba6216e289a2ba885865ddea0afdd5ed1924ae3f379fc9ec188b83f6e71e756a0bac8e9ca356654a6a90#npm:5.1.1"],\
           ["jest", "virtual:160c7a696a99b065a822859af8c18a938041a659df75ba6216e289a2ba885865ddea0afdd5ed1924ae3f379fc9ec188b83f6e71e756a0bac8e9ca356654a6a90#npm:29.7.0"],\
@@ -6187,6 +6188,7 @@ const RAW_RUNTIME_STATE =
           ["@types/rollup", "npm:0.54.0"],\
           ["clsx", "npm:2.1.0"],\
           ["concurrently", "npm:8.2.2"],\
+          ["copy-to-clipboard", "npm:3.3.3"],\
           ["decamelize", "npm:6.0.0"],\
           ["html-react-parser", "virtual:160c7a696a99b065a822859af8c18a938041a659df75ba6216e289a2ba885865ddea0afdd5ed1924ae3f379fc9ec188b83f6e71e756a0bac8e9ca356654a6a90#npm:5.1.1"],\
           ["jest", "virtual:160c7a696a99b065a822859af8c18a938041a659df75ba6216e289a2ba885865ddea0afdd5ed1924ae3f379fc9ec188b83f6e71e756a0bac8e9ca356654a6a90#npm:29.7.0"],\
@@ -6258,6 +6260,7 @@ const RAW_RUNTIME_STATE =
           ["@types/rollup", "npm:0.54.0"],\
           ["clsx", "npm:2.1.0"],\
           ["concurrently", "npm:8.2.2"],\
+          ["copy-to-clipboard", "npm:3.3.3"],\
           ["decamelize", "npm:6.0.0"],\
           ["html-react-parser", "virtual:160c7a696a99b065a822859af8c18a938041a659df75ba6216e289a2ba885865ddea0afdd5ed1924ae3f379fc9ec188b83f6e71e756a0bac8e9ca356654a6a90#npm:5.1.1"],\
           ["jest", "virtual:160c7a696a99b065a822859af8c18a938041a659df75ba6216e289a2ba885865ddea0afdd5ed1924ae3f379fc9ec188b83f6e71e756a0bac8e9ca356654a6a90#npm:29.7.0"],\
@@ -17749,6 +17752,16 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["copy-anything", "npm:2.0.6"],\
           ["is-what", "npm:3.14.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["copy-to-clipboard", [\
+      ["npm:3.3.3", {\
+        "packageLocation": "./.yarn/cache/copy-to-clipboard-npm-3.3.3-6964e6cfad-3ebf5e8ee0.zip/node_modules/copy-to-clipboard/",\
+        "packageDependencies": [\
+          ["copy-to-clipboard", "npm:3.3.3"],\
+          ["toggle-selection", "npm:1.0.6"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -30104,6 +30117,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/tocbot-npm-4.25.0-a25d976a1b-b6ca2ca5a3.zip/node_modules/tocbot/",\
         "packageDependencies": [\
           ["tocbot", "npm:4.25.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["toggle-selection", [\
+      ["npm:1.0.6", {\
+        "packageLocation": "./.yarn/cache/toggle-selection-npm-1.0.6-c506b73005-f2cf1f2c70.zip/node_modules/toggle-selection/",\
+        "packageDependencies": [\
+          ["toggle-selection", "npm:1.0.6"]\
         ],\
         "linkType": "HARD"\
       }]\
