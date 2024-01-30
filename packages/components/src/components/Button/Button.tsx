@@ -8,7 +8,8 @@ import {
   useProps,
 } from "@/lib/propsContext";
 
-export interface ButtonProps extends PropsWithChildren<Aria.ButtonProps> {
+export interface ButtonProps
+  extends PropsWithChildren<Omit<Aria.ButtonProps, "slot">> {
   /** @default "primary" */
   variant?: "primary" | "accent" | "secondary" | "danger" | "plain";
 }
