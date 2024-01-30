@@ -5,7 +5,7 @@ import remarkMdxFrontmatter from "remark-mdx-frontmatter";
 /** @type {import("next").NextConfig} */
 const nextConfig = {
   output: "export",
-  basePath: "/flow",
+  basePath: process.env.NEXT_BASE_PATH ?? "",
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx", "example"],
   webpack: (config, _) => {
     config.module.rules.push({
