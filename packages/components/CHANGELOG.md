@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.3](https://github.com/mittwald/flow/compare/0.1.0-alpha.2...0.1.0-alpha.3) (2024-01-30)
+
+### Bug Fixes
+
+- **Icon:** use fixed FA width
+  ([7143b23](https://github.com/mittwald/flow/commit/7143b23fc5a3269b8248afd24a8207941bdf4332))
+
+### Features
+
+- Allow custom component for NavigationItem
+  ([dbbaf4e](https://github.com/mittwald/flow/commit/dbbaf4e2ce8b94c77043d780bea020c96e901c11))
+- **Button:** add small variant
+  ([19b82b3](https://github.com/mittwald/flow/commit/19b82b3d2bf7655df005b01e0e08c11ccb1cd23e))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.2](https://github.com/mittwald/flow/compare/0.1.0-alpha.1...0.1.0-alpha.2) (2024-01-29)
 
 ### Features
