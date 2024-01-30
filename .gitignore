@@ -10,3 +10,4 @@ dist
 nx-cloud.env
 *.log
 *.tsbuildinfo
+packages/components/out
