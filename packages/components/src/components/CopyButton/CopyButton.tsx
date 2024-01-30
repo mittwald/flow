@@ -30,6 +30,7 @@ export const CopyButton: FC<CopyButtonProps> = (props) => {
         onPress={copyValue}
         aria-label={tooltip}
         variant="plain"
+        small
       >
         <Icon faIcon={faCopy} />
       </Button>
