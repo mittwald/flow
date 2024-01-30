@@ -6273,7 +6273,6 @@ const RAW_RUNTIME_STATE =
           ["@mfalkenberg/react-live-ssr", "virtual:c8483f40a294888f2cccf27b20488986eaec205ef7fbcdc8948dd935483985d3b2cbb1df52636fb2a6a95b012dba5f48b0003a220d2438618adabbbff5cc9ca4#npm:4.1.7"],\
           ["@mittwald/flow-next-components", "virtual:c8483f40a294888f2cccf27b20488986eaec205ef7fbcdc8948dd935483985d3b2cbb1df52636fb2a6a95b012dba5f48b0003a220d2438618adabbbff5cc9ca4#workspace:packages/components"],\
           ["@next/mdx", "virtual:c8483f40a294888f2cccf27b20488986eaec205ef7fbcdc8948dd935483985d3b2cbb1df52636fb2a6a95b012dba5f48b0003a220d2438618adabbbff5cc9ca4#npm:14.1.0"],\
-          ["@types/lodash", "npm:4.14.202"],\
           ["@types/mdx", "npm:2.0.10"],\
           ["@types/node", "npm:20.11.10"],\
           ["@types/react", "npm:18.2.48"],\
@@ -6287,7 +6286,6 @@ const RAW_RUNTIME_STATE =
           ["fs-jetpack", "npm:5.1.0"],\
           ["glob", "npm:10.3.10"],\
           ["humanize-string", "npm:3.0.0"],\
-          ["lodash", "npm:4.17.21"],\
           ["next", "virtual:c8483f40a294888f2cccf27b20488986eaec205ef7fbcdc8948dd935483985d3b2cbb1df52636fb2a6a95b012dba5f48b0003a220d2438618adabbbff5cc9ca4#npm:14.1.0"],\
           ["next-mdx-remote", "virtual:c8483f40a294888f2cccf27b20488986eaec205ef7fbcdc8948dd935483985d3b2cbb1df52636fb2a6a95b012dba5f48b0003a220d2438618adabbbff5cc9ca4#npm:4.4.1"],\
           ["parse-es-import", "npm:0.6.0"],\
@@ -14195,13 +14193,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/@types-lodash-npm-4.14.201-0c286bbc0c-14dc437872.zip/node_modules/@types/lodash/",\
         "packageDependencies": [\
           ["@types/lodash", "npm:4.14.201"]\
-        ],\
-        "linkType": "HARD"\
-      }],\
-      ["npm:4.14.202", {\
-        "packageLocation": "./.yarn/cache/@types-lodash-npm-4.14.202-76de3e302b-6064d43c8f.zip/node_modules/@types/lodash/",\
-        "packageDependencies": [\
-          ["@types/lodash", "npm:4.14.202"]\
         ],\
         "linkType": "HARD"\
       }]\

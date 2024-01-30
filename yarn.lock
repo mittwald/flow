@@ -3248,7 +3248,6 @@ __metadata:
     "@mfalkenberg/react-live-ssr": "npm:^4.1.7"
     "@mittwald/flow-next-components": "workspace:^"
     "@next/mdx": "npm:^14.1.0"
-    "@types/lodash": "npm:^4.14.202"
     "@types/mdx": "npm:^2.0.10"
     "@types/node": "npm:^20.11.10"
     "@types/react": "npm:^18.2.48"
@@ -3262,7 +3261,6 @@ __metadata:
     fs-jetpack: "npm:^5.1.0"
     glob: "npm:^10.3.10"
     humanize-string: "npm:^3.0.0"
-    lodash: "npm:^4.17.21"
     next: "npm:^14.1.0"
     next-mdx-remote: "npm:^4.4.1"
     parse-es-import: "npm:^0.6.0"
@@ -7903,13 +7901,6 @@ __metadata:
   version: 4.14.201
   resolution: "@types/lodash@npm:4.14.201"
   checksum: 14dc43787296c429433d7d034ed47c5ac24b92217056f80a0e6c990449120b9c9c1058918188945fb88353c0c8333c5c36dccc40c51edbd39b05d2169ab2e0ad
-  languageName: node
-  linkType: hard
-
-"@types/lodash@npm:^4.14.202":
-  version: 4.14.202
-  resolution: "@types/lodash@npm:4.14.202"
-  checksum: 6064d43c8f454170841bd67c8266cc9069d9e570a72ca63f06bceb484cb4a3ee60c9c1f305c1b9e3a87826049fd41124b8ef265c4dd08b00f6766609c7fe9973
   languageName: node
   linkType: hard
 

@@ -6,7 +6,8 @@ export interface Property {
   description?: string | null;
 }
 
-export interface PropertyGroup {
-  name: string;
-  properties: Property[];
-}
+export type PropertyCategories = "events" | "accessibility" | "other";
+
+export type Properties = {
+  [key in PropertyCategories]: Property[];
+};

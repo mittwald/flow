@@ -11,12 +11,10 @@ void (async () => {
   const files = await glob("./src/components/**/*.tsx", {
     ignore: "src/**/*.stories.tsx",
   });
-  const components = files
-    .map((fileLocation) => {
-      console.log(`📄 Parsing ${fileLocation}`);
-      return parser.parse(fileLocation);
-    })
-    .filter((component) => component.length > 0);
+  const components = files.flatMap((fileLocation) => {
+    console.log(`📄 Parsing ${fileLocation}`);
+    return parser.parse(fileLocation);
+  });
 
   console.log("📝 Writing to file");
   if (!fsSync.existsSync("./out/")) {

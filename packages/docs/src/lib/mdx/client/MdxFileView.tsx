@@ -16,10 +16,17 @@ export const MdxFileView: FC<Props> = (props) => {
     example = "default",
   }) => <LiveCodeEditor code={mdxFile.getExample(example)} />;
 
+  const ExamplePropertiesTable = () => (
+    <PropertiesTable name={mdxFile.getTitle()} />
+  );
+
   return (
     <NextMDXRemote
       {...mdxFile.mdxSource}
-      components={{ LiveCodeEditor: ExampleLiveCodeEditor, PropertiesTable }}
+      components={{
+        LiveCodeEditor: ExampleLiveCodeEditor,
+        PropertiesTable: ExamplePropertiesTable,
+      }}
     />
   );
 };

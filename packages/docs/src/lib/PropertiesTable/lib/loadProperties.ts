@@ -1,65 +1,50 @@
 import docGenFile from "@mittwald/flow-next-components/doc-properties";
-import { ComponentDoc } from "react-docgen-typescript";
-import _ from "lodash";
-import { PropertyGroup } from "../types";
+import { Properties, Property } from "../types";
+import type { ComponentDoc } from "react-docgen-typescript";
 
-const nodeModuleRegex = /.*\/node_modules\/([^/]*)/gm;
-const componentRegex = /src\/components\/([^/]*)/gm;
+const eventRegex = /on[A-Z]+.*/;
+const a11yRegex = /aria-.+/;
+const optionalRegex = / \| (undefined|null)/g;
 
-const weights: { [key: string]: number } = {
-  component: 0,
-  "react-aria-components": 10,
-  "@react-types": 20,
-  other: 100,
-};
+export default function loadProperties(name: string): Properties | null {
+  const componentDoc = docGenFile.find(
+    (doc) => doc.displayName.toLowerCase() === name.toLowerCase(),
+  ) as unknown as ComponentDoc;
 
-export default function loadProperties(name: string): PropertyGroup[] | null {
-  const docGen: ComponentDoc[][] = docGenFile;
-  const componentDocGens = docGen.find((doc) =>
-    doc.some(
-      (singleDoc) => singleDoc.displayName.toLowerCase() === name.toLowerCase(),
-    ),
-  );
-
-  if (!componentDocGens) {
+  if (!componentDoc) {
     return null;
   }
 
-  const componentDocGen = componentDocGens[0];
+  const properties: Property[] = Object.entries(componentDoc.props)
+    .filter(([name, prop]) => name && prop)
+    .map(([, prop]) => {
+      let type = prop.type.name.replaceAll(optionalRegex, "");
 
-  if (!componentDocGen) {
-    return null;
-  }
-
-  const properties = _.groupBy(
-    Object.entries(componentDocGen.props).sort(([_ignored, prop]) =>
-      prop.required ? 1 : 0,
-    ),
-    (item) => {
-      if (!item[1].parent) {
-        return "Other";
+      if (prop.name === "children") {
+        type = "ReactNode";
       }
-      const match = nodeModuleRegex.exec(item[1].parent.fileName);
-      if (!match) {
-        return componentRegex.exec(item[1].parent.fileName)?.[1] || "Other";
-      }
-      return match[1];
-    },
-  );
-
-  return _.sortBy(Object.entries(properties), ([key]) => {
-    if (key === "Other") return weights["other"];
-    return weights[key] || weights["component"];
-  }).map(
-    ([name, props]): PropertyGroup => ({
-      name,
-      properties: props.map(([, prop]) => ({
+      return {
         name: prop.name,
         default: prop.defaultValue ? prop.defaultValue.value : null,
         description: prop.description,
         required: prop.required,
-        type: prop.type.name,
-      })),
-    }),
+        type,
+      };
+    });
+
+  console.log(properties.length);
+
+  console.log(
+    properties.filter(
+      (prop) => !(eventRegex.test(prop.name) || a11yRegex.test(prop.name)),
+    ).length,
   );
+
+  return {
+    events: properties.filter((prop) => eventRegex.test(prop.name)),
+    accessibility: properties.filter((prop) => a11yRegex.test(prop.name)),
+    other: properties.filter(
+      (prop) => !(eventRegex.test(prop.name) || a11yRegex.test(prop.name)),
+    ),
+  };
 }

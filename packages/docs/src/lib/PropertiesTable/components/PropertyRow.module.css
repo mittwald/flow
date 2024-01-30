@@ -1,0 +1,13 @@
+.root {
+}
+
+.colName {
+  color: var(--color--hosting-blue--800);
+}
+
+.colNameOptional {
+}
+
+.colDefault {
+  text-align: center;
+}
