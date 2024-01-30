@@ -6,7 +6,8 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: var(--button--padding-y) var(--button--padding-x);
+  padding-block: var(--button--padding-squished-y);
+  padding-inline: var(--button--padding-squished-x);
   font-size: var(--font-size--default);
   font-weight: bold;
   transition-property: color, background-color;
@@ -20,16 +21,17 @@
   }
 
   &:has(.icon) {
-    padding: var(--button--padding-with-icon);
+    padding: var(--button--padding);
   }
 }
 
 .small {
   font-size: var(--button--font-size-small);
-  padding: var(--button--padding-small-y) var(--button--padding-small-x);
+  padding-block: var(--button--padding-small-squished-y);
+  padding-inline: var(--button--padding-small-squished-x);
 
   &:has(.icon) {
-    padding: var(--button--padding-small-with-icon);
+    padding: var(--button--padding-small);
   }
 }
 
