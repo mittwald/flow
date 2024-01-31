@@ -5,9 +5,9 @@ import {
   LivePreview,
   LiveProvider,
 } from "@mfalkenberg/react-live-ssr";
-import { extractEditorScope } from "@/lib/LiveCodeEditor/component/lib/extractEditorScope";
-import { LiveCodeEditorProps } from "@/lib/LiveCodeEditor/component/types";
-import extractDefaultExport from "@/lib/LiveCodeEditor/component/lib/extractDefaultExport";
+import { extractEditorScope } from "@/lib/liveCode/components/LiveCodeEditor/lib/extractEditorScope";
+import { LiveCodeEditorProps } from "@/lib/liveCode/components/LiveCodeEditor/types";
+import extractDefaultExport from "@/lib/liveCode/components/LiveCodeEditor/lib/extractDefaultExport";
 import styles from "./LiveCodeEditor.module.css";
 
 // Waiting for https://github.com/FormidableLabs/react-live/issues/339

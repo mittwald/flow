@@ -1,8 +1,8 @@
 "use client";
 import { FC } from "react";
 import { MDXRemote as NextMDXRemote } from "next-mdx-remote";
-import LiveCodeEditor from "@/lib/LiveCodeEditor/component/LiveCodeEditor";
-import { MdxFile, SerializedMdxFile } from "@/lib/docs/MdxFile";
+import LiveCodeEditor from "@/lib/liveCode/components/LiveCodeEditor/LiveCodeEditor";
+import { MdxFile, SerializedMdxFile } from "@/lib/mdx/MdxFile";
 
 interface Props {
   mdxFile: SerializedMdxFile;

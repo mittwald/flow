@@ -1,7 +1,7 @@
 import MainContent from "@/app/_components/layout/MainContent";
-import MdxFileView from "@/lib/docs/client/MdxFileView";
-import { MdxFileFactory } from "@/lib/docs/MdxFileFactory";
-import { StaticParams } from "@/lib/docs/MdxFile";
+import MdxFileView from "@/lib/mdx/components/MdxFileView";
+import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
+import { StaticParams } from "@/lib/mdx/MdxFile";
 
 const docsFolder = "src/docs";
 

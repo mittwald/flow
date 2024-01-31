@@ -1,4 +1,4 @@
-import { liveCodeEditorGlobalImports } from "@/lib/LiveCodeEditor/dynamicImports";
+import { liveCodeEditorGlobalImports } from "@/lib/liveCode/dynamicImports";
 import { ComponentType } from "react";
 
 export const getDynamicComponent = (name: string): ComponentType => {

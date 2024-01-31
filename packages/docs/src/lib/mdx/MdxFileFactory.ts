@@ -7,7 +7,7 @@ import {
   MdxFileExamples,
   MdxFileMeta,
   StaticParams,
-} from "@/lib/docs/MdxFile";
+} from "@/lib/mdx/MdxFile";
 import { Metadata } from "next";
 
 export class MdxFileFactory {

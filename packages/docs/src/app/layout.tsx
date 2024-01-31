@@ -6,7 +6,7 @@ import MainNavigation from "@/app/_components/layout/MainNavigation/MainNavigati
 import clsx from "clsx";
 import styles from "./layout.module.scss";
 import Heading from "@mittwald/flow-next-components/Heading";
-import { MdxFileFactory } from "@/lib/docs/MdxFileFactory";
+import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
 
 export const metadata: Metadata = {
   title: "Flow – mittwald Design System",

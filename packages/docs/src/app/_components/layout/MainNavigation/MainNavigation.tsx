@@ -6,7 +6,7 @@ import Navigation, {
 import Heading from "@mittwald/flow-next-components/Heading";
 import { usePathname } from "next/navigation";
 import styles from "./MainNavigation.module.scss";
-import { MdxFile, SerializedMdxFile } from "@/lib/docs/MdxFile";
+import { MdxFile, SerializedMdxFile } from "@/lib/mdx/MdxFile";
 import { NextJsNavigationItemLink } from "@/app/_components/layout/MainNavigation/NextJsNavigationItemLink";
 
 interface Props {
