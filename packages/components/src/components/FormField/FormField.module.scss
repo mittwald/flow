@@ -8,7 +8,7 @@
 /* Elements */
 .label {
   order: 1;
-  padding-bottom: var(--form-control--label-to-control-spacing);
+  margin-bottom: var(--form-control--label-to-control-spacing);
 }
 
 .fieldError,
