@@ -4,6 +4,7 @@ import { glob } from "glob";
 import * as path from "node:path";
 import { Literal } from "acorn";
 import { extractRawImports } from "../src/lib/liveCode/extractImports.js";
+import { sortBy } from "remeda";
 
 interface ImportDefinition {
   names: string[];
@@ -20,7 +21,7 @@ function mapImports(imports: ImportDefinition[]): Record<string, string> {
 
 async function generateImportMappings(pattern: string, outputPath: string) {
   console.log("Generating imports from files");
-  const matchedFiles = await glob(pattern);
+  const matchedFiles = sortBy(await glob(pattern), (s) => s);
 
   console.log(` - ${matchedFiles.join("\r\n - ")}`);
 
