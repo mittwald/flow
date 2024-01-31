@@ -15,11 +15,6 @@
 
   @extend .primary;
 
-  &[disabled] {
-    background-color: var(--button--disabled-background-color);
-    color: var(--button--disabled-color);
-  }
-
   &:has(.icon) {
     padding: var(--button--padding);
   }
@@ -49,6 +44,11 @@
     &[data-pressed] {
       background-color: var(--button--#{$variant}-background-color--pressed);
       color: var(--button--#{$variant}-color--pressed);
+    }
+
+    &[disabled] {
+      background-color: var(--button--disabled-background-color);
+      color: var(--button--disabled-color);
     }
   }
 }
