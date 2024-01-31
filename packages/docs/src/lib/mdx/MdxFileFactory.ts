@@ -32,19 +32,19 @@ export class MdxFileFactory {
   }
 
   public static async generateStaticParams(
-    docsFolder: string,
+    contentFolder: string,
   ): Promise<Array<StaticParams>> {
-    const mdxFiles = await MdxFileFactory.fromDir(docsFolder);
+    const mdxFiles = await MdxFileFactory.fromDir(contentFolder);
     return mdxFiles.map((mdx) => ({
       slug: mdx.slugs,
     }));
   }
 
   public static async generateMetadata(
-    docsFolder: string,
+    contentFolder: string,
     params: StaticParams,
   ): Promise<Metadata> {
-    const mdxFile = await MdxFileFactory.fromParams(docsFolder, params);
+    const mdxFile = await MdxFileFactory.fromParams(contentFolder, params);
     return {
       title: mdxFile.getTitle(),
     };
@@ -56,12 +56,11 @@ export class MdxFileFactory {
   ): Promise<MdxFile> {
     const relativeFilename = path.relative(baseDir ?? "", filename);
     const slugs = relativeFilename.split("/").slice(0, -1);
-    const pathname = slugs.join("/");
 
     const mdxSource = await MdxFileFactory.getMdxSource(filename);
     const examples = MdxFileFactory.getExamples(filename);
 
-    return new MdxFile(relativeFilename, slugs, pathname, mdxSource, examples);
+    return new MdxFile(relativeFilename, slugs, mdxSource, examples);
   }
 
   private static async getMdxSource(

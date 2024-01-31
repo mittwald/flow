@@ -1,7 +1,8 @@
 import { FC } from "react";
+import { redirect } from "next/navigation";
 
 const Home: FC = () => {
-  return null;
+  redirect("01-getting-started/installation");
 };
 
 export default Home;

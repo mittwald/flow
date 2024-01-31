@@ -15,12 +15,12 @@ export type MdxFileExamples = Record<string, string>;
 export interface SerializedMdxFile {
   filename: string;
   slugs: string[];
-  pathname: string;
   mdxSource: MDXRemoteSerializeResult<never, MdxFileMeta>;
   examples: MdxFileExamples;
 }
 
 export class MdxFile {
+  public readonly id: string;
   public readonly filename: string;
   public readonly slugs: string[];
   public readonly pathname: string;
@@ -30,13 +30,13 @@ export class MdxFile {
   public constructor(
     filename: string,
     slugs: string[],
-    pathname: string,
     mdxSource: MDXRemoteSerializeResult<never, MdxFileMeta>,
     examples: MdxFileExamples,
   ) {
     this.filename = filename;
     this.slugs = slugs;
-    this.pathname = pathname;
+    this.pathname = MdxFile.pathnameFromSlug(slugs);
+    this.id = filename;
     this.mdxSource = mdxSource;
     this.examples = examples;
   }
@@ -53,7 +53,11 @@ export class MdxFile {
   }
 
   public matchesSlugs(slugs: string[]): boolean {
-    return slugs.join("/") === this.pathname;
+    return MdxFile.pathnameFromSlug(slugs) === this.pathname;
+  }
+
+  public static pathnameFromSlug(slugs: string[]): string {
+    return ["", ...slugs].join("/");
   }
 
   public getExample(name: string): string {
@@ -68,14 +72,13 @@ export class MdxFile {
     return {
       mdxSource: this.mdxSource,
       examples: this.examples,
-      pathname: this.pathname,
       slugs: this.slugs,
       filename: this.filename,
     };
   }
 
   public static deserialize(serialized: SerializedMdxFile): MdxFile {
-    const { filename, mdxSource, examples, pathname, slugs } = serialized;
-    return new MdxFile(filename, slugs, pathname, mdxSource, examples);
+    const { filename, mdxSource, examples, slugs } = serialized;
+    return new MdxFile(filename, slugs, mdxSource, examples);
   }
 }

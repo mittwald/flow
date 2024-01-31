@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 const RootLayout: FC<PropsWithChildren> = async (props) => {
   const bodyClassName = clsx("flow", styles.body);
-  const docs = await MdxFileFactory.fromDir("src/docs");
+  const docs = await MdxFileFactory.fromDir("src/content");
 
   return (
     <html lang="en">
