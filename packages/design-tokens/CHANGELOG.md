@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.5](https://github.com/mittwald/flow/compare/0.1.0-alpha.4...0.1.0-alpha.5) (2024-02-01)
+
+### Bug Fixes
+
+- include Font Awesome styles in initial stylesheet
+  ([fe6c060](https://github.com/mittwald/flow/commit/fe6c06053ae0726699c20bc4621ce5a75554242a))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.4](https://github.com/mittwald/flow/compare/0.1.0-alpha.3...0.1.0-alpha.4) (2024-01-30)
 
 ### Features

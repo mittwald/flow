@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.5](https://github.com/mittwald/flow/compare/0.1.0-alpha.4...0.1.0-alpha.5) (2024-02-01)
+
+### Bug Fixes
+
+- **Badge:** should be an inline element
+  ([2870587](https://github.com/mittwald/flow/commit/287058764d53f62db25b70f38994a57bde69bf07))
+- **Button:** icon is not centered
+  ([28d3f81](https://github.com/mittwald/flow/commit/28d3f819022f02d5709113d039ac8e3e0da6ef0b))
+- **Button:** should be an inline element
+  ([c636747](https://github.com/mittwald/flow/commit/c636747def24cccffd954819f3260d7ad880f87f))
+- include Font Awesome styles in initial stylesheet
+  ([fe6c060](https://github.com/mittwald/flow/commit/fe6c06053ae0726699c20bc4621ce5a75554242a))
+- **Storybook:** missing styles
+  ([f5b51d0](https://github.com/mittwald/flow/commit/f5b51d05c8e0fdfa0b4f5a581216e81891ab82b7))
+
+### Features
+
+- **Icon:** support fixed width
+  ([f057ddb](https://github.com/mittwald/flow/commit/f057ddbe41d33a51662876f63ddd1b5fbb010e4f))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.4](https://github.com/mittwald/flow/compare/0.1.0-alpha.3...0.1.0-alpha.4) (2024-01-30)
 
 ### Features
