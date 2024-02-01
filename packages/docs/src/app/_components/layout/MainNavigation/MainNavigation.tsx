@@ -1,5 +1,5 @@
 "use client";
-import React, { FC, ReactElement, useId } from "react";
+import React, { FC, Fragment, ReactElement, useId } from "react";
 import Navigation, {
   NavigationItem,
 } from "@mittwald/flow-next-components/Navigation";
@@ -38,14 +38,14 @@ const MainNavigation: FC<Props> = (props) => {
   };
 
   return Object.entries(navGroups).map(([group, mdxFiles]) => (
-    <>
+    <Fragment key={group}>
       <Heading level={4} id={headingComponentsId} className={styles.heading}>
         <GroupHeadingText>{group}</GroupHeadingText>
       </Heading>
       <Navigation aria-labelledby={headingComponentsId}>
         {mdxFiles.map(navItem)}
       </Navigation>
-    </>
+    </Fragment>
   ));
 };
 

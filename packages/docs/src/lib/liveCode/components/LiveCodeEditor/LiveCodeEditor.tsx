@@ -9,6 +9,7 @@ import { extractEditorScope } from "@/lib/liveCode/components/LiveCodeEditor/lib
 import { LiveCodeEditorProps } from "@/lib/liveCode/components/LiveCodeEditor/types";
 import extractDefaultExport from "@/lib/liveCode/components/LiveCodeEditor/lib/extractDefaultExport";
 import styles from "./LiveCodeEditor.module.css";
+import * as EditorComponents from "./components";
 
 // Waiting for https://github.com/FormidableLabs/react-live/issues/339
 const error = console.error;
@@ -39,7 +40,10 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
   return (
     <LiveProvider
       code={codeToDisplay}
-      scope={scope}
+      scope={{
+        ...scope,
+        ...EditorComponents,
+      }}
       transformCode={transformCode}
     >
       <div className={styles.root}>
