@@ -3,7 +3,9 @@ import { ComponentType } from "react";
 
 export const getDynamicComponent = (name: string): ComponentType => {
   if (!(name in liveCodeEditorGlobalImports)) {
-    throw new Error(`Could not find ${name} in generatedImports.`);
+    throw new Error(
+      `Could not find ${name} in generatedImports. Run 'yarn build:imports'.`,
+    );
   }
   return liveCodeEditorGlobalImports[name];
 };
