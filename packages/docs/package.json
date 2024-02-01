@@ -53,16 +53,27 @@
     "targets": {
       "dev": {
         "dependsOn": [
-          "^build",
-          "build:imports"
+          "build:imports",
+          "^build"
         ]
       },
       "build:imports": {
         "dependsOn": [
           "^build"
         ],
-        "input": "{projectRoot}/dev/generateLiveCodeEditorGlobalImports.ts",
-        "output": "{projectRoot}/src/lib/liveCodeEditorGlobalImports.ts"
+        "inputs": [
+          "{projectRoot}/src/content/**/*.tsx"
+        ],
+        "outputs": [
+          "{projectRoot}/src/lib/liveCode/dynamicImports.ts"
+        ],
+        "cache": true
+      },
+      "build:deps": {
+        "dependsOn": [
+          "^build",
+          "build:imports"
+        ]
       },
       "build": {
         "dependsOn": [
@@ -70,7 +81,8 @@
           "build:imports"
         ],
         "outputs": [
-          "{projectRoot}/.next"
+          "{projectRoot}/.next",
+          "{projectRoot}/out"
         ]
       }
     }
