@@ -3,6 +3,45 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.5](https://github.com/mittwald/flow/compare/0.1.0-alpha.4...0.1.0-alpha.5) (2024-02-01)
+
+### Bug Fixes
+
+- **Badge:** should be an inline element
+  ([2870587](https://github.com/mittwald/flow/commit/287058764d53f62db25b70f38994a57bde69bf07))
+- **Button:** icon is not centered
+  ([28d3f81](https://github.com/mittwald/flow/commit/28d3f819022f02d5709113d039ac8e3e0da6ef0b))
+- **Button:** should be an inline element
+  ([c636747](https://github.com/mittwald/flow/commit/c636747def24cccffd954819f3260d7ad880f87f))
+- **docs:** commit generated imports file
+  ([9ee0a53](https://github.com/mittwald/flow/commit/9ee0a53d952a24e459b45a9e3efbbd5934b8b90c))
+- **docs:** generated imports file is not stable
+  ([348e472](https://github.com/mittwald/flow/commit/348e47237061cef62251906db535deda183fe61b))
+- **docs:** wrong import path
+  ([5d191aa](https://github.com/mittwald/flow/commit/5d191aa44bf6d0e05470c6cf77bfe77ca874f0e9))
+- include Font Awesome styles in initial stylesheet
+  ([fe6c060](https://github.com/mittwald/flow/commit/fe6c06053ae0726699c20bc4621ce5a75554242a))
+- **LiveCodeEditor:** works not with fragements
+  ([7619db7](https://github.com/mittwald/flow/commit/7619db7447876fd4f7e6ab91358ebc134e6d98c6))
+- **Storybook:** missing styles
+  ([f5b51d0](https://github.com/mittwald/flow/commit/f5b51d05c8e0fdfa0b4f5a581216e81891ab82b7))
+
+### Features
+
+- **docs:** add some basic styling
+  ([dc7d74a](https://github.com/mittwald/flow/commit/dc7d74a2e4802ccd979ba25108c5d3d06d6caf6b))
+- **docs:** group pages
+  ([d881b99](https://github.com/mittwald/flow/commit/d881b993f60f26835260d139b6142801b23110df))
+- **Icon:** support fixed width
+  ([f057ddb](https://github.com/mittwald/flow/commit/f057ddbe41d33a51662876f63ddd1b5fbb010e4f))
+- **LiveCodeEditor:** add Row component
+  ([5c4b85a](https://github.com/mittwald/flow/commit/5c4b85a489cffaf7bed3db34027204a31ab2ef08))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.4](https://github.com/mittwald/flow/compare/0.1.0-alpha.3...0.1.0-alpha.4) (2024-01-30)
 
 ### Features
