@@ -34,6 +34,7 @@ export const Button: FC<ButtonProps> = (props) => {
     Icon: {
       className: styles.icon,
       "aria-hidden": true,
+      fixedWidth: true,
     },
   };
 
