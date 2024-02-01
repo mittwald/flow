@@ -1,0 +1,23 @@
+.heading2 {
+  margin: var(--size-rem--xl) 0;
+  padding-top: var(--size-rem--xl);
+  border-top: var(--border-width--default) solid var(--neutral--color--500);
+}
+
+.p,
+.pre,
+.heading {
+  margin-bottom: 1em;
+}
+
+:not(.pre) .code,
+.pre {
+  background-color: var(--neutral--color--300);
+  border-radius: var(--border-radius--default);
+  padding-inline: var(--size-px--xs);
+}
+
+.pre {
+  padding: var(--size-px--s) var(--size-px--m);
+  margin-block: 1.5em;
+}

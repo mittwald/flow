@@ -21,7 +21,10 @@ export default async function Page(props: Props) {
   const mdxFile = await MdxFileFactory.fromParams(contentFolder, props.params);
 
   return (
-    <MainContent title={mdxFile.getTitle()}>
+    <MainContent
+      title={mdxFile.getTitle()}
+      description={mdxFile.mdxSource.frontmatter.description}
+    >
       <MdxFileView mdxFile={mdxFile.serialize()} />
     </MainContent>
   );

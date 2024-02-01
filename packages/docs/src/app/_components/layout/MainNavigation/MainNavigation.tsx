@@ -39,7 +39,7 @@ const MainNavigation: FC<Props> = (props) => {
 
   return Object.entries(navGroups).map(([group, mdxFiles]) => (
     <>
-      <Heading level={3} id={headingComponentsId} className={styles.heading}>
+      <Heading level={4} id={headingComponentsId} className={styles.heading}>
         <GroupHeadingText>{group}</GroupHeadingText>
       </Heading>
       <Navigation aria-labelledby={headingComponentsId}>

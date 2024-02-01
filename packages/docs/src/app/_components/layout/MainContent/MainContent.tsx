@@ -1,18 +1,22 @@
 import { FC, PropsWithChildren, ReactNode } from "react";
-import styles from "./MainContent.module.scss";
 import Heading from "@mittwald/flow-next-components/Heading";
+import styles from "./MainContent.module.css";
 
 interface Props extends PropsWithChildren {
   title?: ReactNode;
+  description?: ReactNode;
 }
 
 export const MainContent: FC<Props> = (props) => {
-  const { title, children } = props;
+  const { title, description, children } = props;
   return (
-    <div className={styles.root}>
-      <Heading level={2}>{title}</Heading>
-      <div className={styles.mainContent}>{children}</div>
-    </div>
+    <>
+      <Heading className={styles.heading} level={1}>
+        {title}
+      </Heading>
+      {description && <p className={styles.description}>{description}</p>}
+      {children}
+    </>
   );
 };
 

@@ -4,6 +4,7 @@ import humanizeString from "humanize-string";
 export interface MdxFileMeta {
   title?: string;
   navTitle?: string;
+  description?: string;
 }
 
 export interface StaticParams {
