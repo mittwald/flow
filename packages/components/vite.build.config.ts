@@ -41,6 +41,7 @@ export default defineConfig(
           Tooltip: "./src/components/Tooltip/index.ts",
           TooltipTrigger:
             "./src/components/Tooltip/components/TooltipTrigger/index.ts",
+          stylesInit: "./src/styles/index.ts",
         },
         formats: ["es"],
       },

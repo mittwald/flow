@@ -3,7 +3,8 @@
   "version": "0.1.0-alpha.4",
   "type": "module",
   "exports": {
-    ".": "./dist/variables.css"
+    ".": "./dist/variables.css",
+    "./variables": "./dist/variables.css"
   },
   "files": [
     "dist"
