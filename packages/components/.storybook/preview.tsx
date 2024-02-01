@@ -1,3 +1,4 @@
+import "../src/styles";
 import { Preview } from "@storybook/react";
 import React from "react";
 
