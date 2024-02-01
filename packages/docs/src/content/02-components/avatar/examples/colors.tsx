@@ -6,12 +6,12 @@ import Initials from "@mittwald/flow-next-components/Initials";
     <Initials>Gillian Gopher</Initials>
   </Avatar>
   <Avatar size="m">
-    <Initials>James Holden</Initials>
+    <Initials>Gustav Gopher</Initials>
   </Avatar>
   <Avatar size="m">
-    <Initials>Peter Parker</Initials>
+    <Initials>Gina-Lisa Gopher</Initials>
   </Avatar>
   <Avatar size="m">
-    <Initials>Amos Burton</Initials>
+    <Initials>Gorgio Gopher</Initials>
   </Avatar>
 </Row>;
