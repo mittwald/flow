@@ -25,6 +25,11 @@
   }
 }
 
+.icon,
+.icon svg {
+  display: block;
+}
+
 .small {
   font-size: var(--button--font-size-small);
   padding-block: var(--button--padding-small-squished-y);
