@@ -33,6 +33,7 @@ export const Button: FC<ButtonProps> = (props) => {
   const propsContext: PropsContext = {
     Icon: {
       className: styles.icon,
+      "aria-hidden": true,
     },
   };
 
