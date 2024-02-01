@@ -41,9 +41,10 @@ export default function extractDefaultExport(code: string): string {
   if (
     defaultExport.declaration.type === "ArrowFunctionExpression" ||
     defaultExport.declaration.type === "JSXElement" ||
+    (defaultExport.declaration.type as string) === "JSXFragment" ||
     defaultExport.declaration.type === "FunctionDeclaration"
   ) {
-    return extractCode(code, defaultExport!.declaration);
+    return extractCode(code, defaultExport.declaration as Expression);
   }
 
   throw Error("No default export or top-level expression found.");
@@ -53,7 +54,10 @@ function extractCode(
   code: string,
   expression: Expression | FunctionDeclaration | AnonymousFunctionDeclaration,
 ) {
-  if (expression.type === "JSXElement") {
+  if (
+    expression.type === "JSXElement" ||
+    (expression.type as string) === "JSXFragment"
+  ) {
     return code.slice(expression.start, expression.end);
   }
   if (expression.type === "ArrowFunctionExpression") {
