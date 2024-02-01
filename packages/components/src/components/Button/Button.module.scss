@@ -3,7 +3,7 @@
 .button {
   border: none;
   border-radius: var(--button--border-radius);
-  display: flex;
+  display: inline-flex;
   flex-direction: row;
   align-items: center;
   padding-block: var(--button--padding-squished-y);
