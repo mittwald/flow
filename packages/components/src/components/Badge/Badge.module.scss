@@ -9,7 +9,7 @@
   padding-inline: var(--badge--padding-x);
   height: var(--badge--height);
   line-height: var(--size-rem--m);
-  display: grid;
+  display: inline-grid;
   grid-template-areas: "icon content";
   grid-template-columns: auto 1fr;
   column-gap: var(--badge--icon-to-text-spacing);
