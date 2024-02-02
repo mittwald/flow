@@ -4,12 +4,11 @@
 
   svg {
     height: 1em;
-    width: 1em;
     display: inline-block;
     margin: 0 auto;
   }
 }
 
-.fixedWidth {
+.fixedWidth svg {
   width: 1.25em;
 }
