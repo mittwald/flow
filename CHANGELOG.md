@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.6](https://github.com/mittwald/flow/compare/0.1.0-alpha.5...0.1.0-alpha.6) (2024-02-02)
+
+### Bug Fixes
+
+- **Avatar:** Avatar must keep aspect ration
+  ([1844b73](https://github.com/mittwald/flow/commit/1844b737e63c9a62a58646b032076bc0177b0ec7))
+- **docs:** fix type error
+  ([458a6e1](https://github.com/mittwald/flow/commit/458a6e1e2940e25fdad9f7ca491f1c6df1b0c255))
+- **Icon:** fixed width should be set on SVG
+  ([49d4137](https://github.com/mittwald/flow/commit/49d413709e13d2c750acf6a07c5af67aa0d51e0a))
+- **Icon:** SVG should be centered
+  ([c60e836](https://github.com/mittwald/flow/commit/c60e836d7736e48c26efca1b85b00d604df9f2ee))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.5](https://github.com/mittwald/flow/compare/0.1.0-alpha.4...0.1.0-alpha.5) (2024-02-01)
 
 ### Bug Fixes
