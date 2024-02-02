@@ -6,8 +6,7 @@
   "homepage": "https://mittwald.github.io/flow/01-getting-started/installation",
   "repository": "https://github.com/mittwald/flow",
   "exports": {
-    ".": "./dist/variables.css",
-    "./variables": "./dist/variables.css"
+    "./css": "./dist/variables.css"
   },
   "files": [
     "dist"

@@ -6,7 +6,7 @@
   "homepage": "https://mittwald.github.io/flow/01-getting-started/installation",
   "repository": "https://github.com/mittwald/flow",
   "exports": {
-    ".": "./dist/styles.css"
+    "./css": "./dist/styles.css"
   },
   "files": [
     "dist"
