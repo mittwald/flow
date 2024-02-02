@@ -1,6 +1,9 @@
 import styles from "./customComponents.module.css";
 import Heading from "@mittwald/flow-next-components/Heading";
 import { MDXComponents } from "mdx/types";
+import Note from "@mittwald/flow-next-components/Note";
+import Content from "@mittwald/flow-next-components/Content";
+import React, { Children, isValidElement } from "react";
 
 export const customComponents: MDXComponents = {
   pre: ({ children }) => <pre className={styles.pre}>{children}</pre>,
@@ -8,6 +11,15 @@ export const customComponents: MDXComponents = {
   code: ({ children }) => <code className={styles.code}>{children}</code>,
 
   p: ({ children }) => <p className={styles.p}>{children}</p>,
+
+  blockquote: ({ children }) => (
+    <Note>
+      <Heading>{Children.toArray(children).find(isValidElement)}</Heading>
+      <Content>
+        {Children.toArray(children).filter(isValidElement).slice(1)}
+      </Content>
+    </Note>
+  ),
 
   h2: ({ children }) => (
     <Heading level={2} className={styles.heading2}>
