@@ -2,9 +2,10 @@
 /* auto-generated file */
 import { ImportMapping } from "@/lib/liveCode/types";
 import { lazy } from "react";
-import { faStar as I9 } from "@fortawesome/free-regular-svg-icons/faStar";
+import { faStar as I6 } from "@fortawesome/free-regular-svg-icons/faStar";
 import { faSnowboarding as I10 } from "@fortawesome/free-solid-svg-icons/faSnowboarding";
 import { faSnowplow as I11 } from "@fortawesome/free-solid-svg-icons/faSnowplow";
+import { faCirclePlay as I16 } from "@fortawesome/free-solid-svg-icons/faCirclePlay";
 
 export const liveCodeEditorGlobalImports: ImportMapping = {
   "Avatar:@mittwald/flow-next-components/Avatar": lazy(() => import("@mittwald/flow-next-components/Avatar")),
@@ -13,11 +14,15 @@ export const liveCodeEditorGlobalImports: ImportMapping = {
 "Badge:@mittwald/flow-next-components/Badge": lazy(() => import("@mittwald/flow-next-components/Badge")),
 "Text:@mittwald/flow-next-components/Text": lazy(() => import("@mittwald/flow-next-components/Text")),
 "Icon:@mittwald/flow-next-components/Icon": lazy(() => import("@mittwald/flow-next-components/Icon")),
+"faStar:@fortawesome/free-regular-svg-icons/faStar": I6,
 "Button:@mittwald/flow-next-components/Button": lazy(() => import("@mittwald/flow-next-components/Button")),
 "Checkbox:@mittwald/flow-next-components/Checkbox": lazy(() => import("@mittwald/flow-next-components/Checkbox")),
 "Heading:@mittwald/flow-next-components/Heading": lazy(() => import("@mittwald/flow-next-components/Heading")),
-"faStar:@fortawesome/free-regular-svg-icons/faStar": I9,
 "faSnowboarding:@fortawesome/free-solid-svg-icons/faSnowboarding": I10,
 "faSnowplow:@fortawesome/free-solid-svg-icons/faSnowplow": I11,
+"Label:@mittwald/flow-next-components/Label": lazy(() => import("@mittwald/flow-next-components/Label")),
 "Link:@mittwald/flow-next-components/Link": lazy(() => import("@mittwald/flow-next-components/Link")),
+"Note:@mittwald/flow-next-components/Note": lazy(() => import("@mittwald/flow-next-components/Note")),
+"Content:@mittwald/flow-next-components/Content": lazy(() => import("@mittwald/flow-next-components/Content")),
+"faCirclePlay:@fortawesome/free-solid-svg-icons/faCirclePlay": I16,
 };
