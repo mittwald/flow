@@ -2,6 +2,9 @@
   "name": "@mittwald/flow-next-components",
   "version": "0.1.0-alpha.5",
   "type": "module",
+  "description": "A React implementation of Flow, mittwald’s design system",
+  "homepage": "https://mittwald.github.io/flow/01-getting-started/installation",
+  "repository": "https://github.com/mittwald/flow",
   "exports": {
     "./Avatar": "./dist/Avatar.js",
     "./Badge": "./dist/Badge.js",

@@ -2,6 +2,9 @@
   "name": "@mittwald/flow-next-design-tokens",
   "version": "0.1.0-alpha.5",
   "type": "module",
+  "description": "The design tokens used in Flow, mittwald’s design system",
+  "homepage": "https://mittwald.github.io/flow/01-getting-started/installation",
+  "repository": "https://github.com/mittwald/flow",
   "exports": {
     ".": "./dist/variables.css",
     "./variables": "./dist/variables.css"
