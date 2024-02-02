@@ -1,11 +1,12 @@
 import { liveCodeEditorGlobalImports } from "@/lib/liveCode/dynamicImports";
-import { ComponentType } from "react";
+import { FC } from "react";
 
-export const getDynamicComponent = (name: string): ComponentType<never> => {
-  if (!(name in liveCodeEditorGlobalImports)) {
+export const getDynamicComponent = (name: string): unknown => {
+  const MissingComponentComplainer: FC<never> = () => {
     throw new Error(
-      `Could not find ${name} in generatedImports. Run 'yarn build:imports'.`,
+      `Could not find component '${name}'. Run 'yarn build:imports'.`,
     );
-  }
-  return liveCodeEditorGlobalImports[name];
+  };
+
+  return liveCodeEditorGlobalImports[name] ?? MissingComponentComplainer;
 };

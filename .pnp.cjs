@@ -5079,6 +5079,8 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./packages/docs/",\
         "packageDependencies": [\
           ["@mittwald/flow-next-documentation", "workspace:packages/docs"],\
+          ["@fortawesome/free-regular-svg-icons", "npm:6.5.1"],\
+          ["@fortawesome/free-solid-svg-icons", "npm:6.5.1"],\
           ["@mdx-js/loader", "virtual:c8483f40a294888f2cccf27b20488986eaec205ef7fbcdc8948dd935483985d3b2cbb1df52636fb2a6a95b012dba5f48b0003a220d2438618adabbbff5cc9ca4#npm:3.0.0"],\
           ["@mdx-js/react", "virtual:c8483f40a294888f2cccf27b20488986eaec205ef7fbcdc8948dd935483985d3b2cbb1df52636fb2a6a95b012dba5f48b0003a220d2438618adabbbff5cc9ca4#npm:3.0.0"],\
           ["@mfalkenberg/react-live-ssr", "virtual:c8483f40a294888f2cccf27b20488986eaec205ef7fbcdc8948dd935483985d3b2cbb1df52636fb2a6a95b012dba5f48b0003a220d2438618adabbbff5cc9ca4#npm:4.1.7"],\

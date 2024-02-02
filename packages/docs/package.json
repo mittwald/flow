@@ -15,6 +15,8 @@
     "test:tsc": "tsc --noEmit"
   },
   "dependencies": {
+    "@fortawesome/free-regular-svg-icons": "^6.5.1",
+    "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@mdx-js/loader": "^3.0.0",
     "@mdx-js/react": "^3.0.0",
     "@mfalkenberg/react-live-ssr": "^4.1.7",

@@ -1,3 +1,1 @@
-import { ComponentType } from "react";
-
-export interface ImportMapping extends Record<string, ComponentType<never>> {}
+export interface ImportMapping extends Record<string, unknown> {}
