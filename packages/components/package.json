@@ -57,6 +57,7 @@
     "html-react-parser": "^5.1.1",
     "react-aria": "^3.31.1",
     "react-aria-components": "^1.0.1",
+    "react-children-utilities": "^2.10.0",
     "react-stately": "^3.29.1",
     "remeda": "^1.40.0"
   },

@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, ReactNode } from "react";
 import copy from "copy-to-clipboard";
 import { Button } from "@/components/Button";
 import { Icon } from "@/components/Icon";
@@ -6,9 +6,10 @@ import { faCopy } from "@fortawesome/free-regular-svg-icons/faCopy";
 import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 import { Tooltip, TooltipTrigger } from "@/components/Tooltip";
+import { onlyText } from "react-children-utilities";
 
 export interface CopyButtonProps {
-  value: string;
+  value: ReactNode;
   className?: string;
 }
 
@@ -20,7 +21,7 @@ export const CopyButton: FC<CopyButtonProps> = (props) => {
   const tooltip = stringFormatter.format("copyButton.copy");
 
   const copyValue = () => {
-    copy(value);
+    copy(onlyText(value));
   };
 
   return (

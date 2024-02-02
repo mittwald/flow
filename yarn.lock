@@ -2966,6 +2966,7 @@ __metadata:
     react: "npm:^18.2.0"
     react-aria: "npm:^3.31.1"
     react-aria-components: "npm:^1.0.1"
+    react-children-utilities: "npm:^2.10.0"
     react-dom: "npm:^18.2.0"
     react-element-to-jsx-string: "npm:^15.0.0"
     react-stately: "npm:^3.29.1"
@@ -19276,6 +19277,15 @@ __metadata:
     react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
     react-dom: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
   checksum: a80a24c528960dc0fdbd47b27ba148804b3dabaede50c2026b892f35ccfceee07f2fe93b6ad8336caa909cf38118f34507e81eac8c89b81eefcba6dcc343d551
+  languageName: node
+  linkType: hard
+
+"react-children-utilities@npm:^2.10.0":
+  version: 2.10.0
+  resolution: "react-children-utilities@npm:2.10.0"
+  peerDependencies:
+    react: ">=15"
+  checksum: 6a7e2ec7a43eaf4d4b55543b0f2a8c9ecb94071e6fad303d5a3b026fc23422b01955f82157dd5d2f3e8d0d70a3af2f6aa781d71a520a09047649a4f129234bb9
   languageName: node
   linkType: hard
 
