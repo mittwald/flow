@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.7](https://github.com/mittwald/flow/compare/0.1.0-alpha.6...0.1.0-alpha.7) (2024-02-02)
+
+### Bug Fixes
+
+- **Note:** enforce visible custom icons
+  ([97077aa](https://github.com/mittwald/flow/commit/97077aa232e0d5d12c9c58f80070a2a0e143ad00))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.6](https://github.com/mittwald/flow/compare/0.1.0-alpha.5...0.1.0-alpha.6) (2024-02-02)
 
 ### Bug Fixes
