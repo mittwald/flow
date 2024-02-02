@@ -3,6 +3,7 @@
   width: var(--avatar-size);
   height: var(--avatar-size);
   overflow: hidden;
+  flex-shrink: 0;
 
   > img {
     width: 100%;
