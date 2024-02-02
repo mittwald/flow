@@ -3,7 +3,7 @@
   "version": "0.1.0-alpha.6",
   "type": "module",
   "description": "The design tokens used in Flow, mittwald’s design system",
-  "homepage": "https://mittwald.github.io/flow/01-getting-started/installation",
+  "homepage": "https://mittwald.github.io/flow",
   "repository": "https://github.com/mittwald/flow",
   "exports": {
     "./css": "./dist/variables.css"
