@@ -4,9 +4,15 @@ import { MDXComponents } from "mdx/types";
 import Note from "@mittwald/flow-next-components/Note";
 import Content from "@mittwald/flow-next-components/Content";
 import React, { Children, isValidElement } from "react";
+import CopyButton from "@mittwald/flow-next-components/CopyButton";
 
 export const customComponents: MDXComponents = {
-  pre: ({ children }) => <pre className={styles.pre}>{children}</pre>,
+  pre: ({ children }) => (
+    <div className={styles.preContainer}>
+      <pre className={styles.pre}>{children}</pre>
+      <CopyButton className={styles.preCopyButton} value={children} />
+    </div>
+  ),
 
   code: ({ children }) => <code className={styles.code}>{children}</code>,
 
