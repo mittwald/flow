@@ -7,7 +7,9 @@ export const liveCodeEditorGlobalImports: ImportMapping = {
   "Avatar:@mittwald/flow-next-components/Avatar": lazy(() => import("@mittwald/flow-next-components/Avatar")),
 "Initials:@mittwald/flow-next-components/Initials": lazy(() => import("@mittwald/flow-next-components/Initials")),
 "Image:@mittwald/flow-next-components/Image": lazy(() => import("@mittwald/flow-next-components/Image")),
-"Button:@mittwald/flow-next-components/Button": lazy(() => import("@mittwald/flow-next-components/Button")),
+"Badge:@mittwald/flow-next-components/Badge": lazy(() => import("@mittwald/flow-next-components/Badge")),
+"Text:@mittwald/flow-next-components/Text": lazy(() => import("@mittwald/flow-next-components/Text")),
 "Icon:@mittwald/flow-next-components/Icon": lazy(() => import("@mittwald/flow-next-components/Icon")),
+"Button:@mittwald/flow-next-components/Button": lazy(() => import("@mittwald/flow-next-components/Button")),
 "Link:@mittwald/flow-next-components/Link": lazy(() => import("@mittwald/flow-next-components/Link")),
 };
