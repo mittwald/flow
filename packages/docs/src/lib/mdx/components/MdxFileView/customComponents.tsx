@@ -4,13 +4,18 @@ import { MDXComponents } from "mdx/types";
 import Note from "@mittwald/flow-next-components/Note";
 import Content from "@mittwald/flow-next-components/Content";
 import React, { Children, isValidElement } from "react";
-import CopyButton from "@mittwald/flow-next-components/CopyButton";
+import CopyToClipboardButton from "@mittwald/flow-next-components/CopyToClipboardButton";
 
 export const customComponents: MDXComponents = {
   pre: ({ children }) => (
     <div className={styles.preContainer}>
       <pre className={styles.pre}>{children}</pre>
-      <CopyButton className={styles.preCopyButton} value={children} />
+      <CopyToClipboardButton
+        className={styles.preCopyButton}
+        text={children}
+        variant="plain"
+        small
+      />
     </div>
   ),
 

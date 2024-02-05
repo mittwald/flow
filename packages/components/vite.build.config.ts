@@ -19,7 +19,8 @@ export default defineConfig(
           Button: "./src/components/Button/index.ts",
           Checkbox: "./src/components/Checkbox/index.ts",
           Content: "./src/components/Content/index.ts",
-          CopyButton: "./src/components/CopyButton/index.ts",
+          CopyToClipboardButton:
+            "./src/components/CopyToClipboardButton/index.ts",
           FieldDescription: "./src/components/FieldDescription/index.ts",
           FieldError: "./src/components/FieldError/index.ts",
           Heading: "./src/components/Heading/index.ts",

@@ -3,7 +3,7 @@ import LabeledValue from "../LabeledValue";
 import React from "react";
 import { Label } from "@/components/Label";
 import { Content } from "@/components/Content";
-import { CopyButton } from "@/components/CopyButton";
+import { CopyToClipboardButton } from "@/components/CopyToClipboardButton";
 
 const meta: Meta<typeof LabeledValue> = {
   title: "Content/Labeled Value",
@@ -29,7 +29,7 @@ export const WithCopyButton: Story = {
     <LabeledValue {...props}>
       <Label>Project</Label>
       <Content>My proSpace</Content>
-      <CopyButton value="My proSpace" />
+      <CopyToClipboardButton text="My proSpace" />
     </LabeledValue>
   ),
 };
