@@ -32,7 +32,6 @@ export default defineConfig(
           Link: "./src/components/Link/index.ts",
           Navigation: "./src/components/Navigation/index.ts",
           Note: "./src/components/Note/index.ts",
-          Radio: "./src/components/RadioGroup/components/Radio/index.ts",
           RadioGroup: "./src/components/RadioGroup/index.ts",
           StatusIcon: "./src/components/StatusIcon/index.ts",
           Switch: "./src/components/Switch/index.ts",
