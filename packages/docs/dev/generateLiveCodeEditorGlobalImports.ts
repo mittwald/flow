@@ -25,6 +25,10 @@ function mapImports(imports: ImportDefinition[]): Record<string, string> {
   );
 }
 
+function getNamedExport(name: string): string {
+  return name.split(":")[0];
+}
+
 async function generateImportMappings(
   pattern: string,
   outputPath: string,
@@ -45,7 +49,7 @@ async function generateImportMappings(
 
   const staticImports = Object.entries(imports).map(([name, source], index) => {
     if (nonComponentsMatcher?.test(name)) {
-      const namedExport = name.split(":")[0];
+      const namedExport = getNamedExport(name);
       return `import { ${namedExport} as I${index} } from "${source}";`;
     }
   });
@@ -54,7 +58,7 @@ async function generateImportMappings(
     if (nonComponentsMatcher?.test(name)) {
       return `"${name}": I${index},`;
     }
-    return `"${name}": lazy(() => import("${source}")),`;
+    return `"${name}": lazy(() => import("${source}").then(module => ({ default: module.${getNamedExport(name)} } ))),`;
   });
 
   const generatedFileContents = `
