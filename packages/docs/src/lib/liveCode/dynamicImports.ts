@@ -22,7 +22,9 @@ export const liveCodeEditorGlobalImports: ImportMapping = {
 "faSnowboarding:@fortawesome/free-solid-svg-icons/faSnowboarding": I11,
 "faSnowplow:@fortawesome/free-solid-svg-icons/faSnowplow": I12,
 "Label:@mittwald/flow-next-components/Label": lazy(() => import("@mittwald/flow-next-components/Label")),
+"LabeledValue:@mittwald/flow-next-components/LabeledValue": lazy(() => import("@mittwald/flow-next-components/LabeledValue")),
+"Content:@mittwald/flow-next-components/Content": lazy(() => import("@mittwald/flow-next-components/Content")),
+"CopyToClipboardButton:@mittwald/flow-next-components/CopyToClipboardButton": lazy(() => import("@mittwald/flow-next-components/CopyToClipboardButton")),
 "Link:@mittwald/flow-next-components/Link": lazy(() => import("@mittwald/flow-next-components/Link")),
 "Note:@mittwald/flow-next-components/Note": lazy(() => import("@mittwald/flow-next-components/Note")),
-"Content:@mittwald/flow-next-components/Content": lazy(() => import("@mittwald/flow-next-components/Content")),
 };
