@@ -36,4 +36,6 @@ export const liveCodeEditorGlobalImports: ImportMapping = {
 "Note:@mittwald/flow-next-components/Note": lazy(() => import("@mittwald/flow-next-components/Note").then(module => ({ default: module.Note } ))),
 "RadioGroup:@mittwald/flow-next-components/RadioGroup": lazy(() => import("@mittwald/flow-next-components/RadioGroup").then(module => ({ default: module.RadioGroup } ))),
 "Radio:@mittwald/flow-next-components/RadioGroup": lazy(() => import("@mittwald/flow-next-components/RadioGroup").then(module => ({ default: module.Radio } ))),
+"StatusIcon:@mittwald/flow-next-components/StatusIcon": lazy(() => import("@mittwald/flow-next-components/StatusIcon").then(module => ({ default: module.StatusIcon } ))),
+"Switch:@mittwald/flow-next-components/Switch": lazy(() => import("@mittwald/flow-next-components/Switch").then(module => ({ default: module.Switch } ))),
 };
