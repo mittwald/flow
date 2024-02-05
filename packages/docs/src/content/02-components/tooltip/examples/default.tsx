@@ -1,4 +1,3 @@
-import React from "react";
 import Tooltip, {
   TooltipTrigger,
 } from "@mittwald/flow-next-components/Tooltip";
