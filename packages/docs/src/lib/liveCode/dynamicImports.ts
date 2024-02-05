@@ -9,7 +9,7 @@ import { faSnowplow as I12 } from "@fortawesome/free-solid-svg-icons/faSnowplow"
 import { NavigationItem as I19 } from "@mittwald/flow-next-components/Navigation";
 import { faUser as I20 } from "@fortawesome/free-regular-svg-icons/faUser";
 import { faHardDrive as I21 } from "@fortawesome/free-regular-svg-icons/faHardDrive";
-import { faSave as I33 } from "@fortawesome/free-regular-svg-icons/faSave";
+import { faSave as I32 } from "@fortawesome/free-regular-svg-icons/faSave";
 
 export const liveCodeEditorGlobalImports: ImportMapping = {
   "Avatar:@mittwald/flow-next-components/Avatar": lazy(() => import("@mittwald/flow-next-components/Avatar").then(module => ({ default: module.Avatar } ))),
@@ -42,8 +42,7 @@ export const liveCodeEditorGlobalImports: ImportMapping = {
 "FieldDescription:@mittwald/flow-next-components/FieldDescription": lazy(() => import("@mittwald/flow-next-components/FieldDescription").then(module => ({ default: module.FieldDescription } ))),
 "TextArea:@mittwald/flow-next-components/TextArea": lazy(() => import("@mittwald/flow-next-components/TextArea").then(module => ({ default: module.TextArea } ))),
 "TextField:@mittwald/flow-next-components/TextField": lazy(() => import("@mittwald/flow-next-components/TextField").then(module => ({ default: module.TextField } ))),
-"React:react": lazy(() => import("react").then(module => ({ default: module.React } ))),
 "Tooltip:@mittwald/flow-next-components/Tooltip": lazy(() => import("@mittwald/flow-next-components/Tooltip").then(module => ({ default: module.Tooltip } ))),
 "TooltipTrigger:@mittwald/flow-next-components/Tooltip": lazy(() => import("@mittwald/flow-next-components/Tooltip").then(module => ({ default: module.TooltipTrigger } ))),
-"faSave:@fortawesome/free-regular-svg-icons/faSave": I33,
+"faSave:@fortawesome/free-regular-svg-icons/faSave": I32,
 };
