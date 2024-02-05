@@ -1,7 +1,7 @@
 .radioGroup {
   display: flex;
   flex-wrap: wrap;
-  container-type: size;
+  container-type: inline-size;
   isolation: isolate;
 
   /* With icon or content */
