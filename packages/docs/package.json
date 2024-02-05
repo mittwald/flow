@@ -64,7 +64,8 @@
           "^build"
         ],
         "inputs": [
-          "{projectRoot}/src/content/**/*.tsx"
+          "{projectRoot}/src/content/**/*.tsx",
+          "{projectRoot}/dev/generateLiveCodeEditorGlobalImports.ts"
         ],
         "outputs": [
           "{projectRoot}/src/lib/liveCode/dynamicImports.ts"

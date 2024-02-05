@@ -6,6 +6,9 @@ import { faCirclePlay as I6 } from "@fortawesome/free-solid-svg-icons/faCirclePl
 import { faStar as I8 } from "@fortawesome/free-regular-svg-icons/faStar";
 import { faSnowboarding as I11 } from "@fortawesome/free-solid-svg-icons/faSnowboarding";
 import { faSnowplow as I12 } from "@fortawesome/free-solid-svg-icons/faSnowplow";
+import { NavigationItem as I19 } from "@mittwald/flow-next-components/Navigation";
+import { faUser as I20 } from "@fortawesome/free-regular-svg-icons/faUser";
+import { faHardDrive as I21 } from "@fortawesome/free-regular-svg-icons/faHardDrive";
 
 export const liveCodeEditorGlobalImports: ImportMapping = {
   "Avatar:@mittwald/flow-next-components/Avatar": lazy(() => import("@mittwald/flow-next-components/Avatar")),
@@ -26,5 +29,9 @@ export const liveCodeEditorGlobalImports: ImportMapping = {
 "Content:@mittwald/flow-next-components/Content": lazy(() => import("@mittwald/flow-next-components/Content")),
 "CopyToClipboardButton:@mittwald/flow-next-components/CopyToClipboardButton": lazy(() => import("@mittwald/flow-next-components/CopyToClipboardButton")),
 "Link:@mittwald/flow-next-components/Link": lazy(() => import("@mittwald/flow-next-components/Link")),
+"Navigation:@mittwald/flow-next-components/Navigation": lazy(() => import("@mittwald/flow-next-components/Navigation")),
+"NavigationItem:@mittwald/flow-next-components/Navigation": I19,
+"faUser:@fortawesome/free-regular-svg-icons/faUser": I20,
+"faHardDrive:@fortawesome/free-regular-svg-icons/faHardDrive": I21,
 "Note:@mittwald/flow-next-components/Note": lazy(() => import("@mittwald/flow-next-components/Note")),
 };

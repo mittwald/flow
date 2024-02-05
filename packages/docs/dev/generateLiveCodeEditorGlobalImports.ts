@@ -9,7 +9,7 @@ import { sortBy } from "remeda";
 void generateImportMappings(
   "./src/content/**/examples/*.tsx",
   "./src/lib/liveCode/dynamicImports.ts",
-  /@fortawesome/,
+  /(@fortawesome|NavigationItem)/,
 );
 
 interface ImportDefinition {
