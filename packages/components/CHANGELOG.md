@@ -3,6 +3,76 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.8](https://github.com/mittwald/flow/compare/0.1.0-alpha.7...0.1.0-alpha.8) (2024-02-06)
+
+### Bug Fixes
+
+- **RadioGroup:** fix zero height
+  ([3143b1c](https://github.com/mittwald/flow/commit/3143b1c164afe9f3d412f6c706c2746e9629a5bc))
+
+### Features
+
+- **CopyButton:** allow React node as copy source
+  ([59ad013](https://github.com/mittwald/flow/commit/59ad01387d8d87d67aeef1a9938fe124dc82f1bd))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.7](https://github.com/mittwald/flow/compare/0.1.0-alpha.6...0.1.0-alpha.7) (2024-02-02)
+
+### Bug Fixes
+
+- **Note:** enforce visible custom icons
+  ([97077aa](https://github.com/mittwald/flow/commit/97077aa232e0d5d12c9c58f80070a2a0e143ad00))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.6](https://github.com/mittwald/flow/compare/0.1.0-alpha.5...0.1.0-alpha.6) (2024-02-02)
+
+### Bug Fixes
+
+- **Avatar:** Avatar must keep aspect ration
+  ([1844b73](https://github.com/mittwald/flow/commit/1844b737e63c9a62a58646b032076bc0177b0ec7))
+- **Icon:** fixed width should be set on SVG
+  ([49d4137](https://github.com/mittwald/flow/commit/49d413709e13d2c750acf6a07c5af67aa0d51e0a))
+- **Icon:** SVG should be centered
+  ([c60e836](https://github.com/mittwald/flow/commit/c60e836d7736e48c26efca1b85b00d604df9f2ee))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.5](https://github.com/mittwald/flow/compare/0.1.0-alpha.4...0.1.0-alpha.5) (2024-02-01)
+
+### Bug Fixes
+
+- **Badge:** should be an inline element
+  ([2870587](https://github.com/mittwald/flow/commit/287058764d53f62db25b70f38994a57bde69bf07))
+- **Button:** icon is not centered
+  ([28d3f81](https://github.com/mittwald/flow/commit/28d3f819022f02d5709113d039ac8e3e0da6ef0b))
+- **Button:** should be an inline element
+  ([c636747](https://github.com/mittwald/flow/commit/c636747def24cccffd954819f3260d7ad880f87f))
+- include Font Awesome styles in initial stylesheet
+  ([fe6c060](https://github.com/mittwald/flow/commit/fe6c06053ae0726699c20bc4621ce5a75554242a))
+- **Storybook:** missing styles
+  ([f5b51d0](https://github.com/mittwald/flow/commit/f5b51d05c8e0fdfa0b4f5a581216e81891ab82b7))
+
+### Features
+
+- **Icon:** support fixed width
+  ([f057ddb](https://github.com/mittwald/flow/commit/f057ddbe41d33a51662876f63ddd1b5fbb010e4f))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.4](https://github.com/mittwald/flow/compare/0.1.0-alpha.3...0.1.0-alpha.4) (2024-01-30)
 
 ### Features
@@ -48,7 +118,7 @@ All notable changes to this project will be documented in this file. See
 
 # [0.1.0-alpha.1](https://github.com/mittwald/flow/compare/0.1.0-alpha.0...0.1.0-alpha.1) (2024-01-25)
 
-**Note:** Version bump only for package @mittwald/flow-next-components
+**Note:** Version bump only for package @mittwald/flow-react-components
 
 # Change Log
 

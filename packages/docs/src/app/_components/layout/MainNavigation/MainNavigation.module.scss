@@ -1,3 +1,6 @@
 .heading {
-  margin-bottom: var(--size-rem--m);
+  margin: var(--size-rem--xl) 0 var(--size-rem--s) 0;
+  &:first-of-type {
+    margin-top: 0;
+  }
 }

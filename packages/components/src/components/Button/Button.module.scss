@@ -1,9 +1,7 @@
-@import "@/styles";
-
 .button {
   border: none;
   border-radius: var(--button--border-radius);
-  display: flex;
+  display: inline-flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
@@ -19,6 +17,11 @@
   &:has(.icon) {
     padding: var(--button--padding);
   }
+}
+
+.icon,
+.icon svg {
+  display: block;
 }
 
 .small {

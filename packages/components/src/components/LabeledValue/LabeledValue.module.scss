@@ -1,5 +1,3 @@
-@import "@/styles";
-
 .labeledValue {
   display: grid;
   grid-template-areas:
@@ -9,10 +7,10 @@
   column-gap: var(--labeled-value--value-to-button-spacing);
   grid-template-columns: auto 1fr;
 
-  &:has(.button) {
+  &:has(.copyButton) {
     grid-template-areas:
-      "label label"
-      "value button";
+      "label label     "
+      "value copy-button";
   }
 }
 
@@ -24,7 +22,7 @@
   grid-area: value;
 }
 
-.button {
-  grid-area: button;
+.copyButton {
+  grid-area: copy-button;
   justify-self: start;
 }

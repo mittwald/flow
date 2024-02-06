@@ -1,5 +1,5 @@
 import type { MDXComponents } from "mdx/types";
-import Heading from "@mittwald/flow-next-components/Heading";
+import Heading from "@mittwald/flow-react-components/Heading";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {

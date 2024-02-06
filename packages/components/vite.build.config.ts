@@ -19,7 +19,8 @@ export default defineConfig(
           Button: "./src/components/Button/index.ts",
           Checkbox: "./src/components/Checkbox/index.ts",
           Content: "./src/components/Content/index.ts",
-          CopyButton: "./src/components/CopyButton/index.ts",
+          CopyToClipboardButton:
+            "./src/components/CopyToClipboardButton/index.ts",
           FieldDescription: "./src/components/FieldDescription/index.ts",
           FieldError: "./src/components/FieldError/index.ts",
           Heading: "./src/components/Heading/index.ts",
@@ -32,7 +33,6 @@ export default defineConfig(
           Navigation: "./src/components/Navigation/index.ts",
           Note: "./src/components/Note/index.ts",
           NumberField: "./src/components/NumberField/index.ts",
-          Radio: "./src/components/RadioGroup/components/Radio/index.ts",
           RadioGroup: "./src/components/RadioGroup/index.ts",
           StatusIcon: "./src/components/StatusIcon/index.ts",
           Switch: "./src/components/Switch/index.ts",
@@ -42,6 +42,7 @@ export default defineConfig(
           Tooltip: "./src/components/Tooltip/index.ts",
           TooltipTrigger:
             "./src/components/Tooltip/components/TooltipTrigger/index.ts",
+          stylesInit: "./src/styles/index.ts",
         },
         formats: ["es"],
       },

@@ -37,9 +37,6 @@
     },
     "start": {
       "dependsOn": ["build"]
-    },
-    "build:imports": {
-      "cache": true
     }
   }
 }

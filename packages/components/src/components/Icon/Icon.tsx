@@ -22,6 +22,7 @@ type SvgAttributeProps = BackwardCompatibleOmit<
 
 export interface IconProps extends PropsWithChildren<SvgAttributeProps> {
   faIcon?: IconLookup;
+  fixedWidth?: boolean;
 }
 
 export const Icon: FC<IconProps> = (props) => {
@@ -30,6 +31,7 @@ export const Icon: FC<IconProps> = (props) => {
     className,
     "aria-label": ariaLabel,
     children,
+    fixedWidth,
     ...svgAttributes
   } = useProps("Icon", props);
 
@@ -46,13 +48,15 @@ export const Icon: FC<IconProps> = (props) => {
    * (line-height is applied), even if used in flex/grid layouts.
    */
   const spanProps: ComponentProps<"span"> = {
-    className: clsx(styles.icon, className),
+    className: clsx(styles.icon, className, {
+      [styles.fixedWidth]: fixedWidth,
+    }),
   };
 
   if (faIcon) {
     return (
       <span {...spanProps}>
-        <FontAwesomeIcon icon={faIcon} fixedWidth {...iconProps} />
+        <FontAwesomeIcon icon={faIcon} {...iconProps} />
       </span>
     );
   }
