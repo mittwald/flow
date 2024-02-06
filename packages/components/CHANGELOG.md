@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.8](https://github.com/mittwald/flow/compare/0.1.0-alpha.7...0.1.0-alpha.8) (2024-02-06)
+
+### Bug Fixes
+
+- **RadioGroup:** fix zero height
+  ([3143b1c](https://github.com/mittwald/flow/commit/3143b1c164afe9f3d412f6c706c2746e9629a5bc))
+
+### Features
+
+- **CopyButton:** allow React node as copy source
+  ([59ad013](https://github.com/mittwald/flow/commit/59ad01387d8d87d67aeef1a9938fe124dc82f1bd))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.7](https://github.com/mittwald/flow/compare/0.1.0-alpha.6...0.1.0-alpha.7) (2024-02-02)
 
 ### Bug Fixes
