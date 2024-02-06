@@ -4,6 +4,7 @@
   display: inline-flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
   padding-block: var(--button--padding-squished-y);
   padding-inline: var(--button--padding-squished-x);
   font-size: var(--font-size--default);
@@ -12,11 +13,6 @@
   transition-duration: var(--transition--duration--default);
 
   @extend .primary;
-
-  &[disabled] {
-    background-color: var(--button--disabled-background-color);
-    color: var(--button--disabled-color);
-  }
 
   &:has(.icon) {
     padding: var(--button--padding);
@@ -52,6 +48,11 @@
     &[data-pressed] {
       background-color: var(--button--#{$variant}-background-color--pressed);
       color: var(--button--#{$variant}-color--pressed);
+    }
+
+    &[disabled] {
+      background-color: var(--button--disabled-background-color);
+      color: var(--button--disabled-color);
     }
   }
 }

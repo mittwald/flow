@@ -23,6 +23,7 @@
     "./Link": "./dist/Link.js",
     "./Navigation": "./dist/Navigation.js",
     "./Note": "./dist/Note.js",
+    "./NumberField": "./dist/NumberField.js",
     "./RadioGroup": "./dist/RadioGroup.js",
     "./StatusIcon": "./dist/StatusIcon.js",
     "./Switch": "./dist/Switch.js",
