@@ -10,6 +10,7 @@ import { LiveCodeEditorProps } from "@/lib/liveCode/components/LiveCodeEditor/ty
 import extractDefaultExport from "@/lib/liveCode/components/LiveCodeEditor/lib/extractDefaultExport";
 import styles from "./LiveCodeEditor.module.css";
 import * as EditorComponents from "./components";
+import clsx from "clsx";
 
 // Waiting for https://github.com/FormidableLabs/react-live/issues/339
 const error = console.error;
@@ -19,7 +20,7 @@ console.error = (...args) => {
 };
 
 const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
-  const { code } = props;
+  const { code, className } = props;
 
   if (typeof code !== "string") {
     throw new Error("Expected code prop to be of type 'string'.");
@@ -46,7 +47,7 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
       }}
       transformCode={transformCode}
     >
-      <div className={styles.root}>
+      <div className={clsx(styles.root, className)}>
         <LivePreview className={styles.preview} />
         <div className={styles.editorContainer}>
           <LiveEditor className={styles.editor} />

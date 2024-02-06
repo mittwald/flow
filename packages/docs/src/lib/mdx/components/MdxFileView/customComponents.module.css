@@ -4,10 +4,17 @@
   border-top: var(--border-width--default) solid var(--neutral--color--500);
 }
 
-.p,
-.pre,
 .heading {
-  margin-bottom: 1em;
+  margin: 1.5em 0 0.5em 0;
+}
+
+.p {
+  margin: 0.5em 0;
+}
+
+.liveCodeEditor,
+.pre {
+  margin: 1em 0;
 }
 
 :not(.pre) .code,
@@ -21,7 +28,6 @@
 .pre {
   background-color: var(--neutral--color--300);
   padding: var(--size-px--s) var(--size-px--m);
-  margin-block: 1.5em;
   overflow: auto;
   display: block;
 }
@@ -35,4 +41,10 @@
   top: calc(-1 * var(--size-px--s));
   right: calc(-1 * var(--size-px--s));
   background: var(--neutral--color--100);
+}
+
+.ul {
+  list-style-type: disc;
+  padding-left: var(--size-rem--m);
+  margin-block: 1.5em;
 }

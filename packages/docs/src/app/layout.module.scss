@@ -48,3 +48,9 @@
   border-radius: var(--border-radius--default);
   padding: var(--size-px--m) var(--size-px--l);
 }
+
+@media (min-width: 1024px) {
+  .main {
+    padding: var(--size-px--l) var(--size-px--xl);
+  }
+}

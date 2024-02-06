@@ -23,6 +23,10 @@ export const customComponents: MDXComponents = {
 
   p: ({ children }) => <p className={styles.p}>{children}</p>,
 
+  ul: ({ children }) => <ul className={styles.ul}>{children}</ul>,
+
+  li: ({ children }) => <li className={styles.li}>{children}</li>,
+
   blockquote: ({ children }) => (
     <Note>
       <Heading>{Children.toArray(children).find(isValidElement)}</Heading>
