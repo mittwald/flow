@@ -1,5 +1,5 @@
 {
-  "name": "@mittwald/flow-next-project",
+  "name": "@mittwald/flow-project",
   "private": true,
   "version": "0.0.0",
   "packageManager": "yarn@4.0.2",
@@ -11,12 +11,12 @@
   "scripts": {
     "build": "lerna run build",
     "components:dev": "concurrently yarn:components:dev:base yarn:components:dev:watch",
-    "components:dev:base": "yarn workspace @mittwald/flow-next-components run dev",
-    "components:dev:watch": "yarn workspace @mittwald/flow-next-components run build:watch:dependents",
+    "components:dev:base": "yarn workspace @mittwald/flow-react-components run dev",
+    "components:dev:watch": "yarn workspace @mittwald/flow-react-components run build:watch:dependents",
     "dev:init-githooks": "yarn dlx simple-git-hooks",
     "docs:dev": "concurrently yarn:docs:dev:base yarn:docs:dev:watch",
-    "docs:dev:base": "yarn workspace @mittwald/flow-next-documentation run dev",
-    "docs:dev:watch": "yarn workspace @mittwald/flow-next-documentation run build:watch:dependents",
+    "docs:dev:base": "yarn workspace @mittwald/flow-documentation run dev",
+    "docs:dev:watch": "yarn workspace @mittwald/flow-documentation run build:watch:dependents",
     "format": "prettier --write '**/*.{ts,tsx,yaml,yml,json,md,mdx,js,cjs,mjs,css}'",
     "lint": "eslint .",
     "test": "lerna run test"

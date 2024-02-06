@@ -101,7 +101,7 @@ All notable changes to this project will be documented in this file. See
 
 # [0.1.0-alpha.1](https://github.com/mittwald/flow/compare/0.1.0-alpha.0...0.1.0-alpha.1) (2024-01-25)
 
-**Note:** Version bump only for package @mittwald/flow-next-components
+**Note:** Version bump only for package @mittwald/flow-react-components
 
 # Change Log
 

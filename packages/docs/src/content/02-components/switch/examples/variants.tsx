@@ -1,4 +1,4 @@
-import Switch from "@mittwald/flow-next-components/Switch";
+import Switch from "@mittwald/flow-react-components/Switch";
 
 <Row>
   <Switch variant="accent" defaultSelected>

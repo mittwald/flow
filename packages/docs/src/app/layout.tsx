@@ -1,4 +1,4 @@
-import "@mittwald/flow-next-components/styles";
+import "@mittwald/flow-react-components/styles";
 import "./global.scss";
 import "./layout.module.scss";
 import type { Metadata } from "next";
@@ -6,9 +6,9 @@ import React, { FC, PropsWithChildren } from "react";
 import MainNavigation from "@/app/_components/layout/MainNavigation/MainNavigation";
 import clsx from "clsx";
 import styles from "./layout.module.scss";
-import Heading from "@mittwald/flow-next-components/Heading";
+import Heading from "@mittwald/flow-react-components/Heading";
 import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
-import Badge from "@mittwald/flow-next-components/Badge";
+import Badge from "@mittwald/flow-react-components/Badge";
 
 export const metadata: Metadata = {
   title: "Flow – mittwald Design System",

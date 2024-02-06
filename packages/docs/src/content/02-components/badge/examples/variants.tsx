@@ -1,4 +1,4 @@
-import Badge from "@mittwald/flow-next-components/Badge";
+import Badge from "@mittwald/flow-react-components/Badge";
 
 <Row>
   <Badge variant="info">Info</Badge>

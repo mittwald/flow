@@ -1,5 +1,5 @@
 import { FC, PropsWithChildren, ReactNode } from "react";
-import Heading from "@mittwald/flow-next-components/Heading";
+import Heading from "@mittwald/flow-react-components/Heading";
 import styles from "./MainContent.module.css";
 
 interface Props extends PropsWithChildren {

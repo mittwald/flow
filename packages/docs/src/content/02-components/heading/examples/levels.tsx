@@ -1,4 +1,4 @@
-import Heading from "@mittwald/flow-next-components/Heading";
+import Heading from "@mittwald/flow-react-components/Heading";
 
 <>
   <Heading level={1}>This is a level 1 heading</Heading>

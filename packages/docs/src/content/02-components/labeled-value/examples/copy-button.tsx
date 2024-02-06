@@ -1,7 +1,7 @@
-import LabeledValue from "@mittwald/flow-next-components/LabeledValue";
-import Label from "@mittwald/flow-next-components/Label";
-import Content from "@mittwald/flow-next-components/Content";
-import CopyToClipboardButton from "@mittwald/flow-next-components/CopyToClipboardButton";
+import LabeledValue from "@mittwald/flow-react-components/LabeledValue";
+import Label from "@mittwald/flow-react-components/Label";
+import Content from "@mittwald/flow-react-components/Content";
+import CopyToClipboardButton from "@mittwald/flow-react-components/CopyToClipboardButton";
 
 <LabeledValue>
   <Label>Project ID</Label>

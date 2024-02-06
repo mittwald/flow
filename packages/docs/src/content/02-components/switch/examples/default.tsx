@@ -1,3 +1,3 @@
-import Switch from "@mittwald/flow-next-components/Switch";
+import Switch from "@mittwald/flow-react-components/Switch";
 
 <Switch defaultSelected>Autoresonder</Switch>;

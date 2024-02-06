@@ -1,5 +1,5 @@
 {
-  "name": "@mittwald/flow-next-stylesheet",
+  "name": "@mittwald/flow-stylesheet",
   "version": "0.1.0-alpha.7",
   "type": "module",
   "description": "A collection of CSS classes used in Flow, mittwald's design system.",
@@ -15,7 +15,7 @@
     "build": "node build.js"
   },
   "devDependencies": {
-    "@mittwald/flow-next-components": "workspace:^",
+    "@mittwald/flow-react-components": "workspace:^",
     "resolve-package-path": "^4.0.3"
   }
 }

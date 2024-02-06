@@ -1,3 +1,3 @@
-import Checkbox from "@mittwald/flow-next-components/Checkbox";
+import Checkbox from "@mittwald/flow-react-components/Checkbox";
 
 <Checkbox>Activate spam protection</Checkbox>;

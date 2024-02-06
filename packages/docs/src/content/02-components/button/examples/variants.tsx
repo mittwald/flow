@@ -1,4 +1,4 @@
-import Button from "@mittwald/flow-next-components/Button";
+import Button from "@mittwald/flow-react-components/Button";
 
 <Row>
   <Button variant="primary">Primary</Button>

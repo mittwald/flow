@@ -1,3 +1,3 @@
-import Label from "@mittwald/flow-next-components/Label";
+import Label from "@mittwald/flow-react-components/Label";
 
 <Label>This is a label</Label>;

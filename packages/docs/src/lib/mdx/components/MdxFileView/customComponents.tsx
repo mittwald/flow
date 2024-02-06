@@ -1,10 +1,10 @@
 import styles from "./customComponents.module.css";
-import Heading from "@mittwald/flow-next-components/Heading";
+import Heading from "@mittwald/flow-react-components/Heading";
 import { MDXComponents } from "mdx/types";
-import Note from "@mittwald/flow-next-components/Note";
-import Content from "@mittwald/flow-next-components/Content";
+import Note from "@mittwald/flow-react-components/Note";
+import Content from "@mittwald/flow-react-components/Content";
 import React, { Children, isValidElement } from "react";
-import CopyToClipboardButton from "@mittwald/flow-next-components/CopyToClipboardButton";
+import CopyToClipboardButton from "@mittwald/flow-react-components/CopyToClipboardButton";
 
 export const customComponents: MDXComponents = {
   pre: ({ children }) => (

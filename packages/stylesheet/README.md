@@ -1,4 +1,4 @@
-# @mittwald/flow-next-stylesheet
+# @mittwald/flow-stylesheet
 
 This package is part of
 [Flow – mittwald design system](https://mittwald.github.io/flow/). See the

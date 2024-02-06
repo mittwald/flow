@@ -1,3 +1,3 @@
-import StatusIcon from "@mittwald/flow-next-components/StatusIcon";
+import StatusIcon from "@mittwald/flow-react-components/StatusIcon";
 
 <StatusIcon />;

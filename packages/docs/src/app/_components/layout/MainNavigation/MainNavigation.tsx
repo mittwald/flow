@@ -2,8 +2,8 @@
 import React, { FC, Fragment, ReactElement, useId } from "react";
 import Navigation, {
   NavigationItem,
-} from "@mittwald/flow-next-components/Navigation";
-import Heading from "@mittwald/flow-next-components/Heading";
+} from "@mittwald/flow-react-components/Navigation";
+import Heading from "@mittwald/flow-react-components/Heading";
 import { usePathname } from "next/navigation";
 import styles from "./MainNavigation.module.scss";
 import { MdxFile, SerializedMdxFile } from "@/lib/mdx/MdxFile";

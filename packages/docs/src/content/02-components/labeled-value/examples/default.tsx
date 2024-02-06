@@ -1,6 +1,6 @@
-import LabeledValue from "@mittwald/flow-next-components/LabeledValue";
-import Label from "@mittwald/flow-next-components/Label";
-import Content from "@mittwald/flow-next-components/Content";
+import LabeledValue from "@mittwald/flow-react-components/LabeledValue";
+import Label from "@mittwald/flow-react-components/Label";
+import Content from "@mittwald/flow-react-components/Content";
 
 <LabeledValue>
   <Label>Storage</Label>

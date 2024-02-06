@@ -1,6 +1,6 @@
-import Note from "@mittwald/flow-next-components/Note";
-import Heading from "@mittwald/flow-next-components/Heading";
-import Content from "@mittwald/flow-next-components/Content";
+import Note from "@mittwald/flow-react-components/Note";
+import Heading from "@mittwald/flow-react-components/Heading";
+import Content from "@mittwald/flow-react-components/Content";
 
 <Note>
   <Heading>Email address has been archived</Heading>

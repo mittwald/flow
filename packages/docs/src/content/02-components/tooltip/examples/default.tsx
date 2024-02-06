@@ -1,8 +1,8 @@
 import Tooltip, {
   TooltipTrigger,
-} from "@mittwald/flow-next-components/Tooltip";
-import Button from "@mittwald/flow-next-components/Button";
-import Icon from "@mittwald/flow-next-components/Icon";
+} from "@mittwald/flow-react-components/Tooltip";
+import Button from "@mittwald/flow-react-components/Button";
+import Icon from "@mittwald/flow-react-components/Icon";
 import { faSave } from "@fortawesome/free-regular-svg-icons/faSave";
 
 <TooltipTrigger>

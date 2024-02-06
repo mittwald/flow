@@ -1,3 +1,3 @@
-import Link from "@mittwald/flow-next-components/Link";
+import Link from "@mittwald/flow-react-components/Link";
 
 <Link>This is a link</Link>;

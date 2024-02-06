@@ -1,5 +1,5 @@
-import Navigation from "@mittwald/flow-next-components/Navigation";
-import { NavigationItem } from "@mittwald/flow-next-components/Navigation";
+import Navigation from "@mittwald/flow-react-components/Navigation";
+import { NavigationItem } from "@mittwald/flow-react-components/Navigation";
 
 <Navigation aria-label="Companies">
   <NavigationItem href="https://www.apple.com">Apple</NavigationItem>

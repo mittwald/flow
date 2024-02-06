@@ -1,4 +1,4 @@
-import Icon from "@mittwald/flow-next-components/Icon";
+import Icon from "@mittwald/flow-react-components/Icon";
 
 () => {
   const svgString = `\

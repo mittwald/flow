@@ -1,7 +1,7 @@
-import Note from "@mittwald/flow-next-components/Note";
-import Heading from "@mittwald/flow-next-components/Heading";
-import Content from "@mittwald/flow-next-components/Content";
-import Icon from "@mittwald/flow-next-components/Icon";
+import Note from "@mittwald/flow-react-components/Note";
+import Heading from "@mittwald/flow-react-components/Heading";
+import Content from "@mittwald/flow-react-components/Content";
+import Icon from "@mittwald/flow-react-components/Icon";
 import { faCirclePlay } from "@fortawesome/free-solid-svg-icons/faCirclePlay";
 
 <Note>

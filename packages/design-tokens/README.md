@@ -1,4 +1,4 @@
-# @mittwald/flow-next-design-tokens
+# @mittwald/flow-design-tokens
 
 This package is part of
 [Flow – mittwald design system](https://mittwald.github.io/flow/). See the
