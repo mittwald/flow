@@ -9,7 +9,7 @@ import { faSnowplow as I12 } from "@fortawesome/free-solid-svg-icons/faSnowplow"
 import { NavigationItem as I19 } from "@mittwald/flow-react-components/Navigation";
 import { faUser as I20 } from "@fortawesome/free-regular-svg-icons/faUser";
 import { faHardDrive as I21 } from "@fortawesome/free-regular-svg-icons/faHardDrive";
-import { faSave as I32 } from "@fortawesome/free-regular-svg-icons/faSave";
+import { faSave as I33 } from "@fortawesome/free-regular-svg-icons/faSave";
 
 export const liveCodeEditorGlobalImports: ImportMapping = {
   "Avatar:@mittwald/flow-react-components/Avatar": lazy(() => import("@mittwald/flow-react-components/Avatar").then(module => ({ default: module.Avatar } ))),
@@ -35,6 +35,7 @@ export const liveCodeEditorGlobalImports: ImportMapping = {
 "faUser:@fortawesome/free-regular-svg-icons/faUser": I20,
 "faHardDrive:@fortawesome/free-regular-svg-icons/faHardDrive": I21,
 "Note:@mittwald/flow-react-components/Note": lazy(() => import("@mittwald/flow-react-components/Note").then(module => ({ default: module.Note } ))),
+"NumberField:@mittwald/flow-react-components/NumberField": lazy(() => import("@mittwald/flow-react-components/NumberField").then(module => ({ default: module.NumberField } ))),
 "RadioGroup:@mittwald/flow-react-components/RadioGroup": lazy(() => import("@mittwald/flow-react-components/RadioGroup").then(module => ({ default: module.RadioGroup } ))),
 "Radio:@mittwald/flow-react-components/RadioGroup": lazy(() => import("@mittwald/flow-react-components/RadioGroup").then(module => ({ default: module.Radio } ))),
 "StatusIcon:@mittwald/flow-react-components/StatusIcon": lazy(() => import("@mittwald/flow-react-components/StatusIcon").then(module => ({ default: module.StatusIcon } ))),
@@ -44,5 +45,5 @@ export const liveCodeEditorGlobalImports: ImportMapping = {
 "TextField:@mittwald/flow-react-components/TextField": lazy(() => import("@mittwald/flow-react-components/TextField").then(module => ({ default: module.TextField } ))),
 "Tooltip:@mittwald/flow-react-components/Tooltip": lazy(() => import("@mittwald/flow-react-components/Tooltip").then(module => ({ default: module.Tooltip } ))),
 "TooltipTrigger:@mittwald/flow-react-components/Tooltip": lazy(() => import("@mittwald/flow-react-components/Tooltip").then(module => ({ default: module.TooltipTrigger } ))),
-"faSave:@fortawesome/free-regular-svg-icons/faSave": I32,
+"faSave:@fortawesome/free-regular-svg-icons/faSave": I33,
 };
