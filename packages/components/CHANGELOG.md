@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.9](https://github.com/mittwald/flow/compare/0.1.0-alpha.8...0.1.0-alpha.9) (2024-02-06)
+
+### Bug Fixes
+
+- **Button:** disable hover-style when disabeld
+  ([129ef76](https://github.com/mittwald/flow/commit/129ef7668032ca4c6c1218ed81abf367bd613570))
+
+### Features
+
+- introduce NumberField component
+  ([33b451d](https://github.com/mittwald/flow/commit/33b451dbadc575a701d90be2d94ee571b82fd37c))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.8](https://github.com/mittwald/flow/compare/0.1.0-alpha.7...0.1.0-alpha.8) (2024-02-06)
 
 ### Bug Fixes
