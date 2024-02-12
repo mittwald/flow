@@ -34,13 +34,13 @@
     "react-dom": "^18.2.0",
     "remark-frontmatter": "^5.0.0",
     "remark-mdx-frontmatter": "^4.0.0",
-    "remeda": "^1.40.0",
+    "remeda": "^1.40.1",
     "webpack": "^5.90.1"
   },
   "devDependencies": {
-    "@types/node": "^20.11.16",
-    "@types/react": "^18.2.53",
-    "@types/react-dom": "^18.2.18",
+    "@types/node": "^20.11.17",
+    "@types/react": "^18.2.55",
+    "@types/react-dom": "^18.2.19",
     "@yarnpkg/pnpify": "^4.0.1",
     "acorn": "patch:acorn@npm%3A8.11.2#~/.yarn/patches/acorn-npm-8.11.2-a470f49bb6.patch",
     "acorn-jsx": "^5.3.2",
