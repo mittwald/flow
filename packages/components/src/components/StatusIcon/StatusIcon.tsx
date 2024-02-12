@@ -14,9 +14,9 @@ export interface StatusIconProps extends StatusVariantProps {
 export const StatusIcon: FC<StatusIconProps> = (props) => {
   const { variant = "info", ...rest } = props;
 
-  const ariaLabel = useLocalizedStringFormatter(locales).format(
-    `statusIcon.${variant}`,
-  );
+  const stringFormatter = useLocalizedStringFormatter(locales);
+
+  const ariaLabel = stringFormatter.format(`statusIcon.${variant}`);
 
   const icon =
     variant === "info"

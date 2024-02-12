@@ -1,5 +1,3 @@
-@import "@/styles";
-
 .formField {
   display: flex;
   flex-direction: column;
@@ -28,4 +26,61 @@
 /* With custom field error */
 .formField:has(.customFieldError) .fieldError {
   display: none;
+}
+
+/* State colors */
+.formField {
+  /* Default */
+  --form-field-control--background-color: var(
+    --form-control--background-color--default
+  );
+  --form-field-control--border-color: var(
+    --form-control--background-color--default
+  );
+  --form-field-control--color: inherit;
+
+  /* Hover */
+  &:hover {
+    --form-field-control--background-color: var(
+      --form-control--background-color--hover
+    );
+    --form-field-control--border-color: var(
+      --form-control--border-color--hover
+    );
+    --form-field-control--color: inherit;
+  }
+
+  /* Invalid */
+  &[data-invalid] {
+    --form-field-control--background-color: var(
+      --form-control--background-color--invalid
+    );
+    --form-field-control--border-color: var(
+      --form-control--border-color--invalid
+    );
+    --form-field-control--color: inherit;
+  }
+
+  /* Focused */
+  &[data-invalid]:focus-within,
+  &:focus-within {
+    --form-field-control--background-color: var(
+      --form-control--background-color--focused
+    );
+    --form-field-control--border-color: var(
+      --form-control--border-color--focused
+    );
+    --form-field-control--color: inherit;
+  }
+
+  /* Disabled */
+  &[data-disabled] {
+    --form-field-control--background-color: var(
+      --form-control--background-color--disabled
+    );
+    --form-field-control--border-color: var(
+      --form-control--border-color--disabled
+    );
+    --form-field-control--color: var(--form-control--color--disabled);
+  }
 }

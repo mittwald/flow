@@ -4,7 +4,7 @@ import * as path from "path";
 import { createRequire } from "module";
 
 const stylesheetPathname = createRequire(import.meta.url).resolve(
-  "@mittwald/flow-next-components/styles",
+  "@mittwald/flow-react-components/styles",
 );
 
 const thisDirname = path.dirname(url.fileURLToPath(import.meta.url));

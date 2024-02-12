@@ -26,6 +26,7 @@ export const Note: FC<NoteProps> = (props) => {
   const propsContext: PropsContext = {
     Icon: {
       className: styles.customIcon,
+      "aria-hidden": false,
     },
     Heading: {
       className: styles.heading,
