@@ -6747,7 +6747,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/core-events@npm:7.6.10, @storybook/core-events@npm:^7.0.10":
+"@storybook/core-events@npm:7.6.10":
   version: 7.6.10
   resolution: "@storybook/core-events@npm:7.6.10"
   dependencies:
@@ -6756,7 +6756,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/core-events@npm:7.6.12, @storybook/core-events@npm:^7.6.12":
+"@storybook/core-events@npm:7.6.12":
   version: 7.6.12
   resolution: "@storybook/core-events@npm:7.6.12"
   dependencies:
@@ -6780,6 +6780,15 @@ __metadata:
   dependencies:
     ts-dedent: "npm:^2.0.0"
   checksum: d1c861ff77bf60e28614e695d73cb076aa1dfe933d68e90b9d426dbf9f2f82205ec084e641f96b53b145ce0ec41924219e9bf653de56e0f631ababa6978c7fba
+  languageName: node
+  linkType: hard
+
+"@storybook/core-events@npm:^7.0.10, @storybook/core-events@npm:^7.6.12":
+  version: 7.6.14
+  resolution: "@storybook/core-events@npm:7.6.14"
+  dependencies:
+    ts-dedent: "npm:^2.0.0"
+  checksum: 1afc2b7576aee76650fb79cf9ba93db0ad1df585142ec4c50b237e88f6bfe0e8c7d72a9c518c3e217ecf844a3a173387213b9876b646195891dcd2017a1fa059
   languageName: node
   linkType: hard
 
