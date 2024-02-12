@@ -182,10 +182,17 @@ primary-solid-background-color:
   pressed:
     value: "{primary.color.1000}"
 primary-solid-foreground-color:
-  value: "{neutral.color.100}"
+  default:
+    value: "{neutral.color.100}"
+  hover:
+    value: "{neutral.color.100}"
+  pressed:
+    value: "{neutral.color.100}"
 
 # Primary Plain
 primary-plain-background-color:
+  default:
+    value: transparent
   hover:
     value: "{primary.color.200}"
   pressed:
@@ -198,6 +205,38 @@ primary-plain-foreground-color:
   pressed:
     value: "{primary.color.1000}"
 
+# Secondary Solid
+secondary-solid-background-color:
+  default:
+    value: "{neutral.color.400}"
+  hover:
+    value: "{neutral.color.500}"
+  pressed:
+    value: "{neutral.color.600}"
+secondary-solid-foreground-color:
+  default:
+    value: "{color.default}"
+  hover:
+    value: "{color.default}"
+  pressed:
+    value: "{color.default}"
+
+# Secondary Plain
+secondary-plain-background-color:
+  default:
+    value: transparent
+  hover:
+    value: "{neutral.color.400}"
+  pressed:
+    value: "{neutral.color.500}"
+secondary-plain-foreground-color:
+  default:
+    value: "{color.default}"
+  hover:
+    value: "{color.default}"
+  pressed:
+    value: "{color.default}"
+
 # Accent Solid
 accent-solid-background-color:
   default:
@@ -207,7 +246,28 @@ accent-solid-background-color:
   pressed:
     value: "{accent.color.1000}"
 accent-solid-foreground-color:
-  value: "{neutral.color.100}"
+  default:
+    value: "{neutral.color.100}"
+  hover:
+    value: "{neutral.color.100}"
+  pressed:
+    value: "{neutral.color.100}"
+
+# Accent Plain
+accent-plain-background-color:
+  default:
+    value: transparent
+  hover:
+    value: "{accent.color.200}"
+  pressed:
+    value: "{accent.color.300}"
+accent-plain-foreground-color:
+  default:
+    value: "{accent.color.800}"
+  hover:
+    value: "{accent.color.900}"
+  pressed:
+    value: "{accent.color.1000}"
 
 # Danger Solid
 danger-solid-background-color:
@@ -218,10 +278,17 @@ danger-solid-background-color:
   pressed:
     value: "{danger.color.1000}"
 danger-solid-foreground-color:
-  value: "{neutral.color.100}"
+  default:
+    value: "{neutral.color.100}"
+  hover:
+    value: "{neutral.color.100}"
+  pressed:
+    value: "{neutral.color.100}"
 
 # Danger Plain
 danger-plain-background-color:
+  default:
+    value: transparent
   hover:
     value: "{danger.color.200}"
   pressed:
@@ -249,7 +316,12 @@ info-solid-background-color:
   pressed:
     value: "{info.color.1000}"
 info-solid-foreground-color:
-  value: "{neutral.color.100}"
+  default:
+    value: "{neutral.color.100}"
+  hover:
+    value: "{neutral.color.100}"
+  pressed:
+    value: "{neutral.color.100}"
 
 # Info Outline
 info-outline-foreground-color:
@@ -266,7 +338,12 @@ success-solid-background-color:
   pressed:
     value: "{success.color.1000}"
 success-solid-foreground-color:
-  value: "{neutral.color.100}"
+  default:
+    value: "{neutral.color.100}"
+  hover:
+    value: "{neutral.color.100}"
+  pressed:
+    value: "{neutral.color.100}"
 
 # Success Outline
 success-outline-foreground-color:
@@ -283,7 +360,12 @@ warning-solid-background-color:
   pressed:
     value: "{warning.color.1000}"
 warning-solid-foreground-color:
-  value: "{neutral.color.100}"
+  default:
+    value: "{neutral.color.100}"
+  hover:
+    value: "{neutral.color.100}"
+  pressed:
+    value: "{neutral.color.100}"
 
 # Warning Outline
 warning-outline-foreground-color:
@@ -298,5 +380,7 @@ disabled-solid-foreground-color:
   value: "{neutral.color.100}"
 
 # Disabled Plain
+disabled-plain-background-color:
+  value: transparent
 disabled-plain-foreground-color:
   value: "{neutral.color.600}"

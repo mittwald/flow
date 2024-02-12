@@ -11,32 +11,54 @@ export default meta;
 
 type Story = StoryObj<typeof Button>;
 
-export const Accent: Story = {
-  args: {
-    variant: "accent",
-  },
-};
-
-export const Primary: Story = {
+export const PrimarySolid: Story = {
   args: {
     variant: "primary",
   },
 };
 
-export const Secondary: Story = {
+export const PrimaryPlain: Story = {
+  args: {
+    variant: "primary",
+    style: "plain",
+  },
+};
+
+export const AccentSolid: Story = {
+  args: {
+    variant: "accent",
+  },
+};
+
+export const AccentPlain: Story = {
+  args: {
+    variant: "accent",
+    style: "plain",
+  },
+};
+
+export const SecondarySolid: Story = {
   args: {
     variant: "secondary",
   },
 };
 
-export const Danger: Story = {
+export const SecondaryPlain: Story = {
+  args: {
+    variant: "secondary",
+    style: "plain",
+  },
+};
+
+export const DangerSolid: Story = {
   args: {
     variant: "danger",
   },
 };
 
-export const Plain: Story = {
+export const DangerPlain: Story = {
   args: {
-    variant: "plain",
+    variant: "danger",
+    style: "plain",
   },
 };

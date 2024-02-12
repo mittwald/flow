@@ -8,15 +8,18 @@ import {
   useProps,
 } from "@/lib/propsContext";
 
-export interface ButtonProps extends PropsWithChildren<Aria.ButtonProps> {
+export interface ButtonProps
+  extends PropsWithChildren<Omit<Aria.ButtonProps, "style">> {
   /** @default "primary" */
-  variant?: "primary" | "accent" | "secondary" | "danger" | "plain";
+  variant?: "primary" | "accent" | "secondary" | "danger";
+  style?: "plain" | "solid";
   small?: boolean;
 }
 
 export const Button: FC<ButtonProps> = (props) => {
   const {
     variant = "primary",
+    style = "solid",
     children,
     className,
     small,
@@ -27,6 +30,7 @@ export const Button: FC<ButtonProps> = (props) => {
     styles.button,
     small && styles.small,
     styles[variant],
+    styles[style],
     className,
   );
 
