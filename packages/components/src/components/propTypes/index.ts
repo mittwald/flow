@@ -15,6 +15,7 @@ import type { HeadingProps } from "@/components/Heading";
 import type { InitialsProps } from "@/components/Initials";
 import type { ImageProps } from "@/components/Image";
 import type { CopyToClipboardButtonProps } from "@/components/CopyToClipboardButton";
+import type { SkeletonProps } from "@/components/Skeleton/Skeleton";
 
 export * from "./types";
 
@@ -34,4 +35,5 @@ export interface FlowComponentPropsTypes {
   Image: ImageProps;
   FieldError: FieldErrorProps;
   FieldDescription: FieldDescriptionProps;
+  Skeleton: SkeletonProps;
 }
