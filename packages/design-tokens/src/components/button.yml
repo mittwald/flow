@@ -1,34 +1,54 @@
 button:
   border-radius:
     value: "{size-px.xs}"
-  padding-x:
+  padding-squished-x:
     value: "{size-px.m}"
-  padding-y:
+  padding-squished-y:
     value: "{size-px.s}"
-  icon-to-text-spacing:
-    value: 0.5em
+  padding:
+    value: "{size-px.s}"
+
+  # Small
+  padding-small:
+    value: "{size-px.xs}"
+  padding-small-squished-x:
+    value: "{size-px.s}"
+  padding-small-squished-y:
+    value: "{size-px.xs}"
+  font-size-small:
+    value: "{font-size.s}"
 
   # Accent
   accent-background-color:
     default:
-      value: "{accent.color.800}"
+      value: "{accent-solid-background-color.default}"
     hover:
-      value: "{accent.color.900}"
+      value: "{accent-solid-background-color.hover}"
     pressed:
-      value: "{accent.color.1000}"
+      value: "{accent-solid-background-color.pressed}"
   accent-color:
-    value: "{neutral.color.100}"
+    default:
+      value: "{accent-solid-foreground-color}"
+    hover:
+      value: "{accent-solid-foreground-color}"
+    pressed:
+      value: "{accent-solid-foreground-color}"
 
   # Primary
   primary-background-color:
     default:
-      value: "{informative.color.800}"
+      value: "{primary-solid-background-color.default}"
     hover:
-      value: "{informative.color.900}"
+      value: "{primary-solid-background-color.hover}"
     pressed:
-      value: "{informative.color.1000}"
+      value: "{primary-solid-background-color.pressed}"
   primary-color:
-    value: "{neutral.color.100}"
+    default:
+      value: "{primary-solid-foreground-color}"
+    hover:
+      value: "{primary-solid-foreground-color}"
+    pressed:
+      value: "{primary-solid-foreground-color}"
 
   # Secondary
   secondary-background-color:
@@ -40,25 +60,46 @@ button:
       value: "{neutral.color.600}"
   secondary-color:
     default:
-      value: "{informative.color.800}"
+      value: "{info.color.800}"
     hover:
-      value: "{informative.color.900}"
+      value: "{info.color.900}"
     pressed:
-      value: "{informative.color.1000}"
+      value: "{info.color.1000}"
 
-  # Negative
-  negative-background-color:
+  # Danger
+  danger-background-color:
     default:
-      value: "{negative.color.800}"
+      value: "{danger-solid-background-color.default}"
     hover:
-      value: "{negative.color.900}"
+      value: "{danger-solid-background-color.hover}"
     pressed:
-      value: "{negative.color.1000}"
-  negative-color:
-    value: "{neutral.color.100}"
+      value: "{danger-solid-background-color.pressed}"
+  danger-color:
+    default:
+      value: "{danger-solid-foreground-color}"
+    hover:
+      value: "{danger-solid-foreground-color}"
+    pressed:
+      value: "{danger-solid-foreground-color}"
+
+  # Plain
+  plain-background-color:
+    default:
+      value: "{color.transparent}"
+    hover:
+      value: "{primary-plain-background-color.hover}"
+    pressed:
+      value: "{primary-plain-background-color.pressed}"
+  plain-color:
+    default:
+      value: "{primary-plain-foreground-color.default}"
+    hover:
+      value: "{primary-plain-foreground-color.hover}"
+    pressed:
+      value: "{primary-plain-foreground-color.pressed}"
 
   # Disabled
   disabled-background-color:
-    value: "{neutral.color.400}"
+    value: "{disabled-solid-background-color}"
   disabled-color:
-    value: "{neutral.color.100}"
+    value: "{disabled-solid-foreground-color}"

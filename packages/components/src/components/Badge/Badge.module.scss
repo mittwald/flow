@@ -1,5 +1,3 @@
-@import "@/styles";
-
 .badge {
   color: var(--badge--color);
   font-size: var(--badge--font-size);
@@ -9,7 +7,7 @@
   padding-inline: var(--badge--padding-x);
   height: var(--badge--height);
   line-height: var(--size-rem--m);
-  display: grid;
+  display: inline-grid;
   grid-template-areas: "icon content";
   grid-template-columns: auto 1fr;
   column-gap: var(--badge--icon-to-text-spacing);
@@ -56,4 +54,4 @@
 @include variant(info);
 @include variant(success);
 @include variant(warning);
-@include variant(negative);
+@include variant(danger);

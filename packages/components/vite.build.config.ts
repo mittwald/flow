@@ -19,6 +19,8 @@ export default defineConfig(
           Button: "./src/components/Button/index.ts",
           Checkbox: "./src/components/Checkbox/index.ts",
           Content: "./src/components/Content/index.ts",
+          CopyToClipboardButton:
+            "./src/components/CopyToClipboardButton/index.ts",
           FieldDescription: "./src/components/FieldDescription/index.ts",
           FieldError: "./src/components/FieldError/index.ts",
           Heading: "./src/components/Heading/index.ts",
@@ -26,12 +28,11 @@ export default defineConfig(
           Image: "./src/components/Image/index.ts",
           Initials: "./src/components/Initials/index.ts",
           Label: "./src/components/Label/index.ts",
+          LabeledValue: "./src/components/LabeledValue/index.ts",
           Link: "./src/components/Link/index.ts",
           Navigation: "./src/components/Navigation/index.ts",
-          NavigationItem:
-            "./src/components/Navigation/components/NavigationItem/index.ts",
           Note: "./src/components/Note/index.ts",
-          Radio: "./src/components/RadioGroup/components/Radio/index.ts",
+          NumberField: "./src/components/NumberField/index.ts",
           RadioGroup: "./src/components/RadioGroup/index.ts",
           Section: "./src/components/Section/index.ts",
           StatusIcon: "./src/components/StatusIcon/index.ts",
@@ -42,10 +43,19 @@ export default defineConfig(
           Tooltip: "./src/components/Tooltip/index.ts",
           TooltipTrigger:
             "./src/components/Tooltip/components/TooltipTrigger/index.ts",
+          stylesInit: "./src/styles/index.ts",
         },
         formats: ["es"],
       },
       rollupOptions: {
+        output: {
+          assetFileNames: (assetInfo: { name: string }) => {
+            if (assetInfo.name === "style.css") {
+              return "styles.css";
+            }
+            return assetInfo.name;
+          },
+        },
         external: [
           "react",
           "react-dom",

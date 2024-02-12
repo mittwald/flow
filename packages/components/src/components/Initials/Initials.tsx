@@ -1,5 +1,5 @@
 import React, { FC, PropsWithChildren } from "react";
-import { getVariantFromInitials } from "./lib/getVariantFromInitials";
+import { getVariantFromString } from "./lib/getVariantFromString";
 import { getInitialsFromString } from "./lib/getInitialsFromString";
 import styles from "./Initials.module.scss";
 import clsx from "clsx";
@@ -16,7 +16,7 @@ export const Initials: FC<InitialsProps> = (props) => {
 
   const rootClassName = clsx(
     styles.initials,
-    styles[`variant-${getVariantFromInitials(initials)}`],
+    styles[`variant-${getVariantFromString(children)}`],
     className,
   );
 

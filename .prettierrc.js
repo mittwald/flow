@@ -19,6 +19,12 @@ const config = {
         tabWidth: 2,
       },
     },
+    {
+      files: ["packages/docs/src/content/**/examples/*.tsx"],
+      options: {
+        printWidth: 60,
+      },
+    },
   ],
   plugins: [
     await import("prettier-plugin-sort-json"),

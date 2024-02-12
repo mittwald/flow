@@ -1,5 +1,3 @@
-@import "@/styles";
-
 .link {
   font-size: var(--link--font-size);
   font-weight: var(--link--font-weight);
@@ -33,4 +31,4 @@
 }
 
 @include variant(primary);
-@include variant(negative);
+@include variant(danger);

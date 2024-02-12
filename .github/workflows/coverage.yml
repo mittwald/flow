@@ -1,4 +1,5 @@
-name: "coverage"
+name: "Build Jest coverage report"
+
 on:
   pull_request:
     branches:

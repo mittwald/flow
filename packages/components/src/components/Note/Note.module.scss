@@ -1,5 +1,3 @@
-@import "@/styles";
-
 .note {
   border-radius: var(--note--border-radius);
   border-width: var(--note--border-width);
@@ -62,4 +60,4 @@
 
 @include variant(info);
 @include variant(warning);
-@include variant(negative);
+@include variant(danger);
