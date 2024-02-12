@@ -1,25 +1,21 @@
 button:
   border-radius:
     value: "{size-px.xs}"
-
-  # Size M
-  padding-x-m:
+  padding-squished-x:
     value: "{size-px.m}"
-  padding-y-m:
+  padding-squished-y:
     value: "{size-px.s}"
-  padding-with-icon-m:
+  padding:
     value: "{size-px.s}"
-  font-size-m:
-    value: "{font-size.m}"
 
-  # Size S
-  padding-x-s:
+  # Small
+  padding-small:
+    value: "{size-px.xs}"
+  padding-small-squished-x:
     value: "{size-px.s}"
-  padding-y-s:
+  padding-small-squished-y:
     value: "{size-px.xs}"
-  padding-with-icon-s:
-    value: "{size-px.xs}"
-  font-size-s:
+  font-size-small:
     value: "{font-size.s}"
 
   # Accent

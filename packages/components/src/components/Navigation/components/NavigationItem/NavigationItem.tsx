@@ -15,7 +15,8 @@ export function NavigationItem<T extends object>(
   props: NavigationItemProps<T>,
 ) {
   const { item, state } = props;
-  const { isCurrent } = item.props as NavigationCollectionItemProps;
+  const { isCurrent, linkComponent: Link = "a" } =
+    item.props as NavigationCollectionItemProps;
 
   const ref = React.useRef(null);
   const { menuItemProps } = useNavigationItem({ key: item.key }, state, ref);
@@ -31,11 +32,15 @@ export function NavigationItem<T extends object>(
 
   return (
     <li className={styles.navigationItem}>
-      <a {...menuItemProps} ref={ref} aria-current={isCurrent ? "page" : false}>
+      <Link
+        {...menuItemProps}
+        ref={ref}
+        aria-current={isCurrent ? "page" : false}
+      >
         <PropsContextProvider props={propsContext}>
           {item.rendered}
         </PropsContextProvider>
-      </a>
+      </Link>
     </li>
   );
 }

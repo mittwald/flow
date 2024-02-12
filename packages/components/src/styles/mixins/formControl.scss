@@ -1,0 +1,18 @@
+@mixin formControl {
+  color: var(--form-field-control--color);
+
+  border-width: var(--form-control--border-width);
+  border-style: var(--form-control--border-style);
+  border-radius: var(--form-control--border-radius);
+  border-color: var(--form-field-control--border-color);
+
+  padding-block: var(--form-control--padding-y);
+  padding-inline: var(--form-control--padding-x);
+
+  background-color: var(--form-field-control--background-color);
+
+  &:focus-visible,
+  &:focus {
+    outline: none;
+  }
+}

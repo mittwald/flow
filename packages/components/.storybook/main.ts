@@ -8,6 +8,7 @@ const config: StorybookConfig = {
     "@storybook/addon-interactions",
     "@storybook/addon-a11y",
     "storybook-addon-dir",
+    "storybook-addon-pseudo-states",
   ],
   framework: "@storybook/react-vite",
   core: {
