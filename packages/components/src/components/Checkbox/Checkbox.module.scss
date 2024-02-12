@@ -1,5 +1,3 @@
-@import "@/styles";
-
 @mixin state($state) {
   border-color: var(--checkbox--border-color--#{$state});
   background-color: var(--checkbox--background-color--#{$state});
