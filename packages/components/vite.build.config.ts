@@ -19,6 +19,8 @@ export default defineConfig(
           Button: "./src/components/Button/index.ts",
           Checkbox: "./src/components/Checkbox/index.ts",
           Content: "./src/components/Content/index.ts",
+          CopyToClipboardButton:
+            "./src/components/CopyToClipboardButton/index.ts",
           DatePicker: "./src/components/DatePicker/index.ts",
           DateRangePicker: "./src/components/DateRangePicker/index.ts",
           FieldDescription: "./src/components/FieldDescription/index.ts",
@@ -28,13 +30,12 @@ export default defineConfig(
           Image: "./src/components/Image/index.ts",
           Initials: "./src/components/Initials/index.ts",
           Label: "./src/components/Label/index.ts",
+          LabeledValue: "./src/components/LabeledValue/index.ts",
           Link: "./src/components/Link/index.ts",
           Navigation: "./src/components/Navigation/index.ts",
-          NavigationItem:
-            "./src/components/Navigation/components/NavigationItem/index.ts",
           Note: "./src/components/Note/index.ts",
+          NumberField: "./src/components/NumberField/index.ts",
           Popover: "./src/components/Popover/index.ts",
-          Radio: "./src/components/RadioGroup/components/Radio/index.ts",
           RadioGroup: "./src/components/RadioGroup/index.ts",
           StatusIcon: "./src/components/StatusIcon/index.ts",
           Switch: "./src/components/Switch/index.ts",
@@ -44,10 +45,19 @@ export default defineConfig(
           Tooltip: "./src/components/Tooltip/index.ts",
           TooltipTrigger:
             "./src/components/Tooltip/components/TooltipTrigger/index.ts",
+          stylesInit: "./src/styles/index.ts",
         },
         formats: ["es"],
       },
       rollupOptions: {
+        output: {
+          assetFileNames: (assetInfo: { name: string }) => {
+            if (assetInfo.name === "style.css") {
+              return "styles.css";
+            }
+            return assetInfo.name;
+          },
+        },
         external: [
           "react",
           "react-dom",

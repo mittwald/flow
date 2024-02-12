@@ -1,0 +1,65 @@
+name: Publish docs to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout ⬇️
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node 🎛️
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "yarn"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Yarn Install 📦️
+        run: yarn install --immutable
+
+      - name: Setup NX 1/2 🎛️
+        uses: nrwl/nx-set-shas@v4
+
+      - name: Setup NX 2/2 🎛
+        if: github.ref != 'refs/heads/main'
+        run: git branch --track main origin/main
+
+      - name: Build 🔨
+        env:
+          NEXT_BASE_PATH: "/flow"
+        run: yarn nx affected -t build --parallel=3
+
+      - name: Configure GitHub pages ⚙️
+        uses: actions/configure-pages@v4
+        with:
+          static_site_generator: next
+
+      - name: Upload GitHub Pages artifact ⬆️
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: packages/docs/out
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Publish to GitHub Pages 🚀
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "affected": {
-    "defaultBase": "master"
+    "defaultBase": "main"
   },
   "namedInputs": {
     "src": ["{projectRoot}/{src,dev}/**/!(*.test).*"],
@@ -37,9 +37,6 @@
     },
     "start": {
       "dependsOn": ["build"]
-    },
-    "build:imports": {
-      "cache": true
     }
   }
 }

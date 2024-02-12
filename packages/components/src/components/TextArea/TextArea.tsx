@@ -4,7 +4,7 @@ import { TextFieldBase, TextFieldBaseProps } from "@/components/TextFieldBase";
 import styles from "./TextArea.module.scss";
 
 export interface TextAreaProps
-  extends TextFieldBaseProps,
+  extends Omit<TextFieldBaseProps, "input">,
     Pick<Aria.TextAreaProps, "placeholder" | "rows"> {}
 
 export const TextArea: FC<TextAreaProps> = (props) => {

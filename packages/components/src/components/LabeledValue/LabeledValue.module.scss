@@ -1,0 +1,28 @@
+.labeledValue {
+  display: grid;
+  grid-template-areas:
+    "label"
+    "value";
+  row-gap: var(--labeled-value--label-to-value-spacing);
+  column-gap: var(--labeled-value--value-to-button-spacing);
+  grid-template-columns: auto 1fr;
+
+  &:has(.copyButton) {
+    grid-template-areas:
+      "label label     "
+      "value copy-button";
+  }
+}
+
+.label {
+  grid-area: label;
+}
+
+.content {
+  grid-area: value;
+}
+
+.copyButton {
+  grid-area: copy-button;
+  justify-self: start;
+}
