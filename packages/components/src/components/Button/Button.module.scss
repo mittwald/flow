@@ -13,7 +13,6 @@
   transition-duration: var(--transition--duration--default);
 
   @extend .primary;
-  @extend .m;
 
   &:has(.icon) {
     padding: var(--button--padding);
@@ -63,18 +62,3 @@
 @include variant(danger);
 @include variant(secondary);
 @include variant(plain);
-
-/* Sizes */
-
-@mixin size($size) {
-  .#{$size} {
-    padding: var(--button--padding-y-#{$size}) var(--button--padding-x-#{$size});
-    font-size: var(--button--font-size-#{$size});
-    &:has(.icon) {
-      padding: var(--button--padding-with-icon-#{$size});
-    }
-  }
-}
-
-@include size(m);
-@include size(s);

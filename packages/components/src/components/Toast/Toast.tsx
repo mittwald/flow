@@ -44,7 +44,7 @@ export const Toast: FC<ToastProps<ToastContentProps>> = ({
         {props.toast.content.content}
       </Content>
       <Button
-        size="s"
+        small
         className={styles.close}
         variant="plain"
         {...closeButtonProps}
