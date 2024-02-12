@@ -5,7 +5,7 @@ import { dummyText } from "@/lib/dev/dummyText";
 import { Label } from "@/components/Label";
 import { Content } from "@/components/Content";
 import React from "react";
-import { CopyToClipboardButton } from "src/components/CopyToClipboardButton";
+import { CopyToClipboardButton } from "@/components/CopyToClipboardButton";
 
 const meta: Meta<typeof LabeledValue> = {
   title: "Content/Labeled Value/Edge Cases",
