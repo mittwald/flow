@@ -1,6 +1,6 @@
 button:
-  border-radius:
-    value: "{size-px.xs}"
+  corner-radius:
+    value: "{corner-radius.default}"
   padding-squished-x:
     value: "{size-px.m}"
   padding-squished-y:
@@ -8,9 +8,11 @@ button:
   padding:
     value: "{size-px.s}"
   focus-outline-color:
-    value: "{primary.color.800}"
+    value: "{focus-outline-color}"
   focus-outline-offset:
     value: "{size-px.xxs}"
+  focus-outline-width:
+    value: "{border-width.200}"
 
   # Small
   padding-small:
@@ -22,37 +24,37 @@ button:
   font-size-small:
     value: "{font-size.s}"
 
-  # Accent Solid
-  accent-solid-background-color:
+  # Success Solid
+  success-solid-background-color:
     default:
-      value: "{accent-solid-background-color.default}"
+      value: "{success-solid-background-color.default}"
     hover:
-      value: "{accent-solid-background-color.hover}"
+      value: "{success-solid-background-color.hover}"
     pressed:
-      value: "{accent-solid-background-color.pressed}"
-  accent-solid-foreground-color:
+      value: "{success-solid-background-color.pressed}"
+  success-solid-foreground-color:
     default:
-      value: "{accent-solid-foreground-color.default}"
+      value: "{success-solid-foreground-color.default}"
     hover:
-      value: "{accent-solid-foreground-color.hover}"
+      value: "{success-solid-foreground-color.hover}"
     pressed:
-      value: "{accent-solid-foreground-color.pressed}"
+      value: "{success-solid-foreground-color.pressed}"
 
-  # Accent Plain
-  accent-plain-background-color:
+  # Success Plain
+  success-plain-background-color:
     default:
-      value: "{accent-plain-background-color.default}"
+      value: "{success-plain-background-color.default}"
     hover:
-      value: "{accent-plain-background-color.hover}"
+      value: "{success-plain-background-color.hover}"
     pressed:
-      value: "{accent-plain-background-color.pressed}"
-  accent-plain-foreground-color:
+      value: "{success-plain-background-color.pressed}"
+  success-plain-foreground-color:
     default:
-      value: "{accent-plain-foreground-color.default}"
+      value: "{success-plain-foreground-color.default}"
     hover:
-      value: "{accent-plain-foreground-color.hover}"
+      value: "{success-plain-foreground-color.hover}"
     pressed:
-      value: "{accent-plain-foreground-color.pressed}"
+      value: "{success-plain-foreground-color.pressed}"
 
   # Primary Solid
   primary-solid-background-color:
@@ -89,34 +91,34 @@ button:
   # Secondary Solid
   secondary-solid-background-color:
     default:
-      value: "{secondary-solid-background-color.default}"
+      value: "{neutral-solid-background-color.default}"
     hover:
-      value: "{secondary-solid-background-color.hover}"
+      value: "{neutral-solid-background-color.hover}"
     pressed:
-      value: "{secondary-solid-background-color.pressed}"
+      value: "{neutral-solid-background-color.pressed}"
   secondary-solid-foreground-color:
     default:
-      value: "{secondary-solid-foreground-color.default}"
+      value: "{neutral-solid-foreground-color.default}"
     hover:
-      value: "{secondary-solid-foreground-color.hover}"
+      value: "{neutral-solid-foreground-color.hover}"
     pressed:
-      value: "{secondary-solid-foreground-color.pressed}"
+      value: "{neutral-solid-foreground-color.pressed}"
 
   # Secondary Plain
   secondary-plain-background-color:
     default:
-      value: "{secondary-plain-background-color.default}"
+      value: "{neutral-plain-background-color.default}"
     hover:
-      value: "{secondary-plain-background-color.hover}"
+      value: "{neutral-plain-background-color.hover}"
     pressed:
-      value: "{secondary-plain-background-color.pressed}"
+      value: "{neutral-plain-background-color.pressed}"
   secondary-plain-foreground-color:
     default:
-      value: "{secondary-plain-foreground-color.default}"
+      value: "{neutral-plain-foreground-color.default}"
     hover:
-      value: "{secondary-plain-foreground-color.hover}"
+      value: "{neutral-plain-foreground-color.hover}"
     pressed:
-      value: "{secondary-plain-foreground-color.pressed}"
+      value: "{neutral-plain-foreground-color.pressed}"
 
   # Danger Solid
   danger-solid-background-color:

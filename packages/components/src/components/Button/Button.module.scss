@@ -1,18 +1,19 @@
 .button {
   border: none;
-  border-radius: var(--button--border-radius);
-  display: inline-flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
+  border-radius: var(--button--corner-radius);
   padding-block: var(--button--padding-squished-y);
   padding-inline: var(--button--padding-squished-x);
   font-size: var(--font-size--default);
+  line-height: var(--line-height--default);
   font-weight: bold;
   transition-property: color, background-color;
   transition-duration: var(--transition--duration--default);
   outline-color: var(--button--focus-outline-color);
   outline-offset: var(--button--focus-outline-offset);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 
   @extend .primary;
   @extend .solid;
@@ -67,10 +68,10 @@
 }
 
 @include variant(primary, solid);
-@include variant(accent, solid);
+@include variant(success, solid);
 @include variant(danger, solid);
 @include variant(secondary, solid);
 @include variant(primary, plain);
-@include variant(accent, plain);
+@include variant(success, plain);
 @include variant(danger, plain);
 @include variant(secondary, plain);

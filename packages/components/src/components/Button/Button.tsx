@@ -11,9 +11,11 @@ import {
 export interface ButtonProps
   extends PropsWithChildren<Omit<Aria.ButtonProps, "style">> {
   /** @default "primary" */
-  variant?: "primary" | "accent" | "secondary" | "danger";
+  variant?: "primary" | "success" | "secondary" | "danger";
+  /** @default "solid" */
   style?: "plain" | "solid";
-  small?: boolean;
+  /** @default "m" */
+  size?: "m" | "s";
 }
 
 export const Button: FC<ButtonProps> = (props) => {
@@ -22,13 +24,13 @@ export const Button: FC<ButtonProps> = (props) => {
     style = "solid",
     children,
     className,
-    small,
+    size = "m",
     ...restProps
   } = useProps("Button", props);
 
   const rootClassName = clsx(
     styles.button,
-    small && styles.small,
+    size === "s" && styles.small,
     styles[variant],
     styles[style],
     className,

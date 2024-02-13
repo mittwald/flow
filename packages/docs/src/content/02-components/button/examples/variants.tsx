@@ -1,9 +1,8 @@
 import Button from "@mittwald/flow-react-components/Button";
 
 <Row>
-  <Button variant="primary">Primary</Button>
-  <Button variant="secondary">Secondary</Button>
-  <Button variant="accent">Accent</Button>
-  <Button variant="danger">Danger</Button>
-  <Button variant="plain">Plain</Button>
+  <Button variant="primary">Continue/Action</Button>
+  <Button variant="secondary">Abort/Back</Button>
+  <Button variant="success">Create/Save</Button>
+  <Button variant="danger">Delete/Terminate</Button>
 </Row>;

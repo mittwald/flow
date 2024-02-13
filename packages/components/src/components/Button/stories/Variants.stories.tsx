@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Button from "../Button";
 import defaultMeta from "./Default.stories";
+import React from "react";
 
 const meta: Meta<typeof Button> = {
   ...defaultMeta,
@@ -24,23 +25,26 @@ export const PrimaryPlain: Story = {
   },
 };
 
-export const AccentSolid: Story = {
+export const SuccessSolid: Story = {
   args: {
-    variant: "accent",
+    variant: "success",
   },
+  render: (props) => <Button {...props}>Create/Save</Button>,
 };
 
-export const AccentPlain: Story = {
+export const SuccessPlain: Story = {
   args: {
-    variant: "accent",
+    variant: "success",
     style: "plain",
   },
+  render: (props) => <Button {...props}>Create/Save</Button>,
 };
 
 export const SecondarySolid: Story = {
   args: {
     variant: "secondary",
   },
+  render: (props) => <Button {...props}>Abort/Back</Button>,
 };
 
 export const SecondaryPlain: Story = {
@@ -48,12 +52,14 @@ export const SecondaryPlain: Story = {
     variant: "secondary",
     style: "plain",
   },
+  render: (props) => <Button {...props}>Abort/Back</Button>,
 };
 
 export const DangerSolid: Story = {
   args: {
     variant: "danger",
   },
+  render: (props) => <Button {...props}>Delete/Terminate</Button>,
 };
 
 export const DangerPlain: Story = {
@@ -61,4 +67,5 @@ export const DangerPlain: Story = {
     variant: "danger",
     style: "plain",
   },
+  render: (props) => <Button {...props}>Delete/Terminate</Button>,
 };
