@@ -1,4 +1,4 @@
-note:
+inline-alert:
   padding:
     value: "{size-px.m}"
   corner-radius:
@@ -17,6 +17,8 @@ note:
     value: "{font-size.m}"
   icon-size:
     value: "{icon.size.m}"
+  background-color:
+    value: "{info-outline-background-color}"
 
   # Info
   info-border-color:
@@ -35,3 +37,9 @@ note:
     value: "{danger-outline-border-color}"
   danger-heading-color:
     value: "{danger-outline-foreground-color}"
+
+  # Success
+  success-border-color:
+    value: "{success-outline-border-color}"
+  success-heading-color:
+    value: "{success-outline-foreground-color}"

@@ -6,6 +6,7 @@ import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons/faExclama
 import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 import { StatusVariantProps } from "@/lib/types/props";
+import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons/faExclamationTriangle";
 
 export interface StatusIconProps extends StatusVariantProps {
   className?: string;
@@ -23,7 +24,9 @@ export const StatusIcon: FC<StatusIconProps> = (props) => {
       ? faInfoCircle
       : variant === "success"
         ? faCheckCircle
-        : faExclamationCircle;
+        : variant === "warning"
+          ? faExclamationCircle
+          : faExclamationTriangle;
 
   return <Icon aria-label={ariaLabel} faIcon={icon} {...rest} />;
 };

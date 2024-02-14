@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Note from "../Note";
+import InlineAlert from "../InlineAlert";
 import React from "react";
 import { Heading } from "@/components/Heading";
 import { Content } from "@/components/Content";
 import { Icon } from "@/components/Icon";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 
-const meta: Meta<typeof Note> = {
-  title: "Status/Note",
-  component: Note,
+const meta: Meta<typeof InlineAlert> = {
+  title: "Status/Inline Alert",
+  component: InlineAlert,
   argTypes: {
     variant: {
       control: "inline-radio",
@@ -19,37 +19,24 @@ const meta: Meta<typeof Note> = {
 
 export default meta;
 
-type Story = StoryObj<typeof Note>;
+type Story = StoryObj<typeof InlineAlert>;
 
 export const Default: Story = {
   render: (props) => (
-    <Note {...props}>
+    <InlineAlert {...props}>
       <Heading>Email address has been archived</Heading>
-    </Note>
+    </InlineAlert>
   ),
 };
 
 export const WithContent: Story = {
   render: (props) => (
-    <Note {...props}>
+    <InlineAlert {...props}>
       <Heading>Email address has been archived</Heading>
       <Content>
         As your domain has been deleted, this email address has been archived.
         To be able to send and receive emails, you must rename the address.
       </Content>
-    </Note>
-  ),
-};
-
-export const WithCustomIcon: Story = {
-  render: (props) => (
-    <Note {...props}>
-      <Icon faIcon={faEnvelope} />
-      <Heading>Email address has been archived</Heading>
-      <Content>
-        As your domain has been deleted, this email address has been archived.
-        To be able to send and receive emails, you must rename the address.
-      </Content>
-    </Note>
+    </InlineAlert>
   ),
 };
