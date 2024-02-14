@@ -12,10 +12,6 @@
   transition-duration: var(--transition--duration--default);
   outline-color: var(--button--focus-outline-color);
   outline-offset: var(--button--focus-outline-offset);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
   display: grid;
   grid-template-areas: "content";
 
@@ -29,8 +25,16 @@
 
 .text,
 .icon,
-.pendingIcon {
+.pendingIcon,
+.succeededIcon,
+.failedIcon {
   grid-area: content;
+}
+
+.text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .icon,
@@ -40,6 +44,14 @@
 
 .pendingIcon {
   color: var(--button--pending-icon-color);
+}
+
+.succeededIcon {
+  color: var(--button--succeeded-icon-color);
+}
+
+.failedIcon {
+  color: var(--button--failed-icon-color);
 }
 
 .pending {

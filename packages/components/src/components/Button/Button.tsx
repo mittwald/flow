@@ -10,6 +10,8 @@ import {
 import Icon from "../Icon";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons/faSpinner";
 import { Text } from "@/components/Text";
+import { faCheck } from "@fortawesome/free-solid-svg-icons/faCheck";
+import { faTimes } from "@fortawesome/free-solid-svg-icons/faTimes";
 
 export interface ButtonProps
   extends PropsWithChildren<Omit<Aria.ButtonProps, "style">> {
@@ -20,6 +22,8 @@ export interface ButtonProps
   /** @default "m" */
   size?: "m" | "s";
   isPending?: boolean;
+  isSucceeded?: boolean;
+  isFailed?: boolean;
 }
 
 export const Button: FC<ButtonProps> = (props) => {
@@ -31,13 +35,15 @@ export const Button: FC<ButtonProps> = (props) => {
     size = "m",
     isPending,
     isDisabled,
+    isSucceeded,
+    isFailed,
     ...restProps
   } = useProps("Button", props);
 
   const rootClassName = clsx(
     styles.button,
     size === "s" && styles.small,
-    isPending && styles.pending,
+    (isPending || isSucceeded || isFailed) && styles.pending,
     styles[variant],
     styles[style],
     className,
@@ -54,7 +60,7 @@ export const Button: FC<ButtonProps> = (props) => {
   return (
     <Aria.Button
       className={rootClassName}
-      isDisabled={isDisabled || isPending}
+      isDisabled={isDisabled || isPending || isSucceeded || isFailed}
       {...restProps}
     >
       <PropsContextProvider props={propsContext}>
@@ -65,6 +71,10 @@ export const Button: FC<ButtonProps> = (props) => {
         )}
       </PropsContextProvider>
       {isPending && <Icon faIcon={faSpinner} className={styles.pendingIcon} />}
+      {isSucceeded && (
+        <Icon faIcon={faCheck} className={styles.succeededIcon} />
+      )}
+      {isFailed && <Icon faIcon={faTimes} className={styles.failedIcon} />}
     </Aria.Button>
   );
 };

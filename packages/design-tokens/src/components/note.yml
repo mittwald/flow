@@ -5,7 +5,7 @@ note:
     value: "{corner-radius.default}"
   border-width:
     value: "{border-width.100}"
-  border-inline-start-width:
+  border-x-start-width:
     value: "{size-px.s}"
   border-style:
     value: "{border-style.default}"

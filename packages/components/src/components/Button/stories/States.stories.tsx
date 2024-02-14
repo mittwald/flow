@@ -50,3 +50,16 @@ export const PendingPlainWithIcon: Story = {
     </Button>
   ),
 };
+
+export const SucceededSolid: Story = {
+  args: {
+    isSucceeded: true,
+  },
+};
+
+export const FailedPlain: Story = {
+  args: {
+    isFailed: true,
+    style: "plain",
+  },
+};

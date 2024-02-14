@@ -15,6 +15,10 @@ button:
     value: "{border-width.200}"
   pending-icon-color:
     value: "{neutral.color.600}"
+  succeeded-icon-color:
+    value: "{success.color.700}"
+  failed-icon-color:
+    value: "{danger.color.700}"
 
   # Small
   padding-small:
