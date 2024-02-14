@@ -13,6 +13,8 @@ button:
     value: "{size-px.xxs}"
   focus-outline-width:
     value: "{border-width.200}"
+  pending-icon-color:
+    value: "{neutral.color.600}"
 
   # Small
   padding-small:

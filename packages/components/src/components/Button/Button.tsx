@@ -7,6 +7,9 @@ import {
   PropsContextProvider,
   useProps,
 } from "@/lib/propsContext";
+import Icon from "../Icon";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons/faSpinner";
+import { Text } from "@/components/Text";
 
 export interface ButtonProps
   extends PropsWithChildren<Omit<Aria.ButtonProps, "style">> {
@@ -16,6 +19,7 @@ export interface ButtonProps
   style?: "plain" | "solid";
   /** @default "m" */
   size?: "m" | "s";
+  isPending?: boolean;
 }
 
 export const Button: FC<ButtonProps> = (props) => {
@@ -25,12 +29,15 @@ export const Button: FC<ButtonProps> = (props) => {
     children,
     className,
     size = "m",
+    isPending,
+    isDisabled,
     ...restProps
   } = useProps("Button", props);
 
   const rootClassName = clsx(
     styles.button,
     size === "s" && styles.small,
+    isPending && styles.pending,
     styles[variant],
     styles[style],
     className,
@@ -45,10 +52,19 @@ export const Button: FC<ButtonProps> = (props) => {
   };
 
   return (
-    <Aria.Button className={rootClassName} {...restProps}>
+    <Aria.Button
+      className={rootClassName}
+      isDisabled={isDisabled || isPending}
+      {...restProps}
+    >
       <PropsContextProvider props={propsContext}>
-        {children}
+        {typeof children === "string" ? (
+          <Text className={styles.text}>{children}</Text>
+        ) : (
+          children
+        )}
       </PropsContextProvider>
+      {isPending && <Icon faIcon={faSpinner} className={styles.pendingIcon} />}
     </Aria.Button>
   );
 };

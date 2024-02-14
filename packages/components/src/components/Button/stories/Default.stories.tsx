@@ -34,19 +34,6 @@ type Story = StoryObj<typeof Button>;
 
 export const Default: Story = {};
 
-export const DisabledSolid: Story = {
-  args: {
-    isDisabled: true,
-  },
-};
-
-export const DisabledPlain: Story = {
-  args: {
-    isDisabled: true,
-    style: "plain",
-  },
-};
-
 export const Small: Story = {
   args: {
     size: "s",

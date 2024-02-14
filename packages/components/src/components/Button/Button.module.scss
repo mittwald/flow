@@ -1,4 +1,6 @@
 .button {
+  position: relative;
+  font-family: "MW-Flow-Regular", sans-serif;
   border: none;
   border-radius: var(--button--corner-radius);
   padding-block: var(--button--padding-squished-y);
@@ -14,6 +16,8 @@
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 100%;
+  display: grid;
+  grid-template-areas: "content";
 
   @extend .primary;
   @extend .solid;
@@ -23,9 +27,31 @@
   }
 }
 
+.text,
+.icon,
+.pendingIcon {
+  grid-area: content;
+}
+
 .icon,
 .icon svg {
   display: block;
+}
+
+.pendingIcon {
+  color: var(--button--pending-icon-color);
+}
+
+.pending {
+  .icon,
+  .text {
+    visibility: hidden;
+  }
+  &.plain {
+    .text {
+      visibility: visible;
+    }
+  }
 }
 
 .small {

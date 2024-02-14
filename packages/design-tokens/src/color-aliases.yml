@@ -371,7 +371,7 @@ disabled-solid-foreground-color:
 disabled-plain-background-color:
   value: "{color.transparent}"
 disabled-plain-foreground-color:
-  value: "{neutral.color.600}"
+  value: "{neutral.color.400}"
 
 # Focus
 focus-outline-color:
