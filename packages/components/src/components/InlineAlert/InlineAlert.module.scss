@@ -9,6 +9,7 @@
   grid-column-gap: var(--inline-alert--icon-to-content-spacing);
   grid-row-gap: var(--inline-alert--text-to-text-spacing);
   background-color: var(--inline-alert--background-color);
+  width: 100%;
 
   @extend .info;
 

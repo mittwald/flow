@@ -29,4 +29,11 @@ import Content from "@mittwald/flow-react-components/Content";
       IP.
     </Content>
   </InlineAlert>
+
+  <InlineAlert variant="success">
+    <Heading>Your app is up to date</Heading>
+    <Content>
+      Your app has been updated to the current version.
+    </Content>
+  </InlineAlert>
 </Row>;
