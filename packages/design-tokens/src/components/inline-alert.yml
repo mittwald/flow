@@ -11,14 +11,14 @@ inline-alert:
     value: "{border-style.default}"
   text-to-text-spacing:
     value: "{size-rem.xs}"
-  icon-to-text-spacing:
-    value: "{size-rem.m}"
+  icon-to-content-spacing:
+    value: "{size-rem.s}"
   heading-font-size:
     value: "{font-size.m}"
   icon-size:
     value: "{icon.size.m}"
   background-color:
-    value: "{info-outline-background-color}"
+    value: "{info-outline-background-color.default}"
 
   # Info
   info-border-color:

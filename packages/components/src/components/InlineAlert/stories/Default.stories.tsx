@@ -3,8 +3,6 @@ import InlineAlert from "../InlineAlert";
 import React from "react";
 import { Heading } from "@/components/Heading";
 import { Content } from "@/components/Content";
-import { Icon } from "@/components/Icon";
-import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 
 const meta: Meta<typeof InlineAlert> = {
   title: "Status/Inline Alert",
