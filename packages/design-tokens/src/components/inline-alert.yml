@@ -1,22 +1,24 @@
-note:
+inline-alert:
   padding:
     value: "{size-px.m}"
-  border-radius:
-    value: "{border-radius.default}"
+  corner-radius:
+    value: "{corner-radius.default}"
   border-width:
-    value: "{border-width.default}"
-  border-inline-start-width:
+    value: "{border-width.100}"
+  border-x-start-width:
     value: "{size-px.s}"
   border-style:
     value: "{border-style.default}"
   text-to-text-spacing:
     value: "{size-rem.xs}"
-  icon-to-text-spacing:
-    value: "{size-rem.m}"
+  icon-to-content-spacing:
+    value: "{size-rem.s}"
   heading-font-size:
     value: "{font-size.m}"
   icon-size:
     value: "{icon.size.m}"
+  background-color:
+    value: "{info-outline-background-color.default}"
 
   # Info
   info-border-color:
@@ -35,3 +37,9 @@ note:
     value: "{danger-outline-border-color}"
   danger-heading-color:
     value: "{danger-outline-foreground-color}"
+
+  # Success
+  success-border-color:
+    value: "{success-outline-border-color}"
+  success-heading-color:
+    value: "{success-outline-foreground-color}"

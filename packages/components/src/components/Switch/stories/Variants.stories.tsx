@@ -12,9 +12,9 @@ export default meta;
 
 type Story = StoryObj<typeof Switch>;
 
-export const Accent: Story = {};
+export const Success: Story = {};
 
-export const AccentDisabled: Story = { args: { isDisabled: true } };
+export const SuccessDisabled: Story = { args: { isDisabled: true } };
 
 export const Danger: Story = {
   args: { variant: "danger" },

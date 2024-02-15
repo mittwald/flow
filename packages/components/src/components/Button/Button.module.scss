@@ -1,27 +1,71 @@
 .button {
+  position: relative;
+  font-family: "MW-Flow-Regular", sans-serif;
   border: none;
-  border-radius: var(--button--border-radius);
-  display: inline-flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
+  border-radius: var(--button--corner-radius);
   padding-block: var(--button--padding-squished-y);
   padding-inline: var(--button--padding-squished-x);
   font-size: var(--font-size--default);
+  line-height: var(--line-height--default);
   font-weight: bold;
   transition-property: color, background-color;
   transition-duration: var(--transition--duration--default);
+  outline-color: var(--button--focus-outline-color);
+  outline-offset: var(--button--focus-outline-offset);
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-template-areas: "content";
 
   @extend .primary;
+  @extend .solid;
 
   &:has(.icon) {
     padding: var(--button--padding);
   }
 }
 
+.text,
+.icon,
+.pendingIcon,
+.succeededIcon,
+.failedIcon {
+  grid-area: content;
+}
+
+.text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .icon,
 .icon svg {
   display: block;
+}
+
+.pendingIcon {
+  color: var(--button--pending-icon-color);
+}
+
+.succeededIcon {
+  color: var(--button--succeeded-icon-color);
+}
+
+.failedIcon {
+  color: var(--button--failed-icon-color);
+}
+
+.pending {
+  .icon,
+  .text {
+    visibility: hidden;
+  }
+  &.plain {
+    .text {
+      visibility: visible;
+    }
+  }
 }
 
 .small {
@@ -35,30 +79,39 @@
 }
 
 /* Variants */
-@mixin variant($variant) {
-  .#{$variant} {
-    background-color: var(--button--#{$variant}-background-color--default);
-    color: var(--button--#{$variant}-color--default);
+@mixin variant($variant, $style) {
+  .#{$variant}.#{$style} {
+    background-color: var(
+      --button--#{$variant}-#{$style}-background-color--default
+    );
+    color: var(--button--#{$variant}-#{$style}-foreground-color--default);
 
     &:hover {
-      background-color: var(--button--#{$variant}-background-color--hover);
-      color: var(--button--#{$variant}-color--hover);
+      background-color: var(
+        --button--#{$variant}-#{$style}-background-color--hover
+      );
+      color: var(--button--#{$variant}-#{$style}-foreground-color--hover);
     }
 
     &[data-pressed] {
-      background-color: var(--button--#{$variant}-background-color--pressed);
-      color: var(--button--#{$variant}-color--pressed);
+      background-color: var(
+        --button--#{$variant}-#{$style}-background-color--pressed
+      );
+      color: var(--button--#{$variant}-#{$style}-foreground-color--pressed);
     }
 
     &[disabled] {
-      background-color: var(--button--disabled-background-color);
-      color: var(--button--disabled-color);
+      background-color: var(--button--disabled-#{$style}-background-color);
+      color: var(--button--disabled-#{$style}-foreground-color);
     }
   }
 }
 
-@include variant(primary);
-@include variant(accent);
-@include variant(danger);
-@include variant(secondary);
-@include variant(plain);
+@include variant(primary, solid);
+@include variant(success, solid);
+@include variant(danger, solid);
+@include variant(secondary, solid);
+@include variant(primary, plain);
+@include variant(success, plain);
+@include variant(danger, plain);
+@include variant(secondary, plain);

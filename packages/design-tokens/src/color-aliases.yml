@@ -73,31 +73,6 @@ success:
     1100:
       value: "{color.espelkamp-green.1100}"
 
-accent:
-  color:
-    100:
-      value: "{color.espelkamp-green.100}"
-    200:
-      value: "{color.espelkamp-green.200}"
-    300:
-      value: "{color.espelkamp-green.300}"
-    400:
-      value: "{color.espelkamp-green.400}"
-    500:
-      value: "{color.espelkamp-green.500}"
-    600:
-      value: "{color.espelkamp-green.600}"
-    700:
-      value: "{color.espelkamp-green.700}"
-    800:
-      value: "{color.espelkamp-green.800}"
-    900:
-      value: "{color.espelkamp-green.900}"
-    1000:
-      value: "{color.espelkamp-green.1000}"
-    1100:
-      value: "{color.espelkamp-green.1100}"
-
 neutral:
   color:
     100:
@@ -182,10 +157,17 @@ primary-solid-background-color:
   pressed:
     value: "{primary.color.1000}"
 primary-solid-foreground-color:
-  value: "{neutral.color.100}"
+  default:
+    value: "{neutral.color.100}"
+  hover:
+    value: "{neutral.color.100}"
+  pressed:
+    value: "{neutral.color.100}"
 
 # Primary Plain
 primary-plain-background-color:
+  default:
+    value: "{color.transparent}"
   hover:
     value: "{primary.color.100}"
   pressed:
@@ -198,16 +180,37 @@ primary-plain-foreground-color:
   pressed:
     value: "{primary.color.1000}"
 
-# Accent Solid
-accent-solid-background-color:
+# Neutral Solid
+neutral-solid-background-color:
   default:
-    value: "{accent.color.800}"
+    value: "{neutral.color.400}"
   hover:
-    value: "{accent.color.900}"
+    value: "{neutral.color.500}"
   pressed:
-    value: "{accent.color.1000}"
-accent-solid-foreground-color:
-  value: "{neutral.color.100}"
+    value: "{neutral.color.600}"
+neutral-solid-foreground-color:
+  default:
+    value: "{neutral.color.1000}"
+  hover:
+    value: "{neutral.color.1000}"
+  pressed:
+    value: "{neutral.color.1000}"
+
+# Neutral Plain
+neutral-plain-background-color:
+  default:
+    value: "{color.transparent}"
+  hover:
+    value: "{neutral.color.400}"
+  pressed:
+    value: "{neutral.color.500}"
+neutral-plain-foreground-color:
+  default:
+    value: "{neutral.color.1000}"
+  hover:
+    value: "{neutral.color.1000}"
+  pressed:
+    value: "{neutral.color.1000}"
 
 # Danger Solid
 danger-solid-background-color:
@@ -218,10 +221,17 @@ danger-solid-background-color:
   pressed:
     value: "{danger.color.1000}"
 danger-solid-foreground-color:
-  value: "{neutral.color.100}"
+  default:
+    value: "{neutral.color.100}"
+  hover:
+    value: "{neutral.color.100}"
+  pressed:
+    value: "{neutral.color.100}"
 
 # Danger Plain
 danger-plain-background-color:
+  default:
+    value: "{color.transparent}"
   hover:
     value: "{danger.color.100}"
   pressed:
@@ -236,10 +246,13 @@ danger-plain-foreground-color:
 
 # Danger Outline
 danger-outline-background-color:
+  default:
+    value: "{neutral.color.100}"
   hover:
     value: "{danger.color.100}"
   pressed:
     value: "{danger.color.200}"
+
 danger-outline-foreground-color:
   value: "{danger.color.900}"
 danger-outline-border-color:
@@ -254,10 +267,17 @@ info-solid-background-color:
   pressed:
     value: "{info.color.1000}"
 info-solid-foreground-color:
-  value: "{neutral.color.100}"
+  default:
+    value: "{neutral.color.100}"
+  hover:
+    value: "{neutral.color.100}"
+  pressed:
+    value: "{neutral.color.100}"
 
 # Info Outline
 info-outline-background-color:
+  default:
+    value: "{neutral.color.100}"
   hover:
     value: "{info.color.100}"
   pressed:
@@ -276,10 +296,33 @@ success-solid-background-color:
   pressed:
     value: "{success.color.1000}"
 success-solid-foreground-color:
-  value: "{neutral.color.100}"
+  default:
+    value: "{neutral.color.100}"
+  hover:
+    value: "{neutral.color.100}"
+  pressed:
+    value: "{neutral.color.100}"
+
+# Success Plain
+success-plain-background-color:
+  default:
+    value: "{color.transparent}"
+  hover:
+    value: "{success.color.100}"
+  pressed:
+    value: "{success.color.200}"
+success-plain-foreground-color:
+  default:
+    value: "{success.color.800}"
+  hover:
+    value: "{success.color.900}"
+  pressed:
+    value: "{success.color.1000}"
 
 # Success Outline
 success-outline-background-color:
+  default:
+    value: "{neutral.color.100}"
   hover:
     value: "{success.color.100}"
   pressed:
@@ -298,10 +341,17 @@ warning-solid-background-color:
   pressed:
     value: "{warning.color.1000}"
 warning-solid-foreground-color:
-  value: "{neutral.color.100}"
+  default:
+    value: "{neutral.color.100}"
+  hover:
+    value: "{neutral.color.100}"
+  pressed:
+    value: "{neutral.color.100}"
 
 # Warning Outline
 warning-outline-background-color:
+  default:
+    value: "{neutral.color.100}"
   hover:
     value: "{warning.color.100}"
   pressed:
@@ -313,10 +363,16 @@ warning-outline-border-color:
 
 # Disabled Solid
 disabled-solid-background-color:
-  value: "{neutral.color.500}"
+  value: "{neutral.color.400}"
 disabled-solid-foreground-color:
-  value: "{neutral.color.100}"
+  value: "{neutral.color.600}"
 
 # Disabled Plain
+disabled-plain-background-color:
+  value: "{color.transparent}"
 disabled-plain-foreground-color:
-  value: "{neutral.color.600}"
+  value: "{neutral.color.400}"
+
+# Focus
+focus-outline-color:
+  value: "{primary.color.800}"
