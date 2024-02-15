@@ -1,32 +1,31 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Toast from "../index";
+import Notification from "../index";
 import React from "react";
 import { Button } from "@/components/Button";
-import { ToastProvider } from "@/components/Toast/components/ToastProvider";
+import { NotificationProvider } from "../components/NotificationProvider";
 
-const meta: Meta<typeof Toast> = {
-  title: "Overlays/Toast",
-  component: Toast,
+const meta: Meta<typeof Notification> = {
+  title: "Overlays/Notification",
+  component: Notification,
   render: () => (
-    <ToastProvider>
+    <NotificationProvider>
       {(state) => (
         <Button
           onPress={() =>
             state.add({
               content: "content",
               title: "title",
-              variant: "warning",
             })
           }
         >
-          Show toast
+          Show notification
         </Button>
       )}
-    </ToastProvider>
+    </NotificationProvider>
   ),
 };
 export default meta;
 
-type Story = StoryObj<typeof Toast>;
+type Story = StoryObj<typeof Notification>;
 
 export const Default: Story = {};

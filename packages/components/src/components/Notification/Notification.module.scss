@@ -1,0 +1,83 @@
+@import "@/styles";
+
+.notification {
+  border-radius: var(--notification--border-radius);
+  border-inline-start-width: var(--notification--border-x-start-width);
+  border-inline-start-style: var(--notification--border-x-start-style);
+  padding: var(--notification--padding);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-column-gap: var(--notification--icon-to-content-spacing);
+  grid-row-gap: var(--notification--heading-to-text-spacing);
+  box-shadow: var(--notification--shadow);
+  width: var(--notification--width);
+  background-color: var(--notification--background-color);
+
+  @extend .info;
+
+  /* With custom icon */
+  &:has(.customIcon) .statusIcon {
+    display: none;
+  }
+
+  /* Without content */
+  &:not(:has(.content)) {
+    grid-template-areas: "icon heading close";
+  }
+
+  /* With content */
+  &:has(.content) {
+    grid-template-areas:
+      "icon heading close"
+      ".    content content";
+  }
+}
+
+/* Elements */
+.customIcon,
+.statusIcon {
+  grid-area: icon;
+  align-self: center;
+  font-size: var(--notification--icon-size);
+  line-height: calc(var(--notification--heading-font-size) * 1.5);
+}
+
+h3.heading {
+  grid-area: heading;
+  font-size: var(--notification--heading-font-size);
+}
+
+.content {
+  grid-area: content;
+}
+
+.close {
+  grid-area: close;
+}
+
+/* Variants */
+@mixin variant($variant) {
+  .#{$variant} {
+    border-color: var(--notification--#{$variant}-border-color);
+    .heading,
+    .customIcon,
+    .statusIcon {
+      color: var(--notification--#{$variant}-heading-color);
+    }
+    &:hover {
+      background-color: var(
+        --notification--#{$variant}-background-color--hover
+      );
+    }
+    &[data-pressed] {
+      background-color: var(
+        --notification--#{$variant}-background-color--pressed
+      );
+    }
+  }
+}
+
+@include variant(info);
+@include variant(warning);
+@include variant(danger);
+@include variant(success);

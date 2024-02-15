@@ -4,7 +4,7 @@ import { Button } from "@/components/Button";
 import type { ToastState } from "@react-stately/toast";
 import React, { FC } from "react";
 import { StatusVariantProps } from "@/lib/types/props";
-import styles from "./Toast.module.scss";
+import styles from "./Notification.module.scss";
 import clsx from "clsx";
 import { Heading } from "@/components/Heading";
 import { Content } from "@/components/Content";
@@ -12,24 +12,24 @@ import { Icon } from "@/components/Icon";
 import { faClose } from "@fortawesome/free-solid-svg-icons/faClose";
 import { StatusIcon } from "@/components/StatusIcon";
 
-export interface ToastContentProps extends StatusVariantProps {
+export interface NotificationContentProps extends StatusVariantProps {
   title: string;
   content?: string;
 }
 
-export interface ToastProps<T> extends AriaToastProps<T> {
+export interface NotificationProps<T> extends AriaToastProps<T> {
   state: ToastState<T>;
 }
 
-export const Toast: FC<ToastProps<ToastContentProps>> = ({
+export const Notification: FC<NotificationProps<NotificationContentProps>> = ({
   state,
   ...props
 }) => {
   const ref = React.useRef(null);
   const { toastProps, closeButtonProps } = useToast(props, state, ref);
-
+  console.log(props);
   const rootClassName = clsx(
-    styles.toast,
+    styles.notification,
     styles[props.toast.content.variant ?? "info"],
   );
 
@@ -44,9 +44,10 @@ export const Toast: FC<ToastProps<ToastContentProps>> = ({
         {props.toast.content.content}
       </Content>
       <Button
-        small
+        size="s"
         className={styles.close}
-        variant="plain"
+        variant="secondary"
+        style="plain"
         {...closeButtonProps}
       >
         <Icon faIcon={faClose} />
@@ -55,4 +56,4 @@ export const Toast: FC<ToastProps<ToastContentProps>> = ({
   );
 };
 
-export default Toast;
+export default Notification;

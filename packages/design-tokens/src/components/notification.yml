@@ -1,24 +1,26 @@
-toast:
+notification:
   padding:
     value: "{size-px.s}"
   border-radius:
-    value: "{border-radius.default}"
-  border-inline-start-width:
-    value: "{size-px.xs}"
-  border-inline-start-style:
+    value: "{corner-radius.default}"
+  border-x-start-width:
+    value: "{border-width.300}"
+  border-x-start-style:
     value: "{border-style.default}"
-  text-to-text-spacing:
+  heading-to-text-spacing:
     value: "{size-rem.xs}"
-  icon-to-text-spacing:
-    value: "{size-rem.m}"
+  icon-to-content-spacing:
+    value: "{size-rem.s}"
   heading-font-size:
     value: "{font-size.m}"
   icon-size:
     value: "{icon.size.s}"
   width:
-    value: "350px"
+    value: "355px"
   shadow:
     value: "rgba(0, 0, 0, 0.2) 0 4px 8px"
+  background-color:
+    value: "{info-outline-background-color.default}"
 
   # Info
   info-background-color:
