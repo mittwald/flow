@@ -11,9 +11,9 @@ export default meta;
 
 type Story = StoryObj<typeof Button>;
 
-export const Accent: Story = {
+export const Success: Story = {
   args: {
-    variant: "accent",
+    variant: "success",
   },
 };
 

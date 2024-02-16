@@ -73,31 +73,6 @@ success:
     1100:
       value: "{color.espelkamp-green.1100}"
 
-accent:
-  color:
-    100:
-      value: "{color.espelkamp-green.100}"
-    200:
-      value: "{color.espelkamp-green.200}"
-    300:
-      value: "{color.espelkamp-green.300}"
-    400:
-      value: "{color.espelkamp-green.400}"
-    500:
-      value: "{color.espelkamp-green.500}"
-    600:
-      value: "{color.espelkamp-green.600}"
-    700:
-      value: "{color.espelkamp-green.700}"
-    800:
-      value: "{color.espelkamp-green.800}"
-    900:
-      value: "{color.espelkamp-green.900}"
-    1000:
-      value: "{color.espelkamp-green.1000}"
-    1100:
-      value: "{color.espelkamp-green.1100}"
-
 neutral:
   color:
     100:
@@ -197,17 +172,6 @@ primary-plain-foreground-color:
     value: "{primary.color.900}"
   pressed:
     value: "{primary.color.1000}"
-
-# Accent Solid
-accent-solid-background-color:
-  default:
-    value: "{accent.color.800}"
-  hover:
-    value: "{accent.color.900}"
-  pressed:
-    value: "{accent.color.1000}"
-accent-solid-foreground-color:
-  value: "{neutral.color.100}"
 
 # Danger Solid
 danger-solid-background-color:
