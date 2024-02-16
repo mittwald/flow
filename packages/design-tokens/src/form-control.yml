@@ -10,7 +10,7 @@ form-control:
   corner-radius:
     value: "{corner-radius.default}"
   border-width:
-    value: "{border-width.default}"
+    value: "{border-width.100}"
   border-style:
     value: "{border-style.default}"
   border-color:

@@ -4,8 +4,14 @@ corner-radius:
   round:
     value: 50%
 border-width:
-  default:
-    value: 1px
+  100:
+    value: "{size-px.xxxs}"
+  200:
+    value: "{size-px.xxs}"
+  300:
+    value: "{size-px.xs}"
+  400:
+    value: "{size-px.s}"
 border-style:
   default:
     value: "solid"
