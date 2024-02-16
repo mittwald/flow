@@ -187,9 +187,9 @@ danger-solid-content-color:
 # Danger Plain
 danger-plain-background-color:
   hover:
-    value: "{danger.color.200}"
+    value: "{danger.color.100}"
   pressed:
-    value: "{danger.color.300}"
+    value: "{danger.color.200}"
 danger-plain-content-color:
   default:
     value: "{danger.color.800}"
@@ -231,6 +231,22 @@ success-solid-background-color:
     value: "{success.color.1000}"
 success-solid-content-color:
   value: "{neutral.color.100}"
+
+# Success Plain
+success-plain-background-color:
+  default:
+    value: "{color.transparent}"
+  hover:
+    value: "{success.color.100}"
+  pressed:
+    value: "{success.color.200}"
+success-plain-foreground-color:
+  default:
+    value: "{success.color.800}"
+  hover:
+    value: "{success.color.900}"
+  pressed:
+    value: "{success.color.1000}"
 
 # Success Outline
 success-outline-content-color:
