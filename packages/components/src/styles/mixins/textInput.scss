@@ -1,0 +1,6 @@
+@use "./formControl";
+
+@mixin textInput {
+  order: 2;
+  @include formControl.formControl();
+}

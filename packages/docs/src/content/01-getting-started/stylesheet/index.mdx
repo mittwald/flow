@@ -1,0 +1,92 @@
+The Flow Component libraries are styled by a shared stylesheet, that can also be
+used standalone. This might be useful if you want to use your own framework to
+build components following the mittwald styling guidelines.
+
+On this page you can find information about how to install the stylesheet and
+how the classnames are structured.
+
+## Install the standalone stylesheet
+
+At this point of development you can only get the stylesheet via NPM. The Flow
+Stylesheet Library can be installed using a package manager like `npm` or
+`yarn`.
+
+```
+yarn add @mittwald/flow-stylesheet
+```
+
+## Import styles
+
+You have to import the bundled stylesheet in order to get the correct component
+styles. Add this line to your project's entry point.
+
+```
+import "@mittwald/flow-stylesheet/css";
+```
+
+## Using the stylesheet
+
+If you want to get started, you should probably learn how the class names are
+structured. The class names provided in this stylesheet are following a
+consistent, component-based and easy to understand schema.
+
+### General class name notation
+
+The class names are all in lowercase and using `-` to separate words and `--` to
+separate logical sections.
+
+The first logical section is always the `flow` namespace. Other sections might
+be:
+
+#### Components
+
+```
+.flow--button
+.flow--heading
+.flow--status-icon
+```
+
+#### Sub-Components
+
+```
+.flow--navigation
+.flow--navigation--navigation-item
+```
+
+#### Specialization: different variants
+
+```
+.flow--button--primary
+.flow--inline-alert--danger
+.flow--icon--fixed-width
+```
+
+#### Specialization: components aligned in a composition
+
+```
+.flow--button--icon
+.flow--inline-alert--status-icon
+```
+
+### A inline-alert to specialization
+
+Class Names used to specialize a basic component must always be used in
+**addition to the basic class name**. Here are some examples that illustrate
+this requirement.
+
+<LiveCodeEditor example="variants" />
+
+#### Combined variants
+
+<LiveCodeEditor example="multiple-variants" />
+
+#### Components aligned in a composition
+
+It is a common practice to compose larger components out of already existing
+smaller ones. Take the Inline Alert example. The Inline Alert is composed out of
+an icon, a heading and some optional content. These contained components must
+have their basic class name (`flow--icon`), to get their basic styling and the
+specialization class name (`flow--inline-alert--status-icon`) to get the Inline
+Alert specific styles.
+
+<LiveCodeEditor example="composition" />

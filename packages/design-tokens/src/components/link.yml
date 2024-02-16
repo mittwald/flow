@@ -3,21 +3,23 @@ link:
     value: "{font-size.s}"
   font-weight:
     value: "{font-weight.bold}"
-  color:
-    default:
-      value: "{informative.color.700}"
-    hover:
-      value: "{informative.color.800}"
-    pressed:
-      value: "{informative.color.900}"
-    disabled:
-      value: "{neutral.color.600}"
+  disabled-color:
+    value: "{disabled-plain-foreground-color}"
 
-  # Negative
-  negative-color:
+  # Primary
+  primary-color:
     default:
-      value: "{negative.color.700}"
+      value: "{primary-plain-foreground-color.default}"
     hover:
-      value: "{negative.color.800}"
+      value: "{primary-plain-foreground-color.hover}"
     pressed:
-      value: "{negative.color.900}"
+      value: "{primary-plain-foreground-color.pressed}"
+
+  # Danger
+  danger-color:
+    default:
+      value: "{danger-plain-foreground-color.default}"
+    hover:
+      value: "{danger-plain-foreground-color.hover}"
+    pressed:
+      value: "{danger-plain-foreground-color.pressed}"

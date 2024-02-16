@@ -1,0 +1,112 @@
+@use "@/styles/mixins/textInput.scss";
+
+.group {
+  order: 2;
+  display: grid;
+  grid-template-columns: 1fr max-content;
+  grid-template-areas:
+    "input increment"
+    "input decrement";
+}
+
+.input {
+  @include textInput.textInput();
+  grid-area: input;
+}
+
+.decrementButton {
+  grid-area: decrement;
+}
+
+.incrementButton {
+  grid-area: increment;
+}
+
+.group.group {
+  .decrementButton,
+  .incrementButton {
+    border-width: var(--form-control--border-width);
+    border-color: var(--form-field-control--border-color);
+    border-style: solid;
+  }
+}
+
+@media (pointer: fine) {
+  .input {
+    border-start-end-radius: 0;
+    border-end-end-radius: 0;
+  }
+
+  .incrementButton {
+    [data-icon="plus"] {
+      display: none;
+    }
+  }
+
+  .decrementButton {
+    [data-icon="minus"] {
+      display: none;
+    }
+  }
+
+  .group.group {
+    .decrementButton,
+    .incrementButton {
+      border-inline-start: none;
+      border-start-start-radius: 0;
+      border-end-start-radius: 0;
+      padding-block: 0;
+    }
+
+    .decrementButton {
+      border-start-end-radius: 0;
+    }
+
+    .incrementButton {
+      border-block-end: none;
+      border-end-end-radius: 0;
+    }
+  }
+}
+
+@media (pointer: coarse) {
+  .group {
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas: "decrement input increment";
+  }
+
+  .input {
+    border-radius: 0;
+  }
+
+  .decrementButton {
+    [data-icon="chevron-down"] {
+      display: none;
+    }
+  }
+
+  .incrementButton {
+    [data-icon="chevron-up"] {
+      display: none;
+    }
+  }
+
+  .group.group {
+    .decrementButton,
+    .incrementButton {
+      padding-inline: var(--form-control--padding-x);
+    }
+
+    .decrementButton {
+      border-start-end-radius: 0;
+      border-end-end-radius: 0;
+      border-inline-end: none;
+    }
+
+    .incrementButton {
+      border-start-start-radius: 0;
+      border-end-start-radius: 0;
+      border-inline-start: none;
+    }
+  }
+}

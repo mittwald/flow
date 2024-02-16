@@ -1,0 +1,73 @@
+.tooltip {
+  border-radius: var(--corner-radius--default);
+  background-color: var(--tooltip--background-color);
+  color: var(--tooltip--color);
+  font-size: var(--tooltip--font-size);
+  padding-block: var(--tooltip--padding-y);
+  padding-inline: var(--tooltip--padding-x);
+  max-width: var(--tooltip--max-width);
+  transform: translate3d(0, 0, 0);
+
+  --translate-origin-length: var(--tooltip--tooltip-to-content-spacing) / 2;
+
+  /* Placement */
+  &[data-placement="top"] {
+    margin-bottom: var(--tooltip--tooltip-to-content-spacing);
+    --translate-origin: translateY(var(--translate-origin-length));
+  }
+
+  &[data-placement="bottom"] {
+    margin-top: var(--tooltip--tooltip-to-content-spacing);
+    --translate-origin: translateY(var(--translate-origin-length) * -1);
+    .arrow svg {
+      transform: rotate(180deg);
+    }
+  }
+
+  &[data-placement="right"] {
+    margin-left: var(--tooltip--tooltip-to-content-spacing);
+    --translate-origin: translateX(var(--translate-origin-length) * -1);
+    .arrow svg {
+      transform: rotate(90deg);
+    }
+  }
+
+  &[data-placement="left"] {
+    margin-right: var(--tooltip--tooltip-to-content-spacing);
+    --translate-origin: translateX(var(--translate-origin-length));
+    .arrow svg {
+      transform: rotate(-90deg);
+    }
+  }
+
+  /* Animation */
+
+  &[data-entering] {
+    animation: slide 200ms;
+  }
+
+  &[data-exiting] {
+    animation: slide 200ms reverse ease-in;
+  }
+}
+
+.arrow {
+  width: var(--tooltip--arrow-size);
+  height: var(--tooltip--arrow-size);
+  svg {
+    display: block;
+    fill: var(--tooltip--background-color);
+  }
+}
+
+@keyframes slide {
+  from {
+    transform: var(--translate-origin);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

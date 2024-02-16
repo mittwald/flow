@@ -1,4 +1,5 @@
-name: "coverage-badges"
+name: Create Jest coverage badges
+
 on:
   push:
     branches:

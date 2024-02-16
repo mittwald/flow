@@ -1,0 +1,53 @@
+.heading2 {
+  margin: var(--size-rem--xl) 0;
+  padding-top: var(--size-rem--xl);
+  border-top: var(--border-width--default) solid var(--neutral--color--500);
+}
+
+.heading {
+  margin: 1.5em 0 0.5em 0;
+}
+
+.p {
+  margin: 0.5em 0;
+}
+
+h3 .p {
+  margin: 0;
+}
+
+.liveCodeEditor,
+.pre {
+  margin: 1em 0;
+}
+
+:not(.pre) .code,
+.pre {
+  background-color: var(--neutral--color--300);
+  border-radius: var(--border-radius--default);
+  padding-inline: var(--size-px--xs);
+  display: inline-block;
+}
+
+.pre {
+  background-color: var(--neutral--color--300);
+  padding: var(--size-px--s) var(--size-px--m);
+  overflow: auto;
+  display: block;
+}
+
+.preContainer {
+  position: relative;
+}
+
+.preCopyButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.ul {
+  list-style-type: disc;
+  padding-left: var(--size-rem--m);
+  margin-block: 1.5em;
+}

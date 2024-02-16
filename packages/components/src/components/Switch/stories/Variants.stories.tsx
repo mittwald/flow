@@ -4,7 +4,7 @@ import defaultMeta from "./Default.stories";
 
 const meta: Meta<typeof Switch> = {
   ...defaultMeta,
-  title: "Switch/Variants",
+  title: "Forms/Switch/Variants",
   args: { defaultSelected: true },
 };
 
@@ -12,14 +12,14 @@ export default meta;
 
 type Story = StoryObj<typeof Switch>;
 
-export const Accent: Story = {};
+export const Success: Story = {};
 
-export const AccentDisabled: Story = { args: { isDisabled: true } };
+export const SuccessDisabled: Story = { args: { isDisabled: true } };
 
-export const Negative: Story = {
-  args: { variant: "negative" },
+export const Danger: Story = {
+  args: { variant: "danger" },
 };
 
-export const NegativeDisabled: Story = {
-  args: { variant: "negative", isDisabled: true },
+export const DangerDisabled: Story = {
+  args: { variant: "danger", isDisabled: true },
 };

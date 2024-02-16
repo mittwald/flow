@@ -1,0 +1,17 @@
+@mixin level($level) {
+  h#{$level}.heading {
+    font-size: var(--heading--h#{$level}-font-size);
+  }
+}
+
+.heading {
+  font-family: "MW-Flow-PageTitle", sans-serif;
+  color: var(--heading--color);
+}
+
+@include level(1);
+@include level(2);
+@include level(3);
+@include level(4);
+@include level(5);
+@include level(6);

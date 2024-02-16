@@ -1,0 +1,45 @@
+@mixin state($state) {
+  border-color: var(--checkbox--border-color--#{$state});
+  background-color: var(--checkbox--background-color--#{$state});
+  color: var(--checkbox--color--#{$state});
+  .checkmark {
+    color: var(--checkbox--checkmark-color--#{$state});
+  }
+}
+
+.checkbox {
+  border-width: var(--checkbox--border-width);
+  border-style: var(--checkbox--border-style);
+  border-color: var(--checkbox--border-color--default);
+  border-radius: var(--checkbox--corner-radius);
+  padding-block: var(--checkbox--padding-y);
+  padding-inline: var(--checkbox--padding-x);
+  background-color: var(--checkbox--background-color--default);
+  color: var(--checkbox--color--default);
+  display: grid;
+  column-gap: var(--checkbox--checkmark-to-text-spacing);
+  grid-template-columns: auto 1fr;
+  width: fit-content;
+
+  /* States */
+  &:hover {
+    background-color: var(--checkbox--background-color--hover);
+  }
+
+  &[data-selected] {
+    @include state(selected);
+  }
+
+  &[data-disabled] {
+    @include state(disabled);
+  }
+
+  &[data-selected][data-disabled] {
+    @include state(selected-disabled);
+  }
+}
+
+/* Elements  */
+.checkmark {
+  color: var(--checkbox--checkmark-color--default);
+}

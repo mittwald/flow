@@ -7,7 +7,7 @@ import FieldDescription from "@/components/FieldDescription/FieldDescription";
 import { FieldError } from "@/components/FieldError";
 
 const meta: Meta<typeof TextArea> = {
-  title: "TextArea",
+  title: "Forms/TextArea",
   component: TextArea,
   render: (props) => (
     <TextArea onChange={action("onChange")} {...props}>

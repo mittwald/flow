@@ -1,5 +1,5 @@
 import React, { FC, PropsWithChildren } from "react";
-import styles from "./FieldDescription.module.css";
+import styles from "./FieldDescription.module.scss";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import { useProps } from "@/lib/propsContext";
@@ -11,7 +11,7 @@ export interface FieldDescriptionProps
 export const FieldDescription: FC<FieldDescriptionProps> = (props) => {
   const { children, className, ...rest } = useProps("FieldDescription", props);
 
-  const rootClassName = clsx(className, styles.root);
+  const rootClassName = clsx(styles.fieldDescription, className);
 
   return (
     <Text slot="description" {...rest} className={rootClassName}>

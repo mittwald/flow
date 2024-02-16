@@ -8,7 +8,7 @@ import { Text } from "@/components/Text";
 import { Navigation, NavigationItem } from "@/components/Navigation";
 
 const meta: Meta<typeof Navigation> = {
-  title: "Navigation",
+  title: "Navigation/Navigation",
   component: Navigation,
   parameters: {
     controls: { exclude: ["className"] },
