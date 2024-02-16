@@ -51,3 +51,13 @@ export const Danger: Story = {
     </InlineAlert>
   ),
 };
+
+export const Success: Story = {
+  args: { variant: "success" },
+  render: (props) => (
+    <InlineAlert {...props}>
+      <Heading>Your app is up to date</Heading>
+      <Content>Your app has been updated to the current version.</Content>
+    </InlineAlert>
+  ),
+};

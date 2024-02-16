@@ -11,7 +11,7 @@ import { StatusVariantProps } from "@/lib/types/props";
 
 export interface InlineAlertProps
   extends PropsWithChildren<ComponentProps<"aside">>,
-    StatusVariantProps<"success"> {}
+    StatusVariantProps {}
 
 export const InlineAlert: FC<InlineAlertProps> = (props) => {
   const {

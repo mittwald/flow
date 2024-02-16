@@ -35,3 +35,9 @@ inline-alert:
     value: "{danger-outline-border-color}"
   danger-heading-color:
     value: "{danger-outline-content-color}"
+
+  # Success
+  success-border-color:
+    value: "{success-outline-border-color}"
+  success-heading-color:
+    value: "{success-outline-content-color}"
