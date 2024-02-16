@@ -57,7 +57,7 @@ be:
 
 ```
 .flow--button--primary
-.flow--note--danger
+.flow--inline-alert--danger
 .flow--icon--fixed-width
 ```
 
@@ -65,7 +65,7 @@ be:
 
 ```
 .flow--button--icon
-.flow--note--status-icon
+.flow--inline-alert--status-icon
 ```
 
 ### A note to specialization
@@ -83,10 +83,10 @@ this requirement.
 #### Components aligned in a composition
 
 It is a common practice to compose larger components out of already existing
-smaller ones. Take the Note example. The Note is composed out of an icon, a
-heading and some optional content. These contained components must have their
-basic class name (`flow--icon`), to get their basic styling and the
-specialization class name (`flow--note--status-icon`) to get the Note specific
-styles.
+smaller ones. Take the Inline Alert example. The Inline Alert is composed out of
+an icon, a heading and some optional content. These contained components must
+have their basic class name (`flow--icon`), to get their basic styling and the
+specialization class name (`flow--inline-alert--status-icon`) to get the Inline
+Alert specific styles.
 
 <LiveCodeEditor example="composition" />

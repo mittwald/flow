@@ -14,7 +14,7 @@ switch:
     value: "{size-rem.l}"
   indicator-width:
     value: 2.5rem
-  indicator-border-radius:
+  indicator-corner-radius:
     value: "{size-rem.m}"
   indicator-to-marker-spacing:
     value: "{size-rem.xs}"
@@ -30,14 +30,14 @@ switch:
     disabled:
       value: "{neutral.color.400}"
 
-  # Accent
-  accent-indicator-color:
+  # Success
+  success-indicator-color:
     selected:
-      value: "{accent.color.800}"
+      value: "{success.color.800}"
     selected-pressed:
-      value: "{accent.color.900}"
+      value: "{success.color.900}"
     selected-disabled:
-      value: "{accent.color.200}"
+      value: "{success.color.200}"
 
   # Danger
   danger-indicator-color:

@@ -9,10 +9,10 @@ radio-group:
     value: "{size-px.m}"
   padding-y:
     value: "{size-px.s}"
-  border-radius:
-    value: "{border-radius.default}"
+  corner-radius:
+    value: "{corner-radius.default}"
   border-width:
-    value: "{border-width.default}"
+    value: "{border-width.100}"
   border-style:
     value: "{border-style.default}"
   border-color:

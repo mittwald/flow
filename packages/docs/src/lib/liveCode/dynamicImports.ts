@@ -6,9 +6,9 @@ import { faCirclePlay as I7 } from "@fortawesome/free-solid-svg-icons/faCirclePl
 import { faStar as I9 } from "@fortawesome/free-regular-svg-icons/faStar";
 import { faSnowboarding as I12 } from "@fortawesome/free-solid-svg-icons/faSnowboarding";
 import { faSnowplow as I13 } from "@fortawesome/free-solid-svg-icons/faSnowplow";
-import { NavigationItem as I20 } from "@mittwald/flow-react-components/Navigation";
-import { faUser as I21 } from "@fortawesome/free-regular-svg-icons/faUser";
-import { faHardDrive as I22 } from "@fortawesome/free-regular-svg-icons/faHardDrive";
+import { NavigationItem as I21 } from "@mittwald/flow-react-components/Navigation";
+import { faUser as I22 } from "@fortawesome/free-regular-svg-icons/faUser";
+import { faHardDrive as I23 } from "@fortawesome/free-regular-svg-icons/faHardDrive";
 import { faSave as I34 } from "@fortawesome/free-regular-svg-icons/faSave";
 
 export const liveCodeEditorGlobalImports: ImportMapping = {
@@ -26,16 +26,16 @@ export const liveCodeEditorGlobalImports: ImportMapping = {
 "Heading:@mittwald/flow-react-components/Heading": lazy(() => import("@mittwald/flow-react-components/Heading").then(module => ({ default: module.Heading } ))),
 "faSnowboarding:@fortawesome/free-solid-svg-icons/faSnowboarding": I12,
 "faSnowplow:@fortawesome/free-solid-svg-icons/faSnowplow": I13,
+"InlineAlert:@mittwald/flow-react-components/InlineAlert": lazy(() => import("@mittwald/flow-react-components/InlineAlert").then(module => ({ default: module.InlineAlert } ))),
+"Content:@mittwald/flow-react-components/Content": lazy(() => import("@mittwald/flow-react-components/Content").then(module => ({ default: module.Content } ))),
 "Label:@mittwald/flow-react-components/Label": lazy(() => import("@mittwald/flow-react-components/Label").then(module => ({ default: module.Label } ))),
 "LabeledValue:@mittwald/flow-react-components/LabeledValue": lazy(() => import("@mittwald/flow-react-components/LabeledValue").then(module => ({ default: module.LabeledValue } ))),
-"Content:@mittwald/flow-react-components/Content": lazy(() => import("@mittwald/flow-react-components/Content").then(module => ({ default: module.Content } ))),
 "CopyToClipboardButton:@mittwald/flow-react-components/CopyToClipboardButton": lazy(() => import("@mittwald/flow-react-components/CopyToClipboardButton").then(module => ({ default: module.CopyToClipboardButton } ))),
 "Link:@mittwald/flow-react-components/Link": lazy(() => import("@mittwald/flow-react-components/Link").then(module => ({ default: module.Link } ))),
 "Navigation:@mittwald/flow-react-components/Navigation": lazy(() => import("@mittwald/flow-react-components/Navigation").then(module => ({ default: module.Navigation } ))),
-"NavigationItem:@mittwald/flow-react-components/Navigation": I20,
-"faUser:@fortawesome/free-regular-svg-icons/faUser": I21,
-"faHardDrive:@fortawesome/free-regular-svg-icons/faHardDrive": I22,
-"Note:@mittwald/flow-react-components/Note": lazy(() => import("@mittwald/flow-react-components/Note").then(module => ({ default: module.Note } ))),
+"NavigationItem:@mittwald/flow-react-components/Navigation": I21,
+"faUser:@fortawesome/free-regular-svg-icons/faUser": I22,
+"faHardDrive:@fortawesome/free-regular-svg-icons/faHardDrive": I23,
 "NumberField:@mittwald/flow-react-components/NumberField": lazy(() => import("@mittwald/flow-react-components/NumberField").then(module => ({ default: module.NumberField } ))),
 "RadioGroup:@mittwald/flow-react-components/RadioGroup": lazy(() => import("@mittwald/flow-react-components/RadioGroup").then(module => ({ default: module.RadioGroup } ))),
 "Radio:@mittwald/flow-react-components/RadioGroup": lazy(() => import("@mittwald/flow-react-components/RadioGroup").then(module => ({ default: module.Radio } ))),
