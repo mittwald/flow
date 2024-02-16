@@ -33,7 +33,7 @@
   width: var(--switch--indicator-width);
   height: var(--switch--indicator-height);
   background-color: var(--switch--indicator-color--default);
-  border-radius: var(--switch--indicator-border-radius);
+  border-radius: var(--switch--indicator-corner-radius);
   padding: var(--switch--indicator-to-marker-spacing);
   flex-shrink: 0;
   position: relative;
@@ -46,7 +46,7 @@
     width: var(--switch--indicator-marker-size);
     height: var(--switch--indicator-marker-size);
     background-color: var(--switch--indicator-marker-color);
-    border-radius: var(--border-radius--round);
+    border-radius: var(--corner-radius--round);
     transition-property: transform;
     transition-duration: var(--transition--duration--default);
     transform: translateX(0);

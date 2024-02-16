@@ -14,7 +14,7 @@ switch:
     value: "{size-rem.l}"
   indicator-width:
     value: 2.5rem
-  indicator-border-radius:
+  indicator-corner-radius:
     value: "{size-rem.m}"
   indicator-to-marker-spacing:
     value: "{size-rem.xs}"

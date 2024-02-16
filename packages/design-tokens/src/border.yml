@@ -1,4 +1,4 @@
-border-radius:
+corner-radius:
   default:
     value: "{size-px.xs}"
   round:

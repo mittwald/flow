@@ -1,6 +1,6 @@
 button:
-  border-radius:
-    value: "{size-px.xs}"
+  corner-radius:
+    value: "{corner-radius.default}"
   padding-squished-x:
     value: "{size-px.m}"
   padding-squished-y:

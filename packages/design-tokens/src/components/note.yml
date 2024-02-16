@@ -1,8 +1,8 @@
 note:
   padding:
     value: "{size-px.m}"
-  border-radius:
-    value: "{border-radius.default}"
+  corner-radius:
+    value: "{corner-radius.default}"
   border-width:
     value: "{border-width.default}"
   border-inline-start-width:

@@ -6,8 +6,8 @@ navigation-item:
   font-weight:
     current:
       value: "{font-weight.bold}"
-  border-radius:
-    value: "{size-px.xs}"
+  corner-radius:
+    value: "{corner-radius.default}"
   padding-x:
     value: "{size-px.s}"
   padding-y:

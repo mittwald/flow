@@ -5,8 +5,8 @@ checkbox:
     value: "{size-px.m}"
   padding-y:
     value: "{size-px.s}"
-  border-radius:
-    value: "{border-radius.default}"
+  corner-radius:
+    value: "{corner-radius.default}"
   border-width:
     value: "{border-width.default}"
   border-style:
