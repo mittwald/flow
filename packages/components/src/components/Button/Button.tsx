@@ -9,7 +9,6 @@ import {
 } from "@/lib/propsContext";
 import Icon from "../Icon";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons/faSpinner";
-import { Text } from "@/components/Text";
 import { faCheck } from "@fortawesome/free-solid-svg-icons/faCheck";
 import { faTimes } from "@fortawesome/free-solid-svg-icons/faTimes";
 
@@ -65,7 +64,7 @@ export const Button: FC<ButtonProps> = (props) => {
     >
       <PropsContextProvider props={propsContext}>
         {typeof children === "string" ? (
-          <Text className={styles.text}>{children}</Text>
+          <span className={styles.text}>{children}</span>
         ) : (
           children
         )}

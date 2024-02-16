@@ -33,9 +33,9 @@
   order: 4;
 }
 
-/* Negative */
+/* Danger */
 
-.negative {
+.danger {
   .icon {
     color: var(--content-placeholder--negative-icon-color);
   }

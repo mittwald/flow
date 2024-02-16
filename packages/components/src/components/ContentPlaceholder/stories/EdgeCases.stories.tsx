@@ -11,7 +11,7 @@ import { faDisplay } from "@fortawesome/free-solid-svg-icons/faDisplay";
 
 const meta: Meta<typeof ContentPlaceholder> = {
   ...defaultMeta,
-  title: "Content Placeholder/Edge Cases",
+  title: "Content/Content Placeholder/Edge Cases",
 };
 export default meta;
 
@@ -23,7 +23,7 @@ export const LongTexts: Story = {
       <Icon faIcon={faDisplay} />
       <Heading>{dummyText.medium}</Heading>
       <Text>{dummyText.long}</Text>
-      <Button variant="accent">Create app</Button>
+      <Button variant="success">Create app</Button>
     </ContentPlaceholder>
   ),
 };
@@ -34,7 +34,7 @@ export const SmallSpace: Story = {
       <Icon faIcon={faDisplay} />
       <Heading>No apps installed</Heading>
       <Text>Create your first app to start working on your website.</Text>
-      <Button variant="accent">Create app</Button>
+      <Button variant="success">Create app</Button>
     </ContentPlaceholder>
   ),
   parameters: { viewport: { defaultViewport: "mobile1" } },

@@ -17,12 +17,12 @@ content-placeholder:
 
   # Info
   info-icon-color:
-    value: "{informative.color.800}"
+    value: "{info.color.800}"
   info-heading-color:
-    value: "{informative.color.800}"
+    value: "{info.color.800}"
 
   # Negative
   negative-icon-color:
-    value: "{negative.color.800}"
+    value: "{danger.color.800}"
   negative-heading-color:
-    value: "{negative.color.900}"
+    value: "{danger.color.900}"
