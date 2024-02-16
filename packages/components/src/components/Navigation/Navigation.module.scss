@@ -1,0 +1,7 @@
+.navigation {
+  > ul {
+    display: flex;
+    flex-direction: column;
+    row-gap: var(--navigation--item-to-item-spacing);
+  }
+}

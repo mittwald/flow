@@ -1,5 +1,5 @@
+import { expect, describe, it, jest } from "@jest/globals";
 import plugin from "./viteI18nPlugin";
-import { expect } from "@jest/globals";
 import path from "path";
 import type {
   PartialResolvedId,
@@ -8,6 +8,9 @@ import type {
   SourceDescription,
 } from "rollup";
 import { HmrContext, ModuleGraph, ViteDevServer, WebSocketServer } from "vite";
+import { URL } from "url";
+
+const __dirname = new URL(".", import.meta.url).pathname;
 
 describe("vite i18n plugin", () => {
   it("resolve will return correct id", async () => {

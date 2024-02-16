@@ -4,7 +4,7 @@ import defaultMeta from "./Default.stories";
 
 const meta: Meta<typeof Heading> = {
   ...defaultMeta,
-  title: "Heading/Levels",
+  title: "Content/Heading/Levels",
   component: Heading,
 };
 export default meta;

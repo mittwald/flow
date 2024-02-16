@@ -4,7 +4,7 @@ import {
   PropsContextProvider,
   useProps,
 } from "@/lib/propsContext";
-import styles from "./Note.module.css";
+import styles from "./Note.module.scss";
 import clsx from "clsx";
 import { StatusIcon } from "@/components/StatusIcon";
 import { StatusVariantProps } from "@/lib/types/props";
@@ -21,11 +21,12 @@ export const Note: FC<NoteProps> = (props) => {
     ...rest
   } = useProps("Note", props);
 
-  const rootClassName = clsx(className, styles.root, styles[variant]);
+  const rootClassName = clsx(styles.note, styles[variant], className);
 
   const propsContext: PropsContext = {
     Icon: {
       className: styles.customIcon,
+      "aria-hidden": false,
     },
     Heading: {
       className: styles.heading,

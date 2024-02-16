@@ -1,7 +1,7 @@
 import React from "react";
 import { TreeState } from "react-stately";
 import { Node } from "@react-types/shared";
-import styles from "./NavigationItem.module.css";
+import styles from "./NavigationItem.module.scss";
 import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { useNavigationItem } from "@/hooks/useNavigationItem";
 import { NavigationCollectionItemProps } from "@/components/Navigation/components/NavigationItem/NavigationCollectionItem";
@@ -15,7 +15,8 @@ export function NavigationItem<T extends object>(
   props: NavigationItemProps<T>,
 ) {
   const { item, state } = props;
-  const { isCurrent } = item.props as NavigationCollectionItemProps;
+  const { isCurrent, linkComponent: Link = "a" } =
+    item.props as NavigationCollectionItemProps;
 
   const ref = React.useRef(null);
   const { menuItemProps } = useNavigationItem({ key: item.key }, state, ref);
@@ -30,17 +31,16 @@ export function NavigationItem<T extends object>(
   };
 
   return (
-    <li className={styles.root}>
-      <a
+    <li className={styles.navigationItem}>
+      <Link
         {...menuItemProps}
         ref={ref}
-        className={styles.link}
         aria-current={isCurrent ? "page" : false}
       >
         <PropsContextProvider props={propsContext}>
           {item.rendered}
         </PropsContextProvider>
-      </a>
+      </Link>
     </li>
   );
 }
