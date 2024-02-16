@@ -1,10 +1,10 @@
-import Note from "@mittwald/flow-react-components/Note";
+import InlineAlert from "@mittwald/flow-react-components/InlineAlert";
 import Heading from "@mittwald/flow-react-components/Heading";
 import Content from "@mittwald/flow-react-components/Content";
 import Icon from "@mittwald/flow-react-components/Icon";
 import { faCirclePlay } from "@fortawesome/free-solid-svg-icons/faCirclePlay";
 
-<Note>
+<InlineAlert>
   <Icon faIcon={faCirclePlay} aria-label="Information" />
   <Heading>Email address has been archived</Heading>
   <Content>
@@ -12,4 +12,4 @@ import { faCirclePlay } from "@fortawesome/free-solid-svg-icons/faCirclePlay";
     been archived. To be able to send and receive emails,
     you must rename the address.
   </Content>
-</Note>;
+</InlineAlert>;

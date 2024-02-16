@@ -1,13 +1,13 @@
-.note {
-  border-radius: var(--note--corner-radius);
-  border-width: var(--note--border-width);
-  border-style: var(--note--border-style);
-  border-inline-start-width: var(--note--border-x-start-width);
-  padding: var(--note--padding);
+.inlineAlert {
+  border-radius: var(--inline-alert--corner-radius);
+  border-width: var(--inline-alert--border-width);
+  border-style: var(--inline-alert--border-style);
+  border-inline-start-width: var(--inline-alert--border-x-start-width);
+  padding: var(--inline-alert--padding);
   display: grid;
   grid-template-columns: auto 1fr;
-  grid-column-gap: var(--note--icon-to-text-spacing);
-  grid-row-gap: var(--note--text-to-text-spacing);
+  grid-column-gap: var(--inline-alert--icon-to-text-spacing);
+  grid-row-gap: var(--inline-alert--text-to-text-spacing);
 
   @extend .info;
 
@@ -33,13 +33,13 @@
 .customIcon,
 .statusIcon {
   grid-area: icon;
-  font-size: var(--note--icon-size);
-  line-height: calc(var(--note--heading-font-size) * 1.5);
+  font-size: var(--inline-alert--icon-size);
+  line-height: calc(var(--inline-alert--heading-font-size) * 1.5);
 }
 
 .heading {
   grid-area: heading;
-  font-size: var(--note--heading-font-size);
+  font-size: var(--inline-alert--heading-font-size);
 }
 
 .content {
@@ -49,11 +49,11 @@
 /* Variants */
 @mixin variant($variant) {
   .#{$variant} {
-    border-color: var(--note--#{$variant}-border-color);
+    border-color: var(--inline-alert--#{$variant}-border-color);
     .heading,
     .customIcon,
     .statusIcon {
-      color: var(--note--#{$variant}-heading-color);
+      color: var(--inline-alert--#{$variant}-heading-color);
     }
   }
 }
