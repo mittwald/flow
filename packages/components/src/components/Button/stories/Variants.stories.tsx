@@ -18,9 +18,9 @@ export const Primary: Story = {
   },
 };
 
-export const Success: Story = {
+export const Accent: Story = {
   args: {
-    variant: "success",
+    variant: "accent",
   },
   render: (props) => <Button {...props}>Create/Save</Button>,
 };

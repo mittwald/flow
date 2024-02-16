@@ -18,15 +18,15 @@ button:
   font-size-small:
     value: "{font-size.s}"
 
-  # Success
-  success-background-color:
+  # Accent
+  accent-background-color:
     default:
       value: "{success-solid-background-color.default}"
     hover:
       value: "{success-solid-background-color.hover}"
     pressed:
       value: "{success-solid-background-color.pressed}"
-  success-color:
+  accent-color:
     default:
       value: "{success-solid-content-color}"
     hover:
