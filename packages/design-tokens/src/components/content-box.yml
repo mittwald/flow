@@ -1,0 +1,7 @@
+content-box:
+  background-color:
+    value: "{neutral.color.100}"
+  border-radius:
+    value: "{border-radius.default}"
+  box-shadow:
+    value: rgba(0, 0, 0, 0.1) 0px 4px 8px
