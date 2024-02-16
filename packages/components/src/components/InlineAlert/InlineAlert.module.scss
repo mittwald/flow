@@ -6,9 +6,8 @@
   padding: var(--inline-alert--padding);
   display: grid;
   grid-template-columns: auto 1fr;
-  grid-column-gap: var(--inline-alert--icon-to-content-spacing);
+  grid-column-gap: var(--inline-alert--icon-to-text-spacing);
   grid-row-gap: var(--inline-alert--text-to-text-spacing);
-  background-color: var(--inline-alert--background-color);
   width: 100%;
 
   @extend .info;

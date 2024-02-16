@@ -16,7 +16,7 @@ badge:
   icon-to-text-spacing:
     value: 0.5em
   color:
-    value: "{info-solid-foreground-color.default}"
+    value: "{info-solid-content-color}"
 
   # Variants
   info-background-color:

@@ -108,10 +108,10 @@
 }
 
 @include variant(primary, solid);
-@include variant(success, solid);
+@include variant(accent, solid);
 @include variant(danger, solid);
 @include variant(secondary, solid);
 @include variant(primary, plain);
-@include variant(success, plain);
+@include variant(accent, plain);
 @include variant(danger, plain);
 @include variant(secondary, plain);
