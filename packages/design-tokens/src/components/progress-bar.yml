@@ -15,21 +15,21 @@ progress-bar:
 
   # Variants
   info-bar-background-color:
-    value: "{informative.color.200}"
+    value: "{info.color.200}"
   info-fill-background-color:
-    value: "{informative.color.700}"
+    value: "{info.color.700}"
 
   success-bar-background-color:
-    value: "{accent.color.200}"
+    value: "{success.color.200}"
   success-fill-background-color:
-    value: "{accent.color.700}"
+    value: "{success.color.700}"
 
   warning-bar-background-color:
     value: "{warning.color.200}"
   warning-fill-background-color:
     value: "{warning.color.700}"
 
-  negative-bar-background-color:
-    value: "{negative.color.200}"
-  negative-fill-background-color:
-    value: "{negative.color.700}"
+  danger-bar-background-color:
+    value: "{danger.color.200}"
+  danger-fill-background-color:
+    value: "{danger.color.700}"

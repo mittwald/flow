@@ -4,7 +4,7 @@ import React from "react";
 import { Label } from "@/components/Label";
 
 const meta: Meta<typeof ProgressBar> = {
-  title: "ProgressBar",
+  title: "Status/Progress Bar",
   component: ProgressBar,
   render: (props) => (
     <ProgressBar

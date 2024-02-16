@@ -1,6 +1,6 @@
 import * as Aria from "react-aria-components";
 import React, { FC, PropsWithChildren } from "react";
-import styles from "./ProgressBar.module.css";
+import styles from "./ProgressBar.module.scss";
 import clsx from "clsx";
 import { StatusVariantProps } from "@/lib/types/props";
 import { useNumberFormatter } from "react-aria";
@@ -12,7 +12,7 @@ export interface ProgressBarProps
 export const ProgressBar: FC<ProgressBarProps> = (props) => {
   const { children, className, variant = "info", ...rest } = props;
 
-  const rootClassName = clsx(className, styles.root, styles[variant]);
+  const rootClassName = clsx(className, styles.progressBar, styles[variant]);
 
   const formatter = useNumberFormatter(props.formatOptions);
 

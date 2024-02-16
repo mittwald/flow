@@ -4,7 +4,7 @@ import defaultMeta from "./Default.stories";
 
 const meta: Meta<typeof ProgressBar> = {
   ...defaultMeta,
-  title: "ProgressBar/Variants",
+  title: "Status/Progress Bar/Variants",
 };
 
 export default meta;
@@ -30,9 +30,9 @@ export const Warning: Story = {
   },
 };
 
-export const Negative: Story = {
+export const Danger: Story = {
   args: {
-    variant: "negative",
+    variant: "danger",
     value: 950,
   },
 };

@@ -1,6 +1,4 @@
-@import "@/styles";
-
-.root {
+.progressBar {
   display: grid;
   grid-template-areas:
     "label value"
@@ -11,6 +9,8 @@
   font-size: var(--progress-bar--font-size);
   font-weight: var(--progress-bar--font-weight);
   color: var(--progress-bar--color);
+
+  @extend .info;
 }
 
 .value {
@@ -32,33 +32,19 @@
 }
 
 /* Variants */
+@mixin variant($variant) {
+  .#{$variant} {
+    .bar {
+      background: var(--progress-bar--#{$variant}-bar-background-color);
+    }
 
-.success {
-  .bar {
-    background: var(--progress-bar--success-bar-background-color);
-  }
-
-  .fill {
-    background: var(--progress-bar--success-fill-background-color);
-  }
-}
-
-.warning {
-  .bar {
-    background: var(--progress-bar--warning-bar-background-color);
-  }
-
-  .fill {
-    background: var(--progress-bar--warning-fill-background-color);
+    .fill {
+      background: var(--progress-bar--#{$variant}-fill-background-color);
+    }
   }
 }
 
-.negative {
-  .bar {
-    background: var(--progress-bar--negative-bar-background-color);
-  }
-
-  .fill {
-    background: var(--progress-bar--negative-fill-background-color);
-  }
-}
+@include variant(info);
+@include variant(success);
+@include variant(danger);
+@include variant(warning);
