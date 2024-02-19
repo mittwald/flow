@@ -19,7 +19,7 @@ export const ContentBox: FC<ContentBoxProps> = (props) => {
     className,
     elementType = "div",
     ...rest
-  } = useProps("Content", props);
+  } = useProps("ContentBox", props);
 
   const rootClassName = clsx(styles.contentBox, className);
 
