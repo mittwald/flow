@@ -42,9 +42,9 @@
     "build:storybook": "run storybook build",
     "dev": "run nx run-many --outputStyle=stream --projects=@mittwald/flow-react-components --targets=start,build:deps:watch",
     "start": "run storybook dev --port 6006",
-    "test": "run nx run-many --targets test:compile,test:unit",
+    "test": "",
     "test:compile": "run tsc --noEmit",
-    "test:unit": "run node --experimental-vm-modules $(yarn bin jest)"
+    "test:unit": "node --experimental-vm-modules $(yarn bin jest)"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.1",

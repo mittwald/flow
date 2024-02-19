@@ -15,6 +15,10 @@
       "cache": false
     },
     "test": {
+      "dependsOn": ["^build", "test:unit", "test:compile"],
+      "cache": true
+    },
+    "test:compile": {
       "dependsOn": ["^build"],
       "cache": true
     }
