@@ -12,7 +12,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "node build.js"
+    "build": "run node build.js"
   },
   "devDependencies": {
     "@mittwald/flow-react-components": "workspace:^",

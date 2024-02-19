@@ -4,12 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "build": "next build",
-    "build:deps:watch": "PROJECT=@mittwald/flow-documentation yarn run -T build:deps:watch",
-    "build:imports": "tsx dev/generateLiveCodeEditorGlobalImports.ts",
-    "dev": "nx run-many --outputStyle=stream --targets=start,build:deps:watch --projects=@mittwald/flow-documentation",
-    "start": "next dev",
-    "test:tsc": "tsc --noEmit"
+    "build": "run next build",
+    "build:deps:watch": "run -T build:deps:watch @mittwald/flow-documentation",
+    "build:imports": "run tsx dev/generateLiveCodeEditorGlobalImports.ts",
+    "dev": "run nx run-many --outputStyle=stream --projects=@mittwald/flow-documentation --targets=start,build:deps:watch",
+    "start": "run next dev",
+    "test:tsc": "run tsc --noEmit"
   },
   "dependencies": {
     "@fortawesome/free-regular-svg-icons": "^6.5.1",

@@ -37,14 +37,14 @@
     "dist"
   ],
   "scripts": {
-    "build": "vite build --config vite.build.config.ts",
-    "build:deps:watch": "PROJECT=@mittwald/flow-react-components yarn run -T build:deps:watch",
-    "build:storybook": "storybook build",
-    "dev": "nx run-many --outputStyle=stream --targets=start,build:deps:watch",
-    "start": "storybook dev --port 6006",
-    "test": "nx run-many --targets test:compile,test:unit",
-    "test:compile": "tsc --noEmit",
-    "test:unit": "yarn node --experimental-vm-modules $(yarn bin jest)"
+    "build": "run vite build --config vite.build.config.ts",
+    "build:deps:watch": "run -T build:deps:watch @mittwald/flow-react-components",
+    "build:storybook": "run storybook build",
+    "dev": "run nx run-many --outputStyle=stream --projects=@mittwald/flow-react-components --targets=start,build:deps:watch",
+    "start": "run storybook dev --port 6006",
+    "test": "run nx run-many --targets test:compile,test:unit",
+    "test:compile": "run tsc --noEmit",
+    "test:unit": "run node --experimental-vm-modules $(yarn bin jest)"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
