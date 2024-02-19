@@ -4649,17 +4649,17 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@mdx-js/loader", [\
-      ["npm:3.0.0", {\
-        "packageLocation": "./.yarn/cache/@mdx-js-loader-npm-3.0.0-c57c744051-47b36f7674.zip/node_modules/@mdx-js/loader/",\
+      ["npm:3.0.1", {\
+        "packageLocation": "./.yarn/cache/@mdx-js-loader-npm-3.0.1-ac130ecd17-d60df64658.zip/node_modules/@mdx-js/loader/",\
         "packageDependencies": [\
-          ["@mdx-js/loader", "npm:3.0.0"]\
+          ["@mdx-js/loader", "npm:3.0.1"]\
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:3.0.0", {\
-        "packageLocation": "./.yarn/__virtual__/@mdx-js-loader-virtual-f7030c3691/0/cache/@mdx-js-loader-npm-3.0.0-c57c744051-47b36f7674.zip/node_modules/@mdx-js/loader/",\
+      ["virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:3.0.1", {\
+        "packageLocation": "./.yarn/__virtual__/@mdx-js-loader-virtual-2301396469/0/cache/@mdx-js-loader-npm-3.0.1-ac130ecd17-d60df64658.zip/node_modules/@mdx-js/loader/",\
         "packageDependencies": [\
-          ["@mdx-js/loader", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:3.0.0"],\
+          ["@mdx-js/loader", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:3.0.1"],\
           ["@mdx-js/mdx", "npm:3.0.0"],\
           ["@types/webpack", null],\
           ["source-map", "npm:0.7.4"],\
@@ -4875,7 +4875,7 @@ const RAW_RUNTIME_STATE =
           ["@mittwald/flow-documentation", "workspace:packages/docs"],\
           ["@fortawesome/free-regular-svg-icons", "npm:6.5.1"],\
           ["@fortawesome/free-solid-svg-icons", "npm:6.5.1"],\
-          ["@mdx-js/loader", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:3.0.0"],\
+          ["@mdx-js/loader", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:3.0.1"],\
           ["@mdx-js/react", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:3.0.0"],\
           ["@mfalkenberg/react-live-ssr", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:4.1.7"],\
           ["@mittwald/flow-react-components", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#workspace:packages/components"],\
@@ -5199,7 +5199,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/__virtual__/@next-mdx-virtual-936034082e/0/cache/@next-mdx-npm-14.1.0-09e81ac129-364e86155c.zip/node_modules/@next/mdx/",\
         "packageDependencies": [\
           ["@next/mdx", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:14.1.0"],\
-          ["@mdx-js/loader", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:3.0.0"],\
+          ["@mdx-js/loader", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:3.0.1"],\
           ["@mdx-js/react", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:3.0.0"],\
           ["@types/mdx-js__loader", null],\
           ["@types/mdx-js__react", null],\
