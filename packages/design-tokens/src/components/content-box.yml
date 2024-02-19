@@ -1,8 +1,8 @@
 content-box:
   background-color:
     value: "{neutral.color.100}"
-  border-radius:
-    value: "{border-radius.default}"
+  corner-radius:
+    value: "{corner-radius.default}"
   padding:
     value: "{size-px.l}"
   box-shadow:
