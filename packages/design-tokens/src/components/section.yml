@@ -1,6 +1,6 @@
 section:
   border-width:
-    value: "{border-width.default}"
+    value: "{border-width.100}"
   border-style:
     value: "{border-style.default}"
   border-color:

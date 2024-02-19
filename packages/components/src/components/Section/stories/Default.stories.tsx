@@ -8,7 +8,7 @@ import { Label } from "@/components/Label";
 import { Link } from "@/components/Link";
 
 const meta: Meta<typeof Section> = {
-  title: "Content/Section",
+  title: "Structure/Section",
   component: Section,
   render: (props) => (
     <Section {...props}>
