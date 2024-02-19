@@ -4736,10 +4736,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "SOFT"\
       }],\
-      ["npm:3.0.0", {\
-        "packageLocation": "./.yarn/cache/@mdx-js-react-npm-3.0.0-55e6b91b62-865f6ebc7a.zip/node_modules/@mdx-js/react/",\
+      ["npm:3.0.1", {\
+        "packageLocation": "./.yarn/cache/@mdx-js-react-npm-3.0.1-1ce14f6273-d210d926ef.zip/node_modules/@mdx-js/react/",\
         "packageDependencies": [\
-          ["@mdx-js/react", "npm:3.0.0"]\
+          ["@mdx-js/react", "npm:3.0.1"]\
         ],\
         "linkType": "SOFT"\
       }],\
@@ -4757,10 +4757,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:3.0.0", {\
-        "packageLocation": "./.yarn/__virtual__/@mdx-js-react-virtual-d81b76a407/0/cache/@mdx-js-react-npm-3.0.0-55e6b91b62-865f6ebc7a.zip/node_modules/@mdx-js/react/",\
+      ["virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:3.0.1", {\
+        "packageLocation": "./.yarn/__virtual__/@mdx-js-react-virtual-0b542522e2/0/cache/@mdx-js-react-npm-3.0.1-1ce14f6273-d210d926ef.zip/node_modules/@mdx-js/react/",\
         "packageDependencies": [\
-          ["@mdx-js/react", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:3.0.0"],\
+          ["@mdx-js/react", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:3.0.1"],\
           ["@types/mdx", "npm:2.0.10"],\
           ["@types/react", "npm:18.2.55"],\
           ["react", "npm:18.2.0"]\
@@ -4876,7 +4876,7 @@ const RAW_RUNTIME_STATE =
           ["@fortawesome/free-regular-svg-icons", "npm:6.5.1"],\
           ["@fortawesome/free-solid-svg-icons", "npm:6.5.1"],\
           ["@mdx-js/loader", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:3.0.0"],\
-          ["@mdx-js/react", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:3.0.0"],\
+          ["@mdx-js/react", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:3.0.1"],\
           ["@mfalkenberg/react-live-ssr", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:4.1.7"],\
           ["@mittwald/flow-react-components", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#workspace:packages/components"],\
           ["@next/mdx", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:14.1.0"],\
@@ -5200,7 +5200,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@next/mdx", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:14.1.0"],\
           ["@mdx-js/loader", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:3.0.0"],\
-          ["@mdx-js/react", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:3.0.0"],\
+          ["@mdx-js/react", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:3.0.1"],\
           ["@types/mdx-js__loader", null],\
           ["@types/mdx-js__react", null],\
           ["source-map", "npm:0.7.4"]\
