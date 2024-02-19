@@ -1,25 +1,25 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Note from "../Note";
+import InlineAlert from "../InlineAlert";
 import React from "react";
 import { Heading } from "@/components/Heading";
 import { Content } from "@/components/Content";
 import { dummyText } from "@/lib/dev/dummyText";
 import defaultMeta from "./Default.stories";
 
-const meta: Meta<typeof Note> = {
+const meta: Meta<typeof InlineAlert> = {
   ...defaultMeta,
-  title: "Status/Note/Edge Cases",
+  title: "Status/Inline Alert/Edge Cases",
 };
 
 export default meta;
 
-type Story = StoryObj<typeof Note>;
+type Story = StoryObj<typeof InlineAlert>;
 
 export const LongTexts: Story = {
   render: (props) => (
-    <Note {...props}>
+    <InlineAlert {...props}>
       <Heading>{dummyText.medium}</Heading>
       <Content>{dummyText.long}</Content>
-    </Note>
+    </InlineAlert>
   ),
 };

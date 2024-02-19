@@ -10,7 +10,7 @@ import type {
 import type { LinkProps } from "@/components/Link";
 import type { FieldErrorProps } from "@/components/FieldError";
 import type { FieldDescriptionProps } from "@/components/FieldDescription";
-import type { NoteProps } from "@/components/Note";
+import type { InlineAlertProps } from "@/components/InlineAlert";
 import type { HeadingProps } from "@/components/Heading";
 import type { InitialsProps } from "@/components/Initials";
 import type { ImageProps } from "@/components/Image";
@@ -28,7 +28,7 @@ export interface FlowComponentPropsTypes {
   Navigation: NavigationProps;
   NavigationItem: NavigationItemProps;
   Heading: HeadingProps;
-  Note: NoteProps;
+  InlineAlert: InlineAlertProps;
   Link: LinkProps;
   Initials: InitialsProps;
   Image: ImageProps;

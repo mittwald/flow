@@ -19,7 +19,7 @@ const meta: Meta<typeof Button> = {
   parameters: {
     controls: { exclude: ["onPress"] },
   },
-  render: (props) => <Button {...props}>Button</Button>,
+  render: (props) => <Button {...props}>Continue/Action</Button>,
 };
 
 export default meta;

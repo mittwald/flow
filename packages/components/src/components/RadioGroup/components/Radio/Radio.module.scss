@@ -19,14 +19,14 @@
 
     &:first-of-type {
       border-radius: 0;
-      border-start-start-radius: var(--radio-group--border-radius);
-      border-end-start-radius: var(--radio-group--border-radius);
+      border-start-start-radius: var(--radio-group--corner-radius);
+      border-end-start-radius: var(--radio-group--corner-radius);
     }
 
     &:last-of-type {
       border-radius: 0;
-      border-start-end-radius: var(--radio-group--border-radius);
-      border-end-end-radius: var(--radio-group--border-radius);
+      border-start-end-radius: var(--radio-group--corner-radius);
+      border-end-end-radius: var(--radio-group--corner-radius);
       margin: 0;
     }
 
@@ -41,14 +41,14 @@
 
       &:first-of-type {
         border-radius: 0;
-        border-start-start-radius: var(--radio-group--border-radius);
-        border-start-end-radius: var(--radio-group--border-radius);
+        border-start-start-radius: var(--radio-group--corner-radius);
+        border-start-end-radius: var(--radio-group--corner-radius);
       }
 
       &:last-of-type {
         border-radius: 0;
-        border-end-end-radius: var(--radio-group--border-radius);
-        border-end-start-radius: var(--radio-group--border-radius);
+        border-end-end-radius: var(--radio-group--corner-radius);
+        border-end-start-radius: var(--radio-group--corner-radius);
         margin: 0;
       }
     }
@@ -61,7 +61,7 @@
       "label";
     grid-template-columns: 1fr;
     justify-items: center;
-    border-radius: var(--radio-group--border-radius);
+    border-radius: var(--radio-group--corner-radius);
     .label {
       font-weight: var(--radio-group--label-font-weight-with-content-or-icon);
     }
@@ -79,7 +79,7 @@
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr;
     justify-items: start;
-    border-radius: var(--radio-group--border-radius);
+    border-radius: var(--radio-group--corner-radius);
     .label {
       font-weight: var(--radio-group--label-font-weight-with-content-or-icon);
     }
