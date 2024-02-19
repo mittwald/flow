@@ -14,8 +14,7 @@ const meta: Meta<typeof ContentBox> = {
   args: { elementType: "div" },
   render: (props) => (
     <ContentBox {...props}>
-      Content Box is an Element with a white background color and box shadow.
-      Structure Elements like sections can be used inside of it to add padding.
+      Content Box is a structure element that can contain any content
     </ContentBox>
   ),
 };
