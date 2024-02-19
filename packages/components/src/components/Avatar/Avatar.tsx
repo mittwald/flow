@@ -6,11 +6,11 @@ import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
 export interface AvatarProps extends PropsWithChildren {
   className?: string;
   /** @default "s" */
-  size?: "s" | "m" | "l";
+  size?: "xs" | "s" | "m" | "l";
 }
 
 export const Avatar: FC<AvatarProps> = (props) => {
-  const { children, className, size = "s" } = props;
+  const { children, className, size = "m" } = props;
 
   const rootClassName = clsx(styles.avatar, styles[`size-${size}`], className);
 

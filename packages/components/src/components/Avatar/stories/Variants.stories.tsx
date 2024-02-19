@@ -10,7 +10,9 @@ export default meta;
 
 type Story = StoryObj<typeof Avatar>;
 
-export const SizeS: Story = {};
+export const SizeXS: Story = { args: { size: "xs" } };
+
+export const SizeS: Story = { args: { size: "s" } };
 
 export const SizeM: Story = { args: { size: "m" } };
 
