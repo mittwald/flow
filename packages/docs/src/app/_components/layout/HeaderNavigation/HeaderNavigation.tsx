@@ -1,11 +1,9 @@
 "use client";
-import React, { FC, Fragment, ReactElement, useId } from "react";
+import React, { FC, ReactElement, useId } from "react";
 import Navigation, {
   NavigationItem,
 } from "@mittwald/flow-react-components/Navigation";
-import Heading from "@mittwald/flow-react-components/Heading";
 import { usePathname } from "next/navigation";
-import styles from "./MainNavigation.module.scss";
 import { MdxFile, SerializedMdxFile } from "@/lib/mdx/MdxFile";
 import { NextJsNavigationItemLink } from "@/app/_components/layout/MainNavigation/NextJsNavigationItemLink";
 import { groupBy } from "remeda";
@@ -15,7 +13,7 @@ interface Props {
   docs: SerializedMdxFile[];
 }
 
-const MainNavigation: FC<Props> = (props) => {
+const HeaderNavigation: FC<Props> = (props) => {
   const docs = props.docs.map(MdxFile.deserialize);
 
   const navGroups = groupBy(docs, (d) => d.pathname.split("/")[1]);
@@ -23,9 +21,7 @@ const MainNavigation: FC<Props> = (props) => {
   const headingComponentsId = useId();
   const currentPathname = usePathname();
 
-  const currentNavGroup = navGroups[currentPathname.split("/")[1]];
-
-  const navItem = (mdx: MdxFile): ReactElement => {
+  const navItem = (mdx: MdxFile, group: string): ReactElement => {
     const href = mdx.pathname;
     return (
       <NavigationItem
@@ -34,21 +30,18 @@ const MainNavigation: FC<Props> = (props) => {
         isCurrent={href === currentPathname}
         linkComponent={NextJsNavigationItemLink}
       >
-        {mdx.getNavTitle()}
+        <GroupHeadingText>{group}</GroupHeadingText>
       </NavigationItem>
     );
   };
 
   return (
-    <Fragment>
-      <Heading level={4} id={headingComponentsId} className={styles.heading}>
-        <GroupHeadingText>{currentPathname.split("/")[1]}</GroupHeadingText>
-      </Heading>
-      <Navigation aria-labelledby={headingComponentsId}>
-        {currentNavGroup.map(navItem)}
-      </Navigation>
-    </Fragment>
+    <Navigation aria-labelledby={headingComponentsId}>
+      {Object.entries(navGroups).map(([group, mdxFiles]) =>
+        navItem(mdxFiles[0], group),
+      )}
+    </Navigation>
   );
 };
 
-export default MainNavigation;
+export default HeaderNavigation;

@@ -4,6 +4,7 @@ import "./layout.module.scss";
 import type { Metadata } from "next";
 import React, { FC, PropsWithChildren } from "react";
 import MainNavigation from "@/app/_components/layout/MainNavigation/MainNavigation";
+import HeaderNavigation from "@/app/_components/layout/HeaderNavigation/HeaderNavigation";
 import clsx from "clsx";
 import styles from "./layout.module.scss";
 import Heading from "@mittwald/flow-react-components/Heading";
@@ -23,9 +24,13 @@ const RootLayout: FC<PropsWithChildren> = async (props) => {
     <html lang="en">
       <body className={bodyClassName}>
         <header className={styles.header}>
-          <Heading level={1} className={styles.heading}>
-            Flow – mittwald Design System <Badge variant="warning">beta</Badge>
-          </Heading>
+          <div>
+            <Heading level={1} className={styles.heading}>
+              Flow – mittwald Design System{" "}
+              <Badge variant="warning">beta</Badge>
+            </Heading>
+            <HeaderNavigation docs={docs.map((mdx) => mdx.serialize())} />
+          </div>
         </header>
         <div className={styles.center}>
           <ContentBox className={styles.nav}>

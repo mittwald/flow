@@ -13,6 +13,7 @@
   grid-template-columns: 200px minmax(0, 1fr);
   grid-template-rows: 1fr auto;
   grid-gap: var(--size-px--l);
+  padding-inline: var(--size-px--l);
 }
 
 @media (max-width: 767px) {
@@ -28,13 +29,17 @@
 }
 
 .header {
-  padding: var(--size-px--m) var(--size-px--l);
   background: var(--primary--color--100);
   padding-bottom: 200px;
-  margin-bottom: calc((200px - var(--size-px--m)) * -1);
-  .heading {
+  margin-bottom: -200px;
+  > div {
+    display: flex;
+    justify-content: space-between;
     max-width: 1500px;
     margin: 0 auto;
+    padding: var(--size-px--m) var(--size-px--l);
+  }
+  .heading {
     align-items: center;
     column-gap: var(--size-px--m);
     display: flex;
