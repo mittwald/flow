@@ -1,7 +1,7 @@
 import styles from "./customComponents.module.css";
 import Heading from "@mittwald/flow-react-components/Heading";
 import { MDXComponents } from "mdx/types";
-import Note from "@mittwald/flow-react-components/Note";
+import InlineAlert from "@mittwald/flow-react-components/InlineAlert";
 import Content from "@mittwald/flow-react-components/Content";
 import React, { Children, isValidElement } from "react";
 import CopyToClipboardButton from "@mittwald/flow-react-components/CopyToClipboardButton";
@@ -28,12 +28,12 @@ export const customComponents: MDXComponents = {
   li: ({ children }) => <li className={styles.li}>{children}</li>,
 
   blockquote: ({ children }) => (
-    <Note>
+    <InlineAlert>
       <Heading>{Children.toArray(children).find(isValidElement)}</Heading>
       <Content>
         {Children.toArray(children).filter(isValidElement).slice(1)}
       </Content>
-    </Note>
+    </InlineAlert>
   ),
 
   h2: ({ children }) => (
