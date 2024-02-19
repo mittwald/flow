@@ -4,14 +4,11 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "build": "run next build",
-    "build:deps": "",
-    "build:deps:base": "yarn run -T lerna run build:deps --scope=@mittwald/flow-documentation",
-    "build:deps:run": "yarn run -T lerna run build:deps --scope=@mittwald/flow-documentation",
-    "build:imports": "yarn pnpify node --loader ts-node/esm dev/generateLiveCodeEditorGlobalImports.ts",
-    "build:watch:dependents": "yarn build:deps:run && run -T lerna watch --scope=@mittwald/flow-documentation --include-dependencies -- lerna run build:deps --scope=@mittwald/flow-documentation",
-    "dev": "run next dev",
-    "start": "run next start",
+    "build": "next build",
+    "build:deps:watch": "PROJECT=@mittwald/flow-documentation yarn run -T build:deps:watch",
+    "build:imports": "tsx dev/generateLiveCodeEditorGlobalImports.ts",
+    "dev": "nx run-many --outputStyle=stream --targets=start,build:deps:watch --projects=@mittwald/flow-documentation",
+    "start": "next dev",
     "test:tsc": "tsc --noEmit"
   },
   "dependencies": {
@@ -47,47 +44,8 @@
     "eslint": "^8.56.0",
     "eslint-config-next": "^14.1.0",
     "glob": "^10.3.10",
+    "nx": "^18.0.4",
     "sass": "^1.71.0",
-    "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
-  },
-  "nx": {
-    "targets": {
-      "dev": {
-        "dependsOn": [
-          "build:imports",
-          "^build"
-        ]
-      },
-      "build:imports": {
-        "dependsOn": [
-          "^build"
-        ],
-        "inputs": [
-          "{projectRoot}/src/content/**/*.tsx",
-          "{projectRoot}/dev/generateLiveCodeEditorGlobalImports.ts"
-        ],
-        "outputs": [
-          "{projectRoot}/src/lib/liveCode/dynamicImports.ts"
-        ],
-        "cache": true
-      },
-      "build:deps": {
-        "dependsOn": [
-          "^build",
-          "build:imports"
-        ]
-      },
-      "build": {
-        "dependsOn": [
-          "^build",
-          "build:imports"
-        ],
-        "outputs": [
-          "{projectRoot}/.next",
-          "{projectRoot}/out"
-        ]
-      }
-    }
   }
 }

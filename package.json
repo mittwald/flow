@@ -10,13 +10,10 @@
   },
   "scripts": {
     "build": "lerna run build",
-    "components:dev": "concurrently yarn:components:dev:base yarn:components:dev:watch",
-    "components:dev:base": "yarn workspace @mittwald/flow-react-components run dev",
-    "components:dev:watch": "yarn workspace @mittwald/flow-react-components run build:watch:dependents",
+    "build:deps:watch": "nx watch --projects=$PROJECT --includeDependentProjects -- nx run-many --targets=build --projects=$(yarn tsx dev/nxDependencies.ts $PROJECT)",
+    "components": "nx run @mittwald/flow-react-components:\"$@\"",
     "dev:init-githooks": "yarn dlx simple-git-hooks",
-    "docs:dev": "concurrently yarn:docs:dev:base yarn:docs:dev:watch",
-    "docs:dev:base": "yarn workspace @mittwald/flow-documentation run dev",
-    "docs:dev:watch": "yarn workspace @mittwald/flow-documentation run build:watch:dependents",
+    "docs": "nx run @mittwald/flow-documentation:\"$@\"",
     "format": "prettier --write '**/*.{ts,tsx,yaml,yml,json,md,mdx,js,cjs,mjs,css}'",
     "lint": "eslint .",
     "test": "lerna run test"
@@ -28,10 +25,10 @@
   },
   "devDependencies": {
     "@eslint/js": "^8.56.0",
+    "@nx/devkit": "^18.0.4",
     "@types/eslint__js": "^8.42.3",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
-    "concurrently": "^8.2.2",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-json": "^3.1.0",
@@ -43,6 +40,7 @@
     "prettier-plugin-pkgsort": "^0.2.1",
     "prettier-plugin-sort-json": "^3.1.0",
     "simple-git-hooks": "^2.9.0",
+    "tsx": "^4.7.1",
     "typescript": "^5.3.3"
   },
   "resolutions": {

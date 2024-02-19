@@ -3,40 +3,20 @@
   "affected": {
     "defaultBase": "main"
   },
-  "namedInputs": {
-    "src": ["{projectRoot}/{src,dev}/**/!(*.test).*"],
-    "config": ["{projectRoot}/*.config.{cjs,js,ts,mjs,json}"],
-    "test": ["{projectRoot}/{src,dev}/**/*.test.*"],
-    "default": ["src", "config"],
-    "production": ["default"],
-    "nx-cloud-version-1:": ["default"]
-  },
+  "namedInputs": {},
   "nxCloudAccessToken": "ZTRhMTQzNWUtZGY5Mi00OWVjLTg4ZjAtNzM3ZjRmZjJiNDRifHJlYWQ=",
   "targetDefaults": {
     "build": {
       "dependsOn": ["^build"],
-      "inputs": ["default", "^default"],
-      "outputs": ["{projectRoot}/dist"],
       "cache": true
-    },
-    "build:deps": {
-      "dependsOn": ["^build"]
     },
     "dev": {
-      "dependsOn": ["^build"]
+      "dependsOn": ["^build"],
+      "cache": false
     },
     "test": {
-      "inputs": ["test", "default", "^default"],
       "dependsOn": ["^build"],
       "cache": true
-    },
-    "test:tsc": {
-      "inputs": ["default"],
-      "dependsOn": ["^build"],
-      "cache": true
-    },
-    "start": {
-      "dependsOn": ["build"]
     }
   }
 }
