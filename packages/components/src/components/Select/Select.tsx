@@ -36,7 +36,7 @@ export const Select: FC<SelectProps> = (props) => {
     <Aria.ComboBox menuTrigger="focus" {...rest} className={rootClassName}>
       <div className={styles.select}>
         <Aria.Input className={styles.input} />
-        <Button>
+        <Button className={styles.toggle} variant="plain">
           <Icon faIcon={faChevronDown} />
         </Button>
       </div>
