@@ -33,6 +33,7 @@ export default defineConfig(
           Link: "./src/components/Link/index.ts",
           Navigation: "./src/components/Navigation/index.ts",
           NumberField: "./src/components/NumberField/index.ts",
+          Popover: "./src/components/Popover/index.ts",
           RadioGroup: "./src/components/RadioGroup/index.ts",
           Select: "./src/components/Select/index.ts",
           StatusIcon: "./src/components/StatusIcon/index.ts",
