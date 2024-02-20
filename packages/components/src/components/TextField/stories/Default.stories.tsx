@@ -73,9 +73,8 @@ export const WithForm: Story = {
       <TextField {...props} type="email" inputMode="email" isRequired>
         <Label>Email</Label>
       </TextField>
-      <Button style={{ marginTop: "16px" }} type="submit">
-        Submit
-      </Button>
+      <br />
+      <Button type="submit">Submit</Button>
     </Form>
   ),
 };
