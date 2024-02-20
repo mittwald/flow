@@ -11,6 +11,7 @@ import Icon from "@/components/Icon";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons/faSpinner";
 import { faCheck } from "@fortawesome/free-solid-svg-icons/faCheck";
 import { faTimes } from "@fortawesome/free-solid-svg-icons/faTimes";
+import { Wrap } from "@/components/Wrap";
 
 export interface ButtonProps
   extends PropsWithChildren<Omit<Aria.ButtonProps, "style">> {
@@ -73,11 +74,9 @@ export const Button: FC<ButtonProps> = (props) => {
       {...restProps}
     >
       <PropsContextProvider props={propsContext}>
-        {stateIcon ? (
+        <Wrap if={stateIcon}>
           <span className={styles.content}>{children}</span>
-        ) : (
-          children
-        )}
+        </Wrap>
       </PropsContextProvider>
       {stateIcon}
     </Aria.Button>
