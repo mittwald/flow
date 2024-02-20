@@ -15,11 +15,17 @@ const meta: Meta<typeof Button> = {
     variant: {
       control: "inline-radio",
     },
+    style: {
+      control: "inline-radio",
+    },
+    size: {
+      control: "inline-radio",
+    },
   },
   parameters: {
     controls: { exclude: ["onPress"] },
   },
-  render: (props) => <Button {...props}>Button</Button>,
+  render: (props) => <Button {...props}>Continue/Action</Button>,
 };
 
 export default meta;
@@ -28,15 +34,9 @@ type Story = StoryObj<typeof Button>;
 
 export const Default: Story = {};
 
-export const Disabled: Story = {
-  args: {
-    isDisabled: true,
-  },
-};
-
 export const Small: Story = {
   args: {
-    small: true,
+    size: "small",
   },
 };
 
@@ -50,7 +50,7 @@ export const WithIcon: Story = {
 
 export const SmallWithIcon: Story = {
   render: (props) => (
-    <Button {...props} aria-label="Add to favorites" small>
+    <Button {...props} aria-label="Add to favorites" size="small">
       <Icon faIcon={faStar} />
     </Button>
   ),

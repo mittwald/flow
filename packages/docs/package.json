@@ -5,20 +5,17 @@
   "type": "module",
   "scripts": {
     "build": "run next build",
-    "build:deps": "",
-    "build:deps:base": "yarn run -T lerna run build:deps --scope=@mittwald/flow-documentation",
-    "build:deps:run": "yarn run -T lerna run build:deps --scope=@mittwald/flow-documentation",
-    "build:imports": "yarn pnpify node --loader ts-node/esm dev/generateLiveCodeEditorGlobalImports.ts",
-    "build:watch:dependents": "yarn build:deps:run && run -T lerna watch --scope=@mittwald/flow-documentation --include-dependencies -- lerna run build:deps --scope=@mittwald/flow-documentation",
-    "dev": "run next dev",
-    "start": "run next start",
-    "test:tsc": "tsc --noEmit"
+    "build:deps:watch": "run -T build:deps:watch @mittwald/flow-documentation",
+    "build:imports": "run tsx dev/generateLiveCodeEditorGlobalImports.ts",
+    "dev": "run nx run-many --outputStyle=stream --projects=@mittwald/flow-documentation --targets=start,build:deps:watch",
+    "start": "run next dev",
+    "test:tsc": "run tsc --noEmit"
   },
   "dependencies": {
     "@fortawesome/free-regular-svg-icons": "^6.5.1",
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
-    "@mdx-js/loader": "^3.0.0",
-    "@mdx-js/react": "^3.0.0",
+    "@mdx-js/loader": "^3.0.1",
+    "@mdx-js/react": "^3.0.1",
     "@mfalkenberg/react-live-ssr": "^4.1.7",
     "@mittwald/flow-react-components": "workspace:^",
     "@next/mdx": "^14.1.0",
@@ -34,60 +31,21 @@
     "react-dom": "^18.2.0",
     "remark-frontmatter": "^5.0.0",
     "remark-mdx-frontmatter": "^4.0.0",
-    "remeda": "^1.40.0",
-    "webpack": "^5.90.1"
+    "remeda": "^1.43.0",
+    "webpack": "^5.90.2"
   },
   "devDependencies": {
-    "@types/node": "^20.11.16",
-    "@types/react": "^18.2.53",
-    "@types/react-dom": "^18.2.18",
+    "@types/node": "^20.11.19",
+    "@types/react": "^18.2.56",
+    "@types/react-dom": "^18.2.19",
     "@yarnpkg/pnpify": "^4.0.1",
     "acorn": "patch:acorn@npm%3A8.11.2#~/.yarn/patches/acorn-npm-8.11.2-a470f49bb6.patch",
     "acorn-jsx": "^5.3.2",
     "eslint": "^8.56.0",
     "eslint-config-next": "^14.1.0",
     "glob": "^10.3.10",
-    "sass": "^1.70.0",
-    "ts-node": "^10.9.2",
+    "nx": "^18.0.4",
+    "sass": "^1.71.0",
     "typescript": "^5.3.3"
-  },
-  "nx": {
-    "targets": {
-      "dev": {
-        "dependsOn": [
-          "build:imports",
-          "^build"
-        ]
-      },
-      "build:imports": {
-        "dependsOn": [
-          "^build"
-        ],
-        "inputs": [
-          "{projectRoot}/src/content/**/*.tsx",
-          "{projectRoot}/dev/generateLiveCodeEditorGlobalImports.ts"
-        ],
-        "outputs": [
-          "{projectRoot}/src/lib/liveCode/dynamicImports.ts"
-        ],
-        "cache": true
-      },
-      "build:deps": {
-        "dependsOn": [
-          "^build",
-          "build:imports"
-        ]
-      },
-      "build": {
-        "dependsOn": [
-          "^build",
-          "build:imports"
-        ],
-        "outputs": [
-          "{projectRoot}/.next",
-          "{projectRoot}/out"
-        ]
-      }
-    }
   }
 }

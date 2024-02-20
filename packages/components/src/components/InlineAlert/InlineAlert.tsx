@@ -4,30 +4,26 @@ import {
   PropsContextProvider,
   useProps,
 } from "@/lib/propsContext";
-import styles from "./Note.module.scss";
+import styles from "./InlineAlert.module.scss";
 import clsx from "clsx";
 import { StatusIcon } from "@/components/StatusIcon";
 import { StatusVariantProps } from "@/lib/types/props";
 
-export interface NoteProps
+export interface InlineAlertProps
   extends PropsWithChildren<ComponentProps<"aside">>,
-    StatusVariantProps<"success"> {}
+    StatusVariantProps {}
 
-export const Note: FC<NoteProps> = (props) => {
+export const InlineAlert: FC<InlineAlertProps> = (props) => {
   const {
     children,
     className,
     variant = "info",
     ...rest
-  } = useProps("Note", props);
+  } = useProps("InlineAlert", props);
 
-  const rootClassName = clsx(styles.note, styles[variant], className);
+  const rootClassName = clsx(styles.inlineAlert, styles[variant], className);
 
   const propsContext: PropsContext = {
-    Icon: {
-      className: styles.customIcon,
-      "aria-hidden": false,
-    },
     Heading: {
       className: styles.heading,
       level: 3,
@@ -47,4 +43,4 @@ export const Note: FC<NoteProps> = (props) => {
   );
 };
 
-export default Note;
+export default InlineAlert;

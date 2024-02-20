@@ -3,6 +3,42 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.13](https://github.com/mittwald/flow/compare/0.1.0-alpha.12...0.1.0-alpha.13) (2024-02-20)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.12](https://github.com/mittwald/flow/compare/0.1.0-alpha.11...0.1.0-alpha.12) (2024-02-19)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.11](https://github.com/mittwald/flow/compare/0.1.0-alpha.10...0.1.0-alpha.11) (2024-02-16)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.10](https://github.com/mittwald/flow/compare/0.1.0-alpha.9...0.1.0-alpha.10) (2024-02-12)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.9](https://github.com/mittwald/flow/compare/0.1.0-alpha.8...0.1.0-alpha.9) (2024-02-06)
 
 ### Bug Fixes
