@@ -1,0 +1,9 @@
+@use "@/styles/mixins/textInput.scss";
+
+.select {
+  order: 2;
+}
+
+.input {
+  @include textInput.textInput();
+}

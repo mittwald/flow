@@ -25,6 +25,7 @@
     "./Navigation": "./dist/Navigation.js",
     "./NumberField": "./dist/NumberField.js",
     "./RadioGroup": "./dist/RadioGroup.js",
+    "./Select": "./dist/Select.js",
     "./StatusIcon": "./dist/StatusIcon.js",
     "./Switch": "./dist/Switch.js",
     "./Text": "./dist/Text.js",
