@@ -32,27 +32,13 @@
 }
 
 .content,
-.pendingIcon,
-.succeededIcon,
-.failedIcon {
+.stateIcon {
   grid-area: content;
 }
 
 .icon,
 .icon svg {
   display: block;
-}
-
-.pendingIcon {
-  color: var(--button--pending-icon-color);
-}
-
-.succeededIcon {
-  color: var(--button--succeeded-icon-color);
-}
-
-.failedIcon {
-  color: var(--button--failed-icon-color);
 }
 
 .small {
@@ -65,7 +51,25 @@
   }
 }
 
-.pending {
+.stateIcon {
+  color: var(--button--pending-icon-color);
+}
+
+.isSucceeded {
+  .stateIcon {
+    color: var(--button--succeeded-icon-color);
+  }
+}
+
+.isFailed {
+  .stateIcon {
+    color: var(--button--failed-icon-color);
+  }
+}
+
+.isPending,
+.isFailed,
+.isSucceeded {
   .content {
     visibility: hidden;
   }

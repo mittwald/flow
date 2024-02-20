@@ -18,8 +18,8 @@ export interface ButtonProps
   variant?: "primary" | "accent" | "secondary" | "danger";
   /** @default "solid" */
   style?: "plain" | "solid";
-  /** @default "m" */
-  size?: "m" | "s";
+  /** @default "medium" */
+  size?: "medium" | "small";
 
   isPending?: boolean;
   isSucceeded?: boolean;
@@ -32,7 +32,7 @@ export const Button: FC<ButtonProps> = (props) => {
     style = "solid",
     children,
     className,
-    size = "m",
+    size = "medium",
     isPending,
     isDisabled,
     isSucceeded,
@@ -42,8 +42,10 @@ export const Button: FC<ButtonProps> = (props) => {
 
   const rootClassName = clsx(
     styles.button,
-    size === "s" && styles.small,
-    (isPending || isSucceeded || isFailed) && styles.pending,
+    isPending && styles.isPending,
+    isSucceeded && styles.isSucceeded,
+    isFailed && styles.isFailed,
+    styles[size],
     styles[variant],
     styles[style],
     className,
@@ -57,13 +59,12 @@ export const Button: FC<ButtonProps> = (props) => {
     },
   };
 
-  const stateIcon = isPending ? (
-    <Icon faIcon={faSpinner} className={styles.pendingIcon} />
-  ) : isSucceeded ? (
-    <Icon faIcon={faCheck} className={styles.succeededIcon} />
-  ) : isFailed ? (
-    <Icon faIcon={faTimes} className={styles.failedIcon} />
-  ) : undefined;
+  const stateIcon = (isPending || isSucceeded || isFailed) && (
+    <Icon
+      faIcon={isSucceeded ? faCheck : isFailed ? faTimes : faSpinner}
+      className={styles.stateIcon}
+    />
+  );
 
   return (
     <Aria.Button
