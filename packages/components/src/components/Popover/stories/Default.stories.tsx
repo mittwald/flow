@@ -7,7 +7,7 @@ import Button from "@/components/Button";
 const meta: Meta<typeof Popover> = {
   title: "Overlays/Popover",
   component: Popover,
-  render: (props) => (
+  render: () => (
     <Aria.DialogTrigger>
       <Button>Trigger popover</Button>
       <Popover placement="bottom right">I am a popover.</Popover>
