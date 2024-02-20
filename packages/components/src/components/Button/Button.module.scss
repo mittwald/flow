@@ -11,10 +11,10 @@
   transition-duration: var(--transition--duration--default);
   outline-color: var(--button--focus-outline-color);
   outline-offset: var(--button--focus-outline-offset);
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  grid-template-areas: "content";
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 
   @extend .primary;
   @extend .solid;
@@ -22,20 +22,20 @@
   &:has(.icon) {
     padding: var(--button--padding);
   }
+
+  &:has(.content) {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-areas: "content";
+  }
 }
 
-.text,
-.icon,
+.content,
 .pendingIcon,
 .succeededIcon,
 .failedIcon {
   grid-area: content;
-}
-
-.text {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .icon,
@@ -66,12 +66,11 @@
 }
 
 .pending {
-  .icon,
-  .text {
+  .content {
     visibility: hidden;
   }
   &.plain {
-    .text {
+    .content:not(:has(.icon)) {
       visibility: visible;
     }
   }

@@ -57,6 +57,14 @@ export const Button: FC<ButtonProps> = (props) => {
     },
   };
 
+  const stateIcon = isPending ? (
+    <Icon faIcon={faSpinner} className={styles.pendingIcon} />
+  ) : isSucceeded ? (
+    <Icon faIcon={faCheck} className={styles.succeededIcon} />
+  ) : isFailed ? (
+    <Icon faIcon={faTimes} className={styles.failedIcon} />
+  ) : undefined;
+
   return (
     <Aria.Button
       className={rootClassName}
@@ -64,17 +72,13 @@ export const Button: FC<ButtonProps> = (props) => {
       {...restProps}
     >
       <PropsContextProvider props={propsContext}>
-        {typeof children === "string" ? (
-          <span className={styles.text}>{children}</span>
+        {stateIcon ? (
+          <span className={styles.content}>{children}</span>
         ) : (
           children
         )}
       </PropsContextProvider>
-      {isPending && <Icon faIcon={faSpinner} className={styles.pendingIcon} />}
-      {isSucceeded && (
-        <Icon faIcon={faCheck} className={styles.succeededIcon} />
-      )}
-      {isFailed && <Icon faIcon={faTimes} className={styles.failedIcon} />}
+      {stateIcon}
     </Aria.Button>
   );
 };
