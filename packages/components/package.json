@@ -24,6 +24,7 @@
     "./Link": "./dist/Link.js",
     "./Navigation": "./dist/Navigation.js",
     "./NumberField": "./dist/NumberField.js",
+    "./Popover": "./dist/Popover.js",
     "./RadioGroup": "./dist/RadioGroup.js",
     "./StatusIcon": "./dist/StatusIcon.js",
     "./Switch": "./dist/Switch.js",
