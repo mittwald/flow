@@ -1,17 +1,12 @@
-import React, {
-  ComponentProps,
-  createElement,
-  FC,
-  PropsWithChildren,
-} from "react";
+import React, { FC, PropsWithChildren } from "react";
 import { ClearPropsContext, useProps } from "@/lib/propsContext";
 import styles from "./ContentBox.module.scss";
 import clsx from "clsx";
+import { PropsWithElementType } from "@/lib/types/props";
 
 export interface ContentBoxProps
-  extends PropsWithChildren<ComponentProps<"div">> {
-  elementType?: string;
-}
+  extends PropsWithChildren,
+    PropsWithElementType {}
 
 export const ContentBox: FC<ContentBoxProps> = (props) => {
   const {
@@ -23,11 +18,13 @@ export const ContentBox: FC<ContentBoxProps> = (props) => {
 
   const rootClassName = clsx(styles.contentBox, className);
 
-  return createElement(elementType, {
-    ...rest,
-    className: rootClassName,
-    children: <ClearPropsContext>{children}</ClearPropsContext>,
-  });
+  const Element = elementType;
+
+  return (
+    <Element className={rootClassName} {...rest}>
+      <ClearPropsContext>{children}</ClearPropsContext>
+    </Element>
+  );
 };
 
 export default ContentBox;
