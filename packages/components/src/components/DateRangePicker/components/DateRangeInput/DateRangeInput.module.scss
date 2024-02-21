@@ -2,15 +2,20 @@
 
 .dateRangeInput {
   @include textInput.textInput();
-  display: grid;
-  grid-template-columns: auto auto 1fr auto;
+  display: flex;
+  justify-content: space-between;
+
+  > div {
+    display: flex;
+    align-items: center;
+  }
 
   :global(.react-aria-DateInput) {
     display: flex;
   }
 
   :global(.react-aria-DateSegment) {
-    border-radius: var(--date-picker--date-segment-border-radius);
+    border-radius: var(--date-picker--date-segment-corner-radius);
 
     &:focus {
       background: var(--date-picker--date-segment-background-color--focused);
@@ -27,5 +32,10 @@
   }
   :global(.react-aria-DateInput):last-of-type {
     padding-inline-start: 2px;
+  }
+
+  :global(.flow--button) {
+    margin-block: calc(var(--form-control--padding-y) * -1);
+    margin-inline-end: calc(var(--form-control--padding-x) * -1);
   }
 }

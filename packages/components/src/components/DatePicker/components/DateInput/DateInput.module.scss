@@ -10,11 +10,16 @@
   }
 
   :global(.react-aria-DateSegment) {
-    border-radius: var(--date-picker--date-segment-border-radius);
+    border-radius: var(--date-picker--date-segment-corner-radius);
 
     &:focus {
       background: var(--date-picker--date-segment-background-color--focused);
       outline: none;
     }
+  }
+
+  :global(.flow--button) {
+    margin-block: calc(var(--form-control--padding-y) * -1);
+    margin-inline-end: calc(var(--form-control--padding-x) * -1);
   }
 }

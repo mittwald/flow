@@ -17,7 +17,7 @@ export const DateInput: FC<DateInputProps> = (props) => {
       <Aria.DateInput>
         {(segment) => <Aria.DateSegment segment={segment} />}
       </Aria.DateInput>
-      <Button variant="plain" isDisabled={isDisabled}>
+      <Button style="plain" variant="secondary" isDisabled={isDisabled}>
         <Icon faIcon={faCalendarDays} />
       </Button>
     </Aria.Group>

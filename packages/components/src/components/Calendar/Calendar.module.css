@@ -22,10 +22,10 @@
     align-items: center;
     justify-content: center;
     cursor: default;
-    border-radius: var(--button--border-radius);
+    border-radius: var(--button--corner-radius);
 
     &:hover {
-      background: var(--button--plain-background-color--hover);
+      background: var(--button--secondary-plain-background-color--hover);
     }
 
     &[data-outside-month] {
@@ -33,16 +33,16 @@
     }
 
     &[data-pressed] {
-      background: var(--button--plain-background-color--pressed);
+      background: var(--button--secondary-plain-background-color--pressed);
     }
 
     &[data-selected] {
-      background: var(--button--plain-background-color--pressed);
+      background: var(--button--secondary-plain-background-color--pressed);
     }
 
     &[data-disabled] {
-      background: var(--button--disabled-background-color);
-      color: var(--button--disabled-color);
+      background: var(--button--disabled-plain-background-color);
+      color: var(--button--disabled-plain-content-color);
     }
   }
 }

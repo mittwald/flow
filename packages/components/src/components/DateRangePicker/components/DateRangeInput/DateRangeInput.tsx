@@ -14,14 +14,16 @@ export const DateRangeInput: FC<DateInputProps> = (props) => {
 
   return (
     <Aria.Group className={styles.dateRangeInput}>
-      <Aria.DateInput slot="start">
-        {(segment) => <Aria.DateSegment segment={segment} />}
-      </Aria.DateInput>
-      <span aria-hidden="true">–</span>
-      <Aria.DateInput slot="end">
-        {(segment) => <Aria.DateSegment segment={segment} />}
-      </Aria.DateInput>
-      <Button variant="plain" isDisabled={isDisabled}>
+      <div>
+        <Aria.DateInput slot="start">
+          {(segment) => <Aria.DateSegment segment={segment} />}
+        </Aria.DateInput>
+        <span aria-hidden="true">–</span>
+        <Aria.DateInput slot="end">
+          {(segment) => <Aria.DateSegment segment={segment} />}
+        </Aria.DateInput>
+      </div>
+      <Button style="plain" variant="secondary" isDisabled={isDisabled}>
         <Icon faIcon={faCalendarDays} />
       </Button>
     </Aria.Group>
