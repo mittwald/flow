@@ -8,7 +8,7 @@ import React from "react";
 import { CopyToClipboardButton } from "@/components/CopyToClipboardButton";
 
 const meta: Meta<typeof LabeledValue> = {
-  title: "Content/Labeled Value/Edge Cases",
+  title: "Content/LabeledValue/Edge Cases",
   ...defaultMeta,
 };
 export default meta;

@@ -6,7 +6,7 @@ import { Content } from "@/components/Content";
 import { CopyToClipboardButton } from "@/components/CopyToClipboardButton";
 
 const meta: Meta<typeof LabeledValue> = {
-  title: "Content/Labeled Value",
+  title: "Content/LabeledValue",
   component: LabeledValue,
   parameters: {
     controls: { exclude: ["className"] },

@@ -15,9 +15,9 @@ form-control:
     value: "{border-style.default}"
   border-color:
     default:
-      value: "{neutral.color.400}"
+      value: "{neutral.color.700}"
     disabled:
-      value: "{neutral.color.500}"
+      value: "{neutral.color.400}"
     hover:
       value: "{neutral.color.600}"
     invalid:
@@ -26,11 +26,11 @@ form-control:
       value: "{info.color.700}"
   background-color:
     default:
-      value: "{neutral.color.400}"
+      value: "{neutral.color.200}"
     disabled:
-      value: "{neutral.color.500}"
+      value: "{neutral.color.300}"
     hover:
-      value: "{neutral.color.500}"
+      value: "{info.color.100}"
     focused:
       value: "{neutral.color.100}"
     invalid:
