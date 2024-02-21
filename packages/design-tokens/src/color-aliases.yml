@@ -161,6 +161,8 @@ primary-solid-content-color:
 
 # Primary Plain
 primary-plain-background-color:
+  default:
+    value: "{color.transparent}"
   hover:
     value: "{primary.color.100}"
   pressed:
@@ -186,6 +188,8 @@ danger-solid-content-color:
 
 # Danger Plain
 danger-plain-background-color:
+  default:
+    value: "{color.transparent}"
   hover:
     value: "{danger.color.100}"
   pressed:
@@ -199,6 +203,8 @@ danger-plain-content-color:
     value: "{danger.color.1000}"
 
 # Danger Outline
+danger-outline-background-color:
+  value: "{neutral.color.100}"
 danger-outline-content-color:
   value: "{danger.color.900}"
 danger-outline-border-color:
@@ -216,6 +222,8 @@ info-solid-content-color:
   value: "{neutral.color.100}"
 
 # Info Outline
+info-outline-background-color:
+  value: "{neutral.color.100}"
 info-outline-content-color:
   value: "{info.color.900}"
 info-outline-border-color:
@@ -240,7 +248,7 @@ success-plain-background-color:
     value: "{success.color.100}"
   pressed:
     value: "{success.color.200}"
-success-plain-foreground-color:
+success-plain-content-color:
   default:
     value: "{success.color.800}"
   hover:
@@ -249,6 +257,8 @@ success-plain-foreground-color:
     value: "{success.color.1000}"
 
 # Success Outline
+success-outline-background-color:
+  value: "{neutral.color.100}"
 success-outline-content-color:
   value: "{success.color.900}"
 success-outline-border-color:
@@ -266,6 +276,8 @@ warning-solid-content-color:
   value: "{neutral.color.100}"
 
 # Warning Outline
+warning-outline-background-color:
+  value: "{neutral.color.100}"
 warning-outline-content-color:
   value: "{warning.color.900}"
 warning-outline-border-color:
@@ -291,13 +303,20 @@ neutral-plain-background-color:
   pressed:
     value: "{neutral.color.500}"
 neutral-plain-content-color:
+  value: "{neutral.color.1000}"
 
 # Disabled Solid
 disabled-solid-background-color:
-  value: "{neutral.color.500}"
+  value: "{neutral.color.400}"
 disabled-solid-content-color:
-  value: "{neutral.color.100}"
+  value: "{neutral.color.600}"
 
 # Disabled Plain
+disabled-plain-background-color:
+  value: "{color.transparent}"
 disabled-plain-content-color:
-  value: "{neutral.color.600}"
+  value: "{neutral.color.400}"
+
+# Focus
+focus-outline-color:
+  value: "{primary.color.800}"

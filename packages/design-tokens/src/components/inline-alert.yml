@@ -12,11 +12,13 @@ inline-alert:
   text-to-text-spacing:
     value: "{size-rem.xs}"
   icon-to-text-spacing:
-    value: "{size-rem.m}"
+    value: "{size-rem.s}"
   heading-font-size:
     value: "{font-size.m}"
   icon-size:
     value: "{icon.size.m}"
+  background-color:
+    value: "{info-outline-background-color}"
 
   # Info
   info-border-color:

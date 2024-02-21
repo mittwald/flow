@@ -3,8 +3,6 @@ import InlineAlert from "../InlineAlert";
 import React from "react";
 import { Heading } from "@/components/Heading";
 import { Content } from "@/components/Content";
-import { Icon } from "@/components/Icon";
-import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 
 const meta: Meta<typeof InlineAlert> = {
   title: "Status/Inline Alert",
@@ -32,19 +30,6 @@ export const Default: Story = {
 export const WithContent: Story = {
   render: (props) => (
     <InlineAlert {...props}>
-      <Heading>Email address has been archived</Heading>
-      <Content>
-        As your domain has been deleted, this email address has been archived.
-        To be able to send and receive emails, you must rename the address.
-      </Content>
-    </InlineAlert>
-  ),
-};
-
-export const WithCustomIcon: Story = {
-  render: (props) => (
-    <InlineAlert {...props}>
-      <Icon faIcon={faEnvelope} />
       <Heading>Email address has been archived</Heading>
       <Content>
         As your domain has been deleted, this email address has been archived.
