@@ -260,8 +260,6 @@ success-plain-content-color:
 success-outline-background-color:
   value: "{neutral.color.100}"
 success-outline-content-color:
-  value: "{neutral.color.100}"
-success-outline-content-color:
   value: "{success.color.900}"
 success-outline-border-color:
   value: "{success.color.800}"
