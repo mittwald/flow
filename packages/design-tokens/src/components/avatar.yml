@@ -1,10 +1,10 @@
 avatar:
   size:
-    xs:
+    extraSmall:
       value: "{size-rem.l}"
-    s:
+    small:
       value: "{size-rem.xl}"
-    m:
+    medium:
       value: 2.5rem
-    l:
+    large:
       value: "{size-rem.xxl}"

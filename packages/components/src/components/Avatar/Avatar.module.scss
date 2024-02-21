@@ -11,7 +11,7 @@
     object-fit: cover;
   }
 
-  @extend .size-m;
+  @extend .medium;
 }
 
 /* Elements */
@@ -26,12 +26,12 @@
 
 /* Sizes */
 @mixin size($size) {
-  .avatar.size-#{$size} {
+  .#{$size} {
     --avatar-size: var(--avatar--size--#{$size});
   }
 }
 
-@include size(xs);
-@include size(s);
-@include size(m);
-@include size(l);
+@include size(medium);
+@include size(extraSmall);
+@include size(small);
+@include size(large);
