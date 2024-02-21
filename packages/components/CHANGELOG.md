@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.15](https://github.com/mittwald/flow/compare/0.1.0-alpha.14...0.1.0-alpha.15) (2024-02-21)
+
+### Features
+
+- add content box component
+  ([48fed41](https://github.com/mittwald/flow/commit/48fed41f05b61780981e038f75040e70c7362293))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.14](https://github.com/mittwald/flow/compare/0.1.0-alpha.13...0.1.0-alpha.14) (2024-02-21)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
