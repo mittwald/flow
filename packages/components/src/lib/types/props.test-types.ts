@@ -40,7 +40,7 @@ function testUnknownStatusVariantCanNotBeAssigned() {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function testAssigningUnknownElementTypeThrowsError() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const test: PropsWithElementType<"div"> = {
+  const test: PropsWithElementType = {
     // @ts-expect-error Is unknown
     elementType: "foo",
   };
@@ -49,7 +49,7 @@ function testAssigningUnknownElementTypeThrowsError() {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function testAssigningElementTypeWorks() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const test: PropsWithElementType<"div"> = {
+  const test: PropsWithElementType = {
     elementType: "a",
   };
 }
@@ -57,7 +57,7 @@ function testAssigningElementTypeWorks() {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function testAssigningUnsupportedElementPropsThrowsError() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const test: PropsWithElementType<"div"> = {
+  const test: PropsWithElementType = {
     elementType: "a",
     // @ts-expect-error Is not supported
     href: "link",
@@ -67,8 +67,8 @@ function testAssigningUnsupportedElementPropsThrowsError() {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function testAssigningSupportedElementPropsWorks() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const test: PropsWithElementType<"a"> = {
-    elementType: "div",
-    href: "link",
+  const test: PropsWithElementType = {
+    elementType: "a",
+    title: "Hello!",
   };
 }
