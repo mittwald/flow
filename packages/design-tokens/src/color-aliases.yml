@@ -248,7 +248,7 @@ success-plain-background-color:
     value: "{success.color.100}"
   pressed:
     value: "{success.color.200}"
-success-plain-foreground-color:
+success-plain-content-color:
   default:
     value: "{success.color.800}"
   hover:
@@ -257,6 +257,8 @@ success-plain-foreground-color:
     value: "{success.color.1000}"
 
 # Success Outline
+success-outline-background-color:
+  value: "{neutral.color.100}"
 success-outline-content-color:
   value: "{neutral.color.100}"
 success-outline-content-color:
@@ -303,6 +305,7 @@ neutral-plain-background-color:
   pressed:
     value: "{neutral.color.500}"
 neutral-plain-content-color:
+  value: "{neutral.color.1000}"
 
 # Disabled Solid
 disabled-solid-background-color:

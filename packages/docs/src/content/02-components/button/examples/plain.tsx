@@ -7,7 +7,7 @@ import Button from "@mittwald/flow-react-components/Button";
   <Button style="plain" variant="secondary">
     Abort/Back
   </Button>
-  <Button style="plain" variant="success">
+  <Button style="plain" variant="accent">
     Create/Save
   </Button>
   <Button style="plain" variant="danger">
