@@ -1,22 +1,22 @@
 import React, { FC, PropsWithChildren } from "react";
 import { ClearPropsContext, useProps } from "@/lib/propsContext";
-import styles from "./ContentBox.module.scss";
+import styles from "./LayoutCard.module.scss";
 import clsx from "clsx";
 import { PropsWithElementType } from "@/lib/types/props";
 
-export interface ContentBoxProps
+export interface LayoutCardProps
   extends PropsWithChildren,
     PropsWithElementType {}
 
-export const ContentBox: FC<ContentBoxProps> = (props) => {
+export const LayoutCard: FC<LayoutCardProps> = (props) => {
   const {
     children,
     className,
     elementType = "div",
     ...rest
-  } = useProps("ContentBox", props);
+  } = useProps("LayoutCard", props);
 
-  const rootClassName = clsx(styles.contentBox, className);
+  const rootClassName = clsx(styles.layoutCard, className);
 
   const Element = elementType;
 
@@ -27,4 +27,4 @@ export const ContentBox: FC<ContentBoxProps> = (props) => {
   );
 };
 
-export default ContentBox;
+export default LayoutCard;

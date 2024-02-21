@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import ContentBox from "../ContentBox";
+import LayoutCard from "../LayoutCard";
 import React from "react";
 
-const meta: Meta<typeof ContentBox> = {
-  title: "Structure/Content Box",
-  component: ContentBox,
+const meta: Meta<typeof LayoutCard> = {
+  title: "Structure/Layout Card",
+  component: LayoutCard,
   argTypes: {
     elementType: {
       control: "inline-radio",
@@ -13,13 +13,13 @@ const meta: Meta<typeof ContentBox> = {
   },
   args: { elementType: "div" },
   render: (props) => (
-    <ContentBox {...props}>
-      Content Box is a structure element that can contain any content
-    </ContentBox>
+    <LayoutCard {...props}>
+      Layout Card is a structure element that can contain any content
+    </LayoutCard>
   ),
 };
 export default meta;
 
-type Story = StoryObj<typeof ContentBox>;
+type Story = StoryObj<typeof LayoutCard>;
 
 export const Default: Story = {};
