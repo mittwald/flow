@@ -13,8 +13,8 @@ export const customComponents: MDXComponents = {
       <CopyToClipboardButton
         className={styles.preCopyButton}
         text={children}
-        variant="plain"
-        small
+        style="plain"
+        size="small"
       />
     </div>
   ),
