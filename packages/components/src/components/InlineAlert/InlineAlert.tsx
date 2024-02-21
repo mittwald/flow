@@ -24,10 +24,6 @@ export const InlineAlert: FC<InlineAlertProps> = (props) => {
   const rootClassName = clsx(styles.inlineAlert, styles[variant], className);
 
   const propsContext: PropsContext = {
-    Icon: {
-      className: styles.customIcon,
-      "aria-hidden": false,
-    },
     Heading: {
       className: styles.heading,
       level: 3,
