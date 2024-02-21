@@ -4,9 +4,9 @@ import clsx from "clsx";
 import { StatusIcon } from "@/components/StatusIcon";
 import { Text } from "@/components/Text";
 import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
-import { StatusVariantProps } from "@/lib/types/props";
+import { PropsWithVariant } from "@/lib/types/props";
 
-export interface BadgeProps extends PropsWithChildren, StatusVariantProps {
+export interface BadgeProps extends PropsWithChildren, PropsWithVariant {
   className?: string;
 }
 
