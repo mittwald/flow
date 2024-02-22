@@ -6,6 +6,20 @@ font-weight:
 line-height:
   default:
     value: 1.5
+  xxs:
+    value: calc(0.625rem * 1.5)
+  xs:
+    value: calc(0.75rem * 1.5)
+  s:
+    value: calc(0.875rem * 1.5)
+  m:
+    value: calc(1rem * 1.5)
+  l:
+    value: calc(1.125rem * 1.5)
+  xl:
+    value: calc(1.5rem * 1.5)
+  xxl:
+    value: calc(2rem * 1.5)
 font-size:
   default:
     value: "{font-size.m}"

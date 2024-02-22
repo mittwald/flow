@@ -7,24 +7,19 @@ import {
   PropsContextProvider,
   useProps,
 } from "@/lib/propsContext";
-import Icon from "@/components/Icon";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons/faSpinner";
-import { faCheck } from "@fortawesome/free-solid-svg-icons/faCheck";
-import { faTimes } from "@fortawesome/free-solid-svg-icons/faTimes";
 import { Wrap } from "@/components/Wrap";
+import { PropsWithActionStates } from "@/lib/types/props";
+import ActionStateIcon from "../ActionStateIcon";
 
 export interface ButtonProps
-  extends PropsWithChildren<Omit<Aria.ButtonProps, "style">> {
+  extends PropsWithChildren<Omit<Aria.ButtonProps, "style">>,
+    PropsWithActionStates {
   /** @default "primary" */
   variant?: "primary" | "accent" | "secondary" | "danger";
   /** @default "solid" */
   style?: "plain" | "solid";
   /** @default "medium" */
   size?: "medium" | "small";
-
-  isPending?: boolean;
-  isSucceeded?: boolean;
-  isFailed?: boolean;
 }
 
 export const Button: FC<ButtonProps> = (props) => {
@@ -38,7 +33,7 @@ export const Button: FC<ButtonProps> = (props) => {
     isDisabled,
     isSucceeded,
     isFailed,
-    ...restProps
+    ...rest
   } = useProps("Button", props);
 
   const rootClassName = clsx(
@@ -60,25 +55,30 @@ export const Button: FC<ButtonProps> = (props) => {
     },
   };
 
-  const stateIcon = (isPending || isSucceeded || isFailed) && (
-    <Icon
-      faIcon={isSucceeded ? faCheck : isFailed ? faTimes : faSpinner}
-      className={styles.stateIcon}
+  const hasActionState = isPending || isSucceeded || isFailed;
+
+  const actionStateIcon = (
+    <ActionStateIcon
+      isSucceeded={isSucceeded}
+      isPending={isPending}
+      isFailed={isFailed}
+      className={styles.actionStateIcon}
     />
   );
 
   return (
     <Aria.Button
       className={rootClassName}
-      isDisabled={isDisabled || isPending || isSucceeded || isFailed}
-      {...restProps}
+      isDisabled={hasActionState || isDisabled}
+      {...rest}
     >
       <PropsContextProvider props={propsContext}>
-        <Wrap if={stateIcon}>
+        <Wrap if={hasActionState}>
           <span className={styles.content}>{children}</span>
         </Wrap>
       </PropsContextProvider>
-      {stateIcon}
+
+      {actionStateIcon}
     </Aria.Button>
   );
 };

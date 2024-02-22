@@ -32,7 +32,7 @@
 }
 
 .content,
-.stateIcon {
+.actionStateIcon {
   grid-area: content;
 }
 
@@ -42,7 +42,6 @@
 }
 
 .small {
-  font-size: var(--button--font-size-small);
   padding-block: var(--button--padding-small-squished-y);
   padding-inline: var(--button--padding-small-squished-x);
 
@@ -51,18 +50,18 @@
   }
 }
 
-.stateIcon {
+.actionStateIcon {
   color: var(--button--pending-icon-color);
 }
 
 .isSucceeded {
-  .stateIcon {
+  .actionStateIcon {
     color: var(--button--succeeded-icon-color);
   }
 }
 
 .isFailed {
-  .stateIcon {
+  .actionStateIcon {
     color: var(--button--failed-icon-color);
   }
 }

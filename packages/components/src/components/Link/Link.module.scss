@@ -1,8 +1,11 @@
 .link {
   font-size: var(--link--font-size);
   font-weight: var(--link--font-weight);
+  line-height: var(--link--line-height);
   transition-property: color;
   transition-duration: var(--transition--duration--default);
+  outline-color: var(--button--focus-outline-color);
+  outline-offset: var(--button--focus-outline-offset);
 
   &[aria-disabled] {
     color: var(--link--disabled-color);
@@ -13,6 +16,40 @@
   }
 
   @extend .primary;
+
+  &:has(.content) {
+    display: inline-grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-areas: "content";
+  }
+}
+
+.icon {
+  margin-inline-start: var(--link--text-to-icon-spacing);
+  line-height: 1;
+}
+
+.actionStateIcon {
+  color: var(--button--pending-icon-color);
+  justify-self: center;
+}
+
+.isSucceeded {
+  .actionStateIcon {
+    color: var(--button--succeeded-icon-color);
+  }
+}
+
+.isFailed {
+  .actionStateIcon {
+    color: var(--button--failed-icon-color);
+  }
+}
+
+.content,
+.actionStateIcon {
+  grid-area: content;
 }
 
 /* Variants */
