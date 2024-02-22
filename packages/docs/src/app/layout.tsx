@@ -10,7 +10,7 @@ import styles from "./layout.module.scss";
 import Heading from "@mittwald/flow-react-components/Heading";
 import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
 import Badge from "@mittwald/flow-react-components/Badge";
-import ContentBox from "@mittwald/flow-react-components/ContentBox";
+import LayoutCard from "@mittwald/flow-react-components/LayoutCard";
 
 export const metadata: Metadata = {
   title: "Flow – mittwald Design System",
@@ -33,12 +33,12 @@ const RootLayout: FC<PropsWithChildren> = async (props) => {
           </div>
         </header>
         <div className={styles.center}>
-          <ContentBox className={styles.nav}>
+          <LayoutCard className={styles.nav}>
             <MainNavigation docs={docs.map((mdx) => mdx.serialize())} />
-          </ContentBox>
-          <ContentBox elementType="main" className={styles.main}>
+          </LayoutCard>
+          <LayoutCard elementType="main" className={styles.main}>
             {props.children}
-          </ContentBox>
+          </LayoutCard>
         </div>
       </body>
     </html>
