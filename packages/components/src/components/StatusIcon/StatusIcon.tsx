@@ -5,10 +5,10 @@ import { faInfoCircle } from "@fortawesome/free-solid-svg-icons/faInfoCircle";
 import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons/faExclamationCircle";
 import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
-import { StatusVariantProps } from "@/lib/types/props";
+import { PropsWithVariant } from "@/lib/types/props";
 import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons/faExclamationTriangle";
 
-export interface StatusIconProps extends StatusVariantProps {
+export interface StatusIconProps extends PropsWithVariant {
   className?: string;
 }
 

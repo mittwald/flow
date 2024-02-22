@@ -7,11 +7,11 @@ import {
 import styles from "./InlineAlert.module.scss";
 import clsx from "clsx";
 import { StatusIcon } from "@/components/StatusIcon";
-import { StatusVariantProps } from "@/lib/types/props";
+import { PropsWithVariant } from "@/lib/types/props";
 
 export interface InlineAlertProps
   extends PropsWithChildren<ComponentProps<"aside">>,
-    StatusVariantProps {}
+    PropsWithVariant {}
 
 export const InlineAlert: FC<InlineAlertProps> = (props) => {
   const {

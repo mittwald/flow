@@ -39,9 +39,9 @@ export const NumberField: FC<NumberFieldProps> = (props) => {
         <Button
           slot="decrement"
           className={styles.decrementButton}
-          size="s"
-          variant="secondary"
+          size="small"
           style="plain"
+          variant="secondary"
         >
           <Icon faIcon={faChevronDown} />
           <Icon faIcon={faMinus} />
@@ -50,9 +50,9 @@ export const NumberField: FC<NumberFieldProps> = (props) => {
         <Button
           slot="increment"
           className={styles.incrementButton}
-          size="s"
-          variant="secondary"
+          size="small"
           style="plain"
+          variant="secondary"
         >
           <Icon faIcon={faChevronUp} />
           <Icon faIcon={faPlus} />
