@@ -3,7 +3,7 @@ import type { ButtonProps } from "@/components/Button";
 import type { IconProps } from "@/components/Icon";
 import type { LabelProps } from "@/components/Label";
 import type { ContentProps } from "@/components/Content";
-import type { ContentBoxProps } from "@/components/ContentBox";
+import type { LayoutCardProps } from "@/components/LayoutCard";
 import type {
   NavigationItemProps,
   NavigationProps,
@@ -26,7 +26,7 @@ export interface FlowComponentPropsTypes {
   Icon: IconProps;
   Label: LabelProps;
   Content: ContentProps;
-  ContentBox: ContentBoxProps;
+  LayoutCard: LayoutCardProps;
   Navigation: NavigationProps;
   NavigationItem: NavigationItemProps;
   Heading: HeadingProps;

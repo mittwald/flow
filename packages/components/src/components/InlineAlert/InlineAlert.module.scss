@@ -8,13 +8,10 @@
   grid-template-columns: auto 1fr;
   grid-column-gap: var(--inline-alert--icon-to-text-spacing);
   grid-row-gap: var(--inline-alert--text-to-text-spacing);
+  background-color: var(--inline-alert--background-color);
+  width: 100%;
 
   @extend .info;
-
-  /* With custom icon */
-  &:has(.customIcon) .statusIcon {
-    display: none;
-  }
 
   /* Without content */
   &:not(:has(.content)) {
@@ -30,7 +27,6 @@
 }
 
 /* Elements */
-.customIcon,
 .statusIcon {
   grid-area: icon;
   font-size: var(--inline-alert--icon-size);
@@ -51,7 +47,6 @@
   .#{$variant} {
     border-color: var(--inline-alert--#{$variant}-border-color);
     .heading,
-    .customIcon,
     .statusIcon {
       color: var(--inline-alert--#{$variant}-heading-color);
     }
