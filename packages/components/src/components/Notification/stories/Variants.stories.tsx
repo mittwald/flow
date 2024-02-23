@@ -34,10 +34,10 @@ type Story = StoryObj<typeof Notification>;
 const DemoNotification: FC<{ content: NotificationContentProps }> = (props) => {
   return (
     <Notification
-      key="a"
+      key="example"
       toast={{
         content: props.content,
-        key: "a",
+        key: "examle",
       }}
       state={{
         add: () => "",
@@ -51,12 +51,48 @@ const DemoNotification: FC<{ content: NotificationContentProps }> = (props) => {
   );
 };
 
-export const a: Story = {
+export const Info: Story = {
   render: () => (
     <DemoNotification
       content={{
-        content: "content",
-        title: "title",
+        content: "Your ticket has been closed",
+        title: "Ticket closed",
+      }}
+    />
+  ),
+};
+
+export const Success: Story = {
+  render: () => (
+    <DemoNotification
+      content={{
+        content: "WordPress has been installed successfully",
+        title: "App Installed",
+        variant: "success",
+      }}
+    />
+  ),
+};
+
+export const Warning: Story = {
+  render: () => (
+    <DemoNotification
+      content={{
+        content: "Your email address has been deactivated",
+        title: "Email deactivated",
+        variant: "warning",
+      }}
+    />
+  ),
+};
+
+export const Danger: Story = {
+  render: () => (
+    <DemoNotification
+      content={{
+        content: "Your project storage is exceeded",
+        title: "Storage exceeded",
+        variant: "danger",
       }}
     />
   ),

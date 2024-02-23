@@ -3,7 +3,7 @@ import { useToast } from "@react-aria/toast";
 import { Button } from "@/components/Button";
 import type { ToastState } from "@react-stately/toast";
 import React, { FC } from "react";
-import { StatusVariantProps } from "@/lib/types/props";
+import { PropsWithVariant } from "@/lib/types/props";
 import styles from "./Notification.module.scss";
 import clsx from "clsx";
 import { Heading } from "@/components/Heading";
@@ -12,7 +12,7 @@ import { Icon } from "@/components/Icon";
 import { faClose } from "@fortawesome/free-solid-svg-icons/faClose";
 import { StatusIcon } from "@/components/StatusIcon";
 
-export interface NotificationContentProps extends StatusVariantProps {
+export interface NotificationContentProps extends PropsWithVariant {
   title: string;
   content?: string;
 }
@@ -27,7 +27,7 @@ export const Notification: FC<NotificationProps<NotificationContentProps>> = ({
 }) => {
   const ref = React.useRef(null);
   const { toastProps, closeButtonProps } = useToast(props, state, ref);
-  console.log(props);
+
   const rootClassName = clsx(
     styles.notification,
     styles[props.toast.content.variant ?? "info"],
@@ -44,7 +44,7 @@ export const Notification: FC<NotificationProps<NotificationContentProps>> = ({
         {props.toast.content.content}
       </Content>
       <Button
-        size="s"
+        size="small"
         className={styles.close}
         variant="secondary"
         style="plain"

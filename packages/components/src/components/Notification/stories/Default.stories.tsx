@@ -12,10 +12,13 @@ const meta: Meta<typeof Notification> = {
       {(state) => (
         <Button
           onPress={() =>
-            state.add({
-              content: "content",
-              title: "title",
-            })
+            state.add(
+              {
+                content: "content",
+                title: "title",
+              },
+              { timeout: 10000 },
+            )
           }
         >
           Show notification

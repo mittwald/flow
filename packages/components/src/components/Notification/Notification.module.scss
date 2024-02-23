@@ -11,14 +11,8 @@
   grid-row-gap: var(--notification--heading-to-text-spacing);
   box-shadow: var(--notification--shadow);
   width: var(--notification--width);
-  background-color: var(--notification--background-color);
 
   @extend .info;
-
-  /* With custom icon */
-  &:has(.customIcon) .statusIcon {
-    display: none;
-  }
 
   /* Without content */
   &:not(:has(.content)) {
@@ -34,7 +28,6 @@
 }
 
 /* Elements */
-.customIcon,
 .statusIcon {
   grid-area: icon;
   align-self: center;
@@ -49,6 +42,7 @@ h3.heading {
 
 .content {
   grid-area: content;
+  line-height: var(--notification--line-height);
 }
 
 .close {
@@ -58,9 +52,11 @@ h3.heading {
 /* Variants */
 @mixin variant($variant) {
   .#{$variant} {
+    background-color: var(
+      --notification--#{$variant}-background-color--default
+    );
     border-color: var(--notification--#{$variant}-border-color);
     .heading,
-    .customIcon,
     .statusIcon {
       color: var(--notification--#{$variant}-heading-color);
     }

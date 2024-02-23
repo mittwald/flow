@@ -18,12 +18,14 @@ notification:
   width:
     value: "355px"
   shadow:
-    value: "rgba(0, 0, 0, 0.2) 0 4px 8px"
-  background-color:
-    value: "{info-outline-background-color.default}"
+    value: "{shadow.overlay}"
+  line-height:
+    value: "{size-rem.m}"
 
   # Info
   info-background-color:
+    default:
+      value: "{info-outline-background-color.default}"
     hover:
       value: "{info-outline-background-color.hover}"
     pressed:
@@ -31,10 +33,12 @@ notification:
   info-border-color:
     value: "{info-outline-border-color}"
   info-heading-color:
-    value: "{info-outline-foreground-color}"
+    value: "{info-outline-content-color}"
 
   # Warning
   warning-background-color:
+    default:
+      value: "{warning-outline-background-color.default}"
     hover:
       value: "{warning-outline-background-color.hover}"
     pressed:
@@ -42,10 +46,12 @@ notification:
   warning-border-color:
     value: "{warning-outline-border-color}"
   warning-heading-color:
-    value: "{warning-outline-foreground-color}"
+    value: "{warning-outline-content-color}"
 
   # Danger
   danger-background-color:
+    default:
+      value: "{danger-outline-background-color.default}"
     hover:
       value: "{danger-outline-background-color.hover}"
     pressed:
@@ -53,10 +59,12 @@ notification:
   danger-border-color:
     value: "{danger-outline-border-color}"
   danger-heading-color:
-    value: "{danger-outline-foreground-color}"
+    value: "{danger-outline-content-color}"
 
   # Success
   success-background-color:
+    default:
+      value: "{success-outline-background-color.default}"
     hover:
       value: "{success-outline-background-color.hover}"
     pressed:
@@ -64,4 +72,4 @@ notification:
   success-border-color:
     value: "{success-outline-border-color}"
   success-heading-color:
-    value: "{success-outline-foreground-color}"
+    value: "{success-outline-content-color}"
