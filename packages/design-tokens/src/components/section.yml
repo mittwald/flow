@@ -6,6 +6,6 @@ section:
   border-color:
     value: "{neutral.color.500}"
   section-to-section-spacing:
-    value: "{size-px.xl}"
+    value: "{size-rem.xl}"
   content-to-content-spacing:
     value: "{size-rem.m}"
