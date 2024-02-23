@@ -1,37 +1,29 @@
 import React, {
-  ComponentProps,
   FC,
   PropsWithChildren,
+  ReactElement,
   SVGAttributes,
   useMemo,
 } from "react";
 import styles from "./Icon.module.scss";
-import { IconLookup } from "@fortawesome/fontawesome-svg-core";
-import {
-  BackwardCompatibleOmit,
-  FontAwesomeIcon,
-} from "@fortawesome/react-fontawesome";
 import clsx from "clsx";
 import { extractSvgFromString } from "@/components/Icon/lib/extractSvgFromString";
 import { useProps } from "@/lib/propsContext";
 
-type SvgAttributeProps = BackwardCompatibleOmit<
-  SVGAttributes<SVGSVGElement>,
-  "children" | "mask" | "transform"
->;
+type SvgAttributeProps = SVGAttributes<SVGSVGElement>;
 
 export interface IconProps extends PropsWithChildren<SvgAttributeProps> {
-  faIcon?: IconLookup;
-  fixedWidth?: boolean;
+  tablerIcon?: ReactElement;
+  size?: "small" | "medium" | "large";
 }
 
 export const Icon: FC<IconProps> = (props) => {
   const {
-    faIcon,
+    tablerIcon,
     className,
     "aria-label": ariaLabel,
     children,
-    fixedWidth,
+    size = "medium",
     ...svgAttributes
   } = useProps("Icon", props);
 
@@ -41,24 +33,16 @@ export const Icon: FC<IconProps> = (props) => {
     role: "img",
     "aria-hidden": !ariaLabel,
     "aria-label": ariaLabel,
+    className: clsx(styles.icon, className, styles[size]),
   };
 
-  /**
-   * Icon is wrapped inside span, so it always behaves as an inline element
-   * (line-height is applied), even if used in flex/grid layouts.
-   */
-  const spanProps: ComponentProps<"span"> = {
-    className: clsx(styles.icon, className, {
-      [styles.fixedWidth]: fixedWidth,
-    }),
-  };
+  console.log(tablerIcon);
 
-  if (faIcon) {
-    return (
-      <span {...spanProps}>
-        <FontAwesomeIcon icon={faIcon} {...iconProps} />
-      </span>
-    );
+  if (tablerIcon) {
+    return React.cloneElement(tablerIcon, {
+      size: size === "small" ? 16 : size === "medium" ? 24 : 64,
+      ...iconProps,
+    });
   }
 
   const isCustomSvgString = typeof children === "string";
@@ -76,9 +60,7 @@ export const Icon: FC<IconProps> = (props) => {
     );
   }
 
-  return (
-    <span {...spanProps}>{React.cloneElement(iconElement, iconProps)}</span>
-  );
+  return React.cloneElement(iconElement, iconProps);
 };
 
 export default Icon;

@@ -8,10 +8,8 @@ import {
   useProps,
 } from "@/lib/propsContext";
 import Icon from "@/components/Icon";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons/faSpinner";
-import { faCheck } from "@fortawesome/free-solid-svg-icons/faCheck";
-import { faTimes } from "@fortawesome/free-solid-svg-icons/faTimes";
 import { Wrap } from "@/components/Wrap";
+import { IconCheck, IconLoader2, IconX } from "@tabler/icons-react";
 
 export interface ButtonProps
   extends PropsWithChildren<Omit<Aria.ButtonProps, "style">> {
@@ -56,13 +54,16 @@ export const Button: FC<ButtonProps> = (props) => {
     Icon: {
       className: styles.icon,
       "aria-hidden": true,
-      fixedWidth: true,
+      size,
     },
   };
 
   const stateIcon = (isPending || isSucceeded || isFailed) && (
     <Icon
-      faIcon={isSucceeded ? faCheck : isFailed ? faTimes : faSpinner}
+      size={size}
+      tablerIcon={
+        isSucceeded ? <IconCheck /> : isFailed ? <IconX /> : <IconLoader2 />
+      }
       className={styles.stateIcon}
     />
   );

@@ -1,11 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import { faUser } from "@fortawesome/free-regular-svg-icons";
-import { faHardDrive } from "@fortawesome/free-regular-svg-icons/faHardDrive";
-import { faStar } from "@fortawesome/free-regular-svg-icons/faStar";
 import { Icon } from "@/components/Icon";
 import { Text } from "@/components/Text";
 import { Navigation, NavigationItem } from "@/components/Navigation";
+import { IconServer, IconStar, IconUser } from "@tabler/icons-react";
 
 const meta: Meta<typeof Navigation> = {
   title: "Navigation/Navigation",
@@ -36,15 +34,15 @@ export const WithIcons: Story = {
   render: (props) => (
     <Navigation aria-label="Main menu" {...props}>
       <NavigationItem textValue="Address">
-        <Icon faIcon={faStar} />
+        <Icon tablerIcon={<IconStar />} />
         <Text>Address</Text>
       </NavigationItem>
       <NavigationItem textValue="Profile" isCurrent>
-        <Icon faIcon={faUser} />
+        <Icon tablerIcon={<IconUser />} />
         <Text>Profile</Text>
       </NavigationItem>
       <NavigationItem textValue="Storage">
-        <Icon faIcon={faHardDrive} />
+        <Icon tablerIcon={<IconServer />} />
         <Text>Storage</Text>
       </NavigationItem>
     </Navigation>

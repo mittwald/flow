@@ -3,8 +3,13 @@ import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import styles from "./Checkbox.module.scss";
 import { Icon } from "@/components/Icon";
-import { faCheckSquare } from "@fortawesome/free-regular-svg-icons/faCheckSquare";
-import { faSquare } from "@fortawesome/free-regular-svg-icons/faSquare";
+import {
+  IconBox,
+  IconCheckbox,
+  IconChecks,
+  IconSquare,
+  IconSquareCheck,
+} from "@tabler/icons-react";
 
 export interface CheckboxProps
   extends PropsWithChildren<Omit<Aria.CheckboxProps, "children">> {}
@@ -20,7 +25,7 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
         <>
           <Icon
             className={styles.checkmark}
-            faIcon={isSelected ? faCheckSquare : faSquare}
+            tablerIcon={isSelected ? <IconSquareCheck /> : <IconSquare />}
           />
           {children}
         </>

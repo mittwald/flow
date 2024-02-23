@@ -1,15 +1,16 @@
 import React, { FC } from "react";
-import { Icon } from "@/components/Icon";
-import { faCheckCircle } from "@fortawesome/free-solid-svg-icons/faCheckCircle";
-import { faInfoCircle } from "@fortawesome/free-solid-svg-icons/faInfoCircle";
-import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons/faExclamationCircle";
+import { Icon, IconProps } from "@/components/Icon";
 import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 import { PropsWithVariant } from "@/lib/types/props";
+import {
+  IconAlertCircle,
+  IconAlertTriangle,
+  IconCircleCheck,
+  IconInfoCircle,
+} from "@tabler/icons-react";
 
-export interface StatusIconProps extends PropsWithVariant {
-  className?: string;
-}
+export interface StatusIconProps extends PropsWithVariant, IconProps {}
 
 export const StatusIcon: FC<StatusIconProps> = (props) => {
   const { variant = "info", ...rest } = props;
@@ -19,13 +20,17 @@ export const StatusIcon: FC<StatusIconProps> = (props) => {
   const ariaLabel = stringFormatter.format(`statusIcon.${variant}`);
 
   const icon =
-    variant === "info"
-      ? faInfoCircle
-      : variant === "success"
-        ? faCheckCircle
-        : faExclamationCircle;
+    variant === "info" ? (
+      <IconInfoCircle />
+    ) : variant === "success" ? (
+      <IconCircleCheck />
+    ) : variant === "warning" ? (
+      <IconAlertCircle />
+    ) : (
+      <IconAlertTriangle />
+    );
 
-  return <Icon aria-label={ariaLabel} faIcon={icon} {...rest} />;
+  return <Icon aria-label={ariaLabel} tablerIcon={icon} {...rest} />;
 };
 
 export default StatusIcon;

@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Button from "../Button";
-import { faStar } from "@fortawesome/free-regular-svg-icons/faStar";
 import React from "react";
 import { Icon } from "@/components/Icon";
 import { action } from "@storybook/addon-actions";
+import { IconStar } from "@tabler/icons-react";
 
 const meta: Meta<typeof Button> = {
   title: "Buttons/Button",
@@ -43,7 +43,7 @@ export const Small: Story = {
 export const WithIcon: Story = {
   render: (props) => (
     <Button {...props} aria-label="Add to favorites">
-      <Icon faIcon={faStar} />
+      <Icon tablerIcon={<IconStar />} />
     </Button>
   ),
 };
@@ -51,7 +51,7 @@ export const WithIcon: Story = {
 export const SmallWithIcon: Story = {
   render: (props) => (
     <Button {...props} aria-label="Add to favorites" size="small">
-      <Icon faIcon={faStar} />
+      <Icon tablerIcon={<IconStar />} />
     </Button>
   ),
 };

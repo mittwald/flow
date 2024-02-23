@@ -7,10 +7,12 @@ import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { FieldError } from "@/components/FieldError";
 import { Button } from "@/components/Button";
 import { Icon } from "@/components/Icon";
-import { faChevronUp } from "@fortawesome/free-solid-svg-icons/faChevronUp";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons/faChevronDown";
-import { faPlus } from "@fortawesome/free-solid-svg-icons/faPlus";
-import { faMinus } from "@fortawesome/free-solid-svg-icons/faMinus";
+import {
+  IconChevronDown,
+  IconChevronUp,
+  IconMinus,
+  IconPlus,
+} from "@tabler/icons-react";
 
 export interface NumberFieldProps
   extends PropsWithChildren<Omit<Aria.NumberFieldProps, "children">> {}
@@ -43,8 +45,8 @@ export const NumberField: FC<NumberFieldProps> = (props) => {
           style="plain"
           variant="secondary"
         >
-          <Icon faIcon={faChevronDown} />
-          <Icon faIcon={faMinus} />
+          <Icon tablerIcon={<IconChevronDown />} />
+          <Icon className={styles.touchIcon} tablerIcon={<IconMinus />} />
         </Button>
         <Aria.Input className={styles.input} />
         <Button
@@ -54,8 +56,8 @@ export const NumberField: FC<NumberFieldProps> = (props) => {
           style="plain"
           variant="secondary"
         >
-          <Icon faIcon={faChevronUp} />
-          <Icon faIcon={faPlus} />
+          <Icon tablerIcon={<IconChevronUp />} />
+          <Icon className={styles.touchIcon} tablerIcon={<IconPlus />} />
         </Button>
       </Aria.Group>
       <PropsContextProvider props={propsContext}>

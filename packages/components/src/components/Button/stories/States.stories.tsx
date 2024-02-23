@@ -3,7 +3,7 @@ import Button from "../Button";
 import defaultMeta from "./Default.stories";
 import { Icon } from "@/components/Icon";
 import React from "react";
-import { faStar } from "@fortawesome/free-regular-svg-icons/faStar";
+import { IconStar } from "@tabler/icons-react";
 
 const meta: Meta<typeof Button> = {
   ...defaultMeta,
@@ -46,7 +46,7 @@ export const PendingPlainWithIcon: Story = {
   },
   render: (props) => (
     <Button {...props} aria-label="Add to favorites">
-      <Icon faIcon={faStar} />
+      <Icon tablerIcon={<IconStar />} />
     </Button>
   ),
 };

@@ -29,8 +29,7 @@
 /* Elements */
 .statusIcon {
   grid-area: icon;
-  font-size: var(--inline-alert--icon-size);
-  line-height: calc(var(--inline-alert--heading-font-size) * 1.5);
+  --icon-size: var(--inline-alert--icon-size);
 }
 
 .heading {

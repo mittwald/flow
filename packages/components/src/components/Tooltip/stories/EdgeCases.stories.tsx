@@ -6,7 +6,7 @@ import { Button } from "@/components/Button";
 import { Icon } from "@/components/Icon";
 import defaultMeta from "./Default.stories";
 import { dummyText } from "@/lib/dev/dummyText";
-import { faSave } from "@fortawesome/free-regular-svg-icons/faSave";
+import { IconDeviceFloppy } from "@tabler/icons-react";
 
 const meta: Meta<typeof Tooltip> = {
   ...defaultMeta,
@@ -17,7 +17,7 @@ const meta: Meta<typeof Tooltip> = {
   render: (props) => (
     <TooltipTrigger {...props}>
       <Button aria-label="save">
-        <Icon faIcon={faSave} />
+        <Icon tablerIcon={<IconDeviceFloppy />} />
       </Button>
       <Tooltip>{dummyText.medium}</Tooltip>
     </TooltipTrigger>

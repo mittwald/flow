@@ -1,8 +1,8 @@
 icon:
   size:
-    s:
+    small:
       value: 1rem
-    m:
-      value: 1.25rem
-    l:
+    medium:
+      value: 1.5rem
+    large:
       value: 4rem
