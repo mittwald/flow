@@ -32,6 +32,7 @@
     "remark-frontmatter": "^5.0.0",
     "remark-mdx-frontmatter": "^4.0.0",
     "remeda": "^1.43.0",
+    "tsx": "^4.7.1",
     "webpack": "^5.90.2"
   },
   "devDependencies": {
