@@ -22,12 +22,3 @@ export const LongText: Story = {
     </Link>
   ),
 };
-
-export const LongTextPending: Story = {
-  render: (props) => (
-    <Link isPending {...props}>
-      {dummyText.medium}
-      <Icon faIcon={faExternalLink} aria-label="external link" />
-    </Link>
-  ),
-};
