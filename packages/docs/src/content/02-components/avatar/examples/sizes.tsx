@@ -2,16 +2,16 @@ import Avatar from "@mittwald/flow-react-components/Avatar";
 import Initials from "@mittwald/flow-react-components/Initials";
 
 <Row>
-  <Avatar size="extraSmall">
+  <Avatar size="xs">
     <Initials>Gillian Gopher</Initials>
   </Avatar>
-  <Avatar size="small">
+  <Avatar size="s">
     <Initials>Gillian Gopher</Initials>
   </Avatar>
-  <Avatar size="medium">
+  <Avatar size="m">
     <Initials>Gillian Gopher</Initials>
   </Avatar>
-  <Avatar size="large">
+  <Avatar size="l">
     <Initials>Gillian Gopher</Initials>
   </Avatar>
 </Row>;

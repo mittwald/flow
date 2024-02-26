@@ -22,7 +22,7 @@ export const LabeledValue: FC<LabeledValueProps> = (props) => {
     CopyToClipboard: {
       className: styles.copyButton,
       style: "plain",
-      size: "small",
+      size: "s",
     },
   };
 
