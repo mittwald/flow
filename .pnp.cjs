@@ -4906,6 +4906,7 @@ const RAW_RUNTIME_STATE =
           ["remark-mdx-frontmatter", "npm:4.0.0"],\
           ["remeda", "npm:1.43.0"],\
           ["sass", "npm:1.71.0"],\
+          ["tsx", "npm:4.7.1"],\
           ["typescript", "patch:typescript@npm%3A5.3.3#optional!builtin<compat/typescript>::version=5.3.3&hash=e012d7"],\
           ["webpack", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:5.90.2"]\
         ],\
