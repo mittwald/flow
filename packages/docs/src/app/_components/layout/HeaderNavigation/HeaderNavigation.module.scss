@@ -1,3 +1,4 @@
 .navigation ul {
   flex-direction: row;
+  gap: var(--navigation--item-to-item-spacing)
 }
