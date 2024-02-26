@@ -45,7 +45,7 @@ const MainNavigation: FC<Props> = (props) => {
         <GroupHeadingText>{currentPathname.split("/")[1]}</GroupHeadingText>
       </Heading>
       <Navigation aria-labelledby={headingComponentsId}>
-        {currentNavGroup.map(navItem)}
+        {currentNavGroup?.map(navItem)}
       </Navigation>
     </Fragment>
   );
