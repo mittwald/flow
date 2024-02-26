@@ -7,26 +7,48 @@ import {
   PropsContextProvider,
   useProps,
 } from "@/lib/propsContext";
+import Icon from "@/components/Icon";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons/faSpinner";
+import { faCheck } from "@fortawesome/free-solid-svg-icons/faCheck";
+import { faTimes } from "@fortawesome/free-solid-svg-icons/faTimes";
+import { Wrap } from "@/components/Wrap";
 
-export interface ButtonProps extends PropsWithChildren<Aria.ButtonProps> {
+export interface ButtonProps
+  extends PropsWithChildren<Omit<Aria.ButtonProps, "style">> {
   /** @default "primary" */
-  variant?: "primary" | "accent" | "secondary" | "danger" | "plain";
-  small?: boolean;
+  variant?: "primary" | "accent" | "secondary" | "danger";
+  /** @default "solid" */
+  style?: "plain" | "solid";
+  /** @default "medium" */
+  size?: "medium" | "small";
+
+  isPending?: boolean;
+  isSucceeded?: boolean;
+  isFailed?: boolean;
 }
 
 export const Button: FC<ButtonProps> = (props) => {
   const {
     variant = "primary",
+    style = "solid",
     children,
     className,
-    small,
+    size = "medium",
+    isPending,
+    isDisabled,
+    isSucceeded,
+    isFailed,
     ...restProps
   } = useProps("Button", props);
 
   const rootClassName = clsx(
     styles.button,
-    small && styles.small,
+    isPending && styles.isPending,
+    isSucceeded && styles.isSucceeded,
+    isFailed && styles.isFailed,
+    styles[size],
     styles[variant],
+    styles[style],
     className,
   );
 
@@ -38,11 +60,25 @@ export const Button: FC<ButtonProps> = (props) => {
     },
   };
 
+  const stateIcon = (isPending || isSucceeded || isFailed) && (
+    <Icon
+      faIcon={isSucceeded ? faCheck : isFailed ? faTimes : faSpinner}
+      className={styles.stateIcon}
+    />
+  );
+
   return (
-    <Aria.Button className={rootClassName} {...restProps}>
+    <Aria.Button
+      className={rootClassName}
+      isDisabled={isDisabled || isPending || isSucceeded || isFailed}
+      {...restProps}
+    >
       <PropsContextProvider props={propsContext}>
-        {children}
+        <Wrap if={stateIcon}>
+          <span className={styles.content}>{children}</span>
+        </Wrap>
       </PropsContextProvider>
+      {stateIcon}
     </Aria.Button>
   );
 };

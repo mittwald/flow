@@ -19,6 +19,7 @@ export default defineConfig(
           Button: "./src/components/Button/index.ts",
           Checkbox: "./src/components/Checkbox/index.ts",
           Content: "./src/components/Content/index.ts",
+          LayoutCard: "./src/components/LayoutCard/index.ts",
           CopyToClipboardButton:
             "./src/components/CopyToClipboardButton/index.ts",
           FieldDescription: "./src/components/FieldDescription/index.ts",
@@ -35,6 +36,7 @@ export default defineConfig(
           NumberField: "./src/components/NumberField/index.ts",
           Popover: "./src/components/Popover/index.ts",
           RadioGroup: "./src/components/RadioGroup/index.ts",
+          Section: "./src/components/Section/index.ts",
           StatusIcon: "./src/components/StatusIcon/index.ts",
           Switch: "./src/components/Switch/index.ts",
           Text: "./src/components/Text/index.ts",
