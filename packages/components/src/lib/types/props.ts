@@ -10,9 +10,3 @@ export type PropsWithElementType<P = unknown> = P &
   HTMLAttributes<HTMLElement> & {
     elementType?: keyof ReactHTML;
   };
-
-export interface PropsWithActionStates {
-  isPending?: boolean;
-  isSucceeded?: boolean;
-  isFailed?: boolean;
-}

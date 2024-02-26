@@ -7,17 +7,11 @@ import {
 } from "@/lib/propsContext";
 import styles from "./Link.module.scss";
 import clsx from "clsx";
-import ActionStateIcon from "@/components/ActionStateIcon";
-import { Wrap } from "@/components/Wrap";
 
 export interface LinkProps
   extends PropsWithChildren<Omit<Aria.LinkProps, "children">> {
   /** @default "default" */
   variant?: "default" | "danger";
-
-  isPending?: boolean;
-  isSucceeded?: boolean;
-  isFailed?: boolean;
 }
 
 export const Link: FC<LinkProps> = (props) => {
@@ -25,21 +19,10 @@ export const Link: FC<LinkProps> = (props) => {
     children,
     className,
     variant = "default",
-    isPending,
-    isDisabled,
-    isSucceeded,
-    isFailed,
     ...rest
   } = useProps("Link", props);
 
-  const rootClassName = clsx(
-    styles.link,
-    isPending && styles.isPending,
-    isSucceeded && styles.isSucceeded,
-    isFailed && styles.isFailed,
-    styles[variant],
-    className,
-  );
+  const rootClassName = clsx(styles.link, styles[variant], className);
 
   const propsContext: PropsContext = {
     Icon: {
@@ -47,30 +30,11 @@ export const Link: FC<LinkProps> = (props) => {
     },
   };
 
-  const hasActionState = isPending || isSucceeded || isFailed;
-
-  const actionStateIcon = (
-    <ActionStateIcon
-      isSucceeded={isSucceeded}
-      isPending={isPending}
-      isFailed={isFailed}
-      className={styles.actionStateIcon}
-    />
-  );
-
   return (
-    <Aria.Link
-      className={rootClassName}
-      isDisabled={isDisabled || hasActionState}
-      {...rest}
-    >
+    <Aria.Link className={rootClassName} {...rest}>
       <PropsContextProvider props={propsContext}>
-        <Wrap if={hasActionState}>
-          <span className={styles.content}>{children}</span>
-        </Wrap>
+        {children}
       </PropsContextProvider>
-
-      {actionStateIcon}
     </Aria.Link>
   );
 };
