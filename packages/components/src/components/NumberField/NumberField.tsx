@@ -39,7 +39,7 @@ export const NumberField: FC<NumberFieldProps> = (props) => {
         <Button
           slot="decrement"
           className={styles.decrementButton}
-          size="small"
+          size="s"
           style="plain"
           variant="secondary"
         >
@@ -50,7 +50,7 @@ export const NumberField: FC<NumberFieldProps> = (props) => {
         <Button
           slot="increment"
           className={styles.incrementButton}
-          size="small"
+          size="s"
           style="plain"
           variant="secondary"
         >

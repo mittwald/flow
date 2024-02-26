@@ -11,7 +11,7 @@
     object-fit: cover;
   }
 
-  @extend .size-s;
+  @extend .size-m;
 }
 
 /* Elements */
@@ -31,6 +31,7 @@
   }
 }
 
-@include size(s);
 @include size(m);
+@include size(xs);
+@include size(s);
 @include size(l);
