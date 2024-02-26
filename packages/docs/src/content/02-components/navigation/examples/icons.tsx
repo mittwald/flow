@@ -10,10 +10,10 @@ import { Text } from "@mittwald/flow-react-components/Text";
   </NavigationItem>
   <NavigationItem textValue="Server" isCurrent>
     <Icon tablerIcon="server" />
-    <Text>Customer</Text>
+    <Text>Server</Text>
   </NavigationItem>
   <NavigationItem textValue="Project">
-    <Icon faIcon="project" />
-    <Text>Customer</Text>
+    <Icon tablerIcon="project" />
+    <Text>Project</Text>
   </NavigationItem>
 </Navigation>;

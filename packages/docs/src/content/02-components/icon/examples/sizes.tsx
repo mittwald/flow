@@ -1,7 +1,7 @@
 import Icon from "@mittwald/flow-react-components/Icon";
 
 <Row>
-  <Icon tablerIcon="home" size="small" />
-  <Icon tablerIcon="home" size="medium" />
-  <Icon tablerIcon="home" size="large" />
+  <Icon tablerIcon="home" size="s" />
+  <Icon tablerIcon="home" size="m" />
+  <Icon tablerIcon="home" size="l" />
 </Row>;
