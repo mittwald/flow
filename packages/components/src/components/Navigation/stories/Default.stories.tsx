@@ -3,7 +3,6 @@ import React from "react";
 import { Icon } from "@/components/Icon";
 import { Text } from "@/components/Text";
 import { Navigation, NavigationItem } from "@/components/Navigation";
-import { IconServer, IconStar, IconUser } from "@tabler/icons-react";
 
 const meta: Meta<typeof Navigation> = {
   title: "Navigation/Navigation",
@@ -33,17 +32,17 @@ export const Default: Story = {
 export const WithIcons: Story = {
   render: (props) => (
     <Navigation aria-label="Main menu" {...props}>
-      <NavigationItem textValue="Address">
-        <Icon tablerIcon={<IconStar />} />
-        <Text>Address</Text>
+      <NavigationItem textValue="Customer">
+        <Icon tablerIcon="customer" />
+        <Text>Customer</Text>
       </NavigationItem>
-      <NavigationItem textValue="Profile" isCurrent>
-        <Icon tablerIcon={<IconUser />} />
-        <Text>Profile</Text>
+      <NavigationItem textValue="Server" isCurrent>
+        <Icon tablerIcon="server" />
+        <Text>Server</Text>
       </NavigationItem>
-      <NavigationItem textValue="Storage">
-        <Icon tablerIcon={<IconServer />} />
-        <Text>Storage</Text>
+      <NavigationItem textValue="Project">
+        <Icon tablerIcon="project" />
+        <Text>Project</Text>
       </NavigationItem>
     </Navigation>
   ),

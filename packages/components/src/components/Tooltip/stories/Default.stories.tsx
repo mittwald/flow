@@ -4,7 +4,6 @@ import React from "react";
 import { Text } from "@/components/Text";
 import { Button } from "@/components/Button";
 import { Icon } from "@/components/Icon";
-import { IconDeviceFloppy } from "@tabler/icons-react";
 
 const meta: Meta<typeof Tooltip> = {
   title: "Overlays/Tooltip",
@@ -14,8 +13,8 @@ const meta: Meta<typeof Tooltip> = {
   },
   render: (props) => (
     <TooltipTrigger {...props}>
-      <Button aria-label="save">
-        <Icon tablerIcon={<IconDeviceFloppy />} />
+      <Button aria-label="copy">
+        <Icon tablerIcon="copy" />
       </Button>
       <Tooltip>Save</Tooltip>
     </TooltipTrigger>

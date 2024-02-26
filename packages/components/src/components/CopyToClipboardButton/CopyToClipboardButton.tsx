@@ -7,7 +7,6 @@ import { useLocalizedStringFormatter } from "react-aria";
 import { Tooltip, TooltipTrigger } from "@/components/Tooltip";
 import { onlyText } from "react-children-utilities";
 import { useProps } from "@/lib/propsContext";
-import { IconCopy } from "@tabler/icons-react";
 
 export interface CopyToClipboardButtonProps
   extends Omit<ButtonProps, "onPress" | "aria-label"> {
@@ -30,7 +29,7 @@ export const CopyToClipboardButton: FC<CopyToClipboardButtonProps> = (
   return (
     <TooltipTrigger>
       <Button onPress={copyValue} aria-label={tooltip} {...buttonProps}>
-        <Icon tablerIcon={<IconCopy />} />
+        <Icon tablerIcon="copy" />
       </Button>
       <Tooltip>{tooltip}</Tooltip>
     </TooltipTrigger>
