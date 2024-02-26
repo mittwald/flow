@@ -4962,7 +4962,7 @@ const RAW_RUNTIME_STATE =
           ["@storybook/blocks", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:7.6.16"],\
           ["@storybook/builder-vite", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:7.6.16"],\
           ["@storybook/components", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:7.6.16"],\
-          ["@storybook/core-events", "npm:7.6.16"],\
+          ["@storybook/core-events", "npm:7.6.17"],\
           ["@storybook/manager-api", "npm:7.6.16"],\
           ["@storybook/preview-api", "npm:7.6.16"],\
           ["@storybook/react", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:7.6.3"],\
@@ -5036,7 +5036,7 @@ const RAW_RUNTIME_STATE =
           ["@storybook/blocks", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:7.6.16"],\
           ["@storybook/builder-vite", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:7.6.16"],\
           ["@storybook/components", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:7.6.16"],\
-          ["@storybook/core-events", "npm:7.6.16"],\
+          ["@storybook/core-events", "npm:7.6.17"],\
           ["@storybook/manager-api", "npm:7.6.16"],\
           ["@storybook/preview-api", "npm:7.6.16"],\
           ["@storybook/react", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:7.6.3"],\
@@ -5104,7 +5104,7 @@ const RAW_RUNTIME_STATE =
           ["@storybook/blocks", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:7.6.16"],\
           ["@storybook/builder-vite", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:7.6.16"],\
           ["@storybook/components", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:7.6.16"],\
-          ["@storybook/core-events", "npm:7.6.16"],\
+          ["@storybook/core-events", "npm:7.6.17"],\
           ["@storybook/manager-api", "npm:7.6.16"],\
           ["@storybook/preview-api", "npm:7.6.16"],\
           ["@storybook/react", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:7.6.3"],\
@@ -28327,7 +28327,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["storybook-addon-dir", "npm:1.0.6"],\
           ["@storybook/components", "virtual:b7dde059a8fb8cf89714fa978a7e71825965fd9af365f31d38ddbf9c3386303f260aceac5312c07b8ef12f329e99c26d6eef787bc1b0bcd591886ca65b405d53#npm:7.6.10"],\
-          ["@storybook/core-events", "npm:7.6.10"],\
+          ["@storybook/core-events", "npm:7.6.17"],\
           ["@storybook/manager-api", "npm:7.6.10"],\
           ["i18next", "npm:22.5.1"],\
           ["react", "npm:18.2.0"],\
@@ -28349,7 +28349,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["storybook-addon-pseudo-states", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:2.1.2"],\
           ["@storybook/components", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:7.6.16"],\
-          ["@storybook/core-events", "npm:7.6.16"],\
+          ["@storybook/core-events", "npm:7.6.17"],\
           ["@storybook/manager-api", "npm:7.6.16"],\
           ["@storybook/preview-api", "npm:7.6.16"],\
           ["@storybook/theming", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:7.6.16"],\
