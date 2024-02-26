@@ -5,12 +5,12 @@
     "value";
   row-gap: var(--labeled-value--label-to-value-spacing);
   column-gap: var(--labeled-value--value-to-button-spacing);
-  grid-template-columns: auto 1fr;
 
-  &:has(.copyButton) {
+  &:has(.button) {
     grid-template-areas:
       "label label     "
-      "value copy-button";
+      "value button";
+    grid-template-columns: auto 1fr;
   }
 }
 
@@ -22,7 +22,8 @@
   grid-area: value;
 }
 
-.copyButton {
-  grid-area: copy-button;
-  justify-self: start;
+.button {
+  grid-area: button;
+  align-self: start;
+  width: calc(var(--button--padding-small) * 2 + var(--icon--size--s));
 }
