@@ -7062,7 +7062,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/preview-api@npm:7.6.16, @storybook/preview-api@npm:^7.6.16":
+"@storybook/preview-api@npm:7.6.16":
   version: 7.6.16
   resolution: "@storybook/preview-api@npm:7.6.16"
   dependencies:
@@ -7084,7 +7084,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/preview-api@npm:7.6.17":
+"@storybook/preview-api@npm:7.6.17, @storybook/preview-api@npm:^7.6.16":
   version: 7.6.17
   resolution: "@storybook/preview-api@npm:7.6.17"
   dependencies:
