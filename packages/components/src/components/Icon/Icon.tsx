@@ -9,11 +9,15 @@ import styles from "./Icon.module.scss";
 import clsx from "clsx";
 import { extractSvgFromString } from "@/components/Icon/lib/extractSvgFromString";
 import { useProps } from "@/lib/propsContext";
+import {
+  getIconByAlias,
+  IconAliases,
+} from "@/components/Icon/lib/getIconAlias";
 
 type SvgAttributeProps = SVGAttributes<SVGSVGElement>;
 
 export interface IconProps extends PropsWithChildren<SvgAttributeProps> {
-  tablerIcon?: ReactElement;
+  tablerIcon?: ReactElement | IconAliases;
   size?: "small" | "medium" | "large";
 }
 
@@ -36,13 +40,14 @@ export const Icon: FC<IconProps> = (props) => {
     className: clsx(styles.icon, className, styles[size]),
   };
 
-  console.log(tablerIcon);
-
   if (tablerIcon) {
-    return React.cloneElement(tablerIcon, {
-      size: size === "small" ? 16 : size === "medium" ? 24 : 64,
-      ...iconProps,
-    });
+    return React.cloneElement(
+      typeof tablerIcon === "string" ? getIconByAlias(tablerIcon) : tablerIcon,
+      {
+        size: size === "small" ? 16 : size === "medium" ? 24 : 64,
+        ...iconProps,
+      },
+    );
   }
 
   const isCustomSvgString = typeof children === "string";

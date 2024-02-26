@@ -7,12 +7,6 @@ import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { FieldError } from "@/components/FieldError";
 import { Button } from "@/components/Button";
 import { Icon } from "@/components/Icon";
-import {
-  IconChevronDown,
-  IconChevronUp,
-  IconMinus,
-  IconPlus,
-} from "@tabler/icons-react";
 
 export interface NumberFieldProps
   extends PropsWithChildren<Omit<Aria.NumberFieldProps, "children">> {}
@@ -45,8 +39,8 @@ export const NumberField: FC<NumberFieldProps> = (props) => {
           style="plain"
           variant="secondary"
         >
-          <Icon tablerIcon={<IconChevronDown />} />
-          <Icon className={styles.touchIcon} tablerIcon={<IconMinus />} />
+          <Icon tablerIcon="chevronDown" />
+          <Icon className={styles.touchIcon} tablerIcon="minus" />
         </Button>
         <Aria.Input className={styles.input} />
         <Button
@@ -56,8 +50,8 @@ export const NumberField: FC<NumberFieldProps> = (props) => {
           style="plain"
           variant="secondary"
         >
-          <Icon tablerIcon={<IconChevronUp />} />
-          <Icon className={styles.touchIcon} tablerIcon={<IconPlus />} />
+          <Icon tablerIcon="chevronUp" />
+          <Icon className={styles.touchIcon} tablerIcon="plus" />
         </Button>
       </Aria.Group>
       <PropsContextProvider props={propsContext}>

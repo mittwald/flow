@@ -9,7 +9,6 @@ import {
 } from "@/lib/propsContext";
 import Icon from "@/components/Icon";
 import { Wrap } from "@/components/Wrap";
-import { IconCheck, IconLoader2, IconX } from "@tabler/icons-react";
 
 export interface ButtonProps
   extends PropsWithChildren<Omit<Aria.ButtonProps, "style">> {
@@ -61,9 +60,7 @@ export const Button: FC<ButtonProps> = (props) => {
   const stateIcon = (isPending || isSucceeded || isFailed) && (
     <Icon
       size={size}
-      tablerIcon={
-        isSucceeded ? <IconCheck /> : isFailed ? <IconX /> : <IconLoader2 />
-      }
+      tablerIcon={isSucceeded ? "succeeded" : isFailed ? "failed" : "pending"}
       className={styles.stateIcon}
     />
   );

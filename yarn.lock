@@ -2912,8 +2912,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@mittwald/flow-documentation@workspace:packages/docs"
   dependencies:
-    "@fortawesome/free-regular-svg-icons": "npm:^6.5.1"
-    "@fortawesome/free-solid-svg-icons": "npm:^6.5.1"
     "@mdx-js/loader": "npm:^3.0.1"
     "@mdx-js/react": "npm:^3.0.1"
     "@mfalkenberg/react-live-ssr": "npm:^4.1.7"
