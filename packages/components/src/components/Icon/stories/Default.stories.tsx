@@ -19,6 +19,11 @@ export const TablerIcon: Story = {
   render: (props) => <Icon {...props} tablerIcon={<IconStar />} />,
 };
 
+export const TablerAlias: Story = {
+  args: { "aria-label": "project" },
+  render: (props) => <Icon {...props} tablerIcon="project" />,
+};
+
 export const CustomSvgString: Story = {
   render: (props) => (
     <Icon {...props}>{`\

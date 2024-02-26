@@ -4,16 +4,16 @@
   width: var(--icon-size);
   height: var(--icon-size);
 
-  @extend .medium;
+  @extend .size-m;
 }
 
 /* Sizes */
 @mixin size($size) {
-  .icon.#{$size} {
+  .icon.size-#{$size} {
     --icon-size: var(--icon--size--#{$size});
   }
 }
 
-@include size(small);
-@include size(medium);
-@include size(large);
+@include size(s);
+@include size(m);
+@include size(l);

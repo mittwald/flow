@@ -36,7 +36,7 @@ export const Default: Story = {};
 
 export const Small: Story = {
   args: {
-    size: "small",
+    size: "s",
   },
 };
 
@@ -50,7 +50,7 @@ export const WithIcon: Story = {
 
 export const SmallWithIcon: Story = {
   render: (props) => (
-    <Button {...props} aria-label="Add to favorites" size="small">
+    <Button {...props} aria-label="Add to favorites" size="s">
       <Icon tablerIcon={<IconStar />} />
     </Button>
   ),

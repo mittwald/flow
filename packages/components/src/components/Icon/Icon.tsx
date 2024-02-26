@@ -18,7 +18,8 @@ type SvgAttributeProps = SVGAttributes<SVGSVGElement>;
 
 export interface IconProps extends PropsWithChildren<SvgAttributeProps> {
   tablerIcon?: ReactElement | IconAliases;
-  size?: "small" | "medium" | "large";
+  /** @default "m" */
+  size?: "s" | "m" | "l";
 }
 
 export const Icon: FC<IconProps> = (props) => {
@@ -27,7 +28,7 @@ export const Icon: FC<IconProps> = (props) => {
     className,
     "aria-label": ariaLabel,
     children,
-    size = "medium",
+    size = "m",
     ...svgAttributes
   } = useProps("Icon", props);
 
@@ -37,14 +38,14 @@ export const Icon: FC<IconProps> = (props) => {
     role: "img",
     "aria-hidden": !ariaLabel,
     "aria-label": ariaLabel,
-    className: clsx(styles.icon, className, styles[size]),
+    className: clsx(styles.icon, className, styles[`size-${size}`]),
   };
 
   if (tablerIcon) {
     return React.cloneElement(
       typeof tablerIcon === "string" ? getIconByAlias(tablerIcon) : tablerIcon,
       {
-        size: size === "small" ? 16 : size === "medium" ? 24 : 64,
+        size: size === "s" ? 16 : size === "m" ? 24 : 64,
         ...iconProps,
       },
     );

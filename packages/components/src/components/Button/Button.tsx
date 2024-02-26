@@ -16,8 +16,8 @@ export interface ButtonProps
   variant?: "primary" | "accent" | "secondary" | "danger";
   /** @default "solid" */
   style?: "plain" | "solid";
-  /** @default "medium" */
-  size?: "medium" | "small";
+  /** @default "m" */
+  size?: "m" | "s";
 
   isPending?: boolean;
   isSucceeded?: boolean;
@@ -30,7 +30,7 @@ export const Button: FC<ButtonProps> = (props) => {
     style = "solid",
     children,
     className,
-    size = "medium",
+    size = "m",
     isPending,
     isDisabled,
     isSucceeded,
@@ -43,7 +43,7 @@ export const Button: FC<ButtonProps> = (props) => {
     isPending && styles.isPending,
     isSucceeded && styles.isSucceeded,
     isFailed && styles.isFailed,
-    styles[size],
+    styles[`size-${size}`],
     styles[variant],
     styles[style],
     className,
