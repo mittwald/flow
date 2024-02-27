@@ -1,14 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Icon from "@/components/Icon/Icon";
 import React from "react";
-import { IconStar } from "@tabler/icons-react";
 import defaultMeta from "./Default.stories";
 
 const meta: Meta<typeof Icon> = {
   ...defaultMeta,
   title: "Content/Icon/Sizes",
-  args: { "aria-label": "star" },
-  render: (props) => <Icon {...props} tablerIcon={<IconStar />} />,
+  args: { "aria-label": "home" },
+  render: (props) => <Icon {...props} name="home" />,
 };
 export default meta;
 

@@ -31,7 +31,9 @@ export const IconOnly: Story = {
 export const CustomIcon: Story = {
   render: (props) => (
     <Badge {...props}>
-      <Icon tablerIcon={<IconHourglassEmpty />} />
+      <Icon>
+        <IconHourglassEmpty />
+      </Icon>
       <Text>Installation running</Text>
     </Badge>
   ),

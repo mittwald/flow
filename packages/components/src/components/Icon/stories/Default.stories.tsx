@@ -14,14 +14,18 @@ export default meta;
 
 type Story = StoryObj<typeof Icon>;
 
-export const TablerIcon: Story = {
-  args: { "aria-label": "star" },
-  render: (props) => <Icon {...props} tablerIcon={<IconStar />} />,
+export const Alias: Story = {
+  args: { "aria-label": "project" },
+  render: (props) => <Icon {...props} name="project" />,
 };
 
-export const TablerAlias: Story = {
-  args: { "aria-label": "project" },
-  render: (props) => <Icon {...props} tablerIcon="project" />,
+export const TablerIcon: Story = {
+  args: { "aria-label": "star" },
+  render: (props) => (
+    <Icon {...props}>
+      <IconStar />
+    </Icon>
+  ),
 };
 
 export const CustomSvgString: Story = {

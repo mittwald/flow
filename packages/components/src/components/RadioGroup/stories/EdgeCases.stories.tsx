@@ -6,7 +6,6 @@ import React from "react";
 import { Icon } from "@/components/Icon";
 import { dummyText } from "@/lib/dev/dummyText";
 import defaultMeta from "./Default.stories";
-import { IconStar } from "@tabler/icons-react";
 
 const meta: Meta<typeof RadioGroup> = {
   title: "Forms/RadioGroup/EdgeCases",
@@ -21,17 +20,17 @@ export const LongTexts: Story = {
   render: (props) => (
     <RadioGroup {...props} defaultValue="a" aria-label="Label">
       <Radio value="a">
-        <Icon tablerIcon={<IconStar />} />
+        <Icon name="app" />
         <Text>{dummyText.medium}</Text>
         <Content>{dummyText.medium}</Content>
       </Radio>
       <Radio value="b">
-        <Icon tablerIcon={<IconStar />} />
+        <Icon name="app" />
         <Text>{dummyText.medium}</Text>
         <Content>{dummyText.short}</Content>
       </Radio>
       <Radio value="c">
-        <Icon tablerIcon={<IconStar />} />
+        <Icon name="app" />
         <Text>{dummyText.short}</Text>
         <Content>{dummyText.medium}</Content>
       </Radio>
@@ -46,7 +45,7 @@ export const MultipleElements: Story = {
         .fill("")
         .map((value, index) => (
           <Radio value={index.toString()} key={index}>
-            <Icon tablerIcon={<IconStar />} />
+            <Icon name="app" />
             <Text>{index + 1} Star</Text>
             <Content>{dummyText.medium}</Content>
           </Radio>

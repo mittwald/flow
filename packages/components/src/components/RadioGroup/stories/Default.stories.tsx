@@ -7,7 +7,6 @@ import { Text } from "@/components/Text";
 import { Icon } from "@/components/Icon";
 import { action } from "@storybook/addon-actions";
 import { FieldError } from "@/components/FieldError";
-import { IconStar } from "@tabler/icons-react";
 
 const meta: Meta<typeof RadioGroup> = {
   title: "Forms/RadioGroup",
@@ -58,15 +57,15 @@ export const WithIcon: Story = {
     <RadioGroup {...props} defaultValue="wordpress">
       <Label>App</Label>
       <Radio value="wordpress">
-        <Icon tablerIcon={<IconStar />} />
+        <Icon name="app" />
         <Text>WordPress</Text>
       </Radio>
       <Radio value="typo3">
-        <Icon tablerIcon={<IconStar />} />
+        <Icon name="app" />
         <Text>TYPO3</Text>
       </Radio>
       <Radio value="magento">
-        <Icon tablerIcon={<IconStar />} />
+        <Icon name="app" />
         <Text>Magento</Text>
       </Radio>
     </RadioGroup>
@@ -104,7 +103,7 @@ export const WithIconAndContent: Story = {
   render: (props) => (
     <RadioGroup {...props} defaultValue="proSpace" aria-label="Project">
       <Radio value="proSpace">
-        <Icon tablerIcon={<IconStar />} />
+        <Icon name="domain" />
         <Text>proSpace</Text>
         <Content>
           The proSpace guarantees your project its own resources, also dedicated
@@ -112,7 +111,7 @@ export const WithIconAndContent: Story = {
         </Content>
       </Radio>
       <Radio value="spaceServer">
-        <Icon tablerIcon={<IconStar />} />
+        <Icon name="domain" />
         <Text>Space-Server</Text>
         <Content>
           On the Space-Server, this project shares resources with all projects
@@ -128,15 +127,15 @@ export const WithFieldError: Story = {
     <RadioGroup {...props} isInvalid>
       <Label>App</Label>
       <Radio value="wordpress">
-        <Icon tablerIcon={<IconStar />} />
+        <Icon name="app" />
         <Text>WordPress</Text>
       </Radio>
       <Radio value="typo3">
-        <Icon tablerIcon={<IconStar />} />
+        <Icon name="app" />
         <Text>TYPO3</Text>
       </Radio>
       <Radio value="magento">
-        <Icon tablerIcon={<IconStar />} />
+        <Icon name="app" />
         <Text>Magento</Text>
       </Radio>
       <FieldError>Select an app to continue</FieldError>

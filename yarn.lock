@@ -2892,6 +2892,7 @@ __metadata:
     "@mfalkenberg/react-live-ssr": "npm:^4.1.7"
     "@mittwald/flow-react-components": "workspace:^"
     "@next/mdx": "npm:^14.1.0"
+    "@tabler/icons-react": "npm:^2.47.0"
     "@types/mdx": "npm:^2.0.11"
     "@types/node": "npm:^20.11.19"
     "@types/react": "npm:^18.2.56"

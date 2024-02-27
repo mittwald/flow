@@ -13,7 +13,7 @@ export const StatusIcon: FC<StatusIconProps> = (props) => {
 
   const ariaLabel = stringFormatter.format(`statusIcon.${variant}`);
 
-  return <Icon aria-label={ariaLabel} tablerIcon={variant} {...rest} />;
+  return <Icon aria-label={ariaLabel} name={variant} {...rest} />;
 };
 
 export default StatusIcon;

@@ -3,7 +3,6 @@ import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import styles from "./Checkbox.module.scss";
 import { Icon } from "@/components/Icon";
-import { IconSquare, IconSquareCheck } from "@tabler/icons-react";
 
 export interface CheckboxProps
   extends PropsWithChildren<Omit<Aria.CheckboxProps, "children">> {}
@@ -19,7 +18,7 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
         <>
           <Icon
             className={styles.checkmark}
-            tablerIcon={isSelected ? <IconSquareCheck /> : <IconSquare />}
+            name={isSelected ? "checked" : "unchecked"}
           />
           {children}
         </>

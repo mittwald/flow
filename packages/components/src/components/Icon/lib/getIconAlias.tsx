@@ -44,6 +44,8 @@ import {
   IconUsersGroup,
   IconWorld,
   IconX,
+  IconSquare,
+  IconSquareCheck,
 } from "@tabler/icons-react";
 import React, { ReactElement } from "react";
 
@@ -89,7 +91,10 @@ type FunctionalIconAliases =
   | "date"
   | "time"
   | "plus"
-  | "minus";
+  | "minus"
+  | "checked"
+  | "unchecked"
+  | "check";
 
 type StatusIconAliases =
   | "success"
@@ -187,6 +192,12 @@ export const getIconByAlias = (iconAlias: IconAliases): ReactElement => {
       return <IconPlus />;
     case "minus":
       return <IconMinus />;
+    case "checked":
+      return <IconSquareCheck />;
+    case "unchecked":
+      return <IconSquare />;
+    case "check":
+      return <IconCheck />;
     case "success":
       return <IconCircleCheck />;
     case "warning":

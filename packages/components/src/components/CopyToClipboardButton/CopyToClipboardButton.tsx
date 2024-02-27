@@ -29,7 +29,7 @@ export const CopyToClipboardButton: FC<CopyToClipboardButtonProps> = (
   return (
     <TooltipTrigger>
       <Button onPress={copyValue} aria-label={tooltip} {...buttonProps}>
-        <Icon tablerIcon="copy" />
+        <Icon name="copy" />
       </Button>
       <Tooltip>{tooltip}</Tooltip>
     </TooltipTrigger>

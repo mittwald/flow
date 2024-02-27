@@ -60,7 +60,7 @@ export const Button: FC<ButtonProps> = (props) => {
   const stateIcon = (isPending || isSucceeded || isFailed) && (
     <Icon
       size={size}
-      tablerIcon={isSucceeded ? "succeeded" : isFailed ? "failed" : "pending"}
+      name={isSucceeded ? "succeeded" : isFailed ? "failed" : "pending"}
       className={styles.stateIcon}
     />
   );

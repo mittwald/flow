@@ -3,7 +3,6 @@ import Button from "../Button";
 import React from "react";
 import { Icon } from "@/components/Icon";
 import { action } from "@storybook/addon-actions";
-import { IconStar } from "@tabler/icons-react";
 
 const meta: Meta<typeof Button> = {
   title: "Buttons/Button",
@@ -43,7 +42,7 @@ export const Small: Story = {
 export const WithIcon: Story = {
   render: (props) => (
     <Button {...props} aria-label="Add to favorites">
-      <Icon tablerIcon={<IconStar />} />
+      <Icon name="plus" />
     </Button>
   ),
 };
@@ -51,7 +50,7 @@ export const WithIcon: Story = {
 export const SmallWithIcon: Story = {
   render: (props) => (
     <Button {...props} aria-label="Add to favorites" size="s">
-      <Icon tablerIcon={<IconStar />} />
+      <Icon name="plus" />
     </Button>
   ),
 };

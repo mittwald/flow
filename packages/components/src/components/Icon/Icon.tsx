@@ -1,10 +1,4 @@
-import React, {
-  FC,
-  PropsWithChildren,
-  ReactElement,
-  SVGAttributes,
-  useMemo,
-} from "react";
+import React, { FC, PropsWithChildren, SVGAttributes, useMemo } from "react";
 import styles from "./Icon.module.scss";
 import clsx from "clsx";
 import { extractSvgFromString } from "@/components/Icon/lib/extractSvgFromString";
@@ -17,14 +11,14 @@ import {
 type SvgAttributeProps = SVGAttributes<SVGSVGElement>;
 
 export interface IconProps extends PropsWithChildren<SvgAttributeProps> {
-  tablerIcon?: ReactElement | IconAliases;
+  name?: IconAliases;
   /** @default "m" */
   size?: "s" | "m" | "l";
 }
 
 export const Icon: FC<IconProps> = (props) => {
   const {
-    tablerIcon,
+    name,
     className,
     "aria-label": ariaLabel,
     children,
@@ -41,13 +35,10 @@ export const Icon: FC<IconProps> = (props) => {
     className: clsx(styles.icon, className, styles[`size-${size}`]),
   };
 
-  if (tablerIcon) {
-    return React.cloneElement(
-      typeof tablerIcon === "string" ? getIconByAlias(tablerIcon) : tablerIcon,
-      {
-        ...iconProps,
-      },
-    );
+  if (name) {
+    return React.cloneElement(getIconByAlias(name), {
+      ...iconProps,
+    });
   }
 
   const isCustomSvgString = typeof children === "string";

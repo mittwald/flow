@@ -6,7 +6,7 @@ import Icon from "@mittwald/flow-react-components/Icon";
 
 <TooltipTrigger>
   <Button aria-label="save">
-    <Icon tablerIcon="copy" />
+    <Icon name="copy" />
   </Button>
   <Tooltip>Save</Tooltip>
 </TooltipTrigger>;

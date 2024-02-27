@@ -17,6 +17,7 @@
     "@mfalkenberg/react-live-ssr": "^4.1.7",
     "@mittwald/flow-react-components": "workspace:^",
     "@next/mdx": "^14.1.0",
+    "@tabler/icons-react": "^2.47.0",
     "@types/mdx": "^2.0.11",
     "clsx": "^2.1.0",
     "fs-jetpack": "^5.1.0",

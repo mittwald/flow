@@ -39,8 +39,8 @@ export const NumberField: FC<NumberFieldProps> = (props) => {
           style="plain"
           variant="secondary"
         >
-          <Icon tablerIcon="chevronDown" />
-          <Icon className={styles.coarsePointerIcon} tablerIcon="minus" />
+          <Icon name="chevronDown" />
+          <Icon className={styles.coarsePointerIcon} name="minus" />
         </Button>
         <Aria.Input className={styles.input} />
         <Button
@@ -50,8 +50,8 @@ export const NumberField: FC<NumberFieldProps> = (props) => {
           style="plain"
           variant="secondary"
         >
-          <Icon tablerIcon="chevronUp" />
-          <Icon className={styles.coarsePointerIcon} tablerIcon="plus" />
+          <Icon name="chevronUp" />
+          <Icon className={styles.coarsePointerIcon} name="plus" />
         </Button>
       </Aria.Group>
       <PropsContextProvider props={propsContext}>

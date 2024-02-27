@@ -14,7 +14,7 @@ const meta: Meta<typeof Tooltip> = {
   render: (props) => (
     <TooltipTrigger {...props}>
       <Button aria-label="copy">
-        <Icon tablerIcon="copy" />
+        <Icon name="copy" />
       </Button>
       <Tooltip>Save</Tooltip>
     </TooltipTrigger>

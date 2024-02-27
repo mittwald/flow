@@ -1,6 +1,6 @@
 import Icon from "@mittwald/flow-react-components/Icon";
 
 <Icon
-  tablerIcon="home"
+  name="home"
   style={{ color: "var(--primary--color--800)" }}
 />;
