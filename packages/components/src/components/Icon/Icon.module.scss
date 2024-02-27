@@ -1,18 +1,17 @@
 .icon {
   flex-shrink: 0;
-  width: var(--icon-size);
-  height: var(--icon-size);
   max-width: none;
   @extend .size-m;
 }
 
 /* Sizes */
 @mixin size($size) {
-  .icon.size-#{$size} {
-    --icon-size: var(--icon--size--#{$size});
+  .size-#{$size} {
+    width: var(--icon--size--#{$size});
+    height: var(--icon--size--#{$size});
   }
 }
 
-@include size(s);
 @include size(m);
+@include size(s);
 @include size(l);
