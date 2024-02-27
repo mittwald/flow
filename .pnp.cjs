@@ -3973,35 +3973,6 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
-    ["@fortawesome/fontawesome-common-types", [\
-      ["npm:6.5.1", {\
-        "packageLocation": "./.yarn/unplugged/@fortawesome-fontawesome-common-types-npm-6.5.1-1efaf0654d/node_modules/@fortawesome/fontawesome-common-types/",\
-        "packageDependencies": [\
-          ["@fortawesome/fontawesome-common-types", "npm:6.5.1"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["@fortawesome/free-regular-svg-icons", [\
-      ["npm:6.5.1", {\
-        "packageLocation": "./.yarn/cache/@fortawesome-free-regular-svg-icons-npm-6.5.1-9331a4ef57-6e35a9b054.zip/node_modules/@fortawesome/free-regular-svg-icons/",\
-        "packageDependencies": [\
-          ["@fortawesome/free-regular-svg-icons", "npm:6.5.1"],\
-          ["@fortawesome/fontawesome-common-types", "npm:6.5.1"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["@fortawesome/free-solid-svg-icons", [\
-      ["npm:6.5.1", {\
-        "packageLocation": "./.yarn/cache/@fortawesome-free-solid-svg-icons-npm-6.5.1-f35995a54f-4874dca578.zip/node_modules/@fortawesome/free-solid-svg-icons/",\
-        "packageDependencies": [\
-          ["@fortawesome/free-solid-svg-icons", "npm:6.5.1"],\
-          ["@fortawesome/fontawesome-common-types", "npm:6.5.1"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
     ["@humanwhocodes/config-array", [\
       ["npm:0.11.13", {\
         "packageLocation": "./.yarn/cache/@humanwhocodes-config-array-npm-0.11.13-12314014f2-d76ca802d8.zip/node_modules/@humanwhocodes/config-array/",\
@@ -4906,8 +4877,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/__virtual__/@mittwald-flow-react-components-virtual-a61e07d7ea/1/packages/components/",\
         "packageDependencies": [\
           ["@mittwald/flow-react-components", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#workspace:packages/components"],\
-          ["@fortawesome/free-regular-svg-icons", "npm:6.5.1"],\
-          ["@fortawesome/free-solid-svg-icons", "npm:6.5.1"],\
           ["@jest/globals", "npm:29.7.0"],\
           ["@mittwald/flow-design-tokens", "workspace:packages/design-tokens"],\
           ["@nx/storybook", "npm:18.0.4"],\
@@ -4979,8 +4948,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/__virtual__/@mittwald-flow-react-components-virtual-7723a7a0cb/1/packages/components/",\
         "packageDependencies": [\
           ["@mittwald/flow-react-components", "virtual:f09e910c1b508d3d7569e5bd3d1b58e6c8eedf483d3ecb00a35f3e6fff907cff61fcf2c7acd90c04d26e337186c1afc7265f77161911bcd5beabe7070df91545#workspace:packages/components"],\
-          ["@fortawesome/free-regular-svg-icons", "npm:6.5.1"],\
-          ["@fortawesome/free-solid-svg-icons", "npm:6.5.1"],\
           ["@jest/globals", "npm:29.7.0"],\
           ["@mittwald/flow-design-tokens", "workspace:packages/design-tokens"],\
           ["@nx/storybook", "npm:18.0.4"],\
@@ -5046,8 +5013,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./packages/components/",\
         "packageDependencies": [\
           ["@mittwald/flow-react-components", "workspace:packages/components"],\
-          ["@fortawesome/free-regular-svg-icons", "npm:6.5.1"],\
-          ["@fortawesome/free-solid-svg-icons", "npm:6.5.1"],\
           ["@jest/globals", "npm:29.7.0"],\
           ["@mittwald/flow-design-tokens", "workspace:packages/design-tokens"],\
           ["@nx/storybook", "npm:18.0.4"],\

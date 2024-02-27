@@ -62,8 +62,6 @@
     "remeda": "^1.43.0"
   },
   "devDependencies": {
-    "@fortawesome/free-regular-svg-icons": "^6.5.1",
-    "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@jest/globals": "^29.7.0",
     "@mittwald/flow-design-tokens": "workspace:^",
     "@nx/storybook": "^18.0.4",
