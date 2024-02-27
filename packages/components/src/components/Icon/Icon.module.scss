@@ -2,7 +2,7 @@
   flex-shrink: 0;
   width: var(--icon-size);
   height: var(--icon-size);
-
+  max-width: none;
   @extend .size-m;
 }
 
