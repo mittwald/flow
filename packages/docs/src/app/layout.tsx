@@ -24,10 +24,12 @@ const RootLayout: FC<PropsWithChildren> = async (props) => {
     <html lang="en">
       <body className={bodyClassName}>
         <header className={styles.header}>
-          <div>
+          <div className={styles.headerContent}>
             <Heading level={1} className={styles.heading}>
               Flow – mittwald Design System{" "}
-              <Badge variant="warning">beta</Badge>
+              <Badge className={styles.betaBadge} variant="warning">
+                beta
+              </Badge>
             </Heading>
             <HeaderNavigation docs={docs.map((mdx) => mdx.serialize())} />
           </div>

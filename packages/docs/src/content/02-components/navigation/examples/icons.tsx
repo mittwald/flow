@@ -1,5 +1,6 @@
-import Navigation from "@mittwald/flow-react-components/Navigation";
-import { NavigationItem } from "@mittwald/flow-react-components/Navigation";
+import Navigation, {
+  NavigationItem,
+} from "@mittwald/flow-react-components/Navigation";
 import Icon from "@mittwald/flow-react-components/Icon";
 import { Text } from "@mittwald/flow-react-components/Text";
 import { faUser } from "@fortawesome/free-regular-svg-icons/faUser";

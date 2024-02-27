@@ -1,14 +1,14 @@
 "use client";
-import React, { FC, ReactElement, useId } from "react";
+import React, { FC, useId } from "react";
 import Navigation, {
   NavigationItem,
 } from "@mittwald/flow-react-components/Navigation";
-import { usePathname } from "next/navigation";
 import { MdxFile, SerializedMdxFile } from "@/lib/mdx/MdxFile";
-import { NextJsNavigationItemLink } from "@/app/_components/layout/MainNavigation/NextJsNavigationItemLink";
 import { groupBy } from "remeda";
-import { GroupHeadingText } from "@/app/_components/layout/MainNavigation/components/GroupHeadingText";
 import styles from "./HeaderNavigation.module.scss";
+import { NextJsNavigationItemLink } from "@/app/_components/layout/MainNavigation/NextJsNavigationItemLink";
+import { GroupHeadingText } from "@/app/_components/layout/MainNavigation/components/GroupHeadingText";
+import { usePathname } from "next/navigation";
 
 interface Props {
   docs: SerializedMdxFile[];
@@ -22,29 +22,23 @@ const HeaderNavigation: FC<Props> = (props) => {
   const headingComponentsId = useId();
   const currentPathname = usePathname();
 
-  const navItem = (mdx: MdxFile, group: string): ReactElement => {
-    const href = mdx.pathname;
-
-    return (
-      <NavigationItem
-        key={href}
-        href={href}
-        isCurrent={currentPathname.includes(group)}
-        linkComponent={NextJsNavigationItemLink}
-      >
-        <GroupHeadingText>{group}</GroupHeadingText>
-      </NavigationItem>
-    );
-  };
+  const navigationItems = Object.entries(navGroups).map(([group, mdxFiles]) => (
+    <NavigationItem
+      href={mdxFiles[0].pathname}
+      key={mdxFiles[0].pathname}
+      isCurrent={currentPathname.includes(group)}
+      linkComponent={NextJsNavigationItemLink}
+    >
+      <GroupHeadingText>{group}</GroupHeadingText>
+    </NavigationItem>
+  ));
 
   return (
     <Navigation
       aria-labelledby={headingComponentsId}
       className={styles.navigation}
     >
-      {Object.entries(navGroups).map(([group, mdxFiles]) =>
-        navItem(mdxFiles[0], group),
-      )}
+      {navigationItems}
     </Navigation>
   );
 };

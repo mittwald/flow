@@ -1,5 +1,5 @@
 "use client";
-import React, { FC, Fragment, ReactElement, useId } from "react";
+import React, { FC, Fragment, useId } from "react";
 import Navigation, {
   NavigationItem,
 } from "@mittwald/flow-react-components/Navigation";
@@ -7,9 +7,9 @@ import Heading from "@mittwald/flow-react-components/Heading";
 import { usePathname } from "next/navigation";
 import styles from "./MainNavigation.module.scss";
 import { MdxFile, SerializedMdxFile } from "@/lib/mdx/MdxFile";
-import { NextJsNavigationItemLink } from "@/app/_components/layout/MainNavigation/NextJsNavigationItemLink";
 import { groupBy } from "remeda";
 import { GroupHeadingText } from "@/app/_components/layout/MainNavigation/components/GroupHeadingText";
+import { NextJsNavigationItemLink } from "@/app/_components/layout/MainNavigation/NextJsNavigationItemLink";
 
 interface Props {
   docs: SerializedMdxFile[];
@@ -22,22 +22,19 @@ const MainNavigation: FC<Props> = (props) => {
 
   const headingComponentsId = useId();
   const currentPathname = usePathname();
-
   const currentNavGroup = navGroups[currentPathname.split("/")[1]];
 
-  const navItem = (mdx: MdxFile): ReactElement => {
-    const href = mdx.pathname;
-    return (
+  const navigationItems =
+    currentNavGroup &&
+    Object.entries(currentNavGroup).map(([_, mdxFile]) => (
       <NavigationItem
-        key={href}
-        href={href}
-        isCurrent={href === currentPathname}
+        href={mdxFile.pathname}
+        isCurrent={mdxFile.pathname === currentPathname}
         linkComponent={NextJsNavigationItemLink}
       >
-        {mdx.getNavTitle()}
+        {mdxFile.getNavTitle()}
       </NavigationItem>
-    );
-  };
+    ));
 
   return (
     <Fragment>
@@ -45,7 +42,7 @@ const MainNavigation: FC<Props> = (props) => {
         <GroupHeadingText>{currentPathname.split("/")[1]}</GroupHeadingText>
       </Heading>
       <Navigation aria-labelledby={headingComponentsId}>
-        {currentNavGroup?.map(navItem)}
+        {navigationItems}
       </Navigation>
     </Fragment>
   );
