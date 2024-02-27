@@ -1,4 +1,8 @@
-import { StatusVariantProps } from "@/lib/types/props";
+import {
+  PropsWithElementType,
+  PropsWithVariant,
+  Variant,
+} from "@/lib/types/props";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function testStatusVariantCanBeOmitted() {
@@ -6,16 +10,14 @@ function testStatusVariantCanBeOmitted() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const testProps = {
     variant: "success",
-  } as StatusVariantProps<"success">;
+  } as PropsWithVariant<Exclude<Variant, "success">>;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function testUnknownStatusVariantCanNotBeOmitted() {
+  // @ts-expect-error Is unknown
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const testProps = {
-    variant: "success",
-    // @ts-expect-error Is unknown
-  } as StatusVariantProps<"unknown">;
+  const testProps = {} as PropsWithVariant<"unknown">;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -23,7 +25,7 @@ function testNoStatusIsExcludedPerDefault() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const testProps = {
     variant: "success",
-  } as StatusVariantProps;
+  } as PropsWithVariant;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -32,5 +34,41 @@ function testUnknownStatusVariantCanNotBeAssigned() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const testProps = {
     variant: "unknown",
-  } as StatusVariantProps;
+  } as PropsWithVariant;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function testAssigningUnknownElementTypeThrowsError() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const test: PropsWithElementType = {
+    // @ts-expect-error Is unknown
+    elementType: "foo",
+  };
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function testAssigningElementTypeWorks() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const test: PropsWithElementType = {
+    elementType: "a",
+  };
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function testAssigningUnsupportedElementPropsThrowsError() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const test: PropsWithElementType = {
+    elementType: "a",
+    // @ts-expect-error Is not supported
+    href: "link",
+  };
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function testAssigningSupportedElementPropsWorks() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const test: PropsWithElementType = {
+    elementType: "a",
+    title: "Hello!",
+  };
 }
