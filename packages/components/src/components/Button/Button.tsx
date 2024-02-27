@@ -9,6 +9,7 @@ import {
 } from "@/lib/propsContext";
 import Icon from "@/components/Icon";
 import { Wrap } from "@/components/Wrap";
+import { Text } from "@/components/Text";
 
 export interface ButtonProps
   extends PropsWithChildren<Omit<Aria.ButtonProps, "style">> {
@@ -55,6 +56,9 @@ export const Button: FC<ButtonProps> = (props) => {
       "aria-hidden": true,
       size,
     },
+    Text: {
+      className: styles.text,
+    },
   };
 
   const stateIcon = (isPending || isSucceeded || isFailed) && (
@@ -65,6 +69,8 @@ export const Button: FC<ButtonProps> = (props) => {
     />
   );
 
+  const isStringContent = typeof children === "string";
+
   return (
     <Aria.Button
       className={rootClassName}
@@ -73,7 +79,11 @@ export const Button: FC<ButtonProps> = (props) => {
     >
       <PropsContextProvider props={propsContext}>
         <Wrap if={stateIcon}>
-          <span className={styles.content}>{children}</span>
+          <span className={styles.content}>
+            <Wrap if={isStringContent}>
+              <Text>{children}</Text>
+            </Wrap>
+          </span>
         </Wrap>
       </PropsContextProvider>
       {stateIcon}
