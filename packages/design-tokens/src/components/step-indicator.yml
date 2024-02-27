@@ -1,0 +1,19 @@
+step-indicator:
+  corner-radius:
+    value: "{corner-radius.default}"
+  padding-x:
+    value: "{size-px.s}"
+  padding-y:
+    value: "{size-px.xs}"
+  font-weight-current:
+    value: "{font-weight.bold}"
+  background-color:
+    default:
+      value: "{neutral.color.400}"
+    current:
+      value: "{info.color.200}"
+  content-color:
+    default:
+      value: "{neutral.color.1000}"
+    current:
+      value: "{info.color.900}"

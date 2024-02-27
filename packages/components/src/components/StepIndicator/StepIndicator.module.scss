@@ -1,0 +1,7 @@
+.stepIndicator {
+  display: flex;
+  flex-direction: row;
+  isolation: isolate;
+  height: calc(1lh + var(--step-indicator--padding-y) * 2);
+  overflow: hidden;
+}

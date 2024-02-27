@@ -37,6 +37,7 @@ export default defineConfig(
           RadioGroup: "./src/components/RadioGroup/index.ts",
           Section: "./src/components/Section/index.ts",
           StatusIcon: "./src/components/StatusIcon/index.ts",
+          StepIndicator: "./src/components/StepIndicator/index.ts",
           Switch: "./src/components/Switch/index.ts",
           Text: "./src/components/Text/index.ts",
           TextArea: "./src/components/TextArea/index.ts",

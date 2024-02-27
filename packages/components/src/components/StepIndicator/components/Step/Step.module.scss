@@ -1,0 +1,62 @@
+.step {
+  background-color: var(--step-indicator--background-color--default);
+  padding-block: var(--step-indicator--padding-y);
+  padding-inline: var(--step-indicator--padding-x);
+  position: relative;
+  color: var(--step-indicator--content-color--default);
+
+  &:first-child {
+    border-start-start-radius: var(--step-indicator--corner-radius);
+    border-end-start-radius: var(--step-indicator--corner-radius);
+  }
+
+  &:last-child {
+    border-start-end-radius: var(--step-indicator--corner-radius);
+    border-end-end-radius: var(--step-indicator--corner-radius);
+  }
+
+  &:not(:first-child) {
+    padding-left: 24px;
+  }
+
+  &:not(:last-child) {
+    &:before,
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      z-index: 1;
+    }
+
+    &:before {
+      border: 20px solid transparent;
+      border-inline-width: 15px;
+      border-inline-start-color: var(--neutral--color--100);
+      right: -30px;
+      top: -4px;
+    }
+
+    &:after {
+      border: 16px solid transparent;
+      border-inline-width: 12px;
+      border-inline-start-color: var(
+        --step-indicator--background-color--default
+      );
+      right: -24px;
+      top: 0;
+    }
+  }
+}
+
+.current,
+.done {
+  background-color: var(--step-indicator--background-color--current);
+  color: var(--step-indicator--content-color--current);
+  &:not(:last-child):after {
+    border-inline-start-color: var(--step-indicator--background-color--current);
+  }
+}
+
+.current {
+  font-weight: var(--step-indicator--font-weight-current);
+}

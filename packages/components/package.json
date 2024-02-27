@@ -28,6 +28,7 @@
     "./RadioGroup": "./dist/RadioGroup.js",
     "./Section": "./dist/Section.js",
     "./StatusIcon": "./dist/StatusIcon.js",
+    "./StepIndicator": "./dist/StepIndicator.js",
     "./Switch": "./dist/Switch.js",
     "./Text": "./dist/Text.js",
     "./TextArea": "./dist/TextArea.js",

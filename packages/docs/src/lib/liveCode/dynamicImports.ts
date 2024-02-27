@@ -9,7 +9,7 @@ import { faSnowplow as I13 } from "@fortawesome/free-solid-svg-icons/faSnowplow"
 import { NavigationItem as I22 } from "@mittwald/flow-react-components/Navigation";
 import { faUser as I23 } from "@fortawesome/free-regular-svg-icons/faUser";
 import { faHardDrive as I24 } from "@fortawesome/free-regular-svg-icons/faHardDrive";
-import { faSave as I36 } from "@fortawesome/free-regular-svg-icons/faSave";
+import { faSave as I38 } from "@fortawesome/free-regular-svg-icons/faSave";
 
 export const liveCodeEditorGlobalImports: ImportMapping = {
   "ExampleSvg:@/content/01-getting-started/stylesheet/examples/components/ExampleSvg": lazy(() => import("@/content/01-getting-started/stylesheet/examples/components/ExampleSvg").then(module => ({ default: module.ExampleSvg } ))),
@@ -43,10 +43,12 @@ export const liveCodeEditorGlobalImports: ImportMapping = {
 "Section:@mittwald/flow-react-components/Section": lazy(() => import("@mittwald/flow-react-components/Section").then(module => ({ default: module.Section } ))),
 "TextField:@mittwald/flow-react-components/TextField": lazy(() => import("@mittwald/flow-react-components/TextField").then(module => ({ default: module.TextField } ))),
 "StatusIcon:@mittwald/flow-react-components/StatusIcon": lazy(() => import("@mittwald/flow-react-components/StatusIcon").then(module => ({ default: module.StatusIcon } ))),
+"Step:@mittwald/flow-react-components/StepIndicator": lazy(() => import("@mittwald/flow-react-components/StepIndicator").then(module => ({ default: module.Step } ))),
+"StepIndicator:@mittwald/flow-react-components/StepIndicator": lazy(() => import("@mittwald/flow-react-components/StepIndicator").then(module => ({ default: module.StepIndicator } ))),
 "Switch:@mittwald/flow-react-components/Switch": lazy(() => import("@mittwald/flow-react-components/Switch").then(module => ({ default: module.Switch } ))),
 "FieldDescription:@mittwald/flow-react-components/FieldDescription": lazy(() => import("@mittwald/flow-react-components/FieldDescription").then(module => ({ default: module.FieldDescription } ))),
 "TextArea:@mittwald/flow-react-components/TextArea": lazy(() => import("@mittwald/flow-react-components/TextArea").then(module => ({ default: module.TextArea } ))),
 "Tooltip:@mittwald/flow-react-components/Tooltip": lazy(() => import("@mittwald/flow-react-components/Tooltip").then(module => ({ default: module.Tooltip } ))),
 "TooltipTrigger:@mittwald/flow-react-components/Tooltip": lazy(() => import("@mittwald/flow-react-components/Tooltip").then(module => ({ default: module.TooltipTrigger } ))),
-"faSave:@fortawesome/free-regular-svg-icons/faSave": I36,
+"faSave:@fortawesome/free-regular-svg-icons/faSave": I38,
 };
