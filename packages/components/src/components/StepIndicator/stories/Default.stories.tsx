@@ -8,7 +8,7 @@ const meta: Meta<typeof StepIndicator> = {
   render: (props) => (
     <StepIndicator
       {...props}
-      steps={["Step 1", "Step 2", "Step 3"]}
+      steps={["Configuration", "Payment", "Overview"]}
       current={2}
     />
   ),

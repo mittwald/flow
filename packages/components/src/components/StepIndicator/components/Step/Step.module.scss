@@ -4,46 +4,76 @@
   padding-inline: var(--step-indicator--padding-x);
   position: relative;
   color: var(--step-indicator--content-color--default);
+  display: flex;
+}
 
-  &:first-child {
-    border-start-start-radius: var(--step-indicator--corner-radius);
-    border-end-start-radius: var(--step-indicator--corner-radius);
-  }
+.current {
+  font-weight: var(--step-indicator--font-weight-current);
+}
 
-  &:last-child {
-    border-start-end-radius: var(--step-indicator--corner-radius);
-    border-end-end-radius: var(--step-indicator--corner-radius);
-  }
+// ToDo: Compact Mode oder Property für compacte Variante -> @container in stepsIndicator css
 
-  &:not(:first-child) {
-    padding-left: 24px;
-  }
-
-  &:not(:last-child) {
-    &:before,
-    &:after {
-      content: "";
-      display: block;
-      position: absolute;
-      z-index: 1;
+@media (min-width: 551px) {
+  .step {
+    &:first-child {
+      border-start-start-radius: var(--step-indicator--corner-radius);
+      border-end-start-radius: var(--step-indicator--corner-radius);
     }
 
-    &:before {
-      border: 20px solid transparent;
-      border-inline-width: 15px;
-      border-inline-start-color: var(--neutral--color--100);
-      right: -30px;
-      top: -4px;
+    &:last-child {
+      border-start-end-radius: var(--step-indicator--corner-radius);
+      border-end-end-radius: var(--step-indicator--corner-radius);
     }
 
-    &:after {
-      border: 16px solid transparent;
-      border-inline-width: 12px;
-      border-inline-start-color: var(
-        --step-indicator--background-color--default
-      );
-      right: -24px;
-      top: 0;
+    &:not(:first-child) {
+      padding-left: 20px;
+    }
+
+    &:not(:last-child) {
+      &:before,
+      &:after {
+        content: "";
+        display: block;
+        position: absolute;
+        z-index: 1;
+      }
+
+      &:before {
+        border: 22px solid transparent;
+        border-inline-width: 15px;
+        border-inline-start-color: var(--neutral--color--100);
+        right: -27px;
+        top: -6px;
+      }
+
+      &:after {
+        border: 18px solid transparent;
+        border-inline-width: 12px;
+        border-inline-start-color: var(
+          --step-indicator--background-color--default
+        );
+        right: -20px;
+        top: -2px;
+      }
+    }
+  }
+
+  .count {
+    display: none;
+  }
+}
+
+@media (max-width: 550px) {
+  .count {
+    display: block;
+    font-weight: normal;
+  }
+  .step {
+    width: 100%;
+    justify-content: space-between;
+    border-radius: var(--step-indicator--corner-radius);
+    &:not(.current) {
+      display: none;
     }
   }
 }
@@ -55,8 +85,4 @@
   &:not(:last-child):after {
     border-inline-start-color: var(--step-indicator--background-color--current);
   }
-}
-
-.current {
-  font-weight: var(--step-indicator--font-weight-current);
 }
