@@ -45,7 +45,6 @@ export const Icon: FC<IconProps> = (props) => {
     return React.cloneElement(
       typeof tablerIcon === "string" ? getIconByAlias(tablerIcon) : tablerIcon,
       {
-        size: size === "s" ? 16 : size === "m" ? 24 : 64,
         ...iconProps,
       },
     );
