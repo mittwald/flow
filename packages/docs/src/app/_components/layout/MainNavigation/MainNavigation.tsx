@@ -22,7 +22,8 @@ const MainNavigation: FC<Props> = (props) => {
 
   const headingComponentsId = useId();
   const currentPathname = usePathname();
-  const currentNavGroup = navGroups[currentPathname.split("/")[1]];
+  const currentGroupName = currentPathname.split("/")[1];
+  const currentNavGroup = navGroups[currentGroupName];
 
   const navigationItems =
     currentNavGroup &&
@@ -40,7 +41,7 @@ const MainNavigation: FC<Props> = (props) => {
   return (
     <Fragment>
       <Heading level={4} id={headingComponentsId} className={styles.heading}>
-        <GroupHeadingText>{currentPathname.split("/")[1]}</GroupHeadingText>
+        <GroupHeadingText>{currentGroupName}</GroupHeadingText>
       </Heading>
       <Navigation aria-labelledby={headingComponentsId}>
         {navigationItems}
