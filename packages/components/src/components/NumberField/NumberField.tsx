@@ -6,7 +6,12 @@ import clsx from "clsx";
 import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { FieldError } from "@/components/FieldError";
 import { Button } from "@/components/Button";
-import { Icon } from "@/components/Icon";
+import {
+  IconChevronDown,
+  IconChevronUp,
+  IconMinus,
+  IconPlus,
+} from "@/components/Icon/components/icons";
 
 export interface NumberFieldProps
   extends PropsWithChildren<Omit<Aria.NumberFieldProps, "children">> {}
@@ -39,8 +44,8 @@ export const NumberField: FC<NumberFieldProps> = (props) => {
           style="plain"
           variant="secondary"
         >
-          <Icon name="chevronDown" />
-          <Icon className={styles.coarsePointerIcon} name="minus" />
+          <IconChevronDown />
+          <IconMinus className={styles.coarsePointerIcon} />
         </Button>
         <Aria.Input className={styles.input} />
         <Button
@@ -50,8 +55,8 @@ export const NumberField: FC<NumberFieldProps> = (props) => {
           style="plain"
           variant="secondary"
         >
-          <Icon name="chevronUp" />
-          <Icon className={styles.coarsePointerIcon} name="plus" />
+          <IconChevronUp />
+          <IconPlus className={styles.coarsePointerIcon} />
         </Button>
       </Aria.Group>
       <PropsContextProvider props={propsContext}>

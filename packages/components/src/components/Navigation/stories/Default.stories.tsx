@@ -1,6 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import { Icon } from "@/components/Icon";
+import {
+  IconCustomer,
+  IconProject,
+  IconServer,
+} from "@/components/Icon/components/icons";
 import { Text } from "@/components/Text";
 import { Navigation, NavigationItem } from "@/components/Navigation";
 
@@ -33,15 +37,15 @@ export const WithIcons: Story = {
   render: (props) => (
     <Navigation aria-label="Main menu" {...props}>
       <NavigationItem textValue="Customer">
-        <Icon name="customer" />
+        <IconCustomer />
         <Text>Customer</Text>
       </NavigationItem>
       <NavigationItem textValue="Server" isCurrent>
-        <Icon name="server" />
+        <IconServer />
         <Text>Server</Text>
       </NavigationItem>
       <NavigationItem textValue="Project">
-        <Icon name="project" />
+        <IconProject />
         <Text>Project</Text>
       </NavigationItem>
     </Navigation>

@@ -2,12 +2,13 @@ import type { Meta, StoryObj } from "@storybook/react";
 import Icon from "@/components/Icon/Icon";
 import React from "react";
 import defaultMeta from "./Default.stories";
+import { IconHome } from "@/components/Icon/components/icons";
 
 const meta: Meta<typeof Icon> = {
   ...defaultMeta,
   title: "Content/Icon/Sizes",
   args: { "aria-label": "home" },
-  render: (props) => <Icon {...props} name="home" />,
+  render: (props) => <IconHome {...props} />,
 };
 export default meta;
 

@@ -3,7 +3,7 @@ import Tooltip, { TooltipTrigger } from "../index";
 import React from "react";
 import { Text } from "@/components/Text";
 import { Button } from "@/components/Button";
-import { Icon } from "@/components/Icon";
+import { IconCopy } from "@/components/Icon/components/icons";
 
 const meta: Meta<typeof Tooltip> = {
   title: "Overlays/Tooltip",
@@ -14,7 +14,7 @@ const meta: Meta<typeof Tooltip> = {
   render: (props) => (
     <TooltipTrigger {...props}>
       <Button aria-label="copy">
-        <Icon name="copy" />
+        <IconCopy />
       </Button>
       <Tooltip>Save</Tooltip>
     </TooltipTrigger>

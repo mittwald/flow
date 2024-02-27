@@ -7,7 +7,7 @@
   "nxCloudAccessToken": "ZTRhMTQzNWUtZGY5Mi00OWVjLTg4ZjAtNzM3ZjRmZjJiNDRifHJlYWQ=",
   "targetDefaults": {
     "build": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["^build", "build:icons"],
       "cache": true
     },
     "start": {
@@ -21,6 +21,13 @@
     "test:compile": {
       "dependsOn": ["^build"],
       "cache": true
+    },
+    "build:icons": {
+      "cache": true,
+      "inputs": [
+        "{projectRoot}/dev/icons/**/*",
+        "{projectRoot}/src/components/Icon/tablerMappings.yaml"
+      ]
     }
   }
 }

@@ -1,8 +1,8 @@
 import Badge from "@mittwald/flow-react-components/Badge";
 import { Text } from "@mittwald/flow-react-components/Text";
-import Icon from "@mittwald/flow-react-components/Icon";
+import { IconEmail } from "@mittwald/flow-react-components/Icons";
 
 <Badge>
-  <Icon name="email" />
+  <IconEmail />
   <Text>New email</Text>
 </Badge>;

@@ -7,7 +7,11 @@ import {
   PropsContextProvider,
   useProps,
 } from "@/lib/propsContext";
-import Icon from "@/components/Icon";
+import {
+  IconFailed,
+  IconPending,
+  IconSucceeded,
+} from "@/components/Icon/components/icons";
 import { Wrap } from "@/components/Wrap";
 import { Text } from "@/components/Text";
 
@@ -61,12 +65,16 @@ export const Button: FC<ButtonProps> = (props) => {
     },
   };
 
-  const stateIcon = (isPending || isSucceeded || isFailed) && (
-    <Icon
-      size={size}
-      name={isSucceeded ? "succeeded" : isFailed ? "failed" : "pending"}
-      className={styles.stateIcon}
-    />
+  const StateIconComponent = isSucceeded
+    ? IconSucceeded
+    : isFailed
+      ? IconFailed
+      : isPending
+        ? IconPending
+        : undefined;
+
+  const stateIcon = StateIconComponent && (
+    <StateIconComponent size={size} className={styles.stateIcon} />
   );
 
   const isStringContent = typeof children === "string";

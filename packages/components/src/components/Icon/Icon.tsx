@@ -3,22 +3,17 @@ import styles from "./Icon.module.scss";
 import clsx from "clsx";
 import { extractSvgFromString } from "@/components/Icon/lib/extractSvgFromString";
 import { useProps } from "@/lib/propsContext";
-import {
-  getIconByAlias,
-  IconAliases,
-} from "@/components/Icon/lib/getIconAlias";
 
 type SvgAttributeProps = SVGAttributes<SVGSVGElement>;
 
-export interface IconProps extends PropsWithChildren<SvgAttributeProps> {
-  name?: IconAliases;
+export interface IconProps
+  extends PropsWithChildren<Omit<SvgAttributeProps, "name">> {
   /** @default "m" */
   size?: "s" | "m" | "l";
 }
 
 export const Icon: FC<IconProps> = (props) => {
   const {
-    name,
     className,
     "aria-label": ariaLabel,
     children,
@@ -34,12 +29,6 @@ export const Icon: FC<IconProps> = (props) => {
     "aria-label": ariaLabel,
     className: clsx(styles.icon, className, styles[`size-${size}`]),
   };
-
-  if (name) {
-    return React.cloneElement(getIconByAlias(name), {
-      ...iconProps,
-    });
-  }
 
   const isCustomSvgString = typeof children === "string";
 

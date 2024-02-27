@@ -1,7 +1,7 @@
-import Icon from "@mittwald/flow-react-components/Icon";
+import { IconHome } from "@mittwald/flow-react-components/Icons";
 
 <Row>
-  <Icon name="home" size="s" />
-  <Icon name="home" size="m" />
-  <Icon name="home" size="l" />
+  <IconHome size="s" />
+  <IconHome size="m" />
+  <IconHome size="l" />
 </Row>;

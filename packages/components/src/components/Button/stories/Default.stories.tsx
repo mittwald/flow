@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Button from "../Button";
 import React from "react";
-import { Icon } from "@/components/Icon";
+import { IconPlus } from "@/components/Icon/components/icons";
 import { action } from "@storybook/addon-actions";
 
 const meta: Meta<typeof Button> = {
@@ -42,7 +42,7 @@ export const Small: Story = {
 export const WithIcon: Story = {
   render: (props) => (
     <Button {...props} aria-label="Add to favorites">
-      <Icon name="plus" />
+      <IconPlus />
     </Button>
   ),
 };
@@ -50,7 +50,7 @@ export const WithIcon: Story = {
 export const SmallWithIcon: Story = {
   render: (props) => (
     <Button {...props} aria-label="Add to favorites" size="s">
-      <Icon name="plus" />
+      <IconPlus />
     </Button>
   ),
 };

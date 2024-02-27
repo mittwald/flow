@@ -1,19 +1,24 @@
-import Navigation from "@mittwald/flow-react-components/Navigation";
-import { NavigationItem } from "@mittwald/flow-react-components/Navigation";
-import Icon from "@mittwald/flow-react-components/Icon";
+import Navigation, {
+  NavigationItem,
+} from "@mittwald/flow-react-components/Navigation";
 import { Text } from "@mittwald/flow-react-components/Text";
+import {
+  IconCustomer,
+  IconProject,
+  IconServer,
+} from "@mittwald/flow-react-components/Icons";
 
 <Navigation aria-label="Main menu">
   <NavigationItem textValue="Customer">
-    <Icon name="customer" />
+    <IconCustomer />
     <Text>Customer</Text>
   </NavigationItem>
   <NavigationItem textValue="Server" isCurrent>
-    <Icon name="server" />
+    <IconServer />
     <Text>Server</Text>
   </NavigationItem>
   <NavigationItem textValue="Project">
-    <Icon name="project" />
+    <IconProject />
     <Text>Project</Text>
   </NavigationItem>
 </Navigation>;

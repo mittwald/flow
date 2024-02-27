@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Button from "../Button";
 import defaultMeta from "./Default.stories";
-import { Icon } from "@/components/Icon";
+import { IconPlus } from "@/components/Icon/components/icons";
 import React from "react";
 
 const meta: Meta<typeof Button> = {
@@ -45,7 +45,7 @@ export const PendingPlainWithIcon: Story = {
   },
   render: (props) => (
     <Button {...props} aria-label="Add to favorites">
-      <Icon name="plus" />
+      <IconPlus />
     </Button>
   ),
 };
