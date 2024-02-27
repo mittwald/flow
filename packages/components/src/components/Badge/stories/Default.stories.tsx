@@ -3,7 +3,6 @@ import Badge from "../Badge";
 import React from "react";
 import { Icon } from "@/components/Icon";
 import { Text } from "@/components/Text";
-import { IconHourglassEmpty } from "@tabler/icons-react";
 
 const meta: Meta<typeof Badge> = {
   title: "Status/Badge",
@@ -31,9 +30,7 @@ export const IconOnly: Story = {
 export const CustomIcon: Story = {
   render: (props) => (
     <Badge {...props}>
-      <Icon>
-        <IconHourglassEmpty />
-      </Icon>
+      <Icon name="app" />
       <Text>Installation running</Text>
     </Badge>
   ),
