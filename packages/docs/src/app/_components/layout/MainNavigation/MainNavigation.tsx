@@ -26,8 +26,9 @@ const MainNavigation: FC<Props> = (props) => {
 
   const navigationItems =
     currentNavGroup &&
-    Object.entries(currentNavGroup).map(([_, mdxFile]) => (
+    Object.entries(currentNavGroup).map(([, mdxFile]) => (
       <NavigationItem
+        key={mdxFile.pathname}
         href={mdxFile.pathname}
         isCurrent={mdxFile.pathname === currentPathname}
         linkComponent={NextJsNavigationItemLink}
