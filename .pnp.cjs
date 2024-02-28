@@ -4091,72 +4091,6 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
-    ["@fortawesome/fontawesome-common-types", [\
-      ["npm:6.5.1", {\
-        "packageLocation": "./.yarn/unplugged/@fortawesome-fontawesome-common-types-npm-6.5.1-1efaf0654d/node_modules/@fortawesome/fontawesome-common-types/",\
-        "packageDependencies": [\
-          ["@fortawesome/fontawesome-common-types", "npm:6.5.1"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["@fortawesome/fontawesome-svg-core", [\
-      ["npm:6.5.1", {\
-        "packageLocation": "./.yarn/cache/@fortawesome-fontawesome-svg-core-npm-6.5.1-8a58ea1915-ba4f4f4f1a.zip/node_modules/@fortawesome/fontawesome-svg-core/",\
-        "packageDependencies": [\
-          ["@fortawesome/fontawesome-svg-core", "npm:6.5.1"],\
-          ["@fortawesome/fontawesome-common-types", "npm:6.5.1"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["@fortawesome/free-regular-svg-icons", [\
-      ["npm:6.5.1", {\
-        "packageLocation": "./.yarn/cache/@fortawesome-free-regular-svg-icons-npm-6.5.1-9331a4ef57-6e35a9b054.zip/node_modules/@fortawesome/free-regular-svg-icons/",\
-        "packageDependencies": [\
-          ["@fortawesome/free-regular-svg-icons", "npm:6.5.1"],\
-          ["@fortawesome/fontawesome-common-types", "npm:6.5.1"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["@fortawesome/free-solid-svg-icons", [\
-      ["npm:6.5.1", {\
-        "packageLocation": "./.yarn/cache/@fortawesome-free-solid-svg-icons-npm-6.5.1-f35995a54f-4874dca578.zip/node_modules/@fortawesome/free-solid-svg-icons/",\
-        "packageDependencies": [\
-          ["@fortawesome/free-solid-svg-icons", "npm:6.5.1"],\
-          ["@fortawesome/fontawesome-common-types", "npm:6.5.1"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["@fortawesome/react-fontawesome", [\
-      ["npm:0.2.0", {\
-        "packageLocation": "./.yarn/unplugged/@fortawesome-react-fontawesome-virtual-d905afba28/node_modules/@fortawesome/react-fontawesome/",\
-        "packageDependencies": [\
-          ["@fortawesome/react-fontawesome", "npm:0.2.0"]\
-        ],\
-        "linkType": "SOFT"\
-      }],\
-      ["virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:0.2.0", {\
-        "packageLocation": "./.yarn/unplugged/@fortawesome-react-fontawesome-virtual-d905afba28/node_modules/@fortawesome/react-fontawesome/",\
-        "packageDependencies": [\
-          ["@fortawesome/react-fontawesome", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:0.2.0"],\
-          ["@fortawesome/fontawesome-svg-core", "npm:6.5.1"],\
-          ["@types/fortawesome__fontawesome-svg-core", null],\
-          ["@types/react", "npm:18.2.58"],\
-          ["prop-types", "npm:15.8.1"],\
-          ["react", "npm:18.2.0"]\
-        ],\
-        "packagePeers": [\
-          "@fortawesome/fontawesome-svg-core",\
-          "@types/fortawesome__fontawesome-svg-core",\
-          "@types/react",\
-          "react"\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
     ["@humanwhocodes/config-array", [\
       ["npm:0.11.14", {\
         "packageLocation": "./.yarn/cache/@humanwhocodes-config-array-npm-0.11.14-94a02fcc87-66f725b4ee.zip/node_modules/@humanwhocodes/config-array/",\
@@ -4993,13 +4927,12 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./packages/docs/",\
         "packageDependencies": [\
           ["@mittwald/flow-documentation", "workspace:packages/docs"],\
-          ["@fortawesome/free-regular-svg-icons", "npm:6.5.1"],\
-          ["@fortawesome/free-solid-svg-icons", "npm:6.5.1"],\
           ["@mdx-js/loader", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:3.0.1"],\
           ["@mdx-js/react", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:3.0.1"],\
           ["@mfalkenberg/react-live-ssr", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:4.1.7"],\
           ["@mittwald/flow-react-components", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#workspace:packages/components"],\
           ["@next/mdx", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:14.1.0"],\
+          ["@tabler/icons-react", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:2.47.0"],\
           ["@types/mdx", "npm:2.0.11"],\
           ["@types/node", "npm:20.11.20"],\
           ["@types/react", "npm:18.2.58"],\
@@ -5063,10 +4996,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/__virtual__/@mittwald-flow-react-components-virtual-a61e07d7ea/1/packages/components/",\
         "packageDependencies": [\
           ["@mittwald/flow-react-components", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#workspace:packages/components"],\
-          ["@fortawesome/fontawesome-svg-core", "npm:6.5.1"],\
-          ["@fortawesome/free-regular-svg-icons", "npm:6.5.1"],\
-          ["@fortawesome/free-solid-svg-icons", "npm:6.5.1"],\
-          ["@fortawesome/react-fontawesome", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:0.2.0"],\
           ["@jest/globals", "npm:29.7.0"],\
           ["@mittwald/flow-design-tokens", "workspace:packages/design-tokens"],\
           ["@nx/storybook", "npm:18.0.5"],\
@@ -5087,8 +5016,11 @@ const RAW_RUNTIME_STATE =
           ["@storybook/react-vite", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:7.6.17"],\
           ["@storybook/testing-library", "npm:0.2.2"],\
           ["@storybook/theming", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:7.6.17"],\
+          ["@tabler/icons-react", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:2.47.0"],\
           ["@testing-library/react", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:14.2.1"],\
           ["@types/jest", "npm:29.5.12"],\
+          ["@types/node", "npm:20.11.20"],\
+          ["@types/prettier", "npm:3.0.0"],\
           ["@types/prop-types", "npm:15.7.11"],\
           ["@types/react", "npm:18.2.58"],\
           ["@types/react-dom", "npm:18.2.19"],\
@@ -5096,6 +5028,7 @@ const RAW_RUNTIME_STATE =
           ["clsx", "npm:2.1.0"],\
           ["copy-to-clipboard", "npm:3.3.3"],\
           ["decamelize", "npm:6.0.0"],\
+          ["fs-jetpack", "npm:5.1.0"],\
           ["html-react-parser", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:5.1.7"],\
           ["jest", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:29.7.0"],\
           ["jest-environment-jsdom", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:29.7.0"],\
@@ -5103,6 +5036,7 @@ const RAW_RUNTIME_STATE =
           ["postcss", "npm:8.4.35"],\
           ["postcss-nested-import", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:1.3.0"],\
           ["postcss-nesting", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:12.0.3"],\
+          ["prettier", "npm:3.2.5"],\
           ["prop-types", "npm:15.8.1"],\
           ["react", "npm:18.2.0"],\
           ["react-aria", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.32.1"],\
@@ -5118,12 +5052,14 @@ const RAW_RUNTIME_STATE =
           ["storybook-addon-dir", "npm:1.0.6"],\
           ["storybook-addon-pseudo-states", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:2.1.2"],\
           ["ts-jest", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:29.1.2"],\
+          ["tsx", "npm:4.7.1"],\
           ["typescript", "patch:typescript@npm%3A5.3.3#optional!builtin<compat/typescript>::version=5.3.3&hash=e012d7"],\
           ["typescript-plugin-css-modules", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:5.1.0"],\
           ["vite", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:5.1.4"],\
           ["vite-plugin-banner", "npm:0.7.1"],\
           ["vite-plugin-checker", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:0.6.4"],\
-          ["vite-plugin-dts", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.7.3"]\
+          ["vite-plugin-dts", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.7.3"],\
+          ["yaml", "npm:2.4.0"]\
         ],\
         "packagePeers": [\
           "@types/react-dom",\
@@ -5137,10 +5073,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/__virtual__/@mittwald-flow-react-components-virtual-7723a7a0cb/1/packages/components/",\
         "packageDependencies": [\
           ["@mittwald/flow-react-components", "virtual:f09e910c1b508d3d7569e5bd3d1b58e6c8eedf483d3ecb00a35f3e6fff907cff61fcf2c7acd90c04d26e337186c1afc7265f77161911bcd5beabe7070df91545#workspace:packages/components"],\
-          ["@fortawesome/fontawesome-svg-core", "npm:6.5.1"],\
-          ["@fortawesome/free-regular-svg-icons", "npm:6.5.1"],\
-          ["@fortawesome/free-solid-svg-icons", "npm:6.5.1"],\
-          ["@fortawesome/react-fontawesome", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:0.2.0"],\
           ["@jest/globals", "npm:29.7.0"],\
           ["@mittwald/flow-design-tokens", "workspace:packages/design-tokens"],\
           ["@nx/storybook", "npm:18.0.5"],\
@@ -5161,8 +5093,11 @@ const RAW_RUNTIME_STATE =
           ["@storybook/react-vite", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:7.6.17"],\
           ["@storybook/testing-library", "npm:0.2.2"],\
           ["@storybook/theming", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:7.6.17"],\
+          ["@tabler/icons-react", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:2.47.0"],\
           ["@testing-library/react", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:14.2.1"],\
           ["@types/jest", "npm:29.5.12"],\
+          ["@types/node", "npm:20.11.20"],\
+          ["@types/prettier", "npm:3.0.0"],\
           ["@types/prop-types", "npm:15.7.11"],\
           ["@types/react", "npm:18.2.58"],\
           ["@types/react-dom", "npm:18.2.19"],\
@@ -5170,6 +5105,7 @@ const RAW_RUNTIME_STATE =
           ["clsx", "npm:2.1.0"],\
           ["copy-to-clipboard", "npm:3.3.3"],\
           ["decamelize", "npm:6.0.0"],\
+          ["fs-jetpack", "npm:5.1.0"],\
           ["html-react-parser", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:5.1.7"],\
           ["jest", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:29.7.0"],\
           ["jest-environment-jsdom", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:29.7.0"],\
@@ -5177,6 +5113,7 @@ const RAW_RUNTIME_STATE =
           ["postcss", "npm:8.4.35"],\
           ["postcss-nested-import", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:1.3.0"],\
           ["postcss-nesting", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:12.0.3"],\
+          ["prettier", "npm:3.2.5"],\
           ["prop-types", "npm:15.8.1"],\
           ["react", "npm:18.2.0"],\
           ["react-aria", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.32.1"],\
@@ -5192,12 +5129,14 @@ const RAW_RUNTIME_STATE =
           ["storybook-addon-dir", "npm:1.0.6"],\
           ["storybook-addon-pseudo-states", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:2.1.2"],\
           ["ts-jest", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:29.1.2"],\
+          ["tsx", "npm:4.7.1"],\
           ["typescript", "patch:typescript@npm%3A5.3.3#optional!builtin<compat/typescript>::version=5.3.3&hash=e012d7"],\
           ["typescript-plugin-css-modules", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:5.1.0"],\
           ["vite", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:5.1.4"],\
           ["vite-plugin-banner", "npm:0.7.1"],\
           ["vite-plugin-checker", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:0.6.4"],\
-          ["vite-plugin-dts", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.7.3"]\
+          ["vite-plugin-dts", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.7.3"],\
+          ["yaml", "npm:2.4.0"]\
         ],\
         "linkType": "SOFT"\
       }],\
@@ -5205,10 +5144,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./packages/components/",\
         "packageDependencies": [\
           ["@mittwald/flow-react-components", "workspace:packages/components"],\
-          ["@fortawesome/fontawesome-svg-core", "npm:6.5.1"],\
-          ["@fortawesome/free-regular-svg-icons", "npm:6.5.1"],\
-          ["@fortawesome/free-solid-svg-icons", "npm:6.5.1"],\
-          ["@fortawesome/react-fontawesome", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:0.2.0"],\
           ["@jest/globals", "npm:29.7.0"],\
           ["@mittwald/flow-design-tokens", "workspace:packages/design-tokens"],\
           ["@nx/storybook", "npm:18.0.5"],\
@@ -5229,8 +5164,11 @@ const RAW_RUNTIME_STATE =
           ["@storybook/react-vite", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:7.6.17"],\
           ["@storybook/testing-library", "npm:0.2.2"],\
           ["@storybook/theming", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:7.6.17"],\
+          ["@tabler/icons-react", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:2.47.0"],\
           ["@testing-library/react", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:14.2.1"],\
           ["@types/jest", "npm:29.5.12"],\
+          ["@types/node", "npm:20.11.20"],\
+          ["@types/prettier", "npm:3.0.0"],\
           ["@types/prop-types", "npm:15.7.11"],\
           ["@types/react", "npm:18.2.58"],\
           ["@types/react-dom", "npm:18.2.19"],\
@@ -5238,6 +5176,7 @@ const RAW_RUNTIME_STATE =
           ["clsx", "npm:2.1.0"],\
           ["copy-to-clipboard", "npm:3.3.3"],\
           ["decamelize", "npm:6.0.0"],\
+          ["fs-jetpack", "npm:5.1.0"],\
           ["html-react-parser", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:5.1.7"],\
           ["jest", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:29.7.0"],\
           ["jest-environment-jsdom", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:29.7.0"],\
@@ -5245,6 +5184,7 @@ const RAW_RUNTIME_STATE =
           ["postcss", "npm:8.4.35"],\
           ["postcss-nested-import", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:1.3.0"],\
           ["postcss-nesting", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:12.0.3"],\
+          ["prettier", "npm:3.2.5"],\
           ["prop-types", "npm:15.8.1"],\
           ["react", "npm:18.2.0"],\
           ["react-aria", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.32.1"],\
@@ -5260,12 +5200,14 @@ const RAW_RUNTIME_STATE =
           ["storybook-addon-dir", "npm:1.0.6"],\
           ["storybook-addon-pseudo-states", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:2.1.2"],\
           ["ts-jest", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:29.1.2"],\
+          ["tsx", "npm:4.7.1"],\
           ["typescript", "patch:typescript@npm%3A5.3.3#optional!builtin<compat/typescript>::version=5.3.3&hash=e012d7"],\
           ["typescript-plugin-css-modules", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:5.1.0"],\
           ["vite", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:5.1.4"],\
           ["vite-plugin-banner", "npm:0.7.1"],\
           ["vite-plugin-checker", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:0.6.4"],\
-          ["vite-plugin-dts", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.7.3"]\
+          ["vite-plugin-dts", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.7.3"],\
+          ["yaml", "npm:2.4.0"]\
         ],\
         "linkType": "SOFT"\
       }]\
@@ -12665,6 +12607,39 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@tabler/icons", [\
+      ["npm:2.47.0", {\
+        "packageLocation": "./.yarn/cache/@tabler-icons-npm-2.47.0-2efd6129cf-ffdffa1289.zip/node_modules/@tabler/icons/",\
+        "packageDependencies": [\
+          ["@tabler/icons", "npm:2.47.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@tabler/icons-react", [\
+      ["npm:2.47.0", {\
+        "packageLocation": "./.yarn/cache/@tabler-icons-react-npm-2.47.0-659652e228-09a78a1b88.zip/node_modules/@tabler/icons-react/",\
+        "packageDependencies": [\
+          ["@tabler/icons-react", "npm:2.47.0"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:2.47.0", {\
+        "packageLocation": "./.yarn/__virtual__/@tabler-icons-react-virtual-88b61c38fb/0/cache/@tabler-icons-react-npm-2.47.0-659652e228-09a78a1b88.zip/node_modules/@tabler/icons-react/",\
+        "packageDependencies": [\
+          ["@tabler/icons-react", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:2.47.0"],\
+          ["@tabler/icons", "npm:2.47.0"],\
+          ["@types/react", "npm:18.2.58"],\
+          ["prop-types", "npm:15.8.1"],\
+          ["react", "npm:18.2.0"]\
+        ],\
+        "packagePeers": [\
+          "@types/react",\
+          "react"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@testing-library/dom", [\
       ["npm:9.3.3", {\
         "packageLocation": "./.yarn/cache/@testing-library-dom-npm-9.3.3-c5d4692db9-c3bbd67503.zip/node_modules/@testing-library/dom/",\
@@ -13425,6 +13400,16 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@types/postcss-modules-scope", "npm:3.0.4"],\
           ["postcss", "npm:8.4.35"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@types/prettier", [\
+      ["npm:3.0.0", {\
+        "packageLocation": "./.yarn/cache/@types-prettier-npm-3.0.0-6c770110eb-edab8c0c0e.zip/node_modules/@types/prettier/",\
+        "packageDependencies": [\
+          ["@types/prettier", "npm:3.0.0"],\
+          ["prettier", "npm:3.2.5"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -30552,7 +30537,7 @@ const RAW_RUNTIME_STATE =
           ["vite", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:5.1.4"],\
           ["@types/less", null],\
           ["@types/lightningcss", null],\
-          ["@types/node", null],\
+          ["@types/node", "npm:20.11.20"],\
           ["@types/sass", null],\
           ["@types/stylus", null],\
           ["@types/sugarss", null],\

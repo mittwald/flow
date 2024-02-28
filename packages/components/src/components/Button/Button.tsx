@@ -7,10 +7,11 @@ import {
   PropsContextProvider,
   useProps,
 } from "@/lib/propsContext";
-import Icon from "@/components/Icon";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons/faSpinner";
-import { faCheck } from "@fortawesome/free-solid-svg-icons/faCheck";
-import { faTimes } from "@fortawesome/free-solid-svg-icons/faTimes";
+import {
+  IconFailed,
+  IconPending,
+  IconSucceeded,
+} from "@/components/Icon/components/icons";
 import { Wrap } from "@/components/Wrap";
 import { Text } from "@/components/Text";
 
@@ -57,18 +58,23 @@ export const Button: FC<ButtonProps> = (props) => {
     Icon: {
       className: styles.icon,
       "aria-hidden": true,
-      fixedWidth: true,
+      size,
     },
     Text: {
       className: styles.text,
     },
   };
 
-  const stateIcon = (isPending || isSucceeded || isFailed) && (
-    <Icon
-      faIcon={isSucceeded ? faCheck : isFailed ? faTimes : faSpinner}
-      className={styles.stateIcon}
-    />
+  const StateIconComponent = isSucceeded
+    ? IconSucceeded
+    : isFailed
+      ? IconFailed
+      : isPending
+        ? IconPending
+        : undefined;
+
+  const stateIcon = StateIconComponent && (
+    <StateIconComponent size={size} className={styles.stateIcon} />
   );
 
   const isStringContent = typeof children === "string";
