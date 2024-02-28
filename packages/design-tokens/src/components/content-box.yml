@@ -1,0 +1,9 @@
+content-box:
+  background-color:
+    value: "{neutral.color.100}"
+  corner-radius:
+    value: "{corner-radius.default}"
+  padding:
+    value: "{size-px.l}"
+  box-shadow:
+    value: "rgba(0, 0, 0, 0.1) 0px {size-px.xs} {size-px.s}"

@@ -29,7 +29,7 @@ color:
     200:
       value: "#E0EBFF"
     300:
-      value: "#A8C6FF"
+      value: "#ABC6FF"
     400:
       value: "#85AFFF"
     500:
@@ -49,17 +49,17 @@ color:
 
   espelkamp-green:
     100:
-      value: "#F8FFFD"
+      value: "#DCFFF4"
     200:
-      value: "#D9FFF4"
+      value: "#C0FFEB"
     300:
-      value: "#99FFE0"
+      value: "#87FFDA"
     400:
-      value: "#2EFFC0"
+      value: "#4FFFC9"
     500:
-      value: "#00F5AB"
+      value: "#17FFB8"
     600:
-      value: "#00D192"
+      value: "#00DE9A"
     700:
       value: "#00A673"
     800:

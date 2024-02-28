@@ -1,8 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Button from "../Button";
-import { faStar } from "@fortawesome/free-regular-svg-icons/faStar";
 import React from "react";
-import { Icon } from "@/components/Icon";
+import { IconPlus } from "@/components/Icon/components/icons";
 import { action } from "@storybook/addon-actions";
 
 const meta: Meta<typeof Button> = {
@@ -15,11 +14,17 @@ const meta: Meta<typeof Button> = {
     variant: {
       control: "inline-radio",
     },
+    style: {
+      control: "inline-radio",
+    },
+    size: {
+      control: "inline-radio",
+    },
   },
   parameters: {
     controls: { exclude: ["onPress"] },
   },
-  render: (props) => <Button {...props}>Button</Button>,
+  render: (props) => <Button {...props}>Continue/Action</Button>,
 };
 
 export default meta;
@@ -28,30 +33,24 @@ type Story = StoryObj<typeof Button>;
 
 export const Default: Story = {};
 
-export const Disabled: Story = {
-  args: {
-    isDisabled: true,
-  },
-};
-
 export const Small: Story = {
   args: {
-    small: true,
+    size: "s",
   },
 };
 
 export const WithIcon: Story = {
   render: (props) => (
     <Button {...props} aria-label="Add to favorites">
-      <Icon faIcon={faStar} />
+      <IconPlus />
     </Button>
   ),
 };
 
 export const SmallWithIcon: Story = {
   render: (props) => (
-    <Button {...props} aria-label="Add to favorites" small>
-      <Icon faIcon={faStar} />
+    <Button {...props} aria-label="Add to favorites" size="s">
+      <IconPlus />
     </Button>
   ),
 };

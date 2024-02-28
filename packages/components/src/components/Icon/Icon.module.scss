@@ -1,14 +1,17 @@
 .icon {
   flex-shrink: 0;
-  display: inline-block;
+  max-width: none;
+  @extend .size-m;
+}
 
-  svg {
-    height: 1em;
-    display: inline-block;
-    margin: 0 auto;
+/* Sizes */
+@mixin size($size) {
+  .size-#{$size} {
+    width: var(--icon--size--#{$size});
+    height: var(--icon--size--#{$size});
   }
 }
 
-.fixedWidth svg {
-  width: 1.25em;
-}
+@include size(m);
+@include size(s);
+@include size(l);

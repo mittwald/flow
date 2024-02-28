@@ -3,9 +3,7 @@ badge:
     value: "{font-size.s}"
   height:
     value: "{size-rem.l}"
-  icon-size:
-    value: "{size-rem.m}"
-  border-radius:
+  corner-radius:
     value: "{size-rem.m}"
   padding-y:
     value: "{size-rem.xs}"
@@ -16,7 +14,7 @@ badge:
   icon-to-text-spacing:
     value: 0.5em
   color:
-    value: "{info-solid-foreground-color}"
+    value: "{info-solid-content-color}"
 
   # Variants
   info-background-color:
