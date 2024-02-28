@@ -8,9 +8,8 @@ import styles from "./Notification.module.scss";
 import clsx from "clsx";
 import { Heading } from "@/components/Heading";
 import { Content } from "@/components/Content";
-import { Icon } from "@/components/Icon";
-import { faClose } from "@fortawesome/free-solid-svg-icons/faClose";
 import { StatusIcon } from "@/components/StatusIcon";
+import { IconClose } from "@/components/Icon/components/icons";
 
 export interface NotificationContentProps extends PropsWithVariant {
   title: string;
@@ -44,13 +43,13 @@ export const Notification: FC<NotificationProps<NotificationContentProps>> = ({
         {props.toast.content.content}
       </Content>
       <Button
-        size="small"
+        size="s"
         className={styles.close}
         variant="secondary"
         style="plain"
         {...closeButtonProps}
       >
-        <Icon faIcon={faClose} />
+        <IconClose />
       </Button>
     </div>
   );
