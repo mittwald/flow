@@ -1,7 +1,5 @@
 field-error:
   font-size:
     value: "{font-size.s}"
-  line-height:
-    value: "{line-height.s}"
   color:
     value: "{danger.color.700}"

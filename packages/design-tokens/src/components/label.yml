@@ -1,8 +1,6 @@
 label:
   font-size:
     value: "{font-size.s}"
-  line-height:
-    value: "{line-height.s}"
   font-weight:
     value: "{font-weight.bold}"
   color:

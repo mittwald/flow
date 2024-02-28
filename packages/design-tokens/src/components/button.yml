@@ -33,8 +33,6 @@ button:
     value: "{size-px.xs}"
   font-size-s:
     value: "{font-size.s}"
-  line-height-s:
-    value: "{line-height.s}"
 
   # Accent Solid
   accent-solid-background-color:

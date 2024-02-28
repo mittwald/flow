@@ -7,8 +7,6 @@ tooltip:
     value: "{size-px.s}"
   font-size:
     value: "{font-size.s}"
-  line-height:
-    value: "{line-height.s}"
   max-width:
     value: 300px
   tooltip-to-content-spacing:

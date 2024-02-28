@@ -6,17 +6,11 @@ font-weight:
 line-height:
   default:
     value: 1.5
-  s:
-    value: 1rem
   m:
-    value: 1.5rem
+    value: "calc({font-size.m} * 1.5)"
 font-size:
   default:
     value: "{font-size.m}"
-  xxs:
-    value: 0.625rem
-  xs:
-    value: 0.75rem
   s:
     value: 0.875rem
   m:
@@ -24,8 +18,6 @@ font-size:
   l:
     value: 1.125rem
   xl:
-    value: 1.5rem
-  xxl:
     value: 2rem
 color:
   default:
