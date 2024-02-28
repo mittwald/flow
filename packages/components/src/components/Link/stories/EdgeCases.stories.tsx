@@ -17,7 +17,7 @@ type Story = StoryObj<typeof Link>;
 export const LongText: Story = {
   render: (props) => (
     <Link {...props}>
-      {dummyText.medium}
+      {dummyText.long}
       <Icon faIcon={faExternalLink} aria-label="external link" />
     </Link>
   ),

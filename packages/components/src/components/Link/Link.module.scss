@@ -4,8 +4,8 @@
   line-height: var(--link--line-height);
   transition-property: color;
   transition-duration: var(--transition--duration--default);
-  outline-color: var(--button--focus-outline-color);
-  outline-offset: var(--button--focus-outline-offset);
+  outline-color: var(--link--focus-outline-color);
+  outline-offset: var(--link--focus-outline-offset);
 
   &[aria-disabled] {
     color: var(--link--disabled-color);
