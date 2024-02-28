@@ -2,8 +2,7 @@ import React, { FC } from "react";
 import styles from "./DateInput.module.scss";
 import * as Aria from "react-aria-components";
 import { Button } from "@/components/Button";
-import { Icon } from "@/components/Icon";
-import { faCalendarDays } from "@fortawesome/free-regular-svg-icons/faCalendarDays";
+import { IconDate } from "@/components/Icon/components/icons";
 
 export interface DateInputProps {
   isDisabled?: boolean;
@@ -18,7 +17,7 @@ export const DateInput: FC<DateInputProps> = (props) => {
         {(segment) => <Aria.DateSegment segment={segment} />}
       </Aria.DateInput>
       <Button style="plain" variant="secondary" isDisabled={isDisabled}>
-        <Icon faIcon={faCalendarDays} />
+        <IconDate />
       </Button>
     </Aria.Group>
   );
