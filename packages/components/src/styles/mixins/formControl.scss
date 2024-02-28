@@ -1,18 +1,60 @@
 @mixin formControl {
-  color: var(--form-field-control--color);
-
   border-width: var(--form-control--border-width);
   border-style: var(--form-control--border-style);
   border-radius: var(--form-control--corner-radius);
-  border-color: var(--form-field-control--border-color);
-
   padding-block: var(--form-control--padding-y);
   padding-inline: var(--form-control--padding-x);
 
-  background-color: var(--form-field-control--background-color);
+  color: var(--form-control--content-color--default);
+  border-color: var(--form-control--border-color--default);
+  background-color: var(--form-control--background-color--default);
 
+  transition-property: color, background-color, border-color;
+  transition-duration: var(--transition--duration--default);
+
+  &::placeholder {
+    color: var(--form-controll--placeholder-color--default);
+  }
+
+  /* Hovered */
+  &:hover {
+    border-color: var(--form-control--border-color--hover);
+    background-color: var(--form-control--background-color--hover);
+  }
+
+  /* Invalid */
+  &[data-invalid] {
+    border-color: var(--form-control--border-color--invalid);
+    background-color: var(--form-control--background-color--invalid);
+  }
+
+  /* Focused */
+  &[data-invalid]:focus-within:not([data-selected]),
+  &:focus-within:not([data-selected]) {
+    border-color: var(--form-control--border-color--focused);
+    background-color: var(--form-control--background-color--focused);
+  }
   &:focus-visible,
   &:focus {
     outline: none;
+  }
+
+  /* Selected */
+  &[data-selected] {
+    color: var(--form-control--content-color--selected);
+    border-color: var(--form-control--border-color--selected);
+    background-color: var(--form-control--background-color--selected);
+  }
+
+  /* Disabled */
+  &[data-disabled],
+  [aria-disabled] & {
+    color: var(--form-control--content-color--disabled);
+    border-color: var(--form-control--border-color--disabled);
+    background-color: var(--form-control--background-color--disabled);
+
+    &::placeholder {
+      color: var(--form-controll--placeholder-color--disabled);
+    }
   }
 }
