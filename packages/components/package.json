@@ -39,6 +39,9 @@
   "files": [
     "dist"
   ],
+  "engines": {
+    "node": ">=20.11"
+  },
   "scripts": {
     "build": "run vite build --config vite.build.config.ts",
     "build:deps:watch": "run -T build:deps:watch @mittwald/flow-react-components",
