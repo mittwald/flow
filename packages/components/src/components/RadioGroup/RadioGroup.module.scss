@@ -5,8 +5,8 @@
   isolation: isolate;
 
   /* With icon or content */
-  &:has(.content),
-  &:has(.icon) {
+  &:has(:global(.flow--radio-group--radio--content)),
+  &:has(:global(.flow--radio-group--radio--icon)) {
     display: grid;
     gap: var(--radio-group--radio-to-radio-spacing);
     .label {
@@ -34,12 +34,12 @@
   }
 
   /* With icon */
-  &:has(.icon) {
+  &:has(:global(.flow--radio-group--radio--icon)) {
     grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr));
   }
 
   /* With content */
-  &:has(.content) {
+  &:has(:global(.flow--radio-group--radio--content)) {
     grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
   }
 

@@ -26,6 +26,7 @@ export default defineConfig(
           FieldError: "./src/components/FieldError/index.ts",
           Heading: "./src/components/Heading/index.ts",
           Icon: "./src/components/Icon/index.ts",
+          Icons: "./src/components/Icon/components/icons/index.ts",
           Image: "./src/components/Image/index.ts",
           Initials: "./src/components/Initials/index.ts",
           InlineAlert: "./src/components/InlineAlert/index.ts",
@@ -35,6 +36,7 @@ export default defineConfig(
           Navigation: "./src/components/Navigation/index.ts",
           NumberField: "./src/components/NumberField/index.ts",
           RadioGroup: "./src/components/RadioGroup/index.ts",
+          Section: "./src/components/Section/index.ts",
           StatusIcon: "./src/components/StatusIcon/index.ts",
           Switch: "./src/components/Switch/index.ts",
           Text: "./src/components/Text/index.ts",
@@ -59,6 +61,7 @@ export default defineConfig(
         external: [
           "react",
           "react-dom",
+          "@tabler/icons-react",
           "@fortawesome/react-fontawesome",
           "@fortawesome/fontawesome-svg-core",
           "@react-aria/utils",

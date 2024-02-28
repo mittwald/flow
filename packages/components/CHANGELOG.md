@@ -3,6 +3,41 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.18](https://github.com/mittwald/flow/compare/0.1.0-alpha.17...0.1.0-alpha.18) (2024-02-28)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.17](https://github.com/mittwald/flow/compare/0.1.0-alpha.16...0.1.0-alpha.17) (2024-02-27)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.16](https://github.com/mittwald/flow/compare/0.1.0-alpha.15...0.1.0-alpha.16) (2024-02-26)
+
+### Bug Fixes
+
+- update avatar tokens
+  ([937836c](https://github.com/mittwald/flow/commit/937836ccf7abbbc394a72e8b8cb52bd1395e1bd0))
+
+### Features
+
+- add section component
+  ([665d1c9](https://github.com/mittwald/flow/commit/665d1c9922335adba6fec29ef8cadc8331c2515d))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.15](https://github.com/mittwald/flow/compare/0.1.0-alpha.14...0.1.0-alpha.15) (2024-02-21)
 
 ### Features

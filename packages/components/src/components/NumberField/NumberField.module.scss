@@ -38,13 +38,13 @@
   }
 
   .incrementButton {
-    [data-icon="plus"] {
+    .coarsePointerIcon {
       display: none;
     }
   }
 
   .decrementButton {
-    [data-icon="minus"] {
+    .coarsePointerIcon {
       display: none;
     }
   }
@@ -80,13 +80,13 @@
   }
 
   .decrementButton {
-    [data-icon="chevron-down"] {
+    :not(.touchIcon) {
       display: none;
     }
   }
 
   .incrementButton {
-    [data-icon="chevron-up"] {
+    :not(.touchIcon) {
       display: none;
     }
   }
