@@ -1,8 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Badge from "../Badge";
 import React from "react";
-import { faHourglass } from "@fortawesome/free-regular-svg-icons/faHourglass";
-import { Icon } from "@/components/Icon";
+import { IconApp } from "@/components/Icon/components/icons";
 import { Text } from "@/components/Text";
 
 const meta: Meta<typeof Badge> = {
@@ -31,7 +30,7 @@ export const IconOnly: Story = {
 export const CustomIcon: Story = {
   render: (props) => (
     <Badge {...props}>
-      <Icon faIcon={faHourglass} />
+      <IconApp />
       <Text>Installation running</Text>
     </Badge>
   ),

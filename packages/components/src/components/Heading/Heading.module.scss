@@ -1,5 +1,5 @@
 @mixin level($level) {
-  h#{$level}.heading {
+  h#{$level} {
     font-size: var(--heading--h#{$level}-font-size);
   }
 }

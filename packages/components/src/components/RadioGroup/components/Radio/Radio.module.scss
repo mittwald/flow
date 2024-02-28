@@ -66,8 +66,8 @@
       font-weight: var(--radio-group--label-font-weight-with-content-or-icon);
     }
     .icon {
-      font-size: var(--icon--size--l);
-      line-height: 0;
+      height: var(--radio-group--icon-size-without-content);
+      width: var(--radio-group--icon-size-without-content);
     }
   }
 
