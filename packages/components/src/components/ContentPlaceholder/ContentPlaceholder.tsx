@@ -1,17 +1,21 @@
 import React, { ComponentProps, FC, PropsWithChildren } from "react";
-import styles from "./ContentPlaceholder.module.css";
+import styles from "./ContentPlaceholder.module.scss";
 import clsx from "clsx";
-import { StatusVariantProps } from "@/lib/types/props";
+import { PropsWithVariant } from "@/lib/types/props";
 import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
 
 export interface ContentPlaceholderProps
   extends PropsWithChildren<ComponentProps<"div">>,
-    StatusVariantProps<"success" | "warning"> {}
+    PropsWithVariant<"info" | "danger"> {}
 
 export const ContentPlaceholder: FC<ContentPlaceholderProps> = (props) => {
   const { className, children, variant = "info", ...rest } = props;
 
-  const rootClassName = clsx(className, styles.root, styles[variant]);
+  const rootClassName = clsx(
+    styles.ContentPlaceholder,
+    styles[variant],
+    className,
+  );
 
   const propsContext: PropsContext = {
     Icon: {

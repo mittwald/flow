@@ -7,7 +7,7 @@ import defaultMeta from "./Default.stories";
 import { ContentPlaceholder } from "../ContentPlaceholder";
 import { Heading } from "@/components/Heading";
 import { Button } from "@/components/Button";
-import { faDisplay } from "@fortawesome/free-solid-svg-icons/faDisplay";
+import { IconApp } from "@/components/Icon/components/icons";
 
 const meta: Meta<typeof ContentPlaceholder> = {
   ...defaultMeta,
@@ -20,10 +20,10 @@ type Story = StoryObj<typeof ContentPlaceholder>;
 export const LongTexts: Story = {
   render: (props) => (
     <ContentPlaceholder {...props}>
-      <Icon faIcon={faDisplay} />
+      <IconApp />
       <Heading>{dummyText.medium}</Heading>
       <Text>{dummyText.long}</Text>
-      <Button variant="success">Create app</Button>
+      <Button variant="accent">Create app</Button>
     </ContentPlaceholder>
   ),
 };
@@ -31,10 +31,10 @@ export const LongTexts: Story = {
 export const SmallSpace: Story = {
   render: (props) => (
     <ContentPlaceholder {...props}>
-      <Icon faIcon={faDisplay} />
+      <IconApp />
       <Heading>No apps installed</Heading>
       <Text>Create your first app to start working on your website.</Text>
-      <Button variant="success">Create app</Button>
+      <Button variant="accent">Create app</Button>
     </ContentPlaceholder>
   ),
   parameters: { viewport: { defaultViewport: "mobile1" } },

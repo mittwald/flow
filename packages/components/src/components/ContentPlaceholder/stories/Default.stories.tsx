@@ -1,22 +1,20 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import ContentPlaceholder from "../ContentPlaceholder";
 import React from "react";
-import { Icon } from "@/components/Icon";
-import { faDisplay } from "@fortawesome/free-solid-svg-icons/faDisplay";
 import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
 import { Button } from "@/components/Button";
-import { faWarning } from "@fortawesome/free-solid-svg-icons/faWarning";
+import { IconApp, IconWarning } from "@/components/Icon/components/icons";
 
 const meta: Meta<typeof ContentPlaceholder> = {
   title: "Content/Content Placeholder",
   component: ContentPlaceholder,
   render: (props) => (
     <ContentPlaceholder {...props}>
-      <Icon faIcon={faDisplay} />
+      <IconApp />
       <Heading>No apps installed</Heading>
       <Text>Create your first app to start working on your website.</Text>
-      <Button variant="success">Create app</Button>
+      <Button variant="accent">Create app</Button>
     </ContentPlaceholder>
   ),
   argTypes: {
@@ -35,10 +33,10 @@ export const Default: Story = {};
 export const Danger: Story = {
   render: (props) => (
     <ContentPlaceholder {...props} variant="danger">
-      <Icon faIcon={faWarning} />
+      <IconWarning />
       <Heading>No access</Heading>
       <Text>You do not have the required permissions to access this page.</Text>
-      <Button variant="success">Go back</Button>
+      <Button variant="accent">Go back</Button>
     </ContentPlaceholder>
   ),
   args: { variant: "danger" },
