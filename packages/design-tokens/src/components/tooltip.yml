@@ -3,12 +3,12 @@ tooltip:
     value: "{neutral.color.900}"
   color:
     value: "{neutral.color.100}"
-  padding-x:
+  padding:
     value: "{size-px.s}"
-  padding-y:
-    value: "{size-px.xs}"
   font-size:
     value: "{font-size.s}"
+  line-height:
+    value: "{line-height.s}"
   max-width:
     value: 300px
   tooltip-to-content-spacing:

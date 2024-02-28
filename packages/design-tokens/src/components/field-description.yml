@@ -1,5 +1,7 @@
 field-description:
   font-size:
     value: "{font-size.s}"
+  line-height:
+    value: "{line-height.s}"
   color:
     value: "{neutral.color.800}"

@@ -1,6 +1,8 @@
 badge:
   font-size:
     value: "{font-size.s}"
+  line-height:
+    value: "{line-height.s}"
   height:
     value: "{size-rem.l}"
   corner-radius:

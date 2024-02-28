@@ -1,5 +1,6 @@
 .label {
-  color: var(--label--color);
+  color: var(--label--color--default);
   font-size: var(--label--font-size);
+  line-height: var(--label--line-height);
   font-weight: var(--label--font-weight);
 }

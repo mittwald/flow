@@ -6,6 +6,10 @@ font-weight:
 line-height:
   default:
     value: 1.5
+  s:
+    value: 1rem
+  m:
+    value: 1.5rem
 font-size:
   default:
     value: "{font-size.m}"
