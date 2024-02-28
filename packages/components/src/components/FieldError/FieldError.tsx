@@ -15,8 +15,12 @@ export const FieldError: FC<FieldErrorProps> = (props) => {
 
   return (
     <Aria.FieldError {...rest} className={rootClassName}>
-      <IconDanger size="s" />
-      {children}
+      {({ validationErrors }) => (
+        <>
+          <IconDanger size="s" />
+          {children ? children : validationErrors.join(" ")}
+        </>
+      )}
     </Aria.FieldError>
   );
 };
