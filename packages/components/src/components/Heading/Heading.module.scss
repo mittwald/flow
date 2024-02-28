@@ -16,7 +16,7 @@
 @include level(5);
 @include level(6);
 
-@media (max-width: $mobile-breakpoint) {
+@media (max-width: 550px) {
   h1 {
     font-size: var(--heading--h1-font-size-mobile);
   }
