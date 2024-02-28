@@ -3,8 +3,7 @@ import * as Aria from "react-aria-components";
 import { LinkProps } from "@/components/Link";
 import styles from "./BreadcrumbItem.module.scss";
 import clsx from "clsx";
-import { Icon } from "@/components/Icon";
-import { faChevronRight } from "@fortawesome/free-solid-svg-icons/faChevronRight";
+import { IconChevronRight } from "@/components/Icon/components/icons";
 
 export interface BreadcrumbItemProps
   extends Pick<Aria.BreadcrumbProps, "id">,
@@ -20,7 +19,7 @@ export const BreadcrumbItem: FC<BreadcrumbItemProps> = (props) => {
       <Aria.Link className={styles.link} {...rest}>
         {children}
       </Aria.Link>
-      <Icon className={styles.icon} faIcon={faChevronRight} />
+      <IconChevronRight size="s" className={styles.icon} />
     </Aria.Breadcrumb>
   );
 };

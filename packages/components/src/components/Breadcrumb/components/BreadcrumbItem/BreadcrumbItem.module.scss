@@ -4,8 +4,8 @@
   color: var(--breadcrumb-item--color);
   font-size: var(--breadcrumb-item--font-size);
   display: flex;
+  align-items: center;
   overflow: hidden;
-  min-width: var(--size-px--xxl);
   cursor: default;
 
   .link {

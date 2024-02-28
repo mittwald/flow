@@ -2,7 +2,7 @@ breadcrumb-item:
   color:
     value: "{color.default}"
   padding-x:
-    value: "{size-px.s}"
+    value: "{size-px.xs}"
   font-size:
     value: "{font-size.s}"
   font-weight:
