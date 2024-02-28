@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import { Icon } from "@/components/Icon";
 import { Text } from "@/components/Text";
 import { dummyText } from "@/lib/dev/dummyText";
 import defaultMeta from "./Default.stories";
