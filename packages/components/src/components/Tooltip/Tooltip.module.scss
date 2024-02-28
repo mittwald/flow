@@ -3,7 +3,8 @@
   background-color: var(--tooltip--background-color);
   color: var(--tooltip--color);
   font-size: var(--tooltip--font-size);
-  padding: var(--tooltip--padding);
+  padding-block: var(--tooltip--padding-y);
+  padding-inline: var(--tooltip--padding-x);
   max-width: var(--tooltip--max-width);
   transform: translate3d(0, 0, 0);
 
