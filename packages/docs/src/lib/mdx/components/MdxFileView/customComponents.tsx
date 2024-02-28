@@ -14,7 +14,7 @@ export const customComponents: MDXComponents = {
         className={styles.preCopyButton}
         text={children}
         style="plain"
-        size="small"
+        size="s"
       />
     </div>
   ),
