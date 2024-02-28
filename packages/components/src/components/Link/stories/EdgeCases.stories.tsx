@@ -1,10 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Link from "../Link";
 import React from "react";
-import { Icon } from "@/components/Icon";
-import { faExternalLink } from "@fortawesome/free-solid-svg-icons/faExternalLink";
 import { dummyText } from "@/lib/dev/dummyText";
 import defaultMeta from "./Default.stories";
+import { IconExternalLink } from "@/components/Icon/components/icons";
 
 const meta: Meta<typeof Link> = {
   ...defaultMeta,
@@ -18,7 +17,7 @@ export const LongText: Story = {
   render: (props) => (
     <Link {...props}>
       {dummyText.long}
-      <Icon faIcon={faExternalLink} aria-label="external link" />
+      <IconExternalLink aria-label="external link" />
     </Link>
   ),
 };

@@ -2,8 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import Link from "../Link";
 import { action } from "@storybook/addon-actions";
 import React from "react";
-import { Icon } from "@/components/Icon";
-import { faExternalLink } from "@fortawesome/free-solid-svg-icons/faExternalLink";
+import { IconExternalLink } from "@/components/Icon/components/icons";
 
 const meta: Meta<typeof Link> = {
   title: "Navigation/Link",
@@ -37,7 +36,7 @@ export const WithIcon: Story = {
   render: (props) => (
     <Link {...props} href="https://mittwald.de">
       mittwald.de
-      <Icon faIcon={faExternalLink} aria-label="external link" />
+      <IconExternalLink aria-label="external link" />
     </Link>
   ),
 };

@@ -1,13 +1,7 @@
 import Link from "@mittwald/flow-react-components/Link";
-import Icon from "@mittwald/flow-react-components/Icon";
-import faExternalLink from "@fortawesome/free-solid-svg-icons/faExternalLink";
-
-//ToDo: External Link Icon wird nicht gefunden
+import { IconExternalLink } from "@mittwald/flow-react-components/Icons";
 
 <Link href="https://mittwald.de">
   mittwald.de
-  <Icon
-    faIcon={faExternalLink}
-    aria-label="external link"
-  />
+  <IconExternalLink aria-label="external link" />
 </Link>;

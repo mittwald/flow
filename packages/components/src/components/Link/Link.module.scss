@@ -20,7 +20,8 @@
 
 .icon {
   margin-inline-start: var(--link--text-to-icon-spacing);
-  line-height: 1;
+  display: inline-block;
+  vertical-align: text-bottom;
 }
 
 /* Variants */

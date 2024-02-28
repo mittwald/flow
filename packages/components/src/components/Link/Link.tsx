@@ -27,6 +27,7 @@ export const Link: FC<LinkProps> = (props) => {
   const propsContext: PropsContext = {
     Icon: {
       className: styles.icon,
+      size: "s",
     },
   };
 

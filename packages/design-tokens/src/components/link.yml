@@ -12,7 +12,7 @@ link:
   focus-outline-color:
     value: "{focus-outline-color}"
   focus-outline-offset:
-    value: "{size-px.xs}"
+    value: "{size-px.xxs}"
   focus-outline-width:
     value: "{border-width.200}"
 
