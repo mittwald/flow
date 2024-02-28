@@ -305,6 +305,14 @@ neutral-plain-background-color:
 neutral-plain-content-color:
   value: "{neutral.color.1000}"
 
+# Neutral Outline
+neutral-outline-background-color:
+  value: "{neutral.color.200}"
+neutral-outline-content-color:
+  value: "{warning.color.1000}"
+neutral-outline-border-color:
+  value: "{warning.color.700}"
+
 # Disabled Solid
 disabled-solid-background-color:
   value: "{neutral.color.400}"
@@ -315,6 +323,14 @@ disabled-solid-content-color:
 disabled-plain-background-color:
   value: "{color.transparent}"
 disabled-plain-content-color:
+  value: "{neutral.color.400}"
+
+# Disabled Outline
+disabled-outline-background-color:
+  value: "{neutal.color.300}"
+disabled-outline-content-color:
+  value: "{neutral.color.600}"
+disabled-outline-border-color:
   value: "{neutral.color.400}"
 
 # Focus

@@ -15,9 +15,9 @@ form-control:
     value: "{border-style.default}"
   border-color:
     default:
-      value: "{neutral.color.700}"
+      value: "{neutral-outline-border-color}"
     disabled:
-      value: "{neutral.color.400}"
+      value: "{disabled-outline-border-color}"
     hover:
       value: "{neutral.color.600}"
     invalid:
