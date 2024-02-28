@@ -1,7 +1,5 @@
-import Icon from "@mittwald/flow-react-components/Icon";
-import { faStar } from "@fortawesome/free-regular-svg-icons/faStar";
+import { IconHome } from "@mittwald/flow-react-components/Icons";
 
-<Icon
-  faIcon={faStar}
+<IconHome
   style={{ color: "var(--primary--color--800)" }}
 />;

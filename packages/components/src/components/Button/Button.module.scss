@@ -1,3 +1,5 @@
+@use "@/styles/mixins/ellipsis";
+
 .button {
   position: relative;
   border: none;
@@ -11,9 +13,6 @@
   transition-duration: var(--transition--duration--default);
   outline-color: var(--button--focus-outline-color);
   outline-offset: var(--button--focus-outline-offset);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   max-width: 100%;
 
   @extend .primary;
@@ -36,6 +35,11 @@
   grid-area: content;
 }
 
+.text {
+  @include ellipsis.ellipsis;
+  display: block;
+}
+
 .icon,
 .icon svg {
   display: block;
@@ -53,6 +57,7 @@
 
 .stateIcon {
   color: var(--button--pending-icon-color);
+  justify-self: center;
 }
 
 .isSucceeded {
