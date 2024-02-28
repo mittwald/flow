@@ -6,11 +6,12 @@ import clsx from "clsx";
 import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { FieldError } from "@/components/FieldError";
 import { Button } from "@/components/Button";
-import { Icon } from "@/components/Icon";
-import { faChevronUp } from "@fortawesome/free-solid-svg-icons/faChevronUp";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons/faChevronDown";
-import { faPlus } from "@fortawesome/free-solid-svg-icons/faPlus";
-import { faMinus } from "@fortawesome/free-solid-svg-icons/faMinus";
+import {
+  IconChevronDown,
+  IconChevronUp,
+  IconMinus,
+  IconPlus,
+} from "@/components/Icon/components/icons";
 
 export interface NumberFieldProps
   extends PropsWithChildren<Omit<Aria.NumberFieldProps, "children">> {}
@@ -40,22 +41,22 @@ export const NumberField: FC<NumberFieldProps> = (props) => {
           slot="decrement"
           className={styles.decrementButton}
           size="s"
-          variant="secondary"
           style="plain"
+          variant="secondary"
         >
-          <Icon faIcon={faChevronDown} />
-          <Icon faIcon={faMinus} />
+          <IconChevronDown />
+          <IconMinus className={styles.coarsePointerIcon} />
         </Button>
         <Aria.Input className={styles.input} />
         <Button
           slot="increment"
           className={styles.incrementButton}
           size="s"
-          variant="secondary"
           style="plain"
+          variant="secondary"
         >
-          <Icon faIcon={faChevronUp} />
-          <Icon faIcon={faPlus} />
+          <IconChevronUp />
+          <IconPlus className={styles.coarsePointerIcon} />
         </Button>
       </Aria.Group>
       <PropsContextProvider props={propsContext}>

@@ -25,16 +25,16 @@ export const PrimaryPlain: Story = {
   },
 };
 
-export const SuccessSolid: Story = {
+export const AccentSolid: Story = {
   args: {
-    variant: "success",
+    variant: "accent",
   },
   render: (props) => <Button {...props}>Create/Save</Button>,
 };
 
-export const SuccessPlain: Story = {
+export const AccentPlain: Story = {
   args: {
-    variant: "success",
+    variant: "accent",
     style: "plain",
   },
   render: (props) => <Button {...props}>Create/Save</Button>,

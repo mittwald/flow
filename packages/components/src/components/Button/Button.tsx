@@ -7,19 +7,23 @@ import {
   PropsContextProvider,
   useProps,
 } from "@/lib/propsContext";
-import Icon from "../Icon";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons/faSpinner";
-import { faCheck } from "@fortawesome/free-solid-svg-icons/faCheck";
-import { faTimes } from "@fortawesome/free-solid-svg-icons/faTimes";
+import {
+  IconFailed,
+  IconPending,
+  IconSucceeded,
+} from "@/components/Icon/components/icons";
+import { Wrap } from "@/components/Wrap";
+import { Text } from "@/components/Text";
 
 export interface ButtonProps
   extends PropsWithChildren<Omit<Aria.ButtonProps, "style">> {
   /** @default "primary" */
-  variant?: "primary" | "success" | "secondary" | "danger";
+  variant?: "primary" | "accent" | "secondary" | "danger";
   /** @default "solid" */
   style?: "plain" | "solid";
   /** @default "m" */
   size?: "m" | "s";
+
   isPending?: boolean;
   isSucceeded?: boolean;
   isFailed?: boolean;
@@ -41,8 +45,10 @@ export const Button: FC<ButtonProps> = (props) => {
 
   const rootClassName = clsx(
     styles.button,
-    size === "s" && styles.small,
-    (isPending || isSucceeded || isFailed) && styles.pending,
+    isPending && styles.isPending,
+    isSucceeded && styles.isSucceeded,
+    isFailed && styles.isFailed,
+    styles[`size-${size}`],
     styles[variant],
     styles[style],
     className,
@@ -52,9 +58,26 @@ export const Button: FC<ButtonProps> = (props) => {
     Icon: {
       className: styles.icon,
       "aria-hidden": true,
-      fixedWidth: true,
+      size,
+    },
+    Text: {
+      className: styles.text,
     },
   };
+
+  const StateIconComponent = isSucceeded
+    ? IconSucceeded
+    : isFailed
+      ? IconFailed
+      : isPending
+        ? IconPending
+        : undefined;
+
+  const stateIcon = StateIconComponent && (
+    <StateIconComponent size={size} className={styles.stateIcon} />
+  );
+
+  const isStringContent = typeof children === "string";
 
   return (
     <Aria.Button
@@ -63,17 +86,15 @@ export const Button: FC<ButtonProps> = (props) => {
       {...restProps}
     >
       <PropsContextProvider props={propsContext}>
-        {typeof children === "string" ? (
-          <span className={styles.text}>{children}</span>
-        ) : (
-          children
-        )}
+        <Wrap if={stateIcon}>
+          <span className={styles.content}>
+            <Wrap if={isStringContent}>
+              <Text>{children}</Text>
+            </Wrap>
+          </span>
+        </Wrap>
       </PropsContextProvider>
-      {isPending && <Icon faIcon={faSpinner} className={styles.pendingIcon} />}
-      {isSucceeded && (
-        <Icon faIcon={faCheck} className={styles.succeededIcon} />
-      )}
-      {isFailed && <Icon faIcon={faTimes} className={styles.failedIcon} />}
+      {stateIcon}
     </Aria.Button>
   );
 };

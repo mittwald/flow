@@ -1,6 +1,7 @@
+@use "@/styles/mixins/ellipsis";
+
 .button {
   position: relative;
-  font-family: "MW-Flow-Regular", sans-serif;
   border: none;
   border-radius: var(--button--corner-radius);
   padding-block: var(--button--padding-squished-y);
@@ -12,10 +13,7 @@
   transition-duration: var(--transition--duration--default);
   outline-color: var(--button--focus-outline-color);
   outline-offset: var(--button--focus-outline-offset);
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  grid-template-areas: "content";
+  max-width: 100%;
 
   @extend .primary;
   @extend .solid;
@@ -23,20 +21,23 @@
   &:has(.icon) {
     padding: var(--button--padding);
   }
+
+  &:has(.content) {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-areas: "content";
+  }
 }
 
-.text,
-.icon,
-.pendingIcon,
-.succeededIcon,
-.failedIcon {
+.content,
+.stateIcon {
   grid-area: content;
 }
 
 .text {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  @include ellipsis.ellipsis;
+  display: block;
 }
 
 .icon,
@@ -44,31 +45,7 @@
   display: block;
 }
 
-.pendingIcon {
-  color: var(--button--pending-icon-color);
-}
-
-.succeededIcon {
-  color: var(--button--succeeded-icon-color);
-}
-
-.failedIcon {
-  color: var(--button--failed-icon-color);
-}
-
-.pending {
-  .icon,
-  .text {
-    visibility: hidden;
-  }
-  &.plain {
-    .text {
-      visibility: visible;
-    }
-  }
-}
-
-.small {
+.size-s {
   font-size: var(--button--font-size-small);
   padding-block: var(--button--padding-small-squished-y);
   padding-inline: var(--button--padding-small-squished-x);
@@ -78,40 +55,70 @@
   }
 }
 
+.stateIcon {
+  color: var(--button--pending-icon-color);
+  justify-self: center;
+}
+
+.isSucceeded {
+  .stateIcon {
+    color: var(--button--succeeded-icon-color);
+  }
+}
+
+.isFailed {
+  .stateIcon {
+    color: var(--button--failed-icon-color);
+  }
+}
+
+.isPending,
+.isFailed,
+.isSucceeded {
+  .content {
+    visibility: hidden;
+  }
+  &.plain {
+    .content:not(:has(.icon)) {
+      visibility: visible;
+    }
+  }
+}
+
 /* Variants */
 @mixin variant($variant, $style) {
   .#{$variant}.#{$style} {
     background-color: var(
       --button--#{$variant}-#{$style}-background-color--default
     );
-    color: var(--button--#{$variant}-#{$style}-foreground-color--default);
+    color: var(--button--#{$variant}-#{$style}-content-color--default);
 
     &:hover {
       background-color: var(
         --button--#{$variant}-#{$style}-background-color--hover
       );
-      color: var(--button--#{$variant}-#{$style}-foreground-color--hover);
+      color: var(--button--#{$variant}-#{$style}-content-color--hover);
     }
 
     &[data-pressed] {
       background-color: var(
         --button--#{$variant}-#{$style}-background-color--pressed
       );
-      color: var(--button--#{$variant}-#{$style}-foreground-color--pressed);
+      color: var(--button--#{$variant}-#{$style}-content-color--pressed);
     }
 
     &[disabled] {
       background-color: var(--button--disabled-#{$style}-background-color);
-      color: var(--button--disabled-#{$style}-foreground-color);
+      color: var(--button--disabled-#{$style}-content-color);
     }
   }
 }
 
 @include variant(primary, solid);
-@include variant(success, solid);
+@include variant(accent, solid);
 @include variant(danger, solid);
 @include variant(secondary, solid);
 @include variant(primary, plain);
-@include variant(success, plain);
+@include variant(accent, plain);
 @include variant(danger, plain);
 @include variant(secondary, plain);
