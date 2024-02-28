@@ -7,11 +7,13 @@ import {
   PropsContextProvider,
   useProps,
 } from "@/lib/propsContext";
-import Icon from "@/components/Icon";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons/faSpinner";
-import { faCheck } from "@fortawesome/free-solid-svg-icons/faCheck";
-import { faTimes } from "@fortawesome/free-solid-svg-icons/faTimes";
+import {
+  IconFailed,
+  IconPending,
+  IconSucceeded,
+} from "@/components/Icon/components/icons";
 import { Wrap } from "@/components/Wrap";
+import { Text } from "@/components/Text";
 
 export interface ButtonProps
   extends PropsWithChildren<Omit<Aria.ButtonProps, "style">> {
@@ -19,8 +21,8 @@ export interface ButtonProps
   variant?: "primary" | "accent" | "secondary" | "danger";
   /** @default "solid" */
   style?: "plain" | "solid";
-  /** @default "medium" */
-  size?: "medium" | "small";
+  /** @default "m" */
+  size?: "m" | "s";
 
   isPending?: boolean;
   isSucceeded?: boolean;
@@ -33,7 +35,7 @@ export const Button: FC<ButtonProps> = (props) => {
     style = "solid",
     children,
     className,
-    size = "medium",
+    size = "m",
     isPending,
     isDisabled,
     isSucceeded,
@@ -46,7 +48,7 @@ export const Button: FC<ButtonProps> = (props) => {
     isPending && styles.isPending,
     isSucceeded && styles.isSucceeded,
     isFailed && styles.isFailed,
-    styles[size],
+    styles[`size-${size}`],
     styles[variant],
     styles[style],
     className,
@@ -56,16 +58,26 @@ export const Button: FC<ButtonProps> = (props) => {
     Icon: {
       className: styles.icon,
       "aria-hidden": true,
-      fixedWidth: true,
+      size,
+    },
+    Text: {
+      className: styles.text,
     },
   };
 
-  const stateIcon = (isPending || isSucceeded || isFailed) && (
-    <Icon
-      faIcon={isSucceeded ? faCheck : isFailed ? faTimes : faSpinner}
-      className={styles.stateIcon}
-    />
+  const StateIconComponent = isSucceeded
+    ? IconSucceeded
+    : isFailed
+      ? IconFailed
+      : isPending
+        ? IconPending
+        : undefined;
+
+  const stateIcon = StateIconComponent && (
+    <StateIconComponent size={size} className={styles.stateIcon} />
   );
+
+  const isStringContent = typeof children === "string";
 
   return (
     <Aria.Button
@@ -75,7 +87,11 @@ export const Button: FC<ButtonProps> = (props) => {
     >
       <PropsContextProvider props={propsContext}>
         <Wrap if={stateIcon}>
-          <span className={styles.content}>{children}</span>
+          <span className={styles.content}>
+            <Wrap if={isStringContent}>
+              <Text>{children}</Text>
+            </Wrap>
+          </span>
         </Wrap>
       </PropsContextProvider>
       {stateIcon}
