@@ -4,7 +4,7 @@ import React from "react";
 import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
 import { Button } from "@/components/Button";
-import { IconApp, IconWarning } from "@/components/Icon/components/icons";
+import { IconApp, IconDanger } from "@/components/Icon/components/icons";
 
 const meta: Meta<typeof ContentPlaceholder> = {
   title: "Content/Content Placeholder",
@@ -14,7 +14,7 @@ const meta: Meta<typeof ContentPlaceholder> = {
       <IconApp />
       <Heading>No apps installed</Heading>
       <Text>Create your first app to start working on your website.</Text>
-      <Button variant="accent">Create app</Button>
+      <Button>Create app</Button>
     </ContentPlaceholder>
   ),
   argTypes: {
@@ -33,10 +33,10 @@ export const Default: Story = {};
 export const Danger: Story = {
   render: (props) => (
     <ContentPlaceholder {...props} variant="danger">
-      <IconWarning />
+      <IconDanger />
       <Heading>No access</Heading>
       <Text>You do not have the required permissions to access this page.</Text>
-      <Button variant="accent">Go back</Button>
+      <Button>Go back</Button>
     </ContentPlaceholder>
   ),
   args: { variant: "danger" },

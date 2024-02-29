@@ -1,16 +1,14 @@
-.root {
+.contentPlaceholder {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: var(--content-placeholder--padding--default);
+  padding: var(--content-placeholder--padding);
 }
 
 /* Elements */
 
 .icon {
-  font-size: var(--content-placeholder--icon-size);
   color: var(--content-placeholder--info-icon-color);
-  line-height: 1;
   margin-bottom: var(--content-placeholder--icon-to-heading-spacing);
   order: 1;
 }
@@ -45,16 +43,8 @@
   }
 }
 
-/* Scss variablen nutzen? */
-/*
-  breakpoints:
-  mobile-max: 550
-  tablet-max: 1100
-  laptop-max: 1500
-  ${breakpoints.mobile-max / 16}rem
-*/
 @media (max-width: 550px) {
-  .root {
+  .contentPlaceholder {
     padding: var(--content-placeholder--padding--mobile);
   }
 }

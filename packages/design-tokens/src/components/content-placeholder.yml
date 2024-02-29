@@ -1,9 +1,8 @@
 content-placeholder:
   padding:
-    default:
-      value: "{size-px.xxl}"
-    mobile:
-      value: "{size-px.l}"
+    value: "{size-px.xxl}"
+  padding-mobile:
+    value: "{size-px.l}"
   max-width:
     value: 400px
   icon-to-heading-spacing:
@@ -12,8 +11,6 @@ content-placeholder:
     value: "{size-rem.s}"
   text-to-button-spacing:
     value: "{size-rem.m}"
-  icon-size:
-    value: "{icon.size.l}"
 
   # Info
   info-icon-color:

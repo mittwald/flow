@@ -3,6 +3,7 @@ import styles from "./Button.module.scss";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import {
+  ClearPropsContext,
   PropsContext,
   PropsContextProvider,
   useProps,
@@ -85,15 +86,17 @@ export const Button: FC<ButtonProps> = (props) => {
       isDisabled={isDisabled || isPending || isSucceeded || isFailed}
       {...restProps}
     >
-      <PropsContextProvider props={propsContext}>
-        <Wrap if={stateIcon}>
-          <span className={styles.content}>
-            <Wrap if={isStringContent}>
-              <Text>{children}</Text>
-            </Wrap>
-          </span>
-        </Wrap>
-      </PropsContextProvider>
+      <ClearPropsContext>
+        <PropsContextProvider props={propsContext}>
+          <Wrap if={stateIcon}>
+            <span className={styles.content}>
+              <Wrap if={isStringContent}>
+                <Text>{children}</Text>
+              </Wrap>
+            </span>
+          </Wrap>
+        </PropsContextProvider>
+      </ClearPropsContext>
       {stateIcon}
     </Aria.Button>
   );

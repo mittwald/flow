@@ -12,7 +12,7 @@ export const ContentPlaceholder: FC<ContentPlaceholderProps> = (props) => {
   const { className, children, variant = "info", ...rest } = props;
 
   const rootClassName = clsx(
-    styles.ContentPlaceholder,
+    styles.contentPlaceholder,
     styles[variant],
     className,
   );
@@ -20,6 +20,7 @@ export const ContentPlaceholder: FC<ContentPlaceholderProps> = (props) => {
   const propsContext: PropsContext = {
     Icon: {
       className: styles.icon,
+      size: "l",
     },
     Heading: {
       className: styles.heading,
@@ -29,6 +30,7 @@ export const ContentPlaceholder: FC<ContentPlaceholderProps> = (props) => {
     },
     Button: {
       className: styles.button,
+      variant: "accent",
     },
   };
 

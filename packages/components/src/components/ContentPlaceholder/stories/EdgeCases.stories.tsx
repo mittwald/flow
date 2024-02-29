@@ -22,7 +22,7 @@ export const LongTexts: Story = {
       <IconApp />
       <Heading>{dummyText.medium}</Heading>
       <Text>{dummyText.long}</Text>
-      <Button variant="accent">Create app</Button>
+      <Button>Create app</Button>
     </ContentPlaceholder>
   ),
 };
@@ -33,7 +33,7 @@ export const SmallSpace: Story = {
       <IconApp />
       <Heading>No apps installed</Heading>
       <Text>Create your first app to start working on your website.</Text>
-      <Button variant="accent">Create app</Button>
+      <Button>Create app</Button>
     </ContentPlaceholder>
   ),
   parameters: { viewport: { defaultViewport: "mobile1" } },
