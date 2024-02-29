@@ -1,20 +1,13 @@
-@use "@/styles/mixins/textInput.scss";
-
-.select {
-  order: 2;
-  display: flex;
-  align-items: center;
-}
-
-.input {
-  @include textInput.textInput();
-  order: unset;
-  padding-inline-end: calc(var(--form-control--padding-x) + 40px);
-  flex-grow: 1;
-}
+@use "@/styles/mixins/formControl.scss";
 
 .toggle {
-  margin-left: -41px;
+  @include formControl.formControl();
+  order: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: normal;
+  font-size: var(--font-size--default);
 }
 
 :global(.flow--popover) {
