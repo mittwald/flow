@@ -8,10 +8,9 @@ tag:
   font-size:
     value: "{font-size.s}"
   font-weight:
-    selected:
       value: "{font-weight.bold}"
   border-radius:
-    value: "{border-radius.default}"
+    value: "{corner-radius.default}"
   padding-x:
     value: "{size-px.s}"
   padding-y:
@@ -20,13 +19,13 @@ tag:
     default:
       value: "{neutral.color.400}"
     hover:
-      value: "{informative.color.100}"
+      value: "{info.color.100}"
     selected:
-      value: "{informative.color.200}"
+      value: "{info.color.200}"
     disabled:
       value: "{neutral.color.300}"
   color:
     selected:
-      value: "{informative.color.800}"
+      value: "{info.color.800}"
     disabled:
       value: "{neutral.color.600}"

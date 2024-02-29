@@ -1,19 +1,16 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Tag, TagGroup, TagList } from "../index";
+import { Tag, TagGroup } from "../index";
 import React from "react";
-import { Label } from "@/components/Label";
+import { useListData } from "react-stately";
 
 const meta: Meta<typeof TagGroup> = {
   title: "TagGroup",
   component: TagGroup,
   render: (props) => (
-    <TagGroup {...props}>
-      <Label>Filter</Label>
-      <TagList>
-        <Tag id="projects">Projects</Tag>
-        <Tag id="servers">Servers</Tag>
-        <Tag id="customers">Customers</Tag>
-      </TagList>
+    <TagGroup label="Filter" {...props} >
+      <Tag>Projects</Tag>
+      <Tag>Servers</Tag>
+      <Tag>Customers</Tag>
     </TagGroup>
   ),
 };
@@ -32,4 +29,26 @@ export const SingleSelect: Story = {
 
 export const DisabledTags: Story = {
   args: { disabledKeys: ["customers"] },
+};
+
+export const RemovableTags: Story = {
+  render: () => {
+    let list = useListData({
+      initialItems: [
+        { id: 1, name: "Projects" },
+        { id: 2, name: "Servers" },
+        { id: 3, name: "Customers" },
+      ],
+    });
+
+    return (
+      <TagGroup
+        label="Filter"
+        items={list.items}
+        onRemove={(keys) => list.remove(...keys)}
+      >
+        {(item) => <Tag>{item.name}</Tag>}
+      </TagGroup>
+    );
+  },
 };
