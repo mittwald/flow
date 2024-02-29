@@ -66,7 +66,6 @@ export const WithSwitch: Story = {
           the most important information to inbox. Subscribe to our newsletter
           and stay up to date.
         </Text>
-        <Link>Subscribe</Link>
       </Content>
     </Section>
   ),

@@ -3,7 +3,6 @@ import Section from "../Section";
 import React from "react";
 import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
-import { Link } from "@/components/Link";
 import { Switch } from "@/components/Switch";
 import { Content } from "@/components/Content";
 import defaultStories from "./Default.stories";
@@ -28,7 +27,6 @@ export const WithLongHeading: Story = {
           the most important information to inbox. Subscribe to our newsletter
           and stay up to date.
         </Text>
-        <Link>Subscribe</Link>
       </Content>
     </Section>
   ),
@@ -45,7 +43,6 @@ export const SmallSpace: Story = {
           the most important information to inbox. Subscribe to our newsletter
           and stay up to date.
         </Text>
-        <Link>Subscribe</Link>
       </Content>
     </Section>
   ),
