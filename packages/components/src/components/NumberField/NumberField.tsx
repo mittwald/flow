@@ -62,7 +62,7 @@ export const NumberField: FC<NumberFieldProps> = (props) => {
       <PropsContextProvider props={propsContext}>
         {children}
       </PropsContextProvider>
-      <FieldError className={styles.fieldError} />
+      <FieldError className={formFieldStyles.fieldError} />
     </Aria.NumberField>
   );
 };

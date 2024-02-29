@@ -204,7 +204,12 @@ danger-plain-content-color:
 
 # Danger Outline
 danger-outline-background-color:
-  value: "{neutral.color.100}"
+  default:
+    value: "{neutral.color.100}"
+  hover:
+    value: "{danger.color.100}"
+  pressed:
+    value: "{danger.color.200}"
 danger-outline-content-color:
   value: "{danger.color.900}"
 danger-outline-border-color:
@@ -223,7 +228,12 @@ info-solid-content-color:
 
 # Info Outline
 info-outline-background-color:
-  value: "{neutral.color.100}"
+  default:
+    value: "{neutral.color.100}"
+  hover:
+    value: "{info.color.100}"
+  pressed:
+    value: "{info.color.200}"
 info-outline-content-color:
   value: "{info.color.900}"
 info-outline-border-color:
@@ -258,7 +268,12 @@ success-plain-content-color:
 
 # Success Outline
 success-outline-background-color:
-  value: "{neutral.color.100}"
+  default:
+    value: "{neutral.color.100}"
+  hover:
+    value: "{success.color.100}"
+  pressed:
+    value: "{success.color.200}"
 success-outline-content-color:
   value: "{success.color.900}"
 success-outline-border-color:
@@ -277,7 +292,12 @@ warning-solid-content-color:
 
 # Warning Outline
 warning-outline-background-color:
-  value: "{neutral.color.100}"
+  default:
+    value: "{neutral.color.100}"
+  hover:
+    value: "{warning.color.100}"
+  pressed:
+    value: "{warning.color.200}"
 warning-outline-content-color:
   value: "{warning.color.900}"
 warning-outline-border-color:
@@ -305,6 +325,14 @@ neutral-plain-background-color:
 neutral-plain-content-color:
   value: "{neutral.color.1000}"
 
+# Neutral Outline
+neutral-outline-background-color:
+  value: "{neutral.color.200}"
+neutral-outline-content-color:
+  value: "{neutral.color.1000}"
+neutral-outline-border-color:
+  value: "{neutral.color.700}"
+
 # Disabled Solid
 disabled-solid-background-color:
   value: "{neutral.color.400}"
@@ -315,6 +343,14 @@ disabled-solid-content-color:
 disabled-plain-background-color:
   value: "{color.transparent}"
 disabled-plain-content-color:
+  value: "{neutral.color.400}"
+
+# Disabled Outline
+disabled-outline-background-color:
+  value: "{neutral.color.300}"
+disabled-outline-content-color:
+  value: "{neutral.color.600}"
+disabled-outline-border-color:
   value: "{neutral.color.400}"
 
 # Focus
