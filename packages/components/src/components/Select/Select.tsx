@@ -1,13 +1,11 @@
 import React, { FC, PropsWithChildren } from "react";
 import * as Aria from "react-aria-components";
-import { Button } from "@/components/Button";
 import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import formFieldStyles from "@/components/FormField/FormField.module.scss";
 import { FieldError } from "@/components/FieldError";
 import styles from "./Select.module.scss";
 import clsx from "clsx";
 import { IconChevronDown } from "@/components/Icon/components/icons";
-import { Label } from "@/components/Label";
 
 export interface SelectProps
   extends PropsWithChildren<
