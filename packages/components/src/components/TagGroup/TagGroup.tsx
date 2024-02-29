@@ -1,9 +1,8 @@
-import React, { FC, PropsWithChildren, ReactElement } from "react";
+import React, { FC } from "react";
 import * as Aria from "react-aria-components";
 import styles from "./TagGroup.module.scss";
 import clsx from "clsx";
 import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
-import { TagProps } from "@/components/TagGroup/components/Tag";
 import { TagList } from "@/components/TagGroup/components/TagList";
 import { Label } from "@/components/Label";
 

@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren } from "react";
+import React, { FC } from "react";
 import styles from "./TagList.module.scss";
 import { TagProps } from "../Tag";
 import * as Aria from "react-aria-components";
