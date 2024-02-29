@@ -26,8 +26,26 @@
   .decrementButton,
   .incrementButton {
     border-width: var(--form-control--border-width);
-    border-color: var(--form-field-control--border-color);
+    border-color: var(--form-control--border-color--default);
     border-style: solid;
+  }
+  &[aria-invalid] {
+    .decrementButton,
+    .incrementButton {
+      border-color: var(--form-control--border-color--invalid);
+    }
+  }
+  &[data-focus-within] {
+    .decrementButton,
+    .incrementButton {
+      border-color: var(--form-control--border-color--focused);
+    }
+  }
+  &[aria-disabled] {
+    .decrementButton,
+    .incrementButton {
+      border-color: var(--form-control--border-color--disabled);
+    }
   }
 }
 
