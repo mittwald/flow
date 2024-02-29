@@ -1,10 +1,10 @@
-@import "@/styles";
+@use "../../../../styles/mixins/formControl";
 
 .tag {
+  @include formControl.formControl();
   font-size: var(--tag--font-size);
   font-weight: var(--tag--font-weight);
   border-radius: var(--tag--border-radius);
-  background-color: var(--tag--background-color--default);
   padding-block: var(--tag--padding-y);
   padding-inline: var(--tag--padding-x);
   cursor: default;
@@ -21,17 +21,5 @@
     }
   }
 
-  &[data-selected] {
-    background-color: var(--tag--background-color--selected);
-    color: var(--tag--color--selected);
-  }
 
-  &:hover {
-    background-color: var(--tag--background-color--hover);
-  }
-
-  &[data-disabled] {
-    background-color: var(--tag--background-color--disabled);
-    color: var(--tag--color--disabled);
-  }
 }

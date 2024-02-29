@@ -15,17 +15,3 @@ tag:
     value: "{size-px.s}"
   padding-y:
     value: "{size-px.xxs}"
-  background-color:
-    default:
-      value: "{neutral.color.400}"
-    hover:
-      value: "{info.color.100}"
-    selected:
-      value: "{info.color.200}"
-    disabled:
-      value: "{neutral.color.300}"
-  color:
-    selected:
-      value: "{info.color.800}"
-    disabled:
-      value: "{neutral.color.600}"
