@@ -1,29 +1,5 @@
-@font-face {
-  font-family: "MW-Flow-Regular";
-  src: url(../fonts/Inter-Regular.woff2);
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "MW-Flow-Regular";
-  src: url(../fonts/Inter-Bold.woff2);
-  font-weight: bold;
-}
-
-@font-face {
-  font-family: "MW-Flow-PageTitle";
-  src: url(../fonts/proximanova-bold-webfont.woff2);
-  font-weight: bold;
-}
-
-@font-face {
-  font-family: "MW-Flow-Mono";
-  src: url(../fonts/RobotoMono-Regular.ttf);
-}
-
 .flow {
-  font-family: "MW-Flow-Regular", sans-serif;
+  font-family: sans-serif;
   line-height: var(--line-height--default);
   font-size: var(--size-rem--m);
   font-weight: var(--font-weight--normal);
