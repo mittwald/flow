@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.19](https://github.com/mittwald/flow/compare/0.1.0-alpha.18...0.1.0-alpha.19) (2024-02-29)
+
+### Features
+
+- new docs styling
+  ([90bd16d](https://github.com/mittwald/flow/commit/90bd16dd3d3021f993cb43c1e7c171340f9db09b))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.18](https://github.com/mittwald/flow/compare/0.1.0-alpha.17...0.1.0-alpha.18) (2024-02-28)
 
 **Note:** Version bump only for package @mittwald/flow-project
