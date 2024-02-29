@@ -1,4 +1,6 @@
 import type { StorybookConfig } from "@storybook/react-vite";
+import { mergeConfig } from "vite";
+import viteCheckerPlugin from "vite-plugin-checker";
 
 const config: StorybookConfig = {
   stories: ["../src/**/*.stories.tsx"],
@@ -17,6 +19,15 @@ const config: StorybookConfig = {
   docs: {
     autodocs: "tag",
   },
+  viteFinal: (conf, {}) =>
+    mergeConfig(conf, {
+      plugins: [
+        viteCheckerPlugin({
+          typescript: true,
+          terminal: true,
+        }),
+      ],
+    }),
 };
 
 export default config;

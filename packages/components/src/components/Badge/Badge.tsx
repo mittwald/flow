@@ -4,9 +4,9 @@ import clsx from "clsx";
 import { StatusIcon } from "@/components/StatusIcon";
 import { Text } from "@/components/Text";
 import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
-import { StatusVariantProps } from "@/lib/types/props";
+import { PropsWithVariant } from "@/lib/types/props";
 
-export interface BadgeProps extends PropsWithChildren, StatusVariantProps {
+export interface BadgeProps extends PropsWithChildren, PropsWithVariant {
   className?: string;
 }
 
@@ -18,6 +18,7 @@ export const Badge: FC<BadgeProps> = (props) => {
   const propsContext: PropsContext = {
     Icon: {
       className: styles.customIcon,
+      size: "s",
     },
     Text: {
       className: styles.content,
@@ -26,7 +27,7 @@ export const Badge: FC<BadgeProps> = (props) => {
 
   return (
     <div className={rootClassName} {...rest}>
-      <StatusIcon className={styles.statusIcon} variant={variant} />
+      <StatusIcon size="s" className={styles.statusIcon} variant={variant} />
       <PropsContextProvider props={propsContext}>
         {typeof children === "string" ? <Text>{children}</Text> : children}
       </PropsContextProvider>

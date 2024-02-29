@@ -2,12 +2,11 @@ import Tooltip, {
   TooltipTrigger,
 } from "@mittwald/flow-react-components/Tooltip";
 import Button from "@mittwald/flow-react-components/Button";
-import Icon from "@mittwald/flow-react-components/Icon";
-import { faSave } from "@fortawesome/free-regular-svg-icons/faSave";
+import { IconCopy } from "@mittwald/flow-react-components/Icons";
 
 <TooltipTrigger>
   <Button aria-label="save">
-    <Icon faIcon={faSave} />
+    <IconCopy />
   </Button>
   <Tooltip>Save</Tooltip>
 </TooltipTrigger>;
