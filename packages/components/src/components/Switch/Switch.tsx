@@ -2,6 +2,7 @@ import React, { FC, PropsWithChildren } from "react";
 import * as Aria from "react-aria-components";
 import styles from "./Switch.module.scss";
 import clsx from "clsx";
+import { useProps } from "@/lib/propsContext";
 
 export interface SwitchProps
   extends PropsWithChildren<Omit<Aria.SwitchProps, "children">> {
@@ -18,7 +19,7 @@ export const Switch: FC<SwitchProps> = (props) => {
     labelPosition = "trailing",
     variant = "success",
     ...rest
-  } = props;
+  } = useProps("Switch", props);
 
   const rootClassName = clsx(
     styles.switch,

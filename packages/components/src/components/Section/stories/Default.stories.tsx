@@ -6,6 +6,8 @@ import { Text } from "@/components/Text";
 import { TextField } from "@/components/TextField";
 import { Label } from "@/components/Label";
 import { Link } from "@/components/Link";
+import { Switch } from "@/components/Switch";
+import { Content } from "@/components/Content";
 
 const meta: Meta<typeof Section> = {
   title: "Structure/Section",
@@ -50,5 +52,22 @@ export const MultipleSections: Story = {
         <Link>Subscribe</Link>
       </Section>
     </>
+  ),
+};
+
+export const WithSwitch: Story = {
+  render: (props) => (
+    <Section {...props}>
+      <Heading>Newsletter</Heading>
+      <Switch>Subscribed</Switch>
+      <Content>
+        <Text>
+          Upcoming releases, new features and tips about your hosting - we bring
+          the most important information to inbox. Subscribe to our newsletter
+          and stay up to date.
+        </Text>
+        <Link>Subscribe</Link>
+      </Content>
+    </Section>
   ),
 };

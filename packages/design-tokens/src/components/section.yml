@@ -9,3 +9,5 @@ section:
     value: "{size-rem.xl}"
   content-to-content-spacing:
     value: "{size-rem.m}"
+  heading-to-switch-spacing:
+    value: "{size-rem.m}"
