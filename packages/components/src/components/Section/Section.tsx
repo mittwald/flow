@@ -1,6 +1,7 @@
 import React, { ComponentProps, FC, PropsWithChildren } from "react";
 import styles from "./Section.module.scss";
 import clsx from "clsx";
+import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
 
 export interface SectionProps
   extends PropsWithChildren<ComponentProps<"section">> {}
@@ -14,9 +15,17 @@ export const Section: FC<SectionProps> = (props) => {
 
   const rootClassName = clsx(styles.section, className);
 
+  const propsContext: PropsContext = {
+    Heading: {
+      level: 2,
+    },
+  };
+
   return (
     <section {...rest} className={rootClassName}>
-      {children}
+      <PropsContextProvider props={propsContext}>
+        {children}
+      </PropsContextProvider>
     </section>
   );
 };

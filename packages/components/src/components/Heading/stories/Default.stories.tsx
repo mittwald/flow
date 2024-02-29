@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Heading from "../Heading";
 import React from "react";
+import { IconMember } from "@/components/Icon/components/icons";
 
 const meta: Meta<typeof Heading> = {
   title: "Content/Heading",
@@ -21,3 +22,15 @@ export default meta;
 type Story = StoryObj<typeof Heading>;
 
 export const Default: Story = {};
+
+export const WithIcon: Story = {
+  render: (props) => (
+    <Heading {...props} level={2}>
+      <IconMember />
+      Personal Information
+    </Heading>
+  ),
+  parameters: {
+    controls: { exclude: ["level"] },
+  },
+};

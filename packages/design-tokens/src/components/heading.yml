@@ -1,6 +1,8 @@
 heading:
   color:
     value: "{info.color.1000}"
+  icon-to-text-spacing:
+    value: "{size-rem.s}"
   font-weight:
     value: "{font-weight.bold}"
   h1-font-size:

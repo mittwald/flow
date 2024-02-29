@@ -7,6 +7,9 @@
 .heading {
   font-weight: var(--heading--font-weight);
   color: var(--heading--color);
+  display: flex;
+  align-items: center;
+  column-gap: var(--heading--icon-to-text-spacing);
 }
 
 @include level(1);
