@@ -7,10 +7,10 @@ form-control:
     value: "{size-px.m}"
   padding-y:
     value: "{size-px.s}"
-  border-radius:
-    value: "{border-radius.default}"
+  corner-radius:
+    value: "{corner-radius.default}"
   border-width:
-    value: "{border-width.default}"
+    value: "{border-width.100}"
   border-style:
     value: "{border-style.default}"
   border-color:
@@ -21,9 +21,9 @@ form-control:
     hover:
       value: "{neutral.color.600}"
     invalid:
-      value: "{negative.color.700}"
+      value: "{danger.color.700}"
     focused:
-      value: "{informative.color.700}"
+      value: "{info.color.700}"
   background-color:
     default:
       value: "{neutral.color.400}"
@@ -32,9 +32,9 @@ form-control:
     hover:
       value: "{neutral.color.500}"
     focused:
-      value: "{color.white}"
+      value: "{neutral.color.100}"
     invalid:
-      value: "{negative.color.100}"
+      value: "{danger.color.100}"
   color:
     disabled:
       value: "{neutral.color.800}"

@@ -3,9 +3,7 @@ badge:
     value: "{font-size.s}"
   height:
     value: "{size-rem.l}"
-  icon-size:
-    value: "{size-rem.m}"
-  border-radius:
+  corner-radius:
     value: "{size-rem.m}"
   padding-y:
     value: "{size-rem.xs}"
@@ -16,14 +14,14 @@ badge:
   icon-to-text-spacing:
     value: 0.5em
   color:
-    value: "{color.white}"
+    value: "{info-solid-content-color}"
 
   # Variants
   info-background-color:
-    value: "{informative.color.700}"
+    value: "{info-solid-background-color.default}"
   success-background-color:
-    value: "{accent.color.700}"
+    value: "{success-solid-background-color.default}"
   warning-background-color:
-    value: "{warning.color.700}"
-  negative-background-color:
-    value: "{negative.color.700}"
+    value: "{warning-solid-background-color.default}"
+  danger-background-color:
+    value: "{danger-solid-background-color.default}"

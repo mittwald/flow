@@ -5,7 +5,7 @@ import React from "react";
 
 const meta: Meta<typeof Badge> = {
   ...defaultMeta,
-  title: "Badge/Variants",
+  title: "Status/Badge/Variants",
 };
 export default meta;
 
@@ -29,10 +29,10 @@ export const Warning: Story = {
   ),
 };
 
-export const Negative: Story = {
+export const Danger: Story = {
   render: (props) => (
-    <Badge variant="negative" {...props}>
-      Negative
+    <Badge variant="danger" {...props}>
+      Danger
     </Badge>
   ),
 };

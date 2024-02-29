@@ -1,37 +1,34 @@
-import React, { FC } from "react";
-import styles from "./StatusIcon.module.css";
-import { Icon } from "@/components/Icon";
-import { faCheckCircle } from "@fortawesome/free-solid-svg-icons/faCheckCircle";
-import { faInfoCircle } from "@fortawesome/free-solid-svg-icons/faInfoCircle";
-import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons/faExclamationCircle";
+import React, { ComponentType, FC } from "react";
+import {
+  IconDanger,
+  IconInfo,
+  IconSuccess,
+  IconWarning,
+} from "@/components/Icon/components/icons";
 import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
-import clsx from "clsx";
-import { StatusVariantProps } from "@/lib/types/props";
+import { PropsWithVariant, Variant } from "@/lib/types/props";
+import { IconProps } from "@/components/Icon";
 
-export interface StatusIconProps extends StatusVariantProps {
-  className?: string;
-}
+export interface StatusIconProps extends PropsWithVariant, IconProps {}
+
+const icons: Record<Variant, ComponentType> = {
+  danger: IconDanger,
+  info: IconInfo,
+  success: IconSuccess,
+  warning: IconWarning,
+};
 
 export const StatusIcon: FC<StatusIconProps> = (props) => {
-  const { variant = "info", className } = props;
+  const { variant = "info", ...rest } = props;
 
-  const rootClassName = clsx(className, styles.root);
+  const stringFormatter = useLocalizedStringFormatter(locales);
 
-  const ariaLabel = useLocalizedStringFormatter(locales).format(
-    `statusIcon.${variant}`,
-  );
+  const ariaLabel = stringFormatter.format(`statusIcon.${variant}`);
 
-  const icon =
-    variant === "info"
-      ? faInfoCircle
-      : variant === "success"
-        ? faCheckCircle
-        : faExclamationCircle;
+  const Icon = icons[variant];
 
-  return (
-    <Icon aria-label={ariaLabel} className={rootClassName} faIcon={icon} />
-  );
+  return <Icon aria-label={ariaLabel} {...rest} />;
 };
 
 export default StatusIcon;

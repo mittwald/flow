@@ -1,0 +1,28 @@
+.labeledValue {
+  display: grid;
+  grid-template-areas:
+    "label"
+    "value";
+  row-gap: var(--labeled-value--label-to-value-spacing);
+  column-gap: var(--labeled-value--value-to-button-spacing);
+
+  &:has(.button) {
+    grid-template-areas:
+      "label label "
+      "value button";
+    grid-template-columns: auto 1fr;
+  }
+}
+
+.label {
+  grid-area: label;
+}
+
+.content {
+  grid-area: value;
+}
+
+.button {
+  grid-area: button;
+  align-self: start;
+}

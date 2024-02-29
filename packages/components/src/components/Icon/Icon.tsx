@@ -1,62 +1,34 @@
-import React, {
-  ComponentProps,
-  FC,
-  PropsWithChildren,
-  SVGAttributes,
-  useMemo,
-} from "react";
-import styles from "./Icon.module.css";
-import { IconLookup } from "@fortawesome/fontawesome-svg-core";
-import {
-  BackwardCompatibleOmit,
-  FontAwesomeIcon,
-} from "@fortawesome/react-fontawesome";
+import React, { FC, PropsWithChildren, SVGAttributes, useMemo } from "react";
+import styles from "./Icon.module.scss";
 import clsx from "clsx";
 import { extractSvgFromString } from "@/components/Icon/lib/extractSvgFromString";
 import { useProps } from "@/lib/propsContext";
 
-type SvgAttributeProps = BackwardCompatibleOmit<
-  SVGAttributes<SVGSVGElement>,
-  "children" | "mask" | "transform"
->;
+type SvgAttributeProps = SVGAttributes<SVGSVGElement>;
 
-export interface IconProps extends PropsWithChildren<SvgAttributeProps> {
-  faIcon?: IconLookup;
+export interface IconProps
+  extends PropsWithChildren<Omit<SvgAttributeProps, "name">> {
+  /** @default "m" */
+  size?: "s" | "m" | "l";
 }
 
 export const Icon: FC<IconProps> = (props) => {
   const {
-    faIcon,
-    className: classNameFromProps,
+    className,
     "aria-label": ariaLabel,
     children,
+    size = "m",
     ...svgAttributes
   } = useProps("Icon", props);
 
   const iconProps: SvgAttributeProps = {
     ...svgAttributes,
-    className: styles.icon,
     focusable: "false",
     role: "img",
     "aria-hidden": !ariaLabel,
     "aria-label": ariaLabel,
+    className: clsx(styles.icon, className, styles[`size-${size}`]),
   };
-
-  /**
-   * Icon is wrapped inside span, so it always behaves as an inline element
-   * (line-height is applied), even if used in flex/grid layouts.
-   */
-  const spanProps: ComponentProps<"span"> = {
-    className: clsx(classNameFromProps, styles.root),
-  };
-
-  if (faIcon) {
-    return (
-      <span {...spanProps}>
-        <FontAwesomeIcon icon={faIcon} {...iconProps} />
-      </span>
-    );
-  }
 
   const isCustomSvgString = typeof children === "string";
 
@@ -73,9 +45,7 @@ export const Icon: FC<IconProps> = (props) => {
     );
   }
 
-  return (
-    <span {...spanProps}>{React.cloneElement(iconElement, iconProps)}</span>
-  );
+  return React.cloneElement(iconElement, iconProps);
 };
 
 export default Icon;

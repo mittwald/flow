@@ -4,7 +4,7 @@ import { action } from "@storybook/addon-actions";
 import React from "react";
 
 const meta: Meta<typeof Link> = {
-  title: "Link",
+  title: "Navigation/Link",
   component: Link,
   args: {
     onPress: action("onPress"),
@@ -28,6 +28,6 @@ export const Default: Story = {};
 
 export const Disabled: Story = { args: { isDisabled: true } };
 
-export const Negative: Story = {
-  args: { variant: "negative" },
+export const Danger: Story = {
+  args: { variant: "danger" },
 };

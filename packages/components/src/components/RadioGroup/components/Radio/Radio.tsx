@@ -1,10 +1,9 @@
 import React, { FC, PropsWithChildren } from "react";
-import styles from "./Radio.module.css";
+import styles from "./Radio.module.scss";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
-import { faCheckCircle } from "@fortawesome/free-regular-svg-icons/faCheckCircle";
-import { Icon } from "@/components/Icon";
+import { IconCheck } from "@/components/Icon/components/icons";
 
 export interface RadioProps
   extends PropsWithChildren<Omit<Aria.RadioProps, "children">> {}
@@ -12,7 +11,7 @@ export interface RadioProps
 export const Radio: FC<RadioProps> = (props) => {
   const { children, className, ...rest } = props;
 
-  const rootClassName = clsx(className, styles.root);
+  const rootClassName = clsx(styles.radio, className);
 
   const propsContext: PropsContext = {
     Icon: {
@@ -31,7 +30,7 @@ export const Radio: FC<RadioProps> = (props) => {
       <PropsContextProvider props={propsContext}>
         {children}
       </PropsContextProvider>
-      <Icon className={styles.checkmark} faIcon={faCheckCircle} />
+      <IconCheck className={styles.checkmark} />
     </Aria.Radio>
   );
 };

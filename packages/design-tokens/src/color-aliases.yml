@@ -1,32 +1,4 @@
-positive:
-  color:
-    100:
-      value: "{color.espelkamp-green.100}"
-    200:
-      value: "{color.espelkamp-green.200}"
-    300:
-      value: "{color.espelkamp-green.300}"
-    400:
-      value: "{color.espelkamp-green.400}"
-    500:
-      value: "{color.espelkamp-green.500}"
-    600:
-      value: "{color.espelkamp-green.600}"
-    700:
-      value: "{color.espelkamp-green.700}"
-    800:
-      value: "{color.espelkamp-green.800}"
-    900:
-      value: "{color.espelkamp-green.900}"
-    1000:
-      value: "{color.espelkamp-green.1000}"
-    1100:
-      value: "{color.espelkamp-green.1100}"
-    visual:
-      color:
-        value: "{positive.color.600}"
-
-informative:
+primary:
   color:
     100:
       value: "{color.hosting-blue.100}"
@@ -50,11 +22,33 @@ informative:
       value: "{color.hosting-blue.1000}"
     1100:
       value: "{color.hosting-blue.1100}"
-  visual:
-    color:
-      value: "{informative.color.700}"
 
-accent:
+info:
+  color:
+    100:
+      value: "{color.hosting-blue.100}"
+    200:
+      value: "{color.hosting-blue.200}"
+    300:
+      value: "{color.hosting-blue.300}"
+    400:
+      value: "{color.hosting-blue.400}"
+    500:
+      value: "{color.hosting-blue.500}"
+    600:
+      value: "{color.hosting-blue.600}"
+    700:
+      value: "{color.hosting-blue.700}"
+    800:
+      value: "{color.hosting-blue.800}"
+    900:
+      value: "{color.hosting-blue.900}"
+    1000:
+      value: "{color.hosting-blue.1000}"
+    1100:
+      value: "{color.hosting-blue.1100}"
+
+success:
   color:
     100:
       value: "{color.espelkamp-green.100}"
@@ -104,7 +98,7 @@ neutral:
     1100:
       value: "{color.gray.1100}"
 
-negative:
+danger:
   color:
     100:
       value: "{color.amaranth-red.100}"
@@ -154,13 +148,175 @@ warning:
     1100:
       value: "{color.royal-orange.1100}"
 
-interactive:
-  quiet:
-    background:
-      color:
-        default:
-          value: transparent
-        hover:
-          value: "{color.gray.300}"
-        selected:
-          value: "{color.gray.300}"
+# Primary Solid
+primary-solid-background-color:
+  default:
+    value: "{primary.color.800}"
+  hover:
+    value: "{primary.color.900}"
+  pressed:
+    value: "{primary.color.1000}"
+primary-solid-content-color:
+  value: "{neutral.color.100}"
+
+# Primary Plain
+primary-plain-background-color:
+  default:
+    value: "{color.transparent}"
+  hover:
+    value: "{primary.color.100}"
+  pressed:
+    value: "{primary.color.200}"
+primary-plain-content-color:
+  default:
+    value: "{primary.color.800}"
+  hover:
+    value: "{primary.color.900}"
+  pressed:
+    value: "{primary.color.1000}"
+
+# Danger Solid
+danger-solid-background-color:
+  default:
+    value: "{danger.color.800}"
+  hover:
+    value: "{danger.color.900}"
+  pressed:
+    value: "{danger.color.1000}"
+danger-solid-content-color:
+  value: "{neutral.color.100}"
+
+# Danger Plain
+danger-plain-background-color:
+  default:
+    value: "{color.transparent}"
+  hover:
+    value: "{danger.color.100}"
+  pressed:
+    value: "{danger.color.200}"
+danger-plain-content-color:
+  default:
+    value: "{danger.color.800}"
+  hover:
+    value: "{danger.color.900}"
+  pressed:
+    value: "{danger.color.1000}"
+
+# Danger Outline
+danger-outline-background-color:
+  value: "{neutral.color.100}"
+danger-outline-content-color:
+  value: "{danger.color.900}"
+danger-outline-border-color:
+  value: "{danger.color.800}"
+
+# Info Solid
+info-solid-background-color:
+  default:
+    value: "{info.color.800}"
+  hover:
+    value: "{info.color.900}"
+  pressed:
+    value: "{info.color.1000}"
+info-solid-content-color:
+  value: "{neutral.color.100}"
+
+# Info Outline
+info-outline-background-color:
+  value: "{neutral.color.100}"
+info-outline-content-color:
+  value: "{info.color.900}"
+info-outline-border-color:
+  value: "{info.color.800}"
+
+# Success Solid
+success-solid-background-color:
+  default:
+    value: "{success.color.800}"
+  hover:
+    value: "{success.color.900}"
+  pressed:
+    value: "{success.color.1000}"
+success-solid-content-color:
+  value: "{neutral.color.100}"
+
+# Success Plain
+success-plain-background-color:
+  default:
+    value: "{color.transparent}"
+  hover:
+    value: "{success.color.100}"
+  pressed:
+    value: "{success.color.200}"
+success-plain-content-color:
+  default:
+    value: "{success.color.800}"
+  hover:
+    value: "{success.color.900}"
+  pressed:
+    value: "{success.color.1000}"
+
+# Success Outline
+success-outline-background-color:
+  value: "{neutral.color.100}"
+success-outline-content-color:
+  value: "{success.color.900}"
+success-outline-border-color:
+  value: "{success.color.800}"
+
+# Warning Solid
+warning-solid-background-color:
+  default:
+    value: "{warning.color.800}"
+  hover:
+    value: "{warning.color.900}"
+  pressed:
+    value: "{warning.color.1000}"
+warning-solid-content-color:
+  value: "{neutral.color.100}"
+
+# Warning Outline
+warning-outline-background-color:
+  value: "{neutral.color.100}"
+warning-outline-content-color:
+  value: "{warning.color.900}"
+warning-outline-border-color:
+  value: "{warning.color.800}"
+
+# Neutral Solid
+neutral-solid-background-color:
+  default:
+    value: "{neutral.color.400}"
+  hover:
+    value: "{neutral.color.500}"
+  pressed:
+    value: "{neutral.color.600}"
+neutral-solid-content-color:
+  value: "{neutral.color.1000}"
+
+# Neutral Plain
+neutral-plain-background-color:
+  default:
+    value: "{color.transparent}"
+  hover:
+    value: "{neutral.color.400}"
+  pressed:
+    value: "{neutral.color.500}"
+neutral-plain-content-color:
+  value: "{neutral.color.1000}"
+
+# Disabled Solid
+disabled-solid-background-color:
+  value: "{neutral.color.400}"
+disabled-solid-content-color:
+  value: "{neutral.color.600}"
+
+# Disabled Plain
+disabled-plain-background-color:
+  value: "{color.transparent}"
+disabled-plain-content-color:
+  value: "{neutral.color.400}"
+
+# Focus
+focus-outline-color:
+  value: "{primary.color.800}"

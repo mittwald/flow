@@ -1,11 +1,12 @@
-import React, { createElement, FC, PropsWithChildren } from "react";
-import styles from "./Text.module.css";
+import React, { FC, PropsWithChildren } from "react";
 import * as Aria from "react-aria-components";
-import clsx from "clsx";
 import { useProps } from "@/lib/propsContext";
+import { PropsWithElementType } from "@/lib/types/props";
 
 export interface TextProps
-  extends PropsWithChildren<Omit<Aria.TextProps, "children">> {}
+  extends PropsWithChildren,
+    Omit<Aria.TextProps, "children" | "elementType">,
+    PropsWithElementType {}
 
 export const Text: FC<TextProps> = (props) => {
   const {
@@ -15,12 +16,11 @@ export const Text: FC<TextProps> = (props) => {
     ...rest
   } = useProps("Text", props);
 
-  const rootClassName = clsx(className, styles.root);
-
-  const textProps = { ...rest, className: rootClassName, children };
+  const textProps = { ...rest, className, children };
 
   if (!props.slot) {
-    return createElement(elementType, textProps);
+    const Element = elementType;
+    return <Element {...textProps} />;
   }
 
   return <Aria.Text {...textProps} elementType={elementType} />;

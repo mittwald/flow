@@ -1,13 +1,13 @@
+import "../src/styles";
 import { Preview } from "@storybook/react";
 import React from "react";
 
 const preview: Preview = {
   decorators: [
-    (Story) => (
-      <div className="flow">
-        <Story />
-      </div>
-    ),
+    (Story) => {
+      document.body.classList.add("flow");
+      return <Story />;
+    },
   ],
   globalTypes: {
     rtlDirection: {},

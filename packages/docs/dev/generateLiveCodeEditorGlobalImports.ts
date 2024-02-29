@@ -3,7 +3,14 @@ import fs from "node:fs";
 import { glob } from "glob";
 import * as path from "node:path";
 import { Literal } from "acorn";
-import { extractRawImports } from "../src/lib/extractImports.js";
+import { extractRawImports } from "../src/lib/liveCode/extractImports.js";
+import { sortBy } from "remeda";
+
+void generateImportMappings(
+  "./src/content/**/examples/*.tsx",
+  "./src/lib/liveCode/dynamicImports.ts",
+  /(NavigationItem)/,
+);
 
 interface ImportDefinition {
   names: string[];
@@ -18,9 +25,17 @@ function mapImports(imports: ImportDefinition[]): Record<string, string> {
   );
 }
 
-async function generateImportMappings(pattern: string, outputPath: string) {
+function getNamedExport(name: string): string {
+  return name.split(":")[0];
+}
+
+async function generateImportMappings(
+  pattern: string,
+  outputPath: string,
+  nonComponentsMatcher?: RegExp,
+) {
   console.log("Generating imports from files");
-  const matchedFiles = await glob(pattern);
+  const matchedFiles = sortBy(await glob(pattern), (s) => s);
 
   console.log(` - ${matchedFiles.join("\r\n - ")}`);
 
@@ -32,17 +47,29 @@ async function generateImportMappings(pattern: string, outputPath: string) {
 
   const imports = mapImports(fileContents.flatMap(extractRawImports));
 
-  const importStatements = Object.entries(imports).map(
-    ([key, value]) => `"${key}": () => import("${value}"),`,
-  );
+  const staticImports = Object.entries(imports).map(([name, source], index) => {
+    if (nonComponentsMatcher?.test(name)) {
+      const namedExport = getNamedExport(name);
+      return `import { ${namedExport} as I${index} } from "${source}";`;
+    }
+  });
+
+  const mappings = Object.entries(imports).map(([name, source], index) => {
+    if (nonComponentsMatcher?.test(name)) {
+      return `"${name}": I${index},`;
+    }
+    return `"${name}": lazy(() => import("${source}").then(module => ({ default: module.${getNamedExport(name)} } ))),`;
+  });
 
   const generatedFileContents = `
 /* eslint-disable */
 /* auto-generated file */
-import { ImportMapping } from "@/lib/types";
+import { ImportMapping } from "@/lib/liveCode/types";
+import { lazy } from "react";
+${staticImports.filter((i) => i !== undefined).join("\r\n")}
 
 export const liveCodeEditorGlobalImports: ImportMapping = {
-  ${importStatements.join("\r\n")}
+  ${mappings.join("\r\n")}
 };
 `;
 
@@ -54,8 +81,3 @@ export const liveCodeEditorGlobalImports: ImportMapping = {
 
   fs.writeFileSync(outputPath, generatedFileContents.trim());
 }
-
-void generateImportMappings(
-  "./src/app/**/_examples/*.tsx",
-  "./src/lib/liveCodeEditorGlobalImports.ts",
-);

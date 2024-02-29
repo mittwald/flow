@@ -6,8 +6,8 @@ navigation-item:
   font-weight:
     current:
       value: "{font-weight.bold}"
-  border-radius:
-    value: "{border-radius.default}"
+  corner-radius:
+    value: "{corner-radius.default}"
   padding-x:
     value: "{size-px.s}"
   padding-y:
@@ -16,25 +16,23 @@ navigation-item:
     value: 0.5em
   color:
     current:
-      value: "{informative.color.800}"
-  icon-size:
-    value: "{icon.size.s}"
+      value: "{info.color.800}"
   icon-color:
     default:
       value: "{neutral.color.800}"
     current:
-      value: "{informative.color.800}"
+      value: "{info.color.800}"
 
   background-color:
     default:
       value: "{color.transparent}"
     hover:
-      value: "{informative.color.100}"
+      value: "{info.color.100}"
     current:
-      value: "{informative.color.100}"
+      value: "{info.color.100}"
 
   # Disabled
   disabled-background-color:
     value: "{neutral.color.400}"
   disabled-color:
-    value: "{color.white}"
+    value: "{neutral.color.100}"

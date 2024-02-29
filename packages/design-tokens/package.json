@@ -1,9 +1,12 @@
 {
-  "name": "@mittwald/flow-next-design-tokens",
-  "version": "0.0.0",
+  "name": "@mittwald/flow-design-tokens",
+  "version": "0.1.0-alpha.18",
   "type": "module",
+  "description": "The design tokens used in Flow, mittwald’s design system",
+  "homepage": "https://mittwald.github.io/flow",
+  "repository": "https://github.com/mittwald/flow",
   "exports": {
-    ".": "./dist/variables.css"
+    "./css": "./dist/variables.css"
   },
   "files": [
     "dist"
@@ -14,6 +17,7 @@
   "devDependencies": {
     "@types/js-yaml": "^4.0.9",
     "js-yaml": "^4.1.0",
-    "style-dictionary": "^3.9.1"
+    "nx": "^18.0.5",
+    "style-dictionary": "^3.9.2"
   }
 }

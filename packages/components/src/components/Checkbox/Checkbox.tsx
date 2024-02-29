@@ -1,10 +1,8 @@
 import React, { FC, PropsWithChildren } from "react";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
-import styles from "./Checkbox.module.css";
-import { Icon } from "@/components/Icon";
-import { faCheckSquare } from "@fortawesome/free-regular-svg-icons/faCheckSquare";
-import { faSquare } from "@fortawesome/free-regular-svg-icons/faSquare";
+import styles from "./Checkbox.module.scss";
+import { IconChecked, IconUnchecked } from "@/components/Icon/components/icons";
 
 export interface CheckboxProps
   extends PropsWithChildren<Omit<Aria.CheckboxProps, "children">> {}
@@ -12,16 +10,17 @@ export interface CheckboxProps
 export const Checkbox: FC<CheckboxProps> = (props) => {
   const { children, className, ...rest } = props;
 
-  const rootClassName = clsx(className, styles.root);
+  const rootClassName = clsx(styles.checkbox, className);
 
   return (
     <Aria.Checkbox {...rest} className={rootClassName}>
       {({ isSelected }) => (
         <>
-          <Icon
-            className={styles.checkmark}
-            faIcon={isSelected ? faCheckSquare : faSquare}
-          />
+          {isSelected ? (
+            <IconChecked className={styles.checkmark} />
+          ) : (
+            <IconUnchecked className={styles.checkmark} />
+          )}
           {children}
         </>
       )}

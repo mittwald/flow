@@ -9,7 +9,7 @@ import { Button } from "@/components/Button";
 import { FieldError } from "@/components/FieldError";
 
 const meta: Meta<typeof TextField> = {
-  title: "TextField",
+  title: "Forms/TextField",
   component: TextField,
   render: (props) => (
     <TextField onChange={action("onChange")} {...props}>
@@ -73,9 +73,8 @@ export const WithForm: Story = {
       <TextField {...props} type="email" inputMode="email" isRequired>
         <Label>Email</Label>
       </TextField>
-      <Button style={{ marginTop: "16px" }} type="submit">
-        Submit
-      </Button>
+      <br />
+      <Button type="submit">Submit</Button>
     </Form>
   ),
 };
