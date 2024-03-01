@@ -1,11 +1,11 @@
 @mixin level($level) {
-  h#{$level}.heading {
+  h#{$level} {
     font-size: var(--heading--h#{$level}-font-size);
   }
 }
 
 .heading {
-  font-weight: var(--heading--font-weight);
+  font-family: "ProximaNova", sans-serif;
   color: var(--heading--color);
 }
 

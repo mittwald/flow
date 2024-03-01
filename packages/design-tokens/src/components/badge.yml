@@ -3,8 +3,6 @@ badge:
     value: "{font-size.s}"
   height:
     value: "{size-rem.l}"
-  icon-size:
-    value: "{size-rem.m}"
   corner-radius:
     value: "{size-rem.m}"
   padding-y:

@@ -1,5 +1,8 @@
+@use "@/styles/mixins/ellipsis";
+
 .button {
   position: relative;
+  font-family: "Inter", sans-serif;
   border: none;
   border-radius: var(--button--corner-radius);
   padding-block: var(--button--padding-squished-y);
@@ -11,9 +14,6 @@
   transition-duration: var(--transition--duration--default);
   outline-color: var(--button--focus-outline-color);
   outline-offset: var(--button--focus-outline-offset);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   max-width: 100%;
 
   @extend .primary;
@@ -36,12 +36,17 @@
   grid-area: content;
 }
 
+.text {
+  @include ellipsis.ellipsis;
+  display: block;
+}
+
 .icon,
 .icon svg {
   display: block;
 }
 
-.small {
+.size-s {
   font-size: var(--button--font-size-small);
   padding-block: var(--button--padding-small-squished-y);
   padding-inline: var(--button--padding-small-squished-x);
@@ -53,6 +58,7 @@
 
 .stateIcon {
   color: var(--button--pending-icon-color);
+  justify-self: center;
 }
 
 .isSucceeded {

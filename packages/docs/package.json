@@ -12,13 +12,12 @@
     "test:tsc": "run tsc --noEmit"
   },
   "dependencies": {
-    "@fortawesome/free-regular-svg-icons": "^6.5.1",
-    "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@mdx-js/loader": "^3.0.1",
     "@mdx-js/react": "^3.0.1",
     "@mfalkenberg/react-live-ssr": "^4.1.7",
     "@mittwald/flow-react-components": "workspace:^",
     "@next/mdx": "^14.1.0",
+    "@tabler/icons-react": "^2.47.0",
     "@types/mdx": "^2.0.11",
     "clsx": "^2.1.0",
     "fs-jetpack": "^5.1.0",
@@ -31,22 +30,22 @@
     "react-dom": "^18.2.0",
     "remark-frontmatter": "^5.0.0",
     "remark-mdx-frontmatter": "^4.0.0",
-    "remeda": "^1.43.0",
+    "remeda": "^1.44.1",
     "tsx": "^4.7.1",
-    "webpack": "^5.90.2"
+    "webpack": "^5.90.3"
   },
   "devDependencies": {
-    "@types/node": "^20.11.19",
-    "@types/react": "^18.2.56",
+    "@types/node": "^20.11.20",
+    "@types/react": "^18.2.58",
     "@types/react-dom": "^18.2.19",
     "@yarnpkg/pnpify": "^4.0.1",
     "acorn": "patch:acorn@npm%3A8.11.2#~/.yarn/patches/acorn-npm-8.11.2-a470f49bb6.patch",
     "acorn-jsx": "^5.3.2",
-    "eslint": "^8.56.0",
+    "eslint": "^8.57.0",
     "eslint-config-next": "^14.1.0",
     "glob": "^10.3.10",
-    "nx": "^18.0.4",
-    "sass": "^1.71.0",
+    "nx": "^18.0.5",
+    "sass": "^1.71.1",
     "typescript": "^5.3.3"
   }
 }

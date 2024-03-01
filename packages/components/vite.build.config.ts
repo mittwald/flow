@@ -26,6 +26,7 @@ export default defineConfig(
           FieldError: "./src/components/FieldError/index.ts",
           Heading: "./src/components/Heading/index.ts",
           Icon: "./src/components/Icon/index.ts",
+          Icons: "./src/components/Icon/components/icons/index.ts",
           Image: "./src/components/Image/index.ts",
           Initials: "./src/components/Initials/index.ts",
           InlineAlert: "./src/components/InlineAlert/index.ts",
@@ -61,6 +62,7 @@ export default defineConfig(
         external: [
           "react",
           "react-dom",
+          "@tabler/icons-react",
           "@fortawesome/react-fontawesome",
           "@fortawesome/fontawesome-svg-core",
           "@react-aria/utils",

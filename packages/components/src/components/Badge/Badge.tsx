@@ -18,6 +18,7 @@ export const Badge: FC<BadgeProps> = (props) => {
   const propsContext: PropsContext = {
     Icon: {
       className: styles.customIcon,
+      size: "s",
     },
     Text: {
       className: styles.content,
@@ -26,7 +27,7 @@ export const Badge: FC<BadgeProps> = (props) => {
 
   return (
     <div className={rootClassName} {...rest}>
-      <StatusIcon className={styles.statusIcon} variant={variant} />
+      <StatusIcon size="s" className={styles.statusIcon} variant={variant} />
       <PropsContextProvider props={propsContext}>
         {typeof children === "string" ? <Text>{children}</Text> : children}
       </PropsContextProvider>
