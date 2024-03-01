@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.20](https://github.com/mittwald/flow/compare/0.1.0-alpha.19...0.1.0-alpha.20) (2024-03-01)
+
+### Features
+
+- add fonts
+  ([caf1bfc](https://github.com/mittwald/flow/commit/caf1bfc74c684f78b7656c244ff34aef7a3fd278))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.19](https://github.com/mittwald/flow/compare/0.1.0-alpha.18...0.1.0-alpha.19) (2024-02-29)
 
 ### Features
