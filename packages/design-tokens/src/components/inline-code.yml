@@ -1,0 +1,11 @@
+inline-code:
+  font-size:
+    value: "{font-size.s}"
+  line-height:
+    value: "{line-height.m}"
+  background-color:
+    value: "{neutral-solid-background-color.default}"
+  padding-x:
+    value: "{size-px.xs}"
+  corner-radius:
+    value: "{corner-radius.default}"
