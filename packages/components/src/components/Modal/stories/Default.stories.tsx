@@ -1,14 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Modal from "../Modal";
 import React from "react";
-import * as Aria from "react-aria-components";
 import { Button } from "@/components/Button";
 import { ButtonGroup } from "@/components/ButtonGroup";
 import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
 import { TextField } from "@/components/TextField";
 import { Label } from "@/components/Label";
-import { Section } from "@/components/Section";
 import { Content } from "@/components/Content";
 
 const meta: Meta<typeof Modal> = {

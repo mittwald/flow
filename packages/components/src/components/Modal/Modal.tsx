@@ -1,5 +1,5 @@
 import * as Aria from "react-aria-components";
-import React, { FC, PropsWithChildren, ReactNode } from "react";
+import React, { FC, PropsWithChildren } from "react";
 import styles from "./Modal.module.scss";
 import clsx from "clsx";
 import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
