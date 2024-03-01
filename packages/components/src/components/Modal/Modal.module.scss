@@ -1,0 +1,56 @@
+.modal {
+  border-radius: var(--modal--corner-radius);
+  background: var(--modal--background-color);
+  max-height: calc(100vh - var(--size-px--xxl));
+  overflow: hidden;
+
+  @extend .size-s;
+
+  [role="dialog"] {
+    padding: var(--modal--padding);
+    overflow: hidden;
+    outline: none;
+    display: grid;
+    grid-template-areas:
+      "content"
+      "buttonGroup";
+  }
+}
+
+.overlay {
+  background: var(--modal--overlay-background-color);
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttonGroup {
+  margin-inline: calc(var(--modal--padding) * -1);
+  margin-bottom: calc(var(--modal--padding) * -1);
+  grid-area: buttonGroup;
+}
+
+.content {
+  grid-area: content;
+  overflow: scroll;
+  padding-bottom: var(--modal--padding);
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--section--content-to-content-spacing);
+}
+
+/* Sizes */
+@mixin size($size) {
+  .size-#{$size} {
+    width: var(--modal--size--#{$size});
+  }
+}
+
+@include size(s);
+@include size(m);
+@include size(l);

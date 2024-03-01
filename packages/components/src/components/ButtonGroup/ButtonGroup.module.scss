@@ -1,0 +1,19 @@
+.buttonGroup {
+  padding: var(--button-group--padding);
+  gap: var(--button-group--button-to-button-spacing);
+  background-color: var(--button-group--background-color);
+  border-top-color: var(--button-group--border-color);
+  border-top-width: var(--button-group--border-top-width);
+  border-top-style: var(--button-group--border-style);
+  display: grid;
+  grid-template-areas: "abort secondary primary";
+  grid-auto-columns: 1fr auto auto;
+
+  :first-child:global(.flow--button--secondary) {
+    grid-area: abort;
+    justify-self: start;
+  }
+  :last-child:not(:global(.flow--button--secondary)) {
+    grid-area: primary;
+  }
+}

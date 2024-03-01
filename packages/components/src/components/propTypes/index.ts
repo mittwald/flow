@@ -16,12 +16,14 @@ import type { HeadingProps } from "@/components/Heading";
 import type { InitialsProps } from "@/components/Initials";
 import type { ImageProps } from "@/components/Image";
 import type { CopyToClipboardButtonProps } from "@/components/CopyToClipboardButton";
+import { ButtonGroupProps } from "@/components/ButtonGroup";
 
 export * from "./types";
 
 export interface FlowComponentPropsTypes {
   Text: TextProps;
   Button: ButtonProps;
+  ButtonGroup: ButtonGroupProps;
   CopyToClipboard: CopyToClipboardButtonProps;
   Icon: IconProps;
   Label: LabelProps;
