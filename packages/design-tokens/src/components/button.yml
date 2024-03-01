@@ -19,15 +19,19 @@ button:
     value: "{success.color.700}"
   failed-icon-color:
     value: "{danger.color.700}"
+  text-to-icon-spacing:
+    value: "{size-px.s}"
 
   # Small
-  padding-small:
+  padding-s:
     value: "{size-px.xs}"
-  padding-small-squished-x:
+  padding-s-squished-x:
     value: "{size-px.s}"
-  padding-small-squished-y:
+  padding-s-squished-y:
     value: "{size-px.xs}"
-  font-size-small:
+  text-to-icon-spacing-s:
+    value: "{size-px.xs}"
+  font-size-s:
     value: "{font-size.s}"
 
   # Accent Solid
