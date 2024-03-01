@@ -13,7 +13,7 @@ export const Popover: FC<PopoverProps> = (props) => {
 
   return (
     <Aria.Popover {...rest} className={rootClassName}>
-      {children}
+      <Aria.Dialog>{children}</Aria.Dialog>
     </Aria.Popover>
   );
 };
