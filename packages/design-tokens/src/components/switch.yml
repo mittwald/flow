@@ -30,8 +30,8 @@ switch:
     disabled:
       value: "{neutral.color.400}"
 
-  # Success
-  success-indicator-color:
+  # Accent
+  accent-indicator-color:
     selected:
       value: "{success.color.800}"
     selected-pressed:

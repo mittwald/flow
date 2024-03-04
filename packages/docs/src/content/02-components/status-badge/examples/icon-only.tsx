@@ -1,3 +1,3 @@
-import Badge from "@mittwald/flow-react-components/Badge";
+import StatusBadge from "@mittwald/flow-react-components/StatusBadge";
 
-<Badge />;
+<StatusBadge />;

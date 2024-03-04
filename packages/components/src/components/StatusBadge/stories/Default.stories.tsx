@@ -8,7 +8,7 @@ const meta: Meta<typeof StatusBadge> = {
   title: "Status/StatusBadge",
   component: StatusBadge,
   argTypes: {
-    variant: {
+    status: {
       control: "inline-radio",
     },
   },

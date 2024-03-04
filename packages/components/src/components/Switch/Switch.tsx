@@ -7,8 +7,8 @@ export interface SwitchProps
   extends PropsWithChildren<Omit<Aria.SwitchProps, "children">> {
   /** @default "trailing" */
   labelPosition?: "leading" | "trailing";
-  /** @default "success" */
-  variant?: "success" | "danger";
+  /** @default "accent" */
+  variant?: "accent" | "danger";
 }
 
 export const Switch: FC<SwitchProps> = (props) => {
@@ -16,7 +16,7 @@ export const Switch: FC<SwitchProps> = (props) => {
     children,
     className,
     labelPosition = "trailing",
-    variant = "success",
+    variant = "accent",
     ...rest
   } = props;
 

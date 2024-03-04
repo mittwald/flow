@@ -43,15 +43,15 @@
   grid-area: content;
 }
 
-/* Variants */
-@mixin variant($variant) {
-  .#{$variant} {
-    background-color: var(--status-badge--#{$variant}-background-color);
-    color: var(--status-badge--#{$variant}-content-color);
+/* Status */
+@mixin status($status) {
+  .#{$status} {
+    background-color: var(--status-badge--#{$status}-background-color);
+    color: var(--status-badge--#{$status}-content-color);
   }
 }
 
-@include variant(info);
-@include variant(success);
-@include variant(warning);
-@include variant(danger);
+@include status(info);
+@include status(success);
+@include status(warning);
+@include status(danger);

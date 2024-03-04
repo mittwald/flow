@@ -5,7 +5,7 @@ import React from "react";
 
 const meta: Meta<typeof StatusBadge> = {
   ...defaultMeta,
-  title: "Status/StatusBadge/Variants",
+  title: "Status/StatusBadge/Status",
 };
 export default meta;
 
@@ -15,7 +15,7 @@ export const Info: Story = {};
 
 export const Success: Story = {
   render: (props) => (
-    <StatusBadge variant="success" {...props}>
+    <StatusBadge status="success" {...props}>
       Success
     </StatusBadge>
   ),
@@ -23,7 +23,7 @@ export const Success: Story = {
 
 export const Warning: Story = {
   render: (props) => (
-    <StatusBadge variant="warning" {...props}>
+    <StatusBadge status="warning" {...props}>
       Warning
     </StatusBadge>
   ),
@@ -31,7 +31,7 @@ export const Warning: Story = {
 
 export const Danger: Story = {
   render: (props) => (
-    <StatusBadge variant="danger" {...props}>
+    <StatusBadge status="danger" {...props}>
       Danger
     </StatusBadge>
   ),
