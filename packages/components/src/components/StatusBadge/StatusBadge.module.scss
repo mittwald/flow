@@ -1,23 +1,23 @@
-.badge {
-  color: var(--badge--color);
-  font-size: var(--badge--font-size);
-  background-color: var(--badge--info-background-color);
-  border-radius: var(--badge--corner-radius);
-  padding-block: var(--badge--padding-y);
-  padding-inline: var(--badge--padding-x);
+.statusBadge {
+  font-size: var(--status-badge--font-size);
+  font-weight: var(--status-badge--font-weight);
+  background-color: var(--status-badge--info-background-color);
+  border-radius: var(--status-badge--corner-radius);
+  padding-block: var(--status-badge--padding-y);
+  padding-inline: var(--status-badge--padding-x);
   height: var(--badge--height);
   line-height: var(--size-rem--m);
   display: inline-grid;
   grid-template-areas: "icon content";
   grid-template-columns: auto 1fr;
-  column-gap: var(--badge--icon-to-text-spacing);
+  column-gap: var(--status-badge--icon-to-text-spacing);
   max-width: fit-content;
 
   @extend .info;
 
   /* With icon only */
   &:not(:has(.content)) {
-    padding-inline: var(--badge--padding-x-icon-only);
+    padding-inline: var(--status-badge--padding-x-icon-only);
     grid-template-areas: "icon";
     grid-template-columns: auto;
   }
@@ -46,7 +46,8 @@
 /* Variants */
 @mixin variant($variant) {
   .#{$variant} {
-    background-color: var(--badge--#{$variant}-background-color);
+    background-color: var(--status-badge--#{$variant}-background-color);
+    color: var(--status-badge--#{$variant}-content-color);
   }
 }
 

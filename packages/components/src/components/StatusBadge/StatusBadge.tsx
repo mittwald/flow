@@ -1,19 +1,19 @@
 import React, { FC, PropsWithChildren } from "react";
-import styles from "./Badge.module.scss";
+import styles from "./StatusBadge.module.scss";
 import clsx from "clsx";
 import { StatusIcon } from "@/components/StatusIcon";
 import { Text } from "@/components/Text";
 import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { PropsWithVariant } from "@/lib/types/props";
 
-export interface BadgeProps extends PropsWithChildren, PropsWithVariant {
+export interface StatusBadgeProps extends PropsWithChildren, PropsWithVariant {
   className?: string;
 }
 
-export const Badge: FC<BadgeProps> = (props) => {
+export const StatusBadge: FC<StatusBadgeProps> = (props) => {
   const { children, className, variant = "info", ...rest } = props;
 
-  const rootClassName = clsx(styles.badge, styles[variant], className);
+  const rootClassName = clsx(styles.statusBadge, styles[variant], className);
 
   const propsContext: PropsContext = {
     Icon: {
@@ -35,4 +35,4 @@ export const Badge: FC<BadgeProps> = (props) => {
   );
 };
 
-export default Badge;
+export default StatusBadge;
