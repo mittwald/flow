@@ -18909,14 +18909,14 @@ __metadata:
   linkType: hard
 
 "postcss-nesting@npm:^12.0.3":
-  version: 12.0.3
-  resolution: "postcss-nesting@npm:12.0.3"
+  version: 12.0.4
+  resolution: "postcss-nesting@npm:12.0.4"
   dependencies:
     "@csstools/selector-specificity": "npm:^3.0.2"
     postcss-selector-parser: "npm:^6.0.13"
   peerDependencies:
     postcss: ^8.4
-  checksum: 10c0/b05bb2a2a7135ea88d646090a026d71b3a9bf66562e9678dd13810ea6d6878853b17529726b7448805d7b9f79b936f0b8020595f9031b8e3219b70283a70727d
+  checksum: 10c0/f6fdf0d6170d9aa7ebcbd8b74f1b4ea28ad9747e4d211fb64948cb20e5638ba32220ceb5d246125892152827da2b0493d087e7abf392c07053bdf931abc5b6de
   languageName: node
   linkType: hard
 
