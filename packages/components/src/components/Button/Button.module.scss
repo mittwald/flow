@@ -123,3 +123,7 @@
 @include variant(accent, plain);
 @include variant(danger, plain);
 @include variant(secondary, plain);
+@include variant(primary, soft);
+@include variant(accent, soft);
+@include variant(danger, soft);
+@include variant(secondary, soft);

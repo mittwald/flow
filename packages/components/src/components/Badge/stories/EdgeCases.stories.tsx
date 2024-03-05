@@ -6,7 +6,7 @@ import { dummyText } from "@/lib/dev/dummyText";
 
 const meta: Meta<typeof Badge> = {
   ...defaultMeta,
-  title: "Status/Badge/EdgeCases",
+  title: "Status/Badge/Edge Cases",
 };
 export default meta;
 
