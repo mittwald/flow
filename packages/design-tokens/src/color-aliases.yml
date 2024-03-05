@@ -221,7 +221,7 @@ danger-plain-content-color:
 # Danger Outline
 danger-outline-background-color:
   default:
-    value: "{neutral.color.100}"
+    value: "{color.transparent}"
   hover:
     value: "{danger.color.100}"
   pressed:
@@ -261,7 +261,7 @@ info-solid-content-color:
 # Info Outline
 info-outline-background-color:
   default:
-    value: "{neutral.color.100}"
+    value: "{color.transparent}"
   hover:
     value: "{info.color.100}"
   pressed:
@@ -317,7 +317,7 @@ success-plain-content-color:
 # Success Outline
 success-outline-background-color:
   default:
-    value: "{neutral.color.100}"
+    value: "{color.transparent}"
   hover:
     value: "{success.color.100}"
   pressed:
@@ -357,7 +357,7 @@ warning-solid-content-color:
 # Warning Outline
 warning-outline-background-color:
   default:
-    value: "{neutral.color.100}"
+    value: "{color.transparent}"
   hover:
     value: "{warning.color.100}"
   pressed:
