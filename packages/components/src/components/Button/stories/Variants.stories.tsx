@@ -5,7 +5,7 @@ import React from "react";
 
 const meta: Meta<typeof Button> = {
   ...defaultMeta,
-  title: "Buttons/Button/Variants",
+  title: "Actions/Button/Variants",
 };
 
 export default meta;

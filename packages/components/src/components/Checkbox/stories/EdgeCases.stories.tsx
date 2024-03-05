@@ -5,7 +5,7 @@ import defaultMeta from "./Default.stories";
 import { dummyText } from "@/lib/dev/dummyText";
 
 const meta: Meta<typeof Checkbox> = {
-  title: "Forms/Checkbox/Edge Cases",
+  title: "Form Controls/Checkbox/Edge Cases",
   ...defaultMeta,
 };
 

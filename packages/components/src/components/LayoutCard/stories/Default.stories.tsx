@@ -3,7 +3,7 @@ import LayoutCard from "../LayoutCard";
 import React from "react";
 
 const meta: Meta<typeof LayoutCard> = {
-  title: "Structure/Layout Card",
+  title: "Structure/LayoutCard",
   component: LayoutCard,
   argTypes: {
     elementType: {
