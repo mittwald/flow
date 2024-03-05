@@ -36,7 +36,7 @@ form-control:
 
   background-color:
     default:
-      value: "{neutral-outline-background-color}"
+      value: "{neutral.color.200}"
     disabled:
       value: "{disabled-outline-background-color}"
     hover:

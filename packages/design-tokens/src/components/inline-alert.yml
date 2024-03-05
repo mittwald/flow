@@ -15,8 +15,6 @@ inline-alert:
     value: "{size-rem.s}"
   heading-font-size:
     value: "{font-size.m}"
-  background-color:
-    value: "{neutral.color.100}"
 
   # Info
   info-border-color:
