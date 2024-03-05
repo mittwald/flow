@@ -316,6 +316,8 @@ disabled-plain-background-color:
   value: "{color.transparent}"
 disabled-plain-content-color:
   value: "{neutral.color.400}"
+disabled-plain-content-accent-color:
+  value: "{neutral.color.600}"
 
 # Focus
 focus-outline-color:
