@@ -1,15 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Modal from "../Modal";
 import React from "react";
-import { Button } from "@/components/Button";
-import { ButtonGroup } from "@/components/ButtonGroup";
-import { Heading } from "@/components/Heading";
-import { Text } from "@/components/Text";
-import { TextField } from "@/components/TextField";
-import { Label } from "@/components/Label";
-import { Content } from "@/components/Content";
-import { DialogTrigger } from "@/components/DialogTrigger";
-import { Title } from "@/components/Title";
+import Button from "@/components/Button";
+import ButtonGroup from "@/components/ButtonGroup";
+import Text from "@/components/Text";
+import TextField from "@/components/TextField";
+import Label from "@/components/Label";
+import Content from "@/components/Content";
+import DialogTrigger from "@/components/DialogTrigger";
+import Title from "@/components/Title";
 
 const meta: Meta<typeof Modal> = {
   title: "Overlays/Modal",

@@ -7,7 +7,7 @@ export const Title: FC<TitleProps> = (props) => {
   const { children, level = 2, ...rest } = props;
 
   return (
-    <Heading {...rest} level={2} slot="title">
+    <Heading level={2} {...rest} slot="title">
       {children}
     </Heading>
   );
