@@ -34,7 +34,6 @@ export const liveCodeEditorGlobalImports: ImportMapping = {
 "Section:@mittwald/flow-react-components/Section": lazy(() => import("@mittwald/flow-react-components/Section").then(module => ({ default: module.Section } ))),
 "TextField:@mittwald/flow-react-components/TextField": lazy(() => import("@mittwald/flow-react-components/TextField").then(module => ({ default: module.TextField } ))),
 "StatusBadge:@mittwald/flow-react-components/StatusBadge": lazy(() => import("@mittwald/flow-react-components/StatusBadge").then(module => ({ default: module.StatusBadge } ))),
-"IconEmail:@mittwald/flow-react-components/Icons": lazy(() => import("@mittwald/flow-react-components/Icons").then(module => ({ default: module.IconEmail } ))),
 "StatusIcon:@mittwald/flow-react-components/StatusIcon": lazy(() => import("@mittwald/flow-react-components/StatusIcon").then(module => ({ default: module.StatusIcon } ))),
 "Switch:@mittwald/flow-react-components/Switch": lazy(() => import("@mittwald/flow-react-components/Switch").then(module => ({ default: module.Switch } ))),
 "FieldDescription:@mittwald/flow-react-components/FieldDescription": lazy(() => import("@mittwald/flow-react-components/FieldDescription").then(module => ({ default: module.FieldDescription } ))),

@@ -11,28 +11,12 @@
   grid-template-areas: "icon content";
   grid-template-columns: auto 1fr;
   column-gap: var(--status-badge--icon-to-text-spacing);
-  max-width: fit-content;
 
   @extend .info;
-
-  /* With icon only */
-  &:not(:has(.content)) {
-    padding-inline: var(--status-badge--padding-x-icon-only);
-    grid-template-areas: "icon";
-    grid-template-columns: auto;
-  }
-
-  /* With custom icon */
-  &:has(.customIcon) {
-    .statusIcon {
-      display: none;
-    }
-  }
 }
 
 /* Elements */
-.statusIcon,
-.customIcon {
+.statusIcon {
   grid-area: icon;
 }
 
