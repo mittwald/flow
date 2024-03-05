@@ -14,7 +14,7 @@ button:
   focus-outline-width:
     value: "{border-width.200}"
   pending-icon-color:
-    value: "{neutral.color.600}"
+    value: "{disabled-plain-content-accent-color}"
   succeeded-icon-color:
     value: "{success.color.700}"
   failed-icon-color:
