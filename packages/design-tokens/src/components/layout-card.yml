@@ -1,4 +1,4 @@
-content-box:
+layout-card:
   background-color:
     value: "{neutral.color.100}"
   corner-radius:
@@ -6,4 +6,4 @@ content-box:
   padding:
     value: "{size-px.l}"
   box-shadow:
-    value: "rgba(0, 0, 0, 0.1) 0px {size-px.xs} {size-px.s}"
+    value: "{shadow.content}"

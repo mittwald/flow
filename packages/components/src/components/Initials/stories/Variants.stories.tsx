@@ -24,5 +24,5 @@ export const Variant3: Story = {
 };
 
 export const Variant4: Story = {
-  render: (props) => <Initials {...props}>Karla Mustermann</Initials>,
+  render: (props) => <Initials {...props}>Tom Mustermann</Initials>,
 };

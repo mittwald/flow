@@ -8,7 +8,6 @@
   grid-template-columns: auto 1fr;
   grid-column-gap: var(--inline-alert--icon-to-text-spacing);
   grid-row-gap: var(--inline-alert--text-to-text-spacing);
-  background-color: var(--inline-alert--background-color);
   width: 100%;
 
   @extend .info;
@@ -43,6 +42,7 @@
 @mixin variant($variant) {
   .#{$variant} {
     border-color: var(--inline-alert--#{$variant}-border-color);
+
     .heading,
     .statusIcon {
       color: var(--inline-alert--#{$variant}-heading-color);

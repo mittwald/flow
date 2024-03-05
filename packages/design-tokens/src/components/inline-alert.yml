@@ -13,8 +13,8 @@ inline-alert:
     value: "{size-rem.xs}"
   icon-to-text-spacing:
     value: "{size-rem.s}"
-  background-color:
-    value: "{info-outline-background-color}"
+  heading-font-size:
+    value: "{font-size.m}"
 
   # Info
   info-border-color:
