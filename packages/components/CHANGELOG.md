@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.21](https://github.com/mittwald/flow/compare/0.1.0-alpha.20...0.1.0-alpha.21) (2024-03-05)
+
+### Bug Fixes
+
+- token updates and small fixes
+  ([#208](https://github.com/mittwald/flow/issues/208))
+  ([85a8a1d](https://github.com/mittwald/flow/commit/85a8a1db4b4684552393d5fbdcf051defb39d85c))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.20](https://github.com/mittwald/flow/compare/0.1.0-alpha.19...0.1.0-alpha.20) (2024-03-01)
 
 ### Features
