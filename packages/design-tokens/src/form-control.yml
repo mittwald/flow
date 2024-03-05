@@ -13,6 +13,7 @@ form-control:
     value: "{border-width.100}"
   border-style:
     value: "{border-style.default}"
+
   placeholder-color:
     default:
       value: "{neutral.color.900}"
@@ -35,7 +36,7 @@ form-control:
 
   background-color:
     default:
-      value: "{neutral-outline-background-color}"
+      value: "{neutral.color.200}"
     disabled:
       value: "{disabled-outline-background-color}"
     hover:

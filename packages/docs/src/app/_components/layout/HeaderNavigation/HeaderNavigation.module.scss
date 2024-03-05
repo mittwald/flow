@@ -1,0 +1,10 @@
+.navigation {
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-end;
+
+  ul {
+    flex-direction: row;
+    gap: var(--navigation--item-to-item-spacing);
+  }
+}
