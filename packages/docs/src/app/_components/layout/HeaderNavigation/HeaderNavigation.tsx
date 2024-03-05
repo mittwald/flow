@@ -28,6 +28,7 @@ const HeaderNavigation: FC<Props> = (props) => {
       key={mdxFiles[0].pathname}
       isCurrent={currentPathname.includes(group)}
       linkComponent={NextJsNavigationItemLink}
+      textValue={group}
     >
       <GroupHeadingText>{group}</GroupHeadingText>
     </NavigationItem>

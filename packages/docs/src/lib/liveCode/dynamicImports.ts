@@ -2,7 +2,7 @@
 /* auto-generated file */
 import { ImportMapping } from "@/lib/liveCode/types";
 import { lazy } from "react";
-import { NavigationItem as I25 } from "@mittwald/flow-react-components/Navigation";
+import { NavigationItem as I26 } from "@mittwald/flow-react-components/Navigation";
 
 export const liveCodeEditorGlobalImports: ImportMapping = {
   "ExampleSvg:@/content/01-getting-started/stylesheet/examples/components/ExampleSvg": lazy(() => import("@/content/01-getting-started/stylesheet/examples/components/ExampleSvg").then(module => ({ default: module.ExampleSvg } ))),
@@ -29,8 +29,9 @@ export const liveCodeEditorGlobalImports: ImportMapping = {
 "Modal:@mittwald/flow-react-components/Modal": lazy(() => import("@mittwald/flow-react-components/Modal").then(module => ({ default: module.Modal } ))),
 "TextField:@mittwald/flow-react-components/TextField": lazy(() => import("@mittwald/flow-react-components/TextField").then(module => ({ default: module.TextField } ))),
 "DialogTrigger:@mittwald/flow-react-components/DialogTrigger": lazy(() => import("@mittwald/flow-react-components/DialogTrigger").then(module => ({ default: module.DialogTrigger } ))),
+"Title:@mittwald/flow-react-components/Title": lazy(() => import("@mittwald/flow-react-components/Title").then(module => ({ default: module.Title } ))),
 "Navigation:@mittwald/flow-react-components/Navigation": lazy(() => import("@mittwald/flow-react-components/Navigation").then(module => ({ default: module.Navigation } ))),
-"NavigationItem:@mittwald/flow-react-components/Navigation": I25,
+"NavigationItem:@mittwald/flow-react-components/Navigation": I26,
 "IconCustomer:@mittwald/flow-react-components/Icons": lazy(() => import("@mittwald/flow-react-components/Icons").then(module => ({ default: module.IconCustomer } ))),
 "IconProject:@mittwald/flow-react-components/Icons": lazy(() => import("@mittwald/flow-react-components/Icons").then(module => ({ default: module.IconProject } ))),
 "IconServer:@mittwald/flow-react-components/Icons": lazy(() => import("@mittwald/flow-react-components/Icons").then(module => ({ default: module.IconServer } ))),

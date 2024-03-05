@@ -11,8 +11,6 @@ export interface ModalProps
   panel?: boolean;
 }
 
-// ToDo: title slot
-
 export const Modal: FC<ModalProps> = (props) => {
   const { size = "s", panel, ...rest } = props;
 

@@ -36,6 +36,7 @@
     "./Text": "./dist/Text.js",
     "./TextArea": "./dist/TextArea.js",
     "./TextField": "./dist/TextField.js",
+    "./Title": "./dist/Title.js",
     "./Tooltip": "./dist/Tooltip.js",
     "./styles": "./dist/styles.css"
   },

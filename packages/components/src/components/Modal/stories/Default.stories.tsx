@@ -9,6 +9,7 @@ import { TextField } from "@/components/TextField";
 import { Label } from "@/components/Label";
 import { Content } from "@/components/Content";
 import { DialogTrigger } from "@/components/DialogTrigger";
+import { Title } from "@/components/Title";
 
 const meta: Meta<typeof Modal> = {
   title: "Overlays/Modal",
@@ -24,7 +25,7 @@ const meta: Meta<typeof Modal> = {
         </Button>
         <Modal {...props} isOpen={isOpen} onOpenChange={setOpen}>
           <Content>
-            <Heading>New Customer</Heading>
+            <Title>New Customer</Title>
             <Text>
               Create a new customer to manage your projects, members and
               payments.
@@ -60,7 +61,7 @@ export const WithDialogTrigger: Story = {
         {({ close }) => (
           <>
             <Content>
-              <Heading>Delete project</Heading>
+              <Title>Delete project</Title>
               <Text>Are you sure you want to delete this project?</Text>
             </Content>
             <ButtonGroup>
