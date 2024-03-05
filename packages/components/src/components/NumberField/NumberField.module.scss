@@ -1,4 +1,4 @@
-@use "@/styles/mixins/textInput.scss";
+@use "@/styles/mixins/formControl.scss";
 
 .group {
   order: 2;
@@ -10,7 +10,7 @@
 }
 
 .input {
-  @include textInput.textInput();
+  @include formControl.formControl();
   grid-area: input;
 }
 

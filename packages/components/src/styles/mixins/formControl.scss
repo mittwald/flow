@@ -12,8 +12,10 @@
   transition-property: color, background-color, border-color;
   transition-duration: var(--transition--duration--default);
 
+  order: 2;
+
   &::placeholder {
-    color: var(--form-controll--placeholder-color--default);
+    color: var(--form-control--placeholder-color--default);
   }
 
   /* Hovered */
@@ -29,8 +31,7 @@
   }
 
   /* Focused */
-  &[data-invalid]:focus-within:not([data-selected]),
-  &:focus-within:not([data-selected]) {
+  &:focus-within {
     border-color: var(--form-control--border-color--focused);
     background-color: var(--form-control--background-color--focused);
   }
@@ -54,7 +55,7 @@
     background-color: var(--form-control--background-color--disabled);
 
     &::placeholder {
-      color: var(--form-controll--placeholder-color--disabled);
+      color: var(--form-control--placeholder-color--disabled);
     }
   }
 }

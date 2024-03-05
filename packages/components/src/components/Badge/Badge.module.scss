@@ -1,3 +1,5 @@
+@use "@/styles/mixins/ellipsis";
+
 .badge {
   font-size: var(--badge--font-size);
   border-radius: var(--badge--corner-radius);
@@ -35,9 +37,7 @@
 }
 
 .content {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  @include ellipsis.ellipsis;
   grid-area: content;
 }
 
