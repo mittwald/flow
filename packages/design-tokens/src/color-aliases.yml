@@ -399,7 +399,7 @@ neutral-soft-content-color:
   hover:
     value: "{neutral.color.1000}"
   pressed:
-    value: "{neutral.color.1000}"
+    value: "{neutral.color.1100}"
 
 # Disabled Solid
 disabled-solid-background-color:
@@ -415,9 +415,9 @@ disabled-plain-content-color:
 
 # Disabled Soft
 disabled-soft-background-color:
-  value: "{neutral.color.200}"
+  value: "{neutral.color.300}"
 disabled-soft-content-color:
-  value: "{neutral.color.400}"
+  value: "{neutral.color.500}"
 
 # Focus
 focus-outline-color:
