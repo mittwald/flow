@@ -17,3 +17,10 @@
     grid-area: primary;
   }
 }
+
+@media (max-width: 550px) {
+  .buttonGroup {
+    display: flex;
+    flex-direction: column;
+  }
+}

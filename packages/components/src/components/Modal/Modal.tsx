@@ -1,19 +1,26 @@
 import * as Aria from "react-aria-components";
-import React, { FC, PropsWithChildren } from "react";
+import React, { FC, useContext } from "react";
 import styles from "./Modal.module.scss";
 import clsx from "clsx";
 import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
 
 export interface ModalProps
-  extends PropsWithChildren,
+  extends Pick<Aria.DialogProps, "children">,
     Omit<Aria.ModalOverlayProps, "children"> {
   size?: "s" | "m" | "l";
+  panel?: boolean;
 }
 
-export const Modal: FC<ModalProps> = (props) => {
-  const { children, size = "s", ...rest } = props;
+// ToDo: title slot
 
-  const rootClassName = clsx(styles.modal, styles[`size-${size}`]);
+export const Modal: FC<ModalProps> = (props) => {
+  const { size = "s", panel, ...rest } = props;
+
+  const rootClassName = clsx(
+    styles.modal,
+    styles[`size-${size}`],
+    panel && styles.panel,
+  );
 
   const propsContext: PropsContext = {
     Content: {
@@ -24,10 +31,19 @@ export const Modal: FC<ModalProps> = (props) => {
     },
   };
 
+  const state = useContext(Aria.OverlayTriggerStateContext);
+
+  let children = props.children;
+  if (typeof children === "function") {
+    children = children({
+      close: state?.close || (() => {}),
+    });
+  }
+
   return (
-    <Aria.ModalOverlay className={styles.overlay} {...rest}>
+    <Aria.ModalOverlay className={styles.overlay} {...rest} isDismissable>
       <Aria.Modal className={rootClassName}>
-        <Aria.Dialog>
+        <Aria.Dialog className={styles.dialog}>
           <PropsContextProvider props={propsContext}>
             {children}
           </PropsContextProvider>

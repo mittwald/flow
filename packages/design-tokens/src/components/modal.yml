@@ -3,6 +3,8 @@ modal:
     value: "{corner-radius.default}"
   padding:
     value: "{size-px.l}"
+  padding-bottom:
+    value: "{size-px.xl}"
   background-color:
     value: "{neutral.color.100}"
   overlay-background-color:

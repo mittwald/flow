@@ -8,6 +8,7 @@ import { Text } from "@/components/Text";
 import { TextField } from "@/components/TextField";
 import { Label } from "@/components/Label";
 import { Content } from "@/components/Content";
+import { DialogTrigger } from "@/components/DialogTrigger";
 
 const meta: Meta<typeof Modal> = {
   title: "Overlays/Modal",
@@ -18,7 +19,9 @@ const meta: Meta<typeof Modal> = {
 
     return (
       <>
-        <Button onPress={() => setOpen(true)}>Show modal</Button>
+        <Button variant="accent" onPress={() => setOpen(true)}>
+          Create customer
+        </Button>
         <Modal {...props} isOpen={isOpen} onOpenChange={setOpen}>
           <Content>
             <Heading>New Customer</Heading>
@@ -47,4 +50,38 @@ export default meta;
 
 type Story = StoryObj<typeof Modal>;
 
-export const Default: Story = {};
+export const WithState: Story = {};
+
+export const WithDialogTrigger: Story = {
+  render: (props) => (
+    <DialogTrigger>
+      <Button variant="danger">Delete project</Button>
+      <Modal {...props}>
+        {({ close }) => (
+          <>
+            <Content>
+              <Heading>Delete project</Heading>
+              <Text>Are you sure you want to delete this project?</Text>
+            </Content>
+            <ButtonGroup>
+              <Button variant="secondary" onPress={close}>
+                Abort
+              </Button>
+              <Button variant="danger" onPress={close}>
+                Delete project
+              </Button>
+            </ButtonGroup>
+          </>
+        )}
+      </Modal>
+    </DialogTrigger>
+  ),
+};
+
+export const Mobile: Story = {
+  parameters: { viewport: { defaultViewport: "mobile1" } },
+};
+
+export const Panel: Story = {
+  args: { panel: true },
+};

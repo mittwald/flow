@@ -2,19 +2,27 @@
   border-radius: var(--modal--corner-radius);
   background: var(--modal--background-color);
   max-height: calc(100vh - var(--size-px--xxl));
+  max-width: calc(100vw - var(--size-px--xxl));
   overflow: hidden;
 
   @extend .size-s;
 
-  [role="dialog"] {
-    padding: var(--modal--padding);
-    overflow: hidden;
-    outline: none;
-    display: grid;
-    grid-template-areas:
-      "content"
-      "buttonGroup";
+  &[data-entering] {
+    animation: modal-zoom 300ms cubic-bezier(0.1, 0.8, 0.3, 1.2);
   }
+}
+
+.dialog {
+  padding: var(--modal--padding);
+  overflow: hidden;
+  outline: none;
+  display: grid;
+  grid-template-areas:
+    "content"
+    "buttonGroup";
+  grid-template-rows: 1fr auto;
+  height: 100%;
+  max-height: inherit;
 }
 
 .overlay {
@@ -27,6 +35,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  &[data-entering] {
+    animation: modal-fade 200ms;
+  }
+
+  &[data-exiting] {
+    animation: modal-fade 150ms reverse ease-in;
+  }
 }
 
 .buttonGroup {
@@ -38,10 +54,12 @@
 .content {
   grid-area: content;
   overflow: scroll;
-  padding-bottom: var(--modal--padding);
-  display: flex;
-  flex-direction: column;
-  row-gap: var(--section--content-to-content-spacing);
+  padding-bottom: var(--modal--padding-bottom);
+  &:not(:has(:global(.flow--section))) {
+    display: flex;
+    flex-direction: column;
+    row-gap: var(--section--content-to-content-spacing);
+  }
 }
 
 /* Sizes */
@@ -54,3 +72,79 @@
 @include size(s);
 @include size(m);
 @include size(l);
+
+/* Panel */
+
+@media (min-width: 550px) {
+  .overlay:has(.panel) {
+    justify-content: flex-end;
+  }
+  .panel {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    height: 100%;
+    max-height: 100%;
+
+    &[data-entering] {
+      animation: modal-slide-in 300ms;
+    }
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 550px) {
+  .overlay {
+    align-items: flex-end;
+  }
+  .modal {
+    width: 100%;
+    max-width: 100%;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+
+    &[data-entering] {
+      animation: modal-slide-up 300ms;
+    }
+  }
+}
+
+@keyframes modal-fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modal-zoom {
+  from {
+    transform: scale(0.8);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes modal-slide-up {
+  from {
+    margin-bottom: -100px;
+  }
+
+  to {
+    margin-bottom: 0;
+  }
+}
+
+@keyframes modal-slide-in {
+  from {
+    margin-right: -100px;
+  }
+
+  to {
+    margin-right: 0;
+  }
+}
