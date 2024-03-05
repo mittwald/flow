@@ -13,9 +13,6 @@ const meta: Meta<typeof Switch> = {
     controls: { exclude: ["onChange"] },
   },
   argTypes: {
-    variant: {
-      control: "inline-radio",
-    },
     labelPosition: {
       control: "inline-radio",
     },
