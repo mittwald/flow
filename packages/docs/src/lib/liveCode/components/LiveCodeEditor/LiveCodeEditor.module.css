@@ -1,7 +1,7 @@
 .root {
   --border-color: var(--neutral--color--400);
   border: 1px solid var(--border-color);
-  border-radius: var(--border-radius--default);
+  border-radius: var(--corner-radius--default);
 }
 
 .preview {
