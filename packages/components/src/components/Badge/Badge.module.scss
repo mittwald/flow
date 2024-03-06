@@ -1,7 +1,5 @@
 .badge {
-  color: var(--badge--color);
   font-size: var(--badge--font-size);
-  background-color: var(--badge--info-background-color);
   border-radius: var(--badge--corner-radius);
   padding-block: var(--badge--padding-y);
   padding-inline: var(--badge--padding-x);
@@ -46,6 +44,7 @@
 /* Variants */
 @mixin variant($variant) {
   .#{$variant} {
+    color: var(--badge--#{$variant}-content-color);
     background-color: var(--badge--#{$variant}-background-color);
   }
 }

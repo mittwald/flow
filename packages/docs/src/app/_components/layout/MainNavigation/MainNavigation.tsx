@@ -1,5 +1,5 @@
 "use client";
-import React, { FC, Fragment, ReactElement, useId } from "react";
+import React, { FC, Fragment, useId } from "react";
 import Navigation, {
   NavigationItem,
 } from "@mittwald/flow-react-components/Navigation";
@@ -7,9 +7,9 @@ import Heading from "@mittwald/flow-react-components/Heading";
 import { usePathname } from "next/navigation";
 import styles from "./MainNavigation.module.scss";
 import { MdxFile, SerializedMdxFile } from "@/lib/mdx/MdxFile";
-import { NextJsNavigationItemLink } from "@/app/_components/layout/MainNavigation/NextJsNavigationItemLink";
 import { groupBy } from "remeda";
 import { GroupHeadingText } from "@/app/_components/layout/MainNavigation/components/GroupHeadingText";
+import { NextJsNavigationItemLink } from "@/app/_components/layout/MainNavigation/NextJsNavigationItemLink";
 
 interface Props {
   docs: SerializedMdxFile[];
@@ -22,31 +22,32 @@ const MainNavigation: FC<Props> = (props) => {
 
   const headingComponentsId = useId();
   const currentPathname = usePathname();
+  const currentGroupName = currentPathname.split("/")[1];
+  const currentNavGroup = navGroups[currentGroupName];
 
-  const navItem = (mdx: MdxFile): ReactElement => {
-    const href = mdx.pathname;
-    return (
+  const navigationItems =
+    currentNavGroup &&
+    Object.entries(currentNavGroup).map(([, mdxFile]) => (
       <NavigationItem
-        key={href}
-        href={href}
-        isCurrent={href === currentPathname}
+        key={mdxFile.pathname}
+        href={mdxFile.pathname}
+        isCurrent={mdxFile.pathname === currentPathname}
         linkComponent={NextJsNavigationItemLink}
       >
-        {mdx.getNavTitle()}
+        {mdxFile.getNavTitle()}
       </NavigationItem>
-    );
-  };
+    ));
 
-  return Object.entries(navGroups).map(([group, mdxFiles]) => (
-    <Fragment key={group}>
+  return (
+    <Fragment>
       <Heading level={4} id={headingComponentsId} className={styles.heading}>
-        <GroupHeadingText>{group}</GroupHeadingText>
+        <GroupHeadingText>{currentGroupName}</GroupHeadingText>
       </Heading>
       <Navigation aria-labelledby={headingComponentsId}>
-        {mdxFiles.map(navItem)}
+        {navigationItems}
       </Navigation>
     </Fragment>
-  ));
+  );
 };
 
 export default MainNavigation;
