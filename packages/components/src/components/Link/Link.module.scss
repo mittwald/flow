@@ -5,6 +5,7 @@
   transition-duration: var(--transition--duration--default);
   outline-color: var(--link--focus-outline-color);
   outline-offset: var(--link--focus-outline-offset);
+  outline-width: var(--link--focus-outline-width);
 
   &[aria-disabled] {
     color: var(--link--disabled-color);
