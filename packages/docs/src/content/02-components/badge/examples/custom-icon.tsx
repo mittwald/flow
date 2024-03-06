@@ -1,9 +1,8 @@
 import Badge from "@mittwald/flow-react-components/Badge";
-import { Text } from "@mittwald/flow-react-components/Text";
-import Icon from "@mittwald/flow-react-components/Icon";
-import { faCirclePlay } from "@fortawesome/free-solid-svg-icons/faCirclePlay";
+import Text from "@mittwald/flow-react-components/Text";
+import { IconEmail } from "@mittwald/flow-react-components/Icons";
 
 <Badge>
-  <Icon faIcon={faCirclePlay} />
-  <Text>Info</Text>
+  <IconEmail />
+  <Text>New email</Text>
 </Badge>;

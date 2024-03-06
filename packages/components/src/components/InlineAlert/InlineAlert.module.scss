@@ -1,0 +1,57 @@
+.inlineAlert {
+  border-radius: var(--inline-alert--corner-radius);
+  border-width: var(--inline-alert--border-width);
+  border-style: var(--inline-alert--border-style);
+  border-inline-start-width: var(--inline-alert--border-x-start-width);
+  padding: var(--inline-alert--padding);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-column-gap: var(--inline-alert--icon-to-text-spacing);
+  grid-row-gap: var(--inline-alert--text-to-text-spacing);
+  width: 100%;
+
+  @extend .info;
+
+  /* Without content */
+  &:not(:has(.content)) {
+    grid-template-areas: "icon heading";
+  }
+
+  /* With content */
+  &:has(.content) {
+    grid-template-areas:
+      "icon heading"
+      ".    content";
+  }
+}
+
+/* Elements */
+.statusIcon {
+  grid-area: icon;
+}
+
+.heading {
+  grid-area: heading;
+  font-size: var(--inline-alert--heading-font-size);
+}
+
+.content {
+  grid-area: content;
+}
+
+/* Variants */
+@mixin variant($variant) {
+  .#{$variant} {
+    border-color: var(--inline-alert--#{$variant}-border-color);
+
+    .heading,
+    .statusIcon {
+      color: var(--inline-alert--#{$variant}-heading-color);
+    }
+  }
+}
+
+@include variant(info);
+@include variant(warning);
+@include variant(danger);
+@include variant(success);

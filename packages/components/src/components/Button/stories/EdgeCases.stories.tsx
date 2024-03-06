@@ -15,13 +15,3 @@ type Story = StoryObj<typeof Button>;
 export const LongText: Story = {
   render: (props) => <Button {...props}>{dummyText.long}</Button>,
 };
-
-export const WithBreak: Story = {
-  render: (props) => (
-    <Button {...props}>
-      Line 1
-      <br />
-      Line 2
-    </Button>
-  ),
-};

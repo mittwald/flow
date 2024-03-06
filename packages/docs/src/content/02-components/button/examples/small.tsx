@@ -1,3 +1,3 @@
 import Button from "@mittwald/flow-react-components/Button";
 
-<Button small>Small Button</Button>;
+<Button size="s">Continue/Action</Button>;

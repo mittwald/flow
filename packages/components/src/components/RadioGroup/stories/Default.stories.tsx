@@ -2,10 +2,9 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Radio, RadioGroup } from "../index";
 import React from "react";
 import { Content } from "@/components/Content";
-import { faStar } from "@fortawesome/free-regular-svg-icons/faStar";
 import { Label } from "@/components/Label";
 import { Text } from "@/components/Text";
-import { Icon } from "@/components/Icon";
+import { IconApp, IconDomain } from "@/components/Icon/components/icons";
 import { action } from "@storybook/addon-actions";
 import { FieldError } from "@/components/FieldError";
 
@@ -58,15 +57,15 @@ export const WithIcon: Story = {
     <RadioGroup {...props} defaultValue="wordpress">
       <Label>App</Label>
       <Radio value="wordpress">
-        <Icon faIcon={faStar} />
+        <IconApp />
         <Text>WordPress</Text>
       </Radio>
       <Radio value="typo3">
-        <Icon faIcon={faStar} />
+        <IconApp />
         <Text>TYPO3</Text>
       </Radio>
       <Radio value="magento">
-        <Icon faIcon={faStar} />
+        <IconApp />
         <Text>Magento</Text>
       </Radio>
     </RadioGroup>
@@ -104,7 +103,7 @@ export const WithIconAndContent: Story = {
   render: (props) => (
     <RadioGroup {...props} defaultValue="proSpace" aria-label="Project">
       <Radio value="proSpace">
-        <Icon faIcon={faStar} />
+        <IconDomain />
         <Text>proSpace</Text>
         <Content>
           The proSpace guarantees your project its own resources, also dedicated
@@ -112,7 +111,7 @@ export const WithIconAndContent: Story = {
         </Content>
       </Radio>
       <Radio value="spaceServer">
-        <Icon faIcon={faStar} />
+        <IconDomain />
         <Text>Space-Server</Text>
         <Content>
           On the Space-Server, this project shares resources with all projects
@@ -128,15 +127,15 @@ export const WithFieldError: Story = {
     <RadioGroup {...props} isInvalid>
       <Label>App</Label>
       <Radio value="wordpress">
-        <Icon faIcon={faStar} />
+        <IconApp />
         <Text>WordPress</Text>
       </Radio>
       <Radio value="typo3">
-        <Icon faIcon={faStar} />
+        <IconApp />
         <Text>TYPO3</Text>
       </Radio>
       <Radio value="magento">
-        <Icon faIcon={faStar} />
+        <IconApp />
         <Text>Magento</Text>
       </Radio>
       <FieldError>Select an app to continue</FieldError>

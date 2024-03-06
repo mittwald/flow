@@ -1,9 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import { faUser } from "@fortawesome/free-regular-svg-icons";
-import { faHardDrive } from "@fortawesome/free-regular-svg-icons/faHardDrive";
-import { faStar } from "@fortawesome/free-regular-svg-icons/faStar";
-import { Icon } from "@/components/Icon";
+import {
+  IconCustomer,
+  IconProject,
+  IconServer,
+} from "@/components/Icon/components/icons";
 import { Text } from "@/components/Text";
 import { Navigation, NavigationItem } from "@/components/Navigation";
 import { Skeleton } from "@/components/Skeleton";
@@ -36,17 +37,17 @@ export const Default: Story = {
 export const WithIcons: Story = {
   render: (props) => (
     <Navigation aria-label="Main menu" {...props}>
-      <NavigationItem textValue="Address">
-        <Icon faIcon={faStar} />
-        <Text>Address</Text>
+      <NavigationItem textValue="Customer">
+        <IconCustomer />
+        <Text>Customer</Text>
       </NavigationItem>
-      <NavigationItem textValue="Profile" isCurrent>
-        <Icon faIcon={faUser} />
-        <Text>Profile</Text>
+      <NavigationItem textValue="Server" isCurrent>
+        <IconServer />
+        <Text>Server</Text>
       </NavigationItem>
-      <NavigationItem textValue="Storage">
-        <Icon faIcon={faHardDrive} />
-        <Text>Storage</Text>
+      <NavigationItem textValue="Project">
+        <IconProject />
+        <Text>Project</Text>
       </NavigationItem>
     </Navigation>
   ),

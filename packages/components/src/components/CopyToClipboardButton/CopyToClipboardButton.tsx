@@ -1,8 +1,7 @@
 import React, { FC, ReactNode } from "react";
 import copy from "copy-to-clipboard";
 import { Button, ButtonProps } from "@/components/Button";
-import { Icon } from "@/components/Icon";
-import { faCopy } from "@fortawesome/free-regular-svg-icons/faCopy";
+import { IconCopy } from "@/components/Icon/components/icons";
 import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 import { Tooltip, TooltipTrigger } from "@/components/Tooltip";
@@ -30,7 +29,7 @@ export const CopyToClipboardButton: FC<CopyToClipboardButtonProps> = (
   return (
     <TooltipTrigger>
       <Button onPress={copyValue} aria-label={tooltip} {...buttonProps}>
-        <Icon faIcon={faCopy} />
+        <IconCopy />
       </Button>
       <Tooltip>{tooltip}</Tooltip>
     </TooltipTrigger>
