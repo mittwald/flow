@@ -25,9 +25,14 @@ const MainNavigation: FC<Props> = (props) => {
   const currentGroupName = currentPathname.split("/")[1];
   const currentNavGroup = navGroups[currentGroupName];
 
-  const navigationItems =
-    currentNavGroup &&
-    Object.entries(currentNavGroup).map(([, mdxFile]) => (
+  const hasSubGroups = currentPathname.split("/").length >= 4;
+
+  const navSubGroups = hasSubGroups
+    ? groupBy(currentNavGroup, (d) => d.pathname.split("/")[2])
+    : undefined;
+
+  const navigationItems = (mdx: [MdxFile, ...MdxFile[]]) =>
+    Object.entries(mdx).map(([, mdxFile]) => (
       <NavigationItem
         key={mdxFile.pathname}
         href={mdxFile.pathname}
@@ -38,14 +43,29 @@ const MainNavigation: FC<Props> = (props) => {
       </NavigationItem>
     ));
 
+  const navigation = navSubGroups ? (
+    Object.entries(navSubGroups).map(([group, mdxFiles]) => (
+      <Fragment key={group}>
+        <Heading level={4} id={headingComponentsId} className={styles.heading}>
+          <GroupHeadingText>{group}</GroupHeadingText>
+        </Heading>
+        <Navigation aria-labelledby={headingComponentsId}>
+          {navigationItems(mdxFiles)}
+        </Navigation>
+      </Fragment>
+    ))
+  ) : (
+    <Navigation aria-labelledby={headingComponentsId}>
+      {navigationItems(currentNavGroup)}
+    </Navigation>
+  );
+
   return (
     <Fragment>
-      <Heading level={4} id={headingComponentsId} className={styles.heading}>
+      <Heading level={2} id={headingComponentsId} className={styles.heading}>
         <GroupHeadingText>{currentGroupName}</GroupHeadingText>
       </Heading>
-      <Navigation aria-labelledby={headingComponentsId}>
-        {navigationItems}
-      </Navigation>
+      {navigation}
     </Fragment>
   );
 };
