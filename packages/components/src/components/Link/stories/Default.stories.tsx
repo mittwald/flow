@@ -27,6 +27,8 @@ type Story = StoryObj<typeof Link>;
 
 export const Default: Story = {};
 
+export const Disabled: Story = { args: { isDisabled: true } };
+
 export const Danger: Story = {
   args: { variant: "danger" },
   render: (props) => <Link {...props}>Delete project</Link>,

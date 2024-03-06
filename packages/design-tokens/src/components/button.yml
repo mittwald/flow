@@ -27,6 +27,8 @@ button:
     value: "{size-px.s}"
   padding-small-squished-y:
     value: "{size-px.xs}"
+  font-size-small:
+    value: "{font-size.s}"
 
   # Accent Solid
   accent-solid-background-color:
