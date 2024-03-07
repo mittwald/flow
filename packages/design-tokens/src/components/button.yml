@@ -21,13 +21,13 @@ button:
     value: "{danger.color.700}"
 
   # Small
-  padding-small:
+  padding-s:
     value: "{size-px.xs}"
-  padding-small-squished-x:
+  padding-s-squished-x:
     value: "{size-px.s}"
-  padding-small-squished-y:
+  padding-s-squished-y:
     value: "{size-px.xs}"
-  font-size-small:
+  font-size-s:
     value: "{font-size.s}"
 
   # Accent Solid

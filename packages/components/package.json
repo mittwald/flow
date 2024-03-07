@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-react-components",
-  "version": "0.1.0-alpha.22",
+  "version": "0.1.0-alpha.23",
   "type": "module",
   "description": "A React implementation of Flow, mittwald’s design system",
   "homepage": "https://mittwald.github.io/flow",
@@ -10,7 +10,6 @@
     "./Button": "./dist/Button.js",
     "./Checkbox": "./dist/Checkbox.js",
     "./Content": "./dist/Content.js",
-    "./LayoutCard": "./dist/LayoutCard.js",
     "./CopyToClipboardButton": "./dist/CopyToClipboardButton.js",
     "./FieldDescription": "./dist/FieldDescription.js",
     "./FieldError": "./dist/FieldError.js",
@@ -22,6 +21,7 @@
     "./InlineAlert": "./dist/InlineAlert.js",
     "./Label": "./dist/Label.js",
     "./LabeledValue": "./dist/LabeledValue.js",
+    "./LayoutCard": "./dist/LayoutCard.js",
     "./Link": "./dist/Link.js",
     "./Navigation": "./dist/Navigation.js",
     "./NumberField": "./dist/NumberField.js",

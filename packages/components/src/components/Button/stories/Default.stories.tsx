@@ -5,7 +5,7 @@ import { IconPlus } from "@/components/Icon/components/icons";
 import { action } from "@storybook/addon-actions";
 
 const meta: Meta<typeof Button> = {
-  title: "Buttons/Button",
+  title: "Actions/Button",
   component: Button,
   args: {
     onPress: action("onPress"),
