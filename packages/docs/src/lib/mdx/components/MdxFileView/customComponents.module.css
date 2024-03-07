@@ -12,10 +12,6 @@
   margin: 0.5em 0;
 }
 
-h3 .p {
-  margin: 0;
-}
-
 .liveCodeEditor,
 .pre {
   margin: 1em 0;
@@ -42,8 +38,9 @@ h3 .p {
 
 .preCopyButton {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: calc(-1 * var(--size-px--s));
+  right: calc(-1 * var(--size-px--s));
+  background: var(--neutral--color--100);
 }
 
 .ul {
