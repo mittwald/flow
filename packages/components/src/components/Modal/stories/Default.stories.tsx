@@ -34,7 +34,11 @@ const meta: Meta<typeof Modal> = {
             </TextField>
           </Content>
           <ButtonGroup>
-            <Button variant="secondary" onPress={() => setOpen(false)}>
+            <Button
+              variant="secondary"
+              style="soft"
+              onPress={() => setOpen(false)}
+            >
               Abort
             </Button>
             <Button variant="accent" onPress={() => setOpen(false)}>
@@ -64,7 +68,7 @@ export const WithDialogTrigger: Story = {
               <Text>Are you sure you want to delete this project?</Text>
             </Content>
             <ButtonGroup>
-              <Button variant="secondary" onPress={close}>
+              <Button style="soft" variant="secondary" onPress={close}>
                 Abort
               </Button>
               <Button variant="danger" onPress={close}>

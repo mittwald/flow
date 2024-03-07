@@ -8,7 +8,6 @@ import { Section } from "@/components/Section";
 import { Text } from "@/components/Text";
 import { ButtonGroup } from "@/components/ButtonGroup";
 import { dummyText } from "@/lib/dev/dummyText";
-import { Heading } from "@/components/Heading";
 import Title from "@/components/Title";
 
 const meta: Meta<typeof Modal> = {
@@ -49,7 +48,11 @@ export const LongContent: Story = {
             </Section>
           </Content>
           <ButtonGroup>
-            <Button variant="secondary" onPress={() => setOpen(false)}>
+            <Button
+              style="soft"
+              variant="secondary"
+              onPress={() => setOpen(false)}
+            >
               Abort
             </Button>
             <Button variant="accent" onPress={() => setOpen(false)}>

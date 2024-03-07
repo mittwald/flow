@@ -24,7 +24,11 @@ import Title from "@mittwald/flow-react-components/Title";
           </TextField>
         </Content>
         <ButtonGroup>
-          <Button variant="secondary" onPress={close}>
+          <Button
+            style="soft"
+            variant="secondary"
+            onPress={close}
+          >
             Abort
           </Button>
           <Button variant="accent" onPress={close}>

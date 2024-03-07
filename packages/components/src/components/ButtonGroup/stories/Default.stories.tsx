@@ -8,7 +8,9 @@ const meta: Meta<typeof ButtonGroup> = {
   component: ButtonGroup,
   render: (props) => (
     <ButtonGroup {...props}>
-      <Button variant="secondary">Abort</Button>
+      <Button style="soft" variant="secondary">
+        Abort
+      </Button>
       <Button variant="accent">Create customer</Button>
     </ButtonGroup>
   ),
@@ -23,7 +25,9 @@ export const Default: Story = {};
 export const Danger: Story = {
   render: (props) => (
     <ButtonGroup {...props}>
-      <Button variant="secondary">Abort</Button>
+      <Button style="soft" variant="secondary">
+        Abort
+      </Button>
       <Button variant="danger">Delete project</Button>
     </ButtonGroup>
   ),
@@ -40,8 +44,12 @@ export const Info: Story = {
 export const AdditionalSecondary: Story = {
   render: (props) => (
     <ButtonGroup {...props}>
-      <Button variant="secondary">Abort</Button>
-      <Button variant="secondary">Save and add more</Button>
+      <Button style="soft" variant="secondary">
+        Abort
+      </Button>
+      <Button style="soft" variant="secondary">
+        Save and add more
+      </Button>
       <Button variant="accent">Add email address</Button>
     </ButtonGroup>
   ),
