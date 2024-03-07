@@ -5,7 +5,7 @@
 }
 
 .heading {
-  font-family: "MW-Flow-PageTitle", sans-serif;
+  font-family: "ProximaNova", sans-serif;
   color: var(--heading--color);
 }
 
@@ -15,3 +15,9 @@
 @include level(4);
 @include level(5);
 @include level(6);
+
+@media (max-width: 550px) {
+  h1 {
+    font-size: var(--heading--h1-font-size-mobile);
+  }
+}
