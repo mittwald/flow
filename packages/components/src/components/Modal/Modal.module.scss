@@ -1,7 +1,7 @@
 .modal {
   border-radius: var(--modal--corner-radius);
   background: var(--modal--background-color);
-  max-height: calc(100vh - var(--size-px--xxl));
+  max-height: calc(100dvh - var(--size-px--xxl));
   max-width: calc(100vw - var(--size-px--xxl));
   overflow: hidden;
 
@@ -95,17 +95,24 @@
 
 @media (max-width: 550px) {
   .overlay {
-    align-items: flex-end;
+    overflow-y: scroll;
+    padding-top: var(--size-px--xxl);
   }
   .modal {
+    margin-top: auto;
     width: 100%;
     max-width: 100%;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
+    max-height: max-content;
 
     &[data-entering] {
       animation: modal-slide-up 300ms;
     }
+  }
+
+  .content {
+    overflow: visible;
   }
 }
 
