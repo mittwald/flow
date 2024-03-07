@@ -19,7 +19,6 @@ export default defineConfig(
           Button: "./src/components/Button/index.ts",
           Checkbox: "./src/components/Checkbox/index.ts",
           Content: "./src/components/Content/index.ts",
-          LayoutCard: "./src/components/LayoutCard/index.ts",
           CopyToClipboardButton:
             "./src/components/CopyToClipboardButton/index.ts",
           FieldDescription: "./src/components/FieldDescription/index.ts",
@@ -32,6 +31,7 @@ export default defineConfig(
           InlineAlert: "./src/components/InlineAlert/index.ts",
           Label: "./src/components/Label/index.ts",
           LabeledValue: "./src/components/LabeledValue/index.ts",
+          LayoutCard: "./src/components/LayoutCard/index.ts",
           Link: "./src/components/Link/index.ts",
           Navigation: "./src/components/Navigation/index.ts",
           NumberField: "./src/components/NumberField/index.ts",

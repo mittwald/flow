@@ -8,7 +8,7 @@ import IconChevronDown from "../../Icon/components/icons/IconChevronDown";
 
 const meta: Meta<typeof Button> = {
   ...defaultMeta,
-  title: "Buttons/Button/States",
+  title: "Actions/Button/States",
   render: (props) => (
     <Button {...props}>
       <Text>Add email address</Text>
