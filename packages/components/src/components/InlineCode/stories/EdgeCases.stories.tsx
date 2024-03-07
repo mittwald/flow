@@ -13,7 +13,7 @@ export default meta;
 
 type Story = StoryObj<typeof InlineCode>;
 
-export const Default: Story = {
+export const LongText: Story = {
   render: (props) => (
     <Text>
       {dummyText.medium} <InlineCode {...props}>{dummyText.medium}</InlineCode>{" "}
