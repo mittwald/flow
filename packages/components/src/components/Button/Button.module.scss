@@ -47,12 +47,12 @@
 }
 
 .size-s {
-  font-size: var(--button--font-size-small);
-  padding-block: var(--button--padding-small-squished-y);
-  padding-inline: var(--button--padding-small-squished-x);
+  font-size: var(--button--font-size-s);
+  padding-block: var(--button--padding-s-squished-y);
+  padding-inline: var(--button--padding-s-squished-x);
 
   &:has(.icon) {
-    padding: var(--button--padding-small);
+    padding: var(--button--padding-s);
   }
 }
 

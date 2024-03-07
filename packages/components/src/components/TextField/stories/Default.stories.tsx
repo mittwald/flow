@@ -9,7 +9,7 @@ import { Button } from "@/components/Button";
 import { FieldError } from "@/components/FieldError";
 
 const meta: Meta<typeof TextField> = {
-  title: "Forms/TextField",
+  title: "Form Controls/TextField",
   component: TextField,
   render: (props) => (
     <TextField onChange={action("onChange")} {...props}>

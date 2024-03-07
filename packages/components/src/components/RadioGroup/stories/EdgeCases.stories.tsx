@@ -8,7 +8,7 @@ import { dummyText } from "@/lib/dev/dummyText";
 import defaultMeta from "./Default.stories";
 
 const meta: Meta<typeof RadioGroup> = {
-  title: "Forms/RadioGroup/Edge Cases",
+  title: "Form Controls/RadioGroup/Edge Cases",
   ...defaultMeta,
 };
 
