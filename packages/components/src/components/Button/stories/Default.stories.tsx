@@ -7,7 +7,7 @@ import { Text } from "@/components/Text";
 import IconChevronDown from "@/components/Icon/components/icons/IconChevronDown";
 
 const meta: Meta<typeof Button> = {
-  title: "Buttons/Button",
+  title: "Actions/Button",
   component: Button,
   args: {
     onPress: action("onPress"),

@@ -1,7 +1,7 @@
 import Navigation, {
   NavigationItem,
 } from "@mittwald/flow-react-components/Navigation";
-import { Text } from "@mittwald/flow-react-components/Text";
+import Text from "@mittwald/flow-react-components/Text";
 import {
   IconCustomer,
   IconProject,

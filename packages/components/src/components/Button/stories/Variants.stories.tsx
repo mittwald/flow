@@ -5,7 +5,7 @@ import React from "react";
 
 const meta: Meta<typeof Button> = {
   ...defaultMeta,
-  title: "Buttons/Button/Variants",
+  title: "Actions/Button/Variants",
 };
 
 export default meta;
@@ -25,6 +25,13 @@ export const PrimaryPlain: Story = {
   },
 };
 
+export const PrimarySoft: Story = {
+  args: {
+    variant: "primary",
+    style: "soft",
+  },
+};
+
 export const AccentSolid: Story = {
   args: {
     variant: "accent",
@@ -36,6 +43,14 @@ export const AccentPlain: Story = {
   args: {
     variant: "accent",
     style: "plain",
+  },
+  render: (props) => <Button {...props}>Create/Save</Button>,
+};
+
+export const AccentSoft: Story = {
+  args: {
+    variant: "accent",
+    style: "soft",
   },
   render: (props) => <Button {...props}>Create/Save</Button>,
 };
@@ -55,6 +70,14 @@ export const SecondaryPlain: Story = {
   render: (props) => <Button {...props}>Abort/Back</Button>,
 };
 
+export const SecondarySoft: Story = {
+  args: {
+    variant: "secondary",
+    style: "soft",
+  },
+  render: (props) => <Button {...props}>Abort/Back</Button>,
+};
+
 export const DangerSolid: Story = {
   args: {
     variant: "danger",
@@ -66,6 +89,14 @@ export const DangerPlain: Story = {
   args: {
     variant: "danger",
     style: "plain",
+  },
+  render: (props) => <Button {...props}>Delete/Terminate</Button>,
+};
+
+export const DangerSoft: Story = {
+  args: {
+    variant: "danger",
+    style: "soft",
   },
   render: (props) => <Button {...props}>Delete/Terminate</Button>,
 };

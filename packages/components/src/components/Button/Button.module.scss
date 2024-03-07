@@ -8,20 +8,18 @@
   padding-block: var(--button--padding-squished-y);
   padding-inline: var(--button--padding-squished-x);
   font-size: var(--font-size--default);
+  line-height: var(--line-height--default);
   font-weight: bold;
   transition-property: color, background-color;
   transition-duration: var(--transition--duration--default);
   outline-color: var(--button--focus-outline-color);
   outline-offset: var(--button--focus-outline-offset);
   max-width: 100%;
-  display: flex;
-  align-items: center;
-  column-gap: var(--button--text-to-icon-spacing);
 
   @extend .primary;
   @extend .solid;
 
-  &:has(.icon):not(:has(.text)) {
+  &:has(.icon) {
     padding: var(--button--padding);
   }
 
@@ -31,10 +29,6 @@
     align-items: center;
     grid-template-areas: "content";
   }
-}
-
-.content {
-  display: flex;
 }
 
 .content,
@@ -56,9 +50,8 @@
   font-size: var(--button--font-size-s);
   padding-block: var(--button--padding-s-squished-y);
   padding-inline: var(--button--padding-s-squished-x);
-  column-gap: var(--button--text-to-icon-spacing-s);
 
-  &:has(.icon):not(:has(.text)) {
+  &:has(.icon) {
     padding: var(--button--padding-s);
   }
 }
@@ -87,7 +80,7 @@
     visibility: hidden;
   }
   &.plain {
-    .content:has(.text) {
+    .content:not(:has(.icon)) {
       visibility: visible;
     }
   }
@@ -130,3 +123,7 @@
 @include variant(accent, plain);
 @include variant(danger, plain);
 @include variant(secondary, plain);
+@include variant(primary, soft);
+@include variant(accent, soft);
+@include variant(danger, soft);
+@include variant(secondary, soft);

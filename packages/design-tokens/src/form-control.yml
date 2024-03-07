@@ -13,28 +13,43 @@ form-control:
     value: "{border-width.100}"
   border-style:
     value: "{border-style.default}"
+
+  placeholder-color:
+    default:
+      value: "{neutral.color.900}"
+    disabled:
+      value: "{neutral.color.500}"
+
   border-color:
     default:
-      value: "{neutral.color.400}"
+      value: "{neutral-outline-border-color}"
     disabled:
-      value: "{neutral.color.500}"
+      value: "{disabled-outline-border-color}"
     hover:
-      value: "{neutral.color.600}"
+      value: "{neutral-outline-border-color}"
     invalid:
-      value: "{danger.color.700}"
+      value: "{danger-outline-border-color}"
     focused:
-      value: "{info.color.700}"
+      value: "{info-outline-border-color}"
+    selected:
+      value: "{info-outline-border-color}"
+
   background-color:
     default:
-      value: "{neutral.color.400}"
+      value: "{neutral.color.200}"
     disabled:
-      value: "{neutral.color.500}"
+      value: "{disabled-outline-background-color}"
     hover:
-      value: "{neutral.color.500}"
+      value: "{info-outline-background-color.hover}"
     focused:
-      value: "{neutral.color.100}"
+      value: "{neutral-outline-background-color}"
     invalid:
-      value: "{danger.color.100}"
-  color:
+      value: "{danger-outline-background-color.hover}"
+    selected:
+      value: "{info-outline-background-color.pressed}"
+
+  content-color:
     disabled:
-      value: "{neutral.color.800}"
+      value: "{disabled-outline-content-color}"
+    selected:
+      value: "{info-outline-content-color}"
