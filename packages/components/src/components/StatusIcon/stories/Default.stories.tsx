@@ -5,7 +5,7 @@ const meta: Meta<typeof StatusIcon> = {
   title: "Status/StatusIcon",
   component: StatusIcon,
   argTypes: {
-    variant: {
+    status: {
       control: "inline-radio",
     },
   },
@@ -19,17 +19,17 @@ export default meta;
 type Story = StoryObj<typeof StatusIcon>;
 
 export const Info: Story = {
-  args: { variant: "info" },
+  args: { status: "info" },
 };
 
 export const Success: Story = {
-  args: { variant: "success" },
+  args: { status: "success" },
 };
 
 export const Warning: Story = {
-  args: { variant: "warning" },
+  args: { status: "warning" },
 };
 
 export const Danger: Story = {
-  args: { variant: "danger" },
+  args: { status: "danger" },
 };

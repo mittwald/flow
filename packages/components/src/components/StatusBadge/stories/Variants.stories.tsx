@@ -1,38 +1,38 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Badge from "../Badge";
+import StatusBadge from "../StatusBadge";
 import defaultMeta from "./Default.stories";
 import React from "react";
 
-const meta: Meta<typeof Badge> = {
+const meta: Meta<typeof StatusBadge> = {
   ...defaultMeta,
-  title: "Status/Badge/Variants",
+  title: "Status/StatusBadge/Status",
 };
 export default meta;
 
-type Story = StoryObj<typeof Badge>;
+type Story = StoryObj<typeof StatusBadge>;
 
 export const Info: Story = {};
 
 export const Success: Story = {
   render: (props) => (
-    <Badge variant="success" {...props}>
+    <StatusBadge status="success" {...props}>
       Success
-    </Badge>
+    </StatusBadge>
   ),
 };
 
 export const Warning: Story = {
   render: (props) => (
-    <Badge variant="warning" {...props}>
+    <StatusBadge status="warning" {...props}>
       Warning
-    </Badge>
+    </StatusBadge>
   ),
 };
 
 export const Danger: Story = {
   render: (props) => (
-    <Badge variant="danger" {...props}>
+    <StatusBadge status="danger" {...props}>
       Danger
-    </Badge>
+    </StatusBadge>
   ),
 };

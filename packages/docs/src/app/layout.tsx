@@ -9,7 +9,7 @@ import clsx from "clsx";
 import styles from "./layout.module.scss";
 import Heading from "@mittwald/flow-react-components/Heading";
 import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
-import Badge from "@mittwald/flow-react-components/Badge";
+import StatusBadge from "@mittwald/flow-react-components/StatusBadge";
 import LayoutCard from "@mittwald/flow-react-components/LayoutCard";
 
 export const metadata: Metadata = {
@@ -26,9 +26,9 @@ const RootLayout: FC<PropsWithChildren> = async (props) => {
         <header className={styles.header}>
           <Heading level={1} className={styles.heading}>
             Flow – mittwald Design System{" "}
-            <Badge className={styles.betaBadge} variant="warning">
+            <StatusBadge className={styles.betaBadge} status="warning">
               beta
-            </Badge>
+            </StatusBadge>
           </Heading>
           <HeaderNavigation docs={docs.map((mdx) => mdx.serialize())} />
         </header>
