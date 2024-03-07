@@ -3098,7 +3098,7 @@ __metadata:
     "@tabler/icons-react": "npm:^2.47.0"
     "@testing-library/react": "npm:^14.2.1"
     "@types/jest": "npm:^29.5.12"
-    "@types/node": "npm:20.11.24"
+    "@types/node": "npm:20.11.25"
     "@types/prettier": "npm:^3.0.0"
     "@types/prop-types": "npm:^15.7.11"
     "@types/react": "npm:^18.2.61"
@@ -7970,12 +7970,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:20.11.24, @types/node@npm:^20.11.24":
-  version: 20.11.24
-  resolution: "@types/node@npm:20.11.24"
+"@types/node@npm:20.11.25":
+  version: 20.11.25
+  resolution: "@types/node@npm:20.11.25"
   dependencies:
     undici-types: "npm:~5.26.4"
-  checksum: 10c0/5a62225eb4797b41e6953f9c08c4611d607b5422ddd153312fc81ed6ed37115228ae27e3e3caa1a3bf52d88310306a196ba1cfbd8b2ec918a20f64d80dfa22c9
+  checksum: 10c0/3a65a0469309d503e572a3198d81c9248876236b1bcc0c9943e995cfa536df7ce9a9302638258984877420d1613167a8a82dbfb3a92197319fb79ebebf9abc83
   languageName: node
   linkType: hard
 
@@ -7985,6 +7985,15 @@ __metadata:
   dependencies:
     undici-types: "npm:~5.26.4"
   checksum: 10c0/8ad59db82b08cb34b2e891e2193aad1081db082178e16189857ffff6619180b9dc74cb14f6e0449007c6797cf0a818a3929a7575b9816267b3d1d858f9fa7be1
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^20.11.24":
+  version: 20.11.24
+  resolution: "@types/node@npm:20.11.24"
+  dependencies:
+    undici-types: "npm:~5.26.4"
+  checksum: 10c0/5a62225eb4797b41e6953f9c08c4611d607b5422ddd153312fc81ed6ed37115228ae27e3e3caa1a3bf52d88310306a196ba1cfbd8b2ec918a20f64d80dfa22c9
   languageName: node
   linkType: hard
 
