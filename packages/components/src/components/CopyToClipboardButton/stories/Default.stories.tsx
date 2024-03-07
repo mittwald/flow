@@ -3,7 +3,7 @@ import React from "react";
 import { CopyToClipboardButton } from "../CopyToClipboardButton";
 
 const meta: Meta<typeof CopyToClipboardButton> = {
-  title: "Buttons/CopyToClipboardButton",
+  title: "Actions/CopyToClipboardButton",
   component: CopyToClipboardButton,
   render: (props) => <CopyToClipboardButton {...props} />,
   args: {

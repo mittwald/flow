@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-react-components",
-  "version": "0.1.0-alpha.22",
+  "version": "0.1.0-alpha.23",
   "type": "module",
   "description": "A React implementation of Flow, mittwald’s design system",
   "homepage": "https://mittwald.github.io/flow",
@@ -12,8 +12,8 @@
     "./ButtonGroup": "./dist/ButtonGroup.js",
     "./Checkbox": "./dist/Checkbox.js",
     "./Content": "./dist/Content.js",
-    "./DialogTrigger": "./dist/DialogTrigger.js",
     "./CopyToClipboardButton": "./dist/CopyToClipboardButton.js",
+    "./DialogTrigger": "./dist/DialogTrigger.js",
     "./FieldDescription": "./dist/FieldDescription.js",
     "./FieldError": "./dist/FieldError.js",
     "./Heading": "./dist/Heading.js",
