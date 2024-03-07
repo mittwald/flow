@@ -4,7 +4,7 @@ inline-code:
   line-height:
     value: "{line-height.m}"
   background-color:
-    value: "{neutral-solid-background-color.default}"
+    value: "{neutral-soft-background-color.default}"
   padding-x:
     value: "{size-px.xs}"
   corner-radius:
