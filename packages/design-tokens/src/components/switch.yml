@@ -20,18 +20,10 @@ switch:
   track-color:
     default:
       value: "{neutral-solid-background-color.default}"
-    hover:
-      value: "{neutral-solid-background-color.hover}"
-    pressed:
-      value: "{neutral-solid-background-color.pressed}"
     disabled:
       value: "{disabled-solid-background-color}"
     selected:
       value: "{success-solid-background-color.default}"
-    selected-hover:
-      value: "{success-solid-background-color.hover}"
-    selected-pressed:
-      value: "{success-solid-background-color.pressed}"
 
   # Handle
   handle-color:

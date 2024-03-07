@@ -1,9 +1,6 @@
 .switch {
   display: flex;
   align-items: center;
-  font-size: var(--label--font-size);
-  font-weight: var(--label--font-weight);
-  color: var(--label--color--default);
   column-gap: var(--switch--label-to-track-spacing);
 
   &.label-leading {
@@ -11,10 +8,6 @@
   }
 
   /* States */
-  &[data-pressed] .track {
-    background-color: var(--switch--track-color--pressed);
-  }
-
   &[data-selected] {
     .track {
       background-color: var(--switch--track-color--selected);
@@ -22,10 +15,6 @@
 
     .handle {
       transform: translate(100%);
-    }
-
-    &[data-pressed] .track {
-      background-color: var(--switch--track-color--selected-pressed);
     }
   }
 
@@ -41,6 +30,9 @@
     .track {
       background-color: var(--switch--track-color--disabled);
       color: var(--switch--track-color--disabled);
+    }
+    .label {
+      color: var(--label--color--disabled);
     }
   }
 }

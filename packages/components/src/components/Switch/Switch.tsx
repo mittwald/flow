@@ -3,6 +3,7 @@ import * as Aria from "react-aria-components";
 import styles from "./Switch.module.scss";
 import clsx from "clsx";
 import { IconCheck, IconClose } from "@/components/Icon/components/icons";
+import { Label } from "@/components/Label";
 
 export interface SwitchProps
   extends PropsWithChildren<Omit<Aria.SwitchProps, "children">> {
@@ -28,7 +29,7 @@ export const Switch: FC<SwitchProps> = (props) => {
               {isSelected ? <IconCheck size="s" /> : <IconClose size="s" />}
             </div>
           </div>
-          {children}
+          <Label className={styles.label}>{children}</Label>
         </>
       )}
     </Aria.Switch>
