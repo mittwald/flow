@@ -3,7 +3,11 @@ import styles from "./Badge.module.scss";
 import clsx from "clsx";
 import { StatusIcon } from "@/components/StatusIcon";
 import { Text } from "@/components/Text";
-import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import {
+  PropsContext,
+  PropsContextProvider,
+  useProps,
+} from "@/lib/propsContext";
 import { PropsWithVariant } from "@/lib/types/props";
 
 export interface BadgeProps extends PropsWithChildren, PropsWithVariant {
@@ -11,7 +15,12 @@ export interface BadgeProps extends PropsWithChildren, PropsWithVariant {
 }
 
 export const Badge: FC<BadgeProps> = (props) => {
-  const { children, className, variant = "info", ...rest } = props;
+  const {
+    children,
+    className,
+    variant = "info",
+    ...rest
+  } = useProps("Badge", props);
 
   const rootClassName = clsx(styles.badge, styles[variant], className);
 

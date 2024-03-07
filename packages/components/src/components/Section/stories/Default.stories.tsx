@@ -8,6 +8,7 @@ import { Label } from "@/components/Label";
 import { Link } from "@/components/Link";
 import { Switch } from "@/components/Switch";
 import { Content } from "@/components/Content";
+import { Badge } from "@/components/Badge";
 
 const meta: Meta<typeof Section> = {
   title: "Structure/Section",
@@ -59,7 +60,23 @@ export const WithSwitch: Story = {
   render: (props) => (
     <Section {...props}>
       <Heading>Newsletter</Heading>
-      <Switch>Subscribed</Switch>
+      <Switch>Subscription</Switch>
+      <Content>
+        <Text>
+          Upcoming releases, new features and tips about your hosting - we bring
+          the most important information to inbox. Subscribe to our newsletter
+          and stay up to date.
+        </Text>
+      </Content>
+    </Section>
+  ),
+};
+
+export const WithStatusBadge: Story = {
+  render: (props) => (
+    <Section {...props}>
+      <Heading>Newsletter</Heading>
+      <Badge>Subscribed</Badge>
       <Content>
         <Text>
           Upcoming releases, new features and tips about your hosting - we bring

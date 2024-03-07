@@ -4,11 +4,12 @@
   flex-direction: column;
   row-gap: var(--section--content-to-content-spacing);
 
-  &:has(.switch) {
+  &:has(.headerContent) {
     display: grid;
     grid-template-areas:
-      "heading switch"
+      "heading headerContent"
       "content content";
+    grid-template-columns: 1fr auto;
     column-gap: var(--section--heading-to-switch-spacing);
   }
 
@@ -32,10 +33,9 @@
   grid-area: heading;
 }
 
-.switch {
-  grid-area: switch;
+.headerContent {
+  grid-area: headerContent;
   align-self: start;
-  line-height: calc(var(--heading--h2-font-size) * 1.5);
 }
 
 .content {
@@ -47,10 +47,10 @@
 
 @media (max-width: 550px) {
   .section {
-    &:has(.switch) {
+    &:has(.headerContent) {
       display: flex;
     }
-    .switch {
+    .headerContent {
       align-self: end;
       line-height: var(--line-height--default);
     }

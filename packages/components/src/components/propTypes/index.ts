@@ -17,10 +17,12 @@ import type { InitialsProps } from "@/components/Initials";
 import type { ImageProps } from "@/components/Image";
 import type { CopyToClipboardButtonProps } from "@/components/CopyToClipboardButton";
 import { SwitchProps } from "@/components/Switch";
+import { BadgeProps } from "@/components/Badge";
 
 export * from "./types";
 
 export interface FlowComponentPropsTypes {
+  Badge: BadgeProps;
   Button: ButtonProps;
   Content: ContentProps;
   CopyToClipboard: CopyToClipboardButtonProps;
