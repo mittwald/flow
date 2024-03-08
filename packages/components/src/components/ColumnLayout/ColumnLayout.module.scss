@@ -1,4 +1,14 @@
+.columnLayoutContainer {
+  container-type: inline-size;
+}
 .columnLayout {
   display: grid;
   gap: var(--column-layout--content-to-content-spacing);
+  grid-template-columns: var(--column-layout--columns-l);
+  @container (max-width: 1100px) {
+    grid-template-columns: var(--column-layout--columns-m);
+  }
+  @container (max-width: 550px) {
+    grid-template-columns: var(--column-layout--columns-s);
+  }
 }
