@@ -8,25 +8,25 @@
   overflow: hidden;
   cursor: default;
 
-  .link {
-    padding-inline: var(--breadcrumb-item--padding-x);
-    font-weight: var(--breadcrumb-item--font-weight--default);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-
-    &:not([aria-current="page"]):hover {
-      text-decoration: underline;
-    }
-
-    &[aria-current="page"] {
-      font-weight: var(--breadcrumb-item--font-weight--current);
-    }
-  }
-
   &:last-child {
     .icon {
       display: none;
     }
+  }
+}
+
+.link {
+  padding-inline: var(--breadcrumb-item--padding-x);
+  font-weight: var(--breadcrumb-item--font-weight--default);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &:not([aria-current="page"]):hover {
+    text-decoration: underline;
+  }
+
+  &[aria-current="page"] {
+    font-weight: var(--breadcrumb-item--font-weight--current);
   }
 }

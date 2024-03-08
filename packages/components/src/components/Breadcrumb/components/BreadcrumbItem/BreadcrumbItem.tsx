@@ -6,16 +6,16 @@ import clsx from "clsx";
 import { IconChevronRight } from "@/components/Icon/components/icons";
 
 export interface BreadcrumbItemProps
-  extends Pick<Aria.BreadcrumbProps, "id">,
-    LinkProps {}
+  extends Pick<Aria.BreadcrumbProps, "id" | "style">,
+    Omit<LinkProps, "style"> {}
 
 export const BreadcrumbItem: FC<BreadcrumbItemProps> = (props) => {
-  const { children, id, className, ...rest } = props;
+  const { children, id, className, style, ...rest } = props;
 
   const rootClassName = clsx(styles.breadcrumbItem, className);
 
   return (
-    <Aria.Breadcrumb className={rootClassName} id={id}>
+    <Aria.Breadcrumb className={rootClassName} id={id} style={style}>
       <Aria.Link className={styles.link} {...rest}>
         {children}
       </Aria.Link>
