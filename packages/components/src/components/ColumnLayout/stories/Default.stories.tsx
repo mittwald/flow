@@ -43,38 +43,18 @@ type Story = StoryObj<typeof ColumnLayout>;
 
 export const Default: Story = {};
 
-export const CustomValueS: Story = {
+export const CustomValueM: Story = {
   render: (props) => (
     <Section>
       <InlineAlert>
-        <Heading>
-          s: [2, 1], m: [2, 1] (inherited), l: [2, 1] (inherited)
-        </Heading>
+        <Heading>s: [1] (default), m: [2, 1], l: [2, 1] (inherited)</Heading>
       </InlineAlert>
-      <ColumnLayout {...props} s={[2, 1]}>
+      <ColumnLayout {...props} m={[2, 1]}>
         <TextField>
           <Label>Street</Label>
         </TextField>
         <TextField>
           <Label>House number</Label>
-        </TextField>
-      </ColumnLayout>
-    </Section>
-  ),
-};
-
-export const CustomValueL: Story = {
-  render: (props) => (
-    <Section>
-      <InlineAlert>
-        <Heading>s: [1] (default), m: [1, 1] (default), l: [1, 1, 4]</Heading>
-      </InlineAlert>
-      <ColumnLayout {...props} l={[1, 1, 4]}>
-        <TextField>
-          <Label>First name</Label>
-        </TextField>
-        <TextField>
-          <Label>Last name</Label>
         </TextField>
       </ColumnLayout>
     </Section>

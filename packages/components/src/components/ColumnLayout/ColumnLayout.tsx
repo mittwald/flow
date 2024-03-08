@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren } from "react";
+import React, { FC, PropsWithChildren, CSSProperties } from "react";
 import styles from "./ColumnLayout.module.scss";
 import { getColumns } from "./lib/getColumns";
 
@@ -13,19 +13,13 @@ export const ColumnLayout: FC<ColumnLayoutProps> = (props) => {
 
   const columnsS = s ? getColumns(s) : "1fr";
   const columnsM = m ? getColumns(m) : s ? columnsS : "1fr 1fr";
-  const columnsL = l
-    ? getColumns(l)
-    : m
-      ? columnsM
-      : s
-        ? columnsS
-        : "1fr 1fr 1fr";
+  const columnsL = l ? getColumns(l) : m || s ? columnsM : "1fr 1fr 1fr";
 
   const style = {
     "--column-layout--columns-s": columnsS,
     "--column-layout--columns-m": columnsM,
     "--column-layout--columns-l": columnsL,
-  } as React.CSSProperties;
+  } as CSSProperties;
 
   return (
     <div className={styles.columnLayoutContainer} style={style}>
