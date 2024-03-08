@@ -20,7 +20,7 @@
 :not(.pre) .code,
 .pre {
   background-color: var(--neutral--color--300);
-  border-radius: var(--border-radius--default);
+  border-radius: var(--corner-radius--default);
   padding-inline: var(--size-px--xs);
   display: inline-block;
 }
