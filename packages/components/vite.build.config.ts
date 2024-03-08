@@ -18,6 +18,7 @@ export default defineConfig(
           Badge: "./src/components/Badge/index.ts",
           Button: "./src/components/Button/index.ts",
           Checkbox: "./src/components/Checkbox/index.ts",
+          ColumnLayout: "./src/components/ColumnLayout/index.ts",
           Content: "./src/components/Content/index.ts",
           CopyToClipboardButton:
             "./src/components/CopyToClipboardButton/index.ts",
