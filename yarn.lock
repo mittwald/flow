@@ -20023,9 +20023,9 @@ __metadata:
   linkType: hard
 
 "remeda@npm:^1.46.2":
-  version: 1.46.2
-  resolution: "remeda@npm:1.46.2"
-  checksum: 10c0/4bf14046645a6456d4025ef251c5d9aa2007118e17a5166d0f749b8a195ccf812126ebc564195eb0dd92b61eede0173fe97d14b7ea440183335e61f26ad21135
+  version: 1.47.1
+  resolution: "remeda@npm:1.47.1"
+  checksum: 10c0/2fa9339eac212e004f395da3d9068cf96c4fee8e56f734d8d315e5ea8f9fb58435ad982099cffae4f98059e08d94614eb239fca0b7c23adb4c6e648a6b866671
   languageName: node
   linkType: hard
 
