@@ -13,7 +13,7 @@ export const Navigation: FC<NavigationProps> = (props) => {
   const rootClassName = clsx(styles.navigation, className);
 
   return (
-    <nav className={rootClassName} {...rest}>
+    <nav className={rootClassName} role="navigation" {...rest}>
       <ul>{children}</ul>
     </nav>
   );
