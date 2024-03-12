@@ -1,6 +1,11 @@
 @mixin level($level) {
   h#{$level} {
     font-size: var(--heading--h#{$level}-font-size);
+    :global(.flow--icon) {
+      height: calc(
+        var(--heading--h#{$level}-font-size) * var(--line-height--default)
+      );
+    }
   }
 }
 
@@ -8,7 +13,6 @@
   font-family: "ProximaNova", sans-serif;
   color: var(--heading--color);
   display: flex;
-  align-items: center;
   column-gap: var(--heading--icon-to-text-spacing);
 }
 
