@@ -3,87 +3,66 @@
 .switch {
   display: flex;
   align-items: center;
-  font-size: var(--switch--font-size);
-  font-weight: var(--switch--font-weight);
-  column-gap: var(--switch--label-to-indicator-spacing);
+  column-gap: var(--switch--label-to-track-spacing);
 
   &.label-leading {
     flex-direction: row-reverse;
   }
 
-  @extend .success;
-
   /* States */
-  &[data-focus-visible] .indicator {
+  &[data-focus-visible] .track {
     outline-style: solid;
   }
 
-  &[data-pressed] .indicator {
-    background-color: var(--switch--indicator-color--pressed);
-  }
+  &[data-selected] {
+    .track {
+      background-color: var(--switch--track-color--selected);
+    }
 
-  &[data-disabled] {
-    color: var(--switch--color--disabled);
-    .indicator {
-      background-color: var(--switch--indicator-color--disabled);
+    .handle {
+      transform: translate(100%);
     }
   }
 
-  &[data-selected] .indicator:before {
-    transform: translate(100%);
+  &[data-disabled] {
+    color: var(--label--color--disabled);
+    .track {
+      background-color: var(--switch--track-color--disabled);
+      color: var(--switch--track-color--disabled);
+    }
+    .label {
+      color: var(--label--color--disabled);
+    }
   }
 }
 
 /* Elements */
-.indicator {
-  width: var(--switch--indicator-width);
-  height: var(--switch--indicator-height);
-  background-color: var(--switch--indicator-color--default);
-  border-radius: var(--switch--indicator-corner-radius);
-  padding: var(--switch--indicator-to-marker-spacing);
+.track {
+  width: var(--switch--track-width);
+  height: var(--switch--track-height);
+  background-color: var(--switch--track-color--default);
+  border-radius: var(--switch--track-corner-radius);
+  padding: var(--switch--track-padding);
   flex-shrink: 0;
   position: relative;
   transition-property: background-color;
   transition-duration: var(--transition--duration--default);
 
   @include focus.focus;
-
-  &:before {
-    content: "";
-    display: block;
-    width: var(--switch--indicator-marker-size);
-    height: var(--switch--indicator-marker-size);
-    background-color: var(--switch--indicator-marker-color);
-    border-radius: var(--corner-radius--round);
-    transition-property: transform;
-    transition-duration: var(--transition--duration--default);
-    transform: translateX(0);
-    position: absolute;
-    top: var(--switch--indicator-to-marker-spacing);
-    left: var(--switch--indicator-to-marker-spacing);
-  }
 }
 
-/* Variants */
-@mixin variant($variant) {
-  .#{$variant}[data-selected] {
-    .indicator {
-      background-color: var(--switch--#{$variant}-indicator-color--selected);
-    }
-
-    &[data-pressed] .indicator {
-      background-color: var(
-        --switch--#{$variant}-indicator-color--selected-pressed
-      );
-    }
-
-    &[data-disabled] .indicator {
-      background-color: var(
-        --switch--#{$variant}-indicator-color--selected-disabled
-      );
-    }
-  }
+.handle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: var(--switch--handle-size);
+  height: var(--switch--handle-size);
+  background-color: var(--switch--handle-color);
+  border-radius: var(--corner-radius--round);
+  transition-property: transform;
+  transition-duration: var(--transition--duration--default);
+  transform: translateX(0);
+  position: absolute;
+  top: var(--switch--track-padding);
+  left: var(--switch--track-padding);
 }
-
-@include variant(success);
-@include variant(danger);
