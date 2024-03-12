@@ -13,6 +13,8 @@ button:
     value: "{success.color.700}"
   failed-icon-color:
     value: "{danger.color.700}"
+  text-to-icon-spacing:
+    value: "{size-rem.s}"
 
   # Small
   padding-s:
@@ -21,6 +23,8 @@ button:
     value: "{size-px.s}"
   padding-s-squished-y:
     value: "{size-px.xs}"
+  text-to-icon-spacing-s:
+    value: "{size-rem.xs}"
   font-size-s:
     value: "{font-size.s}"
 

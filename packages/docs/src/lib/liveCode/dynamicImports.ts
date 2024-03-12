@@ -11,6 +11,7 @@ export const liveCodeEditorGlobalImports: ImportMapping = {
 "Image:@mittwald/flow-react-components/Image": lazy(() => import("@mittwald/flow-react-components/Image").then(module => ({ default: module.Image } ))),
 "Button:@mittwald/flow-react-components/Button": lazy(() => import("@mittwald/flow-react-components/Button").then(module => ({ default: module.Button } ))),
 "IconHome:@mittwald/flow-react-components/Icons": lazy(() => import("@mittwald/flow-react-components/Icons").then(module => ({ default: module.IconHome } ))),
+"IconChevronDown:@mittwald/flow-react-components/Icons": lazy(() => import("@mittwald/flow-react-components/Icons").then(module => ({ default: module.IconChevronDown } ))),
 "Checkbox:@mittwald/flow-react-components/Checkbox": lazy(() => import("@mittwald/flow-react-components/Checkbox").then(module => ({ default: module.Checkbox } ))),
 "ColumnLayout:@mittwald/flow-react-components/ColumnLayout": lazy(() => import("@mittwald/flow-react-components/ColumnLayout").then(module => ({ default: module.ColumnLayout } ))),
 "TextField:@mittwald/flow-react-components/TextField": lazy(() => import("@mittwald/flow-react-components/TextField").then(module => ({ default: module.TextField } ))),
