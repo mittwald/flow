@@ -11,9 +11,9 @@ export const InlineCode: FC<InlineCodeProps> = (props) => {
   const rootClassName = clsx(styles.inlineCode, className);
 
   return (
-    <span {...rest} className={rootClassName}>
+    <code {...rest} className={rootClassName}>
       {children}
-    </span>
+    </code>
   );
 };
 
