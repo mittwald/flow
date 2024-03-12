@@ -4,11 +4,11 @@
 .columnLayout {
   display: grid;
   gap: var(--column-layout--content-to-content-spacing);
-  grid-template-columns: var(--column-layout--columns-l);
+  grid-template-columns: var(--column-layout--columns-l, 1fr 1fr 1fr);
   @container (max-width: 1100px) {
-    grid-template-columns: var(--column-layout--columns-m);
+    grid-template-columns: var(--column-layout--columns-m, 1fr);
   }
   @container (max-width: 550px) {
-    grid-template-columns: var(--column-layout--columns-s);
+    grid-template-columns: var(--column-layout--columns-s, 1fr);
   }
 }
