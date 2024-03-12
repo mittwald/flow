@@ -1,3 +1,5 @@
+@use "@/styles/mixins/focus";
+
 .navigationItem {
   display: flex;
   flex-direction: row;
@@ -6,6 +8,8 @@
   border-radius: var(--navigation-item--corner-radius);
   background-color: var(--navigation-item--background-color--default);
   padding: var(--navigation-item--padding-y) var(--navigation-item--padding-x);
+
+  @include focus.focus;
 
   &:hover {
     background-color: var(--navigation-item--background-color--hover);
