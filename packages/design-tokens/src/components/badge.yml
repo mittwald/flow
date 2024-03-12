@@ -13,15 +13,27 @@ badge:
     value: "{size-rem.xs}"
   icon-to-text-spacing:
     value: 0.5em
-  color:
-    value: "{info-solid-content-color}"
 
-  # Variants
+  # Info
   info-background-color:
-    value: "{info-solid-background-color.default}"
+    value: "{info-soft-background-color.default}"
+  info-content-color:
+    value: "{info-soft-content-color.default}"
+
+  # Success
   success-background-color:
-    value: "{success-solid-background-color.default}"
+    value: "{success-soft-background-color.default}"
+  success-content-color:
+    value: "{success-soft-content-color.default}"
+
+  # Warning
   warning-background-color:
-    value: "{warning-solid-background-color.default}"
+    value: "{warning-soft-background-color.default}"
+  warning-content-color:
+    value: "{warning-soft-content-color.default}"
+
+  # Danger
   danger-background-color:
-    value: "{danger-solid-background-color.default}"
+    value: "{danger-soft-background-color.default}"
+  danger-content-color:
+    value: "{danger-soft-content-color.default}"
