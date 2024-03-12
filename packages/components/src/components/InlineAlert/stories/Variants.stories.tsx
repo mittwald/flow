@@ -7,7 +7,7 @@ import defaultMeta from "./Default.stories";
 
 const meta: Meta<typeof InlineAlert> = {
   ...defaultMeta,
-  title: "Status/Inline Alert/Variants",
+  title: "Status/Inline Alert/Status",
 };
 
 export default meta;
@@ -27,7 +27,7 @@ export const Info: Story = {
 };
 
 export const Warning: Story = {
-  args: { variant: "warning" },
+  args: { status: "warning" },
   render: (props) => (
     <InlineAlert {...props}>
       <Heading>Storage is almost exceeded</Heading>
@@ -40,7 +40,7 @@ export const Warning: Story = {
 };
 
 export const Danger: Story = {
-  args: { variant: "danger" },
+  args: { status: "danger" },
   render: (props) => (
     <InlineAlert {...props}>
       <Heading>No SSL certificate could be issued</Heading>
@@ -53,7 +53,7 @@ export const Danger: Story = {
 };
 
 export const Success: Story = {
-  args: { variant: "success" },
+  args: { status: "success" },
   render: (props) => (
     <InlineAlert {...props}>
       <Heading>Your app is up to date</Heading>

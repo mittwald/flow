@@ -3,7 +3,7 @@ import Heading from "@mittwald/flow-react-components/Heading";
 import Content from "@mittwald/flow-react-components/Content";
 
 <Row>
-  <InlineAlert variant="info">
+  <InlineAlert status="info">
     <Heading>Email address has been archived</Heading>
     <Content>
       As your domain has been deleted, this email address
@@ -12,7 +12,7 @@ import Content from "@mittwald/flow-react-components/Content";
     </Content>
   </InlineAlert>
 
-  <InlineAlert variant="warning">
+  <InlineAlert status="warning">
     <Heading>Storage is almost exceeded</Heading>
     <Content>
       Your storage space is over 80% utilized. We recommend
@@ -21,7 +21,7 @@ import Content from "@mittwald/flow-react-components/Content";
     </Content>
   </InlineAlert>
 
-  <InlineAlert variant="danger">
+  <InlineAlert status="danger">
     <Heading>No SSL certificate could be issued</Heading>
     <Content>
       No SSL certificate could be issued for this domain
@@ -30,7 +30,7 @@ import Content from "@mittwald/flow-react-components/Content";
     </Content>
   </InlineAlert>
 
-  <InlineAlert variant="success">
+  <InlineAlert status="success">
     <Heading>Your app is up to date</Heading>
     <Content>
       Your app has been updated to the current version.

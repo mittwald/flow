@@ -1,31 +1,27 @@
+@use "@/styles/mixins/focus";
+
 .navigationItem {
-  a {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 
-    border: none;
-    border-radius: var(--navigation-item--corner-radius);
-    background-color: var(--navigation-item--background-color--default);
-    padding: var(--navigation-item--padding-y) var(--navigation-item--padding-x);
+  border: none;
+  border-radius: var(--navigation-item--corner-radius);
+  background-color: var(--navigation-item--background-color--default);
+  padding: var(--navigation-item--padding-y) var(--navigation-item--padding-x);
 
-    cursor: default;
+  @include focus.focus;
 
-    &[href] {
-      cursor: pointer;
-    }
+  &:hover {
+    background-color: var(--navigation-item--background-color--hover);
+  }
 
-    &:focus {
-      background-color: var(--navigation-item--background-color--hover);
-    }
+  &[aria-current="page"] {
+    background-color: var(--navigation-item--background-color--current);
+    font-weight: var(--navigation-item--font-weight--current);
+    color: var(--navigation-item--color--current);
 
-    &[aria-current="page"] {
-      background-color: var(--navigation-item--background-color--current);
-      font-weight: var(--navigation-item--font-weight--current);
-      color: var(--navigation-item--color--current);
-
-      .icon {
-        color: var(--navigation-item--icon-color--current);
-      }
+    .icon {
+      color: var(--navigation-item--icon-color--current);
     }
   }
 }
