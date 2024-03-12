@@ -7,12 +7,6 @@
   background-color: var(--navigation-item--background-color--default);
   padding: var(--navigation-item--padding-y) var(--navigation-item--padding-x);
 
-  cursor: default;
-
-  outline-color: var(--navigation-item--focus-outline-color);
-  outline-offset: var(--navigation-item--focus-outline-offset);
-  outline-width: var(--navigation-item--focus-outline-width);
-
   &:hover {
     background-color: var(--navigation-item--background-color--hover);
   }
