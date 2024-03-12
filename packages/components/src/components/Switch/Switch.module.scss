@@ -1,3 +1,5 @@
+@use "@/styles/mixins/focus";
+
 .switch {
   display: flex;
   align-items: center;
@@ -8,6 +10,8 @@
   &.label-leading {
     flex-direction: row-reverse;
   }
+
+  @include focus.focus;
 
   @extend .success;
 
