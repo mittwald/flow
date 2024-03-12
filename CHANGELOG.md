@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.23](https://github.com/mittwald/flow/compare/0.1.0-alpha.22...0.1.0-alpha.23) (2024-03-07)
+
+### Bug Fixes
+
+- update font sizes and line heights + rename story component categories
+  ([#210](https://github.com/mittwald/flow/issues/210))
+  ([abbc424](https://github.com/mittwald/flow/commit/abbc424077bb21e92a79ba77adebf0eb9c170d07))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.22](https://github.com/mittwald/flow/compare/0.1.0-alpha.21...0.1.0-alpha.22) (2024-03-07)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.21](https://github.com/mittwald/flow/compare/0.1.0-alpha.20...0.1.0-alpha.21) (2024-03-05)
 
 ### Bug Fixes

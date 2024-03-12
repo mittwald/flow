@@ -5,10 +5,12 @@ heading:
     value: "{font-weight.bold}"
   h1-font-size:
     value: "{font-size.xxl}"
-  h2-font-size:
+  h1-font-size-mobile:
     value: "{font-size.xl}"
-  h3-font-size:
+  h2-font-size:
     value: "{font-size.l}"
+  h3-font-size:
+    value: "{font-size.m}"
   h4-font-size:
     value: "{font-size.m}"
   h5-font-size:

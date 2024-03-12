@@ -9,7 +9,7 @@ import { action } from "@storybook/addon-actions";
 import { FieldError } from "@/components/FieldError";
 
 const meta: Meta<typeof RadioGroup> = {
-  title: "Forms/RadioGroup",
+  title: "Form Controls/RadioGroup",
   component: RadioGroup,
   args: {
     onChange: action("onChange"),
