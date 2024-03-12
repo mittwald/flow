@@ -1,3 +1,5 @@
 import Link from "@mittwald/flow-react-components/Link";
 
-<Link inline>Inline link</Link>;
+<Link inline href="#">
+  Inline link
+</Link>;
