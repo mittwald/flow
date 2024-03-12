@@ -8,7 +8,7 @@
   grid-template-columns: var(--column-layout--columns-l, 1fr 1fr 1fr);
 
   @container (max-width: 850px) {
-    grid-template-columns: var(--column-layout--columns-m, 1fr);
+    grid-template-columns: var(--column-layout--columns-m, 1fr 1fr);
   }
 
   @container (max-width: 550px) {
