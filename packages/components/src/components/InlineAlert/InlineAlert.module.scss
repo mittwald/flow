@@ -38,19 +38,19 @@
   grid-area: content;
 }
 
-/* Variants */
-@mixin variant($variant) {
-  .#{$variant} {
-    border-color: var(--inline-alert--#{$variant}-border-color);
+/* Status */
+@mixin status($status) {
+  .#{$status} {
+    border-color: var(--inline-alert--#{$status}-border-color);
 
     .heading,
     .statusIcon {
-      color: var(--inline-alert--#{$variant}-heading-color);
+      color: var(--inline-alert--#{$status}-heading-color);
     }
   }
 }
 
-@include variant(info);
-@include variant(warning);
-@include variant(danger);
-@include variant(success);
+@include status(info);
+@include status(warning);
+@include status(danger);
+@include status(success);

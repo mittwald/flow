@@ -1,3 +1,5 @@
+@use "@/styles/mixins/focus";
+
 .switch {
   display: flex;
   align-items: center;
@@ -8,6 +10,10 @@
   }
 
   /* States */
+  &[data-focus-visible] .track {
+    outline-style: solid;
+  }
+
   &[data-selected] {
     .track {
       background-color: var(--switch--track-color--selected);
@@ -41,6 +47,8 @@
   position: relative;
   transition-property: background-color;
   transition-duration: var(--transition--duration--default);
+
+  @include focus.focus;
 }
 
 .handle {

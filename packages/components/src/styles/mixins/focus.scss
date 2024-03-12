@@ -1,0 +1,5 @@
+@mixin focus {
+  outline-color: var(--focus--outline-color);
+  outline-offset: var(--focus--outline-offset);
+  outline-width: var(--focus--outline-width);
+}

@@ -36,15 +36,15 @@ export const Default: Story = {
 export const WithIcons: Story = {
   render: (props) => (
     <Navigation aria-label="Main menu" {...props}>
-      <NavigationItem textValue="Customer">
+      <NavigationItem>
         <IconCustomer />
         <Text>Customer</Text>
       </NavigationItem>
-      <NavigationItem textValue="Server" isCurrent>
+      <NavigationItem isCurrent>
         <IconServer />
         <Text>Server</Text>
       </NavigationItem>
-      <NavigationItem textValue="Project">
+      <NavigationItem>
         <IconProject />
         <Text>Project</Text>
       </NavigationItem>
