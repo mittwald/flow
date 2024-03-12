@@ -18,13 +18,6 @@
     }
   }
 
-  &[data-focus-visible] .track {
-    outline-color: var(--switch--focus-outline-color);
-    outline-width: var(--switch--focus-outline-width);
-    outline-offset: var(--switch--focus-outline-offset);
-    outline-style: solid;
-  }
-
   &[data-disabled] {
     color: var(--label--color--disabled);
     .track {

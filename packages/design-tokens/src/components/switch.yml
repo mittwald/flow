@@ -1,12 +1,6 @@
 switch:
   label-to-track-spacing:
     value: "{size-rem.s}"
-  focus-outline-color:
-    value: "{focus-outline-color}"
-  focus-outline-offset:
-    value: "{size-px.xxs}"
-  focus-outline-width:
-    value: "{border-width.200}"
 
   # Track
   track-height:
