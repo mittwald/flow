@@ -35,6 +35,7 @@
 
 .content {
   display: flex;
+  column-gap: var(--button--text-to-icon-spacing);
 }
 
 .content,
@@ -60,6 +61,10 @@
 
   &:has(.icon):not(:has(.text)) {
     padding: var(--button--padding-s);
+  }
+
+  .content {
+    column-gap: var(--button--text-to-icon-spacing-s);
   }
 }
 
