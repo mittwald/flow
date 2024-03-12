@@ -29,6 +29,7 @@ export default defineConfig(
           Image: "./src/components/Image/index.ts",
           Initials: "./src/components/Initials/index.ts",
           InlineAlert: "./src/components/InlineAlert/index.ts",
+          InlineCode: "./src/components/InlineCode/index.ts",
           Label: "./src/components/Label/index.ts",
           LabeledValue: "./src/components/LabeledValue/index.ts",
           LayoutCard: "./src/components/LayoutCard/index.ts",

@@ -20,6 +20,7 @@
     "./Image": "./dist/Image.js",
     "./Initials": "./dist/Initials.js",
     "./InlineAlert": "./dist/InlineAlert.js",
+    "./InlineCode": "./dist/InlineCode.js",
     "./Label": "./dist/Label.js",
     "./LabeledValue": "./dist/LabeledValue.js",
     "./LayoutCard": "./dist/LayoutCard.js",
