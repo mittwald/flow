@@ -1,3 +1,5 @@
+@use "@/styles/mixins/focus";
+
 .navigationItem {
   a {
     display: flex;
@@ -9,6 +11,8 @@
     padding: var(--navigation-item--padding-y) var(--navigation-item--padding-x);
 
     cursor: default;
+
+    @include focus.focus;
 
     &[href] {
       cursor: pointer;

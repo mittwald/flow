@@ -1,6 +1,8 @@
 link:
   font-size:
     value: "{font-size.s}"
+  line-height:
+    value: "{line-height.m}"
   font-weight:
     value: "{font-weight.bold}"
   disabled-color:
