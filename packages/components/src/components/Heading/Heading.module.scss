@@ -1,7 +1,7 @@
 @mixin level($level) {
   h#{$level} {
     font-size: var(--heading--h#{$level}-font-size);
-    :global(.flow--icon) {
+    .icon {
       height: calc(
         var(--heading--h#{$level}-font-size) * var(--line-height--default)
       );
@@ -26,5 +26,10 @@
 @media (max-width: 550px) {
   h1 {
     font-size: var(--heading--h1-font-size-mobile);
+    .icon {
+      height: calc(
+        var(--heading--h1-font-size-mobile) * var(--line-height--default)
+      );
+    }
   }
 }

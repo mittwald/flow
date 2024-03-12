@@ -31,6 +31,7 @@ export const Heading: FC<HeadingProps> = (props) => {
     Icon: {
       "aria-hidden": true,
       size: "s",
+      className: styles.icon,
     },
   };
 
