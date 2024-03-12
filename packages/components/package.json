@@ -9,6 +9,7 @@
     "./Avatar": "./dist/Avatar.js",
     "./Button": "./dist/Button.js",
     "./Checkbox": "./dist/Checkbox.js",
+    "./ColumnLayout": "./dist/ColumnLayout.js",
     "./Content": "./dist/Content.js",
     "./CopyToClipboardButton": "./dist/CopyToClipboardButton.js",
     "./FieldDescription": "./dist/FieldDescription.js",
