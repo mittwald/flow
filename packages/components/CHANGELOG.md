@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.29](https://github.com/mittwald/flow/compare/0.1.0-alpha.28...0.1.0-alpha.29) (2024-03-12)
+
+### Features
+
+- add InlineCode component
+  ([c9fc931](https://github.com/mittwald/flow/commit/c9fc931777ae9d31f9f9c2f41f410af70cb13f40))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.28](https://github.com/mittwald/flow/compare/0.1.0-alpha.27...0.1.0-alpha.28) (2024-03-12)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
