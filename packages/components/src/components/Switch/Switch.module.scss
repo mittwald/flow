@@ -11,11 +11,13 @@
     flex-direction: row-reverse;
   }
 
-  @include focus.focus;
-
   @extend .success;
 
   /* States */
+  &[data-focus-visible] .indicator {
+    outline-style: solid;
+  }
+
   &[data-pressed] .indicator {
     background-color: var(--switch--indicator-color--pressed);
   }
@@ -43,6 +45,8 @@
   position: relative;
   transition-property: background-color;
   transition-duration: var(--transition--duration--default);
+
+  @include focus.focus;
 
   &:before {
     content: "";
