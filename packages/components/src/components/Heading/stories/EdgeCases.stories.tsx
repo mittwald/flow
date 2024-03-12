@@ -16,7 +16,7 @@ type Story = StoryObj<typeof Heading>;
 
 export const LongText: Story = {
   render: (props) => (
-    <Heading {...props} level={2}>
+    <Heading {...props}>
       <IconMember />
       {dummyText.medium}
     </Heading>
