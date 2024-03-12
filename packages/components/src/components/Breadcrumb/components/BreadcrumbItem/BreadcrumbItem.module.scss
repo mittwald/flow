@@ -1,4 +1,4 @@
-@import "@/styles";
+@use "@/styles/mixins/ellipsis";
 
 .breadcrumbItem {
   color: var(--breadcrumb-item--color);
@@ -6,7 +6,6 @@
   display: flex;
   align-items: center;
   overflow: hidden;
-  cursor: default;
 
   &:last-child {
     .icon {
@@ -18,9 +17,8 @@
 .link {
   padding-inline: var(--breadcrumb-item--padding-x);
   font-weight: var(--breadcrumb-item--font-weight--default);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+
+  @include ellipsis.ellipsis;
 
   &:not([aria-current="page"]):hover {
     text-decoration: underline;
