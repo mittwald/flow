@@ -1,25 +1,18 @@
-import React from "react";
-import { TreeState } from "react-stately";
-import { Node } from "@react-types/shared";
+import React, { FC, PropsWithChildren } from "react";
 import styles from "./NavigationItem.module.scss";
 import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
-import { useNavigationItem } from "@/hooks/useNavigationItem";
-import { NavigationCollectionItemProps } from "@/components/Navigation/components/NavigationItem/NavigationCollectionItem";
+import * as Aria from "react-aria-components";
+import clsx from "clsx";
 
-interface NavigationItemProps<T = never> {
-  state: TreeState<T>;
-  item: Node<T>;
+export interface NavigationItemProps
+  extends PropsWithChildren<Omit<Aria.LinkProps, "children">> {
+  isCurrent?: boolean;
 }
 
-export function NavigationItem<T extends object>(
-  props: NavigationItemProps<T>,
-) {
-  const { item, state } = props;
-  const { isCurrent, linkComponent: Link = "a" } =
-    item.props as NavigationCollectionItemProps;
+export const NavigationItem: FC<NavigationItemProps> = (props) => {
+  const { children, isCurrent, className, ...rest } = props;
 
-  const ref = React.useRef(null);
-  const { menuItemProps } = useNavigationItem({ key: item.key }, state, ref);
+  const rootClassName = clsx(styles.navigationItem, className);
 
   const propsContext: PropsContext = {
     Text: {
@@ -31,16 +24,16 @@ export function NavigationItem<T extends object>(
   };
 
   return (
-    <li className={styles.navigationItem}>
-      <Link
-        {...menuItemProps}
-        ref={ref}
+    <li>
+      <Aria.Link
+        className={rootClassName}
         aria-current={isCurrent ? "page" : false}
+        {...rest}
       >
         <PropsContextProvider props={propsContext}>
-          {item.rendered}
+          {children}
         </PropsContextProvider>
-      </Link>
+      </Aria.Link>
     </li>
   );
-}
+};

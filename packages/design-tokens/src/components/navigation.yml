@@ -1,6 +1,6 @@
 navigation:
   item-to-item-spacing:
-    value: "{size-px.xs}"
+    value: "{size-px.s}"
 
 navigation-item:
   font-weight:
@@ -11,9 +11,10 @@ navigation-item:
   padding-x:
     value: "{size-px.s}"
   padding-y:
-    value: "{size-px.s}"
+    value: "{size-px.xs}"
   icon-to-text-spacing:
     value: 0.5em
+
   color:
     current:
       value: "{info.color.800}"
