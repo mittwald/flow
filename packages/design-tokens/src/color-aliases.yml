@@ -456,7 +456,3 @@ disabled-soft-background-color:
   value: "{neutral.color.300}"
 disabled-soft-content-color:
   value: "{neutral.color.500}"
-
-# Focus
-focus-outline-color:
-  value: "{primary.color.800}"
