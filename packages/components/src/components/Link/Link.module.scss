@@ -20,6 +20,12 @@
   @extend .primary;
 }
 
+.inline {
+  font-weight: normal;
+  font-size: var(--font-size--default);
+  text-decoration: underline;
+}
+
 /* Variants */
 @mixin variant($variant) {
   .#{$variant}:not([aria-disabled]) {

@@ -8,6 +8,7 @@ export interface LinkProps
   extends PropsWithChildren<Omit<Aria.LinkProps, "children">> {
   /** @default "default" */
   variant?: "default" | "danger";
+  inline?: boolean;
 }
 
 export const Link: FC<LinkProps> = (props) => {
@@ -15,10 +16,16 @@ export const Link: FC<LinkProps> = (props) => {
     children,
     className,
     variant = "default",
+    inline,
     ...rest
   } = useProps("Link", props);
 
-  const rootClassName = clsx(styles.link, styles[variant], className);
+  const rootClassName = clsx(
+    styles.link,
+    styles[variant],
+    inline && styles.inline,
+    className,
+  );
 
   return (
     <Aria.Link className={rootClassName} {...rest}>
