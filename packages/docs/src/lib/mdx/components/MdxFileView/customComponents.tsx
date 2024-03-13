@@ -3,10 +3,14 @@ import Heading from "@mittwald/flow-react-components/Heading";
 import { MDXComponents } from "mdx/types";
 import InlineAlert from "@mittwald/flow-react-components/InlineAlert";
 import Content from "@mittwald/flow-react-components/Content";
-import React, { Children, isValidElement } from "react";
+import React from "react";
 import CopyButton from "@mittwald/flow-react-components/CopyButton";
 
 export const customComponents: MDXComponents = {
+  Content: Content,
+  Heading: Heading,
+  InlineAlert: InlineAlert,
+
   pre: ({ children }) => (
     <div className={styles.preContainer}>
       <pre className={styles.pre}>{children}</pre>
@@ -26,15 +30,6 @@ export const customComponents: MDXComponents = {
   ul: ({ children }) => <ul className={styles.ul}>{children}</ul>,
 
   li: ({ children }) => <li className={styles.li}>{children}</li>,
-
-  blockquote: ({ children }) => (
-    <InlineAlert>
-      <Heading>{Children.toArray(children).find(isValidElement)}</Heading>
-      <Content>
-        {Children.toArray(children).filter(isValidElement).slice(1)}
-      </Content>
-    </InlineAlert>
-  ),
 
   h2: ({ children }) => (
     <Heading level={2} className={styles.heading2}>
