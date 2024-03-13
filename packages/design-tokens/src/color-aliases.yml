@@ -456,3 +456,37 @@ disabled-soft-background-color:
   value: "{neutral.color.300}"
 disabled-soft-content-color:
   value: "{neutral.color.500}"
+
+# Decorative
+decorative:
+  # Variant 1
+  variant-1-background-color:
+    value: "{color.hosting-blue.200}"
+  variant-1-content-color:
+    value: "{color.hosting-blue.800}"
+  variant-1-content-accent-color:
+    value: "{color.hosting-blue.1000}"
+
+  # Variant 2
+  variant-2-background-color:
+    value: "{color.soft-contrast-violet.200}"
+  variant-2-content-color:
+    value: "{color.soft-contrast-violet.800}"
+  variant-2-content-accent-color:
+    value: "{color.soft-contrast-violet.1000}"
+
+  # Variant 3
+  variant-3-background-color:
+    value: "{color.espelkamp-green.200}"
+  variant-3-content-color:
+    value: "{color.espelkamp-green.800}"
+  variant-3-content-accent-color:
+    value: "{color.espelkamp-green.1000}"
+
+  # Variant 4
+  variant-4-background-color:
+    value: "{color.royal-orange.200}"
+  variant-4-content-color:
+    value: "{color.royal-orange.800}"
+  variant-4-content-accent-color:
+    value: "{color.royal-orange.1000}"

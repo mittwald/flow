@@ -21,10 +21,10 @@
 /* Variants */
 @mixin variant($variant) {
   .variant-#{$variant} {
-    --background-color: var(--initials--variant-#{$variant}-background-color);
-    --content-color: var(--initials--variant-#{$variant}-content-color);
+    --background-color: var(--decorative--variant-#{$variant}-background-color);
+    --content-color: var(--decorative--variant-#{$variant}-content-color);
     --content-accent-color: var(
-      --initials--variant-#{$variant}-content-accent-color
+      --decorative--variant-#{$variant}-content-accent-color
     );
   }
 }

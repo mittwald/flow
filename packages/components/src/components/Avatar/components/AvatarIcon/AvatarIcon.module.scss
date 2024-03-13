@@ -1,0 +1,24 @@
+.avatarIcon {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  svg {
+    width: calc(var(--avatar-size) * 0.7);
+    height: calc(var(--avatar-size) * 0.7);
+  }
+}
+
+/* Variants */
+@mixin variant($variant) {
+  .variant-#{$variant} {
+    background-color: var(--decorative--variant-#{$variant}-background-color);
+    color: var(--decorative--variant-#{$variant}-content-accent-color);
+  }
+}
+
+@include variant(1);
+@include variant(2);
+@include variant(3);
+@include variant(4);

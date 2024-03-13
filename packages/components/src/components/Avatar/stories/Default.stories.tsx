@@ -4,6 +4,8 @@ import React from "react";
 import { Initials } from "@/components/Initials";
 import { Image } from "@/components/Image";
 import { dummyText } from "@/lib/dev/dummyText";
+import { IconMail } from "@tabler/icons-react";
+import AvatarIcon from "@/components/Avatar/components/AvatarIcon/AvatarIcon";
 
 const meta: Meta<typeof Avatar> = {
   title: "Content/Avatar",
@@ -32,6 +34,16 @@ export const WithInitials: Story = {
   render: (props) => (
     <Avatar {...props}>
       <Initials>Max Mustermann</Initials>
+    </Avatar>
+  ),
+};
+
+export const WithIcon: Story = {
+  render: (props) => (
+    <Avatar {...props}>
+      <AvatarIcon variant={1}>
+        <IconMail />
+      </AvatarIcon>
     </Avatar>
   ),
 };
