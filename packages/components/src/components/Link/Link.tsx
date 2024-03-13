@@ -1,4 +1,9 @@
-import React, { FC, PropsWithChildren } from "react";
+import React, {
+  ComponentProps,
+  ComponentType,
+  FC,
+  PropsWithChildren,
+} from "react";
 import * as Aria from "react-aria-components";
 import { useProps } from "@/lib/propsContext";
 import styles from "./Link.module.scss";
@@ -9,6 +14,7 @@ export interface LinkProps
   /** @default "default" */
   variant?: "default" | "danger";
   inline?: boolean;
+  linkComponent?: ComponentType<Omit<ComponentProps<"a">, "ref">>;
 }
 
 export const Link: FC<LinkProps> = (props) => {

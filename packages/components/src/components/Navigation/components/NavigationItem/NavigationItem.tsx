@@ -1,19 +1,17 @@
-import React, { ComponentProps, ComponentType, PropsWithChildren } from "react";
-import * as Aria from "react-aria-components";
+import React, { FC } from "react";
 import styles from "./NavigationItem.module.scss";
 import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import { Link as LinkComponent, LinkProps } from "@/components/Link";
 
-export interface NavigationItemProps
-  extends PropsWithChildren<Omit<Aria.LinkProps, "children" | "slot">> {
+export interface NavigationItemProps extends Omit<LinkProps, "slot"> {
   isCurrent?: boolean;
-  linkComponent?: ComponentType<Omit<ComponentProps<"a">, "ref">>;
 }
 
-export function NavigationItem(props: NavigationItemProps) {
+export const NavigationItem: FC<NavigationItemProps> = (props) => {
   const {
     isCurrent,
     children,
-    linkComponent: Link = Aria.Link,
+    linkComponent: Link = LinkComponent,
     ...linkProps
   } = props;
 
@@ -39,4 +37,4 @@ export function NavigationItem(props: NavigationItemProps) {
       </Link>
     </li>
   );
-}
+};
