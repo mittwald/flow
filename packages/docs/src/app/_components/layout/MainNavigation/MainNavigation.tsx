@@ -9,6 +9,7 @@ import styles from "./MainNavigation.module.scss";
 import { MdxFile, SerializedMdxFile } from "@/lib/mdx/MdxFile";
 import { groupBy } from "remeda";
 import { GroupText } from "@/app/_components/layout/MainNavigation/components/GroupText";
+import { NextJsNavigationItemLink } from "@/app/_components/layout/MainNavigation/components/NextJsNavigationItemLink";
 
 interface Props {
   docs: SerializedMdxFile[];
@@ -31,6 +32,7 @@ const MainNavigation: FC<Props> = (props) => {
         key={mdxFile.pathname}
         href={mdxFile.pathname}
         isCurrent={mdxFile.pathname === currentPathname}
+        linkComponent={NextJsNavigationItemLink}
       >
         {mdxFile.getNavTitle()}
       </NavigationItem>

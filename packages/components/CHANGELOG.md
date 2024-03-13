@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.31](https://github.com/mittwald/flow/compare/0.1.0-alpha.30...0.1.0-alpha.31) (2024-03-13)
+
+### Bug Fixes
+
+- fix navigation ([#222](https://github.com/mittwald/flow/issues/222))
+  ([bcbbe2e](https://github.com/mittwald/flow/commit/bcbbe2edd642989f6d195883d37bee153e3d0268))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.30](https://github.com/mittwald/flow/compare/0.1.0-alpha.29...0.1.0-alpha.30) (2024-03-12)
 
 ### Features
