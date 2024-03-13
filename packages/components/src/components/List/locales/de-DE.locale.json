@@ -1,0 +1,5 @@
+{
+  "paginationInfo": "{visibleItemsCount} von insgesamt {totalItemsCount} angezeigt",
+  "paginationInfoFiltered": "{visibleItemsCount} von insgesamt {filteredItemsCount} (gefiltert aus {totalItemsCount}) angezeigt",
+  "showMore": "Mehr anzeigen"
+}

@@ -82,6 +82,10 @@
       "types": "./dist/types/components/Link/index.d.ts",
       "import": "./dist/Link.js"
     },
+    "./List": {
+      "types": "./dist/types/components/List/index.d.ts",
+      "import": "./dist/List.js"
+    },
     "./Navigation": {
       "types": "./dist/types/components/Navigation/index.d.ts",
       "import": "./dist/Navigation.js"
@@ -150,12 +154,17 @@
     "test:unit": "node --experimental-vm-modules $(yarn bin jest)"
   },
   "dependencies": {
+    "@mittwald/react-use-promise": "^2.3.12",
+    "@preact/signals-react": "^2.0.0",
     "@react-aria/utils": "^3.23.2",
     "@react-types/shared": "^3.22.1",
     "@tabler/icons-react": "^2.47.0",
+    "@tanstack/react-table": "^8.13.2",
     "clsx": "^2.1.0",
     "copy-to-clipboard": "^3.3.3",
+    "dot-prop": "^8.0.2",
     "html-react-parser": "^5.1.8",
+    "invariant": "^2.2.4",
     "react-aria": "^3.32.1",
     "react-aria-components": "^1.1.1",
     "react-children-utilities": "^2.10.0",
@@ -163,6 +172,7 @@
     "remeda": "^1.46.2"
   },
   "devDependencies": {
+    "@faker-js/faker": "^8.4.1",
     "@jest/globals": "^29.7.0",
     "@mittwald/flow-design-tokens": "workspace:^",
     "@nx/storybook": "^18.1.0",
@@ -182,6 +192,7 @@
     "@storybook/testing-library": "^0.2.2",
     "@storybook/theming": "^7.6.17",
     "@testing-library/react": "^14.2.1",
+    "@types/invariant": "^2",
     "@types/jest": "^29.5.12",
     "@types/node": "20.11.24",
     "@types/prettier": "^3.0.0",
