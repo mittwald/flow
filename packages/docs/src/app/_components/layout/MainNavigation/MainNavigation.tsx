@@ -8,8 +8,7 @@ import { usePathname } from "next/navigation";
 import styles from "./MainNavigation.module.scss";
 import { MdxFile, SerializedMdxFile } from "@/lib/mdx/MdxFile";
 import { groupBy } from "remeda";
-import { GroupHeadingText } from "@/app/_components/layout/MainNavigation/components/GroupHeadingText";
-import { NextJsNavigationItemLink } from "@/app/_components/layout/MainNavigation/NextJsNavigationItemLink";
+import { GroupText } from "@/app/_components/layout/MainNavigation/components/GroupText";
 
 interface Props {
   docs: SerializedMdxFile[];
@@ -37,7 +36,6 @@ const MainNavigation: FC<Props> = (props) => {
         key={mdxFile.pathname}
         href={mdxFile.pathname}
         isCurrent={mdxFile.pathname === currentPathname}
-        linkComponent={NextJsNavigationItemLink}
       >
         {mdxFile.getNavTitle()}
       </NavigationItem>
@@ -63,7 +61,7 @@ const MainNavigation: FC<Props> = (props) => {
   return (
     <Fragment>
       <Heading level={2} id={headingComponentsId} className={styles.heading}>
-        <GroupHeadingText>{currentGroupName}</GroupHeadingText>
+        <GroupText>{currentGroupName}</GroupText>
       </Heading>
       {navigation}
     </Fragment>

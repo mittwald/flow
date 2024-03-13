@@ -1,13 +1,12 @@
 "use client";
-import React, { FC, useId } from "react";
+import React, { FC } from "react";
 import Navigation, {
   NavigationItem,
 } from "@mittwald/flow-react-components/Navigation";
 import { MdxFile, SerializedMdxFile } from "@/lib/mdx/MdxFile";
 import { groupBy } from "remeda";
 import styles from "./HeaderNavigation.module.scss";
-import { NextJsNavigationItemLink } from "@/app/_components/layout/MainNavigation/NextJsNavigationItemLink";
-import { GroupHeadingText } from "@/app/_components/layout/MainNavigation/components/GroupHeadingText";
+import { GroupText } from "@/app/_components/layout/MainNavigation/components/GroupText";
 import { usePathname } from "next/navigation";
 
 interface Props {
@@ -19,7 +18,6 @@ const HeaderNavigation: FC<Props> = (props) => {
 
   const navGroups = groupBy(docs, (d) => d.pathname.split("/")[1]);
 
-  const headingComponentsId = useId();
   const currentPathname = usePathname();
 
   const navigationItems = Object.entries(navGroups).map(([group, mdxFiles]) => (
@@ -27,18 +25,13 @@ const HeaderNavigation: FC<Props> = (props) => {
       href={mdxFiles[0].pathname}
       key={mdxFiles[0].pathname}
       isCurrent={currentPathname.includes(group)}
-      linkComponent={NextJsNavigationItemLink}
-      textValue={group}
     >
-      <GroupHeadingText>{group}</GroupHeadingText>
+      <GroupText>{group}</GroupText>
     </NavigationItem>
   ));
 
   return (
-    <Navigation
-      aria-labelledby={headingComponentsId}
-      className={styles.navigation}
-    >
+    <Navigation aria-label="Main navigation" className={styles.navigation}>
       {navigationItems}
     </Navigation>
   );
