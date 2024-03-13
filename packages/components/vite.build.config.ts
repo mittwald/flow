@@ -15,9 +15,9 @@ export default defineConfig(
       lib: {
         entry: {
           Avatar: "./src/components/Avatar/index.ts",
-          Badge: "./src/components/Badge/index.ts",
           Button: "./src/components/Button/index.ts",
           Checkbox: "./src/components/Checkbox/index.ts",
+          ColumnLayout: "./src/components/ColumnLayout/index.ts",
           Content: "./src/components/Content/index.ts",
           CopyToClipboardButton:
             "./src/components/CopyToClipboardButton/index.ts",
@@ -29,6 +29,7 @@ export default defineConfig(
           Image: "./src/components/Image/index.ts",
           Initials: "./src/components/Initials/index.ts",
           InlineAlert: "./src/components/InlineAlert/index.ts",
+          InlineCode: "./src/components/InlineCode/index.ts",
           Label: "./src/components/Label/index.ts",
           LabeledValue: "./src/components/LabeledValue/index.ts",
           LayoutCard: "./src/components/LayoutCard/index.ts",
@@ -37,6 +38,7 @@ export default defineConfig(
           NumberField: "./src/components/NumberField/index.ts",
           RadioGroup: "./src/components/RadioGroup/index.ts",
           Section: "./src/components/Section/index.ts",
+          StatusBadge: "./src/components/StatusBadge/index.ts",
           StatusIcon: "./src/components/StatusIcon/index.ts",
           Switch: "./src/components/Switch/index.ts",
           Text: "./src/components/Text/index.ts",

@@ -10,5 +10,5 @@ import Section from "@mittwald/flow-react-components/Section";
     hosting - we bring the most important information to
     inbox. Subscribe to our newsletter and stay up to date.
   </Text>
-  <Link>Subscribe</Link>
+  <Link href="#">Subscribe</Link>
 </Section>;

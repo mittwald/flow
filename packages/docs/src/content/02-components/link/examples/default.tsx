@@ -1,3 +1,3 @@
 import Link from "@mittwald/flow-react-components/Link";
 
-<Link>Adjust project</Link>;
+<Link href="#">Adjust project</Link>;
