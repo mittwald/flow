@@ -30,8 +30,9 @@ const MainNavigation: FC<Props> = (props) => {
     ? groupBy(currentNavGroup, (d) => d.pathname.split("/")[2])
     : undefined;
 
-  const navigationItems = (mdx: [MdxFile, ...MdxFile[]]) =>
-    Object.entries(mdx).map(([, mdxFile]) => (
+  const navigationItems = (mdx: MdxFile[]) => {
+    console.log(mdx);
+    return Object.entries(mdx).map(([, mdxFile]) => (
       <NavigationItem
         key={mdxFile.pathname}
         href={mdxFile.pathname}
@@ -40,12 +41,13 @@ const MainNavigation: FC<Props> = (props) => {
         {mdxFile.getNavTitle()}
       </NavigationItem>
     ));
+  };
 
   const navigation = navSubGroups ? (
     Object.entries(navSubGroups).map(([group, mdxFiles]) => (
       <Fragment key={group}>
-        <Heading level={4} id={headingComponentsId} className={styles.heading}>
-          <GroupHeadingText>{group}</GroupHeadingText>
+        <Heading level={3} id={headingComponentsId} className={styles.heading}>
+          <GroupText>{group}</GroupText>
         </Heading>
         <Navigation aria-labelledby={headingComponentsId}>
           {navigationItems(mdxFiles)}

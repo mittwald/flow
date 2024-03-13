@@ -4,13 +4,13 @@ import { MDXComponents } from "mdx/types";
 import InlineAlert from "@mittwald/flow-react-components/InlineAlert";
 import Content from "@mittwald/flow-react-components/Content";
 import React, { Children, isValidElement } from "react";
-import CopyToClipboardButton from "@mittwald/flow-react-components/CopyToClipboardButton";
+import CopyButton from "@mittwald/flow-react-components/CopyButton";
 
 export const customComponents: MDXComponents = {
   pre: ({ children }) => (
     <div className={styles.preContainer}>
       <pre className={styles.pre}>{children}</pre>
-      <CopyToClipboardButton
+      <CopyButton
         className={styles.preCopyButton}
         text={children}
         style="plain"

@@ -11,7 +11,7 @@
     "./Checkbox": "./dist/Checkbox.js",
     "./ColumnLayout": "./dist/ColumnLayout.js",
     "./Content": "./dist/Content.js",
-    "./CopyToClipboardButton": "./dist/CopyToClipboardButton.js",
+    "./CopyButton": "./dist/CopyButton.js",
     "./FieldDescription": "./dist/FieldDescription.js",
     "./FieldError": "./dist/FieldError.js",
     "./Heading": "./dist/Heading.js",
