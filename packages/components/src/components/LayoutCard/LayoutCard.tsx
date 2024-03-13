@@ -1,5 +1,5 @@
 import React, { FC, PropsWithChildren } from "react";
-import { ClearPropsContext, useProps } from "@/lib/propsContext";
+import { useProps } from "@/lib/propsContext";
 import styles from "./LayoutCard.module.scss";
 import clsx from "clsx";
 import { PropsWithElementType } from "@/lib/types/props";
@@ -22,7 +22,7 @@ export const LayoutCard: FC<LayoutCardProps> = (props) => {
 
   return (
     <Element className={rootClassName} {...rest}>
-      <ClearPropsContext>{children}</ClearPropsContext>
+      {children}
     </Element>
   );
 };

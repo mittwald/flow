@@ -48,6 +48,8 @@ export default defineConfig(
           TooltipTrigger:
             "./src/components/Tooltip/components/TooltipTrigger/index.ts",
           stylesInit: "./src/styles/index.ts",
+          "nextjs/LinkProvider":
+            "./src/components/nextjs/LinkProvider/index.ts",
         },
         formats: ["es"],
       },
