@@ -8,7 +8,6 @@ import { groupBy } from "remeda";
 import styles from "./HeaderNavigation.module.scss";
 import { GroupText } from "@/app/_components/layout/MainNavigation/components/GroupText";
 import { usePathname } from "next/navigation";
-import { NextJsNavigationItemLink } from "@/app/_components/layout/MainNavigation/components/NextJsNavigationItemLink";
 
 interface Props {
   docs: SerializedMdxFile[];
@@ -26,7 +25,6 @@ const HeaderNavigation: FC<Props> = (props) => {
       href={mdxFiles[0].pathname}
       key={mdxFiles[0].pathname}
       isCurrent={currentPathname.includes(group)}
-      linkComponent={NextJsNavigationItemLink}
     >
       <GroupText>{group}</GroupText>
     </NavigationItem>

@@ -16,6 +16,8 @@ navigation-item:
     value: 0.5em
 
   color:
+    default:
+      value: "{neutral.color.1000}"
     current:
       value: "{info.color.800}"
   icon-color:
