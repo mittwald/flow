@@ -3,6 +3,7 @@
 .navigationItem {
   display: flex;
   flex-direction: row;
+  color: var(--navigation-item--color--default);
 
   border: none;
   border-radius: var(--navigation-item--corner-radius);
