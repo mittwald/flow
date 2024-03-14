@@ -1,3 +1,4 @@
+import { describe, test, expect } from "vitest";
 import { getColumns } from "./getColumns";
 
 describe('"getColumns()', () => {

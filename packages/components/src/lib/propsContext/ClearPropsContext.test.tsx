@@ -3,8 +3,8 @@ import PropsContextProvider from "@/lib/propsContext/PropsContextProvider";
 import React, { FC } from "react";
 import useProps from "@/lib/propsContext/useProps";
 import ClearPropsContext from "@/lib/propsContext/ClearPropsContext";
-import { expect, test } from "@jest/globals";
 import { TestComponentProps } from "@/lib/propsContext/test";
+import { expect, test } from "vitest";
 
 const ComponentUsingProps: FC<TestComponentProps> = (props) => {
   const { testProp } = useProps("test", props);
