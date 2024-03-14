@@ -4,7 +4,6 @@ import {
   IconChevronUp,
 } from "@/components/Icon/components/icons";
 import { Empty } from "@/lib/react/components/Empty";
-
 import { AnyData } from "@/components/List/model/item/types";
 import { Sorting } from "@/components/List/model/sorting/Sorting";
 import { ContextMenuItem } from "@/components/ContextMenu";

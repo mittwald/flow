@@ -1,6 +1,6 @@
-import { expect, test, describe } from "@jest/globals";
 import React, { FC } from "react";
 import { deepFilterByType, deepFindOfType } from "./deepFindOfType";
+import { describe, expect, test } from "vitest";
 
 const Needle: FC<{ id?: number }> = () => null;
 const Garbage: FC = () => null;

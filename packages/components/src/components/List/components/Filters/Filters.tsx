@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { SortingPicker } from "@/components/List/components/Filters/components/SortingPicker/SortingPicker";
+import { SortingPicker } from "@/components/List/components/Filters/components/SortingPicker";
 import FilterPicker from "@/components/List/components/Filters/components/FilterPicker";
 import styles from "./Filters.module.css";
 import clsx from "clsx";
