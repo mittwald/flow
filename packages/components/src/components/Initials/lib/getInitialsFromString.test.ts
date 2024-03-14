@@ -1,3 +1,4 @@
+import { describe, expect, test } from "vitest";
 import { getInitialsFromString } from "./getInitialsFromString";
 
 describe('"getInitialsFromString()', () => {
