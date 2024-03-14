@@ -1,12 +1,12 @@
 import React, { ComponentProps, FC, PropsWithChildren } from "react";
 import styles from "./ContentPlaceholder.module.scss";
 import clsx from "clsx";
-import { PropsWithVariant } from "@/lib/types/props";
 import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
 
 export interface ContentPlaceholderProps
-  extends PropsWithChildren<ComponentProps<"div">>,
-    PropsWithVariant<"info" | "danger"> {}
+  extends PropsWithChildren<ComponentProps<"div">> {
+  variant: "info" | "danger";
+}
 
 export const ContentPlaceholder: FC<ContentPlaceholderProps> = (props) => {
   const { className, children, variant = "info", ...rest } = props;
