@@ -1,16 +1,16 @@
 import React, { FC } from "react";
-import { SortingPicker } from "@/components/List/components/Filter/components/SortingPicker/SortingPicker";
-import FilterPicker from "@/components/List/components/Filter/components/FilterPicker";
-import styles from "./Filter.module.css";
+import { SortingPicker } from "@/components/List/components/Filters/components/SortingPicker/SortingPicker";
+import FilterPicker from "@/components/List/components/Filters/components/FilterPicker";
+import styles from "./Filters.module.css";
 import clsx from "clsx";
-import { ActiveFilters } from "@/components/List/components/Filter/components/ActiveFilters";
+import { ActiveFilters } from "@/components/List/components/Filters/components/ActiveFilters";
 import { useList } from "@/components/List/hooks/useList";
 
 interface Props {
   className?: string;
 }
 
-export const Filter: FC<Props> = (props) => {
+export const Filters: FC<Props> = (props) => {
   const { className } = props;
   const list = useList();
 
@@ -19,7 +19,7 @@ export const Filter: FC<Props> = (props) => {
   ));
 
   return (
-    <div className={clsx(className, styles.filter)}>
+    <div className={clsx(className, styles.filters)}>
       <div className={styles.filterBar}>
         <SortingPicker />
         {filterPickerList}
@@ -29,4 +29,4 @@ export const Filter: FC<Props> = (props) => {
   );
 };
 
-export default Filter;
+export default Filters;

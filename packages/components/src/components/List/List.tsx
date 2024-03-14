@@ -2,7 +2,7 @@ import React, { PropsWithChildren } from "react";
 import { listContext } from "./listContext";
 import { DataLoader } from "@/components/List/components/DataLoader";
 import { PaginationInfos } from "@/components/List/components/PaginationInfos";
-import { Filter } from "@/components/List/components/Filter";
+import { Filters } from "@/components/List/components/Filters";
 import styles from "./List.module.css";
 import ListModel from "@/components/List/model/List";
 import { ShowMoreItemsButton } from "@/components/List/components/ShowMoreItemsButton";
@@ -74,7 +74,7 @@ export function List(props: Props) {
     >
       <DataLoader />
       <div className={styles.list}>
-        <Filter className={styles.filter} />
+        <Filters className={styles.filter} />
         <Items className={styles.rows} />
         <PaginationInfos className={styles.paginationInfos} />
         <ShowMoreItemsButton className={styles.showMoreButton} />

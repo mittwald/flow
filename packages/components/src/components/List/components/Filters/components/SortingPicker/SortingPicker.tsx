@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { SortingPickerItem } from "@/components/List/components/Filter/components/SortingPickerItem/SortingPickerItem";
+import { SortingPickerItem } from "@/components/List/components/Filters/components/SortingPickerItem/SortingPickerItem";
 import { useList } from "@/components/List/hooks/useList";
 import * as Aria from "react-aria-components";
 import { Text } from "@/components/Text";
