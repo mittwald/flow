@@ -16,7 +16,7 @@
 
   &[data-selected] {
     .track {
-      background-color: var(--switch--track-color--selected);
+      background-color: var(--switch--track-background-color--selected);
     }
 
     .handle {
@@ -25,13 +25,15 @@
   }
 
   &[data-disabled] {
-    color: var(--label--color--disabled);
     .track {
-      background-color: var(--switch--track-color--disabled);
-      color: var(--switch--track-color--disabled);
+      background-color: var(--switch--track-background-color--disabled);
+      color: var(--switch--track-background-color--disabled);
     }
     .label {
       color: var(--label--color--disabled);
+    }
+    .handle {
+      color: var(--switch--handle-color--disabled);
     }
   }
 }
@@ -40,13 +42,14 @@
 .track {
   width: var(--switch--track-width);
   height: var(--switch--track-height);
-  background-color: var(--switch--track-color--default);
+  background-color: var(--switch--track-background-color--default);
   border-radius: var(--switch--track-corner-radius);
   padding: var(--switch--track-padding);
   flex-shrink: 0;
   position: relative;
   transition-property: background-color;
   transition-duration: var(--transition--duration--default);
+  align-self: start;
 
   @include focus.focus;
 }
@@ -57,7 +60,7 @@
   align-items: center;
   width: var(--switch--handle-size);
   height: var(--switch--handle-size);
-  background-color: var(--switch--handle-color);
+  background-color: var(--switch--handle-background-color);
   border-radius: var(--corner-radius--round);
   transition-property: transform;
   transition-duration: var(--transition--duration--default);
