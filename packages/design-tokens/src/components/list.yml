@@ -5,6 +5,8 @@ list:
     value: "{size-px.m}"
   badge-to-badge-spacing:
     value: "{size-px.xs}"
+  filter-to-list-spacing:
+    value: "{size-px.m}"
 
 list-item:
   corner-radius:
@@ -20,6 +22,6 @@ list-item:
   background-color:
     value: "{neutral.color.200}"
   border-color:
-    value: "{neutral-outline-border-color}"
+    value: "{neutral-outline-border-color.default}"
   subtitle-font-size:
     value: "{font-size.s}"

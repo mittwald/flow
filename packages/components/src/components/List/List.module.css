@@ -1,19 +1,19 @@
 .list {
   display: grid;
   grid-template-areas:
-    "filterBar      "
+    "filter      "
     "items          "
     "paginationInfos"
     "showMoreButton ";
 }
 
-.filterBar {
-  grid-area: filterBar;
+.filter {
+  grid-area: filter;
 }
 
 .items {
   grid-area: items;
-  margin-block: var(--size-rem--xl);
+  margin-block-end: var(--list--filter-to-list-spacing);
 }
 
 .paginationInfos {

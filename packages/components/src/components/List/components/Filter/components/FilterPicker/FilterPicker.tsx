@@ -11,12 +11,10 @@ interface Props {
   filter: Filter<AnyData>;
 }
 
-export const FilterPickerItem: FC<Props> = (props) => {
+export const FilterPicker: FC<Props> = (props) => {
   const { filter } = props;
 
-  const values = filter.values;
-
-  const valueButtons = values
+  const items = filter.values
     .filter((v) => !filter.isValueActive(v))
     .map((v) => (
       <ContextMenuItem key={filter.getValueId(v)} id={String(v)}>
@@ -31,7 +29,7 @@ export const FilterPickerItem: FC<Props> = (props) => {
         <IconChevronDown />
       </Button>
       <ContextMenu onAction={(v) => filter.activateValue(v)}>
-        {valueButtons}
+        {items}
       </ContextMenu>
     </Aria.MenuTrigger>
   );

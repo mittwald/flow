@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import { Button } from "@/components/Button";
 import {
   IconChevronDown,
   IconChevronUp,
@@ -8,6 +7,7 @@ import { Empty } from "@/lib/react/components/Empty";
 
 import { AnyData } from "@/components/List/model/item/types";
 import { Sorting } from "@/components/List/model/sorting/Sorting";
+import { ContextMenuItem } from "@/components/ContextMenu";
 
 interface Props {
   sorting: Sorting<AnyData>;
@@ -25,15 +25,12 @@ export const SortingPickerItem: FC<Props> = (props) => {
         ? IconChevronDown
         : Empty;
 
-  const isSorted = direction !== false;
+  //const isSorted = direction !== false;
 
   return (
-    <Button
-      variant={isSorted ? "primary" : "secondary"}
-      onPress={sorting.getTableColumn().getToggleSortingHandler()}
-    >
+    <ContextMenuItem id={sorting.getTableColumn().id}>
       {sorting.getTableColumn().id}
       <SortingIcon size="s" />
-    </Button>
+    </ContextMenuItem>
   );
 };

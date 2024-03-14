@@ -1,12 +1,12 @@
 import React, { FC } from "react";
 import { useList } from "@/components/List/hooks/useList";
 import { Badge } from "@/components/Badge";
-import styles from "./FilterPickedItems.module.scss";
+import styles from "./ActiveFilters.module.scss";
 import { Text } from "@/components/Text";
 import { Button } from "@/components/Button";
 import { IconClose } from "@/components/Icon/components/icons";
 
-export const FilterPickedItems: FC = () => {
+export const ActiveFilters: FC = () => {
   const list = useList();
 
   const pickedItems = list.filters
@@ -24,19 +24,15 @@ export const FilterPickedItems: FC = () => {
     )
     .flat();
 
-  console.log(pickedItems);
-
   return (
-    <div className={styles.filterPickedItems}>
+    <div className={styles.activeFilters}>
       {pickedItems}
       {pickedItems.length > 0 && (
         <Button
           className={styles.clearButton}
           size="s"
           style="plain"
-          onPress={() => {
-            console.log(list.filters.map((f) => f.clearValues()));
-          }}
+          onPress={() => list.filters.map((f) => f.clearValues())}
         >
           reset
         </Button>
@@ -45,4 +41,4 @@ export const FilterPickedItems: FC = () => {
   );
 };
 
-export default FilterPickedItems;
+export default ActiveFilters;

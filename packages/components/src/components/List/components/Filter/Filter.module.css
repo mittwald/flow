@@ -1,0 +1,10 @@
+.filter {
+  display: flex;
+  flex-direction: column;
+}
+
+.filterBar {
+  display: flex;
+  column-gap: var(--list--button-to-button-spacing);
+  margin-bottom: var(--list--buttons-to-badges-spacing);
+}
