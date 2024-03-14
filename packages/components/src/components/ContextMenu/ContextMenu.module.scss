@@ -1,0 +1,10 @@
+.contextMenu {
+  box-shadow: var(--context-menu--box-shadow);
+  border-radius: var(--context-menu--corner-radius);
+  padding: var(--context-menu--padding);
+  background-color: var(--context-menu--background-color);
+
+  [role="menu"]:focus-visible {
+    outline: none;
+  }
+}

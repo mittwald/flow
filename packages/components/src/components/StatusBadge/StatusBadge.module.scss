@@ -1,21 +1,7 @@
 @use "@/styles/mixins/ellipsis";
 
 .statusBadge {
-  font-size: var(--status-badge--font-size);
-  font-weight: var(--status-badge--font-weight);
-  border-radius: var(--status-badge--corner-radius);
-  padding-inline: var(--status-badge--padding-x);
-  padding-block: var(--status-badge--padding-y);
-  display: flex;
-  align-items: center;
-  column-gap: var(--status-badge--icon-to-text-spacing);
-  max-width: fit-content;
-
   @extend .info;
-}
-
-.text {
-  @include ellipsis.ellipsis();
 }
 
 /* Status */

@@ -106,6 +106,55 @@ export class Filter<T> {
     return this.getArrayValue().length > 0;
   }
 
+  public activateValue(newValue: unknown): void {
+    const currentValueAsArray = this.getArrayValue();
+
+    let updatedValue: unknown;
+
+    if (this.mode === "all" || this.mode === "some") {
+      updatedValue = [...currentValueAsArray, newValue];
+    } else {
+      updatedValue = newValue;
+    }
+
+    this.list.reactTable
+      .getTableColumn(this.property)
+      .setFilterValue(updatedValue);
+    this.onFilterUpdateCallbacks.forEach((cb) => cb());
+  }
+
+  public deactivateValue(newValue: unknown): void {
+    const currentValueAsArray = this.getArrayValue();
+
+    let updatedValue: unknown;
+
+    if (this.mode === "all" || this.mode === "some") {
+      updatedValue = currentValueAsArray.filter((v) => v !== newValue);
+    } else {
+      updatedValue = null;
+    }
+
+    this.list.reactTable
+      .getTableColumn(this.property)
+      .setFilterValue(updatedValue);
+    this.onFilterUpdateCallbacks.forEach((cb) => cb());
+  }
+
+  public clearValues(): void {
+    let updatedValue: unknown;
+
+    if (this.mode === "all" || this.mode === "some") {
+      updatedValue = [];
+    } else {
+      updatedValue = null;
+    }
+
+    this.list.reactTable
+      .getTableColumn(this.property)
+      .setFilterValue(updatedValue);
+    this.onFilterUpdateCallbacks.forEach((cb) => cb());
+  }
+
   public toggleValue(newValue: unknown): void {
     const isActive = this.isValueActive(newValue);
     const currentValueAsArray = this.getArrayValue();

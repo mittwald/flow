@@ -1,7 +1,11 @@
 import React, { FC, PropsWithChildren } from "react";
 import styles from "./Avatar.module.scss";
 import clsx from "clsx";
-import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import {
+  PropsContext,
+  PropsContextProvider,
+  useProps,
+} from "@/lib/propsContext";
 import { getVariantFromChildren } from "@/components/Avatar/lib/getVariantFromChildren";
 
 export interface AvatarProps extends PropsWithChildren {
@@ -11,7 +15,7 @@ export interface AvatarProps extends PropsWithChildren {
 }
 
 export const Avatar: FC<AvatarProps> = (props) => {
-  const { children, className, size = "m" } = props;
+  const { children, className, size = "m" } = useProps("Avatar", props);
 
   const rootClassName = clsx(
     styles.avatar,

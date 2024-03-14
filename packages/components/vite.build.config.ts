@@ -20,10 +20,12 @@ export default defineConfig(
       lib: {
         entry: {
           Avatar: "./src/components/Avatar/index.ts",
+          Badge: "./src/components/Badge/index.ts",
           Button: "./src/components/Button/index.ts",
           Checkbox: "./src/components/Checkbox/index.ts",
           ColumnLayout: "./src/components/ColumnLayout/index.ts",
           Content: "./src/components/Content/index.ts",
+          ContextMenu: "./src/components/ContextMenu/index.ts",
           CopyToClipboardButton:
             "./src/components/CopyToClipboardButton/index.ts",
           FieldDescription: "./src/components/FieldDescription/index.ts",

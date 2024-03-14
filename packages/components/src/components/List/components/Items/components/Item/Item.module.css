@@ -1,0 +1,37 @@
+.listItem {
+  padding: var(--list-item--padding);
+  background-color: var(--list-item--background-color);
+  &:not(:last-child) {
+    border-bottom-color: var(--list-item--border-color);
+    border-bottom-width: var(--list-item--border-width);
+    border-bottom-style: var(--list-item--border-style);
+  }
+  display: grid;
+  grid-template-areas:
+    "avatar title content contextMenu"
+    "avatar subtitle content contextMenu";
+  grid-template-columns: auto 40ch 1fr auto;
+  grid-column-gap: var(--list-item--content-to-content-spacing);
+}
+
+.avatar {
+  grid-area: avatar;
+}
+
+.heading {
+  grid-area: title;
+}
+
+.text {
+  grid-area: subtitle;
+  font-size: var(--list-item--subtitle-font-size);
+}
+
+.content {
+  grid-area: content;
+}
+
+.contextMenu {
+  grid-area: contextMenu;
+  align-self: center;
+}

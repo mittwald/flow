@@ -10,6 +10,10 @@
       "types": "./dist/types/components/Avatar/index.d.ts",
       "import": "./dist/Avatar.js"
     },
+    "./Badge": {
+      "types": "./dist/types/components/Badge/index.d.ts",
+      "import": "./dist/Badge.js"
+    },
     "./Button": {
       "types": "./dist/types/components/Button/index.d.ts",
       "import": "./dist/Button.js"
@@ -25,6 +29,10 @@
     "./Content": {
       "types": "./dist/types/components/Content/index.d.ts",
       "import": "./dist/Content.js"
+    },
+    "./ContextMenu": {
+      "types": "./dist/types/components/ContextMenu/index.d.ts",
+      "import": "./dist/ContextMenu.js"
     },
     "./CopyToClipboardButton": {
       "types": "./dist/types/components/CopyToClipboardButton/index.d.ts",
@@ -164,8 +172,8 @@
     "copy-to-clipboard": "^3.3.3",
     "dot-prop": "^8.0.2",
     "html-react-parser": "^5.1.8",
-    "object-code": "^1.3.3",
     "invariant": "^2.2.4",
+    "object-code": "^1.3.3",
     "react-aria": "^3.32.1",
     "react-aria-components": "^1.1.1",
     "react-children-utilities": "^2.10.0",

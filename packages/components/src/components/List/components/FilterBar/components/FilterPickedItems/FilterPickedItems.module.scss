@@ -1,0 +1,11 @@
+.filterPickedItems {
+  display: flex;
+  flex-direction: row;
+  column-gap: var(--list--badge-to-badge-spacing);
+  row-gap: var(--list--badge-to-badge-spacing);
+  flex-wrap: wrap;
+}
+
+.clearButton {
+  margin-inline-start: auto;
+}

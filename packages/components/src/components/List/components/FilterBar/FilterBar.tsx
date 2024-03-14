@@ -3,6 +3,7 @@ import { SortingPicker } from "@/components/List/components/FilterBar/components
 import FilterPicker from "@/components/List/components/FilterBar/components/FilterPicker";
 import styles from "./FilterBar.module.css";
 import clsx from "clsx";
+import { FilterPickedItems } from "@/components/List/components/FilterBar/components/FilterPickedItems";
 
 interface Props {
   className?: string;
@@ -13,8 +14,11 @@ export const FilterBar: FC<Props> = (props) => {
 
   return (
     <div className={clsx(className, styles.filterBar)}>
-      <SortingPicker />
-      <FilterPicker />
+      <div style={{ display: "flex" }}>
+        <SortingPicker />
+        <FilterPicker />
+      </div>
+      <FilterPickedItems />
     </div>
   );
 };

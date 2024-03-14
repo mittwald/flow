@@ -1,0 +1,16 @@
+@use "@/styles/mixins/focus";
+
+.contextMenuItem {
+  border-radius: var(--context-menu--corner-radius);
+  padding: var(--context-menu--padding);
+
+  @include focus.focus;
+
+  &:hover {
+    background-color: var(--context-menu-item--background-color--hover);
+  }
+
+  &[data-pressed] {
+    background-color: var(--context-menu-item--background-color--pressed);
+  }
+}

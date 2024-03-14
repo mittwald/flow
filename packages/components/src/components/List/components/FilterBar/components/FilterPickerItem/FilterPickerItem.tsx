@@ -1,10 +1,11 @@
 import React, { FC } from "react";
 import { Filter } from "@/components/List/model/filter/Filter";
 import { Button } from "@/components/Button";
-import styles from "./FilterPickerItem.module.css";
-import { Label } from "@/components/Label";
-
+import { Text } from "@/components/Text";
+import * as Aria from "react-aria-components";
 import { AnyData } from "@/components/List/model/item/types";
+import { ContextMenu, ContextMenuItem } from "@/components/ContextMenu";
+import { IconChevronDown } from "@/components/Icon/components/icons";
 
 interface Props {
   filter: Filter<AnyData>;
@@ -15,20 +16,23 @@ export const FilterPickerItem: FC<Props> = (props) => {
 
   const values = filter.values;
 
-  const valueButtons = values.map((v) => (
-    <Button
-      variant={filter.isValueActive(v) ? "primary" : "secondary"}
-      key={filter.getValueId(v)}
-      onPress={() => filter.toggleValue(v)}
-    >
-      {String(v)}
-    </Button>
-  ));
+  const valueButtons = values
+    .filter((v) => !filter.isValueActive(v))
+    .map((v) => (
+      <ContextMenuItem key={filter.getValueId(v)} id={String(v)}>
+        {String(v)}
+      </ContextMenuItem>
+    ));
 
   return (
-    <div className={styles.filterPickerItem}>
-      <Label>{filter.property}</Label>
-      <div className={styles.items}>{valueButtons}</div>
-    </div>
+    <Aria.MenuTrigger>
+      <Button style="soft" size="s" variant="secondary">
+        <Text>{filter.property}</Text>
+        <IconChevronDown />
+      </Button>
+      <ContextMenu onAction={(v) => filter.activateValue(v)}>
+        {valueButtons}
+      </ContextMenu>
+    </Aria.MenuTrigger>
   );
 };

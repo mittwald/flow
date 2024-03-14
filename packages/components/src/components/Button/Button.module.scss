@@ -4,6 +4,7 @@
 .button {
   position: relative;
   font-family: "Inter", sans-serif;
+  line-height: var(--line-height--default);
   border: none;
   border-radius: var(--button--corner-radius);
   padding-block: var(--button--padding-squished-y);
@@ -18,6 +19,13 @@
   column-gap: var(--button--text-to-icon-spacing);
 
   @include focus.focus;
+
+  &[data-focused] {
+    outline-style: none;
+  }
+  &[data-focus-visible] {
+    outline-style: solid;
+  }
 
   @extend .primary;
   @extend .solid;

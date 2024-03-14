@@ -16,24 +16,28 @@ import type { HeadingProps } from "@/components/Heading";
 import type { InitialsProps } from "@/components/Initials";
 import type { ImageProps } from "@/components/Image";
 import type { CopyToClipboardButtonProps } from "@/components/CopyToClipboardButton";
+import { AvatarProps } from "@/components/Avatar";
+import { ItemContextMenuProps } from "@/components/List/components/Items/components/ItemContextMenu/ItemContextMenu";
 
 export * from "./types";
 
 export interface FlowComponentPropsTypes {
-  Text: TextProps;
+  Avatar: AvatarProps;
   Button: ButtonProps;
-  CopyToClipboard: CopyToClipboardButtonProps;
-  Icon: IconProps;
-  Label: LabelProps;
   Content: ContentProps;
+  CopyToClipboard: CopyToClipboardButtonProps;
+  FieldDescription: FieldDescriptionProps;
+  FieldError: FieldErrorProps;
+  Heading: HeadingProps;
+  Icon: IconProps;
+  Image: ImageProps;
+  Initials: InitialsProps;
+  InlineAlert: InlineAlertProps;
+  Label: LabelProps;
   LayoutCard: LayoutCardProps;
+  Link: LinkProps;
+  ListItemContextMenu: ItemContextMenuProps;
   Navigation: NavigationProps;
   NavigationItem: NavigationItemProps;
-  Heading: HeadingProps;
-  InlineAlert: InlineAlertProps;
-  Link: LinkProps;
-  Initials: InitialsProps;
-  Image: ImageProps;
-  FieldError: FieldErrorProps;
-  FieldDescription: FieldDescriptionProps;
+  Text: TextProps;
 }

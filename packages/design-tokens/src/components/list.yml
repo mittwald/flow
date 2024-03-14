@@ -1,0 +1,25 @@
+list:
+  button-to-button-spacing:
+    value: "{size-px.s}"
+  buttons-to-badges-spacing:
+    value: "{size-px.m}"
+  badge-to-badge-spacing:
+    value: "{size-px.xs}"
+
+list-item:
+  corner-radius:
+    value: "{corner-radius.default}"
+  padding:
+    value: "{size-px.s}"
+  border-width:
+    value: "{border-width.100}"
+  border-style:
+    value: "{border-style.default}"
+  content-to-content-spacing:
+    value: "{size-px.m}"
+  background-color:
+    value: "{neutral.color.200}"
+  border-color:
+    value: "{neutral-outline-border-color}"
+  subtitle-font-size:
+    value: "{font-size.s}"
