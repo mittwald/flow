@@ -3113,6 +3113,7 @@ __metadata:
     jest-environment-jsdom: "npm:^29.7.0"
     next: "npm:^14.1.3"
     nx: "npm:^18.1.0"
+    object-code: "npm:^1.3.3"
     postcss: "npm:^8.4.35"
     postcss-nested-import: "npm:^1.3.0"
     postcss-nesting: "npm:^12.0.4"
@@ -18240,6 +18241,13 @@ __metadata:
   version: 4.1.1
   resolution: "object-assign@npm:4.1.1"
   checksum: 10c0/1f4df9945120325d041ccf7b86f31e8bcc14e73d29171e37a7903050e96b81323784ec59f93f102ec635bcf6fa8034ba3ea0a8c7e69fa202b87ae3b6cec5a414
+  languageName: node
+  linkType: hard
+
+"object-code@npm:^1.3.3":
+  version: 1.3.3
+  resolution: "object-code@npm:1.3.3"
+  checksum: 10c0/804650eb9b7f23f612c5ba7afbfccc0406f622d701491a690d0492f6e01252096cfba85186fd39883fda6b0e04d623aa8d9485395830223af2395df32d55a75e
   languageName: node
   linkType: hard
 
