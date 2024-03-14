@@ -1,40 +1,139 @@
 {
   "name": "@mittwald/flow-react-components",
-  "version": "0.1.0-alpha.23",
+  "version": "0.1.0-alpha.34",
   "type": "module",
   "description": "A React implementation of Flow, mittwald’s design system",
   "homepage": "https://mittwald.github.io/flow",
   "repository": "https://github.com/mittwald/flow",
   "exports": {
-    "./Avatar": "./dist/Avatar.js",
-    "./Badge": "./dist/Badge.js",
-    "./Button": "./dist/Button.js",
-    "./Checkbox": "./dist/Checkbox.js",
-    "./Content": "./dist/Content.js",
-    "./CopyToClipboardButton": "./dist/CopyToClipboardButton.js",
-    "./FieldDescription": "./dist/FieldDescription.js",
-    "./FieldError": "./dist/FieldError.js",
-    "./Heading": "./dist/Heading.js",
-    "./Icon": "./dist/Icon.js",
-    "./Icons": "./dist/Icons.js",
-    "./Image": "./dist/Image.js",
-    "./Initials": "./dist/Initials.js",
-    "./InlineAlert": "./dist/InlineAlert.js",
-    "./Label": "./dist/Label.js",
-    "./LabeledValue": "./dist/LabeledValue.js",
-    "./LayoutCard": "./dist/LayoutCard.js",
-    "./Link": "./dist/Link.js",
-    "./Navigation": "./dist/Navigation.js",
-    "./Notification": "./dist/Notification.js",
-    "./NumberField": "./dist/NumberField.js",
-    "./RadioGroup": "./dist/RadioGroup.js",
-    "./Section": "./dist/Section.js",
-    "./StatusIcon": "./dist/StatusIcon.js",
-    "./Switch": "./dist/Switch.js",
-    "./Text": "./dist/Text.js",
-    "./TextArea": "./dist/TextArea.js",
-    "./TextField": "./dist/TextField.js",
-    "./Tooltip": "./dist/Tooltip.js",
+    "./Avatar": {
+      "types": "./dist/types/components/Avatar/index.d.ts",
+      "import": "./dist/Avatar.js"
+    },
+    "./Button": {
+      "types": "./dist/types/components/Button/index.d.ts",
+      "import": "./dist/Button.js"
+    },
+    "./Checkbox": {
+      "types": "./dist/types/components/Checkbox/index.d.ts",
+      "import": "./dist/Checkbox.js"
+    },
+    "./ColumnLayout": {
+      "types": "./dist/types/components/ColumnLayout/index.d.ts",
+      "import": "./dist/ColumnLayout.js"
+    },
+    "./Content": {
+      "types": "./dist/types/components/Content/index.d.ts",
+      "import": "./dist/Content.js"
+    },
+    "./CopyToClipboardButton": {
+      "types": "./dist/types/components/CopyToClipboardButton/index.d.ts",
+      "import": "./dist/CopyToClipboardButton.js"
+    },
+    "./FieldDescription": {
+      "types": "./dist/types/components/FieldDescription/index.d.ts",
+      "import": "./dist/FieldDescription.js"
+    },
+    "./FieldError": {
+      "types": "./dist/types/components/FieldError/index.d.ts",
+      "import": "./dist/FieldError.js"
+    },
+    "./Heading": {
+      "types": "./dist/types/components/Heading/index.d.ts",
+      "import": "./dist/Heading.js"
+    },
+    "./Icon": {
+      "types": "./dist/types/components/Icon/index.d.ts",
+      "import": "./dist/Icon.js"
+    },
+    "./Icons": {
+      "types": "./dist/types/components/Icon/components/icons/index.d.ts",
+      "import": "./dist/Icons.js"
+    },
+    "./Image": {
+      "types": "./dist/types/components/Image/index.d.ts",
+      "import": "./dist/Image.js"
+    },
+    "./Initials": {
+      "types": "./dist/types/components/Initials/index.d.ts",
+      "import": "./dist/Initials.js"
+    },
+    "./InlineAlert": {
+      "types": "./dist/types/components/InlineAlert/index.d.ts",
+      "import": "./dist/InlineAlert.js"
+    },
+    "./InlineCode": {
+      "types": "./dist/types/components/InlineCode/index.d.ts",
+      "import": "./dist/InlineCode.js"
+    },
+    "./Label": {
+      "types": "./dist/types/components/Label/index.d.ts",
+      "import": "./dist/Label.js"
+    },
+    "./LabeledValue": {
+      "types": "./dist/types/components/LabeledValue/index.d.ts",
+      "import": "./dist/LabeledValue.js"
+    },
+    "./LayoutCard": {
+      "types": "./dist/types/components/LayoutCard/index.d.ts",
+      "import": "./dist/LayoutCard.js"
+    },
+    "./Link": {
+      "types": "./dist/types/components/Link/index.d.ts",
+      "import": "./dist/Link.js"
+    },
+    "./Navigation": {
+      "types": "./dist/types/components/Navigation/index.d.ts",
+      "import": "./dist/Navigation.js"
+    },
+    "./Notification": {
+      "types": "./dist/types/components/Notification/index.d.ts",
+      "import": "./dist/Notification.js"
+    },
+    "./NumberField": {
+      "types": "./dist/types/components/NumberField/index.d.ts",
+      "import": "./dist/NumberField.js"
+    },
+    "./RadioGroup": {
+      "types": "./dist/types/components/RadioGroup/index.d.ts",
+      "import": "./dist/RadioGroup.js"
+    },
+    "./Section": {
+      "types": "./dist/types/components/Section/index.d.ts",
+      "import": "./dist/Section.js"
+    },
+    "./StatusBadge": {
+      "types": "./dist/types/components/StatusBadge/index.d.ts",
+      "import": "./dist/StatusBadge.js"
+    },
+    "./StatusIcon": {
+      "types": "./dist/types/components/StatusIcon/index.d.ts",
+      "import": "./dist/StatusIcon.js"
+    },
+    "./Switch": {
+      "types": "./dist/types/components/Switch/index.d.ts",
+      "import": "./dist/Switch.js"
+    },
+    "./Text": {
+      "types": "./dist/types/components/Text/index.d.ts",
+      "import": "./dist/Text.js"
+    },
+    "./TextArea": {
+      "types": "./dist/types/components/TextArea/index.d.ts",
+      "import": "./dist/TextArea.js"
+    },
+    "./TextField": {
+      "types": "./dist/types/components/TextField/index.d.ts",
+      "import": "./dist/TextField.js"
+    },
+    "./Tooltip": {
+      "types": "./dist/types/components/Tooltip/index.d.ts",
+      "import": "./dist/Tooltip.js"
+    },
+    "./nextjs/LinkProvider": {
+      "types": "./dist/types/components/nextjs/LinkProvider/index.d.ts",
+      "import": "./dist/nextjs/LinkProvider.js"
+    },
     "./styles": "./dist/styles.css"
   },
   "files": [
@@ -63,6 +162,7 @@
     "clsx": "^2.1.0",
     "copy-to-clipboard": "^3.3.3",
     "html-react-parser": "^5.1.8",
+    "object-code": "^1.3.3",
     "react-aria": "^3.32.1",
     "react-aria-components": "^1.1.1",
     "react-children-utilities": "^2.10.0",
@@ -100,6 +200,7 @@
     "fs-jetpack": "^5.1.0",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
+    "next": "^14.1.3",
     "nx": "^18.1.0",
     "postcss": "^8.4.35",
     "postcss-nested-import": "^1.3.0",
@@ -122,10 +223,17 @@
     "vite-plugin-banner": "^0.7.1",
     "vite-plugin-checker": "^0.6.4",
     "vite-plugin-dts": "^3.7.3",
+    "vite-plugin-externalize-deps": "^0.8.0",
     "yaml": "^2.4.0"
   },
   "peerDependencies": {
+    "next": "*",
     "react": "18.2.0",
     "react-dom": "18.2.0"
+  },
+  "peerDependenciesMeta": {
+    "next": {
+      "optional": true
+    }
   }
 }
