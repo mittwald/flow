@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.33](https://github.com/mittwald/flow/compare/0.1.0-alpha.32...0.1.0-alpha.33) (2024-03-14)
+
+### Features
+
+- add color to Icon in Avatar
+  ([a430727](https://github.com/mittwald/flow/commit/a430727deb8f7290daf38fb0340d92401b2f4830))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.32](https://github.com/mittwald/flow/compare/0.1.0-alpha.31...0.1.0-alpha.32) (2024-03-13)
 
 ### Bug Fixes
