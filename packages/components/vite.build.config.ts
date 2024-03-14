@@ -2,6 +2,7 @@ import { defineConfig, mergeConfig } from "vite";
 import banner from "vite-plugin-banner";
 import dts from "vite-plugin-dts";
 import baseConfig from "./vite.config";
+import { externalizeDeps } from "vite-plugin-externalize-deps";
 
 export default defineConfig(
   mergeConfig(baseConfig, {
@@ -9,7 +10,11 @@ export default defineConfig(
       banner((filename) =>
         filename.endsWith(".js") ? '"use client"\r\n/* */' : "",
       ),
-      dts({ rollupTypes: true }),
+      externalizeDeps(),
+      dts({
+        include: ["src"],
+        outDir: "dist/types",
+      }),
     ],
     build: {
       lib: {
@@ -48,6 +53,8 @@ export default defineConfig(
           TooltipTrigger:
             "./src/components/Tooltip/components/TooltipTrigger/index.ts",
           stylesInit: "./src/styles/index.ts",
+          "nextjs/LinkProvider":
+            "./src/components/nextjs/LinkProvider/index.ts",
         },
         formats: ["es"],
       },
@@ -60,20 +67,6 @@ export default defineConfig(
             return assetInfo.name;
           },
         },
-        external: [
-          "react",
-          "react-dom",
-          "@tabler/icons-react",
-          "@fortawesome/react-fontawesome",
-          "@fortawesome/fontawesome-svg-core",
-          "@react-aria/utils",
-          "@react-types/shared",
-          "html-react-parser",
-          "react-aria",
-          "react-aria-components",
-          "react-stately",
-          "remeda",
-        ],
       },
     },
   }),

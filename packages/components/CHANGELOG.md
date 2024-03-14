@@ -3,6 +3,58 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.34](https://github.com/mittwald/flow/compare/0.1.0-alpha.33...0.1.0-alpha.34) (2024-03-14)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.33](https://github.com/mittwald/flow/compare/0.1.0-alpha.32...0.1.0-alpha.33) (2024-03-14)
+
+### Features
+
+- add color to Icon in Avatar
+  ([a430727](https://github.com/mittwald/flow/commit/a430727deb8f7290daf38fb0340d92401b2f4830))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.32](https://github.com/mittwald/flow/compare/0.1.0-alpha.31...0.1.0-alpha.32) (2024-03-13)
+
+### Bug Fixes
+
+- link component in link
+  ([959f6bb](https://github.com/mittwald/flow/commit/959f6bb554283010b2d271b245b4b017c4e7392f))
+
+### Features
+
+- add link component to link
+  ([b2ddea8](https://github.com/mittwald/flow/commit/b2ddea8a3bfc1596ba721fb92b6004e44823b54b))
+- add LinkProvider for Next.JS
+  ([1d275f4](https://github.com/mittwald/flow/commit/1d275f46be029179d4129b53b8c58fb0346e5fa5))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.31](https://github.com/mittwald/flow/compare/0.1.0-alpha.30...0.1.0-alpha.31) (2024-03-13)
+
+### Bug Fixes
+
+- fix navigation ([#222](https://github.com/mittwald/flow/issues/222))
+  ([bcbbe2e](https://github.com/mittwald/flow/commit/bcbbe2edd642989f6d195883d37bee153e3d0268))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.30](https://github.com/mittwald/flow/compare/0.1.0-alpha.29...0.1.0-alpha.30) (2024-03-12)
 
 ### Features

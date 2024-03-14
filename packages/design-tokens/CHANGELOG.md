@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.34](https://github.com/mittwald/flow/compare/0.1.0-alpha.33...0.1.0-alpha.34) (2024-03-14)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.32](https://github.com/mittwald/flow/compare/0.1.0-alpha.31...0.1.0-alpha.32) (2024-03-13)
+
+### Features
+
+- add LinkProvider for Next.JS
+  ([1d275f4](https://github.com/mittwald/flow/commit/1d275f46be029179d4129b53b8c58fb0346e5fa5))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.30](https://github.com/mittwald/flow/compare/0.1.0-alpha.29...0.1.0-alpha.30) (2024-03-12)
 
 ### Features
