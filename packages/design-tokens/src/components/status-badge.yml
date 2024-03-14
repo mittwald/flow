@@ -1,0 +1,37 @@
+status-badge:
+  font-size:
+    value: "{font-size.s}"
+  font-weight:
+    value: "{font-weight.bold}"
+  corner-radius:
+    value: "{corner-radius.default}"
+  padding-y:
+    value: "{size-rem.xs}"
+  padding-x:
+    value: "{size-rem.s}"
+  icon-to-text-spacing:
+    value: "{size-rem.xs}"
+
+  # Info
+  info-background-color:
+    value: "{info-soft-background-color.default}"
+  info-content-color:
+    value: "{info-soft-content-color.default}"
+
+  # Success
+  success-background-color:
+    value: "{success-soft-background-color.default}"
+  success-content-color:
+    value: "{success-soft-content-color.default}"
+
+  # Warning
+  warning-background-color:
+    value: "{warning-soft-background-color.default}"
+  warning-content-color:
+    value: "{warning-soft-content-color.default}"
+
+  # Danger
+  danger-background-color:
+    value: "{danger-soft-background-color.default}"
+  danger-content-color:
+    value: "{danger-soft-content-color.default}"

@@ -8,7 +8,7 @@ import { dummyText } from "@/lib/dev/dummyText";
 import defaultMeta from "./Default.stories";
 
 const meta: Meta<typeof RadioGroup> = {
-  title: "Forms/RadioGroup/EdgeCases",
+  title: "Form Controls/RadioGroup/Edge Cases",
   ...defaultMeta,
 };
 
@@ -56,7 +56,12 @@ export const MultipleElements: Story = {
 
 export const SmallSpace: Story = {
   render: (props) => (
-    <RadioGroup {...props} defaultValue="0" aria-label="Rating">
+    <RadioGroup
+      {...props}
+      defaultValue="0"
+      aria-label="Rating"
+      style={{ width: "500px" }}
+    >
       {Array(3)
         .fill("")
         .map((value, index) => (

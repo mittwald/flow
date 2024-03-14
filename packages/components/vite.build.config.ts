@@ -2,6 +2,7 @@ import { defineConfig, mergeConfig } from "vite";
 import banner from "vite-plugin-banner";
 import dts from "vite-plugin-dts";
 import baseConfig from "./vite.config";
+import { externalizeDeps } from "vite-plugin-externalize-deps";
 
 export default defineConfig(
   mergeConfig(baseConfig, {
@@ -9,15 +10,19 @@ export default defineConfig(
       banner((filename) =>
         filename.endsWith(".js") ? '"use client"\r\n/* */' : "",
       ),
-      dts({ rollupTypes: true }),
+      externalizeDeps(),
+      dts({
+        include: ["src"],
+        outDir: "dist/types",
+      }),
     ],
     build: {
       lib: {
         entry: {
           Avatar: "./src/components/Avatar/index.ts",
-          Badge: "./src/components/Badge/index.ts",
           Button: "./src/components/Button/index.ts",
           Checkbox: "./src/components/Checkbox/index.ts",
+          ColumnLayout: "./src/components/ColumnLayout/index.ts",
           Content: "./src/components/Content/index.ts",
           ContentPlaceholder: "./src/components/ContentPlaceholder/index.ts",
           CopyToClipboardButton:
@@ -30,6 +35,7 @@ export default defineConfig(
           Image: "./src/components/Image/index.ts",
           Initials: "./src/components/Initials/index.ts",
           InlineAlert: "./src/components/InlineAlert/index.ts",
+          InlineCode: "./src/components/InlineCode/index.ts",
           Label: "./src/components/Label/index.ts",
           LabeledValue: "./src/components/LabeledValue/index.ts",
           LayoutCard: "./src/components/LayoutCard/index.ts",
@@ -38,6 +44,7 @@ export default defineConfig(
           NumberField: "./src/components/NumberField/index.ts",
           RadioGroup: "./src/components/RadioGroup/index.ts",
           Section: "./src/components/Section/index.ts",
+          StatusBadge: "./src/components/StatusBadge/index.ts",
           StatusIcon: "./src/components/StatusIcon/index.ts",
           Switch: "./src/components/Switch/index.ts",
           Text: "./src/components/Text/index.ts",
@@ -47,6 +54,8 @@ export default defineConfig(
           TooltipTrigger:
             "./src/components/Tooltip/components/TooltipTrigger/index.ts",
           stylesInit: "./src/styles/index.ts",
+          "nextjs/LinkProvider":
+            "./src/components/nextjs/LinkProvider/index.ts",
         },
         formats: ["es"],
       },
@@ -59,20 +68,6 @@ export default defineConfig(
             return assetInfo.name;
           },
         },
-        external: [
-          "react",
-          "react-dom",
-          "@tabler/icons-react",
-          "@fortawesome/react-fontawesome",
-          "@fortawesome/fontawesome-svg-core",
-          "@react-aria/utils",
-          "@react-types/shared",
-          "html-react-parser",
-          "react-aria",
-          "react-aria-components",
-          "react-stately",
-          "remeda",
-        ],
       },
     },
   }),

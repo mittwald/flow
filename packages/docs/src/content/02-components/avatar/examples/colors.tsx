@@ -1,5 +1,7 @@
 import Avatar from "@mittwald/flow-react-components/Avatar";
 import Initials from "@mittwald/flow-react-components/Initials";
+import { IconHome } from "@mittwald/flow-react-components/Icons";
+import { IconCustomer } from "@mittwald/flow-react-components/Icons";
 
 <Row>
   <Avatar>
@@ -13,5 +15,11 @@ import Initials from "@mittwald/flow-react-components/Initials";
   </Avatar>
   <Avatar>
     <Initials>Gorgio Gopher</Initials>
+  </Avatar>
+  <Avatar>
+    <IconHome />
+  </Avatar>
+  <Avatar>
+    <IconCustomer />
   </Avatar>
 </Row>;

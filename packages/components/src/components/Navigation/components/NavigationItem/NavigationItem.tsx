@@ -1,25 +1,30 @@
-import React from "react";
-import { TreeState } from "react-stately";
-import { Node } from "@react-types/shared";
+import React, {
+  ComponentProps,
+  ComponentType,
+  FC,
+  PropsWithChildren,
+} from "react";
 import styles from "./NavigationItem.module.scss";
-import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
-import { useNavigationItem } from "@/hooks/useNavigationItem";
-import { NavigationCollectionItemProps } from "@/components/Navigation/components/NavigationItem/NavigationCollectionItem";
+import {
+  PropsContext,
+  PropsContextProvider,
+  useProps,
+} from "@/lib/propsContext";
+import * as Aria from "react-aria-components";
 
-interface NavigationItemProps<T = never> {
-  state: TreeState<T>;
-  item: Node<T>;
+export interface NavigationItemProps
+  extends PropsWithChildren<Omit<Aria.LinkProps, "children" | "slot">> {
+  isCurrent?: boolean;
+  linkComponent?: ComponentType<Omit<ComponentProps<"a">, "ref">>;
 }
 
-export function NavigationItem<T extends object>(
-  props: NavigationItemProps<T>,
-) {
-  const { item, state } = props;
-  const { isCurrent, linkComponent: Link = "a" } =
-    item.props as NavigationCollectionItemProps;
-
-  const ref = React.useRef(null);
-  const { menuItemProps } = useNavigationItem({ key: item.key }, state, ref);
+export const NavigationItem: FC<NavigationItemProps> = (props) => {
+  const {
+    isCurrent,
+    children,
+    linkComponent: Link = Aria.Link,
+    ...linkProps
+  } = useProps("NavigationItem", props);
 
   const propsContext: PropsContext = {
     Text: {
@@ -31,16 +36,16 @@ export function NavigationItem<T extends object>(
   };
 
   return (
-    <li className={styles.navigationItem}>
+    <li>
       <Link
-        {...menuItemProps}
-        ref={ref}
+        {...linkProps}
+        className={styles.navigationItem}
         aria-current={isCurrent ? "page" : false}
       >
         <PropsContextProvider props={propsContext}>
-          {item.rendered}
+          {children}
         </PropsContextProvider>
       </Link>
     </li>
   );
-}
+};

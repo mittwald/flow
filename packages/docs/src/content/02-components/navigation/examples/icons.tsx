@@ -1,7 +1,7 @@
 import Navigation, {
   NavigationItem,
 } from "@mittwald/flow-react-components/Navigation";
-import { Text } from "@mittwald/flow-react-components/Text";
+import Text from "@mittwald/flow-react-components/Text";
 import {
   IconCustomer,
   IconProject,
@@ -9,15 +9,15 @@ import {
 } from "@mittwald/flow-react-components/Icons";
 
 <Navigation aria-label="Main menu">
-  <NavigationItem textValue="Customer">
+  <NavigationItem>
     <IconCustomer />
     <Text>Customer</Text>
   </NavigationItem>
-  <NavigationItem textValue="Server" isCurrent>
+  <NavigationItem isCurrent>
     <IconServer />
     <Text>Server</Text>
   </NavigationItem>
-  <NavigationItem textValue="Project">
+  <NavigationItem>
     <IconProject />
     <Text>Project</Text>
   </NavigationItem>

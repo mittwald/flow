@@ -21,7 +21,7 @@ export interface ButtonProps
   /** @default "primary" */
   variant?: "primary" | "accent" | "secondary" | "danger";
   /** @default "solid" */
-  style?: "plain" | "solid";
+  style?: "plain" | "solid" | "soft";
   /** @default "m" */
   size?: "m" | "s";
 

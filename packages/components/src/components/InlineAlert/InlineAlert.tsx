@@ -7,21 +7,21 @@ import {
 import styles from "./InlineAlert.module.scss";
 import clsx from "clsx";
 import { StatusIcon } from "@/components/StatusIcon";
-import { PropsWithVariant } from "@/lib/types/props";
+import { PropsWithStatus } from "@/lib/types/props";
 
 export interface InlineAlertProps
   extends PropsWithChildren<ComponentProps<"aside">>,
-    PropsWithVariant {}
+    PropsWithStatus {}
 
 export const InlineAlert: FC<InlineAlertProps> = (props) => {
   const {
     children,
     className,
-    variant = "info",
+    status = "info",
     ...rest
   } = useProps("InlineAlert", props);
 
-  const rootClassName = clsx(styles.inlineAlert, styles[variant], className);
+  const rootClassName = clsx(styles.inlineAlert, styles[status], className);
 
   const propsContext: PropsContext = {
     Heading: {
@@ -35,7 +35,7 @@ export const InlineAlert: FC<InlineAlertProps> = (props) => {
 
   return (
     <aside {...rest} className={rootClassName}>
-      <StatusIcon className={styles.statusIcon} variant={variant} />
+      <StatusIcon className={styles.statusIcon} status={status} />
       <PropsContextProvider props={propsContext}>
         {children}
       </PropsContextProvider>

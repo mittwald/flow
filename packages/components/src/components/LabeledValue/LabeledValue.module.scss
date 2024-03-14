@@ -18,11 +18,8 @@
   grid-area: label;
 }
 
-.content {
-  grid-area: value;
-}
-
 .button {
   grid-area: button;
   align-self: start;
+  justify-self: start;
 }

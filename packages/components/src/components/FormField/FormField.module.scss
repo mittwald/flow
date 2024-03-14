@@ -35,7 +35,7 @@
     --form-control--background-color--default
   );
   --form-field-control--border-color: var(
-    --form-control--background-color--default
+    --form-control--border-color--default
   );
   --form-field-control--color: inherit;
 
@@ -43,9 +43,6 @@
   &:hover {
     --form-field-control--background-color: var(
       --form-control--background-color--hover
-    );
-    --form-field-control--border-color: var(
-      --form-control--border-color--hover
     );
     --form-field-control--color: inherit;
   }
