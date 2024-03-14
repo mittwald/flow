@@ -4,7 +4,7 @@ import React from "react";
 import { action } from "@storybook/addon-actions";
 
 const meta: Meta<typeof Switch> = {
-  title: "Forms/Switch",
+  title: "Form Controls/Switch",
   component: Switch,
   args: {
     onChange: action("onChange"),
@@ -13,9 +13,6 @@ const meta: Meta<typeof Switch> = {
     controls: { exclude: ["onChange"] },
   },
   argTypes: {
-    variant: {
-      control: "inline-radio",
-    },
     labelPosition: {
       control: "inline-radio",
     },

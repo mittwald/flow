@@ -22,17 +22,15 @@ form-control:
 
   border-color:
     default:
-      value: "{neutral-outline-border-color}"
+      value: "{neutral-outline-border-color.default}"
     disabled:
       value: "{disabled-outline-border-color}"
-    hover:
-      value: "{neutral-outline-border-color}"
     invalid:
       value: "{danger-outline-border-color}"
     focused:
-      value: "{info-outline-border-color}"
+      value: "{focus.outline-color}"
     selected:
-      value: "{info-outline-border-color}"
+      value: "{neutral-outline-border-color.selected}"
 
   background-color:
     default:
@@ -40,11 +38,11 @@ form-control:
     disabled:
       value: "{disabled-outline-background-color}"
     hover:
-      value: "{info-outline-background-color.hover}"
+      value: "{neutral-outline-background-color.hover}"
     focused:
-      value: "{neutral-outline-background-color}"
+      value: "{neutral.color.200}"
     invalid:
-      value: "{danger-outline-background-color.hover}"
+      value: "{danger.color.100}"
     selected:
       value: "{info-outline-background-color.pressed}"
 
@@ -54,4 +52,4 @@ form-control:
     disabled:
       value: "{disabled-outline-content-color}"
     selected:
-      value: "{info-outline-content-color}"
+      value: "{neutral-outline-content-color}"

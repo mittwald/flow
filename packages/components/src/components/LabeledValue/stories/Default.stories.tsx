@@ -4,6 +4,8 @@ import React from "react";
 import { Label } from "@/components/Label";
 import { Content } from "@/components/Content";
 import { CopyToClipboardButton } from "@/components/CopyToClipboardButton";
+import { InlineCode } from "@/components/InlineCode";
+import { Link } from "@/components/Link";
 
 const meta: Meta<typeof LabeledValue> = {
   title: "Content/LabeledValue",
@@ -30,6 +32,26 @@ export const WithCopyButton: Story = {
       <Label>Project</Label>
       <Content>My proSpace</Content>
       <CopyToClipboardButton text="My proSpace" />
+    </LabeledValue>
+  ),
+};
+
+export const WithInlineCode: Story = {
+  render: (props) => (
+    <LabeledValue {...props}>
+      <Label>IP address</Label>
+      <InlineCode>127.0.0.1</InlineCode>
+      <CopyToClipboardButton text="127.0.0.1" />
+    </LabeledValue>
+  ),
+};
+
+export const WithLink: Story = {
+  render: (props) => (
+    <LabeledValue {...props}>
+      <Label>Domain</Label>
+      <Link>https://mittwald.de</Link>
+      <CopyToClipboardButton text="https://mittwald.de" />
     </LabeledValue>
   ),
 };

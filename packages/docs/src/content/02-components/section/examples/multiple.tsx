@@ -23,6 +23,6 @@ import Label from "@mittwald/flow-react-components/Label";
       in your inbox. Subscribe to our newsletter and stay up
       to date.
     </Text>
-    <Link>Subscribe</Link>
+    <Link href="#">Subscribe</Link>
   </Section>
 </>;
