@@ -407,11 +407,19 @@ neutral-plain-content-color:
 
 # Neutral Outline
 neutral-outline-background-color:
-  value: "{neutral.color.200}"
+  default:
+    value: "{neutral.color.200}"
+  hover:
+    value: "{primary.color.100}"
+  selected:
+    value: "{primary.color.200}"
 neutral-outline-content-color:
   value: "{neutral.color.1000}"
 neutral-outline-border-color:
-  value: "{neutral.color.700}"
+  default:
+    value: "{neutral.color.700}"
+  selected:
+    value: "{primary.color.800}"
 
 # Neutral Soft
 neutral-soft-background-color:
@@ -456,7 +464,3 @@ disabled-soft-background-color:
   value: "{neutral.color.300}"
 disabled-soft-content-color:
   value: "{neutral.color.500}"
-
-# Focus
-focus-outline-color:
-  value: "{primary.color.800}"

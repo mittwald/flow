@@ -27,6 +27,6 @@ import { IconMember } from "@mittwald/flow-react-components/Icons";
       in your inbox. Subscribe to our newsletter and stay up
       to date.
     </Text>
-    <Link>Subscribe</Link>
+    <Link href="#">Subscribe</Link>
   </Section>
 </>;
