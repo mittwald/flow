@@ -42,7 +42,7 @@ h3.heading {
 
 .content {
   grid-area: content;
-  line-height: var(--notification--line-height);
+  font-size: var(--notification--font-size);
 }
 
 .close {

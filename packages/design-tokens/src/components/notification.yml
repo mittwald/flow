@@ -13,19 +13,19 @@ notification:
     value: "{size-rem.s}"
   heading-font-size:
     value: "{font-size.m}"
+  font-size:
+    value: "{font-size.s}"
   icon-size:
     value: "{icon.size.s}"
   width:
     value: "355px"
   shadow:
     value: "{shadow.overlay}"
-  line-height:
-    value: "{size-rem.m}"
 
   # Info
   info-background-color:
     default:
-      value: "{info-outline-background-color.default}"
+      value: "{neutral.color.100}"
     hover:
       value: "{info-outline-background-color.hover}"
     pressed:
@@ -38,7 +38,7 @@ notification:
   # Warning
   warning-background-color:
     default:
-      value: "{warning-outline-background-color.default}"
+      value: "{neutral.color.100}"
     hover:
       value: "{warning-outline-background-color.hover}"
     pressed:
@@ -51,7 +51,7 @@ notification:
   # Danger
   danger-background-color:
     default:
-      value: "{danger-outline-background-color.default}"
+      value: "{neutral.color.100}"
     hover:
       value: "{danger-outline-background-color.hover}"
     pressed:
@@ -64,7 +64,7 @@ notification:
   # Success
   success-background-color:
     default:
-      value: "{success-outline-background-color.default}"
+      value: "{neutral.color.100}"
     hover:
       value: "{success-outline-background-color.hover}"
     pressed:

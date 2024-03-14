@@ -8,7 +8,7 @@ import defaultMeta from "./Default.stories";
 
 const meta: Meta<typeof Notification> = {
   ...defaultMeta,
-  title: "Overlays/Notification/Variants",
+  title: "Status/Notification/Variants",
   component: Notification,
   render: () => (
     <NotificationProvider>
@@ -68,7 +68,7 @@ export const Success: Story = {
       content={{
         content: "WordPress has been installed successfully",
         title: "App Installed",
-        variant: "success",
+        status: "success",
       }}
     />
   ),
@@ -80,7 +80,7 @@ export const Warning: Story = {
       content={{
         content: "Your email address has been deactivated",
         title: "Email deactivated",
-        variant: "warning",
+        status: "warning",
       }}
     />
   ),
@@ -92,7 +92,7 @@ export const Danger: Story = {
       content={{
         content: "Your project storage is exceeded",
         title: "Storage exceeded",
-        variant: "danger",
+        status: "danger",
       }}
     />
   ),

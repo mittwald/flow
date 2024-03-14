@@ -5,7 +5,7 @@ import { Button } from "@/components/Button";
 import { NotificationProvider } from "../components/NotificationProvider";
 
 const meta: Meta<typeof Notification> = {
-  title: "Overlays/Notification",
+  title: "Status/Notification",
   component: Notification,
   render: () => (
     <NotificationProvider>

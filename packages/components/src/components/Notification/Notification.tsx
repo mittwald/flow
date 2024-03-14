@@ -3,7 +3,7 @@ import { useToast } from "@react-aria/toast";
 import { Button } from "@/components/Button";
 import type { ToastState } from "@react-stately/toast";
 import React, { FC } from "react";
-import { PropsWithVariant } from "@/lib/types/props";
+import { PropsWithStatus } from "@/lib/types/props";
 import styles from "./Notification.module.scss";
 import clsx from "clsx";
 import { Heading } from "@/components/Heading";
@@ -11,7 +11,7 @@ import { Content } from "@/components/Content";
 import { StatusIcon } from "@/components/StatusIcon";
 import { IconClose } from "@/components/Icon/components/icons";
 
-export interface NotificationContentProps extends PropsWithVariant {
+export interface NotificationContentProps extends PropsWithStatus {
   title: string;
   content?: string;
 }
@@ -29,14 +29,14 @@ export const Notification: FC<NotificationProps<NotificationContentProps>> = ({
 
   const rootClassName = clsx(
     styles.notification,
-    styles[props.toast.content.variant ?? "info"],
+    styles[props.toast.content.status ?? "info"],
   );
 
   return (
     <div {...toastProps} ref={ref} className={rootClassName}>
       <StatusIcon
         className={styles.statusIcon}
-        variant={props.toast.content.variant}
+        status={props.toast.content.status}
       />
       <Heading className={styles.heading}>{props.toast.content.title}</Heading>
       <Content className={styles.content}>
