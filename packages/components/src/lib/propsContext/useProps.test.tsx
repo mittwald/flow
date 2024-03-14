@@ -1,4 +1,3 @@
-import { beforeEach, describe, expect, test } from "@jest/globals";
 import {
   DependencyList,
   FC,
@@ -13,6 +12,7 @@ import PropsContextProvider from "@/lib/propsContext/PropsContextProvider";
 import dynamic from "@/lib/propsContext/dynamicProps/dynamic";
 import { PropsContext } from "@/lib/propsContext/types";
 import { TestComponentProps } from "@/lib/propsContext/test";
+import { beforeEach, describe, expect, test } from "vitest";
 
 let renderCount: number;
 let renderedPropHistory: Array<string | undefined>;
