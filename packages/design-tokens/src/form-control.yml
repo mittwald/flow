@@ -48,8 +48,8 @@ form-control:
 
   content-color:
     default:
-      value: "{neutral-outline-content-color}"
+      value: "{neutral-outline-content-color.default}"
     disabled:
       value: "{disabled-outline-content-color}"
     selected:
-      value: "{info-outline-content-color}"
+      value: "{neutral-outline-content-color.selected}"
