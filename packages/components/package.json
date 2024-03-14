@@ -86,6 +86,10 @@
       "types": "./dist/types/components/Navigation/index.d.ts",
       "import": "./dist/Navigation.js"
     },
+    "./Notification": {
+      "types": "./dist/types/components/Notification/index.d.ts",
+      "import": "./dist/Notification.js"
+    },
     "./NumberField": {
       "types": "./dist/types/components/NumberField/index.d.ts",
       "import": "./dist/NumberField.js"
@@ -150,7 +154,9 @@
     "test:unit": "node --experimental-vm-modules $(yarn bin jest)"
   },
   "dependencies": {
+    "@react-aria/toast": "3.0.0-beta.8",
     "@react-aria/utils": "^3.23.2",
+    "@react-stately/toast": "3.0.0-beta.1",
     "@react-types/shared": "^3.22.1",
     "@tabler/icons-react": "^2.47.0",
     "clsx": "^2.1.0",
