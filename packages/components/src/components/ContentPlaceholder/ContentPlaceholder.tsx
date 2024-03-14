@@ -5,7 +5,7 @@ import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
 
 export interface ContentPlaceholderProps
   extends PropsWithChildren<ComponentProps<"div">> {
-  variant: "info" | "danger";
+  variant?: "info" | "danger";
 }
 
 export const ContentPlaceholder: FC<ContentPlaceholderProps> = (props) => {
