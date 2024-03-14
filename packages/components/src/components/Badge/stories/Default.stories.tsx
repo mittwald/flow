@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import Badge from "../Badge";
 import React from "react";
 import { Button } from "@/components/Button";
+import { Text } from "@/components/Text";
 import { IconClose } from "@/components/Icon/components/icons";
 
 const meta: Meta<typeof Badge> = {
@@ -21,7 +22,7 @@ export const Default: Story = {};
 export const WithButton: Story = {
   render: (props) => (
     <Badge {...props}>
-      Info
+      <Text>Info</Text>
       <Button>
         <IconClose />
       </Button>
