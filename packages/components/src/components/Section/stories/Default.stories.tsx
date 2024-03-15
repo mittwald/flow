@@ -21,13 +21,13 @@ const meta: Meta<typeof Section> = {
         the most important information to inbox. Subscribe to our newsletter and
         stay up to date.
       </Text>
-      <Link>Subscribe</Link>
+      <Link href="#">Subscribe</Link>
     </Section>
   ),
 };
 export default meta;
 
-type Story = StoryObj<typeof Text>;
+type Story = StoryObj<typeof Section>;
 
 export const Default: Story = {};
 
@@ -50,7 +50,7 @@ export const MultipleSections: Story = {
           you the most important information in your inbox. Subscribe to our
           newsletter and stay up to date.
         </Text>
-        <Link>Subscribe</Link>
+        <Link href="#">Subscribe</Link>
       </Section>
     </>
   ),

@@ -1,0 +1,7 @@
+focus:
+  outline-color:
+    value: "{primary.color.800}"
+  outline-offset:
+    value: "{size-px.xxs}"
+  outline-width:
+    value: "{border-width.200}"

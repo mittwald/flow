@@ -1,11 +1,6 @@
 .initials {
   display: flex;
   font-weight: bold;
-  background-color: var(--background-color);
-
-  *:nth-child(odd) {
-    color: var(--content-color);
-  }
 
   *:nth-child(even) {
     color: var(--content-accent-color);
@@ -14,22 +9,4 @@
   *:only-child {
     color: var(--content-accent-color);
   }
-
-  @extend .variant-1;
 }
-
-/* Variants */
-@mixin variant($variant) {
-  .variant-#{$variant} {
-    --background-color: var(--initials--variant-#{$variant}-background-color);
-    --content-color: var(--initials--variant-#{$variant}-content-color);
-    --content-accent-color: var(
-      --initials--variant-#{$variant}-content-accent-color
-    );
-  }
-}
-
-@include variant(1);
-@include variant(2);
-@include variant(3);
-@include variant(4);
