@@ -1,3 +1,8 @@
 {
-  "paginationInfo": "Showing {visibleRows} of {totalRows}"
+  "options": "Options",
+  "paginationInfo": "Showing {visibleRows} of {totalRows}",
+  "paginationInfoFiltered": "{visibleItemsCount} of {filteredItemsCount} (filtered from {totalItemsCount}) shown",
+  "resetFilters": "Reset filters",
+  "showMore": "Show more",
+  "sorting": "Sorting"
 }

@@ -28,7 +28,7 @@ export const FilterPicker: FC<Props> = (props) => {
         <Text>{filter.property}</Text>
         <IconChevronDown />
       </Button>
-      <ContextMenu onAction={(v) => filter.activateValue(v)}>
+      <ContextMenu onAction={(key) => filter.activateValue(key)}>
         {items}
       </ContextMenu>
     </Aria.MenuTrigger>

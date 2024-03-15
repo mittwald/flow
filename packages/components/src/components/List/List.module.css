@@ -9,11 +9,11 @@
 
 .filter {
   grid-area: filter;
+  margin-block-end: var(--list--filter-to-list-spacing);
 }
 
 .items {
   grid-area: items;
-  margin-block-end: var(--list--filter-to-list-spacing);
 }
 
 .paginationInfos {

@@ -4,6 +4,8 @@ import { IconContextMenu } from "@/components/Icon/components/icons";
 import { useProps } from "@/lib/propsContext";
 import * as Aria from "react-aria-components";
 import { ContextMenu } from "@/components/ContextMenu";
+import locales from "*.locale.json";
+import { useMessageFormatter } from "react-aria";
 
 export interface ItemContextMenuProps extends PropsWithChildren {
   className?: string;
@@ -11,13 +13,18 @@ export interface ItemContextMenuProps extends PropsWithChildren {
 
 export const ItemContextMenu: FC<ItemContextMenuProps> = (props) => {
   const { className, children } = useProps("ListItemContextMenu", props);
+  const stringFormatter = useMessageFormatter(locales);
 
   return (
     <Aria.MenuTrigger>
-      <Button style="plain" className={className}>
+      <Button
+        style="plain"
+        className={className}
+        aria-label={stringFormatter("options")}
+      >
         <IconContextMenu />
       </Button>
-      <ContextMenu>{children}</ContextMenu>
+      <ContextMenu placement="bottom end">{children}</ContextMenu>
     </Aria.MenuTrigger>
   );
 };

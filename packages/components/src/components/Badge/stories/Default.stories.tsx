@@ -11,7 +11,7 @@ const meta: Meta<typeof Badge> = {
   parameters: {
     controls: { exclude: ["className"] },
   },
-  render: (props) => <Badge {...props}>Info</Badge>,
+  render: (props) => <Badge {...props}>Badge</Badge>,
 };
 export default meta;
 
@@ -22,7 +22,7 @@ export const Default: Story = {};
 export const WithButton: Story = {
   render: (props) => (
     <Badge {...props}>
-      <Text>Info</Text>
+      <Text>Badge</Text>
       <Button>
         <IconClose />
       </Button>

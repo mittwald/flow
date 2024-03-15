@@ -9,10 +9,10 @@ export interface ContextMenuProps
     PropsWithChildren {}
 
 export const ContextMenu: FC<ContextMenuProps> = (props) => {
-  const { children, onAction } = props;
+  const { children, onAction, ...rest } = props;
 
   return (
-    <Aria.Popover className={styles.contextMenu}>
+    <Aria.Popover className={styles.contextMenu} {...rest}>
       <Aria.Menu onAction={onAction}>{children}</Aria.Menu>
     </Aria.Popover>
   );

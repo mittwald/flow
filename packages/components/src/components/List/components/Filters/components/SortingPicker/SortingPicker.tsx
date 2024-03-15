@@ -6,9 +6,12 @@ import { Text } from "@/components/Text";
 import { IconChevronDown } from "@/components/Icon/components/icons";
 import { Button } from "@/components/Button";
 import { ContextMenu } from "@/components/ContextMenu";
+import locales from "../../../../locales/*.locale.json";
+import { useMessageFormatter } from "react-aria";
 
 export const SortingPicker: FC = () => {
   const { sorting } = useList();
+  const stringFormatter = useMessageFormatter(locales);
 
   const pickerItems = sorting.map((s) => (
     <SortingPickerItem sorting={s} key={s.getTableColumn().id} />
@@ -17,11 +20,17 @@ export const SortingPicker: FC = () => {
   return (
     <Aria.MenuTrigger>
       <Button style="soft" size="s" variant="secondary">
-        <Text>sort</Text>
+        <Text>{stringFormatter("sorting")}</Text>
         <IconChevronDown />
       </Button>
       <ContextMenu
-      //onAction={(s) => s.getTableColumn().getToggleSortingHandler()}
+        onAction={(key) => {
+          const currentSorting = sorting.find(
+            (s) => s.getTableColumn().id === key,
+          );
+
+          currentSorting?.getTableColumn().getToggleSortingHandler();
+        }}
       >
         {pickerItems}
       </ContextMenu>
