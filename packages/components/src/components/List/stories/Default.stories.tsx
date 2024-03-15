@@ -23,14 +23,15 @@ const meta: Meta<typeof List> = {
   render: () => {
     return (
       <>
-        <List>
-          <ListLoaderAsync<User> manualPagination>{getUsers}</ListLoaderAsync>
+        <List enableMultiSort>
+          <ListLoaderAsync<User>>{getUsers}</ListLoaderAsync>
           <ListFilter<User>
             property="company"
             values={usePromise(getCompanies, [])}
             mode="some"
           />
           <ListSorting<User> property="company" />
+          <ListSorting<User> property="firstName" />
           <ListItemView<User>>
             {(user) => (
               <>

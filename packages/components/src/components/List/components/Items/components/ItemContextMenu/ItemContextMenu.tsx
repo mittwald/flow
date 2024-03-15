@@ -4,7 +4,7 @@ import { IconContextMenu } from "@/components/Icon/components/icons";
 import { useProps } from "@/lib/propsContext";
 import * as Aria from "react-aria-components";
 import { ContextMenu } from "@/components/ContextMenu";
-import locales from "*.locale.json";
+import locales from "../../../../locales/*.locale.json";
 import { useMessageFormatter } from "react-aria";
 
 export interface ItemContextMenuProps extends PropsWithChildren {

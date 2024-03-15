@@ -23,17 +23,7 @@ export const SortingPicker: FC = () => {
         <Text>{stringFormatter("sorting")}</Text>
         <IconChevronDown />
       </Button>
-      <ContextMenu
-        onAction={(key) => {
-          const currentSorting = sorting.find(
-            (s) => s.getTableColumn().id === key,
-          );
-
-          currentSorting?.getTableColumn().getToggleSortingHandler();
-        }}
-      >
-        {pickerItems}
-      </ContextMenu>
+      <ContextMenu>{pickerItems}</ContextMenu>
     </Aria.MenuTrigger>
   );
 };

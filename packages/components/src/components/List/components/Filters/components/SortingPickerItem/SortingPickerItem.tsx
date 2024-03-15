@@ -7,6 +7,7 @@ import { Empty } from "@/lib/react/components/Empty";
 import { AnyData } from "@/components/List/model/item/types";
 import { Sorting } from "@/components/List/model/sorting/Sorting";
 import { ContextMenuItem } from "@/components/ContextMenu";
+import { Button } from "@/components/Button";
 
 interface Props {
   sorting: Sorting<AnyData>;
@@ -28,7 +29,9 @@ export const SortingPickerItem: FC<Props> = (props) => {
 
   return (
     <ContextMenuItem id={sorting.getTableColumn().id}>
-      {sorting.getTableColumn().id}
+      <Button onPress={sorting.getTableColumn().getToggleSortingHandler()}>
+        {sorting.getTableColumn().id}
+      </Button>
       <SortingIcon size="s" />
     </ContextMenuItem>
   );
