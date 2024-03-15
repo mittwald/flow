@@ -26,8 +26,7 @@ export default defineConfig(
           ColumnLayout: "./src/components/ColumnLayout/index.ts",
           Content: "./src/components/Content/index.ts",
           ContextMenu: "./src/components/ContextMenu/index.ts",
-          CopyToClipboardButton:
-            "./src/components/CopyToClipboardButton/index.ts",
+          CopyButton: "./src/components/CopyButton/index.ts",
           FieldDescription: "./src/components/FieldDescription/index.ts",
           FieldError: "./src/components/FieldError/index.ts",
           Heading: "./src/components/Heading/index.ts",

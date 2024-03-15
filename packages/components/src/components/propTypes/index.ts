@@ -15,7 +15,7 @@ import type { InlineAlertProps } from "@/components/InlineAlert";
 import type { HeadingProps } from "@/components/Heading";
 import type { InitialsProps } from "@/components/Initials";
 import type { ImageProps } from "@/components/Image";
-import type { CopyToClipboardButtonProps } from "@/components/CopyToClipboardButton";
+import type { CopyButtonProps } from "@/components/CopyButton";
 import { AvatarProps } from "@/components/Avatar";
 import { ItemContextMenuProps } from "@/components/List/components/Items/components/ItemContextMenu/ItemContextMenu";
 
@@ -25,7 +25,7 @@ export interface FlowComponentPropsTypes {
   Avatar: AvatarProps;
   Button: ButtonProps;
   Content: ContentProps;
-  CopyToClipboard: CopyToClipboardButtonProps;
+  CopyButton: CopyButtonProps;
   FieldDescription: FieldDescriptionProps;
   FieldError: FieldErrorProps;
   Heading: HeadingProps;
