@@ -16,18 +16,17 @@ import type { HeadingProps } from "@/components/Heading";
 import type { InitialsProps } from "@/components/Initials";
 import type { ImageProps } from "@/components/Image";
 import type { CopyToClipboardButtonProps } from "@/components/CopyToClipboardButton";
-import { SwitchProps } from "@/components/Switch";
-import { BadgeProps } from "@/components/Badge";
+import { HeaderProps } from "@/components/Header/";
 
 export * from "./types";
 
 export interface FlowComponentPropsTypes {
-  Badge: BadgeProps;
   Button: ButtonProps;
   Content: ContentProps;
   CopyToClipboard: CopyToClipboardButtonProps;
   FieldDescription: FieldDescriptionProps;
   FieldError: FieldErrorProps;
+  Header: HeaderProps;
   Icon: IconProps;
   Image: ImageProps;
   Initials: InitialsProps;
@@ -38,6 +37,5 @@ export interface FlowComponentPropsTypes {
   Link: LinkProps;
   Navigation: NavigationProps;
   NavigationItem: NavigationItemProps;
-  Switch: SwitchProps;
   Text: TextProps;
 }

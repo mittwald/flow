@@ -4,7 +4,6 @@ import styles from "./Switch.module.scss";
 import clsx from "clsx";
 import { IconCheck, IconClose } from "@/components/Icon/components/icons";
 import { Label } from "@/components/Label";
-import { useProps } from "@/lib/propsContext";
 
 export interface SwitchProps
   extends PropsWithChildren<Omit<Aria.SwitchProps, "children">> {
@@ -13,7 +12,7 @@ export interface SwitchProps
 }
 
 export const Switch: FC<SwitchProps> = (props) => {
-  const { children, className, labelPosition = "trailing", ...rest }  = useProps("Switch", props);
+  const { children, className, labelPosition = "trailing", ...rest } = props;
 
   const rootClassName = clsx(
     styles.switch,

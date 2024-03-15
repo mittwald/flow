@@ -7,8 +7,8 @@ import { TextField } from "@/components/TextField";
 import { Label } from "@/components/Label";
 import { Link } from "@/components/Link";
 import { Switch } from "@/components/Switch";
-import { Content } from "@/components/Content";
-import { Badge } from "@/components/Badge";
+import { StatusBadge } from "@/components/StatusBadge";
+import Header from "@/components/Header";
 
 const meta: Meta<typeof Section> = {
   title: "Structure/Section",
@@ -59,15 +59,15 @@ export const MultipleSections: Story = {
 export const WithSwitch: Story = {
   render: (props) => (
     <Section {...props}>
-      <Heading>Newsletter</Heading>
-      <Switch>Subscription</Switch>
-      <Content>
-        <Text>
-          Upcoming releases, new features and tips about your hosting - we bring
-          the most important information to inbox. Subscribe to our newsletter
-          and stay up to date.
-        </Text>
-      </Content>
+      <Header>
+        <Heading>Newsletter</Heading>
+        <Switch>Subscription</Switch>
+      </Header>
+      <Text>
+        Upcoming releases, new features and tips about your hosting - we bring
+        the most important information to inbox. Subscribe to our newsletter and
+        stay up to date.
+      </Text>
     </Section>
   ),
 };
@@ -75,15 +75,16 @@ export const WithSwitch: Story = {
 export const WithStatusBadge: Story = {
   render: (props) => (
     <Section {...props}>
-      <Heading>Newsletter</Heading>
-      <Badge>Subscribed</Badge>
-      <Content>
-        <Text>
-          Upcoming releases, new features and tips about your hosting - we bring
-          the most important information to inbox. Subscribe to our newsletter
-          and stay up to date.
-        </Text>
-      </Content>
+      <Header>
+        <Heading>Newsletter</Heading>
+        <StatusBadge>Subscribed</StatusBadge>
+      </Header>
+
+      <Text>
+        Upcoming releases, new features and tips about your hosting - we bring
+        the most important information to inbox. Subscribe to our newsletter and
+        stay up to date.
+      </Text>
     </Section>
   ),
 };

@@ -18,17 +18,9 @@ export const Section: FC<SectionProps> = (props) => {
   const propsContext: PropsContext = {
     Heading: {
       level: 2,
-      className: styles.heading,
     },
-    Switch: {
-      className: styles.headerContent,
-      labelPosition: "leading",
-    },
-    Badge: {
-      className: styles.headerContent,
-    },
-    Content: {
-      className: styles.content,
+    Header: {
+      className: styles.header,
     },
   };
 
