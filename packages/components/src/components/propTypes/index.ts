@@ -37,3 +37,30 @@ export interface FlowComponentPropsTypes {
   FieldError: FieldErrorProps;
   FieldDescription: FieldDescriptionProps;
 }
+
+const propsContextSupportingComponentsMap: Record<
+  keyof FlowComponentPropsTypes,
+  true
+> = {
+  Text: true,
+  Button: true,
+  CopyButton: true,
+  Icon: true,
+  Label: true,
+  Content: true,
+  LayoutCard: true,
+  Navigation: true,
+  NavigationItem: true,
+  Heading: true,
+  InlineAlert: true,
+  Link: true,
+  Initials: true,
+  Image: true,
+  FieldError: true,
+  FieldDescription: true,
+  TestComponent: true,
+};
+
+export const propsContextSupportingComponents = Object.keys(
+  propsContextSupportingComponentsMap,
+);
