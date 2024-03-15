@@ -60,7 +60,7 @@ export const SmallSpace: Story = {
       {...props}
       defaultValue="0"
       aria-label="Rating"
-      style={{ width: "600px" }}
+      style={{ width: "500px" }}
     >
       {Array(3)
         .fill("")

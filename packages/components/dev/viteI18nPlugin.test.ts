@@ -1,4 +1,3 @@
-import { expect, describe, it, jest } from "@jest/globals";
 import plugin from "./viteI18nPlugin";
 import path from "path";
 import type {
@@ -9,6 +8,7 @@ import type {
 } from "rollup";
 import { HmrContext, ModuleGraph, ViteDevServer, WebSocketServer } from "vite";
 import { URL } from "url";
+import { describe, expect, it, vitest } from "vitest";
 
 const __dirname = new URL(".", import.meta.url).pathname;
 
@@ -126,15 +126,15 @@ describe("vite i18n plugin", () => {
       const hmrContext = {
         server: {
           ws: {
-            send: jest.fn(),
+            send: vitest.fn(),
           } as unknown as WebSocketServer,
           moduleGraph: {
-            getModuleById: jest.fn(),
+            getModuleById: vitest.fn(),
           } as unknown as ModuleGraph,
         } as ViteDevServer,
         timestamp: Date.now(),
         file: "/button/button.tsx",
-        read: jest.fn(),
+        read: vitest.fn(),
         modules: [],
       } as HmrContext;
 
@@ -152,20 +152,20 @@ describe("vite i18n plugin", () => {
       plugin.handleHotUpdate &&
       typeof plugin.handleHotUpdate === "function"
     ) {
-      const moduleMock = jest.fn().mockReturnValue("module");
+      const moduleMock = vitest.fn().mockReturnValue("module");
       const hmrContext = {
         server: {
           ws: {
-            send: jest.fn(),
+            send: vitest.fn(),
           } as unknown as WebSocketServer,
           moduleGraph: {
             getModuleById: moduleMock,
-            invalidateModule: jest.fn(),
+            invalidateModule: vitest.fn(),
           } as unknown as ModuleGraph,
         } as ViteDevServer,
         timestamp: Date.now(),
         file: "/button/locales/foo.locale.json",
-        read: jest.fn(),
+        read: vitest.fn(),
         modules: [],
       } as HmrContext;
 
