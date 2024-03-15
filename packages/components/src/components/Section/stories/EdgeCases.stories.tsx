@@ -23,7 +23,6 @@ export const WithLongHeading: Story = {
         <Heading>{dummyText.medium}</Heading>
         <Switch>Subscribed</Switch>
       </Header>
-
       <Text>
         Upcoming releases, new features and tips about your hosting - we bring
         the most important information to inbox. Subscribe to our newsletter and
@@ -40,7 +39,6 @@ export const SmallSpace: Story = {
         <Heading>Newsletter Subscription</Heading>
         <Switch>Subscribed</Switch>
       </Header>
-
       <Text>
         Upcoming releases, new features and tips about your hosting - we bring
         the most important information to inbox. Subscribe to our newsletter and

@@ -79,7 +79,6 @@ export const WithStatusBadge: Story = {
         <Heading>Newsletter</Heading>
         <StatusBadge>Subscribed</StatusBadge>
       </Header>
-
       <Text>
         Upcoming releases, new features and tips about your hosting - we bring
         the most important information to inbox. Subscribe to our newsletter and

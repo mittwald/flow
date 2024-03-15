@@ -27,11 +27,11 @@ export interface FlowComponentPropsTypes {
   FieldDescription: FieldDescriptionProps;
   FieldError: FieldErrorProps;
   Header: HeaderProps;
+  Heading: HeadingProps;
   Icon: IconProps;
   Image: ImageProps;
   Initials: InitialsProps;
   InlineAlert: InlineAlertProps;
-  Heading: HeadingProps;
   Label: LabelProps;
   LayoutCard: LayoutCardProps;
   Link: LinkProps;
