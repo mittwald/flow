@@ -7,7 +7,7 @@ import { Empty } from "@/lib/react/components/Empty";
 import { AnyData } from "@/components/List/model/item/types";
 import { Sorting } from "@/components/List/model/sorting/Sorting";
 import { ContextMenuItem } from "@/components/ContextMenu";
-import { Button } from "@/components/Button";
+import styles from "./SortingPickerItem.module.scss";
 
 interface Props {
   sorting: Sorting<AnyData>;
@@ -25,14 +25,20 @@ export const SortingPickerItem: FC<Props> = (props) => {
         ? IconChevronDown
         : Empty;
 
-  //const isSorted = direction !== false;
+  //ToDo: make sorting accessible
 
   return (
-    <ContextMenuItem id={sorting.getTableColumn().id}>
-      <Button onPress={sorting.getTableColumn().getToggleSortingHandler()}>
+    <ContextMenuItem
+      className={styles.sortingPickerItem}
+      id={sorting.getTableColumn().id}
+    >
+      <div
+        className={styles.actionItem}
+        onClick={sorting.getTableColumn().getToggleSortingHandler()}
+      >
         {sorting.getTableColumn().id}
-      </Button>
-      <SortingIcon size="s" />
+        <SortingIcon size="s" />
+      </div>
     </ContextMenuItem>
   );
 };
