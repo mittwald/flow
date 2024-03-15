@@ -1,4 +1,4 @@
-name: "Build Jest coverage report"
+name: "Build test coverage report"
 
 on:
   pull_request:

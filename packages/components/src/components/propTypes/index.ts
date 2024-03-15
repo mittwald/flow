@@ -15,7 +15,8 @@ import type { InlineAlertProps } from "@/components/InlineAlert";
 import type { HeadingProps } from "@/components/Heading";
 import type { InitialsProps } from "@/components/Initials";
 import type { ImageProps } from "@/components/Image";
-import type { CopyToClipboardButtonProps } from "@/components/CopyToClipboardButton";
+import type { CopyButtonProps } from "@/components/CopyButton";
+import type { CopyButtonProps } from "@/components/CopyButton";
 import { HeaderProps } from "@/components/Header/";
 
 export * from "./types";
@@ -23,7 +24,7 @@ export * from "./types";
 export interface FlowComponentPropsTypes {
   Button: ButtonProps;
   Content: ContentProps;
-  CopyToClipboard: CopyToClipboardButtonProps;
+  CopyButton: CopyButtonProps;
   FieldDescription: FieldDescriptionProps;
   FieldError: FieldErrorProps;
   Header: HeaderProps;
