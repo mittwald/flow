@@ -67,25 +67,22 @@ const MainNavigation: FC<Props> = (props) => {
   const docs = props.docs.map(MdxFile.deserialize);
   const docsTree = useMemo(() => buildDirectoryTree(docs), [docs]);
   const currentPathname = usePathname();
-  const mainNavigationPathSection = currentPathname.split("/")[1];
+  const mainPathSegment = currentPathname.split("/")[1];
 
-  if (mainNavigationPathSection === undefined) {
+  if (mainPathSegment === undefined) {
     return null;
   }
 
-  const selectedMainNavigationSubTree = docsTree[mainNavigationPathSection];
-  if (
-    !selectedMainNavigationSubTree ||
-    selectedMainNavigationSubTree instanceof MdxFile
-  ) {
+  const selectedMainBranch = docsTree[mainPathSegment];
+  if (!selectedMainBranch || selectedMainBranch instanceof MdxFile) {
     return null;
   }
 
   return (
     <NavigationSection
       level={2}
-      tree={selectedMainNavigationSubTree}
-      group={mainNavigationPathSection}
+      tree={selectedMainBranch}
+      group={mainPathSegment}
     />
   );
 };
