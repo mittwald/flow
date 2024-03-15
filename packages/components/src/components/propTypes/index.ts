@@ -16,7 +16,6 @@ import type { HeadingProps } from "@/components/Heading";
 import type { InitialsProps } from "@/components/Initials";
 import type { ImageProps } from "@/components/Image";
 import type { CopyButtonProps } from "@/components/CopyButton";
-import type { CopyButtonProps } from "@/components/CopyButton";
 import { HeaderProps } from "@/components/Header/";
 
 export * from "./types";
