@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Modal from "../Modal";
 import React from "react";
 import Button from "@/components/Button";
 import ButtonGroup from "@/components/ButtonGroup";
@@ -7,8 +6,8 @@ import Text from "@/components/Text";
 import TextField from "@/components/TextField";
 import Label from "@/components/Label";
 import Content from "@/components/Content";
-import DialogTrigger from "@/components/DialogTrigger";
 import Title from "@/components/Title";
+import Modal, { ModalTrigger } from "@/components/Modal";
 
 const meta: Meta<typeof Modal> = {
   title: "Overlays/Modal",
@@ -58,7 +57,7 @@ export const WithState: Story = {};
 
 export const WithDialogTrigger: Story = {
   render: (props) => (
-    <DialogTrigger>
+    <ModalTrigger>
       <Button variant="danger">Delete project</Button>
       <Modal {...props}>
         {({ close }) => (
@@ -78,7 +77,7 @@ export const WithDialogTrigger: Story = {
           </>
         )}
       </Modal>
-    </DialogTrigger>
+    </ModalTrigger>
   ),
 };
 

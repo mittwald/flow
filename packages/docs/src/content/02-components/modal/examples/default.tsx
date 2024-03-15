@@ -1,14 +1,15 @@
-import Modal from "@mittwald/flow-react-components/Modal";
+import Modal, {
+  ModalTrigger,
+} from "@mittwald/flow-react-components/Modal";
 import Content from "@mittwald/flow-react-components/Content";
 import Text from "@mittwald/flow-react-components/Text";
 import TextField from "@mittwald/flow-react-components/TextField";
 import Label from "@mittwald/flow-react-components/Label";
 import ButtonGroup from "@mittwald/flow-react-components/ButtonGroup";
 import Button from "@mittwald/flow-react-components/Button";
-import DialogTrigger from "@mittwald/flow-react-components/DialogTrigger";
 import Title from "@mittwald/flow-react-components/Title";
 
-<DialogTrigger>
+<ModalTrigger>
   <Button variant="accent">Create customer</Button>
   <Modal>
     {({ close }) => (
@@ -38,4 +39,4 @@ import Title from "@mittwald/flow-react-components/Title";
       </>
     )}
   </Modal>
-</DialogTrigger>;
+</ModalTrigger>;

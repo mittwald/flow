@@ -27,7 +27,6 @@ export default defineConfig(
           Content: "./src/components/Content/index.ts",
           CopyToClipboardButton:
             "./src/components/CopyToClipboardButton/index.ts",
-          DialogTrigger: "./src/components/DialogTrigger/index.ts",
           FieldDescription: "./src/components/FieldDescription/index.ts",
           FieldError: "./src/components/FieldError/index.ts",
           Heading: "./src/components/Heading/index.ts",
