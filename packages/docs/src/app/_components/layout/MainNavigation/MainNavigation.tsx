@@ -65,7 +65,7 @@ const NavigationSection: FC<NavigationSectionProps> = (props) => {
 
 const MainNavigation: FC<Props> = (props) => {
   const docs = props.docs.map(MdxFile.deserialize);
-  const docsTree = useMemo(() => buildDirectoryTree(docs), []);
+  const docsTree = useMemo(() => buildDirectoryTree(docs), [docs]);
   const currentPathname = usePathname();
   const mainNavigationPathSection = currentPathname.split("/")[1];
 
