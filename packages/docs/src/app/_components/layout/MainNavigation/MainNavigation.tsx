@@ -1,70 +1,92 @@
 "use client";
-import React, { FC, Fragment, useId } from "react";
+import React, { ComponentProps, FC, useId, useMemo } from "react";
 import Navigation, {
   NavigationItem,
 } from "@mittwald/flow-react-components/Navigation";
 import Heading from "@mittwald/flow-react-components/Heading";
-import { usePathname } from "next/navigation";
 import styles from "./MainNavigation.module.scss";
 import { MdxFile, SerializedMdxFile } from "@/lib/mdx/MdxFile";
-import { groupBy } from "remeda";
 import { GroupText } from "@/app/_components/layout/MainNavigation/components/GroupText";
+import {
+  buildDirectoryTree,
+  MdxDirectoryTree,
+} from "@/lib/mdx/components/buildDirectoryTree";
+import { usePathname } from "next/navigation";
 
 interface Props {
   docs: SerializedMdxFile[];
 }
 
-const MainNavigation: FC<Props> = (props) => {
-  const docs = props.docs.map(MdxFile.deserialize);
+interface NavigationSectionProps {
+  level: number;
+  tree: MdxDirectoryTree;
+  group: string;
+}
 
-  const navGroups = groupBy(docs, (d) => d.pathname.split("/")[1]);
-
+const NavigationSection: FC<NavigationSectionProps> = (props) => {
+  const { level, tree, group } = props;
   const headingComponentsId = useId();
   const currentPathname = usePathname();
-  const currentGroupName = currentPathname.split("/")[1];
-  const currentNavGroup = navGroups[currentGroupName];
 
-  const hasSubGroups = currentPathname.split("/").length >= 4;
-
-  const navSubGroups = hasSubGroups
-    ? groupBy(currentNavGroup, (d) => d.pathname.split("/")[2])
-    : undefined;
-
-  const navigationItems = (mdx: MdxFile[]) =>
-    Object.entries(mdx).map(([, mdxFile]) => (
+  const navigationItems = Object.entries(tree).map(([group, treeItem]) =>
+    treeItem instanceof MdxFile ? (
       <NavigationItem
-        key={mdxFile.pathname}
-        href={mdxFile.pathname}
-        isCurrent={mdxFile.pathname === currentPathname}
+        key={group}
+        href={treeItem.pathname}
+        isCurrent={treeItem.pathname === currentPathname}
       >
-        {mdxFile.getNavTitle()}
+        {treeItem.getNavTitle()}
       </NavigationItem>
-    ));
-
-  const navigation = navSubGroups ? (
-    Object.entries(navSubGroups).map(([group, mdxFiles]) => (
-      <Fragment key={group}>
-        <Heading level={3} id={headingComponentsId} className={styles.heading}>
-          <GroupText>{group}</GroupText>
-        </Heading>
-        <Navigation aria-labelledby={headingComponentsId}>
-          {navigationItems(mdxFiles)}
-        </Navigation>
-      </Fragment>
-    ))
-  ) : (
-    <Navigation aria-labelledby={headingComponentsId}>
-      {navigationItems(currentNavGroup)}
-    </Navigation>
+    ) : (
+      <NavigationSection
+        key={group}
+        tree={treeItem}
+        level={level + 1}
+        group={group}
+      />
+    ),
   );
 
   return (
-    <Fragment>
-      <Heading level={2} id={headingComponentsId} className={styles.heading}>
-        <GroupText>{currentGroupName}</GroupText>
+    <>
+      <Heading
+        level={level as ComponentProps<typeof Heading>["level"]}
+        id={headingComponentsId}
+        className={styles.heading}
+      >
+        <GroupText>{group}</GroupText>
       </Heading>
-      {navigation}
-    </Fragment>
+      <Navigation aria-labelledby={headingComponentsId}>
+        {navigationItems}
+      </Navigation>
+    </>
+  );
+};
+
+const MainNavigation: FC<Props> = (props) => {
+  const docs = props.docs.map(MdxFile.deserialize);
+  const docsTree = useMemo(() => buildDirectoryTree(docs), []);
+  const currentPathname = usePathname();
+  const mainNavigationPathSection = currentPathname.split("/")[1];
+
+  if (mainNavigationPathSection === undefined) {
+    return null;
+  }
+
+  const selectedMainNavigationSubTree = docsTree[mainNavigationPathSection];
+  if (
+    !selectedMainNavigationSubTree ||
+    selectedMainNavigationSubTree instanceof MdxFile
+  ) {
+    return null;
+  }
+
+  return (
+    <NavigationSection
+      level={2}
+      tree={selectedMainNavigationSubTree}
+      group={mainNavigationPathSection}
+    />
   );
 };
 
