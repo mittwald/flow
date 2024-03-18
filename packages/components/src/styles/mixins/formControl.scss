@@ -47,6 +47,7 @@
   }
 
   /* Disabled */
+  &:disabled,
   &[data-disabled],
   [aria-disabled] & {
     color: var(--form-control--content-color--disabled);
