@@ -12,6 +12,10 @@
     "avatar subtitle content contextMenu";
   grid-template-columns: auto 40ch 1fr auto;
   grid-column-gap: var(--list-item--content-to-content-spacing);
+
+  &:not(:has(.text)) {
+    grid-template-areas: "avatar title content contextMenu";
+  }
 }
 
 .avatar {
@@ -21,6 +25,7 @@
 
 .heading {
   grid-area: title;
+  align-self: center;
 }
 
 .text {
