@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.39](https://github.com/mittwald/flow/compare/0.1.0-alpha.38...0.1.0-alpha.39) (2024-03-18)
+
+### Features
+
+- **InlineCode:** wrap words anywhere
+  ([131b4f8](https://github.com/mittwald/flow/commit/131b4f8c6ddca200f5635f842a593a78965b2e10))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.38](https://github.com/mittwald/flow/compare/0.1.0-alpha.37...0.1.0-alpha.38) (2024-03-18)
 
 ### Bug Fixes
