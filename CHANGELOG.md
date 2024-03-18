@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.38](https://github.com/mittwald/flow/compare/0.1.0-alpha.37...0.1.0-alpha.38) (2024-03-18)
+
+### Bug Fixes
+
+- fix viteI18nPlugin due to update Vite module API
+  ([c2a3d46](https://github.com/mittwald/flow/commit/c2a3d46cca0608913d49b08c94a38deafa78ee67))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.37](https://github.com/mittwald/flow/compare/0.1.0-alpha.36...0.1.0-alpha.37) (2024-03-18)
 
 **Note:** Version bump only for package @mittwald/flow-project
