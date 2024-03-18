@@ -414,7 +414,10 @@ neutral-outline-background-color:
   selected:
     value: "{primary.color.200}"
 neutral-outline-content-color:
-  value: "{neutral.color.1000}"
+  default:
+    value: "{neutral.color.1000}"
+  selected:
+    value: "{primary.color.900}"
 neutral-outline-border-color:
   default:
     value: "{neutral.color.700}"

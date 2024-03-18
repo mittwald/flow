@@ -1,5 +1,5 @@
-@use "@/styles/mixins/textInput.scss";
+@use "@/styles/mixins/formControl.scss";
 
 .textArea {
-  @include textInput.textInput();
+  @include formControl.formControl();
 }

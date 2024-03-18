@@ -8,7 +8,7 @@ import { InlineCode } from "@/components/InlineCode";
 import { Link } from "@/components/Link";
 
 const meta: Meta<typeof LabeledValue> = {
-  title: "Content/Labeled Value",
+  title: "Content/LabeledValue",
   component: LabeledValue,
   parameters: {
     controls: { exclude: ["className"] },
