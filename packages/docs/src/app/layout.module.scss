@@ -10,7 +10,7 @@
   grid-template-areas:
     "nav      main"
     "footer    .  ";
-  grid-template-columns: 200px minmax(0, 1fr);
+  grid-template-columns: 220px minmax(0, 1fr);
   grid-template-rows: 1fr auto;
   grid-gap: var(--size-px--l);
   padding-inline: var(--size-px--l);
