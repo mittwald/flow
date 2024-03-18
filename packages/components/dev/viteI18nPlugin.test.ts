@@ -1,5 +1,5 @@
 import plugin, { moduleId } from "./viteI18nPlugin";
-import { test, describe, expect, vitest } from "vitest";
+import { test, describe, expect, vi } from "vitest";
 import type {
   PartialResolvedId,
   PluginContext,
@@ -130,14 +130,14 @@ describe("vite i18n plugin", () => {
     ) {
       const hmrContext = {
         server: {
-          reloadModule: vitest.fn(),
+          reloadModule: vi.fn(),
           moduleGraph: {
-            getModuleById: vitest.fn(),
+            getModuleById: vi.fn(),
           },
         } as unknown as ViteDevServer,
         timestamp: Date.now(),
         file: "/button/button.tsx",
-        read: vitest.fn(),
+        read: vi.fn(),
         modules: [],
       } as HmrContext;
 
@@ -155,17 +155,17 @@ describe("vite i18n plugin", () => {
       plugin.handleHotUpdate &&
       typeof plugin.handleHotUpdate === "function"
     ) {
-      const moduleMock = vitest.fn().mockReturnValue("module");
+      const moduleMock = vi.fn().mockReturnValue("module");
       const hmrContext = {
         server: {
-          reloadModule: vitest.fn(),
+          reloadModule: vi.fn(),
           moduleGraph: {
             getModuleById: moduleMock,
           },
         } as unknown as ViteDevServer,
         timestamp: Date.now(),
         file: path.join(__dirname, "test", "locales", "foo.locale.json"),
-        read: vitest.fn(),
+        read: vi.fn(),
         modules: [],
       } as HmrContext;
 
