@@ -1,6 +1,5 @@
 .heading2 {
-  margin: var(--size-rem--xl) 0;
-  padding-top: var(--size-rem--xl);
+  margin: var(--size-rem--xl) 0 var(--size-rem--l);
   border-top: var(--border-width--default) solid var(--neutral--color--500);
 }
 
