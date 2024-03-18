@@ -54,6 +54,12 @@
   &:has(.customFieldError) .fieldError {
     display: none;
   }
+
+  &[data-disabled] {
+    .label {
+      color: var(--label--color--disabled);
+    }
+  }
 }
 
 .label {

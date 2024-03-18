@@ -5,7 +5,7 @@ import { Heading } from "@/components/Heading";
 import { Content } from "@/components/Content";
 
 const meta: Meta<typeof InlineAlert> = {
-  title: "Status/Inline Alert",
+  title: "Status/InlineAlert",
   component: InlineAlert,
   argTypes: {
     status: {
