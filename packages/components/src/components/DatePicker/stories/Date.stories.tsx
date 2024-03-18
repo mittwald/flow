@@ -6,7 +6,7 @@ import { FieldDescription } from "@/components/FieldDescription";
 import { today, getLocalTimeZone, parseDate } from "@internationalized/date";
 
 const meta: Meta<typeof DatePicker> = {
-  title: "Forms/DatePicker",
+  title: "Form Controls/DatePicker",
   component: DatePicker,
   render: (props) => (
     <DatePicker {...props} isRequired>
