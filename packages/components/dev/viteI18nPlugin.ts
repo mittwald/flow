@@ -3,8 +3,8 @@ import path from "path";
 import * as fs from "fs";
 import crypt from "crypto";
 
-const moduleSuffix = ".locale.json";
-const moduleId = `\x00${moduleSuffix}@`;
+export const moduleSuffix = ".locale.json";
+export const moduleId = `\x00${moduleSuffix}@`;
 
 const localeDirectory = "locales";
 const importPathInfosRegEx = new RegExp(
