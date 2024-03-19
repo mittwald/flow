@@ -9,6 +9,7 @@ import { Link } from "@/components/Link";
 import { Switch } from "@/components/Switch";
 import { StatusBadge } from "@/components/StatusBadge";
 import Header from "@/components/Header";
+import { IconMember } from "@/components/Icon/components/icons";
 
 const meta: Meta<typeof Section> = {
   title: "Structure/Section",
@@ -35,7 +36,10 @@ export const MultipleSections: Story = {
   render: (props) => (
     <>
       <Section {...props}>
-        <Heading>Personal Information</Heading>
+        <Heading>
+          <IconMember />
+          Personal Information
+        </Heading>
         <TextField isRequired defaultValue="John">
           <Label>First name</Label>
         </TextField>
