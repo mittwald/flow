@@ -25,12 +25,12 @@ export const Default: Story = {};
 
 export const WithIcon: Story = {
   render: (props) => (
-    <Heading {...props} level={2}>
+    <Heading {...props}>
       <IconMember />
       Personal Information
     </Heading>
   ),
-  parameters: {
-    controls: { exclude: ["level"] },
+  args: {
+    level: 2,
   },
 };
