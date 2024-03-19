@@ -2274,7 +2274,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@internationalized/date@npm:^3.5.2":
+"@internationalized/date@npm:^3.5.1, @internationalized/date@npm:^3.5.2":
   version: 3.5.2
   resolution: "@internationalized/date@npm:3.5.2"
   dependencies:
@@ -2854,6 +2854,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@mittwald/flow-react-components@workspace:packages/components"
   dependencies:
+    "@internationalized/date": "npm:^3.5.1"
     "@mittwald/flow-design-tokens": "workspace:^"
     "@nx/storybook": "npm:^18.1.1"
     "@react-aria/utils": "npm:^3.23.2"

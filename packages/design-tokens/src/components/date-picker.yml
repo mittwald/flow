@@ -1,0 +1,12 @@
+date-picker:
+  date-segment-background-color:
+    focused:
+      value: "{info.color.200}"
+  date-segment-corner-radius:
+    value: "{size-px.xs}"
+
+calendar:
+  padding:
+    value: "{size-px.m}"
+  cell-size:
+    value: "{size-px.xl}"

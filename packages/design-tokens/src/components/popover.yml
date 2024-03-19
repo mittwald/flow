@@ -1,0 +1,5 @@
+popover:
+  box-shadow:
+    value: "{shadow.overlay}"
+  corner-radius:
+    value: "{corner-radius.default}"

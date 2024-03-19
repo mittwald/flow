@@ -30,6 +30,14 @@
       "types": "./dist/types/components/CopyButton/index.d.ts",
       "import": "./dist/CopyButton.js"
     },
+    "./DatePicker": {
+      "types": "./dist/types/components/DatePicker/index.d.ts",
+      "import": "./dist/DatePicker.js"
+    },
+    "./DateRangePicker": {
+      "types": "./dist/types/components/DateRangePicker/index.d.ts",
+      "import": "./dist/DateRangePicker.js"
+    },
     "./FieldDescription": {
       "types": "./dist/types/components/FieldDescription/index.d.ts",
       "import": "./dist/FieldDescription.js"
@@ -94,6 +102,10 @@
       "types": "./dist/types/components/NumberField/index.d.ts",
       "import": "./dist/NumberField.js"
     },
+    "./Popover": {
+      "types": "./dist/types/components/Popover/index.d.ts",
+      "import": "./dist/Popover.js"
+    },
     "./RadioGroup": {
       "types": "./dist/types/components/RadioGroup/index.d.ts",
       "import": "./dist/RadioGroup.js"
@@ -154,6 +166,7 @@
     "test:unit": "run vitest run"
   },
   "dependencies": {
+    "@internationalized/date": "^3.5.1",
     "@react-aria/utils": "^3.23.2",
     "@react-types/shared": "^3.22.1",
     "@tabler/icons-react": "^2.47.0",
