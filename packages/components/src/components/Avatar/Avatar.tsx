@@ -24,6 +24,9 @@ export const Avatar: FC<AvatarProps> = (props) => {
     Initials: {
       className: styles.initials,
     },
+    Icon: {
+      className: styles.icon,
+    },
   };
 
   return (
