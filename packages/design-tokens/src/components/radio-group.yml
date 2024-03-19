@@ -5,48 +5,6 @@ radio-group:
     value: "{size-rem.xs}"
   icon-to-text-spacing:
     value: "{size-rem.m}"
-  padding-x:
-    value: "{size-px.m}"
-  padding-y:
-    value: "{size-px.s}"
-  corner-radius:
-    value: "{corner-radius.default}"
-  border-width:
-    value: "{border-width.100}"
-  border-style:
-    value: "{border-style.default}"
-  border-color:
-    default:
-      value: "{neutral.color.500}"
-    selected:
-      value: "{info.color.900}"
-    disabled:
-      value: "{neutral.color.500}"
-    selected-disabled:
-      value: "{neutral.color.600}"
-  background-color:
-    default:
-      value: "{neutral.color.100}"
-    selected:
-      value: "{info.color.200}"
-    disabled:
-      value: "{neutral.color.300}"
-    selected-disabled:
-      value: "{neutral.color.400}"
-    hover:
-      value: "{info.color.100}"
-  color:
-    default:
-      value: "{neutral.color.1000}"
-    selected:
-      value: "{info.color.900}"
-    disabled:
-      value: "{neutral.color.500}"
-    selected-disabled:
-      value: "{neutral.color.600}"
-  icon-color:
-    default:
-      value: "{neutral.color.800}"
   label-font-weight-with-content-or-icon:
     value: "{font-weight.bold}"
   icon-size-without-content:

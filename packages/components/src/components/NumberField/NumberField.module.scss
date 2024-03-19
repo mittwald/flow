@@ -1,4 +1,4 @@
-@use "@/styles/mixins/textInput.scss";
+@use "@/styles/mixins/formControl.scss";
 
 .group {
   order: 2;
@@ -10,7 +10,7 @@
 }
 
 .input {
-  @include textInput.textInput();
+  @include formControl.formControl();
   grid-area: input;
 }
 
@@ -26,8 +26,26 @@
   .decrementButton,
   .incrementButton {
     border-width: var(--form-control--border-width);
-    border-color: var(--form-field-control--border-color);
+    border-color: var(--form-control--border-color--default);
     border-style: solid;
+  }
+  &[aria-invalid] {
+    .decrementButton,
+    .incrementButton {
+      border-color: var(--form-control--border-color--invalid);
+    }
+  }
+  &[data-focus-within] {
+    .decrementButton,
+    .incrementButton {
+      border-color: var(--form-control--border-color--focused);
+    }
+  }
+  &[aria-disabled] {
+    .decrementButton,
+    .incrementButton {
+      border-color: var(--form-control--border-color--disabled);
+    }
   }
 }
 

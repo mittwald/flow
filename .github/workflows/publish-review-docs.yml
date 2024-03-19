@@ -56,7 +56,7 @@ jobs:
         run: git branch --track main origin/main
 
       - name: Build 🔨
-        run: yarn nx affected -t build --parallel=3
+        run: yarn docs build
 
       - name: Upload files to GitHub Pages 🚀
         uses: cpina/github-action-push-to-another-repository@main
