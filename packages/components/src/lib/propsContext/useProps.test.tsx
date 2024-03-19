@@ -1,12 +1,14 @@
-import {
+import React, {
+  cloneElement,
+  ComponentProps,
   DependencyList,
   FC,
+  isValidElement,
   PropsWithChildren,
   useEffect,
   useState,
 } from "react";
 import useProps from "@/lib/propsContext/useProps";
-import React from "react";
 import { render, screen } from "@testing-library/react";
 import PropsContextProvider from "@/lib/propsContext/PropsContextProvider";
 import dynamic from "@/lib/propsContext/dynamicProps/dynamic";
@@ -17,16 +19,19 @@ import { beforeEach, describe, expect, test } from "vitest";
 let renderCount: number;
 let renderedPropHistory: Array<string | undefined>;
 
-const ComponentUsingProps: FC<PropsWithChildren<TestComponentProps>> = (
-  props,
-) => {
+const TestComponent: FC<PropsWithChildren<TestComponentProps>> = (props) => {
   const { children, testProp } = useProps("TestComponent", props);
   renderCount++;
   renderedPropHistory.push(testProp);
   return (
     <>
       <span data-testid="prop-value">{testProp ?? "undefined"}</span>
-      {children}
+      {isValidElement(children)
+        ? cloneElement(children, {
+            ...children.props,
+            "data-additional-prop": true,
+          })
+        : children}
     </>
   );
 };
@@ -46,14 +51,14 @@ beforeEach(() => {
 });
 
 test("The local property is returned, if property is not in context", () => {
-  render(<ComponentUsingProps testProp="local" />);
+  render(<TestComponent testProp="local" />);
   expectPropertyToBe("local");
 });
 
 test("The local property is returned, event if property is in context", () => {
   render(
     <PropsContextProvider props={contextProps}>
-      <ComponentUsingProps testProp="local" />
+      <TestComponent testProp="local" />
     </PropsContextProvider>,
   );
   expectPropertyToBe("local");
@@ -62,7 +67,7 @@ test("The local property is returned, event if property is in context", () => {
 test("The context property is returned, if property is in context but not local", () => {
   render(
     <PropsContextProvider props={contextProps}>
-      <ComponentUsingProps />
+      <TestComponent />
     </PropsContextProvider>,
   );
   expectPropertyToBe("context");
@@ -72,7 +77,7 @@ test("The parent context property is returned, if property is in parent context 
   render(
     <PropsContextProvider props={contextProps}>
       <PropsContextProvider props={{}}>
-        <ComponentUsingProps />
+        <TestComponent />
       </PropsContextProvider>
     </PropsContextProvider>,
   );
@@ -83,7 +88,7 @@ test("The nearest context property is returned, if property is in parent and chi
   render(
     <PropsContextProvider props={{ TestComponent: { testProp: "context1" } }}>
       <PropsContextProvider props={{ TestComponent: { testProp: "context2" } }}>
-        <ComponentUsingProps />
+        <TestComponent />
       </PropsContextProvider>
     </PropsContextProvider>,
   );
@@ -102,7 +107,7 @@ describe("Dynamic Props", () => {
   test("The dynamic context property is returned, if property is in context but not local", () => {
     render(
       <PropsContextProvider props={contextPropsWithDynamic}>
-        <ComponentUsingProps testDynamicProp={true} />
+        <TestComponent testDynamicProp={true} />
       </PropsContextProvider>,
     );
     expectPropertyToBe("Dynamic!");
@@ -111,7 +116,7 @@ describe("Dynamic Props", () => {
   test("The dynamic context property is returned, if property is in context but not local (counter check)", () => {
     render(
       <PropsContextProvider props={contextPropsWithDynamic}>
-        <ComponentUsingProps testDynamicProp={false} />
+        <TestComponent testDynamicProp={false} />
       </PropsContextProvider>,
     );
     expectPropertyToBe("Not dynamic...");
@@ -120,11 +125,12 @@ describe("Dynamic Props", () => {
 
 describe("Context memoization", () => {
   interface TestSetup {
-    getDependencies: () => DependencyList | undefined;
+    getDependencies?: () => DependencyList | undefined;
+    getTestComponentProps?: () => Partial<ComponentProps<typeof TestComponent>>;
   }
 
   const runTest = (setup: TestSetup) => {
-    const { getDependencies } = setup;
+    const { getDependencies = () => [], getTestComponentProps } = setup;
 
     const ComponentWithStateChange: FC<PropsWithChildren> = (props) => {
       const [state, setState] = useState(0);
@@ -149,11 +155,24 @@ describe("Context memoization", () => {
       );
     };
 
-    render(
-      <ComponentWithStateChange>
-        <ComponentUsingProps />
-      </ComponentWithStateChange>,
-    );
+    if (getTestComponentProps) {
+      const { rerender } = render(
+        <ComponentWithStateChange>
+          <TestComponent {...getTestComponentProps()} />
+        </ComponentWithStateChange>,
+      );
+      rerender(
+        <ComponentWithStateChange>
+          <TestComponent {...getTestComponentProps()} />
+        </ComponentWithStateChange>,
+      );
+    } else {
+      render(
+        <ComponentWithStateChange>
+          <TestComponent />
+        </ComponentWithStateChange>,
+      );
+    }
   };
 
   test("Renders only once if dependencies is empty array", () => {
@@ -175,6 +194,20 @@ describe("Context memoization", () => {
       getDependencies: () => [renderCount],
     });
     expect(renderCount).toBe(2);
+  });
+
+  test("Renders again if local children props changing", () => {
+    runTest({
+      getTestComponentProps: () => ({ testProp: Math.random().toString() }),
+    });
+    expect(renderCount).toBe(2);
+  });
+
+  test("Renders not again if local children props are not changing", () => {
+    runTest({
+      //getTestComponentProps: () => ({ testProp: "foo" }),
+    });
+    expect(renderCount).toBe(1);
   });
 
   test("Context property is memoized if dependency does not change", () => {
@@ -203,9 +236,9 @@ test("Nested context property is used when matching child is rendered", () => {
         },
       }}
     >
-      <ComponentUsingProps>
-        <ComponentUsingProps />
-      </ComponentUsingProps>
+      <TestComponent>
+        <TestComponent />
+      </TestComponent>
     </PropsContextProvider>,
   );
   expect(screen.getAllByTestId("prop-value").map((el) => el.innerText)).toEqual(
@@ -224,13 +257,31 @@ test("Nested context property is used when matching child-array is rendered", ()
         },
       }}
     >
-      <ComponentUsingProps>
-        <ComponentUsingProps />
-        <ComponentUsingProps />
-      </ComponentUsingProps>
+      <TestComponent>
+        <TestComponent />
+        <TestComponent />
+      </TestComponent>
     </PropsContextProvider>,
   );
   expect(screen.getAllByTestId("prop-value").map((el) => el.innerText)).toEqual(
     ["context", "nestedContext", "nestedContext"],
   );
+});
+
+test("Children properties are forwarded, when wrapped in nested PropsContextProvider", () => {
+  render(
+    <PropsContextProvider
+      props={{
+        TestComponent: {},
+      }}
+    >
+      <TestComponent>
+        <div data-testid="inner" />
+      </TestComponent>
+    </PropsContextProvider>,
+  );
+
+  expect(
+    screen.getByTestId("inner").getAttribute("data-additional-prop"),
+  ).not.toBeNull();
 });
