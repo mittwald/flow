@@ -21,8 +21,6 @@ export const Icon: FC<IconProps> = (props) => {
     ...svgAttributes
   } = useProps("Icon", props);
 
-  console.log(className);
-
   const iconProps: SvgAttributeProps = {
     ...svgAttributes,
     focusable: "false",
