@@ -12,7 +12,7 @@ const meta: Meta<typeof Heading> = {
       options: [1, 2, 3, 4, 5, 6],
     },
   },
-  args: { level: 3 },
+  args: { level: 2 },
   render: (props) => (
     <Heading {...props}>I am a H{props.level} Heading</Heading>
   ),
@@ -30,7 +30,4 @@ export const WithIcon: Story = {
       Personal Information
     </Heading>
   ),
-  args: {
-    level: 2,
-  },
 };
