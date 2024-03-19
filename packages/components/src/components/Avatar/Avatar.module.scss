@@ -18,6 +18,11 @@
     object-fit: cover;
   }
 
+  > svg {
+    width: calc(var(--avatar-size) * 0.7);
+    height: calc(var(--avatar-size) * 0.7);
+  }
+
   @extend .size-m;
   @extend .variant-1;
 }
