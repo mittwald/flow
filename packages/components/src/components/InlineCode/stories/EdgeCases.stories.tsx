@@ -16,8 +16,10 @@ type Story = StoryObj<typeof InlineCode>;
 export const LongText: Story = {
   render: (props) => (
     <Text>
-      {dummyText.medium} <InlineCode {...props}>{dummyText.medium}</InlineCode>{" "}
+      {dummyText.medium}{" "}
+      <InlineCode {...props}>{dummyText.medium.replaceAll(" ", "")}</InlineCode>{" "}
       {dummyText.medium}
+      <InlineCode {...props}>{dummyText.medium}</InlineCode> {dummyText.medium}
     </Text>
   ),
 };

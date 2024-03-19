@@ -45,4 +45,5 @@ export const liveCodeEditorGlobalImports: ImportMapping = {
 "ColumnLayout:@mittwald/flow-react-components/ColumnLayout": lazy(() => import("@mittwald/flow-react-components/ColumnLayout").then(module => ({ default: module.ColumnLayout } ))),
 "LayoutCard:@mittwald/flow-react-components/LayoutCard": lazy(() => import("@mittwald/flow-react-components/LayoutCard").then(module => ({ default: module.LayoutCard } ))),
 "Section:@mittwald/flow-react-components/Section": lazy(() => import("@mittwald/flow-react-components/Section").then(module => ({ default: module.Section } ))),
+"Header:@mittwald/flow-react-components/Header": lazy(() => import("@mittwald/flow-react-components/Header").then(module => ({ default: module.Header } ))),
 };
