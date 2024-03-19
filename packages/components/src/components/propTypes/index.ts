@@ -4,10 +4,7 @@ import type { IconProps } from "@/components/Icon";
 import type { LabelProps } from "@/components/Label";
 import type { ContentProps } from "@/components/Content";
 import type { LayoutCardProps } from "@/components/LayoutCard";
-import type {
-  NavigationItemProps,
-  NavigationProps,
-} from "@/components/Navigation";
+import type { NavigationItemProps } from "@/components/Navigation";
 import type { LinkProps } from "@/components/Link";
 import type { FieldErrorProps } from "@/components/FieldError";
 import type { FieldDescriptionProps } from "@/components/FieldDescription";
@@ -35,7 +32,6 @@ export interface FlowComponentPropsTypes {
   Label: LabelProps;
   LayoutCard: LayoutCardProps;
   Link: LinkProps;
-  Navigation: NavigationProps;
   NavigationItem: NavigationItemProps;
   Text: TextProps;
 }
