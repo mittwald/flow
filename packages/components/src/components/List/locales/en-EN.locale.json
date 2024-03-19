@@ -1,0 +1,5 @@
+{
+  "paginationInfo": "Showing {visibleRows} of {totalRows}",
+  "paginationInfoFiltered": "Showing {visibleItemsCount} of {filteredItemsCount} (unfiltered total count {totalItemsCount})",
+  "showMore": "Show more"
+}
