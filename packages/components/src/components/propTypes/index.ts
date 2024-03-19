@@ -44,6 +44,7 @@ const propsContextSupportingComponentsMap: Record<
 > = {
   Text: true,
   Button: true,
+  ButtonGroup: true,
   CopyButton: true,
   Header: true,
   Icon: true,
