@@ -1,11 +1,9 @@
 @mixin level($level) {
   h#{$level} {
     font-size: var(--heading--h#{$level}-font-size);
-    .icon {
-      height: calc(
-        var(--heading--h#{$level}-font-size) * var(--line-height--default)
-      );
-    }
+    --icon-height: calc(
+      var(--heading--h#{$level}-font-size) * var(--line-height--default)
+    );
   }
 }
 
@@ -14,6 +12,9 @@
   color: var(--heading--color);
   display: flex;
   column-gap: var(--heading--icon-to-text-spacing);
+  .icon {
+    height: var(--icon-height);
+  }
 }
 
 @include level(1);
@@ -26,10 +27,8 @@
 @media (max-width: 550px) {
   h1 {
     font-size: var(--heading--h1-font-size-mobile);
-    .icon {
-      height: calc(
-        var(--heading--h1-font-size-mobile) * var(--line-height--default)
-      );
-    }
+    --icon-height: calc(
+      var(--heading--h1-font-size-mobile) * var(--line-height--default)
+    );
   }
 }
