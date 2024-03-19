@@ -38,6 +38,10 @@
       "types": "./dist/types/components/FieldError/index.d.ts",
       "import": "./dist/FieldError.js"
     },
+    "./Header": {
+      "types": "./dist/types/components/Header/index.d.ts",
+      "import": "./dist/Header.js"
+    },
     "./Heading": {
       "types": "./dist/types/components/Heading/index.d.ts",
       "import": "./dist/Heading.js"
