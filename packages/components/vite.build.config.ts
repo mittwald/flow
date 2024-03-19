@@ -39,6 +39,9 @@ export default defineConfig(
           LabeledValue: "./src/components/LabeledValue/index.ts",
           LayoutCard: "./src/components/LayoutCard/index.ts",
           Link: "./src/components/Link/index.ts",
+          List: "./src/components/List/index.ts",
+          "List/ListLoaderAsyncResource":
+            "./src/components/List/components/ListLoaderAsyncResource.ts",
           Navigation: "./src/components/Navigation/index.ts",
           NumberField: "./src/components/NumberField/index.ts",
           RadioGroup: "./src/components/RadioGroup/index.ts",
