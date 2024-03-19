@@ -28,6 +28,7 @@ export default defineConfig(
           CopyButton: "./src/components/CopyButton/index.ts",
           FieldDescription: "./src/components/FieldDescription/index.ts",
           FieldError: "./src/components/FieldError/index.ts",
+          Header: "./src/components/Header/index.ts",
           Heading: "./src/components/Heading/index.ts",
           Icon: "./src/components/Icon/index.ts",
           Icons: "./src/components/Icon/components/icons/index.ts",

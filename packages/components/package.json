@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-react-components",
-  "version": "0.1.0-alpha.38",
+  "version": "0.1.0-alpha.41",
   "type": "module",
   "description": "A React implementation of Flow, mittwald’s design system",
   "homepage": "https://mittwald.github.io/flow",
@@ -41,6 +41,10 @@
     "./FieldError": {
       "types": "./dist/types/components/FieldError/index.d.ts",
       "import": "./dist/FieldError.js"
+    },
+    "./Header": {
+      "types": "./dist/types/components/Header/index.d.ts",
+      "import": "./dist/Header.js"
     },
     "./Heading": {
       "types": "./dist/types/components/Heading/index.d.ts",
