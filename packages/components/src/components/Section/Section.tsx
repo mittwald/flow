@@ -19,6 +19,9 @@ export const Section: FC<SectionProps> = (props) => {
     Heading: {
       level: 2,
     },
+    Header: {
+      className: styles.header,
+    },
   };
 
   return (
