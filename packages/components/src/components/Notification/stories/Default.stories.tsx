@@ -14,8 +14,9 @@ const meta: Meta<typeof Notification> = {
           onPress={() =>
             state.add(
               {
-                content: "content",
-                title: "title",
+                content: "Your ticket has been closed.",
+                title: "Ticket closed",
+                onPress: () => console.log("pressed"),
               },
               { timeout: 10000 },
             )

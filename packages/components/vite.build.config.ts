@@ -40,6 +40,7 @@ export default defineConfig(
           LayoutCard: "./src/components/LayoutCard/index.ts",
           Link: "./src/components/Link/index.ts",
           Navigation: "./src/components/Navigation/index.ts",
+          Notification: "./src/components/Notification/index.ts",
           NumberField: "./src/components/NumberField/index.ts",
           RadioGroup: "./src/components/RadioGroup/index.ts",
           Section: "./src/components/Section/index.ts",

@@ -40,6 +40,7 @@ export const liveCodeEditorGlobalImports: ImportMapping = {
 "TooltipTrigger:@mittwald/flow-react-components/Tooltip": lazy(() => import("@mittwald/flow-react-components/Tooltip").then(module => ({ default: module.TooltipTrigger } ))),
 "IconCopy:@mittwald/flow-react-components/Icons": lazy(() => import("@mittwald/flow-react-components/Icons").then(module => ({ default: module.IconCopy } ))),
 "InlineAlert:@mittwald/flow-react-components/InlineAlert": lazy(() => import("@mittwald/flow-react-components/InlineAlert").then(module => ({ default: module.InlineAlert } ))),
+"NotificationProvider:@mittwald/flow-react-components/Notification": lazy(() => import("@mittwald/flow-react-components/Notification").then(module => ({ default: module.NotificationProvider } ))),
 "StatusBadge:@mittwald/flow-react-components/StatusBadge": lazy(() => import("@mittwald/flow-react-components/StatusBadge").then(module => ({ default: module.StatusBadge } ))),
 "StatusIcon:@mittwald/flow-react-components/StatusIcon": lazy(() => import("@mittwald/flow-react-components/StatusIcon").then(module => ({ default: module.StatusIcon } ))),
 "LayoutCard:@mittwald/flow-react-components/LayoutCard": lazy(() => import("@mittwald/flow-react-components/LayoutCard").then(module => ({ default: module.LayoutCard } ))),

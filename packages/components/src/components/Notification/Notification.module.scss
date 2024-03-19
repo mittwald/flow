@@ -11,6 +11,7 @@
   grid-row-gap: var(--notification--heading-to-text-spacing);
   box-shadow: var(--notification--shadow);
   width: var(--notification--width);
+  cursor: default;
 
   @extend .info;
 
@@ -65,7 +66,7 @@ h3.heading {
         --notification--#{$variant}-background-color--hover
       );
     }
-    &[data-pressed] {
+    &[data-pressed="true"] {
       background-color: var(
         --notification--#{$variant}-background-color--pressed
       );
