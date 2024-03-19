@@ -4,10 +4,14 @@ import Link from "@mittwald/flow-react-components/Link";
 import Section from "@mittwald/flow-react-components/Section";
 import TextField from "@mittwald/flow-react-components/TextField";
 import Label from "@mittwald/flow-react-components/Label";
+import { IconMember } from "@mittwald/flow-react-components/Icons";
 
 <>
   <Section>
-    <Heading>Personal Information</Heading>
+    <Heading>
+      <IconMember />
+      Personal Information
+    </Heading>
     <TextField isRequired defaultValue="John">
       <Label>First name</Label>
     </TextField>

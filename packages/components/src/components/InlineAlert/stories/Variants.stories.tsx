@@ -7,7 +7,7 @@ import defaultMeta from "./Default.stories";
 
 const meta: Meta<typeof InlineAlert> = {
   ...defaultMeta,
-  title: "Status/Inline Alert/Status",
+  title: "Status/InlineAlert/Status",
 };
 
 export default meta;

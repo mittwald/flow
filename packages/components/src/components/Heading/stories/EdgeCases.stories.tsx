@@ -1,33 +1,24 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Heading from "../Heading";
-import React from "react";
+import defaultMeta from "./Default.stories";
 import { IconMember } from "@/components/Icon/components/icons";
+import React from "react";
+import { dummyText } from "@/lib/dev/dummyText";
 
 const meta: Meta<typeof Heading> = {
-  title: "Content/Heading",
+  ...defaultMeta,
+  title: "Content/Heading/Edge Cases",
   component: Heading,
-  argTypes: {
-    level: {
-      control: "inline-radio",
-      options: [1, 2, 3, 4, 5, 6],
-    },
-  },
-  args: { level: 2 },
-  render: (props) => (
-    <Heading {...props}>I am a H{props.level} Heading</Heading>
-  ),
 };
 export default meta;
 
 type Story = StoryObj<typeof Heading>;
 
-export const Default: Story = {};
-
-export const WithIcon: Story = {
+export const LongText: Story = {
   render: (props) => (
     <Heading {...props}>
       <IconMember />
-      Personal Information
+      {dummyText.medium}
     </Heading>
   ),
 };

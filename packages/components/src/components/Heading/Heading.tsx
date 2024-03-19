@@ -1,7 +1,11 @@
 import React, { ComponentPropsWithoutRef, FC, PropsWithChildren } from "react";
 import styles from "./Heading.module.scss";
 import clsx from "clsx";
-import { useProps } from "@/lib/propsContext";
+import {
+  PropsContext,
+  PropsContextProvider,
+  useProps,
+} from "@/lib/propsContext";
 
 type Level = 1 | 2 | 3 | 4 | 5 | 6;
 
@@ -15,7 +19,7 @@ export const Heading: FC<HeadingProps> = (props) => {
   const {
     children,
     className,
-    level = 3,
+    level = 2,
     ...rest
   } = useProps("Heading", props);
 
@@ -23,9 +27,19 @@ export const Heading: FC<HeadingProps> = (props) => {
 
   const Element: `h${Level}` = `h${level}`;
 
+  const propsContext: PropsContext = {
+    Icon: {
+      "aria-hidden": true,
+      size: "s",
+      className: styles.icon,
+    },
+  };
+
   return (
     <Element className={rootClassName} {...rest}>
-      {children}
+      <PropsContextProvider props={propsContext}>
+        {children}
+      </PropsContextProvider>
     </Element>
   );
 };
