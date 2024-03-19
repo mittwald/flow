@@ -1,5 +1,6 @@
 import React from "react";
 import { getVariantFromChildren } from "./getVariantFromChildren";
+import { describe, test, expect } from "vitest";
 
 describe('"getVariantFromChildren()', () => {
   test.each([

@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import { CopyToClipboardButton } from "../CopyToClipboardButton";
+import { CopyButton } from "../CopyButton";
 
-const meta: Meta<typeof CopyToClipboardButton> = {
-  title: "Actions/CopyToClipboardButton",
-  component: CopyToClipboardButton,
-  render: (props) => <CopyToClipboardButton {...props} />,
+const meta: Meta<typeof CopyButton> = {
+  title: "Actions/CopyButton",
+  component: CopyButton,
+  render: (props) => <CopyButton {...props} />,
   args: {
     text: "Copied content",
   },
@@ -15,7 +15,7 @@ const meta: Meta<typeof CopyToClipboardButton> = {
 };
 export default meta;
 
-type Story = StoryObj<typeof CopyToClipboardButton>;
+type Story = StoryObj<typeof CopyButton>;
 
 export const Default: Story = {};
 

@@ -8,15 +8,13 @@ import { Tooltip, TooltipTrigger } from "@/components/Tooltip";
 import { onlyText } from "react-children-utilities";
 import { useProps } from "@/lib/propsContext";
 
-export interface CopyToClipboardButtonProps
+export interface CopyButtonProps
   extends Omit<ButtonProps, "onPress" | "aria-label"> {
   text: ReactNode;
 }
 
-export const CopyToClipboardButton: FC<CopyToClipboardButtonProps> = (
-  props,
-) => {
-  const { text, ...buttonProps } = useProps("CopyToClipboard", props);
+export const CopyButton: FC<CopyButtonProps> = (props) => {
+  const { text, ...buttonProps } = useProps("CopyButton", props);
 
   const stringFormatter = useLocalizedStringFormatter(locales);
 
@@ -36,4 +34,4 @@ export const CopyToClipboardButton: FC<CopyToClipboardButtonProps> = (
   );
 };
 
-export default CopyToClipboardButton;
+export default CopyButton;

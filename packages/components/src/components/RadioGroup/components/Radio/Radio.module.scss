@@ -1,14 +1,11 @@
+@use "../../../../styles/mixins/formControl";
+
 .radio {
-  border: var(--radio-group--border-width) var(--radio-group--border-style)
-    var(--radio-group--border-color--default);
-  padding: var(--radio-group--padding-y) var(--radio-group--padding-x);
-  background-color: var(--radio-group--background-color--default);
-  color: var(--radio-group--color--default);
+  @include formControl.formControl();
   display: grid;
   row-gap: var(--radio-group--text-to-text-spacing);
   column-gap: var(--radio-group--icon-to-text-spacing);
-  transition-property: color, background-color, border-color;
-  transition-duration: var(--transition--duration--default);
+  border-radius: 0;
 
   /* Without icon and content */
   &:not(:has(.content)):not(:has(.icon)) {
@@ -19,14 +16,14 @@
 
     &:first-of-type {
       border-radius: 0;
-      border-start-start-radius: var(--radio-group--corner-radius);
-      border-end-start-radius: var(--radio-group--corner-radius);
+      border-start-start-radius: var(--form-control--corner-radius);
+      border-end-start-radius: var(--form-control--corner-radius);
     }
 
     &:last-of-type {
       border-radius: 0;
-      border-start-end-radius: var(--radio-group--corner-radius);
-      border-end-end-radius: var(--radio-group--corner-radius);
+      border-start-end-radius: var(--form-control--corner-radius);
+      border-end-end-radius: var(--form-control--corner-radius);
       margin: 0;
     }
 
@@ -41,14 +38,14 @@
 
       &:first-of-type {
         border-radius: 0;
-        border-start-start-radius: var(--radio-group--corner-radius);
-        border-start-end-radius: var(--radio-group--corner-radius);
+        border-start-start-radius: var(--form-control--corner-radius);
+        border-start-end-radius: var(--form-control--corner-radius);
       }
 
       &:last-of-type {
         border-radius: 0;
-        border-end-end-radius: var(--radio-group--corner-radius);
-        border-end-start-radius: var(--radio-group--corner-radius);
+        border-end-end-radius: var(--form-control--corner-radius);
+        border-end-start-radius: var(--form-control--corner-radius);
         margin: 0;
       }
     }
@@ -61,7 +58,7 @@
       "label";
     grid-template-columns: 1fr;
     justify-items: center;
-    border-radius: var(--radio-group--corner-radius);
+    border-radius: var(--form-control--corner-radius);
     .label {
       font-weight: var(--radio-group--label-font-weight-with-content-or-icon);
     }
@@ -79,7 +76,7 @@
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr;
     justify-items: start;
-    border-radius: var(--radio-group--corner-radius);
+    border-radius: var(--form-control--corner-radius);
     .label {
       font-weight: var(--radio-group--label-font-weight-with-content-or-icon);
     }
@@ -93,34 +90,8 @@
     grid-template-columns: auto 1fr;
   }
 
-  /* States */
-  &:hover {
-    background-color: var(--radio-group--background-color--hover);
-  }
-
   &[data-selected] {
-    border-color: var(--radio-group--border-color--selected);
-    background-color: var(--radio-group--background-color--selected);
-    color: var(--radio-group--color--selected);
     z-index: 1;
-  }
-
-  &[data-disabled],
-  [aria-disabled] & {
-    border-color: var(--radio-group--border-color--disabled);
-    background-color: var(--radio-group--background-color--disabled);
-    color: var(--radio-group--color--disabled);
-  }
-
-  &[data-disabled][data-selected],
-  [aria-disabled] &[date-selected] {
-    border-color: var(--radio-group--border-color--selected-disabled);
-    background-color: var(--radio-group--background-color--selected-disabled);
-    color: var(--radio-group--color--selected-disabled);
-  }
-
-  &:not([data-selected]):not([data-disabled]) .icon {
-    color: var(--radio-group--icon-color--default);
   }
 }
 
