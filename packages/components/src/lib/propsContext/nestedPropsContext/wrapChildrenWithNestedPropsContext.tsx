@@ -1,6 +1,6 @@
 import { FlowComponentName, FlowComponentProps } from "@/components/propTypes";
 import { ComponentPropsContext } from "@/lib/propsContext/types";
-import React, { PropsWithChildren } from "react";
+import React, { isValidElement, PropsWithChildren } from "react";
 import { PropsContextProvider } from "@/lib/propsContext";
 import { isPropsWithChildren } from "@/lib/propsContext/nestedPropsContext/isPropsWithChildren";
 import { pickPropsContext } from "@/lib/propsContext/nestedPropsContext/pickPropsContext";
@@ -9,16 +9,24 @@ export const wrapChildrenWithNestedPropsContext = <C extends FlowComponentName>(
   contextProps: ComponentPropsContext<C>,
   localProps: Partial<FlowComponentProps<C>>,
 ): PropsWithChildren => {
-  const withWrappedChildren: PropsWithChildren = {};
+  if (!isPropsWithChildren(localProps)) {
+    return {};
+  }
 
-  if (
-    !isPropsWithChildren(localProps) ||
-    typeof localProps.children !== "object"
-  ) {
-    return withWrappedChildren;
+  const childrenProp = localProps.children;
+
+  if (!Array.isArray(childrenProp) && !isValidElement(childrenProp)) {
+    return {};
   }
 
   const nestedPropsContext = pickPropsContext(contextProps);
+
+  const isNestedPropsContextEmpty =
+    Object.keys(nestedPropsContext).length === 0;
+
+  if (isNestedPropsContextEmpty) {
+    return {};
+  }
 
   return {
     children: (
