@@ -1,10 +1,15 @@
 import React, { ComponentProps, FC } from "react";
-import { useProps } from "@/lib/propsContext";
+import { ClearPropsContext, useProps } from "@/lib/propsContext";
 
 export interface ImageProps extends ComponentProps<"img"> {}
 
 export const Image: FC<ImageProps> = (props) => {
-  return <img {...useProps("Image", props)} />;
+  const propsWithContext = useProps("Image", props);
+  return (
+    <ClearPropsContext>
+      <img {...propsWithContext} />
+    </ClearPropsContext>
+  );
 };
 
 export default Image;

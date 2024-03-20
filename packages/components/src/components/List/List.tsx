@@ -19,6 +19,7 @@ import { ListStaticData } from "@/components/List/components/ListStaticData";
 import { FallbackRenderer } from "@/components/List/components/Item/FallbackRenderer";
 import { ListLoaderAsyncResource } from "@/components/List/components/ListLoaderAsyncResource";
 import { IncrementalLoaderShape } from "@/components/List/model/loading/types";
+import { ClearPropsContext } from "@/lib/propsContext";
 
 interface Props
   extends PropsWithChildren,
@@ -67,19 +68,21 @@ export function List(props: Props) {
   });
 
   return (
-    <listContext.Provider
-      value={{
-        list: listModel,
-      }}
-    >
-      <DataLoader />
-      <div className={styles.list}>
-        <FilterBar className={styles.filterBar} />
-        <Items className={styles.rows} />
-        <PaginationInfos className={styles.paginationInfos} />
-        <ShowMoreItemsButton className={styles.showMoreButton} />
-      </div>
-    </listContext.Provider>
+    <ClearPropsContext>
+      <listContext.Provider
+        value={{
+          list: listModel,
+        }}
+      >
+        <DataLoader />
+        <div className={styles.list}>
+          <FilterBar className={styles.filterBar} />
+          <Items className={styles.rows} />
+          <PaginationInfos className={styles.paginationInfos} />
+          <ShowMoreItemsButton className={styles.showMoreButton} />
+        </div>
+      </listContext.Provider>
+    </ClearPropsContext>
   );
 }
 

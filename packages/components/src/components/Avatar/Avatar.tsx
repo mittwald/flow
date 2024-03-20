@@ -1,7 +1,11 @@
 import React, { FC, PropsWithChildren } from "react";
 import styles from "./Avatar.module.scss";
 import clsx from "clsx";
-import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import {
+  ClearPropsContext,
+  PropsContext,
+  PropsContextProvider,
+} from "@/lib/propsContext";
 import { getVariantFromChildren } from "@/components/Avatar/lib/getVariantFromChildren";
 
 export interface AvatarProps extends PropsWithChildren {
@@ -30,11 +34,13 @@ export const Avatar: FC<AvatarProps> = (props) => {
   };
 
   return (
-    <div className={rootClassName}>
-      <PropsContextProvider props={propsContext}>
-        {children}
-      </PropsContextProvider>
-    </div>
+    <ClearPropsContext>
+      <div className={rootClassName}>
+        <PropsContextProvider props={propsContext}>
+          {children}
+        </PropsContextProvider>
+      </div>
+    </ClearPropsContext>
   );
 };
 

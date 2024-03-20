@@ -5,7 +5,7 @@ import React, {
   PropsWithChildren,
 } from "react";
 import * as Aria from "react-aria-components";
-import { useProps } from "@/lib/propsContext";
+import { ClearPropsContext, useProps } from "@/lib/propsContext";
 import styles from "./Link.module.scss";
 import clsx from "clsx";
 
@@ -35,9 +35,11 @@ export const Link: FC<LinkProps> = (props) => {
   );
 
   return (
-    <Link className={rootClassName} {...rest}>
-      {children}
-    </Link>
+    <ClearPropsContext>
+      <Link className={rootClassName} {...rest}>
+        {children}
+      </Link>
+    </ClearPropsContext>
   );
 };
 

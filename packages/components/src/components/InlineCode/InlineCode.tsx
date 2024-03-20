@@ -1,6 +1,7 @@
 import React, { ComponentProps, FC, PropsWithChildren } from "react";
 import clsx from "clsx";
 import styles from "./InlineCode.module.scss";
+import { ClearPropsContext } from "@/lib/propsContext";
 
 export interface InlineCodeProps
   extends PropsWithChildren<ComponentProps<"code">> {}
@@ -11,9 +12,11 @@ export const InlineCode: FC<InlineCodeProps> = (props) => {
   const rootClassName = clsx(styles.inlineCode, className);
 
   return (
-    <code {...rest} className={rootClassName}>
-      {children}
-    </code>
+    <ClearPropsContext>
+      <code {...rest} className={rootClassName}>
+        {children}
+      </code>
+    </ClearPropsContext>
   );
 };
 
