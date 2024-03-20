@@ -1,4 +1,4 @@
-.filters {
+.filterPickerList {
   display: flex;
   flex-direction: column;
   row-gap: var(--list--buttons-to-badges-spacing);

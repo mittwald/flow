@@ -5,7 +5,7 @@ import styles from "./ActiveFilters.module.scss";
 import { Text } from "@/components/Text";
 import { Button } from "@/components/Button";
 import { IconClose } from "@/components/Icon/components/icons";
-import locales from "../../../../locales/*.locale.json";
+import locales from "../../../locales/*.locale.json";
 import { useMessageFormatter } from "react-aria";
 
 export const ActiveFilters: FC = () => {
