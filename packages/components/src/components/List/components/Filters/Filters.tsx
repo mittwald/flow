@@ -10,6 +10,8 @@ interface Props {
   className?: string;
 }
 
+// ToDo: Add search
+
 export const Filters: FC<Props> = (props) => {
   const { className } = props;
   const list = useList();

@@ -15,7 +15,7 @@ import type { ImageProps } from "@/components/Image";
 import type { CopyButtonProps } from "@/components/CopyButton";
 import { HeaderProps } from "@/components/Header/";
 import { AvatarProps } from "@/components/Avatar";
-import { ItemContextMenuProps } from "@/components/List/components/Items/components/ItemContextMenu/ItemContextMenu";
+import { ListItemContextMenuProps } from "@/components/List";
 
 export * from "./types";
 
@@ -35,7 +35,7 @@ export interface FlowComponentPropsTypes {
   Label: LabelProps;
   LayoutCard: LayoutCardProps;
   Link: LinkProps;
-  ListItemContextMenu: ItemContextMenuProps;
+  ListItemContextMenu: ListItemContextMenuProps;
   NavigationItem: NavigationItemProps;
   Text: TextProps;
 }
@@ -44,23 +44,25 @@ const propsContextSupportingComponentsMap: Record<
   keyof FlowComponentPropsTypes,
   true
 > = {
-  Text: true,
+  Avatar: true,
   Button: true,
-  CopyButton: true,
-  Header: true,
-  Icon: true,
-  Label: true,
   Content: true,
-  LayoutCard: true,
-  NavigationItem: true,
-  Heading: true,
-  InlineAlert: true,
-  Link: true,
-  Initials: true,
-  Image: true,
-  FieldError: true,
+  CopyButton: true,
   FieldDescription: true,
+  FieldError: true,
+  Header: true,
+  Heading: true,
+  Icon: true,
+  Image: true,
+  Initials: true,
+  InlineAlert: true,
+  Label: true,
+  LayoutCard: true,
+  Link: true,
+  ListItemContextMenu: true,
+  NavigationItem: true,
   TestComponent: true,
+  Text: true,
 };
 
 export const propsContextSupportingComponents = Object.keys(

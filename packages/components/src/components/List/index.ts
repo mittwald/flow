@@ -5,4 +5,5 @@ export * from "./components/ListSorting";
 export * from "./components/ListItemView";
 export * from "./components/ListLoaderAsync";
 export * from "./components/ListStaticData";
+export * from "./components/Items/components/ListItemContextMenu";
 export default List;

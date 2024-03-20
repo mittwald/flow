@@ -7,11 +7,11 @@ import { ContextMenu } from "@/components/ContextMenu";
 import locales from "../../../../locales/*.locale.json";
 import { useMessageFormatter } from "react-aria";
 
-export interface ItemContextMenuProps extends PropsWithChildren {
+export interface ListItemContextMenuProps extends PropsWithChildren {
   className?: string;
 }
 
-export const ItemContextMenu: FC<ItemContextMenuProps> = (props) => {
+export const ListItemContextMenu: FC<ListItemContextMenuProps> = (props) => {
   const { className, children } = useProps("ListItemContextMenu", props);
   const stringFormatter = useMessageFormatter(locales);
 
@@ -29,4 +29,4 @@ export const ItemContextMenu: FC<ItemContextMenuProps> = (props) => {
   );
 };
 
-export default ItemContextMenu;
+export default ListItemContextMenu;

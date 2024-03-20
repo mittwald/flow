@@ -25,7 +25,7 @@ export const SortingPickerItem: FC<Props> = (props) => {
         ? IconChevronDown
         : Empty;
 
-  //ToDo: make sorting accessible
+  // ToDo: make sorting accessible
 
   return (
     <ContextMenuItem
