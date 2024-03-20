@@ -32,13 +32,8 @@ export const SortingPickerItem: FC<Props> = (props) => {
       className={styles.sortingPickerItem}
       id={sorting.getTableColumn().id}
     >
-      <div
-        className={styles.actionItem}
-        onClick={sorting.getTableColumn().getToggleSortingHandler()}
-      >
-        {sorting.name}
-        <SortingIcon size="s" />
-      </div>
+      {sorting.name}
+      <SortingIcon size="s" />
     </ContextMenuItem>
   );
 };

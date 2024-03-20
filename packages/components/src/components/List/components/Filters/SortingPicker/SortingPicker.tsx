@@ -10,10 +10,10 @@ import locales from "../../../locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 
 export const SortingPicker: FC = () => {
-  const { sorting } = useList();
+  const list = useList();
   const stringFormatter = useLocalizedStringFormatter(locales);
 
-  const pickerItems = sorting.map((s) => (
+  const pickerItems = list.sorting.map((s) => (
     <SortingPickerItem sorting={s} key={s.getTableColumn().id} />
   ));
 
@@ -23,7 +23,13 @@ export const SortingPicker: FC = () => {
         <Text>{stringFormatter.format("sorting")}</Text>
         <IconChevronDown />
       </Button>
-      <ContextMenu>{pickerItems}</ContextMenu>
+      <ContextMenu
+        onAction={(columnId) => {
+          list.reactTable.getTableColumn(String(columnId)).toggleSorting();
+        }}
+      >
+        {pickerItems}
+      </ContextMenu>
     </Aria.MenuTrigger>
   );
 };

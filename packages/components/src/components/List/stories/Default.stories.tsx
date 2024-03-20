@@ -16,30 +16,37 @@ import { Avatar } from "@/components/Avatar";
 import { Initials } from "@/components/Initials";
 import { ContextMenuItem } from "@/components/ContextMenu";
 
+const loadUsers: AsyncDataLoader<User> = async (opt) => {
+  const response = await getUsers({
+    pagination: opt?.pagination
+      ? {
+          limit: opt.pagination.limit,
+          skip: opt.pagination.offset,
+        }
+      : undefined,
+    filter: opt?.filtering?.["location.state"]
+      ? {
+          states: opt.filtering["location.state"].values as string[],
+        }
+      : undefined,
+  });
+  return {
+    data: response.data,
+    itemTotalCount: response.totalCount,
+  };
+};
+
 const meta: Meta<typeof List> = {
   title: "Structure/List",
   component: List,
   render: () => {
-    const loadUsers: AsyncDataLoader<User> = (opt) =>
-      getUsers({
-        pagination: opt?.pagination
-          ? {
-              limit: opt.pagination.limit,
-              skip: opt.pagination.offset,
-            }
-          : undefined,
-        filter: opt?.filtering?.["location.state"]
-          ? {
-              states: opt.filtering["location.state"].values as string[],
-            }
-          : undefined,
-      });
-
     const availableStates = usePromise(getStates, []);
 
     return (
       <List>
-        <ListLoaderAsync<User> manualPagination>{loadUsers}</ListLoaderAsync>
+        <ListLoaderAsync<User> manualPagination manualSorting={false}>
+          {loadUsers}
+        </ListLoaderAsync>
         <ListFilter<User>
           property="location.state"
           values={availableStates}
