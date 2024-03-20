@@ -1,6 +1,8 @@
 import React, {
+  cloneElement,
   DependencyList,
   FC,
+  isValidElement,
   PropsWithChildren,
   useContext,
   useMemo,
@@ -15,7 +17,12 @@ interface Props extends PropsWithChildren {
 }
 
 export const PropsContextProvider: FC<Props> = (props) => {
-  const { props: providedProps, dependencies = [], children } = props;
+  const {
+    props: providedProps,
+    dependencies = [],
+    children,
+    ...forwardChildrenProps
+  } = props;
 
   const parentContextProps = useContext(propsContext);
 
@@ -24,9 +31,29 @@ export const PropsContextProvider: FC<Props> = (props) => {
     [parentContextProps, ...dependencies],
   );
 
+  const childrenProps = isValidElement(children)
+    ? {
+        ...forwardChildrenProps,
+        ...children.props,
+      }
+    : forwardChildrenProps;
+
+  const childrenMemoDeps = [
+    children,
+    ...Object.entries(childrenProps).flatMap((e) => e),
+  ];
+
+  const childrenWithForwardedProps = useMemo(
+    () =>
+      isValidElement(children)
+        ? cloneElement(children, childrenProps)
+        : children,
+    childrenMemoDeps,
+  );
+
   return (
     <propsContext.Provider value={propsIncludingParentContext}>
-      {children}
+      {childrenWithForwardedProps}
     </propsContext.Provider>
   );
 };

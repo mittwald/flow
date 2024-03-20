@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-react-components",
-  "version": "0.1.0-alpha.36",
+  "version": "0.1.0-alpha.44",
   "type": "module",
   "description": "A React implementation of Flow, mittwald’s design system",
   "homepage": "https://mittwald.github.io/flow",
@@ -45,6 +45,10 @@
     "./FieldError": {
       "types": "./dist/types/components/FieldError/index.d.ts",
       "import": "./dist/FieldError.js"
+    },
+    "./Header": {
+      "types": "./dist/types/components/Header/index.d.ts",
+      "import": "./dist/Header.js"
     },
     "./Heading": {
       "types": "./dist/types/components/Heading/index.d.ts",
@@ -93,6 +97,10 @@
     "./List": {
       "types": "./dist/types/components/List/index.d.ts",
       "import": "./dist/List.js"
+    },
+    "./List/ListLoaderAsyncResource": {
+      "types": "./dist/types/components/List/components/ListLoaderAsyncResource.d.ts",
+      "import": "./dist/List/ListLoaderAsyncResource.js"
     },
     "./Navigation": {
       "types": "./dist/types/components/Navigation/index.d.ts",
@@ -178,12 +186,13 @@
     "react-aria-components": "^1.1.1",
     "react-children-utilities": "^2.10.0",
     "react-stately": "^3.30.1",
-    "remeda": "^1.46.2"
+    "remeda": "^1.51.0"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
     "@mittwald/flow-design-tokens": "workspace:^",
-    "@nx/storybook": "^18.1.0",
+    "@mittwald/react-use-promise": "^2.3.12",
+    "@nx/storybook": "^18.1.1",
     "@storybook/addon-a11y": "^7.6.17",
     "@storybook/addon-actions": "^7.6.17",
     "@storybook/addon-essentials": "^7.6.17",
@@ -201,48 +210,53 @@
     "@storybook/theming": "^7.6.17",
     "@testing-library/react": "^14.2.1",
     "@types/invariant": "^2",
-    "@types/node": "20.11.24",
+    "@types/node": "20.11.28",
     "@types/prettier": "^3.0.0",
     "@types/prop-types": "^15.7.11",
-    "@types/react": "^18.2.61",
-    "@types/react-dom": "^18.2.19",
+    "@types/react": "^18.2.66",
+    "@types/react-dom": "^18.2.22",
     "@types/rollup": "^0.54.0",
-    "@vitest/coverage-v8": "^1.3.1",
+    "@vitejs/plugin-react": "^4.2.1",
+    "@vitest/coverage-v8": "^1.4.0",
     "decamelize": "^6.0.0",
     "fs-jetpack": "^5.1.0",
-    "happy-dom": "^13.8.4",
+    "happy-dom": "^13.9.0",
     "next": "^14.1.3",
-    "nx": "^18.1.0",
-    "postcss": "^8.4.35",
+    "nx": "^18.1.1",
+    "postcss": "^8.4.36",
     "postcss-nested-import": "^1.3.0",
-    "postcss-nesting": "^12.0.4",
+    "postcss-nesting": "^12.1.0",
     "prettier": "^3.2.5",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-element-to-jsx-string": "^15.0.0",
-    "rollup": "^4.12.0",
-    "sass": "^1.71.1",
+    "rollup": "^4.13.0",
+    "sass": "^1.72.0",
     "storybook": "^7.6.17",
     "storybook-addon-dir": "^1.0.6",
-    "storybook-addon-pseudo-states": "^2.2.0",
+    "storybook-addon-pseudo-states": "^2.2.1",
     "tsx": "^4.7.1",
-    "typescript": "^5.3.3",
+    "typescript": "^5.4.2",
     "typescript-plugin-css-modules": "^5.1.0",
-    "vite": "^5.1.4",
+    "vite": "^5.1.6",
     "vite-plugin-banner": "^0.7.1",
     "vite-plugin-checker": "^0.6.4",
     "vite-plugin-dts": "^3.7.3",
     "vite-plugin-externalize-deps": "^0.8.0",
-    "vitest": "^1.3.1",
-    "yaml": "^2.4.0"
+    "vitest": "^1.4.0",
+    "yaml": "^2.4.1"
   },
   "peerDependencies": {
+    "@mittwald/react-use-promise": "^2.3.12",
     "next": "*",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
   "peerDependenciesMeta": {
+    "@mittwald/react-use-promise": {
+      "optional": true
+    },
     "next": {
       "optional": true
     }

@@ -1,11 +1,12 @@
 .list {
   display: grid;
   grid-template-areas:
-    "filter      "
+    "filter         "
     "items          "
     "paginationInfos"
     "showMoreButton ";
 }
+
 
 .filter {
   grid-area: filter;
@@ -14,6 +15,7 @@
 
 .items {
   grid-area: items;
+  margin-block: var(--size-rem--xl);
 }
 
 .paginationInfos {

@@ -8,7 +8,7 @@ import {
 import { AnyData } from "@/components/List/model/item/types";
 import { AsyncResource, getAsyncResource } from "@mittwald/react-use-promise";
 import { Signal, useSignal } from "@preact/signals-react";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { useSignals } from "@preact/signals-react/runtime";
 import { times } from "remeda";
 
@@ -83,6 +83,15 @@ export class IncrementalLoader<T> {
     );
   }
 
+  public useSuspenseHook(pageIndex: number): void {
+    useEffect(() => {
+      this.updatePageLoadingState(pageIndex, "loading");
+      return () => {
+        this.updatePageLoadingState(pageIndex, "loaded");
+      };
+    }, [pageIndex]);
+  }
+
   public getLoaderInvocationHooks(): Array<() => void> {
     const pages = times(this.list.pagination.getPageIndex() + 1, (i) => i);
     return pages.map((i) => () => {
@@ -92,15 +101,16 @@ export class IncrementalLoader<T> {
 
   private useLoadPage(pageIndex: number): void {
     const asyncResource = this.getPageDataAsyncResource(pageIndex);
-    this.updatePageLoadingState(pageIndex, asyncResource.state.value);
 
     const { data, itemTotalCount } = asyncResource.use();
-    this.updatePageData(pageIndex, data);
-    this.updatePageLoadingState(pageIndex, asyncResource.state.value);
 
-    if (itemTotalCount !== undefined) {
-      this.list.pagination.updateItemTotalCount(itemTotalCount);
-    }
+    useEffect(() => {
+      this.updatePageData(pageIndex, data);
+
+      if (itemTotalCount !== undefined) {
+        this.list.pagination.updateItemTotalCount(itemTotalCount);
+      }
+    }, [pageIndex, data, itemTotalCount, asyncResource]);
   }
 
   private getDataLoaderOptions(pageIndex: number): DataLoaderOptions<T> {

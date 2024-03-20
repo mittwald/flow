@@ -1,6 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import List from "../List";
 import React from "react";
+import { getStates, getUsers, User } from "@/components/List/testData/userApi";
+import { Heading } from "@/components/Heading";
+import { Text } from "@/components/Text";
+import { usePromise } from "@mittwald/react-use-promise";
+import { ListFilter, ListItemView, ListLoaderAsync } from "@/components/List";
+import { AsyncDataLoader } from "@/components/List/model/loading/types";
 import { getCompanies, getUsers, User } from "@/components/List/test/userApi";
 import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
@@ -21,37 +27,52 @@ const meta: Meta<typeof List> = {
   title: "Structure/List",
   component: List,
   render: () => {
+    const loadUsers: AsyncDataLoader<User> = (opt) =>
+      getUsers({
+        pagination: opt?.pagination
+          ? {
+              limit: opt.pagination.limit,
+              skip: opt.pagination.offset,
+            }
+          : undefined,
+        filter: opt?.filtering?.["location.state"]
+          ? {
+              states: opt.filtering["location.state"].values as string[],
+            }
+          : undefined,
+      });
+
+    const availableStates = usePromise(getStates, []);
+
     return (
-      <>
-        <List enableMultiSort>
-          <ListLoaderAsync<User>>{getUsers}</ListLoaderAsync>
-          <ListFilter<User>
-            property="company"
-            values={usePromise(getCompanies, [])}
-            mode="some"
-          />
-          <ListSorting<User> property="company" />
-          <ListSorting<User> property="firstName" />
-          <ListItemView<User>>
-            {(user) => (
-              <>
-                <Avatar>
-                  <Initials>{`${user.firstName} ${user.lastName}`}</Initials>
-                </Avatar>
-                <Heading>
-                  {user.firstName} {user.lastName}
-                </Heading>
-                <Text>{user.company}</Text>
-                <Content style={{ background: "lightgrey" }}></Content>
-                <ItemContextMenu>
-                  <ContextMenuItem>Show details</ContextMenuItem>
-                  <ContextMenuItem>Delete</ContextMenuItem>
-                </ItemContextMenu>
-              </>
-            )}
-          </ListItemView>
-        </List>
-      </>
+      <List>
+        <ListLoaderAsync<User> manualPagination>{loadUsers}</ListLoaderAsync>
+        <ListFilter<User>
+          property="location.state"
+          values={availableStates}
+          mode="some"
+        />
+        <ListSorting<User> property="company" />
+        <ListSorting<User> property="firstName" />
+        <ListItemView<User>>
+          {(user) => (
+            <>
+              <Avatar>
+                <Initials>{`${user.firstName} ${user.lastName}`}</Initials>
+              </Avatar>
+              <Heading>
+                {user.firstName} {user.lastName}
+              </Heading>
+              <Text>{user.company}</Text>
+              <Content style={{ background: "lightgrey" }}></Content>
+              <ItemContextMenu>
+                <ContextMenuItem>Show details</ContextMenuItem>
+                <ContextMenuItem>Delete</ContextMenuItem>
+              </ItemContextMenu>
+            </>
+          )}
+        </ListItemView>
+      </List>
     );
   },
 };

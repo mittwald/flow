@@ -16,7 +16,7 @@ import { ListItemView } from "@/components/List/components/ListItemView";
 import { AnyData } from "@/components/List/model/item/types";
 import { ListShape } from "@/components/List/model/types";
 import { ListStaticData } from "@/components/List/components/ListStaticData";
-import { FallbackRenderer } from "@/components/List/components/Items/components/Item/FallbackRenderer";
+import { FallbackRenderer } from "@/components/List/components/Item/FallbackRenderer";
 import { ListLoaderAsyncResource } from "@/components/List/components/ListLoaderAsyncResource";
 import { IncrementalLoaderShape } from "@/components/List/model/loading/types";
 
@@ -74,7 +74,7 @@ export function List(props: Props) {
     >
       <DataLoader />
       <div className={styles.list}>
-        <Filters className={styles.filter} />
+        <Filters className={styles.filters} />
         <Items className={styles.rows} />
         <PaginationInfos className={styles.paginationInfos} />
         <ShowMoreItemsButton className={styles.showMoreButton} />
