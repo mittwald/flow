@@ -16,7 +16,7 @@ export const ItemList: FC<Props> = (props) => {
     <Item key={i.id}>{i.render()}</Item>
   ));
 
-  return <div className={clsx(styles.items, className)}>{rows}</div>;
+  return <div className={clsx(styles.itemList, className)}>{rows}</div>;
 };
 
 export default ItemList;
