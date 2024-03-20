@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.45](https://github.com/mittwald/flow/compare/0.1.0-alpha.44...0.1.0-alpha.45) (2024-03-20)
+
+### Bug Fixes
+
+- allow default children type in Initials
+  ([3100be9](https://github.com/mittwald/flow/commit/3100be92d3d427834b414c0745cba6bb8ac3e80a))
+- avoid circular imports
+  ([864276a](https://github.com/mittwald/flow/commit/864276a041daa71b0a9eb7e8e78ae4578573ac6f))
+- **List:** avoid render-loop when suspending ListItemView
+  ([2e9eccd](https://github.com/mittwald/flow/commit/2e9eccdb4fe508074c374aaa6741f4a6f89b1601))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.44](https://github.com/mittwald/flow/compare/0.1.0-alpha.43...0.1.0-alpha.44) (2024-03-19)
 
 ### Features

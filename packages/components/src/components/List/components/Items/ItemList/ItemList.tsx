@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, Suspense } from "react";
 import { useList } from "@/components/List/hooks/useList";
 import styles from "./ItemList.module.css";
 import clsx from "clsx";
@@ -13,7 +13,9 @@ export const ItemList: FC<Props> = (props) => {
   const list = useList();
 
   const rows = list.items.entries.map((i) => (
-    <Item key={i.id}>{i.render()}</Item>
+    <Item key={i.id}>
+      <Suspense>{i.render()}</Suspense>
+    </Item>
   ));
 
   return <div className={clsx(styles.itemList, className)}>{rows}</div>;

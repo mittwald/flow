@@ -7,9 +7,9 @@ import React, {
   useContext,
   useMemo,
 } from "react";
-import { PropsContext as PropsContextShape } from "@/lib/propsContext";
-import { propsContext } from "./propsContext";
+import { PropsContext as PropsContextShape } from "@/lib/propsContext/types";
 import mergePropsContext from "./mergePropsContext";
+import { propsContext } from "@/lib/propsContext/propsContext";
 
 interface Props extends PropsWithChildren {
   props: PropsContextShape;
