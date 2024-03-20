@@ -12,4 +12,5 @@ export interface FilterShape<T> {
   mode?: FilterMode;
   matcher?: FilterMatcher;
   values?: unknown[];
+  name?: string;
 }

@@ -44,9 +44,10 @@ const meta: Meta<typeof List> = {
           property="location.state"
           values={availableStates}
           mode="some"
+          name="Location"
         />
-        <ListSorting<User> property="location.state" />
-        <ListSorting<User> property="name.last" />
+        <ListSorting<User> property="location.state" name="Location" />
+        <ListSorting<User> property="name.last" name="Last name" />
         <ListItemView<User>>
           {(user) => (
             <>

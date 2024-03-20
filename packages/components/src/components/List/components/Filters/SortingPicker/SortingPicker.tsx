@@ -7,11 +7,11 @@ import { IconChevronDown } from "@/components/Icon/components/icons";
 import { Button } from "@/components/Button";
 import { ContextMenu } from "@/components/ContextMenu";
 import locales from "../../../locales/*.locale.json";
-import { useMessageFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "react-aria";
 
 export const SortingPicker: FC = () => {
   const { sorting } = useList();
-  const stringFormatter = useMessageFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(locales);
 
   const pickerItems = sorting.map((s) => (
     <SortingPickerItem sorting={s} key={s.getTableColumn().id} />
@@ -20,7 +20,7 @@ export const SortingPicker: FC = () => {
   return (
     <Aria.MenuTrigger>
       <Button style="soft" size="s" variant="secondary">
-        <Text>{stringFormatter("sorting")}</Text>
+        <Text>{stringFormatter.format("sorting")}</Text>
         <IconChevronDown />
       </Button>
       <ContextMenu>{pickerItems}</ContextMenu>

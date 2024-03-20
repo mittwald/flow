@@ -17,6 +17,7 @@ export class Filter<T> {
   public readonly property: PropertyName<T>;
   public readonly mode: FilterMode;
   public readonly matcher: FilterMatcher;
+  public readonly name?: string;
   private onFilterUpdateCallbacks = new Set<() => unknown>();
 
   public constructor(list: List<T>, shape: FilterShape<T>) {
@@ -25,6 +26,7 @@ export class Filter<T> {
     this.mode = shape.mode ?? "one";
     this._values = shape.values;
     this.matcher = shape.matcher ?? equalsPropertyMatcher;
+    this.name = shape.name;
   }
 
   public updateTableColumnDef(def: ColumnDef<T>): void {
