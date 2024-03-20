@@ -1,7 +1,6 @@
 .items {
   display: flex;
   flex-direction: column;
-  row-gap: var(--size-px--xs);
   border-radius: var(--list-item--corner-radius);
   border-color: var(--list-item--border-color);
   border-width: var(--list-item--border-width);

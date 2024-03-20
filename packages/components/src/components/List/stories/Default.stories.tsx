@@ -5,15 +5,15 @@ import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
 import { AsyncDataLoader } from "@/components/List/model/loading/types";
 import { usePromise } from "@mittwald/react-use-promise";
-import {
+import List, {
   ListFilter,
   ListItemView,
   ListLoaderAsync,
   ListSorting,
+  ListItemContextMenu,
 } from "@/components/List";
 import { Avatar } from "@/components/Avatar";
 import { Initials } from "@/components/Initials";
-import List, { ListItemContextMenu } from "@/components/List";
 import { ContextMenuItem } from "@/components/ContextMenu";
 
 const meta: Meta<typeof List> = {
@@ -45,8 +45,8 @@ const meta: Meta<typeof List> = {
           values={availableStates}
           mode="some"
         />
-        <ListSorting<User> property="location" />
-        <ListSorting<User> property="name" />
+        <ListSorting<User> property="location.state" />
+        <ListSorting<User> property="name.last" />
         <ListItemView<User>>
           {(user) => (
             <>
