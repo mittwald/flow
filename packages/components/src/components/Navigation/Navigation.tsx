@@ -22,8 +22,6 @@ export const Navigation: FC<NavigationProps> = (props) => {
 
   const hasGroups = !!deepFindOfType(children, NavigationGroup);
 
-  console.log(hasGroups);
-
   const propsContext: PropsContext = {
     Heading: {
       className: styles.heading,
