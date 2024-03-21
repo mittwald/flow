@@ -87,17 +87,16 @@ export const Button: FC<ButtonProps> = (props) => {
         isDisabled={isDisabled || isPending || isSucceeded || isFailed}
         {...restProps}
       >
-        <Wrap if={stateIcon}>
-          <span className={styles.content}>
-            <Wrap if={isStringContent}>
-              <Text>
-                <PropsContextProvider props={propsContext}>
-                  {children}
-                </PropsContextProvider>
-              </Text>
-            </Wrap>
-          </span>
-        </Wrap>
+        <PropsContextProvider props={propsContext}>
+          <Wrap if={stateIcon}>
+            <span className={styles.content}>
+              <Wrap if={isStringContent}>
+                <Text>{children}</Text>
+              </Wrap>
+            </span>
+          </Wrap>
+        </PropsContextProvider>
+
         {stateIcon}
       </Aria.Button>
     </ClearPropsContext>

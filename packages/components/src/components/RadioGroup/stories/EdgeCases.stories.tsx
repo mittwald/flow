@@ -71,4 +71,5 @@ export const SmallSpace: Story = {
         ))}
     </RadioGroup>
   ),
+  parameters: { viewport: { defaultViewport: "mobile1" } },
 };

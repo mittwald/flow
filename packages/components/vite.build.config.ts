@@ -24,6 +24,7 @@ export default defineConfig(
           Checkbox: "./src/components/Checkbox/index.ts",
           ColumnLayout: "./src/components/ColumnLayout/index.ts",
           Content: "./src/components/Content/index.ts",
+          ContentPlaceholder: "./src/components/ContentPlaceholder/index.ts",
           CopyButton: "./src/components/CopyButton/index.ts",
           FieldDescription: "./src/components/FieldDescription/index.ts",
           FieldError: "./src/components/FieldError/index.ts",
