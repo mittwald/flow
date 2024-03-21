@@ -2,7 +2,6 @@ import React, { ComponentProps, FC, PropsWithChildren } from "react";
 import styles from "./Navigation.module.scss";
 import clsx from "clsx";
 import {
-  ClearPropsContext,
   PropsContext,
   PropsContextProvider,
 } from "@/lib/propsContext";
@@ -30,7 +29,6 @@ export const Navigation: FC<NavigationProps> = (props) => {
   };
 
   return (
-    <ClearPropsContext>
       <nav className={rootClassName} role="navigation" {...rest}>
         <PropsContextProvider props={propsContext}>
           <Wrap if={!hasGroups}>
@@ -38,7 +36,6 @@ export const Navigation: FC<NavigationProps> = (props) => {
           </Wrap>
         </PropsContextProvider>
       </nav>
-    </ClearPropsContext>
   );
 };
 
