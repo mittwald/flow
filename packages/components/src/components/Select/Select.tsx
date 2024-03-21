@@ -15,7 +15,7 @@ export interface SelectProps
 }
 
 export const Select: FC<SelectProps> = (props) => {
-  const { children, className, label, ...rest } = props;
+  const { children, className, ...rest } = props;
 
   const rootClassName = clsx(formFieldStyles.formField, className);
 

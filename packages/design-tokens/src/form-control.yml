@@ -44,7 +44,7 @@ form-control:
     invalid:
       value: "{danger.color.100}"
     selected:
-      value: "{primary-outline-background-color.pressed}"
+      value: "{info-outline-background-color.pressed}"
 
   content-color:
     default:

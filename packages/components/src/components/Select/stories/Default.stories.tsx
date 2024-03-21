@@ -4,7 +4,7 @@ import React from "react";
 import { Label } from "@/components/Label";
 
 const meta: Meta<typeof Select> = {
-  title: "Forms/Select",
+  title: "Form Controls/Select",
   component: Select,
   render: (props) => (
     <Select {...props}>
