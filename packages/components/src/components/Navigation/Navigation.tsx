@@ -13,6 +13,8 @@ export const Navigation: FC<NavigationProps> = (props) => {
 
   const rootClassName = clsx(styles.navigation, className);
 
+  //   const hasGroups = !!deepFindOfType(children, NavigationGroup);
+
   return (
     <ClearPropsContext>
       <nav className={rootClassName} role="navigation" {...rest}>
