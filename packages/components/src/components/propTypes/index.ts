@@ -13,7 +13,9 @@ import type { HeadingProps } from "@/components/Heading";
 import type { InitialsProps } from "@/components/Initials";
 import type { ImageProps } from "@/components/Image";
 import type { CopyButtonProps } from "@/components/CopyButton";
-import { HeaderProps } from "@/components/Header/";
+import type { HeaderProps } from "@/components/Header/";
+import type { SwitchProps } from "@/components/Switch";
+import { StatusBadgeProps } from "@/components/StatusBadge";
 
 export * from "./types";
 
@@ -33,6 +35,8 @@ export interface FlowComponentPropsTypes {
   LayoutCard: LayoutCardProps;
   Link: LinkProps;
   NavigationItem: NavigationItemProps;
+  StatusBadge: StatusBadgeProps;
+  Switch: SwitchProps;
   Text: TextProps;
 }
 
@@ -57,6 +61,8 @@ const propsContextSupportingComponentsMap: Record<
   FieldError: true,
   FieldDescription: true,
   TestComponent: true,
+  Switch: true,
+  StatusBadge: true,
 };
 
 export const propsContextSupportingComponents = Object.keys(

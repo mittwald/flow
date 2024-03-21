@@ -1,9 +1,9 @@
 import { FlowComponentName, FlowComponentProps } from "@/components/propTypes";
 import { ComponentPropsContext } from "@/lib/propsContext/types";
 import React, { isValidElement, PropsWithChildren } from "react";
-import { PropsContextProvider } from "@/lib/propsContext";
 import { isPropsWithChildren } from "@/lib/propsContext/nestedPropsContext/isPropsWithChildren";
 import { pickPropsContext } from "@/lib/propsContext/nestedPropsContext/pickPropsContext";
+import PropsContextProvider from "@/lib/propsContext/PropsContextProvider";
 
 export const wrapChildrenWithNestedPropsContext = <C extends FlowComponentName>(
   contextProps: ComponentPropsContext<C>,

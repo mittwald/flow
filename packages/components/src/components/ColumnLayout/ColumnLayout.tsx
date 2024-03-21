@@ -1,6 +1,7 @@
 import React, { FC, PropsWithChildren, CSSProperties } from "react";
 import styles from "./ColumnLayout.module.scss";
 import { getColumns } from "./lib/getColumns";
+import { ClearPropsContext } from "@/lib/propsContext";
 
 export interface ColumnLayoutProps extends PropsWithChildren {
   s?: number[];
@@ -22,9 +23,11 @@ export const ColumnLayout: FC<ColumnLayoutProps> = (props) => {
   } as CSSProperties;
 
   return (
-    <div className={styles.columnLayoutContainer} style={style}>
-      <div className={styles.columnLayout}>{children}</div>
-    </div>
+    <ClearPropsContext>
+      <div className={styles.columnLayoutContainer} style={style}>
+        <div className={styles.columnLayout}>{children}</div>
+      </div>
+    </ClearPropsContext>
   );
 };
 

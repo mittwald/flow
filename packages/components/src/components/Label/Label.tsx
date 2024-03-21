@@ -2,7 +2,7 @@ import React, { FC, PropsWithChildren } from "react";
 import styles from "./Label.module.scss";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
-import { useProps } from "@/lib/propsContext";
+import { ClearPropsContext, useProps } from "@/lib/propsContext";
 import { useLocalizedStringFormatter } from "react-aria";
 import locales from "./locales/*.locale.json";
 
@@ -19,10 +19,12 @@ export const Label: FC<LabelProps> = (props) => {
   const optionalMarker = " " + stringFormatter.format("label.optional");
 
   return (
-    <Aria.Label {...rest} className={rootClassName}>
-      {children}
-      {optional && optionalMarker}
-    </Aria.Label>
+    <ClearPropsContext>
+      <Aria.Label {...rest} className={rootClassName}>
+        {children}
+        {optional && optionalMarker}
+      </Aria.Label>
+    </ClearPropsContext>
   );
 };
 

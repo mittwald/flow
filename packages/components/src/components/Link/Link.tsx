@@ -6,6 +6,7 @@ import React, {
 } from "react";
 import * as Aria from "react-aria-components";
 import {
+  ClearPropsContext,
   PropsContext,
   PropsContextProvider,
   useProps,
@@ -46,11 +47,13 @@ export const Link: FC<LinkProps> = (props) => {
   };
 
   return (
-    <Link className={rootClassName} {...rest}>
-      <PropsContextProvider props={propsContext}>
-        {children}
-      </PropsContextProvider>
-    </Link>
+    <ClearPropsContext>
+      <Link className={rootClassName} {...rest}>
+        <PropsContextProvider props={propsContext}>
+          {children}
+        </PropsContextProvider>
+      </Link>
+    </ClearPropsContext>
   );
 };
 

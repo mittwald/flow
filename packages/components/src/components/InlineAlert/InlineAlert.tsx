@@ -1,5 +1,6 @@
 import React, { ComponentProps, FC, PropsWithChildren } from "react";
 import {
+  ClearPropsContext,
   PropsContext,
   PropsContextProvider,
   useProps,
@@ -34,12 +35,14 @@ export const InlineAlert: FC<InlineAlertProps> = (props) => {
   };
 
   return (
-    <aside {...rest} className={rootClassName}>
-      <StatusIcon className={styles.statusIcon} status={status} />
-      <PropsContextProvider props={propsContext}>
-        {children}
-      </PropsContextProvider>
-    </aside>
+    <ClearPropsContext>
+      <aside {...rest} className={rootClassName}>
+        <StatusIcon className={styles.statusIcon} status={status} />
+        <PropsContextProvider props={propsContext}>
+          {children}
+        </PropsContextProvider>
+      </aside>
+    </ClearPropsContext>
   );
 };
 

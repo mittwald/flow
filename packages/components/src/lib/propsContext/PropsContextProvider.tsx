@@ -4,12 +4,10 @@ import React, {
   FC,
   isValidElement,
   PropsWithChildren,
-  useContext,
   useMemo,
 } from "react";
-import { PropsContext as PropsContextShape } from "@/lib/propsContext";
-import { propsContext } from "./propsContext";
-import mergePropsContext from "./mergePropsContext";
+import { PropsContext as PropsContextShape } from "@/lib/propsContext/types";
+import { propsContext } from "@/lib/propsContext/propsContext";
 
 interface Props extends PropsWithChildren {
   props: PropsContextShape;
@@ -24,11 +22,9 @@ export const PropsContextProvider: FC<Props> = (props) => {
     ...forwardChildrenProps
   } = props;
 
-  const parentContextProps = useContext(propsContext);
-
   const propsIncludingParentContext = useMemo(
-    () => mergePropsContext(parentContextProps, providedProps),
-    [parentContextProps, ...dependencies],
+    () => providedProps,
+    dependencies,
   );
 
   const childrenProps = isValidElement(children)
