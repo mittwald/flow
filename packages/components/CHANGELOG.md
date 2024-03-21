@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.46](https://github.com/mittwald/flow/compare/0.1.0-alpha.45...0.1.0-alpha.46) (2024-03-21)
+
+### Bug Fixes
+
+- clear props context in each component
+  ([175c222](https://github.com/mittwald/flow/commit/175c22249152a0be129da58837251d0004ed32e5))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.45](https://github.com/mittwald/flow/compare/0.1.0-alpha.44...0.1.0-alpha.45) (2024-03-20)
 
 ### Bug Fixes
