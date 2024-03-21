@@ -2,7 +2,7 @@ import React, { FC, PropsWithChildren } from "react";
 import styles from "./FieldError.module.scss";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
-import { useProps } from "@/lib/propsContext";
+import { ClearPropsContext, useProps } from "@/lib/propsContext";
 import { IconDanger } from "@/components/Icon/components/icons";
 
 export interface FieldErrorProps
@@ -14,14 +14,16 @@ export const FieldError: FC<FieldErrorProps> = (props) => {
   const rootClassName = clsx(styles.fieldError, className);
 
   return (
-    <Aria.FieldError {...rest} className={rootClassName}>
-      {({ validationErrors }) => (
-        <>
-          <IconDanger size="s" />
-          <span>{children ? children : validationErrors.join(" ")}</span>
-        </>
-      )}
-    </Aria.FieldError>
+    <ClearPropsContext>
+      <Aria.FieldError {...rest} className={rootClassName}>
+        {({ validationErrors }) => (
+          <>
+            <IconDanger size="s" />
+            <span>{children ? children : validationErrors.join(" ")}</span>
+          </>
+        )}
+      </Aria.FieldError>
+    </ClearPropsContext>
   );
 };
 

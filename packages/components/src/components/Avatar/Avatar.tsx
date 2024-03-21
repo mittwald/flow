@@ -2,6 +2,7 @@ import React, { FC, PropsWithChildren } from "react";
 import styles from "./Avatar.module.scss";
 import clsx from "clsx";
 import {
+  ClearPropsContext,
   PropsContext,
   PropsContextProvider,
   useProps,
@@ -34,11 +35,13 @@ export const Avatar: FC<AvatarProps> = (props) => {
   };
 
   return (
-    <div className={rootClassName}>
-      <PropsContextProvider props={propsContext}>
-        {children}
-      </PropsContextProvider>
-    </div>
+    <ClearPropsContext>
+      <div className={rootClassName}>
+        <PropsContextProvider props={propsContext}>
+          {children}
+        </PropsContextProvider>
+      </div>
+    </ClearPropsContext>
   );
 };
 

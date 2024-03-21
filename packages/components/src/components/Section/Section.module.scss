@@ -27,15 +27,11 @@
   justify-content: space-between;
   align-items: flex-start;
 
-  :global(.flow--switch) {
-    flex-direction: row-reverse;
-  }
-
   @container (max-width: 550px) {
     flex-direction: column;
 
-    :global(.flow--switch),
-    :global(.flow--status-badge) {
+    .switch,
+    .statusBadge {
       align-self: flex-end;
     }
   }

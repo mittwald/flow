@@ -21,6 +21,13 @@ export const Section: FC<SectionProps> = (props) => {
     },
     Header: {
       className: styles.header,
+      Switch: {
+        className: styles.switch,
+        labelPosition: "leading",
+      },
+      StatusBadge: {
+        className: styles.statusBadge,
+      },
     },
   };
 

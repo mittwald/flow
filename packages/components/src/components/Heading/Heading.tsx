@@ -2,6 +2,7 @@ import React, { ComponentPropsWithoutRef, FC, PropsWithChildren } from "react";
 import styles from "./Heading.module.scss";
 import clsx from "clsx";
 import {
+  ClearPropsContext,
   PropsContext,
   PropsContextProvider,
   useProps,
@@ -36,11 +37,13 @@ export const Heading: FC<HeadingProps> = (props) => {
   };
 
   return (
-    <Element className={rootClassName} {...rest}>
-      <PropsContextProvider props={propsContext}>
-        {children}
-      </PropsContextProvider>
-    </Element>
+    <ClearPropsContext>
+      <Element className={rootClassName} {...rest}>
+        <PropsContextProvider props={propsContext}>
+          {children}
+        </PropsContextProvider>
+      </Element>
+    </ClearPropsContext>
   );
 };
 

@@ -13,7 +13,9 @@ import type { HeadingProps } from "@/components/Heading";
 import type { InitialsProps } from "@/components/Initials";
 import type { ImageProps } from "@/components/Image";
 import type { CopyButtonProps } from "@/components/CopyButton";
-import { HeaderProps } from "@/components/Header/";
+import type { HeaderProps } from "@/components/Header/";
+import type { SwitchProps } from "@/components/Switch";
+import { StatusBadgeProps } from "@/components/StatusBadge";
 import { AvatarProps } from "@/components/Avatar";
 import { ListItemContextMenuProps } from "@/components/List";
 
@@ -37,6 +39,8 @@ export interface FlowComponentPropsTypes {
   Link: LinkProps;
   ListItemContextMenu: ListItemContextMenuProps;
   NavigationItem: NavigationItemProps;
+  StatusBadge: StatusBadgeProps;
+  Switch: SwitchProps;
   Text: TextProps;
 }
 
@@ -61,6 +65,8 @@ const propsContextSupportingComponentsMap: Record<
   Link: true,
   ListItemContextMenu: true,
   NavigationItem: true,
+  StatusBadge: true,
+  Switch: true,
   TestComponent: true,
   Text: true,
 };
