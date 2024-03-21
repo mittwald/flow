@@ -2,7 +2,7 @@ import React, { FC, PropsWithChildren } from "react";
 import { getInitialsFromString } from "./lib/getInitialsFromString";
 import styles from "./Initials.module.scss";
 import clsx from "clsx";
-import { useProps } from "@/lib/propsContext";
+import { ClearPropsContext, useProps } from "@/lib/propsContext";
 import { onlyText } from "react-children-utilities";
 
 export interface InitialsProps extends PropsWithChildren {
@@ -22,9 +22,11 @@ export const Initials: FC<InitialsProps> = (props) => {
   ));
 
   return (
-    <div aria-label={textContent} className={rootClassName}>
-      {initialsElements}
-    </div>
+    <ClearPropsContext>
+      <div aria-label={textContent} className={rootClassName}>
+        {initialsElements}
+      </div>
+    </ClearPropsContext>
   );
 };
 

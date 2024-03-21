@@ -73,28 +73,6 @@ test("The context property is returned, if property is in context but not local"
   expectPropertyToBe("context");
 });
 
-test("The parent context property is returned, if property is in parent context but not local", () => {
-  render(
-    <PropsContextProvider props={contextProps}>
-      <PropsContextProvider props={{}}>
-        <TestComponent />
-      </PropsContextProvider>
-    </PropsContextProvider>,
-  );
-  expectPropertyToBe("context");
-});
-
-test("The nearest context property is returned, if property is in parent and child context but not local", () => {
-  render(
-    <PropsContextProvider props={{ TestComponent: { testProp: "context1" } }}>
-      <PropsContextProvider props={{ TestComponent: { testProp: "context2" } }}>
-        <TestComponent />
-      </PropsContextProvider>
-    </PropsContextProvider>,
-  );
-  expectPropertyToBe("context2");
-});
-
 describe("Dynamic Props", () => {
   const contextPropsWithDynamic: PropsContext = {
     TestComponent: {

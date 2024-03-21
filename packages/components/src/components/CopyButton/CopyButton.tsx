@@ -6,7 +6,7 @@ import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 import { Tooltip, TooltipTrigger } from "@/components/Tooltip";
 import { onlyText } from "react-children-utilities";
-import { useProps } from "@/lib/propsContext";
+import { ClearPropsContext, useProps } from "@/lib/propsContext";
 
 export interface CopyButtonProps
   extends Omit<ButtonProps, "onPress" | "aria-label"> {
@@ -25,12 +25,14 @@ export const CopyButton: FC<CopyButtonProps> = (props) => {
   };
 
   return (
-    <TooltipTrigger>
-      <Button onPress={copyValue} aria-label={tooltip} {...buttonProps}>
-        <IconCopy />
-      </Button>
-      <Tooltip>{tooltip}</Tooltip>
-    </TooltipTrigger>
+    <ClearPropsContext>
+      <TooltipTrigger>
+        <Button onPress={copyValue} aria-label={tooltip} {...buttonProps}>
+          <IconCopy />
+        </Button>
+        <Tooltip>{tooltip}</Tooltip>
+      </TooltipTrigger>
+    </ClearPropsContext>
   );
 };
 

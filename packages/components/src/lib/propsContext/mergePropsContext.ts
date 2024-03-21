@@ -1,6 +1,8 @@
-import { mergeProps } from "@react-aria/utils";
 import { FlowComponentName } from "@/components/propTypes";
 import { PropsContext, WorkaroundType } from "@/lib/propsContext/types";
+import { getPropsMerger } from "@/lib/react/getPropsMerger";
+
+const merger = getPropsMerger({ mergeClassNames: false });
 
 export const mergePropsContext = (
   firstContext: PropsContext,
@@ -14,7 +16,7 @@ export const mergePropsContext = (
   return Object.fromEntries(
     mergedComponentNames.map((componentName) => [
       componentName,
-      mergeProps<WorkaroundType>(
+      merger<WorkaroundType>(
         firstContext[componentName],
         secondContext[componentName],
       ),

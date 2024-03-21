@@ -72,7 +72,7 @@ test.each<{ first: PropsContext; second: PropsContext; merged: PropsContext }>([
     },
     merged: {
       Button: {
-        className: "first-class second-class",
+        className: "second-class",
       },
     },
   },

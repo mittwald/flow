@@ -1,5 +1,5 @@
 import React, { FC, PropsWithChildren } from "react";
-import { useProps } from "@/lib/propsContext";
+import { ClearPropsContext, useProps } from "@/lib/propsContext";
 import { PropsWithElementType } from "@/lib/types/props";
 
 export interface HeaderProps extends PropsWithChildren, PropsWithElementType {}
@@ -13,7 +13,11 @@ export const Header: FC<HeaderProps> = (props) => {
 
   const Element = elementType;
 
-  return <Element {...rest}>{children}</Element>;
+  return (
+    <ClearPropsContext>
+      <Element {...rest}>{children}</Element>
+    </ClearPropsContext>
+  );
 };
 
 export default Header;

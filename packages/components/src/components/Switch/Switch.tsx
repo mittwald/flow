@@ -4,6 +4,7 @@ import styles from "./Switch.module.scss";
 import clsx from "clsx";
 import { IconCheck, IconClose } from "@/components/Icon/components/icons";
 import { Label } from "@/components/Label";
+import { ClearPropsContext, useProps } from "@/lib/propsContext";
 
 export interface SwitchProps
   extends PropsWithChildren<Omit<Aria.SwitchProps, "children">> {
@@ -12,7 +13,12 @@ export interface SwitchProps
 }
 
 export const Switch: FC<SwitchProps> = (props) => {
-  const { children, className, labelPosition = "trailing", ...rest } = props;
+  const {
+    children,
+    className,
+    labelPosition = "trailing",
+    ...rest
+  } = useProps("Switch", props);
 
   const rootClassName = clsx(
     styles.switch,
@@ -21,18 +27,20 @@ export const Switch: FC<SwitchProps> = (props) => {
   );
 
   return (
-    <Aria.Switch {...rest} className={rootClassName}>
-      {({ isSelected }) => (
-        <>
-          <div className={styles.track}>
-            <div className={styles.handle}>
-              {isSelected ? <IconCheck size="s" /> : <IconClose size="s" />}
+    <ClearPropsContext>
+      <Aria.Switch {...rest} className={rootClassName}>
+        {({ isSelected }) => (
+          <>
+            <div className={styles.track}>
+              <div className={styles.handle}>
+                {isSelected ? <IconCheck size="s" /> : <IconClose size="s" />}
+              </div>
             </div>
-          </div>
-          <Label className={styles.label}>{children}</Label>
-        </>
-      )}
-    </Aria.Switch>
+            <Label className={styles.label}>{children}</Label>
+          </>
+        )}
+      </Aria.Switch>
+    </ClearPropsContext>
   );
 };
 
