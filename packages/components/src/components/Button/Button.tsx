@@ -81,12 +81,12 @@ export const Button: FC<ButtonProps> = (props) => {
   const isStringContent = typeof children === "string";
 
   return (
+    <ClearPropsContext>
     <Aria.Button
       className={rootClassName}
       isDisabled={isDisabled || isPending || isSucceeded || isFailed}
       {...restProps}
     >
-      <ClearPropsContext>
         <PropsContextProvider props={propsContext}>
           <Wrap if={stateIcon}>
             <span className={styles.content}>
@@ -96,9 +96,10 @@ export const Button: FC<ButtonProps> = (props) => {
             </span>
           </Wrap>
         </PropsContextProvider>
-      </ClearPropsContext>
+
       {stateIcon}
     </Aria.Button>
+    </ClearPropsContext>
   );
 };
 

@@ -6,6 +6,10 @@ import { Text } from "@/components/Text";
 import { TextField } from "@/components/TextField";
 import { Label } from "@/components/Label";
 import { Link } from "@/components/Link";
+import { Switch } from "@/components/Switch";
+import { StatusBadge } from "@/components/StatusBadge";
+import Header from "@/components/Header";
+import { IconMember } from "@/components/Icon/components/icons";
 
 const meta: Meta<typeof Section> = {
   title: "Structure/Section",
@@ -32,7 +36,10 @@ export const MultipleSections: Story = {
   render: (props) => (
     <>
       <Section {...props}>
-        <Heading>Personal Information</Heading>
+        <Heading>
+          <IconMember />
+          Personal Information
+        </Heading>
         <TextField isRequired defaultValue="John">
           <Label>First name</Label>
         </TextField>
@@ -50,5 +57,37 @@ export const MultipleSections: Story = {
         <Link href="#">Subscribe</Link>
       </Section>
     </>
+  ),
+};
+
+export const WithSwitch: Story = {
+  render: (props) => (
+    <Section {...props}>
+      <Header>
+        <Heading>Newsletter</Heading>
+        <Switch>Subscription</Switch>
+      </Header>
+      <Text>
+        Upcoming releases, new features and tips about your hosting - we bring
+        the most important information to inbox. Subscribe to our newsletter and
+        stay up to date.
+      </Text>
+    </Section>
+  ),
+};
+
+export const WithStatusBadge: Story = {
+  render: (props) => (
+    <Section {...props}>
+      <Header>
+        <Heading>Newsletter</Heading>
+        <StatusBadge>Subscribed</StatusBadge>
+      </Header>
+      <Text>
+        Upcoming releases, new features and tips about your hosting - we bring
+        the most important information to inbox. Subscribe to our newsletter and
+        stay up to date.
+      </Text>
+    </Section>
   ),
 };

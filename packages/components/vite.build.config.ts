@@ -28,6 +28,7 @@ export default defineConfig(
           CopyButton: "./src/components/CopyButton/index.ts",
           FieldDescription: "./src/components/FieldDescription/index.ts",
           FieldError: "./src/components/FieldError/index.ts",
+          Header: "./src/components/Header/index.ts",
           Heading: "./src/components/Heading/index.ts",
           Icon: "./src/components/Icon/index.ts",
           Icons: "./src/components/Icon/components/icons/index.ts",
@@ -39,6 +40,9 @@ export default defineConfig(
           LabeledValue: "./src/components/LabeledValue/index.ts",
           LayoutCard: "./src/components/LayoutCard/index.ts",
           Link: "./src/components/Link/index.ts",
+          List: "./src/components/List/index.ts",
+          "List/ListLoaderAsyncResource":
+            "./src/components/List/components/ListLoaderAsyncResource.ts",
           Navigation: "./src/components/Navigation/index.ts",
           NumberField: "./src/components/NumberField/index.ts",
           RadioGroup: "./src/components/RadioGroup/index.ts",

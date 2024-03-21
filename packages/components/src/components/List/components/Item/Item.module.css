@@ -1,0 +1,6 @@
+.listItem {
+  border-radius: var(--corner-radius--default);
+  padding-block: var(--size-px--s);
+  padding-inline: var(--size-px--m);
+  background-color: var(--neutral--color--300);
+}

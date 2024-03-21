@@ -10,9 +10,9 @@ export const Content: FC<ContentProps> = (props) => {
   const Element = elementType;
 
   return (
-    <Element {...rest}>
-      <ClearPropsContext>{children}</ClearPropsContext>
-    </Element>
+    <ClearPropsContext>
+      <Element {...rest}>{children}</Element>
+    </ClearPropsContext>
   );
 };
 

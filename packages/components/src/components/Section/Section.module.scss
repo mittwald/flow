@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
   row-gap: var(--section--content-to-content-spacing);
+  container-type: inline-size;
 
   &:first-child {
     margin-top: 0;
@@ -17,5 +18,21 @@
     border-top-style: var(--section--border-style);
     border-top-color: var(--section--border-color);
     padding-top: var(--section--section-to-section-spacing);
+  }
+}
+
+.header {
+  display: flex;
+  gap: var(--section--heading-to-header-content-spacing);
+  justify-content: space-between;
+  align-items: flex-start;
+
+  @container (max-width: 550px) {
+    flex-direction: column;
+
+    .switch,
+    .statusBadge {
+      align-self: flex-end;
+    }
   }
 }

@@ -1,13 +1,13 @@
 import React, {
+  cloneElement,
   DependencyList,
   FC,
+  isValidElement,
   PropsWithChildren,
-  useContext,
   useMemo,
 } from "react";
-import { PropsContext as PropsContextShape } from "@/lib/propsContext";
-import { propsContext } from "./propsContext";
-import mergePropsContext from "./mergePropsContext";
+import { PropsContext as PropsContextShape } from "@/lib/propsContext/types";
+import { propsContext } from "@/lib/propsContext/propsContext";
 
 interface Props extends PropsWithChildren {
   props: PropsContextShape;
@@ -15,18 +15,41 @@ interface Props extends PropsWithChildren {
 }
 
 export const PropsContextProvider: FC<Props> = (props) => {
-  const { props: providedProps, dependencies = [], children } = props;
-
-  const parentContextProps = useContext(propsContext);
+  const {
+    props: providedProps,
+    dependencies = [],
+    children,
+    ...forwardChildrenProps
+  } = props;
 
   const propsIncludingParentContext = useMemo(
-    () => mergePropsContext(parentContextProps, providedProps),
-    [parentContextProps, ...dependencies],
+    () => providedProps,
+    dependencies,
+  );
+
+  const childrenProps = isValidElement(children)
+    ? {
+        ...forwardChildrenProps,
+        ...children.props,
+      }
+    : forwardChildrenProps;
+
+  const childrenMemoDeps = [
+    children,
+    ...Object.entries(childrenProps).flatMap((e) => e),
+  ];
+
+  const childrenWithForwardedProps = useMemo(
+    () =>
+      isValidElement(children)
+        ? cloneElement(children, childrenProps)
+        : children,
+    childrenMemoDeps,
   );
 
   return (
     <propsContext.Provider value={propsIncludingParentContext}>
-      {children}
+      {childrenWithForwardedProps}
     </propsContext.Provider>
   );
 };

@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.43](https://github.com/mittwald/flow/compare/0.1.0-alpha.42...0.1.0-alpha.43) (2024-03-19)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.41](https://github.com/mittwald/flow/compare/0.1.0-alpha.40...0.1.0-alpha.41) (2024-03-19)
+
+### Features
+
+- support Switch in Sections
+  ([2becdb5](https://github.com/mittwald/flow/commit/2becdb5a891a7ef263aad72027d65c8e24ae67d9))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.37](https://github.com/mittwald/flow/compare/0.1.0-alpha.36...0.1.0-alpha.37) (2024-03-18)
 
 **Note:** Version bump only for package @mittwald/flow-design-tokens

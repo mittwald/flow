@@ -7,7 +7,7 @@
   "nxCloudAccessToken": "ZTRhMTQzNWUtZGY5Mi00OWVjLTg4ZjAtNzM3ZjRmZjJiNDRifHJlYWQ=",
   "targetDefaults": {
     "build": {
-      "dependsOn": ["^build", "build:icons"],
+      "dependsOn": ["^build", "build:icons", "build:imports"],
       "cache": true
     },
     "start": {
