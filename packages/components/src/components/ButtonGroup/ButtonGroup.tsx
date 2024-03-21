@@ -12,7 +12,7 @@ export const ButtonGroup: FC<ButtonGroupProps> = (props) => {
   const rootClassName = clsx(styles.buttonGroup, className);
 
   return (
-    <div {...rest} className={rootClassName}>
+    <div {...rest} className={rootClassName} role="group">
       {children}
     </div>
   );

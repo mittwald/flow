@@ -4,14 +4,14 @@ import React from "react";
 import { Button } from "@/components/Button";
 
 const meta: Meta<typeof ButtonGroup> = {
-  title: "Buttons/ButtonGroup",
+  title: "Actions/ButtonGroup",
   component: ButtonGroup,
   render: (props) => (
     <ButtonGroup {...props}>
+      <Button variant="accent">Create customer</Button>
       <Button style="soft" variant="secondary">
         Abort
       </Button>
-      <Button variant="accent">Create customer</Button>
     </ButtonGroup>
   ),
 };
@@ -25,10 +25,10 @@ export const Default: Story = {};
 export const Danger: Story = {
   render: (props) => (
     <ButtonGroup {...props}>
+      <Button variant="danger">Delete project</Button>
       <Button style="soft" variant="secondary">
         Abort
       </Button>
-      <Button variant="danger">Delete project</Button>
     </ButtonGroup>
   ),
 };
@@ -44,13 +44,13 @@ export const Info: Story = {
 export const AdditionalSecondary: Story = {
   render: (props) => (
     <ButtonGroup {...props}>
-      <Button style="soft" variant="secondary">
-        Abort
-      </Button>
+      <Button variant="accent">Add email address</Button>
       <Button style="soft" variant="secondary">
         Save and add more
       </Button>
-      <Button variant="accent">Add email address</Button>
+      <Button style="soft" variant="secondary">
+        Abort
+      </Button>
     </ButtonGroup>
   ),
 };

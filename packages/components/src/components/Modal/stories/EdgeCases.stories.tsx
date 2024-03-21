@@ -48,15 +48,15 @@ export const LongContent: Story = {
             </Section>
           </Content>
           <ButtonGroup>
+            <Button variant="accent" onPress={() => setOpen(false)}>
+              Create customer
+            </Button>
             <Button
               style="soft"
               variant="secondary"
               onPress={() => setOpen(false)}
             >
               Abort
-            </Button>
-            <Button variant="accent" onPress={() => setOpen(false)}>
-              Create customer
             </Button>
           </ButtonGroup>
         </Modal>

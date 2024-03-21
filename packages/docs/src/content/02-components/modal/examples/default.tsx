@@ -25,15 +25,15 @@ import Title from "@mittwald/flow-react-components/Title";
           </TextField>
         </Content>
         <ButtonGroup>
+          <Button variant="accent" onPress={close}>
+            Create customer
+          </Button>
           <Button
             style="soft"
             variant="secondary"
             onPress={close}
           >
             Abort
-          </Button>
-          <Button variant="accent" onPress={close}>
-            Create customer
           </Button>
         </ButtonGroup>
       </>

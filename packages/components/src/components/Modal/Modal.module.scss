@@ -8,7 +8,8 @@
   @extend .size-s;
 
   &[data-entering] {
-    animation: modal-zoom 300ms cubic-bezier(0.1, 0.8, 0.3, 1.2);
+    animation: modal-zoom var(--transition--duration--slow)
+      cubic-bezier(0.1, 0.8, 0.3, 1.2);
   }
 }
 
@@ -28,20 +29,17 @@
 .overlay {
   background: var(--modal--overlay-background-color);
   position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
 
   &[data-entering] {
-    animation: modal-fade 200ms;
+    animation: modal-fade var(--transition--duration--default);
   }
 
   &[data-exiting] {
-    animation: modal-fade 150ms reverse ease-in;
+    animation: modal-fade var(--transition--duration--default) reverse ease-in;
   }
 }
 
@@ -49,6 +47,11 @@
   margin-inline: calc(var(--modal--padding) * -1);
   margin-bottom: calc(var(--modal--padding) * -1);
   grid-area: buttonGroup;
+  padding: var(--modal--button-group-padding);
+  background-color: var(--modal--button-group-background-color);
+  border-top-color: var(--modal--button-group-border-color);
+  border-top-width: var(--modal--button-group-border-top-width);
+  border-top-style: var(--modal--button-group-border-style);
 }
 
 .content {
@@ -86,7 +89,7 @@
     max-height: 100%;
 
     &[data-entering] {
-      animation: modal-slide-in 300ms;
+      animation: modal-slide-in var(--transition--duration--slow);
     }
   }
 }
@@ -107,7 +110,7 @@
     max-height: max-content;
 
     &[data-entering] {
-      animation: modal-slide-up 300ms;
+      animation: modal-slide-up var(--transition--duration--slow);
     }
   }
 

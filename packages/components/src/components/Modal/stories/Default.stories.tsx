@@ -33,15 +33,15 @@ const meta: Meta<typeof Modal> = {
             </TextField>
           </Content>
           <ButtonGroup>
+            <Button variant="accent" onPress={() => setOpen(false)}>
+              Create customer
+            </Button>
             <Button
               variant="secondary"
               style="soft"
               onPress={() => setOpen(false)}
             >
               Abort
-            </Button>
-            <Button variant="accent" onPress={() => setOpen(false)}>
-              Create customer
             </Button>
           </ButtonGroup>
         </Modal>
@@ -67,11 +67,11 @@ export const WithDialogTrigger: Story = {
               <Text>Are you sure you want to delete this project?</Text>
             </Content>
             <ButtonGroup>
-              <Button style="soft" variant="secondary" onPress={close}>
-                Abort
-              </Button>
               <Button variant="danger" onPress={close}>
                 Delete project
+              </Button>
+              <Button style="soft" variant="secondary" onPress={close}>
+                Abort
               </Button>
             </ButtonGroup>
           </>
