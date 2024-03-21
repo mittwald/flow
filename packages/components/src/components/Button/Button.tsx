@@ -82,11 +82,11 @@ export const Button: FC<ButtonProps> = (props) => {
 
   return (
     <ClearPropsContext>
-    <Aria.Button
-      className={rootClassName}
-      isDisabled={isDisabled || isPending || isSucceeded || isFailed}
-      {...restProps}
-    >
+      <Aria.Button
+        className={rootClassName}
+        isDisabled={isDisabled || isPending || isSucceeded || isFailed}
+        {...restProps}
+      >
         <PropsContextProvider props={propsContext}>
           <Wrap if={stateIcon}>
             <span className={styles.content}>
@@ -97,8 +97,8 @@ export const Button: FC<ButtonProps> = (props) => {
           </Wrap>
         </PropsContextProvider>
 
-      {stateIcon}
-    </Aria.Button>
+        {stateIcon}
+      </Aria.Button>
     </ClearPropsContext>
   );
 };
