@@ -1,7 +1,6 @@
 import React, { ComponentProps, FC, PropsWithChildren } from "react";
 import styles from "./Navigation.module.scss";
 import clsx from "clsx";
-import { ClearPropsContext } from "@/lib/propsContext";
 
 export interface NavigationProps
   extends PropsWithChildren<ComponentProps<"nav">> {
@@ -14,11 +13,9 @@ export const Navigation: FC<NavigationProps> = (props) => {
   const rootClassName = clsx(styles.navigation, className);
 
   return (
-    <ClearPropsContext>
-      <nav className={rootClassName} role="navigation" {...rest}>
-        <ul>{children}</ul>
-      </nav>
-    </ClearPropsContext>
+    <nav className={rootClassName} role="navigation" {...rest}>
+      <ul>{children}</ul>
+    </nav>
   );
 };
 
