@@ -2,10 +2,10 @@
 /* auto-generated file */
 import { ImportMapping } from "@/lib/liveCode/types";
 import { lazy } from "react";
-import { NavigationItem as I29 } from "@mittwald/flow-react-components/Navigation";
-import { ListItemView as I40 } from "@mittwald/flow-react-components/List";
-import { ListStaticData as I41 } from "@mittwald/flow-react-components/List";
-import { users as I42 } from "@/content/02-components/structure/list/examples/userApi";
+import { NavigationItem as I31 } from "@mittwald/flow-react-components/Navigation";
+import { ListItemView as I42 } from "@mittwald/flow-react-components/List";
+import { ListStaticData as I43 } from "@mittwald/flow-react-components/List";
+import { users as I44 } from "@/content/02-components/structure/list/examples/userApi";
 
 export const liveCodeEditorGlobalImports: ImportMapping = {
   "ExampleSvg:@/content/01-getting-started/stylesheet/examples/components/ExampleSvg": lazy(() => import("@/content/01-getting-started/stylesheet/examples/components/ExampleSvg").then(module => ({ default: module.ExampleSvg } ))),
@@ -14,6 +14,8 @@ export const liveCodeEditorGlobalImports: ImportMapping = {
 "Text:@mittwald/flow-react-components/Text": lazy(() => import("@mittwald/flow-react-components/Text").then(module => ({ default: module.Text } ))),
 "IconChevronDown:@mittwald/flow-react-components/Icons": lazy(() => import("@mittwald/flow-react-components/Icons").then(module => ({ default: module.IconChevronDown } ))),
 "CopyButton:@mittwald/flow-react-components/CopyButton": lazy(() => import("@mittwald/flow-react-components/CopyButton").then(module => ({ default: module.CopyButton } ))),
+"Breadcrumb:@mittwald/flow-react-components/Breadcrumb": lazy(() => import("@mittwald/flow-react-components/Breadcrumb").then(module => ({ default: module.Breadcrumb } ))),
+"BreadcrumbItem:@mittwald/flow-react-components/Breadcrumb": lazy(() => import("@mittwald/flow-react-components/Breadcrumb").then(module => ({ default: module.BreadcrumbItem } ))),
 "ColumnLayout:@mittwald/flow-react-components/ColumnLayout": lazy(() => import("@mittwald/flow-react-components/ColumnLayout").then(module => ({ default: module.ColumnLayout } ))),
 "TextField:@mittwald/flow-react-components/TextField": lazy(() => import("@mittwald/flow-react-components/TextField").then(module => ({ default: module.TextField } ))),
 "Label:@mittwald/flow-react-components/Label": lazy(() => import("@mittwald/flow-react-components/Label").then(module => ({ default: module.Label } ))),
@@ -37,7 +39,7 @@ export const liveCodeEditorGlobalImports: ImportMapping = {
 "FieldDescription:@mittwald/flow-react-components/FieldDescription": lazy(() => import("@mittwald/flow-react-components/FieldDescription").then(module => ({ default: module.FieldDescription } ))),
 "TextArea:@mittwald/flow-react-components/TextArea": lazy(() => import("@mittwald/flow-react-components/TextArea").then(module => ({ default: module.TextArea } ))),
 "Navigation:@mittwald/flow-react-components/Navigation": lazy(() => import("@mittwald/flow-react-components/Navigation").then(module => ({ default: module.Navigation } ))),
-"NavigationItem:@mittwald/flow-react-components/Navigation": I29,
+"NavigationItem:@mittwald/flow-react-components/Navigation": I31,
 "IconProject:@mittwald/flow-react-components/Icons": lazy(() => import("@mittwald/flow-react-components/Icons").then(module => ({ default: module.IconProject } ))),
 "IconServer:@mittwald/flow-react-components/Icons": lazy(() => import("@mittwald/flow-react-components/Icons").then(module => ({ default: module.IconServer } ))),
 "Tooltip:@mittwald/flow-react-components/Tooltip": lazy(() => import("@mittwald/flow-react-components/Tooltip").then(module => ({ default: module.Tooltip } ))),
@@ -48,9 +50,9 @@ export const liveCodeEditorGlobalImports: ImportMapping = {
 "StatusIcon:@mittwald/flow-react-components/StatusIcon": lazy(() => import("@mittwald/flow-react-components/StatusIcon").then(module => ({ default: module.StatusIcon } ))),
 "LayoutCard:@mittwald/flow-react-components/LayoutCard": lazy(() => import("@mittwald/flow-react-components/LayoutCard").then(module => ({ default: module.LayoutCard } ))),
 "List:@mittwald/flow-react-components/List": lazy(() => import("@mittwald/flow-react-components/List").then(module => ({ default: module.List } ))),
-"ListItemView:@mittwald/flow-react-components/List": I40,
-"ListStaticData:@mittwald/flow-react-components/List": I41,
-"users:@/content/02-components/structure/list/examples/userApi": I42,
+"ListItemView:@mittwald/flow-react-components/List": I42,
+"ListStaticData:@mittwald/flow-react-components/List": I43,
+"users:@/content/02-components/structure/list/examples/userApi": I44,
 "Section:@mittwald/flow-react-components/Section": lazy(() => import("@mittwald/flow-react-components/Section").then(module => ({ default: module.Section } ))),
 "Header:@mittwald/flow-react-components/Header": lazy(() => import("@mittwald/flow-react-components/Header").then(module => ({ default: module.Header } ))),
 };
