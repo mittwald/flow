@@ -1,6 +1,11 @@
 import React, { FC, PropsWithChildren } from "react";
 import * as Aria from "react-aria-components";
-import { useProps } from "@/lib/propsContext";
+import {
+  ClearPropsContext,
+  PropsContext,
+  PropsContextProvider,
+  useProps,
+} from "@/lib/propsContext";
 import { PropsWithElementType } from "@/lib/types/props";
 
 export interface TextProps
@@ -16,14 +21,30 @@ export const Text: FC<TextProps> = (props) => {
     ...rest
   } = useProps("Text", props);
 
-  const textProps = { ...rest, className, children };
+  const textProps = { ...rest, className };
+
+  const propsContext: PropsContext = {
+    Link: {
+      inline: true,
+    },
+  };
+
+  const childrenElement = (
+    <PropsContextProvider props={propsContext}>{children}</PropsContextProvider>
+  );
 
   if (!props.slot) {
     const Element = elementType;
-    return <Element {...textProps} />;
+    return <Element {...textProps}>{childrenElement}</Element>;
   }
 
-  return <Aria.Text {...textProps} elementType={elementType} />;
+  return (
+    <ClearPropsContext>
+      <Aria.Text {...textProps} elementType={elementType}>
+        {childrenElement}
+      </Aria.Text>
+    </ClearPropsContext>
+  );
 };
 
 export default Text;

@@ -5,7 +5,7 @@ import { dummyText } from "@/lib/dev/dummyText";
 import { Label } from "@/components/Label";
 import { Content } from "@/components/Content";
 import React from "react";
-import { CopyToClipboardButton } from "@/components/CopyToClipboardButton";
+import { CopyButton } from "@/components/CopyButton";
 
 const meta: Meta<typeof LabeledValue> = {
   title: "Content/LabeledValue/Edge Cases",
@@ -20,7 +20,7 @@ export const LongLabel: Story = {
     <LabeledValue {...props}>
       <Label>{dummyText.medium}</Label>
       <Content>{dummyText.short}</Content>
-      <CopyToClipboardButton text={dummyText.short} />
+      <CopyButton text={dummyText.short} />
     </LabeledValue>
   ),
 };
@@ -29,7 +29,7 @@ export const LongContent: Story = {
     <LabeledValue {...props}>
       <Label>{dummyText.medium}</Label>
       <Content>{dummyText.long}</Content>
-      <CopyToClipboardButton text={dummyText.long} />
+      <CopyButton text={dummyText.long} />
     </LabeledValue>
   ),
 };

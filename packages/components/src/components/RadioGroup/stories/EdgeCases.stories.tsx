@@ -8,7 +8,7 @@ import { dummyText } from "@/lib/dev/dummyText";
 import defaultMeta from "./Default.stories";
 
 const meta: Meta<typeof RadioGroup> = {
-  title: "Forms/RadioGroup/EdgeCases",
+  title: "Form Controls/RadioGroup/Edge Cases",
   ...defaultMeta,
 };
 
@@ -60,7 +60,7 @@ export const SmallSpace: Story = {
       {...props}
       defaultValue="0"
       aria-label="Rating"
-      style={{ width: "600px" }}
+      style={{ width: "500px" }}
     >
       {Array(3)
         .fill("")

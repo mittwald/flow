@@ -1,7 +1,11 @@
 import React, { FC, PropsWithChildren } from "react";
 import styles from "./LabeledValue.module.scss";
 import clsx from "clsx";
-import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import {
+  ClearPropsContext,
+  PropsContext,
+  PropsContextProvider,
+} from "@/lib/propsContext";
 
 export interface LabeledValueProps extends PropsWithChildren {
   className?: string;
@@ -16,10 +20,7 @@ export const LabeledValue: FC<LabeledValueProps> = (props) => {
     Label: {
       className: styles.label,
     },
-    Content: {
-      className: styles.content,
-    },
-    CopyToClipboard: {
+    CopyButton: {
       className: styles.button,
       style: "plain",
       size: "s",
@@ -32,11 +33,13 @@ export const LabeledValue: FC<LabeledValueProps> = (props) => {
   };
 
   return (
-    <div className={rootClassName}>
-      <PropsContextProvider props={propsContext}>
-        {children}
-      </PropsContextProvider>
-    </div>
+    <ClearPropsContext>
+      <div className={rootClassName}>
+        <PropsContextProvider props={propsContext}>
+          {children}
+        </PropsContextProvider>
+      </div>
+    </ClearPropsContext>
   );
 };
 

@@ -1,6 +1,6 @@
-import { expect, test } from "@jest/globals";
+import { expect, test } from "vitest";
 import resolveDynamicProps from "./resolveDynamicProps";
-import { dynamic } from "@/lib/propsContext";
+import dynamic from "@/lib/propsContext/dynamicProps/dynamic";
 
 test("Dynamic prop will be resolved", () => {
   expect(

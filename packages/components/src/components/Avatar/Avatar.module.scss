@@ -5,22 +5,30 @@
   overflow: hidden;
   flex-shrink: 0;
 
+  background-color: var(--background-color);
+  color: var(--content-color);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   > img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
 
+  .icon {
+    width: calc(var(--avatar-size) * 0.7);
+    height: calc(var(--avatar-size) * 0.7);
+  }
+
   @extend .size-m;
+  @extend .variant-1;
 }
 
 /* Elements */
 .initials {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   font-size: calc(var(--avatar-size) * 0.4);
 }
 
@@ -35,3 +43,19 @@
 @include size(xs);
 @include size(s);
 @include size(l);
+
+/* Variants */
+@mixin variant($variant) {
+  .variant-#{$variant} {
+    --background-color: var(--initials--variant-#{$variant}-background-color);
+    --content-color: var(--initials--variant-#{$variant}-content-color);
+    --content-accent-color: var(
+      --initials--variant-#{$variant}-content-accent-color
+    );
+  }
+}
+
+@include variant(1);
+@include variant(2);
+@include variant(3);
+@include variant(4);

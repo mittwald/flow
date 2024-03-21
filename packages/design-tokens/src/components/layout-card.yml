@@ -1,0 +1,9 @@
+layout-card:
+  background-color:
+    value: "{neutral.color.100}"
+  corner-radius:
+    value: "{corner-radius.default}"
+  padding:
+    value: "{size-px.l}"
+  box-shadow:
+    value: "{shadow.content}"
