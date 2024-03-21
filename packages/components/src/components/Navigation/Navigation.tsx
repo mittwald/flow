@@ -1,10 +1,7 @@
 import React, { ComponentProps, FC, PropsWithChildren } from "react";
 import styles from "./Navigation.module.scss";
 import clsx from "clsx";
-import {
-  PropsContext,
-  PropsContextProvider,
-} from "@/lib/propsContext";
+import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { deepFindOfType } from "@/lib/react/deepFindOfType";
 import { NavigationGroup } from "@/components/Navigation";
 import { Wrap } from "@/components/Wrap";
@@ -29,13 +26,13 @@ export const Navigation: FC<NavigationProps> = (props) => {
   };
 
   return (
-      <nav className={rootClassName} role="navigation" {...rest}>
-        <PropsContextProvider props={propsContext}>
-          <Wrap if={!hasGroups}>
-            <NavigationGroup>{children}</NavigationGroup>
-          </Wrap>
-        </PropsContextProvider>
-      </nav>
+    <nav className={rootClassName} role="navigation" {...rest}>
+      <PropsContextProvider props={propsContext}>
+        <Wrap if={!hasGroups}>
+          <NavigationGroup>{children}</NavigationGroup>
+        </Wrap>
+      </PropsContextProvider>
+    </nav>
   );
 };
 
