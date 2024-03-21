@@ -1,10 +1,10 @@
 "use client";
 import React, { ComponentProps, FC, useId, useMemo } from "react";
 import Navigation, {
+  NavigationGroup,
   NavigationItem,
 } from "@mittwald/flow-react-components/Navigation";
 import Heading from "@mittwald/flow-react-components/Heading";
-import styles from "./MainNavigation.module.scss";
 import { MdxFile, SerializedMdxFile } from "@/lib/mdx/MdxFile";
 import { GroupText } from "@/app/_components/layout/MainNavigation/components/GroupText";
 import {
@@ -52,13 +52,12 @@ const NavigationSection: FC<NavigationSectionProps> = (props) => {
       <Heading
         level={level as ComponentProps<typeof Heading>["level"]}
         id={headingComponentsId}
-        className={styles.heading}
       >
         <GroupText>{group}</GroupText>
       </Heading>
-      <Navigation aria-labelledby={headingComponentsId}>
+      <NavigationGroup aria-labelledby={headingComponentsId}>
         {navigationItems}
-      </Navigation>
+      </NavigationGroup>
     </>
   );
 };
@@ -79,11 +78,13 @@ const MainNavigation: FC<Props> = (props) => {
   }
 
   return (
-    <NavigationSection
-      level={2}
-      tree={selectedMainBranch}
-      group={mainPathSegment}
-    />
+    <Navigation>
+      <NavigationSection
+        level={2}
+        tree={selectedMainBranch}
+        group={mainPathSegment}
+      />
+    </Navigation>
   );
 };
 

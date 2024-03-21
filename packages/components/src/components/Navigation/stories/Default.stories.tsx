@@ -6,7 +6,12 @@ import {
   IconServer,
 } from "@/components/Icon/components/icons";
 import { Text } from "@/components/Text";
-import { Navigation, NavigationItem } from "@/components/Navigation";
+import {
+  Navigation,
+  NavigationItem,
+  NavigationGroup,
+} from "@/components/Navigation";
+import Heading from "@/components/Heading";
 
 const meta: Meta<typeof Navigation> = {
   title: "Navigation/Navigation",
@@ -48,6 +53,26 @@ export const WithIcons: Story = {
         <IconProject />
         <Text>Project</Text>
       </NavigationItem>
+    </Navigation>
+  ),
+};
+
+export const WithGroups: Story = {
+  render: (props) => (
+    <Navigation aria-label="Main navigation" {...props}>
+      <Heading>General</Heading>
+      <NavigationGroup>
+        <NavigationItem href="#">Dashboard</NavigationItem>
+        <NavigationItem href="#" isCurrent>
+          Performance
+        </NavigationItem>
+      </NavigationGroup>
+      <Heading>Components</Heading>
+      <NavigationGroup>
+        <NavigationItem href="#">Apps</NavigationItem>
+        <NavigationItem href="#">Databases</NavigationItem>
+        <NavigationItem href="#">Domains</NavigationItem>
+      </NavigationGroup>
     </Navigation>
   ),
 };
