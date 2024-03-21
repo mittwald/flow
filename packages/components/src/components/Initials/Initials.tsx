@@ -2,17 +2,18 @@ import React, { FC, PropsWithChildren } from "react";
 import { getInitialsFromString } from "./lib/getInitialsFromString";
 import styles from "./Initials.module.scss";
 import clsx from "clsx";
-import { useProps } from "@/lib/propsContext";
+import { ClearPropsContext, useProps } from "@/lib/propsContext";
 import { onlyText } from "react-children-utilities";
 
-export interface InitialsProps extends PropsWithChildren<{ children: string }> {
+export interface InitialsProps extends PropsWithChildren {
   className?: string;
 }
 
 export const Initials: FC<InitialsProps> = (props) => {
   const { children, className } = useProps("Initials", props);
 
-  const initials = getInitialsFromString(onlyText(children));
+  const textContent = onlyText(children);
+  const initials = getInitialsFromString(textContent);
 
   const rootClassName = clsx(styles.initials, className);
 
@@ -21,9 +22,11 @@ export const Initials: FC<InitialsProps> = (props) => {
   ));
 
   return (
-    <div aria-label={children} className={rootClassName}>
-      {initialsElements}
-    </div>
+    <ClearPropsContext>
+      <div aria-label={textContent} className={rootClassName}>
+        {initialsElements}
+      </div>
+    </ClearPropsContext>
   );
 };
 

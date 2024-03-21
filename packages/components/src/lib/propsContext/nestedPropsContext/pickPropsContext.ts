@@ -1,8 +1,8 @@
-import { PropsContext } from "@/lib/propsContext";
 import { isFlowComponentName } from "@/lib/propsContext/isFlowComponentName";
 import { pickBy } from "remeda";
 import {
   ComponentPropsContext,
+  PropsContext,
   WorkaroundType,
 } from "@/lib/propsContext/types";
 import { FlowComponentName } from "@/components/propTypes";
