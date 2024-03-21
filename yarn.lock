@@ -2148,6 +2148,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@faker-js/faker@npm:^8.4.1":
+  version: 8.4.1
+  resolution: "@faker-js/faker@npm:8.4.1"
+  checksum: 10c0/4f2aecddcfdc2cc8b50b2d15d1e37302a7c7a5bbd184ae910a9d271bc11248533ca74dcdd4a9ccbe20410553e7af0f6a4d334c5b955635e09a32ddf4a64942d4
+  languageName: node
+  linkType: hard
+
 "@fal-works/esbuild-plugin-global-externals@npm:^2.1.2":
   version: 2.1.2
   resolution: "@fal-works/esbuild-plugin-global-externals@npm:2.1.2"
@@ -2854,8 +2861,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@mittwald/flow-react-components@workspace:packages/components"
   dependencies:
+    "@faker-js/faker": "npm:^8.4.1"
     "@mittwald/flow-design-tokens": "workspace:^"
+    "@mittwald/react-use-promise": "npm:^2.3.12"
     "@nx/storybook": "npm:^18.1.1"
+    "@preact/signals-react": "npm:^2.0.0"
     "@react-aria/utils": "npm:^3.23.2"
     "@react-types/shared": "npm:^3.22.1"
     "@storybook/addon-a11y": "npm:^7.6.17"
@@ -2874,20 +2884,25 @@ __metadata:
     "@storybook/testing-library": "npm:^0.2.2"
     "@storybook/theming": "npm:^7.6.17"
     "@tabler/icons-react": "npm:^2.47.0"
+    "@tanstack/react-table": "npm:^8.13.2"
     "@testing-library/react": "npm:^14.2.1"
+    "@types/invariant": "npm:^2"
     "@types/node": "npm:20.11.28"
     "@types/prettier": "npm:^3.0.0"
     "@types/prop-types": "npm:^15.7.11"
     "@types/react": "npm:^18.2.66"
     "@types/react-dom": "npm:^18.2.22"
     "@types/rollup": "npm:^0.54.0"
+    "@vitejs/plugin-react": "npm:^4.2.1"
     "@vitest/coverage-v8": "npm:^1.4.0"
     clsx: "npm:^2.1.0"
     copy-to-clipboard: "npm:^3.3.3"
     decamelize: "npm:^6.0.0"
+    dot-prop: "npm:^8.0.2"
     fs-jetpack: "npm:^5.1.0"
     happy-dom: "npm:^13.9.0"
     html-react-parser: "npm:^5.1.8"
+    invariant: "npm:^2.2.4"
     next: "npm:^14.1.3"
     nx: "npm:^18.1.1"
     object-code: "npm:^1.3.3"
@@ -2920,10 +2935,13 @@ __metadata:
     vitest: "npm:^1.4.0"
     yaml: "npm:^2.4.1"
   peerDependencies:
+    "@mittwald/react-use-promise": ^2.3.12
     next: "*"
     react: 18.2.0
     react-dom: 18.2.0
   peerDependenciesMeta:
+    "@mittwald/react-use-promise":
+      optional: true
     next:
       optional: true
   languageName: unknown
@@ -2937,6 +2955,25 @@ __metadata:
     resolve-package-path: "npm:^4.0.3"
   languageName: unknown
   linkType: soft
+
+"@mittwald/react-use-promise@npm:^2.3.12":
+  version: 2.3.12
+  resolution: "@mittwald/react-use-promise@npm:2.3.12"
+  dependencies:
+    "@types/luxon": "npm:3.4.2"
+    browser-or-node: "npm:^3.0.0-pre.0"
+    luxon: "npm:~3.4.4"
+    minimatch: "npm:^9.0.3"
+    object-code: "npm:^1.3.3"
+  peerDependencies:
+    axios: ^1.6.7
+    react: ">=17.0"
+  peerDependenciesMeta:
+    axios:
+      optional: true
+  checksum: 10c0/9f5283b1aa3ac073b655ff07fe1f3823d2dd92f29d4e9232fe41b944ced6841b414b012ee26ec03785cf98fe4f031921a254559805eb234061c4b68742c55220
+  languageName: node
+  linkType: hard
 
 "@ndelangen/get-tarball@npm:^3.0.7":
   version: 3.0.9
@@ -3633,6 +3670,25 @@ __metadata:
   version: 0.1.0
   resolution: "@pkgr/core@npm:0.1.0"
   checksum: 10c0/8f4a0aa6cc1c445fec4f5f12157047e8a05e30b5c03441156f40203d6430f84d15135e8f1a6886e6c9800ff0e4a75d9d3419a43dbcd7490683f2882375a3b99a
+  languageName: node
+  linkType: hard
+
+"@preact/signals-core@npm:^1.5.1":
+  version: 1.5.1
+  resolution: "@preact/signals-core@npm:1.5.1"
+  checksum: 10c0/895d1addfdf6a59d0a22b5a754854d6f549cc71c5c08edb2048a137f155469e51f386b832961339cf930a432193151358b396453e56f9a41f9e3ad0ee2eba912
+  languageName: node
+  linkType: hard
+
+"@preact/signals-react@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@preact/signals-react@npm:2.0.0"
+  dependencies:
+    "@preact/signals-core": "npm:^1.5.1"
+    use-sync-external-store: "npm:^1.2.0"
+  peerDependencies:
+    react: ^16.14.0 || 17.x || 18.x
+  checksum: 10c0/40c2e67d2c16e1f663bc14963cfc6df3ba28f78ae5fd5d513f76cd240cc3d0f46b34399ffb1da09c7cbf5680bc611d154b1637c8fb0939b06fa9b020085005da
   languageName: node
   linkType: hard
 
@@ -7143,6 +7199,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tanstack/react-table@npm:^8.13.2":
+  version: 8.13.2
+  resolution: "@tanstack/react-table@npm:8.13.2"
+  dependencies:
+    "@tanstack/table-core": "npm:8.13.2"
+  peerDependencies:
+    react: ">=16"
+    react-dom: ">=16"
+  checksum: 10c0/780f206c29bcd4386638cb935d27df2db002026c8a3c06eacbf4fcedaeefd20b212ccc4eea2f00feee66840c8d401b478b21d83ab69902341402cb2d3aa5cb60
+  languageName: node
+  linkType: hard
+
+"@tanstack/table-core@npm:8.13.2":
+  version: 8.13.2
+  resolution: "@tanstack/table-core@npm:8.13.2"
+  checksum: 10c0/e81934be7792ee24d66e22471849659abfb926f0e9fda22eea3a94060f4c6d9197b1d5a901700adafe84263950acb97816b7b4736e14353ef58f49a10f8400aa
+  languageName: node
+  linkType: hard
+
 "@testing-library/dom@npm:^9.0.0":
   version: 9.3.3
   resolution: "@testing-library/dom@npm:9.3.3"
@@ -7553,6 +7628,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/invariant@npm:^2":
+  version: 2.2.37
+  resolution: "@types/invariant@npm:2.2.37"
+  checksum: 10c0/f57ed8445036ebda8bc93804f088c2a13050bbeef4e4bc6ed531a70e2869250dbe59413f2a9ed7d8f3efa960f191e8dfca9d25414d63cbf604d348428f8c5b75
+  languageName: node
+  linkType: hard
+
 "@types/istanbul-lib-coverage@npm:*, @types/istanbul-lib-coverage@npm:^2.0.0, @types/istanbul-lib-coverage@npm:^2.0.1":
   version: 2.0.6
   resolution: "@types/istanbul-lib-coverage@npm:2.0.6"
@@ -7612,6 +7694,13 @@ __metadata:
   version: 4.14.201
   resolution: "@types/lodash@npm:4.14.201"
   checksum: 10c0/14dc43787296c429433d7d034ed47c5ac24b92217056f80a0e6c990449120b9c9c1058918188945fb88353c0c8333c5c36dccc40c51edbd39b05d2169ab2e0ad
+  languageName: node
+  linkType: hard
+
+"@types/luxon@npm:3.4.2":
+  version: 3.4.2
+  resolution: "@types/luxon@npm:3.4.2"
+  checksum: 10c0/d835467de3daf7e17ba78b50bb5a14efd94272439ca067990d71332a54b311544459c69623eddd243b511b28d70194c9591a9ee8cf9c038962c965f991affd7e
   languageName: node
   linkType: hard
 
@@ -9559,6 +9648,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"browser-or-node@npm:^3.0.0-pre.0":
+  version: 3.0.0-pre.0
+  resolution: "browser-or-node@npm:3.0.0-pre.0"
+  checksum: 10c0/38f46032b7be0224ae12fb71f1a00940dd7bd6dab27dd31a3c48a25b1d6494f53ac4bb51b9c600495c333b8f348f12feede274c9f28032cbd759309f79b3838d
+  languageName: node
+  linkType: hard
+
 "browserify-zlib@npm:^0.1.4":
   version: 0.1.4
   resolution: "browserify-zlib@npm:0.1.4"
@@ -11048,6 +11144,15 @@ __metadata:
   dependencies:
     is-obj: "npm:^2.0.0"
   checksum: 10c0/93f0d343ef87fe8869320e62f2459f7e70f49c6098d948cc47e060f4a3f827d0ad61e83cb82f2bd90cd5b9571b8d334289978a43c0f98fea4f0e99ee8faa0599
+  languageName: node
+  linkType: hard
+
+"dot-prop@npm:^8.0.2":
+  version: 8.0.2
+  resolution: "dot-prop@npm:8.0.2"
+  dependencies:
+    type-fest: "npm:^3.8.0"
+  checksum: 10c0/422b4a65aad880fc4a21d09615ae97bf6c66767e7b29522fbafa34d2dd0489adff745f79dd1126ac463730f2b43eada75a02e5114065491c6148953f29551f27
   languageName: node
   linkType: hard
 
@@ -15198,6 +15303,13 @@ __metadata:
   version: 7.18.3
   resolution: "lru-cache@npm:7.18.3"
   checksum: 10c0/b3a452b491433db885beed95041eb104c157ef7794b9c9b4d647be503be91769d11206bb573849a16b4cc0d03cbd15ffd22df7960997788b74c1d399ac7a4fed
+  languageName: node
+  linkType: hard
+
+"luxon@npm:~3.4.4":
+  version: 3.4.4
+  resolution: "luxon@npm:3.4.4"
+  checksum: 10c0/02e26a0b039c11fd5b75e1d734c8f0332c95510f6a514a9a0991023e43fb233884da02d7f966823ffb230632a733fc86d4a4b1e63c3fbe00058b8ee0f8c728af
   languageName: node
   linkType: hard
 
@@ -21144,6 +21256,13 @@ __metadata:
   version: 2.19.0
   resolution: "type-fest@npm:2.19.0"
   checksum: 10c0/a5a7ecf2e654251613218c215c7493574594951c08e52ab9881c9df6a6da0aeca7528c213c622bc374b4e0cb5c443aa3ab758da4e3c959783ce884c3194e12cb
+  languageName: node
+  linkType: hard
+
+"type-fest@npm:^3.8.0":
+  version: 3.13.1
+  resolution: "type-fest@npm:3.13.1"
+  checksum: 10c0/547d22186f73a8c04590b70dcf63baff390078c75ea8acd366bbd510fd0646e348bd1970e47ecf795b7cff0b41d26e9c475c1fedd6ef5c45c82075fbf916b629
   languageName: node
   linkType: hard
 

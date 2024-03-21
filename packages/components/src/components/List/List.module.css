@@ -1,0 +1,29 @@
+.list {
+  display: grid;
+  grid-template-areas:
+    "filterBar      "
+    "items          "
+    "paginationInfos"
+    "showMoreButton ";
+}
+
+.filterBar {
+  grid-area: filterBar;
+}
+
+.items {
+  grid-area: items;
+  margin-block: var(--size-rem--xl);
+}
+
+.paginationInfos {
+  margin-top: var(--size-rem--l);
+  grid-area: paginationInfos;
+  margin-inline: auto;
+}
+
+.showMoreButton {
+  margin-top: var(--size-rem--s);
+  grid-area: showMoreButton;
+  margin-inline: auto;
+}

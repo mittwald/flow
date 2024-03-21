@@ -1,6 +1,7 @@
 import React, { FC, PropsWithChildren } from "react";
 import * as Aria from "react-aria-components";
 import {
+  ClearPropsContext,
   PropsContext,
   PropsContextProvider,
   useProps,
@@ -38,9 +39,11 @@ export const Text: FC<TextProps> = (props) => {
   }
 
   return (
-    <Aria.Text {...textProps} elementType={elementType}>
-      {childrenElement}
-    </Aria.Text>
+    <ClearPropsContext>
+      <Aria.Text {...textProps} elementType={elementType}>
+        {childrenElement}
+      </Aria.Text>
+    </ClearPropsContext>
   );
 };
 

@@ -2,7 +2,7 @@ import React, { FC, PropsWithChildren, SVGAttributes, useMemo } from "react";
 import styles from "./Icon.module.scss";
 import clsx from "clsx";
 import { extractSvgFromString } from "@/components/Icon/lib/extractSvgFromString";
-import { useProps } from "@/lib/propsContext";
+import { ClearPropsContext, useProps } from "@/lib/propsContext";
 
 type SvgAttributeProps = SVGAttributes<SVGSVGElement>;
 
@@ -45,7 +45,11 @@ export const Icon: FC<IconProps> = (props) => {
     );
   }
 
-  return React.cloneElement(iconElement, iconProps);
+  return (
+    <ClearPropsContext>
+      {React.cloneElement(iconElement, iconProps)}
+    </ClearPropsContext>
+  );
 };
 
 export default Icon;
