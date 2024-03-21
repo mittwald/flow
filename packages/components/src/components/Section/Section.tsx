@@ -1,11 +1,7 @@
 import React, { ComponentProps, FC, PropsWithChildren } from "react";
 import styles from "./Section.module.scss";
 import clsx from "clsx";
-import {
-  ClearPropsContext,
-  PropsContext,
-  PropsContextProvider,
-} from "@/lib/propsContext";
+import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
 
 export interface SectionProps
   extends PropsWithChildren<ComponentProps<"section">> {}
@@ -36,13 +32,11 @@ export const Section: FC<SectionProps> = (props) => {
   };
 
   return (
-    <ClearPropsContext>
-      <section {...rest} className={rootClassName}>
-        <PropsContextProvider props={propsContext}>
-          {children}
-        </PropsContextProvider>
-      </section>
-    </ClearPropsContext>
+    <section {...rest} className={rootClassName}>
+      <PropsContextProvider props={propsContext}>
+        {children}
+      </PropsContextProvider>
+    </section>
   );
 };
 
