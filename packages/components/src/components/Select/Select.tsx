@@ -41,7 +41,7 @@ export const Select: FC<SelectProps> = (props) => {
         {children}
       </PropsContextProvider>
 
-      <FieldError className={styles.fieldError} />
+      <FieldError className={formFieldStyles.fieldError} />
     </Aria.Select>
   );
 };
