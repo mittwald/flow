@@ -3,6 +3,7 @@ import React, { FC, useContext } from "react";
 import styles from "./Modal.module.scss";
 import clsx from "clsx";
 import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import { TunnelExit, TunnelProvider } from "@/lib/react/components/Tunnel";
 
 export interface ModalProps
   extends Pick<Aria.DialogProps, "children">,
@@ -22,7 +23,13 @@ export const Modal: FC<ModalProps> = (props) => {
 
   const propsContext: PropsContext = {
     Content: {
-      className: styles.content,
+      tunnelId: "content",
+      elementType: React.Fragment,
+    },
+    Heading: {
+      level: 2,
+      tunnelId: "title",
+      slot: "title",
     },
     ButtonGroup: {
       className: styles.buttonGroup,
@@ -43,7 +50,13 @@ export const Modal: FC<ModalProps> = (props) => {
       <Aria.Modal className={rootClassName}>
         <Aria.Dialog className={styles.dialog}>
           <PropsContextProvider props={propsContext}>
-            {children}
+            <TunnelProvider>
+              <div className={styles.content}>
+                <TunnelExit id="title" />
+                <TunnelExit id="content" />
+              </div>
+              {children}
+            </TunnelProvider>
           </PropsContextProvider>
         </Aria.Dialog>
       </Aria.Modal>

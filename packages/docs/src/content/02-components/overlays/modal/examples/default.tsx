@@ -7,15 +7,15 @@ import TextField from "@mittwald/flow-react-components/TextField";
 import Label from "@mittwald/flow-react-components/Label";
 import ButtonGroup from "@mittwald/flow-react-components/ButtonGroup";
 import Button from "@mittwald/flow-react-components/Button";
-import Title from "@mittwald/flow-react-components/Title";
+import Heading from "@mittwald/flow-react-components/Heading";
 
 <ModalTrigger>
   <Button variant="accent">Create customer</Button>
   <Modal>
     {({ close }) => (
       <>
+        <Heading>New Customer</Heading>
         <Content>
-          <Title>New Customer</Title>
           <Text>
             Create a new customer to manage your projects,
             members and payments.

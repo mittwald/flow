@@ -54,7 +54,6 @@ export default defineConfig(
           Text: "./src/components/Text/index.ts",
           TextArea: "./src/components/TextArea/index.ts",
           TextField: "./src/components/TextField/index.ts",
-          Title: "./src/components/Title/index.ts",
           Tooltip: "./src/components/Tooltip/index.ts",
           stylesInit: "./src/styles/index.ts",
           "nextjs/LinkProvider":

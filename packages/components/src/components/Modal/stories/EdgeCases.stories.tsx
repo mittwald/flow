@@ -8,7 +8,7 @@ import { Section } from "@/components/Section";
 import { Text } from "@/components/Text";
 import { ButtonGroup } from "@/components/ButtonGroup";
 import { dummyText } from "@/lib/dev/dummyText";
-import Title from "@/components/Title";
+import Heading from "@/components/Heading";
 
 const meta: Meta<typeof Modal> = {
   ...defaultMeta,
@@ -29,9 +29,9 @@ export const LongContent: Story = {
           Create customer
         </Button>
         <Modal {...props} isOpen={isOpen} onOpenChange={setOpen}>
+          <Heading>{dummyText.short}</Heading>
           <Content>
             <Section>
-              <Title>{dummyText.short}</Title>
               <Text>{dummyText.long}</Text>
             </Section>
             <Section>

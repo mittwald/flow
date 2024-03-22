@@ -142,10 +142,6 @@
       "types": "./dist/types/components/TextField/index.d.ts",
       "import": "./dist/TextField.js"
     },
-    "./Title": {
-      "types": "./dist/types/components/Title/index.d.ts",
-      "import": "./dist/Title.js"
-    },
     "./Tooltip": {
       "types": "./dist/types/components/Tooltip/index.d.ts",
       "import": "./dist/Tooltip.js"
