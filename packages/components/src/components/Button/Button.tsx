@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren } from "react";
+import React, { PropsWithChildren } from "react";
 import styles from "./Button.module.scss";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
@@ -6,7 +6,6 @@ import {
   ClearPropsContext,
   PropsContext,
   PropsContextProvider,
-  useProps,
 } from "@/lib/propsContext";
 import {
   IconFailed,
@@ -15,9 +14,14 @@ import {
 } from "@/components/Icon/components/icons";
 import { Wrap } from "@/components/Wrap";
 import { Text } from "@/components/Text";
+import {
+  flowComponent,
+  FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
 
 export interface ButtonProps
-  extends PropsWithChildren<Omit<Aria.ButtonProps, "style">> {
+  extends PropsWithChildren<Omit<Aria.ButtonProps, "style">>,
+    FlowComponentProps {
   /** @default "primary" */
   variant?: "primary" | "accent" | "secondary" | "danger";
   /** @default "solid" */
@@ -30,7 +34,7 @@ export interface ButtonProps
   isFailed?: boolean;
 }
 
-export const Button: FC<ButtonProps> = (props) => {
+export const Button = flowComponent("Button", (props) => {
   const {
     variant = "primary",
     style = "solid",
@@ -42,7 +46,7 @@ export const Button: FC<ButtonProps> = (props) => {
     isSucceeded,
     isFailed,
     ...restProps
-  } = useProps("Button", props);
+  } = props;
 
   const rootClassName = clsx(
     styles.button,
@@ -102,6 +106,6 @@ export const Button: FC<ButtonProps> = (props) => {
       </Aria.Button>
     </ClearPropsContext>
   );
-};
+});
 
 export default Button;

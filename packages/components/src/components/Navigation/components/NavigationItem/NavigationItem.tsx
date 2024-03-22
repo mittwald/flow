@@ -1,30 +1,26 @@
-import React, {
-  ComponentProps,
-  ComponentType,
-  FC,
-  PropsWithChildren,
-} from "react";
+import React, { ComponentProps, ComponentType, PropsWithChildren } from "react";
 import styles from "./NavigationItem.module.scss";
-import {
-  PropsContext,
-  PropsContextProvider,
-  useProps,
-} from "@/lib/propsContext";
+import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import * as Aria from "react-aria-components";
+import {
+  flowComponent,
+  FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
 
 export interface NavigationItemProps
-  extends PropsWithChildren<Omit<Aria.LinkProps, "children" | "slot">> {
+  extends PropsWithChildren<Omit<Aria.LinkProps, "children" | "slot">>,
+    FlowComponentProps {
   isCurrent?: boolean;
   linkComponent?: ComponentType<Omit<ComponentProps<"a">, "ref">>;
 }
 
-export const NavigationItem: FC<NavigationItemProps> = (props) => {
+export const NavigationItem = flowComponent("NavigationItem", (props) => {
   const {
     isCurrent,
     children,
     linkComponent: Link = Aria.Link,
     ...linkProps
-  } = useProps("NavigationItem", props);
+  } = props;
 
   const propsContext: PropsContext = {
     Text: {
@@ -48,4 +44,4 @@ export const NavigationItem: FC<NavigationItemProps> = (props) => {
       </Link>
     </li>
   );
-};
+});
