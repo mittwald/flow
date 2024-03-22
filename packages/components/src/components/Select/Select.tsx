@@ -10,9 +10,7 @@ import { IconChevronDown } from "@/components/Icon/components/icons";
 export interface SelectProps
   extends PropsWithChildren<
     Omit<Aria.SelectProps<{ example: string }>, "children">
-  > {
-  label?: string;
-}
+  > {}
 
 export const Select: FC<SelectProps> = (props) => {
   const { children, className, ...rest } = props;

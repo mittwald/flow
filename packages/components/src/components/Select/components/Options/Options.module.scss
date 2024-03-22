@@ -1,0 +1,6 @@
+.options {
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--menu--item-to-item-spacing);
+  outline: none;
+}
