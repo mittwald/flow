@@ -3,7 +3,7 @@ import React, { FC, useContext } from "react";
 import styles from "./Modal.module.scss";
 import clsx from "clsx";
 import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
-import { TunnelExit, TunnelProvider } from "@/lib/react/components/Tunnel";
+import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 
 export interface ModalProps
   extends Pick<Aria.DialogProps, "children">,

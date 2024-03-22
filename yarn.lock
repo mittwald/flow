@@ -3024,6 +3024,7 @@ __metadata:
   dependencies:
     "@faker-js/faker": "npm:^8.4.1"
     "@mittwald/flow-design-tokens": "workspace:^"
+    "@mittwald/react-tunnel": "workspace:^"
     "@mittwald/react-use-promise": "npm:^2.3.12"
     "@nx/storybook": "npm:^18.1.1"
     "@preact/signals-react": "npm:^2.0.1"
@@ -3114,6 +3115,35 @@ __metadata:
   dependencies:
     "@mittwald/flow-react-components": "workspace:^"
     resolve-package-path: "npm:^4.0.3"
+  languageName: unknown
+  linkType: soft
+
+"@mittwald/react-tunnel@workspace:^, @mittwald/react-tunnel@workspace:packages/react-tunnel":
+  version: 0.0.0-use.local
+  resolution: "@mittwald/react-tunnel@workspace:packages/react-tunnel"
+  dependencies:
+    "@preact/signals-react": "npm:^2.0.1"
+    "@testing-library/react": "npm:^14.2.2"
+    "@types/node": "npm:^20.11.30"
+    "@types/react": "npm:^18.2.66"
+    "@types/react-dom": "npm:^18.2.22"
+    "@vitejs/plugin-react": "npm:^4.2.1"
+    "@vitest/coverage-v8": "npm:^1.4.0"
+    happy-dom: "npm:^14.2.0"
+    nx: "npm:^18.1.1"
+    prettier: "npm:^3.2.5"
+    react: "npm:^18.2.0"
+    react-dom: "npm:^18.2.0"
+    typescript: "npm:^5.4.2"
+    vite: "npm:^5.2.2"
+    vite-plugin-banner: "npm:^0.7.1"
+    vite-plugin-checker: "npm:^0.6.4"
+    vite-plugin-dts: "npm:^3.7.3"
+    vite-plugin-externalize-deps: "npm:^0.8.0"
+    vitest: "npm:^1.4.0"
+  peerDependencies:
+    react: ^18.2.0
+    react-dom: ^18.2.0
   languageName: unknown
   linkType: soft
 
@@ -8062,6 +8092,15 @@ __metadata:
   dependencies:
     undici-types: "npm:~5.26.4"
   checksum: 10c0/8ad59db82b08cb34b2e891e2193aad1081db082178e16189857ffff6619180b9dc74cb14f6e0449007c6797cf0a818a3929a7575b9816267b3d1d858f9fa7be1
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^20.11.30":
+  version: 20.11.30
+  resolution: "@types/node@npm:20.11.30"
+  dependencies:
+    undici-types: "npm:~5.26.4"
+  checksum: 10c0/867cfaf969c6d8850d8d7304e7ab739898a50ecb1395b61ff2335644f5f48d7a46fbc4a14cee967aed65ec134b61a746edae70d1f32f11321ccf29165e3bc4e6
   languageName: node
   linkType: hard
 

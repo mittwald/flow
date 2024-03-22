@@ -5,7 +5,7 @@ import {
 import React, { ComponentType } from "react";
 import { PropsWithTunnel } from "@/lib/types/props";
 import { useProps } from "@/lib/propsContext";
-import { TunnelEntry } from "@/lib/react/components/Tunnel";
+import { TunnelEntry } from "@mittwald/react-tunnel";
 
 type FlowComponentImplementationType<C extends FlowComponentName> =
   ComponentType<Omit<FlowComponentPropsOfName<C>, "tunnelId">>;
