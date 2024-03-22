@@ -1,22 +1,24 @@
-import React, { FC, PropsWithChildren } from "react";
+import React, { PropsWithChildren } from "react";
 import styles from "./StatusBadge.module.scss";
 import clsx from "clsx";
 import { StatusIcon } from "@/components/StatusIcon";
 import { Text } from "@/components/Text";
 import { PropsWithStatus } from "@/lib/types/props";
-import { ClearPropsContext, useProps } from "@/lib/propsContext";
+import { ClearPropsContext } from "@/lib/propsContext";
+import {
+  flowComponent,
+  FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
 
-export interface StatusBadgeProps extends PropsWithChildren, PropsWithStatus {
+export interface StatusBadgeProps
+  extends PropsWithChildren,
+    PropsWithStatus,
+    FlowComponentProps {
   className?: string;
 }
 
-export const StatusBadge: FC<StatusBadgeProps> = (props) => {
-  const {
-    children,
-    className,
-    status = "info",
-    ...rest
-  } = useProps("StatusBadge", props);
+export const StatusBadge = flowComponent("StatusBadge", (props) => {
+  const { children, className, status = "info", ...rest } = props;
 
   const rootClassName = clsx(styles.statusBadge, styles[status], className);
 
@@ -28,6 +30,6 @@ export const StatusBadge: FC<StatusBadgeProps> = (props) => {
       </div>
     </ClearPropsContext>
   );
-};
+});
 
 export default StatusBadge;

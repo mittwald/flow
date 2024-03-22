@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.48](https://github.com/mittwald/flow/compare/0.1.0-alpha.47...0.1.0-alpha.48) (2024-03-21)
+
+### Features
+
+- add Tunnel component
+  ([ffca8e1](https://github.com/mittwald/flow/commit/ffca8e17d32ef8fd452200ece54a59b8e5409861))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.47](https://github.com/mittwald/flow/compare/0.1.0-alpha.46...0.1.0-alpha.47) (2024-03-21)
+
+### Bug Fixes
+
+- keep props context in structural-like components
+  ([48350b8](https://github.com/mittwald/flow/commit/48350b8f3f771b424ea6e178c3ad374512ccf079))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.46](https://github.com/mittwald/flow/compare/0.1.0-alpha.45...0.1.0-alpha.46) (2024-03-21)
 
 ### Bug Fixes
