@@ -14,6 +14,10 @@
       "types": "./dist/types/components/Button/index.d.ts",
       "import": "./dist/Button.js"
     },
+    "./ButtonGroup": {
+      "types": "./dist/types/components/ButtonGroup/index.d.ts",
+      "import": "./dist/ButtonGroup.js"
+    },
     "./Checkbox": {
       "types": "./dist/types/components/Checkbox/index.d.ts",
       "import": "./dist/Checkbox.js"
@@ -93,6 +97,10 @@
     "./List/ListLoaderAsyncResource": {
       "types": "./dist/types/components/List/components/ListLoaderAsyncResource.d.ts",
       "import": "./dist/List/ListLoaderAsyncResource.js"
+    },
+    "./Modal": {
+      "types": "./dist/types/components/Modal/index.d.ts",
+      "import": "./dist/Modal.js"
     },
     "./Navigation": {
       "types": "./dist/types/components/Navigation/index.d.ts",
