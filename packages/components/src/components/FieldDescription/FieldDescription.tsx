@@ -1,13 +1,17 @@
-import React, { FC } from "react";
+import React from "react";
 import styles from "./FieldDescription.module.scss";
 import clsx from "clsx";
-import { ClearPropsContext, useProps } from "@/lib/propsContext";
+import { ClearPropsContext } from "@/lib/propsContext";
 import { Text, TextProps } from "@/components/Text";
+import {
+  flowComponent,
+  FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
 
-export interface FieldDescriptionProps extends TextProps {}
+export interface FieldDescriptionProps extends TextProps, FlowComponentProps {}
 
-export const FieldDescription: FC<FieldDescriptionProps> = (props) => {
-  const { children, className, ...rest } = useProps("FieldDescription", props);
+export const FieldDescription = flowComponent("FieldDescription", (props) => {
+  const { children, className, ...rest } = props;
 
   const rootClassName = clsx(styles.fieldDescription, className);
 
@@ -18,6 +22,6 @@ export const FieldDescription: FC<FieldDescriptionProps> = (props) => {
       </Text>
     </ClearPropsContext>
   );
-};
+});
 
 export default FieldDescription;

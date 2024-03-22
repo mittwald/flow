@@ -1,28 +1,28 @@
-import React, { ComponentPropsWithoutRef, FC, PropsWithChildren } from "react";
+import React, { ComponentPropsWithoutRef, PropsWithChildren } from "react";
 import styles from "./Heading.module.scss";
 import clsx from "clsx";
 import {
   ClearPropsContext,
   PropsContext,
   PropsContextProvider,
-  useProps,
 } from "@/lib/propsContext";
+import {
+  flowComponent,
+  FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
 
 type Level = 1 | 2 | 3 | 4 | 5 | 6;
 
 export interface HeadingProps
   extends PropsWithChildren,
-    ComponentPropsWithoutRef<"h1" | "h2" | "h3" | "h4" | "h5" | "h6"> {
+    ComponentPropsWithoutRef<"h1" | "h2" | "h3" | "h4" | "h5" | "h6">,
+    FlowComponentProps {
   level?: Level;
+  tunnelId?: string;
 }
 
-export const Heading: FC<HeadingProps> = (props) => {
-  const {
-    children,
-    className,
-    level = 2,
-    ...rest
-  } = useProps("Heading", props);
+export const Heading = flowComponent("Heading", (props) => {
+  const { children, className, level = 2, ...rest } = props;
 
   const rootClassName = clsx(styles.heading, className);
 
@@ -45,6 +45,6 @@ export const Heading: FC<HeadingProps> = (props) => {
       </Element>
     </ClearPropsContext>
   );
-};
+});
 
 export default Heading;

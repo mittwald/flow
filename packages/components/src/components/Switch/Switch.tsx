@@ -1,24 +1,24 @@
-import React, { FC, PropsWithChildren } from "react";
+import React, { PropsWithChildren } from "react";
 import * as Aria from "react-aria-components";
 import styles from "./Switch.module.scss";
 import clsx from "clsx";
 import { IconCheck, IconClose } from "@/components/Icon/components/icons";
 import { Label } from "@/components/Label";
-import { ClearPropsContext, useProps } from "@/lib/propsContext";
+import { ClearPropsContext } from "@/lib/propsContext";
+import {
+  flowComponent,
+  FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
 
 export interface SwitchProps
-  extends PropsWithChildren<Omit<Aria.SwitchProps, "children">> {
+  extends PropsWithChildren<Omit<Aria.SwitchProps, "children">>,
+    FlowComponentProps {
   /** @default "trailing" */
   labelPosition?: "leading" | "trailing";
 }
 
-export const Switch: FC<SwitchProps> = (props) => {
-  const {
-    children,
-    className,
-    labelPosition = "trailing",
-    ...rest
-  } = useProps("Switch", props);
+export const Switch = flowComponent("Switch", (props) => {
+  const { children, className, labelPosition = "trailing", ...rest } = props;
 
   const rootClassName = clsx(
     styles.switch,
@@ -42,6 +42,6 @@ export const Switch: FC<SwitchProps> = (props) => {
       </Aria.Switch>
     </ClearPropsContext>
   );
-};
+});
 
 export default Switch;
