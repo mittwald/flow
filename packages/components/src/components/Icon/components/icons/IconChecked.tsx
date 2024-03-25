@@ -1,7 +1,7 @@
 /* eslint-disable */
 /* auto-generated file */
 import React, { ComponentProps, FC } from "react";
-import { IconSquareCheck as Tabler } from "@tabler/icons-react";
+import { IconSquareCheckFilled as Tabler } from "@tabler/icons-react";
 import { Icon } from "@/components/Icon";
 
 export const IconChecked: FC<Omit<ComponentProps<typeof Icon>, "children">> = (

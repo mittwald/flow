@@ -19,9 +19,9 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
         {({ isSelected }) => (
           <>
             {isSelected ? (
-              <IconChecked className={styles.checkmark} />
+              <IconChecked className={styles.icon} />
             ) : (
-              <IconUnchecked className={styles.checkmark} />
+              <IconUnchecked className={styles.icon} />
             )}
             {children}
           </>

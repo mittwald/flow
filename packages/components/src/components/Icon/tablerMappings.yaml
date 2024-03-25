@@ -2,7 +2,7 @@ App: AppWindow
 BackLink: ArrowLeft
 Backup: Clock
 Check: Check
-Checked: SquareCheck
+Checked: SquareCheckFilled
 ChevronDown: ChevronDown
 ChevronLeft: ChevronLeft
 ChevronRight: ChevronRight
@@ -33,6 +33,8 @@ Pending: Loader2
 Plus: Plus
 Project: Archive
 Random: Dice3
+RadioOff: Circle
+RadioOn: CircleDotFilled
 Search: Search
 SearchEngine: ListSearch
 Server: Server

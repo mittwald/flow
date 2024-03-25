@@ -35,6 +35,8 @@ export { IconPending } from "./IconPending";
 export { IconPlus } from "./IconPlus";
 export { IconProject } from "./IconProject";
 export { IconRandom } from "./IconRandom";
+export { IconRadioOff } from "./IconRadioOff";
+export { IconRadioOn } from "./IconRadioOn";
 export { IconSearch } from "./IconSearch";
 export { IconSearchEngine } from "./IconSearchEngine";
 export { IconServer } from "./IconServer";

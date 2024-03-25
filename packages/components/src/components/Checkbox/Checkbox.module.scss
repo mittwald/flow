@@ -1,9 +1,24 @@
-@use "../../styles/mixins/formControl";
-
 .checkbox {
-  @include formControl.formControl();
   display: grid;
-  column-gap: var(--checkbox--checkmark-to-text-spacing);
+  column-gap: var(--radio--icon-to-text-spacing);
   grid-template-columns: auto 1fr;
   width: fit-content;
+
+  &[data-selected] {
+    .icon {
+      color: var(--radio--icon-color--selected);
+    }
+  }
+
+  &[data-disabled] {
+    color: var(--radio--color--disabled);
+
+    .icon {
+      color: var(--radio--icon-color--disabled);
+    }
+  }
+}
+
+.icon {
+  color: var(--radio--icon-color--default);
 }

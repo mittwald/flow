@@ -1,5 +1,5 @@
 import React, { FC, PropsWithChildren } from "react";
-import styles from "./RadioGroup.module.scss";
+import styles from "./SegmentedButton.module.scss";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
@@ -7,13 +7,17 @@ import { FieldError } from "@/components/FieldError";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import formFieldStyles from "../FormField/FormField.module.scss";
 
-export interface RadioGroupProps
+export interface SegmentedButtonProps
   extends PropsWithChildren<Omit<Aria.RadioGroupProps, "children">> {}
 
-export const RadioGroup: FC<RadioGroupProps> = (props) => {
+export const SegmentedButton: FC<SegmentedButtonProps> = (props) => {
   const { children, className, ...rest } = props;
 
-  const rootClassName = clsx(formFieldStyles.formField, className);
+  const rootClassName = clsx(
+    styles.segmentedButton,
+    formFieldStyles.formField,
+    className,
+  );
 
   const propsContext: PropsContext = {
     Label: {
@@ -35,7 +39,7 @@ export const RadioGroup: FC<RadioGroupProps> = (props) => {
       <PropsContextProvider props={propsContext}>
         <TunnelProvider>
           <TunnelExit id="label" />
-          <div className={styles.radioOptions}>{children}</div>
+          <div className={styles.segments}>{children}</div>
           <TunnelExit id="fieldDescription" />
           <TunnelExit id="fieldError" />
         </TunnelProvider>
@@ -45,4 +49,4 @@ export const RadioGroup: FC<RadioGroupProps> = (props) => {
   );
 };
 
-export default RadioGroup;
+export default SegmentedButton;

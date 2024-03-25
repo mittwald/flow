@@ -118,6 +118,10 @@
       "types": "./dist/types/components/Section/index.d.ts",
       "import": "./dist/Section.js"
     },
+    "./SegmentedButton": {
+      "types": "./dist/types/components/SegmentedButton/index.d.ts",
+      "import": "./dist/SegmentedButton.js"
+    },
     "./StatusBadge": {
       "types": "./dist/types/components/StatusBadge/index.d.ts",
       "import": "./dist/StatusBadge.js"
