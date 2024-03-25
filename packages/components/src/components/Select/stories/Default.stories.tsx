@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from "@storybook/react";
 import Select, { Options, Option } from "../index";
 import React from "react";
 import { Label } from "@/components/Label";
-import { NumberField } from "@/components/NumberField";
 import FieldDescription from "@/components/FieldDescription";
 import { FieldError } from "@/components/FieldError";
 
@@ -54,15 +53,15 @@ export const WithFieldDescription: Story = {
 
 export const WithDefaultValue: Story = {
   render: (props) => (
-    <Select {...props} selectedKey={"Wordpress"}>
+    <Select {...props} defaultSelectedKey="WordPress">
       <Label>App</Label>
       <Options>
-        <Option>WordPress</Option>
-        <Option>TYPO3</Option>
-        <Option>Contao</Option>
-        <Option>Drupal</Option>
-        <Option>Joomla!</Option>
-        <Option>Matomo</Option>
+        <Option id="WordPress">WordPress</Option>
+        <Option id="TYPO3">TYPO3</Option>
+        <Option id="Contao">Contao</Option>
+        <Option id="Drupal">Drupal</Option>
+        <Option id="Joomla!">Joomla!</Option>
+        <Option id="Matomo">Matomo</Option>
       </Options>
     </Select>
   ),

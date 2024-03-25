@@ -2,4 +2,12 @@
 
 .option {
   @include menuItem.menuItem();
+
+  &[data-focused] {
+    outline-style: none;
+  }
+
+  &[data-focus-visible] {
+    outline-style: solid;
+  }
 }

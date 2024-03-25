@@ -1,13 +1,22 @@
 @use "@/styles/mixins/formControl.scss";
 
+.select {
+  &[data-invalid] {
+    .toggle {
+      border-color: var(--form-control--border-color--invalid);
+      background-color: var(--form-control--background-color--invalid);
+    }
+  }
+}
+
 .toggle {
-  @include formControl.formControl();
-  order: 2;
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-weight: normal;
   font-size: var(--font-size--default);
+
+  @include formControl.formControl();
 }
 
 :global(.flow--popover) {
