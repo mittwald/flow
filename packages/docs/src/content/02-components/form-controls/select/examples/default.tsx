@@ -3,7 +3,6 @@ import Select, {
   Options,
 } from "@mittwald/flow-react-components/Select";
 import { Label } from "@mittwald/flow-react-components/Label";
-import React from "react";
 
 <Select>
   <Label>App</Label>
