@@ -1,6 +1,6 @@
 popover:
   box-shadow:
-    value: "rgba(0, 0, 0, 0.14) 0px {size-px.m} {size-px.l}"
+    value: "{shadow.overlay}"
   border-radius:
     value: "{size-px.xs}"
   padding:
