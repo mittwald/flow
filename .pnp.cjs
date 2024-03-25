@@ -4578,7 +4578,7 @@ const RAW_RUNTIME_STATE =
           ["@react-aria/utils", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.23.2"],\
           ["@react-types/shared", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.22.1"],\
           ["@storybook/addon-a11y", "npm:7.6.17"],\
-          ["@storybook/addon-actions", "npm:7.6.17"],\
+          ["@storybook/addon-actions", "npm:8.0.4"],\
           ["@storybook/addon-essentials", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:7.6.17"],\
           ["@storybook/addon-interactions", "npm:7.6.17"],\
           ["@storybook/addon-links", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:7.6.17"],\
@@ -4670,7 +4670,7 @@ const RAW_RUNTIME_STATE =
           ["@react-aria/utils", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.23.2"],\
           ["@react-types/shared", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.22.1"],\
           ["@storybook/addon-a11y", "npm:7.6.17"],\
-          ["@storybook/addon-actions", "npm:7.6.17"],\
+          ["@storybook/addon-actions", "npm:8.0.4"],\
           ["@storybook/addon-essentials", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:7.6.17"],\
           ["@storybook/addon-interactions", "npm:7.6.17"],\
           ["@storybook/addon-links", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:7.6.17"],\
@@ -4757,7 +4757,7 @@ const RAW_RUNTIME_STATE =
           ["@react-aria/utils", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.23.2"],\
           ["@react-types/shared", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.22.1"],\
           ["@storybook/addon-a11y", "npm:7.6.17"],\
-          ["@storybook/addon-actions", "npm:7.6.17"],\
+          ["@storybook/addon-actions", "npm:8.0.4"],\
           ["@storybook/addon-essentials", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:7.6.17"],\
           ["@storybook/addon-interactions", "npm:7.6.17"],\
           ["@storybook/addon-links", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:7.6.17"],\
@@ -10620,6 +10620,19 @@ const RAW_RUNTIME_STATE =
           ["uuid", "npm:9.0.1"]\
         ],\
         "linkType": "HARD"\
+      }],\
+      ["npm:8.0.4", {\
+        "packageLocation": "./.yarn/cache/@storybook-addon-actions-npm-8.0.4-8566b0663d-d6fd10eaeb.zip/node_modules/@storybook/addon-actions/",\
+        "packageDependencies": [\
+          ["@storybook/addon-actions", "npm:8.0.4"],\
+          ["@storybook/core-events", "npm:8.0.4"],\
+          ["@storybook/global", "npm:5.0.0"],\
+          ["@types/uuid", "npm:9.0.7"],\
+          ["dequal", "npm:2.0.3"],\
+          ["polished", "npm:4.3.1"],\
+          ["uuid", "npm:9.0.1"]\
+        ],\
+        "linkType": "HARD"\
       }]\
     ]],\
     ["@storybook/addon-backgrounds", [\
@@ -11465,6 +11478,14 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/@storybook-core-events-npm-7.6.5-5a29fee78a-d1c861ff77.zip/node_modules/@storybook/core-events/",\
         "packageDependencies": [\
           ["@storybook/core-events", "npm:7.6.5"],\
+          ["ts-dedent", "npm:2.2.0"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:8.0.4", {\
+        "packageLocation": "./.yarn/cache/@storybook-core-events-npm-8.0.4-ce0ca6d881-cf47bb9f49.zip/node_modules/@storybook/core-events/",\
+        "packageDependencies": [\
+          ["@storybook/core-events", "npm:8.0.4"],\
           ["ts-dedent", "npm:2.2.0"]\
         ],\
         "linkType": "HARD"\

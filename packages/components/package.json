@@ -195,7 +195,7 @@
     "@mittwald/react-use-promise": "^2.3.13",
     "@nx/storybook": "^18.1.2",
     "@storybook/addon-a11y": "^7.6.17",
-    "@storybook/addon-actions": "^7.6.17",
+    "@storybook/addon-actions": "^8.0.4",
     "@storybook/addon-essentials": "^7.6.17",
     "@storybook/addon-interactions": "^7.6.17",
     "@storybook/addon-links": "^7.6.17",

@@ -3031,7 +3031,7 @@ __metadata:
     "@react-aria/utils": "npm:^3.23.2"
     "@react-types/shared": "npm:^3.22.1"
     "@storybook/addon-a11y": "npm:^7.6.17"
-    "@storybook/addon-actions": "npm:^7.6.17"
+    "@storybook/addon-actions": "npm:^8.0.4"
     "@storybook/addon-essentials": "npm:^7.6.17"
     "@storybook/addon-interactions": "npm:^7.6.17"
     "@storybook/addon-links": "npm:^7.6.17"
@@ -6150,7 +6150,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-actions@npm:7.6.17, @storybook/addon-actions@npm:^7.6.17":
+"@storybook/addon-actions@npm:7.6.17":
   version: 7.6.17
   resolution: "@storybook/addon-actions@npm:7.6.17"
   dependencies:
@@ -6161,6 +6161,20 @@ __metadata:
     polished: "npm:^4.2.2"
     uuid: "npm:^9.0.0"
   checksum: 10c0/91d20a7c35fff6a0b2aa33f2c1171d457c68fb9d955da12629d6f75d931d5aa3756837e413ab7bb928c4cc4b48dcc5cdd63510e6028e7bd8fc8c82d93be967d0
+  languageName: node
+  linkType: hard
+
+"@storybook/addon-actions@npm:^8.0.4":
+  version: 8.0.4
+  resolution: "@storybook/addon-actions@npm:8.0.4"
+  dependencies:
+    "@storybook/core-events": "npm:8.0.4"
+    "@storybook/global": "npm:^5.0.0"
+    "@types/uuid": "npm:^9.0.1"
+    dequal: "npm:^2.0.2"
+    polished: "npm:^4.2.2"
+    uuid: "npm:^9.0.0"
+  checksum: 10c0/d6fd10eaeba3ef4793ad54a386bf5740fac46a98d7c8338642e0362a0c4d844b184802fd1dec21fbffd28c841d5ec264db4cf851f7e7d34e295bcea475f65766
   languageName: node
   linkType: hard
 
@@ -6788,6 +6802,15 @@ __metadata:
   dependencies:
     ts-dedent: "npm:^2.0.0"
   checksum: 10c0/d1c861ff77bf60e28614e695d73cb076aa1dfe933d68e90b9d426dbf9f2f82205ec084e641f96b53b145ce0ec41924219e9bf653de56e0f631ababa6978c7fba
+  languageName: node
+  linkType: hard
+
+"@storybook/core-events@npm:8.0.4":
+  version: 8.0.4
+  resolution: "@storybook/core-events@npm:8.0.4"
+  dependencies:
+    ts-dedent: "npm:^2.0.0"
+  checksum: 10c0/cf47bb9f4941f3c64549fef6edcdcda63a0d8105651d6a9f88847532ba2723fae09b69e0c9c1814385cd846638f9eaddc57793e11371e8ba080808dcbfaf8195
   languageName: node
   linkType: hard
 
