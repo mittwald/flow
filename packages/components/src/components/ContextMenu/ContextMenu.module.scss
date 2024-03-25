@@ -5,10 +5,6 @@
   background-color: var(--context-menu--background-color);
   overflow-y: scroll;
 
-  [role="menu"]:focus-visible {
-    outline: none;
-  }
-
   &[data-placement="top"] {
     --origin: translateY(var(--size-px--s));
   }
@@ -32,6 +28,16 @@
   &[data-exiting] {
     animation: popover-slide var(--transition--duration--default) reverse
       ease-in;
+  }
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--menu--item-to-item-spacing);
+
+  &:focus-visible {
+    outline: none;
   }
 }
 
