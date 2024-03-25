@@ -9,6 +9,7 @@ import {
   flowComponent,
   FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
+import { Badge } from "@/components/Badge";
 
 export interface StatusBadgeProps
   extends PropsWithChildren,
@@ -24,10 +25,10 @@ export const StatusBadge = flowComponent("StatusBadge", (props) => {
 
   return (
     <ClearPropsContext>
-      <div className={rootClassName} {...rest}>
+      <Badge className={rootClassName} {...rest}>
         <StatusIcon size="s" className={styles.statusIcon} status={status} />
         <Text className={styles.text}>{children}</Text>
-      </div>
+      </Badge>
     </ClearPropsContext>
   );
 });

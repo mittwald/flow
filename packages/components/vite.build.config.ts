@@ -20,6 +20,7 @@ export default defineConfig(
       lib: {
         entry: {
           Avatar: "./src/components/Avatar/index.ts",
+          Badge: "./src/components/Badge/index.ts",
           Button: "./src/components/Button/index.ts",
           ButtonGroup: "./src/components/ButtonGroup/index.ts",
           Checkbox: "./src/components/Checkbox/index.ts",

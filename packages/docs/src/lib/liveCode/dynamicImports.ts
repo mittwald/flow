@@ -2,10 +2,10 @@
 /* auto-generated file */
 import { ImportMapping } from "@/lib/liveCode/types";
 import { lazy } from "react";
-import { NavigationItem as I30 } from "@mittwald/flow-react-components/Navigation";
-import { ListItemView as I43 } from "@mittwald/flow-react-components/List";
-import { ListStaticData as I44 } from "@mittwald/flow-react-components/List";
-import { users as I45 } from "@/content/02-components/structure/list/examples/userApi";
+import { NavigationItem as I32 } from "@mittwald/flow-react-components/Navigation";
+import { ListItemView as I45 } from "@mittwald/flow-react-components/List";
+import { ListStaticData as I46 } from "@mittwald/flow-react-components/List";
+import { users as I47 } from "@/content/02-components/structure/list/examples/userApi";
 
 export const liveCodeEditorGlobalImports: ImportMapping = {
   "ExampleSvg:@/content/01-getting-started/stylesheet/examples/components/ExampleSvg": lazy(() => import("@/content/01-getting-started/stylesheet/examples/components/ExampleSvg").then(module => ({ default: module.ExampleSvg } ))),
@@ -22,6 +22,8 @@ export const liveCodeEditorGlobalImports: ImportMapping = {
 "Initials:@mittwald/flow-react-components/Initials": lazy(() => import("@mittwald/flow-react-components/Initials").then(module => ({ default: module.Initials } ))),
 "IconCustomer:@mittwald/flow-react-components/Icons": lazy(() => import("@mittwald/flow-react-components/Icons").then(module => ({ default: module.IconCustomer } ))),
 "Image:@mittwald/flow-react-components/Image": lazy(() => import("@mittwald/flow-react-components/Image").then(module => ({ default: module.Image } ))),
+"Badge:@mittwald/flow-react-components/Badge": lazy(() => import("@mittwald/flow-react-components/Badge").then(module => ({ default: module.Badge } ))),
+"IconClose:@mittwald/flow-react-components/Icons": lazy(() => import("@mittwald/flow-react-components/Icons").then(module => ({ default: module.IconClose } ))),
 "Heading:@mittwald/flow-react-components/Heading": lazy(() => import("@mittwald/flow-react-components/Heading").then(module => ({ default: module.Heading } ))),
 "IconMember:@mittwald/flow-react-components/Icons": lazy(() => import("@mittwald/flow-react-components/Icons").then(module => ({ default: module.IconMember } ))),
 "Icon:@mittwald/flow-react-components/Icon": lazy(() => import("@mittwald/flow-react-components/Icon").then(module => ({ default: module.Icon } ))),
@@ -38,7 +40,7 @@ export const liveCodeEditorGlobalImports: ImportMapping = {
 "FieldDescription:@mittwald/flow-react-components/FieldDescription": lazy(() => import("@mittwald/flow-react-components/FieldDescription").then(module => ({ default: module.FieldDescription } ))),
 "TextArea:@mittwald/flow-react-components/TextArea": lazy(() => import("@mittwald/flow-react-components/TextArea").then(module => ({ default: module.TextArea } ))),
 "Navigation:@mittwald/flow-react-components/Navigation": lazy(() => import("@mittwald/flow-react-components/Navigation").then(module => ({ default: module.Navigation } ))),
-"NavigationItem:@mittwald/flow-react-components/Navigation": I30,
+"NavigationItem:@mittwald/flow-react-components/Navigation": I32,
 "IconProject:@mittwald/flow-react-components/Icons": lazy(() => import("@mittwald/flow-react-components/Icons").then(module => ({ default: module.IconProject } ))),
 "IconServer:@mittwald/flow-react-components/Icons": lazy(() => import("@mittwald/flow-react-components/Icons").then(module => ({ default: module.IconServer } ))),
 "Modal:@mittwald/flow-react-components/Modal": lazy(() => import("@mittwald/flow-react-components/Modal").then(module => ({ default: module.Modal } ))),
@@ -51,9 +53,9 @@ export const liveCodeEditorGlobalImports: ImportMapping = {
 "StatusIcon:@mittwald/flow-react-components/StatusIcon": lazy(() => import("@mittwald/flow-react-components/StatusIcon").then(module => ({ default: module.StatusIcon } ))),
 "LayoutCard:@mittwald/flow-react-components/LayoutCard": lazy(() => import("@mittwald/flow-react-components/LayoutCard").then(module => ({ default: module.LayoutCard } ))),
 "List:@mittwald/flow-react-components/List": lazy(() => import("@mittwald/flow-react-components/List").then(module => ({ default: module.List } ))),
-"ListItemView:@mittwald/flow-react-components/List": I43,
-"ListStaticData:@mittwald/flow-react-components/List": I44,
-"users:@/content/02-components/structure/list/examples/userApi": I45,
+"ListItemView:@mittwald/flow-react-components/List": I45,
+"ListStaticData:@mittwald/flow-react-components/List": I46,
+"users:@/content/02-components/structure/list/examples/userApi": I47,
 "Section:@mittwald/flow-react-components/Section": lazy(() => import("@mittwald/flow-react-components/Section").then(module => ({ default: module.Section } ))),
 "Header:@mittwald/flow-react-components/Header": lazy(() => import("@mittwald/flow-react-components/Header").then(module => ({ default: module.Header } ))),
 };
