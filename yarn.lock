@@ -3148,8 +3148,8 @@ __metadata:
   linkType: soft
 
 "@mittwald/react-use-promise@npm:^2.3.12":
-  version: 2.3.12
-  resolution: "@mittwald/react-use-promise@npm:2.3.12"
+  version: 2.3.13
+  resolution: "@mittwald/react-use-promise@npm:2.3.13"
   dependencies:
     "@types/luxon": "npm:3.4.2"
     browser-or-node: "npm:^3.0.0-pre.0"
@@ -3162,7 +3162,7 @@ __metadata:
   peerDependenciesMeta:
     axios:
       optional: true
-  checksum: 10c0/9f5283b1aa3ac073b655ff07fe1f3823d2dd92f29d4e9232fe41b944ced6841b414b012ee26ec03785cf98fe4f031921a254559805eb234061c4b68742c55220
+  checksum: 10c0/00f6a6fd70e8df803d1c5199d7eae02f5115352285c504439c07883848879f6b362c310418ea733104d4abced377df46f075d25977d4497ecd3f68aa07d83183
   languageName: node
   linkType: hard
 
