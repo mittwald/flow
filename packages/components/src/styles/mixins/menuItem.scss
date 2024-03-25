@@ -27,6 +27,14 @@
     background-color: var(--menu-item--background-color--hover);
   }
 
+  &[data-focused] {
+    outline-style: none;
+  }
+
+  &[data-focus-visible] {
+    outline-style: solid;
+  }
+
   &[aria-current="page"],
   &[data-selected] {
     background-color: var(--menu-item--background-color--current);
