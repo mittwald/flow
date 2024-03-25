@@ -1,0 +1,8 @@
+.popover {
+  background-color: var(--popover--background-color);
+  box-shadow: var(--popover--box-shadow);
+  border-radius: var(--popover--border-radius);
+  padding: var(--popover--padding);
+  overflow-y: scroll;
+  z-index: 1;
+}
