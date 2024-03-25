@@ -36,6 +36,27 @@ const loadUsers: AsyncDataLoader<User> = async (opt) => {
   };
 };
 
+const loadUsers: AsyncDataLoader<User> = async (opt) => {
+  const response = await getUsers({
+    pagination: opt?.pagination
+      ? {
+          limit: opt.pagination.limit,
+          skip: opt.pagination.offset,
+        }
+      : undefined,
+    filter: opt?.filtering?.["location.state"]
+      ? {
+          states: opt.filtering["location.state"].values as string[],
+        }
+      : undefined,
+  });
+
+  return {
+    data: response.data,
+    itemTotalCount: response.totalCount,
+  };
+};
+
 const meta: Meta<typeof List> = {
   title: "Structure/List",
   component: List,

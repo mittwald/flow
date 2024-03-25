@@ -2,7 +2,7 @@ import React, { FC, Suspense } from "react";
 import { useList } from "@/components/List/hooks/useList";
 import styles from "./ItemList.module.css";
 import clsx from "clsx";
-import { Item } from "@/components/List/components/Items/Item";
+import { Item } from "@/components/List/components/Items";
 
 interface Props {
   className?: string;
@@ -11,6 +11,7 @@ interface Props {
 export const ItemList: FC<Props> = (props) => {
   const { className } = props;
   const list = useList();
+  const isLoading = list.loader.useIsLoading();
 
   const rows = list.items.entries.map((i) => (
     <Item key={i.id}>
@@ -18,7 +19,13 @@ export const ItemList: FC<Props> = (props) => {
     </Item>
   ));
 
-  return <div className={clsx(styles.itemList, className)}>{rows}</div>;
+  const rootClassName = clsx(
+    styles.itemList,
+    className,
+    isLoading && styles.isLoading,
+  );
+
+  return <div className={rootClassName}>{rows}</div>;
 };
 
 export default ItemList;
