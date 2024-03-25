@@ -5,7 +5,7 @@ import clsx from "clsx";
 import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { FieldError } from "@/components/FieldError";
 import { TunnelExit, TunnelProvider } from "@/lib/react/components/Tunnel";
-import formFieldStyles from "@/FormField/FormField.module.scss";
+import formFieldStyles from "../FormField/FormField.module.scss";
 
 export interface RadioGroupProps
   extends PropsWithChildren<Omit<Aria.RadioGroupProps, "children">> {}
