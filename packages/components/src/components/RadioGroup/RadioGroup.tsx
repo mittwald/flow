@@ -4,7 +4,7 @@ import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { FieldError } from "@/components/FieldError";
-import { TunnelExit, TunnelProvider } from "@/lib/react/components/Tunnel";
+import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import formFieldStyles from "../FormField/FormField.module.scss";
 
 export interface RadioGroupProps
