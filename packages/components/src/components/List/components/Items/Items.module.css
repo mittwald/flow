@@ -3,3 +3,8 @@
   flex-direction: column;
   row-gap: var(--size-px--xs);
 }
+
+.isLoading {
+  pointer-events: none;
+  opacity: 0.5;
+}

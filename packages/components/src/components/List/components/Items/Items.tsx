@@ -11,6 +11,7 @@ interface Props {
 export const Items: FC<Props> = (props) => {
   const { className } = props;
   const list = useList();
+  const isLoading = list.loader.useIsLoading();
 
   const rows = list.items.entries.map((i) => (
     <Item key={i.id}>
@@ -18,7 +19,13 @@ export const Items: FC<Props> = (props) => {
     </Item>
   ));
 
-  return <div className={clsx(styles.items, className)}>{rows}</div>;
+  const rootClassName = clsx(
+    styles.items,
+    className,
+    isLoading && styles.isLoading,
+  );
+
+  return <div className={rootClassName}>{rows}</div>;
 };
 
 export default Items;
