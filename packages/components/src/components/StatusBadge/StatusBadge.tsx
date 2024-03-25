@@ -4,7 +4,6 @@ import clsx from "clsx";
 import { StatusIcon } from "@/components/StatusIcon";
 import { Text } from "@/components/Text";
 import { PropsWithStatus } from "@/lib/types/props";
-import { Badge } from "@/components/Badge";
 import { ClearPropsContext, useProps } from "@/lib/propsContext";
 
 export interface StatusBadgeProps extends PropsWithChildren, PropsWithStatus {
@@ -23,10 +22,10 @@ export const StatusBadge: FC<StatusBadgeProps> = (props) => {
 
   return (
     <ClearPropsContext>
-      <Badge className={rootClassName} {...rest}>
+      <div className={rootClassName} {...rest}>
         <StatusIcon size="s" className={styles.statusIcon} status={status} />
         <Text className={styles.text}>{children}</Text>
-      </Badge>
+      </div>
     </ClearPropsContext>
   );
 };

@@ -1,6 +1,5 @@
 import React, { FC } from "react";
 import { useList } from "@/components/List/hooks/useList";
-import { Badge } from "@/components/Badge";
 import styles from "./ActiveFilters.module.scss";
 import { Text } from "@/components/Text";
 import { Button } from "@/components/Button";
@@ -17,12 +16,15 @@ export const ActiveFilters: FC = () => {
       f.values
         .filter((v) => f.isValueActive(v))
         .map((v) => (
-          <Badge key={String(v)}>
+          <Button
+            style="soft"
+            size="s"
+            key={String(v)}
+            onPress={() => f.deactivateValue(v)}
+          >
             <Text>{String(v)}</Text>
-            <Button onPress={() => f.deactivateValue(v)}>
-              <IconClose />
-            </Button>
-          </Badge>
+            <IconClose />
+          </Button>
         )),
     )
     .flat();
