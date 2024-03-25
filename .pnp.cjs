@@ -4304,7 +4304,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@mdx-js/mdx", "npm:2.3.0"],\
           ["@types/estree-jsx", "npm:1.0.3"],\
-          ["@types/mdx", "npm:2.0.10"],\
+          ["@types/mdx", "npm:2.0.12"],\
           ["estree-util-build-jsx", "npm:2.2.2"],\
           ["estree-util-is-identifier-name", "npm:2.1.0"],\
           ["estree-util-to-js", "npm:1.2.0"],\
@@ -4330,7 +4330,7 @@ const RAW_RUNTIME_STATE =
           ["@types/estree", "npm:1.0.5"],\
           ["@types/estree-jsx", "npm:1.0.3"],\
           ["@types/hast", "npm:3.0.3"],\
-          ["@types/mdx", "npm:2.0.10"],\
+          ["@types/mdx", "npm:2.0.12"],\
           ["collapse-white-space", "npm:2.1.0"],\
           ["devlop", "npm:1.1.0"],\
           ["estree-util-build-jsx", "npm:3.0.1"],\
@@ -4373,7 +4373,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/__virtual__/@mdx-js-react-virtual-0b542522e2/0/cache/@mdx-js-react-npm-3.0.1-1ce14f6273-d210d926ef.zip/node_modules/@mdx-js/react/",\
         "packageDependencies": [\
           ["@mdx-js/react", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:3.0.1"],\
-          ["@types/mdx", "npm:2.0.10"],\
+          ["@types/mdx", "npm:2.0.12"],\
           ["@types/react", "npm:18.2.66"],\
           ["react", "npm:18.2.0"]\
         ],\
@@ -4387,7 +4387,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/__virtual__/@mdx-js-react-virtual-c977e85588/0/cache/@mdx-js-react-npm-2.3.0-d5582a450b-6d64711570.zip/node_modules/@mdx-js/react/",\
         "packageDependencies": [\
           ["@mdx-js/react", "virtual:c593857a712f5f094eb838ee74ccade7bbb90eef46774b2ff1d90ee70bdb3bae64779db6da61fe3bce84feb2eb5362a199825661d9e982dfab6152c12a6a2953#npm:2.3.0"],\
-          ["@types/mdx", "npm:2.0.10"],\
+          ["@types/mdx", "npm:2.0.12"],\
           ["@types/react", "npm:18.2.66"],\
           ["react", "npm:18.2.0"]\
         ],\
@@ -4506,7 +4506,7 @@ const RAW_RUNTIME_STATE =
           ["@mittwald/flow-react-components", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#workspace:packages/components"],\
           ["@next/mdx", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:14.1.3"],\
           ["@tabler/icons-react", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:2.47.0"],\
-          ["@types/mdx", "npm:2.0.11"],\
+          ["@types/mdx", "npm:2.0.12"],\
           ["@types/node", "npm:20.11.28"],\
           ["@types/react", "npm:18.2.66"],\
           ["@types/react-dom", "npm:18.2.22"],\
@@ -13095,17 +13095,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@types/mdx", [\
-      ["npm:2.0.10", {\
-        "packageLocation": "./.yarn/cache/@types-mdx-npm-2.0.10-3471d7f48a-a2a5d71967.zip/node_modules/@types/mdx/",\
+      ["npm:2.0.12", {\
+        "packageLocation": "./.yarn/cache/@types-mdx-npm-2.0.12-6483690727-a47ef3a781.zip/node_modules/@types/mdx/",\
         "packageDependencies": [\
-          ["@types/mdx", "npm:2.0.10"]\
-        ],\
-        "linkType": "HARD"\
-      }],\
-      ["npm:2.0.11", {\
-        "packageLocation": "./.yarn/cache/@types-mdx-npm-2.0.11-57598b217b-8e60d9e1ad.zip/node_modules/@types/mdx/",\
-        "packageDependencies": [\
-          ["@types/mdx", "npm:2.0.11"]\
+          ["@types/mdx", "npm:2.0.12"]\
         ],\
         "linkType": "HARD"\
       }]\
