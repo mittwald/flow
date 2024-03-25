@@ -1,23 +1,23 @@
-import React, {
-  ComponentProps,
-  ComponentType,
-  FC,
-  PropsWithChildren,
-} from "react";
+import React, { ComponentProps, ComponentType, PropsWithChildren } from "react";
 import * as Aria from "react-aria-components";
-import { ClearPropsContext, useProps } from "@/lib/propsContext";
+import { ClearPropsContext } from "@/lib/propsContext";
 import styles from "./Link.module.scss";
 import clsx from "clsx";
+import {
+  flowComponent,
+  FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
 
 export interface LinkProps
-  extends PropsWithChildren<Omit<Aria.LinkProps, "children" | "slot">> {
+  extends PropsWithChildren<Omit<Aria.LinkProps, "children" | "slot">>,
+    FlowComponentProps {
   /** @default "default" */
   variant?: "default" | "danger";
   inline?: boolean;
   linkComponent?: ComponentType<Omit<ComponentProps<"a">, "ref">>;
 }
 
-export const Link: FC<LinkProps> = (props) => {
+export const Link = flowComponent("Link", (props) => {
   const {
     children,
     className,
@@ -25,7 +25,7 @@ export const Link: FC<LinkProps> = (props) => {
     inline,
     linkComponent: Link = Aria.Link,
     ...rest
-  } = useProps("Link", props);
+  } = props;
 
   const rootClassName = clsx(
     styles.link,
@@ -41,6 +41,6 @@ export const Link: FC<LinkProps> = (props) => {
       </Link>
     </ClearPropsContext>
   );
-};
+});
 
 export default Link;

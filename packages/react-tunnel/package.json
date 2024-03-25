@@ -1,0 +1,59 @@
+{
+  "name": "@mittwald/react-tunnel",
+  "version": "0.1.0-alpha.51",
+  "type": "module",
+  "description": "It's like a Portal – but with React components",
+  "keywords": [
+    "layout",
+    "portal",
+    "react",
+    "react tree",
+    "teleport"
+  ],
+  "homepage": "https://mittwald.github.io/flow",
+  "repository": "https://github.com/mittwald/flow",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "types": "./dist/types/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "run vite build --config vite.build.config.ts",
+    "build:deps:watch": "run -T build:deps:watch @mittwald/react-tunnel",
+    "test": "",
+    "test:compile": "run tsc --noEmit",
+    "test:unit": "run vitest run"
+  },
+  "dependencies": {
+    "@preact/signals-react": "^2.0.1"
+  },
+  "devDependencies": {
+    "@testing-library/react": "^14.2.2",
+    "@types/node": "^20.11.30",
+    "@types/react": "^18.2.66",
+    "@types/react-dom": "^18.2.22",
+    "@vitejs/plugin-react": "^4.2.1",
+    "@vitest/coverage-v8": "^1.4.0",
+    "happy-dom": "^14.2.0",
+    "nx": "^18.1.1",
+    "prettier": "^3.2.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^5.4.2",
+    "vite": "^5.2.2",
+    "vite-plugin-banner": "^0.7.1",
+    "vite-plugin-checker": "^0.6.4",
+    "vite-plugin-dts": "^3.7.3",
+    "vite-plugin-externalize-deps": "^0.8.0",
+    "vitest": "^1.4.0"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
