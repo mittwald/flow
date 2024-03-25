@@ -16,6 +16,7 @@ import type { CopyButtonProps } from "@/components/CopyButton";
 import type { HeaderProps } from "@/components/Header/";
 import type { SwitchProps } from "@/components/Switch";
 import { StatusBadgeProps } from "@/components/StatusBadge";
+import type { ButtonGroupProps } from "@/components/ButtonGroup";
 import { AvatarProps } from "@/components/Avatar";
 import { ListItemContextMenuProps } from "@/components/List";
 
@@ -24,6 +25,7 @@ export * from "./types";
 export interface FlowComponentPropsTypes {
   Avatar: AvatarProps;
   Button: ButtonProps;
+  ButtonGroup: ButtonGroupProps;
   Content: ContentProps;
   CopyButton: CopyButtonProps;
   FieldDescription: FieldDescriptionProps;
@@ -50,6 +52,7 @@ const propsContextSupportingComponentsMap: Record<
 > = {
   Avatar: true,
   Button: true,
+  ButtonGroup: true,
   Content: true,
   CopyButton: true,
   FieldDescription: true,
