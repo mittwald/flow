@@ -1,5 +1,5 @@
 import React, { FC, PropsWithChildren } from "react";
-import tunnelContext from "@/lib/react/components/Tunnel/context";
+import tunnelContext from "@/context";
 import { useSignal } from "@preact/signals-react";
 
 export const TunnelProvider: FC<PropsWithChildren> = (props) => {
@@ -8,7 +8,7 @@ export const TunnelProvider: FC<PropsWithChildren> = (props) => {
   return (
     <tunnelContext.Provider
       value={{
-        nodes: useSignal({}),
+        children: useSignal({}),
       }}
     >
       {children}

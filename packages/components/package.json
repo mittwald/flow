@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-react-components",
-  "version": "0.1.0-alpha.50",
+  "version": "0.1.0-alpha.51",
   "type": "module",
   "description": "A React implementation of Flow, mittwald’s design system",
   "homepage": "https://mittwald.github.io/flow",
@@ -170,6 +170,7 @@
     "test:unit": "run vitest run"
   },
   "dependencies": {
+    "@mittwald/react-tunnel": "workspace:^",
     "@mittwald/react-use-promise": "^2.3.12",
     "@preact/signals-react": "^2.0.1",
     "@react-aria/utils": "^3.23.2",

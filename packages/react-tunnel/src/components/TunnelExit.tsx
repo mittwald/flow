@@ -1,5 +1,5 @@
 import { FC, PropsWithChildren, useContext } from "react";
-import tunnelContext from "@/lib/react/components/Tunnel/context";
+import tunnelContext from "@/context";
 import { useSignals } from "@preact/signals-react/runtime";
 
 interface Props extends PropsWithChildren {
@@ -9,13 +9,9 @@ interface Props extends PropsWithChildren {
 export const TunnelExit: FC<Props> = (props) => {
   const { children, id = "default" } = props;
   useSignals();
-  const { nodes } = useContext(tunnelContext);
-
-  if (id === undefined) {
-    return children;
-  }
-
-  return nodes.value[id] ?? children;
+  const tunnel = useContext(tunnelContext);
+  const tunneledChildren = tunnel.children.value[id];
+  return tunneledChildren ?? children;
 };
 
 export default TunnelExit;
