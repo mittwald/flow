@@ -2,7 +2,7 @@ import React, { FC, Suspense } from "react";
 import { useList } from "@/components/List/hooks/useList";
 import styles from "./ItemList.module.css";
 import clsx from "clsx";
-import { Item } from "@/components/List/components/Items";
+import { Item } from "@/components/List/components/Items/Item";
 
 interface Props {
   className?: string;

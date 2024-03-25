@@ -7,3 +7,8 @@
   border-style: var(--list-item--border-style);
   overflow: hidden;
 }
+
+.isLoading {
+  pointer-events: none;
+  opacity: 0.5;
+}
