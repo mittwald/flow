@@ -1,36 +1,19 @@
 .radioGroup {
-  display: flex;
-  flex-wrap: wrap;
   container-type: inline-size;
   isolation: isolate;
+}
+
+.radioOptions {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  order: 2;
 
   /* With icon or content */
   &:has(:global(.flow--radio-group--radio--content)),
   &:has(:global(.flow--radio-group--radio--icon)) {
     display: grid;
     gap: var(--radio-group--radio-to-radio-spacing);
-    .label {
-      grid-column: 1 / -1;
-      margin-bottom: calc(
-        (
-            var(--radio-group--radio-to-radio-spacing) - var(
-                --form-control--label-to-control-spacing
-              )
-          ) * -1
-      );
-    }
-    .fieldError,
-    .customFieldError,
-    .fieldDescription {
-      grid-column: 1 / -1;
-      margin-top: calc(
-        (
-            var(--radio-group--radio-to-radio-spacing) - var(
-                --form-control--control-to-info-spacing
-              )
-          ) * -1
-      );
-    }
   }
 
   /* With icon */
@@ -42,34 +25,4 @@
   &:has(:global(.flow--radio-group--radio--content)) {
     grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
   }
-
-  /* With field error */
-  &:has(.fieldError) {
-    .fieldDescription {
-      display: none;
-    }
-  }
-
-  /* With custom field error */
-  &:has(.customFieldError) .fieldError {
-    display: none;
-  }
-
-  &[data-disabled] {
-    .label {
-      color: var(--label--color--disabled);
-    }
-  }
-}
-
-.label {
-  width: 100%;
-  margin-bottom: var(--form-control--label-to-control-spacing);
-}
-
-.fieldError,
-.customFieldError,
-.fieldDescription {
-  margin-top: var(--form-control--control-to-info-spacing);
-  width: 100%;
 }

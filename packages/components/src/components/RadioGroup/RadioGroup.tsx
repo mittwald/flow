@@ -4,6 +4,8 @@ import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { FieldError } from "@/components/FieldError";
+import { TunnelExit, TunnelProvider } from "@/lib/react/components/Tunnel";
+import formFieldStyles from "../FormField/FormField.module.scss";
 
 export interface RadioGroupProps
   extends PropsWithChildren<Omit<Aria.RadioGroupProps, "children">> {}
@@ -11,26 +13,38 @@ export interface RadioGroupProps
 export const RadioGroup: FC<RadioGroupProps> = (props) => {
   const { children, className, ...rest } = props;
 
-  const rootClassName = clsx(styles.radioGroup, className);
+  const rootClassName = clsx(
+    styles.radioGroup,
+    formFieldStyles.formField,
+    className,
+  );
 
   const propsContext: PropsContext = {
     Label: {
-      className: styles.label,
+      className: formFieldStyles.label,
+      tunnelId: "label",
     },
     FieldDescription: {
-      className: styles.fieldDescription,
+      className: formFieldStyles.fieldDescription,
+      tunnelId: "fieldDescription",
     },
     FieldError: {
-      className: styles.customFieldError,
+      className: formFieldStyles.customFieldError,
+      tunnelId: "fieldError",
     },
   };
 
   return (
     <Aria.RadioGroup {...rest} className={rootClassName}>
       <PropsContextProvider props={propsContext}>
-        {children}
+        <TunnelProvider>
+          <TunnelExit id="label" />
+          <div className={styles.radioOptions}>{children}</div>
+          <TunnelExit id="fieldDescription" />
+          <TunnelExit id="fieldError" />
+        </TunnelProvider>
       </PropsContextProvider>
-      <FieldError className={styles.fieldError} />
+      <FieldError className={formFieldStyles.fieldError} />
     </Aria.RadioGroup>
   );
 };
