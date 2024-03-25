@@ -1,0 +1,48 @@
+@use "./focus";
+
+@mixin menuItem {
+  display: flex;
+  flex-direction: row;
+  color: var(--menu-item--color--default);
+
+  border: none;
+  border-radius: var(--menu-item--corner-radius);
+  background-color: var(--menu-item--background-color--default);
+  padding: var(--menu-item--padding-y) var(--menu-item--padding-x);
+
+  @include focus.focus;
+
+  /* Elements */
+  .icon {
+    order: 0;
+    color: var(--menu-item--icon-color--default);
+  }
+
+  .text {
+    margin-inline-start: var(--menu-item--icon-to-text-spacing);
+    order: 1;
+  }
+
+  &:hover {
+    background-color: var(--menu-item--background-color--hover);
+  }
+
+  &[data-focused] {
+    outline-style: none;
+  }
+
+  &[data-focus-visible] {
+    outline-style: solid;
+  }
+
+  &[aria-current="page"],
+  &[data-selected] {
+    background-color: var(--menu-item--background-color--current);
+    font-weight: var(--menu-item--font-weight--current);
+    color: var(--menu-item--color--current);
+
+    .icon {
+      color: var(--menu-item--icon-color--current);
+    }
+  }
+}

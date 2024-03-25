@@ -1,0 +1,20 @@
+context-menu:
+  box-shadow:
+    value: "{shadow.overlay}"
+  corner-radius:
+    value: "{corner-radius.default}"
+  padding:
+    value: "{size-px.s}"
+  background-color:
+    value: "{neutral.color.100}"
+
+context-menu-item:
+  corner-radius:
+    value: "{corner-radius.default}"
+  padding:
+    value: "{size-px.s}"
+  background-color:
+    hover:
+      value: "{primary-plain-background-color.hover}"
+    pressed:
+      value: "{primary-plain-background-color.pressed}"
