@@ -11,7 +11,7 @@ import { URL } from "url";
 
 const __dirname = new URL(".", import.meta.url).pathname;
 
-describe.skip("vite i18n plugin", () => {
+describe("vite i18n plugin", () => {
   test("resolve will return correct id", async () => {
     expect(plugin.resolveId).toBeDefined();
     expect(typeof plugin.resolveId).toBe("function");
