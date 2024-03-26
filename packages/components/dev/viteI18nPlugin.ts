@@ -70,7 +70,6 @@ export default {
 
       return {
         id: generateVirtualFileId(resolvedTranslationPath),
-        shouldTransformCachedModule: true,
         meta: {
           id,
           importer,
