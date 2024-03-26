@@ -2,7 +2,7 @@
 
 .checkbox {
   display: grid;
-  column-gap: var(--radio--icon-to-text-spacing);
+  column-gap: var(--checkbox--icon-to-text-spacing);
   grid-template-columns: auto 1fr;
   width: fit-content;
   border-radius: var(--corner-radius--default);
@@ -12,15 +12,15 @@
   &[data-selected],
   &[data-indeterminate] {
     .icon {
-      color: var(--radio--icon-color--selected);
+      color: var(--checkbox--icon-color--selected);
     }
   }
 
   &[data-disabled] {
-    color: var(--radio--color--disabled);
+    color: var(--checkbox--color--disabled);
 
     .icon {
-      color: var(--radio--icon-color--disabled);
+      color: var(--checkbox--icon-color--disabled);
     }
   }
 }
