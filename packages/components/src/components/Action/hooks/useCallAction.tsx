@@ -78,6 +78,7 @@ export const useCallAction = (
 
   const callWithStateHandling: ActionFn = (...args) => {
     try {
+      asyncActionResolved.current = false;
       const result = callActionAndParentAction(...args);
 
       if (result instanceof Promise) {
