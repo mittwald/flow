@@ -1,4 +1,4 @@
-import plugin, { moduleId } from "./viteI18nPlugin";
+import plugin, { generateVirtualFileId, moduleId } from "./viteI18nPlugin";
 import { test, describe, expect, vi } from "vitest";
 import type {
   PartialResolvedId,
@@ -7,15 +7,6 @@ import type {
 } from "rollup";
 import path from "path";
 import { HmrContext, ViteDevServer } from "vite";
-import crypt from "crypto";
-
-const generateVirtualFileId = (filePath: string): string => {
-  const virtualFileId = crypt
-    .createHash("md5")
-    .update(path.resolve(filePath))
-    .digest("hex");
-  return `${moduleId}${virtualFileId}`;
-};
 
 describe("vite i18n plugin", () => {
   test("resolve will return correct id", async () => {
