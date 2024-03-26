@@ -7,7 +7,7 @@
     "build": "run next build",
     "build:deps:watch": "run -T build:deps:watch @mittwald/flow-documentation",
     "build:imports": "run tsx dev/generateLiveCodeEditorGlobalImports.ts",
-    "dev": "run nx run-many --outputStyle=stream --projects=@mittwald/flow-documentation --targets=start,build:deps:watch",
+    "dev": "run nx run-many --outputStyle=stream --projects=@mittwald/flow-documentation --targets=start,build:deps:watch,build:imports",
     "start": "run next dev",
     "test:tsc": "run tsc --noEmit"
   },

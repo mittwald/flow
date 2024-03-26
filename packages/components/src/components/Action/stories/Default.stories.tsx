@@ -2,9 +2,9 @@ import type { Meta, StoryObj } from "@storybook/react";
 import Action from "../Action";
 import React from "react";
 import {
-  asyncAction,
-  syncAction,
-  trigger,
+  asyncFunction,
+  syncfunction,
+  button,
 } from "@/components/Button/stories/lib";
 
 const meta: Meta<typeof Action> = {
@@ -12,8 +12,8 @@ const meta: Meta<typeof Action> = {
   component: Action,
   render: (props) => <Action {...props} />,
   args: {
-    action: syncAction,
-    children: trigger,
+    action: syncfunction,
+    children: button,
   },
 };
 
@@ -25,26 +25,26 @@ export const Default: Story = {};
 
 export const Async: Story = {
   args: {
-    action: asyncAction,
+    action: asyncFunction,
   },
 };
 
 export const AsyncWithFeedback: Story = {
   args: {
-    action: asyncAction,
+    action: asyncFunction,
     feedback: true,
   },
 };
 
 export const Nested: Story = {
   args: {
-    children: <Action action={syncAction}>{trigger}</Action>,
+    children: <Action action={syncfunction}>{button}</Action>,
   },
 };
 
 export const NestedAsync: Story = {
   args: {
-    action: asyncAction,
-    children: <Action action={asyncAction}>{trigger}</Action>,
+    action: asyncFunction,
+    children: <Action action={asyncFunction}>{button}</Action>,
   },
 };
