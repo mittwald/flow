@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import React from "react";
 import Action from "@/components/Action";
 import { Button } from "@/components/Button";
-import { Mock, vitest } from "vitest";
+import { beforeEach, Mock, vitest } from "vitest";
 import userEvent from "@/lib/dev/vitestUserEvent";
 
 const asyncActionDuration = 700;
@@ -133,5 +133,32 @@ describe("Feedback", () => {
     await clickTrigger();
     await vitest.advanceTimersByTimeAsync(2000);
     expect(screen.queryByLabelText("Succeeded")).toBeNull();
+  });
+});
+
+describe("Pending state", () => {
+  beforeEach(() => {
+    asyncAction1.mockImplementation(async () => {
+      await sleep();
+      await sleep();
+    });
+  });
+
+  test("is shown when async action is pending", async () => {
+    render(<Action action={asyncAction1}>{button}</Action>);
+    await clickTrigger();
+    await vitest.advanceTimersByTimeAsync(1000);
+    screen.getByLabelText("Pending");
+  });
+
+  test("is hidden after some time", async () => {
+    render(
+      <Action action={asyncAction1} feedback>
+        {button}
+      </Action>,
+    );
+    await clickTrigger();
+    await vitest.advanceTimersByTimeAsync(2000);
+    expect(screen.queryByLabelText("Pending")).toBeNull();
   });
 });
