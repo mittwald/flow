@@ -56,7 +56,8 @@
 
 .content {
   grid-area: content;
-  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: auto;
   padding-bottom: var(--modal--padding-bottom);
   display: flex;
   flex-direction: column;
