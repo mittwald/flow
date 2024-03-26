@@ -5,8 +5,15 @@ import { getStates, getUsers, User } from "@/components/List/testData/userApi";
 import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
 import { usePromise } from "@mittwald/react-use-promise";
-import { ListFilter, ListItemView, ListLoaderAsync } from "@/components/List";
+import {
+  ListFilter,
+  ListItemContextMenu,
+  ListItemView,
+  ListLoaderAsync,
+} from "@/components/List";
 import { AsyncDataLoader } from "@/components/List/model/loading/types";
+import { Avatar } from "@/components/Avatar";
+import { Initials } from "@/components/Initials";
 
 const loadUsers: AsyncDataLoader<User> = async (opt) => {
   const response = await getUsers({
@@ -46,10 +53,17 @@ const meta: Meta<typeof List> = {
         <ListItemView<User>>
           {(user) => (
             <>
+              <Avatar>
+                <Initials>{`${user.name.first} ${user.name.last}`}</Initials>
+              </Avatar>
               <Heading>
-                {user.name.first} {user.name.last} ({user.location.state})
+                {user.name.first} {user.name.last}
               </Heading>
-              <Text>{user.emails[0]}</Text>
+              <Text>{user.location.state}</Text>
+              <ListItemContextMenu>
+                <ContextMenuItem>Show details</ContextMenuItem>
+                <ContextMenuItem>Delete</ContextMenuItem>
+              </ListItemContextMenu>
             </>
           )}
         </ListItemView>
