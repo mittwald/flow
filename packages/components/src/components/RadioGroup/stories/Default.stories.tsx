@@ -52,11 +52,11 @@ export const RadioDisabled: Story = {
 export const WithFieldError: Story = {
   render: (props) => (
     <RadioGroup {...props} isInvalid isRequired>
-      <Label>App</Label>
-      <Radio value="wordpress">WordPress</Radio>
-      <Radio value="typo3">TYPO3</Radio>
-      <Radio value="magento">Magento</Radio>
-      <FieldError>Select an app to continue</FieldError>
+      <Label>Role</Label>
+      <Radio value="admin">Admin</Radio>
+      <Radio value="member">Member</Radio>
+      <Radio value="accountant">Accountant</Radio>
+      <FieldError>Select a role to continue</FieldError>
     </RadioGroup>
   ),
 };
