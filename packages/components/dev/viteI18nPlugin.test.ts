@@ -1,4 +1,4 @@
-import plugin, { moduleId } from "./viteI18nPlugin";
+import plugin, { generateVirtualFileId, moduleId } from "./viteI18nPlugin";
 import { test, describe, expect, vi } from "vitest";
 import type {
   PartialResolvedId,
@@ -7,11 +7,8 @@ import type {
 } from "rollup";
 import path from "path";
 import { HmrContext, ViteDevServer } from "vite";
-import { URL } from "url";
 
-const __dirname = new URL(".", import.meta.url).pathname;
-
-describe.skip("vite i18n plugin", () => {
+describe("vite i18n plugin", () => {
   test("resolve will return correct id", async () => {
     expect(plugin.resolveId).toBeDefined();
     expect(typeof plugin.resolveId).toBe("function");
@@ -19,7 +16,7 @@ describe.skip("vite i18n plugin", () => {
     if (plugin.resolveId && typeof plugin.resolveId === "function") {
       const resolve = (await plugin.resolveId.apply({} as PluginContext, [
         "./locales/*.locale.json",
-        "./foo/foo.ts",
+        "./foo.ts",
         {
           isEntry: false,
           attributes: {},
@@ -28,10 +25,9 @@ describe.skip("vite i18n plugin", () => {
 
       expect(resolve).toBeDefined();
       expect(typeof resolve).toBe("object");
-      expect(resolve.id.startsWith("\x00.locale.json@")).toBeTruthy();
-      expect(
-        resolve.id.endsWith("1a1e1818b63c26ce9b92f94ec4c972dd"),
-      ).toBeTruthy();
+      expect(resolve.id).toMatch(
+        generateVirtualFileId("./locales/*.locale.json"),
+      );
     }
   });
 
@@ -172,13 +168,13 @@ describe.skip("vite i18n plugin", () => {
       plugin.handleHotUpdate.apply(this, [hmrContext]);
       expect(hmrContext.server.moduleGraph.getModuleById).toBeCalledTimes(3);
       expect(hmrContext.server.moduleGraph.getModuleById).toBeCalledWith(
-        `${moduleId}b20c85a80a5c361dbb4a0afdb0674ef1`,
+        generateVirtualFileId("./dev/test/locales/*.locale.json"),
       );
       expect(hmrContext.server.moduleGraph.getModuleById).toBeCalledWith(
-        `${moduleId}8548eb70fa2e0577ba1853e18a3a8d29`,
+        generateVirtualFileId("./dev/test/locales/foo.locale.json"),
       );
       expect(hmrContext.server.moduleGraph.getModuleById).toBeCalledWith(
-        `${moduleId}c792203dcbe4dbc5e33cf1ca0446134d`,
+        generateVirtualFileId("./dev/test/locales/bar.locale.json"),
       );
 
       expect(hmrContext.server.reloadModule).toBeCalledTimes(3);
