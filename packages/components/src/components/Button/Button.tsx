@@ -18,6 +18,8 @@ import {
   flowComponent,
   FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
+import locales from "./locales/*.locale.json";
+import { useLocalizedStringFormatter } from "react-aria";
 
 export interface ButtonProps
   extends PropsWithChildren<Omit<Aria.ButtonProps, "style">>,
@@ -34,7 +36,24 @@ export interface ButtonProps
   isFailed?: boolean;
 }
 
+const disablePendingProps = (props: ButtonProps) => {
+  if (props.isPending || props.isSucceeded || props.isFailed) {
+    props = { ...props };
+    props.onPress = undefined;
+    props.onPressStart = undefined;
+    props.onPressEnd = undefined;
+    props.onPressChange = undefined;
+    props.onPressUp = undefined;
+    props.onKeyDown = undefined;
+    props.onKeyUp = undefined;
+  }
+
+  return props;
+};
+
 export const Button = flowComponent("Button", (props) => {
+  props = disablePendingProps(props);
+
   const {
     variant = "primary",
     style = "solid",
@@ -45,6 +64,7 @@ export const Button = flowComponent("Button", (props) => {
     isDisabled,
     isSucceeded,
     isFailed,
+    "aria-label": ariaLabel,
     ...restProps
   } = props;
 
@@ -70,6 +90,17 @@ export const Button = flowComponent("Button", (props) => {
     },
   };
 
+  const stringFormatter = useLocalizedStringFormatter(locales);
+
+  const stateLabel =
+    isSucceeded || isFailed || isPending
+      ? stringFormatter.format(
+          `button.${
+            isSucceeded ? "isSucceeded" : isFailed ? "isFailed" : "isPending"
+          }`,
+        )
+      : undefined;
+
   const StateIconComponent = isSucceeded
     ? IconSucceeded
     : isFailed
@@ -88,7 +119,8 @@ export const Button = flowComponent("Button", (props) => {
     <ClearPropsContext>
       <Aria.Button
         className={rootClassName}
-        isDisabled={isDisabled || isPending || isSucceeded || isFailed}
+        isDisabled={isDisabled}
+        aria-label={stateLabel ?? ariaLabel}
         {...restProps}
       >
         <Wrap if={stateIcon}>
