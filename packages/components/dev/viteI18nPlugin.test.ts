@@ -10,7 +10,11 @@ import { HmrContext, ViteDevServer } from "vite";
 import crypt from "crypto";
 
 const generateVirtualFileId = (filePath: string): string => {
-  return crypt.createHash("md5").update(path.resolve(filePath)).digest("hex");
+  const virtualFileId = crypt
+    .createHash("md5")
+    .update(path.resolve(filePath))
+    .digest("hex");
+  return `${moduleId}${virtualFileId}`;
 };
 
 describe("vite i18n plugin", () => {
@@ -31,7 +35,7 @@ describe("vite i18n plugin", () => {
       expect(resolve).toBeDefined();
       expect(typeof resolve).toBe("object");
       expect(resolve.id).toMatch(
-        `${moduleId}${generateVirtualFileId("./locales/*.locale.json")}`,
+        generateVirtualFileId("./locales/*.locale.json"),
       );
     }
   });
@@ -173,13 +177,13 @@ describe("vite i18n plugin", () => {
       plugin.handleHotUpdate.apply(this, [hmrContext]);
       expect(hmrContext.server.moduleGraph.getModuleById).toBeCalledTimes(3);
       expect(hmrContext.server.moduleGraph.getModuleById).toBeCalledWith(
-        `${moduleId}${generateVirtualFileId("./dev/test/locales/*.locale.json")}`,
+        generateVirtualFileId("./dev/test/locales/*.locale.json"),
       );
       expect(hmrContext.server.moduleGraph.getModuleById).toBeCalledWith(
-        `${moduleId}${generateVirtualFileId("./dev/test/locales/foo.locale.json")}`,
+        generateVirtualFileId("./dev/test/locales/foo.locale.json"),
       );
       expect(hmrContext.server.moduleGraph.getModuleById).toBeCalledWith(
-        `${moduleId}${generateVirtualFileId("./dev/test/locales/bar.locale.json")}`,
+        generateVirtualFileId("./dev/test/locales/bar.locale.json"),
       );
 
       expect(hmrContext.server.reloadModule).toBeCalledTimes(3);
