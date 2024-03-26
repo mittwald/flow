@@ -19,6 +19,7 @@ export default defineConfig(
     build: {
       lib: {
         entry: {
+          Action: "./src/components/Action/index.ts",
           Avatar: "./src/components/Avatar/index.ts",
           Button: "./src/components/Button/index.ts",
           ButtonGroup: "./src/components/ButtonGroup/index.ts",

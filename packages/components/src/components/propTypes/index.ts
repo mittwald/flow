@@ -15,12 +15,14 @@ import type { ImageProps } from "@/components/Image";
 import type { CopyButtonProps } from "@/components/CopyButton";
 import type { HeaderProps } from "@/components/Header/";
 import type { SwitchProps } from "@/components/Switch";
-import { StatusBadgeProps } from "@/components/StatusBadge";
+import type { StatusBadgeProps } from "@/components/StatusBadge";
 import type { ButtonGroupProps } from "@/components/ButtonGroup";
+import type { ActionProps } from "@/components/Action";
 
 export * from "./types";
 
 export interface FlowComponentPropsTypes {
+  Action: ActionProps;
   Button: ButtonProps;
   ButtonGroup: ButtonGroupProps;
   Content: ContentProps;
@@ -46,6 +48,7 @@ const propsContextSupportingComponentsMap: Record<
   keyof FlowComponentPropsTypes,
   true
 > = {
+  Action: true,
   Text: true,
   Button: true,
   ButtonGroup: true,
