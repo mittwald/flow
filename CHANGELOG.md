@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.54](https://github.com/mittwald/flow/compare/0.1.0-alpha.53...0.1.0-alpha.54) (2024-03-26)
+
+### Bug Fixes
+
+- make button states accessible
+  ([33d1175](https://github.com/mittwald/flow/commit/33d117592b3013ac299bfdb12ff425d0a106850c))
+
+### Features
+
+- **List:** visualize loading state
+  ([08b831a](https://github.com/mittwald/flow/commit/08b831a85ebdb2b00e19b5b70870dd8983200d9b))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.53](https://github.com/mittwald/flow/compare/0.1.0-alpha.52...0.1.0-alpha.53) (2024-03-25)
 
 ### Bug Fixes
