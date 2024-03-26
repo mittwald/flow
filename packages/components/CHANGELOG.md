@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.56](https://github.com/mittwald/flow/compare/0.1.0-alpha.55...0.1.0-alpha.56) (2024-03-26)
+
+### Bug Fixes
+
+- **Action:** fix not showing pending on second call
+  ([8f37a7e](https://github.com/mittwald/flow/commit/8f37a7ee7804f396c48bfe1e7b6209bec6823f84))
+- add package export for Action component
+  ([1964d8d](https://github.com/mittwald/flow/commit/1964d8d964505f918b229f8c6c3ae2e51daaefe4))
+
+### Features
+
+- Add Action component
+  ([f50ba0f](https://github.com/mittwald/flow/commit/f50ba0f7749efe4ebb529f98ad44b3e5efd65d15))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.55](https://github.com/mittwald/flow/compare/0.1.0-alpha.54...0.1.0-alpha.55) (2024-03-26)
 
 ### Features
