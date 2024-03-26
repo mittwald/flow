@@ -2,4 +2,13 @@
   outline-color: var(--focus--outline-color);
   outline-offset: var(--focus--outline-offset);
   outline-width: var(--focus--outline-width);
+
+  &[data-focused],
+  :focus {
+    outline-style: none;
+  }
+  &[data-focus-visible],
+  :focus-visible {
+    outline-style: solid;
+  }
 }

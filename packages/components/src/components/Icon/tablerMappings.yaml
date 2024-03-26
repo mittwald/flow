@@ -2,7 +2,9 @@ App: AppWindow
 BackLink: ArrowLeft
 Backup: Clock
 Check: Check
-Checked: SquareCheckFilled
+CheckboxChecked: SquareCheckFilled
+CheckboxEmpty: Square
+CheckboxIndeterminate: SquareMinusFilled
 ChevronDown: ChevronDown
 ChevronLeft: ChevronLeft
 ChevronRight: ChevronRight
@@ -48,5 +50,4 @@ Support: Headset
 Terminate: FileX
 TileView: LayoutGrid
 Time: Clock
-Unchecked: Square
 Warning: AlertCircle

@@ -1,8 +1,13 @@
+@use "@/styles/mixins/focus";
+
 .radio {
   display: grid;
   column-gap: var(--radio--icon-to-text-spacing);
   grid-template-columns: auto 1fr;
   width: fit-content;
+  border-radius: var(--corner-radius--default);
+
+  @include focus.focus;
 
   &[data-selected] {
     .icon {
