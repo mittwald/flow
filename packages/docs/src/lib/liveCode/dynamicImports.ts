@@ -3,9 +3,9 @@
 import { ImportMapping } from "@/lib/liveCode/types";
 import { lazy } from "react";
 import { NavigationItem as I30 } from "@mittwald/flow-react-components/Navigation";
-import { ListItemView as I43 } from "@mittwald/flow-react-components/List";
-import { ListStaticData as I44 } from "@mittwald/flow-react-components/List";
-import { users as I45 } from "@/content/02-components/structure/list/examples/userApi";
+import { ListItemView as I49 } from "@mittwald/flow-react-components/List";
+import { ListStaticData as I50 } from "@mittwald/flow-react-components/List";
+import { users as I51 } from "@/content/02-components/structure/list/examples/userApi";
 
 export const liveCodeEditorGlobalImports: ImportMapping = {
   "ExampleSvg:@/content/01-getting-started/stylesheet/examples/components/ExampleSvg": lazy(() => import("@/content/01-getting-started/stylesheet/examples/components/ExampleSvg").then(module => ({ default: module.ExampleSvg } ))),
@@ -41,6 +41,12 @@ export const liveCodeEditorGlobalImports: ImportMapping = {
 "NavigationItem:@mittwald/flow-react-components/Navigation": I30,
 "IconProject:@mittwald/flow-react-components/Icons": lazy(() => import("@mittwald/flow-react-components/Icons").then(module => ({ default: module.IconProject } ))),
 "IconServer:@mittwald/flow-react-components/Icons": lazy(() => import("@mittwald/flow-react-components/Icons").then(module => ({ default: module.IconServer } ))),
+"Tab:@mittwald/flow-react-components/Tabs": lazy(() => import("@mittwald/flow-react-components/Tabs").then(module => ({ default: module.Tab } ))),
+"TabPanel:@mittwald/flow-react-components/Tabs": lazy(() => import("@mittwald/flow-react-components/Tabs").then(module => ({ default: module.TabPanel } ))),
+"Tabs:@mittwald/flow-react-components/Tabs": lazy(() => import("@mittwald/flow-react-components/Tabs").then(module => ({ default: module.Tabs } ))),
+"TabList:@mittwald/flow-react-components/Tabs": lazy(() => import("@mittwald/flow-react-components/Tabs").then(module => ({ default: module.TabList } ))),
+"Section:@mittwald/flow-react-components/Section": lazy(() => import("@mittwald/flow-react-components/Section").then(module => ({ default: module.Section } ))),
+"Header:@mittwald/flow-react-components/Header": lazy(() => import("@mittwald/flow-react-components/Header").then(module => ({ default: module.Header } ))),
 "Modal:@mittwald/flow-react-components/Modal": lazy(() => import("@mittwald/flow-react-components/Modal").then(module => ({ default: module.Modal } ))),
 "ModalTrigger:@mittwald/flow-react-components/Modal": lazy(() => import("@mittwald/flow-react-components/Modal").then(module => ({ default: module.ModalTrigger } ))),
 "Tooltip:@mittwald/flow-react-components/Tooltip": lazy(() => import("@mittwald/flow-react-components/Tooltip").then(module => ({ default: module.Tooltip } ))),
@@ -51,9 +57,7 @@ export const liveCodeEditorGlobalImports: ImportMapping = {
 "StatusIcon:@mittwald/flow-react-components/StatusIcon": lazy(() => import("@mittwald/flow-react-components/StatusIcon").then(module => ({ default: module.StatusIcon } ))),
 "LayoutCard:@mittwald/flow-react-components/LayoutCard": lazy(() => import("@mittwald/flow-react-components/LayoutCard").then(module => ({ default: module.LayoutCard } ))),
 "List:@mittwald/flow-react-components/List": lazy(() => import("@mittwald/flow-react-components/List").then(module => ({ default: module.List } ))),
-"ListItemView:@mittwald/flow-react-components/List": I43,
-"ListStaticData:@mittwald/flow-react-components/List": I44,
-"users:@/content/02-components/structure/list/examples/userApi": I45,
-"Section:@mittwald/flow-react-components/Section": lazy(() => import("@mittwald/flow-react-components/Section").then(module => ({ default: module.Section } ))),
-"Header:@mittwald/flow-react-components/Header": lazy(() => import("@mittwald/flow-react-components/Header").then(module => ({ default: module.Header } ))),
+"ListItemView:@mittwald/flow-react-components/List": I49,
+"ListStaticData:@mittwald/flow-react-components/List": I50,
+"users:@/content/02-components/structure/list/examples/userApi": I51,
 };

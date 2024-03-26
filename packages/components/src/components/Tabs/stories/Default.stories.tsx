@@ -5,9 +5,11 @@ import { TabList } from "@/components/Tabs/components/TabList";
 import { Section } from "@/components/Section";
 import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
-import { dummyText } from "@/lib/dev/dummyText";
 import { TextField } from "@/components/TextField";
 import { Label } from "@/components/Label";
+import { LabeledValue } from "@/components/LabeledValue";
+import { Switch } from "@/components/Switch";
+import { Header } from "@/components/Header";
 
 const meta: Meta<typeof Tabs> = {
   title: "Navigation/Tabs",
@@ -16,27 +18,37 @@ const meta: Meta<typeof Tabs> = {
     <Tabs {...props}>
       <TabList>
         <Tab id="general">General</Tab>
-        <Tab id="software">Software</Tab>
-        <Tab id="configuration">Configuration</Tab>
+        <Tab id="storage">Storage</Tab>
+        <Tab id="spam">Spam protection</Tab>
       </TabList>
       <TabPanel id="general">
         <Section>
           <Heading>General</Heading>
-          <Text>{dummyText.medium}</Text>
-        </Section>
-      </TabPanel>
-      <TabPanel id="software">
-        <Section>
-          <Heading>Software</Heading>
-          <Text>{dummyText.long}</Text>
-        </Section>
-      </TabPanel>
-      <TabPanel id="configuration">
-        <Section>
-          <Heading>Configuration</Heading>
-          <TextField>
-            <Label>Hostname</Label>
+          <TextField defaultValue="example@mittwald.de">
+            <Label>Mail address</Label>
           </TextField>
+        </Section>
+      </TabPanel>
+      <TabPanel id="storage">
+        <Section>
+          <Heading>Storage</Heading>
+          <LabeledValue>
+            <Label>Available storage</Label>
+            <Text>2.4 GB</Text>
+          </LabeledValue>
+        </Section>
+      </TabPanel>
+      <TabPanel id="spam">
+        <Section>
+          <Header>
+            <Heading>Spam protection</Heading>
+            <Switch>Spam protection</Switch>
+          </Header>
+          <Text>
+            The spam filter protects you from unwanted emails. Nobody wants
+            garbage in their inbox, so we recommend that you always leave spam
+            protection activated.
+          </Text>
         </Section>
       </TabPanel>
     </Tabs>
