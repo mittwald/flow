@@ -1,0 +1,7 @@
+@use "@/styles/mixins/focus";
+
+.tabPanel {
+  padding: var(--tab-panel--padding);
+
+  @include focus.focus;
+}
