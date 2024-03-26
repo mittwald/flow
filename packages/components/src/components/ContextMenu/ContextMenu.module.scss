@@ -3,7 +3,7 @@
   border-radius: var(--context-menu--corner-radius);
   padding: var(--context-menu--padding);
   background-color: var(--context-menu--background-color);
-  overflow-y: scroll;
+  overflow-y: auto;
 
   &[data-placement="top"] {
     --origin: translateY(var(--size-px--s));
@@ -31,7 +31,7 @@
   }
 }
 
-.menu {
+.menuList {
   display: flex;
   flex-direction: column;
   row-gap: var(--menu--item-to-item-spacing);

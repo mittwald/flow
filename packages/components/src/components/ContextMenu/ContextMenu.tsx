@@ -13,7 +13,7 @@ export const ContextMenu: FC<ContextMenuProps> = (props) => {
 
   return (
     <Aria.Popover className={styles.contextMenu} {...rest}>
-      <Aria.Menu className={styles.menu} onAction={onAction}>
+      <Aria.Menu className={styles.menuList} onAction={onAction}>
         {children}
       </Aria.Menu>
     </Aria.Popover>
