@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-react-components",
-  "version": "0.1.0-alpha.53",
+  "version": "0.1.0-alpha.55",
   "type": "module",
   "description": "A React implementation of Flow, mittwald’s design system",
   "homepage": "https://mittwald.github.io/flow",
@@ -29,6 +29,10 @@
     "./Content": {
       "types": "./dist/types/components/Content/index.d.ts",
       "import": "./dist/Content.js"
+    },
+    "./ContextMenu": {
+      "types": "./dist/types/components/ContextMenu/index.d.ts",
+      "import": "./dist/ContextMenu.js"
     },
     "./CopyButton": {
       "types": "./dist/types/components/CopyButton/index.d.ts",

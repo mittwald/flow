@@ -122,7 +122,10 @@
       color: var(--button--#{$variant}-#{$style}-content-color--pressed);
     }
 
-    &[disabled] {
+    &[disabled],
+    &.isPending,
+    &.isFailed,
+    &.isSucceeded {
       background-color: var(--button--disabled-#{$style}-background-color);
       color: var(--button--disabled-#{$style}-content-color);
     }
