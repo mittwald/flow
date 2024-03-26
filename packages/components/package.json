@@ -30,6 +30,10 @@
       "types": "./dist/types/components/Content/index.d.ts",
       "import": "./dist/Content.js"
     },
+    "./ContextMenu": {
+      "types": "./dist/types/components/ContextMenu/index.d.ts",
+      "import": "./dist/ContextMenu.js"
+    },
     "./CopyButton": {
       "types": "./dist/types/components/CopyButton/index.d.ts",
       "import": "./dist/CopyButton.js"
