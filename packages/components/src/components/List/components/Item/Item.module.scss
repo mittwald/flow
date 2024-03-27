@@ -1,56 +1,61 @@
 @use "@/styles/mixins/focus";
 
-.listItem {
+.item {
+  --title-width: 30ch;
+  cursor: default;
+
   padding: var(--list-item--padding);
   background-color: var(--list-item--background-color--default);
+
   &:not(:last-child) {
     border-bottom-color: var(--list-item--border-color);
     border-bottom-width: var(--list-item--border-width);
     border-bottom-style: var(--list-item--border-style);
   }
+
   display: grid;
   grid-column-gap: var(--list-item--content-to-content-spacing);
 
   grid-template-areas:
-    "avatar title    content contextMenu"
-    "avatar subtitle content contextMenu";
-  grid-template-columns: auto 40ch 1fr auto;
+    "avatar title    content optionsButton"
+    "avatar subtitle content optionsButton";
+  grid-template-columns: auto var(--title-width) 1fr auto;
 
-  &:not(:has(.contextMenu)) {
+  &:not(:has(.optionsButton)) {
     grid-template-areas:
       "avatar title    content"
       "avatar subtitle content";
-    grid-template-columns: auto 40ch 1fr;
+    grid-template-columns: auto var(--title-width) 1fr;
   }
 
   &:not(:has(.avatar)) {
     grid-template-areas:
-      "title    content contextMenu"
-      "subtitle content contextMenu";
-    grid-template-columns: 40ch 1fr auto;
+      "title    content optionsButton"
+      "subtitle content optionsButton";
+    grid-template-columns: var(--title-width) 1fr auto;
 
-    &:not(:has(.contextMenu)) {
+    &:not(:has(.optionsButton)) {
       grid-template-areas:
         "title    content"
         "subtitle content";
-      grid-template-columns: 40ch 1fr;
+      grid-template-columns: var(--title-width) 1fr;
     }
   }
 
   &:not(:has(.text)) {
-    grid-template-areas: "avatar title content contextMenu";
+    grid-template-areas: "avatar title content optionsButton";
 
     &:not(:has(.avatar)) {
-      grid-template-areas: "title content contextMenu";
+      grid-template-areas: "title content optionsButton";
 
-      &:not(:has(.contextMenu)) {
+      &:not(:has(.optionsButton)) {
         grid-template-areas: "title content";
       }
     }
   }
 }
 
-a.listItem {
+a.item {
   @include focus.focus;
   outline-offset: calc(var(--size-px--xs) * -1);
 
@@ -82,7 +87,7 @@ a.listItem {
   grid-area: content;
 }
 
-.contextMenu {
-  grid-area: contextMenu;
+.optionsButton {
+  grid-area: optionsButton;
   align-self: center;
 }

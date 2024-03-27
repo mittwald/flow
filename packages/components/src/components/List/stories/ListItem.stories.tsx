@@ -4,8 +4,7 @@ import React from "react";
 import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
 import { Content } from "@/components/Content";
-import { ListItemContextMenu } from "@/components/List";
-import { ContextMenuItem } from "@/components/ContextMenu";
+import { ContextMenu, ContextMenuItem } from "@/components/ContextMenu";
 import defaultMeta from "./Default.stories";
 import { Item } from "@/components/List/components/Item";
 import { Avatar } from "@/components/Avatar";
@@ -26,9 +25,9 @@ export const WithoutAvatar: Story = {
       <Heading>John Doe</Heading>
       <Text>Mittwald</Text>
       <Content style={{ background: "lightgrey" }}></Content>
-      <ListItemContextMenu>
+      <ContextMenu>
         <ContextMenuItem>Show details</ContextMenuItem>
-      </ListItemContextMenu>
+      </ContextMenu>
     </Item>
   ),
 };
@@ -38,9 +37,9 @@ export const WithoutSubtitle: Story = {
     <Item>
       <Heading>John Doe</Heading>
       <Content style={{ background: "lightgrey" }}></Content>
-      <ListItemContextMenu>
+      <ContextMenu>
         <ContextMenuItem>Show details</ContextMenuItem>
-      </ListItemContextMenu>
+      </ContextMenu>
     </Item>
   ),
 };
@@ -52,9 +51,9 @@ export const WithoutContent: Story = {
         <IconEmail />
       </Avatar>
       <Heading>john@doe.de</Heading>
-      <ListItemContextMenu>
+      <ContextMenu>
         <ContextMenuItem>Show details</ContextMenuItem>
-      </ListItemContextMenu>
+      </ContextMenu>
     </Item>
   ),
 };

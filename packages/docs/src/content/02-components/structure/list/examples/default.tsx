@@ -2,7 +2,6 @@ import {
   List,
   ListItemView,
   ListStaticData,
-  ListItemContextMenu,
 } from "@mittwald/flow-react-components/List";
 import {
   type User,
@@ -12,7 +11,10 @@ import { Avatar } from "@mittwald/flow-react-components/Avatar";
 import { Initials } from "@mittwald/flow-react-components/Initials";
 import { Heading } from "@mittwald/flow-react-components/Heading";
 import { Text } from "@mittwald/flow-react-components/Text";
-import { ContextMenuItem } from "@mittwald/flow-react-components/ContextMenu";
+import {
+  ContextMenu,
+  ContextMenuItem,
+} from "@mittwald/flow-react-components/ContextMenu";
 
 <List>
   <ListStaticData data={users} />
@@ -26,10 +28,10 @@ import { ContextMenuItem } from "@mittwald/flow-react-components/ContextMenu";
           {user.name.first} {user.name.last}
         </Heading>
         <Text>{user.location.state}</Text>
-        <ListItemContextMenu>
+        <ContextMenu>
           <ContextMenuItem>Show details</ContextMenuItem>
           <ContextMenuItem>Delete</ContextMenuItem>
-        </ListItemContextMenu>
+        </ContextMenu>
       </>
     )}
   </ListItemView>

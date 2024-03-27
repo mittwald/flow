@@ -5,17 +5,12 @@ import { getStates, getUsers, User } from "@/components/List/testData/userApi";
 import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
 import { usePromise } from "@mittwald/react-use-promise";
-import {
-  ListFilter,
-  ListItemContextMenu,
-  ListItemView,
-  ListLoaderAsync,
-} from "@/components/List";
+import { ListFilter, ListItemView, ListLoaderAsync } from "@/components/List";
 import { AsyncDataLoader } from "@/components/List/model/loading/types";
 import { Avatar } from "@/components/Avatar";
 import { Initials } from "@/components/Initials";
-import { ContextMenuItem } from "@/components/ContextMenu";
-import ListItemLink from "@/components/List/components/ListItemLink";
+import { ContextMenu, ContextMenuItem } from "@/components/ContextMenu";
+import { Link } from "@/components/Link";
 
 const loadUsers: AsyncDataLoader<User> = async (opt) => {
   const response = await getUsers({
@@ -62,10 +57,10 @@ const meta: Meta<typeof List> = {
                 {user.name.first} {user.name.last}
               </Heading>
               <Text>{user.location.state}</Text>
-              <ListItemContextMenu>
+              <ContextMenu>
                 <ContextMenuItem>Show details</ContextMenuItem>
                 <ContextMenuItem>Delete</ContextMenuItem>
-              </ListItemContextMenu>
+              </ContextMenu>
             </>
           )}
         </ListItemView>
@@ -94,19 +89,21 @@ export const ItemsWithLink: Story = {
         />
         <ListItemView<User>>
           {(user) => (
-            <ListItemLink href={user.website}>
+            <Link href="#">
               <Avatar>
-                <Initials>{`${user.name.first} ${user.name.last}`}</Initials>
+                <Initials>
+                  {user.name.first} {user.name.last}
+                </Initials>
               </Avatar>
               <Heading>
                 {user.name.first} {user.name.last}
               </Heading>
               <Text>{user.location.state}</Text>
-              <ListItemContextMenu>
+              <ContextMenu>
                 <ContextMenuItem>Show details</ContextMenuItem>
                 <ContextMenuItem>Delete</ContextMenuItem>
-              </ListItemContextMenu>
-            </ListItemLink>
+              </ContextMenu>
+            </Link>
           )}
         </ListItemView>
       </List>

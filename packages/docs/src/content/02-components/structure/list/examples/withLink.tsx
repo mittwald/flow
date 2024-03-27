@@ -2,8 +2,6 @@ import {
   List,
   ListItemView,
   ListStaticData,
-  ListItemContextMenu,
-  ListItemLink,
 } from "@mittwald/flow-react-components/List";
 import {
   type User,
@@ -13,13 +11,16 @@ import { Avatar } from "@mittwald/flow-react-components/Avatar";
 import { Initials } from "@mittwald/flow-react-components/Initials";
 import { Heading } from "@mittwald/flow-react-components/Heading";
 import { Text } from "@mittwald/flow-react-components/Text";
-import { ContextMenuItem } from "@mittwald/flow-react-components/ContextMenu";
+import ContextMenu, {
+  ContextMenuItem,
+} from "@mittwald/flow-react-components/ContextMenu";
+import { Link } from "@mittwald/flow-react-components/Link";
 
 <List>
   <ListStaticData data={users} />
   <ListItemView<User>>
     {(user) => (
-      <ListItemLink href={user.website}>
+      <Link href={user.website}>
         <Avatar>
           <Initials>{`${user.name.first} ${user.name.last}`}</Initials>
         </Avatar>
@@ -27,11 +28,11 @@ import { ContextMenuItem } from "@mittwald/flow-react-components/ContextMenu";
           {user.name.first} {user.name.last}
         </Heading>
         <Text>{user.location.state}</Text>
-        <ListItemContextMenu>
+        <ContextMenu>
           <ContextMenuItem>Show details</ContextMenuItem>
           <ContextMenuItem>Delete</ContextMenuItem>
-        </ListItemContextMenu>
-      </ListItemLink>
+        </ContextMenu>
+      </Link>
     )}
   </ListItemView>
 </List>;

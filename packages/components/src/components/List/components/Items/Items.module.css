@@ -8,6 +8,10 @@
   overflow: hidden;
 }
 
+.items:empty {
+  border: none;
+}
+
 .isLoading {
   pointer-events: none;
   opacity: 0.5;
