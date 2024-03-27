@@ -11,16 +11,16 @@ import { Avatar } from "@mittwald/flow-react-components/Avatar";
 import { Initials } from "@mittwald/flow-react-components/Initials";
 import { Heading } from "@mittwald/flow-react-components/Heading";
 import { Text } from "@mittwald/flow-react-components/Text";
-import {
-  ContextMenu,
+import ContextMenu, {
   ContextMenuItem,
 } from "@mittwald/flow-react-components/ContextMenu";
+import { Link } from "@mittwald/flow-react-components/Link";
 
 <List>
   <ListStaticData data={users} />
   <ListItemView<User>>
     {(user) => (
-      <>
+      <Link href={user.website}>
         <Avatar>
           <Initials>{`${user.name.first} ${user.name.last}`}</Initials>
         </Avatar>
@@ -32,7 +32,7 @@ import {
           <ContextMenuItem>Show details</ContextMenuItem>
           <ContextMenuItem>Delete</ContextMenuItem>
         </ContextMenu>
-      </>
+      </Link>
     )}
   </ListItemView>
 </List>;
