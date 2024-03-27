@@ -28,9 +28,9 @@ export const Action: FC<ActionProps> = (props) => {
     : toggleModal
       ? actions.toggleModal(toggleModal)
       : openModal
-        ? actions.toggleModal(openModal)
+        ? actions.openModal(openModal)
         : closeModal
-          ? actions.toggleModal(closeModal)
+          ? actions.closeModal(closeModal)
           : undefined;
 
   const { callAction, state } = useCallAction(action, { feedback });
