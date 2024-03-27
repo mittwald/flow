@@ -15,14 +15,16 @@ import type { ImageProps } from "@/components/Image";
 import type { CopyButtonProps } from "@/components/CopyButton";
 import type { HeaderProps } from "@/components/Header/";
 import type { SwitchProps } from "@/components/Switch";
-import { StatusBadgeProps } from "@/components/StatusBadge";
+import type { StatusBadgeProps } from "@/components/StatusBadge";
 import type { ButtonGroupProps } from "@/components/ButtonGroup";
 import { AvatarProps } from "@/components/Avatar";
 import { ListItemContextMenuProps } from "@/components/List";
+import type { ActionProps } from "@/components/Action";
 
 export * from "./types";
 
 export interface FlowComponentPropsTypes {
+  Action: ActionProps;
   Avatar: AvatarProps;
   Button: ButtonProps;
   ButtonGroup: ButtonGroupProps;
@@ -50,6 +52,7 @@ const propsContextSupportingComponentsMap: Record<
   keyof FlowComponentPropsTypes,
   true
 > = {
+  Action: true,
   Avatar: true,
   Button: true,
   ButtonGroup: true,

@@ -10,6 +10,10 @@
       "types": "./dist/types/components/Avatar/index.d.ts",
       "import": "./dist/Avatar.js"
     },
+    "./Action": {
+      "types": "./dist/types/components/Action/index.d.ts",
+      "import": "./dist/Action.js"
+    },
     "./Button": {
       "types": "./dist/types/components/Button/index.d.ts",
       "import": "./dist/Button.js"
@@ -213,7 +217,10 @@
     "@storybook/react-vite": "^7.6.17",
     "@storybook/testing-library": "^0.2.2",
     "@storybook/theming": "^7.6.17",
+    "@testing-library/dom": "^9.3.4",
+    "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^14.2.2",
+    "@testing-library/user-event": "^14.5.2",
     "@types/invariant": "^2.2.37",
     "@types/node": "20.11.30",
     "@types/prettier": "^3.0.0",
