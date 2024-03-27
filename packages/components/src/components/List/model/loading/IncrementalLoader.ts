@@ -103,6 +103,7 @@ export class IncrementalLoader<T> {
     const asyncResource = this.getPageDataAsyncResource(pageIndex);
 
     const { data, itemTotalCount } = asyncResource.use();
+    const loadingState = asyncResource.watchState();
 
     useEffect(() => {
       this.updatePageData(pageIndex, data);
@@ -111,6 +112,10 @@ export class IncrementalLoader<T> {
         this.list.pagination.updateItemTotalCount(itemTotalCount);
       }
     }, [pageIndex, data, itemTotalCount, asyncResource]);
+
+    useEffect(() => {
+      this.updatePageLoadingState(pageIndex, loadingState);
+    }, [pageIndex, loadingState]);
   }
 
   private getDataLoaderOptions(pageIndex: number): DataLoaderOptions<T> {

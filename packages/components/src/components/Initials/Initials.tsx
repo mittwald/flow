@@ -1,16 +1,20 @@
-import React, { FC, PropsWithChildren } from "react";
+import React, { PropsWithChildren } from "react";
 import { getInitialsFromString } from "./lib/getInitialsFromString";
 import styles from "./Initials.module.scss";
 import clsx from "clsx";
-import { ClearPropsContext, useProps } from "@/lib/propsContext";
+import { ClearPropsContext } from "@/lib/propsContext";
 import { onlyText } from "react-children-utilities";
+import {
+  flowComponent,
+  FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
 
-export interface InitialsProps extends PropsWithChildren {
+export interface InitialsProps extends PropsWithChildren, FlowComponentProps {
   className?: string;
 }
 
-export const Initials: FC<InitialsProps> = (props) => {
-  const { children, className } = useProps("Initials", props);
+export const Initials = flowComponent("Initials", (props) => {
+  const { children, className } = props;
 
   const textContent = onlyText(children);
   const initials = getInitialsFromString(textContent);
@@ -28,6 +32,6 @@ export const Initials: FC<InitialsProps> = (props) => {
       </div>
     </ClearPropsContext>
   );
-};
+});
 
 export default Initials;

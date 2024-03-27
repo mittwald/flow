@@ -11,6 +11,14 @@ const importPathInfosRegEx = new RegExp(
   `^(.+/${localeDirectory})/((.+)${moduleSuffix.replaceAll(".", "\\.")})$`,
 );
 
+export const generateVirtualFileId = (filePath: string): string => {
+  const virtualFileId = crypt
+    .createHash("md5")
+    .update(path.resolve(filePath))
+    .digest("hex");
+  return `${moduleId}${virtualFileId}`;
+};
+
 const generateComponentIntlContent = (
   filePath: string,
   languageKey: string,
@@ -45,12 +53,9 @@ export default {
         .concat([`*${moduleSuffix}`])
         .forEach((file: string) => {
           const filePath = path.join(localDirectory, file);
-          const virtualFileId = crypt
-            .createHash("md5")
-            .update(filePath)
-            .digest("hex");
-          const id = `${moduleId}${virtualFileId}`;
-          const module = server.moduleGraph.getModuleById(id);
+          const module = server.moduleGraph.getModuleById(
+            generateVirtualFileId(filePath),
+          );
           if (module) {
             server.reloadModule(module);
           }
@@ -62,14 +67,9 @@ export default {
     if (match && importer) {
       const importerDirectory = path.dirname(importer);
       const resolvedTranslationPath = path.resolve(importerDirectory, id);
-      const virtualFileId = crypt
-        .createHash("md5")
-        .update(resolvedTranslationPath)
-        .digest("hex");
 
       return {
-        id: moduleId + virtualFileId,
-        shouldTransformCachedModule: true,
+        id: generateVirtualFileId(resolvedTranslationPath),
         meta: {
           id,
           importer,
