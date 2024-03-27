@@ -35,16 +35,14 @@ export const Action: FC<ActionProps> = (props) => {
 
   const { callAction, state } = useCallAction(action, { feedback });
 
-  const triggerProps = {
-    onPress: callAction,
-    isPending: state.isPending,
-    isDisabled: state.isExecuting,
-    isSucceeded: state.isSucceeded,
-    isFailed: state.isFailed,
-  };
-
   const propsContext: PropsContext = {
-    Button: triggerProps,
+    Button: {
+      onPress: callAction,
+      isPending: state.isPending,
+      isDisabled: state.isExecuting,
+      isSucceeded: state.isSucceeded,
+      isFailed: state.isFailed,
+    },
     Action: {
       action: callAction,
     },
