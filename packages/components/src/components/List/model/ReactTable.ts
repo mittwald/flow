@@ -99,7 +99,7 @@ export class ReactTable<T> {
     return newState;
   }
 
-  public getTableColumn(property: PropertyName<T>): Column<T> {
+  public getTableColumn(property: PropertyName<T> | string): Column<T> {
     const column = this.table.getColumn(property as string);
     invariant(!!column, `Column #${property} is not defined`);
     return column;

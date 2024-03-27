@@ -18,11 +18,14 @@ import type { SwitchProps } from "@/components/Switch";
 import type { StatusBadgeProps } from "@/components/StatusBadge";
 import type { ButtonGroupProps } from "@/components/ButtonGroup";
 import type { ActionProps } from "@/components/Action";
+import type { AvatarProps } from "@/components/Avatar";
+import type { ListItemContextMenuProps } from "@/components/List";
 
 export * from "./types";
 
 export interface FlowComponentPropsTypes {
   Action: ActionProps;
+  Avatar: AvatarProps;
   Button: ButtonProps;
   ButtonGroup: ButtonGroupProps;
   Content: ContentProps;
@@ -38,6 +41,7 @@ export interface FlowComponentPropsTypes {
   Label: LabelProps;
   LayoutCard: LayoutCardProps;
   Link: LinkProps;
+  ListItemContextMenu: ListItemContextMenuProps;
   NavigationItem: NavigationItemProps;
   StatusBadge: StatusBadgeProps;
   Switch: SwitchProps;
@@ -48,6 +52,7 @@ const propsContextSupportingComponentsMap: Record<
   keyof FlowComponentPropsTypes,
   true
 > = {
+  Avatar: true,
   Action: true,
   Text: true,
   Button: true,
@@ -62,6 +67,7 @@ const propsContextSupportingComponentsMap: Record<
   Heading: true,
   InlineAlert: true,
   Link: true,
+  ListItemContextMenu: true,
   Initials: true,
   Image: true,
   FieldError: true,

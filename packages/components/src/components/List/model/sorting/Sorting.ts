@@ -6,10 +6,12 @@ import { SortingShape } from "@/components/List/model/sorting/types";
 export class Sorting<T> {
   public readonly list: List<T>;
   public readonly property: PropertyName<T>;
+  public readonly name?: string;
 
   public constructor(list: List<T>, shape: SortingShape<T>) {
     this.list = list;
     this.property = shape.property;
+    this.name = shape.name;
   }
 
   public updateTableColumnDef(def: ColumnDef<T>): void {

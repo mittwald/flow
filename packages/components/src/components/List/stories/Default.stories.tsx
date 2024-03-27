@@ -1,12 +1,20 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import List from "../List";
 import React from "react";
 import { getStates, getUsers, User } from "@/components/List/testData/userApi";
 import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
-import { usePromise } from "@mittwald/react-use-promise";
-import { ListFilter, ListItemView, ListLoaderAsync } from "@/components/List";
 import { AsyncDataLoader } from "@/components/List/model/loading/types";
+import { usePromise } from "@mittwald/react-use-promise";
+import List, {
+  ListFilter,
+  ListItemView,
+  ListLoaderAsync,
+  ListSorting,
+  ListItemContextMenu,
+} from "@/components/List";
+import { Avatar } from "@/components/Avatar";
+import { Initials } from "@/components/Initials";
+import { ContextMenuItem } from "@/components/ContextMenu";
 
 const loadUsers: AsyncDataLoader<User> = async (opt) => {
   const response = await getUsers({
@@ -37,19 +45,31 @@ const meta: Meta<typeof List> = {
 
     return (
       <List>
-        <ListLoaderAsync<User> manualPagination>{loadUsers}</ListLoaderAsync>
+        <ListLoaderAsync<User> manualPagination manualSorting={false}>
+          {loadUsers}
+        </ListLoaderAsync>
         <ListFilter<User>
           property="location.state"
           values={availableStates}
           mode="some"
+          name="Location"
         />
+        <ListSorting<User> property="location.state" name="Location" />
+        <ListSorting<User> property="name.last" name="Last name" />
         <ListItemView<User>>
           {(user) => (
             <>
+              <Avatar>
+                <Initials>{`${user.name.first} ${user.name.last}`}</Initials>
+              </Avatar>
               <Heading>
-                {user.name.first} {user.name.last} ({user.location.state})
+                {user.name.first} {user.name.last}
               </Heading>
-              <Text>{user.emails[0]}</Text>
+              <Text>{user.location.state}</Text>
+              <ListItemContextMenu>
+                <ContextMenuItem>Show details</ContextMenuItem>
+                <ContextMenuItem>Delete</ContextMenuItem>
+              </ListItemContextMenu>
             </>
           )}
         </ListItemView>

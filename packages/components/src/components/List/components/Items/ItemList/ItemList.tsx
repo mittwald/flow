@@ -1,14 +1,14 @@
 import React, { FC, Suspense } from "react";
 import { useList } from "@/components/List/hooks/useList";
-import styles from "./Items.module.css";
+import styles from "./ItemList.module.css";
 import clsx from "clsx";
-import { Item } from "@/components/List/components/Item";
+import { Item } from "@/components/List/components/Items/Item";
 
 interface Props {
   className?: string;
 }
 
-export const Items: FC<Props> = (props) => {
+export const ItemList: FC<Props> = (props) => {
   const { className } = props;
   const list = useList();
   const isLoading = list.loader.useIsLoading();
@@ -20,7 +20,7 @@ export const Items: FC<Props> = (props) => {
   ));
 
   const rootClassName = clsx(
-    styles.items,
+    styles.itemList,
     className,
     isLoading && styles.isLoading,
   );
@@ -28,4 +28,4 @@ export const Items: FC<Props> = (props) => {
   return <div className={rootClassName}>{rows}</div>;
 };
 
-export default Items;
+export default ItemList;

@@ -20,6 +20,13 @@
 
   @include focus.focus;
 
+  &[data-focused] {
+    outline-style: none;
+  }
+  &[data-focus-visible] {
+    outline-style: solid;
+  }
+
   @extend .primary;
   @extend .solid;
 

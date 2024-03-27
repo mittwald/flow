@@ -1,13 +1,13 @@
 import React, { FC } from "react";
-import { Button } from "@/components/Button";
 import {
   IconChevronDown,
   IconChevronUp,
 } from "@/components/Icon/components/icons";
 import { Empty } from "@/lib/react/components/Empty";
-
 import { AnyData } from "@/components/List/model/item/types";
 import { Sorting } from "@/components/List/model/sorting/Sorting";
+import { ContextMenuItem } from "@/components/ContextMenu";
+import styles from "./SortingPickerItem.module.scss";
 
 interface Props {
   sorting: Sorting<AnyData>;
@@ -25,15 +25,15 @@ export const SortingPickerItem: FC<Props> = (props) => {
         ? IconChevronDown
         : Empty;
 
-  const isSorted = direction !== false;
+  // ToDo: make sorting accessible
 
   return (
-    <Button
-      variant={isSorted ? "primary" : "secondary"}
-      onPress={sorting.getTableColumn().getToggleSortingHandler()}
+    <ContextMenuItem
+      className={styles.sortingPickerItem}
+      id={sorting.getTableColumn().id}
     >
-      {sorting.getTableColumn().id}
+      {sorting.name}
       <SortingIcon size="s" />
-    </Button>
+    </ContextMenuItem>
   );
 };
