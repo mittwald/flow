@@ -1,4 +1,4 @@
-.itemList {
+.items {
   display: flex;
   flex-direction: column;
   border-radius: var(--list-item--corner-radius);
