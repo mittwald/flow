@@ -4,17 +4,18 @@
   padding: var(--context-menu--padding);
   background-color: var(--context-menu--background-color);
   overflow-y: auto;
+  --size-px--s--negative: calc(var(--size-px--s) * -1);
 
   &[data-placement="top"] {
     --origin: translateY(var(--size-px--s));
   }
 
   &[data-placement="bottom"] {
-    --origin: translateY(-(var(--size-px--s)));
+    --origin: translateY(var(--size-px--s--negative));
   }
 
   &[data-placement="right"] {
-    --origin: translateX(-(var(--size-px--s)));
+    --origin: translateX(var(--size-px--s--negative));
   }
 
   &[data-placement="left"] {
