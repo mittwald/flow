@@ -1,8 +1,10 @@
-import { ActionFn } from "@/components/Action/types";
+import { ActionType, ActionFn } from "@/components/Action/types";
 import { useProps } from "@/lib/propsContext";
 import { useSignals } from "@preact/signals-react/runtime";
 import { useSignal } from "@preact/signals-react";
 import { useRef } from "react";
+import { useMakeCallableAction } from "@/components/Action/hooks/useMakeCallableAction";
+import { callActionsInOrder } from "@/components/Action/lib/callActionsInOrder";
 
 interface Result {
   state: {
@@ -24,14 +26,13 @@ interface Options {
   feedback?: boolean;
 }
 
-const voidAction = () => {};
-
 export const useCallAction = (
-  action: ActionFn,
+  action?: ActionType,
   options: Options = {},
 ): Result => {
   const { feedback = false } = options;
-  const { action: parentAction = voidAction } = useProps("Action", {});
+  const { action: parentAction } = useProps("Action", {});
+  const callableAction = useMakeCallableAction(action);
 
   useSignals();
   const isExecuting = useSignal(false);
@@ -68,18 +69,10 @@ export const useCallAction = (
     }
   };
 
-  const callActionAndParentAction: ActionFn = (...args) => {
-    const result = action(...args);
-    if (result instanceof Promise) {
-      return result.then(() => parentAction(...args));
-    }
-    return parentAction(...args);
-  };
-
   const callWithStateHandling: ActionFn = (...args) => {
     try {
       asyncActionResolved.current = false;
-      const result = callActionAndParentAction(...args);
+      const result = callActionsInOrder(args, [callableAction, parentAction]);
 
       if (result instanceof Promise) {
         isExecuting.value = true;
