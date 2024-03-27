@@ -66,6 +66,7 @@ const propsContextSupportingComponentsMap: Record<
   Label: true,
   LayoutCard: true,
   Link: true,
+  ListItemContextMenu: true,
   NavigationItem: true,
   StatusBadge: true,
   Switch: true,

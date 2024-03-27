@@ -14,6 +14,7 @@ import {
 import { AsyncDataLoader } from "@/components/List/model/loading/types";
 import { Avatar } from "@/components/Avatar";
 import { Initials } from "@/components/Initials";
+import { ContextMenuItem } from "@/components/ContextMenu";
 
 const loadUsers: AsyncDataLoader<User> = async (opt) => {
   const response = await getUsers({
