@@ -25,14 +25,8 @@ import { Action } from "@mittwald/flow-react-components/Action";
     </Content>
     <ButtonGroup>
       <Action closeModal>
-        <Button variant="accent" onPress={close}>
-          Create customer
-        </Button>
-        <Button
-          style="soft"
-          variant="secondary"
-          onPress={close}
-        >
+        <Button variant="accent">Create customer</Button>
+        <Button style="soft" variant="secondary">
           Abort
         </Button>
       </Action>
