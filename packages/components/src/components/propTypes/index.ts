@@ -15,14 +15,16 @@ import type { ImageProps } from "@/components/Image";
 import type { CopyButtonProps } from "@/components/CopyButton";
 import type { HeaderProps } from "@/components/Header/";
 import type { SwitchProps } from "@/components/Switch";
-import { StatusBadgeProps } from "@/components/StatusBadge";
+import type { StatusBadgeProps } from "@/components/StatusBadge";
 import type { ButtonGroupProps } from "@/components/ButtonGroup";
-import { AvatarProps } from "@/components/Avatar";
-import { ListItemContextMenuProps } from "@/components/List";
+import type { ActionProps } from "@/components/Action";
+import type { AvatarProps } from "@/components/Avatar";
+import type { ListItemContextMenuProps } from "@/components/List";
 
 export * from "./types";
 
 export interface FlowComponentPropsTypes {
+  Action: ActionProps;
   Avatar: AvatarProps;
   Button: ButtonProps;
   ButtonGroup: ButtonGroupProps;
@@ -51,27 +53,28 @@ const propsContextSupportingComponentsMap: Record<
   true
 > = {
   Avatar: true,
+  Action: true,
+  Text: true,
   Button: true,
   ButtonGroup: true,
-  Content: true,
   CopyButton: true,
-  FieldDescription: true,
-  FieldError: true,
   Header: true,
-  Heading: true,
   Icon: true,
-  Image: true,
-  Initials: true,
-  InlineAlert: true,
   Label: true,
+  Content: true,
   LayoutCard: true,
+  NavigationItem: true,
+  Heading: true,
+  InlineAlert: true,
   Link: true,
   ListItemContextMenu: true,
-  NavigationItem: true,
-  StatusBadge: true,
-  Switch: true,
+  Initials: true,
+  Image: true,
+  FieldError: true,
+  FieldDescription: true,
   TestComponent: true,
-  Text: true,
+  Switch: true,
+  StatusBadge: true,
 };
 
 export const propsContextSupportingComponents = Object.keys(

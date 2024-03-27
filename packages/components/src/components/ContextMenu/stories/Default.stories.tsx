@@ -7,7 +7,7 @@ import ContextMenu, {
 import { Button } from "@/components/Button";
 
 const meta: Meta<typeof ContextMenu> = {
-  title: "Overlays/ContextMenu",
+  title: "Actions/ContextMenu",
   component: ContextMenu,
   render: (props) => (
     <ContextMenuTrigger>

@@ -10,7 +10,7 @@ import { dummyText } from "@/lib/dev/dummyText";
 
 const meta: Meta<typeof ContextMenu> = {
   ...defaultMeta,
-  title: "Overlays/ContextMenu/Edge Cases",
+  title: "Actions/ContextMenu/Edge Cases",
 };
 export default meta;
 

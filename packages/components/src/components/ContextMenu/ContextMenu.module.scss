@@ -3,34 +3,41 @@
   border-radius: var(--context-menu--corner-radius);
   padding: var(--context-menu--padding);
   background-color: var(--context-menu--background-color);
-  overflow-y: scroll;
-
-  [role="menu"]:focus-visible {
-    outline: none;
-  }
+  overflow-y: auto;
 
   &[data-placement="top"] {
-    --origin: translateY(8px);
+    --origin: translateY(var(--size-px--s));
   }
 
   &[data-placement="bottom"] {
-    --origin: translateY(-8px);
+    --origin: translateY(-(var(--size-px--s)));
   }
 
   &[data-placement="right"] {
-    --origin: translateX(-8px);
+    --origin: translateX(-(var(--size-px--s)));
   }
 
   &[data-placement="left"] {
-    --origin: translateX(8px);
+    --origin: translateX(var(--size-px--s));
   }
 
   &[data-entering] {
-    animation: popover-slide 200ms;
+    animation: popover-slide var(--transition--duration--default);
   }
 
   &[data-exiting] {
-    animation: popover-slide 200ms reverse ease-in;
+    animation: popover-slide var(--transition--duration--default) reverse
+      ease-in;
+  }
+}
+
+.menuList {
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--menu--item-to-item-spacing);
+
+  &:focus-visible {
+    outline: none;
   }
 }
 

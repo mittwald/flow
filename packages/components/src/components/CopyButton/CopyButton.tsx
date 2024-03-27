@@ -11,6 +11,7 @@ import {
   flowComponent,
   FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
+import { Action } from "@/components/Action";
 
 export interface CopyButtonProps
   extends Omit<ButtonProps, "onPress" | "aria-label">,
@@ -32,9 +33,11 @@ export const CopyButton = flowComponent("CopyButton", (props) => {
   return (
     <ClearPropsContext>
       <TooltipTrigger>
-        <Button onPress={copyValue} aria-label={tooltip} {...buttonProps}>
-          <IconCopy />
-        </Button>
+        <Action action={copyValue} feedback>
+          <Button aria-label={tooltip} {...buttonProps}>
+            <IconCopy />
+          </Button>
+        </Action>
         <Tooltip>{tooltip}</Tooltip>
       </TooltipTrigger>
     </ClearPropsContext>

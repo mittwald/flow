@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.55](https://github.com/mittwald/flow/compare/0.1.0-alpha.54...0.1.0-alpha.55) (2024-03-26)
+
+### Features
+
+- add context menu component
+  ([0fb5ec1](https://github.com/mittwald/flow/commit/0fb5ec12e3dd097fb554331c87cf3dc80f70b3c8))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.53](https://github.com/mittwald/flow/compare/0.1.0-alpha.52...0.1.0-alpha.53) (2024-03-25)
 
 **Note:** Version bump only for package @mittwald/flow-design-tokens
