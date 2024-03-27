@@ -1,6 +1,10 @@
 import React, { ComponentProps, ComponentType, PropsWithChildren } from "react";
 import * as Aria from "react-aria-components";
-import { ClearPropsContext } from "@/lib/propsContext";
+import {
+  ClearPropsContext,
+  PropsContext,
+  PropsContextProvider,
+} from "@/lib/propsContext";
 import styles from "./Link.module.scss";
 import clsx from "clsx";
 import {
@@ -37,10 +41,19 @@ export const Link = flowComponent("Link", (props) => {
     ? className
     : clsx(styles.link, styles[variant], inline && styles.inline, className);
 
+  const propsContext: PropsContext = {
+    Icon: {
+      className: styles.icon,
+      size: "s",
+    },
+  };
+
   return (
     <ClearPropsContext>
       <Link className={rootClassName} {...rest}>
-        {children}
+        <PropsContextProvider props={propsContext}>
+          {children}
+        </PropsContextProvider>
       </Link>
     </ClearPropsContext>
   );
