@@ -15,6 +15,7 @@ import { AsyncDataLoader } from "@/components/List/model/loading/types";
 import { Avatar } from "@/components/Avatar";
 import { Initials } from "@/components/Initials";
 import { ContextMenuItem } from "@/components/ContextMenu";
+import ListItemLink from "@/components/List/components/ListItemLink";
 
 const loadUsers: AsyncDataLoader<User> = async (opt) => {
   const response = await getUsers({
@@ -78,3 +79,37 @@ export default meta;
 type Story = StoryObj<typeof List>;
 
 export const Default: Story = {};
+
+export const ItemsWithLink: Story = {
+  render: () => {
+    const availableStates = usePromise(getStates, []);
+
+    return (
+      <List>
+        <ListLoaderAsync<User> manualPagination>{loadUsers}</ListLoaderAsync>
+        <ListFilter<User>
+          property="location.state"
+          values={availableStates}
+          mode="some"
+        />
+        <ListItemView<User>>
+          {(user) => (
+            <ListItemLink href={user.website}>
+              <Avatar>
+                <Initials>{`${user.name.first} ${user.name.last}`}</Initials>
+              </Avatar>
+              <Heading>
+                {user.name.first} {user.name.last}
+              </Heading>
+              <Text>{user.location.state}</Text>
+              <ListItemContextMenu>
+                <ContextMenuItem>Show details</ContextMenuItem>
+                <ContextMenuItem>Delete</ContextMenuItem>
+              </ListItemContextMenu>
+            </ListItemLink>
+          )}
+        </ListItemView>
+      </List>
+    );
+  },
+};

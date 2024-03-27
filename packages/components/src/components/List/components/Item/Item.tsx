@@ -1,6 +1,9 @@
 import React, { PropsWithChildren } from "react";
-import styles from "./Item.module.css";
+import styles from "./Item.module.scss";
 import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import { deepFindOfType } from "@/lib/react/deepFindOfType";
+import { ListItemLink } from "@/components/List/components/ListItemLink";
+import { Wrap } from "@/components/Wrap";
 
 interface Props extends PropsWithChildren {}
 
@@ -23,14 +26,21 @@ export const Item = (props: Props) => {
     ListItemContextMenu: {
       className: styles.contextMenu,
     },
+    ListItemLink: {
+      className: styles.listItem,
+    },
   };
 
+  const withLink = !!deepFindOfType(children, ListItemLink);
+
   return (
-    <div className={styles.listItem}>
-      <PropsContextProvider props={propsContext}>
-        {children}
-      </PropsContextProvider>
-    </div>
+    <Wrap if={!withLink}>
+      <div className={styles.listItem}>
+        <PropsContextProvider props={propsContext}>
+          {children}
+        </PropsContextProvider>
+      </div>
+    </Wrap>
   );
 };
 
