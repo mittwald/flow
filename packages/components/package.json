@@ -22,6 +22,10 @@
       "types": "./dist/types/components/ButtonGroup/index.d.ts",
       "import": "./dist/ButtonGroup.js"
     },
+    "./Breadcrumb": {
+      "types": "./dist/types/components/Breadcrumb/index.d.ts",
+      "import": "./dist/Breadcrumb.js"
+    },
     "./Checkbox": {
       "types": "./dist/types/components/Checkbox/index.d.ts",
       "import": "./dist/Checkbox.js"
