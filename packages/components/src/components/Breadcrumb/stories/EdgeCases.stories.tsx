@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Breadcrumb, { BreadcrumbItem } from "../index";
+import Breadcrumb from "../index";
 import React from "react";
 import { dummyText } from "@/lib/dev/dummyText";
 import defaultMeta from "./Default.stories";
+import { Link } from "@/components/Link";
 
 const meta: Meta<typeof Breadcrumb> = {
   ...defaultMeta,
@@ -15,9 +16,9 @@ type Story = StoryObj<typeof Breadcrumb>;
 export const LongTexts: Story = {
   render: () => (
     <Breadcrumb>
-      <BreadcrumbItem>{dummyText.medium}</BreadcrumbItem>
-      <BreadcrumbItem>{dummyText.medium}</BreadcrumbItem>
-      <BreadcrumbItem>{dummyText.medium}</BreadcrumbItem>
+      <Link>{dummyText.medium}</Link>
+      <Link>{dummyText.medium}</Link>
+      <Link>{dummyText.medium}</Link>
     </Breadcrumb>
   ),
 };

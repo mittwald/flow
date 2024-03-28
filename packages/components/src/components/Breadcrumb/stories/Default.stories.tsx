@@ -1,15 +1,16 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Breadcrumb, BreadcrumbItem } from "../index";
 import React from "react";
+import { Link } from "@/components/Link";
+import { Breadcrumb } from "@/components/Breadcrumb";
 
 const meta: Meta<typeof Breadcrumb> = {
   title: "Navigation/Breadcrumb",
   component: Breadcrumb,
   render: () => (
     <Breadcrumb>
-      <BreadcrumbItem>Project</BreadcrumbItem>
-      <BreadcrumbItem>Apps</BreadcrumbItem>
-      <BreadcrumbItem>App</BreadcrumbItem>
+      <Link href="#">Project</Link>
+      <Link href="#">Apps</Link>
+      <Link href="#">App</Link>
     </Breadcrumb>
   ),
 };

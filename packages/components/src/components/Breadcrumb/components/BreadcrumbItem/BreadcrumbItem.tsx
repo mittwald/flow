@@ -1,24 +1,19 @@
-import React, { FC } from "react";
+import React, { FC, PropsWithChildren } from "react";
 import * as Aria from "react-aria-components";
-import { LinkProps } from "@/components/Link";
 import styles from "./BreadcrumbItem.module.scss";
 import clsx from "clsx";
 import { IconChevronRight } from "@/components/Icon/components/icons";
 
-export interface BreadcrumbItemProps
-  extends Pick<Aria.BreadcrumbProps, "id" | "style">,
-    Omit<LinkProps, "style"> {}
+export interface BreadcrumbItemProps extends PropsWithChildren {}
 
 export const BreadcrumbItem: FC<BreadcrumbItemProps> = (props) => {
-  const { children, id, className, style, ...rest } = props;
+  const { children } = props;
 
-  const rootClassName = clsx(styles.breadcrumbItem, className);
+  const rootClassName = clsx(styles.breadcrumbItem);
 
   return (
-    <Aria.Breadcrumb className={rootClassName} id={id} style={style}>
-      <Aria.Link className={styles.link} {...rest}>
-        {children}
-      </Aria.Link>
+    <Aria.Breadcrumb className={rootClassName}>
+      {children}
       <IconChevronRight size="s" className={styles.icon} />
     </Aria.Breadcrumb>
   );

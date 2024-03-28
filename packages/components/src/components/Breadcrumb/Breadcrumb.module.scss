@@ -1,6 +1,25 @@
+@use "@/styles/mixins/focus";
+@use "@/styles/mixins/ellipsis";
+
 .breadcrumb {
   display: flex;
   list-style: none;
   padding: 0;
   align-items: center;
+}
+
+.link {
+  @include focus.focus;
+  @include ellipsis.ellipsis;
+
+  padding-inline: var(--breadcrumb-item--padding-x);
+  font-weight: var(--breadcrumb-item--font-weight--default);
+
+  &:not([aria-current="page"]):hover {
+    text-decoration: underline;
+  }
+
+  &[aria-current="page"] {
+    font-weight: var(--breadcrumb-item--font-weight--current);
+  }
 }
