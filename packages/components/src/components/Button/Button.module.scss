@@ -50,11 +50,6 @@
   display: block;
 }
 
-.icon,
-.icon svg {
-  display: block;
-}
-
 .size-s {
   font-size: var(--button--font-size-s);
   padding-block: var(--button--padding-s-squished-y);
@@ -122,7 +117,10 @@
       color: var(--button--#{$variant}-#{$style}-content-color--pressed);
     }
 
-    &[disabled] {
+    &[disabled],
+    &.isPending,
+    &.isFailed,
+    &.isSucceeded {
       background-color: var(--button--disabled-#{$style}-background-color);
       color: var(--button--disabled-#{$style}-content-color);
     }

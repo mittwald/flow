@@ -22,10 +22,7 @@ export const PropsContextProvider: FC<Props> = (props) => {
     ...forwardChildrenProps
   } = props;
 
-  const propsIncludingParentContext = useMemo(
-    () => providedProps,
-    dependencies,
-  );
+  const memoizedProps = useMemo(() => providedProps, dependencies);
 
   const childrenProps = isValidElement(children)
     ? {
@@ -48,7 +45,7 @@ export const PropsContextProvider: FC<Props> = (props) => {
   );
 
   return (
-    <propsContext.Provider value={propsIncludingParentContext}>
+    <propsContext.Provider value={memoizedProps}>
       {childrenWithForwardedProps}
     </propsContext.Provider>
   );

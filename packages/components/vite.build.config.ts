@@ -19,6 +19,7 @@ export default defineConfig(
     build: {
       lib: {
         entry: {
+          Action: "./src/components/Action/index.ts",
           Avatar: "./src/components/Avatar/index.ts",
           Button: "./src/components/Button/index.ts",
           ButtonGroup: "./src/components/ButtonGroup/index.ts",
@@ -26,6 +27,8 @@ export default defineConfig(
           CheckboxGroup: "./src/components/CheckboxGroup/index.ts",
           ColumnLayout: "./src/components/ColumnLayout/index.ts",
           Content: "./src/components/Content/index.ts",
+          ContextMenu: "./src/components/ContextMenu/index.ts",
+          controller: "./src/lib/controller/index.ts",
           CopyButton: "./src/components/CopyButton/index.ts",
           FieldDescription: "./src/components/FieldDescription/index.ts",
           FieldError: "./src/components/FieldError/index.ts",
