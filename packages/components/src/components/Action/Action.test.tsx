@@ -5,6 +5,7 @@ import Action from "@/components/Action";
 import { Button } from "@/components/Button";
 import { beforeEach, Mock, vitest } from "vitest";
 import userEvent from "@/lib/dev/vitestUserEvent";
+import { act } from "react-dom/test-utils";
 
 const asyncActionDuration = 700;
 const sleep = () =>
@@ -37,11 +38,11 @@ const button = <Button data-testid="button" />;
 const getButton = () => screen.getByTestId("button");
 
 const clickTrigger = async () => {
-  await userEvent.click(getButton());
+  await act(() => userEvent.click(getButton()));
 };
 
 test("Sync Action is called when trigger is clicked", async () => {
-  render(<Action action={syncAction1}>{button}</Action>);
+  await act(() => render(<Action action={syncAction1}>{button}</Action>));
   await clickTrigger();
   expect(syncAction1).toHaveBeenCalledOnce();
 });
@@ -80,7 +81,7 @@ test("Button is disabled when async action is triggered", async () => {
 test("Button is enabled again when async action has completed", async () => {
   render(<Action action={asyncAction1}>{button}</Action>);
   await clickTrigger();
-  await vitest.advanceTimersByTimeAsync(asyncActionDuration);
+  await act(() => vitest.advanceTimersByTimeAsync(asyncActionDuration));
   expect(getButton()).not.toBeDisabled();
 });
 
@@ -92,11 +93,11 @@ test("When nested async actions, the outer action is called after the first has 
   );
   await clickTrigger();
 
-  await vitest.advanceTimersByTimeAsync(asyncActionDuration - 1);
+  await act(() => vitest.advanceTimersByTimeAsync(asyncActionDuration - 1));
   expect(asyncAction1).toHaveBeenCalled();
   expect(asyncAction2).not.toHaveBeenCalled();
 
-  await vitest.advanceTimersByTimeAsync(1);
+  await act(() => vitest.advanceTimersByTimeAsync(1));
   expect(asyncAction2).toHaveBeenCalled();
 });
 
@@ -131,7 +132,7 @@ describe("Feedback", () => {
       </Action>,
     );
     await clickTrigger();
-    await vitest.advanceTimersByTimeAsync(2000);
+    await act(() => vitest.advanceTimersByTimeAsync(2000));
     expect(screen.queryByLabelText("Succeeded")).toBeNull();
   });
 });
@@ -147,7 +148,7 @@ describe("Pending state", () => {
   test("is shown when async action is pending", async () => {
     render(<Action action={asyncAction1}>{button}</Action>);
     await clickTrigger();
-    await vitest.advanceTimersByTimeAsync(1000);
+    await act(() => vitest.advanceTimersByTimeAsync(1000));
     screen.getByLabelText("Pending");
   });
 
@@ -158,7 +159,7 @@ describe("Pending state", () => {
       </Action>,
     );
     await clickTrigger();
-    await vitest.advanceTimersByTimeAsync(2000);
+    await act(() => vitest.advanceTimersByTimeAsync(2000));
     expect(screen.queryByLabelText("Pending")).toBeNull();
   });
 });
