@@ -1,7 +1,13 @@
+@use "@/styles/mixins/menuItem";
+
 .navigation {
   > ul {
     display: flex;
     flex-direction: column;
     row-gap: var(--menu--item-to-item-spacing);
   }
+}
+
+.item {
+  @include menuItem.menuItem();
 }

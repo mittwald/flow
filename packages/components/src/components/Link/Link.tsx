@@ -24,6 +24,7 @@ export interface LinkProps
   inline?: boolean;
   linkComponent?: ComponentType<Omit<ComponentProps<"a">, "ref">>;
   unstyled?: boolean;
+  "aria-current"?: string;
 }
 
 export const Link = flowComponent("Link", (props) => {
@@ -34,6 +35,7 @@ export const Link = flowComponent("Link", (props) => {
     inline,
     linkComponent: Link = Aria.Link,
     unstyled = false,
+    "aria-current": ariaCurrent,
     ...rest
   } = props;
 
@@ -48,9 +50,17 @@ export const Link = flowComponent("Link", (props) => {
     },
   };
 
+  const unsupportedTypingsLinkProps = {
+    "aria-current": ariaCurrent,
+  } as Record<string, unknown>;
+
   return (
     <ClearPropsContext>
-      <Link className={rootClassName} {...rest}>
+      <Link
+        className={rootClassName}
+        {...rest}
+        {...unsupportedTypingsLinkProps}
+      >
         <PropsContextProvider props={propsContext}>
           {children}
         </PropsContextProvider>

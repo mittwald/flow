@@ -1,8 +1,6 @@
 "use client";
 import React, { ComponentProps, FC, useId, useMemo } from "react";
-import Navigation, {
-  NavigationItem,
-} from "@mittwald/flow-react-components/Navigation";
+import Navigation from "@mittwald/flow-react-components/Navigation";
 import Heading from "@mittwald/flow-react-components/Heading";
 import styles from "./MainNavigation.module.scss";
 import { MdxFile, SerializedMdxFile } from "@/lib/mdx/MdxFile";
@@ -12,6 +10,7 @@ import {
   MdxDirectoryTree,
 } from "@/lib/mdx/components/buildDirectoryTree";
 import { usePathname } from "next/navigation";
+import { Link } from "@mittwald/flow-react-components/Link";
 
 interface Props {
   docs: SerializedMdxFile[];
@@ -30,13 +29,15 @@ const NavigationSection: FC<NavigationSectionProps> = (props) => {
 
   const navigationItems = Object.entries(tree).map(([group, treeItem]) =>
     treeItem instanceof MdxFile ? (
-      <NavigationItem
+      <Link
         key={group}
         href={treeItem.pathname}
-        isCurrent={treeItem.pathname === currentPathname}
+        aria-current={
+          treeItem.pathname === currentPathname ? "page" : undefined
+        }
       >
         {treeItem.getNavTitle()}
-      </NavigationItem>
+      </Link>
     ) : (
       <NavigationSection
         key={group}

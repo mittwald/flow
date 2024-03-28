@@ -4,7 +4,6 @@ import type { IconProps } from "@/components/Icon";
 import type { LabelProps } from "@/components/Label";
 import type { ContentProps } from "@/components/Content";
 import type { LayoutCardProps } from "@/components/LayoutCard";
-import type { NavigationItemProps } from "@/components/Navigation";
 import type { LinkProps } from "@/components/Link";
 import type { FieldErrorProps } from "@/components/FieldError";
 import type { FieldDescriptionProps } from "@/components/FieldDescription";
@@ -42,7 +41,6 @@ export interface FlowComponentPropsTypes {
   Label: LabelProps;
   LayoutCard: LayoutCardProps;
   Link: LinkProps;
-  NavigationItem: NavigationItemProps;
   StatusBadge: StatusBadgeProps;
   Switch: SwitchProps;
   Text: TextProps;
@@ -70,7 +68,6 @@ const propsContextSupportingComponentsMap: Record<
   Label: true,
   LayoutCard: true,
   Link: true,
-  NavigationItem: true,
   StatusBadge: true,
   Switch: true,
   TestComponent: true,

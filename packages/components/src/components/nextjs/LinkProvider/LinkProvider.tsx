@@ -6,7 +6,6 @@ export const LinkProvider: FC<PropsWithChildren> = (props) => (
   <PropsContextProvider
     props={{
       Link: { linkComponent: Link },
-      NavigationItem: { linkComponent: Link },
     }}
   >
     {props.children}
