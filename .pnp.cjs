@@ -9395,7 +9395,7 @@ const RAW_RUNTIME_STATE =
           ["ejs", "npm:3.1.9"],\
           ["esbuild", "npm:0.20.2"],\
           ["esbuild-plugin-alias", "npm:0.2.1"],\
-          ["express", "npm:4.19.1"],\
+          ["express", "npm:4.19.2"],\
           ["fs-extra", "npm:11.2.0"],\
           ["process", "npm:0.11.10"],\
           ["util", "npm:0.12.5"]\
@@ -9439,7 +9439,7 @@ const RAW_RUNTIME_STATE =
           ["@types/vite-plugin-glimmerx", null],\
           ["browser-assert", "npm:1.2.1"],\
           ["es-module-lexer", "npm:0.9.3"],\
-          ["express", "npm:4.19.1"],\
+          ["express", "npm:4.19.2"],\
           ["find-cache-dir", "npm:3.3.2"],\
           ["fs-extra", "npm:11.2.0"],\
           ["magic-string", "npm:0.30.8"],\
@@ -9480,7 +9480,7 @@ const RAW_RUNTIME_STATE =
           ["@types/vite-plugin-glimmerx", null],\
           ["browser-assert", "npm:1.2.1"],\
           ["es-module-lexer", "npm:0.9.3"],\
-          ["express", "npm:4.19.1"],\
+          ["express", "npm:4.19.2"],\
           ["find-cache-dir", "npm:3.3.2"],\
           ["fs-extra", "npm:11.2.0"],\
           ["magic-string", "npm:0.30.8"],\
@@ -9831,7 +9831,7 @@ const RAW_RUNTIME_STATE =
           ["cli-table3", "npm:0.6.4"],\
           ["compression", "npm:1.7.4"],\
           ["detect-port", "npm:1.5.1"],\
-          ["express", "npm:4.19.1"],\
+          ["express", "npm:4.19.2"],\
           ["fs-extra", "npm:11.2.0"],\
           ["globby", "npm:11.1.0"],\
           ["ip", "npm:2.0.1"],\
@@ -16757,10 +16757,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["express", [\
-      ["npm:4.19.1", {\
-        "packageLocation": "./.yarn/cache/express-npm-4.19.1-d5e6949ba4-1cf6d3c095.zip/node_modules/express/",\
+      ["npm:4.19.2", {\
+        "packageLocation": "./.yarn/cache/express-npm-4.19.2-f81334a22a-e82e2662ea.zip/node_modules/express/",\
         "packageDependencies": [\
-          ["express", "npm:4.19.1"],\
+          ["express", "npm:4.19.2"],\
           ["accepts", "npm:1.3.8"],\
           ["array-flatten", "npm:1.1.1"],\
           ["body-parser", "npm:1.20.2"],\
