@@ -1,5 +1,18 @@
 .items {
   display: flex;
   flex-direction: column;
-  row-gap: var(--size-px--xs);
+  border-radius: var(--list-item--corner-radius);
+  border-color: var(--list-item--border-color);
+  border-width: var(--list-item--border-width);
+  border-style: var(--list-item--border-style);
+  overflow: hidden;
+}
+
+.items:empty {
+  border: none;
+}
+
+.isLoading {
+  pointer-events: none;
+  opacity: 0.5;
 }

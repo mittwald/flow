@@ -7,6 +7,8 @@ link:
     value: "{font-weight.bold}"
   disabled-color:
     value: "{disabled-plain-content-color}"
+  text-to-icon-spacing:
+    value: "{size-rem.xs}"
 
   # Primary
   primary-color:

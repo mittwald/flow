@@ -124,7 +124,7 @@ export const WithIconAndContent: Story = {
 
 export const WithFieldError: Story = {
   render: (props) => (
-    <RadioGroup {...props} isInvalid>
+    <RadioGroup {...props} isInvalid isRequired>
       <Label>App</Label>
       <Radio value="wordpress">
         <IconApp />
