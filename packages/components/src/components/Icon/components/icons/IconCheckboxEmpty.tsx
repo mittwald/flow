@@ -4,7 +4,7 @@ import React, { ComponentProps, FC } from "react";
 import { IconSquare as Tabler } from "@tabler/icons-react";
 import { Icon } from "@/components/Icon";
 
-export const IconUnchecked: FC<
+export const IconCheckboxEmpty: FC<
   Omit<ComponentProps<typeof Icon>, "children">
 > = (props) => (
   <Icon {...props}>
@@ -12,4 +12,4 @@ export const IconUnchecked: FC<
   </Icon>
 );
 
-export default IconUnchecked;
+export default IconCheckboxEmpty;

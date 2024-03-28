@@ -1,0 +1,6 @@
+.checkboxes {
+  order: 2;
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--checkbox-group--checkbox-to-checkbox-spacing);
+}
