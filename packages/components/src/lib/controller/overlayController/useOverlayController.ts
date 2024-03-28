@@ -1,20 +1,20 @@
-import { ModalController } from "@/components/Modal/controller/types";
+import { OverlayController } from "@/lib/controller/overlayController/types";
 import { useSignal } from "@preact/signals-react";
 import { useContext } from "react";
-import { modalContext } from "@/components/Modal/context";
 import { useSignals } from "@preact/signals-react/runtime";
+import { overlayContext } from "@/lib/controller/overlayController/context";
 
 interface Options {
   reuseControllerFromContext?: boolean;
   defaultOpen?: boolean;
 }
 
-export const useModalController = (opts: Options = {}): ModalController => {
+export const useOverlayController = (opts: Options = {}): OverlayController => {
   const { reuseControllerFromContext = true, defaultOpen = false } = opts;
 
   const isOpen = useSignal<boolean>(defaultOpen);
+  const context = useContext(overlayContext);
 
-  const context = useContext(modalContext);
   if (reuseControllerFromContext && context.controller) {
     return context.controller;
   }

@@ -8,7 +8,7 @@ import Label from "@/components/Label";
 import Content from "@/components/Content";
 import Heading from "@/components/Heading";
 import Modal, { ModalTrigger } from "@/components/Modal";
-import { useModalController } from "@/components/Modal/controller/useModalController";
+import { useOverlayController } from "@/lib/controller/overlayController/useOverlayController";
 import { Action } from "@/components/Action";
 
 const meta: Meta<typeof Modal> = {
@@ -31,7 +31,7 @@ const meta: Meta<typeof Modal> = {
           <Action
             action={() => {
               console.log("?");
-              const c = useModalController();
+              const c = useOverlayController();
               console.log("!");
               return c.close;
             }}
@@ -54,7 +54,7 @@ export const Default: Story = {};
 
 export const WithController: Story = {
   render: (props) => {
-    const controller = useModalController();
+    const controller = useOverlayController();
 
     return (
       <>

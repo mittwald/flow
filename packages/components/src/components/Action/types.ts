@@ -1,4 +1,4 @@
-import { ModalController } from "@/components/Modal/controller/types";
+import { OverlayController } from "@/lib/controller/overlayController/types";
 
 export type ActionFn = (...args: unknown[]) => unknown;
 
@@ -8,7 +8,7 @@ export interface FunctionAction {
 }
 
 interface ModalAction {
-  controller?: ModalController;
+  controller?: OverlayController;
 }
 
 export interface ToggleModalAction extends ModalAction {

@@ -1,8 +1,8 @@
 import { useContext, useEffect } from "react";
 import * as Aria from "react-aria-components";
-import { ModalController } from "@/components/Modal/controller/types";
+import { OverlayController } from "@/lib/controller/overlayController/types";
 
-export const useSyncTriggerState = (controller: ModalController) => {
+export const useSyncTriggerState = (controller: OverlayController) => {
   const triggerState = useContext(Aria.OverlayTriggerStateContext);
   const isOpen = controller.useIsOpen();
 

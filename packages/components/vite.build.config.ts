@@ -27,6 +27,7 @@ export default defineConfig(
           ColumnLayout: "./src/components/ColumnLayout/index.ts",
           Content: "./src/components/Content/index.ts",
           ContextMenu: "./src/components/ContextMenu/index.ts",
+          controller: "./src/lib/controller/index.ts",
           CopyButton: "./src/components/CopyButton/index.ts",
           FieldDescription: "./src/components/FieldDescription/index.ts",
           FieldError: "./src/components/FieldError/index.ts",

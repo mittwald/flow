@@ -4,15 +4,15 @@ import styles from "./Modal.module.scss";
 import clsx from "clsx";
 import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
-import { ModalController } from "@/components/Modal/controller/types";
-import { useModalController } from "@/components/Modal/controller/useModalController";
-import { modalContext } from "./context";
+import { OverlayController } from "@/lib/controller/overlayController/types";
+import { useOverlayController } from "@/lib/controller/overlayController/useOverlayController";
 import { useSyncTriggerState } from "@/components/Modal/hooks/useSyncTriggerState";
+import { OverlayContextProvider } from "@/lib/controller/overlayController/context";
 
 export interface ModalProps extends PropsWithChildren {
   size?: "s" | "m" | "l";
   panel?: boolean;
-  controller?: ModalController;
+  controller?: OverlayController;
   defaultOpen?: boolean;
 }
 
@@ -26,7 +26,7 @@ export const Modal: FC<ModalProps> = (props) => {
     ...rest
   } = props;
 
-  const newController = useModalController({
+  const newController = useOverlayController({
     reuseControllerFromContext: false,
     defaultOpen,
   });
@@ -67,7 +67,7 @@ export const Modal: FC<ModalProps> = (props) => {
     >
       <Aria.Modal className={rootClassName}>
         <Aria.Dialog className={styles.dialog}>
-          <modalContext.Provider value={{ controller }}>
+          <OverlayContextProvider value={{ controller }}>
             <PropsContextProvider props={propsContext}>
               <TunnelProvider>
                 <div className={styles.content}>
@@ -77,7 +77,7 @@ export const Modal: FC<ModalProps> = (props) => {
                 {children}
               </TunnelProvider>
             </PropsContextProvider>
-          </modalContext.Provider>
+          </OverlayContextProvider>
         </Aria.Dialog>
       </Aria.Modal>
     </Aria.ModalOverlay>

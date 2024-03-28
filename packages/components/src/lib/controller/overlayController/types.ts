@@ -1,4 +1,4 @@
-export interface ModalController {
+export interface OverlayController {
   useIsOpen: () => boolean;
   open: () => void;
   close: () => void;

@@ -5,11 +5,13 @@ import {
   OpenModalAction,
   ToggleModalAction,
 } from "@/components/Action/types";
-import { ModalController } from "@/components/Modal/controller/types";
+import { OverlayController } from "@/lib/controller/overlayController/types";
 
-type ModalActionArg = boolean | ModalController;
+type ModalActionArg = boolean | OverlayController;
 
-function getModalController(arg: ModalActionArg): ModalController | undefined {
+function getModalController(
+  arg: ModalActionArg,
+): OverlayController | undefined {
   return typeof arg === "boolean" ? undefined : arg;
 }
 
