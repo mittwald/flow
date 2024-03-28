@@ -44,10 +44,6 @@
     "tsx": "^4.7.1",
     "typescript": "^5.4.3"
   },
-  "resolutions": {
-    "@storybook/react": "^7.6.3",
-    "@vitejs/plugin-react": "^4.2.1"
-  },
   "dependenciesMeta": {
     "@fortawesome/fontawesome-common-types": {
       "unplugged": true
