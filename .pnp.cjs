@@ -4590,7 +4590,7 @@ const RAW_RUNTIME_STATE =
           ["@storybook/test", "npm:8.0.5"],\
           ["@storybook/theming", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.0.5"],\
           ["@tabler/icons-react", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:2.47.0"],\
-          ["@tanstack/react-table", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.15.0"],\
+          ["@tanstack/react-table", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.15.3"],\
           ["@testing-library/dom", "npm:9.3.4"],\
           ["@testing-library/jest-dom", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:6.4.2"],\
           ["@testing-library/react", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:14.2.2"],\
@@ -4682,7 +4682,7 @@ const RAW_RUNTIME_STATE =
           ["@storybook/test", "npm:8.0.5"],\
           ["@storybook/theming", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.0.5"],\
           ["@tabler/icons-react", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:2.47.0"],\
-          ["@tanstack/react-table", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.15.0"],\
+          ["@tanstack/react-table", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.15.3"],\
           ["@testing-library/dom", "npm:9.3.4"],\
           ["@testing-library/jest-dom", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:6.4.2"],\
           ["@testing-library/react", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:14.2.2"],\
@@ -4769,7 +4769,7 @@ const RAW_RUNTIME_STATE =
           ["@storybook/test", "npm:8.0.5"],\
           ["@storybook/theming", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.0.5"],\
           ["@tabler/icons-react", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:2.47.0"],\
-          ["@tanstack/react-table", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.15.0"],\
+          ["@tanstack/react-table", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.15.3"],\
           ["@testing-library/dom", "npm:9.3.4"],\
           ["@testing-library/jest-dom", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:6.4.2"],\
           ["@testing-library/react", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:14.2.2"],\
@@ -10658,18 +10658,18 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@tanstack/react-table", [\
-      ["npm:8.15.0", {\
-        "packageLocation": "./.yarn/cache/@tanstack-react-table-npm-8.15.0-48bb65f5b6-fa82e413d6.zip/node_modules/@tanstack/react-table/",\
+      ["npm:8.15.3", {\
+        "packageLocation": "./.yarn/cache/@tanstack-react-table-npm-8.15.3-316dc551a6-cf88b66eb6.zip/node_modules/@tanstack/react-table/",\
         "packageDependencies": [\
-          ["@tanstack/react-table", "npm:8.15.0"]\
+          ["@tanstack/react-table", "npm:8.15.3"]\
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.15.0", {\
-        "packageLocation": "./.yarn/__virtual__/@tanstack-react-table-virtual-169cb48361/0/cache/@tanstack-react-table-npm-8.15.0-48bb65f5b6-fa82e413d6.zip/node_modules/@tanstack/react-table/",\
+      ["virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.15.3", {\
+        "packageLocation": "./.yarn/__virtual__/@tanstack-react-table-virtual-f95aaa9566/0/cache/@tanstack-react-table-npm-8.15.3-316dc551a6-cf88b66eb6.zip/node_modules/@tanstack/react-table/",\
         "packageDependencies": [\
-          ["@tanstack/react-table", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.15.0"],\
-          ["@tanstack/table-core", "npm:8.14.0"],\
+          ["@tanstack/react-table", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.15.3"],\
+          ["@tanstack/table-core", "npm:8.15.3"],\
           ["@types/react", "npm:18.2.73"],\
           ["@types/react-dom", "npm:18.2.22"],\
           ["react", "npm:18.2.0"],\
@@ -10685,10 +10685,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@tanstack/table-core", [\
-      ["npm:8.14.0", {\
-        "packageLocation": "./.yarn/cache/@tanstack-table-core-npm-8.14.0-fe8fa3b38a-1ace39fd50.zip/node_modules/@tanstack/table-core/",\
+      ["npm:8.15.3", {\
+        "packageLocation": "./.yarn/cache/@tanstack-table-core-npm-8.15.3-1180b79a46-06448565be.zip/node_modules/@tanstack/table-core/",\
         "packageDependencies": [\
-          ["@tanstack/table-core", "npm:8.14.0"]\
+          ["@tanstack/table-core", "npm:8.15.3"]\
         ],\
         "linkType": "HARD"\
       }]\
