@@ -1,5 +1,9 @@
-.navigation {
-  .heading {
-    margin-bottom: var(--navigation--heading-to-group-spacing);
-  }
+@use "@/styles/mixins/menuItem";
+
+.heading {
+  margin-bottom: var(--menu--heading-to-group-spacing);
+}
+
+.item {
+  @include menuItem.menuItem();
 }

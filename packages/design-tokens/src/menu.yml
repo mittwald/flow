@@ -1,4 +1,4 @@
-navigation:
+menu:
   item-to-item-spacing:
     value: "{size-px.s}"
   group-to-group-spacing:
@@ -6,7 +6,7 @@ navigation:
   heading-to-group-spacing:
     value: "{size-px.s}"
 
-navigation-item:
+menu-item:
   font-weight:
     current:
       value: "{font-weight.bold}"

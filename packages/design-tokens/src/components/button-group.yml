@@ -1,0 +1,3 @@
+button-group:
+  button-to-button-spacing:
+    value: "{size-rem.m}"

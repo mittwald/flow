@@ -1,0 +1,5 @@
+@use "@/styles/mixins/menuItem";
+
+.contextMenuItem {
+  @include menuItem.menuItem();
+}

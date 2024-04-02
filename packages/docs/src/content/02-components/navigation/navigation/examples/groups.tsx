@@ -1,21 +1,21 @@
 import Navigation, {
-  NavigationItem,
   NavigationGroup,
 } from "@mittwald/flow-react-components/Navigation";
 import Heading from "@mittwald/flow-react-components/Heading";
+import { Link } from "@mittwald/flow-react-components/Link";
 
 <Navigation aria-label="Main navigation">
   <Heading>General</Heading>
   <NavigationGroup>
-    <NavigationItem href="#">Dashboard</NavigationItem>
-    <NavigationItem href="#" isCurrent>
+    <Link href="#">Dashboard</Link>
+    <Link href="#" aria-current="page">
       Performance
-    </NavigationItem>
+    </Link>
   </NavigationGroup>
   <Heading>Components</Heading>
   <NavigationGroup>
-    <NavigationItem href="#">Apps</NavigationItem>
-    <NavigationItem href="#">Databases</NavigationItem>
-    <NavigationItem href="#">Domains</NavigationItem>
+    <Link href="#">Apps</Link>
+    <Link href="#">Databases</Link>
+    <Link href="#">Domains</Link>
   </NavigationGroup>
 </Navigation>;
