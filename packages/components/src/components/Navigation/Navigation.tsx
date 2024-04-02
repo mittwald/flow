@@ -1,6 +1,9 @@
 import React, { ComponentProps, FC, PropsWithChildren } from "react";
 import styles from "./Navigation.module.scss";
 import clsx from "clsx";
+import { deepFindOfType } from "@/lib/react/deepFindOfType";
+import { NavigationGroup } from "@/components/Navigation";
+import { Wrap } from "@/components/Wrap";
 import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
 
 export interface NavigationProps
@@ -13,7 +16,13 @@ export const Navigation: FC<NavigationProps> = (props) => {
 
   const rootClassName = clsx(styles.navigation, className);
 
+  const hasGroups = !!deepFindOfType(children, NavigationGroup);
+
   const propsContext: PropsContext = {
+    Heading: {
+      className: styles.heading,
+      level: 3,
+    },
     Link: {
       hoc: (link) => <li>{link}</li>,
       className: styles.item,
@@ -29,11 +38,11 @@ export const Navigation: FC<NavigationProps> = (props) => {
 
   return (
     <nav className={rootClassName} role="navigation" {...rest}>
-      <ul>
-        <PropsContextProvider props={propsContext}>
-          {children}
-        </PropsContextProvider>
-      </ul>
+      <PropsContextProvider props={propsContext}>
+        <Wrap if={!hasGroups}>
+          <NavigationGroup>{children}</NavigationGroup>
+        </Wrap>
+      </PropsContextProvider>
     </nav>
   );
 };
