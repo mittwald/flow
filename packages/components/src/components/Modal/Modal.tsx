@@ -4,15 +4,15 @@ import styles from "./Modal.module.scss";
 import clsx from "clsx";
 import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
-import { OverlayController } from "@/lib/controller/overlayController/types";
-import { useOverlayController } from "@/lib/controller/overlayController/useOverlayController";
+import { OverlayState } from "@/lib/controller/overlay";
+import { useOverlayState } from "@/lib/controller/overlay/useOverlayState";
 import { useSyncTriggerState } from "@/components/Modal/hooks/useSyncTriggerState";
-import { OverlayContextProvider } from "@/lib/controller/overlayController/context";
+import { OverlayContextProvider } from "@/lib/controller/overlay/context";
 
 export interface ModalProps extends PropsWithChildren {
   size?: "s" | "m" | "l";
   panel?: boolean;
-  controller?: OverlayController;
+  state?: OverlayState;
   defaultOpen?: boolean;
 }
 
@@ -20,21 +20,21 @@ export const Modal: FC<ModalProps> = (props) => {
   const {
     size = "s",
     panel,
-    controller: controllerFromProps,
+    state: stateFromProps,
     defaultOpen,
     children,
     ...rest
   } = props;
 
-  const newController = useOverlayController({
+  const newState = useOverlayState({
     reuseControllerFromContext: false,
     defaultOpen,
   });
 
-  const controller = controllerFromProps ?? newController;
-  const isOpen = controller.useIsOpen();
+  const state = stateFromProps ?? newState;
+  const isOpen = state.useIsOpen();
 
-  useSyncTriggerState(controller);
+  useSyncTriggerState(state);
 
   const rootClassName = clsx(
     styles.modal,
@@ -63,11 +63,11 @@ export const Modal: FC<ModalProps> = (props) => {
       {...rest}
       isDismissable
       isOpen={isOpen}
-      onOpenChange={controller.setIsOpen}
+      onOpenChange={(isOpen) => state.setOpen(isOpen)}
     >
       <Aria.Modal className={rootClassName}>
         <Aria.Dialog className={styles.dialog}>
-          <OverlayContextProvider value={{ controller }}>
+          <OverlayContextProvider value={state}>
             <PropsContextProvider props={propsContext}>
               <TunnelProvider>
                 <div className={styles.content}>

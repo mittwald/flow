@@ -6,6 +6,7 @@
   border-width: var(--list-item--border-width);
   border-style: var(--list-item--border-style);
   overflow: hidden;
+  transition: opacity var(--transition--duration--default) ease-in-out;
 }
 
 .items:empty {
