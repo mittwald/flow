@@ -29,8 +29,9 @@
   }
 
   @container (max-width: 550px) {
-    flex: auto;
+    flex: none;
     width: 100%;
+    margin-bottom: -1px; /* Collapse borders */
 
     &:first-of-type {
       border-radius: 0;

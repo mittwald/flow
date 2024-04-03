@@ -30,6 +30,10 @@
       "types": "./dist/types/components/Checkbox/index.d.ts",
       "import": "./dist/Checkbox.js"
     },
+    "./CheckboxButton": {
+      "types": "./dist/types/components/CheckboxButton/index.d.ts",
+      "import": "./dist/CheckboxButton.js"
+    },
     "./CheckboxGroup": {
       "types": "./dist/types/components/CheckboxGroup/index.d.ts",
       "import": "./dist/CheckboxGroup.js"

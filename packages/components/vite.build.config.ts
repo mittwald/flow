@@ -25,6 +25,7 @@ export default defineConfig(
           Button: "./src/components/Button/index.ts",
           ButtonGroup: "./src/components/ButtonGroup/index.ts",
           Checkbox: "./src/components/Checkbox/index.ts",
+          CheckboxButton: "./src/components/CheckboxButton/index.ts",
           CheckboxGroup: "./src/components/CheckboxGroup/index.ts",
           ColumnLayout: "./src/components/ColumnLayout/index.ts",
           Content: "./src/components/Content/index.ts",

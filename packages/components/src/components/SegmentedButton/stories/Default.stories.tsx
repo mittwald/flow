@@ -1,10 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Segment, SegmentedButton } from "../index";
 import React from "react";
-import { Content } from "@/components/Content";
 import { Label } from "@/components/Label";
 import { Text } from "@/components/Text";
-import { IconApp, IconDomain } from "@/components/Icon/components/icons";
+import { IconApp } from "@/components/Icon/components/icons";
 import { action } from "@storybook/addon-actions";
 import { FieldError } from "@/components/FieldError";
 
