@@ -50,6 +50,7 @@ export default defineConfig(
           Modal: "./src/components/Modal/index.ts",
           Navigation: "./src/components/Navigation/index.ts",
           NumberField: "./src/components/NumberField/index.ts",
+          ProgressBar: "./src/components/ProgressBar/index.ts",
           RadioGroup: "./src/components/RadioGroup/index.ts",
           Section: "./src/components/Section/index.ts",
           StatusBadge: "./src/components/StatusBadge/index.ts",

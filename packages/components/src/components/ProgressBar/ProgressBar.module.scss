@@ -7,14 +7,19 @@
   gap: var(--progress-bar--label-to-bar-spacing);
   width: 100%;
   font-size: var(--progress-bar--font-size);
-  font-weight: var(--progress-bar--font-weight);
-  color: var(--progress-bar--color);
 
   @extend .info;
+
+  .label {
+    grid-area: label;
+    font-weight: var(--font-weight--normal);
+    color: var(--color--default);
+  }
 }
 
 .value {
   grid-area: value;
+  font-weight: var(--progress-bar--value-font-weight);
 }
 
 .bar {

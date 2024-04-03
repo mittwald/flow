@@ -126,6 +126,10 @@
       "types": "./dist/types/components/NumberField/index.d.ts",
       "import": "./dist/NumberField.js"
     },
+    "./ProgressBar": {
+      "types": "./dist/types/components/ProgressBar/index.d.ts",
+      "import": "./dist/NumberField.js"
+    },
     "./RadioGroup": {
       "types": "./dist/types/components/RadioGroup/index.d.ts",
       "import": "./dist/RadioGroup.js"

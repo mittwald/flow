@@ -4,6 +4,7 @@ import styles from "./ProgressBar.module.scss";
 import clsx from "clsx";
 import { useNumberFormatter } from "react-aria";
 import { PropsWithStatus } from "@/lib/types/props";
+import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
 
 export interface ProgressBarProps
   extends PropsWithChildren<Omit<Aria.ProgressBarProps, "children">>,
@@ -38,10 +39,16 @@ export const ProgressBar: FC<ProgressBarProps> = (props) => {
       ? formatter.format(props.maxValue)
       : undefined;
 
+  const propsContext: PropsContext = {
+    Label: {
+      className: styles.label,
+    },
+  };
+
   return (
     <Aria.ProgressBar className={rootClassName} {...rest}>
       {({ percentage, valueText }) => (
-        <>
+        <PropsContextProvider props={propsContext}>
           {children}
           <span className={styles.value}>
             {maxValueText ? `${valueText} of ${maxValueText}` : valueText}
@@ -49,7 +56,7 @@ export const ProgressBar: FC<ProgressBarProps> = (props) => {
           <div className={styles.bar}>
             <div className={styles.fill} style={{ width: percentage + "%" }} />
           </div>
-        </>
+        </PropsContextProvider>
       )}
     </Aria.ProgressBar>
   );
