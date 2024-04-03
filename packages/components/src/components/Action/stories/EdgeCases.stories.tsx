@@ -3,9 +3,9 @@ import Action from "../Action";
 import React from "react";
 import defaultMeta from "./Default.stories";
 import {
-  asyncAction,
-  syncAction,
-  trigger,
+  asyncFunction,
+  syncfunction,
+  button,
 } from "@/components/Button/stories/lib";
 
 const meta: Meta<typeof Action> = {
@@ -19,11 +19,11 @@ type Story = StoryObj<typeof Action>;
 
 export const MixedAsyncSyncNested: Story = {
   args: {
-    action: asyncAction,
+    action: asyncFunction,
     children: (
-      <Action action={asyncAction}>
-        <Action action={syncAction}>
-          <Action action={asyncAction}>{trigger}</Action>
+      <Action action={asyncFunction}>
+        <Action action={syncfunction}>
+          <Action action={asyncFunction}>{button}</Action>
         </Action>
       </Action>
     ),

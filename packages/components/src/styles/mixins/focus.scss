@@ -3,12 +3,11 @@
   outline-offset: var(--focus--outline-offset);
   outline-width: var(--focus--outline-width);
 
-  &[data-focused],
-  :focus {
+  &[data-focused] {
     outline-style: none;
   }
-  &[data-focus-visible],
-  :focus-visible {
-    outline-style: solid;
+
+  &[data-focus-visible] {
+    outline-style: auto;
   }
 }
