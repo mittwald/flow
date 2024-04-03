@@ -15,8 +15,6 @@ import {
   ContextMenu,
   ContextMenuItem,
 } from "@mittwald/flow-react-components/ContextMenu";
-import { Text } from "@mittwald/flow-react-components/Text";
-import { ContextMenuItem } from "@mittwald/flow-react-components/ContextMenu";
 
 <List>
   <ListStaticData data={users} />
