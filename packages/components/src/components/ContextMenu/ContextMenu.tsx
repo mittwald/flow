@@ -1,27 +1,27 @@
-import React, { PropsWithChildren } from "react";
+import React from "react";
 import * as Aria from "react-aria-components";
 import styles from "./ContextMenu.module.scss";
 import { ContextMenuItemProps } from "@/components/ContextMenu/components/ContextMenuItem";
+import { Popover, PopoverProps } from "@/components/Popover";
 import {
   flowComponent,
   FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
 
 export interface ContextMenuProps
-  extends Omit<Aria.PopoverProps, "children">,
+  extends PopoverProps,
     Pick<Aria.MenuProps<ContextMenuItemProps>, "onAction">,
-    PropsWithChildren,
     FlowComponentProps {}
 
 export const ContextMenu = flowComponent("ContextMenu", (props) => {
   const { children, onAction, ...rest } = props;
 
   return (
-    <Aria.Popover className={styles.contextMenu} {...rest}>
-      <Aria.Menu className={styles.menuList} onAction={onAction}>
+    <Popover {...rest}>
+      <Aria.Menu className={styles.contextMenu} onAction={onAction}>
         {children}
       </Aria.Menu>
-    </Aria.Popover>
+    </Popover>
   );
 });
 

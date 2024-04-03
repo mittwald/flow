@@ -13,7 +13,7 @@ export const Options: FC<OptionsProps> = (props) => {
   const rootClassName = clsx(styles.options, className);
 
   return (
-    <Popover>
+    <Popover className={styles.popover}>
       <Aria.ListBox className={rootClassName} {...rest}>
         {children}
       </Aria.ListBox>

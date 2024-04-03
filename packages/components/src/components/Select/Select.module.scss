@@ -18,7 +18,3 @@
 
   @include formControl.formControl();
 }
-
-:global(.flow--popover) {
-  width: var(--trigger-width);
-}
