@@ -13,23 +13,26 @@ progress-bar:
   bar-border-radius:
     value: "{size-rem.xs}"
 
-  # Variants
+  # Info
   info-bar-background-color:
-    value: "{info.color.200}"
+    value: "{info-soft-background-color.default}"
   info-fill-background-color:
-    value: "{info.color.700}"
+    value: "{info-solid-background-color.default}"
 
+  # Success
   success-bar-background-color:
-    value: "{success.color.200}"
+    value: "{success-soft-background-color.default}"
   success-fill-background-color:
-    value: "{success.color.700}"
+    value: "{success-solid-background-color.default}"
 
+  # Warning
   warning-bar-background-color:
-    value: "{warning.color.200}"
+    value: "{warning-soft-background-color.default}"
   warning-fill-background-color:
-    value: "{warning.color.700}"
+    value: "{warning-solid-background-color.default}"
 
+  # Danger
   danger-bar-background-color:
-    value: "{danger.color.200}"
+    value: "{danger-soft-background-color.default}"
   danger-fill-background-color:
-    value: "{danger.color.700}"
+    value: "{danger-solid-background-color.default}"

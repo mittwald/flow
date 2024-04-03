@@ -1,5 +1,4 @@
-import {
-  List,
+import List, {
   ListItemView,
   ListStaticData,
 } from "@mittwald/flow-react-components/List";
@@ -7,14 +6,14 @@ import {
   type User,
   users,
 } from "@/content/02-components/structure/list/examples/userApi";
-import { Avatar } from "@mittwald/flow-react-components/Avatar";
-import { Initials } from "@mittwald/flow-react-components/Initials";
-import { Heading } from "@mittwald/flow-react-components/Heading";
-import { Text } from "@mittwald/flow-react-components/Text";
+import Avatar from "@mittwald/flow-react-components/Avatar";
+import Initials from "@mittwald/flow-react-components/Initials";
+import Heading from "@mittwald/flow-react-components/Heading";
+import Text from "@mittwald/flow-react-components/Text";
 import ContextMenu, {
   ContextMenuItem,
 } from "@mittwald/flow-react-components/ContextMenu";
-import { Link } from "@mittwald/flow-react-components/Link";
+import Link from "@mittwald/flow-react-components/Link";
 
 <List>
   <ListStaticData data={users} />
