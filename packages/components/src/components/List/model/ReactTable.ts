@@ -1,4 +1,4 @@
-import { Signal, useSignal } from "@preact/signals-react";
+import { Signal, useSignal, useSignalEffect } from "@preact/signals-react";
 import {
   Column,
   ColumnDef,
@@ -13,7 +13,6 @@ import {
   Updater,
   useReactTable,
 } from "@tanstack/react-table";
-import { useSignals } from "@preact/signals-react/runtime";
 import List from "@/components/List/model/List";
 import { PropertyName } from "@/components/List/model/item/Item";
 import invariant from "invariant";
@@ -65,17 +64,18 @@ export class ReactTable<T> {
   }
 
   private useUpdateTableState(table: Table<T>): void {
-    useSignals();
-    const state = this.tableState.value;
+    useSignalEffect(() => {
+      const state = this.tableState.value;
 
-    if (state) {
-      table.setOptions((opts) => ({
-        ...opts,
-        state,
-      }));
-    } else {
-      this.tableState.value = table.getState();
-    }
+      if (state) {
+        table.setOptions((opts) => ({
+          ...opts,
+          state,
+        }));
+      } else {
+        this.tableState.value = table.getState();
+      }
+    });
   }
 
   private onTableStateChange = (updater: Updater<TableState>) => {

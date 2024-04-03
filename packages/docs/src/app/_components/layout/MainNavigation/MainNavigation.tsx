@@ -1,10 +1,9 @@
 "use client";
 import React, { ComponentProps, FC, useId, useMemo } from "react";
 import Navigation, {
-  NavigationItem,
+  NavigationGroup,
 } from "@mittwald/flow-react-components/Navigation";
 import Heading from "@mittwald/flow-react-components/Heading";
-import styles from "./MainNavigation.module.scss";
 import { MdxFile, SerializedMdxFile } from "@/lib/mdx/MdxFile";
 import { GroupText } from "@/app/_components/layout/MainNavigation/components/GroupText";
 import {
@@ -12,6 +11,7 @@ import {
   MdxDirectoryTree,
 } from "@/lib/mdx/components/buildDirectoryTree";
 import { usePathname } from "next/navigation";
+import { Link } from "@mittwald/flow-react-components/Link";
 
 interface Props {
   docs: SerializedMdxFile[];
@@ -30,13 +30,15 @@ const NavigationSection: FC<NavigationSectionProps> = (props) => {
 
   const navigationItems = Object.entries(tree).map(([group, treeItem]) =>
     treeItem instanceof MdxFile ? (
-      <NavigationItem
+      <Link
         key={group}
         href={treeItem.pathname}
-        isCurrent={treeItem.pathname === currentPathname}
+        aria-current={
+          treeItem.pathname === currentPathname ? "page" : undefined
+        }
       >
         {treeItem.getNavTitle()}
-      </NavigationItem>
+      </Link>
     ) : (
       <NavigationSection
         key={group}
@@ -52,13 +54,12 @@ const NavigationSection: FC<NavigationSectionProps> = (props) => {
       <Heading
         level={level as ComponentProps<typeof Heading>["level"]}
         id={headingComponentsId}
-        className={styles.heading}
       >
         <GroupText>{group}</GroupText>
       </Heading>
-      <Navigation aria-labelledby={headingComponentsId}>
+      <NavigationGroup aria-labelledby={headingComponentsId}>
         {navigationItems}
-      </Navigation>
+      </NavigationGroup>
     </>
   );
 };
@@ -79,11 +80,13 @@ const MainNavigation: FC<Props> = (props) => {
   }
 
   return (
-    <NavigationSection
-      level={2}
-      tree={selectedMainBranch}
-      group={mainPathSegment}
-    />
+    <Navigation>
+      <NavigationSection
+        level={2}
+        tree={selectedMainBranch}
+        group={mainPathSegment}
+      />
+    </Navigation>
   );
 };
 

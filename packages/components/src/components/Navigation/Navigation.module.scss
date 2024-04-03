@@ -1,7 +1,9 @@
-.navigation {
-  > ul {
-    display: flex;
-    flex-direction: column;
-    row-gap: var(--menu--item-to-item-spacing);
-  }
+@use "@/styles/mixins/menuItem";
+
+.heading {
+  margin-bottom: var(--menu--heading-to-group-spacing);
+}
+
+.item {
+  @include menuItem.menuItem();
 }

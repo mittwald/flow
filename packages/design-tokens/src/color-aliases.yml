@@ -413,6 +413,8 @@ neutral-outline-background-color:
     value: "{primary.color.100}"
   selected:
     value: "{primary.color.200}"
+  pressed:
+    value: "{primary.color.200}"
 neutral-outline-content-color:
   default:
     value: "{neutral.color.1000}"

@@ -4,6 +4,10 @@ import { getStates, getUsers, User } from "@/components/List/testData/userApi";
 import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
 import { AsyncDataLoader } from "@/components/List/model/loading/types";
+import { Avatar } from "@/components/Avatar";
+import { Initials } from "@/components/Initials";
+import { ContextMenu, ContextMenuItem } from "@/components/ContextMenu";
+import { Link } from "@/components/Link";
 import { usePromise } from "@mittwald/react-use-promise";
 import List, {
   ListFilter,
@@ -66,10 +70,10 @@ const meta: Meta<typeof List> = {
                 {user.name.first} {user.name.last}
               </Heading>
               <Text>{user.location.state}</Text>
-              <ListItemContextMenu>
+              <ContextMenu>
                 <ContextMenuItem>Show details</ContextMenuItem>
                 <ContextMenuItem>Delete</ContextMenuItem>
-              </ListItemContextMenu>
+              </ContextMenu>
             </>
           )}
         </ListItemView>
@@ -83,3 +87,39 @@ export default meta;
 type Story = StoryObj<typeof List>;
 
 export const Default: Story = {};
+
+export const ItemsWithLink: Story = {
+  render: () => {
+    const availableStates = usePromise(getStates, []);
+
+    return (
+      <List>
+        <ListLoaderAsync<User> manualPagination>{loadUsers}</ListLoaderAsync>
+        <ListFilter<User>
+          property="location.state"
+          values={availableStates}
+          mode="some"
+        />
+        <ListItemView<User>>
+          {(user) => (
+            <Link href="#">
+              <Avatar>
+                <Initials>
+                  {user.name.first} {user.name.last}
+                </Initials>
+              </Avatar>
+              <Heading>
+                {user.name.first} {user.name.last}
+              </Heading>
+              <Text>{user.location.state}</Text>
+              <ContextMenu>
+                <ContextMenuItem>Show details</ContextMenuItem>
+                <ContextMenuItem>Delete</ContextMenuItem>
+              </ContextMenu>
+            </Link>
+          )}
+        </ListItemView>
+      </List>
+    );
+  },
+};
