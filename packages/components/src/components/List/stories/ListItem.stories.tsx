@@ -6,7 +6,7 @@ import { Text } from "@/components/Text";
 import { Content } from "@/components/Content";
 import { ContextMenu, ContextMenuItem } from "@/components/ContextMenu";
 import defaultMeta from "./Default.stories";
-import { Item } from "@/components/List/components/Item";
+import { Item } from "@/components/List/components/Items/Item";
 import { Avatar } from "@/components/Avatar";
 import { IconEmail } from "@/components/Icon/components/icons";
 

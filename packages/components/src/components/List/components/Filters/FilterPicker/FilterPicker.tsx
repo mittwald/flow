@@ -25,7 +25,7 @@ export const FilterPicker: FC<Props> = (props) => {
   return (
     <Aria.MenuTrigger>
       <Button style="soft" size="s" variant="secondary">
-        <Text>{filter.name}</Text>
+        <Text>{filter.name ?? filter.property}</Text>
         <IconChevronDown />
       </Button>
       <ContextMenu onAction={(key) => filter.activateValue(key)}>

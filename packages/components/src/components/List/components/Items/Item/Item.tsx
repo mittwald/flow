@@ -1,13 +1,19 @@
 import React, { PropsWithChildren } from "react";
-import styles from "./Item.module.css";
+import styles from "./Item.module.scss";
 import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import { Wrap } from "@/components/Wrap";
+import { deepHas } from "@/lib/react/deepHas";
+import { Link } from "@/components/Link";
+import { OptionsButton } from "@/components/List/components/OptionsButton";
 
 interface Props extends PropsWithChildren {}
 
 export const Item = (props: Props) => {
   const { children } = props;
 
-  const propsContext: PropsContext = {
+  const hasLink = deepHas(children, Link);
+
+  const mainPropsContext: PropsContext = {
     Avatar: {
       className: styles.avatar,
     },
@@ -20,17 +26,31 @@ export const Item = (props: Props) => {
     Content: {
       className: styles.content,
     },
-    ListItemContextMenu: {
-      className: styles.contextMenu,
+    ContextMenu: {
+      placement: "bottom end",
+      hoc: (el) => (
+        <OptionsButton className={styles.optionsButton}>{el}</OptionsButton>
+      ),
+    },
+  };
+
+  const propsContext: PropsContext = {
+    ...mainPropsContext,
+    Link: {
+      className: styles.item,
+      unstyled: true,
+      ...mainPropsContext,
     },
   };
 
   return (
-    <div className={styles.listItem}>
-      <PropsContextProvider props={propsContext}>
-        {children}
-      </PropsContextProvider>
-    </div>
+    <Wrap if={!hasLink}>
+      <div className={styles.item}>
+        <PropsContextProvider props={propsContext}>
+          {children}
+        </PropsContextProvider>
+      </div>
+    </Wrap>
   );
 };
 
