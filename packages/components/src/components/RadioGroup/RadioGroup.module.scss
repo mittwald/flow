@@ -1,12 +1,6 @@
-.radioOptions {
+.radioGroup {
   order: 2;
   display: flex;
   flex-direction: column;
   row-gap: var(--radio-group--radio-to-radio-spacing);
-
-  &:has(.radioButton) {
-    display: grid;
-    gap: var(--radio-group--radio-button-to-radio-button-spacing);
-    grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr));
-  }
 }

@@ -18,22 +18,22 @@ type Story = StoryObj<typeof RadioGroup>;
 export const LongTexts: Story = {
   render: (props) => (
     <RadioGroup {...props} defaultValue="a" aria-label="Label">
-      <Radio value="a">{dummyText.medium} </Radio>
-      <Radio value="b">{dummyText.medium} </Radio>
-      <Radio value="c">{dummyText.medium}</Radio>
+      <Radio value="a">{dummyText.long} </Radio>
+      <Radio value="b">{dummyText.long} </Radio>
+      <Radio value="c">{dummyText.long}</Radio>
     </RadioGroup>
   ),
 };
 
 export const MultipleRadioButtons: Story = {
   render: (props) => (
-    <RadioGroup {...props} defaultValue="0" aria-label="Label">
-      {Array(16)
+    <RadioGroup {...props} defaultValue="0" aria-label="Label" l={[1, 1, 1, 1]}>
+      {Array(6)
         .fill("")
         .map((value, index) => (
           <RadioButton value={index.toString()} key={index}>
-            <Text>{dummyText.short}</Text>
-            <Content>{dummyText.short}</Content>
+            <Text>{dummyText.medium}</Text>
+            <Content>{dummyText.medium}</Content>
           </RadioButton>
         ))}
     </RadioGroup>

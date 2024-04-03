@@ -5,6 +5,7 @@ import { Label } from "@/components/Label";
 import { action } from "@storybook/addon-actions";
 import { FieldError } from "@/components/FieldError";
 import { Checkbox } from "@/components/Checkbox";
+import { CheckboxButton } from "@/components/CheckboxButton";
 
 const meta: Meta<typeof CheckboxGroup> = {
   title: "Form Controls/CheckboxGroup",
@@ -44,6 +45,16 @@ export const CheckboxDisabled: Story = {
         Read
       </Checkbox>
       <Checkbox value="write">Write</Checkbox>
+    </CheckboxGroup>
+  ),
+};
+
+export const CheckboxButtons: Story = {
+  render: (props) => (
+    <CheckboxGroup {...props}>
+      <Label>Permissions</Label>
+      <CheckboxButton value="read">Read</CheckboxButton>
+      <CheckboxButton value="write">Write</CheckboxButton>
     </CheckboxGroup>
   ),
 };

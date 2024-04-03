@@ -1,8 +1,6 @@
 radio-group:
   radio-to-radio-spacing:
     value: "{size-rem.s}"
-  radio-button-to-radio-button-spacing:
-    value: "{size-px.m}"
 
 radio:
   icon-to-text-spacing:
@@ -25,5 +23,3 @@ radio-button:
     value: "{size-rem.m}"
   label-font-weight-with-content:
     value: "{font-weight.bold}"
-  min-width:
-    value: 200px

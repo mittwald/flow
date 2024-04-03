@@ -4,20 +4,20 @@ import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { FieldError } from "@/components/FieldError";
+import { CheckboxButton } from "@/components/CheckboxButton";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import formFieldStyles from "../FormField/FormField.module.scss";
+import { ColumnLayout, ColumnLayoutProps } from "@/components/ColumnLayout";
+import { deepFindOfType } from "@/lib/react/deepFindOfType";
 
 export interface CheckboxGroupProps
-  extends PropsWithChildren<Omit<Aria.CheckboxGroupProps, "children">> {}
+  extends PropsWithChildren<Omit<Aria.CheckboxGroupProps, "children">>,
+    Pick<ColumnLayoutProps, "s" | "m" | "l"> {}
 
 export const CheckboxGroup: FC<CheckboxGroupProps> = (props) => {
-  const { children, className, ...rest } = props;
+  const { children, className, s, m, l, ...rest } = props;
 
-  const rootClassName = clsx(
-    styles.checkboxGroup,
-    formFieldStyles.formField,
-    className,
-  );
+  const rootClassName = clsx(formFieldStyles.formField, className);
 
   const propsContext: PropsContext = {
     Label: {
@@ -34,12 +34,22 @@ export const CheckboxGroup: FC<CheckboxGroupProps> = (props) => {
     },
   };
 
+  const hasCheckboxButtons = !!deepFindOfType(children, CheckboxButton);
+
   return (
     <Aria.CheckboxGroup {...rest} className={rootClassName}>
       <PropsContextProvider props={propsContext}>
         <TunnelProvider>
           <TunnelExit id="label" />
-          <div className={styles.checkboxes}>{children}</div>
+
+          {hasCheckboxButtons ? (
+            <ColumnLayout s={s} m={m} l={l} className={styles.checkboxGroup}>
+              {children}
+            </ColumnLayout>
+          ) : (
+            <div className={styles.checkboxGroup}>{children}</div>
+          )}
+
           <TunnelExit id="fieldDescription" />
           <TunnelExit id="fieldError" />
         </TunnelProvider>

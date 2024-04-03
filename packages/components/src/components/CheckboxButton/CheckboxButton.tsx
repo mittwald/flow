@@ -1,15 +1,15 @@
 import React, { FC } from "react";
-import styles from "./RadioButton.module.scss";
+import styles from "./CheckboxButton.module.scss";
 import clsx from "clsx";
 import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
-import { Radio, RadioProps } from "@/components/RadioGroup";
+import { Checkbox, CheckboxProps } from "@/components/Checkbox";
 
-export interface RadioButtonProps extends RadioProps {}
+export interface CheckboxButtonProps extends CheckboxProps {}
 
-export const RadioButton: FC<RadioButtonProps> = (props) => {
+export const CheckboxButton: FC<CheckboxButtonProps> = (props) => {
   const { children, className, ...rest } = props;
 
-  const rootClassName = clsx(styles.radioButton, className);
+  const rootClassName = clsx(styles.checkboxButton, className);
 
   const propsContext: PropsContext = {
     Text: {
@@ -21,12 +21,12 @@ export const RadioButton: FC<RadioButtonProps> = (props) => {
   };
 
   return (
-    <Radio {...rest} className={rootClassName}>
+    <Checkbox {...rest} className={rootClassName}>
       <PropsContextProvider props={propsContext}>
         {children}
       </PropsContextProvider>
-    </Radio>
+    </Checkbox>
   );
 };
 
-export default RadioButton;
+export default CheckboxButton;
