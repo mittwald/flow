@@ -56,12 +56,7 @@ export const MultipleElements: Story = {
 
 export const SmallSpace: Story = {
   render: (props) => (
-    <RadioGroup
-      {...props}
-      defaultValue="0"
-      aria-label="Rating"
-      style={{ width: "500px" }}
-    >
+    <RadioGroup {...props} defaultValue="0" aria-label="Rating">
       {Array(3)
         .fill("")
         .map((value, index) => (

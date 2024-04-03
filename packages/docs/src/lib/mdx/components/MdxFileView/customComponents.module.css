@@ -14,11 +14,12 @@
 .liveCodeEditor,
 .pre {
   margin: 1em 0;
+  overflow: hidden;
 }
 
 :not(.pre) .code,
 .pre {
-  background-color: var(--neutral--color--300);
+  background-color: var(--neutral--color--400);
   border-radius: var(--corner-radius--default);
   padding-inline: var(--size-px--xs);
   display: inline-block;

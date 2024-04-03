@@ -1,25 +1,30 @@
-import React, { FC, PropsWithChildren, SVGAttributes, useMemo } from "react";
+import React, { PropsWithChildren, SVGAttributes, useMemo } from "react";
 import styles from "./Icon.module.scss";
 import clsx from "clsx";
 import { extractSvgFromString } from "@/components/Icon/lib/extractSvgFromString";
-import { ClearPropsContext, useProps } from "@/lib/propsContext";
+import { ClearPropsContext } from "@/lib/propsContext";
+import {
+  flowComponent,
+  FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
 
 type SvgAttributeProps = SVGAttributes<SVGSVGElement>;
 
 export interface IconProps
-  extends PropsWithChildren<Omit<SvgAttributeProps, "name">> {
+  extends PropsWithChildren<Omit<SvgAttributeProps, "name">>,
+    FlowComponentProps {
   /** @default "m" */
   size?: "s" | "m" | "l";
 }
 
-export const Icon: FC<IconProps> = (props) => {
+export const Icon = flowComponent("Icon", (props) => {
   const {
     className,
     "aria-label": ariaLabel,
     children,
     size = "m",
     ...svgAttributes
-  } = useProps("Icon", props);
+  } = props;
 
   const iconProps: SvgAttributeProps = {
     ...svgAttributes,
@@ -50,6 +55,6 @@ export const Icon: FC<IconProps> = (props) => {
       {React.cloneElement(iconElement, iconProps)}
     </ClearPropsContext>
   );
-};
+});
 
 export default Icon;

@@ -1,6 +1,8 @@
 .icon {
   flex-shrink: 0;
   max-width: none;
+  display: inline-block;
+
   @extend .size-m;
 }
 
