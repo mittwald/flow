@@ -41,19 +41,19 @@
 }
 
 /* Variants */
-@mixin variant($variant) {
-  .#{$variant} {
+@mixin status($status) {
+  .#{$status} {
     .bar {
-      background: var(--progress-bar--#{$variant}-bar-background-color);
+      background: var(--progress-bar--#{$status}-bar-background-color);
     }
 
     .fill {
-      background: var(--progress-bar--#{$variant}-fill-background-color);
+      background: var(--progress-bar--#{$status}-fill-background-color);
     }
   }
 }
 
-@include variant(info);
-@include variant(success);
-@include variant(danger);
-@include variant(warning);
+@include status(info);
+@include status(success);
+@include status(danger);
+@include status(warning);
