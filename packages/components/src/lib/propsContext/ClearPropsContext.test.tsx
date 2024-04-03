@@ -7,7 +7,7 @@ import { TestComponentProps } from "@/lib/propsContext/test";
 import { expect, test } from "vitest";
 
 const ComponentUsingProps: FC<TestComponentProps> = (props) => {
-  const { testProp } = useProps("test", props);
+  const { testProp } = useProps("TestComponent", props);
   return <span data-testid="prop-value">{testProp ?? "undefined"}</span>;
 };
 
@@ -18,7 +18,7 @@ test("Component clears the context for children", () => {
   render(
     <PropsContextProvider
       props={{
-        test: {
+        TestComponent: {
           testProp: "context",
         },
       }}

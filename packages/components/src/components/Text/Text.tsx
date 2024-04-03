@@ -1,24 +1,25 @@
-import React, { FC, PropsWithChildren } from "react";
+import React, { PropsWithChildren } from "react";
 import * as Aria from "react-aria-components";
 import {
+  ClearPropsContext,
   PropsContext,
   PropsContextProvider,
-  useProps,
 } from "@/lib/propsContext";
 import { PropsWithElementType } from "@/lib/types/props";
+import invariant from "invariant";
+import {
+  flowComponent,
+  FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
 
 export interface TextProps
   extends PropsWithChildren,
     Omit<Aria.TextProps, "children" | "elementType">,
-    PropsWithElementType {}
+    PropsWithElementType,
+    FlowComponentProps {}
 
-export const Text: FC<TextProps> = (props) => {
-  const {
-    children,
-    className,
-    elementType = "span",
-    ...rest
-  } = useProps("Text", props);
+export const Text = flowComponent("Text", (props) => {
+  const { children, className, elementType = "span", ...rest } = props;
 
   const textProps = { ...rest, className };
 
@@ -37,11 +38,18 @@ export const Text: FC<TextProps> = (props) => {
     return <Element {...textProps}>{childrenElement}</Element>;
   }
 
-  return (
-    <Aria.Text {...textProps} elementType={elementType}>
-      {childrenElement}
-    </Aria.Text>
+  invariant(
+    typeof elementType === "string",
+    "'elementType' in Text component must be of type string",
   );
-};
+
+  return (
+    <ClearPropsContext>
+      <Aria.Text {...textProps} elementType={elementType}>
+        {childrenElement}
+      </Aria.Text>
+    </ClearPropsContext>
+  );
+});
 
 export default Text;

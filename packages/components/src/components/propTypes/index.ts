@@ -4,10 +4,6 @@ import type { IconProps } from "@/components/Icon";
 import type { LabelProps } from "@/components/Label";
 import type { ContentProps } from "@/components/Content";
 import type { LayoutCardProps } from "@/components/LayoutCard";
-import type {
-  NavigationItemProps,
-  NavigationProps,
-} from "@/components/Navigation";
 import type { LinkProps } from "@/components/Link";
 import type { FieldErrorProps } from "@/components/FieldError";
 import type { FieldDescriptionProps } from "@/components/FieldDescription";
@@ -16,24 +12,68 @@ import type { HeadingProps } from "@/components/Heading";
 import type { InitialsProps } from "@/components/Initials";
 import type { ImageProps } from "@/components/Image";
 import type { CopyButtonProps } from "@/components/CopyButton";
+import type { HeaderProps } from "@/components/Header/";
+import type { SwitchProps } from "@/components/Switch";
+import type { StatusBadgeProps } from "@/components/StatusBadge";
+import type { ButtonGroupProps } from "@/components/ButtonGroup";
+import type { AvatarProps } from "@/components/Avatar";
+import type { ActionProps } from "@/components/Action";
+import type { ContextMenuProps } from "@/components/ContextMenu";
 
 export * from "./types";
 
 export interface FlowComponentPropsTypes {
-  Text: TextProps;
+  Action: ActionProps;
+  Avatar: AvatarProps;
   Button: ButtonProps;
-  CopyButton: CopyButtonProps;
-  Icon: IconProps;
-  Label: LabelProps;
+  ButtonGroup: ButtonGroupProps;
   Content: ContentProps;
-  LayoutCard: LayoutCardProps;
-  Navigation: NavigationProps;
-  NavigationItem: NavigationItemProps;
-  Heading: HeadingProps;
-  InlineAlert: InlineAlertProps;
-  Link: LinkProps;
-  Initials: InitialsProps;
-  Image: ImageProps;
-  FieldError: FieldErrorProps;
+  ContextMenu: ContextMenuProps;
+  CopyButton: CopyButtonProps;
   FieldDescription: FieldDescriptionProps;
+  FieldError: FieldErrorProps;
+  Header: HeaderProps;
+  Heading: HeadingProps;
+  Icon: IconProps;
+  Image: ImageProps;
+  Initials: InitialsProps;
+  InlineAlert: InlineAlertProps;
+  Label: LabelProps;
+  LayoutCard: LayoutCardProps;
+  Link: LinkProps;
+  StatusBadge: StatusBadgeProps;
+  Switch: SwitchProps;
+  Text: TextProps;
 }
+
+const propsContextSupportingComponentsMap: Record<
+  keyof FlowComponentPropsTypes,
+  true
+> = {
+  Action: true,
+  Avatar: true,
+  Button: true,
+  ButtonGroup: true,
+  Content: true,
+  ContextMenu: true,
+  CopyButton: true,
+  FieldDescription: true,
+  FieldError: true,
+  Header: true,
+  Heading: true,
+  Icon: true,
+  Image: true,
+  Initials: true,
+  InlineAlert: true,
+  Label: true,
+  LayoutCard: true,
+  Link: true,
+  StatusBadge: true,
+  Switch: true,
+  TestComponent: true,
+  Text: true,
+};
+
+export const propsContextSupportingComponents = Object.keys(
+  propsContextSupportingComponentsMap,
+);
