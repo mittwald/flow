@@ -10,6 +10,8 @@ progress-bar:
 
   bar-height:
     value: "{size-rem.s}"
+  bar-height-small:
+    value: "{size-rem.xs}"
   bar-border-radius:
     value: "{size-rem.xs}"
 

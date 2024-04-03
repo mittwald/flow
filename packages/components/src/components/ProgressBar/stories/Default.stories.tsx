@@ -13,7 +13,9 @@ const meta: Meta<typeof ProgressBar> = {
       minValue={0}
       formatOptions={{ style: "unit", unit: "gigabyte" }}
       {...props}
-    />
+    >
+      <Label>Storage</Label>
+    </ProgressBar>
   ),
 };
 
@@ -23,16 +25,10 @@ type Story = StoryObj<typeof ProgressBar>;
 
 export const Default: Story = {};
 
-export const WithLabel: Story = {
-  render: (props) => (
-    <ProgressBar
-      value={500}
-      maxValue={1000}
-      minValue={0}
-      formatOptions={{ style: "unit", unit: "gigabyte" }}
-      {...props}
-    >
-      <Label>Storage</Label>
-    </ProgressBar>
-  ),
+export const WithMaxValue: Story = {
+  args: { showMaxValue: true },
+};
+
+export const Small: Story = {
+  args: { size: "s" },
 };

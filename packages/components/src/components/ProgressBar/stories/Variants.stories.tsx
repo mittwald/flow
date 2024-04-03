@@ -13,26 +13,26 @@ type Story = StoryObj<typeof ProgressBar>;
 
 export const Info: Story = {
   args: {
-    variant: "info",
+    status: "info",
   },
 };
 
 export const Success: Story = {
   args: {
-    variant: "success",
+    status: "success",
   },
 };
 
 export const Warning: Story = {
   args: {
-    variant: "warning",
+    status: "warning",
     value: 800,
   },
 };
 
 export const Danger: Story = {
   args: {
-    variant: "danger",
+    status: "danger",
     value: 950,
   },
 };

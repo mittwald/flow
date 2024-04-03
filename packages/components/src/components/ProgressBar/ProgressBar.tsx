@@ -2,23 +2,41 @@ import * as Aria from "react-aria-components";
 import React, { FC, PropsWithChildren } from "react";
 import styles from "./ProgressBar.module.scss";
 import clsx from "clsx";
-import { StatusVariantProps } from "@/lib/types/props";
 import { useNumberFormatter } from "react-aria";
+import { PropsWithStatus } from "@/lib/types/props";
 
 export interface ProgressBarProps
   extends PropsWithChildren<Omit<Aria.ProgressBarProps, "children">>,
-    StatusVariantProps {}
+    PropsWithStatus {
+  showMaxValue?: boolean;
+  /** @default "m" */
+  size?: "s" | "m";
+}
 
 export const ProgressBar: FC<ProgressBarProps> = (props) => {
-  const { children, className, variant = "info", ...rest } = props;
+  const {
+    children,
+    className,
+    status = "info",
+    showMaxValue,
+    size = "m",
+    ...rest
+  } = props;
 
-  const rootClassName = clsx(className, styles.progressBar, styles[variant]);
+  const rootClassName = clsx(
+    className,
+    styles.progressBar,
+    styles[`size-${size}`],
+    styles[status],
+    styles[`size-${size}`],
+  );
 
   const formatter = useNumberFormatter(props.formatOptions);
 
-  const maxValueText = props.maxValue
-    ? formatter.format(props.maxValue)
-    : undefined;
+  const maxValueText =
+    showMaxValue && props.maxValue
+      ? formatter.format(props.maxValue)
+      : undefined;
 
   return (
     <Aria.ProgressBar className={rootClassName} {...rest}>

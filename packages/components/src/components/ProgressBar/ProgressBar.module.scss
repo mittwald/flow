@@ -25,6 +25,12 @@
   background: var(--progress-bar--info-bar-background-color);
 }
 
+.size-s {
+  .bar {
+    height: var(--progress-bar--bar-height-small);
+  }
+}
+
 .fill {
   background: var(--progress-bar--info-fill-background-color);
   height: 100%;
