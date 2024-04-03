@@ -1,6 +1,11 @@
 menu:
   item-to-item-spacing:
     value: "{size-px.s}"
+  group-to-group-spacing:
+    value: "{size-px.m}"
+  heading-to-group-spacing:
+    value: "{size-px.s}"
+
 menu-item:
   font-weight:
     current:

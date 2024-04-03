@@ -6,7 +6,9 @@ import {
   IconServer,
 } from "@/components/Icon/components/icons";
 import { Text } from "@/components/Text";
-import { Navigation, NavigationItem } from "@/components/Navigation";
+import { Link } from "@/components/Link";
+import { Navigation, NavigationGroup } from "@/components/Navigation";
+import Heading from "@/components/Heading";
 
 const meta: Meta<typeof Navigation> = {
   title: "Navigation/Navigation",
@@ -23,12 +25,12 @@ type Story = StoryObj<typeof Navigation>;
 export const Default: Story = {
   render: (props) => (
     <Navigation aria-label="Companies" {...props}>
-      <NavigationItem href="https://www.apple.com">Apple</NavigationItem>
-      <NavigationItem href="https://www.mittwald.de" isCurrent>
+      <Link href="https://www.apple.com">Apple</Link>
+      <Link href="https://www.mittwald.de" aria-current="page">
         mittwald
-      </NavigationItem>
-      <NavigationItem href="https://www.adobe.com">Adobe</NavigationItem>
-      <NavigationItem href="https://www.google.com">Google</NavigationItem>
+      </Link>
+      <Link href="https://www.adobe.com">Adobe</Link>
+      <Link href="https://www.google.com">Google</Link>
     </Navigation>
   ),
 };
@@ -36,18 +38,38 @@ export const Default: Story = {
 export const WithIcons: Story = {
   render: (props) => (
     <Navigation aria-label="Main menu" {...props}>
-      <NavigationItem>
+      <Link>
         <IconCustomer />
         <Text>Customer</Text>
-      </NavigationItem>
-      <NavigationItem isCurrent>
+      </Link>
+      <Link aria-current="page">
         <IconServer />
         <Text>Server</Text>
-      </NavigationItem>
-      <NavigationItem>
+      </Link>
+      <Link>
         <IconProject />
         <Text>Project</Text>
-      </NavigationItem>
+      </Link>
+    </Navigation>
+  ),
+};
+
+export const WithGroups: Story = {
+  render: (props) => (
+    <Navigation aria-label="Main navigation" {...props}>
+      <Heading>General</Heading>
+      <NavigationGroup>
+        <Link href="#">Dashboard</Link>
+        <Link href="#" aria-current="page">
+          Performance
+        </Link>
+      </NavigationGroup>
+      <Heading>Components</Heading>
+      <NavigationGroup>
+        <Link href="#">Apps</Link>
+        <Link href="#">Databases</Link>
+        <Link href="#">Domains</Link>
+      </NavigationGroup>
     </Navigation>
   ),
 };

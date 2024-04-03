@@ -46,5 +46,8 @@ export const useOverlayController = (opts: Options = {}): OverlayController => {
     close,
     toggle,
     setIsOpen,
+    signals: {
+      isOpen,
+    },
   };
 };

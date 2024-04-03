@@ -1,4 +1,9 @@
-import React, { ComponentProps, ComponentType, PropsWithChildren } from "react";
+import React, {
+  ComponentProps,
+  ComponentType,
+  PropsWithChildren,
+  useContext,
+} from "react";
 import * as Aria from "react-aria-components";
 import {
   ClearPropsContext,
@@ -12,6 +17,7 @@ import {
   FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
 import { PropsWithClassName } from "@/lib/types/props";
+import { linkContext } from "@/components/Link/context";
 
 export interface LinkProps
   extends PropsWithChildren<
@@ -24,6 +30,7 @@ export interface LinkProps
   inline?: boolean;
   linkComponent?: ComponentType<Omit<ComponentProps<"a">, "ref">>;
   unstyled?: boolean;
+  "aria-current"?: string;
 }
 
 export const Link = flowComponent("Link", (props) => {
@@ -32,10 +39,14 @@ export const Link = flowComponent("Link", (props) => {
     className,
     variant = "default",
     inline,
-    linkComponent: Link = Aria.Link,
+    linkComponent: linkComponentFromProps,
     unstyled = false,
+    "aria-current": ariaCurrent,
     ...rest
   } = props;
+
+  const { linkComponent: linkComponentFromContext } = useContext(linkContext);
+  const Link = linkComponentFromProps ?? linkComponentFromContext ?? Aria.Link;
 
   const rootClassName = unstyled
     ? className
@@ -48,9 +59,17 @@ export const Link = flowComponent("Link", (props) => {
     },
   };
 
+  const unsupportedTypingsLinkProps = {
+    "aria-current": ariaCurrent,
+  } as Record<string, unknown>;
+
   return (
     <ClearPropsContext>
-      <Link className={rootClassName} {...rest}>
+      <Link
+        className={rootClassName}
+        {...rest}
+        {...unsupportedTypingsLinkProps}
+      >
         <PropsContextProvider props={propsContext}>
           {children}
         </PropsContextProvider>

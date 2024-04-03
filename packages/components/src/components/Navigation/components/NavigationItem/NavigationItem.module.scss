@@ -1,5 +1,0 @@
-@use "@/styles/mixins/menuItem";
-
-.navigationItem {
-  @include menuItem.menuItem();
-}

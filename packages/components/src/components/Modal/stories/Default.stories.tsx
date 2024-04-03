@@ -28,14 +28,7 @@ const meta: Meta<typeof Modal> = {
           </TextField>
         </Content>
         <ButtonGroup>
-          <Action
-            action={() => {
-              console.log("?");
-              const c = useOverlayController();
-              console.log("!");
-              return c.close;
-            }}
-          >
+          <Action closeModal>
             <Button variant="accent">Create customer</Button>
             <Button variant="secondary" style="soft">
               Abort

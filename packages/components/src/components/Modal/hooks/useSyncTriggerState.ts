@@ -1,10 +1,10 @@
 import { useContext, useEffect } from "react";
 import * as Aria from "react-aria-components";
 import { OverlayController } from "@/lib/controller/overlayController/types";
+import { useSignalEffect } from "@preact/signals-react";
 
 export const useSyncTriggerState = (controller: OverlayController) => {
   const triggerState = useContext(Aria.OverlayTriggerStateContext);
-  const isOpen = controller.useIsOpen();
 
   useEffect(() => {
     if (triggerState) {
@@ -12,9 +12,11 @@ export const useSyncTriggerState = (controller: OverlayController) => {
     }
   }, [triggerState?.isOpen]);
 
-  useEffect(() => {
+  useSignalEffect(() => {
+    const isOpen = controller.signals.isOpen.value;
+
     if (triggerState) {
       triggerState.setOpen(isOpen);
     }
-  }, [isOpen, triggerState]);
+  });
 };

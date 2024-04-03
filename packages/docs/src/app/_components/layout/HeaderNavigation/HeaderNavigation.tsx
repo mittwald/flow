@@ -1,13 +1,12 @@
 "use client";
 import React, { FC } from "react";
-import Navigation, {
-  NavigationItem,
-} from "@mittwald/flow-react-components/Navigation";
+import Navigation from "@mittwald/flow-react-components/Navigation";
 import { MdxFile, SerializedMdxFile } from "@/lib/mdx/MdxFile";
 import { groupBy } from "remeda";
 import styles from "./HeaderNavigation.module.scss";
 import { GroupText } from "@/app/_components/layout/MainNavigation/components/GroupText";
 import { usePathname } from "next/navigation";
+import { Link } from "@mittwald/flow-react-components/Link";
 
 interface Props {
   docs: SerializedMdxFile[];
@@ -21,13 +20,13 @@ const HeaderNavigation: FC<Props> = (props) => {
   const currentPathname = usePathname();
 
   const navigationItems = Object.entries(navGroups).map(([group, mdxFiles]) => (
-    <NavigationItem
+    <Link
       href={mdxFiles[0].pathname}
       key={mdxFiles[0].pathname}
-      isCurrent={currentPathname.includes(group)}
+      aria-current={currentPathname.includes(group) ? "page" : undefined}
     >
       <GroupText>{group}</GroupText>
-    </NavigationItem>
+    </Link>
   ));
 
   return (
