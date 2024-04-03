@@ -1,6 +1,8 @@
 radio-group:
   radio-to-radio-spacing:
     value: "{size-rem.s}"
+  radio-button-to-radio-button-spacing:
+    value: "{size-px.m}"
 
 radio:
   icon-to-text-spacing:
@@ -15,3 +17,13 @@ radio:
       value: "{neutral-outline-border-color.selected}"
     disabled:
       value: "{disabled-outline-content-color}"
+
+radio-button:
+  text-to-text-spacing:
+    value: "{size-rem.xs}"
+  icon-to-text-spacing:
+    value: "{size-rem.m}"
+  label-font-weight-with-content:
+    value: "{font-weight.bold}"
+  min-width:
+    value: 200px

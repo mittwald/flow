@@ -1,11 +1,3 @@
 segmented-button:
-  segment-to-segment-spacing:
-    value: "{size-px.m}"
   text-to-text-spacing:
     value: "{size-rem.xs}"
-  icon-to-text-spacing:
-    value: "{size-rem.m}"
-  label-font-weight-with-content-or-icon:
-    value: "{font-weight.bold}"
-  icon-size-without-content:
-    value: "{icon.size.l}"

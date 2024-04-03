@@ -1,9 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Segment, SegmentedButton } from "../index";
-import { Content } from "@/components/Content";
 import { Text } from "@/components/Text";
 import React from "react";
-import { IconApp } from "@/components/Icon/components/icons";
 import { dummyText } from "@/lib/dev/dummyText";
 import defaultMeta from "./Default.stories";
 
@@ -19,49 +17,21 @@ type Story = StoryObj<typeof SegmentedButton>;
 export const LongTexts: Story = {
   render: (props) => (
     <SegmentedButton {...props} defaultValue="a" aria-label="Label">
-      <Segment value="a">
-        <IconApp />
-        <Text>{dummyText.medium}</Text>
-        <Content>{dummyText.medium}</Content>
-      </Segment>
-      <Segment value="b">
-        <IconApp />
-        <Text>{dummyText.medium}</Text>
-        <Content>{dummyText.short}</Content>
-      </Segment>
-      <Segment value="c">
-        <IconApp />
-        <Text>{dummyText.short}</Text>
-        <Content>{dummyText.medium}</Content>
-      </Segment>
-    </SegmentedButton>
-  ),
-};
-
-export const MultipleElements: Story = {
-  render: (props) => (
-    <SegmentedButton {...props} defaultValue="0" aria-label="Rating">
-      {Array(9)
-        .fill("")
-        .map((value, index) => (
-          <Segment value={index.toString()} key={index}>
-            <IconApp />
-            <Text>{index + 1} Star</Text>
-            <Content>{dummyText.medium}</Content>
-          </Segment>
-        ))}
+      <Segment value="a">{dummyText.medium}</Segment>
+      <Segment value="b">{dummyText.medium}</Segment>
+      <Segment value="c">{dummyText.medium}</Segment>
     </SegmentedButton>
   ),
 };
 
 export const SmallSpace: Story = {
   render: (props) => (
-    <SegmentedButton {...props} defaultValue="0" aria-label="Rating">
+    <SegmentedButton {...props} defaultValue="0" aria-label="Label">
       {Array(3)
         .fill("")
         .map((value, index) => (
           <Segment value={index.toString()} key={index}>
-            <Text>{index + 1} Star</Text>
+            <Text>Option {index + 1}</Text>
           </Segment>
         ))}
     </SegmentedButton>

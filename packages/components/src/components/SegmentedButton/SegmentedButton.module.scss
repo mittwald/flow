@@ -9,21 +9,4 @@
   flex-wrap: wrap;
 
   order: 2;
-
-  /* With icon or content */
-  &:has(:global(.flow--segmented-button--segment--content)),
-  &:has(:global(.flow--segmented-button--segment--icon)) {
-    display: grid;
-    gap: var(--segmented-button--segment-to-segment-spacing);
-  }
-
-  /* With icon */
-  &:has(:global(.flow--segmented-button--segment--icon)) {
-    grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr));
-  }
-
-  /* With content */
-  &:has(:global(.flow--segmented-button--segment--content)) {
-    grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
-  }
 }
