@@ -5,7 +5,7 @@ import { Label } from "@/components/Label";
 import { action } from "@storybook/addon-actions";
 
 const meta: Meta<typeof NumberField> = {
-  title: "Forms/NumberField/EdgeCases",
+  title: "Form Controls/NumberField/Edge Cases",
   component: NumberField,
   render: (props) => (
     <NumberField onChange={action("onChange")} {...props}>

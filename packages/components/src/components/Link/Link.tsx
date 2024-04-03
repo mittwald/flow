@@ -1,30 +1,81 @@
-import React, { FC, PropsWithChildren } from "react";
+import React, {
+  ComponentProps,
+  ComponentType,
+  PropsWithChildren,
+  useContext,
+} from "react";
 import * as Aria from "react-aria-components";
-import { useProps } from "@/lib/propsContext";
+import {
+  ClearPropsContext,
+  PropsContext,
+  PropsContextProvider,
+} from "@/lib/propsContext";
 import styles from "./Link.module.scss";
 import clsx from "clsx";
+import {
+  flowComponent,
+  FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
+import { PropsWithClassName } from "@/lib/types/props";
+import { linkContext } from "@/components/Link/context";
 
 export interface LinkProps
-  extends PropsWithChildren<Omit<Aria.LinkProps, "children">> {
+  extends PropsWithChildren<
+      Omit<Aria.LinkProps, "children" | "slot" | "className">
+    >,
+    FlowComponentProps,
+    PropsWithClassName {
   /** @default "default" */
   variant?: "default" | "danger";
+  inline?: boolean;
+  linkComponent?: ComponentType<Omit<ComponentProps<"a">, "ref">>;
+  unstyled?: boolean;
+  "aria-current"?: string;
 }
 
-export const Link: FC<LinkProps> = (props) => {
+export const Link = flowComponent("Link", (props) => {
   const {
     children,
     className,
     variant = "default",
+    inline,
+    linkComponent: linkComponentFromProps,
+    unstyled = false,
+    "aria-current": ariaCurrent,
     ...rest
-  } = useProps("Link", props);
+  } = props;
 
-  const rootClassName = clsx(styles.link, styles[variant], className);
+  const { linkComponent: linkComponentFromContext } = useContext(linkContext);
+  const Link = linkComponentFromProps ?? linkComponentFromContext ?? Aria.Link;
+
+  const rootClassName = unstyled
+    ? className
+    : clsx(styles.link, styles[variant], inline && styles.inline, className);
+
+  const propsContext: PropsContext = {
+    Icon: {
+      className: styles.icon,
+      size: "s",
+    },
+  };
+
+  const unsupportedTypingsLinkProps = {
+    "aria-current": ariaCurrent,
+  } as Record<string, unknown>;
 
   return (
-    <Aria.Link className={rootClassName} {...rest}>
-      {children}
-    </Aria.Link>
+    <ClearPropsContext>
+      <Link
+        className={rootClassName}
+        {...rest}
+        {...unsupportedTypingsLinkProps}
+      >
+        <PropsContextProvider props={propsContext}>
+          {children}
+        </PropsContextProvider>
+      </Link>
+    </ClearPropsContext>
   );
-};
+});
 
 export default Link;

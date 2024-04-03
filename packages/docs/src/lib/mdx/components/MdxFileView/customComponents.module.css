@@ -1,6 +1,5 @@
 .heading2 {
-  margin: var(--size-rem--xl) 0;
-  padding-top: var(--size-rem--xl);
+  margin: var(--size-rem--xl) 0 var(--size-rem--l);
   border-top: var(--border-width--default) solid var(--neutral--color--500);
 }
 
@@ -15,12 +14,13 @@
 .liveCodeEditor,
 .pre {
   margin: 1em 0;
+  overflow: hidden;
 }
 
 :not(.pre) .code,
 .pre {
-  background-color: var(--neutral--color--300);
-  border-radius: var(--border-radius--default);
+  background-color: var(--neutral--color--400);
+  border-radius: var(--corner-radius--default);
   padding-inline: var(--size-px--xs);
   display: inline-block;
 }

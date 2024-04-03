@@ -1,12 +1,19 @@
 @mixin level($level) {
-  h#{$level}.heading {
-    font-size: var(--heading--h#{$level}-font-size);
+  h#{$level} {
+    --font-size: var(--heading--h#{$level}-font-size);
   }
 }
 
 .heading {
-  font-weight: var(--heading--font-weight);
+  font-family: "ProximaNova", sans-serif;
   color: var(--heading--color);
+  display: flex;
+  column-gap: var(--heading--icon-to-text-spacing);
+  font-size: var(--font-size);
+
+  .icon {
+    height: calc(var(--font-size) * var(--line-height--default));
+  }
 }
 
 @include level(1);
@@ -15,3 +22,9 @@
 @include level(4);
 @include level(5);
 @include level(6);
+
+@media (max-width: 550px) {
+  h1 {
+    --font-size: var(--heading--h1-font-size-mobile);
+  }
+}

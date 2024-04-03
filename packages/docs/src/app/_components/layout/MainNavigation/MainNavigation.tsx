@@ -1,52 +1,93 @@
 "use client";
-import React, { FC, Fragment, ReactElement, useId } from "react";
+import React, { ComponentProps, FC, useId, useMemo } from "react";
 import Navigation, {
-  NavigationItem,
+  NavigationGroup,
 } from "@mittwald/flow-react-components/Navigation";
 import Heading from "@mittwald/flow-react-components/Heading";
-import { usePathname } from "next/navigation";
-import styles from "./MainNavigation.module.scss";
 import { MdxFile, SerializedMdxFile } from "@/lib/mdx/MdxFile";
-import { NextJsNavigationItemLink } from "@/app/_components/layout/MainNavigation/NextJsNavigationItemLink";
-import { groupBy } from "remeda";
-import { GroupHeadingText } from "@/app/_components/layout/MainNavigation/components/GroupHeadingText";
+import { GroupText } from "@/app/_components/layout/MainNavigation/components/GroupText";
+import {
+  buildDirectoryTree,
+  MdxDirectoryTree,
+} from "@/lib/mdx/components/buildDirectoryTree";
+import { usePathname } from "next/navigation";
+import { Link } from "@mittwald/flow-react-components/Link";
 
 interface Props {
   docs: SerializedMdxFile[];
 }
 
-const MainNavigation: FC<Props> = (props) => {
-  const docs = props.docs.map(MdxFile.deserialize);
+interface NavigationSectionProps {
+  level: number;
+  tree: MdxDirectoryTree;
+  group: string;
+}
 
-  const navGroups = groupBy(docs, (d) => d.pathname.split("/")[1]);
-
+const NavigationSection: FC<NavigationSectionProps> = (props) => {
+  const { level, tree, group } = props;
   const headingComponentsId = useId();
   const currentPathname = usePathname();
 
-  const navItem = (mdx: MdxFile): ReactElement => {
-    const href = mdx.pathname;
-    return (
-      <NavigationItem
-        key={href}
-        href={href}
-        isCurrent={href === currentPathname}
-        linkComponent={NextJsNavigationItemLink}
+  const navigationItems = Object.entries(tree).map(([group, treeItem]) =>
+    treeItem instanceof MdxFile ? (
+      <Link
+        key={group}
+        href={treeItem.pathname}
+        aria-current={
+          treeItem.pathname === currentPathname ? "page" : undefined
+        }
       >
-        {mdx.getNavTitle()}
-      </NavigationItem>
-    );
-  };
+        {treeItem.getNavTitle()}
+      </Link>
+    ) : (
+      <NavigationSection
+        key={group}
+        tree={treeItem}
+        level={level + 1}
+        group={group}
+      />
+    ),
+  );
 
-  return Object.entries(navGroups).map(([group, mdxFiles]) => (
-    <Fragment key={group}>
-      <Heading level={4} id={headingComponentsId} className={styles.heading}>
-        <GroupHeadingText>{group}</GroupHeadingText>
+  return (
+    <>
+      <Heading
+        level={level as ComponentProps<typeof Heading>["level"]}
+        id={headingComponentsId}
+      >
+        <GroupText>{group}</GroupText>
       </Heading>
-      <Navigation aria-labelledby={headingComponentsId}>
-        {mdxFiles.map(navItem)}
-      </Navigation>
-    </Fragment>
-  ));
+      <NavigationGroup aria-labelledby={headingComponentsId}>
+        {navigationItems}
+      </NavigationGroup>
+    </>
+  );
+};
+
+const MainNavigation: FC<Props> = (props) => {
+  const docs = props.docs.map(MdxFile.deserialize);
+  const docsTree = useMemo(() => buildDirectoryTree(docs), [docs]);
+  const currentPathname = usePathname();
+  const mainPathSegment = currentPathname.split("/")[1];
+
+  if (mainPathSegment === undefined) {
+    return null;
+  }
+
+  const selectedMainBranch = docsTree[mainPathSegment];
+  if (!selectedMainBranch || selectedMainBranch instanceof MdxFile) {
+    return null;
+  }
+
+  return (
+    <Navigation>
+      <NavigationSection
+        level={2}
+        tree={selectedMainBranch}
+        group={mainPathSegment}
+      />
+    </Navigation>
+  );
 };
 
 export default MainNavigation;

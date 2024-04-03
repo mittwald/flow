@@ -1,32 +1,81 @@
-import React, { FC, PropsWithChildren } from "react";
+import React, { PropsWithChildren } from "react";
 import styles from "./Button.module.scss";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import {
+  ClearPropsContext,
   PropsContext,
   PropsContextProvider,
-  useProps,
 } from "@/lib/propsContext";
+import {
+  IconFailed,
+  IconPending,
+  IconSucceeded,
+} from "@/components/Icon/components/icons";
+import { Wrap } from "@/components/Wrap";
+import { Text } from "@/components/Text";
+import {
+  flowComponent,
+  FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
+import locales from "./locales/*.locale.json";
+import { useLocalizedStringFormatter } from "react-aria";
 
-export interface ButtonProps extends PropsWithChildren<Aria.ButtonProps> {
+export interface ButtonProps
+  extends PropsWithChildren<Omit<Aria.ButtonProps, "style">>,
+    FlowComponentProps {
   /** @default "primary" */
-  variant?: "primary" | "accent" | "secondary" | "danger" | "plain";
-  small?: boolean;
+  variant?: "primary" | "accent" | "secondary" | "danger";
+  /** @default "solid" */
+  style?: "plain" | "solid" | "soft";
+  /** @default "m" */
+  size?: "m" | "s";
+
+  isPending?: boolean;
+  isSucceeded?: boolean;
+  isFailed?: boolean;
 }
 
-export const Button: FC<ButtonProps> = (props) => {
+const disablePendingProps = (props: ButtonProps) => {
+  if (props.isPending || props.isSucceeded || props.isFailed) {
+    props = { ...props };
+    props.onPress = undefined;
+    props.onPressStart = undefined;
+    props.onPressEnd = undefined;
+    props.onPressChange = undefined;
+    props.onPressUp = undefined;
+    props.onKeyDown = undefined;
+    props.onKeyUp = undefined;
+  }
+
+  return props;
+};
+
+export const Button = flowComponent("Button", (props) => {
+  props = disablePendingProps(props);
+
   const {
     variant = "primary",
+    style = "solid",
     children,
     className,
-    small,
+    size = "m",
+    isPending,
+    isDisabled,
+    isSucceeded,
+    isFailed,
+    "aria-label": ariaLabel,
     ...restProps
-  } = useProps("Button", props);
+  } = props;
 
   const rootClassName = clsx(
     styles.button,
-    small && styles.small,
+    isPending && styles.isPending,
+    isSucceeded && styles.isSucceeded,
+    isFailed && styles.isFailed,
+    styles[`size-${size}`],
     styles[variant],
+    styles[style],
     className,
   );
 
@@ -34,17 +83,61 @@ export const Button: FC<ButtonProps> = (props) => {
     Icon: {
       className: styles.icon,
       "aria-hidden": true,
-      fixedWidth: true,
+      size,
+    },
+    Text: {
+      className: styles.text,
     },
   };
 
-  return (
-    <Aria.Button className={rootClassName} {...restProps}>
-      <PropsContextProvider props={propsContext}>
-        {children}
-      </PropsContextProvider>
-    </Aria.Button>
+  const stringFormatter = useLocalizedStringFormatter(locales);
+
+  const stateLabel =
+    isSucceeded || isFailed || isPending
+      ? stringFormatter.format(
+          `button.${
+            isSucceeded ? "isSucceeded" : isFailed ? "isFailed" : "isPending"
+          }`,
+        )
+      : undefined;
+
+  const StateIconComponent = isSucceeded
+    ? IconSucceeded
+    : isFailed
+      ? IconFailed
+      : isPending
+        ? IconPending
+        : undefined;
+
+  const stateIcon = StateIconComponent && (
+    <StateIconComponent size={size} className={styles.stateIcon} />
   );
-};
+
+  const isStringContent = typeof children === "string";
+
+  return (
+    <ClearPropsContext>
+      <Aria.Button
+        className={rootClassName}
+        isDisabled={isDisabled}
+        aria-label={stateLabel ?? ariaLabel}
+        {...restProps}
+      >
+        <Wrap if={stateIcon}>
+          <span className={styles.content}>
+            <Wrap if={isStringContent}>
+              <Text>
+                <PropsContextProvider props={propsContext}>
+                  {children}
+                </PropsContextProvider>
+              </Text>
+            </Wrap>
+          </span>
+        </Wrap>
+        {stateIcon}
+      </Aria.Button>
+    </ClearPropsContext>
+  );
+});
 
 export default Button;

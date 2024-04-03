@@ -3,14 +3,19 @@ import * as Aria from "react-aria-components";
 import formFieldStyles from "../FormField/FormField.module.scss";
 import styles from "./NumberField.module.scss";
 import clsx from "clsx";
-import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import {
+  ClearPropsContext,
+  PropsContext,
+  PropsContextProvider,
+} from "@/lib/propsContext";
 import { FieldError } from "@/components/FieldError";
 import { Button } from "@/components/Button";
-import { Icon } from "@/components/Icon";
-import { faChevronUp } from "@fortawesome/free-solid-svg-icons/faChevronUp";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons/faChevronDown";
-import { faPlus } from "@fortawesome/free-solid-svg-icons/faPlus";
-import { faMinus } from "@fortawesome/free-solid-svg-icons/faMinus";
+import {
+  IconChevronDown,
+  IconChevronUp,
+  IconMinus,
+  IconPlus,
+} from "@/components/Icon/components/icons";
 
 export interface NumberFieldProps
   extends PropsWithChildren<Omit<Aria.NumberFieldProps, "children">> {}
@@ -34,33 +39,37 @@ export const NumberField: FC<NumberFieldProps> = (props) => {
   };
 
   return (
-    <Aria.NumberField {...rest} className={rootClassName}>
-      <Aria.Group className={styles.group}>
-        <Button
-          slot="decrement"
-          className={styles.decrementButton}
-          small
-          variant="plain"
-        >
-          <Icon faIcon={faChevronDown} />
-          <Icon faIcon={faMinus} />
-        </Button>
-        <Aria.Input className={styles.input} />
-        <Button
-          slot="increment"
-          className={styles.incrementButton}
-          small
-          variant="plain"
-        >
-          <Icon faIcon={faChevronUp} />
-          <Icon faIcon={faPlus} />
-        </Button>
-      </Aria.Group>
-      <PropsContextProvider props={propsContext}>
-        {children}
-      </PropsContextProvider>
-      <FieldError className={styles.fieldError} />
-    </Aria.NumberField>
+    <ClearPropsContext>
+      <Aria.NumberField {...rest} className={rootClassName}>
+        <Aria.Group className={styles.group}>
+          <Button
+            slot="decrement"
+            className={styles.decrementButton}
+            size="s"
+            style="plain"
+            variant="secondary"
+          >
+            <IconChevronDown />
+            <IconMinus className={styles.coarsePointerIcon} />
+          </Button>
+          <Aria.Input className={styles.input} />
+          <Button
+            slot="increment"
+            className={styles.incrementButton}
+            size="s"
+            style="plain"
+            variant="secondary"
+          >
+            <IconChevronUp />
+            <IconPlus className={styles.coarsePointerIcon} />
+          </Button>
+        </Aria.Group>
+        <PropsContextProvider props={propsContext}>
+          {children}
+        </PropsContextProvider>
+        <FieldError className={formFieldStyles.fieldError} />
+      </Aria.NumberField>
+    </ClearPropsContext>
   );
 };
 

@@ -1,20 +1,24 @@
 import styles from "./customComponents.module.css";
 import Heading from "@mittwald/flow-react-components/Heading";
 import { MDXComponents } from "mdx/types";
-import Note from "@mittwald/flow-react-components/Note";
+import InlineAlert from "@mittwald/flow-react-components/InlineAlert";
 import Content from "@mittwald/flow-react-components/Content";
-import React, { Children, isValidElement } from "react";
-import CopyToClipboardButton from "@mittwald/flow-react-components/CopyToClipboardButton";
+import React from "react";
+import CopyButton from "@mittwald/flow-react-components/CopyButton";
 
 export const customComponents: MDXComponents = {
+  Content: Content,
+  Heading: Heading,
+  InlineAlert: InlineAlert,
+
   pre: ({ children }) => (
     <div className={styles.preContainer}>
       <pre className={styles.pre}>{children}</pre>
-      <CopyToClipboardButton
+      <CopyButton
         className={styles.preCopyButton}
         text={children}
-        variant="plain"
-        small
+        style="plain"
+        size="s"
       />
     </div>
   ),
@@ -26,15 +30,6 @@ export const customComponents: MDXComponents = {
   ul: ({ children }) => <ul className={styles.ul}>{children}</ul>,
 
   li: ({ children }) => <li className={styles.li}>{children}</li>,
-
-  blockquote: ({ children }) => (
-    <Note>
-      <Heading>{Children.toArray(children).find(isValidElement)}</Heading>
-      <Content>
-        {Children.toArray(children).filter(isValidElement).slice(1)}
-      </Content>
-    </Note>
-  ),
 
   h2: ({ children }) => (
     <Heading level={2} className={styles.heading2}>

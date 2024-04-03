@@ -1,25 +1,32 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Icon from "@/components/Icon/Icon";
-import { faStar } from "@fortawesome/free-regular-svg-icons/faStar";
 import React from "react";
+import { IconStar } from "@tabler/icons-react";
+import { IconProject } from "@/components/Icon/components/icons";
 
 const meta: Meta<typeof Icon> = {
   title: "Content/Icon",
   component: Icon,
-  args: {
-    fontSize: 32,
-  },
   parameters: {
-    controls: { exclude: ["faIcon"] },
+    controls: { exclude: ["tablerIcon"] },
   },
 };
 export default meta;
 
 type Story = StoryObj<typeof Icon>;
 
-export const FontAwesomeIcon: Story = {
-  args: { faIcon: faStar, "aria-label": "star" },
-  render: (props) => <Icon {...props} faIcon={faStar} aria-label="Star" />,
+export const Alias: Story = {
+  args: { "aria-label": "project" },
+  render: (props) => <IconProject {...props} />,
+};
+
+export const TablerIcon: Story = {
+  args: { "aria-label": "star" },
+  render: (props) => (
+    <Icon {...props}>
+      <IconStar />
+    </Icon>
+  ),
 };
 
 export const CustomSvgString: Story = {

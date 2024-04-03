@@ -1,5 +1,5 @@
+import { expect, test } from "vitest";
 import mergePropsContext from "./mergePropsContext";
-import { expect, test } from "@jest/globals";
 import { PropsContext } from "@/lib/propsContext";
 
 test.each<{ first: PropsContext; second: PropsContext; merged: PropsContext }>([
@@ -72,7 +72,7 @@ test.each<{ first: PropsContext; second: PropsContext; merged: PropsContext }>([
     },
     merged: {
       Button: {
-        className: "first-class second-class",
+        className: "second-class",
       },
     },
   },

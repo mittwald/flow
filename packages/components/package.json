@@ -1,131 +1,281 @@
 {
   "name": "@mittwald/flow-react-components",
-  "version": "0.1.0-alpha.10",
+  "version": "0.1.0-alpha.55",
   "type": "module",
   "description": "A React implementation of Flow, mittwald’s design system",
   "homepage": "https://mittwald.github.io/flow",
   "repository": "https://github.com/mittwald/flow",
   "exports": {
-    "./Avatar": "./dist/Avatar.js",
-    "./Badge": "./dist/Badge.js",
-    "./Button": "./dist/Button.js",
-    "./Checkbox": "./dist/Checkbox.js",
-    "./Content": "./dist/Content.js",
-    "./CopyToClipboardButton": "./dist/CopyToClipboardButton.js",
-    "./FieldDescription": "./dist/FieldDescription.js",
-    "./FieldError": "./dist/FieldError.js",
-    "./Heading": "./dist/Heading.js",
-    "./Icon": "./dist/Icon.js",
-    "./Image": "./dist/Image.js",
-    "./Initials": "./dist/Initials.js",
-    "./Label": "./dist/Label.js",
-    "./LabeledValue": "./dist/LabeledValue.js",
-    "./Link": "./dist/Link.js",
-    "./Navigation": "./dist/Navigation.js",
-    "./Note": "./dist/Note.js",
-    "./NumberField": "./dist/NumberField.js",
-    "./RadioGroup": "./dist/RadioGroup.js",
-    "./StatusIcon": "./dist/StatusIcon.js",
-    "./Switch": "./dist/Switch.js",
-    "./Text": "./dist/Text.js",
-    "./TextArea": "./dist/TextArea.js",
-    "./TextField": "./dist/TextField.js",
-    "./Tooltip": "./dist/Tooltip.js",
+    "./Avatar": {
+      "types": "./dist/types/components/Avatar/index.d.ts",
+      "import": "./dist/Avatar.js"
+    },
+    "./Action": {
+      "types": "./dist/types/components/Action/index.d.ts",
+      "import": "./dist/Action.js"
+    },
+    "./Button": {
+      "types": "./dist/types/components/Button/index.d.ts",
+      "import": "./dist/Button.js"
+    },
+    "./ButtonGroup": {
+      "types": "./dist/types/components/ButtonGroup/index.d.ts",
+      "import": "./dist/ButtonGroup.js"
+    },
+    "./Breadcrumb": {
+      "types": "./dist/types/components/Breadcrumb/index.d.ts",
+      "import": "./dist/Breadcrumb.js"
+    },
+    "./Checkbox": {
+      "types": "./dist/types/components/Checkbox/index.d.ts",
+      "import": "./dist/Checkbox.js"
+    },
+    "./ColumnLayout": {
+      "types": "./dist/types/components/ColumnLayout/index.d.ts",
+      "import": "./dist/ColumnLayout.js"
+    },
+    "./Content": {
+      "types": "./dist/types/components/Content/index.d.ts",
+      "import": "./dist/Content.js"
+    },
+    "./ContextMenu": {
+      "types": "./dist/types/components/ContextMenu/index.d.ts",
+      "import": "./dist/ContextMenu.js"
+    },
+    "./controller": {
+      "types": "./dist/types/lib/controller/index.d.ts",
+      "import": "./dist/controller.js"
+    },
+    "./CopyButton": {
+      "types": "./dist/types/components/CopyButton/index.d.ts",
+      "import": "./dist/CopyButton.js"
+    },
+    "./FieldDescription": {
+      "types": "./dist/types/components/FieldDescription/index.d.ts",
+      "import": "./dist/FieldDescription.js"
+    },
+    "./FieldError": {
+      "types": "./dist/types/components/FieldError/index.d.ts",
+      "import": "./dist/FieldError.js"
+    },
+    "./Header": {
+      "types": "./dist/types/components/Header/index.d.ts",
+      "import": "./dist/Header.js"
+    },
+    "./Heading": {
+      "types": "./dist/types/components/Heading/index.d.ts",
+      "import": "./dist/Heading.js"
+    },
+    "./Icon": {
+      "types": "./dist/types/components/Icon/index.d.ts",
+      "import": "./dist/Icon.js"
+    },
+    "./Icons": {
+      "types": "./dist/types/components/Icon/components/icons/index.d.ts",
+      "import": "./dist/Icons.js"
+    },
+    "./Image": {
+      "types": "./dist/types/components/Image/index.d.ts",
+      "import": "./dist/Image.js"
+    },
+    "./Initials": {
+      "types": "./dist/types/components/Initials/index.d.ts",
+      "import": "./dist/Initials.js"
+    },
+    "./InlineAlert": {
+      "types": "./dist/types/components/InlineAlert/index.d.ts",
+      "import": "./dist/InlineAlert.js"
+    },
+    "./InlineCode": {
+      "types": "./dist/types/components/InlineCode/index.d.ts",
+      "import": "./dist/InlineCode.js"
+    },
+    "./Label": {
+      "types": "./dist/types/components/Label/index.d.ts",
+      "import": "./dist/Label.js"
+    },
+    "./LabeledValue": {
+      "types": "./dist/types/components/LabeledValue/index.d.ts",
+      "import": "./dist/LabeledValue.js"
+    },
+    "./LayoutCard": {
+      "types": "./dist/types/components/LayoutCard/index.d.ts",
+      "import": "./dist/LayoutCard.js"
+    },
+    "./Link": {
+      "types": "./dist/types/components/Link/index.d.ts",
+      "import": "./dist/Link.js"
+    },
+    "./List": {
+      "types": "./dist/types/components/List/index.d.ts",
+      "import": "./dist/List.js"
+    },
+    "./List/ListLoaderAsyncResource": {
+      "types": "./dist/types/components/List/components/ListLoaderAsyncResource.d.ts",
+      "import": "./dist/List/ListLoaderAsyncResource.js"
+    },
+    "./Modal": {
+      "types": "./dist/types/components/Modal/index.d.ts",
+      "import": "./dist/Modal.js"
+    },
+    "./Navigation": {
+      "types": "./dist/types/components/Navigation/index.d.ts",
+      "import": "./dist/Navigation.js"
+    },
+    "./NumberField": {
+      "types": "./dist/types/components/NumberField/index.d.ts",
+      "import": "./dist/NumberField.js"
+    },
+    "./RadioGroup": {
+      "types": "./dist/types/components/RadioGroup/index.d.ts",
+      "import": "./dist/RadioGroup.js"
+    },
+    "./Section": {
+      "types": "./dist/types/components/Section/index.d.ts",
+      "import": "./dist/Section.js"
+    },
+    "./StatusBadge": {
+      "types": "./dist/types/components/StatusBadge/index.d.ts",
+      "import": "./dist/StatusBadge.js"
+    },
+    "./StatusIcon": {
+      "types": "./dist/types/components/StatusIcon/index.d.ts",
+      "import": "./dist/StatusIcon.js"
+    },
+    "./Switch": {
+      "types": "./dist/types/components/Switch/index.d.ts",
+      "import": "./dist/Switch.js"
+    },
+    "./Text": {
+      "types": "./dist/types/components/Text/index.d.ts",
+      "import": "./dist/Text.js"
+    },
+    "./TextArea": {
+      "types": "./dist/types/components/TextArea/index.d.ts",
+      "import": "./dist/TextArea.js"
+    },
+    "./TextField": {
+      "types": "./dist/types/components/TextField/index.d.ts",
+      "import": "./dist/TextField.js"
+    },
+    "./Tooltip": {
+      "types": "./dist/types/components/Tooltip/index.d.ts",
+      "import": "./dist/Tooltip.js"
+    },
+    "./nextjs/LinkProvider": {
+      "types": "./dist/types/components/nextjs/LinkProvider/index.d.ts",
+      "import": "./dist/nextjs/LinkProvider.js"
+    },
     "./styles": "./dist/styles.css"
   },
   "files": [
     "dist"
   ],
+  "engines": {
+    "node": ">=20.11"
+  },
   "scripts": {
     "build": "run vite build --config vite.build.config.ts",
-    "build:deps": "",
-    "build:deps:run": "yarn run -T lerna run build:deps --scope=@mittwald/flow-react-components",
-    "build:watch:dependents": "yarn build:deps:run && run -T lerna watch --scope=@mittwald/flow-react-components --include-dependencies -- lerna run build:deps --scope=@mittwald/flow-react-components",
-    "dev": "run storybook:start",
-    "storybook:build": "run storybook build",
-    "storybook:start": "run storybook dev -p 6006",
-    "test": "concurrently yarn:test:compile yarn:test:unit",
-    "test:compile": "tsc --noEmit",
-    "test:unit": "yarn node --experimental-vm-modules $(yarn bin jest)"
+    "build:deps:watch": "run -T build:deps:watch @mittwald/flow-react-components",
+    "build:icons": "run tsx dev/icons/generate.ts",
+    "build:storybook": "run storybook build",
+    "dev": "run nx run-many --outputStyle=stream --projects=@mittwald/flow-react-components --targets=start,build:deps:watch",
+    "start": "run storybook dev --port 6006",
+    "test": "",
+    "test:compile": "run tsc --noEmit",
+    "test:unit": "run vitest run"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.5.1",
-    "@fortawesome/react-fontawesome": "^0.2.0",
-    "@react-aria/utils": "^3.23.0",
-    "@react-types/shared": "^3.22.0",
+    "@mittwald/react-tunnel": "workspace:^",
+    "@mittwald/react-use-promise": "^2.3.13",
+    "@preact/signals-react": "^2.0.1",
+    "@react-aria/utils": "^3.23.2",
+    "@react-types/shared": "^3.22.1",
+    "@storybook/test": "^8.0.5",
+    "@tabler/icons-react": "^3.1.0",
+    "@tanstack/react-table": "^8.15.3",
     "clsx": "^2.1.0",
     "copy-to-clipboard": "^3.3.3",
-    "html-react-parser": "^5.1.2",
-    "react-aria": "^3.31.1",
-    "react-aria-components": "^1.0.1",
+    "dot-prop": "^8.0.2",
+    "html-react-parser": "^5.1.10",
+    "invariant": "^2.2.4",
+    "object-code": "^1.3.3",
+    "react-aria": "^3.32.1",
+    "react-aria-components": "^1.1.1",
     "react-children-utilities": "^2.10.0",
-    "react-stately": "^3.29.1",
-    "remeda": "^1.40.1"
+    "react-stately": "^3.30.1",
+    "remeda": "^1.57.0"
   },
   "devDependencies": {
-    "@fortawesome/free-regular-svg-icons": "^6.5.1",
-    "@fortawesome/free-solid-svg-icons": "^6.5.1",
-    "@jest/globals": "^29.7.0",
+    "@faker-js/faker": "^8.4.1",
     "@mittwald/flow-design-tokens": "workspace:^",
-    "@nx/storybook": "^18.0.4",
-    "@storybook/addon-a11y": "^7.6.14",
-    "@storybook/addon-actions": "^7.6.14",
-    "@storybook/addon-essentials": "^7.6.14",
-    "@storybook/addon-interactions": "^7.6.14",
-    "@storybook/addon-links": "^7.6.14",
-    "@storybook/blocks": "^7.6.14",
-    "@storybook/builder-vite": "^7.6.14",
-    "@storybook/components": "^7.6.14",
-    "@storybook/core-events": "^7.6.14",
-    "@storybook/manager-api": "^7.6.14",
-    "@storybook/preview-api": "^7.6.14",
-    "@storybook/react": "^7.6.14",
-    "@storybook/react-vite": "^7.6.14",
-    "@storybook/testing-library": "^0.2.2",
-    "@storybook/theming": "^7.6.14",
-    "@testing-library/react": "^14.2.1",
-    "@types/jest": "^29.5.12",
-    "@types/prop-types": "^15.7.11",
-    "@types/react": "^18.2.55",
-    "@types/react-dom": "^18.2.19",
+    "@mittwald/react-use-promise": "^2.3.13",
+    "@nx/storybook": "^18.2.1",
+    "@storybook/addon-a11y": "^8.0.5",
+    "@storybook/addon-actions": "^8.0.5",
+    "@storybook/addon-essentials": "^8.0.5",
+    "@storybook/addon-interactions": "^8.0.5",
+    "@storybook/addon-links": "^8.0.5",
+    "@storybook/blocks": "^8.0.5",
+    "@storybook/components": "^8.0.5",
+    "@storybook/core-events": "^8.0.5",
+    "@storybook/manager-api": "^8.0.5",
+    "@storybook/preview-api": "^8.0.5",
+    "@storybook/react": "^8.0.5",
+    "@storybook/react-vite": "^8.0.5",
+    "@storybook/theming": "^8.0.5",
+    "@testing-library/dom": "^9.3.4",
+    "@testing-library/jest-dom": "^6.4.2",
+    "@testing-library/react": "^14.2.2",
+    "@testing-library/user-event": "^14.5.2",
+    "@types/invariant": "^2.2.37",
+    "@types/node": "20.12.2",
+    "@types/prettier": "^3.0.0",
+    "@types/prop-types": "^15.7.12",
+    "@types/react": "^18.2.73",
+    "@types/react-dom": "^18.2.23",
     "@types/rollup": "^0.54.0",
-    "concurrently": "^8.2.2",
+    "@vitejs/plugin-react": "^4.2.1",
+    "@vitest/coverage-v8": "^1.4.0",
     "decamelize": "^6.0.0",
-    "jest": "^29.7.0",
-    "jest-environment-jsdom": "^29.7.0",
-    "postcss": "^8.4.35",
+    "fs-jetpack": "^5.1.0",
+    "happy-dom": "^14.3.10",
+    "next": "^14.1.4",
+    "nx": "^18.2.1",
+    "postcss": "^8.4.38",
     "postcss-nested-import": "^1.3.0",
-    "postcss-nesting": "^12.0.2",
+    "postcss-nesting": "^12.1.1",
+    "prettier": "^3.2.5",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-element-to-jsx-string": "^15.0.0",
-    "rollup": "^4.10.0",
-    "sass": "^1.70.0",
-    "storybook": "^7.6.14",
-    "storybook-addon-dir": "^1.0.6",
-    "storybook-addon-pseudo-states": "^2.1.2",
-    "ts-jest": "^29.1.2",
-    "typescript": "^5.3.3",
+    "rollup": "^4.13.2",
+    "sass": "^1.72.0",
+    "storybook": "^8.0.5",
+    "tsx": "^4.7.1",
+    "typescript": "^5.4.3",
     "typescript-plugin-css-modules": "^5.1.0",
-    "vite": "^5.1.1",
+    "vite": "^5.2.7",
     "vite-plugin-banner": "^0.7.1",
-    "vite-plugin-dts": "^3.7.2"
+    "vite-plugin-checker": "^0.6.4",
+    "vite-plugin-dts": "^3.8.1",
+    "vite-plugin-externalize-deps": "^0.8.0",
+    "vitest": "^1.4.0",
+    "yaml": "^2.4.1"
   },
   "peerDependencies": {
+    "@mittwald/react-use-promise": "^2.3.12",
+    "next": "*",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
-  "nx": {
-    "targets": {
-      "build": {
-        "inputs": [
-          "default",
-          "^default",
-          "{projectRoot}/*.ts",
-          "{projectRoot}/dev/"
-        ]
-      }
+  "peerDependenciesMeta": {
+    "@mittwald/react-use-promise": {
+      "optional": true
+    },
+    "next": {
+      "optional": true
     }
   }
 }

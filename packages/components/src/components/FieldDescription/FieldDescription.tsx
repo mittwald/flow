@@ -1,23 +1,27 @@
-import React, { FC, PropsWithChildren } from "react";
+import React from "react";
 import styles from "./FieldDescription.module.scss";
-import * as Aria from "react-aria-components";
 import clsx from "clsx";
-import { useProps } from "@/lib/propsContext";
-import { Text } from "@/components/Text";
+import { ClearPropsContext } from "@/lib/propsContext";
+import { Text, TextProps } from "@/components/Text";
+import {
+  flowComponent,
+  FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
 
-export interface FieldDescriptionProps
-  extends PropsWithChildren<Omit<Aria.TextProps, "children" | "slot">> {}
+export interface FieldDescriptionProps extends TextProps, FlowComponentProps {}
 
-export const FieldDescription: FC<FieldDescriptionProps> = (props) => {
-  const { children, className, ...rest } = useProps("FieldDescription", props);
+export const FieldDescription = flowComponent("FieldDescription", (props) => {
+  const { children, className, ...rest } = props;
 
   const rootClassName = clsx(styles.fieldDescription, className);
 
   return (
-    <Text slot="description" {...rest} className={rootClassName}>
-      {children}
-    </Text>
+    <ClearPropsContext>
+      <Text slot="description" {...rest} className={rootClassName}>
+        {children}
+      </Text>
+    </ClearPropsContext>
   );
-};
+});
 
 export default FieldDescription;

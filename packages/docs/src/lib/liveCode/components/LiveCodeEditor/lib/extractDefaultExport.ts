@@ -1,5 +1,3 @@
-import * as acorn from "acorn";
-import acornJsx from "acorn-jsx";
 import {
   AnonymousFunctionDeclaration,
   ExportDefaultDeclaration,
@@ -8,11 +6,10 @@ import {
   FunctionDeclaration,
   ReturnStatement,
 } from "acorn";
+import { tsxParser } from "@/lib/tsxParser";
 
 export default function extractDefaultExport(code: string): string {
-  const JSXParser = acorn.Parser.extend(acornJsx());
-
-  const tree = JSXParser.parse(code, {
+  const tree = tsxParser.parse(code, {
     ecmaVersion: 14,
     sourceType: "module",
   });

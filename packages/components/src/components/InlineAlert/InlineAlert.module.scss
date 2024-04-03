@@ -1,0 +1,56 @@
+.inlineAlert {
+  border-radius: var(--inline-alert--corner-radius);
+  border-width: var(--inline-alert--border-width);
+  border-style: var(--inline-alert--border-style);
+  border-inline-start-width: var(--inline-alert--border-x-start-width);
+  padding: var(--inline-alert--padding);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-column-gap: var(--inline-alert--icon-to-text-spacing);
+  grid-row-gap: var(--inline-alert--text-to-text-spacing);
+  width: 100%;
+
+  @extend .info;
+
+  /* Without content */
+  &:not(:has(.content)) {
+    grid-template-areas: "icon heading";
+  }
+
+  /* With content */
+  &:has(.content) {
+    grid-template-areas:
+      "icon heading"
+      ".    content";
+  }
+}
+
+/* Elements */
+.statusIcon {
+  grid-area: icon;
+}
+
+.heading {
+  grid-area: heading;
+}
+
+.content {
+  grid-area: content;
+}
+
+/* Status */
+@mixin status($status) {
+  .#{$status} {
+    border-color: var(--inline-alert--#{$status}-border-color);
+
+    .heading,
+    .statusIcon {
+      color: var(--inline-alert--#{$status}-heading-color);
+    }
+  }
+}
+
+@include status(info);
+@include status(warning);
+@include status(danger);
+@include status(success);

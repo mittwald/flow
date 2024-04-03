@@ -1,0 +1,13 @@
+section:
+  border-width:
+    value: "{border-width.100}"
+  border-style:
+    value: "{border-style.default}"
+  border-color:
+    value: "{neutral.color.500}"
+  section-to-section-spacing:
+    value: "{size-rem.xl}"
+  content-to-content-spacing:
+    value: "{size-rem.m}"
+  heading-to-header-content-spacing:
+    value: "{size-rem.m}"

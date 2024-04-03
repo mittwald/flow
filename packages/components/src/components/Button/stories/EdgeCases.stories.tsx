@@ -6,7 +6,7 @@ import defaultMeta from "./Default.stories";
 
 const meta: Meta<typeof Button> = {
   ...defaultMeta,
-  title: "Buttons/Button/Edge Cases",
+  title: "Actions/Button/Edge Cases",
 };
 export default meta;
 
@@ -14,14 +14,4 @@ type Story = StoryObj<typeof Button>;
 
 export const LongText: Story = {
   render: (props) => <Button {...props}>{dummyText.long}</Button>,
-};
-
-export const WithBreak: Story = {
-  render: (props) => (
-    <Button {...props}>
-      Line 1
-      <br />
-      Line 2
-    </Button>
-  ),
 };

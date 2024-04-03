@@ -39,7 +39,7 @@ jobs:
       - name: Build 🔨
         env:
           NEXT_BASE_PATH: "/flow"
-        run: yarn nx affected -t build --parallel=3
+        run: yarn docs build
 
       - name: Configure GitHub pages ⚙️
         uses: actions/configure-pages@v4
