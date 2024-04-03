@@ -1,18 +1,11 @@
-import Navigation, {
-  NavigationItem,
-} from "@mittwald/flow-react-components/Navigation";
+import Navigation from "@mittwald/flow-react-components/Navigation";
+import { Link } from "@mittwald/flow-react-components/Link";
 
 <Navigation aria-label="Companies">
-  <NavigationItem href="https://www.apple.com">
-    Apple
-  </NavigationItem>
-  <NavigationItem href="https://www.mittwald.de" isCurrent>
+  <Link href="https://www.apple.com">Apple</Link>
+  <Link href="https://www.mittwald.de" aria-current="page">
     mittwald
-  </NavigationItem>
-  <NavigationItem href="https://www.adobe.com">
-    Adobe
-  </NavigationItem>
-  <NavigationItem href="https://www.google.com">
-    Google
-  </NavigationItem>
+  </Link>
+  <Link href="https://www.adobe.com">Adobe</Link>
+  <Link href="https://www.google.com">Google</Link>
 </Navigation>;

@@ -26,6 +26,11 @@
   text-decoration: underline;
 }
 
+.icon {
+  margin-inline-start: var(--link--text-to-icon-spacing);
+  vertical-align: text-bottom;
+}
+
 /* Variants */
 @mixin variant($variant) {
   .#{$variant}:not([aria-disabled]) {

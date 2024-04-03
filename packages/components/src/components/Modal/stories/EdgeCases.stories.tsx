@@ -9,6 +9,7 @@ import { Text } from "@/components/Text";
 import { ButtonGroup } from "@/components/ButtonGroup";
 import { dummyText } from "@/lib/dev/dummyText";
 import Heading from "@/components/Heading";
+import { Action } from "@/components/Action";
 
 const meta: Meta<typeof Modal> = {
   ...defaultMeta,
@@ -20,47 +21,34 @@ export default meta;
 type Story = StoryObj<typeof Modal>;
 
 export const LongContent: Story = {
-  render: (props) => {
-    const [isOpen, setOpen] = React.useState(false);
-
-    return (
-      <>
-        <Button variant="accent" onPress={() => setOpen(true)}>
-          Create customer
-        </Button>
-        <Modal {...props} isOpen={isOpen} onOpenChange={setOpen}>
-          <Heading>{dummyText.short}</Heading>
-          <Content>
-            <Section>
-              <Text>{dummyText.long}</Text>
-            </Section>
-            <Section>
-              <Text>{dummyText.long}</Text>
-            </Section>
-            <Section>
-              <Text>{dummyText.long}</Text>
-            </Section>
-            <Section>
-              <Text>{dummyText.long}</Text>
-            </Section>
-            <Section>
-              <Text>{dummyText.long}</Text>
-            </Section>
-          </Content>
-          <ButtonGroup>
-            <Button variant="accent" onPress={() => setOpen(false)}>
-              Create customer
-            </Button>
-            <Button
-              style="soft"
-              variant="secondary"
-              onPress={() => setOpen(false)}
-            >
-              Abort
-            </Button>
-          </ButtonGroup>
-        </Modal>
-      </>
-    );
-  },
+  render: (props) => (
+    <Modal {...props} defaultOpen>
+      <Heading>{dummyText.short}</Heading>
+      <Content>
+        <Section>
+          <Text>{dummyText.long}</Text>
+        </Section>
+        <Section>
+          <Text>{dummyText.long}</Text>
+        </Section>
+        <Section>
+          <Text>{dummyText.long}</Text>
+        </Section>
+        <Section>
+          <Text>{dummyText.long}</Text>
+        </Section>
+        <Section>
+          <Text>{dummyText.long}</Text>
+        </Section>
+      </Content>
+      <ButtonGroup>
+        <Action closeModal>
+          <Button variant="accent">Create customer</Button>
+          <Button style="soft" variant="secondary">
+            Abort
+          </Button>
+        </Action>
+      </ButtonGroup>
+    </Modal>
+  ),
 };

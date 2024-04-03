@@ -10,6 +10,7 @@ export { IconChevronLeft } from "./IconChevronLeft";
 export { IconChevronRight } from "./IconChevronRight";
 export { IconChevronUp } from "./IconChevronUp";
 export { IconClose } from "./IconClose";
+export { IconContextMenu } from "./IconContextMenu";
 export { IconCopy } from "./IconCopy";
 export { IconCronjob } from "./IconCronjob";
 export { IconCustomer } from "./IconCustomer";
