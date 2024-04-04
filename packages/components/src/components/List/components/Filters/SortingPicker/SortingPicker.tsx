@@ -17,6 +17,10 @@ export const SortingPicker: FC = () => {
     <SortingPickerItem sorting={s} key={s.getTableColumn().id} />
   ));
 
+  if (list.sorting.length === 0) {
+    return null;
+  }
+
   return (
     <Aria.MenuTrigger>
       <Button style="soft" size="s" variant="secondary">

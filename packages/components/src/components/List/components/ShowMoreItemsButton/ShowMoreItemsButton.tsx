@@ -18,6 +18,7 @@ export const ShowMoreItemsButton: FC<ButtonProps> = (props) => {
       onPress={() => list.loader.loadMore()}
       style="plain"
       isDisabled={!canLoadMore}
+      size="s"
     >
       {stringFormatter.format("showMore")}
     </Button>

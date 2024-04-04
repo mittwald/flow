@@ -74,10 +74,12 @@ export function List(props: Props) {
     >
       <DataLoader />
       <div className={styles.list}>
-        <FilterPickerList className={styles.filters} />
-        <ItemList className={styles.rows} />
-        <PaginationInfos className={styles.paginationInfos} />
-        <ShowMoreItemsButton className={styles.showMoreButton} />
+        <FilterPickerList />
+        <ItemList />
+        <div className={styles.pagination}>
+          <PaginationInfos />
+          <ShowMoreItemsButton />
+        </div>
       </div>
     </listContext.Provider>
   );

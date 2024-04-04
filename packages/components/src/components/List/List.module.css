@@ -1,29 +1,17 @@
 .list {
-  display: grid;
-  grid-template-areas:
-    "filters         "
-    "items          "
-    "paginationInfos"
-    "showMoreButton ";
+  display: flex;
+  flex-direction: column;
 }
 
-.filters {
-  grid-area: filters;
-  margin-block-end: var(--list--filter-to-list-spacing);
+:global(.flow--list--filters--filter-bar):not(:empty) {
+  margin-bottom: var(--list--block-to-block-spacing);
 }
 
-.items {
-  grid-area: items;
-}
-
-.paginationInfos {
-  margin-top: var(--size-rem--l);
-  grid-area: paginationInfos;
-  margin-inline: auto;
-}
-
-.showMoreButton {
-  margin-top: var(--size-rem--s);
-  grid-area: showMoreButton;
-  margin-inline: auto;
+.pagination {
+  font-size: var(--font-size--s);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: var(--list--content-to-content-spacing);
+  margin-top: var(--list--block-to-block-spacing);
 }

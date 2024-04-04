@@ -16,7 +16,7 @@ export const FilterPickerList: FC<Props> = (props) => {
   const { className } = props;
   const list = useList();
 
-  const filterPickerList = list.filters.map((filter) => (
+  const filterPickers = list.filters.map((filter) => (
     <FilterPicker key={filter.property} filter={filter} />
   ));
 
@@ -24,7 +24,7 @@ export const FilterPickerList: FC<Props> = (props) => {
     <div className={clsx(className, styles.filterPickerList)}>
       <div className={styles.filterBar}>
         <SortingPicker />
-        {filterPickerList}
+        {filterPickers}
       </div>
       <ActiveFilters />
     </div>
