@@ -22,8 +22,8 @@ export const useProps = <C extends FlowComponentName>(
     : undefined;
 
   return mergeProps(
-    resolvedDynamicProps,
     localProps,
+    resolvedDynamicProps,
     withNestedPropsContext,
   ) as FlowComponentProps<C>;
 };

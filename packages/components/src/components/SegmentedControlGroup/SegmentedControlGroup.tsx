@@ -41,9 +41,9 @@ export const SegmentedControlGroup: FC<SegmentedControlGroupProps> = (
     },
     Radio: {
       className: styles.segment,
-      children: dynamic((children) => (
+      children: dynamic((props) => (
         <>
-          {children}
+          {props.children}
           <IconCheck className={styles.checkmark} />
         </>
       )),
