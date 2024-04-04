@@ -1,11 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { SegmentedControlGroup } from "../index";
 import React from "react";
-import { Label } from "@/components/Label";
-import { Text } from "@/components/Text";
-import { IconApp } from "@/components/Icon/components/icons";
 import { action } from "@storybook/addon-actions";
-import { FieldError } from "@/components/FieldError";
 import { Radio } from "@/components/RadioGroup";
 
 const meta: Meta<typeof SegmentedControlGroup> = {
