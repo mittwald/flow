@@ -1,10 +1,11 @@
 import { AnyData } from "@/components/List/model/item/types";
 import React, { FC } from "react";
+import { InlineCode } from "@/components/InlineCode";
 
 interface Props {
   data: AnyData;
 }
 
 export const FallbackRenderer: FC<Props> = (props) => (
-  <pre>{JSON.stringify(props.data)}</pre>
+  <InlineCode>{JSON.stringify(props.data)}</InlineCode>
 );

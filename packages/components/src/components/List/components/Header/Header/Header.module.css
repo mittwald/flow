@@ -1,10 +1,10 @@
-.filterPickerList {
+.header {
   display: flex;
   flex-direction: column;
   row-gap: var(--list--content-to-content-spacing);
 }
 
-.filterBar {
+.pickerList {
   display: flex;
   column-gap: var(--list--content-to-content-spacing);
 }
