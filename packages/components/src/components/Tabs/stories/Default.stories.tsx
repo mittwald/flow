@@ -60,3 +60,7 @@ export default meta;
 type Story = StoryObj<typeof Tabs>;
 
 export const Default: Story = {};
+
+export const SmallSpace: Story = {
+  parameters: { viewport: { defaultViewport: "mobile1" } },
+};

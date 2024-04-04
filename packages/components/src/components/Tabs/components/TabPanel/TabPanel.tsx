@@ -6,12 +6,16 @@ import clsx from "clsx";
 export interface TabPanelProps extends Aria.TabPanelProps {}
 
 export const TabPanel: FC<TabPanelProps> = (props) => {
-  const { children, className, ...rest } = props;
+  const { children, className, shouldForceMount = true, ...rest } = props;
 
   const rootClassName = clsx(styles.tabPanel, className);
 
   return (
-    <Aria.TabPanel className={rootClassName} {...rest}>
+    <Aria.TabPanel
+      className={rootClassName}
+      shouldForceMount={shouldForceMount}
+      {...rest}
+    >
       {children}
     </Aria.TabPanel>
   );
