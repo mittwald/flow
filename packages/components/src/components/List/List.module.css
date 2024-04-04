@@ -3,11 +3,3 @@
   flex-direction: column;
   row-gap: var(--list--block-to-block-spacing);
 }
-
-.pagination {
-  font-size: var(--font-size--s);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  row-gap: var(--list--content-to-content-spacing);
-}

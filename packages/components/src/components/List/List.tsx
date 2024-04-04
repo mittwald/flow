@@ -1,11 +1,11 @@
 import React, { PropsWithChildren } from "react";
 import { listContext } from "./listContext";
 import { DataLoader } from "@/components/List/components/DataLoader";
-import { PaginationInfos } from "@/components/List/components/PaginationInfos";
+import { PaginationInfos } from "src/components/List/components/Pagination/PaginationInfos";
 import { FilterPickerList } from "@/components/List/components/Filters/FilterPickerList";
 import styles from "./List.module.css";
 import ListModel from "@/components/List/model/List";
-import { ShowMoreItemsButton } from "@/components/List/components/ShowMoreItemsButton";
+import { ShowMoreItemsButton } from "src/components/List/components/Pagination/ShowMoreItemsButton";
 import { ItemList } from "@/components/List/components/Items/ItemList";
 import { deepFilterByType, deepFindOfType } from "@/lib/react/deepFindOfType";
 import { RenderItemFn } from "@/components/List/model/item/Item";
@@ -19,6 +19,7 @@ import { ListStaticData } from "@/components/List/components/ListStaticData";
 import { FallbackRenderer } from "@/components/List/components/Items/Item";
 import { ListLoaderAsyncResource } from "@/components/List/components/ListLoaderAsyncResource";
 import { IncrementalLoaderShape } from "@/components/List/model/loading/types";
+import Pagination from "./components/Pagination/Pagination";
 
 interface Props
   extends PropsWithChildren,
@@ -74,12 +75,9 @@ export function List(props: Props) {
     >
       <DataLoader />
       <div className={styles.list}>
-        <FilterPickerList className={styles.filters} />
+        <FilterPickerList />
         <ItemList />
-        <div className={styles.pagination}>
-          <PaginationInfos />
-          <ShowMoreItemsButton />
-        </div>
+        <Pagination />
       </div>
     </listContext.Provider>
   );
