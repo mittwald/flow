@@ -33,7 +33,7 @@ export class List<T> {
 
     this.pagination = new Pagination(this, pagination);
 
-    this.loader = new IncrementalLoader<T>(this, shape.loader);
+    this.loader = IncrementalLoader.useNew<T>(this, shape.loader);
     this.reactTable = ReactTable.useNew(this, {
       enableMultiSort,
       manualFiltering: this.loader.manualFiltering,
