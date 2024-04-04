@@ -10,7 +10,7 @@ import formFieldStyles from "../FormField/FormField.module.scss";
 export interface SegmentedButtonProps
   extends PropsWithChildren<Omit<Aria.RadioGroupProps, "children">> {}
 
-export const SegmentedButton: FC<SegmentedButtonProps> = (props) => {
+export const SegmentedControlGroup: FC<SegmentedButtonProps> = (props) => {
   const { children, className, ...rest } = props;
 
   const rootClassName = clsx(
@@ -49,4 +49,4 @@ export const SegmentedButton: FC<SegmentedButtonProps> = (props) => {
   );
 };
 
-export default SegmentedButton;
+export default SegmentedControlGroup;

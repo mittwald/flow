@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Segment, SegmentedButton } from "../index";
+import { Segment, SegmentedControlGroup } from "../index";
 import React from "react";
 import { Label } from "@/components/Label";
 import { Text } from "@/components/Text";
@@ -7,9 +7,9 @@ import { IconApp } from "@/components/Icon/components/icons";
 import { action } from "@storybook/addon-actions";
 import { FieldError } from "@/components/FieldError";
 
-const meta: Meta<typeof SegmentedButton> = {
+const meta: Meta<typeof SegmentedControlGroup> = {
   title: "Actions/SegmentedButton",
-  component: SegmentedButton,
+  component: SegmentedControlGroup,
   args: {
     onChange: action("onChange"),
   },
@@ -17,18 +17,17 @@ const meta: Meta<typeof SegmentedButton> = {
     controls: { exclude: ["onChange"] },
   },
   render: (props) => (
-    <SegmentedButton {...props} defaultValue="admin">
-      <Label>Role</Label>
+    <SegmentedControlGroup {...props} defaultValue="admin">
       <Segment value="admin">Admin</Segment>
       <Segment value="member">Member</Segment>
       <Segment value="accountant">Accountant</Segment>
-    </SegmentedButton>
+    </SegmentedControlGroup>
   ),
 };
 
 export default meta;
 
-type Story = StoryObj<typeof SegmentedButton>;
+type Story = StoryObj<typeof SegmentedControlGroup>;
 
 export const Default: Story = {};
 
@@ -40,20 +39,20 @@ export const SegmentedButtonDisabled: Story = {
 
 export const SegmentDisabled: Story = {
   render: (props) => (
-    <SegmentedButton {...props} defaultValue="admin">
+    <SegmentedControlGroup {...props} defaultValue="admin">
       <Label>Role</Label>
       <Segment value="admin">Admin</Segment>
       <Segment value="member" isDisabled>
         Member
       </Segment>
       <Segment value="accountant">Accountant</Segment>
-    </SegmentedButton>
+    </SegmentedControlGroup>
   ),
 };
 
 export const WithFieldError: Story = {
   render: (props) => (
-    <SegmentedButton {...props} isInvalid isRequired>
+    <SegmentedControlGroup {...props} isInvalid isRequired>
       <Label>App</Label>
       <Segment value="wordpress">
         <IconApp />
@@ -68,6 +67,6 @@ export const WithFieldError: Story = {
         <Text>Magento</Text>
       </Segment>
       <FieldError>Select an app to continue</FieldError>
-    </SegmentedButton>
+    </SegmentedControlGroup>
   ),
 };
