@@ -3,12 +3,13 @@ import styles from "./Radio.module.scss";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import { IconRadioOff, IconRadioOn } from "@/components/Icon/components/icons";
+import useProps from "@/lib/propsContext";
 
 export interface RadioProps
   extends PropsWithChildren<Omit<Aria.RadioProps, "children">> {}
 
 export const Radio: FC<RadioProps> = (props) => {
-  const { children, className, ...rest } = props;
+  const { children, className, ...rest } = useProps("Radio", props);
 
   const rootClassName = clsx(styles.radio, className);
 

@@ -1,12 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Segment, SegmentedControlGroup } from "../index";
+import { SegmentedControlGroup } from "../index";
 import { Text } from "@/components/Text";
 import React from "react";
 import { dummyText } from "@/lib/dev/dummyText";
 import defaultMeta from "./Default.stories";
+import { Radio } from "@/components/RadioGroup";
 
 const meta: Meta<typeof SegmentedControlGroup> = {
-  title: "Actions/SegmentedButton/Edge Cases",
+  title: "Actions/SegmentedControlGroup/Edge Cases",
   ...defaultMeta,
 };
 
@@ -17,9 +18,9 @@ type Story = StoryObj<typeof SegmentedControlGroup>;
 export const LongTexts: Story = {
   render: (props) => (
     <SegmentedControlGroup {...props} defaultValue="a" aria-label="Label">
-      <Segment value="a">{dummyText.medium}</Segment>
-      <Segment value="b">{dummyText.medium}</Segment>
-      <Segment value="c">{dummyText.medium}</Segment>
+      <Radio value="a">{dummyText.medium}</Radio>
+      <Radio value="b">{dummyText.medium}</Radio>
+      <Radio value="c">{dummyText.medium}</Radio>
     </SegmentedControlGroup>
   ),
 };
@@ -30,9 +31,9 @@ export const SmallSpace: Story = {
       {Array(3)
         .fill("")
         .map((value, index) => (
-          <Segment value={index.toString()} key={index}>
+          <Radio value={index.toString()} key={index}>
             <Text>Option {index + 1}</Text>
-          </Segment>
+          </Radio>
         ))}
     </SegmentedControlGroup>
   ),

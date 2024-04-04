@@ -1,5 +1,5 @@
 import React, { FC, PropsWithChildren } from "react";
-import styles from "./SegmentedButton.module.scss";
+import styles from "./SegmentedControllGroup.module.scss";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
@@ -7,14 +7,16 @@ import { FieldError } from "@/components/FieldError";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import formFieldStyles from "../FormField/FormField.module.scss";
 
-export interface SegmentedButtonProps
+export interface SegmentedControlGroupProps
   extends PropsWithChildren<Omit<Aria.RadioGroupProps, "children">> {}
 
-export const SegmentedControlGroup: FC<SegmentedButtonProps> = (props) => {
+export const SegmentedControlGroup: FC<SegmentedControlGroupProps> = (
+  props,
+) => {
   const { children, className, ...rest } = props;
 
   const rootClassName = clsx(
-    styles.segmentedButton,
+    styles.segmentedControlGroup,
     formFieldStyles.formField,
     className,
   );
@@ -31,6 +33,11 @@ export const SegmentedControlGroup: FC<SegmentedButtonProps> = (props) => {
     FieldError: {
       className: formFieldStyles.customFieldError,
       tunnelId: "fieldError",
+    },
+    Radio: {
+      className: styles.segment,
+      // ToDo: Place checkmark inside radio
+      // <IconCheck className={styles.checkmark} />,
     },
   };
 

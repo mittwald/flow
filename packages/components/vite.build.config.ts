@@ -54,7 +54,8 @@ export default defineConfig(
           NumberField: "./src/components/NumberField/index.ts",
           RadioGroup: "./src/components/RadioGroup/index.ts",
           Section: "./src/components/Section/index.ts",
-          SegmentedButton: "./src/components/SegmentedButton/index.ts",
+          SegmentedControlGroup:
+            "./src/components/SegmentedControlGroup/index.ts",
           StatusBadge: "./src/components/StatusBadge/index.ts",
           StatusIcon: "./src/components/StatusIcon/index.ts",
           Switch: "./src/components/Switch/index.ts",

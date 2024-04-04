@@ -1,9 +1,22 @@
-@use "../../../../styles/mixins/formControl";
+@use "../../styles/mixins/formControl";
+
+.segmentedControlGroup {
+  container-type: inline-size;
+  isolation: isolate;
+}
+
+.segments {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+
+  order: 2;
+}
 
 .segment {
   @include formControl.formControl();
   display: grid;
-  column-gap: var(--segmented-button--icon-to-text-spacing);
+  column-gap: var(--segmented-control-group--icon-to-text-spacing);
   border-radius: 0;
 
   grid-template-areas: "label checkmark";
@@ -30,8 +43,12 @@
 
   @container (max-width: 550px) {
     flex: none;
-    width: 100%;
+
     margin-bottom: -1px; /* Collapse borders */
+
+    &.segment {
+      width: 100%;
+    }
 
     &:first-of-type {
       border-radius: 0;
@@ -50,6 +67,10 @@
   &[data-selected] {
     z-index: 1;
   }
+}
+
+:global(.flow--radio-group--radio--icon) {
+  display: none;
 }
 
 .checkmark {
