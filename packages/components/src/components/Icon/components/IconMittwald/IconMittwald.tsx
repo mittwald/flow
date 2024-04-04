@@ -1,6 +1,5 @@
 import React, { FC } from "react";
-import Icon from "@mittwald/flow-react-components/Icon";
-import { IconProps } from "../../index";
+import Icon, { IconProps } from "../../Icon";
 
 export const IconMittwald: FC<IconProps> = (props) => {
   return (
