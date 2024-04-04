@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import Icon, { IconProps } from "../../Icon";
+import Icon, { IconProps } from "@/components/Icon";
 
 export const IconMittwald: FC<IconProps> = (props) => {
   return (
