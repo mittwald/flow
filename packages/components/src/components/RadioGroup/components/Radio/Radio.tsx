@@ -10,12 +10,14 @@ import {
 
 export interface RadioProps
   extends PropsWithChildren<Omit<Aria.RadioProps, "children">>,
-    FlowComponentProps {}
+    FlowComponentProps {
+  unstyled?: boolean;
+}
 
 export const Radio = flowComponent("Radio", (props) => {
-  const { children, className, ...rest } = props;
+  const { children, className, unstyled = false, ...rest } = props;
 
-  const rootClassName = clsx(styles.radio, className);
+  const rootClassName = unstyled ? className : clsx(styles.radio, className);
 
   return (
     <Aria.Radio {...rest} className={rootClassName}>
