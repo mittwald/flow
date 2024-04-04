@@ -1,11 +1,9 @@
 import React, { PropsWithChildren } from "react";
 import { listContext } from "./listContext";
 import { DataLoader } from "@/components/List/components/DataLoader";
-import { PaginationInfos } from "src/components/List/components/Pagination/PaginationInfos";
 import { FilterPickerList } from "@/components/List/components/Filters/FilterPickerList";
 import styles from "./List.module.css";
 import ListModel from "@/components/List/model/List";
-import { ShowMoreItemsButton } from "src/components/List/components/Pagination/ShowMoreItemsButton";
 import { ItemList } from "@/components/List/components/Items/ItemList";
 import { deepFilterByType, deepFindOfType } from "@/lib/react/deepFindOfType";
 import { RenderItemFn } from "@/components/List/model/item/Item";
