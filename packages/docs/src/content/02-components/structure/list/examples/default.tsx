@@ -2,6 +2,8 @@ import {
   List,
   ListItemView,
   ListStaticData,
+  ListFilter,
+  ListSorting,
 } from "@mittwald/flow-react-components/List";
 import {
   type User,
@@ -18,6 +20,19 @@ import {
 
 <List>
   <ListStaticData data={users} />
+  <ListFilter<User>
+    property="location.state"
+    mode="some"
+    name="Location"
+  />
+  <ListSorting<User>
+    property="location.state"
+    name="Location"
+  />
+  <ListSorting<User>
+    property="name.last"
+    name="Last name"
+  />
   <ListItemView<User>>
     {(user) => (
       <>

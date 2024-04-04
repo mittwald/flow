@@ -1,10 +1,7 @@
 .list {
   display: flex;
   flex-direction: column;
-}
-
-:global(.flow--list--filters--filter-bar):not(:empty) {
-  margin-bottom: var(--list--block-to-block-spacing);
+  row-gap: var(--list--block-to-block-spacing);
 }
 
 .pagination {
@@ -13,5 +10,4 @@
   flex-direction: column;
   align-items: center;
   row-gap: var(--list--content-to-content-spacing);
-  margin-top: var(--list--block-to-block-spacing);
 }

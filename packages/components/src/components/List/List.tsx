@@ -74,7 +74,7 @@ export function List(props: Props) {
     >
       <DataLoader />
       <div className={styles.list}>
-        <FilterPickerList />
+        <FilterPickerList className={styles.filters} />
         <ItemList />
         <div className={styles.pagination}>
           <PaginationInfos />

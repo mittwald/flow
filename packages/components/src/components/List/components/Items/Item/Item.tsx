@@ -4,7 +4,7 @@ import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { Wrap } from "@/components/Wrap";
 import { deepHas } from "@/lib/react/deepHas";
 import { Link } from "@/components/Link";
-import { OptionsButton } from "@/components/List/components/OptionsButton";
+import { OptionsButton } from "@/components/List/components/Items/OptionsButton";
 
 interface Props extends PropsWithChildren {}
 

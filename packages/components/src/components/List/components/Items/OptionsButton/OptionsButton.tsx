@@ -2,7 +2,7 @@ import React, { FC, PropsWithChildren } from "react";
 import { Button } from "@/components/Button";
 import { IconContextMenu } from "@/components/Icon/components/icons";
 import { ContextMenuTrigger } from "@/components/ContextMenu";
-import locales from "../../locales/*.locale.json";
+import locales from "../../../locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 
 interface Props extends PropsWithChildren {
