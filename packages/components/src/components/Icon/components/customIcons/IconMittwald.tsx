@@ -1,7 +1,9 @@
-import React, { FC } from "react";
-import Icon, { IconProps } from "@/components/Icon";
+import React, { ComponentProps, FC } from "react";
+import { Icon } from "@/components/Icon";
 
-export const IconMittwald: FC<IconProps> = (props) => {
+export const IconMittwald: FC<Omit<ComponentProps<typeof Icon>, "children">> = (
+  props,
+) => {
   return (
     <Icon {...props}>{`
 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 1746.7 1232" focusable="false" role="img" aria-hidden="true">
