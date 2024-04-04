@@ -2,10 +2,15 @@ import React, { FC, PropsWithChildren } from "react";
 import styles from "./SegmentedControllGroup.module.scss";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
-import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import {
+  dynamic,
+  PropsContext,
+  PropsContextProvider,
+} from "@/lib/propsContext";
 import { FieldError } from "@/components/FieldError";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import formFieldStyles from "../FormField/FormField.module.scss";
+import { IconCheck } from "../Icon/components/icons";
 
 export interface SegmentedControlGroupProps
   extends PropsWithChildren<Omit<Aria.RadioGroupProps, "children">> {}
@@ -36,8 +41,12 @@ export const SegmentedControlGroup: FC<SegmentedControlGroupProps> = (
     },
     Radio: {
       className: styles.segment,
-      // ToDo: Place checkmark inside radio
-      // <IconCheck className={styles.checkmark} />,
+      children: dynamic((children) => (
+        <>
+          {children}
+          <IconCheck className={styles.checkmark} />
+        </>
+      )),
     },
   };
 
