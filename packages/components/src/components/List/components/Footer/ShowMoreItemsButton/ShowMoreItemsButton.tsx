@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { Button, ButtonProps } from "@/components/Button";
 import { useList } from "@/components/List/hooks/useList";
-import locales from "../../locales/*.locale.json";
+import locales from "../../../locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 
 export const ShowMoreItemsButton: FC<ButtonProps> = (props) => {

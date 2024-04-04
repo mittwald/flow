@@ -17,7 +17,7 @@ import { ListStaticData } from "@/components/List/components/ListStaticData";
 import { FallbackRenderer } from "@/components/List/components/Items/Item";
 import { ListLoaderAsyncResource } from "@/components/List/components/ListLoaderAsyncResource";
 import { IncrementalLoaderShape } from "@/components/List/model/loading/types";
-import Pagination from "./components/Pagination/Pagination";
+import Footer from "./components/Footer/Footer";
 
 interface Props
   extends PropsWithChildren,
@@ -75,7 +75,7 @@ export function List(props: Props) {
       <div className={styles.list}>
         <FilterPickerList />
         <ItemList />
-        <Pagination />
+        <Footer />
       </div>
     </listContext.Provider>
   );

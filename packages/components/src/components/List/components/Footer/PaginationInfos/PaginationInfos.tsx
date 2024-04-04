@@ -1,4 +1,4 @@
-import locales from "../../locales/*.locale.json";
+import locales from "../../../locales/*.locale.json";
 import { useMessageFormatter } from "react-aria";
 import { Text, TextProps } from "@/components/Text";
 import React, { FC } from "react";
