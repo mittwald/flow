@@ -30,6 +30,14 @@
       "types": "./dist/types/components/Checkbox/index.d.ts",
       "import": "./dist/Checkbox.js"
     },
+    "./CheckboxButton": {
+      "types": "./dist/types/components/CheckboxButton/index.d.ts",
+      "import": "./dist/CheckboxButton.js"
+    },
+    "./CheckboxGroup": {
+      "types": "./dist/types/components/CheckboxGroup/index.d.ts",
+      "import": "./dist/CheckboxGroup.js"
+    },
     "./ColumnLayout": {
       "types": "./dist/types/components/ColumnLayout/index.d.ts",
       "import": "./dist/ColumnLayout.js"
@@ -133,6 +141,10 @@
     "./Section": {
       "types": "./dist/types/components/Section/index.d.ts",
       "import": "./dist/Section.js"
+    },
+    "./SegmentedControlGroup": {
+      "types": "./dist/types/components/SegmentedControlGroup/index.d.ts",
+      "import": "./dist/SegmentedControlGroup.js"
     },
     "./StatusBadge": {
       "types": "./dist/types/components/StatusBadge/index.d.ts",
