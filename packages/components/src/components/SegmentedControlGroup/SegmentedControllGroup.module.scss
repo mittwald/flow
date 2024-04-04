@@ -20,7 +20,7 @@
 .segment {
   @include formControl.formControl();
   display: grid;
-  flex-grow: 1;
+  flex: 1;
   column-gap: var(--segmented-control-group--icon-to-text-spacing);
   border-radius: 0;
 
