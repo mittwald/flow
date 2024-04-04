@@ -42,6 +42,7 @@ export const ProgressBar: FC<ProgressBarProps> = (props) => {
   const propsContext: PropsContext = {
     Label: {
       className: styles.label,
+      unstyled: true,
     },
   };
 
