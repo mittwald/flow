@@ -27,11 +27,11 @@ const RootLayout: FC<PropsWithChildren> = async (props) => {
         <LinkProvider>
           <header className={styles.header}>
             <Heading level={1} className={styles.heading}>
-              Flow – mittwald Design System{" "}
-              <StatusBadge className={styles.betaBadge} status="warning">
-                beta
-              </StatusBadge>
+              Flow – mittwald Design System
             </Heading>
+            <StatusBadge className={styles.betaBadge} status="warning">
+              beta
+            </StatusBadge>
             <HeaderNavigation docs={docs.map((mdx) => mdx.serialize())} />
           </header>
           <div className={styles.center}>

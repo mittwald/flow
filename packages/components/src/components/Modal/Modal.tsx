@@ -1,19 +1,40 @@
 import * as Aria from "react-aria-components";
-import React, { FC, useContext } from "react";
+import React, { FC, PropsWithChildren } from "react";
 import styles from "./Modal.module.scss";
 import clsx from "clsx";
 import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
+import { OverlayState } from "@/lib/controller/overlay";
+import { useOverlayState } from "@/lib/controller/overlay/useOverlayState";
+import { useSyncTriggerState } from "@/components/Modal/hooks/useSyncTriggerState";
+import { OverlayContextProvider } from "@/lib/controller/overlay/context";
 
-export interface ModalProps
-  extends Pick<Aria.DialogProps, "children">,
-    Omit<Aria.ModalOverlayProps, "children"> {
+export interface ModalProps extends PropsWithChildren {
   size?: "s" | "m" | "l";
   panel?: boolean;
+  state?: OverlayState;
+  defaultOpen?: boolean;
 }
 
 export const Modal: FC<ModalProps> = (props) => {
-  const { size = "s", panel, ...rest } = props;
+  const {
+    size = "s",
+    panel,
+    state: stateFromProps,
+    defaultOpen,
+    children,
+    ...rest
+  } = props;
+
+  const newState = useOverlayState({
+    reuseControllerFromContext: false,
+    defaultOpen,
+  });
+
+  const state = stateFromProps ?? newState;
+  const isOpen = state.useIsOpen();
+
+  useSyncTriggerState(state);
 
   const rootClassName = clsx(
     styles.modal,
@@ -36,28 +57,27 @@ export const Modal: FC<ModalProps> = (props) => {
     },
   };
 
-  const state = useContext(Aria.OverlayTriggerStateContext);
-
-  let children = props.children;
-  if (typeof children === "function") {
-    children = children({
-      close: state?.close || (() => {}),
-    });
-  }
-
   return (
-    <Aria.ModalOverlay className={styles.overlay} {...rest} isDismissable>
+    <Aria.ModalOverlay
+      className={styles.overlay}
+      {...rest}
+      isDismissable
+      isOpen={isOpen}
+      onOpenChange={(isOpen) => state.setOpen(isOpen)}
+    >
       <Aria.Modal className={rootClassName}>
         <Aria.Dialog className={styles.dialog}>
-          <PropsContextProvider props={propsContext}>
-            <TunnelProvider>
-              <div className={styles.content}>
-                <TunnelExit id="title" />
-                <TunnelExit id="content" />
-              </div>
-              {children}
-            </TunnelProvider>
-          </PropsContextProvider>
+          <OverlayContextProvider value={state}>
+            <PropsContextProvider props={propsContext}>
+              <TunnelProvider>
+                <div className={styles.content}>
+                  <TunnelExit id="title" />
+                  <TunnelExit id="content" />
+                </div>
+                {children}
+              </TunnelProvider>
+            </PropsContextProvider>
+          </OverlayContextProvider>
         </Aria.Dialog>
       </Aria.Modal>
     </Aria.ModalOverlay>

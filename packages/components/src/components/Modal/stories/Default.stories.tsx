@@ -8,20 +8,53 @@ import Label from "@/components/Label";
 import Content from "@/components/Content";
 import Heading from "@/components/Heading";
 import Modal, { ModalTrigger } from "@/components/Modal";
+import { useOverlayState } from "@/lib/controller/overlay/useOverlayState";
+import { Action } from "@/components/Action";
 
 const meta: Meta<typeof Modal> = {
   title: "Overlays/Modal",
   component: Modal,
 
   render: (props) => {
-    const [isOpen, setOpen] = React.useState(false);
+    return (
+      <Modal {...props} defaultOpen>
+        <Heading>New Customer</Heading>
+        <Content>
+          <Text>
+            Create a new customer to manage your projects, members and payments.
+          </Text>
+          <TextField>
+            <Label>Customer name</Label>
+          </TextField>
+        </Content>
+        <ButtonGroup>
+          <Action closeModal>
+            <Button variant="accent">Create customer</Button>
+            <Button variant="secondary" style="soft">
+              Abort
+            </Button>
+          </Action>
+        </ButtonGroup>
+      </Modal>
+    );
+  },
+};
+export default meta;
+
+type Story = StoryObj<typeof Modal>;
+
+export const Default: Story = {};
+
+export const WithController: Story = {
+  render: (props) => {
+    const controller = useOverlayState();
 
     return (
       <>
-        <Button variant="accent" onPress={() => setOpen(true)}>
+        <Button variant="primary" onPress={controller.open}>
           Create customer
         </Button>
-        <Modal {...props} isOpen={isOpen} onOpenChange={setOpen}>
+        <Modal {...props} state={controller}>
           <Heading>New Customer</Heading>
           <Content>
             <Text>
@@ -33,49 +66,36 @@ const meta: Meta<typeof Modal> = {
             </TextField>
           </Content>
           <ButtonGroup>
-            <Button variant="accent" onPress={() => setOpen(false)}>
-              Create customer
-            </Button>
-            <Button
-              variant="secondary"
-              style="soft"
-              onPress={() => setOpen(false)}
-            >
-              Abort
-            </Button>
+            <Action closeModal>
+              <Button variant="accent">Create customer</Button>
+              <Button variant="secondary" style="soft">
+                Abort
+              </Button>
+            </Action>
           </ButtonGroup>
         </Modal>
       </>
     );
   },
 };
-export default meta;
-
-type Story = StoryObj<typeof Modal>;
-
-export const WithState: Story = {};
 
 export const WithDialogTrigger: Story = {
   render: (props) => (
     <ModalTrigger>
       <Button variant="danger">Delete project</Button>
       <Modal {...props}>
-        {({ close }) => (
-          <>
-            <Heading>Delete project</Heading>
-            <Content>
-              <Text>Are you sure you want to delete this project?</Text>
-            </Content>
-            <ButtonGroup>
-              <Button variant="danger" onPress={close}>
-                Delete project
-              </Button>
-              <Button style="soft" variant="secondary" onPress={close}>
-                Abort
-              </Button>
-            </ButtonGroup>
-          </>
-        )}
+        <Heading>Delete project</Heading>
+        <Content>
+          <Text>Are you sure you want to delete this project?</Text>
+        </Content>
+        <ButtonGroup>
+          <Action closeModal>
+            <Button variant="danger">Delete project</Button>
+            <Button style="soft" variant="secondary">
+              Abort
+            </Button>
+          </Action>
+        </ButtonGroup>
       </Modal>
     </ModalTrigger>
   ),
