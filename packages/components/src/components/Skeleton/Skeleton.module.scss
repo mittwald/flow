@@ -5,7 +5,8 @@
   position: relative;
   overflow: hidden;
   background-color: rgba(120, 120, 120, 0.2);
-  border-radius: var(--border-radius--default);
+  border-radius: var(--corner-radius--default);
+  width: 100%;
 
   &::before {
     content: "-";

@@ -33,6 +33,8 @@
 /* Elements */
 .initials {
   font-size: calc(var(--avatar-size) * 0.4);
+  align-items: center;
+  justify-content: center;
 }
 
 /* Sizes */
@@ -55,6 +57,10 @@
     --content-accent-color: var(
       --initials--variant-#{$variant}-content-accent-color
     );
+
+    &.skeleton {
+      --background-color: var(--neutral--color--100);
+    }
   }
 }
 

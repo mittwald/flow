@@ -21,6 +21,7 @@ export const Skeleton: FC<SkeletonProps> = (props) => {
     <div
       style={{ fontSize, width, height }}
       className={rootClassName}
+      aria-hidden
       {...rest}
     />
   );

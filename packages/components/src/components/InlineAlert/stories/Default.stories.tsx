@@ -43,9 +43,6 @@ export const WithContent: Story = {
 export const WithSkeletons: Story = {
   render: (props) => (
     <InlineAlert {...props}>
-      <Icon>
-        <Skeleton />
-      </Icon>
       <Heading>
         <Skeleton />
       </Heading>
