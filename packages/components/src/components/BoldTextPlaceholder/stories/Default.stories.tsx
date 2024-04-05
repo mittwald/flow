@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { BoldTextPlaceholder } from "@/components/BoldTextPlaceholder";
+import BoldTextPlaceholder from "@/components/BoldTextPlaceholder";
 import React from "react";
 
 const meta: Meta<typeof BoldTextPlaceholder> = {
