@@ -14,6 +14,10 @@
       "types": "./dist/types/components/Action/index.d.ts",
       "import": "./dist/Action.js"
     },
+    "./BoldTextPlaceholder": {
+      "types": "./dist/types/components/BoldTextPlaceholder/index.d.ts",
+      "import": "./dist/BoldTextPlaceholder.js"
+    },
     "./Button": {
       "types": "./dist/types/components/Button/index.d.ts",
       "import": "./dist/Button.js"

@@ -21,6 +21,7 @@ export default defineConfig(
         entry: {
           Action: "./src/components/Action/index.ts",
           Avatar: "./src/components/Avatar/index.ts",
+          BoldTextPlaceholder: "./src/components/BoldTextPlaceholder/index.ts",
           Breadcrumb: "./src/components/Breadcrumb/index.ts",
           Button: "./src/components/Button/index.ts",
           ButtonGroup: "./src/components/ButtonGroup/index.ts",
