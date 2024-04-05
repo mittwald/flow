@@ -21,7 +21,7 @@ export const ButtonGroup: FC<ButtonGroupProps> = (props) => {
   const propsContext: PropsContext = {
     Button: {
       className: dynamic((p) =>
-        p.variant === "secondary" ? styles.abort : undefined,
+        p.variant === "secondary" ? styles.secondary : undefined,
       ),
     },
   };
