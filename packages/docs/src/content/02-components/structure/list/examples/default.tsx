@@ -34,7 +34,7 @@ import {
     {(domain) => (
       <>
         <Avatar>
-          {domain.type === "domain" ? (
+          {domain.type === "Domain" ? (
             <IconDomain />
           ) : (
             <IconSubdomain />

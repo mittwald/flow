@@ -14,10 +14,10 @@ import type { AsyncDataLoader } from "@/components/List/model/loading/types";
 import { Avatar } from "@/components/Avatar";
 import { ContextMenu, ContextMenuItem } from "@/components/ContextMenu";
 import { Link } from "@/components/Link";
-import type { Domain } from "../../../../../../dev/domainApi";
-import { getDomains, getTypes } from "../../../../../../dev/domainApi";
 import { IconDomain, IconSubdomain } from "@/components/Icon/components/icons";
 import StatusBadge from "@/components/StatusBadge";
+import type { Domain } from "../devData/domainApi";
+import { getDomains, getTypes } from "../devData/domainApi";
 
 const loadDomains: AsyncDataLoader<Domain> = async (opt) => {
   const response = await getDomains({

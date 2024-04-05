@@ -25,7 +25,7 @@ import {
     {(domain) => (
       <Link href="#">
         <Avatar>
-          {domain.type === "domain" ? (
+          {domain.type === "Domain" ? (
             <IconDomain />
           ) : (
             <IconSubdomain />
