@@ -1,4 +1,5 @@
-import React, { ComponentProps, FC, PropsWithChildren } from "react";
+import type { ComponentProps, FC, PropsWithChildren } from "react";
+import React from "react";
 import styles from "./BoldTextPlaceholder.module.scss";
 import clsx from "clsx";
 
