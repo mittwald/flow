@@ -6,7 +6,6 @@ import { PaginationInfos } from "@/components/List/components/PaginationInfos";
 import { FilterBar } from "@/components/List/components/FilterBar";
 import styles from "./List.module.css";
 import ListModel from "@/components/List/model/List";
-import { ShowNextBatchButton } from "src/components/List/components/ShowNextBatchButton";
 import { Items } from "@/components/List/components/Items";
 import { deepFilterByType, deepFindOfType } from "@/lib/react/deepFindOfType";
 import type { RenderItemFn } from "@/components/List/model/item/Item";
@@ -20,6 +19,7 @@ import { ListStaticData } from "@/components/List/components/ListStaticData";
 import { FallbackRenderer } from "@/components/List/components/Item/FallbackRenderer";
 import { ListLoaderAsyncResource } from "@/components/List/components/ListLoaderAsyncResource";
 import type { IncrementalLoaderShape } from "@/components/List/model/loading/types";
+import { ShowNextBatchButton } from "@/components/List/components/ShowNextBatchButton";
 
 interface Props
   extends PropsWithChildren,
