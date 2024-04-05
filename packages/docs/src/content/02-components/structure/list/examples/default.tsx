@@ -1,48 +1,45 @@
 import {
   List,
-  ListItemView,
-  ListStaticData,
   ListFilter,
+  ListItemView,
   ListSorting,
+  ListStaticData,
 } from "@mittwald/flow-react-components/List";
 import {
-  type User,
-  users,
-} from "@/content/02-components/structure/list/examples/userApi";
+  type Domain,
+  domains,
+} from "@/content/02-components/structure/list/examples/domainApi";
 import { Avatar } from "@mittwald/flow-react-components/Avatar";
-import { Initials } from "@mittwald/flow-react-components/Initials";
 import { Heading } from "@mittwald/flow-react-components/Heading";
 import { Text } from "@mittwald/flow-react-components/Text";
 import {
   ContextMenu,
   ContextMenuItem,
 } from "@mittwald/flow-react-components/ContextMenu";
+import { IconDomain } from "@mittwald/flow-react-components/Icons";
+import { IconFolders } from "@tabler/icons-react";
 
 <List>
-  <ListStaticData data={users} />
-  <ListFilter<User>
-    property="location.state"
+  <ListStaticData data={domains} />
+  <ListFilter<Domain>
+    property="type"
     mode="some"
-    name="Location"
+    name="Type"
   />
-  <ListSorting<User>
-    property="location.state"
-    name="Location"
-  />
-  <ListSorting<User>
-    property="name.last"
-    name="Last name"
-  />
-  <ListItemView<User>>
-    {(user) => (
+  <ListSorting<Domain> property="domain" name="Domain" />
+  <ListSorting<Domain> property="type" name="Type" />
+  <ListItemView<Domain>>
+    {(domain) => (
       <>
         <Avatar>
-          <Initials>{`${user.name.first} ${user.name.last}`}</Initials>
+          {domain.type === "domain" ? (
+            <IconDomain />
+          ) : (
+            <IconFolders />
+          )}
         </Avatar>
-        <Heading>
-          {user.name.first} {user.name.last}
-        </Heading>
-        <Text>{user.location.state}</Text>
+        <Heading>{domain.hostname}</Heading>
+        <Text>{domain.type}</Text>
         <ContextMenu>
           <ContextMenuItem>Show details</ContextMenuItem>
           <ContextMenuItem>Delete</ContextMenuItem>
