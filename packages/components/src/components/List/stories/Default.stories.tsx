@@ -16,8 +16,7 @@ import { ContextMenu, ContextMenuItem } from "@/components/ContextMenu";
 import { Link } from "@/components/Link";
 import type { Domain } from "../../../../../../dev/domainApi";
 import { getDomains, getTypes } from "../../../../../../dev/domainApi";
-import { IconDomain } from "@/components/Icon/components/icons";
-import { IconFolders } from "@tabler/icons-react";
+import { IconDomain, IconSubdomain } from "@/components/Icon/components/icons";
 import StatusBadge from "@/components/StatusBadge";
 
 const loadDomains: AsyncDataLoader<Domain> = async (opt) => {
@@ -64,7 +63,7 @@ const meta: Meta<typeof List> = {
           {(domain) => (
             <>
               <Avatar>
-                {domain.type === "Domain" ? <IconDomain /> : <IconFolders />}
+                {domain.type === "Domain" ? <IconDomain /> : <IconSubdomain />}
               </Avatar>
               <Heading>{domain.hostname}</Heading>
               {domain.verified ? (
@@ -102,7 +101,7 @@ export const ItemsWithLink: Story = {
           {(domain) => (
             <Link href="#">
               <Avatar>
-                {domain.type === "Domain" ? <IconDomain /> : <IconFolders />}
+                {domain.type === "Domain" ? <IconDomain /> : <IconSubdomain />}
               </Avatar>
               <Heading>{domain.hostname}</Heading>
               <Text>{domain.type}</Text>

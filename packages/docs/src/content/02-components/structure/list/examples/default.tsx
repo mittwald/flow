@@ -16,8 +16,10 @@ import {
   ContextMenu,
   ContextMenuItem,
 } from "@mittwald/flow-react-components/ContextMenu";
-import { IconDomain } from "@mittwald/flow-react-components/Icons";
-import { IconFolders } from "@tabler/icons-react";
+import {
+  IconDomain,
+  IconSubdomain,
+} from "@mittwald/flow-react-components/Icons";
 
 <List>
   <ListStaticData data={domains} />
@@ -35,7 +37,7 @@ import { IconFolders } from "@tabler/icons-react";
           {domain.type === "domain" ? (
             <IconDomain />
           ) : (
-            <IconFolders />
+            <IconSubdomain />
           )}
         </Avatar>
         <Heading>{domain.hostname}</Heading>
