@@ -49,7 +49,7 @@ export class ReactTable<T> {
       data,
       initialState: {
         pagination: {
-          pageSize: this.list.pagination.initialPageSize,
+          pageSize: this.list.batches.batchSize,
         },
       },
       columns: this.getTableColumnDefs(),

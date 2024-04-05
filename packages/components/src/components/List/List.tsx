@@ -6,7 +6,7 @@ import { PaginationInfos } from "@/components/List/components/PaginationInfos";
 import { FilterBar } from "@/components/List/components/FilterBar";
 import styles from "./List.module.css";
 import ListModel from "@/components/List/model/List";
-import { ShowMoreItemsButton } from "@/components/List/components/ShowMoreItemsButton";
+import { ShowNextBatchButton } from "src/components/List/components/ShowNextBatchButton";
 import { Items } from "@/components/List/components/Items";
 import { deepFilterByType, deepFindOfType } from "@/lib/react/deepFindOfType";
 import type { RenderItemFn } from "@/components/List/model/item/Item";
@@ -23,10 +23,12 @@ import type { IncrementalLoaderShape } from "@/components/List/model/loading/typ
 
 interface Props
   extends PropsWithChildren,
-    Pick<ListShape<AnyData>, "enableMultiSort"> {}
+    Pick<ListShape<AnyData>, "enableMultiSort"> {
+  batchSize?: number;
+}
 
 export function List(props: Props) {
-  const { children, ...restShape } = props;
+  const { children, batchSize, ...restShape } = props;
 
   const listLoaderAsync = deepFindOfType(children, ListLoaderAsync)?.props;
   const listLoaderAsyncResource = deepFindOfType(
@@ -65,6 +67,9 @@ export function List(props: Props) {
       deepFindOfType(children, ListItemView)?.props.children ??
       fallbackRenderItemFn,
     ...restShape,
+    batchesController: {
+      batchSize,
+    },
   });
 
   return (
@@ -78,7 +83,7 @@ export function List(props: Props) {
         <FilterBar className={styles.filterBar} />
         <Items className={styles.rows} />
         <PaginationInfos className={styles.paginationInfos} />
-        <ShowMoreItemsButton className={styles.showMoreButton} />
+        <ShowNextBatchButton className={styles.showMoreButton} />
       </div>
     </listContext.Provider>
   );

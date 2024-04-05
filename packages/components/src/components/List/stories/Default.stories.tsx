@@ -41,7 +41,7 @@ const meta: Meta<typeof List> = {
     const availableStates = usePromise(getStates, []);
 
     return (
-      <List>
+      <List batchSize={5}>
         <ListLoaderAsync<User> manualPagination>{loadUsers}</ListLoaderAsync>
         <ListFilter<User>
           property="location.state"
@@ -81,7 +81,7 @@ export const ItemsWithLink: Story = {
     const availableStates = usePromise(getStates, []);
 
     return (
-      <List>
+      <List batchSize={5}>
         <ListLoaderAsync<User> manualPagination>{loadUsers}</ListLoaderAsync>
         <ListFilter<User>
           property="location.state"

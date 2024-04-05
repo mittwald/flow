@@ -48,7 +48,6 @@ export class IncrementalLoader<T> {
     this.manualPagination = manualPagination ?? false;
     this.manualFiltering = manualFiltering ?? this.manualPagination;
     this.manualSorting = manualSorting ?? this.manualPagination;
-
     this.list.filters.forEach((f) => f.onFilterUpdated(() => this.reset()));
   }
 
@@ -61,11 +60,6 @@ export class IncrementalLoader<T> {
 
   private reset(): void {
     this.loaderState.reset();
-    this.list.pagination.updateItemTotalCount(0);
-    this.list.reactTable.table.setPagination(() => ({
-      pageIndex: 0,
-      pageSize: this.list.pagination.initialPageSize,
-    }));
   }
 
   public useIsLoading(): boolean {
@@ -77,14 +71,14 @@ export class IncrementalLoader<T> {
   }
 
   public getLoaderInvocationHooks(): Array<() => void> {
-    const pages = times(this.list.pagination.getPageIndex() + 1, (i) => i);
-    return pages.map((i) => () => {
-      this.useLoadPage(i);
+    const batchesCount = times(this.list.batches.getBatchIndex() + 1, (i) => i);
+    return batchesCount.map((i) => () => {
+      this.useLoadBatch(i);
     });
   }
 
-  private useLoadPage(pageIndex: number): void {
-    const asyncResource = this.getPageDataAsyncResource(pageIndex);
+  private useLoadBatch(batchIndex: number): void {
+    const asyncResource = this.getBatchDataAsyncResource(batchIndex);
 
     const asyncData = asyncResource.use({
       useSuspense: false,
@@ -96,31 +90,31 @@ export class IncrementalLoader<T> {
       }
 
       const { data, itemTotalCount } = asyncData.value;
-      this.loaderState.setDataBatch(pageIndex, data);
+      this.loaderState.setDataBatch(batchIndex, data);
 
       if (itemTotalCount !== undefined) {
-        this.list.pagination.updateItemTotalCount(itemTotalCount);
+        this.list.batches.updateItemTotalCount(itemTotalCount);
       }
-    }, [pageIndex, asyncData.maybeValue]);
+    }, [batchIndex, asyncData.maybeValue]);
 
     useEffect(() => {
       this.loaderState.setBatchLoadingState(
-        pageIndex,
+        batchIndex,
         asyncResource.state.value,
       );
 
       return asyncResource.state.observe((newState) => {
-        this.loaderState.setBatchLoadingState(pageIndex, newState);
+        this.loaderState.setBatchLoadingState(batchIndex, newState);
       });
-    }, [asyncResource, pageIndex]);
+    }, [asyncResource, batchIndex]);
   }
 
-  private getDataLoaderOptions(pageIndex: number): DataLoaderOptions<T> {
+  private getDataLoaderOptions(batchIndex: number): DataLoaderOptions<T> {
     return {
       pagination: this.manualPagination
         ? {
-            limit: this.list.pagination.initialPageSize,
-            offset: this.list.pagination.initialPageSize * pageIndex,
+            limit: this.list.batches.batchSize,
+            offset: this.list.batches.batchSize * batchIndex,
           }
         : undefined,
 
@@ -145,11 +139,11 @@ export class IncrementalLoader<T> {
     };
   }
 
-  private getPageDataAsyncResource(
-    pageIndex: number,
+  private getBatchDataAsyncResource(
+    batchIndex: number,
   ): AsyncResource<DataLoaderResult<T>> {
     const dataSource = this.dataSource;
-    const loaderOptions = this.getDataLoaderOptions(pageIndex);
+    const loaderOptions = this.getDataLoaderOptions(batchIndex);
 
     if ("staticData" in dataSource) {
       const staticData = dataSource.staticData;
@@ -173,16 +167,5 @@ export class IncrementalLoader<T> {
     }
 
     throw new Error("Unknown data source");
-  }
-
-  public loadMore(): void {
-    if (this.manualPagination) {
-      this.list.pagination.nextPage();
-    } else {
-      this.list.pagination.updatePageSize(
-        this.list.pagination.getPageSize() +
-          this.list.pagination.initialPageSize,
-      );
-    }
   }
 }

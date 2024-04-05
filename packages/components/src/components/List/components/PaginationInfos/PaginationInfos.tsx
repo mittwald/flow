@@ -10,7 +10,7 @@ export const PaginationInfos: FC<TextProps> = (props) => {
   const stringFormatter = useMessageFormatter(locales);
 
   const list = useList();
-  const pagination = list.pagination;
+  const pagination = list.batches;
   const isFiltered = list.isFiltered() && !list.loader.manualFiltering;
 
   const totalItemsCount = pagination.getTotalItemsCount();

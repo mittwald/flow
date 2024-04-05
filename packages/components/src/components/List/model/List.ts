@@ -1,5 +1,5 @@
 import { ItemCollection } from "@/components/List/model/item/ItemCollection";
-import { Pagination } from "@/components/List/model/pagination/Pagination";
+import { BatchesController } from "@/components/List/model/pagination/BatchesController";
 import type { RenderItemFn } from "@/components/List/model/item/Item";
 import { Filter } from "./filter/Filter";
 import { Sorting } from "@/components/List/model/sorting/Sorting";
@@ -13,7 +13,7 @@ export class List<T> {
   public readonly items: ItemCollection<T>;
   public readonly render?: RenderItemFn<T>;
   public readonly reactTable: ReactTable<T>;
-  public readonly pagination: Pagination<T>;
+  public readonly batches: BatchesController<T>;
   public readonly loader: IncrementalLoader<T>;
 
   private constructor(shape: ListShape<T>) {
@@ -21,7 +21,7 @@ export class List<T> {
       render,
       filters = [],
       sorting = [],
-      pagination,
+      batchesController,
       enableMultiSort = false,
     } = shape;
 
@@ -31,7 +31,7 @@ export class List<T> {
     this.filters = filters.map((shape) => new Filter(this, shape));
     this.sorting = sorting.map((shape) => new Sorting<T>(this, shape));
 
-    this.pagination = new Pagination(this, pagination);
+    this.batches = new BatchesController(this, batchesController);
 
     this.loader = IncrementalLoader.useNew<T>(this, shape.loader);
     this.reactTable = ReactTable.useNew(this, {
