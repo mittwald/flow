@@ -1,4 +1,5 @@
-import React, { CSSProperties, FC, PropsWithChildren } from "react";
+import type { CSSProperties, FC, PropsWithChildren } from "react";
+import React from "react";
 import styles from "./ColumnLayout.module.scss";
 import { getColumns } from "./lib/getColumns";
 import clsx from "clsx";

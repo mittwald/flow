@@ -1,4 +1,5 @@
-import { FC, PropsWithChildren, useContext, useLayoutEffect } from "react";
+import type { FC, PropsWithChildren } from "react";
+import { useContext, useLayoutEffect } from "react";
 import tunnelContext from "@/context";
 import { observer } from "mobx-react-lite";
 

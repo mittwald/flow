@@ -6,7 +6,7 @@ import type {
   SourceDescription,
 } from "rollup";
 import path from "path";
-import { HmrContext, ViteDevServer } from "vite";
+import type { HmrContext, ViteDevServer } from "vite";
 
 describe("vite i18n plugin", () => {
   test("resolve will return correct id", async () => {

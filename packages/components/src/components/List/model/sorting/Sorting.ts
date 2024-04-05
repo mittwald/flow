@@ -1,7 +1,7 @@
-import { Column, ColumnDef, SortDirection } from "@tanstack/react-table";
-import List from "@/components/List/model/List";
-import { PropertyName } from "@/components/List/model/item/Item";
-import { SortingShape } from "@/components/List/model/sorting/types";
+import type { Column, ColumnDef, SortDirection } from "@tanstack/react-table";
+import type List from "@/components/List/model/List";
+import type { PropertyName } from "@/components/List/model/item/Item";
+import type { SortingShape } from "@/components/List/model/sorting/types";
 
 export class Sorting<T> {
   public readonly list: List<T>;

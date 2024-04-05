@@ -1,10 +1,12 @@
-import React, { ComponentProps, FC, PropsWithChildren } from "react";
+import type { ComponentProps, FC, PropsWithChildren } from "react";
+import React from "react";
 import styles from "./Navigation.module.scss";
 import clsx from "clsx";
 import { deepFindOfType } from "@/lib/react/deepFindOfType";
 import { NavigationGroup } from "@/components/Navigation";
 import { Wrap } from "@/components/Wrap";
-import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import type { PropsContext } from "@/lib/propsContext";
+import { PropsContextProvider } from "@/lib/propsContext";
 
 export interface NavigationProps
   extends PropsWithChildren<ComponentProps<"nav">> {

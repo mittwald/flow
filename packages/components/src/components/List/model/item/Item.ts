@@ -1,8 +1,9 @@
-import { ItemCollection } from "@/components/List/model/item/ItemCollection";
-import { createElement, ReactNode } from "react";
-import { DeepKeys, Row } from "@tanstack/react-table";
+import type { ItemCollection } from "@/components/List/model/item/ItemCollection";
+import type { ReactNode } from "react";
+import { createElement } from "react";
+import type { DeepKeys, Row } from "@tanstack/react-table";
 
-import { AnyData } from "@/components/List/model/item/types";
+import type { AnyData } from "@/components/List/model/item/types";
 
 export type PropertyName<T> = DeepKeys<T>;
 

@@ -1,4 +1,4 @@
-import { RenderItemFn } from "@/components/List/model/item/Item";
+import type { RenderItemFn } from "@/components/List/model/item/Item";
 
 interface Props<T> {
   children: RenderItemFn<T>;

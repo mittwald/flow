@@ -1,4 +1,7 @@
-import { FlowComponentName, FlowComponentProps } from "@/components/propTypes";
+import type {
+  FlowComponentName,
+  FlowComponentProps,
+} from "@/components/propTypes";
 import { mergeProps } from "@react-aria/utils";
 import { resolveDynamicProps } from "@/lib/propsContext/dynamicProps/resolveDynamicProps";
 import { useContext } from "react";

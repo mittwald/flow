@@ -1,9 +1,8 @@
-import React, { ComponentProps } from "react";
+import type { ComponentProps } from "react";
+import React from "react";
 import { ClearPropsContext } from "@/lib/propsContext";
-import {
-  flowComponent,
-  FlowComponentProps,
-} from "@/lib/componentFactory/flowComponent";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface ImageProps extends ComponentProps<"img">, FlowComponentProps {}
 

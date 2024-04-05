@@ -1,10 +1,10 @@
 import { ItemCollection } from "@/components/List/model/item/ItemCollection";
 import { Pagination } from "@/components/List/model/pagination/Pagination";
-import { RenderItemFn } from "@/components/List/model/item/Item";
+import type { RenderItemFn } from "@/components/List/model/item/Item";
 import { Filter } from "./filter/Filter";
 import { Sorting } from "@/components/List/model/sorting/Sorting";
 import ReactTable from "@/components/List/model/ReactTable";
-import { ListShape } from "@/components/List/model/types";
+import type { ListShape } from "@/components/List/model/types";
 import { IncrementalLoader } from "@/components/List/model/loading/IncrementalLoader";
 
 export class List<T> {

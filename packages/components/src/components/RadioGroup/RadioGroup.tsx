@@ -1,10 +1,13 @@
-import React, { FC, PropsWithChildren } from "react";
+import type { FC, PropsWithChildren } from "react";
+import React from "react";
 import styles from "./RadioGroup.module.scss";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
-import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import type { PropsContext } from "@/lib/propsContext";
+import { PropsContextProvider } from "@/lib/propsContext";
 import { FieldError } from "@/components/FieldError";
-import { ColumnLayout, ColumnLayoutProps } from "@/components/ColumnLayout";
+import type { ColumnLayoutProps } from "@/components/ColumnLayout";
+import { ColumnLayout } from "@/components/ColumnLayout";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import formFieldStyles from "../FormField/FormField.module.scss";
 import { deepFindOfType } from "@/lib/react/deepFindOfType";

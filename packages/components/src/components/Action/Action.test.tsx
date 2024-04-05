@@ -3,7 +3,8 @@ import { render, screen } from "@testing-library/react";
 import React from "react";
 import Action from "@/components/Action";
 import { Button } from "@/components/Button";
-import { beforeEach, Mock, vitest } from "vitest";
+import type { Mock } from "vitest";
+import { beforeEach, vitest } from "vitest";
 import userEvent from "@/lib/dev/vitestUserEvent";
 import { act } from "react-dom/test-utils";
 

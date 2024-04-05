@@ -1,6 +1,8 @@
-import React, { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
+import React from "react";
 import styles from "./Item.module.scss";
-import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import type { PropsContext } from "@/lib/propsContext";
+import { PropsContextProvider } from "@/lib/propsContext";
 import { Wrap } from "@/components/Wrap";
 import { deepHas } from "@/lib/react/deepHas";
 import { Link } from "@/components/Link";

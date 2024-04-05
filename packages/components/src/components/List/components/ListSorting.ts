@@ -1,4 +1,4 @@
-import { SortingShape } from "@/components/List/model/sorting/types";
+import type { SortingShape } from "@/components/List/model/sorting/types";
 
 interface Props<T> extends SortingShape<T> {}
 

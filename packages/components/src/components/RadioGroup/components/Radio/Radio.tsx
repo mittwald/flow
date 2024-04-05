@@ -1,17 +1,17 @@
-import React, { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
+import React from "react";
 import styles from "./Radio.module.scss";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import { IconRadioOff, IconRadioOn } from "@/components/Icon/components/icons";
-import {
-  flowComponent,
-  FlowComponentProps,
-} from "@/lib/componentFactory/flowComponent";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { ClearPropsContext } from "@/lib/propsContext";
 
 export interface RadioProps
   extends PropsWithChildren<Omit<Aria.RadioProps, "children">>,
     FlowComponentProps {
+  /** @internal */
   unstyled?: boolean;
 }
 

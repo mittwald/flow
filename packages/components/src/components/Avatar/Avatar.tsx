@@ -1,9 +1,10 @@
-import React, { FC, PropsWithChildren } from "react";
+import type { FC, PropsWithChildren } from "react";
+import React from "react";
 import styles from "./Avatar.module.scss";
 import clsx from "clsx";
+import type { PropsContext } from "@/lib/propsContext";
 import {
   ClearPropsContext,
-  PropsContext,
   PropsContextProvider,
   useProps,
 } from "@/lib/propsContext";

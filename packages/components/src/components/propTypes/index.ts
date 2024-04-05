@@ -19,7 +19,7 @@ import type { ButtonGroupProps } from "@/components/ButtonGroup";
 import type { AvatarProps } from "@/components/Avatar";
 import type { ActionProps } from "@/components/Action";
 import type { ContextMenuProps } from "@/components/ContextMenu";
-import { RadioProps } from "@/components/RadioGroup";
+import type { RadioProps } from "@/components/RadioGroup";
 
 export * from "./types";
 

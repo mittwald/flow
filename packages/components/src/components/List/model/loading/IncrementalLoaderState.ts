@@ -1,4 +1,4 @@
-import { AsyncResource } from "@mittwald/react-use-promise";
+import type { AsyncResource } from "@mittwald/react-use-promise";
 import { action, computed, makeObservable, observable } from "mobx";
 import useSelector from "@/lib/mobx/useSelector";
 import { useState } from "react";

@@ -1,4 +1,5 @@
-import React, { FC } from "react";
+import type { FC } from "react";
+import React from "react";
 import { SortingPicker } from "@/components/List/components/FilterBar/components/SortingPicker/SortingPicker";
 import FilterPicker from "@/components/List/components/FilterBar/components/FilterPicker";
 import styles from "./FilterBar.module.css";
