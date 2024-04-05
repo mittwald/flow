@@ -14,7 +14,9 @@ export const BoldTextPlaceholder: FC<BoldTextPlaceholderProps> = (props) => {
   return (
     <span className={rootClassName} {...rest}>
       {children}
-      <span className={styles.boldText}>{children}</span>
+      <span aria-hidden="true" className={styles.boldText}>
+        {children}
+      </span>
     </span>
   );
 };
