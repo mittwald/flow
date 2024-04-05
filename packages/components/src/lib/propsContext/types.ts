@@ -1,9 +1,9 @@
-import {
+import type {
   FlowComponentName,
   FlowComponentPropName,
   FlowComponentPropType,
 } from "@/components/propTypes";
-import { DynamicProp } from "./dynamicProps/types";
+import type { DynamicProp } from "./dynamicProps/types";
 
 export type PropsContext = Partial<{
   [C in FlowComponentName]: ComponentPropsContext<C>;

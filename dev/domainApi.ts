@@ -1,4 +1,9 @@
-export type Domain = (typeof domains)[number];
+export type Domain = {
+  hostname: string;
+  domain: string;
+  type: "Subdomain" | "Domain";
+  verified: boolean;
+};
 
 const apiSleep = (): Promise<void> =>
   new Promise((res) => window.setTimeout(res, 500));
@@ -45,47 +50,47 @@ export const getDomains = async (req: Request): Promise<Response> => {
   };
 };
 
-export const domains = [
+export const domains: Domain[] = [
   {
     hostname: "my-domain.de",
     domain: "my-domain.de",
-    type: "domain",
+    type: "Domain",
     verified: true,
   },
   {
     hostname: "www.my-domain.de",
     domain: "my-domain.de",
-    type: "subdomain",
+    type: "Subdomain",
     verified: true,
   },
   {
     hostname: "blog.my-domain.de",
     domain: "my-domain.de",
-    type: "subdomain",
+    type: "Subdomain",
     verified: true,
   },
   {
     hostname: "another-domain.de",
     domain: "another-domain.de",
-    type: "domain",
+    type: "Domain",
     verified: false,
   },
   {
     hostname: "one-more-domain.com",
     domain: "one-more-domain.com",
-    type: "domain",
+    type: "Domain",
     verified: true,
   },
   {
     hostname: "www.one-more-domain.com",
     domain: "one-more-domain.com",
-    type: "subdomain",
+    type: "Subdomain",
     verified: true,
   },
   {
     hostname: "shop.one-more-domain.com",
     domain: "one-more-domain.com",
-    type: "subdomain",
+    type: "Subdomain",
     verified: true,
   },
 ];

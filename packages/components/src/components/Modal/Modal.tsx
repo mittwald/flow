@@ -1,10 +1,12 @@
 import * as Aria from "react-aria-components";
-import React, { FC, PropsWithChildren } from "react";
+import type { FC, PropsWithChildren } from "react";
+import React from "react";
 import styles from "./Modal.module.scss";
 import clsx from "clsx";
-import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import type { PropsContext } from "@/lib/propsContext";
+import { PropsContextProvider } from "@/lib/propsContext";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
-import { OverlayState } from "@/lib/controller/overlay";
+import type { OverlayState } from "@/lib/controller/overlay";
 import { useOverlayState } from "@/lib/controller/overlay/useOverlayState";
 import { useSyncTriggerState } from "@/components/Modal/hooks/useSyncTriggerState";
 import { OverlayContextProvider } from "@/lib/controller/overlay/context";

@@ -1,16 +1,16 @@
-import React, { ReactNode } from "react";
+import type { ReactNode } from "react";
+import React from "react";
 import copy from "copy-to-clipboard";
-import { Button, ButtonProps } from "@/components/Button";
+import type { ButtonProps } from "@/components/Button";
+import { Button } from "@/components/Button";
 import { IconCopy } from "@/components/Icon/components/icons";
 import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 import { Tooltip, TooltipTrigger } from "@/components/Tooltip";
 import { onlyText } from "react-children-utilities";
 import { ClearPropsContext } from "@/lib/propsContext";
-import {
-  flowComponent,
-  FlowComponentProps,
-} from "@/lib/componentFactory/flowComponent";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { Action } from "@/components/Action";
 
 export interface CopyButtonProps

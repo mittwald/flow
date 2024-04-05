@@ -1,32 +1,36 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import List from "../List";
 import React from "react";
-import { getStates, getUsers, User } from "@/components/List/testData/userApi";
 import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
-import { AsyncDataLoader } from "@/components/List/model/loading/types";
-import { Avatar } from "@/components/Avatar";
-import { Initials } from "@/components/Initials";
-import { ContextMenu, ContextMenuItem } from "@/components/ContextMenu";
-import { Link } from "@/components/Link";
 import { usePromise } from "@mittwald/react-use-promise";
-import List, {
+import {
   ListFilter,
   ListItemView,
   ListLoaderAsync,
   ListSorting,
 } from "@/components/List";
+import type { AsyncDataLoader } from "@/components/List/model/loading/types";
+import { Avatar } from "@/components/Avatar";
+import { ContextMenu, ContextMenuItem } from "@/components/ContextMenu";
+import { Link } from "@/components/Link";
+import type { Domain } from "../../../../../../dev/domainApi";
+import { getDomains, getTypes } from "../../../../../../dev/domainApi";
+import { IconDomain } from "@/components/Icon/components/icons";
+import { IconFolders } from "@tabler/icons-react";
+import StatusBadge from "@/components/StatusBadge";
 
-const loadUsers: AsyncDataLoader<User> = async (opt) => {
-  const response = await getUsers({
+const loadDomains: AsyncDataLoader<Domain> = async (opt) => {
+  const response = await getDomains({
     pagination: opt?.pagination
       ? {
           limit: opt.pagination.limit,
           skip: opt.pagination.offset,
         }
       : undefined,
-    filter: opt?.filtering?.["location.state"]
+    filter: opt?.filtering?.["type"]
       ? {
-          states: opt.filtering["location.state"].values as string[],
+          types: opt.filtering["type"].values as string[],
         }
       : undefined,
   });
@@ -41,31 +45,34 @@ const meta: Meta<typeof List> = {
   title: "Structure/List",
   component: List,
   render: () => {
-    const availableStates = usePromise(getStates, []);
+    const availableTypes = usePromise(getTypes, []);
 
     return (
-      <List>
-        <ListLoaderAsync<User> manualPagination manualSorting={false}>
-          {loadUsers}
+      <List batchSize={5}>
+        <ListLoaderAsync<Domain> manualPagination>
+          {loadDomains}
         </ListLoaderAsync>
-        <ListFilter<User>
-          property="location.state"
-          values={availableStates}
+        <ListFilter<Domain>
+          property="type"
+          values={availableTypes}
           mode="some"
-          name="Location"
+          name="Type"
         />
-        <ListSorting<User> property="location.state" name="Location" />
-        <ListSorting<User> property="name.last" name="Last name" />
-        <ListItemView<User>>
-          {(user) => (
+        <ListSorting<Domain> property="domain" name="Domain" />
+        <ListSorting<Domain> property="type" name="Type" />
+        <ListItemView<Domain>>
+          {(domain) => (
             <>
               <Avatar>
-                <Initials>{`${user.name.first} ${user.name.last}`}</Initials>
+                {domain.type === "Domain" ? <IconDomain /> : <IconFolders />}
               </Avatar>
-              <Heading>
-                {user.name.first} {user.name.last}
-              </Heading>
-              <Text>{user.location.state}</Text>
+              <Heading>{domain.hostname}</Heading>
+              {domain.verified ? (
+                <Text>{domain.type}</Text>
+              ) : (
+                <StatusBadge status="warning">Not verified</StatusBadge>
+              )}
+
               <ContextMenu>
                 <ContextMenuItem>Show details</ContextMenuItem>
                 <ContextMenuItem>Delete</ContextMenuItem>
@@ -86,31 +93,19 @@ export const Default: Story = {};
 
 export const ItemsWithLink: Story = {
   render: () => {
-    const availableStates = usePromise(getStates, []);
-
     return (
-      <List>
-        <ListLoaderAsync<User> manualPagination>{loadUsers}</ListLoaderAsync>
-        <ListFilter<User>
-          property="location.state"
-          values={availableStates}
-          mode="some"
-          name="Location"
-        />
-        <ListSorting<User> property="location.state" name="Location" />
-        <ListSorting<User> property="name.last" name="Last name" />
-        <ListItemView<User>>
-          {(user) => (
+      <List batchSize={5}>
+        <ListLoaderAsync<Domain> manualPagination>
+          {loadDomains}
+        </ListLoaderAsync>
+        <ListItemView<Domain>>
+          {(domain) => (
             <Link href="#">
               <Avatar>
-                <Initials>
-                  {user.name.first} {user.name.last}
-                </Initials>
+                {domain.type === "Domain" ? <IconDomain /> : <IconFolders />}
               </Avatar>
-              <Heading>
-                {user.name.first} {user.name.last}
-              </Heading>
-              <Text>{user.location.state}</Text>
+              <Heading>{domain.hostname}</Heading>
+              <Text>{domain.type}</Text>
               <ContextMenu>
                 <ContextMenuItem>Show details</ContextMenuItem>
                 <ContextMenuItem>Delete</ContextMenuItem>

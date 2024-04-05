@@ -1,4 +1,4 @@
-import { FilterShape } from "@/components/List/model/filter/types";
+import type { FilterShape } from "@/components/List/model/filter/types";
 
 interface Props<T> extends Omit<FilterShape<T>, "type"> {}
 

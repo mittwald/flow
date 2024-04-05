@@ -1,15 +1,16 @@
-import React, { FC } from "react";
+import type { FC } from "react";
+import React from "react";
 import { useList } from "@/components/List/hooks/useList";
 import styles from "./ActiveFilters.module.scss";
 import { Text } from "@/components/Text";
 import { Button } from "@/components/Button";
 import { IconClose } from "@/components/Icon/components/icons";
 import locales from "../../../locales/*.locale.json";
-import { useMessageFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "react-aria";
 
 export const ActiveFilters: FC = () => {
   const list = useList();
-  const stringFormatter = useMessageFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(locales);
 
   const activeFilters = list.filters
     .map((f) =>
@@ -43,7 +44,7 @@ export const ActiveFilters: FC = () => {
         style="plain"
         onPress={() => list.filters.map((f) => f.clearValues())}
       >
-        {stringFormatter("resetFilters")}
+        {stringFormatter.format("resetFilters")}
       </Button>
     </div>
   );

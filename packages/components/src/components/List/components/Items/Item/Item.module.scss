@@ -42,7 +42,7 @@
     }
   }
 
-  &:not(:has(.text)) {
+  &:not(:has(.text)):not(:has(.statusBadge)) {
     grid-template-areas: "avatar title content optionsButton";
 
     &:not(:has(.avatar)) {
@@ -81,6 +81,10 @@ a.item {
 .text {
   grid-area: subtitle;
   font-size: var(--list-item--subtitle-font-size);
+}
+
+.statusBadge {
+  grid-area: subtitle;
 }
 
 .content {

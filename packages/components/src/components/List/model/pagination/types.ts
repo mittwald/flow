@@ -1,3 +1,3 @@
-export interface PaginationShape {
-  pageSize?: number;
+export interface BatchesControllerShape {
+  batchSize?: number;
 }

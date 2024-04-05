@@ -1,4 +1,5 @@
-import React, { FC } from "react";
+import type { FC } from "react";
+import React from "react";
 import { SortingPicker } from "@/components/List/components/Header/SortingPicker";
 import FilterPicker from "@/components/List/components/Header/FilterPicker";
 import styles from "./Header.module.css";

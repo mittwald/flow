@@ -1,11 +1,12 @@
-import React, { FC } from "react";
+import type { FC } from "react";
+import React from "react";
 import {
   IconChevronDown,
   IconChevronUp,
 } from "@/components/Icon/components/icons";
 import { Empty } from "@/lib/react/components/Empty";
-import { AnyData } from "@/components/List/model/item/types";
-import { Sorting } from "@/components/List/model/sorting/Sorting";
+import type { AnyData } from "@/components/List/model/item/types";
+import type { Sorting } from "@/components/List/model/sorting/Sorting";
 import { ContextMenuItem } from "@/components/ContextMenu";
 import styles from "./SortingPickerItem.module.scss";
 

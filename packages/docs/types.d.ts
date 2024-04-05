@@ -1,4 +1,4 @@
-import { ComponentType, PropsWithChildren } from "react";
+import type { ComponentType, PropsWithChildren } from "react";
 
 declare global {
   declare const LiveCodeEditor: ComponentType<{ example?: string }>;

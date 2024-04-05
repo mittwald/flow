@@ -6,3 +6,6 @@ icon:
       value: 1.5rem
     l:
       value: 4rem
+  color:
+    default:
+      value: "{neutral.color.900}"

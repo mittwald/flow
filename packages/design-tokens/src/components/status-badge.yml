@@ -1,16 +1,16 @@
 status-badge:
   font-size:
     value: "{font-size.s}"
-    font-weight:
-      value: "{font-weight.bold}"
-    corner-radius:
-      value: "{corner-radius.default}"
-    padding-y:
-      value: "{size-rem.xs}"
-    padding-x:
-      value: "{size-rem.s}"
-    icon-to-text-spacing:
-      value: "{size-rem.xs}"
+  font-weight:
+    value: "{font-weight.bold}"
+  corner-radius:
+    value: "{corner-radius.default}"
+  padding-y:
+    value: "{size-rem.xxs}"
+  padding-x:
+    value: "{size-rem.s}"
+  icon-to-text-spacing:
+    value: "{size-rem.xs}"
 
   # Info
   info-background-color:

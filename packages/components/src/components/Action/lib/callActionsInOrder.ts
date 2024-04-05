@@ -1,4 +1,4 @@
-import { ActionFn } from "@/components/Action";
+import type { ActionFn } from "@/components/Action";
 
 export const callActionsInOrder = (
   args: unknown[],

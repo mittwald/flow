@@ -1,4 +1,5 @@
-import React, { FC, PropsWithChildren } from "react";
+import type { FC, PropsWithChildren } from "react";
+import React from "react";
 import { Button } from "@/components/Button";
 import { IconContextMenu } from "@/components/Icon/components/icons";
 import { ContextMenuTrigger } from "@/components/ContextMenu";

@@ -1,8 +1,8 @@
-import { Column, ColumnDef, ColumnFilter } from "@tanstack/react-table";
-import List from "@/components/List/model/List";
-import { PropertyName } from "@/components/List/model/item/Item";
+import type { Column, ColumnDef, ColumnFilter } from "@tanstack/react-table";
+import type List from "@/components/List/model/List";
+import type { PropertyName } from "@/components/List/model/item/Item";
 import { getProperty } from "dot-prop";
-import {
+import type {
   FilterMatcher,
   FilterMode,
   FilterShape,

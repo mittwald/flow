@@ -1,4 +1,5 @@
-import React, { FC, Suspense } from "react";
+import type { FC } from "react";
+import React, { Suspense } from "react";
 import { useList } from "@/components/List/hooks/useList";
 import styles from "./ItemList.module.css";
 import clsx from "clsx";
