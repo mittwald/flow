@@ -20,8 +20,9 @@ import {
   IconDomain,
   IconSubdomain,
 } from "@mittwald/flow-react-components/Icons";
+import StatusBadge from "@mittwald/flow-react-components/StatusBadge";
 
-<List>
+<List batchSize={5}>
   <ListStaticData data={domains} />
   <ListFilter<Domain>
     property="type"
@@ -41,7 +42,13 @@ import {
           )}
         </Avatar>
         <Heading>{domain.hostname}</Heading>
-        <Text>{domain.type}</Text>
+        {domain.verified ? (
+          <Text>{domain.type}</Text>
+        ) : (
+          <StatusBadge status="warning">
+            Not verified
+          </StatusBadge>
+        )}
         <ContextMenu>
           <ContextMenuItem>Show details</ContextMenuItem>
           <ContextMenuItem>Delete</ContextMenuItem>
