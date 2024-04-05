@@ -1,45 +1,30 @@
-@mixin state($state) {
-  border-color: var(--checkbox--border-color--#{$state});
-  background-color: var(--checkbox--background-color--#{$state});
-  color: var(--checkbox--color--#{$state});
-  .checkmark {
-    color: var(--checkbox--checkmark-color--#{$state});
-  }
-}
+@use "@/styles/mixins/focus";
 
 .checkbox {
-  border-width: var(--checkbox--border-width);
-  border-style: var(--checkbox--border-style);
-  border-color: var(--checkbox--border-color--default);
-  border-radius: var(--checkbox--corner-radius);
-  padding-block: var(--checkbox--padding-y);
-  padding-inline: var(--checkbox--padding-x);
-  background-color: var(--checkbox--background-color--default);
-  color: var(--checkbox--color--default);
   display: grid;
-  column-gap: var(--checkbox--checkmark-to-text-spacing);
+  column-gap: var(--checkbox--icon-to-text-spacing);
   grid-template-columns: auto 1fr;
   width: fit-content;
+  border-radius: var(--corner-radius--default);
 
-  /* States */
-  &:hover {
-    background-color: var(--checkbox--background-color--hover);
-  }
+  @include focus.focus;
 
-  &[data-selected] {
-    @include state(selected);
+  &[data-selected],
+  &[data-indeterminate] {
+    .icon {
+      color: var(--checkbox--icon-color--selected);
+    }
   }
 
   &[data-disabled] {
-    @include state(disabled);
-  }
+    color: var(--checkbox--color--disabled);
 
-  &[data-selected][data-disabled] {
-    @include state(selected-disabled);
+    .icon {
+      color: var(--checkbox--icon-color--disabled);
+    }
   }
 }
 
-/* Elements  */
-.checkmark {
-  color: var(--checkbox--checkmark-color--default);
+.icon {
+  color: var(--radio--icon-color--default);
 }

@@ -1,27 +1,27 @@
-import React, { ComponentProps, FC, PropsWithChildren } from "react";
+import React, { ComponentProps, PropsWithChildren } from "react";
 import {
+  ClearPropsContext,
   PropsContext,
   PropsContextProvider,
-  useProps,
 } from "@/lib/propsContext";
 import styles from "./InlineAlert.module.scss";
 import clsx from "clsx";
 import { StatusIcon } from "@/components/StatusIcon";
-import { PropsWithVariant } from "@/lib/types/props";
+import { PropsWithStatus } from "@/lib/types/props";
+import {
+  flowComponent,
+  FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
 
 export interface InlineAlertProps
   extends PropsWithChildren<ComponentProps<"aside">>,
-    PropsWithVariant {}
+    PropsWithStatus,
+    FlowComponentProps {}
 
-export const InlineAlert: FC<InlineAlertProps> = (props) => {
-  const {
-    children,
-    className,
-    variant = "info",
-    ...rest
-  } = useProps("InlineAlert", props);
+export const InlineAlert = flowComponent("InlineAlert", (props) => {
+  const { children, className, status = "info", ...rest } = props;
 
-  const rootClassName = clsx(styles.inlineAlert, styles[variant], className);
+  const rootClassName = clsx(styles.inlineAlert, styles[status], className);
 
   const propsContext: PropsContext = {
     Heading: {
@@ -34,13 +34,15 @@ export const InlineAlert: FC<InlineAlertProps> = (props) => {
   };
 
   return (
-    <aside {...rest} className={rootClassName}>
-      <StatusIcon className={styles.statusIcon} variant={variant} />
-      <PropsContextProvider props={propsContext}>
-        {children}
-      </PropsContextProvider>
-    </aside>
+    <ClearPropsContext>
+      <aside {...rest} className={rootClassName}>
+        <StatusIcon className={styles.statusIcon} status={status} />
+        <PropsContextProvider props={propsContext}>
+          {children}
+        </PropsContextProvider>
+      </aside>
+    </ClearPropsContext>
   );
-};
+});
 
 export default InlineAlert;

@@ -6,14 +6,14 @@ import { Content } from "@/components/Content";
 import { Skeleton } from "@/components/Skeleton";
 
 const meta: Meta<typeof InlineAlert> = {
-  title: "Status/Inline Alert",
+  title: "Status/InlineAlert",
   component: InlineAlert,
   argTypes: {
-    variant: {
+    status: {
       control: "inline-radio",
     },
   },
-  args: { variant: "info" },
+  args: { status: "info" },
 };
 
 export default meta;

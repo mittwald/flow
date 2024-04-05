@@ -1,16 +1,22 @@
-import * as acorn from "acorn";
-import jsx from "acorn-jsx";
 import { ImportDeclaration, Literal } from "acorn";
+import { tsxParser } from "@/lib/tsxParser";
 
 interface ImportDefinition {
   names: string[];
   source: Literal["value"];
 }
 
-export function extractRawImports(moduleCode: string): ImportDefinition[] {
-  const JSXParser = acorn.Parser.extend(jsx());
+function isTypeImport(something: unknown): something is { importKind: "type" } {
+  return (
+    !!something &&
+    typeof something === "object" &&
+    "importKind" in something &&
+    something.importKind === "type"
+  );
+}
 
-  const tree = JSXParser.parse(moduleCode, {
+export function extractRawImports(moduleCode: string): ImportDefinition[] {
+  const tree = tsxParser.parse(moduleCode, {
     ecmaVersion: 14,
     sourceType: "module",
   });
@@ -21,7 +27,9 @@ export function extractRawImports(moduleCode: string): ImportDefinition[] {
 
   return imports.map((declaration) => {
     return {
-      names: declaration.specifiers.map((specifier) => specifier.local.name),
+      names: declaration.specifiers
+        .filter((s) => !isTypeImport(s))
+        .map((specifier) => specifier.local.name),
       source: declaration.source.value,
     };
   });

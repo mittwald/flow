@@ -10,6 +10,6 @@ export interface DynamicProp<
   P extends FlowComponentPropName<C>,
 > {
   __dynamicProp: (
-    localProps: FlowComponentProps<C>,
+    localProps: Partial<FlowComponentProps<C>>,
   ) => FlowComponentPropType<C, P>;
 }

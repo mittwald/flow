@@ -1,49 +1,31 @@
 switch:
-  font-size:
-    value: "{font-size.s}"
-  font-weight:
-    value: "{font-weight.bold}"
-  color:
-    disabled:
-      value: "{neutral.color.600}"
-  label-to-indicator-spacing:
+  label-to-track-spacing:
     value: "{size-rem.s}"
 
-  # Indicator
-  indicator-height:
-    value: "{size-rem.l}"
-  indicator-width:
-    value: 2.5rem
-  indicator-corner-radius:
-    value: "{size-rem.m}"
-  indicator-to-marker-spacing:
-    value: "{size-rem.xs}"
-  indicator-marker-color:
-    value: "{neutral.color.100}"
-  indicator-marker-size:
-    value: "{size-rem.m}"
-  indicator-color:
+  # Track
+  track-height:
+    value: 1.5rem
+  track-width:
+    value: 2.75rem
+  track-corner-radius:
+    value: 0.75rem
+  track-padding:
+    value: "{size-rem.xxs}"
+  track-background-color:
     default:
-      value: "{neutral.color.500}"
-    pressed:
-      value: "{neutral.color.600}"
+      value: "{neutral-solid-background-color.default}"
     disabled:
-      value: "{neutral.color.400}"
-
-  # Success
-  success-indicator-color:
+      value: "{neutral.color.600}"
     selected:
-      value: "{success.color.800}"
-    selected-pressed:
-      value: "{success.color.900}"
-    selected-disabled:
-      value: "{success.color.200}"
+      value: "{success-solid-background-color.default}"
 
-  # Danger
-  danger-indicator-color:
-    selected:
-      value: "{danger.color.800}"
-    selected-pressed:
-      value: "{danger.color.900}"
-    selected-disabled:
-      value: "{danger.color.300}"
+  # Handle
+  handle-color:
+    default:
+      value: "{neutral-solid-content-color}"
+    disabled:
+      value: "{neutral.color.600}"
+  handle-background-color:
+    value: "{neutral.color.100}"
+  handle-size:
+    value: 1.25rem

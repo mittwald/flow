@@ -7,7 +7,7 @@ import FieldDescription from "@/components/FieldDescription/FieldDescription";
 import { FieldError } from "@/components/FieldError";
 
 const meta: Meta<typeof NumberField> = {
-  title: "Forms/NumberField",
+  title: "Form Controls/NumberField",
   component: NumberField,
   render: (props) => (
     <NumberField onChange={action("onChange")} {...props}>

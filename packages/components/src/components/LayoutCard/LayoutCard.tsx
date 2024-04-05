@@ -1,20 +1,19 @@
-import React, { FC, PropsWithChildren } from "react";
-import { ClearPropsContext, useProps } from "@/lib/propsContext";
+import React, { PropsWithChildren } from "react";
 import styles from "./LayoutCard.module.scss";
 import clsx from "clsx";
 import { PropsWithElementType } from "@/lib/types/props";
+import {
+  flowComponent,
+  FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
 
 export interface LayoutCardProps
   extends PropsWithChildren,
-    PropsWithElementType {}
+    PropsWithElementType,
+    FlowComponentProps {}
 
-export const LayoutCard: FC<LayoutCardProps> = (props) => {
-  const {
-    children,
-    className,
-    elementType = "div",
-    ...rest
-  } = useProps("LayoutCard", props);
+export const LayoutCard = flowComponent("LayoutCard", (props) => {
+  const { children, className, elementType = "div", ...rest } = props;
 
   const rootClassName = clsx(styles.layoutCard, className);
 
@@ -22,9 +21,9 @@ export const LayoutCard: FC<LayoutCardProps> = (props) => {
 
   return (
     <Element className={rootClassName} {...rest}>
-      <ClearPropsContext>{children}</ClearPropsContext>
+      {children}
     </Element>
   );
-};
+});
 
 export default LayoutCard;

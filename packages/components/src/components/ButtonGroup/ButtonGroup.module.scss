@@ -1,0 +1,22 @@
+.buttonGroup {
+  gap: var(--button-group--button-to-button-spacing);
+  display: grid;
+  grid-template-areas: "abort secondary primary";
+  grid-auto-columns: 1fr auto auto;
+
+  .abort:last-child {
+    grid-area: abort;
+    justify-self: start;
+  }
+
+  :first-child:not(.abort) {
+    grid-area: primary;
+  }
+}
+
+@media (max-width: 550px) {
+  .buttonGroup {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+}

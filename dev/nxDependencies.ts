@@ -18,4 +18,4 @@ const dependencies = graph.dependencies[projectName]
   .map((p) => p.target)
   .filter((p) => projects.includes(p));
 
-console.log(dependencies.join(" "));
+console.log(dependencies.join(","));

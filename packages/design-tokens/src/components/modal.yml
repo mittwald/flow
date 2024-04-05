@@ -1,0 +1,28 @@
+modal:
+  corner-radius:
+    value: "{corner-radius.default}"
+  padding:
+    value: "{size-px.l}"
+  padding-bottom:
+    value: "{size-px.xl}"
+  background-color:
+    value: "{neutral.color.100}"
+  overlay-background-color:
+    value: rgba(0, 0, 0, 0.3)
+  size:
+    s:
+      value: 660px
+    m:
+      value: 900px
+    l:
+      value: 1050px
+  button-group-padding:
+    value: "{size-rem.l}"
+  button-group-background-color:
+    value: "{neutral.color.300}"
+  button-group-border-color:
+    value: "{neutral.color.400}"
+  button-group-border-top-width:
+    value: "{border-width.100}"
+  button-group-border-style:
+    value: "{border-style.default}"

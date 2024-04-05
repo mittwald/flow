@@ -1,0 +1,40 @@
+@use "../../styles/mixins/formControl";
+
+.checkboxButton {
+  @include formControl.formControl();
+  display: grid;
+  row-gap: var(--checkbox-button--text-to-text-spacing);
+  column-gap: var(--checkbox-button--icon-to-text-spacing);
+  border-radius: var(--form-control--corner-radius);
+  grid-template-areas: "icon label";
+  grid-template-columns: auto 1fr;
+
+  &.checkboxButton {
+    width: auto;
+  }
+
+  /* With content */
+  &:has(.content) {
+    grid-template-areas:
+      "icon label"
+      ".    content";
+    grid-template-rows: auto 1fr;
+
+    .label {
+      font-weight: var(--checkbox-button--label-font-weight-with-content);
+    }
+  }
+
+  &:focus-within:not([data-selected]):not([data-focus-visible]) {
+    border-color: var(--form-control--border-color--default);
+  }
+}
+
+/* Elements */
+.label {
+  grid-area: label;
+}
+
+.content {
+  grid-area: content;
+}
