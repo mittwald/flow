@@ -97,7 +97,10 @@ export class ReactTable<T> {
     });
   };
 
-  private getUpdatedTableState(newState: TableState): TableState {
+  private getUpdatedTableState(
+    prevState: TableState,
+    newState: TableState,
+  ): TableState {
     // for further customization (like fixed sorting)
     return newState;
   }
