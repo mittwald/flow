@@ -22,8 +22,6 @@ export const resolveDynamicProps = <C extends FlowComponentName>(
 
       if (isDynamicProp<C, typeof prop>(propValue)) {
         resolved[prop] = propValue.__dynamicProp(localProps);
-      } else {
-        resolved[prop] = propValue;
       }
     }
   }

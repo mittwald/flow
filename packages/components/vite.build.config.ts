@@ -25,6 +25,8 @@ export default defineConfig(
           Button: "./src/components/Button/index.ts",
           ButtonGroup: "./src/components/ButtonGroup/index.ts",
           Checkbox: "./src/components/Checkbox/index.ts",
+          CheckboxButton: "./src/components/CheckboxButton/index.ts",
+          CheckboxGroup: "./src/components/CheckboxGroup/index.ts",
           ColumnLayout: "./src/components/ColumnLayout/index.ts",
           Content: "./src/components/Content/index.ts",
           ContextMenu: "./src/components/ContextMenu/index.ts",
@@ -55,6 +57,8 @@ export default defineConfig(
           Popover: "./src/components/Popover/index.ts",
           RadioGroup: "./src/components/RadioGroup/index.ts",
           Section: "./src/components/Section/index.ts",
+          SegmentedControlGroup:
+            "./src/components/SegmentedControlGroup/index.ts",
           StatusBadge: "./src/components/StatusBadge/index.ts",
           StatusIcon: "./src/components/StatusIcon/index.ts",
           Switch: "./src/components/Switch/index.ts",

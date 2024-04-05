@@ -1,10 +1,10 @@
 import { ActionFn, ActionType } from "@/components/Action/types";
-import { useOverlayController } from "@/lib/controller/overlayController/useOverlayController";
+import { useOverlayState } from "@/lib/controller/overlay/useOverlayState";
 
 const voidAction = () => {};
 
 export const useMakeCallableAction = (action?: ActionType): ActionFn => {
-  const modalController = useOverlayController();
+  const modalController = useOverlayState();
 
   return action?.type === "function"
     ? action.fn

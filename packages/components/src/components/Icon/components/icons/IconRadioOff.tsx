@@ -1,10 +1,10 @@
 /* eslint-disable */
 /* auto-generated file */
 import React, { ComponentProps, FC } from "react";
-import { IconSquareCheck as Tabler } from "@tabler/icons-react";
+import { IconCircle as Tabler } from "@tabler/icons-react";
 import { Icon } from "@/components/Icon";
 
-export const IconChecked: FC<Omit<ComponentProps<typeof Icon>, "children">> = (
+export const IconRadioOff: FC<Omit<ComponentProps<typeof Icon>, "children">> = (
   props,
 ) => (
   <Icon {...props}>
@@ -12,4 +12,4 @@ export const IconChecked: FC<Omit<ComponentProps<typeof Icon>, "children">> = (
   </Icon>
 );
 
-export default IconChecked;
+export default IconRadioOff;

@@ -42,7 +42,7 @@ const clickTrigger = async () => {
 };
 
 test("Sync Action is called when trigger is clicked", async () => {
-  await act(() => render(<Action action={syncAction1}>{button}</Action>));
+  render(<Action action={syncAction1}>{button}</Action>);
   await clickTrigger();
   expect(syncAction1).toHaveBeenCalledOnce();
 });
