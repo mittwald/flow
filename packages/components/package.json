@@ -142,10 +142,6 @@
       "types": "./dist/types/components/Section/index.d.ts",
       "import": "./dist/Section.js"
     },
-    "./SegmentedControlGroup": {
-      "types": "./dist/types/components/SegmentedControlGroup/index.d.ts",
-      "import": "./dist/SegmentedControlGroup.js"
-    },
     "./StatusBadge": {
       "types": "./dist/types/components/StatusBadge/index.d.ts",
       "import": "./dist/StatusBadge.js"

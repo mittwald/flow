@@ -1,12 +1,12 @@
-@use "../../styles/mixins/formControl";
+@use "../../../../styles/mixins/formControl";
 
-.segmentedControlGroup {
+.segmentedGroup {
+  order: 2;
   container-type: inline-size;
   isolation: isolate;
 }
 
 .segments {
-  width: 100%;
   display: flex;
   flex-wrap: nowrap;
 

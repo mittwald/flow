@@ -12,13 +12,17 @@ import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import formFieldStyles from "../FormField/FormField.module.scss";
 import { deepFindOfType } from "@/lib/react/deepFindOfType";
 import RadioButton from "./components/RadioButton";
+import { SegmentedGroup } from "@/components/RadioGroup/components/SegmentedGroup";
+import { Wrap } from "@/components/Wrap";
 
 export interface RadioGroupProps
   extends PropsWithChildren<Omit<Aria.RadioGroupProps, "children">>,
-    Pick<ColumnLayoutProps, "s" | "m" | "l"> {}
+    Pick<ColumnLayoutProps, "s" | "m" | "l"> {
+  variant?: "segmented" | "default";
+}
 
 export const RadioGroup: FC<RadioGroupProps> = (props) => {
-  const { children, className, s, m, l, ...rest } = props;
+  const { children, className, variant = "default", s, m, l, ...rest } = props;
 
   const rootClassName = clsx(formFieldStyles.formField, className);
 
@@ -39,20 +43,28 @@ export const RadioGroup: FC<RadioGroupProps> = (props) => {
 
   const hasRadioButtons = !!deepFindOfType(children, RadioButton);
 
+  if (variant === "segmented" && hasRadioButtons) {
+    console.warn(
+      "<RadioButton/> is not supported in 'segmented' variant of <RadioGroup />",
+    );
+  }
+
   return (
     <Aria.RadioGroup {...rest} className={rootClassName}>
       <PropsContextProvider props={propsContext}>
         <TunnelProvider>
           <TunnelExit id="label" />
-
-          {hasRadioButtons ? (
-            <ColumnLayout s={s} m={m} l={l} className={styles.radioGroup}>
-              {children}
-            </ColumnLayout>
-          ) : (
-            <div className={styles.radioGroup}>{children}</div>
-          )}
-
+          <Wrap if={variant === "segmented"}>
+            <SegmentedGroup>
+              <Wrap if={variant === "default" && hasRadioButtons}>
+                <ColumnLayout s={s} m={m} l={l} className={styles.radioGroup}>
+                  <Wrap if={variant === "default" && !hasRadioButtons}>
+                    <div className={styles.radioGroup}>{children}</div>
+                  </Wrap>
+                </ColumnLayout>
+              </Wrap>
+            </SegmentedGroup>
+          </Wrap>
           <TunnelExit id="fieldDescription" />
           <TunnelExit id="fieldError" />
         </TunnelProvider>
