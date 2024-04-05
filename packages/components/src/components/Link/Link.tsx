@@ -20,6 +20,7 @@ export interface LinkProps
   variant?: "default" | "danger";
   inline?: boolean;
   linkComponent?: ComponentType<Omit<ComponentProps<"a">, "ref">>;
+  /** @internal */
   unstyled?: boolean;
   "aria-current"?: string;
 }

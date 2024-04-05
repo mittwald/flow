@@ -11,6 +11,7 @@ import { ClearPropsContext } from "@/lib/propsContext";
 export interface RadioProps
   extends PropsWithChildren<Omit<Aria.RadioProps, "children">>,
     FlowComponentProps {
+  /** @internal */
   unstyled?: boolean;
 }
 
