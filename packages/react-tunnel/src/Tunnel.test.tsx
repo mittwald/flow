@@ -3,7 +3,7 @@ import TunnelEntry from "./components/TunnelEntry";
 import TunnelExit from "./components/TunnelExit";
 import TunnelProvider from "./components/TunnelProvider";
 import { expect, test } from "vitest";
-import { render, waitFor } from "@testing-library/react";
+import { render } from "@testing-library/react";
 
 test("Exit is empty when no entry is set", async () => {
   const dom = render(
@@ -14,9 +14,7 @@ test("Exit is empty when no entry is set", async () => {
     </TunnelProvider>,
   );
 
-  await waitFor(() => {
-    expect(dom.getByTestId("exit").innerText).toBe("");
-  });
+  expect(dom.getByTestId("exit").innerText).toBe("");
 });
 
 test("Exit is empty when using other tunnel ids", async () => {
@@ -29,9 +27,7 @@ test("Exit is empty when using other tunnel ids", async () => {
     </TunnelProvider>,
   );
 
-  await waitFor(() => {
-    expect(dom.getByTestId("exit").innerText).toBe("");
-  });
+  expect(dom.getByTestId("exit").innerText).toBe("");
 });
 
 test("Content from entry is rendered in exit", async () => {
@@ -46,10 +42,8 @@ test("Content from entry is rendered in exit", async () => {
     </TunnelProvider>,
   );
 
-  await waitFor(() => {
-    expect(dom.getByTestId("exit").innerText).toBe("Hello!");
-    expect(dom.getByTestId("entry").innerText).toBe("");
-  });
+  expect(dom.getByTestId("exit").innerText).toBe("Hello!");
+  expect(dom.getByTestId("entry").innerText).toBe("");
 });
 
 test("Content from entry is rendered in exit when using same tunnel ids", async () => {
@@ -64,10 +58,8 @@ test("Content from entry is rendered in exit when using same tunnel ids", async 
     </TunnelProvider>,
   );
 
-  await waitFor(() => {
-    expect(dom.getByTestId("exit").innerText).toBe("Hello!");
-    expect(dom.getByTestId("entry").innerText).toBe("");
-  });
+  expect(dom.getByTestId("exit").innerText).toBe("Hello!");
+  expect(dom.getByTestId("entry").innerText).toBe("");
 });
 
 test("Exit children are rendered as fallback when entry is empty", async () => {
@@ -79,9 +71,7 @@ test("Exit children are rendered as fallback when entry is empty", async () => {
     </TunnelProvider>,
   );
 
-  await waitFor(() => {
-    expect(dom.getByTestId("exit").innerText).toBe("Exit fallback");
-  });
+  expect(dom.getByTestId("exit").innerText).toBe("Exit fallback");
 });
 
 test("Exit children are NOT rendered as fallback when entry is set", async () => {
@@ -94,9 +84,7 @@ test("Exit children are NOT rendered as fallback when entry is set", async () =>
     </TunnelProvider>,
   );
 
-  await waitFor(() => {
-    expect(dom.getByTestId("exit").innerText).toBe("Hello!");
-  });
+  expect(dom.getByTestId("exit").innerText).toBe("Hello!");
 });
 
 test("Content from entry is updated in exit", async () => {
@@ -111,9 +99,7 @@ test("Content from entry is updated in exit", async () => {
     </TunnelProvider>,
   );
 
-  await waitFor(() => {
-    expect(dom.getByTestId("exit").innerText).toBe("Hello!");
-  });
+  expect(dom.getByTestId("exit").innerText).toBe("Hello!");
 
   dom.rerender(
     <TunnelProvider>
@@ -124,9 +110,7 @@ test("Content from entry is updated in exit", async () => {
     </TunnelProvider>,
   );
 
-  await waitFor(() => {
-    expect(dom.getByTestId("exit").innerText).toBe("Hi!");
-  });
+  expect(dom.getByTestId("exit").innerText).toBe("Hi!");
 });
 
 test("Content in exit is removed when not rendering entry", async () => {
@@ -139,9 +123,7 @@ test("Content in exit is removed when not rendering entry", async () => {
     </TunnelProvider>,
   );
 
-  await waitFor(() => {
-    expect(dom.getByTestId("exit").innerText).toBe("Hello!");
-  });
+  expect(dom.getByTestId("exit").innerText).toBe("Hello!");
 
   dom.rerender(
     <TunnelProvider>
@@ -151,7 +133,5 @@ test("Content in exit is removed when not rendering entry", async () => {
     </TunnelProvider>,
   );
 
-  await waitFor(() => {
-    expect(dom.getByTestId("exit").innerText).toBe("");
-  });
+  expect(dom.getByTestId("exit").innerText).toBe("");
 });

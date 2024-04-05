@@ -1,0 +1,3 @@
+segmented-button:
+  text-to-text-spacing:
+    value: "{size-rem.xs}"

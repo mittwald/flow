@@ -1,16 +1,6 @@
-import { Signal } from "@preact/signals-react";
-import { createContext, ReactNode } from "react";
+import { createContext } from "react";
+import { TunnelState } from "@/TunnelState";
 
-export type TunnelNodes = Record<string, ReactNode>;
-
-export interface TunnelContext {
-  children: Signal<TunnelNodes>;
-}
-
-export const tunnelContext = createContext<TunnelContext>({
-  children: {
-    value: {},
-  },
-} as TunnelContext);
+export const tunnelContext = createContext<TunnelState>(new TunnelState());
 
 export default tunnelContext;

@@ -1,4 +1,3 @@
-import { Signal, useSignal, useSignalEffect } from "@preact/signals-react";
 import {
   Column,
   ColumnDef,
@@ -16,18 +15,21 @@ import {
 import List from "@/components/List/model/List";
 import { PropertyName } from "@/components/List/model/item/Item";
 import invariant from "invariant";
+import { useLocalObservable } from "mobx-react-lite";
+import { runInAction } from "mobx";
+import { useAutorunEffect } from "@/lib/mobx/useAutorunEffect";
 
 export class ReactTable<T> {
   public readonly list: List<T>;
   public readonly table: Table<T>;
-  private readonly tableState: Signal<TableState | undefined>;
+  private readonly tableState: { value: TableState | undefined };
 
   private constructor(
     list: List<T>,
     tableOptions: Partial<TableOptions<T>> = {},
   ) {
     this.list = list;
-    this.tableState = useSignal(undefined);
+    this.tableState = useLocalObservable(() => ({ value: undefined }));
     this.table = this.useReactTable(tableOptions);
   }
 
@@ -64,7 +66,7 @@ export class ReactTable<T> {
   }
 
   private useUpdateTableState(table: Table<T>): void {
-    useSignalEffect(() => {
+    useAutorunEffect(() => {
       const state = this.tableState.value;
 
       if (state) {
@@ -88,7 +90,9 @@ export class ReactTable<T> {
     const newState =
       typeof updater === "function" ? updater(prevState) : updater;
 
-    this.tableState.value = this.getUpdatedTableState(prevState, newState);
+    runInAction(() => {
+      this.tableState.value = this.getUpdatedTableState(prevState, newState);
+    });
   };
 
   private getUpdatedTableState(

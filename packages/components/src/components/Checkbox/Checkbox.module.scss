@@ -1,9 +1,30 @@
-@use "../../styles/mixins/formControl";
+@use "@/styles/mixins/focus";
 
 .checkbox {
-  @include formControl.formControl();
   display: grid;
-  column-gap: var(--checkbox--checkmark-to-text-spacing);
+  column-gap: var(--checkbox--icon-to-text-spacing);
   grid-template-columns: auto 1fr;
   width: fit-content;
+  border-radius: var(--corner-radius--default);
+
+  @include focus.focus;
+
+  &[data-selected],
+  &[data-indeterminate] {
+    .icon {
+      color: var(--checkbox--icon-color--selected);
+    }
+  }
+
+  &[data-disabled] {
+    color: var(--checkbox--color--disabled);
+
+    .icon {
+      color: var(--checkbox--icon-color--disabled);
+    }
+  }
+}
+
+.icon {
+  color: var(--radio--icon-color--default);
 }

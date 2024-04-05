@@ -55,7 +55,7 @@ test("The local property is returned, if property is not in context", () => {
   expectPropertyToBe("local");
 });
 
-test("The local property is returned, event if property is in context", () => {
+test("The local property is returned, even if property is in context", () => {
   render(
     <PropsContextProvider props={contextProps}>
       <TestComponent testProp="local" />
