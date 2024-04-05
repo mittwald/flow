@@ -5,12 +5,7 @@ import Text from "@mittwald/flow-react-components/Text";
   <Text style={{ borderInline: "2px solid red" }}>
     <BoldTextPlaceholder>Example Text</BoldTextPlaceholder>
   </Text>
-  <Text
-    style={{
-      borderInline: "2px solid red",
-      fontWeight: "bold",
-    }}
-  >
-    <BoldTextPlaceholder>Example Text</BoldTextPlaceholder>
+  <Text style={{ borderInline: "2px solid red" }}>
+    <strong>Example Text</strong>
   </Text>
 </Column>;
