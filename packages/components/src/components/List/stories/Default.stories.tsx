@@ -48,7 +48,7 @@ const meta: Meta<typeof List> = {
 
     return (
       <List batchSize={5}>
-        <ListLoaderAsync<Domain> manualPagination>
+        <ListLoaderAsync<Domain> manualPagination manualSorting={false}>
           {loadDomains}
         </ListLoaderAsync>
         <ListFilter<Domain>
