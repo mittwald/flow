@@ -1,8 +1,9 @@
 "use client";
-import { FC } from "react";
+import type { FC } from "react";
 import { MDXRemote as NextMDXRemote } from "next-mdx-remote";
 import LiveCodeEditor from "@/lib/liveCode/components/LiveCodeEditor/LiveCodeEditor";
-import { MdxFile, SerializedMdxFile } from "@/lib/mdx/MdxFile";
+import type { SerializedMdxFile } from "@/lib/mdx/MdxFile";
+import { MdxFile } from "@/lib/mdx/MdxFile";
 import { customComponents } from "@/lib/mdx/components/MdxFileView/customComponents";
 import styles from "./customComponents.module.css";
 

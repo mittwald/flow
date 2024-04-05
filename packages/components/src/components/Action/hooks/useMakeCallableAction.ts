@@ -1,4 +1,4 @@
-import { ActionFn, ActionType } from "@/components/Action/types";
+import type { ActionFn, ActionType } from "@/components/Action/types";
 import { useOverlayState } from "@/lib/controller/overlay/useOverlayState";
 
 const voidAction = () => {};

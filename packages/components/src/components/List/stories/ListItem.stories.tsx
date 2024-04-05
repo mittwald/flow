@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import List from "../List";
+import type List from "../List";
 import React from "react";
 import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";

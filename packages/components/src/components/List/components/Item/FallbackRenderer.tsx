@@ -1,5 +1,6 @@
-import { AnyData } from "@/components/List/model/item/types";
-import React, { FC } from "react";
+import type { AnyData } from "@/components/List/model/item/types";
+import type { FC } from "react";
+import React from "react";
 import { InlineCode } from "@/components/InlineCode";
 
 interface Props {

@@ -1,10 +1,11 @@
-import React, { FC } from "react";
-import { Filter } from "@/components/List/model/filter/Filter";
+import type { FC } from "react";
+import React from "react";
+import type { Filter } from "@/components/List/model/filter/Filter";
 import { Button } from "@/components/Button";
 import styles from "./FilterPickerItem.module.css";
 import { Label } from "@/components/Label";
 
-import { AnyData } from "@/components/List/model/item/types";
+import type { AnyData } from "@/components/List/model/item/types";
 
 interface Props {
   filter: Filter<AnyData>;

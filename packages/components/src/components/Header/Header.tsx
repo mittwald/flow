@@ -1,9 +1,8 @@
-import React, { PropsWithChildren } from "react";
-import { PropsWithElementType } from "@/lib/types/props";
-import {
-  flowComponent,
-  FlowComponentProps,
-} from "@/lib/componentFactory/flowComponent";
+import type { PropsWithChildren } from "react";
+import React from "react";
+import type { PropsWithElementType } from "@/lib/types/props";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface HeaderProps
   extends PropsWithChildren,

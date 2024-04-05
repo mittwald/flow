@@ -1,5 +1,5 @@
-import List from "@/components/List/model/List";
-import { PaginationShape } from "@/components/List/model/pagination/types";
+import type List from "@/components/List/model/List";
+import type { PaginationShape } from "@/components/List/model/pagination/types";
 
 export class Pagination<T> {
   private readonly list: List<T>;

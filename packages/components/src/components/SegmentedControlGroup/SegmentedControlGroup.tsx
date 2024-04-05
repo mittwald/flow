@@ -1,12 +1,10 @@
-import React, { FC, PropsWithChildren } from "react";
+import type { FC, PropsWithChildren } from "react";
+import React from "react";
 import styles from "./SegmentedControllGroup.module.scss";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
-import {
-  dynamic,
-  PropsContext,
-  PropsContextProvider,
-} from "@/lib/propsContext";
+import type { PropsContext } from "@/lib/propsContext";
+import { dynamic, PropsContextProvider } from "@/lib/propsContext";
 import { FieldError } from "@/components/FieldError";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import formFieldStyles from "../FormField/FormField.module.scss";

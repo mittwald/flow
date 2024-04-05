@@ -1,7 +1,5 @@
-import {
-  FlowComponentName,
-  propsContextSupportingComponents,
-} from "@/components/propTypes";
+import type { FlowComponentName } from "@/components/propTypes";
+import { propsContextSupportingComponents } from "@/components/propTypes";
 
 export function isFlowComponentName(
   something: unknown,

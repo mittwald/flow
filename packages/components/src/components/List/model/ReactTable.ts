@@ -1,19 +1,21 @@
-import {
+import type {
   Column,
   ColumnDef,
+  Table,
+  TableOptions,
+  TableState,
+  Updater,
+} from "@tanstack/react-table";
+import {
   getCoreRowModel,
   getFacetedUniqueValues,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-  Table,
-  TableOptions,
-  TableState,
-  Updater,
   useReactTable,
 } from "@tanstack/react-table";
-import List from "@/components/List/model/List";
-import { PropertyName } from "@/components/List/model/item/Item";
+import type List from "@/components/List/model/List";
+import type { PropertyName } from "@/components/List/model/item/Item";
 import invariant from "invariant";
 import { useLocalObservable } from "mobx-react-lite";
 import { runInAction } from "mobx";

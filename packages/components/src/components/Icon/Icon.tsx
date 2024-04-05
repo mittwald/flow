@@ -1,12 +1,11 @@
-import React, { PropsWithChildren, SVGAttributes, useMemo } from "react";
+import type { PropsWithChildren, SVGAttributes } from "react";
+import React, { useMemo } from "react";
 import styles from "./Icon.module.scss";
 import clsx from "clsx";
 import { extractSvgFromString } from "@/components/Icon/lib/extractSvgFromString";
 import { ClearPropsContext } from "@/lib/propsContext";
-import {
-  flowComponent,
-  FlowComponentProps,
-} from "@/lib/componentFactory/flowComponent";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 type SvgAttributeProps = SVGAttributes<SVGSVGElement>;
 

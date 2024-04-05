@@ -1,4 +1,5 @@
-import React, { FC } from "react";
+import type { FC } from "react";
+import React from "react";
 import { Button } from "@/components/Button";
 import {
   IconChevronDown,
@@ -6,8 +7,8 @@ import {
 } from "@/components/Icon/components/icons";
 import { Empty } from "@/lib/react/components/Empty";
 
-import { AnyData } from "@/components/List/model/item/types";
-import { Sorting } from "@/components/List/model/sorting/Sorting";
+import type { AnyData } from "@/components/List/model/item/types";
+import type { Sorting } from "@/components/List/model/sorting/Sorting";
 
 interface Props {
   sorting: Sorting<AnyData>;

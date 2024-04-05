@@ -1,12 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import List from "../List";
 import React from "react";
-import { getStates, getUsers, User } from "@/components/List/testData/userApi";
+import type { User } from "@/components/List/testData/userApi";
+import { getStates, getUsers } from "@/components/List/testData/userApi";
 import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
 import { usePromise } from "@mittwald/react-use-promise";
 import { ListFilter, ListItemView, ListLoaderAsync } from "@/components/List";
-import { AsyncDataLoader } from "@/components/List/model/loading/types";
+import type { AsyncDataLoader } from "@/components/List/model/loading/types";
 import { Avatar } from "@/components/Avatar";
 import { Initials } from "@/components/Initials";
 import { ContextMenu, ContextMenuItem } from "@/components/ContextMenu";

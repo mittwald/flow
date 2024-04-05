@@ -1,4 +1,5 @@
-import React, { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
+import React from "react";
 import { listContext } from "./listContext";
 import { DataLoader } from "@/components/List/components/DataLoader";
 import { PaginationInfos } from "@/components/List/components/PaginationInfos";
@@ -8,17 +9,17 @@ import ListModel from "@/components/List/model/List";
 import { ShowMoreItemsButton } from "@/components/List/components/ShowMoreItemsButton";
 import { Items } from "@/components/List/components/Items";
 import { deepFilterByType, deepFindOfType } from "@/lib/react/deepFindOfType";
-import { RenderItemFn } from "@/components/List/model/item/Item";
+import type { RenderItemFn } from "@/components/List/model/item/Item";
 import { ListLoaderAsync } from "@/components/List/components/ListLoaderAsync";
 import { ListFilter } from "@/components/List/components/ListFilter";
 import { ListSorting } from "@/components/List/components/ListSorting";
 import { ListItemView } from "@/components/List/components/ListItemView";
-import { AnyData } from "@/components/List/model/item/types";
-import { ListShape } from "@/components/List/model/types";
+import type { AnyData } from "@/components/List/model/item/types";
+import type { ListShape } from "@/components/List/model/types";
 import { ListStaticData } from "@/components/List/components/ListStaticData";
 import { FallbackRenderer } from "@/components/List/components/Item/FallbackRenderer";
 import { ListLoaderAsyncResource } from "@/components/List/components/ListLoaderAsyncResource";
-import { IncrementalLoaderShape } from "@/components/List/model/loading/types";
+import type { IncrementalLoaderShape } from "@/components/List/model/loading/types";
 
 interface Props
   extends PropsWithChildren,

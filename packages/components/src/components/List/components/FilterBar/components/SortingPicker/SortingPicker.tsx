@@ -1,4 +1,5 @@
-import React, { FC } from "react";
+import type { FC } from "react";
+import React from "react";
 import { SortingPickerItem } from "@/components/List/components/FilterBar/components/SortingPickerItem/SortingPickerItem";
 import { useList } from "@/components/List/hooks/useList";
 import styles from "./SortingPicker.module.css";

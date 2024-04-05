@@ -1,8 +1,11 @@
-import React, { FC } from "react";
+import type { FC } from "react";
+import React from "react";
 import styles from "./CheckboxButton.module.scss";
 import clsx from "clsx";
-import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
-import { Checkbox, CheckboxProps } from "@/components/Checkbox";
+import type { PropsContext } from "@/lib/propsContext";
+import { PropsContextProvider } from "@/lib/propsContext";
+import type { CheckboxProps } from "@/components/Checkbox";
+import { Checkbox } from "@/components/Checkbox";
 
 export interface CheckboxButtonProps extends CheckboxProps {}
 

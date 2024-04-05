@@ -1,5 +1,6 @@
 import * as Aria from "react-aria-components";
-import React, { FC, PropsWithChildren } from "react";
+import type { FC, PropsWithChildren } from "react";
+import React from "react";
 
 export interface TooltipTriggerProps
   extends PropsWithChildren<

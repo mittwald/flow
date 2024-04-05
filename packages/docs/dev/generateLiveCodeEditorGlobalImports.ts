@@ -2,7 +2,7 @@ import fsAsync from "node:fs/promises";
 import fs from "node:fs";
 import { glob } from "glob";
 import * as path from "node:path";
-import { Literal } from "acorn";
+import type { Literal } from "acorn";
 import { extractRawImports } from "../src/lib/liveCode/extractImports.js";
 import { sortBy } from "remeda";
 
