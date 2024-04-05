@@ -97,15 +97,12 @@ export class ReactTable<T> {
     });
   };
 
-  private getUpdatedTableState(
-    prevState: TableState,
-    newState: TableState,
-  ): TableState {
+  private getUpdatedTableState(newState: TableState): TableState {
     // for further customization (like fixed sorting)
     return newState;
   }
 
-  public getTableColumn(property: PropertyName<T> | string): Column<T> {
+  public getTableColumn(property: PropertyName<T>): Column<T> {
     const column = this.table.getColumn(property as string);
     invariant(!!column, `Column #${property} is not defined`);
     return column;
