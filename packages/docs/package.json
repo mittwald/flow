@@ -32,20 +32,20 @@
     "react-dom": "^18.2.0",
     "remark-frontmatter": "^5.0.0",
     "remark-mdx-frontmatter": "^4.0.0",
-    "remeda": "^1.57.0",
-    "sass": "^1.72.0",
-    "tsx": "^4.7.1",
+    "remeda": "^1.57.2",
+    "sass": "^1.74.1",
+    "tsx": "^4.7.2",
     "webpack": "^5.91.0"
   },
   "devDependencies": {
-    "@types/node": "^20.12.2",
-    "@types/react": "^18.2.73",
-    "@types/react-dom": "^18.2.23",
+    "@types/node": "^20.12.5",
+    "@types/react": "^18.2.74",
+    "@types/react-dom": "^18.2.24",
     "@yarnpkg/pnpify": "^4.0.1",
     "eslint": "^8.57.0",
     "eslint-config-next": "^14.1.4",
     "glob": "^10.3.12",
-    "nx": "^18.2.1",
-    "typescript": "^5.4.3"
+    "nx": "^18.2.3",
+    "typescript": "^5.4.4"
   }
 }
