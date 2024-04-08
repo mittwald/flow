@@ -7,15 +7,25 @@ import type { PropsWithElementType } from "@/lib/types/props";
 import invariant from "invariant";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import { BoldTextPlaceholder } from "@/components/BoldTextPlaceholder";
+import { Wrap } from "@/components/Wrap";
 
 export interface TextProps
   extends PropsWithChildren,
     Omit<Aria.TextProps, "children" | "elementType">,
     PropsWithElementType,
-    FlowComponentProps {}
+    FlowComponentProps {
+  emulateBoldWidth?: boolean;
+}
 
 export const Text = flowComponent("Text", (props) => {
-  const { children, className, elementType = "span", ...rest } = props;
+  const {
+    children,
+    className,
+    elementType = "span",
+    emulateBoldWidth,
+    ...rest
+  } = props;
 
   const textProps = { ...rest, className };
 
@@ -26,7 +36,11 @@ export const Text = flowComponent("Text", (props) => {
   };
 
   const childrenElement = (
-    <PropsContextProvider props={propsContext}>{children}</PropsContextProvider>
+    <PropsContextProvider props={propsContext}>
+      <Wrap if={emulateBoldWidth}>
+        <BoldTextPlaceholder>{children}</BoldTextPlaceholder>
+      </Wrap>
+    </PropsContextProvider>
   );
 
   if (!props.slot) {
