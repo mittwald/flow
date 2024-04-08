@@ -4526,7 +4526,7 @@ const RAW_RUNTIME_STATE =
           ["react-dom", "virtual:193c3fa97376d492680cd9b83892f153de09cded2904b21456ba46f23b0920f4ada8f133334730b97a5e6ee14099d3860cd5134cf945fded40ed127519b0eeb9#npm:18.2.0"],\
           ["remark-frontmatter", "npm:5.0.0"],\
           ["remark-mdx-frontmatter", "npm:4.0.0"],\
-          ["remeda", "npm:1.57.0"],\
+          ["remeda", "npm:1.57.2"],\
           ["sass", "npm:1.72.0"],\
           ["tsx", "npm:4.7.1"],\
           ["typescript", "patch:typescript@npm%3A5.4.3#optional!builtin<compat/typescript>::version=5.4.3&hash=5adc0c"],\
@@ -4630,7 +4630,7 @@ const RAW_RUNTIME_STATE =
           ["react-dom", "virtual:193c3fa97376d492680cd9b83892f153de09cded2904b21456ba46f23b0920f4ada8f133334730b97a5e6ee14099d3860cd5134cf945fded40ed127519b0eeb9#npm:18.2.0"],\
           ["react-element-to-jsx-string", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:15.0.0"],\
           ["react-stately", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.30.1"],\
-          ["remeda", "npm:1.57.0"],\
+          ["remeda", "npm:1.57.2"],\
           ["rollup", "npm:4.13.2"],\
           ["sass", "npm:1.72.0"],\
           ["storybook", "npm:8.0.5"],\
@@ -4723,7 +4723,7 @@ const RAW_RUNTIME_STATE =
           ["react-dom", "virtual:193c3fa97376d492680cd9b83892f153de09cded2904b21456ba46f23b0920f4ada8f133334730b97a5e6ee14099d3860cd5134cf945fded40ed127519b0eeb9#npm:18.2.0"],\
           ["react-element-to-jsx-string", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:15.0.0"],\
           ["react-stately", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.30.1"],\
-          ["remeda", "npm:1.57.0"],\
+          ["remeda", "npm:1.57.2"],\
           ["rollup", "npm:4.13.2"],\
           ["sass", "npm:1.72.0"],\
           ["storybook", "npm:8.0.5"],\
@@ -4809,7 +4809,7 @@ const RAW_RUNTIME_STATE =
           ["react-dom", "virtual:193c3fa97376d492680cd9b83892f153de09cded2904b21456ba46f23b0920f4ada8f133334730b97a5e6ee14099d3860cd5134cf945fded40ed127519b0eeb9#npm:18.2.0"],\
           ["react-element-to-jsx-string", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:15.0.0"],\
           ["react-stately", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.30.1"],\
-          ["remeda", "npm:1.57.0"],\
+          ["remeda", "npm:1.57.2"],\
           ["rollup", "npm:4.13.2"],\
           ["sass", "npm:1.72.0"],\
           ["storybook", "npm:8.0.5"],\
@@ -24444,10 +24444,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["remeda", [\
-      ["npm:1.57.0", {\
-        "packageLocation": "./.yarn/cache/remeda-npm-1.57.0-6736d175ff-d5b455ee85.zip/node_modules/remeda/",\
+      ["npm:1.57.2", {\
+        "packageLocation": "./.yarn/cache/remeda-npm-1.57.2-897c7f65f8-6c22d8003f.zip/node_modules/remeda/",\
         "packageDependencies": [\
-          ["remeda", "npm:1.57.0"]\
+          ["remeda", "npm:1.57.2"]\
         ],\
         "linkType": "HARD"\
       }]\
