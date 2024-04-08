@@ -8,11 +8,10 @@ import { IconChevronDown } from "@/components/Icon/components/icons";
 import { Button } from "@/components/Button";
 import { ContextMenu } from "@/components/ContextMenu";
 import locales from "../../../locales/*.locale.json";
-import { useLocalizedStringFormatter } from "react-aria";
+import { Translate } from "@/lib/react/components/Translate";
 
 export const SortingPicker: FC = () => {
   const list = useList();
-  const stringFormatter = useLocalizedStringFormatter(locales);
 
   const pickerItems = list.sorting.map((s) => (
     <SortingPickerItem sorting={s} key={s.getTableColumn().id} />
@@ -22,15 +21,23 @@ export const SortingPicker: FC = () => {
     return null;
   }
 
+  const enabledSortingProps = list.sorting
+    .filter((s) => s.enabled)
+    .map((s) => s.property);
+
   return (
     <Aria.MenuTrigger>
       <Button style="soft" size="s" variant="secondary">
-        <Text>{stringFormatter.format("sorting")}</Text>
+        <Text>
+          <Translate locales={locales}>sorting</Translate>
+        </Text>
         <IconChevronDown />
       </Button>
       <ContextMenu
+        selectionMode="single"
+        selectedKeys={enabledSortingProps}
         onAction={(columnId) => {
-          list.reactTable.getTableColumn(String(columnId)).toggleSorting();
+          list.getSorting(String(columnId)).toggle();
         }}
       >
         {pickerItems}

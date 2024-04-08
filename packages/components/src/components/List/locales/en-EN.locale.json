@@ -2,7 +2,8 @@
   "options": "Options",
   "paginationInfo": "Showing {visibleRows} of {totalRows}",
   "paginationInfoFiltered": "Showing {visibleItemsCount} of {filteredItemsCount} (unfiltered total count {totalItemsCount})",
-  "resetFilters": "Reset filters",
+  "resetAll": "Reset filters",
   "showMore": "Show more",
+  "sortedBy": "Sorted by: {property}",
   "sorting": "Sorting"
 }

@@ -58,6 +58,7 @@ const meta: Meta<typeof List> = {
           name="Type"
         />
         <ListSorting<Domain> property="domain" name="Domain" />
+        <ListSorting<Domain> property="tld" name="TLD" />
         <ListSorting<Domain> property="type" name="Type" />
         <ListItemView<Domain>>
           {(domain) => (

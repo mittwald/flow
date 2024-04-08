@@ -6,45 +6,64 @@ import { Text } from "@/components/Text";
 import { Button } from "@/components/Button";
 import { IconClose } from "@/components/Icon/components/icons";
 import locales from "../../../locales/*.locale.json";
-import { useLocalizedStringFormatter } from "react-aria";
+import { Translate } from "@/lib/react/components/Translate";
 
 export const ActiveFilters: FC = () => {
   const list = useList();
-  const stringFormatter = useLocalizedStringFormatter(locales);
 
-  const activeFilters = list.filters
-    .map((f) =>
-      f.values
-        .filter((v) => f.isValueActive(v))
-        .map((v) => (
-          <Button
-            style="soft"
-            size="s"
-            key={String(v)}
-            onPress={() => f.deactivateValue(v)}
+  const activeFilters = list.filters.flatMap((f) =>
+    f.values
+      .filter((v) => f.isValueActive(v))
+      .map((v) => (
+        <Button
+          style="soft"
+          size="s"
+          key={String(v)}
+          onPress={() => f.deactivateValue(v)}
+        >
+          <Text>{String(v)}</Text>
+          <IconClose />
+        </Button>
+      )),
+  );
+
+  const activeSorting = list.sorting
+    .filter((s) => s.enabled)
+    .map((s) => (
+      <Button style="soft" size="s" key={s.property} onPress={() => s.clear()}>
+        <Text>
+          <Translate
+            locales={locales}
+            variables={{ property: s.name ?? s.property }}
           >
-            <Text>{String(v)}</Text>
-            <IconClose />
-          </Button>
-        )),
-    )
-    .flat();
+            sortedBy
+          </Translate>
+        </Text>
+        <IconClose />
+      </Button>
+    ));
 
-  if (activeFilters.length <= 0) {
+  if (activeFilters.length <= 0 && activeSorting.length <= 0) {
     return null;
   }
 
+  const clearAll = (): void => {
+    list.clearSorting();
+    list.clearFilters();
+  };
+
   return (
     <div className={styles.activeFilters}>
+      {activeSorting}
       {activeFilters}
 
       <Button
         className={styles.clearButton}
         size="s"
         style="plain"
-        onPress={() => list.filters.map((f) => f.clearValues())}
+        onPress={clearAll}
       >
-        {stringFormatter.format("resetFilters")}
+        <Translate locales={locales}>resetAll</Translate>
       </Button>
     </div>
   );

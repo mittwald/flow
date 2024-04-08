@@ -15,13 +15,19 @@ interface Props {
 export const FilterPicker: FC<Props> = (props) => {
   const { filter } = props;
 
-  const items = filter.values
-    .filter((v) => !filter.isValueActive(v))
-    .map((v) => (
-      <ContextMenuItem key={filter.getValueId(v)} id={String(v)}>
-        {String(v)}
-      </ContextMenuItem>
-    ));
+  const items = filter.values.map((v) => (
+    <ContextMenuItem key={filter.getValueId(v)} id={String(v)}>
+      {String(v)}
+    </ContextMenuItem>
+  ));
+
+  const activeFilterValues = filter.values
+    .filter((v) => filter.isValueActive(v))
+    .map((v) => String(v));
+
+  const handleFilterValueClick = (v: unknown): void => {
+    filter.toggleValue(v);
+  };
 
   return (
     <Aria.MenuTrigger>
@@ -29,7 +35,11 @@ export const FilterPicker: FC<Props> = (props) => {
         <Text>{filter.name ?? filter.property}</Text>
         <IconChevronDown />
       </Button>
-      <ContextMenu onAction={(key) => filter.activateValue(key)}>
+      <ContextMenu
+        onAction={handleFilterValueClick}
+        selectionMode="multiple"
+        selectedKeys={activeFilterValues}
+      >
         {items}
       </ContextMenu>
     </Aria.MenuTrigger>

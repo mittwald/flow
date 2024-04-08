@@ -6,6 +6,10 @@
   border-width: var(--list-item--border-width);
   border-style: var(--list-item--border-style);
   overflow: hidden;
+
+  &:empty {
+    display: none;
+  }
 }
 
 .isLoading {

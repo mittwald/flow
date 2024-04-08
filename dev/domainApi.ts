@@ -3,6 +3,7 @@ export type Domain = {
   domain: string;
   type: "Subdomain" | "Domain";
   verified: boolean;
+  tld: string;
 };
 
 const apiSleep = (): Promise<void> =>
@@ -56,42 +57,49 @@ export const domains: Domain[] = [
     domain: "my-domain.de",
     type: "Domain",
     verified: true,
+    tld: "de",
   },
   {
     hostname: "www.my-domain.de",
     domain: "my-domain.de",
     type: "Subdomain",
     verified: true,
-  },
-  {
-    hostname: "blog.my-domain.de",
-    domain: "my-domain.de",
-    type: "Subdomain",
-    verified: true,
-  },
-  {
-    hostname: "another-domain.de",
-    domain: "another-domain.de",
-    type: "Domain",
-    verified: false,
-  },
-  {
-    hostname: "one-more-domain.com",
-    domain: "one-more-domain.com",
-    type: "Domain",
-    verified: true,
+    tld: "de",
   },
   {
     hostname: "www.one-more-domain.com",
     domain: "one-more-domain.com",
     type: "Subdomain",
     verified: true,
+    tld: "com",
   },
   {
     hostname: "shop.one-more-domain.com",
     domain: "one-more-domain.com",
     type: "Subdomain",
     verified: true,
+    tld: "com",
+  },
+  {
+    hostname: "blog.my-domain.de",
+    domain: "my-domain.de",
+    type: "Subdomain",
+    verified: true,
+    tld: "de",
+  },
+  {
+    hostname: "another-domain.de",
+    domain: "another-domain.de",
+    type: "Domain",
+    verified: false,
+    tld: "de",
+  },
+  {
+    hostname: "one-more-domain.com",
+    domain: "one-more-domain.com",
+    type: "Domain",
+    verified: true,
+    tld: "com",
   },
 ];
 
