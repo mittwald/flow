@@ -27,41 +27,19 @@ export const ActiveFilters: FC = () => {
       )),
   );
 
-  const activeSorting = list.sorting
-    .filter((s) => s.enabled)
-    .map((s) => (
-      <Button style="soft" size="s" key={s.property} onPress={() => s.clear()}>
-        <Text>
-          <Translate
-            locales={locales}
-            variables={{ property: s.name ?? s.property }}
-          >
-            sortedBy
-          </Translate>
-        </Text>
-        <IconClose />
-      </Button>
-    ));
-
-  if (activeFilters.length <= 0 && activeSorting.length <= 0) {
+  if (activeFilters.length <= 0) {
     return null;
   }
 
-  const clearAll = (): void => {
-    list.clearSorting();
-    list.clearFilters();
-  };
-
   return (
     <div className={styles.activeFilters}>
-      {activeSorting}
       {activeFilters}
 
       <Button
         className={styles.clearButton}
         size="s"
         style="plain"
-        onPress={clearAll}
+        onPress={() => list.clearFilters()}
       >
         <Translate locales={locales}>resetAll</Translate>
       </Button>

@@ -45,12 +45,18 @@ export class ReactTable<T> {
   private useReactTable(tableOptions: Partial<TableOptions<T>> = {}): Table<T> {
     const data = this.list.loader.useData();
 
+    const defaultSorting = this.list.sorting.filter((s) => s.defaultEnabled);
+
     const table = useReactTable({
       data,
       initialState: {
         pagination: {
           pageSize: this.list.batches.batchSize,
         },
+        sorting: defaultSorting.map((s) => ({
+          id: String(s.property),
+          desc: s.direction === "desc",
+        })),
       },
       columns: this.getTableColumnDefs(),
       getCoreRowModel: getCoreRowModel(),

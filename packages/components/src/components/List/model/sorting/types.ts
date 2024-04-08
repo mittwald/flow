@@ -5,4 +5,5 @@ export interface SortingShape<T> {
   property: PropertyName<T>;
   name?: string;
   direction?: SortDirection;
+  defaultEnabled?: boolean;
 }

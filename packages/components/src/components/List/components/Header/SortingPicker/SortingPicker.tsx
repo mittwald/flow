@@ -21,23 +21,36 @@ export const SortingPicker: FC = () => {
     return null;
   }
 
-  const enabledSortingProps = list.sorting
-    .filter((s) => s.enabled)
-    .map((s) => s.property);
+  const enabledSorting = list.sorting.find((s) => s.isSorted());
+
+  const text = (
+    <Text>
+      {enabledSorting ? (
+        <Translate
+          locales={locales}
+          variables={{
+            property: enabledSorting.name ?? enabledSorting.property,
+          }}
+        >
+          setSorting
+        </Translate>
+      ) : (
+        <Translate locales={locales}>sorting</Translate>
+      )}
+    </Text>
+  );
 
   return (
     <Aria.MenuTrigger>
       <Button style="soft" size="s" variant="secondary">
-        <Text>
-          <Translate locales={locales}>sorting</Translate>
-        </Text>
+        {text}
         <IconChevronDown />
       </Button>
       <ContextMenu
         selectionMode="single"
-        selectedKeys={enabledSortingProps}
+        selectedKeys={enabledSorting ? [enabledSorting.property] : []}
         onAction={(columnId) => {
-          list.getSorting(String(columnId)).toggle();
+          list.getSorting(String(columnId)).enable();
         }}
       >
         {pickerItems}

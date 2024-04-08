@@ -121,7 +121,7 @@ export class IncrementalLoader<T> {
       sorting: this.manualSorting
         ? (Object.fromEntries(
             this.list.sorting
-              .filter((s) => s.direction !== false)
+              .filter((s) => s.isSorted())
               .map((s) => [s.property, s.direction]),
           ) as DataLoaderOptions<T>["sorting"])
         : undefined,
