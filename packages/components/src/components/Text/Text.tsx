@@ -7,7 +7,7 @@ import type { PropsWithElementType } from "@/lib/types/props";
 import invariant from "invariant";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import { BoldTextPlaceholder } from "@/components/BoldTextPlaceholder";
+import { EmulatedBoldText } from "@/components/EmulatedBoldText";
 import { Wrap } from "@/components/Wrap";
 
 export interface TextProps
@@ -38,7 +38,7 @@ export const Text = flowComponent("Text", (props) => {
   const childrenElement = (
     <PropsContextProvider props={propsContext}>
       <Wrap if={emulateBoldWidth}>
-        <BoldTextPlaceholder>{children}</BoldTextPlaceholder>
+        <EmulatedBoldText>{children}</EmulatedBoldText>
       </Wrap>
     </PropsContextProvider>
   );

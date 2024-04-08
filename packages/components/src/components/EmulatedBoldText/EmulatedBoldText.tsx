@@ -1,15 +1,15 @@
 import type { ComponentProps, FC, PropsWithChildren } from "react";
 import React from "react";
-import styles from "./BoldTextPlaceholder.module.scss";
+import styles from "./EmulatedBoldText.module.scss";
 import clsx from "clsx";
 
-export interface BoldTextPlaceholderProps
+export interface EmulatedBoldTextProps
   extends PropsWithChildren<ComponentProps<"span">> {}
 
-export const BoldTextPlaceholder: FC<BoldTextPlaceholderProps> = (props) => {
+export const EmulatedBoldText: FC<EmulatedBoldTextProps> = (props) => {
   const { children, className, ...rest } = props;
 
-  const rootClassName = clsx(styles.boldTextPlaceholder, className);
+  const rootClassName = clsx(styles.emulatedBoldText, className);
 
   return (
     <span className={rootClassName} {...rest}>
@@ -21,4 +21,4 @@ export const BoldTextPlaceholder: FC<BoldTextPlaceholderProps> = (props) => {
   );
 };
 
-export default BoldTextPlaceholder;
+export default EmulatedBoldText;
