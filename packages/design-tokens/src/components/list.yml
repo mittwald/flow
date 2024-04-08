@@ -1,11 +1,7 @@
 list:
-  button-to-button-spacing:
+  content-to-content-spacing:
     value: "{size-px.s}"
-  buttons-to-badges-spacing:
-    value: "{size-px.m}"
-  badge-to-badge-spacing:
-    value: "{size-px.xs}"
-  filter-to-list-spacing:
+  block-to-block-spacing:
     value: "{size-px.m}"
 
 list-item:

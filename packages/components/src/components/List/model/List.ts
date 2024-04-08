@@ -1,11 +1,15 @@
 import { ItemCollection } from "@/components/List/model/item/ItemCollection";
 import { BatchesController } from "@/components/List/model/pagination/BatchesController";
-import type { RenderItemFn } from "@/components/List/model/item/Item";
+import type {
+  PropertyName,
+  RenderItemFn,
+} from "@/components/List/model/item/Item";
 import { Filter } from "./filter/Filter";
 import { Sorting } from "@/components/List/model/sorting/Sorting";
 import ReactTable from "@/components/List/model/ReactTable";
 import type { ListShape } from "@/components/List/model/types";
 import { IncrementalLoader } from "@/components/List/model/loading/IncrementalLoader";
+import invariant from "invariant";
 
 export class List<T> {
   public readonly filters: Array<Filter<T>>;
@@ -17,13 +21,7 @@ export class List<T> {
   public readonly loader: IncrementalLoader<T>;
 
   private constructor(shape: ListShape<T>) {
-    const {
-      render,
-      filters = [],
-      sorting = [],
-      batchesController,
-      enableMultiSort = false,
-    } = shape;
+    const { render, filters = [], sorting = [], batchesController } = shape;
 
     this.render = render;
 
@@ -35,7 +33,6 @@ export class List<T> {
 
     this.loader = IncrementalLoader.useNew<T>(this, shape.loader);
     this.reactTable = ReactTable.useNew(this, {
-      enableMultiSort,
       manualFiltering: this.loader.manualFiltering,
       manualPagination: this.loader.manualPagination,
       manualSorting: this.loader.manualSorting,
@@ -48,6 +45,20 @@ export class List<T> {
 
   public isFiltered(): boolean {
     return this.filters.some((f) => f.isActive());
+  }
+
+  public getSorting(property: PropertyName<T>): Sorting<T> {
+    const sorting = this.sorting.find((s) => s.property === property);
+    invariant(!!sorting, `Could not get Sorting (property: ${property})`);
+    return sorting;
+  }
+
+  public clearSorting(): void {
+    return this.sorting.forEach((s) => s.clear());
+  }
+
+  public clearFilters(): void {
+    return this.filters.forEach((f) => f.clearValues());
   }
 }
 

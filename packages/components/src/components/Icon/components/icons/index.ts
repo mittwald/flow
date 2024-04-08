@@ -47,6 +47,7 @@ export { IconSettings } from "./IconSettings";
 export { IconShow } from "./IconShow";
 export { IconSorting } from "./IconSorting";
 export { IconSshSftp } from "./IconSshSftp";
+export { IconSubdomain } from "./IconSubdomain";
 export { IconSucceeded } from "./IconSucceeded";
 export { IconSuccess } from "./IconSuccess";
 export { IconSupport } from "./IconSupport";
