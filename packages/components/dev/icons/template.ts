@@ -1,4 +1,4 @@
-import {
+import type {
   CustomSvgIconDefinition,
   IconDefinition,
   IconDefinitions,
