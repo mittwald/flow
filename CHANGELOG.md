@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.59](https://github.com/mittwald/flow/compare/0.1.0-alpha.58...0.1.0-alpha.59) (2024-04-08)
+
+### Features
+
+- add EmulatedBoldText
+  ([10dc20c](https://github.com/mittwald/flow/commit/10dc20c5aad0b31ffd770ad220c7bd6177e96803))
+- **List:** add defualt sorting
+  ([348b687](https://github.com/mittwald/flow/commit/348b6874de88ea3e1fd60917ad721f7e406ee6a2))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.58](https://github.com/mittwald/flow/compare/0.1.0-alpha.57...0.1.0-alpha.58) (2024-04-08)
 
 **Note:** Version bump only for package @mittwald/flow-project
