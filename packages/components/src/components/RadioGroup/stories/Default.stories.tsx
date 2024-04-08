@@ -113,3 +113,26 @@ export const WithFieldError: Story = {
     </RadioGroup>
   ),
 };
+
+export const SegmentedVariant: Story = {
+  render: (props) => (
+    <RadioGroup {...props} defaultValue="admin" variant="segmented">
+      <Label>Role</Label>
+      <Radio value="admin">Admin</Radio>
+      <Radio value="member">Member</Radio>
+      <Radio value="accountant">Accountant</Radio>
+    </RadioGroup>
+  ),
+};
+
+export const SegmentedVariantWithFieldError: Story = {
+  render: (props) => (
+    <RadioGroup {...props} variant="segmented" isInvalid isRequired>
+      <Label>Role</Label>
+      <Radio value="admin">Admin</Radio>
+      <Radio value="member">Member</Radio>
+      <Radio value="accountant">Accountant</Radio>
+      <FieldError>Select a role to continue</FieldError>
+    </RadioGroup>
+  ),
+};
