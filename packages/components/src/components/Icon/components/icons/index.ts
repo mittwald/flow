@@ -55,3 +55,4 @@ export { IconTerminate } from "./IconTerminate";
 export { IconTileView } from "./IconTileView";
 export { IconTime } from "./IconTime";
 export { IconWarning } from "./IconWarning";
+export { IconMittwald } from "./IconMittwald";
