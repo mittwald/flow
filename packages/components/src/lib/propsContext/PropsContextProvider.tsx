@@ -1,12 +1,6 @@
-import React, {
-  cloneElement,
-  DependencyList,
-  FC,
-  isValidElement,
-  PropsWithChildren,
-  useMemo,
-} from "react";
-import { PropsContext as PropsContextShape } from "@/lib/propsContext/types";
+import type { DependencyList, FC, PropsWithChildren } from "react";
+import React, { cloneElement, isValidElement, useMemo } from "react";
+import type { PropsContext as PropsContextShape } from "@/lib/propsContext/types";
 import { propsContext } from "@/lib/propsContext/propsContext";
 
 interface Props extends PropsWithChildren {

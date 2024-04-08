@@ -2,7 +2,9 @@ App: AppWindow
 BackLink: ArrowLeft
 Backup: Clock
 Check: Check
-Checked: SquareCheck
+CheckboxChecked: SquareCheckFilled
+CheckboxEmpty: Square
+CheckboxIndeterminate: SquareMinusFilled
 ChevronDown: ChevronDown
 ChevronLeft: ChevronLeft
 ChevronRight: ChevronRight
@@ -34,6 +36,8 @@ Pending: Loader2
 Plus: Plus
 Project: Archive
 Random: Dice3
+RadioOff: Circle
+RadioOn: CircleDotFilled
 Search: Search
 SearchEngine: ListSearch
 Server: Server
@@ -41,13 +45,13 @@ Settings: Settings
 Show: Eye
 Sorting: AdjustmentsHorizontal
 SshSftp: Door
+Subdomain: Subtask
 Succeeded: Check
 Success: CircleCheck
 Support: Headset
 Terminate: FileX
 TileView: LayoutGrid
 Time: Clock
-Unchecked: Square
 Warning: AlertCircle
 Mittwald:
   svg: |

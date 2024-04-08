@@ -19,6 +19,7 @@ import type { ButtonGroupProps } from "@/components/ButtonGroup";
 import type { AvatarProps } from "@/components/Avatar";
 import type { ActionProps } from "@/components/Action";
 import type { ContextMenuProps } from "@/components/ContextMenu";
+import type { RadioProps } from "@/components/RadioGroup";
 
 export * from "./types";
 
@@ -41,6 +42,7 @@ export interface FlowComponentPropsTypes {
   Label: LabelProps;
   LayoutCard: LayoutCardProps;
   Link: LinkProps;
+  Radio: RadioProps;
   StatusBadge: StatusBadgeProps;
   Switch: SwitchProps;
   Text: TextProps;
@@ -68,6 +70,7 @@ const propsContextSupportingComponentsMap: Record<
   Label: true,
   LayoutCard: true,
   Link: true,
+  Radio: true,
   StatusBadge: true,
   Switch: true,
   TestComponent: true,

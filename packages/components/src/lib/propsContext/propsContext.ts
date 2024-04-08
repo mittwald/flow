@@ -1,4 +1,4 @@
 import { createContext } from "react";
-import { PropsContext } from "@/lib/propsContext/types";
+import type { PropsContext } from "@/lib/propsContext/types";
 
 export const propsContext = createContext<PropsContext>({});

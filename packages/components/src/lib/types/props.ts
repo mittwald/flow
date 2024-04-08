@@ -1,4 +1,4 @@
-import {
+import type {
   ExoticComponent,
   HTMLAttributes,
   ReactElement,
@@ -12,10 +12,12 @@ export type PropsWithStatus<T extends Status = Status, P = unknown> = P & {
 };
 
 export interface PropsWithTunnel {
+  /** @internal */
   tunnelId?: string;
 }
 
 export interface PropsWithHOC<P> {
+  /** @internal */
   hoc?: (element: ReactElement, props: P) => ReactElement;
 }
 

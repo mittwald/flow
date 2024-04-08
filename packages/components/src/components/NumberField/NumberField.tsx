@@ -1,13 +1,11 @@
-import React, { FC, PropsWithChildren } from "react";
+import type { FC, PropsWithChildren } from "react";
+import React from "react";
 import * as Aria from "react-aria-components";
 import formFieldStyles from "../FormField/FormField.module.scss";
 import styles from "./NumberField.module.scss";
 import clsx from "clsx";
-import {
-  ClearPropsContext,
-  PropsContext,
-  PropsContextProvider,
-} from "@/lib/propsContext";
+import type { PropsContext } from "@/lib/propsContext";
+import { ClearPropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { FieldError } from "@/components/FieldError";
 import { Button } from "@/components/Button";
 import {

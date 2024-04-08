@@ -1,10 +1,10 @@
-import {
+import type {
   FlowComponentName,
   FlowComponentProps,
   FlowComponentPropType,
 } from "@/components/propTypes";
 import { isDynamicProp } from "@/lib/propsContext/dynamicProps/isDynamicProp";
-import { ComponentPropsContext } from "@/lib/propsContext/types";
+import type { ComponentPropsContext } from "@/lib/propsContext/types";
 import { isFlowComponentProp } from "@/lib/propsContext/isFlowComponentProp";
 
 export const resolveDynamicProps = <C extends FlowComponentName>(
@@ -22,8 +22,6 @@ export const resolveDynamicProps = <C extends FlowComponentName>(
 
       if (isDynamicProp<C, typeof prop>(propValue)) {
         resolved[prop] = propValue.__dynamicProp(localProps);
-      } else {
-        resolved[prop] = propValue;
       }
     }
   }

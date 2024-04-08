@@ -1,4 +1,4 @@
-import { AsyncResourceFactoryDataLoaderShape } from "@/components/List/model/loading/types";
+import type { AsyncResourceFactoryDataLoaderShape } from "@/components/List/model/loading/types";
 
 interface Props<T>
   extends Omit<AsyncResourceFactoryDataLoaderShape<T>, "asyncResourceFactory"> {

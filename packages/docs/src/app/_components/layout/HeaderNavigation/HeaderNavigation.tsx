@@ -1,7 +1,9 @@
 "use client";
-import React, { FC } from "react";
+import type { FC } from "react";
+import React from "react";
 import Navigation from "@mittwald/flow-react-components/Navigation";
-import { MdxFile, SerializedMdxFile } from "@/lib/mdx/MdxFile";
+import type { SerializedMdxFile } from "@/lib/mdx/MdxFile";
+import { MdxFile } from "@/lib/mdx/MdxFile";
 import { groupBy } from "remeda";
 import styles from "./HeaderNavigation.module.scss";
 import { GroupText } from "@/app/_components/layout/MainNavigation/components/GroupText";

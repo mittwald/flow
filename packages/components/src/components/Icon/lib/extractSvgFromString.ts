@@ -1,4 +1,5 @@
-import { Children, ReactNode } from "react";
+import type { ReactNode } from "react";
+import { Children } from "react";
 import parse from "html-react-parser";
 
 export const extractSvgFromString = (svgString: string): ReactNode => {

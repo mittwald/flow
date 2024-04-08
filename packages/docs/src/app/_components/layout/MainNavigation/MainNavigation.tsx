@@ -1,15 +1,15 @@
 "use client";
-import React, { ComponentProps, FC, useId, useMemo } from "react";
+import type { ComponentProps, FC } from "react";
+import React, { useId, useMemo } from "react";
 import Navigation, {
   NavigationGroup,
 } from "@mittwald/flow-react-components/Navigation";
 import Heading from "@mittwald/flow-react-components/Heading";
-import { MdxFile, SerializedMdxFile } from "@/lib/mdx/MdxFile";
+import type { SerializedMdxFile } from "@/lib/mdx/MdxFile";
+import { MdxFile } from "@/lib/mdx/MdxFile";
 import { GroupText } from "@/app/_components/layout/MainNavigation/components/GroupText";
-import {
-  buildDirectoryTree,
-  MdxDirectoryTree,
-} from "@/lib/mdx/components/buildDirectoryTree";
+import type { MdxDirectoryTree } from "@/lib/mdx/components/buildDirectoryTree";
+import { buildDirectoryTree } from "@/lib/mdx/components/buildDirectoryTree";
 import { usePathname } from "next/navigation";
 import { Link } from "@mittwald/flow-react-components/Link";
 
