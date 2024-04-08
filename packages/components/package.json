@@ -50,10 +50,6 @@
       "types": "./dist/types/components/CopyButton/index.d.ts",
       "import": "./dist/CopyButton.js"
     },
-    "./CustomIcons": {
-      "types": "./dist/types/components/Icon/components/customIcons/index.d.ts",
-      "import": "./dist/CustomIcons.js"
-    },
     "./FieldDescription": {
       "types": "./dist/types/components/FieldDescription/index.d.ts",
       "import": "./dist/FieldDescription.js"

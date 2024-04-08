@@ -12,7 +12,7 @@ import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
 import StatusBadge from "@mittwald/flow-react-components/StatusBadge";
 import LayoutCard from "@mittwald/flow-react-components/LayoutCard";
 import LinkProvider from "@mittwald/flow-react-components/nextjs/LinkProvider";
-import { IconMittwald } from "@mittwald/flow-react-components/CustomIcons";
+import { IconMittwald } from "@mittwald/flow-react-components/Icons";
 
 export const metadata: Metadata = {
   title: "Flow – mittwald Design System",

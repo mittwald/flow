@@ -51,3 +51,4 @@ export { IconTileView } from "./IconTileView";
 export { IconTime } from "./IconTime";
 export { IconUnchecked } from "./IconUnchecked";
 export { IconWarning } from "./IconWarning";
+export { IconMittwald } from "./IconMittwald";

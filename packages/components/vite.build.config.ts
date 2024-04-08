@@ -30,7 +30,6 @@ export default defineConfig(
           ContextMenu: "./src/components/ContextMenu/index.ts",
           controller: "./src/lib/controller/index.ts",
           CopyButton: "./src/components/CopyButton/index.ts",
-          CustomIcons: "./src/components/Icon/components/customIcons/index.ts",
           FieldDescription: "./src/components/FieldDescription/index.ts",
           FieldError: "./src/components/FieldError/index.ts",
           Header: "./src/components/Header/index.ts",
