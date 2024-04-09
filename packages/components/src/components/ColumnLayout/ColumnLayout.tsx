@@ -1,15 +1,18 @@
-import React, { FC, PropsWithChildren, CSSProperties } from "react";
+import type { CSSProperties, FC, PropsWithChildren } from "react";
+import React from "react";
 import styles from "./ColumnLayout.module.scss";
 import { getColumns } from "./lib/getColumns";
+import clsx from "clsx";
 
 export interface ColumnLayoutProps extends PropsWithChildren {
   s?: number[];
   m?: number[];
   l?: number[];
+  className?: string;
 }
 
 export const ColumnLayout: FC<ColumnLayoutProps> = (props) => {
-  const { children, s, m, l } = props;
+  const { children, className, s, m, l } = props;
 
   const columnsS = s ? getColumns(s) : undefined;
   const columnsM = m ? getColumns(m) : s ? columnsS : undefined;
@@ -21,8 +24,10 @@ export const ColumnLayout: FC<ColumnLayoutProps> = (props) => {
     "--column-layout--columns-l": columnsL,
   } as CSSProperties;
 
+  const rootClassName = clsx(styles.columnLayoutContainer, className);
+
   return (
-    <div className={styles.columnLayoutContainer} style={style}>
+    <div className={rootClassName} style={style}>
       <div className={styles.columnLayout}>{children}</div>
     </div>
   );

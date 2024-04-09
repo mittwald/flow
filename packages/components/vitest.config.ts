@@ -7,6 +7,8 @@ export default mergeConfig(
   defineConfig({
     test: {
       globals: true,
+      globalSetup: "./dev/vitest/setupGlobal.ts",
+      setupFiles: "./dev/vitest/setupFiles.ts",
       environmentMatchGlobs: [
         ["dev/**", "node"],
         ["src/**", "happy-dom"],

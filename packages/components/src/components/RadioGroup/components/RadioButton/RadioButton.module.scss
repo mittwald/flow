@@ -1,0 +1,36 @@
+@use "../../../../styles/mixins/formControl";
+
+.radioButton {
+  @include formControl.formControl();
+  display: grid;
+  row-gap: var(--radio-button--text-to-text-spacing);
+  column-gap: var(--radio-button--icon-to-text-spacing);
+  border-radius: var(--form-control--corner-radius);
+  grid-template-areas: "icon label";
+  grid-template-columns: auto 1fr;
+
+  &.radioButton {
+    width: auto;
+  }
+
+  /* With content */
+  &:has(.content) {
+    grid-template-areas:
+      "icon label"
+      ".    content";
+    grid-template-rows: auto 1fr;
+
+    .label {
+      font-weight: var(--radio-button--label-font-weight-with-content);
+    }
+  }
+}
+
+/* Elements */
+.label {
+  grid-area: label;
+}
+
+.content {
+  grid-area: content;
+}

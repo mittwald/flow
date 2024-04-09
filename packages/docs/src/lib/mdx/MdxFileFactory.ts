@@ -1,14 +1,14 @@
-import { MDXRemoteSerializeResult } from "next-mdx-remote";
+import type { MDXRemoteSerializeResult } from "next-mdx-remote";
 import * as path from "path";
 import { serialize } from "next-mdx-remote/serialize";
 import jetpack from "fs-jetpack";
-import {
-  MdxFile,
+import type {
   MdxFileExamples,
   MdxFileMeta,
   StaticParams,
 } from "@/lib/mdx/MdxFile";
-import { Metadata } from "next";
+import { MdxFile } from "@/lib/mdx/MdxFile";
+import type { Metadata } from "next";
 
 export class MdxFileFactory {
   public static async fromDir(dir: string): Promise<MdxFile[]> {

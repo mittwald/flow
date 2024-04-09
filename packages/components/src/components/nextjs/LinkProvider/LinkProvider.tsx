@@ -1,16 +1,12 @@
-import React, { FC, PropsWithChildren } from "react";
-import { PropsContextProvider } from "@/lib/propsContext";
-import Link from "@/components/nextjs/Link";
+import type { FC, PropsWithChildren } from "react";
+import React from "react";
+import NextJsSupportedLink from "@/components/nextjs/Link";
+import { LinkContextProvider } from "@/components/Link/context";
 
 export const LinkProvider: FC<PropsWithChildren> = (props) => (
-  <PropsContextProvider
-    props={{
-      Link: { linkComponent: Link },
-      NavigationItem: { linkComponent: Link },
-    }}
-  >
+  <LinkContextProvider value={{ linkComponent: NextJsSupportedLink }}>
     {props.children}
-  </PropsContextProvider>
+  </LinkContextProvider>
 );
 
 export default LinkProvider;

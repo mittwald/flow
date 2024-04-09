@@ -1,6 +1,6 @@
 import { expect, test } from "vitest";
 import mergePropsContext from "./mergePropsContext";
-import { PropsContext } from "@/lib/propsContext";
+import type { PropsContext } from "@/lib/propsContext";
 
 test.each<{ first: PropsContext; second: PropsContext; merged: PropsContext }>([
   { first: {}, second: {}, merged: {} },
@@ -72,7 +72,7 @@ test.each<{ first: PropsContext; second: PropsContext; merged: PropsContext }>([
     },
     merged: {
       Button: {
-        className: "first-class second-class",
+        className: "second-class",
       },
     },
   },

@@ -1,18 +1,22 @@
-import React, { FC, PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
+import React from "react";
 import { getInitialsFromString } from "./lib/getInitialsFromString";
 import styles from "./Initials.module.scss";
 import clsx from "clsx";
-import { useProps } from "@/lib/propsContext";
+import { ClearPropsContext } from "@/lib/propsContext";
 import { onlyText } from "react-children-utilities";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
-export interface InitialsProps extends PropsWithChildren<{ children: string }> {
+export interface InitialsProps extends PropsWithChildren, FlowComponentProps {
   className?: string;
 }
 
-export const Initials: FC<InitialsProps> = (props) => {
-  const { children, className } = useProps("Initials", props);
+export const Initials = flowComponent("Initials", (props) => {
+  const { children, className } = props;
 
-  const initials = getInitialsFromString(onlyText(children));
+  const textContent = onlyText(children);
+  const initials = getInitialsFromString(textContent);
 
   const rootClassName = clsx(styles.initials, className);
 
@@ -21,10 +25,12 @@ export const Initials: FC<InitialsProps> = (props) => {
   ));
 
   return (
-    <div aria-label={children} className={rootClassName}>
-      {initialsElements}
-    </div>
+    <ClearPropsContext>
+      <div aria-label={textContent} className={rootClassName}>
+        {initialsElements}
+      </div>
+    </ClearPropsContext>
   );
-};
+});
 
 export default Initials;

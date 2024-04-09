@@ -19,11 +19,18 @@ export default defineConfig(
     build: {
       lib: {
         entry: {
+          Action: "./src/components/Action/index.ts",
           Avatar: "./src/components/Avatar/index.ts",
+          Breadcrumb: "./src/components/Breadcrumb/index.ts",
           Button: "./src/components/Button/index.ts",
+          ButtonGroup: "./src/components/ButtonGroup/index.ts",
           Checkbox: "./src/components/Checkbox/index.ts",
+          CheckboxButton: "./src/components/CheckboxButton/index.ts",
+          CheckboxGroup: "./src/components/CheckboxGroup/index.ts",
           ColumnLayout: "./src/components/ColumnLayout/index.ts",
           Content: "./src/components/Content/index.ts",
+          ContextMenu: "./src/components/ContextMenu/index.ts",
+          controller: "./src/lib/controller/index.ts",
           CopyButton: "./src/components/CopyButton/index.ts",
           FieldDescription: "./src/components/FieldDescription/index.ts",
           FieldError: "./src/components/FieldError/index.ts",
@@ -39,6 +46,10 @@ export default defineConfig(
           LabeledValue: "./src/components/LabeledValue/index.ts",
           LayoutCard: "./src/components/LayoutCard/index.ts",
           Link: "./src/components/Link/index.ts",
+          List: "./src/components/List/index.ts",
+          "List/ListLoaderAsyncResource":
+            "./src/components/List/components/ListLoaderAsyncResource.ts",
+          Modal: "./src/components/Modal/index.ts",
           Navigation: "./src/components/Navigation/index.ts",
           Notification: "./src/components/Notification/index.ts",
           NumberField: "./src/components/NumberField/index.ts",
@@ -51,8 +62,6 @@ export default defineConfig(
           TextArea: "./src/components/TextArea/index.ts",
           TextField: "./src/components/TextField/index.ts",
           Tooltip: "./src/components/Tooltip/index.ts",
-          TooltipTrigger:
-            "./src/components/Tooltip/components/TooltipTrigger/index.ts",
           stylesInit: "./src/styles/index.ts",
           "nextjs/LinkProvider":
             "./src/components/nextjs/LinkProvider/index.ts",

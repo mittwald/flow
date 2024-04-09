@@ -4,6 +4,7 @@
 .button {
   position: relative;
   font-family: "Inter", sans-serif;
+  line-height: var(--line-height--default);
   border: none;
   border-radius: var(--button--corner-radius);
   padding-block: var(--button--padding-squished-y);
@@ -46,11 +47,6 @@
 
 .text {
   @include ellipsis.ellipsis;
-  display: block;
-}
-
-.icon,
-.icon svg {
   display: block;
 }
 
@@ -121,7 +117,10 @@
       color: var(--button--#{$variant}-#{$style}-content-color--pressed);
     }
 
-    &[disabled] {
+    &[disabled],
+    &.isPending,
+    &.isFailed,
+    &.isSucceeded {
       background-color: var(--button--disabled-#{$style}-background-color);
       color: var(--button--disabled-#{$style}-content-color);
     }

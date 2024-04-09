@@ -1,10 +1,12 @@
-import React, {
-  cloneElement,
+import type {
   ComponentProps,
   DependencyList,
   FC,
-  isValidElement,
   PropsWithChildren,
+} from "react";
+import React, {
+  cloneElement,
+  isValidElement,
   useEffect,
   useState,
 } from "react";
@@ -12,8 +14,8 @@ import useProps from "@/lib/propsContext/useProps";
 import { render, screen } from "@testing-library/react";
 import PropsContextProvider from "@/lib/propsContext/PropsContextProvider";
 import dynamic from "@/lib/propsContext/dynamicProps/dynamic";
-import { PropsContext } from "@/lib/propsContext/types";
-import { TestComponentProps } from "@/lib/propsContext/test";
+import type { PropsContext } from "@/lib/propsContext/types";
+import type { TestComponentProps } from "@/lib/propsContext/test";
 import { beforeEach, describe, expect, test } from "vitest";
 
 let renderCount: number;
@@ -55,7 +57,7 @@ test("The local property is returned, if property is not in context", () => {
   expectPropertyToBe("local");
 });
 
-test("The local property is returned, event if property is in context", () => {
+test("The local property is returned, even if property is in context", () => {
   render(
     <PropsContextProvider props={contextProps}>
       <TestComponent testProp="local" />
@@ -71,28 +73,6 @@ test("The context property is returned, if property is in context but not local"
     </PropsContextProvider>,
   );
   expectPropertyToBe("context");
-});
-
-test("The parent context property is returned, if property is in parent context but not local", () => {
-  render(
-    <PropsContextProvider props={contextProps}>
-      <PropsContextProvider props={{}}>
-        <TestComponent />
-      </PropsContextProvider>
-    </PropsContextProvider>,
-  );
-  expectPropertyToBe("context");
-});
-
-test("The nearest context property is returned, if property is in parent and child context but not local", () => {
-  render(
-    <PropsContextProvider props={{ TestComponent: { testProp: "context1" } }}>
-      <PropsContextProvider props={{ TestComponent: { testProp: "context2" } }}>
-        <TestComponent />
-      </PropsContextProvider>
-    </PropsContextProvider>,
-  );
-  expectPropertyToBe("context2");
 });
 
 describe("Dynamic Props", () => {

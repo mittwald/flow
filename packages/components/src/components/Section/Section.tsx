@@ -1,7 +1,9 @@
-import React, { ComponentProps, FC, PropsWithChildren } from "react";
+import type { ComponentProps, FC, PropsWithChildren } from "react";
+import React from "react";
 import styles from "./Section.module.scss";
 import clsx from "clsx";
-import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import type { PropsContext } from "@/lib/propsContext";
+import { PropsContextProvider } from "@/lib/propsContext";
 
 export interface SectionProps
   extends PropsWithChildren<ComponentProps<"section">> {}
@@ -21,6 +23,13 @@ export const Section: FC<SectionProps> = (props) => {
     },
     Header: {
       className: styles.header,
+      Switch: {
+        className: styles.switch,
+        labelPosition: "leading",
+      },
+      StatusBadge: {
+        className: styles.statusBadge,
+      },
     },
   };
 

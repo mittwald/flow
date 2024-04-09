@@ -1,4 +1,4 @@
-import { ImportDeclaration, Literal } from "acorn";
+import type { ImportDeclaration, Literal } from "acorn";
 import { tsxParser } from "@/lib/tsxParser";
 
 interface ImportDefinition {

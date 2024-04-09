@@ -1,4 +1,5 @@
-import React, { ComponentType, FC } from "react";
+import type { ComponentType, FC } from "react";
+import React from "react";
 import {
   IconDanger,
   IconInfo,
@@ -7,8 +8,9 @@ import {
 } from "@/components/Icon/components/icons";
 import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
-import { PropsWithStatus, Status } from "@/lib/types/props";
-import { IconProps } from "@/components/Icon";
+import type { PropsWithStatus, Status } from "@/lib/types/props";
+import type { IconProps } from "@/components/Icon";
+import { ClearPropsContext } from "@/lib/propsContext";
 
 export interface StatusIconProps extends PropsWithStatus, IconProps {}
 
@@ -28,7 +30,11 @@ export const StatusIcon: FC<StatusIconProps> = (props) => {
 
   const Icon = icons[status];
 
-  return <Icon aria-label={ariaLabel} {...rest} />;
+  return (
+    <ClearPropsContext>
+      <Icon aria-label={ariaLabel} {...rest} />
+    </ClearPropsContext>
+  );
 };
 
 export default StatusIcon;
