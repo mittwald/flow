@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Step, StepIndicator } from "../index";
+import { StepIndicator } from "../index";
 import React from "react";
 import defaultStories from "./Default.stories";
 import { dummyText } from "@/lib/dev/dummyText";
