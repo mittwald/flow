@@ -1,4 +1,4 @@
-import { ElementType, ReactNode } from "react";
+import type { ElementType, ReactNode } from "react";
 import { deepFindOfType } from "@/lib/react/deepFindOfType";
 
 export const deepHas = (

@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren, ReactNode } from "react";
+import type { FC, PropsWithChildren, ReactNode } from "react";
 import Heading from "@mittwald/flow-react-components/Heading";
 import styles from "./MainContent.module.css";
 

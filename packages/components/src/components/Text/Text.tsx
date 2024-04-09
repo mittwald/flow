@@ -1,25 +1,31 @@
-import React, { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
+import React from "react";
 import * as Aria from "react-aria-components";
-import {
-  ClearPropsContext,
-  PropsContext,
-  PropsContextProvider,
-} from "@/lib/propsContext";
-import { PropsWithElementType } from "@/lib/types/props";
+import type { PropsContext } from "@/lib/propsContext";
+import { ClearPropsContext, PropsContextProvider } from "@/lib/propsContext";
+import type { PropsWithElementType } from "@/lib/types/props";
 import invariant from "invariant";
-import {
-  flowComponent,
-  FlowComponentProps,
-} from "@/lib/componentFactory/flowComponent";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import { EmulatedBoldText } from "@/components/EmulatedBoldText";
+import { Wrap } from "@/components/Wrap";
 
 export interface TextProps
   extends PropsWithChildren,
     Omit<Aria.TextProps, "children" | "elementType">,
     PropsWithElementType,
-    FlowComponentProps {}
+    FlowComponentProps {
+  emulateBoldWidth?: boolean;
+}
 
 export const Text = flowComponent("Text", (props) => {
-  const { children, className, elementType = "span", ...rest } = props;
+  const {
+    children,
+    className,
+    elementType = "span",
+    emulateBoldWidth,
+    ...rest
+  } = props;
 
   const textProps = { ...rest, className };
 
@@ -30,7 +36,11 @@ export const Text = flowComponent("Text", (props) => {
   };
 
   const childrenElement = (
-    <PropsContextProvider props={propsContext}>{children}</PropsContextProvider>
+    <PropsContextProvider props={propsContext}>
+      <Wrap if={emulateBoldWidth}>
+        <EmulatedBoldText>{children}</EmulatedBoldText>
+      </Wrap>
+    </PropsContextProvider>
   );
 
   if (!props.slot) {

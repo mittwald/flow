@@ -1,5 +1,6 @@
 import { hash as objectHash } from "object-code";
-import { isValidElement, ReactNode } from "react";
+import type { ReactNode } from "react";
+import { isValidElement } from "react";
 import { deepForEach } from "react-children-utilities";
 
 export const getVariantFromChildren = (

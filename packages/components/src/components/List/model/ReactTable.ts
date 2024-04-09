@@ -1,19 +1,21 @@
-import {
+import type {
   Column,
   ColumnDef,
+  Table,
+  TableOptions,
+  TableState,
+  Updater,
+} from "@tanstack/react-table";
+import {
   getCoreRowModel,
   getFacetedUniqueValues,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-  Table,
-  TableOptions,
-  TableState,
-  Updater,
   useReactTable,
 } from "@tanstack/react-table";
-import List from "@/components/List/model/List";
-import { PropertyName } from "@/components/List/model/item/Item";
+import type List from "@/components/List/model/List";
+import type { PropertyName } from "@/components/List/model/item/Item";
 import invariant from "invariant";
 import { useLocalObservable } from "mobx-react-lite";
 import { runInAction } from "mobx";
@@ -43,12 +45,18 @@ export class ReactTable<T> {
   private useReactTable(tableOptions: Partial<TableOptions<T>> = {}): Table<T> {
     const data = this.list.loader.useData();
 
+    const defaultSorting = this.list.sorting.filter((s) => s.defaultEnabled);
+
     const table = useReactTable({
       data,
       initialState: {
         pagination: {
-          pageSize: this.list.pagination.initialPageSize,
+          pageSize: this.list.batches.batchSize,
         },
+        sorting: defaultSorting.map((s) => ({
+          id: String(s.property),
+          desc: s.direction === "desc",
+        })),
       },
       columns: this.getTableColumnDefs(),
       getCoreRowModel: getCoreRowModel(),

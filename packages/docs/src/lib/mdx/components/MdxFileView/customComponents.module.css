@@ -17,8 +17,7 @@
   overflow: hidden;
 }
 
-:not(.pre) .code,
-.pre {
+.code {
   background-color: var(--neutral--color--400);
   border-radius: var(--corner-radius--default);
   padding-inline: var(--size-px--xs);
@@ -34,6 +33,10 @@
 
 .preContainer {
   position: relative;
+
+  .code {
+    background-color: var(--neutral--color--300);
+  }
 }
 
 .preCopyButton {

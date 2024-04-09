@@ -1,4 +1,4 @@
-import { OverlayState } from "@/lib/controller/overlay";
+import type { OverlayState } from "@/lib/controller/overlay";
 
 export type ActionFn = (...args: unknown[]) => unknown;
 

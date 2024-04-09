@@ -1,4 +1,4 @@
-import { FC } from "react";
+import type { FC } from "react";
 
 // eslint-disable-next-line
 export const Empty: FC<any> = () => {

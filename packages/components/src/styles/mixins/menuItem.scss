@@ -20,8 +20,11 @@
   }
 
   .text {
-    margin-inline-start: var(--menu-item--icon-to-text-spacing);
     order: 1;
+  }
+
+  .icon + .text {
+    margin-inline-start: var(--menu-item--icon-to-text-spacing);
   }
 
   &:hover {
@@ -36,12 +39,15 @@
     outline-style: solid;
   }
 
-  &[aria-current="page"],
-  &[data-selected] {
+  &[aria-current],
+  &[data-selected]:not([data-selection-mode]) {
     background-color: var(--menu-item--background-color--current);
     font-weight: var(--menu-item--font-weight--current);
     color: var(--menu-item--color--current);
+  }
 
+  &[aria-current],
+  &[data-selected] {
     .icon {
       color: var(--menu-item--icon-color--current);
     }

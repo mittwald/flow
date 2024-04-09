@@ -1,9 +1,11 @@
-import React, { FC, PropsWithChildren } from "react";
-import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
-import { ActionFn } from "@/components/Action/types";
+import type { FC, PropsWithChildren } from "react";
+import React from "react";
+import type { PropsContext } from "@/lib/propsContext";
+import { PropsContextProvider } from "@/lib/propsContext";
+import type { ActionFn } from "@/components/Action/types";
 import { useCallAction } from "@/components/Action/hooks/useCallAction";
 import { actions } from "@/components/Action/actionFactory";
-import { OverlayState } from "@/lib/controller/overlay";
+import type { OverlayState } from "@/lib/controller/overlay";
 
 export interface ActionProps extends PropsWithChildren {
   action?: ActionFn;

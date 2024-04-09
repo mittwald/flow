@@ -3,6 +3,55 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.60](https://github.com/mittwald/flow/compare/0.1.0-alpha.59...0.1.0-alpha.60) (2024-04-08)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.59](https://github.com/mittwald/flow/compare/0.1.0-alpha.58...0.1.0-alpha.59) (2024-04-08)
+
+### Features
+
+- add EmulatedBoldText
+  ([10dc20c](https://github.com/mittwald/flow/commit/10dc20c5aad0b31ffd770ad220c7bd6177e96803))
+- **List:** add defualt sorting
+  ([348b687](https://github.com/mittwald/flow/commit/348b6874de88ea3e1fd60917ad721f7e406ee6a2))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.58](https://github.com/mittwald/flow/compare/0.1.0-alpha.57...0.1.0-alpha.58) (2024-04-08)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.57](https://github.com/mittwald/flow/compare/0.1.0-alpha.56...0.1.0-alpha.57) (2024-04-08)
+
+### Bug Fixes
+
+- fix wrong import path
+  ([e89dc7f](https://github.com/mittwald/flow/commit/e89dc7f92516828c036a8736b28749b934424528))
+
+### Features
+
+- **ContextMenu:** add single-/multi-select
+  ([44bb4ef](https://github.com/mittwald/flow/commit/44bb4ef1518bc1c7deb4feceb3f3f227ac1079e2))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.56](https://github.com/mittwald/flow/compare/0.1.0-alpha.55...0.1.0-alpha.56) (2024-04-04)
 
 ### Bug Fixes
