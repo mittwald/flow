@@ -1,16 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Radio, RadioGroup } from "../index";
+import { Radio, RadioGroup, RadioButton } from "../index";
 import React from "react";
-import { Content } from "@/components/Content";
-import { faStar } from "@fortawesome/free-regular-svg-icons/faStar";
 import { Label } from "@/components/Label";
-import { Text } from "@/components/Text";
-import { Icon } from "@/components/Icon";
 import { action } from "@storybook/addon-actions";
 import { FieldError } from "@/components/FieldError";
+import { Text } from "@/components/Text";
+import { Content } from "@/components/Content";
 
 const meta: Meta<typeof RadioGroup> = {
-  title: "Forms/RadioGroup",
+  title: "Form Controls/RadioGroup",
   component: RadioGroup,
   args: {
     onChange: action("onChange"),
@@ -53,93 +51,88 @@ export const RadioDisabled: Story = {
   ),
 };
 
-export const WithIcon: Story = {
+export const RadioButtons: Story = {
   render: (props) => (
-    <RadioGroup {...props} defaultValue="wordpress">
-      <Label>App</Label>
-      <Radio value="wordpress">
-        <Icon faIcon={faStar} />
-        <Text>WordPress</Text>
-      </Radio>
-      <Radio value="typo3">
-        <Icon faIcon={faStar} />
-        <Text>TYPO3</Text>
-      </Radio>
-      <Radio value="magento">
-        <Icon faIcon={faStar} />
-        <Text>Magento</Text>
-      </Radio>
+    <RadioGroup {...props} defaultValue="admin">
+      <Label>Role</Label>
+      <RadioButton value="admin">Admin</RadioButton>
+      <RadioButton value="member">Member</RadioButton>
+      <RadioButton value="accountant">Accountant</RadioButton>
     </RadioGroup>
   ),
 };
 
-export const WithContent: Story = {
+export const RadioButtonDisabled: Story = {
+  render: (props) => (
+    <RadioGroup {...props} defaultValue="admin">
+      <Label>Role</Label>
+      <RadioButton value="admin">Admin</RadioButton>
+      <RadioButton value="member" isDisabled>
+        Member
+      </RadioButton>
+      <RadioButton value="accountant">Accountant</RadioButton>
+    </RadioGroup>
+  ),
+};
+
+export const RadioButtonsWithContent: Story = {
   render: (props) => (
     <RadioGroup {...props} defaultValue="domain" aria-label="Domain">
-      <Radio value="domain">
+      <RadioButton value="domain">
         <Text>Book domain</Text>
         <Content>
           Do you have a desired domain? No problem, we'll help you find the
           right domain for you.
         </Content>
-      </Radio>
-      <Radio value="virtualHost">
+      </RadioButton>
+      <RadioButton value="virtualHost">
         <Text>Add virtual host</Text>
         <Content>
           The domain remains with your previous provider, but you can use it for
           your website in our mStudio.
         </Content>
-      </Radio>
-      <Radio value="subdomain">
+      </RadioButton>
+      <RadioButton value="subdomain">
         <Text>Add subdomain</Text>
         <Content>
           Create a subdomain from an existing domain to use for your project.
         </Content>
-      </Radio>
-    </RadioGroup>
-  ),
-};
-
-export const WithIconAndContent: Story = {
-  render: (props) => (
-    <RadioGroup {...props} defaultValue="proSpace" aria-label="Project">
-      <Radio value="proSpace">
-        <Icon faIcon={faStar} />
-        <Text>proSpace</Text>
-        <Content>
-          The proSpace guarantees your project its own resources, also dedicated
-          if desired.
-        </Content>
-      </Radio>
-      <Radio value="spaceServer">
-        <Icon faIcon={faStar} />
-        <Text>Space-Server</Text>
-        <Content>
-          On the Space-Server, this project shares resources with all projects
-          on your server.
-        </Content>
-      </Radio>
+      </RadioButton>
     </RadioGroup>
   ),
 };
 
 export const WithFieldError: Story = {
   render: (props) => (
-    <RadioGroup {...props} isInvalid>
-      <Label>App</Label>
-      <Radio value="wordpress">
-        <Icon faIcon={faStar} />
-        <Text>WordPress</Text>
-      </Radio>
-      <Radio value="typo3">
-        <Icon faIcon={faStar} />
-        <Text>TYPO3</Text>
-      </Radio>
-      <Radio value="magento">
-        <Icon faIcon={faStar} />
-        <Text>Magento</Text>
-      </Radio>
-      <FieldError>Select an app to continue</FieldError>
+    <RadioGroup {...props} isInvalid isRequired>
+      <Label>Role</Label>
+      <Radio value="admin">Admin</Radio>
+      <Radio value="member">Member</Radio>
+      <Radio value="accountant">Accountant</Radio>
+      <FieldError>Select a role to continue</FieldError>
+    </RadioGroup>
+  ),
+};
+
+export const SegmentedVariant: Story = {
+  render: (props) => (
+    <RadioGroup {...props} defaultValue="admin" variant="segmented">
+      <Label>Role</Label>
+      <Radio value="admin">Admin</Radio>
+      <Radio value="member">Member</Radio>
+      <Radio value="accountant">Accountant</Radio>
+    </RadioGroup>
+  ),
+};
+
+export const SegmentedVariantWithFieldError: Story = {
+  render: (props) => (
+    <RadioGroup {...props} variant="segmented" isInvalid isRequired>
+      <Label>Role</Label>
+      <Radio value="admin">Admin</Radio>
+      <Radio value="member">Member</Radio>
+      <Radio value="accountant">Accountant</Radio>
+      <FieldError>Select a role to continue</FieldError>
     </RadioGroup>
   ),
 };

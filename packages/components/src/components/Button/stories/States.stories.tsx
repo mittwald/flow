@@ -1,13 +1,20 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Button from "../Button";
 import defaultMeta from "./Default.stories";
-import { Icon } from "@/components/Icon";
+import { IconPlus } from "@/components/Icon/components/icons";
 import React from "react";
-import { faStar } from "@fortawesome/free-regular-svg-icons/faStar";
+import { Text } from "@/components/Text";
+import IconChevronDown from "../../Icon/components/icons/IconChevronDown";
 
 const meta: Meta<typeof Button> = {
   ...defaultMeta,
-  title: "Buttons/Button/States",
+  title: "Actions/Button/States",
+  render: (props) => (
+    <Button {...props}>
+      <Text>Add email address</Text>
+      <IconChevronDown />
+    </Button>
+  ),
 };
 export default meta;
 
@@ -46,7 +53,7 @@ export const PendingPlainWithIcon: Story = {
   },
   render: (props) => (
     <Button {...props} aria-label="Add to favorites">
-      <Icon faIcon={faStar} />
+      <IconPlus />
     </Button>
   ),
 };

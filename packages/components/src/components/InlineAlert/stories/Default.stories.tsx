@@ -5,14 +5,14 @@ import { Heading } from "@/components/Heading";
 import { Content } from "@/components/Content";
 
 const meta: Meta<typeof InlineAlert> = {
-  title: "Status/Inline Alert",
+  title: "Status/InlineAlert",
   component: InlineAlert,
   argTypes: {
-    variant: {
+    status: {
       control: "inline-radio",
     },
   },
-  args: { variant: "info" },
+  args: { status: "info" },
 };
 
 export default meta;

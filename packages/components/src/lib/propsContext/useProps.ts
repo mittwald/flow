@@ -1,22 +1,31 @@
-import { FlowComponentName, FlowComponentProps } from "@/components/propTypes";
+import type {
+  FlowComponentName,
+  FlowComponentProps,
+} from "@/components/propTypes";
 import { mergeProps } from "@react-aria/utils";
 import { resolveDynamicProps } from "@/lib/propsContext/dynamicProps/resolveDynamicProps";
-import { useContext } from "react";
-import { propsContext } from "@/lib/propsContext/propsContext";
+import { useContextProps } from "@/lib/propsContext/propsContext";
+import wrapChildrenWithNestedPropsContext from "@/lib/propsContext/nestedPropsContext/wrapChildrenWithNestedPropsContext";
 
 export const useProps = <C extends FlowComponentName>(
   component: C,
   localProps: FlowComponentProps<C>,
 ): FlowComponentProps<C> => {
-  const componentContextProps = useContext(propsContext)[component];
+  const contextProps = useContextProps()[component] as FlowComponentProps<C>;
 
-  const resolvedComponentContextProps = componentContextProps
-    ? resolveDynamicProps(componentContextProps, localProps)
+  const resolvedDynamicProps = contextProps
+    ? resolveDynamicProps(contextProps, localProps)
+    : undefined;
+
+  const withNestedPropsContext = contextProps
+    ? wrapChildrenWithNestedPropsContext(contextProps, localProps)
     : undefined;
 
   return mergeProps(
-    resolvedComponentContextProps,
+    contextProps,
     localProps,
+    resolvedDynamicProps,
+    withNestedPropsContext,
   ) as FlowComponentProps<C>;
 };
 

@@ -1,0 +1,9 @@
+{
+  "options": "Optionen",
+  "paginationInfo": "{visibleItemsCount} von insgesamt {totalItemsCount} angezeigt",
+  "paginationInfoFiltered": "{visibleItemsCount} von insgesamt {filteredItemsCount} (gefiltert aus {totalItemsCount}) angezeigt",
+  "resetAll": "Alles zurücksetzen",
+  "setSorting": "Sortierung: {property}",
+  "showMore": "Mehr anzeigen",
+  "sorting": "Sortierung"
+}

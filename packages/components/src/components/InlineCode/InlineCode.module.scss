@@ -1,0 +1,11 @@
+.inlineCode {
+  font-family: RobotoMono, "sans-serif";
+  font-size: var(--inline-code--font-size);
+  line-height: var(--inline-code--line-height);
+  word-wrap: anywhere;
+  background-color: var(--inline-code--background-color);
+  padding-inline: var(--inline-code--padding-x);
+  border-radius: var(--inline-code--corner-radius);
+  display: inline-block;
+  max-width: fit-content;
+}

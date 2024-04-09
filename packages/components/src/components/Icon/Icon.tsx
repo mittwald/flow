@@ -1,39 +1,29 @@
-import React, {
-  ComponentProps,
-  FC,
-  PropsWithChildren,
-  SVGAttributes,
-  useMemo,
-} from "react";
+import type { PropsWithChildren, SVGAttributes } from "react";
+import React, { useMemo } from "react";
 import styles from "./Icon.module.scss";
-import { IconLookup } from "@fortawesome/fontawesome-svg-core";
-import {
-  BackwardCompatibleOmit,
-  FontAwesomeIcon,
-} from "@fortawesome/react-fontawesome";
 import clsx from "clsx";
 import { extractSvgFromString } from "@/components/Icon/lib/extractSvgFromString";
-import { useProps } from "@/lib/propsContext";
+import { ClearPropsContext } from "@/lib/propsContext";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
-type SvgAttributeProps = BackwardCompatibleOmit<
-  SVGAttributes<SVGSVGElement>,
-  "children" | "mask" | "transform"
->;
+type SvgAttributeProps = SVGAttributes<SVGSVGElement>;
 
-export interface IconProps extends PropsWithChildren<SvgAttributeProps> {
-  faIcon?: IconLookup;
-  fixedWidth?: boolean;
+export interface IconProps
+  extends PropsWithChildren<Omit<SvgAttributeProps, "name">>,
+    FlowComponentProps {
+  /** @default "m" */
+  size?: "s" | "m" | "l";
 }
 
-export const Icon: FC<IconProps> = (props) => {
+export const Icon = flowComponent("Icon", (props) => {
   const {
-    faIcon,
     className,
     "aria-label": ariaLabel,
     children,
-    fixedWidth,
+    size = "m",
     ...svgAttributes
-  } = useProps("Icon", props);
+  } = props;
 
   const iconProps: SvgAttributeProps = {
     ...svgAttributes,
@@ -41,25 +31,8 @@ export const Icon: FC<IconProps> = (props) => {
     role: "img",
     "aria-hidden": !ariaLabel,
     "aria-label": ariaLabel,
+    className: clsx(styles.icon, className, styles[`size-${size}`]),
   };
-
-  /**
-   * Icon is wrapped inside span, so it always behaves as an inline element
-   * (line-height is applied), even if used in flex/grid layouts.
-   */
-  const spanProps: ComponentProps<"span"> = {
-    className: clsx(styles.icon, className, {
-      [styles.fixedWidth]: fixedWidth,
-    }),
-  };
-
-  if (faIcon) {
-    return (
-      <span {...spanProps}>
-        <FontAwesomeIcon icon={faIcon} {...iconProps} />
-      </span>
-    );
-  }
 
   const isCustomSvgString = typeof children === "string";
 
@@ -77,8 +50,10 @@ export const Icon: FC<IconProps> = (props) => {
   }
 
   return (
-    <span {...spanProps}>{React.cloneElement(iconElement, iconProps)}</span>
+    <ClearPropsContext>
+      {React.cloneElement(iconElement, iconProps)}
+    </ClearPropsContext>
   );
-};
+});
 
 export default Icon;

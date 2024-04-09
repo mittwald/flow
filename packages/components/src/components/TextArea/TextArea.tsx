@@ -1,7 +1,10 @@
-import React, { FC } from "react";
+import type { FC } from "react";
+import React from "react";
 import * as Aria from "react-aria-components";
-import { TextFieldBase, TextFieldBaseProps } from "@/components/TextFieldBase";
+import type { TextFieldBaseProps } from "@/components/TextFieldBase";
+import { TextFieldBase } from "@/components/TextFieldBase";
 import styles from "./TextArea.module.scss";
+import { ClearPropsContext } from "@/lib/propsContext";
 
 export interface TextAreaProps
   extends Omit<TextFieldBaseProps, "input">,
@@ -19,9 +22,11 @@ export const TextArea: FC<TextAreaProps> = (props) => {
   );
 
   return (
-    <TextFieldBase {...rest} input={input}>
-      {children}
-    </TextFieldBase>
+    <ClearPropsContext>
+      <TextFieldBase {...rest} input={input}>
+        {children}
+      </TextFieldBase>
+    </ClearPropsContext>
   );
 };
 

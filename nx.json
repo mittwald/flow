@@ -4,10 +4,9 @@
     "defaultBase": "main"
   },
   "namedInputs": {},
-  "nxCloudAccessToken": "ZTRhMTQzNWUtZGY5Mi00OWVjLTg4ZjAtNzM3ZjRmZjJiNDRifHJlYWQ=",
   "targetDefaults": {
     "build": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["^build", "build:icons", "build:imports"],
       "cache": true
     },
     "start": {
@@ -15,12 +14,27 @@
       "cache": false
     },
     "test": {
-      "dependsOn": ["^build", "test:unit", "test:compile"],
+      "dependsOn": ["test:unit", "test:compile"],
       "cache": true
     },
     "test:compile": {
       "dependsOn": ["^build"],
       "cache": true
+    },
+    "test:unit": {
+      "dependsOn": ["^build"],
+      "cache": true
+    },
+    "test:compile": {
+      "dependsOn": ["^build"],
+      "cache": true
+    },
+    "build:icons": {
+      "cache": true,
+      "inputs": [
+        "{projectRoot}/dev/icons/**/*",
+        "{projectRoot}/src/components/Icon/tablerMappings.yaml"
+      ]
     }
   }
 }

@@ -1,10 +1,14 @@
 link:
   font-size:
     value: "{font-size.s}"
+  line-height:
+    value: "{line-height.m}"
   font-weight:
     value: "{font-weight.bold}"
   disabled-color:
     value: "{disabled-plain-content-color}"
+  text-to-icon-spacing:
+    value: "{size-rem.xs}"
 
   # Primary
   primary-color:

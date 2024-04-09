@@ -1,0 +1,55 @@
+@use "./focus";
+
+@mixin menuItem {
+  display: flex;
+  flex-direction: row;
+  color: var(--menu-item--color--default);
+
+  border: none;
+  border-radius: var(--menu-item--corner-radius);
+  background-color: var(--menu-item--background-color--default);
+  padding: var(--menu-item--padding-y) var(--menu-item--padding-x);
+  cursor: default;
+
+  @include focus.focus;
+
+  /* Elements */
+  .icon {
+    order: 0;
+    color: var(--menu-item--icon-color--default);
+  }
+
+  .text {
+    order: 1;
+  }
+
+  .icon + .text {
+    margin-inline-start: var(--menu-item--icon-to-text-spacing);
+  }
+
+  &:hover {
+    background-color: var(--menu-item--background-color--hover);
+  }
+
+  &[data-focused] {
+    outline-style: none;
+  }
+
+  &[data-focus-visible] {
+    outline-style: solid;
+  }
+
+  &[aria-current],
+  &[data-selected]:not([data-selection-mode]) {
+    background-color: var(--menu-item--background-color--current);
+    font-weight: var(--menu-item--font-weight--current);
+    color: var(--menu-item--color--current);
+  }
+
+  &[aria-current],
+  &[data-selected] {
+    .icon {
+      color: var(--menu-item--icon-color--current);
+    }
+  }
+}

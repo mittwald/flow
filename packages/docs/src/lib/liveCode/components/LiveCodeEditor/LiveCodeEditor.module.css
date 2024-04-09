@@ -1,11 +1,11 @@
 .root {
   --border-color: var(--neutral--color--400);
   border: 1px solid var(--border-color);
-  border-radius: var(--border-radius--default);
+  border-radius: var(--corner-radius--default);
 }
 
 .preview {
-  background-color: var(--neutral--color--300);
+  background-color: var(--neutral--color--200);
   padding: var(--size-px--l);
 }
 

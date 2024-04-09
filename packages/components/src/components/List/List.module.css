@@ -1,0 +1,5 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--list--block-to-block-spacing);
+}

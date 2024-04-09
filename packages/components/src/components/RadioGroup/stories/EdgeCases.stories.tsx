@@ -1,15 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Radio, RadioGroup } from "../index";
-import { faStar } from "@fortawesome/free-regular-svg-icons/faStar";
-import { Content } from "@/components/Content";
-import { Text } from "@/components/Text";
+import { Radio, RadioButton, RadioGroup } from "../index";
 import React from "react";
-import { Icon } from "@/components/Icon";
 import { dummyText } from "@/lib/dev/dummyText";
 import defaultMeta from "./Default.stories";
+import { Text } from "@/components/Text";
+import { Content } from "@/components/Content";
 
 const meta: Meta<typeof RadioGroup> = {
-  title: "Forms/RadioGroup/EdgeCases",
+  title: "Form Controls/RadioGroup/Edge Cases",
   ...defaultMeta,
 };
 
@@ -20,36 +18,23 @@ type Story = StoryObj<typeof RadioGroup>;
 export const LongTexts: Story = {
   render: (props) => (
     <RadioGroup {...props} defaultValue="a" aria-label="Label">
-      <Radio value="a">
-        <Icon faIcon={faStar} />
-        <Text>{dummyText.medium}</Text>
-        <Content>{dummyText.medium}</Content>
-      </Radio>
-      <Radio value="b">
-        <Icon faIcon={faStar} />
-        <Text>{dummyText.medium}</Text>
-        <Content>{dummyText.short}</Content>
-      </Radio>
-      <Radio value="c">
-        <Icon faIcon={faStar} />
-        <Text>{dummyText.short}</Text>
-        <Content>{dummyText.medium}</Content>
-      </Radio>
+      <Radio value="a">{dummyText.long} </Radio>
+      <Radio value="b">{dummyText.long} </Radio>
+      <Radio value="c">{dummyText.long}</Radio>
     </RadioGroup>
   ),
 };
 
-export const MultipleElements: Story = {
+export const MultipleRadioButtons: Story = {
   render: (props) => (
-    <RadioGroup {...props} defaultValue="0" aria-label="Rating">
-      {Array(9)
+    <RadioGroup {...props} defaultValue="0" aria-label="Label" l={[1, 1, 1, 1]}>
+      {Array(6)
         .fill("")
         .map((value, index) => (
-          <Radio value={index.toString()} key={index}>
-            <Icon faIcon={faStar} />
-            <Text>{index + 1} Star</Text>
+          <RadioButton value={index.toString()} key={index}>
+            <Text>{dummyText.medium}</Text>
             <Content>{dummyText.medium}</Content>
-          </Radio>
+          </RadioButton>
         ))}
     </RadioGroup>
   ),
@@ -57,19 +42,15 @@ export const MultipleElements: Story = {
 
 export const SmallSpace: Story = {
   render: (props) => (
-    <RadioGroup
-      {...props}
-      defaultValue="0"
-      aria-label="Rating"
-      style={{ width: "600px" }}
-    >
+    <RadioGroup {...props} defaultValue="0" aria-label="Label">
       {Array(3)
         .fill("")
         .map((value, index) => (
-          <Radio value={index.toString()} key={index}>
-            <Text>{index + 1} Star</Text>
-          </Radio>
+          <RadioButton value={index.toString()} key={index}>
+            Option {index + 1}
+          </RadioButton>
         ))}
     </RadioGroup>
   ),
+  parameters: { viewport: { defaultViewport: "mobile1" } },
 };

@@ -1,5 +1,6 @@
 import * as Aria from "react-aria-components";
-import React, { FC, PropsWithChildren } from "react";
+import type { FC, PropsWithChildren } from "react";
+import React from "react";
 import styles from "./Tooltip.module.scss";
 import clsx from "clsx";
 

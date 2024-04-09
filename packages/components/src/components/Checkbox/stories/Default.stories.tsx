@@ -4,7 +4,7 @@ import React from "react";
 import { action } from "@storybook/addon-actions";
 
 const meta: Meta<typeof Checkbox> = {
-  title: "Forms/Checkbox",
+  title: "Form Controls/Checkbox",
   component: Checkbox,
   args: {
     onChange: action("onChange"),
@@ -12,7 +12,9 @@ const meta: Meta<typeof Checkbox> = {
   parameters: {
     controls: { exclude: ["onChange"] },
   },
-  render: (props) => <Checkbox {...props}>Activate spam protection</Checkbox>,
+  render: (props) => (
+    <Checkbox {...props}>Consent to terms and conditions</Checkbox>
+  ),
 };
 
 export default meta;
@@ -22,6 +24,8 @@ type Story = StoryObj<typeof Checkbox>;
 export const Default: Story = {};
 
 export const Disabled: Story = { args: { isDisabled: true } };
+
+export const Indeterminate: Story = { args: { isIndeterminate: true } };
 
 export const DisabledSelected: Story = {
   args: { isDisabled: true, isSelected: true },

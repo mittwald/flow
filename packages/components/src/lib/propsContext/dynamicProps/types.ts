@@ -1,4 +1,4 @@
-import {
+import type {
   FlowComponentName,
   FlowComponentPropName,
   FlowComponentProps,
@@ -10,6 +10,6 @@ export interface DynamicProp<
   P extends FlowComponentPropName<C>,
 > {
   __dynamicProp: (
-    localProps: FlowComponentProps<C>,
+    localProps: Partial<FlowComponentProps<C>>,
   ) => FlowComponentPropType<C, P>;
 }

@@ -1,40 +1,40 @@
-import {
+import type {
   PropsWithElementType,
-  PropsWithVariant,
-  Variant,
+  PropsWithStatus,
+  Status,
 } from "@/lib/types/props";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function testStatusVariantCanBeOmitted() {
+function testStatusCanBeOmitted() {
   // @ts-expect-error "success" status is excluded
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const testProps = {
-    variant: "success",
-  } as PropsWithVariant<Exclude<Variant, "success">>;
+    status: "success",
+  } as PropsWithStatus<Exclude<Status, "success">>;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function testUnknownStatusVariantCanNotBeOmitted() {
+function testUnknownStatusCanNotBeOmitted() {
   // @ts-expect-error Is unknown
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const testProps = {} as PropsWithVariant<"unknown">;
+  const testProps = {} as PropsWithStatus<"unknown">;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function testNoStatusIsExcludedPerDefault() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const testProps = {
-    variant: "success",
-  } as PropsWithVariant;
+    status: "success",
+  } as PropsWithStatus;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function testUnknownStatusVariantCanNotBeAssigned() {
+function testUnknownStatusCanNotBeAssigned() {
   // @ts-expect-error Is unknown
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const testProps = {
-    variant: "unknown",
-  } as PropsWithVariant;
+    status: "unknown",
+  } as PropsWithStatus;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

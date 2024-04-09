@@ -1,4 +1,4 @@
-@use "@/styles/mixins/textInput.scss";
+@use "@/styles/mixins/formControl.scss";
 
 .group {
   order: 2;
@@ -10,7 +10,7 @@
 }
 
 .input {
-  @include textInput.textInput();
+  @include formControl.formControl();
   grid-area: input;
 }
 
@@ -25,10 +25,27 @@
 .group.group {
   .decrementButton,
   .incrementButton {
-    color: var(--form-field-control--color);
     border-width: var(--form-control--border-width);
-    border-color: var(--form-field-control--border-color);
+    border-color: var(--form-control--border-color--default);
     border-style: solid;
+  }
+  &[aria-invalid] {
+    .decrementButton,
+    .incrementButton {
+      border-color: var(--form-control--border-color--invalid);
+    }
+  }
+  &[data-focus-within] {
+    .decrementButton,
+    .incrementButton {
+      border-color: var(--form-control--border-color--focused);
+    }
+  }
+  &[aria-disabled] {
+    .decrementButton,
+    .incrementButton {
+      border-color: var(--form-control--border-color--disabled);
+    }
   }
 }
 
@@ -39,13 +56,13 @@
   }
 
   .incrementButton {
-    [data-icon="plus"] {
+    .coarsePointerIcon {
       display: none;
     }
   }
 
   .decrementButton {
-    [data-icon="minus"] {
+    .coarsePointerIcon {
       display: none;
     }
   }
@@ -81,13 +98,13 @@
   }
 
   .decrementButton {
-    [data-icon="chevron-down"] {
+    :not(.touchIcon) {
       display: none;
     }
   }
 
   .incrementButton {
-    [data-icon="chevron-up"] {
+    :not(.touchIcon) {
       display: none;
     }
   }

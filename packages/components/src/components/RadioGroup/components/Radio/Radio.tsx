@@ -1,39 +1,39 @@
-import React, { FC, PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
+import React from "react";
 import styles from "./Radio.module.scss";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
-import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
-import { faCheckCircle } from "@fortawesome/free-regular-svg-icons/faCheckCircle";
-import { Icon } from "@/components/Icon";
+import { IconRadioOff, IconRadioOn } from "@/components/Icon/components/icons";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import { ClearPropsContext } from "@/lib/propsContext";
 
 export interface RadioProps
-  extends PropsWithChildren<Omit<Aria.RadioProps, "children">> {}
+  extends PropsWithChildren<Omit<Aria.RadioProps, "children">>,
+    FlowComponentProps {
+  /** @internal */
+  unstyled?: boolean;
+}
 
-export const Radio: FC<RadioProps> = (props) => {
-  const { children, className, ...rest } = props;
+export const Radio = flowComponent("Radio", (props) => {
+  const { children, className, unstyled = false, ...rest } = props;
 
-  const rootClassName = clsx(styles.radio, className);
-
-  const propsContext: PropsContext = {
-    Icon: {
-      className: styles.icon,
-    },
-    Text: {
-      className: styles.label,
-    },
-    Content: {
-      className: styles.content,
-    },
-  };
+  const rootClassName = unstyled ? className : clsx(styles.radio, className);
 
   return (
-    <Aria.Radio {...rest} className={rootClassName}>
-      <PropsContextProvider props={propsContext}>
-        {children}
-      </PropsContextProvider>
-      <Icon className={styles.checkmark} faIcon={faCheckCircle} />
-    </Aria.Radio>
+    <ClearPropsContext>
+      <Aria.Radio {...rest} className={rootClassName}>
+        {({ isSelected }) => (
+          <>
+            {isSelected
+              ? !unstyled && <IconRadioOn className={styles.icon} />
+              : !unstyled && <IconRadioOff className={styles.icon} />}
+            {children}
+          </>
+        )}
+      </Aria.Radio>
+    </ClearPropsContext>
   );
-};
+});
 
 export default Radio;

@@ -2,14 +2,13 @@ import fsAsync from "node:fs/promises";
 import fs from "node:fs";
 import { glob } from "glob";
 import * as path from "node:path";
-import { Literal } from "acorn";
+import type { Literal } from "acorn";
 import { extractRawImports } from "../src/lib/liveCode/extractImports.js";
 import { sortBy } from "remeda";
 
 void generateImportMappings(
   "./src/content/**/examples/*.tsx",
   "./src/lib/liveCode/dynamicImports.ts",
-  /(@fortawesome|NavigationItem)/,
 );
 
 interface ImportDefinition {
@@ -29,11 +28,7 @@ function getNamedExport(name: string): string {
   return name.split(":")[0];
 }
 
-async function generateImportMappings(
-  pattern: string,
-  outputPath: string,
-  nonComponentsMatcher?: RegExp,
-) {
+async function generateImportMappings(pattern: string, outputPath: string) {
   console.log("Generating imports from files");
   const matchedFiles = sortBy(await glob(pattern), (s) => s);
 
@@ -48,17 +43,12 @@ async function generateImportMappings(
   const imports = mapImports(fileContents.flatMap(extractRawImports));
 
   const staticImports = Object.entries(imports).map(([name, source], index) => {
-    if (nonComponentsMatcher?.test(name)) {
-      const namedExport = getNamedExport(name);
-      return `import { ${namedExport} as I${index} } from "${source}";`;
-    }
+    const namedExport = getNamedExport(name);
+    return `import { ${namedExport} as I${index} } from "${source}";`;
   });
 
-  const mappings = Object.entries(imports).map(([name, source], index) => {
-    if (nonComponentsMatcher?.test(name)) {
-      return `"${name}": I${index},`;
-    }
-    return `"${name}": lazy(() => import("${source}").then(module => ({ default: module.${getNamedExport(name)} } ))),`;
+  const mappings = Object.entries(imports).map(([name], index) => {
+    return `"${name}": I${index},`;
   });
 
   const generatedFileContents = `

@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from "@storybook/react";
 import Link from "../Link";
 import { action } from "@storybook/addon-actions";
 import React from "react";
+import { Text } from "@/components/Text";
+import { IconExternalLink } from "@/components/Icon/components/icons";
 
 const meta: Meta<typeof Link> = {
   title: "Navigation/Link",
@@ -9,7 +11,7 @@ const meta: Meta<typeof Link> = {
   args: {
     onPress: action("onPress"),
   },
-  render: (props) => <Link {...props}>Link</Link>,
+  render: (props) => <Link {...props}>Adjust project</Link>,
   argTypes: {
     variant: {
       control: "inline-radio",
@@ -26,8 +28,26 @@ type Story = StoryObj<typeof Link>;
 
 export const Default: Story = {};
 
+export const Inline: Story = {
+  render: (props) => (
+    <Text>
+      Check our <Link {...props}>onboarding</Link> for more information.
+    </Text>
+  ),
+};
+
 export const Disabled: Story = { args: { isDisabled: true } };
 
 export const Danger: Story = {
   args: { variant: "danger" },
+  render: (props) => <Link {...props}>Delete project</Link>,
+};
+
+export const WithIcon: Story = {
+  render: (props) => (
+    <Link {...props} href="https://mittwald.de">
+      mittwald.de
+      <IconExternalLink aria-label="external link" />
+    </Link>
+  ),
 };

@@ -1,33 +1,12 @@
 .initials {
   display: flex;
   font-weight: bold;
-  background-color: var(--background-color);
-
-  *:nth-child(odd) {
-    color: var(--char-1-color);
-  }
 
   *:nth-child(even) {
-    color: var(--char-2-color);
+    color: var(--content-accent-color);
   }
 
   *:only-child {
-    color: var(--char-2-color);
-  }
-
-  @extend .variant-1;
-}
-
-/* Variants */
-@mixin variant($variant) {
-  .variant-#{$variant} {
-    --background-color: var(--initials--variant-#{$variant}-background-color);
-    --char-1-color: var(--initials--variant-#{$variant}-first-initial-color);
-    --char-2-color: var(--initials--variant-#{$variant}-second-initial-color);
+    color: var(--content-accent-color);
   }
 }
-
-@include variant(1);
-@include variant(2);
-@include variant(3);
-@include variant(4);

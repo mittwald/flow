@@ -1,33 +1,52 @@
+import type { ComponentProps, FC, PropsWithChildren } from "react";
 import React from "react";
 import styles from "./Navigation.module.scss";
-import { AriaMenuProps } from "react-aria";
-import { useTreeState } from "react-stately";
-import { NavigationItem } from "./components/NavigationItem/NavigationItem";
-import { useNavigation } from "@/hooks/useNavigation";
 import clsx from "clsx";
+import { deepFindOfType } from "@/lib/react/deepFindOfType";
+import { NavigationGroup } from "@/components/Navigation";
+import { Wrap } from "@/components/Wrap";
+import type { PropsContext } from "@/lib/propsContext";
+import { PropsContextProvider } from "@/lib/propsContext";
 
-export interface NavigationProps<T = never> extends AriaMenuProps<T> {
+export interface NavigationProps
+  extends PropsWithChildren<ComponentProps<"nav">> {
   className?: string;
 }
 
-export function Navigation<T extends object>(props: NavigationProps<T>) {
-  const { className } = props;
-
-  const state = useTreeState(props);
-  const ref = React.useRef<HTMLElement>(null);
-  const { menuProps } = useNavigation(props, state, ref);
+export const Navigation: FC<NavigationProps> = (props) => {
+  const { className, children, ...rest } = props;
 
   const rootClassName = clsx(styles.navigation, className);
 
+  const hasGroups = !!deepFindOfType(children, NavigationGroup);
+
+  const propsContext: PropsContext = {
+    Heading: {
+      className: styles.heading,
+      level: 3,
+    },
+    Link: {
+      hoc: (link) => <li>{link}</li>,
+      className: styles.item,
+      unstyled: true,
+      Text: {
+        className: styles.text,
+      },
+      Icon: {
+        className: styles.icon,
+      },
+    },
+  };
+
   return (
-    <nav {...menuProps} className={rootClassName} ref={ref}>
-      <ul className={styles.list}>
-        {Array.from(state.collection).map((item) => (
-          <NavigationItem state={state} item={item} key={item.key} />
-        ))}
-      </ul>
+    <nav className={rootClassName} role="navigation" {...rest}>
+      <PropsContextProvider props={propsContext}>
+        <Wrap if={!hasGroups}>
+          <NavigationGroup>{children}</NavigationGroup>
+        </Wrap>
+      </PropsContextProvider>
     </nav>
   );
-}
+};
 
 export default Navigation;
