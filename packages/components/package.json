@@ -146,10 +146,6 @@
       "types": "./dist/types/components/Section/index.d.ts",
       "import": "./dist/Section.js"
     },
-    "./SegmentedControlGroup": {
-      "types": "./dist/types/components/SegmentedControlGroup/index.d.ts",
-      "import": "./dist/SegmentedControlGroup.js"
-    },
     "./Select": {
       "types": "./dist/types/components/Select/index.d.ts",
       "import": "./dist/Select.js"
