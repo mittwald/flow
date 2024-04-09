@@ -1,11 +1,11 @@
-import {
+import type {
   ActionFn,
   CloseModalAction,
   FunctionAction,
   OpenModalAction,
   ToggleModalAction,
 } from "@/components/Action/types";
-import { OverlayState } from "@/lib/controller/overlay";
+import type { OverlayState } from "@/lib/controller/overlay";
 
 type ModalActionArg = boolean | OverlayState;
 

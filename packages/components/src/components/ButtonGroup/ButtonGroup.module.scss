@@ -4,12 +4,12 @@
   grid-template-areas: "abort secondary primary";
   grid-auto-columns: 1fr auto auto;
 
-  .abort:last-child {
+  .secondary:last-child {
     grid-area: abort;
     justify-self: start;
   }
 
-  :first-child:not(.abort) {
+  :first-child:not(.secondary) {
     grid-area: primary;
   }
 }

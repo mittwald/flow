@@ -1,4 +1,5 @@
-import React, { FC, PropsWithChildren } from "react";
+import type { FC, PropsWithChildren } from "react";
+import React from "react";
 import * as Aria from "react-aria-components";
 import styles from "./BreadcrumbItem.module.scss";
 import clsx from "clsx";

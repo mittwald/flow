@@ -13,9 +13,9 @@ const meta: Meta<typeof ContextMenu> = {
     <ContextMenuTrigger>
       <Button>Trigger</Button>
       <ContextMenu {...props}>
-        <ContextMenuItem>Item 1</ContextMenuItem>
-        <ContextMenuItem>Item 2</ContextMenuItem>
-        <ContextMenuItem>Item 3</ContextMenuItem>
+        <ContextMenuItem id="item1">Item 1</ContextMenuItem>
+        <ContextMenuItem id="item2">Item 2</ContextMenuItem>
+        <ContextMenuItem id="item3">Item 3</ContextMenuItem>
       </ContextMenu>
     </ContextMenuTrigger>
   ),
@@ -25,3 +25,19 @@ export default meta;
 type Story = StoryObj<typeof ContextMenu>;
 
 export const Default: Story = {};
+
+export const SingleSelection: Story = {
+  args: {
+    defaultOpen: true,
+    selectionMode: "single",
+    defaultSelectedKeys: ["item2"],
+  },
+};
+
+export const MultipleSelection: Story = {
+  args: {
+    defaultOpen: true,
+    selectionMode: "multiple",
+    defaultSelectedKeys: ["item2", "item3"],
+  },
+};

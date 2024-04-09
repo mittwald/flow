@@ -1,11 +1,10 @@
-import React, { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
+import React from "react";
 import styles from "./LayoutCard.module.scss";
 import clsx from "clsx";
-import { PropsWithElementType } from "@/lib/types/props";
-import {
-  flowComponent,
-  FlowComponentProps,
-} from "@/lib/componentFactory/flowComponent";
+import type { PropsWithElementType } from "@/lib/types/props";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface LayoutCardProps
   extends PropsWithChildren,

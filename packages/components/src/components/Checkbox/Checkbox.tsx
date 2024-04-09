@@ -1,4 +1,5 @@
-import React, { FC, PropsWithChildren } from "react";
+import type { FC, PropsWithChildren } from "react";
+import React from "react";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import styles from "./Checkbox.module.scss";

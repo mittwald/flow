@@ -57,8 +57,6 @@ export default defineConfig(
           Popover: "./src/components/Popover/index.ts",
           RadioGroup: "./src/components/RadioGroup/index.ts",
           Section: "./src/components/Section/index.ts",
-          SegmentedControlGroup:
-            "./src/components/SegmentedControlGroup/index.ts",
           StatusBadge: "./src/components/StatusBadge/index.ts",
           StatusIcon: "./src/components/StatusIcon/index.ts",
           Switch: "./src/components/Switch/index.ts",

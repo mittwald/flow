@@ -1,9 +1,10 @@
-import React, { ComponentProps, FC, PropsWithChildren } from "react";
+import type { ComponentProps, FC, PropsWithChildren } from "react";
+import React from "react";
 import styles from "./ButtonGroup.module.scss";
+import type { PropsContext } from "@/lib/propsContext";
 import {
   ClearPropsContext,
   dynamic,
-  PropsContext,
   PropsContextProvider,
   useProps,
 } from "@/lib/propsContext";
@@ -20,7 +21,7 @@ export const ButtonGroup: FC<ButtonGroupProps> = (props) => {
   const propsContext: PropsContext = {
     Button: {
       className: dynamic((p) =>
-        p.variant === "secondary" ? styles.abort : undefined,
+        p.variant === "secondary" ? styles.secondary : undefined,
       ),
     },
   };

@@ -1,13 +1,12 @@
-import React, { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
+import React from "react";
 import { getInitialsFromString } from "./lib/getInitialsFromString";
 import styles from "./Initials.module.scss";
 import clsx from "clsx";
 import { ClearPropsContext } from "@/lib/propsContext";
 import { onlyText } from "react-children-utilities";
-import {
-  flowComponent,
-  FlowComponentProps,
-} from "@/lib/componentFactory/flowComponent";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface InitialsProps extends PropsWithChildren, FlowComponentProps {
   className?: string;

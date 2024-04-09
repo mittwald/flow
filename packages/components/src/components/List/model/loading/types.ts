@@ -1,6 +1,6 @@
-import { PropertyRecord } from "@/components/List/model/types";
-import { FilterMode } from "@/components/List/model/filter/types";
-import { AsyncResource } from "@mittwald/react-use-promise";
+import type { PropertyRecord } from "@/components/List/model/types";
+import type { FilterMode } from "@/components/List/model/filter/types";
+import type { AsyncResource } from "@mittwald/react-use-promise";
 
 type DataLoaderSortOptions<T> = PropertyRecord<T, "asc" | "desc">;
 
