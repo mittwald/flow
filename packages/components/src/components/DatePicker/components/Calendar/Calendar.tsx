@@ -1,4 +1,5 @@
-import React, { FC } from "react";
+import type { FC } from "react";
+import React from "react";
 import * as Aria from "react-aria-components";
 import styles from "@/components/Calendar/Calendar.module.css";
 import { CalendarHeader } from "@/components/Calendar";
