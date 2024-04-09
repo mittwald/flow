@@ -1,10 +1,10 @@
-import {
+import type {
   ComponentProps,
   ElementType,
   FunctionComponentElement,
-  isValidElement,
   ReactNode,
 } from "react";
+import { isValidElement } from "react";
 import { deepFind, deepForEach } from "react-children-utilities";
 
 const isOfType = <T extends ElementType>(

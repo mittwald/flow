@@ -1,6 +1,8 @@
-import React, { FC } from "react";
+import type { FC } from "react";
+import React from "react";
 import * as Aria from "react-aria-components";
-import { TextFieldBase, TextFieldBaseProps } from "@/components/TextFieldBase";
+import type { TextFieldBaseProps } from "@/components/TextFieldBase";
+import { TextFieldBase } from "@/components/TextFieldBase";
 import styles from "./TextArea.module.scss";
 import { ClearPropsContext } from "@/lib/propsContext";
 

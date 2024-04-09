@@ -6,7 +6,7 @@ status-badge:
   corner-radius:
     value: "{corner-radius.default}"
   padding-y:
-    value: "{size-rem.xs}"
+    value: "{size-rem.xxs}"
   padding-x:
     value: "{size-rem.s}"
   icon-to-text-spacing:

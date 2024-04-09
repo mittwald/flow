@@ -1,31 +1,30 @@
-import React, { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
+import React from "react";
 import { listContext } from "./listContext";
 import { DataLoader } from "@/components/List/components/DataLoader";
-import { PaginationInfos } from "@/components/List/components/PaginationInfos";
-import { FilterBar } from "@/components/List/components/FilterBar";
+import { Header } from "@/components/List/components/Header/Header";
 import styles from "./List.module.css";
 import ListModel from "@/components/List/model/List";
-import { ShowMoreItemsButton } from "@/components/List/components/ShowMoreItemsButton";
-import { Items } from "@/components/List/components/Items";
+import { ItemList } from "@/components/List/components/Items/ItemList";
 import { deepFilterByType, deepFindOfType } from "@/lib/react/deepFindOfType";
-import { RenderItemFn } from "@/components/List/model/item/Item";
+import type { RenderItemFn } from "@/components/List/model/item/Item";
 import { ListLoaderAsync } from "@/components/List/components/ListLoaderAsync";
-import { ListFilter } from "@/components/List/components/ListFilter";
-import { ListSorting } from "@/components/List/components/ListSorting";
-import { ListItemView } from "@/components/List/components/ListItemView";
-import { AnyData } from "@/components/List/model/item/types";
-import { ListShape } from "@/components/List/model/types";
+import { ListFilter } from "@/components/List/components/Header/ListFilter";
+import { ListSorting } from "@/components/List/components/Header/ListSorting";
+import { ListItemView } from "@/components/List/components/Items/ListItemView";
+import type { AnyData } from "@/components/List/model/item/types";
 import { ListStaticData } from "@/components/List/components/ListStaticData";
-import { FallbackRenderer } from "@/components/List/components/Item/FallbackRenderer";
+import { FallbackRenderer } from "@/components/List/components/Items/Item";
 import { ListLoaderAsyncResource } from "@/components/List/components/ListLoaderAsyncResource";
-import { IncrementalLoaderShape } from "@/components/List/model/loading/types";
+import type { IncrementalLoaderShape } from "@/components/List/model/loading/types";
+import Footer from "./components/Footer/Footer";
 
-interface Props
-  extends PropsWithChildren,
-    Pick<ListShape<AnyData>, "enableMultiSort"> {}
+interface Props extends PropsWithChildren {
+  batchSize?: number;
+}
 
 export function List(props: Props) {
-  const { children, ...restShape } = props;
+  const { children, batchSize, ...restShape } = props;
 
   const listLoaderAsync = deepFindOfType(children, ListLoaderAsync)?.props;
   const listLoaderAsyncResource = deepFindOfType(
@@ -64,6 +63,9 @@ export function List(props: Props) {
       deepFindOfType(children, ListItemView)?.props.children ??
       fallbackRenderItemFn,
     ...restShape,
+    batchesController: {
+      batchSize,
+    },
   });
 
   return (
@@ -74,10 +76,9 @@ export function List(props: Props) {
     >
       <DataLoader />
       <div className={styles.list}>
-        <FilterBar className={styles.filterBar} />
-        <Items className={styles.rows} />
-        <PaginationInfos className={styles.paginationInfos} />
-        <ShowMoreItemsButton className={styles.showMoreButton} />
+        <Header />
+        <ItemList />
+        <Footer />
       </div>
     </listContext.Provider>
   );

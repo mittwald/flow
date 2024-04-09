@@ -1,4 +1,4 @@
-import { ActionFn, ActionType } from "@/components/Action/types";
+import type { ActionFn, ActionType } from "@/components/Action/types";
 import { useProps } from "@/lib/propsContext";
 import { useMakeCallableAction } from "@/components/Action/hooks/useMakeCallableAction";
 import { callActionsInOrder } from "@/components/Action/lib/callActionsInOrder";

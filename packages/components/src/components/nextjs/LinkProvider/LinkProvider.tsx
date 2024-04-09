@@ -1,4 +1,5 @@
-import React, { FC, PropsWithChildren } from "react";
+import type { FC, PropsWithChildren } from "react";
+import React from "react";
 import NextJsSupportedLink from "@/components/nextjs/Link";
 import { LinkContextProvider } from "@/components/Link/context";
 

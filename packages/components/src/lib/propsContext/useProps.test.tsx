@@ -1,10 +1,12 @@
-import React, {
-  cloneElement,
+import type {
   ComponentProps,
   DependencyList,
   FC,
-  isValidElement,
   PropsWithChildren,
+} from "react";
+import React, {
+  cloneElement,
+  isValidElement,
   useEffect,
   useState,
 } from "react";
@@ -12,8 +14,8 @@ import useProps from "@/lib/propsContext/useProps";
 import { render, screen } from "@testing-library/react";
 import PropsContextProvider from "@/lib/propsContext/PropsContextProvider";
 import dynamic from "@/lib/propsContext/dynamicProps/dynamic";
-import { PropsContext } from "@/lib/propsContext/types";
-import { TestComponentProps } from "@/lib/propsContext/test";
+import type { PropsContext } from "@/lib/propsContext/types";
+import type { TestComponentProps } from "@/lib/propsContext/test";
 import { beforeEach, describe, expect, test } from "vitest";
 
 let renderCount: number;

@@ -1,8 +1,11 @@
-import React, { FC } from "react";
+import type { FC } from "react";
+import React from "react";
 import styles from "./RadioButton.module.scss";
 import clsx from "clsx";
-import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
-import { Radio, RadioProps } from "@/components/RadioGroup";
+import type { PropsContext } from "@/lib/propsContext";
+import { PropsContextProvider } from "@/lib/propsContext";
+import type { RadioProps } from "@/components/RadioGroup";
+import { Radio } from "@/components/RadioGroup";
 
 export interface RadioButtonProps extends RadioProps {}
 

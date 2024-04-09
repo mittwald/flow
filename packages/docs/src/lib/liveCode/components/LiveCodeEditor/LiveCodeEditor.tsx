@@ -1,4 +1,5 @@
-import React, { FC } from "react";
+import type { FC } from "react";
+import React from "react";
 import {
   LiveEditor,
   LiveError,
@@ -6,7 +7,7 @@ import {
   LiveProvider,
 } from "@mfalkenberg/react-live-ssr";
 import { extractEditorScope } from "@/lib/liveCode/components/LiveCodeEditor/lib/extractEditorScope";
-import { LiveCodeEditorProps } from "@/lib/liveCode/components/LiveCodeEditor/types";
+import type { LiveCodeEditorProps } from "@/lib/liveCode/components/LiveCodeEditor/types";
 import extractDefaultExport from "@/lib/liveCode/components/LiveCodeEditor/lib/extractDefaultExport";
 import styles from "./LiveCodeEditor.module.css";
 import * as EditorComponents from "./components";
