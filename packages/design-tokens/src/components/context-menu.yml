@@ -7,3 +7,5 @@ context-menu:
     value: "{size-px.s}"
   background-color:
     value: "{neutral.color.100}"
+  min-width:
+    value: 200px
