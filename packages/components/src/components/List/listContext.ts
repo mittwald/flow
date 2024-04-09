@@ -1,6 +1,6 @@
 import { createContext } from "react";
-import List from "@/components/List/model/List";
-import { AnyData } from "@/components/List/model/item/types";
+import type List from "@/components/List/model/List";
+import type { AnyData } from "@/components/List/model/item/types";
 
 interface ListContext {
   list: List<AnyData>;

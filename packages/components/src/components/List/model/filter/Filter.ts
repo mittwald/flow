@@ -1,8 +1,8 @@
-import { Column, ColumnDef, ColumnFilter } from "@tanstack/react-table";
-import List from "@/components/List/model/List";
-import { PropertyName } from "@/components/List/model/item/Item";
+import type { Column, ColumnDef, ColumnFilter } from "@tanstack/react-table";
+import type List from "@/components/List/model/List";
+import type { PropertyName } from "@/components/List/model/item/Item";
 import { getProperty } from "dot-prop";
-import {
+import type {
   FilterMatcher,
   FilterMode,
   FilterShape,
@@ -17,6 +17,7 @@ export class Filter<T> {
   public readonly property: PropertyName<T>;
   public readonly mode: FilterMode;
   public readonly matcher: FilterMatcher;
+  public readonly name?: string;
   private onFilterUpdateCallbacks = new Set<() => unknown>();
 
   public constructor(list: List<T>, shape: FilterShape<T>) {
@@ -25,6 +26,7 @@ export class Filter<T> {
     this.mode = shape.mode ?? "one";
     this._values = shape.values;
     this.matcher = shape.matcher ?? equalsPropertyMatcher;
+    this.name = shape.name;
   }
 
   public updateTableColumnDef(def: ColumnDef<T>): void {
@@ -104,6 +106,55 @@ export class Filter<T> {
 
   public isActive(): boolean {
     return this.getArrayValue().length > 0;
+  }
+
+  public activateValue(newValue: unknown): void {
+    const currentValueAsArray = this.getArrayValue();
+
+    let updatedValue: unknown;
+
+    if (this.mode === "all" || this.mode === "some") {
+      updatedValue = [...currentValueAsArray, newValue];
+    } else {
+      updatedValue = newValue;
+    }
+
+    this.list.reactTable
+      .getTableColumn(this.property)
+      .setFilterValue(updatedValue);
+    this.onFilterUpdateCallbacks.forEach((cb) => cb());
+  }
+
+  public deactivateValue(newValue: unknown): void {
+    const currentValueAsArray = this.getArrayValue();
+
+    let updatedValue: unknown;
+
+    if (this.mode === "all" || this.mode === "some") {
+      updatedValue = currentValueAsArray.filter((v) => v !== newValue);
+    } else {
+      updatedValue = null;
+    }
+
+    this.list.reactTable
+      .getTableColumn(this.property)
+      .setFilterValue(updatedValue);
+    this.onFilterUpdateCallbacks.forEach((cb) => cb());
+  }
+
+  public clearValues(): void {
+    let updatedValue: unknown;
+
+    if (this.mode === "all" || this.mode === "some") {
+      updatedValue = [];
+    } else {
+      updatedValue = null;
+    }
+
+    this.list.reactTable
+      .getTableColumn(this.property)
+      .setFilterValue(updatedValue);
+    this.onFilterUpdateCallbacks.forEach((cb) => cb());
   }
 
   public toggleValue(newValue: unknown): void {

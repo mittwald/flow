@@ -1,22 +1,13 @@
-import React, {
-  ComponentProps,
-  ComponentType,
-  PropsWithChildren,
-  useContext,
-} from "react";
+import type { ComponentProps, ComponentType, PropsWithChildren } from "react";
+import React, { useContext } from "react";
 import * as Aria from "react-aria-components";
-import {
-  ClearPropsContext,
-  PropsContext,
-  PropsContextProvider,
-} from "@/lib/propsContext";
+import type { PropsContext } from "@/lib/propsContext";
+import { ClearPropsContext, PropsContextProvider } from "@/lib/propsContext";
 import styles from "./Link.module.scss";
 import clsx from "clsx";
-import {
-  flowComponent,
-  FlowComponentProps,
-} from "@/lib/componentFactory/flowComponent";
-import { PropsWithClassName } from "@/lib/types/props";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import type { PropsWithClassName } from "@/lib/types/props";
 import { linkContext } from "@/components/Link/context";
 
 export interface LinkProps
@@ -29,6 +20,7 @@ export interface LinkProps
   variant?: "default" | "danger";
   inline?: boolean;
   linkComponent?: ComponentType<Omit<ComponentProps<"a">, "ref">>;
+  /** @internal */
   unstyled?: boolean;
   "aria-current"?: string;
 }

@@ -1,11 +1,25 @@
 radio-group:
   radio-to-radio-spacing:
-    value: "{size-px.m}"
+    value: "{size-rem.s}"
+
+radio:
+  icon-to-text-spacing:
+    value: "{size-rem.s}"
+  color:
+    disabled:
+      value: "{disabled-outline-content-color}"
+  icon-color:
+    default:
+      value: "{icon.color.default}"
+    selected:
+      value: "{neutral-outline-border-color.selected}"
+    disabled:
+      value: "{disabled-outline-content-color}"
+
+radio-button:
   text-to-text-spacing:
     value: "{size-rem.xs}"
   icon-to-text-spacing:
     value: "{size-rem.m}"
-  label-font-weight-with-content-or-icon:
+  label-font-weight-with-content:
     value: "{font-weight.bold}"
-  icon-size-without-content:
-    value: "{icon.size.l}"

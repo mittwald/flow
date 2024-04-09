@@ -1,4 +1,4 @@
-import { FC, ReactElement } from "react";
+import type { FC, ReactElement } from "react";
 
 export const Wrap: FC<{ if: unknown; children: ReactElement }> = (props) => {
   const { if: _if, children } = props;

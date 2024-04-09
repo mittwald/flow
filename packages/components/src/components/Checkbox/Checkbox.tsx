@@ -1,8 +1,13 @@
-import React, { FC, PropsWithChildren } from "react";
+import type { FC, PropsWithChildren } from "react";
+import React from "react";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import styles from "./Checkbox.module.scss";
-import { IconChecked, IconUnchecked } from "@/components/Icon/components/icons";
+import {
+  IconCheckboxChecked,
+  IconCheckboxEmpty,
+  IconCheckboxIndeterminate,
+} from "@/components/Icon/components/icons";
 import { ClearPropsContext } from "@/lib/propsContext";
 
 export interface CheckboxProps
@@ -16,12 +21,14 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
   return (
     <ClearPropsContext>
       <Aria.Checkbox {...rest} className={rootClassName}>
-        {({ isSelected }) => (
+        {({ isSelected, isIndeterminate }) => (
           <>
             {isSelected ? (
-              <IconChecked className={styles.checkmark} />
+              <IconCheckboxChecked className={styles.icon} />
+            ) : isIndeterminate ? (
+              <IconCheckboxIndeterminate className={styles.icon} />
             ) : (
-              <IconUnchecked className={styles.checkmark} />
+              <IconCheckboxEmpty className={styles.icon} />
             )}
             {children}
           </>

@@ -1,5 +1,5 @@
-import { DynamicProp } from "@/lib/propsContext/dynamicProps/types";
-import {
+import type { DynamicProp } from "@/lib/propsContext/dynamicProps/types";
+import type {
   FlowComponentName,
   FlowComponentPropName,
 } from "@/components/propTypes";
