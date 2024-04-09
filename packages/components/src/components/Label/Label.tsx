@@ -13,6 +13,7 @@ export interface LabelProps
   extends PropsWithChildren<Omit<Aria.LabelProps, "children">>,
     FlowComponentProps {
   optional?: boolean;
+  /* @internal */
   unstyled?: boolean;
 }
 

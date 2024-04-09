@@ -1,10 +1,12 @@
 import * as Aria from "react-aria-components";
-import React, { FC, PropsWithChildren } from "react";
+import type { FC, PropsWithChildren } from "react";
+import React from "react";
 import styles from "./ProgressBar.module.scss";
 import clsx from "clsx";
 import { useNumberFormatter } from "react-aria";
-import { PropsWithStatus } from "@/lib/types/props";
-import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import type { PropsWithStatus } from "@/lib/types/props";
+import type { PropsContext } from "@/lib/propsContext";
+import { PropsContextProvider } from "@/lib/propsContext";
 
 export interface ProgressBarProps
   extends PropsWithChildren<Omit<Aria.ProgressBarProps, "children">>,
@@ -29,7 +31,6 @@ export const ProgressBar: FC<ProgressBarProps> = (props) => {
     styles.progressBar,
     styles[`size-${size}`],
     styles[status],
-    styles[`size-${size}`],
   );
 
   const formatter = useNumberFormatter(props.formatOptions);
