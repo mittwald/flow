@@ -4,4 +4,5 @@
   isolation: isolate;
   height: calc(1lh + var(--step-indicator--padding-y) * 2);
   overflow: hidden;
+  container-type: inline-size;
 }
