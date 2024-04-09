@@ -20,3 +20,7 @@ export default meta;
 type Story = StoryObj<typeof StatusBadge>;
 
 export const Default: Story = {};
+
+export const IconOnly: Story = {
+  render: (props) => <StatusBadge {...props} />,
+};
