@@ -1,4 +1,5 @@
-import React, { FC, PropsWithChildren } from "react";
+import type { FC } from "react";
+import React from "react";
 import styles from "./StepIndicator.module.scss";
 import { Step } from "./components/Step";
 

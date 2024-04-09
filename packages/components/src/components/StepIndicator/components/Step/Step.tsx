@@ -1,4 +1,5 @@
-import React, { FC, PropsWithChildren } from "react";
+import type { FC, PropsWithChildren } from "react";
+import React from "react";
 import styles from "./Step.module.scss";
 import clsx from "clsx";
 import { Text } from "@/components/Text";
