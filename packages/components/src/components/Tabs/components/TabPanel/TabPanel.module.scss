@@ -4,8 +4,6 @@
   opacity: 0;
   height: 0;
 
-  @include focus.focus;
-
   &[id] {
     padding: var(--tab-panel--padding);
     opacity: 1;
