@@ -1,8 +1,10 @@
 import type { AriaToastRegionProps } from "@react-aria/toast";
 import type { ToastState } from "@react-stately/toast";
 import { useToastRegion } from "@react-aria/toast";
-import { Notification, NotificationContentProps } from "../../Notification";
-import React, { FC, useRef } from "react";
+import type { NotificationContentProps } from "../../Notification";
+import { Notification } from "../../Notification";
+import type { FC } from "react";
+import React, { useRef } from "react";
 import styles from "./NotificationRegion.module.scss";
 
 export interface NotificationRegionProps<T> extends AriaToastRegionProps {

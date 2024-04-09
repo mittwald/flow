@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Notification from "../index";
-import React, { FC } from "react";
-import { NotificationContentProps } from "@/components/Notification/Notification";
+import type { FC } from "react";
+import React from "react";
+import type { NotificationContentProps } from "@/components/Notification/Notification";
 import defaultMeta from "./Default.stories";
 
 const meta: Meta<typeof Notification> = {

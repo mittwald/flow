@@ -1,7 +1,9 @@
-import { ToastState, useToastState } from "@react-stately/toast";
-import React, { FC, ReactElement } from "react";
+import type { ToastState } from "@react-stately/toast";
+import { useToastState } from "@react-stately/toast";
+import type { FC, ReactElement } from "react";
+import React from "react";
 import NotificationRegion from "../NotificationRegion";
-import { NotificationContentProps } from "../../Notification";
+import type { NotificationContentProps } from "../../Notification";
 
 export interface NotificationProviderProps {
   children: (item: ToastState<NotificationContentProps>) => ReactElement;
