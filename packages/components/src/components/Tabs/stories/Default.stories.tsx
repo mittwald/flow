@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import { Tab, TabPanel, Tabs } from "@/components/Tabs";
-import { TabList } from "@/components/Tabs/components/TabList";
+import { TabTitle, Tab, Tabs } from "@/components/Tabs";
 import { Section } from "@/components/Section";
 import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
@@ -15,21 +14,18 @@ const meta: Meta<typeof Tabs> = {
   title: "Navigation/Tabs",
   component: Tabs,
   render: (props) => (
-    <Tabs {...props}>
-      <TabList>
-        <Tab id="general">General</Tab>
-        <Tab id="storage">Storage</Tab>
-        <Tab id="spam">Spam protection</Tab>
-      </TabList>
-      <TabPanel id="general">
+    <Tabs {...props} defaultSelectedKey="storage">
+      <Tab>
+        <TabTitle>General</TabTitle>
         <Section>
           <Heading>General</Heading>
           <TextField defaultValue="example@mittwald.de">
             <Label>Mail address</Label>
           </TextField>
         </Section>
-      </TabPanel>
-      <TabPanel id="storage">
+      </Tab>
+      <Tab id="storage">
+        <TabTitle>Storage</TabTitle>
         <Section>
           <Heading>Storage</Heading>
           <LabeledValue>
@@ -37,8 +33,9 @@ const meta: Meta<typeof Tabs> = {
             <Text>2.4 GB</Text>
           </LabeledValue>
         </Section>
-      </TabPanel>
-      <TabPanel id="spam">
+      </Tab>
+      <Tab>
+        <TabTitle>Spam</TabTitle>
         <Section>
           <Header>
             <Heading>Spam protection</Heading>
@@ -50,7 +47,7 @@ const meta: Meta<typeof Tabs> = {
             protection activated.
           </Text>
         </Section>
-      </TabPanel>
+      </Tab>
     </Tabs>
   ),
 };
