@@ -150,10 +150,6 @@
       "types": "./dist/types/components/StatusIcon/index.d.ts",
       "import": "./dist/StatusIcon.js"
     },
-    "./StepsIndicator": {
-      "types": "./dist/types/components/StepsIndicator/index.d.ts",
-      "import": "./dist/StepsIndicator.js"
-    },
     "./Switch": {
       "types": "./dist/types/components/Switch/index.d.ts",
       "import": "./dist/Switch.js"
