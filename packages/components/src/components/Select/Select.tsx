@@ -1,6 +1,8 @@
-import React, { FC, PropsWithChildren } from "react";
+import type { FC, PropsWithChildren } from "react";
+import React from "react";
 import * as Aria from "react-aria-components";
-import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import type { PropsContext } from "@/lib/propsContext";
+import { PropsContextProvider } from "@/lib/propsContext";
 import formFieldStyles from "@/components/FormField/FormField.module.scss";
 import { FieldError } from "@/components/FieldError";
 import styles from "./Select.module.scss";
@@ -9,8 +11,10 @@ import { IconChevronDown } from "@/components/Icon/components/icons";
 
 export interface SelectProps
   extends PropsWithChildren<
-    Omit<Aria.SelectProps<{ example: string }>, "children">
-  > {}
+    Omit<Aria.SelectProps<{ example: string }>, "children" | "className">
+  > {
+  className?: string;
+}
 
 export const Select: FC<SelectProps> = (props) => {
   const { children, className, ...rest } = props;
