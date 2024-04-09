@@ -70,6 +70,10 @@
       "types": "./dist/types/components/Header/index.d.ts",
       "import": "./dist/Header.js"
     },
+    "./HeaderNavigation": {
+      "types": "./dist/types/components/HeaderNavigation/index.d.ts",
+      "import": "./dist/HeaderNavigation.js"
+    },
     "./Heading": {
       "types": "./dist/types/components/Heading/index.d.ts",
       "import": "./dist/Heading.js"
