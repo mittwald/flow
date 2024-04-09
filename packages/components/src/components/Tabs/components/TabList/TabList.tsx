@@ -1,8 +1,9 @@
-import React, { FC } from "react";
+import type { FC } from "react";
+import React from "react";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import styles from "./TabList.module.scss";
-import { TabProps } from "@/components/Tabs";
+import type { TabProps } from "@/components/Tabs";
 
 export interface TabListProps extends Aria.TabListProps<TabProps> {}
 
