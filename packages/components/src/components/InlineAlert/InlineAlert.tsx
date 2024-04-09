@@ -15,7 +15,7 @@ export interface InlineAlertProps
     FlowComponentProps {}
 
 export const InlineAlert = flowComponent("InlineAlert", (props) => {
-  const { children, className, status = "info", ...rest } = props;
+  const { children, className, status = "info", ref, ...rest } = props;
 
   const rootClassName = clsx(styles.inlineAlert, styles[status], className);
 
@@ -31,7 +31,7 @@ export const InlineAlert = flowComponent("InlineAlert", (props) => {
 
   return (
     <ClearPropsContext>
-      <aside {...rest} className={rootClassName}>
+      <aside {...rest} className={rootClassName} ref={ref}>
         <StatusIcon className={styles.statusIcon} status={status} />
         <PropsContextProvider props={propsContext}>
           {children}

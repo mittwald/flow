@@ -1,4 +1,4 @@
-import type { FC, PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 import React from "react";
 import styles from "./RadioGroup.module.scss";
 import * as Aria from "react-aria-components";
@@ -14,14 +14,17 @@ import { deepFindOfType } from "@/lib/react/deepFindOfType";
 import RadioButton from "./components/RadioButton";
 import { SegmentedGroup } from "@/components/RadioGroup/components/SegmentedGroup";
 import { Wrap } from "@/components/Wrap";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface RadioGroupProps
   extends PropsWithChildren<Omit<Aria.RadioGroupProps, "children">>,
+    FlowComponentProps,
     Pick<ColumnLayoutProps, "s" | "m" | "l"> {
   variant?: "segmented" | "default";
 }
 
-export const RadioGroup: FC<RadioGroupProps> = (props) => {
+export const RadioGroup = flowComponent("RadioGroup", (props) => {
   const { children, className, variant = "default", s, m, l, ...rest } = props;
 
   const rootClassName = clsx(formFieldStyles.formField, className);
@@ -72,6 +75,6 @@ export const RadioGroup: FC<RadioGroupProps> = (props) => {
       <FieldError className={formFieldStyles.fieldError} />
     </Aria.RadioGroup>
   );
-};
+});
 
 export default RadioGroup;

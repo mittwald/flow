@@ -16,14 +16,14 @@ export interface StatusBadgeProps
   className?: string;
 }
 
-export const StatusBadge = flowComponent("StatusBadge", (props) => {
+export const StatusBadge = flowComponent("StatusBadge", (props, ref) => {
   const { children, className, status = "info", ...rest } = props;
 
   const rootClassName = clsx(styles.statusBadge, styles[status], className);
 
   return (
     <ClearPropsContext>
-      <div className={rootClassName} {...rest}>
+      <div className={rootClassName} {...rest} ref={ref}>
         <StatusIcon size="s" className={styles.statusIcon} status={status} />
         <Text className={styles.text}>{children}</Text>
       </div>

@@ -16,7 +16,7 @@ const meta: Meta<typeof Text> = {
     elementType: "span",
   },
   render: (props) => (
-    <Text {...props}>
+    <Text {...props} ref={(r) => console.log(r)}>
       Text is an unstyled component that can be used to display texts. By
       default it renders a span.
     </Text>

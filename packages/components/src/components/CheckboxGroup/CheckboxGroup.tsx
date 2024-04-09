@@ -1,4 +1,4 @@
-import type { FC, PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 import React from "react";
 import styles from "./CheckboxGroup.module.scss";
 import * as Aria from "react-aria-components";
@@ -12,13 +12,16 @@ import formFieldStyles from "../FormField/FormField.module.scss";
 import type { ColumnLayoutProps } from "@/components/ColumnLayout";
 import { ColumnLayout } from "@/components/ColumnLayout";
 import { deepFindOfType } from "@/lib/react/deepFindOfType";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface CheckboxGroupProps
   extends PropsWithChildren<Omit<Aria.CheckboxGroupProps, "children">>,
-    Pick<ColumnLayoutProps, "s" | "m" | "l"> {}
+    Pick<ColumnLayoutProps, "s" | "m" | "l">,
+    FlowComponentProps {}
 
-export const CheckboxGroup: FC<CheckboxGroupProps> = (props) => {
-  const { children, className, s, m, l, ...rest } = props;
+export const CheckboxGroup = flowComponent("CheckboxGroup", (props) => {
+  const { children, className, s, m, l, ref: ignoredRef, ...rest } = props;
 
   const rootClassName = clsx(formFieldStyles.formField, className);
 
@@ -60,6 +63,6 @@ export const CheckboxGroup: FC<CheckboxGroupProps> = (props) => {
       <FieldError className={formFieldStyles.fieldError} />
     </Aria.CheckboxGroup>
   );
-};
+});
 
 export default CheckboxGroup;

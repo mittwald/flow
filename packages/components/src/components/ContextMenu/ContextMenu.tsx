@@ -27,6 +27,7 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
     selectedKeys,
     defaultSelectedKeys,
     onSelectionChange,
+    ref,
     ...rest
   } = props;
 
@@ -39,6 +40,7 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
         selectedKeys={selectedKeys}
         defaultSelectedKeys={defaultSelectedKeys}
         onSelectionChange={onSelectionChange}
+        ref={ref}
       >
         {children}
       </Aria.Menu>

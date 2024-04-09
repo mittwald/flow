@@ -1,4 +1,3 @@
-import type { FC } from "react";
 import React from "react";
 import styles from "./CheckboxButton.module.scss";
 import clsx from "clsx";
@@ -6,10 +5,14 @@ import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import type { CheckboxProps } from "@/components/Checkbox";
 import { Checkbox } from "@/components/Checkbox";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
-export interface CheckboxButtonProps extends CheckboxProps {}
+export interface CheckboxButtonProps
+  extends CheckboxProps,
+    FlowComponentProps {}
 
-export const CheckboxButton: FC<CheckboxButtonProps> = (props) => {
+export const CheckboxButton = flowComponent("CheckboxButton", (props) => {
   const { children, className, ...rest } = props;
 
   const rootClassName = clsx(styles.checkboxButton, className);
@@ -30,6 +33,6 @@ export const CheckboxButton: FC<CheckboxButtonProps> = (props) => {
       </PropsContextProvider>
     </Checkbox>
   );
-};
+});
 
 export default CheckboxButton;

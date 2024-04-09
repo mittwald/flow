@@ -16,13 +16,13 @@ export interface RadioProps
 }
 
 export const Radio = flowComponent("Radio", (props) => {
-  const { children, className, unstyled = false, ...rest } = props;
+  const { children, className, unstyled = false, ref, ...rest } = props;
 
   const rootClassName = unstyled ? className : clsx(styles.radio, className);
 
   return (
     <ClearPropsContext>
-      <Aria.Radio {...rest} className={rootClassName}>
+      <Aria.Radio {...rest} className={rootClassName} ref={ref}>
         {({ isSelected }) => (
           <>
             {isSelected

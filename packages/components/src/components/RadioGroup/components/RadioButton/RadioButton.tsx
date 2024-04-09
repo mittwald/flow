@@ -1,4 +1,3 @@
-import type { FC } from "react";
 import React from "react";
 import styles from "./RadioButton.module.scss";
 import clsx from "clsx";
@@ -6,11 +5,13 @@ import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import type { RadioProps } from "@/components/RadioGroup";
 import { Radio } from "@/components/RadioGroup";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
-export interface RadioButtonProps extends RadioProps {}
+export interface RadioButtonProps extends RadioProps, FlowComponentProps {}
 
-export const RadioButton: FC<RadioButtonProps> = (props) => {
-  const { children, className, ...rest } = props;
+export const RadioButton = flowComponent("RadioButton", (props) => {
+  const { children, className, ref, ...rest } = props;
 
   const rootClassName = clsx(styles.radioButton, className);
 
@@ -24,12 +25,12 @@ export const RadioButton: FC<RadioButtonProps> = (props) => {
   };
 
   return (
-    <Radio {...rest} className={rootClassName}>
+    <Radio {...rest} className={rootClassName} ref={ref}>
       <PropsContextProvider props={propsContext}>
         {children}
       </PropsContextProvider>
     </Radio>
   );
-};
+});
 
 export default RadioButton;
