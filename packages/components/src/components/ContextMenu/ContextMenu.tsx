@@ -1,11 +1,11 @@
-import type { PropsWithChildren } from "react";
 import React from "react";
 import * as Aria from "react-aria-components";
 import styles from "./ContextMenu.module.scss";
 import type { ContextMenuItemProps } from "@/components/ContextMenu/components/ContextMenuItem";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import { Popover, PopoverProps } from "@/components/Popover";
+import type { PopoverProps } from "@/components/Popover";
+import { Popover } from "@/components/Popover";
 
 export interface ContextMenuProps
   extends PopoverProps,
