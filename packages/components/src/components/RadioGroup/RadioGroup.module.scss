@@ -1,29 +1,6 @@
 .radioGroup {
-  container-type: inline-size;
-  isolation: isolate;
-}
-
-.radioOptions {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-
   order: 2;
-
-  /* With icon or content */
-  &:has(:global(.flow--radio-group--radio--content)),
-  &:has(:global(.flow--radio-group--radio--icon)) {
-    display: grid;
-    gap: var(--radio-group--radio-to-radio-spacing);
-  }
-
-  /* With icon */
-  &:has(:global(.flow--radio-group--radio--icon)) {
-    grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr));
-  }
-
-  /* With content */
-  &:has(:global(.flow--radio-group--radio--content)) {
-    grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
-  }
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--radio-group--radio-to-radio-spacing);
 }

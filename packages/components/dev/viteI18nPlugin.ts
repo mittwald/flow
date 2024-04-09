@@ -1,4 +1,4 @@
-import { Plugin } from "vite";
+import type { Plugin } from "vite";
 import path from "path";
 import * as fs from "fs";
 import crypt from "crypto";

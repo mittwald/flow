@@ -1,4 +1,5 @@
-import React, { ComponentProps, forwardRef } from "react";
+import type { ComponentProps } from "react";
+import React, { forwardRef } from "react";
 import NextLink from "next/link";
 
 export const Link = forwardRef<

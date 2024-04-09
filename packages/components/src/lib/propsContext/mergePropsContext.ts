@@ -1,5 +1,5 @@
-import { FlowComponentName } from "@/components/propTypes";
-import { PropsContext, WorkaroundType } from "@/lib/propsContext/types";
+import type { FlowComponentName } from "@/components/propTypes";
+import type { PropsContext, WorkaroundType } from "@/lib/propsContext/types";
 import { getPropsMerger } from "@/lib/react/getPropsMerger";
 
 const merger = getPropsMerger({ mergeClassNames: false });

@@ -1,14 +1,13 @@
-import React, { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
+import React from "react";
 import styles from "./StatusBadge.module.scss";
 import clsx from "clsx";
 import { StatusIcon } from "@/components/StatusIcon";
 import { Text } from "@/components/Text";
-import { PropsWithStatus } from "@/lib/types/props";
+import type { PropsWithStatus } from "@/lib/types/props";
 import { ClearPropsContext } from "@/lib/propsContext";
-import {
-  flowComponent,
-  FlowComponentProps,
-} from "@/lib/componentFactory/flowComponent";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface StatusBadgeProps
   extends PropsWithChildren,

@@ -1,31 +1,54 @@
-import List, {
+import {
+  List,
+  ListFilter,
   ListItemView,
+  ListSorting,
   ListStaticData,
 } from "@mittwald/flow-react-components/List";
 import {
-  type User,
-  users,
-} from "@/content/02-components/structure/list/examples/userApi";
-import Avatar from "@mittwald/flow-react-components/Avatar";
-import Initials from "@mittwald/flow-react-components/Initials";
-import Heading from "@mittwald/flow-react-components/Heading";
-import Text from "@mittwald/flow-react-components/Text";
-import ContextMenu, {
+  type Domain,
+  domains,
+} from "@/content/02-components/structure/list/examples/domainApi";
+import { Avatar } from "@mittwald/flow-react-components/Avatar";
+import { Heading } from "@mittwald/flow-react-components/Heading";
+import { Text } from "@mittwald/flow-react-components/Text";
+import {
+  ContextMenu,
   ContextMenuItem,
 } from "@mittwald/flow-react-components/ContextMenu";
+import {
+  IconDomain,
+  IconSubdomain,
+} from "@mittwald/flow-react-components/Icons";
+import StatusBadge from "@mittwald/flow-react-components/StatusBadge";
 
-<List>
-  <ListStaticData data={users} />
-  <ListItemView<User>>
-    {(user) => (
+<List batchSize={5}>
+  <ListStaticData data={domains} />
+  <ListFilter<Domain>
+    property="type"
+    mode="some"
+    name="Type"
+  />
+  <ListSorting<Domain> property="domain" name="Domain" />
+  <ListSorting<Domain> property="type" name="Type" />
+  <ListItemView<Domain>>
+    {(domain) => (
       <>
         <Avatar>
-          <Initials>{`${user.name.first} ${user.name.last}`}</Initials>
+          {domain.type === "Domain" ? (
+            <IconDomain />
+          ) : (
+            <IconSubdomain />
+          )}
         </Avatar>
-        <Heading>
-          {user.name.first} {user.name.last}
-        </Heading>
-        <Text>{user.location.state}</Text>
+        <Heading>{domain.hostname}</Heading>
+        {domain.verified ? (
+          <Text>{domain.type}</Text>
+        ) : (
+          <StatusBadge status="warning">
+            Not verified
+          </StatusBadge>
+        )}
         <ContextMenu>
           <ContextMenuItem>Show details</ContextMenuItem>
           <ContextMenuItem>Delete</ContextMenuItem>

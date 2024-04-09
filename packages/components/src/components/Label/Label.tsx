@@ -1,14 +1,13 @@
-import React, { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
+import React from "react";
 import styles from "./Label.module.scss";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import { ClearPropsContext } from "@/lib/propsContext";
 import { useLocalizedStringFormatter } from "react-aria";
 import locales from "./locales/*.locale.json";
-import {
-  flowComponent,
-  FlowComponentProps,
-} from "@/lib/componentFactory/flowComponent";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface LabelProps
   extends PropsWithChildren<Omit<Aria.LabelProps, "children">>,

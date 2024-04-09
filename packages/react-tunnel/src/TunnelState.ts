@@ -1,4 +1,5 @@
-import { ReactNode, useState } from "react";
+import type { ReactNode } from "react";
+import { useState } from "react";
 import { action, makeObservable, observable } from "mobx";
 
 type TunnelNodes = Record<string, ReactNode>;

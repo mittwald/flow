@@ -1,4 +1,5 @@
-import React, { ComponentProps, FC, PropsWithChildren } from "react";
+import type { ComponentProps, FC, PropsWithChildren } from "react";
+import React from "react";
 import clsx from "clsx";
 import styles from "./InlineCode.module.scss";
 import { ClearPropsContext } from "@/lib/propsContext";

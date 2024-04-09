@@ -1,14 +1,13 @@
-import React, { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
+import React from "react";
 import * as Aria from "react-aria-components";
 import styles from "./Switch.module.scss";
 import clsx from "clsx";
 import { IconCheck, IconClose } from "@/components/Icon/components/icons";
 import { Label } from "@/components/Label";
 import { ClearPropsContext } from "@/lib/propsContext";
-import {
-  flowComponent,
-  FlowComponentProps,
-} from "@/lib/componentFactory/flowComponent";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface SwitchProps
   extends PropsWithChildren<Omit<Aria.SwitchProps, "children">>,

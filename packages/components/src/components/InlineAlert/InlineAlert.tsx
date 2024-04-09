@@ -1,17 +1,13 @@
-import React, { ComponentProps, PropsWithChildren } from "react";
-import {
-  ClearPropsContext,
-  PropsContext,
-  PropsContextProvider,
-} from "@/lib/propsContext";
+import type { ComponentProps, PropsWithChildren } from "react";
+import React from "react";
+import type { PropsContext } from "@/lib/propsContext";
+import { ClearPropsContext, PropsContextProvider } from "@/lib/propsContext";
 import styles from "./InlineAlert.module.scss";
 import clsx from "clsx";
 import { StatusIcon } from "@/components/StatusIcon";
-import { PropsWithStatus } from "@/lib/types/props";
-import {
-  flowComponent,
-  FlowComponentProps,
-} from "@/lib/componentFactory/flowComponent";
+import type { PropsWithStatus } from "@/lib/types/props";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface InlineAlertProps
   extends PropsWithChildren<ComponentProps<"aside">>,

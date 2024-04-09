@@ -1,6 +1,6 @@
 import { prettify } from "./prettify";
 import { fs, writeIfHasChanges } from "./fs";
-import { getIconMappings } from "./mapping";
+import { getIconDefinitions } from "./definitions";
 import { getIconFileContent, getIndexFileContent } from "./template";
 
 const componentPath = "../../src/components/Icon";
@@ -11,16 +11,16 @@ const getIconComponentFilename = (icon: string): string =>
 const getIndexFilename = (): string =>
   fs.path(`${componentPath}/components/icons/index.ts`);
 
-const mappings = getIconMappings(`${componentPath}/tablerMappings.yaml`);
+const definitions = getIconDefinitions(`${componentPath}/icons.yaml`);
 
-for (const [iconFlow, iconTabler] of Object.entries(mappings)) {
+for (const [iconName, iconDefinition] of Object.entries(definitions)) {
   writeIfHasChanges(
-    getIconComponentFilename(iconFlow),
-    await prettify(getIconFileContent(iconFlow, iconTabler)),
+    getIconComponentFilename(iconName),
+    await prettify(getIconFileContent(iconName, iconDefinition)),
   );
 }
 
 writeIfHasChanges(
   getIndexFilename(),
-  await prettify(getIndexFileContent(Object.keys(mappings))),
+  await prettify(getIndexFileContent(definitions)),
 );

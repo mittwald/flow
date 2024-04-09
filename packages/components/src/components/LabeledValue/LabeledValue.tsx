@@ -1,11 +1,9 @@
-import React, { FC, PropsWithChildren } from "react";
+import type { FC, PropsWithChildren } from "react";
+import React from "react";
 import styles from "./LabeledValue.module.scss";
 import clsx from "clsx";
-import {
-  ClearPropsContext,
-  PropsContext,
-  PropsContextProvider,
-} from "@/lib/propsContext";
+import type { PropsContext } from "@/lib/propsContext";
+import { ClearPropsContext, PropsContextProvider } from "@/lib/propsContext";
 
 export interface LabeledValueProps extends PropsWithChildren {
   className?: string;

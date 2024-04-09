@@ -8,15 +8,15 @@ import {
 import Link from "@mittwald/flow-react-components/Link";
 
 <Navigation aria-label="Main menu">
-  <Link>
+  <Link href="#">
     <IconCustomer />
     <Text>Customer</Text>
   </Link>
-  <Link aria-current="page">
+  <Link href="#" aria-current="page">
     <IconServer />
     <Text>Server</Text>
   </Link>
-  <Link>
+  <Link href="#">
     <IconProject />
     <Text>Project</Text>
   </Link>
