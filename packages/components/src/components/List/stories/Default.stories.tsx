@@ -63,7 +63,7 @@ const meta: Meta<typeof List> = {
         <ListItemView<Domain>>
           {(domain) => (
             <>
-              <Avatar>
+              <Avatar variant={domain.type === "Domain" ? 1 : 2}>
                 {domain.type === "Domain" ? <IconDomain /> : <IconSubdomain />}
               </Avatar>
               <Heading>{domain.hostname}</Heading>
@@ -101,7 +101,7 @@ export const ItemsWithLink: Story = {
         <ListItemView<Domain>>
           {(domain) => (
             <Link href="#">
-              <Avatar>
+              <Avatar variant={domain.type === "Domain" ? 1 : 2}>
                 {domain.type === "Domain" ? <IconDomain /> : <IconSubdomain />}
               </Avatar>
               <Heading>{domain.hostname}</Heading>
