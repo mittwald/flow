@@ -11,7 +11,7 @@
   transition-duration: var(--transition--duration--default);
 
   @include focus.focus;
-  outline-offset: 0;
+  outline-offset: calc(var(--size-px--xs) * -1);
 
   &[data-selected] {
     background-color: var(--tab--background-color--selected);
