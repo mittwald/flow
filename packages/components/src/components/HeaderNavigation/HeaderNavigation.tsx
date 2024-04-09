@@ -37,9 +37,11 @@ export const HeaderNavigation: FC<HeaderNavigationProps> = (props) => {
 
   return (
     <nav className={rootClassName} role="navigation" {...rest}>
-      <PropsContextProvider props={propsContext}>
-        {children}
-      </PropsContextProvider>
+      <ul>
+        <PropsContextProvider props={propsContext}>
+          {children}
+        </PropsContextProvider>
+      </ul>
     </nav>
   );
 };

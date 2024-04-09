@@ -15,7 +15,7 @@ import Avatar from "@mittwald/flow-react-components/Avatar";
 import { Image } from "@mittwald/flow-react-components/Image";
 import Text from "@mittwald/flow-react-components/Text";
 
-<HeaderNavigation aria-label="HeaderNavigation">
+<HeaderNavigation aria-label="Header navigation">
   <Button>
     <IconSearch />
   </Button>

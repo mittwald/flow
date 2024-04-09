@@ -33,7 +33,7 @@ type Story = StoryObj<typeof HeaderNavigation>;
 
 export const Default: Story = {
   render: (props) => (
-    <HeaderNavigation aria-label="HeaderNavigation" {...props}>
+    <HeaderNavigation aria-label="Header navigation" {...props}>
       <Link href="#">Getting startet</Link>
       <Link href="#" aria-current="page">
         Components
@@ -47,7 +47,7 @@ export const Default: Story = {
 
 export const WithContextMenu: Story = {
   render: (props) => (
-    <HeaderNavigation aria-label="HeaderNavigation" {...props}>
+    <HeaderNavigation aria-label="Header navigation" {...props}>
       <Button>
         <IconSearch />
       </Button>
