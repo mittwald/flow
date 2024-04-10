@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-react-components",
-  "version": "0.1.0-alpha.62",
+  "version": "0.1.0-alpha.63",
   "type": "module",
   "description": "A React implementation of Flow, mittwald’s design system",
   "homepage": "https://mittwald.github.io/flow",
@@ -138,6 +138,10 @@
       "types": "./dist/types/components/NumberField/index.d.ts",
       "import": "./dist/NumberField.js"
     },
+    "./Popover": {
+      "types": "./dist/types/components/Popover/index.d.ts",
+      "import": "./dist/Popover.js"
+    },
     "./ProgressBar": {
       "types": "./dist/types/components/ProgressBar/index.d.ts",
       "import": "./dist/ProgressBar.js"
@@ -149,6 +153,10 @@
     "./Section": {
       "types": "./dist/types/components/Section/index.d.ts",
       "import": "./dist/Section.js"
+    },
+    "./Select": {
+      "types": "./dist/types/components/Select/index.d.ts",
+      "import": "./dist/Select.js"
     },
     "./StatusBadge": {
       "types": "./dist/types/components/StatusBadge/index.d.ts",
