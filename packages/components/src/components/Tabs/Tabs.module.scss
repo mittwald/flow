@@ -2,3 +2,11 @@
   display: flex;
   flex-direction: column;
 }
+
+.tabList {
+  display: flex;
+  justify-content: flex-start;
+  background-color: var(--tab-list--background-color);
+  column-gap: var(--tab-list--tab-to-tab-spacing);
+  overflow-x: auto;
+}

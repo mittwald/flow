@@ -15,7 +15,7 @@ const meta: Meta<typeof Tabs> = {
   component: Tabs,
   render: (props) => {
     return (
-      <Tabs {...props} defaultSelectedKey="storage">
+      <Tabs {...props}>
         <Tab>
           <TabTitle>General</TabTitle>
           <Section>
