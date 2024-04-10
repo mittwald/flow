@@ -1,0 +1,56 @@
+@use "@/styles/mixins/focus";
+
+.headerNavigation {
+  ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--header-navigation--item-to-item-spacing);
+  }
+
+  li {
+    list-style: none;
+  }
+
+  .button.button {
+    color: var(--header-navigation--item-color);
+    border-radius: var(--corner-radius--round);
+
+    &:hover,
+    &[data-pressed] {
+      color: var(--header-navigation--item-color);
+    }
+  }
+}
+
+.link {
+  padding: var(--header-navigation--item-padding);
+  border-radius: var(--header-navigation--item-corner-radius);
+  color: var(--header-navigation--item-color);
+  position: relative;
+
+  @include focus.focus;
+
+  &:hover:not([aria-current]) {
+    background-color: var(--header-navigation--item-background-color--hover);
+  }
+
+  &[data-pressed]:not([aria-current]) {
+    background-color: var(--header-navigation--item-background-color--pressed);
+  }
+
+  &[aria-current] {
+    font-weight: var(--header-navigation--item-font-weight-current);
+
+    &:after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: var(--header-navigation--item-color);
+      height: var(--header-navigation--item-underline-width-current);
+    }
+  }
+}

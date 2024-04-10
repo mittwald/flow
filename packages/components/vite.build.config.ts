@@ -35,6 +35,7 @@ export default defineConfig(
           FieldDescription: "./src/components/FieldDescription/index.ts",
           FieldError: "./src/components/FieldError/index.ts",
           Header: "./src/components/Header/index.ts",
+          HeaderNavigation: "./src/components/HeaderNavigation/index.ts",
           Heading: "./src/components/Heading/index.ts",
           Icon: "./src/components/Icon/index.ts",
           Icons: "./src/components/Icon/components/icons/index.ts",
