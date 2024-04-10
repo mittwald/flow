@@ -1,11 +1,14 @@
-.root {
-  --border-color: var(--neutral--color--400);
+.liveCodeEditor {
+  --border-color: var(--neutral-outline-border-color--default);
   border: 1px solid var(--border-color);
   border-radius: var(--corner-radius--default);
+  background-color: var(--neutral--color--200);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .preview {
-  background-color: var(--neutral--color--200);
   padding: var(--size-px--l);
 }
 
@@ -16,8 +19,16 @@
 .editor {
   font-family: monospace;
   min-width: min-content;
+  border-top: 1px solid var(--border-color);
 }
 
 .editor pre {
   white-space: pre !important;
+
+  background-color: var(--neutral--color--300) !important;
+}
+
+.toggleCode {
+  margin-inline-start: auto;
+  margin-block-start: auto;
 }

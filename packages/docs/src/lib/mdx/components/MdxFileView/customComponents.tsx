@@ -8,11 +8,17 @@ import CopyButton from "@mittwald/flow-react-components/CopyButton";
 import Link from "@mittwald/flow-react-components/Link";
 import Text from "@mittwald/flow-react-components/Text";
 import { LinkProvider } from "@mittwald/flow-react-components/nextjs/LinkProvider";
+import DoAndDont from "@/lib/mdx/components/DoAndDont/DoAndDont";
+import Do from "@/lib/mdx/components/DoAndDont/Do";
+import Dont from "@/lib/mdx/components/DoAndDont/Dont";
 
 export const customComponents: MDXComponents = {
   Content: Content,
   Heading: Heading,
   InlineAlert: InlineAlert,
+  DoAndDont: DoAndDont,
+  Do: Do,
+  Dont: Dont,
 
   pre: ({ children }) => (
     <div className={styles.preContainer}>

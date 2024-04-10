@@ -47,7 +47,7 @@ kann bspw. ein 66% / 33% Raster innerhalb einer Spalte des 50% / 50% Rasters
 platziert werden, um Straßenname und Hausnummer zu einer sinnvollen Gruppe
 zusammenzufassen.
 
-<LiveCodeEditor example="columnLayout" />
+<LiveCodeEditor example="columnLayout" hideCode />
 
 ### isRequired
 
@@ -95,6 +95,19 @@ Ergänze das TextField mit ...
   Eingabeanforderungen sind.
 - Einer FieldDescription, um dem Nutzer Beispiele oder Formatierungshinweise zu
   geben.
+
+<DoAndDont>
+  <LiveCodeEditor hideCode example="placeholder" />
+  <Dont>
+    Placeholder sollten keine hilfreichen Informationen oder
+    Formatierungshinweise enthalten.
+  </Dont>
+  <LiveCodeEditor hideCode />
+  <Do>
+    Nutze die FieldDescription um hilfreiche Informationen darzustellen, z.B.
+    für Formatierungshinweise.
+  </Do>
+</DoAndDont>
 
 ---
 

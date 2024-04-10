@@ -15,6 +15,7 @@ import * as EditorComponents from "./components";
 import clsx from "clsx";
 import { Button } from "@mittwald/flow-react-components/Button";
 import { IconCode } from "@tabler/icons-react";
+import { themes } from "prism-react-renderer";
 
 // Waiting for https://github.com/FormidableLabs/react-live/issues/339
 const error = console.error;
@@ -53,14 +54,19 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
       }}
       transformCode={transformCode}
     >
-      <div className={clsx(styles.root, className)}>
+      <div className={clsx(styles.liveCodeEditor, className)}>
         <LivePreview className={styles.preview} />
-        <Button onPress={() => setCodeVisible(!codeVisible)}>
+        <Button
+          className={styles.toggleCode}
+          size="s"
+          style="plain"
+          onPress={() => setCodeVisible(!codeVisible)}
+        >
           <IconCode />
         </Button>
         {codeVisible && (
           <div className={styles.editorContainer}>
-            <LiveEditor className={styles.editor} />
+            <LiveEditor theme={themes.vsLight} className={styles.editor} />
           </div>
         )}
         <LiveError className={styles.error} />

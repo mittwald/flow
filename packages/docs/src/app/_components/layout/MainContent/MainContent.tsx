@@ -14,7 +14,7 @@ interface Props extends PropsWithChildren {
 }
 
 export const MainContent: FC<Props> = (props) => {
-  const { title, component, children } = props;
+  const { title, description, component, children } = props;
 
   return (
     <>
@@ -24,7 +24,7 @@ export const MainContent: FC<Props> = (props) => {
             <Heading className={styles.heading} level={1}>
               {title}
             </Heading>
-            {children}
+            {description}
 
             {component && (
               <Link
@@ -35,6 +35,7 @@ export const MainContent: FC<Props> = (props) => {
               </Link>
             )}
           </Section>
+          {children}
         </ColumnLayout>
       </LayoutCard>
     </>
