@@ -1,8 +1,7 @@
 import {
   Tab,
-  TabPanel,
+  TabTitle,
   Tabs,
-  TabList,
 } from "@mittwald/flow-react-components/Tabs";
 import { Section } from "@mittwald/flow-react-components/Section";
 import { Heading } from "@mittwald/flow-react-components/Heading";
@@ -14,20 +13,17 @@ import { Header } from "@mittwald/flow-react-components/Header";
 import { Switch } from "@mittwald/flow-react-components/Switch";
 
 <Tabs>
-  <TabList>
-    <Tab id="general">General</Tab>
-    <Tab id="storage">Storage</Tab>
-    <Tab id="spam">Spam protection</Tab>
-  </TabList>
-  <TabPanel id="general">
+  <Tab>
+    <TabTitle>General</TabTitle>
     <Section>
       <Heading>General</Heading>
       <TextField defaultValue="example@mittwald.de">
         <Label>Mail address</Label>
       </TextField>
     </Section>
-  </TabPanel>
-  <TabPanel id="storage">
+  </Tab>
+  <Tab id="storage">
+    <TabTitle>Storage</TabTitle>
     <Section>
       <Heading>Storage</Heading>
       <LabeledValue>
@@ -35,8 +31,9 @@ import { Switch } from "@mittwald/flow-react-components/Switch";
         <Text>2.4 GB</Text>
       </LabeledValue>
     </Section>
-  </TabPanel>
-  <TabPanel id="spam">
+  </Tab>
+  <Tab>
+    <TabTitle>Spam protection</TabTitle>
     <Section>
       <Header>
         <Heading>Spam protection</Heading>
@@ -48,5 +45,5 @@ import { Switch } from "@mittwald/flow-react-components/Switch";
         that you always leave spam protection activated.
       </Text>
     </Section>
-  </TabPanel>
+  </Tab>
 </Tabs>;
