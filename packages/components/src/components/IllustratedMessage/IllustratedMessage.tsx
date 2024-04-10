@@ -1,18 +1,20 @@
-import React, { ComponentProps, FC, PropsWithChildren } from "react";
-import styles from "./ContentPlaceholder.module.scss";
+import type { ComponentProps, FC, PropsWithChildren } from "react";
+import React from "react";
+import styles from "./IllustratedMessage.module.scss";
 import clsx from "clsx";
-import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import type { PropsContext } from "@/lib/propsContext";
+import { PropsContextProvider } from "@/lib/propsContext";
 
-export interface ContentPlaceholderProps
+export interface IllustratedMessageProps
   extends PropsWithChildren<ComponentProps<"div">> {
   variant?: "info" | "danger";
 }
 
-export const ContentPlaceholder: FC<ContentPlaceholderProps> = (props) => {
+export const IllustratedMessage: FC<IllustratedMessageProps> = (props) => {
   const { className, children, variant = "info", ...rest } = props;
 
   const rootClassName = clsx(
-    styles.contentPlaceholder,
+    styles.illustratedMessage,
     styles[variant],
     className,
   );
@@ -43,4 +45,4 @@ export const ContentPlaceholder: FC<ContentPlaceholderProps> = (props) => {
   );
 };
 
-export default ContentPlaceholder;
+export default IllustratedMessage;

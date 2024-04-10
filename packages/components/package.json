@@ -46,9 +46,9 @@
       "types": "./dist/types/components/Content/index.d.ts",
       "import": "./dist/Content.js"
     },
-    "./ContentPlaceholder": {
-      "types": "./dist/types/components/ContentPlaceholder/index.d.ts",
-      "import": "./dist/ContentPlaceholder.js"
+    "./IllustratedMessage": {
+      "types": "./dist/types/components/IllustratedMessage/index.d.ts",
+      "import": "./dist/IllustratedMessage.js"
     },
     "./ContextMenu": {
       "types": "./dist/types/components/ContextMenu/index.d.ts",

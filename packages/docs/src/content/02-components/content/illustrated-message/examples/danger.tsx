@@ -1,10 +1,10 @@
 import Heading from "@mittwald/flow-react-components/Heading";
-import ContentPlaceholder from "@mittwald/flow-react-components/ContentPlaceholder";
+import IllustratedMessage from "@mittwald/flow-react-components/IllustratedMessage";
 import { IconDanger } from "@mittwald/flow-react-components/Icons";
 import Text from "@mittwald/flow-react-components/Text";
 import Button from "@mittwald/flow-react-components/Button";
 
-<ContentPlaceholder variant="danger">
+<IllustratedMessage variant="danger">
   <IconDanger />
   <Heading>No access</Heading>
   <Text>
@@ -12,4 +12,4 @@ import Button from "@mittwald/flow-react-components/Button";
     page.
   </Text>
   <Button>Go back</Button>
-</ContentPlaceholder>;
+</IllustratedMessage>;

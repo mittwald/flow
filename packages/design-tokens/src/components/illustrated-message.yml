@@ -1,4 +1,4 @@
-content-placeholder:
+illustrated-message:
   padding:
     value: "{size-px.xxl}"
   padding-mobile:
