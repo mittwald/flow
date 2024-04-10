@@ -1,56 +1,10 @@
 .contextMenu {
-  box-shadow: var(--context-menu--box-shadow);
-  border-radius: var(--context-menu--corner-radius);
-  padding: var(--context-menu--padding);
-  background-color: var(--context-menu--background-color);
-  overflow-y: auto;
-  --size-px--s--negative: calc(var(--size-px--s) * -1);
-  min-width: var(--context-menu--min-width);
-
-  &[data-placement="top"] {
-    --origin: translateY(var(--size-px--s));
-  }
-
-  &[data-placement="bottom"] {
-    --origin: translateY(var(--size-px--s--negative));
-  }
-
-  &[data-placement="right"] {
-    --origin: translateX(var(--size-px--s--negative));
-  }
-
-  &[data-placement="left"] {
-    --origin: translateX(var(--size-px--s));
-  }
-
-  &[data-entering] {
-    animation: popover-slide var(--transition--duration--default);
-  }
-
-  &[data-exiting] {
-    animation: popover-slide var(--transition--duration--default) reverse
-      ease-in;
-  }
-}
-
-.menuList {
   display: flex;
   flex-direction: column;
   row-gap: var(--menu--item-to-item-spacing);
+  min-width: var(--context-menu--min-width);
 
   &:focus-visible {
     outline: none;
-  }
-}
-
-@keyframes popover-slide {
-  from {
-    transform: var(--origin);
-    opacity: 0;
-  }
-
-  to {
-    transform: translateY(0);
-    opacity: 1;
   }
 }

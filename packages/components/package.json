@@ -138,6 +138,10 @@
       "types": "./dist/types/components/NumberField/index.d.ts",
       "import": "./dist/NumberField.js"
     },
+    "./Popover": {
+      "types": "./dist/types/components/Popover/index.d.ts",
+      "import": "./dist/Popover.js"
+    },
     "./RadioGroup": {
       "types": "./dist/types/components/RadioGroup/index.d.ts",
       "import": "./dist/RadioGroup.js"
@@ -145,6 +149,10 @@
     "./Section": {
       "types": "./dist/types/components/Section/index.d.ts",
       "import": "./dist/Section.js"
+    },
+    "./Select": {
+      "types": "./dist/types/components/Select/index.d.ts",
+      "import": "./dist/Select.js"
     },
     "./StatusBadge": {
       "types": "./dist/types/components/StatusBadge/index.d.ts",
