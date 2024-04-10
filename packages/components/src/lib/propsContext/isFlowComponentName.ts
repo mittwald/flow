@@ -6,6 +6,6 @@ export function isFlowComponentName(
 ): something is FlowComponentName {
   return (
     typeof something === "string" &&
-    propsContextSupportingComponents.includes(something)
+    (propsContextSupportingComponents as string[]).includes(something)
   );
 }

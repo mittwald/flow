@@ -154,6 +154,10 @@
       "types": "./dist/types/components/Switch/index.d.ts",
       "import": "./dist/Switch.js"
     },
+    "./Tabs": {
+      "types": "./dist/types/components/Tabs/index.d.ts",
+      "import": "./dist/Tabs.js"
+    },
     "./Text": {
       "types": "./dist/types/components/Text/index.d.ts",
       "import": "./dist/Text.js"
