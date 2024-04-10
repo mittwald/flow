@@ -105,6 +105,6 @@ export const Mobile: Story = {
   parameters: { viewport: { defaultViewport: "mobile1" } },
 };
 
-export const Panel: Story = {
-  args: { panel: true },
+export const OffCanvas: Story = {
+  args: { offCanvas: true },
 };
