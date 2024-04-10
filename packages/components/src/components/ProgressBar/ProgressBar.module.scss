@@ -24,8 +24,9 @@
   grid-area: bar;
   height: var(--progress-bar--bar-height);
   border-radius: var(--progress-bar--bar-border-radius);
+  box-shadow: inset 0 0 0 var(--progress-bar--bar-border-width)
+    var(--progress-bar--bar-border-color);
   overflow: hidden;
-  background: var(--progress-bar--info-bar-background-color);
 }
 
 .size-s {
@@ -35,18 +36,12 @@
 }
 
 .fill {
-  background: var(--progress-bar--info-fill-background-color);
   height: 100%;
-  border-radius: var(--progress-bar--bar-border-radius);
 }
 
 /* Variants */
 @mixin status($status) {
   .#{$status} {
-    .bar {
-      background: var(--progress-bar--#{$status}-bar-background-color);
-    }
-
     .fill {
       background: var(--progress-bar--#{$status}-fill-background-color);
     }

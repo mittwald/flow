@@ -9,30 +9,26 @@ progress-bar:
   bar-height:
     value: "{size-rem.s}"
   bar-height-small:
-    value: "{size-rem.xs}"
+    value: 0.375rem
   bar-border-radius:
     value: "{size-rem.xs}"
+  bar-border-width:
+    value: "{border-width.100}"
+  bar-border-color:
+    value: "{neutral-outline-border-color.default}"
 
   # Info
-  info-bar-background-color:
-    value: "{info-soft-background-color.default}"
   info-fill-background-color:
     value: "{info-solid-background-color.default}"
 
   # Success
-  success-bar-background-color:
-    value: "{success-soft-background-color.default}"
   success-fill-background-color:
     value: "{success-solid-background-color.default}"
 
   # Warning
-  warning-bar-background-color:
-    value: "{warning-soft-background-color.default}"
   warning-fill-background-color:
     value: "{warning-solid-background-color.default}"
 
   # Danger
-  danger-bar-background-color:
-    value: "{danger-soft-background-color.default}"
   danger-fill-background-color:
     value: "{danger-solid-background-color.default}"
