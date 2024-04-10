@@ -28,7 +28,6 @@
   padding: var(--header-navigation--item-padding);
   border-radius: var(--header-navigation--item-corner-radius);
   color: var(--header-navigation--item-color);
-  cursor: default;
   position: relative;
 
   @include focus.focus;
@@ -52,7 +51,6 @@
       right: 0;
       background-color: var(--header-navigation--item-color);
       height: var(--header-navigation--item-underline-width-current);
-      border-radius: var(--header-navigation--item-corner-radius);
     }
   }
 }
