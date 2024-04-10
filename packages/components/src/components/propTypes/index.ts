@@ -20,6 +20,7 @@ import type { AvatarProps } from "@/components/Avatar";
 import type { ActionProps } from "@/components/Action";
 import type { ContextMenuProps } from "@/components/ContextMenu";
 import type { RadioProps } from "@/components/RadioGroup";
+import type { TabsProps } from "@/components/Tabs";
 
 export * from "./types";
 
@@ -45,6 +46,7 @@ export interface FlowComponentPropsTypes {
   Radio: RadioProps;
   StatusBadge: StatusBadgeProps;
   Switch: SwitchProps;
+  Tabs: TabsProps;
   Text: TextProps;
 }
 
@@ -73,6 +75,7 @@ const propsContextSupportingComponentsMap: Record<
   Radio: true,
   StatusBadge: true,
   Switch: true,
+  Tabs: true,
   TestComponent: true,
   Text: true,
 };

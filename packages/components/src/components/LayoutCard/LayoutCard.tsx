@@ -5,6 +5,8 @@ import clsx from "clsx";
 import type { PropsWithElementType } from "@/lib/types/props";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import type { PropsContext } from "@/lib/propsContext";
+import { PropsContextProvider } from "@/lib/propsContext";
 
 export interface LayoutCardProps
   extends PropsWithChildren,
@@ -18,9 +20,17 @@ export const LayoutCard = flowComponent("LayoutCard", (props) => {
 
   const Element = elementType;
 
+  const propsContext: PropsContext = {
+    Tabs: {
+      className: styles.tabs,
+    },
+  };
+
   return (
     <Element className={rootClassName} {...rest}>
-      {children}
+      <PropsContextProvider props={propsContext}>
+        {children}
+      </PropsContextProvider>
     </Element>
   );
 });

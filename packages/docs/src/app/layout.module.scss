@@ -64,10 +64,13 @@
 
 .main {
   grid-area: main;
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--size-px--l);
 }
 
 @media (min-width: 1024px) {
   .main {
-    padding: var(--size-px--l) var(--size-px--xl);
+    padding: 0 var(--size-px--xl);
   }
 }

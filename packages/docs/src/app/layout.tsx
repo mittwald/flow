@@ -41,9 +41,7 @@ const RootLayout: FC<PropsWithChildren> = async (props) => {
             <LayoutCard className={styles.nav}>
               <MainNavigation docs={docs.map((mdx) => mdx.serialize())} />
             </LayoutCard>
-            <LayoutCard elementType="main" className={styles.main}>
-              {props.children}
-            </LayoutCard>
+            <main className={styles.main}>{props.children}</main>
           </div>
         </LinkProvider>
       </body>

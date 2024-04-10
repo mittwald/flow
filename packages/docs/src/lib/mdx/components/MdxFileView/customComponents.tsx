@@ -5,6 +5,7 @@ import InlineAlert from "@mittwald/flow-react-components/InlineAlert";
 import Content from "@mittwald/flow-react-components/Content";
 import React from "react";
 import CopyButton from "@mittwald/flow-react-components/CopyButton";
+import { Link } from "@mittwald/flow-react-components/Link";
 
 export const customComponents: MDXComponents = {
   Content: Content,
@@ -54,4 +55,5 @@ export const customComponents: MDXComponents = {
       {children}
     </Heading>
   ),
+  a: ({ children, href }) => <Link href={href}>{children}</Link>,
 };

@@ -11,10 +11,13 @@ import { MdxFile } from "@/lib/mdx/MdxFile";
 import type { Metadata } from "next";
 
 export class MdxFileFactory {
-  public static async fromDir(dir: string): Promise<MdxFile[]> {
+  public static async fromDir(
+    dir: string,
+    fileName?: string,
+  ): Promise<MdxFile[]> {
     return Promise.all(
       jetpack
-        .find(dir, { matching: "**/index.mdx" })
+        .find(dir, { matching: `**/${fileName ?? "index"}.mdx` })
         .map((f) => MdxFileFactory.fromFile(f, dir)),
     );
   }
@@ -22,11 +25,12 @@ export class MdxFileFactory {
   public static async fromParams(
     dir: string,
     params: StaticParams,
-  ): Promise<MdxFile> {
-    const all = await MdxFileFactory.fromDir(dir);
+    fileName?: string,
+  ): Promise<MdxFile | undefined> {
+    const all = await MdxFileFactory.fromDir(dir, fileName);
     const matching = all.find((mdx) => mdx.matchesSlugs(params.slug));
     if (!matching) {
-      throw new Error("Could not find doc file");
+      return undefined;
     }
     return matching;
   }
@@ -46,7 +50,7 @@ export class MdxFileFactory {
   ): Promise<Metadata> {
     const mdxFile = await MdxFileFactory.fromParams(contentFolder, params);
     return {
-      title: mdxFile.getTitle(),
+      title: mdxFile?.getTitle(),
     };
   }
 
