@@ -7,14 +7,24 @@ Verständnis der Eingabeanforderungen unerlässlich sind. Optional kann auch ein
 
 <LiveCodeEditor />
 
-## Disabled
+---
+
+## States
+
+Das TextField hat 6 verschiedene states: **Default**, **Hover**, **Focused**,
+**Disabled**, **Error** und **Error-focused**.
+
+### Disabled
+
+Wenn das TextField disabled ist, zeigt es optisch an, dass es momentan nicht
+verfügbar ist. Sobald die Ursache für die Deaktivierung behoben ist, kann das
+TextField wieder normal verwendet werden.
 
 <LiveCodeEditor example="disabled" />
 
-## Required
+### Error and error-focused
 
-<LiveCodeEditor example="required" />
-
-## Invalid
+Wenn die Benutzereingabe nicht den erwarteten Anforderungen entspricht, wechseln
+sowohl das TextField als auch die [FieldDescription](#) in den **Error state**.
 
 <LiveCodeEditor example="invalid" />

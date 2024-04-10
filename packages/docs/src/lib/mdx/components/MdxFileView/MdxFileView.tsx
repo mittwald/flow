@@ -14,12 +14,14 @@ interface Props {
 export const MdxFileView: FC<Props> = (props) => {
   const mdxFile = MdxFile.deserialize(props.mdxFile);
 
-  const ExampleLiveCodeEditor: FC<{ example?: string }> = ({
+  const ExampleLiveCodeEditor: FC<{ example?: string; hideCode?: boolean }> = ({
     example = "default",
+    hideCode,
   }) => (
     <LiveCodeEditor
       className={styles.liveCodeEditor}
       code={mdxFile.getExample(example)}
+      hideCode={hideCode}
     />
   );
 

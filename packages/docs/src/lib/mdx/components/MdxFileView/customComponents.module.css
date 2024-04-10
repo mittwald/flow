@@ -36,5 +36,11 @@
 .ul {
   list-style-type: disc;
   padding-left: var(--size-rem--m);
-  margin-block: 1.5em;
+}
+
+.hr {
+  margin-block: var(--size-px--m);
+  border: 0;
+  border-top: var(--size-px--xxxs) solid
+    var(--neutral-outline-border-color--default);
 }

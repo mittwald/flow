@@ -1,4 +1,5 @@
 import type { FC } from "react";
+import { useState } from "react";
 import React from "react";
 import {
   LiveEditor,
@@ -12,6 +13,8 @@ import extractDefaultExport from "@/lib/liveCode/components/LiveCodeEditor/lib/e
 import styles from "./LiveCodeEditor.module.css";
 import * as EditorComponents from "./components";
 import clsx from "clsx";
+import { Button } from "@mittwald/flow-react-components/Button";
+import { IconCode } from "@tabler/icons-react";
 
 // Waiting for https://github.com/FormidableLabs/react-live/issues/339
 const error = console.error;
@@ -21,7 +24,9 @@ console.error = (...args) => {
 };
 
 const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
-  const { code, className } = props;
+  const { code, className, hideCode } = props;
+
+  const [codeVisible, setCodeVisible] = useState(!hideCode);
 
   if (typeof code !== "string") {
     throw new Error("Expected code prop to be of type 'string'.");
@@ -50,9 +55,14 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
     >
       <div className={clsx(styles.root, className)}>
         <LivePreview className={styles.preview} />
-        <div className={styles.editorContainer}>
-          <LiveEditor className={styles.editor} />
-        </div>
+        <Button onPress={() => setCodeVisible(!codeVisible)}>
+          <IconCode />
+        </Button>
+        {codeVisible && (
+          <div className={styles.editorContainer}>
+            <LiveEditor className={styles.editor} />
+          </div>
+        )}
         <LiveError className={styles.error} />
       </div>
     </LiveProvider>
