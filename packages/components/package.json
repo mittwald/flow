@@ -142,6 +142,10 @@
       "types": "./dist/types/components/Popover/index.d.ts",
       "import": "./dist/Popover.js"
     },
+    "./ProgressBar": {
+      "types": "./dist/types/components/ProgressBar/index.d.ts",
+      "import": "./dist/ProgressBar.js"
+    },
     "./RadioGroup": {
       "types": "./dist/types/components/RadioGroup/index.d.ts",
       "import": "./dist/RadioGroup.js"

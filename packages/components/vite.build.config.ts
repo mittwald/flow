@@ -54,6 +54,7 @@ export default defineConfig(
           Navigation: "./src/components/Navigation/index.ts",
           NumberField: "./src/components/NumberField/index.ts",
           Popover: "./src/components/Popover/index.ts",
+          ProgressBar: "./src/components/ProgressBar/index.ts",
           RadioGroup: "./src/components/RadioGroup/index.ts",
           Section: "./src/components/Section/index.ts",
           Select: "./src/components/Select/index.ts",
