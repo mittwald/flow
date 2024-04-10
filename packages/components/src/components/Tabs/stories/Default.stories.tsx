@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import { TabTitle, Tab, Tabs } from "@/components/Tabs";
+import { Tab, Tabs, TabTitle } from "@/components/Tabs";
 import { Section } from "@/components/Section";
 import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
@@ -13,43 +13,45 @@ import { Header } from "@/components/Header";
 const meta: Meta<typeof Tabs> = {
   title: "Navigation/Tabs",
   component: Tabs,
-  render: (props) => (
-    <Tabs {...props} defaultSelectedKey="storage">
-      <Tab>
-        <TabTitle>General</TabTitle>
-        <Section>
-          <Heading>General</Heading>
-          <TextField defaultValue="example@mittwald.de">
-            <Label>Mail address</Label>
-          </TextField>
-        </Section>
-      </Tab>
-      <Tab id="storage">
-        <TabTitle>Storage</TabTitle>
-        <Section>
-          <Heading>Storage</Heading>
-          <LabeledValue>
-            <Label>Available storage</Label>
-            <Text>2.4 GB</Text>
-          </LabeledValue>
-        </Section>
-      </Tab>
-      <Tab>
-        <TabTitle>Spam</TabTitle>
-        <Section>
-          <Header>
-            <Heading>Spam protection</Heading>
-            <Switch>Spam protection</Switch>
-          </Header>
-          <Text>
-            The spam filter protects you from unwanted emails. Nobody wants
-            garbage in their inbox, so we recommend that you always leave spam
-            protection activated.
-          </Text>
-        </Section>
-      </Tab>
-    </Tabs>
-  ),
+  render: (props) => {
+    return (
+      <Tabs {...props} defaultSelectedKey="storage">
+        <Tab>
+          <TabTitle>General</TabTitle>
+          <Section>
+            <Heading>General</Heading>
+            <TextField defaultValue="example@mittwald.de">
+              <Label>Mail address</Label>
+            </TextField>
+          </Section>
+        </Tab>
+        <Tab id="storage">
+          <TabTitle>Storage</TabTitle>
+          <Section>
+            <Heading>Storage</Heading>
+            <LabeledValue>
+              <Label>Available storage</Label>
+              <Text>2.4 GB</Text>
+            </LabeledValue>
+          </Section>
+        </Tab>
+        <Tab>
+          <TabTitle>Spam</TabTitle>
+          <Section>
+            <Header>
+              <Heading>Spam protection</Heading>
+              <Switch>Spam protection</Switch>
+            </Header>
+            <Text>
+              The spam filter protects you from unwanted emails. Nobody wants
+              garbage in their inbox, so we recommend that you always leave spam
+              protection activated.
+            </Text>
+          </Section>
+        </Tab>
+      </Tabs>
+    );
+  },
 };
 
 export default meta;

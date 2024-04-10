@@ -3,6 +3,8 @@ import React from "react";
 import * as Aria from "react-aria-components";
 import styles from "./Tab.module.scss";
 import clsx from "clsx";
+import { useSetChildProps } from "@/lib/childProps";
+import { TabContextProvider } from "@/components/Tabs/components/Tab/context";
 
 export interface TabProps
   extends Omit<Aria.TabPanelProps, "children">,
@@ -17,10 +19,12 @@ export const Tab: FC<TabProps> = (props) => {
     className,
     shouldRender = false,
     shouldForceMount = true,
+    id,
     ...rest
   } = props;
 
   if (!shouldRender) {
+    useSetChildProps("Tab", props);
     return null;
   }
 
@@ -30,9 +34,10 @@ export const Tab: FC<TabProps> = (props) => {
     <Aria.TabPanel
       className={rootClassName}
       shouldForceMount={shouldForceMount}
+      id={id}
       {...rest}
     >
-      {children}
+      <TabContextProvider value={{ id }}>{children}</TabContextProvider>
     </Aria.TabPanel>
   );
 };
