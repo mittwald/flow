@@ -25,7 +25,7 @@ import StatusBadge from "@mittwald/flow-react-components/StatusBadge";
   <ListItemView<Domain>>
     {(domain) => (
       <Link href="#">
-        <Avatar>
+        <Avatar variant={domain.type === "Domain" ? 1 : 2}>
           {domain.type === "Domain" ? (
             <IconDomain />
           ) : (

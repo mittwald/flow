@@ -5,6 +5,7 @@
   background-color: var(--context-menu--background-color);
   overflow-y: auto;
   --size-px--s--negative: calc(var(--size-px--s) * -1);
+  min-width: var(--context-menu--min-width);
 
   &[data-placement="top"] {
     --origin: translateY(var(--size-px--s));

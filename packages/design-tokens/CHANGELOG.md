@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.61](https://github.com/mittwald/flow/compare/0.1.0-alpha.60...0.1.0-alpha.61) (2024-04-09)
+
+### Features
+
+- **Avatar:** add variant
+  ([e6d3dea](https://github.com/mittwald/flow/commit/e6d3deabdc2b04d53b2d6ceba58b282e5b97bb53))
+- **StatusBadge:** add icon only version
+  ([8c18f80](https://github.com/mittwald/flow/commit/8c18f808ceba514da2f4d45d4cbae955824a2d42))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.59](https://github.com/mittwald/flow/compare/0.1.0-alpha.58...0.1.0-alpha.59) (2024-04-08)
 
 **Note:** Version bump only for package @mittwald/flow-design-tokens
