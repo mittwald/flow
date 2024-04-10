@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.62](https://github.com/mittwald/flow/compare/0.1.0-alpha.61...0.1.0-alpha.62) (2024-04-10)
+
+### Features
+
+- add Tabs
+  ([8f3ac47](https://github.com/mittwald/flow/commit/8f3ac47d4708df5106dd1776ced3a244728c064d))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.61](https://github.com/mittwald/flow/compare/0.1.0-alpha.60...0.1.0-alpha.61) (2024-04-09)
 
 ### Features

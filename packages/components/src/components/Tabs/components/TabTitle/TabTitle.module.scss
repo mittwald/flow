@@ -1,0 +1,21 @@
+@use "@/styles/mixins/focus";
+
+.tabTitle {
+  padding-inline: var(--tab--padding-x);
+  padding-block: var(--tab--padding-y);
+  background-color: var(--tab--background-color--default);
+  color: var(--tab--color--default);
+  cursor: default;
+  white-space: nowrap;
+  transition-property: color, background-color;
+  transition-duration: var(--transition--duration--default);
+
+  @include focus.focus;
+  outline-offset: calc(var(--size-px--xs) * -1);
+
+  &[data-selected] {
+    background-color: var(--tab--background-color--selected);
+    color: var(--tab--color--selected);
+    font-weight: var(--tab--font-weight--selected);
+  }
+}

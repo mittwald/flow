@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-react-components",
-  "version": "0.1.0-alpha.61",
+  "version": "0.1.0-alpha.62",
   "type": "module",
   "description": "A React implementation of Flow, mittwald’s design system",
   "homepage": "https://mittwald.github.io/flow",
@@ -69,6 +69,10 @@
     "./Header": {
       "types": "./dist/types/components/Header/index.d.ts",
       "import": "./dist/Header.js"
+    },
+    "./HeaderNavigation": {
+      "types": "./dist/types/components/HeaderNavigation/index.d.ts",
+      "import": "./dist/HeaderNavigation.js"
     },
     "./Heading": {
       "types": "./dist/types/components/Heading/index.d.ts",
@@ -157,6 +161,10 @@
     "./Switch": {
       "types": "./dist/types/components/Switch/index.d.ts",
       "import": "./dist/Switch.js"
+    },
+    "./Tabs": {
+      "types": "./dist/types/components/Tabs/index.d.ts",
+      "import": "./dist/Tabs.js"
     },
     "./Text": {
       "types": "./dist/types/components/Text/index.d.ts",
