@@ -16,7 +16,7 @@ export const TabTitle: FC<TabTitleProps> = (props) => {
 
   const context = useTabTabContext();
 
-  const rootClassName = clsx(styles.tab, className);
+  const rootClassName = clsx(styles.tabTitle, className);
 
   return (
     <TunnelEntry id="TabTitles">

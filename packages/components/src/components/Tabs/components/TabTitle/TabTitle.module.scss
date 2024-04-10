@@ -1,6 +1,6 @@
 @use "@/styles/mixins/focus";
 
-.tab {
+.tabTitle {
   padding-inline: var(--tab--padding-x);
   padding-block: var(--tab--padding-y);
   background-color: var(--tab--background-color--default);
