@@ -1,1 +1,1 @@
-export * from "./overlayController";
+export * from "./overlay";

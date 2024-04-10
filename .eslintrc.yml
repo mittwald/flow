@@ -29,3 +29,6 @@ rules:
     - varsIgnorePattern: "[iI]gnored"
       argsIgnorePattern: "[iI]gnored"
       caughtErrorsIgnorePattern: "[iI]gnored"
+  "@typescript-eslint/consistent-type-imports":
+    - error
+    - fixStyle: separate-type-imports

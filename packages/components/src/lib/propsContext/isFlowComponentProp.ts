@@ -1,4 +1,4 @@
-import {
+import type {
   FlowComponentName,
   FlowComponentPropName,
 } from "@/components/propTypes";

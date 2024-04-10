@@ -1,5 +1,5 @@
 import { liveCodeEditorGlobalImports } from "@/lib/liveCode/dynamicImports";
-import { FC } from "react";
+import type { FC } from "react";
 
 export const getDynamicComponent = (name: string): unknown => {
   const MissingComponentComplainer: FC<never> = () => {

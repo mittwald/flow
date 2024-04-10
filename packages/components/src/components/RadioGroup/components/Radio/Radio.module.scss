@@ -1,114 +1,28 @@
-@use "../../../../styles/mixins/formControl";
+@use "@/styles/mixins/focus";
 
 .radio {
-  @include formControl.formControl();
   display: grid;
-  row-gap: var(--radio-group--text-to-text-spacing);
-  column-gap: var(--radio-group--icon-to-text-spacing);
-  border-radius: 0;
+  column-gap: var(--radio--icon-to-text-spacing);
+  grid-template-columns: auto 1fr;
+  width: fit-content;
 
-  /* Without icon and content */
-  &:not(:has(.content)):not(:has(.icon)) {
-    grid-template-areas: "label checkmark";
-    grid-template-columns: 1fr auto;
-    flex: 1;
-    margin-right: -1px; /* Collapse borders */
-
-    &:first-of-type {
-      border-radius: 0;
-      border-start-start-radius: var(--form-control--corner-radius);
-      border-end-start-radius: var(--form-control--corner-radius);
-    }
-
-    &:last-of-type {
-      border-radius: 0;
-      border-start-end-radius: var(--form-control--corner-radius);
-      border-end-end-radius: var(--form-control--corner-radius);
-      margin: 0;
-    }
-
-    &[data-selected] .checkmark {
-      display: block;
-    }
-
-    @container (max-width: 550px) {
-      flex: auto;
-      width: 100%;
-      margin: 0 0 -1px; /* Collapse borders */
-
-      &:first-of-type {
-        border-radius: 0;
-        border-start-start-radius: var(--form-control--corner-radius);
-        border-start-end-radius: var(--form-control--corner-radius);
-      }
-
-      &:last-of-type {
-        border-radius: 0;
-        border-end-end-radius: var(--form-control--corner-radius);
-        border-end-start-radius: var(--form-control--corner-radius);
-        margin: 0;
-      }
-    }
-  }
-
-  /* With icon */
-  &:has(.icon):not(:has(.content)) {
-    grid-template-areas:
-      "icon"
-      "label";
-    grid-template-columns: 1fr;
-    justify-items: center;
-    border-radius: var(--form-control--corner-radius);
-    .label {
-      font-weight: var(--radio-group--label-font-weight-with-content-or-icon);
-    }
-    .icon {
-      height: var(--radio-group--icon-size-without-content);
-      width: var(--radio-group--icon-size-without-content);
-    }
-  }
-
-  /* With content */
-  &:has(.content) {
-    grid-template-areas:
-      "label"
-      "content";
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr;
-    justify-items: start;
-    border-radius: var(--form-control--corner-radius);
-    .label {
-      font-weight: var(--radio-group--label-font-weight-with-content-or-icon);
-    }
-  }
-
-  /* With icon and content */
-  &:has(.content):has(.icon) {
-    grid-template-areas:
-      "icon label"
-      ".    content";
-    grid-template-columns: auto 1fr;
-  }
+  @include focus.focus;
 
   &[data-selected] {
-    z-index: 1;
+    .icon {
+      color: var(--radio--icon-color--selected);
+    }
+  }
+
+  &[data-disabled] {
+    color: var(--radio--color--disabled);
+
+    .icon {
+      color: var(--radio--icon-color--disabled);
+    }
   }
 }
 
-/* Elements */
 .icon {
-  grid-area: icon;
-}
-
-.label {
-  grid-area: label;
-}
-
-.content {
-  grid-area: content;
-}
-
-.checkmark {
-  grid-area: checkmark;
-  display: none;
+  color: var(--checkbox--icon-color--default);
 }

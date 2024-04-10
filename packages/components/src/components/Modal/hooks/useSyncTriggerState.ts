@@ -1,22 +1,20 @@
 import { useContext, useEffect } from "react";
 import * as Aria from "react-aria-components";
-import { OverlayController } from "@/lib/controller/overlayController/types";
-import { useSignalEffect } from "@preact/signals-react";
+import type { OverlayState } from "@/lib/controller/overlay";
 
-export const useSyncTriggerState = (controller: OverlayController) => {
+export const useSyncTriggerState = (controller: OverlayState) => {
   const triggerState = useContext(Aria.OverlayTriggerStateContext);
+  const controllerIsOpen = controller.useIsOpen();
 
   useEffect(() => {
     if (triggerState) {
-      controller.setIsOpen(triggerState.isOpen);
+      controller.setOpen(triggerState.isOpen);
     }
   }, [triggerState?.isOpen]);
 
-  useSignalEffect(() => {
-    const isOpen = controller.signals.isOpen.value;
-
+  useEffect(() => {
     if (triggerState) {
-      triggerState.setOpen(isOpen);
+      triggerState.setOpen(controllerIsOpen);
     }
-  });
+  }, [controllerIsOpen]);
 };

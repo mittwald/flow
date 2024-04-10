@@ -1,37 +1,28 @@
-import { FC, PropsWithChildren, useContext, useLayoutEffect } from "react";
+import type { FC, PropsWithChildren } from "react";
+import { useContext, useLayoutEffect } from "react";
 import tunnelContext from "@/context";
-import { useSignals } from "@preact/signals-react/runtime";
+import { observer } from "mobx-react-lite";
 
 interface Props extends PropsWithChildren {
   id?: string;
 }
 
-export const TunnelEntry: FC<Props> = (props) => {
-  const { children, id = "default" } = props;
+export const TunnelEntry: FC<Props> = observer((props) => {
+  const { children, id } = props;
   const tunnel = useContext(tunnelContext);
-  useSignals();
 
   useLayoutEffect(() => {
-    if (children === tunnel.children.value[id]) {
-      return;
-    }
-
-    tunnel.children.value = { ...tunnel.children.value, [id]: children };
-
+    tunnel.setChildren(id, children);
     return () => {
-      const updatedContext = { ...tunnel.children.value };
-      delete updatedContext[id];
-      tunnel.children.value = updatedContext;
+      tunnel.deleteChildren(id);
     };
   }, [children, id]);
-
-  const inTunnel = id in tunnel.children.value;
 
   /**
    * Render children if not already in Tunnel, because parent component may
    * assume they are being rendered.
    */
-  return inTunnel ? null : children;
-};
+  return tunnel.hasChildren(id) ? null : children;
+});
 
 export default TunnelEntry;

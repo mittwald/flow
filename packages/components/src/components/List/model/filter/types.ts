@@ -1,4 +1,4 @@
-import { PropertyName } from "@/components/List/model/item/Item";
+import type { PropertyName } from "@/components/List/model/item/Item";
 
 export type FilterMode = "all" | "some" | "one";
 
@@ -12,4 +12,5 @@ export interface FilterShape<T> {
   mode?: FilterMode;
   matcher?: FilterMatcher;
   values?: unknown[];
+  name?: string;
 }

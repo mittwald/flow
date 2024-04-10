@@ -3,6 +3,102 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.61](https://github.com/mittwald/flow/compare/0.1.0-alpha.60...0.1.0-alpha.61) (2024-04-09)
+
+### Features
+
+- **Avatar:** add variant
+  ([e6d3dea](https://github.com/mittwald/flow/commit/e6d3deabdc2b04d53b2d6ceba58b282e5b97bb53))
+- **StatusBadge:** add icon only version
+  ([8c18f80](https://github.com/mittwald/flow/commit/8c18f808ceba514da2f4d45d4cbae955824a2d42))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.60](https://github.com/mittwald/flow/compare/0.1.0-alpha.59...0.1.0-alpha.60) (2024-04-08)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.59](https://github.com/mittwald/flow/compare/0.1.0-alpha.58...0.1.0-alpha.59) (2024-04-08)
+
+### Features
+
+- add EmulatedBoldText
+  ([10dc20c](https://github.com/mittwald/flow/commit/10dc20c5aad0b31ffd770ad220c7bd6177e96803))
+- **List:** add defualt sorting
+  ([348b687](https://github.com/mittwald/flow/commit/348b6874de88ea3e1fd60917ad721f7e406ee6a2))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.58](https://github.com/mittwald/flow/compare/0.1.0-alpha.57...0.1.0-alpha.58) (2024-04-08)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.57](https://github.com/mittwald/flow/compare/0.1.0-alpha.56...0.1.0-alpha.57) (2024-04-08)
+
+### Bug Fixes
+
+- fix wrong import path
+  ([e89dc7f](https://github.com/mittwald/flow/commit/e89dc7f92516828c036a8736b28749b934424528))
+
+### Features
+
+- **ContextMenu:** add single-/multi-select
+  ([44bb4ef](https://github.com/mittwald/flow/commit/44bb4ef1518bc1c7deb4feceb3f3f227ac1079e2))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.56](https://github.com/mittwald/flow/compare/0.1.0-alpha.55...0.1.0-alpha.56) (2024-04-04)
+
+### Bug Fixes
+
+- **Action:** fix not showing pending on second call
+  ([8f37a7e](https://github.com/mittwald/flow/commit/8f37a7ee7804f396c48bfe1e7b6209bec6823f84))
+- add package export for Action component
+  ([1964d8d](https://github.com/mittwald/flow/commit/1964d8d964505f918b229f8c6c3ae2e51daaefe4))
+- **Modal:** fix Modal not opened by trigger
+  ([5729fb4](https://github.com/mittwald/flow/commit/5729fb4e134d425fd3f6cd6746800ec1004cc194))
+- update table state in signal effect
+  ([ee68eab](https://github.com/mittwald/flow/commit/ee68eab7114137cb591d1e808e6a9b6d201963c6))
+- use explicit Link context to set component
+  ([1ad51d5](https://github.com/mittwald/flow/commit/1ad51d5c475853bc4c56baa1cdf9373d29410692))
+
+### Features
+
+- Add Action component
+  ([f50ba0f](https://github.com/mittwald/flow/commit/f50ba0f7749efe4ebb529f98ad44b3e5efd65d15))
+- add breadcrumb component
+  ([c99c2f9](https://github.com/mittwald/flow/commit/c99c2f938cfdfa10181a71baad1617f55cae3aeb))
+- add NavigationGroup component
+  ([4d8b7a5](https://github.com/mittwald/flow/commit/4d8b7a5d8b1283ffe6f5c9db6559f04c098e59dd))
+- add package for overlayControler
+  ([e166cb2](https://github.com/mittwald/flow/commit/e166cb2d7ed975e7d1ab0a3b28e25593585dacfb))
+- add styling for List Items
+  ([6432a00](https://github.com/mittwald/flow/commit/6432a00c4312902a64459b7b961df6aff49beeb8))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.55](https://github.com/mittwald/flow/compare/0.1.0-alpha.54...0.1.0-alpha.55) (2024-03-26)
 
 ### Features

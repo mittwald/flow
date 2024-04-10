@@ -1,33 +1,28 @@
-import List from "@/components/List/model/List";
-import {
+import type List from "@/components/List/model/List";
+import type {
   DataLoaderOptions,
   DataLoaderResult,
   DataSource,
   IncrementalLoaderShape,
 } from "@/components/List/model/loading/types";
-import { AnyData } from "@/components/List/model/item/types";
-import { AsyncResource, getAsyncResource } from "@mittwald/react-use-promise";
-import { Signal, useSignal } from "@preact/signals-react";
-import { useEffect, useMemo } from "react";
-import { useSignals } from "@preact/signals-react/runtime";
+import type { AnyData } from "@/components/List/model/item/types";
+import type { AsyncResource } from "@mittwald/react-use-promise";
+import { getAsyncResource } from "@mittwald/react-use-promise";
+import { useEffect } from "react";
 import { times } from "remeda";
+import { IncrementalLoaderState } from "@/components/List/model/loading/IncrementalLoaderState";
 
 const emptyData: AnyData[] = [];
-
-type AsyncResourceLoadingState = AsyncResource["state"]["value"];
-type PagesData = Record<number, AnyData[]>;
-type PagesLoadingState = Record<number, AsyncResourceLoadingState>;
 
 export class IncrementalLoader<T> {
   private readonly list: List<T>;
   private readonly dataSource: DataSource<T>;
-  private readonly pagesDataSignal: Signal<PagesData>;
-  private readonly pagesLoadingStateSignal: Signal<PagesLoadingState>;
   public readonly manualSorting: boolean;
   public readonly manualFiltering: boolean;
   public readonly manualPagination: boolean;
+  public readonly loaderState: IncrementalLoaderState<T>;
 
-  public constructor(list: List<T>, shape: IncrementalLoaderShape<T> = {}) {
+  private constructor(list: List<T>, shape: IncrementalLoaderShape<T> = {}) {
     const { source } = shape;
 
     this.dataSource = source ?? { staticData: emptyData };
@@ -48,89 +43,85 @@ export class IncrementalLoader<T> {
         : undefined;
 
     this.list = list;
-    this.pagesDataSignal = useSignal<PagesData>({});
-    this.pagesLoadingStateSignal = useSignal<PagesLoadingState>({});
+    this.loaderState = IncrementalLoaderState.useNew<T>();
 
     this.manualPagination = manualPagination ?? false;
     this.manualFiltering = manualFiltering ?? this.manualPagination;
     this.manualSorting = manualSorting ?? this.manualPagination;
-
     this.list.filters.forEach((f) => f.onFilterUpdated(() => this.reset()));
   }
 
+  public static useNew<T>(
+    list: List<T>,
+    shape: IncrementalLoaderShape<T> = {},
+  ): IncrementalLoader<T> {
+    return new IncrementalLoader(list, shape);
+  }
+
   private reset(): void {
-    this.pagesLoadingStateSignal.value = {};
-    this.pagesDataSignal.value = {};
-    this.list.reactTable.table.setPagination(() => ({
-      pageIndex: 0,
-      pageSize: this.list.pagination.initialPageSize,
-    }));
+    this.loaderState.reset();
   }
 
   public useIsLoading(): boolean {
-    useSignals();
-    return Object.values(this.pagesLoadingStateSignal.value).some(
-      (s) => s === "loading",
-    );
+    return this.loaderState.useIsLoading();
   }
 
   public useData(): T[] {
-    useSignals();
-    const pagesData = Object.values(this.pagesDataSignal.value);
-    return useMemo(
-      () => pagesData.flatMap((d) => d),
-      [this.pagesDataSignal.value],
-    );
-  }
-
-  public useSuspenseHook(pageIndex: number): void {
-    useEffect(() => {
-      this.updatePageLoadingState(pageIndex, "loading");
-      return () => {
-        this.updatePageLoadingState(pageIndex, "loaded");
-      };
-    }, [pageIndex]);
+    return this.loaderState.useMergedData();
   }
 
   public getLoaderInvocationHooks(): Array<() => void> {
-    const pages = times(this.list.pagination.getPageIndex() + 1, (i) => i);
-    return pages.map((i) => () => {
-      this.useLoadPage(i);
+    const batchesCount = times(this.list.batches.getBatchIndex() + 1, (i) => i);
+    return batchesCount.map((i) => () => {
+      this.useLoadBatch(i);
     });
   }
 
-  private useLoadPage(pageIndex: number): void {
-    const asyncResource = this.getPageDataAsyncResource(pageIndex);
+  private useLoadBatch(batchIndex: number): void {
+    const asyncResource = this.getBatchDataAsyncResource(batchIndex);
 
-    const { data, itemTotalCount } = asyncResource.use();
-    const loadingState = asyncResource.watchState();
+    const asyncData = asyncResource.use({
+      useSuspense: false,
+    });
 
     useEffect(() => {
-      this.updatePageData(pageIndex, data);
+      if (!asyncData.hasValue) {
+        return;
+      }
+
+      const { data, itemTotalCount } = asyncData.value;
+      this.loaderState.setDataBatch(batchIndex, data);
 
       if (itemTotalCount !== undefined) {
-        this.list.pagination.updateItemTotalCount(itemTotalCount);
+        this.list.batches.updateItemTotalCount(itemTotalCount);
       }
-    }, [pageIndex, data, itemTotalCount, asyncResource]);
+    }, [batchIndex, asyncData.maybeValue]);
 
     useEffect(() => {
-      this.updatePageLoadingState(pageIndex, loadingState);
-    }, [pageIndex, loadingState]);
+      this.loaderState.setBatchLoadingState(
+        batchIndex,
+        asyncResource.state.value,
+      );
+
+      return asyncResource.state.observe((newState) => {
+        this.loaderState.setBatchLoadingState(batchIndex, newState);
+      });
+    }, [asyncResource, batchIndex]);
   }
 
-  private getDataLoaderOptions(pageIndex: number): DataLoaderOptions<T> {
+  private getDataLoaderOptions(batchIndex: number): DataLoaderOptions<T> {
     return {
       pagination: this.manualPagination
         ? {
-            limit: this.list.pagination.initialPageSize,
-            offset: this.list.pagination.initialPageSize * pageIndex,
+            limit: this.list.batches.batchSize,
+            offset: this.list.batches.batchSize * batchIndex,
           }
         : undefined,
 
       sorting: this.manualSorting
         ? (Object.fromEntries(
             this.list.sorting
-              .filter((s) => s.direction !== false)
+              .filter((s) => s.isSorted())
               .map((s) => [s.property, s.direction]),
           ) as DataLoaderOptions<T>["sorting"])
         : undefined,
@@ -148,11 +139,11 @@ export class IncrementalLoader<T> {
     };
   }
 
-  private getPageDataAsyncResource(
-    pageIndex: number,
+  private getBatchDataAsyncResource(
+    batchIndex: number,
   ): AsyncResource<DataLoaderResult<T>> {
     const dataSource = this.dataSource;
-    const loaderOptions = this.getDataLoaderOptions(pageIndex);
+    const loaderOptions = this.getDataLoaderOptions(batchIndex);
 
     if ("staticData" in dataSource) {
       const staticData = dataSource.staticData;
@@ -176,37 +167,5 @@ export class IncrementalLoader<T> {
     }
 
     throw new Error("Unknown data source");
-  }
-
-  private updatePageData(pageIndex: number, data: T[]): void {
-    if (this.pagesDataSignal.value[pageIndex] !== data) {
-      this.pagesDataSignal.value = {
-        ...this.pagesDataSignal.value,
-        [pageIndex]: data,
-      };
-    }
-  }
-
-  private updatePageLoadingState(
-    pageIndex: number,
-    loadingState: AsyncResourceLoadingState,
-  ): void {
-    if (this.pagesLoadingStateSignal.value[pageIndex] !== loadingState) {
-      this.pagesLoadingStateSignal.value = {
-        ...this.pagesLoadingStateSignal.value,
-        [pageIndex]: loadingState,
-      };
-    }
-  }
-
-  public loadMore(): void {
-    if (this.manualPagination) {
-      this.list.pagination.nextPage();
-    } else {
-      this.list.pagination.updatePageSize(
-        this.list.pagination.getPageSize() +
-          this.list.pagination.initialPageSize,
-      );
-    }
   }
 }

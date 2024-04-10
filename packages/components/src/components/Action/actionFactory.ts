@@ -1,17 +1,15 @@
-import {
+import type {
   ActionFn,
   CloseModalAction,
   FunctionAction,
   OpenModalAction,
   ToggleModalAction,
 } from "@/components/Action/types";
-import { OverlayController } from "@/lib/controller/overlayController/types";
+import type { OverlayState } from "@/lib/controller/overlay";
 
-type ModalActionArg = boolean | OverlayController;
+type ModalActionArg = boolean | OverlayState;
 
-function getModalController(
-  arg: ModalActionArg,
-): OverlayController | undefined {
+function getModalController(arg: ModalActionArg): OverlayState | undefined {
   return typeof arg === "boolean" ? undefined : arg;
 }
 

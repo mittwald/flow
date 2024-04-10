@@ -1,0 +1,69 @@
+import type List from "@/components/List/model/List";
+import type { BatchesControllerShape } from "@/components/List/model/pagination/types";
+import type { Table } from "@tanstack/react-table";
+
+export class BatchesController<T> {
+  public readonly batchSize: number;
+  private readonly list: List<T>;
+
+  public constructor(list: List<T>, shape: BatchesControllerShape = {}) {
+    const { batchSize = 20 } = shape;
+
+    this.list = list;
+    this.batchSize = batchSize;
+    list.filters.forEach((f) => f.onFilterUpdated(() => this.reset()));
+  }
+
+  private get reactTable(): Table<T> {
+    return this.list.reactTable.table;
+  }
+
+  public getBatchIndex(): number {
+    return this.reactTable.getState().pagination.pageIndex;
+  }
+
+  public hasNextBatch(): boolean {
+    return this.reactTable.getCanNextPage();
+  }
+
+  public getTotalItemsCount(): number | undefined {
+    return this.reactTable.getRowCount();
+  }
+
+  public getFilteredItemsCount(): number {
+    return this.reactTable.getFilteredRowModel().rows.length;
+  }
+
+  public getVisibleItemsCount(): number | undefined {
+    return this.reactTable.getRowModel().rows.length;
+  }
+
+  public updateItemTotalCount(value: number): void {
+    this.reactTable.setOptions((s) => ({
+      ...s,
+      rowCount: value,
+    }));
+  }
+
+  public reset(): void {
+    this.updateItemTotalCount(0);
+    this.reactTable.setPagination(() => ({
+      pageIndex: 0,
+      pageSize: this.batchSize,
+    }));
+  }
+
+  public nextBatch(): void {
+    if (this.list.loader.manualPagination) {
+      this.reactTable.nextPage();
+    } else {
+      const newSize =
+        this.reactTable.getState().pagination.pageSize + this.batchSize;
+
+      this.reactTable.setPagination((prev) => ({
+        ...prev,
+        pageSize: newSize,
+      }));
+    }
+  }
+}

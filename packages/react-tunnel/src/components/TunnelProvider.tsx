@@ -1,16 +1,13 @@
-import React, { FC, PropsWithChildren } from "react";
+import type { FC, PropsWithChildren } from "react";
+import React from "react";
 import tunnelContext from "@/context";
-import { useSignal } from "@preact/signals-react";
+import { TunnelState } from "@/TunnelState";
 
 export const TunnelProvider: FC<PropsWithChildren> = (props) => {
   const { children } = props;
 
   return (
-    <tunnelContext.Provider
-      value={{
-        children: useSignal({}),
-      }}
-    >
+    <tunnelContext.Provider value={TunnelState.useNew()}>
       {children}
     </tunnelContext.Provider>
   );

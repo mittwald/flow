@@ -1,9 +1,10 @@
-import {
+import type {
   FlowComponentName,
   FlowComponentProps as FlowComponentPropsOfName,
 } from "@/components/propTypes";
-import React, { ComponentType } from "react";
-import { PropsWithHOC, PropsWithTunnel } from "@/lib/types/props";
+import type { ComponentType } from "react";
+import React from "react";
+import type { PropsWithHOC, PropsWithTunnel } from "@/lib/types/props";
 import { useProps } from "@/lib/propsContext";
 import { TunnelEntry } from "@mittwald/react-tunnel";
 

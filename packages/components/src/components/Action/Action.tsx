@@ -1,15 +1,17 @@
-import React, { FC, PropsWithChildren } from "react";
-import { PropsContext, PropsContextProvider } from "@/lib/propsContext";
-import { ActionFn } from "@/components/Action/types";
+import type { FC, PropsWithChildren } from "react";
+import React from "react";
+import type { PropsContext } from "@/lib/propsContext";
+import { PropsContextProvider } from "@/lib/propsContext";
+import type { ActionFn } from "@/components/Action/types";
 import { useCallAction } from "@/components/Action/hooks/useCallAction";
 import { actions } from "@/components/Action/actionFactory";
-import { OverlayController } from "@/lib/controller/overlayController/types";
+import type { OverlayState } from "@/lib/controller/overlay";
 
 export interface ActionProps extends PropsWithChildren {
   action?: ActionFn;
-  closeModal?: boolean | OverlayController;
-  openModal?: boolean | OverlayController;
-  toggleModal?: boolean | OverlayController;
+  closeModal?: boolean | OverlayState;
+  openModal?: boolean | OverlayState;
+  toggleModal?: boolean | OverlayState;
   feedback?: boolean;
 }
 
@@ -33,18 +35,19 @@ export const Action: FC<ActionProps> = (props) => {
           ? actions.closeModal(closeModal)
           : undefined;
 
-  const { callAction, state } = useCallAction(action, { feedback });
+  const actionController = useCallAction(action, { feedback });
+  const state = actionController.state.useObserve();
 
   const propsContext: PropsContext = {
     Button: {
-      onPress: callAction,
+      onPress: actionController.callAction,
       isPending: state.isPending,
       isDisabled: state.isExecuting,
       isSucceeded: state.isSucceeded,
       isFailed: state.isFailed,
     },
     Action: {
-      action: callAction,
+      action: actionController.callAction,
     },
   };
 

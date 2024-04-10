@@ -39,7 +39,7 @@ export const WithInitials: Story = {
 
 export const WithIcon: Story = {
   render: (props) => (
-    <Avatar {...props}>
+    <Avatar {...props} variant={1}>
       <IconApp />
     </Avatar>
   ),

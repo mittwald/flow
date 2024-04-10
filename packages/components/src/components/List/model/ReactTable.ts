@@ -1,33 +1,37 @@
-import { Signal, useSignal, useSignalEffect } from "@preact/signals-react";
-import {
+import type {
   Column,
   ColumnDef,
+  Table,
+  TableOptions,
+  TableState,
+  Updater,
+} from "@tanstack/react-table";
+import {
   getCoreRowModel,
   getFacetedUniqueValues,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-  Table,
-  TableOptions,
-  TableState,
-  Updater,
   useReactTable,
 } from "@tanstack/react-table";
-import List from "@/components/List/model/List";
-import { PropertyName } from "@/components/List/model/item/Item";
+import type List from "@/components/List/model/List";
+import type { PropertyName } from "@/components/List/model/item/Item";
 import invariant from "invariant";
+import { useLocalObservable } from "mobx-react-lite";
+import { runInAction } from "mobx";
+import { useAutorunEffect } from "@/lib/mobx/useAutorunEffect";
 
 export class ReactTable<T> {
   public readonly list: List<T>;
   public readonly table: Table<T>;
-  private readonly tableState: Signal<TableState | undefined>;
+  private readonly tableState: { value: TableState | undefined };
 
   private constructor(
     list: List<T>,
     tableOptions: Partial<TableOptions<T>> = {},
   ) {
     this.list = list;
-    this.tableState = useSignal(undefined);
+    this.tableState = useLocalObservable(() => ({ value: undefined }));
     this.table = this.useReactTable(tableOptions);
   }
 
@@ -41,12 +45,18 @@ export class ReactTable<T> {
   private useReactTable(tableOptions: Partial<TableOptions<T>> = {}): Table<T> {
     const data = this.list.loader.useData();
 
+    const defaultSorting = this.list.sorting.filter((s) => s.defaultEnabled);
+
     const table = useReactTable({
       data,
       initialState: {
         pagination: {
-          pageSize: this.list.pagination.initialPageSize,
+          pageSize: this.list.batches.batchSize,
         },
+        sorting: defaultSorting.map((s) => ({
+          id: String(s.property),
+          desc: s.direction === "desc",
+        })),
       },
       columns: this.getTableColumnDefs(),
       getCoreRowModel: getCoreRowModel(),
@@ -64,7 +74,7 @@ export class ReactTable<T> {
   }
 
   private useUpdateTableState(table: Table<T>): void {
-    useSignalEffect(() => {
+    useAutorunEffect(() => {
       const state = this.tableState.value;
 
       if (state) {
@@ -88,7 +98,9 @@ export class ReactTable<T> {
     const newState =
       typeof updater === "function" ? updater(prevState) : updater;
 
-    this.tableState.value = this.getUpdatedTableState(prevState, newState);
+    runInAction(() => {
+      this.tableState.value = this.getUpdatedTableState(prevState, newState);
+    });
   };
 
   private getUpdatedTableState(

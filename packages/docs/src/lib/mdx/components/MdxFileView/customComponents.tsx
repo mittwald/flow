@@ -1,6 +1,6 @@
 import styles from "./customComponents.module.css";
 import Heading from "@mittwald/flow-react-components/Heading";
-import { MDXComponents } from "mdx/types";
+import type { MDXComponents } from "mdx/types";
 import InlineAlert from "@mittwald/flow-react-components/InlineAlert";
 import Content from "@mittwald/flow-react-components/Content";
 import React from "react";

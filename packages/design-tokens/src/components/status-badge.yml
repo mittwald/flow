@@ -5,10 +5,14 @@ status-badge:
     value: "{font-weight.bold}"
   corner-radius:
     value: "{corner-radius.default}"
+  corner-radius-icon-only:
+    value: "{corner-radius.round}"
   padding-y:
-    value: "{size-rem.xs}"
+    value: "{size-rem.xxs}"
   padding-x:
     value: "{size-rem.s}"
+  padding-icon-only:
+    value: "{size-rem.xxs}"
   icon-to-text-spacing:
     value: "{size-rem.xs}"
 

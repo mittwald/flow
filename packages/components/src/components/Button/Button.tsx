@@ -1,12 +1,10 @@
-import React, { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
+import React from "react";
 import styles from "./Button.module.scss";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
-import {
-  ClearPropsContext,
-  PropsContext,
-  PropsContextProvider,
-} from "@/lib/propsContext";
+import type { PropsContext } from "@/lib/propsContext";
+import { ClearPropsContext, PropsContextProvider } from "@/lib/propsContext";
 import {
   IconFailed,
   IconPending,
@@ -14,10 +12,8 @@ import {
 } from "@/components/Icon/components/icons";
 import { Wrap } from "@/components/Wrap";
 import { Text } from "@/components/Text";
-import {
-  flowComponent,
-  FlowComponentProps,
-} from "@/lib/componentFactory/flowComponent";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 
