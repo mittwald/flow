@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./RadioButton.module.scss";
 import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
+import { ClearPropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import type { RadioProps } from "@/components/RadioGroup";
 import { Radio } from "@/components/RadioGroup";
@@ -25,11 +26,13 @@ export const RadioButton = flowComponent("RadioButton", (props) => {
   };
 
   return (
-    <Radio {...rest} className={rootClassName} ref={ref}>
-      <PropsContextProvider props={propsContext}>
-        {children}
-      </PropsContextProvider>
-    </Radio>
+    <ClearPropsContext>
+      <Radio {...rest} className={rootClassName} ref={ref}>
+        <PropsContextProvider props={propsContext}>
+          {children}
+        </PropsContextProvider>
+      </Radio>
+    </ClearPropsContext>
   );
 });
 

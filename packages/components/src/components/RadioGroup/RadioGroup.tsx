@@ -32,7 +32,6 @@ export const RadioGroup = flowComponent("RadioGroup", (props) => {
   const propsContext: PropsContext = {
     Label: {
       className: formFieldStyles.label,
-      tunnelId: "label",
     },
     FieldDescription: {
       className: formFieldStyles.fieldDescription,
@@ -41,6 +40,12 @@ export const RadioGroup = flowComponent("RadioGroup", (props) => {
     FieldError: {
       className: formFieldStyles.customFieldError,
       tunnelId: "fieldError",
+    },
+    RadioButton: {
+      tunnelId: "radios",
+    },
+    Radio: {
+      tunnelId: "radios",
     },
   };
 
@@ -54,15 +59,18 @@ export const RadioGroup = flowComponent("RadioGroup", (props) => {
 
   return (
     <Aria.RadioGroup {...rest} className={rootClassName}>
-      <PropsContextProvider props={propsContext}>
-        <TunnelProvider>
-          <TunnelExit id="label" />
+      <TunnelProvider>
+        <PropsContextProvider props={propsContext}>
+          {children}
+
           <Wrap if={variant === "segmented"}>
             <SegmentedGroup>
               <Wrap if={variant === "default" && hasRadioButtons}>
                 <ColumnLayout s={s} m={m} l={l} className={styles.radioGroup}>
                   <Wrap if={variant === "default" && !hasRadioButtons}>
-                    <div className={styles.radioGroup}>{children}</div>
+                    <div className={styles.radioGroup}>
+                      <TunnelExit id="radios" />
+                    </div>
                   </Wrap>
                 </ColumnLayout>
               </Wrap>
@@ -70,8 +78,8 @@ export const RadioGroup = flowComponent("RadioGroup", (props) => {
           </Wrap>
           <TunnelExit id="fieldDescription" />
           <TunnelExit id="fieldError" />
-        </TunnelProvider>
-      </PropsContextProvider>
+        </PropsContextProvider>
+      </TunnelProvider>
       <FieldError className={formFieldStyles.fieldError} />
     </Aria.RadioGroup>
   );
