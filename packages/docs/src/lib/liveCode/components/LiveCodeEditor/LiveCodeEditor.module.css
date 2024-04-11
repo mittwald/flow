@@ -1,5 +1,5 @@
 .liveCodeEditor {
-  --border-color: var(--neutral-outline-border-color--default);
+  --border-color: var(--neutral--color--500);
   border: 1px solid var(--border-color);
   border-radius: var(--corner-radius--default);
   background-color: var(--neutral--color--200);
@@ -24,11 +24,15 @@
 
 .editor pre {
   white-space: pre !important;
-
   background-color: var(--neutral--color--300) !important;
 }
 
 .toggleCode {
   margin-inline-start: auto;
+}
+
+.actions {
   margin-block-start: auto;
+  background-color: var(--neutral--color--300);
+  border-top: 1px solid var(--border-color);
 }

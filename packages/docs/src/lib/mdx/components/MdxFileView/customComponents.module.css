@@ -35,8 +35,7 @@
 .hr {
   margin-block: var(--size-px--m);
   border: 0;
-  border-top: var(--border-width--100) solid
-    var(--neutral-outline-border-color--default);
+  border-top: var(--border-width--100) solid var(--neutral--color--500);
 }
 
 .doAndDont {

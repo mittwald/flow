@@ -56,14 +56,16 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
     >
       <div className={clsx(styles.liveCodeEditor, className)}>
         <LivePreview className={styles.preview} />
-        <Button
-          className={styles.toggleCode}
-          size="s"
-          style="plain"
-          onPress={() => setCodeVisible(!codeVisible)}
-        >
-          <IconCode />
-        </Button>
+        <div className={styles.actions}>
+          <Button
+            className={styles.toggleCode}
+            size="s"
+            style="plain"
+            onPress={() => setCodeVisible(!codeVisible)}
+          >
+            <IconCode />
+          </Button>
+        </div>
         {codeVisible && (
           <div className={styles.editorContainer}>
             <LiveEditor theme={themes.vsLight} className={styles.editor} />
