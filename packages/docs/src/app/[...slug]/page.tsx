@@ -1,11 +1,10 @@
 import MainContent from "@/app/_components/layout/MainContent";
-import MdxFileView from "@/lib/mdx/components/MdxFileView";
 import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
 import type { StaticParams } from "@/lib/mdx/MdxFile";
 import { LayoutCard } from "@mittwald/flow-react-components/LayoutCard";
-import { Tab, Tabs, TabTitle } from "@mittwald/flow-react-components/Tabs";
-import { Section } from "@mittwald/flow-react-components/Section";
+import { Tabs } from "@mittwald/flow-react-components/Tabs";
 import React from "react";
+import TabContent from "@/app/_components/layout/TabContent";
 
 const contentFolder = "src/content";
 
@@ -48,42 +47,19 @@ export default async function Page(props: Props) {
 
   return (
     <>
-      {indexMdxFile && (
-        <MainContent
-          title={indexMdxFile.getTitle()}
-          description={indexMdxFile.mdxSource.frontmatter.description}
-          component={indexMdxFile.mdxSource.frontmatter.component}
-        >
-          <MdxFileView mdxFile={indexMdxFile.serialize()} />
-        </MainContent>
-      )}
+      {indexMdxFile && <MainContent mdxFile={indexMdxFile} />}
 
       {(overviewMdxFile || developMdxFile || guidelinesMdxFile) && (
         <LayoutCard>
           <Tabs>
             {overviewMdxFile && (
-              <Tab>
-                <TabTitle>Overview</TabTitle>
-                <Section>
-                  <MdxFileView mdxFile={overviewMdxFile.serialize()} />
-                </Section>
-              </Tab>
+              <TabContent mdxFile={overviewMdxFile} tabTitle="Overview" />
             )}
             {developMdxFile && (
-              <Tab id="develop">
-                <TabTitle>Develop</TabTitle>
-                <Section>
-                  <MdxFileView mdxFile={developMdxFile.serialize()} />
-                </Section>
-              </Tab>
+              <TabContent mdxFile={developMdxFile} tabTitle="Develop" />
             )}
             {guidelinesMdxFile && (
-              <Tab id="guidelines">
-                <TabTitle>Guidelines</TabTitle>
-                <Section>
-                  <MdxFileView mdxFile={guidelinesMdxFile.serialize()} />
-                </Section>
-              </Tab>
+              <TabContent mdxFile={guidelinesMdxFile} tabTitle="Guidelines" />
             )}
           </Tabs>
         </LayoutCard>

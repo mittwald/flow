@@ -71,7 +71,7 @@ export const customComponents: MDXComponents = {
 
     return (
       <LinkProvider>
-        <Link href={`/02-components/content/${href}`}>{children}</Link>
+        <Link href={`/02-components/${href}`}>{children}</Link>
       </LinkProvider>
     );
   },

@@ -1,4 +1,5 @@
-import type { FC, PropsWithChildren, ReactNode } from "react";
+import type { FC } from "react";
+import React from "react";
 import Heading from "@mittwald/flow-react-components/Heading";
 import styles from "./MainContent.module.css";
 import { Link } from "@mittwald/flow-react-components/Link";
@@ -6,15 +7,17 @@ import { LayoutCard } from "@mittwald/flow-react-components/LayoutCard";
 import { Section } from "@mittwald/flow-react-components/Section";
 import { ColumnLayout } from "@mittwald/flow-react-components/ColumnLayout";
 import { IconExternalLink } from "@mittwald/flow-react-components/Icons";
+import type { MdxFile } from "@/lib/mdx/MdxFile";
+import MdxFileView from "@/lib/mdx/components/MdxFileView";
 
-interface Props extends PropsWithChildren {
-  title?: ReactNode;
-  description?: ReactNode;
-  component?: string;
+interface Props {
+  mdxFile: MdxFile;
 }
 
 export const MainContent: FC<Props> = (props) => {
-  const { title, description, component, children } = props;
+  const { mdxFile } = props;
+
+  const component = mdxFile.mdxSource.frontmatter.component;
 
   return (
     <>
@@ -22,9 +25,10 @@ export const MainContent: FC<Props> = (props) => {
         <ColumnLayout m={component ? [1, 1] : [1]}>
           <Section>
             <Heading className={styles.heading} level={1}>
-              {title}
+              {mdxFile.getTitle()}
             </Heading>
-            {description}
+
+            {mdxFile.mdxSource.frontmatter.description}
 
             {component && (
               <Link
@@ -35,7 +39,8 @@ export const MainContent: FC<Props> = (props) => {
               </Link>
             )}
           </Section>
-          {children}
+
+          <MdxFileView mdxFile={mdxFile.serialize()} />
         </ColumnLayout>
       </LayoutCard>
     </>
