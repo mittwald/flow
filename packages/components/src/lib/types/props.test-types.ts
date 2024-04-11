@@ -49,7 +49,7 @@ function testAssigningUnknownElementTypeThrowsError() {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function testAssigningElementTypeWorks() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const test: PropsWithElementType = {
+  const test: PropsWithElementType<"a"> = {
     elementType: "a",
   };
 }
@@ -57,7 +57,7 @@ function testAssigningElementTypeWorks() {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function testAssigningUnsupportedElementPropsThrowsError() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const test: PropsWithElementType = {
+  const test: PropsWithElementType<"a"> = {
     elementType: "a",
     // @ts-expect-error Is not supported
     href: "link",
@@ -67,7 +67,7 @@ function testAssigningUnsupportedElementPropsThrowsError() {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function testAssigningSupportedElementPropsWorks() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const test: PropsWithElementType = {
+  const test: PropsWithElementType<"a"> = {
     elementType: "a",
     title: "Hello!",
   };

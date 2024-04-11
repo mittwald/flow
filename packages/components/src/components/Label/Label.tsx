@@ -18,7 +18,14 @@ export interface LabelProps
 }
 
 export const Label = flowComponent("Label", (props) => {
-  const { children, className, optional, unstyled = false, ...rest } = props;
+  const {
+    children,
+    className,
+    optional,
+    ref,
+    unstyled = false,
+    ...rest
+  } = props;
 
   const stringFormatter = useLocalizedStringFormatter(locales);
 
@@ -28,7 +35,7 @@ export const Label = flowComponent("Label", (props) => {
 
   return (
     <ClearPropsContext>
-      <Aria.Label {...rest} className={rootClassName}>
+      <Aria.Label {...rest} className={rootClassName} ref={ref}>
         {children}
         {optional && optionalMarker}
       </Aria.Label>

@@ -190,9 +190,13 @@
       "types": "./dist/types/components/Tooltip/index.d.ts",
       "import": "./dist/Tooltip.js"
     },
-    "./nextjs/LinkProvider": {
-      "types": "./dist/types/components/nextjs/LinkProvider/index.d.ts",
-      "import": "./dist/nextjs/LinkProvider.js"
+    "./nextjs": {
+      "types": "./dist/types/integrations/nextjs/index.d.ts",
+      "import": "./dist/nextjs.js"
+    },
+    "./react-hook-form": {
+      "types": "./dist/types/integrations/react-hook-form/index.d.ts",
+      "import": "./dist/react-hook-form.js"
     },
     "./styles": "./dist/styles.css"
   },
@@ -279,6 +283,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-element-to-jsx-string": "^15.0.0",
+    "react-hook-form": "^7.51.2",
     "rollup": "^4.14.1",
     "sass": "^1.74.1",
     "storybook": "^8.0.6",
@@ -297,13 +302,17 @@
     "@mittwald/react-use-promise": "^2.3.12",
     "next": "*",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-hook-form": "*"
   },
   "peerDependenciesMeta": {
     "@mittwald/react-use-promise": {
       "optional": true
     },
     "next": {
+      "optional": true
+    },
+    "react-hook-form": {
       "optional": true
     }
   }

@@ -4629,6 +4629,7 @@ const RAW_RUNTIME_STATE =
           ["@types/prop-types", "npm:15.7.12"],\
           ["@types/react", "npm:18.2.75"],\
           ["@types/react-dom", "npm:18.2.24"],\
+          ["@types/react-hook-form", null],\
           ["@types/rollup", "npm:0.54.0"],\
           ["@vitejs/plugin-react", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:4.2.1"],\
           ["@vitest/coverage-v8", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:1.4.0"],\
@@ -4656,6 +4657,7 @@ const RAW_RUNTIME_STATE =
           ["react-children-utilities", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:2.10.0"],\
           ["react-dom", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:18.2.0"],\
           ["react-element-to-jsx-string", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:15.0.0"],\
+          ["react-hook-form", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:7.51.2"],\
           ["react-stately", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.30.1"],\
           ["remeda", "npm:1.58.1"],\
           ["rollup", "npm:4.14.1"],\
@@ -4676,6 +4678,7 @@ const RAW_RUNTIME_STATE =
           "@types/mittwald__react-use-promise",\
           "@types/next",\
           "@types/react-dom",\
+          "@types/react-hook-form",\
           "@types/react",\
           "next",\
           "react-dom",\
@@ -4722,6 +4725,7 @@ const RAW_RUNTIME_STATE =
           ["@types/prop-types", "npm:15.7.12"],\
           ["@types/react", "npm:18.2.75"],\
           ["@types/react-dom", "npm:18.2.24"],\
+          ["@types/react-hook-form", null],\
           ["@types/rollup", "npm:0.54.0"],\
           ["@vitejs/plugin-react", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:4.2.1"],\
           ["@vitest/coverage-v8", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:1.4.0"],\
@@ -4749,6 +4753,7 @@ const RAW_RUNTIME_STATE =
           ["react-children-utilities", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:2.10.0"],\
           ["react-dom", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:18.2.0"],\
           ["react-element-to-jsx-string", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:15.0.0"],\
+          ["react-hook-form", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:7.51.2"],\
           ["react-stately", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.30.1"],\
           ["remeda", "npm:1.58.1"],\
           ["rollup", "npm:4.14.1"],\
@@ -4767,7 +4772,8 @@ const RAW_RUNTIME_STATE =
         ],\
         "packagePeers": [\
           "@types/mittwald__react-use-promise",\
-          "@types/next"\
+          "@types/next",\
+          "@types/react-hook-form"\
         ],\
         "linkType": "SOFT"\
       }],\
@@ -4835,6 +4841,7 @@ const RAW_RUNTIME_STATE =
           ["react-children-utilities", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:2.10.0"],\
           ["react-dom", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:18.2.0"],\
           ["react-element-to-jsx-string", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:15.0.0"],\
+          ["react-hook-form", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:7.51.2"],\
           ["react-stately", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.30.1"],\
           ["remeda", "npm:1.58.1"],\
           ["rollup", "npm:4.14.1"],\
@@ -24113,6 +24120,28 @@ const RAW_RUNTIME_STATE =
           "@types/react-dom",\
           "@types/react",\
           "react-dom",\
+          "react"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["react-hook-form", [\
+      ["npm:7.51.2", {\
+        "packageLocation": "./.yarn/cache/react-hook-form-npm-7.51.2-198f65d4e9-9d5e303b64.zip/node_modules/react-hook-form/",\
+        "packageDependencies": [\
+          ["react-hook-form", "npm:7.51.2"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:7.51.2", {\
+        "packageLocation": "./.yarn/__virtual__/react-hook-form-virtual-61986244a5/0/cache/react-hook-form-npm-7.51.2-198f65d4e9-9d5e303b64.zip/node_modules/react-hook-form/",\
+        "packageDependencies": [\
+          ["react-hook-form", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:7.51.2"],\
+          ["@types/react", "npm:18.2.75"],\
+          ["react", "npm:18.2.0"]\
+        ],\
+        "packagePeers": [\
+          "@types/react",\
           "react"\
         ],\
         "linkType": "HARD"\

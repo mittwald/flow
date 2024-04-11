@@ -13,7 +13,7 @@ export interface InitialsProps extends PropsWithChildren, FlowComponentProps {
 }
 
 export const Initials = flowComponent("Initials", (props) => {
-  const { children, className } = props;
+  const { children, className, ref } = props;
 
   const textContent = onlyText(children);
   const initials = getInitialsFromString(textContent);
@@ -26,7 +26,7 @@ export const Initials = flowComponent("Initials", (props) => {
 
   return (
     <ClearPropsContext>
-      <div aria-label={textContent} className={rootClassName}>
+      <div aria-label={textContent} className={rootClassName} ref={ref}>
         {initialsElements}
       </div>
     </ClearPropsContext>
