@@ -13,7 +13,6 @@ import formFieldStyles from "../FormField/FormField.module.scss";
 import { deepFindOfType } from "@/lib/react/deepFindOfType";
 import RadioButton from "./components/RadioButton";
 import { SegmentedGroup } from "@/components/RadioGroup/components/SegmentedGroup";
-import { Wrap } from "@/components/Wrap";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
@@ -63,19 +62,24 @@ export const RadioGroup = flowComponent("RadioGroup", (props) => {
         <PropsContextProvider props={propsContext}>
           {children}
 
-          <Wrap if={variant === "segmented"}>
+          {variant === "segmented" && (
             <SegmentedGroup>
-              <Wrap if={variant === "default" && hasRadioButtons}>
-                <ColumnLayout s={s} m={m} l={l} className={styles.radioGroup}>
-                  <Wrap if={variant === "default" && !hasRadioButtons}>
-                    <div className={styles.radioGroup}>
-                      <TunnelExit id="radios" />
-                    </div>
-                  </Wrap>
-                </ColumnLayout>
-              </Wrap>
+              <TunnelExit id="radios" />
             </SegmentedGroup>
-          </Wrap>
+          )}
+
+          {variant === "default" && hasRadioButtons && (
+            <ColumnLayout s={s} m={m} l={l} className={styles.radioGroup}>
+              <TunnelExit id="radios" />
+            </ColumnLayout>
+          )}
+
+          {variant === "default" && !hasRadioButtons && (
+            <div className={styles.radioGroup}>
+              <TunnelExit id="radios" />
+            </div>
+          )}
+
           <TunnelExit id="fieldDescription" />
           <TunnelExit id="fieldError" />
         </PropsContextProvider>

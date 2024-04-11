@@ -13,7 +13,7 @@ import { Wrap } from "@/components/Wrap";
 export interface TextProps
   extends PropsWithChildren,
     Omit<Aria.TextProps, "children" | "elementType">,
-    PropsWithElementType<"span" | "div">,
+    PropsWithElementType<"span" | "div" | "p">,
     FlowComponentProps {
   emulateBoldWidth?: boolean;
 }

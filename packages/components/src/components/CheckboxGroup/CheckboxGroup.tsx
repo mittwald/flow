@@ -14,7 +14,6 @@ import { ColumnLayout } from "@/components/ColumnLayout";
 import { deepFindOfType } from "@/lib/react/deepFindOfType";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import { Wrap } from "@/components/Wrap";
 
 export interface CheckboxGroupProps
   extends PropsWithChildren<Omit<Aria.CheckboxGroupProps, "children">>,
@@ -54,15 +53,17 @@ export const CheckboxGroup = flowComponent("CheckboxGroup", (props) => {
         <TunnelProvider>
           {children}
 
-          <Wrap if={hasCheckboxButtons}>
+          {hasCheckboxButtons && (
             <ColumnLayout s={s} m={m} l={l} className={styles.checkboxGroup}>
-              <Wrap if={!hasCheckboxButtons}>
-                <div className={styles.checkboxGroup}>
-                  <TunnelExit id="checkboxes" />
-                </div>
-              </Wrap>
+              <TunnelExit id="checkboxes" />
             </ColumnLayout>
-          </Wrap>
+          )}
+
+          {!hasCheckboxButtons && (
+            <div className={styles.checkboxGroup}>
+              <TunnelExit id="checkboxes" />
+            </div>
+          )}
 
           <TunnelExit id="fieldDescription" />
           <TunnelExit id="fieldError" />
