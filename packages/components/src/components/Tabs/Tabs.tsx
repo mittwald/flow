@@ -16,13 +16,13 @@ export const Tabs: FC<TabsProps> = (props) => {
 
   return (
     <TunnelProvider>
+      {children}
       <Aria.Tabs className={rootClassName} {...rest}>
         <Aria.TabList className={styles.tabList}>
           <TunnelExit id="TabTitles" />
         </Aria.TabList>
         <TunnelExit id="TabPanels" />
       </Aria.Tabs>
-      {children}
     </TunnelProvider>
   );
 };
