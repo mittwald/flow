@@ -13,7 +13,7 @@ import { OverlayContextProvider } from "@/lib/controller/overlay/context";
 
 export interface ModalProps extends PropsWithChildren {
   size?: "s" | "m" | "l";
-  panel?: boolean;
+  offCanvas?: boolean;
   state?: OverlayState;
   defaultOpen?: boolean;
 }
@@ -21,7 +21,7 @@ export interface ModalProps extends PropsWithChildren {
 export const Modal: FC<ModalProps> = (props) => {
   const {
     size = "s",
-    panel,
+    offCanvas,
     state: stateFromProps,
     defaultOpen,
     children,
@@ -41,7 +41,7 @@ export const Modal: FC<ModalProps> = (props) => {
   const rootClassName = clsx(
     styles.modal,
     styles[`size-${size}`],
-    panel && styles.panel,
+    offCanvas && styles.offCanvas,
   );
 
   const propsContext: PropsContext = {

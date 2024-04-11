@@ -105,4 +105,4 @@ const propsContextSupportingComponentsMap: Record<
 
 export const propsContextSupportingComponents = Object.keys(
   propsContextSupportingComponentsMap,
-);
+) as Array<keyof FlowComponentPropsTypes>;

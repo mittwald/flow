@@ -5,7 +5,7 @@ import {
   IconProject,
   IconServer,
 } from "@mittwald/flow-react-components/Icons";
-import { Link } from "@mittwald/flow-react-components/Link";
+import Link from "@mittwald/flow-react-components/Link";
 
 <Navigation aria-label="Main menu">
   <Link href="#">

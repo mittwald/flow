@@ -85,6 +85,9 @@ export const Button = flowComponent("Button", (props) => {
     Text: {
       className: styles.text,
     },
+    Avatar: {
+      className: styles.avatar,
+    },
   };
 
   const stringFormatter = useLocalizedStringFormatter(locales);
