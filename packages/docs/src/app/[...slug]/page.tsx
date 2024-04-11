@@ -3,12 +3,7 @@ import MdxFileView from "@/lib/mdx/components/MdxFileView";
 import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
 import type { StaticParams } from "@/lib/mdx/MdxFile";
 import { LayoutCard } from "@mittwald/flow-react-components/LayoutCard";
-import {
-  Tab,
-  TabList,
-  TabPanel,
-  Tabs,
-} from "@mittwald/flow-react-components/Tabs";
+import { Tab, Tabs, TabTitle } from "@mittwald/flow-react-components/Tabs";
 import { Section } from "@mittwald/flow-react-components/Section";
 import React from "react";
 
@@ -66,31 +61,29 @@ export default async function Page(props: Props) {
       {(overviewMdxFile || developMdxFile || guidelinesMdxFile) && (
         <LayoutCard>
           <Tabs>
-            <TabList>
-              {overviewMdxFile && <Tab id="overview">Overview</Tab>}
-              {developMdxFile && <Tab id="develop">Develop</Tab>}
-              {guidelinesMdxFile && <Tab id="guidelines">Guidelines</Tab>}
-            </TabList>
             {overviewMdxFile && (
-              <TabPanel id="overview">
+              <Tab>
+                <TabTitle>Overview</TabTitle>
                 <Section>
                   <MdxFileView mdxFile={overviewMdxFile.serialize()} />
                 </Section>
-              </TabPanel>
+              </Tab>
             )}
             {developMdxFile && (
-              <TabPanel id="develop">
+              <Tab id="develop">
+                <TabTitle>Develop</TabTitle>
                 <Section>
                   <MdxFileView mdxFile={developMdxFile.serialize()} />
                 </Section>
-              </TabPanel>
+              </Tab>
             )}
             {guidelinesMdxFile && (
-              <TabPanel id="guidelines">
+              <Tab id="guidelines">
+                <TabTitle>Guidelines</TabTitle>
                 <Section>
                   <MdxFileView mdxFile={guidelinesMdxFile.serialize()} />
                 </Section>
-              </TabPanel>
+              </Tab>
             )}
           </Tabs>
         </LayoutCard>

@@ -4,5 +4,5 @@ import FieldError from "@mittwald/flow-react-components/FieldError";
 
 <TextField isInvalid defaultValue="hello">
   <Label>URL</Label>
-  <FieldError>Invalid input</FieldError>
+  <FieldError>Das ist keine URL</FieldError>
 </TextField>;
