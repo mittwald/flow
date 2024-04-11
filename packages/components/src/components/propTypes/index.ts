@@ -20,6 +20,7 @@ import type { AvatarProps } from "@/components/Avatar";
 import type { ActionProps } from "@/components/Action";
 import type { ContextMenuProps } from "@/components/ContextMenu";
 import type { RadioProps } from "@/components/RadioGroup";
+import type { OptionProps, SelectProps } from "@/components/Select";
 
 export * from "./types";
 
@@ -42,7 +43,9 @@ export interface FlowComponentPropsTypes {
   Label: LabelProps;
   LayoutCard: LayoutCardProps;
   Link: LinkProps;
+  Option: OptionProps;
   Radio: RadioProps;
+  Select: SelectProps;
   StatusBadge: StatusBadgeProps;
   Switch: SwitchProps;
   Text: TextProps;
@@ -71,7 +74,9 @@ const propsContextSupportingComponentsMap: Record<
   LayoutCard: true,
   Link: true,
   Radio: true,
+  Option: true,
   StatusBadge: true,
+  Select: true,
   Switch: true,
   TestComponent: true,
   Text: true,
