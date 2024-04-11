@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./CheckboxButton.module.scss";
 import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
+import { ClearPropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import type { CheckboxProps } from "@/components/Checkbox";
 import { Checkbox } from "@/components/Checkbox";
@@ -27,11 +28,13 @@ export const CheckboxButton = flowComponent("CheckboxButton", (props) => {
   };
 
   return (
-    <Checkbox {...rest} className={rootClassName}>
-      <PropsContextProvider props={propsContext}>
-        {children}
-      </PropsContextProvider>
-    </Checkbox>
+    <ClearPropsContext>
+      <Checkbox {...rest} className={rootClassName}>
+        <PropsContextProvider props={propsContext}>
+          {children}
+        </PropsContextProvider>
+      </Checkbox>
+    </ClearPropsContext>
   );
 });
 

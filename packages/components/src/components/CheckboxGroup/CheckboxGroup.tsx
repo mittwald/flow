@@ -14,6 +14,7 @@ import { ColumnLayout } from "@/components/ColumnLayout";
 import { deepFindOfType } from "@/lib/react/deepFindOfType";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import { Wrap } from "@/components/Wrap";
 
 export interface CheckboxGroupProps
   extends PropsWithChildren<Omit<Aria.CheckboxGroupProps, "children">>,
@@ -28,7 +29,6 @@ export const CheckboxGroup = flowComponent("CheckboxGroup", (props) => {
   const propsContext: PropsContext = {
     Label: {
       className: formFieldStyles.label,
-      tunnelId: "label",
     },
     FieldDescription: {
       className: formFieldStyles.fieldDescription,
@@ -38,6 +38,12 @@ export const CheckboxGroup = flowComponent("CheckboxGroup", (props) => {
       className: formFieldStyles.customFieldError,
       tunnelId: "fieldError",
     },
+    Checkbox: {
+      tunnelId: "checkboxes",
+    },
+    CheckboxButton: {
+      tunnelId: "checkboxes",
+    },
   };
 
   const hasCheckboxButtons = !!deepFindOfType(children, CheckboxButton);
@@ -46,15 +52,17 @@ export const CheckboxGroup = flowComponent("CheckboxGroup", (props) => {
     <Aria.CheckboxGroup {...rest} className={rootClassName}>
       <PropsContextProvider props={propsContext}>
         <TunnelProvider>
-          <TunnelExit id="label" />
+          {children}
 
-          {hasCheckboxButtons ? (
+          <Wrap if={hasCheckboxButtons}>
             <ColumnLayout s={s} m={m} l={l} className={styles.checkboxGroup}>
-              {children}
+              <Wrap if={!hasCheckboxButtons}>
+                <div className={styles.checkboxGroup}>
+                  <TunnelExit id="checkboxes" />
+                </div>
+              </Wrap>
             </ColumnLayout>
-          ) : (
-            <div className={styles.checkboxGroup}>{children}</div>
-          )}
+          </Wrap>
 
           <TunnelExit id="fieldDescription" />
           <TunnelExit id="fieldError" />
