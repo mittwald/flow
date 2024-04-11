@@ -52,7 +52,7 @@ const meta: Meta<typeof Controller> = {
           <TController
             name="firstName"
             rules={{
-              required: true,
+              required: "Please enter your name",
             }}
           >
             <TextField>
@@ -61,13 +61,22 @@ const meta: Meta<typeof Controller> = {
             </TextField>
           </TController>
 
-          <TController name="age" rules={{ required: true, min: 18 }}>
+          <TController
+            name="age"
+            rules={{
+              required: "Please enter your age",
+              min: { value: 18, message: "You must be at least 18" },
+            }}
+          >
             <NumberField>
               <Label>Age</Label>
             </NumberField>
           </TController>
 
-          <TController name="gender" rules={{ required: true }}>
+          <TController
+            name="gender"
+            rules={{ required: "Please choose your gender" }}
+          >
             <RadioGroup>
               <Label>Gender</Label>
               <Radio value="male">Male</Radio>
@@ -89,7 +98,7 @@ const meta: Meta<typeof Controller> = {
                 min: (val) =>
                   Array.isArray(val) && val.length > 0
                     ? true
-                    : "Check at least 2 items",
+                    : "Check at least 1 item",
                 max: (val) =>
                   Array.isArray(val) && val.length < 3
                     ? true
