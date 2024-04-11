@@ -8,7 +8,7 @@ import Label from "@mittwald/flow-react-components/Label";
 import ButtonGroup from "@mittwald/flow-react-components/ButtonGroup";
 import Button from "@mittwald/flow-react-components/Button";
 import Heading from "@mittwald/flow-react-components/Heading";
-import { Action } from "@mittwald/flow-react-components/Action";
+import Action from "@mittwald/flow-react-components/Action";
 
 <ModalTrigger>
   <Button variant="accent">Create customer</Button>
