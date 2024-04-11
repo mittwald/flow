@@ -63,7 +63,7 @@
   border-bottom-right-radius: var(--corner-radius--default);
   border: var(--border-width--100) solid
     var(--neutral-outline-border-color--default);
-  border-top-width: var(--size-px--s);
+  border-top-width: var(--size-px--xs);
   padding: var(--size-px--m);
 }
 
