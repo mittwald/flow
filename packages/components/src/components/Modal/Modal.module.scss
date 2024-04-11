@@ -97,7 +97,7 @@
 
 @media (max-width: 550px) {
   .overlay {
-    overflow-y: scroll;
+    overflow-y: auto;
     padding-top: var(--size-px--xxl);
   }
   .modal {

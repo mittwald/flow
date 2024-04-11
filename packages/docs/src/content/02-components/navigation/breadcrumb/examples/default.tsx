@@ -1,5 +1,5 @@
-import { Breadcrumb } from "@mittwald/flow-react-components/Breadcrumb";
-import { Link } from "@mittwald/flow-react-components/Link";
+import Breadcrumb from "@mittwald/flow-react-components/Breadcrumb";
+import Link from "@mittwald/flow-react-components/Link";
 
 <Breadcrumb>
   <Link href="#">Project</Link>

@@ -1,23 +1,43 @@
 import type { FC, PropsWithChildren } from "react";
+import { useId } from "react";
 import React from "react";
 import * as Aria from "react-aria-components";
-import clsx from "clsx";
 import styles from "./Tab.module.scss";
-import { Text } from "@/components/Text";
+import clsx from "clsx";
+import { TabContextProvider } from "@/components/Tabs/components/Tab/context";
+import { TunnelEntry } from "@mittwald/react-tunnel";
 
 export interface TabProps
-  extends Omit<Aria.TabProps, "children">,
+  extends Omit<Aria.TabPanelProps, "children">,
     PropsWithChildren {}
 
 export const Tab: FC<TabProps> = (props) => {
-  const { children, className, ...rest } = props;
+  const {
+    children,
+    className,
+    shouldForceMount = true,
+    id: idFromProps,
+    ...rest
+  } = props;
 
-  const rootClassName = clsx(styles.tab, className);
+  const rootClassName = clsx(styles.tabPanel, className);
+
+  const generatedId = useId();
+  const id = idFromProps ?? generatedId;
 
   return (
-    <Aria.Tab className={rootClassName} {...rest}>
-      <Text emulateBoldWidth>{children}</Text>
-    </Aria.Tab>
+    <TunnelEntry id="TabPanels">
+      <TabContextProvider value={{ id }}>
+        <Aria.TabPanel
+          className={rootClassName}
+          shouldForceMount={shouldForceMount}
+          id={id}
+          {...rest}
+        >
+          {children}
+        </Aria.TabPanel>
+      </TabContextProvider>
+    </TunnelEntry>
   );
 };
 

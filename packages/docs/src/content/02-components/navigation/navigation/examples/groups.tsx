@@ -2,7 +2,7 @@ import Navigation, {
   NavigationGroup,
 } from "@mittwald/flow-react-components/Navigation";
 import Heading from "@mittwald/flow-react-components/Heading";
-import { Link } from "@mittwald/flow-react-components/Link";
+import Link from "@mittwald/flow-react-components/Link";
 
 <Navigation aria-label="Main navigation">
   <Heading>General</Heading>
