@@ -19,6 +19,7 @@ import type { ButtonGroupProps } from "@/components/ButtonGroup";
 import type { AvatarProps } from "@/components/Avatar";
 import type { ActionProps } from "@/components/Action";
 import type { ContextMenuProps } from "@/components/ContextMenu";
+import type { OptionProps, SelectProps } from "@/components/Select";
 import type {
   RadioButtonProps,
   RadioGroupProps,
@@ -56,9 +57,11 @@ export interface FlowComponentPropsTypes {
   LayoutCard: LayoutCardProps;
   Link: LinkProps;
   NumberField: NumberFieldProps;
+  Option: OptionProps;
   Radio: RadioProps;
   RadioButton: RadioButtonProps;
   RadioGroup: RadioGroupProps;
+  Select: SelectProps;
   StatusBadge: StatusBadgeProps;
   Switch: SwitchProps;
   Text: TextProps;
@@ -93,9 +96,11 @@ const propsContextSupportingComponentsMap: Record<
   Link: true,
   NumberField: true,
   Radio: true,
+  Option: true,
   RadioButton: true,
   RadioGroup: true,
   StatusBadge: true,
+  Select: true,
   Switch: true,
   TestComponent: true,
   Text: true,
