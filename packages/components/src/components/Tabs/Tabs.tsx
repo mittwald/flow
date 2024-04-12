@@ -5,10 +5,12 @@ import clsx from "clsx";
 import styles from "./Tabs.module.scss";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 
 export interface TabsProps
   extends Omit<Aria.TabsProps, "children">,
-    PropsWithChildren {}
+    PropsWithChildren,
+    FlowComponentProps {}
 
 export const Tabs = flowComponent("Tabs", (props) => {
   const { children, className, ...rest } = props;

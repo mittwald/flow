@@ -28,7 +28,11 @@ export const customComponents: MDXComponents = {
 
   code: ({ children }) => <code className={styles.code}>{children}</code>,
 
-  p: ({ children }) => <Text className={styles.p}>{children}</Text>,
+  p: ({ children }) => (
+    <Text className={styles.p} elementType="p">
+      {children}
+    </Text>
+  ),
 
   ul: ({ children }) => <ul className={styles.ul}>{children}</ul>,
 
@@ -59,13 +63,13 @@ export const customComponents: MDXComponents = {
   ),
 
   a: ({ children, href }) => {
-    if (href?.includes("http")) {
+    if (href?.startsWith("http")) {
       return <Link href={href}>{children}</Link>;
     }
 
     return (
       <LinkProvider>
-        <Link href={`/02-components/${href}`}>{children}</Link>
+        <Link href={href}>{children}</Link>
       </LinkProvider>
     );
   },

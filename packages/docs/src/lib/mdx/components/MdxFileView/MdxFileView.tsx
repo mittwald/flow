@@ -16,14 +16,14 @@ export const MdxFileView: FC<Props> = (props) => {
 
   const ExampleLiveCodeEditor: FC<{
     example?: string;
-    hideCode?: boolean;
-    noCode?: boolean;
-  }> = ({ example = "default", hideCode, noCode }) => (
+    editorCollapsed?: boolean;
+    editorDisabled?: boolean;
+  }> = ({ example = "default", editorCollapsed, editorDisabled }) => (
     <LiveCodeEditor
       className={styles.liveCodeEditor}
       code={mdxFile.getExample(example)}
-      hideCode={hideCode}
-      noCode={noCode}
+      editorCollapsed={editorCollapsed}
+      editorDisabled={editorDisabled}
     />
   );
 

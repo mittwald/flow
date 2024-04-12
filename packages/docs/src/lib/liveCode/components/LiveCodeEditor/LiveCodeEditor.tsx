@@ -25,9 +25,9 @@ console.error = (...args) => {
 };
 
 const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
-  const { code, className, hideCode, noCode } = props;
+  const { code, className, editorCollapsed, editorDisabled } = props;
 
-  const [codeVisible, setCodeVisible] = useState(!hideCode);
+  const [editorVisible, setEditorVisible] = useState(!editorCollapsed);
 
   if (typeof code !== "string") {
     throw new Error("Expected code prop to be of type 'string'.");
@@ -56,20 +56,20 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
     >
       <div className={clsx(styles.liveCodeEditor, className)}>
         <LivePreview className={styles.preview} />
-        {!noCode && (
+        {!editorDisabled && (
           <div className={styles.actions}>
             <Button
               className={styles.toggleCode}
               size="s"
               style="plain"
-              onPress={() => setCodeVisible(!codeVisible)}
+              onPress={() => setEditorVisible(!editorVisible)}
             >
               <IconCode />
             </Button>
           </div>
         )}
 
-        {codeVisible && !noCode && (
+        {editorVisible && !editorDisabled && (
           <div className={styles.editorContainer}>
             <LiveEditor theme={themes.vsLight} className={styles.editor} />
           </div>

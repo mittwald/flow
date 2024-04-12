@@ -3,6 +3,6 @@ import type { JSX } from "react";
 export interface LiveCodeEditorProps {
   code: string | JSX.Element;
   className?: string;
-  hideCode?: boolean;
-  noCode?: boolean;
+  editorCollapsed?: boolean;
+  editorDisabled?: boolean;
 }
