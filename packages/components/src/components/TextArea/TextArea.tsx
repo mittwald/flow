@@ -1,23 +1,26 @@
-import type { FC } from "react";
 import React from "react";
 import * as Aria from "react-aria-components";
 import type { TextFieldBaseProps } from "@/components/TextFieldBase";
 import { TextFieldBase } from "@/components/TextFieldBase";
 import styles from "./TextArea.module.scss";
 import { ClearPropsContext } from "@/lib/propsContext";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface TextAreaProps
   extends Omit<TextFieldBaseProps, "input">,
-    Pick<Aria.TextAreaProps, "placeholder" | "rows"> {}
+    Pick<Aria.TextAreaProps, "placeholder" | "rows">,
+    FlowComponentProps {}
 
-export const TextArea: FC<TextAreaProps> = (props) => {
-  const { children, placeholder, rows = 5, ...rest } = props;
+export const TextArea = flowComponent("TextArea", (props) => {
+  const { children, placeholder, rows = 5, ref, ...rest } = props;
 
   const input = (
     <Aria.TextArea
       rows={rows}
       placeholder={placeholder}
       className={styles.textArea}
+      ref={ref}
     />
   );
 
@@ -28,6 +31,6 @@ export const TextArea: FC<TextAreaProps> = (props) => {
       </TextFieldBase>
     </ClearPropsContext>
   );
-};
+});
 
 export default TextArea;

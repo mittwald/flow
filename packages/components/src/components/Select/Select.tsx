@@ -1,4 +1,4 @@
-import type { FC, PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 import React from "react";
 import * as Aria from "react-aria-components";
 import type { PropsContext } from "@/lib/propsContext";
@@ -8,16 +8,30 @@ import { FieldError } from "@/components/FieldError";
 import styles from "./Select.module.scss";
 import clsx from "clsx";
 import { IconChevronDown } from "@/components/Icon/components/icons";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import { Options } from "@/components/Select/components/Options";
+import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
+import type { Key } from "react-aria-components";
 
 export interface SelectProps
   extends PropsWithChildren<
-    Omit<Aria.SelectProps<{ example: string }>, "children" | "className">
-  > {
+      Omit<Aria.SelectProps<{ example: string }>, "children" | "className">
+    >,
+    FlowComponentProps {
   className?: string;
+  onChange?: (value: string) => void;
 }
 
-export const Select: FC<SelectProps> = (props) => {
-  const { children, className, ...rest } = props;
+export const Select = flowComponent("Select", (props) => {
+  const {
+    children,
+    className,
+    onChange = () => {},
+    onSelectionChange = () => {},
+    ref,
+    ...rest
+  } = props;
 
   const rootClassName = clsx(
     styles.select,
@@ -36,22 +50,41 @@ export const Select: FC<SelectProps> = (props) => {
     FieldError: {
       className: formFieldStyles.customFieldError,
     },
+    Option: {
+      tunnelId: "options",
+    },
+  };
+
+  const handleOnSelectionChange = (id: Key) => {
+    onChange(String(id));
+    onSelectionChange(id);
   };
 
   return (
-    <Aria.Select {...rest} className={rootClassName}>
-      <Aria.Button className={styles.toggle}>
-        <Aria.SelectValue />
-        <IconChevronDown />
-      </Aria.Button>
-
+    <Aria.Select
+      {...rest}
+      className={rootClassName}
+      ref={ref}
+      onSelectionChange={handleOnSelectionChange}
+    >
       <PropsContextProvider props={propsContext}>
-        {children}
-      </PropsContextProvider>
+        <TunnelProvider>
+          <Aria.Button className={styles.toggle}>
+            <Aria.SelectValue />
+            <IconChevronDown />
+          </Aria.Button>
 
-      <FieldError className={formFieldStyles.fieldError} />
+          {children}
+
+          <Options>
+            <TunnelExit id="options" />
+          </Options>
+
+          <FieldError className={formFieldStyles.fieldError} />
+        </TunnelProvider>
+      </PropsContextProvider>
     </Aria.Select>
   );
-};
+});
 
 export default Select;

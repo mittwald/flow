@@ -67,8 +67,8 @@ export default defineConfig(
           TextField: "./src/components/TextField/index.ts",
           Tooltip: "./src/components/Tooltip/index.ts",
           stylesInit: "./src/styles/index.ts",
-          "nextjs/LinkProvider":
-            "./src/components/nextjs/LinkProvider/index.ts",
+          nextjs: "./src/integrations/nextjs/index.ts",
+          "react-hook-form": "./src/integrations/react-hook-form/index.ts",
         },
         formats: ["es"],
       },

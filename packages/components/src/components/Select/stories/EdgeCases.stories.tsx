@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Select, { Option, Options } from "../index";
+import Select, { Option } from "../index";
 import React from "react";
 import { Label } from "@/components/Label";
 import defaultMeta from "./Default.stories";
@@ -16,13 +16,11 @@ export const Default: Story = {
   render: (props) => (
     <Select {...props}>
       <Label>Label</Label>
-      <Options>
-        {Array(20)
-          .fill("")
-          .map((value, index) => (
-            <Option key={index}>Option {index + 1}</Option>
-          ))}
-      </Options>
+      {Array(20)
+        .fill("")
+        .map((value, index) => (
+          <Option key={index}>Option {index + 1}</Option>
+        ))}
     </Select>
   ),
 };

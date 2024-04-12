@@ -13,7 +13,7 @@ import { Wrap } from "@/components/Wrap";
 export interface TextProps
   extends PropsWithChildren,
     Omit<Aria.TextProps, "children" | "elementType">,
-    PropsWithElementType,
+    PropsWithElementType<"span" | "div" | "p">,
     FlowComponentProps {
   emulateBoldWidth?: boolean;
 }
@@ -24,6 +24,7 @@ export const Text = flowComponent("Text", (props) => {
     className,
     elementType = "span",
     emulateBoldWidth,
+    ref,
     ...rest
   } = props;
 
@@ -45,7 +46,11 @@ export const Text = flowComponent("Text", (props) => {
 
   if (!props.slot) {
     const Element = elementType;
-    return <Element {...textProps}>{childrenElement}</Element>;
+    return (
+      <Element {...textProps} ref={ref}>
+        {childrenElement}
+      </Element>
+    );
   }
 
   invariant(
@@ -55,7 +60,7 @@ export const Text = flowComponent("Text", (props) => {
 
   return (
     <ClearPropsContext>
-      <Aria.Text {...textProps} elementType={elementType}>
+      <Aria.Text {...textProps} elementType={elementType} ref={ref}>
         {childrenElement}
       </Aria.Text>
     </ClearPropsContext>
