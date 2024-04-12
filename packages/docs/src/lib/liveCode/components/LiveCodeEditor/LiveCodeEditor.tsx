@@ -25,7 +25,7 @@ console.error = (...args) => {
 };
 
 const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
-  const { code, className, hideCode } = props;
+  const { code, className, hideCode, noCode } = props;
 
   const [codeVisible, setCodeVisible] = useState(!hideCode);
 
@@ -56,17 +56,20 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
     >
       <div className={clsx(styles.liveCodeEditor, className)}>
         <LivePreview className={styles.preview} />
-        <div className={styles.actions}>
-          <Button
-            className={styles.toggleCode}
-            size="s"
-            style="plain"
-            onPress={() => setCodeVisible(!codeVisible)}
-          >
-            <IconCode />
-          </Button>
-        </div>
-        {codeVisible && (
+        {!noCode && (
+          <div className={styles.actions}>
+            <Button
+              className={styles.toggleCode}
+              size="s"
+              style="plain"
+              onPress={() => setCodeVisible(!codeVisible)}
+            >
+              <IconCode />
+            </Button>
+          </div>
+        )}
+
+        {codeVisible && !noCode && (
           <div className={styles.editorContainer}>
             <LiveEditor theme={themes.vsLight} className={styles.editor} />
           </div>

@@ -7,7 +7,7 @@ import React from "react";
 import CopyButton from "@mittwald/flow-react-components/CopyButton";
 import Link from "@mittwald/flow-react-components/Link";
 import Text from "@mittwald/flow-react-components/Text";
-import { LinkProvider } from "@mittwald/flow-react-components/nextjs/LinkProvider";
+import { LinkProvider } from "@mittwald/flow-react-components/nextjs";
 import DoAndDont from "@/lib/mdx/components/DoAndDont/DoAndDont";
 import Do from "@/lib/mdx/components/DoAndDont/Do";
 import Dont from "@/lib/mdx/components/DoAndDont/Dont";
