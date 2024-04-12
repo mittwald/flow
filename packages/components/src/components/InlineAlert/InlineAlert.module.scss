@@ -28,6 +28,7 @@
 /* Elements */
 .statusIcon {
   grid-area: icon;
+  height: calc(var(--heading--h3-font-size) * var(--line-height--default));
 }
 
 .heading {

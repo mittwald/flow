@@ -18,8 +18,10 @@ font-size:
   l:
     value: 1.125rem
   xl:
-    value: 1.5rem
+    value: 1.25rem
   xxl:
+    value: 1.5rem
+  xxxl:
     value: 2rem
 color:
   default:
