@@ -30,14 +30,13 @@ type Story = StoryObj<typeof IllustratedMessage>;
 
 export const Default: Story = {};
 
-export const Danger: Story = {
+export const Negative: Story = {
   render: (props) => (
-    <IllustratedMessage {...props} variant="danger">
+    <IllustratedMessage {...props} variant="negative">
       <IconDanger />
       <Heading>No access</Heading>
       <Text>You do not have the required permissions to access this page.</Text>
       <Button>Go back</Button>
     </IllustratedMessage>
   ),
-  args: { variant: "danger" },
 };

@@ -7,7 +7,7 @@ import { PropsContextProvider } from "@/lib/propsContext";
 
 export interface IllustratedMessageProps
   extends PropsWithChildren<ComponentProps<"div">> {
-  variant?: "info" | "danger";
+  variant?: "info" | "negative";
 }
 
 export const IllustratedMessage: FC<IllustratedMessageProps> = (props) => {
