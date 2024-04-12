@@ -1,4 +1,4 @@
-import type { FC, PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 import React from "react";
 import styles from "./RadioGroup.module.scss";
 import * as Aria from "react-aria-components";
@@ -13,15 +13,17 @@ import formFieldStyles from "../FormField/FormField.module.scss";
 import { deepFindOfType } from "@/lib/react/deepFindOfType";
 import RadioButton from "./components/RadioButton";
 import { SegmentedGroup } from "@/components/RadioGroup/components/SegmentedGroup";
-import { Wrap } from "@/components/Wrap";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface RadioGroupProps
   extends PropsWithChildren<Omit<Aria.RadioGroupProps, "children">>,
+    FlowComponentProps,
     Pick<ColumnLayoutProps, "s" | "m" | "l"> {
   variant?: "segmented" | "default";
 }
 
-export const RadioGroup: FC<RadioGroupProps> = (props) => {
+export const RadioGroup = flowComponent("RadioGroup", (props) => {
   const { children, className, variant = "default", s, m, l, ...rest } = props;
 
   const rootClassName = clsx(formFieldStyles.formField, className);
@@ -29,7 +31,6 @@ export const RadioGroup: FC<RadioGroupProps> = (props) => {
   const propsContext: PropsContext = {
     Label: {
       className: formFieldStyles.label,
-      tunnelId: "label",
     },
     FieldDescription: {
       className: formFieldStyles.fieldDescription,
@@ -38,6 +39,12 @@ export const RadioGroup: FC<RadioGroupProps> = (props) => {
     FieldError: {
       className: formFieldStyles.customFieldError,
       tunnelId: "fieldError",
+    },
+    RadioButton: {
+      tunnelId: "radios",
+    },
+    Radio: {
+      tunnelId: "radios",
     },
   };
 
@@ -51,27 +58,35 @@ export const RadioGroup: FC<RadioGroupProps> = (props) => {
 
   return (
     <Aria.RadioGroup {...rest} className={rootClassName}>
-      <PropsContextProvider props={propsContext}>
-        <TunnelProvider>
-          <TunnelExit id="label" />
-          <Wrap if={variant === "segmented"}>
+      <TunnelProvider>
+        <PropsContextProvider props={propsContext}>
+          {children}
+
+          {variant === "segmented" && (
             <SegmentedGroup>
-              <Wrap if={variant === "default" && hasRadioButtons}>
-                <ColumnLayout s={s} m={m} l={l} className={styles.radioGroup}>
-                  <Wrap if={variant === "default" && !hasRadioButtons}>
-                    <div className={styles.radioGroup}>{children}</div>
-                  </Wrap>
-                </ColumnLayout>
-              </Wrap>
+              <TunnelExit id="radios" />
             </SegmentedGroup>
-          </Wrap>
+          )}
+
+          {variant === "default" && hasRadioButtons && (
+            <ColumnLayout s={s} m={m} l={l} className={styles.radioGroup}>
+              <TunnelExit id="radios" />
+            </ColumnLayout>
+          )}
+
+          {variant === "default" && !hasRadioButtons && (
+            <div className={styles.radioGroup}>
+              <TunnelExit id="radios" />
+            </div>
+          )}
+
           <TunnelExit id="fieldDescription" />
           <TunnelExit id="fieldError" />
-        </TunnelProvider>
-      </PropsContextProvider>
+        </PropsContextProvider>
+      </TunnelProvider>
       <FieldError className={formFieldStyles.fieldError} />
     </Aria.RadioGroup>
   );
-};
+});
 
 export default RadioGroup;

@@ -53,3 +53,18 @@ export const WithFieldError: Story = {
     </NumberField>
   ),
 };
+
+export const WithUnit: Story = {
+  render: (props) => (
+    <NumberField
+      {...props}
+      formatOptions={{
+        style: "unit",
+        unit: "gigabyte",
+      }}
+      defaultValue={12}
+    >
+      <Label>Storage</Label>
+    </NumberField>
+  ),
+};

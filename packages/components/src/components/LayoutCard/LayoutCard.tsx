@@ -8,18 +8,18 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface LayoutCardProps
   extends PropsWithChildren,
-    PropsWithElementType,
+    PropsWithElementType<"div" | "main" | "footer" | "header">,
     FlowComponentProps {}
 
 export const LayoutCard = flowComponent("LayoutCard", (props) => {
-  const { children, className, elementType = "div", ...rest } = props;
+  const { children, className, elementType = "div", ref, ...rest } = props;
 
   const rootClassName = clsx(styles.layoutCard, className);
 
   const Element = elementType;
 
   return (
-    <Element className={rootClassName} {...rest}>
+    <Element className={rootClassName} {...rest} ref={ref}>
       {children}
     </Element>
   );

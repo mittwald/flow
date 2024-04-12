@@ -1,0 +1,28 @@
+tab-list:
+  background-color:
+    value: "{neutral.color.400}"
+  tab-to-tab-spacing:
+    value: "{size-px.xxs}"
+
+tab:
+  padding-y:
+    value: "{size-px.m}"
+  padding-x:
+    value: "{size-px.l}"
+  background-color:
+    default:
+      value: "{neutral.color.400}"
+    selected:
+      value: "{neutral.color.100}"
+  color:
+    default:
+      value: "{color.default}"
+    selected:
+      value: "{primary.color.800}"
+  font-weight:
+    selected:
+      value: "{font-weight.bold}"
+
+tab-panel:
+  padding:
+    value: "{size-px.l}"

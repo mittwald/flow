@@ -75,13 +75,13 @@
 @include size(m);
 @include size(l);
 
-/* Panel */
+/* OffCanvas */
 
 @media (min-width: 550px) {
-  .overlay:has(.panel) {
+  .overlay:has(.offCanvas) {
     justify-content: flex-end;
   }
-  .panel {
+  .offCanvas {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     height: 100%;
@@ -97,7 +97,7 @@
 
 @media (max-width: 550px) {
   .overlay {
-    overflow-y: scroll;
+    overflow-y: auto;
     padding-top: var(--size-px--xxl);
   }
   .modal {

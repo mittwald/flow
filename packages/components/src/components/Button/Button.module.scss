@@ -23,6 +23,11 @@
   @extend .primary;
   @extend .solid;
 
+  &:has(.avatar) {
+    padding: 0;
+    border-radius: var(--corner-radius--round);
+  }
+
   &:has(.icon):not(:has(.text)) {
     padding: var(--button--padding);
   }

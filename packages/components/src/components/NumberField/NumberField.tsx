@@ -1,4 +1,4 @@
-import type { FC, PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 import React from "react";
 import * as Aria from "react-aria-components";
 import formFieldStyles from "../FormField/FormField.module.scss";
@@ -14,12 +14,15 @@ import {
   IconMinus,
   IconPlus,
 } from "@/components/Icon/components/icons";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface NumberFieldProps
-  extends PropsWithChildren<Omit<Aria.NumberFieldProps, "children">> {}
+  extends PropsWithChildren<Omit<Aria.NumberFieldProps, "children">>,
+    FlowComponentProps {}
 
-export const NumberField: FC<NumberFieldProps> = (props) => {
-  const { children, className, ...rest } = props;
+export const NumberField = flowComponent("NumberField", (props) => {
+  const { children, className, ref, ...rest } = props;
 
   const rootClassName = clsx(formFieldStyles.formField, className);
 
@@ -50,7 +53,7 @@ export const NumberField: FC<NumberFieldProps> = (props) => {
             <IconChevronDown />
             <IconMinus className={styles.coarsePointerIcon} />
           </Button>
-          <Aria.Input className={styles.input} />
+          <Aria.Input className={styles.input} ref={ref} />
           <Button
             slot="increment"
             className={styles.incrementButton}
@@ -69,6 +72,6 @@ export const NumberField: FC<NumberFieldProps> = (props) => {
       </Aria.NumberField>
     </ClearPropsContext>
   );
-};
+});
 
 export default NumberField;
