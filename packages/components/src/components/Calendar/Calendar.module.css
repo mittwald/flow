@@ -24,25 +24,25 @@
     cursor: default;
     border-radius: var(--button--corner-radius);
 
-    &:hover {
-      background: var(--button--secondary-plain-background-color--hover);
-    }
-
     &[data-outside-month] {
       display: none;
     }
 
+    &:hover {
+      background: var(--calendar--day-background-color--hover);
+    }
+
     &[data-pressed] {
-      background: var(--button--secondary-plain-background-color--pressed);
+      background: var(--calendar--day-background-color--pressed);
     }
 
     &[data-selected] {
-      background: var(--button--secondary-plain-background-color--pressed);
+      background: var(--calendar--day-background-color--pressed);
     }
 
     &[data-disabled] {
-      background: var(--button--disabled-plain-background-color);
-      color: var(--button--disabled-plain-content-color);
+      background: var(--calendar--day-background-color--disabled);
+      color: var(--calendar--day-color--disabled);
     }
   }
 }
