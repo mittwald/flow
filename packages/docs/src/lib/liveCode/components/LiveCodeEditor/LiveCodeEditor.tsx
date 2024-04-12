@@ -25,9 +25,16 @@ console.error = (...args) => {
 };
 
 const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
-  const { code, className, editorCollapsed, editorDisabled } = props;
+  const {
+    code,
+    className,
+    editorCollapsed: editorInitiallyCollapsed,
+    editorDisabled,
+  } = props;
 
-  const [editorVisible, setEditorVisible] = useState(!editorCollapsed);
+  const [editorCollapsed, setEditorCollapsed] = useState(
+    editorInitiallyCollapsed,
+  );
 
   if (typeof code !== "string") {
     throw new Error("Expected code prop to be of type 'string'.");
@@ -62,14 +69,14 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
               className={styles.toggleCode}
               size="s"
               style="plain"
-              onPress={() => setEditorVisible(!editorVisible)}
+              onPress={() => setEditorCollapsed(!editorCollapsed)}
             >
               <IconCode />
             </Button>
           </div>
         )}
 
-        {editorVisible && !editorDisabled && (
+        {!editorCollapsed && !editorDisabled && (
           <div className={styles.editorContainer}>
             <LiveEditor theme={themes.vsLight} className={styles.editor} />
           </div>
