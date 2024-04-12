@@ -6,6 +6,6 @@ interface TabContext {
 
 const tabContext = createContext<TabContext>({});
 
-export const useTabTabContext = (): TabContext => useContext(tabContext);
+export const useTabContext = (): TabContext => useContext(tabContext);
 
 export const TabContextProvider = tabContext.Provider;

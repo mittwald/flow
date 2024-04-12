@@ -15,8 +15,8 @@ const meta: Meta<typeof Tabs> = {
   component: Tabs,
   render: (props) => {
     return (
-      <Tabs {...props}>
-        <Tab>
+      <Tabs {...props} disabledKeys={["spam"]}>
+        <Tab id="general">
           <TabTitle>General</TabTitle>
           <Section>
             <Heading>General</Heading>
@@ -35,7 +35,7 @@ const meta: Meta<typeof Tabs> = {
             </LabeledValue>
           </Section>
         </Tab>
-        <Tab>
+        <Tab id="spam">
           <TabTitle>Spam</TabTitle>
           <Section>
             <Header>
