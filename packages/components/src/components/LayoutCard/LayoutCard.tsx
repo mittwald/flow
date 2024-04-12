@@ -29,7 +29,7 @@ export const LayoutCard = flowComponent("LayoutCard", (props) => {
   return (
     <Element className={rootClassName} {...rest} ref={ref}>
       <PropsContextProvider props={propsContext}>
-      {children}
+        {children}
       </PropsContextProvider>
     </Element>
   );
