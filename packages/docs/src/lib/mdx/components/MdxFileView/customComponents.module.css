@@ -38,18 +38,27 @@
   border-top: var(--border-width--100) solid var(--neutral--color--500);
 }
 
+.liveCodeEditor:has(+ .do),
+.liveCodeEditor:has(+ .dont) {
+  border-bottom: none;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  margin-bottom: calc(var(--size-px--m) * -1);
+}
+
 .doAndDont {
   display: grid;
+  column-gap: var(--size-px--m);
   grid-template-areas:
     "dontExample     doExample"
     "dontDescription doDescription";
-  column-gap: var(--size-px--m);
 
   .liveCodeEditor {
     grid-area: doExample;
     border-bottom: none;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
+    margin-bottom: 0;
   }
 
   .liveCodeEditor:first-child {
@@ -63,7 +72,7 @@
   border-bottom-right-radius: var(--corner-radius--default);
   border: var(--border-width--100) solid var(--neutral--color--500);
   border-top-width: var(--size-px--xs);
-  padding: var(--size-px--m);
+  padding: var(--size-px--l);
 }
 
 .dont {

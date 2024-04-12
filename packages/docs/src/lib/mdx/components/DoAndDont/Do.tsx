@@ -2,15 +2,24 @@ import type { FC, PropsWithChildren } from "react";
 import styles from "../MdxFileView/customComponents.module.css";
 import { Heading } from "@mittwald/flow-react-components/Heading";
 import { IconCheck } from "@mittwald/flow-react-components/Icons";
+import { Section } from "@mittwald/flow-react-components/Section";
 
-export const Do: FC<PropsWithChildren> = (props) => {
+interface Props extends PropsWithChildren {
+  title?: string;
+}
+
+export const Do: FC<Props> = (props) => {
   return (
-    <div className={styles.do}>
+    <Section className={styles.do}>
       <Heading level={4}>
-        <IconCheck /> Do
+        {props.title ?? (
+          <>
+            <IconCheck /> Do
+          </>
+        )}
       </Heading>
       {props.children}
-    </div>
+    </Section>
   );
 };
 
