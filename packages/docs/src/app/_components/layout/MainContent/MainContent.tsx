@@ -1,7 +1,6 @@
 import type { FC } from "react";
 import React from "react";
 import Heading from "@mittwald/flow-react-components/Heading";
-import styles from "./MainContent.module.css";
 import { Link } from "@mittwald/flow-react-components/Link";
 import { LayoutCard } from "@mittwald/flow-react-components/LayoutCard";
 import { Section } from "@mittwald/flow-react-components/Section";
@@ -24,9 +23,7 @@ export const MainContent: FC<Props> = (props) => {
       <LayoutCard>
         <ColumnLayout m={component ? [1, 1] : [1]}>
           <Section>
-            <Heading className={styles.heading} level={1}>
-              {mdxFile.getTitle()}
-            </Heading>
+            <Heading level={1}>{mdxFile.getTitle()}</Heading>
 
             {mdxFile.mdxSource.frontmatter.description}
 

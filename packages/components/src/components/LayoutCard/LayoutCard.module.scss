@@ -5,7 +5,8 @@
   padding: var(--layout-card--padding);
   overflow: hidden;
 
-  &:has(.tabs) {
-    padding: 0;
+  > .tabs {
+    margin-inline: calc(var(--layout-card--padding) * -1);
+    margin-block-start: calc(var(--layout-card--padding) * -1);
   }
 }

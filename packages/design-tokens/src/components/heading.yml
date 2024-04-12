@@ -11,8 +11,6 @@ heading:
     value: "{font-size.xxl}"
   h2-font-size:
     value: "{font-size.xxl}"
-  h2-font-size-mobile:
-    value: "{font-size.xl}"
   h3-font-size:
     value: "{font-size.xl}"
   h4-font-size:

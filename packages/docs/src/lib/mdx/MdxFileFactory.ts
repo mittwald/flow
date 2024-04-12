@@ -13,11 +13,11 @@ import type { Metadata } from "next";
 export class MdxFileFactory {
   public static async fromDir(
     dir: string,
-    fileName?: string,
+    fileName: string = "index",
   ): Promise<MdxFile[]> {
     return Promise.all(
       jetpack
-        .find(dir, { matching: `**/${fileName ?? "index"}.mdx` })
+        .find(dir, { matching: `**/${fileName}.mdx` })
         .map((f) => MdxFileFactory.fromFile(f, dir)),
     );
   }
