@@ -7,17 +7,19 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface ContentProps
   extends PropsWithChildren,
-    PropsWithElementType,
+    PropsWithElementType<"div" | "section" | "span">,
     FlowComponentProps {}
 
 export const Content = flowComponent("Content", (props) => {
-  const { children, elementType = "div", ...rest } = props;
+  const { children, elementType = "div", ref, ...rest } = props;
 
   const Element = elementType;
 
   return (
     <ClearPropsContext>
-      <Element {...rest}>{children}</Element>
+      <Element ref={ref} {...rest}>
+        {children}
+      </Element>
     </ClearPropsContext>
   );
 });

@@ -34,6 +34,7 @@ export const Link = flowComponent("Link", (props) => {
     linkComponent: linkComponentFromProps,
     unstyled = false,
     "aria-current": ariaCurrent,
+    ref,
     ...rest
   } = props;
 
@@ -61,6 +62,7 @@ export const Link = flowComponent("Link", (props) => {
         className={rootClassName}
         {...rest}
         {...unsupportedTypingsLinkProps}
+        ref={ref}
       >
         <PropsContextProvider props={propsContext}>
           {children}

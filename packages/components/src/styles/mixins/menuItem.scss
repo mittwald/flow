@@ -40,7 +40,7 @@
   }
 
   &[aria-current],
-  &[data-selected]:not([data-selection-mode]) {
+  &[data-selected]:not([role="menuitemcheckbox"]):not([role="menuitemradio"]) {
     background-color: var(--menu-item--background-color--current);
     font-weight: var(--menu-item--font-weight--current);
     color: var(--menu-item--color--current);

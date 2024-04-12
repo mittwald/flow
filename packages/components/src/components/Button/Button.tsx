@@ -61,6 +61,7 @@ export const Button = flowComponent("Button", (props) => {
     isSucceeded,
     isFailed,
     "aria-label": ariaLabel,
+    ref,
     ...restProps
   } = props;
 
@@ -83,6 +84,9 @@ export const Button = flowComponent("Button", (props) => {
     },
     Text: {
       className: styles.text,
+    },
+    Avatar: {
+      className: styles.avatar,
     },
   };
 
@@ -117,6 +121,7 @@ export const Button = flowComponent("Button", (props) => {
         className={rootClassName}
         isDisabled={isDisabled}
         aria-label={stateLabel ?? ariaLabel}
+        ref={ref}
         {...restProps}
       >
         <PropsContextProvider props={propsContext}>
