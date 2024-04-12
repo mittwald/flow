@@ -1,8 +1,6 @@
 import {
   List,
-  ListFilter,
   ListItemView,
-  ListSorting,
   ListStaticData,
 } from "@mittwald/flow-react-components/List";
 import {
