@@ -5,6 +5,9 @@ import InlineAlert from "@mittwald/flow-react-components/InlineAlert";
 import Content from "@mittwald/flow-react-components/Content";
 import React from "react";
 import CopyButton from "@mittwald/flow-react-components/CopyButton";
+import Link from "@mittwald/flow-react-components/Link";
+import Text from "@mittwald/flow-react-components/Text";
+import { LinkProvider } from "@mittwald/flow-react-components/nextjs";
 
 export const customComponents: MDXComponents = {
   Content: Content,
@@ -25,7 +28,7 @@ export const customComponents: MDXComponents = {
 
   code: ({ children }) => <code className={styles.code}>{children}</code>,
 
-  p: ({ children }) => <p className={styles.p}>{children}</p>,
+  p: ({ children }) => <Text className={styles.p}>{children}</Text>,
 
   ul: ({ children }) => <ul className={styles.ul}>{children}</ul>,
 
@@ -54,4 +57,18 @@ export const customComponents: MDXComponents = {
       {children}
     </Heading>
   ),
+
+  a: ({ children, href }) => {
+    if (href?.includes("http")) {
+      return <Link href={href}>{children}</Link>;
+    }
+
+    return (
+      <LinkProvider>
+        <Link href={`/02-components/${href}`}>{children}</Link>
+      </LinkProvider>
+    );
+  },
+
+  hr: () => <hr className={styles.hr} />,
 };

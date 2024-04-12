@@ -4,6 +4,6 @@ layout-card:
   corner-radius:
     value: "{corner-radius.default}"
   padding:
-    value: "{size-px.l}"
+    value: "{size-px.xl}"
   box-shadow:
     value: "{shadow.content}"

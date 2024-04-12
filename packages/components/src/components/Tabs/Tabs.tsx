@@ -4,12 +4,13 @@ import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import styles from "./Tabs.module.scss";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface TabsProps
   extends Omit<Aria.TabsProps, "children">,
     PropsWithChildren {}
 
-export const Tabs: FC<TabsProps> = (props) => {
+export const Tabs = flowComponent("Tabs", (props) => {
   const { children, className, ...rest } = props;
 
   const rootClassName = clsx(styles.tabs, className);
@@ -25,6 +26,6 @@ export const Tabs: FC<TabsProps> = (props) => {
       </Aria.Tabs>
     </TunnelProvider>
   );
-};
+});
 
 export default Tabs;

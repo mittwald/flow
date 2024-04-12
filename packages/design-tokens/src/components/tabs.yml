@@ -25,4 +25,4 @@ tab:
 
 tab-panel:
   padding:
-    value: "{size-px.l}"
+    value: "{size-px.xl}"
