@@ -4606,7 +4606,7 @@ const RAW_RUNTIME_STATE =
           ["@storybook/addon-actions", "npm:8.0.6"],\
           ["@storybook/addon-essentials", "npm:8.0.6"],\
           ["@storybook/addon-interactions", "npm:8.0.6"],\
-          ["@storybook/addon-links", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.0.6"],\
+          ["@storybook/addon-links", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.0.8"],\
           ["@storybook/blocks", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.0.6"],\
           ["@storybook/components", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.0.6"],\
           ["@storybook/core-events", "npm:8.0.6"],\
@@ -4702,7 +4702,7 @@ const RAW_RUNTIME_STATE =
           ["@storybook/addon-actions", "npm:8.0.6"],\
           ["@storybook/addon-essentials", "npm:8.0.6"],\
           ["@storybook/addon-interactions", "npm:8.0.6"],\
-          ["@storybook/addon-links", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.0.6"],\
+          ["@storybook/addon-links", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.0.8"],\
           ["@storybook/blocks", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.0.6"],\
           ["@storybook/components", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.0.6"],\
           ["@storybook/core-events", "npm:8.0.6"],\
@@ -4793,7 +4793,7 @@ const RAW_RUNTIME_STATE =
           ["@storybook/addon-actions", "npm:8.0.6"],\
           ["@storybook/addon-essentials", "npm:8.0.6"],\
           ["@storybook/addon-interactions", "npm:8.0.6"],\
-          ["@storybook/addon-links", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.0.6"],\
+          ["@storybook/addon-links", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.0.8"],\
           ["@storybook/blocks", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.0.6"],\
           ["@storybook/components", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.0.6"],\
           ["@storybook/core-events", "npm:8.0.6"],\
@@ -9081,17 +9081,17 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@storybook/addon-links", [\
-      ["npm:8.0.6", {\
-        "packageLocation": "./.yarn/cache/@storybook-addon-links-npm-8.0.6-37c8c08711-18b3b5f1ef.zip/node_modules/@storybook/addon-links/",\
+      ["npm:8.0.8", {\
+        "packageLocation": "./.yarn/cache/@storybook-addon-links-npm-8.0.8-fe9962d13c-6bc188b2df.zip/node_modules/@storybook/addon-links/",\
         "packageDependencies": [\
-          ["@storybook/addon-links", "npm:8.0.6"]\
+          ["@storybook/addon-links", "npm:8.0.8"]\
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.0.6", {\
-        "packageLocation": "./.yarn/__virtual__/@storybook-addon-links-virtual-5ee88aaf40/0/cache/@storybook-addon-links-npm-8.0.6-37c8c08711-18b3b5f1ef.zip/node_modules/@storybook/addon-links/",\
+      ["virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.0.8", {\
+        "packageLocation": "./.yarn/__virtual__/@storybook-addon-links-virtual-6abf3a336d/0/cache/@storybook-addon-links-npm-8.0.8-fe9962d13c-6bc188b2df.zip/node_modules/@storybook/addon-links/",\
         "packageDependencies": [\
-          ["@storybook/addon-links", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.0.6"],\
+          ["@storybook/addon-links", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.0.8"],\
           ["@storybook/csf", "npm:0.1.2"],\
           ["@storybook/global", "npm:5.0.0"],\
           ["@types/react", "npm:18.2.75"],\
