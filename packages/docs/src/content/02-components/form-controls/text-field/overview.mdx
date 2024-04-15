@@ -12,22 +12,23 @@ bereitzustellen.
 
 ## States
 
-Das TextField hat 6 verschiedene states: **Default**, **Hover**, **Focused**,
-**Disabled**, **Error** und **Error-focused**.
-
 ### Disabled
 
-Wenn das TextField disabled ist, zeigt es optisch an, dass es momentan nicht
-verfügbar ist. Sobald die Ursache für die Deaktivierung behoben ist, kann das
-TextField wieder normal verwendet werden.
+Wenn das TextField disabled ist, kann nicht mit ihm interagiert werden, was auch
+optisch verdeutlicht wird.
 
-<LiveCodeEditor example="disabled" hideCode />
+<LiveCodeEditor example="disabled" editorCollapsed />
 
 ---
 
-### Error and error-focused
+### Validierung
 
-Wenn die Benutzereingabe nicht den erwarteten Anforderungen entspricht, wechseln
-sowohl das TextField als auch die FieldDescription in den **Error state**.
+Wenn die Benutzereingabe nicht den erwarteten Anforderungen entspricht, wird das
+TextField invalidiert. Informationen zum Fehler wird im `<FieldError />`
+angezeigt. Das TextField unterstützt zur Validierung
 
-<LiveCodeEditor example="invalid" hideCode />
+- `isRequired` für Pflichtfelder
+- `validate` für eigene Validierungen
+- HTML input Properties wie `type="email"`, `minLength`
+
+<LiveCodeEditor example="invalid" editorCollapsed />

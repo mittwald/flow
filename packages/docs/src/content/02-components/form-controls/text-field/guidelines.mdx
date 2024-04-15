@@ -1,10 +1,8 @@
 TextFields ermöglichen es Nutzern, freien Text über das Keyboard einzugeben. Ein
-erforderliches [Label](content/label) und eine optionale
-[FieldDescription](form-controls/field-description) unterstützen dabei, die
-Anforderungen an die Eingabe klar zu kommunizieren oder Fehlermeldungen
-darzustellen. Ein TextField wird häufig in Forms, Dialogs oder
-[Modals](overlays/modal) verwendet und bietet flexible Eingabeoptionen, um
-verschiedene Anwendungsfälle abzudecken.
+erforderliches [Label](/02-components/content/label) und eine optionale
+[FieldDescription](/02-components/form-controls/field-description) unterstützen
+dabei, die Anforderungen an die Eingabe klar zu kommunizieren oder
+Fehlermeldungen darzustellen.
 
 <InlineAlert>
 ### Best Practices
@@ -20,8 +18,7 @@ verschiedene Anwendungsfälle abzudecken.
     - Stelle sicher, dass Fehlermeldungen
     hilfreich sind, eine Lösung bieten und leicht umzusetzen sind.
 
-    - Verwende
-    keine Placeholder für wesentliche Informationen.
+    - Verwende keine Placeholder für wesentliche Informationen.
 
   </Content>
 </InlineAlert>
@@ -39,19 +36,18 @@ Spalten, die das ColumnLayout eventuell mit sich bringt. Das ColumnLayout macht
 es somit sehr einfach, übersichtliche Forms unter Berücksichtigung des Layouts
 zu erstellen.
 
-Am besten eignet sich ein 50% / 50% Raster für TextFields, sodass sie maximal
-die Hälfte des Inhaltsbereichs einnehmen können. Das Column Layout kann außerdem
+Am besten eignet sich ein 1:1 Raster für TextFields, sodass sie maximal die
+Hälfte des Inhaltsbereichs einnehmen können. Das Column Layout kann außerdem
 erweitert werden, um spezifischeren Layoutanforderungen gerecht zu werden. So
-kann bspw. ein 66% / 33% Raster innerhalb einer Spalte des 50% / 50% Rasters
-platziert werden, um Straßenname und Hausnummer zu einer sinnvollen Gruppe
+kann bspw. ein 2:1 Raster innerhalb einer Spalte des 1:1 Rasters platziert
+werden, um Straßenname und Hausnummer zu einer sinnvollen Gruppe
 zusammenzufassen.
 
-{" "}
-<LiveCodeEditor example="columnLayout" hideCode />
+<LiveCodeEditor example="columnLayout" editorCollapsed />
 <Do title="Grids und sinnvolle Gruppen">
-  Nutze ein 50% / 50% ColumnLayout für TextFields. Um sinnvolle Gruppen (z.B.
-  Straße und Hausnummer) zu erstellen, kannst du mehrere ColumnLayouts
-  ineinander verschachteln.
+  Nutze ein 1:1 ColumnLayout für TextFields. Um sinnvolle Gruppen (z.B. Straße
+  und Hausnummer) zu erstellen, kannst du mehrere ColumnLayouts ineinander
+  verschachteln.
 </Do>
 
 ---
@@ -62,7 +58,7 @@ Um ein TextField als erforderlich zu markieren, benutze das dazugehörige
 Property `isRequired`. Felder, die nicht required sind, werden als optional
 gekennzeichnet.
 
-<LiveCodeEditor example="required" hideCode />
+<LiveCodeEditor example="required" editorCollapsed />
 
 ---
 
@@ -70,25 +66,21 @@ gekennzeichnet.
 
 ### Label
 
-Jedes TextField muss ein zugehöriges [Label](content/label) besitzen. Das Label
-ist entscheidend, um die Eingabeanforderungen zu verstehen und sollte daher so
-gewählt werden, dass es alle Informationen liefert, um das TextField korrekt
-ausfüllen zu können. Außerdem sollte das Label knapp (max. 2 Wörter), präzise
-und weder versteckt noch auspunktiert sein. werden.
+Jedes TextField muss ein zugehöriges [Label](/02-components/content/label)
+besitzen. Das Label ist entscheidend, um die Eingabeanforderungen zu verstehen
+und sollte daher so gewählt werden, dass es alle Informationen liefert, um das
+TextField korrekt ausfüllen zu können. Außerdem sollte das Label knapp (max. 2
+Wörter), präzise und weder versteckt noch auspunktiert sein.
 
 ---
 
 ### FieldDescription
 
-Die [FieldDescription](form-controls/field-description) kann als optionaler
-Hilfstext unterhalb des TextFields angezeigt werden, um dem Nutzer ergänzenden
-Informationen oder Anweisungen zu bieten. Es sollte sparsam verwendet werden und
-kann:
-
-- als zusätzliche Beschreibung verwendet werden, Eingabe- und
-  Formatierungsbeispiele liefern oder
-- eine Fehlermeldung darstellen, die den Benutzer alarmiert und Hilfestellung
-  gibt, wenn die Feldanforderungen nicht erfüllt werden.
+Die [FieldDescription](/02-components/form-controls/field-description) kann als
+optionaler Hilfstext unterhalb des TextFields angezeigt werden, um dem Nutzer
+ergänzenden Informationen oder Anweisungen zu bieten. Es sollte sparsam
+verwendet werden und kann als zusätzliche Beschreibung verwendet werden,
+Eingabe- und Formatierungsbeispiele liefern.
 
 ---
 
@@ -109,12 +101,12 @@ Ergänze das TextField mit ...
   geben.
 
 <DoAndDont>
-  <LiveCodeEditor noCode example="placeholder" />
+  <LiveCodeEditor editorCollapsed example="placeholder" />
   <Dont>
     Placeholder sollten keine hilfreichen Informationen oder
     Formatierungshinweise enthalten.
   </Dont>
-  <LiveCodeEditor noCode />
+  <LiveCodeEditor editorCollapsed />
   <Do>
     Nutze die FieldDescription um hilfreiche Informationen darzustellen, z.B.
     für Formatierungshinweise.
@@ -127,10 +119,10 @@ Ergänze das TextField mit ...
 
 ### Min / Max Width
 
-Wird das TextField außerhalb eines ColumnLayouts verwendet, besitzt es keine
-fixe Breite. Achte daher darauf, die Breite des TextFields angemessen zum Inhalt
-zu wählen. So kann z.B. für ein TextField für eine URL deutlich mehr Platz
-benötigt werden, als für eines, das nur eine Hausnummer abfragt.
+Ein TextField besitzt keine fixe Breite. Achte daher darauf, die Breite des
+TextFields angemessen zum Inhalt zu wählen. So kann z.B. für ein TextField für
+eine URL deutlich mehr Platz benötigt werden, als für eines, das nur eine
+Hausnummer abfragt.
 
 ---
 
@@ -147,5 +139,4 @@ Damit auch der Inhalt barrierefrei ist, solltest du:
   bieten.
 - Placeholder nicht für Inhalte verwenden, die zum Ausfüllen des TextFields
   hilfreich sind.
-- Das Aria-Label nicht gepflegt werden, wenn die Komponente mit einem passenden
-  Label verwendet wird.
+- Das Aria-Label pflegen, wenn die Komponente ohne Label verwendet wird.

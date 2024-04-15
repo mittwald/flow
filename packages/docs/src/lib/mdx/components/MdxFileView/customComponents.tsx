@@ -11,6 +11,7 @@ import { LinkProvider } from "@mittwald/flow-react-components/nextjs";
 import DoAndDont from "@/lib/mdx/components/DoAndDont/DoAndDont";
 import Do from "@/lib/mdx/components/DoAndDont/Do";
 import Dont from "@/lib/mdx/components/DoAndDont/Dont";
+import { IconExternalLink } from "@mittwald/flow-react-components/Icons";
 
 export const customComponents: MDXComponents = {
   Content: Content,
@@ -70,7 +71,12 @@ export const customComponents: MDXComponents = {
 
   a: ({ children, href }) => {
     if (href?.startsWith("http")) {
-      return <Link href={href}>{children}</Link>;
+      return (
+        <Link href={href}>
+          {children}
+          <IconExternalLink />
+        </Link>
+      );
     }
 
     return (
