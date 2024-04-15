@@ -124,17 +124,16 @@ export const Button = flowComponent("Button", (props) => {
         ref={ref}
         {...restProps}
       >
-        <Wrap if={stateIcon}>
-          <span className={styles.content}>
-            <Wrap if={isStringContent}>
-              <Text>
-                <PropsContextProvider props={propsContext}>
-                  {children}
-                </PropsContextProvider>
-              </Text>
-            </Wrap>
-          </span>
-        </Wrap>
+        <PropsContextProvider props={propsContext}>
+          <Wrap if={stateIcon}>
+            <span className={styles.content}>
+              <Wrap if={isStringContent}>
+                <Text>{children}</Text>
+              </Wrap>
+            </span>
+          </Wrap>
+        </PropsContextProvider>
+
         {stateIcon}
       </Aria.Button>
     </ClearPropsContext>

@@ -46,6 +46,10 @@
       "types": "./dist/types/components/Content/index.d.ts",
       "import": "./dist/Content.js"
     },
+    "./IllustratedMessage": {
+      "types": "./dist/types/components/IllustratedMessage/index.d.ts",
+      "import": "./dist/IllustratedMessage.js"
+    },
     "./ContextMenu": {
       "types": "./dist/types/components/ContextMenu/index.d.ts",
       "import": "./dist/ContextMenu.js"
