@@ -126,6 +126,10 @@
       "types": "./dist/types/components/List/components/ListLoaderAsyncResource.d.ts",
       "import": "./dist/List/ListLoaderAsyncResource.js"
     },
+    "./LoadingSpinner": {
+      "types": "./dist/types/components/LoadingSpinner/index.d.ts",
+      "import": "./dist/LoadingSpinner.js"
+    },
     "./Modal": {
       "types": "./dist/types/components/Modal/index.d.ts",
       "import": "./dist/Modal.js"
