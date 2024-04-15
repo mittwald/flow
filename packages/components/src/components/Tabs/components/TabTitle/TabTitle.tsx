@@ -4,17 +4,17 @@ import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import styles from "./TabTitle.module.scss";
 import { Text } from "@/components/Text";
-import { useTabTabContext } from "@/components/Tabs/components/Tab/context";
+import { useTabContext } from "@/components/Tabs/components/Tab/context";
 import { TunnelEntry } from "@mittwald/react-tunnel";
 
 export interface TabTitleProps
-  extends Omit<Aria.TabProps, "children" | "id">,
+  extends Omit<Aria.TabProps, "children" | "id" | "isDisabled">,
     PropsWithChildren {}
 
 export const TabTitle: FC<TabTitleProps> = (props) => {
   const { children, className, ...rest } = props;
 
-  const context = useTabTabContext();
+  const context = useTabContext();
 
   const rootClassName = clsx(styles.tabTitle, className);
 

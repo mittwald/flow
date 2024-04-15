@@ -1,8 +1,6 @@
 tab-list:
   background-color:
     value: "{neutral.color.400}"
-  tab-to-tab-spacing:
-    value: "{size-px.xxs}"
 
 tab:
   padding-y:
@@ -11,14 +9,24 @@ tab:
     value: "{size-px.l}"
   background-color:
     default:
-      value: "{neutral.color.400}"
+      value: "{neutral-soft-background-color.default}"
+    hover:
+      value: "{neutral-soft-background-color.hover}"
+    pressed:
+      value: "{neutral-soft-background-color.pressed}"
     selected:
       value: "{neutral.color.100}"
   color:
     default:
-      value: "{color.default}"
-    selected:
-      value: "{primary.color.800}"
+      value: "{neutral-soft-content-color.default}"
+    hover:
+      value: "{neutral-soft-content-color.hover}"
+    pressed:
+      value: "{neutral-soft-content-color.pressed}"
+  disabled-color:
+    value: "{neutral.color.600}"
+  disabled-background-color:
+    value: "{neutral-soft-background-color.default}"
   font-weight:
     selected:
       value: "{font-weight.bold}"
