@@ -10,6 +10,9 @@ const meta: Meta<typeof Tooltip> = {
   args: {
     defaultOpen: true,
   },
+  parameters: {
+    controls: { exclude: ["defaultOpen"] },
+  },
   render: (props) => (
     <TooltipTrigger {...props}>
       <Button aria-label="copy">

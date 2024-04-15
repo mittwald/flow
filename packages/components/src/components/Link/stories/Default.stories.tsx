@@ -10,12 +10,13 @@ const meta: Meta<typeof Link> = {
   component: Link,
   args: {
     onPress: action("onPress"),
+    variant: "default",
   },
   render: (props) => <Link {...props}>Adjust project</Link>,
   argTypes: {
     variant: {
       control: "inline-radio",
-      defaultValue: "default",
+      options: ["default", "danger"],
     },
   },
   parameters: {

@@ -36,7 +36,7 @@ export const LongList: Story = {
         {Array(20)
           .fill("")
           .map((value, index) => (
-            <ContextMenuItem>Item {index + 1}</ContextMenuItem>
+            <ContextMenuItem key={index}>Item {index + 1}</ContextMenuItem>
           ))}
       </ContextMenu>
     </ContextMenuTrigger>

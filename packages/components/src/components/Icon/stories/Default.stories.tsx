@@ -10,6 +10,13 @@ const meta: Meta<typeof Icon> = {
   parameters: {
     controls: { exclude: ["tablerIcon"] },
   },
+  args: { size: "m" },
+  argTypes: {
+    size: {
+      control: "inline-radio",
+      options: ["s", "m", "l"],
+    },
+  },
 };
 export default meta;
 
