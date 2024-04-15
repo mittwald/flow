@@ -5,7 +5,7 @@ import { Button } from "@/components/Button";
 import { Text } from "@/components/Text";
 import * as Aria from "react-aria-components";
 import type { AnyData } from "@/components/List/model/item/types";
-import { ContextMenu, ContextMenuItem } from "@/components/ContextMenu";
+import { ContextMenu, MenuItem } from "@/components/ContextMenu";
 import { IconChevronDown } from "@/components/Icon/components/icons";
 
 interface Props {
@@ -16,9 +16,9 @@ export const FilterPicker: FC<Props> = (props) => {
   const { filter } = props;
 
   const items = filter.values.map((v) => (
-    <ContextMenuItem key={filter.getValueId(v)} id={String(v)}>
+    <MenuItem key={filter.getValueId(v)} id={String(v)}>
       {String(v)}
-    </ContextMenuItem>
+    </MenuItem>
   ));
 
   const activeFilterValues = filter.values

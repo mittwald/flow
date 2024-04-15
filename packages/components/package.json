@@ -130,6 +130,10 @@
       "types": "./dist/types/components/List/components/ListLoaderAsyncResource.d.ts",
       "import": "./dist/List/ListLoaderAsyncResource.js"
     },
+    "./MenuItem": {
+      "types": "./dist/types/components/MenuItem/index.d.ts",
+      "import": "./dist/MenuItem.js"
+    },
     "./Modal": {
       "types": "./dist/types/components/Modal/index.d.ts",
       "import": "./dist/Modal.js"
