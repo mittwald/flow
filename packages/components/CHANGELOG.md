@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.68](https://github.com/mittwald/flow/compare/0.1.0-alpha.67...0.1.0-alpha.68) (2024-04-16)
+
+### Bug Fixes
+
+- **RadioGroup:** fix segmented layout
+  ([14de6fb](https://github.com/mittwald/flow/commit/14de6fb155c3470fa8042fe5656965fbe49033ce))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.67](https://github.com/mittwald/flow/compare/0.1.0-alpha.66...0.1.0-alpha.67) (2024-04-16)
 
 ### Bug Fixes
