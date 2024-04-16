@@ -11,6 +11,7 @@ const meta: Meta<typeof InlineAlert> = {
   argTypes: {
     status: {
       control: "inline-radio",
+      options: ["info", "success", "warning", "danger"],
     },
   },
   args: { status: "info" },

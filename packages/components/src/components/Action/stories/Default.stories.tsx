@@ -15,6 +15,18 @@ const meta: Meta<typeof Action> = {
     action: syncfunction,
     children: button,
   },
+  parameters: {
+    controls: {
+      exclude: [
+        "children",
+        "action",
+        "closeModal",
+        "openModal",
+        "toggleModal",
+        "feedback",
+      ],
+    },
+  },
 };
 
 export default meta;

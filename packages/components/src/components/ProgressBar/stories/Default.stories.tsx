@@ -6,6 +6,17 @@ import { Label } from "@/components/Label";
 const meta: Meta<typeof ProgressBar> = {
   title: "Status/ProgressBar",
   component: ProgressBar,
+  args: { showMaxValue: false, size: "m", status: "info" },
+  argTypes: {
+    status: {
+      control: "inline-radio",
+      options: ["info", "success", "warning", "danger"],
+    },
+    size: {
+      control: "inline-radio",
+      options: ["s", "m"],
+    },
+  },
   render: (props) => (
     <ProgressBar
       value={500}
