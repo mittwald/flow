@@ -1,5 +1,7 @@
 progress-bar:
   font-size:
+    value: "{font-size.m}"
+  font-size-small:
     value: "{font-size.s}"
   value-font-weight:
     value: "{font-weight.bold}"
