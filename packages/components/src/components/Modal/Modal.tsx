@@ -12,6 +12,7 @@ import { useSyncTriggerState } from "@/components/Modal/hooks/useSyncTriggerStat
 import { OverlayContextProvider } from "@/lib/controller/overlay/context";
 
 export interface ModalProps extends PropsWithChildren {
+  /** @default "s" */
   size?: "s" | "m" | "l";
   offCanvas?: boolean;
   state?: OverlayState;

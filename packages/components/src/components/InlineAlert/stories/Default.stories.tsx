@@ -3,6 +3,7 @@ import InlineAlert from "../InlineAlert";
 import React from "react";
 import { Heading } from "@/components/Heading";
 import { Content } from "@/components/Content";
+import Button from "@/components/Button";
 
 const meta: Meta<typeof InlineAlert> = {
   title: "Status/InlineAlert",
@@ -10,6 +11,7 @@ const meta: Meta<typeof InlineAlert> = {
   argTypes: {
     status: {
       control: "inline-radio",
+      options: ["info", "success", "warning", "danger"],
     },
   },
   args: { status: "info" },
@@ -34,6 +36,7 @@ export const WithContent: Story = {
       <Content>
         As your domain has been deleted, this email address has been archived.
         To be able to send and receive emails, you must rename the address.
+        <Button>Update email address</Button>
       </Content>
     </InlineAlert>
   ),

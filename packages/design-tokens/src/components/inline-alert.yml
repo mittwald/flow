@@ -9,9 +9,11 @@ inline-alert:
     value: "{border-width.400}"
   border-style:
     value: "{border-style.default}"
-  text-to-text-spacing:
+  heading-to-content-spacing:
     value: "{size-rem.xs}"
-  icon-to-text-spacing:
+  icon-to-heading-spacing:
+    value: "{size-rem.s}"
+  content-to-content-spacing:
     value: "{size-rem.s}"
   heading-font-size:
     value: "{font-size.m}"

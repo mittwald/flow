@@ -26,6 +26,9 @@ export const InlineAlert = flowComponent("InlineAlert", (props) => {
     },
     Content: {
       className: styles.content,
+      Button: {
+        size: "s",
+      },
     },
   };
 

@@ -11,7 +11,7 @@ const meta: Meta<typeof ColumnLayout> = {
   title: "Structure/ColumnLayout",
   component: ColumnLayout,
   parameters: {
-    controls: { exclude: ["s", "m", "l"] },
+    controls: { exclude: ["s", "m", "l", "className"] },
   },
   render: (props) => (
     <Section>

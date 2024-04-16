@@ -1,22 +1,35 @@
 import type { DependencyList, FC, PropsWithChildren } from "react";
 import React, { cloneElement, isValidElement, useMemo } from "react";
 import type { PropsContext as PropsContextShape } from "@/lib/propsContext/types";
-import { propsContext } from "@/lib/propsContext/propsContext";
+import { propsContext, useContextProps } from "@/lib/propsContext/propsContext";
+import mergePropsContext from "@/lib/propsContext/mergePropsContext";
 
 interface Props extends PropsWithChildren {
   props: PropsContextShape;
   dependencies?: DependencyList;
+  mergeInParentContext?: boolean;
 }
 
 export const PropsContextProvider: FC<Props> = (props) => {
   const {
     props: providedProps,
     dependencies = [],
+    mergeInParentContext = false,
     children,
     ...forwardChildrenProps
   } = props;
 
+  const parentContextProps = useContextProps();
+
   const memoizedProps = useMemo(() => providedProps, dependencies);
+
+  const propsWithParentContextProps = useMemo(
+    () =>
+      mergeInParentContext
+        ? mergePropsContext(parentContextProps, providedProps)
+        : providedProps,
+    [memoizedProps, parentContextProps, mergeInParentContext],
+  );
 
   const childrenProps = isValidElement(children)
     ? {
@@ -39,7 +52,7 @@ export const PropsContextProvider: FC<Props> = (props) => {
   );
 
   return (
-    <propsContext.Provider value={memoizedProps}>
+    <propsContext.Provider value={propsWithParentContextProps}>
       {childrenWithForwardedProps}
     </propsContext.Provider>
   );

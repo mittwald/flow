@@ -2,11 +2,14 @@ import type { FlowComponentName } from "@/components/propTypes";
 import type { PropsContext, WorkaroundType } from "@/lib/propsContext/types";
 import { getPropsMerger } from "@/lib/react/getPropsMerger";
 
-const merger = getPropsMerger({ mergeClassNames: false });
+const merger = getPropsMerger({
+  mergeClassNames: false,
+  mergeEventHandler: false,
+});
 
 export const mergePropsContext = (
-  firstContext: PropsContext,
-  secondContext: PropsContext,
+  firstContext: PropsContext = {},
+  secondContext: PropsContext = {},
 ): PropsContext => {
   const mergedComponentNames = Object.keys({
     ...firstContext,

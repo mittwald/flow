@@ -1,7 +1,7 @@
 import type { FC, PropsWithChildren } from "react";
 import React from "react";
 import type * as Aria from "react-aria-components";
-import styles from "./ContextMenuItem.module.scss";
+import styles from "./MenuItem.module.scss";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import {
@@ -16,7 +16,7 @@ import { Wrap } from "@/components/Wrap";
 
 type Props = Aria.MenuItemRenderProps & PropsWithChildren;
 
-export const ContextMenuItemContent: FC<Props> = (props) => {
+export const MenuItemContent: FC<Props> = (props) => {
   const { selectionMode, isSelected, children } = props;
 
   const propsContext: PropsContext = {

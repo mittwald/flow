@@ -4,7 +4,8 @@
     "label value"
     "bar bar";
   grid-template-columns: 1fr auto;
-  gap: var(--progress-bar--label-to-bar-spacing);
+  row-gap: var(--progress-bar--label-to-bar-spacing);
+  column-gap: var(--progress-bar--label-to-value-spacing);
   width: 100%;
   font-size: var(--progress-bar--font-size);
 
@@ -30,6 +31,7 @@
 }
 
 .size-s {
+  font-size: var(--progress-bar--font-size-small);
   .bar {
     height: var(--progress-bar--bar-height-small);
   }

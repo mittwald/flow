@@ -12,18 +12,10 @@
   max-width: fit-content;
 
   @extend .info;
-
-  &:has(.text:empty) {
-    border-radius: var(--status-badge--corner-radius-icon-only);
-    padding: var(--status-badge--padding-icon-only);
-  }
 }
 
 .text {
   @include ellipsis.ellipsis();
-  &:empty {
-    display: none;
-  }
 }
 
 /* Status */

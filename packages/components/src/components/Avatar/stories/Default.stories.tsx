@@ -17,8 +17,12 @@ const meta: Meta<typeof Avatar> = {
   parameters: {
     controls: { exclude: ["className"] },
   },
+  args: { size: "m" },
   argTypes: {
     size: {
+      control: "inline-radio",
+    },
+    variant: {
       control: "inline-radio",
     },
   },
@@ -39,8 +43,9 @@ export const WithInitials: Story = {
 
 export const WithIcon: Story = {
   render: (props) => (
-    <Avatar {...props} variant={1}>
+    <Avatar {...props}>
       <IconApp />
     </Avatar>
   ),
+  args: { variant: 1 },
 };
