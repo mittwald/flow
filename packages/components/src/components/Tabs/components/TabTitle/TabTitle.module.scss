@@ -37,13 +37,13 @@
 */
 
 // first tab disabled
-:global(.flow--tabs--tab-list):not(:has(.tabTitle[data-selected])):has(.tabTitle[aria-disabled])
-.tabTitle[aria-disabled]:first-of-type + .tabTitle,
+:global(.flow--tabs--tab-list):not(:has(.tabTitle[data-selected])):has(.tabTitle[aria-disabled]) .tabTitle[aria-disabled]:first-of-type + .tabTitle,
 
 // other/no tab disabled
-:global(.flow--tabs--tab-list):not(:has(.tabTitle[data-selected]))
-.tabTitle:first-of-type:not([aria-disabled]) {
+:global(.flow--tabs--tab-list):not(:has(.tabTitle[data-selected])) .tabTitle:first-of-type:not([aria-disabled]) {
   background-color: var(--tab--background-color--selected);
   color: var(--tab--color--selected);
   font-weight: var(--tab--font-weight--selected);
+  border-start-start-radius: var(--tab--corner-top-radius-current);
+  border-start-end-radius: var(--tab--corner-top-radius-current);
 }
