@@ -1,7 +1,7 @@
 import React from "react";
 import * as Aria from "react-aria-components";
 import styles from "./ContextMenu.module.scss";
-import type { ContextMenuItemProps } from "@/components/ContextMenu/components/ContextMenuItem";
+import type { MenuItemProps } from "src/components/MenuItem";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import type { PopoverProps } from "@/components/Popover";
@@ -10,7 +10,7 @@ import { Popover } from "@/components/Popover";
 export interface ContextMenuProps
   extends PopoverProps,
     Pick<
-      Aria.MenuProps<ContextMenuItemProps>,
+      Aria.MenuProps<MenuItemProps>,
       | "onAction"
       | "selectionMode"
       | "selectedKeys"
