@@ -29,6 +29,7 @@ export default defineConfig(
           CheckboxGroup: "./src/components/CheckboxGroup/index.ts",
           ColumnLayout: "./src/components/ColumnLayout/index.ts",
           Content: "./src/components/Content/index.ts",
+          IllustratedMessage: "./src/components/IllustratedMessage/index.ts",
           ContextMenu: "./src/components/ContextMenu/index.ts",
           controller: "./src/lib/controller/index.ts",
           CopyButton: "./src/components/CopyButton/index.ts",
@@ -51,6 +52,7 @@ export default defineConfig(
           "List/ListLoaderAsyncResource":
             "./src/components/List/components/ListLoaderAsyncResource.ts",
           LoadingSpinner: "./src/components/LoadingSpinner/index.ts",
+          MenuItem: "./src/components/MenuItem/index.ts",
           Modal: "./src/components/Modal/index.ts",
           Navigation: "./src/components/Navigation/index.ts",
           NumberField: "./src/components/NumberField/index.ts",
