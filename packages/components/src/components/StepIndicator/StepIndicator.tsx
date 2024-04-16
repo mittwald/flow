@@ -1,31 +1,47 @@
-import type { FC } from "react";
+import type { FC, PropsWithChildren } from "react";
 import React from "react";
 import styles from "./StepIndicator.module.scss";
-import { Step } from "./components/Step";
+import type { StepProps } from "./components/Step";
+import { ChildPropsStore } from "@/lib/childProps/ChildPropsStore";
+import { ChildPropsContextProvider } from "@/lib/childProps";
+import { StepView } from "@/components/StepIndicator/components/Step/StepView";
 
-export interface StepIndicatorProps {
-  steps: string[];
-  current: number;
+export interface StepIndicatorProps extends PropsWithChildren {
+  current?: string;
 }
 
 export const StepIndicator: FC<StepIndicatorProps> = (props) => {
-  const { steps, current } = props;
+  const { current, children } = props;
 
-  const stepElements = steps.map((step, index) => {
-    const stepNumber = index + 1;
-    return (
-      <Step
-        stepNumber={stepNumber}
-        stepsLength={steps.length}
-        current={stepNumber === current}
-        done={stepNumber < current}
-      >
-        {step}
-      </Step>
-    );
-  });
+  const childrenProps = ChildPropsStore.useNew("steps");
 
-  return <div className={styles.stepIndicator}>{stepElements}</div>;
+  const stepProps = childrenProps.usePropsArray<StepProps>();
+
+  const currentIndex = current
+    ? stepProps.findIndex((p) => p.id === current)
+    : 0;
+
+  return (
+    <div className={styles.stepIndicator}>
+      <ChildPropsContextProvider store={childrenProps}>
+        {children}
+      </ChildPropsContextProvider>
+
+      {stepProps.map((props, index) => {
+        return (
+          <StepView
+            key={props.id}
+            stepsLength={stepProps.length}
+            stepNumber={index + 1}
+            done={index < currentIndex}
+            current={index === currentIndex}
+          >
+            {props.children}
+          </StepView>
+        );
+      })}
+    </div>
+  );
 };
 
 export default StepIndicator;

@@ -3,10 +3,11 @@ import { StepIndicator } from "../index";
 import React from "react";
 import defaultStories from "./Default.stories";
 import { dummyText } from "@/lib/dev/dummyText";
+import Step from "@/components/StepIndicator/components/Step";
 
 const meta: Meta<typeof StepIndicator> = {
   ...defaultStories,
-  title: "Navigation/Step Indicator/Edge Cases",
+  title: "Navigation/StepIndicator/Edge Cases",
 };
 
 export default meta;
@@ -15,10 +16,11 @@ type Story = StoryObj<typeof StepIndicator>;
 
 export const LongTexts: Story = {
   render: (props) => (
-    <StepIndicator
-      {...props}
-      steps={[dummyText.medium, dummyText.medium, dummyText.medium]}
-      current={2}
-    />
+    <StepIndicator {...props}>
+      <Step id="1">{dummyText.medium}</Step>
+      <Step id="2">{dummyText.medium}</Step>
+      <Step id="3">{dummyText.medium}</Step>
+      <Step id="4">{dummyText.medium}</Step>
+    </StepIndicator>
   ),
 };

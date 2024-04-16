@@ -9,11 +9,11 @@ step-indicator:
     value: "{font-weight.bold}"
   background-color:
     default:
-      value: "{neutral.color.400}"
+      value: "{neutral-soft-background-color.default}"
     current:
-      value: "{info.color.200}"
+      value: "{neutral-solid-background-color.default}"
   content-color:
     default:
       value: "{neutral.color.1000}"
     current:
-      value: "{info.color.900}"
+      value: "{neutral.color.100}"
