@@ -16,8 +16,6 @@ export interface LinkProps
     >,
     FlowComponentProps,
     PropsWithClassName {
-  /** @default "default" */
-  variant?: "default" | "danger";
   inline?: boolean;
   linkComponent?: ComponentType<Omit<ComponentProps<"a">, "ref">>;
   /** @internal */
@@ -29,7 +27,6 @@ export const Link = flowComponent("Link", (props) => {
   const {
     children,
     className,
-    variant = "default",
     inline,
     linkComponent: linkComponentFromProps,
     unstyled = false,
@@ -43,7 +40,7 @@ export const Link = flowComponent("Link", (props) => {
 
   const rootClassName = unstyled
     ? className
-    : clsx(styles.link, styles[variant], inline && styles.inline, className);
+    : clsx(styles.link, inline && styles.inline, className);
 
   const propsContext: PropsContext = {
     Icon: {

@@ -10,20 +10,10 @@ link:
   text-to-icon-spacing:
     value: "{size-rem.xs}"
 
-  # Primary
-  primary-color:
+  color:
     default:
       value: "{primary-plain-content-color.default}"
     hover:
       value: "{primary-plain-content-color.hover}"
     pressed:
       value: "{primary-plain-content-color.pressed}"
-
-  # Danger
-  danger-color:
-    default:
-      value: "{danger-plain-content-color.default}"
-    hover:
-      value: "{danger-plain-content-color.hover}"
-    pressed:
-      value: "{danger-plain-content-color.pressed}"

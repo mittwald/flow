@@ -4,7 +4,7 @@ import styles from "./RadioGroup.module.scss";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
-import { PropsContextProvider } from "@/lib/propsContext";
+import { dynamic, PropsContextProvider } from "@/lib/propsContext";
 import { FieldError } from "@/components/FieldError";
 import type { ColumnLayoutProps } from "@/components/ColumnLayout";
 import { ColumnLayout } from "@/components/ColumnLayout";
@@ -12,9 +12,10 @@ import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import formFieldStyles from "../FormField/FormField.module.scss";
 import { deepFindOfType } from "@/lib/react/deepFindOfType";
 import RadioButton from "./components/RadioButton";
-import { SegmentedGroup } from "@/components/RadioGroup/components/SegmentedGroup";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import { IconCheck } from "@/components/Icon/components/icons";
+import mergePropsContext from "@/lib/propsContext/mergePropsContext";
 
 export interface RadioGroupProps
   extends PropsWithChildren<Omit<Aria.RadioGroupProps, "children">>,
@@ -28,7 +29,7 @@ export const RadioGroup = flowComponent("RadioGroup", (props) => {
 
   const rootClassName = clsx(formFieldStyles.formField, className);
 
-  const propsContext: PropsContext = {
+  let propsContext: PropsContext = {
     Label: {
       className: formFieldStyles.label,
     },
@@ -48,6 +49,21 @@ export const RadioGroup = flowComponent("RadioGroup", (props) => {
     },
   };
 
+  if (variant === "segmented") {
+    propsContext = mergePropsContext(propsContext, {
+      Radio: {
+        className: styles.segment,
+        unstyled: true,
+        children: dynamic((props) => (
+          <>
+            {props.children}
+            <IconCheck className={styles.checkmark} />
+          </>
+        )),
+      },
+    });
+  }
+
   const hasRadioButtons = !!deepFindOfType(children, RadioButton);
 
   if (variant === "segmented" && hasRadioButtons) {
@@ -59,13 +75,15 @@ export const RadioGroup = flowComponent("RadioGroup", (props) => {
   return (
     <Aria.RadioGroup {...rest} className={rootClassName}>
       <TunnelProvider>
-        <PropsContextProvider props={propsContext}>
+        <PropsContextProvider props={propsContext} dependencies={[variant]}>
           {children}
 
           {variant === "segmented" && (
-            <SegmentedGroup>
-              <TunnelExit id="radios" />
-            </SegmentedGroup>
+            <div className={styles.segmentedGroup}>
+              <div className={styles.segments}>
+                <TunnelExit id="radios" />
+              </div>
+            </div>
           )}
 
           {variant === "default" && hasRadioButtons && (

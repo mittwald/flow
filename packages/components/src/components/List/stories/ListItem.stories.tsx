@@ -4,7 +4,7 @@ import React from "react";
 import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
 import { Content } from "@/components/Content";
-import { ContextMenu, ContextMenuItem } from "@/components/ContextMenu";
+import { ContextMenu, MenuItem } from "@/components/ContextMenu";
 import defaultMeta from "./Default.stories";
 import { Item } from "@/components/List/components/Items/Item";
 import { Avatar } from "@/components/Avatar";
@@ -26,7 +26,7 @@ export const WithoutAvatar: Story = {
       <Text>Mittwald</Text>
       <Content style={{ background: "lightgrey" }}></Content>
       <ContextMenu>
-        <ContextMenuItem>Show details</ContextMenuItem>
+        <MenuItem>Show details</MenuItem>
       </ContextMenu>
     </Item>
   ),
@@ -38,7 +38,7 @@ export const WithoutSubtitle: Story = {
       <Heading>John Doe</Heading>
       <Content style={{ background: "lightgrey" }}></Content>
       <ContextMenu>
-        <ContextMenuItem>Show details</ContextMenuItem>
+        <MenuItem>Show details</MenuItem>
       </ContextMenu>
     </Item>
   ),
@@ -52,7 +52,7 @@ export const WithoutContent: Story = {
       </Avatar>
       <Heading>john@doe.de</Heading>
       <ContextMenu>
-        <ContextMenuItem>Show details</ContextMenuItem>
+        <MenuItem>Show details</MenuItem>
       </ContextMenu>
     </Item>
   ),

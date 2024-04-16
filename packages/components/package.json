@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-react-components",
-  "version": "0.1.0-alpha.66",
+  "version": "0.1.0-alpha.69",
   "type": "module",
   "description": "A React implementation of Flow, mittwald’s design system",
   "homepage": "https://mittwald.github.io/flow",
@@ -129,6 +129,14 @@
     "./List/ListLoaderAsyncResource": {
       "types": "./dist/types/components/List/components/ListLoaderAsyncResource.d.ts",
       "import": "./dist/List/ListLoaderAsyncResource.js"
+    },
+    "./LoadingSpinner": {
+      "types": "./dist/types/components/LoadingSpinner/index.d.ts",
+      "import": "./dist/LoadingSpinner.js"
+    },
+    "./MenuItem": {
+      "types": "./dist/types/components/MenuItem/index.d.ts",
+      "import": "./dist/MenuItem.js"
     },
     "./Modal": {
       "types": "./dist/types/components/Modal/index.d.ts",

@@ -53,6 +53,7 @@ export const Action: FC<ActionProps> = (props) => {
 
   return (
     <PropsContextProvider
+      mergeInParentContext
       props={propsContext}
       dependencies={Object.values(state)}
     >

@@ -12,6 +12,7 @@ import type { MdxDirectoryTree } from "@/lib/mdx/components/buildDirectoryTree";
 import { buildDirectoryTree } from "@/lib/mdx/components/buildDirectoryTree";
 import { usePathname } from "next/navigation";
 import { Link } from "@mittwald/flow-react-components/Link";
+import { Label } from "@mittwald/flow-react-components/Label";
 
 interface Props {
   docs: SerializedMdxFile[];
@@ -51,12 +52,19 @@ const NavigationSection: FC<NavigationSectionProps> = (props) => {
 
   return (
     <>
-      <Heading
-        level={level as ComponentProps<typeof Heading>["level"]}
-        id={headingComponentsId}
-      >
-        <GroupText>{group}</GroupText>
-      </Heading>
+      {level >= 4 ? (
+        <Label>
+          <GroupText>{group}</GroupText>
+        </Label>
+      ) : (
+        <Heading
+          level={level as ComponentProps<typeof Heading>["level"]}
+          id={headingComponentsId}
+        >
+          <GroupText>{group}</GroupText>
+        </Heading>
+      )}
+
       <NavigationGroup aria-labelledby={headingComponentsId}>
         {navigationItems}
       </NavigationGroup>
@@ -82,7 +90,7 @@ const MainNavigation: FC<Props> = (props) => {
   return (
     <Navigation>
       <NavigationSection
-        level={2}
+        level={3}
         tree={selectedMainBranch}
         group={mainPathSegment}
       />

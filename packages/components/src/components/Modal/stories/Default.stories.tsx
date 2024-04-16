@@ -14,7 +14,18 @@ import { Action } from "@/components/Action";
 const meta: Meta<typeof Modal> = {
   title: "Overlays/Modal",
   component: Modal,
-
+  parameters: {
+    controls: { exclude: ["state", "defaultOpen", "offCanvas"] },
+  },
+  argTypes: {
+    size: {
+      control: "inline-radio",
+      options: ["s", "m", "l"],
+    },
+  },
+  args: {
+    size: "s",
+  },
   render: (props) => {
     return (
       <Modal {...props} defaultOpen>

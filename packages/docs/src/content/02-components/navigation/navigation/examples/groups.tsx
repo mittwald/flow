@@ -1,18 +1,18 @@
 import Navigation, {
   NavigationGroup,
 } from "@mittwald/flow-react-components/Navigation";
-import Heading from "@mittwald/flow-react-components/Heading";
 import Link from "@mittwald/flow-react-components/Link";
+import Label from "@mittwald/flow-react-components/Label";
 
 <Navigation aria-label="Main navigation">
-  <Heading>General</Heading>
+  <Label>General</Label>
   <NavigationGroup>
     <Link href="#">Dashboard</Link>
     <Link href="#" aria-current="page">
       Performance
     </Link>
   </NavigationGroup>
-  <Heading>Components</Heading>
+  <Label>Components</Label>
   <NavigationGroup>
     <Link href="#">Apps</Link>
     <Link href="#">Databases</Link>

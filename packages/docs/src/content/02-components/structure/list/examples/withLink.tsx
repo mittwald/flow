@@ -11,7 +11,7 @@ import { Avatar } from "@mittwald/flow-react-components/Avatar";
 import { Heading } from "@mittwald/flow-react-components/Heading";
 import { Text } from "@mittwald/flow-react-components/Text";
 import ContextMenu, {
-  ContextMenuItem,
+  MenuItem,
 } from "@mittwald/flow-react-components/ContextMenu";
 import { Link } from "@mittwald/flow-react-components/Link";
 import {
@@ -41,8 +41,8 @@ import StatusBadge from "@mittwald/flow-react-components/StatusBadge";
           </StatusBadge>
         )}
         <ContextMenu>
-          <ContextMenuItem>Show details</ContextMenuItem>
-          <ContextMenuItem>Delete</ContextMenuItem>
+          <MenuItem>Show details</MenuItem>
+          <MenuItem>Delete</MenuItem>
         </ContextMenu>
       </Link>
     )}

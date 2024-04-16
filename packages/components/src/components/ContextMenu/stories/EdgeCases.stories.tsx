@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import ContextMenu, {
-  ContextMenuItem,
+  MenuItem,
   ContextMenuTrigger,
 } from "@/components/ContextMenu";
 import { Button } from "@/components/Button";
@@ -21,8 +21,8 @@ export const LongTexts: Story = {
     <ContextMenuTrigger>
       <Button>Trigger</Button>
       <ContextMenu {...props}>
-        <ContextMenuItem>{dummyText.medium}</ContextMenuItem>
-        <ContextMenuItem>{dummyText.medium}</ContextMenuItem>
+        <MenuItem>{dummyText.medium}</MenuItem>
+        <MenuItem>{dummyText.medium}</MenuItem>
       </ContextMenu>
     </ContextMenuTrigger>
   ),
@@ -36,7 +36,7 @@ export const LongList: Story = {
         {Array(20)
           .fill("")
           .map((value, index) => (
-            <ContextMenuItem>Item {index + 1}</ContextMenuItem>
+            <MenuItem key={index}>Item {index + 1}</MenuItem>
           ))}
       </ContextMenu>
     </ContextMenuTrigger>

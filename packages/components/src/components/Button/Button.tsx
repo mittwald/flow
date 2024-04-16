@@ -5,17 +5,14 @@ import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
 import { ClearPropsContext, PropsContextProvider } from "@/lib/propsContext";
-import {
-  IconFailed,
-  IconPending,
-  IconSucceeded,
-} from "@/components/Icon/components/icons";
+import { IconFailed, IconSucceeded } from "@/components/Icon/components/icons";
 import { Wrap } from "@/components/Wrap";
 import { Text } from "@/components/Text";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
+import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 
 export interface ButtonProps
   extends PropsWithChildren<Omit<Aria.ButtonProps, "style">>,
@@ -106,7 +103,7 @@ export const Button = flowComponent("Button", (props) => {
     : isFailed
       ? IconFailed
       : isPending
-        ? IconPending
+        ? LoadingSpinner
         : undefined;
 
   const stateIcon = StateIconComponent && (
