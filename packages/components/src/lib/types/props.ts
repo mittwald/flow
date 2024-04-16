@@ -3,6 +3,7 @@ import type {
   HTMLAttributes,
   ReactElement,
   ReactHTML,
+  ReactNode,
 } from "react";
 
 export type Status = "info" | "success" | "warning" | "danger";
@@ -18,14 +19,14 @@ export interface PropsWithTunnel {
 
 export interface PropsWithHOC<P> {
   /** @internal */
-  hoc?: (element: ReactElement, props: P) => ReactElement;
+  hoc?: (element: ReactNode, props: P) => ReactElement;
 }
 
 export interface PropsWithClassName {
   className?: string;
 }
 
-export type PropsWithElementType<P = unknown> = P &
+export type PropsWithElementType<T extends keyof ReactHTML = never> =
   HTMLAttributes<HTMLElement> & {
-    elementType?: keyof ReactHTML | ExoticComponent;
+    elementType?: T | ExoticComponent;
   };

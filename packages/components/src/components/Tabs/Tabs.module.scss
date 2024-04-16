@@ -1,0 +1,11 @@
+.tabs {
+  display: flex;
+  flex-direction: column;
+}
+
+.tabList {
+  display: flex;
+  justify-content: flex-start;
+  background-color: var(--tab-list--background-color);
+  overflow-x: auto;
+}

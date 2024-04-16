@@ -61,6 +61,7 @@ export const Button = flowComponent("Button", (props) => {
     isSucceeded,
     isFailed,
     "aria-label": ariaLabel,
+    ref,
     ...restProps
   } = props;
 
@@ -83,6 +84,9 @@ export const Button = flowComponent("Button", (props) => {
     },
     Text: {
       className: styles.text,
+    },
+    Avatar: {
+      className: styles.avatar,
     },
   };
 
@@ -117,19 +121,19 @@ export const Button = flowComponent("Button", (props) => {
         className={rootClassName}
         isDisabled={isDisabled}
         aria-label={stateLabel ?? ariaLabel}
+        ref={ref}
         {...restProps}
       >
-        <Wrap if={stateIcon}>
-          <span className={styles.content}>
-            <Wrap if={isStringContent}>
-              <Text>
-                <PropsContextProvider props={propsContext}>
-                  {children}
-                </PropsContextProvider>
-              </Text>
-            </Wrap>
-          </span>
-        </Wrap>
+        <PropsContextProvider props={propsContext}>
+          <Wrap if={stateIcon}>
+            <span className={styles.content}>
+              <Wrap if={isStringContent}>
+                <Text>{children}</Text>
+              </Wrap>
+            </span>
+          </Wrap>
+        </PropsContextProvider>
+
         {stateIcon}
       </Aria.Button>
     </ClearPropsContext>

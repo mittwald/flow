@@ -10,7 +10,7 @@ import * as Aria from "react-aria-components";
 export interface HeadingProps extends Aria.HeadingProps, FlowComponentProps {}
 
 export const Heading = flowComponent("Heading", (props) => {
-  const { children, className, level = 2, ...rest } = props;
+  const { children, className, level = 2, ref, ...rest } = props;
 
   const rootClassName = clsx(styles.heading, className);
 
@@ -24,7 +24,7 @@ export const Heading = flowComponent("Heading", (props) => {
 
   return (
     <ClearPropsContext>
-      <Aria.Heading level={level} className={rootClassName} {...rest}>
+      <Aria.Heading level={level} className={rootClassName} {...rest} ref={ref}>
         <PropsContextProvider props={propsContext}>
           {children}
         </PropsContextProvider>

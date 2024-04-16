@@ -3,6 +3,86 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.66](https://github.com/mittwald/flow/compare/0.1.0-alpha.65...0.1.0-alpha.66) (2024-04-12)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.65](https://github.com/mittwald/flow/compare/0.1.0-alpha.64...0.1.0-alpha.65) (2024-04-11)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.64](https://github.com/mittwald/flow/compare/0.1.0-alpha.62...0.1.0-alpha.64) (2024-04-10)
+
+### Bug Fixes
+
+- **Tabs:** fix root CSS class
+  ([325d04c](https://github.com/mittwald/flow/commit/325d04cc64a89067ccf45548ca3225279b029ff6))
+
+### Features
+
+- Add ProgressBar component
+  ([1974cd6](https://github.com/mittwald/flow/commit/1974cd614b2cfe6a2c6743e270836f8ac0b8092e))
+- **HeaderNavigation:** add header navigation
+  ([d8ad385](https://github.com/mittwald/flow/commit/d8ad385e38459f83bcc7143e30c4606cec6253be))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.63](https://github.com/mittwald/flow/compare/0.1.0-alpha.62...0.1.0-alpha.63) (2024-04-10)
+
+### Bug Fixes
+
+- **Tabs:** fix root CSS class
+  ([325d04c](https://github.com/mittwald/flow/commit/325d04cc64a89067ccf45548ca3225279b029ff6))
+
+### Features
+
+- **HeaderNavigation:** add header navigation
+  ([d8ad385](https://github.com/mittwald/flow/commit/d8ad385e38459f83bcc7143e30c4606cec6253be))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.62](https://github.com/mittwald/flow/compare/0.1.0-alpha.61...0.1.0-alpha.62) (2024-04-10)
+
+### Features
+
+- add Tabs
+  ([8f3ac47](https://github.com/mittwald/flow/commit/8f3ac47d4708df5106dd1776ced3a244728c064d))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.61](https://github.com/mittwald/flow/compare/0.1.0-alpha.60...0.1.0-alpha.61) (2024-04-09)
+
+### Features
+
+- **Avatar:** add variant
+  ([e6d3dea](https://github.com/mittwald/flow/commit/e6d3deabdc2b04d53b2d6ceba58b282e5b97bb53))
+- **StatusBadge:** add icon only version
+  ([8c18f80](https://github.com/mittwald/flow/commit/8c18f808ceba514da2f4d45d4cbae955824a2d42))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.60](https://github.com/mittwald/flow/compare/0.1.0-alpha.59...0.1.0-alpha.60) (2024-04-08)
 
 **Note:** Version bump only for package @mittwald/flow-react-components

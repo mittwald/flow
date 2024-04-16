@@ -1,9 +1,0 @@
-context-menu:
-  box-shadow:
-    value: "{shadow.overlay}"
-  corner-radius:
-    value: "{corner-radius.default}"
-  padding:
-    value: "{size-px.s}"
-  background-color:
-    value: "{neutral.color.100}"

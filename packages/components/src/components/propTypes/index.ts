@@ -19,7 +19,19 @@ import type { ButtonGroupProps } from "@/components/ButtonGroup";
 import type { AvatarProps } from "@/components/Avatar";
 import type { ActionProps } from "@/components/Action";
 import type { ContextMenuProps } from "@/components/ContextMenu";
-import type { RadioProps } from "@/components/RadioGroup";
+import type { OptionProps, SelectProps } from "@/components/Select";
+import type {
+  RadioButtonProps,
+  RadioGroupProps,
+  RadioProps,
+} from "@/components/RadioGroup";
+import type { TextFieldProps } from "@/components/TextField";
+import type { NumberFieldProps } from "@/components/NumberField";
+import type { TextAreaProps } from "@/components/TextArea";
+import type { CheckboxGroupProps } from "@/components/CheckboxGroup";
+import type { CheckboxProps } from "@/components/Checkbox";
+import type { CheckboxButtonProps } from "@/components/CheckboxButton";
+import type { TabsProps } from "@/components/Tabs";
 
 export * from "./types";
 
@@ -28,6 +40,9 @@ export interface FlowComponentPropsTypes {
   Avatar: AvatarProps;
   Button: ButtonProps;
   ButtonGroup: ButtonGroupProps;
+  Checkbox: CheckboxProps;
+  CheckboxButton: CheckboxButtonProps;
+  CheckboxGroup: CheckboxGroupProps;
   Content: ContentProps;
   ContextMenu: ContextMenuProps;
   CopyButton: CopyButtonProps;
@@ -42,10 +57,18 @@ export interface FlowComponentPropsTypes {
   Label: LabelProps;
   LayoutCard: LayoutCardProps;
   Link: LinkProps;
+  NumberField: NumberFieldProps;
+  Option: OptionProps;
   Radio: RadioProps;
+  RadioButton: RadioButtonProps;
+  RadioGroup: RadioGroupProps;
+  Select: SelectProps;
   StatusBadge: StatusBadgeProps;
   Switch: SwitchProps;
+  Tabs: TabsProps;
   Text: TextProps;
+  TextArea: TextAreaProps;
+  TextField: TextFieldProps;
 }
 
 const propsContextSupportingComponentsMap: Record<
@@ -56,6 +79,9 @@ const propsContextSupportingComponentsMap: Record<
   Avatar: true,
   Button: true,
   ButtonGroup: true,
+  Checkbox: true,
+  CheckboxButton: true,
+  CheckboxGroup: true,
   Content: true,
   ContextMenu: true,
   CopyButton: true,
@@ -70,13 +96,21 @@ const propsContextSupportingComponentsMap: Record<
   Label: true,
   LayoutCard: true,
   Link: true,
+  NumberField: true,
   Radio: true,
+  Option: true,
+  RadioButton: true,
+  RadioGroup: true,
   StatusBadge: true,
+  Select: true,
   Switch: true,
+  Tabs: true,
   TestComponent: true,
   Text: true,
+  TextArea: true,
+  TextField: true,
 };
 
 export const propsContextSupportingComponents = Object.keys(
   propsContextSupportingComponentsMap,
-);
+) as Array<keyof FlowComponentPropsTypes>;

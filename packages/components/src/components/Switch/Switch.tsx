@@ -17,7 +17,13 @@ export interface SwitchProps
 }
 
 export const Switch = flowComponent("Switch", (props) => {
-  const { children, className, labelPosition = "trailing", ...rest } = props;
+  const {
+    children,
+    className,
+    labelPosition = "trailing",
+    ref,
+    ...rest
+  } = props;
 
   const rootClassName = clsx(
     styles.switch,
@@ -27,7 +33,7 @@ export const Switch = flowComponent("Switch", (props) => {
 
   return (
     <ClearPropsContext>
-      <Aria.Switch {...rest} className={rootClassName}>
+      <Aria.Switch {...rest} className={rootClassName} ref={ref}>
         {({ isSelected }) => (
           <>
             <div className={styles.track}>
