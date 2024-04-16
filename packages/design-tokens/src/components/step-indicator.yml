@@ -9,11 +9,10 @@ step-indicator:
     value: "{font-weight.bold}"
   background-color:
     default:
+      value: "{neutral-plain-background-color.default}"
+    current:
       value: "{neutral-soft-background-color.default}"
-    current:
-      value: "{neutral-solid-background-color.default}"
-  content-color:
-    default:
-      value: "{neutral.color.1000}"
-    current:
-      value: "{neutral.color.100}"
+    hover:
+      value: "{neutral-soft-background-color.hover}"
+    pressed:
+      value: "{neutral-soft-background-color.pressed}"

@@ -5,6 +5,9 @@ import React from "react";
 const meta: Meta<typeof StepIndicator> = {
   title: "Navigation/StepIndicator",
   component: StepIndicator,
+  parameters: {
+    controls: { exclude: ["current"] },
+  },
   render: (props) => (
     <StepIndicator current="payment" {...props}>
       <Step id="configuration">Configuration</Step>

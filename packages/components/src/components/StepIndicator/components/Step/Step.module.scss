@@ -4,7 +4,6 @@
 .step {
   background-color: var(--step-indicator--background-color--default);
   position: relative;
-  color: var(--step-indicator--content-color--default);
 
   &:first-child {
     border-start-start-radius: var(--step-indicator--corner-radius);
@@ -51,6 +50,11 @@
   @container (max-width: 550px) {
     width: 100%;
     border-radius: var(--step-indicator--corner-radius);
+
+    &:not(:first-child) {
+      padding-inline-start: 0;
+    }
+
     &:not(.current) {
       display: none;
     }
@@ -74,15 +78,27 @@
   font-weight: var(--step-indicator--font-weight-current);
 }
 
-.done:hover {
-  text-decoration: underline;
-  cursor: pointer;
+.done {
+  &:hover {
+    background-color: var(--step-indicator--background-color--hover);
+    cursor: pointer;
+    &:not(:last-child):after {
+      border-inline-start-color: var(--step-indicator--background-color--hover);
+    }
+  }
+  &[data-pressed] {
+    background-color: var(--step-indicator--background-color--pressed);
+    &:not(:last-child):after {
+      border-inline-start-color: var(
+        --step-indicator--background-color--pressed
+      );
+    }
+  }
 }
 
 .current,
 .done {
   background-color: var(--step-indicator--background-color--current);
-  color: var(--step-indicator--content-color--current);
   &:not(:last-child):after {
     border-inline-start-color: var(--step-indicator--background-color--current);
   }
