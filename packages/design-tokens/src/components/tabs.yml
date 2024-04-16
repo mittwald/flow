@@ -30,6 +30,8 @@ tab:
   font-weight:
     selected:
       value: "{font-weight.bold}"
+  corner-top-radius-current:
+    value: "{corner-radius.default}"
 
 tab-panel:
   padding:
