@@ -1,27 +1,25 @@
 TextFields ermöglichen es Nutzern, freien Text über das Keyboard einzugeben. Ein
 erforderliches [Label](/02-components/content/label) und eine optionale
-[FieldDescription](/02-components/form-controls/field-description) unterstützen
-dabei, die Anforderungen an die Eingabe klar zu kommunizieren oder
-Fehlermeldungen darzustellen.
+FieldDescription unterstützen dabei, die Anforderungen an die Eingabe klar zu
+kommunizieren oder Fehlermeldungen darzustellen.
 
-<InlineAlert>
 ### Best Practices
-  <Content>
-    - Frage nur nach Informationen, die wirklich notwendig sind.
 
-    - Stelle sicher, dass das Label prägnant, vollständig sichtbar und leicht
-    verständlich ist.
+<Info>
+- Frage nur nach Informationen, die wirklich notwendig sind.
 
-    - Verwende die FieldDescription sparsam und für sinnvolle
-    Beispiele oder Formatierungshinweise.
+- Stelle sicher, dass das Label prägnant, vollständig sichtbar und leicht
+  verständlich ist.
 
-    - Stelle sicher, dass Fehlermeldungen
-    hilfreich sind, eine Lösung bieten und leicht umzusetzen sind.
+- Verwende die FieldDescription sparsam und für sinnvolle Beispiele oder
+  Formatierungshinweise.
 
-    - Verwende keine Placeholder für wesentliche Informationen.
+- Stelle sicher, dass Fehlermeldungen hilfreich sind, eine Lösung bieten und
+  leicht umzusetzen sind.
 
-  </Content>
-</InlineAlert>
+- Verwende keine Placeholder für wesentliche Informationen.
+
+</Info>
 
 ---
 
@@ -44,10 +42,14 @@ werden, um Straßenname und Hausnummer zu einer sinnvollen Gruppe
 zusammenzufassen.
 
 <LiveCodeEditor example="columnLayout" editorCollapsed />
-<Do title="Grids und sinnvolle Gruppen">
-  Nutze ein 1:1 ColumnLayout für TextFields. Um sinnvolle Gruppen (z.B. Straße
-  und Hausnummer) zu erstellen, kannst du mehrere ColumnLayouts ineinander
-  verschachteln.
+
+<Do>
+#### Grids und sinnvolle Gruppen
+
+Nutze ein 1:1 ColumnLayout für TextFields. Um sinnvolle Gruppen (z.B. Straße und
+Hausnummer) zu erstellen, kannst du mehrere ColumnLayouts ineinander
+verschachteln.
+
 </Do>
 
 ---
@@ -76,11 +78,10 @@ Wörter), präzise und weder versteckt noch auspunktiert sein.
 
 ### FieldDescription
 
-Die [FieldDescription](/02-components/form-controls/field-description) kann als
-optionaler Hilfstext unterhalb des TextFields angezeigt werden, um dem Nutzer
-ergänzenden Informationen oder Anweisungen zu bieten. Es sollte sparsam
-verwendet werden und kann als zusätzliche Beschreibung verwendet werden,
-Eingabe- und Formatierungsbeispiele liefern.
+Die FieldDescription kann als optionaler Hilfstext unterhalb des TextFields
+angezeigt werden, um dem Nutzer ergänzenden Informationen oder Anweisungen zu
+bieten. Es sollte sparsam verwendet werden und kann als zusätzliche Beschreibung
+verwendet werden, Eingabe- und Formatierungsbeispiele liefern.
 
 ---
 
@@ -101,13 +102,18 @@ Ergänze das TextField mit ...
   geben.
 
 <DoAndDont>
-  <LiveCodeEditor editorCollapsed example="placeholder" />
+  <LiveCodeEditor editorDisabled example="placeholder" />
   <Dont>
+    #### Dont
+
     Placeholder sollten keine hilfreichen Informationen oder
     Formatierungshinweise enthalten.
+
   </Dont>
-  <LiveCodeEditor editorCollapsed />
+  <LiveCodeEditor editorDisabled />
   <Do>
+    #### Do
+    
     Nutze die FieldDescription um hilfreiche Informationen darzustellen, z.B.
     für Formatierungshinweise.
   </Do>

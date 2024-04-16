@@ -12,6 +12,8 @@ import DoAndDont from "@/lib/mdx/components/DoAndDont/DoAndDont";
 import Do from "@/lib/mdx/components/DoAndDont/Do";
 import Dont from "@/lib/mdx/components/DoAndDont/Dont";
 import { IconExternalLink } from "@mittwald/flow-react-components/Icons";
+import Info from "@/lib/mdx/components/DoAndDont/Info";
+import { ColumnLayout } from "@mittwald/flow-react-components/ColumnLayout";
 
 export const customComponents: MDXComponents = {
   Content: Content,
@@ -20,6 +22,8 @@ export const customComponents: MDXComponents = {
   DoAndDont: DoAndDont,
   Do: Do,
   Dont: Dont,
+  Info: Info,
+  ColumnLayout: ColumnLayout,
 
   pre: ({ children }) => (
     <div className={styles.preContainer}>

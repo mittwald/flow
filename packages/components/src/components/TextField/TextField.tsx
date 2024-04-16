@@ -8,7 +8,7 @@ import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface TextFieldProps
-  extends Omit<TextFieldBaseProps, "input">,
+  extends Omit<TextFieldBaseProps, "input" | "isReadOnly">,
     Pick<Aria.InputProps, "placeholder">,
     FlowComponentProps {}
 

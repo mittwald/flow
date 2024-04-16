@@ -67,7 +67,8 @@
 }
 
 .do,
-.dont {
+.dont,
+.info {
   border-bottom-left-radius: var(--corner-radius--default);
   border-bottom-right-radius: var(--corner-radius--default);
   border: var(--border-width--100) solid var(--neutral--color--500);
@@ -83,6 +84,10 @@
 .do {
   grid-area: doDescription;
   border-top-color: var(--success-solid-background-color--default);
+}
+
+.info {
+  border-top-color: var(--info-solid-background-color--default);
 }
 
 .hr {
