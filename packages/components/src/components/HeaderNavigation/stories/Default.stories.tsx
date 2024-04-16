@@ -15,7 +15,7 @@ import { Image } from "@/components/Image";
 import { dummyText } from "@/lib/dev/dummyText";
 import Avatar from "@/components/Avatar";
 import ContextMenu, {
-  ContextMenuItem,
+  MenuItem,
   ContextMenuTrigger,
 } from "@/components/ContextMenu";
 
@@ -64,14 +64,14 @@ export const WithContextMenu: Story = {
           </Avatar>
         </Button>
         <ContextMenu>
-          <ContextMenuItem>
+          <MenuItem>
             <IconSettings />
             <Text>Profile</Text>
-          </ContextMenuItem>
-          <ContextMenuItem>
+          </MenuItem>
+          <MenuItem>
             <IconLogout />
             <Text>Logout</Text>
-          </ContextMenuItem>
+          </MenuItem>
         </ContextMenu>
       </ContextMenuTrigger>
     </HeaderNavigation>

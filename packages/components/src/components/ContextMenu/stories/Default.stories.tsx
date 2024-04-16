@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import ContextMenu, {
-  ContextMenuItem,
+  MenuItem,
   ContextMenuTrigger,
 } from "@/components/ContextMenu";
 import { Button } from "@/components/Button";
@@ -13,9 +13,9 @@ const meta: Meta<typeof ContextMenu> = {
     <ContextMenuTrigger>
       <Button>Trigger</Button>
       <ContextMenu {...props}>
-        <ContextMenuItem id="item1">Item 1</ContextMenuItem>
-        <ContextMenuItem id="item2">Item 2</ContextMenuItem>
-        <ContextMenuItem id="item3">Item 3</ContextMenuItem>
+        <MenuItem id="item1">Item 1</MenuItem>
+        <MenuItem id="item2">Item 2</MenuItem>
+        <MenuItem id="item3">Item 3</MenuItem>
       </ContextMenu>
     </ContextMenuTrigger>
   ),
