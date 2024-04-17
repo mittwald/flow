@@ -1,0 +1,29 @@
+.tabList {
+  background-color: var(--tab-list--background-color);
+  position: relative;
+  overflow-x: clip;
+
+  .contextMenuButton {
+    align-self: center;
+    margin: var(--size-px--s);
+  }
+}
+
+.titles {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: fit-content;
+}
+
+.tabList.collapsed {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .titles {
+    visibility: hidden;
+    position: absolute;
+    width: auto;
+  }
+}

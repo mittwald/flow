@@ -6,6 +6,7 @@ import styles from "./TabTitle.module.scss";
 import { Text } from "@/components/Text";
 import { useTabContext } from "@/components/Tabs/components/Tab/context";
 import { TunnelEntry } from "@mittwald/react-tunnel";
+import { MenuItem } from "@/components/MenuItem";
 
 export interface TabTitleProps
   extends Omit<Aria.TabProps, "children" | "id" | "isDisabled">,
@@ -14,16 +15,28 @@ export interface TabTitleProps
 export const TabTitle: FC<TabTitleProps> = (props) => {
   const { children, className, ...rest } = props;
 
-  const context = useTabContext();
-
-  const rootClassName = clsx(styles.tabTitle, className);
+  const { id } = useTabContext();
+  const titleClassName = clsx(styles.tabTitle, className);
 
   return (
-    <TunnelEntry id="TabTitles">
-      <Aria.Tab className={rootClassName} {...rest} id={context.id}>
-        <Text emulateBoldWidth>{children}</Text>
-      </Aria.Tab>
-    </TunnelEntry>
+    <>
+      <TunnelEntry id="Titles">
+        <Aria.Tab {...rest} id={id} className={titleClassName}>
+          {(p) => (
+            <>
+              <Text emulateBoldWidth>{children}</Text>
+              <TunnelEntry id="ActiveTitle">
+                {p.isSelected && children}
+              </TunnelEntry>
+            </>
+          )}
+        </Aria.Tab>
+      </TunnelEntry>
+
+      <TunnelEntry id="ContextMenuItems">
+        <MenuItem id={id}>{children}</MenuItem>
+      </TunnelEntry>
+    </>
   );
 };
 

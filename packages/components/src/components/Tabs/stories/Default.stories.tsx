@@ -26,7 +26,7 @@ const meta: Meta<typeof Tabs> = {
           </Section>
         </Tab>
         <Tab id="storage">
-          <TabTitle>Storage</TabTitle>
+          <TabTitle>Storage settings</TabTitle>
           <Section>
             <Heading>Storage</Heading>
             <LabeledValue>

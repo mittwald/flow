@@ -7,14 +7,17 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import type { PopoverProps } from "@/components/Popover";
 import { Popover } from "@/components/Popover";
 import type { PropsContext } from "@/lib/propsContext";
-import { PropsContextProvider } from "@/lib/propsContext";
-import { ClearPropsContext } from "@/lib/propsContext";
+import { ClearPropsContext, PropsContextProvider } from "@/lib/propsContext";
 
 export interface ContextMenuProps
   extends PopoverProps,
     Pick<
       Aria.MenuProps<MenuItemProps>,
-      "onAction" | "selectedKeys" | "defaultSelectedKeys" | "onSelectionChange"
+      | "onAction"
+      | "selectedKeys"
+      | "defaultSelectedKeys"
+      | "onSelectionChange"
+      | "disabledKeys"
     >,
     FlowComponentProps {
   selectionMode?: "single" | "multiple" | "navigation";
@@ -27,6 +30,7 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
     selectionMode,
     selectedKeys,
     defaultSelectedKeys,
+    disabledKeys,
     onSelectionChange,
     ref,
     ...rest
@@ -51,6 +55,7 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
           selectionMode={ariaSelectionMode}
           selectedKeys={selectedKeys}
           defaultSelectedKeys={defaultSelectedKeys}
+          disabledKeys={disabledKeys}
           onSelectionChange={onSelectionChange}
           ref={ref}
         >
