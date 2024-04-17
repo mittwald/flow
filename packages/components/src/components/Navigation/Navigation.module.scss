@@ -1,8 +1,11 @@
 @use "@/styles/mixins/menuItem";
 
-.label {
-  display: block;
-  margin-block: var(--menu--label-to-group-spacing);
+.navigation {
+  ul {
+    display: flex;
+    flex-direction: column;
+    row-gap: var(--menu--item-to-item-spacing);
+  }
 }
 
 .item {
