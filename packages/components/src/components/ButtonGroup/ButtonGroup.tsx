@@ -28,10 +28,12 @@ export const ButtonGroup: FC<ButtonGroupProps> = (props) => {
 
   return (
     <ClearPropsContext>
-      <div {...rest} className={rootClassName} role="group">
-        <PropsContextProvider props={propsContext}>
-          {children}
-        </PropsContextProvider>
+      <div className={styles.buttonGroupContainer}>
+        <div {...rest} className={rootClassName} role="group">
+          <PropsContextProvider props={propsContext}>
+            {children}
+          </PropsContextProvider>
+        </div>
       </div>
     </ClearPropsContext>
   );

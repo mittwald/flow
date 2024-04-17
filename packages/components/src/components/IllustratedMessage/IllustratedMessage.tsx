@@ -37,10 +37,12 @@ export const IllustratedMessage: FC<IllustratedMessageProps> = (props) => {
   };
 
   return (
-    <div {...rest} className={rootClassName}>
-      <PropsContextProvider props={propsContext}>
-        {children}
-      </PropsContextProvider>
+    <div className={styles.illustratedMessageContainer}>
+      <div {...rest} className={rootClassName}>
+        <PropsContextProvider props={propsContext}>
+          {children}
+        </PropsContextProvider>
+      </div>
     </div>
   );
 };
