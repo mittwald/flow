@@ -54,3 +54,45 @@
     }
   }
 }
+
+.inverse {
+  .button.button {
+    color: var(--header-navigation--item-color-inverse);
+
+    &:hover,
+    &[data-pressed] {
+      color: var(--header-navigation--item-color-inverse);
+    }
+
+    &:hover {
+      background-color: var(
+        --header-navigation--item-background-color-inverse--hover
+      );
+    }
+    &[data-pressed] {
+      background-color: var(
+        --header-navigation--item-background-color-inverse--pressed
+      );
+    }
+  }
+
+  .link {
+    color: var(--header-navigation--item-color-inverse);
+    &:hover:not([aria-current]) {
+      background-color: var(
+        --header-navigation--item-background-color-inverse--hover
+      );
+    }
+    &[data-pressed]:not([aria-current]) {
+      background-color: var(
+        --header-navigation--item-background-color-inverse--pressed
+      );
+    }
+
+    &[aria-current] {
+      &:after {
+        background-color: var(--header-navigation--item-color-inverse);
+      }
+    }
+  }
+}

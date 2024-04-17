@@ -25,13 +25,6 @@ const meta: Meta<typeof HeaderNavigation> = {
   parameters: {
     controls: { exclude: ["className"] },
   },
-};
-
-export default meta;
-
-type Story = StoryObj<typeof HeaderNavigation>;
-
-export const Default: Story = {
   render: (props) => (
     <HeaderNavigation aria-label="Header navigation" {...props}>
       <Link href="#">Getting startet</Link>
@@ -44,6 +37,12 @@ export const Default: Story = {
     </HeaderNavigation>
   ),
 };
+
+export default meta;
+
+type Story = StoryObj<typeof HeaderNavigation>;
+
+export const Default: Story = {};
 
 export const WithContextMenu: Story = {
   render: (props) => (
@@ -76,4 +75,19 @@ export const WithContextMenu: Story = {
       </ContextMenuTrigger>
     </HeaderNavigation>
   ),
+};
+
+export const Inverse: Story = {
+  args: { inverse: true },
+  parameters: {
+    backgrounds: {
+      default: "dark",
+      values: [
+        {
+          name: "dark",
+          value: "#002A7B",
+        },
+      ],
+    },
+  },
 };
