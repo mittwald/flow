@@ -1,17 +1,18 @@
-The Flow Component libraries are styled by a shared stylesheet, that can also be
-used standalone. This might be useful if you want to use your own framework to
-build components following the mittwald styling guidelines.
+Die Flow-Komponenten-Bibliotheken werden über ein gemeinsames Stylesheet, das
+auch für sich alleine verwendet werden kann, gestyled. Das kann nützlich sein,
+wenn du dein eigenes Framework verwendest, um Komponenten zu bauen, und dich
+dabei an die mittwald Styling Guidelines halten willst.
 
-On this page you can find information about how to install the stylesheet and
-how the classnames are structured.
+Auf dieser Seite findest du alle Informationen darüber, wie du das Stylesheet
+installieren kannst und wie die Klassennamen strukturiert sind.
 
 ---
 
-## Install the standalone stylesheet
+## Installation des Standalone Stylesheets
 
-At this point of development you can only get the stylesheet via NPM. The Flow
-Stylesheet Library can be installed using a package manager like `npm` or
-`yarn`.
+Zum aktuellen Entwicklungsstand des Projektes kannst du das Stylesheet nur über
+NPM installieren. Die Flow-Stylesheet-Bibliothek kann über einen Package Manager
+wie `npm` or `yarn` installiert werden.
 
 ```
 yarn add @mittwald/flow-stylesheet
@@ -19,10 +20,10 @@ yarn add @mittwald/flow-stylesheet
 
 ---
 
-## Import styles
+## Styles importieren
 
-You have to import the bundled stylesheet in order to get the correct component
-styles. Add this line to your project's entry point.
+Um die Komponenten Styles zu verwenden, musst du das Stylesheet importieren.
+Füge diese Zeile zum Einstiegspunkt deines Projektes hinzu.
 
 ```
 import "@mittwald/flow-stylesheet/css";
@@ -30,23 +31,23 @@ import "@mittwald/flow-stylesheet/css";
 
 ---
 
-## Using the stylesheet
+## Anwendung des Stylesheets
 
-If you want to get started, you should probably learn how the class names are
-structured. The class names provided in this stylesheet are following a
-consistent, component-based and easy to understand schema.
+Um anfangen zu können solltest du verstehen wie die Klassennamen strukturiert
+sind. Die im Stylesheet bereitgestellten Klassennamen folgen einem konsistenten,
+Komponenten basiertem und leicht zu verstehendem Schema.
 
 ---
 
-### General class name notation
+### Generelle Klassennamen Auszeichnungen
 
-The class names are all in lowercase and using `-` to separate words and `--` to
-separate logical sections.
+Alle Klassennamen sind in Lowercase geschrieben und benutzen `-` um Wörter zu
+trennen und `--` um logische Abschnitte zu unterteilen.
 
-The first logical section is always the `flow` namespace. Other sections might
-be:
+Der erste logische Abschnitt ist immer der `flow` Namespace. Andere Abschnitte
+könnten beispielsweise so aussehen:
 
-#### Components
+#### Komponenten
 
 ```
 .flow--button
@@ -54,14 +55,14 @@ be:
 .flow--status-icon
 ```
 
-#### Sub-Components
+#### Sub-Komponenten
 
 ```
 .flow--navigation
 .flow--navigation--navigation-item
 ```
 
-#### Specialization: different variants
+#### Spezialisierung: Verschiedene Varianten
 
 ```
 .flow--button--primary
@@ -69,7 +70,7 @@ be:
 .flow--icon--fixed-width
 ```
 
-#### Specialization: components aligned in a composition
+#### Spezialisierung: In einer Komposition verwendete Komponenten
 
 ```
 .flow--button--icon
@@ -78,25 +79,26 @@ be:
 
 ---
 
-### A note to specialization
+### Ein Hinweis zur Spezialisierung
 
-Class Names used to specialize a basic component must always be used in
-**addition to the basic class name**. Here are some examples that illustrate
-this requirement.
+Klassennamen die verwendet werden, um die Basiskomponente zu spezialisieren,
+müssen immer **zusätzlich zum Basis-Klassennamen** verwendet werden.
+
+Hier ein paar Beispiele um die diese Anforderung zu verdeutlichen:
 
 <LiveCodeEditor example="variants" />
 
-#### Combined variants
+#### Kombinierte Varianten
 
 <LiveCodeEditor example="multiple-variants" />
 
-#### Components aligned in a composition
+#### In einer Komposition verwendete Komponenten
 
-It is a common practice to compose larger components out of already existing
-smaller ones. Take the Inline Alert example. The Inline Alert is composed out of
-an icon, a heading and some optional content. These contained components must
-have their basic class name (`flow--icon`), to get their basic styling and the
-specialization class name (`flow--inline-alert--status-icon`) to get the Inline
-Alert specific styles.
+Es ist gängige Praxis größere Komponenten aus bereits bestehenden kleineren
+Komponenten zusammenzusetzen. Der InlineAlert besteht beispielsweise aus einem
+Icon, einer Heading und optionalem Inhalt. Die verwendeten Komponenten müssen
+ihren Basis-Klassennamen für das grundsätzliche Styling erhalten (`flow--icon`),
+sowie den spezialisierten Klassennamen (`flow--inline-alert--status-icon`) um
+spezifische Styles des Inline Alerts zu erhalten.
 
 <LiveCodeEditor example="composition" />

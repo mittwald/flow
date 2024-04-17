@@ -37,7 +37,7 @@ import { MenuItem } from "@mittwald/flow-react-components/MenuItem";
     <ContextMenu>
       <MenuItem>
         <IconSettings />
-        <Text>Profile</Text>
+        <Text>Profil</Text>
       </MenuItem>
       <MenuItem>
         <IconLogout />

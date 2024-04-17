@@ -8,5 +8,5 @@ import { Label } from "@mittwald/flow-react-components/Label";
   }}
   defaultValue={12}
 >
-  <Label>Storage</Label>
+  <Label>Speicherplatz</Label>
 </NumberField>;

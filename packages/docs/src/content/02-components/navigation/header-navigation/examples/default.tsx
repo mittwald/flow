@@ -6,7 +6,7 @@ import HeaderNavigation from "@mittwald/flow-react-components/HeaderNavigation";
 <HeaderNavigation aria-label="Header navigation">
   <Link href="#">Getting startet</Link>
   <Link href="#" aria-current="page">
-    Components
+    Komponenten
   </Link>
   <Button>
     <IconSearch />

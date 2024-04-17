@@ -6,15 +6,15 @@ import {
 
 <Tabs>
   <Tab>
-    <TabTitle>General</TabTitle>
-    General content
+    <TabTitle>Allgemein</TabTitle>
+    Allgemeiner Inhalt
   </Tab>
   <Tab id="storage">
-    <TabTitle>Storage</TabTitle>
-    Storage content
+    <TabTitle>Speicherplatz</TabTitle>
+    Speicherplatz Inhalt
   </Tab>
   <Tab>
-    <TabTitle>Spam protection</TabTitle>
-    Spam protection content
+    <TabTitle>Spamschutz</TabTitle>
+    Spamschutz Inhalt
   </Tab>
 </Tabs>;
