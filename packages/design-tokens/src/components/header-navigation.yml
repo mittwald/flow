@@ -12,9 +12,9 @@ header-navigation:
       value: "{primary-plain-background-color.pressed}"
   item-background-color-inverse:
     hover:
-      value: "#00000033"
+      value: "#00000044"
     pressed:
-      value: "#00000055"
+      value: "#00000066"
   item-padding:
     value: "{size-px.s}"
   item-corner-radius:

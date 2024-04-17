@@ -30,6 +30,7 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
     className,
     editorCollapsed: editorInitiallyCollapsed,
     editorDisabled,
+    inverse,
   } = props;
 
   const [editorCollapsed, setEditorCollapsed] = useState(
@@ -62,7 +63,9 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
       transformCode={transformCode}
     >
       <div className={clsx(styles.liveCodeEditor, className)}>
-        <LivePreview className={styles.preview} />
+        <LivePreview
+          className={clsx(styles.preview, inverse && styles.inverse)}
+        />
         {!editorDisabled && (
           <div className={styles.actions}>
             <Button

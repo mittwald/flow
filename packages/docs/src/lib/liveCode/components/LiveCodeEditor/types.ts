@@ -5,4 +5,5 @@ export interface LiveCodeEditorProps {
   className?: string;
   editorCollapsed?: boolean;
   editorDisabled?: boolean;
+  inverse?: boolean;
 }

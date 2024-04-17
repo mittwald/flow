@@ -13,6 +13,10 @@
   padding: var(--size-px--l);
 }
 
+.inverse {
+  background-color: var(--primary--color--1000);
+}
+
 .editorContainer {
   overflow: scroll;
 }
