@@ -43,7 +43,7 @@
     "@types/react": "^18.2.79",
     "@types/react-dom": "^18.2.25",
     "@yarnpkg/pnpify": "^4.0.1",
-    "eslint": "^9.0.0",
+    "eslint": "^8.57.0",
     "eslint-config-next": "^14.2.2",
     "glob": "^10.3.12",
     "nx": "^18.3.1",
