@@ -4,36 +4,40 @@ import Content from "@mittwald/flow-react-components/Content";
 
 <Row>
   <InlineAlert status="info">
-    <Heading>Email address has been archived</Heading>
+    <Heading>E-Mail-Adresse wurde archiviert</Heading>
     <Content>
-      As your domain has been deleted, this email address
-      has been archived. To be able to send and receive
-      emails, you must rename the address.
+      Da deine Domain gelöscht wurde, wurde diese
+      E-Mail-Adresse archiviert. Um E-Mails empfangen und
+      senden zu können musst du die Adresse wieder
+      umbenennen.
     </Content>
   </InlineAlert>
 
   <InlineAlert status="warning">
-    <Heading>Storage is almost exceeded</Heading>
+    <Heading>Dein Speicher ist fast voll</Heading>
     <Content>
-      Your storage space is over 80% utilized. We recommend
-      that you upgrade the storage space to avoid
-      disruptions during backups.
+      Dein Speicher ist zu über 80% belegt. Wir empfehlen
+      dir deinen Speicherplatz zu erweitern, um Problemen
+      vorzubeugen.
     </Content>
   </InlineAlert>
 
   <InlineAlert status="danger">
-    <Heading>No SSL certificate could be issued</Heading>
+    <Heading>
+      Es konnte kein SSL-Zertifikat ausgestellt werden
+    </Heading>
     <Content>
-      No SSL certificate could be issued for this domain
-      because the domain IP does not point to your server
-      IP.
+      Für diese Domain konnte kein SSL-Zertifikat
+      ausgestellt werden, da die Domain per IP nicht auf
+      deine Server-IP zeigt.
     </Content>
   </InlineAlert>
 
   <InlineAlert status="success">
-    <Heading>Your app is up to date</Heading>
+    <Heading>Deine App wurde aktualisiert</Heading>
     <Content>
-      Your app has been updated to the current version.
+      Deine App wurde erfolgreich auf die neueste Version
+      aktualisiert.
     </Content>
   </InlineAlert>
 </Row>;

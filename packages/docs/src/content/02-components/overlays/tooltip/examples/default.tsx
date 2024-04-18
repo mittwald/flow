@@ -5,8 +5,8 @@ import Button from "@mittwald/flow-react-components/Button";
 import { IconCopy } from "@mittwald/flow-react-components/Icons";
 
 <TooltipTrigger>
-  <Button aria-label="save">
+  <Button aria-label="Speichern">
     <IconCopy />
   </Button>
-  <Tooltip>Save</Tooltip>
+  <Tooltip>Speichern</Tooltip>
 </TooltipTrigger>;

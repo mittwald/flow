@@ -4,5 +4,5 @@ import FieldDescription from "@mittwald/flow-react-components/FieldDescription";
 
 <TextField>
   <Label>URL</Label>
-  <FieldDescription>Start with https://</FieldDescription>
+  <FieldDescription>Beginnt mit https://</FieldDescription>
 </TextField>;
