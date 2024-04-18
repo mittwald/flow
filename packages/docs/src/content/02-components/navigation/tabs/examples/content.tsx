@@ -37,7 +37,7 @@ import { Switch } from "@mittwald/flow-react-components/Switch";
     <Section>
       <Header>
         <Heading>Spamschutz</Heading>
-        <Switch>Spamschutz</Switch>
+        <Switch>Spamfilter</Switch>
       </Header>
       <Text>
         Der Spamfilter schützt dich vor ungewollten E-Mails.

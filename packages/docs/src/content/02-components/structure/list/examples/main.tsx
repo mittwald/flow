@@ -37,12 +37,12 @@ import StatusBadge from "@mittwald/flow-react-components/StatusBadge";
           <Text>{domain.type}</Text>
         ) : (
           <StatusBadge status="warning">
-            Not verified
+            Nicht verifiziert
           </StatusBadge>
         )}
         <ContextMenu>
-          <MenuItem>Show details</MenuItem>
-          <MenuItem>Delete</MenuItem>
+          <MenuItem>Details anzeigen</MenuItem>
+          <MenuItem>Löschen</MenuItem>
         </ContextMenu>
       </>
     )}
