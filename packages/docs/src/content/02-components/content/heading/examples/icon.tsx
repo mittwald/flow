@@ -3,5 +3,5 @@ import { IconMember } from "@mittwald/flow-react-components/Icons";
 
 <Heading>
   <IconMember />
-  Personal Information
+  Persönliche Informationen
 </Heading>;

@@ -1,3 +1,3 @@
 <button className="flow--button flow--button--primary flow--button--size-s">
-  Small primary button
+  Small Primary Button
 </button>;

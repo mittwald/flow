@@ -2,8 +2,8 @@ import Button from "@mittwald/flow-react-components/Button";
 
 <Button
   onPress={() => {
-    alert("Button pressed");
+    alert("Button gedrückt");
   }}
 >
-  Continue/Action
+  Fortfahren/Aktion
 </Button>;

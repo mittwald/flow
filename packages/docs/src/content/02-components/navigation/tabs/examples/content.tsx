@@ -14,35 +14,36 @@ import { Switch } from "@mittwald/flow-react-components/Switch";
 
 <Tabs>
   <Tab>
-    <TabTitle>General</TabTitle>
+    <TabTitle>Allgemein</TabTitle>
     <Section>
-      <Heading>General</Heading>
+      <Heading>Allgemein</Heading>
       <TextField defaultValue="example@mittwald.de">
-        <Label>Mail address</Label>
+        <Label>E-Mail-Adresse</Label>
       </TextField>
     </Section>
   </Tab>
   <Tab id="storage">
-    <TabTitle>Storage</TabTitle>
+    <TabTitle>Speicherplatz</TabTitle>
     <Section>
-      <Heading>Storage</Heading>
+      <Heading>Speicherplatz</Heading>
       <LabeledValue>
-        <Label>Available storage</Label>
+        <Label>Verfügbarer Speicherplatz</Label>
         <Text>2.4 GB</Text>
       </LabeledValue>
     </Section>
   </Tab>
   <Tab>
-    <TabTitle>Spam protection</TabTitle>
+    <TabTitle>Spamschutz</TabTitle>
     <Section>
       <Header>
-        <Heading>Spam protection</Heading>
-        <Switch>Spam protection</Switch>
+        <Heading>Spamschutz</Heading>
+        <Switch>Spamfilter</Switch>
       </Header>
       <Text>
-        The spam filter protects you from unwanted emails.
-        Nobody wants garbage in their inbox, so we recommend
-        that you always leave spam protection activated.
+        Der Spamfilter schützt dich vor ungewollten E-Mails.
+        Niemand will Müll in seinem Postfach, daher
+        empfehlen wir den Spamschutz immer aktiviert zu
+        lassen.
       </Text>
     </Section>
   </Tab>
