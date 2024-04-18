@@ -6,18 +6,19 @@ import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import type { PopoverProps } from "@/components/Popover";
 import { Popover } from "@/components/Popover";
+import type { PropsContext } from "@/lib/propsContext";
+import { PropsContextProvider } from "@/lib/propsContext";
+import { ClearPropsContext } from "@/lib/propsContext";
 
 export interface ContextMenuProps
   extends PopoverProps,
     Pick<
       Aria.MenuProps<MenuItemProps>,
-      | "onAction"
-      | "selectionMode"
-      | "selectedKeys"
-      | "defaultSelectedKeys"
-      | "onSelectionChange"
+      "onAction" | "selectedKeys" | "defaultSelectedKeys" | "onSelectionChange"
     >,
-    FlowComponentProps {}
+    FlowComponentProps {
+  selectionMode?: "single" | "multiple" | "navigation";
+}
 
 export const ContextMenu = flowComponent("ContextMenu", (props) => {
   const {
@@ -31,20 +32,34 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
     ...rest
   } = props;
 
+  const ariaSelectionMode =
+    selectionMode === "navigation" ? "single" : selectionMode;
+
+  const propsContext: PropsContext = {
+    MenuItem: {
+      selectionVariant:
+        selectionMode === "navigation" ? "navigation" : "control",
+    },
+  };
+
   return (
-    <Popover {...rest}>
-      <Aria.Menu
-        className={styles.contextMenu}
-        onAction={onAction}
-        selectionMode={selectionMode}
-        selectedKeys={selectedKeys}
-        defaultSelectedKeys={defaultSelectedKeys}
-        onSelectionChange={onSelectionChange}
-        ref={ref}
-      >
-        {children}
-      </Aria.Menu>
-    </Popover>
+    <ClearPropsContext>
+      <Popover {...rest}>
+        <Aria.Menu
+          className={styles.contextMenu}
+          onAction={onAction}
+          selectionMode={ariaSelectionMode}
+          selectedKeys={selectedKeys}
+          defaultSelectedKeys={defaultSelectedKeys}
+          onSelectionChange={onSelectionChange}
+          ref={ref}
+        >
+          <PropsContextProvider props={propsContext}>
+            {children}
+          </PropsContextProvider>
+        </Aria.Menu>
+      </Popover>
+    </ClearPropsContext>
   );
 });
 
