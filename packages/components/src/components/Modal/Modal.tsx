@@ -47,16 +47,15 @@ export const Modal: FC<ModalProps> = (props) => {
 
   const propsContext: PropsContext = {
     Content: {
-      tunnelId: "content",
       elementType: React.Fragment,
     },
     Heading: {
       level: 2,
-      tunnelId: "title",
       slot: "title",
     },
     ButtonGroup: {
       className: styles.buttonGroup,
+      tunnelId: "buttons",
     },
   };
 
@@ -73,11 +72,8 @@ export const Modal: FC<ModalProps> = (props) => {
           <OverlayContextProvider value={state}>
             <PropsContextProvider props={propsContext}>
               <TunnelProvider>
-                <div className={styles.content}>
-                  <TunnelExit id="title" />
-                  <TunnelExit id="content" />
-                </div>
-                {children}
+                <div className={styles.content}>{children}</div>
+                <TunnelExit id="buttons" />
               </TunnelProvider>
             </PropsContextProvider>
           </OverlayContextProvider>
