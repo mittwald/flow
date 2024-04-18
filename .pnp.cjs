@@ -4603,7 +4603,7 @@ const RAW_RUNTIME_STATE =
           ["@react-aria/utils", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.23.2"],\
           ["@react-types/shared", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.22.1"],\
           ["@storybook/addon-a11y", "npm:8.0.8"],\
-          ["@storybook/addon-actions", "npm:8.0.6"],\
+          ["@storybook/addon-actions", "npm:8.0.8"],\
           ["@storybook/addon-essentials", "npm:8.0.8"],\
           ["@storybook/addon-interactions", "npm:8.0.8"],\
           ["@storybook/addon-links", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.0.8"],\
@@ -4699,7 +4699,7 @@ const RAW_RUNTIME_STATE =
           ["@react-aria/utils", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.23.2"],\
           ["@react-types/shared", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.22.1"],\
           ["@storybook/addon-a11y", "npm:8.0.8"],\
-          ["@storybook/addon-actions", "npm:8.0.6"],\
+          ["@storybook/addon-actions", "npm:8.0.8"],\
           ["@storybook/addon-essentials", "npm:8.0.8"],\
           ["@storybook/addon-interactions", "npm:8.0.8"],\
           ["@storybook/addon-links", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.0.8"],\
@@ -4790,7 +4790,7 @@ const RAW_RUNTIME_STATE =
           ["@react-aria/utils", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.23.2"],\
           ["@react-types/shared", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.22.1"],\
           ["@storybook/addon-a11y", "npm:8.0.8"],\
-          ["@storybook/addon-actions", "npm:8.0.6"],\
+          ["@storybook/addon-actions", "npm:8.0.8"],\
           ["@storybook/addon-essentials", "npm:8.0.8"],\
           ["@storybook/addon-interactions", "npm:8.0.8"],\
           ["@storybook/addon-links", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.0.8"],\
@@ -8974,19 +8974,6 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@storybook/addon-actions", [\
-      ["npm:8.0.6", {\
-        "packageLocation": "./.yarn/cache/@storybook-addon-actions-npm-8.0.6-a97ef103c7-d26060849d.zip/node_modules/@storybook/addon-actions/",\
-        "packageDependencies": [\
-          ["@storybook/addon-actions", "npm:8.0.6"],\
-          ["@storybook/core-events", "npm:8.0.6"],\
-          ["@storybook/global", "npm:5.0.0"],\
-          ["@types/uuid", "npm:9.0.7"],\
-          ["dequal", "npm:2.0.3"],\
-          ["polished", "npm:4.3.1"],\
-          ["uuid", "npm:9.0.1"]\
-        ],\
-        "linkType": "HARD"\
-      }],\
       ["npm:8.0.8", {\
         "packageLocation": "./.yarn/cache/@storybook-addon-actions-npm-8.0.8-0ab5b36ce1-95bf2b68ab.zip/node_modules/@storybook/addon-actions/",\
         "packageDependencies": [\
@@ -9707,14 +9694,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/@storybook-core-events-npm-7.6.5-5a29fee78a-d1c861ff77.zip/node_modules/@storybook/core-events/",\
         "packageDependencies": [\
           ["@storybook/core-events", "npm:7.6.5"],\
-          ["ts-dedent", "npm:2.2.0"]\
-        ],\
-        "linkType": "HARD"\
-      }],\
-      ["npm:8.0.6", {\
-        "packageLocation": "./.yarn/cache/@storybook-core-events-npm-8.0.6-ac8ef9a9d8-4771b9c959.zip/node_modules/@storybook/core-events/",\
-        "packageDependencies": [\
-          ["@storybook/core-events", "npm:8.0.6"],\
           ["ts-dedent", "npm:2.2.0"]\
         ],\
         "linkType": "HARD"\
