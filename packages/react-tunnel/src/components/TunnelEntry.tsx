@@ -1,10 +1,11 @@
-import type { FC, PropsWithChildren } from "react";
-import { useRef } from "react";
-import { useContext, useId, useLayoutEffect } from "react";
+import type { FC } from "react";
+import { useContext, useId, useLayoutEffect, useRef } from "react";
 import tunnelContext from "@/context";
+import type { TunnelChildren } from "@/types";
 
-interface Props extends PropsWithChildren {
+interface Props {
   id?: string;
+  children?: TunnelChildren;
 }
 
 export const TunnelEntry: FC<Props> = (props) => {
