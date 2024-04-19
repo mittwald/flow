@@ -6,6 +6,7 @@ import type { SerializedMdxFile } from "@/lib/mdx/MdxFile";
 import { MdxFile } from "@/lib/mdx/MdxFile";
 import { customComponents } from "@/lib/mdx/components/MdxFileView/customComponents";
 import styles from "./customComponents.module.css";
+import type { LiveCodeEditorProps } from "@/lib/liveCode/components/LiveCodeEditor/types";
 import DoAndDontTile from "@/lib/mdx/components/DoAndDont/DoAndDontTile";
 
 interface Props {
@@ -15,16 +16,15 @@ interface Props {
 export const MdxFileView: FC<Props> = (props) => {
   const mdxFile = MdxFile.deserialize(props.mdxFile);
 
-  const ExampleLiveCodeEditor: FC<{
-    example?: string;
-    editorCollapsed?: boolean;
-    editorDisabled?: boolean;
-  }> = ({ example = "default", editorCollapsed, editorDisabled }) => (
+  const ExampleLiveCodeEditor: FC<
+    {
+      example?: string;
+    } & Omit<LiveCodeEditorProps, "code" | "className">
+  > = ({ example = "default", ...rest }) => (
     <LiveCodeEditor
       className={styles.liveCodeEditor}
       code={mdxFile.getExample(example)}
-      editorCollapsed={editorCollapsed}
-      editorDisabled={editorDisabled}
+      {...rest}
     />
   );
 

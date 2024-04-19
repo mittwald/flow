@@ -3,9 +3,8 @@
   flex-direction: column;
 }
 
-.tabList {
-  display: flex;
-  justify-content: flex-start;
+.list {
   background-color: var(--tab-list--background-color);
-  overflow-x: auto;
+  display: flex;
+  flex-direction: row;
 }

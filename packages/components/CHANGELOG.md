@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.71](https://github.com/mittwald/flow/compare/v0.1.0-alpha.70...0.1.0-alpha.71) (2024-04-19)
+
+### Bug Fixes
+
+- **List:** english translations
+  ([df7b71c](https://github.com/mittwald/flow/commit/df7b71c4b89826801566042a00e29dfb61d8a787))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.69](https://github.com/mittwald/flow/compare/0.1.0-alpha.68...0.1.0-alpha.69) (2024-04-16)
 
 ### Features

@@ -46,3 +46,25 @@ export const MultipleSelection: Story = {
     defaultSelectedKeys: ["item2", "item3"],
   },
 };
+
+export const WithLinks: Story = {
+  render: (props) => (
+    <ContextMenuTrigger>
+      <Button>Trigger</Button>
+      <ContextMenu
+        defaultSelectedKeys={["https://www.mittwald.de"]}
+        selectionMode="navigation"
+        {...props}
+      >
+        <MenuItem href="https://www.mittwald.de" id="https://www.mittwald.de">
+          www.mittwald.de
+        </MenuItem>
+        <MenuItem href="https://www.google.de">www.google.de</MenuItem>
+        <MenuItem href="https://www.adobe.com">www.adobe.com</MenuItem>
+      </ContextMenu>
+    </ContextMenuTrigger>
+  ),
+  args: {
+    defaultOpen: true,
+  },
+};

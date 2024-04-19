@@ -26,17 +26,15 @@ export const Tab: FC<TabProps> = (props) => {
   const id = idFromProps ?? generatedId;
 
   return (
-    <TunnelEntry id="TabPanels">
-      <TabContextProvider value={{ id }}>
-        <Aria.TabPanel
-          className={rootClassName}
-          shouldForceMount={shouldForceMount}
-          id={id}
-          {...rest}
-        >
-          {children}
-        </Aria.TabPanel>
-      </TabContextProvider>
+    <TunnelEntry id="Panels">
+      <Aria.TabPanel
+        className={rootClassName}
+        shouldForceMount={shouldForceMount}
+        id={id}
+        {...rest}
+      >
+        <TabContextProvider value={{ id }}>{children}</TabContextProvider>
+      </Aria.TabPanel>
     </TunnelEntry>
   );
 };
