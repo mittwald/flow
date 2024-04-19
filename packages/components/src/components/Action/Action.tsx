@@ -42,7 +42,7 @@ export const Action: FC<ActionProps> = (props) => {
     Button: {
       onPress: actionController.callAction,
       isPending: state.isPending,
-      isDisabled: state.isExecuting,
+      "aria-disabled": state.isExecuting,
       isSucceeded: state.isSucceeded,
       isFailed: state.isFailed,
     },

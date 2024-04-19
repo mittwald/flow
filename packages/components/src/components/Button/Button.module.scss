@@ -123,6 +123,7 @@
     }
 
     &[disabled],
+    &.ariaDisabled,
     &.isPending,
     &.isFailed,
     &.isSucceeded {

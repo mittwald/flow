@@ -30,7 +30,12 @@ export interface ButtonProps
 }
 
 const disablePendingProps = (props: ButtonProps) => {
-  if (props.isPending || props.isSucceeded || props.isFailed) {
+  if (
+    props.isPending ||
+    props.isSucceeded ||
+    props.isFailed ||
+    props["aria-disabled"]
+  ) {
     props = { ...props };
     props.onPress = undefined;
     props.onPressStart = undefined;
@@ -57,7 +62,7 @@ export const Button = flowComponent("Button", (props) => {
     isDisabled,
     isSucceeded,
     isFailed,
-    "aria-label": ariaLabel,
+    "aria-disabled": ariaDisabled,
     ref,
     ...restProps
   } = props;
@@ -71,6 +76,11 @@ export const Button = flowComponent("Button", (props) => {
     styles[variant],
     styles[style],
     className,
+    /**
+     * Workaround warning: The Aria.Button does not support "aria-disabled" by
+     * now, so this Button will be visually disabled via CSS.
+     */
+    ariaDisabled && styles.ariaDisabled,
   );
 
   const propsContext: PropsContext = {
