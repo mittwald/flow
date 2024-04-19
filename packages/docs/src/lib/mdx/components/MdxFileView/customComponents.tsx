@@ -9,10 +9,7 @@ import Link from "@mittwald/flow-react-components/Link";
 import Text from "@mittwald/flow-react-components/Text";
 import { LinkProvider } from "@mittwald/flow-react-components/nextjs";
 import DoAndDont from "@/lib/mdx/components/DoAndDont/DoAndDont";
-import Do from "@/lib/mdx/components/DoAndDont/Do";
-import Dont from "@/lib/mdx/components/DoAndDont/Dont";
 import { IconExternalLink } from "@mittwald/flow-react-components/Icons";
-import Info from "@/lib/mdx/components/DoAndDont/Info";
 import { ColumnLayout } from "@mittwald/flow-react-components/ColumnLayout";
 
 export const customComponents: MDXComponents = {
@@ -20,9 +17,6 @@ export const customComponents: MDXComponents = {
   Heading: Heading,
   InlineAlert: InlineAlert,
   DoAndDont: DoAndDont,
-  Do: Do,
-  Dont: Dont,
-  Info: Info,
   ColumnLayout: ColumnLayout,
 
   pre: ({ children }) => (
