@@ -5,6 +5,7 @@
   height: 0;
 
   &[id] {
+    @include focus.focus(false, true);
     padding: var(--tab-panel--padding);
     opacity: 1;
     height: auto;

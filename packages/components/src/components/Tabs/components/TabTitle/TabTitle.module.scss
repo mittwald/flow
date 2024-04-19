@@ -10,8 +10,7 @@
   transition-property: color, background-color;
   transition-duration: var(--transition--duration--default);
 
-  @include focus.focus;
-  outline-offset: calc(var(--size-px--xs) * -1);
+  @include focus.focus(false, true);
 
   &:hover {
     background-color: var(--tab--background-color--hover);
