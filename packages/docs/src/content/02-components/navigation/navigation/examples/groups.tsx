@@ -6,16 +6,16 @@ import Label from "@mittwald/flow-react-components/Label";
 
 <Navigation aria-label="Main navigation">
   <NavigationGroup>
-    <Label>General</Label>
+    <Label>Allgemein</Label>
     <Link href="#">Dashboard</Link>
     <Link href="#" aria-current="page">
       Performance
     </Link>
   </NavigationGroup>
   <NavigationGroup>
-    <Label>Components</Label>
+    <Label>Komponenten</Label>
     <Link href="#">Apps</Link>
-    <Link href="#">Databases</Link>
+    <Link href="#">Datenbanken</Link>
     <Link href="#">Domains</Link>
   </NavigationGroup>
 </Navigation>;

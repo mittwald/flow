@@ -8,5 +8,5 @@ import Label from "@mittwald/flow-react-components/Label";
   minValue={0}
   formatOptions={{ style: "unit", unit: "gigabyte" }}
 >
-  <Label>Storage</Label>
+  <Label>Speicher</Label>
 </ProgressBar>;

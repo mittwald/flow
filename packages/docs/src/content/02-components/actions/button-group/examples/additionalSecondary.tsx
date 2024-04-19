@@ -3,10 +3,10 @@ import Button from "@mittwald/flow-react-components/Button";
 
 <ButtonGroup>
   <Button variant="secondary" style="soft">
-    Save and add more
+    Speichern und weitere anlegen
   </Button>
-  <Button variant="accent">Add email address</Button>
+  <Button variant="accent">E-Mail-Addresse anlegen</Button>
   <Button variant="secondary" style="soft">
-    Abort
+    Abbrechen
   </Button>
 </ButtonGroup>;

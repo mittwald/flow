@@ -4,8 +4,8 @@ import RadioGroup, {
 } from "@mittwald/flow-react-components/RadioGroup";
 
 <RadioGroup defaultValue="admin">
-  <Label>Role</Label>
-  <Radio value="admin">Admin</Radio>
-  <Radio value="member">Member</Radio>
-  <Radio value="accountant">Accountant</Radio>
+  <Label>Rolle</Label>
+  <Radio value="admin">Administrator</Radio>
+  <Radio value="member">Mitglied</Radio>
+  <Radio value="accountant">Buchhalter</Radio>
 </RadioGroup>;

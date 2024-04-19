@@ -6,9 +6,10 @@ import Button from "@mittwald/flow-react-components/Button";
 
 <IllustratedMessage>
   <IconApp />
-  <Heading>No apps installed</Heading>
+  <Heading>Keine Apps installiert</Heading>
   <Text>
-    Create your first app to start working on your website.
+    Lege deine erste App an, um mit der Arbeit an deiner
+    Webseite loszulegen.
   </Text>
-  <Button>Create app</Button>
+  <Button>App anlegen</Button>
 </IllustratedMessage>;

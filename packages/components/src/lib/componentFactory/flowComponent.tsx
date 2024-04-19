@@ -3,6 +3,7 @@ import type {
   FlowComponentProps as FlowComponentPropsOfName,
 } from "@/components/propTypes";
 import type {
+  ComponentProps,
   ComponentType,
   ForwardRefExoticComponent,
   LegacyRef,
@@ -14,13 +15,12 @@ import type { PropsWithHOC, PropsWithTunnel } from "@/lib/types/props";
 import { useProps } from "@/lib/propsContext";
 import { TunnelEntry } from "@mittwald/react-tunnel";
 
-export type FlowComponentProps<P = unknown> = P &
-  PropsWithTunnel &
-  PropsWithHOC<P>;
+export type FlowComponentProps<C extends FlowComponentName = never> =
+  PropsWithTunnel & PropsWithHOC<FlowComponentPropsOfName<C>>;
 
 type FlowComponentImplementationType<C extends FlowComponentName> =
   ComponentType<
-    Omit<FlowComponentPropsOfName<C>, keyof FlowComponentProps> & {
+    Omit<FlowComponentPropsOfName<C>, keyof FlowComponentProps<C>> & {
       ref?: LegacyRef<never>;
     }
   >;
@@ -37,9 +37,15 @@ export function flowComponent<C extends FlowComponentName>(
     const { tunnelId, hoc, ...rest } = useProps(
       componentName,
       p,
-    ) as FlowComponentProps<FlowComponentPropsOfName<C>>;
+    ) as FlowComponentProps<C>;
 
-    let element = <ImplementationComponentType {...rest} ref={ref} />;
+    const implementationTypeProps = rest as ComponentProps<
+      typeof ImplementationComponentType
+    >;
+
+    let element = (
+      <ImplementationComponentType {...implementationTypeProps} ref={ref} />
+    );
 
     if (hoc) {
       element = hoc(element, p);
