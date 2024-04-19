@@ -13,6 +13,8 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
+import { deepFindOfType } from "@/lib/react/deepFindOfType";
+import { Skeleton } from "@/components/Skeleton";
 
 export interface ButtonProps
   extends PropsWithChildren<Omit<Aria.ButtonProps, "style">>,
@@ -85,7 +87,12 @@ export const Button = flowComponent("Button", (props) => {
     Avatar: {
       className: styles.avatar,
     },
+    Skeleton: {
+      className: styles.skeleton,
+    },
   };
+
+  const hasSkeleton = !!deepFindOfType(children, Skeleton);
 
   const stringFormatter = useLocalizedStringFormatter(locales);
 
@@ -119,6 +126,7 @@ export const Button = flowComponent("Button", (props) => {
         isDisabled={isDisabled}
         aria-label={stateLabel ?? ariaLabel}
         ref={ref}
+        aria-busy={hasSkeleton}
         {...restProps}
       >
         <PropsContextProvider props={propsContext}>

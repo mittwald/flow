@@ -5,6 +5,7 @@ import { IconPlus } from "@/components/Icon/components/icons";
 import { action } from "@storybook/addon-actions";
 import { Text } from "@/components/Text";
 import IconChevronDown from "@/components/Icon/components/icons/IconChevronDown";
+import { Skeleton } from "@/components/Skeleton";
 
 const meta: Meta<typeof Button> = {
   title: "Actions/Button",
@@ -82,5 +83,15 @@ export const SmallWithTextAndIcon: Story = {
   ),
   args: {
     size: "s",
+  },
+};
+
+export const WithSkeleton: Story = {
+  render: (props) => {
+    return (
+      <Button {...props}>
+        <Skeleton width={200} />
+      </Button>
+    );
   },
 };

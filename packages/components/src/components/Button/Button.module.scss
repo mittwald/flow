@@ -38,6 +38,11 @@
     align-items: center;
     grid-template-areas: "content";
   }
+
+  &.button:has(.skeleton) {
+    padding: 0;
+    background-color: var(--button--disabled-solid-background-color);
+  }
 }
 
 .content {
@@ -55,6 +60,11 @@
   display: block;
 }
 
+.skeleton {
+  padding-block: var(--button--padding-squished-y);
+  padding-inline: var(--button--padding-squished-x);
+}
+
 .size-s {
   font-size: var(--button--font-size-s);
   padding-block: var(--button--padding-s-squished-y);
@@ -67,6 +77,11 @@
 
   .content {
     column-gap: var(--button--text-to-icon-spacing-s);
+  }
+
+  .skeleton {
+    padding-block: var(--button--padding-s-squished-y);
+    padding-inline: var(--button--padding-s-squished-x);
   }
 }
 
