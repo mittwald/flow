@@ -1,8 +1,16 @@
+.illustratedMessageContainer {
+  container-type: inline-size;
+}
+
 .illustratedMessage {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: var(--illustrated-message--padding);
+
+  @container (max-width: 550px) {
+    padding: var(--illustrated-message--padding--mobile);
+  }
 }
 
 /* Elements */
@@ -40,11 +48,5 @@
 
   .heading {
     color: var(--illustrated-message--negative-heading-color);
-  }
-}
-
-@media (max-width: 550px) {
-  .illustratedMessage {
-    padding: var(--illustrated-message--padding--mobile);
   }
 }

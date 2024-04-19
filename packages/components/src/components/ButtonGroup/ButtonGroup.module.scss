@@ -1,3 +1,7 @@
+.buttonGroupContainer {
+  container-type: inline-size;
+}
+
 .buttonGroup {
   gap: var(--button-group--button-to-button-spacing);
   display: grid;
@@ -12,10 +16,8 @@
   :first-child:not(.secondary) {
     grid-area: primary;
   }
-}
 
-@media (max-width: 550px) {
-  .buttonGroup {
+  @container (max-width: 550px) {
     display: flex;
     flex-direction: column-reverse;
   }
