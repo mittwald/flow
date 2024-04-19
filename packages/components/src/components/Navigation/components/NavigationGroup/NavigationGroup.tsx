@@ -23,6 +23,7 @@ export const NavigationGroup: FC<NavigationGroupProps> = (props) => {
       tunnelId: generatedTunnelId,
       id: generatedId,
       className: styles.label,
+      "aria-hidden": true,
     },
   };
 
