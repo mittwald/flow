@@ -4,7 +4,7 @@ header-navigation:
   item-color:
     value: "{heading.color}"
   item-color-inverse:
-    value: "{neutral.color.100}"
+    value: "{inverse-content-color}"
   item-background-color:
     hover:
       value: "{primary-plain-background-color.hover}"
@@ -12,9 +12,9 @@ header-navigation:
       value: "{primary-plain-background-color.pressed}"
   item-background-color-inverse:
     hover:
-      value: "#00000044"
+      value: "{inverse-background-color.hover}"
     pressed:
-      value: "#00000066"
+      value: "{inverse-background-color.pressed}"
   item-padding:
     value: "{size-px.s}"
   item-corner-radius:

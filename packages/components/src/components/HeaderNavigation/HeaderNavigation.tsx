@@ -12,7 +12,7 @@ import { EmulatedBoldText } from "@/components/EmulatedBoldText";
 export interface HeaderNavigationProps
   extends PropsWithChildren<ComponentProps<"nav">> {
   className?: string;
-  inverse: boolean;
+  inverse?: boolean;
 }
 
 export const HeaderNavigation: FC<HeaderNavigationProps> = (props) => {
