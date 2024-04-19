@@ -23,6 +23,15 @@
       "icon heading"
       ".    content";
   }
+
+  &:has(.skeleton) {
+    padding: 0;
+    border: none;
+    display: block;
+    .statusIcon {
+      display: none;
+    }
+  }
 }
 
 /* Elements */
@@ -41,6 +50,10 @@
   flex-direction: column;
   align-items: flex-start;
   row-gap: var(--inline-alert--content-to-content-spacing);
+}
+
+.skeleton {
+  padding: var(--inline-alert--padding);
 }
 
 /* Status */

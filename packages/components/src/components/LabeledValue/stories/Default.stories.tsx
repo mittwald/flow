@@ -6,6 +6,7 @@ import { Content } from "@/components/Content";
 import { CopyButton } from "@/components/CopyButton";
 import { InlineCode } from "@/components/InlineCode";
 import { Link } from "@/components/Link";
+import { Skeleton } from "@/components/Skeleton";
 
 const meta: Meta<typeof LabeledValue> = {
   title: "Content/LabeledValue",
@@ -52,6 +53,15 @@ export const WithLink: Story = {
       <Label>Domain</Label>
       <Link>https://mittwald.de</Link>
       <CopyButton text="https://mittwald.de" />
+    </LabeledValue>
+  ),
+};
+
+export const WithSkeleton: Story = {
+  render: (props) => (
+    <LabeledValue {...props}>
+      <Label>Domain</Label>
+      <Skeleton />
     </LabeledValue>
   ),
 };

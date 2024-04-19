@@ -78,15 +78,9 @@ export const WithGroups: Story = {
 export const WithSkeletons: Story = {
   render: (props) => (
     <Navigation aria-label="Main menu" {...props}>
-      <Link>
-        <Skeleton />
-      </Link>
-      <Link>
-        <Skeleton />
-      </Link>
-      <Link>
-        <Skeleton />
-      </Link>
+      <Skeleton />
+      <Skeleton />
+      <Skeleton />
     </Navigation>
   ),
 };

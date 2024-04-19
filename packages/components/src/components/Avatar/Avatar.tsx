@@ -9,8 +9,6 @@ import {
   useProps,
 } from "@/lib/propsContext";
 import { getVariantFromChildren } from "@/components/Avatar/lib/getVariantFromChildren";
-import { deepFindOfType } from "@/lib/react/deepFindOfType";
-import { Skeleton } from "@/components/Skeleton";
 
 export interface AvatarProps extends PropsWithChildren {
   className?: string;
@@ -27,14 +25,11 @@ export const Avatar: FC<AvatarProps> = (props) => {
     size = "m",
   } = useProps("Avatar", props);
 
-  const hasSkeleton = !!deepFindOfType(children, Skeleton);
-
   const rootClassName = clsx(
     styles.avatar,
     styles[`size-${size}`],
     className,
     styles[`variant-${variant ?? getVariantFromChildren(children)}`],
-    hasSkeleton && styles.skeleton,
   );
 
   const propsContext: PropsContext = {
@@ -43,6 +38,9 @@ export const Avatar: FC<AvatarProps> = (props) => {
     },
     Icon: {
       className: styles.icon,
+    },
+    Skeleton: {
+      className: styles.skeleton,
     },
   };
 
