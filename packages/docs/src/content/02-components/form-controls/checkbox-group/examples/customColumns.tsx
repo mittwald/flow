@@ -3,7 +3,7 @@ import { CheckboxGroup } from "@mittwald/flow-react-components/CheckboxGroup";
 import { Label } from "@mittwald/flow-react-components/Label";
 
 <CheckboxGroup l={[1, 1]}>
-  <Label>Permissions</Label>
-  <CheckboxButton value="read">Read</CheckboxButton>
-  <CheckboxButton value="write">Write</CheckboxButton>
+  <Label>Berechtigungen</Label>
+  <CheckboxButton value="read">Lesen</CheckboxButton>
+  <CheckboxButton value="write">Schreiben</CheckboxButton>
 </CheckboxGroup>;

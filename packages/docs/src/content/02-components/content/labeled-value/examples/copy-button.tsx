@@ -4,7 +4,7 @@ import Content from "@mittwald/flow-react-components/Content";
 import CopyButton from "@mittwald/flow-react-components/CopyButton";
 
 <LabeledValue>
-  <Label>Project ID</Label>
+  <Label>Projekt ID</Label>
   <Content>p-eWRhpRV</Content>
-  <CopyButton text="Project ID: p-eWRhpRV" />
+  <CopyButton text="Projekt ID: p-eWRhpRV" />
 </LabeledValue>;

@@ -7,13 +7,13 @@ import invariant from "invariant";
 export type ChildProps = object;
 
 export class ChildPropsStore {
-  public children: Record<string, ChildProps> = {};
+  public children = observable.map<string, ChildProps>({}, { deep: false });
   public readonly scope: string;
 
   public constructor(scope: string) {
     this.scope = scope;
     makeObservable(this, {
-      children: observable,
+      children: observable.shallow,
       setProps: action,
       removeProps: action,
     });
@@ -30,17 +30,15 @@ export class ChildPropsStore {
   }
 
   public setProps(childId: string, props: ChildProps): void {
-    if (this.children[childId] !== props) {
-      this.children[childId] = props;
-    }
+    this.children.set(childId, props);
   }
 
   public removeProps(childId: string): void {
-    delete this.children[childId];
+    this.children.delete(childId);
   }
 
   public getPropsArray<T>(): T[] {
-    return Object.values(this.children) as T[];
+    return Array.from(this.children.values()) as T[];
   }
 
   public getProp<T>(name: string): T | undefined {

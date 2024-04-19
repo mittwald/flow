@@ -5,9 +5,9 @@ import Text from "@mittwald/flow-react-components/Text";
     style={{ borderInline: "2px solid red" }}
     emulateBoldWidth
   >
-    Example Text
+    Das ist ein Text
   </Text>
   <Text style={{ borderInline: "2px solid red" }}>
-    <strong>Example Text</strong>
+    <strong>Das ist ein Text</strong>
   </Text>
 </Column>;

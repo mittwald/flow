@@ -6,10 +6,10 @@ import Button from "@mittwald/flow-react-components/Button";
 
 <IllustratedMessage variant="negative">
   <IconDanger />
-  <Heading>No access</Heading>
+  <Heading>Kein Zugriff</Heading>
   <Text>
-    You do not have the required permissions to access this
-    page.
+    Du hast keine Berechtigung, um auf diese Seite
+    zuzugreifen.
   </Text>
-  <Button>Go back</Button>
+  <Button>Zum Dashboard</Button>
 </IllustratedMessage>;
