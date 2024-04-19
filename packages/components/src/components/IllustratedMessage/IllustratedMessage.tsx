@@ -14,7 +14,7 @@ export const IllustratedMessage: FC<IllustratedMessageProps> = (props) => {
   const { className, children, variant = "info", ...rest } = props;
 
   const rootClassName = clsx(
-    styles.illustratedMessage,
+    styles.illustratedMessageContainer,
     styles[variant],
     className,
   );
@@ -37,8 +37,8 @@ export const IllustratedMessage: FC<IllustratedMessageProps> = (props) => {
   };
 
   return (
-    <div className={styles.illustratedMessageContainer}>
-      <div {...rest} className={rootClassName}>
+    <div {...rest} className={rootClassName}>
+      <div className={styles.illustratedMessage}>
         <PropsContextProvider props={propsContext}>
           {children}
         </PropsContextProvider>
