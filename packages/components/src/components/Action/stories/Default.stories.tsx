@@ -55,6 +55,13 @@ export const AsyncWithFeedback: Story = {
   },
 };
 
+export const AsyncLongWithFeedback: Story = {
+  args: {
+    action: asyncLongFunction,
+    feedback: true,
+  },
+};
+
 export const Nested: Story = {
   args: {
     children: <Action action={syncFunction}>{button}</Action>,

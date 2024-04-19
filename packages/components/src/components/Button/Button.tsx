@@ -10,9 +10,8 @@ import { Wrap } from "@/components/Wrap";
 import { Text } from "@/components/Text";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import locales from "./locales/*.locale.json";
-import { useLocalizedStringFormatter } from "react-aria";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
+import { useAriaAnnounceActionState } from "@/components/Action/ariaLive";
 
 export interface ButtonProps
   extends PropsWithChildren<Omit<Aria.ButtonProps, "style">>,
@@ -23,6 +22,8 @@ export interface ButtonProps
   style?: "plain" | "solid" | "soft";
   /** @default "m" */
   size?: "m" | "s";
+
+  "aria-disabled"?: boolean;
 
   isPending?: boolean;
   isSucceeded?: boolean;
@@ -59,7 +60,6 @@ export const Button = flowComponent("Button", (props) => {
     className,
     size = "m",
     isPending,
-    isDisabled,
     isSucceeded,
     isFailed,
     "aria-disabled": ariaDisabled,
@@ -83,6 +83,16 @@ export const Button = flowComponent("Button", (props) => {
     ariaDisabled && styles.ariaDisabled,
   );
 
+  useAriaAnnounceActionState(
+    isPending
+      ? "isPending"
+      : isSucceeded
+        ? "isSucceeded"
+        : isFailed
+          ? "isFailed"
+          : "isIdle",
+  );
+
   const propsContext: PropsContext = {
     Icon: {
       className: styles.icon,
@@ -96,17 +106,6 @@ export const Button = flowComponent("Button", (props) => {
       className: styles.avatar,
     },
   };
-
-  const stringFormatter = useLocalizedStringFormatter(locales);
-
-  const stateLabel =
-    isSucceeded || isFailed || isPending
-      ? stringFormatter.format(
-          `button.${
-            isSucceeded ? "isSucceeded" : isFailed ? "isFailed" : "isPending"
-          }`,
-        )
-      : undefined;
 
   const StateIconComponent = isSucceeded
     ? IconSucceeded
@@ -124,23 +123,14 @@ export const Button = flowComponent("Button", (props) => {
 
   return (
     <ClearPropsContext>
-      <Aria.Button
-        className={rootClassName}
-        isDisabled={isDisabled}
-        aria-label={stateLabel ?? ariaLabel}
-        ref={ref}
-        {...restProps}
-      >
+      <Aria.Button className={rootClassName} ref={ref} {...restProps}>
         <PropsContextProvider props={propsContext}>
-          <Wrap if={stateIcon}>
-            <span className={styles.content}>
-              <Wrap if={isStringContent}>
-                <Text>{children}</Text>
-              </Wrap>
-            </span>
-          </Wrap>
+          <span className={styles.content}>
+            <Wrap if={isStringContent}>
+              <Text>{children}</Text>
+            </Wrap>
+          </span>
         </PropsContextProvider>
-
         {stateIcon}
       </Aria.Button>
     </ClearPropsContext>

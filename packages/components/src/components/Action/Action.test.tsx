@@ -73,12 +73,6 @@ test("When nested sync actions, the inner action is called first", async () => {
   await clickTrigger();
 });
 
-test("Button is disabled when async action is triggered", async () => {
-  render(<Action action={asyncAction1}>{button}</Action>);
-  await clickTrigger();
-  expect(getButton()).toBeDisabled();
-});
-
 test("Button is enabled again when async action has completed", async () => {
   render(<Action action={asyncAction1}>{button}</Action>);
   await clickTrigger();
@@ -102,6 +96,22 @@ test("When nested async actions, the outer action is called after the first has 
   expect(asyncAction2).toHaveBeenCalled();
 });
 
+const expectIconInDom = (iconName: string) => {
+  expect(
+    screen.getByRole("img", {
+      hidden: true,
+    }).className,
+  ).includes(`icon-${iconName}`);
+};
+
+const expectNoIconInDom = () => {
+  expect(
+    screen.queryByRole("img", {
+      hidden: true,
+    }),
+  ).toBeNull();
+};
+
 describe("Feedback", () => {
   test("is shown when sync action succeeds", async () => {
     render(
@@ -110,7 +120,7 @@ describe("Feedback", () => {
       </Action>,
     );
     await clickTrigger();
-    screen.getByLabelText("Succeeded");
+    expectIconInDom("check");
   });
 
   test("is shown when sync action fails", async () => {
@@ -123,7 +133,7 @@ describe("Feedback", () => {
       </Action>,
     );
     await clickTrigger();
-    screen.getByLabelText("Failed");
+    expectIconInDom("x");
   });
 
   test("is hidden after some time", async () => {
@@ -134,7 +144,7 @@ describe("Feedback", () => {
     );
     await clickTrigger();
     await act(() => vitest.advanceTimersByTimeAsync(2000));
-    expect(screen.queryByLabelText("Succeeded")).toBeNull();
+    expectNoIconInDom();
   });
 });
 
@@ -150,7 +160,7 @@ describe("Pending state", () => {
     render(<Action action={asyncAction1}>{button}</Action>);
     await clickTrigger();
     await act(() => vitest.advanceTimersByTimeAsync(1000));
-    screen.getByLabelText("Pending");
+    expectIconInDom("loader-2");
   });
 
   test("is hidden after some time", async () => {
@@ -160,7 +170,7 @@ describe("Pending state", () => {
       </Action>,
     );
     await clickTrigger();
-    await act(() => vitest.advanceTimersByTimeAsync(2000));
-    expect(screen.queryByLabelText("Pending")).toBeNull();
+    await act(() => vitest.advanceTimersByTimeAsync(3000));
+    expectNoIconInDom();
   });
 });

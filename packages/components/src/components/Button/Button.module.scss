@@ -91,11 +91,11 @@
 .isFailed,
 .isSucceeded {
   .content {
-    visibility: hidden;
+    opacity: 0;
   }
   &.plain {
     .content:has(.text) {
-      visibility: visible;
+      opacity: 1;
     }
   }
 }
