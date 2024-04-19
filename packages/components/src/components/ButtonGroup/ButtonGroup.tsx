@@ -1,4 +1,4 @@
-import type { ComponentProps, FC, PropsWithChildren } from "react";
+import type { ComponentProps, PropsWithChildren } from "react";
 import React from "react";
 import styles from "./ButtonGroup.module.scss";
 import type { PropsContext } from "@/lib/propsContext";
@@ -9,11 +9,14 @@ import {
   useProps,
 } from "@/lib/propsContext";
 import clsx from "clsx";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface ButtonGroupProps
-  extends PropsWithChildren<ComponentProps<"div">> {}
+  extends PropsWithChildren<ComponentProps<"div">>,
+    FlowComponentProps {}
 
-export const ButtonGroup: FC<ButtonGroupProps> = (props) => {
+export const ButtonGroup = flowComponent("ButtonGroup", (props) => {
   const { children, className, ...rest } = useProps("ButtonGroup", props);
 
   const rootClassName = clsx(styles.buttonGroup, className);
@@ -37,6 +40,6 @@ export const ButtonGroup: FC<ButtonGroupProps> = (props) => {
       </div>
     </ClearPropsContext>
   );
-};
+});
 
 export default ButtonGroup;

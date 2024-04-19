@@ -4,15 +4,15 @@ import Label from "@mittwald/flow-react-components/Label";
 
 <ColumnLayout>
   <TextField>
-    <Label>First name</Label>
+    <Label>Vorname</Label>
   </TextField>
   <TextField>
-    <Label>Last name</Label>
+    <Label>Nachname</Label>
   </TextField>
   <TextField>
-    <Label>Street</Label>
+    <Label>Straße</Label>
   </TextField>
   <TextField>
-    <Label>House number</Label>
+    <Label>Hausnummer</Label>
   </TextField>
 </ColumnLayout>;

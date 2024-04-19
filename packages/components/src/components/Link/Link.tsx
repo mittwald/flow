@@ -14,7 +14,7 @@ export interface LinkProps
   extends PropsWithChildren<
       Omit<Aria.LinkProps, "children" | "slot" | "className">
     >,
-    FlowComponentProps,
+    FlowComponentProps<"Link">,
     PropsWithClassName {
   inline?: boolean;
   linkComponent?: ComponentType<Omit<ComponentProps<"a">, "ref">>;
