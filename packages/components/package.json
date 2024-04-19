@@ -170,6 +170,10 @@
       "types": "./dist/types/components/Select/index.d.ts",
       "import": "./dist/Select.js"
     },
+    "./Skeleton": {
+      "types": "./dist/types/components/Skeleton/index.d.ts",
+      "import": "./dist/Skeleton.js"
+    },
     "./StatusBadge": {
       "types": "./dist/types/components/StatusBadge/index.d.ts",
       "import": "./dist/StatusBadge.js"

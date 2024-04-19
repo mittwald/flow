@@ -1,12 +1,30 @@
-## Beispiele
+## Beispiel
 
 <LiveCodeEditor />
+
+---
+
+## Benutzerdefinierte Größe
+
+<LiveCodeEditor example="custom-size" />
+
+---
+
+## In Komponenten
+
+Wird das Skeleton innerhalb von anderen Komponenten verwendet, passt es sich
+optisch der jeweiligen Komponente an.
+
+<LiveCodeEditor example="in-component" />
+
+---
 
 ## Accessibility
 
 Das Skeleton soll von Screenreadern ignoriert werden und enthält deswegen das
-Property `aria-hidden`. Die Accessibility eines Ladezustands wird **nicht** vom
-Skeleton geregelt.
+Property `aria-hidden`.
+
+Die Accessibility eines Ladezustands wird **nicht** vom Skeleton geregelt.
 
 Um für den Screenreader erkenntlich zu machen, dass ein Inhalt fertig geladen
 hat sollte dieser im Ladezustand das Property `aria-busy`, welches auf `false`
