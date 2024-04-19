@@ -4,5 +4,5 @@ import TextArea from "@mittwald/flow-react-components/TextArea";
 
 <TextArea>
   <Label>Public Key</Label>
-  <FieldDescription>Starts with ssh-rsa</FieldDescription>
+  <FieldDescription>Beginnt mit ssh-rsa</FieldDescription>
 </TextArea>;

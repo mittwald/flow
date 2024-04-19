@@ -1,0 +1,52 @@
+.illustratedMessageContainer {
+  container-type: inline-size;
+}
+
+.illustratedMessage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--illustrated-message--padding);
+
+  @container (max-width: 550px) {
+    padding: var(--illustrated-message--padding--mobile);
+  }
+}
+
+/* Elements */
+
+.icon {
+  color: var(--illustrated-message--info-icon-color);
+  margin-bottom: var(--illustrated-message--icon-to-heading-spacing);
+  order: 1;
+}
+
+.heading {
+  margin-bottom: var(--illustrated-message--heading-to-text-spacing);
+  text-align: center;
+  max-width: var(--illustrated-message--max-width);
+  order: 2;
+}
+
+.text {
+  margin-bottom: var(--illustrated-message--text-to-button-spacing);
+  text-align: center;
+  max-width: var(--illustrated-message--max-width);
+  order: 3;
+}
+
+.button {
+  order: 4;
+}
+
+/* Negative */
+
+.negative {
+  .icon {
+    color: var(--illustrated-message--negative-icon-color);
+  }
+
+  .heading {
+    color: var(--illustrated-message--negative-heading-color);
+  }
+}

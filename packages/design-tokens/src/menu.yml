@@ -3,7 +3,7 @@ menu:
     value: "{size-px.s}"
   group-to-group-spacing:
     value: "{size-px.m}"
-  heading-to-group-spacing:
+  label-to-group-spacing:
     value: "{size-px.s}"
 
 menu-item:
@@ -40,6 +40,6 @@ menu-item:
 
   # Disabled
   disabled-background-color:
-    value: "{neutral.color.400}"
+    value: "{disabled-plain-background-color}"
   disabled-color:
-    value: "{neutral.color.100}"
+    value: "{disabled-plain-content-color}"

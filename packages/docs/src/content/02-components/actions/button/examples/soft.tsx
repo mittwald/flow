@@ -2,15 +2,15 @@ import Button from "@mittwald/flow-react-components/Button";
 
 <Row>
   <Button style="soft" variant="primary">
-    Continue/Action
+    Fortfahren/Aktion
   </Button>
   <Button style="soft" variant="secondary">
-    Abort/Back
+    Abbrechen/Zurück
   </Button>
   <Button style="soft" variant="accent">
-    Create/Save
+    Erstellen/Speichern
   </Button>
   <Button style="soft" variant="danger">
-    Delete/Terminate
+    Löschen/Kündigen
   </Button>
 </Row>;

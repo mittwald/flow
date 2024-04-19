@@ -1,0 +1,25 @@
+illustrated-message:
+  padding:
+    value: "{size-px.xxl}"
+  padding-mobile:
+    value: "{size-px.l}"
+  max-width:
+    value: 400px
+  icon-to-heading-spacing:
+    value: "{size-rem.m}"
+  heading-to-text-spacing:
+    value: "{size-rem.s}"
+  text-to-button-spacing:
+    value: "{size-rem.m}"
+
+  # Info
+  info-icon-color:
+    value: "{info.color.800}"
+  info-heading-color:
+    value: "{info.color.800}"
+
+  # Negative
+  negative-icon-color:
+    value: "{danger.color.800}"
+  negative-heading-color:
+    value: "{danger.color.900}"

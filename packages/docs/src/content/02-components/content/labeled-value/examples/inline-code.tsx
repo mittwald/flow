@@ -4,7 +4,7 @@ import InlineCode from "@mittwald/flow-react-components/InlineCode";
 import CopyButton from "@mittwald/flow-react-components/CopyButton";
 
 <LabeledValue>
-  <Label>IP address</Label>
+  <Label>IP Adresse</Label>
   <InlineCode>127.0.0.1</InlineCode>
   <CopyButton text="127.0.0.1" />
 </LabeledValue>;

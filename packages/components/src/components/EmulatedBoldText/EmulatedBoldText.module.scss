@@ -8,5 +8,6 @@
 .boldText {
   font-weight: var(--font-weight--bold);
   height: 0;
-  opacity: 0;
+  line-height: 0;
+  visibility: hidden;
 }

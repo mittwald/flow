@@ -1,0 +1,11 @@
+popover:
+  box-shadow:
+    value: "{shadow.overlay}"
+  border-radius:
+    value: "{size-px.xs}"
+  padding:
+    value: "{size-px.m}"
+  background-color:
+    value: "{neutral.color.100}"
+  min-width:
+    value: 200px

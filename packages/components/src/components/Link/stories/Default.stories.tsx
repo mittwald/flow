@@ -13,12 +13,6 @@ const meta: Meta<typeof Link> = {
     onPress: action("onPress"),
   },
   render: (props) => <Link {...props}>Adjust project</Link>,
-  argTypes: {
-    variant: {
-      control: "inline-radio",
-      defaultValue: "default",
-    },
-  },
   parameters: {
     controls: { exclude: ["onPress"] },
   },
@@ -38,11 +32,6 @@ export const Inline: Story = {
 };
 
 export const Disabled: Story = { args: { isDisabled: true } };
-
-export const Danger: Story = {
-  args: { variant: "danger" },
-  render: (props) => <Link {...props}>Delete project</Link>,
-};
 
 export const WithIcon: Story = {
   render: (props) => (

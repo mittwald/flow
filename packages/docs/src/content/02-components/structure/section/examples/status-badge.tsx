@@ -10,8 +10,9 @@ import Header from "@mittwald/flow-react-components/Header";
     <StatusBadge>Subscribed</StatusBadge>
   </Header>
   <Text>
-    Upcoming releases, new features and tips about your
-    hosting - we bring the most important information to
-    inbox. Subscribe to our newsletter and stay up to date.
+    Kommende Releases, neue Features und Tipps rund um dein
+    Hosting – wir bringen dir das Wichtigste in dein
+    Postfach. Abonniere unseren Newsletter und bleib auf dem
+    Laufenden.
   </Text>
 </Section>;

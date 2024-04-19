@@ -5,17 +5,14 @@ import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
 import { ClearPropsContext, PropsContextProvider } from "@/lib/propsContext";
-import {
-  IconFailed,
-  IconPending,
-  IconSucceeded,
-} from "@/components/Icon/components/icons";
+import { IconFailed, IconSucceeded } from "@/components/Icon/components/icons";
 import { Wrap } from "@/components/Wrap";
 import { Text } from "@/components/Text";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
+import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 
 export interface ButtonProps
   extends PropsWithChildren<Omit<Aria.ButtonProps, "style">>,
@@ -61,6 +58,7 @@ export const Button = flowComponent("Button", (props) => {
     isSucceeded,
     isFailed,
     "aria-label": ariaLabel,
+    ref,
     ...restProps
   } = props;
 
@@ -84,6 +82,9 @@ export const Button = flowComponent("Button", (props) => {
     Text: {
       className: styles.text,
     },
+    Avatar: {
+      className: styles.avatar,
+    },
   };
 
   const stringFormatter = useLocalizedStringFormatter(locales);
@@ -102,7 +103,7 @@ export const Button = flowComponent("Button", (props) => {
     : isFailed
       ? IconFailed
       : isPending
-        ? IconPending
+        ? LoadingSpinner
         : undefined;
 
   const stateIcon = StateIconComponent && (
@@ -117,19 +118,19 @@ export const Button = flowComponent("Button", (props) => {
         className={rootClassName}
         isDisabled={isDisabled}
         aria-label={stateLabel ?? ariaLabel}
+        ref={ref}
         {...restProps}
       >
-        <Wrap if={stateIcon}>
-          <span className={styles.content}>
-            <Wrap if={isStringContent}>
-              <Text>
-                <PropsContextProvider props={propsContext}>
-                  {children}
-                </PropsContextProvider>
-              </Text>
-            </Wrap>
-          </span>
-        </Wrap>
+        <PropsContextProvider props={propsContext}>
+          <Wrap if={stateIcon}>
+            <span className={styles.content}>
+              <Wrap if={isStringContent}>
+                <Text>{children}</Text>
+              </Wrap>
+            </span>
+          </Wrap>
+        </PropsContextProvider>
+
         {stateIcon}
       </Aria.Button>
     </ClearPropsContext>

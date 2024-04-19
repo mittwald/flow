@@ -4,9 +4,9 @@ import Label from "@mittwald/flow-react-components/Label";
 
 <ColumnLayout m={[2, 1]}>
   <TextField>
-    <Label>Street</Label>
+    <Label>Straße</Label>
   </TextField>
   <TextField>
-    <Label>House number</Label>
+    <Label>Hausnummer</Label>
   </TextField>
 </ColumnLayout>;

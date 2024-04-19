@@ -16,10 +16,16 @@ export interface AvatarProps extends PropsWithChildren {
   className?: string;
   /** @default "m" */
   size?: "xs" | "s" | "m" | "l";
+  variant?: 1 | 2 | 3 | 4;
 }
 
 export const Avatar: FC<AvatarProps> = (props) => {
-  const { children, className, size = "m" } = useProps("Avatar", props);
+  const {
+    children,
+    className,
+    variant,
+    size = "m",
+  } = useProps("Avatar", props);
 
   const hasSkeleton = !!deepFindOfType(children, Skeleton);
 
@@ -27,7 +33,7 @@ export const Avatar: FC<AvatarProps> = (props) => {
     styles.avatar,
     styles[`size-${size}`],
     className,
-    styles[`variant-${getVariantFromChildren(children)}`],
+    styles[`variant-${variant ?? getVariantFromChildren(children)}`],
     hasSkeleton && styles.skeleton,
   );
 

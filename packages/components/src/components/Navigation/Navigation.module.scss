@@ -1,7 +1,8 @@
 @use "@/styles/mixins/menuItem";
 
-.heading {
-  margin-bottom: var(--menu--heading-to-group-spacing);
+.label {
+  display: block;
+  margin-block: var(--menu--label-to-group-spacing);
 }
 
 .item {

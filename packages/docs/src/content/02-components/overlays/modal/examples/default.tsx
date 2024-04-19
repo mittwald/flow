@@ -8,26 +8,30 @@ import Label from "@mittwald/flow-react-components/Label";
 import ButtonGroup from "@mittwald/flow-react-components/ButtonGroup";
 import Button from "@mittwald/flow-react-components/Button";
 import Heading from "@mittwald/flow-react-components/Heading";
-import { Action } from "@mittwald/flow-react-components/Action";
+import Action from "@mittwald/flow-react-components/Action";
 
 <ModalTrigger>
-  <Button variant="accent">Create customer</Button>
+  <Button variant="accent">Organisation anlegen</Button>
   <Modal>
-    <Heading>New Customer</Heading>
+    <Heading>Neue Organisation</Heading>
     <Content>
       <Text>
-        Create a new customer to manage your projects,
-        members and payments.
+        Eine Organisation kannst du dir wie ein Unternehmen
+        vorstellen. An diesem Ort verwaltest du deine
+        Mitarbeiter, Zahlungsmodalitäten und kannst deine
+        Rechnungen einsehen.
       </Text>
       <TextField>
-        <Label>Customer name</Label>
+        <Label>Organisationsname</Label>
       </TextField>
     </Content>
     <ButtonGroup>
       <Action closeModal>
-        <Button variant="accent">Create customer</Button>
+        <Button variant="accent">
+          Organisation anlegen
+        </Button>
         <Button style="soft" variant="secondary">
-          Abort
+          Abbrechen
         </Button>
       </Action>
     </ButtonGroup>

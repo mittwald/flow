@@ -8,6 +8,7 @@ const meta: Meta<typeof Switch> = {
   component: Switch,
   args: {
     onChange: action("onChange"),
+    labelPosition: "trailing",
   },
   parameters: {
     controls: { exclude: ["onChange"] },
@@ -15,6 +16,7 @@ const meta: Meta<typeof Switch> = {
   argTypes: {
     labelPosition: {
       control: "inline-radio",
+      options: ["trailing", "leading"],
     },
   },
   render: (props) => <Switch {...props}>Autoresponder</Switch>,

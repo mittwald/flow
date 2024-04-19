@@ -18,8 +18,12 @@ const meta: Meta<typeof Avatar> = {
   parameters: {
     controls: { exclude: ["className"] },
   },
+  args: { size: "m" },
   argTypes: {
     size: {
+      control: "inline-radio",
+    },
+    variant: {
       control: "inline-radio",
     },
   },
@@ -44,6 +48,7 @@ export const WithIcon: Story = {
       <IconApp />
     </Avatar>
   ),
+  args: { variant: 1 },
 };
 
 export const WithSkeleton: Story = {

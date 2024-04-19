@@ -6,8 +6,8 @@
   padding: var(--inline-alert--padding);
   display: grid;
   grid-template-columns: auto 1fr;
-  grid-column-gap: var(--inline-alert--icon-to-text-spacing);
-  grid-row-gap: var(--inline-alert--text-to-text-spacing);
+  grid-column-gap: var(--inline-alert--icon-to-heading-spacing);
+  grid-row-gap: var(--inline-alert--heading-to-content-spacing);
   width: 100%;
 
   @extend .info;
@@ -28,6 +28,7 @@
 /* Elements */
 .statusIcon {
   grid-area: icon;
+  height: calc(var(--heading--h3-font-size) * var(--line-height--default));
 }
 
 .heading {
@@ -36,6 +37,10 @@
 
 .content {
   grid-area: content;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  row-gap: var(--inline-alert--content-to-content-spacing);
 }
 
 /* Status */

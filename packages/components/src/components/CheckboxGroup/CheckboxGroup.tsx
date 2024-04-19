@@ -1,4 +1,4 @@
-import type { FC, PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 import React from "react";
 import styles from "./CheckboxGroup.module.scss";
 import * as Aria from "react-aria-components";
@@ -12,20 +12,22 @@ import formFieldStyles from "../FormField/FormField.module.scss";
 import type { ColumnLayoutProps } from "@/components/ColumnLayout";
 import { ColumnLayout } from "@/components/ColumnLayout";
 import { deepFindOfType } from "@/lib/react/deepFindOfType";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface CheckboxGroupProps
   extends PropsWithChildren<Omit<Aria.CheckboxGroupProps, "children">>,
-    Pick<ColumnLayoutProps, "s" | "m" | "l"> {}
+    Pick<ColumnLayoutProps, "s" | "m" | "l">,
+    FlowComponentProps {}
 
-export const CheckboxGroup: FC<CheckboxGroupProps> = (props) => {
-  const { children, className, s, m, l, ...rest } = props;
+export const CheckboxGroup = flowComponent("CheckboxGroup", (props) => {
+  const { children, className, s, m, l, ref: ignoredRef, ...rest } = props;
 
   const rootClassName = clsx(formFieldStyles.formField, className);
 
   const propsContext: PropsContext = {
     Label: {
       className: formFieldStyles.label,
-      tunnelId: "label",
     },
     FieldDescription: {
       className: formFieldStyles.fieldDescription,
@@ -35,6 +37,12 @@ export const CheckboxGroup: FC<CheckboxGroupProps> = (props) => {
       className: formFieldStyles.customFieldError,
       tunnelId: "fieldError",
     },
+    Checkbox: {
+      tunnelId: "checkboxes",
+    },
+    CheckboxButton: {
+      tunnelId: "checkboxes",
+    },
   };
 
   const hasCheckboxButtons = !!deepFindOfType(children, CheckboxButton);
@@ -43,14 +51,18 @@ export const CheckboxGroup: FC<CheckboxGroupProps> = (props) => {
     <Aria.CheckboxGroup {...rest} className={rootClassName}>
       <PropsContextProvider props={propsContext}>
         <TunnelProvider>
-          <TunnelExit id="label" />
+          {children}
 
-          {hasCheckboxButtons ? (
+          {hasCheckboxButtons && (
             <ColumnLayout s={s} m={m} l={l} className={styles.checkboxGroup}>
-              {children}
+              <TunnelExit id="checkboxes" />
             </ColumnLayout>
-          ) : (
-            <div className={styles.checkboxGroup}>{children}</div>
+          )}
+
+          {!hasCheckboxButtons && (
+            <div className={styles.checkboxGroup}>
+              <TunnelExit id="checkboxes" />
+            </div>
           )}
 
           <TunnelExit id="fieldDescription" />
@@ -60,6 +72,6 @@ export const CheckboxGroup: FC<CheckboxGroupProps> = (props) => {
       <FieldError className={formFieldStyles.fieldError} />
     </Aria.CheckboxGroup>
   );
-};
+});
 
 export default CheckboxGroup;

@@ -1,4 +1,4 @@
-import type { FC, PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 import React from "react";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
@@ -9,18 +9,21 @@ import {
   IconCheckboxIndeterminate,
 } from "@/components/Icon/components/icons";
 import { ClearPropsContext } from "@/lib/propsContext";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface CheckboxProps
-  extends PropsWithChildren<Omit<Aria.CheckboxProps, "children">> {}
+  extends PropsWithChildren<Omit<Aria.CheckboxProps, "children">>,
+    FlowComponentProps {}
 
-export const Checkbox: FC<CheckboxProps> = (props) => {
-  const { children, className, ...rest } = props;
+export const Checkbox = flowComponent("Checkbox", (props) => {
+  const { children, className, ref, ...rest } = props;
 
   const rootClassName = clsx(styles.checkbox, className);
 
   return (
     <ClearPropsContext>
-      <Aria.Checkbox {...rest} className={rootClassName}>
+      <Aria.Checkbox {...rest} className={rootClassName} ref={ref}>
         {({ isSelected, isIndeterminate }) => (
           <>
             {isSelected ? (
@@ -36,6 +39,6 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
       </Aria.Checkbox>
     </ClearPropsContext>
   );
-};
+});
 
 export default Checkbox;
