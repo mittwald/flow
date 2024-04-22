@@ -202,6 +202,10 @@
       "types": "./dist/types/components/Tooltip/index.d.ts",
       "import": "./dist/Tooltip.js"
     },
+    "./hooks": {
+      "types": "./dist/types/lib/hooks/index.d.ts",
+      "import": "./dist/hooks.js"
+    },
     "./nextjs": {
       "types": "./dist/types/integrations/nextjs/index.d.ts",
       "import": "./dist/nextjs.js"
