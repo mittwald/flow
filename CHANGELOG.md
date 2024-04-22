@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.72](https://github.com/mittwald/flow/compare/0.1.0-alpha.71...0.1.0-alpha.72) (2024-04-22)
+
+### Features
+
+- **Action:** screen reader accessible state
+  ([da0b5ea](https://github.com/mittwald/flow/commit/da0b5ea3f5c9b498dc55eca8a9d02d3bdcb3dc53))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.71](https://github.com/mittwald/flow/compare/v0.1.0-alpha.70...0.1.0-alpha.71) (2024-04-19)
 
 ### Bug Fixes
