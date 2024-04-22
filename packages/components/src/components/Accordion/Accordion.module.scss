@@ -1,0 +1,60 @@
+@use "@/styles/mixins/focus";
+
+.accordion {
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--accordion--header-to-content-spacing);
+}
+
+.header {
+  display: flex;
+}
+
+.headerButton {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-grow: 1;
+  padding-inline: var(--accordion--header-padding-x);
+  padding-block: var(--accordion--header-padding-y);
+  border-radius: var(--accordion--header-corner-radius);
+
+  @include focus.focus;
+
+  &:hover {
+    background-color: var(--accordion--header-background-color--hover);
+  }
+
+  &[data-pressed] {
+    background-color: var(--accordion--header-background-color--pressed);
+  }
+}
+
+.content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition-property: grid-template-rows, visibility;
+  transition-duration: var(--transition--duration--slow);
+  visibility: hidden;
+}
+
+.contentInner {
+  overflow: hidden;
+}
+
+.chevron {
+  transition-property: transform;
+  transition-duration: var(--transition--duration--default);
+  color: var(--accordion--chevron-color);
+}
+
+.expanded {
+  .content {
+    grid-template-rows: 1fr;
+    visibility: visible;
+  }
+
+  .chevron {
+    transform: rotate(180deg);
+  }
+}

@@ -27,6 +27,9 @@ export interface ButtonProps
   isPending?: boolean;
   isSucceeded?: boolean;
   isFailed?: boolean;
+
+  /** @internal */
+  unstyled?: boolean;
 }
 
 const disablePendingProps = (props: ButtonProps) => {
@@ -59,19 +62,22 @@ export const Button = flowComponent("Button", (props) => {
     isFailed,
     "aria-label": ariaLabel,
     ref,
+    unstyled,
     ...restProps
   } = props;
 
-  const rootClassName = clsx(
-    styles.button,
-    isPending && styles.isPending,
-    isSucceeded && styles.isSucceeded,
-    isFailed && styles.isFailed,
-    styles[`size-${size}`],
-    styles[variant],
-    styles[style],
-    className,
-  );
+  const rootClassName = unstyled
+    ? className
+    : clsx(
+        styles.button,
+        isPending && styles.isPending,
+        isSucceeded && styles.isSucceeded,
+        isFailed && styles.isFailed,
+        styles[`size-${size}`],
+        styles[variant],
+        styles[style],
+        className,
+      );
 
   const propsContext: PropsContext = {
     Icon: {

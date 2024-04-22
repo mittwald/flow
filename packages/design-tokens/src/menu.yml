@@ -23,20 +23,20 @@ menu-item:
     default:
       value: "{neutral.color.1000}"
     current:
-      value: "{info.color.800}"
+      value: "{primary.color.800}"
   icon-color:
     default:
       value: "{neutral.color.800}"
     current:
-      value: "{info.color.800}"
+      value: "{primary.color.800}"
 
   background-color:
     default:
       value: "{color.transparent}"
     hover:
-      value: "{info.color.100}"
+      value: "{primary-plain-background-color.hover}"
     current:
-      value: "{info.color.100}"
+      value: "{primary-plain-background-color.hover}"
 
   # Disabled
   disabled-background-color:
