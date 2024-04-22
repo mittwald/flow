@@ -9,5 +9,6 @@
   font-weight: var(--font-weight--bold);
   height: 0;
   line-height: 0;
+  overflow-y: clip;
   visibility: hidden;
 }

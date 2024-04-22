@@ -11,7 +11,7 @@
   padding: var(--menu-item--padding-y) var(--menu-item--padding-x);
   cursor: default;
 
-  @include focus.focus;
+  @include focus.focus(true);
 
   /* Elements */
   .icon {
