@@ -48,7 +48,7 @@ jobs:
         run: git branch --track main origin/main
 
       - name: Build 🔨
-        run: yarn nx affected -t build --parallel=3
+        run: yarn build
 
       - name: Version and publish 🚀
         run: |
