@@ -5,15 +5,15 @@ import Link from "@mittwald/flow-react-components/Link";
 import Label from "@mittwald/flow-react-components/Label";
 
 <Navigation aria-label="Main navigation">
-  <Label>Allgemein</Label>
   <NavigationGroup>
+    <Label>Allgemein</Label>
     <Link href="#">Dashboard</Link>
     <Link href="#" aria-current="page">
       Performance
     </Link>
   </NavigationGroup>
-  <Label>Komponenten</Label>
   <NavigationGroup>
+    <Label>Komponenten</Label>
     <Link href="#">Apps</Link>
     <Link href="#">Datenbanken</Link>
     <Link href="#">Domains</Link>
