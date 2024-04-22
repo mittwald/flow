@@ -1,0 +1,5 @@
+{
+  "action.isFailed": "Failed",
+  "action.isPending": "Pending...",
+  "action.isSucceeded": "Succeeded"
+}
