@@ -12,12 +12,17 @@ import { EmulatedBoldText } from "@/components/EmulatedBoldText";
 export interface HeaderNavigationProps
   extends PropsWithChildren<ComponentProps<"nav">> {
   className?: string;
+  inverse?: boolean;
 }
 
 export const HeaderNavigation: FC<HeaderNavigationProps> = (props) => {
-  const { children, className, ...rest } = props;
+  const { children, className, inverse, ...rest } = props;
 
-  const rootClassName = clsx(styles.headerNavigation, className);
+  const rootClassName = clsx(
+    styles.headerNavigation,
+    inverse && styles.inverse,
+    className,
+  );
 
   const propsContext: PropsContext = {
     Link: {
