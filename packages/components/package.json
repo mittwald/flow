@@ -6,13 +6,17 @@
   "homepage": "https://mittwald.github.io/flow",
   "repository": "https://github.com/mittwald/flow",
   "exports": {
-    "./Avatar": {
-      "types": "./dist/types/components/Avatar/index.d.ts",
-      "import": "./dist/Avatar.js"
+    "./Accordion": {
+      "types": "./dist/types/components/Acordion/index.d.ts",
+      "import": "./dist/Accordion.js"
     },
     "./Action": {
       "types": "./dist/types/components/Action/index.d.ts",
       "import": "./dist/Action.js"
+    },
+    "./Avatar": {
+      "types": "./dist/types/components/Avatar/index.d.ts",
+      "import": "./dist/Avatar.js"
     },
     "./Button": {
       "types": "./dist/types/components/Button/index.d.ts",

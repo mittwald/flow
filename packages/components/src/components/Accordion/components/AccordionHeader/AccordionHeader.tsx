@@ -4,6 +4,8 @@ import { Button } from "@/components/Button";
 import styles from "@/components/Accordion/Accordion.module.scss";
 import { IconChevronDown } from "@/components/Icon/components/icons";
 import React from "react";
+import { Heading } from "@/components/Heading";
+import { Label } from "@/components/Label";
 
 interface AccordionHeaderProps
   extends Pick<ButtonProps, "onPress">,
@@ -15,9 +17,9 @@ interface AccordionHeaderProps
 }
 
 export const AccordionHeader: FC<AccordionHeaderProps> = (props) => {
-  const { expanded, onPress, children, contentId } = props;
+  const { expanded, onPress, children, contentId, level = 4, isLabel } = props;
 
-  return (
+  const buttonElement = (
     <Button
       unstyled
       aria-expanded={expanded}
@@ -28,6 +30,12 @@ export const AccordionHeader: FC<AccordionHeaderProps> = (props) => {
       {children}
       <IconChevronDown className={styles.chevron} />
     </Button>
+  );
+
+  return (
+    <Heading className={styles.header} level={level}>
+      {buttonElement}
+    </Heading>
   );
 };
 

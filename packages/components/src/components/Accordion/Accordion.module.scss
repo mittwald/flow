@@ -14,19 +14,17 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  text-align: start;
   flex-grow: 1;
   padding-inline: var(--accordion--header-padding-x);
   padding-block: var(--accordion--header-padding-y);
   border-radius: var(--accordion--header-corner-radius);
+  column-gap: var(--accordion--heading-to-chevron-spacing);
 
   @include focus.focus;
 
   &:hover {
     background-color: var(--accordion--header-background-color--hover);
-  }
-
-  &[data-pressed] {
-    background-color: var(--accordion--header-background-color--pressed);
   }
 }
 
@@ -40,12 +38,6 @@
 
 .contentInner {
   overflow: hidden;
-}
-
-.chevron {
-  transition-property: transform;
-  transition-duration: var(--transition--duration--default);
-  color: var(--accordion--chevron-color);
 }
 
 .expanded {

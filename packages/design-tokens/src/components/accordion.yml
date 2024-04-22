@@ -1,6 +1,8 @@
 accordion:
   header-to-content-spacing:
     value: "{size-rem.s}"
+  heading-to-chevron-spacing:
+    value: "{size-rem.s}"
 
   header-corner-radius:
     value: "{corner-radius.default}"
@@ -11,8 +13,3 @@ accordion:
   header-background-color:
     hover:
       value: "{primary-plain-background-color.hover}"
-    pressed:
-      value: "{primary-plain-background-color.pressed}"
-
-  chevron-color:
-    value: "{color.default}"

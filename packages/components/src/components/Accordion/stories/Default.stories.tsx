@@ -3,7 +3,6 @@ import React from "react";
 import { Accordion } from "@/components/Accordion";
 import { Heading } from "@/components/Heading";
 import { Content } from "@/components/Content";
-import { dummyText } from "@/lib/dev/dummyText";
 import { Label } from "@/components/Label";
 
 const meta: Meta<typeof Accordion> = {
@@ -12,7 +11,7 @@ const meta: Meta<typeof Accordion> = {
   render: (props) => (
     <Accordion {...props}>
       <Heading>Heading</Heading>
-      <Content>{dummyText.long}</Content>
+      <Content>Accordion Content</Content>
     </Accordion>
   ),
 };
@@ -22,11 +21,6 @@ type Story = StoryObj<typeof Accordion>;
 
 export const Default: Story = {};
 
-export const WithLabel: Story = {
-  render: (props) => (
-    <Accordion {...props}>
-      <Label>Label</Label>
-      <Content>{dummyText.long}</Content>
-    </Accordion>
-  ),
+export const DefaultExpanded: Story = {
+  args: { defaultExpanded: true },
 };
