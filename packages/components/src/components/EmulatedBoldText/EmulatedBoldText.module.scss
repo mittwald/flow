@@ -10,7 +10,5 @@
   height: 0;
   line-height: 0;
   visibility: hidden;
-
-  /* fixes focus outline */
-  margin-top: calc(var(--size-px--s) * -1);
+  overflow: clip;
 }
