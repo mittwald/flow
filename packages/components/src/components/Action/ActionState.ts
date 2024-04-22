@@ -1,5 +1,5 @@
-import { action, makeObservable, observable } from "mobx";
-import { useState } from "react";
+import { makeObservable, observable, runInAction } from "mobx";
+import { useRef } from "react";
 import useSelector from "@/lib/mobx/useSelector";
 
 interface Options {
@@ -12,44 +12,49 @@ const duration = {
   failed: 2000,
 };
 
-export type ObservedActionState = Pick<
-  ActionState,
-  "isSucceeded" | "isPending" | "isExecuting" | "isFailed"
->;
+export type ActionStateValue =
+  | "isIdle"
+  | "isSucceeded"
+  | "isPending"
+  | "isExecuting"
+  | "isFailed";
 
 export class ActionState {
-  public isPending = false;
-  public isExecuting = false;
-  public isSucceeded = false;
-  public isFailed = false;
   private readonly feedback: boolean;
   private executionCount = 0;
+  public state: ActionStateValue = "isIdle";
 
   private constructor(options: Options = {}) {
     const { feedback = false } = options;
+    this.feedback = feedback;
 
     makeObservable(this, {
-      isPending: observable,
-      isExecuting: observable,
-      isSucceeded: observable,
-      isFailed: observable,
-      onStart: action.bound,
-      onSucceeded: action.bound,
-      onFailed: action.bound,
-      resetFeedback: action.bound,
-      startPending: action.bound,
+      state: observable,
     });
-
-    this.feedback = feedback;
   }
 
   public static useNew(opts?: Options): ActionState {
-    return useState(new ActionState(opts))[0];
+    return useRef(new ActionState(opts)).current;
   }
 
-  public resetFeedback(): void {
-    this.isFailed = false;
-    this.isSucceeded = false;
+  public onStart(): void {
+    const executionCount = ++this.executionCount;
+    this.updateState("isExecuting");
+    setTimeout(() => this.startPending(executionCount), duration.pending);
+  }
+
+  public onSucceeded(): void {
+    this.onDone(true);
+  }
+
+  public onFailed(): void {
+    this.onDone(false);
+  }
+
+  private updateState(newState: ActionStateValue): void {
+    runInAction(() => {
+      this.state = newState;
+    });
   }
 
   private startFailedFeedback(): void {
@@ -57,8 +62,9 @@ export class ActionState {
       return;
     }
 
-    this.isFailed = true;
-    setTimeout(this.resetFeedback, duration.failed);
+    this.updateState("isFailed");
+
+    setTimeout(() => this.updateState("isIdle"), duration.failed);
   }
 
   private startSucceededFeedback(): void {
@@ -66,14 +72,12 @@ export class ActionState {
       return;
     }
 
-    this.isSucceeded = true;
-    setTimeout(this.resetFeedback, duration.succeeded);
+    this.updateState("isSucceeded");
+
+    setTimeout(() => this.updateState("isIdle"), duration.succeeded);
   }
 
   private onDone(succeeded: boolean) {
-    this.isExecuting = false;
-    this.isPending = false;
-
     if (succeeded) {
       this.startSucceededFeedback();
     } else {
@@ -81,35 +85,13 @@ export class ActionState {
     }
   }
 
-  public onFailed(): void {
-    this.onDone(false);
-  }
-
-  public onSucceeded(): void {
-    this.onDone(true);
-  }
-
-  public startPending(forExecutionCount: number): void {
-    if (this.isExecuting && forExecutionCount === this.executionCount) {
-      this.isPending = true;
+  private startPending(forExecutionCount: number): void {
+    if (this.state !== "isIdle" && forExecutionCount === this.executionCount) {
+      this.updateState("isPending");
     }
   }
 
-  public onStart(): void {
-    const executionCount = ++this.executionCount;
-    this.isExecuting = true;
-    setTimeout(() => this.startPending(executionCount), duration.pending);
-  }
-
-  public useObserve(): ObservedActionState {
-    return useSelector(
-      () => ({
-        isPending: this.isPending,
-        isFailed: this.isFailed,
-        isExecuting: this.isExecuting,
-        isSucceeded: this.isSucceeded,
-      }),
-      [this],
-    );
+  public useState(): ActionStateValue {
+    return useSelector(() => this.state, [this]);
   }
 }

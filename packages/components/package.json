@@ -230,6 +230,7 @@
     "test:unit": "run vitest run"
   },
   "dependencies": {
+    "@chakra-ui/live-region": "^2.1.0",
     "@mittwald/react-tunnel": "workspace:^",
     "@mittwald/react-use-promise": "^2.3.13",
     "@react-aria/utils": "^3.23.2",
