@@ -40,6 +40,6 @@ menu-item:
 
   # Disabled
   disabled-background-color:
-    value: "{neutral.color.400}"
+    value: "{disabled-plain-background-color}"
   disabled-color:
-    value: "{neutral.color.100}"
+    value: "{disabled-plain-content-color}"

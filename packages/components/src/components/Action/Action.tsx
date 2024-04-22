@@ -35,16 +35,18 @@ export const Action: FC<ActionProps> = (props) => {
           ? actions.closeModal(closeModal)
           : undefined;
 
-  const actionController = useCallAction(action, { feedback });
-  const state = actionController.state.useObserve();
+  const actionController = useCallAction(action, {
+    feedback,
+  });
+  const state = actionController.state.useState();
 
   const propsContext: PropsContext = {
     Button: {
-      onPress: actionController.callAction,
-      isPending: state.isPending,
-      isDisabled: state.isExecuting,
-      isSucceeded: state.isSucceeded,
-      isFailed: state.isFailed,
+      onPress: actionController.callActionWithStateHandling,
+      isPending: state === "isPending",
+      "aria-disabled": state !== "isIdle",
+      isSucceeded: state === "isSucceeded",
+      isFailed: state === "isFailed",
     },
     Action: {
       action: actionController.callAction,
@@ -55,7 +57,7 @@ export const Action: FC<ActionProps> = (props) => {
     <PropsContextProvider
       mergeInParentContext
       props={propsContext}
-      dependencies={Object.values(state)}
+      dependencies={[state]}
     >
       {children}
     </PropsContextProvider>

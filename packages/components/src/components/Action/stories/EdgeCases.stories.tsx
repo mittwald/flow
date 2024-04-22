@@ -4,7 +4,7 @@ import React from "react";
 import defaultMeta from "./Default.stories";
 import {
   asyncFunction,
-  syncfunction,
+  syncFunction,
   button,
 } from "@/components/Button/stories/lib";
 
@@ -22,7 +22,7 @@ export const MixedAsyncSyncNested: Story = {
     action: asyncFunction,
     children: (
       <Action action={asyncFunction}>
-        <Action action={syncfunction}>
+        <Action action={syncFunction}>
           <Action action={asyncFunction}>{button}</Action>
         </Action>
       </Action>

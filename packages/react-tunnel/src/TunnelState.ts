@@ -1,14 +1,14 @@
-import type { ReactNode } from "react";
 import { useState } from "react";
 import type { ObservableMap } from "mobx";
 import { action, makeObservable, observable } from "mobx";
+import type { TunnelChildren } from "@/types";
 
 const defaultId = "default";
 
 export class TunnelState {
   public readonly children = observable.map<
     string,
-    ObservableMap<string, ReactNode>
+    ObservableMap<string, TunnelChildren>
   >(
     {},
     {
@@ -30,11 +30,11 @@ export class TunnelState {
   public setChildren(
     tunnelId: string = defaultId,
     entryId: string,
-    children: ReactNode,
+    children: TunnelChildren,
   ): void {
     const tunnelEntries =
       this.children.get(tunnelId) ??
-      observable.map<string, ReactNode>({}, { deep: false });
+      observable.map<string, TunnelChildren>({}, { deep: false });
 
     tunnelEntries.set(entryId, children);
 
@@ -45,8 +45,10 @@ export class TunnelState {
     this.children.get(tunnelId)?.delete(entryId);
   }
 
-  public getChildren(tunnelId: string = defaultId): ReactNode {
-    const tunnelEntries = this.children.get(tunnelId)?.values();
+  public getChildren(
+    tunnelId: string = defaultId,
+  ): Array<[string, TunnelChildren]> | undefined {
+    const tunnelEntries = this.children.get(tunnelId)?.entries();
     if (tunnelEntries) {
       return Array.from(tunnelEntries);
     }

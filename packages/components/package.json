@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-react-components",
-  "version": "0.1.0-alpha.69",
+  "version": "0.1.0-alpha.72",
   "type": "module",
   "description": "A React implementation of Flow, mittwald’s design system",
   "homepage": "https://mittwald.github.io/flow",
@@ -202,6 +202,10 @@
       "types": "./dist/types/components/Tooltip/index.d.ts",
       "import": "./dist/Tooltip.js"
     },
+    "./hooks": {
+      "types": "./dist/types/lib/hooks/index.d.ts",
+      "import": "./dist/hooks.js"
+    },
     "./nextjs": {
       "types": "./dist/types/integrations/nextjs/index.d.ts",
       "import": "./dist/nextjs.js"
@@ -230,6 +234,7 @@
     "test:unit": "run vitest run"
   },
   "dependencies": {
+    "@chakra-ui/live-region": "^2.1.0",
     "@mittwald/react-tunnel": "workspace:^",
     "@mittwald/react-use-promise": "^2.3.13",
     "@react-aria/utils": "^3.23.2",
@@ -249,7 +254,8 @@
     "react-aria-components": "^1.1.1",
     "react-children-utilities": "^2.10.0",
     "react-stately": "^3.30.1",
-    "remeda": "^1.60.1"
+    "remeda": "^1.60.1",
+    "use-callback-ref": "^1.3.2"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
