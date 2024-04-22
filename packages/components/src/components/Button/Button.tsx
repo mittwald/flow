@@ -73,21 +73,21 @@ export const Button = flowComponent("Button", (props) => {
 
   const rootClassName = unstyled
     ? className
-    :  clsx(
-    styles.button,
-    isPending && styles.isPending,
-    isSucceeded && styles.isSucceeded,
-    isFailed && styles.isFailed,
-    styles[`size-${size}`],
-    styles[variant],
-    styles[style],
-    className,
-    /**
-     * Workaround warning: The Aria.Button does not support "aria-disabled" by
-     * now, so this Button will be visually disabled via CSS.
-     */
-    ariaDisabled && styles.ariaDisabled,
-  );
+    : clsx(
+        styles.button,
+        isPending && styles.isPending,
+        isSucceeded && styles.isSucceeded,
+        isFailed && styles.isFailed,
+        styles[`size-${size}`],
+        styles[variant],
+        styles[style],
+        className,
+        /**
+         * Workaround warning: The Aria.Button does not support "aria-disabled"
+         * by now, so this Button will be visually disabled via CSS.
+         */
+        ariaDisabled && styles.ariaDisabled,
+      );
 
   useAriaAnnounceActionState(
     isPending
