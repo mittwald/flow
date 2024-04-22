@@ -3,7 +3,6 @@ import React from "react";
 import { Accordion } from "@/components/Accordion";
 import { Heading } from "@/components/Heading";
 import { Content } from "@/components/Content";
-import { Label } from "@/components/Label";
 
 const meta: Meta<typeof Accordion> = {
   title: "Structure/Accordion",

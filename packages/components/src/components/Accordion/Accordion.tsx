@@ -7,7 +7,6 @@ import { PropsContextProvider } from "@/lib/propsContext";
 import AccordionHeader from "@/components/Accordion/components/AccordionHeader/AccordionHeader";
 import { deepFindOfType } from "@/lib/react/deepFindOfType";
 import { Heading } from "@/components/Heading";
-import { Label } from "@/components/Label";
 import { Content } from "@/components/Content";
 
 export interface AccordionProps
@@ -35,7 +34,6 @@ export const Accordion: FC<AccordionProps> = (props) => {
   };
 
   const heading = deepFindOfType(children, Heading);
-  const label = deepFindOfType(children, Label);
   const content = deepFindOfType(children, Content);
 
   return (
@@ -47,7 +45,7 @@ export const Accordion: FC<AccordionProps> = (props) => {
         level={heading?.props.level}
         id={headerId}
       >
-        {heading ? heading.props.children : label?.props.children}
+        {heading?.props.children}
       </AccordionHeader>
       <PropsContextProvider props={propsContext}>
         <div
