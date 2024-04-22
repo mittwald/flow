@@ -7,7 +7,7 @@
   "repository": "https://github.com/mittwald/flow",
   "exports": {
     "./Accordion": {
-      "types": "./dist/types/components/Acordion/index.d.ts",
+      "types": "./dist/types/components/Accordion/index.d.ts",
       "import": "./dist/Accordion.js"
     },
     "./Action": {
