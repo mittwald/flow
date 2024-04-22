@@ -1,11 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import defaultMeta from "./Default.stories";
-import {
-  asyncFunction,
-  syncfunction,
-  button,
-} from "@/components/Button/stories/lib";
 import { Accordion } from "@/components/Accordion";
 import { Heading } from "@/components/Heading";
 import { Content } from "@/components/Content";
