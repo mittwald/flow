@@ -7,6 +7,13 @@ import { PropsContextProvider } from "@/lib/propsContext";
 import { dynamic } from "@/lib/propsContext";
 import { IconChevronDown } from "@/components/Icon/components/icons";
 import { Button } from "@/components/Button";
+import AccordionHeader from "@/components/Accordion/components/AccordionHeader/AccordionHeader";
+import { TunnelExit } from "@mittwald/react-tunnel";
+import { deepFindOfType } from "@/lib/react/deepFindOfType";
+import RadioButton from "../RadioGroup/components/RadioButton";
+import { Heading } from "@/components/Heading";
+import { Label } from "@/components/Label";
+import { Content } from "@/components/Content";
 
 export interface AccordionProps
   extends PropsWithChildren<ComponentProps<"div">> {
@@ -26,31 +33,7 @@ export const Accordion: FC<AccordionProps> = (props) => {
   const headerId = useId();
   const contentId = useId();
 
-  const headerButtonElement = (children: ReactNode) => (
-    <Button
-      unstyled
-      aria-expanded={expanded}
-      className={styles.headerButton}
-      onPress={() => setExpanded(!expanded)}
-      aria-controls={contentId}
-    >
-      {children}
-      <IconChevronDown className={styles.chevron} />
-    </Button>
-  );
-
   const propsContext: PropsContext = {
-    Heading: {
-      children: dynamic((props) => headerButtonElement(props.children)),
-      id: headerId,
-      className: styles.header,
-      level: 3,
-    },
-    Label: {
-      children: dynamic((props) => headerButtonElement(props.children)),
-      id: headerId,
-      className: styles.header,
-    },
     Content: {
       "aria-labelledby": headerId,
       id: contentId,
@@ -63,11 +46,24 @@ export const Accordion: FC<AccordionProps> = (props) => {
     },
   };
 
+  const heading = deepFindOfType(children, Heading);
+  const label = deepFindOfType(children, Label);
+  const content = deepFindOfType(children, Content);
+
+  heading?.props.children;
   return (
     <div {...rest} className={rootClassName}>
-      <Button onPress={() => setExpanded(!expanded)}>Toggle</Button>
+      <AccordionHeader
+        expanded={expanded}
+        onPress={() => setExpanded(!expanded)}
+        contentId={contentId}
+        level={heading?.props.level}
+        id={headerId}
+      >
+        {heading ? heading.props.children : label?.props.children}
+      </AccordionHeader>
       <PropsContextProvider props={propsContext}>
-        {children}
+        {content}
       </PropsContextProvider>
     </div>
   );
