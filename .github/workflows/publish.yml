@@ -53,8 +53,8 @@ jobs:
       - name: Version and publish 🚀
         run: |
           yarn lerna publish \
-            --force-publish
-            --conventional-commits --conventional-prerelease=* \
+            --force-publish \
+            --conventional-commits --conventional-prerelease="*" \
             --create-release github \
             --message "chore(release): bump version to %v" \
             --yes --no-private \
