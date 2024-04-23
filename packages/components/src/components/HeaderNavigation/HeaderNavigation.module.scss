@@ -14,12 +14,17 @@
   }
 
   .button.button {
-    color: var(--header-navigation--item-color);
     border-radius: var(--corner-radius--round);
+
+    svg {
+      color: var(--header-navigation--item-color);
+    }
 
     &:hover,
     &[data-pressed] {
-      color: var(--header-navigation--item-color);
+      svg {
+        color: var(--header-navigation--item-color);
+      }
     }
   }
 }
@@ -57,11 +62,15 @@
 
 .inverse {
   .button.button {
-    color: var(--header-navigation--item-color-inverse);
+    svg {
+      color: var(--header-navigation--item-color-inverse);
+    }
 
     &:hover,
     &[data-pressed] {
-      color: var(--header-navigation--item-color-inverse);
+      svg {
+        color: var(--header-navigation--item-color-inverse);
+      }
     }
 
     &:hover {
