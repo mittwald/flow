@@ -14,9 +14,10 @@
   transition-property: color, background-color;
   transition-duration: var(--transition--duration--default);
   max-width: 100%;
-  display: flex;
+  display: grid;
+  justify-content: center;
   align-items: center;
-  column-gap: var(--button--text-to-icon-spacing);
+  grid-template-areas: "content";
 
   @include focus.focus;
 
@@ -32,11 +33,8 @@
     padding: var(--button--padding);
   }
 
-  &:has(.content) {
-    display: grid;
-    justify-content: center;
-    align-items: center;
-    grid-template-areas: "content";
+  &:has(.text) .icon {
+    margin-inline-start: var(--button--text-to-icon-spacing);
   }
 }
 
