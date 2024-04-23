@@ -9,6 +9,9 @@
   white-space: nowrap;
   transition-property: color, background-color;
   transition-duration: var(--transition--duration--default);
+  display: flex;
+  align-items: center;
+  column-gap: var(--tab--text-to-status-spacing);
 
   @include focus.focus;
   outline-offset: calc(var(--size-px--xs) * -1);

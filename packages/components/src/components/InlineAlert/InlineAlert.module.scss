@@ -48,8 +48,7 @@
   .#{$status} {
     border-color: var(--inline-alert--#{$status}-border-color);
 
-    .heading,
-    .statusIcon {
+    .heading {
       color: var(--inline-alert--#{$status}-heading-color);
     }
   }

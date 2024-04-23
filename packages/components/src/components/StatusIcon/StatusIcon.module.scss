@@ -1,0 +1,15 @@
+:where(.statusIcon) {
+  @extend .info;
+}
+
+/* Status */
+@mixin status($status) {
+  :where(.#{$status}) {
+    color: var(--status-icon--#{$status}-color);
+  }
+}
+
+@include status(info);
+@include status(warning);
+@include status(danger);
+@include status(success);

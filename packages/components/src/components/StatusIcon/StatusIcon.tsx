@@ -1,4 +1,4 @@
-import type { ComponentType, FC } from "react";
+import type { FC } from "react";
 import React from "react";
 import {
   IconDanger,
@@ -8,31 +8,38 @@ import {
 } from "@/components/Icon/components/icons";
 import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
-import type { PropsWithStatus, Status } from "@/lib/types/props";
+import type { PropsWithStatus } from "@/lib/types/props";
 import type { IconProps } from "@/components/Icon";
 import { ClearPropsContext } from "@/lib/propsContext";
+import clsx from "clsx";
+import styles from "./StatusIcon.module.scss";
 
 export interface StatusIconProps extends PropsWithStatus, IconProps {}
 
-const icons: Record<Status, ComponentType> = {
-  danger: IconDanger,
-  info: IconInfo,
-  success: IconSuccess,
-  warning: IconWarning,
-};
-
 export const StatusIcon: FC<StatusIconProps> = (props) => {
-  const { status = "info", ...rest } = props;
+  const {
+    status = "info",
+    className,
+    "aria-label": ariaLabel,
+    ...rest
+  } = props;
+
+  const rootClassName = clsx(styles.statusIcon, styles[status], className);
 
   const stringFormatter = useLocalizedStringFormatter(locales);
 
-  const ariaLabel = stringFormatter.format(`statusIcon.${status}`);
-
-  const Icon = icons[status];
+  const iconProps: IconProps = {
+    className: rootClassName,
+    "aria-label": ariaLabel ?? stringFormatter.format(`statusIcon.${status}`),
+    ...rest,
+  };
 
   return (
     <ClearPropsContext>
-      <Icon aria-label={ariaLabel} {...rest} />
+      {status === "info" && <IconInfo {...iconProps} />}
+      {status === "warning" && <IconWarning {...iconProps} />}
+      {status === "danger" && <IconDanger {...iconProps} />}
+      {status === "success" && <IconSuccess {...iconProps} />}
     </ClearPropsContext>
   );
 };

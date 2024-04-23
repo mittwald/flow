@@ -16,7 +16,7 @@ const meta: Meta<typeof Tabs> = {
   render: (props) => {
     return (
       <Tabs {...props} disabledKeys={["spam"]}>
-        <Tab id="general">
+        <Tab id="general" status="info">
           <TabTitle>General</TabTitle>
           <Section>
             <Heading>General</Heading>

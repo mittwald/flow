@@ -7,6 +7,9 @@ import { Text } from "@/components/Text";
 import { useTabContext } from "@/components/Tabs/components/Tab/context";
 import { TunnelEntry } from "@mittwald/react-tunnel";
 import { MenuItem } from "@/components/MenuItem";
+import { StatusIcon } from "@/components/StatusIcon";
+import locales from "../../locales/*.locale.json";
+import { useLocalizedStringFormatter } from "react-aria";
 
 export interface TabTitleProps
   extends Omit<Aria.TabProps, "children" | "id" | "isDisabled">,
@@ -15,8 +18,10 @@ export interface TabTitleProps
 export const TabTitle: FC<TabTitleProps> = (props) => {
   const { children, className, ...rest } = props;
 
-  const { id } = useTabContext();
+  const { id, status } = useTabContext();
   const titleClassName = clsx(styles.tabTitle, className);
+
+  const stringFormatter = useLocalizedStringFormatter(locales);
 
   return (
     <>
@@ -28,6 +33,12 @@ export const TabTitle: FC<TabTitleProps> = (props) => {
               <TunnelEntry id="ActiveTitle">
                 {p.isSelected && children}
               </TunnelEntry>
+              {status && (
+                <StatusIcon
+                  status={status}
+                  aria-label={stringFormatter.format(`tab.status.${status}`)}
+                />
+              )}
             </>
           )}
         </Aria.Tab>

@@ -6,6 +6,10 @@
   @extend .size-m;
 }
 
+:where(.icon) {
+  color: var(--icon--color);
+}
+
 /* Sizes */
 @mixin size($size) {
   .size-#{$size} {

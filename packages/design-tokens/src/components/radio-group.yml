@@ -9,8 +9,6 @@ radio:
     disabled:
       value: "{disabled-outline-content-color}"
   icon-color:
-    default:
-      value: "{icon.color.default}"
     selected:
       value: "{neutral-outline-border-color.selected}"
     disabled:

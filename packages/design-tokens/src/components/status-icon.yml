@@ -1,0 +1,9 @@
+status-icon:
+  info-color:
+    value: "{info.color.900}"
+  warning-color:
+    value: "{warning.color.900}"
+  danger-color:
+    value: "{danger.color.900}"
+  success-color:
+    value: "{success.color.900}"

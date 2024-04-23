@@ -3,8 +3,6 @@
 @mixin menuItem {
   display: flex;
   flex-direction: row;
-  color: var(--menu-item--color--default);
-
   border: none;
   border-radius: var(--menu-item--corner-radius);
   background-color: var(--menu-item--background-color--default);
@@ -16,7 +14,6 @@
   /* Elements */
   .icon {
     order: 0;
-    color: var(--menu-item--icon-color--default);
   }
 
   .text {
