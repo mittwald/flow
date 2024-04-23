@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.77](https://github.com/mittwald/flow/compare/0.1.0-alpha.76...0.1.0-alpha.77) (2024-04-23)
+
+### Bug Fixes
+
+- **Action:** fix state transitions
+  ([aaf7557](https://github.com/mittwald/flow/commit/aaf7557f9c9a71c9ff17e83712fc7e9c5880f4db))
+
+### Features
+
+- increase CSS specifity for Flow global styles
+  ([665ed86](https://github.com/mittwald/flow/commit/665ed86d91d0290ef8a9b4eebcb0d6ccfb0ee6da))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.76](https://github.com/mittwald/flow/compare/0.1.0-alpha.75...0.1.0-alpha.76) (2024-04-23)
 
 ### Bug Fixes
