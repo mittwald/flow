@@ -17,6 +17,7 @@
   display: flex;
   align-items: center;
   column-gap: var(--button--text-to-icon-spacing);
+  width: min-content;
 
   @include focus.focus;
 

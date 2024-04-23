@@ -1,6 +1,6 @@
 menu:
   item-to-item-spacing:
-    value: "{size-px.s}"
+    value: "{size-px.xs}"
   group-to-group-spacing:
     value: "{size-px.m}"
   label-to-group-spacing:
@@ -17,22 +17,19 @@ menu-item:
   padding-y:
     value: "{size-px.xs}"
   icon-to-text-spacing:
-    value: 0.5em
+    value: "{size-rem.s}"
 
   color:
     current:
-      value: "{info.color.800}"
-  icon-color:
-    current:
-      value: "{info.color.800}"
+      value: "{primary.color.800}"
 
   background-color:
     default:
       value: "{color.transparent}"
     hover:
-      value: "{info.color.100}"
+      value: "{primary.color.100}"
     current:
-      value: "{info.color.100}"
+      value: "{primary.color.200}"
 
   # Disabled
   disabled-background-color:
