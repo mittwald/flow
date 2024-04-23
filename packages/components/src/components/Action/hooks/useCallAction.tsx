@@ -29,11 +29,11 @@ export const useCallAction = (
 
   const callActionWithStateHandling: ActionFn = (...args) => {
     try {
-      state.onStart();
-
       const result = callableActionWithParent(...args);
 
       if (result instanceof Promise) {
+        state.onAsyncStart();
+
         return result
           .then(() => state.onSucceeded())
           .catch(() => state.onFailed());
