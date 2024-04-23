@@ -12,14 +12,16 @@
       "value button";
     grid-template-columns: auto 1fr;
   }
-}
 
-.label {
-  grid-area: label;
-}
+  /* Elements */
 
-.button {
-  grid-area: button;
-  align-self: start;
-  justify-self: start;
+  .label {
+    grid-area: label;
+  }
+
+  .button {
+    grid-area: button;
+    align-self: start;
+    justify-self: start;
+  }
 }

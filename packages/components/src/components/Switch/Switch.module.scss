@@ -9,7 +9,40 @@
     flex-direction: row-reverse;
   }
 
+  /* Elements */
+  .track {
+    width: var(--switch--track-width);
+    height: var(--switch--track-height);
+    background-color: var(--switch--track-background-color--default);
+    border-radius: var(--switch--track-corner-radius);
+    padding: var(--switch--track-padding);
+    flex-shrink: 0;
+    position: relative;
+    transition-property: background-color;
+    transition-duration: var(--transition--duration--default);
+    align-self: start;
+
+    @include focus.focus;
+  }
+
+  .handle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: var(--switch--handle-size);
+    height: var(--switch--handle-size);
+    background-color: var(--switch--handle-background-color);
+    border-radius: var(--corner-radius--round);
+    transition-property: transform;
+    transition-duration: var(--transition--duration--default);
+    transform: translateX(0);
+    position: absolute;
+    top: var(--switch--track-padding);
+    left: var(--switch--track-padding);
+  }
+
   /* States */
+
   &[data-focus-visible] .track {
     outline-style: solid;
   }
@@ -36,36 +69,4 @@
       color: var(--switch--handle-color--disabled);
     }
   }
-}
-
-/* Elements */
-.track {
-  width: var(--switch--track-width);
-  height: var(--switch--track-height);
-  background-color: var(--switch--track-background-color--default);
-  border-radius: var(--switch--track-corner-radius);
-  padding: var(--switch--track-padding);
-  flex-shrink: 0;
-  position: relative;
-  transition-property: background-color;
-  transition-duration: var(--transition--duration--default);
-  align-self: start;
-
-  @include focus.focus;
-}
-
-.handle {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: var(--switch--handle-size);
-  height: var(--switch--handle-size);
-  background-color: var(--switch--handle-background-color);
-  border-radius: var(--corner-radius--round);
-  transition-property: transform;
-  transition-duration: var(--transition--duration--default);
-  transform: translateX(0);
-  position: absolute;
-  top: var(--switch--track-padding);
-  left: var(--switch--track-padding);
 }
