@@ -13,6 +13,8 @@
 
   .icon {
     height: calc(var(--font-size) * var(--line-height--default));
+    width: var(--font-size);
+    color: var(--heading--color);
   }
 }
 
