@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.76](https://github.com/mittwald/flow/compare/0.1.0-alpha.75...0.1.0-alpha.76) (2024-04-23)
+
+### Bug Fixes
+
+- **Button:** fix spacing in button inside button group
+  ([9fd2747](https://github.com/mittwald/flow/commit/9fd2747d606ae5be91b61f46a3ff5f860d52eecf))
+- isolate Flow styles
+  ([6619afb](https://github.com/mittwald/flow/commit/6619afb6a5d2209a72b688549a6d4938d94033cb))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.75](https://github.com/mittwald/flow/compare/0.1.0-alpha.74...0.1.0-alpha.75) (2024-04-22)
 
 ### Features
