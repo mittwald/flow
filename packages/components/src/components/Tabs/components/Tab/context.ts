@@ -8,7 +8,6 @@ interface TabContext {
 
 const tabContext = createContext<TabContext>({
   id: "undefined",
-  status: undefined,
 });
 
 export const useTabContext = (): TabContext => useContext(tabContext);
