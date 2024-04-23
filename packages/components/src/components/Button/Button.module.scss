@@ -108,11 +108,7 @@
     background-color: var(
       --button--#{$variant}-#{$style}-background-color--default
     );
-
-    &,
-    .icon {
-      color: var(--button--#{$variant}-#{$style}-content-color--default);
-    }
+    color: var(--button--#{$variant}-#{$style}-content-color--default);
 
     &:hover {
       background-color: var(

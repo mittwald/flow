@@ -22,7 +22,7 @@ export const FieldError = flowComponent("FieldError", (props) => {
       <Aria.FieldError {...rest} className={rootClassName} ref={ref}>
         {({ validationErrors }) => (
           <>
-            <IconDanger className={styles.icon} size="s" />
+            <IconDanger size="s" />
             <span>{children ? children : validationErrors.join(" ")}</span>
           </>
         )}
