@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.80](https://github.com/mittwald/flow/compare/0.1.0-alpha.79...0.1.0-alpha.80) (2024-04-24)
+
+### Bug Fixes
+
+- **PropsContext:** fix missing props in context when used in sub Component
+  ([9f460b3](https://github.com/mittwald/flow/commit/9f460b3f588a7bf8d609f366c7d93ccb06736c32))
+- require at least node version 20.11 to use icon generation
+  ([e678ab8](https://github.com/mittwald/flow/commit/e678ab8c17eb14333c434872776d152e0d5dbccd))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.79](https://github.com/mittwald/flow/compare/0.1.0-alpha.78...0.1.0-alpha.79) (2024-04-24)
 
 **Note:** Version bump only for package @mittwald/flow-project
