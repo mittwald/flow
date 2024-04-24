@@ -1,10 +1,10 @@
-:where(.statusIcon) {
+.statusIcon {
   @extend .info;
 }
 
 /* Status */
 @mixin status($status) {
-  :where(.#{$status}) {
+  .#{$status} {
     color: var(--status-icon--#{$status}-color);
   }
 }
