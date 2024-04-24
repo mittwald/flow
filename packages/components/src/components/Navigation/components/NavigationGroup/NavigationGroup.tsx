@@ -4,7 +4,7 @@ import clsx from "clsx";
 import styles from "./NavigationGroup.module.scss";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
-import { TunnelExit } from "@mittwald/react-tunnel";
+import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import { Accordion } from "@/components/Accordion";
 import { Content } from "@/components/Content";
 
@@ -18,13 +18,12 @@ export const NavigationGroup: FC<NavigationGroupProps> = (props) => {
 
   const rootClassName = clsx(styles.navigationGroup, className);
 
-  const generatedId = useId();
-  const generatedTunnelId = useId();
+  const labelId = useId();
 
   const propsContext: PropsContext = {
     Label: {
-      tunnelId: generatedTunnelId,
-      id: generatedId,
+      tunnelId: "label",
+      id: labelId,
       className: styles.label,
       "aria-hidden": true,
     },
@@ -32,24 +31,28 @@ export const NavigationGroup: FC<NavigationGroupProps> = (props) => {
 
   if (collapsable) {
     return (
-      <Accordion defaultExpanded className={rootClassName}>
-        <PropsContextProvider mergeInParentContext props={propsContext}>
-          <TunnelExit id={generatedTunnelId} />
-          <Content>
-            <ul>{children}</ul>
-          </Content>
-        </PropsContextProvider>
-      </Accordion>
+      <PropsContextProvider mergeInParentContext props={propsContext}>
+        <TunnelProvider>
+          <Accordion defaultExpanded className={rootClassName}>
+            <TunnelExit id="label" />
+            <Content clearPropsContext={false}>
+              <ul>{children}</ul>
+            </Content>
+          </Accordion>
+        </TunnelProvider>
+      </PropsContextProvider>
     );
   }
 
   return (
-    <section aria-labelledby={generatedId} className={rootClassName} {...rest}>
-      <PropsContextProvider mergeInParentContext props={propsContext}>
-        <TunnelExit id={generatedTunnelId} />
-        <ul>{children}</ul>
-      </PropsContextProvider>
-    </section>
+    <PropsContextProvider mergeInParentContext props={propsContext}>
+      <TunnelProvider>
+        <section aria-labelledby={labelId} className={rootClassName} {...rest}>
+          <TunnelExit id="label" />
+          <ul>{children}</ul>
+        </section>
+      </TunnelProvider>
+    </PropsContextProvider>
   );
 };
 

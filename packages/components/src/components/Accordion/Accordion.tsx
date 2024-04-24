@@ -1,14 +1,12 @@
-import type { ComponentProps, FC, PropsWithChildren } from "react";
+import type { ComponentProps, FC, PropsWithChildren, ReactNode } from "react";
 import React, { useId, useState } from "react";
 import clsx from "clsx";
 import styles from "./Accordion.module.scss";
 import type { PropsContext } from "@/lib/propsContext";
-import { PropsContextProvider } from "@/lib/propsContext";
-import AccordionHeader from "@/components/Accordion/components/AccordionHeader/AccordionHeader";
-import { deepFindOfType } from "@/lib/react/deepFindOfType";
-import { Heading } from "@/components/Heading";
-import { Content } from "@/components/Content";
-import { Label } from "@/components/Label";
+import { dynamic, PropsContextProvider } from "@/lib/propsContext";
+import { Button } from "@/components/Button";
+import { IconChevronDown } from "@/components/Icon/components/icons";
+import { TunnelExit } from "@mittwald/react-tunnel";
 
 export interface AccordionProps
   extends PropsWithChildren<ComponentProps<"div">> {
@@ -27,31 +25,46 @@ export const Accordion: FC<AccordionProps> = (props) => {
 
   const headerId = useId();
   const contentId = useId();
+  const contentTunnelId = useId();
+
+  const headerButton = (children: ReactNode) => (
+    <Button
+      unstyled
+      aria-expanded={expanded}
+      className={styles.headerButton}
+      onPress={() => setExpanded(!expanded)}
+      aria-controls={contentId}
+    >
+      {children}
+      <IconChevronDown className={styles.chevron} />
+    </Button>
+  );
 
   const propsContext: PropsContext = {
     Content: {
       className: styles.contentInner,
-      keepContext: true,
+      tunnelId: contentTunnelId,
+    },
+
+    Heading: {
+      className: styles.header,
+      level: 4,
+      children: dynamic((props) => headerButton(props.children)),
+    },
+    Label: {
+      className: styles.header,
+      children: dynamic((props) => headerButton(props.children)),
     },
   };
 
-  const heading = deepFindOfType(children, Heading);
-  const label = deepFindOfType(children, Label);
-  const content = deepFindOfType(children, Content);
-
   return (
     <div {...rest} className={rootClassName}>
-      <PropsContextProvider mergeInParentContext props={propsContext}>
-        <AccordionHeader
-          expanded={expanded}
-          onPress={() => setExpanded(!expanded)}
-          contentId={contentId}
-          level={heading ? heading?.props.level : undefined}
-          type={heading ? "heading" : "label"}
-          id={headerId}
-        >
-          {heading ? heading.props.children : label?.props.children}
-        </AccordionHeader>
+      <PropsContextProvider
+        mergeInParentContext
+        props={propsContext}
+        dependencies={[expanded]}
+      >
+        {children}
 
         <div
           aria-labelledby={headerId}
@@ -60,7 +73,7 @@ export const Accordion: FC<AccordionProps> = (props) => {
           hidden={!expanded}
           className={styles.content}
         >
-          {content}
+          <TunnelExit id={contentTunnelId} />
         </div>
       </PropsContextProvider>
     </div>

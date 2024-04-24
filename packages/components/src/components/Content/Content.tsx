@@ -11,16 +11,22 @@ export interface ContentProps
     PropsWithElementType<"div" | "section" | "span">,
     FlowComponentProps {
   /** @internal */
-  keepContext?: boolean;
+  clearPropsContext?: boolean;
 }
 
 export const Content = flowComponent("Content", (props) => {
-  const { children, elementType = "div", ref, keepContext, ...rest } = props;
+  const {
+    children,
+    elementType = "div",
+    ref,
+    clearPropsContext = true,
+    ...rest
+  } = props;
 
   const Element = elementType;
 
   return (
-    <Wrap if={!keepContext}>
+    <Wrap if={clearPropsContext}>
       <ClearPropsContext>
         <Element ref={ref} {...rest}>
           {children}

@@ -40,8 +40,8 @@
   }
 
   .contentInner {
-    padding-inline: var(--accordion--content-padding-x);
     padding-block: var(--accordion--content-padding-y);
+    padding-inline: var(--accordion--content-padding-x);
     overflow: hidden;
   }
 
