@@ -20,6 +20,8 @@
   padding-block: var(--accordion--header-padding-y);
   border-radius: var(--accordion--header-corner-radius);
   column-gap: var(--accordion--heading-to-chevron-spacing);
+  border: none;
+  background: none;
 
   @include focus.focus;
 

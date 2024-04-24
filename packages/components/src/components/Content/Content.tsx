@@ -4,23 +4,29 @@ import { ClearPropsContext } from "@/lib/propsContext";
 import type { PropsWithElementType } from "@/lib/types/props";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import { Wrap } from "@/components/Wrap";
 
 export interface ContentProps
   extends PropsWithChildren,
     PropsWithElementType<"div" | "section" | "span">,
-    FlowComponentProps {}
+    FlowComponentProps {
+  /** @internal */
+  keepContext?: boolean;
+}
 
 export const Content = flowComponent("Content", (props) => {
-  const { children, elementType = "div", ref, ...rest } = props;
+  const { children, elementType = "div", ref, keepContext, ...rest } = props;
 
   const Element = elementType;
 
   return (
-    <ClearPropsContext>
-      <Element ref={ref} {...rest}>
-        {children}
-      </Element>
-    </ClearPropsContext>
+    <Wrap if={!keepContext}>
+      <ClearPropsContext>
+        <Element ref={ref} {...rest}>
+          {children}
+        </Element>
+      </ClearPropsContext>
+    </Wrap>
   );
 });
 

@@ -3,6 +3,7 @@ import React from "react";
 import { Accordion } from "@/components/Accordion";
 import { Heading } from "@/components/Heading";
 import { Content } from "@/components/Content";
+import Label from "@/components/Label";
 
 const meta: Meta<typeof Accordion> = {
   title: "Structure/Accordion",
@@ -22,4 +23,13 @@ export const Default: Story = {};
 
 export const DefaultExpanded: Story = {
   args: { defaultExpanded: true },
+};
+
+export const WithLabel: Story = {
+  render: (props) => (
+    <Accordion {...props}>
+      <Label>Label</Label>
+      <Content>Accordion Content</Content>
+    </Accordion>
+  ),
 };

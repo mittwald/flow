@@ -8,6 +8,8 @@ import AccordionHeader from "@/components/Accordion/components/AccordionHeader/A
 import { deepFindOfType } from "@/lib/react/deepFindOfType";
 import { Heading } from "@/components/Heading";
 import { Content } from "@/components/Content";
+import { Label } from "@/components/Label";
+import { TunnelExit } from "@mittwald/react-tunnel";
 
 export interface AccordionProps
   extends PropsWithChildren<ComponentProps<"div">> {
@@ -30,24 +32,28 @@ export const Accordion: FC<AccordionProps> = (props) => {
   const propsContext: PropsContext = {
     Content: {
       className: styles.contentInner,
+      keepContext: true,
     },
   };
 
   const heading = deepFindOfType(children, Heading);
+  const label = deepFindOfType(children, Label);
   const content = deepFindOfType(children, Content);
 
   return (
     <div {...rest} className={rootClassName}>
-      <AccordionHeader
-        expanded={expanded}
-        onPress={() => setExpanded(!expanded)}
-        contentId={contentId}
-        level={heading?.props.level}
-        id={headerId}
-      >
-        {heading?.props.children}
-      </AccordionHeader>
-      <PropsContextProvider props={propsContext}>
+      <PropsContextProvider mergeInParentContext props={propsContext}>
+        <AccordionHeader
+          expanded={expanded}
+          onPress={() => setExpanded(!expanded)}
+          contentId={contentId}
+          level={heading ? heading?.props.level : undefined}
+          type={heading ? "heading" : "label"}
+          id={headerId}
+        >
+          {heading ? heading.props.children : label?.props.children}
+        </AccordionHeader>
+
         <div
           aria-labelledby={headerId}
           id={contentId}
