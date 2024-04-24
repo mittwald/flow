@@ -46,7 +46,7 @@
     }
   }
 
-  .button.button {
+  .button {
     color: var(--header-navigation--item-color);
     border-radius: var(--corner-radius--round);
 
@@ -57,7 +57,7 @@
   }
 
   &.inverse {
-    .button.button {
+    .button {
       color: var(--header-navigation--item-color-inverse);
 
       &:hover,

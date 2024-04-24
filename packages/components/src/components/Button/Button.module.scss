@@ -51,7 +51,7 @@
     padding: var(--button--padding);
   }
 
-  &:where(:has(.text) .icon){
+  &:where(:has(.text) .icon) {
     margin-inline-start: var(--button--text-to-icon-spacing);
   }
 
@@ -102,7 +102,7 @@
   /* Variants */
 
   @mixin variant($variant, $style) {
-    &.#{$variant}.#{$style} {
+    &:where(.#{$variant}.#{$style}) {
       background-color: var(
         --button--#{$variant}-#{$style}-background-color--default
       );
