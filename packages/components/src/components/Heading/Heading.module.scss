@@ -1,9 +1,3 @@
-@mixin level($level) {
-  h#{$level} {
-    --font-size: var(--heading--h#{$level}-font-size);
-  }
-}
-
 .heading {
   font-family: "ProximaNova", sans-serif;
   color: var(--heading--color);
@@ -14,17 +8,23 @@
   .icon {
     height: calc(var(--font-size) * var(--line-height--default));
   }
+
+  @mixin level($level) {
+    &.h#{$level} {
+      --font-size: var(--heading--h#{$level}-font-size);
+    }
+  }
+
+  @include level(1);
+  @include level(2);
+  @include level(3);
+  @include level(4);
+  @include level(5);
+  @include level(6);
 }
 
-@include level(1);
-@include level(2);
-@include level(3);
-@include level(4);
-@include level(5);
-@include level(6);
-
 @media (max-width: 550px) {
-  h1 {
+  .heading.h1 {
     --font-size: var(--heading--h1-font-size-mobile);
   }
 }
