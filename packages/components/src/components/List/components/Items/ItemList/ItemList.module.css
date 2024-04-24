@@ -10,9 +10,9 @@
   &:empty {
     display: none;
   }
-}
 
-.isLoading {
-  pointer-events: none;
-  opacity: 0.5;
+  &.isLoading {
+    pointer-events: none;
+    opacity: 0.5;
+  }
 }

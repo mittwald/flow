@@ -49,14 +49,14 @@
   &[data-exiting] {
     animation: slide 200ms reverse ease-in;
   }
-}
 
-.arrow {
-  width: var(--tooltip--arrow-size);
-  height: var(--tooltip--arrow-size);
-  svg {
-    display: block;
-    fill: var(--tooltip--background-color);
+  .arrow {
+    width: var(--tooltip--arrow-size);
+    height: var(--tooltip--arrow-size);
+    svg {
+      display: block;
+      fill: var(--tooltip--background-color);
+    }
   }
 }
 

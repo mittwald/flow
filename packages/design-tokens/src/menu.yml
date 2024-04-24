@@ -36,7 +36,7 @@ menu-item:
     hover:
       value: "{info.color.100}"
     current:
-      value: "{info.color.100}"
+      value: "{info.color.200}"
 
   # Disabled
   disabled-background-color:

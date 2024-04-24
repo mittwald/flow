@@ -4,16 +4,16 @@
   display: inline-block;
 
   @extend .size-m;
-}
 
-/* Sizes */
-@mixin size($size) {
-  .size-#{$size} {
-    width: var(--icon--size--#{$size});
-    height: var(--icon--size--#{$size});
+  /* Sizes */
+  @mixin size($size) {
+    &:where(.size-#{$size}) {
+      width: var(--icon--size--#{$size});
+      height: var(--icon--size--#{$size});
+    }
   }
-}
 
-@include size(m);
-@include size(s);
-@include size(l);
+  @include size(m);
+  @include size(s);
+  @include size(l);
+}

@@ -11,22 +11,22 @@
   column-gap: var(--status-badge--icon-to-text-spacing);
   max-width: fit-content;
 
-  @extend .info;
-}
-
-.text {
-  @include ellipsis.ellipsis();
-}
-
-/* Status */
-@mixin status($status) {
-  .#{$status} {
-    color: var(--status-badge--#{$status}-content-color);
-    background-color: var(--status-badge--#{$status}-background-color);
+  .text {
+    @include ellipsis.ellipsis();
   }
-}
 
-@include status(info);
-@include status(success);
-@include status(warning);
-@include status(danger);
+  @extend .info;
+
+  /* Status */
+  @mixin status($status) {
+    &.#{$status} {
+      color: var(--status-badge--#{$status}-content-color);
+      background-color: var(--status-badge--#{$status}-background-color);
+    }
+  }
+
+  @include status(info);
+  @include status(success);
+  @include status(warning);
+  @include status(danger);
+}

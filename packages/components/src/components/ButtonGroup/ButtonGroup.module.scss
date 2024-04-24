@@ -1,5 +1,6 @@
 .buttonGroupContainer {
   container-type: inline-size;
+  display: block;
 }
 
 .buttonGroup {
@@ -8,17 +9,23 @@
   grid-template-areas: "abort secondary primary";
   grid-auto-columns: 1fr auto auto;
 
-  .secondary:last-child {
-    grid-area: abort;
-    justify-self: start;
-  }
+  .button {
+    &.secondary:last-child {
+      grid-area: abort;
+      justify-self: start;
+    }
 
-  :first-child:not(.secondary) {
-    grid-area: primary;
+    &:first-child:not(.secondary) {
+      grid-area: primary;
+    }
   }
 
   @container (max-width: 550px) {
     display: flex;
     flex-direction: column-reverse;
+
+    .button {
+      width: 100%;
+    }
   }
 }
