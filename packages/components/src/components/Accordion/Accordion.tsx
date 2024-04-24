@@ -9,7 +9,6 @@ import { deepFindOfType } from "@/lib/react/deepFindOfType";
 import { Heading } from "@/components/Heading";
 import { Content } from "@/components/Content";
 import { Label } from "@/components/Label";
-import { TunnelExit } from "@mittwald/react-tunnel";
 
 export interface AccordionProps
   extends PropsWithChildren<ComponentProps<"div">> {
