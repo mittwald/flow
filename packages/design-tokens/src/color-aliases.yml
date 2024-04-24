@@ -469,3 +469,12 @@ disabled-soft-background-color:
   value: "{neutral.color.300}"
 disabled-soft-content-color:
   value: "{neutral.color.500}"
+
+# Inverse
+inverse-content-color:
+  value: "{neutral.color.100}"
+inverse-background-color:
+  hover:
+    value: "#00000044"
+  pressed:
+    value: "#00000066"

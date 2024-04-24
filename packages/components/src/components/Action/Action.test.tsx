@@ -163,6 +163,13 @@ describe("Pending state", () => {
     expectIconInDom("loader-2");
   });
 
+  test("is not shown when sync action is executed", async () => {
+    render(<Action action={syncAction1}>{button}</Action>);
+    await clickTrigger();
+    await act(() => vitest.advanceTimersByTimeAsync(1000));
+    expectNoIconInDom();
+  });
+
   test("is hidden after some time", async () => {
     render(
       <Action action={asyncAction1} feedback>

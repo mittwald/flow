@@ -1,9 +1,10 @@
 .navigationGroup {
-  display: flex;
-  flex-direction: column;
-  row-gap: var(--menu--item-to-item-spacing);
-
   &:not(:last-child) {
     margin-bottom: var(--menu--group-to-group-spacing);
   }
+}
+
+.label {
+  display: block;
+  margin-block: var(--menu--label-to-group-spacing);
 }

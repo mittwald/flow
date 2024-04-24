@@ -37,7 +37,7 @@ export class ActionState {
     return useRef(new ActionState(opts)).current;
   }
 
-  public onStart(): void {
+  public onAsyncStart(): void {
     const executionCount = ++this.executionCount;
     this.updateState("isExecuting");
     setTimeout(() => this.startPending(executionCount), duration.pending);
@@ -58,26 +58,21 @@ export class ActionState {
   }
 
   private startFailedFeedback(): void {
-    if (!this.feedback) {
-      return;
-    }
-
     this.updateState("isFailed");
-
     setTimeout(() => this.updateState("isIdle"), duration.failed);
   }
 
   private startSucceededFeedback(): void {
-    if (!this.feedback) {
-      return;
-    }
-
     this.updateState("isSucceeded");
-
     setTimeout(() => this.updateState("isIdle"), duration.succeeded);
   }
 
-  private onDone(succeeded: boolean) {
+  private onDone(succeeded: boolean): void {
+    if (!this.feedback) {
+      this.updateState("isIdle");
+      return;
+    }
+
     if (succeeded) {
       this.startSucceededFeedback();
     } else {
@@ -86,7 +81,10 @@ export class ActionState {
   }
 
   private startPending(forExecutionCount: number): void {
-    if (this.state !== "isIdle" && forExecutionCount === this.executionCount) {
+    if (
+      this.state === "isExecuting" &&
+      forExecutionCount === this.executionCount
+    ) {
       this.updateState("isPending");
     }
   }

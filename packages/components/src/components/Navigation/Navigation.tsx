@@ -21,9 +21,6 @@ export const Navigation: FC<NavigationProps> = (props) => {
   const hasGroups = !!deepFindOfType(children, NavigationGroup);
 
   const propsContext: PropsContext = {
-    Label: {
-      className: styles.label,
-    },
     Link: {
       hoc: (link) => <li>{link}</li>,
       className: styles.item,
@@ -41,7 +38,7 @@ export const Navigation: FC<NavigationProps> = (props) => {
     <nav className={rootClassName} role="navigation" {...rest}>
       <PropsContextProvider props={propsContext}>
         <Wrap if={!hasGroups}>
-          <NavigationGroup>{children}</NavigationGroup>
+          <ul>{children}</ul>
         </Wrap>
       </PropsContextProvider>
     </nav>
