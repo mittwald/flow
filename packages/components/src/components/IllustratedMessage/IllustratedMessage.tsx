@@ -13,11 +13,7 @@ export interface IllustratedMessageProps
 export const IllustratedMessage: FC<IllustratedMessageProps> = (props) => {
   const { className, children, variant = "info", ...rest } = props;
 
-  const rootClassName = clsx(
-    styles.illustratedMessageContainer,
-    styles[variant],
-    className,
-  );
+  const rootClassName = clsx(styles.illustratedMessageContainer, className);
 
   const propsContext: PropsContext = {
     Icon: {
@@ -38,7 +34,7 @@ export const IllustratedMessage: FC<IllustratedMessageProps> = (props) => {
 
   return (
     <div {...rest} className={rootClassName}>
-      <div className={styles.illustratedMessage}>
+      <div className={clsx(styles.illustratedMessage, styles[variant])}>
         <PropsContextProvider props={propsContext}>
           {children}
         </PropsContextProvider>
