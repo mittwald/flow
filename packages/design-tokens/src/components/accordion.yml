@@ -13,3 +13,7 @@ accordion:
   header-background-color:
     hover:
       value: "{primary-plain-background-color.hover}"
+  content-padding-x:
+    value: "{size-px.s}"
+  content-padding-y:
+    value: "{size-px.xs}"

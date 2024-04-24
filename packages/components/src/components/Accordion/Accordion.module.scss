@@ -4,51 +4,55 @@
   display: flex;
   flex-direction: column;
   row-gap: var(--accordion--header-to-content-spacing);
-}
 
-.header {
-  display: flex;
-}
+  /* Elements */
 
-.headerButton {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  text-align: start;
-  flex-grow: 1;
-  padding-inline: var(--accordion--header-padding-x);
-  padding-block: var(--accordion--header-padding-y);
-  border-radius: var(--accordion--header-corner-radius);
-  column-gap: var(--accordion--heading-to-chevron-spacing);
-  border: none;
-  background: none;
-
-  @include focus.focus;
-
-  &:hover {
-    background-color: var(--accordion--header-background-color--hover);
+  .header {
+    display: flex;
   }
-}
 
-.content {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition-property: grid-template-rows, visibility;
-  transition-duration: var(--transition--duration--slow);
-  visibility: hidden;
-}
+  .headerButton {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: start;
+    flex-grow: 1;
+    padding-inline: var(--accordion--header-padding-x);
+    padding-block: var(--accordion--header-padding-y);
+    border-radius: var(--accordion--header-corner-radius);
+    column-gap: var(--accordion--heading-to-chevron-spacing);
+    border: none;
+    background: none;
 
-.contentInner {
-  overflow: hidden;
-}
+    @include focus.focus;
 
-.expanded {
+    &:hover {
+      background-color: var(--accordion--header-background-color--hover);
+    }
+  }
+
   .content {
-    grid-template-rows: 1fr;
-    visibility: visible;
+    display: grid;
+    grid-template-rows: 0fr;
+    transition-property: grid-template-rows, visibility;
+    transition-duration: var(--transition--duration--slow);
+    visibility: hidden;
   }
 
-  .chevron {
-    transform: rotate(180deg);
+  .contentInner {
+    padding-inline: var(--accordion--content-padding-x);
+    padding-block: var(--accordion--content-padding-y);
+    overflow: hidden;
+  }
+
+  &.expanded {
+    .content {
+      grid-template-rows: 1fr;
+      visibility: visible;
+    }
+
+    .chevron {
+      transform: rotate(180deg);
+    }
   }
 }
