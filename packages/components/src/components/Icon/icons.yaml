@@ -28,6 +28,8 @@ Filter: Filter
 Hide: EyeCancel
 Home: Home
 Info: InfoCircle
+Lock: Lock
+LockOpen: LockOpen
 ListView: List
 Logout: Power
 Member: UsersGroup
@@ -43,6 +45,7 @@ Search: Search
 SearchEngine: ListSearch
 Server: Server
 Settings: Settings
+ShieldLock: ShieldLock
 Show: Eye
 Sorting: AdjustmentsHorizontal
 SshSftp: Door
