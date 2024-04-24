@@ -34,7 +34,7 @@ export const wrapChildrenWithNestedPropsContext = <C extends FlowComponentName>(
 
   return {
     children: (
-      <PropsContextProvider props={nestedPropsContext}>
+      <PropsContextProvider props={nestedPropsContext} mergeInParentContext>
         {localProps.children}
       </PropsContextProvider>
     ),
