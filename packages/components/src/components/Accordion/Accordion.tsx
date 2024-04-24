@@ -6,7 +6,7 @@ import type { PropsContext } from "@/lib/propsContext";
 import { dynamic, PropsContextProvider } from "@/lib/propsContext";
 import { Button } from "@/components/Button";
 import { IconChevronDown } from "@/components/Icon/components/icons";
-import { TunnelExit } from "@mittwald/react-tunnel";
+import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 
 export interface AccordionProps
   extends PropsWithChildren<ComponentProps<"div">> {
@@ -25,7 +25,6 @@ export const Accordion: FC<AccordionProps> = (props) => {
 
   const headerId = useId();
   const contentId = useId();
-  const contentTunnelId = useId();
 
   const headerButton = (children: ReactNode) => (
     <Button
@@ -43,7 +42,7 @@ export const Accordion: FC<AccordionProps> = (props) => {
   const propsContext: PropsContext = {
     Content: {
       className: styles.contentInner,
-      tunnelId: contentTunnelId,
+      tunnelId: "content",
     },
 
     Heading: {
@@ -64,17 +63,19 @@ export const Accordion: FC<AccordionProps> = (props) => {
         props={propsContext}
         dependencies={[expanded]}
       >
-        {children}
+        <TunnelProvider>
+          {children}
 
-        <div
-          aria-labelledby={headerId}
-          id={contentId}
-          role="region"
-          hidden={!expanded}
-          className={styles.content}
-        >
-          <TunnelExit id={contentTunnelId} />
-        </div>
+          <div
+            aria-labelledby={headerId}
+            id={contentId}
+            role="region"
+            hidden={!expanded}
+            className={styles.content}
+          >
+            <TunnelExit id="content" />
+          </div>
+        </TunnelProvider>
       </PropsContextProvider>
     </div>
   );
