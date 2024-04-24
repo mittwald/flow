@@ -57,10 +57,14 @@ html body *:where([class*="flow--"]:not([class*="flow--"] [class*="flow--"])) {
   */
   *,
   *::before,
-  *::after {
+  *::after,
+  &,
+  &::before,
+  &::after {
     box-sizing: border-box;
   }
 
+  &,
   * {
     margin: 0;
   }

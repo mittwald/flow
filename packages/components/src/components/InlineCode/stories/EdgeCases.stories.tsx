@@ -4,6 +4,7 @@ import React from "react";
 import { Text } from "@/components/Text";
 import defaultStories from "./Default.stories";
 import { dummyText } from "@/lib/dev/dummyText";
+import Section from "@/components/Section";
 
 const meta: Meta<typeof InlineCode> = {
   ...defaultStories,
@@ -15,11 +16,16 @@ type Story = StoryObj<typeof InlineCode>;
 
 export const LongText: Story = {
   render: (props) => (
-    <Text>
-      {dummyText.medium}{" "}
-      <InlineCode {...props}>{dummyText.medium.replaceAll(" ", "")}</InlineCode>{" "}
-      {dummyText.medium}
-      <InlineCode {...props}>{dummyText.medium}</InlineCode> {dummyText.medium}
-    </Text>
+    <Section>
+      <Text>
+        {dummyText.medium}{" "}
+        <InlineCode {...props}>
+          {dummyText.medium.replaceAll(" ", "")}
+        </InlineCode>{" "}
+        {dummyText.medium}
+        <InlineCode {...props}>{dummyText.medium}</InlineCode>{" "}
+        {dummyText.medium}
+      </Text>
+    </Section>
   ),
 };

@@ -36,7 +36,7 @@ menu-item:
     hover:
       value: "{primary-plain-background-color.hover}"
     current:
-      value: "{primary-plain-background-color.hover}"
+      value: "{primary-plain-background-color.pressed}"
 
   # Disabled
   disabled-background-color:

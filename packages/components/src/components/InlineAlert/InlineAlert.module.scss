@@ -12,50 +12,53 @@
 
   @extend .info;
 
+  /* Elements */
+  .statusIcon {
+    grid-area: icon;
+    height: calc(var(--heading--h3-font-size) * var(--line-height--default));
+  }
+
+  .heading {
+    grid-area: heading;
+  }
+
+  .content {
+    grid-area: content;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: var(--inline-alert--content-to-content-spacing);
+  }
+
   /* Without content */
+
   &:not(:has(.content)) {
     grid-template-areas: "icon heading";
   }
 
   /* With content */
+
   &:has(.content) {
     grid-template-areas:
       "icon heading"
       ".    content";
   }
-}
 
-/* Elements */
-.statusIcon {
-  grid-area: icon;
-  height: calc(var(--heading--h3-font-size) * var(--line-height--default));
-}
+  /* Status */
 
-.heading {
-  grid-area: heading;
-}
+  @mixin status($status) {
+    &.#{$status} {
+      border-color: var(--inline-alert--#{$status}-border-color);
 
-.content {
-  grid-area: content;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  row-gap: var(--inline-alert--content-to-content-spacing);
-}
-
-/* Status */
-@mixin status($status) {
-  .#{$status} {
-    border-color: var(--inline-alert--#{$status}-border-color);
-
-    .heading,
-    .statusIcon {
-      color: var(--inline-alert--#{$status}-heading-color);
+      .heading,
+      .statusIcon {
+        color: var(--inline-alert--#{$status}-heading-color);
+      }
     }
   }
-}
 
-@include status(info);
-@include status(warning);
-@include status(danger);
-@include status(success);
+  @include status(info);
+  @include status(warning);
+  @include status(danger);
+  @include status(success);
+}
