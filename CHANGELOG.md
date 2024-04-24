@@ -3,6 +3,69 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.80](https://github.com/mittwald/flow/compare/0.1.0-alpha.79...0.1.0-alpha.80) (2024-04-24)
+
+### Bug Fixes
+
+- **PropsContext:** fix missing props in context when used in sub Component
+  ([9f460b3](https://github.com/mittwald/flow/commit/9f460b3f588a7bf8d609f366c7d93ccb06736c32))
+- require at least node version 20.11 to use icon generation
+  ([e678ab8](https://github.com/mittwald/flow/commit/e678ab8c17eb14333c434872776d152e0d5dbccd))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.79](https://github.com/mittwald/flow/compare/0.1.0-alpha.78...0.1.0-alpha.79) (2024-04-24)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.78](https://github.com/mittwald/flow/compare/0.1.0-alpha.77...0.1.0-alpha.78) (2024-04-24)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.77](https://github.com/mittwald/flow/compare/0.1.0-alpha.76...0.1.0-alpha.77) (2024-04-23)
+
+### Bug Fixes
+
+- **Action:** fix state transitions
+  ([aaf7557](https://github.com/mittwald/flow/commit/aaf7557f9c9a71c9ff17e83712fc7e9c5880f4db))
+
+### Features
+
+- increase CSS specifity for Flow global styles
+  ([665ed86](https://github.com/mittwald/flow/commit/665ed86d91d0290ef8a9b4eebcb0d6ccfb0ee6da))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.76](https://github.com/mittwald/flow/compare/0.1.0-alpha.75...0.1.0-alpha.76) (2024-04-23)
+
+### Bug Fixes
+
+- **Button:** fix spacing in button inside button group
+  ([9fd2747](https://github.com/mittwald/flow/commit/9fd2747d606ae5be91b61f46a3ff5f860d52eecf))
+- isolate Flow styles
+  ([6619afb](https://github.com/mittwald/flow/commit/6619afb6a5d2209a72b688549a6d4938d94033cb))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.75](https://github.com/mittwald/flow/compare/0.1.0-alpha.74...0.1.0-alpha.75) (2024-04-22)
 
 ### Features

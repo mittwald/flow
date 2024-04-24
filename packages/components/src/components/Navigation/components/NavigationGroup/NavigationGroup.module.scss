@@ -2,9 +2,9 @@
   &:not(:last-child) {
     margin-bottom: var(--menu--group-to-group-spacing);
   }
-}
 
-.label {
-  display: block;
-  margin-block: var(--menu--label-to-group-spacing);
+  .label {
+    display: block;
+    margin-block: var(--menu--label-to-group-spacing);
+  }
 }

@@ -22,6 +22,11 @@ menu-item:
   color:
     current:
       value: "{primary.color.800}"
+  icon-color:
+    default:
+      value: "{neutral.color.800}"
+    current:
+      value: "{info.color.800}"
 
   background-color:
     default:

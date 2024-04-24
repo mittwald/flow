@@ -8,12 +8,20 @@
   border-radius: var(--form-control--corner-radius);
   grid-template-areas: "icon label";
   grid-template-columns: auto 1fr;
+  width: auto;
 
-  &.checkboxButton {
-    width: auto;
+  /* Elements */
+
+  .label {
+    grid-area: label;
+  }
+
+  .content {
+    grid-area: content;
   }
 
   /* With content */
+
   &:has(.content) {
     grid-template-areas:
       "icon label"
@@ -28,13 +36,4 @@
   &:focus-within:not([data-selected]):not([data-focus-visible]) {
     border-color: var(--form-control--border-color--default);
   }
-}
-
-/* Elements */
-.label {
-  grid-area: label;
-}
-
-.content {
-  grid-area: content;
 }
