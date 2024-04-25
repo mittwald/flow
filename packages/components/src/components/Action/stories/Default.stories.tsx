@@ -3,10 +3,15 @@ import Action from "../Action";
 import React from "react";
 import {
   asyncFunction,
-  syncFunction,
-  button,
   asyncLongFunction,
+  button,
+  syncFunction,
 } from "@/components/Button/stories/lib";
+import { Modal } from "@/components/Modal";
+import { ButtonGroup } from "@/components/ButtonGroup";
+import { Button } from "@/components/Button";
+import { Heading } from "@/components/Heading";
+import { Content } from "@/components/Content";
 
 const meta: Meta<typeof Action> = {
   title: "Actions/Action",
@@ -51,14 +56,14 @@ export const AsyncLong: Story = {
 export const AsyncWithFeedback: Story = {
   args: {
     action: asyncFunction,
-    feedback: true,
+    showFeedback: true,
   },
 };
 
 export const AsyncLongWithFeedback: Story = {
   args: {
     action: asyncLongFunction,
-    feedback: true,
+    showFeedback: true,
   },
 };
 
@@ -73,4 +78,24 @@ export const NestedAsync: Story = {
     action: asyncFunction,
     children: <Action action={asyncFunction}>{button}</Action>,
   },
+};
+
+export const WithConfirmationModal: Story = {
+  render: () => (
+    <Action action={asyncLongFunction}>
+      <Modal slot="actionConfirm">
+        <Heading>Delete customer</Heading>
+        <Content>Do you really want to delete the customer?</Content>
+        <ButtonGroup>
+          <Button variant="danger">Delete customer</Button>
+          <Button variant="secondary" style="soft">
+            Abort
+          </Button>
+        </ButtonGroup>
+      </Modal>
+      <Button variant="secondary" style="soft">
+        Delete customer
+      </Button>
+    </Action>
+  ),
 };

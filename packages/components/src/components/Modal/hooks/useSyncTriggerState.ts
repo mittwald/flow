@@ -1,8 +1,8 @@
 import { useContext, useEffect } from "react";
 import * as Aria from "react-aria-components";
-import type { OverlayState } from "@/lib/controller/overlay";
+import type { OverlayController } from "@/lib/controller/overlay";
 
-export const useSyncTriggerState = (controller: OverlayState) => {
+export const useSyncTriggerState = (controller: OverlayController) => {
   const triggerState = useContext(Aria.OverlayTriggerStateContext);
   const controllerIsOpen = controller.useIsOpen();
 

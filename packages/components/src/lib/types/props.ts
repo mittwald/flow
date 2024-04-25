@@ -1,7 +1,7 @@
 import type {
+  ComponentType,
   ExoticComponent,
   HTMLAttributes,
-  ReactElement,
   ReactHTML,
   ReactNode,
 } from "react";
@@ -17,9 +17,9 @@ export interface PropsWithTunnel {
   tunnelId?: string;
 }
 
-export interface PropsWithHOC<P> {
+export interface PropsWithRender<P> {
   /** @internal */
-  hoc?: (element: ReactNode, props: P) => ReactElement;
+  render?: ((component: ComponentType<P>, props: P) => ReactNode) | false;
 }
 
 export interface PropsWithClassName {
