@@ -1,0 +1,7 @@
+off-canvas:
+  corner-radius:
+    value: "{corner-radius.default}"
+  padding:
+    value: "{size-px.l}"
+  background-color:
+    value: "{neutral.color.100}"

@@ -1,33 +1,25 @@
 import * as Aria from "react-aria-components";
 import type { FC, PropsWithChildren } from "react";
 import React from "react";
-import styles from "./Modal.module.scss";
+import styles from "./OffCanvas.module.scss";
 import clsx from "clsx";
-import type { PropsContext } from "@/lib/propsContext";
-import { PropsContextProvider } from "@/lib/propsContext";
-import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import type { OverlayState } from "@/lib/controller/overlay";
 import { useOverlayState } from "@/lib/controller/overlay/useOverlayState";
 import { useSyncTriggerState } from "@/lib/hooks/overlay/useSyncTriggerState";
 import { OverlayContextProvider } from "@/lib/controller/overlay/context";
+import type { PropsContext } from "@/lib/propsContext";
+import { PropsContextProvider } from "@/lib/propsContext";
+import { Button } from "@/components/Button";
+import { IconClose } from "@/components/Icon/components/icons";
 
-export interface ModalProps extends PropsWithChildren {
-  /** @default "s" */
-  size?: "s" | "m" | "l";
-  offCanvas?: boolean;
+export interface OffCanvasProps extends PropsWithChildren {
   state?: OverlayState;
   defaultOpen?: boolean;
+  className?: string;
 }
 
-export const Modal: FC<ModalProps> = (props) => {
-  const {
-    size = "s",
-    offCanvas,
-    state: stateFromProps,
-    defaultOpen,
-    children,
-    ...rest
-  } = props;
+export const OffCanvas: FC<OffCanvasProps> = (props) => {
+  const { state: stateFromProps, defaultOpen, children, className } = props;
 
   const newState = useOverlayState({
     reuseControllerFromContext: false,
@@ -39,30 +31,17 @@ export const Modal: FC<ModalProps> = (props) => {
 
   useSyncTriggerState(state);
 
-  const rootClassName = clsx(
-    styles.modal,
-    styles[`size-${size}`],
-    offCanvas && styles.offCanvas,
-  );
+  const rootClassName = clsx(styles.offCanvas, className);
 
   const propsContext: PropsContext = {
-    Content: {
-      elementType: React.Fragment,
-    },
-    Heading: {
-      level: 2,
-      slot: "title",
-    },
-    ButtonGroup: {
-      className: styles.buttonGroup,
-      tunnelId: "buttons",
+    Link: {
+      onPress: () => state.close(),
     },
   };
 
   return (
     <Aria.ModalOverlay
       className={styles.overlay}
-      {...rest}
       isDismissable
       isOpen={isOpen}
       onOpenChange={(isOpen) => state.setOpen(isOpen)}
@@ -70,11 +49,17 @@ export const Modal: FC<ModalProps> = (props) => {
       <Aria.Modal className={rootClassName}>
         <Aria.Dialog className={styles.dialog}>
           <OverlayContextProvider value={state}>
-            <PropsContextProvider props={propsContext}>
-              <TunnelProvider>
-                <div className={styles.content}>{children}</div>
-                <TunnelExit id="buttons" />
-              </TunnelProvider>
+            <PropsContextProvider props={propsContext} dependencies={[state]}>
+              <Button
+                onPress={() => state.close()}
+                style="plain"
+                size="s"
+                variant="secondary"
+                className={styles.closeButton}
+              >
+                <IconClose />
+              </Button>
+              {children}
             </PropsContextProvider>
           </OverlayContextProvider>
         </Aria.Dialog>
@@ -83,4 +68,4 @@ export const Modal: FC<ModalProps> = (props) => {
   );
 };
 
-export default Modal;
+export default OffCanvas;

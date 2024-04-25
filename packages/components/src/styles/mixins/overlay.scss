@@ -1,0 +1,26 @@
+@mixin overlay {
+  background: var(--overlay--background-color);
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &[data-entering] {
+    animation: overlay-fade var(--transition--duration--default);
+  }
+
+  &[data-exiting] {
+    animation: overlay-fade var(--transition--duration--default) reverse ease-in;
+  }
+
+  @keyframes overlay-fade {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+}

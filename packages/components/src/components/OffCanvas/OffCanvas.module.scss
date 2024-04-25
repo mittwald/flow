@@ -1,0 +1,62 @@
+@use "../../styles/mixins/overlay";
+
+.overlay {
+  @include overlay.overlay();
+
+  justify-content: flex-end;
+}
+
+.offCanvas {
+  border-radius: var(--off-canvas--corner-radius);
+  background: var(--off-canvas--background-color);
+  width: calc(100vw - var(--size-px--xxl));
+  overflow: hidden;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  height: 100%;
+
+  &[data-entering] {
+    animation: off-canvas-slide-in var(--transition--duration--slow);
+  }
+
+  &[data-exiting] {
+    animation: off-canvas-slide-out var(--transition--duration--default) reverse
+      ease-in;
+  }
+
+  .dialog {
+    padding: var(--off-canvas--padding);
+    overflow: hidden;
+    outline: none;
+    height: 100%;
+    max-height: inherit;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .closeButton {
+    margin-top: calc(var(--size-px--m) * -1);
+    margin-right: calc(var(--size-px--m) * -1);
+    align-self: end;
+  }
+}
+
+@keyframes off-canvas-slide-in {
+  from {
+    margin-right: -100px;
+  }
+
+  to {
+    margin-right: 0;
+  }
+}
+
+@keyframes off-canvas-slide-out {
+  from {
+    margin-right: -100px;
+  }
+
+  to {
+    margin-right: 0;
+  }
+}

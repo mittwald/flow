@@ -33,6 +33,7 @@ export { IconInfo } from "./IconInfo";
 export { IconListView } from "./IconListView";
 export { IconLogout } from "./IconLogout";
 export { IconMember } from "./IconMember";
+export { IconMenu } from "./IconMenu";
 export { IconMinus } from "./IconMinus";
 export { IconNotification } from "./IconNotification";
 export { IconPending } from "./IconPending";
