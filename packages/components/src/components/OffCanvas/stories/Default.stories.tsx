@@ -26,9 +26,6 @@ const meta: Meta<typeof OffCanvas> = {
           <IconMenu />
         </Button>
         <OffCanvas {...props}>
-          <Link>
-            <Text>Customer</Text>
-          </Link>
           <Navigation aria-label="Main menu">
             <Link>
               <IconCustomer />

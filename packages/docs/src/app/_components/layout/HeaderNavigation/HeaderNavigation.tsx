@@ -46,7 +46,7 @@ const HeaderNavigation: FC<Props> = (props) => {
           <Button>
             <IconMenu />
           </Button>
-          <OffCanvas>
+          <OffCanvas className={styles.navMobileOffCanvas}>
             <MainNavigation docs={docs.map((mdx) => mdx.serialize())} />
           </OffCanvas>
         </OffCanvasTrigger>

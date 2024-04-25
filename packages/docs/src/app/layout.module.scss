@@ -57,6 +57,12 @@
   display: none;
 }
 
+.navMobileOffCanvas {
+  > div {
+    max-width: 400px;
+  }
+}
+
 .main {
   grid-area: main;
   display: flex;
@@ -79,5 +85,14 @@
 
   .navMobile {
     display: block;
+  }
+
+  .header {
+    padding: var(--size-px--xs) var(--size-px--s);
+    row-gap: var(--size-rem--s);
+  }
+
+  .center {
+    padding-inline: var(--size-px--s);
   }
 }
