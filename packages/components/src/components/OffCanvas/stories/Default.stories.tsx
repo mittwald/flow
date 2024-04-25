@@ -29,7 +29,7 @@ const meta: Meta<typeof OffCanvas> = {
           <Link>
             <Text>Customer</Text>
           </Link>
-          <Navigation aria-label="Main menu" {...props}>
+          <Navigation aria-label="Main menu">
             <Link>
               <IconCustomer />
               <Text>Customer</Text>

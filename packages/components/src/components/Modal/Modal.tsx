@@ -1,4 +1,3 @@
-import * as Aria from "react-aria-components";
 import type { FC, PropsWithChildren } from "react";
 import React from "react";
 import styles from "./Modal.module.scss";
@@ -8,8 +7,8 @@ import { PropsContextProvider } from "@/lib/propsContext";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import type { OverlayState } from "@/lib/controller/overlay";
 import { useOverlayState } from "@/lib/controller/overlay/useOverlayState";
-import { useSyncTriggerState } from "@/lib/hooks/overlay/useSyncTriggerState";
-import { OverlayContextProvider } from "@/lib/controller/overlay/context";
+import Overlay from "@/components/Overlay/Overlay";
+import { useSyncTriggerState } from "@/components/Overlay/hooks/useSyncTriggerState";
 
 export interface ModalProps extends PropsWithChildren {
   /** @default "s" */
@@ -26,7 +25,6 @@ export const Modal: FC<ModalProps> = (props) => {
     state: stateFromProps,
     defaultOpen,
     children,
-    ...rest
   } = props;
 
   const newState = useOverlayState({
@@ -35,7 +33,6 @@ export const Modal: FC<ModalProps> = (props) => {
   });
 
   const state = stateFromProps ?? newState;
-  const isOpen = state.useIsOpen();
 
   useSyncTriggerState(state);
 
@@ -60,26 +57,14 @@ export const Modal: FC<ModalProps> = (props) => {
   };
 
   return (
-    <Aria.ModalOverlay
-      className={styles.overlay}
-      {...rest}
-      isDismissable
-      isOpen={isOpen}
-      onOpenChange={(isOpen) => state.setOpen(isOpen)}
-    >
-      <Aria.Modal className={rootClassName}>
-        <Aria.Dialog className={styles.dialog}>
-          <OverlayContextProvider value={state}>
-            <PropsContextProvider props={propsContext}>
-              <TunnelProvider>
-                <div className={styles.content}>{children}</div>
-                <TunnelExit id="buttons" />
-              </TunnelProvider>
-            </PropsContextProvider>
-          </OverlayContextProvider>
-        </Aria.Dialog>
-      </Aria.Modal>
-    </Aria.ModalOverlay>
+    <Overlay state={state} className={rootClassName}>
+      <PropsContextProvider props={propsContext}>
+        <TunnelProvider>
+          <div className={styles.content}>{children}</div>
+          <TunnelExit id="buttons" />
+        </TunnelProvider>
+      </PropsContextProvider>
+    </Overlay>
   );
 };
 
