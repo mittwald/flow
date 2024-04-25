@@ -8,17 +8,10 @@ import { groupBy } from "remeda";
 import { GroupText } from "@/app/_components/layout/MainNavigation/components/GroupText";
 import { usePathname } from "next/navigation";
 import { Link } from "@mittwald/flow-react-components/Link";
-import styles from "@/app/layout.module.scss";
-import MainNavigation from "@/app/_components/layout/MainNavigation";
-import { IconMenu } from "@mittwald/flow-react-components/Icons";
-import {
-  OffCanvas,
-  OffCanvasTrigger,
-} from "@mittwald/flow-react-components/OffCanvas";
-import { Button } from "@mittwald/flow-react-components/Button";
 
 interface Props {
   docs: SerializedMdxFile[];
+  className?: string;
 }
 
 const HeaderNavigation: FC<Props> = (props) => {
@@ -39,18 +32,11 @@ const HeaderNavigation: FC<Props> = (props) => {
   ));
 
   return (
-    <HeaderNavigationComponent aria-label="Header navigation">
+    <HeaderNavigationComponent
+      className={props.className}
+      aria-label="Header navigation"
+    >
       {navigationItems}
-      <div className={styles.navMobile}>
-        <OffCanvasTrigger>
-          <Button>
-            <IconMenu />
-          </Button>
-          <OffCanvas className={styles.navMobileOffCanvas}>
-            <MainNavigation docs={docs.map((mdx) => mdx.serialize())} />
-          </OffCanvas>
-        </OffCanvasTrigger>
-      </div>
     </HeaderNavigationComponent>
   );
 };

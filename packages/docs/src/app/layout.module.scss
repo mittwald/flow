@@ -48,18 +48,21 @@
   margin-inline-end: auto;
 }
 
-.nav {
+.mainNavigation {
   grid-area: nav;
 }
 
-.navMobile {
-  grid-area: nav;
+.mobileNavigation {
   display: none;
 }
 
-.navMobileOffCanvas {
+.mobileNavigationOffCanvas {
   > div {
     max-width: 400px;
+  }
+
+  h2 {
+    display: none;
   }
 }
 
@@ -79,11 +82,12 @@
     grid-template-rows: auto auto 1fr auto;
   }
 
-  .nav {
+  .mainNavigation,
+  .headerNavigation {
     display: none;
   }
 
-  .navMobile {
+  .mobileNavigation {
     display: block;
   }
 

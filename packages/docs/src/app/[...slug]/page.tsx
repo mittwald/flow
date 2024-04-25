@@ -1,10 +1,10 @@
-import MainContent from "@/app/_components/layout/MainContent";
+import MainContent from "@/app/_components/layout/MainContent/MainContent";
 import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
 import type { StaticParams } from "@/lib/mdx/MdxFile";
 import { LayoutCard } from "@mittwald/flow-react-components/LayoutCard";
 import { Tabs } from "@mittwald/flow-react-components/Tabs";
 import React from "react";
-import TabContent from "@/app/_components/layout/TabContent";
+import TabContent from "@/app/_components/layout/TabContent/TabContent";
 
 const contentFolder = "src/content";
 
