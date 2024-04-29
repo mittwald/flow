@@ -8,7 +8,7 @@ import Label from "@/components/Label";
 import Content from "@/components/Content";
 import Heading from "@/components/Heading";
 import Modal, { ModalTrigger } from "@/components/Modal";
-import { useOverlayState } from "@/lib/controller/overlay/useOverlayState";
+import { useOverlayController } from "@/lib/controller/overlay/useOverlayController";
 import { Action } from "@/components/Action";
 
 const meta: Meta<typeof Modal> = {
@@ -58,14 +58,14 @@ export const Default: Story = {};
 
 export const WithController: Story = {
   render: (props) => {
-    const controller = useOverlayState();
+    const controller = useOverlayController();
 
     return (
       <>
         <Button variant="primary" onPress={controller.open}>
           Create customer
         </Button>
-        <Modal {...props} state={controller}>
+        <Modal {...props} controller={controller}>
           <Heading>New Customer</Heading>
           <Content>
             <Text>

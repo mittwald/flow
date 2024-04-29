@@ -32,6 +32,7 @@ import type { CheckboxGroupProps } from "@/components/CheckboxGroup";
 import type { CheckboxProps } from "@/components/Checkbox";
 import type { CheckboxButtonProps } from "@/components/CheckboxButton";
 import type { TabsProps } from "@/components/Tabs";
+import type { ModalProps } from "@/components/Modal";
 import type { SkeletonProps } from "@/components/Skeleton/Skeleton";
 
 export * from "./types";
@@ -59,6 +60,7 @@ export interface FlowComponentPropsTypes {
   LayoutCard: LayoutCardProps;
   Link: LinkProps;
   MenuItem: MenuItemProps;
+  Modal: ModalProps;
   NumberField: NumberFieldProps;
   Option: OptionProps;
   Radio: RadioProps;
@@ -100,6 +102,7 @@ const propsContextSupportingComponentsMap: Record<
   LayoutCard: true,
   Link: true,
   MenuItem: true,
+  Modal: true,
   NumberField: true,
   Radio: true,
   Option: true,

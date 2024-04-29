@@ -1,4 +1,4 @@
-import type { ComponentProps, PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 import React from "react";
 import styles from "./ButtonGroup.module.scss";
 import type { PropsContext } from "@/lib/propsContext";
@@ -6,25 +6,29 @@ import {
   ClearPropsContext,
   dynamic,
   PropsContextProvider,
-  useProps,
 } from "@/lib/propsContext";
 import clsx from "clsx";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import type { PropsWithClassName } from "@/lib/types/props";
 
 export interface ButtonGroupProps
-  extends PropsWithChildren<ComponentProps<"div">>,
-    FlowComponentProps {}
+  extends PropsWithChildren,
+    FlowComponentProps<"ButtonGroup">,
+    PropsWithClassName {}
 
 export const ButtonGroup = flowComponent("ButtonGroup", (props) => {
-  const { children, className, ...rest } = useProps("ButtonGroup", props);
+  const { children, className, ...rest } = props;
 
   const rootClassName = clsx(styles.buttonGroupContainer, className);
 
   const propsContext: PropsContext = {
     Button: {
       className: dynamic((p) =>
-        p.variant === "secondary" ? styles.secondary : undefined,
+        clsx(
+          styles.button,
+          p.variant === "secondary" ? styles.secondary : undefined,
+        ),
       ),
     },
   };

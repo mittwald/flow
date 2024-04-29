@@ -19,9 +19,11 @@ export const Breadcrumb: FC<BreadcrumbProps> = (props) => {
 
   const propsContext: PropsContext = {
     Link: {
-      unstyled: true,
-      className: styles.link,
-      hoc: (link) => <BreadcrumbItem>{link}</BreadcrumbItem>,
+      render: (Link, props) => (
+        <BreadcrumbItem>
+          <Link {...props} unstyled className={styles.link} />
+        </BreadcrumbItem>
+      ),
     },
   };
 

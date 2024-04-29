@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Text from "../Text";
 import React from "react";
+import Section from "@/components/Section";
 import { Skeleton } from "@/components/Skeleton";
 
 const meta: Meta<typeof Text> = {
@@ -17,10 +18,12 @@ const meta: Meta<typeof Text> = {
     elementType: "span",
   },
   render: (props) => (
-    <Text {...props}>
-      Text is an unstyled component that can be used to display texts. By
-      default it renders a span.
-    </Text>
+    <Section>
+      <Text {...props}>
+        Text is an unstyled component that can be used to display texts. By
+        default it renders a span.
+      </Text>
+    </Section>
   ),
 };
 export default meta;

@@ -7,7 +7,7 @@ const meta: Meta<typeof LoadingSpinner> = {
   component: LoadingSpinner,
   render: (props) => <LoadingSpinner {...props} />,
   parameters: {
-    controls: { exclude: ["hoc", "tunnelId"] },
+    controls: { exclude: ["render", "tunnelId"] },
   },
   argTypes: {
     size: {

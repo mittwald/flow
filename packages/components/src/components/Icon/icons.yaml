@@ -28,6 +28,7 @@ Filter: Filter
 Hide: EyeCancel
 Home: Home
 Info: InfoCircle
+Inbox: Inbox
 ListView: List
 Logout: Power
 Member: UsersGroup
@@ -39,12 +40,16 @@ Project: Archive
 Random: Dice3
 RadioOff: Circle
 RadioOn: CircleDotFilled
+Save: DeviceFloppy
 Search: Search
 SearchEngine: ListSearch
 Server: Server
 Settings: Settings
+Share: Share3
 Show: Eye
 Sorting: AdjustmentsHorizontal
+SpamProtectionOff: Shield
+SpamProtectionOn: ShieldCheckFilled
 SshSftp: Door
 Subdomain: Subtask
 Succeeded: Check

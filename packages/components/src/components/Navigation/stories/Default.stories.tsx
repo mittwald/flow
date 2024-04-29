@@ -58,15 +58,16 @@ export const WithIcons: Story = {
 export const WithGroups: Story = {
   render: (props) => (
     <Navigation aria-label="Main navigation" {...props}>
-      <Label>General</Label>
       <NavigationGroup>
+        <Label>General</Label>
         <Link href="#">Dashboard</Link>
         <Link href="#" aria-current="page">
           Performance
         </Link>
       </NavigationGroup>
-      <Label>Components</Label>
+
       <NavigationGroup>
+        <Label>Components</Label>
         <Link href="#">Apps</Link>
         <Link href="#">Databases</Link>
         <Link href="#">Domains</Link>
