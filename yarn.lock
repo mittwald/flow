@@ -3147,8 +3147,8 @@ __metadata:
   peerDependencies:
     "@mittwald/react-use-promise": ^2.3.12
     next: "*"
-    react: 18.2.0
-    react-dom: 18.2.0
+    react: ~18.3.0
+    react-dom: ~18.3.0
     react-hook-form: "*"
   peerDependenciesMeta:
     "@mittwald/react-use-promise":
