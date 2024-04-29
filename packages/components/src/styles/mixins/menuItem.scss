@@ -3,13 +3,12 @@
 @mixin menuItem {
   display: flex;
   flex-direction: row;
-  color: var(--menu-item--color--default);
-  align-items: center;
   border: none;
   border-radius: var(--menu-item--corner-radius);
   background-color: var(--menu-item--background-color--default);
   padding: var(--menu-item--padding-y) var(--menu-item--padding-x);
   cursor: default;
+  align-items: center;
 
   @include focus.focus;
 

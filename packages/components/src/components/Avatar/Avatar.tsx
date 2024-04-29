@@ -9,9 +9,9 @@ import {
   useProps,
 } from "@/lib/propsContext";
 import { getVariantFromChildren } from "@/components/Avatar/lib/getVariantFromChildren";
+import type { PropsWithClassName } from "@/lib/types/props";
 
-export interface AvatarProps extends PropsWithChildren {
-  className?: string;
+export interface AvatarProps extends PropsWithChildren, PropsWithClassName {
   /** @default "m" */
   size?: "xs" | "s" | "m" | "l";
   variant?: 1 | 2 | 3 | 4;

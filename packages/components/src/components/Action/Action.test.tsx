@@ -115,7 +115,7 @@ const expectNoIconInDom = () => {
 describe("Feedback", () => {
   test("is shown when sync action succeeds", async () => {
     render(
-      <Action action={syncAction1} feedback>
+      <Action action={syncAction1} showFeedback>
         {button}
       </Action>,
     );
@@ -128,7 +128,7 @@ describe("Feedback", () => {
       throw new Error("Whoops");
     });
     render(
-      <Action action={syncAction1} feedback>
+      <Action action={syncAction1} showFeedback>
         {button}
       </Action>,
     );
@@ -138,7 +138,7 @@ describe("Feedback", () => {
 
   test("is hidden after some time", async () => {
     render(
-      <Action action={syncAction1} feedback>
+      <Action action={syncAction1} showFeedback>
         {button}
       </Action>,
     );
@@ -172,7 +172,7 @@ describe("Pending state", () => {
 
   test("is hidden after some time", async () => {
     render(
-      <Action action={asyncAction1} feedback>
+      <Action action={asyncAction1} showFeedback>
         {button}
       </Action>,
     );
