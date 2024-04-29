@@ -2985,6 +2985,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@mittwald/flow-documentation@workspace:packages/docs"
   dependencies:
+    "@internationalized/date": "npm:^3.5.2"
     "@mdx-js/loader": "npm:^3.0.1"
     "@mdx-js/react": "npm:^3.0.1"
     "@mfalkenberg/react-live-ssr": "npm:^4.1.7"
