@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.85](https://github.com/mittwald/flow/compare/0.1.0-alpha.84...0.1.0-alpha.85) (2024-04-29)
+
+### Features
+
+- **Icon:** Add icons
+  ([9036765](https://github.com/mittwald/flow/commit/9036765c833dd121f26d5bee7ee79b80260057d8))
+- **Icon:** Add icons
+  ([9b4ef3f](https://github.com/mittwald/flow/commit/9b4ef3f644b9968f2861a216fbe1eaf78c72dd33))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.84](https://github.com/mittwald/flow/compare/0.1.0-alpha.83...0.1.0-alpha.84) (2024-04-29)
 
 ### Bug Fixes
