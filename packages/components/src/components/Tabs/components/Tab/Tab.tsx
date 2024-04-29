@@ -1,6 +1,5 @@
 import type { FC, PropsWithChildren } from "react";
-import { useId } from "react";
-import React from "react";
+import React, { useId } from "react";
 import * as Aria from "react-aria-components";
 import styles from "./Tab.module.scss";
 import clsx from "clsx";

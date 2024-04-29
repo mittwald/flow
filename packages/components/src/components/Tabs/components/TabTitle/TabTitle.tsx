@@ -24,7 +24,9 @@ export const TabTitle: FC<TabTitleProps> = (props) => {
         <Aria.Tab {...rest} id={id} className={titleClassName}>
           {(p) => (
             <>
-              <Text emulateBoldWidth>{children}</Text>
+              <Text emulateBoldWidth>
+                <span className={styles.text}>{children}</span>
+              </Text>
               <TunnelEntry id="ActiveTitle">
                 {p.isSelected && children}
               </TunnelEntry>
@@ -34,7 +36,9 @@ export const TabTitle: FC<TabTitleProps> = (props) => {
       </TunnelEntry>
 
       <TunnelEntry id="ContextMenuItems">
-        <MenuItem id={id}>{children}</MenuItem>
+        <MenuItem className={styles.menuItem} id={id}>
+          {children}
+        </MenuItem>
       </TunnelEntry>
     </>
   );
