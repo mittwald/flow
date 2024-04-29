@@ -7,6 +7,9 @@ import { OverlayController } from "@/lib/controller/overlay";
 import { ActionContextProvider } from "@/components/Action/lib/execution/context";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import { useActionController } from "@/components/Action/lib/execution/useActionController";
+import type { ButtonProps } from "@/components/Button";
+import type { FlowRenderFn } from "@/lib/types/props";
+import type { ModalProps } from "@/components/Modal";
 
 export interface ActionProps extends PropsWithChildren {
   action?: ActionFn;
@@ -31,6 +34,44 @@ export const Action: FC<ActionProps> = (actionProps) => {
 
   const actionState = actionController.state.useState();
 
+  const ConfirmationModalRenderer: FlowRenderFn<ModalProps> = (
+    Modal,
+    props,
+  ) => {
+    useEffect(() => {
+      if (props.slot === "actionConfirm") {
+        setHasConfirmationModal(true);
+        return () => {
+          setHasConfirmationModal(false);
+        };
+      }
+    }, []);
+
+    return <Modal controller={confirmationModalController} {...props} />;
+  };
+
+  const ModalButtonRenderer: FlowRenderFn<ButtonProps> = (Button, props) => {
+    const { variant } = props;
+
+    if (variant === "secondary") {
+      return (
+        <Action break>
+          <Action closeModal>
+            <Button {...props} />
+          </Action>
+        </Action>
+      );
+    }
+
+    return (
+      <Action closeModal>
+        <Action {...actionProps} isConfirmationAction>
+          <Button {...props} />
+        </Action>
+      </Action>
+    );
+  };
+
   const propsContext: PropsContext = {
     Button: {
       onPress: interaction,
@@ -41,41 +82,10 @@ export const Action: FC<ActionProps> = (actionProps) => {
     },
     Modal: {
       tunnelId: "outsideActionProvider",
-      render: (Modal, props) => {
-        useEffect(() => {
-          if (props.slot === "actionConfirm") {
-            setHasConfirmationModal(true);
-            return () => {
-              setHasConfirmationModal(false);
-            };
-          }
-        }, []);
-
-        return <Modal controller={confirmationModalController} {...props} />;
-      },
+      render: ConfirmationModalRenderer,
       ButtonGroup: {
         Button: {
-          render: (Button, props) => {
-            const { variant } = props;
-
-            if (variant === "secondary") {
-              return (
-                <Action break>
-                  <Action closeModal>
-                    <Button {...props} />
-                  </Action>
-                </Action>
-              );
-            }
-
-            return (
-              <Action closeModal>
-                <Action {...actionProps} isConfirmationAction>
-                  <Button {...props} />
-                </Action>
-              </Action>
-            );
-          },
+          render: ModalButtonRenderer,
         },
       },
     },

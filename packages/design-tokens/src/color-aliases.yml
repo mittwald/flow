@@ -470,6 +470,12 @@ disabled-soft-background-color:
 disabled-soft-content-color:
   value: "{neutral.color.500}"
 
+# Disabled Inverse
+disabled-inverse-background-color:
+  value: "{color.transparent}"
+disabled-inverse-content-color:
+  value: "{neutral.color.700}"
+
 # Inverse
 inverse-content-color:
   value: "{neutral.color.100}"

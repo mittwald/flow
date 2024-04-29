@@ -28,6 +28,8 @@ export interface ButtonProps
   isPending?: boolean;
   isSucceeded?: boolean;
   isFailed?: boolean;
+
+  inverse?: boolean;
 }
 
 const disablePendingProps = (props: ButtonProps) => {
@@ -64,6 +66,7 @@ export const Button = flowComponent("Button", (props) => {
     isFailed,
     "aria-disabled": ariaDisabled,
     ref,
+    inverse,
     ...restProps
   } = props;
 
@@ -72,6 +75,7 @@ export const Button = flowComponent("Button", (props) => {
     isPending && styles.isPending,
     isSucceeded && styles.isSucceeded,
     isFailed && styles.isFailed,
+    inverse && styles.inverse,
     styles[`size-${size}`],
     styles[variant],
     styles[style],
