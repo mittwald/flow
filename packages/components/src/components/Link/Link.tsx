@@ -56,9 +56,9 @@ export const Link = flowComponent("Link", (props) => {
   return (
     <ClearPropsContext>
       <Link
-        className={rootClassName}
         {...rest}
         {...unsupportedTypingsLinkProps}
+        className={rootClassName}
         ref={ref}
       >
         <PropsContextProvider props={propsContext}>

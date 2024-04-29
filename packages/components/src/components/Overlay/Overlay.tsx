@@ -4,20 +4,24 @@ import React from "react";
 import styles from "./Overlay.module.scss";
 import clsx from "clsx";
 import { OverlayContextProvider } from "@/lib/controller/overlay/context";
-import { useSyncTriggerState } from "@/components/Overlay/hooks/useSyncTriggerState";
 import type { OverlayController } from "@/lib/controller";
+import { useOverlayController } from "@/lib/controller";
 
 export interface OverlayProps extends PropsWithChildren {
-  controller: OverlayController;
+  controller?: OverlayController;
   className?: string;
 }
 
 export const Overlay: FC<OverlayProps> = (props) => {
-  const { controller, children, className } = props;
+  const { controller: controllerFromProps, children, className } = props;
+
+  const controllerFromContext = useOverlayController({
+    reuseControllerFromContext: true,
+  });
+
+  const controller = controllerFromProps ?? controllerFromContext;
 
   const isOpen = controller.useIsOpen();
-
-  useSyncTriggerState(controller);
 
   const rootClassName = clsx(styles.overlay, className);
 

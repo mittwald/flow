@@ -154,6 +154,10 @@
       "types": "./dist/types/components/OffCanvas/index.d.ts",
       "import": "./dist/OffCanvas.js"
     },
+    "./OverlayTrigger": {
+      "types": "./dist/types/components/Overlay/components/OverlayTrigger/index.d.ts",
+      "import": "./dist/OverlayTrigger.js"
+    },
     "./Popover": {
       "types": "./dist/types/components/Popover/index.d.ts",
       "import": "./dist/Popover.js"
