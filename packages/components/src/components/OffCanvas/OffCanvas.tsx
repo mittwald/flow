@@ -2,8 +2,8 @@ import type { FC, PropsWithChildren } from "react";
 import React from "react";
 import styles from "./OffCanvas.module.scss";
 import clsx from "clsx";
-import type { OverlayState } from "@/lib/controller/overlay";
-import { useOverlayState } from "@/lib/controller/overlay/useOverlayState";
+import type { OverlayController } from "@/lib/controller/overlay";
+import { useOverlayController } from "@/lib/controller/overlay";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import { Button } from "@/components/Button";
@@ -12,36 +12,52 @@ import Overlay from "@/components/Overlay/Overlay";
 import { useSyncTriggerState } from "@/components/Overlay/hooks/useSyncTriggerState";
 
 export interface OffCanvasProps extends PropsWithChildren {
-  state?: OverlayState;
+  controller?: OverlayController;
   defaultOpen?: boolean;
   className?: string;
+  /** @internal */
+  reuseControllerFromContext?: boolean;
 }
 
 export const OffCanvas: FC<OffCanvasProps> = (props) => {
-  const { state: stateFromProps, defaultOpen, children, className } = props;
+  const {
+    controller: controllerFromProps,
+    defaultOpen,
+    children,
+    className,
+    reuseControllerFromContext = false,
+  } = props;
 
-  const newState = useOverlayState({
-    reuseControllerFromContext: false,
+  const newController = useOverlayController({
+    reuseControllerFromContext,
     defaultOpen,
   });
 
-  const state = stateFromProps ?? newState;
+  const controller = controllerFromProps ?? newController;
 
-  useSyncTriggerState(state);
+  useSyncTriggerState(controller);
 
   const rootClassName = clsx(styles.offCanvas, className);
 
   const propsContext: PropsContext = {
     Link: {
-      onPress: () => state.close(),
+      render: (Link, props) => (
+        <Link
+          {...props}
+          onPress={(e) => {
+            props.onPress && props.onPress(e);
+            controller.close();
+          }}
+        />
+      ),
     },
   };
 
   return (
-    <Overlay state={state} className={rootClassName}>
+    <Overlay controller={controller} className={rootClassName}>
       <PropsContextProvider props={propsContext}>
         <Button
-          onPress={() => state.close()}
+          onPress={() => controller.close()}
           style="plain"
           size="s"
           variant="secondary"

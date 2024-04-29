@@ -1,5 +1,8 @@
 .offCanvas {
-  justify-content: flex-end;
+  &.offCanvas {
+    justify-content: flex-end;
+  }
+
   > div {
     border-radius: var(--off-canvas--corner-radius);
     background: var(--off-canvas--background-color);

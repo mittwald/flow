@@ -3,21 +3,21 @@ import type { FC, PropsWithChildren } from "react";
 import React from "react";
 import styles from "./Overlay.module.scss";
 import clsx from "clsx";
-import type { OverlayState } from "@/lib/controller/overlay";
 import { OverlayContextProvider } from "@/lib/controller/overlay/context";
 import { useSyncTriggerState } from "@/components/Overlay/hooks/useSyncTriggerState";
+import type { OverlayController } from "@/lib/controller";
 
 export interface OverlayProps extends PropsWithChildren {
-  state: OverlayState;
+  controller: OverlayController;
   className?: string;
 }
 
 export const Overlay: FC<OverlayProps> = (props) => {
-  const { state, children, className } = props;
+  const { controller, children, className } = props;
 
-  const isOpen = state.useIsOpen();
+  const isOpen = controller.useIsOpen();
 
-  useSyncTriggerState(state);
+  useSyncTriggerState(controller);
 
   const rootClassName = clsx(styles.overlay, className);
 
@@ -26,11 +26,11 @@ export const Overlay: FC<OverlayProps> = (props) => {
       className={rootClassName}
       isDismissable
       isOpen={isOpen}
-      onOpenChange={(isOpen) => state.setOpen(isOpen)}
+      onOpenChange={(isOpen) => controller.setOpen(isOpen)}
     >
       <Aria.Modal>
         <Aria.Dialog>
-          <OverlayContextProvider value={state}>
+          <OverlayContextProvider value={controller}>
             {children}
           </OverlayContextProvider>
         </Aria.Dialog>
