@@ -148,4 +148,30 @@
   @include variant(accent, soft);
   @include variant(danger, soft);
   @include variant(secondary, soft);
+
+  /* Inverse */
+
+  &:where(.inverse) {
+    background-color: var(--button--inverse-background-color-default);
+    color: var(--button--inverse-content-color);
+
+    &:hover {
+      background-color: var(--button--inverse-background-color--hover);
+      color: var(--button--inverse-content-color);
+    }
+
+    &[data-pressed] {
+      background-color: var(--button--inverse-background-color--pressed);
+      color: var(--button--inverse-content-color);
+    }
+
+    &[disabled],
+    &.ariaDisabled,
+    &.isPending,
+    &.isFailed,
+    &.isSucceeded {
+      background-color: var(--button--disabled-inverse-background-color);
+      color: var(--button--disabled-inverse-content-color);
+    }
+  }
 }

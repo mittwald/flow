@@ -90,7 +90,7 @@ export const WithController: Story = {
   },
 };
 
-export const WithDialogTrigger: Story = {
+export const WithTrigger: Story = {
   render: (props) => (
     <ModalTrigger>
       <Button variant="danger">Delete project</Button>
