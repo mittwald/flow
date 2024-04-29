@@ -17,9 +17,14 @@ export interface PropsWithTunnel {
   tunnelId?: string;
 }
 
+export type FlowRenderFn<P> = (
+  component: ComponentType<P>,
+  props: P,
+) => ReactNode;
+
 export interface PropsWithRender<P> {
   /** @internal */
-  render?: ((component: ComponentType<P>, props: P) => ReactNode) | false;
+  render?: FlowRenderFn<P> | false;
 }
 
 export interface PropsWithClassName {
