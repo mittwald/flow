@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.84](https://github.com/mittwald/flow/compare/0.1.0-alpha.83...0.1.0-alpha.84) (2024-04-29)
+
+### Bug Fixes
+
+- **NumberField:** Fix Button padding in NumberField
+  ([7c47f1d](https://github.com/mittwald/flow/commit/7c47f1dba7bd5aab28c1553a103962a60fec373e))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.83](https://github.com/mittwald/flow/compare/0.1.0-alpha.82...0.1.0-alpha.83) (2024-04-26)
 
 ### Features
