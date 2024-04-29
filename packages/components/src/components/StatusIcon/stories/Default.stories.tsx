@@ -5,7 +5,7 @@ const meta: Meta<typeof StatusIcon> = {
   title: "Status/StatusIcon",
   component: StatusIcon,
   parameters: {
-    controls: { exclude: ["hoc", "tunnelId"] },
+    controls: { exclude: ["render", "tunnelId"] },
   },
   argTypes: {
     size: {

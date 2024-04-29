@@ -23,6 +23,6 @@ font-size:
     value: 1.5rem
   xxxl:
     value: 2rem
-color:
-  default:
+content:
+  color:
     value: "{neutral.color.1000}"

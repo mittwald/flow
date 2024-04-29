@@ -11,11 +11,11 @@ import { Text } from "@/components/Text";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
-import { useAriaAnnounceActionState } from "@/components/Action/ariaLive";
+import { useAriaAnnounceActionState } from "@/components/Action/lib/ariaLive";
 
 export interface ButtonProps
   extends PropsWithChildren<Omit<Aria.ButtonProps, "style">>,
-    FlowComponentProps {
+    FlowComponentProps<"Button"> {
   /** @default "primary" */
   variant?: "primary" | "accent" | "secondary" | "danger";
   /** @default "solid" */
@@ -28,6 +28,8 @@ export interface ButtonProps
   isPending?: boolean;
   isSucceeded?: boolean;
   isFailed?: boolean;
+
+  inverse?: boolean;
 }
 
 const disablePendingProps = (props: ButtonProps) => {
@@ -64,6 +66,7 @@ export const Button = flowComponent("Button", (props) => {
     isFailed,
     "aria-disabled": ariaDisabled,
     ref,
+    inverse,
     ...restProps
   } = props;
 
@@ -72,6 +75,7 @@ export const Button = flowComponent("Button", (props) => {
     isPending && styles.isPending,
     isSucceeded && styles.isSucceeded,
     isFailed && styles.isFailed,
+    inverse && styles.inverse,
     styles[`size-${size}`],
     styles[variant],
     styles[style],

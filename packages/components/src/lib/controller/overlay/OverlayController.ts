@@ -2,7 +2,7 @@ import { action, makeObservable, observable } from "mobx";
 import useSelector from "@/lib/mobx/useSelector";
 import { useState } from "react";
 
-export class OverlayState {
+export class OverlayController {
   public isOpen: boolean;
 
   public constructor(isDefaultOpen = false) {
@@ -17,7 +17,7 @@ export class OverlayState {
   }
 
   public static useNew(isDefaultOpen?: boolean) {
-    return useState(new OverlayState(isDefaultOpen))[0];
+    return useState(new OverlayController(isDefaultOpen))[0];
   }
 
   public open(): void {

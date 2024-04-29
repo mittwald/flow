@@ -33,9 +33,10 @@ export const Item = (props: Props) => {
       className: styles.content,
     },
     ContextMenu: {
-      placement: "bottom end",
-      hoc: (el) => (
-        <OptionsButton className={styles.optionsButton}>{el}</OptionsButton>
+      render: (ContextMenu, props) => (
+        <OptionsButton className={styles.optionsButton}>
+          <ContextMenu {...props} placement="bottom end" />
+        </OptionsButton>
       ),
     },
   };

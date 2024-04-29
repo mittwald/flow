@@ -1,10 +1,11 @@
 .popover {
   background-color: var(--popover--background-color);
   box-shadow: var(--popover--box-shadow);
-  border-radius: var(--popover--border-radius);
+  border-radius: var(--popover--corner-radius);
   padding: var(--popover--padding);
   overflow-y: auto;
   --size-px--s--negative: calc(var(--size-px--s) * -1);
+  min-width: var(--popover--min-width);
 
   &[data-placement="top"] {
     --origin: translateY(var(--size-px--s));
