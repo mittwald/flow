@@ -32,22 +32,26 @@ export const Action: FC<ActionProps> = (actionProps) => {
     ? confirmationModalController.open
     : actionController.callAction;
 
-  const actionState = actionController.state.useState();
-
   const ConfirmationModalRenderer: FlowRenderFn<ModalProps> = (
     Modal,
     props,
   ) => {
+    const isConfirmationModal = props.slot === "actionConfirm";
+
     useEffect(() => {
-      if (props.slot === "actionConfirm") {
+      if (isConfirmationModal) {
         setHasConfirmationModal(true);
         return () => {
           setHasConfirmationModal(false);
         };
       }
-    }, []);
+    }, [isConfirmationModal]);
 
-    return <Modal controller={confirmationModalController} {...props} />;
+    if (isConfirmationModal) {
+      return <Modal controller={confirmationModalController} {...props} />;
+    }
+
+    return <Modal {...props} />;
   };
 
   const ModalButtonRenderer: FlowRenderFn<ButtonProps> = (Button, props) => {
@@ -75,10 +79,18 @@ export const Action: FC<ActionProps> = (actionProps) => {
   const propsContext: PropsContext = {
     Button: {
       onPress: interaction,
-      isPending: actionState === "isPending" ? true : undefined,
-      "aria-disabled": actionState !== "isIdle" ? true : undefined,
-      isSucceeded: actionState === "isSucceeded" ? true : undefined,
-      isFailed: actionState === "isFailed" ? true : undefined,
+      render: (Button, props) => {
+        const actionState = actionController.state.useState();
+        return (
+          <Button
+            {...props}
+            isPending={actionState === "isPending" ? true : undefined}
+            aria-disabled={actionState !== "isIdle" ? true : undefined}
+            isSucceeded={actionState === "isSucceeded" ? true : undefined}
+            isFailed={actionState === "isFailed" ? true : undefined}
+          />
+        );
+      },
     },
     Modal: {
       tunnelId: "outsideActionProvider",
@@ -95,7 +107,7 @@ export const Action: FC<ActionProps> = (actionProps) => {
     <TunnelProvider>
       <PropsContextProvider
         props={propsContext}
-        dependencies={[hasConfirmationModal, actionState]}
+        dependencies={[hasConfirmationModal]}
         mergeInParentContext
       >
         <ActionContextProvider value={interaction}>
