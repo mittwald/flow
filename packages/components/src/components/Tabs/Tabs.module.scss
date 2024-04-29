@@ -1,0 +1,10 @@
+.tabs {
+  display: flex;
+  flex-direction: column;
+
+  .list {
+    background-color: var(--tab-list--background-color);
+    display: flex;
+    flex-direction: row;
+  }
+}

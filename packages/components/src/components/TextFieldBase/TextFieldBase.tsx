@@ -1,5 +1,5 @@
-import type { FC, PropsWithChildren, ReactNode } from "react";
-import React from "react";
+import type { PropsWithChildren, ReactNode } from "react";
+import React, { forwardRef } from "react";
 import * as Aria from "react-aria-components";
 import styles from "../FormField/FormField.module.scss";
 import clsx from "clsx";
@@ -12,35 +12,37 @@ export interface TextFieldBaseProps
   input: ReactNode;
 }
 
-export const TextFieldBase: FC<TextFieldBaseProps> = (props) => {
-  const { children, className, input, ...rest } = props;
+export const TextFieldBase = forwardRef<HTMLInputElement, TextFieldBaseProps>(
+  (props, ignoredRef) => {
+    const { children, className, input, ...rest } = props;
 
-  const rootClassName = clsx(styles.formField, className);
+    const rootClassName = clsx(styles.formField, className);
 
-  const propsContext: PropsContext = {
-    Label: {
-      className: styles.label,
-      optional: !props.isRequired,
-    },
-    FieldDescription: {
-      className: styles.fieldDescription,
-    },
-    FieldError: {
-      className: styles.customFieldError,
-    },
-  };
+    const propsContext: PropsContext = {
+      Label: {
+        className: styles.label,
+        optional: !props.isRequired,
+      },
+      FieldDescription: {
+        className: styles.fieldDescription,
+      },
+      FieldError: {
+        className: styles.customFieldError,
+      },
+    };
 
-  return (
-    <ClearPropsContext>
-      <Aria.TextField {...rest} className={rootClassName}>
-        {input}
-        <PropsContextProvider props={propsContext}>
-          {children}
-        </PropsContextProvider>
-        <FieldError className={styles.fieldError} />
-      </Aria.TextField>
-    </ClearPropsContext>
-  );
-};
+    return (
+      <ClearPropsContext>
+        <Aria.TextField {...rest} className={rootClassName}>
+          {input}
+          <PropsContextProvider props={propsContext}>
+            {children}
+          </PropsContextProvider>
+          <FieldError className={styles.fieldError} />
+        </Aria.TextField>
+      </ClearPropsContext>
+    );
+  },
+);
 
 export default TextFieldBase;

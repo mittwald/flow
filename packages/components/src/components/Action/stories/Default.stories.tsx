@@ -3,8 +3,9 @@ import Action from "../Action";
 import React from "react";
 import {
   asyncFunction,
-  syncfunction,
+  syncFunction,
   button,
+  asyncLongFunction,
 } from "@/components/Button/stories/lib";
 
 const meta: Meta<typeof Action> = {
@@ -12,8 +13,20 @@ const meta: Meta<typeof Action> = {
   component: Action,
   render: (props) => <Action {...props} />,
   args: {
-    action: syncfunction,
+    action: syncFunction,
     children: button,
+  },
+  parameters: {
+    controls: {
+      exclude: [
+        "children",
+        "action",
+        "closeModal",
+        "openModal",
+        "toggleModal",
+        "feedback",
+      ],
+    },
   },
 };
 
@@ -29,6 +42,12 @@ export const Async: Story = {
   },
 };
 
+export const AsyncLong: Story = {
+  args: {
+    action: asyncLongFunction,
+  },
+};
+
 export const AsyncWithFeedback: Story = {
   args: {
     action: asyncFunction,
@@ -36,9 +55,16 @@ export const AsyncWithFeedback: Story = {
   },
 };
 
+export const AsyncLongWithFeedback: Story = {
+  args: {
+    action: asyncLongFunction,
+    feedback: true,
+  },
+};
+
 export const Nested: Story = {
   args: {
-    children: <Action action={syncfunction}>{button}</Action>,
+    children: <Action action={syncFunction}>{button}</Action>,
   },
 };
 

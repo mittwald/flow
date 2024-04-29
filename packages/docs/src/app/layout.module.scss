@@ -1,5 +1,5 @@
 .body {
-  background-color: var(--neutral--color--100);
+  background-color: var(--neutral--color--300);
 }
 
 .center {
@@ -64,10 +64,7 @@
 
 .main {
   grid-area: main;
-}
-
-@media (min-width: 1024px) {
-  .main {
-    padding: var(--size-px--l) var(--size-px--xl);
-  }
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--size-px--l);
 }

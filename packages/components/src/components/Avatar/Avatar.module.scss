@@ -12,7 +12,9 @@
   align-items: center;
   justify-content: center;
 
-  > img {
+  /* Elements */
+
+  img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -23,39 +25,39 @@
     height: calc(var(--avatar-size) * 0.7);
   }
 
+  .initials {
+    font-size: calc(var(--avatar-size) * 0.4);
+  }
+
   @extend .size-m;
   @extend .variant-1;
-}
 
-/* Elements */
-.initials {
-  font-size: calc(var(--avatar-size) * 0.4);
-}
+  /* Sizes */
 
-/* Sizes */
-@mixin size($size) {
-  .size-#{$size} {
-    --avatar-size: var(--avatar--size--#{$size});
+  @mixin size($size) {
+    &.size-#{$size} {
+      --avatar-size: var(--avatar--size--#{$size});
+    }
   }
-}
 
-@include size(m);
-@include size(xs);
-@include size(s);
-@include size(l);
+  @include size(m);
+  @include size(xs);
+  @include size(s);
+  @include size(l);
 
-/* Variants */
-@mixin variant($variant) {
-  .variant-#{$variant} {
-    --background-color: var(--initials--variant-#{$variant}-background-color);
-    --content-color: var(--initials--variant-#{$variant}-content-color);
-    --content-accent-color: var(
-      --initials--variant-#{$variant}-content-accent-color
-    );
+  /* Variants */
+  @mixin variant($variant) {
+    &.variant-#{$variant} {
+      --background-color: var(--initials--variant-#{$variant}-background-color);
+      --content-color: var(--initials--variant-#{$variant}-content-color);
+      --content-accent-color: var(
+        --initials--variant-#{$variant}-content-accent-color
+      );
+    }
   }
-}
 
-@include variant(1);
-@include variant(2);
-@include variant(3);
-@include variant(4);
+  @include variant(1);
+  @include variant(2);
+  @include variant(3);
+  @include variant(4);
+}

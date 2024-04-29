@@ -8,7 +8,7 @@ import {
 import { Text } from "@/components/Text";
 import { Link } from "@/components/Link";
 import { Navigation, NavigationGroup } from "@/components/Navigation";
-import Heading from "@/components/Heading";
+import Label from "@/components/Label";
 
 const meta: Meta<typeof Navigation> = {
   title: "Navigation/Navigation",
@@ -57,15 +57,16 @@ export const WithIcons: Story = {
 export const WithGroups: Story = {
   render: (props) => (
     <Navigation aria-label="Main navigation" {...props}>
-      <Heading>General</Heading>
       <NavigationGroup>
+        <Label>General</Label>
         <Link href="#">Dashboard</Link>
         <Link href="#" aria-current="page">
           Performance
         </Link>
       </NavigationGroup>
-      <Heading>Components</Heading>
+
       <NavigationGroup>
+        <Label>Components</Label>
         <Link href="#">Apps</Link>
         <Link href="#">Databases</Link>
         <Link href="#">Domains</Link>

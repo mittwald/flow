@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import ContextMenu, {
-  ContextMenuItem,
+  MenuItem,
   ContextMenuTrigger,
 } from "@/components/ContextMenu";
 import { Button } from "@/components/Button";
@@ -13,12 +13,17 @@ const meta: Meta<typeof ContextMenu> = {
     <ContextMenuTrigger>
       <Button>Trigger</Button>
       <ContextMenu {...props}>
-        <ContextMenuItem id="item1">Item 1</ContextMenuItem>
-        <ContextMenuItem id="item2">Item 2</ContextMenuItem>
-        <ContextMenuItem id="item3">Item 3</ContextMenuItem>
+        <MenuItem id="item1">Item 1</MenuItem>
+        <MenuItem id="item2">Item 2</MenuItem>
+        <MenuItem id="item3">Item 3</MenuItem>
       </ContextMenu>
     </ContextMenuTrigger>
   ),
+  parameters: {
+    controls: {
+      exclude: ["defaultOpen", "selectionMode", "defaultSelectedKeys"],
+    },
+  },
 };
 export default meta;
 
@@ -39,5 +44,27 @@ export const MultipleSelection: Story = {
     defaultOpen: true,
     selectionMode: "multiple",
     defaultSelectedKeys: ["item2", "item3"],
+  },
+};
+
+export const WithLinks: Story = {
+  render: (props) => (
+    <ContextMenuTrigger>
+      <Button>Trigger</Button>
+      <ContextMenu
+        defaultSelectedKeys={["https://www.mittwald.de"]}
+        selectionMode="navigation"
+        {...props}
+      >
+        <MenuItem href="https://www.mittwald.de" id="https://www.mittwald.de">
+          www.mittwald.de
+        </MenuItem>
+        <MenuItem href="https://www.google.de">www.google.de</MenuItem>
+        <MenuItem href="https://www.adobe.com">www.adobe.com</MenuItem>
+      </ContextMenu>
+    </ContextMenuTrigger>
+  ),
+  args: {
+    defaultOpen: true,
   },
 };

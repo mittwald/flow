@@ -1,0 +1,38 @@
+tab-list:
+  background-color:
+    value: "{neutral.color.400}"
+
+tab:
+  padding-y:
+    value: "{size-px.m}"
+  padding-x:
+    value: "{size-px.l}"
+  background-color:
+    default:
+      value: "{neutral-soft-background-color.default}"
+    hover:
+      value: "{neutral-soft-background-color.hover}"
+    pressed:
+      value: "{neutral-soft-background-color.pressed}"
+    selected:
+      value: "{neutral.color.100}"
+  color:
+    default:
+      value: "{neutral-soft-content-color.default}"
+    hover:
+      value: "{neutral-soft-content-color.hover}"
+    pressed:
+      value: "{neutral-soft-content-color.pressed}"
+  disabled-color:
+    value: "{neutral.color.600}"
+  disabled-background-color:
+    value: "{neutral-soft-background-color.default}"
+  font-weight:
+    selected:
+      value: "{font-weight.bold}"
+  corner-top-radius-current:
+    value: "{corner-radius.default}"
+
+tab-panel:
+  padding:
+    value: "{size-px.xl}"

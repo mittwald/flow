@@ -1,11 +1,10 @@
 "use client";
 import type { FC } from "react";
 import React from "react";
-import Navigation from "@mittwald/flow-react-components/Navigation";
+import { HeaderNavigation as HeaderNavigationComponent } from "@mittwald/flow-react-components/HeaderNavigation";
 import type { SerializedMdxFile } from "@/lib/mdx/MdxFile";
 import { MdxFile } from "@/lib/mdx/MdxFile";
 import { groupBy } from "remeda";
-import styles from "./HeaderNavigation.module.scss";
 import { GroupText } from "@/app/_components/layout/MainNavigation/components/GroupText";
 import { usePathname } from "next/navigation";
 import { Link } from "@mittwald/flow-react-components/Link";
@@ -32,9 +31,9 @@ const HeaderNavigation: FC<Props> = (props) => {
   ));
 
   return (
-    <Navigation aria-label="Main navigation" className={styles.navigation}>
+    <HeaderNavigationComponent aria-label="Header navigation">
       {navigationItems}
-    </Navigation>
+    </HeaderNavigationComponent>
   );
 };
 

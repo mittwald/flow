@@ -5,17 +5,13 @@ import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
 import { ClearPropsContext, PropsContextProvider } from "@/lib/propsContext";
-import {
-  IconFailed,
-  IconPending,
-  IconSucceeded,
-} from "@/components/Icon/components/icons";
+import { IconFailed, IconSucceeded } from "@/components/Icon/components/icons";
 import { Wrap } from "@/components/Wrap";
 import { Text } from "@/components/Text";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import locales from "./locales/*.locale.json";
-import { useLocalizedStringFormatter } from "react-aria";
+import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
+import { useAriaAnnounceActionState } from "@/components/Action/ariaLive";
 
 export interface ButtonProps
   extends PropsWithChildren<Omit<Aria.ButtonProps, "style">>,
@@ -27,13 +23,20 @@ export interface ButtonProps
   /** @default "m" */
   size?: "m" | "s";
 
+  "aria-disabled"?: boolean;
+
   isPending?: boolean;
   isSucceeded?: boolean;
   isFailed?: boolean;
 }
 
 const disablePendingProps = (props: ButtonProps) => {
-  if (props.isPending || props.isSucceeded || props.isFailed) {
+  if (
+    props.isPending ||
+    props.isSucceeded ||
+    props.isFailed ||
+    props["aria-disabled"]
+  ) {
     props = { ...props };
     props.onPress = undefined;
     props.onPressStart = undefined;
@@ -57,10 +60,10 @@ export const Button = flowComponent("Button", (props) => {
     className,
     size = "m",
     isPending,
-    isDisabled,
     isSucceeded,
     isFailed,
-    "aria-label": ariaLabel,
+    "aria-disabled": ariaDisabled,
+    ref,
     ...restProps
   } = props;
 
@@ -73,6 +76,21 @@ export const Button = flowComponent("Button", (props) => {
     styles[variant],
     styles[style],
     className,
+    /**
+     * Workaround warning: The Aria.Button does not support "aria-disabled" by
+     * now, so this Button will be visually disabled via CSS.
+     */
+    ariaDisabled && styles.ariaDisabled,
+  );
+
+  useAriaAnnounceActionState(
+    isPending
+      ? "isPending"
+      : isSucceeded
+        ? "isSucceeded"
+        : isFailed
+          ? "isFailed"
+          : "isIdle",
   );
 
   const propsContext: PropsContext = {
@@ -84,25 +102,17 @@ export const Button = flowComponent("Button", (props) => {
     Text: {
       className: styles.text,
     },
+    Avatar: {
+      className: styles.avatar,
+    },
   };
-
-  const stringFormatter = useLocalizedStringFormatter(locales);
-
-  const stateLabel =
-    isSucceeded || isFailed || isPending
-      ? stringFormatter.format(
-          `button.${
-            isSucceeded ? "isSucceeded" : isFailed ? "isFailed" : "isPending"
-          }`,
-        )
-      : undefined;
 
   const StateIconComponent = isSucceeded
     ? IconSucceeded
     : isFailed
       ? IconFailed
       : isPending
-        ? IconPending
+        ? LoadingSpinner
         : undefined;
 
   const stateIcon = StateIconComponent && (
@@ -113,23 +123,14 @@ export const Button = flowComponent("Button", (props) => {
 
   return (
     <ClearPropsContext>
-      <Aria.Button
-        className={rootClassName}
-        isDisabled={isDisabled}
-        aria-label={stateLabel ?? ariaLabel}
-        {...restProps}
-      >
-        <Wrap if={stateIcon}>
+      <Aria.Button className={rootClassName} ref={ref} {...restProps}>
+        <PropsContextProvider props={propsContext}>
           <span className={styles.content}>
             <Wrap if={isStringContent}>
-              <Text>
-                <PropsContextProvider props={propsContext}>
-                  {children}
-                </PropsContextProvider>
-              </Text>
+              <Text>{children}</Text>
             </Wrap>
           </span>
-        </Wrap>
+        </PropsContextProvider>
         {stateIcon}
       </Aria.Button>
     </ClearPropsContext>

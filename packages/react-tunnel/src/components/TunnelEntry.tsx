@@ -1,28 +1,33 @@
-import type { FC, PropsWithChildren } from "react";
-import { useContext, useLayoutEffect } from "react";
+import type { FC } from "react";
+import { useContext, useId, useLayoutEffect, useRef } from "react";
 import tunnelContext from "@/context";
-import { observer } from "mobx-react-lite";
+import type { TunnelChildren } from "@/types";
 
-interface Props extends PropsWithChildren {
+interface Props {
   id?: string;
+  children?: TunnelChildren;
 }
 
-export const TunnelEntry: FC<Props> = observer((props) => {
+export const TunnelEntry: FC<Props> = (props) => {
   const { children, id } = props;
   const tunnel = useContext(tunnelContext);
+  const entryId = useId();
+
+  const mounted = useRef(false);
+
+  if (!mounted.current) {
+    tunnel.setChildren(id, entryId, children);
+  }
 
   useLayoutEffect(() => {
-    tunnel.setChildren(id, children);
+    mounted.current = true;
+    tunnel.setChildren(id, entryId, children);
     return () => {
-      tunnel.deleteChildren(id);
+      tunnel.deleteChildren(id, entryId);
     };
-  }, [children, id]);
+  }, [children, id, entryId]);
 
-  /**
-   * Render children if not already in Tunnel, because parent component may
-   * assume they are being rendered.
-   */
-  return tunnel.hasChildren(id) ? null : children;
-});
+  return null;
+};
 
 export default TunnelEntry;

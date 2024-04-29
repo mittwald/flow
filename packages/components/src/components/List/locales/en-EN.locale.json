@@ -1,6 +1,6 @@
 {
   "options": "Options",
-  "paginationInfo": "Showing {visibleRows} of {totalRows}",
+  "paginationInfo": "Showing {visibleItemsCount} of {totalItemsCount}",
   "paginationInfoFiltered": "Showing {visibleItemsCount} of {filteredItemsCount} (unfiltered total count {totalItemsCount})",
   "resetAll": "Reset filters",
   "setSorting": "Sorting: {property}",

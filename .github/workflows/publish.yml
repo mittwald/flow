@@ -48,12 +48,13 @@ jobs:
         run: git branch --track main origin/main
 
       - name: Build 🔨
-        run: yarn nx affected -t build --parallel=3
+        run: yarn build --exclude @mittwald/flow-docs
 
       - name: Version and publish 🚀
         run: |
           yarn lerna publish \
-            --conventional-commits --conventional-prerelease=* \
+            --force-publish \
+            --conventional-commits --conventional-prerelease="*" \
             --create-release github \
             --message "chore(release): bump version to %v" \
             --yes --no-private \

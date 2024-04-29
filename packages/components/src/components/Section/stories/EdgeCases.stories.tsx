@@ -14,7 +14,7 @@ const meta: Meta<typeof Section> = {
 };
 export default meta;
 
-type Story = StoryObj<typeof Text>;
+type Story = StoryObj<typeof Section>;
 
 export const WithLongHeading: Story = {
   render: (props) => (

@@ -12,7 +12,7 @@ import {
 } from "@/components/List";
 import type { AsyncDataLoader } from "@/components/List/model/loading/types";
 import { Avatar } from "@/components/Avatar";
-import { ContextMenu, ContextMenuItem } from "@/components/ContextMenu";
+import { ContextMenu, MenuItem } from "@/components/ContextMenu";
 import { Link } from "@/components/Link";
 import { IconDomain, IconSubdomain } from "@/components/Icon/components/icons";
 import StatusBadge from "@/components/StatusBadge";
@@ -63,7 +63,7 @@ const meta: Meta<typeof List> = {
         <ListItemView<Domain>>
           {(domain) => (
             <>
-              <Avatar>
+              <Avatar variant={domain.type === "Domain" ? 1 : 2}>
                 {domain.type === "Domain" ? <IconDomain /> : <IconSubdomain />}
               </Avatar>
               <Heading>{domain.hostname}</Heading>
@@ -74,8 +74,8 @@ const meta: Meta<typeof List> = {
               )}
 
               <ContextMenu>
-                <ContextMenuItem>Show details</ContextMenuItem>
-                <ContextMenuItem>Delete</ContextMenuItem>
+                <MenuItem>Show details</MenuItem>
+                <MenuItem>Delete</MenuItem>
               </ContextMenu>
             </>
           )}
@@ -101,14 +101,14 @@ export const ItemsWithLink: Story = {
         <ListItemView<Domain>>
           {(domain) => (
             <Link href="#">
-              <Avatar>
+              <Avatar variant={domain.type === "Domain" ? 1 : 2}>
                 {domain.type === "Domain" ? <IconDomain /> : <IconSubdomain />}
               </Avatar>
               <Heading>{domain.hostname}</Heading>
               <Text>{domain.type}</Text>
               <ContextMenu>
-                <ContextMenuItem>Show details</ContextMenuItem>
-                <ContextMenuItem>Delete</ContextMenuItem>
+                <MenuItem>Show details</MenuItem>
+                <MenuItem>Delete</MenuItem>
               </ContextMenu>
             </Link>
           )}

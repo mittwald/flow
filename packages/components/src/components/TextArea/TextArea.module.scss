@@ -1,5 +1,7 @@
 @use "@/styles/mixins/formControl.scss";
 
 .textArea {
+  resize: none;
+
   @include formControl.formControl();
 }

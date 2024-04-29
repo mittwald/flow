@@ -7,10 +7,10 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 export interface ImageProps extends ComponentProps<"img">, FlowComponentProps {}
 
 export const Image = flowComponent("Image", (props) => {
-  const propsWithContext = props;
+  const { ref, ...rest } = props;
   return (
     <ClearPropsContext>
-      <img {...propsWithContext} />
+      <img {...rest} ref={ref} />
     </ClearPropsContext>
   );
 });

@@ -14,10 +14,8 @@ export interface LinkProps
   extends PropsWithChildren<
       Omit<Aria.LinkProps, "children" | "slot" | "className">
     >,
-    FlowComponentProps,
+    FlowComponentProps<"Link">,
     PropsWithClassName {
-  /** @default "default" */
-  variant?: "default" | "danger";
   inline?: boolean;
   linkComponent?: ComponentType<Omit<ComponentProps<"a">, "ref">>;
   /** @internal */
@@ -29,11 +27,11 @@ export const Link = flowComponent("Link", (props) => {
   const {
     children,
     className,
-    variant = "default",
     inline,
     linkComponent: linkComponentFromProps,
     unstyled = false,
     "aria-current": ariaCurrent,
+    ref,
     ...rest
   } = props;
 
@@ -42,7 +40,7 @@ export const Link = flowComponent("Link", (props) => {
 
   const rootClassName = unstyled
     ? className
-    : clsx(styles.link, styles[variant], inline && styles.inline, className);
+    : clsx(styles.link, inline && styles.inline, className);
 
   const propsContext: PropsContext = {
     Icon: {
@@ -61,6 +59,7 @@ export const Link = flowComponent("Link", (props) => {
         className={rootClassName}
         {...rest}
         {...unsupportedTypingsLinkProps}
+        ref={ref}
       >
         <PropsContextProvider props={propsContext}>
           {children}

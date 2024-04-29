@@ -1,31 +1,3 @@
-.modal {
-  border-radius: var(--modal--corner-radius);
-  background: var(--modal--background-color);
-  max-height: calc(100dvh - var(--size-px--xxl));
-  max-width: calc(100vw - var(--size-px--xxl));
-  overflow: hidden;
-
-  @extend .size-s;
-
-  &[data-entering] {
-    animation: modal-zoom var(--transition--duration--slow)
-      cubic-bezier(0.1, 0.8, 0.3, 1.2);
-  }
-}
-
-.dialog {
-  padding: var(--modal--padding);
-  overflow: hidden;
-  outline: none;
-  display: grid;
-  grid-template-areas:
-    "content"
-    "buttonGroup";
-  grid-template-rows: 1fr auto;
-  height: 100%;
-  max-height: inherit;
-}
-
 .overlay {
   background: var(--modal--overlay-background-color);
   position: fixed;
@@ -43,45 +15,73 @@
   }
 }
 
-.buttonGroup {
-  margin-inline: calc(var(--modal--padding) * -1);
-  margin-bottom: calc(var(--modal--padding) * -1);
-  grid-area: buttonGroup;
-  padding: var(--modal--button-group-padding);
-  background-color: var(--modal--button-group-background-color);
-  border-top-color: var(--modal--button-group-border-color);
-  border-top-width: var(--modal--button-group-border-top-width);
-  border-top-style: var(--modal--button-group-border-style);
-}
+.modal {
+  border-radius: var(--modal--corner-radius);
+  background: var(--modal--background-color);
+  max-height: calc(100dvh - var(--size-px--xxl));
+  max-width: calc(100vw - var(--size-px--xxl));
+  overflow: hidden;
 
-.content {
-  grid-area: content;
-  overflow-x: hidden;
-  overflow-y: auto;
-  padding-bottom: var(--modal--padding-bottom);
-  display: flex;
-  flex-direction: column;
-  row-gap: var(--section--content-to-content-spacing);
-}
+  @extend .size-s;
 
-/* Sizes */
-@mixin size($size) {
-  .size-#{$size} {
-    width: var(--modal--size--#{$size});
+  &[data-entering] {
+    animation: modal-zoom var(--transition--duration--slow)
+      cubic-bezier(0.1, 0.8, 0.3, 1.2);
   }
+
+  .dialog {
+    padding: var(--modal--padding);
+    overflow: hidden;
+    outline: none;
+    display: grid;
+    grid-template-areas:
+      "content"
+      "buttonGroup";
+    grid-template-rows: 1fr auto;
+    height: 100%;
+    max-height: inherit;
+  }
+
+  .buttonGroup {
+    margin-inline: calc(var(--modal--padding) * -1);
+    margin-bottom: calc(var(--modal--padding) * -1);
+    grid-area: buttonGroup;
+    padding: var(--modal--button-group-padding);
+    background-color: var(--modal--button-group-background-color);
+    border-top-color: var(--modal--button-group-border-color);
+    border-top-width: var(--modal--button-group-border-top-width);
+    border-top-style: var(--modal--button-group-border-style);
+  }
+
+  .content {
+    grid-area: content;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-bottom: var(--modal--padding-bottom);
+    display: flex;
+    flex-direction: column;
+    row-gap: var(--section--content-to-content-spacing);
+  }
+
+  /* Sizes */
+  @mixin size($size) {
+    &.size-#{$size} {
+      width: var(--modal--size--#{$size});
+    }
+  }
+
+  @include size(s);
+  @include size(m);
+  @include size(l);
 }
 
-@include size(s);
-@include size(m);
-@include size(l);
-
-/* Panel */
+/* OffCanvas */
 
 @media (min-width: 550px) {
-  .overlay:has(.panel) {
+  .overlay:has(.offCanvas) {
     justify-content: flex-end;
   }
-  .panel {
+  .offCanvas {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     height: 100%;
@@ -97,9 +97,10 @@
 
 @media (max-width: 550px) {
   .overlay {
-    overflow-y: scroll;
+    overflow-y: auto;
     padding-top: var(--size-px--xxl);
   }
+
   .modal {
     margin-top: auto;
     width: 100%;
@@ -111,10 +112,10 @@
     &[data-entering] {
       animation: modal-slide-up var(--transition--duration--slow);
     }
-  }
 
-  .content {
-    overflow: visible;
+    .content {
+      overflow: visible;
+    }
   }
 }
 

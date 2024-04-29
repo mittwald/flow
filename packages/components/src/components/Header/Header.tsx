@@ -6,15 +6,19 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface HeaderProps
   extends PropsWithChildren,
-    PropsWithElementType,
+    PropsWithElementType<"div" | "header" | "span">,
     FlowComponentProps {}
 
 export const Header = flowComponent("Header", (props) => {
-  const { children, elementType = "header", ...rest } = props;
+  const { children, ref, elementType = "header", ...rest } = props;
 
   const Element = elementType;
 
-  return <Element {...rest}>{children}</Element>;
+  return (
+    <Element {...rest} ref={ref}>
+      {children}
+    </Element>
+  );
 });
 
 export default Header;

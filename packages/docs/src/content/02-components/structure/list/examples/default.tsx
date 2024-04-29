@@ -12,15 +12,13 @@ import {
 import { Avatar } from "@mittwald/flow-react-components/Avatar";
 import { Heading } from "@mittwald/flow-react-components/Heading";
 import { Text } from "@mittwald/flow-react-components/Text";
-import {
-  ContextMenu,
-  ContextMenuItem,
-} from "@mittwald/flow-react-components/ContextMenu";
+import { ContextMenu } from "@mittwald/flow-react-components/ContextMenu";
 import {
   IconDomain,
   IconSubdomain,
 } from "@mittwald/flow-react-components/Icons";
 import StatusBadge from "@mittwald/flow-react-components/StatusBadge";
+import { MenuItem } from "@mittwald/flow-react-components/MenuItem";
 
 <List batchSize={5}>
   <ListStaticData data={domains} />
@@ -34,7 +32,7 @@ import StatusBadge from "@mittwald/flow-react-components/StatusBadge";
   <ListItemView<Domain>>
     {(domain) => (
       <>
-        <Avatar>
+        <Avatar variant={domain.type === "Domain" ? 1 : 2}>
           {domain.type === "Domain" ? (
             <IconDomain />
           ) : (
@@ -46,12 +44,12 @@ import StatusBadge from "@mittwald/flow-react-components/StatusBadge";
           <Text>{domain.type}</Text>
         ) : (
           <StatusBadge status="warning">
-            Not verified
+            Nicht verifiziert
           </StatusBadge>
         )}
         <ContextMenu>
-          <ContextMenuItem>Show details</ContextMenuItem>
-          <ContextMenuItem>Delete</ContextMenuItem>
+          <MenuItem>Details anzeigen</MenuItem>
+          <MenuItem>Löschen</MenuItem>
         </ContextMenu>
       </>
     )}

@@ -1,17 +1,23 @@
-import type { ReactNode } from "react";
 import { useState } from "react";
+import type { ObservableMap } from "mobx";
 import { action, makeObservable, observable } from "mobx";
-
-type TunnelNodes = Record<string, ReactNode>;
+import type { TunnelChildren } from "@/types";
 
 const defaultId = "default";
 
 export class TunnelState {
-  public readonly children: TunnelNodes = {};
+  public readonly children = observable.map<
+    string,
+    ObservableMap<string, TunnelChildren>
+  >(
+    {},
+    {
+      deep: false,
+    },
+  );
 
   public constructor() {
     makeObservable(this, {
-      children: observable,
       deleteChildren: action.bound,
       setChildren: action.bound,
     });
@@ -21,19 +27,30 @@ export class TunnelState {
     return useState(new TunnelState())[0];
   }
 
-  public setChildren(tunnelId: string = defaultId, children: ReactNode): void {
-    this.children[tunnelId] = children;
+  public setChildren(
+    tunnelId: string = defaultId,
+    entryId: string,
+    children: TunnelChildren,
+  ): void {
+    const tunnelEntries =
+      this.children.get(tunnelId) ??
+      observable.map<string, TunnelChildren>({}, { deep: false });
+
+    tunnelEntries.set(entryId, children);
+
+    this.children.set(tunnelId, tunnelEntries);
   }
 
-  public deleteChildren(tunnelId: string = defaultId): void {
-    delete this.children[tunnelId];
+  public deleteChildren(tunnelId: string = defaultId, entryId: string): void {
+    this.children.get(tunnelId)?.delete(entryId);
   }
 
-  public hasChildren(tunnelId: string = defaultId): boolean {
-    return tunnelId in this.children;
-  }
-
-  public getChildren(tunnelId: string = defaultId): ReactNode {
-    return this.children[tunnelId];
+  public getChildren(
+    tunnelId: string = defaultId,
+  ): Array<[string, TunnelChildren]> | undefined {
+    const tunnelEntries = this.children.get(tunnelId)?.entries();
+    if (tunnelEntries) {
+      return Array.from(tunnelEntries);
+    }
   }
 }

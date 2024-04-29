@@ -1,3 +1,3 @@
 import StatusBadge from "@mittwald/flow-react-components/StatusBadge";
 
-<StatusBadge>Info</StatusBadge>;
+<StatusBadge>Archiviert</StatusBadge>;

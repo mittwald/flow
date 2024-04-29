@@ -11,6 +11,7 @@ interface Options {
 interface ActionController {
   state: ActionState;
   callAction: ActionFn;
+  callActionWithStateHandling: ActionFn;
 }
 
 export const useCallAction = (
@@ -21,15 +22,21 @@ export const useCallAction = (
 
   const callableAction = useMakeCallableAction(action);
 
+  const callableActionWithParent: ActionFn = (...args) =>
+    callActionsInOrder(args, [callableAction, parentAction]);
+
   const state = ActionState.useNew(options);
 
-  const callWithStateHandling: ActionFn = (...args) => {
+  const callActionWithStateHandling: ActionFn = (...args) => {
     try {
-      state.onStart();
-      const result = callActionsInOrder(args, [callableAction, parentAction]);
+      const result = callableActionWithParent(...args);
 
       if (result instanceof Promise) {
-        return result.then(state.onSucceeded).catch(state.onFailed);
+        state.onAsyncStart();
+
+        return result
+          .then(() => state.onSucceeded())
+          .catch(() => state.onFailed());
       }
 
       state.onSucceeded();
@@ -39,7 +46,8 @@ export const useCallAction = (
   };
 
   return {
-    callAction: callWithStateHandling,
+    callAction: callableActionWithParent,
+    callActionWithStateHandling,
     state,
   };
 };

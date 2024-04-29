@@ -1,3 +1,3 @@
 <button className="flow--button flow--button--primary">
-  Primary button
+  Primary Button
 </button>;

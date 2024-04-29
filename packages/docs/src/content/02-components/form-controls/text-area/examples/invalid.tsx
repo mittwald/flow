@@ -4,5 +4,5 @@ import FieldError from "@mittwald/flow-react-components/FieldError";
 
 <TextArea isInvalid defaultValue="hello">
   <Label>Public Key</Label>
-  <FieldError>Invalid Key</FieldError>
+  <FieldError>Ungültiger Key</FieldError>
 </TextArea>;

@@ -12,8 +12,9 @@ import { useSyncTriggerState } from "@/components/Modal/hooks/useSyncTriggerStat
 import { OverlayContextProvider } from "@/lib/controller/overlay/context";
 
 export interface ModalProps extends PropsWithChildren {
+  /** @default "s" */
   size?: "s" | "m" | "l";
-  panel?: boolean;
+  offCanvas?: boolean;
   state?: OverlayState;
   defaultOpen?: boolean;
 }
@@ -21,7 +22,7 @@ export interface ModalProps extends PropsWithChildren {
 export const Modal: FC<ModalProps> = (props) => {
   const {
     size = "s",
-    panel,
+    offCanvas,
     state: stateFromProps,
     defaultOpen,
     children,
@@ -41,21 +42,20 @@ export const Modal: FC<ModalProps> = (props) => {
   const rootClassName = clsx(
     styles.modal,
     styles[`size-${size}`],
-    panel && styles.panel,
+    offCanvas && styles.offCanvas,
   );
 
   const propsContext: PropsContext = {
     Content: {
-      tunnelId: "content",
       elementType: React.Fragment,
     },
     Heading: {
       level: 2,
-      tunnelId: "title",
       slot: "title",
     },
     ButtonGroup: {
       className: styles.buttonGroup,
+      tunnelId: "buttons",
     },
   };
 
@@ -72,11 +72,8 @@ export const Modal: FC<ModalProps> = (props) => {
           <OverlayContextProvider value={state}>
             <PropsContextProvider props={propsContext}>
               <TunnelProvider>
-                <div className={styles.content}>
-                  <TunnelExit id="title" />
-                  <TunnelExit id="content" />
-                </div>
-                {children}
+                <div className={styles.content}>{children}</div>
+                <TunnelExit id="buttons" />
               </TunnelProvider>
             </PropsContextProvider>
           </OverlayContextProvider>
