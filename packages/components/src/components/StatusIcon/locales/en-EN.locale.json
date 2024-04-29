@@ -1,6 +1,6 @@
 {
-  "statusIcon.danger": "Status Error",
-  "statusIcon.info": "Status Information",
-  "statusIcon.success": "Status Success",
-  "statusIcon.warning": "Status Warning"
+  "statusIcon.danger": "Status error",
+  "statusIcon.info": "Status information",
+  "statusIcon.success": "Status success",
+  "statusIcon.warning": "Status warning"
 }
