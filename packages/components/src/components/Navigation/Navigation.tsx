@@ -22,9 +22,11 @@ export const Navigation: FC<NavigationProps> = (props) => {
 
   const propsContext: PropsContext = {
     Link: {
-      hoc: (link) => <li>{link}</li>,
-      className: styles.item,
-      unstyled: true,
+      render: (Link, props) => (
+        <li>
+          <Link {...props} className={styles.item} unstyled />
+        </li>
+      ),
       Text: {
         className: styles.text,
       },

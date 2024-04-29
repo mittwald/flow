@@ -11,11 +11,11 @@ import { Text } from "@/components/Text";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
-import { useAriaAnnounceActionState } from "@/components/Action/ariaLive";
+import { useAriaAnnounceActionState } from "@/components/Action/lib/ariaLive";
 
 export interface ButtonProps
   extends PropsWithChildren<Omit<Aria.ButtonProps, "style">>,
-    FlowComponentProps {
+    FlowComponentProps<"Button"> {
   /** @default "primary" */
   variant?: "primary" | "accent" | "secondary" | "danger";
   /** @default "solid" */
@@ -28,6 +28,8 @@ export interface ButtonProps
   isPending?: boolean;
   isSucceeded?: boolean;
   isFailed?: boolean;
+
+  inverse?: boolean;
 
   /** @internal */
   unstyled?: boolean;
@@ -67,27 +69,29 @@ export const Button = flowComponent("Button", (props) => {
     isFailed,
     "aria-disabled": ariaDisabled,
     ref,
+    inverse,
     unstyled,
     ...restProps
   } = props;
 
-  const rootClassName = unstyled
+  const rootClassName =unstyled
     ? className
-    : clsx(
-        styles.button,
-        isPending && styles.isPending,
-        isSucceeded && styles.isSucceeded,
-        isFailed && styles.isFailed,
-        styles[`size-${size}`],
-        styles[variant],
-        styles[style],
-        className,
-        /**
-         * Workaround warning: The Aria.Button does not support "aria-disabled"
-         * by now, so this Button will be visually disabled via CSS.
-         */
-        ariaDisabled && styles.ariaDisabled,
-      );
+    :   clsx(
+    styles.button,
+    isPending && styles.isPending,
+    isSucceeded && styles.isSucceeded,
+    isFailed && styles.isFailed,
+    inverse && styles.inverse,
+    styles[`size-${size}`],
+    styles[variant],
+    styles[style],
+    className,
+    /**
+     * Workaround warning: The Aria.Button does not support "aria-disabled" by
+     * now, so this Button will be visually disabled via CSS.
+     */
+    ariaDisabled && styles.ariaDisabled,
+  );
 
   useAriaAnnounceActionState(
     isPending

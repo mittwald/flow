@@ -3,6 +3,94 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.87](https://github.com/mittwald/flow/compare/0.1.0-alpha.86...0.1.0-alpha.87) (2024-04-29)
+
+### Features
+
+- **Button:** add inverse option to button
+  ([d78a1a5](https://github.com/mittwald/flow/commit/d78a1a5f28c855e440d12da1db69214fd917ce71))
+
+### Reverts
+
+- Revert "chore: update dependencies"
+  ([09b7f46](https://github.com/mittwald/flow/commit/09b7f46f0df3665cadea66137d493cf5d128f31a))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.86](https://github.com/mittwald/flow/compare/0.1.0-alpha.85...0.1.0-alpha.86) (2024-04-29)
+
+### Features
+
+- **Tabs:** add status to tabs
+  ([569774a](https://github.com/mittwald/flow/commit/569774a66e19d24259cbc8045bd322a3458a34a9))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.85](https://github.com/mittwald/flow/compare/0.1.0-alpha.84...0.1.0-alpha.85) (2024-04-29)
+
+### Features
+
+- **Icon:** Add icons
+  ([9036765](https://github.com/mittwald/flow/commit/9036765c833dd121f26d5bee7ee79b80260057d8))
+- **Icon:** Add icons
+  ([9b4ef3f](https://github.com/mittwald/flow/commit/9b4ef3f644b9968f2861a216fbe1eaf78c72dd33))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.84](https://github.com/mittwald/flow/compare/0.1.0-alpha.83...0.1.0-alpha.84) (2024-04-29)
+
+### Bug Fixes
+
+- **NumberField:** Fix Button padding in NumberField
+  ([7c47f1d](https://github.com/mittwald/flow/commit/7c47f1dba7bd5aab28c1553a103962a60fec373e))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.83](https://github.com/mittwald/flow/compare/0.1.0-alpha.82...0.1.0-alpha.83) (2024-04-26)
+
+### Features
+
+- **Heading:** Add levelVisual property
+  ([f7b2d96](https://github.com/mittwald/flow/commit/f7b2d960ad11041d18101c0d0b16d32f0b2f4a74))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.82](https://github.com/mittwald/flow/compare/0.1.0-alpha.81...0.1.0-alpha.82) (2024-04-24)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.81](https://github.com/mittwald/flow/compare/0.1.0-alpha.80...0.1.0-alpha.81) (2024-04-24)
+
+### Bug Fixes
+
+- **Modal:** fix not applied off-canvas style
+  ([a286436](https://github.com/mittwald/flow/commit/a28643688bbf88691b4931651ecc527b4030e355))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.80](https://github.com/mittwald/flow/compare/0.1.0-alpha.79...0.1.0-alpha.80) (2024-04-24)
 
 ### Bug Fixes

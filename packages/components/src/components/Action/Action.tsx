@@ -1,66 +1,109 @@
 import type { FC, PropsWithChildren } from "react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import type { ActionFn } from "@/components/Action/types";
-import { useCallAction } from "@/components/Action/hooks/useCallAction";
-import { actions } from "@/components/Action/actionFactory";
-import type { OverlayState } from "@/lib/controller/overlay";
+import { OverlayController } from "@/lib/controller/overlay";
+import { ActionContextProvider } from "@/components/Action/lib/execution/context";
+import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
+import { useActionController } from "@/components/Action/lib/execution/useActionController";
+import type { ButtonProps } from "@/components/Button";
+import type { FlowRenderFn } from "@/lib/types/props";
+import type { ModalProps } from "@/components/Modal";
 
 export interface ActionProps extends PropsWithChildren {
   action?: ActionFn;
-  closeModal?: boolean | OverlayState;
-  openModal?: boolean | OverlayState;
-  toggleModal?: boolean | OverlayState;
-  feedback?: boolean;
+  closeModal?: boolean | OverlayController;
+  openModal?: boolean | OverlayController;
+  toggleModal?: boolean | OverlayController;
+  break?: boolean;
+  showFeedback?: boolean;
+  /** @internal */
+  isConfirmationAction?: boolean;
 }
 
-export const Action: FC<ActionProps> = (props) => {
-  const {
-    children,
-    feedback,
-    action: actionFn,
-    toggleModal,
-    openModal,
-    closeModal,
-  } = props;
+export const Action: FC<ActionProps> = (actionProps) => {
+  const [hasConfirmationModal, setHasConfirmationModal] = useState(false);
+  const confirmationModalController = OverlayController.useNew();
 
-  const action = actionFn
-    ? actions.fn(actionFn)
-    : toggleModal
-      ? actions.toggleModal(toggleModal)
-      : openModal
-        ? actions.openModal(openModal)
-        : closeModal
-          ? actions.closeModal(closeModal)
-          : undefined;
+  const actionController = useActionController(actionProps);
 
-  const actionController = useCallAction(action, {
-    feedback,
-  });
-  const state = actionController.state.useState();
+  const interaction = hasConfirmationModal
+    ? confirmationModalController.open
+    : actionController.callAction;
+
+  const actionState = actionController.state.useState();
+
+  const ConfirmationModalRenderer: FlowRenderFn<ModalProps> = (
+    Modal,
+    props,
+  ) => {
+    useEffect(() => {
+      if (props.slot === "actionConfirm") {
+        setHasConfirmationModal(true);
+        return () => {
+          setHasConfirmationModal(false);
+        };
+      }
+    }, []);
+
+    return <Modal controller={confirmationModalController} {...props} />;
+  };
+
+  const ModalButtonRenderer: FlowRenderFn<ButtonProps> = (Button, props) => {
+    const { variant } = props;
+
+    if (variant === "secondary") {
+      return (
+        <Action break>
+          <Action closeModal>
+            <Button {...props} />
+          </Action>
+        </Action>
+      );
+    }
+
+    return (
+      <Action closeModal>
+        <Action {...actionProps} isConfirmationAction>
+          <Button {...props} />
+        </Action>
+      </Action>
+    );
+  };
 
   const propsContext: PropsContext = {
     Button: {
-      onPress: actionController.callActionWithStateHandling,
-      isPending: state === "isPending",
-      "aria-disabled": state !== "isIdle",
-      isSucceeded: state === "isSucceeded",
-      isFailed: state === "isFailed",
+      onPress: interaction,
+      isPending: actionState === "isPending" ? true : undefined,
+      "aria-disabled": actionState !== "isIdle" ? true : undefined,
+      isSucceeded: actionState === "isSucceeded" ? true : undefined,
+      isFailed: actionState === "isFailed" ? true : undefined,
     },
-    Action: {
-      action: actionController.callAction,
+    Modal: {
+      tunnelId: "outsideActionProvider",
+      render: ConfirmationModalRenderer,
+      ButtonGroup: {
+        Button: {
+          render: ModalButtonRenderer,
+        },
+      },
     },
   };
 
   return (
-    <PropsContextProvider
-      mergeInParentContext
-      props={propsContext}
-      dependencies={[state]}
-    >
-      {children}
-    </PropsContextProvider>
+    <TunnelProvider>
+      <PropsContextProvider
+        props={propsContext}
+        dependencies={[hasConfirmationModal, actionState]}
+        mergeInParentContext
+      >
+        <ActionContextProvider value={interaction}>
+          {actionProps.children}
+        </ActionContextProvider>
+        <TunnelExit id="outsideActionProvider" />
+      </PropsContextProvider>
+    </TunnelProvider>
   );
 };
 

@@ -9,6 +9,7 @@ import { Label } from "@/components/Label";
 import { LabeledValue } from "@/components/LabeledValue";
 import { Switch } from "@/components/Switch";
 import { Header } from "@/components/Header";
+import { StatusIcon } from "@/components/StatusIcon";
 
 const meta: Meta<typeof Tabs> = {
   title: "Navigation/Tabs",
@@ -17,7 +18,10 @@ const meta: Meta<typeof Tabs> = {
     return (
       <Tabs {...props} disabledKeys={["spam"]}>
         <Tab id="general">
-          <TabTitle>General</TabTitle>
+          <TabTitle>
+            General
+            <StatusIcon status="info" />
+          </TabTitle>
           <Section>
             <Heading>General</Heading>
             <TextField defaultValue="example@mittwald.de">
