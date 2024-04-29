@@ -1,1 +1,1 @@
-export { useOverlayState } from "@/lib/controller";
+export { useOverlayController } from "@/lib/controller";

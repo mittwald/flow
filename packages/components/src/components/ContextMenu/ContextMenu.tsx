@@ -1,13 +1,13 @@
 import React from "react";
 import * as Aria from "react-aria-components";
 import styles from "./ContextMenu.module.scss";
-import type { MenuItemProps } from "src/components/MenuItem";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import type { PopoverProps } from "@/components/Popover";
 import { Popover } from "@/components/Popover";
 import type { PropsContext } from "@/lib/propsContext";
 import { ClearPropsContext, PropsContextProvider } from "@/lib/propsContext";
+import type { MenuItemProps } from "@/components/MenuItem";
 
 export interface ContextMenuProps
   extends PopoverProps,
@@ -19,7 +19,7 @@ export interface ContextMenuProps
       | "onSelectionChange"
       | "disabledKeys"
     >,
-    FlowComponentProps {
+    FlowComponentProps<"ContextMenu"> {
   selectionMode?: "single" | "multiple" | "navigation";
 }
 
