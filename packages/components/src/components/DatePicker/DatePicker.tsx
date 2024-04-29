@@ -9,14 +9,13 @@ import { Calendar } from "./components/Calendar";
 import { DateInput } from "./components/DateInput";
 import { FieldError } from "@/components/FieldError";
 import styles from "../FormField/FormField.module.scss";
-import type { DateValue } from "@internationalized/date";
 
 export interface DatePickerProps<T extends Aria.DateValue>
   extends PropsWithChildren<Omit<Aria.DatePickerProps<T>, "children">> {
   errorMessage?: ReactNode;
 }
 
-export const DatePicker: FC<DatePickerProps<DateValue>> = (props) => {
+export const DatePicker: FC<DatePickerProps<Aria.DateValue>> = (props) => {
   const { children, className, errorMessage, ...rest } = props;
 
   const rootClassName = clsx(styles.formField, className);

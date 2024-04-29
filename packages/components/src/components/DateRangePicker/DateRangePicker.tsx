@@ -9,14 +9,15 @@ import { Popover } from "@/components/Popover";
 import { RangeCalendar } from "./components/RangeCalendar";
 import { DateRangeInput } from "./components/DateRangeInput";
 import { FieldError } from "@/components/FieldError";
-import type { DateValue } from "@internationalized/date";
 
 export interface DateRangePickerProps<T extends Aria.DateValue>
   extends PropsWithChildren<Omit<Aria.DateRangePickerProps<T>, "children">> {
   errorMessage?: ReactNode;
 }
 
-export const DateRangePicker: FC<DateRangePickerProps<DateValue>> = (props) => {
+export const DateRangePicker: FC<DateRangePickerProps<Aria.DateValue>> = (
+  props,
+) => {
   const { children, className, errorMessage, ...rest } = props;
 
   const rootClassName = clsx(styles.formField, className);
