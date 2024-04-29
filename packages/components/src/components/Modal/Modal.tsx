@@ -8,7 +8,6 @@ import { PropsContextProvider } from "@/lib/propsContext";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import type { OverlayController } from "@/lib/controller/overlay";
 import { useOverlayController } from "@/lib/controller/overlay/useOverlayController";
-import { useSyncTriggerState } from "@/components/Modal/hooks/useSyncTriggerState";
 import { OverlayContextProvider } from "@/lib/controller/overlay/context";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
@@ -22,30 +21,25 @@ export interface ModalProps
   controller?: OverlayController;
   defaultOpen?: boolean;
   slot?: string;
-  /** @internal */
-  reuseControllerFromContext?: boolean;
 }
 
 export const Modal = flowComponent("Modal", (props) => {
   const {
     size = "s",
     offCanvas,
-    controller: stateFromProps,
+    controller: controllerFromProps,
     defaultOpen,
     children,
-    reuseControllerFromContext = false,
     ...rest
   } = props;
 
-  const newState = useOverlayController({
-    reuseControllerFromContext,
+  const controllerFromContext = useOverlayController({
+    reuseControllerFromContext: true,
     defaultOpen,
   });
 
-  const state = stateFromProps ?? newState;
-  const isOpen = state.useIsOpen();
-
-  useSyncTriggerState(state);
+  const controller = controllerFromProps ?? controllerFromContext;
+  const isOpen = controller.useIsOpen();
 
   const rootClassName = clsx(
     styles.modal,
@@ -73,11 +67,11 @@ export const Modal = flowComponent("Modal", (props) => {
       {...rest}
       isDismissable
       isOpen={isOpen}
-      onOpenChange={(isOpen) => state.setOpen(isOpen)}
+      onOpenChange={(isOpen) => controller.setOpen(isOpen)}
     >
       <Aria.Modal className={rootClassName}>
         <Aria.Dialog className={styles.dialog}>
-          <OverlayContextProvider value={state}>
+          <OverlayContextProvider value={controller}>
             <PropsContextProvider props={propsContext}>
               <TunnelProvider>
                 <div className={styles.content}>{children}</div>
