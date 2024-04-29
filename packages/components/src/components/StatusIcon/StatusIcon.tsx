@@ -17,12 +17,7 @@ import styles from "./StatusIcon.module.scss";
 export interface StatusIconProps extends PropsWithStatus, IconProps {}
 
 export const StatusIcon: FC<StatusIconProps> = (props) => {
-  const {
-    status = "info",
-    className,
-    "aria-label": ariaLabel,
-    ...rest
-  } = props;
+  const { status = "info", className, ...rest } = props;
 
   const rootClassName = clsx(styles.statusIcon, styles[status], className);
 
@@ -30,7 +25,7 @@ export const StatusIcon: FC<StatusIconProps> = (props) => {
 
   const iconProps: IconProps = {
     className: rootClassName,
-    "aria-label": ariaLabel ?? stringFormatter.format(`statusIcon.${status}`),
+    "aria-label": stringFormatter.format(`statusIcon.${status}`),
     ...rest,
   };
 

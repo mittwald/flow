@@ -8,6 +8,7 @@
   background-color: var(--menu-item--background-color--default);
   padding: var(--menu-item--padding-y) var(--menu-item--padding-x);
   cursor: default;
+  align-items: center;
 
   @include focus.focus;
 
@@ -49,7 +50,7 @@
   &[aria-current],
   &[data-selected] {
     .icon {
-      color: var(--menu-item--color--current);
+      color: var(--menu-item--icon-color--current);
     }
   }
 
