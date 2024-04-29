@@ -6,6 +6,15 @@
   font-weight: var(--link--font-weight);
   transition-property: color;
   transition-duration: var(--transition--duration--default);
+  color: var(--link--color--default);
+
+  &:hover {
+    color: var(--link--color--hover);
+  }
+
+  &[data-pressed] {
+    color: var(--link--color--pressed);
+  }
 
   @include focus.focus;
 
@@ -17,34 +26,16 @@
     cursor: pointer;
   }
 
-  @extend .primary;
-}
+  /* Elements */
 
-.inline {
-  font-weight: normal;
-  font-size: var(--font-size--default);
-  text-decoration: underline;
-}
+  .inline {
+    font-weight: normal;
+    font-size: var(--font-size--default);
+    text-decoration: underline;
+  }
 
-.icon {
-  margin-inline-start: var(--link--text-to-icon-spacing);
-  vertical-align: text-bottom;
-}
-
-/* Variants */
-@mixin variant($variant) {
-  .#{$variant}:not([aria-disabled]) {
-    color: var(--link--#{$variant}-color--default);
-
-    &:hover {
-      color: var(--link--#{$variant}-color--hover);
-    }
-
-    &[data-pressed] {
-      color: var(--link--#{$variant}-color--pressed);
-    }
+  .icon {
+    margin-inline-start: var(--link--text-to-icon-spacing);
+    vertical-align: text-bottom;
   }
 }
-
-@include variant(primary);
-@include variant(danger);

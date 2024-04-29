@@ -1,10 +1,6 @@
 import type { ComponentProps, FC, PropsWithChildren } from "react";
 import React from "react";
-import {
-  dynamic,
-  type PropsContext,
-  PropsContextProvider,
-} from "@/lib/propsContext";
+import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import clsx from "clsx";
 import styles from "./HeaderNavigation.module.scss";
 import { EmulatedBoldText } from "@/components/EmulatedBoldText";
@@ -12,26 +8,39 @@ import { EmulatedBoldText } from "@/components/EmulatedBoldText";
 export interface HeaderNavigationProps
   extends PropsWithChildren<ComponentProps<"nav">> {
   className?: string;
+  inverse?: boolean;
 }
 
 export const HeaderNavigation: FC<HeaderNavigationProps> = (props) => {
-  const { children, className, ...rest } = props;
+  const { children, className, inverse, ...rest } = props;
 
-  const rootClassName = clsx(styles.headerNavigation, className);
+  const rootClassName = clsx(
+    styles.headerNavigation,
+    inverse && styles.inverse,
+    className,
+  );
 
   const propsContext: PropsContext = {
     Link: {
-      hoc: (link) => <li>{link}</li>,
-      className: styles.link,
-      unstyled: true,
-      children: dynamic((props) => (
-        <EmulatedBoldText>{props.children}</EmulatedBoldText>
-      )),
+      render: (Link, props) => (
+        <li>
+          <Link {...props} className={styles.link} unstyled>
+            <EmulatedBoldText>{props.children}</EmulatedBoldText>
+          </Link>
+        </li>
+      ),
     },
     Button: {
-      hoc: (button) => <li>{button}</li>,
-      className: styles.button,
-      style: "plain",
+      render: (Button, props) => (
+        <li>
+          <Button
+            {...props}
+            className={styles.button}
+            style="plain"
+            inverse={inverse}
+          />
+        </li>
+      ),
     },
   };
 

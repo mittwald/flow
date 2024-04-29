@@ -7,12 +7,25 @@ import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import * as Aria from "react-aria-components";
 
-export interface HeadingProps extends Aria.HeadingProps, FlowComponentProps {}
+export interface HeadingProps extends Aria.HeadingProps, FlowComponentProps {
+  levelVisual?: number;
+}
 
 export const Heading = flowComponent("Heading", (props) => {
-  const { children, className, level = 2, ref, ...rest } = props;
+  const {
+    children,
+    className,
+    level = 2,
+    levelVisual = level,
+    ref,
+    ...rest
+  } = props;
 
-  const rootClassName = clsx(styles.heading, className);
+  const rootClassName = clsx(
+    styles.heading,
+    levelVisual && styles[`h${levelVisual}`],
+    className,
+  );
 
   const propsContext: PropsContext = {
     Icon: {

@@ -237,3 +237,19 @@ button:
     value: "{disabled-soft-background-color}"
   disabled-soft-content-color:
     value: "{disabled-soft-content-color}"
+
+  # Disabled Inverse
+  disabled-inverse-background-color:
+    value: "{disabled-inverse-background-color}"
+  disabled-inverse-content-color:
+    value: "{disabled-inverse-content-color}"
+
+  # Inverse
+  inverse-background-color:
+    default: "{color.transparent}"
+    hover:
+      value: "{inverse-background-color.hover}"
+    pressed:
+      value: "{inverse-background-color.pressed}"
+  inverse-content-color:
+    value: "{inverse-content-color}"

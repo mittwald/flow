@@ -5,6 +5,7 @@ export interface MdxFileMeta {
   title?: string;
   navTitle?: string;
   description?: string;
+  component?: string;
 }
 
 export interface StaticParams {
@@ -45,6 +46,7 @@ export class MdxFile {
   public getTitle(): string {
     return (
       this.mdxSource.frontmatter.title ??
+      this.mdxSource.frontmatter.component ??
       humanizeString(this.slugs[this.slugs.length - 1])
     );
   }

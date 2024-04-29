@@ -3,6 +3,7 @@ import type {
   FlowComponentProps as FlowComponentPropsOfName,
 } from "@/components/propTypes";
 import type {
+  ComponentProps,
   ComponentType,
   ForwardRefExoticComponent,
   LegacyRef,
@@ -10,20 +11,22 @@ import type {
   RefAttributes,
 } from "react";
 import React, { forwardRef } from "react";
-import type { PropsWithHOC, PropsWithTunnel } from "@/lib/types/props";
-import { useProps } from "@/lib/propsContext";
+import type { PropsWithRender, PropsWithTunnel } from "@/lib/types/props";
+import { ClearPropsContext, useProps } from "@/lib/propsContext";
 import { TunnelEntry } from "@mittwald/react-tunnel";
 
-export type FlowComponentProps<P = unknown> = P &
-  PropsWithTunnel &
-  PropsWithHOC<P>;
+export type FlowComponentProps<C extends FlowComponentName = never> =
+  PropsWithTunnel & PropsWithRender<FlowComponentPropsOfName<C>>;
+
+type FlowComponentImplementationProps<C extends FlowComponentName> = Omit<
+  FlowComponentPropsOfName<C>,
+  keyof FlowComponentProps<C>
+> & {
+  ref?: LegacyRef<never>;
+};
 
 type FlowComponentImplementationType<C extends FlowComponentName> =
-  ComponentType<
-    Omit<FlowComponentPropsOfName<C>, keyof FlowComponentProps> & {
-      ref?: LegacyRef<never>;
-    }
-  >;
+  ComponentType<FlowComponentImplementationProps<C>>;
 
 type FlowComponentType<C extends FlowComponentName> = ForwardRefExoticComponent<
   PropsWithoutRef<FlowComponentPropsOfName<C>> & RefAttributes<never>
@@ -33,16 +36,37 @@ export function flowComponent<C extends FlowComponentName>(
   componentName: C,
   ImplementationComponentType: FlowComponentImplementationType<C>,
 ): FlowComponentType<C> {
-  return forwardRef<never, FlowComponentPropsOfName<C>>((p, ref) => {
-    const { tunnelId, hoc, ...rest } = useProps(
+  return forwardRef<never, FlowComponentPropsOfName<C>>((props, ref) => {
+    const { render, tunnelId, ...propsFromContext } = useProps(
       componentName,
-      p,
-    ) as FlowComponentProps<FlowComponentPropsOfName<C>>;
+      props,
+    ) as FlowComponentProps<C>;
 
-    let element = <ImplementationComponentType {...rest} ref={ref} />;
+    const implementationTypeProps = propsFromContext as ComponentProps<
+      typeof ImplementationComponentType
+    >;
 
-    if (hoc) {
-      element = hoc(element, p);
+    const propsWithRef = {
+      ...implementationTypeProps,
+      ref,
+    };
+
+    let element = <ImplementationComponentType {...propsWithRef} />;
+
+    if (render) {
+      const FlowComponent = flowComponent(
+        componentName,
+        ImplementationComponentType,
+      );
+
+      element = (
+        <ClearPropsContext>
+          {render(
+            FlowComponent as unknown as never,
+            propsWithRef as unknown as never,
+          )}
+        </ClearPropsContext>
+      );
     }
 
     if (tunnelId) {

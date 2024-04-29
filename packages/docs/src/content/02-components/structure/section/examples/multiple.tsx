@@ -10,23 +10,23 @@ import { IconMember } from "@mittwald/flow-react-components/Icons";
   <Section>
     <Heading>
       <IconMember />
-      Personal Information
+      Persönliche Informationen
     </Heading>
     <TextField isRequired defaultValue="John">
-      <Label>First name</Label>
+      <Label>Vorname</Label>
     </TextField>
     <TextField isRequired defaultValue="Doe">
-      <Label>Last name</Label>
+      <Label>Nachname</Label>
     </TextField>
   </Section>
   <Section>
     <Heading>Newsletter</Heading>
     <Text>
-      Upcoming releases, new features and tips about your
-      hosting - we bring you the most important information
-      in your inbox. Subscribe to our newsletter and stay up
-      to date.
+      Kommende Releases, neue Features und Tipps rund um
+      dein Hosting – wir bringen dir das Wichtigste in dein
+      Postfach. Abonniere unseren Newsletter und bleib auf
+      dem Laufenden.
     </Text>
-    <Link href="#">Subscribe</Link>
+    <Link href="#">Newsletter abonnieren</Link>
   </Section>
 </>;

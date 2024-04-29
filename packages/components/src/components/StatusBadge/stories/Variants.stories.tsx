@@ -14,25 +14,22 @@ type Story = StoryObj<typeof StatusBadge>;
 export const Info: Story = {};
 
 export const Success: Story = {
-  render: (props) => (
-    <StatusBadge status="success" {...props}>
-      Success
-    </StatusBadge>
-  ),
+  render: (props) => <StatusBadge {...props}>Success</StatusBadge>,
+  args: {
+    status: "success",
+  },
 };
 
 export const Warning: Story = {
-  render: (props) => (
-    <StatusBadge status="warning" {...props}>
-      Warning
-    </StatusBadge>
-  ),
+  render: (props) => <StatusBadge {...props}>Warning</StatusBadge>,
+  args: {
+    status: "warning",
+  },
 };
 
 export const Danger: Story = {
-  render: (props) => (
-    <StatusBadge status="danger" {...props}>
-      Danger
-    </StatusBadge>
-  ),
+  render: (props) => <StatusBadge {...props}>Danger</StatusBadge>,
+  args: {
+    status: "danger",
+  },
 };

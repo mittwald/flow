@@ -4,7 +4,7 @@ import defaultMeta from "./Default.stories";
 
 const meta: Meta<typeof ProgressBar> = {
   ...defaultMeta,
-  title: "Status/Progress Bar/Variants",
+  title: "Status/ProgressBar/Variants",
 };
 
 export default meta;

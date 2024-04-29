@@ -3,11 +3,12 @@
   flex-direction: column;
   align-items: center;
   width: fit-content;
-}
 
-.boldText {
-  font-weight: var(--font-weight--bold);
-  height: 0;
-  line-height: 0;
-  visibility: hidden;
+  .boldText {
+    font-weight: var(--font-weight--bold);
+    height: 0;
+    line-height: 0;
+    visibility: hidden;
+    overflow-y: clip;
+  }
 }

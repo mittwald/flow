@@ -9,6 +9,10 @@
 
   @include focus.focus;
 
+  .icon {
+    color: var(--radio--icon-color--default);
+  }
+
   &[data-selected],
   &[data-indeterminate] {
     .icon {
@@ -23,8 +27,4 @@
       color: var(--checkbox--icon-color--disabled);
     }
   }
-}
-
-.icon {
-  color: var(--radio--icon-color--default);
 }

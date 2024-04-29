@@ -1,11 +1,13 @@
 import { createContext, useContext } from "react";
 
 interface TabContext {
-  id?: string;
+  id: string;
 }
 
-const tabContext = createContext<TabContext>({});
+const tabContext = createContext<TabContext>({
+  id: "undefined",
+});
 
-export const useTabTabContext = (): TabContext => useContext(tabContext);
+export const useTabContext = (): TabContext => useContext(tabContext);
 
 export const TabContextProvider = tabContext.Provider;

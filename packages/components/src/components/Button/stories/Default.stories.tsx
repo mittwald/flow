@@ -11,16 +11,22 @@ const meta: Meta<typeof Button> = {
   component: Button,
   args: {
     onPress: action("onPress"),
+    style: "solid",
+    variant: "primary",
+    size: "m",
   },
   argTypes: {
     variant: {
       control: "inline-radio",
+      options: ["primary", "accent", "secondary", "danger"],
     },
     style: {
       control: "inline-radio",
+      options: ["plain", "solid", "soft"],
     },
     size: {
       control: "inline-radio",
+      options: ["m", "s"],
     },
   },
   parameters: {
@@ -51,10 +57,11 @@ export const WithIcon: Story = {
 
 export const SmallWithIcon: Story = {
   render: (props) => (
-    <Button {...props} aria-label="Add to favorites" size="s">
+    <Button {...props} aria-label="Add to favorites">
       <IconPlus />
     </Button>
   ),
+  args: { size: "s" },
 };
 
 export const WithTextAndIcon: Story = {
@@ -68,9 +75,27 @@ export const WithTextAndIcon: Story = {
 
 export const SmallWithTextAndIcon: Story = {
   render: (props) => (
-    <Button {...props} size="s">
+    <Button {...props}>
       <Text>Add email address</Text>
       <IconChevronDown />
     </Button>
   ),
+  args: {
+    size: "s",
+  },
+};
+
+export const Inverse: Story = {
+  args: { inverse: true },
+  parameters: {
+    backgrounds: {
+      default: "dark",
+      values: [
+        {
+          name: "dark",
+          value: "#002A7B",
+        },
+      ],
+    },
+  },
 };

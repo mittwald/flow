@@ -1,7 +1,7 @@
 import type { FC, PropsWithChildren } from "react";
 import React from "react";
 import * as Aria from "react-aria-components";
-import styles from "./BreadcrumbItem.module.scss";
+import styles from "../../Breadcrumb.module.scss";
 import clsx from "clsx";
 import { IconChevronRight } from "@/components/Icon/components/icons";
 

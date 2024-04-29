@@ -4,13 +4,22 @@ import StatusIcon from "../StatusIcon";
 const meta: Meta<typeof StatusIcon> = {
   title: "Status/StatusIcon",
   component: StatusIcon,
+  parameters: {
+    controls: { exclude: ["render", "tunnelId"] },
+  },
   argTypes: {
+    size: {
+      control: "inline-radio",
+      options: ["s", "m", "l"],
+    },
     status: {
       control: "inline-radio",
+      options: ["info", "success", "warning", "danger"],
     },
   },
-  parameters: {
-    controls: { exclude: ["className"] },
+  args: {
+    size: "m",
+    status: "info",
   },
 };
 

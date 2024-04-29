@@ -8,12 +8,12 @@ import {
   IconSearch,
 } from "@mittwald/flow-react-components/Icons";
 import ContextMenu, {
-  ContextMenuItem,
   ContextMenuTrigger,
 } from "@mittwald/flow-react-components/ContextMenu";
 import Avatar from "@mittwald/flow-react-components/Avatar";
 import { Image } from "@mittwald/flow-react-components/Image";
 import Text from "@mittwald/flow-react-components/Text";
+import { MenuItem } from "@mittwald/flow-react-components/MenuItem";
 
 <HeaderNavigation aria-label="Header navigation">
   <Button>
@@ -35,14 +35,14 @@ import Text from "@mittwald/flow-react-components/Text";
       </Avatar>
     </Button>
     <ContextMenu>
-      <ContextMenuItem>
+      <MenuItem>
         <IconSettings />
-        <Text>Profile</Text>
-      </ContextMenuItem>
-      <ContextMenuItem>
+        <Text>Profil</Text>
+      </MenuItem>
+      <MenuItem>
         <IconLogout />
         <Text>Logout</Text>
-      </ContextMenuItem>
+      </MenuItem>
     </ContextMenu>
   </ContextMenuTrigger>
 </HeaderNavigation>;

@@ -14,7 +14,8 @@ export const ChildPropsContextProvider: FC<ChildPropsContextProviderProps> = (
 ) => {
   const { children, store: storeFromProps, scope } = props;
 
-  const store = storeFromProps ?? ChildPropsStore.useNew(scope ?? "undefined");
+  const newStore = ChildPropsStore.useNew(scope ?? "undefined");
+  const store = storeFromProps ?? newStore;
 
   const parentContext = useContext(childPropsContext);
   const mergedContext = useMemo(

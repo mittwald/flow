@@ -4,51 +4,58 @@
     "label value"
     "bar bar";
   grid-template-columns: 1fr auto;
-  gap: var(--progress-bar--label-to-bar-spacing);
+  row-gap: var(--progress-bar--label-to-bar-spacing);
+  column-gap: var(--progress-bar--label-to-value-spacing);
   width: 100%;
   font-size: var(--progress-bar--font-size);
 
   @extend .info;
 
+  /* Elements */
+
   .label {
     grid-area: label;
   }
-}
 
-.value {
-  grid-area: value;
-  font-weight: var(--progress-bar--value-font-weight);
-}
-
-.bar {
-  grid-area: bar;
-  height: var(--progress-bar--bar-height);
-  border-radius: var(--progress-bar--bar-border-radius);
-  box-shadow: inset 0 0 0 var(--progress-bar--bar-border-width)
-    var(--progress-bar--bar-border-color);
-  overflow: hidden;
-}
-
-.size-s {
-  .bar {
-    height: var(--progress-bar--bar-height-small);
+  .value {
+    grid-area: value;
+    font-weight: var(--progress-bar--value-font-weight);
   }
-}
 
-.fill {
-  height: 100%;
-}
+  .bar {
+    grid-area: bar;
+    height: var(--progress-bar--bar-height);
+    border-radius: var(--progress-bar--bar-border-radius);
+    box-shadow: inset 0 0 0 var(--progress-bar--bar-border-width)
+      var(--progress-bar--bar-border-color);
+    overflow: hidden;
+  }
 
-/* Variants */
-@mixin status($status) {
-  .#{$status} {
-    .fill {
-      background: var(--progress-bar--#{$status}-fill-background-color);
+  .fill {
+    height: 100%;
+  }
+
+  /* Size */
+
+  .size-s {
+    font-size: var(--progress-bar--font-size-small);
+    .bar {
+      height: var(--progress-bar--bar-height-small);
     }
   }
-}
 
-@include status(info);
-@include status(success);
-@include status(danger);
-@include status(warning);
+  /* Variants */
+
+  @mixin status($status) {
+    &.#{$status} {
+      .fill {
+        background: var(--progress-bar--#{$status}-fill-background-color);
+      }
+    }
+  }
+
+  @include status(info);
+  @include status(success);
+  @include status(danger);
+  @include status(warning);
+}

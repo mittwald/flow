@@ -1,0 +1,3 @@
+loading-spinner:
+  transition-duration:
+    value: 2000ms

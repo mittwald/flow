@@ -1,6 +1,5 @@
 import type { FC, PropsWithChildren } from "react";
-import { useId } from "react";
-import React from "react";
+import React, { useId } from "react";
 import * as Aria from "react-aria-components";
 import styles from "./Tab.module.scss";
 import clsx from "clsx";
@@ -26,17 +25,15 @@ export const Tab: FC<TabProps> = (props) => {
   const id = idFromProps ?? generatedId;
 
   return (
-    <TunnelEntry id="TabPanels">
-      <TabContextProvider value={{ id }}>
-        <Aria.TabPanel
-          className={rootClassName}
-          shouldForceMount={shouldForceMount}
-          id={id}
-          {...rest}
-        >
-          {children}
-        </Aria.TabPanel>
-      </TabContextProvider>
+    <TunnelEntry id="Panels">
+      <Aria.TabPanel
+        className={rootClassName}
+        shouldForceMount={shouldForceMount}
+        id={id}
+        {...rest}
+      >
+        <TabContextProvider value={{ id }}>{children}</TabContextProvider>
+      </Aria.TabPanel>
     </TunnelEntry>
   );
 };

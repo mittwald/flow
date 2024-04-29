@@ -1,6 +1,6 @@
 breadcrumb-item:
   color:
-    value: "{color.default}"
+    value: "{content.color}"
   padding-x:
     value: "{size-px.xs}"
   font-size:

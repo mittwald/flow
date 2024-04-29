@@ -31,7 +31,7 @@ const HeaderNavigation: FC<Props> = (props) => {
   ));
 
   return (
-    <HeaderNavigationComponent aria-label="Main navigation">
+    <HeaderNavigationComponent aria-label="Header navigation">
       {navigationItems}
     </HeaderNavigationComponent>
   );

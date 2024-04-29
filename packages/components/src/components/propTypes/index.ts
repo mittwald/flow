@@ -18,7 +18,7 @@ import type { StatusBadgeProps } from "@/components/StatusBadge";
 import type { ButtonGroupProps } from "@/components/ButtonGroup";
 import type { AvatarProps } from "@/components/Avatar";
 import type { ActionProps } from "@/components/Action";
-import type { ContextMenuProps } from "@/components/ContextMenu";
+import type { ContextMenuProps, MenuItemProps } from "@/components/ContextMenu";
 import type { OptionProps, SelectProps } from "@/components/Select";
 import type {
   RadioButtonProps,
@@ -31,6 +31,8 @@ import type { TextAreaProps } from "@/components/TextArea";
 import type { CheckboxGroupProps } from "@/components/CheckboxGroup";
 import type { CheckboxProps } from "@/components/Checkbox";
 import type { CheckboxButtonProps } from "@/components/CheckboxButton";
+import type { TabsProps } from "@/components/Tabs";
+import type { ModalProps } from "@/components/Modal";
 
 export * from "./types";
 
@@ -40,8 +42,8 @@ export interface FlowComponentPropsTypes {
   Button: ButtonProps;
   ButtonGroup: ButtonGroupProps;
   Checkbox: CheckboxProps;
-  CheckboxGroup: CheckboxGroupProps;
   CheckboxButton: CheckboxButtonProps;
+  CheckboxGroup: CheckboxGroupProps;
   Content: ContentProps;
   ContextMenu: ContextMenuProps;
   CopyButton: CopyButtonProps;
@@ -56,6 +58,8 @@ export interface FlowComponentPropsTypes {
   Label: LabelProps;
   LayoutCard: LayoutCardProps;
   Link: LinkProps;
+  MenuItem: MenuItemProps;
+  Modal: ModalProps;
   NumberField: NumberFieldProps;
   Option: OptionProps;
   Radio: RadioProps;
@@ -64,6 +68,7 @@ export interface FlowComponentPropsTypes {
   Select: SelectProps;
   StatusBadge: StatusBadgeProps;
   Switch: SwitchProps;
+  Tabs: TabsProps;
   Text: TextProps;
   TextArea: TextAreaProps;
   TextField: TextFieldProps;
@@ -78,8 +83,8 @@ const propsContextSupportingComponentsMap: Record<
   Button: true,
   ButtonGroup: true,
   Checkbox: true,
-  CheckboxGroup: true,
   CheckboxButton: true,
+  CheckboxGroup: true,
   Content: true,
   ContextMenu: true,
   CopyButton: true,
@@ -94,6 +99,8 @@ const propsContextSupportingComponentsMap: Record<
   Label: true,
   LayoutCard: true,
   Link: true,
+  MenuItem: true,
+  Modal: true,
   NumberField: true,
   Radio: true,
   Option: true,
@@ -102,6 +109,7 @@ const propsContextSupportingComponentsMap: Record<
   StatusBadge: true,
   Select: true,
   Switch: true,
+  Tabs: true,
   TestComponent: true,
   Text: true,
   TextArea: true,

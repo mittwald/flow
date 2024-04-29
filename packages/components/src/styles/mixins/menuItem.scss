@@ -3,13 +3,12 @@
 @mixin menuItem {
   display: flex;
   flex-direction: row;
-  color: var(--menu-item--color--default);
-
   border: none;
   border-radius: var(--menu-item--corner-radius);
   background-color: var(--menu-item--background-color--default);
   padding: var(--menu-item--padding-y) var(--menu-item--padding-x);
   cursor: default;
+  align-items: center;
 
   @include focus.focus;
 
@@ -39,11 +38,13 @@
     outline-style: solid;
   }
 
-  &[aria-current],
-  &[data-selected]:not([role="menuitemcheckbox"]):not([role="menuitemradio"]) {
-    background-color: var(--menu-item--background-color--current);
-    font-weight: var(--menu-item--font-weight--current);
-    color: var(--menu-item--color--current);
+  &:not(:has(.controlIcon)) {
+    &[aria-current],
+    &[data-selected] {
+      background-color: var(--menu-item--background-color--current);
+      font-weight: var(--menu-item--font-weight--current);
+      color: var(--menu-item--color--current);
+    }
   }
 
   &[aria-current],
@@ -51,5 +52,10 @@
     .icon {
       color: var(--menu-item--icon-color--current);
     }
+  }
+
+  &[aria-disabled] {
+    background-color: var(--menu-item--disabled-background-color);
+    color: var(--menu-item--disabled-color);
   }
 }

@@ -15,7 +15,7 @@ import { Image } from "@/components/Image";
 import { dummyText } from "@/lib/dev/dummyText";
 import Avatar from "@/components/Avatar";
 import ContextMenu, {
-  ContextMenuItem,
+  MenuItem,
   ContextMenuTrigger,
 } from "@/components/ContextMenu";
 
@@ -25,13 +25,6 @@ const meta: Meta<typeof HeaderNavigation> = {
   parameters: {
     controls: { exclude: ["className"] },
   },
-};
-
-export default meta;
-
-type Story = StoryObj<typeof HeaderNavigation>;
-
-export const Default: Story = {
   render: (props) => (
     <HeaderNavigation aria-label="Header navigation" {...props}>
       <Link href="#">Getting startet</Link>
@@ -44,6 +37,12 @@ export const Default: Story = {
     </HeaderNavigation>
   ),
 };
+
+export default meta;
+
+type Story = StoryObj<typeof HeaderNavigation>;
+
+export const Default: Story = {};
 
 export const WithContextMenu: Story = {
   render: (props) => (
@@ -64,16 +63,31 @@ export const WithContextMenu: Story = {
           </Avatar>
         </Button>
         <ContextMenu>
-          <ContextMenuItem>
+          <MenuItem>
             <IconSettings />
             <Text>Profile</Text>
-          </ContextMenuItem>
-          <ContextMenuItem>
+          </MenuItem>
+          <MenuItem>
             <IconLogout />
             <Text>Logout</Text>
-          </ContextMenuItem>
+          </MenuItem>
         </ContextMenu>
       </ContextMenuTrigger>
     </HeaderNavigation>
   ),
+};
+
+export const Inverse: Story = {
+  args: { inverse: true },
+  parameters: {
+    backgrounds: {
+      default: "dark",
+      values: [
+        {
+          name: "dark",
+          value: "#002A7B",
+        },
+      ],
+    },
+  },
 };

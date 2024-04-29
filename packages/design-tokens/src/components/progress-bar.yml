@@ -1,10 +1,14 @@
 progress-bar:
   font-size:
+    value: "{font-size.m}"
+  font-size-small:
     value: "{font-size.s}"
   value-font-weight:
     value: "{font-weight.bold}"
   label-to-bar-spacing:
     value: "{size-rem.xs}"
+  label-to-value-spacing:
+    value: "{size-rem.m}"
 
   bar-height:
     value: "{size-rem.s}"

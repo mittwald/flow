@@ -1,5 +1,6 @@
 import CheckboxButton from "@mittwald/flow-react-components/CheckboxButton";
 
 <CheckboxButton>
-  Consent to terms and conditions
+  Ich stimme den AGBs zu und bestätige, dass ich die
+  Datenschutzhinweise zur Kenntnis genommen habe.
 </CheckboxButton>;

@@ -2,18 +2,17 @@ import { action, makeObservable, observable } from "mobx";
 import { useContext, useRef } from "react";
 import useSelector from "@/lib/mobx/useSelector";
 import { childPropsContext } from "@/lib/childProps/context";
-import invariant from "invariant";
 
 export type ChildProps = object;
 
 export class ChildPropsStore {
-  public children: Record<string, ChildProps> = {};
+  public children = observable.map<string, ChildProps>({}, { deep: false });
   public readonly scope: string;
 
   public constructor(scope: string) {
     this.scope = scope;
     makeObservable(this, {
-      children: observable,
+      children: observable.shallow,
       setProps: action,
       removeProps: action,
     });
@@ -23,24 +22,26 @@ export class ChildPropsStore {
     return useRef(new ChildPropsStore(scope)).current;
   }
 
-  public static useFromContext(scope: string): ChildPropsStore {
-    const store = useContext(childPropsContext)[scope];
-    invariant(!!store, `ChildPropsStore for ${scope} not found`);
-    return store;
+  public static useFromContext(scope: string): ChildPropsStore | undefined {
+    return useContext(childPropsContext)[scope];
+  }
+
+  public static use(scope: string): ChildPropsStore {
+    const fromContext = ChildPropsStore.useFromContext(scope);
+    const newContext = ChildPropsStore.useNew(scope);
+    return fromContext ?? newContext;
   }
 
   public setProps(childId: string, props: ChildProps): void {
-    if (this.children[childId] !== props) {
-      this.children[childId] = props;
-    }
+    this.children.set(childId, props);
   }
 
   public removeProps(childId: string): void {
-    delete this.children[childId];
+    this.children.delete(childId);
   }
 
   public getPropsArray<T>(): T[] {
-    return Object.values(this.children) as T[];
+    return Array.from(this.children.values()) as T[];
   }
 
   public getProp<T>(name: string): T | undefined {
@@ -53,6 +54,10 @@ export class ChildPropsStore {
 
   public useProp<T>(name: string): T | undefined {
     return useSelector(() => this.getProp(name));
+  }
+
+  public useProps<T>(): T | undefined {
+    return this.usePropsArray<T>()[0];
   }
 
   public usePropsArray<T>(): T[] {
