@@ -1,0 +1,32 @@
+name: Publish Storybook to GitHub Pages
+
+on:
+  push:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout ⬇️
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node 🎛️
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "yarn"
+          registry-url: "https://registry.npmjs.org"
+
+      - uses: bitovi/github-actions-storybook-to-github-pages@v1.0.3
+        with:
+          install_command: yarn install --immutable
+          build_command: yarn components build
+          path: packages/components/storybook-static
+          checkout: false
