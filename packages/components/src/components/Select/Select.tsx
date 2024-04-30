@@ -13,13 +13,14 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { Options } from "@/components/Select/components/Options";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import type { Key } from "react-aria-components";
+import type { PropsWithClassName } from "@/lib/types/props";
 
 export interface SelectProps
   extends PropsWithChildren<
       Omit<Aria.SelectProps<{ example: string }>, "children" | "className">
     >,
-    FlowComponentProps {
-  className?: string;
+    FlowComponentProps,
+    PropsWithClassName {
   onChange?: (value: string) => void;
 }
 

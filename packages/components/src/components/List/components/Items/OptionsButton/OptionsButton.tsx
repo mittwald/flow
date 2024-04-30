@@ -5,10 +5,9 @@ import { IconContextMenu } from "@/components/Icon/components/icons";
 import { ContextMenuTrigger } from "@/components/ContextMenu";
 import locales from "../../../locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
+import type { PropsWithClassName } from "@/lib/types/props";
 
-interface Props extends PropsWithChildren {
-  className?: string;
-}
+interface Props extends PropsWithChildren, PropsWithClassName {}
 
 export const OptionsButton: FC<Props> = (props) => {
   const { className, children } = props;
