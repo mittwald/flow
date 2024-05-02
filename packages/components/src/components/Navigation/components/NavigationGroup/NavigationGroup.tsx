@@ -34,7 +34,7 @@ export const NavigationGroup: FC<NavigationGroupProps> = (props) => {
       <PropsContextProvider mergeInParentContext props={propsContext}>
         <TunnelProvider>
           <Accordion defaultExpanded className={rootClassName}>
-            <TunnelExit id="label" />
+            <TunnelExit id="Label" />
             <Content clearPropsContext={false}>
               <ul>{children}</ul>
             </Content>
@@ -46,18 +46,18 @@ export const NavigationGroup: FC<NavigationGroupProps> = (props) => {
 
   return (
     <PropsContextProvider mergeInParentContext props={propsContext}>
-    <TunnelProvider>
-      <section
-        aria-labelledby={generatedId}
-        className={rootClassName}
-        {...rest}
-      >
-        <PropsContextProvider mergeInParentContext props={propsContext}>
-          <TunnelExit id="Label" />
-          <ul>{children}</ul>
-        </PropsContextProvider>
-      </section>
-    </TunnelProvider>
+      <TunnelProvider>
+        <section
+          aria-labelledby={generatedId}
+          className={rootClassName}
+          {...rest}
+        >
+          <PropsContextProvider mergeInParentContext props={propsContext}>
+            <TunnelExit id="Label" />
+            <ul>{children}</ul>
+          </PropsContextProvider>
+        </section>
+      </TunnelProvider>
     </PropsContextProvider>
   );
 };
