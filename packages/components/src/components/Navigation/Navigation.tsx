@@ -7,11 +7,11 @@ import { NavigationGroup } from "@/components/Navigation";
 import { Wrap } from "@/components/Wrap";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
+import type { PropsWithClassName } from "@/lib/types/props";
 
 export interface NavigationProps
-  extends PropsWithChildren<ComponentProps<"nav">> {
-  className?: string;
-}
+  extends PropsWithChildren<ComponentProps<"nav">>,
+    PropsWithClassName {}
 
 export const Navigation: FC<NavigationProps> = (props) => {
   const { className, children, ...rest } = props;
@@ -21,13 +21,12 @@ export const Navigation: FC<NavigationProps> = (props) => {
   const hasGroups = !!deepFindOfType(children, NavigationGroup);
 
   const propsContext: PropsContext = {
-    Label: {
-      className: styles.label,
-    },
     Link: {
-      hoc: (link) => <li>{link}</li>,
-      className: styles.item,
-      unstyled: true,
+      render: (Link, props) => (
+        <li>
+          <Link {...props} className={styles.item} unstyled />
+        </li>
+      ),
       Text: {
         className: styles.text,
       },
@@ -41,7 +40,7 @@ export const Navigation: FC<NavigationProps> = (props) => {
     <nav className={rootClassName} role="navigation" {...rest}>
       <PropsContextProvider props={propsContext}>
         <Wrap if={!hasGroups}>
-          <NavigationGroup>{children}</NavigationGroup>
+          <ul>{children}</ul>
         </Wrap>
       </PropsContextProvider>
     </nav>

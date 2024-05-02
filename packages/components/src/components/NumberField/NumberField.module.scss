@@ -7,28 +7,27 @@
   grid-template-areas:
     "input increment"
     "input decrement";
-}
 
-.input {
-  @include formControl.formControl();
-  grid-area: input;
-}
+  .input {
+    @include formControl.formControl();
+    grid-area: input;
+  }
 
-.decrementButton {
-  grid-area: decrement;
-}
+  .decrementButton {
+    grid-area: decrement;
+  }
 
-.incrementButton {
-  grid-area: increment;
-}
+  .incrementButton {
+    grid-area: increment;
+  }
 
-.group.group {
   .decrementButton,
   .incrementButton {
     border-width: var(--form-control--border-width);
     border-color: var(--form-control--border-color--default);
     border-style: solid;
   }
+
   &[aria-invalid] {
     .decrementButton,
     .incrementButton {
@@ -50,30 +49,22 @@
 }
 
 @media (pointer: fine) {
-  .input {
-    border-start-end-radius: 0;
-    border-end-end-radius: 0;
-  }
-
-  .incrementButton {
-    .coarsePointerIcon {
-      display: none;
+  .group {
+    .input {
+      border-start-end-radius: 0;
+      border-end-end-radius: 0;
     }
-  }
 
-  .decrementButton {
-    .coarsePointerIcon {
-      display: none;
-    }
-  }
-
-  .group.group.group {
-    .decrementButton,
-    .incrementButton {
+    .incrementButton,
+    .decrementButton {
       border-inline-start: none;
       border-start-start-radius: 0;
       border-end-start-radius: 0;
       padding-block: 0;
+
+      .coarsePointerIcon {
+        display: none;
+      }
     }
 
     .decrementButton {
@@ -97,34 +88,24 @@
     border-radius: 0;
   }
 
-  .decrementButton {
+  .decrementButton,
+  .incrementButton {
+    padding-inline: var(--form-control--padding-x);
+
     :not(.touchIcon) {
       display: none;
     }
+  }
+
+  .decrementButton {
+    border-start-end-radius: 0;
+    border-end-end-radius: 0;
+    border-inline-end: none;
   }
 
   .incrementButton {
-    :not(.touchIcon) {
-      display: none;
-    }
-  }
-
-  .group.group {
-    .decrementButton,
-    .incrementButton {
-      padding-inline: var(--form-control--padding-x);
-    }
-
-    .decrementButton {
-      border-start-end-radius: 0;
-      border-end-end-radius: 0;
-      border-inline-end: none;
-    }
-
-    .incrementButton {
-      border-start-start-radius: 0;
-      border-end-start-radius: 0;
-      border-inline-start: none;
-    }
+    border-start-start-radius: 0;
+    border-end-start-radius: 0;
+    border-inline-start: none;
   }
 }

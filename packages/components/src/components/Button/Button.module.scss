@@ -14,133 +14,164 @@
   transition-property: color, background-color;
   transition-duration: var(--transition--duration--default);
   max-width: 100%;
-  display: flex;
+  display: grid;
   align-items: center;
-  column-gap: var(--button--text-to-icon-spacing);
+  grid-template-areas: "content";
+  width: fit-content;
 
   @include focus.focus;
 
   @extend .primary;
   @extend .solid;
 
-  &:has(.avatar) {
+  /* Elements */
+  .content {
+    display: flex;
+    column-gap: var(--button--text-to-icon-spacing);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .content,
+  .stateIcon {
+    grid-area: content;
+  }
+
+  .stateIcon {
+    color: var(--button--pending-icon-color);
+    justify-self: center;
+  }
+
+  &:where(:has(.avatar)) {
     padding: 0;
     border-radius: var(--corner-radius--round);
   }
 
-  &:has(.icon):not(:has(.text)) {
+  &:where(:has(.icon):not(:has(.text))) {
     padding: var(--button--padding);
   }
 
-  &:has(.content) {
-    display: grid;
-    justify-content: center;
-    align-items: center;
-    grid-template-areas: "content";
-  }
-}
-
-.content {
-  display: flex;
-  column-gap: var(--button--text-to-icon-spacing);
-}
-
-.content,
-.stateIcon {
-  grid-area: content;
-}
-
-.text {
-  @include ellipsis.ellipsis;
-  display: block;
-}
-
-.size-s {
-  font-size: var(--button--font-size-s);
-  padding-block: var(--button--padding-s-squished-y);
-  padding-inline: var(--button--padding-s-squished-x);
-  column-gap: var(--button--text-to-icon-spacing-s);
-
-  &:has(.icon):not(:has(.text)) {
-    padding: var(--button--padding-s);
+  &:where(:has(.text) .icon) {
+    margin-inline-start: var(--button--text-to-icon-spacing);
   }
 
-  .content {
-    column-gap: var(--button--text-to-icon-spacing-s);
-  }
-}
+  /* States */
 
-.stateIcon {
-  color: var(--button--pending-icon-color);
-  justify-self: center;
-}
-
-.isSucceeded {
-  .stateIcon {
-    color: var(--button--succeeded-icon-color);
-  }
-}
-
-.isFailed {
-  .stateIcon {
-    color: var(--button--failed-icon-color);
-  }
-}
-
-.isPending,
-.isFailed,
-.isSucceeded {
-  .content {
-    visibility: hidden;
-  }
-  &.plain {
-    .content:has(.text) {
-      visibility: visible;
+  &.isSucceeded {
+    .stateIcon {
+      color: var(--button--succeeded-icon-color);
     }
   }
-}
 
-/* Variants */
-@mixin variant($variant, $style) {
-  .#{$variant}.#{$style} {
-    background-color: var(
-      --button--#{$variant}-#{$style}-background-color--default
-    );
-    color: var(--button--#{$variant}-#{$style}-content-color--default);
+  &.isFailed {
+    .stateIcon {
+      color: var(--button--failed-icon-color);
+    }
+  }
+
+  &.isPending,
+  &.isFailed,
+  &.isSucceeded {
+    .content {
+      opacity: 0;
+    }
+    &.plain {
+      .content:has(.text) {
+        opacity: 1;
+      }
+    }
+  }
+
+  /* Size */
+
+  &:where(.size-s) {
+    font-size: var(--button--font-size-s);
+    padding-block: var(--button--padding-s-squished-y);
+    padding-inline: var(--button--padding-s-squished-x);
+    column-gap: var(--button--text-to-icon-spacing-s);
+
+    &:where(:has(.icon):not(:has(.text))) {
+      padding: var(--button--padding-s);
+    }
+
+    .content {
+      column-gap: var(--button--text-to-icon-spacing-s);
+    }
+  }
+
+  /* Variants */
+
+  @mixin variant($color, $variant) {
+    &:where(.#{$color}.#{$variant}) {
+      background-color: var(
+        --button--#{$color}-#{$variant}-background-color--default
+      );
+
+      color: var(--button--#{$color}-#{$variant}-content-color--default);
+
+      &:hover {
+        background-color: var(
+          --button--#{$color}-#{$variant}-background-color--hover
+        );
+
+        color: var(--button--#{$color}-#{$variant}-content-color--hover);
+      }
+
+      &[data-pressed] {
+        background-color: var(
+          --button--#{$color}-#{$variant}-background-color--pressed
+        );
+
+        color: var(--button--#{$color}-#{$variant}-content-color--pressed);
+      }
+
+      &[disabled],
+      &.ariaDisabled,
+      &.isPending,
+      &.isFailed,
+      &.isSucceeded {
+        background-color: var(--button--disabled-#{$variant}-background-color);
+        color: var(--button--disabled-#{$variant}-content-color);
+      }
+    }
+  }
+
+  @include variant(primary, solid);
+  @include variant(accent, solid);
+  @include variant(danger, solid);
+  @include variant(secondary, solid);
+  @include variant(primary, plain);
+  @include variant(accent, plain);
+  @include variant(danger, plain);
+  @include variant(secondary, plain);
+  @include variant(primary, soft);
+  @include variant(accent, soft);
+  @include variant(danger, soft);
+  @include variant(secondary, soft);
+
+  /* Inverse */
+
+  &:where(.inverse) {
+    background-color: var(--button--inverse-background-color-default);
+    color: var(--button--inverse-content-color);
 
     &:hover {
-      background-color: var(
-        --button--#{$variant}-#{$style}-background-color--hover
-      );
-      color: var(--button--#{$variant}-#{$style}-content-color--hover);
+      background-color: var(--button--inverse-background-color--hover);
+      color: var(--button--inverse-content-color);
     }
 
     &[data-pressed] {
-      background-color: var(
-        --button--#{$variant}-#{$style}-background-color--pressed
-      );
-      color: var(--button--#{$variant}-#{$style}-content-color--pressed);
+      background-color: var(--button--inverse-background-color--pressed);
+      color: var(--button--inverse-content-color);
     }
 
     &[disabled],
+    &.ariaDisabled,
     &.isPending,
     &.isFailed,
     &.isSucceeded {
-      background-color: var(--button--disabled-#{$style}-background-color);
-      color: var(--button--disabled-#{$style}-content-color);
+      background-color: var(--button--disabled-inverse-background-color);
+      color: var(--button--disabled-inverse-content-color);
     }
   }
 }
-
-@include variant(primary, solid);
-@include variant(accent, solid);
-@include variant(danger, solid);
-@include variant(secondary, solid);
-@include variant(primary, plain);
-@include variant(accent, plain);
-@include variant(danger, plain);
-@include variant(secondary, plain);
-@include variant(primary, soft);
-@include variant(accent, soft);
-@include variant(danger, soft);
-@include variant(secondary, soft);

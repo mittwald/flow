@@ -1,6 +1,8 @@
 import { createContext } from "react";
-import { OverlayState } from "@/lib/controller/overlay/OverlayState";
+import type { OverlayController } from "@/lib/controller/overlay/OverlayController";
 
-export const overlayContext = createContext<OverlayState>(new OverlayState());
+export const overlayContext = createContext<OverlayController | undefined>(
+  undefined,
+);
 
 export const OverlayContextProvider = overlayContext.Provider;

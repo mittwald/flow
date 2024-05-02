@@ -1,20 +1,20 @@
 @use "@/styles/mixins/formControl.scss";
 
 .select {
+  .toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: normal;
+    font-size: var(--font-size--default);
+
+    @include formControl.formControl();
+  }
+
   &[data-invalid] {
     .toggle {
       border-color: var(--form-control--border-color--invalid);
       background-color: var(--form-control--background-color--invalid);
     }
   }
-}
-
-.toggle {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-weight: normal;
-  font-size: var(--font-size--default);
-
-  @include formControl.formControl();
 }

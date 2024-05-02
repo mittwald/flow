@@ -11,6 +11,8 @@ import { useLocalizedStringFormatter } from "react-aria";
 import type { PropsWithStatus, Status } from "@/lib/types/props";
 import type { IconProps } from "@/components/Icon";
 import { ClearPropsContext } from "@/lib/propsContext";
+import clsx from "clsx";
+import styles from "./StatusIcon.module.scss";
 
 export interface StatusIconProps extends PropsWithStatus, IconProps {}
 
@@ -22,17 +24,23 @@ const icons: Record<Status, ComponentType> = {
 };
 
 export const StatusIcon: FC<StatusIconProps> = (props) => {
-  const { status = "info", ...rest } = props;
+  const { status = "info", className, ...rest } = props;
+
+  const rootClassName = clsx(styles.statusIcon, styles[status], className);
 
   const stringFormatter = useLocalizedStringFormatter(locales);
 
-  const ariaLabel = stringFormatter.format(`statusIcon.${status}`);
-
   const Icon = icons[status];
+
+  const iconProps: IconProps = {
+    className: rootClassName,
+    "aria-label": stringFormatter.format(`statusIcon.${status}`),
+    ...rest,
+  };
 
   return (
     <ClearPropsContext>
-      <Icon aria-label={ariaLabel} {...rest} />
+      <Icon {...iconProps} />
     </ClearPropsContext>
   );
 };

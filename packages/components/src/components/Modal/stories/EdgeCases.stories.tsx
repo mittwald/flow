@@ -10,6 +10,7 @@ import { ButtonGroup } from "@/components/ButtonGroup";
 import { dummyText } from "@/lib/dev/dummyText";
 import Heading from "@/components/Heading";
 import { Action } from "@/components/Action";
+import { useOverlayController } from "@/lib/controller";
 
 const meta: Meta<typeof Modal> = {
   ...defaultMeta,
@@ -22,7 +23,7 @@ type Story = StoryObj<typeof Modal>;
 
 export const LongContent: Story = {
   render: (props) => (
-    <Modal {...props} defaultOpen>
+    <Modal {...props} controller={useOverlayController({ defaultOpen: true })}>
       <Heading>{dummyText.short}</Heading>
       <Content>
         <Section>
@@ -42,9 +43,9 @@ export const LongContent: Story = {
         </Section>
       </Content>
       <ButtonGroup>
-        <Action closeModal>
-          <Button variant="accent">Create customer</Button>
-          <Button style="soft" variant="secondary">
+        <Action closeOverlay>
+          <Button color="accent">Create customer</Button>
+          <Button variant="soft" color="secondary">
             Abort
           </Button>
         </Action>

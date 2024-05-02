@@ -31,7 +31,7 @@ export const FilterPicker: FC<Props> = (props) => {
 
   return (
     <Aria.MenuTrigger>
-      <Button style="soft" size="s" variant="secondary">
+      <Button variant="soft" size="s" color="secondary">
         <Text>{filter.name ?? filter.property}</Text>
         <IconChevronDown />
       </Button>

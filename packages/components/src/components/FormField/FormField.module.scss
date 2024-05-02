@@ -2,34 +2,38 @@
   display: flex;
   flex-direction: column;
   min-width: 0;
-}
 
-/* Elements */
-.label {
-  order: 1;
-  margin-bottom: var(--form-control--label-to-control-spacing);
-}
+  /* Elements */
 
-.fieldError,
-.customFieldError,
-.fieldDescription {
-  order: 3;
-  margin-top: var(--form-control--control-to-info-spacing);
-}
+  .label {
+    order: 1;
+    margin-bottom: var(--form-control--label-to-control-spacing);
+  }
 
-/* With field error */
-.formField:has(.fieldError) {
+  .fieldError,
+  .customFieldError,
   .fieldDescription {
+    order: 3;
+    margin-top: var(--form-control--control-to-info-spacing);
+  }
+
+  /* With field error */
+
+  &:has(.fieldError) {
+    .fieldDescription {
+      display: none;
+    }
+  }
+
+  /* With custom field error */
+
+  &:has(.customFieldError) .fieldError {
     display: none;
   }
-}
 
-/* With custom field error */
-.formField:has(.customFieldError) .fieldError {
-  display: none;
-}
+  /* Disabled */
 
-/* Disabled */
-.formField[data-disabled] .label {
-  color: var(--label--color--disabled);
+  &[data-disabled] .label {
+    color: var(--label--color--disabled);
+  }
 }

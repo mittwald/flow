@@ -11,9 +11,9 @@ import ContextMenu, {
   ContextMenuTrigger,
 } from "@mittwald/flow-react-components/ContextMenu";
 import Avatar from "@mittwald/flow-react-components/Avatar";
-import { Image } from "@mittwald/flow-react-components/Image";
+import Image from "@mittwald/flow-react-components/Image";
 import Text from "@mittwald/flow-react-components/Text";
-import { MenuItem } from "@mittwald/flow-react-components/MenuItem";
+import MenuItem from "@mittwald/flow-react-components/MenuItem";
 
 <HeaderNavigation aria-label="Header navigation">
   <Button>

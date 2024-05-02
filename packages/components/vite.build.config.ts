@@ -56,6 +56,9 @@ export default defineConfig(
           Modal: "./src/components/Modal/index.ts",
           Navigation: "./src/components/Navigation/index.ts",
           NumberField: "./src/components/NumberField/index.ts",
+          OverlayTrigger:
+            "./src/components/Overlay/components/OverlayTrigger/index.ts",
+          OffCanvas: "./src/components/OffCanvas/index.ts",
           Popover: "./src/components/Popover/index.ts",
           ProgressBar: "./src/components/ProgressBar/index.ts",
           RadioGroup: "./src/components/RadioGroup/index.ts",
@@ -70,6 +73,7 @@ export default defineConfig(
           TextField: "./src/components/TextField/index.ts",
           Tooltip: "./src/components/Tooltip/index.ts",
           stylesInit: "./src/styles/index.ts",
+          hooks: "./src/lib/hooks/index.ts",
           nextjs: "./src/integrations/nextjs/index.ts",
           "react-hook-form": "./src/integrations/react-hook-form/index.ts",
         },

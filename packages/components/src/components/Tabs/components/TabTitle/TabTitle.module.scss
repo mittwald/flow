@@ -9,6 +9,9 @@
   white-space: nowrap;
   transition-property: color, background-color;
   transition-duration: var(--transition--duration--default);
+  display: flex;
+  align-items: center;
+  column-gap: var(--tab--text-to-status-spacing);
 
   @include focus.focus;
   outline-offset: calc(var(--size-px--xs) * -1);
@@ -24,6 +27,12 @@
   &[aria-disabled="true"] {
     color: var(--tab--disabled-color);
     background-color: var(--tab--disabled-background-color);
+  }
+
+  .text {
+    display: flex;
+    align-items: center;
+    column-gap: var(--tab--text-to-status-spacing);
   }
 }
 
@@ -44,6 +53,14 @@
   background-color: var(--tab--background-color--selected);
   color: var(--tab--color--selected);
   font-weight: var(--tab--font-weight--selected);
-  border-start-start-radius: var(--tab--corner-top-radius-current);
-  border-start-end-radius: var(--tab--corner-top-radius-current);
+}
+
+.menuItem {
+  > span {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: var(--tab--text-to-status-spacing);
+    flex-grow: 1;
+  }
 }

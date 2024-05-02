@@ -3,11 +3,18 @@ header-navigation:
     value: "{size-rem.m}"
   item-color:
     value: "{heading.color}"
+  item-color-inverse:
+    value: "{inverse-content-color}"
   item-background-color:
     hover:
       value: "{primary-plain-background-color.hover}"
     pressed:
       value: "{primary-plain-background-color.pressed}"
+  item-background-color-inverse:
+    hover:
+      value: "{inverse-background-color.hover}"
+    pressed:
+      value: "{inverse-background-color.pressed}"
   item-padding:
     value: "{size-px.s}"
   item-corner-radius:

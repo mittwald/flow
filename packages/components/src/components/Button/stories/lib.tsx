@@ -4,7 +4,7 @@ import { action } from "@storybook/addon-actions";
 
 const sleep = () => new Promise((res) => window.setTimeout(res, 700));
 
-export const syncfunction = action("sync");
+export const syncFunction = action("sync");
 
 const asyncStartAction = action("asyncStart");
 const asyncEndAction = action("asyncEnd");
@@ -15,4 +15,12 @@ export const asyncFunction = async (...args: unknown[]) => {
   asyncEndAction();
 };
 
-export const button = <Button variant="accent">Create customer</Button>;
+export const asyncLongFunction = async (...args: unknown[]) => {
+  asyncStartAction(...args);
+  await sleep();
+  await sleep();
+  await sleep();
+  asyncEndAction();
+};
+
+export const button = <Button color="accent">Create customer</Button>;

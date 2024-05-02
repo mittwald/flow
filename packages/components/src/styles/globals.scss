@@ -22,10 +22,88 @@
   src: url(../fonts/RobotoMono-Regular.ttf);
 }
 
-.flow {
+/**
+  CSS reset for all Flow components that
+  - are not part of other Flow components (avoid eager reset)
+  - are not SVGs (see https://stackoverflow.com/questions/46758871/css-reset-via-all-unset-breaks-inline-svg)
+ */
+
+// CSS Specificity: 0-0-2
+html
+  body
+  *:where([class*="flow--"]:not([class*="flow--"] [class*="flow--"]):not(svg)) {
+  all: initial;
+}
+
+// CSS Specificity: 0-0-2
+html body *:where([class*="flow--"] [class*="flow--"]) {
+  line-height: inherit;
+  color: inherit;
+  font: inherit;
+}
+
+// CSS Specificity: 0-0-2
+html body *:where([class*="flow--"]:not([class*="flow--"] [class*="flow--"])) {
   font-family: "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
   line-height: var(--line-height--default);
   font-size: var(--size-rem--m);
   font-weight: var(--font-weight--normal);
-  color: var(--color--default);
+  color: var(--content--color);
+
+  /*
+  Josh's Custom CSS Reset
+  https://www.joshwcomeau.com/css/custom-css-reset/
+  */
+  *,
+  *::before,
+  *::after,
+  &,
+  &::before,
+  &::after {
+    box-sizing: border-box;
+  }
+
+  &,
+  * {
+    margin: 0;
+  }
+
+  img,
+  picture,
+  video,
+  svg,
+  canvas {
+    display: block;
+    max-width: 100%;
+  }
+
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    overflow-wrap: break-word;
+  }
+
+  /*
+  Flow CSS Reset
+  */
+  ul {
+    padding: 0;
+    list-style-type: none;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
 }
