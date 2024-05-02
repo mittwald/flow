@@ -7,12 +7,23 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
+
+env:
+  TARGET_PATH: "/storybook-main/${{ github.ref_name }}"
+  BASE_PATH: "/flow-previews/storybook-main/${{ github.ref_name }}"
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages-preview-storybook
+      url: https://mittwald.github.io${{ env.BASE_PATH }}
+
+    env:
+      PUBLISH_PAT: ${{ secrets.PUBLISH_PAT }}
+      GH_TOKEN: ${{ secrets.PUBLISH_PAT }}
+
     steps:
       - name: Checkout ⬇️
         uses: actions/checkout@v4
@@ -25,6 +36,11 @@ jobs:
           node-version: 20
           cache: "yarn"
           registry-url: "https://registry.npmjs.org"
+
+      - name: Git Identity 🪪
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
 
       - name: Install Dependencies 📦️
         run: yarn install --immutable
@@ -42,20 +58,16 @@ jobs:
       - name: Build Storybook 🔨
         run: yarn components build:storybook
 
-      - name: Upload GitHub Pages artifact ⬆️
-        uses: actions/upload-pages-artifact@v3
+      - name: Upload files to GitHub Pages 🚀
+        uses: maaaathis/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.PUBLISH_PAT }}
         with:
-          path: packages/components/storybook-static
+          source-directory: packages/components/storybook-static
+          destination-github-username: mittwald
+          destination-repository-name: flow-previews
+          target-branch: main
+          target-directory: "${{ env.TARGET_PATH }}"
 
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    runs-on: ubuntu-latest
-    needs: build
-
-    steps:
-      - name: Publish to GitHub Pages 🚀
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Output the URL
+        run: echo "${{ job.environment.url }}"
