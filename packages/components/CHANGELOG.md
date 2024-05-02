@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.98](https://github.com/mittwald/flow/compare/0.1.0-alpha.97...0.1.0-alpha.98) (2024-05-02)
+
+### Bug Fixes
+
+- **Tabs:** fix scrolling in tabs with different heights
+  ([bf6df9b](https://github.com/mittwald/flow/commit/bf6df9b386455558cba46ea4a5b34f1eca09ff67))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.97](https://github.com/mittwald/flow/compare/0.1.0-alpha.96...0.1.0-alpha.97) (2024-05-02)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
