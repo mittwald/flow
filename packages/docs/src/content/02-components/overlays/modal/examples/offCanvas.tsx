@@ -26,9 +26,7 @@ import { OverlayTrigger } from "@mittwald/flow-react-components/OverlayTrigger";
     </Content>
     <ButtonGroup>
       <Action closeOverlay>
-        <Button color="accent">
-          Organisation anlegen
-        </Button>
+        <Button color="accent">Organisation anlegen</Button>
         <Button variant="soft" color="secondary">
           Abbrechen
         </Button>
