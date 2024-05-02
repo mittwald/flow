@@ -11,7 +11,7 @@ import Heading from "@mittwald/flow-react-components/Heading";
 import Action from "@mittwald/flow-react-components/Action";
 
 <ModalTrigger>
-  <Button variant="accent">Organisation anlegen</Button>
+  <Button color="accent">Organisation anlegen</Button>
   <Modal offCanvas>
     <Heading>Neue Organisation</Heading>
     <Content>
@@ -27,10 +27,8 @@ import Action from "@mittwald/flow-react-components/Action";
     </Content>
     <ButtonGroup>
       <Action closeModal>
-        <Button variant="accent">
-          Organisation anlegen
-        </Button>
-        <Button style="soft" variant="secondary">
+        <Button color="accent">Organisation anlegen</Button>
+        <Button variant="soft" color="secondary">
           Abbrechen
         </Button>
       </Action>

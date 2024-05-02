@@ -43,8 +43,8 @@ export const LongContent: Story = {
       </Content>
       <ButtonGroup>
         <Action closeModal>
-          <Button variant="accent">Create customer</Button>
-          <Button style="soft" variant="secondary">
+          <Button color="accent">Create customer</Button>
+          <Button variant="soft" color="secondary">
             Abort
           </Button>
         </Action>

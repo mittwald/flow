@@ -40,8 +40,8 @@ const meta: Meta<typeof Modal> = {
         </Content>
         <ButtonGroup>
           <Action closeModal>
-            <Button variant="accent">Create customer</Button>
-            <Button variant="secondary" style="soft">
+            <Button color="accent">Create customer</Button>
+            <Button color="secondary" variant="soft">
               Abort
             </Button>
           </Action>
@@ -62,7 +62,7 @@ export const WithController: Story = {
 
     return (
       <>
-        <Button variant="primary" onPress={controller.open}>
+        <Button color="primary" onPress={controller.open}>
           Create customer
         </Button>
         <Modal {...props} controller={controller}>
@@ -78,8 +78,8 @@ export const WithController: Story = {
           </Content>
           <ButtonGroup>
             <Action closeModal>
-              <Button variant="accent">Create customer</Button>
-              <Button variant="secondary" style="soft">
+              <Button color="accent">Create customer</Button>
+              <Button color="secondary" variant="soft">
                 Abort
               </Button>
             </Action>
@@ -93,7 +93,7 @@ export const WithController: Story = {
 export const WithTrigger: Story = {
   render: (props) => (
     <ModalTrigger>
-      <Button variant="danger">Delete project</Button>
+      <Button color="danger">Delete project</Button>
       <Modal {...props}>
         <Heading>Delete project</Heading>
         <Content>
@@ -101,8 +101,8 @@ export const WithTrigger: Story = {
         </Content>
         <ButtonGroup>
           <Action closeModal>
-            <Button variant="danger">Delete project</Button>
-            <Button style="soft" variant="secondary">
+            <Button color="danger">Delete project</Button>
+            <Button variant="soft" color="secondary">
               Abort
             </Button>
           </Action>

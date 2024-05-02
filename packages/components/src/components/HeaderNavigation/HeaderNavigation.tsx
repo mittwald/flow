@@ -36,7 +36,7 @@ export const HeaderNavigation: FC<HeaderNavigationProps> = (props) => {
           <Button
             {...props}
             className={styles.button}
-            style="plain"
+            variant="plain"
             inverse={inverse}
           />
         </li>

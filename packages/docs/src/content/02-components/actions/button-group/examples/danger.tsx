@@ -2,8 +2,8 @@ import ButtonGroup from "@mittwald/flow-react-components/ButtonGroup";
 import Button from "@mittwald/flow-react-components/Button";
 
 <ButtonGroup>
-  <Button variant="danger">Projekt löschen</Button>
-  <Button variant="secondary" style="soft">
+  <Button color="danger">Projekt löschen</Button>
+  <Button color="secondary" variant="soft">
     Abbrechen
   </Button>
 </ButtonGroup>;

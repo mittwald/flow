@@ -16,7 +16,7 @@ export const ActiveFilters: FC = () => {
       .filter((v) => f.isValueActive(v))
       .map((v) => (
         <Button
-          style="soft"
+          variant="soft"
           size="s"
           key={String(v)}
           onPress={() => f.deactivateValue(v)}
@@ -38,7 +38,7 @@ export const ActiveFilters: FC = () => {
       <Button
         className={styles.clearButton}
         size="s"
-        style="plain"
+        variant="plain"
         onPress={() => list.clearFilters()}
       >
         <Translate locales={locales}>resetAll</Translate>

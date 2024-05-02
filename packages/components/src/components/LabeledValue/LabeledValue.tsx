@@ -20,12 +20,12 @@ export const LabeledValue: FC<LabeledValueProps> = (props) => {
     },
     CopyButton: {
       className: styles.button,
-      style: "plain",
+      variant: "plain",
       size: "s",
     },
     Button: {
       className: styles.button,
-      style: "plain",
+      variant: "plain",
       size: "s",
     },
   };
