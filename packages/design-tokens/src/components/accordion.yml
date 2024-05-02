@@ -1,6 +1,4 @@
 accordion:
-  header-to-content-spacing:
-    value: "{size-rem.s}"
   heading-to-chevron-spacing:
     value: "{size-rem.s}"
 
@@ -13,7 +11,5 @@ accordion:
   header-background-color:
     hover:
       value: "{primary-plain-background-color.hover}"
-  content-padding-x:
+  content-padding:
     value: "{size-px.s}"
-  content-padding-y:
-    value: "{size-px.xs}"

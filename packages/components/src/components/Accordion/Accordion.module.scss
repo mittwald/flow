@@ -3,7 +3,6 @@
 .accordion {
   display: flex;
   flex-direction: column;
-  row-gap: var(--accordion--header-to-content-spacing);
 
   /* Elements */
 
@@ -34,20 +33,20 @@
   .content {
     display: grid;
     grid-template-rows: 0fr;
-    transition-property: grid-template-rows, visibility;
+    transition-property: grid-template-rows, visibility, padding;
     transition-duration: var(--transition--duration--slow);
+    padding-inline: var(--accordion--content-padding);
     visibility: hidden;
   }
 
   .contentInner {
-    padding-block: var(--accordion--content-padding-y);
-    padding-inline: var(--accordion--content-padding-x);
     overflow: hidden;
   }
 
   &.expanded {
     .content {
       grid-template-rows: 1fr;
+      padding-block: var(--accordion--content-padding);
       visibility: visible;
     }
 
