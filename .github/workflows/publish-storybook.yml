@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
 
     environment:
-      name: github-pages-preview-storybook
+      name: github-pages-main-storybook
       url: https://mittwald.github.io${{ env.BASE_PATH }}
 
     env:
