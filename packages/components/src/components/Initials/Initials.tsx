@@ -7,10 +7,12 @@ import { ClearPropsContext } from "@/lib/propsContext";
 import { onlyText } from "react-children-utilities";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import type { PropsWithClassName } from "@/lib/types/props";
 
-export interface InitialsProps extends PropsWithChildren, FlowComponentProps {
-  className?: string;
-}
+export interface InitialsProps
+  extends PropsWithChildren,
+    PropsWithClassName,
+    FlowComponentProps {}
 
 export const Initials = flowComponent("Initials", (props) => {
   const { children, className, ref } = props;

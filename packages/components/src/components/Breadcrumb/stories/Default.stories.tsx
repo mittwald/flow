@@ -6,8 +6,8 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 const meta: Meta<typeof Breadcrumb> = {
   title: "Navigation/Breadcrumb",
   component: Breadcrumb,
-  render: () => (
-    <Breadcrumb>
+  render: (props) => (
+    <Breadcrumb {...props}>
       <Link href="#">Project</Link>
       <Link href="#">Apps</Link>
       <Link href="#">App</Link>
@@ -20,3 +20,18 @@ export default meta;
 type Story = StoryObj<typeof Breadcrumb>;
 
 export const Default: Story = {};
+
+export const Inverse: Story = {
+  args: { inverse: true },
+  parameters: {
+    backgrounds: {
+      default: "dark",
+      values: [
+        {
+          name: "dark",
+          value: "#002A7B",
+        },
+      ],
+    },
+  },
+};
