@@ -10,7 +10,7 @@ permissions:
 
 env:
   TARGET_PATH: "/storybook/${{ github.ref_name }}"
-  NEXT_BASE_PATH: "/flow-previews/storybook/${{ github.ref_name }}"
+  BASE_PATH: "/flow-previews/storybook/${{ github.ref_name }}"
 
 jobs:
   deploy:
@@ -18,7 +18,7 @@ jobs:
 
     environment:
       name: github-pages-preview-storybook
-      url: https://mittwald.github.io${{ env.NEXT_BASE_PATH }}
+      url: https://mittwald.github.io${{ env.BASE_PATH }}
 
     env:
       PUBLISH_PAT: ${{ secrets.PUBLISH_PAT }}
