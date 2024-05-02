@@ -48,7 +48,7 @@ jobs:
         run: git branch --track main origin/main
 
       - name: Build 🔨
-        run: yarn build --exclude @mittwald/flow-docs
+        run: yarn build --exclude @mittwald/flow-documentation
 
       - name: Version and publish 🚀
         run: |
