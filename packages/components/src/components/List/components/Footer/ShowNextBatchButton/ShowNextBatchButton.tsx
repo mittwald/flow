@@ -18,7 +18,7 @@ export const ShowNextBatchButton: FC<ButtonProps> = (props) => {
       isPending={isLoading}
       {...props}
       onPress={() => list.batches.nextBatch()}
-      style="plain"
+      variant="plain"
       isDisabled={!canLoadMore}
       size="s"
     >

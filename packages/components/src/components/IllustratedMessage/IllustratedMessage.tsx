@@ -28,7 +28,7 @@ export const IllustratedMessage: FC<IllustratedMessageProps> = (props) => {
     },
     Button: {
       className: styles.button,
-      variant: "accent",
+      color: "accent",
     },
   };
 
