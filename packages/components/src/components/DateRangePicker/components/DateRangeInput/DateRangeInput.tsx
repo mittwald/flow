@@ -23,7 +23,7 @@ export const DateRangeInput: FC<DateInputProps> = (props) => {
           {(segment) => <Aria.DateSegment segment={segment} />}
         </Aria.DateInput>
       </div>
-      <Button style="plain" variant="secondary" isDisabled={isDisabled}>
+      <Button variant="plain" color="secondary" isDisabled={isDisabled}>
         <IconDate />
       </Button>
     </Aria.Group>
