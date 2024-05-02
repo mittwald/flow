@@ -13,9 +13,9 @@ import type { ModalProps } from "@/components/Modal";
 
 export interface ActionProps extends PropsWithChildren {
   action?: ActionFn;
-  closeModal?: boolean | OverlayController;
-  openModal?: boolean | OverlayController;
-  toggleModal?: boolean | OverlayController;
+  closeOverlay?: boolean | OverlayController;
+  openOverlay?: boolean | OverlayController;
+  toggleOverlay?: boolean | OverlayController;
   break?: boolean;
   showFeedback?: boolean;
   /** @internal */
@@ -60,7 +60,7 @@ export const Action: FC<ActionProps> = (actionProps) => {
     if (color === "secondary") {
       return (
         <Action break>
-          <Action closeModal>
+          <Action closeOverlay>
             <Button {...props} />
           </Action>
         </Action>
@@ -68,7 +68,7 @@ export const Action: FC<ActionProps> = (actionProps) => {
     }
 
     return (
-      <Action closeModal>
+      <Action closeOverlay>
         <Action {...actionProps} isConfirmationAction>
           <Button {...props} />
         </Action>
@@ -77,6 +77,9 @@ export const Action: FC<ActionProps> = (actionProps) => {
   };
 
   const propsContext: PropsContext = {
+    Link: {
+      onPress: interaction,
+    },
     Button: {
       onPress: interaction,
       render: (Button, props) => {
