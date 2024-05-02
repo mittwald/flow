@@ -1,6 +1,7 @@
 .tabs {
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 
   .list {
     background-color: var(--tab-list--background-color);
