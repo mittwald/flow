@@ -7,6 +7,13 @@
   flex-direction: column;
   overflow: hidden;
   justify-content: center;
+
+  .editor pre {
+    white-space: pre !important;
+    overflow: hidden;
+    padding: 0 !important;
+    background-color: var(--neutral--color--300) !important;
+  }
 }
 
 .preview {
@@ -21,23 +28,34 @@
   overflow: scroll;
 }
 
+.toggleCode {
+  width: 100%;
+}
+
 .editor {
   font-family: monospace;
   min-width: min-content;
   border-top: 1px solid var(--border-color);
-}
-
-.editor pre {
-  white-space: pre !important;
+  display: grid;
+  grid-template-rows: 1fr;
+  visibility: visible;
+  transition-property: grid-template-rows, visibility, padding;
+  transition-duration: var(--transition--duration--slow);
+  padding: var(--size-px--m);
   background-color: var(--neutral--color--300) !important;
-}
 
-.toggleCode {
-  margin-inline-start: auto;
+  &.collapsed {
+    grid-template-rows: 0fr;
+    visibility: hidden;
+    padding-block: 0;
+  }
 }
 
 .actions {
+  padding: var(--size-px--xs);
   margin-block-start: auto;
   background-color: var(--neutral--color--300);
   border-top: 1px solid var(--border-color);
+  display: flex;
+  justify-content: center;
 }
