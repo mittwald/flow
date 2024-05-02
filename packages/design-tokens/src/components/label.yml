@@ -3,6 +3,8 @@ label:
     value: "{font-size.s}"
   font-weight:
     value: "{font-weight.bold}"
+  line-height:
+    value: "{line-height.m}"
   color:
     default:
       value: "{neutral.color.800}"

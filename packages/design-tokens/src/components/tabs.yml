@@ -30,8 +30,6 @@ tab:
   font-weight:
     selected:
       value: "{font-weight.bold}"
-  corner-top-radius-current:
-    value: "{corner-radius.default}"
   text-to-status-spacing:
     value: "{size-rem.s}"
 
