@@ -11,16 +11,16 @@ const meta: Meta<typeof Button> = {
   component: Button,
   args: {
     onPress: action("onPress"),
-    style: "solid",
-    variant: "primary",
+    variant: "solid",
+    color: "primary",
     size: "m",
   },
   argTypes: {
-    variant: {
+    color: {
       control: "inline-radio",
       options: ["primary", "accent", "secondary", "danger"],
     },
-    style: {
+    variant: {
       control: "inline-radio",
       options: ["plain", "solid", "soft"],
     },

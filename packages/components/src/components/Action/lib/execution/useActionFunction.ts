@@ -1,4 +1,5 @@
 import type { ActionFn, ActionProps } from "@/components/Action";
+import type { OverlayController } from "@/lib/controller";
 import { useOverlayController } from "@/lib/controller";
 import { breakAction } from "@/components/Action/lib/execution/breakAction";
 
@@ -7,22 +8,25 @@ export const voidAction = () => {};
 export const useActionFunction = (actionProps: ActionProps): ActionFn => {
   const {
     action,
-    toggleModal,
-    openModal,
-    closeModal,
+    toggleOverlay,
+    openOverlay,
+    closeOverlay,
     break: $break,
   } = actionProps;
 
-  const modalController = useOverlayController();
+  const overlayControllerFromContext = useOverlayController();
+
+  const getOverlayController = (controller: OverlayController | true) =>
+    typeof controller === "boolean" ? overlayControllerFromContext : controller;
 
   return action
     ? action
-    : toggleModal
-      ? modalController.toggle
-      : openModal
-        ? modalController.open
-        : closeModal
-          ? modalController.close
+    : toggleOverlay
+      ? getOverlayController(toggleOverlay).toggle
+      : openOverlay
+        ? getOverlayController(openOverlay).open
+        : closeOverlay
+          ? getOverlayController(closeOverlay).close
           : $break
             ? breakAction
             : voidAction;

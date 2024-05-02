@@ -58,6 +58,9 @@ export default defineConfig(
           Modal: "./src/components/Modal/index.ts",
           Navigation: "./src/components/Navigation/index.ts",
           NumberField: "./src/components/NumberField/index.ts",
+          OverlayTrigger:
+            "./src/components/Overlay/components/OverlayTrigger/index.ts",
+          OffCanvas: "./src/components/OffCanvas/index.ts",
           Popover: "./src/components/Popover/index.ts",
           ProgressBar: "./src/components/ProgressBar/index.ts",
           RadioGroup: "./src/components/RadioGroup/index.ts",

@@ -101,28 +101,28 @@
 
   /* Variants */
 
-  @mixin variant($variant, $style) {
-    &:where(.#{$variant}.#{$style}) {
+  @mixin variant($color, $variant) {
+    &:where(.#{$color}.#{$variant}) {
       background-color: var(
-        --button--#{$variant}-#{$style}-background-color--default
+        --button--#{$color}-#{$variant}-background-color--default
       );
 
-      color: var(--button--#{$variant}-#{$style}-content-color--default);
+      color: var(--button--#{$color}-#{$variant}-content-color--default);
 
       &:hover {
         background-color: var(
-          --button--#{$variant}-#{$style}-background-color--hover
+          --button--#{$color}-#{$variant}-background-color--hover
         );
 
-        color: var(--button--#{$variant}-#{$style}-content-color--hover);
+        color: var(--button--#{$color}-#{$variant}-content-color--hover);
       }
 
       &[data-pressed] {
         background-color: var(
-          --button--#{$variant}-#{$style}-background-color--pressed
+          --button--#{$color}-#{$variant}-background-color--pressed
         );
 
-        color: var(--button--#{$variant}-#{$style}-content-color--pressed);
+        color: var(--button--#{$color}-#{$variant}-content-color--pressed);
       }
 
       &[disabled],
@@ -130,8 +130,8 @@
       &.isPending,
       &.isFailed,
       &.isSucceeded {
-        background-color: var(--button--disabled-#{$style}-background-color);
-        color: var(--button--disabled-#{$style}-content-color);
+        background-color: var(--button--disabled-#{$variant}-background-color);
+        color: var(--button--disabled-#{$variant}-content-color);
       }
     }
   }

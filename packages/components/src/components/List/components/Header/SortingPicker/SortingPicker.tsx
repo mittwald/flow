@@ -42,7 +42,7 @@ export const SortingPicker: FC = () => {
 
   return (
     <Aria.MenuTrigger>
-      <Button style="soft" size="s" variant="secondary">
+      <Button variant="soft" size="s" color="secondary">
         {text}
         <IconChevronDown />
       </Button>

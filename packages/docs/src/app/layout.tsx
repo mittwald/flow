@@ -4,7 +4,6 @@ import "./layout.module.scss";
 import type { Metadata } from "next";
 import type { FC, PropsWithChildren } from "react";
 import React from "react";
-import MainNavigation from "@/app/_components/layout/MainNavigation/MainNavigation";
 import HeaderNavigation from "@/app/_components/layout/HeaderNavigation/HeaderNavigation";
 import clsx from "clsx";
 import styles from "./layout.module.scss";
@@ -14,6 +13,8 @@ import StatusBadge from "@mittwald/flow-react-components/StatusBadge";
 import LayoutCard from "@mittwald/flow-react-components/LayoutCard";
 import { LinkProvider } from "@mittwald/flow-react-components/nextjs";
 import { IconMittwald } from "@mittwald/flow-react-components/Icons";
+import MainNavigation from "@/app/_components/layout/MainNavigation";
+import MobileNavigation from "@/app/_components/layout/MobileNavigation/MobileNavigation";
 
 export const metadata: Metadata = {
   title: "Flow – mittwald Design System",
@@ -35,10 +36,17 @@ const RootLayout: FC<PropsWithChildren> = async (props) => {
             <StatusBadge className={styles.betaBadge} status="warning">
               beta
             </StatusBadge>
-            <HeaderNavigation docs={docs.map((mdx) => mdx.serialize())} />
+            <HeaderNavigation
+              className={styles.headerNavigation}
+              docs={docs.map((mdx) => mdx.serialize())}
+            />
+            <MobileNavigation
+              docs={docs.map((mdx) => mdx.serialize())}
+              className={styles.mobileNavigation}
+            />
           </header>
           <div className={styles.center}>
-            <LayoutCard className={styles.nav}>
+            <LayoutCard className={styles.mainNavigation}>
               <MainNavigation docs={docs.map((mdx) => mdx.serialize())} />
             </LayoutCard>
             <main className={styles.main}>{props.children}</main>

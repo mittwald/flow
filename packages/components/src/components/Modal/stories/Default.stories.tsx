@@ -7,15 +7,16 @@ import TextField from "@/components/TextField";
 import Label from "@/components/Label";
 import Content from "@/components/Content";
 import Heading from "@/components/Heading";
-import Modal, { ModalTrigger } from "@/components/Modal";
+import Modal from "@/components/Modal";
 import { useOverlayController } from "@/lib/controller/overlay/useOverlayController";
 import { Action } from "@/components/Action";
+import { OverlayTrigger } from "@/components/Overlay";
 
 const meta: Meta<typeof Modal> = {
   title: "Overlays/Modal",
   component: Modal,
   parameters: {
-    controls: { exclude: ["state", "defaultOpen", "offCanvas"] },
+    controls: { exclude: ["controller", "offCanvas"] },
   },
   argTypes: {
     size: {
@@ -28,7 +29,10 @@ const meta: Meta<typeof Modal> = {
   },
   render: (props) => {
     return (
-      <Modal {...props} defaultOpen>
+      <Modal
+        {...props}
+        controller={useOverlayController({ defaultOpen: true })}
+      >
         <Heading>New Customer</Heading>
         <Content>
           <Text>
@@ -39,9 +43,9 @@ const meta: Meta<typeof Modal> = {
           </TextField>
         </Content>
         <ButtonGroup>
-          <Action closeModal>
-            <Button variant="accent">Create customer</Button>
-            <Button variant="secondary" style="soft">
+          <Action closeOverlay>
+            <Button color="accent">Create customer</Button>
+            <Button color="secondary" variant="soft">
               Abort
             </Button>
           </Action>
@@ -62,7 +66,7 @@ export const WithController: Story = {
 
     return (
       <>
-        <Button variant="primary" onPress={controller.open}>
+        <Button color="primary" onPress={controller.open}>
           Create customer
         </Button>
         <Modal {...props} controller={controller}>
@@ -77,9 +81,9 @@ export const WithController: Story = {
             </TextField>
           </Content>
           <ButtonGroup>
-            <Action closeModal>
-              <Button variant="accent">Create customer</Button>
-              <Button variant="secondary" style="soft">
+            <Action closeOverlay>
+              <Button color="accent">Create customer</Button>
+              <Button color="secondary" variant="soft">
                 Abort
               </Button>
             </Action>
@@ -90,25 +94,25 @@ export const WithController: Story = {
   },
 };
 
-export const WithDialogTrigger: Story = {
+export const WithTrigger: Story = {
   render: (props) => (
-    <ModalTrigger>
-      <Button variant="danger">Delete project</Button>
+    <OverlayTrigger>
+      <Button color="danger">Delete project</Button>
       <Modal {...props}>
         <Heading>Delete project</Heading>
         <Content>
           <Text>Are you sure you want to delete this project?</Text>
         </Content>
         <ButtonGroup>
-          <Action closeModal>
-            <Button variant="danger">Delete project</Button>
-            <Button style="soft" variant="secondary">
+          <Action closeOverlay>
+            <Button color="danger">Delete project</Button>
+            <Button variant="soft" color="secondary">
               Abort
             </Button>
           </Action>
         </ButtonGroup>
       </Modal>
-    </ModalTrigger>
+    </OverlayTrigger>
   ),
 };
 

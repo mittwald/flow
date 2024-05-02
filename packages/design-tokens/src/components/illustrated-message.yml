@@ -3,8 +3,6 @@ illustrated-message:
     value: "{size-px.xxl}"
   padding-mobile:
     value: "{size-px.l}"
-  max-width:
-    value: 400px
   icon-to-heading-spacing:
     value: "{size-rem.m}"
   heading-to-text-spacing:

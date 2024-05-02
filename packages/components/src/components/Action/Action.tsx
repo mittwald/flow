@@ -13,9 +13,9 @@ import type { ModalProps } from "@/components/Modal";
 
 export interface ActionProps extends PropsWithChildren {
   action?: ActionFn;
-  closeModal?: boolean | OverlayController;
-  openModal?: boolean | OverlayController;
-  toggleModal?: boolean | OverlayController;
+  closeOverlay?: boolean | OverlayController;
+  openOverlay?: boolean | OverlayController;
+  toggleOverlay?: boolean | OverlayController;
   break?: boolean;
   showFeedback?: boolean;
   /** @internal */
@@ -32,31 +32,35 @@ export const Action: FC<ActionProps> = (actionProps) => {
     ? confirmationModalController.open
     : actionController.callAction;
 
-  const actionState = actionController.state.useState();
-
   const ConfirmationModalRenderer: FlowRenderFn<ModalProps> = (
     Modal,
     props,
   ) => {
+    const isConfirmationModal = props.slot === "actionConfirm";
+
     useEffect(() => {
-      if (props.slot === "actionConfirm") {
+      if (isConfirmationModal) {
         setHasConfirmationModal(true);
         return () => {
           setHasConfirmationModal(false);
         };
       }
-    }, []);
+    }, [isConfirmationModal]);
 
-    return <Modal controller={confirmationModalController} {...props} />;
+    if (isConfirmationModal) {
+      return <Modal controller={confirmationModalController} {...props} />;
+    }
+
+    return <Modal {...props} />;
   };
 
   const ModalButtonRenderer: FlowRenderFn<ButtonProps> = (Button, props) => {
-    const { variant } = props;
+    const { color } = props;
 
-    if (variant === "secondary") {
+    if (color === "secondary") {
       return (
         <Action break>
-          <Action closeModal>
+          <Action closeOverlay>
             <Button {...props} />
           </Action>
         </Action>
@@ -64,7 +68,7 @@ export const Action: FC<ActionProps> = (actionProps) => {
     }
 
     return (
-      <Action closeModal>
+      <Action closeOverlay>
         <Action {...actionProps} isConfirmationAction>
           <Button {...props} />
         </Action>
@@ -73,12 +77,23 @@ export const Action: FC<ActionProps> = (actionProps) => {
   };
 
   const propsContext: PropsContext = {
+    Link: {
+      onPress: interaction,
+    },
     Button: {
       onPress: interaction,
-      isPending: actionState === "isPending" ? true : undefined,
-      "aria-disabled": actionState !== "isIdle" ? true : undefined,
-      isSucceeded: actionState === "isSucceeded" ? true : undefined,
-      isFailed: actionState === "isFailed" ? true : undefined,
+      render: (Button, props) => {
+        const actionState = actionController.state.useState();
+        return (
+          <Button
+            {...props}
+            isPending={actionState === "isPending" ? true : undefined}
+            aria-disabled={actionState !== "isIdle" ? true : undefined}
+            isSucceeded={actionState === "isSucceeded" ? true : undefined}
+            isFailed={actionState === "isFailed" ? true : undefined}
+          />
+        );
+      },
     },
     Modal: {
       tunnelId: "outsideActionProvider",
@@ -95,7 +110,7 @@ export const Action: FC<ActionProps> = (actionProps) => {
     <TunnelProvider>
       <PropsContextProvider
         props={propsContext}
-        dependencies={[hasConfirmationModal, actionState]}
+        dependencies={[hasConfirmationModal]}
         mergeInParentContext
       >
         <ActionContextProvider value={interaction}>

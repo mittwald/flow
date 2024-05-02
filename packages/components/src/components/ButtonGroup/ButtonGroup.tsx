@@ -27,7 +27,7 @@ export const ButtonGroup = flowComponent("ButtonGroup", (props) => {
       className: dynamic((p) =>
         clsx(
           styles.button,
-          p.variant === "secondary" ? styles.secondary : undefined,
+          p.color === "secondary" ? styles.secondary : undefined,
         ),
       ),
     },

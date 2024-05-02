@@ -87,13 +87,13 @@ export const WithConfirmationModal: Story = {
         <Heading>Delete customer</Heading>
         <Content>Do you really want to delete the customer?</Content>
         <ButtonGroup>
-          <Button variant="danger">Delete customer</Button>
-          <Button variant="secondary" style="soft">
+          <Button color="danger">Delete customer</Button>
+          <Button color="secondary" variant="soft">
             Abort
           </Button>
         </ButtonGroup>
       </Modal>
-      <Button variant="secondary" style="soft">
+      <Button color="secondary" variant="soft">
         Delete customer
       </Button>
     </Action>

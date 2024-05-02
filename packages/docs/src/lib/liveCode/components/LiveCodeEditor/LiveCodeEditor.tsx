@@ -73,7 +73,7 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
             <Button
               className={styles.toggleCode}
               size="s"
-              style="plain"
+              variant="plain"
               onPress={() => setEditorCollapsed(!editorCollapsed)}
             >
               <IconCode />

@@ -6,10 +6,9 @@ import styles from "./Header.module.css";
 import clsx from "clsx";
 import { ActiveFilters } from "@/components/List/components/Header/ActiveFilters";
 import { useList } from "@/components/List/hooks/useList";
+import type { PropsWithClassName } from "@/lib/types/props";
 
-interface Props {
-  className?: string;
-}
+interface Props extends PropsWithClassName {}
 
 // ToDo: Add search
 
