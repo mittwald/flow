@@ -1,6 +1,4 @@
-import Modal, {
-  ModalTrigger,
-} from "@mittwald/flow-react-components/Modal";
+import Modal from "@mittwald/flow-react-components/Modal";
 import Content from "@mittwald/flow-react-components/Content";
 import Text from "@mittwald/flow-react-components/Text";
 import TextField from "@mittwald/flow-react-components/TextField";
@@ -9,8 +7,9 @@ import ButtonGroup from "@mittwald/flow-react-components/ButtonGroup";
 import Button from "@mittwald/flow-react-components/Button";
 import Heading from "@mittwald/flow-react-components/Heading";
 import Action from "@mittwald/flow-react-components/Action";
+import { OverlayTrigger } from "@mittwald/flow-react-components/OverlayTrigger";
 
-<ModalTrigger>
+<OverlayTrigger>
   <Button variant="accent">Organisation anlegen</Button>
   <Modal>
     <Heading>Neue Organisation</Heading>
@@ -26,7 +25,7 @@ import Action from "@mittwald/flow-react-components/Action";
       </TextField>
     </Content>
     <ButtonGroup>
-      <Action closeModal>
+      <Action closeOverlay>
         <Button variant="accent">
           Organisation anlegen
         </Button>
@@ -36,4 +35,4 @@ import Action from "@mittwald/flow-react-components/Action";
       </Action>
     </ButtonGroup>
   </Modal>
-</ModalTrigger>;
+</OverlayTrigger>;

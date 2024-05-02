@@ -10,10 +10,10 @@ interface Options {
 export const useOverlayController = (opts: Options = {}): OverlayController => {
   const { reuseControllerFromContext = true, defaultOpen } = opts;
 
-  const newState = OverlayController.useNew(defaultOpen);
-  const stateFromContext = useContext(overlayContext);
+  const newController = OverlayController.useNew(defaultOpen);
+  const controllerFromContext = useContext(overlayContext);
 
-  return reuseControllerFromContext && stateFromContext
-    ? stateFromContext
-    : newState;
+  return reuseControllerFromContext && controllerFromContext
+    ? controllerFromContext
+    : newController;
 };
