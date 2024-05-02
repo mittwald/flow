@@ -15,7 +15,7 @@ import Content from "@mittwald/flow-react-components/Content";
   <RadioButton value="virtualHost">
     <Text>Virtual Host einrichten</Text>
     <Content>
-      TDie Domain bleibt bei deinem bisherigen Anbieter, du
+      Die Domain bleibt bei deinem bisherigen Anbieter, du
       kannst sie aber für deine Website in unserem mStudio
       verwenden.
     </Content>
