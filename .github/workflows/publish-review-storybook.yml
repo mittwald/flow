@@ -7,8 +7,10 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
+
+env:
+  TARGET_PATH: "/storybook/${{ github.ref_name }}"
+  NEXT_BASE_PATH: "/flow-previews/storybook/${{ github.ref_name }}"
 
 jobs:
   deploy:
@@ -63,7 +65,7 @@ jobs:
         with:
           source-directory: packages/components/storybook-static
           destination-github-username: mittwald
-          destination-repository-name: flow-preview-storybooks
+          destination-repository-name: flow-previews
           target-branch: main
           target-directory: "${{ env.TARGET_PATH }}"
 
