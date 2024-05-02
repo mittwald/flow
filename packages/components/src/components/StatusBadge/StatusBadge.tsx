@@ -4,7 +4,7 @@ import styles from "./StatusBadge.module.scss";
 import clsx from "clsx";
 import { StatusIcon } from "@/components/StatusIcon";
 import { Text } from "@/components/Text";
-import type { PropsWithStatus } from "@/lib/types/props";
+import type { PropsWithClassName, PropsWithStatus } from "@/lib/types/props";
 import { ClearPropsContext } from "@/lib/propsContext";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
@@ -12,9 +12,8 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 export interface StatusBadgeProps
   extends PropsWithChildren,
     PropsWithStatus,
-    FlowComponentProps {
-  className?: string;
-}
+    FlowComponentProps,
+    PropsWithClassName {}
 
 export const StatusBadge = flowComponent("StatusBadge", (props) => {
   const { children, className, status = "info", ref, ...rest } = props;

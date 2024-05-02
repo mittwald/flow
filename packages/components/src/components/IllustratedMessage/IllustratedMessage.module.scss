@@ -23,14 +23,12 @@
   .heading {
     margin-bottom: var(--illustrated-message--heading-to-text-spacing);
     text-align: center;
-    max-width: var(--illustrated-message--max-width);
     order: 2;
   }
 
   .text {
     margin-bottom: var(--illustrated-message--text-to-button-spacing);
     text-align: center;
-    max-width: var(--illustrated-message--max-width);
     order: 3;
   }
 

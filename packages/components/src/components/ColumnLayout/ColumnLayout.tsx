@@ -3,12 +3,14 @@ import React from "react";
 import styles from "./ColumnLayout.module.scss";
 import { getColumns } from "./lib/getColumns";
 import clsx from "clsx";
+import type { PropsWithClassName } from "@/lib/types/props";
 
-export interface ColumnLayoutProps extends PropsWithChildren {
+export interface ColumnLayoutProps
+  extends PropsWithChildren,
+    PropsWithClassName {
   s?: number[];
   m?: number[];
   l?: number[];
-  className?: string;
 }
 
 export const ColumnLayout: FC<ColumnLayoutProps> = (props) => {

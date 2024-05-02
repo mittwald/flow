@@ -36,4 +36,10 @@
       }
     }
   }
+
+  &.inverse {
+    .breadcrumbItem {
+      color: var(--breadcrumb-item--color-inverse);
+    }
+  }
 }

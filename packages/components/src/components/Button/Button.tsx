@@ -14,12 +14,12 @@ import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 import { useAriaAnnounceActionState } from "@/components/Action/lib/ariaLive";
 
 export interface ButtonProps
-  extends PropsWithChildren<Omit<Aria.ButtonProps, "style">>,
+  extends PropsWithChildren<Aria.ButtonProps>,
     FlowComponentProps<"Button"> {
   /** @default "primary" */
-  variant?: "primary" | "accent" | "secondary" | "danger";
+  color?: "primary" | "accent" | "secondary" | "danger";
   /** @default "solid" */
-  style?: "plain" | "solid" | "soft";
+  variant?: "plain" | "solid" | "soft";
   /** @default "m" */
   size?: "m" | "s";
 
@@ -59,8 +59,8 @@ export const Button = flowComponent("Button", (props) => {
   props = disablePendingProps(props);
 
   const {
-    variant = "primary",
-    style = "solid",
+    color = "primary",
+    variant = "solid",
     children,
     className,
     size = "m",
@@ -77,21 +77,21 @@ export const Button = flowComponent("Button", (props) => {
   const rootClassName = unstyled
     ? className
     : clsx(
-        styles.button,
-        isPending && styles.isPending,
-        isSucceeded && styles.isSucceeded,
-        isFailed && styles.isFailed,
-        inverse && styles.inverse,
-        styles[`size-${size}`],
-        styles[variant],
-        styles[style],
-        className,
-        /**
-         * Workaround warning: The Aria.Button does not support "aria-disabled"
-         * by now, so this Button will be visually disabled via CSS.
-         */
-        ariaDisabled && styles.ariaDisabled,
-      );
+    styles.button,
+    isPending && styles.isPending,
+    isSucceeded && styles.isSucceeded,
+    isFailed && styles.isFailed,
+    inverse && styles.inverse,
+    styles[`size-${size}`],
+    styles[color],
+    styles[variant],
+    className,
+    /**
+     * Workaround warning: The Aria.Button does not support "aria-disabled" by
+     * now, so this Button will be visually disabled via CSS.
+     */
+    ariaDisabled && styles.ariaDisabled,
+  );
 
   useAriaAnnounceActionState(
     isPending

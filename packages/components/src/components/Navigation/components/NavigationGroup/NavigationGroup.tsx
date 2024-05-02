@@ -18,12 +18,12 @@ export const NavigationGroup: FC<NavigationGroupProps> = (props) => {
 
   const rootClassName = clsx(styles.navigationGroup, className);
 
-  const labelId = useId();
+  const generatedId = useId();
 
   const propsContext: PropsContext = {
     Label: {
-      tunnelId: "label",
-      id: labelId,
+      tunnelId: "Label",
+      id: generatedId,
       className: styles.label,
       "aria-hidden": true,
     },
@@ -46,12 +46,18 @@ export const NavigationGroup: FC<NavigationGroupProps> = (props) => {
 
   return (
     <PropsContextProvider mergeInParentContext props={propsContext}>
-      <TunnelProvider>
-        <section aria-labelledby={labelId} className={rootClassName} {...rest}>
-          <TunnelExit id="label" />
+    <TunnelProvider>
+      <section
+        aria-labelledby={generatedId}
+        className={rootClassName}
+        {...rest}
+      >
+        <PropsContextProvider mergeInParentContext props={propsContext}>
+          <TunnelExit id="Label" />
           <ul>{children}</ul>
-        </section>
-      </TunnelProvider>
+        </PropsContextProvider>
+      </section>
+    </TunnelProvider>
     </PropsContextProvider>
   );
 };

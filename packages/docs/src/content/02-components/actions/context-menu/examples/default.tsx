@@ -2,7 +2,7 @@ import ContextMenu, {
   ContextMenuTrigger,
 } from "@mittwald/flow-react-components/ContextMenu";
 import Button from "@mittwald/flow-react-components/Button";
-import { MenuItem } from "@mittwald/flow-react-components/MenuItem";
+import MenuItem from "@mittwald/flow-react-components/MenuItem";
 
 <ContextMenuTrigger>
   <Button>Trigger</Button>

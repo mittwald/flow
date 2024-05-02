@@ -1,6 +1,8 @@
 breadcrumb-item:
   color:
     value: "{content.color}"
+  color-inverse:
+    value: "{inverse-content-color}"
   padding-x:
     value: "{size-px.xs}"
   font-size:
