@@ -4517,6 +4517,7 @@ const RAW_RUNTIME_STATE =
           ["rollup", "npm:4.17.2"],\
           ["sass", "npm:1.76.0"],\
           ["storybook", "npm:8.0.9"],\
+          ["storybook-addon-rtl", "npm:1.0.0"],\
           ["tsx", "npm:4.8.2"],\
           ["typescript", "patch:typescript@npm%3A5.4.5#optional!builtin<compat/typescript>::version=5.4.5&hash=5adc0c"],\
           ["typescript-plugin-css-modules", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:5.1.0"],\
@@ -4615,6 +4616,7 @@ const RAW_RUNTIME_STATE =
           ["rollup", "npm:4.17.2"],\
           ["sass", "npm:1.76.0"],\
           ["storybook", "npm:8.0.9"],\
+          ["storybook-addon-rtl", "npm:1.0.0"],\
           ["tsx", "npm:4.8.2"],\
           ["typescript", "patch:typescript@npm%3A5.4.5#optional!builtin<compat/typescript>::version=5.4.5&hash=5adc0c"],\
           ["typescript-plugin-css-modules", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:5.1.0"],\
@@ -4705,6 +4707,7 @@ const RAW_RUNTIME_STATE =
           ["rollup", "npm:4.17.2"],\
           ["sass", "npm:1.76.0"],\
           ["storybook", "npm:8.0.9"],\
+          ["storybook-addon-rtl", "npm:1.0.0"],\
           ["tsx", "npm:4.8.2"],\
           ["typescript", "patch:typescript@npm%3A5.4.5#optional!builtin<compat/typescript>::version=5.4.5&hash=5adc0c"],\
           ["typescript-plugin-css-modules", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:5.1.0"],\
@@ -25694,6 +25697,15 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["storybook", "npm:8.0.9"],\
           ["@storybook/cli", "npm:8.0.9"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["storybook-addon-rtl", [\
+      ["npm:1.0.0", {\
+        "packageLocation": "./.yarn/cache/storybook-addon-rtl-npm-1.0.0-ec95d70d08-6d82994586.zip/node_modules/storybook-addon-rtl/",\
+        "packageDependencies": [\
+          ["storybook-addon-rtl", "npm:1.0.0"]\
         ],\
         "linkType": "HARD"\
       }]\
