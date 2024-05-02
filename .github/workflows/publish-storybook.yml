@@ -9,8 +9,8 @@ permissions:
   contents: read
 
 env:
-  TARGET_PATH: "/storybook-main/${{ github.ref_name }}"
-  BASE_PATH: "/flow-previews/storybook-main/${{ github.ref_name }}"
+  TARGET_PATH: "/storybook-main/"
+  BASE_PATH: "/flow-previews/storybook-main/"
 
 jobs:
   deploy:
