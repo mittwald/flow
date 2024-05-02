@@ -2,6 +2,8 @@ name: Publish Storybook to GitHub Pages
 
 on:
   push:
+    branches:
+      - main
 
 permissions:
   contents: read
@@ -26,6 +28,13 @@ jobs:
 
       - name: Install Dependencies 📦️
         run: yarn install --immutable
+
+      - name: Setup NX 1/2 🎛️
+        uses: nrwl/nx-set-shas@v4
+
+      - name: Setup NX 2/2 🎛
+        if: github.ref != 'refs/heads/main'
+        run: git branch --track main origin/main
 
       - name: Build 🔨
         run: yarn build --exclude @mittwald/flow-documentation
