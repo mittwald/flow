@@ -1,4 +1,4 @@
-name: Publish review docs
+name: Publish review Storybook to GitHub Pages
 
 on:
   push:
@@ -9,20 +9,18 @@ permissions:
   contents: read
 
 env:
-  TARGET_PATH: "/docs/${{ github.ref_name }}"
-  NEXT_BASE_PATH: "/flow-previews/docs/${{ github.ref_name }}"
+  TARGET_PATH: "/storybook/${{ github.ref_name }}"
+  BASE_PATH: "/flow-previews/storybook/${{ github.ref_name }}"
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     environment:
-      name: github-pages-preview
-      url: https://mittwald.github.io${{ env.NEXT_BASE_PATH }}
+      name: github-pages-preview-storybook
+      url: https://mittwald.github.io${{ env.BASE_PATH }}
 
     env:
-      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       PUBLISH_PAT: ${{ secrets.PUBLISH_PAT }}
       GH_TOKEN: ${{ secrets.PUBLISH_PAT }}
 
@@ -31,7 +29,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          token: ${{ secrets.PUBLISH_PAT }}
 
       - name: Setup Node 🎛️
         uses: actions/setup-node@v4
@@ -45,7 +42,7 @@ jobs:
           git config user.name "${{ github.actor }}"
           git config user.email "${{ github.actor }}@users.noreply.github.com"
 
-      - name: Yarn Install 📦️
+      - name: Install Dependencies 📦️
         run: yarn install --immutable
 
       - name: Setup NX 1/2 🎛️
@@ -56,14 +53,17 @@ jobs:
         run: git branch --track main origin/main
 
       - name: Build 🔨
-        run: yarn docs build
+        run: yarn build --exclude @mittwald/flow-documentation
+
+      - name: Build Storybook 🔨
+        run: yarn components build:storybook
 
       - name: Upload files to GitHub Pages 🚀
         uses: maaaathis/github-action-push-to-another-repository@main
         env:
           API_TOKEN_GITHUB: ${{ secrets.PUBLISH_PAT }}
         with:
-          source-directory: packages/docs/out
+          source-directory: packages/components/storybook-static
           destination-github-username: mittwald
           destination-repository-name: flow-previews
           target-branch: main
