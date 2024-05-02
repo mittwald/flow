@@ -55,9 +55,9 @@ export const Action: FC<ActionProps> = (actionProps) => {
   };
 
   const ModalButtonRenderer: FlowRenderFn<ButtonProps> = (Button, props) => {
-    const { variant } = props;
+    const { color } = props;
 
-    if (variant === "secondary") {
+    if (color === "secondary") {
       return (
         <Action break>
           <Action closeOverlay>

@@ -44,9 +44,9 @@ export const TabList: FC<Props> = (props) => {
   const contextMenuWhenCollapsed = isCollapsed && (
     <ContextMenuTrigger>
       <Button
-        style="soft"
+        variant="soft"
         className={styles.contextMenuButton}
-        variant="secondary"
+        color="secondary"
         aria-labelledby={titleCollapsedElementId}
       >
         <IconContextMenu />

@@ -30,9 +30,9 @@ export const OffCanvas: FC<OffCanvasProps> = (props) => {
     <Overlay controller={controller} className={rootClassName}>
       <Action closeOverlay>
         <Button
-          style="plain"
+          variant="plain"
           size="s"
-          variant="secondary"
+          color="secondary"
           className={styles.closeButton}
         >
           <IconClose />

@@ -23,4 +23,4 @@ export const asyncLongFunction = async (...args: unknown[]) => {
   asyncEndAction();
 };
 
-export const button = <Button variant="accent">Create customer</Button>;
+export const button = <Button color="accent">Create customer</Button>;

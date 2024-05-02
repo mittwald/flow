@@ -14,89 +14,89 @@ type Story = StoryObj<typeof Button>;
 
 export const PrimarySolid: Story = {
   args: {
-    variant: "primary",
+    color: "primary",
   },
 };
 
 export const PrimaryPlain: Story = {
   args: {
-    variant: "primary",
-    style: "plain",
+    color: "primary",
+    variant: "plain",
   },
 };
 
 export const PrimarySoft: Story = {
   args: {
-    variant: "primary",
-    style: "soft",
+    color: "primary",
+    variant: "soft",
   },
 };
 
 export const AccentSolid: Story = {
   args: {
-    variant: "accent",
+    color: "accent",
   },
   render: (props) => <Button {...props}>Create/Save</Button>,
 };
 
 export const AccentPlain: Story = {
   args: {
-    variant: "accent",
-    style: "plain",
+    color: "accent",
+    variant: "plain",
   },
   render: (props) => <Button {...props}>Create/Save</Button>,
 };
 
 export const AccentSoft: Story = {
   args: {
-    variant: "accent",
-    style: "soft",
+    color: "accent",
+    variant: "soft",
   },
   render: (props) => <Button {...props}>Create/Save</Button>,
 };
 
 export const SecondarySolid: Story = {
   args: {
-    variant: "secondary",
+    color: "secondary",
   },
   render: (props) => <Button {...props}>Abort/Back</Button>,
 };
 
 export const SecondaryPlain: Story = {
   args: {
-    variant: "secondary",
-    style: "plain",
+    color: "secondary",
+    variant: "plain",
   },
   render: (props) => <Button {...props}>Abort/Back</Button>,
 };
 
 export const SecondarySoft: Story = {
   args: {
-    variant: "secondary",
-    style: "soft",
+    color: "secondary",
+    variant: "soft",
   },
   render: (props) => <Button {...props}>Abort/Back</Button>,
 };
 
 export const DangerSolid: Story = {
   args: {
-    variant: "danger",
+    color: "danger",
   },
   render: (props) => <Button {...props}>Delete/Terminate</Button>,
 };
 
 export const DangerPlain: Story = {
   args: {
-    variant: "danger",
-    style: "plain",
+    color: "danger",
+    variant: "plain",
   },
   render: (props) => <Button {...props}>Delete/Terminate</Button>,
 };
 
 export const DangerSoft: Story = {
   args: {
-    variant: "danger",
-    style: "soft",
+    color: "danger",
+    variant: "soft",
   },
   render: (props) => <Button {...props}>Delete/Terminate</Button>,
 };

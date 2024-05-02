@@ -10,7 +10,7 @@ import Action from "@mittwald/flow-react-components/Action";
 import { OverlayTrigger } from "@mittwald/flow-react-components/OverlayTrigger";
 
 <OverlayTrigger>
-  <Button variant="accent">Organisation anlegen</Button>
+  <Button color="accent">Organisation anlegen</Button>
   <Modal offCanvas>
     <Heading>Neue Organisation</Heading>
     <Content>
@@ -26,10 +26,8 @@ import { OverlayTrigger } from "@mittwald/flow-react-components/OverlayTrigger";
     </Content>
     <ButtonGroup>
       <Action closeOverlay>
-        <Button variant="accent">
-          Organisation anlegen
-        </Button>
-        <Button style="soft" variant="secondary">
+        <Button color="accent">Organisation anlegen</Button>
+        <Button variant="soft" color="secondary">
           Abbrechen
         </Button>
       </Action>

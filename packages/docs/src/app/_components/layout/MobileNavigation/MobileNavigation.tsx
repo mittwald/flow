@@ -22,7 +22,7 @@ export const MobileNavigation: FC<Props> = (props) => {
   return (
     <HeaderNavigationComponent className={className}>
       <OverlayTrigger>
-        <Button variant="secondary" style="plain">
+        <Button color="secondary" variant="plain">
           <IconMenu />
         </Button>
         <OffCanvas className={styles.mobileNavigationOffCanvas}>

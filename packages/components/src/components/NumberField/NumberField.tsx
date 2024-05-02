@@ -67,8 +67,8 @@ export const NumberField = flowComponent("NumberField", (props) => {
             slot="decrement"
             className={styles.decrementButton}
             size="s"
-            style="plain"
-            variant="secondary"
+            variant="plain"
+            color="secondary"
           >
             <IconChevronDown />
             <IconMinus className={styles.coarsePointerIcon} />
@@ -78,8 +78,8 @@ export const NumberField = flowComponent("NumberField", (props) => {
             slot="increment"
             className={styles.incrementButton}
             size="s"
-            style="plain"
-            variant="secondary"
+            variant="plain"
+            color="secondary"
           >
             <IconChevronUp />
             <IconPlus className={styles.coarsePointerIcon} />
