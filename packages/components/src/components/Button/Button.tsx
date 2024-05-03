@@ -30,6 +30,9 @@ export interface ButtonProps
   isFailed?: boolean;
 
   inverse?: boolean;
+
+  /** @internal */
+  unstyled?: boolean;
 }
 
 const disablePendingProps = (props: ButtonProps) => {
@@ -67,25 +70,28 @@ export const Button = flowComponent("Button", (props) => {
     "aria-disabled": ariaDisabled,
     ref,
     inverse,
+    unstyled,
     ...restProps
   } = props;
 
-  const rootClassName = clsx(
-    styles.button,
-    isPending && styles.isPending,
-    isSucceeded && styles.isSucceeded,
-    isFailed && styles.isFailed,
-    inverse && styles.inverse,
-    styles[`size-${size}`],
-    styles[color],
-    styles[variant],
-    className,
-    /**
-     * Workaround warning: The Aria.Button does not support "aria-disabled" by
-     * now, so this Button will be visually disabled via CSS.
-     */
-    ariaDisabled && styles.ariaDisabled,
-  );
+  const rootClassName = unstyled
+    ? className
+    : clsx(
+        styles.button,
+        isPending && styles.isPending,
+        isSucceeded && styles.isSucceeded,
+        isFailed && styles.isFailed,
+        inverse && styles.inverse,
+        styles[`size-${size}`],
+        styles[color],
+        styles[variant],
+        className,
+        /**
+         * Workaround warning: The Aria.Button does not support "aria-disabled"
+         * by now, so this Button will be visually disabled via CSS.
+         */
+        ariaDisabled && styles.ariaDisabled,
+      );
 
   useAriaAnnounceActionState(
     isPending
@@ -129,11 +135,13 @@ export const Button = flowComponent("Button", (props) => {
     <ClearPropsContext>
       <Aria.Button className={rootClassName} ref={ref} {...restProps}>
         <PropsContextProvider props={propsContext}>
-          <span className={styles.content}>
-            <Wrap if={isStringContent}>
-              <Text>{children}</Text>
-            </Wrap>
-          </span>
+          <Wrap if={!unstyled}>
+            <span className={styles.content}>
+              <Wrap if={isStringContent}>
+                <Text>{children}</Text>
+              </Wrap>
+            </span>
+          </Wrap>
         </PropsContextProvider>
         {stateIcon}
       </Aria.Button>
