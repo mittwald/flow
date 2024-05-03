@@ -37,7 +37,7 @@
 
   /* Size */
 
-  .size-s {
+  &.size-s {
     font-size: var(--progress-bar--font-size-small);
     .bar {
       height: var(--progress-bar--bar-height-small);
