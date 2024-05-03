@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.101](https://github.com/mittwald/flow/compare/0.1.0-alpha.100...0.1.0-alpha.101) (2024-05-03)
+
+### Features
+
+- **Accordion:** add accordion component
+  ([fc11cd2](https://github.com/mittwald/flow/commit/fc11cd2ee09a398224bbc3dec2d873eebcb8f77c))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.100](https://github.com/mittwald/flow/compare/0.1.0-alpha.99...0.1.0-alpha.100) (2024-05-03)
 
 **Note:** Version bump only for package @mittwald/flow-design-tokens
