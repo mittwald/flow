@@ -19,11 +19,6 @@ jobs:
       PUBLISH_PAT: ${{ secrets.PUBLISH_PAT }}
 
     steps:
-      - name: Git Identity 🪪
-        run: |
-          git config user.name "${{ github.actor }}"
-          git config user.email "${{ github.actor }}@users.noreply.github.com"
-
       - name: Cleanup docs directory 🧹
         uses: maaaathis/delete-remote-directory@main
         env:
