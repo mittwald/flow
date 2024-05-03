@@ -10,7 +10,7 @@ env:
   TARGET_STORYBOOK_PATH: "/storybook/${{ github.event.pull_request.head.ref }}"
 
 jobs:
-  if_merged:
+  cleanup_previews:
     if: github.event.pull_request.merged == true
 
     runs-on: ubuntu-latest
