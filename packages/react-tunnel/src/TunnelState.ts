@@ -16,6 +16,11 @@ export class TunnelState {
     },
   );
 
+  private readonly preparedChildren = new Map<
+    string,
+    Map<string, TunnelChildren>
+  >();
+
   public constructor() {
     makeObservable(this, {
       deleteChildren: action.bound,
@@ -41,6 +46,19 @@ export class TunnelState {
     this.children.set(tunnelId, tunnelEntries);
   }
 
+  public prepareChildren(
+    tunnelId: string = defaultId,
+    entryId: string,
+    children: TunnelChildren,
+  ): void {
+    const tunnelEntries =
+      this.preparedChildren.get(tunnelId) ?? new Map<string, TunnelChildren>();
+
+    tunnelEntries.set(entryId, children);
+
+    this.preparedChildren.set(tunnelId, tunnelEntries);
+  }
+
   public deleteChildren(tunnelId: string = defaultId, entryId: string): void {
     this.children.get(tunnelId)?.delete(entryId);
   }
@@ -48,7 +66,10 @@ export class TunnelState {
   public getChildren(
     tunnelId: string = defaultId,
   ): Array<[string, TunnelChildren]> | undefined {
-    const tunnelEntries = this.children.get(tunnelId)?.entries();
+    const tunnelEntries =
+      this.children.get(tunnelId)?.entries() ??
+      this.preparedChildren.get(tunnelId)?.entries();
+
     if (tunnelEntries) {
       return Array.from(tunnelEntries);
     }
