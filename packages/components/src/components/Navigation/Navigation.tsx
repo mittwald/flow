@@ -7,11 +7,11 @@ import { NavigationGroup } from "@/components/Navigation";
 import { Wrap } from "@/components/Wrap";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
+import type { PropsWithClassName } from "@/lib/types/props";
 
 export interface NavigationProps
-  extends PropsWithChildren<ComponentProps<"nav">> {
-  className?: string;
-}
+  extends PropsWithChildren<ComponentProps<"nav">>,
+    PropsWithClassName {}
 
 export const Navigation: FC<NavigationProps> = (props) => {
   const { className, children, ...rest } = props;

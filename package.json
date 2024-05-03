@@ -28,8 +28,8 @@
     "@eslint/js": "^8.57.0",
     "@nx/devkit": "^18.3.4",
     "@types/eslint__js": "^8.42.3",
-    "@typescript-eslint/eslint-plugin": "^7.7.1",
-    "@typescript-eslint/parser": "^7.7.1",
+    "@typescript-eslint/eslint-plugin": "^7.8.0",
+    "@typescript-eslint/parser": "^7.8.0",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-json": "^3.1.0",
@@ -41,7 +41,7 @@
     "prettier-plugin-pkgsort": "^0.2.1",
     "prettier-plugin-sort-json": "^4.0.0",
     "simple-git-hooks": "^2.11.1",
-    "tsx": "^4.7.3",
+    "tsx": "^4.8.2",
     "typescript": "^5.4.5"
   },
   "dependenciesMeta": {

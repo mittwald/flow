@@ -29,7 +29,7 @@ export const DisabledSolid: Story = {
 export const DisabledPlain: Story = {
   args: {
     isDisabled: true,
-    style: "plain",
+    variant: "plain",
   },
 };
 
@@ -42,14 +42,14 @@ export const PendingSolid: Story = {
 export const PendingPlain: Story = {
   args: {
     isPending: true,
-    style: "plain",
+    variant: "plain",
   },
 };
 
 export const PendingPlainWithIcon: Story = {
   args: {
     isPending: true,
-    style: "plain",
+    variant: "plain",
   },
   render: (props) => (
     <Button {...props} aria-label="Add to favorites">
@@ -67,6 +67,6 @@ export const SucceededSolid: Story = {
 export const FailedPlain: Story = {
   args: {
     isFailed: true,
-    style: "plain",
+    variant: "plain",
   },
 };

@@ -7,8 +7,6 @@ modal:
     value: "{size-px.xl}"
   background-color:
     value: "{neutral.color.100}"
-  overlay-background-color:
-    value: rgba(0, 0, 0, 0.3)
   size:
     s:
       value: 660px

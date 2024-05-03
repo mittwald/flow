@@ -4,10 +4,11 @@ import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import clsx from "clsx";
 import styles from "./HeaderNavigation.module.scss";
 import { EmulatedBoldText } from "@/components/EmulatedBoldText";
+import type { PropsWithClassName } from "@/lib/types/props";
 
 export interface HeaderNavigationProps
-  extends PropsWithChildren<ComponentProps<"nav">> {
-  className?: string;
+  extends PropsWithChildren<ComponentProps<"nav">>,
+    PropsWithClassName {
   inverse?: boolean;
 }
 
@@ -36,7 +37,7 @@ export const HeaderNavigation: FC<HeaderNavigationProps> = (props) => {
           <Button
             {...props}
             className={styles.button}
-            style="plain"
+            variant="plain"
             inverse={inverse}
           />
         </li>

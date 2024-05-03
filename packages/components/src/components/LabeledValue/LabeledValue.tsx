@@ -4,10 +4,11 @@ import styles from "./LabeledValue.module.scss";
 import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
 import { ClearPropsContext, PropsContextProvider } from "@/lib/propsContext";
+import type { PropsWithClassName } from "@/lib/types/props";
 
-export interface LabeledValueProps extends PropsWithChildren {
-  className?: string;
-}
+export interface LabeledValueProps
+  extends PropsWithChildren,
+    PropsWithClassName {}
 
 export const LabeledValue: FC<LabeledValueProps> = (props) => {
   const { children, className } = props;
@@ -20,12 +21,12 @@ export const LabeledValue: FC<LabeledValueProps> = (props) => {
     },
     CopyButton: {
       className: styles.button,
-      style: "plain",
+      variant: "plain",
       size: "s",
     },
     Button: {
       className: styles.button,
-      style: "plain",
+      variant: "plain",
       size: "s",
     },
   };

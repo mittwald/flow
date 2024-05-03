@@ -1,5 +1,4 @@
-import {
-  List,
+import List, {
   ListFilter,
   ListItemView,
   ListSorting,
@@ -9,16 +8,16 @@ import {
   type Domain,
   domains,
 } from "@/content/02-components/structure/list/examples/domainApi";
-import { Avatar } from "@mittwald/flow-react-components/Avatar";
-import { Heading } from "@mittwald/flow-react-components/Heading";
-import { Text } from "@mittwald/flow-react-components/Text";
-import { ContextMenu } from "@mittwald/flow-react-components/ContextMenu";
+import Avatar from "@mittwald/flow-react-components/Avatar";
+import Heading from "@mittwald/flow-react-components/Heading";
+import Text from "@mittwald/flow-react-components/Text";
+import ContextMenu from "@mittwald/flow-react-components/ContextMenu";
 import {
   IconDomain,
   IconSubdomain,
 } from "@mittwald/flow-react-components/Icons";
 import StatusBadge from "@mittwald/flow-react-components/StatusBadge";
-import { MenuItem } from "@mittwald/flow-react-components/MenuItem";
+import MenuItem from "@mittwald/flow-react-components/MenuItem";
 
 <List batchSize={5}>
   <ListStaticData data={domains} />

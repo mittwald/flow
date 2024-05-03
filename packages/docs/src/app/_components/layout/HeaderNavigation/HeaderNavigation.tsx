@@ -11,6 +11,7 @@ import { Link } from "@mittwald/flow-react-components/Link";
 
 interface Props {
   docs: SerializedMdxFile[];
+  className?: string;
 }
 
 const HeaderNavigation: FC<Props> = (props) => {
@@ -31,7 +32,10 @@ const HeaderNavigation: FC<Props> = (props) => {
   ));
 
   return (
-    <HeaderNavigationComponent aria-label="Header navigation">
+    <HeaderNavigationComponent
+      className={props.className}
+      aria-label="Header navigation"
+    >
       {navigationItems}
     </HeaderNavigationComponent>
   );

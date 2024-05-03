@@ -4,10 +4,9 @@ import { useList } from "@/components/List/hooks/useList";
 import styles from "./ItemList.module.css";
 import clsx from "clsx";
 import { Item } from "@/components/List/components/Items/Item";
+import type { PropsWithClassName } from "@/lib/types/props";
 
-interface Props {
-  className?: string;
-}
+interface Props extends PropsWithClassName {}
 
 export const ItemList: FC<Props> = (props) => {
   const { className } = props;

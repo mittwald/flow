@@ -1,6 +1,5 @@
 import type { FC } from "react";
-import { useState } from "react";
-import React from "react";
+import React, { useState } from "react";
 import {
   LiveEditor,
   LiveError,
@@ -14,7 +13,6 @@ import styles from "./LiveCodeEditor.module.css";
 import * as EditorComponents from "./components";
 import clsx from "clsx";
 import { Button } from "@mittwald/flow-react-components/Button";
-import { IconCode } from "@tabler/icons-react";
 import { themes } from "prism-react-renderer";
 
 // Waiting for https://github.com/FormidableLabs/react-live/issues/339
@@ -68,24 +66,33 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
           className={clsx(styles.preview, inverse && styles.inverse)}
           style={{ zoom }}
         />
+
+        {!editorDisabled && (
+          <div className={styles.editorContainer}>
+            <LiveEditor
+              theme={themes.vsLight}
+              className={clsx(
+                styles.editor,
+                editorCollapsed && styles.collapsed,
+              )}
+            />
+          </div>
+        )}
+
         {!editorDisabled && (
           <div className={styles.actions}>
             <Button
               className={styles.toggleCode}
               size="s"
-              style="plain"
+              variant="plain"
+              color="secondary"
               onPress={() => setEditorCollapsed(!editorCollapsed)}
             >
-              <IconCode />
+              {editorCollapsed ? <>Code anzeigen</> : <>Code ausblenden</>}
             </Button>
           </div>
         )}
 
-        {!editorCollapsed && !editorDisabled && (
-          <div className={styles.editorContainer}>
-            <LiveEditor theme={themes.vsLight} className={styles.editor} />
-          </div>
-        )}
         <LiveError className={styles.error} />
       </div>
     </LiveProvider>

@@ -15,15 +15,15 @@ import ButtonGroup from "@mittwald/flow-react-components/ButtonGroup";
       &quot;Test&quot; dennoch löschen?
     </Content>
     <ButtonGroup>
-      <Button variant="danger">
+      <Button color="danger">
         Unwiederbringlich löschen
       </Button>
-      <Button variant="secondary" style="soft">
+      <Button color="secondary" variant="soft">
         Abbrechen
       </Button>
     </ButtonGroup>
   </Modal>
-  <Button variant="secondary" style="soft">
+  <Button color="secondary" variant="soft">
     Projekt löschen
   </Button>
 </Action>;

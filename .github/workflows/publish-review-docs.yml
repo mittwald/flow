@@ -59,7 +59,7 @@ jobs:
         run: yarn docs build
 
       - name: Upload files to GitHub Pages 🚀
-        uses: cpina/github-action-push-to-another-repository@main
+        uses: maaaathis/github-action-push-to-another-repository@main
         env:
           API_TOKEN_GITHUB: ${{ secrets.PUBLISH_PAT }}
         with:
