@@ -50,7 +50,7 @@
     &.#{$status} {
       border-color: var(--inline-alert--#{$status}-border-color);
 
-      .heading{
+      .heading {
         color: var(--inline-alert--#{$status}-heading-color);
       }
     }
