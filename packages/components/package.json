@@ -325,7 +325,7 @@
     "tsx": "^4.8.2",
     "typescript": "^5.4.5",
     "typescript-plugin-css-modules": "^5.1.0",
-    "vite": "^5.2.10",
+    "vite": "^5.2.11",
     "vite-plugin-banner": "^0.7.1",
     "vite-plugin-checker": "^0.6.4",
     "vite-plugin-dts": "^3.9.0",
