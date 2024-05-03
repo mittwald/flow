@@ -7,6 +7,7 @@ import { dynamic, PropsContextProvider } from "@/lib/propsContext";
 import { Button } from "@/components/Button";
 import { IconChevronDown } from "@/components/Icon/components/icons";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
+import { Activity } from "@/components/Activity";
 
 export interface AccordionProps
   extends PropsWithChildren<ComponentProps<"div">> {
@@ -44,7 +45,6 @@ export const Accordion: FC<AccordionProps> = (props) => {
       className: styles.contentInner,
       tunnelId: "content",
     },
-
     Heading: {
       className: styles.header,
       level: 4,
@@ -65,7 +65,6 @@ export const Accordion: FC<AccordionProps> = (props) => {
       >
         <TunnelProvider>
           {children}
-
           <div
             aria-labelledby={headerId}
             id={contentId}
@@ -73,7 +72,9 @@ export const Accordion: FC<AccordionProps> = (props) => {
             hidden={!expanded}
             className={styles.content}
           >
-            <TunnelExit id="content" />
+            <Activity isActive={expanded} inactiveDelay={1000}>
+              <TunnelExit id="content" />
+            </Activity>
           </div>
         </TunnelProvider>
       </PropsContextProvider>

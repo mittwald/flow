@@ -43,6 +43,7 @@ export class TunnelState {
 
     tunnelEntries.set(entryId, children);
 
+    this.preparedChildren.get(tunnelId)?.delete(entryId);
     this.children.set(tunnelId, tunnelEntries);
   }
 
@@ -61,6 +62,7 @@ export class TunnelState {
 
   public deleteChildren(tunnelId: string = defaultId, entryId: string): void {
     this.children.get(tunnelId)?.delete(entryId);
+    this.preparedChildren.get(tunnelId)?.delete(entryId);
   }
 
   public getChildren(
