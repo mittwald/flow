@@ -29,8 +29,8 @@ jobs:
         env:
           API_TOKEN_GITHUB: ${{ secrets.PUBLISH_PAT }}
         with:
-          destination-github-username: mittwald
-          destination-repository-name: flow-previews
+          target-github-username: mittwald
+          target-repository-name: flow-previews
           target-branch: main
           target-directory: "${{ env.TARGET_DOCS_PATH }}"
 
@@ -39,8 +39,8 @@ jobs:
         env:
           API_TOKEN_GITHUB: ${{ secrets.PUBLISH_PAT }}
         with:
-          destination-github-username: mittwald
-          destination-repository-name: flow-previews
+          target-github-username: mittwald
+          target-repository-name: flow-previews
           target-branch: main
           target-directory: "${{ env.TARGET_STORYBOOK_PATH }}"
 
