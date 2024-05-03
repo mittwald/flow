@@ -4,7 +4,6 @@ import React from "react";
 import { Heading } from "@/components/Heading";
 import { Content } from "@/components/Content";
 import Button from "@/components/Button";
-import { Skeleton } from "@/components/Skeleton";
 
 const meta: Meta<typeof InlineAlert> = {
   title: "Status/InlineAlert",
@@ -39,14 +38,6 @@ export const WithContent: Story = {
         To be able to send and receive emails, you must rename the address.
         <Button>Update email address</Button>
       </Content>
-    </InlineAlert>
-  ),
-};
-
-export const WithSkeletons: Story = {
-  render: (props) => (
-    <InlineAlert {...props}>
-      <Skeleton />
     </InlineAlert>
   ),
 };

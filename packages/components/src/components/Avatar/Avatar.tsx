@@ -39,9 +39,6 @@ export const Avatar: FC<AvatarProps> = (props) => {
     Icon: {
       className: styles.icon,
     },
-    Skeleton: {
-      className: styles.skeleton,
-    },
   };
 
   return (

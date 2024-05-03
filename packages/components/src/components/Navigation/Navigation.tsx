@@ -34,9 +34,6 @@ export const Navigation: FC<NavigationProps> = (props) => {
         className: styles.icon,
       },
     },
-    Skeleton: {
-      className: styles.skeleton,
-    },
   };
 
   return (

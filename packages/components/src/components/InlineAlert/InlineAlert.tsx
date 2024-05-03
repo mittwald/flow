@@ -30,9 +30,6 @@ export const InlineAlert = flowComponent("InlineAlert", (props) => {
         size: "s",
       },
     },
-    Skeleton: {
-      className: styles.skeleton,
-    },
   };
 
   return (

@@ -109,9 +109,6 @@ export const Button = flowComponent("Button", (props) => {
     Avatar: {
       className: styles.avatar,
     },
-    Skeleton: {
-      className: styles.skeleton,
-    },
   };
 
   const StateIconComponent = isSucceeded

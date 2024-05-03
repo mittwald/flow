@@ -33,7 +33,6 @@ import type { CheckboxProps } from "@/components/Checkbox";
 import type { CheckboxButtonProps } from "@/components/CheckboxButton";
 import type { TabsProps } from "@/components/Tabs";
 import type { ModalProps } from "@/components/Modal";
-import type { SkeletonProps } from "@/components/Skeleton/Skeleton";
 
 export * from "./types";
 
@@ -67,7 +66,6 @@ export interface FlowComponentPropsTypes {
   RadioButton: RadioButtonProps;
   RadioGroup: RadioGroupProps;
   Select: SelectProps;
-  Skeleton: SkeletonProps;
   StatusBadge: StatusBadgeProps;
   Switch: SwitchProps;
   Tabs: TabsProps;
@@ -109,7 +107,6 @@ const propsContextSupportingComponentsMap: Record<
   RadioButton: true,
   RadioGroup: true,
   Select: true,
-  Skeleton: true,
   StatusBadge: true,
   Switch: true,
   Tabs: true,

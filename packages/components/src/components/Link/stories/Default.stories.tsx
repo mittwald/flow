@@ -4,7 +4,6 @@ import { action } from "@storybook/addon-actions";
 import React from "react";
 import { Text } from "@/components/Text";
 import { IconExternalLink } from "@/components/Icon/components/icons";
-import { Skeleton } from "@/components/Skeleton";
 
 const meta: Meta<typeof Link> = {
   title: "Navigation/Link",
@@ -38,14 +37,6 @@ export const WithIcon: Story = {
     <Link {...props} href="https://mittwald.de">
       mittwald.de
       <IconExternalLink aria-label="external link" />
-    </Link>
-  ),
-};
-
-export const WithSkeleton: Story = {
-  render: (props) => (
-    <Link {...props}>
-      <Skeleton />
     </Link>
   ),
 };

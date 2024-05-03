@@ -55,11 +55,6 @@
     margin-inline-start: var(--button--text-to-icon-spacing);
   }
 
-  &:where(:has(.skeleton)) {
-    padding: 0;
-    background-color: var(--button--disabled-solid-background-color);
-  }
-
   /* States */
 
   &.isSucceeded {

@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from "@storybook/react";
 import Text from "../Text";
 import React from "react";
 import Section from "@/components/Section";
-import { Skeleton } from "@/components/Skeleton";
 
 const meta: Meta<typeof Text> = {
   title: "Content/Text",
@@ -31,11 +30,3 @@ export default meta;
 type Story = StoryObj<typeof Text>;
 
 export const Default: Story = {};
-
-export const WithSkeleton: Story = {
-  render: (props) => (
-    <Text {...props}>
-      <Skeleton />
-    </Text>
-  ),
-};

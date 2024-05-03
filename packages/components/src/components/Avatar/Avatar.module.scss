@@ -14,11 +14,6 @@
 
   /* Elements */
 
-  .skeleton {
-    width: 100%;
-    height: 100%;
-  }
-
   img {
     width: 100%;
     height: 100%;
@@ -58,10 +53,6 @@
       --content-accent-color: var(
         --initials--variant-#{$variant}-content-accent-color
       );
-
-      &:has(.skeleton) {
-        --background-color: var(--neutral--color--100);
-      }
     }
   }
 

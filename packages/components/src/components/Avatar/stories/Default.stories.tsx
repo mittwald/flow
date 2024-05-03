@@ -5,7 +5,6 @@ import { Initials } from "@/components/Initials";
 import { Image } from "@/components/Image";
 import { dummyText } from "@/lib/dev/dummyText";
 import IconApp from "@/components/Icon/components/icons/IconApp";
-import { Skeleton } from "@/components/Skeleton";
 
 const meta: Meta<typeof Avatar> = {
   title: "Content/Avatar",
@@ -49,12 +48,4 @@ export const WithIcon: Story = {
     </Avatar>
   ),
   args: { variant: 1 },
-};
-
-export const WithSkeleton: Story = {
-  render: (props) => (
-    <Avatar {...props}>
-      <Skeleton />
-    </Avatar>
-  ),
 };

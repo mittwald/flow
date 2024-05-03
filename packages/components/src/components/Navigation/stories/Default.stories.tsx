@@ -9,7 +9,6 @@ import { Text } from "@/components/Text";
 import { Link } from "@/components/Link";
 import { Navigation, NavigationGroup } from "@/components/Navigation";
 import Label from "@/components/Label";
-import { Skeleton } from "@/components/Skeleton";
 
 const meta: Meta<typeof Navigation> = {
   title: "Navigation/Navigation",
@@ -72,16 +71,6 @@ export const WithGroups: Story = {
         <Link href="#">Databases</Link>
         <Link href="#">Domains</Link>
       </NavigationGroup>
-    </Navigation>
-  ),
-};
-
-export const WithSkeletons: Story = {
-  render: (props) => (
-    <Navigation aria-label="Main menu" {...props}>
-      <Skeleton />
-      <Skeleton />
-      <Skeleton />
     </Navigation>
   ),
 };
