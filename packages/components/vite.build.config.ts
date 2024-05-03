@@ -19,6 +19,7 @@ export default defineConfig(
     build: {
       lib: {
         entry: {
+          Accordion: "./src/components/Accordion/index.ts",
           Action: "./src/components/Action/index.ts",
           Avatar: "./src/components/Avatar/index.ts",
           Breadcrumb: "./src/components/Breadcrumb/index.ts",
