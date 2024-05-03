@@ -1,3 +1,12 @@
 import Skeleton from "@mittwald/flow-react-components/Skeleton";
 
-<Skeleton width={300} height={100} />;
+<Column>
+  <Skeleton style={{ height: "100px" }} />
+  <Skeleton
+    style={{
+      height: "100px",
+      width: "100px",
+      borderRadius: "50%",
+    }}
+  />
+</Column>;
