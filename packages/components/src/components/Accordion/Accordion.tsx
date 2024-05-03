@@ -31,7 +31,7 @@ export const Accordion: FC<AccordionProps> = (props) => {
       unstyled
       aria-expanded={expanded}
       className={styles.headerButton}
-      onPress={() => setExpanded(!expanded)}
+      onPress={() => setExpanded((expanded) => !expanded)}
       aria-controls={contentId}
     >
       {children}

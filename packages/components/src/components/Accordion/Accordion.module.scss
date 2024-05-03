@@ -43,6 +43,11 @@
     overflow: hidden;
   }
 
+  .chevron {
+    transition-property: transform;
+    transition-duration: var(--transition--duration--default);
+  }
+
   &.expanded {
     .content {
       grid-template-rows: 1fr;
@@ -52,6 +57,7 @@
 
     .chevron {
       transform: rotate(180deg);
+      transition: all 500ms;
     }
   }
 }
