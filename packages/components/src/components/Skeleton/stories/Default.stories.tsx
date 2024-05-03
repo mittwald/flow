@@ -17,16 +17,17 @@ type Story = StoryObj<typeof Skeleton>;
 export const Default: Story = {};
 
 export const OnDarkBackground: Story = {
-  render: (props) => (
-    <div
-      style={{
-        background: "var(--color--hosting-blue--1000)",
-        padding: "var(--size-px--m)",
-      }}
-    >
-      <Skeleton {...props} />
-    </div>
-  ),
+  parameters: {
+    backgrounds: {
+      default: "dark",
+      values: [
+        {
+          name: "dark",
+          value: "#002A7B",
+        },
+      ],
+    },
+  },
 };
 
 export const WithCustomSize: Story = {
