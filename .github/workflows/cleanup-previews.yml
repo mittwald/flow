@@ -1,0 +1,49 @@
+name: Cleanup preview repository
+
+on:
+  pull_request:
+    types:
+      - closed
+
+env:
+  TARGET_DOCS_PATH: "/docs/${{ github.event.pull_request.head.ref }}"
+  TARGET_STORYBOOK_PATH: "/storybook/${{ github.event.pull_request.head.ref }}"
+
+jobs:
+  cleanup_previews:
+    if: github.event.pull_request.merged == true
+
+    runs-on: ubuntu-latest
+
+    env:
+      PUBLISH_PAT: ${{ secrets.PUBLISH_PAT }}
+
+    steps:
+      - name: Git Identity 🪪
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+
+      - name: Cleanup docs directory 🧹
+        uses: maaaathis/delete-remote-directory@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.PUBLISH_PAT }}
+        with:
+          target-github-username: mittwald
+          target-repository-name: flow-previews
+          target-branch: main
+          target-directory: "${{ env.TARGET_DOCS_PATH }}"
+
+      - name: Cleanup storybook directory 🧹
+        uses: maaaathis/delete-remote-directory@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.PUBLISH_PAT }}
+        with:
+          target-github-username: mittwald
+          target-repository-name: flow-previews
+          target-branch: main
+          target-directory: "${{ env.TARGET_STORYBOOK_PATH }}"
+
+      - name: Summary
+        run: |
+          echo Deleted Documentation and Storybook for branch: ${{ github.event.pull_request.head.ref }}
