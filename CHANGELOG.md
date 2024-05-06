@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.104](https://github.com/mittwald/flow/compare/0.1.0-alpha.103...0.1.0-alpha.104) (2024-05-06)
+
+### Bug Fixes
+
+- **Tabs:** fix nested tabs
+  ([68a7548](https://github.com/mittwald/flow/commit/68a75485bdafa020b534123f74b9df4618d33fb8))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.103](https://github.com/mittwald/flow/compare/0.1.0-alpha.102...0.1.0-alpha.103) (2024-05-03)
 
 **Note:** Version bump only for package @mittwald/flow-project
