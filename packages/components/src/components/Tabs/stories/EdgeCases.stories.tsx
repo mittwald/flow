@@ -17,7 +17,7 @@ type Story = StoryObj<typeof Tabs>;
 
 export const DifferentHeight: Story = {
   render: (props) => (
-    <Tabs {...props} disabledKeys={["spam"]}>
+    <Tabs {...props}>
       <Tab id="a">
         <TabTitle>Tab A</TabTitle>
         <Section>
@@ -37,6 +37,39 @@ export const DifferentHeight: Story = {
         </Section>
         <Section>
           <Text>{dummyText.long}</Text>
+        </Section>
+      </Tab>
+    </Tabs>
+  ),
+};
+
+export const Nested: Story = {
+  render: (props) => (
+    <Tabs {...props}>
+      <Tab id="a">
+        <TabTitle>Tab A</TabTitle>
+        <Section>
+          <Text>{dummyText.short}</Text>
+        </Section>
+      </Tab>
+      <Tab id="b">
+        <TabTitle>Tab B</TabTitle>
+        <Section>
+          <Text>{dummyText.short}</Text>
+          <Tabs {...props} disabledKeys={["spam"]}>
+            <Tab id="subA">
+              <TabTitle>Sub tab A</TabTitle>
+              <Section>
+                <Text>{dummyText.short}</Text>
+              </Section>
+            </Tab>
+            <Tab id="subB">
+              <TabTitle>Sub tab B</TabTitle>
+              <Section>
+                <Text>{dummyText.short}</Text>
+              </Section>
+            </Tab>
+          </Tabs>
         </Section>
       </Tab>
     </Tabs>
