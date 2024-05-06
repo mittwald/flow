@@ -54,7 +54,7 @@ const NavigationSection: FC<NavigationSectionProps> = (props) => {
   );
 
   return (
-    <NavigationGroup>
+    <NavigationGroup collapsable>
       <Label>
         <GroupText>{group}</GroupText>
       </Label>

@@ -1,18 +1,22 @@
 {
   "name": "@mittwald/flow-react-components",
-  "version": "0.1.0-alpha.94",
+  "version": "0.1.0-alpha.103",
   "type": "module",
   "description": "A React implementation of Flow, mittwald’s design system",
   "homepage": "https://mittwald.github.io/flow",
   "repository": "https://github.com/mittwald/flow",
   "exports": {
-    "./Avatar": {
-      "types": "./dist/types/components/Avatar/index.d.ts",
-      "import": "./dist/Avatar.js"
+    "./Accordion": {
+      "types": "./dist/types/components/Accordion/index.d.ts",
+      "import": "./dist/Accordion.js"
     },
     "./Action": {
       "types": "./dist/types/components/Action/index.d.ts",
       "import": "./dist/Action.js"
+    },
+    "./Avatar": {
+      "types": "./dist/types/components/Avatar/index.d.ts",
+      "import": "./dist/Avatar.js"
     },
     "./Button": {
       "types": "./dist/types/components/Button/index.d.ts",
@@ -178,6 +182,10 @@
       "types": "./dist/types/components/Select/index.d.ts",
       "import": "./dist/Select.js"
     },
+    "./Skeleton": {
+      "types": "./dist/types/components/Skeleton/index.d.ts",
+      "import": "./dist/Skeleton.js"
+    },
     "./StatusBadge": {
       "types": "./dist/types/components/StatusBadge/index.d.ts",
       "import": "./dist/StatusBadge.js"
@@ -313,10 +321,11 @@
     "rollup": "^4.17.2",
     "sass": "^1.76.0",
     "storybook": "^8.0.9",
+    "storybook-addon-rtl": "^1.0.0",
     "tsx": "^4.8.2",
     "typescript": "^5.4.5",
     "typescript-plugin-css-modules": "^5.1.0",
-    "vite": "^5.2.10",
+    "vite": "^5.2.11",
     "vite-plugin-banner": "^0.7.1",
     "vite-plugin-checker": "^0.6.4",
     "vite-plugin-dts": "^3.9.0",
