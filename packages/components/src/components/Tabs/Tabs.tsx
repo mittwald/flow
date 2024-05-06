@@ -26,6 +26,7 @@ export const Tabs = flowComponent("Tabs", (props) => {
     <TunnelProvider>
       {children}
       <Aria.Tabs
+        slot={null}
         className={rootClassName}
         {...rest}
         selectedKey={selection}
