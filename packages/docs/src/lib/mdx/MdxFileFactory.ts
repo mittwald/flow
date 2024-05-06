@@ -63,8 +63,15 @@ export class MdxFileFactory {
 
     const mdxSource = await MdxFileFactory.getMdxSource(filename);
     const examples = MdxFileFactory.getExamples(filename);
+    const fileContent = jetpack.read(filename);
 
-    return new MdxFile(relativeFilename, slugs, mdxSource, examples);
+    return new MdxFile(
+      relativeFilename,
+      slugs,
+      mdxSource,
+      examples,
+      fileContent,
+    );
   }
 
   private static async getMdxSource(

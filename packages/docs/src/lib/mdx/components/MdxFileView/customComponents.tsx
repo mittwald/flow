@@ -39,13 +39,13 @@ export const customComponents: MDXComponents = {
   li: ({ children }) => <li className={styles.li}>{children}</li>,
 
   h2: ({ children }) => (
-    <Heading level={2} className={styles.heading2}>
+    <Heading level={2} id={children?.toString()} className={styles.heading2}>
       {children}
     </Heading>
   ),
 
   h3: ({ children }) => (
-    <Heading level={3} className={styles.heading}>
+    <Heading level={3} id={children?.toString()} className={styles.heading}>
       {children}
     </Heading>
   ),

@@ -28,12 +28,14 @@ export class MdxFile {
   public readonly pathname: string;
   public readonly mdxSource: MDXRemoteSerializeResult<never, MdxFileMeta>;
   private readonly examples: MdxFileExamples;
+  private readonly fileContent?: string;
 
   public constructor(
     filename: string,
     slugs: string[],
     mdxSource: MDXRemoteSerializeResult<never, MdxFileMeta>,
     examples: MdxFileExamples,
+    fileContent?: string,
   ) {
     this.filename = filename;
     this.slugs = slugs;
@@ -41,6 +43,7 @@ export class MdxFile {
     this.id = filename;
     this.mdxSource = mdxSource;
     this.examples = examples;
+    this.fileContent = fileContent;
   }
 
   public getTitle(): string {
@@ -48,6 +51,17 @@ export class MdxFile {
       this.mdxSource.frontmatter.title ??
       this.mdxSource.frontmatter.component ??
       humanizeString(this.slugs[this.slugs.length - 1])
+    );
+  }
+
+  public getHeadings(): string[] {
+    if (!this.fileContent) {
+      return [];
+    }
+
+    const lines = this.fileContent?.split(/\r?\n|\r|\n/g);
+    return lines?.filter(
+      (line) => line.startsWith("## ") || line.startsWith("### "),
     );
   }
 
