@@ -182,6 +182,10 @@
       "types": "./dist/types/components/Select/index.d.ts",
       "import": "./dist/Select.js"
     },
+    "./Separator": {
+      "types": "./dist/types/components/Separator/index.d.ts",
+      "import": "./dist/Separator.js"
+    },
     "./Skeleton": {
       "types": "./dist/types/components/Skeleton/index.d.ts",
       "import": "./dist/Skeleton.js"

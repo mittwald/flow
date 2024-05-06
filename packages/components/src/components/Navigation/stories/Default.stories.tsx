@@ -9,6 +9,7 @@ import { Text } from "@/components/Text";
 import { Link } from "@/components/Link";
 import { Navigation, NavigationGroup } from "@/components/Navigation";
 import Label from "@/components/Label";
+import { Separator } from "@/components/Separator";
 
 const meta: Meta<typeof Navigation> = {
   title: "Navigation/Navigation",
@@ -64,6 +65,29 @@ export const WithGroups: Story = {
           Performance
         </Link>
       </NavigationGroup>
+
+      <NavigationGroup>
+        <Label>Components</Label>
+        <Link href="#">Apps</Link>
+        <Link href="#">Databases</Link>
+        <Link href="#">Domains</Link>
+      </NavigationGroup>
+    </Navigation>
+  ),
+};
+
+export const WithSeparator: Story = {
+  render: (props) => (
+    <Navigation aria-label="Main navigation" {...props}>
+      <NavigationGroup>
+        <Label>General</Label>
+        <Link href="#">Dashboard</Link>
+        <Link href="#" aria-current="page">
+          Performance
+        </Link>
+      </NavigationGroup>
+
+      <Separator />
 
       <NavigationGroup>
         <Label>Components</Label>

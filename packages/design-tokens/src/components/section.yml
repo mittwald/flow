@@ -4,7 +4,7 @@ section:
   border-style:
     value: "{border-style.default}"
   border-color:
-    value: "{neutral.color.500}"
+    value: "{neutral.color.700}"
   section-to-section-spacing:
     value: "{size-rem.xl}"
   content-to-content-spacing:

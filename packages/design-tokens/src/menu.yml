@@ -5,6 +5,8 @@ menu:
     value: "{size-px.m}"
   label-to-group-spacing:
     value: "{size-px.s}"
+  separator-to-item-spacing:
+    value: "{size-px.s}"
 
 menu-item:
   font-weight:

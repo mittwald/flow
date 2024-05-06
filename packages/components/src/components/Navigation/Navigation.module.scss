@@ -10,4 +10,8 @@
   .item {
     @include menuItem.menuItem();
   }
+
+  hr {
+    margin-block: var(--menu--separator-to-item-spacing);
+  }
 }
