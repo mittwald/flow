@@ -28,6 +28,7 @@ jobs:
           target-repository-name: flow-previews
           target-branch: main
           target-directory: "${{ env.TARGET_DOCS_PATH }}"
+          commit-message: "Cleanup merged docs previews"
 
       - name: Cleanup storybook directory 🧹
         uses: maaaathis/delete-remote-directory@main
@@ -38,6 +39,7 @@ jobs:
           target-repository-name: flow-previews
           target-branch: main
           target-directory: "${{ env.TARGET_STORYBOOK_PATH }}"
+          commit-message: "Cleanup merged Storybook previews"
 
       - name: Summary
         run: |
