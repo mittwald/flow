@@ -1,52 +1,37 @@
-TextFields ermöglichen es Nutzern, freien Text über das Keyboard einzugeben. Ein
-erforderliches [Label](/02-components/content/label) und eine optionale
-FieldDescription unterstützen dabei, die Anforderungen an die Eingabe klar zu
-kommunizieren oder Fehlermeldungen darzustellen.
+## Grundlagen
 
 ### Best Practices
 
-<Info>
 - Frage nur nach Informationen, die wirklich notwendig sind.
-
-- Stelle sicher, dass das Label prägnant, vollständig sichtbar und leicht
-  verständlich ist.
-
-- Verwende die FieldDescription sparsam und für sinnvolle Beispiele oder
+- Stelle sicher, dass das [Label](/02-components/content/label) prägnant,
+  vollständig sichtbar und leicht verständlich ist.
+- Verwende die FieldDescription für sinnvolle Beispiele oder
   Formatierungshinweise.
-
 - Stelle sicher, dass Fehlermeldungen hilfreich sind, eine Lösung bieten und
   leicht umzusetzen sind.
-
 - Verwende keine Placeholder für wesentliche Informationen.
-
-</Info>
 
 ---
 
-## Verwendung
+## Anwendung
 
 ### Position
 
 Das TextField wird meistens innerhalb eines
-[ColumnLayouts](/02-components/structure/column-layout) platziert. Es füllt
-dabei jeweils die Breite des Columns, in dem es platziert wird, vollständig aus.
-Dadurch folgt es auch einer vorhandenen Aufteilung in Spalten, die das
-ColumnLayout eventuell mit sich bringt. Das ColumnLayout macht es somit sehr
-einfach, übersichtliche Forms unter Berücksichtigung des Layouts zu erstellen.
-
-Am besten eignet sich ein 1:1 Raster für TextFields, sodass sie maximal die
-Hälfte des Inhaltsbereichs einnehmen können. Das Column Layout kann außerdem
-erweitert werden, um spezifischeren Layoutanforderungen gerecht zu werden. So
-kann bspw. ein 2:1 Raster innerhalb einer Spalte des 1:1 Rasters platziert
-werden, um Straßenname und Hausnummer zu einer sinnvollen Gruppe
-zusammenzufassen.
+[ColumnLayouts](/02-components/structure/column-layout) platziert und füllt dort
+immer die zur Verfügung stehende Breite. Dadurch folgt es auch einer Aufteilung
+in Spalten, sofern das ColumnLayout eine vorsieht. Am besten eignet sich ein 1:1
+Raster für TextFields, sodass sie maximal die Hälfte des Content-Bereichs
+einnehmen können. Das ColumnLayout kann zudem erweitert werden, um
+spezifischeren Layoutanforderungen gerecht zu werden.
 
 <Do example="columnLayout">
-#### Grids und sinnvolle Gruppen
+#### Do
 
-Nutze ein 1:1 ColumnLayout für TextFields. Um sinnvolle Gruppen (z.B. Straße und
-Hausnummer) zu erstellen, kannst du mehrere ColumnLayouts ineinander
-verschachteln.
+Nutze ein 1:1 [ColumnLayout](/02-components/structure/column-layout) für
+TextFields. Darin kann ein weiteres Raster (z.B. 2:1) verwendet werden, um
+sinnvolle Gruppierungen (z.B. Straße und Hausnummer) innerhalb des Layouts zu
+erstellen.
 
 </Do>
 
@@ -72,73 +57,71 @@ und sollte daher so gewählt werden, dass es alle Informationen liefert, um das
 TextField korrekt ausfüllen zu können. Außerdem sollte das Label knapp (max. 2
 Wörter), präzise und weder versteckt noch auspunktiert sein.
 
+<DoAndDont>
+  <Dont example="withoutLabel">
+    #### Dont
+
+    Das TextField darf nie ohne ein zugehöriges Label verwendet werden.
+
+  </Dont>
+  <Do example="default">
+    #### Do
+
+    Verwende ein kurzes, präzises Label, das essentielle Eingabeanforderungen kommuniziert.
+
+  </Do>
+</DoAndDont>
 ---
 
 ### FieldDescription
 
 Die FieldDescription kann als optionaler Hilfstext unterhalb des TextFields
 angezeigt werden, um dem Nutzer ergänzenden Informationen oder Anweisungen zu
-bieten. Es sollte sparsam verwendet werden und kann als zusätzliche Beschreibung
-verwendet werden, Eingabe- und Formatierungsbeispiele liefern.
+bieten. Sie sollte sparsam verwendet werden und kann Eingabe- und
+Formatierungsbeispiele liefern.
 
 ---
 
 ### Placeholder
 
-Placeholder verursachen verschiedene Accessibility-Probleme. Sie verschwinden
-beim Beginn der Texteingabe, werden von manchen Assistenztechnologien nicht
-korrekt erkannt und sind kognitiv schwieriger zu verarbeiten, als bspw. eine
-FieldDescription. \
-Daher dürfen Placeholder keine Informationen enthalten, die für das korrekte Ausfüllen
-des TextFields erforderlich sind.
+Placeholder sind nicht accessible und dürfen daher keine Informationen
+enthalten, die für das korrekte Ausfüllen des TextFields erforderlich sind. Das
+größte Problem ist, dass Placeholder verschwinden, sobald Text eingegeben wird.
+Darüber hinaus werden sie von manchen Assistenztechnologien nicht korrekt erkann
+und sind kognitiv schwieriger zu verarbeiten als die FieldDescritption. Statt
+einen Placeholder zu verwenden, ergänze das TextField mit ...
 
-Ergänze das TextField mit ...
-
-- Einem Label für Informationen, die essenziell für das Verständnis der
-  Eingabeanforderungen sind.
-- Einer FieldDescription, um dem Nutzer Beispiele oder Formatierungshinweise zu
+- einem [Label](/02-components/content/label) für Informationen, die essenziell
+  für das Verständnis der Eingabeanforderungen sind.
+- einer FieldDescription, um dem Nutzer Beispiele oder Formatierungshinweise zu
   geben.
 
 <DoAndDont>
   <Dont example="placeholder">
     #### Dont
 
-    Placeholder sollten keine hilfreichen Informationen oder
-    Formatierungshinweise enthalten.
+    Placeholder sollten keine essentiellen Informationen oder Formatierungshinweise enthalten.
 
   </Dont>
   <Do example="default">
     #### Do
-    
-    Nutze die FieldDescription um hilfreiche Informationen darzustellen, z.B.
-    für Formatierungshinweise.
+
+    Verwende das [Label](/02-components/content/label) für essentielle Informationen und die FieldDescription für Ergänzungen, z.B. Formatierungshinweise oder Beispiele.
+
   </Do>
 </DoAndDont>
 
 ---
 
-## Verhalten
-
-### Min / Max Width
-
-Ein TextField besitzt keine fixe Breite. Achte daher darauf, die Breite des
-TextFields angemessen zum Inhalt zu wählen. So kann z.B. für ein TextField für
-eine URL deutlich mehr Platz benötigt werden, als für eines, das nur eine
-Hausnummer abfragt.
-
----
-
 ## Accessibility
 
-Das TextField kann sowohl über Tastaturnavigation erreicht und aktiviert werden
-als auch von Assistenztechnologien angesteuert werden. Ein User kann außerdem im
-TextField befindliche Icons auswählen, wenn diese interaktiv sind.
+Das TextField kann sowohl über die Tastatur erreicht und aktiviert werden als
+auch mit Assistenztechnologien angesteuert werden. Damit auch der Inhalt
+barrierefrei ist, solltest du:
 
-Damit auch der Inhalt barrierefrei ist, solltest du:
-
-- Essenzielle Eingabeanforderungen über das Label kommunizieren.
-- Unterstützung, Beispiele oder Formatierungshilfen über die FieldDescription
-  bieten.
+- immer ein [Label](/02-components/content/label) verwenden, welches essenzielle
+  Eingabeanforderungen über das Label kommuniziert.
+- die FieldDescription nutzen, um Unterstützung, Beispiele oder
+  Formatierungshilfen zu geben.
 - Placeholder nicht für Inhalte verwenden, die zum Ausfüllen des TextFields
   hilfreich sind.
-- Das Aria-Label pflegen, wenn die Komponente ohne Label verwendet wird.

@@ -70,7 +70,7 @@ export const customComponents: MDXComponents = {
   a: ({ children, href }) => {
     if (href?.startsWith("http")) {
       return (
-        <Link href={href}>
+        <Link href={href} inline>
           {children}
           <IconExternalLink />
         </Link>
@@ -79,7 +79,9 @@ export const customComponents: MDXComponents = {
 
     return (
       <LinkProvider>
-        <Link href={href}>{children}</Link>
+        <Link inline href={href}>
+          {children}
+        </Link>
       </LinkProvider>
     );
   },
