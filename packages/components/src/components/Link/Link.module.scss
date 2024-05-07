@@ -26,13 +26,13 @@
     cursor: pointer;
   }
 
-  /* Elements */
-
-  .inline {
+  &.inline {
     font-weight: normal;
     font-size: var(--font-size--default);
     text-decoration: underline;
   }
+
+  /* Elements */
 
   .icon {
     margin-inline-start: var(--link--text-to-icon-spacing);

@@ -8,11 +8,16 @@ import CopyButton from "@mittwald/flow-react-components/CopyButton";
 import Link from "@mittwald/flow-react-components/Link";
 import Text from "@mittwald/flow-react-components/Text";
 import { LinkProvider } from "@mittwald/flow-react-components/nextjs";
+import DoAndDont from "@/lib/mdx/components/DoAndDont/DoAndDont";
+import { IconExternalLink } from "@mittwald/flow-react-components/Icons";
+import { ColumnLayout } from "@mittwald/flow-react-components/ColumnLayout";
 
 export const customComponents: MDXComponents = {
   Content: Content,
   Heading: Heading,
   InlineAlert: InlineAlert,
+  DoAndDont: DoAndDont,
+  ColumnLayout: ColumnLayout,
 
   pre: ({ children }) => (
     <div className={styles.preContainer}>
@@ -64,12 +69,19 @@ export const customComponents: MDXComponents = {
 
   a: ({ children, href }) => {
     if (href?.startsWith("http")) {
-      return <Link href={href}>{children}</Link>;
+      return (
+        <Link href={href} inline>
+          {children}
+          <IconExternalLink />
+        </Link>
+      );
     }
 
     return (
       <LinkProvider>
-        <Link href={href}>{children}</Link>
+        <Link inline href={href}>
+          {children}
+        </Link>
       </LinkProvider>
     );
   },
