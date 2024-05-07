@@ -22,12 +22,12 @@ export const PaginationInfos: FC<TextProps> = (props) => {
   }
 
   const text = isFiltered
-    ? stringFormatter("paginationInfoFiltered", {
+    ? stringFormatter("list.paginationInfoFiltered", {
         visibleItemsCount,
         filteredItemsCount,
         totalItemsCount,
       })
-    : stringFormatter("paginationInfo", {
+    : stringFormatter("list.paginationInfo", {
         visibleItemsCount,
         totalItemsCount,
       });

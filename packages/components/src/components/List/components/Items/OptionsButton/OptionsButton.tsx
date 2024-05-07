@@ -18,7 +18,7 @@ export const OptionsButton: FC<Props> = (props) => {
       <Button
         variant="plain"
         className={className}
-        aria-label={stringFormatter.format("options")}
+        aria-label={stringFormatter.format("list.options")}
       >
         <IconContextMenu />
       </Button>

@@ -15,6 +15,7 @@ export interface ContentProps
   clearPropsContext?: boolean;
   /** @internal */
   isActive?: boolean;
+  slot?: string;
 }
 
 export const Content = flowComponent("Content", (props) => {

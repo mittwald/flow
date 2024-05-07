@@ -18,6 +18,7 @@ import { IconDomain, IconSubdomain } from "@/components/Icon/components/icons";
 import StatusBadge from "@/components/StatusBadge";
 import type { Domain } from "../testData/domainApi";
 import { getDomains, getTypes } from "../testData/domainApi";
+import { Header } from "@/components/Header";
 
 const loadDomains: AsyncDataLoader<Domain> = async (opt) => {
   const response = await getDomains({
@@ -63,15 +64,21 @@ const meta: Meta<typeof List> = {
         <ListItemView<Domain>>
           {(domain) => (
             <>
-              <Avatar variant={domain.type === "Domain" ? 1 : 2}>
-                {domain.type === "Domain" ? <IconDomain /> : <IconSubdomain />}
-              </Avatar>
-              <Heading>{domain.hostname}</Heading>
-              {domain.verified ? (
-                <Text>{domain.type}</Text>
-              ) : (
-                <StatusBadge status="warning">Not verified</StatusBadge>
-              )}
+              <Header>
+                <Avatar variant={domain.type === "Domain" ? 1 : 2}>
+                  {domain.type === "Domain" ? (
+                    <IconDomain />
+                  ) : (
+                    <IconSubdomain />
+                  )}
+                </Avatar>
+                <Heading>{domain.hostname}</Heading>
+                {domain.verified ? (
+                  <Text>{domain.type}</Text>
+                ) : (
+                  <StatusBadge status="warning">Not verified</StatusBadge>
+                )}
+              </Header>
 
               <ContextMenu>
                 <MenuItem>Show details</MenuItem>
@@ -101,11 +108,18 @@ export const ItemsWithLink: Story = {
         <ListItemView<Domain>>
           {(domain) => (
             <Link href="#">
-              <Avatar variant={domain.type === "Domain" ? 1 : 2}>
-                {domain.type === "Domain" ? <IconDomain /> : <IconSubdomain />}
-              </Avatar>
-              <Heading>{domain.hostname}</Heading>
-              <Text>{domain.type}</Text>
+              <Header>
+                <Avatar variant={domain.type === "Domain" ? 1 : 2}>
+                  {domain.type === "Domain" ? (
+                    <IconDomain />
+                  ) : (
+                    <IconSubdomain />
+                  )}
+                </Avatar>
+                <Heading>{domain.hostname}</Heading>
+                <Text>{domain.type}</Text>
+              </Header>
+
               <ContextMenu>
                 <MenuItem>Show details</MenuItem>
                 <MenuItem>Delete</MenuItem>
