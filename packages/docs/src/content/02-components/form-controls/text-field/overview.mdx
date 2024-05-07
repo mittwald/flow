@@ -1,4 +1,10 @@
-## Beispiel
+## Playground
+
+Verwende `<TextField />`, um ein TextField anzuzeigen. Integriere immer ein
+`<Label />`, um Informationen zu vermitteln, die für das Verständnis der
+Eingabeanforderungen unerlässlich sind. Optional können zusätzliche
+Informationen (z.B. Formatierungshinweise) über die `<FieldDescription />`
+ergänzt werden.
 
 <LiveCodeEditor />
 
@@ -6,16 +12,42 @@
 
 ## Disabled
 
+Wenn das TextField disabled ist, kann nicht mit ihm interagiert werden. Sobald
+die Ursache für die Deaktivierung behoben ist, kann das TextField wieder normal
+verwendet werden.
+
 <LiveCodeEditor example="disabled" editorCollapsed />
 
 ---
 
-## Required
+## Validierung
 
-<LiveCodeEditor example="required" editorCollapsed />
+Um das textField zu validieren, stehen folgende Properties zur Verfügung:
+
+- `isRequired` für Pflichtfelder.
+- `validate` für eigene Validierungen.
+- HTML Input Properties wie `type=”email”`, `minLength`.
+
+Wenn die Benutzereingabe nicht den Anforderungen entspricht, wird das TextField
+invalidiert. Mittels `<FieldError />` kann eine Fehlermeldung angezeigt werden.
+
+<LiveCodeEditor example="invalid" editorCollapsed />
 
 ---
 
-## Invalid
+## Value
 
-<LiveCodeEditor example="invalid" editorCollapsed />
+Standardmäßig ist der Value eines TextFields leer. Es ist möglich dem TextField
+eine uncontrolled `defaultValue` mitzugeben. Es kann auch ein controlled `value`
+für das TextField gesetzt werden, um dieses über `onChange` zu updaten.
+
+<LiveCodeEditor example="defaultValue" />
+
+---
+
+## Input Properties
+
+Das TextField unterstützt die Standard-Properties eines HTML `<input />` Feldes.
+(s. [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input))
+
+<LiveCodeEditor example="inputProps" />
