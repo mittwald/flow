@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.109](https://github.com/mittwald/flow/compare/0.1.0-alpha.108...0.1.0-alpha.109) (2024-05-08)
+
+### Bug Fixes
+
+- form control height
+  ([7093177](https://github.com/mittwald/flow/commit/70931775da37e670298c5f8a31bc152f029bbd60))
+- **LabeledValue:** fix content position
+  ([53331be](https://github.com/mittwald/flow/commit/53331beb06e7c5d1f9c6cc6fee1d06d4132d340c))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.108](https://github.com/mittwald/flow/compare/0.1.0-alpha.107...0.1.0-alpha.108) (2024-05-07)
 
 **Note:** Version bump only for package @mittwald/flow-project
