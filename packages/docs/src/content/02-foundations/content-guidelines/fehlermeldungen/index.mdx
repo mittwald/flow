@@ -1,0 +1,178 @@
+## Best Practices
+
+- Platziere Fehlermeldungen in unmittelbarer Nähe zur Ursache des Problems.
+- Stelle sicher, dass Fehlermeldungen kurz, verständlich, hilfreich und
+  handlungsorientiert sind.
+- Versuche bei jeder Fehlermeldung eine Lösung zu kommunizieren.
+- Unterscheide verschiedene Arten von Fehlermeldungen, basierend auf ihrem
+  Umfang und ihrer Dringlichkeit.
+
+---
+
+## Grundlagen
+
+### Kurz und hilfreich
+
+Fehlermeldungen sollten kurz, sinnvoll und hilfreich für den Nutzer sein. Es
+gilt: So kurz wie möglich, aber so lang wie nötig. Das bedeutet allerdings auch,
+dass es in manchen Fällen ausreichend sein kann, nur die Lösung zu nennen.
+
+<DoAndDont>
+  <Dont
+    exampleText="Wir unterstützen die Formatierung nicht. Bitte gib eine E-Mail-Adresse im Format
+name@domain.de ein."
+  >
+    #### Don't
+  </Dont>
+  <Do exampleText="Bitte gib eine E-Mail-Adresse im Format name@domain.de ein.">
+    #### Do
+  </Do>
+</DoAndDont>
+
+### Verständliche Sprache, keine Fachsprache
+
+Vermeide technische Begriffe und konzentriere dich auf eine einfach
+verständliche Sprache. Nutzer verstehen so am ehesten, was schief gelaufen ist
+und wie sie das Problem lösen können.
+
+<DoAndDont>
+  <Dont exampleText="Fehlercode 503: Verbindung zum Server fehlgeschlagen.">
+    #### Don't
+  </Dont>
+  <Do exampleText="Wir konnten keine Verbindung zum Server herstellen. Bitte versuche es erneut.">
+    #### Do
+  </Do>
+</DoAndDont>
+
+### Schuldzuweisungen vermeiden
+
+Ein Fehler an sich ist bereits unangenehm und frustrierend. Daher sollte die
+Fehlermeldung dem Nutzer das Gefühl von Unterstützung und Fürsorge vermitteln,
+anstatt ihm ein Schuldgefühl zu vermitteln oder seine Frustration zu verstärken.
+
+<DoAndDont>
+  <Dont
+    exampleText="Du hast ein ungültiges Bild hochgeladen. Überprüfe die Dateigröße und versuche
+es erneut."
+  >
+    #### Don't
+  </Dont>
+  <Do
+    exampleText="Wir konnten das Bild nicht hochladen. Bitte überprüfe die Dateigröße und
+versuche es erneut."
+  >
+    #### Do
+  </Do>
+</DoAndDont>
+
+### Fehler eingestehen, Verständnis erleichtern
+
+Fehlermeldungen sind einfacher zu verstehen, wenn sie sich auf das System als
+"wir" und den Nutzer als "du" beziehen. So werden die Fragen "Wo ist etwas
+schiefgegangen?" und "Wer muss handeln, um es zu beheben?" einfach und
+verständlich beantwortet.
+
+<DoAndDont>
+  <Dont exampleText="Fehler beim Zurücksetzen des Passworts. Bitte versuche es erneut.">
+    #### Don't
+  </Dont>
+  <Do
+    exampleText="Wir konnten dein Passwort nicht zurücksetzen. Bitte überprüfe die E-Mail-Adresse
+und versuche es erneut."
+  >
+    #### Do
+  </Do>
+</DoAndDont>
+
+### Keine ungerechtfertigten Entschuldigungen
+
+Entschuldige dich nicht für kleine Fehler. Dies kann Fehler oft schlimmer
+erscheinen lassen und vom wichtigen Teil der Nachricht ablenken.
+Entschuldigungen sollten für ernsthafte Fehler aufgespart werden, wie den
+Verlust von Daten oder wenn der Nutzer eine größere Aktion zur Behebung des
+Problems ausführen muss.
+
+<DoAndDont>
+  <Dont exampleText="Es tut uns leid, wir unterstützen das Dateiformat nicht.">
+    #### Don't
+
+    Entschuldige dicht nicht für Kleinigkeiten oder wenn das System keine Schuld
+    trägt.
+
+  </Dont>
+  <Do exampleText="Wir konnten die Datei nicht hochladen. Bitte verwende eine Datei vom Typ XY.">
+    #### Do
+
+    Entschuldige Dich bei ernsthaften Fehlern, z.B. einem systembedingten Verlust von Daten.
+
+  </Do>
+</DoAndDont>
+
+### Wahrscheinlichsten Fehler nennen
+
+Wenn ein Fehler genau eine Ursache hat, dann erkläre, wie der Fehler zu beheben
+ist. Gibt es mehrere mögliche Gründe, so sollte die Fehlermeldung beschreiben,
+wie der wahrscheinlichste Grund zu beheben ist.
+
+<DoAndDont>
+  <Dont exampleText="Das eingegebene Passwort entspricht nicht den Mindestanforderungen. Stelle
+sicher, dass es min. 8 Zeichen, einen Groß- und Kleinbuchstaben, eine Ziffer und
+ein Sonderzeichen enthält.">
+    #### Don't
+  </Dont>
+  <Do exampleText="Dein Passwort muss mindestens 8 Zeichen enthalten.">
+    #### Do
+
+  </Do>
+</DoAndDont>
+
+### Nicht zu spezifisch
+
+Formuliere Fehlermeldungen lieber etwas allgemeiner als zu spezifisch. Oft ist
+es nicht erforderlich, spezifische Details wie Dateinamen, Benutzernamen oder
+Ordner zu nennen, da der Nutzer diese Informationen an anderen Stellen in der
+Benutzeroberfläche finden kann.
+
+<DoAndDont>
+  <Dont exampleText="Wir konnten die Datei „example_file-20.4.24.xy“ nicht hochladen. Bitte verwende
+eine Datei vom Typ XY.">
+    #### Don't
+  </Dont>
+  <Do exampleText="Wir konnten die Datei nicht hochladen. Bitte verwende eine Datei vom Typ XY.">
+    #### Do
+
+  </Do>
+</DoAndDont>
+
+### Aktiv schreiben
+
+Fehlermeldungen werden aktiv formuliert, um das Verständnis zu erleichtern.
+
+<DoAndDont>
+  <Dont exampleText="Es werden nur Dateien vom Typ XY unterstützt.">
+    #### Don't
+  </Dont>
+  <Do exampleText="Wir unterstützen nur Dateien vom Typ XY.">
+    #### Do
+
+  </Do>
+</DoAndDont>
+
+### Positiv formulieren
+
+Versuche, Fehlermeldungen positiv zu formulieren und auf negativ besetzte
+Begriffe (z.B. Fehler, Problem, fehlgeschlagen, falsch, ungültig, verboten, ...)
+zu verzichten. Konzentriere dich stattdessen auf die Lösung und was als nächstes
+getan werden kann. Beachte jedoch, dass dies in Fällen von Systemfehlern, für
+die es keine direkte Lösung gibt, nicht immer möglich ist.
+
+<DoAndDont>
+  <Dont exampleText="Durch ein Problem mit dem Server ist die Verbindung fehlgeschlagen.">
+    #### Don't
+  </Dont>
+  <Do exampleText="Es tut uns leid, wir konnten keine Verbindung zum Server herstellen. Bitte
+versuche es erneut.">
+    #### Do
+
+  </Do>
+</DoAndDont>

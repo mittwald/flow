@@ -30,10 +30,12 @@ export const MdxFileView: FC<Props> = (props) => {
 
   const ExampleDo: FC<{
     example?: string;
+    exampleText?: string;
     children: ReactNode;
-  }> = ({ example, children }) => (
+  }> = ({ example, exampleText, children }) => (
     <DoAndDontTile
       type="do"
+      text={exampleText}
       code={example ? mdxFile.getExample(example) : undefined}
     >
       {children}
@@ -42,10 +44,12 @@ export const MdxFileView: FC<Props> = (props) => {
 
   const ExampleDont: FC<{
     example?: string;
+    exampleText?: string;
     children: ReactNode;
-  }> = ({ example, children }) => (
+  }> = ({ example, exampleText, children }) => (
     <DoAndDontTile
       type="dont"
+      text={exampleText}
       code={example ? mdxFile.getExample(example) : undefined}
     >
       {children}
@@ -54,9 +58,13 @@ export const MdxFileView: FC<Props> = (props) => {
 
   const ExampleInfo: FC<{
     example?: string;
+    exampleText?: string;
     children: ReactNode;
-  }> = ({ example, children }) => (
-    <DoAndDontTile code={example ? mdxFile.getExample(example) : undefined}>
+  }> = ({ example, exampleText, children }) => (
+    <DoAndDontTile
+      text={exampleText}
+      code={example ? mdxFile.getExample(example) : undefined}
+    >
       {children}
     </DoAndDontTile>
   );

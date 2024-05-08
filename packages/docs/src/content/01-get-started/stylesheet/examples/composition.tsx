@@ -1,4 +1,4 @@
-import ExampleSvg from "@/content/01-getting-started/stylesheet/examples/components/ExampleSvg";
+import ExampleSvg from "@/content/01-get-started/stylesheet/examples/components/ExampleSvg";
 
 <aside className="flow--inline-alert flow--inline-alert--info">
   <ExampleSvg className="flow--icon flow--inline-alert--status-icon" />

@@ -43,14 +43,31 @@
   border-bottom-right-radius: 0;
 }
 
+.doAndDontText {
+  margin-bottom: calc(var(--size-px--m) * -1);
+  border-style: var(--border-style--default);
+  border-width: var(--border-width--100);
+  border-color: var(--neutral-outline-border-color--default);
+  border-bottom: none;
+  border-top-left-radius: var(--corner-radius--default);
+  border-top-right-radius: var(--corner-radius--default);
+  padding: var(--size-px--l);
+  background: var(--info-soft-background-color--default);
+  display: flex;
+  align-items: center;
+}
+
 .doAndDontContent {
   border-radius: var(--corner-radius--default);
-  border: var(--border-width--100) solid var(--neutral--color--500);
-  border-top-width: var(--size-px--xs);
+  border-style: var(--border-style--default);
+  border-width: var(--border-width--100);
+  border-color: var(--neutral-outline-border-color--default);
+  border-top-width: var(--size-px--s);
   padding: var(--size-px--l);
   border-top-color: var(--info-solid-background-color--default);
+  margin-bottom: var(--size-px--s);
 
-  &.withCode {
+  &.withContent {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
   }
@@ -70,12 +87,15 @@
   grid-template-areas:
     "dontExample doExample"
     "dont        do";
+  grid-template-columns: 1fr 1fr;
 
-  .doCode {
+  .doCode,
+  .doText {
     grid-area: doExample;
   }
 
-  .dontCode {
+  .dontCode,
+  .dontText {
     grid-area: dontExample;
   }
 
@@ -87,7 +107,8 @@
     grid-area: do;
   }
 
-  .doAndDontCode {
+  .doAndDontCode,
+  .doAndDontText {
     margin-bottom: 0;
   }
 }
