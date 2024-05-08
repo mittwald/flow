@@ -5,6 +5,7 @@
     "value";
   row-gap: var(--labeled-value--label-to-value-spacing);
   column-gap: var(--labeled-value--value-to-button-spacing);
+  grid-template-rows: auto 1fr;
 
   &:has(.button) {
     grid-template-areas:
