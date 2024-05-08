@@ -1,5 +1,5 @@
 .liveCodeEditor {
-  --border-color: var(--neutral--color--500);
+  --border-color: var(--neutral-outline-border-color--default);
   border: 1px solid var(--border-color);
   border-radius: var(--corner-radius--default);
   background-color: var(--neutral--color--200);

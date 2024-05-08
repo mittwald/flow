@@ -62,7 +62,7 @@
   border-style: var(--border-style--default);
   border-width: var(--border-width--100);
   border-color: var(--neutral-outline-border-color--default);
-  border-top-width: var(--size-px--xs);
+  border-top-width: var(--size-px--s);
   padding: var(--size-px--l);
   border-top-color: var(--info-solid-background-color--default);
   margin-bottom: var(--size-px--s);
