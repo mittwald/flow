@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.112](https://github.com/mittwald/flow/compare/0.1.0-alpha.111...0.1.0-alpha.112) (2024-05-08)
+
+### Features
+
+- **RHF-Controller:** Add Select support
+  ([df73426](https://github.com/mittwald/flow/commit/df73426f6c00cdfd308e874e44e4c5ab67d65544))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.111](https://github.com/mittwald/flow/compare/0.1.0-alpha.110...0.1.0-alpha.111) (2024-05-08)
 
 **Note:** Version bump only for package @mittwald/flow-project
