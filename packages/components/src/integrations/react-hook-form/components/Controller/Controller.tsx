@@ -49,6 +49,7 @@ export function Controller<T extends FieldValues>(props: Props<T>) {
           Switch: formControlProps,
           TextArea: formControlProps,
           TextField: formControlProps,
+          Select: formControlProps,
         };
 
         return (

@@ -18,6 +18,7 @@ import { Radio, RadioGroup } from "@/components/RadioGroup";
 import { Switch } from "@/components/Switch";
 import { CheckboxGroup } from "@/components/CheckboxGroup";
 import { Checkbox } from "@/components/Checkbox";
+import Select, { Option } from "@/components/Select";
 
 const submitAction = action("submit");
 
@@ -27,6 +28,7 @@ const meta: Meta<typeof Controller> = {
   render: () => {
     interface Values {
       firstName: string;
+      lastName: string;
       age: number;
       gender: string;
       testing: boolean;
@@ -40,6 +42,7 @@ const meta: Meta<typeof Controller> = {
     const form = useForm<Values>({
       defaultValues: {
         firstName: "",
+        lastName: "",
         gender: "",
       },
     });
@@ -59,6 +62,20 @@ const meta: Meta<typeof Controller> = {
               <Label>First name</Label>
               <FieldDescription>The first part of your name</FieldDescription>
             </TextField>
+          </TController>
+
+          <TController
+            name="lastName"
+            rules={{
+              required: "Please select your last name",
+            }}
+          >
+            <Select>
+              <Label>Last name</Label>
+              <Option value="Simith">Smith</Option>
+              <Option value="Williams">Williams</Option>
+              <Option value="Peters">Peters</Option>
+            </Select>
           </TController>
 
           <TController
