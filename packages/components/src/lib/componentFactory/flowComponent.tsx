@@ -47,8 +47,8 @@ export function flowComponent<C extends FlowComponentName>(
     >;
 
     const propsWithRef = {
-      ...implementationTypeProps,
       ref,
+      ...implementationTypeProps,
     };
 
     let element = <ImplementationComponentType {...propsWithRef} />;

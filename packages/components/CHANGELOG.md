@@ -3,6 +3,93 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.112](https://github.com/mittwald/flow/compare/0.1.0-alpha.111...0.1.0-alpha.112) (2024-05-08)
+
+### Features
+
+- **RHF-Controller:** Add Select support
+  ([df73426](https://github.com/mittwald/flow/commit/df73426f6c00cdfd308e874e44e4c5ab67d65544))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.111](https://github.com/mittwald/flow/compare/0.1.0-alpha.110...0.1.0-alpha.111) (2024-05-08)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.110](https://github.com/mittwald/flow/compare/0.1.0-alpha.109...0.1.0-alpha.110) (2024-05-08)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.109](https://github.com/mittwald/flow/compare/0.1.0-alpha.108...0.1.0-alpha.109) (2024-05-08)
+
+### Bug Fixes
+
+- form control height
+  ([7093177](https://github.com/mittwald/flow/commit/70931775da37e670298c5f8a31bc152f029bbd60))
+- **LabeledValue:** fix content position
+  ([53331be](https://github.com/mittwald/flow/commit/53331beb06e7c5d1f9c6cc6fee1d06d4132d340c))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.108](https://github.com/mittwald/flow/compare/0.1.0-alpha.107...0.1.0-alpha.108) (2024-05-07)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.107](https://github.com/mittwald/flow/compare/0.1.0-alpha.106...0.1.0-alpha.107) (2024-05-06)
+
+### Bug Fixes
+
+- **Modal:** fix modal size
+  ([#430](https://github.com/mittwald/flow/issues/430))
+  ([e8e20cb](https://github.com/mittwald/flow/commit/e8e20cbe3f7cb9c6ccb80ef50fcafa633844b74c))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.106](https://github.com/mittwald/flow/compare/0.1.0-alpha.105...0.1.0-alpha.106) (2024-05-06)
+
+### Bug Fixes
+
+- fix ref handling
+  ([d8b1d5d](https://github.com/mittwald/flow/commit/d8b1d5d1f5a7320f734fd573648e8ed6858096ea))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.105](https://github.com/mittwald/flow/compare/0.1.0-alpha.104...0.1.0-alpha.105) (2024-05-06)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.104](https://github.com/mittwald/flow/compare/0.1.0-alpha.103...0.1.0-alpha.104) (2024-05-06)
 
 ### Bug Fixes

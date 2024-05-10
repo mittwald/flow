@@ -46,18 +46,20 @@
       flex-direction: column;
       row-gap: var(--section--content-to-content-spacing);
     }
+  }
 
-    /* Sizes */
-    @mixin size($size) {
-      &.size-#{$size} {
+  /* Sizes */
+  @mixin size($size) {
+    &.size-#{$size} {
+      > div {
         width: var(--modal--size--#{$size});
       }
     }
-
-    @include size(s);
-    @include size(m);
-    @include size(l);
   }
+
+  @include size(s);
+  @include size(m);
+  @include size(l);
 }
 
 /* OffCanvas */
