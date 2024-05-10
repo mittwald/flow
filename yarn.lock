@@ -2966,7 +2966,7 @@ __metadata:
     react-children-utilities: "npm:^2.10.0"
     react-dom: "npm:^18.3.1"
     react-element-to-jsx-string: "npm:^15.0.0"
-    react-hook-form: "npm:^7.51.3"
+    react-hook-form: "npm:^7.51.4"
     react-stately: "npm:^3.31.0"
     remeda: "npm:^1.61.0"
     rollup: "npm:^4.17.2"
@@ -18329,7 +18329,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-hook-form@npm:^7.51.3":
+"react-hook-form@npm:^7.51.4":
   version: 7.51.4
   resolution: "react-hook-form@npm:7.51.4"
   peerDependencies:
