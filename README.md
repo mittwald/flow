@@ -1,6 +1,7 @@
 # mittwald Flow - The mittwald Design System
 
 ![jest coverage](https://raw.githubusercontent.com/mittwald/flow/badges/badges/coverage-jest%20coverage.svg)
+<a href="https://mittwald.github.io/flow-previews/storybook-main" target="_blank"><img src="https://raw.githubusercontent.com/storybooks/brand/master/badge/badge-storybook.svg"></a>
 
 > ⚠️ **EARLY DEVELOPMENT &mdash; STABILITY NOTICE**
 >
