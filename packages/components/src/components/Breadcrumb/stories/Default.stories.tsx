@@ -13,6 +13,12 @@ const meta: Meta<typeof Breadcrumb> = {
       <Link href="#">App</Link>
     </Breadcrumb>
   ),
+  argTypes: {
+    color: {
+      control: "inline-radio",
+      options: ["primary", "static-black", "static-white"],
+    },
+  },
 };
 
 export default meta;

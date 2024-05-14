@@ -15,6 +15,10 @@ const meta: Meta<typeof Heading> = {
       control: "inline-radio",
       options: [1, 2, 3, 4, 5, 6],
     },
+    color: {
+      control: "inline-radio",
+      options: ["primary", "static-black", "static-white"],
+    },
   },
   args: { level: 2 },
   render: (props) => (

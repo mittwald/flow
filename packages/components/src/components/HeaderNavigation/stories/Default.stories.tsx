@@ -36,6 +36,12 @@ const meta: Meta<typeof HeaderNavigation> = {
       </Button>
     </HeaderNavigation>
   ),
+  argTypes: {
+    color: {
+      control: "inline-radio",
+      options: ["primary", "static-black", "static-white"],
+    },
+  },
 };
 
 export default meta;

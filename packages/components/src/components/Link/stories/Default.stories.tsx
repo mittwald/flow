@@ -15,6 +15,12 @@ const meta: Meta<typeof Link> = {
   parameters: {
     controls: { exclude: ["onPress"] },
   },
+  argTypes: {
+    color: {
+      control: "inline-radio",
+      options: ["primary", "static-black", "static-white"],
+    },
+  },
 };
 export default meta;
 
