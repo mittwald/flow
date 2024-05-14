@@ -3,18 +3,25 @@ header-navigation:
     value: "{size-rem.m}"
   item-color:
     value: "{heading.color}"
-  item-color-inverse:
-    value: "{inverse-content-color}"
+  item-color-static-black:
+    value: "{static-black-plain-content-color.default}"
+  item-color-static-white:
+    value: "{static-white-plain-content-color.default}"
   item-background-color:
     hover:
       value: "{primary-plain-background-color.hover}"
     pressed:
       value: "{primary-plain-background-color.pressed}"
-  item-background-color-inverse:
+  item-background-color-static-black:
     hover:
-      value: "{inverse-background-color.hover}"
+      value: "{static-black-plain-background-color.hover}"
     pressed:
-      value: "{inverse-background-color.pressed}"
+      value: "{static-black-plain-background-color.pressed}"
+  item-background-color-static-white:
+    hover:
+      value: "{static-white-plain-background-color.hover}"
+    pressed:
+      value: "{static-white-plain-background-color.pressed}"
   item-padding:
     value: "{size-px.s}"
   item-corner-radius:

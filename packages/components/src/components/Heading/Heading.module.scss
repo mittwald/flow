@@ -5,6 +5,14 @@
   column-gap: var(--heading--icon-to-text-spacing);
   font-size: var(--font-size);
 
+  &.static-black {
+    color: var(--heading--color-static-black);
+  }
+
+  &.static-white {
+    color: var(--heading--color-static-white);
+  }
+
   .icon {
     height: calc(var(--font-size) * var(--line-height--default));
     width: var(--font-size);

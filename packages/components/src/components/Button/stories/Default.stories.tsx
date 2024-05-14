@@ -84,18 +84,3 @@ export const SmallWithTextAndIcon: Story = {
     size: "s",
   },
 };
-
-export const Inverse: Story = {
-  args: { inverse: true },
-  parameters: {
-    backgrounds: {
-      default: "dark",
-      values: [
-        {
-          name: "dark",
-          value: "#002A7B",
-        },
-      ],
-    },
-  },
-};

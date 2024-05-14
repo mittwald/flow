@@ -50,7 +50,7 @@
     border-radius: var(--corner-radius--round);
   }
 
-  &:not(.inverse) {
+  &:not(.static-black):not(.static-white) {
     .button {
       color: var(--header-navigation--item-color);
 
@@ -61,23 +61,45 @@
     }
   }
 
-  &.inverse {
+  &.static-black {
     .link {
-      color: var(--header-navigation--item-color-inverse);
+      color: var(--header-navigation--item-color-static-black);
       &:hover:not([aria-current]) {
         background-color: var(
-          --header-navigation--item-background-color-inverse--hover
+          --header-navigation--item-background-color-static-black--hover
         );
       }
       &[data-pressed]:not([aria-current]) {
         background-color: var(
-          --header-navigation--item-background-color-inverse--pressed
+          --header-navigation--item-background-color-static-black--pressed
         );
       }
 
       &[aria-current] {
         &:after {
-          background-color: var(--header-navigation--item-color-inverse);
+          background-color: var(--header-navigation--item-color-static-black);
+        }
+      }
+    }
+  }
+
+  &.static-white {
+    .link {
+      color: var(--header-navigation--item-color-static-white);
+      &:hover:not([aria-current]) {
+        background-color: var(
+          --header-navigation--item-background-color-static-white--hover
+        );
+      }
+      &[data-pressed]:not([aria-current]) {
+        background-color: var(
+          --header-navigation--item-background-color-static-white--pressed
+        );
+      }
+
+      &[aria-current] {
+        &:after {
+          background-color: var(--header-navigation--item-color-static-white);
         }
       }
     }

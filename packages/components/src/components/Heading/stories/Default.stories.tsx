@@ -44,3 +44,33 @@ export const WithLevelVisual: Story = {
     </Heading>
   ),
 };
+
+export const StaticBlack: Story = {
+  args: { color: "static-black" },
+  parameters: {
+    backgrounds: {
+      default: "dark",
+      values: [
+        {
+          name: "dark",
+          value: "#E0EBFF",
+        },
+      ],
+    },
+  },
+};
+
+export const StaticWhite: Story = {
+  args: { color: "static-white" },
+  parameters: {
+    backgrounds: {
+      default: "dark",
+      values: [
+        {
+          name: "dark",
+          value: "#002A7B",
+        },
+      ],
+    },
+  },
+};

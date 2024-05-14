@@ -9,6 +9,8 @@ import * as Aria from "react-aria-components";
 
 export interface HeadingProps extends Aria.HeadingProps, FlowComponentProps {
   levelVisual?: number;
+  /** @default "primary" */
+  color?: "primary" | "static-black" | "static-white";
 }
 
 export const Heading = flowComponent("Heading", (props) => {
@@ -17,6 +19,7 @@ export const Heading = flowComponent("Heading", (props) => {
     className,
     level = 2,
     levelVisual = level,
+    color = "primary",
     ref,
     ...rest
   } = props;
@@ -24,6 +27,7 @@ export const Heading = flowComponent("Heading", (props) => {
   const rootClassName = clsx(
     styles.heading,
     levelVisual && styles[`h${levelVisual}`],
+    styles[color],
     className,
   );
 

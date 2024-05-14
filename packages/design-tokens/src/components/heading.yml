@@ -1,6 +1,10 @@
 heading:
   color:
     value: "{primary.color.1000}"
+  color-static-black:
+    value: "{static-black-plain-content-color.default}"
+  color-static-white:
+    value: "{static-white-plain-content-color.default}"
   icon-to-text-spacing:
     value: "{size-rem.s}"
   font-weight:

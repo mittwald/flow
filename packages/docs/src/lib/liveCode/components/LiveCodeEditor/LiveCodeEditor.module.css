@@ -20,12 +20,17 @@
   padding: var(--size-px--l);
 }
 
-.inverse {
+.staticBlack {
+  background-color: var(--primary--color--200);
+}
+
+.staticWhite {
   background-color: var(--primary--color--1000);
 }
 
 .editorContainer {
   overflow: scroll;
+  margin-top: calc(var(--size-px--xxs) * -1);
 }
 
 .toggleCode {

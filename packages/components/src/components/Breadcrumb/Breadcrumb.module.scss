@@ -37,9 +37,15 @@
     }
   }
 
-  &.inverse {
+  &.static-black {
     .breadcrumbItem {
-      color: var(--breadcrumb-item--color-inverse);
+      color: var(--breadcrumb-item--color-static-black);
+    }
+  }
+
+  &.static-white {
+    .breadcrumbItem {
+      color: var(--breadcrumb-item--color-static-white);
     }
   }
 }

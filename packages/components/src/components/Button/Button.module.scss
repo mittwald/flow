@@ -140,38 +140,18 @@
   @include variant(accent, solid);
   @include variant(danger, solid);
   @include variant(secondary, solid);
+  @include variant(static-black, solid);
+  @include variant(static-white, solid);
   @include variant(primary, plain);
   @include variant(accent, plain);
   @include variant(danger, plain);
   @include variant(secondary, plain);
+  @include variant(static-black, plain);
+  @include variant(static-white, plain);
   @include variant(primary, soft);
   @include variant(accent, soft);
   @include variant(danger, soft);
   @include variant(secondary, soft);
-
-  /* Inverse */
-
-  &:where(.inverse) {
-    background-color: var(--button--inverse-background-color-default);
-    color: var(--button--inverse-content-color);
-
-    &:hover {
-      background-color: var(--button--inverse-background-color--hover);
-      color: var(--button--inverse-content-color);
-    }
-
-    &[data-pressed] {
-      background-color: var(--button--inverse-background-color--pressed);
-      color: var(--button--inverse-content-color);
-    }
-
-    &[disabled],
-    &.ariaDisabled,
-    &.isPending,
-    &.isFailed,
-    &.isSucceeded {
-      background-color: var(--button--disabled-inverse-background-color);
-      color: var(--button--disabled-inverse-content-color);
-    }
-  }
+  @include variant(static-black, soft);
+  @include variant(static-white, soft);
 }

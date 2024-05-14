@@ -17,3 +17,17 @@ link:
       value: "{primary-plain-content-color.hover}"
     pressed:
       value: "{primary-plain-content-color.pressed}"
+  color-static-black:
+    default:
+      value: "{static-black-plain-content-color.default}"
+    hover:
+      value: "{static-black-plain-content-color.hover}"
+    pressed:
+      value: "{static-black-plain-content-color.pressed}"
+  color-static-white:
+    default:
+      value: "{static-white-plain-content-color.default}"
+    hover:
+      value: "{static-white-plain-content-color.hover}"
+    pressed:
+      value: "{static-white-plain-content-color.pressed}"

@@ -238,18 +238,98 @@ button:
   disabled-soft-content-color:
     value: "{disabled-soft-content-color}"
 
-  # Disabled Inverse
-  disabled-inverse-background-color:
-    value: "{disabled-inverse-background-color}"
-  disabled-inverse-content-color:
-    value: "{disabled-inverse-content-color}"
-
-  # Inverse
-  inverse-background-color:
-    default: "{color.transparent}"
+  # Static Black Solid
+  static-black-solid-background-color:
+    default:
+      value: "{static-black-solid-background-color.default}"
     hover:
-      value: "{inverse-background-color.hover}"
+      value: "{static-black-solid-background-color.hover}"
     pressed:
-      value: "{inverse-background-color.pressed}"
-  inverse-content-color:
-    value: "{inverse-content-color}"
+      value: "{static-black-solid-background-color.pressed}"
+  static-black-solid-content-color:
+    default:
+      value: "{static-black-solid-content-color}"
+    hover:
+      value: "{static-black-solid-content-color}"
+    pressed:
+      value: "{static-black-solid-content-color}"
+
+  # Static Black Plain
+  static-black-plain-background-color:
+    default:
+      value: "{static-black-plain-background-color.default}"
+    hover:
+      value: "{static-black-plain-background-color.hover}"
+    pressed:
+      value: "{static-black-plain-background-color.pressed}"
+  static-black-plain-content-color:
+    default:
+      value: "{static-black-plain-content-color.default}"
+    hover:
+      value: "{static-black-plain-content-color.default}"
+    pressed:
+      value: "{static-black-plain-content-color.default}"
+
+  # Static Black Soft
+  static-black-soft-background-color:
+    default:
+      value: "{static-black-soft-background-color.default}"
+    hover:
+      value: "{static-black-soft-background-color.hover}"
+    pressed:
+      value: "{static-black-soft-background-color.pressed}"
+  static-black-soft-content-color:
+    default:
+      value: "{static-black-soft-content-color.default}"
+    hover:
+      value: "{static-black-soft-content-color.hover}"
+    pressed:
+      value: "{static-black-soft-content-color.pressed}"
+
+  # Static White Solid
+  static-white-solid-background-color:
+    default:
+      value: "{static-white-solid-background-color.default}"
+    hover:
+      value: "{static-white-solid-background-color.hover}"
+    pressed:
+      value: "{static-white-solid-background-color.pressed}"
+  static-white-solid-content-color:
+    default:
+      value: "{static-white-solid-content-color}"
+    hover:
+      value: "{static-white-solid-content-color}"
+    pressed:
+      value: "{static-white-solid-content-color}"
+
+  # Static White Plain
+  static-white-plain-background-color:
+    default:
+      value: "{static-white-plain-background-color.default}"
+    hover:
+      value: "{static-white-plain-background-color.hover}"
+    pressed:
+      value: "{static-white-plain-background-color.pressed}"
+  static-white-plain-content-color:
+    default:
+      value: "{static-white-plain-content-color.default}"
+    hover:
+      value: "{static-white-plain-content-color.default}"
+    pressed:
+      value: "{static-white-plain-content-color.default}"
+
+  # Static White Soft
+  static-white-soft-background-color:
+    default:
+      value: "{static-white-soft-background-color.default}"
+    hover:
+      value: "{static-white-soft-background-color.hover}"
+    pressed:
+      value: "{static-white-soft-background-color.pressed}"
+  static-white-soft-content-color:
+    default:
+      value: "{static-white-soft-content-color.default}"
+    hover:
+      value: "{static-white-soft-content-color.hover}"
+    pressed:
+      value: "{static-white-soft-content-color.pressed}"

@@ -77,8 +77,23 @@ export const WithContextMenu: Story = {
   ),
 };
 
-export const Inverse: Story = {
-  args: { inverse: true },
+export const StaticBlack: Story = {
+  args: { color: "static-black" },
+  parameters: {
+    backgrounds: {
+      default: "dark",
+      values: [
+        {
+          name: "dark",
+          value: "#E0EBFF",
+        },
+      ],
+    },
+  },
+};
+
+export const StaticWhite: Story = {
+  args: { color: "static-white" },
   parameters: {
     backgrounds: {
       default: "dark",

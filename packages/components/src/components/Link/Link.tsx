@@ -18,6 +18,9 @@ export interface LinkProps
     PropsWithClassName {
   inline?: boolean;
   linkComponent?: ComponentType<Omit<ComponentProps<"a">, "ref">>;
+  /** @default "primary" */
+  color?: "primary" | "static-black" | "static-white";
+
   /** @internal */
   unstyled?: boolean;
   "aria-current"?: string;
@@ -29,6 +32,7 @@ export const Link = flowComponent("Link", (props) => {
     className,
     inline,
     linkComponent: linkComponentFromProps,
+    color = "primary",
     unstyled = false,
     "aria-current": ariaCurrent,
     ref,
@@ -40,7 +44,7 @@ export const Link = flowComponent("Link", (props) => {
 
   const rootClassName = unstyled
     ? className
-    : clsx(styles.link, inline && styles.inline, className);
+    : clsx(styles.link, inline && styles.inline, styles[color], className);
 
   const propsContext: PropsContext = {
     Icon: {

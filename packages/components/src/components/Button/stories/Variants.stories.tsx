@@ -100,3 +100,115 @@ export const DangerSoft: Story = {
   },
   render: (props) => <Button {...props}>Delete/Terminate</Button>,
 };
+
+export const StaticBlackSolid: Story = {
+  args: {
+    color: "static-black",
+  },
+  render: (props) => <Button {...props}>Delete/Terminate</Button>,
+  parameters: {
+    backgrounds: {
+      default: "dark",
+      values: [
+        {
+          name: "dark",
+          value: "#E0EBFF",
+        },
+      ],
+    },
+  },
+};
+
+export const StaticBlackPlain: Story = {
+  args: {
+    color: "static-black",
+    variant: "plain",
+  },
+  render: (props) => <Button {...props}>Delete/Terminate</Button>,
+  parameters: {
+    backgrounds: {
+      default: "dark",
+      values: [
+        {
+          name: "dark",
+          value: "#E0EBFF",
+        },
+      ],
+    },
+  },
+};
+
+export const StaticBlackSoft: Story = {
+  args: {
+    color: "static-black",
+    variant: "soft",
+  },
+  render: (props) => <Button {...props}>Delete/Terminate</Button>,
+  parameters: {
+    backgrounds: {
+      default: "dark",
+      values: [
+        {
+          name: "dark",
+          value: "#E0EBFF",
+        },
+      ],
+    },
+  },
+};
+
+export const StaticWhiteSolid: Story = {
+  args: {
+    color: "static-white",
+  },
+  render: (props) => <Button {...props}>Delete/Terminate</Button>,
+  parameters: {
+    backgrounds: {
+      default: "dark",
+      values: [
+        {
+          name: "dark",
+          value: "#002A7B",
+        },
+      ],
+    },
+  },
+};
+
+export const StaticWhitePlain: Story = {
+  args: {
+    color: "static-white",
+    variant: "plain",
+  },
+  render: (props) => <Button {...props}>Delete/Terminate</Button>,
+  parameters: {
+    backgrounds: {
+      default: "dark",
+      values: [
+        {
+          name: "dark",
+          value: "#002A7B",
+        },
+      ],
+    },
+  },
+};
+
+export const StaticWhiteSoft: Story = {
+  args: {
+    color: "static-white",
+    variant: "soft",
+  },
+  render: (props) => <Button {...props}>Delete/Terminate</Button>,
+  parameters: {
+    backgrounds: {
+      default: "dark",
+      values: [
+        {
+          name: "dark",
+          value: "#002A7B",
+        },
+      ],
+    },
+  },
+};
