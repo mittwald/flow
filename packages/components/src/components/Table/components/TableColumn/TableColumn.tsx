@@ -12,7 +12,7 @@ export const TableColumn: FC<TableColumnProps> = (props) => {
   const rootClassName = clsx(styles.column, className);
 
   return (
-    <Aria.Column className={rootClassName} {...rest}>
+    <Aria.Column isRowHeader className={rootClassName} {...rest}>
       {children}
     </Aria.Column>
   );

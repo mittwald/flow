@@ -12,9 +12,11 @@ export const Table: FC<TableProps> = (props) => {
   const rootClassName = clsx(styles.table, className);
 
   return (
-    <Aria.Table className={rootClassName} {...rest}>
-      {children}
-    </Aria.Table>
+    <div className={styles.tableContainer}>
+      <Aria.Table className={rootClassName} {...rest}>
+        {children}
+      </Aria.Table>
+    </div>
   );
 };
 

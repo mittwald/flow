@@ -1,3 +1,9 @@
+.tableContainer {
+  width: 100%;
+  overflow: scroll;
+  display: block;
+}
+
 .table {
   border-radius: var(--table--corner-radius);
   overflow: hidden;
