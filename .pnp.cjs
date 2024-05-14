@@ -52,7 +52,7 @@ const RAW_RUNTIME_STATE =
       [null, {\
         "packageLocation": "./",\
         "packageDependencies": [\
-          ["@eslint/js", "npm:8.57.0"],\
+          ["@eslint/js", "npm:9.2.0"],\
           ["@nx/devkit", "virtual:231b41c796fb4c3a1878ccc2b284d7acc71e342654f1dcf3bec9e756c379469380938482d22d651d850cf92850f594f3b751114f8c7660ab24c8aee2d7081537#npm:19.0.3"],\
           ["@types/eslint__js", "npm:8.42.3"],\
           ["@typescript-eslint/eslint-plugin", "virtual:39c8c25d260eb1bf02df2a54b39359db7b3370463ab66b81ab8af2464f36109363fcf65528ed61bea6211f97dae28bd320ee3af3dba7e77d2aaeb5c743004d80#npm:7.9.0"],\
@@ -5534,6 +5534,13 @@ const RAW_RUNTIME_STATE =
           ["@eslint/js", "npm:8.57.0"]\
         ],\
         "linkType": "HARD"\
+      }],\
+      ["npm:9.2.0", {\
+        "packageLocation": "./.yarn/cache/@eslint-js-npm-9.2.0-6c74f11ab5-89632466d3.zip/node_modules/@eslint/js/",\
+        "packageDependencies": [\
+          ["@eslint/js", "npm:9.2.0"]\
+        ],\
+        "linkType": "HARD"\
       }]\
     ]],\
     ["@faker-js/faker", [\
@@ -6250,7 +6257,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["@mittwald/flow-project", "workspace:."],\
-          ["@eslint/js", "npm:8.57.0"],\
+          ["@eslint/js", "npm:9.2.0"],\
           ["@nx/devkit", "virtual:231b41c796fb4c3a1878ccc2b284d7acc71e342654f1dcf3bec9e756c379469380938482d22d651d850cf92850f594f3b751114f8c7660ab24c8aee2d7081537#npm:19.0.3"],\
           ["@types/eslint__js", "npm:8.42.3"],\
           ["@typescript-eslint/eslint-plugin", "virtual:39c8c25d260eb1bf02df2a54b39359db7b3370463ab66b81ab8af2464f36109363fcf65528ed61bea6211f97dae28bd320ee3af3dba7e77d2aaeb5c743004d80#npm:7.9.0"],\
