@@ -27,6 +27,8 @@ button:
     value: "{size-rem.xs}"
   font-size-s:
     value: "{font-size.s}"
+  line-height-s:
+    value: "{size-rem.m}"
 
   # Accent Solid
   accent-solid-background-color:
