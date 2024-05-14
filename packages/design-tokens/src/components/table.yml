@@ -1,0 +1,21 @@
+table:
+  corner-radius:
+    value: "{corner-radius.default}"
+  border-width:
+    value: "{border-width.100}"
+  border-style:
+    value: "{border-style.default}"
+  border-color:
+    value: "{neutral.color.500}"
+  padding-x:
+    value: "{size-px.m}"
+  padding-y:
+    value: "{size-px.s}"
+  header-color:
+    value: "{primary.color.1000}"
+  header-font-weight:
+    value: "{font-weight.bold}"
+  background-color:
+    value: "{neutral.color.100}"
+  background-color-accent:
+    value: "{neutral.color.300}"
