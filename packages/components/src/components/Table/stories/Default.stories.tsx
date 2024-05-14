@@ -14,7 +14,7 @@ const meta: Meta<typeof Table> = {
   title: "Structure/Table",
   component: Table,
   render: (props) => (
-    <Table aria-label="Files" selectionMode="multiple" {...props}>
+    <Table aria-label="Button Props" {...props}>
       <TableHeader>
         <TableColumn>Name</TableColumn>
         <TableColumn>Type</TableColumn>
@@ -26,24 +26,24 @@ const meta: Meta<typeof Table> = {
           <TableCell>
             <InlineCode>color</InlineCode>
           </TableCell>
-          <TableCell>"primary" | "accent" | "secondary" | "danger"</TableCell>
-          <TableCell>"primary"</TableCell>
+          <TableCell>primary | accent | secondary | danger</TableCell>
+          <TableCell>primary</TableCell>
           <TableCell>The color of the button</TableCell>
         </TableRow>
         <TableRow>
           <TableCell>
             <InlineCode>variant</InlineCode>
           </TableCell>
-          <TableCell>"plain" | "solid" | "soft"</TableCell>
-          <TableCell>"solid"</TableCell>
+          <TableCell>plain | solid | soft</TableCell>
+          <TableCell>solid</TableCell>
           <TableCell>The variant of the button</TableCell>
         </TableRow>
         <TableRow>
           <TableCell>
             <InlineCode>size</InlineCode>
           </TableCell>
-          <TableCell>"m" | "s"</TableCell>
-          <TableCell>"m"</TableCell>
+          <TableCell>m | s</TableCell>
+          <TableCell>m</TableCell>
           <TableCell>The size of the button</TableCell>
         </TableRow>
       </TableBody>

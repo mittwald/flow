@@ -6,7 +6,7 @@ table:
   border-style:
     value: "{border-style.default}"
   border-color:
-    value: "{neutral.color.500}"
+    value: "{neutral-outline-border-color.default}"
   padding-x:
     value: "{size-px.m}"
   padding-y:
