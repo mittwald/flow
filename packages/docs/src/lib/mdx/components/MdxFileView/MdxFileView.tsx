@@ -31,12 +31,16 @@ export const MdxFileView: FC<Props> = (props) => {
   const ExampleDo: FC<{
     example?: string;
     exampleText?: string;
+    zoom?: number;
+    inverse?: boolean;
     children: ReactNode;
-  }> = ({ example, exampleText, children }) => (
+  }> = ({ example, exampleText, zoom, inverse, children }) => (
     <DoAndDontTile
       type="do"
       text={exampleText}
       code={example ? mdxFile.getExample(example) : undefined}
+      zoom={zoom}
+      inverse={inverse}
     >
       {children}
     </DoAndDontTile>
@@ -45,12 +49,16 @@ export const MdxFileView: FC<Props> = (props) => {
   const ExampleDont: FC<{
     example?: string;
     exampleText?: string;
+    zoom?: number;
+    inverse?: boolean;
     children: ReactNode;
-  }> = ({ example, exampleText, children }) => (
+  }> = ({ example, exampleText, zoom, inverse, children }) => (
     <DoAndDontTile
       type="dont"
       text={exampleText}
       code={example ? mdxFile.getExample(example) : undefined}
+      zoom={zoom}
+      inverse={inverse}
     >
       {children}
     </DoAndDontTile>
@@ -59,11 +67,15 @@ export const MdxFileView: FC<Props> = (props) => {
   const ExampleInfo: FC<{
     example?: string;
     exampleText?: string;
+    zoom?: number;
+    inverse?: boolean;
     children: ReactNode;
-  }> = ({ example, exampleText, children }) => (
+  }> = ({ example, exampleText, zoom, inverse, children }) => (
     <DoAndDontTile
       text={exampleText}
       code={example ? mdxFile.getExample(example) : undefined}
+      zoom={zoom}
+      inverse={inverse}
     >
       {children}
     </DoAndDontTile>

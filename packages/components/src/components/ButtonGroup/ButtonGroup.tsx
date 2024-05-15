@@ -10,10 +10,14 @@ import {
 import clsx from "clsx";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import type { PropsWithClassName } from "@/lib/types/props";
+import type {
+  PropsWithClassName,
+  PropsWithElementType,
+} from "@/lib/types/props";
 
 export interface ButtonGroupProps
   extends PropsWithChildren,
+    PropsWithElementType<"div">,
     FlowComponentProps<"ButtonGroup">,
     PropsWithClassName {}
 

@@ -8,10 +8,12 @@ interface Props extends PropsWithChildren {
   code?: string;
   text?: string;
   type?: "do" | "dont";
+  zoom?: number;
+  inverse?: boolean;
 }
 
 export const DoAndDontTile: FC<Props> = (props) => {
-  const { code, text, type } = props;
+  const { code, text, type, zoom, inverse } = props;
 
   return (
     <>
@@ -24,6 +26,8 @@ export const DoAndDontTile: FC<Props> = (props) => {
             type === "do" && styles.doCode,
             type === "dont" && styles.dontCode,
           )}
+          zoom={zoom}
+          inverse={inverse}
         />
       )}
       {text && (
