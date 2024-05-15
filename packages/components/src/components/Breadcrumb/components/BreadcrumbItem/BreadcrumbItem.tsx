@@ -5,7 +5,7 @@ import styles from "../../Breadcrumb.module.scss";
 import clsx from "clsx";
 import { IconChevronRight } from "@/components/Icon/components/icons";
 
-export interface BreadcrumbItemProps extends PropsWithChildren {}
+export type BreadcrumbItemProps = PropsWithChildren;
 
 export const BreadcrumbItem: FC<BreadcrumbItemProps> = (props) => {
   const { children } = props;

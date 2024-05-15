@@ -11,17 +11,14 @@ import { PropsContextProvider } from "@/lib/propsContext";
 export interface BreadcrumbProps
   extends Omit<Aria.BreadcrumbsProps<BreadcrumbItemProps>, "children">,
     PropsWithChildren {
-  inverse?: boolean;
+  /** @default "primary" */
+  color?: "primary" | "dark" | "light";
 }
 
 export const Breadcrumb: FC<BreadcrumbProps> = (props) => {
-  const { children, className, inverse, ...rest } = props;
+  const { children, className, color = "primary", ...rest } = props;
 
-  const rootClassName = clsx(
-    styles.breadcrumb,
-    inverse && styles.inverse,
-    className,
-  );
+  const rootClassName = clsx(styles.breadcrumb, styles[color], className);
 
   const propsContext: PropsContext = {
     Link: {

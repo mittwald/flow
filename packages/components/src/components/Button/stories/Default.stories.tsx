@@ -18,7 +18,7 @@ const meta: Meta<typeof Button> = {
   argTypes: {
     color: {
       control: "inline-radio",
-      options: ["primary", "accent", "secondary", "danger"],
+      options: ["primary", "accent", "secondary", "danger", "dark", "light"],
     },
     variant: {
       control: "inline-radio",
@@ -82,20 +82,5 @@ export const SmallWithTextAndIcon: Story = {
   ),
   args: {
     size: "s",
-  },
-};
-
-export const Inverse: Story = {
-  args: { inverse: true },
-  parameters: {
-    backgrounds: {
-      default: "dark",
-      values: [
-        {
-          name: "dark",
-          value: "#002A7B",
-        },
-      ],
-    },
   },
 };

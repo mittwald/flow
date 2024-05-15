@@ -20,7 +20,11 @@
   padding: var(--size-px--l);
 }
 
-.inverse {
+.lightBackground {
+  background-color: var(--primary--color--200);
+}
+
+.darkBackground {
   background-color: var(--primary--color--1000);
 }
 

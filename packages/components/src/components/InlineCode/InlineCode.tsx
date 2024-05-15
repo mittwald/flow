@@ -4,8 +4,7 @@ import clsx from "clsx";
 import styles from "./InlineCode.module.scss";
 import { ClearPropsContext } from "@/lib/propsContext";
 
-export interface InlineCodeProps
-  extends PropsWithChildren<ComponentProps<"code">> {}
+export type InlineCodeProps = PropsWithChildren<ComponentProps<"code">>;
 
 export const InlineCode: FC<InlineCodeProps> = (props) => {
   const { children, className, ...rest } = props;

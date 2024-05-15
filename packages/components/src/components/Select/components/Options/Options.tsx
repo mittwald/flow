@@ -6,7 +6,7 @@ import clsx from "clsx";
 import type { OptionProps } from "@/components/Select";
 import styles from "./Options.module.scss";
 
-export interface OptionsProps extends Aria.ListBoxProps<OptionProps> {}
+export type OptionsProps = Aria.ListBoxProps<OptionProps>;
 
 export const Options: FC<OptionsProps> = (props) => {
   const { className, children, ...rest } = props;

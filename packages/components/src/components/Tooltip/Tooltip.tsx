@@ -4,8 +4,9 @@ import React from "react";
 import styles from "./Tooltip.module.scss";
 import clsx from "clsx";
 
-export interface TooltipProps
-  extends PropsWithChildren<Omit<Aria.TooltipProps, "children">> {}
+export type TooltipProps = PropsWithChildren<
+  Omit<Aria.TooltipProps, "children">
+>;
 
 export const Tooltip: FC<TooltipProps> = (props) => {
   const { children, className, ...rest } = props;

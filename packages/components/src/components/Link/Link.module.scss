@@ -18,10 +18,6 @@
 
   @include focus.focus;
 
-  &[aria-disabled] {
-    color: var(--link--disabled-color);
-  }
-
   &:not([aria-disabled]) {
     cursor: pointer;
   }
@@ -37,5 +33,33 @@
   .icon {
     margin-inline-start: var(--link--text-to-icon-spacing);
     vertical-align: text-bottom;
+  }
+
+  &:where(.dark) {
+    color: var(--link--color-dark--default);
+
+    &:hover {
+      color: var(--link--color-dark--hover);
+    }
+
+    &[data-pressed] {
+      color: var(--link--color-dark--pressed);
+    }
+  }
+
+  &:where(.light) {
+    color: var(--link--color-light--default);
+
+    &:hover {
+      color: var(--link--color-light--hover);
+    }
+
+    &[data-pressed] {
+      color: var(--link--color-light--pressed);
+    }
+  }
+
+  &[aria-disabled] {
+    color: var(--link--disabled-color);
   }
 }

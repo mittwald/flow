@@ -86,6 +86,7 @@
 
   &:where(.size-s) {
     font-size: var(--button--font-size-s);
+    line-height: var(--button--line-height-s);
     padding-block: var(--button--padding-s-squished-y);
     padding-inline: var(--button--padding-s-squished-x);
     column-gap: var(--button--text-to-icon-spacing-s);
@@ -140,38 +141,18 @@
   @include variant(accent, solid);
   @include variant(danger, solid);
   @include variant(secondary, solid);
+  @include variant(dark, solid);
+  @include variant(light, solid);
   @include variant(primary, plain);
   @include variant(accent, plain);
   @include variant(danger, plain);
   @include variant(secondary, plain);
+  @include variant(dark, plain);
+  @include variant(light, plain);
   @include variant(primary, soft);
   @include variant(accent, soft);
   @include variant(danger, soft);
   @include variant(secondary, soft);
-
-  /* Inverse */
-
-  &:where(.inverse) {
-    background-color: var(--button--inverse-background-color-default);
-    color: var(--button--inverse-content-color);
-
-    &:hover {
-      background-color: var(--button--inverse-background-color--hover);
-      color: var(--button--inverse-content-color);
-    }
-
-    &[data-pressed] {
-      background-color: var(--button--inverse-background-color--pressed);
-      color: var(--button--inverse-content-color);
-    }
-
-    &[disabled],
-    &.ariaDisabled,
-    &.isPending,
-    &.isFailed,
-    &.isSucceeded {
-      background-color: var(--button--disabled-inverse-background-color);
-      color: var(--button--disabled-inverse-content-color);
-    }
-  }
+  @include variant(dark, soft);
+  @include variant(light, soft);
 }

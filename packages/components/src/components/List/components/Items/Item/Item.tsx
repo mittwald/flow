@@ -8,7 +8,7 @@ import { deepHas } from "@/lib/react/deepHas";
 import { Link } from "@/components/Link";
 import { OptionsButton } from "@/components/List/components/Items/OptionsButton";
 
-interface Props extends PropsWithChildren {}
+type Props = PropsWithChildren;
 
 export const Item = (props: Props) => {
   const { children } = props;

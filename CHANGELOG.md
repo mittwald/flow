@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.116](https://github.com/mittwald/flow/compare/0.1.0-alpha.115...0.1.0-alpha.116) (2024-05-15)
+
+### Bug Fixes
+
+- **Tunnel:** fix state update on render
+  ([c1eaf85](https://github.com/mittwald/flow/commit/c1eaf85fd3be303d721837766f196c1e21531dc1))
+
+### Features
+
+- add Activity component
+  ([27407bc](https://github.com/mittwald/flow/commit/27407bc7b0982e768ca8e9c1949f253a9cdf4192))
+- deactivate collapsed Accordion content
+  ([e846839](https://github.com/mittwald/flow/commit/e84683944859a3df55669068196f476752a67ca7))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.115](https://github.com/mittwald/flow/compare/0.1.0-alpha.114...0.1.0-alpha.115) (2024-05-15)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.114](https://github.com/mittwald/flow/compare/0.1.0-alpha.113...0.1.0-alpha.114) (2024-05-13)
 
 **Note:** Version bump only for package @mittwald/flow-project

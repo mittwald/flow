@@ -117,7 +117,7 @@ export class ReactTable<T> {
     return column;
   }
 
-  private getTableColumnDefs(): Array<ColumnDef<T>> {
+  private getTableColumnDefs(): ColumnDef<T>[] {
     const columnDefsMap = new Map<PropertyName<T>, ColumnDef<T>>();
 
     const getOrCreateColumnDef = (p: PropertyName<T>): ColumnDef<T> => {

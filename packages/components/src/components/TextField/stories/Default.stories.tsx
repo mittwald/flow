@@ -69,7 +69,11 @@ export const WithFieldError: Story = {
 
 export const WithForm: Story = {
   render: (props) => (
-    <Form onSubmit={() => {}}>
+    <Form
+      onSubmit={() => {
+        // do nothing
+      }}
+    >
       <TextField {...props} type="email" inputMode="email" isRequired>
         <Label>Email</Label>
       </TextField>

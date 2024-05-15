@@ -9,17 +9,14 @@ import type { PropsWithClassName } from "@/lib/types/props";
 export interface HeaderNavigationProps
   extends PropsWithChildren<ComponentProps<"nav">>,
     PropsWithClassName {
-  inverse?: boolean;
+  /** @default "primary" */
+  color?: "primary" | "dark" | "light";
 }
 
 export const HeaderNavigation: FC<HeaderNavigationProps> = (props) => {
-  const { children, className, inverse, ...rest } = props;
+  const { children, className, color = "primary", ...rest } = props;
 
-  const rootClassName = clsx(
-    styles.headerNavigation,
-    inverse && styles.inverse,
-    className,
-  );
+  const rootClassName = clsx(styles.headerNavigation, styles[color], className);
 
   const propsContext: PropsContext = {
     Link: {
@@ -38,7 +35,7 @@ export const HeaderNavigation: FC<HeaderNavigationProps> = (props) => {
             {...props}
             className={styles.button}
             variant="plain"
-            inverse={inverse}
+            color={color}
           />
         </li>
       ),

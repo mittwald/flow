@@ -12,7 +12,7 @@ interface Props {
   params: StaticParams;
 }
 
-export const generateStaticParams = async (): Promise<Array<StaticParams>> => {
+export const generateStaticParams = async (): Promise<StaticParams[]> => {
   return await MdxFileFactory.generateStaticParams(contentFolder);
 };
 
