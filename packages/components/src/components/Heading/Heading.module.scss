@@ -5,12 +5,12 @@
   column-gap: var(--heading--icon-to-text-spacing);
   font-size: var(--font-size);
 
-  &.static-black {
-    color: var(--heading--color-static-black);
+  &.dark {
+    color: var(--heading--color-dark);
   }
 
-  &.static-white {
-    color: var(--heading--color-static-white);
+  &.light {
+    color: var(--heading--color-light);
   }
 
   .icon {

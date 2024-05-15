@@ -1,10 +1,10 @@
 breadcrumb-item:
   color:
     value: "{heading.color}"
-  color-static-white:
-    value: "{static-white-plain-content-color.default}"
-  color-static-black:
-    value: "{static-black-plain-content-color.default}"
+  color-light:
+    value: "{light-plain-content-color.default}"
+  color-dark:
+    value: "{dark-plain-content-color.default}"
   padding-x:
     value: "{size-px.xs}"
   font-size:

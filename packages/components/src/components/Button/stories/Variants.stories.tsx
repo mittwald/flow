@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import Button from "../Button";
 import defaultMeta from "./Default.stories";
 import React from "react";
+import { storyBackgroundDark, storyBackgroundLight } from "@/lib/dev/storyBackgrounds";
 
 const meta: Meta<typeof Button> = {
   ...defaultMeta,
@@ -101,114 +102,66 @@ export const DangerSoft: Story = {
   render: (props) => <Button {...props}>Delete/Terminate</Button>,
 };
 
-export const StaticBlackSolid: Story = {
+export const DarkSolid: Story = {
   args: {
-    color: "static-black",
+    color: "dark",
   },
   render: (props) => <Button {...props}>Delete/Terminate</Button>,
   parameters: {
-    backgrounds: {
-      default: "dark",
-      values: [
-        {
-          name: "dark",
-          value: "#E0EBFF",
-        },
-      ],
-    },
+    backgrounds: storyBackgroundLight
   },
 };
 
-export const StaticBlackPlain: Story = {
+export const DarkPlain: Story = {
   args: {
-    color: "static-black",
+    color: "dark",
     variant: "plain",
   },
   render: (props) => <Button {...props}>Delete/Terminate</Button>,
   parameters: {
-    backgrounds: {
-      default: "dark",
-      values: [
-        {
-          name: "dark",
-          value: "#E0EBFF",
-        },
-      ],
-    },
+    backgrounds: storyBackgroundLight
   },
 };
 
-export const StaticBlackSoft: Story = {
+export const DarkSoft: Story = {
   args: {
-    color: "static-black",
+    color: "dark",
     variant: "soft",
   },
   render: (props) => <Button {...props}>Delete/Terminate</Button>,
   parameters: {
-    backgrounds: {
-      default: "dark",
-      values: [
-        {
-          name: "dark",
-          value: "#E0EBFF",
-        },
-      ],
-    },
+    backgrounds: storyBackgroundLight
   },
 };
 
-export const StaticWhiteSolid: Story = {
+export const LightSolid: Story = {
   args: {
-    color: "static-white",
+    color: "light",
   },
   render: (props) => <Button {...props}>Delete/Terminate</Button>,
   parameters: {
-    backgrounds: {
-      default: "dark",
-      values: [
-        {
-          name: "dark",
-          value: "#002A7B",
-        },
-      ],
-    },
+    backgrounds: storyBackgroundDark
   },
 };
 
-export const StaticWhitePlain: Story = {
+export const LightPlain: Story = {
   args: {
-    color: "static-white",
+    color: "light",
     variant: "plain",
   },
   render: (props) => <Button {...props}>Delete/Terminate</Button>,
   parameters: {
-    backgrounds: {
-      default: "dark",
-      values: [
-        {
-          name: "dark",
-          value: "#002A7B",
-        },
-      ],
-    },
+    backgrounds: storyBackgroundDark
   },
 };
 
-export const StaticWhiteSoft: Story = {
+export const LightSoft: Story = {
   args: {
-    color: "static-white",
+    color: "light",
     variant: "soft",
   },
   render: (props) => <Button {...props}>Delete/Terminate</Button>,
   parameters: {
-    backgrounds: {
-      default: "dark",
-      values: [
-        {
-          name: "dark",
-          value: "#002A7B",
-        },
-      ],
-    },
+    backgrounds: storyBackgroundDark
   },
 };

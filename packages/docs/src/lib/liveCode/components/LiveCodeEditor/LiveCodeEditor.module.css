@@ -20,11 +20,11 @@
   padding: var(--size-px--l);
 }
 
-.staticBlack {
+.lightBackground {
   background-color: var(--primary--color--200);
 }
 
-.staticWhite {
+.darkBackground {
   background-color: var(--primary--color--1000);
 }
 

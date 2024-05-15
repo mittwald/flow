@@ -12,7 +12,7 @@ export interface BreadcrumbProps
   extends Omit<Aria.BreadcrumbsProps<BreadcrumbItemProps>, "children">,
     PropsWithChildren {
   /** @default "primary" */
-  color?: "primary" | "static-black" | "static-white";
+  color?: "primary" | "dark" | "light";
 }
 
 export const Breadcrumb: FC<BreadcrumbProps> = (props) => {

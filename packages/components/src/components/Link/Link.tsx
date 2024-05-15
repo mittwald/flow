@@ -19,7 +19,7 @@ export interface LinkProps
   inline?: boolean;
   linkComponent?: ComponentType<Omit<ComponentProps<"a">, "ref">>;
   /** @default "primary" */
-  color?: "primary" | "static-black" | "static-white";
+  color?: "primary" | "dark" | "light";
 
   /** @internal */
   unstyled?: boolean;

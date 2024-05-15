@@ -23,8 +23,8 @@ const meta: Meta<typeof Button> = {
         "accent",
         "secondary",
         "danger",
-        "static-black",
-        "static-white",
+        "dark",
+        "light",
       ],
     },
     variant: {

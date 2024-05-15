@@ -37,15 +37,15 @@
     }
   }
 
-  &.static-black {
+  &.dark {
     .breadcrumbItem {
-      color: var(--breadcrumb-item--color-static-black);
+      color: var(--breadcrumb-item--color-dark);
     }
   }
 
-  &.static-white {
+  &.light {
     .breadcrumbItem {
-      color: var(--breadcrumb-item--color-static-white);
+      color: var(--breadcrumb-item--color-light);
     }
   }
 }

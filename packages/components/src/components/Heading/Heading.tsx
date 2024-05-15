@@ -10,7 +10,7 @@ import * as Aria from "react-aria-components";
 export interface HeadingProps extends Aria.HeadingProps, FlowComponentProps {
   levelVisual?: number;
   /** @default "primary" */
-  color?: "primary" | "static-black" | "static-white";
+  color?: "primary" | "dark" | "light";
 }
 
 export const Heading = flowComponent("Heading", (props) => {

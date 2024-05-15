@@ -6,6 +6,6 @@ export interface LiveCodeEditorProps {
   editorCollapsed?: boolean;
   editorDisabled?: boolean;
   zoom?: number;
-  staticBlack?: boolean;
-  staticWhite?: boolean;
+  darkBackground?: boolean;
+  lightBackground?: boolean;
 }

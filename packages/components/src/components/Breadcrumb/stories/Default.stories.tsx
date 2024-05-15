@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { Link } from "@/components/Link";
 import { Breadcrumb } from "@/components/Breadcrumb";
+import { storyBackgroundDark, storyBackgroundLight } from "@/lib/dev/storyBackgrounds";
 
 const meta: Meta<typeof Breadcrumb> = {
   title: "Navigation/Breadcrumb",
@@ -16,7 +17,7 @@ const meta: Meta<typeof Breadcrumb> = {
   argTypes: {
     color: {
       control: "inline-radio",
-      options: ["primary", "static-black", "static-white"],
+      options: ["primary", "dark", "light"],
     },
   },
 };
@@ -27,32 +28,14 @@ type Story = StoryObj<typeof Breadcrumb>;
 
 export const Default: Story = {};
 
-export const StaticBlack: Story = {
-  args: { color: "static-black" },
-  parameters: {
-    backgrounds: {
-      default: "dark",
-      values: [
-        {
-          name: "dark",
-          value: "#E0EBFF",
-        },
-      ],
-    },
-  },
+export const Dark: Story = {
+  args: { color: "dark" },
+  parameters: { backgrounds: storyBackgroundLight },
 };
 
-export const StaticWhite: Story = {
-  args: { color: "static-white" },
+export const Light: Story = {
+  args: { color: "light" },
   parameters: {
-    backgrounds: {
-      default: "dark",
-      values: [
-        {
-          name: "dark",
-          value: "#002A7B",
-        },
-      ],
-    },
+    backgrounds: storyBackgroundDark,
   },
 };

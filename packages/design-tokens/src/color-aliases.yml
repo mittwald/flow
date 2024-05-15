@@ -148,7 +148,7 @@ warning:
     1100:
       value: "{color.royal-orange.1100}"
 
-static-black:
+dark:
   color:
     100:
       value: "rgb(0 0 0 / 12.5%)"
@@ -167,7 +167,7 @@ static-black:
     800:
       value: "rgb(0 0 0 / 100%)"
 
-static-white:
+light:
   color:
     100:
       value: "rgb(255 255 255 / 12.5%)"
@@ -508,88 +508,88 @@ disabled-soft-background-color:
 disabled-soft-content-color:
   value: "{neutral.color.500}"
 
-# Static Black Solid
-static-black-solid-background-color:
+# Dark Solid
+dark-solid-background-color:
   default:
-    value: "{static-black.color.800}"
+    value: "{dark.color.800}"
   hover:
-    value: "{static-black.color.700}"
+    value: "{dark.color.700}"
   pressed:
-    value: "{static-black.color.600}"
-static-black-solid-content-color:
-  value: "{static-white.color.800}"
+    value: "{dark.color.600}"
+dark-solid-content-color:
+  value: "{light.color.800}"
 
-# Static Black Soft
-static-black-soft-background-color:
+# Dark Soft
+dark-soft-background-color:
   default:
-    value: "{static-black.color.100}"
+    value: "{dark.color.100}"
   hover:
-    value: "{static-black.color.200}"
+    value: "{dark.color.200}"
   pressed:
-    value: "{static-black.color.300}"
-static-black-soft-content-color:
+    value: "{dark.color.300}"
+dark-soft-content-color:
   default:
-    value: "{static-black.color.800}"
+    value: "{dark.color.800}"
   hover:
-    value: "{static-black.color.800}"
+    value: "{dark.color.800}"
   pressed:
-    value: "{static-black.color.800}"
+    value: "{dark.color.800}"
 
-# Static Black Plain
-static-black-plain-background-color:
+# Dark Plain
+dark-plain-background-color:
   default:
     value: "{color.transparent}"
   hover:
-    value: "{static-black.color.100}"
+    value: "{dark.color.100}"
   pressed:
-    value: "{static-black.color.200}"
-static-black-plain-content-color:
+    value: "{dark.color.200}"
+dark-plain-content-color:
   default:
-    value: "{static-black.color.800}"
+    value: "{dark.color.800}"
   hover:
-    value: "{static-black.color.700}"
+    value: "{dark.color.700}"
   pressed:
-    value: "{static-black.color.600}"
+    value: "{dark.color.600}"
 
-# Static White Solid
-static-white-solid-background-color:
+# Light Solid
+light-solid-background-color:
   default:
-    value: "{static-white.color.800}"
+    value: "{light.color.800}"
   hover:
-    value: "{static-white.color.700}"
+    value: "{light.color.700}"
   pressed:
-    value: "{static-white.color.600}"
-static-white-solid-content-color:
-  value: "{static-black.color.800}"
+    value: "{light.color.600}"
+light-solid-content-color:
+  value: "{dark.color.800}"
 
-# Static White Soft
-static-white-soft-background-color:
+# Light Soft
+light-soft-background-color:
   default:
-    value: "{static-white.color.100}"
+    value: "{light.color.100}"
   hover:
-    value: "{static-white.color.200}"
+    value: "{light.color.200}"
   pressed:
-    value: "{static-white.color.300}"
-static-white-soft-content-color:
+    value: "{light.color.300}"
+light-soft-content-color:
   default:
-    value: "{static-white.color.800}"
+    value: "{light.color.800}"
   hover:
-    value: "{static-white.color.800}"
+    value: "{light.color.800}"
   pressed:
-    value: "{static-white.color.800}"
+    value: "{light.color.800}"
 
-# Static White Plain
-static-white-plain-background-color:
+# Light Plain
+light-plain-background-color:
   default:
     value: "{color.transparent}"
   hover:
-    value: "{static-white.color.100}"
+    value: "{light.color.100}"
   pressed:
-    value: "{static-white.color.200}"
-static-white-plain-content-color:
+    value: "{light.color.200}"
+light-plain-content-color:
   default:
-    value: "{static-white.color.800}"
+    value: "{light.color.800}"
   hover:
-    value: "{static-white.color.700}"
+    value: "{light.color.700}"
   pressed:
-    value: "{static-white.color.600}"
+    value: "{light.color.600}"

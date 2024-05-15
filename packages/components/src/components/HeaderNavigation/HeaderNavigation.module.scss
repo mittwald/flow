@@ -50,7 +50,7 @@
     border-radius: var(--corner-radius--round);
   }
 
-  &:not(.static-black):not(.static-white) {
+  &:not(.light):not(.dark) {
     .button {
       color: var(--header-navigation--item-color);
 
@@ -61,45 +61,45 @@
     }
   }
 
-  &.static-black {
+  &.dark {
     .link {
-      color: var(--header-navigation--item-color-static-black);
+      color: var(--header-navigation--item-color-dark);
       &:hover:not([aria-current]) {
         background-color: var(
-          --header-navigation--item-background-color-static-black--hover
+          --header-navigation--item-background-color-dark--hover
         );
       }
       &[data-pressed]:not([aria-current]) {
         background-color: var(
-          --header-navigation--item-background-color-static-black--pressed
+          --header-navigation--item-background-color-dark--pressed
         );
       }
 
       &[aria-current] {
         &:after {
-          background-color: var(--header-navigation--item-color-static-black);
+          background-color: var(--header-navigation--item-color-dark);
         }
       }
     }
   }
 
-  &.static-white {
+  &.light {
     .link {
-      color: var(--header-navigation--item-color-static-white);
+      color: var(--header-navigation--item-color-light);
       &:hover:not([aria-current]) {
         background-color: var(
-          --header-navigation--item-background-color-static-white--hover
+          --header-navigation--item-background-color-light--hover
         );
       }
       &[data-pressed]:not([aria-current]) {
         background-color: var(
-          --header-navigation--item-background-color-static-white--pressed
+          --header-navigation--item-background-color-light--pressed
         );
       }
 
       &[aria-current] {
         &:after {
-          background-color: var(--header-navigation--item-color-static-white);
+          background-color: var(--header-navigation--item-color-light);
         }
       }
     }

@@ -35,27 +35,27 @@
     vertical-align: text-bottom;
   }
 
-  &:where(.static-black) {
-    color: var(--link--color-static-black--default);
+  &:where(.dark) {
+    color: var(--link--color-dark--default);
 
     &:hover {
-      color: var(--link--color-static-black--hover);
+      color: var(--link--color-dark--hover);
     }
 
     &[data-pressed] {
-      color: var(--link--color-static-black--pressed);
+      color: var(--link--color-dark--pressed);
     }
   }
 
-  &:where(.static-white) {
-    color: var(--link--color-static-white--default);
+  &:where(.light) {
+    color: var(--link--color-light--default);
 
     &:hover {
-      color: var(--link--color-static-white--hover);
+      color: var(--link--color-light--hover);
     }
 
     &[data-pressed] {
-      color: var(--link--color-static-white--pressed);
+      color: var(--link--color-light--pressed);
     }
   }
 

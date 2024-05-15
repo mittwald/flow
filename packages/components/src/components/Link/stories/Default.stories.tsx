@@ -4,6 +4,7 @@ import { action } from "@storybook/addon-actions";
 import React from "react";
 import { Text } from "@/components/Text";
 import { IconExternalLink } from "@/components/Icon/components/icons";
+import { storyBackgroundDark, storyBackgroundLight } from "@/lib/dev/storyBackgrounds";
 
 const meta: Meta<typeof Link> = {
   title: "Navigation/Link",
@@ -18,7 +19,7 @@ const meta: Meta<typeof Link> = {
   argTypes: {
     color: {
       control: "inline-radio",
-      options: ["primary", "static-black", "static-white"],
+      options: ["primary", "dark", "light"],
     },
   },
 };
@@ -47,32 +48,16 @@ export const WithIcon: Story = {
   ),
 };
 
-export const StaticBlack: Story = {
-  args: { color: "static-black" },
+export const Dark: Story = {
+  args: { color: "dark" },
   parameters: {
-    backgrounds: {
-      default: "dark",
-      values: [
-        {
-          name: "dark",
-          value: "#E0EBFF",
-        },
-      ],
-    },
+    backgrounds: storyBackgroundLight
   },
 };
 
-export const StaticWhite: Story = {
-  args: { color: "static-white" },
+export const Light: Story = {
+  args: { color: "light" },
   parameters: {
-    backgrounds: {
-      default: "dark",
-      values: [
-        {
-          name: "dark",
-          value: "#002A7B",
-        },
-      ],
-    },
+    backgrounds: storyBackgroundDark
   },
 };

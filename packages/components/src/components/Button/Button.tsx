@@ -22,8 +22,8 @@ export interface ButtonProps
     | "accent"
     | "secondary"
     | "danger"
-    | "static-white"
-    | "static-black";
+    | "dark"
+    | "light";
   /** @default "solid" */
   variant?: "plain" | "solid" | "soft";
   /** @default "m" */

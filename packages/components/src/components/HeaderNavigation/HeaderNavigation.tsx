@@ -10,7 +10,7 @@ export interface HeaderNavigationProps
   extends PropsWithChildren<ComponentProps<"nav">>,
     PropsWithClassName {
   /** @default "primary" */
-  color?: "primary" | "static-black" | "static-white";
+  color?: "primary" | "dark" | "light";
 }
 
 export const HeaderNavigation: FC<HeaderNavigationProps> = (props) => {

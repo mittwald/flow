@@ -18,6 +18,7 @@ import ContextMenu, {
   MenuItem,
   ContextMenuTrigger,
 } from "@/components/ContextMenu";
+import { storyBackgroundDark, storyBackgroundLight } from "@/lib/dev/storyBackgrounds";
 
 const meta: Meta<typeof HeaderNavigation> = {
   title: "Navigation/HeaderNavigation",
@@ -39,7 +40,7 @@ const meta: Meta<typeof HeaderNavigation> = {
   argTypes: {
     color: {
       control: "inline-radio",
-      options: ["primary", "static-black", "static-white"],
+      options: ["primary", "dark", "light"],
     },
   },
 };
@@ -83,32 +84,16 @@ export const WithContextMenu: Story = {
   ),
 };
 
-export const StaticBlack: Story = {
-  args: { color: "static-black" },
+export const Dark: Story = {
+  args: { color: "dark" },
   parameters: {
-    backgrounds: {
-      default: "dark",
-      values: [
-        {
-          name: "dark",
-          value: "#E0EBFF",
-        },
-      ],
-    },
+    backgrounds: storyBackgroundLight
   },
 };
 
-export const StaticWhite: Story = {
-  args: { color: "static-white" },
+export const Light: Story = {
+  args: { color: "light" },
   parameters: {
-    backgrounds: {
-      default: "dark",
-      values: [
-        {
-          name: "dark",
-          value: "#002A7B",
-        },
-      ],
-    },
+    backgrounds:storyBackgroundDark
   },
 };

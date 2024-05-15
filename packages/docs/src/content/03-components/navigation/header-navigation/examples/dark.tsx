@@ -5,7 +5,7 @@ import HeaderNavigation from "@mittwald/flow-react-components/HeaderNavigation";
 
 <HeaderNavigation
   aria-label="Header navigation"
-  color="static-white"
+  color="dark"
 >
   <Link href="#">Getting startet</Link>
   <Link href="#" aria-current="page">

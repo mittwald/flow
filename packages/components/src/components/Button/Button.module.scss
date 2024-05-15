@@ -141,18 +141,18 @@
   @include variant(accent, solid);
   @include variant(danger, solid);
   @include variant(secondary, solid);
-  @include variant(static-black, solid);
-  @include variant(static-white, solid);
+  @include variant(dark, solid);
+  @include variant(light, solid);
   @include variant(primary, plain);
   @include variant(accent, plain);
   @include variant(danger, plain);
   @include variant(secondary, plain);
-  @include variant(static-black, plain);
-  @include variant(static-white, plain);
+  @include variant(dark, plain);
+  @include variant(light, plain);
   @include variant(primary, soft);
   @include variant(accent, soft);
   @include variant(danger, soft);
   @include variant(secondary, soft);
-  @include variant(static-black, soft);
-  @include variant(static-white, soft);
+  @include variant(dark, soft);
+  @include variant(light, soft);
 }

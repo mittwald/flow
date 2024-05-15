@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import Heading from "../Heading";
 import React from "react";
 import { IconMember } from "@/components/Icon/components/icons";
+import { storyBackgroundDark, storyBackgroundLight } from "@/lib/dev/storyBackgrounds";
 
 const meta: Meta<typeof Heading> = {
   title: "Content/Heading",
@@ -17,7 +18,7 @@ const meta: Meta<typeof Heading> = {
     },
     color: {
       control: "inline-radio",
-      options: ["primary", "static-black", "static-white"],
+      options: ["primary", "dark", "light"],
     },
   },
   args: { level: 2 },
@@ -49,32 +50,16 @@ export const WithLevelVisual: Story = {
   ),
 };
 
-export const StaticBlack: Story = {
-  args: { color: "static-black" },
+export const Dark: Story = {
+  args: { color: "dark" },
   parameters: {
-    backgrounds: {
-      default: "dark",
-      values: [
-        {
-          name: "dark",
-          value: "#E0EBFF",
-        },
-      ],
-    },
+    backgrounds: storyBackgroundLight
   },
 };
 
-export const StaticWhite: Story = {
-  args: { color: "static-white" },
+export const Light: Story = {
+  args: { color: "light" },
   parameters: {
-    backgrounds: {
-      default: "dark",
-      values: [
-        {
-          name: "dark",
-          value: "#002A7B",
-        },
-      ],
-    },
+    backgrounds:storyBackgroundDark
   },
 };
