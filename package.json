@@ -41,7 +41,7 @@
     "simple-git-hooks": "^2.11.1",
     "tsx": "^4.10.2",
     "typescript": "^5.4.5",
-    "typescript-eslint": "^7.8.0"
+    "typescript-eslint": "^7.9.0"
   },
   "dependenciesMeta": {
     "@fortawesome/fontawesome-common-types": {
