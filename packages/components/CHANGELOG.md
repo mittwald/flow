@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.116](https://github.com/mittwald/flow/compare/0.1.0-alpha.115...0.1.0-alpha.116) (2024-05-15)
+
+### Features
+
+- add Activity component
+  ([27407bc](https://github.com/mittwald/flow/commit/27407bc7b0982e768ca8e9c1949f253a9cdf4192))
+- deactivate collapsed Accordion content
+  ([e846839](https://github.com/mittwald/flow/commit/e84683944859a3df55669068196f476752a67ca7))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.115](https://github.com/mittwald/flow/compare/0.1.0-alpha.114...0.1.0-alpha.115) (2024-05-15)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
