@@ -1,7 +1,7 @@
 type Fn = (...args: unknown[]) => unknown;
 
 export const callFunctionsInOrder =
-  (actions: Array<Fn | undefined>) =>
+  (actions: (Fn | undefined)[]) =>
   (...args: unknown[]): unknown => {
     const actionsCopy = [...actions];
 

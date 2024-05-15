@@ -6,7 +6,7 @@ import { deepForEach } from "react-children-utilities";
 export const getVariantFromChildren = (
   children: ReactNode | undefined,
 ): number => {
-  const identifyingObject: Array<ReactNode | object> = [];
+  const identifyingObject: (ReactNode | object)[] = [];
 
   deepForEach(children, (c) => {
     if (isValidElement(c)) {

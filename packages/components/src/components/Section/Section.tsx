@@ -5,8 +5,7 @@ import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 
-export interface SectionProps
-  extends PropsWithChildren<ComponentProps<"section">> {}
+export type SectionProps = PropsWithChildren<ComponentProps<"section">>;
 
 export const Section: FC<SectionProps> = (props) => {
   const { children, className, ...rest } = props;

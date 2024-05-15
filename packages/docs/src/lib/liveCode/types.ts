@@ -1,1 +1,1 @@
-export interface ImportMapping extends Record<string, unknown> {}
+export type ImportMapping = Record<string, unknown>;

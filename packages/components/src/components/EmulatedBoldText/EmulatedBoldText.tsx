@@ -3,8 +3,7 @@ import React from "react";
 import styles from "./EmulatedBoldText.module.scss";
 import clsx from "clsx";
 
-export interface EmulatedBoldTextProps
-  extends PropsWithChildren<ComponentProps<"span">> {}
+export type EmulatedBoldTextProps = PropsWithChildren<ComponentProps<"span">>;
 
 export const EmulatedBoldText: FC<EmulatedBoldTextProps> = (props) => {
   const { children, className, ...rest } = props;
