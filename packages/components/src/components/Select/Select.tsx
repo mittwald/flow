@@ -28,8 +28,12 @@ export const Select = flowComponent("Select", (props) => {
   const {
     children,
     className,
-    onChange = () => {},
-    onSelectionChange = () => {},
+    onChange = () => {
+      // default: do nothing
+    },
+    onSelectionChange = () => {
+      // default: do nothing
+    },
     ref,
     ...rest
   } = props;

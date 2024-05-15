@@ -13,7 +13,7 @@ import type { Metadata } from "next";
 export class MdxFileFactory {
   public static async fromDir(
     dir: string,
-    fileName: string = "index",
+    fileName = "index",
   ): Promise<MdxFile[]> {
     return Promise.all(
       jetpack
@@ -37,7 +37,7 @@ export class MdxFileFactory {
 
   public static async generateStaticParams(
     contentFolder: string,
-  ): Promise<Array<StaticParams>> {
+  ): Promise<StaticParams[]> {
     const mdxFiles = await MdxFileFactory.fromDir(contentFolder);
     return mdxFiles.map((mdx) => ({
       slug: mdx.slugs,

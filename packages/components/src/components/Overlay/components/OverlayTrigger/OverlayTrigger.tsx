@@ -6,7 +6,7 @@ import { Action } from "@/components/Action";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 
-interface Props extends PropsWithChildren {}
+type Props = PropsWithChildren;
 
 export const OverlayTrigger: FC<Props> = (props) => {
   const overlayController = useOverlayController();

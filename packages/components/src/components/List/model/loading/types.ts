@@ -20,10 +20,10 @@ export interface DataLoaderOptions<T> {
   pagination?: DataLoaderPaginationOptions;
 }
 
-export type DataLoaderResult<T> = {
+export interface DataLoaderResult<T> {
   data: T[];
   itemTotalCount?: number;
-};
+}
 
 export type AsyncDataLoader<T> = (
   options?: DataLoaderOptions<T>,

@@ -27,7 +27,9 @@ export class ActionExecution {
   ) {
     const {
       resetAfterDone = true,
-      onFeedbackDone = () => {},
+      onFeedbackDone = () => {
+        // default: do nothing
+      },
       showFeedback = false,
     } = options;
 
