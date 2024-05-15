@@ -6,7 +6,7 @@ import clsx from "clsx";
 import { Item } from "@/components/List/components/Items/Item";
 import type { PropsWithClassName } from "@/lib/types/props";
 
-interface Props extends PropsWithClassName {}
+type Props = PropsWithClassName;
 
 export const ItemList: FC<Props> = (props) => {
   const { className } = props;

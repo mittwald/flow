@@ -5,13 +5,16 @@ import type { PropsWithElementType } from "@/lib/types/props";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { Wrap } from "@/components/Wrap";
+import { Activity } from "@/components/Activity";
 
 export interface ContentProps
   extends PropsWithChildren,
     PropsWithElementType<"div" | "section" | "span">,
-    FlowComponentProps {
+    FlowComponentProps<"Content"> {
   /** @internal */
   clearPropsContext?: boolean;
+  /** @internal */
+  isActive?: boolean;
 }
 
 export const Content = flowComponent("Content", (props) => {
@@ -20,6 +23,7 @@ export const Content = flowComponent("Content", (props) => {
     elementType = "div",
     ref,
     clearPropsContext = true,
+    isActive = true,
     ...rest
   } = props;
 
@@ -28,9 +32,11 @@ export const Content = flowComponent("Content", (props) => {
   return (
     <Wrap if={clearPropsContext}>
       <ClearPropsContext>
-        <Element ref={ref} {...rest}>
-          {children}
-        </Element>
+        <Activity isActive={isActive}>
+          <Element ref={ref} {...rest}>
+            {children}
+          </Element>
+        </Activity>
       </ClearPropsContext>
     </Wrap>
   );

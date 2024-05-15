@@ -4,7 +4,7 @@ import useSelector from "@/lib/mobx/useSelector";
 import { useState } from "react";
 
 type AsyncResourceLoadingState = AsyncResource["state"]["value"];
-type DataBatches<T> = Array<T[]>;
+type DataBatches<T> = T[][];
 type BatchesLoadingState = AsyncResourceLoadingState[];
 
 export class IncrementalLoaderState<T> {

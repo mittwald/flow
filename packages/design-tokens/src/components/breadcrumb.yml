@@ -1,8 +1,10 @@
 breadcrumb-item:
   color:
-    value: "{content.color}"
-  color-inverse:
-    value: "{inverse-content-color}"
+    value: "{heading.color}"
+  color-light:
+    value: "{light-plain-content-color.default}"
+  color-dark:
+    value: "{dark-plain-content-color.default}"
   padding-x:
     value: "{size-px.xs}"
   font-size:

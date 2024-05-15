@@ -17,7 +17,7 @@ export interface ButtonProps
   extends PropsWithChildren<Aria.ButtonProps>,
     FlowComponentProps<"Button"> {
   /** @default "primary" */
-  color?: "primary" | "accent" | "secondary" | "danger";
+  color?: "primary" | "accent" | "secondary" | "danger" | "dark" | "light";
   /** @default "solid" */
   variant?: "plain" | "solid" | "soft";
   /** @default "m" */
@@ -28,8 +28,6 @@ export interface ButtonProps
   isPending?: boolean;
   isSucceeded?: boolean;
   isFailed?: boolean;
-
-  inverse?: boolean;
 
   /** @internal */
   unstyled?: boolean;
@@ -69,7 +67,6 @@ export const Button = flowComponent("Button", (props) => {
     isFailed,
     "aria-disabled": ariaDisabled,
     ref,
-    inverse,
     unstyled,
     ...restProps
   } = props;
@@ -81,7 +78,6 @@ export const Button = flowComponent("Button", (props) => {
         isPending && styles.isPending,
         isSucceeded && styles.isSucceeded,
         isFailed && styles.isFailed,
-        inverse && styles.inverse,
         styles[`size-${size}`],
         styles[color],
         styles[variant],

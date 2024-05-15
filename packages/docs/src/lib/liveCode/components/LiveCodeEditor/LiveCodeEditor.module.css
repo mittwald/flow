@@ -8,9 +8,13 @@
   overflow: hidden;
   justify-content: center;
 
-  &.inverse {
-    background-color: var(--primary--color--1000);
-  }
+    &.lightBackground {
+        background-color: var(--primary--color--200);
+    }
+
+    &.darkBackground {
+        background-color: var(--primary--color--1000);
+    }
 
   .editor pre {
     white-space: pre !important;

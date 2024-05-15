@@ -8,7 +8,7 @@ import { ActiveFilters } from "@/components/List/components/Header/ActiveFilters
 import { useList } from "@/components/List/hooks/useList";
 import type { PropsWithClassName } from "@/lib/types/props";
 
-interface Props extends PropsWithClassName {}
+type Props = PropsWithClassName;
 
 // ToDo: Add search
 

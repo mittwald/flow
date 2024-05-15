@@ -19,7 +19,7 @@ import type { TestComponentProps } from "@/lib/propsContext/test";
 import { beforeEach, describe, expect, test } from "vitest";
 
 let renderCount: number;
-let renderedPropHistory: Array<string | undefined>;
+let renderedPropHistory: (string | undefined)[];
 
 const TestComponent: FC<PropsWithChildren<TestComponentProps>> = (props) => {
   const { children, testProp } = useProps("TestComponent", props);

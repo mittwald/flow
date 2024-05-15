@@ -29,7 +29,8 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
     editorCollapsed: editorInitiallyCollapsed,
     editorDisabled,
     zoom = 1,
-    inverse,
+    lightBackground,
+    darkBackground,
   } = props;
 
   const [editorCollapsed, setEditorCollapsed] = useState(
@@ -61,14 +62,15 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
       }}
       transformCode={transformCode}
     >
-      <div
-        className={clsx(
-          styles.liveCodeEditor,
-          inverse && styles.inverse,
-          className,
-        )}
-      >
-        <LivePreview className={clsx(styles.preview)} style={{ zoom }} />
+      <div className={clsx(styles.liveCodeEditor,            darkBackground && styles.darkBackground,
+        lightBackground && styles.lightBackground,
+        className)}>
+        <LivePreview
+          className={clsx(
+            styles.preview,
+          )}
+          style={{ zoom }}
+        />
 
         {!editorDisabled && (
           <div className={styles.editorContainer}>

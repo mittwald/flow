@@ -1,0 +1,54 @@
+import type { ComponentType, FC, PropsWithChildren } from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
+import { useIsSSR } from "react-aria";
+
+interface Props extends PropsWithChildren {
+  isActive?: boolean;
+  inactiveDelay?: number;
+}
+
+const nonResolvingPromise = new Promise<{ default: ComponentType<unknown> }>(
+  () => {
+    // no resolve
+  },
+);
+
+const SuspenseTrigger = lazy(() => nonResolvingPromise);
+
+export const Activity: FC<Props> = (props) => {
+  const { children, isActive: isActiveFromProps = true, inactiveDelay } = props;
+
+  const [isActiveState, setIsActiveState] = useState(isActiveFromProps);
+  const isSsr = useIsSSR();
+
+  useEffect(() => {
+    if (!inactiveDelay) {
+      return;
+    }
+
+    if (isActiveFromProps) {
+      setIsActiveState(true);
+    } else {
+      const timeout = setTimeout(() => {
+        setIsActiveState(false);
+      }, inactiveDelay);
+
+      return () => {
+        clearTimeout(timeout);
+      };
+    }
+  }, [isActiveFromProps, inactiveDelay]);
+
+  const isActive = inactiveDelay ? isActiveState : isActiveFromProps;
+
+  if (isSsr) {
+    return isActive ? children : null;
+  }
+
+  return (
+    <Suspense fallback={null}>
+      {children}
+      {!isActive && <SuspenseTrigger />}
+    </Suspense>
+  );
+};
