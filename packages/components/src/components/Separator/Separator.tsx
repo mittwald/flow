@@ -4,8 +4,7 @@ import clsx from "clsx";
 import styles from "./Separator.module.scss";
 import * as Aria from "react-aria-components";
 
-export interface SeparatorProps
-  extends Omit<Aria.SeparatorProps, "orientation"> {}
+export type SeparatorProps = Omit<Aria.SeparatorProps, "orientation">;
 
 export const Separator: FC<SeparatorProps> = (props) => {
   const { className, ...rest } = props;
