@@ -1,10 +1,10 @@
 section:
   border-width:
-    value: "{border-width.100}"
+    value: "{separator.height}"
   border-style:
     value: "{border-style.default}"
   border-color:
-    value: "{neutral.color.700}"
+    value: "{separator.color}"
   section-to-section-spacing:
     value: "{size-rem.xl}"
   content-to-content-spacing:
