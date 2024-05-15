@@ -148,6 +148,44 @@ warning:
     1100:
       value: "{color.royal-orange.1100}"
 
+dark:
+  color:
+    100:
+      value: "rgb(0 0 0 / 12.5%)"
+    200:
+      value: "rgb(0 0 0 / 25%)"
+    300:
+      value: "rgb(0 0 0 / 37.5%)"
+    400:
+      value: "rgb(0 0 0 / 50%)"
+    500:
+      value: "rgb(0 0 0 / 62.5%)"
+    600:
+      value: "rgb(0 0 0 / 75%)"
+    700:
+      value: "rgb(0 0 0 / 87.5%)"
+    800:
+      value: "rgb(0 0 0 / 100%)"
+
+light:
+  color:
+    100:
+      value: "rgb(255 255 255 / 12.5%)"
+    200:
+      value: "rgb(255 255 255 / 25%)"
+    300:
+      value: "rgb(255 255 255 / 37.5%)"
+    400:
+      value: "rgb(255 255 255 / 50%)"
+    500:
+      value: "rgb(255 255 255 / 62.5%)"
+    600:
+      value: "rgb(255 255 255 / 75%)"
+    700:
+      value: "rgb(255 255 255 / 87.5%)"
+    800:
+      value: "rgb(255 255 255 / 100%)"
+
 # Primary Solid
 primary-solid-background-color:
   default:
@@ -470,17 +508,88 @@ disabled-soft-background-color:
 disabled-soft-content-color:
   value: "{neutral.color.500}"
 
-# Disabled Inverse
-disabled-inverse-background-color:
-  value: "{color.transparent}"
-disabled-inverse-content-color:
-  value: "{neutral.color.700}"
-
-# Inverse
-inverse-content-color:
-  value: "{neutral.color.100}"
-inverse-background-color:
+# Dark Solid
+dark-solid-background-color:
+  default:
+    value: "{dark.color.800}"
   hover:
-    value: "#00000044"
+    value: "{dark.color.700}"
   pressed:
-    value: "#00000066"
+    value: "{dark.color.600}"
+dark-solid-content-color:
+  value: "{light.color.800}"
+
+# Dark Soft
+dark-soft-background-color:
+  default:
+    value: "{dark.color.100}"
+  hover:
+    value: "{dark.color.200}"
+  pressed:
+    value: "{dark.color.300}"
+dark-soft-content-color:
+  default:
+    value: "{dark.color.800}"
+  hover:
+    value: "{dark.color.800}"
+  pressed:
+    value: "{dark.color.800}"
+
+# Dark Plain
+dark-plain-background-color:
+  default:
+    value: "{color.transparent}"
+  hover:
+    value: "{dark.color.100}"
+  pressed:
+    value: "{dark.color.200}"
+dark-plain-content-color:
+  default:
+    value: "{dark.color.800}"
+  hover:
+    value: "{dark.color.700}"
+  pressed:
+    value: "{dark.color.600}"
+
+# Light Solid
+light-solid-background-color:
+  default:
+    value: "{light.color.800}"
+  hover:
+    value: "{light.color.700}"
+  pressed:
+    value: "{light.color.600}"
+light-solid-content-color:
+  value: "{dark.color.800}"
+
+# Light Soft
+light-soft-background-color:
+  default:
+    value: "{light.color.100}"
+  hover:
+    value: "{light.color.200}"
+  pressed:
+    value: "{light.color.300}"
+light-soft-content-color:
+  default:
+    value: "{light.color.800}"
+  hover:
+    value: "{light.color.800}"
+  pressed:
+    value: "{light.color.800}"
+
+# Light Plain
+light-plain-background-color:
+  default:
+    value: "{color.transparent}"
+  hover:
+    value: "{light.color.100}"
+  pressed:
+    value: "{light.color.200}"
+light-plain-content-color:
+  default:
+    value: "{light.color.800}"
+  hover:
+    value: "{light.color.700}"
+  pressed:
+    value: "{light.color.600}"

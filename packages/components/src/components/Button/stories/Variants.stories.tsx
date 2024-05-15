@@ -2,6 +2,10 @@ import type { Meta, StoryObj } from "@storybook/react";
 import Button from "../Button";
 import defaultMeta from "./Default.stories";
 import React from "react";
+import {
+  storyBackgroundDark,
+  storyBackgroundLight,
+} from "@/lib/dev/storyBackgrounds";
 
 const meta: Meta<typeof Button> = {
   ...defaultMeta,
@@ -99,4 +103,68 @@ export const DangerSoft: Story = {
     variant: "soft",
   },
   render: (props) => <Button {...props}>Delete/Terminate</Button>,
+};
+
+export const DarkSolid: Story = {
+  args: {
+    color: "dark",
+  },
+  render: (props) => <Button {...props}>Delete/Terminate</Button>,
+  parameters: {
+    backgrounds: storyBackgroundLight,
+  },
+};
+
+export const DarkPlain: Story = {
+  args: {
+    color: "dark",
+    variant: "plain",
+  },
+  render: (props) => <Button {...props}>Delete/Terminate</Button>,
+  parameters: {
+    backgrounds: storyBackgroundLight,
+  },
+};
+
+export const DarkSoft: Story = {
+  args: {
+    color: "dark",
+    variant: "soft",
+  },
+  render: (props) => <Button {...props}>Delete/Terminate</Button>,
+  parameters: {
+    backgrounds: storyBackgroundLight,
+  },
+};
+
+export const LightSolid: Story = {
+  args: {
+    color: "light",
+  },
+  render: (props) => <Button {...props}>Delete/Terminate</Button>,
+  parameters: {
+    backgrounds: storyBackgroundDark,
+  },
+};
+
+export const LightPlain: Story = {
+  args: {
+    color: "light",
+    variant: "plain",
+  },
+  render: (props) => <Button {...props}>Delete/Terminate</Button>,
+  parameters: {
+    backgrounds: storyBackgroundDark,
+  },
+};
+
+export const LightSoft: Story = {
+  args: {
+    color: "light",
+    variant: "soft",
+  },
+  render: (props) => <Button {...props}>Delete/Terminate</Button>,
+  parameters: {
+    backgrounds: storyBackgroundDark,
+  },
 };
