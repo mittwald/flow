@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.118](https://github.com/mittwald/flow/compare/0.1.0-alpha.117...0.1.0-alpha.118) (2024-05-15)
+
+### Features
+
+- **List:** add title, content and free content to list item
+  ([729f9c2](https://github.com/mittwald/flow/commit/729f9c20413ff671fddb00df6367e1237a9efa14))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.117](https://github.com/mittwald/flow/compare/0.1.0-alpha.116...0.1.0-alpha.117) (2024-05-15)
 
 ### Features
