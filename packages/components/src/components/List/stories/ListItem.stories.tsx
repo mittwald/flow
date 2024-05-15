@@ -1,71 +1,142 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import type List from "../List";
+import type { FC, PropsWithChildren } from "react";
 import React from "react";
 import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
-import { Content } from "@/components/Content";
 import { ContextMenu, MenuItem } from "@/components/ContextMenu";
 import defaultMeta from "./Default.stories";
 import { Item } from "@/components/List/components/Items/Item";
 import { Avatar } from "@/components/Avatar";
-import { IconEmail } from "@/components/Icon/components/icons";
+import { dummyText } from "@/lib/dev/dummyText";
+import Image from "@/components/Image";
+import { Content } from "@/components/Content";
+import { Button } from "@/components/Button";
+import { IconCheck } from "@/components/Icon/components/icons";
+
+const ContentPlaceholder: FC<PropsWithChildren> = (props) => (
+  <div
+    style={{
+      display: "flex",
+      width: "100%",
+      height: "100%",
+      border: "1px dashed purple",
+      color: "purple",
+      alignItems: "center",
+      justifyContent: "center",
+      borderRadius: "4px",
+      padding: "8px",
+    }}
+  >
+    <Text>{props.children}</Text>
+  </div>
+);
 
 const meta: Meta<typeof List> = {
   ...defaultMeta,
   title: "Structure/List/ListItem",
+  render: () => (
+    <div style={{ containerType: "inline-size" }}>
+      <Item>
+        <Avatar>
+          <Image alt="John Doe" src={dummyText.imageSrc} />
+        </Avatar>
+        <Heading>John Doe</Heading>
+        <Text>Mittwald</Text>
+        <ContextMenu>
+          <MenuItem>Show details</MenuItem>
+        </ContextMenu>
+      </Item>
+    </div>
+  ),
 };
 
 export default meta;
 
 type Story = StoryObj<typeof List>;
 
-export const WithoutAvatar: Story = {
+export const Default: Story = {};
+
+export const WithTopContent: Story = {
   render: () => (
-    <Item>
-      <Heading>John Doe</Heading>
-      <Text>Mittwald</Text>
-      <Content style={{ background: "lightgrey" }}></Content>
-      <ContextMenu>
-        <MenuItem>Show details</MenuItem>
-      </ContextMenu>
-    </Item>
+    <div style={{ containerType: "inline-size" }}>
+      <Item>
+        <Avatar>
+          <Image alt="John Doe" src={dummyText.imageSrc} />
+        </Avatar>
+        <Heading>John Doe</Heading>
+        <Text>Mittwald</Text>
+        <Content>
+          <ContentPlaceholder>Top content</ContentPlaceholder>
+        </Content>
+        <ContextMenu>
+          <MenuItem>Show details</MenuItem>
+        </ContextMenu>
+      </Item>
+    </div>
   ),
 };
 
-export const WithoutSubtitle: Story = {
+export const WithContent: Story = {
   render: () => (
-    <Item>
-      <Heading>John Doe</Heading>
-      <Content style={{ background: "lightgrey" }}></Content>
-      <ContextMenu>
-        <MenuItem>Show details</MenuItem>
-      </ContextMenu>
-    </Item>
+    <div style={{ containerType: "inline-size" }}>
+      <Item>
+        <Avatar>
+          <Image alt="John Doe" src={dummyText.imageSrc} />
+        </Avatar>
+        <Heading>John Doe</Heading>
+        <Text>Mittwald</Text>
+        <Content slot="top">
+          <ContentPlaceholder>Top content</ContentPlaceholder>
+        </Content>
+        <Content slot="bottom">
+          <ContentPlaceholder>Bottom content</ContentPlaceholder>
+        </Content>
+        <ContextMenu>
+          <MenuItem>Show details</MenuItem>
+        </ContextMenu>
+      </Item>
+    </div>
   ),
 };
 
-export const WithoutContent: Story = {
+export const WithButton: Story = {
   render: () => (
-    <Item>
-      <Avatar>
-        <IconEmail />
-      </Avatar>
-      <Heading>john@doe.de</Heading>
-      <ContextMenu>
-        <MenuItem>Show details</MenuItem>
-      </ContextMenu>
-    </Item>
+    <div style={{ containerType: "inline-size" }}>
+      <Item>
+        <Avatar>
+          <Image alt="John Doe" src={dummyText.imageSrc} />
+        </Avatar>
+        <Heading>John Doe</Heading>
+        <Text>Mittwald</Text>
+        <Button variant="soft">
+          <IconCheck />
+        </Button>
+      </Item>
+    </div>
   ),
 };
 
-export const WithoutContextMenu: Story = {
+export const SmallSpace: Story = {
   render: () => (
-    <Item>
-      <Avatar>
-        <IconEmail />
-      </Avatar>
-      <Heading>john@doe.de</Heading>
-      <Content style={{ background: "lightgrey" }}></Content>
-    </Item>
+    <div style={{ containerType: "inline-size" }}>
+      <Item>
+        <Avatar>
+          <Image alt="John Doe" src={dummyText.imageSrc} />
+        </Avatar>
+        <Heading>John Doe</Heading>
+        <Text>Mittwald</Text>
+        <Content slot="top">
+          <ContentPlaceholder>Top content</ContentPlaceholder>
+        </Content>
+        <Content slot="bottom">
+          <ContentPlaceholder>Bottom content</ContentPlaceholder>
+        </Content>
+        <ContextMenu>
+          <MenuItem>Show details</MenuItem>
+        </ContextMenu>
+      </Item>
+    </div>
   ),
+  parameters: { viewport: { defaultViewport: "mobile1" } },
 };
