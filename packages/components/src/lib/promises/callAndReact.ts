@@ -6,16 +6,20 @@ interface Options {
   finally?: () => void;
 }
 
+const emptyFunction = (): void => {
+  // do nothing
+};
+
 export const callAndReact = (
   fn: (...args: unknown[]) => unknown,
   options: Options = {},
 ) => {
   const {
-    onSync = () => {},
-    onAsync = () => {},
-    then = () => {},
-    catch: $catch = () => {},
-    finally: $finally = () => {},
+    onSync = emptyFunction,
+    onAsync = emptyFunction,
+    then = emptyFunction,
+    catch: $catch = emptyFunction,
+    finally: $finally = emptyFunction,
   } = options;
   try {
     const result = fn();

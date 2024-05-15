@@ -12,8 +12,8 @@ import { IncrementalLoader } from "@/components/List/model/loading/IncrementalLo
 import invariant from "invariant";
 
 export class List<T> {
-  public readonly filters: Array<Filter<T>>;
-  public readonly sorting: Array<Sorting<T>>;
+  public readonly filters: Filter<T>[];
+  public readonly sorting: Sorting<T>[];
   public readonly items: ItemCollection<T>;
   public readonly render?: RenderItemFn<T>;
   public readonly reactTable: ReactTable<T>;

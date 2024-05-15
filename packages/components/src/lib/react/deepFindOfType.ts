@@ -36,8 +36,8 @@ export const deepFindOfType = <T extends ElementType>(
 export const deepFilterByType = <T extends ElementType>(
   children: ReactNode,
   searchType: T,
-): Array<FunctionComponentElement<ComponentProps<T>>> => {
-  const result: Array<FunctionComponentElement<ComponentProps<T>>> = [];
+): FunctionComponentElement<ComponentProps<T>>[] => {
+  const result: FunctionComponentElement<ComponentProps<T>>[] = [];
 
   deepForEach(children, (c) => {
     if (isOfType(c, searchType)) {

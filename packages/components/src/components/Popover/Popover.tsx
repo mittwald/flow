@@ -4,8 +4,9 @@ import styles from "./Popover.module.scss";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 
-export interface PopoverProps
-  extends PropsWithChildren<Omit<Aria.PopoverProps, "children">> {}
+export type PopoverProps = PropsWithChildren<
+  Omit<Aria.PopoverProps, "children">
+>;
 
 export const Popover: FC<PopoverProps> = (props) => {
   const { children, className, ...rest } = props;

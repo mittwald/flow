@@ -70,7 +70,7 @@ export class IncrementalLoader<T> {
     return this.loaderState.useMergedData();
   }
 
-  public getLoaderInvocationHooks(): Array<() => void> {
+  public getLoaderInvocationHooks(): (() => void)[] {
     const batchesCount = times(this.list.batches.getBatchIndex() + 1, (i) => i);
     return batchesCount.map((i) => () => {
       this.useLoadBatch(i);

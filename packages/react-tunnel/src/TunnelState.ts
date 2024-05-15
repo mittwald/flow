@@ -67,11 +67,10 @@ export class TunnelState {
 
   public getChildren(
     tunnelId: string = defaultId,
-  ): Array<[string, TunnelChildren]> | undefined {
+  ): [string, TunnelChildren][] | undefined {
     const tunnelEntries =
       this.children.get(tunnelId)?.entries() ??
       this.preparedChildren.get(tunnelId)?.entries();
-
     if (tunnelEntries) {
       return Array.from(tunnelEntries);
     }

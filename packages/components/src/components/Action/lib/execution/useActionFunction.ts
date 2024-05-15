@@ -3,7 +3,9 @@ import type { OverlayController } from "@/lib/controller";
 import { useOverlayController } from "@/lib/controller";
 import { breakAction } from "@/components/Action/lib/execution/breakAction";
 
-export const voidAction = () => {};
+export const voidAction = () => {
+  // do nothing
+};
 
 export const useActionFunction = (actionProps: ActionProps): ActionFn => {
   const {
