@@ -30,7 +30,6 @@
 
 .editorContainer {
   overflow: scroll;
-  margin-top: calc(var(--size-px--xxs) * -1);
 }
 
 .toggleCode {
