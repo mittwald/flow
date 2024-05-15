@@ -8,6 +8,10 @@
   overflow: hidden;
   justify-content: center;
 
+  &.inverse {
+    background-color: var(--primary--color--1000);
+  }
+
   .editor pre {
     white-space: pre !important;
     overflow: hidden;
@@ -18,10 +22,6 @@
 
 .preview {
   padding: var(--size-px--l);
-}
-
-.inverse {
-  background-color: var(--primary--color--1000);
 }
 
 .editorContainer {

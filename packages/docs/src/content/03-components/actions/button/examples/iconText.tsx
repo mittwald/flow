@@ -7,19 +7,19 @@ import {
 
 <Row>
   <Button size="s">
-    <Text>E-Mail-Adresse hinzufügen</Text>
+    <Text>E-Mail hinzufügen</Text>
     <IconChevronDown />
   </Button>
   <Button>
-    <Text>E-Mail-Adresse hinzufügen</Text>
+    <Text>E-Mail hinzufügen</Text>
     <IconChevronDown />
   </Button>
   <Button size="s">
-    <Text>Gesetzter Filter</Text>
+    <Text>Filter</Text>
     <IconClose />
   </Button>
   <Button>
-    <Text>Gesetzter Filter</Text>
-    <IconChevronDown />
+    <Text>Filter</Text>
+    <IconClose />
   </Button>
 </Row>;

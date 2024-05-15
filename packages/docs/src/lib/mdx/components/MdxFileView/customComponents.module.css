@@ -66,6 +66,9 @@
   padding: var(--size-px--l);
   border-top-color: var(--info-solid-background-color--default);
   margin-bottom: var(--size-px--s);
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--size-px--s);
 
   &.withContent {
     border-top-left-radius: 0;
@@ -85,26 +88,26 @@
   display: grid;
   column-gap: var(--size-px--m);
   grid-template-areas:
-    "dontExample doExample"
-    "dont        do";
+    "firstExample secondExample"
+    "firstContent secondContent";
   grid-template-columns: 1fr 1fr;
 
-  .doCode,
-  .doText {
-    grid-area: doExample;
+  .doAndDontCode:first-of-type,
+  .doAndDontText:first-of-type {
+    grid-area: firstExample;
   }
 
-  .dontCode,
-  .dontText {
-    grid-area: dontExample;
+  .doAndDontCode:last-of-type,
+  .doAndDontText:last-of-type {
+    grid-area: secondExample;
   }
 
-  .dont {
-    grid-area: dont;
+  .doAndDontContent:first-of-type {
+    grid-area: firstContent;
   }
 
-  .do {
-    grid-area: do;
+  .doAndDontContent:last-of-type {
+    grid-area: secondContent;
   }
 
   .doAndDontCode,

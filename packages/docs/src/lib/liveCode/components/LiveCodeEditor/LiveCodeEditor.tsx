@@ -61,11 +61,14 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
       }}
       transformCode={transformCode}
     >
-      <div className={clsx(styles.liveCodeEditor, className)}>
-        <LivePreview
-          className={clsx(styles.preview, inverse && styles.inverse)}
-          style={{ zoom }}
-        />
+      <div
+        className={clsx(
+          styles.liveCodeEditor,
+          inverse && styles.inverse,
+          className,
+        )}
+      >
+        <LivePreview className={clsx(styles.preview)} style={{ zoom }} />
 
         {!editorDisabled && (
           <div className={styles.editorContainer}>
