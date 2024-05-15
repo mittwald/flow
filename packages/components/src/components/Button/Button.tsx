@@ -17,13 +17,7 @@ export interface ButtonProps
   extends PropsWithChildren<Aria.ButtonProps>,
     FlowComponentProps<"Button"> {
   /** @default "primary" */
-  color?:
-    | "primary"
-    | "accent"
-    | "secondary"
-    | "danger"
-    | "dark"
-    | "light";
+  color?: "primary" | "accent" | "secondary" | "danger" | "dark" | "light";
   /** @default "solid" */
   variant?: "plain" | "solid" | "soft";
   /** @default "m" */

@@ -19,7 +19,7 @@ export const Default: Story = {};
 
 export const OnDarkBackground: Story = {
   parameters: {
-    backgrounds:storyBackgroundDark
+    backgrounds: storyBackgroundDark,
   },
 };
 

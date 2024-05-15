@@ -18,7 +18,10 @@ import ContextMenu, {
   MenuItem,
   ContextMenuTrigger,
 } from "@/components/ContextMenu";
-import { storyBackgroundDark, storyBackgroundLight } from "@/lib/dev/storyBackgrounds";
+import {
+  storyBackgroundDark,
+  storyBackgroundLight,
+} from "@/lib/dev/storyBackgrounds";
 
 const meta: Meta<typeof HeaderNavigation> = {
   title: "Navigation/HeaderNavigation",
@@ -87,13 +90,13 @@ export const WithContextMenu: Story = {
 export const Dark: Story = {
   args: { color: "dark" },
   parameters: {
-    backgrounds: storyBackgroundLight
+    backgrounds: storyBackgroundLight,
   },
 };
 
 export const Light: Story = {
   args: { color: "light" },
   parameters: {
-    backgrounds:storyBackgroundDark
+    backgrounds: storyBackgroundDark,
   },
 };

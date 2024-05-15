@@ -2,7 +2,10 @@ import type { Meta, StoryObj } from "@storybook/react";
 import Heading from "../Heading";
 import React from "react";
 import { IconMember } from "@/components/Icon/components/icons";
-import { storyBackgroundDark, storyBackgroundLight } from "@/lib/dev/storyBackgrounds";
+import {
+  storyBackgroundDark,
+  storyBackgroundLight,
+} from "@/lib/dev/storyBackgrounds";
 
 const meta: Meta<typeof Heading> = {
   title: "Content/Heading",
@@ -53,13 +56,13 @@ export const WithLevelVisual: Story = {
 export const Dark: Story = {
   args: { color: "dark" },
   parameters: {
-    backgrounds: storyBackgroundLight
+    backgrounds: storyBackgroundLight,
   },
 };
 
 export const Light: Story = {
   args: { color: "light" },
   parameters: {
-    backgrounds:storyBackgroundDark
+    backgrounds: storyBackgroundDark,
   },
 };

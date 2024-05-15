@@ -2,7 +2,10 @@ import type { Meta, StoryObj } from "@storybook/react";
 import Button from "../Button";
 import defaultMeta from "./Default.stories";
 import React from "react";
-import { storyBackgroundDark, storyBackgroundLight } from "@/lib/dev/storyBackgrounds";
+import {
+  storyBackgroundDark,
+  storyBackgroundLight,
+} from "@/lib/dev/storyBackgrounds";
 
 const meta: Meta<typeof Button> = {
   ...defaultMeta,
@@ -108,7 +111,7 @@ export const DarkSolid: Story = {
   },
   render: (props) => <Button {...props}>Delete/Terminate</Button>,
   parameters: {
-    backgrounds: storyBackgroundLight
+    backgrounds: storyBackgroundLight,
   },
 };
 
@@ -119,7 +122,7 @@ export const DarkPlain: Story = {
   },
   render: (props) => <Button {...props}>Delete/Terminate</Button>,
   parameters: {
-    backgrounds: storyBackgroundLight
+    backgrounds: storyBackgroundLight,
   },
 };
 
@@ -130,7 +133,7 @@ export const DarkSoft: Story = {
   },
   render: (props) => <Button {...props}>Delete/Terminate</Button>,
   parameters: {
-    backgrounds: storyBackgroundLight
+    backgrounds: storyBackgroundLight,
   },
 };
 
@@ -140,7 +143,7 @@ export const LightSolid: Story = {
   },
   render: (props) => <Button {...props}>Delete/Terminate</Button>,
   parameters: {
-    backgrounds: storyBackgroundDark
+    backgrounds: storyBackgroundDark,
   },
 };
 
@@ -151,7 +154,7 @@ export const LightPlain: Story = {
   },
   render: (props) => <Button {...props}>Delete/Terminate</Button>,
   parameters: {
-    backgrounds: storyBackgroundDark
+    backgrounds: storyBackgroundDark,
   },
 };
 
@@ -162,6 +165,6 @@ export const LightSoft: Story = {
   },
   render: (props) => <Button {...props}>Delete/Terminate</Button>,
   parameters: {
-    backgrounds: storyBackgroundDark
+    backgrounds: storyBackgroundDark,
   },
 };

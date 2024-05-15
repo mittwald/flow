@@ -4,7 +4,10 @@ import { action } from "@storybook/addon-actions";
 import React from "react";
 import { Text } from "@/components/Text";
 import { IconExternalLink } from "@/components/Icon/components/icons";
-import { storyBackgroundDark, storyBackgroundLight } from "@/lib/dev/storyBackgrounds";
+import {
+  storyBackgroundDark,
+  storyBackgroundLight,
+} from "@/lib/dev/storyBackgrounds";
 
 const meta: Meta<typeof Link> = {
   title: "Navigation/Link",
@@ -51,13 +54,13 @@ export const WithIcon: Story = {
 export const Dark: Story = {
   args: { color: "dark" },
   parameters: {
-    backgrounds: storyBackgroundLight
+    backgrounds: storyBackgroundLight,
   },
 };
 
 export const Light: Story = {
   args: { color: "light" },
   parameters: {
-    backgrounds: storyBackgroundDark
+    backgrounds: storyBackgroundDark,
   },
 };
