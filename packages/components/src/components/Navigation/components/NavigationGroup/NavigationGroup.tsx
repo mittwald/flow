@@ -22,10 +22,12 @@ export const NavigationGroup: FC<NavigationGroupProps> = (props) => {
 
   const propsContext: PropsContext = {
     Label: {
-      tunnelId: "Label",
       id: generatedId,
       className: styles.label,
       "aria-hidden": true,
+    },
+    Link: {
+      tunnelId: "links",
     },
   };
 
@@ -34,9 +36,11 @@ export const NavigationGroup: FC<NavigationGroupProps> = (props) => {
       <PropsContextProvider mergeInParentContext props={propsContext}>
         <TunnelProvider>
           <Accordion defaultExpanded className={rootClassName}>
-            <TunnelExit id="Label" />
+            {children}
             <Content clearPropsContext={false}>
-              <ul>{children}</ul>
+              <ul>
+                <TunnelExit id="links" />
+              </ul>
             </Content>
           </Accordion>
         </TunnelProvider>
