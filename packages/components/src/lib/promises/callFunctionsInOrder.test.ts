@@ -53,7 +53,7 @@ test.each([
 ])("functions are correctly called", async (fnArray, expectation) => {
   try {
     await callFunctionsInOrder(fnArray)();
-  } catch (error) {
+  } catch (ignoredError) {
     // ok
   }
   expect(history.join()).toBe(expectation);
