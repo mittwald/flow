@@ -110,7 +110,7 @@ export const Action: FC<ActionProps> = (actionProps) => {
     <TunnelProvider>
       <PropsContextProvider
         props={propsContext}
-        dependencies={[hasConfirmationModal]}
+        dependencies={[hasConfirmationModal, actionController]}
         mergeInParentContext
       >
         <ActionContextProvider value={interaction}>

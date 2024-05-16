@@ -6,6 +6,8 @@ import { ActionExecution } from "@/components/Action/lib/execution/ActionExecuti
 import { ActionState } from "@/components/Action/lib/execution/ActionState";
 import { useActionFunction } from "@/components/Action/lib/execution/useActionFunction";
 import { callAndReact } from "@/lib/promises/callAndReact";
+import { useMemo } from "react";
+import { omit, values } from "remeda";
 
 interface UseActionController {
   callAction: ActionFn;
@@ -44,8 +46,13 @@ export const useActionController = (
     });
   };
 
-  return {
-    callAction,
-    state,
-  };
+  const dependencies = values(omit(actionProps, ["children"]));
+
+  return useMemo(
+    () => ({
+      callAction,
+      state,
+    }),
+    dependencies,
+  );
 };
