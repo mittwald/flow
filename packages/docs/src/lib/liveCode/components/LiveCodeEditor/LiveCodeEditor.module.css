@@ -8,13 +8,35 @@
   overflow: hidden;
   justify-content: center;
 
-    &.lightBackground {
-        background-color: var(--primary--color--200);
-    }
+  &.darkBackground {
+    background-color: var(--primary--color--1000);
+  }
 
-    &.darkBackground {
-        background-color: var(--primary--color--1000);
+  &.lightBackground,
+  &.mobile {
+    background-color: var(--primary--color--200);
+  }
+
+  &.mobile {
+    .preview {
+      border-inline: 4px solid var(--neutral--color--600);
+      margin: 0 auto;
+      padding: var(--size-px--l);
+      width: 400px;
+      max-width: 100%;
+      background-color: var(--neutral--color--100);
+      height: 100%;
+
+      &:has(:global(.flow--modal)) {
+        padding: 0;
+      }
     }
+    &.darkBackground {
+      .preview {
+        background-color: var(--primary--color--1000);
+      }
+    }
+  }
 
   .editor pre {
     white-space: pre !important;
@@ -30,6 +52,20 @@
 
 .editorContainer {
   overflow: scroll;
+}
+
+.darkBackground {
+  .mobile {
+    height: 100%;
+    .preview {
+      border-inline: 4px solid var(--neutral--color--500);
+      margin: 0 auto;
+      padding: var(--size-px--l);
+      max-width: 400px;
+      background-color: var(--neutral--color--100);
+      height: 100%;
+    }
+  }
 }
 
 .toggleCode {

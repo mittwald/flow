@@ -1,12 +1,12 @@
 "use client";
 import type { FC, ReactNode } from "react";
 import { MDXRemote as NextMDXRemote } from "next-mdx-remote";
+import type { LiveCodeEditorProps } from "@/lib/liveCode/components/LiveCodeEditor/LiveCodeEditor";
 import LiveCodeEditor from "@/lib/liveCode/components/LiveCodeEditor/LiveCodeEditor";
 import type { SerializedMdxFile } from "@/lib/mdx/MdxFile";
 import { MdxFile } from "@/lib/mdx/MdxFile";
 import { customComponents } from "@/lib/mdx/components/MdxFileView/customComponents";
 import styles from "./customComponents.module.css";
-import type { LiveCodeEditorProps } from "@/lib/liveCode/components/LiveCodeEditor/types";
 import DoAndDontTile from "@/lib/mdx/components/DoAndDont/DoAndDontTile";
 
 interface Props {
@@ -32,15 +32,27 @@ export const MdxFileView: FC<Props> = (props) => {
     example?: string;
     exampleText?: string;
     zoom?: number;
-    inverse?: boolean;
+    lightBackground?: boolean;
+    darkBackground?: boolean;
+    mobile?: boolean;
     children: ReactNode;
-  }> = ({ example, exampleText, zoom, inverse, children }) => (
+  }> = ({
+    example,
+    exampleText,
+    zoom,
+    lightBackground,
+    darkBackground,
+    mobile,
+    children,
+  }) => (
     <DoAndDontTile
       type="do"
       text={exampleText}
       code={example ? mdxFile.getExample(example) : undefined}
       zoom={zoom}
-      inverse={inverse}
+      lightBackground={lightBackground}
+      darkBackground={darkBackground}
+      mobile={mobile}
     >
       {children}
     </DoAndDontTile>
@@ -50,15 +62,27 @@ export const MdxFileView: FC<Props> = (props) => {
     example?: string;
     exampleText?: string;
     zoom?: number;
-    inverse?: boolean;
+    lightBackground?: boolean;
+    darkBackground?: boolean;
+    mobile?: boolean;
     children: ReactNode;
-  }> = ({ example, exampleText, zoom, inverse, children }) => (
+  }> = ({
+    example,
+    exampleText,
+    zoom,
+    lightBackground,
+    darkBackground,
+    mobile,
+    children,
+  }) => (
     <DoAndDontTile
       type="dont"
       text={exampleText}
       code={example ? mdxFile.getExample(example) : undefined}
       zoom={zoom}
-      inverse={inverse}
+      lightBackground={lightBackground}
+      darkBackground={darkBackground}
+      mobile={mobile}
     >
       {children}
     </DoAndDontTile>
@@ -68,14 +92,26 @@ export const MdxFileView: FC<Props> = (props) => {
     example?: string;
     exampleText?: string;
     zoom?: number;
-    inverse?: boolean;
+    lightBackground?: boolean;
+    darkBackground?: boolean;
+    mobile?: boolean;
     children: ReactNode;
-  }> = ({ example, exampleText, zoom, inverse, children }) => (
+  }> = ({
+    example,
+    exampleText,
+    zoom,
+    lightBackground,
+    darkBackground,
+    mobile,
+    children,
+  }) => (
     <DoAndDontTile
       text={exampleText}
       code={example ? mdxFile.getExample(example) : undefined}
       zoom={zoom}
-      inverse={inverse}
+      lightBackground={lightBackground}
+      darkBackground={darkBackground}
+      mobile={mobile}
     >
       {children}
     </DoAndDontTile>

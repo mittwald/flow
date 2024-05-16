@@ -8,11 +8,12 @@ import {
 import LayoutCard from "@mittwald/flow-react-components/LayoutCard";
 import Heading from "@mittwald/flow-react-components/Heading";
 import Text from "@mittwald/flow-react-components/Text";
+import Section from "@mittwald/flow-react-components/Section";
 
-<Column>
+<Section style={{ height: "100%" }}>
   <HeaderNavigation
     aria-label="Header navigation"
-    inverse
+    color="light"
     style={{ alignSelf: "flex-end" }}
   >
     <Button>
@@ -26,8 +27,8 @@ import Text from "@mittwald/flow-react-components/Text";
     </Button>
   </HeaderNavigation>
   <Button color="accent">Projekt anlegen</Button>
-  <LayoutCard style={{ width: "100%" }}>
+  <LayoutCard style={{ width: "100%", flexGrow: "1" }}>
     <Heading>Projekte</Heading>
     <Text>...</Text>
   </LayoutCard>
-</Column>;
+</Section>;

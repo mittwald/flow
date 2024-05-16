@@ -11,12 +11,23 @@ interface Props extends PropsWithChildren {
   text?: string;
   type?: "do" | "dont";
   zoom?: number;
-  inverse?: boolean;
+  lightBackground?: boolean;
+  darkBackground?: boolean;
   heading?: string;
+  mobile?: boolean;
 }
 
 export const DoAndDontTile: FC<Props> = (props) => {
-  const { code, text, type, zoom, inverse, heading } = props;
+  const {
+    code,
+    text,
+    type,
+    zoom,
+    lightBackground,
+    darkBackground,
+    heading,
+    mobile,
+  } = props;
 
   return (
     <>
@@ -26,7 +37,9 @@ export const DoAndDontTile: FC<Props> = (props) => {
           code={code}
           className={styles.doAndDontCode}
           zoom={zoom}
-          inverse={inverse}
+          lightBackground={lightBackground}
+          darkBackground={darkBackground}
+          mobile={mobile}
         />
       )}
       {text && (

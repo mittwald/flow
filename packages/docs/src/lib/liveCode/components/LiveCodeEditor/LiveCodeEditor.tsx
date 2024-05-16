@@ -7,13 +7,24 @@ import {
   LiveProvider,
 } from "@mfalkenberg/react-live-ssr";
 import { extractEditorScope } from "@/lib/liveCode/components/LiveCodeEditor/lib/extractEditorScope";
-import type { LiveCodeEditorProps } from "@/lib/liveCode/components/LiveCodeEditor/types";
 import extractDefaultExport from "@/lib/liveCode/components/LiveCodeEditor/lib/extractDefaultExport";
 import styles from "./LiveCodeEditor.module.css";
 import * as EditorComponents from "./components";
 import clsx from "clsx";
 import { Button } from "@mittwald/flow-react-components/Button";
 import { themes } from "prism-react-renderer";
+import type { JSX } from "react";
+
+export interface LiveCodeEditorProps {
+  code: string | JSX.Element;
+  className?: string;
+  editorCollapsed?: boolean;
+  editorDisabled?: boolean;
+  zoom?: number;
+  darkBackground?: boolean;
+  lightBackground?: boolean;
+  mobile?: boolean;
+}
 
 // Waiting for https://github.com/FormidableLabs/react-live/issues/339
 const error = console.error;
@@ -31,6 +42,7 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
     zoom = 1,
     lightBackground,
     darkBackground,
+    mobile,
   } = props;
 
   const [editorCollapsed, setEditorCollapsed] = useState(
@@ -62,15 +74,16 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
       }}
       transformCode={transformCode}
     >
-      <div className={clsx(styles.liveCodeEditor,            darkBackground && styles.darkBackground,
-        lightBackground && styles.lightBackground,
-        className)}>
-        <LivePreview
-          className={clsx(
-            styles.preview,
-          )}
-          style={{ zoom }}
-        />
+      <div
+        className={clsx(
+          styles.liveCodeEditor,
+          darkBackground && styles.darkBackground,
+          lightBackground && styles.lightBackground,
+          mobile && styles.mobile,
+          className,
+        )}
+      >
+        <LivePreview className={clsx(styles.preview)} style={{ zoom }} />
 
         {!editorDisabled && (
           <div className={styles.editorContainer}>

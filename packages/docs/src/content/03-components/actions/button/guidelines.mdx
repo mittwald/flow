@@ -1,4 +1,11 @@
-<Info example="content-info" inverse />
+## Anwendung
+
+### Position
+
+<Info example="position-info" darkBackground />
+
+### Hierarchie
+
 <DoAndDont>
   <Dont example="hierarchy-order-dont" />
   <Do example="hierarchy-order-do" />
@@ -7,21 +14,53 @@
   <Do example="hierarchy-soft-do" />
   <Do example="hierarchy-solid-do" />
 </DoAndDont>
-<DoAndDont>
-  <Dont example="icon-clarity-dont" />
-  <Do example="icon-clarity-do" />
-</DoAndDont>
-<Do example="icon-context-menu-do" />
-<DoAndDont>
-  <Do example="mobile-width-group-do" />
-  <Do example="mobile-width-standard-do" inverse />
-</DoAndDont>
+
+### Sizes
+
 <Do example="sizes-dont" />
-<DoAndDont>
-  <Dont example="text-clarity-dont" zoom={0.7} inverse />
-  <Do example="text-clarity-do" zoom={0.7} inverse />
-</DoAndDont>
+
+---
+
+## Content Guidelines
+
+### Text
+
 <DoAndDont>
   <Dont example="text-length-dont" />
   <Do example="text-length-do" />
 </DoAndDont>
+
+<DoAndDont>
+  <Dont example="text-clarity-dont" zoom={0.7} darkBackground />
+  <Do example="text-clarity-do" zoom={0.7} darkBackground />
+</DoAndDont>
+
+### Icon
+
+<DoAndDont>
+  <Dont example="icon-clarity-dont" />
+  <Do example="icon-clarity-do" />
+</DoAndDont>
+
+### Text mit Icon
+
+<Do example="icon-context-menu-do" />
+
+---
+
+## Behavior
+
+### Responsive Layout
+
+<DoAndDont>
+  <Do example="mobile-width-group-do" mobile />
+  <Do example="mobile-width-standard-do" mobile darkBackground />
+</DoAndDont>
+
+---
+
+### Accessibility
+
+Das enthaltene SVG erhält automatisch das `aria-hidden=true` Attribut. Wenn dein
+Button keinen Text enthält, benutze das `aria-label` Attribut um die hinterlegte
+Aktion zu beschreiben.
