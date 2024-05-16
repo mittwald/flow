@@ -10,7 +10,7 @@ export interface HeaderProps
     FlowComponentProps<"Header"> {}
 
 export const Header = flowComponent("Header", (props) => {
-  const { children, ref, elementType = "header", ...rest } = props;
+  const { children, refProp: ref, elementType = "header", ...rest } = props;
 
   const Element = elementType;
 

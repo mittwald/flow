@@ -22,7 +22,7 @@ type FlowComponentImplementationProps<C extends FlowComponentName> = Omit<
   FlowComponentPropsOfName<C>,
   keyof FlowComponentProps<C>
 > & {
-  ref?: LegacyRef<never>;
+  refProp?: LegacyRef<never>;
 };
 
 type FlowComponentImplementationType<C extends FlowComponentName> =
@@ -47,7 +47,7 @@ export function flowComponent<C extends FlowComponentName>(
     >;
 
     const propsWithRef = {
-      ref,
+      refProp: ref,
       ...implementationTypeProps,
     };
 

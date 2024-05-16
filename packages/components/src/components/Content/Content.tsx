@@ -22,7 +22,7 @@ export const Content = flowComponent("Content", (props) => {
   const {
     children,
     elementType = "div",
-    ref,
+    refProp: ref,
     clearPropsContext = true,
     isActive = true,
     ...rest

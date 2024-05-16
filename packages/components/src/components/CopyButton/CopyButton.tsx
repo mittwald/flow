@@ -20,7 +20,7 @@ export interface CopyButtonProps
 }
 
 export const CopyButton = flowComponent("CopyButton", (props) => {
-  const { text, ref, ...buttonProps } = props;
+  const { text, refProp: ref, ...buttonProps } = props;
 
   const stringFormatter = useLocalizedStringFormatter(locales);
 
