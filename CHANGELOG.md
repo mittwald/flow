@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.120](https://github.com/mittwald/flow/compare/0.1.0-alpha.119...0.1.0-alpha.120) (2024-05-16)
+
+### Bug Fixes
+
+- **Action:** fix Action executes outdated callback
+  ([21f1e13](https://github.com/mittwald/flow/commit/21f1e1304d78a163a9dc0f74c3903e205b847bd6))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.119](https://github.com/mittwald/flow/compare/0.1.0-alpha.118...0.1.0-alpha.119) (2024-05-16)
 
 **Note:** Version bump only for package @mittwald/flow-project
