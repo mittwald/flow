@@ -13,7 +13,7 @@ export interface FieldErrorProps
     FlowComponentProps {}
 
 export const FieldError = flowComponent("FieldError", (props) => {
-  const { children, className, ref, ...rest } = props;
+  const { children, className, refProp: ref, ...rest } = props;
 
   const rootClassName = clsx(styles.fieldError, className);
 

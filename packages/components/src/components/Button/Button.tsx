@@ -66,7 +66,7 @@ export const Button = flowComponent("Button", (props) => {
     isSucceeded,
     isFailed,
     "aria-disabled": ariaDisabled,
-    ref,
+    refProp: ref,
     unstyled,
     ...restProps
   } = props;

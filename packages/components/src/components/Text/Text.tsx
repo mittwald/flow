@@ -24,7 +24,7 @@ export const Text = flowComponent("Text", (props) => {
     className,
     elementType = "span",
     emulateBoldWidth,
-    ref,
+    refProp: ref,
     ...rest
   } = props;
 

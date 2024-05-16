@@ -22,7 +22,7 @@ export interface NumberFieldProps
     FlowComponentProps {}
 
 export const NumberField = flowComponent("NumberField", (props) => {
-  const { children, className, ref, onChange, ...rest } = props;
+  const { children, className, refProp: ref, onChange, ...rest } = props;
 
   const rootClassName = clsx(formFieldStyles.formField, className);
 
