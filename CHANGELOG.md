@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.121](https://github.com/mittwald/flow/compare/0.1.0-alpha.120...0.1.0-alpha.121) (2024-05-16)
+
+### Bug Fixes
+
+- fix not working refs
+  ([a04a9d3](https://github.com/mittwald/flow/commit/a04a9d3723e2307f2cc829217ebdf9e354a6513a))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.120](https://github.com/mittwald/flow/compare/0.1.0-alpha.119...0.1.0-alpha.120) (2024-05-16)
 
 ### Bug Fixes
