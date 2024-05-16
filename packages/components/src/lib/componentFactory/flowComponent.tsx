@@ -22,6 +22,7 @@ type FlowComponentImplementationProps<C extends FlowComponentName> = Omit<
   FlowComponentPropsOfName<C>,
   keyof FlowComponentProps<C>
 > & {
+  /** @internal */
   refProp?: LegacyRef<never>;
 };
 
