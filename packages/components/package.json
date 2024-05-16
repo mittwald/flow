@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-react-components",
-  "version": "0.1.0-alpha.116",
+  "version": "0.1.0-alpha.118",
   "type": "module",
   "description": "A React implementation of Flow, mittwald’s design system",
   "homepage": "https://mittwald.github.io/flow",
@@ -181,6 +181,10 @@
     "./Select": {
       "types": "./dist/types/components/Select/index.d.ts",
       "import": "./dist/Select.js"
+    },
+    "./Separator": {
+      "types": "./dist/types/components/Separator/index.d.ts",
+      "import": "./dist/Separator.js"
     },
     "./Skeleton": {
       "types": "./dist/types/components/Skeleton/index.d.ts",
