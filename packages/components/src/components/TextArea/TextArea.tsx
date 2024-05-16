@@ -13,7 +13,7 @@ export interface TextAreaProps
     FlowComponentProps {}
 
 export const TextArea = flowComponent("TextArea", (props) => {
-  const { children, placeholder, rows = 5, ref, ...rest } = props;
+  const { children, placeholder, rows = 5, refProp: ref, ...rest } = props;
 
   const input = (
     <Aria.TextArea

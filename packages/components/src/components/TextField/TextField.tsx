@@ -13,7 +13,7 @@ export interface TextFieldProps
     FlowComponentProps {}
 
 export const TextField = flowComponent("TextField", (props) => {
-  const { children, placeholder, ref, ...rest } = props;
+  const { children, placeholder, refProp: ref, ...rest } = props;
 
   const input = (
     <Aria.Input

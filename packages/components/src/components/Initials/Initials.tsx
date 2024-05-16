@@ -15,7 +15,7 @@ export interface InitialsProps
     FlowComponentProps {}
 
 export const Initials = flowComponent("Initials", (props) => {
-  const { children, className, ref } = props;
+  const { children, className, refProp: ref } = props;
 
   const textContent = onlyText(children);
   const initials = getInitialsFromString(textContent);

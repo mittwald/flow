@@ -22,7 +22,7 @@ export const Label = flowComponent("Label", (props) => {
     children,
     className,
     optional,
-    ref,
+    refProp: ref,
     unstyled = false,
     ...rest
   } = props;

@@ -48,6 +48,18 @@ test("Sync Action is called when trigger is clicked", async () => {
   expect(syncAction1).toHaveBeenCalledOnce();
 });
 
+test("Action function is updated when action prop changes", async () => {
+  const r = render(<Action action={syncAction1}>{button}</Action>);
+  await clickTrigger();
+  expect(syncAction1).toHaveBeenCalledOnce();
+  expect(syncAction2).not.toHaveBeenCalledOnce();
+
+  r.rerender(<Action action={syncAction2}>{button}</Action>);
+  await clickTrigger();
+  expect(syncAction1).toHaveBeenCalledOnce();
+  expect(syncAction2).toHaveBeenCalledOnce();
+});
+
 test("Nested sync actions are called when trigger is clicked", async () => {
   render(
     <Action action={syncAction2}>

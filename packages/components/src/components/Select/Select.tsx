@@ -34,7 +34,7 @@ export const Select = flowComponent("Select", (props) => {
     onSelectionChange = () => {
       // default: do nothing
     },
-    ref,
+    refProp: ref,
     ...rest
   } = props;
 

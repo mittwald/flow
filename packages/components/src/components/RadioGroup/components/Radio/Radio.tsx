@@ -16,7 +16,13 @@ export interface RadioProps
 }
 
 export const Radio = flowComponent("Radio", (props) => {
-  const { children, className, unstyled = false, ref, ...rest } = props;
+  const {
+    children,
+    className,
+    unstyled = false,
+    refProp: ref,
+    ...rest
+  } = props;
 
   const rootClassName = unstyled ? className : clsx(styles.radio, className);
 

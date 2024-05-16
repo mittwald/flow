@@ -20,7 +20,7 @@ export const Heading = flowComponent("Heading", (props) => {
     level = 2,
     levelVisual = level,
     color = "primary",
-    ref,
+    refProp: ref,
     ...rest
   } = props;
 
