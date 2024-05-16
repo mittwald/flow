@@ -1,5 +1,7 @@
 ## Playground
 
+Verwende `<Button />`, um einen Button darzustellen.
+
 Benutze das `onPress` Property um die Interaktion mit Maus, Keyboard oder Touch
 zu ermöglichen.
 
@@ -9,13 +11,44 @@ zu ermöglichen.
 
 ## Variants
 
+Beim Button wird zwischen den Variants **Solid, Soft** und **Plain**
+unterschieden.
+
 <LiveCodeEditor example="variants" editorCollapsed />
+
+**Solid:** Die Solid-Variant zeichnet sich durch sein flächiges und auffälliges
+Aussehen aus. Aus diesem Grund verbergen sich in der Regel die Hauptaktionen
+hinter einem Solid-Button.
+
+**Soft:** Die Soft-Variant verleiht dem Button einen softeren Touch und eignet
+sich daher gut für sekundäre Aktionen.
+
+**Plain:** Die Plain-Variant ist weniger auffällig als die anderen Variants und
+wird für weniger wichtige oder versteckte Aktionen verwendet.
 
 ---
 
 ## Colors
 
+Je nach Bedarf stehen vier Button-Color zur Auswahl: **Primary, Secondary,
+Accent** und **Danger**.
+
 <LiveCodeEditor example="colors" editorCollapsed />
+
+**Primary:** Verwende die Primary-Color für Hauptaktionen, wenn der Kontext
+keinen Accent- oder Danger-Button erfordert.
+
+**Secondary:** Die Secondary-Color wird für Nebenaktionen verwendet. Um dies zu
+verdeutlichen wird die Secondary-Color häufig als Soft-Variant verwendet.
+
+**Accent:** Die grüne Farbe der Accent-Color soll dem Button eine positive
+Bedeutung verleihen. Daher wird diese Color vor allem im Kontext von
+Erstellungs-, Speicher- oder Bestellvorgängen verwendet.
+
+**Danger:** Die Danger-Color zeichnet sich durch die rote Farbe aus, die davor
+warnen soll, dass sich hinter dem Button eine negative Konsequenz verbirgt.
+Beispielsweise kann sich hinter dem Button eine Lösch- oder Kündigungsfunktion
+verbergen.
 
 ### Dark
 
@@ -29,20 +62,32 @@ zu ermöglichen.
 
 ## Sizes
 
+Die Size des Buttons kann **Small** oder **Medium** sein. Medium ist die
+Standardgröße und wird für die meisten Buttons verwendet.
+
 <LiveCodeEditor example="sizes" editorCollapsed />
 
 ---
 
 ## Kombiniere mit...
 
+Im Content-Bereich des Buttons kan entweder **Text**, ein **Icon** oder **Text
+mit einem Icon am Ende** beinhalten.
+
 ### Icon
 
-Benutze die `<Icon />` Komponente in einem `<Button />` um ein Icon
-darzustellen.
+Verwende `<Icon />` in einem `<Button />`, um ein Icon statt Text im Button
+anzuzeigen.
 
 <LiveCodeEditor example="icon" editorCollapsed />
 
 ### Text und Icon
+
+Verwende `<Text />` zusammen mit `<Icon />` in einem `<Button />`, um Text mit
+einem Icon im Button anzuzeigen. Das Icon soll spezielle Verhaltensweisen des
+Buttons signalisieren. Zum Beispiel kann ein Chevron-Icon dem Nutzer anzeigen,
+dass sich ein Dropdown öffnet, oder ein Close-Icon zeigt an, dass der Button als
+Filterelement wieder entfernt werden kann.
 
 <LiveCodeEditor example="iconText" editorCollapsed />
 
@@ -51,3 +96,11 @@ darzustellen.
 ## States
 
 <LiveCodeEditor example="states" editorCollapsed />
+
+**Disabled:** Verwende den Disabeld State, wenn der Button keine Aktion oder
+kein Ereignis auslösen soll.
+
+**Pending, Succeeded und Failed:** Pending, Succeeded und Failed sollen dem
+Nutzer signalisieren, dass im Hintergrund etwas passiert, wenn er auf einen
+Button geklickt hat. Verwende den Button zusammen mit der Komponente
+[Action](/03-components/actions/action), um die States zu steuern.
