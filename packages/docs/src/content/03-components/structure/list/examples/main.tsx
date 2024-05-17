@@ -1,4 +1,5 @@
 import List, {
+  ListItem,
   ListItemView,
   ListStaticData,
 } from "@mittwald/flow-react-components/List";
@@ -22,7 +23,7 @@ import StatusBadge from "@mittwald/flow-react-components/StatusBadge";
   <ListStaticData data={domains} />
   <ListItemView<Domain>>
     {(domain) => (
-      <>
+      <ListItem>
         <Avatar variant={domain.type === "Domain" ? 1 : 2}>
           {domain.type === "Domain" ? (
             <IconDomain />
@@ -42,7 +43,7 @@ import StatusBadge from "@mittwald/flow-react-components/StatusBadge";
           <MenuItem>Details anzeigen</MenuItem>
           <MenuItem>Löschen</MenuItem>
         </ContextMenu>
-      </>
+      </ListItem>
     )}
   </ListItemView>
 </List>;

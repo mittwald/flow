@@ -3,7 +3,6 @@ import React, { Suspense } from "react";
 import { useList } from "@/components/List/hooks/useList";
 import styles from "./ItemList.module.css";
 import clsx from "clsx";
-import { Item } from "@/components/List/components/Items/Item";
 import type { PropsWithClassName } from "@/lib/types/props";
 import { IllustratedMessage } from "@/components/IllustratedMessage";
 import { IconSearch } from "@/components/Icon/components/icons";
@@ -25,9 +24,7 @@ export const ItemList: FC<Props> = (props) => {
   const stringFormatter = useLocalizedStringFormatter(locales);
 
   const rows = list.items.entries.map((i) => (
-    <Item key={i.id}>
-      <Suspense>{i.render()}</Suspense>
-    </Item>
+    <Suspense key={i.id}>{i.render()}</Suspense>
   ));
 
   const rootClassName = clsx(

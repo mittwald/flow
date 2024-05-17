@@ -1,16 +1,14 @@
-import type { PropsWithChildren } from "react";
+import type { FC, PropsWithChildren } from "react";
 import React from "react";
-import styles from "./Item.module.scss";
+import styles from "./ListItem.module.scss";
 import type { PropsContext } from "@/lib/propsContext";
-import { dynamic } from "@/lib/propsContext";
-import { PropsContextProvider } from "@/lib/propsContext";
-import { Wrap } from "@/components/Wrap";
-import { deepHas } from "@/lib/react/deepHas";
-import { Link } from "@/components/Link";
+import { dynamic, PropsContextProvider } from "@/lib/propsContext";
 import { OptionsButton } from "@/components/List/components/Items/OptionsButton";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
+import type { LinkDOMProps } from "@react-types/shared";
+import { Link } from "@/components/Link";
 
-type Props = PropsWithChildren;
+type Props = PropsWithChildren & LinkDOMProps;
 
 const getStyleForContentSlot = (slot?: string) =>
   slot === "top"
@@ -19,12 +17,10 @@ const getStyleForContentSlot = (slot?: string) =>
       ? styles.content
       : styles.topContent;
 
-export const Item = (props: Props) => {
-  const { children } = props;
+export const ListItem = (props: Props) => {
+  const { children, href, ...linkDomProps } = props;
 
-  const hasLink = deepHas(children, Link);
-
-  const mainPropsContext: PropsContext = {
+  const propsContext: PropsContext = {
     ContextMenu: {
       render: (ContextMenu, props) => (
         <OptionsButton className={styles.action}>
@@ -56,32 +52,33 @@ export const Item = (props: Props) => {
       className: styles.statusBadge,
       tunnelId: "title",
     },
-  };
-
-  const propsContext: PropsContext = {
-    ...mainPropsContext,
     Link: {
-      className: styles.item,
       unstyled: true,
-      ...mainPropsContext,
     },
   };
 
+  const MainComponent: FC<PropsWithChildren> = (props) =>
+    href ? (
+      <Link unstyled {...linkDomProps} className={styles.item} href={href}>
+        {props.children}
+      </Link>
+    ) : (
+      <div className={styles.item}>{props.children}</div>
+    );
+
   return (
-    <Wrap if={!hasLink}>
-      <div className={styles.item}>
-        <PropsContextProvider props={propsContext}>
-          <TunnelProvider>
-            {children}
-            <div className={styles.title}>
-              <TunnelExit id="title" />
-            </div>
-            <TunnelExit id="topContent" />
-          </TunnelProvider>
-        </PropsContextProvider>
-      </div>
-    </Wrap>
+    <MainComponent>
+      <PropsContextProvider props={propsContext}>
+        <TunnelProvider>
+          {children}
+          <div className={styles.title}>
+            <TunnelExit id="title" />
+          </div>
+          <TunnelExit id="topContent" />
+        </TunnelProvider>
+      </PropsContextProvider>
+    </MainComponent>
   );
 };
 
-export default Item;
+export default ListItem;
