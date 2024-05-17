@@ -10,10 +10,15 @@ export const ShowNextBatchButton: FC<ButtonProps> = (props) => {
   const stringFormatter = useLocalizedStringFormatter(locales);
   const list = useList();
   const isLoading = list.loader.useIsLoading();
+  const isInitiallyLoading = list.loader.useIsInitiallyLoading();
   const pagination = list.batches;
   const canLoadMore = pagination.hasNextBatch();
 
-  if (!canLoadMore) {
+  if (isInitiallyLoading) {
+    return null;
+  }
+
+  if (!canLoadMore && !isLoading) {
     return null;
   }
 
