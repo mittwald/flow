@@ -16,7 +16,7 @@ export interface SectionProps
 }
 
 export const Section = flowComponent("Section", (props) => {
-  const { children, className, isActive = true, ...rest } = props;
+  const { children, className, isActive = true, refProp: ref, ...rest } = props;
 
   if (!children) {
     return null;
@@ -42,7 +42,7 @@ export const Section = flowComponent("Section", (props) => {
 
   return (
     <Activity isActive={isActive}>
-      <section {...rest} className={rootClassName}>
+      <section {...rest} className={rootClassName} ref={ref}>
         <PropsContextProvider props={propsContext}>
           {children}
         </PropsContextProvider>

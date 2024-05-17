@@ -21,7 +21,14 @@ export interface ModalProps
 }
 
 export const Modal = flowComponent("Modal", (props) => {
-  const { size = "s", offCanvas, controller, children, ...rest } = props;
+  const {
+    size = "s",
+    offCanvas,
+    controller,
+    children,
+    refProp: ignoredRef,
+    ...rest
+  } = props;
 
   const rootClassName = clsx(
     styles.modal,

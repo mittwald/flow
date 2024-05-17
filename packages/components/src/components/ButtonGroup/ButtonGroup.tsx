@@ -18,7 +18,7 @@ export interface ButtonGroupProps
     PropsWithClassName {}
 
 export const ButtonGroup = flowComponent("ButtonGroup", (props) => {
-  const { children, className, ...rest } = props;
+  const { children, className, refProp: ref, ...rest } = props;
 
   const rootClassName = clsx(styles.buttonGroupContainer, className);
 
@@ -35,7 +35,7 @@ export const ButtonGroup = flowComponent("ButtonGroup", (props) => {
 
   return (
     <ClearPropsContext>
-      <div {...rest} className={rootClassName}>
+      <div {...rest} className={rootClassName} ref={ref}>
         <div className={styles.buttonGroup} role="group">
           <PropsContextProvider props={propsContext}>
             {children}
