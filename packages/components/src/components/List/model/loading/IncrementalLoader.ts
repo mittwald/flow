@@ -112,22 +112,26 @@ export class IncrementalLoader<T> {
     asyncResource: AsyncResource<DataLoaderResult<T>>,
     batchIndex: number,
   ): void {
-    useEffect(
-      () =>
-        asyncResource.value.observe((asyncData) => {
-          if (!asyncData.isSet) {
-            return;
-          }
+    const setData = (loaderResult: DataLoaderResult<T>): void => {
+      const { data, itemTotalCount } = loaderResult;
+      this.loaderState.setDataBatch(batchIndex, data);
 
-          const { data, itemTotalCount } = asyncData.value;
-          this.loaderState.setDataBatch(batchIndex, data);
+      if (itemTotalCount !== undefined) {
+        this.list.batches.updateItemTotalCount(itemTotalCount);
+      }
+    };
 
-          if (itemTotalCount !== undefined) {
-            this.list.batches.updateItemTotalCount(itemTotalCount);
-          }
-        }),
-      [asyncResource, batchIndex],
-    );
+    useEffect(() => {
+      if (asyncResource.value.value.isSet) {
+        setData(asyncResource.value.value.value);
+      }
+
+      return asyncResource.value.observe((asyncData) => {
+        if (asyncData.isSet) {
+          setData(asyncData.value);
+        }
+      });
+    }, [asyncResource, batchIndex]);
   }
 
   private getDataLoaderOptions(batchIndex: number): DataLoaderOptions<T> {
