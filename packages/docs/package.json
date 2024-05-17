@@ -17,7 +17,7 @@
     "@mfalkenberg/react-live-ssr": "^4.1.7",
     "@mittwald/flow-react-components": "workspace:^",
     "@next/mdx": "^14.2.3",
-    "@tabler/icons-react": "^3.3.0",
+    "@tabler/icons-react": "^3.4.0",
     "@types/mdx": "^2.0.13",
     "acorn": "patch:acorn@npm%3A8.11.2#~/.yarn/patches/acorn-npm-8.11.2-a470f49bb6.patch",
     "acorn-typescript": "^1.4.13",
@@ -34,8 +34,8 @@
     "remark-frontmatter": "^5.0.0",
     "remark-mdx-frontmatter": "^4.0.0",
     "remeda": "^1.61.0",
-    "sass": "^1.77.1",
-    "tsx": "^4.10.2",
+    "sass": "^1.77.2",
+    "tsx": "^4.10.4",
     "webpack": "^5.91.0"
   },
   "devDependencies": {
@@ -45,7 +45,7 @@
     "@yarnpkg/pnpify": "^4.1.0",
     "eslint": "^9.2.0",
     "glob": "^10.3.15",
-    "nx": "^19.0.3",
+    "nx": "^19.0.4",
     "typescript": "^5.4.5"
   }
 }
