@@ -66,6 +66,10 @@ export class IncrementalLoader<T> {
     return this.loaderState.useIsLoading();
   }
 
+  public useIsInitiallyLoading(): boolean {
+    return this.useIsLoading() && this.list.batches.getBatchIndex() === 0;
+  }
+
   public useData(): T[] {
     return this.loaderState.useMergedData();
   }
@@ -80,23 +84,18 @@ export class IncrementalLoader<T> {
   private useLoadBatch(batchIndex: number): void {
     const asyncResource = this.getBatchDataAsyncResource(batchIndex);
 
-    const asyncData = asyncResource.use({
+    asyncResource.use({
       useSuspense: false,
     });
 
-    useEffect(() => {
-      if (!asyncData.hasValue) {
-        return;
-      }
+    this.useObserveBatchData(asyncResource, batchIndex);
+    this.useObserveBatchLoadingState(asyncResource, batchIndex);
+  }
 
-      const { data, itemTotalCount } = asyncData.value;
-      this.loaderState.setDataBatch(batchIndex, data);
-
-      if (itemTotalCount !== undefined) {
-        this.list.batches.updateItemTotalCount(itemTotalCount);
-      }
-    }, [batchIndex, asyncData.maybeValue]);
-
+  private useObserveBatchLoadingState(
+    asyncResource: AsyncResource<DataLoaderResult<T>>,
+    batchIndex: number,
+  ): void {
     useEffect(() => {
       this.loaderState.setBatchLoadingState(
         batchIndex,
@@ -107,6 +106,28 @@ export class IncrementalLoader<T> {
         this.loaderState.setBatchLoadingState(batchIndex, newState);
       });
     }, [asyncResource, batchIndex]);
+  }
+
+  private useObserveBatchData(
+    asyncResource: AsyncResource<DataLoaderResult<T>>,
+    batchIndex: number,
+  ): void {
+    useEffect(
+      () =>
+        asyncResource.value.observe((asyncData) => {
+          if (!asyncData.isSet) {
+            return;
+          }
+
+          const { data, itemTotalCount } = asyncData.value;
+          this.loaderState.setDataBatch(batchIndex, data);
+
+          if (itemTotalCount !== undefined) {
+            this.list.batches.updateItemTotalCount(itemTotalCount);
+          }
+        }),
+      [asyncResource, batchIndex],
+    );
   }
 
   private getDataLoaderOptions(batchIndex: number): DataLoaderOptions<T> {
