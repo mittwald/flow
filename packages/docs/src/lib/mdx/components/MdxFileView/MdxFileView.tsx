@@ -36,6 +36,7 @@ export const MdxFileView: FC<Props> = (props) => {
     darkBackground?: boolean;
     mobile?: boolean;
     children: ReactNode;
+    heading?: string;
   }> = ({
     example,
     exampleText,
@@ -44,6 +45,7 @@ export const MdxFileView: FC<Props> = (props) => {
     darkBackground,
     mobile,
     children,
+    heading,
   }) => (
     <DoAndDontTile
       type="do"
@@ -53,6 +55,7 @@ export const MdxFileView: FC<Props> = (props) => {
       lightBackground={lightBackground}
       darkBackground={darkBackground}
       mobile={mobile}
+      heading={heading}
     >
       {children}
     </DoAndDontTile>
@@ -66,6 +69,7 @@ export const MdxFileView: FC<Props> = (props) => {
     darkBackground?: boolean;
     mobile?: boolean;
     children: ReactNode;
+    heading?: string;
   }> = ({
     example,
     exampleText,
@@ -74,6 +78,7 @@ export const MdxFileView: FC<Props> = (props) => {
     darkBackground,
     mobile,
     children,
+    heading,
   }) => (
     <DoAndDontTile
       type="dont"
@@ -83,6 +88,7 @@ export const MdxFileView: FC<Props> = (props) => {
       lightBackground={lightBackground}
       darkBackground={darkBackground}
       mobile={mobile}
+      heading={heading}
     >
       {children}
     </DoAndDontTile>
@@ -96,6 +102,7 @@ export const MdxFileView: FC<Props> = (props) => {
     darkBackground?: boolean;
     mobile?: boolean;
     children: ReactNode;
+    heading?: string;
   }> = ({
     example,
     exampleText,
@@ -104,6 +111,7 @@ export const MdxFileView: FC<Props> = (props) => {
     darkBackground,
     mobile,
     children,
+    heading,
   }) => (
     <DoAndDontTile
       text={exampleText}
@@ -112,6 +120,7 @@ export const MdxFileView: FC<Props> = (props) => {
       lightBackground={lightBackground}
       darkBackground={darkBackground}
       mobile={mobile}
+      heading={heading}
     >
       {children}
     </DoAndDontTile>
