@@ -15,7 +15,7 @@ export const Popover: FC<PopoverProps> = (props) => {
   const rootClassName = clsx(styles.popover, className);
 
   return (
-    <Aria.Popover {...rest} className={rootClassName}>
+    <Aria.Popover {...rest} className={rootClassName} containerPadding={8}>
       {withTip && (
         <Aria.OverlayArrow className={styles.tip}>
           <svg width={12} height={12} viewBox="0 0 12 12">
@@ -23,8 +23,7 @@ export const Popover: FC<PopoverProps> = (props) => {
           </svg>
         </Aria.OverlayArrow>
       )}
-
-      {children}
+      <div className={styles.content}>{children}</div>
     </Aria.Popover>
   );
 };
