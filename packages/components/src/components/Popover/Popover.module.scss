@@ -27,7 +27,7 @@
     --origin: translateY(var(--size-px--s));
 
     &:has(.tip) {
-      margin-bottom: var(--popover--tip-to-trigger-spacing);
+      margin-bottom: var(--popover--tip-height);
     }
   }
 
@@ -35,7 +35,7 @@
     --origin: translateY(var(--size-px--s--negative));
 
     &:has(.tip) {
-      margin-top: var(--popover--tip-to-trigger-spacing);
+      margin-top: var(--popover--tip-height);
     }
 
     .tip svg {
@@ -47,7 +47,7 @@
     --origin: translateX(var(--size-px--s--negative));
 
     &:has(.tip) {
-      margin-left: var(--popover--tip-to-trigger-spacing);
+      margin-left: var(--popover--tip-height);
     }
 
     .tip svg {
@@ -59,7 +59,7 @@
     --origin: translateX(var(--size-px--s));
 
     &:has(.tip) {
-      margin-right: var(--popover--tip-to-trigger-spacing);
+      margin-right: var(--popover--tip-height);
     }
 
     .tip svg {
