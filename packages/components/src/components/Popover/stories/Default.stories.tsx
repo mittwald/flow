@@ -7,10 +7,12 @@ import Button from "@/components/Button";
 const meta: Meta<typeof Popover> = {
   title: "Overlays/Popover",
   component: Popover,
-  render: () => (
+  render: (props) => (
     <Aria.DialogTrigger>
       <Button>Trigger popover</Button>
-      <Popover placement="bottom right">I am a popover.</Popover>
+      <Popover {...props} placement="bottom right">
+        I am a popover.
+      </Popover>
     </Aria.DialogTrigger>
   ),
 };
@@ -19,3 +21,5 @@ export default meta;
 type Story = StoryObj<typeof Popover>;
 
 export const Default: Story = {};
+
+export const WithTip: Story = { args: { withTip: true } };

@@ -9,3 +9,11 @@ popover:
     value: "{neutral.color.100}"
   min-width:
     value: 200px
+  border-width:
+    value: "{border-width.100}"
+  border-style:
+    value: "{border-style.default}"
+  border-color:
+    value: "{neutral-outline-border-color.default}"
+  tip-to-trigger-spacing:
+    value: "{size-px.xs}"
