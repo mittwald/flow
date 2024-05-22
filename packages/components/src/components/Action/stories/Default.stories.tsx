@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Action from "../Action";
 import React from "react";
 import {
   asyncFunction,
@@ -12,6 +11,7 @@ import { ButtonGroup } from "@/components/ButtonGroup";
 import { Button } from "@/components/Button";
 import { Heading } from "@/components/Heading";
 import { Content } from "@/components/Content";
+import { Action } from "@/components/Action";
 
 const meta: Meta<typeof Action> = {
   title: "Actions/Action",

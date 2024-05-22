@@ -12,7 +12,7 @@ export type ActionStateValue =
 export class ActionState {
   public state: ActionStateValue = "isIdle";
 
-  private constructor() {
+  public constructor() {
     makeObservable(this, {
       state: observable,
       updateState: action,

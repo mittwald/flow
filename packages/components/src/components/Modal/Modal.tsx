@@ -18,6 +18,7 @@ export interface ModalProps
   offCanvas?: boolean;
   controller?: OverlayController;
   slot?: string;
+  isDismissable?: boolean;
 }
 
 export const Modal = flowComponent("Modal", (props) => {

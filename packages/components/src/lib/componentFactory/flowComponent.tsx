@@ -14,6 +14,7 @@ import React, { forwardRef } from "react";
 import type { PropsWithRender, PropsWithTunnel } from "@/lib/types/props";
 import { ClearPropsContext, useProps } from "@/lib/propsContext";
 import { TunnelEntry } from "@mittwald/react-tunnel";
+import { Render } from "@/lib/react/components/Render";
 
 export type FlowComponentProps<C extends FlowComponentName = never> =
   PropsWithTunnel & PropsWithRender<FlowComponentPropsOfName<C>>;
@@ -62,10 +63,14 @@ export function flowComponent<C extends FlowComponentName>(
 
       element = (
         <ClearPropsContext>
-          {render(
-            FlowComponent as unknown as never,
-            propsWithRef as unknown as never,
-          )}
+          <Render>
+            {() =>
+              render(
+                FlowComponent as unknown as never,
+                propsWithRef as unknown as never,
+              )
+            }
+          </Render>
         </ClearPropsContext>
       );
     }

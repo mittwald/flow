@@ -9,11 +9,17 @@ import { useOverlayController } from "@/lib/controller";
 
 export interface OverlayProps extends PropsWithChildren {
   controller?: OverlayController;
+  isDismissable?: boolean;
   className?: string;
 }
 
 export const Overlay: FC<OverlayProps> = (props) => {
-  const { controller: controllerFromProps, children, className } = props;
+  const {
+    controller: controllerFromProps,
+    children,
+    isDismissable = true,
+    className,
+  } = props;
 
   const controllerFromContext = useOverlayController({
     reuseControllerFromContext: true,
@@ -28,7 +34,7 @@ export const Overlay: FC<OverlayProps> = (props) => {
   return (
     <Aria.ModalOverlay
       className={rootClassName}
-      isDismissable
+      isDismissable={isDismissable}
       isOpen={isOpen}
       onOpenChange={(isOpen) => controller.setOpen(isOpen)}
     >
