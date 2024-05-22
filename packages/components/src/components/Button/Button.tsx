@@ -111,6 +111,9 @@ export const Button = flowComponent("Button", (props) => {
     Avatar: {
       className: styles.avatar,
     },
+    CounterLabel: {
+      className: styles.counterLabel,
+    },
   };
 
   const StateIconComponent = isSucceeded

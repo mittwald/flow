@@ -1,0 +1,34 @@
+## Beispiel
+
+<LiveCodeEditor />
+
+---
+
+## Ohne Inhalt
+
+<LiveCodeEditor example="without-content" />
+
+---
+
+## Hohe Zahlen
+
+Ist der tatsächliche Wert 100 oder höher, wird empfohlen stattdessen "99+" in
+das CounterLabel zu schreiben.
+
+<LiveCodeEditor example="high-number" />
+
+---
+
+## Innerhalb eines Buttons
+
+Um sich bei der Verwendung auf anderen Elementen besser von diesen abzuheben,
+hat das CounterLabel eine Border. Diese ist im Default weiß und muss jeweils an
+die Hintergrundfarbe angepasst werden.
+
+### Accessibility
+
+Da das CounterLabel selbst nicht accessible ist, muss der Wert über das
+darunterliegende Element vermittelt werden, in diesem Beispiel erhält der Button
+ein Aria Label, das die Zahl des Counters enthält.
+
+<LiveCodeEditor example="with-button" />
