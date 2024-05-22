@@ -104,19 +104,27 @@ export const useActionController = (): UseActionController => {
         currentContext = currentContext.parentContext;
       }
 
-      await callAndReact(() => callFunctionsInOrder(executionChain)(args), {
+      const executionChainFn = callFunctionsInOrder(executionChain);
+
+      actionExecution.setResetDelay(
+        activeConfirmationModalController ? 500 : 0,
+      );
+
+      await callAndReact(() => executionChainFn(args), {
         onAsync: () => actionExecution.onAsyncStart(),
-        then: () => actionExecution.onSucceeded(),
+        then: async () => {
+          await actionExecution.onSucceeded();
+
+          if (nextConfirmationModalController) {
+            nextConfirmationModalController.open();
+          }
+
+          if (activeConfirmationModalController) {
+            activeConfirmationModalController.close();
+          }
+        },
         catch: (error) => actionExecution.onFailed(error),
       });
-
-      if (nextConfirmationModalController) {
-        nextConfirmationModalController.open();
-      }
-
-      if (activeConfirmationModalController) {
-        activeConfirmationModalController.close();
-      }
     },
   };
 };

@@ -10,6 +10,7 @@ const duration = {
 interface ActionExecutionOptions {
   showFeedback?: boolean;
   resetAfterDone?: boolean;
+  resetDelayMs?: number;
   onFeedbackDone?: (...args: unknown[]) => void;
 }
 
@@ -31,11 +32,17 @@ export class ActionExecution {
         // default: do nothing
       },
       showFeedback = false,
+      resetDelayMs = 0,
     } = options;
 
     this.state = state;
     this.args = args;
-    this.options = { resetAfterDone, onFeedbackDone, showFeedback };
+    this.options = {
+      resetAfterDone,
+      onFeedbackDone,
+      showFeedback,
+      resetDelayMs,
+    };
   }
 
   public onAsyncStart(): void {
@@ -54,6 +61,10 @@ export class ActionExecution {
     await this.onDone();
   }
 
+  public setResetDelay(ms: number): void {
+    this.options.resetDelayMs = ms;
+  }
+
   private async startFailedFeedback(): Promise<void> {
     this.state.updateState("isFailed");
     await sleep(duration.failed);
@@ -67,12 +78,14 @@ export class ActionExecution {
   }
 
   private resetAfterDone(): void {
-    if (this.options.resetAfterDone) {
-      this.state.updateState("isIdle");
-    }
-    if (!this.error) {
-      this.options.onFeedbackDone(...this.args);
-    }
+    setTimeout(() => {
+      if (this.options.resetAfterDone) {
+        this.state.updateState("isIdle");
+      }
+      if (!this.error) {
+        this.options.onFeedbackDone(...this.args);
+      }
+    }, this.options.resetDelayMs);
   }
 
   private async onDone(): Promise<void> {
