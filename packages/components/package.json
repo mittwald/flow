@@ -162,10 +162,6 @@
       "types": "./dist/types/components/Overlay/components/OverlayTrigger/index.d.ts",
       "import": "./dist/OverlayTrigger.js"
     },
-    "./Popover": {
-      "types": "./dist/types/components/Popover/index.d.ts",
-      "import": "./dist/Popover.js"
-    },
     "./ProgressBar": {
       "types": "./dist/types/components/ProgressBar/index.d.ts",
       "import": "./dist/ProgressBar.js"
