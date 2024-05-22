@@ -60,7 +60,6 @@ export default defineConfig(
           OverlayTrigger:
             "./src/components/Overlay/components/OverlayTrigger/index.ts",
           OffCanvas: "./src/components/OffCanvas/index.ts",
-          Popover: "./src/components/Popover/index.ts",
           ProgressBar: "./src/components/ProgressBar/index.ts",
           RadioGroup: "./src/components/RadioGroup/index.ts",
           Section: "./src/components/Section/index.ts",
