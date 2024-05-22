@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Action from "../Action";
 import React from "react";
 import defaultMeta from "./Default.stories";
 import {
@@ -7,6 +6,7 @@ import {
   syncFunction,
   button,
 } from "@/components/Button/stories/lib";
+import { Action } from "@/components/Action";
 
 const meta: Meta<typeof Action> = {
   ...defaultMeta,

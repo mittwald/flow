@@ -1,5 +1,5 @@
 import type { ActionState } from "@/components/Action/lib/execution/ActionState";
-import { isBreakActionError } from "@/components/Action/lib/execution/breakAction";
+import { sleep } from "@/lib/promises/sleep";
 
 const duration = {
   pending: 1000,
@@ -44,28 +44,26 @@ export class ActionExecution {
     setTimeout(() => this.startPending(), duration.pending);
   }
 
-  public onSucceeded(): void {
-    this.onDone();
+  public onSucceeded(): Promise<void> {
+    return this.onDone();
   }
 
-  public onFailed(error: unknown): void {
+  public async onFailed(error: unknown): Promise<void> {
     this.error = error ?? new Error("Unknown error");
     console.error(error);
-    this.onDone();
+    await this.onDone();
   }
 
-  private startFailedFeedback(): void {
-    if (isBreakActionError(this.error)) {
-      this.resetAfterDone();
-    } else {
-      this.state.updateState("isFailed");
-      setTimeout(() => this.resetAfterDone(), duration.failed);
-    }
+  private async startFailedFeedback(): Promise<void> {
+    this.state.updateState("isFailed");
+    await sleep(duration.failed);
+    this.resetAfterDone();
   }
 
-  private startSucceededFeedback(): void {
+  private async startSucceededFeedback(): Promise<void> {
     this.state.updateState("isSucceeded");
-    setTimeout(() => this.resetAfterDone(), duration.succeeded);
+    await sleep(duration.succeeded);
+    this.resetAfterDone();
   }
 
   private resetAfterDone(): void {
@@ -77,14 +75,14 @@ export class ActionExecution {
     }
   }
 
-  private onDone(): void {
+  private async onDone(): Promise<void> {
     this.isDone = true;
 
     if (this.options.showFeedback) {
       if (this.error) {
-        this.startFailedFeedback();
+        await this.startFailedFeedback();
       } else {
-        this.startSucceededFeedback();
+        await this.startSucceededFeedback();
       }
     } else {
       this.resetAfterDone();

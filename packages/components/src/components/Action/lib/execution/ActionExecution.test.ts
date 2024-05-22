@@ -14,7 +14,7 @@ test("State for async actions is correct", async () => {
   expect(actionState.state).toBe("isIdle");
   execution.onAsyncStart();
   expect(actionState.state).toBe("isExecuting");
-  execution.onSucceeded();
+  void execution.onSucceeded();
   expect(actionState.state).toBe("isSucceeded");
   await vi.runAllTimersAsync();
   expect(actionState.state).toBe("isIdle");
@@ -29,7 +29,7 @@ test("State for async failing actions is correct", async () => {
   expect(actionState.state).toBe("isIdle");
   execution.onAsyncStart();
   expect(actionState.state).toBe("isExecuting");
-  execution.onFailed("Error");
+  void execution.onFailed("Error");
   expect(actionState.state).toBe("isFailed");
   await vi.runAllTimersAsync();
   expect(actionState.state).toBe("isIdle");
@@ -46,7 +46,7 @@ test("Long running actions show pending state", async () => {
   expect(actionState.state).toBe("isExecuting");
   vi.advanceTimersByTime(1001);
   expect(actionState.state).toBe("isPending");
-  execution.onSucceeded();
+  void execution.onSucceeded();
   expect(actionState.state).toBe("isSucceeded");
   await vi.runAllTimersAsync();
   expect(actionState.state).toBe("isIdle");
@@ -61,7 +61,7 @@ test("State is not reset when option enabled", async () => {
   expect(actionState.state).toBe("isIdle");
   execution.onAsyncStart();
   expect(actionState.state).toBe("isExecuting");
-  execution.onSucceeded();
+  void execution.onSucceeded();
   expect(actionState.state).toBe("isSucceeded");
   await vi.runAllTimersAsync();
   expect(actionState.state).toBe("isSucceeded");
@@ -79,7 +79,7 @@ test("onFeedbackDone() callback is called", async () => {
   execution.onAsyncStart();
   expect(onFeedbackDone).toHaveBeenCalledTimes(0);
   expect(actionState.state).toBe("isExecuting");
-  execution.onSucceeded();
+  void execution.onSucceeded();
   expect(onFeedbackDone).toHaveBeenCalledTimes(0);
   expect(actionState.state).toBe("isSucceeded");
   await vi.runAllTimersAsync();
@@ -94,7 +94,7 @@ test("Sync action stays idle", async () => {
   });
 
   expect(actionState.state).toBe("isIdle");
-  execution.onSucceeded();
+  void execution.onSucceeded();
   expect(actionState.state).toBe("isIdle");
 });
 
@@ -105,7 +105,7 @@ test("Sync action show feedback when activated", async () => {
   });
 
   expect(actionState.state).toBe("isIdle");
-  execution.onSucceeded();
+  void execution.onSucceeded();
   expect(actionState.state).toBe("isSucceeded");
   await vi.runAllTimersAsync();
   expect(actionState.state).toBe("isIdle");
@@ -118,7 +118,7 @@ test("Sync failing action show feedback when activated", async () => {
   });
 
   expect(actionState.state).toBe("isIdle");
-  execution.onFailed("Error");
+  void execution.onFailed("Error");
   expect(actionState.state).toBe("isFailed");
   await vi.runAllTimersAsync();
   expect(actionState.state).toBe("isIdle");
