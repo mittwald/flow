@@ -10,14 +10,15 @@ import clsx from "clsx";
 import { IconChevronDown } from "@/components/Icon/components/icons";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import { Options } from "@/components/Select/components/Options";
+
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import type { Key } from "react-aria-components";
 import type { PropsWithClassName } from "@/lib/types/props";
+import { Options } from "@/components/Options";
 
 export interface SelectProps
   extends PropsWithChildren<
-      Omit<Aria.SelectProps<{ example: string }>, "children" | "className">
+      Omit<Aria.SelectProps<never>, "children" | "className">
     >,
     FlowComponentProps,
     PropsWithClassName {

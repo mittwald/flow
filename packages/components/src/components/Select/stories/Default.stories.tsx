@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Select, { Option } from "../index";
+import Select from "../index";
 import React from "react";
 import { Label } from "@/components/Label";
+import { Option } from "@/components/Options";
 import FieldDescription from "@/components/FieldDescription";
 import { FieldError } from "@/components/FieldError";
 

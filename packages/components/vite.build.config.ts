@@ -21,6 +21,7 @@ export default defineConfig(
         entry: {
           Accordion: "./src/components/Accordion/index.ts",
           Action: "./src/components/Action/index.ts",
+          Autocomplete: "./src/components/Autocomplete/index.ts",
           Avatar: "./src/components/Avatar/index.ts",
           Breadcrumb: "./src/components/Breadcrumb/index.ts",
           Button: "./src/components/Button/index.ts",

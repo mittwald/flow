@@ -9,6 +9,7 @@
     font-size: var(--font-size--default);
 
     @include formControl.formControl();
+    padding-right: var(--button--padding);
   }
 
   &[data-invalid] {

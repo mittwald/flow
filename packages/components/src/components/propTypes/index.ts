@@ -19,7 +19,7 @@ import type { ButtonGroupProps } from "@/components/ButtonGroup";
 import type { AvatarProps } from "@/components/Avatar";
 import type { ActionProps } from "@/components/Action";
 import type { ContextMenuProps, MenuItemProps } from "@/components/ContextMenu";
-import type { OptionProps, SelectProps } from "@/components/Select";
+import type { SelectProps } from "@/components/Select";
 import type {
   RadioButtonProps,
   RadioGroupProps,
@@ -34,11 +34,14 @@ import type { CheckboxButtonProps } from "@/components/CheckboxButton";
 import type { TabsProps } from "@/components/Tabs";
 import type { ModalProps } from "@/components/Modal";
 import type { SectionProps } from "@/components/Section";
+import type { OptionProps } from "@/components/Options";
+import type { AutocompleteProps } from "@/components/Autocomplete";
 
 export * from "./types";
 
 export interface FlowComponentPropsTypes {
   Action: ActionProps;
+  Autocomplete: AutocompleteProps;
   Avatar: AvatarProps;
   Button: ButtonProps;
   ButtonGroup: ButtonGroupProps;
@@ -81,6 +84,7 @@ const propsContextSupportingComponentsMap: Record<
   true
 > = {
   Action: true,
+  Autocomplete: true,
   Avatar: true,
   Button: true,
   ButtonGroup: true,

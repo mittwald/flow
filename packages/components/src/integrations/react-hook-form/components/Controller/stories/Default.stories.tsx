@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { action } from "@storybook/addon-actions";
 import { TextField } from "@/components/TextField";
 import { Label } from "@/components/Label";
+import { Option } from "@/components/Options";
 import {
   Controller,
   Form,
@@ -18,7 +19,8 @@ import { Radio, RadioGroup } from "@/components/RadioGroup";
 import { Switch } from "@/components/Switch";
 import { CheckboxGroup } from "@/components/CheckboxGroup";
 import { Checkbox } from "@/components/Checkbox";
-import Select, { Option } from "@/components/Select";
+import Select from "@/components/Select";
+import { Autocomplete } from "@/components/Autocomplete";
 
 const submitAction = action("submit");
 
@@ -33,6 +35,7 @@ const meta: Meta<typeof Controller> = {
       gender: string;
       testing: boolean;
       interests: string[];
+      domain: string;
     }
 
     const onSubmit = (values: Values): void => {
@@ -129,6 +132,19 @@ const meta: Meta<typeof Controller> = {
               <Checkbox value="bar">Bar</Checkbox>
               <Checkbox value="baz">Baz</Checkbox>
             </CheckboxGroup>
+          </TController>
+
+          <TController
+            name="domain"
+            rules={{
+              required: "Please select a domain",
+            }}
+          >
+            <Autocomplete>
+              <Label>Domain</Label>
+              <Option value="mydomain.de">mydomain.de</Option>
+              <Option value="anotherdomain.com">anotherdomain.com</Option>
+            </Autocomplete>
           </TController>
 
           <ButtonGroup>
