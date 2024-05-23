@@ -55,6 +55,12 @@
     margin-inline-start: var(--button--text-to-icon-spacing);
   }
 
+  .counterLabel {
+    position: absolute;
+    top: calc(var(--size-px--xs) * -1);
+    right: calc(var(--size-px--xs) * -1);
+  }
+
   /* States */
 
   &.isSucceeded {
