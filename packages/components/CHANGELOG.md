@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.127](https://github.com/mittwald/flow/compare/0.1.0-alpha.126...0.1.0-alpha.127) (2024-05-23)
+
+### Features
+
+- **CounterLabel:** add CounterLabel
+  ([#459](https://github.com/mittwald/flow/issues/459))
+  ([743b980](https://github.com/mittwald/flow/commit/743b98060d81fd1689dc51c3e78198ff2f6ca6c0))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.126](https://github.com/mittwald/flow/compare/0.1.0-alpha.125...0.1.0-alpha.126) (2024-05-23)
 
 ### Features
