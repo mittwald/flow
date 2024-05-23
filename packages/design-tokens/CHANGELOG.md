@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.126](https://github.com/mittwald/flow/compare/0.1.0-alpha.125...0.1.0-alpha.126) (2024-05-23)
+
+### Features
+
+- **Table:** add table component
+  ([2410168](https://github.com/mittwald/flow/commit/24101685f5ae9a6c3f6ba1d9f18ed72be1725b75))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.125](https://github.com/mittwald/flow/compare/0.1.0-alpha.124...0.1.0-alpha.125) (2024-05-23)
 
 ### Features
