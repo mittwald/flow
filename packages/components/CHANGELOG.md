@@ -3,6 +3,54 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.125](https://github.com/mittwald/flow/compare/0.1.0-alpha.124...0.1.0-alpha.125) (2024-05-23)
+
+### Features
+
+- **Action:** keep check icon when closing ConfirmationModal
+  ([3ee2084](https://github.com/mittwald/flow/commit/3ee2084536d8fcfcfad3d47f70575345de58c3e1))
+- **Docs:** auto-close mobile navigation
+  ([bd38876](https://github.com/mittwald/flow/commit/bd388767cf668f6068d9e5b3218a82f87466df47))
+- **OffCanvas:** add heading to off canvas
+  ([380c892](https://github.com/mittwald/flow/commit/380c8925f4c2436819a53a48fd67bd61875991d6))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.124](https://github.com/mittwald/flow/compare/0.1.0-alpha.123...0.1.0-alpha.124) (2024-05-22)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.123](https://github.com/mittwald/flow/compare/0.1.0-alpha.122...0.1.0-alpha.123) (2024-05-22)
+
+### Bug Fixes
+
+- fix ref is passed to DOM element
+  ([e83d920](https://github.com/mittwald/flow/commit/e83d920ce5a17ae209772f5ea767471590853665))
+- **List:** fix linked list items
+  ([0c7521f](https://github.com/mittwald/flow/commit/0c7521fd68da648b7fc16736ed2a884381bd2c13))
+- **List:** fix list is always empty for static data
+  ([350b0b1](https://github.com/mittwald/flow/commit/350b0b193dd0692459684ac8bd53fc7b5e06e091))
+
+### Features
+
+- **List:** show Skeleton in footer component
+  ([30d12fd](https://github.com/mittwald/flow/commit/30d12fd18cf38d55bfc69956ae05f38860d35f24))
+- **Popover:** add border and tip to Popover
+  ([ef34646](https://github.com/mittwald/flow/commit/ef3464650d5311aafd3158c06718f549ada7fcc1))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.122](https://github.com/mittwald/flow/compare/0.1.0-alpha.121...0.1.0-alpha.122) (2024-05-17)
 
 ### Bug Fixes

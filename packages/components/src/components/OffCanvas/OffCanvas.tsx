@@ -9,6 +9,8 @@ import { Action } from "@/components/Action";
 import { Overlay } from "@/components/Overlay";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
+import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
+import { Header } from "@/components/Header";
 
 export interface OffCanvasProps extends PropsWithChildren {
   controller?: OverlayController;
@@ -23,23 +25,31 @@ export const OffCanvas: FC<OffCanvasProps> = (props) => {
   const propsContext: PropsContext = {
     Heading: {
       slot: "title",
+      tunnelId: "heading",
+      levelVisual: 4,
+      level: 2,
     },
   };
 
   return (
     <Overlay controller={controller} className={rootClassName}>
-      <Action closeOverlay>
-        <Button
-          variant="plain"
-          size="s"
-          color="secondary"
-          className={styles.closeButton}
-        >
-          <IconClose />
-        </Button>
-      </Action>
       <PropsContextProvider props={propsContext}>
-        {children}
+        <TunnelProvider>
+          <Header className={styles.header}>
+            <TunnelExit id="heading" />
+            <Action closeOverlay>
+              <Button
+                variant="plain"
+                color="secondary"
+                className={styles.closeButton}
+              >
+                <IconClose />
+              </Button>
+            </Action>
+          </Header>
+
+          {children}
+        </TunnelProvider>
       </PropsContextProvider>
     </Overlay>
   );

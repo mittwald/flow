@@ -10,6 +10,7 @@ import { HeaderNavigation as HeaderNavigationComponent } from "@mittwald/flow-re
 import HeaderNavigation from "@/app/_components/layout/HeaderNavigation";
 import { Section } from "@mittwald/flow-react-components/Section";
 import { OverlayTrigger } from "@mittwald/flow-react-components/OverlayTrigger";
+import { Heading } from "@mittwald/flow-react-components/Heading";
 
 interface Props {
   docs: SerializedMdxFile[];
@@ -26,6 +27,7 @@ export const MobileNavigation: FC<Props> = (props) => {
           <IconMenu />
         </Button>
         <OffCanvas className={styles.mobileNavigationOffCanvas}>
+          <Heading>Menü</Heading>
           <Section>
             <HeaderNavigation docs={docs} />
             <MainNavigation docs={docs} />

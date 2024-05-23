@@ -13,6 +13,7 @@ import { Text } from "@/components/Text";
 import { Navigation } from "@/components/Navigation";
 import { Action } from "@/components/Action";
 import { OverlayTrigger } from "@/components/Overlay";
+import { Heading } from "@/components/Heading";
 
 const meta: Meta<typeof OffCanvas> = {
   title: "Overlays/OffCanvas",
@@ -28,6 +29,7 @@ const meta: Meta<typeof OffCanvas> = {
           <IconMenu />
         </Button>
         <OffCanvas {...props}>
+          <Heading>Menu</Heading>
           <Navigation aria-label="Main menu">
             <Action closeOverlay>
               <Link>

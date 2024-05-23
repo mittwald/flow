@@ -1,58 +1,130 @@
 import type { ActionFn } from "@/components/Action/types";
-import { callFunctionsInOrder } from "@/lib/promises/callFunctionsInOrder";
-import { useParentAction } from "@/components/Action/lib/execution/context";
-import type { ActionProps } from "@/components/Action/Action";
-import { ActionExecution } from "@/components/Action/lib/execution/ActionExecution";
-import { ActionState } from "@/components/Action/lib/execution/ActionState";
-import { useActionFunction } from "@/components/Action/lib/execution/useActionFunction";
+import type { ActionState } from "@/components/Action/lib/execution/ActionState";
+import type { ActionContextValue } from "@/components/Action/context";
+import { useActionContext } from "@/components/Action/context";
 import { callAndReact } from "@/lib/promises/callAndReact";
-import { useMemo } from "react";
-import { omit, values } from "remeda";
+import { ActionExecution } from "@/components/Action/lib/execution/ActionExecution";
+import { callFunctionsInOrder } from "@/lib/promises/callFunctionsInOrder";
+import type { OverlayController } from "@/lib/controller";
 
 interface UseActionController {
-  callAction: ActionFn;
+  execute: ActionFn;
   state: ActionState;
 }
 
-export const useActionController = (
-  actionProps: ActionProps,
-): UseActionController => {
-  const { isConfirmationAction, showFeedback } = actionProps;
+const voidAction = () => {
+  // do nothing
+};
 
-  const localAction = useActionFunction(actionProps);
-  const parentAction = useParentAction();
-  const state = ActionState.useNew();
+export const useActionController = (): UseActionController => {
+  const context = useActionContext();
 
-  const resetAfterDone = !isConfirmationAction;
+  const state =
+    context.actionProps.confirm || context.actionProps.abort
+      ? context.parentContext?.state ?? context.state
+      : context.state;
 
-  const nextAction = isConfirmationAction ? undefined : parentAction;
-  const afterFeedbackDoneAction = isConfirmationAction
-    ? parentAction
-    : undefined;
+  return {
+    state,
+    execute: async (...args) => {
+      const {
+        actionProps,
+        confirmationModalController,
+        needsConfirmation,
+        parentContext,
+      } = context;
 
-  const action = callFunctionsInOrder([localAction, nextAction]);
+      if (actionProps.abort) {
+        parentContext?.confirmationModalController?.close();
+        return;
+      }
 
-  const callAction: ActionFn = (...args) => {
-    const execution = new ActionExecution(state, args, {
-      onFeedbackDone: afterFeedbackDoneAction,
-      resetAfterDone,
-      showFeedback,
-    });
+      if (needsConfirmation && !confirmationModalController.isOpen) {
+        confirmationModalController.open();
+        return;
+      }
 
-    return callAndReact(action, {
-      onAsync: () => execution.onAsyncStart(),
-      then: () => execution.onSucceeded(),
-      catch: (err) => execution.onFailed(err),
-    });
+      const actionExecution = new ActionExecution(state, args, actionProps);
+
+      const executionChain: ActionFn[] = [];
+
+      let activeConfirmationModalController: OverlayController | undefined;
+      let nextConfirmationModalController: OverlayController | undefined;
+
+      let currentContext: ActionContextValue | undefined = context;
+
+      while (currentContext) {
+        const {
+          actionProps,
+          overlayController,
+          confirmationModalController,
+          needsConfirmation,
+        } = currentContext;
+
+        const {
+          action,
+          toggleOverlay,
+          openOverlay,
+          closeOverlay,
+          break: $break,
+        } = actionProps;
+
+        if ($break) {
+          break;
+        }
+
+        if (needsConfirmation) {
+          if (activeConfirmationModalController) {
+            nextConfirmationModalController = confirmationModalController;
+            break;
+          } else {
+            activeConfirmationModalController = confirmationModalController;
+          }
+        }
+
+        const getOverlayController = (
+          controllerFromProp: OverlayController | true,
+        ) =>
+          typeof controllerFromProp === "boolean"
+            ? overlayController
+            : controllerFromProp;
+
+        executionChain.push(
+          action
+            ? action
+            : toggleOverlay
+              ? getOverlayController(toggleOverlay).toggle
+              : openOverlay
+                ? getOverlayController(openOverlay).open
+                : closeOverlay
+                  ? getOverlayController(closeOverlay).close
+                  : voidAction,
+        );
+
+        currentContext = currentContext.parentContext;
+      }
+
+      const executionChainFn = callFunctionsInOrder(executionChain);
+
+      actionExecution.setResetDelay(
+        activeConfirmationModalController ? 500 : 0,
+      );
+
+      await callAndReact(() => executionChainFn(args), {
+        onAsync: () => actionExecution.onAsyncStart(),
+        then: async () => {
+          await actionExecution.onSucceeded();
+
+          if (nextConfirmationModalController) {
+            nextConfirmationModalController.open();
+          }
+
+          if (activeConfirmationModalController) {
+            activeConfirmationModalController.close();
+          }
+        },
+        catch: (error) => actionExecution.onFailed(error),
+      });
+    },
   };
-
-  const dependencies = values(omit(actionProps, ["children"]));
-
-  return useMemo(
-    () => ({
-      callAction,
-      state,
-    }),
-    dependencies,
-  );
 };

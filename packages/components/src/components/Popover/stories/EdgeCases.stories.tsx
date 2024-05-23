@@ -1,25 +1,30 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Popover from "../Popover";
 import React from "react";
+import { Popover } from "@/components/Popover";
 import * as Aria from "react-aria-components";
 import Button from "@/components/Button";
+import { dummyText } from "@/lib/dev/dummyText";
+import defaultMeta from "./Default.stories";
 
 const meta: Meta<typeof Popover> = {
-  title: "Overlays/Popover",
+  ...defaultMeta,
+  title: "Overlays/Popover/Edge Cases",
   component: Popover,
-  render: (props) => (
-    <Aria.DialogTrigger>
-      <Button>Trigger popover</Button>
-      <Popover {...props} placement="bottom right">
-        I am a popover.
-      </Popover>
-    </Aria.DialogTrigger>
-  ),
 };
+
 export default meta;
 
 type Story = StoryObj<typeof Popover>;
 
-export const Default: Story = {};
-
-export const WithTip: Story = { args: { withTip: true } };
+export const LongContent: Story = {
+  render: (props) => (
+    <Aria.DialogTrigger>
+      <Button>Trigger popover</Button>
+      <Popover {...props} placement="bottom right">
+        {dummyText.long}
+        {dummyText.long}
+        {dummyText.long}
+      </Popover>
+    </Aria.DialogTrigger>
+  ),
+};
