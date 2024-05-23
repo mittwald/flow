@@ -7,7 +7,7 @@ import { IconNotification } from "@/components/Icon/components/icons";
 const meta: Meta<typeof CounterLabel> = {
   title: "Status/CounterLabel",
   component: CounterLabel,
-  render: (props) => <CounterLabel {...props}>5</CounterLabel>,
+  render: (props) => <CounterLabel {...props} count={5} />,
 };
 export default meta;
 
@@ -20,14 +20,14 @@ export const WithoutContent: Story = {
 };
 
 export const WithHighNumber: Story = {
-  render: (props) => <CounterLabel {...props}>74</CounterLabel>,
+  render: (props) => <CounterLabel {...props} count={120} />,
 };
 
 export const WithButton: Story = {
   render: (props) => (
     <Button aria-label="Notifications: 7">
       <IconNotification />
-      <CounterLabel {...props}>7</CounterLabel>
+      <CounterLabel {...props} count={7}></CounterLabel>
     </Button>
   ),
 };

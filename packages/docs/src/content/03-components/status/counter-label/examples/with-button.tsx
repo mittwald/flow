@@ -4,5 +4,5 @@ import { CounterLabel } from "@mittwald/flow-react-components/CounterLabel";
 
 <Button aria-label="Benachrichtigungen: 7">
   <IconNotification />
-  <CounterLabel>7</CounterLabel>
+  <CounterLabel count={7} />
 </Button>;

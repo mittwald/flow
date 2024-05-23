@@ -1,3 +1,3 @@
 import { CounterLabel } from "@mittwald/flow-react-components/CounterLabel";
 
-<CounterLabel>99+</CounterLabel>;
+<CounterLabel count={120} />;
