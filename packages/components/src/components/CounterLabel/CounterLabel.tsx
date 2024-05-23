@@ -21,7 +21,7 @@ export const CounterLabel: FC<CounterLabelProps> = flowComponent(
     const rootClassName = clsx(styles.counterLabel, className);
 
     return (
-      <span className={rootClassName} {...rest}>
+      <span className={rootClassName} {...rest} aria-hidden>
         {children}
       </span>
     );
