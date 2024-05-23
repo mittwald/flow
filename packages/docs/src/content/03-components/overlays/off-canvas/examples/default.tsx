@@ -18,8 +18,8 @@ import { OverlayTrigger } from "@mittwald/flow-react-components/OverlayTrigger";
     <IconMenu />
   </Button>
   <OffCanvas>
+    <Heading>Menü</Heading>
     <Section>
-      <Heading>Menü</Heading>
       <Navigation aria-label="Main menu">
         <Link>
           <IconCustomer />
