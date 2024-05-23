@@ -6,8 +6,6 @@ import styles from "./CounterLabel.module.scss";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 
-// accessibility über label am button mit anzahl des counters
-
 export interface CounterLabelProps
   extends PropsWithChildren,
     PropsWithElementType<"span">,
