@@ -5,3 +5,7 @@ off-canvas:
     value: "{size-px.l}"
   background-color:
     value: "{neutral.color.100}"
+  heading-to-close-button-spacing:
+    value: "{size-rem.m}"
+  header-to-content-spacing:
+    value: "{size-rem.m}"
