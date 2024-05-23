@@ -69,6 +69,7 @@ export default defineConfig(
           StatusBadge: "./src/components/StatusBadge/index.ts",
           StatusIcon: "./src/components/StatusIcon/index.ts",
           Switch: "./src/components/Switch/index.ts",
+          Table: "./src/components/Table/index.ts",
           Tabs: "./src/components/Tabs/index.ts",
           Text: "./src/components/Text/index.ts",
           TextArea: "./src/components/TextArea/index.ts",
