@@ -4,7 +4,7 @@ import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import styles from "../../Table.module.scss";
 
-export interface TableCellProps extends Aria.CellProps {}
+export type TableCellProps = Aria.CellProps;
 
 export const TableCell: FC<TableCellProps> = (props) => {
   const { children, className, ...rest } = props;

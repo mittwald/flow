@@ -4,7 +4,7 @@ import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import styles from "../../Table.module.scss";
 
-export interface TableHeaderProps extends Aria.TableHeaderProps<never> {}
+export type TableHeaderProps = Aria.TableHeaderProps<never>;
 
 export const TableHeader: FC<TableHeaderProps> = (props) => {
   const { children, className, ...rest } = props;

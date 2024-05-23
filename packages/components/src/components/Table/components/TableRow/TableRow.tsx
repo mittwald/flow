@@ -4,7 +4,7 @@ import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import styles from "../../Table.module.scss";
 
-export interface TableRowProps extends Aria.RowProps<never> {}
+export type TableRowProps = Aria.RowProps<never>;
 
 export const TableRow: FC<TableRowProps> = (props) => {
   const { children, className, ...rest } = props;
