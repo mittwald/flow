@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import { OffCanvas } from "@/components/OffCanvas";
+import { OffCanvas, OffCanvasTrigger } from "@/components/OffCanvas";
 import { Button } from "@/components/Button";
 import {
   IconCustomer,
@@ -12,7 +12,6 @@ import { Link } from "@/components/Link";
 import { Text } from "@/components/Text";
 import { Navigation } from "@/components/Navigation";
 import { Action } from "@/components/Action";
-import { OverlayTrigger } from "@/components/Overlay";
 import { Heading } from "@/components/Heading";
 
 const meta: Meta<typeof OffCanvas> = {
@@ -24,7 +23,7 @@ const meta: Meta<typeof OffCanvas> = {
 
   render: (props) => {
     return (
-      <OverlayTrigger>
+      <OffCanvasTrigger>
         <Button>
           <IconMenu />
         </Button>
@@ -51,7 +50,7 @@ const meta: Meta<typeof OffCanvas> = {
             </Action>
           </Navigation>
         </OffCanvas>
-      </OverlayTrigger>
+      </OffCanvasTrigger>
     );
   },
 };

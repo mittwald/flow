@@ -57,11 +57,10 @@ export default defineConfig(
           Modal: "./src/components/Modal/index.ts",
           Navigation: "./src/components/Navigation/index.ts",
           NumberField: "./src/components/NumberField/index.ts",
-          OverlayTrigger:
-            "./src/components/Overlay/components/OverlayTrigger/index.ts",
           OffCanvas: "./src/components/OffCanvas/index.ts",
           ProgressBar: "./src/components/ProgressBar/index.ts",
           RadioGroup: "./src/components/RadioGroup/index.ts",
+          Render: "./src/lib/react/components/Render/index.ts",
           Section: "./src/components/Section/index.ts",
           Select: "./src/components/Select/index.ts",
           Separator: "./src/components/Separator/index.ts",
