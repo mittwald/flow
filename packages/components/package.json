@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-react-components",
-  "version": "0.1.0-alpha.125",
+  "version": "0.1.0-alpha.126",
   "type": "module",
   "description": "A React implementation of Flow, mittwald’s design system",
   "homepage": "https://mittwald.github.io/flow",
@@ -201,6 +201,10 @@
     "./Switch": {
       "types": "./dist/types/components/Switch/index.d.ts",
       "import": "./dist/Switch.js"
+    },
+    "./Table": {
+      "types": "./dist/types/components/Table/index.d.ts",
+      "import": "./dist/Table.js"
     },
     "./Tabs": {
       "types": "./dist/types/components/Tabs/index.d.ts",

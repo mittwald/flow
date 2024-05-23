@@ -31,7 +31,11 @@
 // CSS Specificity: 0-0-2
 html
   body
-  *:where([class*="flow--"]:not([class*="flow--"] [class*="flow--"]):not(svg)) {
+  *:where(
+    [class*="flow--"]:not([class*="flow--"] [class*="flow--"]):not(svg):not(
+        table
+      )
+  ) {
   all: initial;
 }
 
