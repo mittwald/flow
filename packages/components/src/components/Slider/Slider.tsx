@@ -11,7 +11,7 @@ import { Button } from "@/components/Button";
 import { IconMinus, IconPlus } from "@/components/Icon/components/icons";
 
 //translate label
-//add initialvalue
+//add initial value
 
 export interface SliderProps
   extends FlowComponentProps<"Slider">,
@@ -19,9 +19,13 @@ export interface SliderProps
     Pick<Aria.SliderThumbProps, "name"> {}
 
 export const Slider: FC<SliderProps> = flowComponent("Slider", (props) => {
-  const { className, children, name, ...rest } = props;
+  const { className, children, name, isDisabled, ...rest } = props;
 
-  const rootClassName = clsx(styles.slider, className);
+  const rootClassName = clsx(
+    styles.slider,
+    isDisabled && styles.disabled,
+    className,
+  );
 
   const propsContext: PropsContext = {
     Label: {
@@ -30,7 +34,7 @@ export const Slider: FC<SliderProps> = flowComponent("Slider", (props) => {
   };
 
   return (
-    <Aria.Slider className={rootClassName} {...rest}>
+    <Aria.Slider className={rootClassName} isDisabled={isDisabled} {...rest}>
       <div className={styles.text}>
         <Aria.SliderOutput className={styles.value} />
         <PropsContextProvider props={propsContext}>
@@ -46,6 +50,7 @@ export const Slider: FC<SliderProps> = flowComponent("Slider", (props) => {
               size="s"
               variant="plain"
               className={styles.decrement}
+              isDisabled={isDisabled}
             >
               <IconMinus />
             </Button>
@@ -54,6 +59,7 @@ export const Slider: FC<SliderProps> = flowComponent("Slider", (props) => {
               size="s"
               variant="plain"
               className={styles.increment}
+              isDisabled={isDisabled}
             >
               <IconPlus />
             </Button>

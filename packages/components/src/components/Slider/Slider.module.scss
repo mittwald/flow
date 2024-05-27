@@ -27,13 +27,12 @@
     grid-area: track;
     position: relative;
     height: var(--slider--thumb-size);
-    width: 100%;
 
     &:before {
       content: "";
       display: block;
       position: absolute;
-      background: var(--slider--track-background-color);
+      background: var(--slider--track-background-color--default);
       height: var(--slider--track-height);
       width: 100%;
       top: 50%;
@@ -45,7 +44,7 @@
   .fill {
     position: absolute;
     height: var(--slider--track-height);
-    background: var(--slider--track-background-color-fill);
+    background: var(--slider--track-background-color-fill--default);
     top: calc(50% - var(--slider--track-height) / 2);
     border-radius: var(--slider--track-corner-radius);
   }
@@ -85,5 +84,25 @@
 
   .decrement {
     left: 0;
+  }
+
+  &.disabled {
+    .track {
+      &:before {
+        background: var(--slider--track-background-color--disabled);
+      }
+    }
+
+    .fill {
+      background: var(--slider--track-background-color-fill--disabled);
+    }
+
+    .thumb {
+      border-color: var(--slider--thumb-border-color--disabled);
+    }
+
+    .text {
+      color: var(--slider--text-color--disabled);
+    }
   }
 }

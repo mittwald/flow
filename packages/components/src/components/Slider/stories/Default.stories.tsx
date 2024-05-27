@@ -35,3 +35,5 @@ export const WithUnit: Story = {
     </Slider>
   ),
 };
+
+export const Disabled: Story = { args: { isDisabled: true } };

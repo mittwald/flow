@@ -5,17 +5,29 @@ slider:
     value: "{size-rem.xs}"
   text-to-track-spacing:
     value: "{size-rem.xs}"
+  text-color:
+    disabled:
+      value: "{disabled-plain-content-accent-color}"
   track-background-color:
-    value: "{primary-soft-background-color.default}"
+    default:
+      value: "{primary-soft-background-color.default}"
+    disabled:
+      value: "{disabled-soft-background-color}"
   track-background-color-fill:
-    value: "{primary-solid-background-color.default}"
+    default:
+      value: "{primary-solid-background-color.default}"
+    disabled:
+      value: "{disabled-solid-background-color}"
   track-height:
     value: "{size-px.xs}"
   track-corner-radius:
     value: "{corner-radius.default}"
 
   thumb-border-color:
-    value: "{primary-solid-background-color.default}"
+    default:
+      value: "{primary-solid-background-color.default}"
+    disabled:
+      value: "{disabled-solid-background-color}"
   thumb-border-width:
     value: "{border-width.200}"
   thumb-border-style:
