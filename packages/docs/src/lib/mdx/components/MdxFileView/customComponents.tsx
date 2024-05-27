@@ -12,6 +12,7 @@ import DoAndDont from "@/lib/mdx/components/DoAndDont/DoAndDont";
 import { IconExternalLink } from "@mittwald/flow-react-components/Icons";
 import { ColumnLayout } from "@mittwald/flow-react-components/ColumnLayout";
 import { InlineCode } from "@mittwald/flow-react-components/InlineCode";
+import { Separator } from "@mittwald/flow-react-components/Separator";
 
 export const customComponents: MDXComponents = {
   Content: Content,
@@ -87,5 +88,5 @@ export const customComponents: MDXComponents = {
     );
   },
 
-  hr: () => <hr className={styles.hr} />,
+  hr: () => <Separator />,
 };

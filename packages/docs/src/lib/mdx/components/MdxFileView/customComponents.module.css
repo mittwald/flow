@@ -23,12 +23,6 @@
   padding-left: var(--size-rem--m);
 }
 
-.hr {
-  margin-block: var(--size-px--m);
-  border: 0;
-  border-top: var(--border-width--100) solid var(--neutral--color--500);
-}
-
 .doAndDontCode {
   margin-bottom: calc(var(--size-px--m) * -1);
   border-bottom: none;
