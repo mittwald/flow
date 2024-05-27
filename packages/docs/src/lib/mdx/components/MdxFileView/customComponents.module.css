@@ -107,12 +107,6 @@
   }
 }
 
-.hr {
-  margin-block: var(--size-px--m);
-  border: 0;
-  border-top: var(--border-width--100) solid var(--neutral--color--500);
-}
-
 @media (max-width: 1200px) {
   .doAndDont {
     display: flex;
