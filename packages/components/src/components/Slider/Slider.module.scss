@@ -1,24 +1,32 @@
+@use "@/styles/mixins/focus";
+
 .slider {
-  display: grid;
-  grid-template-areas:
-    "label value"
-    "track track";
-  grid-template-columns: 1fr auto;
+  display: flex;
   flex-direction: column;
   width: 100%;
+  row-gap: var(--slider--text-to-track-spacing);
 
-  .label {
-    grid-area: label;
-  }
+  --button-size: calc(
+    var(--button--line-height-s) + var(--button--padding-s) * 2
+  );
 
-  .value {
-    grid-area: value;
+  .text {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    column-gap: var(--slider--value-to-label-spacing);
+    padding: 0 calc(var(--button-size) + var(--slider--value-to-label-spacing));
+
+    .value {
+      font-weight: var(--slider--value-font-weight);
+    }
   }
 
   .track {
     grid-area: track;
     position: relative;
-    height: 30px;
+    height: var(--slider--thumb-size);
     width: 100%;
 
     &:before {
@@ -26,28 +34,56 @@
       display: block;
       position: absolute;
       background: var(--slider--track-background-color);
-      height: 4px;
+      height: var(--slider--track-height);
       width: 100%;
       top: 50%;
       transform: translateY(-50%);
+      border-radius: var(--slider--track-corner-radius);
     }
   }
 
+  .fill {
+    position: absolute;
+    height: var(--slider--track-height);
+    background: var(--slider--track-background-color-fill);
+    top: calc(50% - var(--slider--track-height) / 2);
+    border-radius: var(--slider--track-corner-radius);
+  }
+
   .thumb {
-    width: 1.429rem;
-    height: 1.429rem;
-    border-radius: 50%;
-    background: var(--slider--thumb-background-color);
-    border: 2px solid var(--slider--thumb-border-color);
+    width: var(--slider--thumb-size);
+    height: var(--slider--thumb-size);
+    border-radius: var(--slider--thumb-corner-radius);
+    background-color: var(--slider--thumb-background-color--default);
+    border-width: var(--slider--thumb-border-width);
+    border-style: var(--slider--thumb-border-style);
+    border-color: var(--slider--thumb-border-color);
     forced-color-adjust: none;
     top: 50%;
 
-    &[data-dragging] {
-      background: purple;
+    &[data-dragging],
+    &[data-focus-visible] {
+      background-color: var(--slider--thumb-background-color--pressed);
     }
 
     &[data-focus-visible] {
-      outline: 2px solid var(--focus-ring-color);
+      @include focus.focus;
+      outline-offset: var(--size-px--xs);
     }
+  }
+
+  .increment,
+  .decrement {
+    position: absolute;
+    top: calc((var(--slider--text-to-track-spacing) + var(--button-size)) * -1);
+    right: 0;
+  }
+
+  .increment {
+    right: 0;
+  }
+
+  .decrement {
+    left: 0;
   }
 }

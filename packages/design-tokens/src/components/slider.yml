@@ -1,7 +1,31 @@
 slider:
+  value-font-weight:
+    value: "{font-weight.bold}"
+  value-to-label-spacing:
+    value: "{size-rem.xs}"
+  text-to-track-spacing:
+    value: "{size-rem.xs}"
   track-background-color:
     value: "{primary-soft-background-color.default}"
+  track-background-color-fill:
+    value: "{primary-solid-background-color.default}"
+  track-height:
+    value: "{size-px.xs}"
+  track-corner-radius:
+    value: "{corner-radius.default}"
+
   thumb-border-color:
     value: "{primary-solid-background-color.default}"
+  thumb-border-width:
+    value: "{border-width.200}"
+  thumb-border-style:
+    value: "{border-style.default}"
+  thumb-corner-radius:
+    value: "{corner-radius.round}"
+  thumb-size:
+    value: "{size-px.l}"
   thumb-background-color:
-    value: "{neutral.color.100}"
+    default:
+      value: "{neutral.color.100}"
+    pressed:
+      value: "{primary-solid-background-color.default}"

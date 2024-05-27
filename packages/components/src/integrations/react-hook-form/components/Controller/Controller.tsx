@@ -50,6 +50,7 @@ export function Controller<T extends FieldValues>(props: Props<T>) {
           TextArea: formControlProps,
           TextField: formControlProps,
           Select: formControlProps,
+          Slider: formControlProps,
         };
 
         return (
