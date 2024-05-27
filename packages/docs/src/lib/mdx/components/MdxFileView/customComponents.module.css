@@ -23,6 +23,10 @@
   padding-left: var(--size-rem--m);
 }
 
+.separator {
+  margin-block: var(--size-px--m);
+}
+
 .doAndDontCode {
   margin-bottom: calc(var(--size-px--m) * -1);
   border-bottom: none;

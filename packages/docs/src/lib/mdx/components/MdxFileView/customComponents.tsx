@@ -88,5 +88,5 @@ export const customComponents: MDXComponents = {
     );
   },
 
-  hr: () => <Separator />,
+  hr: () => <Separator className={styles.separator} />,
 };
