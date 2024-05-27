@@ -11,6 +11,7 @@ import { LinkProvider } from "@mittwald/flow-react-components/nextjs";
 import DoAndDont from "@/lib/mdx/components/DoAndDont/DoAndDont";
 import { IconExternalLink } from "@mittwald/flow-react-components/Icons";
 import { ColumnLayout } from "@mittwald/flow-react-components/ColumnLayout";
+import { InlineCode } from "@mittwald/flow-react-components/InlineCode";
 
 export const customComponents: MDXComponents = {
   Content: Content,
@@ -31,7 +32,7 @@ export const customComponents: MDXComponents = {
     </div>
   ),
 
-  code: ({ children }) => <code className={styles.code}>{children}</code>,
+  code: ({ children }) => <InlineCode>{children}</InlineCode>,
 
   p: ({ children }) => (
     <Text className={styles.p} elementType="p">
