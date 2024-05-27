@@ -5,6 +5,8 @@ direkt im Content-Bereich durchgeführt oder innerhalb eines
 werden muss. Ein Button hat eine hohe Sichtbarkeit und sollte daher nicht zu
 übermäßig eingesetzt werden.
 
+---
+
 ## Grundlagen
 
 ### Best practices
@@ -38,9 +40,9 @@ Anhaltspunkte.
 
 <DoAndDont>
 <Info heading="Verwende Buttons, um z. B. ...">
-- eine Aktion auszuführen oder ein Event zu starten, ohne die Seite zu verlassen.
+- eine Aktion auszuführen ohne die Seite zu verlassen.
 - Formulare zu speichern oder zurückzusetzen.
-- in einem [Modal]/03-components/overlays/modal) oder [Off-Canvas](/03-components/overlays/off-canvas) zu navigieren und Aktionen auszuwählen.
+- in einem [Modal](/03-components/overlays/modal) oder [Off-Canvas](/03-components/overlays/off-canvas) zu navigieren und Aktionen auszuwählen.
 
 </Info>
 
@@ -66,9 +68,10 @@ Bei der Positionierung des Buttons sind folgende Punkte zu beachten:
   3:1 AA oder besser 4:1 AAA angestrebt werden. Bei farbigen Hintergründen
   sollten gegebenenfalls die Colors Light oder Dark in Betracht gezogen werden.
 - Verwende niemals zu viele Buttons nebeneinander. Als Richtwert sollten nicht
-  mehr als zwei oder drei Button nebeneinander verwendet werden.
+  mehr als zwei oder drei Buttons nebeneinander verwendet werden.
 - Viele Buttons haben in komplexeren Komponenten bereits eine feste Position.
-  Zum Beispiel werden Buttons automatisch in der ButtonGroup positioniert.
+  Zum Beispiel werden Buttons automatisch in der
+  [ButtonGroup](/03-components/actions/button-group) positioniert.
 
 <Info
   example="position-info"
@@ -85,15 +88,15 @@ Die verschiedenen Arten von Buttons haben eine Hierarchie untereinander. Das
 heißt, wenn mehrere Buttons nebeneinander verwendet werden, muss darauf geachtet
 werden, welche Buttonart dafür geeignet ist.
 
-- Für Hauptaktionen verwende einen Button als Solid-Variant in den Colors
+- Für **Hauptaktionen** verwende einen Button als Solid-Variant in den Colors
   Primary-, Accent- oder Danger. Um Verwirrung zu vermeiden, achte darauf, nur
   eine Hauptaktion darzustellen. Zum Beispiel können zwei Danger-Buttons mit
   einer Löschfunktion vom Nutzer nicht direkt unterschieden werden.
-- Wenn eine Nebenaktion fast gleichwertig ist wie die Hauptaktion, dann verwende
-  einen Solid-Variant-Button in der Secondary-Color. Ist die Nebenaktion nicht
-  so wichtig und nebensächlicher, dann wird die Secondary-Color mit der
-  Soft-Variant verwendet. Besonders gut ist diese Darstellung für “Schließen”-
-  oder “Zurück”-Buttons geeignet.
+- Wenn eine **Nebenaktion** fast gleichwertig ist wie die Hauptaktion, dann
+  verwende einen Solid-Variant-Button in der Secondary-Color. Ist die
+  Nebenaktion nicht so wichtig und nebensächlicher, dann wird die
+  Secondary-Color mit der Soft-Variant verwendet. Besonders gut ist diese
+  Darstellung für “Schließen”- oder “Zurück”-Buttons geeignet.
 - Wenn Aktionen nicht sofort vom Nutzer bemerkt werden sollen, dann verwende
   einen Button in der Plain-Variant.
 - Versuche, Buttons desselben Variant und derselben Color zu gruppieren.
@@ -135,15 +138,16 @@ des Buttons bestimmt.
 
 Zeige dem Nutzer immer an, dass der Klick auf den Button eine Aktion auslöst:
 
-- Modal oder Off-Canvas öffnet sich.
+- [Modal](/03-components/overlays/modal) oder
+  [Off-Canvas](/03-components/overlays/off-canvas) öffnet sich.
 - Ein Spinner, Häkchen oder ein Kreuz wird angezeigt, um zu signalisieren, dass
   ein Prozess läuft, erfolgreich war oder fehlgeschlagen ist. Für die Steuerung
-  wird die Action-Komponente verwendet.
+  wird die [Action-Komponente](/03-components/actions/action) verwendet.
 - Mit den unterschiedlichen States eines Buttons, die Interaktivität vermitteln.
 
 ---
 
-## Content Guidelines
+## Content guidelines
 
 ### Text
 
@@ -178,10 +182,10 @@ Achte beim Verfassen des Textes besonders auf:
 
 ### Icon
 
-Achte bei der Auswahl des Icon besonders auf...
+Achte bei der Auswahl des Icons besonders auf...
 
-ein universell verständliches Icon.\
-dass die Icon-Komponente verwendet wird.
+- ein universell verständliches Icon.\
+- dass die [Icon-Komponente](/03-components/content/icon) verwendet wird.
 
 <DoAndDont>
   <Dont example="icon-clarity-dont">
@@ -212,7 +216,8 @@ Achte besonders bei einem Button mit Text und einem Icon:
 ### Responsive Layout
 
 Bei schmaleren Bildschirmgrößen behält der Button die vorgegebene Breite. Eine
-Ausnahme bilden die Buttons in der Modal-Navigation. Wenn die Bildschirmbreite
+Ausnahme bilden die Buttons in der
+[Modal](/03-components/overlays/modal)-Navigation. Wenn die Bildschirmbreite
 kleiner als 400 px ist, nehmen diese die volle Breite des Contents an.
 
 <DoAndDont>
@@ -222,7 +227,7 @@ kleiner als 400 px ist, nehmen diese die volle Breite des Contents an.
     heading="Mobile Text- und Icon-Buttons"
   >
     Buttons behalten in den meisten Fällen auch bei schmaleren Bildschirmbreiten
-    die gewählte Größe. \ Die Position der Buttons kann sich jedoch der Breite
+    die gewählte Größe. Die Position der Buttons kann sich jedoch der Breite
     anpassen.
   </Do>
   <Do
@@ -243,15 +248,15 @@ kleiner als 400 px ist, nehmen diese die volle Breite des Contents an.
 
 Achte beim Button darauf, dass...
 
-- ein Tooltip das Icon beschreibt, wenn das Icon selbst nicht verständlich genug
-  ist
+- ein [Tooltip](/03-components/overlays/tooltip) das Icon beschreibt, wenn das
+  Icon selbst nicht verständlich genug ist
 - man den Button auch per Tastatur erreichen kann.
 - der Screenreader den Button als Button erkennt.
 
 ### Icon
 
-Das Icon erhält automatisch das Attribut aria-hidden=true. Verwende das Attribut
-aria-label bei dem Button, um die zugehörige Aktion zu beschreiben.
+Das Icon erhält automatisch das Attribut **aria-hidden=true**. Verwende das
+Attribut **aria-label** bei dem Button, um die zugehörige Aktion zu beschreiben.
 
 #### Color Light und Dark
 
@@ -263,25 +268,14 @@ als 50 haben. Für beide Colors gilt: Je weiter der HSL Lightness-Wert von 50
 entfernt ist, desto besser ist der Kontrast.
 
 <DoAndDont>
-<Dont example="light" lightBackground>
-  Um einen ausreichenden Kontrast zu gewährleisten, verwende die Color Light
-  nicht auf zu hellen Hintergründen.
-</Dont>
 
 <Do example="light" darkBackground>
-  Die Static Color Light kommt besonders gut auf sehr dunklen Hintergründen zur
-  Geltung.
+  Die Color Light kommt besonders gut auf sehr dunklen Hintergründen zur
+  Geltung. Verwende sie auf Hintergründen mit einem HSL Lightness-Wert von
+  weniger als 50.
 </Do>
-</DoAndDont>
 
-<DoAndDont>
-<Dont example="dark" darkBackground>
-  Um einen ausreichenden Kontrast zu gewährleisten, verwende die Color Dark
-  nicht auf zu dunklen Hintergründen.
-</Dont>
-
-<Do example="dark" lightBackground>
-  Die Static Color Dark kommt besonders gut auf sehr hellen Hintergründen zur
-  Geltung.
-</Do>
+  <Do example="dark" lightBackground>
+    Color Dark kommt besonders gut auf sehr hellen Hintergründen zur Geltung. Verwende sie auf Hintergründen mit einem HSL Lightness-Wert von über 50.
+  </Do>
 </DoAndDont>
