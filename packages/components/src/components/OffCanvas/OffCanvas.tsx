@@ -6,7 +6,7 @@ import type { OverlayController } from "@/lib/controller/overlay";
 import { Button } from "@/components/Button";
 import { IconClose } from "@/components/Icon/components/icons";
 import { Action } from "@/components/Action";
-import { Overlay } from "@/components/Overlay";
+import { ModalOverlay } from "@/components/ModalOverlay";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
@@ -32,7 +32,7 @@ export const OffCanvas: FC<OffCanvasProps> = (props) => {
   };
 
   return (
-    <Overlay controller={controller} className={rootClassName}>
+    <ModalOverlay controller={controller} className={rootClassName}>
       <PropsContextProvider props={propsContext}>
         <TunnelProvider>
           <Header className={styles.header}>
@@ -51,7 +51,7 @@ export const OffCanvas: FC<OffCanvasProps> = (props) => {
           {children}
         </TunnelProvider>
       </PropsContextProvider>
-    </Overlay>
+    </ModalOverlay>
   );
 };
 

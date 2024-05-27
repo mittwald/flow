@@ -1,19 +1,19 @@
 import * as Aria from "react-aria-components";
 import type { FC, PropsWithChildren } from "react";
 import React from "react";
-import styles from "./Overlay.module.scss";
+import styles from "./ModalOverlay.module.scss";
 import clsx from "clsx";
 import { OverlayContextProvider } from "@/lib/controller/overlay/context";
 import type { OverlayController } from "@/lib/controller";
 import { useOverlayController } from "@/lib/controller";
 
-export interface OverlayProps extends PropsWithChildren {
+export interface ModalOverlayProps extends PropsWithChildren {
   controller?: OverlayController;
   isDismissable?: boolean;
   className?: string;
 }
 
-export const Overlay: FC<OverlayProps> = (props) => {
+export const ModalOverlay: FC<ModalOverlayProps> = (props) => {
   const {
     controller: controllerFromProps,
     children,
@@ -49,4 +49,4 @@ export const Overlay: FC<OverlayProps> = (props) => {
   );
 };
 
-export default Overlay;
+export default ModalOverlay;

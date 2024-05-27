@@ -7,10 +7,9 @@ import TextField from "@/components/TextField";
 import Label from "@/components/Label";
 import Content from "@/components/Content";
 import Heading from "@/components/Heading";
-import Modal from "@/components/Modal";
+import Modal, { ModalTrigger } from "@/components/Modal";
 import { useOverlayController } from "@/lib/controller/overlay/useOverlayController";
 import { Action } from "@/components/Action";
-import { OverlayTrigger } from "@/components/Overlay";
 
 const meta: Meta<typeof Modal> = {
   title: "Overlays/Modal",
@@ -96,7 +95,7 @@ export const WithController: Story = {
 
 export const WithTrigger: Story = {
   render: (props) => (
-    <OverlayTrigger>
+    <ModalTrigger>
       <Button color="danger">Delete project</Button>
       <Modal {...props}>
         <Heading>Delete project</Heading>
@@ -112,7 +111,7 @@ export const WithTrigger: Story = {
           </Action>
         </ButtonGroup>
       </Modal>
-    </OverlayTrigger>
+    </ModalTrigger>
   ),
 };
 

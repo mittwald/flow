@@ -162,10 +162,6 @@
       "types": "./dist/types/components/OffCanvas/index.d.ts",
       "import": "./dist/OffCanvas.js"
     },
-    "./OverlayTrigger": {
-      "types": "./dist/types/components/Overlay/components/OverlayTrigger/index.d.ts",
-      "import": "./dist/OverlayTrigger.js"
-    },
     "./ProgressBar": {
       "types": "./dist/types/components/ProgressBar/index.d.ts",
       "import": "./dist/ProgressBar.js"
@@ -173,6 +169,10 @@
     "./RadioGroup": {
       "types": "./dist/types/components/RadioGroup/index.d.ts",
       "import": "./dist/RadioGroup.js"
+    },
+    "./Render": {
+      "types": "./dist/types/lib/react/components/Render/index.d.ts",
+      "import": "./dist/Render.js"
     },
     "./Section": {
       "types": "./dist/types/components/Section/index.d.ts",
