@@ -9,7 +9,7 @@
     "build:imports": "run tsx dev/generateLiveCodeEditorGlobalImports.ts",
     "dev": "run nx run-many --outputStyle=stream --projects=@mittwald/flow-documentation --targets=start,build:deps:watch,build:imports",
     "start": "run next dev",
-    "test:tsc": "run tsc --noEmit"
+    "test:compile": "run tsc --noEmit"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.0.1",
@@ -35,17 +35,17 @@
     "remark-mdx-frontmatter": "^4.0.0",
     "remeda": "^1.61.0",
     "sass": "^1.77.2",
-    "tsx": "^4.10.5",
+    "tsx": "^4.11.0",
     "webpack": "^5.91.0"
   },
   "devDependencies": {
     "@types/node": "^20.12.12",
-    "@types/react": "^18.3.2",
+    "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@yarnpkg/pnpify": "^4.1.0",
     "eslint": "^9.3.0",
-    "glob": "^10.3.16",
-    "nx": "^19.0.5",
+    "glob": "^10.4.1",
+    "nx": "^19.1.0",
     "typescript": "^5.4.5"
   }
 }
