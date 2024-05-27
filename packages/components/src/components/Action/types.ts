@@ -9,11 +9,6 @@ export interface ActionProps extends PropsWithChildren {
   openOverlay?: boolean | OverlayController;
   toggleOverlay?: boolean | OverlayController;
   break?: boolean;
+  skip?: number | boolean;
   showFeedback?: boolean;
-  /** @internal */
-  isConfirmationAction?: boolean;
-  /** @internal */
-  confirm?: boolean;
-  /** @internal */
-  abort?: boolean;
 }

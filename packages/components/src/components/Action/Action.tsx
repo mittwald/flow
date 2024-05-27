@@ -1,35 +1,29 @@
 import type { FC } from "react";
 import React from "react";
-import {
-  ActionContextProvider,
-  useNewActionContext,
-} from "@/components/Action/context";
+import { ActionModel as ActionModel } from "@/components/Action/models/ActionModel";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import type { ActionProps } from "@/components/Action/types";
 import { Wrap } from "@/components/Wrap";
 import { ActionButton } from "@/components/Action/components/ActionButton";
 import { ActionLink } from "@/components/Action/components/ActionLink";
-import { ConfirmationModalButton } from "@/components/Action/components/ConfirmationModalButton";
-import { ConfirmationModal } from "@/components/Action/components/ConfirmationModal";
+import { ActionModal } from "@/components/Action/components/ActionModal";
+import { ActionGroup } from "@/components/Action/components/ActionGroup";
+import { ActionContextProvider } from "@/components/Action/context";
 
 export const Action: FC<ActionProps> = (props) => {
   const { children, ...actionProps } = props;
 
-  const actionContext = useNewActionContext(actionProps);
+  const actionModel = ActionModel.useNew(actionProps);
 
-  const isNestedAction =
-    !!actionContext.parentContext &&
-    !!actionContext.parentContext.parentContext;
+  const isRootAction = !actionModel.parentAction;
 
   const propsContext: PropsContext = {
     Modal: {
-      render: ConfirmationModal,
-      ButtonGroup: {
-        Button: {
-          render: ConfirmationModalButton,
-        },
-      },
+      render: ActionModal,
+    },
+    ButtonGroup: {
+      render: ActionGroup,
     },
     Button: {
       render: ActionButton,
@@ -40,11 +34,11 @@ export const Action: FC<ActionProps> = (props) => {
   };
 
   return (
-    <ActionContextProvider value={actionContext}>
-      <Wrap if={!isNestedAction}>
+    <ActionContextProvider value={actionModel}>
+      <Wrap if={isRootAction}>
         <PropsContextProvider
           props={propsContext}
-          dependencies={[actionContext]}
+          dependencies={[actionModel]}
           mergeInParentContext
         >
           {children}

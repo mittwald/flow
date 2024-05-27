@@ -5,11 +5,15 @@ import { PropsContextProvider } from "@/lib/propsContext";
 import { ActionButton } from "@/components/Action/components/ActionButton";
 import React from "react";
 import { Action } from "@/components/Action";
+import { ActionModel as ActionModel } from "@/components/Action/models/ActionModel";
+import { ActionContextProvider } from "@/components/Action/context";
 
 export const ConfirmationModalButton: FlowRenderFn<ButtonProps> = (
   Button,
   renderProps,
 ) => {
+  const action = ActionModel.useConfirmationAction();
+
   const isAbortButton = renderProps.color === "secondary";
   const isConfirmButton =
     renderProps.color === "primary" ||
@@ -22,11 +26,23 @@ export const ConfirmationModalButton: FlowRenderFn<ButtonProps> = (
 
   const propsContext: PropsContext = { Button: { render: ActionButton } };
 
+  if (isAbortButton) {
+    return (
+      <PropsContextProvider props={propsContext} mergeInParentContext>
+        <Action break>
+          <Action closeOverlay>
+            <Button {...renderProps} />
+          </Action>
+        </Action>
+      </PropsContextProvider>
+    );
+  }
+
   return (
-    <PropsContextProvider props={propsContext}>
-      <Action abort={isAbortButton} confirm={isConfirmButton}>
+    <PropsContextProvider props={propsContext} mergeInParentContext>
+      <ActionContextProvider value={action}>
         <Button {...renderProps} />
-      </Action>
+      </ActionContextProvider>
     </PropsContextProvider>
   );
 };
