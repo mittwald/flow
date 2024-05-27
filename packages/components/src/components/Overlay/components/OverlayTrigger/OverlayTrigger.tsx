@@ -23,7 +23,7 @@ export const OverlayTrigger: FC<Props> = (props) => {
 
   return (
     <OverlayContextProvider value={overlayController}>
-      <PropsContextProvider props={propsContext}>
+      <PropsContextProvider props={propsContext} mergeInParentContext>
         {props.children}
       </PropsContextProvider>
     </OverlayContextProvider>
