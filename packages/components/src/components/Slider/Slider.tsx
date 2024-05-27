@@ -7,7 +7,6 @@ import clsx from "clsx";
 import styles from "./Slider.module.scss";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
-import formFieldStyles from "@/components/FormField/FormField.module.scss";
 
 export interface SliderProps
   extends FlowComponentProps<"Slider">,
