@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-react-components",
-  "version": "0.1.0-alpha.126",
+  "version": "0.1.0-alpha.128",
   "type": "module",
   "description": "A React implementation of Flow, mittwald’s design system",
   "homepage": "https://mittwald.github.io/flow",
@@ -49,6 +49,10 @@
     "./Content": {
       "types": "./dist/types/components/Content/index.d.ts",
       "import": "./dist/Content.js"
+    },
+    "./CounterLabel": {
+      "types": "./dist/types/components/CounterLabel/index.d.ts",
+      "import": "./dist/CounterLabel.js"
     },
     "./IllustratedMessage": {
       "types": "./dist/types/components/IllustratedMessage/index.d.ts",
