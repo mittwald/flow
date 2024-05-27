@@ -5,6 +5,7 @@ import { ActionModel } from "@/components/Action/models/ActionModel";
 import { PropsContextProvider } from "@/lib/propsContext";
 import { ConfirmationModalButton } from "@/components/Action/components/ConfirmationModalButton";
 import { Wrap } from "@/components/Wrap";
+import { ActionGroup } from "@/components/Action/components/ActionGroup";
 
 export const ActionModal: FlowRenderFn<ModalProps> = (Modal, renderProps) => {
   const action = ActionModel.use();
@@ -27,11 +28,13 @@ export const ActionModal: FlowRenderFn<ModalProps> = (Modal, renderProps) => {
         <PropsContextProvider
           props={{
             ButtonGroup: {
+              render: ActionGroup,
               Button: {
                 render: ConfirmationModalButton,
               },
             },
           }}
+          mergeInParentContext
         >
           {renderProps.children}
         </PropsContextProvider>

@@ -6,6 +6,7 @@ import type { ActionProps } from "@/components/Action/types";
 import { actionContext } from "@/components/Action/context";
 import { ActionState } from "@/components/Action/models/ActionState";
 import { ActionExecution } from "@/components/Action/models/ActionExecution";
+import { ActionStateContext } from "@/components/Action/models/ActionStateContext";
 
 interface InitObject {
   actionProps: ActionProps;
@@ -65,6 +66,7 @@ export class ActionModel {
   public static use(): ActionModel {
     const c = useContext(actionContext);
     invariant(!!c, "Action context is not defined");
+    ActionStateContext.useRegisterState(c.state);
     return c;
   }
 

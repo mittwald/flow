@@ -7,7 +7,6 @@ import {
 import useSelector from "@/lib/mobx/useSelector";
 import { useRef } from "react";
 import { sleep } from "@/lib/promises/sleep";
-import { ActionStateContext } from "@/components/Action/models/ActionStateContext";
 
 export type ActionStateValue =
   | "isIdle"
@@ -38,9 +37,7 @@ export class ActionState {
   }
 
   public static useNew(): ActionState {
-    const state = useRef(new ActionState()).current;
-    ActionStateContext.useRegisterState(state);
-    return state;
+    return useRef(new ActionState()).current;
   }
 
   public updateState(newState: ActionStateValue): void {

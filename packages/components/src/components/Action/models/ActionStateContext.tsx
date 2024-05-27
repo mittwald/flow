@@ -24,9 +24,9 @@ export class ActionStateContext {
     const context = useActionStateContext();
 
     useEffect(() => {
-      context.addState(state);
+      context?.addState(state);
       return () => {
-        context.removeState(state);
+        context?.removeState(state);
       };
     }, [context, state]);
   }
@@ -40,7 +40,7 @@ export class ActionStateContext {
   }
 
   public useIsBusy(): boolean {
-    return useSelector(() => this.isBusy, [this]);
+    return useSelector(() => this.isBusy, [this.states.size]);
   }
 
   public get isBusy(): boolean {
@@ -53,7 +53,7 @@ export class ActionStateContext {
   }
 }
 
-const context = createContext<ActionStateContext>(new ActionStateContext());
+const context = createContext<ActionStateContext | undefined>(undefined);
 
 export const ActionStateContextProvider: FC<PropsWithChildren> = (props) => {
   const { children } = props;
@@ -61,5 +61,7 @@ export const ActionStateContextProvider: FC<PropsWithChildren> = (props) => {
   return <context.Provider value={ctx}>{children}</context.Provider>;
 };
 
-export const useActionStateContext = (): ActionStateContext =>
-  useContext(context);
+export const useActionStateContext = (): ActionStateContext => {
+  const newContext = ActionStateContext.useNew();
+  return useContext(context) ?? newContext;
+};
