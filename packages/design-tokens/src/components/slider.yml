@@ -1,0 +1,7 @@
+slider:
+  track-background-color:
+    value: "{primary-soft-background-color.default}"
+  thumb-border-color:
+    value: "{primary-solid-background-color.default}"
+  thumb-background-color:
+    value: "{neutral.color.100}"
