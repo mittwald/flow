@@ -7,7 +7,11 @@ import { IconNotification } from "@/components/Icon/components/icons";
 const meta: Meta<typeof CounterLabel> = {
   title: "Status/CounterLabel",
   component: CounterLabel,
-  render: (props) => <CounterLabel {...props} count={5} />,
+  args: { count: 5 },
+  parameters: {
+    controls: { exclude: ["elementType", "tunnelId", "render"] },
+  },
+  render: (props) => <CounterLabel {...props} />,
 };
 export default meta;
 
@@ -16,11 +20,11 @@ type Story = StoryObj<typeof CounterLabel>;
 export const Default: Story = {};
 
 export const WithoutContent: Story = {
-  render: (props) => <CounterLabel {...props} />,
+  args: { count: undefined },
 };
 
 export const WithHighNumber: Story = {
-  render: (props) => <CounterLabel {...props} count={120} />,
+  args: { count: 120 },
 };
 
 export const WithButton: Story = {

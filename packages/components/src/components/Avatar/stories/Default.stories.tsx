@@ -21,9 +21,11 @@ const meta: Meta<typeof Avatar> = {
   argTypes: {
     size: {
       control: "inline-radio",
+      options: ["s", "m", "l"],
     },
     variant: {
       control: "inline-radio",
+      options: [1, 2, 3, 4],
     },
   },
 };
