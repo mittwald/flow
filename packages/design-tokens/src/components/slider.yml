@@ -29,7 +29,7 @@ slider:
     disabled:
       value: "{disabled-solid-background-color}"
   thumb-border-width:
-    value: "{border-width.200}"
+    value: "{size-px.xs}"
   thumb-border-style:
     value: "{border-style.default}"
   thumb-corner-radius:
@@ -41,3 +41,15 @@ slider:
       value: "{neutral.color.100}"
     pressed:
       value: "{primary-solid-background-color.default}"
+
+  initial-marker-height:
+    value: "{size-px.m}"
+  initial-marker-width:
+    value: "{size-px.xs}"
+  initial-marker-background-color:
+    default:
+      value: "{primary-solid-background-color.default}"
+    disabled:
+      value: "{disabled-solid-background-color}"
+  initial-marker-corner-radius:
+    value: "{corner-radius.default}"

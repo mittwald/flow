@@ -10,6 +10,7 @@ import Slider from "@mittwald/flow-react-components/Slider";
   maxValue={2000}
   defaultValue={200}
   step={20}
+  showInitialMarker
 >
   <Label>Storage</Label>
 </Slider>;

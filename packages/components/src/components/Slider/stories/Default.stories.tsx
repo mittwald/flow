@@ -37,3 +37,11 @@ export const WithUnit: Story = {
 };
 
 export const Disabled: Story = { args: { isDisabled: true } };
+
+export const WithInitialMarker: Story = {
+  render: (props) => (
+    <Slider {...props} defaultValue={20} showInitialMarker>
+      <Label>Amount</Label>
+    </Slider>
+  ),
+};
