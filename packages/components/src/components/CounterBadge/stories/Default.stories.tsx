@@ -1,21 +1,21 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import { CounterLabel } from "@/components/CounterLabel";
+import { CounterBadge } from "@/components/CounterBadge";
 import Button from "@/components/Button";
 import { IconNotification } from "@/components/Icon/components/icons";
 
-const meta: Meta<typeof CounterLabel> = {
-  title: "Status/CounterLabel",
-  component: CounterLabel,
+const meta: Meta<typeof CounterBadge> = {
+  title: "Status/CounterBadge",
+  component: CounterBadge,
   args: { count: 5 },
   parameters: {
     controls: { exclude: ["elementType", "tunnelId", "render"] },
   },
-  render: (props) => <CounterLabel {...props} />,
+  render: (props) => <CounterBadge {...props} />,
 };
 export default meta;
 
-type Story = StoryObj<typeof CounterLabel>;
+type Story = StoryObj<typeof CounterBadge>;
 
 export const Default: Story = {};
 
@@ -31,7 +31,7 @@ export const WithButton: Story = {
   render: (props) => (
     <Button aria-label="Notifications: 7">
       <IconNotification />
-      <CounterLabel {...props} count={7}></CounterLabel>
+      <CounterBadge {...props} count={7}></CounterBadge>
     </Button>
   ),
 };

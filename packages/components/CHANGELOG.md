@@ -40,7 +40,7 @@ All notable changes to this project will be documented in this file. See
 
 ### Features
 
-- **CounterLabel:** add CounterLabel
+- **CounterBadge:** add CounterBadge
   ([#459](https://github.com/mittwald/flow/issues/459))
   ([743b980](https://github.com/mittwald/flow/commit/743b98060d81fd1689dc51c3e78198ff2f6ca6c0))
 

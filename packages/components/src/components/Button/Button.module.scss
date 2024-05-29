@@ -55,10 +55,10 @@
     margin-inline-start: var(--button--text-to-icon-spacing);
   }
 
-  .counterLabel {
+  .counterBadge {
     position: absolute;
-    top: calc(var(--size-px--xs) * -1);
-    right: calc(var(--size-px--xs) * -1);
+    top: calc(var(--size-px--xxs) * -1);
+    right: calc(var(--size-px--xxs) * -1);
   }
 
   /* States */

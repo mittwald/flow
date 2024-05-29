@@ -1,4 +1,4 @@
-counter-label:
+counter-badge:
   font-size:
     value: 0.625rem
   font-weight:
@@ -6,7 +6,7 @@ counter-label:
   height:
     value: 1.25rem
   height-empty:
-    value: "{size-rem.m}"
+    value: 0.75rem
   padding-inline:
     value: "{size-rem.xs}"
   background-color:

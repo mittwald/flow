@@ -34,7 +34,7 @@ import type { CheckboxButtonProps } from "@/components/CheckboxButton";
 import type { TabsProps } from "@/components/Tabs";
 import type { ModalProps } from "@/components/Modal";
 import type { SectionProps } from "@/components/Section";
-import type { CounterLabelProps } from "@/components/CounterLabel";
+import type { CounterBadgeProps } from "@/components/CounterBadge";
 
 export * from "./types";
 
@@ -49,7 +49,7 @@ export interface FlowComponentPropsTypes {
   Content: ContentProps;
   ContextMenu: ContextMenuProps;
   CopyButton: CopyButtonProps;
-  CounterLabel: CounterLabelProps;
+  CounterBadge: CounterBadgeProps;
   FieldDescription: FieldDescriptionProps;
   FieldError: FieldErrorProps;
   Header: HeaderProps;
@@ -92,7 +92,7 @@ const propsContextSupportingComponentsMap: Record<
   Content: true,
   ContextMenu: true,
   CopyButton: true,
-  CounterLabel: true,
+  CounterBadge: true,
   FieldDescription: true,
   FieldError: true,
   Header: true,
