@@ -14,16 +14,7 @@ export default meta;
 
 type Story = StoryObj<typeof Notification>;
 
-export const Info: Story = {
-  render: (props) => (
-    <Notification {...props}>
-      <Heading>Email address archived</Heading>
-      <Text>
-        Your email address <b>example@mittwald.de</b> has been archived.
-      </Text>
-    </Notification>
-  ),
-};
+export const Info: Story = {};
 
 export const Warning: Story = {
   args: { status: "warning" },

@@ -20,13 +20,7 @@ const meta: Meta<typeof Notification> = {
     onClick: action("onClick"),
     onClose: action("onClose"),
   },
-};
 
-export default meta;
-
-type Story = StoryObj<typeof Notification>;
-
-export const Default: Story = {
   render: (props) => (
     <Notification {...props}>
       <Heading>Email address archived</Heading>
@@ -36,3 +30,9 @@ export const Default: Story = {
     </Notification>
   ),
 };
+
+export default meta;
+
+type Story = StoryObj<typeof Notification>;
+
+export const Default: Story = {};
