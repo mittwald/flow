@@ -1,0 +1,92 @@
+@use "@/styles/mixins/focus";
+
+.notification {
+  border-radius: var(--notification--corner-radius);
+  width: var(--notification--width);
+  box-shadow: var(--notification--box-shadow);
+  display: block;
+  position: relative;
+
+  @extend .info;
+
+  /* Elements */
+
+  .link {
+    padding: var(--notification--padding);
+    border-radius: var(--notification--corner-radius);
+    border-style: var(--notification--border-style);
+    border-width: 0;
+    border-inline-start-width: var(--notification--border-x-start-width);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-column-gap: var(--notification--icon-to-heading-spacing);
+    grid-row-gap: var(--notification--heading-to-text-spacing);
+    grid-template-areas:
+      "icon heading"
+      ".    text   ";
+    cursor: default;
+
+    @include focus.focus;
+  }
+
+  .statusIcon {
+    grid-area: icon;
+    height: calc(var(--heading--h4-font-size) * var(--line-height--default));
+  }
+
+  .heading {
+    grid-area: heading;
+    --button-width: calc(
+      var(--button--line-height-s) + 2 * var(--button--padding-s)
+    );
+    padding-inline-end: calc(
+      var(--button-width) + var(--notification--icon-to-heading-spacing)
+    );
+  }
+
+  .text {
+    grid-area: text;
+    font-size: var(--notification--font-size);
+  }
+
+  .close {
+    position: absolute;
+    top: var(--notification--padding);
+    right: var(--notification--padding);
+  }
+
+  /* Status */
+
+  @mixin status($status) {
+    &.#{$status} {
+      .link {
+        border-color: var(--notification--#{$status}-border-color);
+
+        background-color: var(
+          --notification--#{$status}-background-color--default
+        );
+
+        &:hover {
+          background-color: var(
+            --notification--#{$status}-background-color--hover
+          );
+        }
+
+        &[data-pressed] {
+          background-color: var(
+            --notification--#{$status}-background-color--pressed
+          );
+        }
+      }
+
+      .heading {
+        color: var(--notification--#{$status}-heading-color);
+      }
+    }
+  }
+
+  @include status(info);
+  @include status(warning);
+  @include status(danger);
+  @include status(success);
+}
