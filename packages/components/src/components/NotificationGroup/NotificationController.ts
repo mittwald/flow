@@ -33,8 +33,11 @@ export class NotificationController {
     return useSelector(() => this.notificationList);
   }
 
-  public add(notification: NotificationData): void {
-    this.notificationList = [notification, ...this.notificationList];
+  public add(notification: Omit<NotificationData, "id">): void {
+    const id =
+      Date.now().toString(36) + Math.random().toString(36).substring(2);
+
+    this.notificationList = [{ ...notification, id }, ...this.notificationList];
   }
 
   public remove(notificationId: string): void {

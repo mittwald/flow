@@ -14,8 +14,9 @@ import { IconClose } from "@/components/Icon/components/icons";
 export interface NotificationProps
   extends PropsWithChildren<ComponentProps<"div">>,
     PropsWithStatus {
-  onClose?: () => void;
   onClick?: () => void;
+  onClose?: () => void;
+  autoClose?: boolean;
 }
 
 export const Notification: FC<NotificationProps> = (props) => {
@@ -25,6 +26,7 @@ export const Notification: FC<NotificationProps> = (props) => {
     status = "info",
     onClick,
     onClose,
+    autoClose,
     ...rest
   } = props;
 
@@ -39,6 +41,13 @@ export const Notification: FC<NotificationProps> = (props) => {
       className: styles.text,
     },
   };
+
+  useEffect(() => {
+    autoClose &&
+      setTimeout(() => {
+        onClose && onClose();
+      }, 10000);
+  }, []);
 
   return (
     <div role="alert" {...rest} className={rootClassName}>

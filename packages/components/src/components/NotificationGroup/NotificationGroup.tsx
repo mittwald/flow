@@ -1,4 +1,4 @@
-import type { ComponentProps, FC, PropsWithChildren } from "react";
+import type { ComponentProps, FC } from "react";
 import React from "react";
 import clsx from "clsx";
 import styles from "./NotificationGroup.module.scss";
@@ -9,10 +9,11 @@ import { Text } from "@/components/Text";
 
 export interface NotificationGroupProps extends ComponentProps<"div"> {
   controller: NotificationController;
+  autoClose?: boolean;
 }
 
 export const NotificationGroup: FC<NotificationGroupProps> = (props) => {
-  const { children, className, controller, ...rest } = props;
+  const { className, controller, autoClose = true, ...rest } = props;
 
   const rootClassName = clsx(styles.notificationGroup, className);
 
@@ -25,6 +26,8 @@ export const NotificationGroup: FC<NotificationGroupProps> = (props) => {
           onClose={() => controller.remove(n.id)}
           onClick={n.onClick}
           status={n.status}
+          key={n.id}
+          autoClose={autoClose}
         >
           <Heading>{n.heading}</Heading>
           <Text>{n.text} </Text>
