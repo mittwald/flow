@@ -11,7 +11,7 @@
 
   /* Elements */
 
-  .link,.content {
+  .link {
     padding: var(--notification--padding);
     border-radius: var(--notification--corner-radius);
     border-style: var(--notification--border-style);
@@ -37,10 +37,10 @@
   .heading {
     grid-area: heading;
     --button-width: calc(
-            var(--button--line-height-s) + 2 * var(--button--padding-s)
+      var(--button--line-height-s) + 2 * var(--button--padding-s)
     );
     padding-inline-end: calc(
-            var(--button-width) + var(--notification--icon-to-heading-spacing)
+      var(--button-width) + var(--notification--icon-to-heading-spacing)
     );
   }
 
@@ -59,30 +59,27 @@
 
   @mixin status($status) {
     &.#{$status} {
-      .link,.content {
+      .link {
         border-color: var(--notification--#{$status}-border-color);
-
         background-color: var(
-                        --notification--#{$status}-background-color--default
+          --notification--#{$status}-background-color--default
         );
-
-
       }
 
-
+      &.hasLink {
         .link {
           &:hover {
             background-color: var(
-                            --notification--#{$status}-background-color--hover
+              --notification--#{$status}-background-color--hover
             );
           }
 
           &[data-pressed] {
             background-color: var(
-                            --notification--#{$status}-background-color--pressed
+              --notification--#{$status}-background-color--pressed
             );
           }
-
+        }
       }
 
       .heading {

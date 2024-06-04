@@ -36,3 +36,7 @@ export default meta;
 type Story = StoryObj<typeof Notification>;
 
 export const Default: Story = {};
+
+export const WithoutLink: Story = {
+  args: { onClick: undefined, onClose: undefined },
+};

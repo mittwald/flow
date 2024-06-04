@@ -10,6 +10,7 @@ import { Link } from "@/components/Link";
 import { Action } from "@/components/Action";
 import { Button } from "@/components/Button";
 import { IconClose } from "@/components/Icon/components/icons";
+import { Wrap } from "@/components/Wrap";
 
 export interface NotificationProps
   extends PropsWithChildren<ComponentProps<"div">>,
@@ -32,7 +33,12 @@ export const Notification: FC<NotificationProps> = (props) => {
     ...rest
   } = props;
 
-  const rootClassName = clsx(styles.notification, styles[status], className);
+  const rootClassName = clsx(
+    styles.notification,
+    styles[status],
+    (onClick || onClose || href) && styles.hasLink,
+    className,
+  );
 
   const propsContext: PropsContext = {
     Heading: {
@@ -61,31 +67,30 @@ export const Notification: FC<NotificationProps> = (props) => {
     </>
   );
 
-  const hasLink = !!href || !!onClick;
-
   return (
     <div role="alert" {...rest} className={rootClassName}>
-      <Action action={onClose}>
-        <Action action={onClick}>
-          {hasLink && (
-            <Link unstyled href={href} className={styles.link}>
-              {content}
-            </Link>
-          )}
+      <Wrap if={onClose}>
+        <Action action={onClose}>
+          <Wrap if={onClick}>
+            <Action action={onClick}>
+              <Link unstyled href={href} className={styles.link}>
+                {content}
+              </Link>
+            </Action>
+          </Wrap>
 
-          {!hasLink && <div className={styles.content}>{content}</div>}
+          {onClose && (
+            <Button
+              size="s"
+              className={styles.close}
+              variant="plain"
+              color="secondary"
+            >
+              <IconClose />
+            </Button>
+          )}
         </Action>
-        {onClose && (
-          <Button
-            size="s"
-            className={styles.close}
-            variant="plain"
-            color="secondary"
-          >
-            <IconClose />
-          </Button>
-        )}
-      </Action>
+      </Wrap>
     </div>
   );
 };
