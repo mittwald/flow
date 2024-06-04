@@ -45,15 +45,15 @@ export const Modal = flowComponent("Modal", (props) => {
       level: 2,
       slot: "title",
     },
-    ButtonGroup: {
-      className: styles.buttonGroup,
+    ActionGroup: {
+      className: styles.actionGroup,
       tunnelId: "buttons",
     },
   };
 
   return (
     <ModalOverlay className={rootClassName} controller={controller} {...rest}>
-      <PropsContextProvider props={propsContext}>
+      <PropsContextProvider props={propsContext} mergeInParentContext>
         <TunnelProvider>
           <div className={styles.content}>{children}</div>
           <TunnelExit id="buttons" />

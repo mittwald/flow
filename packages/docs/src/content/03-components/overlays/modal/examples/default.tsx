@@ -5,10 +5,11 @@ import Content from "@mittwald/flow-react-components/Content";
 import Text from "@mittwald/flow-react-components/Text";
 import TextField from "@mittwald/flow-react-components/TextField";
 import Label from "@mittwald/flow-react-components/Label";
-import ButtonGroup from "@mittwald/flow-react-components/ButtonGroup";
+import ActionGroup from "@mittwald/flow-react-components/ActionGroup";
 import Button from "@mittwald/flow-react-components/Button";
 import Heading from "@mittwald/flow-react-components/Heading";
 import Action from "@mittwald/flow-react-components/Action";
+import { sleepLong } from "@/content/03-components/actions/action/examples/lib";
 
 <ModalTrigger>
   <Button color="accent">Organisation anlegen</Button>
@@ -25,13 +26,17 @@ import Action from "@mittwald/flow-react-components/Action";
         <Label>Organisationsname</Label>
       </TextField>
     </Content>
-    <ButtonGroup>
+    <ActionGroup>
       <Action closeOverlay>
-        <Button color="accent">Organisation anlegen</Button>
+        <Action action={sleepLong}>
+          <Button color="accent">
+            Organisation anlegen
+          </Button>
+        </Action>
         <Button variant="soft" color="secondary">
           Abbrechen
         </Button>
       </Action>
-    </ButtonGroup>
+    </ActionGroup>
   </Modal>
 </ModalTrigger>;

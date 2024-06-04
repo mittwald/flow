@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-design-tokens",
-  "version": "0.1.0-alpha.130",
+  "version": "0.1.0-alpha.131",
   "type": "module",
   "description": "The design tokens used in Flow, mittwald’s design system",
   "homepage": "https://mittwald.github.io/flow",
@@ -17,7 +17,7 @@
   "devDependencies": {
     "@types/js-yaml": "^4.0.9",
     "js-yaml": "^4.1.0",
-    "nx": "^19.1.0",
+    "nx": "^19.1.2",
     "style-dictionary": "^3.9.2"
   }
 }

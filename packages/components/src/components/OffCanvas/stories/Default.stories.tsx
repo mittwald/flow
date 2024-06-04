@@ -29,26 +29,22 @@ const meta: Meta<typeof OffCanvas> = {
         </Button>
         <OffCanvas {...props}>
           <Heading>Menu</Heading>
-          <Navigation aria-label="Main menu">
-            <Action closeOverlay>
+          <Action closeOverlay>
+            <Navigation aria-label="Main menu">
               <Link>
                 <IconCustomer />
                 <Text>Customer</Text>
               </Link>
-            </Action>
-            <Action closeOverlay>
               <Link aria-current="page">
                 <IconServer />
                 <Text>Server</Text>
               </Link>
-            </Action>
-            <Action closeOverlay>
               <Link>
                 <IconProject />
                 <Text>Project</Text>
               </Link>
-            </Action>
-          </Navigation>
+            </Navigation>
+          </Action>
         </OffCanvas>
       </OffCanvasTrigger>
     );

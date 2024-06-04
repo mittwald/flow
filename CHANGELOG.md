@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.131](https://github.com/mittwald/flow/compare/0.1.0-alpha.130...0.1.0-alpha.131) (2024-06-04)
+
+### Bug Fixes
+
+- **Action:** fix state context should not be global
+  ([07fbe7d](https://github.com/mittwald/flow/commit/07fbe7dfc48392bc65426060352fcec7a17a310d))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.130](https://github.com/mittwald/flow/compare/0.1.0-alpha.129...0.1.0-alpha.130) (2024-05-27)
 
 **Note:** Version bump only for package @mittwald/flow-project

@@ -20,21 +20,21 @@
       display: grid;
       grid-template-areas:
         "content"
-        "buttonGroup";
+        "actionGroup";
       grid-template-rows: 1fr auto;
       height: 100%;
       max-height: inherit;
     }
 
-    .buttonGroup {
+    .actionGroup {
       margin-inline: calc(var(--modal--padding) * -1);
       margin-bottom: calc(var(--modal--padding) * -1);
-      grid-area: buttonGroup;
-      padding: var(--modal--button-group-padding);
-      background-color: var(--modal--button-group-background-color);
-      border-top-color: var(--modal--button-group-border-color);
-      border-top-width: var(--modal--button-group-border-top-width);
-      border-top-style: var(--modal--button-group-border-style);
+      grid-area: actionGroup;
+      padding: var(--modal--action-group-padding);
+      background-color: var(--modal--action-group-background-color);
+      border-top-color: var(--modal--action-group-border-color);
+      border-top-width: var(--modal--action-group-border-top-width);
+      border-top-style: var(--modal--action-group-border-style);
     }
 
     .content {

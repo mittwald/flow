@@ -6,7 +6,7 @@ import defaultMeta from "./Default.stories";
 import { Content } from "@/components/Content";
 import { Section } from "@/components/Section";
 import { Text } from "@/components/Text";
-import { ButtonGroup } from "@/components/ButtonGroup";
+import { ActionGroup } from "@/components/ActionGroup";
 import { dummyText } from "@/lib/dev/dummyText";
 import Heading from "@/components/Heading";
 import { Action } from "@/components/Action";
@@ -42,14 +42,14 @@ export const LongContent: Story = {
           <Text>{dummyText.long}</Text>
         </Section>
       </Content>
-      <ButtonGroup>
+      <ActionGroup>
         <Action closeOverlay>
           <Button color="accent">Create customer</Button>
           <Button variant="soft" color="secondary">
             Abort
           </Button>
         </Action>
-      </ButtonGroup>
+      </ActionGroup>
     </Modal>
   ),
 };

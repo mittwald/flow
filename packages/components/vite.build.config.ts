@@ -21,10 +21,10 @@ export default defineConfig(
         entry: {
           Accordion: "./src/components/Accordion/index.ts",
           Action: "./src/components/Action/index.ts",
+          ActionGroup: "./src/components/ActionGroup/index.ts",
           Avatar: "./src/components/Avatar/index.ts",
           Breadcrumb: "./src/components/Breadcrumb/index.ts",
           Button: "./src/components/Button/index.ts",
-          ButtonGroup: "./src/components/ButtonGroup/index.ts",
           Checkbox: "./src/components/Checkbox/index.ts",
           CheckboxButton: "./src/components/CheckboxButton/index.ts",
           CheckboxGroup: "./src/components/CheckboxGroup/index.ts",

@@ -7,7 +7,7 @@ import {
   syncFunction,
 } from "@/components/Button/stories/lib";
 import { Modal } from "@/components/Modal";
-import { ButtonGroup } from "@/components/ButtonGroup";
+import { ActionGroup } from "@/components/ActionGroup";
 import { Button } from "@/components/Button";
 import { Heading } from "@/components/Heading";
 import { Content } from "@/components/Content";
@@ -86,12 +86,12 @@ export const WithConfirmationModal: Story = {
       <Modal slot="actionConfirm">
         <Heading>Delete customer</Heading>
         <Content>Do you really want to delete the customer?</Content>
-        <ButtonGroup>
-          <Button color="danger">Delete customer</Button>
+        <ActionGroup>
+          <Button color="danger">Confirm</Button>
           <Button color="secondary" variant="soft">
             Abort
           </Button>
-        </ButtonGroup>
+        </ActionGroup>
       </Modal>
       <Button color="secondary" variant="soft">
         Delete customer

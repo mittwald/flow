@@ -36,13 +36,9 @@ const NavigationLink: FC<NavigationLinkProps> = (props) => {
 
   const overlay = useOverlayController();
 
-  useOnChange(
-    currentPathname,
-    () => {
-      overlay.close();
-    },
-    [overlay],
-  );
+  useOnChange(currentPathname, () => {
+    overlay.close();
+  }, [overlay]);
 
   return (
     <Link

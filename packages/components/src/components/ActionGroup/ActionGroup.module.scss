@@ -1,0 +1,47 @@
+.actionGroupContainer {
+  container-type: inline-size;
+  display: block;
+}
+
+.actionGroup {
+  gap: var(--action-group--button-to-button-spacing);
+  display: grid;
+  grid-template-areas: "abort secondary primary";
+  grid-auto-columns: 1fr auto auto;
+
+  .primary {
+    grid-area: primary;
+  }
+
+  .secondary {
+    grid-area: secondary;
+    display: flex;
+    flex-direction: row;
+    gap: var(--action-group--button-to-button-spacing);
+    &:empty {
+      display: none;
+    }
+  }
+
+  .abort {
+    grid-area: abort;
+  }
+
+  @container (max-width: 550px) {
+    display: flex;
+    flex-direction: column-reverse;
+
+    .primary,
+    .secondary,
+    .abort {
+      width: 100%;
+    }
+
+    .secondary {
+      flex-direction: column-reverse;
+      & > * {
+        width: 100%;
+      }
+    }
+  }
+}
