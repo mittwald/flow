@@ -6,7 +6,6 @@
   box-shadow: var(--notification--box-shadow);
   display: block;
   position: relative;
-  animation: modal-slide-in var(--transition--duration--slow);
 
   @extend .info;
 
@@ -90,14 +89,4 @@
   @include status(warning);
   @include status(danger);
   @include status(success);
-}
-
-@keyframes modal-slide-in {
-  from {
-    right: -100px;
-  }
-
-  to {
-    right: 0;
-  }
 }

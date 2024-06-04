@@ -1,5 +1,6 @@
 import type { ComponentProps, FC } from "react";
 import React from "react";
+import ReactDOM from "react-dom";
 import clsx from "clsx";
 import styles from "./NotificationGroup.module.scss";
 import type NotificationController from "@/components/NotificationGroup/NotificationController";
@@ -19,10 +20,11 @@ export const NotificationGroup: FC<NotificationGroupProps> = (props) => {
 
   const notifications = controller.useNotificationList();
 
-  return (
+  const content = (
     <div className={rootClassName} {...rest}>
       {notifications.map((n) => (
         <Notification
+          className={styles.notification}
           onClose={() => controller.remove(n.id)}
           onClick={n.onClick}
           status={n.status}
@@ -35,6 +37,8 @@ export const NotificationGroup: FC<NotificationGroupProps> = (props) => {
       ))}
     </div>
   );
+
+  return document ? ReactDOM.createPortal(content, document.body) : null;
 };
 
 export default NotificationGroup;

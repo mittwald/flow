@@ -14,17 +14,17 @@ const meta: Meta<typeof NotificationGroup> = {
       setTimeout(() => {
         notificationController.add({
           heading: "Email address archived",
-          text: "Your email address example@mittwald.de has been archived.",
-          onClick: () => alert("1"),
+          text: "Your email address examples@mittwald.de has been archived.",
+          onClick: () => alert("Notification clicked"),
         });
       }, 5000);
 
       setTimeout(() => {
         notificationController.add({
           heading: "No SSL certificate",
-          text: "No SSL certificate could be issued for example.de.",
+          text: "No SSL certificate could be issued for examples.de.",
           status: "warning",
-          onClick: () => alert("2"),
+          onClick: () => alert("Notification clicked"),
         });
       }, 10000);
     }, []);

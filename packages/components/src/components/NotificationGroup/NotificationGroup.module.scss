@@ -5,4 +5,19 @@
   display: flex;
   flex-direction: column;
   row-gap: 16px;
+  z-index: 1;
+
+  .notification {
+    animation: modal-slide-in var(--transition--duration--slow);
+  }
+}
+
+@keyframes modal-slide-in {
+  from {
+    right: -100px;
+  }
+
+  to {
+    right: 0;
+  }
 }

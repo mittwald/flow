@@ -154,6 +154,14 @@
       "types": "./dist/types/components/Navigation/index.d.ts",
       "import": "./dist/Navigation.js"
     },
+    "./Notification": {
+      "types": "./dist/types/components/Notification/index.d.ts",
+      "import": "./dist/Notification.js"
+    },
+    "./NotificationGroup": {
+      "types": "./dist/types/components/NotificationGroup/index.d.ts",
+      "import": "./dist/NotificationGroup.js"
+    },
     "./NumberField": {
       "types": "./dist/types/components/NumberField/index.d.ts",
       "import": "./dist/NumberField.js"
