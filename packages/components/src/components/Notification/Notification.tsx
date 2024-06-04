@@ -14,6 +14,7 @@ import { IconClose } from "@/components/Icon/components/icons";
 export interface NotificationProps
   extends PropsWithChildren<ComponentProps<"div">>,
     PropsWithStatus {
+  href?: string;
   onClick?: () => void;
   onClose?: () => void;
   autoClose?: boolean;
@@ -24,6 +25,7 @@ export const Notification: FC<NotificationProps> = (props) => {
     children,
     className,
     status = "info",
+    href,
     onClick,
     onClose,
     autoClose,
@@ -43,22 +45,35 @@ export const Notification: FC<NotificationProps> = (props) => {
   };
 
   useEffect(() => {
-    autoClose &&
+    if (autoClose && onClose) {
       setTimeout(() => {
-        onClose && onClose();
+        onClose();
       }, 10000);
+    }
   }, []);
+
+  const content = (
+    <>
+      <StatusIcon className={styles.statusIcon} status={status} />
+      <PropsContextProvider props={propsContext}>
+        {children}
+      </PropsContextProvider>
+    </>
+  );
+
+  const hasLink = !!href || !!onClick;
 
   return (
     <div role="alert" {...rest} className={rootClassName}>
       <Action action={onClose}>
         <Action action={onClick}>
-          <Link unstyled className={styles.link}>
-            <StatusIcon className={styles.statusIcon} status={status} />
-            <PropsContextProvider props={propsContext}>
-              {children}
-            </PropsContextProvider>
-          </Link>
+          {hasLink && (
+            <Link unstyled href={href} className={styles.link}>
+              {content}
+            </Link>
+          )}
+
+          {!hasLink && <div className={styles.content}>{content}</div>}
         </Action>
         {onClose && (
           <Button

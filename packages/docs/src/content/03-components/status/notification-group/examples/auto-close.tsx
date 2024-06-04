@@ -9,7 +9,10 @@ export default () => {
 
   return (
     <>
-      <NotificationGroup controller={controller} />
+      <NotificationGroup
+        controller={controller}
+        autoClose
+      />
       <Button
         onPress={() =>
           controller.add({

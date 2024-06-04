@@ -14,11 +14,15 @@ export interface NotificationGroupProps extends ComponentProps<"div"> {
 }
 
 export const NotificationGroup: FC<NotificationGroupProps> = (props) => {
-  const { className, controller, autoClose = true, ...rest } = props;
+  const { className, controller, autoClose, ...rest } = props;
 
   const rootClassName = clsx(styles.notificationGroup, className);
 
   const notifications = controller.useNotificationList();
+
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => setMounted(true), []);
 
   const content = (
     <div className={rootClassName} {...rest}>
@@ -38,7 +42,7 @@ export const NotificationGroup: FC<NotificationGroupProps> = (props) => {
     </div>
   );
 
-  return document ? ReactDOM.createPortal(content, document.body) : null;
+  return mounted ? ReactDOM.createPortal(content, document.body) : null;
 };
 
 export default NotificationGroup;

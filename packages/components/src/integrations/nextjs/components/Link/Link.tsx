@@ -2,9 +2,16 @@ import type { ComponentProps } from "react";
 import React, { forwardRef } from "react";
 import NextLink from "next/link";
 
-export const Link = forwardRef<
-  HTMLAnchorElement,
-  Omit<ComponentProps<"a">, "ref">
->(function Link(props, ref) {
-  return <NextLink href={props.href ?? "#"} {...props} ref={ref} />;
-});
+export interface LinkProps extends Omit<ComponentProps<"a">, "ref"> {
+  onPress?: () => object;
+}
+
+export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
+  function Link(props, ref) {
+    const { href, onPress, ...rest } = props;
+
+    return (
+      <NextLink href={href ?? "#"} onClick={onPress} {...rest} ref={ref} />
+    );
+  },
+);

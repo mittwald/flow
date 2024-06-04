@@ -39,4 +39,4 @@ type Story = StoryObj<typeof Notification>;
 
 export const Default: Story = {};
 
-export const WithoutAutoClose: Story = { args: { autoClose: false } };
+export const WithAutoClose: Story = { args: { autoClose: true } };
