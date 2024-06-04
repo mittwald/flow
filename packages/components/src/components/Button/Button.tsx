@@ -111,8 +111,8 @@ export const Button = flowComponent("Button", (props) => {
     Avatar: {
       className: styles.avatar,
     },
-    CounterLabel: {
-      className: styles.counterLabel,
+    CounterBadge: {
+      className: styles.counterBadge,
     },
   };
 
