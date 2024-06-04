@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import Button from "@/components/Button";
-import ButtonGroup from "@/components/ButtonGroup";
 import Text from "@/components/Text";
 import TextField from "@/components/TextField";
 import Label from "@/components/Label";
@@ -10,6 +9,8 @@ import Heading from "@/components/Heading";
 import Modal, { ModalTrigger } from "@/components/Modal";
 import { useOverlayController } from "@/lib/controller/overlay/useOverlayController";
 import { Action } from "@/components/Action";
+import { ActionGroup } from "@/components/ActionGroup";
+import { asyncLongFunction } from "@/components/Button/stories/lib";
 
 const meta: Meta<typeof Modal> = {
   title: "Overlays/Modal",
@@ -41,14 +42,16 @@ const meta: Meta<typeof Modal> = {
             <Label>Customer name</Label>
           </TextField>
         </Content>
-        <ButtonGroup>
+        <ActionGroup>
           <Action closeOverlay>
-            <Button color="accent">Create customer</Button>
+            <Action action={asyncLongFunction}>
+              <Button color="accent">Create customer</Button>
+            </Action>
             <Button color="secondary" variant="soft">
               Abort
             </Button>
           </Action>
-        </ButtonGroup>
+        </ActionGroup>
       </Modal>
     );
   },
@@ -79,14 +82,14 @@ export const WithController: Story = {
               <Label>Customer name</Label>
             </TextField>
           </Content>
-          <ButtonGroup>
+          <ActionGroup>
             <Action closeOverlay>
               <Button color="accent">Create customer</Button>
               <Button color="secondary" variant="soft">
                 Abort
               </Button>
             </Action>
-          </ButtonGroup>
+          </ActionGroup>
         </Modal>
       </>
     );
@@ -102,14 +105,14 @@ export const WithTrigger: Story = {
         <Content>
           <Text>Are you sure you want to delete this project?</Text>
         </Content>
-        <ButtonGroup>
+        <ActionGroup>
           <Action closeOverlay>
             <Button color="danger">Delete project</Button>
             <Button variant="soft" color="secondary">
               Abort
             </Button>
           </Action>
-        </ButtonGroup>
+        </ActionGroup>
       </Modal>
     </ModalTrigger>
   ),

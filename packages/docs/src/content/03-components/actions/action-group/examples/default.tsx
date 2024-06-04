@@ -1,9 +1,9 @@
-import ButtonGroup from "@mittwald/flow-react-components/ButtonGroup";
+import ActionGroup from "@mittwald/flow-react-components/ActionGroup";
 import Button from "@mittwald/flow-react-components/Button";
 
-<ButtonGroup>
+<ActionGroup>
   <Button color="accent">Organisation erstellen</Button>
   <Button color="secondary" variant="soft">
     Abbrechen
   </Button>
-</ButtonGroup>;
+</ActionGroup>;
