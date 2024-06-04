@@ -15,7 +15,7 @@ import type { CopyButtonProps } from "@/components/CopyButton";
 import type { HeaderProps } from "@/components/Header/";
 import type { SwitchProps } from "@/components/Switch";
 import type { StatusBadgeProps } from "@/components/StatusBadge";
-import type { ButtonGroupProps } from "@/components/ButtonGroup";
+import type { ActionGroupProps } from "@/components/ActionGroup";
 import type { AvatarProps } from "@/components/Avatar";
 import type { ActionProps } from "@/components/Action";
 import type { ContextMenuProps, MenuItemProps } from "@/components/ContextMenu";
@@ -42,7 +42,7 @@ export interface FlowComponentPropsTypes {
   Action: ActionProps;
   Avatar: AvatarProps;
   Button: ButtonProps;
-  ButtonGroup: ButtonGroupProps;
+  ActionGroup: ActionGroupProps;
   Checkbox: CheckboxProps;
   CheckboxButton: CheckboxButtonProps;
   CheckboxGroup: CheckboxGroupProps;
@@ -85,7 +85,7 @@ const propsContextSupportingComponentsMap: Record<
   Action: true,
   Avatar: true,
   Button: true,
-  ButtonGroup: true,
+  ActionGroup: true,
   Checkbox: true,
   CheckboxButton: true,
   CheckboxGroup: true,

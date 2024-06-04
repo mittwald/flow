@@ -72,6 +72,7 @@ export class ActionModel {
 
   public static useConfirmationAction(): ActionModel {
     const action = ActionModel.use();
+
     return new ActionModel({
       actionProps: action.actionProps,
       confirmationModalController: action.confirmationModalController,

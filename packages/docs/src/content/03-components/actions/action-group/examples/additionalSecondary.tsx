@@ -1,7 +1,7 @@
-import ButtonGroup from "@mittwald/flow-react-components/ButtonGroup";
+import ActionGroup from "@mittwald/flow-react-components/ActionGroup";
 import Button from "@mittwald/flow-react-components/Button";
 
-<ButtonGroup>
+<ActionGroup>
   <Button color="secondary" variant="soft">
     Speichern und weitere anlegen
   </Button>
@@ -9,4 +9,4 @@ import Button from "@mittwald/flow-react-components/Button";
   <Button color="secondary" variant="soft">
     Abbrechen
   </Button>
-</ButtonGroup>;
+</ActionGroup>;

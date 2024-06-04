@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef } from "react";
 import type { ObservableMap } from "mobx";
 import { action, makeObservable, observable } from "mobx";
 import type { TunnelChildren } from "@/types";
@@ -29,7 +29,7 @@ export class TunnelState {
   }
 
   public static useNew(): TunnelState {
-    return useState(new TunnelState())[0];
+    return useRef(new TunnelState()).current;
   }
 
   public setChildren(
