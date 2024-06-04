@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.132](https://github.com/mittwald/flow/compare/0.1.0-alpha.131...0.1.0-alpha.132) (2024-06-04)
+
+### Bug Fixes
+
+- **Docs:** fix ActionGroup examples
+  ([7e67e6c](https://github.com/mittwald/flow/commit/7e67e6c5d441fb40b6a8b2280f4eaff29d441425))
+- **Navigation:** fix broken link rendering
+  ([e735786](https://github.com/mittwald/flow/commit/e735786a62cf63b41c4669ab68d0f4d89aba9877))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.131](https://github.com/mittwald/flow/compare/0.1.0-alpha.130...0.1.0-alpha.131) (2024-06-04)
 
 ### Bug Fixes
