@@ -40,7 +40,9 @@ export const Link = flowComponent("Link", (props) => {
   } = props;
 
   const { linkComponent: linkComponentFromContext } = useContext(linkContext);
-  const Link = linkComponentFromProps ?? linkComponentFromContext ?? Aria.Link;
+  const Link = props.href
+    ? linkComponentFromProps ?? linkComponentFromContext ?? Aria.Link
+    : Aria.Link;
 
   const rootClassName = unstyled
     ? className
