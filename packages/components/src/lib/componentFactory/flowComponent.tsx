@@ -13,7 +13,7 @@ import type {
 } from "react";
 import React, { forwardRef, useCallback } from "react";
 import type { PropsWithRender, PropsWithTunnel } from "@/lib/types/props";
-import { useProps } from "@/lib/propsContext";
+import { ClearPropsContext, useProps } from "@/lib/propsContext";
 import { TunnelEntry } from "@mittwald/react-tunnel";
 import { ComponentRenderContextProvider } from "@/lib/propsContext/render/ComponentRenderContextProvider";
 import { useComponentRenderFn } from "@/lib/propsContext/render/useComponentRenderFn";
@@ -67,9 +67,11 @@ export function flowComponent<C extends FlowComponentName>(
 
     if (renderFn) {
       element = (
-        <ComponentRenderContextProvider value={renderContext}>
-          {renderFn(FlowRenderComponent as never, propsWithRef as never)}
-        </ComponentRenderContextProvider>
+        <ClearPropsContext>
+          <ComponentRenderContextProvider value={renderContext}>
+            {renderFn(FlowRenderComponent as never, propsWithRef as never)}
+          </ComponentRenderContextProvider>
+        </ClearPropsContext>
       );
     }
 
