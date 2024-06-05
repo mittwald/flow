@@ -19,6 +19,7 @@ import { Switch } from "@/components/Switch";
 import { CheckboxGroup } from "@/components/CheckboxGroup";
 import { Checkbox } from "@/components/Checkbox";
 import Select, { Option } from "@/components/Select";
+import { Slider } from "@/components/Slider";
 
 const submitAction = action("submit");
 
@@ -33,6 +34,7 @@ const meta: Meta<typeof Controller> = {
       gender: string;
       testing: boolean;
       interests: string[];
+      storage: number;
     }
 
     const onSubmit = (values: Values): void => {
@@ -44,6 +46,7 @@ const meta: Meta<typeof Controller> = {
         firstName: "",
         lastName: "",
         gender: "",
+        storage: 200,
       },
     });
 
@@ -129,6 +132,19 @@ const meta: Meta<typeof Controller> = {
               <Checkbox value="bar">Bar</Checkbox>
               <Checkbox value="baz">Baz</Checkbox>
             </CheckboxGroup>
+          </TController>
+
+          <TController name="storage">
+            <Slider
+              formatOptions={{
+                style: "unit",
+                unit: "gigabyte",
+              }}
+              minValue={20}
+              maxValue={2000}
+            >
+              <Label>Storage</Label>
+            </Slider>
           </TController>
 
           <ActionGroup>

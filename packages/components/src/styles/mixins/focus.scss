@@ -13,4 +13,8 @@
   &:focus-visible {
     outline-style: auto;
   }
+
+  &[data-focused]:not([data-focus-visible]):focus-visible {
+    outline-style: none;
+  }
 }

@@ -34,6 +34,7 @@ import type { CheckboxButtonProps } from "@/components/CheckboxButton";
 import type { TabsProps } from "@/components/Tabs";
 import type { ModalProps } from "@/components/Modal";
 import type { SectionProps } from "@/components/Section";
+import type { SliderProps } from "@/components/Slider";
 import type { CounterBadgeProps } from "@/components/CounterBadge";
 import type { FlowComponentName } from "@/components/propTypes/types";
 
@@ -41,9 +42,9 @@ export * from "./types";
 
 export interface FlowComponentPropsTypes {
   Action: ActionProps;
+  ActionGroup: ActionGroupProps;
   Avatar: AvatarProps;
   Button: ButtonProps;
-  ActionGroup: ActionGroupProps;
   Checkbox: CheckboxProps;
   CheckboxButton: CheckboxButtonProps;
   CheckboxGroup: CheckboxGroupProps;
@@ -71,6 +72,7 @@ export interface FlowComponentPropsTypes {
   RadioGroup: RadioGroupProps;
   Section: SectionProps;
   Select: SelectProps;
+  Slider: SliderProps;
   StatusBadge: StatusBadgeProps;
   Switch: SwitchProps;
   Tabs: TabsProps;
@@ -84,9 +86,9 @@ const propsContextSupportingComponentsMap: Record<
   true
 > = {
   Action: true,
+  ActionGroup: true,
   Avatar: true,
   Button: true,
-  ActionGroup: true,
   Checkbox: true,
   CheckboxButton: true,
   CheckboxGroup: true,
@@ -114,6 +116,7 @@ const propsContextSupportingComponentsMap: Record<
   RadioGroup: true,
   Section: true,
   Select: true,
+  Slider: true,
   StatusBadge: true,
   Switch: true,
   Tabs: true,
