@@ -3,6 +3,10 @@
   flex-direction: column;
   row-gap: var(--menu--item-to-item-spacing);
 
+  hr {
+    margin-block: var(--menu--separator-to-item-spacing);
+  }
+
   &:focus-visible {
     outline: none;
   }

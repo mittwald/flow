@@ -25,7 +25,16 @@ export interface RadioGroupProps
 }
 
 export const RadioGroup = flowComponent("RadioGroup", (props) => {
-  const { children, className, variant = "default", s, m, l, ...rest } = props;
+  const {
+    children,
+    className,
+    variant = "default",
+    s,
+    m,
+    l,
+    refProp: ref,
+    ...rest
+  } = props;
 
   const rootClassName = clsx(formFieldStyles.formField, className);
 
@@ -73,7 +82,7 @@ export const RadioGroup = flowComponent("RadioGroup", (props) => {
   }
 
   return (
-    <Aria.RadioGroup {...rest} className={rootClassName}>
+    <Aria.RadioGroup {...rest} className={rootClassName} ref={ref}>
       <TunnelProvider>
         <PropsContextProvider props={propsContext} dependencies={[variant]}>
           {children}

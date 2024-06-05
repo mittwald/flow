@@ -14,10 +14,10 @@ import { ListSorting } from "@/components/List/components/Header/ListSorting";
 import { ListItemView } from "@/components/List/components/Items/ListItemView";
 import type { AnyData } from "@/components/List/model/item/types";
 import { ListStaticData } from "@/components/List/components/ListStaticData";
-import { FallbackRenderer } from "@/components/List/components/Items/Item";
 import { ListLoaderAsyncResource } from "@/components/List/components/ListLoaderAsyncResource";
 import type { IncrementalLoaderShape } from "@/components/List/model/loading/types";
 import Footer from "./components/Footer/Footer";
+import { FallbackRenderer } from "@/components/List/components/Items/ListItem/FallbackRenderer";
 
 interface Props extends PropsWithChildren {
   batchSize?: number;

@@ -16,7 +16,7 @@ export const TunnelEntry: FC<Props> = (props) => {
   const mounted = useRef(false);
 
   if (!mounted.current) {
-    tunnel.setChildren(id, entryId, children);
+    tunnel.prepareChildren(id, entryId, children);
   }
 
   useLayoutEffect(() => {

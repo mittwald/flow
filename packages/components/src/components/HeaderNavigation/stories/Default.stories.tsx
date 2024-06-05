@@ -18,6 +18,12 @@ import ContextMenu, {
   MenuItem,
   ContextMenuTrigger,
 } from "@/components/ContextMenu";
+import {
+  storyBackgroundDark,
+  storyBackgroundLight,
+} from "@/lib/dev/storyBackgrounds";
+import { Modal, ModalTrigger } from "@/components/Modal";
+import { Heading } from "@/components/Heading";
 
 const meta: Meta<typeof HeaderNavigation> = {
   title: "Navigation/HeaderNavigation",
@@ -36,6 +42,12 @@ const meta: Meta<typeof HeaderNavigation> = {
       </Button>
     </HeaderNavigation>
   ),
+  argTypes: {
+    color: {
+      control: "inline-radio",
+      options: ["primary", "dark", "light"],
+    },
+  },
 };
 
 export default meta;
@@ -53,9 +65,14 @@ export const WithContextMenu: Story = {
       <Button>
         <IconSupport />
       </Button>
-      <Button>
-        <IconNotification />
-      </Button>
+      <ModalTrigger>
+        <Button>
+          <IconNotification />
+        </Button>
+        <Modal>
+          <Heading>Notifications</Heading>
+        </Modal>
+      </ModalTrigger>
       <ContextMenuTrigger>
         <Button>
           <Avatar>
@@ -77,17 +94,16 @@ export const WithContextMenu: Story = {
   ),
 };
 
-export const Inverse: Story = {
-  args: { inverse: true },
+export const Dark: Story = {
+  args: { color: "dark" },
   parameters: {
-    backgrounds: {
-      default: "dark",
-      values: [
-        {
-          name: "dark",
-          value: "#002A7B",
-        },
-      ],
-    },
+    backgrounds: storyBackgroundLight,
+  },
+};
+
+export const Light: Story = {
+  args: { color: "light" },
+  parameters: {
+    backgrounds: storyBackgroundDark,
   },
 };

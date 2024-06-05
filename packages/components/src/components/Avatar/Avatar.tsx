@@ -1,29 +1,25 @@
-import type { FC, PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 import React from "react";
 import styles from "./Avatar.module.scss";
 import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
-import {
-  ClearPropsContext,
-  PropsContextProvider,
-  useProps,
-} from "@/lib/propsContext";
+import { ClearPropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { getVariantFromChildren } from "@/components/Avatar/lib/getVariantFromChildren";
 import type { PropsWithClassName } from "@/lib/types/props";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
-export interface AvatarProps extends PropsWithChildren, PropsWithClassName {
+export interface AvatarProps
+  extends PropsWithChildren,
+    PropsWithClassName,
+    FlowComponentProps<"Avatar"> {
   /** @default "m" */
   size?: "xs" | "s" | "m" | "l";
   variant?: 1 | 2 | 3 | 4;
 }
 
-export const Avatar: FC<AvatarProps> = (props) => {
-  const {
-    children,
-    className,
-    variant,
-    size = "m",
-  } = useProps("Avatar", props);
+export const Avatar = flowComponent("Avatar", (props) => {
+  const { children, className, variant, size = "m", refProp: ref } = props;
 
   const rootClassName = clsx(
     styles.avatar,
@@ -43,13 +39,13 @@ export const Avatar: FC<AvatarProps> = (props) => {
 
   return (
     <ClearPropsContext>
-      <div className={rootClassName}>
+      <div className={rootClassName} ref={ref}>
         <PropsContextProvider props={propsContext}>
           {children}
         </PropsContextProvider>
       </div>
     </ClearPropsContext>
   );
-};
+});
 
 export default Avatar;

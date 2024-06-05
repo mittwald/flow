@@ -6,6 +6,7 @@ import { Text } from "@/components/Text";
 import { usePromise } from "@mittwald/react-use-promise";
 import {
   ListFilter,
+  ListItem,
   ListItemView,
   ListLoaderAsync,
   ListSorting,
@@ -13,7 +14,6 @@ import {
 import type { AsyncDataLoader } from "@/components/List/model/loading/types";
 import { Avatar } from "@/components/Avatar";
 import { ContextMenu, MenuItem } from "@/components/ContextMenu";
-import { Link } from "@/components/Link";
 import { IconDomain, IconSubdomain } from "@/components/Icon/components/icons";
 import StatusBadge from "@/components/StatusBadge";
 import type { Domain } from "../testData/domainApi";
@@ -62,7 +62,7 @@ const meta: Meta<typeof List> = {
         <ListSorting<Domain> property="tld" name="TLD" />
         <ListItemView<Domain>>
           {(domain) => (
-            <>
+            <ListItem>
               <Avatar variant={domain.type === "Domain" ? 1 : 2}>
                 {domain.type === "Domain" ? <IconDomain /> : <IconSubdomain />}
               </Avatar>
@@ -77,7 +77,7 @@ const meta: Meta<typeof List> = {
                 <MenuItem>Show details</MenuItem>
                 <MenuItem>Delete</MenuItem>
               </ContextMenu>
-            </>
+            </ListItem>
           )}
         </ListItemView>
       </List>
@@ -100,17 +100,18 @@ export const ItemsWithLink: Story = {
         </ListLoaderAsync>
         <ListItemView<Domain>>
           {(domain) => (
-            <Link href="#">
+            <ListItem href="#">
               <Avatar variant={domain.type === "Domain" ? 1 : 2}>
                 {domain.type === "Domain" ? <IconDomain /> : <IconSubdomain />}
               </Avatar>
               <Heading>{domain.hostname}</Heading>
               <Text>{domain.type}</Text>
+
               <ContextMenu>
                 <MenuItem>Show details</MenuItem>
                 <MenuItem>Delete</MenuItem>
               </ContextMenu>
-            </Link>
+            </ListItem>
           )}
         </ListItemView>
       </List>

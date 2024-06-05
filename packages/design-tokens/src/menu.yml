@@ -5,6 +5,8 @@ menu:
     value: "{size-px.m}"
   label-to-group-spacing:
     value: "{size-px.s}"
+  separator-to-item-spacing:
+    value: "{size-px.s}"
 
 menu-item:
   font-weight:
@@ -26,15 +28,15 @@ menu-item:
     default:
       value: "{neutral.color.800}"
     current:
-      value: "{info.color.800}"
+      value: "{primary.color.800}"
 
   background-color:
     default:
       value: "{color.transparent}"
     hover:
-      value: "{primary.color.100}"
+      value: "{primary-plain-background-color.hover}"
     current:
-      value: "{primary.color.200}"
+      value: "{primary-plain-background-color.pressed}"
 
   # Disabled
   disabled-background-color:

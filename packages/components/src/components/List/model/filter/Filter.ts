@@ -91,7 +91,7 @@ export class Filter<T> {
     );
   }
 
-  public getArrayValue(): Array<unknown> {
+  public getArrayValue(): unknown[] {
     const currentValue = this.getValue();
     return Array.isArray(currentValue)
       ? currentValue

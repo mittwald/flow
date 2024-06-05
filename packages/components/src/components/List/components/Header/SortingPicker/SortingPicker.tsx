@@ -32,10 +32,10 @@ export const SortingPicker: FC = () => {
             property: enabledSorting.name ?? enabledSorting.property,
           }}
         >
-          setSorting
+          list.setSorting
         </Translate>
       ) : (
-        <Translate locales={locales}>sorting</Translate>
+        <Translate locales={locales}>list.sorting</Translate>
       )}
     </Text>
   );

@@ -1,15 +1,22 @@
-import type { ComponentProps, FC, PropsWithChildren } from "react";
+import type { ComponentProps, PropsWithChildren } from "react";
 import React from "react";
 import styles from "./Section.module.scss";
 import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import { Activity } from "@/components/Activity";
 
 export interface SectionProps
-  extends PropsWithChildren<ComponentProps<"section">> {}
+  extends PropsWithChildren<ComponentProps<"section">>,
+    FlowComponentProps<"Section"> {
+  /** @internal */
+  isActive?: boolean;
+}
 
-export const Section: FC<SectionProps> = (props) => {
-  const { children, className, ...rest } = props;
+export const Section = flowComponent("Section", (props) => {
+  const { children, className, isActive = true, refProp: ref, ...rest } = props;
 
   if (!children) {
     return null;
@@ -34,12 +41,14 @@ export const Section: FC<SectionProps> = (props) => {
   };
 
   return (
-    <section {...rest} className={rootClassName}>
-      <PropsContextProvider props={propsContext}>
-        {children}
-      </PropsContextProvider>
-    </section>
+    <Activity isActive={isActive}>
+      <section {...rest} className={rootClassName} ref={ref}>
+        <PropsContextProvider props={propsContext}>
+          {children}
+        </PropsContextProvider>
+      </section>
+    </Activity>
   );
-};
+});
 
 export default Section;

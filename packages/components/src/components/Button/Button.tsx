@@ -16,8 +16,9 @@ import { useAriaAnnounceActionState } from "@/components/Action/lib/ariaLive";
 export interface ButtonProps
   extends PropsWithChildren<Aria.ButtonProps>,
     FlowComponentProps<"Button"> {
+  slot?: string;
   /** @default "primary" */
-  color?: "primary" | "accent" | "secondary" | "danger";
+  color?: "primary" | "accent" | "secondary" | "danger" | "dark" | "light";
   /** @default "solid" */
   variant?: "plain" | "solid" | "soft";
   /** @default "m" */
@@ -28,8 +29,8 @@ export interface ButtonProps
   isPending?: boolean;
   isSucceeded?: boolean;
   isFailed?: boolean;
-
-  inverse?: boolean;
+  /** @internal */
+  unstyled?: boolean;
 }
 
 const disablePendingProps = (props: ButtonProps) => {
@@ -65,27 +66,28 @@ export const Button = flowComponent("Button", (props) => {
     isSucceeded,
     isFailed,
     "aria-disabled": ariaDisabled,
-    ref,
-    inverse,
+    refProp: ref,
+    unstyled,
     ...restProps
   } = props;
 
-  const rootClassName = clsx(
-    styles.button,
-    isPending && styles.isPending,
-    isSucceeded && styles.isSucceeded,
-    isFailed && styles.isFailed,
-    inverse && styles.inverse,
-    styles[`size-${size}`],
-    styles[color],
-    styles[variant],
-    className,
-    /**
-     * Workaround warning: The Aria.Button does not support "aria-disabled" by
-     * now, so this Button will be visually disabled via CSS.
-     */
-    ariaDisabled && styles.ariaDisabled,
-  );
+  const rootClassName = unstyled
+    ? className
+    : clsx(
+        styles.button,
+        isPending && styles.isPending,
+        isSucceeded && styles.isSucceeded,
+        isFailed && styles.isFailed,
+        styles[`size-${size}`],
+        styles[color],
+        styles[variant],
+        className,
+        /**
+         * Workaround warning: The Aria.Button does not support "aria-disabled"
+         * by now, so this Button will be visually disabled via CSS.
+         */
+        ariaDisabled && styles.ariaDisabled,
+      );
 
   useAriaAnnounceActionState(
     isPending
@@ -109,6 +111,9 @@ export const Button = flowComponent("Button", (props) => {
     Avatar: {
       className: styles.avatar,
     },
+    CounterBadge: {
+      className: styles.counterBadge,
+    },
   };
 
   const StateIconComponent = isSucceeded
@@ -129,11 +134,13 @@ export const Button = flowComponent("Button", (props) => {
     <ClearPropsContext>
       <Aria.Button className={rootClassName} ref={ref} {...restProps}>
         <PropsContextProvider props={propsContext}>
-          <span className={styles.content}>
-            <Wrap if={isStringContent}>
-              <Text>{children}</Text>
-            </Wrap>
-          </span>
+          <Wrap if={!unstyled}>
+            <span className={styles.content}>
+              <Wrap if={isStringContent}>
+                <Text>{children}</Text>
+              </Wrap>
+            </span>
+          </Wrap>
         </PropsContextProvider>
         {stateIcon}
       </Aria.Button>

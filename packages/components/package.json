@@ -1,26 +1,30 @@
 {
   "name": "@mittwald/flow-react-components",
-  "version": "0.1.0-alpha.94",
+  "version": "0.1.0-alpha.132",
   "type": "module",
   "description": "A React implementation of Flow, mittwald’s design system",
   "homepage": "https://mittwald.github.io/flow",
   "repository": "https://github.com/mittwald/flow",
   "exports": {
-    "./Avatar": {
-      "types": "./dist/types/components/Avatar/index.d.ts",
-      "import": "./dist/Avatar.js"
+    "./Accordion": {
+      "types": "./dist/types/components/Accordion/index.d.ts",
+      "import": "./dist/Accordion.js"
     },
     "./Action": {
       "types": "./dist/types/components/Action/index.d.ts",
       "import": "./dist/Action.js"
     },
+    "./ActionGroup": {
+      "types": "./dist/types/components/ActionGroup/index.d.ts",
+      "import": "./dist/ActionGroup.js"
+    },
+    "./Avatar": {
+      "types": "./dist/types/components/Avatar/index.d.ts",
+      "import": "./dist/Avatar.js"
+    },
     "./Button": {
       "types": "./dist/types/components/Button/index.d.ts",
       "import": "./dist/Button.js"
-    },
-    "./ButtonGroup": {
-      "types": "./dist/types/components/ButtonGroup/index.d.ts",
-      "import": "./dist/ButtonGroup.js"
     },
     "./Breadcrumb": {
       "types": "./dist/types/components/Breadcrumb/index.d.ts",
@@ -45,6 +49,10 @@
     "./Content": {
       "types": "./dist/types/components/Content/index.d.ts",
       "import": "./dist/Content.js"
+    },
+    "./CounterBadge": {
+      "types": "./dist/types/components/CounterBadge/index.d.ts",
+      "import": "./dist/CounterBadge.js"
     },
     "./IllustratedMessage": {
       "types": "./dist/types/components/IllustratedMessage/index.d.ts",
@@ -162,14 +170,6 @@
       "types": "./dist/types/components/OffCanvas/index.d.ts",
       "import": "./dist/OffCanvas.js"
     },
-    "./OverlayTrigger": {
-      "types": "./dist/types/components/Overlay/components/OverlayTrigger/index.d.ts",
-      "import": "./dist/OverlayTrigger.js"
-    },
-    "./Popover": {
-      "types": "./dist/types/components/Popover/index.d.ts",
-      "import": "./dist/Popover.js"
-    },
     "./ProgressBar": {
       "types": "./dist/types/components/ProgressBar/index.d.ts",
       "import": "./dist/ProgressBar.js"
@@ -178,6 +178,10 @@
       "types": "./dist/types/components/RadioGroup/index.d.ts",
       "import": "./dist/RadioGroup.js"
     },
+    "./Render": {
+      "types": "./dist/types/lib/react/components/Render/index.d.ts",
+      "import": "./dist/Render.js"
+    },
     "./Section": {
       "types": "./dist/types/components/Section/index.d.ts",
       "import": "./dist/Section.js"
@@ -185,6 +189,14 @@
     "./Select": {
       "types": "./dist/types/components/Select/index.d.ts",
       "import": "./dist/Select.js"
+    },
+    "./Separator": {
+      "types": "./dist/types/components/Separator/index.d.ts",
+      "import": "./dist/Separator.js"
+    },
+    "./Skeleton": {
+      "types": "./dist/types/components/Skeleton/index.d.ts",
+      "import": "./dist/Skeleton.js"
     },
     "./StatusBadge": {
       "types": "./dist/types/components/StatusBadge/index.d.ts",
@@ -197,6 +209,10 @@
     "./Switch": {
       "types": "./dist/types/components/Switch/index.d.ts",
       "import": "./dist/Switch.js"
+    },
+    "./Table": {
+      "types": "./dist/types/components/Table/index.d.ts",
+      "import": "./dist/Table.js"
     },
     "./Tabs": {
       "types": "./dist/types/components/Tabs/index.d.ts",
@@ -254,84 +270,85 @@
     "@internationalized/date": "^3.5.1",
     "@mittwald/react-tunnel": "workspace:^",
     "@mittwald/react-use-promise": "^2.3.13",
-    "@react-aria/utils": "^3.24.0",
-    "@react-types/shared": "^3.23.0",
-    "@storybook/test": "^8.0.9",
-    "@tabler/icons-react": "^3.3.0",
-    "@tanstack/react-table": "^8.16.0",
+    "@react-aria/utils": "^3.24.1",
+    "@react-types/shared": "^3.23.1",
+    "@storybook/test": "^8.1.5",
+    "@tabler/icons-react": "^3.5.0",
+    "@tanstack/react-table": "^8.17.3",
     "clsx": "^2.1.1",
     "copy-to-clipboard": "^3.3.3",
-    "dot-prop": "^8.0.2",
+    "dot-prop": "^9.0.0",
     "html-react-parser": "^5.1.10",
     "invariant": "^2.2.4",
     "mobx": "^6.12.3",
     "mobx-react-lite": "^4.0.7",
     "object-code": "^1.3.3",
-    "react-aria": "^3.33.0",
-    "react-aria-components": "^1.2.0",
+    "react-aria": "^3.33.1",
+    "react-aria-components": "^1.2.1",
     "react-children-utilities": "^2.10.0",
-    "react-stately": "^3.31.0",
-    "remeda": "^1.61.0",
+    "react-stately": "^3.31.1",
+    "remeda": "^2.0.3",
     "use-callback-ref": "^1.3.2"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
     "@mittwald/flow-design-tokens": "workspace:^",
     "@mittwald/react-use-promise": "^2.3.13",
-    "@nx/storybook": "^18.3.4",
-    "@storybook/addon-a11y": "^8.0.9",
-    "@storybook/addon-actions": "^8.0.9",
-    "@storybook/addon-essentials": "^8.0.9",
-    "@storybook/addon-interactions": "^8.0.9",
-    "@storybook/addon-links": "^8.0.9",
-    "@storybook/blocks": "^8.0.9",
-    "@storybook/components": "^8.0.9",
-    "@storybook/core-events": "^8.0.9",
-    "@storybook/manager-api": "^8.0.9",
-    "@storybook/preview-api": "^8.0.9",
-    "@storybook/react": "^8.0.9",
-    "@storybook/react-vite": "^8.0.9",
-    "@storybook/theming": "^8.0.9",
+    "@nx/storybook": "^19.1.2",
+    "@storybook/addon-a11y": "^8.1.5",
+    "@storybook/addon-actions": "^8.1.5",
+    "@storybook/addon-essentials": "^8.1.5",
+    "@storybook/addon-interactions": "^8.1.5",
+    "@storybook/addon-links": "^8.1.5",
+    "@storybook/blocks": "^8.1.5",
+    "@storybook/components": "^8.1.5",
+    "@storybook/core-events": "^8.1.5",
+    "@storybook/manager-api": "^8.1.5",
+    "@storybook/preview-api": "^8.1.5",
+    "@storybook/react": "^8.1.5",
+    "@storybook/react-vite": "^8.1.5",
+    "@storybook/theming": "^8.1.5",
     "@testing-library/dom": "^10.1.0",
-    "@testing-library/jest-dom": "^6.4.2",
-    "@testing-library/react": "~14.3.1",
+    "@testing-library/jest-dom": "^6.4.5",
+    "@testing-library/react": "~15.0.7",
     "@testing-library/user-event": "^14.5.2",
     "@types/invariant": "^2.2.37",
-    "@types/node": "20.12.8",
+    "@types/node": "20.14.1",
     "@types/prettier": "^3.0.0",
     "@types/prop-types": "^15.7.12",
-    "@types/react": "^18.3.1",
+    "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@types/rollup": "^0.54.0",
-    "@vitejs/plugin-react": "^4.2.1",
-    "@vitest/coverage-v8": "~1.5.3",
+    "@vitejs/plugin-react": "^4.3.0",
+    "@vitest/coverage-v8": "~1.6.0",
     "decamelize": "^6.0.0",
     "fs-jetpack": "^5.1.0",
-    "happy-dom": "^14.7.1",
+    "happy-dom": "^14.12.0",
     "next": "^14.2.3",
-    "nx": "^18.3.4",
+    "nx": "^19.1.2",
     "postcss": "^8.4.38",
     "postcss-nested-import": "^1.3.0",
-    "postcss-nesting": "^12.1.2",
-    "prettier": "^3.2.5",
+    "postcss-nesting": "^12.1.5",
+    "prettier": "^3.3.0",
     "prop-types": "^15.8.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-element-to-jsx-string": "^15.0.0",
-    "react-hook-form": "^7.51.3",
-    "rollup": "^4.17.2",
-    "sass": "^1.76.0",
-    "storybook": "^8.0.9",
-    "tsx": "^4.8.2",
+    "react-hook-form": "^7.51.5",
+    "rollup": "^4.18.0",
+    "sass": "^1.77.4",
+    "storybook": "^8.1.5",
+    "storybook-addon-rtl": "^1.0.0",
+    "tsx": "^4.11.2",
     "typescript": "^5.4.5",
     "typescript-plugin-css-modules": "^5.1.0",
-    "vite": "^5.2.10",
+    "vite": "^5.2.12",
     "vite-plugin-banner": "^0.7.1",
     "vite-plugin-checker": "^0.6.4",
-    "vite-plugin-dts": "^3.9.0",
+    "vite-plugin-dts": "^3.9.1",
     "vite-plugin-externalize-deps": "^0.8.0",
-    "vitest": "~1.5.3",
-    "yaml": "^2.4.2"
+    "vitest": "~1.6.0",
+    "yaml": "^2.4.3"
   },
   "peerDependencies": {
     "@mittwald/react-use-promise": "^2.3.12",

@@ -4,6 +4,10 @@ import { action } from "@storybook/addon-actions";
 import React from "react";
 import { Text } from "@/components/Text";
 import { IconExternalLink } from "@/components/Icon/components/icons";
+import {
+  storyBackgroundDark,
+  storyBackgroundLight,
+} from "@/lib/dev/storyBackgrounds";
 
 const meta: Meta<typeof Link> = {
   title: "Navigation/Link",
@@ -14,6 +18,12 @@ const meta: Meta<typeof Link> = {
   render: (props) => <Link {...props}>Adjust project</Link>,
   parameters: {
     controls: { exclude: ["onPress"] },
+  },
+  argTypes: {
+    color: {
+      control: "inline-radio",
+      options: ["primary", "dark", "light"],
+    },
   },
 };
 export default meta;
@@ -39,4 +49,18 @@ export const WithIcon: Story = {
       <IconExternalLink aria-label="external link" />
     </Link>
   ),
+};
+
+export const Dark: Story = {
+  args: { color: "dark" },
+  parameters: {
+    backgrounds: storyBackgroundLight,
+  },
+};
+
+export const Light: Story = {
+  args: { color: "light" },
+  parameters: {
+    backgrounds: storyBackgroundDark,
+  },
 };

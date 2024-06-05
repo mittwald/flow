@@ -16,7 +16,7 @@ export interface StatusBadgeProps
     PropsWithClassName {}
 
 export const StatusBadge = flowComponent("StatusBadge", (props) => {
-  const { children, className, status = "info", ref, ...rest } = props;
+  const { children, className, status = "info", refProp: ref, ...rest } = props;
 
   const rootClassName = clsx(styles.statusBadge, styles[status], className);
 

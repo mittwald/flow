@@ -41,7 +41,7 @@ export const ActiveFilters: FC = () => {
         variant="plain"
         onPress={() => list.clearFilters()}
       >
-        <Translate locales={locales}>resetAll</Translate>
+        <Translate locales={locales}>list.resetAll</Translate>
       </Button>
     </div>
   );

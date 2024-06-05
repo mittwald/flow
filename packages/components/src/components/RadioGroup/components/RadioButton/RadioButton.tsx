@@ -12,7 +12,7 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 export interface RadioButtonProps extends RadioProps, FlowComponentProps {}
 
 export const RadioButton = flowComponent("RadioButton", (props) => {
-  const { children, className, ref, ...rest } = props;
+  const { children, className, refProp: ref, ...rest } = props;
 
   const rootClassName = clsx(styles.radioButton, className);
 

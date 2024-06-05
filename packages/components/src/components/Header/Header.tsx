@@ -7,10 +7,10 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 export interface HeaderProps
   extends PropsWithChildren,
     PropsWithElementType<"div" | "header" | "span">,
-    FlowComponentProps {}
+    FlowComponentProps<"Header"> {}
 
 export const Header = flowComponent("Header", (props) => {
-  const { children, ref, elementType = "header", ...rest } = props;
+  const { children, refProp: ref, elementType = "header", ...rest } = props;
 
   const Element = elementType;
 

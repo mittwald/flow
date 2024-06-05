@@ -1,13 +1,13 @@
-export type Domain = {
+export interface Domain {
   hostname: string;
   domain: string;
   type: "Subdomain" | "Domain";
   verified: boolean;
   tld: string;
-};
+}
 
 const apiSleep = (): Promise<void> =>
-  new Promise((res) => window.setTimeout(res, 500));
+  new Promise((res) => window.setTimeout(res, 750));
 
 export const getTypes = async () => {
   await apiSleep();

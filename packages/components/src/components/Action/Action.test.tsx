@@ -1,12 +1,11 @@
 import "@testing-library/jest-dom/vitest";
 import { render, screen } from "@testing-library/react";
-import React from "react";
+import React, { act } from "react";
 import Action from "@/components/Action";
 import { Button } from "@/components/Button";
 import type { Mock } from "vitest";
 import { beforeEach, vitest } from "vitest";
 import userEvent from "@/lib/dev/vitestUserEvent";
-import { act } from "react-dom/test-utils";
 
 const asyncActionDuration = 700;
 const sleep = () =>
@@ -48,6 +47,18 @@ test("Sync Action is called when trigger is clicked", async () => {
   expect(syncAction1).toHaveBeenCalledOnce();
 });
 
+test("Action function is updated when action prop changes", async () => {
+  const r = render(<Action action={syncAction1}>{button}</Action>);
+  await clickTrigger();
+  expect(syncAction1).toHaveBeenCalledOnce();
+  expect(syncAction2).not.toHaveBeenCalledOnce();
+
+  r.rerender(<Action action={syncAction2}>{button}</Action>);
+  await clickTrigger();
+  expect(syncAction1).toHaveBeenCalledOnce();
+  expect(syncAction2).toHaveBeenCalledOnce();
+});
+
 test("Nested sync actions are called when trigger is clicked", async () => {
   render(
     <Action action={syncAction2}>
@@ -57,6 +68,49 @@ test("Nested sync actions are called when trigger is clicked", async () => {
   await clickTrigger();
   expect(syncAction1).toHaveBeenCalledOnce();
   expect(syncAction2).toHaveBeenCalledOnce();
+});
+
+test("Nested sync actions are not called when break action is used", async () => {
+  render(
+    <Action action={syncAction2}>
+      <Action break>
+        <Action action={syncAction1}>{button}</Action>
+      </Action>
+    </Action>,
+  );
+  await clickTrigger();
+  expect(syncAction1).toHaveBeenCalledOnce();
+  expect(syncAction2).not.toHaveBeenCalledOnce();
+});
+
+test("Nested sync actions are not called when skipped", async () => {
+  render(
+    <Action action={syncAction2}>
+      <Action action={syncAction2}>
+        <Action skip>
+          <Action action={syncAction1}>{button}</Action>
+        </Action>
+      </Action>
+    </Action>,
+  );
+  await clickTrigger();
+  expect(syncAction1).toHaveBeenCalledOnce();
+  expect(syncAction2).toHaveBeenCalledOnce();
+});
+
+test("Nested sync actions are not called when multiple skipped", async () => {
+  render(
+    <Action action={syncAction2}>
+      <Action action={syncAction2}>
+        <Action skip={2}>
+          <Action action={syncAction1}>{button}</Action>
+        </Action>
+      </Action>
+    </Action>,
+  );
+  await clickTrigger();
+  expect(syncAction1).toHaveBeenCalledOnce();
+  expect(syncAction2).not.toHaveBeenCalledOnce();
 });
 
 test("When nested sync actions, the inner action is called first", async () => {

@@ -14,8 +14,14 @@ export interface TabsProps
     FlowComponentProps {}
 
 export const Tabs = flowComponent("Tabs", (props) => {
-  const { children, className, defaultSelectedKey, disabledKeys, ...rest } =
-    props;
+  const {
+    children,
+    className,
+    defaultSelectedKey,
+    disabledKeys,
+    refProp: ref,
+    ...rest
+  } = props;
 
   const rootClassName = clsx(styles.tabs, className);
   const [selection, setSelection] = useState<Aria.Key | undefined>(
@@ -26,11 +32,13 @@ export const Tabs = flowComponent("Tabs", (props) => {
     <TunnelProvider>
       {children}
       <Aria.Tabs
+        slot={null}
         className={rootClassName}
         {...rest}
         selectedKey={selection}
         onSelectionChange={setSelection}
         disabledKeys={disabledKeys}
+        ref={ref}
       >
         <TabList
           selection={selection}

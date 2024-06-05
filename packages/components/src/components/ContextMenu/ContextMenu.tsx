@@ -32,7 +32,7 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
     defaultSelectedKeys,
     disabledKeys,
     onSelectionChange,
-    ref,
+    refProp: ref,
     ...rest
   } = props;
 

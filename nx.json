@@ -25,10 +25,6 @@
       "dependsOn": ["^build"],
       "cache": true
     },
-    "test:compile": {
-      "dependsOn": ["^build"],
-      "cache": true
-    },
     "build:icons": {
       "cache": true,
       "inputs": [

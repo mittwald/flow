@@ -1,4 +1,4 @@
-name: Publish review Storybook to GitHub Pages
+name: Publish preview Storybook to GitHub Pages
 
 on:
   push:
