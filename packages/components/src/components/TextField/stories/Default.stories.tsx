@@ -82,3 +82,12 @@ export const WithForm: Story = {
     </Form>
   ),
 };
+
+export const ShowCharacterCount: Story = {
+  args: { showCharacterCount: true, maxLength: 10 },
+  render: (props) => (
+    <TextField onChange={action("onChange")} {...props}>
+      <Label>User name</Label>
+    </TextField>
+  ),
+};
