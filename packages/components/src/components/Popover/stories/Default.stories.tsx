@@ -1,19 +1,19 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Popover from "../Popover";
 import React from "react";
-import * as Aria from "react-aria-components";
 import Button from "@/components/Button";
+import { PopoverTrigger } from "@/components/Popover";
 
 const meta: Meta<typeof Popover> = {
   title: "Overlays/Popover",
   component: Popover,
   render: (props) => (
-    <Aria.DialogTrigger>
+    <PopoverTrigger>
       <Button>Trigger popover</Button>
       <Popover {...props} placement="bottom right">
         I am a popover.
       </Popover>
-    </Aria.DialogTrigger>
+    </PopoverTrigger>
   ),
 };
 export default meta;

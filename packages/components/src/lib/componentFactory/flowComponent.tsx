@@ -8,12 +8,15 @@ import type {
   ForwardRefExoticComponent,
   LegacyRef,
   PropsWithoutRef,
+  ReactNode,
   RefAttributes,
 } from "react";
-import React, { forwardRef } from "react";
+import React, { forwardRef, useCallback } from "react";
 import type { PropsWithRender, PropsWithTunnel } from "@/lib/types/props";
 import { ClearPropsContext, useProps } from "@/lib/propsContext";
 import { TunnelEntry } from "@mittwald/react-tunnel";
+import { ComponentRenderContextProvider } from "@/lib/propsContext/render/ComponentRenderContextProvider";
+import { useComponentRenderFn } from "@/lib/propsContext/render/useComponentRenderFn";
 
 export type FlowComponentProps<C extends FlowComponentName = never> =
   PropsWithTunnel & PropsWithRender<FlowComponentPropsOfName<C>>;
@@ -38,12 +41,20 @@ export function flowComponent<C extends FlowComponentName>(
   ImplementationComponentType: FlowComponentImplementationType<C>,
 ): FlowComponentType<C> {
   return forwardRef<never, FlowComponentPropsOfName<C>>((props, ref) => {
-    const { render, tunnelId, ...propsFromContext } = useProps(
-      componentName,
-      props,
-    ) as FlowComponentProps<C>;
+    const {
+      render: ignoredRender,
+      tunnelId,
+      ...propsWithContext
+    } = useProps(componentName, props) as FlowComponentProps<C>;
 
-    const implementationTypeProps = propsFromContext as ComponentProps<
+    const [renderFn, renderContext] = useComponentRenderFn(componentName);
+
+    const FlowRenderComponent = useCallback(
+      flowComponent(componentName, ImplementationComponentType),
+      [componentName, ImplementationComponentType],
+    );
+
+    const implementationTypeProps = propsWithContext as ComponentProps<
       typeof ImplementationComponentType
     >;
 
@@ -52,20 +63,14 @@ export function flowComponent<C extends FlowComponentName>(
       ...implementationTypeProps,
     };
 
-    let element = <ImplementationComponentType {...propsWithRef} />;
+    let element: ReactNode = <ImplementationComponentType {...propsWithRef} />;
 
-    if (render) {
-      const FlowComponent = flowComponent(
-        componentName,
-        ImplementationComponentType,
-      );
-
+    if (renderFn) {
       element = (
         <ClearPropsContext>
-          {render(
-            FlowComponent as unknown as never,
-            propsWithRef as unknown as never,
-          )}
+          <ComponentRenderContextProvider value={renderContext}>
+            {renderFn(FlowRenderComponent as never, propsWithRef as never)}
+          </ComponentRenderContextProvider>
         </ClearPropsContext>
       );
     }

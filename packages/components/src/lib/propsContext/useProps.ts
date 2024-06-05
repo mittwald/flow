@@ -14,7 +14,9 @@ export const useProps = <C extends FlowComponentName>(
   component: C,
   localProps: FlowComponentProps<C>,
 ): FlowComponentProps<C> => {
-  const contextProps = useContextProps()[component] as FlowComponentProps<C> &
+  const propsContext = useContextProps();
+
+  const contextProps = propsContext[component] as FlowComponentProps<C> &
     PropsContext;
 
   const resolvedDynamicProps = contextProps

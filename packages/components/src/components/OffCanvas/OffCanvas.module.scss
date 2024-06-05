@@ -32,10 +32,17 @@
       overflow-y: auto;
     }
 
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      column-gap: var(--off-canvas--heading-to-close-button-spacing);
+      margin-bottom: var(--off-canvas--header-to-content-spacing);
+    }
+
     .closeButton {
-      margin-top: calc(var(--size-px--m) * -1);
-      margin-right: calc(var(--size-px--m) * -1);
-      align-self: end;
+      align-self: start;
+      margin-inline-start: auto;
     }
   }
 }

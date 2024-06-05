@@ -12,7 +12,7 @@ import {
 } from "@/integrations/react-hook-form";
 import { Button } from "@/components/Button";
 import { Section } from "@/components/Section";
-import { ButtonGroup } from "@/components/ButtonGroup";
+import { ActionGroup } from "@/components/ActionGroup";
 import { FieldDescription } from "@/components/FieldDescription";
 import { NumberField } from "@/components/NumberField";
 import { Radio, RadioGroup } from "@/components/RadioGroup";
@@ -147,9 +147,9 @@ const meta: Meta<typeof Controller> = {
             </Autocomplete>
           </TController>
 
-          <ButtonGroup>
+          <ActionGroup>
             <Button type="submit">Submit</Button>
-          </ButtonGroup>
+          </ActionGroup>
         </Section>
       </Form>
     );
