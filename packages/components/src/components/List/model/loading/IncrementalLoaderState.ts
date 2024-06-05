@@ -1,7 +1,7 @@
 import type { AsyncResource } from "@mittwald/react-use-promise";
 import { action, computed, makeObservable, observable } from "mobx";
 import useSelector from "@/lib/mobx/useSelector";
-import { useState } from "react";
+import { useRef } from "react";
 
 type AsyncResourceLoadingState = AsyncResource["state"]["value"];
 type DataBatches<T> = T[][];
@@ -10,12 +10,12 @@ type BatchesLoadingState = AsyncResourceLoadingState[];
 export class IncrementalLoaderState<T> {
   public dataBatches: DataBatches<T> = [];
   public prevDataBatches: DataBatches<T> = [];
-  public batchLoadingStates: BatchesLoadingState = [];
+  public batchLoadingStates: BatchesLoadingState = ["void"];
 
   private constructor() {
     makeObservable(this, {
-      dataBatches: observable,
-      batchLoadingStates: observable,
+      dataBatches: observable.shallow,
+      batchLoadingStates: observable.shallow,
       mergedData: computed,
       isLoading: computed,
       reset: action.bound,
@@ -25,7 +25,7 @@ export class IncrementalLoaderState<T> {
   }
 
   public static useNew<T>(): IncrementalLoaderState<T> {
-    return useState(new IncrementalLoaderState<T>())[0];
+    return useRef(new IncrementalLoaderState<T>()).current;
   }
 
   public reset(): void {
@@ -65,7 +65,7 @@ export class IncrementalLoaderState<T> {
   }
 
   public get isLoading(): boolean {
-    return this.batchLoadingStates.some((s) => s === "loading");
+    return this.batchLoadingStates.some((s) => s === "loading" || s === "void");
   }
 
   public useIsLoading(): boolean {

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import { OffCanvas } from "@/components/OffCanvas";
+import { OffCanvas, OffCanvasTrigger } from "@/components/OffCanvas";
 import { Button } from "@/components/Button";
 import {
   IconCustomer,
@@ -12,7 +12,7 @@ import { Link } from "@/components/Link";
 import { Text } from "@/components/Text";
 import { Navigation } from "@/components/Navigation";
 import { Action } from "@/components/Action";
-import { OverlayTrigger } from "@/components/Overlay";
+import { Heading } from "@/components/Heading";
 
 const meta: Meta<typeof OffCanvas> = {
   title: "Overlays/OffCanvas",
@@ -23,33 +23,30 @@ const meta: Meta<typeof OffCanvas> = {
 
   render: (props) => {
     return (
-      <OverlayTrigger>
+      <OffCanvasTrigger>
         <Button>
           <IconMenu />
         </Button>
         <OffCanvas {...props}>
-          <Navigation aria-label="Main menu">
-            <Action closeOverlay>
+          <Heading>Menu</Heading>
+          <Action closeOverlay>
+            <Navigation aria-label="Main menu">
               <Link>
                 <IconCustomer />
                 <Text>Customer</Text>
               </Link>
-            </Action>
-            <Action closeOverlay>
               <Link aria-current="page">
                 <IconServer />
                 <Text>Server</Text>
               </Link>
-            </Action>
-            <Action closeOverlay>
               <Link>
                 <IconProject />
                 <Text>Project</Text>
               </Link>
-            </Action>
-          </Navigation>
+            </Navigation>
+          </Action>
         </OffCanvas>
-      </OverlayTrigger>
+      </OffCanvasTrigger>
     );
   },
 };

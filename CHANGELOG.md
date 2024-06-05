@@ -3,6 +3,155 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.132](https://github.com/mittwald/flow/compare/0.1.0-alpha.131...0.1.0-alpha.132) (2024-06-04)
+
+### Bug Fixes
+
+- **Docs:** fix ActionGroup examples
+  ([7e67e6c](https://github.com/mittwald/flow/commit/7e67e6c5d441fb40b6a8b2280f4eaff29d441425))
+- **Navigation:** fix broken link rendering
+  ([e735786](https://github.com/mittwald/flow/commit/e735786a62cf63b41c4669ab68d0f4d89aba9877))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.131](https://github.com/mittwald/flow/compare/0.1.0-alpha.130...0.1.0-alpha.131) (2024-06-04)
+
+### Bug Fixes
+
+- **Action:** fix state context should not be global
+  ([07fbe7d](https://github.com/mittwald/flow/commit/07fbe7dfc48392bc65426060352fcec7a17a310d))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.130](https://github.com/mittwald/flow/compare/0.1.0-alpha.129...0.1.0-alpha.130) (2024-05-27)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.129](https://github.com/mittwald/flow/compare/0.1.0-alpha.128...0.1.0-alpha.129) (2024-05-27)
+
+### Features
+
+- **Action:** wait for Action feedback when closing Modals
+  ([1474cf1](https://github.com/mittwald/flow/commit/1474cf1b96efa43e9302218053ba483e13c9767e))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.128](https://github.com/mittwald/flow/compare/0.1.0-alpha.127...0.1.0-alpha.128) (2024-05-27)
+
+### Bug Fixes
+
+- merge props in overlay trigger
+  ([a011f26](https://github.com/mittwald/flow/commit/a011f262e5ad4bd94c5a8832ba600a1f3bcb8cee))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.127](https://github.com/mittwald/flow/compare/0.1.0-alpha.126...0.1.0-alpha.127) (2024-05-23)
+
+### Features
+
+- **CounterBadge:** add CounterBadge
+  ([#459](https://github.com/mittwald/flow/issues/459))
+  ([743b980](https://github.com/mittwald/flow/commit/743b98060d81fd1689dc51c3e78198ff2f6ca6c0))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.126](https://github.com/mittwald/flow/compare/0.1.0-alpha.125...0.1.0-alpha.126) (2024-05-23)
+
+### Features
+
+- **Table:** add table component
+  ([2410168](https://github.com/mittwald/flow/commit/24101685f5ae9a6c3f6ba1d9f18ed72be1725b75))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.125](https://github.com/mittwald/flow/compare/0.1.0-alpha.124...0.1.0-alpha.125) (2024-05-23)
+
+### Features
+
+- **Action:** keep check icon when closing ConfirmationModal
+  ([3ee2084](https://github.com/mittwald/flow/commit/3ee2084536d8fcfcfad3d47f70575345de58c3e1))
+- **Docs:** auto-close mobile navigation
+  ([bd38876](https://github.com/mittwald/flow/commit/bd388767cf668f6068d9e5b3218a82f87466df47))
+- **OffCanvas:** add heading to off canvas
+  ([380c892](https://github.com/mittwald/flow/commit/380c8925f4c2436819a53a48fd67bd61875991d6))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.124](https://github.com/mittwald/flow/compare/0.1.0-alpha.123...0.1.0-alpha.124) (2024-05-22)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.123](https://github.com/mittwald/flow/compare/0.1.0-alpha.122...0.1.0-alpha.123) (2024-05-22)
+
+### Bug Fixes
+
+- fix ref is passed to DOM element
+  ([e83d920](https://github.com/mittwald/flow/commit/e83d920ce5a17ae209772f5ea767471590853665))
+- **List:** fix linked list items
+  ([0c7521f](https://github.com/mittwald/flow/commit/0c7521fd68da648b7fc16736ed2a884381bd2c13))
+- **List:** fix list is always empty for static data
+  ([350b0b1](https://github.com/mittwald/flow/commit/350b0b193dd0692459684ac8bd53fc7b5e06e091))
+
+### Features
+
+- **List:** show Skeleton in footer component
+  ([30d12fd](https://github.com/mittwald/flow/commit/30d12fd18cf38d55bfc69956ae05f38860d35f24))
+- **Popover:** add border and tip to Popover
+  ([ef34646](https://github.com/mittwald/flow/commit/ef3464650d5311aafd3158c06718f549ada7fcc1))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.122](https://github.com/mittwald/flow/compare/0.1.0-alpha.121...0.1.0-alpha.122) (2024-05-17)
+
+### Bug Fixes
+
+- **List:** fix initially showing "list empty" message
+  ([ae4e8a6](https://github.com/mittwald/flow/commit/ae4e8a6e9343f176fab67996265ae4346562dd71))
+
+### Features
+
+- **List:** show Skeleton items on initial load
+  ([45d26d4](https://github.com/mittwald/flow/commit/45d26d4813c0b75b0fc306ae62736705755b4733))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.121](https://github.com/mittwald/flow/compare/0.1.0-alpha.120...0.1.0-alpha.121) (2024-05-16)
 
 ### Bug Fixes

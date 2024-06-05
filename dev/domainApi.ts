@@ -7,7 +7,7 @@ export interface Domain {
 }
 
 const apiSleep = (): Promise<void> =>
-  new Promise((res) => window.setTimeout(res, 500));
+  new Promise((res) => window.setTimeout(res, 750));
 
 export const getTypes = async () => {
   await apiSleep();

@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import ContextMenu, {
-  MenuItem,
   ContextMenuTrigger,
+  MenuItem,
 } from "@/components/ContextMenu";
 import { Button } from "@/components/Button";
 import { Separator } from "@/components/Separator";

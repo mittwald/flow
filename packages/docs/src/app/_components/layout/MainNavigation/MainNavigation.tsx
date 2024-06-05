@@ -14,6 +14,8 @@ import { usePathname } from "next/navigation";
 import { Link } from "@mittwald/flow-react-components/Link";
 import { Label } from "@mittwald/flow-react-components/Label";
 import { Section } from "@mittwald/flow-react-components/Section";
+import { useOverlayController } from "@mittwald/flow-react-components/controller";
+import { useOnChange } from "@mittwald/flow-react-components/hooks";
 
 interface Props {
   docs: SerializedMdxFile[];
@@ -31,6 +33,12 @@ interface NavigationLinkProps {
 const NavigationLink: FC<NavigationLinkProps> = (props) => {
   const { treeItem } = props;
   const currentPathname = usePathname();
+
+  const overlay = useOverlayController();
+
+  useOnChange(currentPathname, () => {
+    overlay.close();
+  }, [overlay]);
 
   return (
     <Link

@@ -10,16 +10,18 @@ export const ShowNextBatchButton: FC<ButtonProps> = (props) => {
   const stringFormatter = useLocalizedStringFormatter(locales);
   const list = useList();
   const isLoading = list.loader.useIsLoading();
+  const isInitiallyLoading = list.loader.useIsInitiallyLoading();
   const pagination = list.batches;
   const canLoadMore = pagination.hasNextBatch();
 
-  if (!canLoadMore) {
+  if (!canLoadMore && !isLoading) {
     return null;
   }
 
   return (
     <Button
-      isPending={isLoading}
+      isPending={isLoading && !isInitiallyLoading}
+      isDisabled={isInitiallyLoading}
       {...props}
       onPress={() => list.batches.nextBatch()}
       variant="plain"

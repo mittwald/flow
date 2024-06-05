@@ -6,13 +6,13 @@ import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
 import { ContextMenu, MenuItem } from "@/components/ContextMenu";
 import defaultMeta from "./Default.stories";
-import { Item } from "@/components/List/components/Items/Item";
 import { Avatar } from "@/components/Avatar";
 import { dummyText } from "@/lib/dev/dummyText";
 import Image from "@/components/Image";
 import { Content } from "@/components/Content";
 import { Button } from "@/components/Button";
 import { IconCheck } from "@/components/Icon/components/icons";
+import { ListItem } from "@/components/List";
 
 const ContentPlaceholder: FC<PropsWithChildren> = (props) => (
   <div
@@ -37,7 +37,7 @@ const meta: Meta<typeof List> = {
   title: "Structure/List/ListItem",
   render: () => (
     <div style={{ containerType: "inline-size" }}>
-      <Item>
+      <ListItem>
         <Avatar>
           <Image alt="John Doe" src={dummyText.imageSrc} />
         </Avatar>
@@ -46,7 +46,7 @@ const meta: Meta<typeof List> = {
         <ContextMenu>
           <MenuItem>Show details</MenuItem>
         </ContextMenu>
-      </Item>
+      </ListItem>
     </div>
   ),
 };
@@ -60,7 +60,7 @@ export const Default: Story = {};
 export const WithTopContent: Story = {
   render: () => (
     <div style={{ containerType: "inline-size" }}>
-      <Item>
+      <ListItem>
         <Avatar>
           <Image alt="John Doe" src={dummyText.imageSrc} />
         </Avatar>
@@ -72,7 +72,7 @@ export const WithTopContent: Story = {
         <ContextMenu>
           <MenuItem>Show details</MenuItem>
         </ContextMenu>
-      </Item>
+      </ListItem>
     </div>
   ),
 };
@@ -80,7 +80,7 @@ export const WithTopContent: Story = {
 export const WithContent: Story = {
   render: () => (
     <div style={{ containerType: "inline-size" }}>
-      <Item>
+      <ListItem>
         <Avatar>
           <Image alt="John Doe" src={dummyText.imageSrc} />
         </Avatar>
@@ -95,7 +95,30 @@ export const WithContent: Story = {
         <ContextMenu>
           <MenuItem>Show details</MenuItem>
         </ContextMenu>
-      </Item>
+      </ListItem>
+    </div>
+  ),
+};
+
+export const WithLink: Story = {
+  render: () => (
+    <div style={{ containerType: "inline-size" }}>
+      <ListItem href="#">
+        <Avatar>
+          <Image alt="John Doe" src={dummyText.imageSrc} />
+        </Avatar>
+        <Heading>John Doe</Heading>
+        <Text>Mittwald</Text>
+        <Content slot="top">
+          <ContentPlaceholder>Top content</ContentPlaceholder>
+        </Content>
+        <Content slot="bottom">
+          <ContentPlaceholder>Bottom content</ContentPlaceholder>
+        </Content>
+        <ContextMenu>
+          <MenuItem>Show details</MenuItem>
+        </ContextMenu>
+      </ListItem>
     </div>
   ),
 };
@@ -103,7 +126,7 @@ export const WithContent: Story = {
 export const WithButton: Story = {
   render: () => (
     <div style={{ containerType: "inline-size" }}>
-      <Item>
+      <ListItem>
         <Avatar>
           <Image alt="John Doe" src={dummyText.imageSrc} />
         </Avatar>
@@ -112,7 +135,7 @@ export const WithButton: Story = {
         <Button variant="soft">
           <IconCheck />
         </Button>
-      </Item>
+      </ListItem>
     </div>
   ),
 };
@@ -120,7 +143,7 @@ export const WithButton: Story = {
 export const SmallSpace: Story = {
   render: () => (
     <div style={{ containerType: "inline-size" }}>
-      <Item>
+      <ListItem>
         <Avatar>
           <Image alt="John Doe" src={dummyText.imageSrc} />
         </Avatar>
@@ -135,7 +158,7 @@ export const SmallSpace: Story = {
         <ContextMenu>
           <MenuItem>Show details</MenuItem>
         </ContextMenu>
-      </Item>
+      </ListItem>
     </div>
   ),
   parameters: { viewport: { defaultViewport: "mobile1" } },

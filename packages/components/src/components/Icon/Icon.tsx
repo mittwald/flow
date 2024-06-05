@@ -22,6 +22,7 @@ export const Icon = flowComponent("Icon", (props) => {
     "aria-label": ariaLabel,
     children,
     size = "m",
+    refProp: ignoredRef,
     ...svgAttributes
   } = props;
 
@@ -36,6 +37,7 @@ export const Icon = flowComponent("Icon", (props) => {
 
   const isCustomSvgString = typeof children === "string";
 
+  // @warning: extractSvgFromString might be a performance-killer
   const iconElement = useMemo(
     () => (isCustomSvgString ? extractSvgFromString(children) : children),
     [isCustomSvgString, children],

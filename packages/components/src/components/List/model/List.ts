@@ -60,6 +60,10 @@ export class List<T> {
   public clearFilters(): void {
     return this.filters.forEach((f) => f.clearValues());
   }
+
+  public useIsEmpty(): boolean {
+    return !this.loader.useIsLoading() && this.items.entries.length === 0;
+  }
 }
 
 export default List;

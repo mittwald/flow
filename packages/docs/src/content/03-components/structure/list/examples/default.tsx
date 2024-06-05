@@ -1,5 +1,6 @@
 import List, {
   ListFilter,
+  ListItem,
   ListItemView,
   ListSorting,
   ListStaticData,
@@ -30,7 +31,7 @@ import MenuItem from "@mittwald/flow-react-components/MenuItem";
   <ListSorting<Domain> property="type" name="Type" />
   <ListItemView<Domain>>
     {(domain) => (
-      <>
+      <ListItem>
         <Avatar variant={domain.type === "Domain" ? 1 : 2}>
           {domain.type === "Domain" ? (
             <IconDomain />
@@ -50,7 +51,7 @@ import MenuItem from "@mittwald/flow-react-components/MenuItem";
           <MenuItem>Details anzeigen</MenuItem>
           <MenuItem>Löschen</MenuItem>
         </ContextMenu>
-      </>
+      </ListItem>
     )}
   </ListItemView>
 </List>;

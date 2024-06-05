@@ -19,7 +19,7 @@ export interface AvatarProps
 }
 
 export const Avatar = flowComponent("Avatar", (props) => {
-  const { children, className, variant, size = "m" } = props;
+  const { children, className, variant, size = "m", refProp: ref } = props;
 
   const rootClassName = clsx(
     styles.avatar,
@@ -39,7 +39,7 @@ export const Avatar = flowComponent("Avatar", (props) => {
 
   return (
     <ClearPropsContext>
-      <div className={rootClassName}>
+      <div className={rootClassName} ref={ref}>
         <PropsContextProvider props={propsContext}>
           {children}
         </PropsContextProvider>
