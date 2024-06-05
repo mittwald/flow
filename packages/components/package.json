@@ -18,6 +18,10 @@
       "types": "./dist/types/components/ActionGroup/index.d.ts",
       "import": "./dist/ActionGroup.js"
     },
+    "./Autocomplete": {
+      "types": "./dist/types/components/Autocomplete/index.d.ts",
+      "import": "./dist/Autocomplete.js"
+    },
     "./Avatar": {
       "types": "./dist/types/components/Avatar/index.d.ts",
       "import": "./dist/Avatar.js"
@@ -53,10 +57,6 @@
     "./CounterBadge": {
       "types": "./dist/types/components/CounterBadge/index.d.ts",
       "import": "./dist/CounterBadge.js"
-    },
-    "./IllustratedMessage": {
-      "types": "./dist/types/components/IllustratedMessage/index.d.ts",
-      "import": "./dist/IllustratedMessage.js"
     },
     "./ContextMenu": {
       "types": "./dist/types/components/ContextMenu/index.d.ts",
@@ -97,6 +97,10 @@
     "./Icons": {
       "types": "./dist/types/components/Icon/components/icons/index.d.ts",
       "import": "./dist/Icons.js"
+    },
+    "./IllustratedMessage": {
+      "types": "./dist/types/components/IllustratedMessage/index.d.ts",
+      "import": "./dist/IllustratedMessage.js"
     },
     "./Image": {
       "types": "./dist/types/components/Image/index.d.ts",

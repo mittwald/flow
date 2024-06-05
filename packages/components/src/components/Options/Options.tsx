@@ -3,8 +3,8 @@ import React from "react";
 import * as Aria from "react-aria-components";
 import { Popover } from "@/components/Popover";
 import clsx from "clsx";
-import type { OptionProps } from "@/components/Select";
 import styles from "./Options.module.scss";
+import type { OptionProps } from "@/components/Options/components/Option";
 
 export type OptionsProps = Aria.ListBoxProps<OptionProps>;
 
