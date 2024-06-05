@@ -1,22 +1,20 @@
 import type { FlowRenderFn } from "@/lib/types/props";
 import type { LinkProps } from "@/components/Link";
-import { useActionContext } from "@/components/Action/context";
-import { useActionController } from "@/components/Action/lib/execution/useActionController";
 import React from "react";
+import { ActionModel } from "@/components/Action/models/ActionModel";
 
 export const ActionLink: FlowRenderFn<LinkProps> = (Link, renderProps) => {
-  const { needsConfirmation } = useActionContext();
-  const actionController = useActionController();
-  const state = actionController.state.useState();
+  const context = ActionModel.use();
+  const state = context.state.useValue();
 
-  if (needsConfirmation) {
-    return <Link {...renderProps} onPress={actionController.execute} />;
+  if (context.needsConfirmation) {
+    return <Link {...renderProps} onPress={context.execute} />;
   }
 
   return (
     <Link
       {...renderProps}
-      onPress={actionController.execute}
+      onPress={context.execute}
       aria-disabled={state !== "isIdle"}
     />
   );

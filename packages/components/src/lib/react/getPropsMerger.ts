@@ -1,7 +1,6 @@
 import { mergeProps as ariaMergeProps } from "@react-aria/utils";
 import { isObjectType } from "remeda";
 import { setProperty } from "dot-prop";
-import type { FlowRenderFn } from "@/lib/types/props";
 
 interface MergePropsOptions {
   mergeClassNames?: boolean;
@@ -25,30 +24,6 @@ export const getPropsMerger =
           ) {
             mergedProps.className = props.className;
           }
-        }
-
-        if ("render" in mergedProps) {
-          let mergedRender: FlowRenderFn<never> | undefined = undefined;
-
-          for (const props of propsList) {
-            if (isObjectType(props) && "render" in props) {
-              if (!mergedRender) {
-                mergedRender = props.render;
-                continue;
-              }
-
-              const prevRender = mergedRender;
-              const currentRender = props.render;
-
-              mergedRender = (Component, renderProps) =>
-                currentRender(
-                  (p: never) => prevRender(Component, p),
-                  renderProps,
-                );
-            }
-          }
-
-          mergedProps.render = mergedRender;
         }
       }
 

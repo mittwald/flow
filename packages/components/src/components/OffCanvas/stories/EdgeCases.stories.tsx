@@ -2,8 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import defaultMeta from "./Default.stories";
 import React from "react";
 import { dummyText } from "@/lib/dev/dummyText";
-import { OffCanvas } from "@/components/OffCanvas";
-import { OverlayTrigger } from "@/components/Overlay";
+import { OffCanvas, OffCanvasTrigger } from "@/components/OffCanvas";
 import { Button } from "@/components/Button";
 import { IconMenu } from "@/components/Icon/components/icons";
 import { Heading } from "@/components/Heading";
@@ -21,7 +20,7 @@ type Story = StoryObj<typeof OffCanvas>;
 export const LongTexts: Story = {
   render: (props) => {
     return (
-      <OverlayTrigger>
+      <OffCanvasTrigger>
         <Button>
           <IconMenu />
         </Button>
@@ -35,7 +34,7 @@ export const LongTexts: Story = {
           <Section>{dummyText.long}</Section>
           <Section>{dummyText.long}</Section>
         </OffCanvas>
-      </OverlayTrigger>
+      </OffCanvasTrigger>
     );
   },
 };

@@ -1,0 +1,27 @@
+.counterBadge {
+  font-size: var(--counter-badge--font-size);
+  font-weight: var(--counter-badge--font-weight);
+  line-height: 1;
+  color: var(--counter-badge--color);
+  background-color: var(--counter-badge--background-color);
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--counter-badge--height);
+  border-radius: calc(var(--counter-badge--height) / 2);
+  border-width: var(--counter-badge--border-width);
+  border-style: var(--counter-badge--border-style);
+  border-color: var(--counter-badge--border-color);
+  padding-inline: var(--counter-badge--padding-inline);
+
+  &:not(:empty) {
+    min-width: var(--counter-badge--height);
+  }
+
+  &:empty {
+    padding: 0;
+    height: var(--counter-badge--height-empty);
+    width: var(--counter-badge--height-empty);
+  }
+}

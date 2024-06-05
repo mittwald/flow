@@ -16,6 +16,7 @@ import { useAriaAnnounceActionState } from "@/components/Action/lib/ariaLive";
 export interface ButtonProps
   extends PropsWithChildren<Aria.ButtonProps>,
     FlowComponentProps<"Button"> {
+  slot?: string;
   /** @default "primary" */
   color?: "primary" | "accent" | "secondary" | "danger" | "dark" | "light";
   /** @default "solid" */
@@ -28,7 +29,6 @@ export interface ButtonProps
   isPending?: boolean;
   isSucceeded?: boolean;
   isFailed?: boolean;
-
   /** @internal */
   unstyled?: boolean;
 }
@@ -111,8 +111,8 @@ export const Button = flowComponent("Button", (props) => {
     Avatar: {
       className: styles.avatar,
     },
-    CounterLabel: {
-      className: styles.counterLabel,
+    CounterBadge: {
+      className: styles.counterBadge,
     },
   };
 

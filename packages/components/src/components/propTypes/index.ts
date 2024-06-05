@@ -15,7 +15,7 @@ import type { CopyButtonProps } from "@/components/CopyButton";
 import type { HeaderProps } from "@/components/Header/";
 import type { SwitchProps } from "@/components/Switch";
 import type { StatusBadgeProps } from "@/components/StatusBadge";
-import type { ButtonGroupProps } from "@/components/ButtonGroup";
+import type { ActionGroupProps } from "@/components/ActionGroup";
 import type { AvatarProps } from "@/components/Avatar";
 import type { ActionProps } from "@/components/Action";
 import type { ContextMenuProps, MenuItemProps } from "@/components/ContextMenu";
@@ -36,21 +36,22 @@ import type { ModalProps } from "@/components/Modal";
 import type { SectionProps } from "@/components/Section";
 import type { CounterLabelProps } from "@/components/CounterLabel";
 import type { SliderProps } from "@/components/Slider";
+import type { CounterBadgeProps } from "@/components/CounterBadge";
 
 export * from "./types";
 
 export interface FlowComponentPropsTypes {
   Action: ActionProps;
+  ActionGroup: ActionGroupProps;
   Avatar: AvatarProps;
   Button: ButtonProps;
-  ButtonGroup: ButtonGroupProps;
   Checkbox: CheckboxProps;
   CheckboxButton: CheckboxButtonProps;
   CheckboxGroup: CheckboxGroupProps;
   Content: ContentProps;
   ContextMenu: ContextMenuProps;
   CopyButton: CopyButtonProps;
-  CounterLabel: CounterLabelProps;
+  CounterBadge: CounterBadgeProps;
   FieldDescription: FieldDescriptionProps;
   FieldError: FieldErrorProps;
   Header: HeaderProps;
@@ -85,16 +86,16 @@ const propsContextSupportingComponentsMap: Record<
   true
 > = {
   Action: true,
+  ActionGroup: true,
   Avatar: true,
   Button: true,
-  ButtonGroup: true,
   Checkbox: true,
   CheckboxButton: true,
   CheckboxGroup: true,
   Content: true,
   ContextMenu: true,
   CopyButton: true,
-  CounterLabel: true,
+  CounterBadge: true,
   FieldDescription: true,
   FieldError: true,
   Header: true,

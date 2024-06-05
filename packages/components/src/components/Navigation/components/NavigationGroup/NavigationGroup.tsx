@@ -57,8 +57,11 @@ export const NavigationGroup: FC<NavigationGroupProps> = (props) => {
           {...rest}
         >
           <PropsContextProvider mergeInParentContext props={propsContext}>
+            {children}
             <TunnelExit id="Label" />
-            <ul>{children}</ul>
+            <ul>
+              <TunnelExit id="links" />
+            </ul>
           </PropsContextProvider>
         </section>
       </TunnelProvider>

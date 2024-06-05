@@ -3,11 +3,68 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.132](https://github.com/mittwald/flow/compare/0.1.0-alpha.131...0.1.0-alpha.132) (2024-06-04)
+
+### Bug Fixes
+
+- **Navigation:** fix broken link rendering
+  ([e735786](https://github.com/mittwald/flow/commit/e735786a62cf63b41c4669ab68d0f4d89aba9877))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.131](https://github.com/mittwald/flow/compare/0.1.0-alpha.130...0.1.0-alpha.131) (2024-06-04)
+
+### Bug Fixes
+
+- **Action:** fix state context should not be global
+  ([07fbe7d](https://github.com/mittwald/flow/commit/07fbe7dfc48392bc65426060352fcec7a17a310d))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.130](https://github.com/mittwald/flow/compare/0.1.0-alpha.129...0.1.0-alpha.130) (2024-05-27)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.129](https://github.com/mittwald/flow/compare/0.1.0-alpha.128...0.1.0-alpha.129) (2024-05-27)
+
+### Features
+
+- **Action:** wait for Action feedback when closing Modals
+  ([1474cf1](https://github.com/mittwald/flow/commit/1474cf1b96efa43e9302218053ba483e13c9767e))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.128](https://github.com/mittwald/flow/compare/0.1.0-alpha.127...0.1.0-alpha.128) (2024-05-27)
+
+### Bug Fixes
+
+- merge props in overlay trigger
+  ([a011f26](https://github.com/mittwald/flow/commit/a011f262e5ad4bd94c5a8832ba600a1f3bcb8cee))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.127](https://github.com/mittwald/flow/compare/0.1.0-alpha.126...0.1.0-alpha.127) (2024-05-23)
 
 ### Features
 
-- **CounterLabel:** add CounterLabel
+- **CounterBadge:** add CounterBadge
   ([#459](https://github.com/mittwald/flow/issues/459))
   ([743b980](https://github.com/mittwald/flow/commit/743b98060d81fd1689dc51c3e78198ff2f6ca6c0))
 

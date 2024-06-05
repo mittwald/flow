@@ -7,7 +7,7 @@ import {
   syncFunction,
 } from "@/components/Button/stories/lib";
 import { Modal } from "@/components/Modal";
-import { ButtonGroup } from "@/components/ButtonGroup";
+import { ActionGroup } from "@/components/ActionGroup";
 import { Button } from "@/components/Button";
 import { Heading } from "@/components/Heading";
 import { Content } from "@/components/Content";
@@ -16,20 +16,22 @@ import { Action } from "@/components/Action";
 const meta: Meta<typeof Action> = {
   title: "Actions/Action",
   component: Action,
-  render: (props) => <Action {...props} />,
-  args: {
-    action: syncFunction,
-    children: button,
-  },
+  render: (props) => (
+    <Action {...props}>
+      <Button>Button</Button>
+    </Action>
+  ),
   parameters: {
     controls: {
       exclude: [
         "children",
         "action",
-        "closeModal",
-        "openModal",
-        "toggleModal",
-        "feedback",
+        "closeOverlay",
+        "openOverlay",
+        "toggleOverlay",
+        "showFeedback",
+        "break",
+        "skip",
       ],
     },
   },
@@ -86,12 +88,12 @@ export const WithConfirmationModal: Story = {
       <Modal slot="actionConfirm">
         <Heading>Delete customer</Heading>
         <Content>Do you really want to delete the customer?</Content>
-        <ButtonGroup>
-          <Button color="danger">Delete customer</Button>
+        <ActionGroup>
+          <Button color="danger">Confirm</Button>
           <Button color="secondary" variant="soft">
             Abort
           </Button>
-        </ButtonGroup>
+        </ActionGroup>
       </Modal>
       <Button color="secondary" variant="soft">
         Delete customer

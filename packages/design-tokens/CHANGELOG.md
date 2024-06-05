@@ -3,11 +3,56 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.132](https://github.com/mittwald/flow/compare/0.1.0-alpha.131...0.1.0-alpha.132) (2024-06-04)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.131](https://github.com/mittwald/flow/compare/0.1.0-alpha.130...0.1.0-alpha.131) (2024-06-04)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.130](https://github.com/mittwald/flow/compare/0.1.0-alpha.129...0.1.0-alpha.130) (2024-05-27)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.129](https://github.com/mittwald/flow/compare/0.1.0-alpha.128...0.1.0-alpha.129) (2024-05-27)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.128](https://github.com/mittwald/flow/compare/0.1.0-alpha.127...0.1.0-alpha.128) (2024-05-27)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.127](https://github.com/mittwald/flow/compare/0.1.0-alpha.126...0.1.0-alpha.127) (2024-05-23)
 
 ### Features
 
-- **CounterLabel:** add CounterLabel
+- **CounterBadge:** add CounterBadge
   ([#459](https://github.com/mittwald/flow/issues/459))
   ([743b980](https://github.com/mittwald/flow/commit/743b98060d81fd1689dc51c3e78198ff2f6ca6c0))
 

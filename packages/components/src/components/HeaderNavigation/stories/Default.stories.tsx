@@ -22,6 +22,8 @@ import {
   storyBackgroundDark,
   storyBackgroundLight,
 } from "@/lib/dev/storyBackgrounds";
+import { Modal, ModalTrigger } from "@/components/Modal";
+import { Heading } from "@/components/Heading";
 
 const meta: Meta<typeof HeaderNavigation> = {
   title: "Navigation/HeaderNavigation",
@@ -63,9 +65,14 @@ export const WithContextMenu: Story = {
       <Button>
         <IconSupport />
       </Button>
-      <Button>
-        <IconNotification />
-      </Button>
+      <ModalTrigger>
+        <Button>
+          <IconNotification />
+        </Button>
+        <Modal>
+          <Heading>Notifications</Heading>
+        </Modal>
+      </ModalTrigger>
       <ContextMenuTrigger>
         <Button>
           <Avatar>
