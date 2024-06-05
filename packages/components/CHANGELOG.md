@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.133](https://github.com/mittwald/flow/compare/0.1.0-alpha.132...0.1.0-alpha.133) (2024-06-05)
+
+### Bug Fixes
+
+- **Select:** fix Select not opening on click
+  ([3906c76](https://github.com/mittwald/flow/commit/3906c764d5d2a637205e1a53f9c6859fab87da9f))
+
+### Features
+
+- **Slider:** add Slider component
+  ([4fd5087](https://github.com/mittwald/flow/commit/4fd50879327fa85a11170ea3319b0f895b090420))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.132](https://github.com/mittwald/flow/compare/0.1.0-alpha.131...0.1.0-alpha.132) (2024-06-04)
 
 ### Bug Fixes
