@@ -158,9 +158,9 @@
       "types": "./dist/types/components/Notification/index.d.ts",
       "import": "./dist/Notification.js"
     },
-    "./NotificationGroup": {
-      "types": "./dist/types/components/NotificationGroup/index.d.ts",
-      "import": "./dist/NotificationGroup.js"
+    "./NotificationProvider": {
+      "types": "./dist/types/components/NotificationProvider/index.d.ts",
+      "import": "./dist/NotificationProvider.js"
     },
     "./NumberField": {
       "types": "./dist/types/components/NumberField/index.d.ts",
