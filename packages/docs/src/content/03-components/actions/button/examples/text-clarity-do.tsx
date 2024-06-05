@@ -1,5 +1,5 @@
 import Heading from "@mittwald/flow-react-components/Heading";
-import ButtonGroup from "@mittwald/flow-react-components/ButtonGroup";
+import ActionGroup from "@mittwald/flow-react-components/ActionGroup";
 import Button from "@mittwald/flow-react-components/Button";
 import Text from "@mittwald/flow-react-components/Text";
 
@@ -14,10 +14,10 @@ import Text from "@mittwald/flow-react-components/Text";
       nicht gespeichert.
     </Text>
   </div>
-  <ButtonGroup className="flow--modal--button-group">
+  <ActionGroup className="flow--modal--action-group">
     <Button color="secondary" variant="soft">
       Bestellung fortsetzen
     </Button>
     <Button color="danger">Bestellung verlassen</Button>
-  </ButtonGroup>
+  </ActionGroup>
 </StaticModal>;

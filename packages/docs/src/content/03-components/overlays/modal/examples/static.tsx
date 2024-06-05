@@ -1,7 +1,7 @@
 import Text from "@mittwald/flow-react-components/Text";
 import TextField from "@mittwald/flow-react-components/TextField";
 import Label from "@mittwald/flow-react-components/Label";
-import ButtonGroup from "@mittwald/flow-react-components/ButtonGroup";
+import ActionGroup from "@mittwald/flow-react-components/ActionGroup";
 import Button from "@mittwald/flow-react-components/Button";
 import Heading from "@mittwald/flow-react-components/Heading";
 import Action from "@mittwald/flow-react-components/Action";
@@ -19,12 +19,12 @@ import Action from "@mittwald/flow-react-components/Action";
       <Label>Organisationsname</Label>
     </TextField>
   </div>
-  <ButtonGroup className="flow--modal--button-group">
+  <ActionGroup className="flow--modal--action-group">
     <Action closeOverlay>
       <Button color="accent">Organisation anlegen</Button>
       <Button variant="soft" color="secondary">
         Abbrechen
       </Button>
     </Action>
-  </ButtonGroup>
+  </ActionGroup>
 </StaticModal>;
