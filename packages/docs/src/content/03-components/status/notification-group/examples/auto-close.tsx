@@ -1,7 +1,7 @@
 import {
   NotificationController,
-  NotificationGroup,
-} from "@mittwald/flow-react-components/NotificationGroup";
+  NotificationProvider,
+} from "@mittwald/flow-react-components/NotificationProvider";
 import { Button } from "@mittwald/flow-react-components/Button";
 
 export default () => {
@@ -9,7 +9,7 @@ export default () => {
 
   return (
     <>
-      <NotificationGroup
+      <NotificationProvider
         controller={controller}
         autoClose
       />

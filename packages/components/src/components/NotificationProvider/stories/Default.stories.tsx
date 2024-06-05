@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React, { useEffect } from "react";
 import type { Notification } from "@/components/Notification";
-import { NotificationGroup } from "@/components/NotificationGroup";
-import { NotificationController } from "@/components/NotificationGroup/NotificationController";
+import { NotificationProvider } from "@/components/NotificationProvider";
+import { NotificationController } from "@/components/NotificationProvider/NotificationController";
 
-const meta: Meta<typeof NotificationGroup> = {
-  title: "Status/NotificationGroup",
-  component: NotificationGroup,
+const meta: Meta<typeof NotificationProvider> = {
+  title: "Status/NotificationProvider",
+  component: NotificationProvider,
   render: (props) => {
     const notificationController = NotificationController.useNew();
 
@@ -17,7 +17,7 @@ const meta: Meta<typeof NotificationGroup> = {
           text: "Your email address examples@mittwald.de has been archived.",
           onClick: () => alert("Notification clicked"),
         });
-      }, 5000);
+      }, 1000);
 
       setTimeout(() => {
         notificationController.add({
@@ -26,10 +26,12 @@ const meta: Meta<typeof NotificationGroup> = {
           status: "warning",
           onClick: () => alert("Notification clicked"),
         });
-      }, 10000);
+      }, 3000);
     }, []);
 
-    return <NotificationGroup {...props} controller={notificationController} />;
+    return (
+      <NotificationProvider {...props} controller={notificationController} />
+    );
   },
 };
 

@@ -2,21 +2,21 @@ import type { ComponentProps, FC } from "react";
 import React from "react";
 import ReactDOM from "react-dom";
 import clsx from "clsx";
-import styles from "./NotificationGroup.module.scss";
-import type NotificationController from "@/components/NotificationGroup/NotificationController";
+import styles from "./NotificationProvider.module.scss";
+import type NotificationController from "@/components/NotificationProvider/NotificationController";
 import { Notification } from "@/components/Notification";
 import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
 
-export interface NotificationGroupProps extends ComponentProps<"div"> {
+export interface NotificationProviderProps extends ComponentProps<"div"> {
   controller: NotificationController;
   autoClose?: boolean;
 }
 
-export const NotificationGroup: FC<NotificationGroupProps> = (props) => {
+export const NotificationProvider: FC<NotificationProviderProps> = (props) => {
   const { className, controller, autoClose, ...rest } = props;
 
-  const rootClassName = clsx(styles.notificationGroup, className);
+  const rootClassName = clsx(styles.notificationProvider, className);
 
   const notifications = controller.useNotificationList();
 
@@ -33,7 +33,7 @@ export const NotificationGroup: FC<NotificationGroupProps> = (props) => {
           onClick={n.onClick}
           status={n.status}
           key={n.id}
-          autoClose={autoClose}
+          autoClose={n.autoClose ?? autoClose}
         >
           <Heading>{n.heading}</Heading>
           <Text>{n.text} </Text>
@@ -45,4 +45,4 @@ export const NotificationGroup: FC<NotificationGroupProps> = (props) => {
   return mounted ? ReactDOM.createPortal(content, document.body) : null;
 };
 
-export default NotificationGroup;
+export default NotificationProvider;

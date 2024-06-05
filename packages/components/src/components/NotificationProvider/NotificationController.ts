@@ -10,6 +10,7 @@ export interface NotificationData {
   text: ReactNode;
   onClose?: () => void;
   onClick?: () => void;
+  autoClose?: boolean;
   status?: Status;
 }
 

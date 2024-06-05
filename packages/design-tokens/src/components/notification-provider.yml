@@ -1,0 +1,5 @@
+notification-provider:
+  window-to-provider-spacing:
+    value: "{size-px.xl}"
+  notification-to-notification-spacing:
+    value: "{size-px.m}"
