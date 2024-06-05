@@ -11,6 +11,9 @@ const meta: Meta<typeof Slider> = {
       <Label>Amount</Label>
     </Slider>
   ),
+  parameters: {
+    controls: { exclude: ["tunnelId", "render", "showInitialMarker"] },
+  },
 };
 export default meta;
 
