@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.134](https://github.com/mittwald/flow/compare/0.1.0-alpha.133...0.1.0-alpha.134) (2024-06-05)
+
+### Features
+
+- **TextField:** add character count
+  ([86fcf6b](https://github.com/mittwald/flow/commit/86fcf6b539cfb074a25af1681460c6816005a35e))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.133](https://github.com/mittwald/flow/compare/0.1.0-alpha.132...0.1.0-alpha.133) (2024-06-05)
 
 ### Bug Fixes
