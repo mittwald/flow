@@ -10,7 +10,7 @@ import { Activity } from "@/components/Activity";
 
 export interface SectionProps
   extends PropsWithChildren<ComponentProps<"section">>,
-    FlowComponentProps<"Section"> {
+    FlowComponentProps {
   /** @internal */
   isActive?: boolean;
 }

@@ -4,6 +4,7 @@ export const getActionGroupSlot = (props: ButtonProps): string => {
   const { slot: slotFromProps, ...buttonProps } = props;
 
   const guessedSlot =
+    buttonProps.color === undefined ||
     buttonProps.color === "primary" ||
     buttonProps.color === "danger" ||
     buttonProps.color === "accent"

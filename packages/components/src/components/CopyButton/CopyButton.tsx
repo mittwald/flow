@@ -15,7 +15,7 @@ import { Action } from "@/components/Action";
 
 export interface CopyButtonProps
   extends Omit<ButtonProps, "onPress" | "aria-label" | "render">,
-    FlowComponentProps<"CopyButton"> {
+    FlowComponentProps {
   text: ReactNode;
 }
 

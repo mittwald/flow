@@ -10,7 +10,7 @@ import { Activity } from "@/components/Activity";
 export interface ContentProps
   extends PropsWithChildren,
     PropsWithElementType<"div" | "section" | "span">,
-    FlowComponentProps<"Content"> {
+    FlowComponentProps {
   /** @internal */
   clearPropsContext?: boolean;
   /** @internal */

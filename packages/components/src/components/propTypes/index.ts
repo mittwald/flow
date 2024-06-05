@@ -35,6 +35,7 @@ import type { TabsProps } from "@/components/Tabs";
 import type { ModalProps } from "@/components/Modal";
 import type { SectionProps } from "@/components/Section";
 import type { CounterBadgeProps } from "@/components/CounterBadge";
+import type { FlowComponentName } from "@/components/propTypes/types";
 
 export * from "./types";
 
@@ -124,4 +125,4 @@ const propsContextSupportingComponentsMap: Record<
 
 export const propsContextSupportingComponents = Object.keys(
   propsContextSupportingComponentsMap,
-) as (keyof FlowComponentPropsTypes)[];
+) as FlowComponentName[];

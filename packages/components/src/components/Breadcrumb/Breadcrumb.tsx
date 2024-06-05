@@ -22,11 +22,9 @@ export const Breadcrumb: FC<BreadcrumbProps> = (props) => {
 
   const propsContext: PropsContext = {
     Link: {
-      render: (Link, props) => (
-        <BreadcrumbItem>
-          <Link {...props} unstyled className={styles.link} />
-        </BreadcrumbItem>
-      ),
+      unstyled: true,
+      className: styles.link,
+      wrapWith: <BreadcrumbItem />,
     },
   };
 

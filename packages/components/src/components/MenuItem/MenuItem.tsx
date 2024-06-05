@@ -10,7 +10,7 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 export interface MenuItemProps
   extends Omit<Aria.MenuItemProps, "children">,
     PropsWithChildren,
-    FlowComponentProps<"MenuItem"> {
+    FlowComponentProps {
   selectionVariant?: "control" | "navigation";
 }
 
