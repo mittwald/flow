@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.136](https://github.com/mittwald/flow/compare/0.1.0-alpha.135...0.1.0-alpha.136) (2024-06-06)
+
+### Features
+
+- **Notification:** add notification component
+  ([68db4c4](https://github.com/mittwald/flow/commit/68db4c43afd6dffe024986e8b3ed6d7c895cd2cb))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.135](https://github.com/mittwald/flow/compare/0.1.0-alpha.134...0.1.0-alpha.135) (2024-06-06)
 
 ### Bug Fixes
