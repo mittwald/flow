@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.137](https://github.com/mittwald/flow/compare/0.1.0-alpha.136...0.1.0-alpha.137) (2024-06-06)
+
+### Bug Fixes
+
+- **ActionGroup:** fix button is wrapped in <li>
+  ([73527cb](https://github.com/mittwald/flow/commit/73527cb18963e4d71ab865d390a7f2f3b9e7815f))
+- fix typo in filename
+  ([f6434b2](https://github.com/mittwald/flow/commit/f6434b2261e931a59d0c87d3479daed24ef64184))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.136](https://github.com/mittwald/flow/compare/0.1.0-alpha.135...0.1.0-alpha.136) (2024-06-06)
 
 ### Features
