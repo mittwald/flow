@@ -11,6 +11,9 @@ import List, {
   ListStaticData,
 } from "@mittwald/flow-react-components/List";
 import { Heading } from "@mittwald/flow-react-components/Heading";
+import { ActionGroup } from "@mittwald/flow-react-components/ActionGroup";
+import { sleepLong } from "@/content/03-components/actions/action/examples/lib";
+import { Action } from "@mittwald/flow-react-components/Action";
 
 export default () => {
   const appSelectionController = useOverlayController();
@@ -74,8 +77,14 @@ export default () => {
               )}
             </ListItemView>
           </List>
-          ;
         </Content>
+        <ActionGroup>
+          <Action closeOverlay>
+            <Button variant="soft" color="secondary">
+              Abbrechen
+            </Button>
+          </Action>
+        </ActionGroup>
       </Modal>
     </>
   );
