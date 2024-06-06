@@ -53,8 +53,10 @@ export const Action: FC<ActionProps> = (props) => {
       }),
       isDismissable: dynamic((props) => {
         const action = ActionModel.use();
-        const actionIsBusy = action.state.useIsBusy();
-        return actionIsBusy ? false : props.isDismissable;
+        const actionState = action.state.useValue();
+        return actionState === "isExecuting" || actionState === "isPending"
+          ? false
+          : props.isDismissable;
       }),
       controller: dynamic(() => {
         const action = ActionModel.use();

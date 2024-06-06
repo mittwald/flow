@@ -53,7 +53,7 @@ export class ActionState {
   }
 
   public get isBusy(): boolean {
-    return this.state === "isExecuting" || this.state === "isPending";
+    return this.state !== "isIdle";
   }
 
   public onAsyncStart(): void {
