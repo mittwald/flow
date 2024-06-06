@@ -1,3 +1,3 @@
-import { CounterLabel } from "@mittwald/flow-react-components/CounterLabel";
+import CounterBadge from "@mittwald/flow-react-components/CounterBadge";
 
-<CounterLabel count={5} />;
+<CounterBadge count={5} />;

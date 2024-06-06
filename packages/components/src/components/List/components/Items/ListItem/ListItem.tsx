@@ -22,11 +22,8 @@ export const ListItem = (props: Props) => {
 
   const propsContext: PropsContext = {
     ContextMenu: {
-      render: (ContextMenu, props) => (
-        <OptionsButton className={styles.action}>
-          <ContextMenu {...props} placement="bottom end" />
-        </OptionsButton>
-      ),
+      wrapWith: <OptionsButton className={styles.action} />,
+      placement: "bottom end",
     },
     Button: {
       className: styles.action,

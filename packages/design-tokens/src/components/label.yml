@@ -9,4 +9,4 @@ label:
     default:
       value: "{neutral.color.800}"
     disabled:
-      value: "{neutral.color.600}"
+      value: "{disabled-plain-content-accent-color}"

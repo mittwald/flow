@@ -10,9 +10,7 @@ import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { ModalOverlay } from "@/components/ModalOverlay";
 
-export interface ModalProps
-  extends PropsWithChildren,
-    FlowComponentProps<"Modal"> {
+export interface ModalProps extends PropsWithChildren, FlowComponentProps {
   /** @default "s" */
   size?: "s" | "m" | "l";
   offCanvas?: boolean;

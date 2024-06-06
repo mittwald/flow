@@ -19,7 +19,7 @@ export interface ContextMenuProps
       | "onSelectionChange"
       | "disabledKeys"
     >,
-    FlowComponentProps<"ContextMenu"> {
+    FlowComponentProps {
   selectionMode?: "single" | "multiple" | "navigation";
 }
 

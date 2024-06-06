@@ -16,20 +16,22 @@ import { Action } from "@/components/Action";
 const meta: Meta<typeof Action> = {
   title: "Actions/Action",
   component: Action,
-  render: (props) => <Action {...props} />,
-  args: {
-    action: syncFunction,
-    children: button,
-  },
+  render: (props) => (
+    <Action {...props}>
+      <Button>Button</Button>
+    </Action>
+  ),
   parameters: {
     controls: {
       exclude: [
         "children",
         "action",
-        "closeModal",
-        "openModal",
-        "toggleModal",
-        "feedback",
+        "closeOverlay",
+        "openOverlay",
+        "toggleOverlay",
+        "showFeedback",
+        "break",
+        "skip",
       ],
     },
   },

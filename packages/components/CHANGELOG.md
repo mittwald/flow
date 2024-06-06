@@ -3,6 +3,47 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.134](https://github.com/mittwald/flow/compare/0.1.0-alpha.133...0.1.0-alpha.134) (2024-06-05)
+
+### Features
+
+- **TextField:** add character count
+  ([86fcf6b](https://github.com/mittwald/flow/commit/86fcf6b539cfb074a25af1681460c6816005a35e))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.133](https://github.com/mittwald/flow/compare/0.1.0-alpha.132...0.1.0-alpha.133) (2024-06-05)
+
+### Bug Fixes
+
+- **Select:** fix Select not opening on click
+  ([3906c76](https://github.com/mittwald/flow/commit/3906c764d5d2a637205e1a53f9c6859fab87da9f))
+
+### Features
+
+- **Slider:** add Slider component
+  ([4fd5087](https://github.com/mittwald/flow/commit/4fd50879327fa85a11170ea3319b0f895b090420))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.132](https://github.com/mittwald/flow/compare/0.1.0-alpha.131...0.1.0-alpha.132) (2024-06-04)
+
+### Bug Fixes
+
+- **Navigation:** fix broken link rendering
+  ([e735786](https://github.com/mittwald/flow/commit/e735786a62cf63b41c4669ab68d0f4d89aba9877))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.131](https://github.com/mittwald/flow/compare/0.1.0-alpha.130...0.1.0-alpha.131) (2024-06-04)
 
 ### Bug Fixes
@@ -52,7 +93,7 @@ All notable changes to this project will be documented in this file. See
 
 ### Features
 
-- **CounterLabel:** add CounterLabel
+- **CounterBadge:** add CounterBadge
   ([#459](https://github.com/mittwald/flow/issues/459))
   ([743b980](https://github.com/mittwald/flow/commit/743b98060d81fd1689dc51c3e78198ff2f6ca6c0))
 

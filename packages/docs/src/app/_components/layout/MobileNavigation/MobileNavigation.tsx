@@ -13,6 +13,7 @@ import { HeaderNavigation as HeaderNavigationComponent } from "@mittwald/flow-re
 import HeaderNavigation from "@/app/_components/layout/HeaderNavigation";
 import { Section } from "@mittwald/flow-react-components/Section";
 import { Heading } from "@mittwald/flow-react-components/Heading";
+import { Content } from "@mittwald/flow-react-components/Content";
 
 interface Props {
   docs: SerializedMdxFile[];
@@ -24,18 +25,20 @@ export const MobileNavigation: FC<Props> = (props) => {
 
   return (
     <HeaderNavigationComponent className={className}>
-      <OffCanvasTrigger>
-        <Button color="secondary" variant="plain">
-          <IconMenu />
-        </Button>
-        <OffCanvas className={styles.mobileNavigationOffCanvas}>
-          <Heading>Menü</Heading>
-          <Section>
-            <HeaderNavigation docs={docs} />
-            <MainNavigation docs={docs} />
-          </Section>
-        </OffCanvas>
-      </OffCanvasTrigger>
+      <Content>
+        <OffCanvasTrigger>
+          <Button color="secondary" variant="plain">
+            <IconMenu />
+          </Button>
+          <OffCanvas className={styles.mobileNavigationOffCanvas}>
+            <Heading>Menü</Heading>
+            <Section>
+              <HeaderNavigation docs={docs} />
+              <MainNavigation docs={docs} />
+            </Section>
+          </OffCanvas>
+        </OffCanvasTrigger>
+      </Content>
     </HeaderNavigationComponent>
   );
 };
