@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.135](https://github.com/mittwald/flow/compare/0.1.0-alpha.134...0.1.0-alpha.135) (2024-06-06)
+
+### Bug Fixes
+
+- **TextField:** fix max length
+  ([8dc598f](https://github.com/mittwald/flow/commit/8dc598f20e0c2fcea066c759c086a07ebe189fb1))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.134](https://github.com/mittwald/flow/compare/0.1.0-alpha.133...0.1.0-alpha.134) (2024-06-05)
 
 ### Features
