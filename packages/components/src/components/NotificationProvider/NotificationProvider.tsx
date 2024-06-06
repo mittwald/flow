@@ -1,9 +1,10 @@
 import type { FC, PropsWithChildren } from "react";
 import React, { createContext, useContext } from "react";
 import NotificationController from "@/components/NotificationProvider/NotificationController";
+import type { NotificationsContainerProps } from "@/components/NotificationProvider/NotificationContainer";
 import NotificationContainer from "@/components/NotificationProvider/NotificationContainer";
 
-type Props = PropsWithChildren;
+type Props = PropsWithChildren<NotificationsContainerProps>;
 
 const context = createContext<NotificationController>(
   new NotificationController(),
@@ -18,7 +19,7 @@ export const NotificationProvider: FC<Props> = (props) => {
 
   return (
     <context.Provider value={controller}>
-      <NotificationContainer controller={controller} {...containerProps} />
+      <NotificationContainer {...containerProps} />
       {children}
     </context.Provider>
   );

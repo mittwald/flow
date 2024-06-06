@@ -3,25 +3,23 @@ import React from "react";
 import ReactDOM from "react-dom";
 import clsx from "clsx";
 import styles from "./NotificationContainer.module.scss";
-import type NotificationController from "@/components/NotificationProvider/NotificationController";
 import ControlledNotification from "@/components/NotificationProvider/ControlledNotification";
 import { AnimatePresence, domAnimation, LazyMotion, m } from "framer-motion";
 import { useIsSSR } from "react-aria";
+import { useNotificationController } from "@/components/NotificationProvider/NotificationProvider";
 
-export interface NotificationsContainerProps extends ComponentProps<"div"> {
-  controller: NotificationController;
-}
+export type NotificationsContainerProps = ComponentProps<"div">;
 
 export const NotificationContainer: FC<NotificationsContainerProps> = (
   props,
 ) => {
-  const { className, controller, ...rest } = props;
+  const { className, ...rest } = props;
+
+  const controller = useNotificationController();
+  const notifications = controller.useNotifications();
+  const isSsr = useIsSSR();
 
   const rootClassName = clsx(styles.notificationContainer, className);
-
-  const notifications = controller.useNotifications();
-
-  const isSsr = useIsSSR();
 
   const content = (
     <LazyMotion features={domAnimation}>
