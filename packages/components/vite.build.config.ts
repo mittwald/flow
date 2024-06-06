@@ -57,6 +57,9 @@ export default defineConfig(
           MenuItem: "./src/components/MenuItem/index.ts",
           Modal: "./src/components/Modal/index.ts",
           Navigation: "./src/components/Navigation/index.ts",
+          Notification: "./src/components/Notification/index.ts",
+          NotificationProvider:
+            "./src/components/NotificationProvider/index.ts",
           NumberField: "./src/components/NumberField/index.ts",
           OffCanvas: "./src/components/OffCanvas/index.ts",
           ProgressBar: "./src/components/ProgressBar/index.ts",
