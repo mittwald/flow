@@ -6,9 +6,10 @@ import { dynamic, PropsContextProvider } from "@/lib/propsContext";
 import { OptionsButton } from "@/components/List/components/Items/OptionsButton";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import type { LinkDOMProps } from "@react-types/shared";
+import type { LinkProps } from "@/components/Link";
 import { Link } from "@/components/Link";
 
-type Props = PropsWithChildren & LinkDOMProps;
+type Props = PropsWithChildren & LinkDOMProps & Pick<LinkProps, "onPress">;
 
 const getStyleForContentSlot = (slot?: string) =>
   slot === "top"
@@ -18,7 +19,7 @@ const getStyleForContentSlot = (slot?: string) =>
       : styles.topContent;
 
 export const ListItem = (props: Props) => {
-  const { children, href, ...linkDomProps } = props;
+  const { children, href, onPress, ...linkDomProps } = props;
 
   const propsContext: PropsContext = {
     ContextMenu: {
@@ -55,8 +56,14 @@ export const ListItem = (props: Props) => {
   };
 
   const MainComponent: FC<PropsWithChildren> = (props) =>
-    href ? (
-      <Link unstyled {...linkDomProps} className={styles.item} href={href}>
+    href || onPress ? (
+      <Link
+        unstyled
+        {...linkDomProps}
+        className={styles.item}
+        onPress={onPress}
+        href={href}
+      >
         {props.children}
       </Link>
     ) : (

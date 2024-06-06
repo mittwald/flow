@@ -1,4 +1,6 @@
 .modal {
+  isolation: isolate;
+
   > div {
     border-radius: var(--modal--corner-radius);
     background: var(--modal--background-color);
@@ -14,7 +16,6 @@
     }
 
     [role="dialog"] {
-      padding: var(--modal--padding);
       overflow: hidden;
       outline: none;
       display: grid;
@@ -27,8 +28,6 @@
     }
 
     .actionGroup {
-      margin-inline: calc(var(--modal--padding) * -1);
-      margin-bottom: calc(var(--modal--padding) * -1);
       grid-area: actionGroup;
       padding: var(--modal--action-group-padding);
       background-color: var(--modal--action-group-background-color);
@@ -41,10 +40,24 @@
       grid-area: content;
       overflow-x: hidden;
       overflow-y: auto;
+      padding-inline: var(--modal--padding);
       padding-bottom: var(--modal--padding-bottom);
       display: flex;
       flex-direction: column;
       row-gap: var(--section--content-to-content-spacing);
+    }
+
+    .title {
+      background-color: var(--modal--background-color);
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      margin-inline: calc(var(--modal--padding) * -1);
+      margin-bottom: var(--size-px--m);
+      border-block-end-width: var(--section--border-width);
+      border-block-end-style: var(--section--border-style);
+      border-block-end-color: var(--section--border-color);
+      padding: var(--size-px--m) var(--modal--padding);
     }
   }
 

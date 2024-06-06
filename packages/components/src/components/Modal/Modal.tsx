@@ -42,6 +42,7 @@ export const Modal = flowComponent("Modal", (props) => {
     Heading: {
       level: 2,
       slot: "title",
+      className: styles.title,
     },
     ActionGroup: {
       className: styles.actionGroup,
