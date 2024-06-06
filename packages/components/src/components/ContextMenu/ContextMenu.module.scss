@@ -11,3 +11,7 @@
     outline: none;
   }
 }
+
+.popover [role="dialog"] {
+  padding: var(--context-menu--padding);
+}

@@ -50,17 +50,13 @@
       "types": "./dist/types/components/Content/index.d.ts",
       "import": "./dist/Content.js"
     },
-    "./CounterBadge": {
-      "types": "./dist/types/components/CounterBadge/index.d.ts",
-      "import": "./dist/CounterBadge.js"
-    },
-    "./IllustratedMessage": {
-      "types": "./dist/types/components/IllustratedMessage/index.d.ts",
-      "import": "./dist/IllustratedMessage.js"
-    },
     "./ContextMenu": {
       "types": "./dist/types/components/ContextMenu/index.d.ts",
       "import": "./dist/ContextMenu.js"
+    },
+    "./ContextualHelp": {
+      "types": "./dist/types/components/ContextualHelp/index.d.ts",
+      "import": "./dist/ContextualHelp.js"
     },
     "./controller": {
       "types": "./dist/types/lib/controller/index.d.ts",
@@ -69,6 +65,10 @@
     "./CopyButton": {
       "types": "./dist/types/components/CopyButton/index.d.ts",
       "import": "./dist/CopyButton.js"
+    },
+    "./CounterBadge": {
+      "types": "./dist/types/components/CounterBadge/index.d.ts",
+      "import": "./dist/CounterBadge.js"
     },
     "./FieldDescription": {
       "types": "./dist/types/components/FieldDescription/index.d.ts",
@@ -97,6 +97,10 @@
     "./Icons": {
       "types": "./dist/types/components/Icon/components/icons/index.d.ts",
       "import": "./dist/Icons.js"
+    },
+    "./IllustratedMessage": {
+      "types": "./dist/types/components/IllustratedMessage/index.d.ts",
+      "import": "./dist/IllustratedMessage.js"
     },
     "./Image": {
       "types": "./dist/types/components/Image/index.d.ts",

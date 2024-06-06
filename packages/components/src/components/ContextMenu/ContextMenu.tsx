@@ -48,7 +48,7 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
 
   return (
     <ClearPropsContext>
-      <Popover {...rest}>
+      <Popover {...rest} className={styles.popover}>
         <Aria.Menu
           className={styles.contextMenu}
           onAction={onAction}

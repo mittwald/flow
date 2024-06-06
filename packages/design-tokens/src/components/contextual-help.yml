@@ -1,0 +1,5 @@
+contextual-help:
+  content-to-content-spacing:
+    value: "{size-rem.s}"
+  max-width:
+    value: 500px
