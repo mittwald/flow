@@ -18,14 +18,7 @@ export interface TextFieldBaseProps
 
 export const TextFieldBase = forwardRef<HTMLInputElement, TextFieldBaseProps>(
   (props, ignoredRef) => {
-    const {
-      children,
-      className,
-      input,
-      showCharacterCount,
-      maxLength = 0,
-      ...rest
-    } = props;
+    const { children, className, input, showCharacterCount, ...rest } = props;
     const [charactersCount, setCharactersCount] = useState(
       props.value?.length ?? 0,
     );
@@ -58,7 +51,7 @@ export const TextFieldBase = forwardRef<HTMLInputElement, TextFieldBaseProps>(
 
     const charactersCountDescription = translate("textFieldBase.characters", {
       count: charactersCount,
-      maxCount: maxLength,
+      maxCount: props.maxLength,
     });
 
     return (
@@ -67,7 +60,6 @@ export const TextFieldBase = forwardRef<HTMLInputElement, TextFieldBaseProps>(
           {...rest}
           className={rootClassName}
           onChange={handleOnChange}
-          maxLength={maxLength}
         >
           {input}
           <PropsContextProvider props={propsContext}>
