@@ -1,5 +1,5 @@
 import type { ComponentProps, FC, PropsWithChildren } from "react";
-import React, { useEffect } from "react";
+import React from "react";
 import type { PropsWithStatus } from "@/lib/types/props";
 import styles from "./Notification.module.scss";
 import clsx from "clsx";
@@ -7,10 +7,8 @@ import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import { StatusIcon } from "@/components/StatusIcon";
 import { Link } from "@/components/Link";
-import { Action } from "@/components/Action";
 import { Button } from "@/components/Button";
 import { IconClose } from "@/components/Icon/components/icons";
-import { Wrap } from "@/components/Wrap";
 
 export interface NotificationProps
   extends PropsWithChildren<ComponentProps<"div">>,
@@ -18,7 +16,6 @@ export interface NotificationProps
   href?: string;
   onClick?: () => void;
   onClose?: () => void;
-  autoClose?: boolean;
 }
 
 export const Notification: FC<NotificationProps> = (props) => {
@@ -26,10 +23,10 @@ export const Notification: FC<NotificationProps> = (props) => {
     children,
     className,
     status = "info",
+    role = "alert",
     href,
     onClick,
     onClose,
-    autoClose,
     ...rest
   } = props;
 
@@ -50,47 +47,27 @@ export const Notification: FC<NotificationProps> = (props) => {
     },
   };
 
-  useEffect(() => {
-    if (autoClose && onClose) {
-      setTimeout(() => {
-        onClose();
-      }, 10000);
-    }
-  }, []);
-
-  const content = (
-    <>
-      <StatusIcon className={styles.statusIcon} status={status} />
-      <PropsContextProvider props={propsContext}>
-        {children}
-      </PropsContextProvider>
-    </>
+  const closeButton = onClose && (
+    <Button
+      size="s"
+      className={styles.close}
+      variant="plain"
+      color="secondary"
+      onPress={onClose}
+    >
+      <IconClose />
+    </Button>
   );
 
   return (
-    <div role="alert" {...rest} className={rootClassName}>
-      <Wrap if={onClose}>
-        <Action action={onClose}>
-          <Wrap if={onClick}>
-            <Action action={onClick}>
-              <Link unstyled href={href} className={styles.link}>
-                {content}
-              </Link>
-            </Action>
-          </Wrap>
-
-          {onClose && (
-            <Button
-              size="s"
-              className={styles.close}
-              variant="plain"
-              color="secondary"
-            >
-              <IconClose />
-            </Button>
-          )}
-        </Action>
-      </Wrap>
+    <div {...rest} className={rootClassName} role={role}>
+      <Link unstyled href={href} className={styles.link} onPress={onClick}>
+        <StatusIcon className={styles.statusIcon} status={status} />
+        <PropsContextProvider props={propsContext}>
+          {children}
+        </PropsContextProvider>
+      </Link>
+      {closeButton}
     </div>
   );
 };

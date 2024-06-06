@@ -1,48 +1,26 @@
-import type { ComponentProps, FC } from "react";
-import React from "react";
-import ReactDOM from "react-dom";
-import clsx from "clsx";
-import styles from "./NotificationProvider.module.scss";
-import type NotificationController from "@/components/NotificationProvider/NotificationController";
-import { Notification } from "@/components/Notification";
-import { Heading } from "@/components/Heading";
-import { Text } from "@/components/Text";
+import type { FC, PropsWithChildren } from "react";
+import React, { createContext, useContext } from "react";
+import NotificationController from "@/components/NotificationProvider/NotificationController";
+import NotificationsContainer from "@/components/NotificationProvider/NotificationsContainer";
 
-export interface NotificationProviderProps extends ComponentProps<"div"> {
-  controller: NotificationController;
-  autoClose?: boolean;
-}
+type Props = PropsWithChildren;
 
-export const NotificationProvider: FC<NotificationProviderProps> = (props) => {
-  const { className, controller, autoClose, ...rest } = props;
+const context = createContext<NotificationController>(
+  new NotificationController(),
+);
 
-  const rootClassName = clsx(styles.notificationProvider, className);
+export const useNotificationController = (): NotificationController =>
+  useContext(context);
 
-  const notifications = controller.useNotificationList();
-
-  const [mounted, setMounted] = React.useState(false);
-
-  React.useEffect(() => setMounted(true), []);
-
-  const content = (
-    <div className={rootClassName} {...rest}>
-      {notifications.map((n) => (
-        <Notification
-          className={styles.notification}
-          onClose={() => controller.remove(n.id)}
-          onClick={n.onClick}
-          status={n.status}
-          key={n.id}
-          autoClose={n.autoClose ?? autoClose}
-        >
-          <Heading>{n.heading}</Heading>
-          <Text>{n.text} </Text>
-        </Notification>
-      ))}
-    </div>
+export const NotificationProvider: FC<Props> = (props) => {
+  const { children, ...containerProps } = props;
+  const controller = new NotificationController();
+  return (
+    <context.Provider value={controller}>
+      <NotificationsContainer controller={controller} {...containerProps} />
+      {children}
+    </context.Provider>
   );
-
-  return mounted ? ReactDOM.createPortal(content, document.body) : null;
 };
 
 export default NotificationProvider;

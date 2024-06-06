@@ -1,7 +1,7 @@
-import { NotificationProvider } from "./NotificationProvider";
+import NotificationProvider from "./NotificationProvider";
 export {
-  type NotificationProviderProps,
+  useNotificationController,
   NotificationProvider,
 } from "./NotificationProvider";
-export { NotificationController } from "./NotificationController";
+
 export default NotificationProvider;

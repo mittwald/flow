@@ -6553,6 +6553,7 @@ const RAW_RUNTIME_STATE =
           ["@testing-library/react", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:15.0.7"],\
           ["@testing-library/user-event", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:14.5.2"],\
           ["@types/invariant", "npm:2.2.37"],\
+          ["@types/luxon", "npm:3.4.2"],\
           ["@types/mittwald__react-use-promise", null],\
           ["@types/next", null],\
           ["@types/node", "npm:20.14.1"],\
@@ -6572,6 +6573,7 @@ const RAW_RUNTIME_STATE =
           ["happy-dom", "npm:14.12.0"],\
           ["html-react-parser", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:5.1.10"],\
           ["invariant", "npm:2.2.4"],\
+          ["luxon", "npm:3.4.4"],\
           ["mobx", "npm:6.12.3"],\
           ["mobx-react-lite", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:4.0.7"],\
           ["next", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:14.2.3"],\
@@ -6652,6 +6654,7 @@ const RAW_RUNTIME_STATE =
           ["@testing-library/react", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:15.0.7"],\
           ["@testing-library/user-event", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:14.5.2"],\
           ["@types/invariant", "npm:2.2.37"],\
+          ["@types/luxon", "npm:3.4.2"],\
           ["@types/mittwald__react-use-promise", null],\
           ["@types/next", null],\
           ["@types/node", "npm:20.14.1"],\
@@ -6671,6 +6674,7 @@ const RAW_RUNTIME_STATE =
           ["happy-dom", "npm:14.12.0"],\
           ["html-react-parser", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:5.1.10"],\
           ["invariant", "npm:2.2.4"],\
+          ["luxon", "npm:3.4.4"],\
           ["mobx", "npm:6.12.3"],\
           ["mobx-react-lite", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:4.0.7"],\
           ["next", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:14.2.3"],\
@@ -6746,6 +6750,7 @@ const RAW_RUNTIME_STATE =
           ["@testing-library/react", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:15.0.7"],\
           ["@testing-library/user-event", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:14.5.2"],\
           ["@types/invariant", "npm:2.2.37"],\
+          ["@types/luxon", "npm:3.4.2"],\
           ["@types/node", "npm:20.14.1"],\
           ["@types/prettier", "npm:3.0.0"],\
           ["@types/prop-types", "npm:15.7.12"],\
@@ -6762,6 +6767,7 @@ const RAW_RUNTIME_STATE =
           ["happy-dom", "npm:14.12.0"],\
           ["html-react-parser", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:5.1.10"],\
           ["invariant", "npm:2.2.4"],\
+          ["luxon", "npm:3.4.4"],\
           ["mobx", "npm:6.12.3"],\
           ["mobx-react-lite", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:4.0.7"],\
           ["next", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:14.2.3"],\

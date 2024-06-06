@@ -1,43 +1,51 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React, { useEffect } from "react";
-import type { Notification } from "@/components/Notification";
-import { NotificationProvider } from "@/components/NotificationProvider";
-import { NotificationController } from "@/components/NotificationProvider/NotificationController";
+import {
+  NotificationProvider,
+  useNotificationController,
+} from "@/components/NotificationProvider";
+import { Text } from "@/components/Text";
 
-const meta: Meta<typeof NotificationProvider> = {
+const meta: Meta<{ autoClose: boolean }> = {
   title: "Status/NotificationProvider",
-  component: NotificationProvider,
+  decorators: [
+    (Story) => (
+      <NotificationProvider>
+        <Story />
+      </NotificationProvider>
+    ),
+  ],
   render: (props) => {
-    const notificationController = NotificationController.useNew();
+    const notificationController = useNotificationController();
 
     useEffect(() => {
       setTimeout(() => {
         notificationController.add({
+          autoClose: props.autoClose,
           heading: "Email address archived",
           text: "Your email address examples@mittwald.de has been archived.",
           onClick: () => alert("Notification clicked"),
         });
-      }, 1000);
+      }, 500);
 
       setTimeout(() => {
         notificationController.add({
+          autoClose: props.autoClose,
           heading: "No SSL certificate",
           text: "No SSL certificate could be issued for examples.de.",
           status: "warning",
           onClick: () => alert("Notification clicked"),
         });
-      }, 3000);
+      }, 2000);
     }, []);
 
-    return (
-      <NotificationProvider {...props} controller={notificationController} />
-    );
+    return <Text>Notifications incoming...</Text>;
   },
 };
 
 export default meta;
 
-type Story = StoryObj<typeof Notification>;
+type Story = StoryObj<{ autoClose: boolean }>;
 
 export const Default: Story = {};
 

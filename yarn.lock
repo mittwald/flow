@@ -4112,6 +4112,7 @@ __metadata:
     "@testing-library/react": "npm:~15.0.7"
     "@testing-library/user-event": "npm:^14.5.2"
     "@types/invariant": "npm:^2.2.37"
+    "@types/luxon": "npm:^3"
     "@types/node": "npm:20.14.1"
     "@types/prettier": "npm:^3.0.0"
     "@types/prop-types": "npm:^15.7.12"
@@ -4128,6 +4129,7 @@ __metadata:
     happy-dom: "npm:^14.12.0"
     html-react-parser: "npm:^5.1.10"
     invariant: "npm:^2.2.4"
+    luxon: "npm:^3.4.4"
     mobx: "npm:^6.12.3"
     mobx-react-lite: "npm:^4.0.7"
     next: "npm:^14.2.3"
@@ -8715,7 +8717,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/luxon@npm:3.4.2":
+"@types/luxon@npm:3.4.2, @types/luxon@npm:^3":
   version: 3.4.2
   resolution: "@types/luxon@npm:3.4.2"
   checksum: 10c0/d835467de3daf7e17ba78b50bb5a14efd94272439ca067990d71332a54b311544459c69623eddd243b511b28d70194c9591a9ee8cf9c038962c965f991affd7e
@@ -15551,7 +15553,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"luxon@npm:~3.4.4":
+"luxon@npm:^3.4.4, luxon@npm:~3.4.4":
   version: 3.4.4
   resolution: "luxon@npm:3.4.4"
   checksum: 10c0/02e26a0b039c11fd5b75e1d734c8f0332c95510f6a514a9a0991023e43fb233884da02d7f966823ffb230632a733fc86d4a4b1e63c3fbe00058b8ee0f8c728af
