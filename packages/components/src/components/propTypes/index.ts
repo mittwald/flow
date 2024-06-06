@@ -34,22 +34,24 @@ import type { CheckboxButtonProps } from "@/components/CheckboxButton";
 import type { TabsProps } from "@/components/Tabs";
 import type { ModalProps } from "@/components/Modal";
 import type { SectionProps } from "@/components/Section";
-import type { CounterLabelProps } from "@/components/CounterLabel";
+import type { SliderProps } from "@/components/Slider";
+import type { CounterBadgeProps } from "@/components/CounterBadge";
+import type { FlowComponentName } from "@/components/propTypes/types";
 
 export * from "./types";
 
 export interface FlowComponentPropsTypes {
   Action: ActionProps;
+  ActionGroup: ActionGroupProps;
   Avatar: AvatarProps;
   Button: ButtonProps;
-  ActionGroup: ActionGroupProps;
   Checkbox: CheckboxProps;
   CheckboxButton: CheckboxButtonProps;
   CheckboxGroup: CheckboxGroupProps;
   Content: ContentProps;
   ContextMenu: ContextMenuProps;
   CopyButton: CopyButtonProps;
-  CounterLabel: CounterLabelProps;
+  CounterBadge: CounterBadgeProps;
   FieldDescription: FieldDescriptionProps;
   FieldError: FieldErrorProps;
   Header: HeaderProps;
@@ -70,6 +72,7 @@ export interface FlowComponentPropsTypes {
   RadioGroup: RadioGroupProps;
   Section: SectionProps;
   Select: SelectProps;
+  Slider: SliderProps;
   StatusBadge: StatusBadgeProps;
   Switch: SwitchProps;
   Tabs: TabsProps;
@@ -83,16 +86,16 @@ const propsContextSupportingComponentsMap: Record<
   true
 > = {
   Action: true,
+  ActionGroup: true,
   Avatar: true,
   Button: true,
-  ActionGroup: true,
   Checkbox: true,
   CheckboxButton: true,
   CheckboxGroup: true,
   Content: true,
   ContextMenu: true,
   CopyButton: true,
-  CounterLabel: true,
+  CounterBadge: true,
   FieldDescription: true,
   FieldError: true,
   Header: true,
@@ -113,6 +116,7 @@ const propsContextSupportingComponentsMap: Record<
   RadioGroup: true,
   Section: true,
   Select: true,
+  Slider: true,
   StatusBadge: true,
   Switch: true,
   Tabs: true,
@@ -124,4 +128,4 @@ const propsContextSupportingComponentsMap: Record<
 
 export const propsContextSupportingComponents = Object.keys(
   propsContextSupportingComponentsMap,
-) as (keyof FlowComponentPropsTypes)[];
+) as FlowComponentName[];

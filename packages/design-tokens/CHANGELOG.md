@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.134](https://github.com/mittwald/flow/compare/0.1.0-alpha.133...0.1.0-alpha.134) (2024-06-05)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.133](https://github.com/mittwald/flow/compare/0.1.0-alpha.132...0.1.0-alpha.133) (2024-06-05)
+
+### Features
+
+- **Slider:** add Slider component
+  ([4fd5087](https://github.com/mittwald/flow/commit/4fd50879327fa85a11170ea3319b0f895b090420))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.132](https://github.com/mittwald/flow/compare/0.1.0-alpha.131...0.1.0-alpha.132) (2024-06-04)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.131](https://github.com/mittwald/flow/compare/0.1.0-alpha.130...0.1.0-alpha.131) (2024-06-04)
 
 **Note:** Version bump only for package @mittwald/flow-design-tokens
@@ -43,7 +73,7 @@ All notable changes to this project will be documented in this file. See
 
 ### Features
 
-- **CounterLabel:** add CounterLabel
+- **CounterBadge:** add CounterBadge
   ([#459](https://github.com/mittwald/flow/issues/459))
   ([743b980](https://github.com/mittwald/flow/commit/743b98060d81fd1689dc51c3e78198ff2f6ca6c0))
 

@@ -14,6 +14,9 @@ const meta: Meta<typeof Accordion> = {
       <Content>Accordion Content</Content>
     </Accordion>
   ),
+  parameters: {
+    controls: { exclude: ["defaultExpanded"] },
+  },
 };
 export default meta;
 

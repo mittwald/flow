@@ -14,6 +14,8 @@ import { Options } from "@/components/Select/components/Options";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import type { Key } from "react-aria-components";
 import type { PropsWithClassName } from "@/lib/types/props";
+import { useOverlayController } from "@/lib/controller";
+import { OverlayContextProvider } from "@/lib/controller/overlay/context";
 
 export interface SelectProps
   extends PropsWithChildren<
@@ -65,12 +67,17 @@ export const Select = flowComponent("Select", (props) => {
     onSelectionChange(id);
   };
 
+  const popoverController = useOverlayController();
+  const popoverIsOpen = popoverController.useIsOpen();
+
   return (
     <Aria.Select
       {...rest}
       className={rootClassName}
       ref={ref}
       onSelectionChange={handleOnSelectionChange}
+      onOpenChange={(isOpen) => popoverController.setOpen(isOpen)}
+      isOpen={popoverIsOpen}
     >
       <PropsContextProvider props={propsContext}>
         <TunnelProvider>
@@ -79,11 +86,12 @@ export const Select = flowComponent("Select", (props) => {
             <IconChevronDown />
           </Aria.Button>
 
-          {children}
-
-          <Options>
-            <TunnelExit id="options" />
-          </Options>
+          <OverlayContextProvider value={popoverController}>
+            {children}
+            <Options>
+              <TunnelExit id="options" />
+            </Options>
+          </OverlayContextProvider>
 
           <FieldError className={formFieldStyles.fieldError} />
         </TunnelProvider>

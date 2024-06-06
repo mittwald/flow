@@ -13,7 +13,7 @@ import { getActionGroupSlot } from "@/components/ActionGroup/lib/getActionGroupS
 
 export interface ActionGroupProps
   extends PropsWithChildren,
-    FlowComponentProps<"ActionGroup">,
+    FlowComponentProps,
     PropsWithClassName {}
 
 export const ActionGroup = flowComponent("ActionGroup", (props) => {
@@ -23,17 +23,15 @@ export const ActionGroup = flowComponent("ActionGroup", (props) => {
 
   const propsContext: PropsContext = {
     Button: {
-      render: (Button, renderProps) => {
-        const slot = getActionGroupSlot(renderProps);
-
-        const className = clsx(
-          renderProps.className,
+      tunnelId: dynamic((p) => getActionGroupSlot(p)),
+      slot: dynamic((props) => getActionGroupSlot(props)),
+      className: dynamic((props) => {
+        const slot = getActionGroupSlot(props);
+        return clsx(
+          props.className,
           slot !== "secondary" ? styles[slot] : undefined,
         );
-
-        return <Button {...renderProps} className={className} />;
-      },
-      tunnelId: dynamic((p) => getActionGroupSlot(p)),
+      }),
     },
   };
 
