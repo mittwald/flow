@@ -70,6 +70,14 @@
       "types": "./dist/types/components/CopyButton/index.d.ts",
       "import": "./dist/CopyButton.js"
     },
+    "./DatePicker": {
+      "types": "./dist/types/components/DatePicker/index.d.ts",
+      "import": "./dist/DatePicker.js"
+    },
+    "./DateRangePicker": {
+      "types": "./dist/types/components/DateRangePicker/index.d.ts",
+      "import": "./dist/DateRangePicker.js"
+    },
     "./FieldDescription": {
       "types": "./dist/types/components/FieldDescription/index.d.ts",
       "import": "./dist/FieldDescription.js"
@@ -263,6 +271,7 @@
   },
   "dependencies": {
     "@chakra-ui/live-region": "^2.1.0",
+    "@internationalized/date": "^3.5.1",
     "@mittwald/react-tunnel": "workspace:^",
     "@mittwald/react-use-promise": "^2.3.13",
     "@react-aria/utils": "^3.24.1",

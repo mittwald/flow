@@ -35,6 +35,8 @@ export default defineConfig(
           ContextMenu: "./src/components/ContextMenu/index.ts",
           controller: "./src/lib/controller/index.ts",
           CopyButton: "./src/components/CopyButton/index.ts",
+          DatePicker: "./src/components/DatePicker/index.ts",
+          DateRangePicker: "./src/components/DateRangePicker/index.ts",
           FieldDescription: "./src/components/FieldDescription/index.ts",
           FieldError: "./src/components/FieldError/index.ts",
           Header: "./src/components/Header/index.ts",
