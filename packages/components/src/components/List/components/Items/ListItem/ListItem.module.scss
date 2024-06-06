@@ -91,7 +91,8 @@
     border-bottom-style: var(--list-item--border-style);
   }
 
-  &:is(a) {
+  &:is(a),
+  &[role="link"] {
     @include focus.focus;
     outline-offset: calc(var(--size-px--xs) * -1);
 
