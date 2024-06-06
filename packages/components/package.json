@@ -281,6 +281,7 @@
     "clsx": "^2.1.1",
     "copy-to-clipboard": "^3.3.3",
     "dot-prop": "^9.0.0",
+    "framer-motion": "^11.2.10",
     "html-react-parser": "^5.1.10",
     "invariant": "^2.2.4",
     "luxon": "^3.4.4",

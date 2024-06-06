@@ -5,7 +5,6 @@ import type {
   NotificationData,
 } from "@/components/NotificationProvider/NotificationController";
 import { Notification } from "@/components/Notification";
-import styles from "@/components/NotificationProvider/NotificationProvider.module.scss";
 import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
 
@@ -19,7 +18,6 @@ export const ControlledNotification: FC<Props> = (props) => {
 
   return (
     <Notification
-      className={styles.notification}
       onClose={() => controller.remove(notification.meta.id)}
       onClick={notification.onClick}
       onMouseEnter={() => {

@@ -8,7 +8,7 @@ import { Text } from "@/components/Text";
 
 const meta: Meta<typeof Notification> = {
   ...defaultMeta,
-  title: "Status/Notification/Edge Cases",
+  title: "Status/Notifications/Notification/Edge Cases",
 };
 
 export default meta;

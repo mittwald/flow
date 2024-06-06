@@ -7,7 +7,7 @@ import {
 import { Text } from "@/components/Text";
 
 const meta: Meta<{ autoClose: boolean }> = {
-  title: "Status/NotificationProvider",
+  title: "Status/Notifications",
   decorators: [
     (Story) => (
       <NotificationProvider>

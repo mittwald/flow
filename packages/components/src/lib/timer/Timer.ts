@@ -3,43 +3,24 @@ import { DateTime, Duration } from "luxon";
 
 export class Timer {
   private duration: Duration = Duration.fromDurationLike(0);
-  private onDone: () => void = () => {
-    // default: do nothing
-  };
+  private onDone: (() => void) | undefined;
 
   private startedAt?: DateTime;
   private pausedAt?: DateTime;
   private runningTimeoutId?: number;
 
-  public stop(): void {
-    this.clearTimeout();
-    this.startedAt = undefined;
-    this.pausedAt = undefined;
-  }
-
-  public get state(): "idle" | "running" | "paused" {
-    return this.pausedAt ? "paused" : this.startedAt ? "running" : "idle";
-  }
-
-  private clearTimeout(): void {
-    if (this.runningTimeoutId) {
-      window.clearTimeout(this.runningTimeoutId);
-    }
-    this.runningTimeoutId = undefined;
-  }
-
-  public restart(): void {
-    this.stop();
-    this.startTimeout(this.duration);
-  }
-
-  public start(duration: DurationLike, onDone: () => void): void {
+  public start(duration: DurationLike, onDone?: () => void): void {
     if (this.startedAt) {
       throw new Error("Timer already started");
     }
 
     this.duration = Duration.fromDurationLike(duration);
     this.onDone = onDone;
+    this.startTimeout(this.duration);
+  }
+
+  public restart(): void {
+    this.stop();
     this.startTimeout(this.duration);
   }
 
@@ -62,12 +43,31 @@ export class Timer {
     }
   }
 
+  public stop(): void {
+    this.clearTimeout();
+    this.startedAt = undefined;
+    this.pausedAt = undefined;
+  }
+
+  public get state(): "idle" | "running" | "paused" {
+    return this.pausedAt ? "paused" : this.startedAt ? "running" : "idle";
+  }
+
+  private clearTimeout(): void {
+    if (this.runningTimeoutId) {
+      window.clearTimeout(this.runningTimeoutId);
+    }
+    this.runningTimeoutId = undefined;
+  }
+
   private startTimeout(duration: Duration): void {
     this.startedAt = DateTime.now();
     this.pausedAt = undefined;
     this.runningTimeoutId = window.setTimeout(() => {
       this.stop();
-      this.onDone();
+      if (this.onDone) {
+        this.onDone();
+      }
     }, duration.toMillis());
   }
 }

@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import type { Status } from "@/lib/types/props";
 import useSelector from "@/lib/mobx/useSelector";
-import { action, computed, makeObservable, observable } from "mobx";
+import { action, makeObservable, observable } from "mobx";
 import Timer from "@/lib/timer/Timer";
 
 interface NotificationMetaData {
@@ -30,20 +30,13 @@ export class NotificationController {
   public constructor() {
     makeObservable(this, {
       notificationsData: observable.shallow,
-      notificationsStream: computed,
       add: action.bound,
       remove: action.bound,
     });
   }
 
-  public useNotificationsStream(): NotificationData[] {
-    return useSelector(() => this.notificationsStream);
-  }
-
-  public get notificationsStream(): NotificationData[] {
-    return Array.from(this.notificationsData.values()).sort((n1, n2) =>
-      n1.meta.createdAt > n2.meta.createdAt ? 1 : -1,
-    );
+  public useNotifications(): NotificationData[] {
+    return useSelector(() => Array.from(this.notificationsData.values()));
   }
 
   public add(data: NotificationInputData): void {

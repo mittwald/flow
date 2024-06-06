@@ -15,6 +15,7 @@ export const useNotificationController = (): NotificationController =>
 export const NotificationProvider: FC<Props> = (props) => {
   const { children, ...containerProps } = props;
   const controller = new NotificationController();
+
   return (
     <context.Provider value={controller}>
       <NotificationsContainer controller={controller} {...containerProps} />

@@ -7,7 +7,7 @@ import { Text } from "@/components/Text";
 
 const meta: Meta<typeof Notification> = {
   ...defaultMeta,
-  title: "Status/Notification/Status",
+  title: "Status/Notifications/Notification/Status",
 };
 
 export default meta;

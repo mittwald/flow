@@ -6,7 +6,7 @@ import { Text } from "@/components/Text";
 import { action } from "@storybook/addon-actions";
 
 const meta: Meta<typeof Notification> = {
-  title: "Status/Notification",
+  title: "Status/Notifications/Notification",
   component: Notification,
 
   argTypes: {

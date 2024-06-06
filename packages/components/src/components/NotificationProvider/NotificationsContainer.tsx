@@ -2,9 +2,10 @@ import type { ComponentProps, FC } from "react";
 import React from "react";
 import ReactDOM from "react-dom";
 import clsx from "clsx";
-import styles from "./NotificationProvider.module.scss";
+import styles from "./NotificationContainer.module.scss";
 import type NotificationController from "@/components/NotificationProvider/NotificationController";
 import ControlledNotification from "@/components/NotificationProvider/ControlledNotification";
+import { AnimatePresence, domAnimation, LazyMotion, m } from "framer-motion";
 
 export interface NotificationsContainerProps extends ComponentProps<"div"> {
   controller: NotificationController;
@@ -15,27 +16,37 @@ export const NotificationsContainer: FC<NotificationsContainerProps> = (
 ) => {
   const { className, controller, ...rest } = props;
 
-  const rootClassName = clsx(styles.notificationProvider, className);
+  const rootClassName = clsx(styles.notificationContainer, className);
 
-  const notifications = controller.useNotificationsStream();
-
-  const [mounted, setMounted] = React.useState(false);
-
-  React.useEffect(() => setMounted(true), []);
+  const notifications = controller.useNotifications();
 
   const content = (
-    <div className={rootClassName} {...rest}>
-      {notifications.map((n) => (
-        <ControlledNotification
-          key={n.meta.id}
-          notification={n}
-          controller={controller}
-        />
-      ))}
-    </div>
+    <LazyMotion features={domAnimation}>
+      <div className={rootClassName} {...rest}>
+        <AnimatePresence>
+          {notifications.map((n) => (
+            <m.div
+              className={styles.notification}
+              key={n.meta.id}
+              initial={{ opacity: 0, x: 200 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 200, height: 0, paddingBottom: 0 }}
+              transition={{
+                bounce: 0,
+              }}
+            >
+              <ControlledNotification
+                notification={n}
+                controller={controller}
+              />
+            </m.div>
+          ))}
+        </AnimatePresence>
+      </div>
+    </LazyMotion>
   );
 
-  return mounted ? ReactDOM.createPortal(content, document.body) : null;
+  return ReactDOM.createPortal(content, document.body);
 };
 
 export default NotificationsContainer;
