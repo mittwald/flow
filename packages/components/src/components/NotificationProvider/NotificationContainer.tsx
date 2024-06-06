@@ -12,7 +12,7 @@ export interface NotificationsContainerProps extends ComponentProps<"div"> {
   controller: NotificationController;
 }
 
-export const NotificationsContainer: FC<NotificationsContainerProps> = (
+export const NotificationContainer: FC<NotificationsContainerProps> = (
   props,
 ) => {
   const { className, controller, ...rest } = props;
@@ -52,4 +52,4 @@ export const NotificationsContainer: FC<NotificationsContainerProps> = (
   return isSsr ? null : ReactDOM.createPortal(content, document.body);
 };
 
-export default NotificationsContainer;
+export default NotificationContainer;
