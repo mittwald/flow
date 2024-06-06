@@ -51,7 +51,7 @@ export const TextFieldBase = forwardRef<HTMLInputElement, TextFieldBaseProps>(
 
     const charactersCountDescription = translate("textFieldBase.characters", {
       count: charactersCount,
-      maxCount: props.maxLength,
+      maxCount: props.maxLength ?? 0,
     });
 
     return (
