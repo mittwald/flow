@@ -1,8 +1,9 @@
-import type { ReactNode } from "react";
-import type { Status } from "@/lib/types/props";
+import type { ReactElement } from "react";
+import { useRef } from "react";
 import useSelector from "@/lib/mobx/useSelector";
 import { action, makeObservable, observable } from "mobx";
 import Timer from "@/lib/timer/Timer";
+import type { NotificationProps } from "@/components/Notification";
 
 interface NotificationMetaData {
   readonly id: number;
@@ -11,17 +12,9 @@ interface NotificationMetaData {
 }
 
 export interface NotificationData {
-  readonly heading: ReactNode;
-  readonly text: ReactNode;
-  readonly onClose?: () => void;
-  readonly onClick?: () => void;
-  readonly autoClose?: boolean;
-  readonly status?: Status;
-
+  readonly element: ReactElement<NotificationProps>;
   readonly meta: NotificationMetaData;
 }
-
-type NotificationInputData = Omit<NotificationData, "meta">;
 
 export class NotificationController {
   public readonly notificationsData = new Map<number, NotificationData>();
@@ -35,11 +28,15 @@ export class NotificationController {
     });
   }
 
+  public static useNew(): NotificationController {
+    return useRef(new NotificationController()).current;
+  }
+
   public useNotifications(): NotificationData[] {
     return useSelector(() => Array.from(this.notificationsData.values()));
   }
 
-  public add(data: NotificationInputData): void {
+  public add(notification: ReactElement<NotificationProps>): void {
     const id = this.id++;
 
     const meta: NotificationMetaData = {
@@ -49,11 +46,11 @@ export class NotificationController {
     };
 
     this.notificationsData.set(id, {
-      ...data,
+      element: notification,
       meta,
     });
 
-    if (data.autoClose) {
+    if (notification.props.autoClose) {
       meta.autoCloseTimer.start({ seconds: 10 }, () => {
         this.remove(id);
       });

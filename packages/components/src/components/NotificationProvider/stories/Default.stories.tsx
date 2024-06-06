@@ -5,6 +5,8 @@ import {
   useNotificationController,
 } from "@/components/NotificationProvider";
 import { Text } from "@/components/Text";
+import { Notification } from "@/components/Notification";
+import { Heading } from "@/components/Heading";
 
 const meta: Meta<{ autoClose: boolean }> = {
   title: "Status/Notifications",
@@ -20,22 +22,30 @@ const meta: Meta<{ autoClose: boolean }> = {
 
     useEffect(() => {
       setTimeout(() => {
-        notificationController.add({
-          autoClose: props.autoClose,
-          heading: "Email address archived",
-          text: "Your email address examples@mittwald.de has been archived.",
-          onClick: () => alert("Notification clicked"),
-        });
+        notificationController.add(
+          <Notification
+            autoClose={props.autoClose}
+            onClick={() => alert("Notification clicked")}
+          >
+            <Heading>Email address archived</Heading>
+            <Text>
+              Your email address examples@mittwald.de has been archived.
+            </Text>
+          </Notification>,
+        );
       }, 500);
 
       setTimeout(() => {
-        notificationController.add({
-          autoClose: props.autoClose,
-          heading: "No SSL certificate",
-          text: "No SSL certificate could be issued for examples.de.",
-          status: "warning",
-          onClick: () => alert("Notification clicked"),
-        });
+        notificationController.add(
+          <Notification
+            autoClose={props.autoClose}
+            onClick={() => alert("Notification clicked")}
+            status="warning"
+          >
+            <Heading>No SSL certificate</Heading>
+            <Text>No SSL certificate could be issued for examples.de.</Text>
+          </Notification>,
+        );
       }, 2000);
     }, []);
 

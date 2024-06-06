@@ -14,6 +14,7 @@ export interface NotificationProps
   extends PropsWithChildren<ComponentProps<"div">>,
     PropsWithStatus {
   href?: string;
+  autoClose?: boolean;
   onClick?: () => void;
   onClose?: () => void;
 }
@@ -27,6 +28,7 @@ export const Notification: FC<NotificationProps> = (props) => {
     href,
     onClick,
     onClose,
+    autoClose: ignoredAutoClose,
     ...rest
   } = props;
 

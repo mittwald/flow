@@ -15,6 +15,7 @@ import { LinkProvider } from "@mittwald/flow-react-components/nextjs";
 import { IconMittwald } from "@mittwald/flow-react-components/Icons";
 import MainNavigation from "@/app/_components/layout/MainNavigation";
 import MobileNavigation from "@/app/_components/layout/MobileNavigation/MobileNavigation";
+import { NotificationProvider } from "@mittwald/flow-react-components/NotificationProvider";
 
 export const metadata: Metadata = {
   title: "Flow – mittwald Design System",
@@ -28,29 +29,31 @@ const RootLayout: FC<PropsWithChildren> = async (props) => {
     <html lang="en">
       <body className={bodyClassName}>
         <LinkProvider>
-          <header className={styles.header}>
-            <IconMittwald size="l" className={styles.logo} />
-            <Heading level={1} className={styles.heading}>
-              Flow
-            </Heading>
-            <StatusBadge className={styles.betaBadge} status="warning">
-              beta
-            </StatusBadge>
-            <HeaderNavigation
-              className={styles.headerNavigation}
-              docs={docs.map((mdx) => mdx.serialize())}
-            />
-            <MobileNavigation
-              docs={docs.map((mdx) => mdx.serialize())}
-              className={styles.mobileNavigation}
-            />
-          </header>
-          <div className={styles.center}>
-            <LayoutCard className={styles.mainNavigation}>
-              <MainNavigation docs={docs.map((mdx) => mdx.serialize())} />
-            </LayoutCard>
-            <main className={styles.main}>{props.children}</main>
-          </div>
+          <NotificationProvider>
+            <header className={styles.header}>
+              <IconMittwald size="l" className={styles.logo} />
+              <Heading level={1} className={styles.heading}>
+                Flow
+              </Heading>
+              <StatusBadge className={styles.betaBadge} status="warning">
+                beta
+              </StatusBadge>
+              <HeaderNavigation
+                className={styles.headerNavigation}
+                docs={docs.map((mdx) => mdx.serialize())}
+              />
+              <MobileNavigation
+                docs={docs.map((mdx) => mdx.serialize())}
+                className={styles.mobileNavigation}
+              />
+            </header>
+            <div className={styles.center}>
+              <LayoutCard className={styles.mainNavigation}>
+                <MainNavigation docs={docs.map((mdx) => mdx.serialize())} />
+              </LayoutCard>
+              <main className={styles.main}>{props.children}</main>
+            </div>
+          </NotificationProvider>
         </LinkProvider>
       </body>
     </html>

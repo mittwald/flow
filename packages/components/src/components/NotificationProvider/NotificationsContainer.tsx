@@ -6,6 +6,7 @@ import styles from "./NotificationContainer.module.scss";
 import type NotificationController from "@/components/NotificationProvider/NotificationController";
 import ControlledNotification from "@/components/NotificationProvider/ControlledNotification";
 import { AnimatePresence, domAnimation, LazyMotion, m } from "framer-motion";
+import { useIsSSR } from "react-aria";
 
 export interface NotificationsContainerProps extends ComponentProps<"div"> {
   controller: NotificationController;
@@ -19,6 +20,8 @@ export const NotificationsContainer: FC<NotificationsContainerProps> = (
   const rootClassName = clsx(styles.notificationContainer, className);
 
   const notifications = controller.useNotifications();
+
+  const isSsr = useIsSSR();
 
   const content = (
     <LazyMotion features={domAnimation}>
@@ -46,7 +49,7 @@ export const NotificationsContainer: FC<NotificationsContainerProps> = (
     </LazyMotion>
   );
 
-  return ReactDOM.createPortal(content, document.body);
+  return isSsr ? null : ReactDOM.createPortal(content, document.body);
 };
 
 export default NotificationsContainer;
