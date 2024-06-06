@@ -14,6 +14,9 @@ import { Heading } from "@mittwald/flow-react-components/Heading";
 import { ActionGroup } from "@mittwald/flow-react-components/ActionGroup";
 import { sleepLong } from "@/content/03-components/actions/action/examples/lib";
 import { Action } from "@mittwald/flow-react-components/Action";
+import { TextField } from "@mittwald/flow-react-components/TextField";
+import { Label } from "@mittwald/flow-react-components/Label";
+import { Section } from "@mittwald/flow-react-components/Section";
 
 export default () => {
   const appSelectionController = useOverlayController();
@@ -59,16 +62,20 @@ export default () => {
         controller={appSelectionController}
         size="l"
       >
+        <Heading>App installieren</Heading>
         <Content>
           <List batchSize={5}>
             <ListStaticData data={apps} />
             <ListItemView<App>>
               {(app: App) => (
                 <ListItem
-                  onPress={appSelectionController.close}
+                  onPress={() => {
+                    appSelectionController.close();
+                    configurationController.open();
+                  }}
                 >
-                  <Avatar>
-                    <Initials>app.name</Initials>
+                  <Avatar variant={1}>
+                    <Initials>{app.name}</Initials>
                   </Avatar>
                   <Heading>{app.name}</Heading>
                   <Text>{app.versions}</Text>
@@ -80,6 +87,71 @@ export default () => {
         </Content>
         <ActionGroup>
           <Action closeOverlay>
+            <Button variant="soft" color="secondary">
+              Abbrechen
+            </Button>
+          </Action>
+        </ActionGroup>
+      </Modal>
+
+      <Modal
+        offCanvas
+        controller={configurationController}
+        size="m"
+      >
+        <Heading>Wordpress installieren</Heading>
+        <Content>
+          <Section>
+            <TextField isRequired>
+              <Label>Bezeichnung</Label>
+            </TextField>
+            <TextField isRequired defaultValue="6.5.3">
+              <Label>Version</Label>
+            </TextField>
+          </Section>
+          <Section>
+            <Heading>Grundeinstellungen</Heading>
+            <Text>
+              Gib hier die allgemeinen Daten für deine
+              WordPress Installation ein.
+            </Text>
+            <TextField isRequired>
+              <Label>Titel der Website</Label>
+            </TextField>
+            <TextField isRequired>
+              <Label>Domain</Label>
+            </TextField>
+          </Section>
+          <Section>
+            <Heading>Admin</Heading>
+            <Text>
+              Lege hier den Admin für deine WordPress
+              Installation an.
+            </Text>
+            <TextField
+              isRequired
+              defaultValue="mmustermann"
+            >
+              <Label>Benutzername</Label>
+            </TextField>
+            <TextField isRequired>
+              <Label>Passwort</Label>
+            </TextField>
+            <TextField
+              isRequired
+              defaultValue="m.musterman@example.de"
+            >
+              <Label>E-Mail-Adresse</Label>
+            </TextField>
+          </Section>
+        </Content>
+        <ActionGroup>
+          <Action closeOverlay>
+            <Action action={sleepLong}>
+              <Button color="accent">
+                Wordpress installieren
+              </Button>
+            </Action>
             <Button variant="soft" color="secondary">
               Abbrechen
             </Button>
