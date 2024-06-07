@@ -7,14 +7,14 @@ import {
 import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
 import { Link } from "@/components/Link";
-import { ContextualHelpButton } from "@/components/ContextualHelp/components/ContextualHelpButton";
+import { Button } from "@/components/Button";
 
 const meta: Meta<typeof ContextualHelp> = {
   title: "Overlays/ContextualHelp",
   component: ContextualHelp,
   render: (props) => (
     <ContextualHelpTrigger>
-      <ContextualHelpButton />
+      <Button />
       <ContextualHelp {...props}>
         <Heading>Rights & roles</Heading>
         <Text>

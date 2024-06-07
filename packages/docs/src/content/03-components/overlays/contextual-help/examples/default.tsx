@@ -1,14 +1,15 @@
 import {
   ContextualHelp,
-  ContextualHelpButton,
   ContextualHelpTrigger,
 } from "@mittwald/flow-react-components/ContextualHelp";
 import { Heading } from "@mittwald/flow-react-components/Heading";
 import { Text } from "@mittwald/flow-react-components/Text";
 import { Link } from "@mittwald/flow-react-components/Link";
+import { Button } from "@mittwald/flow-react-components/Button";
 
 <ContextualHelpTrigger>
-  <ContextualHelpButton />
+  <Button />
+
   <ContextualHelp>
     <Heading>Rechte & Rollen</Heading>
     <Text>
