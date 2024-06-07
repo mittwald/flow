@@ -52,6 +52,7 @@ export default () => {
               display: "flex",
               alignItems: "center",
               gap: "24px",
+              borderBottom: "1px solid #909090",
             }}
           >
             <div style={{ flexGrow: "1" }}>
@@ -62,54 +63,88 @@ export default () => {
             <Heading levelVisual={1}>50 €</Heading>
           </div>
           <Section>
-            <TextField isRequired>
-              <Label>Servername</Label>
-            </TextField>
-            <RadioGroup defaultValue="1">
-              <Label>Ressourcen wählen</Label>
-              <RadioButton value="1">
-                <Text>2 vCPU</Text>
-                <Content>4 GB RAM</Content>
-              </RadioButton>
-              <RadioButton value="2">
-                <Text>4 vCPU</Text>
-                <Content>4 GB RAM</Content>
-              </RadioButton>
-              <RadioButton value="3">
-                <Text>8 vCPU</Text>
-                <Content>4 GB RAM</Content>
-              </RadioButton>
-              <RadioButton value="4">
-                <Text>16 vCPU</Text>
-                <Content>4 GB RAM</Content>
-              </RadioButton>
-              <RadioButton value="5">
-                <Text>32 vCPU</Text>
-                <Content>4 GB RAM</Content>
-              </RadioButton>
-              <RadioButton value="6">
-                <Text>64 vCPU</Text>
-                <Content>4 GB RAM</Content>
-              </RadioButton>
-            </RadioGroup>
-            <Text>
-              Auf deinem Space-Server kannst du unlimitiert
-              viele Projekte anlegen. Wir empfehlen jedoch
-              eine maximale Anzahl - basierend auf Analysen
-              und langjähriger Erfahrung.
-            </Text>
-            <Slider
-              formatOptions={{
-                style: "unit",
-                unit: "gigabyte",
-              }}
-              minValue={20}
-              maxValue={2000}
-              defaultValue={200}
-              step={20}
-            >
-              <Label>Speicherplatz</Label>
-            </Slider>
+            <ColumnLayout m={[3, 2]}>
+              <Section>
+                <TextField isRequired>
+                  <Label>Servername</Label>
+                </TextField>
+                <RadioGroup defaultValue="1" s={[1, 1, 1]}>
+                  <Label>Ressourcen wählen</Label>
+                  <RadioButton value="1">
+                    <Text>2 vCPU</Text>
+                    <Content>4 GB RAM</Content>
+                  </RadioButton>
+                  <RadioButton value="2">
+                    <Text>4 vCPU</Text>
+                    <Content>4 GB RAM</Content>
+                  </RadioButton>
+                  <RadioButton value="3">
+                    <Text>8 vCPU</Text>
+                    <Content>4 GB RAM</Content>
+                  </RadioButton>
+                  <RadioButton value="4">
+                    <Text>16 vCPU</Text>
+                    <Content>4 GB RAM</Content>
+                  </RadioButton>
+                  <RadioButton value="5">
+                    <Text>32 vCPU</Text>
+                    <Content>4 GB RAM</Content>
+                  </RadioButton>
+                  <RadioButton value="6">
+                    <Text>64 vCPU</Text>
+                    <Content>4 GB RAM</Content>
+                  </RadioButton>
+                </RadioGroup>
+                <Text>
+                  Auf deinem Space-Server kannst du
+                  unlimitiert viele Projekte anlegen. Wir
+                  empfehlen jedoch eine maximale Anzahl -
+                  basierend auf Analysen und langjähriger
+                  Erfahrung.
+                </Text>
+                <Slider
+                  formatOptions={{
+                    style: "unit",
+                    unit: "gigabyte",
+                  }}
+                  minValue={20}
+                  maxValue={2000}
+                  defaultValue={200}
+                  step={20}
+                >
+                  <Label>Speicherplatz</Label>
+                </Slider>
+              </Section>
+              <div
+                style={{
+                  backgroundColor: "#f8f8f8",
+                  border: "1px solid #909090",
+                  borderRadius: "4px",
+                  padding: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "16px",
+                }}
+              >
+                <Heading>Deine Konfiguration</Heading>
+                <Text>
+                  <b>Artikel: Space-Server</b>
+                </Text>
+                <ColumnLayout s={[2, 1]}>
+                  <Text>4vCPU/8 GB RAM</Text>
+                  <Text>45,00 €</Text>
+                  <Text>50 GB Speichplatz</Text>
+                  <Text>inklusive</Text>
+                  <Text>100 GB Speicherplatz</Text>
+                  <Text>5,00 €</Text>
+                </ColumnLayout>
+                <CheckboxButton
+                  style={{ marginTop: "auto" }}
+                >
+                  10 Tage kostenlos testen!
+                </CheckboxButton>
+              </div>
+            </ColumnLayout>
           </Section>
           <Section>
             <Heading>Organisation wählen</Heading>
