@@ -8,37 +8,42 @@ import { ActionContextProvider } from "@/components/Action/context";
 import { useActionStateContext } from "@/components/Action/models/ActionStateContext";
 import { useConfirmationModalButtonSlot } from "@/components/Action/hooks/useConfirmationModalButtonSlot";
 import { useActionButtonState } from "@/components/Action/hooks/useActionButtonState";
+import type { ComponentPropsContext } from "@/lib/propsContext/types";
+
+const actionButtonContext: ComponentPropsContext<"Button"> = {
+  onPress: dynamic((props) => {
+    const action = ActionModel.use();
+    const confirmAction = ActionModel.useConfirmationAction();
+    const isConfirmationButton =
+      useConfirmationModalButtonSlot(props) === "primary";
+    const isAbortButton = useConfirmationModalButtonSlot(props) === "abort";
+    if (isAbortButton) {
+      return action.confirmationModalController.close;
+    }
+    return isConfirmationButton ? confirmAction.execute : action.execute;
+  }),
+
+  isPending: dynamic((props) => useActionButtonState(props) === "isPending"),
+
+  isSucceeded: dynamic(
+    (props) => useActionButtonState(props) === "isSucceeded",
+  ),
+
+  isFailed: dynamic((props) => useActionButtonState(props) === "isFailed"),
+
+  "aria-disabled": dynamic((props) => {
+    const state = useActionButtonState(props);
+    const someActionInContextIsBusy = useActionStateContext().useIsBusy();
+    return state === "isExecuting" || someActionInContextIsBusy;
+  }),
+};
 
 export const Action: FC<ActionProps> = (props) => {
   const { children, ...actionProps } = props;
   const actionModel = ActionModel.useNew(actionProps);
 
   const propsContext: PropsContext = {
-    Button: {
-      onPress: dynamic((props) => {
-        const action = ActionModel.use();
-        const confirmAction = ActionModel.useConfirmationAction();
-        const isConfirmationButton =
-          useConfirmationModalButtonSlot(props) === "primary";
-        const isAbortButton = useConfirmationModalButtonSlot(props) === "abort";
-        if (isAbortButton) {
-          return action.confirmationModalController.close;
-        }
-        return isConfirmationButton ? confirmAction.execute : action.execute;
-      }),
-      isPending: dynamic(
-        (props) => useActionButtonState(props) === "isPending",
-      ),
-      isSucceeded: dynamic(
-        (props) => useActionButtonState(props) === "isSucceeded",
-      ),
-      isFailed: dynamic((props) => useActionButtonState(props) === "isFailed"),
-      "aria-disabled": dynamic(() => {
-        const state = useActionButtonState(props);
-        const someActionInContextIsBusy = useActionStateContext().useIsBusy();
-        return state === "isExecuting" || someActionInContextIsBusy;
-      }),
-    },
+    Button: actionButtonContext,
 
     Link: {
       onPress: dynamic(() => ActionModel.use().execute),
@@ -53,8 +58,10 @@ export const Action: FC<ActionProps> = (props) => {
       }),
       isDismissable: dynamic((props) => {
         const action = ActionModel.use();
-        const actionIsBusy = action.state.useIsBusy();
-        return actionIsBusy ? false : props.isDismissable;
+        const actionState = action.state.useValue();
+        return actionState === "isExecuting" || actionState === "isPending"
+          ? false
+          : props.isDismissable;
       }),
       controller: dynamic(() => {
         const action = ActionModel.use();
@@ -62,6 +69,9 @@ export const Action: FC<ActionProps> = (props) => {
           ? action.confirmationModalController
           : action.getOverlayController();
       }),
+      ActionGroup: {
+        Button: actionButtonContext,
+      },
     },
   };
 
