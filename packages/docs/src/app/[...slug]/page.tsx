@@ -5,6 +5,8 @@ import { LayoutCard } from "@mittwald/flow-react-components/LayoutCard";
 import { Tabs } from "@mittwald/flow-react-components/Tabs";
 import React from "react";
 import TabContent from "@/app/_components/layout/TabContent/TabContent";
+import SideNavigation from "@/app/_components/layout/SideNavigation/SideNavigation";
+import styles from "@/app/layout.module.scss";
 
 const contentFolder = "src/content";
 
@@ -45,24 +47,34 @@ export default async function Page(props: Props) {
     "guidelines",
   );
 
+  // ToDo: check active tab for side navigation
+
   return (
     <>
       {indexMdxFile && <MainContent mdxFile={indexMdxFile} />}
 
       {(overviewMdxFile || developMdxFile || guidelinesMdxFile) && (
-        <LayoutCard>
-          <Tabs>
-            {overviewMdxFile && (
-              <TabContent mdxFile={overviewMdxFile} tabTitle="Overview" />
-            )}
-            {developMdxFile && (
-              <TabContent mdxFile={developMdxFile} tabTitle="Develop" />
-            )}
-            {guidelinesMdxFile && (
-              <TabContent mdxFile={guidelinesMdxFile} tabTitle="Guidelines" />
-            )}
-          </Tabs>
-        </LayoutCard>
+        <div className={styles.mainContainer}>
+          <LayoutCard className={styles.mainContent}>
+            <Tabs>
+              {overviewMdxFile && (
+                <TabContent mdxFile={overviewMdxFile} tabTitle="Overview" />
+              )}
+              {developMdxFile && (
+                <TabContent mdxFile={developMdxFile} tabTitle="Develop" />
+              )}
+              {guidelinesMdxFile && (
+                <TabContent mdxFile={guidelinesMdxFile} tabTitle="Guidelines" />
+              )}
+            </Tabs>
+          </LayoutCard>
+
+          <SideNavigation
+            className={styles.sideNavigation}
+            mdxFile={overviewMdxFile}
+            title="Overview"
+          />
+        </div>
       )}
     </>
   );

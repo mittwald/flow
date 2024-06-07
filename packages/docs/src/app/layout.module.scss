@@ -73,6 +73,26 @@
   row-gap: var(--size-px--l);
 }
 
+.mainContainer {
+  display: flex;
+  column-gap: var(--size-px--l);
+
+  .mainContent {
+    flex-grow: 1;
+  }
+
+  .sideNavigation {
+    position: sticky;
+    top: var(--size-px--l);
+    height: min-content;
+    width: 250px;
+    padding-inline: var(--size-px--m);
+    a {
+      font-size: var(--font-size--s);
+    }
+  }
+}
+
 @media (max-width: 900px) {
   .center {
     grid-template-areas:
@@ -98,5 +118,11 @@
 
   .center {
     padding-inline: var(--size-px--s);
+  }
+}
+
+@media (max-width: 1200px) {
+  .sideNavigation {
+    display: none;
   }
 }
