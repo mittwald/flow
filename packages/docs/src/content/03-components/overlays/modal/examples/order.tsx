@@ -213,9 +213,7 @@ export default () => {
         <ActionGroup>
           <Action closeOverlay>
             <Action action={sleepLong}>
-              <Button color="accent">
-                Ticket erstellen
-              </Button>
+              <Button color="accent">Server buchen</Button>
             </Action>
             <Button variant="soft" color="secondary">
               Abbrechen
