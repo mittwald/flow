@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.138](https://github.com/mittwald/flow/compare/0.1.0-alpha.137...0.1.0-alpha.138) (2024-06-07)
+
+### Features
+
+- **ContextualHelp:** add contextual help component
+  ([69b85cc](https://github.com/mittwald/flow/commit/69b85cc66e3b474e0990e3a11d820db8e7bd515d))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.137](https://github.com/mittwald/flow/compare/0.1.0-alpha.136...0.1.0-alpha.137) (2024-06-06)
 
 **Note:** Version bump only for package @mittwald/flow-design-tokens
