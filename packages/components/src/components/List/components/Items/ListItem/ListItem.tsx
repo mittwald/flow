@@ -1,6 +1,7 @@
 import type { FC, PropsWithChildren } from "react";
 import React from "react";
 import styles from "./ListItem.module.scss";
+import itemListStyles from "../ItemList/ItemList.module.css";
 import type { PropsContext } from "@/lib/propsContext";
 import { dynamic, PropsContextProvider } from "@/lib/propsContext";
 import { OptionsButton } from "@/components/List/components/Items/OptionsButton";
@@ -71,17 +72,19 @@ export const ListItem = (props: Props) => {
     );
 
   return (
-    <MainComponent>
-      <PropsContextProvider props={propsContext}>
-        <TunnelProvider>
-          {children}
-          <div className={styles.title}>
-            <TunnelExit id="title" />
-          </div>
-          <TunnelExit id="topContent" />
-        </TunnelProvider>
-      </PropsContextProvider>
-    </MainComponent>
+    <div className={itemListStyles.itemContainer}>
+      <MainComponent>
+        <PropsContextProvider props={propsContext}>
+          <TunnelProvider>
+            {children}
+            <div className={styles.title}>
+              <TunnelExit id="title" />
+            </div>
+            <TunnelExit id="topContent" />
+          </TunnelProvider>
+        </PropsContextProvider>
+      </MainComponent>
+    </div>
   );
 };
 

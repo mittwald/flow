@@ -31,6 +31,7 @@ export const ItemList: FC<Props> = (props) => {
     styles.itemList,
     className,
     isLoading && styles.isLoading,
+    list.tiles && styles.tiles,
   );
 
   if (listIsEmpty) {

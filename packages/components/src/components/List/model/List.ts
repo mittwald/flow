@@ -19,9 +19,16 @@ export class List<T> {
   public readonly reactTable: ReactTable<T>;
   public readonly batches: BatchesController<T>;
   public readonly loader: IncrementalLoader<T>;
+  public readonly tiles?: boolean;
 
   private constructor(shape: ListShape<T>) {
-    const { render, filters = [], sorting = [], batchesController } = shape;
+    const {
+      render,
+      filters = [],
+      sorting = [],
+      batchesController,
+      tiles,
+    } = shape;
 
     this.render = render;
 
@@ -37,6 +44,8 @@ export class List<T> {
       manualPagination: this.loader.manualPagination,
       manualSorting: this.loader.manualSorting,
     });
+
+    this.tiles = tiles;
   }
 
   public static useNew<T>(shape: ListShape<T>): List<T> {

@@ -13,6 +13,7 @@ export interface ListShape<T> {
   filters?: FilterShape<T>[];
   sorting?: SortingShape<T>[];
   batchesController?: BatchesControllerShape;
+  tiles?: boolean;
 }
 
 export type PropertyRecord<T, TValue> = Partial<

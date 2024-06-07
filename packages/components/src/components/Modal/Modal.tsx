@@ -43,6 +43,7 @@ export const Modal = flowComponent("Modal", (props) => {
       level: 2,
       slot: "title",
       className: styles.title,
+      tunnelId: "title",
     },
     ActionGroup: {
       className: styles.actionGroup,
@@ -54,6 +55,7 @@ export const Modal = flowComponent("Modal", (props) => {
     <ModalOverlay className={rootClassName} controller={controller} {...rest}>
       <PropsContextProvider props={propsContext} mergeInParentContext>
         <TunnelProvider>
+          <TunnelExit id="title" />
           <div className={styles.content}>{children}</div>
           <TunnelExit id="buttons" />
         </TunnelProvider>

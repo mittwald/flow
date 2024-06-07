@@ -20,9 +20,10 @@
       outline: none;
       display: grid;
       grid-template-areas:
+        "title"
         "content"
         "actionGroup";
-      grid-template-rows: 1fr auto;
+      grid-template-rows: auto 1fr auto;
       height: 100%;
       max-height: inherit;
     }
@@ -40,7 +41,7 @@
       grid-area: content;
       overflow-x: hidden;
       overflow-y: auto;
-      padding-inline: var(--modal--padding);
+      padding: var(--modal--padding);
       padding-bottom: var(--modal--padding-bottom);
       display: flex;
       flex-direction: column;
@@ -48,12 +49,8 @@
     }
 
     .title {
-      background-color: var(--modal--background-color);
-      position: sticky;
-      top: 0;
+      grid-area: title;
       z-index: 1;
-      margin-inline: calc(var(--modal--padding) * -1);
-      margin-bottom: var(--size-px--m);
       border-block-end-width: var(--section--border-width);
       border-block-end-style: var(--section--border-style);
       border-block-end-color: var(--section--border-color);

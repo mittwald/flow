@@ -47,6 +47,24 @@ export default () => {
         "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod",
       versions: "Versionen X.XX bis X.XX",
     },
+    {
+      name: "Matomo",
+      description:
+        "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod",
+      versions: "Versionen X.XX bis X.XX",
+    },
+    {
+      name: "Contao",
+      description:
+        "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod",
+      versions: "Versionen X.XX bis X.XX",
+    },
+    {
+      name: "Shopware",
+      description:
+        "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod",
+      versions: "Versionen X.XX bis X.XX",
+    },
   ];
 
   return (
@@ -64,7 +82,8 @@ export default () => {
       >
         <Heading>App installieren</Heading>
         <Content>
-          <List batchSize={5}>
+          <TextField placeholder="Suche" />
+          <List batchSize={6} tiles>
             <ListStaticData data={apps} />
             <ListItemView<App>>
               {(app: App) => (

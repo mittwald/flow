@@ -21,10 +21,11 @@ import { FallbackRenderer } from "@/components/List/components/Items/ListItem/Fa
 
 interface Props extends PropsWithChildren {
   batchSize?: number;
+  tiles?: boolean;
 }
 
 export function List(props: Props) {
-  const { children, batchSize, ...restShape } = props;
+  const { children, batchSize, tiles, ...restShape } = props;
 
   const listLoaderAsync = deepFindOfType(children, ListLoaderAsync)?.props;
   const listLoaderAsyncResource = deepFindOfType(
@@ -66,6 +67,7 @@ export function List(props: Props) {
     batchesController: {
       batchSize,
     },
+    tiles: tiles,
   });
 
   return (

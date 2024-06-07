@@ -15,4 +15,20 @@
     pointer-events: none;
     opacity: 0.5;
   }
+
+  &.tiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--size-px--m);
+    border: none;
+
+    .itemContainer {
+      container-type: inline-size;
+      overflow: hidden;
+      border-color: var(--list-item--border-color);
+      border-width: var(--list-item--border-width);
+      border-style: var(--list-item--border-style);
+      border-radius: var(--list-item--corner-radius);
+    }
+  }
 }
