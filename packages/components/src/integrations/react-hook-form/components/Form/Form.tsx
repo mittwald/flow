@@ -31,7 +31,7 @@ export function Form<F extends FieldValues>(props: Props<F>) {
 
   useEffect(() => {
     if (isSubmitted && isValid) {
-      form?.reset(undefined, {
+      form.reset(undefined, {
         keepIsSubmitted: false,
         keepIsSubmitSuccessful: false,
         keepDefaultValues: true,
@@ -47,16 +47,11 @@ export function Form<F extends FieldValues>(props: Props<F>) {
     }
   }, [isSubmitted, isValid]);
 
-  const handleSubmit = form?.handleSubmit(onSubmit);
-
   const handleOnSubmit: FormEventHandler = (e) => {
     if (unwatchedFormState.isSubmitting || unwatchedFormState.isValidating) {
       e.preventDefault();
-      return false;
-    }
-
-    if (handleSubmit) {
-      return handleSubmit(e);
+    } else {
+      form.handleSubmit(onSubmit)(e);
     }
   };
 
