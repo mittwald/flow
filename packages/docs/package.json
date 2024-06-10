@@ -49,5 +49,25 @@
     "nx": "^19.1.2",
     "react-docgen-typescript": "^2.2.2",
     "typescript": "^5.4.5"
+  },
+  "nx": {
+    "targets": {
+      "build": {
+        "dependsOn": [
+          {
+            "projects": "@mittwald/flow-react-components",
+            "target": "build:docs-properties"
+          }
+        ]
+      },
+      "dev": {
+        "dependsOn": [
+          {
+            "projects": "@mittwald/flow-react-components",
+            "target": "build:docs-properties"
+          }
+        ]
+      }
+    }
   }
 }

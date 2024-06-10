@@ -264,7 +264,7 @@
     "node": ">=20.11"
   },
   "scripts": {
-    "build": "run build:docs-properties && run vite build --config vite.build.config.ts",
+    "build": "run vite build --config vite.build.config.ts",
     "build:deps:watch": "run -T build:deps:watch @mittwald/flow-react-components",
     "build:docs-properties": "run tsx dev/createDocPropertiesJson.ts",
     "build:icons": "run tsx dev/icons/generate.ts",
@@ -380,6 +380,20 @@
     },
     "react-hook-form": {
       "optional": true
+    }
+  },
+  "nx": {
+    "targets": {
+      "build:docs-properties": {
+        "cache": true,
+        "inputs": [
+          "{projectRoot}/src/components/**/*"
+        ],
+        "outputs": [
+          "{projectRoot}/dev/.cache",
+          "{projectRoot}/out"
+        ]
+      }
     }
   }
 }
