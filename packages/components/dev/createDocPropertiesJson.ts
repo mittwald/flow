@@ -4,7 +4,7 @@ import * as fsSync from "fs";
 import { glob } from "glob";
 
 import crypto from "node:crypto";
-import { ComponentDoc } from "react-docgen-typescript";
+import type { ComponentDoc } from "react-docgen-typescript";
 import { dirname, join, basename } from "path";
 import * as zlibSync from "zlib";
 import { promisify } from "node:util";
@@ -25,7 +25,7 @@ interface Component {
 const cacheDirectory = "./dev/.cache/docgen";
 const fileHashLength = 10;
 
-function hashString(input: string, length: number = 40) {
+function hashString(input: string, length = 40) {
   return crypto
     .createHash("sha1")
     .update(input)
