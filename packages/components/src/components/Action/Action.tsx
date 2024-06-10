@@ -39,8 +39,9 @@ const actionButtonContext: ComponentPropsContext<"Button"> = {
 };
 
 export const Action: FC<ActionProps> = (props) => {
-  const { children, ...actionProps } = props;
-  const actionModel = ActionModel.useNew(actionProps);
+  const { children, actionModel: actionModelFromProps, ...actionProps } = props;
+  const newActionModel = ActionModel.useNew(actionProps);
+  const actionModel = actionModelFromProps ?? newActionModel;
 
   const propsContext: PropsContext = {
     Button: actionButtonContext,

@@ -4,11 +4,7 @@ import { useForm } from "react-hook-form";
 import { action } from "@storybook/addon-actions";
 import { TextField } from "@/components/TextField";
 import { Label } from "@/components/Label";
-import {
-  Controller,
-  Form,
-  typedController,
-} from "@/integrations/react-hook-form";
+import { Field, Form, typedField } from "@/integrations/react-hook-form";
 import { Button } from "@/components/Button";
 import { Section } from "@/components/Section";
 import { ActionGroup } from "@/components/ActionGroup";
@@ -20,12 +16,13 @@ import { CheckboxGroup } from "@/components/CheckboxGroup";
 import { Checkbox } from "@/components/Checkbox";
 import Select, { Option } from "@/components/Select";
 import { Slider } from "@/components/Slider";
+import { sleep } from "@/lib/promises/sleep";
 
 const submitAction = action("submit");
 
-const meta: Meta<typeof Controller> = {
-  title: "Integrations/React Hook Form/Controller",
-  component: Controller,
+const meta: Meta<typeof Field> = {
+  title: "Integrations/React Hook Form/Field",
+  component: Field,
   render: () => {
     interface Values {
       firstName: string;
@@ -37,7 +34,8 @@ const meta: Meta<typeof Controller> = {
       storage: number;
     }
 
-    const onSubmit = (values: Values): void => {
+    const handleOnSubmit = async (values: Values) => {
+      await sleep(1500);
       submitAction(values);
     };
 
@@ -50,12 +48,12 @@ const meta: Meta<typeof Controller> = {
       },
     });
 
-    const TController = typedController(form);
+    const Field = typedField(form);
 
     return (
-      <Form onSubmit={form.handleSubmit(onSubmit)} form={form}>
+      <Form form={form} onSubmit={handleOnSubmit}>
         <Section>
-          <TController
+          <Field
             name="firstName"
             rules={{
               required: "Please enter your name",
@@ -65,9 +63,9 @@ const meta: Meta<typeof Controller> = {
               <Label>First name</Label>
               <FieldDescription>The first part of your name</FieldDescription>
             </TextField>
-          </TController>
+          </Field>
 
-          <TController
+          <Field
             name="lastName"
             rules={{
               required: "Please select your last name",
@@ -79,9 +77,9 @@ const meta: Meta<typeof Controller> = {
               <Option value="Williams">Williams</Option>
               <Option value="Peters">Peters</Option>
             </Select>
-          </TController>
+          </Field>
 
-          <TController
+          <Field
             name="age"
             rules={{
               required: "Please enter your age",
@@ -91,9 +89,9 @@ const meta: Meta<typeof Controller> = {
             <NumberField>
               <Label>Age</Label>
             </NumberField>
-          </TController>
+          </Field>
 
-          <TController
+          <Field
             name="gender"
             rules={{ required: "Please choose your gender" }}
           >
@@ -103,15 +101,15 @@ const meta: Meta<typeof Controller> = {
               <Radio value="female">Female</Radio>
               <Radio value="diverse">Diverse</Radio>
             </RadioGroup>
-          </TController>
+          </Field>
 
-          <TController name="testing">
+          <Field name="testing">
             <Switch>
               <Label>Activate testing</Label>
             </Switch>
-          </TController>
+          </Field>
 
-          <TController
+          <Field
             name="interests"
             rules={{
               validate: {
@@ -132,9 +130,9 @@ const meta: Meta<typeof Controller> = {
               <Checkbox value="bar">Bar</Checkbox>
               <Checkbox value="baz">Baz</Checkbox>
             </CheckboxGroup>
-          </TController>
+          </Field>
 
-          <TController name="storage">
+          <Field name="storage">
             <Slider
               formatOptions={{
                 style: "unit",
@@ -145,7 +143,7 @@ const meta: Meta<typeof Controller> = {
             >
               <Label>Storage</Label>
             </Slider>
-          </TController>
+          </Field>
 
           <ActionGroup>
             <Button type="submit">Submit</Button>
@@ -157,6 +155,6 @@ const meta: Meta<typeof Controller> = {
 };
 export default meta;
 
-type Story = StoryObj<typeof Controller>;
+type Story = StoryObj<typeof Field>;
 
 export const Default: Story = {};
