@@ -7,9 +7,8 @@ const a11yRegex = /^aria-.+/;
 const optionalRegex = / \| (undefined|null)/g;
 
 export default function loadProperties(name: string): Properties | null {
-  const componentDoc = (docGenFile as ComponentDoc[]).find(
-    (doc) => doc.displayName === name,
-  );
+  const typeDocGenFile = (docGenFile ?? []) as unknown as ComponentDoc[];
+  const componentDoc = typeDocGenFile.find((doc) => doc.displayName === name);
 
   if (!componentDoc) {
     return null;
