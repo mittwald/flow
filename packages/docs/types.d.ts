@@ -6,5 +6,6 @@ declare global {
   declare const Dont: ComponentType<{ example?: string }>;
   declare const Info: ComponentType<{ example?: string }>;
   declare const Row: ComponentType<PropsWithChildren>;
+  declare const PropertiesTables: ComponentType;
   declare const Column: ComponentType<PropsWithChildren>;
 }

@@ -13,3 +13,4 @@ nx-cloud.env
 packages/docs/src/lib/liveCode/dynamicImports.ts
 .idea/material_theme_project_new.xml
 coverage
+packages/components/out

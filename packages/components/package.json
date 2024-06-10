@@ -254,7 +254,8 @@
       "types": "./dist/types/integrations/react-hook-form/index.d.ts",
       "import": "./dist/react-hook-form.js"
     },
-    "./styles": "./dist/styles.css"
+    "./styles": "./dist/styles.css",
+    "./doc-properties": "./out/doc-properties.json"
   },
   "files": [
     "dist"
@@ -263,8 +264,9 @@
     "node": ">=20.11"
   },
   "scripts": {
-    "build": "run vite build --config vite.build.config.ts",
+    "build": "run build:docs-properties && run vite build --config vite.build.config.ts",
     "build:deps:watch": "run -T build:deps:watch @mittwald/flow-react-components",
+    "build:docs-properties": "run tsx dev/createDocPropertiesJson.ts",
     "build:icons": "run tsx dev/icons/generate.ts",
     "build:storybook": "run storybook build",
     "dev": "run nx run-many --outputStyle=stream --projects=@mittwald/flow-react-components --targets=start,build:deps:watch",
@@ -333,6 +335,7 @@
     "@vitest/coverage-v8": "~1.6.0",
     "decamelize": "^6.0.0",
     "fs-jetpack": "^5.1.0",
+    "glob": "^10.4.1",
     "happy-dom": "^14.12.0",
     "next": "^14.2.3",
     "nx": "^19.1.2",
@@ -342,6 +345,7 @@
     "prettier": "^3.3.0",
     "prop-types": "^15.8.1",
     "react": "^18.3.1",
+    "react-docgen-typescript": "^2.2.2",
     "react-dom": "^18.3.1",
     "react-element-to-jsx-string": "^15.0.0",
     "react-hook-form": "^7.51.5",
