@@ -54,6 +54,7 @@
     "targets": {
       "build": {
         "dependsOn": [
+          "build:imports",
           {
             "projects": "@mittwald/flow-react-components",
             "target": "build:docs-properties"
@@ -63,6 +64,7 @@
       },
       "dev": {
         "dependsOn": [
+          "build:imports",
           {
             "projects": "@mittwald/flow-react-components",
             "target": "build:docs-properties"
