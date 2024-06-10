@@ -6593,7 +6593,7 @@ const RAW_RUNTIME_STATE =
           ["vite-plugin-dts", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.9.1"],\
           ["vite-plugin-externalize-deps", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:0.8.0"],\
           ["vitest", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:1.6.0"],\
-          ["yaml", "npm:2.4.3"]\
+          ["yaml", "npm:2.4.5"]\
         ],\
         "packagePeers": [\
           "@types/mittwald__react-use-promise",\
@@ -6695,7 +6695,7 @@ const RAW_RUNTIME_STATE =
           ["vite-plugin-dts", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.9.1"],\
           ["vite-plugin-externalize-deps", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:0.8.0"],\
           ["vitest", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:1.6.0"],\
-          ["yaml", "npm:2.4.3"]\
+          ["yaml", "npm:2.4.5"]\
         ],\
         "packagePeers": [\
           "@types/mittwald__react-use-promise",\
@@ -6789,7 +6789,7 @@ const RAW_RUNTIME_STATE =
           ["vite-plugin-dts", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.9.1"],\
           ["vite-plugin-externalize-deps", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:0.8.0"],\
           ["vitest", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:1.6.0"],\
-          ["yaml", "npm:2.4.3"]\
+          ["yaml", "npm:2.4.5"]\
         ],\
         "linkType": "SOFT"\
       }]\
@@ -26265,7 +26265,7 @@ const RAW_RUNTIME_STATE =
           ["estree-util-value-to-estree", "npm:3.1.1"],\
           ["toml", "npm:3.0.0"],\
           ["unified", "npm:11.0.4"],\
-          ["yaml", "npm:2.4.3"]\
+          ["yaml", "npm:2.4.5"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -28851,7 +28851,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["vfile-matter", "npm:5.0.0"],\
           ["vfile", "npm:6.0.1"],\
-          ["yaml", "npm:2.4.3"]\
+          ["yaml", "npm:2.4.5"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -29808,10 +29808,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["npm:2.4.3", {\
-        "packageLocation": "./.yarn/cache/yaml-npm-2.4.3-3f2d66fba4-b4a9dea342.zip/node_modules/yaml/",\
+      ["npm:2.4.5", {\
+        "packageLocation": "./.yarn/cache/yaml-npm-2.4.5-4752f3d852-e1ee78b381.zip/node_modules/yaml/",\
         "packageDependencies": [\
-          ["yaml", "npm:2.4.3"]\
+          ["yaml", "npm:2.4.5"]\
         ],\
         "linkType": "HARD"\
       }]\
