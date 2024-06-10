@@ -3,6 +3,7 @@ import type {
   FormEventHandler,
   PropsWithChildren,
 } from "react";
+import { useRef } from "react";
 import { useEffect } from "react";
 import React from "react";
 import type { FieldValues, UseFormReturn } from "react-hook-form";
@@ -29,6 +30,8 @@ export function Form<F extends FieldValues>(props: Props<F>) {
 
   const unwatchedFormState = form.control._formState;
 
+  const isAsyncSubmit = useRef(false);
+
   useEffect(() => {
     if (isSubmitted && isValid) {
       form.reset(undefined, {
@@ -51,7 +54,11 @@ export function Form<F extends FieldValues>(props: Props<F>) {
     if (unwatchedFormState.isSubmitting || unwatchedFormState.isValidating) {
       e.preventDefault();
     } else {
-      form.handleSubmit(onSubmit)(e);
+      form.handleSubmit((values) => {
+        const result = onSubmit(values);
+        isAsyncSubmit.current = result instanceof Promise;
+        return result;
+      })(e);
     }
   };
 
@@ -62,7 +69,7 @@ export function Form<F extends FieldValues>(props: Props<F>) {
     <FormContextProvider value={{ form }}>
       <form {...formProps} onSubmit={handleOnSubmit}>
         <ActionStateContext
-          isStarted={isSubmitting}
+          isStarted={isSubmitting && isAsyncSubmit.current}
           hasFailedWithError={submitError}
           hasSucceeded={submitSucceeded}
         >
