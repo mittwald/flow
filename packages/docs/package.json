@@ -65,7 +65,8 @@
           {
             "projects": "@mittwald/flow-react-components",
             "target": "build:docs-properties"
-          }
+          },
+          "^build"
         ]
       }
     }
