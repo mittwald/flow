@@ -18948,11 +18948,11 @@ __metadata:
   linkType: hard
 
 "remeda@npm:^2.0.3":
-  version: 2.0.3
-  resolution: "remeda@npm:2.0.3"
+  version: 2.0.9
+  resolution: "remeda@npm:2.0.9"
   dependencies:
     type-fest: "npm:^4.18.2"
-  checksum: 10c0/02ca48ef0dbf5246ceec0dbaf9f7d19e56069176747ff1bf4a429f696b5a1d22ddb7fde4c15c67fe61f93916ff17ecace107045979dec810630ab2b729e988e2
+  checksum: 10c0/851dc8a2bd9b3707a6d61dc813f6fd0c4cb13203768f7a32688dc0adf1ffbde2062f25f9e5c4f158088b1b6c3be51373b5b5546a3e5ac0f89d7d2773debf929f
   languageName: node
   linkType: hard
 
