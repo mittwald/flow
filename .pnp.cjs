@@ -6467,6 +6467,7 @@ const RAW_RUNTIME_STATE =
           ["raw-loader", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:4.0.2"],\
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:18.3.1"],\
+          ["react-hook-form", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:7.51.5"],\
           ["remark-frontmatter", "npm:5.0.0"],\
           ["remark-mdx-frontmatter", "npm:4.0.0"],\
           ["remeda", "npm:2.0.3"],\
@@ -6603,6 +6604,7 @@ const RAW_RUNTIME_STATE =
           "@types/react",\
           "next",\
           "react-dom",\
+          "react-hook-form",\
           "react"\
         ],\
         "linkType": "SOFT"\

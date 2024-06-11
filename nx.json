@@ -31,6 +31,10 @@
         "{projectRoot}/dev/icons/**/*",
         "{projectRoot}/src/components/Icon/tablerMappings.yaml"
       ]
+    },
+    "build:imports": {
+      "cache": true,
+      "inputs": ["default", "{projectRoot}/src/content/**/*.mdx"]
     }
   }
 }
