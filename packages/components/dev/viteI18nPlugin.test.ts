@@ -76,9 +76,11 @@ describe("vite i18n plugin", () => {
       expect(load).toBeDefined();
       expect(load.code).toBeDefined();
       expect(load.code).toMatchInlineSnapshot(`
-        "export default {"bar":{ "bar": "baz" }
-        ,"foo":{ "foo": "bar" }
-        };"
+        "export default {"bar": {  "bar": (args) => \`test with variable \${args.var}\`,
+          "bar.simple": \`test simple variable\`,
+        },"foo": {  "foo": (args) => \`bar \${args.var}\`,
+          "foo.simple": \`test simple variable\`,
+        }};"
       `);
     }
   });
@@ -110,8 +112,9 @@ describe("vite i18n plugin", () => {
       expect(load).toBeDefined();
       expect(load.code).toBeDefined();
       expect(load.code).toMatchInlineSnapshot(`
-        "export default {"bar":{ "bar": "baz" }
-        };"
+        "export default {"bar": {  "bar": (args) => \`test with variable \${args.var}\`,
+          "bar.simple": \`test simple variable\`,
+        }};"
       `);
     }
   });

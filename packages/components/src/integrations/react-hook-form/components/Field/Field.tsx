@@ -5,7 +5,7 @@ import type {
   FieldValues,
   UseFormReturn,
 } from "react-hook-form";
-import { Controller as RHFController } from "react-hook-form";
+import { Controller } from "react-hook-form";
 import type { PropsContext } from "@/lib/propsContext";
 import { dynamic, PropsContextProvider } from "@/lib/propsContext";
 import { useFormContext } from "@/integrations/react-hook-form/components/context/formContext";
@@ -15,29 +15,34 @@ interface Props<T extends FieldValues>
   extends Omit<ControllerProps<T>, "render">,
     PropsWithChildren {}
 
-export function Controller<T extends FieldValues>(props: Props<T>) {
+export function Field<T extends FieldValues>(props: Props<T>) {
   const { children, control, ...rest } = props;
 
   const controlFromContext = useFormContext<T>().form?.control;
 
   return (
-    <RHFController
+    <Controller
       {...rest}
       control={control ?? controlFromContext}
       render={(renderProps) => {
-        const { field, fieldState } = renderProps;
+        const {
+          field,
+          fieldState: { error, invalid },
+        } = renderProps;
 
         const formControlProps = {
           ...field,
           isRequired: !!rest.rules?.required,
-          isInvalid: fieldState.invalid,
+          isInvalid: invalid,
           validationBehavior: "aria" as const,
           children: dynamic((p) => (
             <>
               {p.children}
-              <FieldError>{fieldState.error?.message}</FieldError>
+              <FieldError>{error?.message}</FieldError>
             </>
           )),
+          ref: undefined,
+          refProp: field.ref,
         };
 
         const propsContext: PropsContext = {
@@ -67,6 +72,6 @@ export function Controller<T extends FieldValues>(props: Props<T>) {
   );
 }
 
-export const typedController = <T extends FieldValues>(
+export const typedField = <T extends FieldValues>(
   ignoredForm: UseFormReturn<T>,
-): typeof Controller<T> => Controller;
+): typeof Field<T> => Field;

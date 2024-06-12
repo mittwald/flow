@@ -84,7 +84,11 @@ export const RadioGroup = flowComponent("RadioGroup", (props) => {
   return (
     <Aria.RadioGroup {...rest} className={rootClassName} ref={ref}>
       <TunnelProvider>
-        <PropsContextProvider props={propsContext} dependencies={[variant]}>
+        <PropsContextProvider
+          props={propsContext}
+          dependencies={[variant]}
+          mergeInParentContext
+        >
           {children}
 
           {variant === "segmented" && (

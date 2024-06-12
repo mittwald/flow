@@ -1,3 +1,3 @@
-<button className="flow--button flow--button--primary flow--button--size-s">
-  Small Primary Button
+<button className="flow--button flow--button--accent flow--button--size-s">
+  Small Accented Button
 </button>;

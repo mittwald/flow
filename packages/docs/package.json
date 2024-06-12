@@ -31,21 +31,22 @@
     "raw-loader": "^4.0.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-hook-form": "^7.51.5",
     "remark-frontmatter": "^5.0.0",
     "remark-mdx-frontmatter": "^4.0.0",
-    "remeda": "^2.0.3",
+    "remeda": "^2.0.9",
     "sass": "^1.77.4",
-    "tsx": "^4.11.2",
+    "tsx": "^4.15.2",
     "webpack": "^5.91.0"
   },
   "devDependencies": {
-    "@types/node": "^20.14.1",
+    "@types/node": "^20.14.2",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@yarnpkg/pnpify": "^4.1.0",
     "eslint": "^9.4.0",
     "glob": "^10.4.1",
-    "nx": "^19.1.2",
+    "nx": "^19.2.3",
     "typescript": "^5.4.5"
   }
 }

@@ -43,7 +43,7 @@ export const Section = flowComponent("Section", (props) => {
   return (
     <Activity isActive={isActive}>
       <section {...rest} className={rootClassName} ref={ref}>
-        <PropsContextProvider props={propsContext}>
+        <PropsContextProvider props={propsContext} mergeInParentContext>
           {children}
         </PropsContextProvider>
       </section>

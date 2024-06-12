@@ -1,1 +1,4 @@
-{ "foo": "bar" }
+{
+  "foo": "bar {var}",
+  "foo.simple": "test simple variable"
+}
