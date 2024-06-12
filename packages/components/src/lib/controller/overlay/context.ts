@@ -1,8 +1,12 @@
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 import type { OverlayController } from "@/lib/controller/overlay/OverlayController";
+import type { FlowComponentName } from "@/components/propTypes";
 
-export const overlayContext = createContext<OverlayController | undefined>(
-  undefined,
-);
+export type OverlayContext = Partial<{
+  [C in FlowComponentName]: OverlayController | undefined;
+}>;
 
-export const OverlayContextProvider = overlayContext.Provider;
+export const overlayContext = createContext<OverlayContext>({});
+
+export const useOverlayContext = (): OverlayContext =>
+  useContext(overlayContext);

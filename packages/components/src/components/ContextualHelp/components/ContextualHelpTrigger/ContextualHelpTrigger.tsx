@@ -1,6 +1,7 @@
 import * as Aria from "react-aria-components";
-import type { FC, PropsWithChildren } from "react";
+import type { FC } from "react";
 import React from "react";
+import type { OverlayTriggerProps } from "@/components/OverlayTrigger";
 import { OverlayTrigger } from "@/components/OverlayTrigger";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
@@ -8,9 +9,10 @@ import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 import { IconInfo } from "@/components/Icon/components/icons";
 
-type Props = PropsWithChildren;
+type Props = Omit<OverlayTriggerProps, "overlayType">;
 
 export const ContextualHelpTrigger: FC<Props> = (props) => {
+  const { children, ...triggerProps } = props;
   const stringFormatter = useLocalizedStringFormatter(locales);
 
   const propsContext: PropsContext = {
@@ -25,10 +27,10 @@ export const ContextualHelpTrigger: FC<Props> = (props) => {
   };
 
   return (
-    <OverlayTrigger>
+    <OverlayTrigger overlayType="ContextualHelp" {...triggerProps}>
       <Aria.DialogTrigger>
         <PropsContextProvider props={propsContext} mergeInParentContext>
-          {props.children}
+          {children}
         </PropsContextProvider>
       </Aria.DialogTrigger>
     </OverlayTrigger>
