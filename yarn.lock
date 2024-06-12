@@ -3504,7 +3504,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@formatjs/icu-messageformat-parser@npm:2.7.8":
+"@formatjs/icu-messageformat-parser@npm:2.7.8, @formatjs/icu-messageformat-parser@npm:^2.4.0":
   version: 2.7.8
   resolution: "@formatjs/icu-messageformat-parser@npm:2.7.8"
   dependencies:
@@ -3580,6 +3580,15 @@ __metadata:
   dependencies:
     "@swc/helpers": "npm:^0.5.0"
   checksum: 10c0/dd1bb4e89c6468b97e8357e1ba0a60234bd2c8226f3241c4c7499e5b1791ba0574127ea6de0fd6c4158e2ceef564bba6531a8f5589e58b820df669e312500f99
+  languageName: node
+  linkType: hard
+
+"@internationalized/string-compiler@npm:^3.2.4":
+  version: 3.2.4
+  resolution: "@internationalized/string-compiler@npm:3.2.4"
+  dependencies:
+    "@formatjs/icu-messageformat-parser": "npm:^2.4.0"
+  checksum: 10c0/751f3214b37e7facac67c26eb028da09061ae0d5bb11c814ac798e9fb87001f5c3ce4a071c24e79f1fbe47fdb56a1e04d78e23850b1fd6b319a61d720c6628ed
   languageName: node
   linkType: hard
 
@@ -4079,6 +4088,7 @@ __metadata:
   dependencies:
     "@chakra-ui/live-region": "npm:^2.1.0"
     "@faker-js/faker": "npm:^8.4.1"
+    "@internationalized/string-compiler": "npm:^3.2.4"
     "@mittwald/flow-design-tokens": "workspace:^"
     "@mittwald/react-tunnel": "workspace:^"
     "@mittwald/react-use-promise": "npm:^2.3.13"

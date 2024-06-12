@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import type { LocalizedStrings } from "react-aria";
-import { useMessageFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "react-aria";
 
 interface Props {
   locales: LocalizedStrings;
@@ -10,8 +10,8 @@ interface Props {
 
 export const Translate: FC<Props> = (props) => {
   const { children, locales, variables } = props;
-  const formatter = useMessageFormatter(locales);
-  return formatter(children, variables);
+  const translator = useLocalizedStringFormatter(locales);
+  return translator.format(children, variables);
 };
 
 export default Translate;
