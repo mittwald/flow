@@ -9,8 +9,12 @@ type Props = Omit<OverlayTriggerProps, "overlayType">;
 export const OffCanvasTrigger: FC<Props> = (props) => {
   const { children, ...triggerProps } = props;
   return (
-    <OverlayTrigger overlayType="OffCanvas" {...triggerProps}>
-      <Aria.DialogTrigger>{children}</Aria.DialogTrigger>
+    <OverlayTrigger
+      overlayType="OffCanvas"
+      {...triggerProps}
+      component={Aria.DialogTrigger}
+    >
+      {children}
     </OverlayTrigger>
   );
 };

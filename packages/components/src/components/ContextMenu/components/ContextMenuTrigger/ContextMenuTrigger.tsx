@@ -4,13 +4,15 @@ import React from "react";
 import type { OverlayTriggerProps } from "@/components/OverlayTrigger";
 import { OverlayTrigger } from "@/components/OverlayTrigger";
 
-type Props = Omit<OverlayTriggerProps, "overlayType">;
-
-export const ContextMenuTrigger: FC<Props> = (props) => {
+export const ContextMenuTrigger: FC<OverlayTriggerProps> = (props) => {
   const { children, ...triggerProps } = props;
   return (
-    <OverlayTrigger overlayType="Popover" {...triggerProps}>
-      <Aria.MenuTrigger>{children}</Aria.MenuTrigger>
+    <OverlayTrigger
+      overlayType="ContextMenu"
+      {...triggerProps}
+      component={Aria.MenuTrigger}
+    >
+      {children}
     </OverlayTrigger>
   );
 };

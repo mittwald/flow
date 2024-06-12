@@ -9,9 +9,7 @@ import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 import { IconInfo } from "@/components/Icon/components/icons";
 
-type Props = Omit<OverlayTriggerProps, "overlayType">;
-
-export const ContextualHelpTrigger: FC<Props> = (props) => {
+export const ContextualHelpTrigger: FC<OverlayTriggerProps> = (props) => {
   const { children, ...triggerProps } = props;
   const stringFormatter = useLocalizedStringFormatter(locales);
 
@@ -27,12 +25,14 @@ export const ContextualHelpTrigger: FC<Props> = (props) => {
   };
 
   return (
-    <OverlayTrigger overlayType="ContextualHelp" {...triggerProps}>
-      <Aria.DialogTrigger>
-        <PropsContextProvider props={propsContext} mergeInParentContext>
-          {children}
-        </PropsContextProvider>
-      </Aria.DialogTrigger>
+    <OverlayTrigger
+      overlayType="ContextualHelp"
+      {...triggerProps}
+      component={Aria.DialogTrigger}
+    >
+      <PropsContextProvider props={propsContext} mergeInParentContext>
+        {children}
+      </PropsContextProvider>
     </OverlayTrigger>
   );
 };

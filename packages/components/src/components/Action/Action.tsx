@@ -50,6 +50,10 @@ export const Action: FC<ActionProps> = (props) => {
       onPress: dynamic(() => ActionModel.use().execute),
     },
 
+    MenuItem: {
+      onAction: dynamic(() => ActionModel.use().execute),
+    },
+
     Modal: {
       slot: dynamic((props) => {
         const { slot } = props;

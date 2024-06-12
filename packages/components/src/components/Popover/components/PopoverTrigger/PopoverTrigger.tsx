@@ -9,8 +9,12 @@ type Props = Omit<OverlayTriggerProps, "overlayType">;
 export const PopoverTrigger: FC<Props> = (props) => {
   const { children, ...triggerProps } = props;
   return (
-    <OverlayTrigger overlayType="Popover" {...triggerProps}>
-      <Aria.DialogTrigger>{children}</Aria.DialogTrigger>
+    <OverlayTrigger
+      overlayType="Popover"
+      {...triggerProps}
+      component={Aria.DialogTrigger}
+    >
+      {children}
     </OverlayTrigger>
   );
 };
