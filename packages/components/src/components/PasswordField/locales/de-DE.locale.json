@@ -1,0 +1,5 @@
+{
+  "validation_charPool": "pool {foo}",
+  "validation_length": "länge {foo}",
+  "validation_length_one": "länge {foo}"
+}

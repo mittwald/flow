@@ -1,0 +1,11 @@
+{
+  "list.noResult.heading": "No search results found",
+  "list.noResult.text": "Your search did not return any results. Please adjust the search query or your filters.",
+  "list.options": "Options",
+  "list.paginationInfo": "Showing {visibleItemsCount} of {totalItemsCount}",
+  "list.paginationInfoFiltered": "Showing {visibleItemsCount} of {filteredItemsCount} (unfiltered total count {totalItemsCount})",
+  "list.resetAll": "Reset filters",
+  "list.setSorting": "Sorting: {property}",
+  "list.showMore": "Show more",
+  "list.sorting": "Sorting"
+}

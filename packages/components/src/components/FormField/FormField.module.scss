@@ -6,6 +6,8 @@
   /* Elements */
 
   .label {
+    display: flex;
+    column-gap: 4px;
     order: 1;
     margin-bottom: var(--form-control--label-to-control-spacing);
   }
