@@ -1,1 +1,4 @@
-{ "bar": "baz" }
+{
+  "bar": "test with variable {var}",
+  "bar.simple": "test simple variable"
+}
