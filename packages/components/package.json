@@ -238,6 +238,10 @@
       "types": "./dist/types/components/TextField/index.d.ts",
       "import": "./dist/TextField.js"
     },
+    "./PasswordField": {
+      "types": "./dist/types/components/PasswordField/index.d.ts",
+      "import": "./dist/PasswordField.js"
+    },
     "./Tooltip": {
       "types": "./dist/types/components/Tooltip/index.d.ts",
       "import": "./dist/Tooltip.js"
@@ -275,6 +279,7 @@
   },
   "dependencies": {
     "@chakra-ui/live-region": "^2.1.0",
+    "@mittwald/password-validation": "^2.1.0-alpha.5",
     "@mittwald/react-tunnel": "workspace:^",
     "@mittwald/react-use-promise": "^2.3.13",
     "@react-aria/utils": "^3.24.1",
@@ -357,6 +362,7 @@
     "vite-plugin-checker": "^0.6.4",
     "vite-plugin-dts": "^3.9.1",
     "vite-plugin-externalize-deps": "^0.8.0",
+    "vite-plugin-node-polyfills": "^0.22.0",
     "vitest": "~1.6.0",
     "yaml": "^2.4.3"
   },
