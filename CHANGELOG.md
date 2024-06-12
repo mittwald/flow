@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.141](https://github.com/mittwald/flow/compare/0.1.0-alpha.140...0.1.0-alpha.141) (2024-06-12)
+
+### Bug Fixes
+
+- **ListItem:** fix large white-space when just using content
+  ([fb21307](https://github.com/mittwald/flow/commit/fb21307aed3fdd53ac9342fbff0b19ffccdabc19))
+
+### Features
+
+- **Docs:** support GitHub component path in docs meta
+  ([50760a3](https://github.com/mittwald/flow/commit/50760a3aff4be17666f04ccef85ee71a6a6d9c3a))
+- **Form:** feedback only on async submit
+  ([96d9434](https://github.com/mittwald/flow/commit/96d94348d83deee212223132432e1b268e68ed8a))
+- **Form:** feedback only on async submit
+  ([b533457](https://github.com/mittwald/flow/commit/b5334579753299403f45fc70e885020c3c6b20e2))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.140](https://github.com/mittwald/flow/compare/0.1.0-alpha.139...0.1.0-alpha.140) (2024-06-10)
 
 **Note:** Version bump only for package @mittwald/flow-project
