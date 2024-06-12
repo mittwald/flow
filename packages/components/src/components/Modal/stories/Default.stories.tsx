@@ -31,7 +31,7 @@ const meta: Meta<typeof Modal> = {
     return (
       <Modal
         {...props}
-        controller={useOverlayController({ defaultOpen: true })}
+        controller={useOverlayController("Modal", { defaultOpen: true })}
       >
         <Heading>New Customer</Heading>
         <Content>
@@ -43,7 +43,7 @@ const meta: Meta<typeof Modal> = {
           </TextField>
         </Content>
         <ActionGroup>
-          <Action closeOverlay>
+          <Action closeOverlay="Modal">
             <Action action={asyncLongFunction}>
               <Button color="accent">Create customer</Button>
             </Action>
@@ -64,7 +64,7 @@ export const Default: Story = {};
 
 export const WithController: Story = {
   render: (props) => {
-    const controller = useOverlayController();
+    const controller = useOverlayController("Modal");
 
     return (
       <>
@@ -83,7 +83,7 @@ export const WithController: Story = {
             </TextField>
           </Content>
           <ActionGroup>
-            <Action closeOverlay>
+            <Action closeOverlay="Modal">
               <Button color="accent">Create customer</Button>
               <Button color="secondary" variant="soft">
                 Abort
@@ -106,7 +106,7 @@ export const WithTrigger: Story = {
           <Text>Are you sure you want to delete this project?</Text>
         </Content>
         <ActionGroup>
-          <Action closeOverlay>
+          <Action closeOverlay="Modal">
             <Button color="danger">Delete project</Button>
             <Button variant="soft" color="secondary">
               Abort

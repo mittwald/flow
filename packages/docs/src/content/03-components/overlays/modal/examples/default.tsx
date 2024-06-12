@@ -27,7 +27,7 @@ import { sleepLong } from "@/content/03-components/actions/action/examples/lib";
       </TextField>
     </Content>
     <ActionGroup>
-      <Action closeOverlay>
+      <Action closeOverlay="Modal">
         <Action action={sleepLong}>
           <Button color="accent">
             Organisation anlegen

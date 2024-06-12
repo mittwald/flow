@@ -1,14 +1,19 @@
 import type { FC, PropsWithChildren } from "react";
 import React from "react";
-import { useOverlayController } from "@/lib/controller";
-import { OverlayContextProvider } from "@/lib/controller/overlay/context";
+import { OverlayController } from "@/lib/controller";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
+import type { FlowComponentName } from "@/components/propTypes";
+import OverlayContextProvider from "@/lib/controller/overlay/OverlayContextProvider";
 
-type Props = PropsWithChildren;
+export interface OverlayTriggerProps extends PropsWithChildren {
+  overlayType: FlowComponentName;
+  isDefaultOpen?: boolean;
+}
 
-export const OverlayTrigger: FC<Props> = (props) => {
-  const overlayController = useOverlayController();
+export const OverlayTrigger: FC<OverlayTriggerProps> = (props) => {
+  const { overlayType, isDefaultOpen = false, children } = props;
+  const overlayController = OverlayController.useNew(isDefaultOpen);
 
   const propsContext: PropsContext = {
     Button: {
@@ -17,9 +22,9 @@ export const OverlayTrigger: FC<Props> = (props) => {
   };
 
   return (
-    <OverlayContextProvider value={overlayController}>
+    <OverlayContextProvider type={overlayType} controller={overlayController}>
       <PropsContextProvider props={propsContext} mergeInParentContext>
-        {props.children}
+        {children}
       </PropsContextProvider>
     </OverlayContextProvider>
   );
