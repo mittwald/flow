@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.145](https://github.com/mittwald/flow/compare/0.1.0-alpha.144...0.1.0-alpha.145) (2024-06-13)
+
+### Bug Fixes
+
+- **List:** fix filter and sorting menu not opening
+  ([905b497](https://github.com/mittwald/flow/commit/905b4974c796e2f71c9c28471284bba75d007f15))
+- **OverlayTrigger:** fix not cleared pressed state
+  ([4fa4580](https://github.com/mittwald/flow/commit/4fa45804246f186ccc79ea0fc927f44409bdbe68)),
+  closes [#485](https://github.com/mittwald/flow/issues/485)
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.144](https://github.com/mittwald/flow/compare/0.1.0-alpha.143...0.1.0-alpha.144) (2024-06-12)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
