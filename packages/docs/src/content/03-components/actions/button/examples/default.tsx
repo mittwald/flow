@@ -5,5 +5,5 @@ import Button from "@mittwald/flow-react-components/Button";
     alert("Button gedrückt");
   }}
 >
-  Fortfahren/Aktion
+  Button
 </Button>;

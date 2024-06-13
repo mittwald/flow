@@ -7,4 +7,5 @@ declare global {
   declare const Info: ComponentType<{ example?: string }>;
   declare const Row: ComponentType<PropsWithChildren>;
   declare const Column: ComponentType<PropsWithChildren>;
+  declare const StaticModal: ComponentType<PropsWithChildren>;
 }

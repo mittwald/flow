@@ -3,15 +3,31 @@ import styles from "../MdxFileView/customComponents.module.css";
 import { Text } from "@mittwald/flow-react-components/Text";
 import LiveCodeEditor from "@/lib/liveCode/components/LiveCodeEditor";
 import clsx from "clsx";
+import { Heading } from "@mittwald/flow-react-components/Heading";
+import { IconCheck, IconClose } from "@mittwald/flow-react-components/Icons";
 
 interface Props extends PropsWithChildren {
   code?: string;
   text?: string;
   type?: "do" | "dont";
+  zoom?: number;
+  lightBackground?: boolean;
+  darkBackground?: boolean;
+  heading?: string;
+  mobile?: boolean;
 }
 
 export const DoAndDontTile: FC<Props> = (props) => {
-  const { code, text, type } = props;
+  const {
+    code,
+    text,
+    type,
+    zoom,
+    lightBackground,
+    darkBackground,
+    heading,
+    mobile,
+  } = props;
 
   return (
     <>
@@ -19,25 +35,19 @@ export const DoAndDontTile: FC<Props> = (props) => {
         <LiveCodeEditor
           editorDisabled
           code={code}
-          className={clsx(
-            styles.doAndDontCode,
-            type === "do" && styles.doCode,
-            type === "dont" && styles.dontCode,
-          )}
+          className={styles.doAndDontCode}
+          zoom={zoom}
+          lightBackground={lightBackground}
+          darkBackground={darkBackground}
+          mobile={mobile}
         />
       )}
       {text && (
-        <div
-          className={clsx(
-            styles.doAndDontText,
-            type === "do" && styles.doText,
-            type === "dont" && styles.dontText,
-          )}
-        >
+        <div className={styles.doAndDontText}>
           <Text>{text}</Text>
         </div>
       )}
-      <div
+      <article
         className={clsx(
           styles.doAndDontContent,
           type === "do" && styles.do,
@@ -45,8 +55,25 @@ export const DoAndDontTile: FC<Props> = (props) => {
           (code || text) && styles.withContent,
         )}
       >
+        {(type || heading) && (
+          <Heading level={4}>
+            {type === "do" ? (
+              <IconCheck />
+            ) : type === "dont" ? (
+              <IconClose />
+            ) : undefined}
+            {heading
+              ? heading
+              : type === "do"
+                ? "Do"
+                : type === "dont"
+                  ? "Don't"
+                  : undefined}
+          </Heading>
+        )}
+
         {props.children}
-      </div>
+      </article>
     </>
   );
 };
