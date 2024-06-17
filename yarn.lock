@@ -7742,13 +7742,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/core-events@npm:8.1.6, @storybook/core-events@npm:^8.1.6":
+"@storybook/core-events@npm:8.1.6":
   version: 8.1.6
   resolution: "@storybook/core-events@npm:8.1.6"
   dependencies:
     "@storybook/csf": "npm:^0.1.7"
     ts-dedent: "npm:^2.0.0"
   checksum: 10c0/3bf5d43040c66eb6af7048f87ae925605ed4914f9776eaeb2dae4713995ef6a0838c5bae72333d1f3457081fad438c3dbc72cb723f1c08896599c5290004f3b5
+  languageName: node
+  linkType: hard
+
+"@storybook/core-events@npm:^8.1.6":
+  version: 8.1.9
+  resolution: "@storybook/core-events@npm:8.1.9"
+  dependencies:
+    "@storybook/csf": "npm:^0.1.7"
+    ts-dedent: "npm:^2.0.0"
+  checksum: 10c0/27886c18892e0292f56a218c8b11b253f560d62f5621907eceae91ac01f6571eccd95068ebb9d0bbc6fc94afb951004d882942680d1afc7a170f3ae5be490a2b
   languageName: node
   linkType: hard
 

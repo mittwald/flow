@@ -6704,7 +6704,7 @@ const RAW_RUNTIME_STATE =
           ["@storybook/addon-links", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.1.6"],\
           ["@storybook/blocks", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.1.6"],\
           ["@storybook/components", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.1.6"],\
-          ["@storybook/core-events", "npm:8.1.6"],\
+          ["@storybook/core-events", "npm:8.1.9"],\
           ["@storybook/manager-api", "npm:8.1.6"],\
           ["@storybook/preview-api", "npm:8.1.6"],\
           ["@storybook/react", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.1.6"],\
@@ -6808,7 +6808,7 @@ const RAW_RUNTIME_STATE =
           ["@storybook/addon-links", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.1.6"],\
           ["@storybook/blocks", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.1.6"],\
           ["@storybook/components", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.1.6"],\
-          ["@storybook/core-events", "npm:8.1.6"],\
+          ["@storybook/core-events", "npm:8.1.9"],\
           ["@storybook/manager-api", "npm:8.1.6"],\
           ["@storybook/preview-api", "npm:8.1.6"],\
           ["@storybook/react", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.1.6"],\
@@ -6906,7 +6906,7 @@ const RAW_RUNTIME_STATE =
           ["@storybook/addon-links", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.1.6"],\
           ["@storybook/blocks", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.1.6"],\
           ["@storybook/components", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.1.6"],\
-          ["@storybook/core-events", "npm:8.1.6"],\
+          ["@storybook/core-events", "npm:8.1.9"],\
           ["@storybook/manager-api", "npm:8.1.6"],\
           ["@storybook/preview-api", "npm:8.1.6"],\
           ["@storybook/react", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.1.6"],\
@@ -12838,6 +12838,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/@storybook-core-events-npm-8.1.6-889bfaeb32-3bf5d43040.zip/node_modules/@storybook/core-events/",\
         "packageDependencies": [\
           ["@storybook/core-events", "npm:8.1.6"],\
+          ["@storybook/csf", "npm:0.1.7"],\
+          ["ts-dedent", "npm:2.2.0"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:8.1.9", {\
+        "packageLocation": "./.yarn/cache/@storybook-core-events-npm-8.1.9-190d093976-27886c1889.zip/node_modules/@storybook/core-events/",\
+        "packageDependencies": [\
+          ["@storybook/core-events", "npm:8.1.9"],\
           ["@storybook/csf", "npm:0.1.7"],\
           ["ts-dedent", "npm:2.2.0"]\
         ],\
