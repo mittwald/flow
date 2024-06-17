@@ -3,7 +3,7 @@
 ### Best Practices
 
 - Frage nur nach Informationen, die wirklich notwendig sind.
-- Stelle sicher, dass das [Label](/02-components/content/label) prägnant,
+- Stelle sicher, dass das [Label](/03-components/content/label) prägnant,
   vollständig sichtbar und leicht verständlich ist.
 - Verwende die FieldDescription für sinnvolle Beispiele oder
   Formatierungshinweise.
@@ -18,7 +18,7 @@
 ### Position
 
 Das TextField wird meistens innerhalb eines
-[ColumnLayouts](/02-components/structure/column-layout) platziert und füllt dort
+[ColumnLayouts](/03-components/structure/column-layout) platziert und füllt dort
 immer die zur Verfügung stehende Breite. Dadurch folgt es auch einer Aufteilung
 in Spalten, sofern das ColumnLayout eine vorsieht. Am besten eignet sich ein 1:1
 Raster für TextFields, sodass sie maximal die Hälfte des Content-Bereichs
@@ -26,9 +26,9 @@ einnehmen können. Das ColumnLayout kann zudem erweitert werden, um
 spezifischeren Layoutanforderungen gerecht zu werden.
 
 <Do example="columnLayout">
-#### Do
+  #### Do
 
-Nutze ein 1:1 [ColumnLayout](/02-components/structure/column-layout) für
+Nutze ein 1:1 [ColumnLayout](/03-components/structure/column-layout) für
 TextFields. Darin kann ein weiteres Raster (z.B. 2:1) verwendet werden, um
 sinnvolle Gruppierungen (z.B. Straße und Hausnummer) innerhalb des Layouts zu
 erstellen.
@@ -51,7 +51,7 @@ gekennzeichnet.
 
 ### Label
 
-Jedes TextField muss ein zugehöriges [Label](/02-components/content/label)
+Jedes TextField muss ein zugehöriges [Label](/03-components/content/label)
 besitzen. Das Label ist entscheidend, um die Eingabeanforderungen zu verstehen
 und sollte daher so gewählt werden, dass es alle Informationen liefert, um das
 TextField korrekt ausfüllen zu können. Außerdem sollte das Label knapp (max. 2
@@ -91,7 +91,7 @@ Darüber hinaus werden sie von manchen Assistenztechnologien nicht korrekt erkan
 und sind kognitiv schwieriger zu verarbeiten als die FieldDescritption. Statt
 einen Placeholder zu verwenden, ergänze das TextField mit ...
 
-- einem [Label](/02-components/content/label) für Informationen, die essenziell
+- einem [Label](/03-components/content/label) für Informationen, die essenziell
   für das Verständnis der Eingabeanforderungen sind.
 - einer FieldDescription, um dem Nutzer Beispiele oder Formatierungshinweise zu
   geben.
@@ -106,7 +106,8 @@ einen Placeholder zu verwenden, ergänze das TextField mit ...
   <Do example="default">
     #### Do
 
-    Verwende das [Label](/02-components/content/label) für essentielle Informationen und die FieldDescription für Ergänzungen, z.B. Formatierungshinweise oder Beispiele.
+    Verwende das [Label](/03-components/content/label) für essentielle Informationen und die FieldDescription für
+    Ergänzungen, z.B. Formatierungshinweise oder Beispiele.
 
   </Do>
 </DoAndDont>
@@ -119,7 +120,7 @@ Das TextField kann sowohl über die Tastatur erreicht und aktiviert werden als
 auch mit Assistenztechnologien angesteuert werden. Damit auch der Inhalt
 barrierefrei ist, solltest du:
 
-- immer ein [Label](/02-components/content/label) verwenden, welches essenzielle
+- immer ein [Label](/03-components/content/label) verwenden, welches essenzielle
   Eingabeanforderungen über das Label kommuniziert.
 - die FieldDescription nutzen, um Unterstützung, Beispiele oder
   Formatierungshilfen zu geben.
