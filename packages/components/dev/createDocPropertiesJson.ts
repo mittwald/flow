@@ -85,8 +85,8 @@ async function parse(): Promise<Component[]> {
     savePropValueAsString: true,
   });
   console.log("📚 Building component docs");
-  const files = await glob("./src/components/**/*.tsx", {
-    ignore: "src/**/*.stories.tsx",
+  const files = await glob("./src/components/*/*.tsx", {
+    ignore: ["src/**/*.stories.tsx", "src/**/*.test.tsx"],
   });
   return files.map((fileLocation) => {
     const cached = readCache(fileLocation);
