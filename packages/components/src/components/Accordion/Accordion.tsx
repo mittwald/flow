@@ -8,6 +8,7 @@ import { Button } from "@/components/Button";
 import { IconChevronDown } from "@/components/Icon/components/icons";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import { Activity } from "@/components/Activity";
+import { useIsSSR } from "react-aria";
 
 export interface AccordionProps
   extends PropsWithChildren<ComponentProps<"div">> {
@@ -15,8 +16,13 @@ export interface AccordionProps
 }
 
 export const Accordion: FC<AccordionProps> = (props) => {
-  const { children, className, defaultExpanded = false, ...rest } = props;
-  const [expanded, setExpanded] = useState(defaultExpanded);
+  const { children, className, defaultExpanded = false, id, ...rest } = props;
+
+  const isSSR = useIsSSR();
+
+  const anchorId = isSSR ? undefined : window.location.hash.slice(1);
+
+  const [expanded, setExpanded] = useState(anchorId === id || defaultExpanded);
 
   const rootClassName = clsx(
     styles.accordion,
@@ -57,7 +63,7 @@ export const Accordion: FC<AccordionProps> = (props) => {
   };
 
   return (
-    <div {...rest} className={rootClassName}>
+    <div {...rest} className={rootClassName} id={id}>
       <PropsContextProvider
         mergeInParentContext
         props={propsContext}

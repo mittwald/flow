@@ -10,6 +10,7 @@ import { LabeledValue } from "@/components/LabeledValue";
 import { Switch } from "@/components/Switch";
 import { Header } from "@/components/Header";
 import { StatusIcon } from "@/components/StatusIcon";
+import { Link } from "@/components/Link";
 
 const meta: Meta<typeof Tabs> = {
   title: "Navigation/Tabs",
@@ -66,4 +67,38 @@ export const Default: Story = {};
 
 export const SmallSpace: Story = {
   parameters: { viewport: { defaultViewport: "mobile1" } },
+};
+
+export const WithAnchorLink: Story = {
+  render: (props) => {
+    return (
+      <Section>
+        <Tabs {...props}>
+          <Tab id="general">
+            <TabTitle>
+              General
+              <StatusIcon status="info" />
+            </TabTitle>
+            <Section>
+              <Heading>General</Heading>
+              <TextField defaultValue="example@mittwald.de">
+                <Label>Mail address</Label>
+              </TextField>
+            </Section>
+          </Tab>
+          <Tab id="storage">
+            <TabTitle>Storage settings</TabTitle>
+            <Section>
+              <Heading>Storage</Heading>
+              <LabeledValue>
+                <Label>Available storage</Label>
+                <Text>2.4 GB</Text>
+              </LabeledValue>
+            </Section>
+          </Tab>
+        </Tabs>
+        <Link href="#storage">Storage tab anchor link</Link>
+      </Section>
+    );
+  },
 };

@@ -4,6 +4,8 @@ import { Accordion } from "@/components/Accordion";
 import { Heading } from "@/components/Heading";
 import { Content } from "@/components/Content";
 import Label from "@/components/Label";
+import { Section } from "@/components/Section";
+import { Link } from "@/components/Link";
 
 const meta: Meta<typeof Accordion> = {
   title: "Structure/Accordion",
@@ -34,5 +36,17 @@ export const WithLabel: Story = {
       <Label>Label</Label>
       <Content>Accordion Content</Content>
     </Accordion>
+  ),
+};
+
+export const WithAnchorLink: Story = {
+  render: (props) => (
+    <Section>
+      <Accordion {...props} id="myAccordion">
+        <Heading>Heading</Heading>
+        <Content>Accordion Content</Content>
+      </Accordion>
+      <Link href="#myAccordion">Anchor link</Link>
+    </Section>
   ),
 };

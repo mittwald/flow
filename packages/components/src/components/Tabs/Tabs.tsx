@@ -7,6 +7,7 @@ import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { TabList } from "@/components/Tabs/components/TabList";
+import { useIsSSR } from "react-aria";
 
 export interface TabsProps
   extends Omit<Aria.TabsProps, "children">,
@@ -24,8 +25,13 @@ export const Tabs = flowComponent("Tabs", (props) => {
   } = props;
 
   const rootClassName = clsx(styles.tabs, className);
+
+  const isSSR = useIsSSR();
+
+  const anchorId = isSSR ? undefined : window.location.hash.slice(1);
+
   const [selection, setSelection] = useState<Aria.Key | undefined>(
-    defaultSelectedKey,
+    anchorId || defaultSelectedKey,
   );
 
   return (

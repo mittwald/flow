@@ -1,6 +1,7 @@
 node_modules
 dist
 .nx/cache
+.nx/workspace-data
 .yarn/*
 !.yarn/patches
 !.yarn/plugins
@@ -12,4 +13,5 @@ nx-cloud.env
 *.tsbuildinfo
 packages/docs/src/lib/liveCode/dynamicImports.ts
 .idea/material_theme_project_new.xml
+.idea/dictionaries
 coverage
