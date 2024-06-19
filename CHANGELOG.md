@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.150](https://github.com/mittwald/flow/compare/0.1.0-alpha.149...0.1.0-alpha.150) (2024-06-19)
+
+### Bug Fixes
+
+- **Popover:** Export Popover component
+  ([0320c8b](https://github.com/mittwald/flow/commit/0320c8ba4b3f3d0c5565e6828e1c379a163cb915))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.149](https://github.com/mittwald/flow/compare/0.1.0-alpha.148...0.1.0-alpha.149) (2024-06-19)
 
 **Note:** Version bump only for package @mittwald/flow-project
