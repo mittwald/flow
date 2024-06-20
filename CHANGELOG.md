@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.153](https://github.com/mittwald/flow/compare/0.1.0-alpha.152...0.1.0-alpha.153) (2024-06-20)
+
+### Bug Fixes
+
+- **Section:** update visual level
+  ([861c21c](https://github.com/mittwald/flow/commit/861c21cc0f9c886b81d327f0779f00008aa6d151))
+
+### Features
+
+- **ContextMenu:** close context menu on navigation
+  ([bb8b9de](https://github.com/mittwald/flow/commit/bb8b9dee5e59d05a70100581d5487b6a4fc68e90))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.152](https://github.com/mittwald/flow/compare/0.1.0-alpha.151...0.1.0-alpha.152) (2024-06-20)
 
 ### Features
