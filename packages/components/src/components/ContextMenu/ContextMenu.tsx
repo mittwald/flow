@@ -58,7 +58,9 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
   };
 
   const closeOverlayType =
-    selectionMode === "single" ? "ContextMenu" : undefined;
+    selectionMode === "single" || selectionMode === "navigation"
+      ? "ContextMenu"
+      : undefined;
 
   return (
     <ClearPropsContext>
