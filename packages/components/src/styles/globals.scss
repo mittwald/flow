@@ -12,12 +12,6 @@
 }
 
 @font-face {
-  font-family: "ProximaNova";
-  src: url(../fonts/ProximaNova-Bold.woff2);
-  font-weight: bold;
-}
-
-@font-face {
   font-family: "RobotoMono";
   src: url(../fonts/RobotoMono-Regular.ttf);
 }
@@ -30,8 +24,8 @@
 
 // CSS Specificity: 0-0-2
 html
-  body
-  *:where(
+body
+*:where(
     [class*="flow--"]:not([class*="flow--"] [class*="flow--"]):not(svg):not(
         table
       )
