@@ -40,5 +40,4 @@ import {
     <Label>Succeeded</Label>
     <IconSucceeded />
   </LabeledValue>
-
 </ColumnLayout>;
