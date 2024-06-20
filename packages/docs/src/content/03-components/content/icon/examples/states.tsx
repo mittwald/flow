@@ -17,8 +17,12 @@ import {
     <IconDanger />
   </LabeledValue>
   <LabeledValue>
-    <Label>Failed</Label>
-    <IconFailed />
+    <Label>Warning</Label>
+    <IconWarning />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Success</Label>
+    <IconSuccess />
   </LabeledValue>
   <LabeledValue>
     <Label>Info</Label>
@@ -29,15 +33,12 @@ import {
     <IconPending />
   </LabeledValue>
   <LabeledValue>
+    <Label>Failed</Label>
+    <IconFailed />
+  </LabeledValue>
+  <LabeledValue>
     <Label>Succeeded</Label>
     <IconSucceeded />
   </LabeledValue>
-  <LabeledValue>
-    <Label>Success</Label>
-    <IconSuccess />
-  </LabeledValue>
-  <LabeledValue>
-    <Label>Warning</Label>
-    <IconWarning />
-  </LabeledValue>
+
 </ColumnLayout>;
