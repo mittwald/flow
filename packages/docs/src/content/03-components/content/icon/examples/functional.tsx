@@ -13,14 +13,17 @@ import {
   IconContextMenu,
   IconCopy,
   IconDashboard,
-  IconDate,
   IconDelete,
+  IconEdit,
   IconExternalLink,
   IconFilter,
   IconHide,
   IconHome,
   IconListView,
   IconLogout,
+  IconMaximize,
+  IconMenu,
+  IconMinimize,
   IconMinus,
   IconNotification,
   IconPlus,
@@ -29,12 +32,12 @@ import {
   IconRandom,
   IconSave,
   IconSearch,
+  IconSettings,
   IconShare,
   IconShow,
   IconSorting,
   IconTerminate,
   IconTileView,
-  IconTime,
 } from "@mittwald/flow-react-components/Icons";
 import Label from "@mittwald/flow-react-components/Label";
 import LabeledValue from "@mittwald/flow-react-components/LabeledValue";
@@ -78,6 +81,34 @@ import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
     <IconSorting />
   </LabeledValue>
   <LabeledValue>
+    <Label>Menu</Label>
+    <IconMenu />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Maximize</Label>
+    <IconMaximize />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Minimize</Label>
+    <IconMinimize />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Edit</Label>
+    <IconEdit />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Share</Label>
+    <IconShare />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Save</Label>
+    <IconSave />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Settings</Label>
+    <IconSettings />
+  </LabeledValue>
+  <LabeledValue>
     <Label>Delete</Label>
     <IconDelete />
   </LabeledValue>
@@ -92,6 +123,10 @@ import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
   <LabeledValue>
     <Label>Backlink</Label>
     <IconBackLink />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Random</Label>
+    <IconRandom />
   </LabeledValue>
   <LabeledValue>
     <Label>External Link</Label>
@@ -118,24 +153,12 @@ import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
     <IconClose />
   </LabeledValue>
   <LabeledValue>
-    <Label>Hide</Label>
-    <IconHide />
-  </LabeledValue>
-  <LabeledValue>
     <Label>Show</Label>
     <IconShow />
   </LabeledValue>
   <LabeledValue>
-    <Label>Random</Label>
-    <IconRandom />
-  </LabeledValue>
-  <LabeledValue>
-    <Label>Date</Label>
-    <IconDate />
-  </LabeledValue>
-  <LabeledValue>
-    <Label>Time</Label>
-    <IconTime />
+    <Label>Hide</Label>
+    <IconHide />
   </LabeledValue>
   <LabeledValue>
     <Label>Plus</Label>
@@ -174,15 +197,7 @@ import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
     <IconRadioOn />
   </LabeledValue>
   <LabeledValue>
-    <Label>Save</Label>
-    <IconSave />
-  </LabeledValue>
-  <LabeledValue>
     <Label>Check</Label>
     <IconCheck />
-  </LabeledValue>
-  <LabeledValue>
-    <Label>Share</Label>
-    <IconShare />
   </LabeledValue>
 </ColumnLayout>;
