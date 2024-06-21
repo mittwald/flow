@@ -34,14 +34,6 @@
       border-top-style: var(--modal--action-group-border-style);
     }
 
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-inline: var(--modal--padding);
-      padding-top: var(--modal--padding);
-    }
-
     .content {
       grid-area: content;
       overflow-x: hidden;
@@ -96,7 +88,11 @@
           border-bottom-width: var(--separator--height);
           border-bottom-style: var(--border-style--default);
           border-bottom-color: var(--separator--color);
+          padding-inline: var(--modal--padding);
           padding-block: var(--modal--off-canvas-padding-y);
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
         }
       }
     }
