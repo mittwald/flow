@@ -13,7 +13,7 @@ import { Header } from "@/components/Header";
 import { Action } from "@/components/Action";
 import { Button } from "@/components/Button";
 import { IconClose } from "@/components/Icon/components/icons";
-import { PropsWithClassName } from "@/lib/types/props";
+import type { PropsWithClassName } from "@/lib/types/props";
 
 export interface ModalProps
   extends PropsWithChildren,
