@@ -39,6 +39,7 @@ export const ListItem = (props: Props) => {
     Heading: {
       className: styles.heading,
       level: 4,
+      levelVisual: 5,
       tunnelId: "title",
     },
     Text: {
