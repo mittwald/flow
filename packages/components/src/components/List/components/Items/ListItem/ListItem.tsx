@@ -6,7 +6,7 @@ import { dynamic, PropsContextProvider } from "@/lib/propsContext";
 import { OptionsButton } from "@/components/List/components/Items/OptionsButton";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import type { LinkDOMProps } from "@react-types/shared";
-import { Link, LinkProps } from "@/components/Link";
+import Link, { type LinkProps } from "@/components/Link";
 import { PropsWithClassName } from "@/lib/types/props";
 import clsx from "clsx";
 
