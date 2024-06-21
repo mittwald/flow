@@ -170,10 +170,6 @@
       "types": "./dist/types/components/NumberField/index.d.ts",
       "import": "./dist/NumberField.js"
     },
-    "./OffCanvas": {
-      "types": "./dist/types/components/OffCanvas/index.d.ts",
-      "import": "./dist/OffCanvas.js"
-    },
     "./Popover": {
       "types": "./dist/types/components/Popover/index.d.ts",
       "import": "./dist/Popover.js"

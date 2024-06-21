@@ -24,3 +24,5 @@ modal:
     value: "{border-width.100}"
   action-group-border-style:
     value: "{border-style.default}"
+  off-canvas-padding-y:
+    value: "{size-px.s}"
