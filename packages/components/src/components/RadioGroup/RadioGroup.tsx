@@ -92,7 +92,12 @@ export const RadioGroup = flowComponent("RadioGroup", (props) => {
           {children}
 
           {variant === "segmented" && (
-            <div className={styles.segmentedGroup}>
+            <div
+              className={clsx(
+                styles.segmentedGroup,
+                s && s.length > 1 && styles.skipBreakpoint,
+              )}
+            >
               <div className={styles.segments}>
                 <TunnelExit id="radios" />
               </div>

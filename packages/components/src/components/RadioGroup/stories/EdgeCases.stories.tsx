@@ -54,3 +54,24 @@ export const SmallSpace: Story = {
   ),
   parameters: { viewport: { defaultViewport: "mobile1" } },
 };
+
+export const SmallSpaceSegmentedCustomColumns: Story = {
+  render: (props) => (
+    <RadioGroup
+      {...props}
+      variant="segmented"
+      defaultValue="0"
+      aria-label="Label"
+      s={[1, 1]}
+    >
+      {Array(2)
+        .fill("")
+        .map((value, index) => (
+          <Radio value={index.toString()} key={index}>
+            Option {index + 1}
+          </Radio>
+        ))}
+    </RadioGroup>
+  ),
+  parameters: { viewport: { defaultViewport: "mobile1" } },
+};
