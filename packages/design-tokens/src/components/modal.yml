@@ -26,3 +26,5 @@ modal:
     value: "{border-style.default}"
   off-canvas-padding-y:
     value: "{size-px.s}"
+  off-canvas-header-background-color:
+    value: "{neutral.color.200}"
