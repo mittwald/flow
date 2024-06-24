@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.155](https://github.com/mittwald/flow/compare/0.1.0-alpha.154...0.1.0-alpha.155) (2024-06-24)
+
+### Features
+
+- **ListItem:** add className to ListItem
+  ([a39bc1a](https://github.com/mittwald/flow/commit/a39bc1a9a0d61b7dfbe6964b441131d904c51945))
+- **ListItem:** add className to ListItem
+  ([76604f0](https://github.com/mittwald/flow/commit/76604f01980f6992a4780981bd1323be9ab7c941))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.154](https://github.com/mittwald/flow/compare/0.1.0-alpha.153...0.1.0-alpha.154) (2024-06-24)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
