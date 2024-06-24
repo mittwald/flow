@@ -8,7 +8,7 @@ import { ClearPropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { FieldError } from "@/components/FieldError";
 import { FieldDescription } from "@/components/FieldDescription";
 import locales from "./locales/*.locale.json";
-import { useMessageFormatter } from "react-aria";
+import { useLocalizedStringFormatter } from "react-aria";
 
 export interface TextFieldBaseProps
   extends PropsWithChildren<Omit<Aria.TextFieldProps, "children">> {
@@ -25,7 +25,7 @@ export const TextFieldBase = forwardRef<HTMLInputElement, TextFieldBaseProps>(
 
     const rootClassName = clsx(styles.formField, className);
 
-    const translate = useMessageFormatter(locales);
+    const translation = useLocalizedStringFormatter(locales);
 
     const propsContext: PropsContext = {
       Label: {
@@ -49,10 +49,13 @@ export const TextFieldBase = forwardRef<HTMLInputElement, TextFieldBaseProps>(
       }
     };
 
-    const charactersCountDescription = translate("textFieldBase.characters", {
-      count: charactersCount,
-      maxCount: props.maxLength ?? 0,
-    });
+    const charactersCountDescription = translation.format(
+      "textFieldBase.characters",
+      {
+        count: charactersCount,
+        maxCount: props.maxLength ?? 0,
+      },
+    );
 
     return (
       <ClearPropsContext>

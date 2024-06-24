@@ -17,6 +17,7 @@ import { Checkbox } from "@/components/Checkbox";
 import Select, { Option } from "@/components/Select";
 import { Slider } from "@/components/Slider";
 import { sleep } from "@/lib/promises/sleep";
+import { Action } from "@/components/Action";
 
 const submitAction = action("submit");
 
@@ -51,105 +52,111 @@ const meta: Meta<typeof Field> = {
     const Field = typedField(form);
 
     return (
-      <Form form={form} onSubmit={handleOnSubmit}>
-        <Section>
-          <Field
-            name="firstName"
-            rules={{
-              required: "Please enter your name",
-            }}
-          >
-            <TextField>
-              <Label>First name</Label>
-              <FieldDescription>The first part of your name</FieldDescription>
-            </TextField>
-          </Field>
-
-          <Field
-            name="lastName"
-            rules={{
-              required: "Please select your last name",
-            }}
-          >
-            <Select>
-              <Label>Last name</Label>
-              <Option value="Simith">Smith</Option>
-              <Option value="Williams">Williams</Option>
-              <Option value="Peters">Peters</Option>
-            </Select>
-          </Field>
-
-          <Field
-            name="age"
-            rules={{
-              required: "Please enter your age",
-              min: { value: 18, message: "You must be at least 18" },
-            }}
-          >
-            <NumberField>
-              <Label>Age</Label>
-            </NumberField>
-          </Field>
-
-          <Field
-            name="gender"
-            rules={{ required: "Please choose your gender" }}
-          >
-            <RadioGroup>
-              <Label>Gender</Label>
-              <Radio value="male">Male</Radio>
-              <Radio value="female">Female</Radio>
-              <Radio value="diverse">Diverse</Radio>
-            </RadioGroup>
-          </Field>
-
-          <Field name="testing">
-            <Switch>
-              <Label>Activate testing</Label>
-            </Switch>
-          </Field>
-
-          <Field
-            name="interests"
-            rules={{
-              validate: {
-                min: (val) =>
-                  Array.isArray(val) && val.length > 0
-                    ? true
-                    : "Check at least 1 item",
-                max: (val) =>
-                  Array.isArray(val) && val.length < 3
-                    ? true
-                    : "Check max 2 items",
-              },
-            }}
-          >
-            <CheckboxGroup>
-              <Label>Interests</Label>
-              <Checkbox value="foo">Foo</Checkbox>
-              <Checkbox value="bar">Bar</Checkbox>
-              <Checkbox value="baz">Baz</Checkbox>
-            </CheckboxGroup>
-          </Field>
-
-          <Field name="storage">
-            <Slider
-              formatOptions={{
-                style: "unit",
-                unit: "gigabyte",
+      <Action
+        action={() => {
+          console.log("!");
+        }}
+      >
+        <Form form={form} onSubmit={handleOnSubmit}>
+          <Section>
+            <Field
+              name="firstName"
+              rules={{
+                required: "Please enter your name",
               }}
-              minValue={20}
-              maxValue={2000}
             >
-              <Label>Storage</Label>
-            </Slider>
-          </Field>
+              <TextField>
+                <Label>First name</Label>
+                <FieldDescription>The first part of your name</FieldDescription>
+              </TextField>
+            </Field>
 
-          <ActionGroup>
-            <Button type="submit">Submit</Button>
-          </ActionGroup>
-        </Section>
-      </Form>
+            <Field
+              name="lastName"
+              rules={{
+                required: "Please select your last name",
+              }}
+            >
+              <Select>
+                <Label>Last name</Label>
+                <Option value="Simith">Smith</Option>
+                <Option value="Williams">Williams</Option>
+                <Option value="Peters">Peters</Option>
+              </Select>
+            </Field>
+
+            <Field
+              name="age"
+              rules={{
+                required: "Please enter your age",
+                min: { value: 18, message: "You must be at least 18" },
+              }}
+            >
+              <NumberField>
+                <Label>Age</Label>
+              </NumberField>
+            </Field>
+
+            <Field
+              name="gender"
+              rules={{ required: "Please choose your gender" }}
+            >
+              <RadioGroup>
+                <Label>Gender</Label>
+                <Radio value="male">Male</Radio>
+                <Radio value="female">Female</Radio>
+                <Radio value="diverse">Diverse</Radio>
+              </RadioGroup>
+            </Field>
+
+            <Field name="testing">
+              <Switch>
+                <Label>Activate testing</Label>
+              </Switch>
+            </Field>
+
+            <Field
+              name="interests"
+              rules={{
+                validate: {
+                  min: (val) =>
+                    Array.isArray(val) && val.length > 0
+                      ? true
+                      : "Check at least 1 item",
+                  max: (val) =>
+                    Array.isArray(val) && val.length < 3
+                      ? true
+                      : "Check max 2 items",
+                },
+              }}
+            >
+              <CheckboxGroup>
+                <Label>Interests</Label>
+                <Checkbox value="foo">Foo</Checkbox>
+                <Checkbox value="bar">Bar</Checkbox>
+                <Checkbox value="baz">Baz</Checkbox>
+              </CheckboxGroup>
+            </Field>
+
+            <Field name="storage">
+              <Slider
+                formatOptions={{
+                  style: "unit",
+                  unit: "gigabyte",
+                }}
+                minValue={20}
+                maxValue={2000}
+              >
+                <Label>Storage</Label>
+              </Slider>
+            </Field>
+
+            <ActionGroup>
+              <Button type="submit">Submit</Button>
+            </ActionGroup>
+          </Section>
+        </Form>
+      </Action>
     );
   },
 };

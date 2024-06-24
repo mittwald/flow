@@ -41,6 +41,7 @@ export const Modal = flowComponent("Modal", (props) => {
     },
     Heading: {
       level: 2,
+      levelVisual: 4,
       slot: "title",
     },
     ActionGroup: {

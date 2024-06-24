@@ -1,14 +1,36 @@
-import type { FC, PropsWithChildren } from "react";
+import type { ComponentType, FC, ReactNode } from "react";
 import React from "react";
-import { useOverlayController } from "@/lib/controller";
-import { OverlayContextProvider } from "@/lib/controller/overlay/context";
+import { OverlayController } from "@/lib/controller";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
+import type { FlowComponentName } from "@/components/propTypes";
+import OverlayContextProvider from "@/lib/controller/overlay/OverlayContextProvider";
 
-type Props = PropsWithChildren;
+type AriaComponentType = ComponentType<{
+  isOpen?: boolean;
+  children: ReactNode;
+}>;
+
+export interface OverlayTriggerProps {
+  isDefaultOpen?: boolean;
+  children: ReactNode;
+}
+
+interface Props extends OverlayTriggerProps {
+  overlayType: FlowComponentName;
+  component: AriaComponentType;
+}
 
 export const OverlayTrigger: FC<Props> = (props) => {
-  const overlayController = useOverlayController();
+  const {
+    overlayType,
+    isDefaultOpen = false,
+    component: AriaOverlayTrigger,
+    children,
+  } = props;
+
+  const overlayController = OverlayController.useNew(isDefaultOpen);
+  const isOpen = overlayController.useIsOpen();
 
   const propsContext: PropsContext = {
     Button: {
@@ -17,9 +39,9 @@ export const OverlayTrigger: FC<Props> = (props) => {
   };
 
   return (
-    <OverlayContextProvider value={overlayController}>
+    <OverlayContextProvider type={overlayType} controller={overlayController}>
       <PropsContextProvider props={propsContext} mergeInParentContext>
-        {props.children}
+        <AriaOverlayTrigger isOpen={isOpen}>{children}</AriaOverlayTrigger>
       </PropsContextProvider>
     </OverlayContextProvider>
   );

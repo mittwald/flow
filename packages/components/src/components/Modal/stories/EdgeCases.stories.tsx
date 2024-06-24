@@ -23,7 +23,10 @@ type Story = StoryObj<typeof Modal>;
 
 export const LongContent: Story = {
   render: (props) => (
-    <Modal {...props} controller={useOverlayController({ defaultOpen: true })}>
+    <Modal
+      {...props}
+      controller={useOverlayController("Modal", { defaultOpen: true })}
+    >
       <Heading>{dummyText.short}</Heading>
       <Content>
         <Section>
@@ -43,7 +46,7 @@ export const LongContent: Story = {
         </Section>
       </Content>
       <ActionGroup>
-        <Action closeOverlay>
+        <Action closeOverlay="Modal">
           <Button color="accent">Create customer</Button>
           <Button variant="soft" color="secondary">
             Abort

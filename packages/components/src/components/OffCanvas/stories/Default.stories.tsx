@@ -29,7 +29,7 @@ const meta: Meta<typeof OffCanvas> = {
         </Button>
         <OffCanvas {...props}>
           <Heading>Menu</Heading>
-          <Action closeOverlay>
+          <Action closeOverlay="OffCanvas">
             <Navigation aria-label="Main menu">
               <Link>
                 <IconCustomer />

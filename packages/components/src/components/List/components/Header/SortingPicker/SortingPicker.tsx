@@ -2,11 +2,10 @@ import type { FC } from "react";
 import React from "react";
 import { SortingPickerItem } from "@/components/List/components/Header/SortingPickerItem";
 import { useList } from "@/components/List/hooks/useList";
-import * as Aria from "react-aria-components";
 import { Text } from "@/components/Text";
 import { IconChevronDown } from "@/components/Icon/components/icons";
 import { Button } from "@/components/Button";
-import { ContextMenu } from "@/components/ContextMenu";
+import { ContextMenu, ContextMenuTrigger } from "@/components/ContextMenu";
 import locales from "../../../locales/*.locale.json";
 import { Translate } from "@/lib/react/components/Translate";
 
@@ -41,7 +40,7 @@ export const SortingPicker: FC = () => {
   );
 
   return (
-    <Aria.MenuTrigger>
+    <ContextMenuTrigger>
       <Button variant="soft" size="s" color="secondary">
         {text}
         <IconChevronDown />
@@ -55,6 +54,6 @@ export const SortingPicker: FC = () => {
       >
         {pickerItems}
       </ContextMenu>
-    </Aria.MenuTrigger>
+    </ContextMenuTrigger>
   );
 };
