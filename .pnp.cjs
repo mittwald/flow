@@ -6647,7 +6647,7 @@ const RAW_RUNTIME_STATE =
           ["react-dom", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:18.3.1"],\
           ["react-hook-form", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:7.52.0"],\
           ["remark-frontmatter", "npm:5.0.0"],\
-          ["remark-mdx-frontmatter", "npm:4.0.0"],\
+          ["remark-mdx-frontmatter", "npm:5.0.0"],\
           ["remeda", "npm:2.0.10"],\
           ["sass", "npm:1.77.6"],\
           ["tsx", "npm:4.15.6"],\
@@ -26471,10 +26471,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["remark-mdx-frontmatter", [\
-      ["npm:4.0.0", {\
-        "packageLocation": "./.yarn/cache/remark-mdx-frontmatter-npm-4.0.0-bce801d390-c52f9abf26.zip/node_modules/remark-mdx-frontmatter/",\
+      ["npm:5.0.0", {\
+        "packageLocation": "./.yarn/cache/remark-mdx-frontmatter-npm-5.0.0-1f1231e238-fba25d087b.zip/node_modules/remark-mdx-frontmatter/",\
         "packageDependencies": [\
-          ["remark-mdx-frontmatter", "npm:4.0.0"],\
+          ["remark-mdx-frontmatter", "npm:5.0.0"],\
           ["@types/mdast", "npm:4.0.3"],\
           ["estree-util-is-identifier-name", "npm:3.0.0"],\
           ["estree-util-value-to-estree", "npm:3.1.1"],\
