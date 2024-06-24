@@ -6408,7 +6408,7 @@ const RAW_RUNTIME_STATE =
           ["@mdx-js/mdx", "npm:3.0.0"],\
           ["@types/webpack", null],\
           ["source-map", "npm:0.7.4"],\
-          ["webpack", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:5.92.0"]\
+          ["webpack", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:5.92.1"]\
         ],\
         "packagePeers": [\
           "@types/webpack",\
@@ -6652,7 +6652,7 @@ const RAW_RUNTIME_STATE =
           ["sass", "npm:1.77.6"],\
           ["tsx", "npm:4.15.6"],\
           ["typescript", "patch:typescript@npm%3A5.4.5#optional!builtin<compat/typescript>::version=5.4.5&hash=5adc0c"],\
-          ["webpack", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:5.92.0"]\
+          ["webpack", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:5.92.1"]\
         ],\
         "linkType": "SOFT"\
       }]\
@@ -15739,10 +15739,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:243bc1cb399fc2c7a8d74afe48ab331e3744f320e63cc69336960eeb283ea50d87c5acd0efdbf01550f680488b24cfe6e5b5a927fa669e69cfdf6dc8d40e205f#npm:1.9.5", {\
-        "packageLocation": "./.yarn/__virtual__/acorn-import-attributes-virtual-4ea4ab361c/0/cache/acorn-import-attributes-npm-1.9.5-d1e666eb35-5926eaaead.zip/node_modules/acorn-import-attributes/",\
+      ["virtual:c136c892f614ac6c62302846a2bb74c4c362f4fc7f12b51717e26ed928f85c1be8ee3123cf03dab658da71c5a0aecbf8195e4b5821108d51cb6d956a8ce44615#npm:1.9.5", {\
+        "packageLocation": "./.yarn/__virtual__/acorn-import-attributes-virtual-a3798b928e/0/cache/acorn-import-attributes-npm-1.9.5-d1e666eb35-5926eaaead.zip/node_modules/acorn-import-attributes/",\
         "packageDependencies": [\
-          ["acorn-import-attributes", "virtual:243bc1cb399fc2c7a8d74afe48ab331e3744f320e63cc69336960eeb283ea50d87c5acd0efdbf01550f680488b24cfe6e5b5a927fa669e69cfdf6dc8d40e205f#npm:1.9.5"],\
+          ["acorn-import-attributes", "virtual:c136c892f614ac6c62302846a2bb74c4c362f4fc7f12b51717e26ed928f85c1be8ee3123cf03dab658da71c5a0aecbf8195e4b5821108d51cb6d956a8ce44615#npm:1.9.5"],\
           ["@types/acorn", null],\
           ["acorn", "npm:8.12.0"]\
         ],\
@@ -25528,7 +25528,7 @@ const RAW_RUNTIME_STATE =
           ["@types/webpack", null],\
           ["loader-utils", "npm:2.0.4"],\
           ["schema-utils", "npm:3.3.0"],\
-          ["webpack", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:5.92.0"]\
+          ["webpack", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:5.92.1"]\
         ],\
         "packagePeers": [\
           "@types/webpack",\
@@ -27827,10 +27827,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:243bc1cb399fc2c7a8d74afe48ab331e3744f320e63cc69336960eeb283ea50d87c5acd0efdbf01550f680488b24cfe6e5b5a927fa669e69cfdf6dc8d40e205f#npm:5.3.10", {\
-        "packageLocation": "./.yarn/__virtual__/terser-webpack-plugin-virtual-bcda976675/0/cache/terser-webpack-plugin-npm-5.3.10-3bde1920fb-66d1ed3174.zip/node_modules/terser-webpack-plugin/",\
+      ["virtual:c136c892f614ac6c62302846a2bb74c4c362f4fc7f12b51717e26ed928f85c1be8ee3123cf03dab658da71c5a0aecbf8195e4b5821108d51cb6d956a8ce44615#npm:5.3.10", {\
+        "packageLocation": "./.yarn/__virtual__/terser-webpack-plugin-virtual-f206000e1f/0/cache/terser-webpack-plugin-npm-5.3.10-3bde1920fb-66d1ed3174.zip/node_modules/terser-webpack-plugin/",\
         "packageDependencies": [\
-          ["terser-webpack-plugin", "virtual:243bc1cb399fc2c7a8d74afe48ab331e3744f320e63cc69336960eeb283ea50d87c5acd0efdbf01550f680488b24cfe6e5b5a927fa669e69cfdf6dc8d40e205f#npm:5.3.10"],\
+          ["terser-webpack-plugin", "virtual:c136c892f614ac6c62302846a2bb74c4c362f4fc7f12b51717e26ed928f85c1be8ee3123cf03dab658da71c5a0aecbf8195e4b5821108d51cb6d956a8ce44615#npm:5.3.10"],\
           ["@jridgewell/trace-mapping", "npm:0.3.21"],\
           ["@swc/core", null],\
           ["@types/esbuild", null],\
@@ -27843,7 +27843,7 @@ const RAW_RUNTIME_STATE =
           ["serialize-javascript", "npm:6.0.2"],\
           ["terser", "npm:5.31.1"],\
           ["uglify-js", null],\
-          ["webpack", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:5.92.0"]\
+          ["webpack", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:5.92.1"]\
         ],\
         "packagePeers": [\
           "@swc/core",\
@@ -29685,17 +29685,17 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["webpack", [\
-      ["npm:5.92.0", {\
-        "packageLocation": "./.yarn/cache/webpack-npm-5.92.0-de23750d1a-588de5ce6f.zip/node_modules/webpack/",\
+      ["npm:5.92.1", {\
+        "packageLocation": "./.yarn/cache/webpack-npm-5.92.1-eba8a81d56-43ca7c76b9.zip/node_modules/webpack/",\
         "packageDependencies": [\
-          ["webpack", "npm:5.92.0"]\
+          ["webpack", "npm:5.92.1"]\
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:5.92.0", {\
-        "packageLocation": "./.yarn/__virtual__/webpack-virtual-243bc1cb39/0/cache/webpack-npm-5.92.0-de23750d1a-588de5ce6f.zip/node_modules/webpack/",\
+      ["virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:5.92.1", {\
+        "packageLocation": "./.yarn/__virtual__/webpack-virtual-c136c892f6/0/cache/webpack-npm-5.92.1-eba8a81d56-43ca7c76b9.zip/node_modules/webpack/",\
         "packageDependencies": [\
-          ["webpack", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:5.92.0"],\
+          ["webpack", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:5.92.1"],\
           ["@types/eslint-scope", "npm:3.7.7"],\
           ["@types/estree", "npm:1.0.5"],\
           ["@types/webpack-cli", null],\
@@ -29703,7 +29703,7 @@ const RAW_RUNTIME_STATE =
           ["@webassemblyjs/wasm-edit", "npm:1.12.1"],\
           ["@webassemblyjs/wasm-parser", "npm:1.12.1"],\
           ["acorn", "npm:8.12.0"],\
-          ["acorn-import-attributes", "virtual:243bc1cb399fc2c7a8d74afe48ab331e3744f320e63cc69336960eeb283ea50d87c5acd0efdbf01550f680488b24cfe6e5b5a927fa669e69cfdf6dc8d40e205f#npm:1.9.5"],\
+          ["acorn-import-attributes", "virtual:c136c892f614ac6c62302846a2bb74c4c362f4fc7f12b51717e26ed928f85c1be8ee3123cf03dab658da71c5a0aecbf8195e4b5821108d51cb6d956a8ce44615#npm:1.9.5"],\
           ["browserslist", "npm:4.23.1"],\
           ["chrome-trace-event", "npm:1.0.4"],\
           ["enhanced-resolve", "npm:5.17.0"],\
@@ -29718,7 +29718,7 @@ const RAW_RUNTIME_STATE =
           ["neo-async", "npm:2.6.2"],\
           ["schema-utils", "npm:3.3.0"],\
           ["tapable", "npm:2.2.1"],\
-          ["terser-webpack-plugin", "virtual:243bc1cb399fc2c7a8d74afe48ab331e3744f320e63cc69336960eeb283ea50d87c5acd0efdbf01550f680488b24cfe6e5b5a927fa669e69cfdf6dc8d40e205f#npm:5.3.10"],\
+          ["terser-webpack-plugin", "virtual:c136c892f614ac6c62302846a2bb74c4c362f4fc7f12b51717e26ed928f85c1be8ee3123cf03dab658da71c5a0aecbf8195e4b5821108d51cb6d956a8ce44615#npm:5.3.10"],\
           ["watchpack", "npm:2.4.1"],\
           ["webpack-cli", null],\
           ["webpack-sources", "npm:3.2.3"]\
