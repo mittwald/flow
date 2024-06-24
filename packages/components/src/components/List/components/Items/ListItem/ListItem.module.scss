@@ -99,7 +99,8 @@
     border-bottom-style: var(--list-item--border-style);
   }
 
-  &.action {
+  &:is(a),
+  &:is(button) {
     @include focus.focus;
     outline-offset: calc(var(--size-px--xs) * -1);
 

@@ -60,11 +60,7 @@ export const ListItem = (props: Props) => {
     },
   };
 
-  const rootClassName = clsx(
-    styles.item,
-    className,
-    (href || onPress) && styles.action,
-  );
+  const rootClassName = clsx(styles.item, className);
 
   const MainComponent: FC<PropsWithChildren> = (props) =>
     href ? (
