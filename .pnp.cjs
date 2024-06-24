@@ -6635,7 +6635,7 @@ const RAW_RUNTIME_STATE =
           ["clsx", "npm:2.1.1"],\
           ["eslint", "npm:9.5.0"],\
           ["fs-jetpack", "npm:5.1.0"],\
-          ["glob", "npm:10.4.1"],\
+          ["glob", "npm:10.4.2"],\
           ["humanize-string", "npm:3.0.0"],\
           ["next", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:14.2.4"],\
           ["next-mdx-remote", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:5.0.0"],\
@@ -12713,7 +12713,7 @@ const RAW_RUNTIME_STATE =
           ["find-cache-dir", "npm:3.3.2"],\
           ["find-up", "npm:5.0.0"],\
           ["fs-extra", "npm:11.2.0"],\
-          ["glob", "npm:10.4.1"],\
+          ["glob", "npm:10.4.2"],\
           ["handlebars", "npm:4.7.8"],\
           ["lazy-universal-dotenv", "npm:4.0.0"],\
           ["node-fetch", "virtual:fbcbb43713b8d29847f83af8ca8e6903174c6e8a1da151b8f0af1a210ae14ed964860db184734df50ebf0661beb7dfb5de30e59b8bee2e6f5d434f43b286743a#npm:2.7.0"],\
@@ -12753,7 +12753,7 @@ const RAW_RUNTIME_STATE =
           ["find-cache-dir", "npm:3.3.2"],\
           ["find-up", "npm:5.0.0"],\
           ["fs-extra", "npm:11.2.0"],\
-          ["glob", "npm:10.4.1"],\
+          ["glob", "npm:10.4.2"],\
           ["handlebars", "npm:4.7.8"],\
           ["lazy-universal-dotenv", "npm:4.0.0"],\
           ["node-fetch", "virtual:fbcbb43713b8d29847f83af8ca8e6903174c6e8a1da151b8f0af1a210ae14ed964860db184734df50ebf0661beb7dfb5de30e59b8bee2e6f5d434f43b286743a#npm:2.7.0"],\
@@ -12799,7 +12799,7 @@ const RAW_RUNTIME_STATE =
           ["find-cache-dir", "npm:3.3.2"],\
           ["find-up", "npm:5.0.0"],\
           ["fs-extra", "npm:11.2.0"],\
-          ["glob", "npm:10.4.1"],\
+          ["glob", "npm:10.4.2"],\
           ["handlebars", "npm:4.7.8"],\
           ["lazy-universal-dotenv", "npm:4.0.0"],\
           ["node-fetch", "virtual:fbcbb43713b8d29847f83af8ca8e6903174c6e8a1da151b8f0af1a210ae14ed964860db184734df50ebf0661beb7dfb5de30e59b8bee2e6f5d434f43b286743a#npm:2.7.0"],\
@@ -16774,7 +16774,7 @@ const RAW_RUNTIME_STATE =
           ["cacache", "npm:17.1.4"],\
           ["@npmcli/fs", "npm:3.1.0"],\
           ["fs-minipass", "npm:3.0.3"],\
-          ["glob", "npm:10.4.1"],\
+          ["glob", "npm:10.4.2"],\
           ["lru-cache", "npm:7.18.3"],\
           ["minipass", "npm:7.1.2"],\
           ["minipass-collect", "npm:1.0.2"],\
@@ -16793,7 +16793,7 @@ const RAW_RUNTIME_STATE =
           ["cacache", "npm:18.0.3"],\
           ["@npmcli/fs", "npm:3.1.0"],\
           ["fs-minipass", "npm:3.0.3"],\
-          ["glob", "npm:10.4.1"],\
+          ["glob", "npm:10.4.2"],\
           ["lru-cache", "npm:10.2.2"],\
           ["minipass", "npm:7.1.2"],\
           ["minipass-collect", "npm:2.0.1"],\
@@ -19932,14 +19932,15 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["glob", [\
-      ["npm:10.4.1", {\
-        "packageLocation": "./.yarn/cache/glob-npm-10.4.1-a0d030e0a9-77f2900ed9.zip/node_modules/glob/",\
+      ["npm:10.4.2", {\
+        "packageLocation": "./.yarn/cache/glob-npm-10.4.2-c8431e09a9-2c7296695f.zip/node_modules/glob/",\
         "packageDependencies": [\
-          ["glob", "npm:10.4.1"],\
+          ["glob", "npm:10.4.2"],\
           ["foreground-child", "npm:3.2.1"],\
           ["jackspeak", "npm:3.4.0"],\
           ["minimatch", "npm:9.0.4"],\
           ["minipass", "npm:7.1.2"],\
+          ["package-json-from-dist", "npm:1.0.0"],\
           ["path-scurry", "npm:1.11.1"]\
         ],\
         "linkType": "HARD"\
@@ -23699,7 +23700,7 @@ const RAW_RUNTIME_STATE =
           ["node-gyp", "npm:10.1.0"],\
           ["env-paths", "npm:2.2.1"],\
           ["exponential-backoff", "npm:3.1.1"],\
-          ["glob", "npm:10.4.1"],\
+          ["glob", "npm:10.4.2"],\
           ["graceful-fs", "npm:4.2.11"],\
           ["make-fetch-happen", "npm:13.0.1"],\
           ["nopt", "npm:7.2.1"],\
@@ -24423,6 +24424,15 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["p-waterfall", "npm:2.1.1"],\
           ["p-reduce", "npm:2.1.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["package-json-from-dist", [\
+      ["npm:1.0.0", {\
+        "packageLocation": "./.yarn/cache/package-json-from-dist-npm-1.0.0-961f0fcb3b-e3ffaf6ac1.zip/node_modules/package-json-from-dist/",\
+        "packageDependencies": [\
+          ["package-json-from-dist", "npm:1.0.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -26206,7 +26216,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/read-package-json-npm-6.0.4-bf5c705b94-0eb1110b35.zip/node_modules/read-package-json/",\
         "packageDependencies": [\
           ["read-package-json", "npm:6.0.4"],\
-          ["glob", "npm:10.4.1"],\
+          ["glob", "npm:10.4.2"],\
           ["json-parse-even-better-errors", "npm:3.0.2"],\
           ["normalize-package-data", "npm:5.0.0"],\
           ["npm-normalize-package-bin", "npm:3.0.1"]\
@@ -26217,7 +26227,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/read-package-json-npm-7.0.1-94653faf6b-4bb2ad7dc6.zip/node_modules/read-package-json/",\
         "packageDependencies": [\
           ["read-package-json", "npm:7.0.1"],\
-          ["glob", "npm:10.4.1"],\
+          ["glob", "npm:10.4.2"],\
           ["json-parse-even-better-errors", "npm:3.0.2"],\
           ["normalize-package-data", "npm:6.0.1"],\
           ["npm-normalize-package-bin", "npm:3.0.1"]\
@@ -27553,7 +27563,7 @@ const RAW_RUNTIME_STATE =
           ["change-case", "npm:4.1.2"],\
           ["commander", "npm:8.3.0"],\
           ["fs-extra", "npm:10.1.0"],\
-          ["glob", "npm:10.4.1"],\
+          ["glob", "npm:10.4.2"],\
           ["json5", "npm:2.2.3"],\
           ["jsonc-parser", "npm:3.2.1"],\
           ["lodash", "npm:4.17.21"],\
@@ -27642,7 +27652,7 @@ const RAW_RUNTIME_STATE =
           ["sucrase", "npm:3.35.0"],\
           ["@jridgewell/gen-mapping", "npm:0.3.3"],\
           ["commander", "npm:4.1.1"],\
-          ["glob", "npm:10.4.1"],\
+          ["glob", "npm:10.4.2"],\
           ["lines-and-columns", "npm:1.2.4"],\
           ["mz", "npm:2.7.0"],\
           ["pirates", "npm:4.0.6"],\
