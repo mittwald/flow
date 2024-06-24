@@ -28,7 +28,7 @@ export const WithTip: Story = { args: { withTip: true } };
 export const WithController: Story = {
   render: (props) => {
     const controller = useOverlayController("Popover");
-    let triggerRef = React.useRef(null);
+    const triggerRef = React.useRef(null);
 
     return (
       <>
