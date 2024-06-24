@@ -7,6 +7,7 @@
   background-color: var(--list-item--background-color--default);
   display: grid;
   gap: var(--list-item--content-to-content-spacing);
+  width: 100%;
 
   &:has(.title:not(:empty)):has(.topContent):has(.content):has(.action) {
     grid-template-areas:
@@ -22,19 +23,25 @@
     grid-template-columns: var(--title-width) 1fr;
   }
 
-  &:has(.title:not(:empty)):has(.topContent):not(:has(.content)):not(:has(.action)) {
+  &:has(.title:not(:empty)):has(.topContent):not(:has(.content)):not(
+      :has(.action)
+    ) {
     grid-template-areas: "title topContent";
     grid-template-columns: var(--title-width) 1fr;
   }
 
-  &:has(.title:not(:empty)):not(:has(.topContent)):has(.content):not(:has(.action)) {
+  &:has(.title:not(:empty)):not(:has(.topContent)):has(.content):not(
+      :has(.action)
+    ) {
     grid-template-areas:
       "title  "
       "content";
     grid-template-columns: auto;
   }
 
-  &:has(.title:not(:empty)):not(:has(.topContent)):not(:has(.content)):not(:has(.action)) {
+  &:has(.title:not(:empty)):not(:has(.topContent)):not(:has(.content)):not(
+      :has(.action)
+    ) {
     grid-template-areas: "title";
     grid-template-columns: 1fr;
   }
@@ -46,7 +53,9 @@
     grid-template-columns: 1fr auto;
   }
 
-  &:not(:has(.title:not(:empty))):not(:has(.topContent)):has(.content):has(.action) {
+  &:not(:has(.title:not(:empty))):not(:has(.topContent)):has(.content):has(
+      .action
+    ) {
     grid-template-areas: "content action";
     grid-template-columns: 1fr auto;
   }
@@ -58,7 +67,9 @@
     grid-template-columns: 1fr auto;
   }
 
-  &:has(.title:not(:empty)):not(:has(.topContent)):not(:has(.content)):has(.action) {
+  &:has(.title:not(:empty)):not(:has(.topContent)):not(:has(.content)):has(
+      .action
+    ) {
     grid-template-areas: "title action";
     grid-template-columns: 1fr auto;
   }
@@ -68,12 +79,16 @@
     grid-template-columns: var(--title-width) 1fr auto;
   }
 
-  &:not(:has(.title:not(:empty))):has(.topContent):not(:has(.content)):has(.action) {
+  &:not(:has(.title:not(:empty))):has(.topContent):not(:has(.content)):has(
+      .action
+    ) {
     grid-template-areas: "topContent action";
     grid-template-columns: 1fr auto;
   }
 
-  &:not(:has(.title:not(:empty))):has(.topContent):not(:has(.content)):not(:has(.action)) {
+  &:not(:has(.title:not(:empty))):has(.topContent):not(:has(.content)):not(
+      :has(.action)
+    ) {
     grid-template-areas: "topContent";
     grid-template-columns: auto;
   }
@@ -84,7 +99,7 @@
     border-bottom-style: var(--list-item--border-style);
   }
 
-  &:is(a) {
+  &.action {
     @include focus.focus;
     outline-offset: calc(var(--size-px--xs) * -1);
 

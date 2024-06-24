@@ -6,14 +6,15 @@ import { dynamic, PropsContextProvider } from "@/lib/propsContext";
 import { OptionsButton } from "@/components/List/components/Items/OptionsButton";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import type { LinkDOMProps } from "@react-types/shared";
-import Link, { type LinkProps } from "@/components/Link";
+import Link from "@/components/Link";
 import type { PropsWithClassName } from "@/lib/types/props";
 import clsx from "clsx";
+import { Button, type ButtonProps } from "@/components/Button";
 
 type Props = PropsWithChildren &
   LinkDOMProps &
   PropsWithClassName &
-  Pick<LinkProps, "onPress">;
+  Pick<ButtonProps, "onPress">;
 
 const getStyleForContentSlot = (slot?: string) =>
   slot === "top"
@@ -59,19 +60,21 @@ export const ListItem = (props: Props) => {
     },
   };
 
-  const rootClassName = clsx(styles.item, className);
+  const rootClassName = clsx(
+    styles.item,
+    className,
+    (href || onPress) && styles.action,
+  );
 
   const MainComponent: FC<PropsWithChildren> = (props) =>
     href ? (
-      <Link
-        unstyled
-        {...linkDomProps}
-        className={rootClassName}
-        href={href}
-        onPress={onPress}
-      >
+      <Link unstyled {...linkDomProps} className={rootClassName} href={href}>
         {props.children}
       </Link>
+    ) : onPress ? (
+      <Button unstyled className={rootClassName} onPress={onPress}>
+        {props.children}
+      </Button>
     ) : (
       <div className={rootClassName}>{props.children}</div>
     );

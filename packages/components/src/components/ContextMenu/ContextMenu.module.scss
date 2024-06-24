@@ -12,6 +12,6 @@
   }
 }
 
-.popover [role="dialog"] {
+.popover section[role="dialog"] {
   padding: var(--context-menu--padding);
 }
