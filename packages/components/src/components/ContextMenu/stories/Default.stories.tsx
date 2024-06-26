@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import ContextMenu, {
-  ContextMenuSection,
   ContextMenuTrigger,
   MenuItem,
 } from "@/components/ContextMenu";
 import { Button } from "@/components/Button";
 import { Separator } from "@/components/Separator";
 import { Heading } from "@/components/Heading";
+import { Section } from "@/components/Section";
 
 const meta: Meta<typeof ContextMenu> = {
   title: "Actions/ContextMenu",
@@ -104,14 +104,14 @@ export const WithContextMenuSection: Story = {
         selectionMode="navigation"
         {...props}
       >
-        <ContextMenuSection>
+        <Section>
           <Heading>Websites</Heading>
           <MenuItem href="https://www.mittwald.de" id="https://www.mittwald.de">
             www.mittwald.de
           </MenuItem>
           <MenuItem href="https://www.google.de">www.google.de</MenuItem>
           <MenuItem href="https://www.adobe.com">www.adobe.com</MenuItem>
-        </ContextMenuSection>
+        </Section>
       </ContextMenu>
     </ContextMenuTrigger>
   ),

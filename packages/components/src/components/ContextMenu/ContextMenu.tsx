@@ -57,10 +57,12 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
     MenuItem: {
       selectionVariant,
     },
-    ContextMenuSection: {
+
+    Section: {
       MenuItem: {
         selectionVariant,
       },
+      renderContextMenuSection: true,
     },
   };
 
