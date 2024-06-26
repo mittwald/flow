@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.158](https://github.com/mittwald/flow/compare/0.1.0-alpha.157...0.1.0-alpha.158) (2024-06-26)
+
+### Bug Fixes
+
+- **Notification:** prevent auto close when focused
+  ([37deeb4](https://github.com/mittwald/flow/commit/37deeb4b6a66eb527437a7465673149c2312dbf9))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.157](https://github.com/mittwald/flow/compare/0.1.0-alpha.156...0.1.0-alpha.157) (2024-06-26)
 
 ### Features
