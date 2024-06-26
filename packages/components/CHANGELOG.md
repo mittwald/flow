@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.156](https://github.com/mittwald/flow/compare/0.1.0-alpha.155...0.1.0-alpha.156) (2024-06-26)
+
+### Bug Fixes
+
+- **ContextMenu:** omit tip in context menu
+  ([#548](https://github.com/mittwald/flow/issues/548))
+  ([f502740](https://github.com/mittwald/flow/commit/f502740565512443ca623d0a48cc88b969fb3b72))
+- **CounterBadge:** fix counter badge ref
+  ([#547](https://github.com/mittwald/flow/issues/547))
+  ([743708e](https://github.com/mittwald/flow/commit/743708e86a3f89a453cca0683ade0219c438df1c))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.155](https://github.com/mittwald/flow/compare/0.1.0-alpha.154...0.1.0-alpha.155) (2024-06-24)
 
 ### Features
