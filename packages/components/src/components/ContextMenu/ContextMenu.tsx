@@ -50,10 +50,19 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
   const ariaSelectionMode =
     selectionMode === "navigation" ? "single" : selectionMode;
 
+  const selectionVariant =
+    selectionMode === "navigation" ? "navigation" : "control";
+
   const propsContext: PropsContext = {
     MenuItem: {
-      selectionVariant:
-        selectionMode === "navigation" ? "navigation" : "control",
+      selectionVariant,
+    },
+
+    Section: {
+      MenuItem: {
+        selectionVariant,
+      },
+      renderContextMenuSection: true,
     },
   };
 

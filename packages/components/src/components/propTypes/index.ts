@@ -40,6 +40,7 @@ import type { FlowComponentName } from "@/components/propTypes/types";
 import type { OffCanvasProps } from "@/components/OffCanvas";
 import type { ContextualHelpProps } from "@/components/ContextualHelp";
 import type { PopoverProps } from "@/components/Popover";
+import type { ContextMenuSectionProps } from "@/components/ContextMenu/components/ContextMenuSection";
 
 export * from "./types";
 
@@ -53,6 +54,7 @@ export interface FlowComponentPropsTypes {
   CheckboxGroup: CheckboxGroupProps;
   Content: ContentProps;
   ContextMenu: ContextMenuProps;
+  ContextMenuSection: ContextMenuSectionProps;
   ContextualHelp: ContextualHelpProps;
   CopyButton: CopyButtonProps;
   CounterBadge: CounterBadgeProps;
@@ -100,6 +102,7 @@ const propsContextSupportingComponentsMap: Record<
   CheckboxGroup: true,
   Content: true,
   ContextMenu: true,
+  ContextMenuSection: true,
   ContextualHelp: true,
   CopyButton: true,
   CounterBadge: true,
