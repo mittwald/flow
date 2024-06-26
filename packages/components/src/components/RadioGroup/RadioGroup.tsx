@@ -17,6 +17,7 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { IconCheck } from "@/components/Icon/components/icons";
 import mergePropsContext from "@/lib/propsContext/mergePropsContext";
 import type { PropsWithContainerBreakpointSize } from "@/lib/types/props";
+import { getContainerBreakpointSizeClassName } from "@/lib/getContainerBreakpointSizeClassName";
 
 export interface RadioGroupProps
   extends PropsWithChildren<Omit<Aria.RadioGroupProps, "children">>,
@@ -43,7 +44,7 @@ export const RadioGroup = flowComponent("RadioGroup", (props) => {
     formFieldStyles.formField,
     styles.radioGroupContainer,
     className,
-    styles[`container-breakpoint-size-${containerBreakpointSize}`],
+    styles[getContainerBreakpointSizeClassName(containerBreakpointSize)],
   );
 
   let propsContext: PropsContext = {

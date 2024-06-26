@@ -22,9 +22,6 @@ export type PropsWithElementType<T extends keyof ReactHTML = never> =
 
 export type ContainerBreakpointSize = "xs" | "s" | "m" | "l" | "xl";
 
-export type PropsWithContainerBreakpointSize<
-  T extends ContainerBreakpointSize = ContainerBreakpointSize,
-  P = unknown,
-> = P & {
-  containerBreakpointSize?: T;
-};
+export interface PropsWithContainerBreakpointSize {
+  containerBreakpointSize?: ContainerBreakpointSize;
+}
