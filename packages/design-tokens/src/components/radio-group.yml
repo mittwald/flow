@@ -23,3 +23,7 @@ radio-button:
     value: "{size-rem.m}"
   label-font-weight-with-content:
     value: "{font-weight.bold}"
+
+segment:
+  text-to-icon-spacing:
+    value: "{size-rem.m}"

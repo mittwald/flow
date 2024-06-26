@@ -19,3 +19,12 @@ export type PropsWithElementType<T extends keyof ReactHTML = never> =
   HTMLAttributes<HTMLElement> & {
     elementType?: T | ExoticComponent;
   };
+
+export type ContainerBreakpointSize = "xs" | "s" | "m" | "l" | "xl";
+
+export type PropsWithContainerBreakpointSize<
+  T extends ContainerBreakpointSize = ContainerBreakpointSize,
+  P = unknown,
+> = P & {
+  containerBreakpointSize?: T;
+};
