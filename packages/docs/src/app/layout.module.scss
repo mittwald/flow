@@ -73,6 +73,12 @@
   row-gap: var(--size-px--l);
 }
 
+.tabContent {
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--section--content-to-content-spacing);
+}
+
 @media (max-width: 900px) {
   .center {
     grid-template-areas:
