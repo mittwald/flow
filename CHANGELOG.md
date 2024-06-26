@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.157](https://github.com/mittwald/flow/compare/0.1.0-alpha.156...0.1.0-alpha.157) (2024-06-26)
+
+### Features
+
+- **ContextMenu:** add context menu sections
+  ([#550](https://github.com/mittwald/flow/issues/550))
+  ([c68bb35](https://github.com/mittwald/flow/commit/c68bb35a2bf9301759b5a8d4ce2ecf365823024a))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.156](https://github.com/mittwald/flow/compare/0.1.0-alpha.155...0.1.0-alpha.156) (2024-06-26)
 
 ### Bug Fixes
