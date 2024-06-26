@@ -21,7 +21,6 @@ export interface ContextMenuProps
       | "defaultSelectedKeys"
       | "onSelectionChange"
       | "disabledKeys"
-      | "aria-label"
     >,
     FlowComponentProps {
   selectionMode?: "single" | "multiple" | "navigation";
