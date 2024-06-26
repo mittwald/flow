@@ -37,7 +37,6 @@ import type { SectionProps } from "@/components/Section";
 import type { SliderProps } from "@/components/Slider";
 import type { CounterBadgeProps } from "@/components/CounterBadge";
 import type { FlowComponentName } from "@/components/propTypes/types";
-import type { OffCanvasProps } from "@/components/OffCanvas";
 import type { ContextualHelpProps } from "@/components/ContextualHelp";
 import type { PopoverProps } from "@/components/Popover";
 import type { ContextMenuSectionProps } from "@/components/ContextMenu/components/ContextMenuSection";
@@ -73,7 +72,6 @@ export interface FlowComponentPropsTypes {
   Modal: ModalProps;
   NumberField: NumberFieldProps;
   Option: OptionProps;
-  OffCanvas: OffCanvasProps;
   Popover: PopoverProps;
   Radio: RadioProps;
   RadioButton: RadioButtonProps;
@@ -121,7 +119,6 @@ const propsContextSupportingComponentsMap: Record<
   Modal: true,
   NumberField: true,
   Radio: true,
-  OffCanvas: true,
   Option: true,
   Popover: true,
   RadioButton: true,
