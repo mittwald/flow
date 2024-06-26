@@ -13,7 +13,7 @@ import OverlayContextProvider from "@/lib/controller/overlay/OverlayContextProvi
 import { Action } from "@/components/Action";
 
 export interface ContextMenuProps
-  extends PopoverProps,
+  extends Omit<PopoverProps, "withTip">,
     Pick<
       Aria.MenuProps<MenuItemProps>,
       | "onAction"
