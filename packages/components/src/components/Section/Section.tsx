@@ -7,7 +7,7 @@ import { PropsContextProvider } from "@/lib/propsContext";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { Activity } from "@/components/Activity";
-import { ContextMenuSection } from "@/components/ContextMenu";
+import { ContextMenuSection } from "@/components/ContextMenu/components/ContextMenuSection";
 
 export interface SectionProps
   extends PropsWithChildren<ComponentProps<"section">>,
