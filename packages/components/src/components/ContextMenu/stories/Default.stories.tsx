@@ -1,11 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import ContextMenu, {
+  ContextMenuSection,
   ContextMenuTrigger,
   MenuItem,
 } from "@/components/ContextMenu";
 import { Button } from "@/components/Button";
 import { Separator } from "@/components/Separator";
+import { Heading } from "@/components/Heading";
 
 const meta: Meta<typeof ContextMenu> = {
   title: "Actions/ContextMenu",
@@ -85,6 +87,31 @@ export const WithSeparator: Story = {
         <Separator />
         <MenuItem href="https://www.google.de">www.google.de</MenuItem>
         <MenuItem href="https://www.adobe.com">www.adobe.com</MenuItem>
+      </ContextMenu>
+    </ContextMenuTrigger>
+  ),
+  args: {
+    defaultOpen: true,
+  },
+};
+
+export const WithContextMenuSection: Story = {
+  render: (props) => (
+    <ContextMenuTrigger>
+      <Button>Trigger</Button>
+      <ContextMenu
+        defaultSelectedKeys={["https://www.mittwald.de"]}
+        selectionMode="navigation"
+        {...props}
+      >
+        <ContextMenuSection>
+          <Heading>Websites</Heading>
+          <MenuItem href="https://www.mittwald.de" id="https://www.mittwald.de">
+            www.mittwald.de
+          </MenuItem>
+          <MenuItem href="https://www.google.de">www.google.de</MenuItem>
+          <MenuItem href="https://www.adobe.com">www.adobe.com</MenuItem>
+        </ContextMenuSection>
       </ContextMenu>
     </ContextMenuTrigger>
   ),

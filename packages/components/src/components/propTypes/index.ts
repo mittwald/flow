@@ -18,7 +18,11 @@ import type { StatusBadgeProps } from "@/components/StatusBadge";
 import type { ActionGroupProps } from "@/components/ActionGroup";
 import type { AvatarProps } from "@/components/Avatar";
 import type { ActionProps } from "@/components/Action";
-import type { ContextMenuProps, MenuItemProps } from "@/components/ContextMenu";
+import type {
+  ContextMenuProps,
+  ContextMenuSectionProps,
+  MenuItemProps,
+} from "@/components/ContextMenu";
 import type { OptionProps, SelectProps } from "@/components/Select";
 import type {
   RadioButtonProps,
@@ -53,6 +57,7 @@ export interface FlowComponentPropsTypes {
   CheckboxGroup: CheckboxGroupProps;
   Content: ContentProps;
   ContextMenu: ContextMenuProps;
+  ContextMenuSection: ContextMenuSectionProps;
   ContextualHelp: ContextualHelpProps;
   CopyButton: CopyButtonProps;
   CounterBadge: CounterBadgeProps;
@@ -100,6 +105,7 @@ const propsContextSupportingComponentsMap: Record<
   CheckboxGroup: true,
   Content: true,
   ContextMenu: true,
+  ContextMenuSection: true,
   ContextualHelp: true,
   CopyButton: true,
   CounterBadge: true,

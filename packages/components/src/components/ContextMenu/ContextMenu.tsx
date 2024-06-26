@@ -21,6 +21,7 @@ export interface ContextMenuProps
       | "defaultSelectedKeys"
       | "onSelectionChange"
       | "disabledKeys"
+      | "aria-label"
     >,
     FlowComponentProps {
   selectionMode?: "single" | "multiple" | "navigation";
@@ -50,10 +51,17 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
   const ariaSelectionMode =
     selectionMode === "navigation" ? "single" : selectionMode;
 
+  const selectionVariant =
+    selectionMode === "navigation" ? "navigation" : "control";
+
   const propsContext: PropsContext = {
     MenuItem: {
-      selectionVariant:
-        selectionMode === "navigation" ? "navigation" : "control",
+      selectionVariant,
+    },
+    ContextMenuSection: {
+      MenuItem: {
+        selectionVariant,
+      },
     },
   };
 
