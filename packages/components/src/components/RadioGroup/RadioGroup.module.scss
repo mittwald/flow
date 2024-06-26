@@ -15,6 +15,7 @@
 
   .segments {
     display: flex;
+    flex-wrap: nowrap;
     order: 2;
   }
 
