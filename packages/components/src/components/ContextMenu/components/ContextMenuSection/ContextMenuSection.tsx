@@ -1,5 +1,5 @@
 import * as Aria from "react-aria-components";
-import type { FC, PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 import React from "react";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
@@ -7,7 +7,7 @@ import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export type ContextMenuSectionProps = PropsWithChildren & FlowComponentProps;
-export const ContextMenuSection: FC<ContextMenuSectionProps> = flowComponent(
+export const ContextMenuSection = flowComponent(
   "ContextMenuSection",
   (props) => {
     const { children } = props;

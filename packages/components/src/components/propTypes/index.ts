@@ -18,11 +18,7 @@ import type { StatusBadgeProps } from "@/components/StatusBadge";
 import type { ActionGroupProps } from "@/components/ActionGroup";
 import type { AvatarProps } from "@/components/Avatar";
 import type { ActionProps } from "@/components/Action";
-import type {
-  ContextMenuProps,
-  ContextMenuSectionProps,
-  MenuItemProps,
-} from "@/components/ContextMenu";
+import type { ContextMenuProps, MenuItemProps } from "@/components/ContextMenu";
 import type { OptionProps, SelectProps } from "@/components/Select";
 import type {
   RadioButtonProps,
@@ -44,6 +40,7 @@ import type { FlowComponentName } from "@/components/propTypes/types";
 import type { OffCanvasProps } from "@/components/OffCanvas";
 import type { ContextualHelpProps } from "@/components/ContextualHelp";
 import type { PopoverProps } from "@/components/Popover";
+import type { ContextMenuSectionProps } from "@/components/ContextMenu/components/ContextMenuSection";
 
 export * from "./types";
 
