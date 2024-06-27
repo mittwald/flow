@@ -24,8 +24,8 @@
 
 // CSS Specificity: 0-0-2
 html
-body
-*:where(
+  body
+  *:where(
     [class*="flow--"]:not([class*="flow--"] [class*="flow--"]):not(svg):not(
         table
       )
@@ -47,7 +47,7 @@ html body *:where([class*="flow--"]:not([class*="flow--"] [class*="flow--"])) {
   line-height: var(--line-height--default);
   font-size: var(--size-rem--m);
   font-weight: var(--font-weight--normal);
-  color: var(--content--color);
+  color: var(--content--color--default);
 
   /*
   Josh's Custom CSS Reset
