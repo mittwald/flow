@@ -21,15 +21,3 @@ illustrated-message:
     value: "{danger.color.800}"
   negative-heading-color:
     value: "{danger.color.900}"
-
-  # Light
-  light-text-color:
-    value: "{light-plain-content-color.default}"
-  light-icon-color:
-    value: "{light-plain-content-color.default}"
-
-  # Dark
-  dark-text-color:
-    value: "{dark-plain-content-color.default}"
-  dark-icon-color:
-    value: "{dark-plain-content-color.default}"

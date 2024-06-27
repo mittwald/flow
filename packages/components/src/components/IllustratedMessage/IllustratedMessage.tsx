@@ -20,6 +20,7 @@ export const IllustratedMessage: FC<IllustratedMessageProps> = (props) => {
     Icon: {
       className: styles.icon,
       size: "l",
+      color: color === "dark" || color === "light" ? color : undefined,
     },
     Heading: {
       className: styles.heading,
@@ -27,6 +28,7 @@ export const IllustratedMessage: FC<IllustratedMessageProps> = (props) => {
     },
     Text: {
       className: styles.text,
+      color: color === "dark" || color === "light" ? color : undefined,
     },
     Button: {
       color: color === "dark" || color === "light" ? color : "accent",

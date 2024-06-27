@@ -3,6 +3,10 @@ import Icon from "@/components/Icon/Icon";
 import React from "react";
 import { IconStar } from "@tabler/icons-react";
 import { IconProject } from "@/components/Icon/components/icons";
+import {
+  storyBackgroundDark,
+  storyBackgroundLight,
+} from "@/lib/dev/storyBackgrounds";
 
 const meta: Meta<typeof Icon> = {
   title: "Content/Icon",
@@ -17,6 +21,7 @@ const meta: Meta<typeof Icon> = {
       options: ["s", "m", "l"],
     },
   },
+  render: (props) => <IconProject {...props} />,
 };
 export default meta;
 
@@ -24,7 +29,6 @@ type Story = StoryObj<typeof Icon>;
 
 export const Alias: Story = {
   args: { "aria-label": "project" },
-  render: (props) => <IconProject {...props} />,
 };
 
 export const TablerIcon: Story = {
@@ -61,4 +65,18 @@ export const CustomSvg: Story = {
       </svg>
     </Icon>
   ),
+};
+
+export const Dark: Story = {
+  args: { color: "dark" },
+  parameters: {
+    backgrounds: storyBackgroundLight,
+  },
+};
+
+export const Light: Story = {
+  args: { color: "light" },
+  parameters: {
+    backgrounds: storyBackgroundDark,
+  },
 };

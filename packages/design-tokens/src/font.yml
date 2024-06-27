@@ -25,4 +25,9 @@ font-size:
     value: 2rem
 content:
   color:
-    value: "{neutral.color.1000}"
+    default:
+      value: "{neutral.color.1000}"
+    light:
+      value: "{light-plain-content-color.default}"
+    dark:
+      value: "{dark-plain-content-color.default}"
