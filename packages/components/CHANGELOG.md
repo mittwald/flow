@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.161](https://github.com/mittwald/flow/compare/0.1.0-alpha.160...0.1.0-alpha.161) (2024-06-27)
+
+### Bug Fixes
+
+- **Modal:** fix mobile tray
+  ([ed0d002](https://github.com/mittwald/flow/commit/ed0d002b5d4fbe90fc2aaa173d705627d1a9337d))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.160](https://github.com/mittwald/flow/compare/0.1.0-alpha.159...0.1.0-alpha.160) (2024-06-26)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
