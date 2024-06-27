@@ -47,4 +47,32 @@
       color: var(--illustrated-message--negative-heading-color);
     }
   }
+
+  /* Light */
+
+  &.light {
+    color: var(--illustrated-message--light-text-color);
+
+    .icon {
+      color: var(--illustrated-message--light-icon-color);
+    }
+
+    .heading {
+      color: var(--illustrated-message--light-heading-color);
+    }
+  }
+
+  /* Dark */
+
+  &.dark {
+    color: var(--illustrated-message--dark-text-color);
+
+    .icon {
+      color: var(--illustrated-message--dark-icon-color);
+    }
+
+    .heading {
+      color: var(--illustrated-message--dark-heading-color);
+    }
+  }
 }

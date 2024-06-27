@@ -7,11 +7,12 @@ import { PropsContextProvider } from "@/lib/propsContext";
 
 export interface IllustratedMessageProps
   extends PropsWithChildren<ComponentProps<"div">> {
-  variant?: "info" | "negative";
+  /** @default "info" */
+  color?: "info" | "negative" | "light" | "dark";
 }
 
 export const IllustratedMessage: FC<IllustratedMessageProps> = (props) => {
-  const { className, children, variant = "info", ...rest } = props;
+  const { className, children, color = "info", ...rest } = props;
 
   const rootClassName = clsx(styles.illustratedMessageContainer, className);
 
@@ -28,13 +29,13 @@ export const IllustratedMessage: FC<IllustratedMessageProps> = (props) => {
     },
     Button: {
       className: styles.button,
-      color: "accent",
+      color: color === "dark" || color === "light" ? color : "accent",
     },
   };
 
   return (
     <div {...rest} className={rootClassName}>
-      <div className={clsx(styles.illustratedMessage, styles[variant])}>
+      <div className={clsx(styles.illustratedMessage, styles[color])}>
         <PropsContextProvider props={propsContext}>
           {children}
         </PropsContextProvider>

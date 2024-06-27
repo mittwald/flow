@@ -5,6 +5,10 @@ import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
 import { Button } from "@/components/Button";
 import { IconApp, IconDanger } from "@/components/Icon/components/icons";
+import {
+  storyBackgroundDark,
+  storyBackgroundLight,
+} from "@/lib/dev/storyBackgrounds";
 
 const meta: Meta<typeof IllustratedMessage> = {
   title: "Content/Illustrated Message",
@@ -18,11 +22,11 @@ const meta: Meta<typeof IllustratedMessage> = {
     </IllustratedMessage>
   ),
   argTypes: {
-    variant: {
+    color: {
       control: "inline-radio",
     },
   },
-  args: { variant: "info" },
+  args: { color: "info" },
 };
 export default meta;
 
@@ -32,11 +36,25 @@ export const Default: Story = {};
 
 export const Negative: Story = {
   render: (props) => (
-    <IllustratedMessage {...props} variant="negative">
+    <IllustratedMessage {...props} color="negative">
       <IconDanger />
       <Heading>No access</Heading>
       <Text>You do not have the required permissions to access this page.</Text>
       <Button>Go back</Button>
     </IllustratedMessage>
   ),
+};
+
+export const Dark: Story = {
+  args: { color: "dark" },
+  parameters: {
+    backgrounds: storyBackgroundLight,
+  },
+};
+
+export const Light: Story = {
+  args: { color: "light" },
+  parameters: {
+    backgrounds: storyBackgroundDark,
+  },
 };
