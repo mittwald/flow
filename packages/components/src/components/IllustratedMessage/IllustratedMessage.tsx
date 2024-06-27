@@ -16,22 +16,25 @@ export const IllustratedMessage: FC<IllustratedMessageProps> = (props) => {
 
   const rootClassName = clsx(styles.illustratedMessageContainer, className);
 
+  const lightOrDarkColor =
+    color === "dark" || color === "light" ? color : undefined;
+
   const propsContext: PropsContext = {
     Icon: {
       className: styles.icon,
       size: "l",
-      color: color === "dark" || color === "light" ? color : undefined,
+      color: lightOrDarkColor,
     },
     Heading: {
       className: styles.heading,
-      color: color === "dark" || color === "light" ? color : undefined,
+      color: lightOrDarkColor,
     },
     Text: {
       className: styles.text,
-      color: color === "dark" || color === "light" ? color : undefined,
+      color: lightOrDarkColor,
     },
     Button: {
-      color: color === "dark" || color === "light" ? color : "accent",
+      color: lightOrDarkColor ?? "accent",
     },
   };
 
