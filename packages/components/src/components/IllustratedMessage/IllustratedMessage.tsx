@@ -23,6 +23,7 @@ export const IllustratedMessage: FC<IllustratedMessageProps> = (props) => {
     },
     Heading: {
       className: styles.heading,
+      color: color === "dark" || color === "light" ? color : undefined,
     },
     Text: {
       className: styles.text,

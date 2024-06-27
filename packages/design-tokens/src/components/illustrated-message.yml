@@ -27,13 +27,9 @@ illustrated-message:
     value: "{light-plain-content-color.default}"
   light-icon-color:
     value: "{light-plain-content-color.default}"
-  light-heading-color:
-    value: "{light-plain-content-color.default}"
 
   # Dark
   dark-text-color:
     value: "{dark-plain-content-color.default}"
   dark-icon-color:
-    value: "{dark-plain-content-color.default}"
-  dark-heading-color:
     value: "{dark-plain-content-color.default}"
