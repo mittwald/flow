@@ -125,3 +125,8 @@ export const Mobile: Story = {
 export const OffCanvas: Story = {
   args: { offCanvas: true },
 };
+
+export const OffCanvasMobile: Story = {
+  args: { offCanvas: true },
+  parameters: { viewport: { defaultViewport: "mobile1" } },
+};

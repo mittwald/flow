@@ -39,9 +39,8 @@ export const Modal = flowComponent("Modal", (props) => {
   } = props;
 
   const rootClassName = clsx(
-    styles.modal,
+    offCanvas ? styles.offCanvas : styles.modal,
     styles[`size-${size}`],
-    offCanvas && styles.offCanvas,
     className,
   );
 
