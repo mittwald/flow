@@ -17,23 +17,16 @@
   .icon {
     color: var(--illustrated-message--info-icon-color);
     margin-bottom: var(--illustrated-message--icon-to-heading-spacing);
-    order: 1;
   }
 
   .heading {
     margin-bottom: var(--illustrated-message--heading-to-text-spacing);
     text-align: center;
-    order: 2;
   }
 
   .text {
     margin-bottom: var(--illustrated-message--text-to-button-spacing);
     text-align: center;
-    order: 3;
-  }
-
-  .button {
-    order: 4;
   }
 
   /* Negative */

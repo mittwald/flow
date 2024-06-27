@@ -28,7 +28,6 @@ export const IllustratedMessage: FC<IllustratedMessageProps> = (props) => {
       className: styles.text,
     },
     Button: {
-      className: styles.button,
       color: color === "dark" || color === "light" ? color : "accent",
     },
   };
