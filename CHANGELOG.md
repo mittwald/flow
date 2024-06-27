@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.163](https://github.com/mittwald/flow/compare/0.1.0-alpha.162...0.1.0-alpha.163) (2024-06-27)
+
+### Bug Fixes
+
+- fix CSS reset for display property
+  ([#560](https://github.com/mittwald/flow/issues/560))
+  ([8671c3e](https://github.com/mittwald/flow/commit/8671c3efd071f1d7222ac5fbbef784eb88413bfd))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.162](https://github.com/mittwald/flow/compare/0.1.0-alpha.161...0.1.0-alpha.162) (2024-06-27)
 
 **Note:** Version bump only for package @mittwald/flow-project
