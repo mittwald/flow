@@ -7,6 +7,18 @@ import type { Area } from "react-easy-crop";
 const meta: Meta<typeof ImageCropper> = {
   title: "Upload/ImageCropper",
   component: ImageCropper,
+  parameters: {
+    controls: { exclude: ["className"] },
+  },
+  argTypes: {
+    cropShape: {
+      control: "inline-radio",
+      options: ["rect", "round"],
+    },
+    aspect: {
+      control: "number",
+    },
+  },
   render: (props) => (
     <ImageCropper
       {...props}

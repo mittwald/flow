@@ -17,8 +17,8 @@ export interface ImageCropperProps
 
 export const ImageCropper: FC<ImageCropperProps> = (props) => {
   const {
-    aspect = 4 / 3,
     cropShape = "rect",
+    aspect = cropShape === "round" ? 1 : 3 / 2,
     image,
     onCropComplete,
     className,
@@ -36,7 +36,7 @@ export const ImageCropper: FC<ImageCropperProps> = (props) => {
       <div className={styles.cropperContainer}>
         <Cropper
           crop={crop}
-          aspect={cropShape === "round" ? 1 : aspect}
+          aspect={aspect}
           cropShape={cropShape}
           image={image}
           onCropChange={setCrop}

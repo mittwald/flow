@@ -3,7 +3,7 @@ import { action, makeObservable, observable } from "mobx";
 import type { Area } from "react-easy-crop";
 import useSelector from "@/lib/mobx/useSelector";
 
-export class CanvasController {
+export class ImageUploadController {
   public url?: string;
 
   public constructor() {
@@ -13,8 +13,8 @@ export class CanvasController {
     });
   }
 
-  public static useNew(): CanvasController {
-    return useRef(new CanvasController()).current;
+  public static useNew(): ImageUploadController {
+    return useRef(new ImageUploadController()).current;
   }
 
   public drawImage(
@@ -52,4 +52,4 @@ export class CanvasController {
   }
 }
 
-export default CanvasController;
+export default ImageUploadController;
