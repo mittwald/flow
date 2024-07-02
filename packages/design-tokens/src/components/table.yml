@@ -15,6 +15,8 @@ table:
     value: "{primary.color.1000}"
   header-font-weight:
     value: "{font-weight.bold}"
+  header-border-width:
+    value: "{border-width.200}"
   background-color:
     value: "{neutral.color.100}"
   background-color-accent:
