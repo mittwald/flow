@@ -1,0 +1,15 @@
+{
+  "button.generate": "Generate",
+  "password.requirements.heading": "Your password must contain:",
+  "validation.blocklist": "{isValid, select, true {No forbidden words} other {Forbidden words \"{blockedSubstrings}\"}}",
+  "validation.charPool.numberChars.max": "{max, plural, one {Use a maximum of one number} other {Use a maximum of {max} numbers}}",
+  "validation.charPool.numberChars.min": "{min, plural, one {Use at least one number} other {Use at least {min} numbers}}",
+  "validation.charPool.specialChars.max": "{max, plural, one {Use a maximum of one special character} other {Use a maximum of {max} special characters}}",
+  "validation.charPool.specialChars.min": "{min, plural, one {Use at least one special character} other {Use at least {min} special characters}}",
+  "validation.hibp": "{isValid, select, true {Not compromised} other {Password compromised}}",
+  "validation.length.max": "{max, plural, one {Maximum one character} other {Maximum {max} characters}}",
+  "validation.length.min": "{min, plural, one {Minimum length of one character} other {Minimum length of {min} characters}}",
+  "validation.regex.max": "Pattern \"{pattern}\" may not be used more than {max}",
+  "validation.regex.min": "Does not match the pattern \"{pattern}\"",
+  "validation.sequence": "No simple character repetitions"
+}

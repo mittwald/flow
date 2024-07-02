@@ -77,6 +77,7 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
             selectedKey: formControlProps.value,
           },
           Slider: formControlProps,
+          PasswordCreationField: formControlProps,
           DatePicker: formControlProps,
           DateRangePicker: formControlProps,
           TimeField: formControlProps,

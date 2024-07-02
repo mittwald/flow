@@ -71,6 +71,7 @@ import type { FileCardListProps } from "@/components/FileCardList";
 import type { AccentBoxProps } from "@/components/AccentBox";
 import type { ColumnLayoutProps } from "@/components/ColumnLayout";
 import type { MenuTriggerProps } from "@/components/OverlayTrigger";
+import type { PasswordCreationFieldProps } from "src/components/PasswordCreationField";
 
 export * from "./types";
 
@@ -127,6 +128,7 @@ export interface FlowComponentPropsTypes {
   Option: OptionProps;
   Popover: PopoverProps;
   PopoverTrigger: PopoverTriggerProps;
+  PasswordCreationField: PasswordCreationFieldProps;
   Radio: RadioProps;
   RadioButton: RadioButtonProps;
   RadioGroup: RadioGroupProps;
@@ -202,6 +204,7 @@ const propsContextSupportingComponentsMap: Record<
   Option: true,
   Popover: true,
   PopoverTrigger: true,
+  PasswordCreationField: true,
   RadioButton: true,
   RadioGroup: true,
   SearchField: true,
