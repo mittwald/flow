@@ -1,5 +1,7 @@
 {
-  "fileDropZone.drop": "Dateien hier ablegen",
+  "fileDropZone.drop": "Datei hier ablegen",
+  "fileDropZone.dropMultiple": "Dateien hier ablegen",
   "fileDropZone.or": "oder",
-  "fileDropZone.select": "Dateien auswählen"
+  "fileDropZone.select": "Datei auswählen",
+  "fileDropZone.selectMultiple": "Dateien auswählen"
 }

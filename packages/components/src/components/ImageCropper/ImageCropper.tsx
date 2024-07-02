@@ -10,9 +10,8 @@ import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 
 export interface ImageCropperProps
-  extends Pick<
-      CropperProps,
-      "aspect" | "cropShape" | "image" | "onCropComplete"
+  extends Partial<
+      Pick<CropperProps, "aspect" | "cropShape" | "image" | "onCropComplete">
     >,
     PropsWithClassName {}
 

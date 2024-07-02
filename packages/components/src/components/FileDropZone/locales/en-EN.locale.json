@@ -1,5 +1,7 @@
 {
-  "fileDropZone.drop": "Drop files here",
+  "fileDropZone.drop": "Drop file here",
+  "fileDropZone.dropMultiple": "Drop files here",
   "fileDropZone.or": "or",
-  "fileDropZone.select": "Select files"
+  "fileDropZone.select": "Select file",
+  "fileDropZone.selectMultiple": "Select files"
 }

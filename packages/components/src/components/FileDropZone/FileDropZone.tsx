@@ -13,10 +13,11 @@ import type FileController from "@/components/FileDropZone/FileController";
 
 export interface FileDropZoneProps extends PropsWithClassName {
   controller: FileController;
+  allowsMultiple?: boolean;
 }
 
 export const FileDropZone: FC<FileDropZoneProps> = (props) => {
-  const { controller, className } = props;
+  const { controller, allowsMultiple, className } = props;
 
   const rootClassName = clsx(styles.fileDropZone, className);
 
@@ -29,6 +30,7 @@ export const FileDropZone: FC<FileDropZoneProps> = (props) => {
 
     fileDropItems.map(async (f) => {
       const file = await f.getFile();
+
       controller.add(file);
     });
   };
@@ -42,12 +44,22 @@ export const FileDropZone: FC<FileDropZoneProps> = (props) => {
     <>
       <Aria.DropZone className={rootClassName} onDrop={onDrop}>
         <Text slot="label">
-          <b>{stringFormatter.format("fileDropZone.drop")}</b>
+          <b>
+            {stringFormatter.format(
+              allowsMultiple
+                ? "fileDropZone.dropMultiple"
+                : "fileDropZone.drop",
+            )}
+          </b>
         </Text>
         <Text>{stringFormatter.format("fileDropZone.or")}</Text>
-        <Aria.FileTrigger allowsMultiple onSelect={onSelect}>
+        <Aria.FileTrigger allowsMultiple={allowsMultiple} onSelect={onSelect}>
           <Button variant="plain">
-            {stringFormatter.format("fileDropZone.select")}
+            {stringFormatter.format(
+              allowsMultiple
+                ? "fileDropZone.selectMultiple"
+                : "fileDropZone.select",
+            )}
           </Button>
         </Aria.FileTrigger>
       </Aria.DropZone>

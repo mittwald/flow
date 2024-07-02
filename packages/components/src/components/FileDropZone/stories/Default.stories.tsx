@@ -18,7 +18,7 @@ const meta: Meta<typeof FileDropZone> = {
       <Section>
         <FileDropZone {...props} controller={fileController} />
         <LabeledValue>
-          <Label>Selected files</Label>{" "}
+          <Label>Selected files</Label>
           <Text>
             {files.length > 0 ? files.map((f) => f.name).join(", ") : "-"}
           </Text>

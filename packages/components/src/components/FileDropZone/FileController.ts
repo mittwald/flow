@@ -1,4 +1,4 @@
-import { makeObservable, observable } from "mobx";
+import { action, makeObservable, observable } from "mobx";
 import useSelector from "@/lib/mobx/useSelector";
 import { useRef } from "react";
 
@@ -7,7 +7,11 @@ export class FileController {
   private id = 0;
 
   public constructor() {
-    makeObservable(this, { files: observable.shallow });
+    makeObservable(this, {
+      files: observable.shallow,
+      add: action.bound,
+      remove: action.bound,
+    });
   }
 
   public static useNew(): FileController {
