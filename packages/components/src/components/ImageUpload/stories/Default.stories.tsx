@@ -6,7 +6,7 @@ import { Link } from "@/components/Link";
 import { Section } from "@/components/Section";
 
 const meta: Meta<typeof ImageUpload> = {
-  title: "Upload/ImageUpload",
+  title: "Upload/image-upload",
   component: ImageUpload,
   parameters: {
     controls: { exclude: ["className", "controller"] },

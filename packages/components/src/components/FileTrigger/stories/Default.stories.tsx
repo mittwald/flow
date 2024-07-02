@@ -24,12 +24,12 @@ const meta: Meta<typeof FileTrigger> = {
     controls: { exclude: ["className", "controller"] },
   },
   render: (props) => {
-    const fileController = FileController.useNew();
-    const files = fileController.useFiles();
+    const controller = FileController.useNew();
+    const files = controller.useFiles();
 
     return (
       <Section>
-        <FileTrigger {...props} controller={fileController}>
+        <FileTrigger {...props} controller={controller}>
           <Button>Select file</Button>
         </FileTrigger>
         <SelectedFiles files={files} />
@@ -45,12 +45,12 @@ export const Default: Story = {};
 
 export const AllowsMultiple: Story = {
   render: (props) => {
-    const fileController = FileController.useNew();
-    const files = fileController.useFiles();
+    const controller = FileController.useNew();
+    const files = controller.useFiles();
 
     return (
       <Section>
-        <FileTrigger {...props} controller={fileController} allowsMultiple>
+        <FileTrigger {...props} controller={controller} allowsMultiple>
           <Button>Select multiple files</Button>
         </FileTrigger>
         <SelectedFiles files={files} />
@@ -61,14 +61,14 @@ export const AllowsMultiple: Story = {
 
 export const AcceptedFileTypes: Story = {
   render: (props) => {
-    const fileController = FileController.useNew();
-    const files = fileController.useFiles();
+    const controller = FileController.useNew();
+    const files = controller.useFiles();
 
     return (
       <Section>
         <FileTrigger
           {...props}
-          controller={fileController}
+          controller={controller}
           allowsMultiple
           acceptedFileTypes={["image/png", "image/jpeg"]}
         >

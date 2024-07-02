@@ -14,12 +14,12 @@ const meta: Meta<typeof FileDropZone> = {
     controls: { exclude: ["className", "controller"] },
   },
   render: (props) => {
-    const fileController = FileController.useNew();
-    const files = fileController.useFiles();
+    const controller = FileController.useNew();
+    const files = controller.useFiles();
 
     return (
       <Section>
-        <FileDropZone {...props} controller={fileController} />
+        <FileDropZone {...props} controller={controller} />
         <LabeledValue>
           <Label>Selected files</Label>
           <Text>

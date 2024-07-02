@@ -78,6 +78,14 @@
       "types": "./dist/types/components/FieldError/index.d.ts",
       "import": "./dist/FieldError.js"
     },
+    "./FileDropZone": {
+      "types": "./dist/types/components/FileDropZone/index.d.ts",
+      "import": "./dist/FileDropZone.js"
+    },
+    "./FileTrigger": {
+      "types": "./dist/types/components/FileTrigger/index.d.ts",
+      "import": "./dist/FileTrigger.js"
+    },
     "./Header": {
       "types": "./dist/types/components/Header/index.d.ts",
       "import": "./dist/Header.js"
@@ -105,6 +113,14 @@
     "./Image": {
       "types": "./dist/types/components/Image/index.d.ts",
       "import": "./dist/Image.js"
+    },
+    "./ImageCropper": {
+      "types": "./dist/types/components/ImageCropper/index.d.ts",
+      "import": "./dist/ImageCropper.js"
+    },
+    "./ImageUpload": {
+      "types": "./dist/types/components/ImageUpload/index.d.ts",
+      "import": "./dist/ImageUpload.js"
     },
     "./Initials": {
       "types": "./dist/types/components/Initials/index.d.ts",

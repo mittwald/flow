@@ -5,11 +5,12 @@ import { dummyText } from "@/lib/dev/dummyText";
 import type { Area } from "react-easy-crop";
 
 const meta: Meta<typeof ImageCropper> = {
-  title: "Upload/ImageCropper",
+  title: "Upload/image-cropper",
   component: ImageCropper,
   parameters: {
     controls: { exclude: ["className"] },
   },
+  args: { cropShape: "rect" },
   argTypes: {
     cropShape: {
       control: "inline-radio",
@@ -37,4 +38,4 @@ export const Default: Story = {};
 
 export const Round: Story = { args: { cropShape: "round" } };
 
-export const CustomAspect: Story = { args: { aspect: 16 / 9 } };
+export const CustomAspect: Story = { args: { aspect: 5 / 2 } };
