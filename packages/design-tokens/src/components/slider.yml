@@ -10,26 +10,26 @@ slider:
       value: "{disabled-plain-content-accent-color}"
   track-background-color:
     default:
-      value: "{primary-soft-background-color.default}"
+      value: "{neutral.color.700}"
     disabled:
       value: "{disabled-soft-background-color}"
   track-background-color-fill:
     default:
-      value: "{primary-solid-background-color.default}"
+      value: "{neutral.color.1000}"
     disabled:
       value: "{disabled-solid-background-color}"
   track-height:
-    value: "{size-rem.xs}"
+    value: 3px
   track-corner-radius:
     value: "{corner-radius.default}"
 
   thumb-border-color:
     default:
-      value: "{primary-solid-background-color.default}"
+      value: "{neutral.color.1000}"
     disabled:
       value: "{disabled-solid-background-color}"
   thumb-border-width:
-    value: "{size-rem.xs}"
+    value: 3px
   thumb-border-style:
     value: "{border-style.default}"
   thumb-corner-radius:
@@ -40,7 +40,7 @@ slider:
     default:
       value: "{neutral.color.100}"
     pressed:
-      value: "{primary-solid-background-color.default}"
+      value: "{neutral.color.1000}"
 
   initial-marker-height:
     value: "{size-rem.m}"

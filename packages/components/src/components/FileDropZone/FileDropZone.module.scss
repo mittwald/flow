@@ -1,0 +1,12 @@
+.fileDropZone {
+  border-style: var(--file-drop-zone--border-style);
+  border-width: var(--file-drop-zone--border-width);
+  border-color: var(--file-drop-zone--border-color);
+  border-radius: var(--file-drop-zone--corner-radius);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--file-drop-zone--padding);
+  row-gap: var(--file-drop-zone--content-to-content-spacing);
+}

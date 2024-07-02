@@ -17,6 +17,8 @@ export interface SliderProps
     PropsWithChildren<Aria.SliderProps>,
     Pick<Aria.SliderThumbProps, "name"> {
   showInitialMarker?: boolean;
+  showButtonControls?: boolean;
+  showValue?: boolean;
 }
 
 export const Slider: FC<SliderProps> = flowComponent("Slider", (props) => {
@@ -27,6 +29,8 @@ export const Slider: FC<SliderProps> = flowComponent("Slider", (props) => {
     isDisabled,
     defaultValue,
     showInitialMarker,
+    showButtonControls,
+    showValue,
     ...rest
   } = props;
 
@@ -51,38 +55,44 @@ export const Slider: FC<SliderProps> = flowComponent("Slider", (props) => {
       defaultValue={defaultValue}
       {...rest}
     >
-      <div className={styles.text}>
-        <Aria.SliderOutput className={styles.value} />
+      {showValue && (
+        <div className={styles.text}>
+          <Aria.SliderOutput className={styles.value} />
 
-        <PropsContextProvider props={propsContext}>
-          {children}
-        </PropsContextProvider>
-      </div>
+          <PropsContextProvider props={propsContext}>
+            {children}
+          </PropsContextProvider>
+        </div>
+      )}
 
       <Aria.SliderTrack className={styles.track}>
         {({ state }) => (
           <>
-            <Button
-              onPress={() => state.decrementThumb(0)}
-              aria-label={stringFormatter.format("slider.decrement")}
-              size="s"
-              variant="plain"
-              className={styles.decrement}
-              isDisabled={isDisabled}
-            >
-              <IconMinus />
-            </Button>
+            {showButtonControls && (
+              <>
+                <Button
+                  onPress={() => state.decrementThumb(0)}
+                  aria-label={stringFormatter.format("slider.decrement")}
+                  size="s"
+                  variant="plain"
+                  className={styles.decrement}
+                  isDisabled={isDisabled}
+                >
+                  <IconMinus />
+                </Button>
 
-            <Button
-              onPress={() => state.incrementThumb(0)}
-              aria-label={stringFormatter.format("slider.increment")}
-              size="s"
-              variant="plain"
-              className={styles.increment}
-              isDisabled={isDisabled}
-            >
-              <IconPlus />
-            </Button>
+                <Button
+                  onPress={() => state.incrementThumb(0)}
+                  aria-label={stringFormatter.format("slider.increment")}
+                  size="s"
+                  variant="plain"
+                  className={styles.increment}
+                  isDisabled={isDisabled}
+                >
+                  <IconPlus />
+                </Button>
+              </>
+            )}
 
             <div
               className={styles.fill}

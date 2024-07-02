@@ -1,0 +1,9 @@
+image-cropper:
+  corner-radius:
+    value: "{corner-radius.default}"
+  width:
+    value: 300px;
+  height:
+    value: 200px;
+  cropper-to-slider-spacing:
+    value: "{size-px.m}"
