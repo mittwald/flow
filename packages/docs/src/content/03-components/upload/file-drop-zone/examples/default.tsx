@@ -1,8 +1,8 @@
 import FileDropZone from "@mittwald/flow-react-components/FileDropZone";
-import { FileController } from "@mittwald/flow-react-components/FileTrigger";
+import { useFileController } from "@mittwald/flow-react-components/FileTrigger";
 
 export default () => {
-  const controller = FileController.useNew();
+  const controller = useFileController();
 
   return <FileDropZone controller={controller} />;
 };

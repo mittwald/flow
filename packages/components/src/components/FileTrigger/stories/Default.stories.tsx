@@ -5,17 +5,22 @@ import { Text } from "@/components/Text";
 import { LabeledValue } from "@/components/LabeledValue";
 import { Label } from "@/components/Label";
 import { Section } from "@/components/Section";
-import { FileController, FileTrigger } from "@/components/FileTrigger";
+import { FileTrigger, useFileController } from "@/components/FileTrigger";
 import { Button } from "@/components/Button";
+import type FileController from "@/components/FileTrigger/FileController";
 
-const SelectedFiles: FC<{ files: File[] }> = (props) => (
-  <LabeledValue>
-    <Label>Selected files</Label>
-    <Text>
-      {props.files.length > 0 ? props.files.map((f) => f.name).join(", ") : "-"}
-    </Text>
-  </LabeledValue>
-);
+const SelectedFiles: FC<{ controller: FileController }> = (props) => {
+  const files = props.controller.useFiles();
+
+  return (
+    <LabeledValue>
+      <Label>Selected files</Label>
+      <Text>
+        {files.length > 0 ? files.map((f) => f.name).join(", ") : "-"}
+      </Text>
+    </LabeledValue>
+  );
+};
 
 const meta: Meta<typeof FileTrigger> = {
   title: "Upload/FileTrigger",
@@ -24,15 +29,14 @@ const meta: Meta<typeof FileTrigger> = {
     controls: { exclude: ["className", "controller"] },
   },
   render: (props) => {
-    const controller = FileController.useNew();
-    const files = controller.useFiles();
+    const controller = useFileController();
 
     return (
       <Section>
         <FileTrigger {...props} controller={controller}>
           <Button>Select file</Button>
         </FileTrigger>
-        <SelectedFiles files={files} />
+        <SelectedFiles controller={controller} />
       </Section>
     );
   },
@@ -45,15 +49,14 @@ export const Default: Story = {};
 
 export const AllowsMultiple: Story = {
   render: (props) => {
-    const controller = FileController.useNew();
-    const files = controller.useFiles();
+    const controller = useFileController();
 
     return (
       <Section>
         <FileTrigger {...props} controller={controller} allowsMultiple>
           <Button>Select multiple files</Button>
         </FileTrigger>
-        <SelectedFiles files={files} />
+        <SelectedFiles controller={controller} />
       </Section>
     );
   },
@@ -61,20 +64,18 @@ export const AllowsMultiple: Story = {
 
 export const AcceptedFileTypes: Story = {
   render: (props) => {
-    const controller = FileController.useNew();
-    const files = controller.useFiles();
+    const controller = useFileController();
 
     return (
       <Section>
         <FileTrigger
           {...props}
           controller={controller}
-          allowsMultiple
           acceptedFileTypes={["image/png", "image/jpeg"]}
         >
           <Button>Select image</Button>
         </FileTrigger>
-        <SelectedFiles files={files} />
+        <SelectedFiles controller={controller} />
       </Section>
     );
   },

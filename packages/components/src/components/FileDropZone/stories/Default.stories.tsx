@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { FileDropZone } from "@/components/FileDropZone";
-import FileController from "@/components/FileTrigger/FileController";
 import { Text } from "@/components/Text";
 import { LabeledValue } from "@/components/LabeledValue";
 import { Label } from "@/components/Label";
 import { Section } from "@/components/Section";
+import { useFileController } from "@/components/FileTrigger";
 
 const meta: Meta<typeof FileDropZone> = {
   title: "Upload/FileDropZone",
@@ -14,7 +14,7 @@ const meta: Meta<typeof FileDropZone> = {
     controls: { exclude: ["className", "controller"] },
   },
   render: (props) => {
-    const controller = FileController.useNew();
+    const controller = useFileController();
     const files = controller.useFiles();
 
     return (

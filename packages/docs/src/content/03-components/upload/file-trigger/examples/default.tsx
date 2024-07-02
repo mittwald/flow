@@ -1,10 +1,10 @@
 import FileTrigger, {
-  FileController,
+  useFileController,
 } from "@mittwald/flow-react-components/FileTrigger";
 import Button from "@mittwald/flow-react-components/Button";
 
 export default () => {
-  const controller = FileController.useNew();
+  const controller = useFileController();
 
   return (
     <FileTrigger controller={controller}>

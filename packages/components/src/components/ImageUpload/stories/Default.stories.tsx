@@ -1,7 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import { ImageUpload } from "@/components/ImageUpload";
-import ImageUploadController from "@/components/ImageUpload/ImageUploadController";
+import {
+  ImageUpload,
+  useImageUploadController,
+} from "@/components/ImageUpload";
 import { Link } from "@/components/Link";
 import { Section } from "@/components/Section";
 
@@ -24,7 +26,7 @@ const meta: Meta<typeof ImageUpload> = {
     },
   },
   render: (props) => {
-    const controller = ImageUploadController.useNew();
+    const controller = useImageUploadController();
     const url = controller.useUrl();
 
     return (

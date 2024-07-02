@@ -10,7 +10,7 @@ import clsx from "clsx";
 import type { PropsWithClassName } from "@/lib/types/props";
 
 export interface ImageUploadProps
-  extends Pick<CropperProps, "cropShape">,
+  extends Partial<Pick<CropperProps, "cropShape">>,
     PropsWithClassName {
   controller: ImageUploadController;
   width?: number;
