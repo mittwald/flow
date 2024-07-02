@@ -1,0 +1,115 @@
+@use "@/styles/mixins/focus";
+@use "@/styles/mixins/ellipsis";
+
+.step {
+  background-color: var(--step-indicator--background-color--default);
+  position: relative;
+
+  &:first-child {
+    border-start-start-radius: var(--step-indicator--corner-radius);
+    border-end-start-radius: var(--step-indicator--corner-radius);
+  }
+
+  &:last-child {
+    border-start-end-radius: var(--step-indicator--corner-radius);
+    border-end-end-radius: var(--step-indicator--corner-radius);
+  }
+
+  &:not(:first-child) {
+    padding-inline-start: var(--size-px--m);
+  }
+
+  &:not(:last-child) {
+    &:before,
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      z-index: 1;
+    }
+
+    &:before {
+      border: 22px solid transparent;
+      border-inline-width: 15px;
+      border-inline-start-color: var(--neutral--color--100);
+      right: -29px;
+      top: -6px;
+    }
+
+    &:after {
+      border: 18px solid transparent;
+      border-inline-width: 12px;
+      border-inline-start-color: var(
+        --step-indicator--background-color--default
+      );
+      right: -22px;
+      top: -2px;
+    }
+  }
+
+  @container (max-width: 550px) {
+    width: 100%;
+    border-radius: var(--step-indicator--corner-radius);
+
+    &:not(:first-child) {
+      padding-inline-start: 0;
+    }
+
+    &:not(.current) {
+      display: none;
+    }
+
+    .link {
+      justify-content: space-between;
+    }
+
+    .count.count {
+      display: block;
+      font-weight: normal;
+    }
+  }
+}
+
+.count.count {
+  display: none;
+}
+
+.current {
+  font-weight: var(--step-indicator--font-weight-current);
+}
+
+.done {
+  &:hover {
+    background-color: var(--step-indicator--background-color--hover);
+    cursor: pointer;
+    &:not(:last-child):after {
+      border-inline-start-color: var(--step-indicator--background-color--hover);
+    }
+  }
+  &[data-pressed] {
+    background-color: var(--step-indicator--background-color--pressed);
+    &:not(:last-child):after {
+      border-inline-start-color: var(
+        --step-indicator--background-color--pressed
+      );
+    }
+  }
+}
+
+.current,
+.done {
+  background-color: var(--step-indicator--background-color--current);
+  &:not(:last-child):after {
+    border-inline-start-color: var(--step-indicator--background-color--current);
+  }
+}
+
+.link {
+  padding-block: var(--step-indicator--padding-y);
+  padding-inline: var(--step-indicator--padding-x);
+  display: flex;
+
+  @include focus.focus;
+  outline-offset: calc(var(--size-px--xs) * -1);
+  outline-color: var(--neutral--color--100);
+}
