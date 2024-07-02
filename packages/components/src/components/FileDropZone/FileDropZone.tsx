@@ -51,18 +51,6 @@ export const FileDropZone: FC<FileDropZoneProps> = (props) => {
           </Button>
         </Aria.FileTrigger>
       </Aria.DropZone>
-
-      {files.map((file) => (
-        <div
-          key={file.name}
-          style={{ border: "1px solid black", padding: "8px", margin: "8px" }}
-        >
-          {file.name}
-          <Button onPress={() => setFiles(files.filter((f) => f !== file))}>
-            Remove File
-          </Button>
-        </div>
-      ))}
     </>
   );
 };
