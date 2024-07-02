@@ -1,21 +1,41 @@
 @mixin formControl {
+  @include formBorder;
+  @include formOutline;
+  @include formColor;
+  @include formAnimation;
+  @include formOrder;
+  @include formInteractionStates;
+}
+
+@mixin formBorder {
   border-width: var(--form-control--border-width);
   border-style: var(--form-control--border-style);
   border-radius: var(--form-control--corner-radius);
+}
+
+@mixin formOutline {
   padding-block: calc(
     var(--form-control--padding-y) - var(--form-control--border-width)
   );
   padding-inline: var(--form-control--padding-x);
+}
 
+@mixin formColor {
   color: var(--form-control--content-color--default);
   border-color: var(--form-control--border-color--default);
   background-color: var(--form-control--background-color--default);
+}
 
+@mixin formAnimation {
   transition-property: color, background-color, border-color;
   transition-duration: var(--transition--duration--default);
+}
 
+@mixin formOrder {
   order: 2;
+}
 
+@mixin formInteractionStates {
   &::placeholder {
     color: var(--form-control--placeholder-color--default);
   }

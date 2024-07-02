@@ -1,0 +1,17 @@
+.passwordFieldLabel {
+  display: flex;
+  flex-grow: 1;
+}
+
+.helpButton {
+  display: inline;
+}
+
+.generateButton {
+  margin-left: auto;
+}
+
+.rule {
+  display: flex;
+  column-gap: 8px;
+}

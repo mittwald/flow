@@ -40,6 +40,7 @@ import type { FlowComponentName } from "@/components/propTypes/types";
 import type { ContextualHelpProps } from "@/components/ContextualHelp";
 import type { PopoverProps } from "@/components/Popover";
 import type { ContextMenuSectionProps } from "@/components/ContextMenu/components/ContextMenuSection";
+import type { PasswordCreationFieldProps } from "src/components/PasswordCreationField";
 
 export * from "./types";
 
@@ -72,6 +73,7 @@ export interface FlowComponentPropsTypes {
   Modal: ModalProps;
   NumberField: NumberFieldProps;
   Option: OptionProps;
+  PasswordCreationField: PasswordCreationFieldProps;
   Popover: PopoverProps;
   Radio: RadioProps;
   RadioButton: RadioButtonProps;
@@ -120,6 +122,7 @@ const propsContextSupportingComponentsMap: Record<
   NumberField: true,
   Radio: true,
   Option: true,
+  PasswordCreationField: true,
   Popover: true,
   RadioButton: true,
   RadioGroup: true,
