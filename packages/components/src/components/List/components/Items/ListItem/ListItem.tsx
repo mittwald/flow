@@ -7,10 +7,17 @@ import { OptionsButton } from "@/components/List/components/Items/OptionsButton"
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import type { LinkDOMProps } from "@react-types/shared";
 import { Link } from "@/components/Link";
-import type { PropsWithClassName } from "@/lib/types/props";
+import type {
+  PropsWithClassName,
+  PropsWithContainerBreakpointSize,
+} from "@/lib/types/props";
 import clsx from "clsx";
+import { getContainerBreakpointSizeClassName } from "@/lib/getContainerBreakpointSizeClassName";
 
-type Props = PropsWithChildren & LinkDOMProps & PropsWithClassName;
+type Props = PropsWithChildren &
+  LinkDOMProps &
+  PropsWithClassName &
+  PropsWithContainerBreakpointSize;
 
 const getStyleForContentSlot = (slot?: string) =>
   slot === "top"
@@ -20,7 +27,13 @@ const getStyleForContentSlot = (slot?: string) =>
       : styles.topContent;
 
 export const ListItem = (props: Props) => {
-  const { children, href, className, ...linkDomProps } = props;
+  const {
+    children,
+    href,
+    className,
+    containerBreakpointSize = "m",
+    ...linkDomProps
+  } = props;
 
   const propsContext: PropsContext = {
     ContextMenu: {
@@ -56,7 +69,11 @@ export const ListItem = (props: Props) => {
     },
   };
 
-  const rootClassName = clsx(styles.item, className);
+  const rootClassName = clsx(
+    styles.item,
+    className,
+    styles[getContainerBreakpointSizeClassName(containerBreakpointSize)],
+  );
 
   const MainComponent: FC<PropsWithChildren> = (props) =>
     href ? (
