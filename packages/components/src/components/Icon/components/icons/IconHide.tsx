@@ -1,7 +1,7 @@
 /* eslint-disable */
 /* auto-generated file */
 import React, { ComponentProps, FC } from "react";
-import { IconEyeCancel as Tabler } from "@tabler/icons-react";
+import { IconEyeOff as Tabler } from "@tabler/icons-react";
 import { Icon } from "@/components/Icon";
 
 export const IconHide: FC<Omit<ComponentProps<typeof Icon>, "children">> = (

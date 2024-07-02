@@ -56,7 +56,7 @@ export function Field<T extends FieldValues>(props: Props<T>) {
           TextField: formControlProps,
           Select: formControlProps,
           Slider: formControlProps,
-          PasswordField: formControlProps,
+          PasswordCreationField: formControlProps,
         };
 
         return (

@@ -37,7 +37,8 @@ import type { SectionProps } from "@/components/Section";
 import type { SliderProps } from "@/components/Slider";
 import type { CounterBadgeProps } from "@/components/CounterBadge";
 import type { FlowComponentName } from "@/components/propTypes/types";
-import { PasswordFieldProps } from "@/components/PasswordField";
+import type { PasswordCreationFieldProps } from "src/components/PasswordCreationField";
+import PasswordCreationField from "@/components/PasswordCreationField";
 
 export * from "./types";
 
@@ -68,7 +69,7 @@ export interface FlowComponentPropsTypes {
   Modal: ModalProps;
   NumberField: NumberFieldProps;
   Option: OptionProps;
-  PasswordField: PasswordFieldProps;
+  PasswordCreationField: PasswordCreationFieldProps;
   Radio: RadioProps;
   RadioButton: RadioButtonProps;
   RadioGroup: RadioGroupProps;
@@ -114,7 +115,7 @@ const propsContextSupportingComponentsMap: Record<
   NumberField: true,
   Radio: true,
   Option: true,
-  PasswordField: true,
+  PasswordCreationField: true,
   RadioButton: true,
   RadioGroup: true,
   Section: true,
