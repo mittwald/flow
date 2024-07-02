@@ -3,9 +3,12 @@ import React from "react";
 import type { Filter } from "@/components/List/model/filter/Filter";
 import { Button } from "@/components/Button";
 import { Text } from "@/components/Text";
-import * as Aria from "react-aria-components";
 import type { AnyData } from "@/components/List/model/item/types";
-import { ContextMenu, MenuItem } from "@/components/ContextMenu";
+import {
+  ContextMenu,
+  ContextMenuTrigger,
+  MenuItem,
+} from "@/components/ContextMenu";
 import { IconChevronDown } from "@/components/Icon/components/icons";
 
 interface Props {
@@ -30,7 +33,7 @@ export const FilterPicker: FC<Props> = (props) => {
   };
 
   return (
-    <Aria.MenuTrigger>
+    <ContextMenuTrigger>
       <Button variant="soft" size="s" color="secondary">
         <Text>{filter.name ?? filter.property}</Text>
         <IconChevronDown />
@@ -42,6 +45,6 @@ export const FilterPicker: FC<Props> = (props) => {
       >
         {items}
       </ContextMenu>
-    </Aria.MenuTrigger>
+    </ContextMenuTrigger>
   );
 };

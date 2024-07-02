@@ -62,8 +62,8 @@ export default defineConfig(
           NotificationProvider:
             "./src/components/NotificationProvider/index.ts",
           NumberField: "./src/components/NumberField/index.ts",
-          OffCanvas: "./src/components/OffCanvas/index.ts",
           ProgressBar: "./src/components/ProgressBar/index.ts",
+          Popover: "./src/components/Popover/index.ts",
           RadioGroup: "./src/components/RadioGroup/index.ts",
           Render: "./src/lib/react/components/Render/index.ts",
           Section: "./src/components/Section/index.ts",

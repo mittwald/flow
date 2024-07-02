@@ -3,9 +3,9 @@ import type { FC, PropsWithChildren } from "react";
 import React from "react";
 import styles from "./ModalOverlay.module.scss";
 import clsx from "clsx";
-import { OverlayContextProvider } from "@/lib/controller/overlay/context";
 import type { OverlayController } from "@/lib/controller";
 import { useOverlayController } from "@/lib/controller";
+import OverlayContextProvider from "@/lib/controller/overlay/OverlayContextProvider";
 
 export interface ModalOverlayProps extends PropsWithChildren {
   controller?: OverlayController;
@@ -21,7 +21,7 @@ export const ModalOverlay: FC<ModalOverlayProps> = (props) => {
     className,
   } = props;
 
-  const controllerFromContext = useOverlayController({
+  const controllerFromContext = useOverlayController("Modal", {
     reuseControllerFromContext: true,
   });
 
@@ -40,7 +40,7 @@ export const ModalOverlay: FC<ModalOverlayProps> = (props) => {
     >
       <Aria.Modal>
         <Aria.Dialog>
-          <OverlayContextProvider value={controller}>
+          <OverlayContextProvider type="Modal" controller={controller}>
             {children}
           </OverlayContextProvider>
         </Aria.Dialog>

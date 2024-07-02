@@ -1,14 +1,18 @@
 import * as Aria from "react-aria-components";
-import type { FC, PropsWithChildren } from "react";
+import type { FC } from "react";
 import React from "react";
+import type { OverlayTriggerProps } from "@/components/OverlayTrigger";
 import { OverlayTrigger } from "@/components/OverlayTrigger";
 
-type Props = PropsWithChildren;
-
-export const ModalTrigger: FC<Props> = (props) => {
+export const ModalTrigger: FC<OverlayTriggerProps> = (props) => {
+  const { children, ...triggerProps } = props;
   return (
-    <OverlayTrigger>
-      <Aria.DialogTrigger>{props.children}</Aria.DialogTrigger>
+    <OverlayTrigger
+      overlayType="Modal"
+      {...triggerProps}
+      component={Aria.DialogTrigger}
+    >
+      {children}
     </OverlayTrigger>
   );
 };

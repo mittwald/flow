@@ -8,6 +8,7 @@ import { customComponents } from "@/lib/mdx/components/MdxFileView/customCompone
 import styles from "./customComponents.module.css";
 import type { LiveCodeEditorProps } from "@/lib/liveCode/components/LiveCodeEditor/types";
 import DoAndDontTile from "@/lib/mdx/components/DoAndDont/DoAndDontTile";
+import { Content } from "@mittwald/flow-react-components/Content";
 
 interface Props {
   mdxFile: SerializedMdxFile;
@@ -21,11 +22,13 @@ export const MdxFileView: FC<Props> = (props) => {
       example?: string;
     } & Omit<LiveCodeEditorProps, "code" | "className">
   > = ({ example = "default", ...rest }) => (
-    <LiveCodeEditor
-      className={styles.liveCodeEditor}
-      code={mdxFile.getExample(example)}
-      {...rest}
-    />
+    <Content>
+      <LiveCodeEditor
+        className={styles.liveCodeEditor}
+        code={mdxFile.getExample(example)}
+        {...rest}
+      />
+    </Content>
   );
 
   const ExampleDo: FC<{

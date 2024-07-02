@@ -1,15 +1,27 @@
-import type { FC } from "react";
 import React from "react";
 import type { PopoverProps } from "@/components/Popover";
 import { Popover } from "@/components/Popover";
 import styles from "./ContextualHelp.module.scss";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import { useOverlayController } from "@/lib/controller";
 
 export type ContextualHelpProps = Omit<PopoverProps, "withTip">;
 
-export const ContextualHelp: FC<ContextualHelpProps> = (props) => {
-  const { children, ...rest } = props;
+export const ContextualHelp = flowComponent("ContextualHelp", (props) => {
+  const {
+    children,
+    controller: controllerFromProps,
+    refProp: ignoredRef,
+    ...rest
+  } = props;
+
+  const controllerFromContext = useOverlayController("ContextualHelp", {
+    reuseControllerFromContext: true,
+  });
+
+  const controller = controllerFromProps ?? controllerFromContext;
 
   const propsContext: PropsContext = {
     Heading: {
@@ -18,12 +30,12 @@ export const ContextualHelp: FC<ContextualHelpProps> = (props) => {
   };
 
   return (
-    <Popover withTip {...rest}>
+    <Popover withTip {...rest} controller={controller}>
       <PropsContextProvider props={propsContext}>
         <div className={styles.contextualHelp}>{children}</div>
       </PropsContextProvider>
     </Popover>
   );
-};
+});
 
 export default ContextualHelp;

@@ -37,8 +37,10 @@ import type { SectionProps } from "@/components/Section";
 import type { SliderProps } from "@/components/Slider";
 import type { CounterBadgeProps } from "@/components/CounterBadge";
 import type { FlowComponentName } from "@/components/propTypes/types";
+import type { ContextualHelpProps } from "@/components/ContextualHelp";
+import type { PopoverProps } from "@/components/Popover";
+import type { ContextMenuSectionProps } from "@/components/ContextMenu/components/ContextMenuSection";
 import type { PasswordCreationFieldProps } from "src/components/PasswordCreationField";
-import PasswordCreationField from "@/components/PasswordCreationField";
 
 export * from "./types";
 
@@ -52,6 +54,8 @@ export interface FlowComponentPropsTypes {
   CheckboxGroup: CheckboxGroupProps;
   Content: ContentProps;
   ContextMenu: ContextMenuProps;
+  ContextMenuSection: ContextMenuSectionProps;
+  ContextualHelp: ContextualHelpProps;
   CopyButton: CopyButtonProps;
   CounterBadge: CounterBadgeProps;
   FieldDescription: FieldDescriptionProps;
@@ -70,6 +74,7 @@ export interface FlowComponentPropsTypes {
   NumberField: NumberFieldProps;
   Option: OptionProps;
   PasswordCreationField: PasswordCreationFieldProps;
+  Popover: PopoverProps;
   Radio: RadioProps;
   RadioButton: RadioButtonProps;
   RadioGroup: RadioGroupProps;
@@ -97,6 +102,8 @@ const propsContextSupportingComponentsMap: Record<
   CheckboxGroup: true,
   Content: true,
   ContextMenu: true,
+  ContextMenuSection: true,
+  ContextualHelp: true,
   CopyButton: true,
   CounterBadge: true,
   FieldDescription: true,
@@ -116,6 +123,7 @@ const propsContextSupportingComponentsMap: Record<
   Radio: true,
   Option: true,
   PasswordCreationField: true,
+  Popover: true,
   RadioButton: true,
   RadioGroup: true,
   Section: true,

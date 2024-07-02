@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Radio, RadioGroup, RadioButton } from "../index";
+import { Radio, RadioButton, RadioGroup } from "../index";
 import React from "react";
 import { Label } from "@/components/Label";
 import { action } from "@storybook/addon-actions";
@@ -123,6 +123,22 @@ export const SegmentedVariant: Story = {
       <Radio value="accountant">Accountant</Radio>
     </RadioGroup>
   ),
+};
+
+export const CustomContainerBreakpoint: Story = {
+  render: (props) => (
+    <RadioGroup
+      {...props}
+      defaultValue="admin"
+      variant="segmented"
+      containerBreakpointSize="xs"
+    >
+      <Label>Role</Label>
+      <Radio value="admin">Admin</Radio>
+      <Radio value="member">Member</Radio>
+    </RadioGroup>
+  ),
+  parameters: { viewport: { defaultViewport: "mobile1" } },
 };
 
 export const SegmentedVariantWithFieldError: Story = {

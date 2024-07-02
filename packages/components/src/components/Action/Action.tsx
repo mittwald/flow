@@ -50,6 +50,10 @@ export const Action: FC<ActionProps> = (props) => {
       onPress: dynamic(() => ActionModel.use().execute),
     },
 
+    MenuItem: {
+      onAction: dynamic(() => ActionModel.use().execute),
+    },
+
     Modal: {
       slot: dynamic((props) => {
         const { slot } = props;
@@ -68,7 +72,7 @@ export const Action: FC<ActionProps> = (props) => {
         const action = ActionModel.use();
         return action.needsConfirmation
           ? action.confirmationModalController
-          : action.getOverlayController();
+          : action.getOverlayController("Modal");
       }),
       ActionGroup: {
         Button: actionButtonContext,
