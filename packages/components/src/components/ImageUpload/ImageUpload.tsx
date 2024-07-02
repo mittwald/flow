@@ -60,7 +60,12 @@ export const ImageUpload: FC<ImageUploadProps> = (props) => {
 
   return (
     <div className={rootClassName}>
-      {!file && <FileDropZone controller={fileController} />}
+      {!file && (
+        <FileDropZone
+          className={styles.fileDropZone}
+          controller={fileController}
+        />
+      )}
 
       {file && (
         <ImageCropper

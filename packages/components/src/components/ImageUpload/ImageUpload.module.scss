@@ -1,3 +1,13 @@
-.canvas {
-  display: none;
+.imageUpload {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .fileDropZone {
+    flex-grow: 1;
+  }
+
+  .canvas {
+    display: none;
+  }
 }
