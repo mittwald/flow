@@ -99,11 +99,7 @@ export const WithContextMenuSection: Story = {
   render: (props) => (
     <ContextMenuTrigger>
       <Button>Trigger</Button>
-      <ContextMenu
-        defaultSelectedKeys={["https://www.mittwald.de"]}
-        selectionMode="navigation"
-        {...props}
-      >
+      <ContextMenu selectionMode="navigation" {...props}>
         <Section>
           <Heading>Websites</Heading>
           <MenuItem href="https://www.mittwald.de" id="https://www.mittwald.de">
