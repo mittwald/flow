@@ -90,7 +90,7 @@ const MainNavigation: FC<Props> = (props) => {
 
   return (
     <Section>
-      <Heading id={headingId}>
+      <Heading id={headingId} levelVisual={2}>
         <GroupText>{mainPathSegment}</GroupText>
       </Heading>
 

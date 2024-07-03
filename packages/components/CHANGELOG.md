@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.164](https://github.com/mittwald/flow/compare/0.1.0-alpha.163...0.1.0-alpha.164) (2024-07-03)
+
+### Bug Fixes
+
+- **NumberField:** do not delay onChange
+  ([af5653c](https://github.com/mittwald/flow/commit/af5653cc01775edbf4763a185f3ee31abf5e0ae7)),
+  closes [#492](https://github.com/mittwald/flow/issues/492)
+
+### Features
+
+- **List:** add container breakpoint size
+  ([2ef6922](https://github.com/mittwald/flow/commit/2ef69220966a76e6e9551b64a07dd7e81d5ad896))
+
+### Performance Improvements
+
+- **Form:** reduce re-renders
+  ([6a39e7e](https://github.com/mittwald/flow/commit/6a39e7e5995243029334b87b2adfda28b4d00210))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.163](https://github.com/mittwald/flow/compare/0.1.0-alpha.162...0.1.0-alpha.163) (2024-06-27)
 
 ### Bug Fixes

@@ -45,25 +45,25 @@ export const customComponents: MDXComponents = {
 
   li: ({ children }) => <li className={styles.li}>{children}</li>,
 
-  h2: ({ children }) => (
+  h1: ({ children }) => (
     <Heading level={2} className={styles.heading2}>
       {children}
     </Heading>
   ),
 
-  h3: ({ children }) => (
+  h2: ({ children }) => (
     <Heading level={3} className={styles.heading}>
       {children}
     </Heading>
   ),
 
-  h4: ({ children }) => (
+  h3: ({ children }) => (
     <Heading level={4} className={styles.heading}>
       {children}
     </Heading>
   ),
 
-  h5: ({ children }) => (
+  h4: ({ children }) => (
     <Heading level={5} className={styles.heading}>
       {children}
     </Heading>

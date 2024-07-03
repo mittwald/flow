@@ -23,10 +23,17 @@
       &:nth-of-type(odd) {
         background-color: var(--table--background-color-accent);
       }
+
       td {
         border-block-start-width: var(--table--border-width);
         border-block-start-style: var(--table--border-style);
         border-block-start-color: var(--table--border-color);
+      }
+
+      &:first-of-type {
+        td {
+          border-block-start-width: var(--table--header-border-width);
+        }
       }
     }
   }
