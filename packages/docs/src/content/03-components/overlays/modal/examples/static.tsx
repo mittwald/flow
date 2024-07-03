@@ -20,7 +20,7 @@ import Action from "@mittwald/flow-react-components/Action";
     </TextField>
   </div>
   <ActionGroup className="flow--modal--action-group">
-    <Action closeOverlay>
+    <Action closeOverlay="Modal">
       <Button color="accent">Organisation anlegen</Button>
       <Button variant="soft" color="secondary">
         Abbrechen
