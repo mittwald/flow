@@ -163,3 +163,26 @@ export const SmallSpace: Story = {
   ),
   parameters: { viewport: { defaultViewport: "mobile1" } },
 };
+
+export const CustomContainerBreakpoint: Story = {
+  render: () => (
+    <div style={{ containerType: "inline-size" }}>
+      <ListItem containerBreakpointSize="s">
+        <Avatar>
+          <Image alt="John Doe" src={dummyText.imageSrc} />
+        </Avatar>
+        <Heading>John Doe</Heading>
+        <Text>Mittwald</Text>
+        <Content slot="top">
+          <ContentPlaceholder>Top content</ContentPlaceholder>
+        </Content>
+        <Content slot="bottom">
+          <ContentPlaceholder>Bottom content</ContentPlaceholder>
+        </Content>
+        <ContextMenu>
+          <MenuItem>Show details</MenuItem>
+        </ContextMenu>
+      </ListItem>
+    </div>
+  ),
+};

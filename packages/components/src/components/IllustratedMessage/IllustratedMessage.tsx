@@ -7,34 +7,40 @@ import { PropsContextProvider } from "@/lib/propsContext";
 
 export interface IllustratedMessageProps
   extends PropsWithChildren<ComponentProps<"div">> {
-  variant?: "info" | "negative";
+  /** @default "info" */
+  color?: "info" | "negative" | "light" | "dark";
 }
 
 export const IllustratedMessage: FC<IllustratedMessageProps> = (props) => {
-  const { className, children, variant = "info", ...rest } = props;
+  const { className, children, color = "info", ...rest } = props;
 
   const rootClassName = clsx(styles.illustratedMessageContainer, className);
+
+  const lightOrDarkColor =
+    color === "dark" || color === "light" ? color : undefined;
 
   const propsContext: PropsContext = {
     Icon: {
       className: styles.icon,
       size: "l",
+      color: lightOrDarkColor,
     },
     Heading: {
       className: styles.heading,
+      color: lightOrDarkColor,
     },
     Text: {
       className: styles.text,
+      color: lightOrDarkColor,
     },
     Button: {
-      className: styles.button,
-      color: "accent",
+      color: lightOrDarkColor ?? "accent",
     },
   };
 
   return (
     <div {...rest} className={rootClassName}>
-      <div className={clsx(styles.illustratedMessage, styles[variant])}>
+      <div className={clsx(styles.illustratedMessage, styles[color])}>
         <PropsContextProvider props={propsContext}>
           {children}
         </PropsContextProvider>
