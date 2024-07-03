@@ -14,6 +14,7 @@ import * as EditorComponents from "./components";
 import clsx from "clsx";
 import { Button } from "@mittwald/flow-react-components/Button";
 import { themes } from "prism-react-renderer";
+import { PropsContextProvider } from "@mittwald/flow-react-components/PropsContextProvider";
 
 // Waiting for https://github.com/FormidableLabs/react-live/issues/339
 const error = console.error;
@@ -63,14 +64,24 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
       transformCode={transformCode}
     >
       <div className={clsx(styles.liveCodeEditor, className)}>
-        <LivePreview
-          className={clsx(
-            styles.preview,
-            darkBackground && styles.darkBackground,
-            lightBackground && styles.lightBackground,
-          )}
-          style={{ zoom }}
-        />
+        <PropsContextProvider
+          props={{
+            Section: {
+              Heading: {
+                levelVisual: 4,
+              },
+            },
+          }}
+        >
+          <LivePreview
+            className={clsx(
+              styles.preview,
+              darkBackground && styles.darkBackground,
+              lightBackground && styles.lightBackground,
+            )}
+            style={{ zoom }}
+          />
+        </PropsContextProvider>
 
         {!editorDisabled && (
           <div className={styles.editorContainer}>

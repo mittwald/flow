@@ -3,13 +3,11 @@ import type {
   FormEventHandler,
   PropsWithChildren,
 } from "react";
-import { useRef } from "react";
-import { useEffect } from "react";
-import React from "react";
+import React, { useRef } from "react";
 import type { FieldValues, UseFormReturn } from "react-hook-form";
-import { useFormState } from "react-hook-form";
 import { FormContextProvider } from "@/integrations/react-hook-form/components/context/formContext";
-import { ActionStateContext } from "@/components/Action/ActionStateContext";
+import { SubmitButtonStateProvider } from "@/integrations/react-hook-form/components/ActionGroupWrapper/SubmitButtonStateProvider";
+import { AutoFormResetEffect } from "../AutoFormResetEffect/AutoFormResetEffect";
 
 export type FormOnSubmitHandler<F extends FieldValues> = Parameters<
   UseFormReturn<F>["handleSubmit"]
@@ -25,57 +23,31 @@ interface Props<F extends FieldValues>
 export function Form<F extends FieldValues>(props: Props<F>) {
   const { form, children, onSubmit, ...formProps } = props;
 
-  const { isValid, isSubmitted, isSubmitting, isSubmitSuccessful, errors } =
-    useFormState(form);
-
-  const unwatchedFormState = form.control._formState;
-
   const isAsyncSubmit = useRef(false);
 
-  useEffect(() => {
-    if (isSubmitted && isValid) {
-      form.reset(undefined, {
-        keepIsSubmitted: false,
-        keepIsSubmitSuccessful: false,
-        keepDefaultValues: true,
-        keepValues: true,
-        keepDirtyValues: true,
-        keepIsValid: true,
-        keepDirty: true,
-        keepErrors: true,
-        keepTouched: true,
-        keepIsValidating: true,
-        keepSubmitCount: true,
-      });
-    }
-  }, [isSubmitted, isValid]);
-
   const handleOnSubmit: FormEventHandler = (e) => {
-    if (unwatchedFormState.isSubmitting || unwatchedFormState.isValidating) {
-      e.preventDefault();
-    } else {
-      form.handleSubmit((values) => {
-        const result = onSubmit(values);
-        isAsyncSubmit.current = result instanceof Promise;
-        return result;
-      })(e);
-    }
-  };
+    const { isSubmitting, isValidating } = form.control._formState;
 
-  const submitError = isSubmitted ? errors : undefined;
-  const submitSucceeded = isSubmitted && isSubmitSuccessful;
+    if (isSubmitting || isValidating) {
+      e.preventDefault();
+      return;
+    }
+
+    form.handleSubmit((values) => {
+      const result = onSubmit(values);
+      isAsyncSubmit.current = result instanceof Promise;
+      return result;
+    })(e);
+  };
 
   return (
     <FormContextProvider value={{ form }}>
-      <form {...formProps} onSubmit={handleOnSubmit}>
-        <ActionStateContext
-          isStarted={isSubmitting && isAsyncSubmit.current}
-          hasFailedWithError={submitError}
-          hasSucceeded={submitSucceeded}
-        >
+      <SubmitButtonStateProvider isAsyncSubmit={isAsyncSubmit}>
+        <form {...formProps} onSubmit={handleOnSubmit}>
           {children}
-        </ActionStateContext>
-      </form>
+        </form>
+        <AutoFormResetEffect />
+      </SubmitButtonStateProvider>
     </FormContextProvider>
   );
 }
