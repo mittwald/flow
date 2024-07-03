@@ -1,6 +1,7 @@
 node_modules
 dist
 .nx/cache
+.nx/workspace-data
 .yarn/*
 !.yarn/patches
 !.yarn/plugins

@@ -41,7 +41,6 @@ export const Section = flowComponent("Section", (props) => {
   const propsContext: PropsContext = {
     Heading: {
       level: 2,
-      levelVisual: 4,
     },
     Header: {
       className: styles.header,

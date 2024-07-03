@@ -5,6 +5,7 @@ import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import styles from "../../ContextMenu.module.scss";
 
 export type ContextMenuSectionProps = PropsWithChildren & FlowComponentProps;
 export const ContextMenuSection = flowComponent(
@@ -20,7 +21,7 @@ export const ContextMenuSection = flowComponent(
     };
 
     return (
-      <Aria.Section>
+      <Aria.Section className={styles.section}>
         <PropsContextProvider props={propsContext}>
           {children}
         </PropsContextProvider>
