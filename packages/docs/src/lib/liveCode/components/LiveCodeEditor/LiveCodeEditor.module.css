@@ -31,6 +31,7 @@
         padding: 0;
       }
     }
+
     &.darkBackground {
       .preview {
         background-color: var(--primary--color--1000);
@@ -43,6 +44,12 @@
     overflow: hidden;
     padding: 0 !important;
     background-color: var(--neutral--color--300) !important;
+  }
+
+  .staticModal {
+    --modal--size--s: auto;
+    --modal--size--m: auto;
+    --modal--size--l: auto;
   }
 }
 
@@ -57,6 +64,7 @@
 .darkBackground {
   .mobile {
     height: 100%;
+
     .preview {
       border-inline: 4px solid var(--neutral--color--500);
       margin: 0 auto;

@@ -29,6 +29,17 @@ export const DoAndDontTile: FC<Props> = (props) => {
     mobile,
   } = props;
 
+  const headingIcon =
+    type === "do" ? <IconCheck /> : type === "dont" ? <IconClose /> : undefined;
+
+  const headingText = heading
+    ? heading
+    : type === "do"
+      ? "Do"
+      : type === "dont"
+        ? "Don't"
+        : undefined;
+
   return (
     <>
       {code && (
@@ -57,18 +68,8 @@ export const DoAndDontTile: FC<Props> = (props) => {
       >
         {(type || heading) && (
           <Heading level={4}>
-            {type === "do" ? (
-              <IconCheck />
-            ) : type === "dont" ? (
-              <IconClose />
-            ) : undefined}
-            {heading
-              ? heading
-              : type === "do"
-                ? "Do"
-                : type === "dont"
-                  ? "Don't"
-                  : undefined}
+            {headingIcon}
+            {headingText}
           </Heading>
         )}
 
