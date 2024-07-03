@@ -48,7 +48,7 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
     overlayControllerFromProps ?? overlayControllerFromContext;
 
   const ariaSelectionMode =
-    selectionMode === "navigation" ? "single" : selectionMode;
+    selectionMode === "navigation" ? "none" : selectionMode;
 
   const selectionVariant =
     selectionMode === "navigation" ? "navigation" : "control";
