@@ -6,9 +6,9 @@ import { action } from "@storybook/addon-actions";
 import { IconPlus } from "@/components/Icon/components/icons";
 import Button from "@/components/Button";
 import { Form } from "react-aria-components";
-import type { PolicyDeclaration } from "@mittwald/password-validation/policy";
-import { RuleType, SequenceType } from "@mittwald/password-validation/rules";
-import { Policy } from "@mittwald/password-validation/policy";
+import type { PolicyDeclaration } from "@mittwald/password-tools-js/policy";
+import { RuleType, SequenceType } from "@mittwald/password-tools-js/rules";
+import { Policy } from "@mittwald/password-tools-js/policy";
 import { Action } from "@/components/Action";
 
 const policyDecl: PolicyDeclaration = {
@@ -84,7 +84,7 @@ export const Required: Story = {
 };
 
 export const WithForm: Story = {
-  render: (props) => {
+  render: () => {
     const policy = Policy.fromDeclaration(policyDecl);
 
     return (

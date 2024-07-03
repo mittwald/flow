@@ -6,8 +6,8 @@ import PasswordCreationField from "@/components/PasswordCreationField/PasswordCr
 import {
   Policy,
   type PolicyDeclaration,
-} from "@mittwald/password-validation/policy";
-import { RuleType } from "@mittwald/password-validation/rules";
+} from "@mittwald/password-tools-js/policy";
+import { RuleType } from "@mittwald/password-tools-js/rules";
 import { Label } from "@/components/Label";
 import { I18nProvider } from "react-aria";
 import { IconPlus } from "@/components/Icon/components/icons";

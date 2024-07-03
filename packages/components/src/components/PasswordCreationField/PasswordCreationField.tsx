@@ -21,8 +21,8 @@ import * as Aria from "react-aria-components";
 import formFieldStyles from "@/components/FormField/FormField.module.scss";
 import clsx from "clsx";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
-import { Policy } from "@mittwald/password-validation/policy";
-import { Generator } from "@mittwald/password-validation/generator";
+import { Policy } from "@mittwald/password-tools-js/policy";
+import { Generator } from "@mittwald/password-tools-js/generator";
 import Button from "@/components/Button";
 import { Action, type ActionFn } from "@/components/Action";
 import FieldLabel from "@/components/PasswordCreationField/components/FieldLabel/FieldLabel";
@@ -36,7 +36,7 @@ import locales from "./locales/*.locale.json";
 import type { LocalizedStrings } from "react-aria";
 import { useLocalizedStringFormatter } from "react-aria";
 import generateValidationTranslation from "@/components/PasswordCreationField/lib/generateValidationTranslation";
-import { RuleType } from "@mittwald/password-validation/rules";
+import { RuleType } from "@mittwald/password-tools-js/rules";
 import { FieldError } from "@/components/FieldError";
 
 export const defaultPasswordCreationPolicy = Policy.fromDeclaration({

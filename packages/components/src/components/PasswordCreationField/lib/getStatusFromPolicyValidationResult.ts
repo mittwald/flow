@@ -1,6 +1,6 @@
 import type { Status } from "@/lib/types/props";
-import { type PolicyValidationResult } from "@mittwald/password-validation/policy";
-import { type RuleValidationResult } from "@mittwald/password-validation/rules";
+import { type PolicyValidationResult } from "@mittwald/password-tools-js/policy";
+import { type RuleValidationResult } from "@mittwald/password-tools-js/rules";
 
 export interface ResolvedPolicyValidationResult extends PolicyValidationResult {
   ruleResults: RuleValidationResult[];
