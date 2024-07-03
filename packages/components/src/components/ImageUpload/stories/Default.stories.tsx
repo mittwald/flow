@@ -4,8 +4,10 @@ import {
   ImageUpload,
   useImageUploadController,
 } from "@/components/ImageUpload";
-import { Link } from "@/components/Link";
 import { Section } from "@/components/Section";
+import { LabeledValue } from "@/components/LabeledValue";
+import { Label } from "@/components/Label";
+import { Image } from "@/components/Image";
 
 const meta: Meta<typeof ImageUpload> = {
   title: "Upload/image-upload",
@@ -32,9 +34,12 @@ const meta: Meta<typeof ImageUpload> = {
     return (
       <Section>
         <ImageUpload {...props} controller={controller} />
-        <Link href={url} isDisabled={!url} download>
-          Download cropped image
-        </Link>
+        {url && (
+          <LabeledValue>
+            <Label>Ergebnis</Label>
+            <Image src={url} style={{ width: "contentWidth" }} />
+          </LabeledValue>
+        )}
       </Section>
     );
   },
