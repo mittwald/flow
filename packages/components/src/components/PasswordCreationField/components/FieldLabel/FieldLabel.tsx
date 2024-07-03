@@ -13,7 +13,7 @@ import { Action } from "@/components/Action";
 import { IconCircleCheck, IconCircleMinus } from "@tabler/icons-react";
 import type { LocalizedStrings } from "react-aria";
 import { useLocalizedStringFormatter } from "react-aria";
-import { type RuleValidationResult } from "@mittwald/password-validation/rules";
+import { type RuleValidationResult } from "@mittwald/password-tools-js/rules";
 import generateValidationTranslation from "@/components/PasswordCreationField/lib/generateValidationTranslation";
 import type * as Aria from "react-aria-components";
 
