@@ -21,7 +21,7 @@ export const MainContent: FC<Props> = (props) => {
   return (
     <>
       <LayoutCard>
-        <ColumnLayout m={component ? [1, 1] : [1]}>
+        <ColumnLayout l={component ? [1, 1] : [1]} m={[1]}>
           <Section>
             <Heading level={1} levelVisual={1}>
               {mdxFile.getTitle()}

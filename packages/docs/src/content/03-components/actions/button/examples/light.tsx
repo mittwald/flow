@@ -1,12 +1,11 @@
 import Button from "@mittwald/flow-react-components/Button";
 
 <Row>
-  <Button color="light">Fortfahren/Aktion</Button>
+  <Button color="light">Light</Button>
   <Button variant="soft" color="light">
-    Fortfahren/Aktion
+    Light
   </Button>
   <Button variant="plain" color="light">
-    Fortfahren/Aktion
+    Light
   </Button>
-  ;
 </Row>;
