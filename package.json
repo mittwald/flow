@@ -2,7 +2,7 @@
   "name": "@mittwald/flow-project",
   "private": true,
   "version": "0.0.0",
-  "packageManager": "yarn@4.2.2",
+  "packageManager": "yarn@4.3.1",
   "type": "module",
   "license": "MIT",
   "engines": {
@@ -40,8 +40,8 @@
     "prettier-plugin-sort-json": "^4.0.0",
     "simple-git-hooks": "^2.11.1",
     "tsx": "^4.16.2",
-    "typescript": "^5.4.5",
-    "typescript-eslint": "^8.0.0-alpha.30"
+    "typescript": "^5.5.3",
+    "typescript-eslint": "^8.0.0-alpha.39"
   },
   "dependenciesMeta": {
     "@fortawesome/fontawesome-common-types": {
