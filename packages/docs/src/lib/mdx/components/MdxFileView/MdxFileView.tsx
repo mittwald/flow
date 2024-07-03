@@ -1,5 +1,5 @@
 "use client";
-import type { FC, ReactNode } from "react";
+import type { FC } from "react";
 import { MDXRemote as NextMDXRemote } from "next-mdx-remote";
 import type { LiveCodeEditorProps } from "@/lib/liveCode/components/LiveCodeEditor/LiveCodeEditor";
 import LiveCodeEditor from "@/lib/liveCode/components/LiveCodeEditor/LiveCodeEditor";
@@ -7,11 +7,17 @@ import type { SerializedMdxFile } from "@/lib/mdx/MdxFile";
 import { MdxFile } from "@/lib/mdx/MdxFile";
 import { customComponents } from "@/lib/mdx/components/MdxFileView/customComponents";
 import styles from "./customComponents.module.css";
+import type { DoAndDontTileProps } from "@/lib/mdx/components/DoAndDont/DoAndDontTile";
 import DoAndDontTile from "@/lib/mdx/components/DoAndDont/DoAndDontTile";
 import { Content } from "@mittwald/flow-react-components/Content";
 
 interface Props {
   mdxFile: SerializedMdxFile;
+}
+
+interface ExampleProps extends DoAndDontTileProps {
+  example?: string;
+  exampleText?: string;
 }
 
 export const MdxFileView: FC<Props> = (props) => {
@@ -31,21 +37,11 @@ export const MdxFileView: FC<Props> = (props) => {
     </Content>
   );
 
-  const ExampleDo: FC<{
-    example?: string;
-    exampleText?: string;
-    zoom?: number;
-    lightBackground?: boolean;
-    darkBackground?: boolean;
-    mobile?: boolean;
-    children: ReactNode;
-    heading?: string;
-  }> = ({
+  const ExampleDo: FC<ExampleProps> = ({
     example,
     exampleText,
     zoom,
-    lightBackground,
-    darkBackground,
+    bgColor,
     mobile,
     children,
     heading,
@@ -55,8 +51,7 @@ export const MdxFileView: FC<Props> = (props) => {
       text={exampleText}
       code={example ? mdxFile.getExample(example) : undefined}
       zoom={zoom}
-      lightBackground={lightBackground}
-      darkBackground={darkBackground}
+      bgColor={bgColor}
       mobile={mobile}
       heading={heading}
     >
@@ -64,21 +59,11 @@ export const MdxFileView: FC<Props> = (props) => {
     </DoAndDontTile>
   );
 
-  const ExampleDont: FC<{
-    example?: string;
-    exampleText?: string;
-    zoom?: number;
-    lightBackground?: boolean;
-    darkBackground?: boolean;
-    mobile?: boolean;
-    children: ReactNode;
-    heading?: string;
-  }> = ({
+  const ExampleDont: FC<ExampleProps> = ({
     example,
     exampleText,
     zoom,
-    lightBackground,
-    darkBackground,
+    bgColor,
     mobile,
     children,
     heading,
@@ -88,8 +73,7 @@ export const MdxFileView: FC<Props> = (props) => {
       text={exampleText}
       code={example ? mdxFile.getExample(example) : undefined}
       zoom={zoom}
-      lightBackground={lightBackground}
-      darkBackground={darkBackground}
+      bgColor={bgColor}
       mobile={mobile}
       heading={heading}
     >
@@ -97,21 +81,11 @@ export const MdxFileView: FC<Props> = (props) => {
     </DoAndDontTile>
   );
 
-  const ExampleInfo: FC<{
-    example?: string;
-    exampleText?: string;
-    zoom?: number;
-    lightBackground?: boolean;
-    darkBackground?: boolean;
-    mobile?: boolean;
-    children: ReactNode;
-    heading?: string;
-  }> = ({
+  const ExampleInfo: FC<ExampleProps> = ({
     example,
     exampleText,
     zoom,
-    lightBackground,
-    darkBackground,
+    bgColor,
     mobile,
     children,
     heading,
@@ -120,8 +94,7 @@ export const MdxFileView: FC<Props> = (props) => {
       text={exampleText}
       code={example ? mdxFile.getExample(example) : undefined}
       zoom={zoom}
-      lightBackground={lightBackground}
-      darkBackground={darkBackground}
+      bgColor={bgColor}
       mobile={mobile}
       heading={heading}
     >

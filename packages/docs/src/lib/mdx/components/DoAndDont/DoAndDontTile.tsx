@@ -6,28 +6,18 @@ import clsx from "clsx";
 import { Heading } from "@mittwald/flow-react-components/Heading";
 import { IconCheck, IconClose } from "@mittwald/flow-react-components/Icons";
 
-interface Props extends PropsWithChildren {
+export interface DoAndDontTileProps extends PropsWithChildren {
   code?: string;
   text?: string;
   type?: "do" | "dont";
   zoom?: number;
-  lightBackground?: boolean;
-  darkBackground?: boolean;
+  bgColor?: "default" | "dark" | "light";
   heading?: string;
   mobile?: boolean;
 }
 
-export const DoAndDontTile: FC<Props> = (props) => {
-  const {
-    code,
-    text,
-    type,
-    zoom,
-    lightBackground,
-    darkBackground,
-    heading,
-    mobile,
-  } = props;
+export const DoAndDontTile: FC<DoAndDontTileProps> = (props) => {
+  const { code, text, type, zoom, bgColor, heading, mobile } = props;
 
   const headingIcon =
     type === "do" ? <IconCheck /> : type === "dont" ? <IconClose /> : undefined;
@@ -48,8 +38,7 @@ export const DoAndDontTile: FC<Props> = (props) => {
           code={code}
           className={styles.doAndDontCode}
           zoom={zoom}
-          lightBackground={lightBackground}
-          darkBackground={darkBackground}
+          bgColor={bgColor}
           mobile={mobile}
         />
       )}

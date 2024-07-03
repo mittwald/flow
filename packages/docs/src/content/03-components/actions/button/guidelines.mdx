@@ -78,7 +78,7 @@ Bei der Positionierung des Buttons sind folgende Punkte zu beachten:
 
 <Info
   example="position-info"
-  darkBackground
+  bgColor="dark"
   heading="Oberhalb des Content-Bereichs"
 >
   Im mStudio werden Anlege-Button häufig rechts über dem Content-Bereich
@@ -175,10 +175,10 @@ Achte beim Verfassen des Textes besonders auf:
 </DoAndDont>
 
 <DoAndDont>
-  <Dont example="text-clarity-dont" zoom={0.7} darkBackground>
+  <Dont example="text-clarity-dont" zoom={0.7} bgColor="dark">
     Verwirre die Nutzer nicht mit mehrdeutigen Begriffen.
   </Dont>
-  <Do example="text-clarity-do" zoom={0.7} darkBackground>
+  <Do example="text-clarity-do" zoom={0.7} bgColor="dark">
     Beschreibe exakt und kurz, welche Aktion sich hinter den Buttons verbergen.
   </Do>
 </DoAndDont>
@@ -236,7 +236,7 @@ kleiner als 400 px ist, nehmen diese die volle Breite des Contents an.
   <Do
     example="mobile-width-standard-do"
     mobile
-    darkBackground
+    bgColor="dark"
     heading="Mobile Modal-Buttons"
   >
     Um auch mobil eine schnelle Navigation durch ein Modal zu ermöglichen,
@@ -271,15 +271,13 @@ als 50 haben. Für beide Colors gilt: Je weiter der HSL Lightness-Wert von 50
 entfernt ist, desto besser ist der Kontrast.
 
 <DoAndDont>
+  <Do example="light" bgColor="dark">
+    Die Color Light kommt besonders gut auf sehr dunklen Hintergründen zur
+    Geltung. Verwende sie auf Hintergründen mit einem HSL Lightness-Wert von
+    weniger als 50.
+  </Do>
 
-{" "}
-<Do example="light" darkBackground>
-  Die Color Light kommt besonders gut auf sehr dunklen Hintergründen zur
-  Geltung. Verwende sie auf Hintergründen mit einem HSL Lightness-Wert von
-  weniger als 50.
-</Do>
-
-  <Do example="dark" lightBackground>
+  <Do example="dark" bgColor="light">
     Color Dark kommt besonders gut auf sehr hellen Hintergründen zur Geltung. Verwende sie auf Hintergründen mit einem
     HSL Lightness-Wert von über 50.
   </Do>

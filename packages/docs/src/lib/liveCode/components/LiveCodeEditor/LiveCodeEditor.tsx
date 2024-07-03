@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import type { FC, JSX } from "react";
 import React, { useState } from "react";
 import {
   LiveEditor,
@@ -13,7 +13,6 @@ import * as EditorComponents from "./components";
 import clsx from "clsx";
 import { Button } from "@mittwald/flow-react-components/Button";
 import { themes } from "prism-react-renderer";
-import type { JSX } from "react";
 
 export interface LiveCodeEditorProps {
   code: string | JSX.Element;
@@ -21,8 +20,7 @@ export interface LiveCodeEditorProps {
   editorCollapsed?: boolean;
   editorDisabled?: boolean;
   zoom?: number;
-  darkBackground?: boolean;
-  lightBackground?: boolean;
+  bgColor?: "default" | "dark" | "light";
   mobile?: boolean;
 }
 
@@ -40,8 +38,7 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
     editorCollapsed: editorInitiallyCollapsed,
     editorDisabled,
     zoom = 1,
-    lightBackground,
-    darkBackground,
+    bgColor,
     mobile,
   } = props;
 
@@ -77,8 +74,8 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
       <div
         className={clsx(
           styles.liveCodeEditor,
-          darkBackground && styles.darkBackground,
-          lightBackground && styles.lightBackground,
+          bgColor === "dark" && styles.darkBackground,
+          bgColor === "light" && styles.lightBackground,
           mobile && styles.mobile,
           className,
         )}
