@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import type { FC, JSX } from "react";
 import React, { useState } from "react";
 import {
   LiveEditor,
@@ -7,7 +7,6 @@ import {
   LiveProvider,
 } from "@mfalkenberg/react-live-ssr";
 import { extractEditorScope } from "@/lib/liveCode/components/LiveCodeEditor/lib/extractEditorScope";
-import type { LiveCodeEditorProps } from "@/lib/liveCode/components/LiveCodeEditor/types";
 import extractDefaultExport from "@/lib/liveCode/components/LiveCodeEditor/lib/extractDefaultExport";
 import styles from "./LiveCodeEditor.module.css";
 import * as EditorComponents from "./components";
@@ -15,6 +14,16 @@ import clsx from "clsx";
 import { Button } from "@mittwald/flow-react-components/Button";
 import { themes } from "prism-react-renderer";
 import { PropsContextProvider } from "@mittwald/flow-react-components/PropsContextProvider";
+
+export interface LiveCodeEditorProps {
+  code: string | JSX.Element;
+  className?: string;
+  editorCollapsed?: boolean;
+  editorDisabled?: boolean;
+  zoom?: number;
+  bgColor?: "default" | "dark" | "light";
+  mobile?: boolean;
+}
 
 // Waiting for https://github.com/FormidableLabs/react-live/issues/339
 const error = console.error;
@@ -30,8 +39,8 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
     editorCollapsed: editorInitiallyCollapsed,
     editorDisabled,
     zoom = 1,
-    lightBackground,
-    darkBackground,
+    bgColor,
+    mobile,
   } = props;
 
   const [editorCollapsed, setEditorCollapsed] = useState(
@@ -63,7 +72,15 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
       }}
       transformCode={transformCode}
     >
-      <div className={clsx(styles.liveCodeEditor, className)}>
+      <div
+        className={clsx(
+          styles.liveCodeEditor,
+          bgColor === "dark" && styles.darkBackground,
+          bgColor === "light" && styles.lightBackground,
+          mobile && styles.mobile,
+          className,
+        )}
+      >
         <PropsContextProvider
           props={{
             Section: {
@@ -73,16 +90,8 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
             },
           }}
         >
-          <LivePreview
-            className={clsx(
-              styles.preview,
-              darkBackground && styles.darkBackground,
-              lightBackground && styles.lightBackground,
-            )}
-            style={{ zoom }}
-          />
+          <LivePreview className={clsx(styles.preview)} style={{ zoom }} />
         </PropsContextProvider>
-
         {!editorDisabled && (
           <div className={styles.editorContainer}>
             <LiveEditor
