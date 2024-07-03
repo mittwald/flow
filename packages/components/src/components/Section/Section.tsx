@@ -7,19 +7,33 @@ import { PropsContextProvider } from "@/lib/propsContext";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { Activity } from "@/components/Activity";
+import { ContextMenuSection } from "@/components/ContextMenu/components/ContextMenuSection";
 
 export interface SectionProps
   extends PropsWithChildren<ComponentProps<"section">>,
     FlowComponentProps {
   /** @internal */
   isActive?: boolean;
+  /** @internal */
+  renderContextMenuSection?: boolean;
 }
 
 export const Section = flowComponent("Section", (props) => {
-  const { children, className, isActive = true, refProp: ref, ...rest } = props;
+  const {
+    children,
+    className,
+    isActive = true,
+    refProp: ref,
+    renderContextMenuSection,
+    ...rest
+  } = props;
 
   if (!children) {
     return null;
+  }
+
+  if (renderContextMenuSection) {
+    return <ContextMenuSection>{children}</ContextMenuSection>;
   }
 
   const rootClassName = clsx(styles.section, className);
@@ -27,6 +41,7 @@ export const Section = flowComponent("Section", (props) => {
   const propsContext: PropsContext = {
     Heading: {
       level: 2,
+      levelVisual: 4,
     },
     Header: {
       className: styles.header,

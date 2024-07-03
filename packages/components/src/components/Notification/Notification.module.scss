@@ -4,7 +4,6 @@
   border-radius: var(--notification--corner-radius);
   width: var(--notification--width);
   box-shadow: var(--notification--box-shadow);
-  display: block;
   position: relative;
 
   @extend .info;

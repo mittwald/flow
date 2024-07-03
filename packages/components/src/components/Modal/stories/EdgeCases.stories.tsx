@@ -56,3 +56,40 @@ export const LongContent: Story = {
     </Modal>
   ),
 };
+
+export const LongContentOffCanvas: Story = {
+  render: (props) => (
+    <Modal
+      offCanvas
+      {...props}
+      controller={useOverlayController("Modal", { defaultOpen: true })}
+    >
+      <Heading>{dummyText.short}</Heading>
+      <Content>
+        <Section>
+          <Text>{dummyText.long}</Text>
+        </Section>
+        <Section>
+          <Text>{dummyText.long}</Text>
+        </Section>
+        <Section>
+          <Text>{dummyText.long}</Text>
+        </Section>
+        <Section>
+          <Text>{dummyText.long}</Text>
+        </Section>
+        <Section>
+          <Text>{dummyText.long}</Text>
+        </Section>
+      </Content>
+      <ActionGroup>
+        <Action closeOverlay="Modal">
+          <Button color="accent">Create customer</Button>
+          <Button variant="soft" color="secondary">
+            Abort
+          </Button>
+        </Action>
+      </ActionGroup>
+    </Modal>
+  ),
+};

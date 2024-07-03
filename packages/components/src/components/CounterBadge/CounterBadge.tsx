@@ -15,12 +15,12 @@ export interface CounterBadgeProps
 export const CounterBadge: FC<CounterBadgeProps> = flowComponent(
   "CounterBadge",
   (props) => {
-    const { className, count, ...rest } = props;
+    const { className, count, refProp: ref, ...rest } = props;
 
     const rootClassName = clsx(styles.counterBadge, className);
 
     return (
-      <span className={rootClassName} {...rest} aria-hidden>
+      <span className={rootClassName} {...rest} aria-hidden ref={ref}>
         {count && count > 99 ? "99+" : count}
       </span>
     );

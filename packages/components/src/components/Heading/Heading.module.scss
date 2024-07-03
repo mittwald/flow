@@ -1,9 +1,9 @@
 .heading {
-  font-family: "ProximaNova", sans-serif;
   color: var(--heading--color);
   display: flex;
   column-gap: var(--heading--icon-to-text-spacing);
   font-size: var(--font-size);
+  font-weight: var(--heading--font-weight);
 
   &.dark {
     color: var(--heading--color-dark);
