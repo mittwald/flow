@@ -2,7 +2,6 @@
   background-color: var(--popover--background-color);
   box-shadow: var(--popover--box-shadow);
   border-radius: var(--popover--corner-radius);
-  padding: var(--popover--padding);
   display: flex;
   flex-direction: column;
   --size-px--s--negative: calc(var(--size-px--s) * -1);
@@ -14,6 +13,11 @@
 
   .content {
     overflow-y: auto;
+    padding: var(--popover--padding);
+
+    &:focus-visible {
+      outline: none;
+    }
   }
 
   .tip svg {

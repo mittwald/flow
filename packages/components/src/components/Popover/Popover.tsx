@@ -1,10 +1,11 @@
 import type { PropsWithChildren } from "react";
-import React, { forwardRef } from "react";
+import React from "react";
 import styles from "./Popover.module.scss";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import { type OverlayController, useOverlayController } from "@/lib/controller";
-import { OverlayContextProvider } from "@/lib/controller/overlay/context";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import OverlayContextProvider from "@/lib/controller/overlay/OverlayContextProvider";
 
 export interface PopoverProps
   extends PropsWithChildren<Omit<Aria.PopoverProps, "children">> {
@@ -12,17 +13,18 @@ export interface PopoverProps
   controller?: OverlayController;
 }
 
-export const Popover = forwardRef<HTMLElement, PopoverProps>((props, ref) => {
+export const Popover = flowComponent("Popover", (props) => {
   const {
     children,
     className,
     controller: controllerFromProps,
     withTip,
+    refProp: ref,
     defaultOpen = false,
     ...rest
   } = props;
 
-  const controllerFromContext = useOverlayController({
+  const controllerFromContext = useOverlayController("Popover", {
     reuseControllerFromContext: true,
     defaultOpen,
   });
@@ -49,7 +51,7 @@ export const Popover = forwardRef<HTMLElement, PopoverProps>((props, ref) => {
         </Aria.OverlayArrow>
       )}
       <Aria.Dialog className={styles.content}>
-        <OverlayContextProvider value={controller}>
+        <OverlayContextProvider type="Popover" controller={controller}>
           {children}
         </OverlayContextProvider>
       </Aria.Dialog>

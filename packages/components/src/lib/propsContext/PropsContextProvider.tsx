@@ -3,7 +3,6 @@ import React, { cloneElement, isValidElement, useMemo } from "react";
 import type { PropsContext as PropsContextShape } from "@/lib/propsContext/types";
 import { propsContext, useContextProps } from "@/lib/propsContext/propsContext";
 import mergePropsContext from "@/lib/propsContext/mergePropsContext";
-import { PropsContextRenderProvider } from "@/lib/propsContext/render/ComponentRenderContextProvider";
 
 interface Props extends PropsWithChildren {
   props: PropsContextShape;
@@ -21,6 +20,7 @@ export const PropsContextProvider: FC<Props> = (props) => {
   } = props;
 
   const parentPropsContext = useContextProps();
+
   const memoizedProps = useMemo(() => providedProps, dependencies);
 
   const propsWithParentPropsContext = useMemo(
@@ -52,11 +52,9 @@ export const PropsContextProvider: FC<Props> = (props) => {
   );
 
   return (
-    <PropsContextRenderProvider propsContext={providedProps}>
-      <propsContext.Provider value={propsWithParentPropsContext}>
-        {childrenWithForwardedProps}
-      </propsContext.Provider>
-    </PropsContextRenderProvider>
+    <propsContext.Provider value={propsWithParentPropsContext}>
+      {childrenWithForwardedProps}
+    </propsContext.Provider>
   );
 };
 

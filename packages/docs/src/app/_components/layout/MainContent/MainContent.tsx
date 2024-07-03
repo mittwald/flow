@@ -28,9 +28,7 @@ export const MainContent: FC<Props> = (props) => {
             {mdxFile.mdxSource.frontmatter.description}
 
             {component && (
-              <Link
-                href={`https://github.com/mittwald/flow/tree/main/packages/components/src/components/${component}`}
-              >
+              <Link href={mdxFile.getGitHubUrl()}>
                 GitHub
                 <IconExternalLink />
               </Link>

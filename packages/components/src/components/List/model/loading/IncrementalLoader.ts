@@ -171,13 +171,12 @@ export class IncrementalLoader<T> {
     const loaderOptions = this.getDataLoaderOptions(batchIndex);
 
     if ("staticData" in dataSource) {
-      const staticData = dataSource.staticData;
       return getAsyncResource(
-        async () => ({
+        async (staticData) => ({
           data: staticData,
           itemTotalCount: staticData.length,
         }),
-        [],
+        [dataSource.staticData],
       );
     }
 

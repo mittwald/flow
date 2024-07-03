@@ -14,7 +14,7 @@ export interface LinkProps
   extends PropsWithChildren<
       Omit<Aria.LinkProps, "children" | "slot" | "className">
     >,
-    FlowComponentProps<"Link">,
+    FlowComponentProps,
     PropsWithClassName {
   inline?: boolean;
   linkComponent?: ComponentType<Omit<ComponentProps<"a">, "ref">>;
@@ -40,7 +40,11 @@ export const Link = flowComponent("Link", (props) => {
   } = props;
 
   const { linkComponent: linkComponentFromContext } = useContext(linkContext);
-  const Link = linkComponentFromProps ?? linkComponentFromContext ?? Aria.Link;
+  const Link = linkComponentFromProps
+    ? linkComponentFromProps
+    : props.href && linkComponentFromContext
+      ? linkComponentFromContext
+      : Aria.Link;
 
   const rootClassName = unstyled
     ? className

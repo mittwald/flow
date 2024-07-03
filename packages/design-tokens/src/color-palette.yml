@@ -143,5 +143,29 @@ color:
     1100:
       value: "#4743A5"
 
+  mittwald-navy:
+    100:
+      value: "#E4E7F6"
+    200:
+      value: "#C8CFEE"
+    300:
+      value: "#A5B0E2"
+    400:
+      value: "#8291D7"
+    500:
+      value: "#5F73CC"
+    600:
+      value: "#3D55C1"
+    700:
+      value: "#32459E"
+    800:
+      value: "#27367B"
+    900:
+      value: "#1D285C"
+    1000:
+      value: "#131B3D"
+    1100:
+      value: "#0E142E"
+
   transparent:
     value: transparent

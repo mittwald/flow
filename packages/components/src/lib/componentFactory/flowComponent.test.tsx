@@ -6,7 +6,7 @@ import { render } from "@testing-library/react";
 import { HTMLDivElement } from "happy-dom";
 import type { FlowComponentName } from "@/components/propTypes";
 import { propsContextSupportingComponents } from "@/components/propTypes";
-import type { PropsWithRender, PropsWithTunnel } from "@/lib/types/props";
+import type { PropsWithTunnel } from "@/lib/types/props";
 import { PropsContextProvider } from "@/lib/propsContext";
 
 const getComponentName = (name: string): FlowComponentName => {
@@ -14,8 +14,9 @@ const getComponentName = (name: string): FlowComponentName => {
   return name as FlowComponentName;
 };
 
-type FlowComponentProps<P> = PropsWithTunnel &
-  PropsWithRender<P> & { refProp?: LegacyRef<never> } & P;
+type FlowComponentProps<P> = PropsWithTunnel & {
+  refProp?: LegacyRef<never>;
+} & P;
 
 const testComponent1Name = getComponentName("Test1");
 const testComponent2Name = getComponentName("Test2");
@@ -261,151 +262,6 @@ describe("propsContext", () => {
             <div data-testid="prop">bar</div>
           </div>
         </div>
-      </div>,
-    ).container.innerHTML;
-
-    expect(actual).toBe(expected);
-  });
-});
-
-describe("render()", () => {
-  test("can be used to change output from component", () => {
-    const actual = render(
-      <PropsContextProvider
-        props={{
-          [testComponent1Name]: {
-            render: (Component: TestComponent, props: TestComponentProps) => (
-              <Component {...props} prop={props.prop + "bar"} />
-            ),
-          },
-        }}
-      >
-        <TestComponent1 prop="foo" />
-      </PropsContextProvider>,
-    ).container.innerHTML;
-
-    const expected = render(
-      <div data-testid="test1">
-        <div data-testid="prop">foobar</div>
-      </div>,
-    ).container.innerHTML;
-
-    expect(actual).toBe(expected);
-  });
-
-  test("can be used nested", () => {
-    const actual = render(
-      <PropsContextProvider
-        props={{
-          [testComponent1Name]: {
-            render: (Component: TestComponent, props: TestComponentProps) => (
-              <Component {...props} prop={props.prop + "baz"} />
-            ),
-          },
-        }}
-      >
-        <PropsContextProvider
-          props={{
-            [testComponent1Name]: {
-              render: (Component: TestComponent, props: TestComponentProps) => (
-                <Component {...props} prop={props.prop + "bar"} />
-              ),
-            },
-          }}
-        >
-          <TestComponent1 prop="foo" />
-        </PropsContextProvider>
-      </PropsContextProvider>,
-    ).container.innerHTML;
-
-    const expected = render(
-      <div data-testid="test1">
-        <div data-testid="prop">foobarbaz</div>
-      </div>,
-    ).container.innerHTML;
-
-    expect(actual).toBe(expected);
-  });
-
-  test("can be used nested inside parent render", () => {
-    const actual = render(
-      <PropsContextProvider
-        props={{
-          [testComponent1Name]: {
-            render: (Component: TestComponent, props: TestComponentProps) => (
-              <PropsContextProvider
-                props={{
-                  [testComponent1Name]: {
-                    render: (
-                      Component: TestComponent,
-                      props: TestComponentProps,
-                    ) => <Component {...props} prop={props.prop + "baz"} />,
-                  },
-                }}
-              >
-                <Component {...props} prop={props.prop + "bar"} />
-              </PropsContextProvider>
-            ),
-          },
-        }}
-      >
-        <TestComponent1 prop="foo" />
-      </PropsContextProvider>,
-    ).container.innerHTML;
-
-    const expected = render(
-      <div data-testid="test1">
-        <div data-testid="prop">foobarbaz</div>
-      </div>,
-    ).container.innerHTML;
-
-    expect(actual).toBe(expected);
-  });
-
-  test("uses props from context", () => {
-    const actual = render(
-      <PropsContextProvider
-        props={{
-          [testComponent1Name]: {
-            prop: "foo",
-            render: (Component: TestComponent, props: TestComponentProps) => (
-              <Component {...props} prop={props.prop + "bar"} />
-            ),
-          },
-        }}
-      >
-        <TestComponent1 />
-      </PropsContextProvider>,
-    ).container.innerHTML;
-
-    const expected = render(
-      <div data-testid="test1">
-        <div data-testid="prop">foobar</div>
-      </div>,
-    ).container.innerHTML;
-
-    expect(actual).toBe(expected);
-  });
-
-  test("uses local overridden prop", () => {
-    const actual = render(
-      <PropsContextProvider
-        props={{
-          [testComponent1Name]: {
-            prop: "baz",
-            render: (Component: TestComponent, props: TestComponentProps) => (
-              <Component {...props} prop={props.prop + "bar"} />
-            ),
-          },
-        }}
-      >
-        <TestComponent1 prop="foo" />
-      </PropsContextProvider>,
-    ).container.innerHTML;
-
-    const expected = render(
-      <div data-testid="test1">
-        <div data-testid="prop">foobar</div>
       </div>,
     ).container.innerHTML;
 

@@ -1,19 +1,21 @@
 import { useContext } from "react";
-import type { OverlayController } from "@/lib/controller";
-import { useOverlayController } from "@/lib/controller";
+import { OverlayController } from "@/lib/controller";
 import invariant from "invariant";
 import type { ActionProps } from "@/components/Action/types";
 import { actionContext } from "@/components/Action/context";
 import { ActionState } from "@/components/Action/models/ActionState";
 import { ActionExecution } from "@/components/Action/models/ActionExecution";
 import { ActionStateContext } from "@/components/Action/models/ActionStateContext";
+import type { OverlayContext } from "@/lib/controller/overlay/context";
+import { useOverlayContext } from "@/lib/controller/overlay/context";
+import type { FlowComponentName } from "@/components/propTypes";
 
 interface InitObject {
   actionProps: ActionProps;
   parentAction?: ActionModel;
   confirmationModalController: OverlayController;
   needsConfirmation: boolean;
-  overlayController: OverlayController;
+  overlayContext: OverlayContext;
   state: ActionState;
 }
 
@@ -23,14 +25,14 @@ export class ActionModel {
   public readonly actionProps: ActionProps;
   public readonly parentAction?: ActionModel;
   public readonly confirmationModalController: OverlayController;
-  public readonly overlayController: OverlayController;
+  public readonly overlayContext: OverlayContext;
 
   private constructor(init: InitObject) {
     const {
       actionProps,
       needsConfirmation,
       parentAction,
-      overlayController,
+      overlayContext,
       confirmationModalController,
       state,
     } = init;
@@ -39,7 +41,7 @@ export class ActionModel {
     this.parentAction = parentAction;
     this.confirmationModalController = confirmationModalController;
     this.needsConfirmation = needsConfirmation;
-    this.overlayController = overlayController;
+    this.overlayContext = overlayContext;
     this.state = state;
   }
 
@@ -48,13 +50,13 @@ export class ActionModel {
     init: Partial<InitObject> = {},
   ): ActionModel {
     const parentAction = useContext(actionContext);
-    const overlayController = useOverlayController();
-    const confirmationModalController = useOverlayController();
+    const overlayContext = useOverlayContext();
+    const confirmationModalController = OverlayController.useNew();
     const state = ActionState.useNew();
 
     return new ActionModel({
       parentAction,
-      overlayController,
+      overlayContext,
       confirmationModalController,
       needsConfirmation: false,
       actionProps,
@@ -76,12 +78,12 @@ export class ActionModel {
     return new ActionModel({
       actionProps: action.actionProps,
       confirmationModalController: action.confirmationModalController,
-      overlayController: action.overlayController,
+      overlayContext: action.overlayContext,
       state: action.state,
       needsConfirmation: false,
       parentAction: ActionModel.useNew(
         {
-          closeOverlay: true,
+          closeOverlay: action.confirmationModalController,
         },
         {
           parentAction: action.parentAction,
@@ -90,17 +92,17 @@ export class ActionModel {
     });
   }
 
-  public getOverlayController(): OverlayController | undefined {
+  public getOverlayController(
+    component: FlowComponentName,
+  ): OverlayController | undefined {
     const getController = (
-      controller?: OverlayController | boolean,
+      controller?: OverlayController | FlowComponentName,
     ): OverlayController | undefined => {
       return controller === undefined
         ? undefined
-        : controller === true
-          ? this.overlayController
-          : controller === false
-            ? undefined
-            : controller;
+        : controller
+          ? this.overlayContext[component]
+          : undefined;
     };
 
     return (

@@ -16,4 +16,12 @@
   @include size(m);
   @include size(s);
   @include size(l);
+
+  &.light {
+    color: var(--icon--color--light);
+  }
+
+  &.dark {
+    color: var(--icon--color--dark);
+  }
 }

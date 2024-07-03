@@ -64,3 +64,7 @@ export const WithFieldError: Story = {
     </TextArea>
   ),
 };
+
+export const ShowCharacterCount: Story = {
+  args: { showCharacterCount: true, maxLength: 100 },
+};

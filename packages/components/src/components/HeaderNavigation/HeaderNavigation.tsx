@@ -1,6 +1,10 @@
 import type { ComponentProps, FC, PropsWithChildren } from "react";
 import React from "react";
-import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import {
+  dynamic,
+  type PropsContext,
+  PropsContextProvider,
+} from "@/lib/propsContext";
 import clsx from "clsx";
 import styles from "./HeaderNavigation.module.scss";
 import { EmulatedBoldText } from "@/components/EmulatedBoldText";
@@ -20,25 +24,18 @@ export const HeaderNavigation: FC<HeaderNavigationProps> = (props) => {
 
   const propsContext: PropsContext = {
     Link: {
-      render: (Link, props) => (
-        <li>
-          <Link {...props} className={styles.link} unstyled>
-            <EmulatedBoldText>{props.children}</EmulatedBoldText>
-          </Link>
-        </li>
-      ),
+      wrapWith: <li />,
+      className: styles.link,
+      unstyled: true,
+      children: dynamic((props) => (
+        <EmulatedBoldText>{props.children}</EmulatedBoldText>
+      )),
     },
     Button: {
-      render: (Button, props) => (
-        <li>
-          <Button
-            {...props}
-            className={styles.button}
-            variant="plain"
-            color={color}
-          />
-        </li>
-      ),
+      className: styles.button,
+      color,
+      variant: "plain",
+      wrapWith: <li />,
     },
   };
 

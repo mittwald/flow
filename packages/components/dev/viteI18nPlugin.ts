@@ -2,6 +2,7 @@ import type { Plugin } from "vite";
 import path from "path";
 import * as fs from "fs";
 import crypt from "crypto";
+import { compileStrings } from "@internationalized/string-compiler";
 
 export const moduleSuffix = ".locale.json";
 export const moduleId = `\x00${moduleSuffix}@`;
@@ -19,6 +20,15 @@ export const generateVirtualFileId = (filePath: string): string => {
   return `${moduleId}${virtualFileId}`;
 };
 
+const compileLocalString = (localesString: string): string => {
+  return (
+    compileStrings(JSON.parse(localesString))
+      // we create our own virtual file, so we
+      // don't need the export from compileStrings
+      .replace("module.exports =", "")
+  );
+};
+
 const generateComponentIntlContent = (
   filePath: string,
   languageKey: string,
@@ -32,11 +42,13 @@ const generateComponentIntlContent = (
       const match = filePath.match(importPathInfosRegEx);
 
       const fileContent = fs.readFileSync(filePath, "utf8");
-      langObject.push(`"${match && match[3]}":${fileContent}`);
+      langObject.push(
+        `"${match && match[3]}":${compileLocalString(fileContent)}`,
+      );
     });
   } else {
     const fileContent = fs.readFileSync(filePath, "utf8");
-    langObject.push(`"${languageKey}":${fileContent}`);
+    langObject.push(`"${languageKey}":${compileLocalString(fileContent)}`);
   }
 
   return `{${langObject.join(",")}}`;

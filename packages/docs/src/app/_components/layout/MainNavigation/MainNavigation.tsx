@@ -34,7 +34,7 @@ const NavigationLink: FC<NavigationLinkProps> = (props) => {
   const { treeItem } = props;
   const currentPathname = usePathname();
 
-  const overlay = useOverlayController();
+  const overlay = useOverlayController("Modal");
 
   useOnChange(currentPathname, () => {
     overlay.close();

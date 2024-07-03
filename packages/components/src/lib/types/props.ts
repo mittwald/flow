@@ -1,10 +1,4 @@
-import type {
-  ComponentType,
-  ExoticComponent,
-  HTMLAttributes,
-  ReactHTML,
-  ReactNode,
-} from "react";
+import type { ExoticComponent, HTMLAttributes, ReactHTML } from "react";
 
 export type Status = "info" | "success" | "warning" | "danger";
 
@@ -17,16 +11,6 @@ export interface PropsWithTunnel {
   tunnelId?: string;
 }
 
-export type FlowRenderFn<P> = (
-  component: ComponentType<P>,
-  props: P,
-) => ReactNode;
-
-export interface PropsWithRender<P> {
-  /** @internal */
-  render?: FlowRenderFn<P> | false;
-}
-
 export interface PropsWithClassName {
   className?: string;
 }
@@ -35,3 +19,9 @@ export type PropsWithElementType<T extends keyof ReactHTML = never> =
   HTMLAttributes<HTMLElement> & {
     elementType?: T | ExoticComponent;
   };
+
+export type ContainerBreakpointSize = "xs" | "s" | "m" | "l" | "xl";
+
+export interface PropsWithContainerBreakpointSize {
+  containerBreakpointSize?: ContainerBreakpointSize;
+}

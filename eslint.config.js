@@ -11,6 +11,7 @@ export default tseslint.config(
       "**/next.config.js",
       "**/*.cjs",
       ".next/**/*",
+      ".nx",
     ],
   },
   {

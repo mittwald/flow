@@ -6,5 +6,7 @@ export const Link = forwardRef<
   HTMLAnchorElement,
   Omit<ComponentProps<"a">, "ref">
 >(function Link(props, ref) {
-  return <NextLink href={props.href ?? "#"} {...props} ref={ref} />;
+  const { href, ...rest } = props;
+
+  return <NextLink href={href ?? "#"} {...rest} ref={ref} />;
 });
