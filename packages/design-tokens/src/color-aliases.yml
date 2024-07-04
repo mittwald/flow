@@ -485,6 +485,14 @@ disabled-solid-background-color:
   value: "{neutral.color.400}"
 disabled-solid-content-color:
   value: "{neutral.color.600}"
+disabled-dark-solid-background-color:
+  value: "{dark.color.300}"
+disabled-dark-solid-content-color:
+  value: "{light.color.300}"
+disabled-light-solid-background-color:
+  value: "{light.color.300}"
+disabled-light-solid-content-color:
+  value: "{dark.color.300}"
 
 # Disabled Plain
 disabled-plain-background-color:
@@ -493,6 +501,10 @@ disabled-plain-content-color:
   value: "{neutral.color.400}"
 disabled-plain-content-accent-color:
   value: "{neutral.color.600}"
+disabled-dark-plain-content-color:
+  value: "{dark.color.300}"
+disabled-light-plain-content-color:
+  value: "{light.color.300}"
 
 # Disabled Outline
 disabled-outline-background-color:
@@ -507,6 +519,14 @@ disabled-soft-background-color:
   value: "{neutral.color.300}"
 disabled-soft-content-color:
   value: "{neutral.color.500}"
+disabled-dark-soft-background-color:
+  value: "{dark.color.100}"
+disabled-dark-soft-content-color:
+  value: "{dark.color.200}"
+disabled-light-soft-background-color:
+  value: "{light.color.100}"
+disabled-light-soft-content-color:
+  value: "{light.color.200}"
 
 # Dark Solid
 dark-solid-background-color:
