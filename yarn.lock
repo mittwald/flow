@@ -2597,6 +2597,7 @@ __metadata:
     react-aria-components: "npm:^1.2.1"
     react-children-utilities: "npm:^2.10.0"
     react-dom: "npm:^18.3.1"
+    react-easy-crop: "npm:^5.0.7"
     react-element-to-jsx-string: "npm:^15.0.0"
     react-hook-form: "npm:^7.52.1"
     react-stately: "npm:^3.31.1"
@@ -14424,6 +14425,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"normalize-wheel@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "normalize-wheel@npm:1.0.1"
+  checksum: 10c0/5daf4c97e39f36658a5263a6499bbc148676ae2bd85f12c8d03c46ffe7bc3c68d44564c00413d88d0457ac0d94450559bb1c24c2ce7ae0c107031f82d093ac06
+  languageName: node
+  linkType: hard
+
 "npm-bundled@npm:^3.0.0":
   version: 3.0.1
   resolution: "npm-bundled@npm:3.0.1"
@@ -16002,6 +16010,19 @@ __metadata:
   peerDependencies:
     react: ^18.3.1
   checksum: 10c0/a752496c1941f958f2e8ac56239172296fcddce1365ce45222d04a1947e0cc5547df3e8447f855a81d6d39f008d7c32eab43db3712077f09e3f67c4874973e85
+  languageName: node
+  linkType: hard
+
+"react-easy-crop@npm:^5.0.7":
+  version: 5.0.7
+  resolution: "react-easy-crop@npm:5.0.7"
+  dependencies:
+    normalize-wheel: "npm:^1.0.1"
+    tslib: "npm:^2.0.1"
+  peerDependencies:
+    react: ">=16.4.0"
+    react-dom: ">=16.4.0"
+  checksum: 10c0/6784a6fcf49b8796ac1e607fc780cf156d63c531e82d070dd52122227ab0f00ab14c548045d1f8573951b32bd72c54ac358cbf862153d4a5b2eb2b0cec4bdb3e
   languageName: node
   linkType: hard
 

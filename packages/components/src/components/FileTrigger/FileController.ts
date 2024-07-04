@@ -49,13 +49,11 @@ export class FileController {
       const file = await f.getFile();
 
       if (acceptedFileTypes && !acceptedFileTypes.includes(file.type)) {
-        alert(`files of this type are not allowed`);
-        return;
+        throw new Error("invalid file type");
       }
 
       if (!allowsMultiple && i > 0) {
-        alert(`multiple files are not allowed`);
-        return;
+        throw new Error("invalid file count");
       }
 
       if (!allowsMultiple) {
