@@ -1,7 +1,6 @@
 import type { FC } from "react";
 import React, { useEffect, useRef } from "react";
 import { FileDropZone } from "@/components/FileDropZone";
-import FileController from "@/components/FileTrigger/FileController";
 import { ImageCropper } from "@/components/ImageCropper";
 import type { Area, CropperProps } from "react-easy-crop";
 import type ImageUploadController from "@/components/ImageUpload/ImageUploadController";
@@ -12,6 +11,7 @@ import { Button } from "@/components/Button";
 import { IconClose } from "@/components/Icon/components/icons";
 import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
+import { useFileController } from "@/components/FileTrigger";
 
 export interface ImageUploadProps
   extends Partial<Pick<CropperProps, "cropShape">>,
@@ -30,7 +30,7 @@ export const ImageUpload: FC<ImageUploadProps> = (props) => {
     className,
   } = props;
 
-  const fileController = FileController.useNew();
+  const fileController = useFileController();
   const files = fileController.useFiles();
 
   const imageSrc = controller.useImageSrc();
