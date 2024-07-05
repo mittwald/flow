@@ -30,12 +30,13 @@ export const ImageUpload: FC<ImageUploadProps> = (props) => {
   const fileController = FileController.useNew();
   const files = fileController.useFiles();
   const file = files[0];
-  const reader = new FileReader();
+
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const rootClassName = clsx(styles.imageUpload, className);
 
   useEffect(() => {
+    const reader = new FileReader();
     if (file) {
       reader.onload = (event) => {
         if (event.target && typeof event.target.result === "string") {
