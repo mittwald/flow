@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { FileDropZone } from "@/components/FileDropZone";
 import FileController from "@/components/FileTrigger/FileController";
 import { ImageCropper } from "@/components/ImageCropper";
@@ -29,10 +29,12 @@ export const ImageUpload: FC<ImageUploadProps> = (props) => {
     height = cropShape === "round" ? 300 : 200,
     className,
   } = props;
-  const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area>();
 
   const fileController = FileController.useNew();
   const files = fileController.useFiles();
+
+  const imageSrc = controller.useImageSrc();
+  const croppedArea = controller.useCroppedArea();
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -40,23 +42,15 @@ export const ImageUpload: FC<ImageUploadProps> = (props) => {
 
   const stringFormatter = useLocalizedStringFormatter(locales);
 
-  const imageSrc = controller.useImageSrc();
-
   useEffect(() => {
     controller.setImageSrc(files);
   }, [files]);
 
   useEffect(() => {
-    if (canvasRef.current && imageSrc && croppedAreaPixels) {
-      controller.drawImage(
-        canvasRef.current,
-        imageSrc,
-        croppedAreaPixels,
-        width,
-        height,
-      );
+    if (canvasRef.current) {
+      controller.drawImage(canvasRef.current, width, height);
     }
-  }, [imageSrc, croppedAreaPixels]);
+  }, [imageSrc, croppedArea]);
 
   return (
     <div className={rootClassName}>
@@ -75,7 +69,7 @@ export const ImageUpload: FC<ImageUploadProps> = (props) => {
             aspect={width / height}
             image={imageSrc}
             onCropComplete={(_, croppedAreaPixels: Area) => {
-              setCroppedAreaPixels(croppedAreaPixels);
+              controller.setCroppedArea(croppedAreaPixels);
             }}
           />
           <Button
