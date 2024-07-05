@@ -8,6 +8,10 @@ import type ImageUploadController from "@/components/ImageUpload/ImageUploadCont
 import styles from "./ImageUpload.module.scss";
 import clsx from "clsx";
 import type { PropsWithClassName } from "@/lib/types/props";
+import { Button } from "@/components/Button";
+import { IconClose } from "@/components/Icon/components/icons";
+import locales from "./locales/*.locale.json";
+import { useLocalizedStringFormatter } from "react-aria";
 
 export interface ImageUploadProps
   extends Partial<Pick<CropperProps, "cropShape">>,
@@ -25,27 +29,22 @@ export const ImageUpload: FC<ImageUploadProps> = (props) => {
     height = cropShape === "round" ? 300 : 200,
     className,
   } = props;
-  const [imageSrc, setImageSrc] = useState<string>();
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area>();
+
   const fileController = FileController.useNew();
   const files = fileController.useFiles();
-  const file = files[0];
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const rootClassName = clsx(styles.imageUpload, className);
 
+  const stringFormatter = useLocalizedStringFormatter(locales);
+
+  const imageSrc = controller.useImageSrc();
+
   useEffect(() => {
-    const reader = new FileReader();
-    if (file) {
-      reader.onload = (event) => {
-        if (event.target && typeof event.target.result === "string") {
-          setImageSrc(event.target.result);
-        }
-      };
-      reader.readAsDataURL(file);
-    }
-  }, [file]);
+    controller.setImageSrc(files);
+  }, [files]);
 
   useEffect(() => {
     if (canvasRef.current && imageSrc && croppedAreaPixels) {
@@ -61,7 +60,7 @@ export const ImageUpload: FC<ImageUploadProps> = (props) => {
 
   return (
     <div className={rootClassName}>
-      {!file && (
+      {files.length === 0 && (
         <FileDropZone
           className={styles.fileDropZone}
           controller={fileController}
@@ -69,15 +68,29 @@ export const ImageUpload: FC<ImageUploadProps> = (props) => {
         />
       )}
 
-      {file && (
-        <ImageCropper
-          cropShape={cropShape}
-          aspect={width / height}
-          image={imageSrc}
-          onCropComplete={(_, croppedAreaPixels: Area) => {
-            setCroppedAreaPixels(croppedAreaPixels);
-          }}
-        />
+      {files.length > 0 && (
+        <div className={styles.imageCropperContainer}>
+          <ImageCropper
+            cropShape={cropShape}
+            aspect={width / height}
+            image={imageSrc}
+            onCropComplete={(_, croppedAreaPixels: Area) => {
+              setCroppedAreaPixels(croppedAreaPixels);
+            }}
+          />
+          <Button
+            color="secondary"
+            variant="plain"
+            aria-label={stringFormatter.format("imageUpload.remove")}
+            size="s"
+            onPress={() => {
+              fileController.clear();
+              controller.clearCanvas(canvasRef.current);
+            }}
+          >
+            <IconClose />
+          </Button>
+        </div>
       )}
 
       <canvas
