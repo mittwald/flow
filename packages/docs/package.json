@@ -17,7 +17,7 @@
     "@mfalkenberg/react-live-ssr": "^4.1.7",
     "@mittwald/flow-react-components": "workspace:^",
     "@next/mdx": "^14.2.4",
-    "@tabler/icons-react": "^3.8.0",
+    "@tabler/icons-react": "^3.9.0",
     "@types/mdx": "^2.0.13",
     "acorn": "patch:acorn@npm%3A8.11.2#~/.yarn/patches/acorn-npm-8.11.2-a470f49bb6.patch",
     "acorn-typescript": "^1.4.13",
@@ -34,7 +34,7 @@
     "react-hook-form": "^7.52.1",
     "remark-frontmatter": "^5.0.0",
     "remark-mdx-frontmatter": "^5.0.0",
-    "remeda": "^2.2.2",
+    "remeda": "^2.3.0",
     "sass": "^1.77.6",
     "tsx": "^4.16.2",
     "webpack": "^5.92.1"
