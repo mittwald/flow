@@ -36,18 +36,20 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
           isRequired: !!rest.rules?.required,
           isInvalid: invalid,
           validationBehavior: "aria" as const,
-          children: dynamic((p) => (
-            <>
-              {p.children}
-              <FieldErrorView>{error?.message}</FieldErrorView>
-            </>
-          )),
-        };
+          children: dynamic((p) => {
+            if (!error?.message) {
+              return p.children;
+            }
 
-        const uncontrolledFormControlProps = {
-          ...formControlProps,
-          value: undefined,
-          defaultValue: field.value,
+            return (
+              <>
+                {p.children}
+                <FieldError>{error?.message}</FieldError>
+              </>
+            );
+          }),
+          ref: undefined,
+          refProp: field.ref,
         };
 
         const propsContext: PropsContext = {
