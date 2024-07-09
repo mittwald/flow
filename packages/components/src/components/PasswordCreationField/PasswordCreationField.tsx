@@ -1,4 +1,3 @@
-import type { ChangeEventHandler } from "react";
 import { useDeferredValue } from "react";
 import { useRef } from "react";
 import React, {
@@ -152,7 +151,7 @@ export const PasswordCreationField = flowComponent(
               // on empty values assume the state as valid but keep the single rule validations
               // to show the result in the info box without showing a complete failed validation
               return {
-                isValid: true,
+                isValid: false,
                 complexity: { min: validationPolicy.minComplexity, actual: 4 },
                 ruleResults,
               };
@@ -168,6 +167,18 @@ export const PasswordCreationField = flowComponent(
       }
     });
 
+    const setOptimisticSuccessResult = () => {
+      setPolicyValidationResult((old) => ({
+        ruleResults: old?.ruleResults ?? [],
+        isValid: true,
+        complexity: {
+          warning: null,
+          min: validationPolicy.minComplexity,
+          actual: 4,
+        },
+      }));
+    };
+
     const onPasswordGenerateHandler: ActionFn = async () => {
       if (validationPolicy) {
         const newValue = await new Generator(
@@ -180,15 +191,7 @@ export const PasswordCreationField = flowComponent(
 
         // optimistic success since we generate
         // a password from the same policy
-        setPolicyValidationResult({
-          ruleResults: [],
-          isValid: true,
-          complexity: {
-            warning: null,
-            min: validationPolicy.minComplexity,
-            actual: 4,
-          },
-        });
+        setOptimisticSuccessResult();
 
         startTransition(() => {
           setIsPasswordRevealed(true);
@@ -200,16 +203,17 @@ export const PasswordCreationField = flowComponent(
       }
     };
 
-    const onPasswordInputChangeHandler: ChangeEventHandler<HTMLInputElement> = (
-      event,
-    ) => {
-      const newValue = event.target.value;
+    const onPasswordInputChangeHandler = (value: string) => {
       if (onChange) {
-        onChange(newValue);
+        onChange(value);
       }
       if (valueControlType === "uncontrolled") {
-        setUncontrolledValue(newValue);
+        setUncontrolledValue(value);
       }
+    };
+
+    const onPasswordPasteHandler = () => {
+      setOptimisticSuccessResult();
     };
 
     const togglePasswordVisibilityHandler = () => {
@@ -271,7 +275,8 @@ export const PasswordCreationField = flowComponent(
           <Aria.TextField
             type={isPasswordRevealed ? "text" : "password"}
             value={value}
-            onChange={onChange}
+            onChange={onPasswordInputChangeHandler}
+            onPaste={onPasswordPasteHandler}
             className={rootClassName}
             isDisabled={isDisabled}
             isInvalid={
@@ -284,13 +289,7 @@ export const PasswordCreationField = flowComponent(
               isDisabled={isDisabled}
               className={clsx(styles.inputGroup)}
             >
-              <Aria.Input
-                disabled={isDisabled}
-                onChange={onPasswordInputChangeHandler}
-                className={styles.input}
-                ref={ref}
-                value={value}
-              />
+              <Aria.Input className={styles.input} ref={ref} value={value} />
               <Aria.Group className={styles.buttonContainer}>
                 <Action action={togglePasswordVisibilityHandler}>
                   <Button

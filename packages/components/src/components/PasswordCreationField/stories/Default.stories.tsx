@@ -3,13 +3,10 @@ import { PasswordCreationField } from "../index";
 import React from "react";
 import { Label } from "@/components/Label";
 import { action } from "@storybook/addon-actions";
-import { IconPlus } from "@/components/Icon/components/icons";
-import Button from "@/components/Button";
 import { Form } from "react-aria-components";
 import type { PolicyDeclaration } from "@mittwald/password-tools-js/policy";
 import { RuleType, SequenceType } from "@mittwald/password-tools-js/rules";
 import { Policy } from "@mittwald/password-tools-js/policy";
-import { Action } from "@/components/Action";
 
 const policyDecl: PolicyDeclaration = {
   minComplexity: 3,
@@ -62,11 +59,6 @@ const meta: Meta<typeof PasswordCreationField> = {
     return (
       <PasswordCreationField onChange={action("onChange")} {...props}>
         <Label>Password</Label>
-        <Action action={action("customButton")}>
-          <Button slot="button" size="m" aria-label="Add ">
-            <IconPlus />
-          </Button>
-        </Action>
       </PasswordCreationField>
     );
   },
