@@ -170,6 +170,10 @@
       "types": "./dist/types/components/NumberField/index.d.ts",
       "import": "./dist/NumberField.js"
     },
+    "./PasswordCreationField": {
+      "types": "./dist/types/components/PasswordCreationField/index.d.ts",
+      "import": "./dist/PasswordCreationField.js"
+    },
     "./Popover": {
       "types": "./dist/types/components/Popover/index.d.ts",
       "import": "./dist/Popover.js"
