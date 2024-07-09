@@ -38,6 +38,8 @@ button:
       value: "{success-solid-background-color.hover}"
     pressed:
       value: "{success-solid-background-color.pressed}"
+    disabled:
+      value: "{disabled-solid-background-color}"
   accent-solid-content-color:
     default:
       value: "{success-solid-content-color}"
@@ -45,6 +47,8 @@ button:
       value: "{success-solid-content-color}"
     pressed:
       value: "{success-solid-content-color}"
+    disabled:
+      value: "{disabled-solid-content-color}"
 
   # Accent Plain
   accent-plain-background-color:
@@ -54,6 +58,8 @@ button:
       value: "{success-plain-background-color.hover}"
     pressed:
       value: "{success-plain-background-color.pressed}"
+    disabled:
+      value: "{disabled-plain-background-color}"
   accent-plain-content-color:
     default:
       value: "{success-plain-content-color.default}"
@@ -61,6 +67,8 @@ button:
       value: "{success-plain-content-color.hover}"
     pressed:
       value: "{success-plain-content-color.pressed}"
+    disabled:
+      value: "{disabled-plain-content-color}"
 
   # Accent Soft
   accent-soft-background-color:
@@ -70,6 +78,8 @@ button:
       value: "{success-soft-background-color.hover}"
     pressed:
       value: "{success-soft-background-color.pressed}"
+    disabled:
+      value: "{disabled-soft-background-color}"
   accent-soft-content-color:
     default:
       value: "{success-soft-content-color.default}"
@@ -77,6 +87,8 @@ button:
       value: "{success-soft-content-color.hover}"
     pressed:
       value: "{success-soft-content-color.pressed}"
+    disabled:
+      value: "{disabled-soft-content-color}"
 
   # Primary Solid
   primary-solid-background-color:
@@ -86,6 +98,8 @@ button:
       value: "{primary-solid-background-color.hover}"
     pressed:
       value: "{primary-solid-background-color.pressed}"
+    disabled:
+      value: "{disabled-solid-background-color}"
   primary-solid-content-color:
     default:
       value: "{primary-solid-content-color}"
@@ -93,6 +107,8 @@ button:
       value: "{primary-solid-content-color}"
     pressed:
       value: "{primary-solid-content-color}"
+    disabled:
+      value: "{disabled-solid-content-color}"
 
   # Primary Plain
   primary-plain-background-color:
@@ -102,6 +118,8 @@ button:
       value: "{primary-plain-background-color.hover}"
     pressed:
       value: "{primary-plain-background-color.pressed}"
+    disabled:
+      value: "{disabled-plain-background-color}"
   primary-plain-content-color:
     default:
       value: "{primary-plain-content-color.default}"
@@ -109,6 +127,8 @@ button:
       value: "{primary-plain-content-color.hover}"
     pressed:
       value: "{primary-plain-content-color.pressed}"
+    disabled:
+      value: "{disabled-plain-content-color}"
 
   # Primary Soft
   primary-soft-background-color:
@@ -118,6 +138,8 @@ button:
       value: "{primary-soft-background-color.hover}"
     pressed:
       value: "{primary-soft-background-color.pressed}"
+    disabled:
+      value: "{disabled-soft-background-color}"
   primary-soft-content-color:
     default:
       value: "{primary-soft-content-color.default}"
@@ -125,6 +147,8 @@ button:
       value: "{primary-soft-content-color.hover}"
     pressed:
       value: "{primary-soft-content-color.pressed}"
+    disabled:
+      value: "{disabled-soft-content-color}"
 
   # Secondary Solid
   secondary-solid-background-color:
@@ -134,6 +158,8 @@ button:
       value: "{neutral-solid-background-color.hover}"
     pressed:
       value: "{neutral-solid-background-color.pressed}"
+    disabled:
+      value: "{disabled-solid-background-color}"
   secondary-solid-content-color:
     default:
       value: "{neutral-solid-content-color}"
@@ -141,6 +167,8 @@ button:
       value: "{neutral-solid-content-color}"
     pressed:
       value: "{neutral-solid-content-color}"
+    disabled:
+      value: "{disabled-solid-content-color}"
 
   # Secondary Plain
   secondary-plain-background-color:
@@ -150,6 +178,8 @@ button:
       value: "{neutral-plain-background-color.hover}"
     pressed:
       value: "{neutral-plain-background-color.pressed}"
+    disabled:
+      value: "{disabled-plain-background-color}"
   secondary-plain-content-color:
     default:
       value: "{neutral-plain-content-color}"
@@ -157,6 +187,8 @@ button:
       value: "{neutral-plain-content-color}"
     pressed:
       value: "{neutral-plain-content-color}"
+    disabled:
+      value: "{disabled-plain-content-color}"
 
   # Secondary Soft
   secondary-soft-background-color:
@@ -166,6 +198,8 @@ button:
       value: "{neutral-soft-background-color.hover}"
     pressed:
       value: "{neutral-soft-background-color.pressed}"
+    disabled:
+      value: "{disabled-soft-background-color}"
   secondary-soft-content-color:
     default:
       value: "{neutral-soft-content-color.default}"
@@ -173,6 +207,8 @@ button:
       value: "{neutral-soft-content-color.hover}"
     pressed:
       value: "{neutral-soft-content-color.pressed}"
+    disabled:
+      value: "{disabled-soft-content-color}"
 
   # Danger Solid
   danger-solid-background-color:
@@ -182,6 +218,8 @@ button:
       value: "{danger-solid-background-color.hover}"
     pressed:
       value: "{danger-solid-background-color.pressed}"
+    disabled:
+      value: "{disabled-solid-background-color}"
   danger-solid-content-color:
     default:
       value: "{danger-solid-content-color}"
@@ -189,6 +227,8 @@ button:
       value: "{danger-solid-content-color}"
     pressed:
       value: "{danger-solid-content-color}"
+    disabled:
+      value: "{disabled-solid-content-color}"
 
   # Danger Plain
   danger-plain-background-color:
@@ -198,6 +238,8 @@ button:
       value: "{danger-plain-background-color.hover}"
     pressed:
       value: "{danger-plain-background-color.pressed}"
+    disabled:
+      value: "{disabled-plain-background-color}"
   danger-plain-content-color:
     default:
       value: "{danger-plain-content-color.default}"
@@ -205,6 +247,8 @@ button:
       value: "{danger-plain-content-color.hover}"
     pressed:
       value: "{danger-plain-content-color.pressed}"
+    disabled:
+      value: "{disabled-plain-content-color}"
 
   # Danger Soft
   danger-soft-background-color:
@@ -214,6 +258,8 @@ button:
       value: "{danger-soft-background-color.hover}"
     pressed:
       value: "{danger-soft-background-color.pressed}"
+    disabled:
+      value: "{disabled-soft-background-color}"
   danger-soft-content-color:
     default:
       value: "{danger-soft-content-color.default}"
@@ -221,24 +267,8 @@ button:
       value: "{danger-soft-content-color.hover}"
     pressed:
       value: "{danger-soft-content-color.pressed}"
-
-  # Disabled Solid
-  disabled-solid-background-color:
-    value: "{disabled-solid-background-color}"
-  disabled-solid-content-color:
-    value: "{disabled-solid-content-color}"
-
-  # Disabled Plain
-  disabled-plain-background-color:
-    value: "{disabled-plain-background-color}"
-  disabled-plain-content-color:
-    value: "{disabled-plain-content-color}"
-
-  # Disabled Soft
-  disabled-soft-background-color:
-    value: "{disabled-soft-background-color}"
-  disabled-soft-content-color:
-    value: "{disabled-soft-content-color}"
+    disabled:
+      value: "{disabled-soft-content-color}"
 
   # Dark Solid
   dark-solid-background-color:
@@ -248,6 +278,8 @@ button:
       value: "{dark-solid-background-color.hover}"
     pressed:
       value: "{dark-solid-background-color.pressed}"
+    disabled:
+      value: "{disabled-dark-solid-background-color}"
   dark-solid-content-color:
     default:
       value: "{dark-solid-content-color}"
@@ -255,6 +287,8 @@ button:
       value: "{dark-solid-content-color}"
     pressed:
       value: "{dark-solid-content-color}"
+    disabled:
+      value: "{disabled-dark-solid-content-color}"
 
   # Dark Plain
   dark-plain-background-color:
@@ -264,6 +298,8 @@ button:
       value: "{dark-plain-background-color.hover}"
     pressed:
       value: "{dark-plain-background-color.pressed}"
+    disabled:
+      value: "{disabled-plain-background-color}"
   dark-plain-content-color:
     default:
       value: "{dark-plain-content-color.default}"
@@ -271,6 +307,8 @@ button:
       value: "{dark-plain-content-color.default}"
     pressed:
       value: "{dark-plain-content-color.default}"
+    disabled:
+      value: "{disabled-dark-plain-content-color}"
 
   # Dark Soft
   dark-soft-background-color:
@@ -280,6 +318,8 @@ button:
       value: "{dark-soft-background-color.hover}"
     pressed:
       value: "{dark-soft-background-color.pressed}"
+    disabled:
+      value: "{disabled-dark-soft-background-color}"
   dark-soft-content-color:
     default:
       value: "{dark-soft-content-color.default}"
@@ -287,6 +327,8 @@ button:
       value: "{dark-soft-content-color.hover}"
     pressed:
       value: "{dark-soft-content-color.pressed}"
+    disabled:
+      value: "{disabled-dark-soft-content-color}"
 
   # Light Solid
   light-solid-background-color:
@@ -296,6 +338,8 @@ button:
       value: "{light-solid-background-color.hover}"
     pressed:
       value: "{light-solid-background-color.pressed}"
+    disabled:
+      value: "{disabled-light-solid-background-color}"
   light-solid-content-color:
     default:
       value: "{light-solid-content-color}"
@@ -303,6 +347,8 @@ button:
       value: "{light-solid-content-color}"
     pressed:
       value: "{light-solid-content-color}"
+    disabled:
+      value: "{disabled-light-solid-content-color}"
 
   # Light Plain
   light-plain-background-color:
@@ -312,6 +358,8 @@ button:
       value: "{light-plain-background-color.hover}"
     pressed:
       value: "{light-plain-background-color.pressed}"
+    disabled:
+      value: "{disabled-plain-background-color}"
   light-plain-content-color:
     default:
       value: "{light-plain-content-color.default}"
@@ -319,6 +367,8 @@ button:
       value: "{light-plain-content-color.default}"
     pressed:
       value: "{light-plain-content-color.default}"
+    disabled:
+      value: "{disabled-light-plain-content-color}"
 
   # Light Soft
   light-soft-background-color:
@@ -328,6 +378,8 @@ button:
       value: "{light-soft-background-color.hover}"
     pressed:
       value: "{light-soft-background-color.pressed}"
+    disabled:
+      value: "{disabled-light-soft-background-color}"
   light-soft-content-color:
     default:
       value: "{light-soft-content-color.default}"
@@ -335,3 +387,5 @@ button:
       value: "{light-soft-content-color.hover}"
     pressed:
       value: "{light-soft-content-color.pressed}"
+    disabled:
+      value: "{disabled-light-soft-content-color}"
