@@ -58,13 +58,19 @@ describe("PasswordCreationField Tests", () => {
       '[data-container="complexity"]',
     );
     assert(complexityElement);
-    expect(complexityElement).toHaveAttribute("data-visible", "false");
+    expect(complexityElement).toHaveAttribute(
+      "data-complexity-visible",
+      "false",
+    );
 
     await act(() =>
       fireEvent.input(inputElement, { target: { value: "123" } }),
     );
 
-    expect(complexityElement).toHaveAttribute("data-visible", "true");
+    expect(complexityElement).toHaveAttribute(
+      "data-complexity-visible",
+      "true",
+    );
   });
 
   test("shows password hints when clicking on info", async () => {
@@ -138,7 +144,10 @@ describe("PasswordCreationField Tests", () => {
       '[data-container="complexity"]',
     );
     assert(complexityElement);
-    expect(complexityElement).toHaveAttribute("data-status", "success");
+    expect(complexityElement).toHaveAttribute(
+      "data-complexity-status",
+      "success",
+    );
 
     const generateButton = renderResult.container.querySelector(
       'button[data-component="generatePassword"]',
@@ -147,7 +156,10 @@ describe("PasswordCreationField Tests", () => {
 
     await act(() => fireEvent.click(generateButton));
     expect(inputElement.value).toHaveLength(12);
-    expect(complexityElement).toHaveAttribute("data-status", "success");
+    expect(complexityElement).toHaveAttribute(
+      "data-complexity-status",
+      "success",
+    );
   });
 
   test("will pass custom buttons to input area", async () => {

@@ -25,6 +25,11 @@ export type PasswordFieldLabelProps = PropsWithChildren<{
 }> &
   Pick<Aria.InputProps, "disabled">;
 
+/**
+ * @class
+ * @param props
+ * @internal
+ */
 export const FieldLabel: FC<PasswordFieldLabelProps> = (props) => {
   const {
     children,

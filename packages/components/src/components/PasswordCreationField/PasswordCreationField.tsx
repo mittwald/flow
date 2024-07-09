@@ -28,10 +28,7 @@ import Button from "@/components/Button";
 import { Action, type ActionFn } from "@/components/Action";
 import FieldLabel from "@/components/PasswordCreationField/components/FieldLabel/FieldLabel";
 import { IconHide, IconShow } from "@/components/Icon/components/icons";
-import {
-  getStatusFromPolicyValidationResult,
-  type ResolvedPolicyValidationResult,
-} from "@/components/PasswordCreationField/lib/getStatusFromPolicyValidationResult";
+import { type ResolvedPolicyValidationResult } from "@/components/PasswordCreationField/lib/getStatusFromPolicyValidationResult";
 import getStatusTextFromPolicyValidationResult from "@/components/PasswordCreationField/lib/getStatusTextFromPolicyValidationResult";
 import locales from "./locales/*.locale.json";
 import type { LocalizedStrings } from "react-aria";
@@ -41,6 +38,7 @@ import { RuleType } from "@mittwald/password-tools-js/rules";
 import { FieldError } from "@/components/FieldError";
 import FieldDescription from "@/components/FieldDescription";
 import PromiseQueue from "p-queue";
+import ComplexityIndicator from "@/components/PasswordCreationField/components/ComplexityIndicator/ComplexityIndicator";
 
 export const defaultPasswordCreationPolicy = Policy.fromDeclaration({
   minComplexity: 3,
@@ -117,16 +115,6 @@ export const PasswordCreationField = flowComponent(
     const [policyValidationResult, setPolicyValidationResult] = useState<
       ResolvedPolicyValidationResult | undefined
     >(undefined);
-
-    const complexity = policyValidationResult?.complexity;
-    const policyValidationStatus = getStatusFromPolicyValidationResult(
-      policyValidationResult,
-    );
-
-    const complexityFulfilledPercentage =
-      complexity && value
-        ? Math.min((100 / (complexity.min + 1)) * (complexity.actual + 1), 100)
-        : 0;
 
     const statusTextFromValidationResult =
       getStatusTextFromPolicyValidationResult(policyValidationResult);
@@ -320,31 +308,11 @@ export const PasswordCreationField = flowComponent(
                 </Action>
                 <TunnelExit id="button" />
               </Aria.Group>
-              <div
-                data-container="complexity"
-                data-visible={complexityFulfilledPercentage !== 0}
-                data-status={policyValidationStatus}
-                className={clsx(
-                  styles.complexityContainer,
-                  complexityFulfilledPercentage === 0 &&
-                    styles.complexityContainerHide,
-                )}
-              >
-                <div
-                  style={{
-                    width: `${complexityFulfilledPercentage}%`,
-                  }}
-                  className={clsx(
-                    styles.complexity,
-                    styles[
-                      `complexity-background-status-${policyValidationStatus}`
-                    ],
-                    isLoading && styles.loading,
-                    complexityFulfilledPercentage !== 100 &&
-                      styles.complexityRunning,
-                  )}
-                />
-              </div>
+              <ComplexityIndicator
+                value={value}
+                isLoading={isLoading}
+                policyValidationResult={policyValidationResult}
+              />
             </Aria.Group>
             <PropsContextProvider props={propsContext}>
               {!!value && statusTextFromValidationResult?.isValid && (

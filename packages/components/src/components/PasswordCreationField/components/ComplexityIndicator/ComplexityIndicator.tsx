@@ -1,0 +1,58 @@
+import type { FC } from "react";
+import React from "react";
+import styles from "./ComplexityIndicator.module.scss";
+import type { ResolvedPolicyValidationResult } from "@/components/PasswordCreationField/lib/getStatusFromPolicyValidationResult";
+import { getStatusFromPolicyValidationResult } from "@/components/PasswordCreationField/lib/getStatusFromPolicyValidationResult";
+import clsx from "clsx";
+
+export interface ComplexityIndicatorProps {
+  value?: string;
+  isLoading: boolean;
+  policyValidationResult?: ResolvedPolicyValidationResult;
+}
+
+/**
+ * @class
+ * @param props
+ * @internal
+ */
+export const ComplexityIndicator: FC<ComplexityIndicatorProps> = (props) => {
+  const { value, policyValidationResult, isLoading } = props;
+
+  const complexity = policyValidationResult?.complexity;
+
+  const complexityFulfilledPercentage =
+    complexity && value
+      ? Math.min((100 / (complexity.min + 1)) * (complexity.actual + 1), 100)
+      : 0;
+
+  const policyValidationStatus = getStatusFromPolicyValidationResult(
+    policyValidationResult,
+  );
+
+  return (
+    <div
+      data-container="complexity"
+      data-complexity-visible={complexityFulfilledPercentage !== 0}
+      data-complexity-status={policyValidationStatus}
+      className={clsx(
+        styles.complexityContainer,
+        complexityFulfilledPercentage === 0 && styles.complexityContainerHide,
+      )}
+    >
+      <div
+        style={{
+          width: `${complexityFulfilledPercentage}%`,
+        }}
+        className={clsx(
+          styles.complexity,
+          styles[`complexity-background-status-${policyValidationStatus}`],
+          isLoading && styles.loading,
+          complexityFulfilledPercentage !== 100 && styles.complexityRunning,
+        )}
+      />
+    </div>
+  );
+};
+
+export default ComplexityIndicator;
