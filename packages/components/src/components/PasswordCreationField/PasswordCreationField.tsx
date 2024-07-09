@@ -91,6 +91,7 @@ export const PasswordCreationField = flowComponent(
       isInvalid,
       validationPolicy = defaultPasswordCreationPolicy,
       locales: localesFromProps = {},
+      isRequired,
       ...rest
     } = props;
 
@@ -243,6 +244,7 @@ export const PasswordCreationField = flowComponent(
         className: dynamic((p) => clsx(p.className, styles.button)),
       },
       Label: {
+        optional: !isRequired,
         className: formFieldStyles.label,
         children: dynamic((localProps) => {
           return (
@@ -283,11 +285,11 @@ export const PasswordCreationField = flowComponent(
             value={value}
             onChange={onChange}
             className={rootClassName}
+            isDisabled={isDisabled}
             isInvalid={
               isInvalid || (!!value && !statusTextFromValidationResult?.isValid)
             }
-            isRequired={true}
-            isDisabled={isDisabled}
+            isRequired={isRequired}
             {...rest}
           >
             <Aria.Group
