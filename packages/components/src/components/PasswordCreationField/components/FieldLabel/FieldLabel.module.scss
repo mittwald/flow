@@ -14,5 +14,5 @@
 
 .rule {
   display: flex;
-  column-gap: 8px;
+  column-gap: var(--password-creation-field--rule-to-rule-spacing);
 }
