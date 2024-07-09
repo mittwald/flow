@@ -31,7 +31,11 @@ export const Label = flowComponent("Label", (props) => {
 
   const rootClassName = unstyled ? className : clsx(styles.label, className);
 
-  const optionalMarker = " " + stringFormatter.format("label.optional");
+  const optionalMarker = (
+    <div className={styles.optional}>
+      {stringFormatter.format("label.optional")}
+    </div>
+  );
 
   return (
     <ClearPropsContext>
