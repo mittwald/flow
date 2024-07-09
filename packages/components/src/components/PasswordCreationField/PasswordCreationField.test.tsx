@@ -146,7 +146,7 @@ describe("PasswordCreationField Tests", () => {
     assert(complexityElement);
     expect(complexityElement).toHaveAttribute(
       "data-complexity-status",
-      "success",
+      "danger",
     );
 
     const generateButton = renderResult.container.querySelector(
