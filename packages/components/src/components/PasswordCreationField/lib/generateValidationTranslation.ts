@@ -5,8 +5,10 @@ import type translate from "@/lib/react/components/Translate";
  * @param rule
  * @internal
  */
-const generateTranslationString = (rule: RuleValidationResult): string => {
-  const translateString = `validation.${rule.ruleType}`;
+const generateTranslationString = (
+  rule: Partial<RuleValidationResult>,
+): string => {
+  const translateString = `validation.${rule.ruleType ?? "general"}`;
 
   if ("min" in rule || "max" in rule) {
     const breakingBoundaryProperty = rule.failingBoundary
@@ -28,7 +30,7 @@ const generateTranslationString = (rule: RuleValidationResult): string => {
 };
 
 export const generateValidationTranslation = (
-  r: RuleValidationResult,
+  r: Partial<RuleValidationResult>,
 ): [string, Parameters<typeof translate>[1]] => {
   const translationKey = generateTranslationString(r);
 
