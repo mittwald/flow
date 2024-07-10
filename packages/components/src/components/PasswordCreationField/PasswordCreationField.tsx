@@ -249,8 +249,7 @@ export const PasswordCreationField = flowComponent(
               locales={passwordCreationFieldLocales}
               disabled={isDisabled}
               onGeneratePasswordAction={onPasswordGenerateHandler}
-              ruleValidationResult={policyValidationResult?.ruleResults}
-              value={value}
+              policyValidationResult={policyValidationResult}
             >
               {localProps.children}
             </FieldLabel>

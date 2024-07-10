@@ -13,15 +13,14 @@ import { Action } from "@/components/Action";
 import { IconCircleCheck, IconCircleMinus } from "@tabler/icons-react";
 import type { LocalizedStrings } from "react-aria";
 import { useLocalizedStringFormatter } from "react-aria";
-import { type RuleValidationResult } from "@mittwald/password-tools-js/rules";
 import generateValidationTranslation from "@/components/PasswordCreationField/lib/generateValidationTranslation";
 import type * as Aria from "react-aria-components";
+import type { PolicyValidationResult } from "@/components/PasswordCreationField/PasswordCreationField";
 
 export type PasswordFieldLabelProps = PropsWithChildren<{
-  ruleValidationResult?: RuleValidationResult[];
+  policyValidationResult?: PolicyValidationResult;
   onGeneratePasswordAction: ActionFn;
   locales?: LocalizedStrings;
-  value?: string;
 }> &
   Pick<Aria.InputProps, "disabled">;
 
@@ -34,16 +33,15 @@ export const FieldLabel: FC<PasswordFieldLabelProps> = (props) => {
   const {
     children,
     onGeneratePasswordAction,
-    ruleValidationResult,
+    policyValidationResult,
     disabled,
-    value,
     locales = {},
   } = props;
   const translate = useLocalizedStringFormatter(locales);
 
-  const validationResultComponents = ruleValidationResult
+  const validationResultComponents = policyValidationResult?.ruleResults
     ?.filter((r) => {
-      return !value ? !r.isValid : true;
+      return policyValidationResult?.isEmptyValueValidation ? !r.isValid : true;
     })
     .map((r) => {
       const icon = r.isValid ? (
