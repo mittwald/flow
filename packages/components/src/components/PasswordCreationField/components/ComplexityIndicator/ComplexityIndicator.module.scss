@@ -5,7 +5,7 @@
   bottom: 0;
   left: 0;
   height: 6px;
-  transition: height ease-in-out 150ms;
+  transition: height linear 100ms;
   overflow: hidden;
 
   &.complexityContainerHide {
@@ -27,7 +27,7 @@
     }
 
     transition:
-      all ease-in-out 100ms,
+      all linear 100ms,
       background-color ease-in-out 150ms;
 
     &.complexity-background-status-danger {

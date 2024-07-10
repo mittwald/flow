@@ -1,14 +1,13 @@
 import type { FC } from "react";
 import React from "react";
 import styles from "./ComplexityIndicator.module.scss";
-import type { ResolvedPolicyValidationResult } from "@/components/PasswordCreationField/lib/getStatusFromPolicyValidationResult";
 import { getStatusFromPolicyValidationResult } from "@/components/PasswordCreationField/lib/getStatusFromPolicyValidationResult";
 import clsx from "clsx";
+import type { PolicyValidationResult } from "@/components/PasswordCreationField/PasswordCreationField";
 
 export interface ComplexityIndicatorProps {
-  value?: string;
   isLoading: boolean;
-  policyValidationResult?: ResolvedPolicyValidationResult;
+  policyValidationResult?: PolicyValidationResult;
 }
 
 /**
@@ -17,12 +16,12 @@ export interface ComplexityIndicatorProps {
  * @internal
  */
 export const ComplexityIndicator: FC<ComplexityIndicatorProps> = (props) => {
-  const { value, policyValidationResult, isLoading } = props;
+  const { policyValidationResult, isLoading } = props;
 
   const complexity = policyValidationResult?.complexity;
 
   const complexityFulfilledPercentage =
-    complexity && value
+    complexity && !policyValidationResult?.isEmptyValueValidation
       ? Math.min((100 / (complexity.min + 1)) * (complexity.actual + 1), 100)
       : 0;
 

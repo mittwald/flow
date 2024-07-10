@@ -74,6 +74,10 @@ export interface PasswordCreationFieldProps
   validationPolicy?: Policy;
 }
 
+export interface PolicyValidationResult extends ResolvedPolicyValidationResult {
+  isEmptyValueValidation: boolean;
+}
+
 export const PasswordCreationField = flowComponent(
   "PasswordCreationField",
   (props) => {
@@ -112,7 +116,7 @@ export const PasswordCreationField = flowComponent(
     const [isPasswordRevealed, setIsPasswordRevealed] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [policyValidationResult, setPolicyValidationResult] = useState<
-      ResolvedPolicyValidationResult | undefined
+      PolicyValidationResult | undefined
     >(undefined);
 
     const statusTextFromValidationResult =
@@ -151,13 +155,19 @@ export const PasswordCreationField = flowComponent(
               // on empty values assume the state as valid but keep the single rule validations
               // to show the result in the info box without showing a complete failed validation
               return {
+                isEmptyValueValidation: true,
                 isValid: false,
-                complexity: { min: validationPolicy.minComplexity, actual: 4 },
+                complexity: {
+                  min: validationPolicy.minComplexity,
+                  actual: 4,
+                  warning: null,
+                },
                 ruleResults,
               };
             }
 
             return {
+              isEmptyValueValidation: false,
               isValid,
               complexity,
               ruleResults,
@@ -169,6 +179,7 @@ export const PasswordCreationField = flowComponent(
 
     const setOptimisticSuccessResult = () => {
       setPolicyValidationResult((old) => ({
+        isEmptyValueValidation: false,
         ruleResults: old?.ruleResults ?? [],
         isValid: true,
         complexity: {
@@ -276,7 +287,9 @@ export const PasswordCreationField = flowComponent(
             className={rootClassName}
             isDisabled={isDisabled}
             isInvalid={
-              isInvalid || (!!value && !statusTextFromValidationResult?.isValid)
+              isInvalid ||
+              (!policyValidationResult?.isEmptyValueValidation &&
+                !statusTextFromValidationResult?.isValid)
             }
             isRequired={isRequired}
             {...rest}
@@ -304,18 +317,17 @@ export const PasswordCreationField = flowComponent(
                 <TunnelExit id="button" />
               </Aria.Group>
               <ComplexityIndicator
-                value={value}
                 isLoading={isLoading}
                 policyValidationResult={policyValidationResult}
               />
             </Aria.Group>
             <PropsContextProvider props={propsContext}>
-              {!!value && statusTextFromValidationResult?.isValid && (
-                <FieldDescription>{translatedStatusText}</FieldDescription>
-              )}
-              {!!value && !statusTextFromValidationResult?.isValid && (
-                <FieldError />
-              )}
+              {!policyValidationResult?.isEmptyValueValidation &&
+                statusTextFromValidationResult?.isValid && (
+                  <FieldDescription>{translatedStatusText}</FieldDescription>
+                )}
+              {!policyValidationResult?.isEmptyValueValidation &&
+                !statusTextFromValidationResult?.isValid && <FieldError />}
               {children}
             </PropsContextProvider>
           </Aria.TextField>
