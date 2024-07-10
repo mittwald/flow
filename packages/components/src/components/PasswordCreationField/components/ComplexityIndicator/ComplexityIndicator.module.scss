@@ -1,3 +1,5 @@
+@use "complexity";
+
 .complexityContainer {
   box-shadow: 0 -1px 0 var(--progress-bar--bar-border-color);
   width: 100%;
@@ -5,11 +7,14 @@
   bottom: 0;
   left: 0;
   height: 6px;
-  transition: height ease-out 15ms;
   overflow: hidden;
 
+  @include complexity.animation-in("height");
+
   &.complexityContainerHide {
+    @include complexity.animation-out("height");
     height: 0;
+    box-shadow: unset;
     overflow: hidden;
   }
 
@@ -22,13 +27,13 @@
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 
+    transition:
+      width #{complexity.$animation-width-responsiveness},
+      background-color #{complexity.$animation-background-color-change};
+
     &.complexityRunning {
       border-bottom-right-radius: 0;
     }
-
-    transition:
-      all linear 100ms,
-      background-color ease-in-out 150ms;
 
     &.complexity-background-status-danger {
       background-color: var(--progress-bar--danger-fill-background-color);
