@@ -41,6 +41,7 @@ import type { ContextualHelpProps } from "@/components/ContextualHelp";
 import type { PopoverProps } from "@/components/Popover";
 import type { ContextMenuSectionProps } from "@/components/ContextMenu/components/ContextMenuSection";
 import type { PasswordCreationFieldProps } from "src/components/PasswordCreationField";
+import type { OverlayTriggerProps } from "@/components/OverlayTrigger";
 
 export * from "./types";
 
@@ -55,6 +56,7 @@ export interface FlowComponentPropsTypes {
   Content: ContentProps;
   ContextMenu: ContextMenuProps;
   ContextMenuSection: ContextMenuSectionProps;
+  ContextMenuTrigger: OverlayTriggerProps;
   ContextualHelp: ContextualHelpProps;
   CopyButton: CopyButtonProps;
   CounterBadge: CounterBadgeProps;
@@ -103,6 +105,7 @@ const propsContextSupportingComponentsMap: Record<
   Content: true,
   ContextMenu: true,
   ContextMenuSection: true,
+  ContextMenuTrigger: true,
   ContextualHelp: true,
   CopyButton: true,
   CounterBadge: true,

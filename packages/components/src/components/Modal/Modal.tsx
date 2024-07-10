@@ -20,7 +20,7 @@ export interface ModalProps
     FlowComponentProps,
     PropsWithClassName {
   /** @default "s" */
-  size?: "s" | "m" | "l";
+  size?: "s" | "m";
   offCanvas?: boolean;
   controller?: OverlayController;
   slot?: string;

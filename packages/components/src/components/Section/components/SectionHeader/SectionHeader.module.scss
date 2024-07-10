@@ -1,0 +1,13 @@
+.sectionHeader {
+  display: flex;
+  gap: var(--section-header--heading-to-actions-spacing);
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+
+  .actions {
+    display: flex;
+    gap: var(--section-header--action-to-action-spacing);
+    margin-inline-start: auto;
+  }
+}
