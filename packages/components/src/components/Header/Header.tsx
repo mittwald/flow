@@ -9,6 +9,7 @@ export interface HeaderProps
   extends PropsWithChildren,
     PropsWithElementType<"div" | "header" | "span">,
     FlowComponentProps {
+  /** @internal */
   renderSectionHeader?: boolean;
 }
 
