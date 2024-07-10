@@ -27,7 +27,6 @@ import Button from "@/components/Button";
 import { Action, type ActionFn } from "@/components/Action";
 import FieldLabel from "@/components/PasswordCreationField/components/FieldLabel/FieldLabel";
 import { IconHide, IconShow } from "@/components/Icon/components/icons";
-import { type ResolvedPolicyValidationResult } from "@/components/PasswordCreationField/lib/getStatusFromPolicyValidationResult";
 import getStatusTextFromPolicyValidationResult from "@/components/PasswordCreationField/lib/getStatusTextFromPolicyValidationResult";
 import locales from "./locales/*.locale.json";
 import type { LocalizedStrings } from "react-aria";
@@ -38,6 +37,8 @@ import { FieldError } from "@/components/FieldError";
 import FieldDescription from "@/components/FieldDescription";
 import PromiseQueue from "p-queue";
 import ComplexityIndicator from "@/components/PasswordCreationField/components/ComplexityIndicator/ComplexityIndicator";
+import { type PolicyValidationResult } from "@mittwald/password-tools-js/policy";
+import { type RuleValidationResult } from "@mittwald/password-tools-js/rules";
 
 export const defaultPasswordCreationPolicy = Policy.fromDeclaration({
   minComplexity: 3,
@@ -74,8 +75,10 @@ export interface PasswordCreationFieldProps
   validationPolicy?: Policy;
 }
 
-export interface PolicyValidationResult extends ResolvedPolicyValidationResult {
+export interface ResolvedPolicyValidationResult extends PolicyValidationResult {
   isEmptyValueValidation: boolean;
+  isValid: boolean;
+  ruleResults: RuleValidationResult[];
 }
 
 export const PasswordCreationField = flowComponent(
@@ -116,7 +119,7 @@ export const PasswordCreationField = flowComponent(
     const [isPasswordRevealed, setIsPasswordRevealed] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [policyValidationResult, setPolicyValidationResult] = useState<
-      PolicyValidationResult | undefined
+      ResolvedPolicyValidationResult | undefined
     >(undefined);
 
     const statusTextFromValidationResult =
