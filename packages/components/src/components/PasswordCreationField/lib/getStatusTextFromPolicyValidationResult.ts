@@ -1,5 +1,5 @@
-import type { ResolvedPolicyValidationResult } from "@/components/PasswordCreationField/lib/getStatusFromPolicyValidationResult";
 import { type RuleValidationResult } from "@mittwald/password-tools-js/rules";
+import type { ResolvedPolicyValidationResult } from "@/components/PasswordCreationField/PasswordCreationField";
 
 /**
  * @param result

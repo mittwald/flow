@@ -1,11 +1,5 @@
 import type { Status } from "@/lib/types/props";
-import { type PolicyValidationResult } from "@mittwald/password-tools-js/policy";
-import { type RuleValidationResult } from "@mittwald/password-tools-js/rules";
-
-export interface ResolvedPolicyValidationResult extends PolicyValidationResult {
-  isValid: boolean;
-  ruleResults: RuleValidationResult[];
-}
+import type { ResolvedPolicyValidationResult } from "@/components/PasswordCreationField/PasswordCreationField";
 
 /**
  * @param result

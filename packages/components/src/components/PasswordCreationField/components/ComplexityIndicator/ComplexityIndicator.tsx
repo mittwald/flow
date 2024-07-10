@@ -3,11 +3,11 @@ import React from "react";
 import styles from "./ComplexityIndicator.module.scss";
 import { getStatusFromPolicyValidationResult } from "@/components/PasswordCreationField/lib/getStatusFromPolicyValidationResult";
 import clsx from "clsx";
-import type { PolicyValidationResult } from "@/components/PasswordCreationField/PasswordCreationField";
+import type { ResolvedPolicyValidationResult } from "@/components/PasswordCreationField/PasswordCreationField";
 
 export interface ComplexityIndicatorProps {
   isLoading: boolean;
-  policyValidationResult?: PolicyValidationResult;
+  policyValidationResult?: ResolvedPolicyValidationResult;
 }
 
 /**

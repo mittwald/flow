@@ -15,10 +15,10 @@ import type { LocalizedStrings } from "react-aria";
 import { useLocalizedStringFormatter } from "react-aria";
 import generateValidationTranslation from "@/components/PasswordCreationField/lib/generateValidationTranslation";
 import type * as Aria from "react-aria-components";
-import type { PolicyValidationResult } from "@/components/PasswordCreationField/PasswordCreationField";
+import type { ResolvedPolicyValidationResult } from "@/components/PasswordCreationField/PasswordCreationField";
 
 export type PasswordFieldLabelProps = PropsWithChildren<{
-  policyValidationResult?: PolicyValidationResult;
+  policyValidationResult?: ResolvedPolicyValidationResult;
   onGeneratePasswordAction: ActionFn;
   locales?: LocalizedStrings;
 }> &
