@@ -46,7 +46,8 @@
   }
 
   /* Invalid */
-  &[data-invalid] {
+  &[data-invalid],
+  [data-invalid] & {
     border-color: var(--form-control--border-color--invalid);
     background-color: var(--form-control--background-color--invalid);
   }
@@ -62,7 +63,8 @@
   }
 
   /* Selected */
-  &[data-selected] {
+  &[data-selected],
+  [data-selected] & {
     color: var(--form-control--content-color--selected);
     border-color: var(--form-control--border-color--selected);
     background-color: var(--form-control--background-color--selected);

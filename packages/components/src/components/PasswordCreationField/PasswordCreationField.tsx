@@ -220,18 +220,12 @@ export const PasswordCreationField = flowComponent(
       setIsPasswordRevealed((old) => !old);
     };
 
-    const rootClassName = clsx(
-      className,
-      formFieldStyles.formField,
-      styles.passwordField,
-    );
-
     const propsContext: PropsContext = {
       Button: {
         tunnelId: "button",
         size: "m",
         variant: "plain",
-        color: "dark",
+        color: "secondary",
         isDisabled: isDisabled,
         className: dynamic((p) => clsx(p.className, styles.button)),
       },
@@ -269,6 +263,8 @@ export const PasswordCreationField = flowComponent(
       },
     };
 
+    const rootClassName = clsx(className, formFieldStyles.formField);
+
     return (
       <ClearPropsContext>
         <TunnelProvider>
@@ -299,7 +295,7 @@ export const PasswordCreationField = flowComponent(
                     slot="button"
                     size="m"
                     variant="plain"
-                    color="dark"
+                    color="secondary"
                     aria-label="Show password in plaintext"
                   >
                     {isPasswordRevealed ? <IconShow /> : <IconHide />}
