@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.171](https://github.com/mittwald/flow/compare/0.1.0-alpha.170...0.1.0-alpha.171) (2024-07-10)
+
+### Bug Fixes
+
+- **ContextMenu:** merge section props in parent context
+  ([0cd0dd9](https://github.com/mittwald/flow/commit/0cd0dd9a47e193d41df4dcb8c818980a4806d28d))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.170](https://github.com/mittwald/flow/compare/0.1.0-alpha.169...0.1.0-alpha.170) (2024-07-10)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
