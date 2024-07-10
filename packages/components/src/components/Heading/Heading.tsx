@@ -38,7 +38,7 @@ export const Heading = flowComponent("Heading", (props) => {
       className: styles.icon,
     },
     StatusBadge: {
-      wrapWith: <div className={styles.headingContent}></div>,
+      wrapWith: <div className={styles.headingContent} />,
     },
   };
 
