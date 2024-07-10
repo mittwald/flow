@@ -5,23 +5,25 @@ import ActionGroup from "@mittwald/flow-react-components/ActionGroup";
 import Button from "@mittwald/flow-react-components/Button";
 import Heading from "@mittwald/flow-react-components/Heading";
 import Action from "@mittwald/flow-react-components/Action";
+import { IconEmail } from "@mittwald/flow-react-components/Icons";
 
 <StaticModal>
   <div className="flow--modal--content">
-    <Heading>Organisation anlegen</Heading>
+    <Heading levelVisual={4}>
+      <IconEmail />
+      E-Mail-Adresse anlegen
+    </Heading>
     <Text>
-      Eine Organisation kannst du dir wie ein Unternehmen
-      vorstellen. An diesem Ort verwaltest du deine
-      Mitarbeiter, Zahlungsmodalitäten und kannst deine
-      Rechnungen einsehen.
+      Erstelle dir eine E-Mail-Adresse mit Postfach
+      Speicherplatz.
     </Text>
-    <TextField>
-      <Label>Organisationsname</Label>
+    <TextField type="email">
+      <Label>E-Mail-Adresse</Label>
     </TextField>
   </div>
   <ActionGroup className="flow--modal--action-group">
     <Action closeOverlay="Modal">
-      <Button color="accent">Organisation anlegen</Button>
+      <Button color="accent">E-Mail-Adresse anlegen</Button>
       <Button variant="soft" color="secondary">
         Abbrechen
       </Button>

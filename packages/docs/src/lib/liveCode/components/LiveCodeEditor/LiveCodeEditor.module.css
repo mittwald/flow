@@ -50,6 +50,7 @@
     --modal--size--s: auto;
     --modal--size--m: auto;
     --modal--size--l: auto;
+    box-shadow: var(--shadow--overlay);
   }
 }
 
