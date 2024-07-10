@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.172](https://github.com/mittwald/flow/compare/0.1.0-alpha.171...0.1.0-alpha.172) (2024-07-10)
+
+### Features
+
+- **Section:** add actions to header
+  ([#582](https://github.com/mittwald/flow/issues/582))
+  ([a3174f5](https://github.com/mittwald/flow/commit/a3174f599aa9a199b8a6a93df7405e374885370f))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.171](https://github.com/mittwald/flow/compare/0.1.0-alpha.170...0.1.0-alpha.171) (2024-07-10)
 
 **Note:** Version bump only for package @mittwald/flow-design-tokens
