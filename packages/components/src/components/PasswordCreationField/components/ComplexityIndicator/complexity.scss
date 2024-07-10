@@ -1,0 +1,10 @@
+$animation-background-color-change: linear 100ms;
+$animation-width-responsiveness: ease-in-out 200ms;
+
+@mixin animation-in($property) {
+  transition: #{$property} ease-out 100ms;
+}
+
+@mixin animation-out($property) {
+  transition: #{$property} ease-in 80ms;
+}
