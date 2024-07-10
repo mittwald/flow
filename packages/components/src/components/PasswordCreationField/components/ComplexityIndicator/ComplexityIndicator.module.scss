@@ -1,20 +1,21 @@
 @use "complexity";
 
 .complexityContainer {
-  box-shadow: 0 -1px 0 var(--progress-bar--bar-border-color);
   width: 100%;
   position: absolute;
   bottom: 0;
   left: 0;
   height: 6px;
   overflow: hidden;
+  border-top: 1px solid var(--progress-bar--bar-border-color);
 
   @include complexity.animation-in("height");
+  @include complexity.animation-in("border-top-color");
 
   &.complexityContainerHide {
-    @include complexity.animation-out("height");
+    transition-duration: #{complexity.$animation-out-duration};
     height: 0;
-    box-shadow: unset;
+    border-top-color: transparent;
     overflow: hidden;
   }
 
