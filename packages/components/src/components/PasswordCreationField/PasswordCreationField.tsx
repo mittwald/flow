@@ -118,9 +118,17 @@ export const PasswordCreationField = flowComponent(
 
     const [isPasswordRevealed, setIsPasswordRevealed] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const [policyValidationResult, setPolicyValidationResult] = useState<
-      ResolvedPolicyValidationResult | undefined
-    >(undefined);
+    const [policyValidationResult, setPolicyValidationResult] =
+      useState<ResolvedPolicyValidationResult>({
+        isEmptyValueValidation: true,
+        isValid: false,
+        complexity: {
+          min: validationPolicy.minComplexity,
+          actual: 4,
+          warning: null,
+        },
+        ruleResults: [],
+      });
 
     const statusTextFromValidationResult =
       getStatusTextFromPolicyValidationResult(policyValidationResult);

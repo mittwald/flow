@@ -5,7 +5,7 @@
   bottom: 0;
   left: 0;
   height: 6px;
-  transition: height linear 100ms;
+  transition: height ease-out 15ms;
   overflow: hidden;
 
   &.complexityContainerHide {
