@@ -17,14 +17,21 @@ export const SectionHeader: FC<SectionHeaderProps> = (props) => {
   const propsContext: PropsContext = {
     Switch: {
       labelPosition: "leading",
+      tunnelId: "actions",
     },
     Button: {
       size: "s",
+      tunnelId: "actions",
+    },
+    ContextMenuTrigger: {
+      tunnelId: "actions",
+      Button: {
+        tunnelId: null,
+      },
     },
     Heading: {
       level: 2,
       className: styles.heading,
-      tunnelId: "heading",
     },
   };
 
@@ -32,8 +39,10 @@ export const SectionHeader: FC<SectionHeaderProps> = (props) => {
     <header className={rootClassName}>
       <PropsContextProvider props={propsContext}>
         <TunnelProvider>
-          <TunnelExit id="heading" />
-          <div className={styles.actions}>{children}</div>
+          {children}
+          <div className={styles.actions}>
+            <TunnelExit id="actions" />
+          </div>
         </TunnelProvider>
       </PropsContextProvider>
     </header>
