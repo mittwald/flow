@@ -118,17 +118,19 @@ export const PasswordCreationField = flowComponent(
 
     const [isPasswordRevealed, setIsPasswordRevealed] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+
+    const initialValidationState: ResolvedPolicyValidationResult = {
+      isEmptyValueValidation: true,
+      isValid: false,
+      complexity: {
+        min: validationPolicy.minComplexity,
+        actual: 4,
+        warning: null,
+      },
+      ruleResults: [],
+    };
     const [policyValidationResult, setPolicyValidationResult] =
-      useState<ResolvedPolicyValidationResult>({
-        isEmptyValueValidation: true,
-        isValid: false,
-        complexity: {
-          min: validationPolicy.minComplexity,
-          actual: 4,
-          warning: null,
-        },
-        ruleResults: [],
-      });
+      useState<ResolvedPolicyValidationResult>(initialValidationState);
 
     const statusTextFromValidationResult =
       getStatusTextFromPolicyValidationResult(policyValidationResult);
@@ -166,13 +168,7 @@ export const PasswordCreationField = flowComponent(
               // on empty values assume the state as valid but keep the single rule validations
               // to show the result in the info box without showing a complete failed validation
               return {
-                isEmptyValueValidation: true,
-                isValid: false,
-                complexity: {
-                  min: validationPolicy.minComplexity,
-                  actual: 4,
-                  warning: null,
-                },
+                ...initialValidationState,
                 ruleResults,
               };
             }
