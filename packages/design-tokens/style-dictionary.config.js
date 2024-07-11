@@ -1,15 +1,16 @@
-const StyleDictionary = require("style-dictionary");
-const yaml = require("js-yaml");
+import StyleDictionary from "style-dictionary";
+import yaml from "js-yaml";
 
 StyleDictionary.registerParser({
   pattern: /\.yml$/,
-  parse: ({ contents }) => yaml.load(contents),
+  name: "yml-parser",
+  parser: ({ contents }) => yaml.load(contents),
 });
 
 StyleDictionary.registerTransform({
   type: "name",
-  name: `name/flow-css-var`,
-  transformer: (token, options) => {
+  name: "name/flow-css-var",
+  transform: (token, options) => {
     return [options.prefix]
       .concat(token.path)
       .filter((p) => !!p)
@@ -17,8 +18,9 @@ StyleDictionary.registerTransform({
   },
 });
 
-module.exports = {
-  source: [`src/**/*.yml`],
+export default {
+  parsers: ["yml-parser"],
+  source: ["src/**/*.yml"],
   platforms: {
     css: {
       transforms: [
@@ -27,7 +29,6 @@ module.exports = {
         "attribute/cti",
         "name/flow-css-var", // here is the customization
         "time/seconds",
-        "content/icon",
         "size/rem",
         "color/css",
       ],

@@ -12,7 +12,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "run style-dictionary build -c style-dictionary.config.cjs"
+    "build": "run style-dictionary build -c style-dictionary.config.js"
   },
   "devDependencies": {
     "@types/js-yaml": "^4.0.9",
