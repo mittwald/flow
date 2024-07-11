@@ -53,15 +53,11 @@ export const ListItem = (props: Props) => {
     },
     Heading: {
       className: styles.heading,
-      level: 4,
+      level: 5,
       tunnelId: "title",
     },
     Text: {
       className: styles.text,
-      tunnelId: "title",
-    },
-    StatusBadge: {
-      className: styles.statusBadge,
       tunnelId: "title",
     },
     Link: {

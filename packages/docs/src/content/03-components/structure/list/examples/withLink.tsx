@@ -31,14 +31,16 @@ import StatusBadge from "@mittwald/flow-react-components/StatusBadge";
             <IconSubdomain />
           )}
         </Avatar>
-        <Heading>{domain.hostname}</Heading>
-        {domain.verified ? (
-          <Text>{domain.type}</Text>
-        ) : (
-          <StatusBadge status="warning">
-            Nicht verifiziert
-          </StatusBadge>
-        )}
+        <Heading>
+          {domain.hostname}
+          {!domain.verified && (
+            <StatusBadge status="warning">
+              Not verified
+            </StatusBadge>
+          )}
+        </Heading>
+        <Text>{domain.type}</Text>
+
         <ContextMenu>
           <MenuItem>Details anzeigen</MenuItem>
           <MenuItem>Löschen</MenuItem>
