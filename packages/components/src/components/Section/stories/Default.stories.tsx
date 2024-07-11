@@ -15,6 +15,8 @@ import {
 } from "@/components/Icon/components/icons";
 import { Button } from "@/components/Button";
 import { dummyText } from "@/lib/dev/dummyText";
+import { Action } from "@/components/Action";
+import { Modal } from "@/components/Modal";
 
 const meta: Meta<typeof Section> = {
   title: "Structure/Section",
@@ -91,11 +93,20 @@ export const WithHeaderContent: Story = {
             My Project with a looooooooooong name
             <StatusBadge status="danger">Deactivated</StatusBadge>
           </Heading>
-
-          <Button variant="soft" color="secondary">
-            Start database migration
-          </Button>
-          <Button color="accent">Activate</Button>
+          <Action>
+            <Modal slot="actionConfirm">
+              <Heading>Confirmation Modal</Heading>
+            </Modal>
+            <Button variant="soft" color="secondary">
+              Start database migration
+            </Button>
+          </Action>
+          <Action>
+            <Modal slot="actionConfirm">
+              <Heading>Confirmation Modal</Heading>
+            </Modal>
+            <Button color="accent">Activate</Button>
+          </Action>
         </Header>
         <Text>{dummyText.medium}</Text>
       </Section>
