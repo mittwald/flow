@@ -35,7 +35,7 @@ import StatusBadge from "@mittwald/flow-react-components/StatusBadge";
           {domain.hostname}
           {!domain.verified && (
             <StatusBadge status="warning">
-              Not verified
+              Unverifiziert
             </StatusBadge>
           )}
         </Heading>

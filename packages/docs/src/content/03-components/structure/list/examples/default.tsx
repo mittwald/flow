@@ -43,7 +43,7 @@ import MenuItem from "@mittwald/flow-react-components/MenuItem";
           {domain.hostname}
           {!domain.verified && (
             <StatusBadge status="warning">
-              Not verified
+              Unverifiziert
             </StatusBadge>
           )}
         </Heading>
