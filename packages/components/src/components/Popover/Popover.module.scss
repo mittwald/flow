@@ -11,7 +11,7 @@
   border-color: var(--popover--border-color);
   max-width: calc(100% - calc(var(--popover--popover-to-trigger-spacing) * 2));
 
-  .content {
+  :where(.content) {
     overflow-y: auto;
     padding: var(--popover--padding);
 
