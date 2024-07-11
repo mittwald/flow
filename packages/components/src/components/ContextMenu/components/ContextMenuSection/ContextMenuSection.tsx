@@ -22,7 +22,7 @@ export const ContextMenuSection = flowComponent(
 
     return (
       <Aria.Section className={styles.section}>
-        <PropsContextProvider props={propsContext}>
+        <PropsContextProvider props={propsContext} mergeInParentContext>
           {children}
         </PropsContextProvider>
       </Aria.Section>

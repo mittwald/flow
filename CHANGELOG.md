@@ -3,6 +3,79 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.173](https://github.com/mittwald/flow/compare/0.1.0-alpha.172...0.1.0-alpha.173) (2024-07-11)
+
+### Features
+
+- **Section:** add action to section header tunnel
+  ([2b1a2ce](https://github.com/mittwald/flow/commit/2b1a2ce5a1ff91f68bbdd8f82cd5b52f361d1588))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.172](https://github.com/mittwald/flow/compare/0.1.0-alpha.171...0.1.0-alpha.172) (2024-07-10)
+
+### Features
+
+- **Section:** add actions to header
+  ([#582](https://github.com/mittwald/flow/issues/582))
+  ([a3174f5](https://github.com/mittwald/flow/commit/a3174f599aa9a199b8a6a93df7405e374885370f))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.171](https://github.com/mittwald/flow/compare/0.1.0-alpha.170...0.1.0-alpha.171) (2024-07-10)
+
+### Bug Fixes
+
+- **ContextMenu:** merge section props in parent context
+  ([0cd0dd9](https://github.com/mittwald/flow/commit/0cd0dd9a47e193d41df4dcb8c818980a4806d28d))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.170](https://github.com/mittwald/flow/compare/0.1.0-alpha.169...0.1.0-alpha.170) (2024-07-10)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.169](https://github.com/mittwald/flow/compare/0.1.0-alpha.168...0.1.0-alpha.169) (2024-07-10)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.168](https://github.com/mittwald/flow/compare/0.1.0-alpha.167...0.1.0-alpha.168) (2024-07-10)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.167](https://github.com/mittwald/flow/compare/0.1.0-alpha.166...0.1.0-alpha.167) (2024-07-09)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.166](https://github.com/mittwald/flow/compare/v0.1.0-alpha.165...0.1.0-alpha.166) (2024-07-05)
 
 **Note:** Version bump only for package @mittwald/flow-project
