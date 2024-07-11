@@ -4,13 +4,7 @@ import React from "react";
 import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
 import { usePromise } from "@mittwald/react-use-promise";
-import {
-  ListFilter,
-  ListItem,
-  ListItemView,
-  ListLoaderAsync,
-  ListSorting,
-} from "@/components/List";
+import { ListItem, ListItemView, ListLoaderAsync } from "@/components/List";
 import type { AsyncDataLoader } from "@/components/List/model/loading/types";
 import { Avatar } from "@/components/Avatar";
 import { ContextMenu, MenuItem } from "@/components/ContextMenu";
@@ -18,6 +12,7 @@ import { IconDomain, IconSubdomain } from "@/components/Icon/components/icons";
 import StatusBadge from "@/components/StatusBadge";
 import type { Domain } from "../testData/domainApi";
 import { getDomains, getTypes } from "../testData/domainApi";
+import { typedList } from "@/components/List/typedList";
 
 const loadDomains: AsyncDataLoader<Domain> = async (opt) => {
   const response = await getDomains({
@@ -46,21 +41,24 @@ const meta: Meta<typeof List> = {
   render: () => {
     const availableTypes = usePromise(getTypes, []);
 
+    const Domains = typedList<Domain>();
+
     return (
-      <List batchSize={5}>
-        <ListLoaderAsync<Domain> manualPagination manualSorting={false}>
+      <Domains.List batchSize={5}>
+        <Domains.LoaderAsync manualPagination manualSorting={false}>
           {loadDomains}
-        </ListLoaderAsync>
-        <ListFilter<Domain>
-          property="type"
+        </Domains.LoaderAsync>
+        <Domains.Filter
           values={availableTypes}
-          mode="some"
-          name="Type"
+          property="type"
+          mode="all"
+          name="Typ"
         />
-        <ListSorting<Domain> property="type" name="Type" defaultEnabled />
-        <ListSorting<Domain> property="domain" name="Domain" />
-        <ListSorting<Domain> property="tld" name="TLD" />
-        <ListItemView<Domain>>
+        <Domains.Sorting property="domain" name="A-Z" />
+        <Domains.Sorting property="domain" name="Z-A" direction="desc" />
+        <Domains.Sorting property="type" name="Typ" defaultEnabled />
+        <Domains.Sorting property="tld" name="TLD" />
+        <Domains.ItemView>
           {(domain) => (
             <ListItem>
               <Avatar variant={domain.type === "Domain" ? 1 : 2}>
@@ -80,8 +78,8 @@ const meta: Meta<typeof List> = {
               </ContextMenu>
             </ListItem>
           )}
-        </ListItemView>
-      </List>
+        </Domains.ItemView>
+      </Domains.List>
     );
   },
 };

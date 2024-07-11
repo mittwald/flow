@@ -1,7 +1,7 @@
 import type { Column, ColumnDef, SortDirection } from "@tanstack/react-table";
 import type List from "@/components/List/model/List";
-import type { PropertyName } from "@/components/List/model/item/Item";
 import type { SortingShape } from "@/components/List/model/sorting/types";
+import type { PropertyName } from "@/components/List/model/types";
 
 export class Sorting<T> {
   public readonly list: List<T>;
@@ -23,9 +23,8 @@ export class Sorting<T> {
   }
 
   public isSorted(): boolean {
-    return (
-      this.list.reactTable.getTableColumn(this.property).getIsSorted() !== false
-    );
+    const col = this.getTableColumn();
+    return col.getIsSorted() == this.direction;
   }
 
   public getTableColumn(): Column<T> {
@@ -40,5 +39,9 @@ export class Sorting<T> {
 
   public clear(): void {
     this.list.reactTable.getTableColumn(this.property).clearSorting();
+  }
+
+  public get id(): string {
+    return `${this.getTableColumn().id}:${this.direction}`;
   }
 }

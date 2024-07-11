@@ -1,5 +1,6 @@
 import { List } from "./List";
 export * from "./List";
+export * from "./typedList";
 export * from "./components/Header/ListFilter";
 export * from "./components/Header/ListSorting";
 export * from "./components/Items/ListItemView";

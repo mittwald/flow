@@ -3,7 +3,6 @@ import React from "react";
 import type { Filter } from "@/components/List/model/filter/Filter";
 import { Button } from "@/components/Button";
 import { Text } from "@/components/Text";
-import type { AnyData } from "@/components/List/model/item/types";
 import {
   ContextMenu,
   ContextMenuTrigger,
@@ -12,19 +11,21 @@ import {
 import { IconChevronDown } from "@/components/Icon/components/icons";
 
 interface Props {
-  filter: Filter<AnyData>;
+  filter: Filter<never, never, never>;
 }
 
 export const FilterPicker: FC<Props> = (props) => {
   const { filter } = props;
 
-  const items = filter.values.map((v) => (
+  const { values, mode, name, property } = filter;
+
+  const items = values.map((v) => (
     <MenuItem key={filter.getValueId(v)} id={String(v)}>
       {String(v)}
     </MenuItem>
   ));
 
-  const activeFilterValues = filter.values
+  const activeFilterValues = values
     .filter((v) => filter.isValueActive(v))
     .map((v) => String(v));
 
@@ -35,12 +36,12 @@ export const FilterPicker: FC<Props> = (props) => {
   return (
     <ContextMenuTrigger>
       <Button variant="soft" size="s" color="secondary">
-        <Text>{filter.name ?? filter.property}</Text>
+        <Text>{name ?? property}</Text>
         <IconChevronDown />
       </Button>
       <ContextMenu
         onAction={handleFilterValueClick}
-        selectionMode="multiple"
+        selectionMode={mode === "one" ? "single" : "multiple"}
         selectedKeys={activeFilterValues}
       >
         {items}

@@ -15,11 +15,11 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import type List from "@/components/List/model/List";
-import type { PropertyName } from "@/components/List/model/item/Item";
 import invariant from "invariant";
 import { useLocalObservable } from "mobx-react-lite";
 import { runInAction } from "mobx";
 import { useAutorunEffect } from "@/lib/mobx/useAutorunEffect";
+import type { PropertyName } from "@/components/List/model/types";
 
 export class ReactTable<T> {
   public readonly list: List<T>;

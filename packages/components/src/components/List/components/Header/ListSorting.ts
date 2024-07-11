@@ -1,9 +1,8 @@
 import type { SortingShape } from "@/components/List/model/sorting/types";
+import type { ComponentType } from "react";
 
-interface Props<T> extends SortingShape<T> {
-  defaultEnabled?: boolean;
-}
+type Props<T> = SortingShape<T>;
 
-export function ListSorting<T = never>(ignoredProps: Props<T>) {
-  return null;
-}
+export const ListSorting = <T>(ignoredProps: Props<T>) => null;
+
+export const TypedListSorting = <T>() => ListSorting as ComponentType<Props<T>>;

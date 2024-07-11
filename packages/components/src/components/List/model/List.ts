@@ -1,18 +1,15 @@
 import { ItemCollection } from "@/components/List/model/item/ItemCollection";
 import { BatchesController } from "@/components/List/model/pagination/BatchesController";
-import type {
-  PropertyName,
-  RenderItemFn,
-} from "@/components/List/model/item/Item";
 import { Filter } from "./filter/Filter";
 import { Sorting } from "@/components/List/model/sorting/Sorting";
 import ReactTable from "@/components/List/model/ReactTable";
 import type { ListShape } from "@/components/List/model/types";
 import { IncrementalLoader } from "@/components/List/model/loading/IncrementalLoader";
 import invariant from "invariant";
+import type { RenderItemFn } from "@/components/List/model/item/types";
 
 export class List<T> {
-  public readonly filters: Filter<T>[];
+  public readonly filters: Filter<T, never, never>[];
   public readonly sorting: Sorting<T>[];
   public readonly items: ItemCollection<T>;
   public readonly render?: RenderItemFn<T>;
@@ -47,9 +44,9 @@ export class List<T> {
     return this.filters.some((f) => f.isActive());
   }
 
-  public getSorting(property: PropertyName<T>): Sorting<T> {
-    const sorting = this.sorting.find((s) => s.property === property);
-    invariant(!!sorting, `Could not get Sorting (property: ${property})`);
+  public getSorting(id: string): Sorting<T> {
+    const sorting = this.sorting.find((s) => s.id === id);
+    invariant(!!sorting, `Could not get Sorting (ID: ${id})`);
     return sorting;
   }
 
