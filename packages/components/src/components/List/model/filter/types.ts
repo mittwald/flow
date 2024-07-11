@@ -1,16 +1,22 @@
-import type { PropertyName } from "@/components/List/model/item/Item";
+import type { ItemType } from "@/lib/types/array";
+import type {
+  PropertyName,
+  PropertyValue,
+} from "@/components/List/model/types";
 
 export type FilterMode = "all" | "some" | "one";
 
-export type FilterMatcher = (
-  filterValue: unknown,
-  property: unknown,
+export type FilterValue<T, P> = ItemType<NonNullable<PropertyValue<T, P>>>;
+
+export type FilterMatcher<T, P, TMatcherValue> = (
+  filterBy: FilterValue<T, P>,
+  filterFrom: TMatcherValue[],
 ) => boolean;
 
-export interface FilterShape<T> {
-  property: PropertyName<T>;
+export interface FilterShape<T, TProp extends PropertyName<T>, TMatcherValue> {
+  property: TProp;
   mode?: FilterMode;
-  matcher?: FilterMatcher;
-  values?: unknown[];
+  matcher?: FilterMatcher<T, TProp, TMatcherValue>;
+  values?: TMatcherValue[];
   name?: string;
 }

@@ -1,9 +1,11 @@
-import type { RenderItemFn } from "@/components/List/model/item/Item";
+import type { ComponentType } from "react";
+import type { RenderItemFn } from "@/components/List/model/item/types";
 
-interface Props<T> {
+type Props<T> = {} & {
   children: RenderItemFn<T>;
-}
+};
 
-export function ListItemView<T = never>(ignoredProps: Props<T>) {
-  return null;
-}
+export const ListItemView = <T>(ignoredProps: Props<T>) => null;
+
+export const TypedListItemView = <T>() =>
+  ListItemView as ComponentType<Props<T>>;

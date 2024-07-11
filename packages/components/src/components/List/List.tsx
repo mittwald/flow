@@ -7,17 +7,16 @@ import styles from "./List.module.css";
 import ListModel from "@/components/List/model/List";
 import { ItemList } from "@/components/List/components/Items/ItemList";
 import { deepFilterByType, deepFindOfType } from "@/lib/react/deepFindOfType";
-import type { RenderItemFn } from "@/components/List/model/item/Item";
 import { ListLoaderAsync } from "@/components/List/components/ListLoaderAsync";
 import { ListFilter } from "@/components/List/components/Header/ListFilter";
 import { ListSorting } from "@/components/List/components/Header/ListSorting";
 import { ListItemView } from "@/components/List/components/Items/ListItemView";
-import type { AnyData } from "@/components/List/model/item/types";
 import { ListStaticData } from "@/components/List/components/ListStaticData";
 import { ListLoaderAsyncResource } from "@/components/List/components/ListLoaderAsyncResource";
 import type { IncrementalLoaderShape } from "@/components/List/model/loading/types";
 import Footer from "./components/Footer/Footer";
 import { FallbackRenderer } from "@/components/List/components/Items/ListItem/FallbackRenderer";
+import type { RenderItemFn } from "@/components/List/model/item/types";
 
 interface Props extends PropsWithChildren {
   batchSize?: number;
@@ -26,14 +25,17 @@ interface Props extends PropsWithChildren {
 export function List(props: Props) {
   const { children, batchSize, ...restShape } = props;
 
-  const listLoaderAsync = deepFindOfType(children, ListLoaderAsync)?.props;
+  const listLoaderAsync = deepFindOfType(
+    children,
+    ListLoaderAsync<never>,
+  )?.props;
   const listLoaderAsyncResource = deepFindOfType(
     children,
-    ListLoaderAsyncResource,
+    ListLoaderAsyncResource<never>,
   )?.props;
-  const listStaticData = deepFindOfType(children, ListStaticData)?.props;
+  const listStaticData = deepFindOfType(children, ListStaticData<never>)?.props;
 
-  const loaderShape: IncrementalLoaderShape<AnyData> = {
+  const loaderShape: IncrementalLoaderShape<never> = {
     source: listLoaderAsync
       ? {
           ...listLoaderAsync,
@@ -51,14 +53,16 @@ export function List(props: Props) {
           : undefined,
   };
 
-  const fallbackRenderItemFn: RenderItemFn<AnyData> = (data) => (
+  const fallbackRenderItemFn: RenderItemFn<never> = (data) => (
     <FallbackRenderer data={data} />
   );
 
-  const listModel = ListModel.useNew({
+  const listModel = ListModel.useNew<never>({
     loader: loaderShape,
-    filters: deepFilterByType(children, ListFilter).map((f) => f.props),
-    sorting: deepFilterByType(children, ListSorting).map((s) => s.props),
+    filters: deepFilterByType(children, ListFilter<never, never, never>).map(
+      (f) => f.props,
+    ),
+    sorting: deepFilterByType(children, ListSorting<never>).map((s) => s.props),
     render:
       deepFindOfType(children, ListItemView)?.props.children ??
       fallbackRenderItemFn,

@@ -1,9 +1,6 @@
-import List, {
-  ListFilter,
+import {
   ListItem,
-  ListItemView,
-  ListSorting,
-  ListStaticData,
+  typedList,
 } from "@mittwald/flow-react-components/List";
 import {
   type Domain,
@@ -20,40 +17,48 @@ import {
 import StatusBadge from "@mittwald/flow-react-components/StatusBadge";
 import MenuItem from "@mittwald/flow-react-components/MenuItem";
 
-<List batchSize={5}>
-  <ListStaticData data={domains} />
-  <ListFilter<Domain>
-    property="type"
-    mode="some"
-    name="Type"
-  />
-  <ListSorting<Domain> property="domain" name="Domain" />
-  <ListSorting<Domain> property="type" name="Type" />
-  <ListItemView<Domain>>
-    {(domain) => (
-      <ListItem>
-        <Avatar variant={domain.type === "Domain" ? 1 : 2}>
-          {domain.type === "Domain" ? (
-            <IconDomain />
-          ) : (
-            <IconSubdomain />
-          )}
-        </Avatar>
-        <Heading>
-          {domain.hostname}
-          {!domain.verified && (
-            <StatusBadge status="warning">
-              Unverifiziert
-            </StatusBadge>
-          )}
-        </Heading>
-        <Text>{domain.type}</Text>
+export default () => {
+  const DomainList = typedList<Domain>();
 
-        <ContextMenu>
-          <MenuItem>Details anzeigen</MenuItem>
-          <MenuItem>Löschen</MenuItem>
-        </ContextMenu>
-      </ListItem>
-    )}
-  </ListItemView>
-</List>;
+  return (
+    <DomainList.List batchSize={5}>
+      <DomainList.StaticData data={domains} />
+      <DomainList.Filter
+        property="type"
+        mode="some"
+        name="Type"
+      />
+      <DomainList.Sorting property="domain" name="Domain" />
+      <DomainList.Sorting property="type" name="Type" />
+      <DomainList.ItemView>
+        {(domain) => (
+          <ListItem>
+            <Avatar
+              variant={domain.type === "Domain" ? 1 : 2}
+            >
+              {domain.type === "Domain" ? (
+                <IconDomain />
+              ) : (
+                <IconSubdomain />
+              )}
+            </Avatar>
+            <Heading>
+              {domain.hostname}
+              {!domain.verified && (
+                <StatusBadge status="warning">
+                  Unverifiziert
+                </StatusBadge>
+              )}
+            </Heading>
+            <Text>{domain.type}</Text>
+
+            <ContextMenu>
+              <MenuItem>Details anzeigen</MenuItem>
+              <MenuItem>Löschen</MenuItem>
+            </ContextMenu>
+          </ListItem>
+        )}
+      </DomainList.ItemView>
+    </DomainList.List>
+  );
+};

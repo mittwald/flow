@@ -13,7 +13,7 @@ export const SortingPicker: FC = () => {
   const list = useList();
 
   const pickerItems = list.sorting.map((s) => (
-    <SortingPickerItem sorting={s} key={s.getTableColumn().id} />
+    <SortingPickerItem sorting={s} key={s.id} />
   ));
 
   if (list.sorting.length === 0) {
@@ -47,9 +47,9 @@ export const SortingPicker: FC = () => {
       </Button>
       <ContextMenu
         selectionMode="single"
-        selectedKeys={enabledSorting ? [enabledSorting.property] : []}
-        onAction={(columnId) => {
-          list.getSorting(String(columnId)).enable();
+        selectedKeys={enabledSorting ? [enabledSorting.id] : []}
+        onAction={(id) => {
+          list.getSorting(String(id)).enable();
         }}
       >
         {pickerItems}

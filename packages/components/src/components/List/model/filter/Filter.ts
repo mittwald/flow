@@ -1,26 +1,28 @@
 import type { Column, ColumnDef, ColumnFilter } from "@tanstack/react-table";
 import type List from "@/components/List/model/List";
-import type { PropertyName } from "@/components/List/model/item/Item";
 import { getProperty } from "dot-prop";
 import type {
   FilterMatcher,
   FilterMode,
   FilterShape,
 } from "@/components/List/model/filter/types";
+import type { PropertyName } from "@/components/List/model/types";
 
-const equalsPropertyMatcher: FilterMatcher = (filterValue, propertyValue) =>
-  filterValue === propertyValue;
+const equalsPropertyMatcher: FilterMatcher<never, never, never> = (
+  filterValue,
+  propertyValue,
+) => filterValue === propertyValue;
 
-export class Filter<T> {
+export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
   private readonly _values?: unknown[];
   public readonly list: List<T>;
   public readonly property: PropertyName<T>;
   public readonly mode: FilterMode;
-  public readonly matcher: FilterMatcher;
+  public readonly matcher: FilterMatcher<T, never, never>;
   public readonly name?: string;
   private onFilterUpdateCallbacks = new Set<() => unknown>();
 
-  public constructor(list: List<T>, shape: FilterShape<T>) {
+  public constructor(list: List<T>, shape: FilterShape<T, TProp, TMatchValue>) {
     this.list = list;
     this.property = shape.property;
     this.mode = shape.mode ?? "one";
@@ -52,7 +54,7 @@ export class Filter<T> {
       Array.isArray(val) ? val : [val];
 
     const predicate = (filterValue: unknown) =>
-      this.matcher(filterValue, property);
+      this.matcher(filterValue as never, property as never);
 
     if (this.mode === "all") {
       return toArray(filterValue).every(predicate);

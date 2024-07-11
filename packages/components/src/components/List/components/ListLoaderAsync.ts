@@ -1,9 +1,11 @@
 import type { AsyncDataLoaderShape } from "@/components/List/model/loading/types";
+import type { ComponentType } from "react";
 
-interface Props<T> extends Omit<AsyncDataLoaderShape<T>, "asyncLoader"> {
+type Props<T> = Omit<AsyncDataLoaderShape<T>, "asyncLoader"> & {
   children: AsyncDataLoaderShape<T>["asyncLoader"];
-}
+};
 
-export function ListLoaderAsync<T = never>(ignoredProps: Props<T>) {
-  return null;
-}
+export const ListLoaderAsync = <T>(ignoredProps: Props<T>) => null;
+
+export const TypedListLoaderAsync = <T>() =>
+  ListLoaderAsync as ComponentType<Props<T>>;
