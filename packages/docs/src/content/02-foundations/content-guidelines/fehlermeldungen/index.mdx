@@ -18,22 +18,21 @@ gilt: So kurz wie möglich, aber so lang wie nötig. Das bedeutet allerdings auc
 dass es in manchen Fällen ausreichend sein kann, nur die Lösung zu nennen.
 
 <DoAndDont>
+  <Do exampleText="Bitte gib eine E-Mail-Adresse im Format name@domain.de ein." />
   <Dont
     exampleText="Wir unterstützen die Formatierung nicht. Bitte gib eine E-Mail-Adresse im Format
 name@domain.de ein."
   />
-  <Do exampleText="Bitte gib eine E-Mail-Adresse im Format name@domain.de ein." />
 </DoAndDont>
 
-## Verständliche Sprache, keine Fachsprache
+## Verständliche Sprache auf Augenhöhe
 
-Vermeide technische Begriffe und konzentriere dich auf eine einfach
-verständliche Sprache. Nutzer verstehen so am ehesten, was schiefgelaufen ist
-und wie sie das Problem lösen können.
+Wähle eine Sprache, die dem Kontext der jeweiligen Benutzeroberfläche entspricht.
+Fehlermeldungen müssen klar und verständlich formuliert sein. In bestimmten Fällen kann dabei eine etwas technischere Sprache hilfreich sein.
 
 <DoAndDont>
-  <Dont exampleText="Fehlercode 503: Verbindung zum Server fehlgeschlagen." />
   <Do exampleText="Wir konnten keine Verbindung zum Server herstellen. Bitte versuche es erneut." />
+  <Dont exampleText="Fehlercode 503: Verbindung zum Server fehlgeschlagen." />
 </DoAndDont>
 
 ## Schuldzuweisungen vermeiden
@@ -43,13 +42,13 @@ Fehlermeldung dem Nutzer das Gefühl von Unterstützung und Fürsorge vermitteln
 anstatt ihm ein Schuldgefühl zu vermitteln oder seine Frustration zu verstärken.
 
 <DoAndDont>
-  <Dont
-    exampleText="Du hast ein ungültiges Bild hochgeladen. Überprüfe die Dateigröße und versuche
-es erneut."
-  />
   <Do
     exampleText="Wir konnten das Bild nicht hochladen. Bitte überprüfe die Dateigröße und
 versuche es erneut."
+  />
+  <Dont
+    exampleText="Du hast ein ungültiges Bild hochgeladen. Überprüfe die Dateigröße und versuche
+es erneut."
   />
 </DoAndDont>
 
@@ -61,11 +60,11 @@ schiefgegangen?" und "Wer muss handeln, um es zu beheben?" einfach und
 verständlich beantwortet.
 
 <DoAndDont>
-  <Dont exampleText="Fehler beim Zurücksetzen des Passworts. Bitte versuche es erneut." />
-  <Do
+    <Do
     exampleText="Wir konnten dein Passwort nicht zurücksetzen. Bitte überprüfe die E-Mail-Adresse
 und versuche es erneut."
   />
+  <Dont exampleText="Fehler beim Zurücksetzen des Passworts. Bitte versuche es erneut." />
 </DoAndDont>
 
 ## Keine ungerechtfertigten Entschuldigungen
@@ -77,17 +76,18 @@ Verlust von Daten oder wenn der Nutzer eine größere Aktion zur Behebung des
 Problems ausführen muss.
 
 <DoAndDont>
+  <Do exampleText="Es tut uns Leid, durch einen Serverfehler konnten wir deine Eingabe nicht speichern. Bitte versuche es erneut.">
+
+    Entschuldige Dich bei ernsthaften Fehlern, z.B. einem systembedingten Verlust von Daten.
+
+  </Do>
   <Dont exampleText="Es tut uns leid, wir unterstützen das Dateiformat nicht.">
 
     Entschuldige dich nicht für Kleinigkeiten oder wenn das System keine Schuld
     trägt.
 
   </Dont>
-  <Do exampleText="Wir konnten die Datei nicht hochladen. Bitte verwende eine Datei vom Typ XY.">
 
-    Entschuldige Dich bei ernsthaften Fehlern, z.B. einem systembedingten Verlust von Daten.
-
-  </Do>
 </DoAndDont>
 
 ## Wahrscheinlichsten Fehler nennen
@@ -97,13 +97,12 @@ ist. Gibt es mehrere mögliche Gründe, so sollte die Fehlermeldung beschreiben,
 wie der wahrscheinlichste Grund zu beheben ist.
 
 <DoAndDont>
+  <Do exampleText="Bitte wähle ein Passwort mit mindestens 8 Zeichen.">
+  </Do>
   <Dont exampleText="Das eingegebene Passwort entspricht nicht den Mindestanforderungen. Stelle
 sicher, dass es min. 8 Zeichen, einen Groß- und Kleinbuchstaben, eine Ziffer und
 ein Sonderzeichen enthält.">
   </Dont>
-  <Do exampleText="Dein Passwort muss mindestens 8 Zeichen enthalten.">
-
-  </Do>
 </DoAndDont>
 
 ## Nicht zu spezifisch
@@ -114,12 +113,11 @@ Ordner zu nennen, da der Nutzer diese Informationen an anderen Stellen in der
 Benutzeroberfläche finden kann.
 
 <DoAndDont>
+  <Do exampleText="Wir konnten die Datei nicht hochladen. Bitte verwende eine Datei vom Typ XY.">
+  </Do>
   <Dont exampleText="Wir konnten die Datei „example_file-20.4.24.xy“ nicht hochladen. Bitte verwende
 eine Datei vom Typ XY.">
   </Dont>
-  <Do exampleText="Wir konnten die Datei nicht hochladen. Bitte verwende eine Datei vom Typ XY.">
-
-  </Do>
 </DoAndDont>
 
 ## Aktiv schreiben
@@ -127,11 +125,10 @@ eine Datei vom Typ XY.">
 Fehlermeldungen werden aktiv formuliert, um das Verständnis zu erleichtern.
 
 <DoAndDont>
+  <Do exampleText="Wir unterstützen nur Dateien vom Typ XY.">
+  </Do>
   <Dont exampleText="Es werden nur Dateien vom Typ XY unterstützt.">
   </Dont>
-  <Do exampleText="Wir unterstützen nur Dateien vom Typ XY.">
-
-  </Do>
 </DoAndDont>
 
 ## Positiv formulieren
@@ -143,10 +140,8 @@ getan werden kann. Beachte jedoch, dass dies in Fällen von Systemfehlern, für
 die es keine direkte Lösung gibt, nicht immer möglich ist.
 
 <DoAndDont>
+  <Do exampleText="Wir konnten keine Verbindung zum Server herstellen. Bitte versuche es erneut.">
+  </Do>
   <Dont exampleText="Durch ein Problem mit dem Server ist die Verbindung fehlgeschlagen.">
   </Dont>
-  <Do exampleText="Es tut uns leid, wir konnten keine Verbindung zum Server herstellen. Bitte
-versuche es erneut.">
-
-  </Do>
 </DoAndDont>

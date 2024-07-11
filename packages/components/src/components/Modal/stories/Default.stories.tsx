@@ -21,7 +21,7 @@ const meta: Meta<typeof Modal> = {
   argTypes: {
     size: {
       control: "inline-radio",
-      options: ["s", "m", "l"],
+      options: ["s", "m"],
     },
   },
   args: {
