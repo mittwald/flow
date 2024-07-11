@@ -11,20 +11,4 @@
     border-block-start-color: var(--section--border-color);
     padding-block-start: var(--section--section-to-section-spacing);
   }
-
-  .header {
-    display: flex;
-    gap: var(--section--heading-to-header-content-spacing);
-    justify-content: space-between;
-    align-items: flex-start;
-
-    @container (max-width: 550px) {
-      flex-direction: column;
-
-      .switch,
-      .statusBadge {
-        align-self: flex-end;
-      }
-    }
-  }
 }

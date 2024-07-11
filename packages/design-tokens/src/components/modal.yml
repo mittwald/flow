@@ -12,8 +12,6 @@ modal:
       value: 660px
     m:
       value: 900px
-    l:
-      value: 1050px
   action-group-padding:
     value: "{size-rem.l}"
   action-group-background-color:

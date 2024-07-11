@@ -9,6 +9,7 @@ import { useActionStateContext } from "@/components/Action/models/ActionStateCon
 import { useConfirmationModalButtonSlot } from "@/components/Action/hooks/useConfirmationModalButtonSlot";
 import { useActionButtonState } from "@/components/Action/hooks/useActionButtonState";
 import type { ComponentPropsContext } from "@/lib/propsContext/types";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 const actionButtonContext: ComponentPropsContext<"Button"> = {
   onPress: dynamic((props) => {
@@ -38,7 +39,7 @@ const actionButtonContext: ComponentPropsContext<"Button"> = {
   }),
 };
 
-export const Action: FC<ActionProps> = (props) => {
+export const Action: FC<ActionProps> = flowComponent("Action", (props) => {
   const { children, actionModel: actionModelFromProps, ...actionProps } = props;
   const newActionModel = ActionModel.useNew(actionProps);
   const actionModel = actionModelFromProps ?? newActionModel;
@@ -87,4 +88,4 @@ export const Action: FC<ActionProps> = (props) => {
       </PropsContextProvider>
     </ActionContextProvider>
   );
-};
+});

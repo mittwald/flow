@@ -1,9 +1,46 @@
-# Beispiel
+# Playground
+
+Verwende `<Modal />`, um ein Modal darzustellen. Da ein Modal in der Regel nur
+durch eine Aktion des Nutzers erscheint, wird ein `<ModalTrigger />` in
+Kombination z. B. einem `<Button />` benötigt.
 
 <LiveCodeEditor />
 
 ---
 
-# Als OffCanvas
+# Variants
+
+## OffCanvas
+
+Neben der klassischen Darstellung lässt sich das Modal auch als OffCanvas
+öffnen.
 
 <LiveCodeEditor example="offCanvas" editorCollapsed />
+
+---
+
+# Sizes
+
+Das Modal gibt es in zwei Standardgrößen: **S** und **M**. Beide Größen sind
+sowohl als klassisches Modal als auch in der OffCanvas-Variante verfügbar. In
+der OffCanvas-Darstellung kannst du außerdem eine individuelle Größe je nach
+Anwendungsfall festlegen.
+
+<LiveCodeEditor example="size" editorCollapsed />
+
+**Size S:** Ein Modal in der Size S (Breite 660 px) wird zum Beispiel für
+einfache Abfragen, ob etwas gelöscht werden soll, verwendet.
+
+**Size M:** Ein Modal in der Size M (Breite 900 px) wird für komplexere Dialoge
+(z.B. Erstellungs-Prozesse mit mehreren Eingabefeldern) verwendet.
+
+---
+
+# Kombiniere mit ...
+
+## Controller
+
+Alternativ zum `<ModalTrigger />` kann das Modal auch über einen Controller
+gesteuert werden.
+
+<LiveCodeEditor example="controller" editorCollapsed />
