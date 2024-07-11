@@ -13,6 +13,7 @@ import { Content } from "@/components/Content";
 import { Button } from "@/components/Button";
 import { IconCheck } from "@/components/Icon/components/icons";
 import { ListItem } from "@/components/List";
+import { StatusBadge } from "@/components/StatusBadge";
 
 const ContentPlaceholder: FC<PropsWithChildren> = (props) => (
   <div
@@ -41,7 +42,9 @@ const meta: Meta<typeof List> = {
         <Avatar>
           <Image alt="John Doe" src={dummyText.imageSrc} />
         </Avatar>
-        <Heading>John Doe</Heading>
+        <Heading>
+          John Doe <StatusBadge status="danger">Gesperrt</StatusBadge>
+        </Heading>
         <Text>Mittwald</Text>
         <ContextMenu>
           <MenuItem>Show details</MenuItem>

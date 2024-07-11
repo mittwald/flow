@@ -66,12 +66,13 @@ const meta: Meta<typeof List> = {
               <Avatar variant={domain.type === "Domain" ? 1 : 2}>
                 {domain.type === "Domain" ? <IconDomain /> : <IconSubdomain />}
               </Avatar>
-              <Heading>{domain.hostname}</Heading>
-              {domain.verified ? (
-                <Text>{domain.type}</Text>
-              ) : (
-                <StatusBadge status="warning">Not verified</StatusBadge>
-              )}
+              <Heading>
+                {domain.hostname}
+                {!domain.verified && (
+                  <StatusBadge status="warning">Not verified</StatusBadge>
+                )}
+              </Heading>
+              <Text>{domain.type}</Text>
 
               <ContextMenu>
                 <MenuItem>Show details</MenuItem>
@@ -104,7 +105,12 @@ export const ItemsWithLink: Story = {
               <Avatar variant={domain.type === "Domain" ? 1 : 2}>
                 {domain.type === "Domain" ? <IconDomain /> : <IconSubdomain />}
               </Avatar>
-              <Heading>{domain.hostname}</Heading>
+              <Heading>
+                {domain.hostname}
+                {!domain.verified && (
+                  <StatusBadge status="warning">Not verified</StatusBadge>
+                )}
+              </Heading>
               <Text>{domain.type}</Text>
 
               <ContextMenu>

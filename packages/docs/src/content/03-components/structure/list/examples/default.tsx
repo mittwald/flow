@@ -39,14 +39,16 @@ import MenuItem from "@mittwald/flow-react-components/MenuItem";
             <IconSubdomain />
           )}
         </Avatar>
-        <Heading>{domain.hostname}</Heading>
-        {domain.verified ? (
-          <Text>{domain.type}</Text>
-        ) : (
-          <StatusBadge status="warning">
-            Nicht verifiziert
-          </StatusBadge>
-        )}
+        <Heading>
+          {domain.hostname}
+          {!domain.verified && (
+            <StatusBadge status="warning">
+              Unverifiziert
+            </StatusBadge>
+          )}
+        </Heading>
+        <Text>{domain.type}</Text>
+
         <ContextMenu>
           <MenuItem>Details anzeigen</MenuItem>
           <MenuItem>Löschen</MenuItem>

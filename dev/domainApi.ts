@@ -63,7 +63,7 @@ export const domains: Domain[] = [
     hostname: "www.my-domain.de",
     domain: "my-domain.de",
     type: "Subdomain",
-    verified: true,
+    verified: false,
     tld: "de",
   },
   {

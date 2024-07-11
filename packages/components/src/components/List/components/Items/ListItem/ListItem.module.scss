@@ -133,7 +133,7 @@
       grid-template-columns: 1fr;
     }
 
-    &:not(:has(.text)):not(:has(.statusBadge)) {
+    &:not(:has(.text)) {
       grid-template-areas: "avatar title";
 
       &:not(:has(.avatar)) {
@@ -154,10 +154,6 @@
     .text {
       grid-area: subtitle;
       font-size: var(--list-item--subtitle-font-size);
-    }
-
-    .statusBadge {
-      grid-area: subtitle;
     }
   }
 
