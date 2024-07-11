@@ -29,6 +29,12 @@ export const SectionHeader: FC<SectionHeaderProps> = (props) => {
         tunnelId: null,
       },
     },
+    Action: {
+      tunnelId: "actions",
+      Button: {
+        tunnelId: null,
+      },
+    },
     Heading: {
       level: 2,
       className: styles.heading,
