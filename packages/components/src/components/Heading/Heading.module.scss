@@ -13,9 +13,17 @@
     color: var(--heading--color-light);
   }
 
+  --heading-line-height: calc(var(--font-size) * var(--line-height--default));
+
   .icon {
-    height: calc(var(--font-size) * var(--line-height--default));
+    height: var(--heading-line-height);
     width: var(--font-size);
+  }
+
+  .headingContent {
+    height: var(--heading-line-height);
+    display: flex;
+    align-items: center;
   }
 
   @mixin level($level) {

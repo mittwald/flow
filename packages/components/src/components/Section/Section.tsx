@@ -43,14 +43,7 @@ export const Section = flowComponent("Section", (props) => {
       level: 2,
     },
     Header: {
-      className: styles.header,
-      Switch: {
-        className: styles.switch,
-        labelPosition: "leading",
-      },
-      StatusBadge: {
-        className: styles.statusBadge,
-      },
+      renderSectionHeader: true,
     },
   };
 
