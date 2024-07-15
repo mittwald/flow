@@ -4069,7 +4069,7 @@ const RAW_RUNTIME_STATE =
           ["remark-frontmatter", "npm:5.0.0"],\
           ["remark-mdx-frontmatter", "npm:5.0.0"],\
           ["remeda", "npm:2.3.0"],\
-          ["sass", "npm:1.77.6"],\
+          ["sass", "npm:1.77.8"],\
           ["tsx", "npm:4.16.2"],\
           ["typescript", "patch:typescript@npm%3A5.5.3#optional!builtin<compat/typescript>::version=5.5.3&hash=379a07"],\
           ["webpack", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:5.92.1"]\
@@ -4180,7 +4180,7 @@ const RAW_RUNTIME_STATE =
           ["react-stately", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.31.1"],\
           ["remeda", "npm:2.3.0"],\
           ["rollup", "npm:4.18.0"],\
-          ["sass", "npm:1.77.6"],\
+          ["sass", "npm:1.77.8"],\
           ["storybook", "npm:8.1.11"],\
           ["storybook-addon-rtl", "npm:1.0.0"],\
           ["tsx", "npm:4.16.2"],\
@@ -4284,7 +4284,7 @@ const RAW_RUNTIME_STATE =
           ["react-stately", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.31.1"],\
           ["remeda", "npm:2.3.0"],\
           ["rollup", "npm:4.18.0"],\
-          ["sass", "npm:1.77.6"],\
+          ["sass", "npm:1.77.8"],\
           ["storybook", "npm:8.1.11"],\
           ["storybook-addon-rtl", "npm:1.0.0"],\
           ["tsx", "npm:4.16.2"],\
@@ -4379,7 +4379,7 @@ const RAW_RUNTIME_STATE =
           ["react-stately", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.31.1"],\
           ["remeda", "npm:2.3.0"],\
           ["rollup", "npm:4.18.0"],\
-          ["sass", "npm:1.77.6"],\
+          ["sass", "npm:1.77.8"],\
           ["storybook", "npm:8.1.11"],\
           ["storybook-addon-rtl", "npm:1.0.0"],\
           ["tsx", "npm:4.16.2"],\
@@ -19947,7 +19947,7 @@ const RAW_RUNTIME_STATE =
           ["postcss", "npm:8.4.31"],\
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:f1b8669b78bbd9ad1b1a5718d2c1b8c17a96801f6c7f09f92a5f6a722c2b98a8a3a35f54439df570df3b9786d4a7c4656664c15be781a52c51b8418027c09dd8#npm:18.3.1"],\
-          ["sass", "npm:1.77.6"],\
+          ["sass", "npm:1.77.8"],\
           ["styled-jsx", "virtual:d5594d23b4a0161adbae3fffae2b8137ee1f1426f8400437ff65896a239d5ee9c2f0348d6db8902bfbc2c1493dfba37ff70141aa0d1149af0b7d5fd5fb21fb33#npm:5.1.1"]\
         ],\
         "packagePeers": [\
@@ -23006,10 +23006,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["sass", [\
-      ["npm:1.77.6", {\
-        "packageLocation": "./.yarn/cache/sass-npm-1.77.6-bcc408e096-fe5a393c0a.zip/node_modules/sass/",\
+      ["npm:1.77.8", {\
+        "packageLocation": "./.yarn/cache/sass-npm-1.77.8-d0ad322666-2bfd627940.zip/node_modules/sass/",\
         "packageDependencies": [\
-          ["sass", "npm:1.77.6"],\
+          ["sass", "npm:1.77.8"],\
           ["chokidar", "npm:3.6.0"],\
           ["immutable", "npm:4.3.6"],\
           ["source-map-js", "npm:1.2.0"]\
@@ -24665,7 +24665,7 @@ const RAW_RUNTIME_STATE =
           ["postcss-modules-local-by-default", "virtual:c2588d0ed2de9c43919dbf6b1d7ae1f48e1ba54d375e84e7ff4e2431f3cc26c1076e0283bc495a86d5bb10076aa9a9d53f5df84c03f91efb52e45121f42f5f35#npm:4.0.5"],\
           ["postcss-modules-scope", "virtual:c2588d0ed2de9c43919dbf6b1d7ae1f48e1ba54d375e84e7ff4e2431f3cc26c1076e0283bc495a86d5bb10076aa9a9d53f5df84c03f91efb52e45121f42f5f35#npm:3.2.0"],\
           ["reserved-words", "npm:0.1.2"],\
-          ["sass", "npm:1.77.6"],\
+          ["sass", "npm:1.77.8"],\
           ["source-map-js", "npm:1.2.0"],\
           ["stylus", "npm:0.62.0"],\
           ["tsconfig-paths", "npm:4.2.0"],\
@@ -25371,7 +25371,7 @@ const RAW_RUNTIME_STATE =
           ["lightningcss", null],\
           ["postcss", "npm:8.4.39"],\
           ["rollup", "npm:4.18.0"],\
-          ["sass", "npm:1.77.6"],\
+          ["sass", "npm:1.77.8"],\
           ["stylus", null],\
           ["sugarss", null],\
           ["terser", null]\
