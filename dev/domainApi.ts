@@ -22,6 +22,7 @@ interface Request {
   filter?: {
     types?: string[];
   };
+  search?: string;
 }
 
 interface Response {
@@ -33,11 +34,17 @@ export const getDomains = async (req: Request): Promise<Response> => {
   await apiSleep();
 
   const types = req.filter?.types;
+  const searchString = req.search;
 
-  const preFilteredData =
-    types === undefined
-      ? domains
-      : domains.filter((u) => types.length === 0 || types.includes(u.type));
+  const preFilteredData = domains.filter((u) => {
+    const filterMatches =
+      !types || types.length === 0 || types.includes(u.type);
+    const searchMatches =
+      searchString === undefined ||
+      u.domain.toLowerCase().includes(searchString.toLowerCase());
+    return filterMatches && searchMatches;
+  });
+
   const totalCount = preFilteredData.length;
 
   return {

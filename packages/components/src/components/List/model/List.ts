@@ -6,26 +6,34 @@ import ReactTable from "@/components/List/model/ReactTable";
 import type { ListShape } from "@/components/List/model/types";
 import { IncrementalLoader } from "@/components/List/model/loading/IncrementalLoader";
 import invariant from "invariant";
-import type { RenderItemFn } from "@/components/List/model/item/types";
+import { Search } from "@/components/List/model/search/Search";
+import { ItemView } from "@/components/List/model/item/ItemView";
 
 export class List<T> {
   public readonly filters: Filter<T, never, never>[];
+  public readonly itemView: ItemView<T>;
+  public readonly search?: Search<T>;
   public readonly sorting: Sorting<T>[];
   public readonly items: ItemCollection<T>;
-  public readonly render?: RenderItemFn<T>;
   public readonly reactTable: ReactTable<T>;
   public readonly batches: BatchesController<T>;
   public readonly loader: IncrementalLoader<T>;
+  public readonly hasAction: boolean;
 
   private constructor(shape: ListShape<T>) {
-    const { render, filters = [], sorting = [], batchesController } = shape;
+    const {
+      itemView,
+      filters = [],
+      sorting = [],
+      batchesController,
+      hasAction,
+    } = shape;
 
-    this.render = render;
-
-    this.items = ItemCollection.useNew(this);
+    this.items = new ItemCollection(this);
     this.filters = filters.map((shape) => new Filter(this, shape));
     this.sorting = sorting.map((shape) => new Sorting<T>(this, shape));
-
+    this.search = shape.search ? new Search(this, shape.search) : undefined;
+    this.itemView = new ItemView(this, itemView);
     this.batches = new BatchesController(this, batchesController);
 
     this.loader = IncrementalLoader.useNew<T>(this, shape.loader);
@@ -34,14 +42,19 @@ export class List<T> {
       manualPagination: this.loader.manualPagination,
       manualSorting: this.loader.manualSorting,
     });
+
+    this.hasAction = hasAction;
   }
 
   public static useNew<T>(shape: ListShape<T>): List<T> {
     return new List<T>(shape);
   }
 
-  public isFiltered(): boolean {
-    return this.filters.some((f) => f.isActive());
+  public get isFiltered(): boolean {
+    return (
+      this.filters.some((f) => f.isActive()) ||
+      (!!this.search && this.search.isSet)
+    );
   }
 
   public getSorting(id: string): Sorting<T> {
@@ -55,6 +68,7 @@ export class List<T> {
   }
 
   public clearFilters(): void {
+    this.search?.clear();
     return this.filters.forEach((f) => f.clearValues());
   }
 

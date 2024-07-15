@@ -1,0 +1,27 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--list--content-to-content-spacing);
+
+  .pickerListAndSearch {
+    display: flex;
+    gap: var(--list--block-to-block-spacing);
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .pickerList {
+    display: flex;
+    flex-grow: 9999;
+    flex-shrink: 0;
+    column-gap: var(--list--content-to-content-spacing);
+  }
+
+  .searchField {
+    display: flex;
+    gap: var(--list--content-to-content-spacing);
+    flex-grow: 1;
+    min-width: 200px;
+  }
+}

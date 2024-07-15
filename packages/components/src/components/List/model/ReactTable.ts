@@ -20,6 +20,7 @@ import { useLocalObservable } from "mobx-react-lite";
 import { runInAction } from "mobx";
 import { useAutorunEffect } from "@/lib/mobx/useAutorunEffect";
 import type { PropertyName } from "@/components/List/model/types";
+import type { SearchValue } from "@/components/List/model/search/types";
 
 export class ReactTable<T> {
   public readonly list: List<T>;
@@ -65,6 +66,7 @@ export class ReactTable<T> {
       getPaginationRowModel: getPaginationRowModel(),
       getFacetedUniqueValues: getFacetedUniqueValues(),
       onStateChange: this.onTableStateChange,
+      globalFilterFn: "auto",
       ...tableOptions,
     });
 
@@ -109,6 +111,10 @@ export class ReactTable<T> {
   ): TableState {
     // for further customization (like fixed sorting)
     return newState;
+  }
+
+  public get searchString(): SearchValue {
+    return this.tableState.value?.globalFilter;
   }
 
   public getTableColumn(property: PropertyName<T>): Column<T> {
