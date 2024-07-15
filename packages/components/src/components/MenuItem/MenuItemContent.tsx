@@ -34,6 +34,9 @@ export const MenuItemContent: FC<Props> = (props) => {
     Text: {
       className: styles.text,
     },
+    Switch: {
+      className: styles.switch,
+    },
   };
 
   const controlIconPropsContext: PropsContext = {

@@ -22,6 +22,11 @@
     order: 1;
   }
 
+  .switch {
+    order: 2;
+    margin-left: auto;
+  }
+
   .icon + .text {
     margin-inline-start: var(--menu-item--icon-to-text-spacing);
   }
