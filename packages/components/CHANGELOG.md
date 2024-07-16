@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.177](https://github.com/mittwald/flow/compare/0.1.0-alpha.176...0.1.0-alpha.177) (2024-07-16)
+
+### Bug Fixes
+
+- **ContextMenu:** do not use Dialog for ContextMenu
+  ([458dc75](https://github.com/mittwald/flow/commit/458dc7599077ed4a46eedb55bb74611dfc4d0388))
+- **Skeleton:** Height should behave like line-height
+  ([fa4ea9c](https://github.com/mittwald/flow/commit/fa4ea9c0d75e110df458130a158ef6667a768aef))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.176](https://github.com/mittwald/flow/compare/0.1.0-alpha.175...0.1.0-alpha.176) (2024-07-12)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
