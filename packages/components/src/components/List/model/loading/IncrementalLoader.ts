@@ -48,6 +48,7 @@ export class IncrementalLoader<T> {
     this.manualFiltering = manualFiltering ?? this.manualPagination;
     this.manualSorting = manualSorting ?? this.manualPagination;
     this.list.filters.forEach((f) => f.onFilterUpdated(() => this.reset()));
+    this.list.search?.onUpdated(() => this.reset());
   }
 
   public static useNew<T>(
@@ -159,6 +160,10 @@ export class IncrementalLoader<T> {
                 { mode: f.mode, values: f.getArrayValue() },
               ]),
           ) as DataLoaderOptions<T>["filtering"])
+        : undefined,
+
+      searchString: this.manualFiltering
+        ? this.list.reactTable.searchString
         : undefined,
     };
   }

@@ -1,7 +1,4 @@
-import {
-  ListItem,
-  typedList,
-} from "@mittwald/flow-react-components/List";
+import { typedList } from "@mittwald/flow-react-components/List";
 import {
   type Domain,
   domains,
@@ -23,6 +20,7 @@ export default () => {
   return (
     <DomainList.List batchSize={5}>
       <DomainList.StaticData data={domains} />
+      <DomainList.Search />
       <DomainList.Filter
         property="type"
         mode="some"
@@ -30,9 +28,9 @@ export default () => {
       />
       <DomainList.Sorting property="domain" name="Domain" />
       <DomainList.Sorting property="type" name="Type" />
-      <DomainList.ItemView>
+      <DomainList.Item>
         {(domain) => (
-          <ListItem>
+          <DomainList.ItemView>
             <Avatar
               variant={domain.type === "Domain" ? 1 : 2}
             >
@@ -56,9 +54,9 @@ export default () => {
               <MenuItem>Details anzeigen</MenuItem>
               <MenuItem>Löschen</MenuItem>
             </ContextMenu>
-          </ListItem>
+          </DomainList.ItemView>
         )}
-      </DomainList.ItemView>
+      </DomainList.Item>
     </DomainList.List>
   );
 };

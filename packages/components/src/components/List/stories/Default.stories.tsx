@@ -4,7 +4,6 @@ import React from "react";
 import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
 import { usePromise } from "@mittwald/react-use-promise";
-import { ListItem, ListItemView, ListLoaderAsync } from "@/components/List";
 import type { AsyncDataLoader } from "@/components/List/model/loading/types";
 import { Avatar } from "@/components/Avatar";
 import { ContextMenu, MenuItem } from "@/components/ContextMenu";
@@ -12,7 +11,8 @@ import { IconDomain, IconSubdomain } from "@/components/Icon/components/icons";
 import StatusBadge from "@/components/StatusBadge";
 import type { Domain } from "../testData/domainApi";
 import { getDomains, getTypes } from "../testData/domainApi";
-import { typedList } from "@/components/List/typedList";
+import { Section } from "@/components/Section";
+import { typedList } from "@/components/List";
 
 const loadDomains: AsyncDataLoader<Domain> = async (opt) => {
   const response = await getDomains({
@@ -27,6 +27,7 @@ const loadDomains: AsyncDataLoader<Domain> = async (opt) => {
           types: opt.filtering["type"].values as string[],
         }
       : undefined,
+    search: opt?.searchString,
   });
 
   return {
@@ -41,45 +42,56 @@ const meta: Meta<typeof List> = {
   render: () => {
     const availableTypes = usePromise(getTypes, []);
 
-    const Domains = typedList<Domain>();
+    const DomainList = typedList<Domain>();
 
     return (
-      <Domains.List batchSize={5}>
-        <Domains.LoaderAsync manualPagination manualSorting={false}>
-          {loadDomains}
-        </Domains.LoaderAsync>
-        <Domains.Filter
-          values={availableTypes}
-          property="type"
-          mode="all"
-          name="Typ"
-        />
-        <Domains.Sorting property="domain" name="A-Z" />
-        <Domains.Sorting property="domain" name="Z-A" direction="desc" />
-        <Domains.Sorting property="type" name="Typ" defaultEnabled />
-        <Domains.Sorting property="tld" name="TLD" />
-        <Domains.ItemView>
-          {(domain) => (
-            <ListItem>
-              <Avatar variant={domain.type === "Domain" ? 1 : 2}>
-                {domain.type === "Domain" ? <IconDomain /> : <IconSubdomain />}
-              </Avatar>
-              <Heading>
-                {domain.hostname}
-                {!domain.verified && (
-                  <StatusBadge status="warning">Not verified</StatusBadge>
-                )}
-              </Heading>
-              <Text>{domain.type}</Text>
+      <Section>
+        <Heading>Domains</Heading>
+        <DomainList.List batchSize={5}>
+          <DomainList.LoaderAsync manualPagination manualSorting={false}>
+            {loadDomains}
+          </DomainList.LoaderAsync>
+          <DomainList.Filter
+            values={availableTypes}
+            property="type"
+            mode="all"
+            name="Typ"
+          />
+          <DomainList.Search />
+          <DomainList.Sorting property="domain" name="A-Z" />
+          <DomainList.Sorting property="domain" name="Z-A" direction="desc" />
+          <DomainList.Sorting property="type" name="Typ" defaultEnabled />
+          <DomainList.Sorting property="tld" name="TLD" />
+          <DomainList.Item
+            textValue={(domain) => domain.hostname}
+            onAction={(domain) => console.log(domain.hostname)}
+          >
+            {(domain) => (
+              <DomainList.ItemView>
+                <Avatar variant={domain.type === "Domain" ? 1 : 2}>
+                  {domain.type === "Domain" ? (
+                    <IconDomain />
+                  ) : (
+                    <IconSubdomain />
+                  )}
+                </Avatar>
+                <Heading>
+                  {domain.hostname}
+                  {!domain.verified && (
+                    <StatusBadge status="warning">Not verified</StatusBadge>
+                  )}
+                </Heading>
+                <Text>{domain.type}</Text>
 
-              <ContextMenu>
-                <MenuItem>Show details</MenuItem>
-                <MenuItem>Delete</MenuItem>
-              </ContextMenu>
-            </ListItem>
-          )}
-        </Domains.ItemView>
-      </Domains.List>
+                <ContextMenu>
+                  <MenuItem>Show details</MenuItem>
+                  <MenuItem>Delete</MenuItem>
+                </ContextMenu>
+              </DomainList.ItemView>
+            )}
+          </DomainList.Item>
+        </DomainList.List>
+      </Section>
     );
   },
 };
@@ -89,36 +101,3 @@ export default meta;
 type Story = StoryObj<typeof List>;
 
 export const Default: Story = {};
-
-export const ItemsWithLink: Story = {
-  render: () => {
-    return (
-      <List batchSize={5}>
-        <ListLoaderAsync<Domain> manualPagination>
-          {loadDomains}
-        </ListLoaderAsync>
-        <ListItemView<Domain>>
-          {(domain) => (
-            <ListItem href="#">
-              <Avatar variant={domain.type === "Domain" ? 1 : 2}>
-                {domain.type === "Domain" ? <IconDomain /> : <IconSubdomain />}
-              </Avatar>
-              <Heading>
-                {domain.hostname}
-                {!domain.verified && (
-                  <StatusBadge status="warning">Not verified</StatusBadge>
-                )}
-              </Heading>
-              <Text>{domain.type}</Text>
-
-              <ContextMenu>
-                <MenuItem>Show details</MenuItem>
-                <MenuItem>Delete</MenuItem>
-              </ContextMenu>
-            </ListItem>
-          )}
-        </ListItemView>
-      </List>
-    );
-  },
-};
