@@ -26,3 +26,12 @@ export const OnDarkBackground: Story = {
 export const WithCustomSize: Story = {
   render: (props) => <Skeleton {...props} style={{ height: "200px" }} />,
 };
+
+export const WithCustomBorderRadius: Story = {
+  render: (props) => (
+    <Skeleton
+      {...props}
+      style={{ borderRadius: "20px", height: "30px", width: "60px" }}
+    />
+  ),
+};

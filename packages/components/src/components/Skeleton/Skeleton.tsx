@@ -9,13 +9,13 @@ export interface SkeletonProps extends ComponentProps<"div"> {
 }
 
 export const Skeleton: FC<SkeletonProps> = (props) => {
-  const { width, height, className, ...rest } = props;
+  const { width, height, className, style, ...rest } = props;
 
   const rootClassName = clsx(styles.skeleton, className);
 
   return (
     <div aria-hidden style={{ height, width }} {...rest}>
-      <div className={rootClassName} />
+      <div className={rootClassName} style={style} />
     </div>
   );
 };
