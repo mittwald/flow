@@ -60,6 +60,7 @@ const DefaultSearchFieldRender: SearchFieldRenderComponent = (props) => {
         variant="plain"
         onPress={clearSearch}
         isDisabled={!searchString}
+        excludeFromTabOrder
       >
         <IconClose />
       </Button>
