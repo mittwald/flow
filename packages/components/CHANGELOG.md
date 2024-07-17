@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.179](https://github.com/mittwald/flow/compare/0.1.0-alpha.178...0.1.0-alpha.179) (2024-07-17)
+
+### Bug Fixes
+
+- **List:** not tabbable clear search
+  ([e422b1c](https://github.com/mittwald/flow/commit/e422b1cb12551fde5ae80db1a20e58f538957976))
+
+### Features
+
+- **List:** support autoFocus for search field
+  ([2f90049](https://github.com/mittwald/flow/commit/2f90049673e03b9338b5254b8782d825e3d95d62))
+- **List:** support readonly typed static data
+  ([eaeed40](https://github.com/mittwald/flow/commit/eaeed40fe2a95f67ba10063c9e969b68135d5f11))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.178](https://github.com/mittwald/flow/compare/0.1.0-alpha.177...0.1.0-alpha.178) (2024-07-17)
 
 ### Bug Fixes
