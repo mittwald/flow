@@ -56,7 +56,12 @@ export const FieldLabel: FC<PasswordFieldLabelProps> = (props) => {
       );
 
       return (
-        <Text key={translationKey} className={styles.rule}>
+        <Text
+          className={styles.rule}
+          data-rule={r.ruleType}
+          data-rule-valid={r.isValid}
+          key={translationKey}
+        >
           {icon}
           {translate.format(translationKey, translationValues)}
         </Text>
