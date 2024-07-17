@@ -9,7 +9,14 @@ import { Link } from "@/components/Link";
 import { Switch } from "@/components/Switch";
 import { StatusBadge } from "@/components/StatusBadge";
 import Header from "@/components/Header";
-import { IconMember } from "@/components/Icon/components/icons";
+import {
+  IconContextMenu,
+  IconMember,
+} from "@/components/Icon/components/icons";
+import { Button } from "@/components/Button";
+import { dummyText } from "@/lib/dev/dummyText";
+import { Action } from "@/components/Action";
+import { Modal } from "@/components/Modal";
 
 const meta: Meta<typeof Section> = {
   title: "Structure/Section",
@@ -60,34 +67,59 @@ export const MultipleSections: Story = {
   ),
 };
 
-export const WithSwitch: Story = {
+export const WithHeaderContent: Story = {
   render: (props) => (
-    <Section {...props}>
-      <Header>
-        <Heading>Newsletter</Heading>
-        <Switch>Subscription</Switch>
-      </Header>
-      <Text>
-        Upcoming releases, new features and tips about your hosting - we bring
-        the most important information to inbox. Subscribe to our newsletter and
-        stay up to date.
-      </Text>
-    </Section>
-  ),
-};
+    <>
+      <Section {...props}>
+        <Header>
+          <Heading>
+            Newsletter <StatusBadge>Subscribed</StatusBadge>
+          </Heading>
 
-export const WithStatusBadge: Story = {
-  render: (props) => (
-    <Section {...props}>
-      <Header>
-        <Heading>Newsletter</Heading>
-        <StatusBadge>Subscribed</StatusBadge>
-      </Header>
-      <Text>
-        Upcoming releases, new features and tips about your hosting - we bring
-        the most important information to inbox. Subscribe to our newsletter and
-        stay up to date.
-      </Text>
-    </Section>
+          <Switch defaultSelected>Subscription</Switch>
+          <Button variant="soft" color="secondary">
+            Start database migration
+          </Button>
+        </Header>
+        <Text>
+          Upcoming releases, new features and tips about your hosting - we bring
+          the most important information to inbox. Subscribe to our newsletter
+          and stay up to date.
+        </Text>
+      </Section>
+      <Section {...props}>
+        <Header>
+          <Heading>
+            My Project with a looooooooooong name
+            <StatusBadge status="danger">Deactivated</StatusBadge>
+          </Heading>
+          <Action>
+            <Modal slot="actionConfirm">
+              <Heading>Confirmation Modal</Heading>
+            </Modal>
+            <Button variant="soft" color="secondary">
+              Start database migration
+            </Button>
+          </Action>
+          <Action>
+            <Modal slot="actionConfirm">
+              <Heading>Confirmation Modal</Heading>
+            </Modal>
+            <Button color="accent">Activate</Button>
+          </Action>
+        </Header>
+        <Text>{dummyText.medium}</Text>
+      </Section>
+      <Section {...props}>
+        <Header>
+          <Heading>My Project</Heading>
+          <Button variant="soft" color="secondary">
+            <IconContextMenu />
+          </Button>
+          <Button color="danger">Deactivate</Button>
+        </Header>
+        <Text>{dummyText.medium}</Text>
+      </Section>
+    </>
   ),
 };

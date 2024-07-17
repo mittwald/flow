@@ -41,7 +41,7 @@ export const Switch = flowComponent("Switch", (props) => {
                 {isSelected ? <IconCheck size="s" /> : <IconClose size="s" />}
               </div>
             </div>
-            <Label className={styles.label}>{children}</Label>
+            {children && <Label className={styles.label}>{children}</Label>}
           </>
         )}
       </Aria.Switch>

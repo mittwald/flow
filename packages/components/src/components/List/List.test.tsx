@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { List, ListItemView, ListStaticData } from "@/components/List";
+import { List, ListItem, ListStaticData } from "@/components/List";
 import React from "react";
 import { test } from "vitest";
 
@@ -13,7 +13,9 @@ describe("Static data", () => {
       render(
         <List>
           <ListStaticData data={items} />
-          <ListItemView<number>>{(num) => <span>{num}</span>}</ListItemView>
+          <ListItem<number> textValue={(num) => String(num)}>
+            {(num) => <span>{num}</span>}
+          </ListItem>
         </List>,
       );
     };
