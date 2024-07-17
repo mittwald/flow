@@ -3,12 +3,14 @@ import type translate from "@/lib/react/components/Translate";
 
 /**
  * @param rule
- * @internal
+ * @param shortVersion
  */
 const generateTranslationString = (
   rule: Partial<RuleValidationResult>,
+  shortVersion = false,
 ): string => {
   const translateString = `validation.${rule.ruleType ?? "general"}`;
+  let finalTranslationString = "";
 
   if ("min" in rule || "max" in rule) {
     const breakingBoundaryProperty = rule.failingBoundary
@@ -16,23 +18,26 @@ const generateTranslationString = (
       : "min";
 
     if (rule.identifier) {
-      return `${translateString}.${rule.identifier}.${breakingBoundaryProperty}`;
+      finalTranslationString = `${translateString}.${rule.identifier}.${breakingBoundaryProperty}`;
+    } else {
+      finalTranslationString = `${translateString}.${breakingBoundaryProperty}`;
     }
-
-    return `${translateString}.${breakingBoundaryProperty}`;
+  } else if (rule.identifier) {
+    finalTranslationString = `${translateString}.${rule.identifier}`;
+  } else {
+    finalTranslationString = translateString;
   }
 
-  if (rule.identifier) {
-    return `${translateString}.${rule.identifier}`;
-  }
-
-  return `${translateString}`;
+  return shortVersion
+    ? `${finalTranslationString}.short`
+    : finalTranslationString;
 };
 
 export const generateValidationTranslation = (
   r: Partial<RuleValidationResult>,
+  shotVersion = false,
 ): [string, Parameters<typeof translate>[1]] => {
-  const translationKey = generateTranslationString(r);
+  const translationKey = generateTranslationString(r, shotVersion);
 
   return [translationKey, r];
 };
