@@ -51,12 +51,12 @@ export const defaultPasswordCreationPolicy = Policy.fromDeclaration({
       ruleType: RuleType.hibp,
     },
     {
-      identifier: "specialChars",
+      identifier: "special",
       ruleType: RuleType.charPool,
       charPools: ["special"],
     },
     {
-      identifier: "numberChars",
+      identifier: "numbers",
       ruleType: RuleType.charPool,
       charPools: ["numbers"],
     },
