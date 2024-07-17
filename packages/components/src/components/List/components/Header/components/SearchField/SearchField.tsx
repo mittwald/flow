@@ -15,7 +15,7 @@ interface Props extends PropsWithClassName {
 }
 
 const DefaultSearchFieldRender: SearchFieldRenderComponent = (props) => {
-  const { className, onChange, value } = props;
+  const { className, onChange, value, ...textFieldProps } = props;
 
   const stringFormatter = useLocalizedStringFormatter(locales);
   const [searchString, setSearchString] = useState(value ?? "");
@@ -53,6 +53,7 @@ const DefaultSearchFieldRender: SearchFieldRenderComponent = (props) => {
         value={searchString}
         onKeyUp={handleKeyPress}
         onChange={(value) => setSearchString(value)}
+        {...textFieldProps}
       />
       {/* @todo: remove Button when dedicated <SearchField /> exists */}
       <Button
@@ -76,5 +77,6 @@ export const SearchField: FC<Props> = (props) => {
     className,
     value: search.value,
     onChange: search.setValue.bind(search),
+    ...search.textFieldProps,
   });
 };

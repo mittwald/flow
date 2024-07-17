@@ -8,11 +8,13 @@ import type {
 export class Search<T> {
   public readonly list: List<T>;
   public readonly render?: SearchFieldRenderComponent;
+  public readonly textFieldProps: SearchShape<T>["textFieldProps"];
   private onUpdateCallbacks = new Set<() => unknown>();
 
   public constructor(list: List<T>, searchShape: SearchShape<T>) {
     this.list = list;
     this.render = searchShape.render;
+    this.textFieldProps = searchShape.textFieldProps;
   }
 
   public get value(): SearchValue {

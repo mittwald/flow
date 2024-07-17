@@ -57,7 +57,7 @@ const meta: Meta<typeof List> = {
             mode="all"
             name="Typ"
           />
-          <DomainList.Search />
+          <DomainList.Search autoFocus />
           <DomainList.Sorting property="domain" name="A-Z" />
           <DomainList.Sorting property="domain" name="Z-A" direction="desc" />
           <DomainList.Sorting property="type" name="Typ" defaultEnabled />

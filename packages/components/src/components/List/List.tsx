@@ -68,8 +68,8 @@ export const List = flowComponent("List", (props) => {
     ),
     search: searchProps
       ? {
-          ...searchProps,
           render: searchProps.children,
+          textFieldProps: searchProps,
         }
       : undefined,
     sorting: deepFilterByType(children, ListSorting<never>).map((s) => s.props),
