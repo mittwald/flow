@@ -21,6 +21,12 @@ const policyDecl: PolicyDeclaration = {
       min: 8,
       max: 12,
     },
+    {
+      identifier: "numbers",
+      ruleType: RuleType.charPool,
+      charPools: ["numbers"],
+      min: 1,
+    },
   ],
 };
 
@@ -91,11 +97,8 @@ describe("PasswordCreationField Tests", () => {
 
     await act(() => fireEvent.click(infoButton));
 
-    const passwordRulesDialog = renderResult.getByRole("dialog");
-    assert(passwordRulesDialog);
-
-    const rules = passwordRulesDialog.querySelectorAll("span");
-    expect(rules).toHaveLength(1);
+    const rules = renderResult.baseElement.querySelectorAll("[data-rule]");
+    expect(rules).toHaveLength(2);
   });
 
   test("will reveal and hide password when clicked", async () => {
