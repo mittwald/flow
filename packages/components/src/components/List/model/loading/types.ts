@@ -35,7 +35,7 @@ type AsyncResourceFactory<T> = (
   options?: DataLoaderOptions<T>,
 ) => AsyncResource<DataLoaderResult<T>>;
 
-type StaticData<T> = T[];
+type StaticData<T> = T[] | readonly T[];
 
 interface DynamicLoaderShape {
   manualSorting?: boolean;

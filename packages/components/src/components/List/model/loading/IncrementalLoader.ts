@@ -177,7 +177,7 @@ export class IncrementalLoader<T> {
     if ("staticData" in dataSource) {
       return getAsyncResource(
         async (staticData) => ({
-          data: staticData,
+          data: staticData as T[],
           itemTotalCount: staticData.length,
         }),
         [dataSource.staticData],
