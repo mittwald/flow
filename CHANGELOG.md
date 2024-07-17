@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.178](https://github.com/mittwald/flow/compare/0.1.0-alpha.177...0.1.0-alpha.178) (2024-07-17)
+
+### Bug Fixes
+
+- **Switch:** Only render label component if children is defined
+  ([43cd498](https://github.com/mittwald/flow/commit/43cd49897c9639de075243a9b871609076a12c67))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.177](https://github.com/mittwald/flow/compare/0.1.0-alpha.176...0.1.0-alpha.177) (2024-07-16)
 
 ### Bug Fixes
