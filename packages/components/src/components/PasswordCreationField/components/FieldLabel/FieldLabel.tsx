@@ -50,8 +50,10 @@ export const FieldLabel: FC<PasswordFieldLabelProps> = (props) => {
         <IconCircleMinus color="red" />
       );
 
-      const [translationKey, translationValues] =
-        generateValidationTranslation(r);
+      const [translationKey, translationValues] = generateValidationTranslation(
+        r,
+        true,
+      );
 
       return (
         <Text key={translationKey} className={styles.rule}>
