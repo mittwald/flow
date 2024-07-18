@@ -35,6 +35,12 @@ type Story = StoryObj<typeof Text>;
 
 export const Default: Story = {};
 
+export const RawText: Story = {
+  render: (props) => (
+    <Text {...props}>Text without styling parent components</Text>
+  ),
+};
+
 export const Dark: Story = {
   args: { color: "dark" },
   parameters: {
