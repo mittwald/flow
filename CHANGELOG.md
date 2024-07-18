@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.180](https://github.com/mittwald/flow/compare/0.1.0-alpha.179...0.1.0-alpha.180) (2024-07-18)
+
+### Bug Fixes
+
+- **List:** fix filter types
+  ([f6cfc19](https://github.com/mittwald/flow/commit/f6cfc194b5a87a2f943a68b306e05829e503c08a))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.179](https://github.com/mittwald/flow/compare/0.1.0-alpha.178...0.1.0-alpha.179) (2024-07-17)
 
 ### Bug Fixes
