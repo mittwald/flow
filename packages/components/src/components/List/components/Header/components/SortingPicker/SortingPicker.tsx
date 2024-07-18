@@ -12,23 +12,23 @@ import { Translate } from "@/lib/react/components/Translate";
 export const SortingPicker: FC = () => {
   const list = useList();
 
-  const pickerItems = list.sorting.map((s) => (
+  const pickerItems = list.visibleSorting.map((s) => (
     <SortingPickerItem sorting={s} key={s.id} />
   ));
 
-  if (list.sorting.length === 0) {
+  if (pickerItems.length === 0) {
     return null;
   }
 
-  const enabledSorting = list.sorting.find((s) => s.isSorted());
+  const pickerLabelSorting = list.visibleSorting.find((s) => s.isSorted());
 
   const text = (
     <Text>
-      {enabledSorting ? (
+      {pickerLabelSorting ? (
         <Translate
           locales={locales}
           variables={{
-            property: enabledSorting.name ?? enabledSorting.property,
+            property: pickerLabelSorting.name ?? pickerLabelSorting.property,
           }}
         >
           list.setSorting
@@ -47,7 +47,7 @@ export const SortingPicker: FC = () => {
       </Button>
       <ContextMenu
         selectionMode="single"
-        selectedKeys={enabledSorting ? [enabledSorting.id] : []}
+        selectedKeys={pickerLabelSorting ? [pickerLabelSorting.id] : []}
         onAction={(id) => {
           list.getSorting(String(id)).enable();
         }}

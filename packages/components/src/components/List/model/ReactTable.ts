@@ -46,7 +46,9 @@ export class ReactTable<T> {
   private useReactTable(tableOptions: Partial<TableOptions<T>> = {}): Table<T> {
     const data = this.list.loader.useData();
 
-    const defaultSorting = this.list.sorting.filter((s) => s.defaultEnabled);
+    const defaultSorting = this.list.sorting.filter(
+      (s) => s.defaultEnabled !== false,
+    );
 
     const table = useReactTable({
       data,
@@ -54,10 +56,7 @@ export class ReactTable<T> {
         pagination: {
           pageSize: this.list.batches.batchSize,
         },
-        sorting: defaultSorting.map((s) => ({
-          id: String(s.property),
-          desc: s.direction === "desc",
-        })),
+        sorting: defaultSorting.map((s) => s.getReactTableColumnSort()),
       },
       columns: this.getTableColumnDefs(),
       getCoreRowModel: getCoreRowModel(),
@@ -109,8 +108,18 @@ export class ReactTable<T> {
     prevState: TableState,
     newState: TableState,
   ): TableState {
-    // for further customization (like fixed sorting)
-    return newState;
+    const additionalHiddenSorting = this.list.sorting
+      .filter(
+        (s) =>
+          s.defaultEnabled === "hidden" &&
+          !newState.sorting.some((existing) => existing.id === s.property),
+      )
+      .map((s) => s.getReactTableColumnSort());
+
+    return {
+      ...newState,
+      sorting: [...additionalHiddenSorting, ...newState.sorting],
+    };
   }
 
   public get searchString(): SearchValue {

@@ -57,6 +57,10 @@ export class List<T> {
     );
   }
 
+  public get visibleSorting() {
+    return this.sorting.filter((s) => s.defaultEnabled !== "hidden");
+  }
+
   public getSorting(id: string): Sorting<T> {
     const sorting = this.sorting.find((s) => s.id === id);
     invariant(!!sorting, `Could not get Sorting (ID: ${id})`);
