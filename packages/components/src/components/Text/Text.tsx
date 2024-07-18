@@ -32,7 +32,11 @@ export const Text = flowComponent("Text", (props) => {
     ...rest
   } = props;
 
-  const rootClassName = clsx(color && styles[color], className);
+  const rootClassName = clsx(
+    color && styles[color],
+    !color && styles.dark,
+    className,
+  );
 
   const textProps = { ...rest, className: rootClassName };
 
