@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.183](https://github.com/mittwald/flow/compare/0.1.0-alpha.182...0.1.0-alpha.183) (2024-07-18)
+
+### Features
+
+- **List:** support readonly typed static data
+  ([c72aa44](https://github.com/mittwald/flow/commit/c72aa44254100b11258fd91be3d2b4b6893e98a1))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.182](https://github.com/mittwald/flow/compare/0.1.0-alpha.181...0.1.0-alpha.182) (2024-07-18)
 
 ### Bug Fixes
