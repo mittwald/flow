@@ -6,7 +6,7 @@ import type { IncrementalLoaderShape } from "@/components/List/model/loading/typ
 import type { SearchShape } from "@/components/List/model/search/types";
 import type { ItemViewShape } from "@/components/List/model/item/ItemView";
 
-export type PropertyName<T> = never extends T ? string : DeepKeys<T>;
+export type PropertyName<T> = DeepKeys<T>;
 export type PropertyValue<T, TProp> = DeepValue<T, TProp>;
 
 export interface ListShape<T> {
