@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.182](https://github.com/mittwald/flow/compare/0.1.0-alpha.181...0.1.0-alpha.182) (2024-07-18)
+
+### Bug Fixes
+
+- **List:** fix render-loop
+  ([e28bc55](https://github.com/mittwald/flow/commit/e28bc5584d1e6520666c5484f789fd5a0bc48bd6))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.181](https://github.com/mittwald/flow/compare/0.1.0-alpha.180...0.1.0-alpha.181) (2024-07-18)
 
 ### Bug Fixes
