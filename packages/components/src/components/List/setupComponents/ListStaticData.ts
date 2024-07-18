@@ -1,7 +1,7 @@
 import type { ComponentType } from "react";
 
 type Props<T> = {} & {
-  data: T[];
+  data: T[] | readonly T[];
 };
 
 export const ListStaticData = <T>(ignoredProps: Props<T>) => null;
