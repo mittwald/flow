@@ -100,26 +100,21 @@ export class ReactTable<T> {
       typeof updater === "function" ? updater(prevState) : updater;
 
     runInAction(() => {
-      this.tableState.value = this.getUpdatedTableState(prevState, newState);
+      this.finalizeTableState(newState);
+      this.tableState.value = newState;
     });
   };
 
-  private getUpdatedTableState(
-    prevState: TableState,
-    newState: TableState,
-  ): TableState {
+  private finalizeTableState(state: TableState): void {
     const additionalHiddenSorting = this.list.sorting
       .filter(
         (s) =>
           s.defaultEnabled === "hidden" &&
-          !newState.sorting.some((existing) => existing.id === s.property),
+          !state.sorting.some((existing) => existing.id === s.property),
       )
       .map((s) => s.getReactTableColumnSort());
 
-    return {
-      ...newState,
-      sorting: [...additionalHiddenSorting, ...newState.sorting],
-    };
+    state.sorting.unshift(...additionalHiddenSorting);
   }
 
   public get searchString(): SearchValue {
