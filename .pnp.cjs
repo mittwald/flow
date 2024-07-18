@@ -11610,6 +11610,13 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["ansi-regex", [\
+      ["npm:3.0.1", {\
+        "packageLocation": "./.yarn/cache/ansi-regex-npm-3.0.1-01f44078a3-d108a7498b.zip/node_modules/ansi-regex/",\
+        "packageDependencies": [\
+          ["ansi-regex", "npm:3.0.1"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
       ["npm:5.0.1", {\
         "packageLocation": "./.yarn/cache/ansi-regex-npm-5.0.1-c963a48615-9a64bb8627.zip/node_modules/ansi-regex/",\
         "packageDependencies": [\
@@ -17007,6 +17014,7 @@ const RAW_RUNTIME_STATE =
           ["slash", "npm:3.0.0"],\
           ["ssri", "npm:10.0.6"],\
           ["string-width", "npm:4.2.3"],\
+          ["strip-ansi", "npm:4.0.0"],\
           ["strong-log-transformer", "npm:2.1.0"],\
           ["tar", "npm:6.2.1"],\
           ["temp-dir", "npm:1.0.0"],\
@@ -22194,6 +22202,14 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["strip-ansi", [\
+      ["npm:4.0.0", {\
+        "packageLocation": "./.yarn/cache/strip-ansi-npm-4.0.0-d4de985014-d75d9681e0.zip/node_modules/strip-ansi/",\
+        "packageDependencies": [\
+          ["strip-ansi", "npm:4.0.0"],\
+          ["ansi-regex", "npm:3.0.1"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
       ["npm:6.0.1", {\
         "packageLocation": "./.yarn/cache/strip-ansi-npm-6.0.1-caddc7cb40-1ae5f212a1.zip/node_modules/strip-ansi/",\
         "packageDependencies": [\
