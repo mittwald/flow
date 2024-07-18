@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.181](https://github.com/mittwald/flow/compare/0.1.0-alpha.180...0.1.0-alpha.181) (2024-07-18)
+
+### Bug Fixes
+
+- **List:** do not render empty header
+  ([6077fc4](https://github.com/mittwald/flow/commit/6077fc4a755c78231f4ff8dc486ec95d25e2629d))
+
+### Features
+
+- **List:** support hidden default sorting
+  ([f9b8498](https://github.com/mittwald/flow/commit/f9b8498b216113515499cd1b12d32603538d0730))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.180](https://github.com/mittwald/flow/compare/0.1.0-alpha.179...0.1.0-alpha.180) (2024-07-18)
 
 ### Bug Fixes
