@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.186](https://github.com/mittwald/flow/compare/0.1.0-alpha.185...0.1.0-alpha.186) (2024-07-19)
+
+### Bug Fixes
+
+- **Text:** Fix Text style if text is used without a wrapper component
+  ([6db586f](https://github.com/mittwald/flow/commit/6db586feac51a0085c20ee79d30378879d22aa77))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.185](https://github.com/mittwald/flow/compare/0.1.0-alpha.184...0.1.0-alpha.185) (2024-07-19)
 
 **Note:** Version bump only for package @mittwald/flow-project
