@@ -11,7 +11,7 @@ interface Props extends PropsWithClassName {
 }
 
 const DefaultSearchFieldRender: SearchFieldRenderComponent = (props) => {
-  const { className, onChange, value, ...textFieldProps } = props;
+  const { className, onChange, value, ...searchFieldProps } = props;
 
   const [searchString, setSearchString] = useState(value ?? "");
 
@@ -43,7 +43,7 @@ const DefaultSearchFieldRender: SearchFieldRenderComponent = (props) => {
       onKeyUp={handleKeyPress}
       onChange={(value) => setSearchString(value)}
       onClear={clearSearch}
-      {...textFieldProps}
+      {...searchFieldProps}
     />
   );
 };
