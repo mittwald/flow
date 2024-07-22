@@ -1,0 +1,31 @@
+@use "@/styles/mixins/formControl.scss";
+
+.inputContainer {
+  order: 2;
+  display: flex;
+  position: relative;
+
+  .searchIcon {
+    position: absolute;
+  }
+
+  --button-size: calc(var(--icon--size--m) + var(--button--padding) * 2);
+
+  .input {
+    @include formControl.formControl();
+    flex-grow: 1;
+
+    &::-webkit-search-cancel-button,
+    &::-webkit-search-decoration {
+      -webkit-appearance: none;
+    }
+  }
+
+  .clearButton {
+    position: absolute;
+    right: var(--size-rem--xxxs);
+    top: var(--size-rem--xxxs);
+    bottom: var(--size-rem--xxxs);
+    padding-block: initial;
+  }
+}
