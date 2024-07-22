@@ -2,11 +2,7 @@
   display: flex;
   font-weight: bold;
 
-  *:nth-child(even) {
-    color: var(--content-accent-color);
-  }
-
-  *:only-child {
-    color: var(--content-accent-color);
+  *:nth-child(odd) {
+    color: var(--content-color);
   }
 }
