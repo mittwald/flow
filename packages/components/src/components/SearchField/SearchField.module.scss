@@ -4,6 +4,14 @@
   &[data-empty] .clearButton {
     display: none;
   }
+
+  &:disabled,
+  &[data-disabled],
+  [aria-disabled] & {
+    .searchIcon {
+      color: var(--form-control--content-color--disabled);
+    }
+  }
 }
 
 .inputContainer {

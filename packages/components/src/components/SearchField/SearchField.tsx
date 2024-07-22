@@ -11,6 +11,8 @@ import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { Button } from "@/components/Button";
 import { IconClose, IconSearch } from "@/components/Icon/components/icons";
+import locales from "./locales/*.locale.json";
+import { useLocalizedStringFormatter } from "react-aria";
 
 export interface SearchFieldProps
   extends PropsWithChildren<Omit<Aria.SearchFieldProps, "children">>,
@@ -24,6 +26,10 @@ export const SearchField = flowComponent("SearchField", (props) => {
     styles.searchField,
     className,
   );
+
+  const stringFormatter = useLocalizedStringFormatter(locales);
+
+  const searchText = stringFormatter.format(`searchField.search`);
 
   const propsContext: PropsContext = {
     Label: {
@@ -40,13 +46,21 @@ export const SearchField = flowComponent("SearchField", (props) => {
 
   return (
     <ClearPropsContext>
-      <Aria.SearchField aria-label="search" {...rest} className={rootClassName}>
+      <Aria.SearchField
+        aria-label={searchText}
+        {...rest}
+        className={rootClassName}
+      >
         <PropsContextProvider props={propsContext}>
           {children}
         </PropsContextProvider>
         <div className={styles.inputContainer}>
           <IconSearch className={styles.searchIcon} />
-          <Aria.Input placeholder="search" className={styles.input} ref={ref} />
+          <Aria.Input
+            placeholder={searchText}
+            className={styles.input}
+            ref={ref}
+          />
           <Button
             className={styles.clearButton}
             variant="plain"

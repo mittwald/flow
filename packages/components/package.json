@@ -190,6 +190,10 @@
       "types": "./dist/types/lib/react/components/Render/index.d.ts",
       "import": "./dist/Render.js"
     },
+    "./SearchField": {
+      "types": "./dist/types/components/SearchField/index.d.ts",
+      "import": "./dist/SearchField.js"
+    },
     "./Section": {
       "types": "./dist/types/components/Section/index.d.ts",
       "import": "./dist/Section.js"
