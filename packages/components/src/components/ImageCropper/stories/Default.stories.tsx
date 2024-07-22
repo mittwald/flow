@@ -5,7 +5,7 @@ import { dummyText } from "@/lib/dev/dummyText";
 import type { Area } from "react-easy-crop";
 
 const meta: Meta<typeof ImageCropper> = {
-  title: "Upload/image-cropper",
+  title: "Upload/ImageCropper",
   component: ImageCropper,
   parameters: {
     controls: { exclude: ["className"] },

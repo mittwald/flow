@@ -10,7 +10,7 @@ import { Label } from "@/components/Label";
 import { Image } from "@/components/Image";
 
 const meta: Meta<typeof ImageUpload> = {
-  title: "Upload/image-upload",
+  title: "Upload/ImageUpload",
   component: ImageUpload,
   parameters: {
     controls: { exclude: ["className", "controller"] },
