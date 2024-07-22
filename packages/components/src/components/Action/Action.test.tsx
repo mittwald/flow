@@ -15,17 +15,29 @@ let syncAction1: Mock;
 let syncAction2: Mock;
 let asyncAction1: Mock;
 let asyncAction2: Mock;
+let actionHistory: string[];
 
 beforeEach(() => {
-  vitest.useFakeTimers();
+  vitest.useFakeTimers({
+    shouldAdvanceTime: true,
+  });
   vitest.resetAllMocks();
-  syncAction1 = vitest.fn();
-  syncAction2 = vitest.fn();
+  actionHistory = [];
+  syncAction1 = vitest.fn(() => {
+    actionHistory.push("sync1");
+  });
+  syncAction2 = vitest.fn(() => {
+    actionHistory.push("sync2");
+  });
   asyncAction1 = vitest.fn(async () => {
+    actionHistory.push("async1/start");
     await sleep();
+    actionHistory.push("async1/end");
   });
   asyncAction2 = vitest.fn(async () => {
+    actionHistory.push("async2/start");
     await sleep();
+    actionHistory.push("async2/end");
   });
 });
 
@@ -39,6 +51,10 @@ const getButton = () => screen.getByTestId("button");
 
 const clickTrigger = async () => {
   await act(() => userEvent.click(getButton()));
+};
+
+const advanceTime = async (ms: number) => {
+  await act(() => vitest.advanceTimersByTimeAsync(ms));
 };
 
 test("Sync Action is called when trigger is clicked", async () => {
@@ -114,10 +130,6 @@ test("Nested sync actions are not called when multiple skipped", async () => {
 });
 
 test("When nested sync actions, the inner action is called first", async () => {
-  syncAction1.mockImplementation(() => {
-    expect(syncAction2).not.toHaveBeenCalled();
-  });
-
   render(
     <Action action={syncAction2}>
       <Action action={syncAction1}>{button}</Action>
@@ -125,12 +137,13 @@ test("When nested sync actions, the inner action is called first", async () => {
   );
 
   await clickTrigger();
+  expect(actionHistory).toEqual(["sync1", "sync2"]);
 });
 
 test("Button is enabled again when async action has completed", async () => {
   render(<Action action={asyncAction1}>{button}</Action>);
   await clickTrigger();
-  await act(() => vitest.advanceTimersByTimeAsync(asyncActionDuration));
+  await advanceTime(asyncActionDuration);
   expect(getButton()).not.toBeDisabled();
 });
 
@@ -141,13 +154,13 @@ test("When nested async actions, the outer action is called after the first has 
     </Action>,
   );
   await clickTrigger();
-
-  await act(() => vitest.advanceTimersByTimeAsync(asyncActionDuration - 1));
-  expect(asyncAction1).toHaveBeenCalled();
-  expect(asyncAction2).not.toHaveBeenCalled();
-
-  await act(() => vitest.advanceTimersByTimeAsync(1));
-  expect(asyncAction2).toHaveBeenCalled();
+  await advanceTime(asyncActionDuration * 2);
+  expect(actionHistory).toEqual([
+    "async1/start",
+    "async1/end",
+    "async2/start",
+    "async2/end",
+  ]);
 });
 
 const expectIconInDom = (iconName: string) => {
@@ -197,7 +210,7 @@ describe("Feedback", () => {
       </Action>,
     );
     await clickTrigger();
-    await act(() => vitest.advanceTimersByTimeAsync(2000));
+    await advanceTime(2000);
     expectNoIconInDom();
   });
 });
@@ -213,14 +226,14 @@ describe("Pending state", () => {
   test("is shown when async action is pending", async () => {
     render(<Action action={asyncAction1}>{button}</Action>);
     await clickTrigger();
-    await act(() => vitest.advanceTimersByTimeAsync(1000));
+    await advanceTime(1000);
     expectIconInDom("loader-2");
   });
 
   test("is not shown when sync action is executed", async () => {
     render(<Action action={syncAction1}>{button}</Action>);
     await clickTrigger();
-    await act(() => vitest.advanceTimersByTimeAsync(1000));
+    await advanceTime(1000);
     expectNoIconInDom();
   });
 
@@ -231,7 +244,7 @@ describe("Pending state", () => {
       </Action>,
     );
     await clickTrigger();
-    await act(() => vitest.advanceTimersByTimeAsync(3000));
+    await advanceTime(3000);
     expectNoIconInDom();
   });
 });

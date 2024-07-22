@@ -1,0 +1,25 @@
+@use "@/styles/mixins/focus";
+
+.item {
+  cursor: default;
+  background-color: var(--list-item--background-color--default);
+  outline-offset: calc(var(--size-px--xs) * -1);
+
+  @include focus.focus;
+
+  &:not(:last-child) {
+    border-bottom-color: var(--list-item--border-color);
+    border-bottom-width: var(--list-item--border-width);
+    border-bottom-style: var(--list-item--border-style);
+  }
+
+  &:where(.hasAction) {
+    &:hover {
+      background-color: var(--list-item--background-color--hover);
+    }
+
+    &[data-pressed] {
+      background-color: var(--list-item--background-color--pressed);
+    }
+  }
+}

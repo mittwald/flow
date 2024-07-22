@@ -12,8 +12,6 @@ modal:
       value: 660px
     m:
       value: 900px
-    l:
-      value: 1050px
   action-group-padding:
     value: "{size-rem.l}"
   action-group-background-color:
@@ -24,3 +22,7 @@ modal:
     value: "{border-width.100}"
   action-group-border-style:
     value: "{border-style.default}"
+  off-canvas-padding-y:
+    value: "{size-px.s}"
+  off-canvas-header-background-color:
+    value: "{neutral.color.200}"

@@ -1,18 +1,24 @@
 "use client";
-import type { FC, ReactNode } from "react";
+import type { FC } from "react";
 import { MDXRemote as NextMDXRemote } from "next-mdx-remote";
+import type { LiveCodeEditorProps } from "@/lib/liveCode/components/LiveCodeEditor/LiveCodeEditor";
 import LiveCodeEditor from "@/lib/liveCode/components/LiveCodeEditor/LiveCodeEditor";
 import { PropertiesTables } from "@/lib/PropertiesTables/PropertiesTables";
 import { MdxFile } from "@/lib/mdx/MdxFile";
 import type { SerializedMdxFile } from "@/lib/mdx/MdxFile";
 import { customComponents } from "@/lib/mdx/components/MdxFileView/customComponents";
 import styles from "./customComponents.module.css";
-import type { LiveCodeEditorProps } from "@/lib/liveCode/components/LiveCodeEditor/types";
+import type { DoAndDontTileProps } from "@/lib/mdx/components/DoAndDont/DoAndDontTile";
 import DoAndDontTile from "@/lib/mdx/components/DoAndDont/DoAndDontTile";
 
 interface Props {
   mdxFile: SerializedMdxFile;
   indexFile?: SerializedMdxFile;
+}
+
+interface ExampleProps extends DoAndDontTileProps {
+  example?: string;
+  exampleText?: string;
 }
 
 export const MdxFileView: FC<Props> = (props) => {
@@ -30,42 +36,66 @@ export const MdxFileView: FC<Props> = (props) => {
     />
   );
 
-  const ExampleDo: FC<{
-    example?: string;
-    exampleText?: string;
-    children: ReactNode;
-  }> = ({ example, exampleText, children }) => (
+  const ExampleDo: FC<ExampleProps> = ({
+    example,
+    exampleText,
+    zoom,
+    bgColor,
+    mobile,
+    children,
+    heading,
+  }) => (
     <DoAndDontTile
       type="do"
       text={exampleText}
       code={example ? mdxFile.getExample(example) : undefined}
+      zoom={zoom}
+      bgColor={bgColor}
+      mobile={mobile}
+      heading={heading}
     >
       {children}
     </DoAndDontTile>
   );
 
-  const ExampleDont: FC<{
-    example?: string;
-    exampleText?: string;
-    children: ReactNode;
-  }> = ({ example, exampleText, children }) => (
+  const ExampleDont: FC<ExampleProps> = ({
+    example,
+    exampleText,
+    zoom,
+    bgColor,
+    mobile,
+    children,
+    heading,
+  }) => (
     <DoAndDontTile
       type="dont"
       text={exampleText}
       code={example ? mdxFile.getExample(example) : undefined}
+      zoom={zoom}
+      bgColor={bgColor}
+      mobile={mobile}
+      heading={heading}
     >
       {children}
     </DoAndDontTile>
   );
 
-  const ExampleInfo: FC<{
-    example?: string;
-    exampleText?: string;
-    children: ReactNode;
-  }> = ({ example, exampleText, children }) => (
+  const ExampleInfo: FC<ExampleProps> = ({
+    example,
+    exampleText,
+    zoom,
+    bgColor,
+    mobile,
+    children,
+    heading,
+  }) => (
     <DoAndDontTile
       text={exampleText}
       code={example ? mdxFile.getExample(example) : undefined}
+      zoom={zoom}
+      bgColor={bgColor}
+      mobile={mobile}
+      heading={heading}
     >
       {children}
     </DoAndDontTile>

@@ -10,9 +10,9 @@ import { Avatar } from "@/components/Avatar";
 import { dummyText } from "@/lib/dev/dummyText";
 import Image from "@/components/Image";
 import { Content } from "@/components/Content";
-import { Button } from "@/components/Button";
-import { IconCheck } from "@/components/Icon/components/icons";
-import { ListItem } from "@/components/List";
+import { StatusBadge } from "@/components/StatusBadge";
+import * as Aria from "react-aria-components";
+import { View } from "@/components/List/components/Items/components/Item/components/View";
 
 const ContentPlaceholder: FC<PropsWithChildren> = (props) => (
   <div
@@ -35,19 +35,26 @@ const ContentPlaceholder: FC<PropsWithChildren> = (props) => (
 const meta: Meta<typeof List> = {
   ...defaultMeta,
   title: "Structure/List/ListItem",
+  decorators: [
+    (story) => (
+      <Aria.GridList style={{ containerType: "inline-size" }}>
+        {story()}
+      </Aria.GridList>
+    ),
+  ],
   render: () => (
-    <div style={{ containerType: "inline-size" }}>
-      <ListItem>
-        <Avatar>
-          <Image alt="John Doe" src={dummyText.imageSrc} />
-        </Avatar>
-        <Heading>John Doe</Heading>
-        <Text>Mittwald</Text>
-        <ContextMenu>
-          <MenuItem>Show details</MenuItem>
-        </ContextMenu>
-      </ListItem>
-    </div>
+    <View>
+      <Avatar>
+        <Image alt="John Doe" src={dummyText.imageSrc} />
+      </Avatar>
+      <Heading>
+        John Doe <StatusBadge status="danger">Gesperrt</StatusBadge>
+      </Heading>
+      <Text>Mittwald</Text>
+      <ContextMenu>
+        <MenuItem>Show details</MenuItem>
+      </ContextMenu>
+    </View>
   ),
 };
 
@@ -59,107 +66,82 @@ export const Default: Story = {};
 
 export const WithTopContent: Story = {
   render: () => (
-    <div style={{ containerType: "inline-size" }}>
-      <ListItem>
-        <Avatar>
-          <Image alt="John Doe" src={dummyText.imageSrc} />
-        </Avatar>
-        <Heading>John Doe</Heading>
-        <Text>Mittwald</Text>
-        <Content>
-          <ContentPlaceholder>Top content</ContentPlaceholder>
-        </Content>
-        <ContextMenu>
-          <MenuItem>Show details</MenuItem>
-        </ContextMenu>
-      </ListItem>
-    </div>
+    <View>
+      <Avatar>
+        <Image alt="John Doe" src={dummyText.imageSrc} />
+      </Avatar>
+      <Heading>John Doe</Heading>
+      <Text>Mittwald</Text>
+      <Content>
+        <ContentPlaceholder>Top content</ContentPlaceholder>
+      </Content>
+      <ContextMenu>
+        <MenuItem>Show details</MenuItem>
+      </ContextMenu>
+    </View>
   ),
 };
 
 export const WithContent: Story = {
   render: () => (
-    <div style={{ containerType: "inline-size" }}>
-      <ListItem>
-        <Avatar>
-          <Image alt="John Doe" src={dummyText.imageSrc} />
-        </Avatar>
-        <Heading>John Doe</Heading>
-        <Text>Mittwald</Text>
-        <Content slot="top">
-          <ContentPlaceholder>Top content</ContentPlaceholder>
-        </Content>
-        <Content slot="bottom">
-          <ContentPlaceholder>Bottom content</ContentPlaceholder>
-        </Content>
-        <ContextMenu>
-          <MenuItem>Show details</MenuItem>
-        </ContextMenu>
-      </ListItem>
-    </div>
-  ),
-};
-
-export const WithLink: Story = {
-  render: () => (
-    <div style={{ containerType: "inline-size" }}>
-      <ListItem href="#">
-        <Avatar>
-          <Image alt="John Doe" src={dummyText.imageSrc} />
-        </Avatar>
-        <Heading>John Doe</Heading>
-        <Text>Mittwald</Text>
-        <Content slot="top">
-          <ContentPlaceholder>Top content</ContentPlaceholder>
-        </Content>
-        <Content slot="bottom">
-          <ContentPlaceholder>Bottom content</ContentPlaceholder>
-        </Content>
-        <ContextMenu>
-          <MenuItem>Show details</MenuItem>
-        </ContextMenu>
-      </ListItem>
-    </div>
-  ),
-};
-
-export const WithButton: Story = {
-  render: () => (
-    <div style={{ containerType: "inline-size" }}>
-      <ListItem>
-        <Avatar>
-          <Image alt="John Doe" src={dummyText.imageSrc} />
-        </Avatar>
-        <Heading>John Doe</Heading>
-        <Text>Mittwald</Text>
-        <Button variant="soft">
-          <IconCheck />
-        </Button>
-      </ListItem>
-    </div>
+    <View>
+      <Avatar>
+        <Image alt="John Doe" src={dummyText.imageSrc} />
+      </Avatar>
+      <Heading>John Doe</Heading>
+      <Text>Mittwald</Text>
+      <Content slot="top">
+        <ContentPlaceholder>Top content</ContentPlaceholder>
+      </Content>
+      <Content slot="bottom">
+        <ContentPlaceholder>Bottom content</ContentPlaceholder>
+      </Content>
+      <ContextMenu>
+        <MenuItem>Show details</MenuItem>
+      </ContextMenu>
+    </View>
   ),
 };
 
 export const SmallSpace: Story = {
   render: () => (
-    <div style={{ containerType: "inline-size" }}>
-      <ListItem>
-        <Avatar>
-          <Image alt="John Doe" src={dummyText.imageSrc} />
-        </Avatar>
-        <Heading>John Doe</Heading>
-        <Text>Mittwald</Text>
-        <Content slot="top">
-          <ContentPlaceholder>Top content</ContentPlaceholder>
-        </Content>
-        <Content slot="bottom">
-          <ContentPlaceholder>Bottom content</ContentPlaceholder>
-        </Content>
-        <ContextMenu>
-          <MenuItem>Show details</MenuItem>
-        </ContextMenu>
-      </ListItem>
-    </div>
+    <View>
+      <Avatar>
+        <Image alt="John Doe" src={dummyText.imageSrc} />
+      </Avatar>
+      <Heading>John Doe</Heading>
+      <Text>Mittwald</Text>
+      <Content slot="top">
+        <ContentPlaceholder>Top content</ContentPlaceholder>
+      </Content>
+      <Content slot="bottom">
+        <ContentPlaceholder>Bottom content</ContentPlaceholder>
+      </Content>
+      <ContextMenu>
+        <MenuItem>Show details</MenuItem>
+      </ContextMenu>
+    </View>
   ),
   parameters: { viewport: { defaultViewport: "mobile1" } },
+};
+
+export const CustomContainerBreakpoint: Story = {
+  render: () => (
+    <View containerBreakpointSize="s">
+      <Avatar>
+        <Image alt="John Doe" src={dummyText.imageSrc} />
+      </Avatar>
+      <Heading>John Doe</Heading>
+      <Text>Mittwald</Text>
+      <Content slot="top">
+        <ContentPlaceholder>Top content</ContentPlaceholder>
+      </Content>
+      <Content slot="bottom">
+        <ContentPlaceholder>Bottom content</ContentPlaceholder>
+      </Content>
+      <ContextMenu>
+        <MenuItem>Show details</MenuItem>
+      </ContextMenu>
+    </View>
+  ),
 };

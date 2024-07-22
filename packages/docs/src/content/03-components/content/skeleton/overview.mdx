@@ -1,25 +1,25 @@
-## Beispiel
+# Beispiel
 
 <LiveCodeEditor />
 
 ---
 
-## Benutzerdefinierte Größe
+# Benutzerdefinierte Größe
 
 <LiveCodeEditor example="custom-size" editorCollapsed />
 
 ---
 
-## Accessibility
+# Accessibility
 
 Das Skeleton soll von Screenreadern ignoriert werden und enthält deswegen das
 Property `aria-hidden`.
 
 Die Accessibility eines Ladezustands wird **nicht** vom Skeleton geregelt.
 
-Um für den Screenreader erkenntlich zu machen, dass ein Inhalt fertig geladen
-hat sollte dieser im Ladezustand das Property `aria-busy`, welches auf `false`
-gesetzt wird, wenn fertig geladen wurde. (s.
+Um einem Screenreader anzuzeigen, dass ein Inhalt vollständig geladen ist,
+sollte im Ladezustand die Property `aria-busy` verwendet werden. Dieses wird auf
+`false` gesetzt, sobald der Ladevorgang abgeschlossen ist. (s.
 [MDN](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-busy))
 
 ## Properties

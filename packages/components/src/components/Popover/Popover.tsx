@@ -10,13 +10,17 @@ import OverlayContextProvider from "@/lib/controller/overlay/OverlayContextProvi
 export interface PopoverProps
   extends PropsWithChildren<Omit<Aria.PopoverProps, "children">> {
   withTip?: boolean;
+  isDialogContent?: boolean;
   controller?: OverlayController;
+  contentClassName?: string;
 }
 
 export const Popover = flowComponent("Popover", (props) => {
   const {
     children,
     className,
+    contentClassName,
+    isDialogContent = false,
     controller: controllerFromProps,
     withTip,
     refProp: ref,
@@ -34,6 +38,8 @@ export const Popover = flowComponent("Popover", (props) => {
 
   const rootClassName = clsx(styles.popover, className);
 
+  const ContentComponent = isDialogContent ? Aria.Dialog : "div";
+
   return (
     <Aria.Popover
       {...rest}
@@ -50,11 +56,11 @@ export const Popover = flowComponent("Popover", (props) => {
           </svg>
         </Aria.OverlayArrow>
       )}
-      <Aria.Dialog className={styles.content}>
+      <ContentComponent className={clsx(styles.content, contentClassName)}>
         <OverlayContextProvider type="Popover" controller={controller}>
           {children}
         </OverlayContextProvider>
-      </Aria.Dialog>
+      </ContentComponent>
     </Aria.Popover>
   );
 });

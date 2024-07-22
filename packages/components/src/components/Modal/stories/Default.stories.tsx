@@ -21,7 +21,7 @@ const meta: Meta<typeof Modal> = {
   argTypes: {
     size: {
       control: "inline-radio",
-      options: ["s", "m", "l"],
+      options: ["s", "m"],
     },
   },
   args: {
@@ -124,4 +124,9 @@ export const Mobile: Story = {
 
 export const OffCanvas: Story = {
   args: { offCanvas: true },
+};
+
+export const OffCanvasMobile: Story = {
+  args: { offCanvas: true },
+  parameters: { viewport: { defaultViewport: "mobile1" } },
 };

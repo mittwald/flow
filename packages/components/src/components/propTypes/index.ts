@@ -37,9 +37,11 @@ import type { SectionProps } from "@/components/Section";
 import type { SliderProps } from "@/components/Slider";
 import type { CounterBadgeProps } from "@/components/CounterBadge";
 import type { FlowComponentName } from "@/components/propTypes/types";
-import type { OffCanvasProps } from "@/components/OffCanvas";
 import type { ContextualHelpProps } from "@/components/ContextualHelp";
 import type { PopoverProps } from "@/components/Popover";
+import type { ContextMenuSectionProps } from "@/components/ContextMenu/components/ContextMenuSection";
+import type { OverlayTriggerProps } from "@/components/OverlayTrigger";
+import type { ListProps } from "@/components/List";
 
 export * from "./types";
 
@@ -53,6 +55,8 @@ export interface FlowComponentPropsTypes {
   CheckboxGroup: CheckboxGroupProps;
   Content: ContentProps;
   ContextMenu: ContextMenuProps;
+  ContextMenuSection: ContextMenuSectionProps;
+  ContextMenuTrigger: OverlayTriggerProps;
   ContextualHelp: ContextualHelpProps;
   CopyButton: CopyButtonProps;
   CounterBadge: CounterBadgeProps;
@@ -67,11 +71,11 @@ export interface FlowComponentPropsTypes {
   Label: LabelProps;
   LayoutCard: LayoutCardProps;
   Link: LinkProps;
+  List: ListProps;
   MenuItem: MenuItemProps;
   Modal: ModalProps;
   NumberField: NumberFieldProps;
   Option: OptionProps;
-  OffCanvas: OffCanvasProps;
   Popover: PopoverProps;
   Radio: RadioProps;
   RadioButton: RadioButtonProps;
@@ -100,6 +104,8 @@ const propsContextSupportingComponentsMap: Record<
   CheckboxGroup: true,
   Content: true,
   ContextMenu: true,
+  ContextMenuSection: true,
+  ContextMenuTrigger: true,
   ContextualHelp: true,
   CopyButton: true,
   CounterBadge: true,
@@ -114,11 +120,11 @@ const propsContextSupportingComponentsMap: Record<
   Label: true,
   LayoutCard: true,
   Link: true,
+  List: true,
   MenuItem: true,
   Modal: true,
   NumberField: true,
   Radio: true,
-  OffCanvas: true,
   Option: true,
   Popover: true,
   RadioButton: true,

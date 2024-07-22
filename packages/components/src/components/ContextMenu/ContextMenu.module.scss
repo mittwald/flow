@@ -12,6 +12,12 @@
   }
 }
 
-.popover [role="dialog"] {
+.section {
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--menu--item-to-item-spacing);
+}
+
+.popoverContent.popoverContent {
   padding: var(--context-menu--padding);
 }

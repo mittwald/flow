@@ -1,0 +1,11 @@
+.text {
+  color: inherit;
+
+  &:where(.light) {
+    color: var(--content--color--light);
+  }
+
+  &:where(.dark) {
+    color: var(--content--color--dark);
+  }
+}

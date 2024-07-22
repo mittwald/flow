@@ -13,7 +13,7 @@ import OverlayContextProvider from "@/lib/controller/overlay/OverlayContextProvi
 import { Action } from "@/components/Action";
 
 export interface ContextMenuProps
-  extends PopoverProps,
+  extends Omit<PopoverProps, "withTip">,
     Pick<
       Aria.MenuProps<MenuItemProps>,
       | "onAction"
@@ -48,12 +48,21 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
     overlayControllerFromProps ?? overlayControllerFromContext;
 
   const ariaSelectionMode =
-    selectionMode === "navigation" ? "single" : selectionMode;
+    selectionMode === "navigation" ? "none" : selectionMode;
+
+  const selectionVariant =
+    selectionMode === "navigation" ? "navigation" : "control";
 
   const propsContext: PropsContext = {
     MenuItem: {
-      selectionVariant:
-        selectionMode === "navigation" ? "navigation" : "control",
+      selectionVariant,
+    },
+
+    Section: {
+      MenuItem: {
+        selectionVariant,
+      },
+      renderContextMenuSection: true,
     },
   };
 
@@ -66,8 +75,9 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
     <ClearPropsContext>
       <Popover
         {...rest}
-        className={styles.popover}
+        contentClassName={styles.popoverContent}
         controller={overlayController}
+        isDialogContent={false}
       >
         <OverlayContextProvider
           type="ContextMenu"

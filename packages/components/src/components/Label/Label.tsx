@@ -13,6 +13,7 @@ export interface LabelProps
   extends PropsWithChildren<Omit<Aria.LabelProps, "children">>,
     FlowComponentProps {
   optional?: boolean;
+  isDisabled?: boolean;
   /* @internal */
   unstyled?: boolean;
 }
@@ -22,6 +23,7 @@ export const Label = flowComponent("Label", (props) => {
     children,
     className,
     optional,
+    isDisabled,
     refProp: ref,
     unstyled = false,
     ...rest
@@ -29,7 +31,9 @@ export const Label = flowComponent("Label", (props) => {
 
   const stringFormatter = useLocalizedStringFormatter(locales);
 
-  const rootClassName = unstyled ? className : clsx(styles.label, className);
+  const rootClassName = unstyled
+    ? className
+    : clsx(styles.label, isDisabled && styles.disabled, className);
 
   const optionalMarker = " " + stringFormatter.format("label.optional");
 

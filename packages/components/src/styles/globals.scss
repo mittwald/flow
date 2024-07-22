@@ -24,13 +24,35 @@
 
 // CSS Specificity: 0-0-2
 html
-body
-*:where(
+  body
+  *:where(
     [class*="flow--"]:not([class*="flow--"] [class*="flow--"]):not(svg):not(
         table
       )
   ) {
   all: initial;
+}
+
+/**
+  "all: initial" sets "display: inline" for **all elements**. This rule, reverts this for common block elements.
+ */
+body article:where([class*="flow--"]),
+body aside:where([class*="flow--"]),
+body address:where([class*="flow--"]),
+body blockquote:where([class*="flow--"]),
+body div:where([class*="flow--"]),
+body footer:where([class*="flow--"]),
+body header:where([class*="flow--"]),
+body hr:where([class*="flow--"]),
+body main:where([class*="flow--"]),
+body nav:where([class*="flow--"]),
+body p:where([class*="flow--"]),
+body pre:where([class*="flow--"]) {
+  display: block;
+}
+
+body table:where([class*="flow--"]) {
+  display: table;
 }
 
 // CSS Specificity: 0-0-2
@@ -47,7 +69,7 @@ html body *:where([class*="flow--"]:not([class*="flow--"] [class*="flow--"])) {
   line-height: var(--line-height--default);
   font-size: var(--size-rem--m);
   font-weight: var(--font-weight--normal);
-  color: var(--content--color);
+  color: var(--content--color--default);
 
   /*
   Josh's Custom CSS Reset

@@ -1,4 +1,5 @@
 @use "../../styles/mixins/formControl";
+@use "../../styles/mixins/containerBreakpointSizes";
 
 .radioGroup {
   order: 2;
@@ -15,52 +16,29 @@
   .segments {
     display: flex;
     flex-wrap: nowrap;
-
     order: 2;
-
-    @container (max-width: 550px) {
-      flex-direction: column;
-    }
   }
 
   .segment {
     @include formControl.formControl();
     display: grid;
     flex: 1;
-    column-gap: var(--segmented-control-group--icon-to-text-spacing);
+    column-gap: var(--segment--text-to-icon-spacing);
     border-radius: 0;
 
     grid-template-areas: "label checkmark";
     grid-template-columns: 1fr auto;
+    margin-right: -1px; /* Collapse borders */
 
-    @container (min-width: 551px) {
-      margin-right: -1px; /* Collapse borders */
-
-      &:first-of-type {
-        border-start-start-radius: var(--form-control--corner-radius);
-        border-end-start-radius: var(--form-control--corner-radius);
-      }
-
-      &:last-of-type {
-        border-start-end-radius: var(--form-control--corner-radius);
-        border-end-end-radius: var(--form-control--corner-radius);
-        margin: 0;
-      }
+    &:first-of-type {
+      border-start-start-radius: var(--form-control--corner-radius);
+      border-end-start-radius: var(--form-control--corner-radius);
     }
 
-    @container (max-width: 550px) {
-      margin-bottom: -1px; /* Collapse borders */
-
-      &:first-of-type {
-        border-start-start-radius: var(--form-control--corner-radius);
-        border-start-end-radius: var(--form-control--corner-radius);
-      }
-
-      &:last-of-type {
-        border-end-end-radius: var(--form-control--corner-radius);
-        border-end-start-radius: var(--form-control--corner-radius);
-        margin: 0;
-      }
+    &:last-of-type {
+      border-start-end-radius: var(--form-control--corner-radius);
+      border-end-end-radius: var(--form-control--corner-radius);
+      margin: 0;
     }
 
     .checkmark {
@@ -70,8 +48,43 @@
 
     &[data-selected] {
       z-index: 1;
+
       .checkmark {
         display: block;
+      }
+    }
+  }
+}
+
+.radioGroupContainer {
+  @include containerBreakpointSizes.containerBreakpointSizes(
+    250,
+    400,
+    550,
+    700,
+    850
+  ) {
+    .segmentedGroup {
+      .segments {
+        flex-direction: column;
+      }
+
+      .segment {
+        margin-bottom: -1px; /* Collapse borders */
+        margin-right: 0;
+
+        &:first-of-type {
+          border-start-start-radius: var(--form-control--corner-radius);
+          border-start-end-radius: var(--form-control--corner-radius);
+          border-end-start-radius: 0;
+        }
+
+        &:last-of-type {
+          border-end-end-radius: var(--form-control--corner-radius);
+          border-end-start-radius: var(--form-control--corner-radius);
+          border-start-end-radius: 0;
+          margin: 0;
+        }
       }
     }
   }

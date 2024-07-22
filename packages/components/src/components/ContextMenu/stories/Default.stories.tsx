@@ -6,6 +6,8 @@ import ContextMenu, {
 } from "@/components/ContextMenu";
 import { Button } from "@/components/Button";
 import { Separator } from "@/components/Separator";
+import { Heading } from "@/components/Heading";
+import { Section } from "@/components/Section";
 
 const meta: Meta<typeof ContextMenu> = {
   title: "Actions/ContextMenu",
@@ -85,6 +87,27 @@ export const WithSeparator: Story = {
         <Separator />
         <MenuItem href="https://www.google.de">www.google.de</MenuItem>
         <MenuItem href="https://www.adobe.com">www.adobe.com</MenuItem>
+      </ContextMenu>
+    </ContextMenuTrigger>
+  ),
+  args: {
+    defaultOpen: true,
+  },
+};
+
+export const WithContextMenuSection: Story = {
+  render: (props) => (
+    <ContextMenuTrigger>
+      <Button>Trigger</Button>
+      <ContextMenu selectionMode="navigation" {...props}>
+        <Section>
+          <Heading>Websites</Heading>
+          <MenuItem href="https://www.mittwald.de" id="https://www.mittwald.de">
+            www.mittwald.de
+          </MenuItem>
+          <MenuItem href="https://www.google.de">www.google.de</MenuItem>
+          <MenuItem href="https://www.adobe.com">www.adobe.com</MenuItem>
+        </Section>
       </ContextMenu>
     </ContextMenuTrigger>
   ),

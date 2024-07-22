@@ -53,7 +53,7 @@ export default defineConfig(
           Link: "./src/components/Link/index.ts",
           List: "./src/components/List/index.ts",
           "List/ListLoaderAsyncResource":
-            "./src/components/List/components/ListLoaderAsyncResource.ts",
+            "./src/components/List/setupComponents/ListLoaderAsyncResource.ts",
           LoadingSpinner: "./src/components/LoadingSpinner/index.ts",
           MenuItem: "./src/components/MenuItem/index.ts",
           Modal: "./src/components/Modal/index.ts",
@@ -62,9 +62,10 @@ export default defineConfig(
           NotificationProvider:
             "./src/components/NotificationProvider/index.ts",
           NumberField: "./src/components/NumberField/index.ts",
-          OffCanvas: "./src/components/OffCanvas/index.ts",
-          ProgressBar: "./src/components/ProgressBar/index.ts",
           Popover: "./src/components/Popover/index.ts",
+          ProgressBar: "./src/components/ProgressBar/index.ts",
+          PropsContextProvider:
+            "./src/lib/propsContext/PropsContextProvider.tsx",
           RadioGroup: "./src/components/RadioGroup/index.ts",
           Render: "./src/lib/react/components/Render/index.ts",
           Section: "./src/components/Section/index.ts",

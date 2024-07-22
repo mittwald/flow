@@ -8,7 +8,7 @@ export type PropsWithStatus<T extends Status = Status, P = unknown> = P & {
 
 export interface PropsWithTunnel {
   /** @internal */
-  tunnelId?: string;
+  tunnelId?: string | null;
 }
 
 export interface PropsWithClassName {
@@ -19,3 +19,9 @@ export type PropsWithElementType<T extends keyof ReactHTML = never> =
   HTMLAttributes<HTMLElement> & {
     elementType?: T | ExoticComponent;
   };
+
+export type ContainerBreakpointSize = "xs" | "s" | "m" | "l" | "xl";
+
+export interface PropsWithContainerBreakpointSize {
+  containerBreakpointSize?: ContainerBreakpointSize;
+}
