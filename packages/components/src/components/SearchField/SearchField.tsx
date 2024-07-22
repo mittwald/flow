@@ -19,7 +19,11 @@ export interface SearchFieldProps
 export const SearchField = flowComponent("SearchField", (props) => {
   const { children, className, refProp: ref, ...rest } = props;
 
-  const rootClassName = clsx(formFieldStyles.formField, className);
+  const rootClassName = clsx(
+    formFieldStyles.formField,
+    styles.searchField,
+    className,
+  );
 
   const propsContext: PropsContext = {
     Label: {
