@@ -57,7 +57,7 @@ export default defineConfig(
           Link: "./src/components/Link/index.ts",
           List: "./src/components/List/index.ts",
           "List/ListLoaderAsyncResource":
-            "./src/components/List/components/ListLoaderAsyncResource.ts",
+            "./src/components/List/setupComponents/ListLoaderAsyncResource.ts",
           LoadingSpinner: "./src/components/LoadingSpinner/index.ts",
           MenuItem: "./src/components/MenuItem/index.ts",
           Modal: "./src/components/Modal/index.ts",

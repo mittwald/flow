@@ -6,10 +6,12 @@ import styles from "./TextField.module.scss";
 import { ClearPropsContext } from "@/lib/propsContext";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import type { PropsWithClassName } from "@/lib/types/props";
 
 export interface TextFieldProps
-  extends Omit<TextFieldBaseProps, "input">,
+  extends Omit<TextFieldBaseProps, "input" | "className">,
     Pick<Aria.InputProps, "placeholder">,
+    PropsWithClassName,
     FlowComponentProps {}
 
 export const TextField = flowComponent("TextField", (props) => {

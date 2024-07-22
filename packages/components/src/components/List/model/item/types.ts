@@ -1,7 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type AnyData = any;
+import type { ReactNode } from "react";
 
-export interface ListDataLoaderResult<T> {
-  data: T[];
-  itemTotalCount?: number;
-}
+export type RenderItemFn<T> = (data: T) => ReactNode;

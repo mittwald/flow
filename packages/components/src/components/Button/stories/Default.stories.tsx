@@ -14,6 +14,7 @@ const meta: Meta<typeof Button> = {
     variant: "solid",
     color: "primary",
     size: "m",
+    isDisabled: false,
   },
   argTypes: {
     color: {
@@ -27,6 +28,9 @@ const meta: Meta<typeof Button> = {
     size: {
       control: "inline-radio",
       options: ["m", "s"],
+    },
+    isDisabled: {
+      control: "boolean",
     },
   },
   parameters: {

@@ -15,11 +15,12 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import type List from "@/components/List/model/List";
-import type { PropertyName } from "@/components/List/model/item/Item";
 import invariant from "invariant";
 import { useLocalObservable } from "mobx-react-lite";
 import { runInAction } from "mobx";
 import { useAutorunEffect } from "@/lib/mobx/useAutorunEffect";
+import type { PropertyName } from "@/components/List/model/types";
+import type { SearchValue } from "@/components/List/model/search/types";
 
 export class ReactTable<T> {
   public readonly list: List<T>;
@@ -45,7 +46,9 @@ export class ReactTable<T> {
   private useReactTable(tableOptions: Partial<TableOptions<T>> = {}): Table<T> {
     const data = this.list.loader.useData();
 
-    const defaultSorting = this.list.sorting.filter((s) => s.defaultEnabled);
+    const defaultSorting = this.list.sorting.filter(
+      (s) => s.defaultEnabled !== false,
+    );
 
     const table = useReactTable({
       data,
@@ -53,10 +56,7 @@ export class ReactTable<T> {
         pagination: {
           pageSize: this.list.batches.batchSize,
         },
-        sorting: defaultSorting.map((s) => ({
-          id: String(s.property),
-          desc: s.direction === "desc",
-        })),
+        sorting: defaultSorting.map((s) => s.getReactTableColumnSort()),
       },
       columns: this.getTableColumnDefs(),
       getCoreRowModel: getCoreRowModel(),
@@ -65,6 +65,7 @@ export class ReactTable<T> {
       getPaginationRowModel: getPaginationRowModel(),
       getFacetedUniqueValues: getFacetedUniqueValues(),
       onStateChange: this.onTableStateChange,
+      globalFilterFn: "auto",
       ...tableOptions,
     });
 
@@ -99,16 +100,25 @@ export class ReactTable<T> {
       typeof updater === "function" ? updater(prevState) : updater;
 
     runInAction(() => {
-      this.tableState.value = this.getUpdatedTableState(prevState, newState);
+      this.finalizeTableState(newState);
+      this.tableState.value = newState;
     });
   };
 
-  private getUpdatedTableState(
-    prevState: TableState,
-    newState: TableState,
-  ): TableState {
-    // for further customization (like fixed sorting)
-    return newState;
+  private finalizeTableState(state: TableState): void {
+    const additionalHiddenSorting = this.list.sorting
+      .filter(
+        (s) =>
+          s.defaultEnabled === "hidden" &&
+          !state.sorting.some((existing) => existing.id === s.property),
+      )
+      .map((s) => s.getReactTableColumnSort());
+
+    state.sorting.unshift(...additionalHiddenSorting);
+  }
+
+  public get searchString(): SearchValue {
+    return this.tableState.value?.globalFilter;
   }
 
   public getTableColumn(property: PropertyName<T>): Column<T> {

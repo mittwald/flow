@@ -12,6 +12,7 @@ export class BatchesController<T> {
     this.list = list;
     this.batchSize = batchSize;
     list.filters.forEach((f) => f.onFilterUpdated(() => this.reset()));
+    list.search?.onUpdated(() => this.reset());
   }
 
   private get reactTable(): Table<T> {
@@ -26,16 +27,12 @@ export class BatchesController<T> {
     return this.reactTable.getCanNextPage();
   }
 
-  public getTotalItemsCount(): number | undefined {
-    return this.reactTable.getRowCount();
+  public getTotalItemsCount(): number {
+    return this.reactTable.getRowCount() ?? 0;
   }
 
-  public getFilteredItemsCount(): number {
-    return this.reactTable.getFilteredRowModel().rows.length;
-  }
-
-  public getVisibleItemsCount(): number | undefined {
-    return this.reactTable.getRowModel().rows.length;
+  public getVisibleItemsCount(): number {
+    return this.reactTable.getRowModel().rows.length ?? 0;
   }
 
   public updateItemTotalCount(value: number): void {
@@ -46,7 +43,9 @@ export class BatchesController<T> {
   }
 
   public reset(): void {
-    this.updateItemTotalCount(0);
+    if (this.list.loader.manualFiltering) {
+      this.updateItemTotalCount(0);
+    }
     this.reactTable.setPagination(() => ({
       pageIndex: 0,
       pageSize: this.batchSize,

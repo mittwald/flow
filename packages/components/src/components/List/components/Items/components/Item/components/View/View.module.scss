@@ -1,0 +1,250 @@
+@use "@/styles/mixins/containerBreakpointSizes";
+
+.view {
+  --title-width: 30ch;
+  padding: var(--list-item--padding);
+  display: grid;
+  gap: var(--list-item--content-to-content-spacing);
+
+  &:has(.title:not(:empty)):has(.topContent):has(.content):has(.action) {
+    grid-template-areas:
+      "title   topContent action "
+      "content content    content";
+    grid-template-columns: var(--title-width) 1fr auto;
+  }
+
+  &:has(.title:not(:empty)):has(.topContent):has(.content):not(:has(.action)) {
+    grid-template-areas:
+      "title   topContent"
+      "content content   ";
+    grid-template-columns: var(--title-width) 1fr;
+  }
+
+  &:has(.title:not(:empty)):has(.topContent):not(:has(.content)):not(
+      :has(.action)
+    ) {
+    grid-template-areas: "title topContent";
+    grid-template-columns: var(--title-width) 1fr;
+  }
+
+  &:has(.title:not(:empty)):not(:has(.topContent)):has(.content):not(
+      :has(.action)
+    ) {
+    grid-template-areas:
+      "title  "
+      "content";
+    grid-template-columns: auto;
+  }
+
+  &:has(.title:not(:empty)):not(:has(.topContent)):not(:has(.content)):not(
+      :has(.action)
+    ) {
+    grid-template-areas: "title";
+    grid-template-columns: 1fr;
+  }
+
+  &:not(:has(.title:not(:empty))):has(.topContent):has(.content):has(.action) {
+    grid-template-areas:
+      "topContent action"
+      "content    content";
+    grid-template-columns: 1fr auto;
+  }
+
+  &:not(:has(.title:not(:empty))):not(:has(.topContent)):has(.content):has(
+      .action
+    ) {
+    grid-template-areas: "content action";
+    grid-template-columns: 1fr auto;
+  }
+
+  &:has(.title:not(:empty)):not(:has(.topContent)):has(.content):has(.action) {
+    grid-template-areas:
+      "title   action "
+      "content content";
+    grid-template-columns: 1fr auto;
+  }
+
+  &:has(.title:not(:empty)):not(:has(.topContent)):not(:has(.content)):has(
+      .action
+    ) {
+    grid-template-areas: "title action";
+    grid-template-columns: 1fr auto;
+  }
+
+  &:has(.title:not(:empty)):has(.topContent):not(:has(.content)):has(.action) {
+    grid-template-areas: "title topContent action";
+    grid-template-columns: var(--title-width) 1fr auto;
+  }
+
+  &:not(:has(.title:not(:empty))):has(.topContent):not(:has(.content)):has(
+      .action
+    ) {
+    grid-template-areas: "topContent action";
+    grid-template-columns: 1fr auto;
+  }
+
+  &:not(:has(.title:not(:empty))):has(.topContent):not(:has(.content)):not(
+      :has(.action)
+    ) {
+    grid-template-areas: "topContent";
+    grid-template-columns: auto;
+  }
+
+  .title {
+    grid-area: title;
+    display: grid;
+    grid-column-gap: var(--list-item--content-to-content-spacing);
+
+    grid-template-areas:
+      "avatar title   "
+      "avatar subtitle";
+    grid-template-columns: auto 1fr;
+
+    &:empty {
+      display: none;
+    }
+
+    &:not(:has(.avatar)) {
+      grid-template-areas:
+        "title   "
+        "subtitle";
+      grid-template-columns: 1fr;
+    }
+
+    &:not(:has(.text)) {
+      grid-template-areas: "avatar title";
+
+      &:not(:has(.avatar)) {
+        grid-template-areas: "title";
+      }
+    }
+
+    .avatar {
+      grid-area: avatar;
+      align-self: center;
+    }
+
+    .heading {
+      grid-area: title;
+      align-self: center;
+    }
+
+    .text {
+      grid-area: subtitle;
+      font-size: var(--list-item--subtitle-font-size);
+    }
+  }
+
+  .topContent {
+    grid-area: topContent;
+  }
+
+  .content {
+    grid-area: content;
+  }
+
+  .action {
+    grid-area: action;
+    align-self: center;
+    justify-self: end;
+  }
+
+  @include containerBreakpointSizes.containerBreakpointSizes(
+    250,
+    450,
+    650,
+    850,
+    1050
+  ) {
+    &:has(.title:not(:empty)):has(.topContent):has(.content):has(.action) {
+      grid-template-areas:
+        "title      action"
+        "topContent topContent"
+        "content    content   ";
+      grid-template-columns: 1fr auto;
+    }
+
+    &:has(.title:not(:empty)):has(.topContent):has(.content):not(
+        :has(.action)
+      ) {
+      grid-template-areas:
+        "title     "
+        "topContent"
+        "content   ";
+      grid-template-columns: auto;
+    }
+
+    &:has(.title:not(:empty)):has(.topContent):not(:has(.content)):not(
+        :has(.action)
+      ) {
+      grid-template-areas:
+        "title     "
+        "topContent";
+      grid-template-columns: auto;
+    }
+
+    &:has(.title:not(:empty)):not(:has(.topContent)):has(.content):not(
+        :has(.action)
+      ) {
+      grid-template-areas:
+        "title  "
+        "content";
+      grid-template-columns: auto;
+    }
+
+    &:has(.title:not(:empty)):not(:has(.topContent)):not(:has(.content)):not(
+        :has(.action)
+      ) {
+      grid-template-areas: "title";
+      grid-template-columns: auto;
+    }
+
+    &:not(:has(.title:not(:empty))):has(.topContent):has(.content):has(
+        .action
+      ) {
+      grid-template-areas:
+        "topContent action       "
+        "content    content      ";
+      grid-template-columns: 1fr auto;
+    }
+
+    &:not(:has(.title:not(:empty))):not(:has(.topContent)):has(.content):has(
+        .action
+      ) {
+      grid-template-areas: "content action";
+      grid-template-columns: 1fr auto;
+    }
+
+    &:has(.title:not(:empty)):not(:has(.topContent)):has(.content):has(
+        .action
+      ) {
+      grid-template-areas:
+        "title   action       "
+        "content content      ";
+      grid-template-columns: 1fr auto;
+    }
+
+    &:has(.title:not(:empty)):not(:has(.topContent)):not(:has(.content)):has(
+        .action
+      ) {
+      grid-template-areas: "title action";
+      grid-template-columns: 1fr auto;
+    }
+
+    &:has(.title:not(:empty)):has(.topContent):not(:has(.content)):has(
+        .action
+      ) {
+      grid-template-areas:
+        "title      action    "
+        "topContent topContent";
+      grid-template-columns: 1fr auto;
+    }
+
+    &:not(:has(.title:not(:empty))):has(.topContent):not(:has(.content)):has(
+        .action
+      ) {
+      grid-template-areas: "topContent action";
+      grid-template-columns: 1fr auto;
+    }
+  }
+}

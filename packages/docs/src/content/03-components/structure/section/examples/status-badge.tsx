@@ -6,8 +6,10 @@ import Header from "@mittwald/flow-react-components/Header";
 
 <Section>
   <Header>
-    <Heading>Newsletter</Heading>
-    <StatusBadge>Subscribed</StatusBadge>
+    <Heading>
+      <Text>Newsletter</Text>
+      <StatusBadge>Abonniert</StatusBadge>
+    </Heading>
   </Header>
   <Text>
     Kommende Releases, neue Features und Tipps rund um dein

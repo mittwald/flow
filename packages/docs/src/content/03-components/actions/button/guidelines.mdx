@@ -1,13 +1,11 @@
+# Grundlagen
+
 Mit einem Button können Aktionen ausgeführt werden. Entweder wird die Aktion
 direkt im Content-Bereich durchgeführt oder innerhalb eines
 [Modal](/03-components/overlays/modal) oder
 [Off-Canvas](/03-components/overlays/off-canvas), ohne dass die Seite verlassen
 werden muss. Ein Button hat eine hohe Sichtbarkeit und sollte daher nicht zu
 übermäßig eingesetzt werden.
-
----
-
-# Grundlagen
 
 ## Best practices
 
@@ -105,13 +103,13 @@ werden, welche Buttonart dafür geeignet ist.
 - Versuche, Buttons desselben Variant und derselben Color zu gruppieren.
 
 <DoAndDont>
-  <Dont example="hierarchy-order-dont">
-    Ignoriere nicht die Hierarchie der Buttons, die sie zueinander haben.
-  </Dont>
   <Do example="hierarchy-order-do">
     Versuche, ähnliche Buttons zu gruppieren. Zum Beispiel, dass Buttons in der
     Solid-Variant nebeneinander stehen.
   </Do>
+  <Dont example="hierarchy-order-dont">
+    Ignoriere nicht die Hierarchie der Buttons, die sie zueinander haben.
+  </Dont>
 </DoAndDont>
 <DoAndDont>
   <Do example="hierarchy-soft-do">
@@ -150,7 +148,7 @@ Zeige dem Nutzer immer an, dass der Klick auf den Button eine Aktion auslöst:
 
 ---
 
-# Content guidelines
+# Writing guidelines
 
 ## Text
 
@@ -166,21 +164,21 @@ Achte beim Verfassen des Textes besonders auf:
   nicht ausschließlich in Großbuchstaben geschrieben werden.
 
 <DoAndDont>
-  <Dont example="text-length-dont">
-    Werde nicht mehrzeilig und verwende nicht zu viele Wörter.
-  </Dont>
   <Do example="text-length-do">
     Verwende maximal zwei Wörter, um die Aktion exakt zu beschreiben.
   </Do>
+  <Dont example="text-length-dont">
+    Werde nicht mehrzeilig und verwende nicht zu viele Wörter.
+  </Dont>
 </DoAndDont>
 
 <DoAndDont>
-  <Dont example="text-clarity-dont" zoom={0.7} bgColor="dark">
-    Verwirre die Nutzer nicht mit mehrdeutigen Begriffen.
-  </Dont>
   <Do example="text-clarity-do" zoom={0.7} bgColor="dark">
     Beschreibe exakt und kurz, welche Aktion sich hinter den Buttons verbergen.
   </Do>
+  <Dont example="text-clarity-dont" zoom={0.7} bgColor="dark">
+    Verwirre die Nutzer nicht mit mehrdeutigen Begriffen.
+  </Dont>
 </DoAndDont>
 
 ## Icon
@@ -191,18 +189,18 @@ Achte bei der Auswahl des Icons besonders auf...
 - dass die [Icon-Komponente](/03-components/content/icon) verwendet wird.
 
 <DoAndDont>
+  <Do example="icon-clarity-do">
+    Verwende Icons, die die Funktion hinter dem Icon visuell verdeutlichen.
+  </Do>
   <Dont example="icon-clarity-dont">
     Verwende keine Icons die nur gut aussehen, aber keine Funktion
     widerspiegeln.
   </Dont>
-  <Do example="icon-clarity-do">
-    Verwende Icons, die die Funktion hinter dem Icon visuell verdeutlichen.
-  </Do>
 </DoAndDont>
 
 ### Text mit Icon
 
-Achte besonders bei einem Button mit Text und einem Icon:
+Beachte besonders bei einem Button mit Text und einem Icon:
 
 - Das Icon muss eindeutig zeigen, dass sich hinter dem Button eine besondere
   Funktion verbirgt. Dies kann z. B. bei einer Dropdown-Funktion durch ein

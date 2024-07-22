@@ -5,14 +5,13 @@ import type {
   DataSource,
   IncrementalLoaderShape,
 } from "@/components/List/model/loading/types";
-import type { AnyData } from "@/components/List/model/item/types";
 import type { AsyncResource } from "@mittwald/react-use-promise";
 import { getAsyncResource } from "@mittwald/react-use-promise";
 import { useEffect } from "react";
 import { times } from "remeda";
 import { IncrementalLoaderState } from "@/components/List/model/loading/IncrementalLoaderState";
 
-const emptyData: AnyData[] = [];
+const emptyData: never[] = [];
 
 export class IncrementalLoader<T> {
   private readonly list: List<T>;
@@ -49,6 +48,7 @@ export class IncrementalLoader<T> {
     this.manualFiltering = manualFiltering ?? this.manualPagination;
     this.manualSorting = manualSorting ?? this.manualPagination;
     this.list.filters.forEach((f) => f.onFilterUpdated(() => this.reset()));
+    this.list.search?.onUpdated(() => this.reset());
   }
 
   public static useNew<T>(
@@ -161,6 +161,10 @@ export class IncrementalLoader<T> {
               ]),
           ) as DataLoaderOptions<T>["filtering"])
         : undefined,
+
+      searchString: this.manualFiltering
+        ? this.list.reactTable.searchString
+        : undefined,
     };
   }
 
@@ -173,7 +177,7 @@ export class IncrementalLoader<T> {
     if ("staticData" in dataSource) {
       return getAsyncResource(
         async (staticData) => ({
-          data: staticData,
+          data: staticData as T[],
           itemTotalCount: staticData.length,
         }),
         [dataSource.staticData],

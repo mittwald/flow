@@ -1,4 +1,5 @@
 import type { ComponentProps, PropsWithChildren } from "react";
+import { useId } from "react";
 import React from "react";
 import styles from "./Section.module.scss";
 import clsx from "clsx";
@@ -38,19 +39,18 @@ export const Section = flowComponent("Section", (props) => {
 
   const rootClassName = clsx(styles.section, className);
 
+  const headingId = useId();
+
   const propsContext: PropsContext = {
     Heading: {
       level: 2,
+      id: headingId,
     },
     Header: {
-      className: styles.header,
-      Switch: {
-        className: styles.switch,
-        labelPosition: "leading",
-      },
-      StatusBadge: {
-        className: styles.statusBadge,
-      },
+      renderSectionHeader: true,
+    },
+    List: {
+      "aria-labelledby": headingId,
     },
   };
 

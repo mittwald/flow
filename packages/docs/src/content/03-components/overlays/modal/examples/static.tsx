@@ -8,7 +8,7 @@ import Action from "@mittwald/flow-react-components/Action";
 
 <StaticModal>
   <div className="flow--modal--content">
-    <Heading>Neue Organisation</Heading>
+    <Heading>Organisation anlegen</Heading>
     <Text>
       Eine Organisation kannst du dir wie ein Unternehmen
       vorstellen. An diesem Ort verwaltest du deine
