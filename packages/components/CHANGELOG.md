@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.187](https://github.com/mittwald/flow/compare/0.1.0-alpha.186...0.1.0-alpha.187) (2024-07-22)
+
+### Bug Fixes
+
+- **Field:** fix Select does not get form value
+  ([#600](https://github.com/mittwald/flow/issues/600))
+  ([bec0fc8](https://github.com/mittwald/flow/commit/bec0fc880775de73e0ed9da41239dd6ed091048b))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.186](https://github.com/mittwald/flow/compare/0.1.0-alpha.185...0.1.0-alpha.186) (2024-07-19)
 
 ### Bug Fixes
