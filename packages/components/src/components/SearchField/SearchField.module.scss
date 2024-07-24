@@ -27,6 +27,7 @@
   .input {
     @include formControl.formControl();
     flex-grow: 1;
+    min-width: 0;
     --button-size: calc(var(--icon--size--m) + var(--button--padding) * 2);
     padding-inline: var(--button-size);
 
