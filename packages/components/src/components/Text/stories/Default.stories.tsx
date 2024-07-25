@@ -67,6 +67,14 @@ export const OrderedList: Story = {
   ),
 };
 
+export const SmallText: Story = {
+  render: (props) => (
+    <Text {...props}>
+      <small>Small Text</small>
+    </Text>
+  ),
+};
+
 export const Dark: Story = {
   args: { color: "dark" },
   parameters: {
