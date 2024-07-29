@@ -35,7 +35,11 @@ export const Label = flowComponent("Label", (props) => {
     ? className
     : clsx(styles.label, isDisabled && styles.disabled, className);
 
-  const optionalMarker = " " + stringFormatter.format("label.optional");
+  const optionalMarker = (
+    <div className={styles.optional}>
+      {stringFormatter.format("label.optional")}
+    </div>
+  );
 
   return (
     <ClearPropsContext>

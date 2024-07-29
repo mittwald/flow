@@ -42,6 +42,7 @@ import type { PopoverProps } from "@/components/Popover";
 import type { ContextMenuSectionProps } from "@/components/ContextMenu/components/ContextMenuSection";
 import type { OverlayTriggerProps } from "@/components/OverlayTrigger";
 import type { ListProps } from "@/components/List";
+import type { PasswordCreationFieldProps } from "@/components/PasswordCreationField";
 import type { SearchFieldProps } from "@/components/SearchField";
 
 export * from "./types";
@@ -77,6 +78,7 @@ export interface FlowComponentPropsTypes {
   Modal: ModalProps;
   NumberField: NumberFieldProps;
   Option: OptionProps;
+  PasswordCreationField: PasswordCreationFieldProps;
   Popover: PopoverProps;
   Radio: RadioProps;
   RadioButton: RadioButtonProps;
@@ -128,6 +130,7 @@ const propsContextSupportingComponentsMap: Record<
   NumberField: true,
   Radio: true,
   Option: true,
+  PasswordCreationField: true,
   Popover: true,
   RadioButton: true,
   RadioGroup: true,
