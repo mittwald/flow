@@ -93,7 +93,7 @@
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
     "@mittwald/flow-design-tokens": "workspace:^",
-    "@mittwald/password-validation": "^2.1.0-alpha.12",
+    "@mittwald/password-tools-js": "^2.1.2",
     "@mittwald/react-use-promise": "^2.3.13",
     "@nx/storybook": "^19.3.0",
     "@storybook/addon-a11y": "^8.1.10",
