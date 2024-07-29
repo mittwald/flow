@@ -31,14 +31,14 @@ const policyDecl: PolicyDeclaration = {
       ruleType: RuleType.hibp,
     },
     {
-      identifier: "specialChars",
+      identifier: "special",
       ruleType: RuleType.charPool,
       charPools: ["special"],
       min: 1,
       max: 2,
     },
     {
-      identifier: "numberChars",
+      identifier: "numbers",
       ruleType: RuleType.charPool,
       charPools: ["numbers"],
       min: 1,
