@@ -1,6 +1,6 @@
-import Checkbox from "@mittwald/flow-react-components/Checkbox";
+import { PasswordCreationField } from "@mittwald/flow-react-components/PasswordCreationField";
+import { Label } from "@mittwald/flow-react-components/Label";
 
-<Checkbox isDisabled>
-  Ich stimme den AGBs zu und bestätige, dass ich die
-  Datenschutzhinweise zur Kenntnis genommen habe.
-</Checkbox>;
+<PasswordCreationField isDisabled>
+  <Label>Password</Label>
+</PasswordCreationField>;
