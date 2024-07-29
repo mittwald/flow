@@ -2609,7 +2609,7 @@ __metadata:
     "@faker-js/faker": "npm:^8.4.1"
     "@internationalized/string-compiler": "npm:^3.2.4"
     "@mittwald/flow-design-tokens": "workspace:^"
-    "@mittwald/password-tools-js": "npm:^2.1.0"
+    "@mittwald/password-tools-js": "npm:^2.1.2"
     "@mittwald/react-tunnel": "workspace:^"
     "@mittwald/react-use-promise": "npm:^2.3.13"
     "@nx/storybook": "npm:^19.4.0"
@@ -2715,9 +2715,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@mittwald/password-tools-js@npm:^2.1.0":
-  version: 2.1.1
-  resolution: "@mittwald/password-tools-js@npm:2.1.1"
+"@mittwald/password-tools-js@npm:^2.1.2":
+  version: 2.1.2
+  resolution: "@mittwald/password-tools-js@npm:2.1.2"
   dependencies:
     "@zxcvbn-ts/core": "npm:^3.0.3"
     "@zxcvbn-ts/language-common": "npm:^3.0.3"
@@ -2732,14 +2732,13 @@ __metadata:
     license-checker-rseidelsohn: "npm:^4.3.0"
     ora: "npm:^5.4.1"
     pretty-error: "npm:^4.0.0"
-    randomatic: "npm:^3.1.1"
     typescript-json-schema: "npm:^0.61.0"
     verror: "npm:^1.10.1"
     yaml: "npm:^2.3.2"
     yargs: "npm:^17.7.2"
   bin:
     password-tools-js: ./bin/cli.js
-  checksum: 10c0/33939995044799e28c3bc9e194805715b895c3ef794f9f4ea10c657d9ad4ecdfe3d767e1e497a09a70975ba981d616753638b3883fc0c3edb7ee70c2f7d00811
+  checksum: 10c0/d4d0f2bbd01efb556dd58c3d488375cc4c9869e9d924f46df3c5e99cda032b627559cdaa5613f1922544e239b049bceecbacb1c7ece335ec134d30e8838090ce
   languageName: node
   linkType: hard
 
@@ -12476,13 +12475,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"is-number@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "is-number@npm:4.0.0"
-  checksum: 10c0/bb17a331f357eb59a7f8db848086c41886715b2ea1db03f284a99d14001cda094083a5b6a7b343b5bcf410ccef668a70bc626d07bc2032cc4ab46dd264cea244
-  languageName: node
-  linkType: hard
-
 "is-number@npm:^7.0.0":
   version: 7.0.0
   resolution: "is-number@npm:7.0.0"
@@ -13030,7 +13022,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"kind-of@npm:^6.0.0, kind-of@npm:^6.0.2, kind-of@npm:^6.0.3":
+"kind-of@npm:^6.0.2, kind-of@npm:^6.0.3":
   version: 6.0.3
   resolution: "kind-of@npm:6.0.3"
   checksum: 10c0/61cdff9623dabf3568b6445e93e31376bee1cdb93f8ba7033d86022c2a9b1791a1d9510e026e6465ebd701a6dd2f7b0808483ad8838341ac52f003f512e0b4c4
@@ -13636,13 +13628,6 @@ __metadata:
   peerDependencies:
     react: ">= 0.14.0"
   checksum: 10c0/191b9a9defeed02e12dd340cebf279f577266dac7b34574fa44ce4d64ee8536f9967d455b8303c853f84413feb473118290a6160d8221eeaf3b9e4961b8980e3
-  languageName: node
-  linkType: hard
-
-"math-random@npm:^1.0.1":
-  version: 1.0.4
-  resolution: "math-random@npm:1.0.4"
-  checksum: 10c0/7b0ddc17f5dfe3b426c1e92505122e6a32f884dd50f5e0bb3898e5ce2da60b4ffb47c9b607809cf0beb5b8bf253b9dcc3b6f7331b20ce59b8bd7e8dbbbb1e347
   languageName: node
   linkType: hard
 
@@ -16328,17 +16313,6 @@ __metadata:
   version: 0.29.0
   resolution: "ramda@npm:0.29.0"
   checksum: 10c0/b00eaaf1c62b06a99affa1d583e256bd65ad27ab9d0ef512f55d7d93b842e7cd244a4a09179f61fdd8548362e409323867a2b0477cbd0626b5644eb6ac7c53da
-  languageName: node
-  linkType: hard
-
-"randomatic@npm:^3.1.1":
-  version: 3.1.1
-  resolution: "randomatic@npm:3.1.1"
-  dependencies:
-    is-number: "npm:^4.0.0"
-    kind-of: "npm:^6.0.0"
-    math-random: "npm:^1.0.1"
-  checksum: 10c0/4b1da4b8e234d3d0bd2294a42541dfa03edbde85ee06fa0722e2b004e845da197d72fa7995723d32ea7d7402823ea62550034118cf22e94638560a509cec5bfc
   languageName: node
   linkType: hard
 
