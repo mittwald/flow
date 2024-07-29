@@ -7,6 +7,7 @@ import type {
   FilterShape,
 } from "@/components/List/model/filter/types";
 import type { PropertyName } from "@/components/List/model/types";
+import { unique } from "remeda";
 
 const equalsPropertyMatcher: FilterMatcher<never, never, never> = (
   filterValue,
@@ -14,7 +15,7 @@ const equalsPropertyMatcher: FilterMatcher<never, never, never> = (
 ) => filterValue === propertyValue;
 
 export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
-  private readonly _values?: unknown[];
+  private _values?: unknown[] | undefined;
   public readonly list: List<T>;
   public readonly property: PropertyName<T>;
   public readonly mode: FilterMode;
@@ -87,10 +88,15 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
   }
 
   public get values(): unknown[] {
-    return (
-      this._values ??
-      Array.from(this.getTableColumn().getFacetedUniqueValues().keys())
-    );
+    if (this._values === undefined) {
+      this._values = unique(
+        Array.from(this.getTableColumn().getFacetedUniqueValues().keys())
+          .flatMap((v) => v)
+          .filter((v) => v !== undefined && v !== null),
+      );
+    }
+
+    return this._values;
   }
 
   public getArrayValue(): unknown[] {

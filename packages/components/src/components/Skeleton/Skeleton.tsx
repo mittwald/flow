@@ -14,9 +14,12 @@ export const Skeleton: FC<SkeletonProps> = (props) => {
   const rootClassName = clsx(styles.skeleton, className);
 
   return (
-    <div aria-hidden style={{ height, width }} {...rest}>
-      <div className={rootClassName} />
-    </div>
+    <div
+      className={rootClassName}
+      aria-hidden
+      style={{ height, width }}
+      {...rest}
+    />
   );
 };
 

@@ -14,6 +14,9 @@ export class IncrementalLoaderState<T> {
 
   private constructor() {
     makeObservable(this, {
+      prevDataBatches: false,
+      useMergedData: false,
+      useIsLoading: false,
       dataBatches: observable.shallow,
       batchLoadingStates: observable.shallow,
       mergedData: computed,

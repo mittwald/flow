@@ -1,7 +1,11 @@
-.light {
-  color: var(--content--color--light);
-}
+.text {
+  color: inherit;
 
-.dark {
-  color: var(--content--color--dark);
+  &:where(.light) {
+    color: var(--content--color--light);
+  }
+
+  &:where(.dark) {
+    color: var(--content--color--dark);
+  }
 }

@@ -91,10 +91,6 @@
   }
 
   .title {
-    &:empty {
-      display: none;
-    }
-
     grid-area: title;
     display: grid;
     grid-column-gap: var(--list-item--content-to-content-spacing);
@@ -103,6 +99,10 @@
       "avatar title   "
       "avatar subtitle";
     grid-template-columns: auto 1fr;
+
+    &:empty {
+      display: none;
+    }
 
     &:not(:has(.avatar)) {
       grid-template-areas:

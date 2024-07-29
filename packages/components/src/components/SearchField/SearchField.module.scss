@@ -1,0 +1,47 @@
+@use "@/styles/mixins/formControl.scss";
+
+.searchField {
+  &[data-empty] .clearButton {
+    display: none;
+  }
+
+  &:disabled,
+  &[data-disabled],
+  [aria-disabled] & {
+    .searchIcon {
+      color: var(--form-control--content-color--disabled);
+    }
+  }
+}
+
+.inputContainer {
+  order: 2;
+  display: flex;
+  position: relative;
+
+  .searchIcon {
+    position: absolute;
+    margin: var(--button--padding);
+  }
+
+  .input {
+    @include formControl.formControl();
+    flex-grow: 1;
+    min-width: 0;
+    --button-size: calc(var(--icon--size--m) + var(--button--padding) * 2);
+    padding-inline: var(--button-size);
+
+    &::-webkit-search-cancel-button,
+    &::-webkit-search-decoration {
+      -webkit-appearance: none;
+    }
+  }
+
+  .clearButton {
+    position: absolute;
+    right: var(--size-rem--xxxs);
+    top: var(--size-rem--xxxs);
+    bottom: var(--size-rem--xxxs);
+    padding-block: initial;
+  }
+}

@@ -1,6 +1,14 @@
-import type { Column, ColumnDef, SortDirection } from "@tanstack/react-table";
+import type {
+  Column,
+  ColumnDef,
+  ColumnSort,
+  SortDirection,
+} from "@tanstack/react-table";
 import type List from "@/components/List/model/List";
-import type { SortingShape } from "@/components/List/model/sorting/types";
+import type {
+  SortingDefaultMode,
+  SortingShape,
+} from "@/components/List/model/sorting/types";
 import type { PropertyName } from "@/components/List/model/types";
 
 export class Sorting<T> {
@@ -8,18 +16,25 @@ export class Sorting<T> {
   public readonly property: PropertyName<T>;
   public readonly name?: string;
   public readonly direction: SortDirection;
-  public readonly defaultEnabled: boolean;
+  public readonly defaultEnabled: SortingDefaultMode;
 
   public constructor(list: List<T>, shape: SortingShape<T>) {
     this.list = list;
     this.property = shape.property;
     this.name = shape.name;
     this.direction = shape.direction ?? "asc";
-    this.defaultEnabled = !!shape.defaultEnabled;
+    this.defaultEnabled = shape.defaultEnabled ?? false;
   }
 
   public updateTableColumnDef(def: ColumnDef<T>): void {
     def.enableSorting = true;
+  }
+
+  public getReactTableColumnSort(): ColumnSort {
+    return {
+      id: this.property as string,
+      desc: this.direction === "desc",
+    };
   }
 
   public isSorted(): boolean {

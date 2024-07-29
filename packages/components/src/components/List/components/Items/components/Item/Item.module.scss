@@ -3,15 +3,15 @@
 .item {
   cursor: default;
   background-color: var(--list-item--background-color--default);
+  outline-offset: calc(var(--size-px--xs) * -1);
+
+  @include focus.focus;
 
   &:not(:last-child) {
     border-bottom-color: var(--list-item--border-color);
     border-bottom-width: var(--list-item--border-width);
     border-bottom-style: var(--list-item--border-style);
   }
-
-  @include focus.focus;
-  outline-offset: calc(var(--size-px--xs) * -1);
 
   &:where(.hasAction) {
     &:hover {

@@ -1,30 +1,23 @@
 import type { FC, KeyboardEvent } from "react";
 import React, { createElement, useState } from "react";
-import { TextField } from "@/components/TextField";
 import type { PropsWithClassName } from "@/lib/types/props";
-import locales from "../../../../locales/*.locale.json";
-import { useLocalizedStringFormatter } from "react-aria";
 import type { Search } from "@/components/List/model/search/Search";
 import type { SearchFieldRenderComponent } from "@/components/List/model/search/types";
 import { useOnChange } from "@/lib/hooks";
-import { Button } from "@/components/Button";
-import { IconClose } from "@/components/Icon/components/icons";
+import { SearchField as SearchFieldComponent } from "@/components/SearchField";
 
 interface Props extends PropsWithClassName {
   search: Search<never>;
 }
 
 const DefaultSearchFieldRender: SearchFieldRenderComponent = (props) => {
-  const { className, onChange, value, ...textFieldProps } = props;
+  const { className, onChange, value, ...searchFieldProps } = props;
 
-  const stringFormatter = useLocalizedStringFormatter(locales);
   const [searchString, setSearchString] = useState(value ?? "");
 
   useOnChange(value, () => {
     setSearchString(value ?? "");
   }, [searchString]);
-
-  const label = stringFormatter.format("list.search");
 
   const clearSearch = () => {
     onChange(undefined);
@@ -44,28 +37,14 @@ const DefaultSearchFieldRender: SearchFieldRenderComponent = (props) => {
   };
 
   return (
-    <div className={className}>
-      <TextField
-        // @todo: remove style when dedicated <SearchField /> exists
-        style={{ flexGrow: "1" }}
-        aria-label={label}
-        placeholder={label}
-        value={searchString}
-        onKeyUp={handleKeyPress}
-        onChange={(value) => setSearchString(value)}
-        {...textFieldProps}
-      />
-      {/* @todo: remove Button when dedicated <SearchField /> exists */}
-      <Button
-        color="secondary"
-        variant="plain"
-        onPress={clearSearch}
-        isDisabled={!searchString}
-        excludeFromTabOrder
-      >
-        <IconClose />
-      </Button>
-    </div>
+    <SearchFieldComponent
+      className={className}
+      value={searchString}
+      onKeyUp={handleKeyPress}
+      onChange={(value) => setSearchString(value)}
+      onClear={clearSearch}
+      {...searchFieldProps}
+    />
   );
 };
 

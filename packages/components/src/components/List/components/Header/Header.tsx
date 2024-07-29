@@ -15,6 +15,14 @@ export const Header: FC<Props> = (props) => {
   const { className } = props;
   const list = useList();
 
+  if (
+    list.filters.length === 0 &&
+    list.visibleSorting.length === 0 &&
+    !list.search
+  ) {
+    return null;
+  }
+
   const filterPickerList = list.filters.map((filter) => (
     <FilterPicker key={filter.property} filter={filter} />
   ));

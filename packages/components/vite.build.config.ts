@@ -70,6 +70,7 @@ export default defineConfig(
             "./src/lib/propsContext/PropsContextProvider.tsx",
           RadioGroup: "./src/components/RadioGroup/index.ts",
           Render: "./src/lib/react/components/Render/index.ts",
+          SearchField: "./src/components/SearchField/index.ts",
           Section: "./src/components/Section/index.ts",
           Select: "./src/components/Select/index.ts",
           Separator: "./src/components/Separator/index.ts",

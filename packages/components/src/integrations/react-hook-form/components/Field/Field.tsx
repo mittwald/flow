@@ -60,7 +60,10 @@ export function Field<T extends FieldValues>(props: Props<T>) {
           Switch: formControlProps,
           TextArea: formControlProps,
           TextField: formControlProps,
-          Select: formControlProps,
+          Select: {
+            ...formControlProps,
+            defaultSelectedKey: formControlProps.value,
+          },
           Slider: formControlProps,
           PasswordCreationField: formControlProps,
         };
