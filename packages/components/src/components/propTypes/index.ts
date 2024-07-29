@@ -42,7 +42,7 @@ import type { PopoverProps } from "@/components/Popover";
 import type { ContextMenuSectionProps } from "@/components/ContextMenu/components/ContextMenuSection";
 import type { OverlayTriggerProps } from "@/components/OverlayTrigger";
 import type { ListProps } from "@/components/List";
-import type { PasswordCreationFieldProps } from "src/components/PasswordCreationField";
+import type { PasswordCreationFieldProps } from "@/components/PasswordCreationField";
 
 export * from "./types";
 
