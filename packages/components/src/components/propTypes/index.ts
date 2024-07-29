@@ -49,6 +49,7 @@ import type {
 import type { PopoverProps, PopoverTriggerProps } from "@/components/Popover";
 import type { ContextMenuSectionProps } from "@/components/ContextMenu/components/ContextMenuSection";
 import type { ListProps } from "@/components/List";
+import type { PasswordCreationFieldProps } from "@/components/PasswordCreationField";
 import type { SearchFieldProps } from "@/components/SearchField";
 import type { BadgeProps } from "@/components/Badge";
 import type { DatePickerProps } from "@/components/DatePicker";
