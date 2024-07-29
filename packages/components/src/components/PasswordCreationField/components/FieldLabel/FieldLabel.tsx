@@ -16,10 +16,11 @@ import { useLocalizedStringFormatter } from "react-aria";
 import generateValidationTranslation from "@/components/PasswordCreationField/lib/generateValidationTranslation";
 import type * as Aria from "react-aria-components";
 import type { ResolvedPolicyValidationResult } from "@/components/PasswordCreationField/PasswordCreationField";
+import { isCryptographicSecureRandom } from "@mittwald/password-tools-js/generator";
 
 export type PasswordFieldLabelProps = PropsWithChildren<{
   policyValidationResult?: ResolvedPolicyValidationResult;
-  onGeneratePasswordAction: ActionFn;
+  onGeneratePasswordAction?: ActionFn;
   locales?: LocalizedStrings;
 }> &
   Pick<Aria.InputProps, "disabled">;
@@ -85,7 +86,7 @@ export const FieldLabel: FC<PasswordFieldLabelProps> = (props) => {
             {validationResultComponents}
           </ContextualHelp>
         </ContextualHelpTrigger>
-        {onGeneratePasswordAction && (
+        {onGeneratePasswordAction && isCryptographicSecureRandom && (
           <Action action={onGeneratePasswordAction}>
             <Button
               data-component="generatePassword"
