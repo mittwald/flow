@@ -78,6 +78,14 @@
       "types": "./dist/types/components/FieldError/index.d.ts",
       "import": "./dist/FieldError.js"
     },
+    "./FileDropZone": {
+      "types": "./dist/types/components/FileDropZone/index.d.ts",
+      "import": "./dist/FileDropZone.js"
+    },
+    "./FileTrigger": {
+      "types": "./dist/types/components/FileTrigger/index.d.ts",
+      "import": "./dist/FileTrigger.js"
+    },
     "./Header": {
       "types": "./dist/types/components/Header/index.d.ts",
       "import": "./dist/Header.js"
@@ -105,6 +113,14 @@
     "./Image": {
       "types": "./dist/types/components/Image/index.d.ts",
       "import": "./dist/Image.js"
+    },
+    "./ImageCropper": {
+      "types": "./dist/types/components/ImageCropper/index.d.ts",
+      "import": "./dist/ImageCropper.js"
+    },
+    "./ImageUpload": {
+      "types": "./dist/types/components/ImageUpload/index.d.ts",
+      "import": "./dist/ImageUpload.js"
     },
     "./Initials": {
       "types": "./dist/types/components/Initials/index.d.ts",
@@ -305,6 +321,7 @@
     "react-aria": "^3.33.1",
     "react-aria-components": "^1.2.1",
     "react-children-utilities": "^2.10.0",
+    "react-easy-crop": "^5.0.7",
     "react-stately": "^3.31.1",
     "remeda": "^2.6.0",
     "use-callback-ref": "^1.3.2"

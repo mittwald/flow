@@ -1,0 +1,19 @@
+.imageUpload {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .fileDropZone {
+    flex-grow: 1;
+  }
+
+  .imageCropperContainer {
+    display: flex;
+    align-items: flex-start;
+    column-gap: var(--image-upload--cropper-to-button-spacing);
+  }
+
+  .canvas {
+    display: none;
+  }
+}
