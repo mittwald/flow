@@ -1,9 +1,12 @@
 import type { ComponentType } from "react";
-import type { TextFieldProps } from "@/components/TextField";
+import type { SearchFieldProps } from "@/components/SearchField";
 
-type SupportedTextFieldProps = Pick<TextFieldProps, "className" | "autoFocus">;
+type SupportedSearchFieldProps = Pick<
+  SearchFieldProps,
+  "className" | "autoFocus"
+>;
 
-interface SearchFieldRenderProps extends SupportedTextFieldProps {
+interface SearchFieldRenderProps extends SupportedSearchFieldProps {
   onChange: (value: SearchValue) => unknown;
   value: SearchValue;
 }
@@ -14,5 +17,5 @@ export type SearchValue = string | undefined;
 
 export interface SearchShape<IgnoredT> {
   render?: SearchFieldRenderComponent;
-  textFieldProps: SupportedTextFieldProps;
+  textFieldProps: SupportedSearchFieldProps;
 }

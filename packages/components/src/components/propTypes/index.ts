@@ -42,6 +42,7 @@ import type { PopoverProps } from "@/components/Popover";
 import type { ContextMenuSectionProps } from "@/components/ContextMenu/components/ContextMenuSection";
 import type { OverlayTriggerProps } from "@/components/OverlayTrigger";
 import type { ListProps } from "@/components/List";
+import type { SearchFieldProps } from "@/components/SearchField";
 
 export * from "./types";
 
@@ -80,6 +81,7 @@ export interface FlowComponentPropsTypes {
   Radio: RadioProps;
   RadioButton: RadioButtonProps;
   RadioGroup: RadioGroupProps;
+  SearchField: SearchFieldProps;
   Section: SectionProps;
   Select: SelectProps;
   Slider: SliderProps;
@@ -129,6 +131,7 @@ const propsContextSupportingComponentsMap: Record<
   Popover: true,
   RadioButton: true,
   RadioGroup: true,
+  SearchField: true,
   Section: true,
   Select: true,
   Slider: true,
