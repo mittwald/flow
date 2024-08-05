@@ -1,10 +1,10 @@
 /* eslint-disable */
 /* auto-generated file */
 import React, { ComponentProps, FC } from "react";
-import { IconBorderAll as Tabler } from "@tabler/icons-react";
+import { IconFileDescription as Tabler } from "@tabler/icons-react";
 import { Icon } from "@/components/Icon";
 
-export const IconDashboard: FC<
+export const IconContractPartner: FC<
   Omit<ComponentProps<typeof Icon>, "children">
 > = (props) => (
   <Icon {...props}>
@@ -12,4 +12,4 @@ export const IconDashboard: FC<
   </Icon>
 );
 
-export default IconDashboard;
+export default IconContractPartner;

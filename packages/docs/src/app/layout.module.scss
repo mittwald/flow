@@ -10,7 +10,7 @@
   grid-template-areas:
     "nav      main"
     "footer    .  ";
-  grid-template-columns: 260px minmax(0, 1fr);
+  grid-template-columns: 270px minmax(0, 1fr);
   grid-template-rows: 1fr auto;
   grid-gap: var(--size-px--l);
   padding-inline: var(--size-px--l);
@@ -50,6 +50,7 @@
 
 .mainNavigation {
   grid-area: nav;
+  padding-inline: var(--size-px--l);
 }
 
 .mobileNavigation {
