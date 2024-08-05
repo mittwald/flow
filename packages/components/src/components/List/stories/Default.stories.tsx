@@ -14,20 +14,20 @@ import { getDomains, getTypes } from "../testData/domainApi";
 import { Section } from "@/components/Section";
 import { typedList } from "@/components/List";
 
-const loadDomains: AsyncDataLoader<Domain> = async (opt) => {
+const loadDomains: AsyncDataLoader<Domain> = async (opts) => {
   const response = await getDomains({
-    pagination: opt?.pagination
+    pagination: opts?.pagination
       ? {
-          limit: opt.pagination.limit,
-          skip: opt.pagination.offset,
+          limit: opts.pagination.limit,
+          skip: opts.pagination.offset,
         }
       : undefined,
-    filter: opt?.filtering?.["type"]
+    filter: opts?.filtering?.type
       ? {
-          types: opt.filtering["type"].values as string[],
+          types: opts.filtering.type.values as string[],
         }
       : undefined,
-    search: opt?.searchString,
+    search: opts?.searchString,
   });
 
   return {

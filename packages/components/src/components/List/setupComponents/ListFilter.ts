@@ -10,7 +10,7 @@ type Props<T, TProp extends PropertyName<T>, TMatcherValue> = Omit<
   FilterShape<T, TProp, TMatcherValue>,
   "type" | "renderItem"
 > & {
-  children?: PropertyValueRenderMethod<T, TProp>;
+  children?: PropertyValueRenderMethod<TMatcherValue>;
 };
 
 export const ListFilter = <

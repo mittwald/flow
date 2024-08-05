@@ -20,18 +20,20 @@ export const FilterPicker: FC<Props> = (props) => {
   const { renderItem, values, mode, name, property } = filter;
 
   const items = values.map((v) => (
-    <MenuItem key={filter.getValueId(v)} id={String(v)}>
+    <MenuItem
+      key={filter.getValueId(v)}
+      id={JSON.stringify(v)}
+      onAction={() => {
+        filter.toggleValue(v);
+      }}
+    >
       {renderItem(v as never)}
     </MenuItem>
   ));
 
   const activeFilterValues = values
     .filter((v) => filter.isValueActive(v))
-    .map((v) => String(v));
-
-  const handleFilterValueClick = (v: unknown): void => {
-    filter.toggleValue(v);
-  };
+    .map((v) => JSON.stringify(v));
 
   return (
     <ContextMenuTrigger>
@@ -40,7 +42,6 @@ export const FilterPicker: FC<Props> = (props) => {
         <IconChevronDown />
       </Button>
       <ContextMenu
-        onAction={handleFilterValueClick}
         selectionMode={mode === "one" ? "single" : "multiple"}
         selectedKeys={activeFilterValues}
       >

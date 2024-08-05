@@ -14,7 +14,7 @@ export type FilterMatcher<T, P, TMatcherValue> = (
 
 export interface FilterShape<T, TProp extends PropertyName<T>, TMatcherValue> {
   property: TProp;
-  renderItem?: PropertyValueRenderMethod<T, TProp>;
+  renderItem?: PropertyValueRenderMethod<TMatcherValue>;
   mode?: FilterMode;
   matcher?: FilterMatcher<T, TProp, TMatcherValue>;
   values?: TMatcherValue[];

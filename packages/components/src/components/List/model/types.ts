@@ -6,11 +6,17 @@ import type { IncrementalLoaderShape } from "@/components/List/model/loading/typ
 import type { SearchShape } from "@/components/List/model/search/types";
 import type { ItemViewShape } from "@/components/List/model/item/ItemView";
 import type { ReactNode } from "react";
+import type { ItemType } from "@/lib/types/array";
 
-export type PropertyName<T> = DeepKeys<T>;
-export type PropertyValue<T, TProp> = DeepValue<T, TProp>;
-export type PropertyValueRenderMethod<T, P> = (
-  prop: PropertyValue<T, P>,
+export const customPropertyPrefix = "$" as const;
+export type CustomPropertyName = `${typeof customPropertyPrefix}${string}`;
+
+export type PropertyName<T> = DeepKeys<T> | CustomPropertyName;
+export type PropertyValue<T, TProp> = TProp extends CustomPropertyName
+  ? T
+  : DeepValue<T, TProp>;
+export type PropertyValueRenderMethod<TMatcherValue> = (
+  prop: NonNullable<ItemType<TMatcherValue>>,
 ) => ReactNode;
 
 export interface ListShape<T> {

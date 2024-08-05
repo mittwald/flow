@@ -10,7 +10,8 @@ import type {
   PropertyName,
   PropertyValueRenderMethod,
 } from "@/components/List/model/types";
-import { unique } from "remeda";
+import { customPropertyPrefix } from "@/components/List/model/types";
+import { isShallowEqual, unique } from "remeda";
 
 const equalsPropertyMatcher: FilterMatcher<never, never, never> = (
   filterValue,
@@ -23,7 +24,7 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
   public readonly property: PropertyName<T>;
   public readonly mode: FilterMode;
   public readonly matcher: FilterMatcher<T, never, never>;
-  public readonly renderItem: PropertyValueRenderMethod<T, TProp>;
+  public readonly renderItem: PropertyValueRenderMethod<TMatchValue>;
   public readonly name?: string;
   private onFilterUpdateCallbacks = new Set<() => unknown>();
 
@@ -32,8 +33,10 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
     this.property = shape.property;
     this.mode = shape.mode ?? "one";
     this._values = shape.values;
-    this.matcher = shape.matcher ?? equalsPropertyMatcher;
-    this.renderItem = shape.renderItem ?? ((v: TProp) => String(v));
+    this.matcher =
+      shape.matcher ??
+      (equalsPropertyMatcher as FilterMatcher<T, never, never>);
+    this.renderItem = shape.renderItem ?? ((v) => String(v));
     this.name = shape.name;
   }
 
@@ -44,8 +47,12 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
 
   private getReactTableFilterFn(): ColumnDef<T>["filterFn"] {
     return (row, _, filterValue) => {
+      const propString = this.property as string;
+
       return this.checkFilterMatches(
-        getProperty(row.original, this.property as string),
+        propString.startsWith(customPropertyPrefix)
+          ? row.original
+          : getProperty(row.original, propString),
         filterValue,
       );
     };
@@ -80,7 +87,7 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
       .columnFilters.find((f) => f.id === this.property);
   }
 
-  protected getTableColumn(): Column<T> {
+  private getTableColumn(): Column<T> {
     return this.list.reactTable.getTableColumn(this.property);
   }
 
@@ -114,7 +121,7 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
   }
 
   public isValueActive(value: unknown): boolean {
-    return this.getArrayValue().includes(value);
+    return this.getArrayValue().some((v) => isShallowEqual(value, v));
   }
 
   public isActive(): boolean {
@@ -178,7 +185,9 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
 
     if (this.mode === "all" || this.mode === "some") {
       if (isActive) {
-        updatedValue = currentValueAsArray.filter((v) => v !== newValue);
+        updatedValue = currentValueAsArray.filter(
+          (v) => !isShallowEqual(v, newValue),
+        );
       } else {
         updatedValue = [...currentValueAsArray, newValue];
       }
