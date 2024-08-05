@@ -6,7 +6,10 @@ import type {
   FilterMode,
   FilterShape,
 } from "@/components/List/model/filter/types";
-import type { PropertyName } from "@/components/List/model/types";
+import type {
+  PropertyName,
+  PropertyValueRenderMethod,
+} from "@/components/List/model/types";
 import { unique } from "remeda";
 
 const equalsPropertyMatcher: FilterMatcher<never, never, never> = (
@@ -20,6 +23,7 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
   public readonly property: PropertyName<T>;
   public readonly mode: FilterMode;
   public readonly matcher: FilterMatcher<T, never, never>;
+  public readonly renderItem: PropertyValueRenderMethod<T, TProp>;
   public readonly name?: string;
   private onFilterUpdateCallbacks = new Set<() => unknown>();
 
@@ -29,6 +33,7 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
     this.mode = shape.mode ?? "one";
     this._values = shape.values;
     this.matcher = shape.matcher ?? equalsPropertyMatcher;
+    this.renderItem = shape.renderItem ?? ((v: TProp) => String(v));
     this.name = shape.name;
   }
 

@@ -21,7 +21,7 @@ export const ActiveFilters: FC = () => {
           key={String(v)}
           onPress={() => f.deactivateValue(v)}
         >
-          <Text>{String(v)}</Text>
+          <Text>{f.renderItem(v as never)}</Text>
           <IconClose />
         </Button>
       )),

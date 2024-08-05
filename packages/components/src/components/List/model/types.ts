@@ -5,9 +5,13 @@ import type { FilterShape } from "@/components/List/model/filter/types";
 import type { IncrementalLoaderShape } from "@/components/List/model/loading/types";
 import type { SearchShape } from "@/components/List/model/search/types";
 import type { ItemViewShape } from "@/components/List/model/item/ItemView";
+import type { ReactNode } from "react";
 
 export type PropertyName<T> = DeepKeys<T>;
 export type PropertyValue<T, TProp> = DeepValue<T, TProp>;
+export type PropertyValueRenderMethod<T, P> = (
+  prop: PropertyValue<T, P>,
+) => ReactNode;
 
 export interface ListShape<T> {
   loader?: IncrementalLoaderShape<T>;

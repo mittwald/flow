@@ -17,11 +17,11 @@ interface Props {
 export const FilterPicker: FC<Props> = (props) => {
   const { filter } = props;
 
-  const { values, mode, name, property } = filter;
+  const { renderItem, values, mode, name, property } = filter;
 
   const items = values.map((v) => (
     <MenuItem key={filter.getValueId(v)} id={String(v)}>
-      {String(v)}
+      {renderItem(v as never)}
     </MenuItem>
   ));
 
