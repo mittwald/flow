@@ -25,7 +25,7 @@ const meta: Meta<typeof Avatar> = {
     },
     variant: {
       control: "inline-radio",
-      options: [1, 2, 3, 4],
+      options: [1, 2, 3, 4, 5],
     },
   },
 };

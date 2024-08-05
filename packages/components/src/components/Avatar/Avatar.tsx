@@ -15,7 +15,7 @@ export interface AvatarProps
     FlowComponentProps {
   /** @default "m" */
   size?: "xs" | "s" | "m" | "l";
-  variant?: 1 | 2 | 3 | 4;
+  variant?: 1 | 2 | 3 | 4 | 5;
 }
 
 export const Avatar = flowComponent("Avatar", (props) => {
