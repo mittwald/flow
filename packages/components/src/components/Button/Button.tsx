@@ -31,6 +31,8 @@ export interface ButtonProps
   isFailed?: boolean;
   /** @internal */
   unstyled?: boolean;
+  /** @internal */
+  ariaSlot?: string;
 }
 
 const disablePendingProps = (props: ButtonProps) => {
@@ -67,6 +69,8 @@ export const Button = flowComponent("Button", (props) => {
     isFailed,
     "aria-disabled": ariaDisabled,
     refProp: ref,
+    slot: ignoredSlotProp,
+    ariaSlot: slot,
     unstyled,
     ...restProps
   } = props;
@@ -132,7 +136,12 @@ export const Button = flowComponent("Button", (props) => {
 
   return (
     <ClearPropsContext>
-      <Aria.Button className={rootClassName} ref={ref} {...restProps}>
+      <Aria.Button
+        className={rootClassName}
+        ref={ref}
+        slot={slot}
+        {...restProps}
+      >
         <PropsContextProvider props={propsContext}>
           <Wrap if={!unstyled}>
             <span className={styles.content}>
