@@ -5,7 +5,8 @@ import baseConfig from "./vite.config";
 import { externalizeDeps } from "vite-plugin-externalize-deps";
 
 export default defineConfig(
-  mergeConfig(baseConfig, {
+  // @todo: fix this type cast
+  mergeConfig(baseConfig as never, {
     plugins: [
       banner((filename) =>
         filename.endsWith(".js") ? '"use client"\r\n/* */' : "",
