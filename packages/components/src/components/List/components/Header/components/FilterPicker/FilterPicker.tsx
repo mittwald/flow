@@ -17,23 +17,21 @@ interface Props {
 export const FilterPicker: FC<Props> = (props) => {
   const { filter } = props;
 
-  const { renderItem, values, mode, name, property } = filter;
+  const { values, mode, name, property } = filter;
 
   const items = values.map((v) => (
     <MenuItem
-      key={filter.getValueId(v)}
-      id={JSON.stringify(v)}
+      id={v.id}
+      key={v.id}
       onAction={() => {
-        filter.toggleValue(v);
+        v.toggle();
       }}
     >
-      {renderItem(v as never)}
+      {v.render()}
     </MenuItem>
   ));
 
-  const activeFilterValues = values
-    .filter((v) => filter.isValueActive(v))
-    .map((v) => JSON.stringify(v));
+  const activeFilterKeys = values.filter((v) => v.isActive).map((v) => v.id);
 
   return (
     <ContextMenuTrigger>
@@ -43,7 +41,7 @@ export const FilterPicker: FC<Props> = (props) => {
       </Button>
       <ContextMenu
         selectionMode={mode === "one" ? "single" : "multiple"}
-        selectedKeys={activeFilterValues}
+        selectedKeys={activeFilterKeys}
       >
         {items}
       </ContextMenu>
