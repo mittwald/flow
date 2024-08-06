@@ -13,15 +13,15 @@ export const ActiveFilters: FC = () => {
 
   const activeFilters = list.filters.flatMap((f) =>
     f.values
-      .filter((v) => f.isValueActive(v))
+      .filter((v) => v.isActive)
       .map((v) => (
         <Button
           variant="soft"
           size="s"
-          key={String(v)}
-          onPress={() => f.deactivateValue(v)}
+          key={v.id}
+          onPress={() => v.deactivate()}
         >
-          <Text>{String(v)}</Text>
+          <Text>{v.render()}</Text>
           <IconClose />
         </Button>
       )),

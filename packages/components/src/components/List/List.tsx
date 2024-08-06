@@ -64,7 +64,10 @@ export const List = flowComponent("List", (props) => {
   const listModel = ListModel.useNew<never>({
     loader: loaderShape,
     filters: deepFilterByType(children, ListFilter<never, never, never>).map(
-      (f) => f.props,
+      (f) => ({
+        ...f.props,
+        renderItem: f.props.children,
+      }),
     ),
     search: searchProps
       ? {

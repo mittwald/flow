@@ -17,7 +17,7 @@ import {
 import type List from "@/components/List/model/List";
 import invariant from "invariant";
 import { useLocalObservable } from "mobx-react-lite";
-import { runInAction } from "mobx";
+import { runInAction, toJS } from "mobx";
 import { useAutorunEffect } from "@/lib/mobx/useAutorunEffect";
 import type { PropertyName } from "@/components/List/model/types";
 import type { SearchValue } from "@/components/List/model/search/types";
@@ -81,7 +81,7 @@ export class ReactTable<T> {
       if (state) {
         table.setOptions((opts) => ({
           ...opts,
-          state,
+          state: toJS(state),
         }));
       } else {
         this.tableState.value = table.getState();

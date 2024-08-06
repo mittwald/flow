@@ -157,7 +157,10 @@ export class IncrementalLoader<T> {
               .filter((f) => f.getValue() !== null)
               .map((f) => [
                 f.property,
-                { mode: f.mode, values: f.getArrayValue() },
+                {
+                  mode: f.mode,
+                  values: f.getArrayValue().map((v) => v.value),
+                },
               ]),
           ) as DataLoaderOptions<T>["filtering"])
         : undefined,
