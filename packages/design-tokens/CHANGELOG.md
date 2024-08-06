@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.190](https://github.com/mittwald/flow/compare/0.1.0-alpha.189...0.1.0-alpha.190) (2024-08-06)
+
+### Bug Fixes
+
+- **Label:** center content in label
+  ([80ba98d](https://github.com/mittwald/flow/commit/80ba98d321b1ccb6c01ce10a90708916421ef984))
+
+### Features
+
+- **Avatar:** add new colors
+  ([#615](https://github.com/mittwald/flow/issues/615))
+  ([90f565b](https://github.com/mittwald/flow/commit/90f565bbe1dfce18f19bc002ad4fe9da203f9011))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.189](https://github.com/mittwald/flow/compare/0.1.0-alpha.188...0.1.0-alpha.189) (2024-07-25)
 
 **Note:** Version bump only for package @mittwald/flow-design-tokens

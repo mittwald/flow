@@ -3,6 +3,37 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.190](https://github.com/mittwald/flow/compare/0.1.0-alpha.189...0.1.0-alpha.190) (2024-08-06)
+
+### Bug Fixes
+
+- **Button:** fix Flow and Aria slot names conflict
+  ([#621](https://github.com/mittwald/flow/issues/621))
+  ([00e26d1](https://github.com/mittwald/flow/commit/00e26d1bb716a8bc90d279c152a29e75409785a4))
+- **Checkbox:** set width to fit content
+  ([4788c28](https://github.com/mittwald/flow/commit/4788c28570644443de3c916d8001466887aa7539))
+- **Label:** center content in label
+  ([80ba98d](https://github.com/mittwald/flow/commit/80ba98d321b1ccb6c01ce10a90708916421ef984))
+
+### Features
+
+- **Avatar:** add new colors
+  ([#615](https://github.com/mittwald/flow/issues/615))
+  ([90f565b](https://github.com/mittwald/flow/commit/90f565bbe1dfce18f19bc002ad4fe9da203f9011))
+- **List:** fix long list item title
+  ([f24f4aa](https://github.com/mittwald/flow/commit/f24f4aa1e134f24fcc7c382033135a3dd8877817))
+- **Section:** add flex wrap to header actions
+  ([c64f4c4](https://github.com/mittwald/flow/commit/c64f4c44e1926a47b2fcba300496ea20298910cf))
+- **Text:** Support small in text
+  ([a2a8fcb](https://github.com/mittwald/flow/commit/a2a8fcb7225c4dccb88b36f21b3593018bbeffc2))
+- **Text:** Support ul and ol in Text component
+  ([c939c1e](https://github.com/mittwald/flow/commit/c939c1e7eea35119a1a7389ac5bc4535938c13df))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.189](https://github.com/mittwald/flow/compare/0.1.0-alpha.188...0.1.0-alpha.189) (2024-07-25)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
