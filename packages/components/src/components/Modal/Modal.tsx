@@ -46,7 +46,7 @@ export const Modal = flowComponent("Modal", (props) => {
 
   const propsContext: PropsContext = {
     Content: {
-      elementType: React.Fragment,
+      className: styles.content,
     },
     Heading: {
       level: 2,
@@ -55,7 +55,6 @@ export const Modal = flowComponent("Modal", (props) => {
     },
     ActionGroup: {
       className: styles.actionGroup,
-      tunnelId: "buttons",
     },
   };
 
@@ -63,10 +62,9 @@ export const Modal = flowComponent("Modal", (props) => {
     <ModalOverlay className={rootClassName} controller={controller} {...rest}>
       <PropsContextProvider props={propsContext}>
         <TunnelProvider>
-          {offCanvas && (
-            <Header className={styles.header}>
-              <TunnelExit id="heading" />
-
+          <Header className={styles.header}>
+            <TunnelExit id="heading" />
+            {offCanvas && (
               <Action closeOverlay="Modal">
                 <Button
                   variant="plain"
@@ -76,13 +74,9 @@ export const Modal = flowComponent("Modal", (props) => {
                   <IconClose />
                 </Button>
               </Action>
-            </Header>
-          )}
-          <div className={styles.content}>
-            {!offCanvas && <TunnelExit id="heading" />}
-            {children}
-          </div>
-          <TunnelExit id="buttons" />
+            )}
+          </Header>
+          {children}
         </TunnelProvider>
       </PropsContextProvider>
     </ModalOverlay>

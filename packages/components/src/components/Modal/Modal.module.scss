@@ -13,6 +13,17 @@
     display: grid;
     height: 100%;
     max-height: inherit;
+    grid-template-areas:
+      "header"
+      "content"
+      "actionGroup";
+    grid-template-rows: auto 1fr auto;
+  }
+
+  .header {
+    grid-area: header;
+    padding-inline: var(--modal--padding);
+    padding-block: var(--modal--padding);
   }
 
   .content {
@@ -21,8 +32,7 @@
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    row-gap: var(--section--content-to-content-spacing);
-    padding: var(--modal--padding);
+    padding-inline: var(--modal--padding);
     padding-bottom: var(--modal--padding-bottom);
   }
 
@@ -56,15 +66,6 @@
 
 /* Modal */
 
-.modal {
-  [role="dialog"] {
-    grid-template-areas:
-      "content"
-      "actionGroup";
-    grid-template-rows: 1fr auto;
-  }
-}
-
 @media (min-width: 550px) {
   .modal {
     > div {
@@ -84,19 +85,6 @@
 
 .offCanvas {
   justify-content: flex-end;
-
-  [role="dialog"] {
-    grid-template-areas:
-      "header"
-      "content"
-      "actionGroup";
-    grid-template-rows: auto 1fr auto;
-  }
-
-  .header {
-    grid-area: header;
-    padding-inline: var(--modal--padding);
-  }
 }
 
 @media (min-width: 550px) {
