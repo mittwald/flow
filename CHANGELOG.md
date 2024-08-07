@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.192](https://github.com/mittwald/flow/compare/0.1.0-alpha.191...0.1.0-alpha.192) (2024-08-07)
+
+### Bug Fixes
+
+- **Modal:** remove button tunnel to use form in modal
+  ([a17c4d3](https://github.com/mittwald/flow/commit/a17c4d33be796136b7b30c6f4ed818cf4c100bc9))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.191](https://github.com/mittwald/flow/compare/0.1.0-alpha.190...0.1.0-alpha.191) (2024-08-06)
 
 ### Bug Fixes
