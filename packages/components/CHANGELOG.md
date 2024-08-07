@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.193](https://github.com/mittwald/flow/compare/0.1.0-alpha.192...0.1.0-alpha.193) (2024-08-07)
+
+### Bug Fixes
+
+- **OffCanvas:** fix spacings
+  ([502ab99](https://github.com/mittwald/flow/commit/502ab99feeab3a9aedaa275bcabbfcd03caf2e0c))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.192](https://github.com/mittwald/flow/compare/0.1.0-alpha.191...0.1.0-alpha.192) (2024-08-07)
 
 ### Bug Fixes
