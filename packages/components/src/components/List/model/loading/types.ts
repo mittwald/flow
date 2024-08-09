@@ -22,8 +22,10 @@ export interface DataLoaderOptions<T> {
   pagination?: DataLoaderPaginationOptions;
 }
 
+export type ListData<T> = readonly T[];
+
 export interface DataLoaderResult<T> {
-  data: T[];
+  data: ListData<T>;
   itemTotalCount?: number;
 }
 
@@ -35,8 +37,6 @@ type AsyncResourceFactory<T> = (
   options?: DataLoaderOptions<T>,
 ) => AsyncResource<DataLoaderResult<T>>;
 
-type StaticData<T> = T[] | readonly T[];
-
 interface DynamicLoaderShape {
   manualSorting?: boolean;
   manualFiltering?: boolean;
@@ -44,7 +44,7 @@ interface DynamicLoaderShape {
 }
 
 export interface StaticDataLoaderShape<T> {
-  staticData: StaticData<T>;
+  staticData: ListData<T>;
 }
 
 export type AsyncResourceFactoryDataLoaderShape<T> = {

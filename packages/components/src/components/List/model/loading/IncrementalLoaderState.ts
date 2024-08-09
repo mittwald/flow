@@ -2,9 +2,10 @@ import type { AsyncResource } from "@mittwald/react-use-promise";
 import { action, computed, makeObservable, observable } from "mobx";
 import useSelector from "@/lib/mobx/useSelector";
 import { useRef } from "react";
+import type { ListData } from "@/components/List/model/loading/types";
 
 type AsyncResourceLoadingState = AsyncResource["state"]["value"];
-type DataBatches<T> = T[][];
+type DataBatches<T> = ListData<T>[];
 type BatchesLoadingState = AsyncResourceLoadingState[];
 
 export class IncrementalLoaderState<T> {
@@ -36,7 +37,7 @@ export class IncrementalLoaderState<T> {
     this.dataBatches = [];
   }
 
-  public setDataBatch(index: number, data: T[]): void {
+  public setDataBatch(index: number, data: ListData<T>): void {
     if (this.dataBatches.length === 0) {
       this.prevDataBatches = [];
     }
