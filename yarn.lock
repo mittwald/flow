@@ -2930,21 +2930,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nrwl/devkit@npm:19.4.0":
-  version: 19.4.0
-  resolution: "@nrwl/devkit@npm:19.4.0"
-  dependencies:
-    "@nx/devkit": "npm:19.4.0"
-  checksum: 10c0/50707e9ac5417f671592c2773ecafd9bad678ca4f0c12743dde139715a76fa0086211d542f10a8a18ecc8755b1fbf697b2532e246dc46e3242710ed8ab86cf94
-  languageName: node
-  linkType: hard
-
 "@nrwl/devkit@npm:19.5.6":
   version: 19.5.6
   resolution: "@nrwl/devkit@npm:19.5.6"
   dependencies:
     "@nx/devkit": "npm:19.5.6"
   checksum: 10c0/3ef7efed315f6c1544616f4f645516cad8516d848261bff85463c42212ece678e3c9af94774bdbef3016fe744c9ae66dcd1d48b1719f93e6a0eea9a0407c226b
+  languageName: node
+  linkType: hard
+
+"@nrwl/devkit@npm:19.5.7":
+  version: 19.5.7
+  resolution: "@nrwl/devkit@npm:19.5.7"
+  dependencies:
+    "@nx/devkit": "npm:19.5.7"
+  checksum: 10c0/573ac8116f444ea2a8f60edd0ce3dc6fb5d937a34ef1d308a68abd56f6b620aa12339f63d3e3af567031de5b4ae1988307be56ea7b744df4b724af30bfc4d6ea
   languageName: node
   linkType: hard
 
@@ -3007,26 +3007,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nx/devkit@npm:19.4.0, @nx/devkit@npm:>=17.1.2 < 20":
-  version: 19.4.0
-  resolution: "@nx/devkit@npm:19.4.0"
-  dependencies:
-    "@nrwl/devkit": "npm:19.4.0"
-    ejs: "npm:^3.1.7"
-    enquirer: "npm:~2.3.6"
-    ignore: "npm:^5.0.4"
-    minimatch: "npm:9.0.3"
-    semver: "npm:^7.5.3"
-    tmp: "npm:~0.2.1"
-    tslib: "npm:^2.3.0"
-    yargs-parser: "npm:21.1.1"
-  peerDependencies:
-    nx: ">= 17 <= 20"
-  checksum: 10c0/e9820531eacd1353e52dc22e0efe3e2bfc71eea95aeab005fa35af195dd22e4ed6bca49ea9e5ce133a9dc865ba4aa477b9dce11123aba8330e743bc88f57a2ff
-  languageName: node
-  linkType: hard
-
-"@nx/devkit@npm:19.5.6, @nx/devkit@npm:^19.5.6":
+"@nx/devkit@npm:19.5.6":
   version: 19.5.6
   resolution: "@nx/devkit@npm:19.5.6"
   dependencies:
@@ -3042,6 +3023,25 @@ __metadata:
   peerDependencies:
     nx: ">= 17 <= 20"
   checksum: 10c0/1c132cead5b3d6ce47dc234a0660717997ebd3d54764a8840a34e70e33319adbb0a8d0ea2af8a160f185165f1af046af755cb8711abe79f9f993943de2332790
+  languageName: node
+  linkType: hard
+
+"@nx/devkit@npm:19.5.7, @nx/devkit@npm:>=17.1.2 < 20, @nx/devkit@npm:^19.5.6":
+  version: 19.5.7
+  resolution: "@nx/devkit@npm:19.5.7"
+  dependencies:
+    "@nrwl/devkit": "npm:19.5.7"
+    ejs: "npm:^3.1.7"
+    enquirer: "npm:~2.3.6"
+    ignore: "npm:^5.0.4"
+    minimatch: "npm:9.0.3"
+    semver: "npm:^7.5.3"
+    tmp: "npm:~0.2.1"
+    tslib: "npm:^2.3.0"
+    yargs-parser: "npm:21.1.1"
+  peerDependencies:
+    nx: ">= 17 <= 20"
+  checksum: 10c0/a80c363f0afd8e43763299d8b3723d850833fa7b8c2e3922df363a4dc401f495b82d57dfffb052843c62b308a73930b1b8123c941f0d557e1daff273004873e7
   languageName: node
   linkType: hard
 
