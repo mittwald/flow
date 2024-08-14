@@ -11977,11 +11977,11 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["axios", [\
-      ["npm:1.7.3", {\
-        "packageLocation": "./.yarn/cache/axios-npm-1.7.3-a63743a582-a18cbe5592.zip/node_modules/axios/",\
+      ["npm:1.7.4", {\
+        "packageLocation": "./.yarn/cache/axios-npm-1.7.4-cc1c89ddba-5ea1a93140.zip/node_modules/axios/",\
         "packageDependencies": [\
-          ["axios", "npm:1.7.3"],\
-          ["follow-redirects", "virtual:a63743a5822c3f4f0080debf0a45615212b5bd005b763a14221b5559794a4eab59edf521118fa1c78a2444ffb22b1d205323e984eccd051abda1334fb302f130#npm:1.15.6"],\
+          ["axios", "npm:1.7.4"],\
+          ["follow-redirects", "virtual:cc1c89ddbaa2ee6988ad04cd8f48fb510e98268b86b9002d50ceca7bd737255eca4ec5ce4ed954e6ba12356c7138528653644b23c509c9a7726b952c51404b15#npm:1.15.6"],\
           ["form-data", "npm:4.0.0"],\
           ["proxy-from-env", "npm:1.1.0"]\
         ],\
@@ -14885,10 +14885,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:a63743a5822c3f4f0080debf0a45615212b5bd005b763a14221b5559794a4eab59edf521118fa1c78a2444ffb22b1d205323e984eccd051abda1334fb302f130#npm:1.15.6", {\
-        "packageLocation": "./.yarn/__virtual__/follow-redirects-virtual-74498d9869/0/cache/follow-redirects-npm-1.15.6-50635fe51d-9ff767f0d7.zip/node_modules/follow-redirects/",\
+      ["virtual:cc1c89ddbaa2ee6988ad04cd8f48fb510e98268b86b9002d50ceca7bd737255eca4ec5ce4ed954e6ba12356c7138528653644b23c509c9a7726b952c51404b15#npm:1.15.6", {\
+        "packageLocation": "./.yarn/__virtual__/follow-redirects-virtual-b46b84e192/0/cache/follow-redirects-npm-1.15.6-50635fe51d-9ff767f0d7.zip/node_modules/follow-redirects/",\
         "packageDependencies": [\
-          ["follow-redirects", "virtual:a63743a5822c3f4f0080debf0a45615212b5bd005b763a14221b5559794a4eab59edf521118fa1c78a2444ffb22b1d205323e984eccd051abda1334fb302f130#npm:1.15.6"],\
+          ["follow-redirects", "virtual:cc1c89ddbaa2ee6988ad04cd8f48fb510e98268b86b9002d50ceca7bd737255eca4ec5ce4ed954e6ba12356c7138528653644b23c509c9a7726b952c51404b15#npm:1.15.6"],\
           ["@types/debug", null],\
           ["debug", null]\
         ],\
@@ -19069,7 +19069,7 @@ const RAW_RUNTIME_STATE =
           ["@yarnpkg/lockfile", "npm:1.1.0"],\
           ["@yarnpkg/parsers", "npm:3.0.0-rc.46"],\
           ["@zkochan/js-yaml", "npm:0.0.7"],\
-          ["axios", "npm:1.7.3"],\
+          ["axios", "npm:1.7.4"],\
           ["chalk", "npm:4.1.2"],\
           ["cli-cursor", "npm:3.1.0"],\
           ["cli-spinners", "npm:2.6.1"],\
