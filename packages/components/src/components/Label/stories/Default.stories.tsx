@@ -23,6 +23,8 @@ export const Default: Story = {};
 
 export const Optional: Story = { args: { optional: true } };
 
+export const Required: Story = { args: { required: true } };
+
 export const WithContextualHelp: Story = {
   render: (props) => (
     <Label {...props}>

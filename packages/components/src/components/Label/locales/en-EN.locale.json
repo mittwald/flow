@@ -1,3 +1,4 @@
 {
-  "label.optional": "(optional)"
+  "label.optional": "(optional)",
+  "label.required": "(required)"
 }
