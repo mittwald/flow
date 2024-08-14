@@ -3,9 +3,12 @@
 .item {
   cursor: default;
   background-color: var(--list-item--background-color--default);
-  outline-offset: calc(var(--size-px--xs) * -1);
 
   @include focus.focus;
+
+  &.item {
+    outline-offset: calc(var(--size-px--xs) * -1);
+  }
 
   &:not(:last-child) {
     border-bottom-color: var(--list-item--border-color);

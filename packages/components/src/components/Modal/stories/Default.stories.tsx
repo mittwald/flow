@@ -170,3 +170,41 @@ export const WithForm: Story = {
     );
   },
 };
+
+export const OffCanvasWithForm: Story = {
+  render: (props) => {
+    const form = useForm<{ name: string }>();
+    const modalController = useOverlayController("Modal");
+
+    return (
+      <>
+        <Button color="accent" onPress={modalController.open}>
+          Add customer
+        </Button>
+
+        <Modal offCanvas {...props} controller={modalController}>
+          <Form form={form} onSubmit={() => modalController.close()}>
+            <Heading>Add Customer</Heading>
+            <Content>
+              <Field name="name" rules={{ required: "Please enter a name" }}>
+                <TextField>
+                  <Label>Customer name</Label>
+                </TextField>
+              </Field>
+            </Content>
+            <ActionGroup>
+              <Button type="submit" color="accent">
+                Submit
+              </Button>
+              <Action closeOverlay="Modal">
+                <Button variant="soft" color="secondary">
+                  Abort
+                </Button>
+              </Action>
+            </ActionGroup>
+          </Form>
+        </Modal>
+      </>
+    );
+  },
+};
