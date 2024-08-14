@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.196](https://github.com/mittwald/flow/compare/0.1.0-alpha.195...0.1.0-alpha.196) (2024-08-14)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.195](https://github.com/mittwald/flow/compare/0.1.0-alpha.194...0.1.0-alpha.195) (2024-08-13)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.194](https://github.com/mittwald/flow/compare/0.1.0-alpha.193...0.1.0-alpha.194) (2024-08-09)
 
 **Note:** Version bump only for package @mittwald/flow-design-tokens
