@@ -57,7 +57,7 @@ const RAW_RUNTIME_STATE =
           ["@types/eslint__js", "npm:8.42.3"],\
           ["eslint", "npm:9.8.0"],\
           ["eslint-config-prettier", "virtual:39c8c25d260eb1bf02df2a54b39359db7b3370463ab66b81ab8af2464f36109363fcf65528ed61bea6211f97dae28bd320ee3af3dba7e77d2aaeb5c743004d80#npm:9.1.0"],\
-          ["eslint-plugin-json", "npm:4.0.0"],\
+          ["eslint-plugin-json", "npm:4.0.1"],\
           ["eslint-plugin-prettier", "virtual:39c8c25d260eb1bf02df2a54b39359db7b3370463ab66b81ab8af2464f36109363fcf65528ed61bea6211f97dae28bd320ee3af3dba7e77d2aaeb5c743004d80#npm:5.2.1"],\
           ["lerna", "npm:8.1.7"],\
           ["nx", "virtual:cfa1c0c10c07454a516b4bdbb45891520158c7100dbbf19d79ca663cafa610fb7da26ed29e38359f1981af8c47bf20c3e2e5271f9e724ca3fc74c1511798240f#npm:19.5.6"],\
@@ -4063,7 +4063,7 @@ const RAW_RUNTIME_STATE =
           ["@types/eslint__js", "npm:8.42.3"],\
           ["eslint", "npm:9.8.0"],\
           ["eslint-config-prettier", "virtual:39c8c25d260eb1bf02df2a54b39359db7b3370463ab66b81ab8af2464f36109363fcf65528ed61bea6211f97dae28bd320ee3af3dba7e77d2aaeb5c743004d80#npm:9.1.0"],\
-          ["eslint-plugin-json", "npm:4.0.0"],\
+          ["eslint-plugin-json", "npm:4.0.1"],\
           ["eslint-plugin-prettier", "virtual:39c8c25d260eb1bf02df2a54b39359db7b3370463ab66b81ab8af2464f36109363fcf65528ed61bea6211f97dae28bd320ee3af3dba7e77d2aaeb5c743004d80#npm:5.2.1"],\
           ["lerna", "npm:8.1.7"],\
           ["nx", "virtual:cfa1c0c10c07454a516b4bdbb45891520158c7100dbbf19d79ca663cafa610fb7da26ed29e38359f1981af8c47bf20c3e2e5271f9e724ca3fc74c1511798240f#npm:19.5.6"],\
@@ -14241,10 +14241,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["eslint-plugin-json", [\
-      ["npm:4.0.0", {\
-        "packageLocation": "./.yarn/cache/eslint-plugin-json-npm-4.0.0-335c008c53-01a0cfcf10.zip/node_modules/eslint-plugin-json/",\
+      ["npm:4.0.1", {\
+        "packageLocation": "./.yarn/cache/eslint-plugin-json-npm-4.0.1-b7f6415dd5-9eb37d8f30.zip/node_modules/eslint-plugin-json/",\
         "packageDependencies": [\
-          ["eslint-plugin-json", "npm:4.0.0"],\
+          ["eslint-plugin-json", "npm:4.0.1"],\
           ["lodash", "npm:4.17.21"],\
           ["vscode-json-languageservice", "npm:4.2.1"]\
         ],\

@@ -9786,12 +9786,12 @@ __metadata:
   linkType: hard
 
 "eslint-plugin-json@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "eslint-plugin-json@npm:4.0.0"
+  version: 4.0.1
+  resolution: "eslint-plugin-json@npm:4.0.1"
   dependencies:
     lodash: "npm:^4.17.21"
     vscode-json-languageservice: "npm:^4.1.6"
-  checksum: 10c0/01a0cfcf10c9f8cfac1b1e69177a693d028e457fccaa6d57db78a80305fb96bc3f2ca632652cd9ddcf12ddc4b82d04a73443fb590d7f4b1d460ab2d39b7a5f34
+  checksum: 10c0/9eb37d8f306180b194073af91a62a24afac9a4b805c7e685524c792bb6550ad9362f84ee226553e9f5099a56238f0697ae8a85d4e39bb2e12fdccbccd77669e0
   languageName: node
   linkType: hard
 
