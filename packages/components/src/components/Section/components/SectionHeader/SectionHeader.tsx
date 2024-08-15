@@ -29,6 +29,12 @@ export const SectionHeader: FC<SectionHeaderProps> = (props) => {
         tunnelId: null,
       },
     },
+    PopoverTrigger: {
+      tunnelId: "actions",
+      Button: {
+        tunnelId: null,
+      },
+    },
     Action: {
       tunnelId: "actions",
       Button: {
