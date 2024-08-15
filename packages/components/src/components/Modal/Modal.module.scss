@@ -7,17 +7,36 @@
     overflow: hidden;
   }
 
-  [role="dialog"] {
+  [role="dialog"],
+  form {
     overflow: hidden;
     outline: none;
     display: grid;
     height: 100%;
     max-height: inherit;
+  }
+
+  [role="dialog"]:not(:has(form)) {
     grid-template-areas:
       "header"
       "content"
       "actionGroup";
     grid-template-rows: auto 1fr auto;
+  }
+
+  [role="dialog"]:has(form) {
+    grid-template-areas:
+      "header"
+      "content";
+    grid-template-rows: auto 1fr;
+  }
+
+  form {
+    grid-area: content;
+    grid-template-areas:
+      "content"
+      "actionGroup";
+    grid-template-rows: 1fr auto;
   }
 
   .header {
