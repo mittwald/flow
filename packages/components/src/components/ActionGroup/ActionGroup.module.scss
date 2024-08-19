@@ -1,7 +1,3 @@
-.actionGroupContainer {
-  container-type: inline-size;
-}
-
 .actionGroup {
   gap: var(--action-group--button-to-button-spacing);
   display: grid;
@@ -17,6 +13,7 @@
     display: flex;
     flex-direction: row;
     gap: var(--action-group--button-to-button-spacing);
+
     &:empty {
       display: none;
     }
@@ -25,21 +22,30 @@
   .abort {
     grid-area: abort;
   }
+}
 
-  @container (max-width: 550px) {
-    display: flex;
-    flex-direction: column-reverse;
+.actionGroupContainer {
+  &:not(.ignoreBreakpoint) {
+    container-type: inline-size;
 
-    .primary,
-    .secondary,
-    .abort {
-      width: 100%;
-    }
+    .actionGroup {
+      @container (max-width: 550px) {
+        display: flex;
+        flex-direction: column-reverse;
 
-    .secondary {
-      flex-direction: column-reverse;
-      & > * {
-        width: 100%;
+        .primary,
+        .secondary,
+        .abort {
+          width: 100%;
+        }
+
+        .secondary {
+          flex-direction: column-reverse;
+
+          & > * {
+            width: 100%;
+          }
+        }
       }
     }
   }

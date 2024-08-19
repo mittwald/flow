@@ -14,12 +14,24 @@ import { getActionGroupSlot } from "@/components/ActionGroup/lib/getActionGroupS
 export interface ActionGroupProps
   extends PropsWithChildren,
     FlowComponentProps,
-    PropsWithClassName {}
+    PropsWithClassName {
+  ignoreBreakpoint?: boolean;
+}
 
 export const ActionGroup = flowComponent("ActionGroup", (props) => {
-  const { children, className, refProp: ref, ...rest } = props;
+  const {
+    children,
+    className,
+    refProp: ref,
+    ignoreBreakpoint,
+    ...rest
+  } = props;
 
-  const rootClassName = clsx(styles.actionGroupContainer, className);
+  const rootClassName = clsx(
+    styles.actionGroupContainer,
+    className,
+    ignoreBreakpoint && styles.ignoreBreakpoint,
+  );
 
   const propsContext: PropsContext = {
     Button: {

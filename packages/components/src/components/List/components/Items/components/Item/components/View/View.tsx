@@ -34,6 +34,10 @@ export const View = (props: Props) => {
     Button: {
       className: styles.action,
     },
+    ActionGroup: {
+      className: styles.action,
+      ignoreBreakpoint: true,
+    },
     Content: {
       className: dynamic((p) => getStyleForContentSlot(p.slot)),
       tunnelId: "topContent",
