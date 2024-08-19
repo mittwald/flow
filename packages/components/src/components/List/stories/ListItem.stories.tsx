@@ -11,8 +11,10 @@ import { dummyText } from "@/lib/dev/dummyText";
 import Image from "@/components/Image";
 import { Content } from "@/components/Content";
 import { StatusBadge } from "@/components/StatusBadge";
-import * as Aria from "react-aria-components";
 import { View } from "@/components/List/components/Items/components/Item/components/View";
+import { ActionGroup } from "@/components/ActionGroup";
+import { Button } from "@/components/Button";
+import { IconStar } from "@/components/Icon/components/icons";
 
 const ContentPlaceholder: FC<PropsWithChildren> = (props) => (
   <div
@@ -35,13 +37,7 @@ const ContentPlaceholder: FC<PropsWithChildren> = (props) => (
 const meta: Meta<typeof List> = {
   ...defaultMeta,
   title: "Structure/List/ListItem",
-  decorators: [
-    (story) => (
-      <Aria.GridList style={{ containerType: "inline-size" }}>
-        {story()}
-      </Aria.GridList>
-    ),
-  ],
+  decorators: [(story) => <div>{story()}</div>],
   render: () => (
     <View>
       <Avatar>
@@ -142,6 +138,26 @@ export const CustomContainerBreakpoint: Story = {
       <ContextMenu>
         <MenuItem>Show details</MenuItem>
       </ContextMenu>
+    </View>
+  ),
+};
+
+export const WithActionGroup: Story = {
+  render: () => (
+    <View>
+      <Avatar>
+        <Image alt="John Doe" src={dummyText.imageSrc} />
+      </Avatar>
+      <Heading>John Doe</Heading>
+      <Text>Mittwald</Text>
+      <ActionGroup>
+        <Button color="secondary" variant="soft" slot="secondary">
+          <IconStar />
+        </Button>
+        <ContextMenu>
+          <MenuItem>Show details</MenuItem>
+        </ContextMenu>
+      </ActionGroup>
     </View>
   ),
 };
