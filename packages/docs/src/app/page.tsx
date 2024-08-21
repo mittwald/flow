@@ -23,7 +23,7 @@ const Home: FC = () => {
         <Section>
           <Image
             className={styles.homeImage}
-            src="/home.png"
+            src={"/home.svg"}
             alt="Flow Design System"
           />
           <Heading level={1}>
@@ -37,7 +37,7 @@ const Home: FC = () => {
       </LayoutCard>
       <LayoutCard>
         <Section>
-          <Heading level={2}>Unsere Grundprinzipien</Heading>
+          <Heading>Unsere Grundprinzipien</Heading>
           <Text>
             <ul>
               <li>
@@ -60,7 +60,7 @@ const Home: FC = () => {
       <ColumnLayout l={[1, 1, 1]}>
         <LayoutCard>
           <Section>
-            <Heading level={2}>
+            <Heading>
               <Icon>
                 <IconDeviceLaptop />
               </Icon>
@@ -72,7 +72,7 @@ const Home: FC = () => {
         </LayoutCard>
         <LayoutCard>
           <Section>
-            <Heading level={2}>
+            <Heading>
               <Icon>
                 <IconBooks />
               </Icon>
@@ -88,7 +88,7 @@ const Home: FC = () => {
         </LayoutCard>
         <LayoutCard>
           <Section>
-            <Heading level={2}>
+            <Heading>
               <Icon>
                 <IconComponents />
               </Icon>
