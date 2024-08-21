@@ -9,7 +9,6 @@ import clsx from "clsx";
 import styles from "./layout.module.scss";
 import Heading from "@mittwald/flow-react-components/Heading";
 import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
-import StatusBadge from "@mittwald/flow-react-components/StatusBadge";
 import LayoutCard from "@mittwald/flow-react-components/LayoutCard";
 import { LinkProvider } from "@mittwald/flow-react-components/nextjs";
 import { IconMittwald } from "@mittwald/flow-react-components/Icons";
@@ -35,9 +34,7 @@ const RootLayout: FC<PropsWithChildren> = async (props) => {
               <Heading level={1} className={styles.heading}>
                 Flow
               </Heading>
-              <StatusBadge className={styles.betaBadge} status="warning">
-                beta
-              </StatusBadge>
+
               <HeaderNavigation
                 className={styles.headerNavigation}
                 docs={docs.map((mdx) => mdx.serialize())}
