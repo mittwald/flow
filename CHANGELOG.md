@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.198](https://github.com/mittwald/flow/compare/0.1.0-alpha.197...0.1.0-alpha.198) (2024-08-23)
+
+### Bug Fixes
+
+- **Checkbox:** show invalid state on focused checkbox button
+  ([94835aa](https://github.com/mittwald/flow/commit/94835aac8632d6528f71bfd41eda4a5bddd7e527))
+- **Modal:** add styles to form in modal
+  ([5aeb50c](https://github.com/mittwald/flow/commit/5aeb50c02697055a9499dcebac8ef8ddbce74ea4))
+- **Slider:** disable focus for slider buttons
+  ([922e62c](https://github.com/mittwald/flow/commit/922e62cb990c902f9b9ce4f7dfadcc9c7ff89c05))
+
+### Features
+
+- **List:** support action group in list item
+  ([1b8473f](https://github.com/mittwald/flow/commit/1b8473f19bd006c6ad56993f00332dc90d5e668d))
+- **List:** support action group in list item
+  ([323aea6](https://github.com/mittwald/flow/commit/323aea650d04d80da7b1395a2c853921bcebd915))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.197](https://github.com/mittwald/flow/compare/0.1.0-alpha.196...0.1.0-alpha.197) (2024-08-14)
 
 **Note:** Version bump only for package @mittwald/flow-project
