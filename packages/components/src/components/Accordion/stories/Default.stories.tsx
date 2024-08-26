@@ -28,6 +28,10 @@ export const DefaultExpanded: Story = {
   args: { defaultExpanded: true },
 };
 
+export const OutlineVariant: Story = {
+  args: { variant: "outlined" },
+};
+
 export const WithLabel: Story = {
   render: (props) => (
     <Accordion {...props}>

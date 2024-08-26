@@ -48,6 +48,13 @@
     transition-duration: var(--transition--duration--default);
   }
 
+  &.outline {
+    border-color: var(--form-control--border-color--default);
+    border-width: var(--form-control--border-width);
+    border-style: var(--form-control--border-style);
+    border-radius: var(--form-control--corner-radius);
+  }
+
   &.expanded {
     .content {
       grid-template-rows: 1fr;
