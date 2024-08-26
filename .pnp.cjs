@@ -11198,7 +11198,7 @@ const RAW_RUNTIME_STATE =
           ["fast-glob", "npm:3.3.2"],\
           ["got", "npm:11.8.6"],\
           ["lodash", "npm:4.17.21"],\
-          ["micromatch", "npm:4.0.7"],\
+          ["micromatch", "npm:4.0.8"],\
           ["p-limit", "npm:2.3.0"],\
           ["semver", "npm:7.6.3"],\
           ["strip-ansi", "npm:6.0.1"],\
@@ -11231,7 +11231,7 @@ const RAW_RUNTIME_STATE =
           ["fast-glob", "npm:3.3.2"],\
           ["got", "npm:11.8.6"],\
           ["lodash", "npm:4.17.21"],\
-          ["micromatch", "npm:4.0.7"],\
+          ["micromatch", "npm:4.0.8"],\
           ["p-limit", "npm:2.3.0"],\
           ["semver", "npm:7.6.3"],\
           ["strip-ansi", "npm:6.0.1"],\
@@ -11373,7 +11373,7 @@ const RAW_RUNTIME_STATE =
           ["clipanion", "virtual:79bd705dbf206d6bd5005d5f35924cece8938d35eed524c3106dd8d8c6d56228b3ffaf764b0b711713e3d2dfeba0155ac81f45b66f87f4323e61be254172e9b5#npm:4.0.0-rc.3"],\
           ["cross-spawn", "npm:7.0.3"],\
           ["fast-glob", "npm:3.3.2"],\
-          ["micromatch", "npm:4.0.7"],\
+          ["micromatch", "npm:4.0.8"],\
           ["tslib", "npm:2.6.3"]\
         ],\
         "linkType": "HARD"\
@@ -14650,7 +14650,7 @@ const RAW_RUNTIME_STATE =
           ["@nodelib/fs.walk", "npm:1.2.8"],\
           ["glob-parent", "npm:5.1.2"],\
           ["merge2", "npm:1.4.1"],\
-          ["micromatch", "npm:4.0.7"]\
+          ["micromatch", "npm:4.0.8"]\
         ],\
         "linkType": "HARD"\
       }],\
@@ -14662,7 +14662,7 @@ const RAW_RUNTIME_STATE =
           ["@nodelib/fs.walk", "npm:1.2.8"],\
           ["glob-parent", "npm:5.1.2"],\
           ["merge2", "npm:1.4.1"],\
-          ["micromatch", "npm:4.0.7"]\
+          ["micromatch", "npm:4.0.8"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -14834,7 +14834,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/find-yarn-workspace-root-npm-2.0.0-e58a501607-b0d3843013.zip/node_modules/find-yarn-workspace-root/",\
         "packageDependencies": [\
           ["find-yarn-workspace-root", "npm:2.0.0"],\
-          ["micromatch", "npm:4.0.7"]\
+          ["micromatch", "npm:4.0.8"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -16723,7 +16723,7 @@ const RAW_RUNTIME_STATE =
           ["chalk", "npm:4.1.2"],\
           ["flow-parser", "npm:0.242.1"],\
           ["graceful-fs", "npm:4.2.11"],\
-          ["micromatch", "npm:4.0.7"],\
+          ["micromatch", "npm:4.0.8"],\
           ["neo-async", "npm:2.6.2"],\
           ["node-dir", "npm:0.1.17"],\
           ["recast", "npm:0.23.9"],\
@@ -16756,7 +16756,7 @@ const RAW_RUNTIME_STATE =
           ["chalk", "npm:4.1.2"],\
           ["flow-parser", "npm:0.242.1"],\
           ["graceful-fs", "npm:4.2.11"],\
-          ["micromatch", "npm:4.0.7"],\
+          ["micromatch", "npm:4.0.8"],\
           ["neo-async", "npm:2.6.2"],\
           ["node-dir", "npm:0.1.17"],\
           ["recast", "npm:0.23.9"],\
@@ -18215,10 +18215,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["micromatch", [\
-      ["npm:4.0.7", {\
-        "packageLocation": "./.yarn/cache/micromatch-npm-4.0.7-28fb7387ee-58fa99bc52.zip/node_modules/micromatch/",\
+      ["npm:4.0.8", {\
+        "packageLocation": "./.yarn/cache/micromatch-npm-4.0.8-c9570e4aca-166fa6eb92.zip/node_modules/micromatch/",\
         "packageDependencies": [\
-          ["micromatch", "npm:4.0.7"],\
+          ["micromatch", "npm:4.0.8"],\
           ["braces", "npm:3.0.3"],\
           ["picomatch", "npm:2.3.1"]\
         ],\
