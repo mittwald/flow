@@ -28,6 +28,8 @@ export function Form<F extends FieldValues>(props: Props<F>) {
   const handleOnSubmit: FormEventHandler = (e) => {
     const { isSubmitting, isValidating } = form.control._formState;
 
+    e.stopPropagation();
+
     if (isSubmitting || isValidating) {
       e.preventDefault();
       return;
