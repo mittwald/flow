@@ -75,6 +75,7 @@ export interface FlowComponentPropsTypes {
   List: ListProps;
   MenuItem: MenuItemProps;
   Modal: ModalProps;
+  ModalTrigger: OverlayTriggerProps;
   NumberField: NumberFieldProps;
   Option: OptionProps;
   Popover: PopoverProps;
@@ -126,6 +127,7 @@ const propsContextSupportingComponentsMap: Record<
   List: true,
   MenuItem: true,
   Modal: true,
+  ModalTrigger: true,
   NumberField: true,
   Radio: true,
   Option: true,
