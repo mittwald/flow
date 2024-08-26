@@ -34,7 +34,7 @@ export function Form<F extends FieldValues>(props: Props<F>) {
     }
 
     form.handleSubmit((values) => {
-      const result = onSubmit(values);
+      const result = onSubmit(values, e);
       isAsyncSubmit.current = result instanceof Promise;
       return result;
     })(e);
