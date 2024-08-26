@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.199](https://github.com/mittwald/flow/compare/0.1.0-alpha.198...0.1.0-alpha.199) (2024-08-26)
+
+### Bug Fixes
+
+- **select:** fix text align
+  ([d5f46be](https://github.com/mittwald/flow/commit/d5f46be16d02f833accfe0c4f82b7fc05b3ee21c))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.198](https://github.com/mittwald/flow/compare/0.1.0-alpha.197...0.1.0-alpha.198) (2024-08-23)
 
 ### Bug Fixes
