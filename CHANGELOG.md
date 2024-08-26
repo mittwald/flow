@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.200](https://github.com/mittwald/flow/compare/0.1.0-alpha.199...0.1.0-alpha.200) (2024-08-26)
+
+### Features
+
+- **Accordion:** add outlined variant
+  ([1bbdf04](https://github.com/mittwald/flow/commit/1bbdf0476ac3449ff4f719e67be25b7806d00fad))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.199](https://github.com/mittwald/flow/compare/0.1.0-alpha.198...0.1.0-alpha.199) (2024-08-26)
 
 ### Bug Fixes
