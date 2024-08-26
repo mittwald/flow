@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.202](https://github.com/mittwald/flow/compare/0.1.0-alpha.201...0.1.0-alpha.202) (2024-08-26)
+
+### Bug Fixes
+
+- **Form:** stop propagation of form submit events
+  ([c02affb](https://github.com/mittwald/flow/commit/c02affba398305a75d53feee07f74a272f191b23))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.201](https://github.com/mittwald/flow/compare/0.1.0-alpha.200...0.1.0-alpha.201) (2024-08-26)
 
 ### Bug Fixes
