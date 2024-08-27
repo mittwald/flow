@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.204](https://github.com/mittwald/flow/compare/0.1.0-alpha.203...0.1.0-alpha.204) (2024-08-27)
+
+### Features
+
+- **List:** add onChange handler
+  ([5162f31](https://github.com/mittwald/flow/commit/5162f3147349f728765bf265a65506705484200b))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.203](https://github.com/mittwald/flow/compare/0.1.0-alpha.202...0.1.0-alpha.203) (2024-08-27)
 
 ### Bug Fixes
