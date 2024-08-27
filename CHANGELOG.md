@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.203](https://github.com/mittwald/flow/compare/0.1.0-alpha.202...0.1.0-alpha.203) (2024-08-27)
+
+### Bug Fixes
+
+- **Section:** add modal trigger to header props context
+  ([1643fc4](https://github.com/mittwald/flow/commit/1643fc470a43f14bfde38026a9fd7e184425ca42))
+- **Section:** add popover trigger to section header props context
+  ([870cc00](https://github.com/mittwald/flow/commit/870cc0095bb46342c94def6cbaf398ed1e1a1341))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.202](https://github.com/mittwald/flow/compare/0.1.0-alpha.201...0.1.0-alpha.202) (2024-08-26)
 
 ### Bug Fixes
