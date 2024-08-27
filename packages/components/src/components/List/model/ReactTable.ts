@@ -16,9 +16,13 @@ import {
 } from "@tanstack/react-table";
 import type List from "@/components/List/model/List";
 import invariant from "invariant";
-import type { PropertyName } from "@/components/List/model/types";
+import type {
+  OnListChanged,
+  PropertyName,
+} from "@/components/List/model/types";
 import type { SearchValue } from "@/components/List/model/search/types";
 import type { Dispatch, SetStateAction } from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 
 export class ReactTable<T> {
@@ -29,6 +33,7 @@ export class ReactTable<T> {
 
   private constructor(
     list: List<T>,
+    onChange?: OnListChanged<T>,
     tableOptions: Partial<TableOptions<T>> = {},
   ) {
     this.list = list;
@@ -42,17 +47,21 @@ export class ReactTable<T> {
     );
     this.sortingState = sortingState;
     this.updateSortingState = updateSortingState;
-    this.table = this.useReactTable(tableOptions);
+    this.table = this.useReactTable(onChange, tableOptions);
   }
 
   public static useNew<T>(
     list: List<T>,
+    onChange?: OnListChanged<T>,
     tableOptions: Partial<TableOptions<T>> = {},
   ): ReactTable<T> {
-    return new ReactTable<T>(list, tableOptions);
+    return new ReactTable<T>(list, onChange, tableOptions);
   }
 
-  private useReactTable(tableOptions: Partial<TableOptions<T>> = {}): Table<T> {
+  private useReactTable(
+    onChange?: OnListChanged<T>,
+    tableOptions: Partial<TableOptions<T>> = {},
+  ): Table<T> {
     const data = this.list.loader.useData();
 
     const table = useReactTable({
@@ -77,6 +86,12 @@ export class ReactTable<T> {
       globalFilterFn: "auto",
       ...tableOptions,
     });
+
+    useEffect(() => {
+      if (onChange) {
+        onChange(this.list);
+      }
+    }, [this.list, onChange, table]);
 
     return table;
   }

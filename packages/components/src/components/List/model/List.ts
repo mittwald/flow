@@ -18,7 +18,7 @@ export class List<T> {
   public readonly reactTable: ReactTable<T>;
   public readonly batches: BatchesController<T>;
   public readonly loader: IncrementalLoader<T>;
-  public readonly hasAction: boolean;
+  public readonly hasAction?: boolean;
 
   private constructor(shape: ListShape<T>) {
     const {
@@ -27,6 +27,7 @@ export class List<T> {
       sorting = [],
       batchesController,
       hasAction,
+      onChange,
     } = shape;
 
     this.items = new ItemCollection(this);
@@ -37,7 +38,7 @@ export class List<T> {
     this.batches = new BatchesController(this, batchesController);
 
     this.loader = IncrementalLoader.useNew<T>(this, shape.loader);
-    this.reactTable = ReactTable.useNew(this, {
+    this.reactTable = ReactTable.useNew(this, onChange, {
       manualFiltering: this.loader.manualFiltering,
       manualPagination: this.loader.manualPagination,
       manualSorting: this.loader.manualSorting,

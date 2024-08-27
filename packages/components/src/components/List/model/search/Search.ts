@@ -25,13 +25,20 @@ export class Search<T> {
     return this.value !== undefined;
   }
 
+  private callOnUpdateCallbacks(): void {
+    this.onUpdateCallbacks.forEach((cb) => cb());
+  }
+
   public setValue(value: SearchValue): void {
     if (value === undefined || value.trim() === "") {
-      this.list.reactTable.table.resetGlobalFilter();
+      if (this.list.reactTable.table.getState().globalFilter) {
+        this.list.reactTable.table.resetGlobalFilter();
+        this.callOnUpdateCallbacks();
+      }
     } else {
       this.list.reactTable.table.setGlobalFilter(value);
+      this.callOnUpdateCallbacks();
     }
-    this.onUpdateCallbacks.forEach((cb) => cb());
   }
 
   public clear(): void {

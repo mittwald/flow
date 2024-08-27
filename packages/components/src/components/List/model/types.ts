@@ -7,6 +7,7 @@ import type { SearchShape } from "@/components/List/model/search/types";
 import type { ItemViewShape } from "@/components/List/model/item/ItemView";
 import type { ReactNode } from "react";
 import type { ItemType } from "@/lib/types/array";
+import type List from "@/components/List/model/List";
 
 export const customPropertyPrefix = "$" as const;
 export type CustomPropertyName = `${typeof customPropertyPrefix}${string}`;
@@ -19,6 +20,8 @@ export type PropertyValueRenderMethod<TMatcherValue> = (
   prop: NonNullable<ItemType<TMatcherValue>>,
 ) => ReactNode;
 
+export type OnListChanged<T> = (list: List<T>) => void;
+
 export interface ListShape<T> {
   loader?: IncrementalLoaderShape<T>;
   filters?: FilterShape<T, never, never>[];
@@ -26,7 +29,8 @@ export interface ListShape<T> {
   search?: SearchShape<T>;
   sorting?: SortingShape<T>[];
   batchesController?: BatchesControllerShape;
-  hasAction: boolean;
+  hasAction?: boolean;
+  onChange?: OnListChanged<T>;
 }
 
 export type PropertyRecord<T, TValue> = Partial<
