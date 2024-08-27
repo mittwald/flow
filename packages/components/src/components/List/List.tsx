@@ -19,16 +19,18 @@ import type { IncrementalLoaderShape } from "@/components/List/model/loading/typ
 import Footer from "./components/Footer";
 import { ListSearch } from "@/components/List/setupComponents/ListSearch";
 import type { ItemListProps } from "@/components/List/components/Items/Items";
+import type { OnListChanged } from "@/components/List/model/types";
 
-export interface ListProps
+export interface ListProps<T>
   extends PropsWithChildren,
     ItemListProps,
     FlowComponentProps {
   batchSize?: number;
+  onChange?: OnListChanged<T>;
 }
 
 export const List = flowComponent("List", (props) => {
-  const { children, batchSize, ...itemListProps } = props;
+  const { children, batchSize, onChange, ...itemListProps } = props;
 
   const listLoaderAsync = deepFindOfType(
     children,
@@ -62,6 +64,7 @@ export const List = flowComponent("List", (props) => {
   const itemViewProps = deepFindOfType(children, ListItem)?.props;
 
   const listModel = ListModel.useNew<never>({
+    onChange,
     loader: loaderShape,
     filters: deepFilterByType(children, ListFilter<never, never, never>).map(
       (f) => ({

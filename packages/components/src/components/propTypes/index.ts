@@ -72,7 +72,7 @@ export interface FlowComponentPropsTypes {
   Label: LabelProps;
   LayoutCard: LayoutCardProps;
   Link: LinkProps;
-  List: ListProps;
+  List: ListProps<never>;
   MenuItem: MenuItemProps;
   Modal: ModalProps;
   ModalTrigger: OverlayTriggerProps;
