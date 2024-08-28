@@ -4015,6 +4015,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./packages/docs/",\
         "packageDependencies": [\
           ["@mittwald/flow-documentation", "workspace:packages/docs"],\
+          ["@internationalized/date", "npm:3.5.5"],\
           ["@mdx-js/loader", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:3.0.1"],\
           ["@mdx-js/react", "virtual:da5c879d5618beaf6148379180f44c8816b6a50a9113a028d532abf7e10ae3c3ac908eaa5fc3a15ab33e835d368aa7b9481ecde5ccbf366e0f0fbf9d58ba2f7a#npm:3.0.1"],\
           ["@mfalkenberg/react-live-ssr", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:4.1.7"],\
@@ -4086,6 +4087,7 @@ const RAW_RUNTIME_STATE =
           ["@mittwald/flow-react-components", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#workspace:packages/components"],\
           ["@chakra-ui/live-region", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:2.1.0"],\
           ["@faker-js/faker", "npm:8.4.1"],\
+          ["@internationalized/date", "npm:3.5.5"],\
           ["@internationalized/string-compiler", "npm:3.2.4"],\
           ["@mittwald/flow-design-tokens", "workspace:packages/design-tokens"],\
           ["@mittwald/react-tunnel", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#workspace:packages/react-tunnel"],\
@@ -4191,6 +4193,7 @@ const RAW_RUNTIME_STATE =
           ["@mittwald/flow-react-components", "virtual:f09e910c1b508d3d7569e5bd3d1b58e6c8eedf483d3ecb00a35f3e6fff907cff61fcf2c7acd90c04d26e337186c1afc7265f77161911bcd5beabe7070df91545#workspace:packages/components"],\
           ["@chakra-ui/live-region", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:2.1.0"],\
           ["@faker-js/faker", "npm:8.4.1"],\
+          ["@internationalized/date", "npm:3.5.5"],\
           ["@internationalized/string-compiler", "npm:3.2.4"],\
           ["@mittwald/flow-design-tokens", "workspace:packages/design-tokens"],\
           ["@mittwald/react-tunnel", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#workspace:packages/react-tunnel"],\
@@ -4290,6 +4293,7 @@ const RAW_RUNTIME_STATE =
           ["@mittwald/flow-react-components", "workspace:packages/components"],\
           ["@chakra-ui/live-region", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:2.1.0"],\
           ["@faker-js/faker", "npm:8.4.1"],\
+          ["@internationalized/date", "npm:3.5.5"],\
           ["@internationalized/string-compiler", "npm:3.2.4"],\
           ["@mittwald/flow-design-tokens", "workspace:packages/design-tokens"],\
           ["@mittwald/react-tunnel", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#workspace:packages/react-tunnel"],\

@@ -10,11 +10,11 @@ import {
 export const CalendarHeader: FC = () => {
   return (
     <header>
-      <Button slot="previous" variant="plain">
+      <Button ariaSlot="previous" variant="plain">
         <IconChevronLeft />
       </Button>
       <Aria.Heading />
-      <Button slot="next" variant="plain">
+      <Button ariaSlot="next" variant="plain">
         <IconChevronRight />
       </Button>
     </header>

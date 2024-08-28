@@ -9,6 +9,7 @@ import { Popover } from "@/components/Popover";
 import { RangeCalendar } from "./components/RangeCalendar";
 import { DateRangeInput } from "./components/DateRangeInput";
 import { FieldError } from "@/components/FieldError";
+import { useOverlayController } from "@/lib/controller";
 
 export interface DateRangePickerProps<T extends Aria.DateValue>
   extends PropsWithChildren<Omit<Aria.DateRangePickerProps<T>, "children">> {
@@ -32,17 +33,27 @@ export const DateRangePicker: FC<DateRangePickerProps<Aria.DateValue>> = (
     },
   };
 
+  const popoverController = useOverlayController("Popover");
+
   return (
-    <Aria.DateRangePicker {...rest} className={rootClassName}>
+    <Aria.DateRangePicker
+      {...rest}
+      className={rootClassName}
+      onOpenChange={(v) => popoverController.setOpen(v)}
+      isOpen={popoverController.isOpen}
+      onChange={popoverController.close}
+    >
       <DateRangeInput isDisabled={props.isDisabled} />
       <PropsContextProvider props={propsContext}>
         {children}
       </PropsContextProvider>
       <FieldError className={styles.fieldError}>{errorMessage}</FieldError>
-      <Popover placement="bottom end">
-        <Aria.Dialog>
-          <RangeCalendar />
-        </Aria.Dialog>
+      <Popover
+        placement="bottom end"
+        isDialogContent
+        controller={popoverController}
+      >
+        <RangeCalendar />
       </Popover>
     </Aria.DateRangePicker>
   );
