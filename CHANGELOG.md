@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.205](https://github.com/mittwald/flow/compare/0.1.0-alpha.204...0.1.0-alpha.205) (2024-08-28)
+
+### Bug Fixes
+
+- **Components:** fix build
+  ([9d983af](https://github.com/mittwald/flow/commit/9d983af3df4161da8df2580da90a3de4767c1496))
+- **List:** fix async loader function type
+  ([867741e](https://github.com/mittwald/flow/commit/867741e71c37c4bd18604fa10badc3870bd93fbb))
+
+### Features
+
+- **Activity:** export Activity component
+  ([198639b](https://github.com/mittwald/flow/commit/198639ba2371dea8005a5ca2a010959d33d55d91))
+- **SkeletonText:** export SkeletonText component
+  ([91f122d](https://github.com/mittwald/flow/commit/91f122d5d51f949c7adce0d3e9557b7dd98d5d43))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.204](https://github.com/mittwald/flow/compare/0.1.0-alpha.203...0.1.0-alpha.204) (2024-08-27)
 
 ### Features
