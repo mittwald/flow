@@ -22,6 +22,7 @@ export default defineConfig(
         entry: {
           Accordion: "./src/components/Accordion/index.ts",
           Action: "./src/components/Action/index.ts",
+          Activity: "./src/components/Activity/index.ts",
           ActionGroup: "./src/components/ActionGroup/index.ts",
           Avatar: "./src/components/Avatar/index.ts",
           Breadcrumb: "./src/components/Breadcrumb/index.ts",
