@@ -6,6 +6,7 @@ export interface MdxFileMeta {
   navTitle?: string;
   description?: string;
   component?: string;
+  gitHubComponentPath?: string;
 }
 
 export interface StaticParams {
@@ -49,6 +50,16 @@ export class MdxFile {
       this.mdxSource.frontmatter.component ??
       humanizeString(this.slugs[this.slugs.length - 1])
     );
+  }
+
+  public getGitHubUrl(): string {
+    const component = this.mdxSource.frontmatter.component;
+
+    const gitHubPath =
+      this.mdxSource.frontmatter.gitHubComponentPath ??
+      `components/${component}`;
+
+    return `https://github.com/mittwald/flow/tree/main/packages/components/src/${gitHubPath}`;
   }
 
   public getNavTitle(): string {

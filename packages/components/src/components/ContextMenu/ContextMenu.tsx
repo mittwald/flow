@@ -8,9 +8,12 @@ import { Popover } from "@/components/Popover";
 import type { PropsContext } from "@/lib/propsContext";
 import { ClearPropsContext, PropsContextProvider } from "@/lib/propsContext";
 import type { MenuItemProps } from "@/components/MenuItem";
+import { useOverlayController } from "@/lib/controller";
+import OverlayContextProvider from "@/lib/controller/overlay/OverlayContextProvider";
+import { Action } from "@/components/Action";
 
 export interface ContextMenuProps
-  extends PopoverProps,
+  extends Omit<PopoverProps, "withTip">,
     Pick<
       Aria.MenuProps<MenuItemProps>,
       | "onAction"
@@ -19,7 +22,7 @@ export interface ContextMenuProps
       | "onSelectionChange"
       | "disabledKeys"
     >,
-    FlowComponentProps<"ContextMenu"> {
+    FlowComponentProps {
   selectionMode?: "single" | "multiple" | "navigation";
 }
 
@@ -33,36 +36,68 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
     disabledKeys,
     onSelectionChange,
     refProp: ref,
+    controller: overlayControllerFromProps,
     ...rest
   } = props;
 
+  const overlayControllerFromContext = useOverlayController("ContextMenu", {
+    reuseControllerFromContext: true,
+  });
+
+  const overlayController =
+    overlayControllerFromProps ?? overlayControllerFromContext;
+
   const ariaSelectionMode =
-    selectionMode === "navigation" ? "single" : selectionMode;
+    selectionMode === "navigation" ? "none" : selectionMode;
+
+  const selectionVariant =
+    selectionMode === "navigation" ? "navigation" : "control";
 
   const propsContext: PropsContext = {
     MenuItem: {
-      selectionVariant:
-        selectionMode === "navigation" ? "navigation" : "control",
+      selectionVariant,
+    },
+
+    Section: {
+      MenuItem: {
+        selectionVariant,
+      },
+      renderContextMenuSection: true,
     },
   };
 
+  const closeOverlayType =
+    selectionMode === "single" || selectionMode === "navigation"
+      ? "ContextMenu"
+      : undefined;
+
   return (
     <ClearPropsContext>
-      <Popover {...rest}>
-        <Aria.Menu
-          className={styles.contextMenu}
-          onAction={onAction}
-          selectionMode={ariaSelectionMode}
-          selectedKeys={selectedKeys}
-          defaultSelectedKeys={defaultSelectedKeys}
-          disabledKeys={disabledKeys}
-          onSelectionChange={onSelectionChange}
-          ref={ref}
+      <Popover
+        {...rest}
+        contentClassName={styles.popoverContent}
+        controller={overlayController}
+        isDialogContent={false}
+      >
+        <OverlayContextProvider
+          type="ContextMenu"
+          controller={overlayController}
         >
-          <PropsContextProvider props={propsContext}>
-            {children}
-          </PropsContextProvider>
-        </Aria.Menu>
+          <Aria.Menu
+            className={styles.contextMenu}
+            onAction={onAction}
+            selectionMode={ariaSelectionMode}
+            selectedKeys={selectedKeys}
+            defaultSelectedKeys={defaultSelectedKeys}
+            disabledKeys={disabledKeys}
+            onSelectionChange={onSelectionChange}
+            ref={ref}
+          >
+            <PropsContextProvider props={propsContext}>
+              <Action closeOverlay={closeOverlayType}>{children}</Action>
+            </PropsContextProvider>
+          </Aria.Menu>
+        </OverlayContextProvider>
       </Popover>
     </ClearPropsContext>
   );

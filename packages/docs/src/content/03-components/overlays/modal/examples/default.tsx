@@ -12,9 +12,9 @@ import Action from "@mittwald/flow-react-components/Action";
 import { sleepLong } from "@/content/03-components/actions/action/examples/lib";
 
 <ModalTrigger>
-  <Button color="accent">Organisation anlegen</Button>
+  <Button>Modal öffnen</Button>
   <Modal>
-    <Heading>Neue Organisation</Heading>
+    <Heading>Organisation anlegen</Heading>
     <Content>
       <Text>
         Eine Organisation kannst du dir wie ein Unternehmen
@@ -22,12 +22,12 @@ import { sleepLong } from "@/content/03-components/actions/action/examples/lib";
         Mitarbeiter, Zahlungsmodalitäten und kannst deine
         Rechnungen einsehen.
       </Text>
-      <TextField>
+      <TextField isRequired>
         <Label>Organisationsname</Label>
       </TextField>
     </Content>
     <ActionGroup>
-      <Action closeOverlay>
+      <Action closeOverlay="Modal">
         <Action action={sleepLong}>
           <Button color="accent">
             Organisation anlegen

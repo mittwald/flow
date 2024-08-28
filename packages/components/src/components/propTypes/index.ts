@@ -34,20 +34,31 @@ import type { CheckboxButtonProps } from "@/components/CheckboxButton";
 import type { TabsProps } from "@/components/Tabs";
 import type { ModalProps } from "@/components/Modal";
 import type { SectionProps } from "@/components/Section";
+import type { SliderProps } from "@/components/Slider";
 import type { CounterBadgeProps } from "@/components/CounterBadge";
+import type { FlowComponentName } from "@/components/propTypes/types";
+import type { ContextualHelpProps } from "@/components/ContextualHelp";
+import type { PopoverProps } from "@/components/Popover";
+import type { ContextMenuSectionProps } from "@/components/ContextMenu/components/ContextMenuSection";
+import type { OverlayTriggerProps } from "@/components/OverlayTrigger";
+import type { ListProps } from "@/components/List";
+import type { SearchFieldProps } from "@/components/SearchField";
 
 export * from "./types";
 
 export interface FlowComponentPropsTypes {
   Action: ActionProps;
+  ActionGroup: ActionGroupProps;
   Avatar: AvatarProps;
   Button: ButtonProps;
-  ActionGroup: ActionGroupProps;
   Checkbox: CheckboxProps;
   CheckboxButton: CheckboxButtonProps;
   CheckboxGroup: CheckboxGroupProps;
   Content: ContentProps;
   ContextMenu: ContextMenuProps;
+  ContextMenuSection: ContextMenuSectionProps;
+  ContextMenuTrigger: OverlayTriggerProps;
+  ContextualHelp: ContextualHelpProps;
   CopyButton: CopyButtonProps;
   CounterBadge: CounterBadgeProps;
   FieldDescription: FieldDescriptionProps;
@@ -61,15 +72,21 @@ export interface FlowComponentPropsTypes {
   Label: LabelProps;
   LayoutCard: LayoutCardProps;
   Link: LinkProps;
+  List: ListProps<never>;
   MenuItem: MenuItemProps;
   Modal: ModalProps;
+  ModalTrigger: OverlayTriggerProps;
   NumberField: NumberFieldProps;
   Option: OptionProps;
+  Popover: PopoverProps;
+  PopoverTrigger: OverlayTriggerProps;
   Radio: RadioProps;
   RadioButton: RadioButtonProps;
   RadioGroup: RadioGroupProps;
+  SearchField: SearchFieldProps;
   Section: SectionProps;
   Select: SelectProps;
+  Slider: SliderProps;
   StatusBadge: StatusBadgeProps;
   Switch: SwitchProps;
   Tabs: TabsProps;
@@ -83,14 +100,17 @@ const propsContextSupportingComponentsMap: Record<
   true
 > = {
   Action: true,
+  ActionGroup: true,
   Avatar: true,
   Button: true,
-  ActionGroup: true,
   Checkbox: true,
   CheckboxButton: true,
   CheckboxGroup: true,
   Content: true,
   ContextMenu: true,
+  ContextMenuSection: true,
+  ContextMenuTrigger: true,
+  ContextualHelp: true,
   CopyButton: true,
   CounterBadge: true,
   FieldDescription: true,
@@ -104,15 +124,21 @@ const propsContextSupportingComponentsMap: Record<
   Label: true,
   LayoutCard: true,
   Link: true,
+  List: true,
   MenuItem: true,
   Modal: true,
+  ModalTrigger: true,
   NumberField: true,
   Radio: true,
   Option: true,
+  Popover: true,
+  PopoverTrigger: true,
   RadioButton: true,
   RadioGroup: true,
+  SearchField: true,
   Section: true,
   Select: true,
+  Slider: true,
   StatusBadge: true,
   Switch: true,
   Tabs: true,
@@ -124,4 +150,4 @@ const propsContextSupportingComponentsMap: Record<
 
 export const propsContextSupportingComponents = Object.keys(
   propsContextSupportingComponentsMap,
-) as (keyof FlowComponentPropsTypes)[];
+) as FlowComponentName[];

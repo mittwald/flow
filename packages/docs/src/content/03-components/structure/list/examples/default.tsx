@@ -1,10 +1,4 @@
-import List, {
-  ListFilter,
-  ListItem,
-  ListItemView,
-  ListSorting,
-  ListStaticData,
-} from "@mittwald/flow-react-components/List";
+import { typedList } from "@mittwald/flow-react-components/List";
 import {
   type Domain,
   domains,
@@ -20,38 +14,49 @@ import {
 import StatusBadge from "@mittwald/flow-react-components/StatusBadge";
 import MenuItem from "@mittwald/flow-react-components/MenuItem";
 
-<List batchSize={5}>
-  <ListStaticData data={domains} />
-  <ListFilter<Domain>
-    property="type"
-    mode="some"
-    name="Type"
-  />
-  <ListSorting<Domain> property="domain" name="Domain" />
-  <ListSorting<Domain> property="type" name="Type" />
-  <ListItemView<Domain>>
-    {(domain) => (
-      <ListItem>
-        <Avatar variant={domain.type === "Domain" ? 1 : 2}>
-          {domain.type === "Domain" ? (
-            <IconDomain />
-          ) : (
-            <IconSubdomain />
-          )}
-        </Avatar>
-        <Heading>{domain.hostname}</Heading>
-        {domain.verified ? (
-          <Text>{domain.type}</Text>
-        ) : (
-          <StatusBadge status="warning">
-            Nicht verifiziert
-          </StatusBadge>
+export default () => {
+  const DomainList = typedList<Domain>();
+
+  return (
+    <DomainList.List batchSize={5}>
+      <DomainList.StaticData data={domains} />
+      <DomainList.Search />
+      <DomainList.Filter
+        property="type"
+        mode="some"
+        name="Type"
+      />
+      <DomainList.Sorting property="domain" name="Domain" />
+      <DomainList.Sorting property="type" name="Type" />
+      <DomainList.Item>
+        {(domain) => (
+          <DomainList.ItemView>
+            <Avatar
+              variant={domain.type === "Domain" ? 1 : 2}
+            >
+              {domain.type === "Domain" ? (
+                <IconDomain />
+              ) : (
+                <IconSubdomain />
+              )}
+            </Avatar>
+            <Heading>
+              {domain.hostname}
+              {!domain.verified && (
+                <StatusBadge status="warning">
+                  Unverifiziert
+                </StatusBadge>
+              )}
+            </Heading>
+            <Text>{domain.type}</Text>
+
+            <ContextMenu>
+              <MenuItem>Details anzeigen</MenuItem>
+              <MenuItem>Löschen</MenuItem>
+            </ContextMenu>
+          </DomainList.ItemView>
         )}
-        <ContextMenu>
-          <MenuItem>Details anzeigen</MenuItem>
-          <MenuItem>Löschen</MenuItem>
-        </ContextMenu>
-      </ListItem>
-    )}
-  </ListItemView>
-</List>;
+      </DomainList.Item>
+    </DomainList.List>
+  );
+};

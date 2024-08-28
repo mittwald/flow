@@ -1,7 +1,7 @@
 progress-bar:
   font-size:
     value: "{font-size.m}"
-  font-size-small:
+  font-size-s:
     value: "{font-size.s}"
   value-font-weight:
     value: "{font-weight.bold}"
@@ -12,9 +12,9 @@ progress-bar:
 
   bar-height:
     value: "{size-rem.s}"
-  bar-height-small:
+  bar-height-s:
     value: 0.375rem
-  bar-border-radius:
+  bar-corner-radius:
     value: "{size-rem.xs}"
   bar-border-width:
     value: "{border-width.100}"

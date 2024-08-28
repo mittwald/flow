@@ -12,10 +12,10 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 export interface AvatarProps
   extends PropsWithChildren,
     PropsWithClassName,
-    FlowComponentProps<"Avatar"> {
+    FlowComponentProps {
   /** @default "m" */
   size?: "xs" | "s" | "m" | "l";
-  variant?: 1 | 2 | 3 | 4;
+  variant?: 1 | 2 | 3 | 4 | 5;
 }
 
 export const Avatar = flowComponent("Avatar", (props) => {

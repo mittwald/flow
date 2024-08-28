@@ -1,5 +1,7 @@
 import type { ActionModel } from "@/components/Action/models/ActionModel";
 import type { ActionFn } from "@/components/Action";
+import type { OverlayController } from "@/lib/controller";
+import type { FlowComponentName } from "@/components/propTypes";
 
 const voidAction = () => {
   // do nothing
@@ -10,7 +12,14 @@ export function getExecutionFunction(action: ActionModel): ActionFn {
     return action.confirmationModalController.open;
   }
 
-  const overlayController = action.getOverlayController();
+  const getOverlayController = (
+    from: OverlayController | FlowComponentName,
+  ): OverlayController | undefined => {
+    if (typeof from === "string") {
+      return action.getOverlayController(from);
+    }
+    return from;
+  };
 
   const {
     action: actionFn,
@@ -19,13 +28,15 @@ export function getExecutionFunction(action: ActionModel): ActionFn {
     openOverlay,
   } = action.actionProps;
 
-  return actionFn
+  const maybeAction = actionFn
     ? actionFn
-    : openOverlay && overlayController
-      ? overlayController.open
-      : closeOverlay && overlayController
-        ? overlayController.close
-        : toggleOverlay && overlayController
-          ? overlayController.close
+    : openOverlay
+      ? getOverlayController(openOverlay)?.open
+      : closeOverlay
+        ? getOverlayController(closeOverlay)?.close
+        : toggleOverlay
+          ? getOverlayController(toggleOverlay)?.toggle
           : voidAction;
+
+  return maybeAction ?? voidAction;
 }

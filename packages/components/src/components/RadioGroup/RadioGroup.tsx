@@ -16,11 +16,14 @@ import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { IconCheck } from "@/components/Icon/components/icons";
 import mergePropsContext from "@/lib/propsContext/mergePropsContext";
+import type { PropsWithContainerBreakpointSize } from "@/lib/types/props";
+import { getContainerBreakpointSizeClassName } from "@/lib/getContainerBreakpointSizeClassName";
 
 export interface RadioGroupProps
   extends PropsWithChildren<Omit<Aria.RadioGroupProps, "children">>,
     FlowComponentProps,
-    Pick<ColumnLayoutProps, "s" | "m" | "l"> {
+    Pick<ColumnLayoutProps, "s" | "m" | "l">,
+    PropsWithContainerBreakpointSize {
   variant?: "segmented" | "default";
 }
 
@@ -32,11 +35,17 @@ export const RadioGroup = flowComponent("RadioGroup", (props) => {
     s,
     m,
     l,
+    containerBreakpointSize = "m",
     refProp: ref,
     ...rest
   } = props;
 
-  const rootClassName = clsx(formFieldStyles.formField, className);
+  const rootClassName = clsx(
+    formFieldStyles.formField,
+    styles.radioGroupContainer,
+    className,
+    styles[getContainerBreakpointSizeClassName(containerBreakpointSize)],
+  );
 
   let propsContext: PropsContext = {
     Label: {
@@ -84,7 +93,11 @@ export const RadioGroup = flowComponent("RadioGroup", (props) => {
   return (
     <Aria.RadioGroup {...rest} className={rootClassName} ref={ref}>
       <TunnelProvider>
-        <PropsContextProvider props={propsContext} dependencies={[variant]}>
+        <PropsContextProvider
+          props={propsContext}
+          dependencies={[variant]}
+          mergeInParentContext
+        >
           {children}
 
           {variant === "segmented" && (

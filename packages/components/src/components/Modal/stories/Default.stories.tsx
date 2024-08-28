@@ -11,6 +11,8 @@ import { useOverlayController } from "@/lib/controller/overlay/useOverlayControl
 import { Action } from "@/components/Action";
 import { ActionGroup } from "@/components/ActionGroup";
 import { asyncLongFunction } from "@/components/Button/stories/lib";
+import { Field, Form } from "@/integrations/react-hook-form";
+import { useForm } from "react-hook-form";
 
 const meta: Meta<typeof Modal> = {
   title: "Overlays/Modal",
@@ -21,7 +23,7 @@ const meta: Meta<typeof Modal> = {
   argTypes: {
     size: {
       control: "inline-radio",
-      options: ["s", "m", "l"],
+      options: ["s", "m"],
     },
   },
   args: {
@@ -31,7 +33,7 @@ const meta: Meta<typeof Modal> = {
     return (
       <Modal
         {...props}
-        controller={useOverlayController({ defaultOpen: true })}
+        controller={useOverlayController("Modal", { defaultOpen: true })}
       >
         <Heading>New Customer</Heading>
         <Content>
@@ -43,7 +45,7 @@ const meta: Meta<typeof Modal> = {
           </TextField>
         </Content>
         <ActionGroup>
-          <Action closeOverlay>
+          <Action closeOverlay="Modal">
             <Action action={asyncLongFunction}>
               <Button color="accent">Create customer</Button>
             </Action>
@@ -64,7 +66,7 @@ export const Default: Story = {};
 
 export const WithController: Story = {
   render: (props) => {
-    const controller = useOverlayController();
+    const controller = useOverlayController("Modal");
 
     return (
       <>
@@ -83,7 +85,7 @@ export const WithController: Story = {
             </TextField>
           </Content>
           <ActionGroup>
-            <Action closeOverlay>
+            <Action closeOverlay="Modal">
               <Button color="accent">Create customer</Button>
               <Button color="secondary" variant="soft">
                 Abort
@@ -106,7 +108,7 @@ export const WithTrigger: Story = {
           <Text>Are you sure you want to delete this project?</Text>
         </Content>
         <ActionGroup>
-          <Action closeOverlay>
+          <Action closeOverlay="Modal">
             <Button color="danger">Delete project</Button>
             <Button variant="soft" color="secondary">
               Abort
@@ -124,4 +126,85 @@ export const Mobile: Story = {
 
 export const OffCanvas: Story = {
   args: { offCanvas: true },
+};
+
+export const OffCanvasMobile: Story = {
+  args: { offCanvas: true },
+  parameters: { viewport: { defaultViewport: "mobile1" } },
+};
+
+export const WithForm: Story = {
+  render: (props) => {
+    const form = useForm<{ name: string }>();
+    const modalController = useOverlayController("Modal");
+
+    return (
+      <>
+        <Button color="accent" onPress={modalController.open}>
+          Add customer
+        </Button>
+
+        <Modal {...props} controller={modalController}>
+          <Form form={form} onSubmit={() => modalController.close()}>
+            <Heading>Add Customer</Heading>
+            <Content>
+              <Field name="name" rules={{ required: "Please enter a name" }}>
+                <TextField>
+                  <Label>Customer name</Label>
+                </TextField>
+              </Field>
+            </Content>
+            <ActionGroup>
+              <Button type="submit" color="accent">
+                Submit
+              </Button>
+              <Action closeOverlay="Modal">
+                <Button variant="soft" color="secondary">
+                  Abort
+                </Button>
+              </Action>
+            </ActionGroup>
+          </Form>
+        </Modal>
+      </>
+    );
+  },
+};
+
+export const OffCanvasWithForm: Story = {
+  render: (props) => {
+    const form = useForm<{ name: string }>();
+    const modalController = useOverlayController("Modal");
+
+    return (
+      <>
+        <Button color="accent" onPress={modalController.open}>
+          Add customer
+        </Button>
+
+        <Modal offCanvas {...props} controller={modalController}>
+          <Form form={form} onSubmit={() => modalController.close()}>
+            <Heading>Add Customer</Heading>
+            <Content>
+              <Field name="name" rules={{ required: "Please enter a name" }}>
+                <TextField>
+                  <Label>Customer name</Label>
+                </TextField>
+              </Field>
+            </Content>
+            <ActionGroup>
+              <Button type="submit" color="accent">
+                Submit
+              </Button>
+              <Action closeOverlay="Modal">
+                <Button variant="soft" color="secondary">
+                  Abort
+                </Button>
+              </Action>
+            </ActionGroup>
+          </Form>
+        </Modal>
+      </>
+    );
+  },
 };

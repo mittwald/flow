@@ -1,39 +1,48 @@
 import type { PropsWithChildren } from "react";
 import React from "react";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { listContext } from "./listContext";
 import { DataLoader } from "@/components/List/components/DataLoader";
-import { Header } from "@/components/List/components/Header/Header";
+import { Header } from "@/components/List/components/Header";
 import styles from "./List.module.css";
 import ListModel from "@/components/List/model/List";
-import { ItemList } from "@/components/List/components/Items/ItemList";
+import { Items } from "@/components/List/components/Items";
 import { deepFilterByType, deepFindOfType } from "@/lib/react/deepFindOfType";
-import type { RenderItemFn } from "@/components/List/model/item/Item";
-import { ListLoaderAsync } from "@/components/List/components/ListLoaderAsync";
-import { ListFilter } from "@/components/List/components/Header/ListFilter";
-import { ListSorting } from "@/components/List/components/Header/ListSorting";
-import { ListItemView } from "@/components/List/components/Items/ListItemView";
-import type { AnyData } from "@/components/List/model/item/types";
-import { ListStaticData } from "@/components/List/components/ListStaticData";
-import { ListLoaderAsyncResource } from "@/components/List/components/ListLoaderAsyncResource";
+import { ListLoaderAsync } from "@/components/List/setupComponents/ListLoaderAsync";
+import { ListFilter } from "@/components/List/setupComponents/ListFilter";
+import { ListSorting } from "@/components/List/setupComponents/ListSorting";
+import { ListItem } from "@/components/List/setupComponents/ListItem";
+import { ListStaticData } from "@/components/List/setupComponents/ListStaticData";
+import { ListLoaderAsyncResource } from "@/components/List/setupComponents/ListLoaderAsyncResource";
 import type { IncrementalLoaderShape } from "@/components/List/model/loading/types";
-import Footer from "./components/Footer/Footer";
-import { FallbackRenderer } from "@/components/List/components/Items/ListItem/FallbackRenderer";
+import Footer from "./components/Footer";
+import { ListSearch } from "@/components/List/setupComponents/ListSearch";
+import type { ItemListProps } from "@/components/List/components/Items/Items";
+import type { OnListChanged } from "@/components/List/model/types";
 
-interface Props extends PropsWithChildren {
+export interface ListProps<T>
+  extends PropsWithChildren,
+    ItemListProps,
+    FlowComponentProps {
   batchSize?: number;
+  onChange?: OnListChanged<T>;
 }
 
-export function List(props: Props) {
-  const { children, batchSize, ...restShape } = props;
+export const List = flowComponent("List", (props) => {
+  const { children, batchSize, onChange, ...itemListProps } = props;
 
-  const listLoaderAsync = deepFindOfType(children, ListLoaderAsync)?.props;
+  const listLoaderAsync = deepFindOfType(
+    children,
+    ListLoaderAsync<never>,
+  )?.props;
   const listLoaderAsyncResource = deepFindOfType(
     children,
-    ListLoaderAsyncResource,
+    ListLoaderAsyncResource<never>,
   )?.props;
-  const listStaticData = deepFindOfType(children, ListStaticData)?.props;
+  const listStaticData = deepFindOfType(children, ListStaticData<never>)?.props;
 
-  const loaderShape: IncrementalLoaderShape<AnyData> = {
+  const loaderShape: IncrementalLoaderShape<never> = {
     source: listLoaderAsync
       ? {
           ...listLoaderAsync,
@@ -51,21 +60,37 @@ export function List(props: Props) {
           : undefined,
   };
 
-  const fallbackRenderItemFn: RenderItemFn<AnyData> = (data) => (
-    <FallbackRenderer data={data} />
-  );
+  const searchProps = deepFindOfType(children, ListSearch)?.props;
+  const itemViewProps = deepFindOfType(children, ListItem)?.props;
 
-  const listModel = ListModel.useNew({
+  const listModel = ListModel.useNew<never>({
+    onChange,
     loader: loaderShape,
-    filters: deepFilterByType(children, ListFilter).map((f) => f.props),
-    sorting: deepFilterByType(children, ListSorting).map((s) => s.props),
-    render:
-      deepFindOfType(children, ListItemView)?.props.children ??
-      fallbackRenderItemFn,
-    ...restShape,
+    filters: deepFilterByType(children, ListFilter<never, never, never>).map(
+      (f) => ({
+        ...f.props,
+        renderItem: f.props.children,
+      }),
+    ),
+    search: searchProps
+      ? {
+          render: searchProps.children,
+          textFieldProps: searchProps,
+        }
+      : undefined,
+    sorting: deepFilterByType(children, ListSorting<never>).map((s) => s.props),
+
+    itemView: itemViewProps
+      ? {
+          ...itemViewProps,
+          renderFn: itemViewProps.children,
+        }
+      : undefined,
+
     batchesController: {
       batchSize,
     },
+    hasAction: !!props.onAction,
   });
 
   return (
@@ -77,11 +102,11 @@ export function List(props: Props) {
       <DataLoader />
       <div className={styles.list}>
         <Header />
-        <ItemList />
+        <Items {...itemListProps} />
         <Footer />
       </div>
     </listContext.Provider>
   );
-}
+});
 
 export default List;

@@ -4,7 +4,7 @@ popover:
   corner-radius:
     value: "{size-px.xs}"
   padding:
-    value: "{size-px.s}"
+    value: "{size-px.m}"
   background-color:
     value: "{neutral.color.100}"
   min-width:

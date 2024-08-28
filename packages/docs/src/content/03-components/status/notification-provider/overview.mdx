@@ -1,0 +1,23 @@
+# Initialisierung
+
+Damit Notifications angezeigt werden können, muss der `<NotificationProvider />`
+als obere Komponente existieren.
+
+<LiveCodeEditor example="provider" />
+
+---
+
+# Notifications anzeigen
+
+Über den `useNotificationController()` Hook kann auf den Notification-Controller
+zugegriffen werden. Dieser stellt zum Anzeigen einer Notification die
+`add()`-Method bereit.
+
+<LiveCodeEditor />
+
+# Auto close
+
+Ist das Property `autoClose` gesetzt, verschwinden die Notifications nach 10
+Sekunden.
+
+<LiveCodeEditor example="auto-close" editorCollapsed />

@@ -22,11 +22,9 @@ export const Navigation: FC<NavigationProps> = (props) => {
 
   const propsContext: PropsContext = {
     Link: {
-      render: (Link, props) => (
-        <li>
-          <Link {...props} className={styles.item} unstyled />
-        </li>
-      ),
+      wrapWith: <li />,
+      className: styles.item,
+      unstyled: true,
       Text: {
         className: styles.text,
       },
@@ -38,7 +36,7 @@ export const Navigation: FC<NavigationProps> = (props) => {
 
   return (
     <nav className={rootClassName} role="navigation" {...rest}>
-      <PropsContextProvider props={propsContext}>
+      <PropsContextProvider props={propsContext} mergeInParentContext>
         <Wrap if={!hasGroups}>
           <ul>{children}</ul>
         </Wrap>

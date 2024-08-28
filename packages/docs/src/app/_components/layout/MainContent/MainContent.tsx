@@ -21,16 +21,16 @@ export const MainContent: FC<Props> = (props) => {
   return (
     <>
       <LayoutCard>
-        <ColumnLayout m={component ? [1, 1] : [1]}>
+        <ColumnLayout l={component ? [1, 1] : [1]} m={[1]}>
           <Section>
-            <Heading level={1}>{mdxFile.getTitle()}</Heading>
+            <Heading level={1} levelVisual={1}>
+              {mdxFile.getTitle()}
+            </Heading>
 
             {mdxFile.mdxSource.frontmatter.description}
 
             {component && (
-              <Link
-                href={`https://github.com/mittwald/flow/tree/main/packages/components/src/components/${component}`}
-              >
+              <Link href={mdxFile.getGitHubUrl()}>
                 GitHub
                 <IconExternalLink />
               </Link>

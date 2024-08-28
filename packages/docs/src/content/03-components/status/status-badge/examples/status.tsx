@@ -8,5 +8,5 @@ import StatusBadge from "@mittwald/flow-react-components/StatusBadge";
   <StatusBadge status="warning">
     Speicher fast voll
   </StatusBadge>
-  <StatusBadge status="danger">SSL fehlt</StatusBadge>
+  <StatusBadge status="danger">Speicher voll</StatusBadge>
 </Row>;

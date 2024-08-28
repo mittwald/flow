@@ -8,7 +8,7 @@
   border-radius: var(--form-control--corner-radius);
   grid-template-areas: "icon label";
   grid-template-columns: auto 1fr;
-  width: auto;
+  width: fit-content;
 
   /* Elements */
 
@@ -35,5 +35,10 @@
 
   &:focus-within:not([data-selected]):not([data-focus-visible]) {
     border-color: var(--form-control--border-color--default);
+  }
+
+  &[data-invalid]:not([data-selected]) {
+    border-color: var(--form-control--border-color--invalid);
+    background-color: var(--form-control--background-color--invalid);
   }
 }

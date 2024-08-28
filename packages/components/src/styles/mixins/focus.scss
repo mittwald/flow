@@ -1,8 +1,10 @@
 @mixin focus {
-  outline-color: var(--focus--outline-color);
-  outline-offset: var(--focus--outline-offset);
-  outline-width: var(--focus--outline-width);
-  outline-style: none;
+  & {
+    outline-color: var(--focus--outline-color);
+    outline-offset: var(--focus--outline-offset);
+    outline-width: var(--focus--outline-width);
+    outline-style: none;
+  }
 
   &[data-focused],
   &:focus {
@@ -12,5 +14,9 @@
   &[data-focus-visible],
   &:focus-visible {
     outline-style: auto;
+  }
+
+  &[data-focused]:not([data-focus-visible]):focus-visible {
+    outline-style: none;
   }
 }

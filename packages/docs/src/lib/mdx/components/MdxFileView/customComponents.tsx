@@ -11,6 +11,8 @@ import { LinkProvider } from "@mittwald/flow-react-components/nextjs";
 import DoAndDont from "@/lib/mdx/components/DoAndDont/DoAndDont";
 import { IconExternalLink } from "@mittwald/flow-react-components/Icons";
 import { ColumnLayout } from "@mittwald/flow-react-components/ColumnLayout";
+import { InlineCode } from "@mittwald/flow-react-components/InlineCode";
+import { Separator } from "@mittwald/flow-react-components/Separator";
 
 export const customComponents: MDXComponents = {
   Content: Content,
@@ -31,7 +33,7 @@ export const customComponents: MDXComponents = {
     </div>
   ),
 
-  code: ({ children }) => <code className={styles.code}>{children}</code>,
+  code: ({ children }) => <InlineCode>{children}</InlineCode>,
 
   p: ({ children }) => (
     <Text className={styles.p} elementType="p">
@@ -43,25 +45,25 @@ export const customComponents: MDXComponents = {
 
   li: ({ children }) => <li className={styles.li}>{children}</li>,
 
-  h2: ({ children }) => (
+  h1: ({ children }) => (
     <Heading level={2} className={styles.heading2}>
       {children}
     </Heading>
   ),
 
-  h3: ({ children }) => (
+  h2: ({ children }) => (
     <Heading level={3} className={styles.heading}>
       {children}
     </Heading>
   ),
 
-  h4: ({ children }) => (
+  h3: ({ children }) => (
     <Heading level={4} className={styles.heading}>
       {children}
     </Heading>
   ),
 
-  h5: ({ children }) => (
+  h4: ({ children }) => (
     <Heading level={5} className={styles.heading}>
       {children}
     </Heading>
@@ -86,5 +88,5 @@ export const customComponents: MDXComponents = {
     );
   },
 
-  hr: () => <hr className={styles.hr} />,
+  hr: () => <Separator className={styles.separator} />,
 };

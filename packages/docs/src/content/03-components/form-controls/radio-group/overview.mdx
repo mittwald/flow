@@ -1,20 +1,20 @@
-## Beispiel
+# Beispiel
 
 <LiveCodeEditor />
 
 ---
 
-## Mit Radio Buttons
+# Mit Radio Buttons
 
 <LiveCodeEditor example="buttons" editorCollapsed />
 
-### Mit zusätzlichem Inhalt
+## Mit zusätzlichem Inhalt
 
 <LiveCodeEditor example="content" editorCollapsed />
 
 ---
 
-## Mit benutzerdefinierten Spalten
+# Mit benutzerdefinierten Spalten
 
 Die `RadioGroup` verwendet das `ColumnLayout` um eine Anpassung der Spalten zu
 ermöglichen.
@@ -23,6 +23,15 @@ ermöglichen.
 
 ---
 
-## Segmented Variante
+# Segmented Variante
 
 <LiveCodeEditor example="segmented" editorCollapsed />
+
+## Container Breakpoint Size
+
+Die segmented RadioGroup springt in die kompakte Variante um, sobald der
+Container kleiner als gesetzte Breakpoint ist. Im default passiert das bei
+550px, was der `containerBreakpointSize="m"` entspricht. Über dieses Property
+kann die Größe mit Werten zwischen `xs` und `xl` überschrieben werden.
+
+<LiveCodeEditor example="breakpoints" editorCollapsed />

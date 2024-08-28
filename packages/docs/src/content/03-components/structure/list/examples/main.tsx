@@ -1,4 +1,5 @@
-import List, {
+import {
+  List,
   ListItem,
   ListItemView,
   ListStaticData,
@@ -21,9 +22,9 @@ import StatusBadge from "@mittwald/flow-react-components/StatusBadge";
 
 <List batchSize={2}>
   <ListStaticData data={domains} />
-  <ListItemView<Domain>>
+  <ListItem<Domain>>
     {(domain) => (
-      <ListItem>
+      <ListItemView>
         <Avatar variant={domain.type === "Domain" ? 1 : 2}>
           {domain.type === "Domain" ? (
             <IconDomain />
@@ -31,19 +32,21 @@ import StatusBadge from "@mittwald/flow-react-components/StatusBadge";
             <IconSubdomain />
           )}
         </Avatar>
-        <Heading>{domain.hostname}</Heading>
-        {domain.verified ? (
-          <Text>{domain.type}</Text>
-        ) : (
-          <StatusBadge status="warning">
-            Nicht verifiziert
-          </StatusBadge>
-        )}
+        <Heading>
+          {domain.hostname}
+          {!domain.verified && (
+            <StatusBadge status="warning">
+              Unverifiziert
+            </StatusBadge>
+          )}
+        </Heading>
+        <Text>{domain.type}</Text>
+
         <ContextMenu>
           <MenuItem>Details anzeigen</MenuItem>
           <MenuItem>Löschen</MenuItem>
         </ContextMenu>
-      </ListItem>
+      </ListItemView>
     )}
-  </ListItemView>
+  </ListItem>
 </List>;

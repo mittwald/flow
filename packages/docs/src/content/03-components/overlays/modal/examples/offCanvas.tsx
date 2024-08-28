@@ -12,9 +12,9 @@ import Action from "@mittwald/flow-react-components/Action";
 import { sleepLong } from "@/content/03-components/actions/action/examples/lib";
 
 <ModalTrigger>
-  <Button color="accent">Organisation anlegen</Button>
+  <Button>OffCanvas öffnen</Button>
   <Modal offCanvas>
-    <Heading>Neue Organisation</Heading>
+    <Heading>Organisation anlegen</Heading>
     <Content>
       <Text>
         Eine Organisation kannst du dir wie ein Unternehmen
@@ -27,7 +27,7 @@ import { sleepLong } from "@/content/03-components/actions/action/examples/lib";
       </TextField>
     </Content>
     <ActionGroup>
-      <Action closeOverlay>
+      <Action closeOverlay="Modal">
         <Action action={sleepLong}>
           <Button color="accent">
             Organisation anlegen

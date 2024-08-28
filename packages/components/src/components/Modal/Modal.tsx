@@ -9,12 +9,18 @@ import type { OverlayController } from "@/lib/controller/overlay";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { ModalOverlay } from "@/components/ModalOverlay";
+import { Header } from "@/components/Header";
+import { Action } from "@/components/Action";
+import { Button } from "@/components/Button";
+import { IconClose } from "@/components/Icon/components/icons";
+import type { PropsWithClassName } from "@/lib/types/props";
 
 export interface ModalProps
   extends PropsWithChildren,
-    FlowComponentProps<"Modal"> {
+    FlowComponentProps,
+    PropsWithClassName {
   /** @default "s" */
-  size?: "s" | "m" | "l";
+  size?: "s" | "m";
   offCanvas?: boolean;
   controller?: OverlayController;
   slot?: string;
@@ -28,35 +34,49 @@ export const Modal = flowComponent("Modal", (props) => {
     controller,
     children,
     refProp: ignoredRef,
+    className,
     ...rest
   } = props;
 
   const rootClassName = clsx(
-    styles.modal,
+    offCanvas ? styles.offCanvas : styles.modal,
     styles[`size-${size}`],
-    offCanvas && styles.offCanvas,
+    className,
   );
 
   const propsContext: PropsContext = {
     Content: {
-      elementType: React.Fragment,
+      className: styles.content,
     },
     Heading: {
       level: 2,
       slot: "title",
+      tunnelId: "heading",
     },
     ActionGroup: {
       className: styles.actionGroup,
-      tunnelId: "buttons",
     },
   };
 
   return (
     <ModalOverlay className={rootClassName} controller={controller} {...rest}>
-      <PropsContextProvider props={propsContext} mergeInParentContext>
+      <PropsContextProvider props={propsContext}>
         <TunnelProvider>
-          <div className={styles.content}>{children}</div>
-          <TunnelExit id="buttons" />
+          <Header className={styles.header}>
+            <TunnelExit id="heading" />
+            {offCanvas && (
+              <Action closeOverlay="Modal">
+                <Button
+                  variant="plain"
+                  color="secondary"
+                  className={styles.closeButton}
+                >
+                  <IconClose />
+                </Button>
+              </Action>
+            )}
+          </Header>
+          {children}
         </TunnelProvider>
       </PropsContextProvider>
     </ModalOverlay>

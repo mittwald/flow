@@ -1,9 +1,9 @@
 import type { FC } from "react";
 import React from "react";
-import { Section } from "@mittwald/flow-react-components/Section";
 import type { MdxFile } from "@/lib/mdx/MdxFile";
 import MdxFileView from "@/lib/mdx/components/MdxFileView";
 import { Tab, TabTitle } from "@mittwald/flow-react-components/Tabs";
+import styles from "../../../layout.module.scss";
 
 interface Props {
   mdxFile: MdxFile;
@@ -16,9 +16,9 @@ export const TabContent: FC<Props> = (props) => {
   return (
     <Tab>
       <TabTitle>{tabTitle}</TabTitle>
-      <Section>
+      <div className={styles.tabContent}>
         <MdxFileView mdxFile={mdxFile.serialize()} />
-      </Section>
+      </div>
     </Tab>
   );
 };

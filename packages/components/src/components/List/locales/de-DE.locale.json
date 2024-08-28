@@ -3,7 +3,6 @@
   "list.noResult.text": "Deine Suche ergab keine Ergebnisse. Bitte passe die Suchanfrage oder deine Filter an.",
   "list.options": "Optionen",
   "list.paginationInfo": "{visibleItemsCount} von insgesamt {totalItemsCount} angezeigt",
-  "list.paginationInfoFiltered": "{visibleItemsCount} von insgesamt {filteredItemsCount} (gefiltert aus {totalItemsCount}) angezeigt",
   "list.resetAll": "Alles zurücksetzen",
   "list.setSorting": "Sortierung: {property}",
   "list.showMore": "Mehr anzeigen",

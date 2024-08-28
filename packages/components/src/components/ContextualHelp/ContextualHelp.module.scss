@@ -1,0 +1,6 @@
+.contextualHelp {
+  row-gap: var(--contextual-help--content-to-content-spacing);
+  display: flex;
+  flex-direction: column;
+  max-width: var(--contextual-help--max-width);
+}

@@ -1,9 +1,10 @@
-import { List } from "./List";
+export type { RenderItemFn } from "@/components/List/model/item/types";
+export { View as ListItemView } from "./components/Items/components/Item/components/View";
 export * from "./List";
-export * from "./components/Header/ListFilter";
-export * from "./components/Header/ListSorting";
-export * from "./components/Items/ListItemView";
-export * from "./components/Items/ListItem";
-export * from "./components/ListLoaderAsync";
-export * from "./components/ListStaticData";
-export default List;
+export * from "./setupComponents/ListFilter";
+export * from "./setupComponents/ListSorting";
+export * from "./setupComponents/ListItem";
+export * from "./setupComponents/ListLoaderAsync";
+export * from "./setupComponents/ListStaticData";
+export * from "./typedList";
+export * from "./hooks/useList";
