@@ -30,7 +30,7 @@ export interface DataLoaderResult<T> {
 }
 
 export type AsyncDataLoader<T> = (
-  options?: DataLoaderOptions<T>,
+  options: DataLoaderOptions<T>,
 ) => Promise<DataLoaderResult<T>>;
 
 type AsyncResourceFactory<T> = (
