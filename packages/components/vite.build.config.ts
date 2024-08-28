@@ -74,6 +74,7 @@ export default defineConfig(
           Select: "./src/components/Select/index.ts",
           Separator: "./src/components/Separator/index.ts",
           Skeleton: "./src/components/Skeleton/index.ts",
+          SkeletonText: "./src/components/SkeletonText/index.ts",
           Slider: "./src/components/Slider/index.ts",
           StatusBadge: "./src/components/StatusBadge/index.ts",
           StatusIcon: "./src/components/StatusIcon/index.ts",
