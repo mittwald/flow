@@ -22,6 +22,7 @@ export default defineConfig(
         entry: {
           Accordion: "./src/components/Accordion/index.ts",
           Action: "./src/components/Action/index.ts",
+          Activity: "./src/components/Activity/index.ts",
           ActionGroup: "./src/components/ActionGroup/index.ts",
           Avatar: "./src/components/Avatar/index.ts",
           Breadcrumb: "./src/components/Breadcrumb/index.ts",
@@ -74,6 +75,7 @@ export default defineConfig(
           Select: "./src/components/Select/index.ts",
           Separator: "./src/components/Separator/index.ts",
           Skeleton: "./src/components/Skeleton/index.ts",
+          SkeletonText: "./src/components/SkeletonText/index.ts",
           Slider: "./src/components/Slider/index.ts",
           StatusBadge: "./src/components/StatusBadge/index.ts",
           StatusIcon: "./src/components/StatusIcon/index.ts",

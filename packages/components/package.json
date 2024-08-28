@@ -18,6 +18,10 @@
       "types": "./dist/types/components/ActionGroup/index.d.ts",
       "import": "./dist/ActionGroup.js"
     },
+    "./Activity": {
+      "types": "./dist/types/components/Activity/index.d.ts",
+      "import": "./dist/Activity.js"
+    },
     "./Avatar": {
       "types": "./dist/types/components/Avatar/index.d.ts",
       "import": "./dist/Avatar.js"
@@ -209,6 +213,10 @@
     "./Skeleton": {
       "types": "./dist/types/components/Skeleton/index.d.ts",
       "import": "./dist/Skeleton.js"
+    },
+    "./SkeletonText": {
+      "types": "./dist/types/components/SkeletonText/index.d.ts",
+      "import": "./dist/SkeletonText.js"
     },
     "./Slider": {
       "types": "./dist/types/components/Slider/index.d.ts",
