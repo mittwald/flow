@@ -18,13 +18,11 @@ import { Button } from "@mittwald/flow-react-components/Button";
     </Text>
   </Section>
   <Section>
-    <Heading>Newsletter</Heading>
+    <Heading>Cronjobs</Heading>
     <Text>
-      Kommende Releases, neue Features und Tipps rund um
-      dein Hosting – wir bringen dir das Wichtigste in dein
-      Postfach. Abonniere unseren Newsletter und bleib auf
-      dem Laufenden.
+      Ein Cronjob ist immer fest einer App zugeordnet, du
+      kannst ihn unter dem Menüpunkt Cronjobs bearbeiten und
+      löschen.
     </Text>
-    <Link href="#">Newsletter abonnieren</Link>
   </Section>
 </>;

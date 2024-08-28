@@ -11,5 +11,4 @@ import Link from "@mittwald/flow-react-components/Link";
     Postfach. Abonniere unseren Newsletter und bleib auf dem
     Laufenden.
   </Text>
-  <Link href="#">Newsletter abonnieren</Link>
 </Section>;
