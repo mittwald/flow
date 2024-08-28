@@ -26,6 +26,7 @@ const stringCastRenderMethod: PropertyValueRenderMethod<any> = (value) =>
 
 export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
   private _values?: FilterValue[] | undefined;
+  private _valuesFromTableState?: FilterValue[];
   public readonly list: List<T>;
   public readonly property: PropertyName<T>;
   public readonly mode: FilterMode;
@@ -101,16 +102,40 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
     return this.getTableColumnFilter()?.value ?? null;
   }
 
-  public get values(): FilterValue[] {
-    if (this._values === undefined) {
-      this._values = unique(
-        Array.from(this.getTableColumn().getFacetedUniqueValues().keys())
-          .flatMap((v) => v)
-          .filter((v) => v !== undefined && v !== null),
-      ).map((v) => new FilterValue(this, v));
+  private getValuesFromTableState() {
+    return unique(
+      Array.from(this.getTableColumn().getFacetedUniqueValues().keys())
+        .flatMap((v) => v)
+        .filter((v) => v !== undefined && v !== null),
+    ).map((v) => new FilterValue(this, v));
+  }
+
+  private checkIfValueIsUnknown(value: FilterValue) {
+    const isKnown = this.values.some((v) => v.id === value.id);
+    return !isKnown;
+  }
+
+  public deleteUnknownFilterValues() {
+    if (this.values === this.valuesFromTableState) {
+      return;
     }
 
-    return this._values;
+    for (const valueInState of this.valuesFromTableState) {
+      if (this.checkIfValueIsUnknown(valueInState)) {
+        this.deactivateValue(valueInState);
+      }
+    }
+  }
+
+  public get values(): FilterValue[] {
+    return this._values ?? this.valuesFromTableState;
+  }
+
+  private get valuesFromTableState(): FilterValue[] {
+    if (!this._valuesFromTableState) {
+      this._valuesFromTableState = this.getValuesFromTableState();
+    }
+    return this._valuesFromTableState;
   }
 
   public getArrayValue(): FilterValue[] {
@@ -130,13 +155,13 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
     return this.getArrayValue().length > 0;
   }
 
-  public deactivateValue(newValue: FilterValue): void {
+  public deactivateValue(value: FilterValue): void {
     const currentValueAsArray = this.getArrayValue();
 
     let updatedValue: unknown;
 
     if (this.mode === "all" || this.mode === "some") {
-      updatedValue = currentValueAsArray.filter((v) => !v.equals(newValue));
+      updatedValue = currentValueAsArray.filter((v) => !v.equals(value));
     } else {
       updatedValue = null;
     }

@@ -8,6 +8,7 @@ import { IncrementalLoader } from "@/components/List/model/loading/IncrementalLo
 import invariant from "invariant";
 import { Search } from "@/components/List/model/search/Search";
 import { ItemView } from "@/components/List/model/item/ItemView";
+import { useEffect } from "react";
 
 export class List<T> {
   public readonly filters: Filter<T, never, never>[];
@@ -43,6 +44,10 @@ export class List<T> {
       manualPagination: this.loader.manualPagination,
       manualSorting: this.loader.manualSorting,
     });
+
+    useEffect(() => {
+      this.filters.forEach((f) => f.deleteUnknownFilterValues());
+    }, [this.filters]);
 
     this.hasAction = hasAction;
   }
