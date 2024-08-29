@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.206](https://github.com/mittwald/flow/compare/0.1.0-alpha.205...0.1.0-alpha.206) (2024-08-29)
+
+### Bug Fixes
+
+- **List:** detect removed filter values
+  ([4c13389](https://github.com/mittwald/flow/commit/4c13389cbca038062ab6df86cea1a7cedc32ba6e))
+- **Tabs:** fix context menu
+  ([ada6196](https://github.com/mittwald/flow/commit/ada61960f347ae80a3f3a7fd07a5849f72466754))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.205](https://github.com/mittwald/flow/compare/0.1.0-alpha.204...0.1.0-alpha.205) (2024-08-28)
 
 ### Bug Fixes
