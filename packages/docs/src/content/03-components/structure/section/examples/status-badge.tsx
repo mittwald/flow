@@ -29,7 +29,7 @@ import { IconExternalLink } from "@mittwald/flow-react-components/Icons";
     <ColumnLayout>
       <LabeledValue>
         <Label>Projektname</Label>
-        <Content>Dolve Vita</Content>
+        <Content>Dolce Vita</Content>
       </LabeledValue>
       <LabeledValue>
         <Label>Short-ID</Label>
