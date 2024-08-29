@@ -12,6 +12,7 @@
     "test:compile": "run tsc --noEmit"
   },
   "dependencies": {
+    "@internationalized/date": "^3.5.2",
     "@mdx-js/loader": "^3.0.1",
     "@mdx-js/react": "^3.0.1",
     "@mfalkenberg/react-live-ssr": "^4.1.7",
