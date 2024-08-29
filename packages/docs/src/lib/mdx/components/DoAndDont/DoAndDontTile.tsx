@@ -36,7 +36,7 @@ export const DoAndDontTile: FC<DoAndDontTileProps> = (props) => {
         <LiveCodeEditor
           editorDisabled
           code={code}
-          className={styles.doAndDontCode}
+          className={clsx(styles.doAndDontCode, mobile && styles.mobileCode)}
           zoom={zoom}
           bgColor={bgColor}
           mobile={mobile}
