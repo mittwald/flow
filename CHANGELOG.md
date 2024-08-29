@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.207](https://github.com/mittwald/flow/compare/0.1.0-alpha.206...0.1.0-alpha.207) (2024-08-29)
+
+### Bug Fixes
+
+- **List:** fix render loop when using property filters
+  ([8245801](https://github.com/mittwald/flow/commit/82458013daceabaf0e7c544914103051d3a0d31d))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.206](https://github.com/mittwald/flow/compare/0.1.0-alpha.205...0.1.0-alpha.206) (2024-08-29)
 
 ### Bug Fixes
