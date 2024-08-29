@@ -120,9 +120,9 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
       return;
     }
 
-    for (const valueInState of this.valuesFromTableState) {
-      if (this.checkIfValueIsUnknown(valueInState)) {
-        this.deactivateValue(valueInState);
+    for (const currentValues of this.getArrayValue()) {
+      if (this.checkIfValueIsUnknown(currentValues)) {
+        this.deactivateValue(currentValues);
       }
     }
   }
