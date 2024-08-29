@@ -30,7 +30,7 @@ export const OverlayTrigger: FC<Props> = (props) => {
     children,
   } = props;
 
-  const overlayController = OverlayController.useNew(isDefaultOpen);
+  const overlayController = OverlayController.useNew({ isDefaultOpen });
   const isOpen = overlayController.useIsOpen();
 
   const propsContext: PropsContext = {
