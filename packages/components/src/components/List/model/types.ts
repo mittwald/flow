@@ -8,6 +8,7 @@ import type { ItemViewShape } from "@/components/List/model/item/ItemView";
 import type { ReactNode } from "react";
 import type { ItemType } from "@/lib/types/array";
 import type List from "@/components/List/model/List";
+import type { TableShape } from "@/components/List/model/table/types";
 
 export const customPropertyPrefix = "$" as const;
 export type CustomPropertyName = `${typeof customPropertyPrefix}${string}`;
@@ -31,8 +32,11 @@ export interface ListShape<T> {
   batchesController?: BatchesControllerShape;
   hasAction?: boolean;
   onChange?: OnListChanged<T>;
+  table?: TableShape<T>;
 }
 
 export type PropertyRecord<T, TValue> = Partial<
   Record<PropertyName<T>, TValue>
 >;
+
+export type ListViewMode = "table" | "list";

@@ -5,6 +5,10 @@
   "list.paginationInfo": "{visibleItemsCount} von insgesamt {totalItemsCount} angezeigt",
   "list.resetAll": "Alles zurücksetzen",
   "list.setSorting": "Sortierung: {property}",
+  "list.settings": "Einstellungen",
+  "list.settings.viewMode": "Ansicht",
+  "list.settings.viewMode.list": "Liste",
+  "list.settings.viewMode.table": "Tabelle",
   "list.showMore": "Mehr anzeigen",
   "list.sorting": "Sortierung"
 }

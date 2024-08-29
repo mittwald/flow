@@ -1,0 +1,19 @@
+.table {
+  &.isLoading {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}
+
+.row {
+  &:where(.hasAction) {
+    cursor: default;
+    &:hover {
+      background-color: var(--list-item--background-color--hover);
+    }
+
+    &[data-pressed] {
+      background-color: var(--list-item--background-color--pressed);
+    }
+  }
+}

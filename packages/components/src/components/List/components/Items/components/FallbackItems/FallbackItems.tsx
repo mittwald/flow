@@ -6,7 +6,7 @@ import { ItemContainer } from "@/components/List/components/Items/components/Ite
 
 export const FallbackItems: FC = () => {
   const list = useList();
-  const fallback = list.itemView.fallback ?? <SkeletonView />;
+  const fallback = list.itemView?.fallback ?? <SkeletonView />;
 
   return Array.from(Array(5)).map((_, i) => (
     <ItemContainer key={i}>{cloneElement(fallback)}</ItemContainer>

@@ -3,16 +3,20 @@ import { BatchesController } from "@/components/List/model/pagination/BatchesCon
 import { Filter } from "./filter/Filter";
 import { Sorting } from "@/components/List/model/sorting/Sorting";
 import ReactTable from "@/components/List/model/ReactTable";
-import type { ListShape } from "@/components/List/model/types";
+import type { ListShape, ListViewMode } from "@/components/List/model/types";
 import { IncrementalLoader } from "@/components/List/model/loading/IncrementalLoader";
 import invariant from "invariant";
 import { Search } from "@/components/List/model/search/Search";
 import { ItemView } from "@/components/List/model/item/ItemView";
+import { Table } from "@/components/List/model/table/Table";
+import { makeAutoObservable } from "mobx";
+import { useRef } from "react";
 import { useEffect } from "react";
 
 export class List<T> {
   public readonly filters: Filter<T, never, never>[];
-  public readonly itemView: ItemView<T>;
+  public readonly itemView?: ItemView<T>;
+  public readonly table?: Table<T>;
   public readonly search?: Search<T>;
   public readonly sorting: Sorting<T>[];
   public readonly items: ItemCollection<T>;
@@ -20,10 +24,12 @@ export class List<T> {
   public readonly batches: BatchesController<T>;
   public readonly loader: IncrementalLoader<T>;
   public readonly hasAction?: boolean;
+  public viewMode: ListViewMode = "list";
 
-  private constructor(shape: ListShape<T>) {
+  public constructor(shape: ListShape<T>) {
     const {
       itemView,
+      table,
       filters = [],
       sorting = [],
       batchesController,
@@ -35,7 +41,8 @@ export class List<T> {
     this.filters = filters.map((shape) => new Filter(this, shape));
     this.sorting = sorting.map((shape) => new Sorting<T>(this, shape));
     this.search = shape.search ? new Search(this, shape.search) : undefined;
-    this.itemView = new ItemView(this, itemView);
+    this.itemView = itemView ? new ItemView(this, itemView) : undefined;
+    this.table = table ? new Table(this, table) : undefined;
     this.batches = new BatchesController(this, batchesController);
 
     this.loader = IncrementalLoader.useNew<T>(this, shape.loader);
@@ -50,10 +57,12 @@ export class List<T> {
     }, [this.filters]);
 
     this.hasAction = hasAction;
+
+    makeAutoObservable(this, { viewMode: true, setViewMode: true });
   }
 
   public static useNew<T>(shape: ListShape<T>): List<T> {
-    return new List<T>(shape);
+    return useRef(new List<T>(shape)).current;
   }
 
   public get isFiltered(): boolean {
@@ -84,6 +93,10 @@ export class List<T> {
 
   public useIsEmpty(): boolean {
     return !this.loader.useIsLoading() && this.items.entries.length === 0;
+  }
+
+  public setViewMode(to: ListViewMode) {
+    this.viewMode = to;
   }
 }
 

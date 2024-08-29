@@ -6,7 +6,7 @@ import clsx from "clsx";
 import * as Aria from "react-aria-components";
 import { type GridListProps } from "react-aria-components";
 import Item from "@/components/List/components/Items/components/Item/Item";
-import { EmptyView } from "@/components/List/components/Items/components/EmptyView/EmptyView";
+import { EmptyView } from "@/components/List/components/EmptyView/EmptyView";
 import { FallbackItems } from "@/components/List/components/Items/components/FallbackItems/FallbackItems";
 
 export type ItemListProps = Pick<
@@ -20,6 +20,10 @@ export const Items: FC<ItemListProps> = (props) => {
   const isLoading = list.loader.useIsLoading();
   const isInitiallyLoading = list.loader.useIsInitiallyLoading();
   const listIsEmpty = list.useIsEmpty();
+
+  if (!list.itemView) {
+    return null;
+  }
 
   const rows = list.items.entries.map((item) => (
     <Item key={item.id} data={item.data} />

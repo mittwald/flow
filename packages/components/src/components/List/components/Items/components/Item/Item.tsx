@@ -13,6 +13,11 @@ export const Item = (props: Props) => {
   const { data, children } = props;
   const list = useList();
   const itemView = list.itemView;
+
+  if (!itemView) {
+    return null;
+  }
+
   const onAction = itemView.onAction;
 
   const textValue = itemView.textValue ? itemView.textValue(data) : undefined;

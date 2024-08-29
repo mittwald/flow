@@ -8,7 +8,6 @@ export type TableColumnProps = Aria.ColumnProps;
 
 export const TableColumn: FC<TableColumnProps> = (props) => {
   const { children, className, ...rest } = props;
-
   const rootClassName = clsx(styles.column, className);
 
   return (
