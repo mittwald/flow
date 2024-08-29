@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.208](https://github.com/mittwald/flow/compare/0.1.0-alpha.207...0.1.0-alpha.208) (2024-08-29)
+
+### Features
+
+- **useOverlayController:** Add onOpen and onClose callback to options
+  ([95f183d](https://github.com/mittwald/flow/commit/95f183d97c3de23adf2afa16b1bad4deb5fd5875))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.207](https://github.com/mittwald/flow/compare/0.1.0-alpha.206...0.1.0-alpha.207) (2024-08-29)
 
 ### Bug Fixes
