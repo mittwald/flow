@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.211](https://github.com/mittwald/flow/compare/0.1.0-alpha.210...0.1.0-alpha.211) (2024-08-30)
+
+### Features
+
+- **List:** support async loader dependencies
+  ([3db636e](https://github.com/mittwald/flow/commit/3db636e3540f2580d263f39f704f757e3c689447))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.210](https://github.com/mittwald/flow/compare/0.1.0-alpha.209...0.1.0-alpha.210) (2024-08-30)
 
 ### Features
