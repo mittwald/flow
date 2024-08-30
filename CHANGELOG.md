@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.210](https://github.com/mittwald/flow/compare/0.1.0-alpha.209...0.1.0-alpha.210) (2024-08-30)
+
+### Features
+
+- **List:** support table view in List component
+  ([6280669](https://github.com/mittwald/flow/commit/628066949be357528e5f94e892c1b392641800c6))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.209](https://github.com/mittwald/flow/compare/0.1.0-alpha.208...0.1.0-alpha.209) (2024-08-29)
 
 ### Features
