@@ -20,6 +20,14 @@ import Footer from "./components/Footer";
 import { ListSearch } from "@/components/List/setupComponents/ListSearch";
 import type { ItemListProps } from "@/components/List/components/Items/Items";
 import type { OnListChanged } from "@/components/List/model/types";
+import { TableColumn } from "@/components/List/setupComponents/TableColumn";
+import { TableRow } from "@/components/List/setupComponents/TableRow";
+import { TableCell } from "@/components/List/setupComponents/TableCell";
+import { Table } from "@/components/List/components/Table";
+import { Table as TableSetupComponent } from "@/components/List/setupComponents/Table";
+import { TableHeader } from "@/components/List/setupComponents/TableHeader";
+import { TableBody } from "@/components/List/setupComponents/TableBody";
+import { observer } from "mobx-react-lite";
 
 export interface ListProps<T>
   extends PropsWithChildren,
@@ -29,84 +37,130 @@ export interface ListProps<T>
   onChange?: OnListChanged<T>;
 }
 
-export const List = flowComponent("List", (props) => {
-  const { children, batchSize, onChange, ...itemListProps } = props;
+export const List = flowComponent(
+  "List",
+  observer((props) => {
+    const { children, batchSize, onChange, ...itemListProps } = props;
 
-  const listLoaderAsync = deepFindOfType(
-    children,
-    ListLoaderAsync<never>,
-  )?.props;
-  const listLoaderAsyncResource = deepFindOfType(
-    children,
-    ListLoaderAsyncResource<never>,
-  )?.props;
-  const listStaticData = deepFindOfType(children, ListStaticData<never>)?.props;
+    const listLoaderAsync = deepFindOfType(
+      children,
+      ListLoaderAsync<never>,
+    )?.props;
+    const listLoaderAsyncResource = deepFindOfType(
+      children,
+      ListLoaderAsyncResource<never>,
+    )?.props;
+    const listStaticData = deepFindOfType(
+      children,
+      ListStaticData<never>,
+    )?.props;
 
-  const loaderShape: IncrementalLoaderShape<never> = {
-    source: listLoaderAsync
-      ? {
-          ...listLoaderAsync,
-          asyncLoader: listLoaderAsync.children,
-        }
-      : listLoaderAsyncResource
+    const loaderShape: IncrementalLoaderShape<never> = {
+      source: listLoaderAsync
         ? {
-            ...listLoaderAsyncResource,
-            asyncResourceFactory: listLoaderAsyncResource.children,
+            ...listLoaderAsync,
+            asyncLoader: listLoaderAsync.children,
           }
-        : listStaticData
+        : listLoaderAsyncResource
           ? {
-              staticData: listStaticData.data,
+              ...listLoaderAsyncResource,
+              asyncResourceFactory: listLoaderAsyncResource.children,
+            }
+          : listStaticData
+            ? {
+                staticData: listStaticData.data,
+              }
+            : undefined,
+    };
+
+    const searchProps = deepFindOfType(children, ListSearch)?.props;
+    const itemViewProps = deepFindOfType(children, ListItem)?.props;
+
+    const tableProps = deepFindOfType(children, TableSetupComponent)?.props;
+    const tableColumnProps = deepFilterByType(children, TableColumn<never>).map(
+      (c) => ({
+        ...c.props,
+        name: c.props.children,
+      }),
+    );
+    const tableCellProps = deepFilterByType(children, TableCell<never>).map(
+      (c) => ({
+        ...c.props,
+        renderFn: c.props.children,
+      }),
+    );
+
+    const tableRowProps = deepFindOfType(children, TableRow)?.props;
+    const tableHeaderProps = deepFindOfType(children, TableHeader)?.props;
+    const tableBodyProps = deepFindOfType(children, TableBody)?.props;
+
+    const listModel = ListModel.useNew<never>({
+      onChange,
+      loader: loaderShape,
+      filters: deepFilterByType(children, ListFilter<never, never, never>).map(
+        (f) => ({
+          ...f.props,
+          renderItem: f.props.children,
+        }),
+      ),
+      search: searchProps
+        ? {
+            render: searchProps.children,
+            textFieldProps: searchProps,
+          }
+        : undefined,
+      sorting: deepFilterByType(children, ListSorting<never>).map(
+        (s) => s.props,
+      ),
+
+      itemView: itemViewProps
+        ? {
+            ...itemViewProps,
+            renderFn: itemViewProps.children,
+          }
+        : undefined,
+
+      table:
+        tableColumnProps.length > 0
+          ? {
+              header: {
+                ...tableHeaderProps,
+                columns: tableColumnProps,
+              },
+              body: {
+                ...tableBodyProps,
+                row: {
+                  ...tableRowProps,
+                  cells: tableCellProps,
+                },
+              },
+              ...tableProps,
             }
           : undefined,
-  };
 
-  const searchProps = deepFindOfType(children, ListSearch)?.props;
-  const itemViewProps = deepFindOfType(children, ListItem)?.props;
+      batchesController: {
+        batchSize,
+      },
 
-  const listModel = ListModel.useNew<never>({
-    onChange,
-    loader: loaderShape,
-    filters: deepFilterByType(children, ListFilter<never, never, never>).map(
-      (f) => ({
-        ...f.props,
-        renderItem: f.props.children,
-      }),
-    ),
-    search: searchProps
-      ? {
-          render: searchProps.children,
-          textFieldProps: searchProps,
-        }
-      : undefined,
-    sorting: deepFilterByType(children, ListSorting<never>).map((s) => s.props),
+      hasAction: !!props.onAction,
+    });
 
-    itemView: itemViewProps
-      ? {
-          ...itemViewProps,
-          renderFn: itemViewProps.children,
-        }
-      : undefined,
-
-    batchesController: {
-      batchSize,
-    },
-    hasAction: !!props.onAction,
-  });
-
-  return (
-    <listContext.Provider
-      value={{
-        list: listModel,
-      }}
-    >
-      <DataLoader />
-      <div className={styles.list}>
-        <Header />
-        <Items {...itemListProps} />
-        <Footer />
-      </div>
-    </listContext.Provider>
-  );
-});
+    return (
+      <listContext.Provider
+        value={{
+          list: listModel,
+        }}
+      >
+        <DataLoader />
+        <div className={styles.list}>
+          <Header />
+          {listModel.viewMode === "list" && <Items {...itemListProps} />}
+          {listModel.viewMode === "table" && <Table />}
+          <Footer />
+        </div>
+      </listContext.Provider>
+    );
+  }),
+);
 
 export default List;

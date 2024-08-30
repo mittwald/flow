@@ -18,9 +18,9 @@
     font-weight: var(--table--header-font-weight);
   }
 
-  .body {
+  :where(.body) {
     tr {
-      &:nth-of-type(odd) {
+      &:where(:nth-of-type(odd)) {
         background-color: var(--table--background-color-accent);
       }
 

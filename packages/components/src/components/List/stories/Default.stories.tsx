@@ -40,9 +40,8 @@ const meta: Meta<typeof List> = {
   title: "Structure/List",
   component: List,
   render: () => {
-    const availableTypes = usePromise(getTypes, []);
-
     const DomainList = typedList<Domain>();
+    const availableTypes = usePromise(getTypes, []);
 
     return (
       <Section>
@@ -101,3 +100,89 @@ export default meta;
 type Story = StoryObj<typeof List>;
 
 export const Default: Story = {};
+
+export const AsTable: Story = {
+  render: () => {
+    const DomainList = typedList<Domain>();
+    const availableTypes = usePromise(getTypes, []);
+
+    return (
+      <Section>
+        <Heading>Domains</Heading>
+        <DomainList.List batchSize={5}>
+          <DomainList.LoaderAsync manualPagination manualSorting={false}>
+            {loadDomains}
+          </DomainList.LoaderAsync>
+          <DomainList.Filter
+            values={availableTypes}
+            property="type"
+            mode="all"
+            name="Typ"
+          />
+          <DomainList.Search autoFocus />
+          <DomainList.Sorting property="domain" name="A-Z" />
+          <DomainList.Sorting property="domain" name="Z-A" direction="desc" />
+          <DomainList.Sorting property="type" name="Typ" defaultEnabled />
+          <DomainList.Sorting property="tld" name="TLD" />
+
+          <DomainList.Table aria-label="Domains">
+            <DomainList.TableHeader>
+              <DomainList.TableColumn>Name</DomainList.TableColumn>
+              <DomainList.TableColumn>Type</DomainList.TableColumn>
+              <DomainList.TableColumn>TLD</DomainList.TableColumn>
+              <DomainList.TableColumn>Hostname</DomainList.TableColumn>
+            </DomainList.TableHeader>
+
+            <DomainList.TableBody>
+              <DomainList.TableRow
+                onAction={(domain) => console.log(domain.hostname)}
+              >
+                <DomainList.TableCell>
+                  {(domain) => domain.domain}
+                </DomainList.TableCell>
+                <DomainList.TableCell>
+                  {(domain) => domain.type}
+                </DomainList.TableCell>
+                <DomainList.TableCell>
+                  {(domain) => domain.tld}
+                </DomainList.TableCell>
+                <DomainList.TableCell>
+                  {(domain) => domain.hostname}
+                </DomainList.TableCell>
+              </DomainList.TableRow>
+            </DomainList.TableBody>
+          </DomainList.Table>
+
+          <DomainList.Item
+            textValue={(domain) => domain.hostname}
+            onAction={(domain) => console.log(domain.hostname)}
+          >
+            {(domain) => (
+              <DomainList.ItemView>
+                <Avatar variant={domain.type === "Domain" ? 1 : 2}>
+                  {domain.type === "Domain" ? (
+                    <IconDomain />
+                  ) : (
+                    <IconSubdomain />
+                  )}
+                </Avatar>
+                <Heading>
+                  {domain.hostname}
+                  {!domain.verified && (
+                    <StatusBadge status="warning">Not verified</StatusBadge>
+                  )}
+                </Heading>
+                <Text>{domain.type}</Text>
+
+                <ContextMenu>
+                  <MenuItem>Show details</MenuItem>
+                  <MenuItem>Delete</MenuItem>
+                </ContextMenu>
+              </DomainList.ItemView>
+            )}
+          </DomainList.Item>
+        </DomainList.List>
+      </Section>
+    );
+  },
+};

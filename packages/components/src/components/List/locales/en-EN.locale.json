@@ -5,6 +5,10 @@
   "list.paginationInfo": "Showing {visibleItemsCount} of {totalItemsCount}",
   "list.resetAll": "Reset filters",
   "list.setSorting": "Sorting: {property}",
+  "list.settings": "Settings",
+  "list.settings.viewMode": "View",
+  "list.settings.viewMode.list": "List",
+  "list.settings.viewMode.table": "Table",
   "list.showMore": "Show more",
   "list.sorting": "Sorting"
 }

@@ -4,7 +4,7 @@ import { IllustratedMessage } from "@/components/IllustratedMessage";
 import { IconSearch } from "@/components/Icon/components/icons";
 import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
-import locales from "../../../../locales/*.locale.json";
+import locales from "../../locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 
 export const EmptyView: FC = () => {
