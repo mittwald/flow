@@ -1,6 +1,5 @@
 import type { PropsWithChildren } from "react";
 import React from "react";
-import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { listContext } from "./listContext";
 import { DataLoader } from "@/components/List/components/DataLoader";
@@ -18,8 +17,7 @@ import { ListLoaderAsyncResource } from "@/components/List/setupComponents/ListL
 import type { IncrementalLoaderShape } from "@/components/List/model/loading/types";
 import Footer from "./components/Footer";
 import { ListSearch } from "@/components/List/setupComponents/ListSearch";
-import type { ItemListProps } from "@/components/List/components/Items/Items";
-import type { OnListChanged } from "@/components/List/model/types";
+import type { ListShape } from "@/components/List/model/types";
 import { TableColumn } from "@/components/List/setupComponents/TableColumn";
 import { TableRow } from "@/components/List/setupComponents/TableRow";
 import { TableCell } from "@/components/List/setupComponents/TableCell";
@@ -31,16 +29,23 @@ import { observer } from "mobx-react-lite";
 
 export interface ListProps<T>
   extends PropsWithChildren,
-    ItemListProps,
-    FlowComponentProps {
+    Omit<
+      ListShape<T>,
+      | "search"
+      | "loader"
+      | "itemView"
+      | "table"
+      | "batchesController"
+      | "filters"
+      | "sorting"
+    > {
   batchSize?: number;
-  onChange?: OnListChanged<T>;
 }
 
 export const List = flowComponent(
   "List",
   observer((props) => {
-    const { children, batchSize, onChange, ...itemListProps } = props;
+    const { children, batchSize, onChange, refProp: ref, ...restProps } = props;
 
     const listLoaderAsync = deepFindOfType(
       children,
@@ -141,8 +146,7 @@ export const List = flowComponent(
       batchesController: {
         batchSize,
       },
-
-      hasAction: !!props.onAction,
+      ...restProps,
     });
 
     return (
@@ -152,9 +156,9 @@ export const List = flowComponent(
         }}
       >
         <DataLoader />
-        <div className={styles.list}>
+        <div className={styles.list} ref={ref}>
           <Header />
-          {listModel.viewMode === "list" && <Items {...itemListProps} />}
+          {listModel.viewMode === "list" && <Items />}
           {listModel.viewMode === "table" && <Table />}
           <Footer />
         </div>

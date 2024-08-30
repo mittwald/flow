@@ -48,7 +48,11 @@ export const Table: FC = () => {
   );
 
   return (
-    <TableComponent {...table.componentProps} className={tableClassName}>
+    <TableComponent
+      {...list.componentProps}
+      {...table.componentProps}
+      className={tableClassName}
+    >
       <TableHeader {...table.header.componentProps}>
         {table.header.columns.map((col, i) => (
           <TableColumn key={i} {...col.componentProps} />

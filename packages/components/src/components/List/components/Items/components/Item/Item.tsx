@@ -18,19 +18,18 @@ export const Item = (props: Props) => {
     return null;
   }
 
-  const onAction = itemView.onAction;
+  const onAction = itemView.list.onAction;
 
   const textValue = itemView.textValue ? itemView.textValue(data) : undefined;
-  const itemAction = onAction ? () => onAction(data) : undefined;
   const href = itemView.href ? itemView.href(data) : undefined;
-  const hasAction = list.hasAction || !!itemAction || !!href;
+  const hasAction = !!onAction || !!href;
 
   const rootClassName = clsx(styles.item, hasAction && styles.hasAction);
 
   return (
     <Aria.GridListItem
       className={rootClassName}
-      onAction={itemAction}
+      onAction={() => onAction && onAction(data)}
       textValue={textValue}
       href={href}
     >
