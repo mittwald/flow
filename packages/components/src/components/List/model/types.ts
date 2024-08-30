@@ -23,16 +23,22 @@ export type PropertyValueRenderMethod<TMatcherValue> = (
 
 export type OnListChanged<T> = (list: List<T>) => void;
 
-export interface ListShape<T> {
+export interface ListSupportedComponentProps {
+  "aria-labelledby"?: string;
+  "aria-label"?: string;
+}
+
+export interface ListShape<T> extends ListSupportedComponentProps {
   loader?: IncrementalLoaderShape<T>;
   filters?: FilterShape<T, never, never>[];
   itemView?: ItemViewShape<T>;
   search?: SearchShape<T>;
   sorting?: SortingShape<T>[];
   batchesController?: BatchesControllerShape;
-  hasAction?: boolean;
-  onChange?: OnListChanged<T>;
   table?: TableShape<T>;
+
+  onAction?: ItemActionFn<T>;
+  onChange?: OnListChanged<T>;
 }
 
 export type PropertyRecord<T, TValue> = Partial<
@@ -40,3 +46,4 @@ export type PropertyRecord<T, TValue> = Partial<
 >;
 
 export type ListViewMode = "table" | "list";
+export type ItemActionFn<T> = (data: T) => void;

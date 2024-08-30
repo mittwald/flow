@@ -3,7 +3,12 @@ import { BatchesController } from "@/components/List/model/pagination/BatchesCon
 import { Filter } from "./filter/Filter";
 import { Sorting } from "@/components/List/model/sorting/Sorting";
 import ReactTable from "@/components/List/model/ReactTable";
-import type { ListShape, ListViewMode } from "@/components/List/model/types";
+import type {
+  ItemActionFn,
+  ListShape,
+  ListSupportedComponentProps,
+  ListViewMode,
+} from "@/components/List/model/types";
 import { IncrementalLoader } from "@/components/List/model/loading/IncrementalLoader";
 import invariant from "invariant";
 import { Search } from "@/components/List/model/search/Search";
@@ -23,7 +28,8 @@ export class List<T> {
   public readonly reactTable: ReactTable<T>;
   public readonly batches: BatchesController<T>;
   public readonly loader: IncrementalLoader<T>;
-  public readonly hasAction?: boolean;
+  public readonly onAction?: ItemActionFn<T>;
+  public readonly componentProps: ListSupportedComponentProps;
   public viewMode: ListViewMode = "list";
 
   public constructor(shape: ListShape<T>) {
@@ -33,19 +39,23 @@ export class List<T> {
       filters = [],
       sorting = [],
       batchesController,
-      hasAction,
       onChange,
+      loader,
+      search,
+      onAction,
+      ...componentProps
     } = shape;
 
     this.items = new ItemCollection(this);
     this.filters = filters.map((shape) => new Filter(this, shape));
     this.sorting = sorting.map((shape) => new Sorting<T>(this, shape));
-    this.search = shape.search ? new Search(this, shape.search) : undefined;
+    this.search = search ? new Search(this, search) : undefined;
     this.itemView = itemView ? new ItemView(this, itemView) : undefined;
     this.table = table ? new Table(this, table) : undefined;
     this.batches = new BatchesController(this, batchesController);
-
-    this.loader = IncrementalLoader.useNew<T>(this, shape.loader);
+    this.componentProps = componentProps;
+    this.loader = IncrementalLoader.useNew<T>(this, loader);
+    this.onAction = onAction;
     this.reactTable = ReactTable.useNew(this, onChange, {
       manualFiltering: this.loader.manualFiltering,
       manualPagination: this.loader.manualPagination,
@@ -55,8 +65,6 @@ export class List<T> {
     useEffect(() => {
       this.filters.forEach((f) => f.deleteUnknownFilterValues());
     }, [this.filters]);
-
-    this.hasAction = hasAction;
 
     makeAutoObservable(this, { viewMode: true, setViewMode: true });
   }
