@@ -2,6 +2,7 @@ import type { PropertyRecord } from "@/components/List/model/types";
 import type { FilterMode } from "@/components/List/model/filter/types";
 import type { AsyncResource } from "@mittwald/react-use-promise";
 import type { SearchValue } from "@/components/List/model/search/types";
+import type { DependencyList } from "react";
 
 type DataLoaderSortOptions<T> = PropertyRecord<T, "asc" | "desc">;
 
@@ -53,6 +54,7 @@ export type AsyncResourceFactoryDataLoaderShape<T> = {
 
 export type AsyncDataLoaderShape<T> = {
   asyncLoader: AsyncDataLoader<T>;
+  dependencies?: DependencyList;
 } & DynamicLoaderShape;
 
 export type DataSource<T> =
