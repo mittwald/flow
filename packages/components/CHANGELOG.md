@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.212](https://github.com/mittwald/flow/compare/0.1.0-alpha.211...0.1.0-alpha.212) (2024-09-02)
+
+### Features
+
+- **List:** support default view mode
+  ([fdb2360](https://github.com/mittwald/flow/commit/fdb2360dca5043ce53b45f7bb6a40c9b0e2542f5))
+- **List:** support item selection
+  ([f1251cc](https://github.com/mittwald/flow/commit/f1251cc9b52eaa5f37a6a94d454647a7a476efe4))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.211](https://github.com/mittwald/flow/compare/0.1.0-alpha.210...0.1.0-alpha.211) (2024-08-30)
 
 ### Features
