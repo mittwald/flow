@@ -4021,7 +4021,7 @@ const RAW_RUNTIME_STATE =
           ["@mfalkenberg/react-live-ssr", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:4.1.7"],\
           ["@mittwald/flow-react-components", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#workspace:packages/components"],\
           ["@next/mdx", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:14.2.5"],\
-          ["@tabler/icons-react", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.11.0"],\
+          ["@tabler/icons-react", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.14.0"],\
           ["@types/mdx", "npm:2.0.13"],\
           ["@types/node", "npm:20.14.14"],\
           ["@types/react", "npm:18.3.3"],\
@@ -4109,7 +4109,7 @@ const RAW_RUNTIME_STATE =
           ["@storybook/react-vite", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.2.7"],\
           ["@storybook/test", "virtual:1209e66c129f51fd8b15c25eed2cd5ca77c3d38d584aefaef905786d4945100e2db3fb47513577692afd5317f4ef86363cfab44e62544c78cb96aa44e0a7956c#npm:8.2.7"],\
           ["@storybook/theming", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.2.7"],\
-          ["@tabler/icons-react", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.11.0"],\
+          ["@tabler/icons-react", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.14.0"],\
           ["@tanstack/react-table", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.20.1"],\
           ["@testing-library/dom", "npm:10.4.0"],\
           ["@testing-library/jest-dom", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:6.4.7"],\
@@ -4215,7 +4215,7 @@ const RAW_RUNTIME_STATE =
           ["@storybook/react-vite", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.2.7"],\
           ["@storybook/test", "virtual:1209e66c129f51fd8b15c25eed2cd5ca77c3d38d584aefaef905786d4945100e2db3fb47513577692afd5317f4ef86363cfab44e62544c78cb96aa44e0a7956c#npm:8.2.7"],\
           ["@storybook/theming", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.2.7"],\
-          ["@tabler/icons-react", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.11.0"],\
+          ["@tabler/icons-react", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.14.0"],\
           ["@tanstack/react-table", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.20.1"],\
           ["@testing-library/dom", "npm:10.4.0"],\
           ["@testing-library/jest-dom", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:6.4.7"],\
@@ -4315,7 +4315,7 @@ const RAW_RUNTIME_STATE =
           ["@storybook/react-vite", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.2.7"],\
           ["@storybook/test", "virtual:1209e66c129f51fd8b15c25eed2cd5ca77c3d38d584aefaef905786d4945100e2db3fb47513577692afd5317f4ef86363cfab44e62544c78cb96aa44e0a7956c#npm:8.2.7"],\
           ["@storybook/theming", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.2.7"],\
-          ["@tabler/icons-react", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.11.0"],\
+          ["@tabler/icons-react", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.14.0"],\
           ["@tanstack/react-table", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:8.20.1"],\
           ["@testing-library/dom", "npm:10.4.0"],\
           ["@testing-library/jest-dom", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:6.4.7"],\
@@ -9543,27 +9543,27 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@tabler/icons", [\
-      ["npm:3.11.0", {\
-        "packageLocation": "./.yarn/cache/@tabler-icons-npm-3.11.0-db3adf4d6b-335558d3e2.zip/node_modules/@tabler/icons/",\
+      ["npm:3.14.0", {\
+        "packageLocation": "./.yarn/cache/@tabler-icons-npm-3.14.0-2fb24daef6-58aabf1b68.zip/node_modules/@tabler/icons/",\
         "packageDependencies": [\
-          ["@tabler/icons", "npm:3.11.0"]\
+          ["@tabler/icons", "npm:3.14.0"]\
         ],\
         "linkType": "HARD"\
       }]\
     ]],\
     ["@tabler/icons-react", [\
-      ["npm:3.11.0", {\
-        "packageLocation": "./.yarn/cache/@tabler-icons-react-npm-3.11.0-7eb6d514df-5c3c999ecf.zip/node_modules/@tabler/icons-react/",\
+      ["npm:3.14.0", {\
+        "packageLocation": "./.yarn/cache/@tabler-icons-react-npm-3.14.0-9b49e7a533-87779307e8.zip/node_modules/@tabler/icons-react/",\
         "packageDependencies": [\
-          ["@tabler/icons-react", "npm:3.11.0"]\
+          ["@tabler/icons-react", "npm:3.14.0"]\
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.11.0", {\
-        "packageLocation": "./.yarn/__virtual__/@tabler-icons-react-virtual-9ae2de3298/0/cache/@tabler-icons-react-npm-3.11.0-7eb6d514df-5c3c999ecf.zip/node_modules/@tabler/icons-react/",\
+      ["virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.14.0", {\
+        "packageLocation": "./.yarn/__virtual__/@tabler-icons-react-virtual-fec962fb72/0/cache/@tabler-icons-react-npm-3.14.0-9b49e7a533-87779307e8.zip/node_modules/@tabler/icons-react/",\
         "packageDependencies": [\
-          ["@tabler/icons-react", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.11.0"],\
-          ["@tabler/icons", "npm:3.11.0"],\
+          ["@tabler/icons-react", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.14.0"],\
+          ["@tabler/icons", "npm:3.14.0"],\
           ["@types/react", "npm:18.3.3"],\
           ["react", "npm:18.3.1"]\
         ],\
