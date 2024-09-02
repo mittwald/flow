@@ -1,0 +1,118 @@
+# Grundlagen
+
+Auf dieser Seite werden die Grundlagen zur Verwendung der Typography erläutert.
+Hinweise zur Formulierung und Wortwahl finden sich im
+[Sprach-Guide](/02-foundations/content-guidelines/sprach-guide).
+
+## Best practices
+
+Die verschiedenen Schriftarten sind bereits in den Components enthalten. Um
+keine Unregelmäßigkeiten zu erzeugen, sollte die Typography nicht verändert
+werden. So ist z. B. die Line Height bei vielen Schriften auf 24px gesetzt,
+damit sich die Schrift perfekt in die anderen Designelemente einfügt.
+
+Beachte die folgenden Punkte bei der Verwendung von Typography:
+
+- Versuche, nicht mehr als 3 verschiedene Schriftarten gleichzeitig zu
+  verwenden.
+- Für die Lesbarkeit sollte die Schrift immer einen guten Kontrast zum
+  Hintergrund haben (s. Accessibility).
+- Achte bei den [Headings](/03-components/content/heading) auf eine logische
+  semantische Reihenfolge von H1 bis H5.
+- Wenn ein Wort im Fließtext hervorgehoben werden soll, kann es in Bold gesetzt
+  werden.
+
+---
+
+# Anwendung
+
+## Position
+
+Text findet sich überall auf Benutzeroberflächen. Oft geben die Components
+bereits vor, wie mit dem Text umzugehen ist. Die folgenden Punkte können bei der
+Positionierung von Text helfen:
+
+- Bei der Verwendung von Fließtext ist auf die Textbreite zu achten. Es wird
+  empfohlen, dass der Fließtext nicht breiter als 80 Zeichen ist, damit der
+  Zeilensprung möglichst angenehm zu lesen ist.
+- Wenn verschiedene Textarten mit unterschiedlichen Texthöhen nebeneinander
+  dargestellt werden, sollte der kleinere Text auf die Höhe des größeren Textes
+  zentriert werden.
+
+<DoAndDont>
+  <Do example="position-do">
+    Heading und StatusBadge haben unterschiedliche Höhen. Das StatusBadge wird
+    auf der Höhe der Heading zentriert.
+  </Do>
+  <Dont example="position-dont">
+    Wenn Textelemente unterschiedliche Höhen haben, dann soll das kleinere sich
+    mittig von der Höhe und nicht unten oder oben anordnen.
+  </Dont>
+</DoAndDont>
+
+## Hierarchie
+
+Typography schafft Hierarchie, indem die Schriftarten sich durch Weight, Size
+und Color unterscheiden. Aber auch die Position kann die Hierarchie
+beeinflussen. Bei der Hierarchie ist folgendes zu beachten:
+
+- [Headings](/03-components/content/heading) erzeugen durch eine logische
+  semantische Reihenfolge eine Struktur und damit eine Hierarchie (s. a.
+  [Section](/03-components/structure/section)).
+- Unterhalb der Headings im Body-Bereich werden typografische Hierarchien durch
+  verschiedene Schriftarten (z. B. [Text](/03-components/content/text), Small
+  Text, Bold Text, [Links](/03-components/navigation/link)) erzeugt.
+- Small Text wirkt von allen Textarten am unscheinbarsten. Es wird meist als
+  kleinere Informationen in Components verwendet – zum Beispiel als
+  Fehlermeldung. Es sollte vermieden werden, zu viel Small Text zu verwenden, da
+  dies für den User anstrengender zu lesen ist.
+- Oft reicht es nicht aus, wenn nur eine Eigenschaft der Schrift angepasst wird.
+  Beispielsweise unterscheiden sich die Headings im Flow zum Fließtext in den
+  Eigenschaften Weight, Size und Color – würde sich die Heading nur in der
+  Eigenschaft Color unterscheiden, würde sie vom User nicht unbedingt als
+  Überschrift erkannt werden.
+- Typography sollte sich nach einem Schema wiederholen. Zum Beispiel sollte die
+  Typography in einer [List](/03-components/structure/list) in allen Zeilen
+  gleich sein.
+
+<DoAndDont>
+  <Do example="heading-do">
+    Headings unterscheiden sich vom normalen Fließtext durch Weight, Size und
+    Color.
+  </Do>
+  <Dont example="heading-dont">
+    Eine Heading ohne die passende Weight wird nicht immer als Heading erkannt.
+  </Dont>
+</DoAndDont>
+
+<DoAndDont>
+  <Do>
+    Besonders in Lists sollte eine Regelmäßigkeit in der Typografie vorhanden
+    sein.
+  </Do>
+  <Dont>
+    Wenn viele verschiedene Schriftarten verwendet werden, wirkt alles sehr
+    unruhig.
+  </Dont>
+</DoAndDont>
+
+---
+
+# Accessibility
+
+Gerade bei Typography ist Accessibility ein wichtiges Thema. Deswegen beachte
+folgende Punkte:
+
+- Für Fonts in Flow wird immer REM statt Pixel verwendet. Dies hat den Vorteil,
+  dass die Font-Größe den individuellen Einstellungen des Users folgt. Die
+  Basis-Fontgröße – worauf sich REM bezieht – beträgt 16px.
+- Fonts müssen zum Hintergrund einen bestimmten Kontrast aufweisen. Für normalen
+  Text sollte das Kontrastverhältnis mindestens 4,5:1 betragen, und für großen
+  Text mindestens 3:1 (WCAG 2.0 Level AA). Ein noch besserer Kontrast wird
+  erreicht, wenn das Verhältnis für normalen Text bei 7:1 und für großen Text
+  bei 4,5:1 liegt (WCAG Level AAA).
+- Links werden in Flow so dargestellt, dass sie für alle User erkennbar sind. So
+  werden z. B. Bold und eine Unterstreichung auch von Farbenblinden erkannt.
+- Um eine gute Lesbarkeit für alle User zu gewährleisten, sollte die Line Height
+  immer mindestens 150 % der Font-Größe betragen.
+- Achte auf eine verständliche Wortwahl (s. Sprach-Guide).
