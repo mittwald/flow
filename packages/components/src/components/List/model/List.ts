@@ -30,7 +30,7 @@ export class List<T> {
   public readonly loader: IncrementalLoader<T>;
   public readonly onAction?: ItemActionFn<T>;
   public readonly componentProps: ListSupportedComponentProps;
-  public viewMode: ListViewMode = "list";
+  public viewMode: ListViewMode;
 
   public constructor(shape: ListShape<T>) {
     const {
@@ -43,10 +43,12 @@ export class List<T> {
       loader,
       search,
       onAction,
+      defaultViewMode,
       ...componentProps
     } = shape;
 
     this.items = new ItemCollection(this);
+    this.viewMode = defaultViewMode ?? "list";
     this.filters = filters.map((shape) => new Filter(this, shape));
     this.sorting = sorting.map((shape) => new Sorting<T>(this, shape));
     this.search = search ? new Search(this, search) : undefined;

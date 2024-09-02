@@ -39,6 +39,7 @@ export interface ListShape<T> extends ListSupportedComponentProps {
 
   onAction?: ItemActionFn<T>;
   onChange?: OnListChanged<T>;
+  defaultViewMode?: ListViewMode;
 }
 
 export type PropertyRecord<T, TValue> = Partial<
