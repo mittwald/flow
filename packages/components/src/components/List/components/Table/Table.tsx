@@ -58,7 +58,10 @@ export const Table: FC = () => {
           <TableColumn key={i} {...col.componentProps} />
         ))}
       </TableHeader>
-      <TableBody {...table.body.componentProps}>
+      <TableBody
+        {...table.body.componentProps}
+        renderEmptyState={() => <EmptyView />}
+      >
         {list.items.entries.map((item) => (
           <TableRow
             className={rowClassName}
