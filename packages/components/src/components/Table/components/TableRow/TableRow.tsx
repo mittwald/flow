@@ -9,10 +9,16 @@ export type TableRowProps = Aria.RowProps<never>;
 export const TableRow: FC<TableRowProps> = (props) => {
   const { children, className, ...rest } = props;
 
-  const rootClassName = clsx(styles.row, className);
-
   return (
-    <Aria.Row className={rootClassName} {...rest}>
+    <Aria.Row
+      className={(props) =>
+        clsx(
+          styles.row,
+          typeof className === "function" ? className(props) : className,
+        )
+      }
+      {...rest}
+    >
       {children}
     </Aria.Row>
   );

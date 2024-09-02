@@ -4,6 +4,7 @@ import { Filter } from "./filter/Filter";
 import { Sorting } from "@/components/List/model/sorting/Sorting";
 import ReactTable from "@/components/List/model/ReactTable";
 import type {
+  GetItemId,
   ItemActionFn,
   ListShape,
   ListSupportedComponentProps,
@@ -29,8 +30,9 @@ export class List<T> {
   public readonly batches: BatchesController<T>;
   public readonly loader: IncrementalLoader<T>;
   public readonly onAction?: ItemActionFn<T>;
+  public readonly getItemId?: GetItemId<T>;
   public readonly componentProps: ListSupportedComponentProps;
-  public viewMode: ListViewMode = "list";
+  public viewMode: ListViewMode;
 
   public constructor(shape: ListShape<T>) {
     const {
@@ -43,10 +45,13 @@ export class List<T> {
       loader,
       search,
       onAction,
+      getItemId,
+      defaultViewMode,
       ...componentProps
     } = shape;
 
     this.items = new ItemCollection(this);
+    this.viewMode = defaultViewMode ?? "list";
     this.filters = filters.map((shape) => new Filter(this, shape));
     this.sorting = sorting.map((shape) => new Sorting<T>(this, shape));
     this.search = search ? new Search(this, search) : undefined;
@@ -56,6 +61,7 @@ export class List<T> {
     this.componentProps = componentProps;
     this.loader = IncrementalLoader.useNew<T>(this, loader);
     this.onAction = onAction;
+    this.getItemId = getItemId;
     this.reactTable = ReactTable.useNew(this, onChange, {
       manualFiltering: this.loader.manualFiltering,
       manualPagination: this.loader.manualPagination,

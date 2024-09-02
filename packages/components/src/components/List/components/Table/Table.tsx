@@ -34,13 +34,8 @@ export const Table: FC = () => {
     return <EmptyView />;
   }
 
-  const rowAction = table.body.row.onAction;
-  const rowClassName = clsx(
-    styles.row,
-    rowAction && styles.hasAction,
+  const rowAction = table.list.onAction;
 
-    table.body.row.componentProps.className,
-  );
   const tableClassName = clsx(
     styles.table,
     isLoading && styles.isLoading,
@@ -58,10 +53,20 @@ export const Table: FC = () => {
           <TableColumn key={i} {...col.componentProps} />
         ))}
       </TableHeader>
-      <TableBody {...table.body.componentProps}>
+      <TableBody
+        {...table.body.componentProps}
+        renderEmptyState={() => <EmptyView />}
+      >
         {list.items.entries.map((item) => (
           <TableRow
-            className={rowClassName}
+            className={(props) =>
+              clsx(
+                styles.row,
+                rowAction && styles.hasAction,
+                table.body.row.componentProps.className,
+                props.isSelected && styles.isSelected,
+              )
+            }
             key={item.id}
             onAction={rowAction ? () => rowAction(item.data) : undefined}
             {...table.body.row.componentProps}

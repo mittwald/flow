@@ -6,10 +6,17 @@
 }
 
 .row {
+  &.isSelected {
+    background-color: var(--list-item--background-color--pressed);
+  }
+
   &:where(.hasAction) {
     cursor: default;
-    &:hover {
-      background-color: var(--list-item--background-color--hover);
+
+    &:not(.isSelected) {
+      &:hover {
+        background-color: var(--list-item--background-color--hover);
+      }
     }
 
     &[data-pressed] {

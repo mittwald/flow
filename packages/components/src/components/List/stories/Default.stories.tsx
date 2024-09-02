@@ -75,9 +75,7 @@ const meta: Meta<typeof List> = {
             </DomainList.TableHeader>
 
             <DomainList.TableBody>
-              <DomainList.TableRow
-                onAction={(domain) => console.log(domain.hostname)}
-              >
+              <DomainList.TableRow>
                 <DomainList.TableCell>
                   {(domain) => domain.domain}
                 </DomainList.TableCell>

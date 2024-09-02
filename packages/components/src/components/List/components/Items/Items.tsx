@@ -12,25 +12,24 @@ export const Items: FC = () => {
   const list = useList();
   const isLoading = list.loader.useIsLoading();
   const isInitiallyLoading = list.loader.useIsInitiallyLoading();
-  const listIsEmpty = list.useIsEmpty();
 
   if (!list.itemView) {
     return null;
   }
 
   const rows = list.items.entries.map((item) => (
-    <Item key={item.id} data={item.data} />
+    <Item key={item.id} data={item.data} id={item.id} />
   ));
 
   const rootClassName = clsx(styles.items, isLoading && styles.isLoading);
 
-  if (listIsEmpty) {
-    return <EmptyView />;
-  }
-
   return (
     <div aria-hidden={isInitiallyLoading} aria-busy={isLoading}>
-      <Aria.GridList className={rootClassName} {...list.componentProps}>
+      <Aria.GridList
+        className={rootClassName}
+        {...list.componentProps}
+        renderEmptyState={() => <EmptyView />}
+      >
         {isInitiallyLoading ? <FallbackItems /> : rows}
       </Aria.GridList>
     </div>
