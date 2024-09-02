@@ -7,7 +7,6 @@ import type {
   TableProps,
   TableRowProps,
 } from "@/components/Table";
-import type { ItemActionFn } from "@/components/List/model/types";
 
 /** Cell */
 export type RenderCellFn<T> = (data: T) => ReactNode;
@@ -25,7 +24,6 @@ export interface TableRowShape<T>
   extends TableRowSupportedComponentProps,
     PropsWithChildren {
   cells?: TableCellShape<T>[];
-  onAction?: ItemActionFn<T>;
 }
 
 /** Column */

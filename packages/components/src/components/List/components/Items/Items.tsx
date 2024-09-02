@@ -18,7 +18,7 @@ export const Items: FC = () => {
   }
 
   const rows = list.items.entries.map((item) => (
-    <Item key={item.id} data={item.data} />
+    <Item key={item.id} data={item.data} id={item.id} />
   ));
 
   const rootClassName = clsx(styles.items, isLoading && styles.isLoading);
