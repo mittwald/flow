@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.213](https://github.com/mittwald/flow/compare/0.1.0-alpha.212...0.1.0-alpha.213) (2024-09-03)
+
+### Bug Fixes
+
+- **List:** fix not updating on property changes
+  ([ce1736c](https://github.com/mittwald/flow/commit/ce1736c89b529cbe0f7237d754c19468140a5a4c))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.212](https://github.com/mittwald/flow/compare/0.1.0-alpha.211...0.1.0-alpha.212) (2024-09-02)
 
 ### Features
