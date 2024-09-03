@@ -6,8 +6,7 @@
   [Heading](/03-components/content/heading).
 - Integriere bei Bedarf einen [Switch](/03-components/form-controls/switch),
   [Link](/03-components/navigations/link) oder
-  [Buttons](/03-components/actions/button) (siehe
-  [Overview](/03-components/structure/section)).
+  [Buttons](/03-components/actions/button).
 - Verwendest du mehrere Sections, sollte die wichtigste ganz oben stehen.
 
 ## Verwendung
@@ -99,18 +98,13 @@ Im unteren Bereich der Section bilden häufig
 - Der [StatusBadge](/03-components/status/status-badge) bleibt immer auf einer
   Höhe mit dem Titel. Ist der Titel zu lang, wird er zweizeilig.
 
-<ColumnLayout m={[1, 1]}>
-  <div>
-    <Info mobile heading="Mobile" example="status-badge">
-      Wenn die Section nicht alle Inhalte horizontal darstellen kann, springen
-      die Actions in die nächste Zeile. Dort ordnen sie sich weiterhin rechts
-      an.
-    </Info>
-  </div>
-  <div>
-    <Info mobile heading="Textumbruch Heading" example="long-heading">
-      StatusBadge und Heading bleiben immer auf einer Höhe. Ist der Text zu
-      lang, bricht er in die nächste Zeile um.
-    </Info>
-  </div>
-</ColumnLayout>
+<DoAndDont>
+  <Info mobile heading="Mobile" example="status-badge">
+    Wenn die Section nicht alle Inhalte horizontal darstellen kann, springen die
+    Actions in die nächste Zeile. Dort ordnen sie sich weiterhin rechts an.
+  </Info>
+  <Info mobile heading="Textumbruch Heading" example="long-heading">
+    StatusBadge und Heading bleiben immer auf einer Höhe. Ist der Text zu lang,
+    bricht er in die nächste Zeile um.
+  </Info>
+</DoAndDont>
