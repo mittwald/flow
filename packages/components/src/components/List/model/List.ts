@@ -15,9 +15,8 @@ import invariant from "invariant";
 import { Search } from "@/components/List/model/search/Search";
 import { ItemView } from "@/components/List/model/item/ItemView";
 import { Table } from "@/components/List/model/table/Table";
-import { makeAutoObservable } from "mobx";
-import { useRef } from "react";
-import { useEffect } from "react";
+import type { Dispatch, SetStateAction } from "react";
+import { useEffect, useState } from "react";
 
 export class List<T> {
   public readonly filters: Filter<T, never, never>[];
@@ -33,6 +32,7 @@ export class List<T> {
   public readonly getItemId?: GetItemId<T>;
   public readonly componentProps: ListSupportedComponentProps;
   public viewMode: ListViewMode;
+  public readonly setViewMode: Dispatch<SetStateAction<ListViewMode>>;
 
   public constructor(shape: ListShape<T>) {
     const {
@@ -51,7 +51,6 @@ export class List<T> {
     } = shape;
 
     this.items = new ItemCollection(this);
-    this.viewMode = defaultViewMode ?? "list";
     this.filters = filters.map((shape) => new Filter(this, shape));
     this.sorting = sorting.map((shape) => new Sorting<T>(this, shape));
     this.search = search ? new Search(this, search) : undefined;
@@ -68,15 +67,17 @@ export class List<T> {
       manualSorting: this.loader.manualSorting,
     });
 
+    const [viewMode, setViewMode] = useState(defaultViewMode ?? "list");
+    this.viewMode = viewMode;
+    this.setViewMode = setViewMode;
+
     useEffect(() => {
       this.filters.forEach((f) => f.deleteUnknownFilterValues());
     }, [this.filters]);
-
-    makeAutoObservable(this, { viewMode: true, setViewMode: true });
   }
 
   public static useNew<T>(shape: ListShape<T>): List<T> {
-    return useRef(new List<T>(shape)).current;
+    return new List<T>(shape);
   }
 
   public get isFiltered(): boolean {
@@ -107,10 +108,6 @@ export class List<T> {
 
   public useIsEmpty(): boolean {
     return !this.loader.useIsLoading() && this.items.entries.length === 0;
-  }
-
-  public setViewMode(to: ListViewMode) {
-    this.viewMode = to;
   }
 }
 
