@@ -8,4 +8,15 @@
   border-radius: var(--inline-code--corner-radius);
   display: inline-block;
   max-width: fit-content;
+
+  @mixin variant($color) {
+    &:where(.#{$color}) {
+      color: var(--inline-code--#{$color}-content-color);
+      background-color: var(--inline-code--#{$color}-background-color);
+    }
+  }
+
+  @include variant(neutral);
+  @include variant(light);
+  @include variant(dark);
 }
