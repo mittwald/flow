@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.214](https://github.com/mittwald/flow/compare/0.1.0-alpha.213...0.1.0-alpha.214) (2024-09-04)
+
+### Features
+
+- **Tunnel:** support static entry ID
+  ([7ed7c10](https://github.com/mittwald/flow/commit/7ed7c10e1f1b667c93d4a9ec0359eae05266c1d2))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.213](https://github.com/mittwald/flow/compare/0.1.0-alpha.212...0.1.0-alpha.213) (2024-09-03)
 
 **Note:** Version bump only for package @mittwald/react-tunnel
