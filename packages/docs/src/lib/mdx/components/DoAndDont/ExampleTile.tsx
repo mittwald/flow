@@ -21,7 +21,7 @@ export interface DoAndDontTileProps extends PropsWithChildren {
   mobile?: boolean;
 }
 
-export const DoAndDontTile: FC<DoAndDontTileProps> = (props) => {
+export const ExampleTile: FC<DoAndDontTileProps> = (props) => {
   const { code, text, type, zoom, bgColor, heading, mobile } = props;
 
   const headingIcon =
@@ -81,4 +81,4 @@ export const DoAndDontTile: FC<DoAndDontTileProps> = (props) => {
   );
 };
 
-export default DoAndDontTile;
+export default ExampleTile;
