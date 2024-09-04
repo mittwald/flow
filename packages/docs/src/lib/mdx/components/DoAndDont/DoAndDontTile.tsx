@@ -4,12 +4,17 @@ import { Text } from "@mittwald/flow-react-components/Text";
 import LiveCodeEditor from "@/lib/liveCode/components/LiveCodeEditor";
 import clsx from "clsx";
 import { Heading } from "@mittwald/flow-react-components/Heading";
-import { IconCheck, IconClose } from "@mittwald/flow-react-components/Icons";
+import {
+  IconCheck,
+  IconClose,
+  IconInfo,
+  IconMittwald,
+} from "@mittwald/flow-react-components/Icons";
 
 export interface DoAndDontTileProps extends PropsWithChildren {
   code?: string;
   text?: string;
-  type?: "do" | "dont";
+  type?: "do" | "dont" | "info" | "mstudio";
   zoom?: number;
   bgColor?: "default" | "dark" | "light";
   heading?: string;
@@ -20,7 +25,15 @@ export const DoAndDontTile: FC<DoAndDontTileProps> = (props) => {
   const { code, text, type, zoom, bgColor, heading, mobile } = props;
 
   const headingIcon =
-    type === "do" ? <IconCheck /> : type === "dont" ? <IconClose /> : undefined;
+    type === "do" ? (
+      <IconCheck />
+    ) : type === "dont" ? (
+      <IconClose />
+    ) : type === "info" ? (
+      <IconInfo />
+    ) : type === "mstudio" ? (
+      <IconMittwald />
+    ) : undefined;
 
   const headingText = heading
     ? heading

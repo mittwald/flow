@@ -88,6 +88,48 @@ export const MdxFileView: FC<Props> = (props) => {
     heading,
   }) => (
     <DoAndDontTile
+      type="info"
+      text={exampleText}
+      code={example ? mdxFile.getExample(example) : undefined}
+      zoom={zoom}
+      bgColor={bgColor}
+      mobile={mobile}
+      heading={heading}
+    >
+      {children}
+    </DoAndDontTile>
+  );
+  const ExampleStudio: FC<ExampleProps> = ({
+    example,
+    exampleText,
+    zoom,
+    bgColor,
+    mobile,
+    children,
+    heading,
+  }) => (
+    <DoAndDontTile
+      type="mstudio"
+      text={exampleText}
+      code={example ? mdxFile.getExample(example) : undefined}
+      zoom={zoom}
+      bgColor={bgColor}
+      mobile={mobile}
+      heading={heading}
+    >
+      {children}
+    </DoAndDontTile>
+  );
+  const ExamplePlain: FC<ExampleProps> = ({
+    example,
+    exampleText,
+    zoom,
+    bgColor,
+    mobile,
+    children,
+    heading,
+  }) => (
+    <DoAndDontTile
       text={exampleText}
       code={example ? mdxFile.getExample(example) : undefined}
       zoom={zoom}
@@ -107,6 +149,8 @@ export const MdxFileView: FC<Props> = (props) => {
         Do: ExampleDo,
         Dont: ExampleDont,
         Info: ExampleInfo,
+        MStudioTile: ExampleStudio,
+        PlainTile: ExamplePlain,
         ...customComponents,
       }}
     />
