@@ -10,7 +10,7 @@
     "react tree",
     "teleport"
   ],
-  "homepage": "https://mittwald.github.io/flow",
+  "homepage": "https://github.com/mittwald/flow/tree/main/packages/react-tunnel",
   "repository": "https://github.com/mittwald/flow",
   "exports": {
     ".": {
