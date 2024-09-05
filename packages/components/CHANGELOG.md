@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.215](https://github.com/mittwald/flow/compare/0.1.0-alpha.214...0.1.0-alpha.215) (2024-09-05)
+
+### Features
+
+- **List:** support initial state for filters and search
+  ([3675a6f](https://github.com/mittwald/flow/commit/3675a6f3ee5f1cf6312d919de61471bdae12e8fc))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.214](https://github.com/mittwald/flow/compare/0.1.0-alpha.213...0.1.0-alpha.214) (2024-09-04)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
