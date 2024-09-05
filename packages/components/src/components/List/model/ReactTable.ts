@@ -2,6 +2,7 @@ import type {
   Column,
   ColumnDef,
   ColumnSort,
+  InitialTableState,
   Table,
   TableOptions,
   Updater,
@@ -22,8 +23,7 @@ import type {
 } from "@/components/List/model/types";
 import type { SearchValue } from "@/components/List/model/search/types";
 import type { Dispatch, SetStateAction } from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export class ReactTable<T> {
   public readonly list: List<T>;
@@ -64,17 +64,26 @@ export class ReactTable<T> {
   ): Table<T> {
     const data = this.list.loader.useData();
 
+    const initialState: InitialTableState = {
+      pagination: {
+        pageSize: this.list.batches.batchSize,
+      },
+      columnFilters: [],
+    };
+
+    for (const filter of this.list.filters) {
+      filter.updateInitialState(initialState);
+    }
+
+    this.list.search?.updateInitialState(initialState);
+
     const table = useReactTable({
       data,
       state: {
         sorting: this.sortingState,
       },
       getRowId: this.list.getItemId,
-      initialState: {
-        pagination: {
-          pageSize: this.list.batches.batchSize,
-        },
-      },
+      initialState,
       columns: this.getTableColumnDefs(),
       getCoreRowModel: getCoreRowModel(),
       getSortedRowModel: getSortedRowModel(),

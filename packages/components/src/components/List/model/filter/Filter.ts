@@ -1,4 +1,9 @@
-import type { Column, ColumnDef, ColumnFilter } from "@tanstack/react-table";
+import type {
+  Column,
+  ColumnDef,
+  ColumnFilter,
+  InitialTableState,
+} from "@tanstack/react-table";
 import type List from "@/components/List/model/List";
 import { getProperty } from "dot-prop";
 import type {
@@ -34,6 +39,7 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
   public readonly renderItem: PropertyValueRenderMethod<TMatchValue>;
   public readonly name?: string;
   private onFilterUpdateCallbacks = new Set<() => unknown>();
+  private readonly defaultSelectedValues: FilterValue[];
 
   public constructor(list: List<T>, shape: FilterShape<T, TProp, TMatchValue>) {
     this.list = list;
@@ -43,6 +49,21 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
     this.matcher = shape.matcher ?? equalsPropertyMatcher;
     this.renderItem = shape.renderItem ?? stringCastRenderMethod;
     this.name = shape.name;
+    this.defaultSelectedValues = shape.defaultSelected
+      ? this.values.filter((v) =>
+          shape.defaultSelected?.some((d) => d === v.value),
+        )
+      : [];
+  }
+
+  public updateInitialState(initialState: InitialTableState) {
+    initialState.columnFilters = [
+      ...(initialState.columnFilters ?? []),
+      ...this.defaultSelectedValues.map((d) => ({
+        id: d.filter.property,
+        value: d,
+      })),
+    ];
   }
 
   public updateTableColumnDef(def: ColumnDef<T>): void {

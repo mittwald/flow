@@ -3,7 +3,7 @@ import { isShallowEqual } from "remeda";
 import { hash } from "object-code";
 
 export class FilterValue {
-  private readonly filter: Filter<unknown, string, unknown>;
+  public readonly filter: Filter<unknown, string, unknown>;
   public readonly value: unknown;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
