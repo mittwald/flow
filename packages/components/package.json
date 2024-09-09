@@ -26,13 +26,17 @@
       "types": "./dist/types/components/Avatar/index.d.ts",
       "import": "./dist/Avatar.js"
     },
-    "./Button": {
-      "types": "./dist/types/components/Button/index.d.ts",
-      "import": "./dist/Button.js"
+    "./Badge": {
+      "types": "./dist/types/components/Badge/index.d.ts",
+      "import": "./dist/Badge.js"
     },
     "./Breadcrumb": {
       "types": "./dist/types/components/Breadcrumb/index.d.ts",
       "import": "./dist/Breadcrumb.js"
+    },
+    "./Button": {
+      "types": "./dist/types/components/Button/index.d.ts",
+      "import": "./dist/Button.js"
     },
     "./Checkbox": {
       "types": "./dist/types/components/Checkbox/index.d.ts",

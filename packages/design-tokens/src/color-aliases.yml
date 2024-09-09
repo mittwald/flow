@@ -513,6 +513,10 @@ disabled-outline-content-color:
   value: "{neutral.color.600}"
 disabled-outline-border-color:
   value: "{neutral.color.400}"
+disabled-dark-outline-border-color:
+  value: "{dark.color.300}"
+disabled-light-outline-border-color:
+  value: "{light.color.300}"
 
 # Disabled Soft
 disabled-soft-background-color:

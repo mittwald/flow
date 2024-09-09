@@ -25,6 +25,7 @@ export default defineConfig(
           Activity: "./src/components/Activity/index.ts",
           ActionGroup: "./src/components/ActionGroup/index.ts",
           Avatar: "./src/components/Avatar/index.ts",
+          Badge: "./src/components/Badge/index.ts",
           Breadcrumb: "./src/components/Breadcrumb/index.ts",
           Button: "./src/components/Button/index.ts",
           Checkbox: "./src/components/Checkbox/index.ts",
