@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.219](https://github.com/mittwald/flow/compare/0.1.0-alpha.218...0.1.0-alpha.219) (2024-09-09)
+
+### Bug Fixes
+
+- **Popover:** fix popover trigger
+  ([#681](https://github.com/mittwald/flow/issues/681))
+  ([da72536](https://github.com/mittwald/flow/commit/da72536e861c38e534602dfc4c21a5d1d4e99bc7))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.218](https://github.com/mittwald/flow/compare/0.1.0-alpha.217...0.1.0-alpha.218) (2024-09-09)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
