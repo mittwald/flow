@@ -54,7 +54,7 @@ export const LoadingListItem: Story = {
   },
 };
 
-export const LoadingTableRow: Story = {
+export const LoadingTableCell: Story = {
   render: () => {
     const List = typedList<{ name: string }>();
 
