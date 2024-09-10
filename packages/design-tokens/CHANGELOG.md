@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.220](https://github.com/mittwald/flow/compare/0.1.0-alpha.219...0.1.0-alpha.220) (2024-09-10)
+
+### Features
+
+- add disabled dark and light outline tokens
+  ([266981f](https://github.com/mittwald/flow/commit/266981faef0726c803c9c22683161415b5ec5eb9))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.219](https://github.com/mittwald/flow/compare/0.1.0-alpha.218...0.1.0-alpha.219) (2024-09-09)
 
 **Note:** Version bump only for package @mittwald/flow-design-tokens
