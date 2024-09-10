@@ -513,6 +513,18 @@ disabled-outline-content-color:
   value: "{neutral.color.600}"
 disabled-outline-border-color:
   value: "{neutral.color.400}"
+disabled-dark-outline-background-color:
+  value: "{color.transparent}"
+disabled-dark-outline-border-color:
+  value: "{dark.color.300}"
+disabled-dark-outline-content-color:
+  value: "{dark.color.300}"
+disabled-light-outline-background-color:
+  value: "{color.transparent}"
+disabled-light-outline-border-color:
+  value: "{light.color.300}"
+disabled-light-outline-content-color:
+  value: "{light.color.300}"
 
 # Disabled Soft
 disabled-soft-background-color:
