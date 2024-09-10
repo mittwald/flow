@@ -1,10 +1,11 @@
 import type { FC, PropsWithChildren } from "react";
-import React from "react";
+import React, { Suspense } from "react";
 import styles from "./Item.module.scss";
 import clsx from "clsx";
+import type { Key } from "react-aria-components";
 import * as Aria from "react-aria-components";
 import { useList } from "@/components/List/hooks/useList";
-import type { Key } from "react-aria-components";
+import { SkeletonView } from "@/components/List/components/Items/components/Item/components/SkeletonView/SkeletonView";
 
 interface Props extends PropsWithChildren {
   id: Key;
@@ -40,7 +41,9 @@ export const Item = (props: Props) => {
       textValue={textValue}
       href={href}
     >
-      {children ?? itemView.render(data)}
+      <Suspense fallback={<SkeletonView />}>
+        {children ?? itemView.render(data)}
+      </Suspense>
     </Aria.GridListItem>
   );
 };
