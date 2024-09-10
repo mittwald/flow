@@ -20,15 +20,18 @@
   }
 
   .segment {
-    @include formControl.formControl();
-    display: grid;
     flex: 1;
+    display: grid;
     column-gap: var(--segment--text-to-icon-spacing);
-    border-radius: 0;
-
     grid-template-areas: "label checkmark";
     grid-template-columns: 1fr auto;
     margin-right: -1px; /* Collapse borders */
+
+    @include formControl.formControl();
+
+    & {
+      border-radius: 0;
+    }
 
     &:first-of-type {
       border-start-start-radius: var(--form-control--corner-radius);

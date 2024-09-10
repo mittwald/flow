@@ -14,7 +14,10 @@
   column-gap: var(--tab--text-to-status-spacing);
 
   @include focus.focus;
-  outline-offset: calc(var(--size-px--xs) * -1);
+
+  & {
+    outline-offset: calc(var(--size-px--xs) * -1);
+  }
 
   &:hover {
     background-color: var(--tab--background-color--hover);
@@ -38,17 +41,16 @@
 
 // selected tab
 .tabTitle[data-selected],
+  /**
+    The following selectors setting the selected style at the first (not disabled) tab,
+    if the selected state is undetermined at first render (no tab has [data-selected]).
+    This prevents the initial CSS transition, which looks like flickering.
+  */
 
-/**
-  The following selectors setting the selected style at the first (not disabled) tab,
-  if the selected state is undetermined at first render (no tab has [data-selected]).
-  This prevents the initial CSS transition, which looks like flickering.
-*/
-
-// first tab disabled
+  // first tab disabled
 :global(.flow--tabs--tab-list):not(:has(.tabTitle[data-selected])):has(.tabTitle[aria-disabled]) .tabTitle[aria-disabled]:first-of-type + .tabTitle,
 
-// other/no tab disabled
+  // other/no tab disabled
 :global(.flow--tabs--tab-list):not(:has(.tabTitle[data-selected])) .tabTitle:first-of-type:not([aria-disabled]) {
   background-color: var(--tab--background-color--selected);
   color: var(--tab--color--selected);

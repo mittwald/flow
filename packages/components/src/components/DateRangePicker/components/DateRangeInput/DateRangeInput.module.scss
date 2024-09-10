@@ -1,9 +1,10 @@
 @use "@/styles/mixins/formControl.scss";
 
 .dateRangeInput {
-  @include formControl.formControl();
   display: flex;
   justify-content: space-between;
+
+  @include formControl.formControl();
 
   > div {
     display: flex;

@@ -1,8 +1,9 @@
 @use "@/styles/mixins/formControl.scss";
 
 .dateInput {
-  @include formControl.formControl();
   display: flex;
+  
+  @include formControl.formControl();
 
   :global(.react-aria-DateInput) {
     display: flex;
