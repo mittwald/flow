@@ -6,8 +6,6 @@ import Table, {
   TableRow,
 } from "@mittwald/flow-react-components/Table";
 import { Heading } from "@mittwald/flow-react-components/Heading";
-import { Text } from "@mittwald/flow-react-components/Text";
-import { Label } from "@mittwald/flow-react-components/Label";
 
 <Table>
   <TableHeader>
