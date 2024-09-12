@@ -9,10 +9,9 @@ import locales from "../../../../locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 import { IconSettings } from "@/components/Icon/components/icons";
 import { useList } from "@/components/List";
-import { observer } from "mobx-react-lite";
 import type { ListViewMode } from "@/components/List/model/types";
 
-export const SettingsMenu: FC = observer(() => {
+export const SettingsMenu: FC = () => {
   const stringFormatter = useLocalizedStringFormatter(locales);
   const list = useList();
   const selectedViewMode = list.viewMode;
@@ -56,4 +55,4 @@ export const SettingsMenu: FC = observer(() => {
       </ContextMenu>
     </ContextMenuTrigger>
   );
-});
+};
