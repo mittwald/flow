@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.224](https://github.com/mittwald/flow/compare/0.1.0-alpha.223...0.1.0-alpha.224) (2024-09-12)
+
+### Features
+
+- **OverlayTrigger:** support controller via props
+  ([#697](https://github.com/mittwald/flow/issues/697))
+  ([3f0a589](https://github.com/mittwald/flow/commit/3f0a5895610e726422fa5788ce55ae42671d9169))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.223](https://github.com/mittwald/flow/compare/0.1.0-alpha.222...0.1.0-alpha.223) (2024-09-12)
 
 ### Bug Fixes
