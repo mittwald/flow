@@ -17,6 +17,9 @@ import { Checkbox } from "@/components/Checkbox";
 import Select, { Option } from "@/components/Select";
 import { Slider } from "@/components/Slider";
 import { sleep } from "@/lib/promises/sleep";
+import DatePicker from "@/components/DatePicker";
+import { DateRangePicker } from "@/components/DateRangePicker";
+import { getLocalTimeZone, today } from "@internationalized/date";
 
 const submitAction = action("submit");
 
@@ -32,6 +35,8 @@ const meta: Meta<typeof Field> = {
       testing: boolean;
       interests: string[];
       storage: number;
+      date: string;
+      dateRange: string;
     }
 
     const handleOnSubmit = async (values: Values) => {
@@ -143,6 +148,18 @@ const meta: Meta<typeof Field> = {
             >
               <Label>Storage</Label>
             </Slider>
+          </Field>
+
+          <Field name="date" rules={{ required: true }}>
+            <DatePicker isRequired minValue={today(getLocalTimeZone())}>
+              <Label>Future Date</Label>
+            </DatePicker>
+          </Field>
+
+          <Field name="dateRange">
+            <DateRangePicker>
+              <Label>Date</Label>
+            </DateRangePicker>
           </Field>
 
           <ActionGroup>
