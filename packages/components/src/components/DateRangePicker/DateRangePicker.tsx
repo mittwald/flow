@@ -30,6 +30,9 @@ export const DateRangePicker = flowComponent("DateRangePicker", (props) => {
     FieldDescription: {
       className: styles.fieldDescription,
     },
+    FieldError: {
+      className: styles.customFieldError,
+    },
   };
 
   const popoverController = useOverlayController("Popover");
