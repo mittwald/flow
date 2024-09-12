@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.222](https://github.com/mittwald/flow/compare/0.1.0-alpha.221...0.1.0-alpha.222) (2024-09-12)
+
+### Bug Fixes
+
+- **Table:** add id to table row to fix selection key
+  ([2dfcadd](https://github.com/mittwald/flow/commit/2dfcadd624c4526d3ab08dcc77a997b7fd3129c2))
+
+### Features
+
+- **Field:** add DatePicker
+  ([beaac6f](https://github.com/mittwald/flow/commit/beaac6fbe4fa84d50a8261d4098dbe279452f961))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.221](https://github.com/mittwald/flow/compare/0.1.0-alpha.220...0.1.0-alpha.221) (2024-09-11)
 
 **Note:** Version bump only for package @mittwald/flow-project
