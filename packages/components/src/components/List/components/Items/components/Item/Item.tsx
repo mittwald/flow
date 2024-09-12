@@ -4,28 +4,39 @@ import styles from "./Item.module.scss";
 import clsx from "clsx";
 import * as Aria from "react-aria-components";
 import { useList } from "@/components/List/hooks/useList";
+import type { Key } from "react-aria-components";
 
 interface Props extends PropsWithChildren {
+  id: Key;
   data: never;
 }
 
 export const Item = (props: Props) => {
-  const { data, children } = props;
+  const { id, data, children } = props;
   const list = useList();
   const itemView = list.itemView;
-  const onAction = itemView.onAction;
+
+  if (!itemView) {
+    return null;
+  }
+
+  const onAction = itemView.list.onAction;
 
   const textValue = itemView.textValue ? itemView.textValue(data) : undefined;
-  const itemAction = onAction ? () => onAction(data) : undefined;
   const href = itemView.href ? itemView.href(data) : undefined;
-  const hasAction = list.hasAction || !!itemAction || !!href;
-
-  const rootClassName = clsx(styles.item, hasAction && styles.hasAction);
+  const hasAction = !!onAction || !!href;
 
   return (
     <Aria.GridListItem
-      className={rootClassName}
-      onAction={itemAction}
+      id={id}
+      className={(props) =>
+        clsx(
+          styles.item,
+          hasAction && styles.hasAction,
+          props.isSelected && styles.isSelected,
+        )
+      }
+      onAction={() => onAction && onAction(data)}
       textValue={textValue}
       href={href}
     >

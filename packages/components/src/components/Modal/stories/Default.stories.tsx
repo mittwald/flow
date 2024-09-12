@@ -13,6 +13,7 @@ import { ActionGroup } from "@/components/ActionGroup";
 import { asyncLongFunction } from "@/components/Button/stories/lib";
 import { Field, Form } from "@/integrations/react-hook-form";
 import { useForm } from "react-hook-form";
+import { action } from "@storybook/addon-actions";
 
 const meta: Meta<typeof Modal> = {
   title: "Overlays/Modal",
@@ -33,7 +34,7 @@ const meta: Meta<typeof Modal> = {
     return (
       <Modal
         {...props}
-        controller={useOverlayController("Modal", { defaultOpen: true })}
+        controller={useOverlayController("Modal", { isDefaultOpen: true })}
       >
         <Heading>New Customer</Heading>
         <Content>
@@ -66,7 +67,10 @@ export const Default: Story = {};
 
 export const WithController: Story = {
   render: (props) => {
-    const controller = useOverlayController("Modal");
+    const controller = useOverlayController("Modal", {
+      onOpen: () => action("onOpen")(),
+      onClose: () => action("onClose")(),
+    });
 
     return (
       <>

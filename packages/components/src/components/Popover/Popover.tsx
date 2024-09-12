@@ -30,7 +30,7 @@ export const Popover = flowComponent("Popover", (props) => {
 
   const controllerFromContext = useOverlayController("Popover", {
     reuseControllerFromContext: true,
-    defaultOpen,
+    isDefaultOpen: defaultOpen,
   });
 
   const controller = controllerFromProps ?? controllerFromContext;

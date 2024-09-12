@@ -69,6 +69,7 @@ export class ReactTable<T> {
       state: {
         sorting: this.sortingState,
       },
+      getRowId: this.list.getItemId,
       initialState: {
         pagination: {
           pageSize: this.list.batches.batchSize,

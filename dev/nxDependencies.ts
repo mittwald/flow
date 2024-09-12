@@ -1,4 +1,4 @@
-import { readCachedProjectGraph } from "nx/src/project-graph/project-graph";
+import { readCachedProjectGraph } from "nx/src/project-graph/project-graph.js";
 import * as process from "process";
 
 const projectName = process.argv[2];
