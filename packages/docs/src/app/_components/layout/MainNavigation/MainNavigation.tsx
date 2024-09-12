@@ -1,7 +1,6 @@
 "use client";
 import type { FC } from "react";
-import { useState } from "react";
-import React, { useId, useMemo } from "react";
+import React, { useId, useMemo, useState } from "react";
 import Navigation, {
   NavigationGroup,
 } from "@mittwald/flow-react-components/Navigation";
@@ -117,7 +116,7 @@ const MainNavigation: FC<Props> = (props) => {
 
   return (
     <Section>
-      <Heading id={headingId} levelVisual={2}>
+      <Heading id={headingId}>
         <GroupText>{mainPathSegment}</GroupText>
       </Heading>
 
