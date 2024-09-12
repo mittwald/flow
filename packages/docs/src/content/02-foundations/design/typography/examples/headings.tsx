@@ -57,53 +57,5 @@ import { Label } from "@mittwald/flow-react-components/Label";
       <TableCell>16 px</TableCell>
       <TableCell>24 lh</TableCell>
     </TableRow>
-    <TableRow>
-      <TableCell>
-        <Text>Text (Body)</Text>
-      </TableCell>
-      <TableCell>1 rem</TableCell>
-      <TableCell>16 px</TableCell>
-      <TableCell>24 lh</TableCell>
-    </TableRow>
-    <TableRow>
-      <TableCell>
-        <Text>
-          <strong>Text (Body)</strong>
-        </Text>
-      </TableCell>
-      <TableCell>1 rem</TableCell>
-      <TableCell>16 px</TableCell>
-      <TableCell>24 lh</TableCell>
-    </TableRow>
-    <TableRow>
-      <TableCell>
-        <Text>
-          <small>Text (Small)</small>
-        </Text>
-      </TableCell>
-      <TableCell>0,875 rem</TableCell>
-      <TableCell>14 px</TableCell>
-      <TableCell>21 lh / 24 lh</TableCell>
-    </TableRow>
-    <TableRow>
-      <TableCell>
-        <Text>
-          <small>
-            <strong>Text (Small)</strong>
-          </small>
-        </Text>
-      </TableCell>
-      <TableCell>0,875 rem</TableCell>
-      <TableCell>14 px</TableCell>
-      <TableCell>21 lh / 24 lh</TableCell>
-    </TableRow>
-    <TableRow>
-      <TableCell>
-        <Label>Label</Label>
-      </TableCell>
-      <TableCell>0,875 rem</TableCell>
-      <TableCell>14 px</TableCell>
-      <TableCell>21 lh / 24 lh</TableCell>
-    </TableRow>
   </TableBody>
 </Table>;
