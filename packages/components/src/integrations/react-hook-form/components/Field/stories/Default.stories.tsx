@@ -150,15 +150,15 @@ const meta: Meta<typeof Field> = {
             </Slider>
           </Field>
 
-          <Field name="date" rules={{ required: true }}>
-            <DatePicker isRequired minValue={today(getLocalTimeZone())}>
+          <Field name="date" rules={{ required: "Please enter a date" }}>
+            <DatePicker minValue={today(getLocalTimeZone())}>
               <Label>Future Date</Label>
             </DatePicker>
           </Field>
 
           <Field name="dateRange">
             <DateRangePicker>
-              <Label>Date</Label>
+              <Label>Date Range</Label>
             </DateRangePicker>
           </Field>
 
