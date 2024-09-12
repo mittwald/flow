@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.223](https://github.com/mittwald/flow/compare/0.1.0-alpha.222...0.1.0-alpha.223) (2024-09-12)
+
+### Bug Fixes
+
+- **Datepicker:** add field error to props context
+  ([260826c](https://github.com/mittwald/flow/commit/260826cd083f187505b9001ca493ef0c7914d8df))
+- **Datepicker:** wrap DatePicker with flowComponent
+  ([60bd2e0](https://github.com/mittwald/flow/commit/60bd2e0ccb4948d83b6420c59e731fec22b876cc))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.222](https://github.com/mittwald/flow/compare/0.1.0-alpha.221...0.1.0-alpha.222) (2024-09-12)
 
 ### Bug Fixes
