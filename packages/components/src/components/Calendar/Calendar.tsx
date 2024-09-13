@@ -8,7 +8,7 @@ export const Calendar: FC = () => {
   return (
     <Aria.Calendar className={styles.calendar}>
       <CalendarHeader />
-      <Aria.CalendarGrid>
+      <Aria.CalendarGrid weekdayStyle="short">
         {(date) => <Aria.CalendarCell date={date} />}
       </Aria.CalendarGrid>
     </Aria.Calendar>
