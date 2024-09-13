@@ -6,7 +6,8 @@
   "homepage": "https://github.com/mittwald/flow/tree/main/packages/design-tokens",
   "repository": "https://github.com/mittwald/flow",
   "exports": {
-    "./css": "./dist/variables.css"
+    "./css": "./dist/variables.css",
+    "./variables.json": "./dist/variables.json"
   },
   "files": [
     "dist"
