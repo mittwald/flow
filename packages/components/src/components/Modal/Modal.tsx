@@ -22,6 +22,7 @@ export interface ModalProps
   /** @default "s" */
   size?: "s" | "m";
   offCanvas?: boolean;
+  offCanvasOrientation?: "left" | "right";
   controller?: OverlayController;
   slot?: string;
   isDismissable?: boolean;
@@ -35,12 +36,14 @@ export const Modal = flowComponent("Modal", (props) => {
     children,
     refProp: ignoredRef,
     className,
+    offCanvasOrientation = "right",
     ...rest
   } = props;
 
   const rootClassName = clsx(
     offCanvas ? styles.offCanvas : styles.modal,
     styles[`size-${size}`],
+    styles[offCanvasOrientation],
     className,
   );
 
