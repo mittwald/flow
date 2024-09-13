@@ -1,7 +1,6 @@
 import Heading from "@mittwald/flow-react-components/Heading";
 import Text from "@mittwald/flow-react-components/Text";
 import Section from "@mittwald/flow-react-components/Section";
-import Link from "@mittwald/flow-react-components/Link";
 
 <Section>
   <Heading>Newsletter</Heading>
@@ -11,5 +10,4 @@ import Link from "@mittwald/flow-react-components/Link";
     Postfach. Abonniere unseren Newsletter und bleib auf dem
     Laufenden.
   </Text>
-  <Link href="#">Newsletter abonnieren</Link>
 </Section>;

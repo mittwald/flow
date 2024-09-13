@@ -1,4 +1,5 @@
 import Header from "@mittwald/flow-react-components/Header";
+import { Text } from "@mittwald/flow-react-components/Text";
 import Section from "@mittwald/flow-react-components/Section";
 import StatusBadge from "@mittwald/flow-react-components/StatusBadge";
 import Heading from "@mittwald/flow-react-components/Heading";
@@ -7,11 +8,14 @@ import Content from "@mittwald/flow-react-components/Content";
 import LabeledValue from "@mittwald/flow-react-components/LabeledValue";
 import Label from "@mittwald/flow-react-components/Label";
 import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
+import { Link } from "@mittwald/flow-react-components/Link";
+import { CopyButton } from "@mittwald/flow-react-components/CopyButton";
+import { IconExternalLink } from "@mittwald/flow-react-components/Icons";
 
 <Section>
   <Header>
     <Heading>
-      Mein Projekt
+      Mein sehr langes Projekt
       <StatusBadge status="danger">Deaktiviert</StatusBadge>
     </Heading>
 
@@ -24,16 +28,21 @@ import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
   <Content>
     <ColumnLayout>
       <LabeledValue>
+        <Label>Projektname</Label>
+        <Content>Dolce Vita</Content>
+      </LabeledValue>
+      <LabeledValue>
         <Label>Short-ID</Label>
-        <Content>p-wut3uw</Content>
+        <Content>p-lol3qe</Content>
+        <CopyButton text="p-lol3qe" />
       </LabeledValue>
       <LabeledValue>
         <Label>Projektdomain</Label>
-        <Content>p-lol3qe.project.space</Content>
-      </LabeledValue>
-      <LabeledValue>
-        <Label>Erstellungsdatum</Label>
-        <Content>06.12.2023 um 11:40 Uhr</Content>
+        <Link>
+          <Text>p-lol3qe.project.space</Text>
+          <IconExternalLink />
+        </Link>
+        <CopyButton text="p-lol3qe.project.space" />
       </LabeledValue>
     </ColumnLayout>
   </Content>
