@@ -1,0 +1,123 @@
+@use "@/styles/mixins/focus";
+
+.calendar {
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    h2 {
+      font-size: var(--font-size--default);
+    }
+  }
+
+  :global(.react-aria-CalendarHeaderCell) {
+    font-size: var(--font-size--s);
+  }
+
+  :global(.react-aria-CalendarCell) {
+    @include focus.focus;
+    width: var(--calendar--cell-size);
+    height: var(--calendar--cell-size);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: default;
+    border-radius: var(--calendar--cell-corner-radius);
+
+    &[data-outside-month] {
+      display: none;
+    }
+
+    &:hover {
+      background: var(--calendar--day-background-color--hover);
+    }
+
+    &[data-pressed] {
+      background: var(--calendar--day-background-color--pressed);
+    }
+
+    &[data-selected] {
+      background: var(--calendar--day-background-color--selected);
+      color: var(--calendar--day-content-color--selected);
+    }
+
+    &[data-disabled] {
+      background: var(--calendar--day-background-color--disabled);
+      color: var(--calendar--day-content-color--disabled);
+    }
+  }
+
+  &.range {
+    :global(.react-aria-CalendarCell) {
+      position: relative;
+      isolation: isolate;
+
+      &[data-selected] {
+        &:before {
+          content: "";
+          background: var(--calendar--day-range-background-color);
+          width: calc(100% + 4px);
+          height: 100%;
+          position: absolute;
+          z-index: -1;
+        }
+
+        &:after {
+          content: "";
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          z-index: -1;
+          border-radius: var(--calendar--cell-corner-radius);
+        }
+
+        &:hover {
+          &:after {
+            background: var(--calendar--day-background-color--hover);
+          }
+        }
+
+        &[data-pressed] {
+          &:after {
+            background: var(--calendar--day-background-color--pressed);
+          }
+        }
+
+        &[data-selection-start],
+        &[data-selection-end] {
+          &:after {
+            background: var(--calendar--day-background-color--selected);
+          }
+        }
+
+        &[data-selection-start] {
+          &:before {
+            border-top-left-radius: var(--calendar--cell-corner-radius);
+            border-bottom-left-radius: var(--calendar--cell-corner-radius);
+            left: 0;
+          }
+        }
+
+        &[data-selection-end] {
+          &:before {
+            border-top-right-radius: var(--calendar--cell-corner-radius);
+            border-bottom-right-radius: var(--calendar--cell-corner-radius);
+            right: 0;
+          }
+        }
+
+        &:not([data-selection-start]):not([data-selection-end]) {
+          color: var(--content--color--default);
+          background: none;
+        }
+
+        &[data-selection-start][data-selection-end] {
+          &:before {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}

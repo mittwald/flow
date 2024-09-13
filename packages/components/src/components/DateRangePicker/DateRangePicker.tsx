@@ -6,7 +6,7 @@ import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import * as Aria from "react-aria-components";
 import { Popover } from "@/components/Popover";
-import { RangeCalendar } from "./components/RangeCalendar";
+import { RangeCalendar } from "../Calendar/RangeCalendar";
 import { DateRangeInput } from "./components/DateRangeInput";
 import { FieldError } from "@/components/FieldError";
 import { useOverlayController } from "@/lib/controller";

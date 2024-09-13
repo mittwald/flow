@@ -4,13 +4,13 @@ import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import * as Aria from "react-aria-components";
-import { Calendar } from "./components/Calendar";
 import { DateInput } from "./components/DateInput";
 import { FieldError } from "@/components/FieldError";
 import styles from "../FormField/FormField.module.scss";
 import { Popover } from "@/components/Popover";
 import { useOverlayController } from "@/lib/controller";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import { Calendar } from "@/components/Calendar";
 
 export interface DatePickerProps<T extends Aria.DateValue>
   extends PropsWithChildren<Omit<Aria.DatePickerProps<T>, "children">> {
