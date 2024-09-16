@@ -5,14 +5,9 @@
 .center {
   max-width: 1500px;
   margin: 0 auto;
-  display: grid;
   min-height: 100vh;
-  grid-template-areas:
-    "nav      main"
-    "footer    .  ";
-  grid-template-columns: 270px minmax(0, 1fr);
-  grid-template-rows: 1fr auto;
-  grid-gap: var(--size-px--l);
+  display: flex;
+  column-gap: var(--size-px--l);
   padding-inline: var(--size-px--l);
 
   &:has(.mainNavigation:empty) {
@@ -55,12 +50,8 @@
 }
 
 .mainNavigation {
-  grid-area: nav;
   padding-inline: var(--size-px--l);
-
-  &:empty {
-    display: none;
-  }
+  width: 270px;
 }
 
 .mobileNavigation {
@@ -78,10 +69,10 @@
 }
 
 .main {
-  grid-area: main;
   display: flex;
   flex-direction: column;
   row-gap: var(--size-px--l);
+  flex-grow: 1;
 }
 
 .tabContent {

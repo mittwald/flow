@@ -9,7 +9,6 @@ import clsx from "clsx";
 import styles from "./layout.module.scss";
 import Heading from "@mittwald/flow-react-components/Heading";
 import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
-import LayoutCard from "@mittwald/flow-react-components/LayoutCard";
 import { LinkProvider } from "@mittwald/flow-react-components/nextjs";
 import { IconMittwald } from "@mittwald/flow-react-components/Icons";
 import MainNavigation from "@/app/_components/layout/MainNavigation";
@@ -48,9 +47,7 @@ const RootLayout: FC<PropsWithChildren> = async (props) => {
               />
             </header>
             <div className={styles.center}>
-              <LayoutCard className={styles.mainNavigation}>
-                <MainNavigation docs={docs.map((mdx) => mdx.serialize())} />
-              </LayoutCard>
+              <MainNavigation docs={docs.map((mdx) => mdx.serialize())} />
               <main className={styles.main}>{props.children}</main>
             </div>
           </NotificationProvider>
