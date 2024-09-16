@@ -4211,7 +4211,8 @@ const RAW_RUNTIME_STATE =
           ["vite-plugin-dts", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:4.1.0"],\
           ["vite-plugin-externalize-deps", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:0.8.0"],\
           ["vitest", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:2.0.5"],\
-          ["yaml", "npm:2.5.0"]\
+          ["yaml", "npm:2.5.0"],\
+          ["zod", "npm:3.23.8"]\
         ],\
         "packagePeers": [\
           "@types/mittwald__react-use-promise",\
@@ -4317,7 +4318,8 @@ const RAW_RUNTIME_STATE =
           ["vite-plugin-dts", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:4.1.0"],\
           ["vite-plugin-externalize-deps", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:0.8.0"],\
           ["vitest", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:2.0.5"],\
-          ["yaml", "npm:2.5.0"]\
+          ["yaml", "npm:2.5.0"],\
+          ["zod", "npm:3.23.8"]\
         ],\
         "packagePeers": [\
           "@types/mittwald__react-use-promise",\
@@ -4414,7 +4416,8 @@ const RAW_RUNTIME_STATE =
           ["vite-plugin-dts", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:4.1.0"],\
           ["vite-plugin-externalize-deps", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:0.8.0"],\
           ["vitest", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:2.0.5"],\
-          ["yaml", "npm:2.5.0"]\
+          ["yaml", "npm:2.5.0"],\
+          ["zod", "npm:3.23.8"]\
         ],\
         "linkType": "SOFT"\
       }]\
@@ -24910,6 +24913,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/yocto-queue-npm-0.1.0-c6c9a7db29-dceb44c285.zip/node_modules/yocto-queue/",\
         "packageDependencies": [\
           ["yocto-queue", "npm:0.1.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["zod", [\
+      ["npm:3.23.8", {\
+        "packageLocation": "./.yarn/cache/zod-npm-3.23.8-11c49c85b5-8f14c87d6b.zip/node_modules/zod/",\
+        "packageDependencies": [\
+          ["zod", "npm:3.23.8"]\
         ],\
         "linkType": "HARD"\
       }]\
