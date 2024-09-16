@@ -1,0 +1,27 @@
+code-block:
+  font-size:
+    value: "{font-size.s}"
+  padding:
+    value: "{size-px.m}"
+  corner-radius:
+    value: "{corner-radius.default}"
+  code-to-button-spacing:
+    value: "{size-px.m}"
+
+  # Neutral Color
+  neutral-background-color:
+    value: "{neutral-soft-background-color.default}"
+  neutral-content-color:
+    value: "{neutral-soft-content-color.default}"
+
+  # Light Color
+  light-background-color:
+    value: "{light-soft-background-color.default}"
+  light-content-color:
+    value: "{light-soft-content-color.default}"
+
+  # Dark Color
+  dark-background-color:
+    value: "{dark-soft-background-color.default}"
+  dark-content-color:
+    value: "{dark-soft-content-color.default}"
