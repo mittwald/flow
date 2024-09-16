@@ -11,7 +11,6 @@ import { a11yDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 export interface CodeBlockProps
   extends SyntaxHighlighterProps,
     PropsWithClassName {
-  children: string | string[];
   copyable?: boolean;
   color?: "neutral" | "light" | "dark";
 }
