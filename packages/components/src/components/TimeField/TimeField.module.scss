@@ -7,11 +7,11 @@
   @include formControl.formControl();
 
   :global(.react-aria-DateSegment) {
-    border-radius: var(--date-picker--date-segment-corner-radius);
+    border-radius: var(--time-field--date-segment-corner-radius);
     letter-spacing: var(--size-rem--xxxs);
 
     &:focus {
-      background: var(--date-picker--date-segment-background-color--focused);
+      background: var(--time-field--date-segment-background-color--focused);
       outline: none;
     }
   }
