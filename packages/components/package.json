@@ -218,6 +218,10 @@
       "types": "./dist/types/components/Separator/index.d.ts",
       "import": "./dist/Separator.js"
     },
+    "./SettingsProvider": {
+      "types": "./dist/types/components/SettingsProvider/index.d.ts",
+      "import": "./dist/SettingsProvider.js"
+    },
     "./Skeleton": {
       "types": "./dist/types/components/Skeleton/index.d.ts",
       "import": "./dist/Skeleton.js"
@@ -323,7 +327,8 @@
     "react-children-utilities": "^2.10.0",
     "react-stately": "^3.32.2",
     "remeda": "^2.11.0",
-    "use-callback-ref": "^1.3.2"
+    "use-callback-ref": "^1.3.2",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
