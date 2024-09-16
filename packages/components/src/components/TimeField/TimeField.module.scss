@@ -1,0 +1,18 @@
+@use "@/styles/mixins/formControl.scss";
+
+.dateInput {
+  display: flex;
+  column-gap: var(--size-rem--xxs);
+
+  @include formControl.formControl();
+
+  :global(.react-aria-DateSegment) {
+    border-radius: var(--date-picker--date-segment-corner-radius);
+    letter-spacing: var(--size-rem--xxxs);
+
+    &:focus {
+      background: var(--date-picker--date-segment-background-color--focused);
+      outline: none;
+    }
+  }
+}
