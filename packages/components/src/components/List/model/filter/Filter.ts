@@ -1,4 +1,9 @@
-import type { Column, ColumnDef, ColumnFilter } from "@tanstack/react-table";
+import type {
+  Column,
+  ColumnDef,
+  ColumnFilter,
+  InitialTableState,
+} from "@tanstack/react-table";
 import type List from "@/components/List/model/List";
 import { getProperty } from "dot-prop";
 import type {
@@ -26,6 +31,7 @@ const stringCastRenderMethod: PropertyValueRenderMethod<any> = (value) =>
 
 export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
   private _values?: FilterValue[] | undefined;
+  private _valuesFromTableState?: FilterValue[];
   public readonly list: List<T>;
   public readonly property: PropertyName<T>;
   public readonly mode: FilterMode;
@@ -33,6 +39,7 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
   public readonly renderItem: PropertyValueRenderMethod<TMatchValue>;
   public readonly name?: string;
   private onFilterUpdateCallbacks = new Set<() => unknown>();
+  private readonly defaultSelectedValues: FilterValue[];
 
   public constructor(list: List<T>, shape: FilterShape<T, TProp, TMatchValue>) {
     this.list = list;
@@ -42,6 +49,21 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
     this.matcher = shape.matcher ?? equalsPropertyMatcher;
     this.renderItem = shape.renderItem ?? stringCastRenderMethod;
     this.name = shape.name;
+    this.defaultSelectedValues = shape.defaultSelected
+      ? this.values.filter((v) =>
+          shape.defaultSelected?.some((d) => d === v.value),
+        )
+      : [];
+  }
+
+  public updateInitialState(initialState: InitialTableState) {
+    initialState.columnFilters = [
+      ...(initialState.columnFilters ?? []),
+      ...this.defaultSelectedValues.map((d) => ({
+        id: d.filter.property,
+        value: d,
+      })),
+    ];
   }
 
   public updateTableColumnDef(def: ColumnDef<T>): void {
@@ -101,16 +123,40 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
     return this.getTableColumnFilter()?.value ?? null;
   }
 
-  public get values(): FilterValue[] {
-    if (this._values === undefined) {
-      this._values = unique(
-        Array.from(this.getTableColumn().getFacetedUniqueValues().keys())
-          .flatMap((v) => v)
-          .filter((v) => v !== undefined && v !== null),
-      ).map((v) => new FilterValue(this, v));
+  private getValuesFromTableState() {
+    return unique(
+      Array.from(this.getTableColumn().getFacetedUniqueValues().keys())
+        .flatMap((v) => v)
+        .filter((v) => v !== undefined && v !== null),
+    ).map((v) => new FilterValue(this, v));
+  }
+
+  private checkIfValueIsUnknown(value: FilterValue) {
+    const isKnown = this.values.some((v) => v.id === value.id);
+    return !isKnown;
+  }
+
+  public deleteUnknownFilterValues() {
+    if (this.values === this.valuesFromTableState) {
+      return;
     }
 
-    return this._values;
+    for (const currentValues of this.getArrayValue()) {
+      if (this.checkIfValueIsUnknown(currentValues)) {
+        this.deactivateValue(currentValues);
+      }
+    }
+  }
+
+  public get values(): FilterValue[] {
+    return this._values ?? this.valuesFromTableState;
+  }
+
+  private get valuesFromTableState(): FilterValue[] {
+    if (!this._valuesFromTableState) {
+      this._valuesFromTableState = this.getValuesFromTableState();
+    }
+    return this._valuesFromTableState;
   }
 
   public getArrayValue(): FilterValue[] {
@@ -130,13 +176,13 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
     return this.getArrayValue().length > 0;
   }
 
-  public deactivateValue(newValue: FilterValue): void {
+  public deactivateValue(value: FilterValue): void {
     const currentValueAsArray = this.getArrayValue();
 
     let updatedValue: unknown;
 
     if (this.mode === "all" || this.mode === "some") {
-      updatedValue = currentValueAsArray.filter((v) => !v.equals(newValue));
+      updatedValue = currentValueAsArray.filter((v) => !v.equals(value));
     } else {
       updatedValue = null;
     }

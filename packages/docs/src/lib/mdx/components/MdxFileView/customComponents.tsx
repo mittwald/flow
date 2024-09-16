@@ -8,7 +8,7 @@ import CopyButton from "@mittwald/flow-react-components/CopyButton";
 import Link from "@mittwald/flow-react-components/Link";
 import Text from "@mittwald/flow-react-components/Text";
 import { LinkProvider } from "@mittwald/flow-react-components/nextjs";
-import DoAndDont from "@/lib/mdx/components/DoAndDont/DoAndDont";
+import ExamplesContainer from "@/lib/mdx/components/DoAndDont/ExamplesContainer";
 import { IconExternalLink } from "@mittwald/flow-react-components/Icons";
 import { ColumnLayout } from "@mittwald/flow-react-components/ColumnLayout";
 import { InlineCode } from "@mittwald/flow-react-components/InlineCode";
@@ -18,7 +18,7 @@ export const customComponents: MDXComponents = {
   Content: Content,
   Heading: Heading,
   InlineAlert: InlineAlert,
-  DoAndDont: DoAndDont,
+  DoAndDont: ExamplesContainer,
   ColumnLayout: ColumnLayout,
 
   pre: ({ children }) => (

@@ -19,4 +19,5 @@ export interface FilterShape<T, TProp extends PropertyName<T>, TMatcherValue> {
   matcher?: FilterMatcher<T, TProp, TMatcherValue>;
   values?: TMatcherValue[];
   name?: string;
+  defaultSelected?: NonNullable<ItemType<TMatcherValue>>[];
 }

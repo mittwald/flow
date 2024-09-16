@@ -24,11 +24,8 @@ export const TabList: FC<Props> = (props) => {
   const isCollapsed = overflowObserver.isOverflowing;
   const rootClassName = clsx(styles.tabList, isCollapsed && styles.collapsed);
 
-  const handleContextMenuSelectionChanged = (selection: Aria.Selection) => {
-    const [id] = selection;
-    if (id) {
-      onContextMenuSelectionChange(id);
-    }
+  const handleContextMenuSelectionChange = (key: Aria.Key) => {
+    onContextMenuSelectionChange(key);
   };
 
   const regularTabTitles = (
@@ -56,7 +53,7 @@ export const TabList: FC<Props> = (props) => {
         disabledKeys={disabledKeys}
         selectedKeys={selection ? [selection] : undefined}
         selectionMode="navigation"
-        onSelectionChange={handleContextMenuSelectionChanged}
+        onAction={(key) => handleContextMenuSelectionChange(key)}
       >
         <TunnelExit id="ContextMenuItems" />
       </ContextMenu>

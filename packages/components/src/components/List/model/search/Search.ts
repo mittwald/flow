@@ -4,17 +4,20 @@ import type {
   SearchShape,
   SearchValue,
 } from "@/components/List/model/search/types";
+import type { InitialTableState } from "@tanstack/react-table";
 
 export class Search<T> {
   public readonly list: List<T>;
   public readonly render?: SearchFieldRenderComponent;
   public readonly textFieldProps: SearchShape<T>["textFieldProps"];
   private onUpdateCallbacks = new Set<() => unknown>();
+  private readonly defaultValue?: string;
 
   public constructor(list: List<T>, searchShape: SearchShape<T>) {
     this.list = list;
     this.render = searchShape.render;
     this.textFieldProps = searchShape.textFieldProps;
+    this.defaultValue = searchShape.defaultValue;
   }
 
   public get value(): SearchValue {
@@ -25,13 +28,24 @@ export class Search<T> {
     return this.value !== undefined;
   }
 
+  private callOnUpdateCallbacks(): void {
+    this.onUpdateCallbacks.forEach((cb) => cb());
+  }
+
+  public updateInitialState(initialState: InitialTableState) {
+    initialState.globalFilter = this.defaultValue;
+  }
+
   public setValue(value: SearchValue): void {
     if (value === undefined || value.trim() === "") {
-      this.list.reactTable.table.resetGlobalFilter();
+      if (this.list.reactTable.table.getState().globalFilter) {
+        this.list.reactTable.table.setGlobalFilter(undefined);
+        this.callOnUpdateCallbacks();
+      }
     } else {
       this.list.reactTable.table.setGlobalFilter(value);
+      this.callOnUpdateCallbacks();
     }
-    this.onUpdateCallbacks.forEach((cb) => cb());
   }
 
   public clear(): void {

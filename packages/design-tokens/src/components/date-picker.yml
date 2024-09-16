@@ -1,0 +1,22 @@
+date-picker:
+  date-segment-background-color:
+    focused:
+      value: "{primary-plain-background-color.pressed}"
+  date-segment-corner-radius:
+    value: "{size-px.xs}"
+
+calendar:
+  padding:
+    value: "{size-px.m}"
+  cell-size:
+    value: "{size-px.xl}"
+  day-background-color:
+    disabled:
+      value: "{disabled-plain-background-color}"
+    hover:
+      value: "{primary-plain-background-color.hover}"
+    pressed:
+      value: "{primary-plain-background-color.pressed}"
+  day-color:
+    disabled:
+      value: "{disabled-plain-content-color}"

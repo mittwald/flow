@@ -6,12 +6,15 @@ import type { TunnelChildren } from "@/types";
 interface Props {
   id?: string;
   children?: TunnelChildren;
+  /** Static entry ID instead of generated ID by `useId` */
+  staticEntryId?: string;
 }
 
 export const TunnelEntry: FC<Props> = (props) => {
-  const { children, id } = props;
+  const { children, id, staticEntryId } = props;
   const tunnel = useContext(tunnelContext);
-  const entryId = useId();
+  const usedId = useId();
+  const entryId = staticEntryId ?? usedId;
 
   const mounted = useRef(false);
 

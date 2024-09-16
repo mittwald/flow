@@ -43,6 +43,9 @@ import type { ContextMenuSectionProps } from "@/components/ContextMenu/component
 import type { OverlayTriggerProps } from "@/components/OverlayTrigger";
 import type { ListProps } from "@/components/List";
 import type { SearchFieldProps } from "@/components/SearchField";
+import type { DatePickerProps } from "@/components/DatePicker";
+import type * as Aria from "react-aria-components";
+import type { DateRangePickerProps } from "@/components/DateRangePicker";
 
 export * from "./types";
 
@@ -61,6 +64,8 @@ export interface FlowComponentPropsTypes {
   ContextualHelp: ContextualHelpProps;
   CopyButton: CopyButtonProps;
   CounterBadge: CounterBadgeProps;
+  DatePicker: DatePickerProps<Aria.DateValue>;
+  DateRangePicker: DateRangePickerProps<Aria.DateValue>;
   FieldDescription: FieldDescriptionProps;
   FieldError: FieldErrorProps;
   Header: HeaderProps;
@@ -72,12 +77,14 @@ export interface FlowComponentPropsTypes {
   Label: LabelProps;
   LayoutCard: LayoutCardProps;
   Link: LinkProps;
-  List: ListProps;
+  List: ListProps<never>;
   MenuItem: MenuItemProps;
   Modal: ModalProps;
+  ModalTrigger: OverlayTriggerProps;
   NumberField: NumberFieldProps;
   Option: OptionProps;
   Popover: PopoverProps;
+  PopoverTrigger: OverlayTriggerProps;
   Radio: RadioProps;
   RadioButton: RadioButtonProps;
   RadioGroup: RadioGroupProps;
@@ -111,6 +118,8 @@ const propsContextSupportingComponentsMap: Record<
   ContextualHelp: true,
   CopyButton: true,
   CounterBadge: true,
+  DatePicker: true,
+  DateRangePicker: true,
   FieldDescription: true,
   FieldError: true,
   Header: true,
@@ -125,10 +134,12 @@ const propsContextSupportingComponentsMap: Record<
   List: true,
   MenuItem: true,
   Modal: true,
+  ModalTrigger: true,
   NumberField: true,
   Radio: true,
   Option: true,
   Popover: true,
+  PopoverTrigger: true,
   RadioButton: true,
   RadioGroup: true,
   SearchField: true,

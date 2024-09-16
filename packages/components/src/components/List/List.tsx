@@ -1,6 +1,5 @@
 import type { PropsWithChildren } from "react";
 import React from "react";
-import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { listContext } from "./listContext";
 import { DataLoader } from "@/components/List/components/DataLoader";
@@ -18,17 +17,32 @@ import { ListLoaderAsyncResource } from "@/components/List/setupComponents/ListL
 import type { IncrementalLoaderShape } from "@/components/List/model/loading/types";
 import Footer from "./components/Footer";
 import { ListSearch } from "@/components/List/setupComponents/ListSearch";
-import type { ItemListProps } from "@/components/List/components/Items/Items";
+import type { ListShape } from "@/components/List/model/types";
+import { TableColumn } from "@/components/List/setupComponents/TableColumn";
+import { TableRow } from "@/components/List/setupComponents/TableRow";
+import { TableCell } from "@/components/List/setupComponents/TableCell";
+import { Table } from "@/components/List/components/Table";
+import { Table as TableSetupComponent } from "@/components/List/setupComponents/Table";
+import { TableHeader } from "@/components/List/setupComponents/TableHeader";
+import { TableBody } from "@/components/List/setupComponents/TableBody";
 
-export interface ListProps
+export interface ListProps<T>
   extends PropsWithChildren,
-    ItemListProps,
-    FlowComponentProps {
+    Omit<
+      ListShape<T>,
+      | "search"
+      | "loader"
+      | "itemView"
+      | "table"
+      | "batchesController"
+      | "filters"
+      | "sorting"
+    > {
   batchSize?: number;
 }
 
 export const List = flowComponent("List", (props) => {
-  const { children, batchSize, ...itemListProps } = props;
+  const { children, batchSize, onChange, refProp: ref, ...restProps } = props;
 
   const listLoaderAsync = deepFindOfType(
     children,
@@ -61,7 +75,26 @@ export const List = flowComponent("List", (props) => {
   const searchProps = deepFindOfType(children, ListSearch)?.props;
   const itemViewProps = deepFindOfType(children, ListItem)?.props;
 
+  const tableProps = deepFindOfType(children, TableSetupComponent)?.props;
+  const tableColumnProps = deepFilterByType(children, TableColumn<never>).map(
+    (c) => ({
+      ...c.props,
+      name: c.props.children,
+    }),
+  );
+  const tableCellProps = deepFilterByType(children, TableCell<never>).map(
+    (c) => ({
+      ...c.props,
+      renderFn: c.props.children,
+    }),
+  );
+
+  const tableRowProps = deepFindOfType(children, TableRow)?.props;
+  const tableHeaderProps = deepFindOfType(children, TableHeader)?.props;
+  const tableBodyProps = deepFindOfType(children, TableBody)?.props;
+
   const listModel = ListModel.useNew<never>({
+    onChange,
     loader: loaderShape,
     filters: deepFilterByType(children, ListFilter<never, never, never>).map(
       (f) => ({
@@ -73,6 +106,7 @@ export const List = flowComponent("List", (props) => {
       ? {
           render: searchProps.children,
           textFieldProps: searchProps,
+          defaultValue: searchProps.defaultValue,
         }
       : undefined,
     sorting: deepFilterByType(children, ListSorting<never>).map((s) => s.props),
@@ -84,10 +118,28 @@ export const List = flowComponent("List", (props) => {
         }
       : undefined,
 
+    table:
+      tableColumnProps.length > 0
+        ? {
+            header: {
+              ...tableHeaderProps,
+              columns: tableColumnProps,
+            },
+            body: {
+              ...tableBodyProps,
+              row: {
+                ...tableRowProps,
+                cells: tableCellProps,
+              },
+            },
+            ...tableProps,
+          }
+        : undefined,
+
     batchesController: {
       batchSize,
     },
-    hasAction: !!props.onAction,
+    ...restProps,
   });
 
   return (
@@ -97,9 +149,10 @@ export const List = flowComponent("List", (props) => {
       }}
     >
       <DataLoader />
-      <div className={styles.list}>
+      <div className={styles.list} ref={ref}>
         <Header />
-        <Items {...itemListProps} />
+        {listModel.viewMode === "list" && <Items />}
+        {listModel.viewMode === "table" && <Table />}
         <Footer />
       </div>
     </listContext.Provider>

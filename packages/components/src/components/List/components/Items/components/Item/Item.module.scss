@@ -10,6 +10,10 @@
     outline-offset: calc(var(--size-px--xs) * -1);
   }
 
+  &:where(.isSelected) {
+    background-color: var(--list-item--background-color--pressed);
+  }
+
   &:not(:last-child) {
     border-bottom-color: var(--list-item--border-color);
     border-bottom-width: var(--list-item--border-width);
@@ -17,8 +21,10 @@
   }
 
   &:where(.hasAction) {
-    &:hover {
-      background-color: var(--list-item--background-color--hover);
+    &:not(.isSelected) {
+      &:hover {
+        background-color: var(--list-item--background-color--hover);
+      }
     }
 
     &[data-pressed] {

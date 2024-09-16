@@ -45,7 +45,7 @@ export function flowComponent<C extends FlowComponentName>(
   return forwardRef<never, FlowComponentPropsOfName<C>>((props, ref) => {
     const { tunnelId, wrapWith, ...propsWithContext } = useProps(
       componentName,
-      props,
+      props as FlowComponentPropsOfName<C>,
     ) as FlowComponentProps;
 
     const implementationTypeProps = propsWithContext as ComponentProps<
