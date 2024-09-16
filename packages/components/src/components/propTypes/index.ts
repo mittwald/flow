@@ -95,6 +95,7 @@ export interface FlowComponentPropsTypes {
   StatusBadge: StatusBadgeProps;
   Switch: SwitchProps;
   Tabs: TabsProps;
+  TabTitle: TabsProps;
   Text: TextProps;
   TextArea: TextAreaProps;
   TextField: TextFieldProps;
@@ -149,6 +150,7 @@ const propsContextSupportingComponentsMap: Record<
   StatusBadge: true,
   Switch: true,
   Tabs: true,
+  TabTitle: true,
   TestComponent: true,
   Text: true,
   TextArea: true,

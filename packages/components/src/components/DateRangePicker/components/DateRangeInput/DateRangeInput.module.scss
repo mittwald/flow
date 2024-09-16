@@ -40,5 +40,6 @@
   :global(.flow--button) {
     margin-block: calc((var(--form-control--padding-y) - 1px) * -1);
     margin-inline-end: calc(var(--form-control--padding-x) * -1);
+    padding: calc(var(--button--padding) - var(--form-control--border-width));
   }
 }
