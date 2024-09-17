@@ -11,10 +11,22 @@ export interface ColumnLayoutProps
   s?: number[];
   m?: number[];
   l?: number[];
+  gap: "s" | "m" | "l";
+  rowGap: "s" | "m" | "l";
+  columnGap: "s" | "m" | "l";
 }
 
 export const ColumnLayout: FC<ColumnLayoutProps> = (props) => {
-  const { children, className, s, m, l } = props;
+  const {
+    children,
+    className,
+    s,
+    m,
+    l,
+    gap,
+    rowGap = gap,
+    columnGap = gap,
+  } = props;
 
   const columnsS = s ? getColumns(s) : undefined;
   const columnsM = m ? getColumns(m) : s ? columnsS : undefined;
@@ -24,6 +36,8 @@ export const ColumnLayout: FC<ColumnLayoutProps> = (props) => {
     "--column-layout--columns-s": columnsS,
     "--column-layout--columns-m": columnsM,
     "--column-layout--columns-l": columnsL,
+    "--column-layout--row-gap": `var(--column-layout--gap--${rowGap || "m"})`,
+    "--column-layout--column-gap": `var(--column-layout--gap--${columnGap || "m"})`,
   } as CSSProperties;
 
   const rootClassName = clsx(styles.columnLayoutContainer, className);
