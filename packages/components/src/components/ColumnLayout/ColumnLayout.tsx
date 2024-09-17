@@ -11,9 +11,9 @@ export interface ColumnLayoutProps
   s?: number[];
   m?: number[];
   l?: number[];
-  gap: "s" | "m" | "l";
-  rowGap: "s" | "m" | "l";
-  columnGap: "s" | "m" | "l";
+  gap?: "s" | "m" | "l";
+  rowGap?: "s" | "m" | "l";
+  columnGap?: "s" | "m" | "l";
 }
 
 export const ColumnLayout: FC<ColumnLayoutProps> = (props) => {
