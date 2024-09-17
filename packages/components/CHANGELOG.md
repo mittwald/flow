@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.231](https://github.com/mittwald/flow/compare/0.1.0-alpha.230...0.1.0-alpha.231) (2024-09-17)
+
+### Bug Fixes
+
+- **Link:** set link width to prevent to large clickable areas
+  ([#731](https://github.com/mittwald/flow/issues/731))
+  ([7f27536](https://github.com/mittwald/flow/commit/7f27536a4e82b61691ecc51bb48b3f10d4929a08))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.230](https://github.com/mittwald/flow/compare/0.1.0-alpha.229...0.1.0-alpha.230) (2024-09-17)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
