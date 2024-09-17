@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.233](https://github.com/mittwald/flow/compare/0.1.0-alpha.232...0.1.0-alpha.233) (2024-09-17)
+
+### Bug Fixes
+
+- **SettingProvider:** refresh settings after update
+  ([d7d01e6](https://github.com/mittwald/flow/commit/d7d01e6663c5560fcd69c665f9fca311a21a7556))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.232](https://github.com/mittwald/flow/compare/0.1.0-alpha.231...0.1.0-alpha.232) (2024-09-17)
 
 ### Bug Fixes
