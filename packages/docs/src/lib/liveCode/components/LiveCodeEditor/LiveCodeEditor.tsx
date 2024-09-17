@@ -61,7 +61,7 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
     }
   };
 
-  const codeToDisplay = code.replace(/\r?\n$/, "");
+  const codeToDisplay = code.replace(/;\r?\n$/, "");
 
   return (
     <LiveProvider
