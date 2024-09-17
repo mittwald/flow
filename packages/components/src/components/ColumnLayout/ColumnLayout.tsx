@@ -5,15 +5,17 @@ import { getColumns } from "./lib/getColumns";
 import clsx from "clsx";
 import type { PropsWithClassName } from "@/lib/types/props";
 
+type GapSize = "s" | "m" | "l";
+
 export interface ColumnLayoutProps
   extends PropsWithChildren,
     PropsWithClassName {
   s?: number[];
   m?: number[];
   l?: number[];
-  gap?: "s" | "m" | "l";
-  rowGap?: "s" | "m" | "l";
-  columnGap?: "s" | "m" | "l";
+  gap?: GapSize;
+  rowGap?: GapSize;
+  columnGap?: GapSize;
 }
 
 export const ColumnLayout: FC<ColumnLayoutProps> = (props) => {
@@ -23,7 +25,7 @@ export const ColumnLayout: FC<ColumnLayoutProps> = (props) => {
     s,
     m,
     l,
-    gap,
+    gap = "m",
     rowGap = gap,
     columnGap = gap,
   } = props;
@@ -36,8 +38,8 @@ export const ColumnLayout: FC<ColumnLayoutProps> = (props) => {
     "--column-layout--columns-s": columnsS,
     "--column-layout--columns-m": columnsM,
     "--column-layout--columns-l": columnsL,
-    "--column-layout--row-gap": `var(--column-layout--gap--${rowGap || "m"})`,
-    "--column-layout--column-gap": `var(--column-layout--gap--${columnGap || "m"})`,
+    "--column-layout--row-gap": `var(--column-layout--gap--${rowGap})`,
+    "--column-layout--column-gap": `var(--column-layout--gap--${columnGap})`,
   } as CSSProperties;
 
   const rootClassName = clsx(styles.columnLayoutContainer, className);
