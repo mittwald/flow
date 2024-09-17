@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.228](https://github.com/mittwald/flow/compare/0.1.0-alpha.227...0.1.0-alpha.228) (2024-09-17)
+
+### Bug Fixes
+
+- fix export statement
+  ([412a6cd](https://github.com/mittwald/flow/commit/412a6cdf267fb3c15436fb12283630834b40d280))
+
+### Features
+
+- **List:** support multiple SettingProvider
+  ([ab7456a](https://github.com/mittwald/flow/commit/ab7456a49bfe14994d97a5e1aaec24b3c6b78717))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.227](https://github.com/mittwald/flow/compare/0.1.0-alpha.226...0.1.0-alpha.227) (2024-09-16)
 
 ### Features
