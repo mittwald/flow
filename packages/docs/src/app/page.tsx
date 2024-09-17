@@ -7,26 +7,26 @@ import { Section } from "@mittwald/flow-react-components/Section";
 import { Link } from "@mittwald/flow-react-components/Link";
 import { ColumnLayout } from "@mittwald/flow-react-components/ColumnLayout";
 import { StatusBadge } from "@mittwald/flow-react-components/StatusBadge";
+import { Image } from "@mittwald/flow-react-components/Image";
 import Icon from "@mittwald/flow-react-components/Icon";
 import {
   IconBooks,
   IconComponents,
   IconDeviceLaptop,
 } from "@tabler/icons-react";
+import homeImage from "../../assets/Styleguide_Startseite.svg";
+import styles from "./layout.module.scss";
 
 const Home: FC = () => {
   return (
     <ColumnLayout l={[1]} m={[1]}>
       <LayoutCard>
         <Section>
-          {/*
-          @todo: image is not loading in preview app
-            <Image
+          <Image
             className={styles.homeImage}
-            src="/home.svg"
+            src={homeImage.src}
             alt="Flow Design System"
           />
-          */}
 
           <Heading level={1}>
             Flow Design System <StatusBadge>beta</StatusBadge>
