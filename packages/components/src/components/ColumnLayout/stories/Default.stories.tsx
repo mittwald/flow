@@ -84,3 +84,61 @@ export const AllCustomValues: Story = {
     </Section>
   ),
 };
+
+export const Gaps: Story = {
+  render: (props) => (
+    <Section>
+      <InlineAlert>
+        <Heading>Gap size: "s"</Heading>
+      </InlineAlert>
+      <ColumnLayout {...props} gap="s">
+        <TextField>
+          <Label>First name</Label>
+        </TextField>
+        <TextField>
+          <Label>Last name</Label>
+        </TextField>
+        <TextField>
+          <Label>Street</Label>
+        </TextField>
+        <TextField>
+          <Label>House number</Label>
+        </TextField>
+      </ColumnLayout>
+      <InlineAlert>
+        <Heading>Gap size: "m"</Heading>
+      </InlineAlert>
+      <ColumnLayout {...props} gap="m">
+        <TextField>
+          <Label>First name</Label>
+        </TextField>
+        <TextField>
+          <Label>Last name</Label>
+        </TextField>
+        <TextField>
+          <Label>Street</Label>
+        </TextField>
+        <TextField>
+          <Label>House number</Label>
+        </TextField>
+      </ColumnLayout>
+      <InlineAlert>
+        <Heading>Gap size: "l"</Heading>
+      </InlineAlert>
+      <ColumnLayout {...props} gap="l">
+        <TextField>
+          <Label>First name</Label>
+        </TextField>
+        <TextField>
+          <Label>Last name</Label>
+        </TextField>
+        <TextField>
+          <Label>Street</Label>
+        </TextField>
+        <TextField>
+          <Label>House number</Label>
+        </TextField>
+      </ColumnLayout>
+    </Section>
+  ),
+};
