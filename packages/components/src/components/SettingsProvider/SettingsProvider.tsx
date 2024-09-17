@@ -23,30 +23,28 @@ export const useSettings = () => useContext(context);
 
 export const SettingsProvider: FC<Props> = (props) => {
   const { children, id, ...storeShape } = props;
-  const store = settingsBackendFactory(storeShape);
+  const backend = settingsBackendFactory(storeShape);
 
-  const firstAutorun = useRef(true);
   const storingPromise = useRef(Promise.resolve());
-  const storedSettings = usePromise(() => store.load(), [], {
+  const storedSettings = usePromise(() => backend.load(), [], {
     loaderId: id,
   });
-  const settings = useMemo(() => SettingsStore.fromJson(storedSettings), []);
+
+  const settingsStore = useMemo(
+    () => SettingsStore.fromJson(storedSettings),
+    [id],
+  );
 
   useEffect(
     () =>
       autorun(() => {
-        // skip initial autorun
-        if (firstAutorun.current) {
-          firstAutorun.current = false;
-          return;
-        }
-        const asJson = settings.asJson;
+        const json = settingsStore.asJson;
         storingPromise.current = storingPromise.current.then(() =>
-          store.store(asJson),
+          backend.store(json),
         );
       }),
-    [settings, id],
+    [id],
   );
 
-  return <context.Provider value={settings}>{children}</context.Provider>;
+  return <context.Provider value={settingsStore}>{children}</context.Provider>;
 };
