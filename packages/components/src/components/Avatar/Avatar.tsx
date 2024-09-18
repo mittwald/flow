@@ -4,7 +4,7 @@ import styles from "./Avatar.module.scss";
 import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
 import { ClearPropsContext, PropsContextProvider } from "@/lib/propsContext";
-import { getVariantFromChildren } from "@/components/Avatar/lib/getVariantFromChildren";
+import { getColorFromChildren } from "@/components/Avatar/lib/getColorFromChildren";
 import type { PropsWithClassName } from "@/lib/types/props";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
@@ -15,17 +15,17 @@ export interface AvatarProps
     FlowComponentProps {
   /** @default "m" */
   size?: "xs" | "s" | "m" | "l";
-  variant?: 1 | 2 | 3 | 4 | 5;
+  color?: "blue" | "teal" | "green" | "violet" | "lilac";
 }
 
 export const Avatar = flowComponent("Avatar", (props) => {
-  const { children, className, variant, size = "m", refProp: ref } = props;
+  const { children, className, color, size = "m", refProp: ref } = props;
 
   const rootClassName = clsx(
     styles.avatar,
     styles[`size-${size}`],
     className,
-    styles[`variant-${variant ?? getVariantFromChildren(children)}`],
+    styles[color ?? getColorFromChildren(children)],
   );
 
   const propsContext: PropsContext = {

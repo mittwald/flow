@@ -23,9 +23,9 @@ const meta: Meta<typeof Avatar> = {
       control: "inline-radio",
       options: ["s", "m", "l"],
     },
-    variant: {
+    color: {
       control: "inline-radio",
-      options: [1, 2, 3, 4, 5],
+      options: ["blue", "teal", "green", "violet", "lilac"],
     },
   },
 };
@@ -49,5 +49,5 @@ export const WithIcon: Story = {
       <IconApp />
     </Avatar>
   ),
-  args: { variant: 1 },
+  args: { color: "blue" },
 };
