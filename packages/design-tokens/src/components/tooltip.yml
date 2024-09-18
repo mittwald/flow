@@ -15,3 +15,5 @@ tooltip:
     value: "{size-px.s}"
   arrow-size:
     value: "{size-px.s}"
+  box-shadow:
+    value: "{shadow.overlay}"
