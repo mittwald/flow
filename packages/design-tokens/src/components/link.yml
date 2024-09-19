@@ -7,6 +7,10 @@ link:
     value: "{font-weight.bold}"
   disabled-color:
     value: "{disabled-plain-content-color}"
+  disabled-color-light:
+    value: "{disabled-light-plain-content-color}"
+  disabled-color-dark:
+    value: "{disabled-dark-plain-content-color}"
   text-to-icon-spacing:
     value: "{size-rem.xs}"
 
