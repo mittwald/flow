@@ -12,13 +12,15 @@ import Label from "@mittwald/flow-react-components/Label";
 import { usePathname } from "next/navigation";
 
 import { NavigationAvatar } from "@/app/_components/NavigationAvatar";
+import { Heading } from "@mittwald/flow-react-components/Heading";
 
 export const ProjectNavigation: FC = () => {
   const currentPathname = usePathname();
 
   return (
     <Navigation>
-      <NavigationAvatar title="Projekt" />
+      <NavigationAvatar title="Mein Projekt" />
+      <Heading>Mein Projekt</Heading>
       <Label>Allgemein</Label>
       <Link
         href="/project/dashboard"

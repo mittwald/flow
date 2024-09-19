@@ -19,25 +19,6 @@ export interface Domain {
   owner: DomainOwner;
 }
 
-const apiSleep = (): Promise<void> =>
-  new Promise((res) => window.setTimeout(res, 750));
-
-interface Request {
-  pagination?: {
-    limit: number;
-    skip: number;
-  };
-  filter?: {
-    types?: string[];
-  };
-  search?: string;
-}
-
-interface Response {
-  data: Domain[];
-  totalCount: number;
-}
-
 export const domains: Domain[] = [
   {
     id: "1",
@@ -148,32 +129,8 @@ export const domains: Domain[] = [
   },
 ];
 
-export const getDomains = async (req: Request): Promise<Response> => {
-  await apiSleep();
-
-  const types = req.filter?.types;
-  const searchString = req.search;
-
-  const preFilteredData = domains.filter((u) => {
-    const filterMatches =
-      !types || types.length === 0 || types.includes(u.type);
-    const searchMatches =
-      searchString === undefined ||
-      u.domain.toLowerCase().includes(searchString.toLowerCase());
-    return filterMatches && searchMatches;
-  });
-
-  const totalCount = preFilteredData.length;
-
-  return {
-    data: req.pagination
-      ? preFilteredData.slice(
-          req.pagination.skip,
-          req.pagination.skip + req.pagination.limit,
-        )
-      : preFilteredData,
-    totalCount,
-  };
+export const listDomains = (): Domain[] => {
+  return domains;
 };
 
 export const getDomain = (id: string): Domain => {
@@ -184,17 +141,4 @@ export const getDomain = (id: string): Domain => {
   }
 
   return domain;
-};
-
-export const types = domains
-  .map((d) => d.type)
-  .filter((v, i, a) => a.indexOf(v) === i);
-
-export const loadDomains = async () => {
-  const response = await getDomains({});
-
-  return {
-    data: response.data,
-    itemTotalCount: response.totalCount,
-  };
 };

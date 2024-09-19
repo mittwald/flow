@@ -11,13 +11,15 @@ import Navigation from "@mittwald/flow-react-components/Navigation";
 import Label from "@mittwald/flow-react-components/Label";
 import { usePathname } from "next/navigation";
 import { NavigationAvatar } from "@/app/_components/NavigationAvatar";
+import { Heading } from "@mittwald/flow-react-components/Heading";
 
 export const CustomerNavigation: FC = () => {
   const currentPathname = usePathname();
 
   return (
     <Navigation>
-      <NavigationAvatar title="Organisation" />
+      <NavigationAvatar title="Meine Organisation" />
+      <Heading>Meine Organisation</Heading>
       <Label>Allgemein</Label>
       <Link
         href="/customer/dashboard"

@@ -8,6 +8,7 @@
             <path value="file://$PROJECT_DIR$/packages/components/dist" />
             <path value="file://$PROJECT_DIR$/packages/stylesheet/dist" />
             <path value="file://$PROJECT_DIR$/packages/design-tokens/dist" />
+            <path value="file://$PROJECT_DIR$/packages/code-template/app" />
           </resourceRoots>
         </entryData>
       </entry>

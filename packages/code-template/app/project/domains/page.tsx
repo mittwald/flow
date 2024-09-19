@@ -18,10 +18,12 @@ import {
 } from "@mittwald/flow-react-components/Icons";
 import StatusBadge from "@mittwald/flow-react-components/StatusBadge";
 import type { Domain } from "@/api/domainApi";
-import { loadDomains } from "@/api/domainApi";
+import { listDomains } from "@/api/domainApi";
 
 export default function Page() {
   const DomainList = typedList<Domain>();
+
+  const domains = listDomains();
 
   return (
     <>
@@ -39,7 +41,7 @@ export default function Page() {
       <LayoutCard className={styles.content}>
         <Section>
           <DomainList.List batchSize={5}>
-            <DomainList.LoaderAsync>{loadDomains}</DomainList.LoaderAsync>
+            <DomainList.StaticData data={domains} />
             <DomainList.Search />
             <DomainList.Sorting
               property="domain"
