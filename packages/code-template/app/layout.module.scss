@@ -1,0 +1,44 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-block: var(--size-px--s);
+}
+
+.main{
+  display: flex;
+  column-gap: var(--size-px--m);
+
+  .container{
+    flex-grow: 1;
+    display: grid;
+    grid-template-areas:
+        "breadcrumb action"
+        "title      action"
+        "content    content";
+    grid-template-rows: auto auto 1fr;
+
+    >button{
+      grid-area: action;
+      justify-self: end;
+      align-self: self-end;
+      margin-bottom: var(--size-rem--m);
+    }
+
+    >:global(.flow--breadcrumb){
+      grid-area: breadcrumb;
+    }
+
+    >h1{
+      grid-area: title;
+      margin-bottom: var(--size-rem--s);
+    }
+
+    .content{
+      grid-area: content;
+      display: flex;
+      flex-direction: column;
+      row-gap: var(--size-px--m);
+    }
+  }
+}

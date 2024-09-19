@@ -1,0 +1,25 @@
+{
+  "name": "@mittwald/code-template",
+  "private": true,
+  "version": "0.1.0-alpha",
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@mittwald/flow-react-components": "^0.1.0-alpha.234",
+    "next": "14.2.9",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-hook-form": "^7.53.0",
+    "sass": "^1.78.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "typescript": "^5"
+  }
+}
