@@ -22,11 +22,6 @@ export interface Domain {
 const apiSleep = (): Promise<void> =>
   new Promise((res) => window.setTimeout(res, 750));
 
-export const getTypes = async () => {
-  await apiSleep();
-  return types;
-};
-
 interface Request {
   pagination?: {
     limit: number;
@@ -174,7 +169,7 @@ export const getDomains = async (req: Request): Promise<Response> => {
     data: req.pagination
       ? preFilteredData.slice(
           req.pagination.skip,
-          req.pagination.skip + req.pagination.limit
+          req.pagination.skip + req.pagination.limit,
         )
       : preFilteredData,
     totalCount,

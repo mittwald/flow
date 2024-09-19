@@ -7,8 +7,8 @@ import Label from "@mittwald/flow-react-components/Label";
 import Modal from "@mittwald/flow-react-components/Modal";
 import Section from "@mittwald/flow-react-components/Section";
 import TextField from "@mittwald/flow-react-components/TextField";
-import { FC } from "react";
-import { DomainOwner } from "@/api/domainApi";
+import type { FC } from "react";
+import type { DomainOwner } from "@/api/domainApi";
 import {
   Form,
   typedField,
@@ -20,6 +20,7 @@ import { useOverlayController } from "@mittwald/flow-react-components/controller
 interface Props {
   owner: DomainOwner;
 }
+
 export const UpdateDomainOwnerModal: FC<Props> = (props) => {
   const { owner } = props;
 

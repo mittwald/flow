@@ -17,7 +17,8 @@ import {
   IconSubdomain,
 } from "@mittwald/flow-react-components/Icons";
 import StatusBadge from "@mittwald/flow-react-components/StatusBadge";
-import { Domain, loadDomains } from "@/api/domainApi";
+import type { Domain } from "@/api/domainApi";
+import { loadDomains } from "@/api/domainApi";
 
 export default function Page() {
   const DomainList = typedList<Domain>();
@@ -60,8 +61,8 @@ export default function Page() {
                       domain.type === "Domain"
                         ? 2
                         : domain.type === "Subdomain"
-                        ? 5
-                        : 4
+                          ? 5
+                          : 4
                     }
                   >
                     {domain.type === "Domain" ? (

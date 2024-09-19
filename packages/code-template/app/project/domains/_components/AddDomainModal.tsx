@@ -6,7 +6,7 @@ import Label from "@mittwald/flow-react-components/Label";
 import Modal from "@mittwald/flow-react-components/Modal";
 import Section from "@mittwald/flow-react-components/Section";
 import TextField from "@mittwald/flow-react-components/TextField";
-import { FC } from "react";
+import type { FC } from "react";
 
 export const AddDomainModal: FC = () => {
   return (
