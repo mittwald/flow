@@ -37,7 +37,7 @@
   }
 
   &[aria-disabled] {
-    color: var(--link--disabled-color);
+    color: var(--link--color--disabled);
   }
 
   &:where(.dark) {
@@ -52,7 +52,7 @@
     }
 
     &[aria-disabled] {
-      color: var(--link--disabled-color-dark);
+      color: var(--link--color-dark--disabled);
     }
   }
 
@@ -68,7 +68,7 @@
     }
 
     &[aria-disabled] {
-      color: var(--link--disabled-color-light);
+      color: var(--link--color-light--disabled);
     }
   }
 }
