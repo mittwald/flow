@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.237](https://github.com/mittwald/flow/compare/0.1.0-alpha.236...0.1.0-alpha.237) (2024-09-20)
+
+### Bug Fixes
+
+- **Tunnel:** fix not showing entries when used in Activity
+  ([1a9d7f0](https://github.com/mittwald/flow/commit/1a9d7f0ee7943068d2fa1dcf43a60f31fc30461a))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.236](https://github.com/mittwald/flow/compare/0.1.0-alpha.235...0.1.0-alpha.236) (2024-09-20)
 
 **Note:** Version bump only for package @mittwald/react-tunnel
