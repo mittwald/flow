@@ -5,8 +5,6 @@ link:
     value: "{line-height.m}"
   font-weight:
     value: "{font-weight.bold}"
-  disabled-color:
-    value: "{disabled-plain-content-color}"
   text-to-icon-spacing:
     value: "{size-rem.xs}"
 
@@ -17,6 +15,9 @@ link:
       value: "{primary-plain-content-color.hover}"
     pressed:
       value: "{primary-plain-content-color.pressed}"
+    disabled:
+      value: "{disabled-plain-content-color}"
+
   color-dark:
     default:
       value: "{dark-plain-content-color.default}"
@@ -24,6 +25,9 @@ link:
       value: "{dark-plain-content-color.hover}"
     pressed:
       value: "{dark-plain-content-color.pressed}"
+    disabled:
+      value: "{disabled-dark-plain-content-color}"
+
   color-light:
     default:
       value: "{light-plain-content-color.default}"
@@ -31,3 +35,5 @@ link:
       value: "{light-plain-content-color.hover}"
     pressed:
       value: "{light-plain-content-color.pressed}"
+    disabled:
+      value: "{disabled-light-plain-content-color}"
