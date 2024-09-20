@@ -1,5 +1,6 @@
 import type { FC } from "react";
-import { useContext, useId, useLayoutEffect, useRef } from "react";
+import { useLayoutEffect } from "react";
+import { useContext, useEffect, useId, useRef } from "react";
 import tunnelContext from "@/context";
 import type { TunnelChildren } from "@/types";
 
@@ -25,6 +26,9 @@ export const TunnelEntry: FC<Props> = (props) => {
   useLayoutEffect(() => {
     mounted.current = true;
     tunnel.setChildren(id, entryId, children);
+  }, [children, id, entryId]);
+
+  useEffect(() => {
     return () => {
       tunnel.deleteChildren(id, entryId);
     };
