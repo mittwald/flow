@@ -9,6 +9,7 @@ import { useList } from "@/components/List/hooks/useList";
 import type { PropsWithClassName } from "@/lib/types/props";
 import { SearchField } from "@/components/List/components/Header/components/SearchField/SearchField";
 import { ViewModeMenu } from "@/components/List/components/Header/components/ViewModeMenu/ViewModeMenu";
+import { ActionGroup } from "@/components/List/components/ActionGroup";
 
 type Props = PropsWithClassName;
 
@@ -40,6 +41,7 @@ export const Header: FC<Props> = (props) => {
           {list.search && (
             <SearchField className={styles.searchField} search={list.search} />
           )}
+          <ActionGroup />
         </div>
       </div>
       <ActiveFilters />

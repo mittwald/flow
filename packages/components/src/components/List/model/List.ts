@@ -19,6 +19,7 @@ import type { Dispatch, SetStateAction } from "react";
 import { useEffect, useState } from "react";
 import { useSettings } from "@/components/SettingsProvider/SettingsProvider";
 import type { SettingsStore } from "@/components/SettingsProvider/models/SettingsStore";
+import { ActionGroup } from "./ActionGroup";
 
 export class List<T> {
   public readonly settingStorageKey?: string;
@@ -37,6 +38,7 @@ export class List<T> {
   public readonly componentProps: ListSupportedComponentProps;
   public viewMode: ListViewMode;
   public readonly setViewMode: Dispatch<SetStateAction<ListViewMode>>;
+  public readonly actionGroup?: ActionGroup;
   private readonly filterSettingsStorageKey?: string;
   private readonly defaultSettings?: SettingsStore;
 
@@ -53,6 +55,7 @@ export class List<T> {
       search,
       onAction,
       getItemId,
+      actionGroup,
       defaultViewMode,
       ...componentProps
     } = shape;
@@ -80,6 +83,7 @@ export class List<T> {
       manualPagination: this.loader.manualPagination,
       manualSorting: this.loader.manualSorting,
     });
+    this.actionGroup = actionGroup ? new ActionGroup() : undefined;
 
     const [viewMode, setViewMode] = useState(defaultViewMode ?? "list");
     this.viewMode = viewMode;

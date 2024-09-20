@@ -10,6 +10,7 @@ import type { ItemType } from "@/lib/types/array";
 import type List from "@/components/List/model/List";
 import type { TableShape } from "@/components/List/model/table/types";
 import type { MultipleSelection, SelectionBehavior } from "@react-types/shared";
+import type { ActionGroupShape } from "@/components/List/model/ActionGroup";
 
 export const customPropertyPrefix = "$" as const;
 export type CustomPropertyName = `${typeof customPropertyPrefix}${string}`;
@@ -40,6 +41,7 @@ export interface ListShape<T> extends ListSupportedComponentProps {
   sorting?: SortingShape<T>[];
   batchesController?: BatchesControllerShape;
   table?: TableShape<T>;
+  actionGroup?: ActionGroupShape;
 
   onAction?: ItemActionFn<T>;
   getItemId?: GetItemId<T>;
