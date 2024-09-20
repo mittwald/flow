@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.247](https://github.com/mittwald/flow/compare/0.1.0-alpha.246...0.1.0-alpha.247) (2024-09-20)
+
+### Features
+
+- **TimeField:** add time field component
+  ([#725](https://github.com/mittwald/flow/issues/725))
+  ([1aa6336](https://github.com/mittwald/flow/commit/1aa63363fdd181b62df09ffe7917d26c237043d9))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.246](https://github.com/mittwald/flow/compare/0.1.0-alpha.245...0.1.0-alpha.246) (2024-09-20)
 
 ### Bug Fixes
