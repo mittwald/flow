@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Badge from "../Badge";
+import Badge, { badgeColors } from "../Badge";
 import React from "react";
 import { Text } from "@/components/Text";
 import { Label } from "@/components/Label";
@@ -24,19 +24,7 @@ const meta: Meta<typeof Badge> = {
   argTypes: {
     color: {
       control: "inline-radio",
-      options: [
-        "neutral",
-        "blue",
-        "navy",
-        "violet",
-        "teal",
-        "lilac",
-        "green",
-        "orange",
-        "red",
-        "dark",
-        "light",
-      ],
+      options: badgeColors,
     },
   },
   render: (props) => <Badge {...props}>Value</Badge>,

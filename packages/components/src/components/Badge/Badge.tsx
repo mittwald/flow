@@ -10,24 +10,28 @@ import type { PressEvent } from "@react-types/shared";
 import { Button } from "@/components/Button";
 import { IconClose } from "@/components/Icon/components/icons";
 
+export const badgeColors = [
+  "neutral",
+  "blue",
+  "navy",
+  "violet",
+  "teal",
+  "lilac",
+  "green",
+  "orange",
+  "red",
+  "dark",
+  "light",
+] as const;
+export type BadgeColors = (typeof badgeColors)[number];
+
 export interface BadgeProps
   extends PropsWithChildren,
     FlowComponentProps,
     PropsWithClassName {
   onPress?: (e: PressEvent) => void;
   onClose?: (e: PressEvent) => void;
-  color?:
-    | "neutral"
-    | "blue"
-    | "navy"
-    | "violet"
-    | "teal"
-    | "lilac"
-    | "green"
-    | "orange"
-    | "red"
-    | "dark"
-    | "light";
+  color?: BadgeColors;
   isDisabled?: boolean;
 }
 
