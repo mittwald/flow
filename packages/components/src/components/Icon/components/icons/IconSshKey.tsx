@@ -1,10 +1,10 @@
 /* eslint-disable */
 /* auto-generated file */
 import React, { ComponentProps, FC } from "react";
-import { IconList as Tabler } from "@tabler/icons-react";
+import { IconKey as Tabler } from "@tabler/icons-react";
 import { Icon } from "@/components/Icon";
 
-export const IconListView: FC<Omit<ComponentProps<typeof Icon>, "children">> = (
+export const IconSshKey: FC<Omit<ComponentProps<typeof Icon>, "children">> = (
   props,
 ) => (
   <Icon {...props}>
@@ -12,4 +12,4 @@ export const IconListView: FC<Omit<ComponentProps<typeof Icon>, "children">> = (
   </Icon>
 );
 
-export default IconListView;
+export default IconSshKey;

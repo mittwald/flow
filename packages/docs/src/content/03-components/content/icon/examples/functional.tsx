@@ -13,13 +13,12 @@ import {
   IconContextMenu,
   IconCopy,
   IconDelete,
+  IconDownload,
   IconEdit,
   IconExternalLink,
   IconFilter,
-  IconGrid,
   IconHide,
   IconHome,
-  IconList,
   IconLogout,
   IconMaximize,
   IconMenu,
@@ -29,6 +28,7 @@ import {
   IconPlus,
   IconRadioOff,
   IconRadioOn,
+  IconRedo,
   IconRefresh,
   IconSave,
   IconSearch,
@@ -36,6 +36,8 @@ import {
   IconShare,
   IconShow,
   IconSorting,
+  IconUndo,
+  IconView,
 } from "@mittwald/flow-react-components/Icons";
 import Label from "@mittwald/flow-react-components/Label";
 import LabeledValue from "@mittwald/flow-react-components/LabeledValue";
@@ -64,12 +66,8 @@ import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
     <IconMenu />
   </LabeledValue>
   <LabeledValue>
-    <Label>Grid</Label>
-    <IconGrid />
-  </LabeledValue>
-  <LabeledValue>
-    <Label>List</Label>
-    <IconList />
+    <Label>View</Label>
+    <IconView />
   </LabeledValue>
   <LabeledValue>
     <Label>Filter</Label>
@@ -190,5 +188,17 @@ import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
   <LabeledValue>
     <Label>Check</Label>
     <IconCheck />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Download</Label>
+    <IconDownload />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Redo</Label>
+    <IconRedo />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Undo</Label>
+    <IconUndo />
   </LabeledValue>
 </ColumnLayout>;
