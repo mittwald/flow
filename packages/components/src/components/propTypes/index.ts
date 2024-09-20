@@ -43,6 +43,7 @@ import type { ContextMenuSectionProps } from "@/components/ContextMenu/component
 import type { OverlayTriggerProps } from "@/components/OverlayTrigger";
 import type { ListProps } from "@/components/List";
 import type { SearchFieldProps } from "@/components/SearchField";
+import type { BadgeProps } from "@/components/Badge";
 import type { DatePickerProps } from "@/components/DatePicker";
 import type * as Aria from "react-aria-components";
 import type { DateRangePickerProps } from "@/components/DateRangePicker";
@@ -53,6 +54,7 @@ export interface FlowComponentPropsTypes {
   Action: ActionProps;
   ActionGroup: ActionGroupProps;
   Avatar: AvatarProps;
+  Badge: BadgeProps;
   Button: ButtonProps;
   Checkbox: CheckboxProps;
   CheckboxButton: CheckboxButtonProps;
@@ -108,6 +110,7 @@ const propsContextSupportingComponentsMap: Record<
   Action: true,
   ActionGroup: true,
   Avatar: true,
+  Badge: true,
   Button: true,
   Checkbox: true,
   CheckboxButton: true,
