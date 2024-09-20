@@ -8,7 +8,7 @@ import { ActiveFilters } from "@/components/List/components/Header/components/Ac
 import { useList } from "@/components/List/hooks/useList";
 import type { PropsWithClassName } from "@/lib/types/props";
 import { SearchField } from "@/components/List/components/Header/components/SearchField/SearchField";
-import { SettingsMenu } from "@/components/List/components/Header/components/SettingsMenu/SettingsMenu";
+import { ViewModeMenu } from "@/components/List/components/Header/components/ViewModeMenu/ViewModeMenu";
 
 type Props = PropsWithClassName;
 
@@ -32,13 +32,15 @@ export const Header: FC<Props> = (props) => {
     <div className={clsx(className, styles.header)}>
       <div className={styles.pickerListAndSearch}>
         <div className={styles.pickerList}>
+          <ViewModeMenu />
           <SortingPicker />
           {filterPickerList}
         </div>
-        {list.search && (
-          <SearchField className={styles.searchField} search={list.search} />
-        )}
-        <SettingsMenu />
+        <div>
+          {list.search && (
+            <SearchField className={styles.searchField} search={list.search} />
+          )}
+        </div>
       </div>
       <ActiveFilters />
     </div>
