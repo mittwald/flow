@@ -9,13 +9,22 @@ import type { PropsWithClassName } from "@/lib/types/props";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
+export const avatarColors = [
+  "blue",
+  "teal",
+  "green",
+  "violet",
+  "lilac",
+] as const;
+export type AvatarColors = (typeof avatarColors)[number];
+
 export interface AvatarProps
   extends PropsWithChildren,
     PropsWithClassName,
     FlowComponentProps {
   /** @default "m" */
   size?: "xs" | "s" | "m" | "l";
-  color?: "blue" | "teal" | "green" | "violet" | "lilac";
+  color?: AvatarColors;
 }
 
 export const Avatar = flowComponent("Avatar", (props) => {
