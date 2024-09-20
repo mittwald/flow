@@ -9,6 +9,7 @@ import Heading from "@mittwald/flow-react-components/Heading";
 import Action from "@mittwald/flow-react-components/Action";
 import { sleepLong } from "@/content/03-components/actions/action/examples/lib";
 import { useOverlayController } from "@mittwald/flow-react-components/controller";
+import Section from "@mittwald/flow-react-components/Section";
 
 export default () => {
   const controller = useOverlayController("Modal");
@@ -22,15 +23,18 @@ export default () => {
       <Modal controller={controller}>
         <Heading>Organisation anlegen</Heading>
         <Content>
-          <Text>
-            Eine Organisation kannst du dir wie ein
-            Unternehmen vorstellen. An diesem Ort verwaltest
-            du deine Mitarbeiter, Zahlungsmodalitäten und
-            kannst deine Rechnungen einsehen.
-          </Text>
-          <TextField isRequired>
-            <Label>Organisationsname</Label>
-          </TextField>
+          <Section>
+            <Text>
+              Eine Organisation kannst du dir wie ein
+              Unternehmen vorstellen. An diesem Ort
+              verwaltest du deine Mitarbeiter,
+              Zahlungsmodalitäten und kannst deine
+              Rechnungen einsehen.
+            </Text>
+            <TextField isRequired>
+              <Label>Organisationsname</Label>
+            </TextField>
+          </Section>
         </Content>
         <ActionGroup>
           <Action closeOverlay="Modal">

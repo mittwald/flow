@@ -1,6 +1,5 @@
 import type { ComponentProps, PropsWithChildren } from "react";
-import { useId } from "react";
-import React from "react";
+import React, { useId } from "react";
 import styles from "./Section.module.scss";
 import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
@@ -45,7 +44,6 @@ export const Section = flowComponent("Section", (props) => {
     Heading: {
       level: 2,
       id: headingId,
-      levelVisual: 4,
     },
     Header: {
       renderSectionHeader: true,

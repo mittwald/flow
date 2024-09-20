@@ -23,6 +23,7 @@ export const InlineAlert = flowComponent("InlineAlert", (props) => {
     Heading: {
       className: styles.heading,
       level: 3,
+      size: "s",
     },
     Content: {
       className: styles.content,
