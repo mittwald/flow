@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.238](https://github.com/mittwald/flow/compare/0.1.0-alpha.237...0.1.0-alpha.238) (2024-09-20)
+
+### Features
+
+- **Modal:** add off canvas orientation
+  ([b2e5c3e](https://github.com/mittwald/flow/commit/b2e5c3e5588aefda4a524968ed5f20ba28ed2226))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.237](https://github.com/mittwald/flow/compare/0.1.0-alpha.236...0.1.0-alpha.237) (2024-09-20)
 
 ### Bug Fixes
