@@ -2679,7 +2679,7 @@ __metadata:
     "@testing-library/user-event": "npm:^14.5.2"
     "@types/invariant": "npm:^2.2.37"
     "@types/luxon": "npm:^3.4.2"
-    "@types/node": "npm:22.5.2"
+    "@types/node": "npm:22.5.5"
     "@types/prettier": "npm:^3.0.0"
     "@types/prop-types": "npm:^15.7.12"
     "@types/react": "npm:^18.3.5"
@@ -6492,12 +6492,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:22.5.2, @types/node@npm:^22.5.2":
-  version: 22.5.2
-  resolution: "@types/node@npm:22.5.2"
+"@types/node@npm:22.5.5":
+  version: 22.5.5
+  resolution: "@types/node@npm:22.5.5"
   dependencies:
     undici-types: "npm:~6.19.2"
-  checksum: 10c0/624a7fd76229eacc6c158eb3b9afd55b811d7f01976c5f92c630d5b9d47047cc218928c343988484a165ac400e5eb6fe70ea300fc7242deeb0e920c7724290f6
+  checksum: 10c0/ead9495cfc6b1da5e7025856dcce2591e9bae635357410c0d2dd619fce797d2a1d402887580ca4b336cb78168b195224869967de370a23f61663cf1e4836121c
   languageName: node
   linkType: hard
 
@@ -6507,6 +6507,15 @@ __metadata:
   dependencies:
     undici-types: "npm:~5.26.4"
   checksum: 10c0/a9eb33bc093beba6bd5d4e839de7d1d1f496cd7e741c2f6c7161318dba0f37227bb25d8306907194992488d6c59a7363a419d72298549483d33402227a2d435b
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^22.5.2":
+  version: 22.5.2
+  resolution: "@types/node@npm:22.5.2"
+  dependencies:
+    undici-types: "npm:~6.19.2"
+  checksum: 10c0/624a7fd76229eacc6c158eb3b9afd55b811d7f01976c5f92c630d5b9d47047cc218928c343988484a165ac400e5eb6fe70ea300fc7242deeb0e920c7724290f6
   languageName: node
   linkType: hard
 
