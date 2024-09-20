@@ -47,6 +47,7 @@ import type { BadgeProps } from "@/components/Badge";
 import type { DatePickerProps } from "@/components/DatePicker";
 import type * as Aria from "react-aria-components";
 import type { DateRangePickerProps } from "@/components/DateRangePicker";
+import type { TimeFieldProps } from "@/components/TimeField";
 
 export * from "./types";
 
@@ -101,6 +102,7 @@ export interface FlowComponentPropsTypes {
   Text: TextProps;
   TextArea: TextAreaProps;
   TextField: TextFieldProps;
+  TimeField: TimeFieldProps<Aria.TimeValue>;
 }
 
 const propsContextSupportingComponentsMap: Record<
@@ -158,6 +160,7 @@ const propsContextSupportingComponentsMap: Record<
   Text: true,
   TextArea: true,
   TextField: true,
+  TimeField: true,
 };
 
 export const propsContextSupportingComponents = Object.keys(

@@ -1,0 +1,6 @@
+time-field:
+  date-segment-background-color:
+    focused:
+      value: "{primary-plain-background-color.pressed}"
+  date-segment-corner-radius:
+    value: "{size-px.xs}"

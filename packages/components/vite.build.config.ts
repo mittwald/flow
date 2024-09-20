@@ -89,6 +89,7 @@ export default defineConfig(
           Text: "./src/components/Text/index.ts",
           TextArea: "./src/components/TextArea/index.ts",
           TextField: "./src/components/TextField/index.ts",
+          TimeField: "./src/components/TimeField/index.ts",
           Tooltip: "./src/components/Tooltip/index.ts",
           stylesInit: "./src/styles/index.ts",
           hooks: "./src/lib/hooks/index.ts",

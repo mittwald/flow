@@ -270,6 +270,10 @@
       "types": "./dist/types/components/TextField/index.d.ts",
       "import": "./dist/TextField.js"
     },
+    "./TimeField": {
+      "types": "./dist/types/components/TimeField/index.d.ts",
+      "import": "./dist/TimeField.js"
+    },
     "./Tooltip": {
       "types": "./dist/types/components/Tooltip/index.d.ts",
       "import": "./dist/Tooltip.js"
