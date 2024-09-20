@@ -1,20 +1,49 @@
-import Heading from "@mittwald/flow-react-components/Heading";
-import Text from "@mittwald/flow-react-components/Text";
+import Header from "@mittwald/flow-react-components/Header";
+import { Text } from "@mittwald/flow-react-components/Text";
 import Section from "@mittwald/flow-react-components/Section";
 import StatusBadge from "@mittwald/flow-react-components/StatusBadge";
-import Header from "@mittwald/flow-react-components/Header";
+import Heading from "@mittwald/flow-react-components/Heading";
+import Button from "@mittwald/flow-react-components/Button";
+import Content from "@mittwald/flow-react-components/Content";
+import LabeledValue from "@mittwald/flow-react-components/LabeledValue";
+import Label from "@mittwald/flow-react-components/Label";
+import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
+import { Link } from "@mittwald/flow-react-components/Link";
+import { CopyButton } from "@mittwald/flow-react-components/CopyButton";
+import { IconExternalLink } from "@mittwald/flow-react-components/Icons";
 
 <Section>
   <Header>
     <Heading>
-      <Text>Newsletter</Text>
-      <StatusBadge>Abonniert</StatusBadge>
+      Mein Projekt
+      <StatusBadge status="danger">Deaktiviert</StatusBadge>
     </Heading>
+
+    <Button variant="soft" color="secondary">
+      Datenbank migrieren
+    </Button>
+    <Button color="accent">Aktivieren</Button>
   </Header>
-  <Text>
-    Kommende Releases, neue Features und Tipps rund um dein
-    Hosting – wir bringen dir das Wichtigste in dein
-    Postfach. Abonniere unseren Newsletter und bleib auf dem
-    Laufenden.
-  </Text>
+
+  <Content>
+    <ColumnLayout>
+      <LabeledValue>
+        <Label>Projektname</Label>
+        <Content>Dolce Vita</Content>
+      </LabeledValue>
+      <LabeledValue>
+        <Label>Short-ID</Label>
+        <Content>p-lol3qe</Content>
+        <CopyButton text="p-lol3qe" />
+      </LabeledValue>
+      <LabeledValue>
+        <Label>Projektdomain</Label>
+        <Link>
+          <Text>p-lol3qe.project.space</Text>
+          <IconExternalLink />
+        </Link>
+        <CopyButton text="p-lol3qe.project.space" />
+      </LabeledValue>
+    </ColumnLayout>
+  </Content>
 </Section>;

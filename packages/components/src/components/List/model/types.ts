@@ -31,6 +31,8 @@ export interface ListSupportedComponentProps extends MultipleSelection {
 }
 
 export interface ListShape<T> extends ListSupportedComponentProps {
+  settingStorageKey?: string;
+
   loader?: IncrementalLoaderShape<T>;
   filters?: FilterShape<T, never, never>[];
   itemView?: ItemViewShape<T>;

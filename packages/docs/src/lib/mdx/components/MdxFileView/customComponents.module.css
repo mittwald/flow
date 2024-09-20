@@ -34,6 +34,10 @@
   border-bottom-right-radius: 0;
 }
 
+.mobileCode {
+  margin-bottom: 0;
+}
+
 .doAndDontText {
   margin-bottom: calc(var(--size-px--m) * -1);
   border-style: var(--border-style--default);

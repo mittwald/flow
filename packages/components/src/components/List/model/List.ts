@@ -17,8 +17,14 @@ import { ItemView } from "@/components/List/model/item/ItemView";
 import { Table } from "@/components/List/model/table/Table";
 import type { Dispatch, SetStateAction } from "react";
 import { useEffect, useState } from "react";
+import { useSettings } from "@/components/SettingsProvider/SettingsProvider";
+import type { SettingsStore } from "@/components/SettingsProvider/models/SettingsStore";
 
 export class List<T> {
+  public readonly settingStorageKey?: string;
+  public readonly supportsSettingsStorage: boolean;
+  private readonly filterSettingsStorageKey?: string;
+  private readonly defaultSettings?: SettingsStore;
   public readonly filters: Filter<T, never, never>[];
   public readonly itemView?: ItemView<T>;
   public readonly table?: Table<T>;
@@ -36,6 +42,7 @@ export class List<T> {
 
   public constructor(shape: ListShape<T>) {
     const {
+      settingStorageKey,
       itemView,
       table,
       filters = [],
@@ -49,6 +56,13 @@ export class List<T> {
       defaultViewMode,
       ...componentProps
     } = shape;
+
+    this.defaultSettings = useSettings();
+    this.settingStorageKey = settingStorageKey;
+    this.filterSettingsStorageKey = settingStorageKey
+      ? `${settingStorageKey}.activeFilters`
+      : undefined;
+    this.supportsSettingsStorage = !!this.settingStorageKey;
 
     this.items = new ItemCollection(this);
     this.filters = filters.map((shape) => new Filter(this, shape));
@@ -91,6 +105,37 @@ export class List<T> {
     return this.sorting.filter((s) => s.defaultEnabled !== "hidden");
   }
 
+  public storeFilterDefaultSettings() {
+    if (this.defaultSettings && this.filterSettingsStorageKey) {
+      const data = Object.fromEntries(
+        this.filters.map((f) => [
+          f.property,
+          f
+            .getArrayValue()
+            .filter((v) => v.isActive)
+            .map((v) => v.value),
+        ]),
+      );
+
+      this.defaultSettings.set(
+        "List",
+        this.filterSettingsStorageKey,
+        Filter.settingsStorageSchema,
+        data,
+      );
+    }
+  }
+
+  public getStoredFilterDefaultSettings() {
+    if (this.defaultSettings && this.filterSettingsStorageKey) {
+      return this.defaultSettings.get(
+        "List",
+        this.filterSettingsStorageKey,
+        Filter.settingsStorageSchema,
+      );
+    }
+  }
+
   public getSorting(id: string): Sorting<T> {
     const sorting = this.sorting.find((s) => s.id === id);
     invariant(!!sorting, `Could not get Sorting (ID: ${id})`);
@@ -101,9 +146,8 @@ export class List<T> {
     return this.sorting.forEach((s) => s.clear());
   }
 
-  public clearFilters(): void {
-    this.search?.clear();
-    return this.filters.forEach((f) => f.clearValues());
+  public resetFilters(): void {
+    return this.filters.forEach((f) => f.resetValues());
   }
 
   public useIsEmpty(): boolean {
