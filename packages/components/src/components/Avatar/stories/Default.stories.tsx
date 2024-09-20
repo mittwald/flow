@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Avatar from "../Avatar";
+import Avatar, { avatarColors } from "../Avatar";
 import React from "react";
 import { Initials } from "@/components/Initials";
 import { Image } from "@/components/Image";
@@ -25,7 +25,7 @@ const meta: Meta<typeof Avatar> = {
     },
     color: {
       control: "inline-radio",
-      options: ["blue", "teal", "green", "violet", "lilac"],
+      options: avatarColors,
     },
   },
 };
