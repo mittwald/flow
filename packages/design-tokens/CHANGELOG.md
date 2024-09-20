@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.246](https://github.com/mittwald/flow/compare/0.1.0-alpha.245...0.1.0-alpha.246) (2024-09-20)
+
+### Bug Fixes
+
+- **Link:** add dark and light disabled colors
+  ([#738](https://github.com/mittwald/flow/issues/738))
+  ([7a555e3](https://github.com/mittwald/flow/commit/7a555e32ac8c35e71b770d809a568a0326bcf1f2))
+
+### Features
+
+- **Badge:** add badge component
+  ([#689](https://github.com/mittwald/flow/issues/689))
+  ([1ce3804](https://github.com/mittwald/flow/commit/1ce3804d6e371bc0760e1335422e47801f0ba1e4))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.245](https://github.com/mittwald/flow/compare/0.1.0-alpha.244...0.1.0-alpha.245) (2024-09-20)
 
 **Note:** Version bump only for package @mittwald/flow-design-tokens
