@@ -1,10 +1,10 @@
 /* eslint-disable */
 /* auto-generated file */
 import React, { ComponentProps, FC } from "react";
-import { IconArrowsUpDown as Tabler } from "@tabler/icons-react";
+import { IconShieldLock as Tabler } from "@tabler/icons-react";
 import { Icon } from "@/components/Icon";
 
-export const IconSorting: FC<Omit<ComponentProps<typeof Icon>, "children">> = (
+export const IconSecurity: FC<Omit<ComponentProps<typeof Icon>, "children">> = (
   props,
 ) => (
   <Icon {...props}>
@@ -12,4 +12,4 @@ export const IconSorting: FC<Omit<ComponentProps<typeof Icon>, "children">> = (
   </Icon>
 );
 
-export default IconSorting;
+export default IconSecurity;

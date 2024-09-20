@@ -32,7 +32,9 @@ export default () => {
         {(domain) => (
           <DomainList.ItemView>
             <Avatar
-              variant={domain.type === "Domain" ? 1 : 2}
+              color={
+                domain.type === "Domain" ? "blue" : "teal"
+              }
             >
               {domain.type === "Domain" ? (
                 <IconDomain />

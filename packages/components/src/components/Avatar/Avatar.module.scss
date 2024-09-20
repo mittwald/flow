@@ -30,7 +30,7 @@
   }
 
   @extend .size-m;
-  @extend .variant-1;
+  @extend .blue;
 
   /* Sizes */
 
@@ -46,19 +46,19 @@
   @include size(l);
 
   /* Variants */
-  @mixin variant($variant) {
-    &.variant-#{$variant} {
-      --background-color: var(--initials--variant-#{$variant}-background-color);
-      --content-color: var(--initials--variant-#{$variant}-content-color);
+  @mixin color($color) {
+    &.#{$color} {
+      --background-color: var(--initials--color-#{$color}-background-color);
+      --content-color: var(--initials--color-#{$color}-content-color);
       --content-accent-color: var(
-        --initials--variant-#{$variant}-content-accent-color
+        --initials--color-#{$color}-content-accent-color
       );
     }
   }
 
-  @include variant(1);
-  @include variant(2);
-  @include variant(3);
-  @include variant(4);
-  @include variant(5);
+  @include color("blue");
+  @include color("teal");
+  @include color("green");
+  @include color("violet");
+  @include color("lilac");
 }

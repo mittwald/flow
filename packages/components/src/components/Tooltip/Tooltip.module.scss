@@ -7,6 +7,7 @@
   padding-inline: var(--tooltip--padding-x);
   max-width: var(--tooltip--max-width);
   transform: translate3d(0, 0, 0);
+  box-shadow: var(--tooltip--box-shadow);
 
   --translate-origin-length: var(--tooltip--tooltip-to-content-spacing) / 2;
 
@@ -19,6 +20,7 @@
   &[data-placement="bottom"] {
     margin-top: var(--tooltip--tooltip-to-content-spacing);
     --translate-origin: translateY(var(--translate-origin-length) * -1);
+
     .arrow svg {
       transform: rotate(180deg);
     }
@@ -27,6 +29,7 @@
   &[data-placement="right"] {
     margin-left: var(--tooltip--tooltip-to-content-spacing);
     --translate-origin: translateX(var(--translate-origin-length) * -1);
+
     .arrow svg {
       transform: rotate(90deg);
     }
@@ -35,6 +38,7 @@
   &[data-placement="left"] {
     margin-right: var(--tooltip--tooltip-to-content-spacing);
     --translate-origin: translateX(var(--translate-origin-length));
+
     .arrow svg {
       transform: rotate(-90deg);
     }
@@ -53,6 +57,7 @@
   .arrow {
     width: var(--tooltip--arrow-size);
     height: var(--tooltip--arrow-size);
+
     svg {
       display: block;
       fill: var(--tooltip--background-color);
