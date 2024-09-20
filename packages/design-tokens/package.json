@@ -18,7 +18,7 @@
   "devDependencies": {
     "@types/js-yaml": "^4.0.9",
     "js-yaml": "^4.1.0",
-    "nx": "^19.6.4",
-    "style-dictionary": "^4.1.0"
+    "nx": "^19.7.4",
+    "style-dictionary": "^4.1.2"
   }
 }
