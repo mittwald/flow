@@ -16,6 +16,7 @@ export interface ActionGroupProps
     FlowComponentProps,
     PropsWithClassName {
   ignoreBreakpoint?: boolean;
+  spacing?: "s" | "m";
 }
 
 export const ActionGroup = flowComponent("ActionGroup", (props) => {
@@ -24,6 +25,7 @@ export const ActionGroup = flowComponent("ActionGroup", (props) => {
     className,
     refProp: ref,
     ignoreBreakpoint,
+    spacing,
     ...rest
   } = props;
 
@@ -48,7 +50,17 @@ export const ActionGroup = flowComponent("ActionGroup", (props) => {
       <PropsContextProvider props={propsContext} mergeInParentContext>
         <TunnelProvider>
           <div {...rest} className={rootClassName} ref={ref}>
-            <div className={styles.actionGroup} role="group">
+            <div
+              className={styles.actionGroup}
+              role="group"
+              style={
+                spacing
+                  ? {
+                      gap: `var(--action-group--button-to-button-spacing--${spacing})`,
+                    }
+                  : undefined
+              }
+            >
               {children}
             </div>
           </div>

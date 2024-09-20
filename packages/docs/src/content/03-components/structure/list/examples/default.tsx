@@ -9,10 +9,12 @@ import Text from "@mittwald/flow-react-components/Text";
 import ContextMenu from "@mittwald/flow-react-components/ContextMenu";
 import {
   IconDomain,
+  IconDownload,
   IconSubdomain,
 } from "@mittwald/flow-react-components/Icons";
 import StatusBadge from "@mittwald/flow-react-components/StatusBadge";
 import MenuItem from "@mittwald/flow-react-components/MenuItem";
+import Button from "@mittwald/flow-react-components/Button";
 
 export default () => {
   const DomainList = typedList<Domain>();
@@ -20,6 +22,16 @@ export default () => {
   return (
     <DomainList.List batchSize={5}>
       <DomainList.StaticData data={domains} />
+      <DomainList.ActionGroup>
+        <Button
+          color="secondary"
+          variant="soft"
+          slot="secondary"
+        >
+          <IconDownload />
+        </Button>
+        <Button color="accent">Anlegen</Button>
+      </DomainList.ActionGroup>
       <DomainList.Search />
       <DomainList.Filter
         property="type"

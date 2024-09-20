@@ -8,7 +8,7 @@
     gap: var(--list--block-to-block-spacing);
     align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap;
+    flex-wrap: wrap-reverse;
   }
 
   .pickerList {
@@ -18,10 +18,21 @@
     column-gap: var(--list--content-to-content-spacing);
   }
 
-  .searchField {
+  .searchAndActions {
     display: flex;
-    gap: var(--list--content-to-content-spacing);
     flex-grow: 1;
-    min-width: 200px;
+    gap: var(--list--content-to-content-spacing);
+    flex-wrap: wrap-reverse;
+    overflow: hidden;
+    justify-content: space-between;
+  }
+
+  .searchField {
+    min-width: 150px;
+    flex-grow: 1;
+  }
+
+  .actionGroup {
+    margin-left: auto;
   }
 }

@@ -37,11 +37,11 @@ export const Header: FC<Props> = (props) => {
           <SortingPicker />
           {filterPickerList}
         </div>
-        <div>
+        <div className={styles.searchAndActions}>
           {list.search && (
             <SearchField className={styles.searchField} search={list.search} />
           )}
-          <ActionGroup />
+          {list.actionGroup && <ActionGroup className={styles.actionGroup} />}
         </div>
       </div>
       <ActiveFilters />

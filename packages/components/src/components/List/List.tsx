@@ -25,6 +25,7 @@ import { Table } from "@/components/List/components/Table";
 import { Table as TableSetupComponent } from "@/components/List/setupComponents/Table";
 import { TableHeader } from "@/components/List/setupComponents/TableHeader";
 import { TableBody } from "@/components/List/setupComponents/TableBody";
+import { ActionGroup } from "@/components/List/setupComponents/ActionGroup";
 
 export interface ListProps<T>
   extends PropsWithChildren,
@@ -93,6 +94,8 @@ export const List = flowComponent("List", (props) => {
   const tableHeaderProps = deepFindOfType(children, TableHeader)?.props;
   const tableBodyProps = deepFindOfType(children, TableBody)?.props;
 
+  const actionGroupProps = deepFindOfType(children, ActionGroup)?.props;
+
   const listModel = ListModel.useNew<never>({
     onChange,
     loader: loaderShape,
@@ -139,6 +142,7 @@ export const List = flowComponent("List", (props) => {
     batchesController: {
       batchSize,
     },
+    actionGroup: actionGroupProps,
     ...restProps,
   });
 

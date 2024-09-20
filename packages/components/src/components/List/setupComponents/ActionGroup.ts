@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 
 interface Props {
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 export const ActionGroup = (ignoredProps: Props) => null;

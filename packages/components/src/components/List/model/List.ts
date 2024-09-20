@@ -83,7 +83,9 @@ export class List<T> {
       manualPagination: this.loader.manualPagination,
       manualSorting: this.loader.manualSorting,
     });
-    this.actionGroup = actionGroup ? new ActionGroup() : undefined;
+    this.actionGroup = actionGroup
+      ? new ActionGroup(actionGroup.children)
+      : undefined;
 
     const [viewMode, setViewMode] = useState(defaultViewMode ?? "list");
     this.viewMode = viewMode;
