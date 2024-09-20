@@ -4,4 +4,6 @@ export class ActionGroup {
   public readonly children: ReactNode;
 }
 
-export interface ActionGroupShape {}
+export interface ActionGroupShape {
+  children: ReactNode;
+}
