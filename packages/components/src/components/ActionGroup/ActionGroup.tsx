@@ -25,7 +25,7 @@ export const ActionGroup = flowComponent("ActionGroup", (props) => {
     className,
     refProp: ref,
     ignoreBreakpoint,
-    spacing,
+    spacing = "s",
     ...rest
   } = props;
 
@@ -53,13 +53,9 @@ export const ActionGroup = flowComponent("ActionGroup", (props) => {
             <div
               className={styles.actionGroup}
               role="group"
-              style={
-                spacing
-                  ? {
-                      gap: `var(--action-group--button-to-button-spacing--${spacing})`,
-                    }
-                  : undefined
-              }
+              style={{
+                gap: `var(--action-group--button-to-button-spacing--${spacing})`,
+              }}
             >
               {children}
             </div>
