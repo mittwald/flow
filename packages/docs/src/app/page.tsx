@@ -20,21 +20,22 @@ import styles from "./layout.module.scss";
 const Home: FC = () => {
   return (
     <ColumnLayout l={[1]} m={[1]}>
-      <LayoutCard>
+      <LayoutCard className={styles.homeTopLayoutCard}>
         <Section>
           <Image
             className={styles.homeImage}
             src={homeImage.src}
             alt="Flow Design System"
           />
-
-          <Heading level={1}>
-            Flow Design System <StatusBadge>beta</StatusBadge>
-          </Heading>
-          <Text>
-            Entwickle performante und nutzerzentrierte Benutzeroberflächen, die
-            die Markenidentität von mittwald konsistent widerspiegeln.
-          </Text>
+          <ColumnLayout l={[1]} className={styles.homeTopContent}>
+            <Heading level={1}>
+              Flow Design System <StatusBadge>beta</StatusBadge>
+            </Heading>
+            <Text>
+              Entwickle performante und nutzerzentrierte Benutzeroberflächen,
+              die die Markenidentität von mittwald konsistent widerspiegeln.
+            </Text>
+          </ColumnLayout>
         </Section>
       </LayoutCard>
       <LayoutCard>
