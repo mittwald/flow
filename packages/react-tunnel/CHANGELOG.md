@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.235](https://github.com/mittwald/flow/compare/0.1.0-alpha.234...0.1.0-alpha.235) (2024-09-20)
+
+### Bug Fixes
+
+- **Tabs:** fix Tabs crashing when used in Activity
+  ([be087bc](https://github.com/mittwald/flow/commit/be087bca064825243f0dabb1a23e57a91a3c4e53))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.234](https://github.com/mittwald/flow/compare/0.1.0-alpha.233...0.1.0-alpha.234) (2024-09-18)
 
 **Note:** Version bump only for package @mittwald/react-tunnel
