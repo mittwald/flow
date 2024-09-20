@@ -21,7 +21,7 @@ export const getColorFromChildren = (
   });
 
   const propsCode = objectHash(identifyingObject);
-  const number = Math.abs(propsCode % 4);
+  const number = Math.abs(propsCode % (avatarColors.length - 1));
 
   return avatarColors[number];
 };
