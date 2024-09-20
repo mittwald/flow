@@ -4160,7 +4160,7 @@ const RAW_RUNTIME_STATE =
           ["@types/next", null],\
           ["@types/node", "npm:22.5.2"],\
           ["@types/prettier", "npm:3.0.0"],\
-          ["@types/prop-types", "npm:15.7.12"],\
+          ["@types/prop-types", "npm:15.7.13"],\
           ["@types/react", "npm:18.3.5"],\
           ["@types/react-dom", "npm:18.3.0"],\
           ["@types/react-hook-form", null],\
@@ -4267,7 +4267,7 @@ const RAW_RUNTIME_STATE =
           ["@types/next", null],\
           ["@types/node", "npm:22.5.2"],\
           ["@types/prettier", "npm:3.0.0"],\
-          ["@types/prop-types", "npm:15.7.12"],\
+          ["@types/prop-types", "npm:15.7.13"],\
           ["@types/react", "npm:18.3.5"],\
           ["@types/react-dom", "npm:18.3.0"],\
           ["@types/react-hook-form", null],\
@@ -4366,7 +4366,7 @@ const RAW_RUNTIME_STATE =
           ["@types/luxon", "npm:3.4.2"],\
           ["@types/node", "npm:22.5.2"],\
           ["@types/prettier", "npm:3.0.0"],\
-          ["@types/prop-types", "npm:15.7.12"],\
+          ["@types/prop-types", "npm:15.7.13"],\
           ["@types/react", "npm:18.3.5"],\
           ["@types/react-dom", "npm:18.3.0"],\
           ["@types/rollup", "npm:0.54.0"],\
@@ -10430,10 +10430,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@types/prop-types", [\
-      ["npm:15.7.12", {\
-        "packageLocation": "./.yarn/cache/@types-prop-types-npm-15.7.12-b093f43531-1babcc7db6.zip/node_modules/@types/prop-types/",\
+      ["npm:15.7.13", {\
+        "packageLocation": "./.yarn/cache/@types-prop-types-npm-15.7.13-ac81cbe352-1b20fc6728.zip/node_modules/@types/prop-types/",\
         "packageDependencies": [\
-          ["@types/prop-types", "npm:15.7.12"]\
+          ["@types/prop-types", "npm:15.7.13"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -10461,7 +10461,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/unplugged/@types-react-npm-18.3.3-07e68e178e/node_modules/@types/react/",\
         "packageDependencies": [\
           ["@types/react", "npm:18.3.3"],\
-          ["@types/prop-types", "npm:15.7.12"],\
+          ["@types/prop-types", "npm:15.7.13"],\
           ["csstype", "npm:3.1.3"]\
         ],\
         "linkType": "HARD"\
@@ -10470,7 +10470,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/unplugged/@types-react-npm-18.3.5-85b093554b/node_modules/@types/react/",\
         "packageDependencies": [\
           ["@types/react", "npm:18.3.5"],\
-          ["@types/prop-types", "npm:15.7.12"],\
+          ["@types/prop-types", "npm:15.7.13"],\
           ["csstype", "npm:3.1.3"]\
         ],\
         "linkType": "HARD"\
