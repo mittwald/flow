@@ -11,6 +11,7 @@ import {
   IconCustomer,
   IconDashboard,
   IconDatabase,
+  IconDeliveryBox,
   IconDomain,
   IconEmail,
   IconExtension,
@@ -24,9 +25,11 @@ import {
   IconPerformance,
   IconProject,
   IconSearchEngine,
+  IconSecurity,
   IconServer,
   IconSpamProtectionOff,
   IconSpamProtectionOn,
+  IconSshKey,
   IconSshSftp,
   IconStar,
   IconStarFilled,
@@ -72,6 +75,10 @@ import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
   <LabeledValue>
     <Label>E-Mail</Label>
     <IconEmail />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Delivery Box</Label>
+    <IconDeliveryBox />
   </LabeledValue>
   <LabeledValue>
     <Label>App</Label>
@@ -184,5 +191,13 @@ import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
   <LabeledValue>
     <Label>Terminate</Label>
     <IconTerminate />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Security</Label>
+    <IconSecurity />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>SshKey</Label>
+    <IconSshKey />
   </LabeledValue>
 </ColumnLayout>;

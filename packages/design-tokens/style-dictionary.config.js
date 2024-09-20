@@ -22,6 +22,16 @@ export default {
   parsers: ["yml-parser"],
   source: ["src/**/*.yml"],
   platforms: {
+    json: {
+      buildPath: "dist/",
+      transformGroup: "js",
+      files: [
+        {
+          format: "json",
+          destination: "variables.json",
+        },
+      ],
+    },
     css: {
       transforms: [
         // roughly the predefined css transform group

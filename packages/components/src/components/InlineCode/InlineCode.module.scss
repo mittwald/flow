@@ -1,5 +1,5 @@
 .inlineCode {
-  font-family: RobotoMono, "sans-serif";
+  font-family: FiraCode, "monospace";
   font-size: var(--inline-code--font-size);
   line-height: var(--inline-code--line-height);
   word-wrap: break-word;
@@ -8,4 +8,15 @@
   border-radius: var(--inline-code--corner-radius);
   display: inline-block;
   max-width: fit-content;
+
+  @mixin variant($color) {
+    &:where(.#{$color}) {
+      color: var(--inline-code--#{$color}-content-color);
+      background-color: var(--inline-code--#{$color}-background-color);
+    }
+  }
+
+  @include variant(neutral);
+  @include variant(light);
+  @include variant(dark);
 }

@@ -17,6 +17,12 @@
 }
 
 .actionGroupContainer {
+  &.ignoreBreakpoint {
+    .actionGroup {
+      flex-wrap: wrap;
+    }
+  }
+
   &:not(.ignoreBreakpoint) {
     container-type: inline-size;
 

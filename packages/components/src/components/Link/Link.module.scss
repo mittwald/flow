@@ -7,6 +7,7 @@
   transition-property: color;
   transition-duration: var(--transition--duration--default);
   color: var(--link--color--default);
+  width: fit-content;
 
   &:hover {
     color: var(--link--color--hover);

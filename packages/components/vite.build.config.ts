@@ -77,6 +77,7 @@ export default defineConfig(
           Section: "./src/components/Section/index.ts",
           Select: "./src/components/Select/index.ts",
           Separator: "./src/components/Separator/index.ts",
+          SettingsProvider: "./src/components/SettingsProvider/index.ts",
           Skeleton: "./src/components/Skeleton/index.ts",
           SkeletonText: "./src/components/SkeletonText/index.ts",
           Slider: "./src/components/Slider/index.ts",

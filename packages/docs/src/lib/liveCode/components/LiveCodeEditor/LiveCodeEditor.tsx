@@ -61,7 +61,7 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
     }
   };
 
-  const codeToDisplay = code.replace(/\r?\n$/, "");
+  const codeToDisplay = code.replace(/;\r?\n$/, "");
 
   return (
     <LiveProvider
@@ -95,6 +95,7 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
         {!editorDisabled && (
           <div className={styles.editorContainer}>
             <LiveEditor
+              tabMode="focus"
               theme={themes.vsLight}
               className={clsx(
                 styles.editor,

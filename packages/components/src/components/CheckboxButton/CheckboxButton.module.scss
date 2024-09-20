@@ -1,14 +1,14 @@
 @use "../../styles/mixins/formControl";
 
 .checkboxButton {
-  @include formControl.formControl();
   display: grid;
   row-gap: var(--checkbox-button--text-to-text-spacing);
   column-gap: var(--checkbox-button--icon-to-text-spacing);
-  border-radius: var(--form-control--corner-radius);
   grid-template-areas: "icon label";
   grid-template-columns: auto 1fr;
   width: fit-content;
+
+  @include formControl.formControl();
 
   /* Elements */
 

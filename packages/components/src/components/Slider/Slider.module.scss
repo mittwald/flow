@@ -76,7 +76,10 @@
 
     &[data-focus-visible] {
       @include focus.focus;
-      outline-offset: var(--size-px--xs);
+
+      & {
+        outline-offset: var(--size-px--xs);
+      }
     }
   }
 

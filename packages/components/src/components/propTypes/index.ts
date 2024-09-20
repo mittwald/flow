@@ -44,6 +44,9 @@ import type { OverlayTriggerProps } from "@/components/OverlayTrigger";
 import type { ListProps } from "@/components/List";
 import type { SearchFieldProps } from "@/components/SearchField";
 import type { BadgeProps } from "@/components/Badge";
+import type { DatePickerProps } from "@/components/DatePicker";
+import type * as Aria from "react-aria-components";
+import type { DateRangePickerProps } from "@/components/DateRangePicker";
 
 export * from "./types";
 
@@ -63,6 +66,8 @@ export interface FlowComponentPropsTypes {
   ContextualHelp: ContextualHelpProps;
   CopyButton: CopyButtonProps;
   CounterBadge: CounterBadgeProps;
+  DatePicker: DatePickerProps<Aria.DateValue>;
+  DateRangePicker: DateRangePickerProps<Aria.DateValue>;
   FieldDescription: FieldDescriptionProps;
   FieldError: FieldErrorProps;
   Header: HeaderProps;
@@ -92,6 +97,7 @@ export interface FlowComponentPropsTypes {
   StatusBadge: StatusBadgeProps;
   Switch: SwitchProps;
   Tabs: TabsProps;
+  TabTitle: TabsProps;
   Text: TextProps;
   TextArea: TextAreaProps;
   TextField: TextFieldProps;
@@ -116,6 +122,8 @@ const propsContextSupportingComponentsMap: Record<
   ContextualHelp: true,
   CopyButton: true,
   CounterBadge: true,
+  DatePicker: true,
+  DateRangePicker: true,
   FieldDescription: true,
   FieldError: true,
   Header: true,
@@ -145,6 +153,7 @@ const propsContextSupportingComponentsMap: Record<
   StatusBadge: true,
   Switch: true,
   Tabs: true,
+  TabTitle: true,
   TestComponent: true,
   Text: true,
   TextArea: true,

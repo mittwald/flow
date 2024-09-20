@@ -15,6 +15,7 @@ type AriaComponentType = ComponentType<{
 export interface OverlayTriggerProps extends FlowComponentProps {
   isDefaultOpen?: boolean;
   children: ReactNode;
+  controller?: OverlayController;
 }
 
 interface Props extends OverlayTriggerProps {
@@ -28,9 +29,11 @@ export const OverlayTrigger: FC<Props> = (props) => {
     isDefaultOpen = false,
     component: AriaOverlayTrigger,
     children,
+    controller: controllerFromProps,
   } = props;
 
-  const overlayController = OverlayController.useNew({ isDefaultOpen });
+  const newOverlayController = OverlayController.useNew({ isDefaultOpen });
+  const overlayController = controllerFromProps ?? newOverlayController;
   const isOpen = overlayController.useIsOpen();
 
   const propsContext: PropsContext = {

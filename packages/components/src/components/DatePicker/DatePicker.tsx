@@ -1,23 +1,24 @@
-import type { FC, PropsWithChildren, ReactNode } from "react";
+import type { PropsWithChildren, ReactNode } from "react";
 import React from "react";
 import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import * as Aria from "react-aria-components";
-import { Calendar } from "./components/Calendar";
 import { DateInput } from "./components/DateInput";
 import { FieldError } from "@/components/FieldError";
 import styles from "../FormField/FormField.module.scss";
 import { Popover } from "@/components/Popover";
 import { useOverlayController } from "@/lib/controller";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import { Calendar } from "@/components/Calendar";
 
 export interface DatePickerProps<T extends Aria.DateValue>
   extends PropsWithChildren<Omit<Aria.DatePickerProps<T>, "children">> {
   errorMessage?: ReactNode;
 }
 
-export const DatePicker: FC<DatePickerProps<Aria.DateValue>> = (props) => {
-  const { children, className, errorMessage, ...rest } = props;
+export const DatePicker = flowComponent("DatePicker", (props) => {
+  const { children, className, errorMessage, onChange, ...rest } = props;
 
   const rootClassName = clsx(styles.formField, className);
 
@@ -29,6 +30,9 @@ export const DatePicker: FC<DatePickerProps<Aria.DateValue>> = (props) => {
     FieldDescription: {
       className: styles.fieldDescription,
     },
+    FieldError: {
+      className: styles.customFieldError,
+    },
   };
 
   const popoverController = useOverlayController("Popover");
@@ -39,7 +43,12 @@ export const DatePicker: FC<DatePickerProps<Aria.DateValue>> = (props) => {
       className={rootClassName}
       onOpenChange={(v) => popoverController.setOpen(v)}
       isOpen={popoverController.isOpen}
-      onChange={popoverController.close}
+      onChange={(value) => {
+        if (onChange) {
+          onChange(value);
+        }
+        popoverController.close();
+      }}
     >
       <DateInput isDisabled={props.isDisabled} />
       <PropsContextProvider props={propsContext}>
@@ -55,6 +64,6 @@ export const DatePicker: FC<DatePickerProps<Aria.DateValue>> = (props) => {
       </Popover>
     </Aria.DatePicker>
   );
-};
+});
 
 export default DatePicker;

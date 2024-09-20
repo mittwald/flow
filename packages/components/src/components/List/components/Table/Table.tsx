@@ -68,6 +68,7 @@ export const Table: FC = () => {
               )
             }
             key={item.id}
+            id={item.id}
             onAction={rowAction ? () => rowAction(item.data) : undefined}
             {...table.body.row.componentProps}
           >

@@ -115,7 +115,18 @@
       margin-left: auto;
 
       &[data-entering] {
-        animation: modal-slide-in var(--transition--duration--slow);
+        animation: modal-slide-in-from-right var(--transition--duration--slow);
+      }
+    }
+
+    &.left {
+      > div {
+        margin-left: unset;
+        margin-right: auto;
+
+        &[data-entering] {
+          animation: modal-slide-in-from-left var(--transition--duration--slow);
+        }
       }
     }
 
@@ -192,12 +203,22 @@
   }
 }
 
-@keyframes modal-slide-in {
+@keyframes modal-slide-in-from-right {
   from {
     margin-right: -100px;
   }
 
   to {
     margin-right: 0;
+  }
+}
+
+@keyframes modal-slide-in-from-left {
+  from {
+    margin-left: -100px;
+  }
+
+  to {
+    margin-left: 0;
   }
 }

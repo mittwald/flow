@@ -5,6 +5,8 @@ import { LayoutCard } from "@mittwald/flow-react-components/LayoutCard";
 import { Tabs } from "@mittwald/flow-react-components/Tabs";
 import React from "react";
 import TabContent from "@/app/_components/layout/TabContent/TabContent";
+import { Link } from "@mittwald/flow-react-components/Link";
+import { IconExternalLink } from "@mittwald/flow-react-components/Icons";
 
 const contentFolder = "src/content";
 
@@ -45,6 +47,8 @@ export default async function Page(props: Props) {
     "guidelines",
   );
 
+  const component = indexMdxFile?.mdxSource.frontmatter.component;
+
   return (
     <>
       {indexMdxFile && <MainContent mdxFile={indexMdxFile} />}
@@ -63,6 +67,14 @@ export default async function Page(props: Props) {
             )}
           </Tabs>
         </LayoutCard>
+      )}
+
+      {component && (
+        <Link
+          href={`https://github.com/mittwald/flow/issues/new?title=Feedback%20on%20${component}%20component`}
+        >
+          Feedback geben <IconExternalLink />
+        </Link>
       )}
     </>
   );

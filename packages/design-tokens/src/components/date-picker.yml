@@ -6,17 +6,23 @@ date-picker:
     value: "{size-px.xs}"
 
 calendar:
-  padding:
-    value: "{size-px.m}"
   cell-size:
-    value: "{size-px.xl}"
+    value: 2.25rem
+  cell-corner-radius:
+    value: "{corner-radius.round}"
   day-background-color:
     disabled:
       value: "{disabled-plain-background-color}"
     hover:
-      value: "{primary-plain-background-color.hover}"
+      value: "{neutral-plain-background-color.hover}"
     pressed:
-      value: "{primary-plain-background-color.pressed}"
-  day-color:
+      value: "{neutral-plain-background-color.pressed}"
+    selected:
+      value: "{primary-solid-background-color.default}"
+  day-content-color:
     disabled:
       value: "{disabled-plain-content-color}"
+    selected:
+      value: "{primary-solid-content-color}"
+  day-range-background-color:
+    value: "{primary-plain-background-color.hover}"
