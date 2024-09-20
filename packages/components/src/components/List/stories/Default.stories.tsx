@@ -95,7 +95,7 @@ const meta: Meta<typeof List> = {
           <DomainList.Item textValue={(domain) => domain.hostname}>
             {(domain) => (
               <DomainList.ItemView>
-                <Avatar variant={domain.type === "Domain" ? 1 : 2}>
+                <Avatar color={domain.type === "Domain" ? "blue" : "teal"}>
                   {domain.type === "Domain" ? (
                     <IconDomain />
                   ) : (
