@@ -40,6 +40,39 @@ export default () => {
       />
       <DomainList.Sorting property="domain" name="Domain" />
       <DomainList.Sorting property="type" name="Type" />
+      <DomainList.Table>
+        <DomainList.TableHeader>
+          <DomainList.TableColumn>
+            Name
+          </DomainList.TableColumn>
+          <DomainList.TableColumn>
+            Type
+          </DomainList.TableColumn>
+          <DomainList.TableColumn>
+            TLD
+          </DomainList.TableColumn>
+          <DomainList.TableColumn>
+            Hostname
+          </DomainList.TableColumn>
+        </DomainList.TableHeader>
+
+        <DomainList.TableBody>
+          <DomainList.TableRow>
+            <DomainList.TableCell>
+              {(domain) => domain.domain}
+            </DomainList.TableCell>
+            <DomainList.TableCell>
+              {(domain) => domain.type}
+            </DomainList.TableCell>
+            <DomainList.TableCell>
+              {(domain) => domain.tld}
+            </DomainList.TableCell>
+            <DomainList.TableCell>
+              {(domain) => domain.hostname}
+            </DomainList.TableCell>
+          </DomainList.TableRow>
+        </DomainList.TableBody>
+      </DomainList.Table>
       <DomainList.Item>
         {(domain) => (
           <DomainList.ItemView>
