@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.240](https://github.com/mittwald/flow/compare/0.1.0-alpha.239...0.1.0-alpha.240) (2024-09-20)
+
+### Bug Fixes
+
+- **ActionGroup:** fix layout with ignored breakpoint
+  ([#732](https://github.com/mittwald/flow/issues/732))
+  ([16476bb](https://github.com/mittwald/flow/commit/16476bb5afca42379d766c477702f8d1d50f672c))
+- **Tooltip:** add box shadow to tooltip
+  ([ff91676](https://github.com/mittwald/flow/commit/ff91676d9d2252c49a6441ef021b58b58f2bd2ec))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.239](https://github.com/mittwald/flow/compare/0.1.0-alpha.238...0.1.0-alpha.239) (2024-09-20)
 
 **Note:** Version bump only for package @mittwald/flow-project
