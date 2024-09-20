@@ -52,6 +52,7 @@
 .mainNavigation {
   padding-inline: var(--size-px--l);
   width: 270px;
+  flex-shrink: 0;
 }
 
 .mobileNavigation {
