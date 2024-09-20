@@ -119,7 +119,7 @@ const MainNavigation: FC<Props> = (props) => {
   return (
     <LayoutCard className={styles.mainNavigation}>
       <Section>
-        <Heading id={headingId} levelVisual={2}>
+        <Heading id={headingId}>
           <GroupText>{mainPathSegment}</GroupText>
         </Heading>
 

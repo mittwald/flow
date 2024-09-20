@@ -8,7 +8,7 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import * as Aria from "react-aria-components";
 
 export interface HeadingProps extends Aria.HeadingProps, FlowComponentProps {
-  levelVisual?: number;
+  size?: "xs" | "s" | "m" | "l" | "xl" | "xxl";
   /** @default "primary" */
   color?: "primary" | "dark" | "light";
 }
@@ -18,15 +18,15 @@ export const Heading = flowComponent("Heading", (props) => {
     children,
     className,
     level = 2,
-    levelVisual = level,
     color = "primary",
+    size,
     refProp: ref,
     ...rest
   } = props;
 
   const rootClassName = clsx(
     styles.heading,
-    levelVisual && styles[`h${levelVisual}`],
+    size && styles[size],
     styles[color],
     className,
   );
@@ -34,7 +34,6 @@ export const Heading = flowComponent("Heading", (props) => {
   const propsContext: PropsContext = {
     Icon: {
       "aria-hidden": true,
-      size: "s",
       className: styles.icon,
     },
     StatusBadge: {

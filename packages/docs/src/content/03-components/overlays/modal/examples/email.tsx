@@ -9,7 +9,7 @@ import { IconEmail } from "@mittwald/flow-react-components/Icons";
 
 <StaticModal>
   <div className="flow--modal--content">
-    <Heading levelVisual={4}>
+    <Heading>
       <IconEmail />
       E-Mail-Adresse anlegen
     </Heading>

@@ -13,7 +13,6 @@ import * as EditorComponents from "./components";
 import clsx from "clsx";
 import { Button } from "@mittwald/flow-react-components/Button";
 import { themes } from "prism-react-renderer";
-import { PropsContextProvider } from "@mittwald/flow-react-components/PropsContextProvider";
 
 export interface LiveCodeEditorProps {
   code: string | JSX.Element;
@@ -81,17 +80,8 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
           className,
         )}
       >
-        <PropsContextProvider
-          props={{
-            Section: {
-              Heading: {
-                levelVisual: 4,
-              },
-            },
-          }}
-        >
-          <LivePreview className={clsx(styles.preview)} style={{ zoom }} />
-        </PropsContextProvider>
+        <LivePreview className={clsx(styles.preview)} style={{ zoom }} />
+
         {!editorDisabled && (
           <div className={styles.editorContainer}>
             <LiveEditor

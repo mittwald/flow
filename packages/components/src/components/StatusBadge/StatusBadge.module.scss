@@ -1,20 +1,18 @@
 @use "@/styles/mixins/ellipsis";
 
 .statusBadge {
-  font-size: var(--status-badge--font-size);
-  font-weight: var(--status-badge--font-weight);
-  line-height: var(--status-badge--line-height);
-  border-radius: var(--status-badge--corner-radius);
-  padding-inline: var(--status-badge--padding-x);
-  padding-block: calc(
-    var(--status-badge--padding-y) - (var(--status-badge--border-width))
-  );
+  font-size: var(--badge--font-size);
+  font-weight: var(--badge--font-weight);
+  line-height: var(--badge--line-height);
+  border-radius: var(--badge--corner-radius);
+  padding-inline: var(--badge--padding-x);
+  padding-block: calc(var(--badge--padding-y) - (var(--badge--border-width)));
   display: flex;
   align-items: center;
   column-gap: var(--status-badge--icon-to-text-spacing);
   max-width: fit-content;
-  border-style: var(--status-badge--border-style);
-  border-width: var(--status-badge--border-width);
+  border-style: var(--badge--border-style);
+  border-width: var(--badge--border-width);
 
   .text {
     @include ellipsis.ellipsis();

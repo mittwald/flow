@@ -9,6 +9,10 @@
   padding: var(--menu-item--padding-y) var(--menu-item--padding-x);
   align-items: center;
 
+  &:not(a) {
+    cursor: default;
+  }
+
   @include focus.focus;
 
   /* Elements */
