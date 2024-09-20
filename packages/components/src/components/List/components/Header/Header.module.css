@@ -23,7 +23,6 @@
     flex-grow: 1;
     gap: var(--list--content-to-content-spacing);
     flex-wrap: wrap-reverse;
-    overflow: hidden;
     justify-content: space-between;
   }
 
