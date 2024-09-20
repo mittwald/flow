@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.241](https://github.com/mittwald/flow/compare/0.1.0-alpha.240...0.1.0-alpha.241) (2024-09-20)
+
+### Bug Fixes
+
+- **Datepicker:** fix onChange
+  ([4018b42](https://github.com/mittwald/flow/commit/4018b42021316b0ce1c98dbb48588d63fbc2710b))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.240](https://github.com/mittwald/flow/compare/0.1.0-alpha.239...0.1.0-alpha.240) (2024-09-20)
 
 ### Bug Fixes
