@@ -15,7 +15,6 @@ import { TableHeader } from "@/components/List/setupComponents/TableHeader";
 import { TableRow } from "@/components/List/setupComponents/TableRow";
 import { TableBody } from "@/components/List/setupComponents/TableBody";
 import { Table } from "@/components/List/setupComponents/Table";
-import { ActionGroup } from "@/components/List/setupComponents/ActionGroup";
 
 export const TypedList = <T>() =>
   List as unknown as ComponentType<ListProps<T>>;
@@ -36,5 +35,4 @@ export const typedList = <T>() => ({
   StaticData: TypedListStaticData<T>(),
   LoaderAsync: TypedListLoaderAsync<T>(),
   LoaderAsyncResource: TypedListLoaderAsyncResource<T>(),
-  ActionGroup: ActionGroup,
 });

@@ -9,7 +9,7 @@ import { useList } from "@/components/List/hooks/useList";
 import type { PropsWithClassName } from "@/lib/types/props";
 import { SearchField } from "@/components/List/components/Header/components/SearchField/SearchField";
 import { ViewModeMenu } from "@/components/List/components/Header/components/ViewModeMenu/ViewModeMenu";
-import { ActionGroup } from "@/components/List/components/ActionGroup";
+import { TunnelExit } from "@mittwald/react-tunnel";
 
 type Props = PropsWithClassName;
 
@@ -41,7 +41,7 @@ export const Header: FC<Props> = (props) => {
           {list.search && (
             <SearchField className={styles.searchField} search={list.search} />
           )}
-          {list.actionGroup && <ActionGroup className={styles.actionGroup} />}
+          <TunnelExit id="actions" />
         </div>
       </div>
       <ActiveFilters />

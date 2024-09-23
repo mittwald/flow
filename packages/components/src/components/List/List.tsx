@@ -25,7 +25,9 @@ import { Table } from "@/components/List/components/Table";
 import { Table as TableSetupComponent } from "@/components/List/setupComponents/Table";
 import { TableHeader } from "@/components/List/setupComponents/TableHeader";
 import { TableBody } from "@/components/List/setupComponents/TableBody";
-import { ActionGroup } from "@/components/List/setupComponents/ActionGroup";
+import { TunnelProvider } from "@mittwald/react-tunnel";
+import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import headerStyles from "./components/Header/Header.module.css";
 
 export interface ListProps<T>
   extends PropsWithChildren,
@@ -94,8 +96,6 @@ export const List = flowComponent("List", (props) => {
   const tableHeaderProps = deepFindOfType(children, TableHeader)?.props;
   const tableBodyProps = deepFindOfType(children, TableBody)?.props;
 
-  const actionGroupProps = deepFindOfType(children, ActionGroup)?.props;
-
   const listModel = ListModel.useNew<never>({
     onChange,
     loader: loaderShape,
@@ -142,24 +142,36 @@ export const List = flowComponent("List", (props) => {
     batchesController: {
       batchSize,
     },
-    actionGroup: actionGroupProps,
     ...restProps,
   });
 
+  const propsContext: PropsContext = {
+    ActionGroup: {
+      className: headerStyles.actions,
+      tunnelId: "actions",
+      ignoreBreakpoint: true,
+    },
+  };
+
   return (
-    <listContext.Provider
-      value={{
-        list: listModel,
-      }}
-    >
-      <DataLoader />
-      <div className={styles.list} ref={ref}>
-        <Header />
-        {listModel.viewMode === "list" && <Items />}
-        {listModel.viewMode === "table" && <Table />}
-        <Footer />
-      </div>
-    </listContext.Provider>
+    <PropsContextProvider props={propsContext}>
+      <TunnelProvider>
+        <listContext.Provider
+          value={{
+            list: listModel,
+          }}
+        >
+          <DataLoader />
+          <div className={styles.list} ref={ref}>
+            {children}
+            <Header />
+            {listModel.viewMode === "list" && <Items />}
+            {listModel.viewMode === "table" && <Table />}
+            <Footer />
+          </div>
+        </listContext.Provider>
+      </TunnelProvider>
+    </PropsContextProvider>
   );
 });
 
