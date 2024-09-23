@@ -16,8 +16,9 @@ import type {
   PropertyValueRenderMethod,
 } from "@/components/List/model/types";
 import { customPropertyPrefix } from "@/components/List/model/types";
-import { unique } from "remeda";
+import { difference, unique } from "remeda";
 import { FilterValue } from "@/components/List/model/filter/FilterValue";
+import z from "zod";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const equalsPropertyMatcher: FilterMatcher<any, never, never> = (
@@ -30,6 +31,10 @@ const stringCastRenderMethod: PropertyValueRenderMethod<any> = (value) =>
   String(value);
 
 export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
+  public static readonly settingsStorageSchema = z
+    .record(z.array(z.unknown()))
+    .optional();
+
   private _values?: FilterValue[] | undefined;
   private _valuesFromTableState?: FilterValue[];
   public readonly list: List<T>;
@@ -39,7 +44,7 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
   public readonly renderItem: PropertyValueRenderMethod<TMatchValue>;
   public readonly name?: string;
   private onFilterUpdateCallbacks = new Set<() => unknown>();
-  private readonly defaultSelectedValues: FilterValue[];
+  private readonly defaultSelectedValues?: FilterValue[];
 
   public constructor(list: List<T>, shape: FilterShape<T, TProp, TMatchValue>) {
     this.list = list;
@@ -49,21 +54,35 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
     this.matcher = shape.matcher ?? equalsPropertyMatcher;
     this.renderItem = shape.renderItem ?? stringCastRenderMethod;
     this.name = shape.name;
+
     this.defaultSelectedValues = shape.defaultSelected
       ? this.values.filter((v) =>
           shape.defaultSelected?.some((d) => d === v.value),
         )
-      : [];
+      : undefined;
+  }
+
+  private getStoredDefaultSelectedValues() {
+    const storedValues =
+      this.list.getStoredFilterDefaultSettings()?.[this.property as string];
+
+    return storedValues
+      ? this.values.filter((v) => storedValues.includes(v.value))
+      : undefined;
   }
 
   public updateInitialState(initialState: InitialTableState) {
-    initialState.columnFilters = [
-      ...(initialState.columnFilters ?? []),
-      ...this.defaultSelectedValues.map((d) => ({
-        id: d.filter.property,
-        value: d,
-      })),
-    ];
+    const initialValues = this.getInitialValues();
+
+    if (initialValues?.length) {
+      initialState.columnFilters = [
+        ...(initialState.columnFilters ?? []),
+        {
+          id: this.property as string,
+          value: initialValues,
+        },
+      ];
+    }
   }
 
   public updateTableColumnDef(def: ColumnDef<T>): void {
@@ -193,18 +212,35 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
     this.onFilterUpdateCallbacks.forEach((cb) => cb());
   }
 
-  public clearValues(): void {
-    let updatedValue: unknown;
+  public hasChanged(): boolean {
+    const currentValues = this.getArrayValue().map((v) => v.value);
+    const initialValues = (this.getInitialValues() ?? []).map((v) => v.value);
 
-    if (this.mode === "all" || this.mode === "some") {
-      updatedValue = [];
+    return (
+      currentValues.length !== initialValues.length ||
+      difference(currentValues, initialValues).length > 0
+    );
+  }
+
+  private getInitialValues() {
+    return this.getStoredDefaultSelectedValues() ?? this.defaultSelectedValues;
+  }
+
+  public resetValues(): void {
+    let resetTo: unknown;
+    const initialValues = this.getInitialValues();
+
+    if (initialValues) {
+      resetTo = initialValues;
     } else {
-      updatedValue = null;
+      if (this.mode === "all" || this.mode === "some") {
+        resetTo = [];
+      } else {
+        resetTo = null;
+      }
     }
 
-    this.list.reactTable
-      .getTableColumn(this.property)
-      .setFilterValue(updatedValue);
+    this.list.reactTable.getTableColumn(this.property).setFilterValue(resetTo);
     this.onFilterUpdateCallbacks.forEach((cb) => cb());
   }
 

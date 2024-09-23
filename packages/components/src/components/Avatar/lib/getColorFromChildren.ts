@@ -2,10 +2,12 @@ import { hash as objectHash } from "object-code";
 import type { ReactNode } from "react";
 import { isValidElement } from "react";
 import { deepForEach } from "react-children-utilities";
+import type { AvatarColors } from "@/components/Avatar/Avatar";
+import { avatarColors } from "@/components/Avatar/Avatar";
 
-export const getVariantFromChildren = (
+export const getColorFromChildren = (
   children: ReactNode | undefined,
-): number => {
+): AvatarColors => {
   const identifyingObject: (ReactNode | object)[] = [];
 
   deepForEach(children, (c) => {
@@ -20,5 +22,7 @@ export const getVariantFromChildren = (
   });
 
   const propsCode = objectHash(identifyingObject);
-  return Math.abs(propsCode % 4) + 1;
+  const number = Math.abs(propsCode % (avatarColors.length - 1));
+
+  return avatarColors[number];
 };

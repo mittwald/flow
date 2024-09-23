@@ -10,6 +10,7 @@ import Button from "@mittwald/flow-react-components/Button";
 import Heading from "@mittwald/flow-react-components/Heading";
 import Action from "@mittwald/flow-react-components/Action";
 import { sleepLong } from "@/content/03-components/actions/action/examples/lib";
+import Section from "@mittwald/flow-react-components/Section";
 
 <Row>
   <ModalTrigger>
@@ -17,15 +18,17 @@ import { sleepLong } from "@/content/03-components/actions/action/examples/lib";
     <Modal size="s">
       <Heading>Organisation anlegen</Heading>
       <Content>
-        <Text>
-          Eine Organisation kannst du dir wie ein
-          Unternehmen vorstellen. An diesem Ort verwaltest
-          du deine Mitarbeiter, Zahlungsmodalitäten und
-          kannst deine Rechnungen einsehen.
-        </Text>
-        <TextField isRequired>
-          <Label>Organisationsname</Label>
-        </TextField>
+        <Section>
+          <Text>
+            Eine Organisation kannst du dir wie ein
+            Unternehmen vorstellen. An diesem Ort verwaltest
+            du deine Mitarbeiter, Zahlungsmodalitäten und
+            kannst deine Rechnungen einsehen.
+          </Text>
+          <TextField isRequired>
+            <Label>Organisationsname</Label>
+          </TextField>
+        </Section>
       </Content>
       <ActionGroup>
         <Action closeOverlay="Modal">
@@ -47,15 +50,17 @@ import { sleepLong } from "@/content/03-components/actions/action/examples/lib";
     <Modal size="m">
       <Heading>Organisation anlegen</Heading>
       <Content>
-        <Text>
-          Eine Organisation kannst du dir wie ein
-          Unternehmen vorstellen. An diesem Ort verwaltest
-          du deine Mitarbeiter, Zahlungsmodalitäten und
-          kannst deine Rechnungen einsehen.
-        </Text>
-        <TextField isRequired>
-          <Label>Organisationsname</Label>
-        </TextField>
+        <Section>
+          <Text>
+            Eine Organisation kannst du dir wie ein
+            Unternehmen vorstellen. An diesem Ort verwaltest
+            du deine Mitarbeiter, Zahlungsmodalitäten und
+            kannst deine Rechnungen einsehen.
+          </Text>
+          <TextField isRequired>
+            <Label>Organisationsname</Label>
+          </TextField>
+        </Section>
       </Content>
       <ActionGroup>
         <Action closeOverlay="Modal">
@@ -77,15 +82,17 @@ import { sleepLong } from "@/content/03-components/actions/action/examples/lib";
     <Modal size="s" offCanvas>
       <Heading>Organisation anlegen</Heading>
       <Content>
-        <Text>
-          Eine Organisation kannst du dir wie ein
-          Unternehmen vorstellen. An diesem Ort verwaltest
-          du deine Mitarbeiter, Zahlungsmodalitäten und
-          kannst deine Rechnungen einsehen.
-        </Text>
-        <TextField isRequired>
-          <Label>Organisationsname</Label>
-        </TextField>
+        <Section>
+          <Text>
+            Eine Organisation kannst du dir wie ein
+            Unternehmen vorstellen. An diesem Ort verwaltest
+            du deine Mitarbeiter, Zahlungsmodalitäten und
+            kannst deine Rechnungen einsehen.
+          </Text>
+          <TextField isRequired>
+            <Label>Organisationsname</Label>
+          </TextField>
+        </Section>
       </Content>
       <ActionGroup>
         <Action closeOverlay="Modal">
@@ -107,15 +114,17 @@ import { sleepLong } from "@/content/03-components/actions/action/examples/lib";
     <Modal size="m" offCanvas>
       <Heading>Organisation anlegen</Heading>
       <Content>
-        <Text>
-          Eine Organisation kannst du dir wie ein
-          Unternehmen vorstellen. An diesem Ort verwaltest
-          du deine Mitarbeiter, Zahlungsmodalitäten und
-          kannst deine Rechnungen einsehen.
-        </Text>
-        <TextField isRequired>
-          <Label>Organisationsname</Label>
-        </TextField>
+        <Section>
+          <Text>
+            Eine Organisation kannst du dir wie ein
+            Unternehmen vorstellen. An diesem Ort verwaltest
+            du deine Mitarbeiter, Zahlungsmodalitäten und
+            kannst deine Rechnungen einsehen.
+          </Text>
+          <TextField isRequired>
+            <Label>Organisationsname</Label>
+          </TextField>
+        </Section>
       </Content>
       <ActionGroup>
         <Action closeOverlay="Modal">

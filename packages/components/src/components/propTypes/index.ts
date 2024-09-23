@@ -43,9 +43,11 @@ import type { ContextMenuSectionProps } from "@/components/ContextMenu/component
 import type { OverlayTriggerProps } from "@/components/OverlayTrigger";
 import type { ListProps } from "@/components/List";
 import type { SearchFieldProps } from "@/components/SearchField";
+import type { BadgeProps } from "@/components/Badge";
 import type { DatePickerProps } from "@/components/DatePicker";
 import type * as Aria from "react-aria-components";
 import type { DateRangePickerProps } from "@/components/DateRangePicker";
+import type { TimeFieldProps } from "@/components/TimeField";
 
 export * from "./types";
 
@@ -53,6 +55,7 @@ export interface FlowComponentPropsTypes {
   Action: ActionProps;
   ActionGroup: ActionGroupProps;
   Avatar: AvatarProps;
+  Badge: BadgeProps;
   Button: ButtonProps;
   Checkbox: CheckboxProps;
   CheckboxButton: CheckboxButtonProps;
@@ -99,6 +102,7 @@ export interface FlowComponentPropsTypes {
   Text: TextProps;
   TextArea: TextAreaProps;
   TextField: TextFieldProps;
+  TimeField: TimeFieldProps<Aria.TimeValue>;
 }
 
 const propsContextSupportingComponentsMap: Record<
@@ -108,6 +112,7 @@ const propsContextSupportingComponentsMap: Record<
   Action: true,
   ActionGroup: true,
   Avatar: true,
+  Badge: true,
   Button: true,
   Checkbox: true,
   CheckboxButton: true,
@@ -155,6 +160,7 @@ const propsContextSupportingComponentsMap: Record<
   Text: true,
   TextArea: true,
   TextField: true,
+  TimeField: true,
 };
 
 export const propsContextSupportingComponents = Object.keys(

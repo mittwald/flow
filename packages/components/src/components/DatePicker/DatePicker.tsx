@@ -4,13 +4,13 @@ import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import * as Aria from "react-aria-components";
-import { Calendar } from "./components/Calendar";
 import { DateInput } from "./components/DateInput";
 import { FieldError } from "@/components/FieldError";
 import styles from "../FormField/FormField.module.scss";
 import { Popover } from "@/components/Popover";
 import { useOverlayController } from "@/lib/controller";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import { Calendar } from "@/components/Calendar";
 
 export interface DatePickerProps<T extends Aria.DateValue>
   extends PropsWithChildren<Omit<Aria.DatePickerProps<T>, "children">> {
@@ -18,7 +18,7 @@ export interface DatePickerProps<T extends Aria.DateValue>
 }
 
 export const DatePicker = flowComponent("DatePicker", (props) => {
-  const { children, className, errorMessage, ...rest } = props;
+  const { children, className, errorMessage, onChange, ...rest } = props;
 
   const rootClassName = clsx(styles.formField, className);
 
@@ -43,7 +43,12 @@ export const DatePicker = flowComponent("DatePicker", (props) => {
       className={rootClassName}
       onOpenChange={(v) => popoverController.setOpen(v)}
       isOpen={popoverController.isOpen}
-      onChange={popoverController.close}
+      onChange={(value) => {
+        if (onChange) {
+          onChange(value);
+        }
+        popoverController.close();
+      }}
     >
       <DateInput isDisabled={props.isDisabled} />
       <PropsContextProvider props={propsContext}>
