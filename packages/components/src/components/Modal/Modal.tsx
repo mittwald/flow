@@ -58,6 +58,7 @@ export const Modal = flowComponent("Modal", (props) => {
     },
     ActionGroup: {
       className: styles.actionGroup,
+      spacing: "m",
     },
   };
 

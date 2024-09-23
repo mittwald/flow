@@ -13,6 +13,9 @@ import type { Domain } from "../testData/domainApi";
 import { getDomains, getTypes } from "../testData/domainApi";
 import { Section } from "@/components/Section";
 import { typedList } from "@/components/List";
+import { Button } from "@/components/Button";
+import IconDownload from "@/components/Icon/components/icons/IconDownload";
+import { ActionGroup } from "@/components/ActionGroup";
 
 const loadDomains: AsyncDataLoader<Domain> = async (opts) => {
   const response = await getDomains({
@@ -51,6 +54,12 @@ const meta: Meta<typeof List> = {
           aria-label="Domains"
           onAction={(domain) => console.log(domain.hostname)}
         >
+          <ActionGroup>
+            <Button color="secondary" variant="soft" slot="secondary">
+              <IconDownload />
+            </Button>
+            <Button color="accent">Anlegen</Button>
+          </ActionGroup>
           <DomainList.LoaderAsync manualPagination manualSorting={false}>
             {loadDomains}
           </DomainList.LoaderAsync>

@@ -23,8 +23,6 @@ import type { SettingsStore } from "@/components/SettingsProvider/models/Setting
 export class List<T> {
   public readonly settingStorageKey?: string;
   public readonly supportsSettingsStorage: boolean;
-  private readonly filterSettingsStorageKey?: string;
-  private readonly defaultSettings?: SettingsStore;
   public readonly filters: Filter<T, never, never>[];
   public readonly itemView?: ItemView<T>;
   public readonly table?: Table<T>;
@@ -39,6 +37,8 @@ export class List<T> {
   public readonly componentProps: ListSupportedComponentProps;
   public viewMode: ListViewMode;
   public readonly setViewMode: Dispatch<SetStateAction<ListViewMode>>;
+  private readonly filterSettingsStorageKey?: string;
+  private readonly defaultSettings?: SettingsStore;
 
   public constructor(shape: ListShape<T>) {
     const {
@@ -90,10 +90,6 @@ export class List<T> {
     }, [this.filters]);
   }
 
-  public static useNew<T>(shape: ListShape<T>): List<T> {
-    return new List<T>(shape);
-  }
-
   public get isFiltered(): boolean {
     return (
       this.filters.some((f) => f.isActive()) ||
@@ -103,6 +99,10 @@ export class List<T> {
 
   public get visibleSorting() {
     return this.sorting.filter((s) => s.defaultEnabled !== "hidden");
+  }
+
+  public static useNew<T>(shape: ListShape<T>): List<T> {
+    return new List<T>(shape);
   }
 
   public storeFilterDefaultSettings() {
