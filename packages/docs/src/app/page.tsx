@@ -21,22 +21,20 @@ const Home: FC = () => {
   return (
     <ColumnLayout l={[1]} m={[1]}>
       <LayoutCard className={styles.homeTopLayoutCard}>
-        <Section>
-          <Image
-            className={styles.homeImage}
-            src={homeImage.src}
-            alt="Flow Design System"
-          />
-          <ColumnLayout l={[1]} className={styles.homeTopContent}>
-            <Heading level={1}>
-              Flow Design System <StatusBadge>beta</StatusBadge>
-            </Heading>
-            <Text>
-              Entwickle performante und nutzerzentrierte Benutzeroberflächen,
-              die die Markenidentität von mittwald konsistent widerspiegeln.
-            </Text>
-          </ColumnLayout>
-        </Section>
+        <Image
+          className={styles.homeImage}
+          src={homeImage.src}
+          alt="Flow Design System"
+        />
+        <ColumnLayout l={[1]} className={styles.homeTopContent}>
+          <Heading level={1}>
+            Flow Design System <StatusBadge>beta</StatusBadge>
+          </Heading>
+          <Text>
+            Entwickle performante und nutzerzentrierte Benutzeroberflächen, die
+            die Markenidentität von mittwald konsistent widerspiegeln.
+          </Text>
+        </ColumnLayout>
       </LayoutCard>
       <LayoutCard>
         <Section>
