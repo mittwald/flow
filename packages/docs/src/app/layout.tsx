@@ -30,12 +30,12 @@ const RootLayout: FC<PropsWithChildren> = async (props) => {
         <LinkProvider>
           <NotificationProvider>
             <header className={styles.header}>
-              <Link href="/">
+              <Link href="/" className={styles.homeLink}>
                 <IconMittwald size="l" className={styles.logo} />
+                <Heading level={1} className={styles.heading}>
+                  Flow
+                </Heading>
               </Link>
-              <Heading level={1} className={styles.heading}>
-                Flow
-              </Heading>
 
               <HeaderNavigation
                 className={styles.headerNavigation}
