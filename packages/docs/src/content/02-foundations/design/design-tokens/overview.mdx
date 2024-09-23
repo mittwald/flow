@@ -106,8 +106,6 @@ optischen Nutzen erfüllen und keiner tieferen Idee folgen.
 | hosting-blue--800 | #0054F5 |
 | size--s           | 8px     |
 
-<LiveCodeEditor example="global-token" editorDisabled />
-
 ## Alias Token
 
 Alias Tokens referenzieren andere Tokens und weisen ihnen eine spezifischere
@@ -121,7 +119,10 @@ Wir nutzen diese Ebene vor allem für die Definition von Tokens, die sich keiner
 bestimmten Variante (Solid, Soft, Outlined, Plain) zuordnen lassen, aber in eine
 gemeinsame Kategorie zusammengefasst werden können.
 
-<LiveCodeEditor example="alias-token" editorDisabled />
+| Token-Name              | Wert              |
+| ----------------------- | ----------------- |
+| primary--color--default | hosting-blue--800 |
+| border-width--400       | size--s           |
 
 ## Alias Token 2
 
@@ -135,7 +136,10 @@ zur Hintergrundfarbe passt und barrierefrei lesbar ist.
 Ein Alias Token 2 darf keine hard coded Werte besitzen, sich aber sowohl auf
 Alias als auch Global Token beziehen.
 
-<LiveCodeEditor example="alias-token-two" editorDisabled />
+| Token-Name                              | Wert                    |
+| --------------------------------------- | ----------------------- |
+| primary-solid-background-color--default | primary--color--default |
+| info-outline-border-color--default      | info-color--default     |
 
 ## Component Specific Token
 
@@ -144,4 +148,7 @@ vermitteln einzigartige Designentscheidungen, die ausschließlich für eine
 bestimmte Component relevant sind. Sie enthalten den höchsten Detailgrad der
 Token-Struktur und sind somit das Gegenteil eines Global Tokens.
 
-<LiveCodeEditor example="specific-token" editorDisabled />
+| Token-Name                                       | Wert                                    |
+| ------------------------------------------------ | --------------------------------------- |
+| button--primary-solid-background-color--default  | primary-solid-background-color--default |
+| inline-alert--info-outline-border-color--default | info-outline-border-color--default      |
