@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.251](https://github.com/mittwald/flow/compare/0.1.0-alpha.250...0.1.0-alpha.251) (2024-09-23)
+
+### Features
+
+- **List:** add action groups to list
+  ([c9f1b37](https://github.com/mittwald/flow/commit/c9f1b377bedd543f5e2f689ebd07321fc80ff300))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.250](https://github.com/mittwald/flow/compare/0.1.0-alpha.249...0.1.0-alpha.250) (2024-09-23)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
