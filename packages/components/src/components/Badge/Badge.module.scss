@@ -1,0 +1,182 @@
+@use "@/styles/mixins/focus";
+@use "@/styles/mixins/ellipsis";
+
+.badge {
+  display: flex;
+  width: fit-content;
+  max-width: 100%;
+
+  --badge-size: calc(var(--badge--line-height) + var(--badge--padding-y) * 2);
+  --content-size: calc(var(--badge-size) - var(--badge--border-width) * 2);
+
+  .content,
+  .button {
+    border-radius: var(--badge--corner-radius);
+    border-width: var(--badge--border-width);
+    border-style: var(--badge--border-style);
+    font-size: var(--badge--font-size);
+    font-weight: var(--badge--font-weight);
+    padding: 0;
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    height: var(--badge-size);
+    line-height: var(--content-size);
+    padding-inline: var(--badge--padding-x);
+
+    @include ellipsis.ellipsis();
+  }
+
+  .button,
+  .close {
+    @include focus.focus;
+  }
+
+  @extend .neutral;
+
+  &:has(.close) {
+    .button,
+    .content {
+      padding-inline-end: calc(
+        var(--content-size) + var(--badge--content-to-content-spacing)
+      );
+    }
+  }
+
+  &:has(.scope) {
+    .content,
+    .button {
+      padding: 0;
+    }
+
+    .value {
+      padding-inline-start: var(--badge--content-to-content-spacing);
+      padding-inline-end: var(--badge--padding-x);
+    }
+
+    .scope {
+      padding-inline-start: var(--badge--padding-x);
+      padding-inline-end: var(--badge--content-to-content-spacing);
+      flex-shrink: 0;
+    }
+
+    &:has(.close) {
+      .button,
+      .content {
+        padding-inline-end: var(--content-size);
+
+        .value {
+          padding-inline-end: var(--badge--content-to-content-spacing);
+        }
+      }
+    }
+  }
+
+  .close {
+    height: var(--content-size);
+    padding: calc(var(--badge--padding-y) - var(--badge--border-width));
+    border-radius: 0;
+    border-end-end-radius: var(--badge-size);
+    border-start-end-radius: var(--badge-size);
+    margin-inline-start: calc(
+      (var(--badge-size) - var(--badge--border-width)) * -1
+    );
+    margin-top: var(--badge--border-width);
+  }
+
+  /* Variants */
+
+  @mixin variant($color) {
+    &:where(.#{$color}) {
+      .content,
+      .button {
+        border-color: var(--badge--#{$color}-border-color);
+        background-color: var(--badge--#{$color}-background-color--default);
+        color: var(--badge--#{$color}-content-color);
+      }
+
+      &:not(.disabled) {
+        .button {
+          &:hover {
+            background-color: var(--badge--#{$color}-background-color--hover);
+          }
+
+          &[data-pressed] {
+            background-color: var(--badge--#{$color}-background-color--pressed);
+          }
+        }
+      }
+
+      .scope {
+        background-color: var(--badge--#{$color}-scope-background-color);
+        color: var(--badge--#{$color}-scope-content-color);
+      }
+    }
+  }
+
+  @include variant("neutral");
+  @include variant("blue");
+  @include variant("navy");
+  @include variant("violet");
+  @include variant("teal");
+  @include variant("lilac");
+  @include variant("green");
+  @include variant("orange");
+  @include variant("red");
+  @include variant("dark");
+  @include variant("light");
+
+  &.disabled {
+    .content,
+    .button {
+      border-color: var(--badge--disabled-border-color);
+      background-color: var(--badge--disabled-background-color);
+      color: var(--badge--disabled-content-color);
+    }
+
+    .close {
+      color: var(--badge--disabled-content-color);
+    }
+
+    .scope {
+      background-color: var(--badge--disabled-scope-background-color);
+      color: var(--badge--disabled-scope-content-color);
+    }
+  }
+
+  &.light.disabled {
+    .content,
+    .button {
+      border-color: var(--badge--disabled-light-border-color);
+      background-color: var(--badge--disabled-light-background-color);
+      color: var(--badge--disabled-light-content-color);
+    }
+
+    .close {
+      color: var(--badge--disabled-light-content-color);
+    }
+
+    .scope {
+      background-color: var(--badge--disabled-light-scope-background-color);
+      color: var(--badge--disabled-light-scope-content-color);
+    }
+  }
+
+  &.dark.disabled {
+    .content,
+    .button {
+      border-color: var(--badge--disabled-dark-border-color);
+      background-color: var(--badge--disabled-dark-background-color);
+      color: var(--badge--disabled-dark-content-color);
+    }
+
+    .close {
+      color: var(--badge--disabled-dark-content-color);
+    }
+
+    .scope {
+      background-color: var(--badge--disabled-dark-scope-background-color);
+      color: var(--badge--disabled-dark-scope-content-color);
+    }
+  }
+}

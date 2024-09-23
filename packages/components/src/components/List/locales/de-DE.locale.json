@@ -1,9 +1,10 @@
 {
+  "list.filters.reset": "Filter zurücksetzen",
+  "list.filters.store": "Filter speichern",
   "list.noResult.heading": "Keine Suchergebnisse gefunden",
   "list.noResult.text": "Deine Suche ergab keine Ergebnisse. Bitte passe die Suchanfrage oder deine Filter an.",
   "list.options": "Optionen",
   "list.paginationInfo": "{visibleItemsCount} von insgesamt {totalItemsCount} angezeigt",
-  "list.resetAll": "Alles zurücksetzen",
   "list.setSorting": "Sortierung: {property}",
   "list.settings": "Einstellungen",
   "list.settings.viewMode": "Ansicht",

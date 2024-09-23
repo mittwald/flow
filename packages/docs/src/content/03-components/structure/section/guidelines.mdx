@@ -1,0 +1,114 @@
+# Grundlagen
+
+## Best practices
+
+- Gib der Section eine kurze, aussagekräftige
+  [Heading](/03-components/content/heading).
+- Integriere bei Bedarf einen [Switch](/03-components/form-controls/switch),
+  [Link](/03-components/navigations/link) oder
+  [Buttons](/03-components/actions/button).
+- Verwendest du mehrere Sections, sollte die wichtigste ganz oben stehen.
+
+## Verwendung
+
+Verwende eine Section, um...
+
+- deinen Content in kleinere Teilbereiche zu trennen und so die
+  Übersichtlichkeit zu erhöhen.
+- einzelne Teilbereiche automatisch durch einen
+  [Separator](/03-components/structure/separator) zu trennen, indem du mehrere
+  Sections verwendest.
+- Elemente vertikal zu positionieren und so die richtigen Abstände zu
+  gewährleisten. Nutze für horizontale Positionierungen ein
+  [ColumnLayout](/03-components/structure/column-layout).
+
+---
+
+# Anwendung
+
+## Abstände
+
+Die Section liefert automatisch Abstände zwischen Elementen, die in ihr
+platziert werden. Aufeinanderfolgende Sections werden zusätzlich durch einen
+[Separator](/03-components/structure/seperator) getrennt.
+
+Im Standard entsteht so eine klare visuelle Struktur und Hierarchie für den
+Content, der in einer Section platziert wird. Falls du Abstände anpassen musst,
+achte darauf, dass sie unserem generellen Spacing entsprechen.
+
+## Position
+
+Sections werden häufig im Content-Bereich verwendet und füllen dort die gesamte
+Breite aus. Wenn mehrere Sections untereinander verwendet werden, achte auf
+folgende Punkte:
+
+- Die Section mit dem wichtigsten Inhalt sollte ganz oben stehen, insbesondere
+  Sections mit [StatusBadge](/03-components/status/status-badge) oder Actions.
+- Vermeide zu viele Sections, um den User nicht zu überladen. Überlege, ob der
+  Content in solchen Fällen auf mehrere Seiten oder
+  [Tabs](/03-components/navigation/tabs) verteilt werden sollte.
+
+## Hierarchie
+
+Eine Section beginnt immer mit einer [Heading](/03-components/content/heading).
+Darauf folgt der eigentliche Content – also Informationen in Form vom
+[LabeledValues](/03-components/content/labeled-value) oder einfachem Text. Im
+unteren Bereich der Section bilden häufig
+[Links](/03-components/navigation/link) und
+[Buttons](/03-components/actions/button) den Abschluss.
+
+<Do example="hierarchy-do">
+  Erzeuge eine klare und sinnvolle Struktur innerhalb der Section.
+</Do>
+
+---
+
+# Inhalt
+
+## Actions und StatusBadge
+
+Durch den Action-Bereich sowie den StatusBadge lassen sich Informationen und
+Interaktionen kompakt darstellen. Achte bei der Verwendung dieser Elemente
+darauf, dass ...
+
+- [StatusBadge](/03-components/status/status-badge) und Actions sich immer
+  unmittelbar auf die Section beziehen, der sie zugeordnet sind.
+- Die Hauptaktion der Section sich deutlich von anderen Aktionen abhebt. Dies
+  gilt insbesondere, wenn 2 oder mehr [Buttons](/03-components/actions/button)
+  verwendet werden.
+
+<Do example="status-badge">
+  Der StatusBadge bezieht sich auf den Status der Section, der er zugeordnet
+  ist. Die Hauptaktion der Section ist deutlich hervorgehoben und dauerhaft
+  sichtbar, obwohl es mehrere Actions gibt.
+</Do>
+
+<Dont example="status-badge-dont">
+  Der StatusBadge sollte sich nicht auf Dinge beziehen, die außerhalb der
+  Section liegen. Außerdem sollte die Hauptaktion immer sichtbar sein.
+</Dont>
+
+---
+
+# Verhalten
+
+## Responsive Layout
+
+- Die Section passt sich der Breite des umgebenden Containers an.
+- Reicht die Breite der Section nicht aus, um alle Inhalte des Header-Bereichs
+  darzustellen, brechen der [Switch](/03-components/form-controls/switch) oder
+  die [Buttons](/03-components/action/button) in die nächste Zeile um. Dort
+  ordnen sie sich weiterhin an der rechten Seite an.
+- Der [StatusBadge](/03-components/status/status-badge) bleibt immer auf einer
+  Höhe mit dem Titel. Ist der Titel zu lang, wird er zweizeilig.
+
+<DoAndDont>
+  <Info mobile heading="Mobile" example="status-badge">
+    Wenn die Section nicht alle Inhalte horizontal darstellen kann, springen die
+    Actions in die nächste Zeile. Dort ordnen sie sich weiterhin rechts an.
+  </Info>
+  <Info mobile heading="Textumbruch Heading" example="long-heading">
+    StatusBadge und Heading bleiben immer auf einer Höhe. Ist der Text zu lang,
+    bricht er in die nächste Zeile um.
+  </Info>
+</DoAndDont>

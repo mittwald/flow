@@ -61,6 +61,7 @@ export function Field<T extends FieldValues>(props: Props<T>) {
           Slider: formControlProps,
           DatePicker: formControlProps,
           DateRangePicker: formControlProps,
+          TimeField: formControlProps,
         };
 
         return (

@@ -14,6 +14,7 @@ const meta: Meta<typeof Link> = {
   component: Link,
   args: {
     onPress: action("onPress"),
+    isDisabled: false,
   },
   render: (props) => <Link {...props}>Adjust project</Link>,
   parameters: {
@@ -23,6 +24,9 @@ const meta: Meta<typeof Link> = {
     color: {
       control: "inline-radio",
       options: ["primary", "dark", "light"],
+    },
+    isDisabled: {
+      control: "boolean",
     },
   },
 };

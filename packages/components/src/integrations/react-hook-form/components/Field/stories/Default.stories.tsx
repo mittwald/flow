@@ -20,6 +20,7 @@ import { sleep } from "@/lib/promises/sleep";
 import DatePicker from "@/components/DatePicker";
 import { DateRangePicker } from "@/components/DateRangePicker";
 import { getLocalTimeZone, today } from "@internationalized/date";
+import { TimeField } from "@/components/TimeField";
 
 const submitAction = action("submit");
 
@@ -37,6 +38,7 @@ const meta: Meta<typeof Field> = {
       storage: number;
       date: string;
       dateRange: string;
+      time: string;
     }
 
     const handleOnSubmit = async (values: Values) => {
@@ -160,6 +162,12 @@ const meta: Meta<typeof Field> = {
             <DateRangePicker>
               <Label>Date Range</Label>
             </DateRangePicker>
+          </Field>
+
+          <Field name="time" rules={{ required: "Please enter a time" }}>
+            <TimeField>
+              <Label>Time</Label>
+            </TimeField>
           </Field>
 
           <ActionGroup>

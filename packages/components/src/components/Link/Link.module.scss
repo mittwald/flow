@@ -7,6 +7,7 @@
   transition-property: color;
   transition-duration: var(--transition--duration--default);
   color: var(--link--color--default);
+  width: fit-content;
 
   &:hover {
     color: var(--link--color--hover);
@@ -35,6 +36,10 @@
     vertical-align: text-bottom;
   }
 
+  &[aria-disabled] {
+    color: var(--link--color--disabled);
+  }
+
   &:where(.dark) {
     color: var(--link--color-dark--default);
 
@@ -44,6 +49,10 @@
 
     &[data-pressed] {
       color: var(--link--color-dark--pressed);
+    }
+
+    &[aria-disabled] {
+      color: var(--link--color-dark--disabled);
     }
   }
 
@@ -57,9 +66,9 @@
     &[data-pressed] {
       color: var(--link--color-light--pressed);
     }
-  }
 
-  &[aria-disabled] {
-    color: var(--link--disabled-color);
+    &[aria-disabled] {
+      color: var(--link--color-light--disabled);
+    }
   }
 }

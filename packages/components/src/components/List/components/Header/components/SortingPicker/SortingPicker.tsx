@@ -3,7 +3,7 @@ import React from "react";
 import { SortingPickerItem } from "@/components/List/components/Header/components/SortingPickerItem";
 import { useList } from "@/components/List/hooks/useList";
 import { Text } from "@/components/Text";
-import { IconChevronDown } from "@/components/Icon/components/icons";
+import { IconSorting } from "@/components/Icon/components/icons";
 import { Button } from "@/components/Button";
 import { ContextMenu, ContextMenuTrigger } from "@/components/ContextMenu";
 import locales from "../../../../locales/*.locale.json";
@@ -43,7 +43,7 @@ export const SortingPicker: FC = () => {
     <ContextMenuTrigger>
       <Button variant="soft" size="s" color="secondary">
         {text}
-        <IconChevronDown />
+        <IconSorting />
       </Button>
       <ContextMenu
         selectionMode="single"
