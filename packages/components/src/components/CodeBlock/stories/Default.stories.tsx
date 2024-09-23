@@ -10,12 +10,13 @@ const meta: Meta<typeof CodeBlock> = {
   title: "Content/CodeBlock",
   component: CodeBlock,
   render: (props) => (
-    <CodeBlock {...props}>
-      {`{
+    <CodeBlock
+      {...props}
+      code={`{
     "projectId": "b3a96db5-ba8f-40dd-9100-bab43ac1f698",
     "name": "My Project"
 }`}
-    </CodeBlock>
+    />
   ),
   args: {
     language: "json",

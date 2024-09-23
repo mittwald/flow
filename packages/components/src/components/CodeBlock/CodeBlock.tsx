@@ -9,14 +9,15 @@ import styles from "./CodeBlock.module.scss";
 import { a11yDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 export interface CodeBlockProps
-  extends SyntaxHighlighterProps,
+  extends Omit<SyntaxHighlighterProps, "children">,
     PropsWithClassName {
   copyable?: boolean;
   color?: "neutral" | "light" | "dark";
+  code: string | string[];
 }
 
 export const CodeBlock: FC<CodeBlockProps> = (props) => {
-  const { children, className, copyable, color = "neutral", ...rest } = props;
+  const { code, className, copyable, color = "neutral", ...rest } = props;
 
   const rootClassName = clsx(styles.codeBlock, styles[color], className);
 
@@ -31,13 +32,13 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
         style={color === "light" ? a11yDark : undefined}
         {...rest}
       >
-        {children}
+        {code}
       </SyntaxHighlighter>
       {copyable && (
         <CopyButton
           size="s"
           color={color === "neutral" ? "dark" : color}
-          text={children}
+          text={code}
         />
       )}
     </div>
