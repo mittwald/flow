@@ -15,6 +15,7 @@ import {
 import StatusBadge from "@mittwald/flow-react-components/StatusBadge";
 import MenuItem from "@mittwald/flow-react-components/MenuItem";
 import Button from "@mittwald/flow-react-components/Button";
+import ActionGroup from "@mittwald/flow-react-components/ActionGroup";
 
 export default () => {
   const DomainList = typedList<Domain>();
@@ -22,7 +23,7 @@ export default () => {
   return (
     <DomainList.List batchSize={5}>
       <DomainList.StaticData data={domains} />
-      <DomainList.ActionGroup>
+      <ActionGroup>
         <Button
           color="secondary"
           variant="soft"
@@ -31,7 +32,7 @@ export default () => {
           <IconDownload />
         </Button>
         <Button color="accent">Anlegen</Button>
-      </DomainList.ActionGroup>
+      </ActionGroup>
       <DomainList.Search />
       <DomainList.Filter
         property="type"
