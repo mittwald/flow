@@ -110,8 +110,16 @@
   }
 }
 
-.homeImage {
-  margin-top: calc(var(--layout-card--padding) * -1);
-  margin-inline: calc((1px + var(--layout-card--padding)) * -1);
-  max-width: none;
+.homeTopLayoutCard {
+  padding: 0;
+
+  .homeImage {
+    margin-left: -1px;
+    width: calc(100% + 2px);
+    max-width: calc(100% + 2px);
+  }
+
+  .homeTopContent {
+    padding: var(--layout-card--padding);
+  }
 }
