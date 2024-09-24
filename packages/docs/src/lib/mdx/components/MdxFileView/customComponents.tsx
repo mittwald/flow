@@ -21,6 +21,7 @@ import {
   TableHeader,
   TableRow,
 } from "@mittwald/flow-react-components/Table";
+import { Label } from "@mittwald/flow-react-components/Label";
 
 export const customComponents: MDXComponents = {
   Content: Content,
@@ -28,6 +29,7 @@ export const customComponents: MDXComponents = {
   InlineAlert: InlineAlert,
   DoAndDont: ExamplesContainer,
   ColumnLayout: ColumnLayout,
+  Label: Label,
 
   pre: ({ children }) => (
     <div className={styles.preContainer}>

@@ -13,57 +13,13 @@ beträgt immer min. 150 % der Höhe der Font.
 [Headings](/03-components/content/heading) zeichnen sich durch ihre Farbe und
 die große Auswahl an verschiedenen Größen zur Strukturierung aus.
 
-<table>
-  <thead>
-    <th></th>
-    <th>Size REM</th>
-    <th>Size PX</th>
-    <th>Line Height</th>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <h1>Heading 1</h1>
-      </td>
-      <td>2 rem</td>
-      <td>32 px</td>
-      <td>48 lh</td>
-    </tr>
-    <tr>
-      <td>
-        <h2>Heading 2</h2>
-      </td>
-      <td>1,5 rem</td>
-      <td>24 px</td>
-      <td>36 lh</td>
-    </tr>
-    <tr>
-      <td>
-        <h3>Heading 3</h3>
-      </td>
-      <td>1,25 rem</td>
-      <td>20 px</td>
-      <td>30 lh</td>
-    </tr>
-    <tr>
-      <td>
-        <h4>Heading 4</h4>
-      </td>
-      <td>1,125 rem</td>
-      <td>18 px</td>
-      <td>27 lh</td>
-    </tr>
-    <tr>
-      <td>
-        <h5>Heading 5</h5>
-      </td>
-      <td>1 rem</td>
-      <td>16 px</td>
-      <td>24 lh</td>
-    </tr>
-  </tbody>
-</table>
-;
+|                                        | REM       | PX    | Line Height |
+| -------------------------------------- | --------- | ----- | ----------- |
+| <Heading level={1}>Heading 1</Heading> | 2 rem     | 32 px | 48 lh       |
+| <Heading level={2}>Heading 2</Heading> | 1,25 rem  | 20 px | 30 lh       |
+| <Heading level={3}>Heading 3</Heading> | 1.125 rem | 18 px | 27 lh       |
+| <Heading level={4}>Heading 4</Heading> | 1 rem     | 16 px | 24 lh       |
+| <Heading level={5}>Heading 5</Heading> | 1 rem     | 16 px | 24 lh       |
 
 ---
 
@@ -74,7 +30,12 @@ kleinen Hinweisen. Bei Small kann zwischen den Line Heights 21 und 24 gewählt
 werden, da gerade 24lh gut in das Layout passt und 21lh für kleinere Höhen
 besser geeignet ist.
 
-<LiveCodeEditor example="text" editorDisabled />
+|                                 | REM       | PX    | Line Height   |
+| ------------------------------- | --------- | ----- | ------------- |
+| Text (Body)                     | 1 rem     | 16 px | 24 lh         |
+| **Text (Body)**                 | 1 rem     | 16 px | 24 lh         |
+| <small>Text (Small)</small>     | 0,875 rem | 14 px | 21 lh / 24 lh |
+| **<small>Text (Small)</small>** | 0,875 rem | 14 px | 21 lh / 24 lh |
 
 ---
 
@@ -84,7 +45,9 @@ besser geeignet ist.
 Bold-Darstellung als beschreibendes Element in komplexeren Components gut
 erkennbar.
 
-<LiveCodeEditor example="label" editorDisabled />
+|                      | REM       | PX    | Line Height   |
+| -------------------- | --------- | ----- | ------------- |
+| <Label>Label</Label> | 0,875 rem | 14 px | 21 lh / 24 lh |
 
 ---
 
@@ -103,4 +66,6 @@ im Text besser erkennen zu können (s. Accessibility).
 Um Code von der anderen Font abzuheben, wird bei Code **Fira Code** verwendet,
 da sie einen eher technisches Aussehen hat.
 
-<LiveCodeEditor example="code" editorDisabled />
+|        | REM       | PX    | Line Height |
+| ------ | --------- | ----- | ----------- |
+| `code` | 0,875 rem | 14 px | 24 lh       |
