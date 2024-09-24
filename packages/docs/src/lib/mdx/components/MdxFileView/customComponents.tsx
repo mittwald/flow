@@ -13,6 +13,7 @@ import { IconExternalLink } from "@mittwald/flow-react-components/Icons";
 import { ColumnLayout } from "@mittwald/flow-react-components/ColumnLayout";
 import { InlineCode } from "@mittwald/flow-react-components/InlineCode";
 import { Separator } from "@mittwald/flow-react-components/Separator";
+import { DesignTokenTable } from "@/lib/mdx/components/DesignTokenTable";
 
 export const customComponents: MDXComponents = {
   Content: Content,
@@ -20,6 +21,7 @@ export const customComponents: MDXComponents = {
   InlineAlert: InlineAlert,
   DoAndDont: ExamplesContainer,
   ColumnLayout: ColumnLayout,
+  DesignTokenTable: DesignTokenTable,
 
   pre: ({ children }) => (
     <div className={styles.preContainer}>
