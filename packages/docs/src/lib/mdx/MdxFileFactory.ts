@@ -9,6 +9,7 @@ import type {
 } from "@/lib/mdx/MdxFile";
 import { MdxFile } from "@/lib/mdx/MdxFile";
 import type { Metadata } from "next";
+import remarkGfm from "remark-gfm";
 
 export class MdxFileFactory {
   public static async fromDir(
@@ -76,6 +77,7 @@ export class MdxFileFactory {
     }
     return serialize<never, MdxFileMeta>(fileContent, {
       parseFrontmatter: true,
+      mdxOptions: { remarkPlugins: [remarkGfm] },
     });
   }
 

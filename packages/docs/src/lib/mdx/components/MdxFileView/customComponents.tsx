@@ -13,6 +13,14 @@ import { IconExternalLink } from "@mittwald/flow-react-components/Icons";
 import { ColumnLayout } from "@mittwald/flow-react-components/ColumnLayout";
 import { InlineCode } from "@mittwald/flow-react-components/InlineCode";
 import { Separator } from "@mittwald/flow-react-components/Separator";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableColumn,
+  TableHeader,
+  TableRow,
+} from "@mittwald/flow-react-components/Table";
 
 export const customComponents: MDXComponents = {
   Content: Content,
@@ -89,4 +97,11 @@ export const customComponents: MDXComponents = {
   },
 
   hr: () => <Separator className={styles.separator} />,
+
+  table: ({ children }) => <Table>{children}</Table>,
+  thead: ({ children }) => <TableHeader>{children}</TableHeader>,
+  tr: ({ children }) => <TableRow>{children}</TableRow>,
+  th: ({ children }) => <TableColumn>{children}</TableColumn>,
+  tbody: ({ children }) => <TableBody>{children}</TableBody>,
+  td: ({ children }) => <TableCell>{children}</TableCell>,
 };
