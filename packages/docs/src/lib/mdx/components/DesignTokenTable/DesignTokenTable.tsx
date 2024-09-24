@@ -9,6 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@mittwald/flow-react-components/Table";
+import { ColorSample } from "@/lib/mdx/components/DesignTokenTable/Samples/ColorSample";
 
 interface Props {
   path: string;
@@ -25,12 +26,12 @@ function isDesignToken(ref: unknown): ref is DesignToken {
   );
 }
 
-function traverseAndCheck(current: unknown, target: DesignToken[] = []) {
+function getTokens(current: unknown, target: DesignToken[] = []) {
   if (isDesignToken(current)) {
     target.push(current);
   } else if (current !== null && typeof current === "object") {
     for (const value of Object.values(current)) {
-      traverseAndCheck(value, target);
+      getTokens(value, target);
     }
   }
   return target;
@@ -40,8 +41,9 @@ export const DesignTokenTable: FC<Props> = (props) => {
   const { path } = props;
 
   const values = getProperty<unknown, string>(tokens, path, undefined);
-  const designTokens = traverseAndCheck(values);
+  const designTokens = getTokens(values);
   const rows = designTokens.map((token) => {
+    console.log(token);
     let tokenName = "";
     token.path.forEach((part, index) => {
       const glue = index === token.path.length - 1 ? "" : "--";
@@ -49,6 +51,11 @@ export const DesignTokenTable: FC<Props> = (props) => {
     });
     return (
       <TableRow key={tokenName}>
+        {tokenName.includes("color") && (
+          <TableCell>
+            <ColorSample value={token.value} />
+          </TableCell>
+        )}
         <TableCell>{tokenName}</TableCell>
         <TableCell>{token.value}</TableCell>
       </TableRow>
@@ -58,6 +65,7 @@ export const DesignTokenTable: FC<Props> = (props) => {
   return (
     <Table>
       <TableHeader>
+        {path.includes("color") && <TableColumn>Beispiel</TableColumn>}
         <TableColumn>Token-Name</TableColumn>
         <TableColumn>Wert</TableColumn>
       </TableHeader>

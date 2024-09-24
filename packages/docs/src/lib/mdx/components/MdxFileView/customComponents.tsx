@@ -13,7 +13,7 @@ import { IconExternalLink } from "@mittwald/flow-react-components/Icons";
 import { ColumnLayout } from "@mittwald/flow-react-components/ColumnLayout";
 import { InlineCode } from "@mittwald/flow-react-components/InlineCode";
 import { Separator } from "@mittwald/flow-react-components/Separator";
-import { DesignTokenTable } from "@/lib/mdx/components/DesignTokenTable";
+import { DesignTokenTable } from "@/lib/mdx/components/DesignTokenTable/DesignTokenTable";
 
 export const customComponents: MDXComponents = {
   Content: Content,
