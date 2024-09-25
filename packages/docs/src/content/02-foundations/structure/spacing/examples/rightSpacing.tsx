@@ -15,13 +15,15 @@ import { Content } from "@mittwald/flow-react-components/Content";
     marginRight: "auto",
   }}
 >
-  <Avatar
+  <div
     style={{
       gridArea: "avatar",
     }}
   >
-    <Initials>Sven Fuchs</Initials>
-  </Avatar>
+    <Avatar>
+      <Initials>Sven Fuchs</Initials>
+    </Avatar>
+  </div>
   <Text
     style={{
       gridArea: "title",
