@@ -6,14 +6,11 @@ import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import { Activity } from "@/components/Activity";
 import { ContextMenuSection } from "@/components/ContextMenu/components/ContextMenuSection";
 
 export interface SectionProps
   extends PropsWithChildren<ComponentProps<"section">>,
     FlowComponentProps {
-  /** @internal */
-  isActive?: boolean;
   /** @internal */
   renderContextMenuSection?: boolean;
 }
@@ -22,7 +19,6 @@ export const Section = flowComponent("Section", (props) => {
   const {
     children,
     className,
-    isActive = true,
     refProp: ref,
     renderContextMenuSection,
     ...rest
@@ -54,13 +50,11 @@ export const Section = flowComponent("Section", (props) => {
   };
 
   return (
-    <Activity isActive={isActive}>
-      <section {...rest} className={rootClassName} ref={ref}>
-        <PropsContextProvider props={propsContext} mergeInParentContext>
-          {children}
-        </PropsContextProvider>
-      </section>
-    </Activity>
+    <section {...rest} className={rootClassName} ref={ref}>
+      <PropsContextProvider props={propsContext} mergeInParentContext>
+        {children}
+      </PropsContextProvider>
+    </section>
   );
 });
 
