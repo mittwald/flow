@@ -424,11 +424,11 @@ warning-soft-content-color:
 # Neutral Solid
 neutral-solid-background-color:
   default:
-    value: "{neutral.color.800}"
-  hover:
     value: "{neutral.color.900}"
-  pressed:
+  hover:
     value: "{neutral.color.1000}"
+  pressed:
+    value: "{neutral.color.1100}"
 neutral-solid-content-color:
   value: "{neutral.color.100}"
 
@@ -441,28 +441,22 @@ neutral-plain-background-color:
   pressed:
     value: "{neutral.color.500}"
 neutral-plain-content-color:
-  value: "{neutral.color.1000}"
+  value: "{neutral.color.900}"
 
 # Neutral Outline
 neutral-outline-background-color:
   default:
-    value: "{neutral.color.200}"
+    value: "{color.transparent}"
   hover:
-    value: "{primary.color.100}"
+    value: "{primary.color.400}"
   selected:
-    value: "{primary.color.200}"
+    value: "{primary.color.500}"
   pressed:
-    value: "{primary.color.200}"
+    value: "{primary.color.500}"
 neutral-outline-content-color:
-  default:
-    value: "{neutral.color.1000}"
-  selected:
-    value: "{primary.color.900}"
+  value: "{neutral.color.900}"
 neutral-outline-border-color:
-  default:
-    value: "{neutral.color.700}"
-  selected:
-    value: "{primary.color.800}"
+  value: "{neutral.color.900}"
 
 # Neutral Soft
 neutral-soft-background-color:

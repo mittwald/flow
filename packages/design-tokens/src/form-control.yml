@@ -22,7 +22,7 @@ form-control:
 
   border-color:
     default:
-      value: "{neutral-outline-border-color.default}"
+      value: "{neutral-outline-border-color}"
     disabled:
       value: "{disabled-outline-border-color}"
     invalid:
@@ -30,7 +30,7 @@ form-control:
     focused:
       value: "{focus.outline-color}"
     selected:
-      value: "{neutral-outline-border-color.selected}"
+      value: "{primary.color.800}"
 
   background-color:
     default:
@@ -48,8 +48,8 @@ form-control:
 
   content-color:
     default:
-      value: "{neutral-outline-content-color.default}"
+      value: "{content.color.default}"
     disabled:
       value: "{disabled-outline-content-color}"
     selected:
-      value: "{neutral-outline-content-color.selected}"
+      value: "{content.color.default}"
