@@ -448,11 +448,11 @@ neutral-outline-background-color:
   default:
     value: "{color.transparent}"
   hover:
-    value: "{primary.color.400}"
+    value: "{neutral.color.400}"
   selected:
-    value: "{primary.color.500}"
+    value: "{neutral.color.500}"
   pressed:
-    value: "{primary.color.500}"
+    value: "{neutral.color.500}"
 neutral-outline-content-color:
   value: "{neutral.color.900}"
 neutral-outline-border-color:
