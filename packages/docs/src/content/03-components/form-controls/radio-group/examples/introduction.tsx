@@ -3,11 +3,7 @@ import RadioGroup, {
   Radio,
 } from "@mittwald/flow-react-components/RadioGroup";
 
-<RadioGroup
-  defaultValue="admin"
-  variant="segmented"
-  containerBreakpointSize="s"
->
+<RadioGroup defaultValue="admin">
   <Label>Rolle</Label>
   <Radio value="admin">Administrator</Radio>
   <Radio value="member">Mitglied</Radio>
