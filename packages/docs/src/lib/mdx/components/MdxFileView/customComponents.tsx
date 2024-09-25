@@ -30,6 +30,7 @@ export const customComponents: MDXComponents = {
   DoAndDont: ExamplesContainer,
   ColumnLayout: ColumnLayout,
   Label: Label,
+  Link: Link,
 
   pre: ({ children }) => (
     <div className={styles.preContainer}>
