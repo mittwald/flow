@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.254](https://github.com/mittwald/flow/compare/0.1.0-alpha.253...0.1.0-alpha.254) (2024-09-25)
+
+### Bug Fixes
+
+- avoid Suspense boundaries in Content/Section
+  ([7dc58e4](https://github.com/mittwald/flow/commit/7dc58e476814d7838acbb7c12aa374f8ad0ea360))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.253](https://github.com/mittwald/flow/compare/0.1.0-alpha.252...0.1.0-alpha.253) (2024-09-24)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
