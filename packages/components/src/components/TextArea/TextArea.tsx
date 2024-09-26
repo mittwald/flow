@@ -13,7 +13,7 @@ export interface TextAreaProps
   extends Omit<TextFieldBaseProps, "input">,
     Pick<Aria.TextAreaProps, "placeholder" | "rows">,
     FlowComponentProps {
-  maxRows?: number;
+  autoResizeMaxRows?: number;
 }
 
 export const TextArea = flowComponent("TextArea", (props) => {
@@ -21,7 +21,7 @@ export const TextArea = flowComponent("TextArea", (props) => {
     children,
     placeholder,
     rows = 5,
-    maxRows = rows,
+    autoResizeMaxRows = rows,
     refProp: ref,
     ...rest
   } = props;
@@ -30,6 +30,15 @@ export const TextArea = flowComponent("TextArea", (props) => {
 
   const getHeight = (rows: number) => {
     return `calc(var(--line-height--m) * ${rows} + (var(--form-control--padding-y) * 2))`;
+  };
+
+  const updateHeight = () => {
+    if (resizeRef.current && rows !== autoResizeMaxRows) {
+      // https://stackoverflow.com/a/60795884
+      resizeRef.current.style.height = "0px";
+      const scrollHeight = resizeRef.current.scrollHeight;
+      resizeRef.current.style.height = scrollHeight + "px";
+    }
   };
 
   const input = (
@@ -41,16 +50,10 @@ export const TextArea = flowComponent("TextArea", (props) => {
         ref as ForwardedRef<HTMLTextAreaElement | null>,
         resizeRef,
       )}
-      onChange={() => {
-        if (resizeRef.current && rows !== maxRows) {
-          resizeRef.current.style.height = "0px";
-          const scrollHeight = resizeRef.current.scrollHeight;
-          resizeRef.current.style.height = scrollHeight + "px";
-        }
-      }}
+      onChange={updateHeight}
       style={{
         minHeight: getHeight(rows),
-        maxHeight: getHeight(maxRows),
+        maxHeight: getHeight(autoResizeMaxRows),
       }}
     />
   );

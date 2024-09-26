@@ -70,5 +70,5 @@ export const ShowCharacterCount: Story = {
 };
 
 export const Resizeable: Story = {
-  args: { rows: 1, maxRows: 5 },
+  args: { rows: 1, autoResizeMaxRows: 5 },
 };
