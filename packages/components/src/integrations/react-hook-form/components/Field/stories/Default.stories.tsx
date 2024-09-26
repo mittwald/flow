@@ -178,7 +178,7 @@ const meta: Meta<typeof Field> = {
               required: "Please enter a message",
             }}
           >
-            <TextArea rows={1} maxRows={5}>
+            <TextArea rows={1} autoResizeMaxRows={5}>
               <Label>Message</Label>
             </TextArea>
           </Field>
