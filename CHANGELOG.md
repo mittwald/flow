@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.257](https://github.com/mittwald/flow/compare/0.1.0-alpha.256...0.1.0-alpha.257) (2024-09-26)
+
+### Features
+
+- **List:** allow readonly values in Filter
+  ([9f1f5fe](https://github.com/mittwald/flow/commit/9f1f5fed46acafb4ade1a67dbb948a55577d4326))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.256](https://github.com/mittwald/flow/compare/0.1.0-alpha.255...0.1.0-alpha.256) (2024-09-26)
 
 ### Features
