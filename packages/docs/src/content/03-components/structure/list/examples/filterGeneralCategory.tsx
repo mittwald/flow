@@ -30,20 +30,16 @@ export default () => {
             ? verified
             : !verified;
         }}
-        defaultSelected={["Verifiziert"]}
       />
       <DomainList.Filter
-        property="tld"
+        property="id"
         mode="some"
         name="Filter"
-        values={[".de Endung", ".com Endung"]}
-        matcher={(filterValue, tld) => {
-          return (
-            filterValue.split(" ")[0].replace(".", "") ===
-            tld
-          );
-        }}
-        defaultSelected={[".de Endung"]}
+        values={[
+          "SSL Zertifikat abgelaufen",
+          "Kein Ziel hinterlegt",
+        ]}
+        matcher={() => true}
       />
       <DomainList.Item>
         {(domain) => (

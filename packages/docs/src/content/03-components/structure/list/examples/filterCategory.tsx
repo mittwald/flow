@@ -30,7 +30,6 @@ export default () => {
             ? verified
             : !verified;
         }}
-        defaultSelected={["Verifiziert"]}
       />
       <DomainList.Item>
         {(domain) => (
