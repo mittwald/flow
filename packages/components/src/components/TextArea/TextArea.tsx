@@ -44,7 +44,7 @@ export const TextArea = flowComponent("TextArea", (props) => {
       onChange={() => {
         if (resizeRef.current && rows !== maxRows) {
           resizeRef.current.style.height = "0px";
-          const scrollHeight = resizeRef.current?.scrollHeight;
+          const scrollHeight = resizeRef.current.scrollHeight;
           resizeRef.current.style.height = scrollHeight + "px";
         }
       }}
