@@ -20,8 +20,26 @@ export default () => {
   return (
     <DomainList.List batchSize={5}>
       <DomainList.StaticData data={domains} />
-      <DomainList.Sorting property="domain" name="Domain" />
-      <DomainList.Sorting property="type" name="Type" />
+      <DomainList.Sorting
+        property="hostname"
+        name="Domain A bis Z"
+        direction="asc"
+      />
+      <DomainList.Sorting
+        property="hostname"
+        name="Domain Z bis A"
+        direction="desc"
+      />
+      <DomainList.Sorting
+        property="type"
+        name="Type A bis Z"
+        direction="asc"
+      />
+      <DomainList.Sorting
+        property="type"
+        name="Type Z bis A"
+        direction="desc"
+      />
       <DomainList.Item>
         {(domain) => (
           <DomainList.ItemView>
