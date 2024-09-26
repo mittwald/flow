@@ -2,11 +2,11 @@
   color: inherit;
 
   &:where(.light) {
-    color: var(--content--color--light);
+    color: var(--text--color--light);
   }
 
   &:where(.dark) {
-    color: var(--content--color--dark);
+    color: var(--text--color--dark);
   }
 
   ul,
@@ -21,6 +21,6 @@
   }
 
   small {
-    font-size: var(--font-size--s);
+    font-size: var(--font-size-text--s);
   }
 }

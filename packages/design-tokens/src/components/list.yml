@@ -23,6 +23,6 @@ list-item:
     pressed:
       value: "{neutral-outline-background-color.pressed}"
   border-color:
-    value: "{neutral-outline-border-color.default}"
+    value: "{neutral-outline-border-color}"
   subtitle-font-size:
-    value: "{font-size.s}"
+    value: "{font-size-text.s}"

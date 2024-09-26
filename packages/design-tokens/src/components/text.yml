@@ -1,14 +1,7 @@
-icon:
-  size:
-    s:
-      value: 1rem
-    m:
-      value: 1.5rem
-    l:
-      value: 4rem
+text:
   color:
     default:
-      value: "{neutral.color.800}"
+      value: "{neutral.color.1000}"
     light:
       value: "{light-plain-content-color}"
     dark:

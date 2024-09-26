@@ -8,7 +8,7 @@ tooltip:
   padding-y:
     value: "{size-px.xs}"
   font-size:
-    value: "{font-size.s}"
+    value: "{font-size-text.s}"
   max-width:
     value: 300px
   tooltip-to-content-spacing:

@@ -1,8 +1,8 @@
 progress-bar:
   font-size:
-    value: "{font-size.m}"
+    value: "{font-size-text.m}"
   font-size-s:
-    value: "{font-size.s}"
+    value: "{font-size-text.s}"
   value-font-weight:
     value: "{font-weight.bold}"
   label-to-bar-spacing:
@@ -19,7 +19,7 @@ progress-bar:
   bar-border-width:
     value: "{border-width.100}"
   bar-border-color:
-    value: "{neutral-outline-border-color.default}"
+    value: "{neutral-outline-border-color}"
 
   # Info
   info-fill-background-color:

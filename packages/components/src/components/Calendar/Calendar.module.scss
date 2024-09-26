@@ -7,12 +7,12 @@
     justify-content: space-between;
 
     h2 {
-      font-size: var(--font-size--default);
+      font-size: var(--font-size-text--default);
     }
   }
 
   :global(.react-aria-CalendarHeaderCell) {
-    font-size: var(--font-size--s);
+    font-size: var(--font-size-text--s);
   }
 
   :global(.react-aria-CalendarCell) {
@@ -24,7 +24,7 @@
     justify-content: center;
     cursor: default;
     border-radius: var(--calendar--cell-corner-radius);
-    font-size: var(--font-size--s);
+    font-size: var(--font-size-text--s);
 
     &[data-outside-month] {
       display: none;
@@ -109,7 +109,7 @@
         }
 
         &:not([data-selection-start]):not([data-selection-end]) {
-          color: var(--content--color--default);
+          color: var(--text--color--default);
           background: none;
         }
 

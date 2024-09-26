@@ -1,6 +1,6 @@
 link:
   font-size:
-    value: "{font-size.s}"
+    value: "{font-size-text.s}"
   line-height:
     value: "{line-height.m}"
   font-weight:
@@ -10,30 +10,30 @@ link:
 
   color:
     default:
-      value: "{primary-plain-content-color.default}"
+      value: "{primary.color.800}"
     hover:
-      value: "{primary-plain-content-color.hover}"
+      value: "{primary.color.900}"
     pressed:
-      value: "{primary-plain-content-color.pressed}"
+      value: "{primary.color.1000}"
     disabled:
       value: "{disabled-plain-content-color}"
 
   color-dark:
     default:
-      value: "{dark-plain-content-color.default}"
+      value: "{dark.color.800}"
     hover:
-      value: "{dark-plain-content-color.hover}"
+      value: "{dark.color.700}"
     pressed:
-      value: "{dark-plain-content-color.pressed}"
+      value: "{dark.color.600}"
     disabled:
-      value: "{disabled-dark-plain-content-color}"
+      value: "{disabled-plain-dark-content-color}"
 
   color-light:
     default:
-      value: "{light-plain-content-color.default}"
+      value: "{light.color.800}"
     hover:
-      value: "{light-plain-content-color.hover}"
+      value: "{light.color.700}"
     pressed:
-      value: "{light-plain-content-color.pressed}"
+      value: "{light.color.600}"
     disabled:
-      value: "{disabled-light-plain-content-color}"
+      value: "{disabled-plain-light-content-color}"

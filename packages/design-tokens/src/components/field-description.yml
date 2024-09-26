@@ -1,5 +1,5 @@
 field-description:
   font-size:
-    value: "{font-size.s}"
+    value: "{font-size-text.s}"
   color:
-    value: "{content.color.default}"
+    value: "{text.color.default}"

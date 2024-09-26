@@ -4,9 +4,9 @@ header-navigation:
   item-color:
     value: "{heading.color}"
   item-color-dark:
-    value: "{dark-plain-content-color.default}"
+    value: "{dark-plain-content-color}"
   item-color-light:
-    value: "{light-plain-content-color.default}"
+    value: "{light-plain-content-color}"
   item-background-color:
     hover:
       value: "{primary-plain-background-color.hover}"
