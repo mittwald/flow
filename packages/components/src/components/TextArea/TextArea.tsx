@@ -28,7 +28,9 @@ export const TextArea = flowComponent("TextArea", (props) => {
 
   const resizeRef = useRef<HTMLTextAreaElement>(null);
 
-  const textAreaPadding = "(var(--form-control--padding-y) * 2)";
+  const getHeight = (rows: number) => {
+    return `calc(var(--line-height--m) * ${rows} + (var(--form-control--padding-y) * 2))`;
+  };
 
   const input = (
     <Aria.TextArea
@@ -47,8 +49,8 @@ export const TextArea = flowComponent("TextArea", (props) => {
         }
       }}
       style={{
-        minHeight: `calc(24px * ${rows} + ${textAreaPadding})`,
-        maxHeight: `calc(24px * ${maxRows} + ${textAreaPadding})`,
+        minHeight: getHeight(rows),
+        maxHeight: getHeight(maxRows),
       }}
     />
   );
