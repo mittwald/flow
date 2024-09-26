@@ -1,4 +1,5 @@
-import React from "react";
+import type { ForwardedRef } from "react";
+import React, { useRef } from "react";
 import * as Aria from "react-aria-components";
 import type { TextFieldBaseProps } from "@/components/TextFieldBase";
 import { TextFieldBase } from "@/components/TextFieldBase";
@@ -6,21 +7,50 @@ import styles from "./TextArea.module.scss";
 import { ClearPropsContext } from "@/lib/propsContext";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import { mergeRefs } from "@react-aria/utils";
 
 export interface TextAreaProps
   extends Omit<TextFieldBaseProps, "input">,
     Pick<Aria.TextAreaProps, "placeholder" | "rows">,
-    FlowComponentProps {}
+    FlowComponentProps {
+  minRows?: number;
+  maxRows?: number;
+}
 
 export const TextArea = flowComponent("TextArea", (props) => {
-  const { children, placeholder, rows = 5, refProp: ref, ...rest } = props;
+  const {
+    children,
+    placeholder,
+    rows = 5,
+    maxRows = rows,
+    refProp: ref,
+    ...rest
+  } = props;
+
+  const resizeRef = useRef<HTMLTextAreaElement>(null);
+
+  const textAreaPadding = "(var(--form-control--padding-y) * 2)";
 
   const input = (
     <Aria.TextArea
       rows={rows}
       placeholder={placeholder}
       className={styles.textArea}
-      ref={ref}
+      ref={mergeRefs(
+        ref as ForwardedRef<HTMLTextAreaElement | null>,
+        resizeRef,
+      )}
+      onChange={() => {
+        if (resizeRef.current && maxRows) {
+          resizeRef.current.style.height = "0px";
+          const scrollHeight = resizeRef.current?.scrollHeight;
+          resizeRef.current.style.height = scrollHeight + "px";
+        }
+      }}
+      style={{
+        minHeight: `calc(24px * ${rows} + ${textAreaPadding})`,
+        maxHeight: `calc(24px * ${maxRows} + ${textAreaPadding})`,
+      }}
     />
   );
 

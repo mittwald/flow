@@ -68,3 +68,7 @@ export const WithFieldError: Story = {
 export const ShowCharacterCount: Story = {
   args: { showCharacterCount: true, maxLength: 100 },
 };
+
+export const Resizeable: Story = {
+  args: { rows: 1, maxRows: 5 },
+};
