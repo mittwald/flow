@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.256](https://github.com/mittwald/flow/compare/0.1.0-alpha.255...0.1.0-alpha.256) (2024-09-26)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.255](https://github.com/mittwald/flow/compare/0.1.0-alpha.254...0.1.0-alpha.255) (2024-09-26)
 
 **Note:** Version bump only for package @mittwald/flow-design-tokens

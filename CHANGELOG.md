@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.256](https://github.com/mittwald/flow/compare/0.1.0-alpha.255...0.1.0-alpha.256) (2024-09-26)
+
+### Features
+
+- **TextArea:** make TextArea resizeable
+  ([#790](https://github.com/mittwald/flow/issues/790))
+  ([6e484f4](https://github.com/mittwald/flow/commit/6e484f4cc5be2e283d16511aad36244cd004afbf))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.255](https://github.com/mittwald/flow/compare/0.1.0-alpha.254...0.1.0-alpha.255) (2024-09-26)
 
 **Note:** Version bump only for package @mittwald/flow-project
