@@ -13,7 +13,6 @@ export interface TextAreaProps
   extends Omit<TextFieldBaseProps, "input">,
     Pick<Aria.TextAreaProps, "placeholder" | "rows">,
     FlowComponentProps {
-  minRows?: number;
   maxRows?: number;
 }
 
