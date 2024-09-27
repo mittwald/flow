@@ -45,4 +45,11 @@
     text-align: start;
     vertical-align: top;
   }
+
+  &.middle {
+    .cell,
+    .column {
+      vertical-align: middle;
+    }
+  }
 }

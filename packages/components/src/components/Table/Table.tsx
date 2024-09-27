@@ -4,12 +4,13 @@ import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import styles from "./Table.module.scss";
 
-export type TableProps = Aria.TableProps;
-
+export type TableProps = Aria.TableProps & {
+  verticalAlign?: "top" | "middle";
+};
 export const Table: FC<TableProps> = (props) => {
-  const { children, className, ...rest } = props;
+  const { children, className, verticalAlign = "top", ...rest } = props;
 
-  const rootClassName = clsx(styles.table, className);
+  const rootClassName = clsx(styles.table, styles[verticalAlign], className);
 
   return (
     <div className={styles.tableContainer}>
