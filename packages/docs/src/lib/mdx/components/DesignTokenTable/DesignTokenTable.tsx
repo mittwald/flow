@@ -9,7 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@mittwald/flow-react-components/Table";
-import { ColorSample } from "@/lib/mdx/components/DesignTokenTable/Samples/ColorSample";
+import { Sample } from "@/lib/mdx/components/DesignTokenTable/Samples/Sample";
 
 interface Props {
   path: string;
@@ -51,11 +51,7 @@ export const DesignTokenTable: FC<Props> = (props) => {
     });
     return (
       <TableRow key={tokenName}>
-        {tokenName.includes("color") && (
-          <TableCell>
-            <ColorSample value={token.value} />
-          </TableCell>
-        )}
+        <Sample tokenName={tokenName} tokenValue={token.value} />
         <TableCell>{tokenName}</TableCell>
         <TableCell>{token.value}</TableCell>
       </TableRow>
@@ -65,7 +61,7 @@ export const DesignTokenTable: FC<Props> = (props) => {
   return (
     <Table>
       <TableHeader>
-        {path.includes("color") && <TableColumn>Beispiel</TableColumn>}
+        <TableColumn>Beispiel</TableColumn>
         <TableColumn>Token-Name</TableColumn>
         <TableColumn>Wert</TableColumn>
       </TableHeader>
