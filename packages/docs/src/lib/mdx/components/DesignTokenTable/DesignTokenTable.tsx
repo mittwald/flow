@@ -43,7 +43,6 @@ export const DesignTokenTable: FC<Props> = (props) => {
   const values = getProperty<unknown, string>(tokens, path, undefined);
   const designTokens = getTokens(values);
   const rows = designTokens.map((token) => {
-    console.log(token);
     let tokenName = "";
     token.path.forEach((part, index) => {
       const glue = index === token.path.length - 1 ? "" : "--";
