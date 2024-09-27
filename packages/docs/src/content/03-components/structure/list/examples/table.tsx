@@ -18,7 +18,7 @@ export default () => {
   const DomainList = typedList<Domain>();
 
   return (
-    <DomainList.List batchSize={5}>
+    <DomainList.List batchSize={5} defaultViewMode="table">
       <DomainList.StaticData data={domains} />
       <DomainList.Table>
         <DomainList.TableHeader>
