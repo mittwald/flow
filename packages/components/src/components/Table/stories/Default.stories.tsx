@@ -45,7 +45,7 @@ const meta: Meta<typeof Table> = {
           </TableCell>
           <TableCell>m | s</TableCell>
           <TableCell>m</TableCell>
-          <TableCell>The size of the button</TableCell>
+          <TableCell>{dummyText.long}</TableCell>
         </TableRow>
       </TableBody>
     </Table>
@@ -59,40 +59,5 @@ type Story = StoryObj<typeof Table>;
 export const Default: Story = {};
 
 export const VerticallyCenteredRows: Story = {
-  render: (props) => (
-    <Table aria-label="Button Props" {...props} verticalAlign="middle">
-      <TableHeader>
-        <TableColumn>Name</TableColumn>
-        <TableColumn>Type</TableColumn>
-        <TableColumn>Default</TableColumn>
-        <TableColumn>Description</TableColumn>
-      </TableHeader>
-      <TableBody>
-        <TableRow>
-          <TableCell>
-            <InlineCode>color</InlineCode>
-          </TableCell>
-          <TableCell>primary | accent | secondary | danger</TableCell>
-          <TableCell>primary</TableCell>
-          <TableCell>{dummyText.long}</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>
-            <InlineCode>variant</InlineCode>
-          </TableCell>
-          <TableCell>plain | solid | soft</TableCell>
-          <TableCell>solid</TableCell>
-          <TableCell>The variant of the button</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>
-            <InlineCode>size</InlineCode>
-          </TableCell>
-          <TableCell>m | s</TableCell>
-          <TableCell>m</TableCell>
-          <TableCell>The size of the button</TableCell>
-        </TableRow>
-      </TableBody>
-    </Table>
-  ),
+  args: { verticalAlign: "middle" },
 };
