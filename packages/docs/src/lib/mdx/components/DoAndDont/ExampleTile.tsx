@@ -44,7 +44,7 @@ export const ExampleTile: FC<DoAndDontTileProps> = (props) => {
         : undefined;
 
   return (
-    <>
+    <div>
       {code && (
         <LiveCodeEditor
           editorDisabled
@@ -77,7 +77,7 @@ export const ExampleTile: FC<DoAndDontTileProps> = (props) => {
 
         {props.children}
       </article>
-    </>
+    </div>
   );
 };
 
