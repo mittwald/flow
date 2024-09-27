@@ -1,5 +1,5 @@
 action-group:
-  button-to-button-spacing:
+  spacing:
     m:
       value: "{size-px.m}"
     s:

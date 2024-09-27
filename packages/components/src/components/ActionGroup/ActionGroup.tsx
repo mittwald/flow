@@ -16,6 +16,7 @@ export interface ActionGroupProps
     FlowComponentProps,
     PropsWithClassName {
   ignoreBreakpoint?: boolean;
+  /** @internal */
   spacing?: "s" | "m";
 }
 

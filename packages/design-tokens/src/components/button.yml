@@ -1,29 +1,29 @@
 button:
   corner-radius:
     value: "{corner-radius.default}"
-  padding-squished-x:
+  padding-x:
     value: "{size-px.m}"
-  padding-squished-y:
+  padding-y:
     value: "{size-px.s}"
-  padding:
+  padding-icon-only:
     value: "{size-px.s}"
-  pending-icon-color:
-    value: "{disabled-plain-content-color}"
-  succeeded-icon-color:
-    value: "{success.color.700}"
-  failed-icon-color:
-    value: "{danger.color.700}"
-  text-to-icon-spacing:
+  spacing:
     value: "{size-rem.s}"
+  pending-icon-color:
+    value: "{neutral.color.1000}"
+  succeeded-icon-color:
+    value: "{success.color.800}"
+  failed-icon-color:
+    value: "{danger.color.800}"
 
   # Small
-  padding-s:
+  padding-s-icon-only:
     value: "{size-px.xs}"
-  padding-s-squished-x:
+  padding-s-x:
     value: "{size-px.s}"
-  padding-s-squished-y:
+  padding-s-y:
     value: "{size-px.xs}"
-  text-to-icon-spacing-s:
+  spacing-s:
     value: "{size-rem.xs}"
   font-size-s:
     value: "{font-size-text.s}"
