@@ -4,16 +4,16 @@ interface SampleProps {
   value: string;
 }
 
-export const SizeSample: FC<SampleProps> = (props) => {
+export const FontSizeSample: FC<SampleProps> = (props) => {
   const { value } = props;
 
   return (
     <div
       style={{
-        width: value,
-        height: "24px",
-        backgroundColor: "black",
+        fontSize: value,
       }}
-    />
+    >
+      Aa
+    </div>
   );
 };

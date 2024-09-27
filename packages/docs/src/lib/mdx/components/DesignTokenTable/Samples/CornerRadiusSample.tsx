@@ -12,8 +12,9 @@ export const CornerRadiusSample: FC<SampleProps> = (props) => {
       style={{
         width: "24px",
         height: "24px",
-        border: "solid black",
-        borderRadius: value,
+        borderLeft: "solid black",
+        borderTop: "solid black",
+        borderTopLeftRadius: value,
       }}
     />
   );
