@@ -10,7 +10,11 @@ export type TableProps = Aria.TableProps & {
 export const Table: FC<TableProps> = (props) => {
   const { children, className, verticalAlign = "top", ...rest } = props;
 
-  const rootClassName = clsx(styles.table, styles[verticalAlign], className);
+  const rootClassName = clsx(
+    styles.table,
+    styles[`vertical-align-${verticalAlign}`],
+    className,
+  );
 
   return (
     <div className={styles.tableContainer}>
