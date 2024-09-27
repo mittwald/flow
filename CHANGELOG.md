@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.259](https://github.com/mittwald/flow/compare/0.1.0-alpha.258...0.1.0-alpha.259) (2024-09-27)
+
+### Bug Fixes
+
+- **ExampleTile:** In edge cases the ExampleTile editor and the bottom part will
+  be effected by the row-spacing of the entire page
+  ([117e3fb](https://github.com/mittwald/flow/commit/117e3fbed406a1def33f0cd8e101c15e7c09a547))
+- **list docs:** Fix bugs and change some texts
+  ([d80e556](https://github.com/mittwald/flow/commit/d80e5568a0a95093183b938fe9d911b6ec48d267))
+- **list docs:** Fix property names and show table view by default in example
+  ([fd7cd41](https://github.com/mittwald/flow/commit/fd7cd4198468d78a3134364b74e8aafa3482dd68))
+- **list docs:** Make examples clearer
+  ([01eb3ea](https://github.com/mittwald/flow/commit/01eb3eae7dab7d35d289460ac92b2a879e33d4bf))
+- **List:** show header if list has actionGroup or support list and table view
+  ([1bb0623](https://github.com/mittwald/flow/commit/1bb0623ec36ed741de44912e29acd483f8d08921))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.258](https://github.com/mittwald/flow/compare/0.1.0-alpha.257...0.1.0-alpha.258) (2024-09-27)
 
 **Note:** Version bump only for package @mittwald/flow-project
