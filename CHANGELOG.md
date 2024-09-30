@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.261](https://github.com/mittwald/flow/compare/0.1.0-alpha.260...0.1.0-alpha.261) (2024-09-30)
+
+### Features
+
+- **List:** add List parameter to Cell render function
+  ([623fdb9](https://github.com/mittwald/flow/commit/623fdb95c773f4b1dfe4da9574f4401bb5858c62))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.260](https://github.com/mittwald/flow/compare/0.1.0-alpha.259...0.1.0-alpha.260) (2024-09-30)
 
 ### Features
