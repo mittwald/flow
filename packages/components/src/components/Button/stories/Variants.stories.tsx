@@ -36,6 +36,13 @@ export const PrimarySoft: Story = {
   },
 };
 
+export const PrimaryOutline: Story = {
+  args: {
+    color: "primary",
+    variant: "outline",
+  },
+};
+
 export const AccentSolid: Story = {
   args: {
     color: "accent",
@@ -55,6 +62,14 @@ export const AccentSoft: Story = {
   args: {
     color: "accent",
     variant: "soft",
+  },
+  render: (props) => <Button {...props}>Create/Save</Button>,
+};
+
+export const AccentOutline: Story = {
+  args: {
+    color: "accent",
+    variant: "outline",
   },
   render: (props) => <Button {...props}>Create/Save</Button>,
 };
@@ -82,6 +97,14 @@ export const SecondarySoft: Story = {
   render: (props) => <Button {...props}>Abort/Back</Button>,
 };
 
+export const SecondaryOutline: Story = {
+  args: {
+    color: "secondary",
+    variant: "outline",
+  },
+  render: (props) => <Button {...props}>Abort/Back</Button>,
+};
+
 export const DangerSolid: Story = {
   args: {
     color: "danger",
@@ -101,6 +124,14 @@ export const DangerSoft: Story = {
   args: {
     color: "danger",
     variant: "soft",
+  },
+  render: (props) => <Button {...props}>Delete/Terminate</Button>,
+};
+
+export const DangerOutline: Story = {
+  args: {
+    color: "danger",
+    variant: "outline",
   },
   render: (props) => <Button {...props}>Delete/Terminate</Button>,
 };
@@ -137,6 +168,17 @@ export const DarkSoft: Story = {
   },
 };
 
+export const DarkOutline: Story = {
+  args: {
+    color: "dark",
+    variant: "outline",
+  },
+  render: (props) => <Button {...props}>Delete/Terminate</Button>,
+  parameters: {
+    backgrounds: storyBackgroundLight,
+  },
+};
+
 export const LightSolid: Story = {
   args: {
     color: "light",
@@ -162,6 +204,17 @@ export const LightSoft: Story = {
   args: {
     color: "light",
     variant: "soft",
+  },
+  render: (props) => <Button {...props}>Delete/Terminate</Button>,
+  parameters: {
+    backgrounds: storyBackgroundDark,
+  },
+};
+
+export const LightOutline: Story = {
+  args: {
+    color: "light",
+    variant: "outline",
   },
   render: (props) => <Button {...props}>Delete/Terminate</Button>,
   parameters: {

@@ -229,6 +229,19 @@ primary-soft-content-color:
   pressed:
     value: "{primary.color.1000}"
 
+# Primary Outline
+primary-outline-background-color:
+  default:
+    value: "{color.transparent}"
+  hover:
+    value: "{primary.color.100}"
+  pressed:
+    value: "{primary.color.200}"
+primary-outline-content-color:
+  value: "{primary.color.900}"
+primary-outline-border-color:
+  value: "{primary.color.800}"
+
 # Danger Solid
 danger-solid-background-color:
   default:
@@ -583,6 +596,19 @@ dark-plain-content-color:
   pressed:
     value: "{dark.color.600}"
 
+# Dark Outline
+dark-outline-background-color:
+  default:
+    value: "{color.transparent}"
+  hover:
+    value: "{dark.color.100}"
+  pressed:
+    value: "{dark.color.200}"
+dark-outline-content-color:
+  value: "{dark.color.800}"
+dark-outline-border-color:
+  value: "{dark.color.700}"
+
 # Light Solid
 light-solid-background-color:
   default:
@@ -625,3 +651,16 @@ light-plain-content-color:
     value: "{light.color.700}"
   pressed:
     value: "{light.color.600}"
+
+# Light Outline
+light-outline-background-color:
+  default:
+    value: "{color.transparent}"
+  hover:
+    value: "{light.color.100}"
+  pressed:
+    value: "{light.color.200}"
+light-outline-content-color:
+  value: "{light.color.800}"
+light-outline-border-color:
+  value: "{light.color.700}"

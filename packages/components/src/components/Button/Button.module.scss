@@ -112,14 +112,14 @@
   @mixin variant($color, $variant) {
     &:where(.#{$color}.#{$variant}) {
       background-color: var(
-                      --button--#{$color}-#{$variant}-background-color--default
+        --button--#{$color}-#{$variant}-background-color--default
       );
 
       color: var(--button--#{$color}-#{$variant}-content-color--default);
 
       &:hover {
         background-color: var(
-                        --button--#{$color}-#{$variant}-background-color--hover
+          --button--#{$color}-#{$variant}-background-color--hover
         );
 
         color: var(--button--#{$color}-#{$variant}-content-color--hover);
@@ -127,7 +127,7 @@
 
       &[data-pressed] {
         background-color: var(
-                        --button--#{$color}-#{$variant}-background-color--pressed
+          --button--#{$color}-#{$variant}-background-color--pressed
         );
 
         color: var(--button--#{$color}-#{$variant}-content-color--pressed);
@@ -138,8 +138,16 @@
       &.isPending,
       &.isFailed,
       &.isSucceeded {
-        background-color: var(--button--#{$color}-#{$variant}-background-color--disabled);
+        background-color: var(
+          --button--#{$color}-#{$variant}-background-color--disabled
+        );
         color: var(--button--#{$color}-#{$variant}-content-color--disabled);
+      }
+
+      &.outline {
+        border-width: var(--button--border-width);
+        border-color: var(--button--#{$color}-outline-border-color);
+        border-style: var(--button--border-style);
       }
     }
   }
@@ -162,4 +170,10 @@
   @include variant(secondary, soft);
   @include variant(dark, soft);
   @include variant(light, soft);
+  @include variant(primary, outline);
+  @include variant(accent, outline);
+  @include variant(danger, outline);
+  @include variant(secondary, outline);
+  @include variant(dark, outline);
+  @include variant(light, outline);
 }

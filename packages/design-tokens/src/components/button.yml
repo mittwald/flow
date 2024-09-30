@@ -15,6 +15,10 @@ button:
     value: "{danger.color.700}"
   text-to-icon-spacing:
     value: "{size-rem.s}"
+  border-width:
+    value: "{border-width.100}"
+  border-style:
+    value: "{border-style.default}"
 
   # Small
   padding-s:
@@ -90,6 +94,28 @@ button:
     disabled:
       value: "{disabled-soft-content-color}"
 
+  # Accent Outline
+  accent-outline-background-color:
+    default:
+      value: "{success-outline-background-color.default}"
+    hover:
+      value: "{success-outline-background-color.hover}"
+    pressed:
+      value: "{success-outline-background-color.pressed}"
+    disabled:
+      value: "{disabled-outline-background-color}"
+  accent-outline-content-color:
+    default:
+      value: "{success-outline-border-color}"
+    hover:
+      value: "{success-outline-border-color}"
+    pressed:
+      value: "{success-outline-border-color}"
+    disabled:
+      value: "{disabled-outline-content-color}"
+  accent-outline-border-color:
+    value: "{success-outline-border-color}"
+
   # Primary Solid
   primary-solid-background-color:
     default:
@@ -149,6 +175,28 @@ button:
       value: "{primary-soft-content-color.pressed}"
     disabled:
       value: "{disabled-soft-content-color}"
+
+  # Primary Outline
+  primary-outline-background-color:
+    default:
+      value: "{primary-outline-background-color.default}"
+    hover:
+      value: "{primary-outline-background-color.hover}"
+    pressed:
+      value: "{primary-outline-background-color.pressed}"
+    disabled:
+      value: "{disabled-outline-background-color}"
+  primary-outline-content-color:
+    default:
+      value: "{primary-outline-border-color}"
+    hover:
+      value: "{primary-outline-border-color}"
+    pressed:
+      value: "{primary-outline-border-color}"
+    disabled:
+      value: "{disabled-outline-content-color}"
+  primary-outline-border-color:
+    value: "{primary-outline-border-color}"
 
   # Secondary Solid
   secondary-solid-background-color:
@@ -210,6 +258,28 @@ button:
     disabled:
       value: "{disabled-soft-content-color}"
 
+  # Secondary Outline
+  secondary-outline-background-color:
+    default:
+      value: "{neutral-outline-background-color.default}"
+    hover:
+      value: "{neutral-outline-background-color.hover}"
+    pressed:
+      value: "{neutral-outline-background-color.pressed}"
+    disabled:
+      value: "{disabled-outline-background-color}"
+  secondary-outline-content-color:
+    default:
+      value: "{neutral-outline-content-color.default}"
+    hover:
+      value: "{neutral-outline-content-color.default}"
+    pressed:
+      value: "{neutral-outline-content-color.default}"
+    disabled:
+      value: "{disabled-outline-content-color}"
+  secondary-outline-border-color:
+    value: "{neutral-outline-border-color.default}"
+
   # Danger Solid
   danger-solid-background-color:
     default:
@@ -269,6 +339,28 @@ button:
       value: "{danger-soft-content-color.pressed}"
     disabled:
       value: "{disabled-soft-content-color}"
+
+  # Danger Outline
+  danger-outline-background-color:
+    default:
+      value: "{danger-outline-background-color.default}"
+    hover:
+      value: "{danger-outline-background-color.hover}"
+    pressed:
+      value: "{danger-outline-background-color.pressed}"
+    disabled:
+      value: "{disabled-outline-background-color}"
+  danger-outline-content-color:
+    default:
+      value: "{danger-outline-border-color}"
+    hover:
+      value: "{danger-outline-border-color}"
+    pressed:
+      value: "{danger-outline-border-color}"
+    disabled:
+      value: "{disabled-outline-content-color}"
+  danger-outline-border-color:
+    value: "{danger-outline-border-color}"
 
   # Dark Solid
   dark-solid-background-color:
@@ -330,6 +422,28 @@ button:
     disabled:
       value: "{disabled-dark-soft-content-color}"
 
+  # Dark Outline
+  dark-outline-background-color:
+    default:
+      value: "{dark-outline-background-color.default}"
+    hover:
+      value: "{dark-outline-background-color.hover}"
+    pressed:
+      value: "{dark-outline-background-color.pressed}"
+    disabled:
+      value: "{disabled-outline-background-color}"
+  dark-outline-content-color:
+    default:
+      value: "{dark-outline-content-color}"
+    hover:
+      value: "{dark-outline-content-color}"
+    pressed:
+      value: "{dark-outline-content-color}"
+    disabled:
+      value: "{disabled-dark-outline-content-color}"
+  dark-outline-border-color:
+    value: "{dark-outline-border-color}"
+
   # Light Solid
   light-solid-background-color:
     default:
@@ -389,3 +503,25 @@ button:
       value: "{light-soft-content-color.pressed}"
     disabled:
       value: "{disabled-light-soft-content-color}"
+
+  # Light Outline
+  light-outline-background-color:
+    default:
+      value: "{light-outline-background-color.default}"
+    hover:
+      value: "{light-outline-background-color.hover}"
+    pressed:
+      value: "{light-outline-background-color.pressed}"
+    disabled:
+      value: "{disabled-outline-background-color}"
+  light-outline-content-color:
+    default:
+      value: "{light-outline-content-color}"
+    hover:
+      value: "{light-outline-content-color}"
+    pressed:
+      value: "{light-outline-content-color}"
+    disabled:
+      value: "{disabled-light-outline-content-color}"
+  light-outline-border-color:
+    value: "{light-outline-border-color}"

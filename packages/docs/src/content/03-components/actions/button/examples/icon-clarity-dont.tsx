@@ -15,4 +15,9 @@ import Icon from "@mittwald/flow-react-components/Icon";
       <IconDog />
     </Icon>
   </Button>
+  <Button variant="outline">
+    <Icon>
+      <IconDog />
+    </Icon>
+  </Button>
 </Row>;
