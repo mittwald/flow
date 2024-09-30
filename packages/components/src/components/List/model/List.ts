@@ -15,14 +15,12 @@ import invariant from "invariant";
 import { Search } from "@/components/List/model/search/Search";
 import { ItemView } from "@/components/List/model/item/ItemView";
 import { Table } from "@/components/List/model/table/Table";
-import type { Dispatch, SetStateAction } from "react";
 import { useEffect, useState } from "react";
 import { useSettings } from "@/components/SettingsProvider/SettingsProvider";
 import type { SettingsStore } from "@/components/SettingsProvider/models/SettingsStore";
+import z from "zod";
 
 export class List<T> {
-  public readonly settingStorageKey?: string;
-  public readonly supportsSettingsStorage: boolean;
   public readonly filters: Filter<T, never, never>[];
   public readonly itemView?: ItemView<T>;
   public readonly table?: Table<T>;
@@ -36,9 +34,17 @@ export class List<T> {
   public readonly getItemId?: GetItemId<T>;
   public readonly componentProps: ListSupportedComponentProps;
   public viewMode: ListViewMode;
-  public readonly setViewMode: Dispatch<SetStateAction<ListViewMode>>;
-  private readonly filterSettingsStorageKey?: string;
+  public readonly setViewMode: (viewMode: ListViewMode) => void;
+
   private readonly defaultSettings?: SettingsStore;
+  public readonly supportsSettingsStorage: boolean;
+  public readonly settingStorageKey?: string;
+  private readonly viewModeStorageKey?: string;
+  private readonly filterSettingsStorageKey?: string;
+
+  public static readonly viewModeSettingsStorageSchema = z
+    .enum(["list", "table"])
+    .optional();
 
   public constructor(shape: ListShape<T>) {
     const {
@@ -62,6 +68,9 @@ export class List<T> {
     this.filterSettingsStorageKey = settingStorageKey
       ? `${settingStorageKey}.activeFilters`
       : undefined;
+    this.viewModeStorageKey = settingStorageKey
+      ? `${settingStorageKey}.viewMode`
+      : undefined;
     this.supportsSettingsStorage = !!this.settingStorageKey;
 
     this.items = new ItemCollection(this);
@@ -81,9 +90,21 @@ export class List<T> {
       manualSorting: this.loader.manualSorting,
     });
 
-    const [viewMode, setViewMode] = useState(defaultViewMode ?? "list");
+    const [viewMode, setViewMode] = useState(
+      defaultViewMode ?? this.getStoredViewModeDefaultSetting() ?? "list",
+    );
     this.viewMode = viewMode;
-    this.setViewMode = setViewMode;
+    this.setViewMode = (viewMode) => {
+      setViewMode(viewMode);
+      if (this.defaultSettings && this.viewModeStorageKey) {
+        this.defaultSettings.set(
+          "List",
+          this.viewModeStorageKey,
+          List.viewModeSettingsStorageSchema,
+          viewMode,
+        );
+      }
+    };
 
     useEffect(() => {
       this.filters.forEach((f) => f.deleteUnknownFilterValues());
@@ -132,6 +153,16 @@ export class List<T> {
         "List",
         this.filterSettingsStorageKey,
         Filter.settingsStorageSchema,
+      );
+    }
+  }
+
+  public getStoredViewModeDefaultSetting() {
+    if (this.defaultSettings && this.viewModeStorageKey) {
+      return this.defaultSettings.get(
+        "List",
+        this.viewModeStorageKey,
+        List.viewModeSettingsStorageSchema,
       );
     }
   }
