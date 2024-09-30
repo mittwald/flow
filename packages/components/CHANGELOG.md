@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.260](https://github.com/mittwald/flow/compare/0.1.0-alpha.259...0.1.0-alpha.260) (2024-09-30)
+
+### Features
+
+- **List:** add List parameter to render function
+  ([37ae6b6](https://github.com/mittwald/flow/commit/37ae6b6d3f26fc3cc4a5ceb0855104a1d3f70729))
+- **List:** store view mode in default settings
+  ([17c9c45](https://github.com/mittwald/flow/commit/17c9c4520c52ec3a12a38dcad3f8ec25de572f06))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.259](https://github.com/mittwald/flow/compare/0.1.0-alpha.258...0.1.0-alpha.259) (2024-09-27)
 
 ### Bug Fixes
