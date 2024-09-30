@@ -68,6 +68,7 @@ const meta: Meta<typeof List> = {
             property="type"
             mode="all"
             name="Typ"
+            defaultSelected={["Domain"]}
           />
           <DomainList.Search autoFocus />
           <DomainList.Sorting property="domain" name="A-Z" />

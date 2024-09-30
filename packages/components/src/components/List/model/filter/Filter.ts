@@ -244,6 +244,11 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
     this.onFilterUpdateCallbacks.forEach((cb) => cb());
   }
 
+  public clear(): void {
+    this.list.reactTable.getTableColumn(this.property).setFilterValue(null);
+    this.onFilterUpdateCallbacks.forEach((cb) => cb());
+  }
+
   public toggleValue(newValue: FilterValue): void {
     const currentValueAsArray = this.getArrayValue();
 
