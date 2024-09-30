@@ -77,7 +77,7 @@ export const List = flowComponent("List", (props) => {
   };
 
   const searchProps = deepFindOfType(children, ListSearch)?.props;
-  const itemViewProps = deepFindOfType(children, ListItem)?.props;
+  const itemViewProps = deepFindOfType(children, ListItem<never>)?.props;
 
   const tableProps = deepFindOfType(children, TableSetupComponent)?.props;
   const tableColumnProps = deepFilterByType(children, TableColumn<never>).map(
