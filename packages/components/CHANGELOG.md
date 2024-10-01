@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.262](https://github.com/mittwald/flow/compare/0.1.0-alpha.261...0.1.0-alpha.262) (2024-10-01)
+
+### Features
+
+- implement outline variant for button component
+  ([#814](https://github.com/mittwald/flow/issues/814))
+  ([2179bb5](https://github.com/mittwald/flow/commit/2179bb541f0c9a000dfa7a9e71060b0ea8f45f99))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.261](https://github.com/mittwald/flow/compare/0.1.0-alpha.260...0.1.0-alpha.261) (2024-09-30)
 
 ### Features
