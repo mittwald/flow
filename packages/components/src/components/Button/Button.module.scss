@@ -19,6 +19,17 @@
   grid-template-areas: "content";
   width: fit-content;
 
+  &.outline {
+    border-width: var(--button--border-width);
+    border-style: var(--button--border-style);
+    padding-block: calc(
+      var(--button--padding-squished-y) - var(--button--border-width)
+    );
+    padding-inline: calc(
+      var(--button--padding-squished-x) - var(--button--border-width)
+    );
+  }
+
   @include focus.focus;
 
   @extend .primary;
@@ -98,6 +109,15 @@
     padding-inline: var(--button--padding-s-squished-x);
     column-gap: var(--button--text-to-icon-spacing-s);
 
+    &.outline {
+      padding-block: calc(
+        var(--button--padding-s-squished-y) - var(--button--border-width)
+      );
+      padding-inline: calc(
+        var(--button--padding-s-squished-x) - var(--button--border-width)
+      );
+    }
+
     &:where(:has(.icon):not(:has(.text))) {
       padding: var(--button--padding-s);
     }
@@ -112,14 +132,20 @@
   @mixin variant($color, $variant) {
     &:where(.#{$color}.#{$variant}) {
       background-color: var(
-                      --button--#{$color}-#{$variant}-background-color--default
+        --button--#{$color}-#{$variant}-background-color--default
       );
 
       color: var(--button--#{$color}-#{$variant}-content-color--default);
 
+      &.outline {
+        border-color: var(
+          --button--#{$color}-#{$variant}-border-color--default
+        );
+      }
+
       &:hover {
         background-color: var(
-                        --button--#{$color}-#{$variant}-background-color--hover
+          --button--#{$color}-#{$variant}-background-color--hover
         );
 
         color: var(--button--#{$color}-#{$variant}-content-color--hover);
@@ -127,7 +153,7 @@
 
       &[data-pressed] {
         background-color: var(
-                        --button--#{$color}-#{$variant}-background-color--pressed
+          --button--#{$color}-#{$variant}-background-color--pressed
         );
 
         color: var(--button--#{$color}-#{$variant}-content-color--pressed);
@@ -138,8 +164,16 @@
       &.isPending,
       &.isFailed,
       &.isSucceeded {
-        background-color: var(--button--#{$color}-#{$variant}-background-color--disabled);
+        background-color: var(
+          --button--#{$color}-#{$variant}-background-color--disabled
+        );
         color: var(--button--#{$color}-#{$variant}-content-color--disabled);
+
+        &.outline {
+          border-color: var(
+            --button--#{$color}-#{$variant}-border-color--disabled
+          );
+        }
       }
     }
   }
@@ -162,4 +196,10 @@
   @include variant(secondary, soft);
   @include variant(dark, soft);
   @include variant(light, soft);
+  @include variant(primary, outline);
+  @include variant(accent, outline);
+  @include variant(danger, outline);
+  @include variant(secondary, outline);
+  @include variant(dark, outline);
+  @include variant(light, outline);
 }

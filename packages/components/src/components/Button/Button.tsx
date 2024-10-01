@@ -20,7 +20,7 @@ export interface ButtonProps
   /** @default "primary" */
   color?: "primary" | "accent" | "secondary" | "danger" | "dark" | "light";
   /** @default "solid" */
-  variant?: "plain" | "solid" | "soft";
+  variant?: "plain" | "solid" | "soft" | "outline";
   /** @default "m" */
   size?: "m" | "s";
 

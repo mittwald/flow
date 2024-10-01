@@ -12,7 +12,7 @@ radio:
     default:
       value: "{icon.color.default}"
     selected:
-      value: "{neutral-outline-border-color.selected}"
+      value: "{neutral-outline-border-color}"
     disabled:
       value: "{disabled-outline-content-color}"
 
