@@ -66,11 +66,11 @@ button:
       value: "{disabled-plain-background-color}"
   accent-plain-content-color:
     default:
-      value: "{success-plain-content-color.default}"
+      value: "{success-plain-content-color}"
     hover:
-      value: "{success-plain-content-color.default}"
+      value: "{success-plain-content-color}"
     pressed:
-      value: "{success-plain-content-color.default}"
+      value: "{success-plain-content-color}"
     disabled:
       value: "{disabled-plain-content-color}"
 
@@ -88,7 +88,7 @@ button:
     default:
       value: "{success-soft-content-color.default}"
     hover:
-      value: "{success-soft-content-color.hover}"
+      value: "{success-soft-content-color.default}"
     pressed:
       value: "{success-soft-content-color.pressed}"
     disabled:
@@ -114,7 +114,10 @@ button:
     disabled:
       value: "{disabled-outline-content-color}"
   accent-outline-border-color:
-    value: "{success-outline-border-color}"
+    default:
+      value: "{success-outline-border-color}"
+    disabled:
+      value: "{disabled-outline-border-color}"
 
   # Primary Solid
   primary-solid-background-color:
@@ -148,11 +151,11 @@ button:
       value: "{disabled-plain-background-color}"
   primary-plain-content-color:
     default:
-      value: "{primary-plain-content-color.default}"
+      value: "{primary-plain-content-color}"
     hover:
-      value: "{primary-plain-content-color.default}"
+      value: "{primary-plain-content-color}"
     pressed:
-      value: "{primary-plain-content-color.default}"
+      value: "{primary-plain-content-color}"
     disabled:
       value: "{disabled-plain-content-color}"
 
@@ -196,7 +199,10 @@ button:
     disabled:
       value: "{disabled-outline-content-color}"
   primary-outline-border-color:
-    value: "{primary-outline-border-color}"
+    default:
+      value: "{primary-outline-border-color}"
+    disabled:
+      value: "{disabled-outline-border-color}"
 
   # Secondary Solid
   secondary-solid-background-color:
@@ -252,7 +258,7 @@ button:
     default:
       value: "{neutral-soft-content-color.default}"
     hover:
-      value: "{neutral-soft-content-color.hover}"
+      value: "{neutral-soft-content-color.default}"
     pressed:
       value: "{neutral-soft-content-color.pressed}"
     disabled:
@@ -270,15 +276,18 @@ button:
       value: "{disabled-outline-background-color}"
   secondary-outline-content-color:
     default:
-      value: "{neutral-outline-content-color.default}"
+      value: "{neutral-outline-content-color}"
     hover:
-      value: "{neutral-outline-content-color.default}"
+      value: "{neutral-outline-content-color}"
     pressed:
-      value: "{neutral-outline-content-color.default}"
+      value: "{neutral-outline-content-color}"
     disabled:
       value: "{disabled-outline-content-color}"
   secondary-outline-border-color:
-    value: "{neutral-outline-border-color.default}"
+    default:
+      value: "{neutral-outline-border-color}"
+    disabled:
+      value: "{disabled-outline-border-color}"
 
   # Danger Solid
   danger-solid-background-color:
@@ -312,11 +321,11 @@ button:
       value: "{disabled-plain-background-color}"
   danger-plain-content-color:
     default:
-      value: "{danger-plain-content-color.default}"
+      value: "{danger-plain-content-color}"
     hover:
-      value: "{danger-plain-content-color.default}"
+      value: "{danger-plain-content-color}"
     pressed:
-      value: "{danger-plain-content-color.default}"
+      value: "{danger-plain-content-color}"
     disabled:
       value: "{disabled-plain-content-color}"
 
@@ -334,7 +343,7 @@ button:
     default:
       value: "{danger-soft-content-color.default}"
     hover:
-      value: "{danger-soft-content-color.hover}"
+      value: "{danger-soft-content-color.default}"
     pressed:
       value: "{danger-soft-content-color.pressed}"
     disabled:
@@ -360,7 +369,10 @@ button:
     disabled:
       value: "{disabled-outline-content-color}"
   danger-outline-border-color:
-    value: "{danger-outline-border-color}"
+    default:
+      value: "{danger-outline-border-color}"
+    disabled:
+      value: "{disabled-outline-border-color}"
 
   # Dark Solid
   dark-solid-background-color:
@@ -414,11 +426,11 @@ button:
       value: "{disabled-dark-soft-background-color}"
   dark-soft-content-color:
     default:
-      value: "{dark-soft-content-color.default}"
+      value: "{dark-soft-content-color}"
     hover:
-      value: "{dark-soft-content-color.hover}"
+      value: "{dark-soft-content-color}"
     pressed:
-      value: "{dark-soft-content-color.pressed}"
+      value: "{dark-soft-content-color}"
     disabled:
       value: "{disabled-dark-soft-content-color}"
 
@@ -431,7 +443,7 @@ button:
     pressed:
       value: "{dark-outline-background-color.pressed}"
     disabled:
-      value: "{disabled-outline-background-color}"
+      value: "{disabled-dark-outline-background-color}"
   dark-outline-content-color:
     default:
       value: "{dark-outline-content-color}"
@@ -442,7 +454,10 @@ button:
     disabled:
       value: "{disabled-dark-outline-content-color}"
   dark-outline-border-color:
-    value: "{dark-outline-border-color}"
+    default:
+      value: "{dark-outline-border-color}"
+    disabled:
+      value: "{disabled-dark-outline-border-color}"
 
   # Light Solid
   light-solid-background-color:
@@ -496,11 +511,11 @@ button:
       value: "{disabled-light-soft-background-color}"
   light-soft-content-color:
     default:
-      value: "{light-soft-content-color.default}"
+      value: "{light-soft-content-color}"
     hover:
-      value: "{light-soft-content-color.hover}"
+      value: "{light-soft-content-color}"
     pressed:
-      value: "{light-soft-content-color.pressed}"
+      value: "{light-soft-content-color}"
     disabled:
       value: "{disabled-light-soft-content-color}"
 
@@ -513,7 +528,7 @@ button:
     pressed:
       value: "{light-outline-background-color.pressed}"
     disabled:
-      value: "{disabled-outline-background-color}"
+      value: "{disabled-light-outline-background-color}"
   light-outline-content-color:
     default:
       value: "{light-outline-content-color}"
@@ -524,4 +539,7 @@ button:
     disabled:
       value: "{disabled-light-outline-content-color}"
   light-outline-border-color:
-    value: "{light-outline-border-color}"
+    default:
+      value: "{light-outline-border-color}"
+    disabled:
+      value: "{disabled-light-outline-border-color}"

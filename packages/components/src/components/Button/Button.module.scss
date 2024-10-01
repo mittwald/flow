@@ -19,6 +19,17 @@
   grid-template-areas: "content";
   width: fit-content;
 
+  &.outline {
+    border-width: var(--button--border-width);
+    border-style: var(--button--border-style);
+    padding-block: calc(
+      var(--button--padding-squished-y) - var(--button--border-width)
+    );
+    padding-inline: calc(
+      var(--button--padding-squished-x) - var(--button--border-width)
+    );
+  }
+
   @include focus.focus;
 
   @extend .primary;
@@ -98,6 +109,15 @@
     padding-inline: var(--button--padding-s-squished-x);
     column-gap: var(--button--text-to-icon-spacing-s);
 
+    &.outline {
+      padding-block: calc(
+        var(--button--padding-s-squished-y) - var(--button--border-width)
+      );
+      padding-inline: calc(
+        var(--button--padding-s-squished-x) - var(--button--border-width)
+      );
+    }
+
     &:where(:has(.icon):not(:has(.text))) {
       padding: var(--button--padding-s);
     }
@@ -116,6 +136,12 @@
       );
 
       color: var(--button--#{$color}-#{$variant}-content-color--default);
+
+      &.outline {
+        border-color: var(
+          --button--#{$color}-#{$variant}-border-color--default
+        );
+      }
 
       &:hover {
         background-color: var(
@@ -142,12 +168,12 @@
           --button--#{$color}-#{$variant}-background-color--disabled
         );
         color: var(--button--#{$color}-#{$variant}-content-color--disabled);
-      }
 
-      &.outline {
-        border-width: var(--button--border-width);
-        border-color: var(--button--#{$color}-outline-border-color);
-        border-style: var(--button--border-style);
+        &.outline {
+          border-color: var(
+            --button--#{$color}-#{$variant}-border-color--disabled
+          );
+        }
       }
     }
   }
