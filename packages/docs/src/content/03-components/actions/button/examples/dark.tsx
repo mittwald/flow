@@ -8,7 +8,6 @@ import Button from "@mittwald/flow-react-components/Button";
   <Button variant="plain" color="dark">
     Dark
   </Button>
-
   <Button variant="outline" color="dark">
     Dark
   </Button>
