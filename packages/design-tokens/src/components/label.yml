@@ -1,6 +1,6 @@
 label:
   font-size:
-    value: "{font-size.s}"
+    value: "{font-size-text.s}"
   font-weight:
     value: "{font-weight.bold}"
   line-height:
@@ -11,4 +11,4 @@ label:
     default:
       value: "{neutral.color.800}"
     disabled:
-      value: "{disabled-plain-content-accent-color}"
+      value: "{disabled-plain-content-color}"

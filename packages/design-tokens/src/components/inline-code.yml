@@ -1,6 +1,6 @@
 inline-code:
   font-size:
-    value: "{font-size.s}"
+    value: "{font-size-text.s}"
   line-height:
     value: "{line-height.m}"
   padding-x:

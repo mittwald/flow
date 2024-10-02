@@ -1,6 +1,6 @@
 link:
   font-size:
-    value: "{font-size.s}"
+    value: "{font-size-text.s}"
   line-height:
     value: "{line-height.m}"
   font-weight:
@@ -26,7 +26,7 @@ link:
     pressed:
       value: "{dark.color.600}"
     disabled:
-      value: "{disabled-dark-plain-content-color}"
+      value: "{disabled-plain-dark-content-color}"
 
   color-light:
     default:
@@ -36,4 +36,4 @@ link:
     pressed:
       value: "{light.color.600}"
     disabled:
-      value: "{disabled-light-plain-content-color}"
+      value: "{disabled-plain-light-content-color}"

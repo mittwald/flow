@@ -29,7 +29,7 @@
     justify-content: center;
     cursor: default;
     border-radius: var(--calendar--cell-corner-radius);
-    font-size: var(--font-size--s);
+    font-size: var(--calendar--day-font-size);
 
     &[data-outside-month] {
       display: none;
@@ -114,7 +114,7 @@
         }
 
         &:not([data-selection-start]):not([data-selection-end]) {
-          color: var(--content--color--default);
+          color: var(--text--color--default);
           background: none;
         }
 

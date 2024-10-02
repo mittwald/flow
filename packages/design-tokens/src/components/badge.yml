@@ -1,6 +1,6 @@
 badge:
   font-size:
-    value: "{font-size.s}"
+    value: "{font-size-text.s}"
   font-weight:
     value: "{font-weight.bold}"
   line-height:
@@ -33,7 +33,7 @@ badge:
   neutral-scope-background-color:
     value: "{color.gray.800}"
   neutral-scope-content-color:
-    value: "{content.color.light}"
+    value: "{text.color.light}"
 
   # Blue
   blue-border-color:
@@ -50,7 +50,7 @@ badge:
   blue-scope-background-color:
     value: "{color.hosting-blue.800}"
   blue-scope-content-color:
-    value: "{content.color.light}"
+    value: "{text.color.light}"
 
   # Navy
   navy-border-color:
@@ -67,7 +67,7 @@ badge:
   navy-scope-background-color:
     value: "{color.mittwald-navy.800}"
   navy-scope-content-color:
-    value: "{content.color.light}"
+    value: "{text.color.light}"
 
   # Violet
   violet-border-color:
@@ -84,7 +84,7 @@ badge:
   violet-scope-background-color:
     value: "{color.soft-contrast-violet.800}"
   violet-scope-content-color:
-    value: "{content.color.light}"
+    value: "{text.color.light}"
 
   # Teal
   teal-border-color:
@@ -101,7 +101,7 @@ badge:
   teal-scope-background-color:
     value: "{color.super-teal.800}"
   teal-scope-content-color:
-    value: "{content.color.light}"
+    value: "{text.color.light}"
 
   # Lilac
   lilac-border-color:
@@ -118,7 +118,7 @@ badge:
   lilac-scope-background-color:
     value: "{color.bright-lilac.800}"
   lilac-scope-content-color:
-    value: "{content.color.light}"
+    value: "{text.color.light}"
 
   # Red
   red-border-color:
@@ -135,7 +135,7 @@ badge:
   red-scope-background-color:
     value: "{color.amaranth-red.800}"
   red-scope-content-color:
-    value: "{content.color.light}"
+    value: "{text.color.light}"
 
   # Green
   green-border-color:
@@ -152,7 +152,7 @@ badge:
   green-scope-background-color:
     value: "{color.espelkamp-green.800}"
   green-scope-content-color:
-    value: "{content.color.light}"
+    value: "{text.color.light}"
 
   # Orange
   orange-border-color:
@@ -169,7 +169,7 @@ badge:
   orange-scope-background-color:
     value: "{color.royal-orange.900}"
   orange-scope-content-color:
-    value: "{content.color.light}"
+    value: "{text.color.light}"
 
   # Dark
   dark-border-color:
@@ -186,7 +186,7 @@ badge:
   dark-scope-background-color:
     value: "{dark.color.800}"
   dark-scope-content-color:
-    value: "{content.color.light}"
+    value: "{text.color.light}"
 
   # Light
   light-border-color:
@@ -203,7 +203,7 @@ badge:
   light-scope-background-color:
     value: "{light.color.800}"
   light-scope-content-color:
-    value: "{content.color.dark}"
+    value: "{text.color.dark}"
 
   # Disabled
   disabled-border-color:
@@ -219,24 +219,24 @@ badge:
 
   # Disabled Dark
   disabled-dark-border-color:
-    value: "{disabled-dark-outline-border-color}"
+    value: "{disabled-outline-dark-border-color}"
   disabled-dark-background-color:
-    value: "{disabled-dark-soft-background-color}"
+    value: "{disabled-soft-dark-background-color}"
   disabled-dark-content-color:
-    value: "{disabled-dark-soft-content-color}"
+    value: "{disabled-soft-dark-content-color}"
   disabled-dark-scope-background-color:
-    value: "{disabled-dark-solid-background-color}"
+    value: "{disabled-solid-dark-background-color}"
   disabled-dark-scope-content-color:
-    value: "{disabled-dark-solid-content-color}"
+    value: "{disabled-solid-dark-content-color}"
 
   # Disabled Light
   disabled-light-border-color:
-    value: "{disabled-light-outline-border-color}"
+    value: "{disabled-outline-light-border-color}"
   disabled-light-background-color:
-    value: "{disabled-light-soft-background-color}"
+    value: "{disabled-soft-light-background-color}"
   disabled-light-content-color:
-    value: "{disabled-light-soft-content-color}"
+    value: "{disabled-soft-light-content-color}"
   disabled-light-scope-background-color:
-    value: "{disabled-light-solid-background-color}"
+    value: "{disabled-solid-light-background-color}"
   disabled-light-scope-content-color:
-    value: "{disabled-light-solid-content-color}"
+    value: "{disabled-solid-light-content-color}"

@@ -1,36 +1,36 @@
 button:
   corner-radius:
     value: "{corner-radius.default}"
-  padding-squished-x:
+  padding-x:
     value: "{size-px.m}"
-  padding-squished-y:
+  padding-y:
     value: "{size-px.s}"
-  padding:
+  padding-icon-only:
     value: "{size-px.s}"
-  pending-icon-color:
-    value: "{disabled-plain-content-accent-color}"
-  succeeded-icon-color:
-    value: "{success.color.700}"
-  failed-icon-color:
-    value: "{danger.color.700}"
-  text-to-icon-spacing:
+  spacing:
     value: "{size-rem.s}"
+  pending-icon-color:
+    value: "{neutral.color.1000}"
+  succeeded-icon-color:
+    value: "{success.color.800}"
+  failed-icon-color:
+    value: "{danger.color.800}"
   border-width:
     value: "{border-width.100}"
   border-style:
     value: "{border-style.default}"
 
   # Small
-  padding-s:
+  padding-s-icon-only:
     value: "{size-px.xs}"
-  padding-s-squished-x:
+  padding-s-x:
     value: "{size-px.s}"
-  padding-s-squished-y:
+  padding-s-y:
     value: "{size-px.xs}"
-  text-to-icon-spacing-s:
+  spacing-s:
     value: "{size-rem.xs}"
   font-size-s:
-    value: "{font-size.s}"
+    value: "{font-size-text.s}"
   line-height-s:
     value: "{size-rem.m}"
 
@@ -173,7 +173,7 @@ button:
     default:
       value: "{primary-soft-content-color.default}"
     hover:
-      value: "{primary-soft-content-color.hover}"
+      value: "{primary-soft-content-color.default}"
     pressed:
       value: "{primary-soft-content-color.pressed}"
     disabled:
@@ -383,7 +383,7 @@ button:
     pressed:
       value: "{dark-solid-background-color.pressed}"
     disabled:
-      value: "{disabled-dark-solid-background-color}"
+      value: "{disabled-solid-dark-background-color}"
   dark-solid-content-color:
     default:
       value: "{dark-solid-content-color}"
@@ -392,7 +392,7 @@ button:
     pressed:
       value: "{dark-solid-content-color}"
     disabled:
-      value: "{disabled-dark-solid-content-color}"
+      value: "{disabled-solid-dark-content-color}"
 
   # Dark Plain
   dark-plain-background-color:
@@ -406,13 +406,13 @@ button:
       value: "{disabled-plain-background-color}"
   dark-plain-content-color:
     default:
-      value: "{dark-plain-content-color.default}"
+      value: "{dark-plain-content-color}"
     hover:
-      value: "{dark-plain-content-color.default}"
+      value: "{dark-plain-content-color}"
     pressed:
-      value: "{dark-plain-content-color.default}"
+      value: "{dark-plain-content-color}"
     disabled:
-      value: "{disabled-dark-plain-content-color}"
+      value: "{disabled-plain-dark-content-color}"
 
   # Dark Soft
   dark-soft-background-color:
@@ -423,7 +423,7 @@ button:
     pressed:
       value: "{dark-soft-background-color.pressed}"
     disabled:
-      value: "{disabled-dark-soft-background-color}"
+      value: "{disabled-soft-dark-background-color}"
   dark-soft-content-color:
     default:
       value: "{dark-soft-content-color}"
@@ -432,7 +432,7 @@ button:
     pressed:
       value: "{dark-soft-content-color}"
     disabled:
-      value: "{disabled-dark-soft-content-color}"
+      value: "{disabled-soft-dark-content-color}"
 
   # Dark Outline
   dark-outline-background-color:
@@ -443,7 +443,7 @@ button:
     pressed:
       value: "{dark-outline-background-color.pressed}"
     disabled:
-      value: "{disabled-dark-outline-background-color}"
+      value: "{disabled-outline-dark-background-color}"
   dark-outline-content-color:
     default:
       value: "{dark-outline-content-color}"
@@ -452,12 +452,12 @@ button:
     pressed:
       value: "{dark-outline-content-color}"
     disabled:
-      value: "{disabled-dark-outline-content-color}"
+      value: "{disabled-outline-dark-content-color}"
   dark-outline-border-color:
     default:
       value: "{dark-outline-border-color}"
     disabled:
-      value: "{disabled-dark-outline-border-color}"
+      value: "{disabled-outline-dark-border-color}"
 
   # Light Solid
   light-solid-background-color:
@@ -468,7 +468,7 @@ button:
     pressed:
       value: "{light-solid-background-color.pressed}"
     disabled:
-      value: "{disabled-light-solid-background-color}"
+      value: "{disabled-solid-light-background-color}"
   light-solid-content-color:
     default:
       value: "{light-solid-content-color}"
@@ -477,7 +477,7 @@ button:
     pressed:
       value: "{light-solid-content-color}"
     disabled:
-      value: "{disabled-light-solid-content-color}"
+      value: "{disabled-solid-light-content-color}"
 
   # Light Plain
   light-plain-background-color:
@@ -491,13 +491,13 @@ button:
       value: "{disabled-plain-background-color}"
   light-plain-content-color:
     default:
-      value: "{light-plain-content-color.default}"
+      value: "{light-plain-content-color}"
     hover:
-      value: "{light-plain-content-color.default}"
+      value: "{light-plain-content-color}"
     pressed:
-      value: "{light-plain-content-color.default}"
+      value: "{light-plain-content-color}"
     disabled:
-      value: "{disabled-light-plain-content-color}"
+      value: "{disabled-plain-light-content-color}"
 
   # Light Soft
   light-soft-background-color:
@@ -508,7 +508,7 @@ button:
     pressed:
       value: "{light-soft-background-color.pressed}"
     disabled:
-      value: "{disabled-light-soft-background-color}"
+      value: "{disabled-soft-light-background-color}"
   light-soft-content-color:
     default:
       value: "{light-soft-content-color}"
@@ -517,7 +517,7 @@ button:
     pressed:
       value: "{light-soft-content-color}"
     disabled:
-      value: "{disabled-light-soft-content-color}"
+      value: "{disabled-soft-light-content-color}"
 
   # Light Outline
   light-outline-background-color:
@@ -528,7 +528,7 @@ button:
     pressed:
       value: "{light-outline-background-color.pressed}"
     disabled:
-      value: "{disabled-light-outline-background-color}"
+      value: "{disabled-outline-light-background-color}"
   light-outline-content-color:
     default:
       value: "{light-outline-content-color}"
@@ -537,9 +537,9 @@ button:
     pressed:
       value: "{light-outline-content-color}"
     disabled:
-      value: "{disabled-light-outline-content-color}"
+      value: "{disabled-outline-light-content-color}"
   light-outline-border-color:
     default:
       value: "{light-outline-border-color}"
     disabled:
-      value: "{disabled-light-outline-border-color}"
+      value: "{disabled-outline-light-border-color}"

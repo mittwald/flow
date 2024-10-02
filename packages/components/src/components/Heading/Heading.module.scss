@@ -26,26 +26,26 @@
   }
 
   &:where(h1) {
-    --font-size: var(--heading-font-size--xl);
+    --font-size: var(--font-size-heading--xl);
   }
 
   &:where(h2) {
-    --font-size: var(--heading-font-size--m);
+    --font-size: var(--font-size-heading--m);
   }
 
   &:where(h3) {
-    --font-size: var(--heading-font-size--s);
+    --font-size: var(--font-size-heading--s);
   }
 
   &:where(h4),
   &:where(h5),
   &:where(h6) {
-    --font-size: var(--heading-font-size--xs);
+    --font-size: var(--font-size-heading--xs);
   }
 
   @mixin size($size) {
     &.#{$size} {
-      --font-size: var(--heading-font-size--#{$size});
+      --font-size: var(--font-size-heading--#{$size});
     }
   }
 
@@ -59,6 +59,6 @@
 
 @media (max-width: 550px) {
   .heading:where(h1) {
-    --font-size: var(--heading-font-size--l);
+    --font-size: var(--font-size-heading--l);
   }
 }

@@ -30,8 +30,8 @@
 
   .statusIcon {
     grid-area: icon;
-    height: calc(var(--heading-font-size--xs) * var(--line-height--default));
-    width: var(--heading-font-size--xs);
+    height: calc(var(--font-size-heading--xs) * var(--line-height--default));
+    width: var(--font-size-heading--xs);
   }
 
   .heading {
