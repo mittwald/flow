@@ -56,6 +56,7 @@ export const DateRangePicker = flowComponent("DateRangePicker", (props) => {
       </PropsContextProvider>
       <FieldError className={styles.fieldError}>{errorMessage}</FieldError>
       <Popover
+        padding="s"
         placement="bottom end"
         isDialogContent
         controller={popoverController}

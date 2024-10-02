@@ -35,7 +35,7 @@ export const FilterPicker: FC<Props> = (props) => {
 
   return (
     <ContextMenuTrigger>
-      <Button variant="soft" size="s" color="secondary">
+      <Button variant="outline" color="secondary">
         <Text>{name ?? property}</Text>
         <IconFilter />
       </Button>

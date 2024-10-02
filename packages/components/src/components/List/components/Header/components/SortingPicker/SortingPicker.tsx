@@ -41,7 +41,7 @@ export const SortingPicker: FC = () => {
 
   return (
     <ContextMenuTrigger>
-      <Button variant="soft" size="s" color="secondary">
+      <Button variant="outline" color="secondary">
         {text}
         <IconSorting />
       </Button>
