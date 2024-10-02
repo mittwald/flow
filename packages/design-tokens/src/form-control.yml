@@ -38,13 +38,13 @@ form-control:
     disabled:
       value: "{disabled-outline-background-color}"
     hover:
-      value: "{neutral-outline-background-color.hover}"
+      value: "{primary.color.100}"
     focused:
       value: "{neutral.color.300}"
     invalid:
       value: "{danger.color.100}"
     selected:
-      value: "{info-outline-background-color.pressed}"
+      value: "{primary.color.200}"
 
   content-color:
     default:

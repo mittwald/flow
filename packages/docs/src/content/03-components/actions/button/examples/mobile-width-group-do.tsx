@@ -5,8 +5,10 @@ import Heading from "@mittwald/flow-react-components/Heading";
 import ActionGroup from "@mittwald/flow-react-components/ActionGroup";
 
 <StaticModal>
-  <div className="flow--modal--content">
+  <header className="flow--modal--header">
     <Heading>Projekt anlegen</Heading>
+  </header>
+  <div className="flow--modal--content">
     <TextField>
       <Label>Projekt Name</Label>
     </TextField>
