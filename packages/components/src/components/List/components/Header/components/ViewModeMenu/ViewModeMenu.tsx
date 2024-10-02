@@ -32,9 +32,8 @@ export const ViewModeMenu: FC = () => {
   return (
     <ContextMenuTrigger>
       <Button
-        variant="soft"
+        variant="outline"
         color="secondary"
-        size="s"
         aria-label={stringFormatter.format("list.settings")}
       >
         <Text>

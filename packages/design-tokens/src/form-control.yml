@@ -1,6 +1,6 @@
 form-control:
   label-to-control-spacing:
-    value: "{size-rem.xs}"
+    value: "{size-rem.xxs}"
   control-to-info-spacing:
     value: "{size-rem.xs}"
   padding-x:
@@ -22,7 +22,7 @@ form-control:
 
   border-color:
     default:
-      value: "{neutral-outline-border-color.default}"
+      value: "{neutral-outline-border-color}"
     disabled:
       value: "{disabled-outline-border-color}"
     invalid:
@@ -30,7 +30,7 @@ form-control:
     focused:
       value: "{focus.outline-color}"
     selected:
-      value: "{neutral-outline-border-color.selected}"
+      value: "{neutral-outline-border-color}"
 
   background-color:
     default:
@@ -38,18 +38,18 @@ form-control:
     disabled:
       value: "{disabled-outline-background-color}"
     hover:
-      value: "{neutral-outline-background-color.hover}"
+      value: "{primary.color.100}"
     focused:
       value: "{neutral.color.300}"
     invalid:
       value: "{danger.color.100}"
     selected:
-      value: "{info-outline-background-color.pressed}"
+      value: "{primary.color.200}"
 
   content-color:
     default:
-      value: "{neutral-outline-content-color.default}"
+      value: "{neutral-outline-content-color}"
     disabled:
       value: "{disabled-outline-content-color}"
     selected:
-      value: "{neutral-outline-content-color.selected}"
+      value: "{neutral-outline-content-color}"

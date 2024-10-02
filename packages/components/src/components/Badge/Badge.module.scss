@@ -57,6 +57,7 @@
     .scope {
       padding-inline-start: var(--badge--padding-x);
       padding-inline-end: var(--badge--content-to-content-spacing);
+      height: 100%;
       flex-shrink: 0;
     }
 

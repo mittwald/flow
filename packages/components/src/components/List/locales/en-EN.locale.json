@@ -6,7 +6,6 @@
   "list.noResult.text": "Your search did not return any results. Please adjust the search query or your filters.",
   "list.options": "Options",
   "list.paginationInfo": "Showing {visibleItemsCount} of {totalItemsCount}",
-  "list.setSorting": "Sorting: {property}",
   "list.settings": "Settings",
   "list.settings.viewMode": "View",
   "list.settings.viewMode.list": "List",
