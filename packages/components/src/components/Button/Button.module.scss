@@ -19,7 +19,7 @@
   grid-template-areas: "content";
   width: fit-content;
 
-  &.outline {
+  &:where(.outline) {
     border-width: var(--button--border-width);
     border-style: var(--button--border-style);
     padding-block: calc(
@@ -60,6 +60,10 @@
 
   &:where(:has(.icon):not(:has(.text))) {
     padding: var(--button--padding);
+
+    &:where(.outline) {
+      padding: calc(var(--button--padding) - var(--button--border-width));
+    }
   }
 
   &:where(:has(.text) .icon) {
@@ -109,7 +113,7 @@
     padding-inline: var(--button--padding-s-squished-x);
     column-gap: var(--button--text-to-icon-spacing-s);
 
-    &.outline {
+    &:where(.outline) {
       padding-block: calc(
         var(--button--padding-s-squished-y) - var(--button--border-width)
       );
@@ -120,6 +124,10 @@
 
     &:where(:has(.icon):not(:has(.text))) {
       padding: var(--button--padding-s);
+
+      &:where(.outline) {
+        padding: calc(var(--button--padding-s) - var(--button--border-width));
+      }
     }
 
     .content {
