@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.263](https://github.com/mittwald/flow/compare/0.1.0-alpha.262...0.1.0-alpha.263) (2024-10-02)
+
+### Bug Fixes
+
+- fix colors after neutral color token update
+  ([909d356](https://github.com/mittwald/flow/commit/909d3567b7d9b9999ebd99aa6c23623841a830d3))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.262](https://github.com/mittwald/flow/compare/0.1.0-alpha.261...0.1.0-alpha.262) (2024-10-01)
 
 ### Features
