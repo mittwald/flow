@@ -18,6 +18,7 @@
   align-items: center;
   grid-template-areas: "content";
   width: fit-content;
+  white-space: nowrap;
 
   &:where(.outline) {
     border-width: var(--button--border-width);
