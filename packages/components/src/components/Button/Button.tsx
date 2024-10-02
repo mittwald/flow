@@ -146,7 +146,7 @@ export const Button = flowComponent("Button", (props) => {
           <Wrap if={!unstyled}>
             <span className={styles.content}>
               <Wrap if={isStringContent}>
-                <Text>{children}</Text>
+                <Text className={styles.text}>{children}</Text>
               </Wrap>
             </span>
           </Wrap>
