@@ -33,65 +33,6 @@ export default () => {
         </Button>
         <Button color="accent">Anlegen</Button>
       </ActionGroup>
-      <DomainList.Search />
-      <DomainList.Filter
-        property="type"
-        mode="some"
-        name="Type"
-      />
-      <DomainList.Sorting
-        property="hostname"
-        name="Domain A bis Z"
-        direction="asc"
-      />
-      <DomainList.Sorting
-        property="hostname"
-        name="Domain Z bis A"
-        direction="desc"
-      />
-      <DomainList.Sorting
-        property="type"
-        name="Type A bis Z"
-        direction="asc"
-      />
-      <DomainList.Sorting
-        property="type"
-        name="Type Z bis A"
-        direction="desc"
-      />
-      <DomainList.Table>
-        <DomainList.TableHeader>
-          <DomainList.TableColumn>
-            Name
-          </DomainList.TableColumn>
-          <DomainList.TableColumn>
-            Type
-          </DomainList.TableColumn>
-          <DomainList.TableColumn>
-            TLD
-          </DomainList.TableColumn>
-          <DomainList.TableColumn>
-            Hostname
-          </DomainList.TableColumn>
-        </DomainList.TableHeader>
-
-        <DomainList.TableBody>
-          <DomainList.TableRow>
-            <DomainList.TableCell>
-              {(domain) => domain.domain}
-            </DomainList.TableCell>
-            <DomainList.TableCell>
-              {(domain) => domain.type}
-            </DomainList.TableCell>
-            <DomainList.TableCell>
-              {(domain) => domain.tld}
-            </DomainList.TableCell>
-            <DomainList.TableCell>
-              {(domain) => domain.hostname}
-            </DomainList.TableCell>
-          </DomainList.TableRow>
-        </DomainList.TableBody>
-      </DomainList.Table>
       <DomainList.Item>
         {(domain) => (
           <DomainList.ItemView>

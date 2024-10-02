@@ -28,6 +28,7 @@ import { TableBody } from "@/components/List/setupComponents/TableBody";
 import { TunnelProvider } from "@mittwald/react-tunnel";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import headerStyles from "./components/Header/Header.module.css";
+import { ActionGroup } from "@/components/ActionGroup";
 
 export interface ListProps<T>
   extends PropsWithChildren,
@@ -76,7 +77,7 @@ export const List = flowComponent("List", (props) => {
   };
 
   const searchProps = deepFindOfType(children, ListSearch)?.props;
-  const itemViewProps = deepFindOfType(children, ListItem)?.props;
+  const itemViewProps = deepFindOfType(children, ListItem<never>)?.props;
 
   const tableProps = deepFindOfType(children, TableSetupComponent)?.props;
   const tableColumnProps = deepFilterByType(children, TableColumn<never>).map(
@@ -153,6 +154,8 @@ export const List = flowComponent("List", (props) => {
     },
   };
 
+  const hasActionGroup = !!deepFindOfType(children, ActionGroup);
+
   return (
     <PropsContextProvider props={propsContext}>
       <TunnelProvider>
@@ -164,7 +167,7 @@ export const List = flowComponent("List", (props) => {
           <DataLoader />
           <div className={styles.list} ref={ref}>
             {children}
-            <Header />
+            <Header hasActionGroup={hasActionGroup} />
             {listModel.viewMode === "list" && <Items />}
             {listModel.viewMode === "table" && <Table />}
             <Footer />

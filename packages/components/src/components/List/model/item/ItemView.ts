@@ -27,8 +27,9 @@ export class ItemView<T> {
   }
 
   public render(data: T): ReactNode {
-    const renderFn = this.renderFn ?? ItemView.fallbackRenderItemFn;
-    return renderFn(data as never);
+    const renderFn = (this.renderFn ??
+      ItemView.fallbackRenderItemFn) as RenderItemFn<T>;
+    return renderFn(data as never, this.list);
   }
 
   private static fallbackRenderItemFn: RenderItemFn<never> = (item) =>

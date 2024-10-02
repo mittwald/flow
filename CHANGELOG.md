@@ -3,6 +3,121 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.264](https://github.com/mittwald/flow/compare/0.1.0-alpha.263...0.1.0-alpha.264) (2024-10-02)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.263](https://github.com/mittwald/flow/compare/0.1.0-alpha.262...0.1.0-alpha.263) (2024-10-02)
+
+### Bug Fixes
+
+- fix colors after neutral color token update
+  ([909d356](https://github.com/mittwald/flow/commit/909d3567b7d9b9999ebd99aa6c23623841a830d3))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.262](https://github.com/mittwald/flow/compare/0.1.0-alpha.261...0.1.0-alpha.262) (2024-10-01)
+
+### Features
+
+- implement outline variant for button component
+  ([#814](https://github.com/mittwald/flow/issues/814))
+  ([2179bb5](https://github.com/mittwald/flow/commit/2179bb541f0c9a000dfa7a9e71060b0ea8f45f99))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.261](https://github.com/mittwald/flow/compare/0.1.0-alpha.260...0.1.0-alpha.261) (2024-09-30)
+
+### Features
+
+- **List:** add List parameter to Cell render function
+  ([623fdb9](https://github.com/mittwald/flow/commit/623fdb95c773f4b1dfe4da9574f4401bb5858c62))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.260](https://github.com/mittwald/flow/compare/0.1.0-alpha.259...0.1.0-alpha.260) (2024-09-30)
+
+### Features
+
+- **List:** add List parameter to render function
+  ([37ae6b6](https://github.com/mittwald/flow/commit/37ae6b6d3f26fc3cc4a5ceb0855104a1d3f70729))
+- **List:** store view mode in default settings
+  ([17c9c45](https://github.com/mittwald/flow/commit/17c9c4520c52ec3a12a38dcad3f8ec25de572f06))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.259](https://github.com/mittwald/flow/compare/0.1.0-alpha.258...0.1.0-alpha.259) (2024-09-27)
+
+### Bug Fixes
+
+- **ExampleTile:** In edge cases the ExampleTile editor and the bottom part will
+  be effected by the row-spacing of the entire page
+  ([117e3fb](https://github.com/mittwald/flow/commit/117e3fbed406a1def33f0cd8e101c15e7c09a547))
+- **list docs:** Fix bugs and change some texts
+  ([d80e556](https://github.com/mittwald/flow/commit/d80e5568a0a95093183b938fe9d911b6ec48d267))
+- **list docs:** Fix property names and show table view by default in example
+  ([fd7cd41](https://github.com/mittwald/flow/commit/fd7cd4198468d78a3134364b74e8aafa3482dd68))
+- **list docs:** Make examples clearer
+  ([01eb3ea](https://github.com/mittwald/flow/commit/01eb3eae7dab7d35d289460ac92b2a879e33d4bf))
+- **List:** show header if list has actionGroup or support list and table view
+  ([1bb0623](https://github.com/mittwald/flow/commit/1bb0623ec36ed741de44912e29acd483f8d08921))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.258](https://github.com/mittwald/flow/compare/0.1.0-alpha.257...0.1.0-alpha.258) (2024-09-27)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.257](https://github.com/mittwald/flow/compare/0.1.0-alpha.256...0.1.0-alpha.257) (2024-09-26)
+
+### Features
+
+- **List:** allow readonly values in Filter
+  ([9f1f5fe](https://github.com/mittwald/flow/commit/9f1f5fed46acafb4ade1a67dbb948a55577d4326))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.256](https://github.com/mittwald/flow/compare/0.1.0-alpha.255...0.1.0-alpha.256) (2024-09-26)
+
+### Features
+
+- **TextArea:** make TextArea resizeable
+  ([#790](https://github.com/mittwald/flow/issues/790))
+  ([6e484f4](https://github.com/mittwald/flow/commit/6e484f4cc5be2e283d16511aad36244cd004afbf))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.255](https://github.com/mittwald/flow/compare/0.1.0-alpha.254...0.1.0-alpha.255) (2024-09-26)
 
 **Note:** Version bump only for package @mittwald/flow-project

@@ -9,56 +9,17 @@ import Text from "@mittwald/flow-react-components/Text";
 import ContextMenu from "@mittwald/flow-react-components/ContextMenu";
 import {
   IconDomain,
-  IconDownload,
   IconSubdomain,
 } from "@mittwald/flow-react-components/Icons";
 import StatusBadge from "@mittwald/flow-react-components/StatusBadge";
 import MenuItem from "@mittwald/flow-react-components/MenuItem";
-import Button from "@mittwald/flow-react-components/Button";
-import ActionGroup from "@mittwald/flow-react-components/ActionGroup";
 
 export default () => {
   const DomainList = typedList<Domain>();
 
   return (
-    <DomainList.List batchSize={5}>
+    <DomainList.List batchSize={5} defaultViewMode="table">
       <DomainList.StaticData data={domains} />
-      <ActionGroup>
-        <Button
-          color="secondary"
-          variant="soft"
-          slot="secondary"
-        >
-          <IconDownload />
-        </Button>
-        <Button color="accent">Anlegen</Button>
-      </ActionGroup>
-      <DomainList.Search />
-      <DomainList.Filter
-        property="type"
-        mode="some"
-        name="Type"
-      />
-      <DomainList.Sorting
-        property="hostname"
-        name="Domain A bis Z"
-        direction="asc"
-      />
-      <DomainList.Sorting
-        property="hostname"
-        name="Domain Z bis A"
-        direction="desc"
-      />
-      <DomainList.Sorting
-        property="type"
-        name="Type A bis Z"
-        direction="asc"
-      />
-      <DomainList.Sorting
-        property="type"
-        name="Type Z bis A"
-        direction="desc"
-      />
       <DomainList.Table>
         <DomainList.TableHeader>
           <DomainList.TableColumn>

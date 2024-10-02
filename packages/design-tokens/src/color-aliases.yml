@@ -582,7 +582,7 @@ dark-outline-background-color:
   pressed:
     value: "{dark.color.200}"
 dark-outline-border-color:
-  value: "{dark.color.800}"
+  value: "{dark.color.700}"
 dark-outline-content-color:
   value: "{dark.color.800}"
 
@@ -630,4 +630,4 @@ light-outline-background-color:
 light-outline-border-color:
   value: "{light.color.800}"
 light-outline-content-color:
-  value: "{light.color.800}"
+  value: "{light.color.700}"
