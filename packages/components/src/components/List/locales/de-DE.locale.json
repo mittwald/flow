@@ -5,7 +5,6 @@
   "list.noResult.text": "Deine Suche ergab keine Ergebnisse. Bitte passe die Suchanfrage oder deine Filter an.",
   "list.options": "Optionen",
   "list.paginationInfo": "{visibleItemsCount} von insgesamt {totalItemsCount} angezeigt",
-  "list.setSorting": "Sortierung: {property}",
   "list.settings": "Einstellungen",
   "list.settings.viewMode": "Ansicht",
   "list.settings.viewMode.list": "Liste",

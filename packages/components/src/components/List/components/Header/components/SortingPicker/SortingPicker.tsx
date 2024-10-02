@@ -25,14 +25,7 @@ export const SortingPicker: FC = () => {
   const text = (
     <Text>
       {pickerLabelSorting ? (
-        <Translate
-          locales={locales}
-          variables={{
-            property: pickerLabelSorting.name ?? pickerLabelSorting.property,
-          }}
-        >
-          list.setSorting
-        </Translate>
+        <>{pickerLabelSorting.name ?? pickerLabelSorting.property}</>
       ) : (
         <Translate locales={locales}>list.sorting</Translate>
       )}
