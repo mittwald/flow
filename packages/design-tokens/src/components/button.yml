@@ -443,7 +443,7 @@ button:
     pressed:
       value: "{dark-outline-background-color.pressed}"
     disabled:
-      value: "{disabled-dark-outline-background-color}"
+      value: "{disabled-outline-dark-background-color}"
   dark-outline-content-color:
     default:
       value: "{dark-outline-content-color}"
@@ -452,12 +452,12 @@ button:
     pressed:
       value: "{dark-outline-content-color}"
     disabled:
-      value: "{disabled-dark-outline-content-color}"
+      value: "{disabled-outline-dark-content-color}"
   dark-outline-border-color:
     default:
       value: "{dark-outline-border-color}"
     disabled:
-      value: "{disabled-dark-outline-border-color}"
+      value: "{disabled-outline-dark-border-color}"
 
   # Light Solid
   light-solid-background-color:
@@ -528,7 +528,7 @@ button:
     pressed:
       value: "{light-outline-background-color.pressed}"
     disabled:
-      value: "{disabled-light-outline-background-color}"
+      value: "{disabled-outline-light-background-color}"
   light-outline-content-color:
     default:
       value: "{light-outline-content-color}"
@@ -537,9 +537,9 @@ button:
     pressed:
       value: "{light-outline-content-color}"
     disabled:
-      value: "{disabled-light-outline-content-color}"
+      value: "{disabled-outline-light-content-color}"
   light-outline-border-color:
     default:
       value: "{light-outline-border-color}"
     disabled:
-      value: "{disabled-light-outline-border-color}"
+      value: "{disabled-outline-light-border-color}"

@@ -15,9 +15,9 @@ calendar:
   header-to-day-spacing:
     value: "{size-rem.xs}"
   heading-font-size:
-    value: "{font-size.default}"
+    value: "{font-size-text.default}"
   day-font-size:
-    value: "{font-size.s}"
+    value: "{font-size-text.s}"
   day-background-color:
     disabled:
       value: "{disabled-plain-background-color}"
