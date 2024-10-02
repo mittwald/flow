@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.265](https://github.com/mittwald/flow/compare/0.1.0-alpha.264...0.1.0-alpha.265) (2024-10-02)
+
+### Bug Fixes
+
+- **List:** Remove "Sorting" prefix of list sorting button
+  ([52c935c](https://github.com/mittwald/flow/commit/52c935c683f1114a4ec516216b175a1ca14c8ec3))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.264](https://github.com/mittwald/flow/compare/0.1.0-alpha.263...0.1.0-alpha.264) (2024-10-02)
 
 **Note:** Version bump only for package @mittwald/flow-project
