@@ -3,6 +3,87 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.266](https://github.com/mittwald/flow/compare/0.1.0-alpha.265...0.1.0-alpha.266) (2024-10-02)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.265](https://github.com/mittwald/flow/compare/0.1.0-alpha.264...0.1.0-alpha.265) (2024-10-02)
+
+### Bug Fixes
+
+- **List:** Remove "Sorting" prefix of list sorting button
+  ([52c935c](https://github.com/mittwald/flow/commit/52c935c683f1114a4ec516216b175a1ca14c8ec3))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.264](https://github.com/mittwald/flow/compare/0.1.0-alpha.263...0.1.0-alpha.264) (2024-10-02)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.263](https://github.com/mittwald/flow/compare/0.1.0-alpha.262...0.1.0-alpha.263) (2024-10-02)
+
+### Bug Fixes
+
+- fix colors after neutral color token update
+  ([909d356](https://github.com/mittwald/flow/commit/909d3567b7d9b9999ebd99aa6c23623841a830d3))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.262](https://github.com/mittwald/flow/compare/0.1.0-alpha.261...0.1.0-alpha.262) (2024-10-01)
+
+### Features
+
+- implement outline variant for button component
+  ([#814](https://github.com/mittwald/flow/issues/814))
+  ([2179bb5](https://github.com/mittwald/flow/commit/2179bb541f0c9a000dfa7a9e71060b0ea8f45f99))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.261](https://github.com/mittwald/flow/compare/0.1.0-alpha.260...0.1.0-alpha.261) (2024-09-30)
+
+### Features
+
+- **List:** add List parameter to Cell render function
+  ([623fdb9](https://github.com/mittwald/flow/commit/623fdb95c773f4b1dfe4da9574f4401bb5858c62))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.260](https://github.com/mittwald/flow/compare/0.1.0-alpha.259...0.1.0-alpha.260) (2024-09-30)
+
+### Features
+
+- **List:** add List parameter to render function
+  ([37ae6b6](https://github.com/mittwald/flow/commit/37ae6b6d3f26fc3cc4a5ceb0855104a1d3f70729))
+- **List:** store view mode in default settings
+  ([17c9c45](https://github.com/mittwald/flow/commit/17c9c4520c52ec3a12a38dcad3f8ec25de572f06))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.259](https://github.com/mittwald/flow/compare/0.1.0-alpha.258...0.1.0-alpha.259) (2024-09-27)
 
 ### Bug Fixes

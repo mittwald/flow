@@ -29,7 +29,7 @@ export const DefaultExpanded: Story = {
 };
 
 export const OutlineVariant: Story = {
-  args: { variant: "outlined" },
+  args: { variant: "outline" },
 };
 
 export const WithLabel: Story = {

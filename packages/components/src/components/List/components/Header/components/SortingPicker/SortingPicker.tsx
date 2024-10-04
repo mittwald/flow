@@ -25,14 +25,7 @@ export const SortingPicker: FC = () => {
   const text = (
     <Text>
       {pickerLabelSorting ? (
-        <Translate
-          locales={locales}
-          variables={{
-            property: pickerLabelSorting.name ?? pickerLabelSorting.property,
-          }}
-        >
-          list.setSorting
-        </Translate>
+        <>{pickerLabelSorting.name ?? pickerLabelSorting.property}</>
       ) : (
         <Translate locales={locales}>list.sorting</Translate>
       )}
@@ -41,7 +34,7 @@ export const SortingPicker: FC = () => {
 
   return (
     <ContextMenuTrigger>
-      <Button variant="soft" size="s" color="secondary">
+      <Button variant="outline" color="secondary">
         {text}
         <IconSorting />
       </Button>
