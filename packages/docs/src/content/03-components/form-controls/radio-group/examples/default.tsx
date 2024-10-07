@@ -3,9 +3,11 @@ import RadioGroup, {
   Radio,
 } from "@mittwald/flow-react-components/RadioGroup";
 
-<RadioGroup defaultValue="admin">
-  <Label>Rolle</Label>
-  <Radio value="admin">Administrator</Radio>
-  <Radio value="member">Mitglied</Radio>
-  <Radio value="accountant">Buchhalter</Radio>
+<RadioGroup defaultValue="more">
+  <Label>Täglicher Kaffeekonsum</Label>
+  <Radio value="more">Mehr als 6 Tassen</Radio>
+  <Radio value="5-6">5-6 Tassen</Radio>
+  <Radio value="3-4">3-4 Tassen</Radio>
+  <Radio value="1-2">1-2 Tassen</Radio>
+  <Radio value="none">Trinke keinen Kaffee</Radio>
 </RadioGroup>;

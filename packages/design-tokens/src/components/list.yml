@@ -19,10 +19,10 @@ list-item:
     default:
       value: "{neutral.color.200}"
     hover:
-      value: "{neutral-outline-background-color.hover}"
+      value: "{primary.color.100}"
     pressed:
-      value: "{neutral-outline-background-color.pressed}"
+      value: "{primary.color.200}"
   border-color:
-    value: "{neutral-outline-border-color.default}"
+    value: "{neutral-outline-border-color}"
   subtitle-font-size:
     value: "{font-size.s}"

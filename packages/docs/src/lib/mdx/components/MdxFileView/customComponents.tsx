@@ -1,7 +1,7 @@
 import styles from "./customComponents.module.css";
 import Heading from "@mittwald/flow-react-components/Heading";
 import type { MDXComponents } from "mdx/types";
-import InlineAlert from "@mittwald/flow-react-components/InlineAlert";
+import Alert from "@mittwald/flow-react-components/Alert";
 import Content from "@mittwald/flow-react-components/Content";
 import React from "react";
 import CopyButton from "@mittwald/flow-react-components/CopyButton";
@@ -21,13 +21,16 @@ import {
   TableHeader,
   TableRow,
 } from "@mittwald/flow-react-components/Table";
+import { Label } from "@mittwald/flow-react-components/Label";
 
 export const customComponents: MDXComponents = {
   Content: Content,
   Heading: Heading,
-  InlineAlert: InlineAlert,
+  Alert: Alert,
   DoAndDont: ExamplesContainer,
   ColumnLayout: ColumnLayout,
+  Label: Label,
+  Link: Link,
 
   pre: ({ children }) => (
     <div className={styles.preContainer}>

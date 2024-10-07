@@ -74,7 +74,7 @@ export const Table: FC = () => {
           >
             {table.body.row?.cells.map((cell, i) => (
               <TableCell key={i} {...cell.componentProps}>
-                {cell.renderFn ? cell.renderFn(item.data) : undefined}
+                {cell.renderFn ? cell.renderFn(item.data, list) : undefined}
               </TableCell>
             ))}
           </TableRow>

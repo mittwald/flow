@@ -8,4 +8,7 @@ import Button from "@mittwald/flow-react-components/Button";
   <Button variant="plain" color="light">
     Light
   </Button>
+  <Button variant="outline" color="light">
+    Light
+  </Button>
 </Row>;
