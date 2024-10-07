@@ -22,6 +22,18 @@
       "types": "./dist/types/components/Activity/index.d.ts",
       "import": "./dist/Activity.js"
     },
+    "./Alert": {
+      "types": "./dist/types/components/Alert/index.d.ts",
+      "import": "./dist/Alert.js"
+    },
+    "./AlertBadge": {
+      "types": "./dist/types/components/AlertBadge/index.d.ts",
+      "import": "./dist/AlertBadge.js"
+    },
+    "./AlertIcon": {
+      "types": "./dist/types/components/AlertIcon/index.d.ts",
+      "import": "./dist/AlertIcon.js"
+    },
     "./Avatar": {
       "types": "./dist/types/components/Avatar/index.d.ts",
       "import": "./dist/Avatar.js"
@@ -125,10 +137,6 @@
     "./Initials": {
       "types": "./dist/types/components/Initials/index.d.ts",
       "import": "./dist/Initials.js"
-    },
-    "./InlineAlert": {
-      "types": "./dist/types/components/InlineAlert/index.d.ts",
-      "import": "./dist/InlineAlert.js"
     },
     "./InlineCode": {
       "types": "./dist/types/components/InlineCode/index.d.ts",
@@ -237,14 +245,6 @@
     "./Slider": {
       "types": "./dist/types/components/Slider/index.d.ts",
       "import": "./dist/Slider.js"
-    },
-    "./StatusBadge": {
-      "types": "./dist/types/components/StatusBadge/index.d.ts",
-      "import": "./dist/StatusBadge.js"
-    },
-    "./StatusIcon": {
-      "types": "./dist/types/components/StatusIcon/index.d.ts",
-      "import": "./dist/StatusIcon.js"
     },
     "./Switch": {
       "types": "./dist/types/components/Switch/index.d.ts",

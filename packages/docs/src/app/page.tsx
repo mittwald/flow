@@ -6,7 +6,6 @@ import { Text } from "@mittwald/flow-react-components/Text";
 import { Section } from "@mittwald/flow-react-components/Section";
 import { Link } from "@mittwald/flow-react-components/Link";
 import { ColumnLayout } from "@mittwald/flow-react-components/ColumnLayout";
-import { StatusBadge } from "@mittwald/flow-react-components/StatusBadge";
 import { Image } from "@mittwald/flow-react-components/Image";
 import Icon from "@mittwald/flow-react-components/Icon";
 import {
@@ -16,6 +15,7 @@ import {
 } from "@tabler/icons-react";
 import homeImage from "../../assets/Styleguide_Startseite.svg";
 import styles from "./layout.module.scss";
+import { AlertBadge } from "@mittwald/flow-react-components/AlertBadge";
 
 const Home: FC = () => {
   return (
@@ -28,7 +28,7 @@ const Home: FC = () => {
         />
         <ColumnLayout l={[1]} className={styles.homeTopContent}>
           <Heading level={1}>
-            Flow Design System <StatusBadge>beta</StatusBadge>
+            Flow Design System <AlertBadge>beta</AlertBadge>
           </Heading>
           <Text>
             Entwickle performante und nutzerzentrierte Benutzeroberflächen, die
