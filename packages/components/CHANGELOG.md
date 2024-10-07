@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.270](https://github.com/mittwald/flow/compare/0.1.0-alpha.269...0.1.0-alpha.270) (2024-10-07)
+
+### Bug Fixes
+
+- **List:** fix List settings storage
+  ([817bd6d](https://github.com/mittwald/flow/commit/817bd6d44bc400c0c5932c62f21d26f332297ce3))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.269](https://github.com/mittwald/flow/compare/0.1.0-alpha.268...0.1.0-alpha.269) (2024-10-07)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
