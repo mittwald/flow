@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import InlineAlert from "../InlineAlert";
+import Alert from "../Alert";
 import React from "react";
 import { Heading } from "@/components/Heading";
 import { Content } from "@/components/Content";
 import Button from "@/components/Button";
 
-const meta: Meta<typeof InlineAlert> = {
-  title: "Status/InlineAlert",
-  component: InlineAlert,
+const meta: Meta<typeof Alert> = {
+  title: "Status/Alert",
+  component: Alert,
   argTypes: {
     status: {
       control: "inline-radio",
@@ -19,25 +19,25 @@ const meta: Meta<typeof InlineAlert> = {
 
 export default meta;
 
-type Story = StoryObj<typeof InlineAlert>;
+type Story = StoryObj<typeof Alert>;
 
 export const Default: Story = {
   render: (props) => (
-    <InlineAlert {...props}>
+    <Alert {...props}>
       <Heading>Email address has been archived</Heading>
-    </InlineAlert>
+    </Alert>
   ),
 };
 
 export const WithContent: Story = {
   render: (props) => (
-    <InlineAlert {...props}>
+    <Alert {...props}>
       <Heading>Email address has been archived</Heading>
       <Content>
         As your domain has been deleted, this email address has been archived.
         To be able to send and receive emails, you must rename the address.
         <Button>Update email address</Button>
       </Content>
-    </InlineAlert>
+    </Alert>
   ),
 };

@@ -1,4 +1,4 @@
-inline-alert:
+alert:
   padding:
     value: "{size-px.m}"
   corner-radius:

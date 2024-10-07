@@ -1,13 +1,13 @@
-.inlineAlert {
-  border-radius: var(--inline-alert--corner-radius);
-  border-width: var(--inline-alert--border-width);
-  border-style: var(--inline-alert--border-style);
-  border-inline-start-width: var(--inline-alert--border-x-start-width);
-  padding: var(--inline-alert--padding);
+.alert {
+  border-radius: var(--alert--corner-radius);
+  border-width: var(--alert--border-width);
+  border-style: var(--alert--border-style);
+  border-inline-start-width: var(--alert--border-x-start-width);
+  padding: var(--alert--padding);
   display: grid;
   grid-template-columns: auto 1fr;
-  grid-column-gap: var(--inline-alert--icon-to-heading-spacing);
-  grid-row-gap: var(--inline-alert--heading-to-content-spacing);
+  grid-column-gap: var(--alert--icon-to-heading-spacing);
+  grid-row-gap: var(--alert--heading-to-content-spacing);
   width: 100%;
 
   @extend .info;
@@ -28,7 +28,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    row-gap: var(--inline-alert--content-to-content-spacing);
+    row-gap: var(--alert--content-to-content-spacing);
   }
 
   /* Without content */
@@ -49,10 +49,10 @@
 
   @mixin status($status) {
     &.#{$status} {
-      border-color: var(--inline-alert--#{$status}-border-color);
+      border-color: var(--alert--#{$status}-border-color);
 
       .heading {
-        color: var(--inline-alert--#{$status}-heading-color);
+        color: var(--alert--#{$status}-heading-color);
       }
     }
   }

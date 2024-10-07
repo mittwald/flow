@@ -1,9 +1,9 @@
-import InlineAlert from "@mittwald/flow-react-components/InlineAlert";
+import Alert from "@mittwald/flow-react-components/Alert";
 import Heading from "@mittwald/flow-react-components/Heading";
 import Content from "@mittwald/flow-react-components/Content";
 import Button from "@mittwald/flow-react-components/Button";
 
-<InlineAlert>
+<Alert>
   <Heading>E-Mail-Adresse wurde archiviert</Heading>
   <Content>
     Da deine Domain gelöscht wurde, wurde diese
@@ -11,4 +11,4 @@ import Button from "@mittwald/flow-react-components/Button";
     senden zu können musst du die Adresse wieder umbenennen.
     <Button>E-Mail-Adresse anpassen</Button>
   </Content>
-</InlineAlert>;
+</Alert>;

@@ -5,7 +5,7 @@
 /* Status */
 @mixin status($status) {
   .#{$status} {
-    color: var(--status-icon--#{$status}-color);
+    color: var(--alert-icon--#{$status}-color);
   }
 }
 

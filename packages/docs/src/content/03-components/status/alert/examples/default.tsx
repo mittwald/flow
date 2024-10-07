@@ -1,6 +1,6 @@
-import InlineAlert from "@mittwald/flow-react-components/InlineAlert";
+import Alert from "@mittwald/flow-react-components/Alert";
 import Heading from "@mittwald/flow-react-components/Heading";
 
-<InlineAlert>
+<Alert>
   <Heading>E-Mail-Adresse wurde archiviert</Heading>
-</InlineAlert>;
+</Alert>;

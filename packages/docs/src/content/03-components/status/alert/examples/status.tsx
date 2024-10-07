@@ -1,9 +1,9 @@
-import InlineAlert from "@mittwald/flow-react-components/InlineAlert";
+import Alert from "@mittwald/flow-react-components/Alert";
 import Heading from "@mittwald/flow-react-components/Heading";
 import Content from "@mittwald/flow-react-components/Content";
 
 <Row>
-  <InlineAlert status="info">
+  <Alert status="info">
     <Heading>E-Mail-Adresse wurde archiviert</Heading>
     <Content>
       Da deine Domain gelöscht wurde, wurde diese
@@ -11,18 +11,18 @@ import Content from "@mittwald/flow-react-components/Content";
       senden zu können musst du die Adresse wieder
       umbenennen.
     </Content>
-  </InlineAlert>
+  </Alert>
 
-  <InlineAlert status="warning">
+  <Alert status="warning">
     <Heading>Dein Speicher ist fast voll</Heading>
     <Content>
       Dein Speicher ist zu über 80% belegt. Wir empfehlen
       dir deinen Speicherplatz zu erweitern, um Problemen
       vorzubeugen.
     </Content>
-  </InlineAlert>
+  </Alert>
 
-  <InlineAlert status="danger">
+  <Alert status="danger">
     <Heading>
       Es konnte kein SSL-Zertifikat ausgestellt werden
     </Heading>
@@ -31,13 +31,13 @@ import Content from "@mittwald/flow-react-components/Content";
       ausgestellt werden, da die Domain per IP nicht auf
       deine Server-IP zeigt.
     </Content>
-  </InlineAlert>
+  </Alert>
 
-  <InlineAlert status="success">
+  <Alert status="success">
     <Heading>Deine App wurde aktualisiert</Heading>
     <Content>
       Deine App wurde erfolgreich auf die neueste Version
       aktualisiert.
     </Content>
-  </InlineAlert>
+  </Alert>
 </Row>;

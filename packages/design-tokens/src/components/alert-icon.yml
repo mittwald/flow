@@ -1,4 +1,4 @@
-status-icon:
+alert-icon:
   info-color:
     value: "{info-outline-content-color}"
   warning-color:

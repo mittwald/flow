@@ -22,6 +22,10 @@
       "types": "./dist/types/components/Activity/index.d.ts",
       "import": "./dist/Activity.js"
     },
+    "./Alert": {
+      "types": "./dist/types/components/Alert/index.d.ts",
+      "import": "./dist/Alert.js"
+    },
     "./AlertBadge": {
       "types": "./dist/types/components/AlertBadge/index.d.ts",
       "import": "./dist/AlertBadge.js"
@@ -133,10 +137,6 @@
     "./Initials": {
       "types": "./dist/types/components/Initials/index.d.ts",
       "import": "./dist/Initials.js"
-    },
-    "./InlineAlert": {
-      "types": "./dist/types/components/InlineAlert/index.d.ts",
-      "import": "./dist/InlineAlert.js"
     },
     "./InlineCode": {
       "types": "./dist/types/components/InlineCode/index.d.ts",

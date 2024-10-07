@@ -7,7 +7,7 @@ import type { LayoutCardProps } from "@/components/LayoutCard";
 import type { LinkProps } from "@/components/Link";
 import type { FieldErrorProps } from "@/components/FieldError";
 import type { FieldDescriptionProps } from "@/components/FieldDescription";
-import type { InlineAlertProps } from "@/components/InlineAlert";
+import type { AlertProps } from "@/components/Alert";
 import type { HeadingProps } from "@/components/Heading";
 import type { InitialsProps } from "@/components/Initials";
 import type { ImageProps } from "@/components/Image";
@@ -54,6 +54,7 @@ export * from "./types";
 export interface FlowComponentPropsTypes {
   Action: ActionProps;
   ActionGroup: ActionGroupProps;
+  Alert: AlertProps;
   AlertBadge: AlertBadgeProps;
   Avatar: AvatarProps;
   Badge: BadgeProps;
@@ -77,7 +78,6 @@ export interface FlowComponentPropsTypes {
   Icon: IconProps;
   Image: ImageProps;
   Initials: InitialsProps;
-  InlineAlert: InlineAlertProps;
   Label: LabelProps;
   LayoutCard: LayoutCardProps;
   Link: LinkProps;
@@ -112,6 +112,8 @@ const propsContextSupportingComponentsMap: Record<
   Action: true,
   ActionGroup: true,
   Avatar: true,
+  Alert: true,
+  AlertBadge: true,
   Badge: true,
   Button: true,
   Checkbox: true,
@@ -133,7 +135,6 @@ const propsContextSupportingComponentsMap: Record<
   Icon: true,
   Image: true,
   Initials: true,
-  InlineAlert: true,
   Label: true,
   LayoutCard: true,
   Link: true,
@@ -152,7 +153,6 @@ const propsContextSupportingComponentsMap: Record<
   Section: true,
   Select: true,
   Slider: true,
-  AlertBadge: true,
   Switch: true,
   Tabs: true,
   TabTitle: true,

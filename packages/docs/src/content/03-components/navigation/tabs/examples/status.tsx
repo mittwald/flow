@@ -3,7 +3,7 @@ import {
   Tabs,
   TabTitle,
 } from "@mittwald/flow-react-components/Tabs";
-import { InlineAlert } from "@mittwald/flow-react-components/InlineAlert";
+import { Alert } from "@mittwald/flow-react-components/Alert";
 import { Heading } from "@mittwald/flow-react-components/Heading";
 import { AlertIcon } from "@mittwald/flow-react-components/AlertIcon";
 
@@ -17,9 +17,9 @@ import { AlertIcon } from "@mittwald/flow-react-components/AlertIcon";
       Speicherplatz
       <AlertIcon status="danger" />
     </TabTitle>
-    <InlineAlert status="danger">
+    <Alert status="danger">
       <Heading>Dein Speicherplatz ist voll</Heading>
-    </InlineAlert>
+    </Alert>
   </Tab>
   <Tab>
     <TabTitle>Spamschutz</TabTitle>
