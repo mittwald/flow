@@ -2626,7 +2626,7 @@ __metadata:
   resolution: "@mittwald/flow-project@workspace:."
   dependencies:
     "@eslint/js": "npm:^9.10.0"
-    "@nx/devkit": "npm:^19.7.4"
+    "@nx/devkit": "npm:^20.0.0"
     "@types/eslint__js": "npm:^8.42.3"
     eslint: "npm:^9.10.0"
     eslint-config-prettier: "npm:^9.1.0"
@@ -3255,7 +3255,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nx/devkit@npm:19.7.4, @nx/devkit@npm:^19.7.4":
+"@nx/devkit@npm:19.7.4":
   version: 19.7.4
   resolution: "@nx/devkit@npm:19.7.4"
   dependencies:
@@ -3271,6 +3271,24 @@ __metadata:
   peerDependencies:
     nx: ">= 17 <= 20"
   checksum: 10c0/6de5e514c60c561f3eebdb98b06235011a6ebe943f6843748545e4719df3e1aeb37afba2890e031b896e727189aa1c27730fdc264a09b1a9de50b1723d69b96d
+  languageName: node
+  linkType: hard
+
+"@nx/devkit@npm:^20.0.0":
+  version: 20.0.0
+  resolution: "@nx/devkit@npm:20.0.0"
+  dependencies:
+    ejs: "npm:^3.1.7"
+    enquirer: "npm:~2.3.6"
+    ignore: "npm:^5.0.4"
+    minimatch: "npm:9.0.3"
+    semver: "npm:^7.5.3"
+    tmp: "npm:~0.2.1"
+    tslib: "npm:^2.3.0"
+    yargs-parser: "npm:21.1.1"
+  peerDependencies:
+    nx: ">= 19 <= 21"
+  checksum: 10c0/1aaf9796dd833af5afb2b2513b3bc733f58a6e850ac21713a856744efb8e08830b8c48bedb50a5c4b02d981f174a7b664ffcab57895eaf124df32d87df9f57cb
   languageName: node
   linkType: hard
 
