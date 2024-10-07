@@ -156,8 +156,6 @@ export const List = flowComponent("List", (props) => {
 
   const hasActionGroup = !!deepFindOfType(children, ActionGroup);
 
-  console.log(listModel);
-
   return (
     <PropsContextProvider props={propsContext}>
       <TunnelProvider>
