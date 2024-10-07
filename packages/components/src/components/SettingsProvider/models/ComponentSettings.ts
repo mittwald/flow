@@ -1,6 +1,7 @@
 import { makeAutoObservable, ObservableMap } from "mobx";
 import type { ZodSchema } from "zod";
 import type z from "zod";
+import { mobxMapToObject } from "@/lib/mobx/mobxMapToObject";
 
 export class ComponentSettings {
   public readonly settings: ObservableMap<string, unknown>;
@@ -27,7 +28,7 @@ export class ComponentSettings {
   }
 
   public get asJson() {
-    return this.settings.toJSON();
+    return mobxMapToObject(this.settings);
   }
 
   public static fromJson(json: ComponentSettingsJson) {
