@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import StatusBadge from "../StatusBadge";
+import AlertBadge from "../AlertBadge";
 import React from "react";
 
-const meta: Meta<typeof StatusBadge> = {
-  title: "Status/StatusBadge",
-  component: StatusBadge,
+const meta: Meta<typeof AlertBadge> = {
+  title: "Status/AlertBadge",
+  component: AlertBadge,
 
   parameters: {
     controls: { exclude: ["className"] },
@@ -16,10 +16,10 @@ const meta: Meta<typeof StatusBadge> = {
       options: ["info", "success", "warning", "danger"],
     },
   },
-  render: (props) => <StatusBadge {...props}>Info</StatusBadge>,
+  render: (props) => <AlertBadge {...props}>Info</AlertBadge>,
 };
 export default meta;
 
-type Story = StoryObj<typeof StatusBadge>;
+type Story = StoryObj<typeof AlertBadge>;
 
 export const Default: Story = {};

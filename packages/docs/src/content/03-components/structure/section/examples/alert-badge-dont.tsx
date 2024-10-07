@@ -1,7 +1,7 @@
 import Header from "@mittwald/flow-react-components/Header";
 import { Text } from "@mittwald/flow-react-components/Text";
 import Section from "@mittwald/flow-react-components/Section";
-import StatusBadge from "@mittwald/flow-react-components/StatusBadge";
+import AlertBadge from "@mittwald/flow-react-components/AlertBadge";
 import Heading from "@mittwald/flow-react-components/Heading";
 import Button from "@mittwald/flow-react-components/Button";
 import Content from "@mittwald/flow-react-components/Content";
@@ -10,19 +10,25 @@ import Label from "@mittwald/flow-react-components/Label";
 import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
 import { Link } from "@mittwald/flow-react-components/Link";
 import { CopyButton } from "@mittwald/flow-react-components/CopyButton";
-import { IconExternalLink } from "@mittwald/flow-react-components/Icons";
+import {
+  IconContextMenu,
+  IconExternalLink,
+} from "@mittwald/flow-react-components/Icons";
 
 <Section>
   <Header>
     <Heading>
       Mein Projekt
-      <StatusBadge status="danger">Deaktiviert</StatusBadge>
+      <AlertBadge status="danger">
+        Fehlende Vertragspartnerdaten
+      </AlertBadge>
     </Heading>
-
+    <Button variant="soft" color="secondary">
+      <IconContextMenu />
+    </Button>
     <Button variant="soft" color="secondary">
       Datenbank migrieren
     </Button>
-    <Button color="accent">Aktivieren</Button>
   </Header>
 
   <Content>

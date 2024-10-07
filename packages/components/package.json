@@ -22,6 +22,10 @@
       "types": "./dist/types/components/Activity/index.d.ts",
       "import": "./dist/Activity.js"
     },
+    "./AlertBadge": {
+      "types": "./dist/types/components/AlertBadge/index.d.ts",
+      "import": "./dist/AlertBadge.js"
+    },
     "./AlertIcon": {
       "types": "./dist/types/components/AlertIcon/index.d.ts",
       "import": "./dist/AlertIcon.js"
@@ -241,10 +245,6 @@
     "./Slider": {
       "types": "./dist/types/components/Slider/index.d.ts",
       "import": "./dist/Slider.js"
-    },
-    "./StatusBadge": {
-      "types": "./dist/types/components/StatusBadge/index.d.ts",
-      "import": "./dist/StatusBadge.js"
     },
     "./Switch": {
       "types": "./dist/types/components/Switch/index.d.ts",

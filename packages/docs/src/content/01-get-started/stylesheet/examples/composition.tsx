@@ -1,7 +1,7 @@
 import ExampleSvg from "@/content/01-get-started/stylesheet/examples/components/ExampleSvg";
 
 <aside className="flow--inline-alert">
-  <ExampleSvg className="flow--icon flow--status-icon flow--inline-alert--status-icon" />
+  <ExampleSvg className="flow--icon flow--alert-icon flow--inline-alert--alert-icon" />
   <h3 className="flow--heading flow--heading--h3 flow--inline-alert--heading">
     E-Mail Adresse wurde archiviert
   </h3>

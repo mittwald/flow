@@ -14,7 +14,7 @@ import type { ImageProps } from "@/components/Image";
 import type { CopyButtonProps } from "@/components/CopyButton";
 import type { HeaderProps } from "@/components/Header/";
 import type { SwitchProps } from "@/components/Switch";
-import type { StatusBadgeProps } from "@/components/StatusBadge";
+import type { AlertBadgeProps } from "@/components/AlertBadge";
 import type { ActionGroupProps } from "@/components/ActionGroup";
 import type { AvatarProps } from "@/components/Avatar";
 import type { ActionProps } from "@/components/Action";
@@ -54,6 +54,7 @@ export * from "./types";
 export interface FlowComponentPropsTypes {
   Action: ActionProps;
   ActionGroup: ActionGroupProps;
+  AlertBadge: AlertBadgeProps;
   Avatar: AvatarProps;
   Badge: BadgeProps;
   Button: ButtonProps;
@@ -95,7 +96,6 @@ export interface FlowComponentPropsTypes {
   Section: SectionProps;
   Select: SelectProps;
   Slider: SliderProps;
-  StatusBadge: StatusBadgeProps;
   Switch: SwitchProps;
   Tabs: TabsProps;
   TabTitle: TabsProps;
@@ -152,7 +152,7 @@ const propsContextSupportingComponentsMap: Record<
   Section: true,
   Select: true,
   Slider: true,
-  StatusBadge: true,
+  AlertBadge: true,
   Switch: true,
   Tabs: true,
   TabTitle: true,
