@@ -1,8 +1,8 @@
-import StatusIcon from "@mittwald/flow-react-components/StatusIcon";
+import AlertIcon from "@mittwald/flow-react-components/AlertIcon";
 
 <Row>
-  <StatusIcon status="info" />
-  <StatusIcon status="success" />
-  <StatusIcon status="warning" />
-  <StatusIcon status="danger" />
+  <AlertIcon status="info" />
+  <AlertIcon status="success" />
+  <AlertIcon status="warning" />
+  <AlertIcon status="danger" />
 </Row>;

@@ -1,3 +1,3 @@
-import StatusIcon from "@mittwald/flow-react-components/StatusIcon";
+import AlertIcon from "@mittwald/flow-react-components/AlertIcon";
 
-<StatusIcon />;
+<AlertIcon />;

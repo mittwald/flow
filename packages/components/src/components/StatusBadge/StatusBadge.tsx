@@ -2,7 +2,7 @@ import type { PropsWithChildren } from "react";
 import React from "react";
 import styles from "./StatusBadge.module.scss";
 import clsx from "clsx";
-import { StatusIcon } from "@/components/StatusIcon";
+import { AlertIcon } from "@/components/AlertIcon";
 import { Text } from "@/components/Text";
 import type { PropsWithClassName, PropsWithStatus } from "@/lib/types/props";
 import { ClearPropsContext } from "@/lib/propsContext";
@@ -23,7 +23,7 @@ export const StatusBadge = flowComponent("StatusBadge", (props) => {
   return (
     <ClearPropsContext>
       <div className={rootClassName} {...rest} ref={ref}>
-        <StatusIcon size="s" className={styles.statusIcon} status={status} />
+        <AlertIcon size="s" className={styles.alertIcon} status={status} />
         <Text className={styles.text}>{children}</Text>
       </div>
     </ClearPropsContext>

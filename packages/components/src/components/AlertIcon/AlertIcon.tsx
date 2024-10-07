@@ -12,9 +12,9 @@ import type { PropsWithStatus, Status } from "@/lib/types/props";
 import type { IconProps } from "@/components/Icon";
 import { ClearPropsContext } from "@/lib/propsContext";
 import clsx from "clsx";
-import styles from "./StatusIcon.module.scss";
+import styles from "./AlertIcon.module.scss";
 
-export interface StatusIconProps extends PropsWithStatus, IconProps {}
+export interface AlertIconProps extends PropsWithStatus, IconProps {}
 
 const icons: Record<Status, ComponentType> = {
   danger: IconDanger,
@@ -23,10 +23,10 @@ const icons: Record<Status, ComponentType> = {
   warning: IconWarning,
 };
 
-export const StatusIcon: FC<StatusIconProps> = (props) => {
+export const AlertIcon: FC<AlertIconProps> = (props) => {
   const { status = "info", className, ...rest } = props;
 
-  const rootClassName = clsx(styles.statusIcon, styles[status], className);
+  const rootClassName = clsx(styles.alertIcon, styles[status], className);
 
   const stringFormatter = useLocalizedStringFormatter(locales);
 
@@ -34,7 +34,7 @@ export const StatusIcon: FC<StatusIconProps> = (props) => {
 
   const iconProps: IconProps = {
     className: rootClassName,
-    "aria-label": stringFormatter.format(`statusIcon.${status}`),
+    "aria-label": stringFormatter.format(`alertIcon.${status}`),
     ...rest,
   };
 
@@ -45,4 +45,4 @@ export const StatusIcon: FC<StatusIconProps> = (props) => {
   );
 };
 
-export default StatusIcon;
+export default AlertIcon;

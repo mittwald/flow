@@ -4,7 +4,7 @@ import type { PropsContext } from "@/lib/propsContext";
 import { ClearPropsContext, PropsContextProvider } from "@/lib/propsContext";
 import styles from "./InlineAlert.module.scss";
 import clsx from "clsx";
-import { StatusIcon } from "@/components/StatusIcon";
+import { AlertIcon } from "@/components/AlertIcon";
 import type { PropsWithStatus } from "@/lib/types/props";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
@@ -36,7 +36,7 @@ export const InlineAlert = flowComponent("InlineAlert", (props) => {
   return (
     <ClearPropsContext>
       <aside {...rest} className={rootClassName} ref={ref}>
-        <StatusIcon className={styles.statusIcon} status={status} />
+        <AlertIcon className={styles.alertIcon} status={status} />
         <PropsContextProvider props={propsContext}>
           {children}
         </PropsContextProvider>

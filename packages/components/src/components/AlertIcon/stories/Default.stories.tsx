@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import StatusIcon from "../StatusIcon";
+import AlertIcon from "../AlertIcon";
 
-const meta: Meta<typeof StatusIcon> = {
-  title: "Status/StatusIcon",
-  component: StatusIcon,
+const meta: Meta<typeof AlertIcon> = {
+  title: "Status/AlertIcon",
+  component: AlertIcon,
   parameters: {
     controls: { exclude: ["render", "tunnelId"] },
   },
@@ -25,7 +25,7 @@ const meta: Meta<typeof StatusIcon> = {
 
 export default meta;
 
-type Story = StoryObj<typeof StatusIcon>;
+type Story = StoryObj<typeof AlertIcon>;
 
 export const Info: Story = {
   args: { status: "info" },
