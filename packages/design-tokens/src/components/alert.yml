@@ -11,8 +11,6 @@ alert:
     value: "{border-style.default}"
   heading-to-content-spacing:
     value: "{size-rem.xs}"
-  icon-to-heading-spacing:
-    value: "{size-rem.s}"
   content-to-content-spacing:
     value: "{size-rem.s}"
   heading-font-size:

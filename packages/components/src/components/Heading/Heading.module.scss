@@ -14,9 +14,9 @@
     color: var(--heading--color-light);
   }
 
-  .icon {
+  > svg {
     height: var(--heading-line-height);
-    width: var(--font-size);
+    width: var(--heading-line-height);
   }
 
   .headingContent {

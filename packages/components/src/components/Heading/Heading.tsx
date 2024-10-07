@@ -34,7 +34,6 @@ export const Heading = flowComponent("Heading", (props) => {
   const propsContext: PropsContext = {
     Icon: {
       "aria-hidden": true,
-      className: styles.icon,
     },
     AlertBadge: {
       wrapWith: <div className={styles.headingContent} />,
