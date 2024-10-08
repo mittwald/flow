@@ -1,4 +1,5 @@
-import { type ObservableMap, toJS } from "mobx";
+import { type ObservableMap } from "mobx";
 
-export const mobxMapToObject = (map: ObservableMap) =>
-  Object.fromEntries(toJS(map).entries());
+export const mobxMapToObject = <T>(
+  map: ObservableMap<string, T>,
+): Record<string, T> => Object.fromEntries(map.entries());
