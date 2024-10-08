@@ -1,0 +1,25 @@
+.codeBlock {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  border-radius: var(--code-block--corner-radius);
+  padding: var(--code-block--padding);
+  column-gap: var(--code-block--code-to-button-spacing);
+  font-size: var(--code-block--font-size);
+  font-family: FiraCode, "monospace";
+
+  > pre > code {
+    text-shadow: none;
+  }
+
+  @mixin variant($color) {
+    &:where(.#{$color}) {
+      color: var(--code-block--#{$color}-content-color);
+      background-color: var(--code-block--#{$color}-background-color);
+    }
+  }
+
+  @include variant(neutral);
+  @include variant(light);
+  @include variant(dark);
+}
