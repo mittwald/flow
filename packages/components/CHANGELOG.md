@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.273](https://github.com/mittwald/flow/compare/0.1.0-alpha.272...0.1.0-alpha.273) (2024-10-08)
+
+### Bug Fixes
+
+- **List:** fix list item title overflow
+  ([#830](https://github.com/mittwald/flow/issues/830))
+  ([e81908a](https://github.com/mittwald/flow/commit/e81908a5e4f058811ac1d46032860b0e384228e4))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.272](https://github.com/mittwald/flow/compare/0.1.0-alpha.271...0.1.0-alpha.272) (2024-10-08)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
