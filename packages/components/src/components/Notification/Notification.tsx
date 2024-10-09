@@ -5,7 +5,7 @@ import styles from "./Notification.module.scss";
 import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
-import { StatusIcon } from "@/components/StatusIcon";
+import { AlertIcon } from "@/components/AlertIcon";
 import { Link } from "@/components/Link";
 import { Button } from "@/components/Button";
 import { IconClose } from "@/components/Icon/components/icons";
@@ -64,7 +64,7 @@ export const Notification: FC<NotificationProps> = (props) => {
   return (
     <div {...rest} className={rootClassName} role={role}>
       <Link unstyled href={href} className={styles.link} onPress={onClick}>
-        <StatusIcon className={styles.statusIcon} status={status} />
+        <AlertIcon className={styles.alertIcon} status={status} />
         <PropsContextProvider props={propsContext}>
           {children}
         </PropsContextProvider>

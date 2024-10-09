@@ -10,6 +10,7 @@ import { getAsyncResource } from "@mittwald/react-use-promise";
 import { useEffect } from "react";
 import { times } from "remeda";
 import { IncrementalLoaderState } from "@/components/List/model/loading/IncrementalLoaderState";
+import { hash } from "object-code";
 
 const emptyData: never[] = [];
 
@@ -157,7 +158,10 @@ export class IncrementalLoader<T> {
               .filter((f) => f.getValue() !== null)
               .map((f) => [
                 f.property,
-                { mode: f.mode, values: f.getArrayValue() },
+                {
+                  mode: f.mode,
+                  values: f.getArrayValue().map((v) => v.value),
+                },
               ]),
           ) as DataLoaderOptions<T>["filtering"])
         : undefined,
@@ -186,7 +190,11 @@ export class IncrementalLoader<T> {
 
     if ("asyncLoader" in dataSource) {
       const asyncLoader = dataSource.asyncLoader;
-      return getAsyncResource(asyncLoader, [loaderOptions]);
+      const dependencies = dataSource.dependencies;
+      const loaderId = dependencies ? hash(dependencies).toString() : undefined;
+      return getAsyncResource(asyncLoader, [loaderOptions], {
+        loaderId,
+      });
     }
 
     if ("asyncResourceFactory" in dataSource) {

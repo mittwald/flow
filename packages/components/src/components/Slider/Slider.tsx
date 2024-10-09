@@ -77,6 +77,7 @@ export const Slider: FC<SliderProps> = flowComponent("Slider", (props) => {
                   variant="plain"
                   className={styles.decrement}
                   isDisabled={isDisabled}
+                  excludeFromTabOrder
                 >
                   <IconMinus />
                 </Button>
@@ -88,6 +89,7 @@ export const Slider: FC<SliderProps> = flowComponent("Slider", (props) => {
                   variant="plain"
                   className={styles.increment}
                   isDisabled={isDisabled}
+                  excludeFromTabOrder
                 >
                   <IconPlus />
                 </Button>

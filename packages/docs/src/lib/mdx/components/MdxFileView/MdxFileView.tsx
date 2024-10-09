@@ -7,8 +7,8 @@ import type { SerializedMdxFile } from "@/lib/mdx/MdxFile";
 import { MdxFile } from "@/lib/mdx/MdxFile";
 import { customComponents } from "@/lib/mdx/components/MdxFileView/customComponents";
 import styles from "./customComponents.module.css";
-import type { DoAndDontTileProps } from "@/lib/mdx/components/DoAndDont/DoAndDontTile";
-import DoAndDontTile from "@/lib/mdx/components/DoAndDont/DoAndDontTile";
+import type { DoAndDontTileProps } from "@/lib/mdx/components/DoAndDont/ExampleTile";
+import ExampleTile from "@/lib/mdx/components/DoAndDont/ExampleTile";
 
 interface Props {
   mdxFile: SerializedMdxFile;
@@ -43,7 +43,7 @@ export const MdxFileView: FC<Props> = (props) => {
     children,
     heading,
   }) => (
-    <DoAndDontTile
+    <ExampleTile
       type="do"
       text={exampleText}
       code={example ? mdxFile.getExample(example) : undefined}
@@ -53,7 +53,7 @@ export const MdxFileView: FC<Props> = (props) => {
       heading={heading}
     >
       {children}
-    </DoAndDontTile>
+    </ExampleTile>
   );
 
   const ExampleDont: FC<ExampleProps> = ({
@@ -65,7 +65,7 @@ export const MdxFileView: FC<Props> = (props) => {
     children,
     heading,
   }) => (
-    <DoAndDontTile
+    <ExampleTile
       type="dont"
       text={exampleText}
       code={example ? mdxFile.getExample(example) : undefined}
@@ -75,7 +75,7 @@ export const MdxFileView: FC<Props> = (props) => {
       heading={heading}
     >
       {children}
-    </DoAndDontTile>
+    </ExampleTile>
   );
 
   const ExampleInfo: FC<ExampleProps> = ({
@@ -87,7 +87,8 @@ export const MdxFileView: FC<Props> = (props) => {
     children,
     heading,
   }) => (
-    <DoAndDontTile
+    <ExampleTile
+      type="info"
       text={exampleText}
       code={example ? mdxFile.getExample(example) : undefined}
       zoom={zoom}
@@ -96,7 +97,48 @@ export const MdxFileView: FC<Props> = (props) => {
       heading={heading}
     >
       {children}
-    </DoAndDontTile>
+    </ExampleTile>
+  );
+  const ExampleStudio: FC<ExampleProps> = ({
+    example,
+    exampleText,
+    zoom,
+    bgColor,
+    mobile,
+    children,
+    heading,
+  }) => (
+    <ExampleTile
+      type="mstudio"
+      text={exampleText}
+      code={example ? mdxFile.getExample(example) : undefined}
+      zoom={zoom}
+      bgColor={bgColor}
+      mobile={mobile}
+      heading={heading}
+    >
+      {children}
+    </ExampleTile>
+  );
+  const ExamplePlain: FC<ExampleProps> = ({
+    example,
+    exampleText,
+    zoom,
+    bgColor,
+    mobile,
+    children,
+    heading,
+  }) => (
+    <ExampleTile
+      text={exampleText}
+      code={example ? mdxFile.getExample(example) : undefined}
+      zoom={zoom}
+      bgColor={bgColor}
+      mobile={mobile}
+      heading={heading}
+    >
+      {children}
+    </ExampleTile>
   );
 
   return (
@@ -107,6 +149,8 @@ export const MdxFileView: FC<Props> = (props) => {
         Do: ExampleDo,
         Dont: ExampleDont,
         Info: ExampleInfo,
+        MStudio: ExampleStudio,
+        Plain: ExamplePlain,
         ...customComponents,
       }}
     />

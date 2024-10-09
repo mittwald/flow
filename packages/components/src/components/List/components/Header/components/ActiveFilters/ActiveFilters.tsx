@@ -4,47 +4,85 @@ import { useList } from "@/components/List/hooks/useList";
 import styles from "./ActiveFilters.module.scss";
 import { Text } from "@/components/Text";
 import { Button } from "@/components/Button";
-import { IconClose } from "@/components/Icon/components/icons";
+import { IconSave } from "@/components/Icon/components/icons";
 import locales from "../../../../locales/*.locale.json";
 import { Translate } from "@/lib/react/components/Translate";
+import { observer } from "mobx-react-lite";
+import { useLocalizedStringFormatter } from "react-aria";
+import { Tooltip, TooltipTrigger } from "@/components/Tooltip";
+import { Icon } from "@/components/Icon";
+import { IconArrowBackUp } from "@tabler/icons-react";
+import { Badge } from "@/components/Badge";
 
-export const ActiveFilters: FC = () => {
+export const ActiveFilters: FC = observer(() => {
   const list = useList();
+  const formatter = useLocalizedStringFormatter(locales);
 
-  const activeFilters = list.filters.flatMap((f) =>
-    f.values
-      .filter((v) => f.isValueActive(v))
-      .map((v) => (
+  const activeFilterValues = list.filters
+    .flatMap((f) => f.values)
+    .filter((v) => v.isActive);
+
+  const activeFilters = activeFilterValues.map((v) => (
+    <Badge key={v.id} onClose={() => v.deactivate()}>
+      <Text>{v.render()}</Text>
+    </Badge>
+  ));
+
+  const someFiltersChanged =
+    list.filters.filter((f) => f.hasChanged()).length > 0;
+
+  const storeFiltersButton = list.supportsSettingsStorage &&
+    someFiltersChanged && (
+      <TooltipTrigger>
+        <Tooltip>
+          <Translate locales={locales}>list.filters.store</Translate>
+        </Tooltip>
         <Button
-          variant="soft"
           size="s"
-          key={String(v)}
-          onPress={() => f.deactivateValue(v)}
+          variant="plain"
+          color="secondary"
+          onPress={() => list.storeFilterDefaultSettings()}
+          aria-label={formatter.format("list.filters.store")}
         >
-          <Text>{String(v)}</Text>
-          <IconClose />
+          <IconSave />
         </Button>
-      )),
-  );
+      </TooltipTrigger>
+    );
 
-  if (activeFilters.length <= 0) {
+  const resetFiltersButton = someFiltersChanged ? (
+    <TooltipTrigger>
+      <Tooltip>
+        <Translate locales={locales}>list.filters.reset</Translate>
+      </Tooltip>
+      <Button
+        size="s"
+        variant="plain"
+        color="secondary"
+        onPress={() => list.resetFilters()}
+        aria-label={formatter.format("list.filters.reset")}
+      >
+        <Icon>
+          <IconArrowBackUp />
+        </Icon>
+      </Button>
+    </TooltipTrigger>
+  ) : undefined;
+
+  if (
+    activeFilters.length === 0 &&
+    !storeFiltersButton &&
+    !resetFiltersButton
+  ) {
     return null;
   }
 
   return (
     <div className={styles.activeFilters}>
       {activeFilters}
-
-      <Button
-        className={styles.clearButton}
-        size="s"
-        variant="plain"
-        onPress={() => list.clearFilters()}
-      >
-        <Translate locales={locales}>list.resetAll</Translate>
-      </Button>
+      {storeFiltersButton}
+      {resetFiltersButton}
     </div>
   );
-};
+});
 
 export default ActiveFilters;

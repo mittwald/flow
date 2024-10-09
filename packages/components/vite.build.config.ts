@@ -5,7 +5,8 @@ import baseConfig from "./vite.config";
 import { externalizeDeps } from "vite-plugin-externalize-deps";
 
 export default defineConfig(
-  mergeConfig(baseConfig, {
+  // @todo: fix this type cast
+  mergeConfig(baseConfig as never, {
     plugins: [
       banner((filename) =>
         filename.endsWith(".js") ? '"use client"\r\n/* */' : "",
@@ -21,8 +22,13 @@ export default defineConfig(
         entry: {
           Accordion: "./src/components/Accordion/index.ts",
           Action: "./src/components/Action/index.ts",
+          Activity: "./src/components/Activity/index.ts",
           ActionGroup: "./src/components/ActionGroup/index.ts",
+          Alert: "./src/components/Alert/index.ts",
+          AlertBadge: "./src/components/AlertBadge/index.ts",
+          AlertIcon: "./src/components/AlertIcon/index.ts",
           Avatar: "./src/components/Avatar/index.ts",
+          Badge: "./src/components/Badge/index.ts",
           Breadcrumb: "./src/components/Breadcrumb/index.ts",
           Button: "./src/components/Button/index.ts",
           Checkbox: "./src/components/Checkbox/index.ts",
@@ -35,6 +41,8 @@ export default defineConfig(
           controller: "./src/lib/controller/index.ts",
           CopyButton: "./src/components/CopyButton/index.ts",
           CounterBadge: "./src/components/CounterBadge/index.ts",
+          DatePicker: "./src/components/DatePicker/index.ts",
+          DateRangePicker: "./src/components/DateRangePicker/index.ts",
           FieldDescription: "./src/components/FieldDescription/index.ts",
           FieldError: "./src/components/FieldError/index.ts",
           FileDropZone: "./src/components/FileDropZone/index.ts",
@@ -49,7 +57,6 @@ export default defineConfig(
           ImageCropper: "./src/components/ImageCropper/index.ts",
           ImageUpload: "./src/components/ImageUpload/index.ts",
           Initials: "./src/components/Initials/index.ts",
-          InlineAlert: "./src/components/InlineAlert/index.ts",
           InlineCode: "./src/components/InlineCode/index.ts",
           Label: "./src/components/Label/index.ts",
           LabeledValue: "./src/components/LabeledValue/index.ts",
@@ -76,16 +83,17 @@ export default defineConfig(
           Section: "./src/components/Section/index.ts",
           Select: "./src/components/Select/index.ts",
           Separator: "./src/components/Separator/index.ts",
+          SettingsProvider: "./src/components/SettingsProvider/index.ts",
           Skeleton: "./src/components/Skeleton/index.ts",
+          SkeletonText: "./src/components/SkeletonText/index.ts",
           Slider: "./src/components/Slider/index.ts",
-          StatusBadge: "./src/components/StatusBadge/index.ts",
-          StatusIcon: "./src/components/StatusIcon/index.ts",
           Switch: "./src/components/Switch/index.ts",
           Table: "./src/components/Table/index.ts",
           Tabs: "./src/components/Tabs/index.ts",
           Text: "./src/components/Text/index.ts",
           TextArea: "./src/components/TextArea/index.ts",
           TextField: "./src/components/TextField/index.ts",
+          TimeField: "./src/components/TimeField/index.ts",
           Tooltip: "./src/components/Tooltip/index.ts",
           stylesInit: "./src/styles/index.ts",
           hooks: "./src/lib/hooks/index.ts",

@@ -4,40 +4,32 @@ import { useList } from "@/components/List/hooks/useList";
 import styles from "./Items.module.css";
 import clsx from "clsx";
 import * as Aria from "react-aria-components";
-import { type GridListProps } from "react-aria-components";
 import Item from "@/components/List/components/Items/components/Item/Item";
-import { EmptyView } from "@/components/List/components/Items/components/EmptyView/EmptyView";
+import { EmptyView } from "@/components/List/components/EmptyView/EmptyView";
 import { FallbackItems } from "@/components/List/components/Items/components/FallbackItems/FallbackItems";
 
-export type ItemListProps = Pick<
-  GridListProps<never>,
-  "aria-labelledby" | "aria-label" | "className" | "onAction"
->;
-
-export const Items: FC<ItemListProps> = (props) => {
-  const { className, ...rest } = props;
+export const Items: FC = () => {
   const list = useList();
   const isLoading = list.loader.useIsLoading();
   const isInitiallyLoading = list.loader.useIsInitiallyLoading();
-  const listIsEmpty = list.useIsEmpty();
+
+  if (!list.itemView) {
+    return null;
+  }
 
   const rows = list.items.entries.map((item) => (
-    <Item key={item.id} data={item.data} />
+    <Item key={item.id} data={item.data} id={item.id} />
   ));
 
-  const rootClassName = clsx(
-    styles.items,
-    className,
-    isLoading && styles.isLoading,
-  );
-
-  if (listIsEmpty) {
-    return <EmptyView />;
-  }
+  const rootClassName = clsx(styles.items, isLoading && styles.isLoading);
 
   return (
     <div aria-hidden={isInitiallyLoading} aria-busy={isLoading}>
-      <Aria.GridList className={rootClassName} {...rest}>
+      <Aria.GridList
+        className={rootClassName}
+        {...list.componentProps}
+        renderEmptyState={() => <EmptyView />}
+      >
         {isInitiallyLoading ? <FallbackItems /> : rows}
       </Aria.GridList>
     </div>

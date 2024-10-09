@@ -15,4 +15,8 @@
     pointer-events: none;
     opacity: 0.5;
   }
+
+  &[data-empty="true"] {
+    border: none;
+  }
 }

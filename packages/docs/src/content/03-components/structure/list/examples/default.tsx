@@ -9,10 +9,13 @@ import Text from "@mittwald/flow-react-components/Text";
 import ContextMenu from "@mittwald/flow-react-components/ContextMenu";
 import {
   IconDomain,
+  IconDownload,
   IconSubdomain,
 } from "@mittwald/flow-react-components/Icons";
-import StatusBadge from "@mittwald/flow-react-components/StatusBadge";
+import AlertBadge from "@mittwald/flow-react-components/AlertBadge";
 import MenuItem from "@mittwald/flow-react-components/MenuItem";
+import Button from "@mittwald/flow-react-components/Button";
+import ActionGroup from "@mittwald/flow-react-components/ActionGroup";
 
 export default () => {
   const DomainList = typedList<Domain>();
@@ -20,19 +23,82 @@ export default () => {
   return (
     <DomainList.List batchSize={5}>
       <DomainList.StaticData data={domains} />
+      <ActionGroup>
+        <Button
+          color="secondary"
+          variant="soft"
+          slot="secondary"
+        >
+          <IconDownload />
+        </Button>
+        <Button color="accent">Anlegen</Button>
+      </ActionGroup>
       <DomainList.Search />
       <DomainList.Filter
         property="type"
         mode="some"
         name="Type"
       />
-      <DomainList.Sorting property="domain" name="Domain" />
-      <DomainList.Sorting property="type" name="Type" />
+      <DomainList.Sorting
+        property="hostname"
+        name="Domain A bis Z"
+        direction="asc"
+      />
+      <DomainList.Sorting
+        property="hostname"
+        name="Domain Z bis A"
+        direction="desc"
+      />
+      <DomainList.Sorting
+        property="type"
+        name="Type A bis Z"
+        direction="asc"
+      />
+      <DomainList.Sorting
+        property="type"
+        name="Type Z bis A"
+        direction="desc"
+      />
+      <DomainList.Table>
+        <DomainList.TableHeader>
+          <DomainList.TableColumn>
+            Name
+          </DomainList.TableColumn>
+          <DomainList.TableColumn>
+            Type
+          </DomainList.TableColumn>
+          <DomainList.TableColumn>
+            TLD
+          </DomainList.TableColumn>
+          <DomainList.TableColumn>
+            Hostname
+          </DomainList.TableColumn>
+        </DomainList.TableHeader>
+
+        <DomainList.TableBody>
+          <DomainList.TableRow>
+            <DomainList.TableCell>
+              {(domain) => domain.domain}
+            </DomainList.TableCell>
+            <DomainList.TableCell>
+              {(domain) => domain.type}
+            </DomainList.TableCell>
+            <DomainList.TableCell>
+              {(domain) => domain.tld}
+            </DomainList.TableCell>
+            <DomainList.TableCell>
+              {(domain) => domain.hostname}
+            </DomainList.TableCell>
+          </DomainList.TableRow>
+        </DomainList.TableBody>
+      </DomainList.Table>
       <DomainList.Item>
         {(domain) => (
           <DomainList.ItemView>
             <Avatar
-              variant={domain.type === "Domain" ? 1 : 2}
+              color={
+                domain.type === "Domain" ? "blue" : "teal"
+              }
             >
               {domain.type === "Domain" ? (
                 <IconDomain />
@@ -43,9 +109,9 @@ export default () => {
             <Heading>
               {domain.hostname}
               {!domain.verified && (
-                <StatusBadge status="warning">
+                <AlertBadge status="warning">
                   Unverifiziert
-                </StatusBadge>
+                </AlertBadge>
               )}
             </Heading>
             <Text>{domain.type}</Text>

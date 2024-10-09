@@ -9,8 +9,9 @@
     "input decrement";
 
   .input {
-    @include formControl.formControl();
     grid-area: input;
+    
+    @include formControl.formControl();
   }
 
   .decrementButton {
@@ -34,12 +35,14 @@
       border-color: var(--form-control--border-color--invalid);
     }
   }
+
   &[data-focus-within] {
     .decrementButton,
     .incrementButton {
       border-color: var(--form-control--border-color--focused);
     }
   }
+
   &[aria-disabled] {
     .decrementButton,
     .incrementButton {

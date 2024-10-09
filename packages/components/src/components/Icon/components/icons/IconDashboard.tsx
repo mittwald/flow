@@ -1,7 +1,7 @@
 /* eslint-disable */
 /* auto-generated file */
 import React, { ComponentProps, FC } from "react";
-import { IconLayoutBoard as Tabler } from "@tabler/icons-react";
+import { IconBorderAll as Tabler } from "@tabler/icons-react";
 import { Icon } from "@/components/Icon";
 
 export const IconDashboard: FC<

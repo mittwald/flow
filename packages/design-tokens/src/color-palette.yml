@@ -137,11 +137,11 @@ color:
     800:
       value: "#715DEE"
     900:
-      value: "#5C50CA"
+      value: "#5d4abf"
     1000:
-      value: "#534FB8"
+      value: "#483b9f"
     1100:
-      value: "#4743A5"
+      value: "#302a6f"
 
   mittwald-navy:
     100:
@@ -166,6 +166,54 @@ color:
       value: "#131B3D"
     1100:
       value: "#0E142E"
+
+  super-teal:
+    100:
+      value: "#ebfdff"
+    200:
+      value: "#cffaff"
+    300:
+      value: "#96f3ff"
+    400:
+      value: "#5eedff"
+    500:
+      value: "#26e7ff"
+    600:
+      value: "#00d3ed"
+    700:
+      value: "#00a1b5"
+    800:
+      value: "#008696"
+    900:
+      value: "#006b78"
+    1000:
+      value: "#004f59"
+    1100:
+      value: "#00424a"
+
+  bright-lilac:
+    100:
+      value: "#f9e9ff"
+    200:
+      value: "#f6dfff"
+    300:
+      value: "#f1caff"
+    400:
+      value: "#ebb6ff"
+    500:
+      value: "#e6a1ff"
+    600:
+      value: "#e08dff"
+    700:
+      value: "#ce4bff"
+    800:
+      value: "#bc08ff"
+    900:
+      value: "#9000c5"
+    1000:
+      value: "#5f0083"
+    1100:
+      value: "#470062"
 
   transparent:
     value: transparent

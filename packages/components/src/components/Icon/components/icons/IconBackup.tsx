@@ -1,7 +1,7 @@
 /* eslint-disable */
 /* auto-generated file */
 import React, { ComponentProps, FC } from "react";
-import { IconClock as Tabler } from "@tabler/icons-react";
+import { IconHistory as Tabler } from "@tabler/icons-react";
 import { Icon } from "@/components/Icon";
 
 export const IconBackup: FC<Omit<ComponentProps<typeof Icon>, "children">> = (
