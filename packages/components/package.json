@@ -384,7 +384,7 @@
     "react-dom": "^18.3.1",
     "react-element-to-jsx-string": "^15.0.0",
     "react-hook-form": "^7.53.0",
-    "rollup": "~4.21.3",
+    "rollup": "~4.22.4",
     "sass": "^1.79.4",
     "storybook": "^8.3.5",
     "storybook-addon-rtl": "^1.0.1",
