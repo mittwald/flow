@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.277](https://github.com/mittwald/flow/compare/0.1.0-alpha.276...0.1.0-alpha.277) (2024-10-09)
+
+### Features
+
+- **Modal:** add experimental "no-unmount"-feature
+  ([d33733b](https://github.com/mittwald/flow/commit/d33733bb0d4375a7bb207db00b304d8b5d64d092))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.276](https://github.com/mittwald/flow/compare/0.1.0-alpha.275...0.1.0-alpha.276) (2024-10-09)
 
 ### Features
