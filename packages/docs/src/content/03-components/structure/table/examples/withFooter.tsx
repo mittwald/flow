@@ -3,6 +3,7 @@ import {
   TableBody,
   TableCell,
   TableColumn,
+  TableFooterRow,
   TableHeader,
   TableRow,
 } from "@mittwald/flow-react-components/Table";
@@ -25,9 +26,9 @@ import {
       <TableCell>20 GB Zusatzspeicherplatz</TableCell>
       <TableCell>2,00 €</TableCell>
     </TableRow>
-    <TableRow footer>
+    <TableFooterRow>
       <TableCell>Gesamtpreis</TableCell>
       <TableCell>34,00 €</TableCell>
-    </TableRow>
+    </TableFooterRow>
   </TableBody>
 </Table>;

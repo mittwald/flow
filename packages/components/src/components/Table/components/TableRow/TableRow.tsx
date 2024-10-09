@@ -4,7 +4,10 @@ import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import styles from "../../Table.module.scss";
 
-export type TableRowProps = Aria.RowProps<never> & { footer?: boolean };
+export type TableRowProps = Aria.RowProps<never> & {
+  /** @internal */
+  footer?: boolean;
+};
 
 export const TableRow: FC<TableRowProps> = (props) => {
   const { children, className, footer, ...rest } = props;

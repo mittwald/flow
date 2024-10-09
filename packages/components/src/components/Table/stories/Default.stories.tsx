@@ -9,6 +9,7 @@ import {
   TableRow,
 } from "@/components/Table";
 import { InlineCode } from "@/components/InlineCode";
+import { TableFooterRow } from "@/components/Table/components/TableFooterRow";
 
 const meta: Meta<typeof Table> = {
   title: "Structure/Table",
@@ -77,10 +78,10 @@ export const WithFooter: Story = {
           <TableCell>20 GB additional storage</TableCell>
           <TableCell>2,00 €</TableCell>
         </TableRow>
-        <TableRow footer>
+        <TableFooterRow>
           <TableCell>total</TableCell>
           <TableCell>34,00 €</TableCell>
-        </TableRow>
+        </TableFooterRow>
       </TableBody>
     </Table>
   ),
