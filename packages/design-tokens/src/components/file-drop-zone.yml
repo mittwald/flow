@@ -6,7 +6,7 @@ file-drop-zone:
   border-style:
     value: "{border-style.dashed}"
   border-color:
-    value: "{neutral-outline-border-color.default}"
+    value: "{neutral-outline-border-color}"
   padding:
     value: "{size-px.xl}"
   content-to-content-spacing:
