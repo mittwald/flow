@@ -2901,6 +2901,7 @@ __metadata:
     react-dom: "npm:^18.3.1"
     react-element-to-jsx-string: "npm:^15.0.0"
     react-hook-form: "npm:^7.53.0"
+    react-reverse-portal: "npm:^2.1.2"
     react-stately: "npm:^3.33.0"
     remeda: "npm:^2.15.0"
     rollup: "npm:~4.21.3"
@@ -16051,6 +16052,16 @@ __metadata:
   version: 0.14.2
   resolution: "react-refresh@npm:0.14.2"
   checksum: 10c0/875b72ef56b147a131e33f2abd6ec059d1989854b3ff438898e4f9310bfcc73acff709445b7ba843318a953cb9424bcc2c05af2b3d80011cee28f25aef3e2ebb
+  languageName: node
+  linkType: hard
+
+"react-reverse-portal@npm:^2.1.2":
+  version: 2.1.2
+  resolution: "react-reverse-portal@npm:2.1.2"
+  peerDependencies:
+    react: ^16.0.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
+  checksum: 10c0/187202a91d773d396e97209bec00b3ff9bc2ba48d713f139c3c144d35ff4df19ce2b29fe3de85fe9dbe0aba0f37a4ea21f04aefdcdbe1f86951c5561607e3ba9
   languageName: node
   linkType: hard
 

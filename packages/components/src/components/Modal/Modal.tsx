@@ -26,6 +26,7 @@ export interface ModalProps
   controller?: OverlayController;
   slot?: string;
   isDismissable?: boolean;
+  _experimentalNoUnmountContent?: boolean;
 }
 
 export const Modal = flowComponent("Modal", (props) => {
