@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.276](https://github.com/mittwald/flow/compare/0.1.0-alpha.275...0.1.0-alpha.276) (2024-10-09)
+
+### Features
+
+- **Table:** add table footer
+  ([1e298d3](https://github.com/mittwald/flow/commit/1e298d343d7b0b6419b0a4df0867cfab0a587e3a))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.275](https://github.com/mittwald/flow/compare/0.1.0-alpha.274...0.1.0-alpha.275) (2024-10-08)
 
 **Note:** Version bump only for package @mittwald/flow-design-tokens
