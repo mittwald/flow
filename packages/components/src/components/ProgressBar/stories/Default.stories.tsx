@@ -38,10 +38,7 @@ export const Default: Story = {};
 
 export const WithPercentage: Story = {
   render: (props) => (
-    <ProgressBar
-      value={50}
-      {...props}
-    >
+    <ProgressBar value={50} {...props}>
       <Label>Storage</Label>
     </ProgressBar>
   ),
