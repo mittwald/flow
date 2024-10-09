@@ -2,11 +2,11 @@ import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import {
   Table,
+  TableBody,
+  TableCell,
   TableColumn,
   TableHeader,
-  TableBody,
   TableRow,
-  TableCell,
 } from "@/components/Table";
 import { InlineCode } from "@/components/InlineCode";
 
@@ -56,3 +56,32 @@ export default meta;
 type Story = StoryObj<typeof Table>;
 
 export const Default: Story = {};
+
+export const WithFooter: Story = {
+  render: (props) => (
+    <Table {...props} aria-label="Order overview">
+      <TableHeader>
+        <TableColumn>Article</TableColumn>
+        <TableColumn>Price</TableColumn>
+      </TableHeader>
+      <TableBody>
+        <TableRow>
+          <TableCell>proSpace (2 vCPU / 4 GB RAM)</TableCell>
+          <TableCell>32,00 €</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>20 GB storage</TableCell>
+          <TableCell>Inclusive</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>20 GB additional storage</TableCell>
+          <TableCell>2,00 €</TableCell>
+        </TableRow>
+        <TableRow footer>
+          <TableCell>total</TableCell>
+          <TableCell>34,00 €</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  ),
+};
