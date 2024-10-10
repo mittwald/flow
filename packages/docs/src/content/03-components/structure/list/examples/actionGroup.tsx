@@ -12,7 +12,7 @@ import {
   IconDownload,
   IconSubdomain,
 } from "@mittwald/flow-react-components/Icons";
-import StatusBadge from "@mittwald/flow-react-components/StatusBadge";
+import AlertBadge from "@mittwald/flow-react-components/AlertBadge";
 import MenuItem from "@mittwald/flow-react-components/MenuItem";
 import Button from "@mittwald/flow-react-components/Button";
 import ActionGroup from "@mittwald/flow-react-components/ActionGroup";
@@ -50,9 +50,9 @@ export default () => {
             <Heading>
               {domain.hostname}
               {!domain.verified && (
-                <StatusBadge status="warning">
+                <AlertBadge status="warning">
                   Unverifiziert
-                </StatusBadge>
+                </AlertBadge>
               )}
             </Heading>
             <Text>{domain.type}</Text>
