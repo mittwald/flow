@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.281](https://github.com/mittwald/flow/compare/0.1.0-alpha.280...0.1.0-alpha.281) (2024-10-10)
+
+### Bug Fixes
+
+- **icon:** fix icon size
+  ([d20f4c3](https://github.com/mittwald/flow/commit/d20f4c3e795878593fe75251401cbb76958d3858))
+
+### Features
+
+- **List:** add summary
+  ([39ee6ea](https://github.com/mittwald/flow/commit/39ee6ea27fea223bc893b2be9cc473b1cf9cca4d))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.280](https://github.com/mittwald/flow/compare/0.1.0-alpha.279...0.1.0-alpha.280) (2024-10-10)
 
 ### Features
