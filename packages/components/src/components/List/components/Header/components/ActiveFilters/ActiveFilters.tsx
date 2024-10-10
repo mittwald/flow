@@ -4,11 +4,7 @@ import { useList } from "@/components/List/hooks/useList";
 import styles from "./ActiveFilters.module.scss";
 import { Text } from "@/components/Text";
 import { Button } from "@/components/Button";
-import {
-  IconClose,
-  IconDelete,
-  IconSave,
-} from "@/components/Icon/components/icons";
+import { IconDelete, IconSave } from "@/components/Icon/components/icons";
 import locales from "../../../../locales/*.locale.json";
 import { Translate } from "@/lib/react/components/Translate";
 import { observer } from "mobx-react-lite";
