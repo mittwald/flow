@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.280](https://github.com/mittwald/flow/compare/0.1.0-alpha.279...0.1.0-alpha.280) (2024-10-10)
+
+### Features
+
+- **List:** Add clear all filters button
+  ([#813](https://github.com/mittwald/flow/issues/813))
+  ([146bc83](https://github.com/mittwald/flow/commit/146bc838e60490aa0dafdb4f00526a931a11c798))
+- **Table:** allow vertical centering
+  ([e17582c](https://github.com/mittwald/flow/commit/e17582c9f3b35c71ac9a77af5d0f4cdbd4e70e5d))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.279](https://github.com/mittwald/flow/compare/0.1.0-alpha.277...0.1.0-alpha.279) (2024-10-10)
 
 ### Bug Fixes
