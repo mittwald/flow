@@ -58,10 +58,8 @@ verwendet. Bei der Positionierung ist Folgendes zu beachten:
 - Wenn Inhalte mithilfe des SegmentedControls geändert werden sollen, muss das
   SegmentedControl direkt über dem zu ändernden Inhaltsbereich stehen.
 
-<Do>
-  Wähle bitte eine Bankverbindung für die Bezahlung mit SEPA-Lastschrift aus.
-  TextField: Kontoinhaber Do Das SegmentedControl steht über dem angepassten
-  Inhalt.
+<Do example="changeContent">
+  Das SegmentedControl steht über dem angepassten Inhalt.
 </Do>
 
 ## Hierarchie
@@ -117,6 +115,7 @@ Das SegmentedControl hat Text in den Optionen und im
 
 ## Responsive layout
 
+<ColumnLayout m={[1,1]}>
 Sobald die Breite des Containers kleiner als 551px ist, werden alle Optionen im
 SegmentedControl untereinander dargestellt. Dieser Wert kann mit
 `containerBreakpointSize` angepasst werden. Auch bei schmaleren Containerns
@@ -124,10 +123,11 @@ sollte vermieden werden, dass der Text zweizeilig wird oder nicht mehr lesbar
 ist.
 
 <Info mobile heading="Mobile Variante" example="playground" />
+</ColumnLayout>
 
 ---
 
 # Accessibility
 
-Falls SegmentedControl ohne Label verwendet wird, muss ein AriaLabel gepflegt
-werden.
+Falls SegmentedControl ohne [Label](/03-components/content/label) verwendet
+wird, muss ein AriaLabel gepflegt werden.
