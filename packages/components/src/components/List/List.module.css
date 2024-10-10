@@ -5,7 +5,8 @@
   container-type: inline-size;
 
   :has(:global(.flow--list--list-summary)) {
-    :global(.flow--list--items) {
+    :global(.flow--list--items),
+    :global(.flow--list--table) {
       border-top-left-radius: 0;
       border-top-right-radius: 0;
     }

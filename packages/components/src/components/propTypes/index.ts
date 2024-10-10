@@ -50,7 +50,6 @@ import type { DateRangePickerProps } from "@/components/DateRangePicker";
 import type { TimeFieldProps } from "@/components/TimeField";
 import type { AlertIconProps } from "@/components/AlertIcon";
 import type { ListSummaryProps } from "@/components/List/components/ListSummary/ListSummary";
-import type { TableFooterRowProps } from "@/components/Table/components/TableFooterRow/TableFooterRow";
 
 export * from "./types";
 
@@ -102,7 +101,6 @@ export interface FlowComponentPropsTypes {
   Select: SelectProps;
   Slider: SliderProps;
   Switch: SwitchProps;
-  TableFooterRow: TableFooterRowProps;
   Tabs: TabsProps;
   TabTitle: TabsProps;
   Text: TextProps;
@@ -162,7 +160,6 @@ const propsContextSupportingComponentsMap: Record<
   Select: true,
   Slider: true,
   Switch: true,
-  TableFooterRow: true,
   Tabs: true,
   TabTitle: true,
   TestComponent: true,

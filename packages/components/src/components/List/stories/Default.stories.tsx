@@ -16,7 +16,6 @@ import { ListItemView, ListSummary, typedList } from "@/components/List";
 import { Button } from "@/components/Button";
 import IconDownload from "@/components/Icon/components/icons/IconDownload";
 import { ActionGroup } from "@/components/ActionGroup";
-import { TableCell, TableFooterRow } from "@/components/Table";
 
 const loadDomains: AsyncDataLoader<Domain> = async (opts) => {
   const response = await getDomains({
@@ -142,7 +141,11 @@ export const Default: Story = {};
 
 export const WithSummary: Story = {
   render: () => {
-    const InvoiceList = typedList<{ id: string; amount: string }>();
+    const InvoiceList = typedList<{
+      id: string;
+      date: string;
+      amount: string;
+    }>();
 
     return (
       <Section>
@@ -150,46 +153,23 @@ export const WithSummary: Story = {
         <InvoiceList.List batchSize={5} aria-label="Invoices">
           <ListSummary>
             <Text style={{ display: "block", textAlign: "right" }}>
-              <b>Gesamtpreis: 42,00 €</b>
+              <b>total: 42,00 €</b>
             </Text>
           </ListSummary>
           <InvoiceList.StaticData
             data={[
-              { id: "RG100000", amount: "25,00 €" },
-              { id: "RG100001", amount: "12,00 €" },
-              { id: "RG100002", amount: "4,00 €" },
+              { id: "RG100000", date: "1.9.2024", amount: "25,00 €" },
+              { id: "RG100001", date: "12.9.2024", amount: "12,00 €" },
+              { id: "RG100002", date: "3.10.2024", amount: "4,00 €" },
             ]}
           />
-          <InvoiceList.Search autoFocus />
-          <InvoiceList.Sorting property="id" name="A-Z" />
-          <InvoiceList.Sorting property="id" name="Z-A" direction="desc" />
-
-          <InvoiceList.Table>
-            <InvoiceList.TableHeader>
-              <InvoiceList.TableColumn>ID</InvoiceList.TableColumn>
-              <InvoiceList.TableColumn>Amount</InvoiceList.TableColumn>
-            </InvoiceList.TableHeader>
-
-            <InvoiceList.TableBody>
-              <InvoiceList.TableRow>
-                <InvoiceList.TableCell>
-                  {(invoice) => invoice.id}
-                </InvoiceList.TableCell>
-                <InvoiceList.TableCell>
-                  {(invoice) => invoice.amount}
-                </InvoiceList.TableCell>
-              </InvoiceList.TableRow>
-              <TableFooterRow>
-                <TableCell>total</TableCell>
-                <TableCell>41,00 €</TableCell>
-              </TableFooterRow>
-            </InvoiceList.TableBody>
-          </InvoiceList.Table>
           <InvoiceList.Item>
             {(invoice) => (
               <ListItemView>
                 <Heading>{invoice.id}</Heading>
-                <Text>{invoice.amount}</Text>
+                <Text>
+                  {invoice.date} - {invoice.amount}
+                </Text>
               </ListItemView>
             )}
           </InvoiceList.Item>
