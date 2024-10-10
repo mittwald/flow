@@ -30,7 +30,7 @@ export const Alert = flowComponent("Alert", (props) => {
       size: "s",
       children: dynamic((props) => (
         <>
-          <AlertIcon className={styles.alertIcon} status={status} />
+          <AlertIcon status={status} />
           {props.children}
         </>
       )),

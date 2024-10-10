@@ -45,7 +45,7 @@ export const Notification: FC<NotificationProps> = (props) => {
       level: 4,
       children: dynamic((props) => (
         <>
-          <AlertIcon className={styles.alertIcon} status={status} />
+          <AlertIcon status={status} />
           {props.children}
         </>
       )),
