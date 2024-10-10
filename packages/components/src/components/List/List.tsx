@@ -25,7 +25,7 @@ import { Table } from "@/components/List/components/Table";
 import { Table as TableSetupComponent } from "@/components/List/setupComponents/Table";
 import { TableHeader } from "@/components/List/setupComponents/TableHeader";
 import { TableBody } from "@/components/List/setupComponents/TableBody";
-import { TunnelProvider } from "@mittwald/react-tunnel";
+import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import headerStyles from "./components/Header/Header.module.css";
 import { ActionGroup } from "@/components/ActionGroup";
@@ -152,6 +152,9 @@ export const List = flowComponent("List", (props) => {
       tunnelId: "actions",
       ignoreBreakpoint: true,
     },
+    ListSummary: {
+      tunnelId: "listSummary",
+    },
   };
 
   const hasActionGroup = !!deepFindOfType(children, ActionGroup);
@@ -168,8 +171,12 @@ export const List = flowComponent("List", (props) => {
           <div className={styles.list} ref={ref}>
             {children}
             <Header hasActionGroup={hasActionGroup} />
-            {listModel.viewMode === "list" && <Items />}
-            {listModel.viewMode === "table" && <Table />}
+
+            <div>
+              <TunnelExit id="listSummary" />
+              {listModel.viewMode === "list" && <Items />}
+              {listModel.viewMode === "table" && <Table />}
+            </div>
             <Footer />
           </div>
         </listContext.Provider>

@@ -1,9 +1,7 @@
-import type { FC } from "react";
 import React from "react";
 import { ActionModel as ActionModel } from "@/components/Action/models/ActionModel";
 import type { PropsContext } from "@/lib/propsContext";
 import { dynamic, PropsContextProvider } from "@/lib/propsContext";
-import type { ActionProps } from "@/components/Action/types";
 import { ActionContextProvider } from "@/components/Action/context";
 import { useActionStateContext } from "@/components/Action/models/ActionStateContext";
 import { useConfirmationModalButtonSlot } from "@/components/Action/hooks/useConfirmationModalButtonSlot";
@@ -39,7 +37,7 @@ const actionButtonContext: ComponentPropsContext<"Button"> = {
   }),
 };
 
-export const Action: FC<ActionProps> = flowComponent("Action", (props) => {
+export const Action = flowComponent("Action", (props) => {
   const { children, actionModel: actionModelFromProps, ...actionProps } = props;
   const newActionModel = ActionModel.useNew(actionProps);
   const actionModel = actionModelFromProps ?? newActionModel;
