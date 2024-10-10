@@ -15,7 +15,7 @@
   }
 
   .icon,
-  :global(.flow--alert-icon) {
+  > :global(.flow--alert-icon) {
     height: var(--heading-line-height);
     width: var(--heading-line-height);
   }
