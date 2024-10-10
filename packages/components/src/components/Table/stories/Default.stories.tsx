@@ -9,6 +9,7 @@ import {
   TableRow,
 } from "@/components/Table";
 import { InlineCode } from "@/components/InlineCode";
+import { dummyText } from "@/lib/dev/dummyText";
 import { TableFooterRow } from "@/components/Table/components/TableFooterRow";
 
 const meta: Meta<typeof Table> = {
@@ -45,7 +46,7 @@ const meta: Meta<typeof Table> = {
           </TableCell>
           <TableCell>m | s</TableCell>
           <TableCell>m</TableCell>
-          <TableCell>The size of the button</TableCell>
+          <TableCell>{dummyText.long}</TableCell>
         </TableRow>
       </TableBody>
     </Table>
@@ -57,6 +58,10 @@ export default meta;
 type Story = StoryObj<typeof Table>;
 
 export const Default: Story = {};
+
+export const VerticallyCenteredRows: Story = {
+  args: { verticalAlign: "middle" },
+};
 
 export const WithFooter: Story = {
   render: (props) => (

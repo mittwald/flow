@@ -181,6 +181,10 @@ export class List<T> {
     return this.filters.forEach((f) => f.resetValues());
   }
 
+  public clearFilters(): void {
+    return this.filters.forEach((f) => f.clear());
+  }
+
   public useIsEmpty(): boolean {
     return !this.loader.useIsLoading() && this.items.entries.length === 0;
   }

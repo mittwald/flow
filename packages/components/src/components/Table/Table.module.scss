@@ -52,4 +52,11 @@
     text-align: start;
     vertical-align: top;
   }
+
+  &.vertical-align-middle {
+    .cell,
+    .column {
+      vertical-align: middle;
+    }
+  }
 }
