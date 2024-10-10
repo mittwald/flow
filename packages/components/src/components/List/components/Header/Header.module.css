@@ -14,8 +14,8 @@
   .pickerList {
     display: flex;
     flex-grow: 9999;
-    flex-shrink: 0;
-    column-gap: var(--list--content-to-content-spacing);
+    flex-wrap: wrap;
+    gap: var(--list--content-to-content-spacing);
   }
 
   .searchAndActions {

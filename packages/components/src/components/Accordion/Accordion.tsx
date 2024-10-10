@@ -12,7 +12,7 @@ import { Activity } from "@/components/Activity";
 export interface AccordionProps
   extends PropsWithChildren<ComponentProps<"div">> {
   defaultExpanded?: boolean;
-  variant?: "default" | "outlined";
+  variant?: "default" | "outline";
 }
 
 export const Accordion: FC<AccordionProps> = (props) => {
@@ -29,7 +29,7 @@ export const Accordion: FC<AccordionProps> = (props) => {
     styles.accordion,
     expanded && styles.expanded,
     className,
-    variant === "outlined" && styles.outline,
+    variant === "outline" && styles.outline,
   );
 
   const headerId = useId();

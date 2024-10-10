@@ -15,14 +15,12 @@ import invariant from "invariant";
 import { Search } from "@/components/List/model/search/Search";
 import { ItemView } from "@/components/List/model/item/ItemView";
 import { Table } from "@/components/List/model/table/Table";
-import type { Dispatch, SetStateAction } from "react";
 import { useEffect, useState } from "react";
 import { useSettings } from "@/components/SettingsProvider/SettingsProvider";
 import type { SettingsStore } from "@/components/SettingsProvider/models/SettingsStore";
+import z from "zod";
 
 export class List<T> {
-  public readonly settingStorageKey?: string;
-  public readonly supportsSettingsStorage: boolean;
   public readonly filters: Filter<T, never, never>[];
   public readonly itemView?: ItemView<T>;
   public readonly table?: Table<T>;
@@ -36,9 +34,17 @@ export class List<T> {
   public readonly getItemId?: GetItemId<T>;
   public readonly componentProps: ListSupportedComponentProps;
   public viewMode: ListViewMode;
-  public readonly setViewMode: Dispatch<SetStateAction<ListViewMode>>;
+  public readonly setViewMode: (viewMode: ListViewMode) => void;
+
+  private readonly settingsStore?: SettingsStore;
+  public readonly supportsSettingsStorage: boolean;
+  public readonly settingStorageKey?: string;
+  private readonly viewModeStorageKey?: string;
   private readonly filterSettingsStorageKey?: string;
-  private readonly defaultSettings?: SettingsStore;
+
+  public static readonly viewModeSettingsStorageSchema = z
+    .enum(["list", "table"])
+    .optional();
 
   public constructor(shape: ListShape<T>) {
     const {
@@ -57,10 +63,13 @@ export class List<T> {
       ...componentProps
     } = shape;
 
-    this.defaultSettings = useSettings();
+    this.settingsStore = useSettings();
     this.settingStorageKey = settingStorageKey;
     this.filterSettingsStorageKey = settingStorageKey
       ? `${settingStorageKey}.activeFilters`
+      : undefined;
+    this.viewModeStorageKey = settingStorageKey
+      ? `${settingStorageKey}.viewMode`
       : undefined;
     this.supportsSettingsStorage = !!this.settingStorageKey;
 
@@ -81,9 +90,21 @@ export class List<T> {
       manualSorting: this.loader.manualSorting,
     });
 
-    const [viewMode, setViewMode] = useState(defaultViewMode ?? "list");
+    const [viewMode, setViewMode] = useState(
+      defaultViewMode ?? this.getStoredViewModeDefaultSetting() ?? "list",
+    );
     this.viewMode = viewMode;
-    this.setViewMode = setViewMode;
+    this.setViewMode = (viewMode) => {
+      setViewMode(viewMode);
+      if (this.settingsStore && this.viewModeStorageKey) {
+        this.settingsStore.set(
+          "List",
+          this.viewModeStorageKey,
+          List.viewModeSettingsStorageSchema,
+          viewMode,
+        );
+      }
+    };
 
     useEffect(() => {
       this.filters.forEach((f) => f.deleteUnknownFilterValues());
@@ -106,18 +127,18 @@ export class List<T> {
   }
 
   public storeFilterDefaultSettings() {
-    if (this.defaultSettings && this.filterSettingsStorageKey) {
+    if (this.settingsStore && this.filterSettingsStorageKey) {
       const data = Object.fromEntries(
         this.filters.map((f) => [
           f.property,
           f
             .getArrayValue()
             .filter((v) => v.isActive)
-            .map((v) => v.value),
+            .map((v) => v.id),
         ]),
       );
 
-      this.defaultSettings.set(
+      this.settingsStore.set(
         "List",
         this.filterSettingsStorageKey,
         Filter.settingsStorageSchema,
@@ -127,11 +148,21 @@ export class List<T> {
   }
 
   public getStoredFilterDefaultSettings() {
-    if (this.defaultSettings && this.filterSettingsStorageKey) {
-      return this.defaultSettings.get(
+    if (this.settingsStore && this.filterSettingsStorageKey) {
+      return this.settingsStore.get(
         "List",
         this.filterSettingsStorageKey,
         Filter.settingsStorageSchema,
+      );
+    }
+  }
+
+  public getStoredViewModeDefaultSetting() {
+    if (this.settingsStore && this.viewModeStorageKey) {
+      return this.settingsStore.get(
+        "List",
+        this.viewModeStorageKey,
+        List.viewModeSettingsStorageSchema,
       );
     }
   }

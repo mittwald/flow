@@ -18,10 +18,10 @@ inline-code:
   light-background-color:
     value: "{light-soft-background-color.default}"
   light-content-color:
-    value: "{light-soft-content-color.default}"
+    value: "{light-soft-content-color}"
 
   # Dark Color
   dark-background-color:
     value: "{dark-soft-background-color.default}"
   dark-content-color:
-    value: "{dark-soft-content-color.default}"
+    value: "{dark-soft-content-color}"

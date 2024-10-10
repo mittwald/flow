@@ -20,7 +20,7 @@ export interface ButtonProps
   /** @default "primary" */
   color?: "primary" | "accent" | "secondary" | "danger" | "dark" | "light";
   /** @default "solid" */
-  variant?: "plain" | "solid" | "soft";
+  variant?: "plain" | "solid" | "soft" | "outline";
   /** @default "m" */
   size?: "m" | "s";
 
@@ -146,7 +146,7 @@ export const Button = flowComponent("Button", (props) => {
           <Wrap if={!unstyled}>
             <span className={styles.content}>
               <Wrap if={isStringContent}>
-                <Text>{children}</Text>
+                <Text className={styles.text}>{children}</Text>
               </Wrap>
             </span>
           </Wrap>

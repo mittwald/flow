@@ -1,6 +1,10 @@
-import { makeAutoObservable, ObservableMap } from "mobx";
+import { makeAutoObservable, ObservableMap, toJS } from "mobx";
 import type { ZodSchema } from "zod";
 import type z from "zod";
+import { mobxMapToObject } from "@/lib/mobx/mobxMapToObject";
+import { mapValues } from "remeda";
+
+export type ComponentSettingsJson = Record<string, string>;
 
 export class ComponentSettings {
   public readonly settings: ObservableMap<string, unknown>;
@@ -15,7 +19,7 @@ export class ComponentSettings {
     schema: T,
     value: z.infer<T>,
   ) {
-    this.settings.set(settingKey, schema.parse(value));
+    this.settings.set(settingKey, schema.parse(toJS(value)));
   }
 
   public get<T extends ZodSchema>(settingKey: string, schema: T): z.infer<T> {
@@ -26,13 +30,15 @@ export class ComponentSettings {
     this.settings.delete(settingKey);
   }
 
-  public get asJson() {
-    return this.settings.toJSON();
+  public get asJson(): ComponentSettingsJson {
+    return mapValues(mobxMapToObject(this.settings), (v) => JSON.stringify(v));
   }
 
   public static fromJson(json: ComponentSettingsJson) {
-    return new ComponentSettings(new ObservableMap<string, unknown>(json));
+    return new ComponentSettings(
+      new ObservableMap<string, unknown>(
+        mapValues(json, (v) => (typeof v === "string" ? JSON.parse(v) : v)),
+      ),
+    );
   }
 }
-
-export type ComponentSettingsJson = ComponentSettings["asJson"];

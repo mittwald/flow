@@ -1,0 +1,36 @@
+@use "@/styles/mixins/ellipsis";
+
+.alertBadge {
+  font-size: var(--badge--font-size);
+  font-weight: var(--badge--font-weight);
+  line-height: var(--badge--line-height);
+  border-radius: var(--badge--corner-radius);
+  padding-inline: var(--badge--padding-x);
+  padding-block: calc(var(--badge--padding-y) - (var(--badge--border-width)));
+  display: flex;
+  align-items: center;
+  column-gap: var(--alert-badge--icon-to-text-spacing);
+  max-width: fit-content;
+  border-style: var(--badge--border-style);
+  border-width: var(--badge--border-width);
+
+  .text {
+    @include ellipsis.ellipsis();
+  }
+
+  @extend .info;
+
+  /* Status */
+  @mixin status($status) {
+    &.#{$status} {
+      color: var(--alert-badge--#{$status}-content-color);
+      background-color: var(--alert-badge--#{$status}-background-color);
+      border-color: var(--alert-badge--#{$status}-border-color);
+    }
+  }
+
+  @include status(info);
+  @include status(success);
+  @include status(warning);
+  @include status(danger);
+}

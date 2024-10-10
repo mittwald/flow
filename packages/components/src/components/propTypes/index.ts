@@ -7,14 +7,14 @@ import type { LayoutCardProps } from "@/components/LayoutCard";
 import type { LinkProps } from "@/components/Link";
 import type { FieldErrorProps } from "@/components/FieldError";
 import type { FieldDescriptionProps } from "@/components/FieldDescription";
-import type { InlineAlertProps } from "@/components/InlineAlert";
+import type { AlertProps } from "@/components/Alert";
 import type { HeadingProps } from "@/components/Heading";
 import type { InitialsProps } from "@/components/Initials";
 import type { ImageProps } from "@/components/Image";
 import type { CopyButtonProps } from "@/components/CopyButton";
 import type { HeaderProps } from "@/components/Header/";
 import type { SwitchProps } from "@/components/Switch";
-import type { StatusBadgeProps } from "@/components/StatusBadge";
+import type { AlertBadgeProps } from "@/components/AlertBadge";
 import type { ActionGroupProps } from "@/components/ActionGroup";
 import type { AvatarProps } from "@/components/Avatar";
 import type { ActionProps } from "@/components/Action";
@@ -48,12 +48,16 @@ import type { DatePickerProps } from "@/components/DatePicker";
 import type * as Aria from "react-aria-components";
 import type { DateRangePickerProps } from "@/components/DateRangePicker";
 import type { TimeFieldProps } from "@/components/TimeField";
+import type { AlertIconProps } from "@/components/AlertIcon";
 
 export * from "./types";
 
 export interface FlowComponentPropsTypes {
   Action: ActionProps;
   ActionGroup: ActionGroupProps;
+  Alert: AlertProps;
+  AlertBadge: AlertBadgeProps;
+  AlertIcon: AlertIconProps;
   Avatar: AvatarProps;
   Badge: BadgeProps;
   Button: ButtonProps;
@@ -76,7 +80,6 @@ export interface FlowComponentPropsTypes {
   Icon: IconProps;
   Image: ImageProps;
   Initials: InitialsProps;
-  InlineAlert: InlineAlertProps;
   Label: LabelProps;
   LayoutCard: LayoutCardProps;
   Link: LinkProps;
@@ -95,7 +98,6 @@ export interface FlowComponentPropsTypes {
   Section: SectionProps;
   Select: SelectProps;
   Slider: SliderProps;
-  StatusBadge: StatusBadgeProps;
   Switch: SwitchProps;
   Tabs: TabsProps;
   TabTitle: TabsProps;
@@ -112,6 +114,9 @@ const propsContextSupportingComponentsMap: Record<
   Action: true,
   ActionGroup: true,
   Avatar: true,
+  Alert: true,
+  AlertBadge: true,
+  AlertIcon: true,
   Badge: true,
   Button: true,
   Checkbox: true,
@@ -133,7 +138,6 @@ const propsContextSupportingComponentsMap: Record<
   Icon: true,
   Image: true,
   Initials: true,
-  InlineAlert: true,
   Label: true,
   LayoutCard: true,
   Link: true,
@@ -152,7 +156,6 @@ const propsContextSupportingComponentsMap: Record<
   Section: true,
   Select: true,
   Slider: true,
-  StatusBadge: true,
   Switch: true,
   Tabs: true,
   TabTitle: true,

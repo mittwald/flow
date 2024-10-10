@@ -10,6 +10,7 @@ import {
 } from "@/components/Table";
 import { InlineCode } from "@/components/InlineCode";
 import { dummyText } from "@/lib/dev/dummyText";
+import { TableFooterRow } from "@/components/Table/components/TableFooterRow";
 
 const meta: Meta<typeof Table> = {
   title: "Structure/Table",
@@ -60,4 +61,33 @@ export const Default: Story = {};
 
 export const VerticallyCenteredRows: Story = {
   args: { verticalAlign: "middle" },
+};
+
+export const WithFooter: Story = {
+  render: (props) => (
+    <Table {...props} aria-label="Order overview">
+      <TableHeader>
+        <TableColumn>Article</TableColumn>
+        <TableColumn>Price</TableColumn>
+      </TableHeader>
+      <TableBody>
+        <TableRow>
+          <TableCell>proSpace (2 vCPU / 4 GB RAM)</TableCell>
+          <TableCell>32,00 €</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>20 GB storage</TableCell>
+          <TableCell>Inclusive</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>20 GB additional storage</TableCell>
+          <TableCell>2,00 €</TableCell>
+        </TableRow>
+        <TableFooterRow>
+          <TableCell>total</TableCell>
+          <TableCell>34,00 €</TableCell>
+        </TableFooterRow>
+      </TableBody>
+    </Table>
+  ),
 };
