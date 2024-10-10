@@ -18,7 +18,7 @@ import {
   IconDomain,
   IconSubdomain,
 } from "@mittwald/flow-react-components/Icons";
-import StatusBadge from "@mittwald/flow-react-components/StatusBadge";
+import AlertBadge from "@mittwald/flow-react-components/AlertBadge";
 
 <List batchSize={2}>
   <ListStaticData data={domains} />
@@ -37,9 +37,9 @@ import StatusBadge from "@mittwald/flow-react-components/StatusBadge";
         <Heading>
           {domain.hostname}
           {!domain.verified && (
-            <StatusBadge status="warning">
+            <AlertBadge status="warning">
               Unverifiziert
-            </StatusBadge>
+            </AlertBadge>
           )}
         </Heading>
         <Text>{domain.type}</Text>

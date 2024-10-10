@@ -11,16 +11,20 @@ import { SearchField } from "@/components/List/components/Header/components/Sear
 import { ViewModeMenu } from "@/components/List/components/Header/components/ViewModeMenu/ViewModeMenu";
 import { TunnelExit } from "@mittwald/react-tunnel";
 
-type Props = PropsWithClassName;
+interface Props extends PropsWithClassName {
+  hasActionGroup?: boolean;
+}
 
 export const Header: FC<Props> = (props) => {
-  const { className } = props;
+  const { className, hasActionGroup } = props;
   const list = useList();
 
   if (
     list.filters.length === 0 &&
     list.visibleSorting.length === 0 &&
-    !list.search
+    !list.search &&
+    !list.table &&
+    !hasActionGroup
   ) {
     return null;
   }

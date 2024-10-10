@@ -4,6 +4,7 @@ import type { FlowComponentName } from "@/components/propTypes";
 import { mapValues } from "remeda";
 import type { ZodSchema } from "zod";
 import type z from "zod";
+import { mobxMapToObject } from "@/lib/mobx/mobxMapToObject";
 
 export class SettingsStore {
   public readonly componentSettings: ObservableMap<
@@ -45,12 +46,7 @@ export class SettingsStore {
   }
 
   public get asJson() {
-    return Object.fromEntries(
-      Array.from(this.componentSettings.entries()).map(([key, value]) => [
-        key,
-        value.asJson,
-      ]),
-    );
+    return mapValues(mobxMapToObject(this.componentSettings), (v) => v.asJson);
   }
 
   public static fromJson(json: SettingsJson) {

@@ -19,7 +19,7 @@ progress-bar:
   bar-border-width:
     value: "{border-width.100}"
   bar-border-color:
-    value: "{neutral-outline-border-color.default}"
+    value: "{neutral-outline-border-color}"
 
   # Info
   info-fill-background-color:

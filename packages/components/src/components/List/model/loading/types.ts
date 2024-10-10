@@ -34,7 +34,7 @@ export type AsyncDataLoader<T> = (
   options: DataLoaderOptions<T>,
 ) => Promise<DataLoaderResult<T>>;
 
-type AsyncResourceFactory<T> = (
+export type AsyncResourceFactory<T> = (
   options?: DataLoaderOptions<T>,
 ) => AsyncResource<DataLoaderResult<T>>;
 

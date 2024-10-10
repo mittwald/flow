@@ -8,6 +8,7 @@ import { TabContextProvider } from "@/components/Tabs/components/Tab/context";
 import { TunnelEntry } from "@mittwald/react-tunnel";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
+import { Activity } from "@/components/Activity";
 
 export interface TabProps
   extends Omit<Aria.TabPanelProps, "children">,
@@ -26,10 +27,10 @@ export const Tab: FC<TabProps> = (props) => {
 
     const propsContext: PropsContext = {
       Content: {
-        isActive: isSelected,
+        wrapWith: <Activity isActive={isSelected} />,
       },
       Section: {
-        isActive: isSelected,
+        wrapWith: <Activity isActive={isSelected} />,
       },
     };
 

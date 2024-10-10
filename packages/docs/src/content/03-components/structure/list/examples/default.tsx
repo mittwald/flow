@@ -12,7 +12,7 @@ import {
   IconDownload,
   IconSubdomain,
 } from "@mittwald/flow-react-components/Icons";
-import StatusBadge from "@mittwald/flow-react-components/StatusBadge";
+import AlertBadge from "@mittwald/flow-react-components/AlertBadge";
 import MenuItem from "@mittwald/flow-react-components/MenuItem";
 import Button from "@mittwald/flow-react-components/Button";
 import ActionGroup from "@mittwald/flow-react-components/ActionGroup";
@@ -39,8 +39,26 @@ export default () => {
         mode="some"
         name="Type"
       />
-      <DomainList.Sorting property="domain" name="Domain" />
-      <DomainList.Sorting property="type" name="Type" />
+      <DomainList.Sorting
+        property="hostname"
+        name="Domain A bis Z"
+        direction="asc"
+      />
+      <DomainList.Sorting
+        property="hostname"
+        name="Domain Z bis A"
+        direction="desc"
+      />
+      <DomainList.Sorting
+        property="type"
+        name="Type A bis Z"
+        direction="asc"
+      />
+      <DomainList.Sorting
+        property="type"
+        name="Type Z bis A"
+        direction="desc"
+      />
       <DomainList.Table>
         <DomainList.TableHeader>
           <DomainList.TableColumn>
@@ -91,9 +109,9 @@ export default () => {
             <Heading>
               {domain.hostname}
               {!domain.verified && (
-                <StatusBadge status="warning">
+                <AlertBadge status="warning">
                   Unverifiziert
-                </StatusBadge>
+                </AlertBadge>
               )}
             </Heading>
             <Text>{domain.type}</Text>

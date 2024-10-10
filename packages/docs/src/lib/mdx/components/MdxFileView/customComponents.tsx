@@ -1,7 +1,7 @@
 import styles from "./customComponents.module.css";
 import Heading from "@mittwald/flow-react-components/Heading";
 import type { MDXComponents } from "mdx/types";
-import InlineAlert from "@mittwald/flow-react-components/InlineAlert";
+import Alert from "@mittwald/flow-react-components/Alert";
 import Content from "@mittwald/flow-react-components/Content";
 import React from "react";
 import CopyButton from "@mittwald/flow-react-components/CopyButton";
@@ -14,14 +14,25 @@ import { ColumnLayout } from "@mittwald/flow-react-components/ColumnLayout";
 import { InlineCode } from "@mittwald/flow-react-components/InlineCode";
 import { Separator } from "@mittwald/flow-react-components/Separator";
 import { DesignTokenTable } from "@/lib/mdx/components/DesignTokenTable/DesignTokenTable";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableColumn,
+  TableHeader,
+  TableRow,
+} from "@mittwald/flow-react-components/Table";
+import { Label } from "@mittwald/flow-react-components/Label";
 
 export const customComponents: MDXComponents = {
   Content: Content,
   Heading: Heading,
-  InlineAlert: InlineAlert,
+  Alert: Alert,
   DoAndDont: ExamplesContainer,
   ColumnLayout: ColumnLayout,
   DesignTokenTable: DesignTokenTable,
+  Label: Label,
+  Link: Link,
 
   pre: ({ children }) => (
     <div className={styles.preContainer}>
@@ -91,4 +102,11 @@ export const customComponents: MDXComponents = {
   },
 
   hr: () => <Separator className={styles.separator} />,
+
+  table: ({ children }) => <Table>{children}</Table>,
+  thead: ({ children }) => <TableHeader>{children}</TableHeader>,
+  tr: ({ children }) => <TableRow>{children}</TableRow>,
+  th: ({ children }) => <TableColumn>{children}</TableColumn>,
+  tbody: ({ children }) => <TableBody>{children}</TableBody>,
+  td: ({ children }) => <TableCell>{children}</TableCell>,
 };
