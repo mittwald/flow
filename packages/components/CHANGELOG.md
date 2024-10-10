@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.278](https://github.com/mittwald/flow/compare/0.1.0-alpha.277...0.1.0-alpha.278) (2024-10-10)
+
+### Bug Fixes
+
+- **Table:** fix scrollbar
+  ([64ba89b](https://github.com/mittwald/flow/commit/64ba89be22887a6850b7c4aa4d9ea0947735ae3d))
+
+### Reverts
+
+- Revert "feat(Modal): add experimental "no-unmount"-feature"
+  ([3f45849](https://github.com/mittwald/flow/commit/3f458493a5779f11690453da0fc454b0b89c9314))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.277](https://github.com/mittwald/flow/compare/0.1.0-alpha.276...0.1.0-alpha.277) (2024-10-09)
 
 ### Features
