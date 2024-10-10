@@ -1,9 +1,0 @@
-status-icon:
-  info-color:
-    value: "{info-outline-content-color}"
-  warning-color:
-    value: "{warning-outline-content-color}"
-  danger-color:
-    value: "{danger-outline-content-color}"
-  success-color:
-    value: "{success-outline-content-color}"

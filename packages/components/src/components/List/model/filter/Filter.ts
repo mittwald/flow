@@ -64,10 +64,10 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
 
   private getStoredDefaultSelectedValues() {
     const storedValues =
-      this.list.getStoredFilterDefaultSettings()?.[this.property as string];
+      this.list.getStoredFilterDefaultSettings()?.[String(this.property)];
 
     return storedValues
-      ? this.values.filter((v) => storedValues.includes(v.value))
+      ? this.values.filter((v) => storedValues.includes(v.id))
       : undefined;
   }
 
