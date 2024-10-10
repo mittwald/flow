@@ -35,7 +35,9 @@ export default () => {
           <TextField isRequired>
             <Label>Kontoinhaber</Label>
           </TextField>
-          <TextField isRequired>IBAN</TextField>
+          <TextField isRequired>
+            <Label>IBAN</Label>
+          </TextField>
         </ColumnLayout>
       )}
     </>
