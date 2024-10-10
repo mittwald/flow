@@ -1,7 +1,11 @@
 import type { ComponentProps, PropsWithChildren } from "react";
 import React from "react";
 import type { PropsContext } from "@/lib/propsContext";
-import { ClearPropsContext, PropsContextProvider } from "@/lib/propsContext";
+import {
+  ClearPropsContext,
+  dynamic,
+  PropsContextProvider,
+} from "@/lib/propsContext";
 import styles from "./Alert.module.scss";
 import clsx from "clsx";
 import { AlertIcon } from "@/components/AlertIcon";
@@ -24,6 +28,12 @@ export const Alert = flowComponent("Alert", (props) => {
       className: styles.heading,
       level: 3,
       size: "s",
+      children: dynamic((props) => (
+        <>
+          <AlertIcon status={status} />
+          {props.children}
+        </>
+      )),
     },
     Content: {
       className: styles.content,
@@ -36,7 +46,6 @@ export const Alert = flowComponent("Alert", (props) => {
   return (
     <ClearPropsContext>
       <aside {...rest} className={rootClassName} ref={ref}>
-        <AlertIcon className={styles.alertIcon} status={status} />
         <PropsContextProvider props={propsContext}>
           {children}
         </PropsContextProvider>

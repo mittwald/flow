@@ -4,7 +4,7 @@ import type { PropsWithStatus } from "@/lib/types/props";
 import styles from "./Notification.module.scss";
 import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
-import { PropsContextProvider } from "@/lib/propsContext";
+import { dynamic, PropsContextProvider } from "@/lib/propsContext";
 import { AlertIcon } from "@/components/AlertIcon";
 import { Link } from "@/components/Link";
 import { Button } from "@/components/Button";
@@ -43,6 +43,12 @@ export const Notification: FC<NotificationProps> = (props) => {
     Heading: {
       className: styles.heading,
       level: 4,
+      children: dynamic((props) => (
+        <>
+          <AlertIcon status={status} />
+          {props.children}
+        </>
+      )),
     },
     Text: {
       className: styles.text,
@@ -64,7 +70,6 @@ export const Notification: FC<NotificationProps> = (props) => {
   return (
     <div {...rest} className={rootClassName} role={role}>
       <Link unstyled href={href} className={styles.link} onPress={onClick}>
-        <AlertIcon className={styles.alertIcon} status={status} />
         <PropsContextProvider props={propsContext}>
           {children}
         </PropsContextProvider>

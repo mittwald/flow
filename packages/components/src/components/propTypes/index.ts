@@ -48,6 +48,7 @@ import type { DatePickerProps } from "@/components/DatePicker";
 import type * as Aria from "react-aria-components";
 import type { DateRangePickerProps } from "@/components/DateRangePicker";
 import type { TimeFieldProps } from "@/components/TimeField";
+import type { AlertIconProps } from "@/components/AlertIcon";
 import type { ListSummaryProps } from "@/components/List/components/ListSummary/ListSummary";
 
 export * from "./types";
@@ -57,6 +58,7 @@ export interface FlowComponentPropsTypes {
   ActionGroup: ActionGroupProps;
   Alert: AlertProps;
   AlertBadge: AlertBadgeProps;
+  AlertIcon: AlertIconProps;
   Avatar: AvatarProps;
   Badge: BadgeProps;
   Button: ButtonProps;
@@ -116,6 +118,7 @@ const propsContextSupportingComponentsMap: Record<
   Avatar: true,
   Alert: true,
   AlertBadge: true,
+  AlertIcon: true,
   Badge: true,
   Button: true,
   Checkbox: true,
