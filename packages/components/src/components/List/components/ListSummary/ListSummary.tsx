@@ -12,9 +12,9 @@ export const ListSummary = flowComponent("ListSummary", (props) => {
   const { children } = props;
 
   return (
-    <div className={styles.listSummary} {...props}>
+    <header className={styles.listSummary} {...props}>
       {children}
-    </div>
+    </header>
   );
 });
 
