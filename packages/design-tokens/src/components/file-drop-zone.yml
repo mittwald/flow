@@ -5,8 +5,14 @@ file-drop-zone:
     value: "{border-width.100}"
   border-style:
     value: "{border-style.dashed}"
+  target-border-style:
+    value: "{border-style.default}"
   border-color:
     value: "{neutral-outline-border-color}"
+  target-border-color:
+    value: "{focus.outline-color}"
+  target-background-color:
+    value: "{primary.color.100}"
   padding:
     value: "{size-px.xl}"
   content-to-content-spacing:

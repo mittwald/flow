@@ -14,7 +14,9 @@ export default () => {
       <FileDropZone
         controller={controller}
         acceptedFileTypes={["image/png", "image/jpeg"]}
-      />
+      >
+        <Text>Erlaubte Datei-Typen sind jpg unnd png.</Text>
+      </FileDropZone>
       <LabeledValue>
         <Label>Ausgewählte Datei</Label>
         <Text>

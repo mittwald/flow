@@ -37,6 +37,7 @@ import {
   IconShow,
   IconSorting,
   IconUndo,
+  IconUpload,
   IconView,
 } from "@mittwald/flow-react-components/Icons";
 import Label from "@mittwald/flow-react-components/Label";
@@ -200,5 +201,9 @@ import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
   <LabeledValue>
     <Label>Undo</Label>
     <IconUndo />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Upload</Label>
+    <IconUpload />
   </LabeledValue>
 </ColumnLayout>;

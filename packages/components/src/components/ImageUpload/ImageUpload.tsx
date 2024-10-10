@@ -56,6 +56,7 @@ export const ImageUpload: FC<ImageUploadProps> = (props) => {
     <div className={rootClassName}>
       {files.length === 0 && (
         <FileDropZone
+          type="image"
           className={styles.fileDropZone}
           controller={fileController}
           acceptedFileTypes={["image/png", "image/jpeg"]}

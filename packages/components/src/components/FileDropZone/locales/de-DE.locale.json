@@ -1,7 +1,10 @@
 {
-  "fileDropZone.drop": "Datei hier ablegen",
-  "fileDropZone.dropMultiple": "Dateien hier ablegen",
-  "fileDropZone.or": "oder",
-  "fileDropZone.select": "Datei auswählen",
-  "fileDropZone.selectMultiple": "Dateien auswählen"
+  "fileDropZone.file.drop": "Datei ablegen",
+  "fileDropZone.file.drop.multiple": "Dateien ablegen",
+  "fileDropZone.file.select": "Datei auswählen",
+  "fileDropZone.file.select.multiple": "Dateien auswählen",
+  "fileDropZone.image.drop": "Bild ablegen",
+  "fileDropZone.image.drop.multiple": "Bilder ablegen",
+  "fileDropZone.image.select": "Bild auswählen",
+  "fileDropZone.image.select.multiple": "Bilder auswählen"
 }

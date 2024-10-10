@@ -1,7 +1,10 @@
 {
-  "fileDropZone.drop": "Drop file here",
-  "fileDropZone.dropMultiple": "Drop files here",
-  "fileDropZone.or": "or",
-  "fileDropZone.select": "Select file",
-  "fileDropZone.selectMultiple": "Select files"
+  "fileDropZone.file.drop": "Drop file",
+  "fileDropZone.file.drop.multiple": "Drop files",
+  "fileDropZone.file.select": "Select file",
+  "fileDropZone.file.select.multiple": "Select files",
+  "fileDropZone.image.drop": "Drop image",
+  "fileDropZone.image.drop.multiple": "Drop images",
+  "fileDropZone.image.select": "Select image",
+  "fileDropZone.image.select.multiple": "Select images"
 }

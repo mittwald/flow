@@ -53,6 +53,7 @@ Order: ShoppingCart
 Payment: CreditCard
 Pending: Loader2
 Performance: ChartHistogram
+Picture: Photo
 Plus: Plus
 Project: Archive
 RadioOff: Circle
@@ -81,6 +82,7 @@ Support: Headset
 Terminate: FileX
 Ticket: Ticket
 Undo: ArrowBackUp
+Upload: Upload
 User: User
 View: List
 Warning: AlertCircle

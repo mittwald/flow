@@ -40,4 +40,22 @@ export const AllowsMultiple: Story = { args: { allowsMultiple: true } };
 
 export const AcceptedFileTypes: Story = {
   args: { acceptedFileTypes: ["image/png", "image/jpeg"] },
+  render: (props) => {
+    const controller = useFileController();
+    const files = controller.useFiles();
+
+    return (
+      <Section>
+        <FileDropZone {...props} controller={controller}>
+          <Text>Accepted file types are jpg and png.</Text>
+        </FileDropZone>
+        <LabeledValue>
+          <Label>Selected files</Label>
+          <Text>
+            {files.length > 0 ? files.map((f) => f.name).join(", ") : "-"}
+          </Text>
+        </LabeledValue>
+      </Section>
+    );
+  },
 };
