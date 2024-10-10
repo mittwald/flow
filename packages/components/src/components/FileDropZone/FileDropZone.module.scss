@@ -1,0 +1,18 @@
+.fileDropZone {
+  border-style: var(--file-drop-zone--border-style);
+  border-width: var(--file-drop-zone--border-width);
+  border-color: var(--file-drop-zone--border-color);
+  border-radius: var(--file-drop-zone--corner-radius);
+  padding: var(--file-drop-zone--padding);
+  row-gap: var(--file-drop-zone--content-to-content-spacing);
+
+  &[data-focus-visible],
+  &[data-drop-target] {
+    border-color: var(--file-drop-zone--target-border-color);
+    border-style: var(--file-drop-zone--target-border-style);
+  }
+
+  &[data-drop-target] {
+    background: var(--file-drop-zone--target-background-color);
+  }
+}
