@@ -25,7 +25,6 @@
   }
 
   .heading {
-    grid-area: heading;
     --button-width: calc(
       var(--button--line-height-s) + 2 * var(--button--padding-s)
     );
@@ -35,7 +34,6 @@
   }
 
   .text {
-    grid-area: text;
     font-size: var(--notification--font-size);
   }
 
