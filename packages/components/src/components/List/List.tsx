@@ -155,6 +155,9 @@ export const List = flowComponent("List", (props) => {
     ListSummary: {
       tunnelId: "listSummary",
     },
+    TableFooterRow: {
+      tunnelId: "tableFooterRow",
+    },
   };
 
   const hasActionGroup = !!deepFindOfType(children, ActionGroup);

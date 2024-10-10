@@ -13,6 +13,7 @@ import { TableLoadingView } from "@/components/List/components/Table/components/
 import styles from "./Table.module.css";
 import clsx from "clsx";
 import { EmptyView } from "@/components/List/components/EmptyView/EmptyView";
+import { TunnelExit } from "@mittwald/react-tunnel";
 
 export const Table: FC = () => {
   const list = useList();
@@ -79,6 +80,7 @@ export const Table: FC = () => {
             ))}
           </TableRow>
         ))}
+        <TunnelExit id="tableFooterRow" />
       </TableBody>
     </TableComponent>
   );

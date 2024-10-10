@@ -16,6 +16,7 @@ import { ListItemView, ListSummary, typedList } from "@/components/List";
 import { Button } from "@/components/Button";
 import IconDownload from "@/components/Icon/components/icons/IconDownload";
 import { ActionGroup } from "@/components/ActionGroup";
+import { TableCell, TableFooterRow } from "@/components/Table";
 
 const loadDomains: AsyncDataLoader<Domain> = async (opts) => {
   const response = await getDomains({
@@ -177,6 +178,10 @@ export const WithSummary: Story = {
                   {(invoice) => invoice.amount}
                 </InvoiceList.TableCell>
               </InvoiceList.TableRow>
+              <TableFooterRow>
+                <TableCell>total</TableCell>
+                <TableCell>41,00 €</TableCell>
+              </TableFooterRow>
             </InvoiceList.TableBody>
           </InvoiceList.Table>
           <InvoiceList.Item>

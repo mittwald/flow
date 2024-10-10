@@ -1,5 +1,6 @@
 import {
   ListItemView,
+  ListSummary,
   typedList,
 } from "@mittwald/flow-react-components/List";
 import Heading from "@mittwald/flow-react-components/Heading";
