@@ -1,12 +1,12 @@
 import {
   Radio,
   RadioGroup,
-} from "@mittwald/flow-react-components/src/components/RadioGroup";
-import { Label } from "@mittwald/flow-react-components/src/components/Label";
+} from "@mittwald/flow-react-components/RadioGroup";
+import { Label } from "@mittwald/flow-react-components/Label";
 
 <RadioGroup
   variant="segmented"
-  defaultValue="dev"
+  defaultValue="entwickler"
   containerBreakpointSize="xs"
 >
   <Label>Rolle</Label>

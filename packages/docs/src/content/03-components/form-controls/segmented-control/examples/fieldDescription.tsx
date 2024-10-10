@@ -1,9 +1,9 @@
 import {
   Radio,
   RadioGroup,
-} from "@mittwald/flow-react-components/src/components/RadioGroup";
-import { Label } from "@mittwald/flow-react-components/src/components/Label";
-import { FieldDescription } from "@mittwald/flow-react-components/src/components/FieldDescription";
+} from "@mittwald/flow-react-components/RadioGroup";
+import { Label } from "@mittwald/flow-react-components/Label";
+import { FieldDescription } from "@mittwald/flow-react-components/FieldDescription";
 
 <RadioGroup variant="segmented" defaultValue="cloud">
   <Label>Speicherplatz</Label>
