@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/react-tunnel",
-  "version": "0.1.0-alpha.268",
+  "version": "0.1.0-alpha.277",
   "type": "module",
   "description": "It's like a Portal – but with React components",
   "keywords": [
@@ -30,29 +30,29 @@
     "test:unit": "run vitest run"
   },
   "dependencies": {
-    "mobx": "^6.13.2",
+    "mobx": "^6.13.3",
     "mobx-react-lite": "^4.0.7"
   },
   "devDependencies": {
     "@testing-library/dom": "^10.4.0",
     "@testing-library/react": "^16.0.1",
-    "@types/node": "^22.5.5",
-    "@types/react": "^18.3.8",
+    "@types/node": "^22.7.5",
+    "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.0",
-    "@vitejs/plugin-react": "^4.3.1",
-    "@vitest/coverage-v8": "^2.1.1",
-    "happy-dom": "^14.12.3",
-    "nx": "^19.7.4",
+    "@vitejs/plugin-react": "^4.3.2",
+    "@vitest/coverage-v8": "^2.1.2",
+    "happy-dom": "^15.7.4",
+    "nx": "^20.0.0",
     "prettier": "^3.3.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "typescript": "^5.5.4",
-    "vite": "^5.4.6",
+    "typescript": "^5.6.2",
+    "vite": "^5.4.8",
     "vite-plugin-banner": "^0.8.0",
     "vite-plugin-checker": "^0.8.0",
-    "vite-plugin-dts": "^4.2.1",
+    "vite-plugin-dts": "^4.2.3",
     "vite-plugin-externalize-deps": "^0.8.0",
-    "vitest": "^2.1.1"
+    "vitest": "^2.1.2"
   },
   "peerDependencies": {
     "react": "^18.2.0",
