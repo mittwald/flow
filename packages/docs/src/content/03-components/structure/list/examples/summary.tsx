@@ -4,7 +4,6 @@ import {
 } from "@mittwald/flow-react-components/List";
 import Heading from "@mittwald/flow-react-components/Heading";
 import Text from "@mittwald/flow-react-components/Text";
-import { Header } from "@mittwald/flow-react-components/Header";
 
 export default () => {
   const InvoiceList = typedList<{
@@ -14,13 +13,13 @@ export default () => {
 
   return (
     <InvoiceList.List batchSize={5} aria-label="Invoices">
-      <Header>
+      <ListSummary>
         <Text
           style={{ display: "block", textAlign: "right" }}
         >
           <b>Gesamtpreis: 41,00 €</b>
         </Text>
-      </Header>
+      </ListSummary>
       <InvoiceList.StaticData
         data={[
           { id: "RG100000", amount: "25,00 €" },

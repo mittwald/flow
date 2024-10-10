@@ -48,6 +48,7 @@ import type { DatePickerProps } from "@/components/DatePicker";
 import type * as Aria from "react-aria-components";
 import type { DateRangePickerProps } from "@/components/DateRangePicker";
 import type { TimeFieldProps } from "@/components/TimeField";
+import type { ListSummaryProps } from "@/components/List/components/ListSummary/ListSummary";
 
 export * from "./types";
 
@@ -82,6 +83,7 @@ export interface FlowComponentPropsTypes {
   LayoutCard: LayoutCardProps;
   Link: LinkProps;
   List: ListProps<never>;
+  ListSummary: ListSummaryProps;
   MenuItem: MenuItemProps;
   Modal: ModalProps;
   ModalTrigger: OverlayTriggerProps;
@@ -139,6 +141,7 @@ const propsContextSupportingComponentsMap: Record<
   LayoutCard: true,
   Link: true,
   List: true,
+  ListSummary: true,
   MenuItem: true,
   Modal: true,
   ModalTrigger: true,

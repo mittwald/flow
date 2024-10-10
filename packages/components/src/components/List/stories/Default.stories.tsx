@@ -12,11 +12,10 @@ import AlertBadge from "@/components/AlertBadge";
 import type { Domain } from "../testData/domainApi";
 import { getDomains, getTypes } from "../testData/domainApi";
 import { Section } from "@/components/Section";
-import { ListItemView, typedList } from "@/components/List";
+import { ListItemView, ListSummary, typedList } from "@/components/List";
 import { Button } from "@/components/Button";
 import IconDownload from "@/components/Icon/components/icons/IconDownload";
 import { ActionGroup } from "@/components/ActionGroup";
-import { Header } from "@/components/Header";
 
 const loadDomains: AsyncDataLoader<Domain> = async (opts) => {
   const response = await getDomains({
@@ -139,7 +138,7 @@ type Story = StoryObj<typeof List>;
 
 export const Default: Story = {};
 
-export const WithHeader: Story = {
+export const WithSummary: Story = {
   render: () => {
     const InvoiceList = typedList<{ id: string; amount: string }>();
 
@@ -147,11 +146,11 @@ export const WithHeader: Story = {
       <Section>
         <Heading>Invoices</Heading>
         <InvoiceList.List batchSize={5} aria-label="Invoices">
-          <Header>
-            <Text>
+          <ListSummary>
+            <Text style={{ display: "block", textAlign: "right" }}>
               <b>Gesamtpreis: 42,00 €</b>
             </Text>
-          </Header>
+          </ListSummary>
           <InvoiceList.StaticData
             data={[
               { id: "RG100000", amount: "25,00 €" },

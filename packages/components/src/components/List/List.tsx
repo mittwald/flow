@@ -152,9 +152,8 @@ export const List = flowComponent("List", (props) => {
       tunnelId: "actions",
       ignoreBreakpoint: true,
     },
-    Header: {
-      tunnelId: "header",
-      className: styles.headerItem,
+    ListSummary: {
+      tunnelId: "listSummary",
     },
   };
 
@@ -172,11 +171,13 @@ export const List = flowComponent("List", (props) => {
           <div className={styles.list} ref={ref}>
             {children}
             <Header hasActionGroup={hasActionGroup} />
-            <div>
-              <TunnelExit id="header" />
-              {listModel.viewMode === "list" && <Items />}
-              {listModel.viewMode === "table" && <Table />}
-            </div>
+            {listModel.viewMode === "list" && (
+              <div>
+                <TunnelExit id="listSummary" />
+                <Items />
+              </div>
+            )}
+            {listModel.viewMode === "table" && <Table />}
             <Footer />
           </div>
         </listContext.Provider>
