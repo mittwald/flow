@@ -94,9 +94,6 @@
     grid-area: title;
     display: grid;
     grid-column-gap: var(--list-item--content-to-content-spacing);
-    overflow: hidden;
-    flex-wrap: wrap;
-
     grid-template-areas:
       "avatar title   "
       "avatar subtitle";

@@ -8,7 +8,7 @@ import type { AsyncDataLoader } from "@/components/List/model/loading/types";
 import { Avatar } from "@/components/Avatar";
 import { ContextMenu, MenuItem } from "@/components/ContextMenu";
 import { IconDomain, IconSubdomain } from "@/components/Icon/components/icons";
-import StatusBadge from "@/components/StatusBadge";
+import AlertBadge from "@/components/AlertBadge";
 import type { Domain } from "../testData/domainApi";
 import { getDomains, getTypes } from "../testData/domainApi";
 import { Section } from "@/components/Section";
@@ -114,7 +114,7 @@ const meta: Meta<typeof List> = {
                 <Heading>
                   {domain.hostname}
                   {!domain.verified && (
-                    <StatusBadge status="warning">Not verified</StatusBadge>
+                    <AlertBadge status="warning">Not verified</AlertBadge>
                   )}
                 </Heading>
                 <Text>{domain.type}</Text>

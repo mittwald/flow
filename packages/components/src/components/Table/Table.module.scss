@@ -20,7 +20,7 @@
 
   :where(.body) {
     tr {
-      &:where(:nth-of-type(odd)) {
+      &:where(:nth-of-type(odd):not(.footer)) {
         background-color: var(--table--background-color-accent);
       }
 
@@ -33,6 +33,13 @@
       &:first-of-type {
         td {
           border-block-start-width: var(--table--header-border-width);
+        }
+      }
+
+      &.footer {
+        td {
+          border-block-start-width: var(--table--footer-border-width);
+          font-weight: var(--table--footer-font-weight);
         }
       }
     }

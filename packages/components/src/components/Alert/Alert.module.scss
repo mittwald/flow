@@ -1,0 +1,64 @@
+.alert {
+  border-radius: var(--alert--corner-radius);
+  border-width: var(--alert--border-width);
+  border-style: var(--alert--border-style);
+  border-inline-start-width: var(--alert--border-x-start-width);
+  padding: var(--alert--padding);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-column-gap: var(--alert--icon-to-heading-spacing);
+  grid-row-gap: var(--alert--heading-to-content-spacing);
+  width: 100%;
+
+  @extend .info;
+
+  /* Elements */
+  .alertIcon {
+    grid-area: icon;
+    height: calc(var(--heading-font-size--s) * var(--line-height--default));
+    width: var(--heading-font-size--s);
+  }
+
+  .heading {
+    grid-area: heading;
+  }
+
+  .content {
+    grid-area: content;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: var(--alert--content-to-content-spacing);
+  }
+
+  /* Without content */
+
+  &:not(:has(.content)) {
+    grid-template-areas: "icon heading";
+  }
+
+  /* With content */
+
+  &:has(.content) {
+    grid-template-areas:
+      "icon heading"
+      ".    content";
+  }
+
+  /* Status */
+
+  @mixin status($status) {
+    &.#{$status} {
+      border-color: var(--alert--#{$status}-border-color);
+
+      .heading {
+        color: var(--alert--#{$status}-heading-color);
+      }
+    }
+  }
+
+  @include status(info);
+  @include status(warning);
+  @include status(danger);
+  @include status(success);
+}
