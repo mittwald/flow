@@ -9,13 +9,12 @@ import Breadcrumb from "@mittwald/flow-react-components/Breadcrumb";
 import Link from "@mittwald/flow-react-components/Link";
 import LayoutCard from "@mittwald/flow-react-components/LayoutCard";
 import { IconInvoice } from "@mittwald/flow-react-components/Icons";
+import type { Invoice } from "@/api/invoiceApi";
+import { listInvoices } from "@/api/invoiceApi";
 
 export default function Page() {
-  const InvoiceList = typedList<{
-    name: string;
-    date: string;
-    amount: string;
-  }>();
+  const InvoiceList = typedList<Invoice>();
+  const invoices = listInvoices();
 
   return (
     <>
@@ -29,15 +28,7 @@ export default function Page() {
       <LayoutCard className={styles.content}>
         <Section>
           <InvoiceList.List defaultViewMode="table">
-            <InvoiceList.StaticData
-              data={[
-                { name: "RG100534", date: "03.09.2024", amount: "15 €" },
-                { name: "RG100533", date: "01.09.2024", amount: "25 €" },
-                { name: "RG100532", date: "01.08.2024", amount: "25 €" },
-                { name: "RG100531", date: "23.07.2024", amount: "18 €" },
-                { name: "RG100530", date: "01.07.2024", amount: "25 €" },
-              ]}
-            />
+            <InvoiceList.StaticData data={invoices} />
             <InvoiceList.Search autoFocus />
 
             <InvoiceList.Sorting
@@ -72,7 +63,7 @@ export default function Page() {
             <InvoiceList.Item textValue={(invoice) => invoice.name}>
               {(invoice) => (
                 <InvoiceList.ItemView>
-                  <Avatar variant={1}>
+                  <Avatar color="blue">
                     <IconInvoice />
                   </Avatar>
                   <Heading>{invoice.name}</Heading>

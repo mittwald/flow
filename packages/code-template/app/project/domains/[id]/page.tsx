@@ -2,24 +2,20 @@
 import LayoutCard from "@mittwald/flow-react-components/LayoutCard";
 import Section from "@mittwald/flow-react-components/Section";
 import { getDomain } from "@/api/domainApi";
-import InlineAlert from "@mittwald/flow-react-components/InlineAlert";
+import Alert from "@mittwald/flow-react-components/Alert";
 import Heading from "@mittwald/flow-react-components/Heading";
 import Text from "@mittwald/flow-react-components/Text";
 import Link from "@mittwald/flow-react-components/Link";
 import Content from "@mittwald/flow-react-components/Content";
 import Header from "@mittwald/flow-react-components/Header";
 import Button from "@mittwald/flow-react-components/Button";
-import { IconContextMenu } from "@mittwald/flow-react-components/Icons";
-import ContextMenu, {
-  ContextMenuTrigger,
-  MenuItem,
-} from "@mittwald/flow-react-components/ContextMenu";
 import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
 import LabeledValue from "@mittwald/flow-react-components/LabeledValue";
 import Label from "@mittwald/flow-react-components/Label";
 import { ModalTrigger } from "@mittwald/flow-react-components/Modal";
 import { UpdateDomainOwnerModal } from "@/app/project/domains/_components/UpdateDomainOwnerModal";
 import Breadcrumb from "@mittwald/flow-react-components/Breadcrumb";
+import styles from "@/app/layout.module.scss";
 
 export default function Page({ params }: { params: { id: string } }) {
   const { id } = params;
@@ -36,10 +32,10 @@ export default function Page({ params }: { params: { id: string } }) {
       <Heading level={1} color="light">
         {domain.hostname}
       </Heading>
-      <LayoutCard>
+      <LayoutCard className={styles.content}>
         <Section>
           {!domain.ssl && (
-            <InlineAlert status="danger">
+            <Alert status="danger">
               <Heading>
                 Es konnte kein SSL-Zertifikat ausgestellt werden
               </Heading>
@@ -53,22 +49,12 @@ export default function Page({ params }: { params: { id: string } }) {
                 </Text>
                 <Link>SSL-Zertifikat ausstellen</Link>
               </Content>
-            </InlineAlert>
+            </Alert>
           )}
         </Section>
         <Section>
           <Header>
             <Heading>Domain-Details</Heading>
-            <ContextMenuTrigger>
-              <Button color="secondary" variant="soft">
-                <IconContextMenu />
-              </Button>
-              <ContextMenu>
-                <MenuItem>Domain umziehen</MenuItem>
-                <MenuItem>Domain entfernen</MenuItem>
-              </ContextMenu>
-            </ContextMenuTrigger>
-            <Button>Domain-Ziel ändern</Button>
           </Header>
           <ColumnLayout>
             <LabeledValue>

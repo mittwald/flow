@@ -11,7 +11,7 @@ export default function RootLayout({
 }>) {
   return (
     <main className={styles.main}>
-      <LayoutCard>
+      <LayoutCard className={styles.sidebar}>
         <CustomerNavigation />
       </LayoutCard>
       <div className={styles.container}>{children}</div>

@@ -9,9 +9,12 @@ import styles from "@/app/layout.module.scss";
 import Breadcrumb from "@mittwald/flow-react-components/Breadcrumb";
 import Link from "@mittwald/flow-react-components/Link";
 import LayoutCard from "@mittwald/flow-react-components/LayoutCard";
+import type { User } from "@/api/userApi";
+import { listUsers } from "@/api/userApi";
 
 export default function Page() {
-  const MemberList = typedList<{ name: string; email: string }>();
+  const MemberList = typedList<User>();
+  const users = listUsers();
 
   return (
     <>
@@ -25,13 +28,7 @@ export default function Page() {
       <LayoutCard className={styles.content}>
         <Section>
           <MemberList.List>
-            <MemberList.StaticData
-              data={[
-                { name: "John Doe", email: "john@doe.de" },
-                { name: "Max Mustermann", email: "max@mustermann.de" },
-                { name: "Franz Müller", email: "f.mueller@mittwald.de" },
-              ]}
-            />
+            <MemberList.StaticData data={users} />
             <MemberList.Search />
             <MemberList.Sorting property="name" name="A bis Z" defaultEnabled />
             <MemberList.Sorting
@@ -43,7 +40,7 @@ export default function Page() {
             <MemberList.Item>
               {(member) => (
                 <ListItemView>
-                  <Avatar>
+                  <Avatar color="blue">
                     <Initials>{member.name}</Initials>
                   </Avatar>
                   <Heading>{member.name}</Heading>

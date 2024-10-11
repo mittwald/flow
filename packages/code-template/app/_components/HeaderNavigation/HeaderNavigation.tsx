@@ -22,9 +22,11 @@ import CounterBadge from "@mittwald/flow-react-components/CounterBadge";
 import styles from "./HeaderNavigation.module.scss";
 import { ModalTrigger } from "@mittwald/flow-react-components/Modal";
 import { NotificationModal } from "@/app/_components/NotificationModal";
+import { getUser } from "@/api/userApi";
 
 export const HeaderNavigation: FC = () => {
   const currentPathname = usePathname();
+  const user = getUser("1");
 
   return (
     <HeaderNavigationComponent aria-label="Header navigation" color="light">
@@ -53,8 +55,8 @@ export const HeaderNavigation: FC = () => {
       <ContextMenuTrigger>
         <TooltipTrigger>
           <Button aria-label="User Settings">
-            <Avatar>
-              <Initials>John Doe</Initials>
+            <Avatar color="teal">
+              <Initials>{user.name}</Initials>
             </Avatar>
           </Button>
           <Tooltip>User Settings</Tooltip>

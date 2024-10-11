@@ -16,8 +16,13 @@ import ContextMenu, {
 } from "@mittwald/flow-react-components/ContextMenu";
 import Button from "@mittwald/flow-react-components/Button";
 import { IconContextMenu } from "@mittwald/flow-react-components/Icons";
+import { getProject } from "@/api/projectApi";
+import { FeedbackLayoutCard } from "@/app/_components/FeedbackLayoutCard";
+import { StyleguideLayoutCard } from "@/app/_components/StyleguideLayoutCard";
 
 export default function Page() {
+  const project = getProject();
+
   return (
     <>
       <Breadcrumb color="light">
@@ -46,58 +51,37 @@ export default function Page() {
             <ColumnLayout>
               <LabeledValue>
                 <Label>Projektname</Label>
-                <Text>Mein Projekt</Text>
+                <Text>{project.name}</Text>
               </LabeledValue>
               <LabeledValue>
                 <Label>Server</Label>
-                <Text>Mein Server</Text>
+                <Text>{project.server}</Text>
               </LabeledValue>
               <LabeledValue>
                 <Label>Projektdomain</Label>
-                <Link href="https://p-lis5uw.project.space">
-                  p-lis5uw.project.space
-                </Link>
-                <CopyButton text="p-lis5uw.project.space" />
+                <Link href={project.domain}>{project.domain}</Link>
+                <CopyButton text={project.domain} />
               </LabeledValue>
               <LabeledValue>
                 <Label>Erstelldatum</Label>
-                <Text>06.12.2023 um 11:40 Uhr</Text>
+                <Text>{project.createdAt}</Text>
               </LabeledValue>
               <LabeledValue>
                 <Label>A-Record</Label>
-                <Text>45.225.312.55</Text>
-                <CopyButton text="45.225.312.55" />
+                <Text>{project.aRecord}</Text>
+                <CopyButton text={project.aRecord} />
               </LabeledValue>
               <LabeledValue>
                 <Label>Short-ID</Label>
-                <Text>p-lis5uw</Text>
-                <CopyButton text="p-x2l7wi" />
+                <Text>{project.shortId}</Text>
+                <CopyButton text={project.shortId} />
               </LabeledValue>
             </ColumnLayout>
           </Section>
         </LayoutCard>
         <ColumnLayout l={[2, 1]}>
-          <LayoutCard>
-            <Section>
-              <Heading>Lerne mehr über Flow</Heading>
-              <Text>
-                Nutze unseren Styleguide, um mehr über das Design System Flow zu
-                erfahren und konsistente Benutzeroberflächen zu entwickeln.
-              </Text>
-              <Link href="https://mittwald.github.io/flow">Zum Styleguide</Link>
-            </Section>
-          </LayoutCard>
-          <LayoutCard>
-            <Section>
-              <Heading>Gib uns Feedback</Heading>
-              <Text>
-                Wir freuen uns auf deine Anmerkungen und Wünsche zu Flow.
-              </Text>
-              <Link href="https://github.com/mittwald/flow/issues/new">
-                Zum GitHub Repository
-              </Link>
-            </Section>
-          </LayoutCard>
+          <StyleguideLayoutCard />
+          <FeedbackLayoutCard />
         </ColumnLayout>
       </div>
     </>

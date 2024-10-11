@@ -1,3 +1,11 @@
+.body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: var(--size-px--m);
+  box-sizing: border-box;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -5,37 +13,24 @@
   padding-block: var(--size-px--s);
 }
 
+.sidebar {
+  width: 240px;
+  padding: var(--size-px--l);
+}
+
 .main {
   display: flex;
   column-gap: var(--size-px--m);
+  flex-grow: 1;
 
   .container {
     flex-grow: 1;
-    display: grid;
-    grid-template-areas:
-      "breadcrumb action"
-      "title      action"
-      "content    content";
-    grid-template-rows: auto auto 1fr;
-
-    > button {
-      grid-area: action;
-      justify-self: end;
-      align-self: self-end;
-      margin-bottom: var(--size-rem--m);
-    }
-
-    > :global(.flow--breadcrumb) {
-      grid-area: breadcrumb;
-    }
 
     > h1 {
-      grid-area: title;
       margin-bottom: var(--size-rem--s);
     }
 
-    .content {
-      grid-area: content;
+    .content:not(:global(.flow--layout-card)) {
       display: flex;
       flex-direction: column;
       row-gap: var(--size-px--m);

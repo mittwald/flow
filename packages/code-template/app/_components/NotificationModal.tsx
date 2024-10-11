@@ -35,7 +35,7 @@ export const NotificationModal: FC = () => {
           <NotificationList.Item>
             {(notification) => (
               <ListItemView>
-                <Avatar variant={1}>
+                <Avatar color="blue">
                   <IconNotification />
                 </Avatar>
                 <Heading>{notification.title}</Heading>

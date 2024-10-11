@@ -5,7 +5,7 @@ import { ListItemView, typedList } from "@mittwald/flow-react-components/List";
 import Avatar from "@mittwald/flow-react-components/Avatar";
 import { IconEmail } from "@mittwald/flow-react-components/Icons";
 import Heading from "@mittwald/flow-react-components/Heading";
-import StatusBadge from "@mittwald/flow-react-components/StatusBadge";
+import AlertBadge from "@mittwald/flow-react-components/AlertBadge";
 import ProgressBar from "@mittwald/flow-react-components/ProgressBar";
 import Text from "@mittwald/flow-react-components/Text";
 import Label from "@mittwald/flow-react-components/Label";
@@ -57,15 +57,15 @@ export default function Page() {
                 <EmailList.Item>
                   {(email) => (
                     <ListItemView>
-                      <Avatar variant={1}>
+                      <Avatar color="blue">
                         <IconEmail />
                       </Avatar>
                       <Heading>
                         {email.email}
                         {email.storage >= 80 && (
-                          <StatusBadge status="warning">
+                          <AlertBadge status="warning">
                             Speicher fast voll
-                          </StatusBadge>
+                          </AlertBadge>
                         )}
                       </Heading>
                       <Text>

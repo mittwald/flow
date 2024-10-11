@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="de">
-      <body>
+      <body className={styles.body}>
         <header className={styles.header}>
           <IconMittwald color="light" size="l" />
           <HeaderNavigation />

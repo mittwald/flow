@@ -4,12 +4,18 @@ import Label from "@mittwald/flow-react-components/Label";
 import LabeledValue from "@mittwald/flow-react-components/LabeledValue";
 import LayoutCard from "@mittwald/flow-react-components/LayoutCard";
 import Section from "@mittwald/flow-react-components/Section";
-import Text from "@mittwald/flow-react-components/Text";
 import styles from "@/app/layout.module.scss";
 import Breadcrumb from "@mittwald/flow-react-components/Breadcrumb";
 import Link from "@mittwald/flow-react-components/Link";
+import { getCustomer } from "@/api/customerApi";
+import { FeedbackLayoutCard } from "@/app/_components/FeedbackLayoutCard";
+import { StyleguideLayoutCard } from "@/app/_components/StyleguideLayoutCard";
+import { ContractPartnerText } from "@/app/customer/_components/ContractPartnerText";
+import { InvoiceSettingsText } from "@/app/customer/_components/InvoiceSettingsText";
 
 export default function Page() {
+  const customer = getCustomer();
+
   return (
     <>
       <Breadcrumb color="light">
@@ -19,23 +25,31 @@ export default function Page() {
       <Heading level={1} color="light">
         Dashboard
       </Heading>
-      <LayoutCard className={styles.content}>
-        <Section>
-          <Heading>Dashboard</Heading>
-          <ColumnLayout>
-            <LabeledValue>
-              <Label>Vertragspartner</Label>
-              <Text>
-                John Doe
-                <br />
-                Beispielstraße 1
-                <br />
-                12345 Musterstadt
-              </Text>
-            </LabeledValue>
-          </ColumnLayout>
-        </Section>
-      </LayoutCard>
+      <div className={styles.content}>
+        <LayoutCard>
+          <Section>
+            <Heading>Organisationsübersicht</Heading>
+            <ColumnLayout>
+              <LabeledValue>
+                <Label>Vertragspartner</Label>
+                <ContractPartnerText
+                  contractPartner={customer.contractPartner}
+                />
+              </LabeledValue>
+              <LabeledValue>
+                <Label>Zahlungsmethode</Label>
+                <InvoiceSettingsText
+                  invoiceSettings={customer.invoiceSettings}
+                />
+              </LabeledValue>
+            </ColumnLayout>
+          </Section>
+        </LayoutCard>
+        <ColumnLayout l={[2, 1]}>
+          <StyleguideLayoutCard />
+          <FeedbackLayoutCard />
+        </ColumnLayout>
+      </div>
     </>
   );
 }

@@ -16,9 +16,10 @@ import {
   IconHome,
   IconSubdomain,
 } from "@mittwald/flow-react-components/Icons";
-import StatusBadge from "@mittwald/flow-react-components/StatusBadge";
 import type { Domain } from "@/api/domainApi";
 import { listDomains } from "@/api/domainApi";
+import { AlertBadge } from "@mittwald/flow-react-components/AlertBadge";
+import { ActionGroup } from "@mittwald/flow-react-components/ActionGroup";
 
 export default function Page() {
   const DomainList = typedList<Domain>();
@@ -34,13 +35,15 @@ export default function Page() {
       <Heading level={1} color="light">
         Domains
       </Heading>
-      <ModalTrigger>
-        <Button color="accent">Domain anlegen</Button>
-        <AddDomainModal />
-      </ModalTrigger>
       <LayoutCard className={styles.content}>
         <Section>
           <DomainList.List batchSize={5}>
+            <ActionGroup>
+              <ModalTrigger>
+                <Button color="accent">Domain anlegen</Button>
+                <AddDomainModal />
+              </ModalTrigger>
+            </ActionGroup>
             <DomainList.StaticData data={domains} />
             <DomainList.Search />
             <DomainList.Sorting
@@ -59,12 +62,12 @@ export default function Page() {
               {(domain) => (
                 <ListItemView>
                   <Avatar
-                    variant={
+                    color={
                       domain.type === "Domain"
-                        ? 2
+                        ? "blue"
                         : domain.type === "Subdomain"
-                          ? 5
-                          : 4
+                          ? "teal"
+                          : "lilac"
                     }
                   >
                     {domain.type === "Domain" ? (
@@ -78,7 +81,7 @@ export default function Page() {
                   <Heading>
                     {domain.hostname}
                     {!domain.ssl && (
-                      <StatusBadge status="danger">SSL-Zertifikat</StatusBadge>
+                      <AlertBadge status="danger">SSL-Zertifikat</AlertBadge>
                     )}
                   </Heading>
                   <Text>{domain.type}</Text>
