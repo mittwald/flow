@@ -1,13 +1,7 @@
-html {
+body {
   --body-background-color: var(--color--mittwald-navy--800);
   margin: 0;
   background: var(--body-background-color);
   padding-inline: var(--size-px--m);
   padding-bottom: var(--size-px--m);
-}
-
-body {
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 100%;
 }

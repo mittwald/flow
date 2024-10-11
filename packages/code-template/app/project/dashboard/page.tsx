@@ -1,3 +1,4 @@
+"use client";
 import Breadcrumb from "@mittwald/flow-react-components/Breadcrumb";
 import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
 import CopyButton from "@mittwald/flow-react-components/CopyButton";
@@ -19,9 +20,15 @@ import { IconContextMenu } from "@mittwald/flow-react-components/Icons";
 import { getProject } from "@/api/projectApi";
 import { FeedbackLayoutCard } from "@/app/_components/FeedbackLayoutCard";
 import { StyleguideLayoutCard } from "@/app/_components/StyleguideLayoutCard";
+import { useOverlayController } from "@mittwald/flow-react-components/controller";
+import { UpdateProjectNameModal } from "@/app/project/_components/UpdateProjectNameModal";
+import { TerminateProjectModal } from "@/app/project/_components/TerminateProjectModal";
 
 export default function Page() {
   const project = getProject();
+
+  const updateProjectNameModalController = useOverlayController("Modal");
+  const terminateProjectModalController = useOverlayController("Modal");
 
   return (
     <>
@@ -41,9 +48,13 @@ export default function Page() {
                 <Button color="secondary" variant="soft">
                   <IconContextMenu />
                 </Button>
-                <ContextMenu>
-                  <MenuItem>Projektname ändern</MenuItem>
-                  <MenuItem>Projekt kündigen</MenuItem>
+                <ContextMenu selectionMode="navigation">
+                  <MenuItem onAction={updateProjectNameModalController.open}>
+                    Projektname ändern
+                  </MenuItem>
+                  <MenuItem onAction={terminateProjectModalController.open}>
+                    Projekt kündigen
+                  </MenuItem>
                 </ContextMenu>
               </ContextMenuTrigger>
               <Button>Tarif anpassen</Button>
@@ -83,6 +94,11 @@ export default function Page() {
           <StyleguideLayoutCard />
           <FeedbackLayoutCard />
         </ColumnLayout>
+        <UpdateProjectNameModal
+          controller={updateProjectNameModalController}
+          name={project.name}
+        />
+        <TerminateProjectModal controller={terminateProjectModalController} />
       </div>
     </>
   );

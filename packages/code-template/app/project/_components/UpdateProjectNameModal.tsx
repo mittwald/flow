@@ -5,37 +5,37 @@ import Heading from "@mittwald/flow-react-components/Heading";
 import Modal from "@mittwald/flow-react-components/Modal";
 import Section from "@mittwald/flow-react-components/Section";
 import type { FC } from "react";
-import type { DomainOwner } from "@/api/domainApi";
-import { Form } from "@mittwald/flow-react-components/react-hook-form";
+import {
+  Form,
+  typedField,
+} from "@mittwald/flow-react-components/react-hook-form";
 import { useForm } from "react-hook-form";
 import Action from "@mittwald/flow-react-components/Action";
-import { useOverlayController } from "@mittwald/flow-react-components/controller";
-import DomainOwnerFormFields from "@/app/project/domains/_components/DomainOwnerFormFields";
+import type { OverlayController } from "@mittwald/flow-react-components/controller";
+import TextField from "@mittwald/flow-react-components/TextField";
+import Label from "@mittwald/flow-react-components/Label";
 
 interface Props {
-  owner: DomainOwner;
+  name: string;
+  controller: OverlayController;
 }
 
-export const UpdateDomainOwnerModal: FC<Props> = (props) => {
-  const { owner } = props;
+interface Values {
+  name: string;
+}
 
-  const controller = useOverlayController("Modal");
+export const UpdateProjectNameModal: FC<Props> = (props) => {
+  const { name, controller } = props;
 
-  const form = useForm<DomainOwner>({
+  const form = useForm<Values>({
     defaultValues: {
-      firstName: owner.firstName,
-      lastName: owner.lastName,
-      street: owner.street,
-      houseNumber: owner.houseNumber,
-      zip: owner.zip,
-      city: owner.city,
-      country: owner.country,
-      email: owner.email,
-      phone: owner.phone,
+      name,
     },
   });
 
-  const handleOnSubmit = async (values: DomainOwner) => {
+  const Field = typedField(form);
+
+  const handleOnSubmit = async (values: Values) => {
     console.log(values);
     controller.close();
     form.reset();
@@ -44,10 +44,17 @@ export const UpdateDomainOwnerModal: FC<Props> = (props) => {
   return (
     <Modal controller={controller}>
       <Form form={form} onSubmit={handleOnSubmit}>
-        <Heading>Domain-Inhaber bearbeiten</Heading>
+        <Heading>Projektname bearbeiten</Heading>
         <Content>
           <Section>
-            <DomainOwnerFormFields form={form} />
+            <Field
+              name="name"
+              rules={{ required: "Bitte gib einen Vornamen an" }}
+            >
+              <TextField>
+                <Label>Projektname</Label>
+              </TextField>
+            </Field>
           </Section>
         </Content>
         <ActionGroup>

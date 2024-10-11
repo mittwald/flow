@@ -2822,7 +2822,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@mittwald/code-template@workspace:packages/code-template"
   dependencies:
-    "@mittwald/flow-react-components": "npm:^0.1.0-alpha.234"
+    "@mittwald/flow-react-components": "npm:^0.1.0-alpha.283"
     "@types/node": "npm:^20"
     "@types/react": "npm:^18"
     "@types/react-dom": "npm:^18"
@@ -2929,7 +2929,55 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@mittwald/flow-react-components@npm:^0.1.0-alpha.234, @mittwald/flow-react-components@workspace:^, @mittwald/flow-react-components@workspace:packages/components":
+"@mittwald/flow-react-components@npm:^0.1.0-alpha.283":
+  version: 0.1.0-alpha.283
+  resolution: "@mittwald/flow-react-components@npm:0.1.0-alpha.283"
+  dependencies:
+    "@chakra-ui/live-region": "npm:^2.1.0"
+    "@internationalized/date": "npm:^3.5.6"
+    "@internationalized/string-compiler": "npm:^3.2.5"
+    "@mittwald/react-tunnel": "npm:^0.1.0-alpha.283"
+    "@mittwald/react-use-promise": "npm:^2.5.0"
+    "@react-aria/utils": "npm:^3.25.3"
+    "@react-types/shared": "npm:^3.25.0"
+    "@tabler/icons-react": "npm:^3.19.0"
+    "@tanstack/react-table": "npm:^8.20.5"
+    "@types/luxon": "npm:^3.4.2"
+    clsx: "npm:^2.1.1"
+    copy-to-clipboard: "npm:^3.3.3"
+    dot-prop: "npm:^9.0.0"
+    framer-motion: "npm:^11.11.7"
+    html-react-parser: "npm:^5.1.18"
+    invariant: "npm:^2.2.4"
+    luxon: "npm:^3.5.0"
+    mobx: "npm:^6.13.3"
+    mobx-react-lite: "npm:^4.0.7"
+    object-code: "npm:^1.3.3"
+    react-aria: "npm:^3.35.0"
+    react-aria-components: "npm:^1.4.0"
+    react-children-utilities: "npm:^2.10.0"
+    react-stately: "npm:^3.33.0"
+    remeda: "npm:^2.15.0"
+    use-callback-ref: "npm:^1.3.2"
+    zod: "npm:^3.23.8"
+  peerDependencies:
+    "@mittwald/react-use-promise": ^2.3.12
+    next: "*"
+    react: ~18.3.0
+    react-dom: ~18.3.0
+    react-hook-form: "*"
+  peerDependenciesMeta:
+    "@mittwald/react-use-promise":
+      optional: true
+    next:
+      optional: true
+    react-hook-form:
+      optional: true
+  checksum: 10c0/977c378d43866ca1ef26d54a414671eb9e63a833662ef88a0647efd11da06b82b8c60c482bce3b14790fe6554a0702bb1683f1d00906a601055d438152f41be1
+  languageName: node
+  linkType: hard
+
+"@mittwald/flow-react-components@workspace:^, @mittwald/flow-react-components@workspace:packages/components":
   version: 0.0.0-use.local
   resolution: "@mittwald/flow-react-components@workspace:packages/components"
   dependencies:
@@ -3042,6 +3090,19 @@ __metadata:
     resolve-package-path: "npm:^4.0.3"
   languageName: unknown
   linkType: soft
+
+"@mittwald/react-tunnel@npm:^0.1.0-alpha.283":
+  version: 0.1.0-alpha.283
+  resolution: "@mittwald/react-tunnel@npm:0.1.0-alpha.283"
+  dependencies:
+    mobx: "npm:^6.13.3"
+    mobx-react-lite: "npm:^4.0.7"
+  peerDependencies:
+    react: ^18.2.0
+    react-dom: ^18.2.0
+  checksum: 10c0/f96f119db8cbe8533ed01e0fc2f6e2d985363a4a755979e61851ecac5dd4ecc432995b6ec7110f80782a7da970418032789d738bf0a51260b07d5f5b771db9e9
+  languageName: node
+  linkType: hard
 
 "@mittwald/react-tunnel@workspace:^, @mittwald/react-tunnel@workspace:packages/react-tunnel":
   version: 0.0.0-use.local

@@ -19,11 +19,13 @@ export default function RootLayout({
   return (
     <html lang="de">
       <body>
-        <header className={styles.header}>
-          <IconMittwald color="light" size="l" />
-          <HeaderNavigation />
-        </header>
-        {children}
+        <div className={styles.container}>
+          <header className={styles.header}>
+            <IconMittwald color="light" size="l" />
+            <HeaderNavigation />
+          </header>
+          {children}
+        </div>
       </body>
     </html>
   );
