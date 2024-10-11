@@ -278,6 +278,10 @@
       "types": "./dist/types/components/Tooltip/index.d.ts",
       "import": "./dist/Tooltip.js"
     },
+    "./Wrap": {
+      "types": "./dist/types/components/Wrap/index.d.ts",
+      "import": "./dist/Wrap.js"
+    },
     "./hooks": {
       "types": "./dist/types/lib/hooks/index.d.ts",
       "import": "./dist/hooks.js"
