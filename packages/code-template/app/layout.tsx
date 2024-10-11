@@ -5,6 +5,7 @@ import type { ReactNode } from "react";
 import styles from "./layout.module.scss";
 import { IconMittwald } from "@mittwald/flow-react-components/Icons";
 import { HeaderNavigation } from "@/app/_components/HeaderNavigation";
+import { MobileNavigation } from "@/app/_components/MobileNavigation/MobileNavigation";
 
 export const metadata: Metadata = {
   title: "Code template",
@@ -22,7 +23,8 @@ export default function RootLayout({
         <div className={styles.container}>
           <header className={styles.header}>
             <IconMittwald color="light" size="l" />
-            <HeaderNavigation />
+            <HeaderNavigation className={styles.headerNavigation} />
+            <MobileNavigation className={styles.mobileNavigation} />
           </header>
           {children}
         </div>

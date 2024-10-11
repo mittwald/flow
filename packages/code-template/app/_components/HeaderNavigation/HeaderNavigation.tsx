@@ -24,12 +24,21 @@ import { ModalTrigger } from "@mittwald/flow-react-components/Modal";
 import { NotificationModal } from "@/app/_components/NotificationModal";
 import { getUser } from "@/api/userApi";
 
-export const HeaderNavigation: FC = () => {
+interface Props {
+  className?: string;
+}
+
+export const HeaderNavigation: FC<Props> = (props) => {
+  const { className } = props;
   const currentPathname = usePathname();
   const user = getUser("1");
 
   return (
-    <HeaderNavigationComponent aria-label="Header navigation" color="light">
+    <HeaderNavigationComponent
+      className={className}
+      aria-label="Header navigation"
+      color="light"
+    >
       <Link
         href="/customer"
         aria-current={currentPathname.includes("customer") ? "page" : undefined}
