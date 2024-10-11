@@ -1,5 +1,62 @@
-# Beispiel
+# Playground
+
+Verwende `<List />`, um eine Liste darzustellen.
 
 <LiveCodeEditor />
 
 ---
+
+# Kombiniere mit ...
+
+Die List kann um eine Sortierung, einen Filter, ein SearchField oder eine
+Kombination dieser Elemente erweitert werden.
+
+## Sortierung
+
+Nutze `<List.Sorting />` innerhalb der List, um eine Sortiermethode anzulegen.
+
+<LiveCodeEditor example="sorting" editorCollapsed />
+
+## Filter
+
+Über `<List.Filter />` lassen sich Filtermöglichkeiten anlegen.
+
+<LiveCodeEditor example="filter" editorCollapsed />
+
+## Suche
+
+Verwende `<List.Search />` innerhalb der List, um ein
+[SearchField](/03-components/form-controls/search-field) anzuzeigen.
+
+<LiveCodeEditor example="search" editorCollapsed />
+
+## ActionGroup
+
+Verwende `<ActionGroup/>` innerhalb der List, um eine
+[ActionGroup](/03-components/actions/action-group) anzuzeigen. Hier können
+Aktionen definiert werden, die sich direkt auf die Liste beziehen."
+
+<LiveCodeEditor example="actionGroup" editorCollapsed />
+
+## Tabellen-Ansicht
+
+Die List kann als Liste oder als Tabelle dargestellt werden. Nutze
+`<List.Item />` für die Darstellung als Liste und `<List.Table />`, um sie als
+[Tabelle](/03-components/structure/table) anzuzeigen
+
+<LiveCodeEditor example="table" editorCollapsed />
+
+## Pagination
+
+Die Pagination wird standardmäßig bei jeder List aktiviert. Sie zeigt im
+Standard 10 Einträge an und lädt über einen Klick auf "Mehr anzeigen" jeweils 10
+Einträge nach. Diese Werte lassen sich über die `batchSize` Property anpassen.
+
+<LiveCodeEditor example="pagination" editorCollapsed />
+
+## Summary
+
+Verwende eine `<ListSummary/>` um eine Zusammenfassung, wie beispielsweise die
+Summe der Beträge, anzuzeigen.
+
+<LiveCodeEditor example="summary" editorCollapsed />

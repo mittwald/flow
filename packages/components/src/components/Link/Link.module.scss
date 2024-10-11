@@ -36,6 +36,10 @@
     vertical-align: text-bottom;
   }
 
+  &[aria-disabled] {
+    color: var(--link--color--disabled);
+  }
+
   &:where(.dark) {
     color: var(--link--color-dark--default);
 
@@ -45,6 +49,10 @@
 
     &[data-pressed] {
       color: var(--link--color-dark--pressed);
+    }
+
+    &[aria-disabled] {
+      color: var(--link--color-dark--disabled);
     }
   }
 
@@ -58,9 +66,9 @@
     &[data-pressed] {
       color: var(--link--color-light--pressed);
     }
-  }
 
-  &[aria-disabled] {
-    color: var(--link--disabled-color);
+    &[aria-disabled] {
+      color: var(--link--color-light--disabled);
+    }
   }
 }

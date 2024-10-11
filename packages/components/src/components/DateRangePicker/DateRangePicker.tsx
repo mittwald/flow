@@ -6,7 +6,7 @@ import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import * as Aria from "react-aria-components";
 import { Popover } from "@/components/Popover";
-import { RangeCalendar } from "./components/RangeCalendar";
+import { RangeCalendar } from "../Calendar/RangeCalendar";
 import { DateRangeInput } from "./components/DateRangeInput";
 import { FieldError } from "@/components/FieldError";
 import { useOverlayController } from "@/lib/controller";
@@ -18,7 +18,7 @@ export interface DateRangePickerProps<T extends Aria.DateValue>
 }
 
 export const DateRangePicker = flowComponent("DateRangePicker", (props) => {
-  const { children, className, errorMessage, ...rest } = props;
+  const { children, className, errorMessage, onChange, ...rest } = props;
 
   const rootClassName = clsx(styles.formField, className);
 
@@ -43,7 +43,12 @@ export const DateRangePicker = flowComponent("DateRangePicker", (props) => {
       className={rootClassName}
       onOpenChange={(v) => popoverController.setOpen(v)}
       isOpen={popoverController.isOpen}
-      onChange={popoverController.close}
+      onChange={(value) => {
+        if (onChange) {
+          onChange(value);
+        }
+        popoverController.close();
+      }}
     >
       <DateRangeInput isDisabled={props.isDisabled} />
       <PropsContextProvider props={propsContext}>

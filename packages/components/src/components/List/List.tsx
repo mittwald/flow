@@ -25,6 +25,10 @@ import { Table } from "@/components/List/components/Table";
 import { Table as TableSetupComponent } from "@/components/List/setupComponents/Table";
 import { TableHeader } from "@/components/List/setupComponents/TableHeader";
 import { TableBody } from "@/components/List/setupComponents/TableBody";
+import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
+import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import headerStyles from "./components/Header/Header.module.css";
+import { ActionGroup } from "@/components/ActionGroup";
 
 export interface ListProps<T>
   extends PropsWithChildren,
@@ -73,7 +77,7 @@ export const List = flowComponent("List", (props) => {
   };
 
   const searchProps = deepFindOfType(children, ListSearch)?.props;
-  const itemViewProps = deepFindOfType(children, ListItem)?.props;
+  const itemViewProps = deepFindOfType(children, ListItem<never>)?.props;
 
   const tableProps = deepFindOfType(children, TableSetupComponent)?.props;
   const tableColumnProps = deepFilterByType(children, TableColumn<never>).map(
@@ -142,20 +146,42 @@ export const List = flowComponent("List", (props) => {
     ...restProps,
   });
 
+  const propsContext: PropsContext = {
+    ActionGroup: {
+      className: headerStyles.actions,
+      tunnelId: "actions",
+      ignoreBreakpoint: true,
+    },
+    ListSummary: {
+      tunnelId: "listSummary",
+    },
+  };
+
+  const hasActionGroup = !!deepFindOfType(children, ActionGroup);
+
   return (
-    <listContext.Provider
-      value={{
-        list: listModel,
-      }}
-    >
-      <DataLoader />
-      <div className={styles.list} ref={ref}>
-        <Header />
-        {listModel.viewMode === "list" && <Items />}
-        {listModel.viewMode === "table" && <Table />}
-        <Footer />
-      </div>
-    </listContext.Provider>
+    <PropsContextProvider props={propsContext}>
+      <TunnelProvider>
+        <listContext.Provider
+          value={{
+            list: listModel,
+          }}
+        >
+          <DataLoader />
+          <div className={styles.list} ref={ref}>
+            {children}
+            <Header hasActionGroup={hasActionGroup} />
+
+            <div>
+              <TunnelExit id="listSummary" />
+              {listModel.viewMode === "list" && <Items />}
+              {listModel.viewMode === "table" && <Table />}
+            </div>
+            <Footer />
+          </div>
+        </listContext.Provider>
+      </TunnelProvider>
+    </PropsContextProvider>
   );
 });
 

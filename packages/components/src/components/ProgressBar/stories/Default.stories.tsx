@@ -36,6 +36,29 @@ type Story = StoryObj<typeof ProgressBar>;
 
 export const Default: Story = {};
 
+export const WithPercentage: Story = {
+  render: (props) => (
+    <ProgressBar value={50} {...props}>
+      <Label>Storage</Label>
+    </ProgressBar>
+  ),
+};
+
+export const WithoutUnit: Story = {
+  args: { showMaxValue: true },
+  render: (props) => (
+    <ProgressBar
+      value={500}
+      maxValue={1000}
+      minValue={0}
+      formatOptions={{ style: "decimal" }}
+      {...props}
+    >
+      <Label>Storage</Label>
+    </ProgressBar>
+  ),
+};
+
 export const WithMaxValue: Story = {
   args: { showMaxValue: true },
 };

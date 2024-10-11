@@ -1,0 +1,9 @@
+.listSummary {
+  border-width: var(--list-item--border-width);
+  border-bottom-width: 0;
+  border-style: var(--list-item--border-style);
+  border-color: var(--list-item--border-color);
+  padding: var(--list-item--padding);
+  border-top-left-radius: var(--list-item--corner-radius);
+  border-top-right-radius: var(--list-item--corner-radius);
+}

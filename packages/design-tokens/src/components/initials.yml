@@ -2,42 +2,42 @@ initials:
   font-weight:
     value: "{font-weight.bold}"
 
-  # Variant 1
-  variant-1-background-color:
+  # Blue
+  color-blue-background-color:
     value: "{color.hosting-blue.200}"
-  variant-1-content-color:
+  color-blue-content-color:
     value: "{color.hosting-blue.800}"
-  variant-1-content-accent-color:
+  color-blue-content-accent-color:
     value: "{color.hosting-blue.1000}"
 
-  # Variant 2
-  variant-2-background-color:
+  # Teal
+  color-teal-background-color:
     value: "{color.super-teal.200}"
-  variant-2-content-color:
+  color-teal-content-color:
     value: "{color.super-teal.800}"
-  variant-2-content-accent-color:
+  color-teal-content-accent-color:
     value: "{color.super-teal.1000}"
 
-  # Variant 3
-  variant-3-background-color:
+  # Green
+  color-green-background-color:
     value: "{color.espelkamp-green.200}"
-  variant-3-content-color:
+  color-green-content-color:
     value: "{color.espelkamp-green.800}"
-  variant-3-content-accent-color:
+  color-green-content-accent-color:
     value: "{color.espelkamp-green.1000}"
 
-  # Variant 4
-  variant-4-background-color:
+  # Violet
+  color-violet-background-color:
     value: "{color.soft-contrast-violet.200}"
-  variant-4-content-color:
+  color-violet-content-color:
     value: "{color.soft-contrast-violet.800}"
-  variant-4-content-accent-color:
+  color-violet-content-accent-color:
     value: "{color.soft-contrast-violet.1000}"
 
-  # Variant 5
-  variant-5-background-color:
+  # Lilac
+  color-lilac-background-color:
     value: "{color.bright-lilac.200}"
-  variant-5-content-color:
+  color-lilac-content-color:
     value: "{color.bright-lilac.800}"
-  variant-5-content-accent-color:
+  color-lilac-content-accent-color:
     value: "{color.bright-lilac.1000}"

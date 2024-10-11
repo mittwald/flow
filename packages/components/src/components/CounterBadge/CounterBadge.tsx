@@ -1,4 +1,3 @@
-import type { FC } from "react";
 import React from "react";
 import type { PropsWithElementType } from "@/lib/types/props";
 import clsx from "clsx";
@@ -12,19 +11,16 @@ export interface CounterBadgeProps
   count?: number;
 }
 
-export const CounterBadge: FC<CounterBadgeProps> = flowComponent(
-  "CounterBadge",
-  (props) => {
-    const { className, count, refProp: ref, ...rest } = props;
+export const CounterBadge = flowComponent("CounterBadge", (props) => {
+  const { className, count, refProp: ref, ...rest } = props;
 
-    const rootClassName = clsx(styles.counterBadge, className);
+  const rootClassName = clsx(styles.counterBadge, className);
 
-    return (
-      <span className={rootClassName} {...rest} aria-hidden ref={ref}>
-        {count && count > 99 ? "99+" : count}
-      </span>
-    );
-  },
-);
+  return (
+    <span className={rootClassName} {...rest} aria-hidden ref={ref}>
+      {count && count > 99 ? "99+" : count}
+    </span>
+  );
+});
 
 export default CounterBadge;

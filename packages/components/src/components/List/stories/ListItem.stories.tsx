@@ -10,7 +10,7 @@ import { Avatar } from "@/components/Avatar";
 import { dummyText } from "@/lib/dev/dummyText";
 import Image from "@/components/Image";
 import { Content } from "@/components/Content";
-import { StatusBadge } from "@/components/StatusBadge";
+import { AlertBadge } from "@/components/AlertBadge";
 import { View } from "@/components/List/components/Items/components/Item/components/View";
 import { ActionGroup } from "@/components/ActionGroup";
 import { Button } from "@/components/Button";
@@ -44,7 +44,7 @@ const meta: Meta<typeof List> = {
         <Image alt="John Doe" src={dummyText.imageSrc} />
       </Avatar>
       <Heading>
-        John Doe <StatusBadge status="danger">Gesperrt</StatusBadge>
+        John Doe <AlertBadge status="danger">Gesperrt</AlertBadge>
       </Heading>
       <Text>Mittwald</Text>
       <ContextMenu>
