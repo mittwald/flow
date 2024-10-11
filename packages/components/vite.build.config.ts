@@ -91,6 +91,7 @@ export default defineConfig(
           TextField: "./src/components/TextField/index.ts",
           TimeField: "./src/components/TimeField/index.ts",
           Tooltip: "./src/components/Tooltip/index.ts",
+          Wrap: "./src/components/Wrap/index.ts",
           stylesInit: "./src/styles/index.ts",
           hooks: "./src/lib/hooks/index.ts",
           nextjs: "./src/integrations/nextjs/index.ts",

@@ -107,6 +107,12 @@
     display: block;
   }
 
+  .mobileNavigationOffCanvas {
+    .mainNavigation {
+      display: block;
+    }
+  }
+
   .header {
     padding: var(--size-px--xs) var(--size-px--s);
     row-gap: var(--size-rem--s);
