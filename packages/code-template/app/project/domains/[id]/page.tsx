@@ -16,6 +16,12 @@ import { ModalTrigger } from "@mittwald/flow-react-components/Modal";
 import { UpdateDomainOwnerModal } from "@/app/project/domains/_components/UpdateDomainOwnerModal";
 import Breadcrumb from "@mittwald/flow-react-components/Breadcrumb";
 import styles from "@/app/layout.module.scss";
+import { IconContextMenu } from "@mittwald/flow-react-components/Icons";
+import {
+  ContextMenu,
+  ContextMenuTrigger,
+} from "@mittwald/flow-react-components/ContextMenu";
+import { MenuItem } from "@mittwald/flow-react-components/MenuItem";
 
 export default function Page({ params }: { params: { id: string } }) {
   const { id } = params;
@@ -55,6 +61,16 @@ export default function Page({ params }: { params: { id: string } }) {
         <Section>
           <Header>
             <Heading>Domain-Details</Heading>
+            <ContextMenuTrigger>
+              <Button color="secondary" variant="soft">
+                <IconContextMenu />
+              </Button>
+              <ContextMenu>
+                <MenuItem>Domain umziehen</MenuItem>
+                <MenuItem>Domain entfernen</MenuItem>
+              </ContextMenu>
+            </ContextMenuTrigger>
+            <Button>Domain-Ziel ändern</Button>
           </Header>
           <ColumnLayout>
             <LabeledValue>
