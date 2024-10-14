@@ -4380,7 +4380,7 @@ const RAW_RUNTIME_STATE =
           ["vite-plugin-dts", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:4.2.3"],\
           ["vite-plugin-externalize-deps", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:0.8.0"],\
           ["vitest", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:2.1.2"],\
-          ["yaml", "npm:2.5.1"],\
+          ["yaml", "npm:2.6.0"],\
           ["zod", "npm:3.23.8"]\
         ],\
         "packagePeers": [\
@@ -4486,7 +4486,7 @@ const RAW_RUNTIME_STATE =
           ["vite-plugin-dts", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:4.2.3"],\
           ["vite-plugin-externalize-deps", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:0.8.0"],\
           ["vitest", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:2.1.2"],\
-          ["yaml", "npm:2.5.1"],\
+          ["yaml", "npm:2.6.0"],\
           ["zod", "npm:3.23.8"]\
         ],\
         "packagePeers": [\
@@ -4583,7 +4583,7 @@ const RAW_RUNTIME_STATE =
           ["vite-plugin-dts", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:4.2.3"],\
           ["vite-plugin-externalize-deps", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:0.8.0"],\
           ["vitest", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:2.1.2"],\
-          ["yaml", "npm:2.5.1"],\
+          ["yaml", "npm:2.6.0"],\
           ["zod", "npm:3.23.8"]\
         ],\
         "linkType": "SOFT"\
@@ -20083,7 +20083,7 @@ const RAW_RUNTIME_STATE =
           ["semver", "npm:7.6.3"],\
           ["slash", "npm:2.0.0"],\
           ["tmp", "npm:0.0.33"],\
-          ["yaml", "npm:2.5.1"]\
+          ["yaml", "npm:2.6.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -21711,7 +21711,7 @@ const RAW_RUNTIME_STATE =
           ["estree-util-value-to-estree", "npm:3.1.2"],\
           ["toml", "npm:3.0.0"],\
           ["unified", "npm:11.0.5"],\
-          ["yaml", "npm:2.5.1"]\
+          ["yaml", "npm:2.6.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -24060,7 +24060,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["vfile-matter", "npm:5.0.0"],\
           ["vfile", "npm:6.0.3"],\
-          ["yaml", "npm:2.5.1"]\
+          ["yaml", "npm:2.6.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -25032,10 +25032,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["npm:2.5.1", {\
-        "packageLocation": "./.yarn/cache/yaml-npm-2.5.1-8b2871f510-40fba56828.zip/node_modules/yaml/",\
+      ["npm:2.6.0", {\
+        "packageLocation": "./.yarn/cache/yaml-npm-2.6.0-1c0bd2fcf8-9e74cdb91c.zip/node_modules/yaml/",\
         "packageDependencies": [\
-          ["yaml", "npm:2.5.1"]\
+          ["yaml", "npm:2.6.0"]\
         ],\
         "linkType": "HARD"\
       }]\
