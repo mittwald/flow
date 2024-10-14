@@ -2967,6 +2967,71 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@mittwald/flow-react-remote-components@workspace:packages/react-remote-components":
+  version: 0.0.0-use.local
+  resolution: "@mittwald/flow-react-remote-components@workspace:packages/react-remote-components"
+  dependencies:
+    "@mittwald/flow-react-components": "workspace:^"
+    "@mittwald/flow-remote-elements": "workspace:^"
+    "@remote-dom/core": "npm:^1.5.0"
+    "@remote-dom/react": "npm:^1.2.0"
+    "@types/node": "npm:^22.7.5"
+    "@types/react": "npm:^18.3.11"
+    nx: "npm:^20.0.0"
+    prettier: "npm:^3.3.3"
+    react: "npm:^18.3.1"
+    typescript: "npm:^5.6.3"
+    vite: "npm:^5.4.8"
+    vite-plugin-checker: "npm:^0.8.0"
+    vite-plugin-dts: "npm:^4.2.3"
+    vite-plugin-externalize-deps: "npm:^0.8.0"
+  peerDependencies:
+    react: ~18.3.0
+  languageName: unknown
+  linkType: soft
+
+"@mittwald/flow-react-remote-renderer@workspace:packages/react-remote-renderer":
+  version: 0.0.0-use.local
+  resolution: "@mittwald/flow-react-remote-renderer@workspace:packages/react-remote-renderer"
+  dependencies:
+    "@mittwald/flow-react-components": "workspace:^"
+    "@mittwald/flow-remote-elements": "workspace:^"
+    "@remote-dom/core": "npm:^1.5.0"
+    "@remote-dom/react": "npm:^1.2.0"
+    "@types/node": "npm:^22.7.5"
+    "@types/react": "npm:^18.3.11"
+    nx: "npm:^20.0.0"
+    prettier: "npm:^3.3.3"
+    react: "npm:^18.3.1"
+    remeda: "npm:^2.15.0"
+    typescript: "npm:^5.6.3"
+    vite: "npm:^5.4.8"
+    vite-plugin-checker: "npm:^0.8.0"
+    vite-plugin-dts: "npm:^4.2.3"
+    vite-plugin-externalize-deps: "npm:^0.8.0"
+  peerDependencies:
+    react: ~18.3.0
+  languageName: unknown
+  linkType: soft
+
+"@mittwald/flow-remote-elements@workspace:^, @mittwald/flow-remote-elements@workspace:packages/remote-elements":
+  version: 0.0.0-use.local
+  resolution: "@mittwald/flow-remote-elements@workspace:packages/remote-elements"
+  dependencies:
+    "@mittwald/flow-react-components": "workspace:^"
+    "@remote-dom/core": "npm:^1.5.0"
+    "@types/node": "npm:^22.7.5"
+    nx: "npm:^20.0.0"
+    prettier: "npm:^3.3.3"
+    type-fest: "npm:^4.26.1"
+    typescript: "npm:^5.6.3"
+    vite: "npm:^5.4.8"
+    vite-plugin-checker: "npm:^0.8.0"
+    vite-plugin-dts: "npm:^4.2.3"
+    vite-plugin-externalize-deps: "npm:^0.8.0"
+  languageName: unknown
+  linkType: soft
+
 "@mittwald/flow-stylesheet@workspace:packages/stylesheet":
   version: 0.0.0-use.local
   resolution: "@mittwald/flow-stylesheet@workspace:packages/stylesheet"
@@ -5424,6 +5489,46 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@remote-dom/core@npm:^1.5.0":
+  version: 1.5.0
+  resolution: "@remote-dom/core@npm:1.5.0"
+  dependencies:
+    "@remote-dom/polyfill": "npm:^1.3.0"
+    htm: "npm:^3.1.1"
+  peerDependencies:
+    "@preact/signals-core": ^1.3.0
+  peerDependenciesMeta:
+    "@preact/signals-core":
+      optional: true
+    preact:
+      optional: true
+  checksum: 10c0/1cf8f7ebc8f7f48edc51c09127524b8eb946a90dcc8dec92dc7ce5fa4ca7e86c303d53ff71119ffd20f24d1a728362548823bbf17a3179654c9246dc00cd1d57
+  languageName: node
+  linkType: hard
+
+"@remote-dom/polyfill@npm:^1.3.0":
+  version: 1.4.0
+  resolution: "@remote-dom/polyfill@npm:1.4.0"
+  checksum: 10c0/fa05a20dad70c19eec26d594f320c333defc1da24e4d9511e4b918b7df9e8be4d027033295b0dae9799c38c0eb08cc3bd7849295447166ad94357ac3736f3c66
+  languageName: node
+  linkType: hard
+
+"@remote-dom/react@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "@remote-dom/react@npm:1.2.0"
+  dependencies:
+    "@remote-dom/core": "npm:^1.5.0"
+    "@types/react": "npm:^18.0.0"
+    htm: "npm:^3.1.1"
+  peerDependencies:
+    react: ^17.0.0 || ^18.0.0
+  peerDependenciesMeta:
+    react:
+      optional: true
+  checksum: 10c0/a11d263aa554c30b343e29c4266bebedf0cb1aca2630815dee416cfb8179b70e7d7c25a810f551f6e9112a8f10b3dc7c0001866a05e10181e6eee64137c9403b
+  languageName: node
+  linkType: hard
+
 "@rollup/pluginutils@npm:^5.0.2, @rollup/pluginutils@npm:^5.1.0":
   version: 5.1.0
   resolution: "@rollup/pluginutils@npm:5.1.0"
@@ -6903,7 +7008,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:^18.3.11":
+"@types/react@npm:^18.0.0, @types/react@npm:^18.3.11":
   version: 18.3.11
   resolution: "@types/react@npm:18.3.11"
   dependencies:
@@ -11434,6 +11539,13 @@ __metadata:
   dependencies:
     lru-cache: "npm:^10.0.1"
   checksum: 10c0/b19dbd92d3c0b4b0f1513cf79b0fc189f54d6af2129eeb201de2e9baaa711f1936929c848b866d9c8667a0f956f34bf4f07418c12be1ee9ca74fd9246335ca1f
+  languageName: node
+  linkType: hard
+
+"htm@npm:^3.1.1":
+  version: 3.1.1
+  resolution: "htm@npm:3.1.1"
+  checksum: 10c0/0de4c8fff2b8e76c162235ae80dbf93ca5eef1575bd50596a06ce9bebf1a6da5efc467417c53034a9ffa2ab9ecff819cbec041dc9087894b2b900ad4de26c7e7
   languageName: node
   linkType: hard
 

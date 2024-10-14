@@ -1,0 +1,46 @@
+{
+  "name": "@mittwald/flow-react-remote-renderer",
+  "version": "0.1.0-alpha.281",
+  "type": "module",
+  "description": "React rendering for Flow Remote Elements",
+  "homepage": "https://mittwald.github.io/flow",
+  "repository": "https://github.com/mittwald/flow",
+  "exports": {
+    "types": "./dist/types/index.d.ts",
+    "default": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=20.11"
+  },
+  "scripts": {
+    "build": "run vite build --config vite.build.config.ts",
+    "build:deps:watch": "run -T build:deps:watch @mittwald/flow-react-components",
+    "test": "",
+    "test:compile": "run tsc --noEmit"
+  },
+  "dependencies": {
+    "@mittwald/flow-react-components": "workspace:^",
+    "@mittwald/flow-remote-elements": "workspace:^",
+    "@remote-dom/core": "^1.5.0",
+    "@remote-dom/react": "^1.2.0",
+    "remeda": "^2.15.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.5",
+    "@types/react": "^18.3.11",
+    "nx": "^20.0.0",
+    "prettier": "^3.3.3",
+    "react": "^18.3.1",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.8",
+    "vite-plugin-checker": "^0.8.0",
+    "vite-plugin-dts": "^4.2.3",
+    "vite-plugin-externalize-deps": "^0.8.0"
+  },
+  "peerDependencies": {
+    "react": "~18.3.0"
+  }
+}
