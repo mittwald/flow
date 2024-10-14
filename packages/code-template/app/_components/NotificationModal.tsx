@@ -6,33 +6,21 @@ import type { FC } from "react";
 import { Content } from "@mittwald/flow-react-components/Content";
 import Avatar from "@mittwald/flow-react-components/Avatar";
 import { IconNotification } from "@mittwald/flow-react-components/Icons";
+import type { Notification } from "@/api/notificationApi";
+import { listNotifications } from "@/api/notificationApi";
 
 export const NotificationModal: FC = () => {
-  const NotificationList = typedList<{ title: string; date: string }>();
+  const NotificationList = typedList<Notification>();
+  const notifications = listNotifications();
 
   return (
     <Modal offCanvas>
       <Heading>Benachrichtigungen</Heading>
       <Content>
         <NotificationList.List>
-          <NotificationList.StaticData
-            data={[
-              {
-                title: "Speicherplatz fast voll",
-                date: "13.09.2024, 07:15 Uhr",
-              },
-              {
-                title: "Projekt erfolgreich angelegt",
-                date: "01.09.2024, 15:52 Uhr",
-              },
-              {
-                title: "Organisation erfolgreich angelegt",
-                date: "30.08.2024, 12:28 Uhr",
-              },
-            ]}
-          />
+          <NotificationList.StaticData data={notifications} />
 
-          <NotificationList.Item>
+          <NotificationList.Item href={(notification) => notification.href}>
             {(notification) => (
               <ListItemView>
                 <Avatar color="blue">

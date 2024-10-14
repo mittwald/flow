@@ -3,12 +3,7 @@ import type { FC } from "react";
 import { HeaderNavigation as HeaderNavigationComponent } from "@mittwald/flow-react-components/HeaderNavigation";
 import Button from "@mittwald/flow-react-components/Button";
 import {
-  IconDashboard,
-  IconDomain,
-  IconEmail,
-  IconInvoice,
   IconLogout,
-  IconMember,
   IconMenu,
   IconNotification,
 } from "@mittwald/flow-react-components/Icons";
@@ -28,7 +23,12 @@ import { Content } from "@mittwald/flow-react-components/Content";
 import { Text } from "@mittwald/flow-react-components/Text";
 import { Heading } from "@mittwald/flow-react-components/Heading";
 import Link from "@mittwald/flow-react-components/Link";
-import { usePathname } from "next/navigation";
+import { CustomerDashboardLink } from "@/app/customer/_components/CustomerDashboardLink";
+import { CustomerMembersLink } from "@/app/customer/_components/CustomerMembersLink";
+import { CustomerInvoicesLink } from "@/app/customer/_components/CustomerInvoicesLink";
+import { ProjectDashboardLink } from "@/app/project/_components/ProjectDashboardLink";
+import { ProjectDomainsLink } from "@/app/project/_components/ProjectDomainsLink";
+import { ProjectEmailsLink } from "@/app/project/_components/ProjectEmailsLink";
 
 interface Props {
   className?: string;
@@ -36,8 +36,6 @@ interface Props {
 
 export const MobileNavigation: FC<Props> = (props) => {
   const { className } = props;
-
-  const currentPathname = usePathname();
 
   return (
     <HeaderNavigationComponent
@@ -65,76 +63,15 @@ export const MobileNavigation: FC<Props> = (props) => {
             <Navigation>
               <NavigationGroup>
                 <Label>Organisation</Label>
-                <Link
-                  href="/customer/dashboard"
-                  aria-current={
-                    currentPathname.includes("customer/dashboard")
-                      ? "page"
-                      : undefined
-                  }
-                >
-                  <IconDashboard />
-                  <Text>Dashboard</Text>
-                </Link>
-
-                <Link
-                  href="/customer/members"
-                  aria-current={
-                    currentPathname.includes("customer/members")
-                      ? "page"
-                      : undefined
-                  }
-                >
-                  <IconMember />
-                  <Text>Mitglieder</Text>
-                </Link>
-                <Link
-                  href="/customer/invoices"
-                  aria-current={
-                    currentPathname.includes("customer/invoices")
-                      ? "page"
-                      : undefined
-                  }
-                >
-                  <IconInvoice />
-                  <Text>Rechnungen</Text>
-                </Link>
+                <CustomerDashboardLink />
+                <CustomerMembersLink />
+                <CustomerInvoicesLink />
               </NavigationGroup>
               <NavigationGroup>
                 <Label>Projekt</Label>
-                <Link
-                  href="/project/dashboard"
-                  aria-current={
-                    currentPathname.includes("project/dashboard")
-                      ? "page"
-                      : undefined
-                  }
-                >
-                  <IconDashboard />
-                  <Text>Dashboard</Text>
-                </Link>
-                <Link
-                  href="/project/domains"
-                  aria-current={
-                    currentPathname.includes("project/domains")
-                      ? "page"
-                      : undefined
-                  }
-                >
-                  <IconDomain />
-                  <Text>Domains</Text>
-                </Link>
-                <Link
-                  href="/project/emails"
-                  aria-current={
-                    currentPathname.includes("project/emails")
-                      ? "page"
-                      : undefined
-                  }
-                >
-                  <IconEmail />
-                  <Text>E-Mails</Text>
-                </Link>
+                <ProjectDashboardLink />
+                <ProjectDomainsLink />
+                <ProjectEmailsLink />
               </NavigationGroup>
               <NavigationGroup>
                 <Label>User Settings</Label>

@@ -1,7 +1,7 @@
 "use client";
 import Avatar from "@mittwald/flow-react-components/Avatar";
 import Heading from "@mittwald/flow-react-components/Heading";
-import { typedList } from "@mittwald/flow-react-components/List";
+import { ListSummary, typedList } from "@mittwald/flow-react-components/List";
 import Section from "@mittwald/flow-react-components/Section";
 import Text from "@mittwald/flow-react-components/Text";
 import styles from "@/app/layout.module.scss";
@@ -28,6 +28,11 @@ export default function Page() {
       <LayoutCard className={styles.content}>
         <Section>
           <InvoiceList.List defaultViewMode="table">
+            <ListSummary>
+              <Text style={{ display: "block", textAlign: "right" }}>
+                <b>Gesamt: 108 €</b>
+              </Text>
+            </ListSummary>
             <InvoiceList.StaticData data={invoices} />
             <InvoiceList.Search autoFocus />
 

@@ -14,12 +14,12 @@ import LayoutCard from "@mittwald/flow-react-components/LayoutCard";
 import Breadcrumb from "@mittwald/flow-react-components/Breadcrumb";
 import Link from "@mittwald/flow-react-components/Link";
 import styles from "@/app/layout.module.scss";
+import type { Email } from "@/api/emailApi";
+import { listEmails } from "@/api/emailApi";
 
 export default function Page() {
-  const EmailList = typedList<{
-    email: string;
-    storage: number;
-  }>();
+  const EmailList = typedList<Email>();
+  const emails = listEmails();
 
   return (
     <>
@@ -36,12 +36,7 @@ export default function Page() {
             <TabTitle>E-Mail-Adressen</TabTitle>
             <Content>
               <EmailList.List>
-                <EmailList.StaticData
-                  data={[
-                    { email: "john@doe.de", storage: 80 },
-                    { email: "max@mustermann.de", storage: 20 },
-                  ]}
-                />
+                <EmailList.StaticData data={emails} />
                 <EmailList.Search />
                 <EmailList.Sorting
                   property="email"
