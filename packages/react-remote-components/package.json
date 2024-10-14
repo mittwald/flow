@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-react-remote-components",
-  "version": "0.1.0-alpha.281",
+  "version": "0.1.0-experimental.0",
   "type": "module",
   "description": "React components that can be used in a remote environment",
   "homepage": "https://mittwald.github.io/flow",
