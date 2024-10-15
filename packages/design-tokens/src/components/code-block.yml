@@ -13,15 +13,58 @@ code-block:
     value: "{neutral-soft-background-color.default}"
   neutral-content-color:
     value: "{neutral-soft-content-color.default}"
+  neutral-content-accent-color-1:
+    value: "#666666"
+  neutral-content-accent-color-2:
+    value: "#880000"
+  neutral-content-accent-color-3:
+    value: "#a94747"
+  neutral-content-accent-color-4:
+    value: "#4c6d3b"
+  neutral-content-accent-color-5:
+    value: "#397300"
+  neutral-content-accent-color-6:
+    value: "#1e6e94"
+  neutral-content-accent-color-7:
+    value: "#326d8b"
 
   # Light Color
   light-background-color:
     value: "{light-soft-background-color.default}"
   light-content-color:
     value: "{light-soft-content-color.default}"
+  light-content-accent-color-1:
+    value: "#b8b8b8"
+  light-content-accent-color-2:
+    value: "#ff9e9e"
+  light-content-accent-color-3:
+    value: "#dcacac"
+  light-content-accent-color-4:
+    value: "#9fc28e"
+  light-content-accent-color-5:
+    value: "#68d100"
+  light-content-accent-color-6:
+    value: "#77c0e4"
+  light-content-accent-color-7:
+    value: "#8ebfd7"
 
   # Dark Color
   dark-background-color:
     value: "{dark-soft-background-color.default}"
   dark-content-color:
     value: "{dark-soft-content-color.default}"
+
+  dark-content-accent-color-1:
+    value: "#575757"
+  dark-content-accent-color-2:
+    value: "#880000"
+  dark-content-accent-color-3:
+    value: "#8c3b3b"
+  dark-content-accent-color-4:
+    value: "#405d32"
+  dark-content-accent-color-5:
+    value: "#306100"
+  dark-content-accent-color-6:
+    value: "#195b7b"
+  dark-content-accent-color-7:
+    value: "#2a5b74"

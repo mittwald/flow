@@ -6,7 +6,6 @@ import type { PropsWithClassName } from "@/lib/types/props";
 import clsx from "clsx";
 import { CopyButton } from "@/components/CopyButton";
 import styles from "./CodeBlock.module.scss";
-import { a11yDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 export interface CodeBlockProps
   extends Omit<SyntaxHighlighterProps, "children">,
@@ -29,7 +28,7 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
           padding: "none",
           margin: "none",
         }}
-        style={color === "light" ? a11yDark : undefined}
+        useInlineStyles={false}
         {...rest}
       >
         {code}

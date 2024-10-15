@@ -16,6 +16,56 @@
     &:where(.#{$color}) {
       color: var(--code-block--#{$color}-content-color);
       background-color: var(--code-block--#{$color}-background-color);
+
+      :global(.hljs-subst) {
+        color: var(--code-block--#{$color}-content-color);
+      }
+
+      :global(.hljs-comment) {
+        color: var(--code-block--#{$color}-content-accent-color-1);
+      }
+
+      :global(.hljs-type),
+      :global(.hljs-string),
+      :global(.hljs-number),
+      :global(.hljs-selector-id),
+      :global(.hljs-selector-class),
+      :global(.hljs-quote),
+      :global(.hljs-template-tag),
+      :global(.hljs-deletion),
+      :global(.hljs-title),
+      :global(.hljs-section) {
+        color: var(--code-block--#{$color}-content-accent-color-2);
+      }
+
+      :global(.hljs-regexp),
+      :global(.hljs-symbol),
+      :global(.hljs-variable),
+      :global(.hljs-template-variable),
+      :global(.hljs-link),
+      :global(.hljs-selector-attr),
+      :global(.hljs-selector-pseudo) {
+        color: var(--code-block--#{$color}-content-accent-color-3);
+      }
+
+      :global(.hljs-literal) {
+        color: var(--code-block--#{$color}-content-accent-color-4);
+      }
+
+      :global(.hljs-built_in),
+      :global(.hljs-bullet),
+      :global(.hljs-code),
+      :global(.hljs-addition) {
+        color: var(--code-block--#{$color}-content-accent-color-5);
+      }
+
+      :global(.hljs-meta) {
+        color: var(--code-block--#{$color}-content-accent-color-6);
+      }
+
+      :global(.hljs-meta-string) {
+        color: var(--code-block--#{$color}-content-accent-color-7);
+      }
     }
   }
 
