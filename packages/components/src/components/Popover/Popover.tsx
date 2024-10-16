@@ -58,7 +58,10 @@ export const Popover = flowComponent("Popover", (props) => {
           </svg>
         </Aria.OverlayArrow>
       )}
-      <ContentComponent style={{ width }} className={clsx(styles.content, contentClassName)}>
+      <ContentComponent
+        style={{ width }}
+        className={clsx(styles.content, contentClassName)}
+      >
         <OverlayContextProvider type="Popover" controller={controller}>
           {children}
         </OverlayContextProvider>
