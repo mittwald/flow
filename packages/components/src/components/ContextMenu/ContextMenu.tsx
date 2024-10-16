@@ -24,6 +24,7 @@ export interface ContextMenuProps
     >,
     FlowComponentProps {
   selectionMode?: "single" | "multiple" | "navigation";
+  width?: string | number;
 }
 
 export const ContextMenu = flowComponent("ContextMenu", (props) => {
