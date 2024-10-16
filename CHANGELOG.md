@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.284](https://github.com/mittwald/flow/compare/0.1.0-alpha.283...0.1.0-alpha.284) (2024-10-16)
+
+### Features
+
+- **ContextMenu:** add width
+  ([fcc5cab](https://github.com/mittwald/flow/commit/fcc5cab76abb9d64eee4ad664309e3bc7a54c118))
+- **ContextMenu:** add width
+  ([60445ae](https://github.com/mittwald/flow/commit/60445aed25285447ab6aebf187ce9e0462386eac))
+- **ContextMenu:** add width
+  ([956ccf3](https://github.com/mittwald/flow/commit/956ccf314a2fd082733520ed8660f62f6297b3e5))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.283](https://github.com/mittwald/flow/compare/0.1.0-alpha.282...0.1.0-alpha.283) (2024-10-11)
 
 **Note:** Version bump only for package @mittwald/flow-project
