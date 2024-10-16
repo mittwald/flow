@@ -115,5 +115,3 @@ export const WithContextMenuSection: Story = {
     defaultOpen: true,
   },
 };
-
-export const CustomWidth: Story = { args: { width: 400 } };

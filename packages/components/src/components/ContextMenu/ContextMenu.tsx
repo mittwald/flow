@@ -24,7 +24,6 @@ export interface ContextMenuProps
     >,
     FlowComponentProps {
   selectionMode?: "single" | "multiple" | "navigation";
-  width?: string | number;
 }
 
 export const ContextMenu = flowComponent("ContextMenu", (props) => {
@@ -38,7 +37,6 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
     onSelectionChange,
     refProp: ref,
     controller: overlayControllerFromProps,
-    width,
     ...rest
   } = props;
 
@@ -76,7 +74,6 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
   return (
     <ClearPropsContext>
       <Popover
-        width={width}
         {...rest}
         contentClassName={styles.popoverContent}
         controller={overlayController}

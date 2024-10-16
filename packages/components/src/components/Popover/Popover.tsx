@@ -13,7 +13,6 @@ export interface PopoverProps
   isDialogContent?: boolean;
   controller?: OverlayController;
   contentClassName?: string;
-  width?: string | number;
 }
 
 export const Popover = flowComponent("Popover", (props) => {
@@ -26,7 +25,6 @@ export const Popover = flowComponent("Popover", (props) => {
     withTip,
     refProp: ref,
     defaultOpen = false,
-    width,
     ...rest
   } = props;
 
@@ -58,10 +56,7 @@ export const Popover = flowComponent("Popover", (props) => {
           </svg>
         </Aria.OverlayArrow>
       )}
-      <ContentComponent
-        style={{ width }}
-        className={clsx(styles.content, contentClassName)}
-      >
+      <ContentComponent className={clsx(styles.content, contentClassName)}>
         <OverlayContextProvider type="Popover" controller={controller}>
           {children}
         </OverlayContextProvider>
