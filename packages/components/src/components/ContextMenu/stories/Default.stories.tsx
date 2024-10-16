@@ -1,9 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import ContextMenu, {
-  ContextMenuTrigger,
-  MenuItem,
-} from "@/components/ContextMenu";
+import ContextMenu, { ContextMenuTrigger, MenuItem } from "@/components/ContextMenu";
 import { Button } from "@/components/Button";
 import { Separator } from "@/components/Separator";
 import { Heading } from "@/components/Heading";
@@ -115,3 +112,5 @@ export const WithContextMenuSection: Story = {
     defaultOpen: true,
   },
 };
+
+export const CustomWidth: Story = { args: { width: 400 } };
