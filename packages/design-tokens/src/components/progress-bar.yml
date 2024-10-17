@@ -5,21 +5,23 @@ progress-bar:
     value: "{font-size-text.s}"
   value-font-weight:
     value: "{font-weight.bold}"
-  label-to-bar-spacing:
+  spacing-y:
     value: "{size-rem.xs}"
-  label-to-value-spacing:
+  spacing-x:
     value: "{size-rem.m}"
 
-  bar-height:
+  height:
     value: "{size-rem.s}"
-  bar-height-s:
+  height-s:
     value: 0.375rem
-  bar-corner-radius:
+  corner-radius:
     value: "{size-rem.xs}"
-  bar-border-width:
+  border-width:
     value: "{border-width.100}"
-  bar-border-color:
+  border-color:
     value: "{neutral-outline-border-color}"
+  background-color:
+    value: "{neutral-outline-background-color}"
 
   # Info
   info-fill-background-color:
