@@ -218,7 +218,7 @@ export default () => {
               </Text>
               <ColumnLayout m={[1, 1]}>
                 <TextField isRequired>
-                  <Label>Beschreibung</Label>
+                  <Label>Bezeichnung</Label>
                 </TextField>
                 <DatePicker>
                   <Label>Ablaufdatum</Label>
@@ -243,7 +243,7 @@ export default () => {
                 <Radio value="ssh">SSH-Key</Radio>
               </RadioGroup>
               <ColumnLayout s={[1, 1]}>
-                <TextField>
+                <TextField isRequired>
                   <Label>Passwort</Label>
                 </TextField>
               </ColumnLayout>
@@ -277,7 +277,7 @@ export default () => {
             <Section>
               <Heading>Verzeichnisauswahl</Heading>
               <Text>
-                Hier legst du das Verzeichnis fest, auf dsa
+                Hier legst du das Verzeichnis fest, auf das
                 der SFTP-Benutzer Zugriff hat.
               </Text>
               <TextField isRequired>
