@@ -116,7 +116,7 @@ export default () => {
           </Heading>
           <Content>
             <Section>
-              <Heading>Widget-Sichtbarkeit</Heading>
+              <Heading level={3}>Widget-Sichtbarkeit</Heading>
               <Text>
                 Aktiviere und deaktiviere die Widgets, die
                 du wirklich benötigst. So bestimmst du
@@ -210,7 +210,7 @@ export default () => {
           </Heading>
           <Content>
             <Section>
-              <Heading>Beschreibung</Heading>
+              <Heading level={3}>Beschreibung</Heading>
               <Text>
                 Mit einem SFTP-Benutzer kannst du dich mit
                 deinem Projekt verbinden, um z.B. Dateien
@@ -218,7 +218,7 @@ export default () => {
               </Text>
               <ColumnLayout m={[1, 1]}>
                 <TextField isRequired>
-                  <Label>Beschreibung</Label>
+                  <Label>Bezeichnung</Label>
                 </TextField>
                 <DatePicker>
                   <Label>Ablaufdatum</Label>
@@ -230,7 +230,7 @@ export default () => {
               </ColumnLayout>
             </Section>
             <Section>
-              <Heading>Authentifizierung</Heading>
+              <Heading level={3}>Authentifizierung</Heading>
               <Text>
                 Wähle zwischen der Authentifikation per
                 Passwort oder über einen SSH-Key.
@@ -243,13 +243,13 @@ export default () => {
                 <Radio value="ssh">SSH-Key</Radio>
               </RadioGroup>
               <ColumnLayout s={[1, 1]}>
-                <TextField>
+                <TextField isRequired>
                   <Label>Passwort</Label>
                 </TextField>
               </ColumnLayout>
             </Section>
             <Section>
-              <Heading>Berechtigungen</Heading>
+              <Heading level={3}>Berechtigungen</Heading>
               <Text>
                 Wähle hier die Berechtigungen aus, mit denen
                 der SFTP-Benutzer zugreifen darf.
@@ -275,9 +275,9 @@ export default () => {
               </RadioGroup>
             </Section>
             <Section>
-              <Heading>Verzeichnisauswahl</Heading>
+              <Heading level={3}>Verzeichnisauswahl</Heading>
               <Text>
-                Hier legst du das Verzeichnis fest, auf dsa
+                Hier legst du das Verzeichnis fest, auf das
                 der SFTP-Benutzer Zugriff hat.
               </Text>
               <TextField isRequired>
