@@ -7,13 +7,14 @@ import { useState } from "react";
 import { FieldDescription } from "@mittwald/flow-react-components/FieldDescription";
 import { ColumnLayout } from "@mittwald/flow-react-components/ColumnLayout";
 import { TextField } from "@mittwald/flow-react-components/TextField";
+import { Section } from "@mittwald/flow-react-components/Section";
 
 export default () => {
   const [showContent, setShowContent] =
     useState<boolean>(false);
 
   return (
-    <>
+    <Section>
       <RadioGroup
         variant="segmented"
         defaultValue="lastschrift"
@@ -40,6 +41,6 @@ export default () => {
           </TextField>
         </ColumnLayout>
       )}
-    </>
+    </Section>
   );
 };
