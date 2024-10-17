@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.287](https://github.com/mittwald/flow/compare/0.1.0-alpha.286...0.1.0-alpha.287) (2024-10-17)
+
+### Bug Fixes
+
+- **Docs:** adjust content of different modal sizes to concept
+  ([#855](https://github.com/mittwald/flow/issues/855))
+  ([be7e741](https://github.com/mittwald/flow/commit/be7e7416fb9faf1445384058fb7d13816b9e5f69))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.286](https://github.com/mittwald/flow/compare/0.1.0-alpha.285...0.1.0-alpha.286) (2024-10-16)
 
 **Note:** Version bump only for package @mittwald/flow-project
