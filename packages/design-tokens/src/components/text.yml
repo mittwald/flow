@@ -6,3 +6,7 @@ text:
       value: "{light-plain-content-color}"
     dark:
       value: "{dark-plain-content-color}"
+    disabled:
+      value: "{disabled-plain-content-color}"
+  max-width:
+    value: "780px"
