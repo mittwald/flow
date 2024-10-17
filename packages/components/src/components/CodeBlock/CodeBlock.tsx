@@ -11,12 +11,12 @@ export interface CodeBlockProps
   extends Omit<SyntaxHighlighterProps, "children">,
     PropsWithClassName {
   copyable?: boolean;
-  color?: "neutral" | "light" | "dark";
+  color?: "default" | "light" | "dark";
   code: string | string[];
 }
 
 export const CodeBlock: FC<CodeBlockProps> = (props) => {
-  const { code, className, copyable, color = "neutral", ...rest } = props;
+  const { code, className, copyable, color = "default", ...rest } = props;
 
   const rootClassName = clsx(styles.codeBlock, styles[color], className);
 
@@ -36,7 +36,7 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
       {copyable && (
         <CopyButton
           size="s"
-          color={color === "neutral" ? "dark" : color}
+          color={color === "default" ? "dark" : color}
           text={code}
         />
       )}
