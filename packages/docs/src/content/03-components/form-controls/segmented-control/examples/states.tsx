@@ -3,9 +3,9 @@ import {
   RadioGroup,
 } from "@mittwald/flow-react-components/RadioGroup";
 import { Label } from "@mittwald/flow-react-components/Label";
-import { Column } from "@/lib/liveCode/components/LiveCodeEditor/components";
+import { Section } from "@mittwald/flow-react-components/Section";
 
-<Column>
+<Section>
   <RadioGroup variant="segmented" defaultValue="dev">
     <Label>Rolle</Label>
     <Radio value="entwickler">Entwickler</Radio>
@@ -24,4 +24,4 @@ import { Column } from "@/lib/liveCode/components/LiveCodeEditor/components";
     <Radio value="geschäftsführer">Geschäftsführer</Radio>
     <Radio value="andere">Andere</Radio>
   </RadioGroup>
-</Column>;
+</Section>;
