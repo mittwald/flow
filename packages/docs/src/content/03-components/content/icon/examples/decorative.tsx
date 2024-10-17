@@ -23,6 +23,7 @@ import {
   IconOrder,
   IconPayment,
   IconPerformance,
+  IconPicture,
   IconProject,
   IconSearchEngine,
   IconSecurity,
@@ -199,5 +200,9 @@ import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
   <LabeledValue>
     <Label>SshKey</Label>
     <IconSshKey />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Picture</Label>
+    <IconPicture />
   </LabeledValue>
 </ColumnLayout>;

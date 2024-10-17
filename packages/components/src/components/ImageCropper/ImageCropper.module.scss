@@ -1,0 +1,13 @@
+.imageCropper {
+  width: var(--image-cropper--width);
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--image-cropper--cropper-to-slider-spacing);
+
+  .cropperContainer {
+    position: relative;
+    height: var(--image-cropper--height);
+    border-radius: var(--image-cropper--corner-radius);
+    overflow: hidden;
+  }
+}
