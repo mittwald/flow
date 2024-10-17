@@ -116,7 +116,9 @@ export default () => {
           </Heading>
           <Content>
             <Section>
-              <Heading level={3}>Widget-Sichtbarkeit</Heading>
+              <Heading level={3}>
+                Widget-Sichtbarkeit
+              </Heading>
               <Text>
                 Aktiviere und deaktiviere die Widgets, die
                 du wirklich benötigst. So bestimmst du
@@ -275,7 +277,9 @@ export default () => {
               </RadioGroup>
             </Section>
             <Section>
-              <Heading level={3}>Verzeichnisauswahl</Heading>
+              <Heading level={3}>
+                Verzeichnisauswahl
+              </Heading>
               <Text>
                 Hier legst du das Verzeichnis fest, auf das
                 der SFTP-Benutzer Zugriff hat.
