@@ -3,10 +3,10 @@ import TextField from "@mittwald/flow-react-components/TextField";
 import Label from "@mittwald/flow-react-components/Label";
 
 <ColumnLayout s={[1, 1]}>
-  <TextField>
+  <TextField isRequired>
     <Label>Vorname</Label>
   </TextField>
-  <TextField>
+  <TextField isRequired>
     <Label>Nachname</Label>
   </TextField>
 </ColumnLayout>;
