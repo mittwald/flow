@@ -1,4 +1,6 @@
 import type { FC } from "react";
+import clsx from "clsx";
+import styles from "./Sample.module.scss";
 
 interface SampleProps {
   value: string;
@@ -9,10 +11,9 @@ export const SizeSample: FC<SampleProps> = (props) => {
 
   return (
     <div
+      className={clsx(styles.box, styles.filled)}
       style={{
         width: value,
-        height: "24px",
-        backgroundColor: "black",
       }}
     />
   );

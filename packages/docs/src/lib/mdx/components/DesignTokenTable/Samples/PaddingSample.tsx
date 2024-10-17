@@ -1,4 +1,6 @@
 import type { FC } from "react";
+import clsx from "clsx";
+import styles from "./Sample.module.scss";
 
 interface SampleProps {
   value: string;
@@ -9,22 +11,12 @@ export const PaddingSample: FC<SampleProps> = (props) => {
 
   return (
     <div
+      className={clsx(styles.wrapper, styles.padding)}
       style={{
-        borderRadius: "4px",
-        backgroundColor: "gray",
         padding: value,
-        width: "fit-content",
-        border: "1px solid black",
       }}
     >
-      <div
-        style={{
-          width: "24px",
-          height: "24px",
-          backgroundColor: "white",
-          borderRadius: "4px",
-        }}
-      />
+      <div className={clsx(styles.content, styles.padding)}>Content</div>
     </div>
   );
 };

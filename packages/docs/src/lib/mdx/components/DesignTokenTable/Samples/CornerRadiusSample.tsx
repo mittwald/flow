@@ -1,4 +1,6 @@
 import type { FC } from "react";
+import clsx from "clsx";
+import styles from "./Sample.module.scss";
 
 interface SampleProps {
   value: string;
@@ -9,12 +11,9 @@ export const CornerRadiusSample: FC<SampleProps> = (props) => {
 
   return (
     <div
+      className={clsx(styles.box, styles.filled)}
       style={{
-        width: "24px",
-        height: "24px",
-        borderLeft: "solid black",
-        borderTop: "solid black",
-        borderTopLeftRadius: value,
+        borderRadius: value,
       }}
     />
   );
