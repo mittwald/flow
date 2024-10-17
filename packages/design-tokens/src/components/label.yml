@@ -5,7 +5,7 @@ label:
     value: "{font-weight.bold}"
   line-height:
     value: "{line-height.m}"
-  content-to-content-spacing:
+  spacing:
     value: "{size-rem.xs}"
   color:
     default:
