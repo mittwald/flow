@@ -14,7 +14,6 @@ export interface IconProps
     FlowComponentProps {
   /** @default "m" */
   size?: "s" | "m" | "l";
-  color?: "light" | "dark";
 }
 
 export const Icon = flowComponent("Icon", (props) => {
@@ -23,7 +22,6 @@ export const Icon = flowComponent("Icon", (props) => {
     "aria-label": ariaLabel,
     children,
     size = "m",
-    color,
     refProp: ignoredRef,
     ...svgAttributes
   } = props;
@@ -39,7 +37,6 @@ export const Icon = flowComponent("Icon", (props) => {
       styles.icon,
       className,
       styles[`size-${size}`],
-      color && styles[color],
     ),
   };
 

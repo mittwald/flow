@@ -7,9 +7,5 @@ icon:
     l:
       value: 4rem
   color:
-    default:
-      value: "{neutral.color.800}"
-    light:
-      value: "{light-plain-content-color}"
-    dark:
-      value: "{dark-plain-content-color}"
+    value: "{neutral.color.800}"
+
