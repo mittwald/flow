@@ -1,23 +1,30 @@
 illustrated-message:
   padding:
-    value: "{size-px.xxl}"
-  padding-mobile:
-    value: "{size-px.l}"
-  icon-to-heading-spacing:
-    value: "{size-rem.m}"
-  heading-to-text-spacing:
-    value: "{size-rem.s}"
-  text-to-button-spacing:
+    value: "{size-px.m}"
+  spacing:
     value: "{size-rem.m}"
 
-  # Info
-  info-icon-color:
-    value: "{info.color.900}"
-  info-heading-color:
-    value: "{info.color.1000}"
+  # Primary
+  primary-icon-color:
+    value: "{primary.color.900}"
+  primary-heading-color:
+    value: "{heading.color}"
 
-  # Negative
-  negative-icon-color:
+  # Danger
+  danger-icon-color:
     value: "{danger.color.900}"
-  negative-heading-color:
+  danger-heading-color:
     value: "{danger.color.1000}"
+
+  # Dark
+  dark-icon-color:
+    value: "{dark-plain-content-color}"
+  dark-heading-color:
+    value: "{heading.color-dark}"
+
+  # Dark
+  light-icon-color:
+    value: "{light-plain-content-color}"
+  light-heading-color:
+    value: "{heading.color-light}"
+
