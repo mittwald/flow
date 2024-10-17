@@ -116,9 +116,7 @@ export default () => {
           </Heading>
           <Content>
             <Section>
-              <Heading level={3}>
-                Widget-Sichtbarkeit
-              </Heading>
+              <Heading>Widget-Sichtbarkeit</Heading>
               <Text>
                 Aktiviere und deaktiviere die Widgets, die
                 du wirklich benötigst. So bestimmst du
@@ -212,7 +210,7 @@ export default () => {
           </Heading>
           <Content>
             <Section>
-              <Heading level={3}>Beschreibung</Heading>
+              <Heading>Beschreibung</Heading>
               <Text>
                 Mit einem SFTP-Benutzer kannst du dich mit
                 deinem Projekt verbinden, um z.B. Dateien
@@ -232,7 +230,7 @@ export default () => {
               </ColumnLayout>
             </Section>
             <Section>
-              <Heading level={3}>Authentifizierung</Heading>
+              <Heading>Authentifizierung</Heading>
               <Text>
                 Wähle zwischen der Authentifikation per
                 Passwort oder über einen SSH-Key.
@@ -251,7 +249,7 @@ export default () => {
               </ColumnLayout>
             </Section>
             <Section>
-              <Heading level={3}>Berechtigungen</Heading>
+              <Heading>Berechtigungen</Heading>
               <Text>
                 Wähle hier die Berechtigungen aus, mit denen
                 der SFTP-Benutzer zugreifen darf.
@@ -277,9 +275,7 @@ export default () => {
               </RadioGroup>
             </Section>
             <Section>
-              <Heading level={3}>
-                Verzeichnisauswahl
-              </Heading>
+              <Heading>Verzeichnisauswahl</Heading>
               <Text>
                 Hier legst du das Verzeichnis fest, auf das
                 der SFTP-Benutzer Zugriff hat.
