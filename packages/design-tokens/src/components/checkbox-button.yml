@@ -1,7 +1,0 @@
-checkbox-button:
-  text-to-text-spacing:
-    value: "{size-rem.xs}"
-  icon-to-text-spacing:
-    value: "{size-rem.m}"
-  label-font-weight-with-content:
-    value: "{font-weight.bold}"
