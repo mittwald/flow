@@ -5,10 +5,7 @@ import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
 import { Button } from "@/components/Button";
 import { IconApp, IconDanger } from "@/components/Icon/components/icons";
-import {
-  storyBackgroundDark,
-  storyBackgroundLight,
-} from "@/lib/dev/storyBackgrounds";
+import { storyBackgroundDark, storyBackgroundLight } from "@/lib/dev/storyBackgrounds";
 
 const meta: Meta<typeof IllustratedMessage> = {
   title: "Content/Illustrated Message",
@@ -26,7 +23,7 @@ const meta: Meta<typeof IllustratedMessage> = {
       control: "inline-radio",
     },
   },
-  args: { color: "info" },
+  args: { color: "primary" },
 };
 export default meta;
 
@@ -34,9 +31,9 @@ type Story = StoryObj<typeof IllustratedMessage>;
 
 export const Default: Story = {};
 
-export const Negative: Story = {
+export const Danger: Story = {
   render: (props) => (
-    <IllustratedMessage {...props} color="negative">
+    <IllustratedMessage {...props} color="danger">
       <IconDanger />
       <Heading>No access</Heading>
       <Text>You do not have the required permissions to access this page.</Text>
