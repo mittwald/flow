@@ -1,17 +1,19 @@
-inline-code:
+code:
   font-size:
     value: "{font-size-text.s}"
   line-height:
     value: "{line-height.m}"
   padding-x:
     value: "{size-px.xs}"
+  padding:
+    value: "{size-px.m}"
   corner-radius:
     value: "{corner-radius.default}"
 
-  # Neutral Color
-  neutral-background-color:
+  # Default Color
+  default-background-color:
     value: "{neutral-soft-background-color.default}"
-  neutral-content-color:
+  default-content-color:
     value: "{neutral-soft-content-color.default}"
 
   # Light Color
@@ -25,3 +27,4 @@ inline-code:
     value: "{dark-soft-background-color.default}"
   dark-content-color:
     value: "{dark-soft-content-color}"
+
