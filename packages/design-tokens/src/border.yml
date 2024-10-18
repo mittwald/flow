@@ -15,6 +15,8 @@ border-width:
 border-style:
   default:
     value: "solid"
+  dashed:
+    value: "dashed"
 shadow:
   content:
     value: "rgba(0, 0, 0, 0.1) 0 {size-px.xs} {size-px.s}"
