@@ -1,7 +1,7 @@
 import Image from "@mittwald/flow-react-components/Image";
 
 <Image
-  src="https://cdn.shopify.com/s/files/1/2022/6883/products/IMG_2002_250x250@2x.JPG?v=1538235544"
+  src="https://mittwald.github.io/flow/assets/mittwald_logo_rgb.jpg"
   alt="Gopher"
   width={200}
 />;
