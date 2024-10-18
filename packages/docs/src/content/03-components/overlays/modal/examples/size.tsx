@@ -28,7 +28,10 @@ import FieldDescription from "@mittwald/flow-react-components/FieldDescription";
 import RadioGroup, {
   RadioButton,
 } from "@mittwald/flow-react-components/RadioGroup";
-import { SegmentedControl } from "@mittwald/flow-react-components/SegmentedControl";
+import {
+  Segment,
+  SegmentedControl,
+} from "@mittwald/flow-react-components/SegmentedControl";
 
 export default () => {
   return (
