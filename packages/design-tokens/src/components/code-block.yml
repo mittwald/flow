@@ -68,7 +68,7 @@ code-block:
   light-background-color:
     value: "{light-soft-background-color.default}"
   light-content-color:
-    value: "{light-soft-content-color.default}"
+    value: "{light-soft-content-color}"
   light-syntax-color-addition:
     value: "#68d100"
   light-syntax-color-built-in:
@@ -124,7 +124,7 @@ code-block:
   dark-background-color:
     value: "{dark-soft-background-color.default}"
   dark-content-color:
-    value: "{dark-soft-content-color.default}"
+    value: "{dark-soft-content-color}"
   dark-syntax-color-addition:
     value: "#306100"
   dark-syntax-color-built-in:
