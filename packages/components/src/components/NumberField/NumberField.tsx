@@ -30,6 +30,7 @@ export const NumberField = flowComponent("NumberField", (props) => {
     Label: {
       className: formFieldStyles.label,
       optional: !props.isRequired,
+      required: props.isRequired,
     },
     FieldDescription: {
       className: formFieldStyles.fieldDescription,
