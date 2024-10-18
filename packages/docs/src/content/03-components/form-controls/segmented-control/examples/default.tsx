@@ -4,7 +4,7 @@ import {
 } from "@mittwald/flow-react-components/SegmentedControl";
 import { Label } from "@mittwald/flow-react-components/Label";
 
-<SegmentedControl defaultValue="lastschrift" s={[1, 1]}>
+<SegmentedControl defaultValue="lastschrift">
   <Label>Zahlungsart</Label>
   <Segment value="lastschrift">Lastschrift</Segment>
   <Segment value="Rechnung">Rechnung</Segment>
