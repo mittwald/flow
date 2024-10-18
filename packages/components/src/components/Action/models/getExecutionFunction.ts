@@ -22,7 +22,8 @@ export function getExecutionFunction(action: ActionModel): ActionFn {
   };
 
   const {
-    action: actionFn,
+    action: actionProp,
+    onAction: actionFn = actionProp,
     toggleOverlay,
     closeOverlay,
     openOverlay,
