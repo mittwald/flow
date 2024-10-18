@@ -14,9 +14,10 @@
     color: var(--heading--color-light);
   }
 
-  .icon {
+  .icon,
+  > :global(.flow--alert-icon) {
     height: var(--heading-line-height);
-    width: var(--font-size);
+    width: var(--heading-line-height);
   }
 
   .headingContent {

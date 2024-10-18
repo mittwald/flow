@@ -2,17 +2,22 @@ import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
 import TextField from "@mittwald/flow-react-components/TextField";
 import Label from "@mittwald/flow-react-components/Label";
 
-<ColumnLayout rowGap="s" columnGap="l">
-  <TextField>
+<ColumnLayout m={[1, 1]} rowGap="s" columnGap="l">
+  <TextField isRequired>
     <Label>Vorname</Label>
   </TextField>
-  <TextField>
+  <TextField isRequired>
     <Label>Nachname</Label>
   </TextField>
-  <TextField>
-    <Label>Straße</Label>
-  </TextField>
-  <TextField>
-    <Label>Hausnummer</Label>
+  <ColumnLayout s={[2, 1]} columnGap="m">
+    <TextField isRequired>
+      <Label>Straße</Label>
+    </TextField>
+    <TextField isRequired>
+      <Label>Hausnummer</Label>
+    </TextField>
+  </ColumnLayout>
+  <TextField isRequired>
+    <Label>Ort</Label>
   </TextField>
 </ColumnLayout>;

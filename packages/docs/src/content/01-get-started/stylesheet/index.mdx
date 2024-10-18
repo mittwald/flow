@@ -52,7 +52,7 @@ könnten beispielsweise so aussehen:
 ```
 .flow--button
 .flow--heading
-.flow--status-icon
+.flow--alert-icon
 ```
 
 ### Sub-Komponenten
@@ -66,7 +66,7 @@ könnten beispielsweise so aussehen:
 
 ```
 .flow--button--primary
-.flow--inline-alert--danger
+.flow--alert--danger
 .flow--icon--fixed-width
 ```
 
@@ -74,7 +74,7 @@ könnten beispielsweise so aussehen:
 
 ```
 .flow--button--icon
-.flow--inline-alert--status-icon
+.flow--alert--heading
 ```
 
 ---
@@ -95,10 +95,10 @@ Hier ein paar Beispiele um die diese Anforderung zu verdeutlichen:
 ### In einer Komposition verwendete Komponenten
 
 Es ist gängige Praxis, größere Komponenten aus bereits bestehenden kleineren
-Komponenten zusammenzusetzen. Der InlineAlert besteht beispielsweise aus einem
-Icon, einer Heading und optionalem Inhalt. Die verwendeten Komponenten müssen
-ihren Basis-Klassennamen für das grundsätzliche Styling erhalten (`flow--icon`),
-sowie den spezialisierten Klassennamen (`flow--inline-alert--status-icon`), um
-spezifische Styles des Inline Alerts zu erhalten.
+Komponenten zusammenzusetzen. Der Alert besteht beispielsweise aus einem Icon,
+einer Heading und optionalem Inhalt. Die verwendeten Komponenten müssen ihren
+Basis-Klassennamen für das grundsätzliche Styling erhalten (`flow--heading`),
+sowie den spezialisierten Klassennamen (`flow--alert--heading`), um spezifische
+Styles des Inline Alerts zu erhalten.
 
 <LiveCodeEditor example="composition" />

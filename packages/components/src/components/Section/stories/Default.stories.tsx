@@ -7,7 +7,7 @@ import { TextField } from "@/components/TextField";
 import { Label } from "@/components/Label";
 import { Link } from "@/components/Link";
 import { Switch } from "@/components/Switch";
-import { StatusBadge } from "@/components/StatusBadge";
+import { AlertBadge } from "@/components/AlertBadge";
 import Header from "@/components/Header";
 import {
   IconContextMenu,
@@ -73,7 +73,7 @@ export const WithHeaderContent: Story = {
       <Section {...props}>
         <Header>
           <Heading>
-            Newsletter <StatusBadge>Subscribed</StatusBadge>
+            Newsletter <AlertBadge>Subscribed</AlertBadge>
           </Heading>
 
           <Switch defaultSelected>Subscription</Switch>
@@ -91,7 +91,7 @@ export const WithHeaderContent: Story = {
         <Header>
           <Heading>
             My Project with a looooooooooong name
-            <StatusBadge status="danger">Deactivated</StatusBadge>
+            <AlertBadge status="danger">Deactivated</AlertBadge>
           </Heading>
           <Action>
             <Modal slot="actionConfirm">

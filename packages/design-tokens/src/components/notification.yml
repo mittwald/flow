@@ -13,8 +13,6 @@ notification:
     value: 355px
   heading-to-text-spacing:
     value: "{size-rem.xs}"
-  icon-to-heading-spacing:
-    value: "{size-rem.s}"
   font-size:
     value: "{font-size-text.s}"
 

@@ -3,6 +3,278 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.288](https://github.com/mittwald/flow/compare/0.1.0-alpha.287...0.1.0-alpha.288) (2024-10-17)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.287](https://github.com/mittwald/flow/compare/0.1.0-alpha.286...0.1.0-alpha.287) (2024-10-17)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.286](https://github.com/mittwald/flow/compare/0.1.0-alpha.285...0.1.0-alpha.286) (2024-10-16)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.285](https://github.com/mittwald/flow/compare/0.1.0-alpha.284...0.1.0-alpha.285) (2024-10-16)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.284](https://github.com/mittwald/flow/compare/0.1.0-alpha.283...0.1.0-alpha.284) (2024-10-16)
+
+### Features
+
+- **ContextMenu:** add width
+  ([60445ae](https://github.com/mittwald/flow/commit/60445aed25285447ab6aebf187ce9e0462386eac))
+- **ContextMenu:** add width
+  ([956ccf3](https://github.com/mittwald/flow/commit/956ccf314a2fd082733520ed8660f62f6297b3e5))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.283](https://github.com/mittwald/flow/compare/0.1.0-alpha.282...0.1.0-alpha.283) (2024-10-11)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.282](https://github.com/mittwald/flow/compare/0.1.0-alpha.281...0.1.0-alpha.282) (2024-10-10)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.281](https://github.com/mittwald/flow/compare/0.1.0-alpha.280...0.1.0-alpha.281) (2024-10-10)
+
+### Bug Fixes
+
+- **icon:** fix icon size
+  ([d20f4c3](https://github.com/mittwald/flow/commit/d20f4c3e795878593fe75251401cbb76958d3858))
+
+### Features
+
+- **List:** add summary
+  ([39ee6ea](https://github.com/mittwald/flow/commit/39ee6ea27fea223bc893b2be9cc473b1cf9cca4d))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.280](https://github.com/mittwald/flow/compare/0.1.0-alpha.279...0.1.0-alpha.280) (2024-10-10)
+
+### Features
+
+- **List:** Add clear all filters button
+  ([#813](https://github.com/mittwald/flow/issues/813))
+  ([146bc83](https://github.com/mittwald/flow/commit/146bc838e60490aa0dafdb4f00526a931a11c798))
+- **Table:** allow vertical centering
+  ([e17582c](https://github.com/mittwald/flow/commit/e17582c9f3b35c71ac9a77af5d0f4cdbd4e70e5d))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.279](https://github.com/mittwald/flow/compare/0.1.0-alpha.277...0.1.0-alpha.279) (2024-10-10)
+
+### Bug Fixes
+
+- **List:** fix overflowing filters
+  ([f022f9b](https://github.com/mittwald/flow/commit/f022f9bf84b626dbf8c5fcfbc069fd91b43a1fb3))
+- **Table:** fix scrollbar
+  ([64ba89b](https://github.com/mittwald/flow/commit/64ba89be22887a6850b7c4aa4d9ea0947735ae3d))
+
+### Reverts
+
+- Revert "feat(Modal): add experimental "no-unmount"-feature"
+  ([3f45849](https://github.com/mittwald/flow/commit/3f458493a5779f11690453da0fc454b0b89c9314))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.278](https://github.com/mittwald/flow/compare/0.1.0-alpha.277...0.1.0-alpha.278) (2024-10-10)
+
+### Bug Fixes
+
+- **Table:** fix scrollbar
+  ([64ba89b](https://github.com/mittwald/flow/commit/64ba89be22887a6850b7c4aa4d9ea0947735ae3d))
+
+### Reverts
+
+- Revert "feat(Modal): add experimental "no-unmount"-feature"
+  ([3f45849](https://github.com/mittwald/flow/commit/3f458493a5779f11690453da0fc454b0b89c9314))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.277](https://github.com/mittwald/flow/compare/0.1.0-alpha.276...0.1.0-alpha.277) (2024-10-09)
+
+### Features
+
+- **Modal:** add experimental "no-unmount"-feature
+  ([d33733b](https://github.com/mittwald/flow/commit/d33733bb0d4375a7bb207db00b304d8b5d64d092))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.276](https://github.com/mittwald/flow/compare/0.1.0-alpha.275...0.1.0-alpha.276) (2024-10-09)
+
+### Features
+
+- **Table:** add table footer
+  ([1e298d3](https://github.com/mittwald/flow/commit/1e298d343d7b0b6419b0a4df0867cfab0a587e3a))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.275](https://github.com/mittwald/flow/compare/0.1.0-alpha.274...0.1.0-alpha.275) (2024-10-08)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.274](https://github.com/mittwald/flow/compare/0.1.0-alpha.273...0.1.0-alpha.274) (2024-10-08)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.273](https://github.com/mittwald/flow/compare/0.1.0-alpha.272...0.1.0-alpha.273) (2024-10-08)
+
+### Bug Fixes
+
+- **List:** fix list item title overflow
+  ([#830](https://github.com/mittwald/flow/issues/830))
+  ([e81908a](https://github.com/mittwald/flow/commit/e81908a5e4f058811ac1d46032860b0e384228e4))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.272](https://github.com/mittwald/flow/compare/0.1.0-alpha.271...0.1.0-alpha.272) (2024-10-08)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.271](https://github.com/mittwald/flow/compare/0.1.0-alpha.270...0.1.0-alpha.271) (2024-10-07)
+
+### Bug Fixes
+
+- **List:** fix List settings custom storage
+  ([dabc02a](https://github.com/mittwald/flow/commit/dabc02a9ea880f97e6e425c2421f0cb1e9b3feb1))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.270](https://github.com/mittwald/flow/compare/0.1.0-alpha.269...0.1.0-alpha.270) (2024-10-07)
+
+### Bug Fixes
+
+- **List:** fix List settings storage
+  ([817bd6d](https://github.com/mittwald/flow/commit/817bd6d44bc400c0c5932c62f21d26f332297ce3))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.269](https://github.com/mittwald/flow/compare/0.1.0-alpha.268...0.1.0-alpha.269) (2024-10-07)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.268](https://github.com/mittwald/flow/compare/0.1.0-alpha.267...0.1.0-alpha.268) (2024-10-07)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.267](https://github.com/mittwald/flow/compare/0.1.0-alpha.266...0.1.0-alpha.267) (2024-10-07)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.266](https://github.com/mittwald/flow/compare/0.1.0-alpha.265...0.1.0-alpha.266) (2024-10-02)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.265](https://github.com/mittwald/flow/compare/0.1.0-alpha.264...0.1.0-alpha.265) (2024-10-02)
+
+### Bug Fixes
+
+- **List:** Remove "Sorting" prefix of list sorting button
+  ([52c935c](https://github.com/mittwald/flow/commit/52c935c683f1114a4ec516216b175a1ca14c8ec3))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.264](https://github.com/mittwald/flow/compare/0.1.0-alpha.263...0.1.0-alpha.264) (2024-10-02)
 
 **Note:** Version bump only for package @mittwald/flow-react-components

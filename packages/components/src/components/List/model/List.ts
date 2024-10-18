@@ -36,7 +36,7 @@ export class List<T> {
   public viewMode: ListViewMode;
   public readonly setViewMode: (viewMode: ListViewMode) => void;
 
-  private readonly defaultSettings?: SettingsStore;
+  private readonly settingsStore?: SettingsStore;
   public readonly supportsSettingsStorage: boolean;
   public readonly settingStorageKey?: string;
   private readonly viewModeStorageKey?: string;
@@ -63,7 +63,7 @@ export class List<T> {
       ...componentProps
     } = shape;
 
-    this.defaultSettings = useSettings();
+    this.settingsStore = useSettings();
     this.settingStorageKey = settingStorageKey;
     this.filterSettingsStorageKey = settingStorageKey
       ? `${settingStorageKey}.activeFilters`
@@ -96,8 +96,8 @@ export class List<T> {
     this.viewMode = viewMode;
     this.setViewMode = (viewMode) => {
       setViewMode(viewMode);
-      if (this.defaultSettings && this.viewModeStorageKey) {
-        this.defaultSettings.set(
+      if (this.settingsStore && this.viewModeStorageKey) {
+        this.settingsStore.set(
           "List",
           this.viewModeStorageKey,
           List.viewModeSettingsStorageSchema,
@@ -127,18 +127,18 @@ export class List<T> {
   }
 
   public storeFilterDefaultSettings() {
-    if (this.defaultSettings && this.filterSettingsStorageKey) {
+    if (this.settingsStore && this.filterSettingsStorageKey) {
       const data = Object.fromEntries(
         this.filters.map((f) => [
           f.property,
           f
             .getArrayValue()
             .filter((v) => v.isActive)
-            .map((v) => v.value),
+            .map((v) => v.id),
         ]),
       );
 
-      this.defaultSettings.set(
+      this.settingsStore.set(
         "List",
         this.filterSettingsStorageKey,
         Filter.settingsStorageSchema,
@@ -148,8 +148,8 @@ export class List<T> {
   }
 
   public getStoredFilterDefaultSettings() {
-    if (this.defaultSettings && this.filterSettingsStorageKey) {
-      return this.defaultSettings.get(
+    if (this.settingsStore && this.filterSettingsStorageKey) {
+      return this.settingsStore.get(
         "List",
         this.filterSettingsStorageKey,
         Filter.settingsStorageSchema,
@@ -158,8 +158,8 @@ export class List<T> {
   }
 
   public getStoredViewModeDefaultSetting() {
-    if (this.defaultSettings && this.viewModeStorageKey) {
-      return this.defaultSettings.get(
+    if (this.settingsStore && this.viewModeStorageKey) {
+      return this.settingsStore.get(
         "List",
         this.viewModeStorageKey,
         List.viewModeSettingsStorageSchema,
@@ -179,6 +179,10 @@ export class List<T> {
 
   public resetFilters(): void {
     return this.filters.forEach((f) => f.resetValues());
+  }
+
+  public clearFilters(): void {
+    return this.filters.forEach((f) => f.clear());
   }
 
   public useIsEmpty(): boolean {
