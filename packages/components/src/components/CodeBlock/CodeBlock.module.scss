@@ -7,15 +7,23 @@
   column-gap: var(--code-block--code-to-button-spacing);
   font-size: var(--code-block--font-size);
   font-family: FiraCode, "monospace";
+  overflow-x: auto;
+  max-width: 100%;
 
-  > pre > code {
-    text-shadow: none;
+  > pre {
+    > code {
+      text-shadow: none;
+    }
   }
 
   @mixin variant($color) {
     &:where(.#{$color}) {
       color: var(--code-block--#{$color}-content-color);
       background-color: var(--code-block--#{$color}-background-color);
+
+      :global(.hljs-subst) {
+        color: var(--code-block--#{$color}-content-color);
+      }
 
       :global(.hljs-addition) {
         color: var(--code-block--#{$color}-syntax-color-addition);
@@ -66,31 +74,55 @@
       }
 
       :global(.hljs-regexp) {
+        color: var(--code-block--#{$color}-syntax-color-regexp);
       }
 
-      //---
-
-      :global(.hljs-subst) {
-        color: var(--code-block--#{$color}-content-color);
-      }
-
-      :global(.hljs-type),
-      :global(.hljs-string),
-      :global(.hljs-selector-id),
-      :global(.hljs-selector-class),
-      :global(.hljs-quote),
-      :global(.hljs-template-tag),
-      :global(.hljs-title),
       :global(.hljs-section) {
-        color: var(--code-block--#{$color}-content-accent-color-2);
+        color: var(--code-block--#{$color}-syntax-color-section);
       }
 
-      :global(.hljs-symbol),
-      :global(.hljs-variable),
-      :global(.hljs-template-variable),
-      :global(.hljs-selector-attr),
+      :global(.hljs-selector-attr) {
+        color: var(--code-block--#{$color}-syntax-color-selector-attr);
+      }
+
+      :global(.hljs-selector-class) {
+        color: var(--code-block--#{$color}-syntax-color-selector-class);
+      }
+
+      :global(.hljs-selector-id) {
+        color: var(--code-block--#{$color}-syntax-color-selector-id);
+      }
+
       :global(.hljs-selector-pseudo) {
-        color: var(--code-block--#{$color}-content-accent-color-3);
+        color: var(--code-block--#{$color}-syntax-color-selector-pseudo);
+      }
+
+      :global(.hljs-string) {
+        color: var(--code-block--#{$color}-syntax-color-string);
+      }
+
+      :global(.hljs-symbol) {
+        color: var(--code-block--#{$color}-syntax-color-symbol);
+      }
+
+      :global(.hljs-template-tag) {
+        color: var(--code-block--#{$color}-syntax-color-template-tag);
+      }
+
+      :global(.hljs-template-variable) {
+        color: var(--code-block--#{$color}-syntax-color-template-variable);
+      }
+
+      :global(.hljs-title) {
+        color: var(--code-block--#{$color}-syntax-color-title);
+      }
+
+      :global(.hljs-type) {
+        color: var(--code-block--#{$color}-syntax-color-type);
+      }
+
+      :global(.hljs-variable) {
+        color: var(--code-block--#{$color}-syntax-color-variable);
       }
     }
   }

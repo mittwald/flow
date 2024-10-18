@@ -74,6 +74,7 @@
   flex-direction: column;
   row-gap: var(--size-px--l);
   flex-grow: 1;
+  max-width: 100%;
 }
 
 .tabContent {
