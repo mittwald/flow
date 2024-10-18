@@ -1,15 +1,11 @@
 import {
-  Radio,
-  RadioGroup,
-} from "@mittwald/flow-react-components/RadioGroup";
+  Segment,
+  SegmentedControl,
+} from "@mittwald/flow-react-components/SegmentedControl";
 import { Label } from "@mittwald/flow-react-components/Label";
 
-<RadioGroup
-  variant="segmented"
-  defaultValue="lastschrift"
-  s={[1, 1]}
->
+<SegmentedControl defaultValue="lastschrift">
   <Label>Zahlungsart</Label>
-  <Radio value="lastschrift">Lastschrift</Radio>
-  <Radio value="Rechnung">Rechnung</Radio>
-</RadioGroup>;
+  <Segment value="lastschrift">Lastschrift</Segment>
+  <Segment value="Rechnung">Rechnung</Segment>
+</SegmentedControl>;

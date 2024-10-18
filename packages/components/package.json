@@ -226,6 +226,10 @@
       "types": "./dist/types/components/Section/index.d.ts",
       "import": "./dist/Section.js"
     },
+    "./SegmentedControl": {
+      "types": "./dist/types/components/SegmentedControl/index.d.ts",
+      "import": "./dist/SegmentedControl.js"
+    },
     "./Select": {
       "types": "./dist/types/components/Select/index.d.ts",
       "import": "./dist/Select.js"

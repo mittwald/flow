@@ -1,15 +1,15 @@
 import {
-  Radio,
-  RadioGroup,
-} from "@mittwald/flow-react-components/RadioGroup";
+  Segment,
+  SegmentedControl,
+} from "@mittwald/flow-react-components/SegmentedControl";
 import { Label } from "@mittwald/flow-react-components/Label";
 import { FieldDescription } from "@mittwald/flow-react-components/FieldDescription";
 
-<RadioGroup variant="segmented" defaultValue="cloud">
+<SegmentedControl defaultValue="cloud">
   <Label>Speicherplatz</Label>
-  <Radio value="cloud">Cloud</Radio>
-  <Radio value="lokal">Lokal</Radio>
+  <Segment value="cloud">Cloud</Segment>
+  <Segment value="lokal">Lokal</Segment>
   <FieldDescription>
     Speicherplatz kann jederzeit geändert werden
   </FieldDescription>
-</RadioGroup>;
+</SegmentedControl>;

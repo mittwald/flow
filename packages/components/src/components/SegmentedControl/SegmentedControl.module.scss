@@ -1,0 +1,47 @@
+@use "../../styles/mixins/containerBreakpointSizes";
+
+.segmentedControl {
+  order: 2;
+  container-type: inline-size;
+  isolation: isolate;
+
+  .segments {
+    display: flex;
+    flex-wrap: nowrap;
+    order: 2;
+  }
+}
+
+.segmentedControlContainer {
+  @include containerBreakpointSizes.containerBreakpointSizes(
+    250,
+    400,
+    550,
+    700,
+    850
+  ) {
+    .segmentedControl {
+      .segments {
+        flex-direction: column;
+      }
+
+      .segment {
+        margin-bottom: -1px; /* Collapse borders */
+        margin-right: 0;
+
+        &:first-of-type {
+          border-start-start-radius: var(--form-control--corner-radius);
+          border-start-end-radius: var(--form-control--corner-radius);
+          border-end-start-radius: 0;
+        }
+
+        &:last-of-type {
+          border-end-end-radius: var(--form-control--corner-radius);
+          border-end-start-radius: var(--form-control--corner-radius);
+          border-start-end-radius: 0;
+          margin: 0;
+        }
+      }
+    }
+  }
+}

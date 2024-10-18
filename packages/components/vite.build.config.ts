@@ -78,6 +78,7 @@ export default defineConfig(
           Render: "./src/lib/react/components/Render/index.ts",
           SearchField: "./src/components/SearchField/index.ts",
           Section: "./src/components/Section/index.ts",
+          SegmentedControl: "./src/components/SegmentedControl/index.ts",
           Select: "./src/components/Select/index.ts",
           Separator: "./src/components/Separator/index.ts",
           SettingsProvider: "./src/components/SettingsProvider/index.ts",

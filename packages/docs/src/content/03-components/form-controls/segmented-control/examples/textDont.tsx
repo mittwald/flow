@@ -1,13 +1,13 @@
 import {
-  Radio,
-  RadioGroup,
-} from "@mittwald/flow-react-components/RadioGroup";
+  Segment,
+  SegmentedControl,
+} from "@mittwald/flow-react-components/SegmentedControl";
 import { Label } from "@mittwald/flow-react-components/Label";
 
-<RadioGroup variant="segmented" defaultValue="individuell">
+<SegmentedControl defaultValue="individuell">
   <Label>Wähle deine Einstellungsart aus:</Label>
-  <Radio value="standard">Standard-Einstellungen</Radio>
-  <Radio value="individuell">
+  <Segment value="standard">Standard-Einstellungen</Segment>
+  <Segment value="individuell">
     Individuell einstellbare Einstellungen
-  </Radio>
-</RadioGroup>;
+  </Segment>
+</SegmentedControl>;
