@@ -17,6 +17,7 @@ export default meta;
 type Story = StoryObj<typeof ContextMenu>;
 
 export const LongTexts: Story = {
+  args: { width: 400 },
   render: (props) => (
     <ContextMenuTrigger>
       <Button>Trigger</Button>

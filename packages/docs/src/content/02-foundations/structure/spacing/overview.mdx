@@ -1,0 +1,55 @@
+Die Spacings und generell alle Größen in Flow basieren auf 8-Pixel-Schritten. Da
+jedoch oft kleinere Spacings als 8px benötigt werden, stehen zusätzlich feinere
+Abstufungen von 4px und 2px zur Verfügung. Standardmäßig folgen alle Components
+den definierten Spacings. Für ein optimales Spacing – das Einfluss auf das
+Layout hat – sollten die Components
+[ColumnLayout](/03-components/structure/column-layout) und
+[Section](/03-components/structure/section) verwendet werden.
+
+## Best practices
+
+Um mit dem Spacing ein harmonisches Layout zu erschaffen, achte auf folgende
+Punkte:
+
+- Verwende die Layout-Components
+  [ColumnLayout](/03-components/structure/column-layout) und
+  [Section](/03-components/structure/section), um dadurch das richtige vertikale
+  und horizontale Spacing zu erhalten.
+- Spacing hilft bei der Gruppierung von Elementen auf Benutzeroberflächen. Je
+  geringer das Spacing zwischen den Elementen ist, desto größer ist das Gefühl
+  der Zusammengehörigkeit.
+- Optisch kann es sinnvoll sein, das Spacing zwischen größeren Elementen größer
+  und zwischen kleineren Elementen kleiner zu wählen.
+
+<DoAndDont>
+  <Do example="rightSpacing">
+    Zwischen dem [Avatar](/03-components/content/avatar) und dem Namen und
+    Untertitel ist ein Spacing von 8px definiert, da diese Größe ein gutes
+    Zusammengehörigkeitsgefühl vermittelt.
+  </Do>
+  <Dont example="falseSpacing">
+    Wenn das Spacing zu groß ist, fühlt sich der Avatar nicht mehr zum Namen und
+    Untertitel gehörig an.
+  </Dont>
+</DoAndDont>
+
+---
+
+# Spacing-Tabelle
+
+Alle Spacings in der Tabelle können sowohl vertikal und horizontal verwendet
+werden. Spacings werden in REM angegeben, wenn sie zwischen Elementen eingesetzt
+werden, die ebenfalls in REM definiert sind. Dies ist zum Beispiel bei Text der
+Fall, damit der Abstand beim Skalieren der Schriftgröße konsistent bleibt.
+Zwischen zwei Elementen muss jedoch nicht zwingend ein Spacing verwendet werden,
+da nicht immer ein Abstand erforderlich ist.
+
+|       | Pixel | REM       | (Vertical) Visual                                                                                        |
+| ----- | ----- | --------- | -------------------------------------------------------------------------------------------------------- |
+| `xxs` | 2px   | 0,125 rem | <div style={{ backgroundColor: "#EBB6FF", width: "0.125rem", height: "1.5rem", borderRadius: "4px" }} /> |
+| `xs`  | 4px   | 0,25 rem  | <div style={{ backgroundColor: "#EBB6FF", width: "0.25rem", height: "1.5rem", borderRadius: "4px" }} />  |
+| `s`   | 8px   | 0,5 rem   | <div style={{ backgroundColor: "#EBB6FF", width: "0.5rem", height: "1.5rem", borderRadius: "4px" }} />   |
+| `m`   | 16px  | 1 rem     | <div style={{ backgroundColor: "#EBB6FF", width: "1rem", height: "1.5rem", borderRadius: "4px" }} />     |
+| `l`   | 24px  | 1,5 rem   | <div style={{ backgroundColor: "#EBB6FF", width: "1.5rem", height: "1.5rem", borderRadius: "4px" }} />   |
+| `xl`  | 32px  | 2 rem     | <div style={{ backgroundColor: "#EBB6FF", width: "2rem", height: "1.5rem", borderRadius: "4px" }} />     |
+| `xxl` | 64px  | 4 rem     | <div style={{ backgroundColor: "#EBB6FF", width: "4rem", height: "1.5rem", borderRadius: "4px" }} />     |

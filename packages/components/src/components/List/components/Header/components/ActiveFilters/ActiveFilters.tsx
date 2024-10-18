@@ -4,7 +4,7 @@ import { useList } from "@/components/List/hooks/useList";
 import styles from "./ActiveFilters.module.scss";
 import { Text } from "@/components/Text";
 import { Button } from "@/components/Button";
-import { IconClose, IconSave } from "@/components/Icon/components/icons";
+import { IconDelete, IconSave } from "@/components/Icon/components/icons";
 import locales from "../../../../locales/*.locale.json";
 import { Translate } from "@/lib/react/components/Translate";
 import { observer } from "mobx-react-lite";
@@ -12,6 +12,7 @@ import { useLocalizedStringFormatter } from "react-aria";
 import { Tooltip, TooltipTrigger } from "@/components/Tooltip";
 import { Icon } from "@/components/Icon";
 import { IconArrowBackUp } from "@tabler/icons-react";
+import { Badge } from "@/components/Badge";
 
 export const ActiveFilters: FC = observer(() => {
   const list = useList();
@@ -22,10 +23,9 @@ export const ActiveFilters: FC = observer(() => {
     .filter((v) => v.isActive);
 
   const activeFilters = activeFilterValues.map((v) => (
-    <Button variant="soft" size="s" key={v.id} onPress={() => v.deactivate()}>
+    <Badge key={v.id} onClose={() => v.deactivate()}>
       <Text>{v.render()}</Text>
-      <IconClose />
-    </Button>
+    </Badge>
   ));
 
   const someFiltersChanged =
@@ -68,6 +68,25 @@ export const ActiveFilters: FC = observer(() => {
     </TooltipTrigger>
   ) : undefined;
 
+  const removeAllFiltersButton =
+    activeFilters.length > 0 ? (
+      <TooltipTrigger>
+        <Tooltip>
+          <Translate locales={locales}>list.filters.clear</Translate>
+        </Tooltip>
+        <Button
+          size="s"
+          variant="plain"
+          color="secondary"
+          onPress={() => list.clearFilters()}
+        >
+          <Icon>
+            <IconDelete />
+          </Icon>
+        </Button>
+      </TooltipTrigger>
+    ) : undefined;
+
   if (
     activeFilters.length === 0 &&
     !storeFiltersButton &&
@@ -81,6 +100,7 @@ export const ActiveFilters: FC = observer(() => {
       {activeFilters}
       {storeFiltersButton}
       {resetFiltersButton}
+      {removeAllFiltersButton}
     </div>
   );
 });

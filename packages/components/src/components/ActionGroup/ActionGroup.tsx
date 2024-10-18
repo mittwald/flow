@@ -16,6 +16,7 @@ export interface ActionGroupProps
     FlowComponentProps,
     PropsWithClassName {
   ignoreBreakpoint?: boolean;
+  spacing?: "s" | "m";
 }
 
 export const ActionGroup = flowComponent("ActionGroup", (props) => {
@@ -24,6 +25,7 @@ export const ActionGroup = flowComponent("ActionGroup", (props) => {
     className,
     refProp: ref,
     ignoreBreakpoint,
+    spacing = "s",
     ...rest
   } = props;
 
@@ -31,6 +33,7 @@ export const ActionGroup = flowComponent("ActionGroup", (props) => {
     styles.actionGroupContainer,
     className,
     ignoreBreakpoint && styles.ignoreBreakpoint,
+    styles[spacing],
   );
 
   const propsContext: PropsContext = {

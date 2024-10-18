@@ -1,5 +1,5 @@
 .actionGroup {
-  gap: var(--action-group--button-to-button-spacing);
+  gap: var(--action-group--button-to-button-spacing--s);
   display: flex;
 
   .primary {
@@ -17,6 +17,8 @@
 }
 
 .actionGroupContainer {
+  @extend .s;
+
   &.ignoreBreakpoint {
     .actionGroup {
       flex-wrap: wrap;
@@ -47,4 +49,15 @@
       }
     }
   }
+
+  @mixin spacing($spacing) {
+    &.#{$spacing} {
+      .actionGroup {
+        gap: var(--action-group--button-to-button-spacing--#{$spacing});
+      }
+    }
+  }
+
+  @include spacing(s);
+  @include spacing(m);
 }

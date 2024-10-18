@@ -8,11 +8,14 @@ import type { AsyncDataLoader } from "@/components/List/model/loading/types";
 import { Avatar } from "@/components/Avatar";
 import { ContextMenu, MenuItem } from "@/components/ContextMenu";
 import { IconDomain, IconSubdomain } from "@/components/Icon/components/icons";
-import StatusBadge from "@/components/StatusBadge";
+import AlertBadge from "@/components/AlertBadge";
 import type { Domain } from "../testData/domainApi";
 import { getDomains, getTypes } from "../testData/domainApi";
 import { Section } from "@/components/Section";
-import { typedList } from "@/components/List";
+import { ListItemView, ListSummary, typedList } from "@/components/List";
+import { Button } from "@/components/Button";
+import IconDownload from "@/components/Icon/components/icons/IconDownload";
+import { ActionGroup } from "@/components/ActionGroup";
 
 const loadDomains: AsyncDataLoader<Domain> = async (opts) => {
   const response = await getDomains({
@@ -51,6 +54,12 @@ const meta: Meta<typeof List> = {
           aria-label="Domains"
           onAction={(domain) => console.log(domain.hostname)}
         >
+          <ActionGroup>
+            <Button color="secondary" variant="soft" slot="secondary">
+              <IconDownload />
+            </Button>
+            <Button color="accent">Anlegen</Button>
+          </ActionGroup>
           <DomainList.LoaderAsync manualPagination manualSorting={false}>
             {loadDomains}
           </DomainList.LoaderAsync>
@@ -59,6 +68,7 @@ const meta: Meta<typeof List> = {
             property="type"
             mode="all"
             name="Typ"
+            defaultSelected={["Domain"]}
           />
           <DomainList.Search autoFocus />
           <DomainList.Sorting property="domain" name="A-Z" />
@@ -105,7 +115,7 @@ const meta: Meta<typeof List> = {
                 <Heading>
                   {domain.hostname}
                   {!domain.verified && (
-                    <StatusBadge status="warning">Not verified</StatusBadge>
+                    <AlertBadge status="warning">Not verified</AlertBadge>
                   )}
                 </Heading>
                 <Text>{domain.type}</Text>
@@ -128,3 +138,43 @@ export default meta;
 type Story = StoryObj<typeof List>;
 
 export const Default: Story = {};
+
+export const WithSummary: Story = {
+  render: () => {
+    const InvoiceList = typedList<{
+      id: string;
+      date: string;
+      amount: string;
+    }>();
+
+    return (
+      <Section>
+        <Heading>Invoices</Heading>
+        <InvoiceList.List batchSize={5} aria-label="Invoices">
+          <ListSummary>
+            <Text style={{ display: "block", textAlign: "right" }}>
+              <b>total: 42,00 €</b>
+            </Text>
+          </ListSummary>
+          <InvoiceList.StaticData
+            data={[
+              { id: "RG100000", date: "1.9.2024", amount: "25,00 €" },
+              { id: "RG100001", date: "12.9.2024", amount: "12,00 €" },
+              { id: "RG100002", date: "3.10.2024", amount: "4,00 €" },
+            ]}
+          />
+          <InvoiceList.Item>
+            {(invoice) => (
+              <ListItemView>
+                <Heading>{invoice.id}</Heading>
+                <Text>
+                  {invoice.date} - {invoice.amount}
+                </Text>
+              </ListItemView>
+            )}
+          </InvoiceList.Item>
+        </InvoiceList.List>
+      </Section>
+    );
+  },
+};

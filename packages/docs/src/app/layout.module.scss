@@ -9,6 +9,7 @@
   display: flex;
   column-gap: var(--size-px--l);
   padding-inline: var(--size-px--l);
+  padding-bottom: var(--size-px--l);
 
   &:has(.mainNavigation:empty) {
     grid-template-areas:
@@ -43,6 +44,12 @@
   h1 {
     margin-right: auto;
   }
+}
+
+.homeLink {
+  display: flex;
+  column-gap: var(--size-rem--s);
+  align-items: center;
 }
 
 .logo {
@@ -101,6 +108,12 @@
     display: block;
   }
 
+  .mobileNavigationOffCanvas {
+    .mainNavigation {
+      display: block;
+    }
+  }
+
   .header {
     padding: var(--size-px--xs) var(--size-px--s);
     row-gap: var(--size-rem--s);
@@ -118,6 +131,9 @@
     margin-left: -1px;
     width: calc(100% + 2px);
     max-width: calc(100% + 2px);
+    border-bottom-color: var(--separator--color);
+    border-bottom-width: var(--separator--height);
+    border-bottom-style: var(--border-style--default);
   }
 
   .homeTopContent {

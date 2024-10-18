@@ -21,6 +21,7 @@ import DatePicker from "@/components/DatePicker";
 import { DateRangePicker } from "@/components/DateRangePicker";
 import { getLocalTimeZone, today } from "@internationalized/date";
 import { TimeField } from "@/components/TimeField";
+import { TextArea } from "@/components/TextArea";
 
 const submitAction = action("submit");
 
@@ -39,6 +40,7 @@ const meta: Meta<typeof Field> = {
       date: string;
       dateRange: string;
       time: string;
+      message: string;
     }
 
     const handleOnSubmit = async (values: Values) => {
@@ -168,6 +170,17 @@ const meta: Meta<typeof Field> = {
             <TimeField>
               <Label>Time</Label>
             </TimeField>
+          </Field>
+
+          <Field
+            name="message"
+            rules={{
+              required: "Please enter a message",
+            }}
+          >
+            <TextArea rows={1} autoResizeMaxRows={5}>
+              <Label>Message</Label>
+            </TextArea>
           </Field>
 
           <ActionGroup>

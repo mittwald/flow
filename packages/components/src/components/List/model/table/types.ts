@@ -1,4 +1,4 @@
-import type { PropsWithChildren, ReactNode } from "react";
+import type { PropsWithChildren } from "react";
 import type {
   TableBodyProps,
   TableCellProps,
@@ -7,12 +7,12 @@ import type {
   TableProps,
   TableRowProps,
 } from "@/components/Table";
+import type { RenderItemFn } from "@/components/List";
 
 /** Cell */
-export type RenderCellFn<T> = (data: T) => ReactNode;
 export type TableCellSupportedComponentProps = Omit<TableCellProps, "children">;
 export interface TableCellShape<T> extends TableCellSupportedComponentProps {
-  renderFn?: RenderCellFn<T>;
+  renderFn?: RenderItemFn<T>;
 }
 
 /** Row */

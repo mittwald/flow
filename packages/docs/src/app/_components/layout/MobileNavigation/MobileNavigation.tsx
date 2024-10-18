@@ -32,7 +32,7 @@ export const MobileNavigation: FC<Props> = (props) => {
             <Content>
               <Section>
                 <HeaderNavigation docs={docs} />
-                <MainNavigation docs={docs} />
+                <MainNavigation docs={docs} mobileNavigation />
               </Section>
             </Content>
           </Modal>

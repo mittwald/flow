@@ -8,8 +8,16 @@ date-picker:
 calendar:
   cell-size:
     value: 2.25rem
+  cell-spacing:
+    value: "{size-rem.xs}"
   cell-corner-radius:
     value: "{corner-radius.round}"
+  header-to-day-spacing:
+    value: "{size-rem.xs}"
+  heading-font-size:
+    value: "{font-size.default}"
+  day-font-size:
+    value: "{font-size.s}"
   day-background-color:
     disabled:
       value: "{disabled-plain-background-color}"
