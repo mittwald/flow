@@ -21,7 +21,6 @@
   }
 
   :global(.react-aria-CalendarCell) {
-    @include focus.focus;
     width: var(--calendar--cell-size);
     height: var(--calendar--cell-size);
     display: inline-flex;
@@ -30,6 +29,8 @@
     cursor: default;
     border-radius: var(--calendar--cell-corner-radius);
     font-size: var(--calendar--cell-font-size);
+
+    @include focus.focus;
 
     &[data-outside-month] {
       display: none;

@@ -21,7 +21,8 @@ progress-bar:
   border-color:
     value: "{neutral-outline-border-color}"
   background-color:
-    value: "{neutral-outline-background-color}"
+    value: "{neutral-outline-background-color.default}"
+
 
   # Info
   info-fill-background-color:

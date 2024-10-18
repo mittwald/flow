@@ -61,11 +61,11 @@
 
 .radioGroupContainer {
   @include containerBreakpointSizes.containerBreakpointSizes(
-                  250,
-                  400,
-                  550,
-                  700,
-                  850
+    250,
+    400,
+    550,
+    700,
+    850
   ) {
     .segmentedGroup {
       .segments {

@@ -33,11 +33,7 @@ export const Icon = flowComponent("Icon", (props) => {
     "aria-hidden": !ariaLabel,
     "aria-label": ariaLabel,
 
-    className: clsx(
-      styles.icon,
-      className,
-      styles[`size-${size}`],
-    ),
+    className: clsx(styles.icon, className, styles[`size-${size}`]),
   };
 
   const isCustomSvgString = typeof children === "string";

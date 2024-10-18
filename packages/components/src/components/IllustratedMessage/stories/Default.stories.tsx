@@ -5,7 +5,10 @@ import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
 import { Button } from "@/components/Button";
 import { IconApp, IconDanger } from "@/components/Icon/components/icons";
-import { storyBackgroundDark, storyBackgroundLight } from "@/lib/dev/storyBackgrounds";
+import {
+  storyBackgroundDark,
+  storyBackgroundLight,
+} from "@/lib/dev/storyBackgrounds";
 
 const meta: Meta<typeof IllustratedMessage> = {
   title: "Content/Illustrated Message",
