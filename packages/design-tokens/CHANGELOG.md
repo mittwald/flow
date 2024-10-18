@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.290](https://github.com/mittwald/flow/compare/0.1.0-alpha.289...0.1.0-alpha.290) (2024-10-18)
+
+### Features
+
+- **CodeBlock:** add code block component
+  ([fe0a80e](https://github.com/mittwald/flow/commit/fe0a80e20c0c0350758d74d6a5973f76d471b02e))
+- **CodeBlock:** add custom colors
+  ([ed8b454](https://github.com/mittwald/flow/commit/ed8b4541508383dace50ee43fed8135b7dd7c80a))
+- **CodeBlock:** fix tokens
+  ([8f521d8](https://github.com/mittwald/flow/commit/8f521d89d7adfd51b31876bd5ae8430a09919ded))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.289](https://github.com/mittwald/flow/compare/0.1.0-alpha.288...0.1.0-alpha.289) (2024-10-18)
 
 **Note:** Version bump only for package @mittwald/flow-design-tokens
