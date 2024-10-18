@@ -15,11 +15,7 @@ import { Section } from "@mittwald/flow-react-components/Section";
     </Segment>
     <Segment value="andere">Andere</Segment>
   </SegmentedControl>
-  <SegmentedControl
-    variant="segmented"
-    defaultValue="dev"
-    isDisabled
-  >
+  <SegmentedControl defaultValue="dev" isDisabled>
     <Label>Rolle</Label>
     <Segment value="entwickler">Entwickler</Segment>
     <Segment value="designer">Designer</Segment>
