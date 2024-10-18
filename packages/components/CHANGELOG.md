@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.291](https://github.com/mittwald/flow/compare/0.1.0-alpha.290...0.1.0-alpha.291) (2024-10-18)
+
+### Bug Fixes
+
+- **NumberField:** fix mobile styles
+  ([#858](https://github.com/mittwald/flow/issues/858))
+  ([f211f9d](https://github.com/mittwald/flow/commit/f211f9d68aed3e5538c4896d6f39afb227799e27))
+- **ProgressBar:** add translations
+  ([#859](https://github.com/mittwald/flow/issues/859))
+  ([268cd5f](https://github.com/mittwald/flow/commit/268cd5f4c75dfc77b682d4fe0ce4bb8f25b88ce9))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.290](https://github.com/mittwald/flow/compare/0.1.0-alpha.289...0.1.0-alpha.290) (2024-10-18)
 
 ### Bug Fixes
