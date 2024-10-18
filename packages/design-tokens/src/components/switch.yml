@@ -15,7 +15,7 @@ switch:
     default:
       value: "{neutral-solid-background-color.default}"
     disabled:
-      value: "{neutral.color.600}"
+      value: "{disabled-solid-background-color}"
     selected:
       value: "{success-solid-background-color.default}"
 
@@ -24,8 +24,11 @@ switch:
     default:
       value: "{neutral-solid-content-color}"
     disabled:
-      value: "{neutral.color.600}"
+      value: "{neutral.color.500}"
   handle-background-color:
-    value: "{neutral.color.100}"
+    default:
+      value: "{neutral.color.100}"
+    disabled:
+      value: "{neutral.color.300}"
   handle-size:
     value: 1.25rem

@@ -2,13 +2,13 @@ breadcrumb-item:
   color:
     value: "{heading.color}"
   color-light:
-    value: "{light-plain-content-color.default}"
+    value: "{light-plain-content-color}"
   color-dark:
-    value: "{dark-plain-content-color.default}"
+    value: "{dark-plain-content-color}"
   padding-x:
     value: "{size-px.xs}"
   font-size:
-    value: "{font-size.s}"
+    value: "{font-size-text.s}"
   font-weight:
     default:
       value: "{font-weight.normal}"

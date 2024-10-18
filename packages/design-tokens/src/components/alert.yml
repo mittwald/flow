@@ -13,8 +13,8 @@ alert:
     value: "{size-rem.xs}"
   content-to-content-spacing:
     value: "{size-rem.s}"
-  heading-font-size:
-    value: "{font-size.m}"
+  font-size-heading:
+    value: "{font-size-text.m}"
 
   # Info
   info-border-color:

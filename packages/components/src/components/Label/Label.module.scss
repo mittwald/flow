@@ -5,7 +5,7 @@
   line-height: var(--label--line-height);
   display: inline-flex;
   align-items: center;
-  column-gap: var(--label--content-to-content-spacing);
+  column-gap: var(--label--spacing);
 
   &.disabled {
     color: var(--label--color--disabled);

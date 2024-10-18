@@ -1,7 +1,7 @@
 field-error:
   font-size:
-    value: "{font-size.s}"
+    value: "{font-size-text.s}"
   color:
-    value: "{danger.color.700}"
-  icon-to-text-spacing:
-    value: "{size-rem.s}"
+    value: "{danger.color.800}"
+  spacing:
+    value: "{size-rem.xs}"

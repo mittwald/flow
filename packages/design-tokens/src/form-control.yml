@@ -3,6 +3,10 @@ form-control:
     value: "{size-rem.xxs}"
   control-to-info-spacing:
     value: "{size-rem.xs}"
+  spacing-x:
+    value: "{size-rem.s}"
+  spacing-y:
+    value: "{size-rem.xs}"
   padding-x:
     value: "{size-px.m}"
   padding-y:

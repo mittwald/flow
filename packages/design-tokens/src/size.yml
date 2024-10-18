@@ -33,7 +33,3 @@ size-px:
     value: 32px
   xxl:
     value: 64px
-
-size:
-  none:
-    value: 0px

@@ -7,7 +7,7 @@ slider:
     value: "{size-rem.xs}"
   text-color:
     disabled:
-      value: "{disabled-plain-content-accent-color}"
+      value: "{disabled-plain-content-color}"
   track-background-color:
     default:
       value: "{primary-soft-background-color.default}"

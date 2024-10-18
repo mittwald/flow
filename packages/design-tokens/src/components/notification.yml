@@ -14,7 +14,7 @@ notification:
   heading-to-text-spacing:
     value: "{size-rem.xs}"
   font-size:
-    value: "{font-size.s}"
+    value: "{font-size-text.s}"
 
   # Info
   info-border-color:
