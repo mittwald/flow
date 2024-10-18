@@ -34,6 +34,7 @@ export default defineConfig(
           Checkbox: "./src/components/Checkbox/index.ts",
           CheckboxButton: "./src/components/CheckboxButton/index.ts",
           CheckboxGroup: "./src/components/CheckboxGroup/index.ts",
+          CodeBlock: "./src/components/CodeBlock/index.ts",
           ColumnLayout: "./src/components/ColumnLayout/index.ts",
           Content: "./src/components/Content/index.ts",
           ContextMenu: "./src/components/ContextMenu/index.ts",
