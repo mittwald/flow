@@ -7,8 +7,8 @@ import {
 } from "@/lib/propsContext";
 import clsx from "clsx";
 import styles from "./HeaderNavigation.module.scss";
-import { EmulatedBoldText } from "@/components/EmulatedBoldText";
 import type { PropsWithClassName } from "@/lib/types/props";
+import { Text } from "@/components/Text";
 
 export interface HeaderNavigationProps
   extends PropsWithChildren<ComponentProps<"nav">>,
@@ -28,7 +28,7 @@ export const HeaderNavigation: FC<HeaderNavigationProps> = (props) => {
       className: styles.link,
       unstyled: true,
       children: dynamic((props) => (
-        <EmulatedBoldText>{props.children}</EmulatedBoldText>
+        <Text emulateBoldWidth>{props.children}</Text>
       )),
     },
     Button: {

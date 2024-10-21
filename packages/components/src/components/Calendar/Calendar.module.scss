@@ -21,7 +21,6 @@
   }
 
   :global(.react-aria-CalendarCell) {
-    @include focus.focus;
     width: var(--calendar--cell-size);
     height: var(--calendar--cell-size);
     display: inline-flex;
@@ -52,6 +51,8 @@
       background: var(--calendar--day-background-color--disabled);
       color: var(--calendar--day-content-color--disabled);
     }
+
+    @include focus.focus;
   }
 
   &.range {
