@@ -26,7 +26,7 @@ const meta: Meta<typeof IllustratedMessage> = {
       control: "inline-radio",
     },
   },
-  args: { color: "info" },
+  args: { color: "primary" },
 };
 export default meta;
 
@@ -34,9 +34,9 @@ type Story = StoryObj<typeof IllustratedMessage>;
 
 export const Default: Story = {};
 
-export const Negative: Story = {
+export const Danger: Story = {
   render: (props) => (
-    <IllustratedMessage {...props} color="negative">
+    <IllustratedMessage {...props} color="danger">
       <IconDanger />
       <Heading>No access</Heading>
       <Text>You do not have the required permissions to access this page.</Text>

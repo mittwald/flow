@@ -1,0 +1,19 @@
+tooltip:
+  background-color:
+    value: "{neutral.color.900}"
+  color:
+    value: "{neutral.color.100}"
+  padding-x:
+    value: "{size-px.s}"
+  padding-y:
+    value: "{size-px.xs}"
+  font-size:
+    value: "{font-size-text.s}"
+  max-width:
+    value: 300px
+  tooltip-to-content-spacing:
+    value: "{size-px.s}"
+  arrow-size:
+    value: "{size-px.s}"
+  box-shadow:
+    value: "{shadow.overlay}"

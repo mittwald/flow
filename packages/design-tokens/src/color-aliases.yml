@@ -219,8 +219,6 @@ primary-soft-background-color:
 primary-soft-content-color:
   default:
     value: "{primary.color.900}"
-  hover:
-    value: "{primary.color.900}"
   pressed:
     value: "{primary.color.1000}"
 
@@ -464,7 +462,7 @@ neutral-outline-background-color:
   selected:
     value: "{neutral.color.500}"
   pressed:
-    value: "{neutral.color.600}"
+    value: "{neutral.color.500}"
 neutral-outline-content-color:
   value: "{neutral.color.1000}"
 neutral-outline-border-color:
@@ -489,13 +487,13 @@ disabled-solid-background-color:
   value: "{neutral.color.400}"
 disabled-solid-content-color:
   value: "{neutral.color.600}"
-disabled-dark-solid-background-color:
+disabled-solid-dark-background-color:
   value: "{dark.color.300}"
-disabled-dark-solid-content-color:
+disabled-solid-dark-content-color:
   value: "{light.color.300}"
-disabled-light-solid-background-color:
+disabled-solid-light-background-color:
   value: "{light.color.300}"
-disabled-light-solid-content-color:
+disabled-solid-light-content-color:
   value: "{dark.color.300}"
 
 # Disabled Plain
@@ -503,31 +501,29 @@ disabled-plain-background-color:
   value: "{color.transparent}"
 disabled-plain-content-color:
   value: "{neutral.color.400}"
-disabled-plain-content-accent-color:
-  value: "{neutral.color.600}"
-disabled-dark-plain-content-color:
+disabled-plain-dark-content-color:
   value: "{dark.color.300}"
-disabled-light-plain-content-color:
+disabled-plain-light-content-color:
   value: "{light.color.300}"
 
 # Disabled Outline
 disabled-outline-background-color:
   value: "{neutral.color.300}"
 disabled-outline-content-color:
-  value: "{neutral.color.600}"
+  value: "{neutral.color.500}"
 disabled-outline-border-color:
   value: "{neutral.color.400}"
-disabled-dark-outline-background-color:
+disabled-outline-dark-background-color:
   value: "{color.transparent}"
-disabled-dark-outline-border-color:
+disabled-outline-dark-border-color:
   value: "{dark.color.300}"
-disabled-dark-outline-content-color:
+disabled-outline-dark-content-color:
   value: "{dark.color.300}"
-disabled-light-outline-background-color:
+disabled-outline-light-background-color:
   value: "{color.transparent}"
-disabled-light-outline-border-color:
+disabled-outline-light-border-color:
   value: "{light.color.300}"
-disabled-light-outline-content-color:
+disabled-outline-light-content-color:
   value: "{light.color.300}"
 
 # Disabled Soft
@@ -535,13 +531,13 @@ disabled-soft-background-color:
   value: "{neutral.color.300}"
 disabled-soft-content-color:
   value: "{neutral.color.500}"
-disabled-dark-soft-background-color:
+disabled-soft-dark-background-color:
   value: "{dark.color.100}"
-disabled-dark-soft-content-color:
+disabled-soft-dark-content-color:
   value: "{dark.color.200}"
-disabled-light-soft-background-color:
+disabled-soft-light-background-color:
   value: "{light.color.100}"
-disabled-light-soft-content-color:
+disabled-soft-light-content-color:
   value: "{light.color.200}"
 
 # Dark Solid
@@ -575,12 +571,7 @@ dark-plain-background-color:
   pressed:
     value: "{dark.color.200}"
 dark-plain-content-color:
-  default:
-    value: "{dark.color.800}"
-  hover:
-    value: "{dark.color.700}"
-  pressed:
-    value: "{dark.color.600}"
+  value: "{dark.color.800}"
 
 # Dark Outline
 dark-outline-background-color:
@@ -590,10 +581,10 @@ dark-outline-background-color:
     value: "{dark.color.100}"
   pressed:
     value: "{dark.color.200}"
-dark-outline-content-color:
-  value: "{dark.color.800}"
 dark-outline-border-color:
   value: "{dark.color.700}"
+dark-outline-content-color:
+  value: "{dark.color.800}"
 
 # Light Solid
 light-solid-background-color:
@@ -626,12 +617,7 @@ light-plain-background-color:
   pressed:
     value: "{light.color.200}"
 light-plain-content-color:
-  default:
-    value: "{light.color.800}"
-  hover:
-    value: "{light.color.700}"
-  pressed:
-    value: "{light.color.600}"
+  value: "{light.color.800}"
 
 # Light Outline
 light-outline-background-color:
@@ -641,7 +627,7 @@ light-outline-background-color:
     value: "{light.color.100}"
   pressed:
     value: "{light.color.200}"
-light-outline-content-color:
-  value: "{light.color.800}"
 light-outline-border-color:
+  value: "{light.color.800}"
+light-outline-content-color:
   value: "{light.color.700}"

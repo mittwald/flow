@@ -1,0 +1,10 @@
+choice:
+  icon-color:
+    default:
+      value: "{icon.color}"
+    selected:
+      value: "{primary.color.800}"
+    disabled:
+      value: "{disabled-outline-content-color}"
+
+

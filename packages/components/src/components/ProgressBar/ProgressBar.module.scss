@@ -4,8 +4,8 @@
     "label value"
     "bar bar";
   grid-template-columns: 1fr auto;
-  row-gap: var(--progress-bar--label-to-bar-spacing);
-  column-gap: var(--progress-bar--label-to-value-spacing);
+  row-gap: var(--progress-bar--spacing-y);
+  column-gap: var(--progress-bar--spacing-x);
   width: 100%;
   font-size: var(--progress-bar--font-size);
 
@@ -24,10 +24,10 @@
 
   .bar {
     grid-area: bar;
-    height: var(--progress-bar--bar-height);
-    border-radius: var(--progress-bar--bar-corner-radius);
-    box-shadow: inset 0 0 0 var(--progress-bar--bar-border-width)
-      var(--progress-bar--bar-border-color);
+    height: var(--progress-bar--height);
+    border-radius: var(--progress-bar--corner-radius);
+    box-shadow: inset 0 0 0 var(--progress-bar--border-width)
+      var(--progress-bar--border-color);
     overflow: hidden;
   }
 
@@ -41,7 +41,7 @@
     font-size: var(--progress-bar--font-size-s);
 
     .bar {
-      height: var(--progress-bar--bar-height-s);
+      height: var(--progress-bar--height-s);
     }
   }
 

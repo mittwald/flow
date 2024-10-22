@@ -2,10 +2,10 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  border-radius: var(--code-block--corner-radius);
-  padding: var(--code-block--padding);
-  column-gap: var(--code-block--code-to-button-spacing);
-  font-size: var(--code-block--font-size);
+  border-radius: var(--code--corner-radius);
+  padding: var(--code--padding);
+  column-gap: var(--code--spacing);
+  font-size: var(--code--font-size);
   font-family: FiraCode, "monospace";
   overflow-x: auto;
   max-width: 100%;
@@ -18,111 +18,111 @@
 
   @mixin variant($color) {
     &:where(.#{$color}) {
-      color: var(--code-block--#{$color}-content-color);
-      background-color: var(--code-block--#{$color}-background-color);
+      color: var(--code--#{$color}-content-color);
+      background-color: var(--code--#{$color}-background-color);
 
       :global(.hljs-subst) {
-        color: var(--code-block--#{$color}-content-color);
+        color: var(--code--#{$color}-content-color);
       }
 
       :global(.hljs-addition) {
-        color: var(--code-block--#{$color}-syntax-color-addition);
+        color: var(--code--#{$color}-syntax-color-addition);
       }
 
       :global(.hljs-built_in) {
-        color: var(--code-block--#{$color}-syntax-color-built-in);
+        color: var(--code--#{$color}-syntax-color-built-in);
       }
 
       :global(.hljs-bullet) {
-        color: var(--code-block--#{$color}-syntax-color-bullet);
+        color: var(--code--#{$color}-syntax-color-bullet);
       }
 
       :global(.hljs-code) {
-        color: var(--code-block--#{$color}-syntax-color-code);
+        color: var(--code--#{$color}-syntax-color-code);
       }
 
       :global(.hljs-comment) {
-        color: var(--code-block--#{$color}-syntax-color-comment);
+        color: var(--code--#{$color}-syntax-color-comment);
       }
 
       :global(.hljs-deletion) {
-        color: var(--code-block--#{$color}-syntax-color-deletion);
+        color: var(--code--#{$color}-syntax-color-deletion);
       }
 
       :global(.hljs-link) {
-        color: var(--code-block--#{$color}-syntax-color-link);
+        color: var(--code--#{$color}-syntax-color-link);
       }
 
       :global(.hljs-literal) {
-        color: var(--code-block--#{$color}-syntax-color-literal);
+        color: var(--code--#{$color}-syntax-color-literal);
       }
 
       :global(.hljs-meta) {
-        color: var(--code-block--#{$color}-syntax-color-meta);
+        color: var(--code--#{$color}-syntax-color-meta);
       }
 
       :global(.hljs-meta-string) {
-        color: var(--code-block--#{$color}-syntax-color-meta-string);
+        color: var(--code--#{$color}-syntax-color-meta-string);
       }
 
       :global(.hljs-number) {
-        color: var(--code-block--#{$color}-syntax-color-number);
+        color: var(--code--#{$color}-syntax-color-number);
       }
 
       :global(.hljs-quote) {
-        color: var(--code-block--#{$color}-syntax-color-quote);
+        color: var(--code--#{$color}-syntax-color-quote);
       }
 
       :global(.hljs-regexp) {
-        color: var(--code-block--#{$color}-syntax-color-regexp);
+        color: var(--code--#{$color}-syntax-color-regexp);
       }
 
       :global(.hljs-section) {
-        color: var(--code-block--#{$color}-syntax-color-section);
+        color: var(--code--#{$color}-syntax-color-section);
       }
 
       :global(.hljs-selector-attr) {
-        color: var(--code-block--#{$color}-syntax-color-selector-attr);
+        color: var(--code--#{$color}-syntax-color-selector-attr);
       }
 
       :global(.hljs-selector-class) {
-        color: var(--code-block--#{$color}-syntax-color-selector-class);
+        color: var(--code--#{$color}-syntax-color-selector-class);
       }
 
       :global(.hljs-selector-id) {
-        color: var(--code-block--#{$color}-syntax-color-selector-id);
+        color: var(--code--#{$color}-syntax-color-selector-id);
       }
 
       :global(.hljs-selector-pseudo) {
-        color: var(--code-block--#{$color}-syntax-color-selector-pseudo);
+        color: var(--code--#{$color}-syntax-color-selector-pseudo);
       }
 
       :global(.hljs-string) {
-        color: var(--code-block--#{$color}-syntax-color-string);
+        color: var(--code--#{$color}-syntax-color-string);
       }
 
       :global(.hljs-symbol) {
-        color: var(--code-block--#{$color}-syntax-color-symbol);
+        color: var(--code--#{$color}-syntax-color-symbol);
       }
 
       :global(.hljs-template-tag) {
-        color: var(--code-block--#{$color}-syntax-color-template-tag);
+        color: var(--code--#{$color}-syntax-color-template-tag);
       }
 
       :global(.hljs-template-variable) {
-        color: var(--code-block--#{$color}-syntax-color-template-variable);
+        color: var(--code--#{$color}-syntax-color-template-variable);
       }
 
       :global(.hljs-title) {
-        color: var(--code-block--#{$color}-syntax-color-title);
+        color: var(--code--#{$color}-syntax-color-title);
       }
 
       :global(.hljs-type) {
-        color: var(--code-block--#{$color}-syntax-color-type);
+        color: var(--code--#{$color}-syntax-color-type);
       }
 
       :global(.hljs-variable) {
-        color: var(--code-block--#{$color}-syntax-color-variable);
+        color: var(--code--#{$color}-syntax-color-variable);
       }
     }
   }

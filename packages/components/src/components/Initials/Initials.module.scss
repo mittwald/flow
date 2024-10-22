@@ -1,8 +1,8 @@
 .initials {
   display: flex;
-  font-weight: bold;
+  font-weight: var(--initials--font-weight);
 
-  *:nth-child(odd) {
-    color: var(--content-color);
+  *:nth-child(even) {
+    color: var(--content-accent-color);
   }
 }

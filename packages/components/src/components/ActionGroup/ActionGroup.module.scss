@@ -1,5 +1,4 @@
 .actionGroup {
-  gap: var(--action-group--button-to-button-spacing--s);
   display: flex;
 
   .primary {
@@ -53,7 +52,7 @@
   @mixin spacing($spacing) {
     &.#{$spacing} {
       .actionGroup {
-        gap: var(--action-group--button-to-button-spacing--#{$spacing});
+        gap: var(--action-group--spacing--#{$spacing});
       }
     }
   }

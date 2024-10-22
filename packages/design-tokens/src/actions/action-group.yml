@@ -1,0 +1,6 @@
+action-group:
+  spacing:
+    m:
+      value: "{size-px.m}"
+    s:
+      value: "{size-px.s}"
