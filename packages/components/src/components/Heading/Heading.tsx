@@ -39,6 +39,9 @@ export const Heading = flowComponent("Heading", (props) => {
     AlertBadge: {
       wrapWith: <div className={styles.headingContent} />,
     },
+    Button: {
+      wrapWith: <div className={styles.headingContent} />,
+    },
   };
 
   return (
