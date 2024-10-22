@@ -1,6 +1,7 @@
 import type {
   PropertyName,
   PropertyValue,
+  PropertyValueRenderMethod,
 } from "@/components/List/model/types";
 import type { ItemType } from "@/lib/types/array";
 
@@ -13,8 +14,10 @@ export type FilterMatcher<T, P, TMatcherValue> = (
 
 export interface FilterShape<T, TProp extends PropertyName<T>, TMatcherValue> {
   property: TProp;
+  renderItem?: PropertyValueRenderMethod<TMatcherValue>;
   mode?: FilterMode;
   matcher?: FilterMatcher<T, TProp, TMatcherValue>;
-  values?: TMatcherValue[];
+  values?: readonly TMatcherValue[];
   name?: string;
+  defaultSelected?: readonly NonNullable<ItemType<TMatcherValue>>[];
 }

@@ -11,6 +11,9 @@ import { useOverlayController } from "@/lib/controller/overlay/useOverlayControl
 import { Action } from "@/components/Action";
 import { ActionGroup } from "@/components/ActionGroup";
 import { asyncLongFunction } from "@/components/Button/stories/lib";
+import { Field, Form } from "@/integrations/react-hook-form";
+import { useForm } from "react-hook-form";
+import { action } from "@storybook/addon-actions";
 
 const meta: Meta<typeof Modal> = {
   title: "Overlays/Modal",
@@ -31,7 +34,7 @@ const meta: Meta<typeof Modal> = {
     return (
       <Modal
         {...props}
-        controller={useOverlayController("Modal", { defaultOpen: true })}
+        controller={useOverlayController("Modal", { isDefaultOpen: true })}
       >
         <Heading>New Customer</Heading>
         <Content>
@@ -64,7 +67,10 @@ export const Default: Story = {};
 
 export const WithController: Story = {
   render: (props) => {
-    const controller = useOverlayController("Modal");
+    const controller = useOverlayController("Modal", {
+      onOpen: () => action("onOpen")(),
+      onClose: () => action("onClose")(),
+    });
 
     return (
       <>
@@ -126,7 +132,87 @@ export const OffCanvas: Story = {
   args: { offCanvas: true },
 };
 
+export const OffCanvasOrientationLeft: Story = {
+  args: { offCanvas: true, offCanvasOrientation: "left" },
+};
+
 export const OffCanvasMobile: Story = {
   args: { offCanvas: true },
   parameters: { viewport: { defaultViewport: "mobile1" } },
+};
+
+export const WithForm: Story = {
+  render: (props) => {
+    const form = useForm<{ name: string }>();
+    const modalController = useOverlayController("Modal");
+
+    return (
+      <>
+        <Button color="accent" onPress={modalController.open}>
+          Add customer
+        </Button>
+
+        <Modal {...props} controller={modalController}>
+          <Form form={form} onSubmit={() => modalController.close()}>
+            <Heading>Add Customer</Heading>
+            <Content>
+              <Field name="name" rules={{ required: "Please enter a name" }}>
+                <TextField>
+                  <Label>Customer name</Label>
+                </TextField>
+              </Field>
+            </Content>
+            <ActionGroup>
+              <Button type="submit" color="accent">
+                Submit
+              </Button>
+              <Action closeOverlay="Modal">
+                <Button variant="soft" color="secondary">
+                  Abort
+                </Button>
+              </Action>
+            </ActionGroup>
+          </Form>
+        </Modal>
+      </>
+    );
+  },
+};
+
+export const OffCanvasWithForm: Story = {
+  render: (props) => {
+    const form = useForm<{ name: string }>();
+    const modalController = useOverlayController("Modal");
+
+    return (
+      <>
+        <Button color="accent" onPress={modalController.open}>
+          Add customer
+        </Button>
+
+        <Modal offCanvas {...props} controller={modalController}>
+          <Form form={form} onSubmit={() => modalController.close()}>
+            <Heading>Add Customer</Heading>
+            <Content>
+              <Field name="name" rules={{ required: "Please enter a name" }}>
+                <TextField>
+                  <Label>Customer name</Label>
+                </TextField>
+              </Field>
+            </Content>
+            <ActionGroup>
+              <Button type="submit" color="accent">
+                Submit
+              </Button>
+              <Action closeOverlay="Modal">
+                <Button variant="soft" color="secondary">
+                  Abort
+                </Button>
+              </Action>
+            </ActionGroup>
+          </Form>
+        </Modal>
+      </>
+    );
+  },
 };

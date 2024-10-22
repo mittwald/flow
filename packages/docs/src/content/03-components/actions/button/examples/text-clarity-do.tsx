@@ -4,10 +4,12 @@ import Button from "@mittwald/flow-react-components/Button";
 import Text from "@mittwald/flow-react-components/Text";
 
 <StaticModal>
-  <div className="flow--modal--content">
+  <header className="flow--modal--header">
     <Heading>
       Möchtest du die Bestellung wirklich verlassen?
     </Heading>
+  </header>
+  <div className="flow--modal--content">
     <Text>
       Bist du sicher, dass du die Bestellung wirklich
       verlassen möchtest? Deine eingegebenen Daten werden

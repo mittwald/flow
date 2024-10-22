@@ -15,9 +15,9 @@ const meta: Meta<typeof Heading> = {
       control: "inline-radio",
       options: [1, 2, 3, 4, 5, 6],
     },
-    levelVisual: {
+    size: {
       control: "inline-radio",
-      options: [1, 2, 3, 4, 5, 6],
+      options: ["xs", "s", "m", "l", "xl", "xxl"],
     },
     color: {
       control: "inline-radio",
@@ -44,9 +44,10 @@ export const WithIcon: Story = {
   ),
 };
 
-export const WithLevelVisual: Story = {
+export const WithCustomSize: Story = {
+  args: { level: 1, size: "xxl" },
   render: (props) => (
-    <Heading level={4} levelVisual={1} {...props}>
+    <Heading level={1} size="xxl" {...props}>
       <IconMember />
       Personal Information
     </Heading>

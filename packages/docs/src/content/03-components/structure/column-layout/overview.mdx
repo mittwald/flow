@@ -1,25 +1,57 @@
-# Beispiel
+# Playground
 
-Im Default werden die Spalten folgendermaßen gesetzt:
-
-- s: `[1]`
-- m: `[1, 1]`
-- l: `[1, 1, 1]`
+Verwende `<ColumnLayout />`, um ein ColumnLayout darzustellen.
 
 <LiveCodeEditor />
 
+Das ColumnLayout erzeugt ein flexibles Spalten-Layout, das für die Breakpoints
+s, m und l individuell angepasst werden kann. Diese Breakpoints beziehen sich
+nicht auf die Bildschirmgröße, sondern auf die Breite des Containers, in dem das
+ColumnLayout verwendet wird. Standardmäßig sind die Spalten wie folgt definiert:
+
+- Größe `s` bis 550 Pixel Breite: `[1]`
+- Größe `m` bis 850 Pixel Breite: `[1, 1]`
+- Größe `l` ab 851 Pixel Breite: `[1, 1, 1]`
+
+In der Definition der Spalten-Breiten werden sowohl die Anzahl der Spalten als
+auch ihr Größenverhältnis festgelegt. Eine Aufteilung wie [1, 2, 1] erzeugt zum
+Beispiel drei Spalten, wobei die mittlere Spalte doppelt so breit ist wie die
+beiden äußeren.
+
 ---
 
-# Benutzerdefinierte Values
+# Benutzerdefinierte Werte
 
-Größere Größen erben von kleineren größen, sofern sie nicht gesetzt sind:
+Für jeden Breakpoint können eigene Werte für die Spaltenanzahl und deren
+Größenverhältnis festgelegt werden. Wenn für einen größeren Breakpoint keine
+eigenen Werte definiert sind, übernimmt er automatisch die Werte des
+nächstkleineren Breakpoints. Standardwerte werden nur verwendet, wenn bei keinem
+kleineren Breakpoint benutzerdefinierte Werte angegeben sind. Beispiel:
 
-- s: `[1]` (default)
-- m: `[2, 1]`
-- l: `[2, 1]` (inherited)
+- Größe `s` bis 550 Pixel Breite: `[1]` (Default-Wert)
+- Größe `m` bis 850 Pixel Breite: `[2, 1]` (benutzerdefinierter Wert)
+- Größe `l` ab 851 Pixel Breite: `[2, 1]` (Wert von m geerbt)
+
+In diesem Beispiel wurde für den Breakpoint `m` eine benutzerdefinierte
+Spaltenaufteilung festgelegt. Der Breakpoint `l` übernimmt diese Aufteilung von
+`m`, anstatt auf den Standardwert von `[1, 1, 1]` zurückzufallen. Da für den
+Breakpoint `s` kein benutzerdefinierter Wert angegeben wurde, bleibt er beim
+Standardwert von `[1]`.
 
 <LiveCodeEditor example="custom-values" editorCollapsed />
 
-## Properties
+---
 
-<PropertiesTables />
+# Abstände
+
+Die Abstände des ColumnLayout können in drei Stufen angepasst werden:
+
+- s = 8px
+- m = 16px
+- l = 24px
+
+Die property `rowGap` steuert die Abstände zwischen den Zeilen (oben und unten),
+`columnGap` die Abstände zwischen den Spalten (rechts und links) und `gap` setzt
+alle Abstände gleichzeitig (oben, unten, rechts und links).
+
+<LiveCodeEditor example="gaps" editorCollapsed />

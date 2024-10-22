@@ -1,32 +1,27 @@
 import Heading from "@mittwald/flow-react-components/Heading";
 import Text from "@mittwald/flow-react-components/Text";
-import Link from "@mittwald/flow-react-components/Link";
 import Section from "@mittwald/flow-react-components/Section";
-import TextField from "@mittwald/flow-react-components/TextField";
-import Label from "@mittwald/flow-react-components/Label";
-import { IconMember } from "@mittwald/flow-react-components/Icons";
+import Header from "@mittwald/flow-react-components/Header";
+import { Button } from "@mittwald/flow-react-components/Button";
 
 <>
   <Section>
-    <Heading>
-      <IconMember />
-      Persönliche Informationen
-    </Heading>
-    <TextField isRequired defaultValue="John">
-      <Label>Vorname</Label>
-    </TextField>
-    <TextField isRequired defaultValue="Doe">
-      <Label>Nachname</Label>
-    </TextField>
+    <Header>
+      <Heading>Datenbanken</Heading>
+      <Button>Datenbank verknüpfen</Button>
+    </Header>
+    <Text>
+      Eine Datenbank, die mit einer App verknüpft ist, kann
+      nicht gelöscht werden. Die App nutzt immer die
+      verknüpfte Datenbank.
+    </Text>
   </Section>
   <Section>
-    <Heading>Newsletter</Heading>
+    <Heading>Cronjobs</Heading>
     <Text>
-      Kommende Releases, neue Features und Tipps rund um
-      dein Hosting – wir bringen dir das Wichtigste in dein
-      Postfach. Abonniere unseren Newsletter und bleib auf
-      dem Laufenden.
+      Ein Cronjob ist immer fest einer App zugeordnet, du
+      kannst ihn unter dem Menüpunkt Cronjobs bearbeiten und
+      löschen.
     </Text>
-    <Link href="#">Newsletter abonnieren</Link>
   </Section>
 </>;

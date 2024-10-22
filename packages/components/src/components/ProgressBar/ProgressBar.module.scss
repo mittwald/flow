@@ -38,9 +38,10 @@
   /* Size */
 
   &.size-s {
-    font-size: var(--progress-bar--font-size-small);
+    font-size: var(--progress-bar--font-size-s);
+
     .bar {
-      height: var(--progress-bar--bar-height-small);
+      height: var(--progress-bar--bar-height-s);
     }
   }
 

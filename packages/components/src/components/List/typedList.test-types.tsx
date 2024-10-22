@@ -18,6 +18,11 @@ function filters() {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  function testCustomProperty() {
+    <ItemList.Filter property="$custom" />;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   function testUnknownProperty() {
     // @ts-expect-error Is unknown
     <ItemList.Filter property="foo" />;
@@ -30,6 +35,31 @@ function filters() {
       matcher={(filter, prop) => {
         expectTypeOf(filter).toBeNumber();
         expectTypeOf(prop).toBeNumber();
+        return true;
+      }}
+    />;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  function testCustomMatcherParameters1() {
+    <ItemList.Filter
+      property="$custom"
+      matcher={(filter, item) => {
+        expectTypeOf(filter).toMatchTypeOf<Item>();
+        expectTypeOf(item).toMatchTypeOf<Item>();
+        return true;
+      }}
+    />;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  function testCustomMatcherParameters2() {
+    <ItemList.Filter
+      property="$custom"
+      values={[1, 2, 3]}
+      matcher={(filter, item) => {
+        expectTypeOf(filter).toBeNumber();
+        expectTypeOf(item).toMatchTypeOf<Item>();
         return true;
       }}
     />;
@@ -58,5 +88,35 @@ function filters() {
         return true;
       }}
     />;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  function testValueTypeForRenderMethod1() {
+    <ItemList.Filter property="labels">
+      {(label) => {
+        expectTypeOf(label).toBeString();
+        return null;
+      }}
+    </ItemList.Filter>;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  function testValueTypeForRenderMethod2() {
+    <ItemList.Filter property="id">
+      {(label) => {
+        expectTypeOf(label).toBeNumber();
+        return null;
+      }}
+    </ItemList.Filter>;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  function testValueTypeForRenderMethod3() {
+    <ItemList.Filter property="$custom">
+      {(item) => {
+        expectTypeOf(item).toMatchTypeOf<Item>();
+        return null;
+      }}
+    </ItemList.Filter>;
   }
 }

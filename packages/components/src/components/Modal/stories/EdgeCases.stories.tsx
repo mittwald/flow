@@ -25,7 +25,7 @@ export const LongContent: Story = {
   render: (props) => (
     <Modal
       {...props}
-      controller={useOverlayController("Modal", { defaultOpen: true })}
+      controller={useOverlayController("Modal", { isDefaultOpen: true })}
     >
       <Heading>{dummyText.short}</Heading>
       <Content>
@@ -62,7 +62,7 @@ export const LongContentOffCanvas: Story = {
     <Modal
       offCanvas
       {...props}
-      controller={useOverlayController("Modal", { defaultOpen: true })}
+      controller={useOverlayController("Modal", { isDefaultOpen: true })}
     >
       <Heading>{dummyText.short}</Heading>
       <Content>

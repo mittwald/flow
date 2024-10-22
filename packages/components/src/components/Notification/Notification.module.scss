@@ -16,35 +16,24 @@
     border-style: var(--notification--border-style);
     border-width: 0;
     border-inline-start-width: var(--notification--border-x-start-width);
-    display: grid;
-    grid-template-columns: auto 1fr;
-    grid-column-gap: var(--notification--icon-to-heading-spacing);
-    grid-row-gap: var(--notification--heading-to-text-spacing);
-    grid-template-areas:
-      "icon heading"
-      ".    text   ";
+    display: flex;
+    flex-direction: column;
+    row-gap: var(--notification--heading-to-text-spacing);
     cursor: default;
 
     @include focus.focus;
   }
 
-  .statusIcon {
-    grid-area: icon;
-    height: calc(var(--heading--h4-font-size) * var(--line-height--default));
-  }
-
   .heading {
-    grid-area: heading;
     --button-width: calc(
       var(--button--line-height-s) + 2 * var(--button--padding-s)
     );
     padding-inline-end: calc(
-      var(--button-width) + var(--notification--icon-to-heading-spacing)
+      var(--button-width) + var(--heading--icon-to-text-spacing)
     );
   }
 
   .text {
-    grid-area: text;
     font-size: var(--notification--font-size);
   }
 

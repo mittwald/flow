@@ -44,7 +44,7 @@ export const NumberField = flowComponent("NumberField", (props) => {
       <Aria.NumberField {...rest} className={rootClassName}>
         <Aria.Group className={styles.group}>
           <Button
-            slot="decrement"
+            ariaSlot="decrement"
             className={styles.decrementButton}
             size="s"
             variant="plain"
@@ -55,7 +55,7 @@ export const NumberField = flowComponent("NumberField", (props) => {
           </Button>
           <Aria.Input className={styles.input} ref={ref} />
           <Button
-            slot="increment"
+            ariaSlot="increment"
             className={styles.incrementButton}
             size="s"
             variant="plain"

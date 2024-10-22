@@ -4,7 +4,7 @@
 
 .columnLayout {
   display: grid;
-  gap: var(--column-layout--content-to-content-spacing);
+  gap: var(--column-layout--row-gap) var(--column-layout--column-gap);
   grid-template-columns: var(--column-layout--columns-l, 1fr 1fr 1fr);
 
   @container (max-width: 850px) {

@@ -2,11 +2,11 @@ import type { ComponentProps, FC } from "react";
 import React from "react";
 import styles from "./SkeletonText.module.scss";
 
-export interface SkeletonProps extends ComponentProps<"div"> {
+export interface SkeletonTextProps extends ComponentProps<"div"> {
   width?: string;
 }
 
-export const Skeleton: FC<SkeletonProps> = (props) => {
+export const SkeletonText: FC<SkeletonTextProps> = (props) => {
   const { width, style = {}, ...rest } = props;
   return (
     <div aria-hidden style={{ width, ...style }} {...rest}>
@@ -15,4 +15,4 @@ export const Skeleton: FC<SkeletonProps> = (props) => {
   );
 };
 
-export default Skeleton;
+export default SkeletonText;

@@ -8,11 +8,14 @@
   align-items: center;
 
   .link {
-    @include focus.focus;
-    @include ellipsis.ellipsis;
-
     padding-inline: var(--breadcrumb-item--padding-x);
     font-weight: var(--breadcrumb-item--font-weight--default);
+
+    @include focus.focus;
+
+    & {
+      @include ellipsis.ellipsis;
+    }
 
     &:hover {
       text-decoration: underline;
@@ -30,6 +33,7 @@
       .icon {
         display: none;
       }
+
       .link {
         text-decoration: none;
         font-weight: var(--breadcrumb-item--font-weight--current);

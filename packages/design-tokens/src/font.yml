@@ -1,8 +1,8 @@
 font-weight:
   normal:
-    value: 300
+    value: normal
   bold:
-    value: 600
+    value: bold
 line-height:
   default:
     value: 1.5
@@ -15,14 +15,19 @@ font-size:
     value: 0.875rem
   m:
     value: 1rem
-  l:
+heading-font-size:
+  xs:
+    value: 1rem
+  s:
     value: 1.125rem
-  xl:
+  m:
     value: 1.25rem
-  xxl:
+  l:
     value: 1.5rem
-  xxxl:
+  xl:
     value: 2rem
+  xxl:
+    value: 2.625rem
 content:
   color:
     default:

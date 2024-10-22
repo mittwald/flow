@@ -1,0 +1,15 @@
+.alertIcon {
+  @extend .info;
+}
+
+/* Status */
+@mixin status($status) {
+  .#{$status} {
+    color: var(--alert-icon--#{$status}-color);
+  }
+}
+
+@include status(info);
+@include status(warning);
+@include status(danger);
+@include status(success);

@@ -6,7 +6,6 @@ import type List from "@/components/List/model/List";
 export interface ItemViewShape<T> {
   textValue?: (data: T) => string;
   href?: (data: T) => string;
-  onAction?: (data: T) => void;
   renderFn?: RenderItemFn<T>;
   fallback?: ReactElement;
 }
@@ -15,23 +14,22 @@ export class ItemView<T> {
   public readonly list: List<T>;
   public readonly textValue?: (data: T) => string;
   public readonly href?: (data: T) => string;
-  public readonly onAction?: (data: T) => void;
   public readonly fallback?: ReactElement;
   private readonly renderFn?: RenderItemFn<T>;
 
   public constructor(list: List<T>, shape: ItemViewShape<T> = {}) {
-    const { onAction, fallback, textValue, href, renderFn } = shape;
+    const { fallback, textValue, href, renderFn } = shape;
     this.list = list;
     this.textValue = textValue;
     this.renderFn = renderFn;
     this.href = href;
-    this.onAction = onAction;
     this.fallback = fallback;
   }
 
   public render(data: T): ReactNode {
-    const renderFn = this.renderFn ?? ItemView.fallbackRenderItemFn;
-    return renderFn(data as never);
+    const renderFn = (this.renderFn ??
+      ItemView.fallbackRenderItemFn) as RenderItemFn<T>;
+    return renderFn(data as never, this.list);
   }
 
   private static fallbackRenderItemFn: RenderItemFn<never> = (item) =>

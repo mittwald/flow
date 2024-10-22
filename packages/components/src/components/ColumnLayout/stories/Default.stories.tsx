@@ -3,7 +3,7 @@ import ColumnLayout from "../ColumnLayout";
 import React from "react";
 import { TextField } from "@/components/TextField";
 import { Label } from "@/components/Label";
-import { InlineAlert } from "@/components/InlineAlert";
+import { Alert } from "@/components/Alert";
 import { Heading } from "@/components/Heading";
 import { Section } from "@/components/Section";
 
@@ -15,11 +15,11 @@ const meta: Meta<typeof ColumnLayout> = {
   },
   render: (props) => (
     <Section>
-      <InlineAlert>
+      <Alert>
         <Heading>
           s: [1] (default), m: [1, 1] (default), l: [1, 1, 1] (default)
         </Heading>
-      </InlineAlert>
+      </Alert>
       <ColumnLayout {...props}>
         <TextField>
           <Label>First name</Label>
@@ -46,9 +46,9 @@ export const Default: Story = {};
 export const CustomValueM: Story = {
   render: (props) => (
     <Section>
-      <InlineAlert>
+      <Alert>
         <Heading>s: [1] (default), m: [2, 1], l: [2, 1] (inherited)</Heading>
-      </InlineAlert>
+      </Alert>
       <ColumnLayout {...props} m={[2, 1]}>
         <TextField>
           <Label>Street</Label>
@@ -64,10 +64,68 @@ export const CustomValueM: Story = {
 export const AllCustomValues: Story = {
   render: (props) => (
     <Section>
-      <InlineAlert>
+      <Alert>
         <Heading>s: [2, 1], m: [3, 2, 1], l: [4, 3, 2, 1]</Heading>
-      </InlineAlert>
+      </Alert>
       <ColumnLayout {...props} s={[2, 1]} m={[3, 2, 1]} l={[4, 3, 2, 1]}>
+        <TextField>
+          <Label>First name</Label>
+        </TextField>
+        <TextField>
+          <Label>Last name</Label>
+        </TextField>
+        <TextField>
+          <Label>Street</Label>
+        </TextField>
+        <TextField>
+          <Label>House number</Label>
+        </TextField>
+      </ColumnLayout>
+    </Section>
+  ),
+};
+
+export const Gaps: Story = {
+  render: (props) => (
+    <Section>
+      <Alert>
+        <Heading>Gap size: "s"</Heading>
+      </Alert>
+      <ColumnLayout {...props} gap="s">
+        <TextField>
+          <Label>First name</Label>
+        </TextField>
+        <TextField>
+          <Label>Last name</Label>
+        </TextField>
+        <TextField>
+          <Label>Street</Label>
+        </TextField>
+        <TextField>
+          <Label>House number</Label>
+        </TextField>
+      </ColumnLayout>
+      <Alert>
+        <Heading>Gap size: "m"</Heading>
+      </Alert>
+      <ColumnLayout {...props} gap="m">
+        <TextField>
+          <Label>First name</Label>
+        </TextField>
+        <TextField>
+          <Label>Last name</Label>
+        </TextField>
+        <TextField>
+          <Label>Street</Label>
+        </TextField>
+        <TextField>
+          <Label>House number</Label>
+        </TextField>
+      </ColumnLayout>
+      <Alert>
+        <Heading>Gap size: "l"</Heading>
+      </Alert>
+      <ColumnLayout {...props} gap="l">
         <TextField>
           <Label>First name</Label>
         </TextField>

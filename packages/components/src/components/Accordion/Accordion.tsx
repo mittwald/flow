@@ -12,16 +12,24 @@ import { Activity } from "@/components/Activity";
 export interface AccordionProps
   extends PropsWithChildren<ComponentProps<"div">> {
   defaultExpanded?: boolean;
+  variant?: "default" | "outline";
 }
 
 export const Accordion: FC<AccordionProps> = (props) => {
-  const { children, className, defaultExpanded = false, ...rest } = props;
+  const {
+    children,
+    className,
+    defaultExpanded = false,
+    variant = "default",
+    ...rest
+  } = props;
   const [expanded, setExpanded] = useState(defaultExpanded);
 
   const rootClassName = clsx(
     styles.accordion,
     expanded && styles.expanded,
     className,
+    variant === "outline" && styles.outline,
   );
 
   const headerId = useId();
