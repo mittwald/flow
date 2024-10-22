@@ -50,6 +50,11 @@ export const Modal = flowComponent("Modal", (props) => {
   const propsContext: PropsContext = {
     Content: {
       className: styles.content,
+      Section: {
+        Heading: {
+          level: 3,
+        },
+      },
     },
     Heading: {
       level: 2,

@@ -53,6 +53,8 @@
       background: var(--calendar--cell-background-color--disabled);
       color: var(--calendar--cell-content-color--disabled);
     }
+
+    @include focus.focus;
   }
 
   &.range {

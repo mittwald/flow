@@ -10,7 +10,7 @@
 
   .input {
     grid-area: input;
-    
+
     @include formControl.formControl();
   }
 
@@ -85,30 +85,37 @@
   .group {
     grid-template-columns: auto 1fr auto;
     grid-template-areas: "decrement input increment";
-  }
 
-  .input {
-    border-radius: 0;
-  }
+    .input {
+      border-radius: 0;
+    }
 
-  .decrementButton,
-  .incrementButton {
-    padding-inline: var(--form-control--padding-x);
+    .decrementButton,
+    .incrementButton {
+      padding-inline: var(--button--padding);
 
-    :not(.touchIcon) {
-      display: none;
+      .coarsePointerIcon {
+        width: var(--icon--size--m);
+        height: var(--icon--size--m);
+      }
+
+      svg:not(.coarsePointerIcon) {
+        display: none;
+      }
+    }
+
+    .decrementButton {
+      border-start-end-radius: 0;
+      border-end-end-radius: 0;
+      border-inline-end: none;
+    }
+
+    .incrementButton {
+      border-start-start-radius: 0;
+      border-end-start-radius: 0;
+      border-inline-start: none;
     }
   }
 
-  .decrementButton {
-    border-start-end-radius: 0;
-    border-end-end-radius: 0;
-    border-inline-end: none;
-  }
 
-  .incrementButton {
-    border-start-start-radius: 0;
-    border-end-start-radius: 0;
-    border-inline-start: none;
-  }
 }

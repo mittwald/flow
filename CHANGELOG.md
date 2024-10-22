@@ -3,6 +3,80 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.293](https://github.com/mittwald/flow/compare/0.1.0-alpha.292...0.1.0-alpha.293) (2024-10-22)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.292](https://github.com/mittwald/flow/compare/0.1.0-alpha.291...0.1.0-alpha.292) (2024-10-21)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.291](https://github.com/mittwald/flow/compare/0.1.0-alpha.290...0.1.0-alpha.291) (2024-10-18)
+
+### Bug Fixes
+
+- **NumberField:** fix mobile styles
+  ([#858](https://github.com/mittwald/flow/issues/858))
+  ([f211f9d](https://github.com/mittwald/flow/commit/f211f9d68aed3e5538c4896d6f39afb227799e27))
+- **ProgressBar:** add translations
+  ([#859](https://github.com/mittwald/flow/issues/859))
+  ([268cd5f](https://github.com/mittwald/flow/commit/268cd5f4c75dfc77b682d4fe0ce4bb8f25b88ce9))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.290](https://github.com/mittwald/flow/compare/0.1.0-alpha.289...0.1.0-alpha.290) (2024-10-18)
+
+### Bug Fixes
+
+- **ContextMenu:** remove width (wrong branch)
+  ([35e0c30](https://github.com/mittwald/flow/commit/35e0c303beadd17d91f7ed0508f8c09a7e38891a))
+
+### Features
+
+- **CodeBlock:** add code block component
+  ([eaca671](https://github.com/mittwald/flow/commit/eaca67168d68334625c3d7e19b33dc83738dc992))
+- **CodeBlock:** add code block component
+  ([fe0a80e](https://github.com/mittwald/flow/commit/fe0a80e20c0c0350758d74d6a5973f76d471b02e))
+- **CodeBlock:** add code property
+  ([f0d9006](https://github.com/mittwald/flow/commit/f0d9006d2879db914a891a58aabe2bad7241eede))
+- **CodeBlock:** add CodeBlock component
+  ([8b5481d](https://github.com/mittwald/flow/commit/8b5481d11c03bf46345419c365e571a46991ea3c))
+- **CodeBlock:** add CodeBlock component
+  ([5eefef9](https://github.com/mittwald/flow/commit/5eefef9d37346e82df52a0aae501b7903081dd36))
+- **CodeBlock:** add custom colors
+  ([ed8b454](https://github.com/mittwald/flow/commit/ed8b4541508383dace50ee43fed8135b7dd7c80a))
+- **CodeBlock:** fix tokens
+  ([8f521d8](https://github.com/mittwald/flow/commit/8f521d89d7adfd51b31876bd5ae8430a09919ded))
+- **ContextMenu:** add width property
+  ([88f78b8](https://github.com/mittwald/flow/commit/88f78b80f6b4d43edc64cd719b74054d04de6e7f))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.289](https://github.com/mittwald/flow/compare/0.1.0-alpha.288...0.1.0-alpha.289) (2024-10-18)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.288](https://github.com/mittwald/flow/compare/0.1.0-alpha.287...0.1.0-alpha.288) (2024-10-17)
 
 **Note:** Version bump only for package @mittwald/flow-project
