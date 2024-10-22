@@ -11,4 +11,8 @@
     margin-inline-start: auto;
     flex-wrap: wrap;
   }
+
+  &:not(:first-child) {
+    margin-top: var(--section--sub-heading-spacing);
+  }
 }

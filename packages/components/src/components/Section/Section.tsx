@@ -40,6 +40,7 @@ export const Section = flowComponent("Section", (props) => {
     Heading: {
       level: 2,
       id: headingId,
+      className: styles.heading,
     },
     Header: {
       renderSectionHeader: true,
