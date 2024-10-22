@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.294](https://github.com/mittwald/flow/compare/0.1.0-alpha.293...0.1.0-alpha.294) (2024-10-22)
+
+### Bug Fixes
+
+- **NumberField:** fix number field overflow
+  ([#873](https://github.com/mittwald/flow/issues/873))
+  ([075a099](https://github.com/mittwald/flow/commit/075a0996670b8a60056a74e09cb91263dbe22256))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.293](https://github.com/mittwald/flow/compare/0.1.0-alpha.292...0.1.0-alpha.293) (2024-10-22)
 
 **Note:** Version bump only for package @mittwald/flow-project
