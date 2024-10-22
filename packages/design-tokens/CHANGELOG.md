@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.295](https://github.com/mittwald/flow/compare/0.1.0-alpha.294...0.1.0-alpha.295) (2024-10-22)
+
+### Features
+
+- **Section:** add spacing to sub headings in sections
+  ([#890](https://github.com/mittwald/flow/issues/890))
+  ([9710032](https://github.com/mittwald/flow/commit/971003226121d8a577cc7df99ebf15592904021d))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.294](https://github.com/mittwald/flow/compare/0.1.0-alpha.293...0.1.0-alpha.294) (2024-10-22)
 
 **Note:** Version bump only for package @mittwald/flow-design-tokens
