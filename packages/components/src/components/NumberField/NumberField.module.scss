@@ -85,9 +85,11 @@
   .group {
     grid-template-columns: auto 1fr auto;
     grid-template-areas: "decrement input increment";
+    max-width: 100%;
 
     .input {
       border-radius: 0;
+      min-width: 0;
     }
 
     .decrementButton,
@@ -116,6 +118,4 @@
       border-inline-start: none;
     }
   }
-
-
 }
