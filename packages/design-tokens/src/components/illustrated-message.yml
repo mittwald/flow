@@ -12,12 +12,12 @@ illustrated-message:
 
   # Info
   info-icon-color:
-    value: "{info.color.800}"
+    value: "{info.color.900}"
   info-heading-color:
-    value: "{info.color.800}"
+    value: "{info.color.1000}"
 
   # Negative
   negative-icon-color:
-    value: "{danger.color.800}"
-  negative-heading-color:
     value: "{danger.color.900}"
+  negative-heading-color:
+    value: "{danger.color.1000}"

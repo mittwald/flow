@@ -2,11 +2,11 @@ import Tooltip, {
   TooltipTrigger,
 } from "@mittwald/flow-react-components/Tooltip";
 import Button from "@mittwald/flow-react-components/Button";
-import { IconCopy } from "@mittwald/flow-react-components/Icons";
+import { IconEdit } from "@mittwald/flow-react-components/Icons";
 
 <TooltipTrigger>
-  <Button aria-label="Speichern">
-    <IconCopy />
+  <Button aria-label="Bearbeiten" variant="plain">
+    <IconEdit />
   </Button>
-  <Tooltip>Speichern</Tooltip>
+  <Tooltip>Bearbeiten</Tooltip>
 </TooltipTrigger>;

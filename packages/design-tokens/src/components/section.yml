@@ -9,5 +9,10 @@ section:
     value: "{size-rem.xl}"
   content-to-content-spacing:
     value: "{size-rem.m}"
-  heading-to-header-content-spacing:
+  sub-heading-spacing:
+    value: "{size-rem.s}"
+section-header:
+  action-to-action-spacing:
+    value: "{size-rem.s}"
+  heading-to-actions-spacing:
     value: "{size-rem.m}"

@@ -1,0 +1,37 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--list--content-to-content-spacing);
+
+  .pickerListAndSearch {
+    display: flex;
+    gap: var(--list--block-to-block-spacing);
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap-reverse;
+  }
+
+  .pickerList {
+    display: flex;
+    flex-grow: 9999;
+    flex-wrap: wrap;
+    gap: var(--list--content-to-content-spacing);
+  }
+
+  .searchAndActions {
+    display: flex;
+    flex-grow: 1;
+    gap: var(--list--content-to-content-spacing);
+    flex-wrap: wrap-reverse;
+    justify-content: space-between;
+  }
+
+  .searchField {
+    width: 180px;
+    flex-grow: 1;
+  }
+
+  .actions {
+    margin-left: auto;
+  }
+}

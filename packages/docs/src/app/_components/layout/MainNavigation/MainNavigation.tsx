@@ -1,6 +1,6 @@
 "use client";
 import type { FC } from "react";
-import React, { useId, useMemo } from "react";
+import React, { useId, useMemo, useState } from "react";
 import Navigation, {
   NavigationGroup,
 } from "@mittwald/flow-react-components/Navigation";
@@ -16,14 +16,20 @@ import { Label } from "@mittwald/flow-react-components/Label";
 import { Section } from "@mittwald/flow-react-components/Section";
 import { useOverlayController } from "@mittwald/flow-react-components/controller";
 import { useOnChange } from "@mittwald/flow-react-components/hooks";
+import { SearchField } from "@mittwald/flow-react-components/SearchField";
+import styles from "@/app/layout.module.scss";
+import { LayoutCard } from "@mittwald/flow-react-components/LayoutCard";
+import { Wrap } from "@mittwald/flow-react-components/Wrap";
 
 interface Props {
   docs: SerializedMdxFile[];
+  mobileNavigation?: boolean;
 }
 
 interface NavigationSectionProps {
   tree: MdxDirectoryTree;
   group: string;
+  searchValue: string;
 }
 
 interface NavigationLinkProps {
@@ -34,7 +40,7 @@ const NavigationLink: FC<NavigationLinkProps> = (props) => {
   const { treeItem } = props;
   const currentPathname = usePathname();
 
-  const overlay = useOverlayController();
+  const overlay = useOverlayController("Modal");
 
   useOnChange(currentPathname, () => {
     overlay.close();
@@ -50,16 +56,38 @@ const NavigationLink: FC<NavigationLinkProps> = (props) => {
   );
 };
 
-const NavigationSection: FC<NavigationSectionProps> = (props) => {
-  const { tree, group } = props;
+const filterBySearchValue = (
+  searchValue: string,
+  tree: [string, MdxDirectoryTree | MdxFile],
+): boolean => {
+  const [, treeItem] = tree;
+  if (searchValue === "" || !(treeItem instanceof MdxFile)) {
+    return true;
+  }
+  return treeItem.getNavTitle().toLowerCase().includes(searchValue);
+};
 
-  const navigationItems = Object.entries(tree).map(([group, treeItem]) =>
-    treeItem instanceof MdxFile ? (
-      <NavigationLink key={group} treeItem={treeItem} />
-    ) : (
-      <NavigationSection key={group} tree={treeItem} group={group} />
-    ),
-  );
+const NavigationSection: FC<NavigationSectionProps> = (props) => {
+  const { tree, group, searchValue } = props;
+
+  const navigationItems = Object.entries(tree)
+    .filter((tree) => filterBySearchValue(searchValue, tree))
+    .map(([group, treeItem]) =>
+      treeItem instanceof MdxFile ? (
+        <NavigationLink key={group} treeItem={treeItem} />
+      ) : (
+        <NavigationSection
+          key={group}
+          tree={treeItem}
+          group={group}
+          searchValue={searchValue}
+        />
+      ),
+    );
+
+  if (navigationItems.length === 0) {
+    return null;
+  }
 
   return (
     <NavigationGroup collapsable>
@@ -77,6 +105,8 @@ const MainNavigation: FC<Props> = (props) => {
   const currentPathname = usePathname();
   const mainPathSegment = currentPathname.split("/")[1];
 
+  const [searchValue, setSearchValue] = useState<string>("");
+
   const headingId = useId();
 
   if (mainPathSegment === undefined) {
@@ -89,21 +119,35 @@ const MainNavigation: FC<Props> = (props) => {
   }
 
   return (
-    <Section>
-      <Heading id={headingId}>
-        <GroupText>{mainPathSegment}</GroupText>
-      </Heading>
+    <Wrap if={!props.mobileNavigation}>
+      <LayoutCard className={styles.mainNavigation}>
+        <Section>
+          <Heading id={headingId}>
+            <GroupText>{mainPathSegment}</GroupText>
+          </Heading>
 
-      <Navigation aria-labelledby={headingId}>
-        {Object.entries(selectedMainBranch).map(([group, treeItem]) =>
-          treeItem instanceof MdxFile ? (
-            <NavigationLink key={group} treeItem={treeItem} />
-          ) : (
-            <NavigationSection key={group} tree={treeItem} group={group} />
-          ),
-        )}
-      </Navigation>
-    </Section>
+          <SearchField
+            onChange={(value) => setSearchValue(value.toLowerCase().trim())}
+          />
+          <Navigation aria-labelledby={headingId}>
+            {Object.entries(selectedMainBranch)
+              .filter((tree) => filterBySearchValue(searchValue, tree))
+              .map(([group, treeItem]) =>
+                treeItem instanceof MdxFile ? (
+                  <NavigationLink key={group} treeItem={treeItem} />
+                ) : (
+                  <NavigationSection
+                    key={group}
+                    tree={treeItem}
+                    group={group}
+                    searchValue={searchValue}
+                  />
+                ),
+              )}
+          </Navigation>
+        </Section>
+      </LayoutCard>
+    </Wrap>
   );
 };
 

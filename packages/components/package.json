@@ -1,257 +1,381 @@
 {
   "name": "@mittwald/flow-react-components",
-  "version": "0.1.0-alpha.132",
+  "version": "0.1.0-alpha.297",
   "type": "module",
   "description": "A React implementation of Flow, mittwald’s design system",
   "homepage": "https://mittwald.github.io/flow",
   "repository": "https://github.com/mittwald/flow",
   "exports": {
+    "./Accordion/styles.css": "./dist/css/Accordion.css",
     "./Accordion": {
-      "types": "./dist/types/components/Accordion/index.d.ts",
-      "import": "./dist/Accordion.js"
+      "types": "./dist/js/types/components/Accordion/index.d.ts",
+      "import": "./dist/js/Accordion.js"
     },
     "./Action": {
-      "types": "./dist/types/components/Action/index.d.ts",
-      "import": "./dist/Action.js"
+      "types": "./dist/js/types/components/Action/index.d.ts",
+      "import": "./dist/js/Action.js"
     },
+    "./ActionGroup/styles.css": "./dist/css/ActionGroup.css",
     "./ActionGroup": {
-      "types": "./dist/types/components/ActionGroup/index.d.ts",
-      "import": "./dist/ActionGroup.js"
+      "types": "./dist/js/types/components/ActionGroup/index.d.ts",
+      "import": "./dist/js/ActionGroup.js"
     },
+    "./Activity": {
+      "types": "./dist/js/types/components/Activity/index.d.ts",
+      "import": "./dist/js/Activity.js"
+    },
+    "./Alert.css": "./dist/css/Alert.css",
+    "./Alert": {
+      "types": "./dist/js/types/components/Alert/index.d.ts",
+      "import": "./dist/js/Alert.js"
+    },
+    "./AlertBadge/styles.css": "./dist/css/AlertBadge.css",
+    "./AlertBadge": {
+      "types": "./dist/js/types/components/AlertBadge/index.d.ts",
+      "import": "./dist/js/AlertBadge.js"
+    },
+    "./AlertIcon/styles.css": "./dist/css/AlertIcon.css",
+    "./AlertIcon": {
+      "types": "./dist/js/types/components/AlertIcon/index.d.ts",
+      "import": "./dist/js/AlertIcon.js"
+    },
+    "./Autocomplete/styles.css": "./dist/css/Autocomplete.css",
     "./Autocomplete": {
       "types": "./dist/types/components/Autocomplete/index.d.ts",
       "import": "./dist/Autocomplete.js"
     },
+    "./Avatar/styles.css": "./dist/css/Avatar.css",
     "./Avatar": {
-      "types": "./dist/types/components/Avatar/index.d.ts",
-      "import": "./dist/Avatar.js"
+      "types": "./dist/js/types/components/Avatar/index.d.ts",
+      "import": "./dist/js/Avatar.js"
     },
-    "./Button": {
-      "types": "./dist/types/components/Button/index.d.ts",
-      "import": "./dist/Button.js"
+    "./Badge/styles.css": "./dist/css/Badge.css",
+    "./Badge": {
+      "types": "./dist/js/types/components/Badge/index.d.ts",
+      "import": "./dist/js/Badge.js"
     },
     "./Breadcrumb": {
-      "types": "./dist/types/components/Breadcrumb/index.d.ts",
-      "import": "./dist/Breadcrumb.js"
+      "types": "./dist/js/types/components/Breadcrumb/index.d.ts",
+      "import": "./dist/js/Breadcrumb.js"
     },
+    "./Button/styles.css": "./dist/css/Button.css",
+    "./Button": {
+      "types": "./dist/js/types/components/Button/index.d.ts",
+      "import": "./dist/js/Button.js"
+    },
+    "./Checkbox/styles.css": "./dist/css/Checkbox.css",
     "./Checkbox": {
-      "types": "./dist/types/components/Checkbox/index.d.ts",
-      "import": "./dist/Checkbox.js"
+      "types": "./dist/js/types/components/Checkbox/index.d.ts",
+      "import": "./dist/js/Checkbox.js"
     },
+    "./CheckboxButton/styles.css": "./dist/css/CheckboxButton.css",
     "./CheckboxButton": {
-      "types": "./dist/types/components/CheckboxButton/index.d.ts",
-      "import": "./dist/CheckboxButton.js"
+      "types": "./dist/js/types/components/CheckboxButton/index.d.ts",
+      "import": "./dist/js/CheckboxButton.js"
     },
+    "./CheckboxGroup/styles.css": "./dist/css/CheckboxGroup.css",
     "./CheckboxGroup": {
-      "types": "./dist/types/components/CheckboxGroup/index.d.ts",
-      "import": "./dist/CheckboxGroup.js"
+      "types": "./dist/js/types/components/CheckboxGroup/index.d.ts",
+      "import": "./dist/js/CheckboxGroup.js"
     },
+    "./CodeBlock/styles.css": "./dist/css/CodeBlock.css",
+    "./CodeBlock": {
+      "types": "./dist/js/types/components/CodeBlock/index.d.ts",
+      "import": "./dist/js/CodeBlock.js"
+    },
+    "./ColumnLayout/styles.css": "./dist/css/ColumnLayout.css",
     "./ColumnLayout": {
-      "types": "./dist/types/components/ColumnLayout/index.d.ts",
-      "import": "./dist/ColumnLayout.js"
+      "types": "./dist/js/types/components/ColumnLayout/index.d.ts",
+      "import": "./dist/js/ColumnLayout.js"
     },
     "./Content": {
-      "types": "./dist/types/components/Content/index.d.ts",
-      "import": "./dist/Content.js"
+      "types": "./dist/js/types/components/Content/index.d.ts",
+      "import": "./dist/js/Content.js"
     },
-    "./CounterBadge": {
-      "types": "./dist/types/components/CounterBadge/index.d.ts",
-      "import": "./dist/CounterBadge.js"
-    },
+    "./ContextMenu/styles.css": "./dist/css/ContextMenu.css",
     "./ContextMenu": {
-      "types": "./dist/types/components/ContextMenu/index.d.ts",
-      "import": "./dist/ContextMenu.js"
+      "types": "./dist/js/types/components/ContextMenu/index.d.ts",
+      "import": "./dist/js/ContextMenu.js"
+    },
+    "./ContextualHelp/styles.css": "./dist/css/ContextualHelp.css",
+    "./ContextualHelp": {
+      "types": "./dist/js/types/components/ContextualHelp/index.d.ts",
+      "import": "./dist/js/ContextualHelp.js"
     },
     "./controller": {
-      "types": "./dist/types/lib/controller/index.d.ts",
-      "import": "./dist/controller.js"
+      "types": "./dist/js/types/lib/controller/index.d.ts",
+      "import": "./dist/js/controller.js"
     },
     "./CopyButton": {
-      "types": "./dist/types/components/CopyButton/index.d.ts",
-      "import": "./dist/CopyButton.js"
+      "types": "./dist/js/types/components/CopyButton/index.d.ts",
+      "import": "./dist/js/CopyButton.js"
     },
+    "./CounterBadge/styles.css": "./dist/css/CounterBadge.css",
+    "./CounterBadge": {
+      "types": "./dist/js/types/components/CounterBadge/index.d.ts",
+      "import": "./dist/js/CounterBadge.js"
+    },
+    "./DatePicker/styles.css": "./dist/css/DatePicker.css",
+    "./DatePicker": {
+      "types": "./dist/js/types/components/DatePicker/index.d.ts",
+      "import": "./dist/js/DatePicker.js"
+    },
+    "./DateRangePicker/styles.css": "./dist/css/DateRangePicker.css",
+    "./DateRangePicker": {
+      "types": "./dist/js/types/components/DateRangePicker/index.d.ts",
+      "import": "./dist/js/DateRangePicker.js"
+    },
+    "./EmulatedBoldText/styles.css": "./dist/css/EmulatedBoldText.css",
+    "./FieldDescription/styles.css": "./dist/css/FieldDescription.css",
     "./FieldDescription": {
-      "types": "./dist/types/components/FieldDescription/index.d.ts",
-      "import": "./dist/FieldDescription.js"
+      "types": "./dist/js/types/components/FieldDescription/index.d.ts",
+      "import": "./dist/js/FieldDescription.js"
     },
+    "./FieldError/styles.css": "./dist/css/FieldError.css",
     "./FieldError": {
-      "types": "./dist/types/components/FieldError/index.d.ts",
-      "import": "./dist/FieldError.js"
+      "types": "./dist/js/types/components/FieldError/index.d.ts",
+      "import": "./dist/js/FieldError.js"
     },
+    "./Header/styles.css": "./dist/css/Header.css",
     "./Header": {
-      "types": "./dist/types/components/Header/index.d.ts",
-      "import": "./dist/Header.js"
+      "types": "./dist/js/types/components/Header/index.d.ts",
+      "import": "./dist/js/Header.js"
     },
+    "./HeaderNavigation/styles.css": "./dist/css/HeaderNavigation.css",
     "./HeaderNavigation": {
-      "types": "./dist/types/components/HeaderNavigation/index.d.ts",
-      "import": "./dist/HeaderNavigation.js"
+      "types": "./dist/js/types/components/HeaderNavigation/index.d.ts",
+      "import": "./dist/js/HeaderNavigation.js"
     },
+    "./Heading/styles.css": "./dist/css/Heading.css",
     "./Heading": {
-      "types": "./dist/types/components/Heading/index.d.ts",
-      "import": "./dist/Heading.js"
+      "types": "./dist/js/types/components/Heading/index.d.ts",
+      "import": "./dist/js/Heading.js"
     },
+    "./Icon/styles.css": "./dist/css/Icon.css",
     "./Icon": {
-      "types": "./dist/types/components/Icon/index.d.ts",
-      "import": "./dist/Icon.js"
+      "types": "./dist/js/types/components/Icon/index.d.ts",
+      "import": "./dist/js/Icon.js"
     },
     "./Icons": {
-      "types": "./dist/types/components/Icon/components/icons/index.d.ts",
-      "import": "./dist/Icons.js"
+      "types": "./dist/js/types/components/Icon/components/icons/index.d.ts",
+      "import": "./dist/js/Icons.js"
     },
+    "./IllustratedMessage/styles.css": "./dist/css/IllustratedMessage.css",
     "./IllustratedMessage": {
-      "types": "./dist/types/components/IllustratedMessage/index.d.ts",
-      "import": "./dist/IllustratedMessage.js"
+      "types": "./dist/js/types/components/IllustratedMessage/index.d.ts",
+      "import": "./dist/js/IllustratedMessage.js"
     },
     "./Image": {
-      "types": "./dist/types/components/Image/index.d.ts",
-      "import": "./dist/Image.js"
+      "types": "./dist/js/types/components/Image/index.d.ts",
+      "import": "./dist/js/Image.js"
     },
+    "./Initials/styles.css": "./dist/css/Initials.css",
     "./Initials": {
-      "types": "./dist/types/components/Initials/index.d.ts",
-      "import": "./dist/Initials.js"
+      "types": "./dist/js/types/components/Initials/index.d.ts",
+      "import": "./dist/js/Initials.js"
     },
-    "./InlineAlert": {
-      "types": "./dist/types/components/InlineAlert/index.d.ts",
-      "import": "./dist/InlineAlert.js"
-    },
+    "./InlineCode/styles.css": "./dist/css/InlineCode.css",
     "./InlineCode": {
-      "types": "./dist/types/components/InlineCode/index.d.ts",
-      "import": "./dist/InlineCode.js"
+      "types": "./dist/js/types/components/InlineCode/index.d.ts",
+      "import": "./dist/js/InlineCode.js"
     },
+    "./Label/styles.css": "./dist/css/Label.css",
     "./Label": {
-      "types": "./dist/types/components/Label/index.d.ts",
-      "import": "./dist/Label.js"
+      "types": "./dist/js/types/components/Label/index.d.ts",
+      "import": "./dist/js/Label.js"
     },
+    "./LabeledValue/styles.css": "./dist/css/LabeledValue.css",
     "./LabeledValue": {
-      "types": "./dist/types/components/LabeledValue/index.d.ts",
-      "import": "./dist/LabeledValue.js"
+      "types": "./dist/js/types/components/LabeledValue/index.d.ts",
+      "import": "./dist/js/LabeledValue.js"
     },
+    "./LayoutCard/styles.css": "./dist/css/LayoutCard.css",
     "./LayoutCard": {
-      "types": "./dist/types/components/LayoutCard/index.d.ts",
-      "import": "./dist/LayoutCard.js"
+      "types": "./dist/js/types/components/LayoutCard/index.d.ts",
+      "import": "./dist/js/LayoutCard.js"
     },
+    "./Link/styles.css": "./dist/css/Link.css",
     "./Link": {
-      "types": "./dist/types/components/Link/index.d.ts",
-      "import": "./dist/Link.js"
+      "types": "./dist/js/types/components/Link/index.d.ts",
+      "import": "./dist/js/Link.js"
     },
+    "./List/styles.css": "./dist/css/List.css",
     "./List": {
-      "types": "./dist/types/components/List/index.d.ts",
-      "import": "./dist/List.js"
+      "types": "./dist/js/types/components/List/index.d.ts",
+      "import": "./dist/js/List.js"
     },
     "./List/ListLoaderAsyncResource": {
-      "types": "./dist/types/components/List/components/ListLoaderAsyncResource.d.ts",
-      "import": "./dist/List/ListLoaderAsyncResource.js"
+      "types": "./dist/js/types/components/List/components/ListLoaderAsyncResource.d.ts",
+      "import": "./dist/js/List/ListLoaderAsyncResource.js"
     },
+    "./LoadingSpinner/styles.css": "./dist/css/LoadingSpinner.css",
     "./LoadingSpinner": {
-      "types": "./dist/types/components/LoadingSpinner/index.d.ts",
-      "import": "./dist/LoadingSpinner.js"
+      "types": "./dist/js/types/components/LoadingSpinner/index.d.ts",
+      "import": "./dist/js/LoadingSpinner.js"
     },
+    "./MenuItem/styles.css": "./dist/css/MenuItem.css",
     "./MenuItem": {
-      "types": "./dist/types/components/MenuItem/index.d.ts",
-      "import": "./dist/MenuItem.js"
+      "types": "./dist/js/types/components/MenuItem/index.d.ts",
+      "import": "./dist/js/MenuItem.js"
     },
+    "./Modal/styles.css": "./dist/css/Modal.css",
     "./Modal": {
-      "types": "./dist/types/components/Modal/index.d.ts",
-      "import": "./dist/Modal.js"
+      "types": "./dist/js/types/components/Modal/index.d.ts",
+      "import": "./dist/js/Modal.js"
     },
+    "./Navigation/styles.css": "./dist/css/Navigation.css",
     "./Navigation": {
-      "types": "./dist/types/components/Navigation/index.d.ts",
-      "import": "./dist/Navigation.js"
+      "types": "./dist/js/types/components/Navigation/index.d.ts",
+      "import": "./dist/js/Navigation.js"
     },
+    "./Notification/styles.css": "./dist/css/Notification.css",
+    "./Notification": {
+      "types": "./dist/js/types/components/Notification/index.d.ts",
+      "import": "./dist/js/Notification.js"
+    },
+    "./NotificationProvider/styles.css": "./dist/css/NotificationProvider.css",
+    "./NotificationProvider": {
+      "types": "./dist/js/types/components/NotificationProvider/index.d.ts",
+      "import": "./dist/js/NotificationProvider.js"
+    },
+    "./NumberField/styles.css": "./dist/css/NumberField.css",
     "./NumberField": {
-      "types": "./dist/types/components/NumberField/index.d.ts",
-      "import": "./dist/NumberField.js"
+      "types": "./dist/js/types/components/NumberField/index.d.ts",
+      "import": "./dist/js/NumberField.js"
     },
-    "./OffCanvas": {
-      "types": "./dist/types/components/OffCanvas/index.d.ts",
-      "import": "./dist/OffCanvas.js"
+    "./Popover/styles.css": "./dist/css/Popover.css",
+    "./Popover": {
+      "types": "./dist/js/types/components/Popover/index.d.ts",
+      "import": "./dist/js/Popover.js"
     },
+    "./ProgressBar/styles.css": "./dist/css/ProgressBar.css",
     "./ProgressBar": {
-      "types": "./dist/types/components/ProgressBar/index.d.ts",
-      "import": "./dist/ProgressBar.js"
+      "types": "./dist/js/types/components/ProgressBar/index.d.ts",
+      "import": "./dist/js/ProgressBar.js"
     },
+    "./PropsContextProvider": {
+      "types": "./dist/js/types/lib/propsContext/PropsContextProvider.d.ts",
+      "import": "./dist/js/PropsContextProvider.js"
+    },
+    "./RadioGroup/styles.css": "./dist/css/RadioGroup.css",
     "./RadioGroup": {
-      "types": "./dist/types/components/RadioGroup/index.d.ts",
-      "import": "./dist/RadioGroup.js"
+      "types": "./dist/js/types/components/RadioGroup/index.d.ts",
+      "import": "./dist/js/RadioGroup.js"
     },
     "./Render": {
-      "types": "./dist/types/lib/react/components/Render/index.d.ts",
-      "import": "./dist/Render.js"
+      "types": "./dist/js/types/lib/react/components/Render/index.d.ts",
+      "import": "./dist/js/Render.js"
     },
+    "./SearchField/styles.css": "./dist/css/SearchField.css",
+    "./SearchField": {
+      "types": "./dist/js/types/components/SearchField/index.d.ts",
+      "import": "./dist/js/SearchField.js"
+    },
+    "./Section/styles.css": "./dist/css/Section.css",
     "./Section": {
-      "types": "./dist/types/components/Section/index.d.ts",
-      "import": "./dist/Section.js"
+      "types": "./dist/js/types/components/Section/index.d.ts",
+      "import": "./dist/js/Section.js"
     },
+    "./Select/styles.css": "./dist/css/Select.css",
     "./Select": {
-      "types": "./dist/types/components/Select/index.d.ts",
-      "import": "./dist/Select.js"
+      "types": "./dist/js/types/components/Select/index.d.ts",
+      "import": "./dist/js/Select.js"
     },
+    "./Separator/styles.css": "./dist/css/Separator.css",
     "./Separator": {
-      "types": "./dist/types/components/Separator/index.d.ts",
-      "import": "./dist/Separator.js"
+      "types": "./dist/js/types/components/Separator/index.d.ts",
+      "import": "./dist/js/Separator.js"
     },
+    "./SettingsProvider": {
+      "types": "./dist/js/types/components/SettingsProvider/index.d.ts",
+      "import": "./dist/js/SettingsProvider.js"
+    },
+    "./Skeleton/styles.css": "./dist/css/Skeleton.css",
     "./Skeleton": {
-      "types": "./dist/types/components/Skeleton/index.d.ts",
-      "import": "./dist/Skeleton.js"
+      "types": "./dist/js/types/components/Skeleton/index.d.ts",
+      "import": "./dist/js/Skeleton.js"
     },
-    "./StatusBadge": {
-      "types": "./dist/types/components/StatusBadge/index.d.ts",
-      "import": "./dist/StatusBadge.js"
+    "./SkeletonText/styles.css": "./dist/css/SkeletonText.css",
+    "./SkeletonText": {
+      "types": "./dist/js/types/components/SkeletonText/index.d.ts",
+      "import": "./dist/js/SkeletonText.js"
     },
-    "./StatusIcon": {
-      "types": "./dist/types/components/StatusIcon/index.d.ts",
-      "import": "./dist/StatusIcon.js"
+    "./Slider/styles.css": "./dist/css/Slider.css",
+    "./Slider": {
+      "types": "./dist/js/types/components/Slider/index.d.ts",
+      "import": "./dist/js/Slider.js"
     },
+    "./Switch/styles.css": "./dist/css/Switch.css",
     "./Switch": {
-      "types": "./dist/types/components/Switch/index.d.ts",
-      "import": "./dist/Switch.js"
+      "types": "./dist/js/types/components/Switch/index.d.ts",
+      "import": "./dist/js/Switch.js"
     },
+    "./Table/styles.css": "./dist/css/Table.css",
     "./Table": {
-      "types": "./dist/types/components/Table/index.d.ts",
-      "import": "./dist/Table.js"
+      "types": "./dist/js/types/components/Table/index.d.ts",
+      "import": "./dist/js/Table.js"
     },
+    "./Tabs/styles.css": "./dist/css/Tabs.css",
     "./Tabs": {
-      "types": "./dist/types/components/Tabs/index.d.ts",
-      "import": "./dist/Tabs.js"
+      "types": "./dist/js/types/components/Tabs/index.d.ts",
+      "import": "./dist/js/Tabs.js"
     },
+    "./Text/styles.css": "./dist/css/Text.css",
     "./Text": {
-      "types": "./dist/types/components/Text/index.d.ts",
-      "import": "./dist/Text.js"
+      "types": "./dist/js/types/components/Text/index.d.ts",
+      "import": "./dist/js/Text.js"
     },
+    "./TextArea/styles.css": "./dist/css/TextArea.css",
     "./TextArea": {
-      "types": "./dist/types/components/TextArea/index.d.ts",
-      "import": "./dist/TextArea.js"
+      "types": "./dist/js/types/components/TextArea/index.d.ts",
+      "import": "./dist/js/TextArea.js"
     },
+    "./TextField/styles.css": "./dist/css/TextField.css",
     "./TextField": {
-      "types": "./dist/types/components/TextField/index.d.ts",
-      "import": "./dist/TextField.js"
+      "types": "./dist/js/types/components/TextField/index.d.ts",
+      "import": "./dist/js/TextField.js"
     },
+    "./TimeField/styles.css": "./dist/css/TimeField.css",
+    "./TimeField": {
+      "types": "./dist/js/types/components/TimeField/index.d.ts",
+      "import": "./dist/js/TimeField.js"
+    },
+    "./Tooltip/styles.css": "./dist/css/Tooltip.css",
     "./Tooltip": {
-      "types": "./dist/types/components/Tooltip/index.d.ts",
-      "import": "./dist/Tooltip.js"
+      "types": "./dist/js/types/components/Tooltip/index.d.ts",
+      "import": "./dist/js/Tooltip.js"
+    },
+    "./Wrap": {
+      "types": "./dist/js/types/components/Wrap/index.d.ts",
+      "import": "./dist/js/Wrap.js"
     },
     "./hooks": {
-      "types": "./dist/types/lib/hooks/index.d.ts",
-      "import": "./dist/hooks.js"
+      "types": "./dist/js/types/lib/hooks/index.d.ts",
+      "import": "./dist/js/hooks.js"
     },
     "./nextjs": {
-      "types": "./dist/types/integrations/nextjs/index.d.ts",
-      "import": "./dist/nextjs.js"
+      "types": "./dist/js/types/integrations/nextjs/index.d.ts",
+      "import": "./dist/js/nextjs.js"
     },
     "./react-hook-form": {
-      "types": "./dist/types/integrations/react-hook-form/index.d.ts",
-      "import": "./dist/react-hook-form.js"
+      "types": "./dist/js/types/integrations/react-hook-form/index.d.ts",
+      "import": "./dist/js/react-hook-form.js"
     },
-    "./styles": "./dist/styles.css"
+    "./globals.css": "./dist/css/globals.css",
+    "./all.css": "./dist/js/all.css"
   },
   "files": [
+    "*.md",
     "dist"
   ],
   "engines": {
     "node": ">=20.11"
   },
   "scripts": {
-    "build": "run vite build --config vite.build.config.ts",
+    "build": "",
+    "build:base": "run vite build --config vite.build.config.ts",
+    "build:css": "run vite build --config vite.build.config.css.ts && run postbuild:css",
+    "postbuild:css": "rimraf dist/css/**/*.js",
     "build:deps:watch": "run -T build:deps:watch @mittwald/flow-react-components",
     "build:icons": "run tsx dev/icons/generate.ts",
     "build:storybook": "run storybook build",
@@ -263,87 +387,96 @@
   },
   "dependencies": {
     "@chakra-ui/live-region": "^2.1.0",
+    "@internationalized/date": "^3.5.6",
+    "@internationalized/string-compiler": "^3.2.5",
     "@mittwald/react-tunnel": "workspace:^",
-    "@mittwald/react-use-promise": "^2.3.13",
-    "@react-aria/utils": "^3.24.1",
-    "@react-types/shared": "^3.23.1",
-    "@storybook/test": "^8.1.5",
-    "@tabler/icons-react": "^3.5.0",
-    "@tanstack/react-table": "^8.17.3",
+    "@mittwald/react-use-promise": "^2.5.0",
+    "@react-aria/utils": "^3.25.3",
+    "@react-types/shared": "^3.25.0",
+    "@tabler/icons-react": "^3.19.0",
+    "@tanstack/react-table": "^8.20.5",
+    "@types/luxon": "^3.4.2",
     "clsx": "^2.1.1",
     "copy-to-clipboard": "^3.3.3",
     "dot-prop": "^9.0.0",
-    "html-react-parser": "^5.1.10",
+    "framer-motion": "^11.11.7",
+    "html-react-parser": "^5.1.18",
     "invariant": "^2.2.4",
-    "mobx": "^6.12.3",
+    "luxon": "^3.5.0",
+    "mobx": "^6.13.3",
     "mobx-react-lite": "^4.0.7",
     "object-code": "^1.3.3",
-    "react-aria": "^3.33.1",
-    "react-aria-components": "^1.2.1",
+    "react-aria": "^3.35.0",
+    "react-aria-components": "^1.4.0",
     "react-children-utilities": "^2.10.0",
-    "react-stately": "^3.31.1",
-    "remeda": "^2.0.3",
-    "use-callback-ref": "^1.3.2"
+    "react-stately": "^3.33.0",
+    "react-syntax-highlighter": "^15.5.0",
+    "remeda": "^2.15.0",
+    "use-callback-ref": "^1.3.2",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@faker-js/faker": "^8.4.1",
+    "@faker-js/faker": "^9.0.3",
     "@mittwald/flow-design-tokens": "workspace:^",
-    "@mittwald/react-use-promise": "^2.3.13",
-    "@nx/storybook": "^19.1.2",
-    "@storybook/addon-a11y": "^8.1.5",
-    "@storybook/addon-actions": "^8.1.5",
-    "@storybook/addon-essentials": "^8.1.5",
-    "@storybook/addon-interactions": "^8.1.5",
-    "@storybook/addon-links": "^8.1.5",
-    "@storybook/blocks": "^8.1.5",
-    "@storybook/components": "^8.1.5",
-    "@storybook/core-events": "^8.1.5",
-    "@storybook/manager-api": "^8.1.5",
-    "@storybook/preview-api": "^8.1.5",
-    "@storybook/react": "^8.1.5",
-    "@storybook/react-vite": "^8.1.5",
-    "@storybook/theming": "^8.1.5",
-    "@testing-library/dom": "^10.1.0",
-    "@testing-library/jest-dom": "^6.4.5",
-    "@testing-library/react": "~15.0.7",
+    "@mittwald/react-use-promise": "^2.5.0",
+    "@nx/storybook": "^20.0.0",
+    "@storybook/addon-a11y": "^8.3.5",
+    "@storybook/addon-actions": "^8.3.5",
+    "@storybook/addon-essentials": "^8.3.5",
+    "@storybook/addon-interactions": "^8.3.5",
+    "@storybook/addon-links": "^8.3.5",
+    "@storybook/blocks": "^8.3.5",
+    "@storybook/components": "^8.3.5",
+    "@storybook/core-events": "^8.3.5",
+    "@storybook/manager-api": "^8.3.5",
+    "@storybook/preview-api": "^8.3.5",
+    "@storybook/react": "^8.3.5",
+    "@storybook/react-vite": "^8.3.5",
+    "@storybook/test": "^8.3.5",
+    "@storybook/theming": "^8.3.5",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "6.4.7",
+    "@testing-library/react": "~16.0.1",
     "@testing-library/user-event": "^14.5.2",
     "@types/invariant": "^2.2.37",
-    "@types/node": "20.14.1",
+    "@types/node": "22.7.5",
     "@types/prettier": "^3.0.0",
-    "@types/prop-types": "^15.7.12",
-    "@types/react": "^18.3.3",
+    "@types/prop-types": "^15.7.13",
+    "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.0",
+    "@types/react-syntax-highlighter": "^15",
     "@types/rollup": "^0.54.0",
-    "@vitejs/plugin-react": "^4.3.0",
-    "@vitest/coverage-v8": "~1.6.0",
+    "@vitejs/plugin-react": "^4.3.2",
+    "@vitest/coverage-v8": "~2.1.2",
     "decamelize": "^6.0.0",
     "fs-jetpack": "^5.1.0",
-    "happy-dom": "^14.12.0",
-    "next": "^14.2.3",
-    "nx": "^19.1.2",
-    "postcss": "^8.4.38",
+    "happy-dom": "^15.7.4",
+    "next": "^14.2.15",
+    "nx": "^20.0.0",
+    "postcss": "^8.4.47",
     "postcss-nested-import": "^1.3.0",
-    "postcss-nesting": "^12.1.5",
-    "prettier": "^3.3.0",
+    "postcss-nesting": "^13.0.0",
+    "prettier": "^3.3.3",
     "prop-types": "^15.8.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-element-to-jsx-string": "^15.0.0",
-    "react-hook-form": "^7.51.5",
-    "rollup": "^4.18.0",
-    "sass": "^1.77.4",
-    "storybook": "^8.1.5",
-    "storybook-addon-rtl": "^1.0.0",
-    "tsx": "^4.11.2",
-    "typescript": "^5.4.5",
+    "react-hook-form": "^7.53.0",
+    "rimraf": "^6.0.1",
+    "rollup": "~4.24.0",
+    "sass": "^1.79.4",
+    "storybook": "^8.3.5",
+    "storybook-addon-rtl": "^1.0.1",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.3",
     "typescript-plugin-css-modules": "^5.1.0",
-    "vite": "^5.2.12",
-    "vite-plugin-banner": "^0.7.1",
-    "vite-plugin-checker": "^0.6.4",
-    "vite-plugin-dts": "^3.9.1",
+    "vite": "^5.4.8",
+    "vite-plugin-banner": "^0.8.0",
+    "vite-plugin-checker": "^0.8.0",
+    "vite-plugin-dts": "^4.2.3",
     "vite-plugin-externalize-deps": "^0.8.0",
-    "vitest": "~1.6.0",
-    "yaml": "^2.4.3"
+    "vitest": "~2.1.2",
+    "yaml": "^2.5.1"
   },
   "peerDependencies": {
     "@mittwald/react-use-promise": "^2.3.12",

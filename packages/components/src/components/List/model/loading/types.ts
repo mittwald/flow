@@ -1,6 +1,8 @@
 import type { PropertyRecord } from "@/components/List/model/types";
 import type { FilterMode } from "@/components/List/model/filter/types";
 import type { AsyncResource } from "@mittwald/react-use-promise";
+import type { SearchValue } from "@/components/List/model/search/types";
+import type { DependencyList } from "react";
 
 type DataLoaderSortOptions<T> = PropertyRecord<T, "asc" | "desc">;
 
@@ -17,23 +19,24 @@ interface DataLoaderPaginationOptions {
 export interface DataLoaderOptions<T> {
   sorting?: DataLoaderSortOptions<T>;
   filtering?: DataLoaderFilterOptions<T>;
+  searchString?: SearchValue;
   pagination?: DataLoaderPaginationOptions;
 }
 
+export type ListData<T> = readonly T[];
+
 export interface DataLoaderResult<T> {
-  data: T[];
+  data: ListData<T>;
   itemTotalCount?: number;
 }
 
 export type AsyncDataLoader<T> = (
-  options?: DataLoaderOptions<T>,
+  options: DataLoaderOptions<T>,
 ) => Promise<DataLoaderResult<T>>;
 
-type AsyncResourceFactory<T> = (
+export type AsyncResourceFactory<T> = (
   options?: DataLoaderOptions<T>,
 ) => AsyncResource<DataLoaderResult<T>>;
-
-type StaticData<T> = T[];
 
 interface DynamicLoaderShape {
   manualSorting?: boolean;
@@ -42,7 +45,7 @@ interface DynamicLoaderShape {
 }
 
 export interface StaticDataLoaderShape<T> {
-  staticData: StaticData<T>;
+  staticData: ListData<T>;
 }
 
 export type AsyncResourceFactoryDataLoaderShape<T> = {
@@ -51,6 +54,7 @@ export type AsyncResourceFactoryDataLoaderShape<T> = {
 
 export type AsyncDataLoaderShape<T> = {
   asyncLoader: AsyncDataLoader<T>;
+  dependencies?: DependencyList;
 } & DynamicLoaderShape;
 
 export type DataSource<T> =

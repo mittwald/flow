@@ -1,10 +1,13 @@
-import type { FC } from "react";
-import React from "react";
+import type { FC, PropsWithChildren } from "react";
+import React, { Suspense } from "react";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import styles from "../../Table.module.scss";
+import { SkeletonText } from "@/components/SkeletonText";
 
-export type TableCellProps = Aria.CellProps;
+export interface TableCellProps
+  extends Omit<Aria.CellProps, "children">,
+    PropsWithChildren {}
 
 export const TableCell: FC<TableCellProps> = (props) => {
   const { children, className, ...rest } = props;
@@ -13,7 +16,7 @@ export const TableCell: FC<TableCellProps> = (props) => {
 
   return (
     <Aria.Cell className={rootClassName} {...rest}>
-      {children}
+      <Suspense fallback={<SkeletonText width="100px" />}>{children}</Suspense>
     </Aria.Cell>
   );
 };

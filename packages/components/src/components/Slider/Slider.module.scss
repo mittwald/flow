@@ -1,0 +1,126 @@
+@use "@/styles/mixins/focus";
+
+.slider {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  row-gap: var(--slider--text-to-track-spacing);
+
+  --button-size: calc(
+    var(--button--line-height-s) + var(--button--padding-s) * 2
+  );
+
+  .text {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    column-gap: var(--slider--value-to-label-spacing);
+    padding: 0 calc(var(--button-size) + var(--slider--value-to-label-spacing));
+
+    .value {
+      font-weight: var(--slider--value-font-weight);
+    }
+  }
+
+  .track {
+    grid-area: track;
+    position: relative;
+    height: var(--slider--thumb-size);
+
+    &:before {
+      content: "";
+      display: block;
+      position: absolute;
+      background-color: var(--slider--track-background-color--default);
+      height: var(--slider--track-height);
+      width: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+      border-radius: var(--slider--track-corner-radius);
+    }
+  }
+
+  .fill {
+    position: absolute;
+    height: var(--slider--track-height);
+    background-color: var(--slider--track-background-color-fill--default);
+    top: calc(50% - var(--slider--track-height) / 2);
+    border-radius: var(--slider--track-corner-radius);
+  }
+
+  .initialMarker {
+    position: absolute;
+    height: var(--slider--initial-marker-height);
+    width: var(--slider--initial-marker-width);
+    background-color: var(--slider--initial-marker-background-color--default);
+    top: calc(50% - var(--slider--initial-marker-height) / 2);
+    border-radius: var(--slider--initial-marker-corner-radius);
+  }
+
+  .thumb {
+    width: var(--slider--thumb-size);
+    height: var(--slider--thumb-size);
+    border-radius: var(--slider--thumb-corner-radius);
+    background-color: var(--slider--thumb-background-color--default);
+    border-width: var(--slider--thumb-border-width);
+    border-style: var(--slider--thumb-border-style);
+    border-color: var(--slider--thumb-border-color--default);
+    forced-color-adjust: none;
+    top: 50%;
+
+    &[data-dragging],
+    &[data-focus-visible] {
+      background-color: var(--slider--thumb-background-color--pressed);
+    }
+
+    &[data-focus-visible] {
+      @include focus.focus;
+
+      & {
+        outline-offset: var(--size-px--xs);
+      }
+    }
+  }
+
+  .increment,
+  .decrement {
+    position: absolute;
+    top: calc((var(--slider--text-to-track-spacing) + var(--button-size)) * -1);
+    right: 0;
+  }
+
+  .increment {
+    right: 0;
+  }
+
+  .decrement {
+    left: 0;
+  }
+
+  &.disabled {
+    .track {
+      &:before {
+        background-color: var(--slider--track-background-color--disabled);
+      }
+    }
+
+    .fill {
+      background-color: var(--slider--track-background-color-fill--disabled);
+    }
+
+    .thumb {
+      border-color: var(--slider--thumb-border-color--disabled);
+    }
+
+    .text {
+      color: var(--slider--text-color--disabled);
+    }
+
+    .initialMarker {
+      background-color: var(
+        --slider--initial-marker-background-color--disabled
+      );
+    }
+  }
+}

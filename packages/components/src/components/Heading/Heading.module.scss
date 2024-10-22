@@ -1,9 +1,10 @@
 .heading {
-  font-family: "ProximaNova", sans-serif;
   color: var(--heading--color);
   display: flex;
   column-gap: var(--heading--icon-to-text-spacing);
   font-size: var(--font-size);
+  font-weight: var(--heading--font-weight);
+  --heading-line-height: calc(var(--font-size) * var(--line-height--default));
 
   &.dark {
     color: var(--heading--color-dark);
@@ -13,27 +14,52 @@
     color: var(--heading--color-light);
   }
 
-  .icon {
-    height: calc(var(--font-size) * var(--line-height--default));
-    width: var(--font-size);
+  .icon,
+  > :global(.flow--alert-icon) {
+    height: var(--heading-line-height);
+    width: var(--heading-line-height);
   }
 
-  @mixin level($level) {
-    &.h#{$level} {
-      --font-size: var(--heading--h#{$level}-font-size);
+  .headingContent {
+    height: var(--heading-line-height);
+    display: flex;
+    align-items: center;
+  }
+
+  &:where(h1) {
+    --font-size: var(--heading-font-size--xl);
+  }
+
+  &:where(h2) {
+    --font-size: var(--heading-font-size--m);
+  }
+
+  &:where(h3) {
+    --font-size: var(--heading-font-size--s);
+  }
+
+  &:where(h4),
+  &:where(h5),
+  &:where(h6) {
+    --font-size: var(--heading-font-size--xs);
+  }
+
+  @mixin size($size) {
+    &.#{$size} {
+      --font-size: var(--heading-font-size--#{$size});
     }
   }
 
-  @include level(1);
-  @include level(2);
-  @include level(3);
-  @include level(4);
-  @include level(5);
-  @include level(6);
+  @include size("xs");
+  @include size("s");
+  @include size("m");
+  @include size("l");
+  @include size("xl");
+  @include size("xxl");
 }
 
 @media (max-width: 550px) {
-  .heading.h1 {
-    --font-size: var(--heading--h1-font-size-mobile);
+  .heading:where(h1) {
+    --font-size: var(--heading-font-size--l);
   }
 }

@@ -1,4 +1,4 @@
-import "@mittwald/flow-react-components/styles";
+import "@mittwald/flow-react-components/all.css";
 import "./global.scss";
 import "./layout.module.scss";
 import type { Metadata } from "next";
@@ -9,12 +9,12 @@ import clsx from "clsx";
 import styles from "./layout.module.scss";
 import Heading from "@mittwald/flow-react-components/Heading";
 import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
-import StatusBadge from "@mittwald/flow-react-components/StatusBadge";
-import LayoutCard from "@mittwald/flow-react-components/LayoutCard";
 import { LinkProvider } from "@mittwald/flow-react-components/nextjs";
 import { IconMittwald } from "@mittwald/flow-react-components/Icons";
 import MainNavigation from "@/app/_components/layout/MainNavigation";
 import MobileNavigation from "@/app/_components/layout/MobileNavigation/MobileNavigation";
+import { NotificationProvider } from "@mittwald/flow-react-components/NotificationProvider";
+import { Link } from "@mittwald/flow-react-components/Link";
 
 export const metadata: Metadata = {
   title: "Flow – mittwald Design System",
@@ -28,29 +28,29 @@ const RootLayout: FC<PropsWithChildren> = async (props) => {
     <html lang="en">
       <body className={bodyClassName}>
         <LinkProvider>
-          <header className={styles.header}>
-            <IconMittwald size="l" className={styles.logo} />
-            <Heading level={1} className={styles.heading}>
-              Flow
-            </Heading>
-            <StatusBadge className={styles.betaBadge} status="warning">
-              beta
-            </StatusBadge>
-            <HeaderNavigation
-              className={styles.headerNavigation}
-              docs={docs.map((mdx) => mdx.serialize())}
-            />
-            <MobileNavigation
-              docs={docs.map((mdx) => mdx.serialize())}
-              className={styles.mobileNavigation}
-            />
-          </header>
-          <div className={styles.center}>
-            <LayoutCard className={styles.mainNavigation}>
+          <NotificationProvider>
+            <header className={styles.header}>
+              <Link href="/" className={styles.homeLink}>
+                <IconMittwald size="l" className={styles.logo} />
+                <Heading level={1} className={styles.heading}>
+                  Flow
+                </Heading>
+              </Link>
+
+              <HeaderNavigation
+                className={styles.headerNavigation}
+                docs={docs.map((mdx) => mdx.serialize())}
+              />
+              <MobileNavigation
+                docs={docs.map((mdx) => mdx.serialize())}
+                className={styles.mobileNavigation}
+              />
+            </header>
+            <div className={styles.center}>
               <MainNavigation docs={docs.map((mdx) => mdx.serialize())} />
-            </LayoutCard>
-            <main className={styles.main}>{props.children}</main>
-          </div>
+              <main className={styles.main}>{props.children}</main>
+            </div>
+          </NotificationProvider>
         </LinkProvider>
       </body>
     </html>

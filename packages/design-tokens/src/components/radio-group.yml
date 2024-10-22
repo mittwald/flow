@@ -10,9 +10,9 @@ radio:
       value: "{disabled-outline-content-color}"
   icon-color:
     default:
-      value: "{icon.color}"
+      value: "{icon.color.default}"
     selected:
-      value: "{neutral-outline-border-color.selected}"
+      value: "{primary.color.800}"
     disabled:
       value: "{disabled-outline-content-color}"
 
@@ -23,3 +23,7 @@ radio-button:
     value: "{size-rem.m}"
   label-font-weight-with-content:
     value: "{font-weight.bold}"
+
+segment:
+  text-to-icon-spacing:
+    value: "{size-rem.m}"

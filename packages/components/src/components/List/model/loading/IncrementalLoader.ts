@@ -5,14 +5,14 @@ import type {
   DataSource,
   IncrementalLoaderShape,
 } from "@/components/List/model/loading/types";
-import type { AnyData } from "@/components/List/model/item/types";
 import type { AsyncResource } from "@mittwald/react-use-promise";
 import { getAsyncResource } from "@mittwald/react-use-promise";
 import { useEffect } from "react";
 import { times } from "remeda";
 import { IncrementalLoaderState } from "@/components/List/model/loading/IncrementalLoaderState";
+import { hash } from "object-code";
 
-const emptyData: AnyData[] = [];
+const emptyData: never[] = [];
 
 export class IncrementalLoader<T> {
   private readonly list: List<T>;
@@ -49,6 +49,7 @@ export class IncrementalLoader<T> {
     this.manualFiltering = manualFiltering ?? this.manualPagination;
     this.manualSorting = manualSorting ?? this.manualPagination;
     this.list.filters.forEach((f) => f.onFilterUpdated(() => this.reset()));
+    this.list.search?.onUpdated(() => this.reset());
   }
 
   public static useNew<T>(
@@ -157,9 +158,16 @@ export class IncrementalLoader<T> {
               .filter((f) => f.getValue() !== null)
               .map((f) => [
                 f.property,
-                { mode: f.mode, values: f.getArrayValue() },
+                {
+                  mode: f.mode,
+                  values: f.getArrayValue().map((v) => v.value),
+                },
               ]),
           ) as DataLoaderOptions<T>["filtering"])
+        : undefined,
+
+      searchString: this.manualFiltering
+        ? this.list.reactTable.searchString
         : undefined,
     };
   }
@@ -171,19 +179,22 @@ export class IncrementalLoader<T> {
     const loaderOptions = this.getDataLoaderOptions(batchIndex);
 
     if ("staticData" in dataSource) {
-      const staticData = dataSource.staticData;
       return getAsyncResource(
-        async () => ({
-          data: staticData,
+        async (staticData) => ({
+          data: staticData as T[],
           itemTotalCount: staticData.length,
         }),
-        [],
+        [dataSource.staticData],
       );
     }
 
     if ("asyncLoader" in dataSource) {
       const asyncLoader = dataSource.asyncLoader;
-      return getAsyncResource(asyncLoader, [loaderOptions]);
+      const dependencies = dataSource.dependencies;
+      const loaderId = dependencies ? hash(dependencies).toString() : undefined;
+      return getAsyncResource(asyncLoader, [loaderOptions], {
+        loaderId,
+      });
     }
 
     if ("asyncResourceFactory" in dataSource) {

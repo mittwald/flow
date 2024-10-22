@@ -1,0 +1,36 @@
+date-picker:
+  date-segment-background-color:
+    focused:
+      value: "{primary-plain-background-color.pressed}"
+  date-segment-corner-radius:
+    value: "{size-px.xs}"
+
+calendar:
+  cell-size:
+    value: 2.25rem
+  cell-spacing:
+    value: "{size-rem.xs}"
+  cell-corner-radius:
+    value: "{corner-radius.round}"
+  header-to-day-spacing:
+    value: "{size-rem.xs}"
+  heading-font-size:
+    value: "{font-size.default}"
+  day-font-size:
+    value: "{font-size.s}"
+  day-background-color:
+    disabled:
+      value: "{disabled-plain-background-color}"
+    hover:
+      value: "{neutral-plain-background-color.hover}"
+    pressed:
+      value: "{neutral-plain-background-color.pressed}"
+    selected:
+      value: "{primary-solid-background-color.default}"
+  day-content-color:
+    disabled:
+      value: "{disabled-plain-content-color}"
+    selected:
+      value: "{primary-solid-content-color}"
+  day-range-background-color:
+    value: "{primary-plain-background-color.hover}"

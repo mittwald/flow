@@ -9,17 +9,3 @@ heading:
     value: "{size-rem.s}"
   font-weight:
     value: "{font-weight.bold}"
-  h1-font-size:
-    value: "{font-size.xxxl}"
-  h1-font-size-mobile:
-    value: "{font-size.xxl}"
-  h2-font-size:
-    value: "{font-size.xxl}"
-  h3-font-size:
-    value: "{font-size.xl}"
-  h4-font-size:
-    value: "{font-size.l}"
-  h5-font-size:
-    value: "{font-size.m}"
-  h6-font-size:
-    value: "{font-size.m}"

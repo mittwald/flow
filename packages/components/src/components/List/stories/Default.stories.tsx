@@ -4,34 +4,33 @@ import React from "react";
 import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
 import { usePromise } from "@mittwald/react-use-promise";
-import {
-  ListFilter,
-  ListItem,
-  ListItemView,
-  ListLoaderAsync,
-  ListSorting,
-} from "@/components/List";
 import type { AsyncDataLoader } from "@/components/List/model/loading/types";
 import { Avatar } from "@/components/Avatar";
 import { ContextMenu, MenuItem } from "@/components/ContextMenu";
 import { IconDomain, IconSubdomain } from "@/components/Icon/components/icons";
-import StatusBadge from "@/components/StatusBadge";
+import AlertBadge from "@/components/AlertBadge";
 import type { Domain } from "../testData/domainApi";
 import { getDomains, getTypes } from "../testData/domainApi";
+import { Section } from "@/components/Section";
+import { ListItemView, ListSummary, typedList } from "@/components/List";
+import { Button } from "@/components/Button";
+import IconDownload from "@/components/Icon/components/icons/IconDownload";
+import { ActionGroup } from "@/components/ActionGroup";
 
-const loadDomains: AsyncDataLoader<Domain> = async (opt) => {
+const loadDomains: AsyncDataLoader<Domain> = async (opts) => {
   const response = await getDomains({
-    pagination: opt?.pagination
+    pagination: opts?.pagination
       ? {
-          limit: opt.pagination.limit,
-          skip: opt.pagination.offset,
+          limit: opts.pagination.limit,
+          skip: opts.pagination.offset,
         }
       : undefined,
-    filter: opt?.filtering?.["type"]
+    filter: opts?.filtering?.type
       ? {
-          types: opt.filtering["type"].values as string[],
+          types: opts.filtering.type.values as string[],
         }
       : undefined,
+    search: opts?.searchString,
   });
 
   return {
@@ -44,43 +43,92 @@ const meta: Meta<typeof List> = {
   title: "Structure/List",
   component: List,
   render: () => {
+    const DomainList = typedList<Domain>();
     const availableTypes = usePromise(getTypes, []);
 
     return (
-      <List batchSize={5}>
-        <ListLoaderAsync<Domain> manualPagination manualSorting={false}>
-          {loadDomains}
-        </ListLoaderAsync>
-        <ListFilter<Domain>
-          property="type"
-          values={availableTypes}
-          mode="some"
-          name="Type"
-        />
-        <ListSorting<Domain> property="type" name="Type" defaultEnabled />
-        <ListSorting<Domain> property="domain" name="Domain" />
-        <ListSorting<Domain> property="tld" name="TLD" />
-        <ListItemView<Domain>>
-          {(domain) => (
-            <ListItem>
-              <Avatar variant={domain.type === "Domain" ? 1 : 2}>
-                {domain.type === "Domain" ? <IconDomain /> : <IconSubdomain />}
-              </Avatar>
-              <Heading>{domain.hostname}</Heading>
-              {domain.verified ? (
-                <Text>{domain.type}</Text>
-              ) : (
-                <StatusBadge status="warning">Not verified</StatusBadge>
-              )}
+      <Section>
+        <Heading>Domains</Heading>
+        <DomainList.List
+          batchSize={5}
+          aria-label="Domains"
+          onAction={(domain) => console.log(domain.hostname)}
+        >
+          <ActionGroup>
+            <Button color="secondary" variant="soft" slot="secondary">
+              <IconDownload />
+            </Button>
+            <Button color="accent">Anlegen</Button>
+          </ActionGroup>
+          <DomainList.LoaderAsync manualPagination manualSorting={false}>
+            {loadDomains}
+          </DomainList.LoaderAsync>
+          <DomainList.Filter
+            values={availableTypes}
+            property="type"
+            mode="all"
+            name="Typ"
+            defaultSelected={["Domain"]}
+          />
+          <DomainList.Search autoFocus />
+          <DomainList.Sorting property="domain" name="A-Z" />
+          <DomainList.Sorting property="domain" name="Z-A" direction="desc" />
+          <DomainList.Sorting property="type" name="Typ" defaultEnabled />
+          <DomainList.Sorting property="tld" name="TLD" />
 
-              <ContextMenu>
-                <MenuItem>Show details</MenuItem>
-                <MenuItem>Delete</MenuItem>
-              </ContextMenu>
-            </ListItem>
-          )}
-        </ListItemView>
-      </List>
+          <DomainList.Table>
+            <DomainList.TableHeader>
+              <DomainList.TableColumn>Name</DomainList.TableColumn>
+              <DomainList.TableColumn>Type</DomainList.TableColumn>
+              <DomainList.TableColumn>TLD</DomainList.TableColumn>
+              <DomainList.TableColumn>Hostname</DomainList.TableColumn>
+            </DomainList.TableHeader>
+
+            <DomainList.TableBody>
+              <DomainList.TableRow>
+                <DomainList.TableCell>
+                  {(domain) => domain.domain}
+                </DomainList.TableCell>
+                <DomainList.TableCell>
+                  {(domain) => domain.type}
+                </DomainList.TableCell>
+                <DomainList.TableCell>
+                  {(domain) => domain.tld}
+                </DomainList.TableCell>
+                <DomainList.TableCell>
+                  {(domain) => domain.hostname}
+                </DomainList.TableCell>
+              </DomainList.TableRow>
+            </DomainList.TableBody>
+          </DomainList.Table>
+
+          <DomainList.Item textValue={(domain) => domain.hostname}>
+            {(domain) => (
+              <DomainList.ItemView>
+                <Avatar color={domain.type === "Domain" ? "blue" : "teal"}>
+                  {domain.type === "Domain" ? (
+                    <IconDomain />
+                  ) : (
+                    <IconSubdomain />
+                  )}
+                </Avatar>
+                <Heading>
+                  {domain.hostname}
+                  {!domain.verified && (
+                    <AlertBadge status="warning">Not verified</AlertBadge>
+                  )}
+                </Heading>
+                <Text>{domain.type}</Text>
+
+                <ContextMenu>
+                  <MenuItem>Show details</MenuItem>
+                  <MenuItem>Delete</MenuItem>
+                </ContextMenu>
+              </DomainList.ItemView>
+            )}
+          </DomainList.Item>
+        </DomainList.List>
+      </Section>
     );
   },
 };
@@ -91,30 +139,42 @@ type Story = StoryObj<typeof List>;
 
 export const Default: Story = {};
 
-export const ItemsWithLink: Story = {
+export const WithSummary: Story = {
   render: () => {
-    return (
-      <List batchSize={5}>
-        <ListLoaderAsync<Domain> manualPagination>
-          {loadDomains}
-        </ListLoaderAsync>
-        <ListItemView<Domain>>
-          {(domain) => (
-            <ListItem href="#">
-              <Avatar variant={domain.type === "Domain" ? 1 : 2}>
-                {domain.type === "Domain" ? <IconDomain /> : <IconSubdomain />}
-              </Avatar>
-              <Heading>{domain.hostname}</Heading>
-              <Text>{domain.type}</Text>
+    const InvoiceList = typedList<{
+      id: string;
+      date: string;
+      amount: string;
+    }>();
 
-              <ContextMenu>
-                <MenuItem>Show details</MenuItem>
-                <MenuItem>Delete</MenuItem>
-              </ContextMenu>
-            </ListItem>
-          )}
-        </ListItemView>
-      </List>
+    return (
+      <Section>
+        <Heading>Invoices</Heading>
+        <InvoiceList.List batchSize={5} aria-label="Invoices">
+          <ListSummary>
+            <Text style={{ display: "block", textAlign: "right" }}>
+              <b>total: 42,00 €</b>
+            </Text>
+          </ListSummary>
+          <InvoiceList.StaticData
+            data={[
+              { id: "RG100000", date: "1.9.2024", amount: "25,00 €" },
+              { id: "RG100001", date: "12.9.2024", amount: "12,00 €" },
+              { id: "RG100002", date: "3.10.2024", amount: "4,00 €" },
+            ]}
+          />
+          <InvoiceList.Item>
+            {(invoice) => (
+              <ListItemView>
+                <Heading>{invoice.id}</Heading>
+                <Text>
+                  {invoice.date} - {invoice.amount}
+                </Text>
+              </ListItemView>
+            )}
+          </InvoiceList.Item>
+        </InvoiceList.List>
+      </Section>
     );
   },
 };

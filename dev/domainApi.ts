@@ -1,4 +1,5 @@
 export interface Domain {
+  id: string;
   hostname: string;
   domain: string;
   type: "Subdomain" | "Domain";
@@ -22,6 +23,7 @@ interface Request {
   filter?: {
     types?: string[];
   };
+  search?: string;
 }
 
 interface Response {
@@ -33,11 +35,17 @@ export const getDomains = async (req: Request): Promise<Response> => {
   await apiSleep();
 
   const types = req.filter?.types;
+  const searchString = req.search;
 
-  const preFilteredData =
-    types === undefined
-      ? domains
-      : domains.filter((u) => types.length === 0 || types.includes(u.type));
+  const preFilteredData = domains.filter((u) => {
+    const filterMatches =
+      !types || types.length === 0 || types.includes(u.type);
+    const searchMatches =
+      searchString === undefined ||
+      u.domain.toLowerCase().includes(searchString.toLowerCase());
+    return filterMatches && searchMatches;
+  });
+
   const totalCount = preFilteredData.length;
 
   return {
@@ -53,6 +61,7 @@ export const getDomains = async (req: Request): Promise<Response> => {
 
 export const domains: Domain[] = [
   {
+    id: "abc-1",
     hostname: "my-domain.de",
     domain: "my-domain.de",
     type: "Domain",
@@ -60,13 +69,15 @@ export const domains: Domain[] = [
     tld: "de",
   },
   {
+    id: "abc-2",
     hostname: "www.my-domain.de",
     domain: "my-domain.de",
     type: "Subdomain",
-    verified: true,
+    verified: false,
     tld: "de",
   },
   {
+    id: "abc-3",
     hostname: "www.one-more-domain.com",
     domain: "one-more-domain.com",
     type: "Subdomain",
@@ -74,6 +85,7 @@ export const domains: Domain[] = [
     tld: "com",
   },
   {
+    id: "abc-4",
     hostname: "shop.one-more-domain.com",
     domain: "one-more-domain.com",
     type: "Subdomain",
@@ -81,6 +93,7 @@ export const domains: Domain[] = [
     tld: "com",
   },
   {
+    id: "abc-5",
     hostname: "blog.my-domain.de",
     domain: "my-domain.de",
     type: "Subdomain",
@@ -88,6 +101,7 @@ export const domains: Domain[] = [
     tld: "de",
   },
   {
+    id: "abc-6",
     hostname: "another-domain.de",
     domain: "another-domain.de",
     type: "Domain",
@@ -95,6 +109,7 @@ export const domains: Domain[] = [
     tld: "de",
   },
   {
+    id: "abc-7",
     hostname: "one-more-domain.com",
     domain: "one-more-domain.com",
     type: "Domain",

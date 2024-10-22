@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Avatar from "../Avatar";
+import Avatar, { avatarColors } from "../Avatar";
 import React from "react";
 import { Initials } from "@/components/Initials";
 import { Image } from "@/components/Image";
@@ -23,9 +23,9 @@ const meta: Meta<typeof Avatar> = {
       control: "inline-radio",
       options: ["s", "m", "l"],
     },
-    variant: {
+    color: {
       control: "inline-radio",
-      options: [1, 2, 3, 4],
+      options: avatarColors,
     },
   },
 };
@@ -49,5 +49,5 @@ export const WithIcon: Story = {
       <IconApp />
     </Avatar>
   ),
-  args: { variant: 1 },
+  args: { color: "blue" },
 };

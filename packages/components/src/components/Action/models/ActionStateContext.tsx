@@ -40,7 +40,7 @@ export class ActionStateContext {
   }
 
   public useIsBusy(): boolean {
-    return useSelector(() => this.isBusy, [this.states.size]);
+    return useSelector(() => this.isBusy);
   }
 
   public get isBusy(): boolean {

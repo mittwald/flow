@@ -22,7 +22,7 @@ export interface NumberFieldProps
     FlowComponentProps {}
 
 export const NumberField = flowComponent("NumberField", (props) => {
-  const { children, className, refProp: ref, onChange, ...rest } = props;
+  const { children, className, refProp: ref, ...rest } = props;
 
   const rootClassName = clsx(formFieldStyles.formField, className);
 
@@ -39,32 +39,12 @@ export const NumberField = flowComponent("NumberField", (props) => {
     },
   };
 
-  const handleOnChange = (value: number) => {
-    /**
-     * When entering numbers via keyboard, the NumberField onChange event is
-     * triggered onBlur. When clicking on another form element directly after
-     * changing an invalid NumberField from invalid to valid (via keyboard), the
-     * users click may not hit the desired target, because the removed
-     * validation message may cause a layout-shift. To circumvent this pitfall,
-     * the onChange event is delayed for a little time.
-     */
-    setTimeout(() => {
-      if (onChange) {
-        onChange(value);
-      }
-    }, 150);
-  };
-
   return (
     <ClearPropsContext>
-      <Aria.NumberField
-        {...rest}
-        className={rootClassName}
-        onChange={handleOnChange}
-      >
+      <Aria.NumberField {...rest} className={rootClassName}>
         <Aria.Group className={styles.group}>
           <Button
-            slot="decrement"
+            ariaSlot="decrement"
             className={styles.decrementButton}
             size="s"
             variant="plain"
@@ -75,7 +55,7 @@ export const NumberField = flowComponent("NumberField", (props) => {
           </Button>
           <Aria.Input className={styles.input} ref={ref} />
           <Button
-            slot="increment"
+            ariaSlot="increment"
             className={styles.incrementButton}
             size="s"
             variant="plain"

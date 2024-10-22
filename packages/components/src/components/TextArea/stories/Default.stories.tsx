@@ -64,3 +64,11 @@ export const WithFieldError: Story = {
     </TextArea>
   ),
 };
+
+export const ShowCharacterCount: Story = {
+  args: { showCharacterCount: true, maxLength: 100 },
+};
+
+export const Resizeable: Story = {
+  args: { rows: 1, autoResizeMaxRows: 5 },
+};

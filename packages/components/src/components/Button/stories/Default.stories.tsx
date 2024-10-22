@@ -14,6 +14,7 @@ const meta: Meta<typeof Button> = {
     variant: "solid",
     color: "primary",
     size: "m",
+    isDisabled: false,
   },
   argTypes: {
     color: {
@@ -22,11 +23,14 @@ const meta: Meta<typeof Button> = {
     },
     variant: {
       control: "inline-radio",
-      options: ["plain", "solid", "soft"],
+      options: ["plain", "solid", "soft", "outline"],
     },
     size: {
       control: "inline-radio",
       options: ["m", "s"],
+    },
+    isDisabled: {
+      control: "boolean",
     },
   },
   parameters: {
@@ -38,7 +42,6 @@ const meta: Meta<typeof Button> = {
 export default meta;
 
 type Story = StoryObj<typeof Button>;
-
 export const Default: Story = {};
 
 export const Small: Story = {

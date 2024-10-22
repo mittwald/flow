@@ -6,7 +6,7 @@
   "namedInputs": {},
   "targetDefaults": {
     "build": {
-      "dependsOn": ["^build", "build:icons", "build:imports"],
+      "dependsOn": ["^build", "build:icons", "build:imports", "build:css"],
       "cache": true
     },
     "start": {
@@ -31,6 +31,19 @@
         "{projectRoot}/dev/icons/**/*",
         "{projectRoot}/src/components/Icon/tablerMappings.yaml"
       ]
+    },
+    "build:css": {
+      "dependsOn": ["^build", "build:base"],
+      "cache": true,
+      "inputs": ["default"]
+    },
+    "build:imports": {
+      "cache": true,
+      "inputs": ["default", "{projectRoot}/src/content/**/*.mdx"]
+    },
+    "build:base": {
+      "cache": true,
+      "inputs": ["default"]
     }
   }
 }

@@ -1,9 +1,10 @@
 import type {
   Column,
   ColumnDef,
+  ColumnSort,
+  InitialTableState,
   Table,
   TableOptions,
-  TableState,
   Updater,
 } from "@tanstack/react-table";
 import {
@@ -15,100 +16,113 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import type List from "@/components/List/model/List";
-import type { PropertyName } from "@/components/List/model/item/Item";
 import invariant from "invariant";
-import { useLocalObservable } from "mobx-react-lite";
-import { runInAction } from "mobx";
-import { useAutorunEffect } from "@/lib/mobx/useAutorunEffect";
+import type {
+  OnListChanged,
+  PropertyName,
+} from "@/components/List/model/types";
+import type { SearchValue } from "@/components/List/model/search/types";
+import type { Dispatch, SetStateAction } from "react";
+import { useEffect, useState } from "react";
 
 export class ReactTable<T> {
   public readonly list: List<T>;
   public readonly table: Table<T>;
-  private readonly tableState: { value: TableState | undefined };
+  public readonly sortingState: ColumnSort[];
+  public readonly updateSortingState: Dispatch<SetStateAction<ColumnSort[]>>;
 
   private constructor(
     list: List<T>,
+    onChange?: OnListChanged<T>,
     tableOptions: Partial<TableOptions<T>> = {},
   ) {
     this.list = list;
-    this.tableState = useLocalObservable(() => ({ value: undefined }));
-    this.table = this.useReactTable(tableOptions);
+
+    const defaultSorting = this.list.sorting.filter(
+      (s) => s.defaultEnabled !== false,
+    );
+
+    const [sortingState, updateSortingState] = useState<ColumnSort[]>(
+      defaultSorting.map((s) => s.getReactTableColumnSort()),
+    );
+    this.sortingState = sortingState;
+    this.updateSortingState = updateSortingState;
+    this.table = this.useReactTable(onChange, tableOptions);
   }
 
   public static useNew<T>(
     list: List<T>,
+    onChange?: OnListChanged<T>,
     tableOptions: Partial<TableOptions<T>> = {},
   ): ReactTable<T> {
-    return new ReactTable<T>(list, tableOptions);
+    return new ReactTable<T>(list, onChange, tableOptions);
   }
 
-  private useReactTable(tableOptions: Partial<TableOptions<T>> = {}): Table<T> {
+  private useReactTable(
+    onChange?: OnListChanged<T>,
+    tableOptions: Partial<TableOptions<T>> = {},
+  ): Table<T> {
     const data = this.list.loader.useData();
 
-    const defaultSorting = this.list.sorting.filter((s) => s.defaultEnabled);
+    const initialState: InitialTableState = {
+      pagination: {
+        pageSize: this.list.batches.batchSize,
+      },
+      columnFilters: [],
+    };
+
+    for (const filter of this.list.filters) {
+      filter.updateInitialState(initialState);
+    }
+
+    this.list.search?.updateInitialState(initialState);
 
     const table = useReactTable({
       data,
-      initialState: {
-        pagination: {
-          pageSize: this.list.batches.batchSize,
-        },
-        sorting: defaultSorting.map((s) => ({
-          id: String(s.property),
-          desc: s.direction === "desc",
-        })),
+      state: {
+        sorting: this.sortingState,
       },
+      getRowId: this.list.getItemId,
+      initialState,
       columns: this.getTableColumnDefs(),
       getCoreRowModel: getCoreRowModel(),
       getSortedRowModel: getSortedRowModel(),
       getFilteredRowModel: getFilteredRowModel(),
       getPaginationRowModel: getPaginationRowModel(),
       getFacetedUniqueValues: getFacetedUniqueValues(),
-      onStateChange: this.onTableStateChange,
+      onSortingChange: (updater) => {
+        this.handleSortingStateUpdate(updater);
+      },
+      globalFilterFn: "auto",
       ...tableOptions,
     });
 
-    this.useUpdateTableState(table);
+    useEffect(() => {
+      if (onChange) {
+        onChange(this.list);
+      }
+    }, [this.list, onChange, table]);
 
     return table;
   }
 
-  private useUpdateTableState(table: Table<T>): void {
-    useAutorunEffect(() => {
-      const state = this.tableState.value;
+  private handleSortingStateUpdate(updater: Updater<ColumnSort[]>) {
+    const newSortingState =
+      typeof updater === "function" ? updater(this.sortingState) : updater;
 
-      if (state) {
-        table.setOptions((opts) => ({
-          ...opts,
-          state,
-        }));
-      } else {
-        this.tableState.value = table.getState();
-      }
-    });
+    const additionalHiddenSorting = this.list.sorting
+      .filter(
+        (s) =>
+          s.defaultEnabled === "hidden" &&
+          !newSortingState.some((existing) => existing.id === s.property),
+      )
+      .map((s) => s.getReactTableColumnSort());
+
+    this.updateSortingState([...additionalHiddenSorting, ...newSortingState]);
   }
 
-  private onTableStateChange = (updater: Updater<TableState>) => {
-    const prevState = this.tableState.value;
-
-    if (!prevState) {
-      return;
-    }
-
-    const newState =
-      typeof updater === "function" ? updater(prevState) : updater;
-
-    runInAction(() => {
-      this.tableState.value = this.getUpdatedTableState(prevState, newState);
-    });
-  };
-
-  private getUpdatedTableState(
-    prevState: TableState,
-    newState: TableState,
-  ): TableState {
-    // for further customization (like fixed sorting)
-    return newState;
+  public get searchString(): SearchValue {
+    return this.table.getState().globalFilter;
   }
 
   public getTableColumn(property: PropertyName<T>): Column<T> {

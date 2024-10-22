@@ -1,16 +1,22 @@
 "use client";
-import type { FC, ReactNode } from "react";
+import type { FC } from "react";
 import { MDXRemote as NextMDXRemote } from "next-mdx-remote";
+import type { LiveCodeEditorProps } from "@/lib/liveCode/components/LiveCodeEditor/LiveCodeEditor";
 import LiveCodeEditor from "@/lib/liveCode/components/LiveCodeEditor/LiveCodeEditor";
 import type { SerializedMdxFile } from "@/lib/mdx/MdxFile";
 import { MdxFile } from "@/lib/mdx/MdxFile";
 import { customComponents } from "@/lib/mdx/components/MdxFileView/customComponents";
 import styles from "./customComponents.module.css";
-import type { LiveCodeEditorProps } from "@/lib/liveCode/components/LiveCodeEditor/types";
-import DoAndDontTile from "@/lib/mdx/components/DoAndDont/DoAndDontTile";
+import type { DoAndDontTileProps } from "@/lib/mdx/components/DoAndDont/ExampleTile";
+import ExampleTile from "@/lib/mdx/components/DoAndDont/ExampleTile";
 
 interface Props {
   mdxFile: SerializedMdxFile;
+}
+
+interface ExampleProps extends DoAndDontTileProps {
+  example?: string;
+  exampleText?: string;
 }
 
 export const MdxFileView: FC<Props> = (props) => {
@@ -28,45 +34,111 @@ export const MdxFileView: FC<Props> = (props) => {
     />
   );
 
-  const ExampleDo: FC<{
-    example?: string;
-    exampleText?: string;
-    children: ReactNode;
-  }> = ({ example, exampleText, children }) => (
-    <DoAndDontTile
+  const ExampleDo: FC<ExampleProps> = ({
+    example,
+    exampleText,
+    zoom,
+    bgColor,
+    mobile,
+    children,
+    heading,
+  }) => (
+    <ExampleTile
       type="do"
       text={exampleText}
       code={example ? mdxFile.getExample(example) : undefined}
+      zoom={zoom}
+      bgColor={bgColor}
+      mobile={mobile}
+      heading={heading}
     >
       {children}
-    </DoAndDontTile>
+    </ExampleTile>
   );
 
-  const ExampleDont: FC<{
-    example?: string;
-    exampleText?: string;
-    children: ReactNode;
-  }> = ({ example, exampleText, children }) => (
-    <DoAndDontTile
+  const ExampleDont: FC<ExampleProps> = ({
+    example,
+    exampleText,
+    zoom,
+    bgColor,
+    mobile,
+    children,
+    heading,
+  }) => (
+    <ExampleTile
       type="dont"
       text={exampleText}
       code={example ? mdxFile.getExample(example) : undefined}
+      zoom={zoom}
+      bgColor={bgColor}
+      mobile={mobile}
+      heading={heading}
     >
       {children}
-    </DoAndDontTile>
+    </ExampleTile>
   );
 
-  const ExampleInfo: FC<{
-    example?: string;
-    exampleText?: string;
-    children: ReactNode;
-  }> = ({ example, exampleText, children }) => (
-    <DoAndDontTile
+  const ExampleInfo: FC<ExampleProps> = ({
+    example,
+    exampleText,
+    zoom,
+    bgColor,
+    mobile,
+    children,
+    heading,
+  }) => (
+    <ExampleTile
+      type="info"
       text={exampleText}
       code={example ? mdxFile.getExample(example) : undefined}
+      zoom={zoom}
+      bgColor={bgColor}
+      mobile={mobile}
+      heading={heading}
     >
       {children}
-    </DoAndDontTile>
+    </ExampleTile>
+  );
+  const ExampleStudio: FC<ExampleProps> = ({
+    example,
+    exampleText,
+    zoom,
+    bgColor,
+    mobile,
+    children,
+    heading,
+  }) => (
+    <ExampleTile
+      type="mstudio"
+      text={exampleText}
+      code={example ? mdxFile.getExample(example) : undefined}
+      zoom={zoom}
+      bgColor={bgColor}
+      mobile={mobile}
+      heading={heading}
+    >
+      {children}
+    </ExampleTile>
+  );
+  const ExamplePlain: FC<ExampleProps> = ({
+    example,
+    exampleText,
+    zoom,
+    bgColor,
+    mobile,
+    children,
+    heading,
+  }) => (
+    <ExampleTile
+      text={exampleText}
+      code={example ? mdxFile.getExample(example) : undefined}
+      zoom={zoom}
+      bgColor={bgColor}
+      mobile={mobile}
+      heading={heading}
+    >
+      {children}
+    </ExampleTile>
   );
 
   return (
@@ -77,6 +149,8 @@ export const MdxFileView: FC<Props> = (props) => {
         Do: ExampleDo,
         Dont: ExampleDont,
         Info: ExampleInfo,
+        MStudio: ExampleStudio,
+        Plain: ExamplePlain,
         ...customComponents,
       }}
     />

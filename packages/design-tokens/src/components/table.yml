@@ -6,7 +6,7 @@ table:
   border-style:
     value: "{border-style.default}"
   border-color:
-    value: "{neutral-outline-border-color.default}"
+    value: "{neutral-outline-border-color}"
   padding-x:
     value: "{size-px.m}"
   padding-y:
@@ -15,6 +15,12 @@ table:
     value: "{primary.color.1000}"
   header-font-weight:
     value: "{font-weight.bold}"
+  header-border-width:
+    value: "{border-width.200}"
+  footer-font-weight:
+    value: "{font-weight.bold}"
+  footer-border-width:
+    value: "{border-width.200}"
   background-color:
     value: "{neutral.color.100}"
   background-color-accent:

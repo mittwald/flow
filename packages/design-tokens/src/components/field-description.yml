@@ -2,4 +2,4 @@ field-description:
   font-size:
     value: "{font-size.s}"
   color:
-    value: "{neutral.color.800}"
+    value: "{content.color.default}"

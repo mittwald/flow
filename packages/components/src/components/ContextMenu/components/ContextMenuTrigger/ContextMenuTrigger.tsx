@@ -1,14 +1,20 @@
 import * as Aria from "react-aria-components";
-import type { FC, PropsWithChildren } from "react";
 import React from "react";
 import { OverlayTrigger } from "@/components/OverlayTrigger";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
-type Props = PropsWithChildren;
-
-export const ContextMenuTrigger: FC<Props> = (props) => {
-  return (
-    <OverlayTrigger>
-      <Aria.MenuTrigger>{props.children}</Aria.MenuTrigger>
-    </OverlayTrigger>
-  );
-};
+export const ContextMenuTrigger = flowComponent(
+  "ContextMenuTrigger",
+  (props) => {
+    const { children, ...triggerProps } = props;
+    return (
+      <OverlayTrigger
+        overlayType="ContextMenu"
+        {...triggerProps}
+        component={Aria.MenuTrigger}
+      >
+        {children}
+      </OverlayTrigger>
+    );
+  },
+);

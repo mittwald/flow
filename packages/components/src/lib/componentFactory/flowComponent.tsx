@@ -8,22 +8,24 @@ import type {
   ForwardRefExoticComponent,
   LegacyRef,
   PropsWithoutRef,
+  ReactElement,
   ReactNode,
   RefAttributes,
 } from "react";
-import React, { forwardRef, useCallback } from "react";
-import type { PropsWithRender, PropsWithTunnel } from "@/lib/types/props";
-import { ClearPropsContext, useProps } from "@/lib/propsContext";
+import { cloneElement } from "react";
+import React, { forwardRef } from "react";
+import type { PropsWithTunnel } from "@/lib/types/props";
+import { useProps } from "@/lib/propsContext";
 import { TunnelEntry } from "@mittwald/react-tunnel";
-import { ComponentRenderContextProvider } from "@/lib/propsContext/render/ComponentRenderContextProvider";
-import { useComponentRenderFn } from "@/lib/propsContext/render/useComponentRenderFn";
+import SlotContextProvider from "@/lib/slotContext/SlotContextProvider";
 
-export type FlowComponentProps<C extends FlowComponentName = never> =
-  PropsWithTunnel & PropsWithRender<FlowComponentPropsOfName<C>>;
+export interface FlowComponentProps extends PropsWithTunnel {
+  wrapWith?: ReactElement;
+}
 
 type FlowComponentImplementationProps<C extends FlowComponentName> = Omit<
   FlowComponentPropsOfName<C>,
-  keyof FlowComponentProps<C>
+  keyof FlowComponentProps
 > & {
   /** @internal */
   refProp?: LegacyRef<never>;
@@ -41,18 +43,10 @@ export function flowComponent<C extends FlowComponentName>(
   ImplementationComponentType: FlowComponentImplementationType<C>,
 ): FlowComponentType<C> {
   return forwardRef<never, FlowComponentPropsOfName<C>>((props, ref) => {
-    const {
-      render: ignoredRender,
-      tunnelId,
-      ...propsWithContext
-    } = useProps(componentName, props) as FlowComponentProps<C>;
-
-    const [renderFn, renderContext] = useComponentRenderFn(componentName);
-
-    const FlowRenderComponent = useCallback(
-      flowComponent(componentName, ImplementationComponentType),
-      [componentName, ImplementationComponentType],
-    );
+    const { tunnelId, wrapWith, ...propsWithContext } = useProps(
+      componentName,
+      props as FlowComponentPropsOfName<C>,
+    ) as FlowComponentProps;
 
     const implementationTypeProps = propsWithContext as ComponentProps<
       typeof ImplementationComponentType
@@ -65,14 +59,16 @@ export function flowComponent<C extends FlowComponentName>(
 
     let element: ReactNode = <ImplementationComponentType {...propsWithRef} />;
 
-    if (renderFn) {
+    if ("slot" in props && !!props.slot) {
       element = (
-        <ClearPropsContext>
-          <ComponentRenderContextProvider value={renderContext}>
-            {renderFn(FlowRenderComponent as never, propsWithRef as never)}
-          </ComponentRenderContextProvider>
-        </ClearPropsContext>
+        <SlotContextProvider slot={props.slot} component={componentName}>
+          {element}
+        </SlotContextProvider>
       );
+    }
+
+    if (wrapWith) {
+      element = cloneElement(wrapWith, undefined, element);
     }
 
     if (tunnelId) {

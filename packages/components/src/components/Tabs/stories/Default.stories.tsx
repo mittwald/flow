@@ -9,7 +9,7 @@ import { Label } from "@/components/Label";
 import { LabeledValue } from "@/components/LabeledValue";
 import { Switch } from "@/components/Switch";
 import { Header } from "@/components/Header";
-import { StatusIcon } from "@/components/StatusIcon";
+import { AlertIcon } from "@/components/AlertIcon";
 
 const meta: Meta<typeof Tabs> = {
   title: "Navigation/Tabs",
@@ -20,7 +20,7 @@ const meta: Meta<typeof Tabs> = {
         <Tab id="general">
           <TabTitle>
             General
-            <StatusIcon status="info" />
+            <AlertIcon status="info" />
           </TabTitle>
           <Section>
             <Heading>General</Heading>

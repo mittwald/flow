@@ -23,7 +23,10 @@ type Story = StoryObj<typeof Modal>;
 
 export const LongContent: Story = {
   render: (props) => (
-    <Modal {...props} controller={useOverlayController({ defaultOpen: true })}>
+    <Modal
+      {...props}
+      controller={useOverlayController("Modal", { isDefaultOpen: true })}
+    >
       <Heading>{dummyText.short}</Heading>
       <Content>
         <Section>
@@ -43,7 +46,44 @@ export const LongContent: Story = {
         </Section>
       </Content>
       <ActionGroup>
-        <Action closeOverlay>
+        <Action closeOverlay="Modal">
+          <Button color="accent">Create customer</Button>
+          <Button variant="soft" color="secondary">
+            Abort
+          </Button>
+        </Action>
+      </ActionGroup>
+    </Modal>
+  ),
+};
+
+export const LongContentOffCanvas: Story = {
+  render: (props) => (
+    <Modal
+      offCanvas
+      {...props}
+      controller={useOverlayController("Modal", { isDefaultOpen: true })}
+    >
+      <Heading>{dummyText.short}</Heading>
+      <Content>
+        <Section>
+          <Text>{dummyText.long}</Text>
+        </Section>
+        <Section>
+          <Text>{dummyText.long}</Text>
+        </Section>
+        <Section>
+          <Text>{dummyText.long}</Text>
+        </Section>
+        <Section>
+          <Text>{dummyText.long}</Text>
+        </Section>
+        <Section>
+          <Text>{dummyText.long}</Text>
+        </Section>
+      </Content>
+      <ActionGroup>
+        <Action closeOverlay="Modal">
           <Button color="accent">Create customer</Button>
           <Button variant="soft" color="secondary">
             Abort

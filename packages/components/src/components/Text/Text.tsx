@@ -9,6 +9,8 @@ import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { EmulatedBoldText } from "@/components/EmulatedBoldText";
 import { Wrap } from "@/components/Wrap";
+import clsx from "clsx";
+import styles from "./Text.module.scss";
 
 export interface TextProps
   extends PropsWithChildren,
@@ -16,6 +18,7 @@ export interface TextProps
     PropsWithElementType<"span" | "div" | "p">,
     FlowComponentProps {
   emulateBoldWidth?: boolean;
+  color?: "light" | "dark";
 }
 
 export const Text = flowComponent("Text", (props) => {
@@ -25,10 +28,13 @@ export const Text = flowComponent("Text", (props) => {
     elementType = "span",
     emulateBoldWidth,
     refProp: ref,
+    color,
     ...rest
   } = props;
 
-  const textProps = { ...rest, className };
+  const rootClassName = clsx(styles.text, color && styles[color], className);
+
+  const textProps = { ...rest, className: rootClassName };
 
   const propsContext: PropsContext = {
     Link: {

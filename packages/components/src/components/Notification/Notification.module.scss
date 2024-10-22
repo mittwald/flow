@@ -1,0 +1,83 @@
+@use "@/styles/mixins/focus";
+
+.notification {
+  border-radius: var(--notification--corner-radius);
+  width: var(--notification--width);
+  box-shadow: var(--notification--box-shadow);
+  position: relative;
+
+  @extend .info;
+
+  /* Elements */
+
+  .link {
+    padding: var(--notification--padding);
+    border-radius: var(--notification--corner-radius);
+    border-style: var(--notification--border-style);
+    border-width: 0;
+    border-inline-start-width: var(--notification--border-x-start-width);
+    display: flex;
+    flex-direction: column;
+    row-gap: var(--notification--heading-to-text-spacing);
+    cursor: default;
+
+    @include focus.focus;
+  }
+
+  .heading {
+    --button-width: calc(
+      var(--button--line-height-s) + 2 * var(--button--padding-s)
+    );
+    padding-inline-end: calc(
+      var(--button-width) + var(--heading--icon-to-text-spacing)
+    );
+  }
+
+  .text {
+    font-size: var(--notification--font-size);
+  }
+
+  .close {
+    position: absolute;
+    top: var(--notification--padding);
+    right: var(--notification--padding);
+  }
+
+  /* Status */
+
+  @mixin status($status) {
+    &.#{$status} {
+      .link {
+        border-color: var(--notification--#{$status}-border-color);
+        background-color: var(
+          --notification--#{$status}-background-color--default
+        );
+      }
+
+      &.hasLink {
+        .link {
+          &:hover {
+            background-color: var(
+              --notification--#{$status}-background-color--hover
+            );
+          }
+
+          &[data-pressed] {
+            background-color: var(
+              --notification--#{$status}-background-color--pressed
+            );
+          }
+        }
+      }
+
+      .heading {
+        color: var(--notification--#{$status}-heading-color);
+      }
+    }
+  }
+
+  @include status(info);
+  @include status(warning);
+  @include status(danger);
+  @include status(success);
+}

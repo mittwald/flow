@@ -1,0 +1,26 @@
+.text {
+  color: inherit;
+
+  &:where(.light) {
+    color: var(--content--color--light);
+  }
+
+  &:where(.dark) {
+    color: var(--content--color--dark);
+  }
+
+  ul,
+  ol {
+    padding-left: var(--size-rem--l);
+  }
+
+  ul {
+    li {
+      list-style: initial;
+    }
+  }
+
+  small {
+    font-size: var(--font-size--s);
+  }
+}

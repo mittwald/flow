@@ -12,29 +12,32 @@ import {
   IconCode,
   IconContextMenu,
   IconCopy,
-  IconDashboard,
-  IconDate,
   IconDelete,
+  IconDownload,
+  IconEdit,
   IconExternalLink,
   IconFilter,
   IconHide,
   IconHome,
-  IconListView,
   IconLogout,
+  IconMaximize,
+  IconMenu,
+  IconMinimize,
   IconMinus,
   IconNotification,
   IconPlus,
   IconRadioOff,
   IconRadioOn,
-  IconRandom,
+  IconRedo,
+  IconRefresh,
   IconSave,
   IconSearch,
+  IconSettings,
   IconShare,
   IconShow,
   IconSorting,
-  IconTerminate,
-  IconTileView,
-  IconTime,
+  IconUndo,
+  IconView,
 } from "@mittwald/flow-react-components/Icons";
 import Label from "@mittwald/flow-react-components/Label";
 import LabeledValue from "@mittwald/flow-react-components/LabeledValue";
@@ -49,10 +52,7 @@ import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
     <Label>Notification</Label>
     <IconNotification />
   </LabeledValue>
-  <LabeledValue>
-    <Label>Dashboard</Label>
-    <IconDashboard />
-  </LabeledValue>
+
   <LabeledValue>
     <Label>Logout</Label>
     <IconLogout />
@@ -62,12 +62,12 @@ import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
     <IconSearch />
   </LabeledValue>
   <LabeledValue>
-    <Label>TileView</Label>
-    <IconTileView />
+    <Label>Menu</Label>
+    <IconMenu />
   </LabeledValue>
   <LabeledValue>
-    <Label>ListView</Label>
-    <IconListView />
+    <Label>View</Label>
+    <IconView />
   </LabeledValue>
   <LabeledValue>
     <Label>Filter</Label>
@@ -78,12 +78,36 @@ import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
     <IconSorting />
   </LabeledValue>
   <LabeledValue>
-    <Label>Delete</Label>
-    <IconDelete />
+    <Label>Context Menu</Label>
+    <IconContextMenu />
   </LabeledValue>
   <LabeledValue>
-    <Label>Terminate</Label>
-    <IconTerminate />
+    <Label>Maximize</Label>
+    <IconMaximize />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Minimize</Label>
+    <IconMinimize />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Edit</Label>
+    <IconEdit />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Share</Label>
+    <IconShare />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Save</Label>
+    <IconSave />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Settings</Label>
+    <IconSettings />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Delete</Label>
+    <IconDelete />
   </LabeledValue>
   <LabeledValue>
     <Label>Copy</Label>
@@ -118,24 +142,12 @@ import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
     <IconClose />
   </LabeledValue>
   <LabeledValue>
-    <Label>Hide</Label>
-    <IconHide />
-  </LabeledValue>
-  <LabeledValue>
     <Label>Show</Label>
     <IconShow />
   </LabeledValue>
   <LabeledValue>
-    <Label>Random</Label>
-    <IconRandom />
-  </LabeledValue>
-  <LabeledValue>
-    <Label>Date</Label>
-    <IconDate />
-  </LabeledValue>
-  <LabeledValue>
-    <Label>Time</Label>
-    <IconTime />
+    <Label>Hide</Label>
+    <IconHide />
   </LabeledValue>
   <LabeledValue>
     <Label>Plus</Label>
@@ -144,10 +156,6 @@ import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
   <LabeledValue>
     <Label>Minus</Label>
     <IconMinus />
-  </LabeledValue>
-  <LabeledValue>
-    <Label>Context Menu</Label>
-    <IconContextMenu />
   </LabeledValue>
   <LabeledValue>
     <Label>Code</Label>
@@ -174,15 +182,23 @@ import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
     <IconRadioOn />
   </LabeledValue>
   <LabeledValue>
-    <Label>Save</Label>
-    <IconSave />
+    <Label>Refresh</Label>
+    <IconRefresh />
   </LabeledValue>
   <LabeledValue>
     <Label>Check</Label>
     <IconCheck />
   </LabeledValue>
   <LabeledValue>
-    <Label>Share</Label>
-    <IconShare />
+    <Label>Download</Label>
+    <IconDownload />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Redo</Label>
+    <IconRedo />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Undo</Label>
+    <IconUndo />
   </LabeledValue>
 </ColumnLayout>;

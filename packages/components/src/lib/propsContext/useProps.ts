@@ -7,8 +7,9 @@ import { mergeProps } from "@react-aria/utils";
 import { resolveDynamicProps } from "@/lib/propsContext/dynamicProps/resolveDynamicProps";
 import { useContextProps } from "@/lib/propsContext/propsContext";
 import wrapChildrenWithNestedPropsContext from "@/lib/propsContext/nestedPropsContext/wrapChildrenWithNestedPropsContext";
-import { omit } from "remeda";
+import { omitBy } from "remeda";
 import type { PropsContext } from "@/lib/propsContext/types";
+import isDynamicProp from "@/lib/propsContext/dynamicProps/isDynamicProp";
 
 export const useProps = <C extends FlowComponentName>(
   component: C,
@@ -29,7 +30,13 @@ export const useProps = <C extends FlowComponentName>(
 
   return mergeProps(
     contextProps
-      ? omit(contextProps, propsContextSupportingComponents)
+      ? omitBy<FlowComponentProps<C>>(
+          contextProps,
+          (value, key) =>
+            propsContextSupportingComponents.includes(
+              key as FlowComponentName,
+            ) || isDynamicProp(value),
+        )
       : contextProps,
     localProps,
     resolvedDynamicProps,
