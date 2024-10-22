@@ -14,7 +14,9 @@
 
   :global(.flow--heading) ~ :global(.flow--heading),
   :global(.flow--section--section-header)
-    ~ :global(.flow--section--section-header) {
+    ~ :global(.flow--section--section-header),
+  :global(.flow--heading) ~ :global(.flow--section--section-header),
+  :global(.flow--section--section-header) ~ :global(.flow--heading) {
     margin-top: var(--section--sub-heading-spacing);
   }
 }
