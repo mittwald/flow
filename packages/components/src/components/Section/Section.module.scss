@@ -11,4 +11,10 @@
     border-block-start-color: var(--section--border-color);
     padding-block-start: var(--section--section-to-section-spacing);
   }
+
+  :global(.flow--heading) ~ :global(.flow--heading),
+  :global(.flow--section--section-header)
+    ~ :global(.flow--section--section-header) {
+    margin-top: var(--section--sub-heading-spacing);
+  }
 }

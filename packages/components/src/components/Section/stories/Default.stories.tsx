@@ -123,3 +123,28 @@ export const WithHeaderContent: Story = {
     </>
   ),
 };
+
+export const WithSubHeadings: Story = {
+  render: (props) => (
+    <>
+      <Section {...props}>
+        <Heading>Heading</Heading>
+        <Text>{dummyText.long}</Text>
+        <Heading level={3}>Sub-Heading</Heading>
+        <Text>{dummyText.long}</Text>
+      </Section>
+      <Section {...props}>
+        <Header>
+          <Heading>Heading</Heading>
+          <Button>Button</Button>
+        </Header>
+        <Text>{dummyText.long}</Text>
+        <Header>
+          <Heading level={3}>Sub-Heading</Heading>
+          <Button>Button</Button>
+        </Header>
+        <Text>{dummyText.long}</Text>
+      </Section>
+    </>
+  ),
+};
