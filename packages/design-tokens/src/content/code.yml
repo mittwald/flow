@@ -1,11 +1,15 @@
-code-block:
+code:
   font-size:
-    value: "{font-size.s}"
+    value: "{font-size-text.s}"
+  line-height:
+    value: "{line-height.m}"
+  padding-x:
+    value: "{size-px.xs}"
   padding:
     value: "{size-px.m}"
   corner-radius:
     value: "{corner-radius.default}"
-  code-to-button-spacing:
+  spacing:
     value: "{size-px.m}"
 
   # Default Color
