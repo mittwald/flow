@@ -9,6 +9,7 @@ import ActionGroup from "@mittwald/flow-react-components/ActionGroup";
 import Button from "@mittwald/flow-react-components/Button";
 import Heading from "@mittwald/flow-react-components/Heading";
 import Action from "@mittwald/flow-react-components/Action";
+import Option from "@mittwald/flow-react-components/Option";
 import { sleepLong } from "@/content/03-components/actions/action/examples/lib";
 import Section from "@mittwald/flow-react-components/Section";
 import {
@@ -16,10 +17,7 @@ import {
   IconSettings,
   IconSshSftp,
 } from "@mittwald/flow-react-components/Icons";
-import {
-  Select,
-  Option,
-} from "@mittwald/flow-react-components/Select";
+import { Select } from "@mittwald/flow-react-components/Select";
 import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
 import { Switch } from "@mittwald/flow-react-components/Switch";
 import Link from "@mittwald/flow-react-components/Link";

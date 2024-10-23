@@ -22,8 +22,8 @@ import { DateRangePicker } from "@/components/DateRangePicker";
 import { getLocalTimeZone, today } from "@internationalized/date";
 import { TimeField } from "@/components/TimeField";
 import { TextArea } from "@/components/TextArea";
-import { ComboBox } from "src/components/ComboBox";
-import { Option } from "src/components/Options";
+import { ComboBox } from "@/components/ComboBox";
+import { Option } from "@/components/Option";
 
 const submitAction = action("submit");
 

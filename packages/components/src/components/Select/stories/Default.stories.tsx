@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import Select from "../index";
 import React from "react";
 import { Label } from "@/components/Label";
-import { Option } from "@/components/Options";
+import { Option } from "@/components/Option";
 import FieldDescription from "@/components/FieldDescription";
 import { FieldError } from "@/components/FieldError";
 

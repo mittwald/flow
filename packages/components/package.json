@@ -39,11 +39,6 @@
       "types": "./dist/js/types/components/AlertIcon/index.d.ts",
       "import": "./dist/js/AlertIcon.js"
     },
-    "./ComboBox/styles.css": "./dist/css/ComboBox.css",
-    "./ComboBox": {
-      "types": "./dist/types/components/ComboBox/index.d.ts",
-      "import": "./dist/ComboBox.js"
-    },
     "./Avatar/styles.css": "./dist/css/Avatar.css",
     "./Avatar": {
       "types": "./dist/js/types/components/Avatar/index.d.ts",
@@ -87,6 +82,11 @@
     "./ColumnLayout": {
       "types": "./dist/js/types/components/ColumnLayout/index.d.ts",
       "import": "./dist/js/ColumnLayout.js"
+    },
+    "./ComboBox/styles.css": "./dist/css/ComboBox.css",
+    "./ComboBox": {
+      "types": "./dist/types/components/ComboBox/index.d.ts",
+      "import": "./dist/ComboBox.js"
     },
     "./Content": {
       "types": "./dist/js/types/components/Content/index.d.ts",
@@ -242,6 +242,11 @@
     "./NumberField": {
       "types": "./dist/js/types/components/NumberField/index.d.ts",
       "import": "./dist/js/NumberField.js"
+    },
+    "./Option/styles.css": "./dist/css/Option.css",
+    "./Option": {
+      "types": "./dist/js/types/components/Option/index.d.ts",
+      "import": "./dist/js/Option.js"
     },
     "./Popover/styles.css": "./dist/css/Popover.css",
     "./Popover": {

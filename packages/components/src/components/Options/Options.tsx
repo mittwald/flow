@@ -5,7 +5,7 @@ import { Popover } from "@/components/Popover";
 import clsx from "clsx";
 import styles from "./Options.module.scss";
 import type { OverlayController } from "@/lib/controller";
-import type { OptionProps } from "@/components/Options";
+import type { OptionProps } from "@/components/Option";
 
 export interface OptionsProps extends Aria.ListBoxProps<OptionProps> {
   controller: OverlayController;

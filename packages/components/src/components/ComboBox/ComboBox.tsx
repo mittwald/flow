@@ -1,4 +1,4 @@
-import type { FC, PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 import React from "react";
 import type { Key } from "react-aria-components";
 import * as Aria from "react-aria-components";
@@ -25,96 +25,93 @@ export interface ComboBoxProps
   controller?: OverlayController;
 }
 
-export const ComboBox: FC<ComboBoxProps> = flowComponent(
-  "ComboBox",
-  (props) => {
-    const {
-      children,
-      className,
-      menuTrigger = "focus",
-      onChange = () => {
-        // default: do nothing
-      },
-      onSelectionChange = () => {
-        // default: do nothing
-      },
-      controller: controllerFromProps,
-      refProp: ref,
-      ...rest
-    } = props;
+export const ComboBox = flowComponent("ComboBox", (props) => {
+  const {
+    children,
+    className,
+    menuTrigger = "focus",
+    onChange = () => {
+      // default: do nothing
+    },
+    onSelectionChange = () => {
+      // default: do nothing
+    },
+    controller: controllerFromProps,
+    refProp: ref,
+    ...rest
+  } = props;
 
-    const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(locales);
 
-    const rootClassName = clsx(
-      styles.comboBox,
-      formFieldStyles.formField,
-      className,
-    );
+  const rootClassName = clsx(
+    styles.comboBox,
+    formFieldStyles.formField,
+    className,
+  );
 
-    const propsContext: PropsContext = {
-      Label: {
-        className: formFieldStyles.label,
-        optional: !props.isRequired,
-      },
-      FieldDescription: {
-        className: formFieldStyles.fieldDescription,
-      },
-      FieldError: {
-        className: formFieldStyles.customFieldError,
-      },
-      Option: {
-        tunnelId: "options",
-      },
-    };
+  const propsContext: PropsContext = {
+    Label: {
+      className: formFieldStyles.label,
+      optional: !props.isRequired,
+    },
+    FieldDescription: {
+      className: formFieldStyles.fieldDescription,
+    },
+    FieldError: {
+      className: formFieldStyles.customFieldError,
+    },
+    Option: {
+      tunnelId: "options",
+    },
+  };
 
-    const handleOnSelectionChange = (key: Key | null) => {
-      onChange(String(key));
-      onSelectionChange(key);
-    };
+  const handleOnSelectionChange = (key: Key | null) => {
+    onChange(String(key));
+    onSelectionChange(key);
+  };
 
-    const controllerFromContext = useOverlayController("ComboBox", {
-      reuseControllerFromContext: true,
-    });
+  const controllerFromContext = useOverlayController("ComboBox", {
+    reuseControllerFromContext: true,
+  });
 
-    const controller = controllerFromProps ?? controllerFromContext;
+  const controller = controllerFromProps ?? controllerFromContext;
 
-    const isOpen = controller.useIsOpen();
+  const isOpen = controller.useIsOpen();
 
-    console.log(isOpen);
+  console.log(isOpen);
 
-    return (
-      <Aria.ComboBox
-        menuTrigger={menuTrigger}
-        className={rootClassName}
-        {...rest}
-        ref={ref}
-        onSelectionChange={handleOnSelectionChange}
-        onOpenChange={(isOpen) => controller.setOpen(isOpen)}
-      >
-        <PropsContextProvider props={propsContext}>
-          <TunnelProvider>
-            <div className={styles.input}>
-              <Aria.Input />
-              <Button
-                className={styles.toggle}
-                aria-label={stringFormatter.format("comboBox.showOptions")}
-                variant="plain"
-                color="secondary"
-              >
-                <IconChevronDown />
-              </Button>
-            </div>
+  return (
+    <Aria.ComboBox
+      menuTrigger={menuTrigger}
+      className={rootClassName}
+      {...rest}
+      ref={ref}
+      onSelectionChange={handleOnSelectionChange}
+      onOpenChange={(isOpen) => controller.setOpen(isOpen)}
+    >
+      <PropsContextProvider props={propsContext}>
+        <TunnelProvider>
+          <div className={styles.input}>
+            <Aria.Input />
+            <Button
+              className={styles.toggle}
+              aria-label={stringFormatter.format("comboBox.showOptions")}
+              variant="plain"
+              color="secondary"
+            >
+              <IconChevronDown />
+            </Button>
+          </div>
 
-            {children}
+          {children}
 
-            <Options controller={controller}>
-              <TunnelExit id="options" />
-            </Options>
-          </TunnelProvider>
-        </PropsContextProvider>
-      </Aria.ComboBox>
-    );
-  },
-);
+          <Options controller={controller}>
+            <TunnelExit id="options" />
+          </Options>
+        </TunnelProvider>
+      </PropsContextProvider>
+    </Aria.ComboBox>
+  );
+});
 
 export default ComboBox;

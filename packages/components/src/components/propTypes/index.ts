@@ -50,8 +50,8 @@ import type { DateRangePickerProps } from "@/components/DateRangePicker";
 import type { TimeFieldProps } from "@/components/TimeField";
 import type { AlertIconProps } from "@/components/AlertIcon";
 import type { ListSummaryProps } from "@/components/List/components/ListSummary/ListSummary";
-import type { ComboBoxProps } from "src/components/ComboBox";
-import type { OptionProps } from "@/components/Options";
+import type { ComboBoxProps } from "@/components/ComboBox";
+import type { OptionProps } from "@/components/Option";
 
 export * from "./types";
 

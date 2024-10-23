@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { Label } from "@/components/Label";
-import { Option } from "@/components/Options";
+import { Option } from "@/components/Option";
 import FieldDescription from "@/components/FieldDescription";
 import { FieldError } from "@/components/FieldError";
-import { ComboBox } from "src/components/ComboBox";
+import { ComboBox } from "@/components/ComboBox";
 
 const meta: Meta<typeof ComboBox> = {
   title: "Form Controls/ComboBox",
