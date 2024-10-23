@@ -2,34 +2,34 @@ import type { PropsWithChildren } from "react";
 import React from "react";
 import type { Key } from "react-aria-components";
 import * as Aria from "react-aria-components";
+import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
+import { Button } from "@/components/Button";
+import { IconChevronDown } from "@/components/Icon/components/icons";
+import { Options } from "@/components/Options";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
-import formFieldStyles from "@/components/FormField/FormField.module.scss";
-import { FieldError } from "@/components/FieldError";
-import styles from "./Select.module.scss";
 import clsx from "clsx";
-import { IconChevronDown } from "@/components/Icon/components/icons";
+import styles from "./ComboBox.module.scss";
+import formFieldStyles from "@/components/FormField/FormField.module.scss";
+import locales from "./locales/*.locale.json";
+import { useLocalizedStringFormatter } from "react-aria";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import { Options } from "@/components/Options";
-import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
-import type { PropsWithClassName } from "@/lib/types/props";
 import { type OverlayController, useOverlayController } from "@/lib/controller";
 
-export interface SelectProps
-  extends PropsWithChildren<
-      Omit<Aria.SelectProps<{ example: string }>, "children" | "className">
-    >,
-    FlowComponentProps,
-    PropsWithClassName {
+export interface ComboBoxProps
+  extends Omit<Aria.ComboBoxProps<never>, "children">,
+    PropsWithChildren,
+    FlowComponentProps {
   onChange?: (value: string) => void;
   controller?: OverlayController;
 }
 
-export const Select = flowComponent("Select", (props) => {
+export const ComboBox = flowComponent("ComboBox", (props) => {
   const {
     children,
     className,
+    menuTrigger = "focus",
     onChange = () => {
       // default: do nothing
     },
@@ -41,8 +41,10 @@ export const Select = flowComponent("Select", (props) => {
     ...rest
   } = props;
 
+  const stringFormatter = useLocalizedStringFormatter(locales);
+
   const rootClassName = clsx(
-    styles.select,
+    styles.comboBox,
     formFieldStyles.formField,
     className,
   );
@@ -63,12 +65,12 @@ export const Select = flowComponent("Select", (props) => {
     },
   };
 
-  const handleOnSelectionChange = (id: Key) => {
-    onChange(String(id));
-    onSelectionChange(id);
+  const handleOnSelectionChange = (key: Key | null) => {
+    onChange(String(key));
+    onSelectionChange(key);
   };
 
-  const controllerFromContext = useOverlayController("Select", {
+  const controllerFromContext = useOverlayController("ComboBox", {
     reuseControllerFromContext: true,
   });
 
@@ -76,32 +78,40 @@ export const Select = flowComponent("Select", (props) => {
 
   const isOpen = controller.useIsOpen();
 
+  console.log(isOpen);
+
   return (
-    <Aria.Select
-      {...rest}
+    <Aria.ComboBox
+      menuTrigger={menuTrigger}
       className={rootClassName}
+      {...rest}
       ref={ref}
       onSelectionChange={handleOnSelectionChange}
       onOpenChange={(isOpen) => controller.setOpen(isOpen)}
-      isOpen={isOpen}
     >
       <PropsContextProvider props={propsContext}>
         <TunnelProvider>
-          <Aria.Button className={styles.toggle}>
-            <Aria.SelectValue />
-            <IconChevronDown />
-          </Aria.Button>
+          <div className={styles.input}>
+            <Aria.Input />
+            <Button
+              className={styles.toggle}
+              aria-label={stringFormatter.format("comboBox.showOptions")}
+              variant="plain"
+              color="secondary"
+            >
+              <IconChevronDown />
+            </Button>
+          </div>
 
           {children}
+
           <Options controller={controller}>
             <TunnelExit id="options" />
           </Options>
-
-          <FieldError className={formFieldStyles.fieldError} />
         </TunnelProvider>
       </PropsContextProvider>
-    </Aria.Select>
+    </Aria.ComboBox>
   );
 });
 
-export default Select;
+export default ComboBox;
