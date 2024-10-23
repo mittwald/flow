@@ -85,8 +85,8 @@
     },
     "./ComboBox/styles.css": "./dist/css/ComboBox.css",
     "./ComboBox": {
-      "types": "./dist/types/components/ComboBox/index.d.ts",
-      "import": "./dist/ComboBox.js"
+      "types": "./dist/js/types/components/ComboBox/index.d.ts",
+      "import": "./dist/js/ComboBox.js"
     },
     "./Content": {
       "types": "./dist/js/types/components/Content/index.d.ts",
