@@ -3,9 +3,9 @@ import React from "react";
 import * as Aria from "react-aria-components";
 import { Popover } from "@/components/Popover";
 import clsx from "clsx";
-import type { OptionProps } from "@/components/Select";
 import styles from "./Options.module.scss";
 import type { OverlayController } from "@/lib/controller";
+import type { OptionProps } from "@/components/Options";
 
 export interface OptionsProps extends Aria.ListBoxProps<OptionProps> {
   controller: OverlayController;

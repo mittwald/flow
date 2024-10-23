@@ -19,7 +19,7 @@ import type { ActionGroupProps } from "@/components/ActionGroup";
 import type { AvatarProps } from "@/components/Avatar";
 import type { ActionProps } from "@/components/Action";
 import type { ContextMenuProps, MenuItemProps } from "@/components/ContextMenu";
-import type { OptionProps, SelectProps } from "@/components/Select";
+import type { SelectProps } from "@/components/Select";
 import type {
   RadioButtonProps,
   RadioGroupProps,
@@ -51,6 +51,7 @@ import type { TimeFieldProps } from "@/components/TimeField";
 import type { AlertIconProps } from "@/components/AlertIcon";
 import type { ListSummaryProps } from "@/components/List/components/ListSummary/ListSummary";
 import type { ComboBoxProps } from "src/components/ComboBox";
+import type { OptionProps } from "@/components/Options";
 
 export * from "./types";
 

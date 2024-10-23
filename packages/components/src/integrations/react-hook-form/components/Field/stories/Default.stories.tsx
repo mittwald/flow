@@ -14,7 +14,7 @@ import { Radio, RadioGroup } from "@/components/RadioGroup";
 import { Switch } from "@/components/Switch";
 import { CheckboxGroup } from "@/components/CheckboxGroup";
 import { Checkbox } from "@/components/Checkbox";
-import Select, { Option } from "@/components/Select";
+import Select from "@/components/Select";
 import { Slider } from "@/components/Slider";
 import { sleep } from "@/lib/promises/sleep";
 import DatePicker from "@/components/DatePicker";
@@ -23,6 +23,7 @@ import { getLocalTimeZone, today } from "@internationalized/date";
 import { TimeField } from "@/components/TimeField";
 import { TextArea } from "@/components/TextArea";
 import { ComboBox } from "src/components/ComboBox";
+import { Option } from "src/components/Options";
 
 const submitAction = action("submit");
 
