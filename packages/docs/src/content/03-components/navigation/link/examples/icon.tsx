@@ -1,7 +1,7 @@
 import Link from "@mittwald/flow-react-components/Link";
-import { IconExternalLink } from "@mittwald/flow-react-components/Icons";
+import { IconDownload } from "@mittwald/flow-react-components/Icons";
 
 <Link href="https://mittwald.de">
-  mittwald.de
-  <IconExternalLink aria-label="external link" />
+  Rechnung herunterladen
+  <IconDownload aria-label="Download" />
 </Link>;
