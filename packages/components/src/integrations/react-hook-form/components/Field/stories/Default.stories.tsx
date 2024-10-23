@@ -22,8 +22,7 @@ import { DateRangePicker } from "@/components/DateRangePicker";
 import { getLocalTimeZone, today } from "@internationalized/date";
 import { TimeField } from "@/components/TimeField";
 import { TextArea } from "@/components/TextArea";
-import { Autocomplete } from "@/components/Autocomplete";
-
+import { ComboBox } from "src/components/ComboBox";
 
 const submitAction = action("submit");
 
@@ -192,11 +191,11 @@ const meta: Meta<typeof Field> = {
               required: "Please select a domain",
             }}
           >
-            <Autocomplete>
+            <ComboBox>
               <Label>Domain</Label>
               <Option value="mydomain.de">mydomain.de</Option>
               <Option value="anotherdomain.com">anotherdomain.com</Option>
-            </Autocomplete>
+            </ComboBox>
           </Field>
 
           <ActionGroup>

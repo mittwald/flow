@@ -62,7 +62,7 @@ export function Field<T extends FieldValues>(props: Props<T>) {
           DatePicker: formControlProps,
           DateRangePicker: formControlProps,
           TimeField: formControlProps,
-          Autocomplete: formControlProps,
+          ComboBox: formControlProps,
         };
 
         return (

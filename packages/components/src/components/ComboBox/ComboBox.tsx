@@ -1,5 +1,6 @@
 import type { FC, PropsWithChildren } from "react";
 import React from "react";
+import type { Key } from "react-aria-components";
 import * as Aria from "react-aria-components";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import { Button } from "@/components/Button";
@@ -8,23 +9,24 @@ import { Options } from "@/components/Options";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import clsx from "clsx";
-import styles from "./Autocomplete.module.scss";
+import styles from "./ComboBox.module.scss";
 import formFieldStyles from "@/components/FormField/FormField.module.scss";
 import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import type { Key } from "react-aria-components";
+import { type OverlayController, useOverlayController } from "@/lib/controller";
 
-export interface AutocompleteProps
+export interface ComboBoxProps
   extends Omit<Aria.ComboBoxProps<never>, "children">,
     PropsWithChildren,
     FlowComponentProps {
   onChange?: (value: string) => void;
+  controller?: OverlayController;
 }
 
-export const Autocomplete: FC<AutocompleteProps> = flowComponent(
-  "Autocomplete",
+export const ComboBox: FC<ComboBoxProps> = flowComponent(
+  "ComboBox",
   (props) => {
     const {
       children,
@@ -36,6 +38,7 @@ export const Autocomplete: FC<AutocompleteProps> = flowComponent(
       onSelectionChange = () => {
         // default: do nothing
       },
+      controller: controllerFromProps,
       refProp: ref,
       ...rest
     } = props;
@@ -43,7 +46,7 @@ export const Autocomplete: FC<AutocompleteProps> = flowComponent(
     const stringFormatter = useLocalizedStringFormatter(locales);
 
     const rootClassName = clsx(
-      styles.autocomplete,
+      styles.comboBox,
       formFieldStyles.formField,
       className,
     );
@@ -69,6 +72,16 @@ export const Autocomplete: FC<AutocompleteProps> = flowComponent(
       onSelectionChange(key);
     };
 
+    const controllerFromContext = useOverlayController("ComboBox", {
+      reuseControllerFromContext: true,
+    });
+
+    const controller = controllerFromProps ?? controllerFromContext;
+
+    const isOpen = controller.useIsOpen();
+
+    console.log(isOpen);
+
     return (
       <Aria.ComboBox
         menuTrigger={menuTrigger}
@@ -76,6 +89,7 @@ export const Autocomplete: FC<AutocompleteProps> = flowComponent(
         {...rest}
         ref={ref}
         onSelectionChange={handleOnSelectionChange}
+        onOpenChange={(isOpen) => controller.setOpen(isOpen)}
       >
         <PropsContextProvider props={propsContext}>
           <TunnelProvider>
@@ -83,7 +97,7 @@ export const Autocomplete: FC<AutocompleteProps> = flowComponent(
               <Aria.Input />
               <Button
                 className={styles.toggle}
-                aria-label={stringFormatter.format("autocomplete.showOptions")}
+                aria-label={stringFormatter.format("comboBox.showOptions")}
                 variant="plain"
                 color="secondary"
               >
@@ -93,7 +107,7 @@ export const Autocomplete: FC<AutocompleteProps> = flowComponent(
 
             {children}
 
-            <Options>
+            <Options controller={controller}>
               <TunnelExit id="options" />
             </Options>
           </TunnelProvider>
@@ -103,4 +117,4 @@ export const Autocomplete: FC<AutocompleteProps> = flowComponent(
   },
 );
 
-export default Autocomplete;
+export default ComboBox;

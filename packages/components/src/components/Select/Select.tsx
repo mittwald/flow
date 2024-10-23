@@ -11,11 +11,10 @@ import clsx from "clsx";
 import { IconChevronDown } from "@/components/Icon/components/icons";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import { Options } from "@/components/Select/components/Options";
+import { Options } from "@/components/Options";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import type { PropsWithClassName } from "@/lib/types/props";
 import { type OverlayController, useOverlayController } from "@/lib/controller";
-import OverlayContextProvider from "@/lib/controller/overlay/OverlayContextProvider";
 
 export interface SelectProps
   extends PropsWithChildren<
@@ -86,23 +85,21 @@ export const Select = flowComponent("Select", (props) => {
       onOpenChange={(isOpen) => controller.setOpen(isOpen)}
       isOpen={isOpen}
     >
-      <OverlayContextProvider type="Select" controller={controller}>
-        <PropsContextProvider props={propsContext}>
-          <TunnelProvider>
-            <Aria.Button className={styles.toggle}>
-              <Aria.SelectValue />
-              <IconChevronDown />
-            </Aria.Button>
+      <PropsContextProvider props={propsContext}>
+        <TunnelProvider>
+          <Aria.Button className={styles.toggle}>
+            <Aria.SelectValue />
+            <IconChevronDown />
+          </Aria.Button>
 
-            {children}
-            <Options>
-              <TunnelExit id="options" />
-            </Options>
+          {children}
+          <Options controller={controller}>
+            <TunnelExit id="options" />
+          </Options>
 
-            <FieldError className={formFieldStyles.fieldError} />
-          </TunnelProvider>
-        </PropsContextProvider>
-      </OverlayContextProvider>
+          <FieldError className={formFieldStyles.fieldError} />
+        </TunnelProvider>
+      </PropsContextProvider>
     </Aria.Select>
   );
 });

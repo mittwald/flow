@@ -50,7 +50,7 @@ import type { DateRangePickerProps } from "@/components/DateRangePicker";
 import type { TimeFieldProps } from "@/components/TimeField";
 import type { AlertIconProps } from "@/components/AlertIcon";
 import type { ListSummaryProps } from "@/components/List/components/ListSummary/ListSummary";
-import type { AutocompleteProps } from "@/components/Autocomplete";
+import type { ComboBoxProps } from "src/components/ComboBox";
 
 export * from "./types";
 
@@ -60,7 +60,7 @@ export interface FlowComponentPropsTypes {
   Alert: AlertProps;
   AlertBadge: AlertBadgeProps;
   AlertIcon: AlertIconProps;
-  Autocomplete: AutocompleteProps;
+  ComboBox: ComboBoxProps;
   Avatar: AvatarProps;
   Badge: BadgeProps;
   Button: ButtonProps;
@@ -120,7 +120,7 @@ const propsContextSupportingComponentsMap: Record<
   Alert: true,
   AlertBadge: true,
   AlertIcon: true,
-  Autocomplete: true,
+  ComboBox: true,
   Avatar: true,
   Badge: true,
   Button: true,

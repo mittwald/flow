@@ -4,13 +4,13 @@ import { Label } from "@/components/Label";
 import { Option } from "@/components/Options";
 import FieldDescription from "@/components/FieldDescription";
 import { FieldError } from "@/components/FieldError";
-import { Autocomplete } from "@/components/Autocomplete";
+import { ComboBox } from "src/components/ComboBox";
 
-const meta: Meta<typeof Autocomplete> = {
-  title: "Form Controls/Autocomplete",
-  component: Autocomplete,
+const meta: Meta<typeof ComboBox> = {
+  title: "Form Controls/ComboBox",
+  component: ComboBox,
   render: (props) => (
-    <Autocomplete {...props}>
+    <ComboBox {...props}>
       <Label>Domain</Label>
       <Option>mydomain.de</Option>
       <Option>shop.mydomain.de</Option>
@@ -20,12 +20,12 @@ const meta: Meta<typeof Autocomplete> = {
       <Option>anotherdomain.com/blog</Option>
       <Option>onemoredomain.de</Option>
       <Option>www.onemoredomain.de</Option>
-    </Autocomplete>
+    </ComboBox>
   ),
 };
 export default meta;
 
-type Story = StoryObj<typeof Autocomplete>;
+type Story = StoryObj<typeof ComboBox>;
 
 export const Default: Story = {};
 
@@ -37,7 +37,7 @@ export const Required: Story = {
 
 export const WithFieldDescription: Story = {
   render: (props) => (
-    <Autocomplete {...props}>
+    <ComboBox {...props}>
       <Label>Domain</Label>
       <Option>mydomain.de</Option>
       <Option>shop.mydomain.de</Option>
@@ -48,13 +48,13 @@ export const WithFieldDescription: Story = {
       <Option>onemoredomain.de</Option>
       <Option>www.onemoredomain.de</Option>
       <FieldDescription>Select a domain</FieldDescription>
-    </Autocomplete>
+    </ComboBox>
   ),
 };
 
 export const WithDefaultValue: Story = {
   render: (props) => (
-    <Autocomplete {...props} defaultSelectedKey="mydomain.de">
+    <ComboBox {...props} defaultSelectedKey="mydomain.de">
       <Label>Domain</Label>
       <Option value="mydomain.de">mydomain.de</Option>
       <Option>shop.mydomain.de</Option>
@@ -64,13 +64,13 @@ export const WithDefaultValue: Story = {
       <Option>anotherdomain.com/blog</Option>
       <Option>onemoredomain.de</Option>
       <Option>www.onemoredomain.de</Option>
-    </Autocomplete>
+    </ComboBox>
   ),
 };
 
 export const WithFieldError: Story = {
   render: (props) => (
-    <Autocomplete {...props} isInvalid isRequired>
+    <ComboBox {...props} isInvalid isRequired>
       <Label>Domain</Label>
       <Option>mydomain.de</Option>
       <Option>shop.mydomain.de</Option>
@@ -81,6 +81,6 @@ export const WithFieldError: Story = {
       <Option>onemoredomain.de</Option>
       <Option>www.onemoredomain.de</Option>
       <FieldError>Select a domain to continue</FieldError>
-    </Autocomplete>
+    </ComboBox>
   ),
 };

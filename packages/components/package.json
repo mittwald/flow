@@ -39,10 +39,10 @@
       "types": "./dist/js/types/components/AlertIcon/index.d.ts",
       "import": "./dist/js/AlertIcon.js"
     },
-    "./Autocomplete/styles.css": "./dist/css/Autocomplete.css",
-    "./Autocomplete": {
-      "types": "./dist/types/components/Autocomplete/index.d.ts",
-      "import": "./dist/Autocomplete.js"
+    "./ComboBox/styles.css": "./dist/css/ComboBox.css",
+    "./ComboBox": {
+      "types": "./dist/types/components/ComboBox/index.d.ts",
+      "import": "./dist/ComboBox.js"
     },
     "./Avatar/styles.css": "./dist/css/Avatar.css",
     "./Avatar": {

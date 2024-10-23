@@ -1,9 +1,9 @@
-import Autocomplete, {
+import ComboBox, {
   Option,
-} from "@mittwald/flow-react-components/Autocomplete";
+} from "@mittwald/flow-react-components/ComboBox";
 import Label from "@mittwald/flow-react-components/Label";
 
-<Autocomplete>
+<ComboBox>
   <Label>Domain</Label>
   <Option>mydomain.de</Option>
   <Option>shop.mydomain.de</Option>
@@ -13,4 +13,4 @@ import Label from "@mittwald/flow-react-components/Label";
   <Option>anotherdomain.com/blog</Option>
   <Option>onemoredomain.de</Option>
   <Option>www.onemoredomain.de</Option>
-</Autocomplete>;
+</ComboBox>;
