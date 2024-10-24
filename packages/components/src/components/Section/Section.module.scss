@@ -12,11 +12,7 @@
     padding-block-start: var(--section--section-to-section-spacing);
   }
 
-  :global(.flow--heading) ~ :global(.flow--heading),
-  :global(.flow--section--section-header)
-    ~ :global(.flow--section--section-header),
-  :global(.flow--heading) ~ :global(.flow--section--section-header),
-  :global(.flow--section--section-header) ~ :global(.flow--heading) {
+  .heading:not(:first-child) {
     margin-top: var(--section--sub-heading-spacing);
   }
 }
