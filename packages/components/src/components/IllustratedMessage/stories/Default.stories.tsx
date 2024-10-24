@@ -9,6 +9,7 @@ import {
   storyBackgroundDark,
   storyBackgroundLight,
 } from "@/lib/dev/storyBackgrounds";
+import { ActionGroup } from "@/components/ActionGroup";
 
 const meta: Meta<typeof IllustratedMessage> = {
   title: "Content/Illustrated Message",
@@ -57,4 +58,20 @@ export const Light: Story = {
   parameters: {
     backgrounds: storyBackgroundDark,
   },
+};
+
+export const WithActionGroup: Story = {
+  render: (props) => (
+    <IllustratedMessage {...props}>
+      <IconApp />
+      <Heading>No apps installed</Heading>
+      <Text>Create your first app to start working on your website.</Text>
+      <ActionGroup>
+        <Button variant="soft" color="secondary">
+          Go back
+        </Button>
+        <Button>Create app</Button>
+      </ActionGroup>
+    </IllustratedMessage>
+  ),
 };
