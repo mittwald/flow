@@ -26,31 +26,34 @@ function isDesignToken(ref: unknown): ref is DesignToken {
   );
 }
 
-function getTokens(current: unknown, target: DesignToken[] = []) {
+function getTokens(current: unknown, collector: DesignToken[] = []) {
   if (isDesignToken(current)) {
-    target.push(current);
+    collector.push(current);
   } else if (current !== null && typeof current === "object") {
     for (const value of Object.values(current)) {
-      getTokens(value, target);
+      getTokens(value, collector);
     }
   }
-  return target;
+  return collector;
+}
+
+function recursiveGetTokensInPath(path: string) {
+  const values = getProperty<unknown, string>(tokens, path, undefined);
+  return getTokens(values);
 }
 
 export const DesignTokenTable: FC<Props> = (props) => {
   const { path } = props;
 
-  const values = getProperty<unknown, string>(tokens, path, undefined);
-  const designTokens = getTokens(values);
+  const designTokens = recursiveGetTokensInPath(path);
   const rows = designTokens.map((token) => {
-    let tokenName = "";
-    token.path.forEach((part, index) => {
-      const glue = index === token.path.length - 1 ? "" : "--";
-      tokenName += part + glue;
-    });
+    const tokenName = token.path.join("--");
+
     return (
       <TableRow key={tokenName}>
-        <Sample tokenName={tokenName} tokenValue={token.value} />
+        <TableCell>
+          <Sample tokenName={tokenName} tokenValue={token.value} />
+        </TableCell>
         <TableCell>{tokenName}</TableCell>
         <TableCell>{token.value}</TableCell>
       </TableRow>

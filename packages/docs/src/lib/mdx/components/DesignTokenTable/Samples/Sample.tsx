@@ -19,32 +19,28 @@ interface SampleProps {
 export const Sample: FC<SampleProps> = (props) => {
   const { tokenName, tokenValue } = props;
 
-  let specificSample;
-
-  if (tokenName.includes("color")) {
-    specificSample = <ColorSample value={tokenValue} />;
-  } else if (tokenName.includes("corner-radius")) {
-    specificSample = <CornerRadiusSample value={tokenValue} />;
-  } else if (tokenName.includes("font-size")) {
-    specificSample = <FontSizeSample value={tokenValue} />;
-  } else if (tokenName.includes("font-weight")) {
-    specificSample = <FontWeightSample value={tokenValue} />;
-  } else if (tokenName.includes("line-height")) {
-    specificSample = <LineHeightSample value={tokenValue} />;
-  } else if (tokenName.includes("padding")) {
-    specificSample = <PaddingSample value={tokenValue} />;
-  } else if (tokenName.includes("margin")) {
-    specificSample = <MarginSample value={tokenValue} />;
-  } else if (tokenName.includes("border-style")) {
-    specificSample = <BorderStyleSample value={tokenValue} />;
-  } else if (tokenName.includes("border-width")) {
-    specificSample = <BorderWidthSample value={tokenValue} />;
-  } else if (
-    tokenName.includes("width") ||
-    tokenName.includes("spacing") ||
-    tokenName.includes("size")
-  ) {
-    specificSample = <SizeSample value={tokenValue} />;
+  switch (true) {
+    case tokenName.includes("color"):
+      return <ColorSample value={tokenValue} />;
+    case tokenName.includes("corner-radius"):
+      return <CornerRadiusSample value={tokenValue} />;
+    case tokenName.includes("font-size"):
+      return <FontSizeSample value={tokenValue} />;
+    case tokenName.includes("font-weight"):
+      return <FontWeightSample value={tokenValue} />;
+    case tokenName.includes("line-height"):
+      return <LineHeightSample value={tokenValue} />;
+    case tokenName.includes("padding"):
+      return <PaddingSample value={tokenValue} />;
+    case tokenName.includes("margin"):
+      return <MarginSample value={tokenValue} />;
+    case tokenName.includes("border-style"):
+      return <BorderStyleSample value={tokenValue} />;
+    case tokenName.includes("border-width"):
+      return <BorderWidthSample value={tokenValue} />;
+    case tokenName.includes("width") ||
+      tokenName.includes("spacing") ||
+      tokenName.includes("size"):
+      return <SizeSample value={tokenValue} />;
   }
-  return <TableCell>{specificSample}</TableCell>;
 };

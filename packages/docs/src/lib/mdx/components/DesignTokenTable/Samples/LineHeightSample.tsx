@@ -13,7 +13,7 @@ export const LineHeightSample: FC<SampleProps> = (props) => {
     <div
       className={clsx(styles.lineHeight)}
       style={{
-        fontSize: value,
+        lineHeight: value,
       }}
     >
       Aa
