@@ -1,5 +1,4 @@
 import type { FC } from "react";
-import { TableCell } from "@mittwald/flow-react-components/Table";
 import { ColorSample } from "@/lib/mdx/components/DesignTokenTable/Samples/ColorSample";
 import { CornerRadiusSample } from "@/lib/mdx/components/DesignTokenTable/Samples/CornerRadiusSample";
 import { SizeSample } from "@/lib/mdx/components/DesignTokenTable/Samples/SizeSample";
