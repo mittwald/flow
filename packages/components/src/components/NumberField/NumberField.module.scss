@@ -43,7 +43,7 @@
     }
   }
 
-  &[aria-disabled] {
+  &[aria-disabled="true"] {
     .decrementButton,
     .incrementButton {
       border-color: var(--form-control--border-color--disabled);
