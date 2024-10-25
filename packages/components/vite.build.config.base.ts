@@ -57,6 +57,7 @@ export const buildConfig = (opts: Options) => {
     EmulatedBoldText: "./src/components/EmulatedBoldText/index.ts",
     FieldDescription: "./src/components/FieldDescription/index.ts",
     FieldError: "./src/components/FieldError/index.ts",
+    FileTrigger: "./src/components/FileTrigger/index.ts",
     Header: "./src/components/Header/index.ts",
     HeaderNavigation: "./src/components/HeaderNavigation/index.ts",
     Heading: "./src/components/Heading/index.ts",

@@ -132,8 +132,8 @@
       "import": "./dist/js/FieldError.js"
     },
     "./FileTrigger": {
-      "types": "./dist/types/components/FileTrigger/index.d.ts",
-      "import": "./dist/FileTrigger.js"
+      "types": "./dist/js/types/components/FileTrigger/index.d.ts",
+      "import": "./dist/js/FileTrigger.js"
     },
     "./Header/styles.css": "./dist/css/Header.css",
     "./Header": {
