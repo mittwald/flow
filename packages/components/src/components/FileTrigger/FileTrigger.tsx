@@ -14,14 +14,12 @@ export const FileTrigger: FC<FileTriggerProps> = (props) => {
   const { controller, children, ...rest } = props;
 
   return (
-    <>
-      <Aria.FileTrigger
-        {...rest}
-        onSelect={(e) => controller.selectFile(e, props.allowsMultiple)}
-      >
-        {children}
-      </Aria.FileTrigger>
-    </>
+    <Aria.FileTrigger
+      {...rest}
+      onSelect={(e) => controller.selectFile(e, props.allowsMultiple)}
+    >
+      {children}
+    </Aria.FileTrigger>
   );
 };
 
