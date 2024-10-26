@@ -1,6 +1,5 @@
-import Select, {
-  Option,
-} from "@mittwald/flow-react-components/Select";
+import Select from "@mittwald/flow-react-components/Select";
+import Option from "@mittwald/flow-react-components/Option";
 import Label from "@mittwald/flow-react-components/Label";
 
 <Select>

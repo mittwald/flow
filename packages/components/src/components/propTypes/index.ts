@@ -19,7 +19,7 @@ import type { ActionGroupProps } from "@/components/ActionGroup";
 import type { AvatarProps } from "@/components/Avatar";
 import type { ActionProps } from "@/components/Action";
 import type { ContextMenuProps, MenuItemProps } from "@/components/ContextMenu";
-import type { OptionProps, SelectProps } from "@/components/Select";
+import type { SelectProps } from "@/components/Select";
 import type {
   RadioButtonProps,
   RadioGroupProps,
@@ -50,6 +50,8 @@ import type { DateRangePickerProps } from "@/components/DateRangePicker";
 import type { TimeFieldProps } from "@/components/TimeField";
 import type { AlertIconProps } from "@/components/AlertIcon";
 import type { ListSummaryProps } from "@/components/List/components/ListSummary/ListSummary";
+import type { ComboBoxProps } from "@/components/ComboBox";
+import type { OptionProps } from "@/components/Option";
 
 export * from "./types";
 
@@ -59,6 +61,7 @@ export interface FlowComponentPropsTypes {
   Alert: AlertProps;
   AlertBadge: AlertBadgeProps;
   AlertIcon: AlertIconProps;
+  ComboBox: ComboBoxProps;
   Avatar: AvatarProps;
   Badge: BadgeProps;
   Button: ButtonProps;
@@ -115,10 +118,11 @@ const propsContextSupportingComponentsMap: Record<
 > = {
   Action: true,
   ActionGroup: true,
-  Avatar: true,
   Alert: true,
   AlertBadge: true,
   AlertIcon: true,
+  ComboBox: true,
+  Avatar: true,
   Badge: true,
   Button: true,
   Checkbox: true,
