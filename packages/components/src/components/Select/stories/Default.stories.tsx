@@ -75,3 +75,15 @@ export const WithFieldError: Story = {
     </Select>
   ),
 };
+
+export const WithNumbers: Story = {
+  render: (props) => (
+    <Select {...props}>
+      <Label>Number</Label>
+      <Option value={1}>1</Option>
+      <Option value={2}>2</Option>
+      <Option value={3}>3</Option>
+      <Option value={4}>4</Option>
+    </Select>
+  ),
+};
