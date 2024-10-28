@@ -1,7 +1,5 @@
 .heading {
   color: var(--heading--color);
-  display: flex;
-  column-gap: var(--heading--icon-to-text-spacing);
   font-size: var(--font-size);
   font-weight: var(--heading--font-weight);
   --heading-line-height: calc(var(--font-size) * var(--line-height--default));
@@ -18,11 +16,19 @@
   > :global(.flow--alert-icon) {
     height: var(--heading-line-height);
     width: var(--heading-line-height);
+    vertical-align: bottom;
+    display: inline-block;
+    margin-inline-end: var(--heading--icon-to-text-spacing);
+  }
+
+  .headingText:not(:last-child) {
+    margin-inline-end: var(--heading--icon-to-text-spacing);
   }
 
   .headingContent {
+    vertical-align: bottom;
+    display: inline-flex;
     height: var(--heading-line-height);
-    display: flex;
     align-items: center;
   }
 
