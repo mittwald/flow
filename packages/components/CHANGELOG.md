@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.303](https://github.com/mittwald/flow/compare/0.1.0-alpha.302...0.1.0-alpha.303) (2024-10-28)
+
+### Bug Fixes
+
+- NumberField applying disabled styles when aria-disabled="false"
+  ([#911](https://github.com/mittwald/flow/issues/911))
+  ([0d20ab3](https://github.com/mittwald/flow/commit/0d20ab383214395f11ce7dda4ac26ba3698ff408))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.302](https://github.com/mittwald/flow/compare/0.1.0-alpha.301...0.1.0-alpha.302) (2024-10-24)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
