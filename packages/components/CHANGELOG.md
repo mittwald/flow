@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.305](https://github.com/mittwald/flow/compare/0.1.0-alpha.304...0.1.0-alpha.305) (2024-10-28)
+
+### Bug Fixes
+
+- **List:** hide summary in empty list
+  ([77f5a54](https://github.com/mittwald/flow/commit/77f5a540cdd77a8b8e93fd14b954b80c2e1be72a))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.304](https://github.com/mittwald/flow/compare/0.1.0-alpha.303...0.1.0-alpha.304) (2024-10-28)
 
 ### Bug Fixes
