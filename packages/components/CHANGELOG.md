@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.304](https://github.com/mittwald/flow/compare/0.1.0-alpha.303...0.1.0-alpha.304) (2024-10-28)
+
+### Bug Fixes
+
+- **Select:** fix overflow in select field
+  ([c571018](https://github.com/mittwald/flow/commit/c571018830230b2441b97af39eb0d5e42508cd13))
+
+### Features
+
+- **Select:** Support numbers in select field
+  ([29a9d21](https://github.com/mittwald/flow/commit/29a9d21baf32f68f2ede56204521a2957797330c))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.303](https://github.com/mittwald/flow/compare/0.1.0-alpha.302...0.1.0-alpha.303) (2024-10-28)
 
 ### Bug Fixes
