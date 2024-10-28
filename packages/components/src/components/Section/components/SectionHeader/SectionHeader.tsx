@@ -41,6 +41,12 @@ export const SectionHeader: FC<SectionHeaderProps> = (props) => {
         tunnelId: null,
       },
     },
+    ContextualHelpTrigger: {
+      tunnelId: "actions",
+      Button: {
+        tunnelId: null,
+      },
+    },
     Action: {
       tunnelId: "actions",
       Button: {
