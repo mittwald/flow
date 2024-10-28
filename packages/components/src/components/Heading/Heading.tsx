@@ -6,6 +6,7 @@ import { ClearPropsContext, PropsContextProvider } from "@/lib/propsContext";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import * as Aria from "react-aria-components";
+import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 
 export interface HeadingProps extends Aria.HeadingProps, FlowComponentProps {
   size?: "xs" | "s" | "m" | "l" | "xl" | "xxl";
@@ -37,20 +38,32 @@ export const Heading = flowComponent("Heading", (props) => {
       className: styles.icon,
     },
     AlertBadge: {
-      wrapWith: <div className={styles.headingContent} />,
+      tunnelId: "headingContent",
     },
     Button: {
-      wrapWith: <div className={styles.headingContent} />,
+      tunnelId: "headingContent",
     },
   };
 
   return (
     <ClearPropsContext>
-      <Aria.Heading level={level} className={rootClassName} {...rest} ref={ref}>
-        <PropsContextProvider props={propsContext}>
-          {children}
-        </PropsContextProvider>
-      </Aria.Heading>
+      <TunnelProvider>
+        <Aria.Heading
+          level={level}
+          className={rootClassName}
+          {...rest}
+          ref={ref}
+        >
+          <span className={styles.headingText}>
+            <PropsContextProvider props={propsContext}>
+              {children}
+            </PropsContextProvider>
+          </span>
+          <span className={styles.headingContent}>
+            <TunnelExit id="headingContent" />
+          </span>
+        </Aria.Heading>
+      </TunnelProvider>
     </ClearPropsContext>
   );
 });
