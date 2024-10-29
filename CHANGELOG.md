@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.306](https://github.com/mittwald/flow/compare/0.1.0-alpha.305...0.1.0-alpha.306) (2024-10-28)
+
+### Bug Fixes
+
+- **Heading:** fix heading content margin
+  ([46da4bb](https://github.com/mittwald/flow/commit/46da4bb900a6f9b07f10299c4fc3cde0a8b9cef0))
+
+### Features
+
+- **Heading:** support contextual help
+  ([6a21e4a](https://github.com/mittwald/flow/commit/6a21e4a0f94410703a033acebd1ce9c95f154dab))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.305](https://github.com/mittwald/flow/compare/0.1.0-alpha.304...0.1.0-alpha.305) (2024-10-28)
 
 ### Bug Fixes
