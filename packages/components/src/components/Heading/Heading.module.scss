@@ -12,17 +12,19 @@
     color: var(--heading--color-light);
   }
 
-  .icon,
-  > :global(.flow--alert-icon) {
-    height: var(--heading-line-height);
-    width: var(--heading-line-height);
-    vertical-align: bottom;
-    display: inline-block;
-    margin-inline-end: var(--heading--icon-to-text-spacing);
-  }
+  .headingText {
+    .icon,
+    > :global(.flow--alert-icon) {
+      height: var(--heading-line-height);
+      width: var(--heading-line-height);
+      vertical-align: bottom;
+      display: inline-block;
+      margin-inline-end: var(--heading--icon-to-text-spacing);
+    }
 
-  .headingText:not(:last-child) {
-    margin-inline-end: var(--heading--icon-to-text-spacing);
+    &:not(:last-child) {
+      margin-inline-end: var(--heading--icon-to-text-spacing);
+    }
   }
 
   .headingContent {
