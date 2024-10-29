@@ -4376,6 +4376,7 @@ const RAW_RUNTIME_STATE =
           ["react-stately", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.33.0"],\
           ["react-syntax-highlighter", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:15.6.1"],\
           ["remeda", "npm:2.15.0"],\
+          ["rimraf", "npm:6.0.1"],\
           ["rollup", "npm:4.24.0"],\
           ["sass", "npm:1.79.4"],\
           ["storybook", "npm:8.3.5"],\
@@ -4484,6 +4485,7 @@ const RAW_RUNTIME_STATE =
           ["react-stately", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.33.0"],\
           ["react-syntax-highlighter", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:15.6.1"],\
           ["remeda", "npm:2.15.0"],\
+          ["rimraf", "npm:6.0.1"],\
           ["rollup", "npm:4.24.0"],\
           ["sass", "npm:1.79.4"],\
           ["storybook", "npm:8.3.5"],\
@@ -4583,6 +4585,7 @@ const RAW_RUNTIME_STATE =
           ["react-stately", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.33.0"],\
           ["react-syntax-highlighter", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:15.6.1"],\
           ["remeda", "npm:2.15.0"],\
+          ["rimraf", "npm:6.0.1"],\
           ["rollup", "npm:4.24.0"],\
           ["sass", "npm:1.79.4"],\
           ["storybook", "npm:8.3.5"],\
@@ -22145,6 +22148,15 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["rimraf", "npm:4.4.1"],\
           ["glob", "npm:9.3.5"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:6.0.1", {\
+        "packageLocation": "./.yarn/cache/rimraf-npm-6.0.1-2d0b0aeb1b-b30b6b0727.zip/node_modules/rimraf/",\
+        "packageDependencies": [\
+          ["rimraf", "npm:6.0.1"],\
+          ["glob", "npm:11.0.0"],\
+          ["package-json-from-dist", "npm:1.0.1"]\
         ],\
         "linkType": "HARD"\
       }]\

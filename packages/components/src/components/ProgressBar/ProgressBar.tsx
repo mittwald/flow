@@ -3,10 +3,11 @@ import type { FC, PropsWithChildren } from "react";
 import React from "react";
 import styles from "./ProgressBar.module.scss";
 import clsx from "clsx";
-import { useNumberFormatter } from "react-aria";
+import { useLocalizedStringFormatter, useNumberFormatter } from "react-aria";
 import type { PropsWithStatus } from "@/lib/types/props";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
+import locales from "./locales/*.locale.json";
 
 export interface ProgressBarProps
   extends PropsWithChildren<Omit<Aria.ProgressBarProps, "children">>,
@@ -33,6 +34,8 @@ export const ProgressBar: FC<ProgressBarProps> = (props) => {
     styles[status],
   );
 
+  const stringFormatter = useLocalizedStringFormatter(locales);
+
   const formatter = useNumberFormatter(props.formatOptions);
 
   const maxValueText =
@@ -53,7 +56,9 @@ export const ProgressBar: FC<ProgressBarProps> = (props) => {
         <PropsContextProvider props={propsContext}>
           {children}
           <span className={styles.value}>
-            {maxValueText ? `${valueText} of ${maxValueText}` : valueText}
+            {maxValueText
+              ? `${valueText} ${stringFormatter.format("progressBar.of")} ${maxValueText}`
+              : valueText}
           </span>
           <div className={styles.bar}>
             <div className={styles.fill} style={{ width: percentage + "%" }} />

@@ -72,6 +72,7 @@ export interface FlowComponentPropsTypes {
   ContextMenuSection: ContextMenuSectionProps;
   ContextMenuTrigger: OverlayTriggerProps;
   ContextualHelp: ContextualHelpProps;
+  ContextualHelpTrigger: OverlayTriggerProps;
   CopyButton: CopyButtonProps;
   CounterBadge: CounterBadgeProps;
   DatePicker: DatePickerProps<Aria.DateValue>;
@@ -133,6 +134,7 @@ const propsContextSupportingComponentsMap: Record<
   ContextMenuSection: true,
   ContextMenuTrigger: true,
   ContextualHelp: true,
+  ContextualHelpTrigger: true,
   CopyButton: true,
   CounterBadge: true,
   DatePicker: true,

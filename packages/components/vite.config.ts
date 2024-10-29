@@ -17,8 +17,7 @@ export default defineConfig({
   },
   css: {
     postcss: {
-      // @todo: fix this type cast
-      plugins: [postcssNesting as never],
+      plugins: [postcssNesting],
     },
     modules: {
       generateScopedName: cssModuleClassNameGenerator,
