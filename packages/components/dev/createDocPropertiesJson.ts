@@ -5,12 +5,7 @@ import { glob } from "glob";
 
 import type { ComponentDoc } from "react-docgen-typescript";
 
-interface Component {
-  fileLocation: string;
-  doc: ComponentDoc[];
-}
-
-async function parse(): Promise<Component[]> {
+async function parse(): Promise<ComponentDoc[]> {
   const parser = docgen.withCustomConfig("./tsconfig.json", {
     skipChildrenPropWithoutDoc: false,
     shouldRemoveUndefinedFromOptional: true,
@@ -20,12 +15,7 @@ async function parse(): Promise<Component[]> {
   const files = await glob("./src/components/*/*.tsx", {
     ignore: ["src/**/*.stories.tsx", "src/**/*.test.tsx"],
   });
-  return files.map((fileLocation) => {
-    return {
-      fileLocation,
-      doc: parser.parse(fileLocation),
-    } satisfies Component;
-  });
+  return parser.parse(files);
 }
 
 async function createDocPropertiesJson() {
@@ -37,11 +27,7 @@ async function createDocPropertiesJson() {
   }
   await fs.writeFile(
     "./out/doc-properties.json",
-    JSON.stringify(
-      components.flatMap((component) => component.doc),
-      null,
-      2,
-    ),
+    JSON.stringify(components, null, 2),
   );
 
   console.log("✅  Done");
