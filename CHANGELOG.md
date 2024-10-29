@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.307](https://github.com/mittwald/flow/compare/0.1.0-alpha.306...0.1.0-alpha.307) (2024-10-29)
+
+### Features
+
+- **Section:** support contextual help in section header
+  ([88f009c](https://github.com/mittwald/flow/commit/88f009c670f7a9ca9752c8c36098ac0d6c938d2f))
+- **Section:** support contextual help in section header
+  ([33fcc6e](https://github.com/mittwald/flow/commit/33fcc6ef99f3976d1c12c1a78595dda35bda97cc))
+- **Section:** support contextual help in section header
+  ([29577cc](https://github.com/mittwald/flow/commit/29577cc04fe59e80407d0c7795567c131ba3b957))
+- **Section:** support contextual help in section header
+  ([054155d](https://github.com/mittwald/flow/commit/054155d5e8b3ea2b4e03b25d53e92234c5111148))
+- **Section:** support contextual help in section header
+  ([2f29e19](https://github.com/mittwald/flow/commit/2f29e190a9e5002aeed92208e6f56271c5e1baff))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.306](https://github.com/mittwald/flow/compare/0.1.0-alpha.305...0.1.0-alpha.306) (2024-10-28)
 
 ### Bug Fixes
