@@ -173,7 +173,9 @@ export const List = flowComponent("List", (props) => {
             <Header hasActionGroup={hasActionGroup} />
 
             <div>
-              <TunnelExit id="listSummary" />
+              {listModel.items.entries.length > 0 && (
+                <TunnelExit id="listSummary" />
+              )}
               {listModel.viewMode === "list" && <Items />}
               {listModel.viewMode === "table" && <Table />}
             </div>

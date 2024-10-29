@@ -18,4 +18,10 @@
       background-color: var(--form-control--background-color--invalid);
     }
   }
+
+  :global(.react-aria-SelectValue) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }

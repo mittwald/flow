@@ -34,6 +34,10 @@ export const IllustratedMessage: FC<IllustratedMessageProps> = (props) => {
     Button: {
       color: lightOrDarkColor ?? "accent",
     },
+    ActionGroup: {
+      ignoreBreakpoint: true,
+      className: styles.actionGroup,
+    },
   };
 
   return (

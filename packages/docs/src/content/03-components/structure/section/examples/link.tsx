@@ -7,7 +7,7 @@ import { Link } from "@mittwald/flow-react-components/Link";
 <Section>
   <Header>
     <Heading>Newsletter</Heading>
-    <Link href={"#"}>Zur Anmeldung</Link>
+    <Link href="#">Zur Anmeldung</Link>
   </Header>
   <Text>
     Kommende Releases, neue Features und Tipps rund um dein

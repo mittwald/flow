@@ -23,7 +23,7 @@ export interface SelectProps
     >,
     FlowComponentProps,
     PropsWithClassName {
-  onChange?: (value: string) => void;
+  onChange?: (value: string | number) => void;
   controller?: OverlayController;
 }
 

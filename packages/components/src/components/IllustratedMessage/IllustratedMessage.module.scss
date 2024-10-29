@@ -8,13 +8,25 @@
   align-items: center;
   padding: var(--illustrated-message--padding);
   row-gap: var(--illustrated-message--spacing);
-  
+
   /* Elements */
+
+  :where(.icon) {
+    color: var(--illustrated-message--info-icon-color);
+    margin-bottom: var(--illustrated-message--icon-to-heading-spacing);
+  }
 
   .text, .heading {
     max-width: var(--text--max-width);
     text-align: center;
+  }
 
+  .actionGroup [role="group"] {
+    justify-content: center;
+
+    button {
+      margin: 0;
+    }
   }
 
   /* Color */
