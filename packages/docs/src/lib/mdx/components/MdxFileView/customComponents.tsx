@@ -9,7 +9,6 @@ import Link from "@mittwald/flow-react-components/Link";
 import Text from "@mittwald/flow-react-components/Text";
 import { LinkProvider } from "@mittwald/flow-react-components/nextjs";
 import ExamplesContainer from "@/lib/mdx/components/DoAndDont/ExamplesContainer";
-import { IconExternalLink } from "@mittwald/flow-react-components/Icons";
 import { ColumnLayout } from "@mittwald/flow-react-components/ColumnLayout";
 import { InlineCode } from "@mittwald/flow-react-components/InlineCode";
 import { Separator } from "@mittwald/flow-react-components/Separator";
@@ -85,7 +84,6 @@ export const customComponents: MDXComponents = {
       return (
         <Link href={href} inline>
           {children}
-          <IconExternalLink />
         </Link>
       );
     }
