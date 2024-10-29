@@ -40,6 +40,9 @@ export const Heading = flowComponent("Heading", (props) => {
     AlertBadge: {
       tunnelId: "headingContent",
     },
+    Badge: {
+      tunnelId: "headingContent",
+    },
     ContextualHelpTrigger: {
       tunnelId: "headingContent",
       Button: {
