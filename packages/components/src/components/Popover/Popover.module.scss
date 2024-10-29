@@ -20,11 +20,15 @@
     }
   }
 
-  .tip svg {
-    display: block;
-    fill: var(--popover--background-color);
-    stroke: var(--popover--border-color);
-    stroke-width: var(--popover--border-width);
+  .tip {
+    width: var(--popover--tip-width);
+
+    svg {
+      display: block;
+      fill: var(--popover--background-color);
+      stroke: var(--popover--border-color);
+      stroke-width: var(--popover--border-width);
+    }
   }
 
   &[data-placement="top"] {

@@ -9,6 +9,7 @@ import ContextualHelpTrigger from "../../ContextualHelp/components/ContextualHel
 import { Button } from "@/components/Button";
 import { ContextualHelp } from "@/components/ContextualHelp";
 import { Text } from "@/components/Text";
+import { Badge } from "@/components/Badge";
 
 const meta: Meta<typeof Heading> = {
   ...defaultMeta,
@@ -34,6 +35,7 @@ export const WithAlertBadge: Story = {
       <IconMember />
       {dummyText.long}
       <AlertBadge>Alert</AlertBadge>
+      <Badge>Badge</Badge>
     </Heading>
   ),
 };
