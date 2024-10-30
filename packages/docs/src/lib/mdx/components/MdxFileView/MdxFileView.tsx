@@ -3,8 +3,9 @@ import type { FC } from "react";
 import { MDXRemote as NextMDXRemote } from "next-mdx-remote";
 import type { LiveCodeEditorProps } from "@/lib/liveCode/components/LiveCodeEditor/LiveCodeEditor";
 import LiveCodeEditor from "@/lib/liveCode/components/LiveCodeEditor/LiveCodeEditor";
-import type { SerializedMdxFile } from "@/lib/mdx/MdxFile";
+import { PropertiesTables } from "@/lib/PropertiesTables/PropertiesTables";
 import { MdxFile } from "@/lib/mdx/MdxFile";
+import type { SerializedMdxFile } from "@/lib/mdx/MdxFile";
 import { customComponents } from "@/lib/mdx/components/MdxFileView/customComponents";
 import styles from "./customComponents.module.css";
 import type { DoAndDontTileProps } from "@/lib/mdx/components/DoAndDont/ExampleTile";
@@ -12,6 +13,7 @@ import ExampleTile from "@/lib/mdx/components/DoAndDont/ExampleTile";
 
 interface Props {
   mdxFile: SerializedMdxFile;
+  indexFile?: SerializedMdxFile;
 }
 
 interface ExampleProps extends DoAndDontTileProps {
@@ -141,11 +143,20 @@ export const MdxFileView: FC<Props> = (props) => {
     </ExampleTile>
   );
 
+  const ExamplePropertiesTables = () => (
+    <PropertiesTables
+      name={
+        props.indexFile?.mdxSource.frontmatter?.component || mdxFile.getTitle()
+      }
+    />
+  );
+
   return (
     <NextMDXRemote
       {...mdxFile.mdxSource}
       components={{
         LiveCodeEditor: ExampleLiveCodeEditor,
+        PropertiesTables: ExamplePropertiesTables,
         Do: ExampleDo,
         Dont: ExampleDont,
         Info: ExampleInfo,
