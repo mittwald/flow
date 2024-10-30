@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.314](https://github.com/mittwald/flow/compare/0.1.0-alpha.313...0.1.0-alpha.314) (2024-10-30)
+
+### Bug Fixes
+
+- **Docs:** fix CSS import path
+  ([fdc1c2a](https://github.com/mittwald/flow/commit/fdc1c2a7b97c952b9236983773f39370938838d0))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.313](https://github.com/mittwald/flow/compare/0.1.0-alpha.312...0.1.0-alpha.313) (2024-10-30)
 
 ### Features
