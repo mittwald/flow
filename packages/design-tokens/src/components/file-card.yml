@@ -1,0 +1,17 @@
+file-card:
+  padding-x:
+    value: "{size-px.s}"
+  padding-y:
+    value: "{size-px.xs}"
+  spacing:
+    value: "{size-rem.s}"
+  corner-radius:
+    value: "{corner-radius.default}"
+  border-width:
+    value: "{border-width.100}"
+  border-style:
+    value: "{border-style.default}"
+  border-color:
+    value: "{neutral-outline-border-color}"
+  text-font-size:
+    value: "{font-size.s}"

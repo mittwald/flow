@@ -1,0 +1,32 @@
+.fileCard {
+  border-color: var(--file-card--border-color);
+  border-width: var(--file-card--border-width);
+  border-style: var(--file-card--border-style);
+  padding-inline: var(--file-card--padding-x);
+  padding-block: var(--file-card--padding-y);
+  display: flex;
+  gap: var(--file-card--spacing);
+  align-items: center;
+  width: fit-content;
+  max-width: 100%;
+
+  .text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+    overflow: hidden;
+
+    .title {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .subTitle {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+}
