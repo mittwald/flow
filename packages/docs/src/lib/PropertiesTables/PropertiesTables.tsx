@@ -5,6 +5,7 @@ import { PropertiesTable } from "@/lib/PropertiesTables/components/PropertiesTab
 import { Accordion } from "@mittwald/flow-react-components/Accordion";
 import { Heading } from "@mittwald/flow-react-components/Heading";
 import { Content } from "@mittwald/flow-react-components/Content";
+import { useIsMounted } from "@mittwald/flow-react-components/hooks";
 
 interface PropertiesTableProps {
   name: string;
@@ -12,6 +13,11 @@ interface PropertiesTableProps {
 
 export const PropertiesTables: React.FC<PropertiesTableProps> = ({ name }) => {
   const properties = loadProperties(name);
+  const isMounted = useIsMounted();
+
+  if (!isMounted) {
+    return <p>...</p>;
+  }
 
   if (!properties) {
     return <p>Keine Properties vorhanden.</p>;
