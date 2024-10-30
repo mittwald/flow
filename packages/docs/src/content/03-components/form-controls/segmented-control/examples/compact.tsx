@@ -17,6 +17,7 @@ import {
     </Segment>
     <Segment value="andere">Andere</Segment>
   </SegmentedControl>
+
   <SegmentedControl
     defaultValue="entwickler"
     containerBreakpointSize="xs"
