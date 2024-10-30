@@ -1,27 +1,27 @@
 import {
-  Radio,
-  RadioGroup,
-} from "@mittwald/flow-react-components/RadioGroup";
+  Segment,
+  SegmentedControl,
+} from "@mittwald/flow-react-components/SegmentedControl";
 import { Label } from "@mittwald/flow-react-components/Label";
 import { Section } from "@mittwald/flow-react-components/Section";
 
 <Section>
-  <RadioGroup variant="segmented" defaultValue="dev">
+  <SegmentedControl defaultValue="dev">
     <Label>Rolle</Label>
-    <Radio value="entwickler">Entwickler</Radio>
-    <Radio value="designer">Designer</Radio>
-    <Radio value="geschäftsführer">Geschäftsführer</Radio>
-    <Radio value="andere">Andere</Radio>
-  </RadioGroup>
-  <RadioGroup
-    variant="segmented"
-    defaultValue="dev"
-    isDisabled
-  >
+    <Segment value="entwickler">Entwickler</Segment>
+    <Segment value="designer">Designer</Segment>
+    <Segment value="geschäftsführer">
+      Geschäftsführer
+    </Segment>
+    <Segment value="andere">Andere</Segment>
+  </SegmentedControl>
+  <SegmentedControl defaultValue="dev" isDisabled>
     <Label>Rolle</Label>
-    <Radio value="entwickler">Entwickler</Radio>
-    <Radio value="designer">Designer</Radio>
-    <Radio value="geschäftsführer">Geschäftsführer</Radio>
-    <Radio value="andere">Andere</Radio>
-  </RadioGroup>
+    <Segment value="entwickler">Entwickler</Segment>
+    <Segment value="designer">Designer</Segment>
+    <Segment value="geschäftsführer">
+      Geschäftsführer
+    </Segment>
+    <Segment value="andere">Andere</Segment>
+  </SegmentedControl>
 </Section>;

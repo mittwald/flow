@@ -27,7 +27,7 @@ export const buildConfig = (opts: Options) => {
           }),
         ];
 
-  const cssCodeSplit = mode === "cssChunks" ? true : false;
+  const cssCodeSplit = mode === "cssChunks";
 
   const entryPoints: LibraryOptions["entry"] = {
     Accordion: "./src/components/Accordion/index.ts",
@@ -87,6 +87,7 @@ export const buildConfig = (opts: Options) => {
     Render: "./src/lib/react/components/Render/index.ts",
     SearchField: "./src/components/SearchField/index.ts",
     Section: "./src/components/Section/index.ts",
+    SegmentedControl: "./src/components/SegmentedControl/index.ts",
     Select: "./src/components/Select/index.ts",
     Separator: "./src/components/Separator/index.ts",
     SettingsProvider: "./src/components/SettingsProvider/index.ts",

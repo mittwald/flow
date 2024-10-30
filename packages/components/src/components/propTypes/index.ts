@@ -50,6 +50,8 @@ import type { DateRangePickerProps } from "@/components/DateRangePicker";
 import type { TimeFieldProps } from "@/components/TimeField";
 import type { AlertIconProps } from "@/components/AlertIcon";
 import type { ListSummaryProps } from "@/components/List/components/ListSummary/ListSummary";
+import type { SegmentedControlProps } from "@/components/SegmentedControl";
+import type { SegmentProps } from "src/components/SegmentedControl/components/Segment";
 
 export * from "./types";
 
@@ -99,6 +101,8 @@ export interface FlowComponentPropsTypes {
   RadioGroup: RadioGroupProps;
   SearchField: SearchFieldProps;
   Section: SectionProps;
+  Segment: SegmentProps;
+  SegmentedControl: SegmentedControlProps;
   Select: SelectProps;
   Slider: SliderProps;
   Switch: SwitchProps;
@@ -159,6 +163,8 @@ const propsContextSupportingComponentsMap: Record<
   RadioGroup: true,
   SearchField: true,
   Section: true,
+  Segment: true,
+  SegmentedControl: true,
   Select: true,
   Slider: true,
   Switch: true,

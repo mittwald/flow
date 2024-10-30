@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-react-components",
-  "version": "0.1.0-alpha.307",
+  "version": "0.1.0-alpha.308",
   "type": "module",
   "description": "A React implementation of Flow, mittwald’s design system",
   "homepage": "https://mittwald.github.io/flow",
@@ -270,6 +270,11 @@
     "./Section": {
       "types": "./dist/js/types/components/Section/index.d.ts",
       "import": "./dist/js/Section.js"
+    },
+    "./SegmentedControl/styles.css": "./dist/css/SegmentedControlt.css",
+    "./SegmentedControl": {
+      "types": "./dist/js/types/components/SegmentedControl/index.d.ts",
+      "import": "./dist/js/SegmentedControl.js"
     },
     "./Select/styles.css": "./dist/css/Select.css",
     "./Select": {
