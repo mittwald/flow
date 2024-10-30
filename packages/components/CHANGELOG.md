@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.311](https://github.com/mittwald/flow/compare/0.1.0-alpha.310...0.1.0-alpha.311) (2024-10-30)
+
+### Bug Fixes
+
+- **docs:** develop tab rendering
+  ([1c63f84](https://github.com/mittwald/flow/commit/1c63f84c742efa8e7d8c21bc65c6f815fca24a41))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.310](https://github.com/mittwald/flow/compare/0.1.0-alpha.309...0.1.0-alpha.310) (2024-10-30)
 
 ### Features
