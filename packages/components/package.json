@@ -131,6 +131,11 @@
       "types": "./dist/js/types/components/FieldError/index.d.ts",
       "import": "./dist/js/FieldError.js"
     },
+    "./FileField/styles.css": "./dist/css/FileField.css",
+    "./FileField": {
+      "types": "./dist/js/types/components/FileField/index.d.ts",
+      "import": "./dist/js/FileField.js"
+    },
     "./Header/styles.css": "./dist/css/Header.css",
     "./Header": {
       "types": "./dist/js/types/components/Header/index.d.ts",
@@ -393,7 +398,9 @@
     "@internationalized/string-compiler": "^3.2.5",
     "@mittwald/react-tunnel": "workspace:^",
     "@mittwald/react-use-promise": "^2.5.0",
+    "@react-aria/form": "^3.0.10",
     "@react-aria/utils": "^3.25.3",
+    "@react-stately/form": "^3.0.6",
     "@react-types/shared": "^3.25.0",
     "@tabler/icons-react": "^3.19.0",
     "@tanstack/react-table": "^8.20.5",
