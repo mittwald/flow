@@ -29,7 +29,12 @@ badge:
     pressed:
       value: "{color.gray.500}"
   neutral-content-color:
-    value: "{color.gray.1000}"
+    default:
+      value: "{color.gray.900}"
+    hover:
+      value: "{color.gray.900}"
+    pressed:
+      value: "{color.gray.1000}"
   neutral-scope-background-color:
     value: "{color.gray.800}"
   neutral-scope-content-color:
@@ -46,7 +51,12 @@ badge:
     pressed:
       value: "{color.hosting-blue.300}"
   blue-content-color:
-    value: "{color.hosting-blue.1000}"
+    default:
+      value: "{color.hosting-blue.900}"
+    hover:
+      value: "{color.hosting-blue.900}"
+    pressed:
+      value: "{color.hosting-blue.1000}"
   blue-scope-background-color:
     value: "{color.hosting-blue.800}"
   blue-scope-content-color:
@@ -63,7 +73,12 @@ badge:
     pressed:
       value: "{color.mittwald-navy.300}"
   navy-content-color:
-    value: "{color.mittwald-navy.1000}"
+    default:
+      value: "{color.mittwald-navy.900}"
+    hover:
+      value: "{color.mittwald-navy.900}"
+    pressed:
+      value: "{color.mittwald-navy.1000}"
   navy-scope-background-color:
     value: "{color.mittwald-navy.800}"
   navy-scope-content-color:
@@ -80,7 +95,12 @@ badge:
     pressed:
       value: "{color.soft-contrast-violet.300}"
   violet-content-color:
-    value: "{color.soft-contrast-violet.1000}"
+    default:
+      value: "{color.soft-contrast-violet.900}"
+    hover:
+      value: "{color.soft-contrast-violet.900}"
+    pressed:
+      value: "{color.soft-contrast-violet.1000}"
   violet-scope-background-color:
     value: "{color.soft-contrast-violet.800}"
   violet-scope-content-color:
@@ -97,7 +117,12 @@ badge:
     pressed:
       value: "{color.super-teal.300}"
   teal-content-color:
-    value: "{color.super-teal.1000}"
+    default:
+      value: "{color.super-teal.900}"
+    hover:
+      value: "{color.super-teal.900}"
+    pressed:
+      value: "{color.super-teal.1000}"
   teal-scope-background-color:
     value: "{color.super-teal.800}"
   teal-scope-content-color:
@@ -114,7 +139,12 @@ badge:
     pressed:
       value: "{color.bright-lilac.300}"
   lilac-content-color:
-    value: "{color.bright-lilac.1000}"
+    default:
+      value: "{color.bright-lilac.900}"
+    hover:
+      value: "{color.bright-lilac.900}"
+    pressed:
+      value: "{color.bright-lilac.1000}"
   lilac-scope-background-color:
     value: "{color.bright-lilac.800}"
   lilac-scope-content-color:
@@ -131,7 +161,12 @@ badge:
     pressed:
       value: "{color.amaranth-red.300}"
   red-content-color:
-    value: "{color.amaranth-red.1000}"
+    default:
+      value: "{color.amaranth-red.900}"
+    hover:
+      value: "{color.amaranth-red.900}"
+    pressed:
+      value: "{color.amaranth-red.1000}"
   red-scope-background-color:
     value: "{color.amaranth-red.800}"
   red-scope-content-color:
@@ -148,7 +183,12 @@ badge:
     pressed:
       value: "{color.espelkamp-green.300}"
   green-content-color:
-    value: "{color.espelkamp-green.1000}"
+    default:
+      value: "{color.espelkamp-green.900}"
+    hover:
+      value: "{color.espelkamp-green.900}"
+    pressed:
+      value: "{color.espelkamp-green.1000}"
   green-scope-background-color:
     value: "{color.espelkamp-green.800}"
   green-scope-content-color:
@@ -165,7 +205,12 @@ badge:
     pressed:
       value: "{color.royal-orange.300}"
   orange-content-color:
-    value: "{color.royal-orange.1000}"
+    default:
+      value: "{color.royal-orange.900}"
+    hover:
+      value: "{color.royal-orange.900}"
+    pressed:
+      value: "{color.royal-orange.1000}"
   orange-scope-background-color:
     value: "{color.royal-orange.900}"
   orange-scope-content-color:
@@ -182,7 +227,12 @@ badge:
     pressed:
       value: "{dark.color.300}"
   dark-content-color:
-    value: "{dark.color.800}"
+    default:
+      value: "{dark.color.800}"
+    hover:
+      value: "{dark.color.800}"
+    pressed:
+      value: "{dark.color.800}"
   dark-scope-background-color:
     value: "{dark.color.800}"
   dark-scope-content-color:
@@ -199,7 +249,12 @@ badge:
     pressed:
       value: "{light.color.300}"
   light-content-color:
-    value: "{light.color.800}"
+    default:
+      value: "{light.color.800}"
+    hover:
+      value: "{light.color.800}"
+    pressed:
+      value: "{light.color.800}"
   light-scope-background-color:
     value: "{light.color.800}"
   light-scope-content-color:

@@ -100,10 +100,12 @@
         .button {
           &:hover {
             background-color: var(--badge--#{$color}-background-color--hover);
+            color: var(--badge--#{$color}-content-color--hover);
           }
 
           &[data-pressed] {
             background-color: var(--badge--#{$color}-background-color--pressed);
+            color: var(--badge--#{$color}-content-color--pressed);
           }
         }
       }
