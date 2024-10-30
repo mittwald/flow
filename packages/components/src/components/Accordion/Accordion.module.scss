@@ -8,6 +8,14 @@
 
   .header {
     display: flex;
+
+    :global(.flow--heading--heading-text) {
+      flex-grow: 1;
+    }
+
+    button {
+      width: 100%;
+    }
   }
 
   .headerButton {

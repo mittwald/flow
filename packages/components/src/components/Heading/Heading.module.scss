@@ -22,7 +22,7 @@
       margin-inline-end: var(--heading--icon-to-text-spacing);
     }
 
-    &:not(:last-child) {
+    &:not(:last-child) + .headingContent:not(:empty) {
       margin-inline-end: var(--heading--icon-to-text-spacing);
     }
   }
