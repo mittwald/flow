@@ -1,11 +1,11 @@
 import {
-  Radio,
-  RadioGroup,
-} from "@mittwald/flow-react-components/RadioGroup";
+  Segment,
+  SegmentedControl,
+} from "@mittwald/flow-react-components/SegmentedControl";
 import { Label } from "@mittwald/flow-react-components/Label";
 
-<RadioGroup variant="segmented" defaultValue="ssh-key">
+<SegmentedControl defaultValue="ssh-key">
   <Label>Authentifizierungsart</Label>
-  <Radio value="ssh-key">SSH-Key</Radio>
-  <Radio value="passwort">Passwort</Radio>
-</RadioGroup>;
+  <Segment value="ssh-key">SSH-Key</Segment>
+  <Segment value="passwort">Passwort</Segment>
+</SegmentedControl>;
