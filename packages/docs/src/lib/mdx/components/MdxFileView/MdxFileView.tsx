@@ -44,6 +44,7 @@ export const MdxFileView: FC<Props> = (props) => {
     mobile,
     children,
     heading,
+    alignCenter,
   }) => (
     <ExampleTile
       type="do"
@@ -53,6 +54,7 @@ export const MdxFileView: FC<Props> = (props) => {
       bgColor={bgColor}
       mobile={mobile}
       heading={heading}
+      alignCenter={alignCenter}
     >
       {children}
     </ExampleTile>
@@ -66,6 +68,7 @@ export const MdxFileView: FC<Props> = (props) => {
     mobile,
     children,
     heading,
+    alignCenter,
   }) => (
     <ExampleTile
       type="dont"
@@ -75,6 +78,7 @@ export const MdxFileView: FC<Props> = (props) => {
       bgColor={bgColor}
       mobile={mobile}
       heading={heading}
+      alignCenter={alignCenter}
     >
       {children}
     </ExampleTile>
@@ -88,6 +92,7 @@ export const MdxFileView: FC<Props> = (props) => {
     mobile,
     children,
     heading,
+    alignCenter,
   }) => (
     <ExampleTile
       type="info"
@@ -97,6 +102,7 @@ export const MdxFileView: FC<Props> = (props) => {
       bgColor={bgColor}
       mobile={mobile}
       heading={heading}
+      alignCenter={alignCenter}
     >
       {children}
     </ExampleTile>
@@ -109,6 +115,7 @@ export const MdxFileView: FC<Props> = (props) => {
     mobile,
     children,
     heading,
+    alignCenter,
   }) => (
     <ExampleTile
       type="mstudio"
@@ -118,6 +125,7 @@ export const MdxFileView: FC<Props> = (props) => {
       bgColor={bgColor}
       mobile={mobile}
       heading={heading}
+      alignCenter={alignCenter}
     >
       {children}
     </ExampleTile>
@@ -130,6 +138,7 @@ export const MdxFileView: FC<Props> = (props) => {
     mobile,
     children,
     heading,
+    alignCenter,
   }) => (
     <ExampleTile
       text={exampleText}
@@ -138,6 +147,7 @@ export const MdxFileView: FC<Props> = (props) => {
       bgColor={bgColor}
       mobile={mobile}
       heading={heading}
+      alignCenter={alignCenter}
     >
       {children}
     </ExampleTile>

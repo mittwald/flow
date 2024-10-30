@@ -58,6 +58,11 @@
   padding: var(--size-px--l);
 }
 
+.center {
+  display: flex;
+  justify-content: center;
+}
+
 .editorContainer {
   overflow-x: auto;
 }

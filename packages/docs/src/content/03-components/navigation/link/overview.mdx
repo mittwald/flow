@@ -1,45 +1,75 @@
-# Beispiel
+# Playground
 
-<LiveCodeEditor />
+Verwende `<Link />`, um einen Link darzustellen.
 
----
-
-# Mit Icon
-
-<LiveCodeEditor example="icon" editorCollapsed />
+<LiveCodeEditor alignCenter />
 
 ---
 
-# Inline
+## Inline
 
-Benutze das `inline` Property wenn du den Link innerhalb eines Textblocks
-benutzen möchtest.
-
-<LiveCodeEditor example="inline" editorCollapsed />
-
-Links innerhalb der `<Text />` Komponente werden automatisch als Inline Link
+Links innerhalb des `<Text />` -Tags werden automatisch als Inline Link
 gerendert.
 
-<LiveCodeEditor example="inlineText" editorCollapsed />
+<LiveCodeEditor example="inlineText" alignCenter editorCollapsed />
 
 ---
 
-# Externer Link
+## Color
 
-Wird auf einem Link `target="_blank"` gesetzt, erhält dieser automatisch ein
-`ExternalLinkIcon` um zu verdeutlichen, dass sich der Link in einem neuen Tab
-öffnet.
+Der Link kann in den drei Colors **Primary**, **Light** und **Dark** dargestellt
+werden. Light und Dark eignen sich besonders gut für Links auf
+farbigen/dekorativen Hintergründen.
 
-<LiveCodeEditor example="external" editorCollapsed />
+<LiveCodeEditor example="primary" alignCenter editorCollapsed />
+
+<LiveCodeEditor example="light" bgColor="dark" alignCenter editorCollapsed />
+
+<LiveCodeEditor example="dark" bgColor="light" alignCenter editorCollapsed />
+
+**Primary**: Im Standardfall wird die Color Primary verwendet, da das leuchtende
+Blau als Hinweis (Signifier) darauf dient, dass es sich um einen anklickbaren
+Link handelt.
+
+**Light**: Verwende die Light-Color bei dunklen Hintergründen mit einem HSL
+Lightness-Wert von weniger als 50.
+
+**Dark**: Verwende die Dark-Color bei hellen, farbigen Hintergründen mit einem
+HSL Lightness-Wert von mehr als 50.
 
 ---
 
-# Color Light und Dark
+# Kombiniere mit ...
 
-## Dark
+## Icon (Externer Link)
 
-<LiveCodeEditor example="dark" bgColor="light" editorCollapsed />
+Rechts neben dem Link kann ein `IconExternalLink` eingefügt werden, um dem User
+den Hinweis zu geben, dass es sich um einen externen Link handelt, der in einem
+neuen Tab geöffnet wird. Wenn der externe Link keinen neuen Tab öffnet, muss
+dieser ohne Icon dargestellt werden.
 
-## Light
+<LiveCodeEditor example="external" alignCenter editorCollapsed />
 
-<LiveCodeEditor example="light" bgColor="dark" editorCollapsed />
+**Externer Link mit Icon:** Der Link öffnet sich in einem neuen Tab. Sollte nur
+verwendet werden, wenn der Workflow des Users stark unterbrochen wird oder das
+Verlassen der ursprünglichen Seite negative Konsequenzen hat.
+
+**Externer Link ohne Icon**: Der Link öffnet sich bei einem einfachen Klick im
+selben Tab.
+
+## Icon
+
+Links können mit einem Icon versehen werden, um dem User eine zusätzliche
+Information zu geben. Hierfür kann das Icon `Icon` direkt in die `<Link />`
+Component eingefügt werden.
+
+<LiveCodeEditor example="icon" alignCenter editorCollapsed />
+
+---
+
+## States
+
+Ein Link hat vier verschiedene States: **Default**, **Hover**, **Pressed** und
+**Disabled**.
+
+<LiveCodeEditor example="disabled" alignCenter editorCollapsed />
