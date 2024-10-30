@@ -2885,7 +2885,9 @@ __metadata:
     "@mittwald/react-tunnel": "workspace:^"
     "@mittwald/react-use-promise": "npm:^2.5.0"
     "@nx/storybook": "npm:^20.0.0"
+    "@react-aria/form": "npm:^3.0.10"
     "@react-aria/utils": "npm:^3.25.3"
+    "@react-stately/form": "npm:^3.0.6"
     "@react-types/shared": "npm:^3.25.0"
     "@storybook/addon-a11y": "npm:^8.3.5"
     "@storybook/addon-actions": "npm:^8.3.5"
@@ -4102,6 +4104,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-aria/form@npm:^3.0.10":
+  version: 3.0.10
+  resolution: "@react-aria/form@npm:3.0.10"
+  dependencies:
+    "@react-aria/interactions": "npm:^3.22.4"
+    "@react-aria/utils": "npm:^3.25.3"
+    "@react-stately/form": "npm:^3.0.6"
+    "@react-types/shared": "npm:^3.25.0"
+    "@swc/helpers": "npm:^0.5.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0
+  checksum: 10c0/31ed3c2a2eb8340f38e9164bf2730ece07563178975aaff55c2e58ed307943071b105dd0503bf31a9fe17e085ef3db52f935636b04365e26194649f0c87f8c5e
+  languageName: node
+  linkType: hard
+
 "@react-aria/form@npm:^3.0.9":
   version: 3.0.9
   resolution: "@react-aria/form@npm:3.0.9"
@@ -4192,6 +4209,20 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0
   checksum: 10c0/3b683e97c9d41eb3540c0347314d43499a162cba05875ab717a5d92eb67f60e0f319844f4123fb54c2889ee65cceb86bf9708f1a9010f7df540d6f9dc2c1624a
+  languageName: node
+  linkType: hard
+
+"@react-aria/interactions@npm:^3.22.4":
+  version: 3.22.4
+  resolution: "@react-aria/interactions@npm:3.22.4"
+  dependencies:
+    "@react-aria/ssr": "npm:^3.9.6"
+    "@react-aria/utils": "npm:^3.25.3"
+    "@react-types/shared": "npm:^3.25.0"
+    "@swc/helpers": "npm:^0.5.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0
+  checksum: 10c0/8455a68540a4085b71ed034cad5c349a7e756e44cd30d69d340d7f7a66ce1886882021fbcc8049a5d8aeba54b47cd2ca49a7bc4e6910aab2d13b41703d55c7a5
   languageName: node
   linkType: hard
 

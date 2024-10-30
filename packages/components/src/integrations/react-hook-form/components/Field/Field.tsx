@@ -49,6 +49,7 @@ export function Field<T extends FieldValues>(props: Props<T>) {
           Checkbox: formControlProps,
           CheckboxGroup: formControlProps,
           CheckboxButton: formControlProps,
+          FileField: formControlProps,
           NumberField: formControlProps,
           RadioGroup: formControlProps,
           Switch: formControlProps,
