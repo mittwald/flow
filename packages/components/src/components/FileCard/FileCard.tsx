@@ -11,6 +11,8 @@ import type {
 import styles from "./FileCard.module.scss";
 import clsx from "clsx";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import locales from "./locales/*.locale.json";
+import { useLocalizedStringFormatter } from "react-aria";
 
 export interface FileCardProps
   extends PropsWithClassName,
@@ -35,6 +37,8 @@ export const FileCard = flowComponent("FileCard", (props) => {
 
   const Element = elementType;
 
+  const stringFormatter = useLocalizedStringFormatter(locales);
+
   return (
     <Element className={rootClassName}>
       <Avatar color="blue">
@@ -56,7 +60,13 @@ export const FileCard = flowComponent("FileCard", (props) => {
         )}
       </span>
       {onDelete && (
-        <Button size="s" variant="plain" color="secondary" onPress={onDelete}>
+        <Button
+          aria-label={stringFormatter.format(`fileCard.delete`)}
+          size="s"
+          variant="plain"
+          color="secondary"
+          onPress={onDelete}
+        >
           <IconClose />
         </Button>
       )}
