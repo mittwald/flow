@@ -1,0 +1,14 @@
+label:
+  font-size:
+    value: "{font-size-text.s}"
+  font-weight:
+    value: "{font-weight.bold}"
+  line-height:
+    value: "{line-height.m}"
+  spacing:
+    value: "{size-rem.xs}"
+  color:
+    default:
+      value: "{neutral.color.800}"
+    disabled:
+      value: "{disabled-plain-content-color}"

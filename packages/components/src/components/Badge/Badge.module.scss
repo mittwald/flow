@@ -93,7 +93,7 @@
       .button {
         border-color: var(--badge--#{$color}-border-color);
         background-color: var(--badge--#{$color}-background-color--default);
-        color: var(--badge--#{$color}-content-color);
+        color: var(--badge--#{$color}-content-color--default);
       }
 
       &:not(.disabled) {
