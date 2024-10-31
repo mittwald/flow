@@ -23,7 +23,7 @@ type Story = StoryObj<typeof Popover>;
 
 export const Default: Story = {};
 
-export const WithTip: Story = { args: { withTip: true } };
+export const CustomWidth: Story = { args: { width: 800 } };
 
 export const WithController: Story = {
   render: (props) => {

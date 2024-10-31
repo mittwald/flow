@@ -15,7 +15,7 @@ alert-badge:
     value: "{success-soft-background-color.default}"
   success-content-color:
     value: "{success-soft-content-color.default}"
-  success-outline-color:
+  success-border-color:
     value: "{success-outline-border-color}"
 
   # Warning
@@ -23,7 +23,7 @@ alert-badge:
     value: "{warning-soft-background-color.default}"
   warning-content-color:
     value: "{warning-soft-content-color.default}"
-  warning-outline-color:
+  warning-border-color:
     value: "{warning-outline-border-color}"
 
   # Danger
@@ -31,5 +31,5 @@ alert-badge:
     value: "{danger-soft-background-color.default}"
   danger-content-color:
     value: "{danger-soft-content-color.default}"
-  danger-outline-color:
+  danger-border-color:
     value: "{danger-outline-border-color}"
