@@ -1,21 +1,3 @@
-@font-face {
-  font-family: "Inter";
-  src: url(../fonts/Inter-Regular.woff2);
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Inter";
-  src: url(../fonts/Inter-Bold.woff2);
-  font-weight: bold;
-}
-
-@font-face {
-  font-family: "FiraCode";
-  src: url(../fonts/FiraCode-Regular.ttf);
-}
-
 /**
   CSS reset for all Flow components that
   - are not part of other Flow components (avoid eager reset)

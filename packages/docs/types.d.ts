@@ -16,6 +16,7 @@ declare global {
   declare const Dont: ComponentType<DoAndDontProps>;
   declare const Info: ComponentType<DoAndDontProps>;
   declare const Row: ComponentType<PropsWithChildren>;
+  declare const PropertiesTables: ComponentType;
   declare const Column: ComponentType<PropsWithChildren>;
   declare const StaticModal: ComponentType<PropsWithChildren>;
 }

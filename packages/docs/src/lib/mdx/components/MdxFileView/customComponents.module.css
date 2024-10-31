@@ -28,13 +28,10 @@
 }
 
 .doAndDontCode {
+  margin-bottom: calc(var(--size-px--m) * -1);
   border-bottom: none;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
-}
-
-.mobileCode {
-  margin-bottom: 0;
 }
 
 .doAndDontText {

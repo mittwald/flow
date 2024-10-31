@@ -59,7 +59,7 @@
 }
 
 .editorContainer {
-  overflow: scroll;
+  overflow-x: auto;
 }
 
 .darkBackground {

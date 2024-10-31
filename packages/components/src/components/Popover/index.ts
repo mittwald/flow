@@ -1,4 +1,6 @@
+// Keep this export on top, due to CSS filename generation
+export * from "./components/PopoverTrigger";
+
 import { Popover } from "./Popover";
 export { type PopoverProps, Popover } from "./Popover";
-export * from "./components/PopoverTrigger";
 export default Popover;

@@ -81,6 +81,8 @@
   flex-direction: column;
   row-gap: var(--size-px--l);
   flex-grow: 1;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .tabContent {
@@ -105,6 +107,12 @@
 
   .mobileNavigation {
     display: block;
+  }
+
+  .mobileNavigationOffCanvas {
+    .mainNavigation {
+      display: block;
+    }
   }
 
   .header {

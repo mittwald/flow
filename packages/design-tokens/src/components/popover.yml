@@ -19,3 +19,5 @@ popover:
     value: "{size-px.m}"
   tip-height:
     value: "{size-px.s}"
+  tip-width:
+    value: "{size-px.m}"

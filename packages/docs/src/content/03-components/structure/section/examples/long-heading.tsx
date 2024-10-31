@@ -1,7 +1,7 @@
 import Header from "@mittwald/flow-react-components/Header";
 import { Text } from "@mittwald/flow-react-components/Text";
 import Section from "@mittwald/flow-react-components/Section";
-import StatusBadge from "@mittwald/flow-react-components/StatusBadge";
+import AlertBadge from "@mittwald/flow-react-components/AlertBadge";
 import Heading from "@mittwald/flow-react-components/Heading";
 import Button from "@mittwald/flow-react-components/Button";
 import Content from "@mittwald/flow-react-components/Content";
@@ -16,7 +16,7 @@ import { IconExternalLink } from "@mittwald/flow-react-components/Icons";
   <Header>
     <Heading>
       Mein sehr langes Projekt
-      <StatusBadge status="danger">Deaktiviert</StatusBadge>
+      <AlertBadge status="danger">Deaktiviert</AlertBadge>
     </Heading>
 
     <Button variant="soft" color="secondary">
@@ -25,25 +25,23 @@ import { IconExternalLink } from "@mittwald/flow-react-components/Icons";
     <Button color="accent">Aktivieren</Button>
   </Header>
 
-  <Content>
-    <ColumnLayout>
-      <LabeledValue>
-        <Label>Projektname</Label>
-        <Content>Dolce Vita</Content>
-      </LabeledValue>
-      <LabeledValue>
-        <Label>Short-ID</Label>
-        <Content>p-lol3qe</Content>
-        <CopyButton text="p-lol3qe" />
-      </LabeledValue>
-      <LabeledValue>
-        <Label>Projektdomain</Label>
-        <Link>
-          <Text>p-lol3qe.project.space</Text>
-          <IconExternalLink />
-        </Link>
-        <CopyButton text="p-lol3qe.project.space" />
-      </LabeledValue>
-    </ColumnLayout>
-  </Content>
+  <ColumnLayout>
+    <LabeledValue>
+      <Label>Projektname</Label>
+      <Content>Dolce Vita</Content>
+    </LabeledValue>
+    <LabeledValue>
+      <Label>Short-ID</Label>
+      <Content>p-lol3qe</Content>
+      <CopyButton text="p-lol3qe" />
+    </LabeledValue>
+    <LabeledValue>
+      <Label>Projektdomain</Label>
+      <Link>
+        <Text>p-lol3qe.project.space</Text>
+        <IconExternalLink />
+      </Link>
+      <CopyButton text="p-lol3qe.project.space" />
+    </LabeledValue>
+  </ColumnLayout>
 </Section>;

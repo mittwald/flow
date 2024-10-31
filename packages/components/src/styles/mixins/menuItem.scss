@@ -15,6 +15,10 @@
 
   @include focus.focus;
 
+  & {
+    outline-offset: calc(var(--size-px--xxs) * -1);
+  }
+
   /* Elements */
   .icon {
     order: 0;

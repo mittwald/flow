@@ -1,7 +1,7 @@
 import styles from "./customComponents.module.css";
 import Heading from "@mittwald/flow-react-components/Heading";
 import type { MDXComponents } from "mdx/types";
-import InlineAlert from "@mittwald/flow-react-components/InlineAlert";
+import Alert from "@mittwald/flow-react-components/Alert";
 import Content from "@mittwald/flow-react-components/Content";
 import React from "react";
 import CopyButton from "@mittwald/flow-react-components/CopyButton";
@@ -9,10 +9,10 @@ import Link from "@mittwald/flow-react-components/Link";
 import Text from "@mittwald/flow-react-components/Text";
 import { LinkProvider } from "@mittwald/flow-react-components/nextjs";
 import ExamplesContainer from "@/lib/mdx/components/DoAndDont/ExamplesContainer";
-import { IconExternalLink } from "@mittwald/flow-react-components/Icons";
 import { ColumnLayout } from "@mittwald/flow-react-components/ColumnLayout";
 import { InlineCode } from "@mittwald/flow-react-components/InlineCode";
 import { Separator } from "@mittwald/flow-react-components/Separator";
+import { DesignTokenTable } from "@/lib/mdx/components/DesignTokenTable/DesignTokenTable";
 import {
   Table,
   TableBody,
@@ -26,9 +26,10 @@ import { Label } from "@mittwald/flow-react-components/Label";
 export const customComponents: MDXComponents = {
   Content: Content,
   Heading: Heading,
-  InlineAlert: InlineAlert,
+  Alert: Alert,
   DoAndDont: ExamplesContainer,
   ColumnLayout: ColumnLayout,
+  DesignTokenTable: DesignTokenTable,
   Label: Label,
   Link: Link,
 
@@ -85,7 +86,6 @@ export const customComponents: MDXComponents = {
       return (
         <Link href={href} inline>
           {children}
-          <IconExternalLink />
         </Link>
       );
     }

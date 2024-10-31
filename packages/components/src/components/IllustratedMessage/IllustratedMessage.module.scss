@@ -29,8 +29,15 @@
     text-align: center;
   }
 
-  /* Negative */
+  .actionGroup [role="group"] {
+    justify-content: center;
 
+    button {
+      margin: 0;
+    }
+  }
+
+  /* Negative */
   &.negative {
     :where(.icon) {
       color: var(--illustrated-message--negative-icon-color);

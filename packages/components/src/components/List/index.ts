@@ -6,6 +6,7 @@ export type {
 } from "@/components/List/model/loading/types";
 export type { RenderItemFn } from "@/components/List/model/item/types";
 export { View as ListItemView } from "./components/Items/components/Item/components/View";
+export * from "./components/ListSummary";
 export * from "./List";
 export * from "./setupComponents/ListFilter";
 export * from "./setupComponents/ListSorting";
