@@ -20,7 +20,6 @@ export interface ColumnLayoutProps
   gap?: GapSize;
   rowGap?: GapSize;
   columnGap?: GapSize;
-  ariaLabel?: string;
 }
 
 export const ColumnLayout: FC<ColumnLayoutProps> = (props) => {
@@ -33,8 +32,8 @@ export const ColumnLayout: FC<ColumnLayoutProps> = (props) => {
     gap = "m",
     rowGap = gap,
     columnGap = gap,
-    ariaLabel,
     elementType = "div",
+    "aria-label": ariaLabel,
   } = props;
 
   const columnsS = s ? getColumns(s) : undefined;

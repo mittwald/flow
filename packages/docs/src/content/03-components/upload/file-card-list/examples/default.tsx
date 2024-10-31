@@ -1,7 +1,7 @@
 import { FileCardList } from "@mittwald/flow-react-components/FileCardList";
 import FileCard from "@mittwald/flow-react-components/FileCard";
 
-<FileCardList>
+<FileCardList aria-label="Hochgeladene Dateien">
   <FileCard
     name="file1.txt"
     onDelete={() => {
