@@ -6,7 +6,13 @@
   "namedInputs": {},
   "targetDefaults": {
     "build": {
-      "dependsOn": ["^build", "build:icons", "build:imports", "build:css"],
+      "dependsOn": [
+        "^build",
+        "build:icons",
+        "build:imports",
+        "build:css",
+        "build:docs-properties"
+      ],
       "cache": true
     },
     "start": {

@@ -53,6 +53,7 @@ import type { ListSummaryProps } from "@/components/List/components/ListSummary/
 import type { SegmentedControlProps } from "@/components/SegmentedControl";
 import type { SegmentProps } from "src/components/SegmentedControl/components/Segment";
 import type { FileCardProps } from "@/components/FileCard";
+import type { FileFieldProps } from "@/components/FileField";
 
 export * from "./types";
 
@@ -81,6 +82,7 @@ export interface FlowComponentPropsTypes {
   FieldDescription: FieldDescriptionProps;
   FieldError: FieldErrorProps;
   FileCard: FileCardProps;
+  FileField: FileFieldProps;
   Header: HeaderProps;
   Heading: HeadingProps;
   Icon: IconProps;
@@ -144,6 +146,7 @@ const propsContextSupportingComponentsMap: Record<
   FieldDescription: true,
   FieldError: true,
   FileCard: true,
+  FileField: true,
   Header: true,
   Heading: true,
   Icon: true,
