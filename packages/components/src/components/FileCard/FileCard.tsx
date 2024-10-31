@@ -37,7 +37,9 @@ export const FileCard = flowComponent("FileCard", (props) => {
 
   return (
     <Element className={rootClassName}>
-      <Avatar>{type?.includes("image") ? <IconImage /> : <IconFile />}</Avatar>
+      <Avatar color="blue">
+        {type?.includes("image") ? <IconImage /> : <IconFile />}
+      </Avatar>
       <span className={styles.text}>
         <Text className={styles.title}>
           <b>{name}</b>

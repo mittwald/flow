@@ -131,6 +131,15 @@
       "types": "./dist/js/types/components/FieldError/index.d.ts",
       "import": "./dist/js/FieldError.js"
     },
+    "./FileCard/styles.css": "./dist/css/FileCard.css",
+    "./FileCard": {
+      "types": "./dist/js/types/components/FileCard/index.d.ts",
+      "import": "./dist/js/FileCard.js"
+    },
+    "./FileCardList": {
+      "types": "./dist/js/types/components/FileCardList/index.d.ts",
+      "import": "./dist/js/FileCardList.js"
+    },
     "./FileField/styles.css": "./dist/css/FileField.css",
     "./FileField": {
       "types": "./dist/js/types/components/FileField/index.d.ts",
