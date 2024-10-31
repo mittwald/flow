@@ -16,16 +16,15 @@
     flex-grow: 1;
     overflow: hidden;
 
-    .title {
+    .title,
+    .subTitle {
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
     }
 
     .subTitle {
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
+      font-size: var(--file-card--sub-title-font-size);
     }
   }
 }

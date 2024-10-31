@@ -45,7 +45,7 @@ export const FileCard = flowComponent("FileCard", (props) => {
           <b>{name}</b>
         </Text>
         {sizeInBytes && (
-          <Text>
+          <Text className={styles.subTitle}>
             {new Intl.NumberFormat(undefined, {
               notation: "compact",
               style: "unit",
