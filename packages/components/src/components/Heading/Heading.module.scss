@@ -22,7 +22,7 @@
       margin-inline-end: var(--heading--icon-to-text-spacing);
     }
 
-    &:not(:last-child) {
+    &:not(:last-child) + .headingContent:not(:empty) {
       margin-inline-end: var(--heading--icon-to-text-spacing);
     }
   }
@@ -33,6 +33,10 @@
     height: var(--heading-line-height);
     align-items: center;
     column-gap: var(--heading--icon-to-text-spacing);
+
+    &:empty {
+      display: none;
+    }
   }
 
   &:where(h1) {

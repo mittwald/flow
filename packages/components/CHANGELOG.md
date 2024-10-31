@@ -3,6 +3,83 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.315](https://github.com/mittwald/flow/compare/0.1.0-alpha.314...0.1.0-alpha.315) (2024-10-31)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.314](https://github.com/mittwald/flow/compare/0.1.0-alpha.313...0.1.0-alpha.314) (2024-10-30)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.313](https://github.com/mittwald/flow/compare/0.1.0-alpha.312...0.1.0-alpha.313) (2024-10-30)
+
+### Features
+
+- add FileField component
+  ([80bdb43](https://github.com/mittwald/flow/commit/80bdb43a1ad4b29a8eb5ff83220b6fda91e38324))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.312](https://github.com/mittwald/flow/compare/0.1.0-alpha.311...0.1.0-alpha.312) (2024-10-30)
+
+### Bug Fixes
+
+- **Accordion:** fix spacing
+  ([#923](https://github.com/mittwald/flow/issues/923))
+  ([8d4a450](https://github.com/mittwald/flow/commit/8d4a450a7be7bd089afa302ccc553bd5f0bb62c9))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.311](https://github.com/mittwald/flow/compare/0.1.0-alpha.310...0.1.0-alpha.311) (2024-10-30)
+
+### Bug Fixes
+
+- **docs:** develop tab rendering
+  ([1c63f84](https://github.com/mittwald/flow/commit/1c63f84c742efa8e7d8c21bc65c6f815fca24a41))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.310](https://github.com/mittwald/flow/compare/0.1.0-alpha.309...0.1.0-alpha.310) (2024-10-30)
+
+### Features
+
+- **docs:** Develop tab with properties table of the component
+  ([#920](https://github.com/mittwald/flow/issues/920))
+  ([0ead16a](https://github.com/mittwald/flow/commit/0ead16ac7b03b1da7e167f62c62d1762d7bbb45e))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.309](https://github.com/mittwald/flow/compare/0.1.0-alpha.308...0.1.0-alpha.309) (2024-10-30)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.308](https://github.com/mittwald/flow/compare/0.1.0-alpha.307...0.1.0-alpha.308) (2024-10-29)
 
 **Note:** Version bump only for package @mittwald/flow-react-components

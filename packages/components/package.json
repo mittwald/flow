@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-react-components",
-  "version": "0.1.0-alpha.308",
+  "version": "0.1.0-alpha.315",
   "type": "module",
   "description": "A React implementation of Flow, mittwald’s design system",
   "homepage": "https://mittwald.github.io/flow",
@@ -130,6 +130,11 @@
     "./FieldError": {
       "types": "./dist/js/types/components/FieldError/index.d.ts",
       "import": "./dist/js/FieldError.js"
+    },
+    "./FileField/styles.css": "./dist/css/FileField.css",
+    "./FileField": {
+      "types": "./dist/js/types/components/FileField/index.d.ts",
+      "import": "./dist/js/FileField.js"
     },
     "./Header/styles.css": "./dist/css/Header.css",
     "./Header": {
@@ -362,7 +367,8 @@
       "import": "./dist/js/react-hook-form.js"
     },
     "./globals.css": "./dist/css/globals.css",
-    "./all.css": "./dist/js/all.css"
+    "./all.css": "./dist/js/all.css",
+    "./doc-properties": "./out/doc-properties.json"
   },
   "files": [
     "*.md",
@@ -377,6 +383,7 @@
     "build:css": "run vite build --config vite.build.config.css.ts && run postbuild:css",
     "postbuild:css": "rimraf dist/css/**/*.js",
     "build:deps:watch": "run -T build:deps:watch @mittwald/flow-react-components",
+    "build:docs-properties": "run tsx dev/createDocPropertiesJson.ts",
     "build:icons": "run tsx dev/icons/generate.ts",
     "build:storybook": "run storybook build",
     "dev": "run nx run-many --outputStyle=stream --projects=@mittwald/flow-react-components --targets=start,build:deps:watch",
@@ -391,7 +398,9 @@
     "@internationalized/string-compiler": "^3.2.5",
     "@mittwald/react-tunnel": "workspace:^",
     "@mittwald/react-use-promise": "^2.5.0",
+    "@react-aria/form": "^3.0.10",
     "@react-aria/utils": "^3.25.3",
+    "@react-stately/form": "^3.0.6",
     "@react-types/shared": "^3.25.0",
     "@tabler/icons-react": "^3.19.0",
     "@tanstack/react-table": "^8.20.5",
@@ -450,6 +459,7 @@
     "@vitest/coverage-v8": "~2.1.2",
     "decamelize": "^6.0.0",
     "fs-jetpack": "^5.1.0",
+    "glob": "^10.4.1",
     "happy-dom": "^15.7.4",
     "next": "^14.2.15",
     "nx": "^20.0.0",
@@ -459,6 +469,7 @@
     "prettier": "^3.3.3",
     "prop-types": "^15.8.1",
     "react": "^18.3.1",
+    "react-docgen-typescript": "^2.2.2",
     "react-dom": "^18.3.1",
     "react-element-to-jsx-string": "^15.0.0",
     "react-hook-form": "^7.53.0",
@@ -494,6 +505,20 @@
     },
     "react-hook-form": {
       "optional": true
+    }
+  },
+  "nx": {
+    "targets": {
+      "build:docs-properties": {
+        "cache": true,
+        "inputs": [
+          "{projectRoot}/src/components/**/*",
+          "{projectRoot}/dev/createDocPropertiesJson.ts"
+        ],
+        "outputs": [
+          "{projectRoot}/out"
+        ]
+      }
     }
   }
 }
