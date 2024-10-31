@@ -29,6 +29,7 @@ import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import headerStyles from "./components/Header/Header.module.css";
 import { ActionGroup } from "@/components/ActionGroup";
+import { deepHas } from "@/lib/react/deepHas";
 
 export interface ListProps<T>
   extends PropsWithChildren,
@@ -157,7 +158,7 @@ export const List = flowComponent("List", (props) => {
     },
   };
 
-  const hasActionGroup = !!deepFindOfType(children, ActionGroup);
+  const hasActionGroup = deepHas(children, ActionGroup);
 
   return (
     <PropsContextProvider props={propsContext}>

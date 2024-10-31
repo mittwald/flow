@@ -11,9 +11,9 @@ import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import formFieldStyles from "../FormField/FormField.module.scss";
 import type { ColumnLayoutProps } from "@/components/ColumnLayout";
 import { ColumnLayout } from "@/components/ColumnLayout";
-import { deepFindOfType } from "@/lib/react/deepFindOfType";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import { deepHas } from "@/lib/react/deepHas";
 
 export interface CheckboxGroupProps
   extends PropsWithChildren<Omit<Aria.CheckboxGroupProps, "children">>,
@@ -45,7 +45,7 @@ export const CheckboxGroup = flowComponent("CheckboxGroup", (props) => {
     },
   };
 
-  const hasCheckboxButtons = !!deepFindOfType(children, CheckboxButton);
+  const hasCheckboxButtons = deepHas(children, CheckboxButton);
 
   return (
     <Aria.CheckboxGroup {...rest} className={rootClassName} ref={ref}>
