@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "jsx": "react",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "plugins": [{ "name": "typescript-plugin-css-modules" }],
+    "types": ["vitest/globals", "@testing-library/jest-dom", "./types.d.ts"]
+  },
+  "exclude": ["node_modules", "dist"],
+  "extends": "../../tsconfig.json",
+  "include": ["**/*.ts", "**/*.tsx", "./dev/vitest/setupFiles.ts"]
+}

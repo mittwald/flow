@@ -17,6 +17,7 @@
     "docs": "nx run @mittwald/flow-documentation:\"$@\"",
     "format": "prettier --write '**/*.{ts,tsx,yaml,yml,json,md,mdx,js,cjs,mjs,css}'",
     "lint": "eslint .",
+    "mstudio-components": "nx run @mittwald/flow-mstudio-react-components:\"$@\"",
     "test": "run all test"
   },
   "simple-git-hooks": {
