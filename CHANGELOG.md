@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.316](https://github.com/mittwald/flow/compare/0.1.0-alpha.315...0.1.0-alpha.316) (2024-10-31)
+
+### Features
+
+- **Docs:** start implement DesignTokenTable
+  ([2f9bdc6](https://github.com/mittwald/flow/commit/2f9bdc695c019f331d2f9198ecaa8383884cab13))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.315](https://github.com/mittwald/flow/compare/0.1.0-alpha.314...0.1.0-alpha.315) (2024-10-31)
 
 **Note:** Version bump only for package @mittwald/flow-project
