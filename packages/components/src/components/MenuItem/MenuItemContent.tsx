@@ -14,6 +14,7 @@ import { Text } from "@/components/Text";
 import { deepHas } from "@/lib/react/deepHas";
 import { Wrap } from "@/components/Wrap";
 import clsx from "clsx";
+import { Avatar } from "@/components/Avatar";
 
 interface Props extends Aria.MenuItemRenderProps, PropsWithChildren {
   selectionVariant?: "control" | "navigation";
@@ -33,6 +34,9 @@ export const MenuItemContent: FC<Props> = (props) => {
     },
     Text: {
       className: styles.text,
+    },
+    Avatar: {
+      className: styles.avatar,
     },
   };
 
@@ -56,6 +60,7 @@ export const MenuItemContent: FC<Props> = (props) => {
     );
 
   const hasText = deepHas(children, Text);
+  const hasAvatar = deepHas(children, Avatar);
 
   return (
     <>
@@ -63,7 +68,7 @@ export const MenuItemContent: FC<Props> = (props) => {
         {selectionIcon}
       </PropsContextProvider>
       <PropsContextProvider props={propsContext}>
-        <Wrap if={!hasText}>
+        <Wrap if={!hasText && !hasAvatar}>
           <Text>{children}</Text>
         </Wrap>
       </PropsContextProvider>
