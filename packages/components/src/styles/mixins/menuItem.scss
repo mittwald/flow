@@ -67,7 +67,5 @@
     color: var(--menu-item--disabled-color);
   }
 
-  &:has(.avatar) {
-    @include avatarButton.avatarButton();
-  }
+  @include avatarButton.avatarButton();
 }
