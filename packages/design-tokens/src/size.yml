@@ -1,0 +1,35 @@
+size-rem:
+  xxxs:
+    value: 0.0625rem
+  xxs:
+    value: 0.125rem
+  xs:
+    value: 0.25rem
+  s:
+    value: 0.5rem
+  m:
+    value: 1rem
+  l:
+    value: 1.5rem
+  xl:
+    value: 2rem
+  xxl:
+    value: 4rem
+
+size-px:
+  xxxs:
+    value: 1px
+  xxs:
+    value: 2px
+  xs:
+    value: 4px
+  s:
+    value: 8px
+  m:
+    value: 16px
+  l:
+    value: 24px
+  xl:
+    value: 32px
+  xxl:
+    value: 64px

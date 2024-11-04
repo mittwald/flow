@@ -51,7 +51,7 @@ html body *:where([class*="flow--"]:not([class*="flow--"] [class*="flow--"])) {
   line-height: var(--line-height--default);
   font-size: var(--size-rem--m);
   font-weight: var(--font-weight--normal);
-  color: var(--content--color--default);
+  color: var(--text--color--default);
 
   /*
   Josh's Custom CSS Reset

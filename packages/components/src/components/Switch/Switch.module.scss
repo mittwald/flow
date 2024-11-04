@@ -31,7 +31,7 @@
     align-items: center;
     width: var(--switch--handle-size);
     height: var(--switch--handle-size);
-    background-color: var(--switch--handle-background-color);
+    background-color: var(--switch--handle-background-color--default);
     border-radius: var(--corner-radius--round);
     transition-property: transform;
     transition-duration: var(--transition--duration--default);
@@ -62,11 +62,14 @@
       background-color: var(--switch--track-background-color--disabled);
       color: var(--switch--track-background-color--disabled);
     }
+
     .label {
       color: var(--label--color--disabled);
     }
+
     .handle {
       color: var(--switch--handle-color--disabled);
+      background-color: var(--switch--handle-background-color--disabled);
     }
   }
 }

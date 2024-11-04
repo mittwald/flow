@@ -1,0 +1,30 @@
+illustrated-message:
+  padding:
+    value: "{size-px.m}"
+  spacing:
+    value: "{size-rem.m}"
+
+  # Primary
+  primary-icon-color:
+    value: "{primary.color.900}"
+  primary-heading-color:
+    value: "{heading.color}"
+
+  # Danger
+  danger-icon-color:
+    value: "{danger.color.900}"
+  danger-heading-color:
+    value: "{danger.color.1000}"
+
+  # Dark
+  dark-icon-color:
+    value: "{dark-plain-content-color}"
+  dark-heading-color:
+    value: "{heading.color-dark}"
+
+  # Dark
+  light-icon-color:
+    value: "{light-plain-content-color}"
+  light-heading-color:
+    value: "{heading.color-light}"
+

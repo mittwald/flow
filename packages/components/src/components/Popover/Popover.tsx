@@ -50,6 +50,7 @@ export const Popover = flowComponent("Popover", (props) => {
       ref={ref}
       isOpen={isOpen}
       onOpenChange={(isOpen) => controller.setOpen(isOpen)}
+      style={{ width }}
     >
       {withTip && (
         <Aria.OverlayArrow className={styles.tip}>
@@ -58,10 +59,7 @@ export const Popover = flowComponent("Popover", (props) => {
           </svg>
         </Aria.OverlayArrow>
       )}
-      <ContentComponent
-        style={{ width }}
-        className={clsx(styles.content, contentClassName)}
-      >
+      <ContentComponent className={clsx(styles.content, contentClassName)}>
         <OverlayContextProvider type="Popover" controller={controller}>
           {children}
         </OverlayContextProvider>

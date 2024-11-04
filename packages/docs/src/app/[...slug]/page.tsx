@@ -11,7 +11,7 @@ import { IconExternalLink } from "@mittwald/flow-react-components/Icons";
 const contentFolder = "src/content";
 
 interface Props {
-  params: StaticParams;
+  params: Promise<StaticParams>;
 }
 
 export const generateStaticParams = async (): Promise<StaticParams[]> => {
@@ -19,31 +19,34 @@ export const generateStaticParams = async (): Promise<StaticParams[]> => {
 };
 
 export const generateMetadata = async (props: Props) => {
-  return await MdxFileFactory.generateMetadata(contentFolder, props.params);
+  const params = await props.params;
+  return await MdxFileFactory.generateMetadata(contentFolder, params);
 };
 
 export default async function Page(props: Props) {
+  const params = await props.params;
+
   const indexMdxFile = await MdxFileFactory.fromParams(
     contentFolder,
-    props.params,
+    params,
     "index",
   );
 
   const overviewMdxFile = await MdxFileFactory.fromParams(
     contentFolder,
-    props.params,
+    params,
     "overview",
   );
 
   const developMdxFile = await MdxFileFactory.fromParams(
     contentFolder,
-    props.params,
+    params,
     "develop",
   );
 
   const guidelinesMdxFile = await MdxFileFactory.fromParams(
     contentFolder,
-    props.params,
+    params,
     "guidelines",
   );
 

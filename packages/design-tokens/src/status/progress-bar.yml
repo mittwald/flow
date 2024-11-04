@@ -1,0 +1,41 @@
+progress-bar:
+  font-size:
+    value: "{font-size-text.m}"
+  font-size-s:
+    value: "{font-size-text.s}"
+  value-font-weight:
+    value: "{font-weight.bold}"
+  spacing-y:
+    value: "{size-rem.xs}"
+  spacing-x:
+    value: "{size-rem.m}"
+
+  height:
+    value: "{size-rem.s}"
+  height-s:
+    value: 0.375rem
+  corner-radius:
+    value: "{size-rem.xs}"
+  border-width:
+    value: "{border-width.100}"
+  border-color:
+    value: "{neutral-outline-border-color}"
+  background-color:
+    value: "{neutral-outline-background-color.default}"
+
+
+  # Info
+  info-fill-background-color:
+    value: "{info-solid-background-color.default}"
+
+  # Success
+  success-fill-background-color:
+    value: "{success-solid-background-color.default}"
+
+  # Warning
+  warning-fill-background-color:
+    value: "{warning-solid-background-color.default}"
+
+  # Danger
+  danger-fill-background-color:
+    value: "{danger-solid-background-color.default}"

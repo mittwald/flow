@@ -4,13 +4,13 @@
 .button {
   position: relative;
   font-family: "Inter", sans-serif;
+  font-size: var(--font-size-text--default);
+  font-weight: bold;
   line-height: var(--line-height--default);
   border: none;
   border-radius: var(--button--corner-radius);
-  padding-block: var(--button--padding-squished-y);
-  padding-inline: var(--button--padding-squished-x);
-  font-size: var(--font-size--default);
-  font-weight: bold;
+  padding-block: var(--button--padding-y);
+  padding-inline: var(--button--padding-x);
   transition-property: color, background-color;
   transition-duration: var(--transition--duration--default);
   max-width: 100%;
@@ -24,10 +24,10 @@
     border-width: var(--button--border-width);
     border-style: var(--button--border-style);
     padding-block: calc(
-      var(--button--padding-squished-y) - var(--button--border-width)
+      var(--button--padding-y) - var(--button--border-width)
     );
     padding-inline: calc(
-      var(--button--padding-squished-x) - var(--button--border-width)
+      var(--button--padding-x) - var(--button--border-width)
     );
   }
 
@@ -39,7 +39,7 @@
   /* Elements */
   .content {
     display: flex;
-    column-gap: var(--button--text-to-icon-spacing);
+    column-gap: var(--button--spacing);
     align-items: center;
     justify-content: center;
   }
@@ -60,15 +60,15 @@
   }
 
   &:where(:has(.icon):not(:has(.text))) {
-    padding: var(--button--padding);
+    padding: var(--button--padding-icon-only);
 
     &:where(.outline) {
-      padding: calc(var(--button--padding) - var(--button--border-width));
+      padding: calc(var(--button--padding-icon-only) - var(--button--border-width));
     }
   }
 
   &:where(:has(.text) .icon) {
-    margin-inline-start: var(--button--text-to-icon-spacing);
+    margin-inline-start: var(--button--spacing);
   }
 
   .counterBadge {
@@ -110,29 +110,29 @@
   &:where(.size-s) {
     font-size: var(--button--font-size-s);
     line-height: var(--button--line-height-s);
-    padding-block: var(--button--padding-s-squished-y);
-    padding-inline: var(--button--padding-s-squished-x);
-    column-gap: var(--button--text-to-icon-spacing-s);
+    padding-block: var(--button--padding-s-y);
+    padding-inline: var(--button--padding-s-x);
+    column-gap: var(--button--spacing-s);
 
     &:where(.outline) {
       padding-block: calc(
-        var(--button--padding-s-squished-y) - var(--button--border-width)
+        var(--button--padding-s-y) - var(--button--border-width)
       );
       padding-inline: calc(
-        var(--button--padding-s-squished-x) - var(--button--border-width)
+        var(--button--padding-s-x) - var(--button--border-width)
       );
     }
 
     &:where(:has(.icon):not(:has(.text))) {
-      padding: var(--button--padding-s);
+      padding: var(--button--padding-s-icon-only);
 
       &:where(.outline) {
-        padding: calc(var(--button--padding-s) - var(--button--border-width));
+        padding: calc(var(--button--padding-s-icon-only) - var(--button--border-width));
       }
     }
 
     .content {
-      column-gap: var(--button--text-to-icon-spacing-s);
+      column-gap: var(--button--spacing-s);
     }
   }
 

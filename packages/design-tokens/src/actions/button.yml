@@ -1,0 +1,545 @@
+button:
+  corner-radius:
+    value: "{corner-radius.default}"
+  padding-x:
+    value: "{size-px.m}"
+  padding-y:
+    value: "{size-px.s}"
+  padding-icon-only:
+    value: "{size-px.s}"
+  spacing:
+    value: "{size-rem.s}"
+  pending-icon-color:
+    value: "{neutral.color.1000}"
+  succeeded-icon-color:
+    value: "{success.color.800}"
+  failed-icon-color:
+    value: "{danger.color.800}"
+  border-width:
+    value: "{border-width.100}"
+  border-style:
+    value: "{border-style.default}"
+
+  # Small
+  padding-s-icon-only:
+    value: "{size-px.xs}"
+  padding-s-x:
+    value: "{size-px.s}"
+  padding-s-y:
+    value: "{size-px.xs}"
+  spacing-s:
+    value: "{size-rem.xs}"
+  font-size-s:
+    value: "{font-size-text.s}"
+  line-height-s:
+    value: "{size-rem.m}"
+
+  # Accent Solid
+  accent-solid-background-color:
+    default:
+      value: "{success-solid-background-color.default}"
+    hover:
+      value: "{success-solid-background-color.hover}"
+    pressed:
+      value: "{success-solid-background-color.pressed}"
+    disabled:
+      value: "{disabled-solid-background-color}"
+  accent-solid-content-color:
+    default:
+      value: "{success-solid-content-color}"
+    hover:
+      value: "{success-solid-content-color}"
+    pressed:
+      value: "{success-solid-content-color}"
+    disabled:
+      value: "{disabled-solid-content-color}"
+
+  # Accent Plain
+  accent-plain-background-color:
+    default:
+      value: "{success-plain-background-color.default}"
+    hover:
+      value: "{success-plain-background-color.hover}"
+    pressed:
+      value: "{success-plain-background-color.pressed}"
+    disabled:
+      value: "{disabled-plain-background-color}"
+  accent-plain-content-color:
+    default:
+      value: "{success-plain-content-color}"
+    hover:
+      value: "{success-plain-content-color}"
+    pressed:
+      value: "{success-plain-content-color}"
+    disabled:
+      value: "{disabled-plain-content-color}"
+
+  # Accent Soft
+  accent-soft-background-color:
+    default:
+      value: "{success-soft-background-color.default}"
+    hover:
+      value: "{success-soft-background-color.hover}"
+    pressed:
+      value: "{success-soft-background-color.pressed}"
+    disabled:
+      value: "{disabled-soft-background-color}"
+  accent-soft-content-color:
+    default:
+      value: "{success-soft-content-color.default}"
+    hover:
+      value: "{success-soft-content-color.default}"
+    pressed:
+      value: "{success-soft-content-color.pressed}"
+    disabled:
+      value: "{disabled-soft-content-color}"
+
+  # Accent Outline
+  accent-outline-background-color:
+    default:
+      value: "{success-outline-background-color.default}"
+    hover:
+      value: "{success-outline-background-color.hover}"
+    pressed:
+      value: "{success-outline-background-color.pressed}"
+    disabled:
+      value: "{disabled-outline-background-color}"
+  accent-outline-content-color:
+    default:
+      value: "{success-outline-border-color}"
+    hover:
+      value: "{success-outline-border-color}"
+    pressed:
+      value: "{success-outline-border-color}"
+    disabled:
+      value: "{disabled-outline-content-color}"
+  accent-outline-border-color:
+    default:
+      value: "{success-outline-border-color}"
+    disabled:
+      value: "{disabled-outline-border-color}"
+
+  # Primary Solid
+  primary-solid-background-color:
+    default:
+      value: "{primary-solid-background-color.default}"
+    hover:
+      value: "{primary-solid-background-color.hover}"
+    pressed:
+      value: "{primary-solid-background-color.pressed}"
+    disabled:
+      value: "{disabled-solid-background-color}"
+  primary-solid-content-color:
+    default:
+      value: "{primary-solid-content-color}"
+    hover:
+      value: "{primary-solid-content-color}"
+    pressed:
+      value: "{primary-solid-content-color}"
+    disabled:
+      value: "{disabled-solid-content-color}"
+
+  # Primary Plain
+  primary-plain-background-color:
+    default:
+      value: "{primary-plain-background-color.default}"
+    hover:
+      value: "{primary-plain-background-color.hover}"
+    pressed:
+      value: "{primary-plain-background-color.pressed}"
+    disabled:
+      value: "{disabled-plain-background-color}"
+  primary-plain-content-color:
+    default:
+      value: "{primary-plain-content-color}"
+    hover:
+      value: "{primary-plain-content-color}"
+    pressed:
+      value: "{primary-plain-content-color}"
+    disabled:
+      value: "{disabled-plain-content-color}"
+
+  # Primary Soft
+  primary-soft-background-color:
+    default:
+      value: "{primary-soft-background-color.default}"
+    hover:
+      value: "{primary-soft-background-color.hover}"
+    pressed:
+      value: "{primary-soft-background-color.pressed}"
+    disabled:
+      value: "{disabled-soft-background-color}"
+  primary-soft-content-color:
+    default:
+      value: "{primary-soft-content-color.default}"
+    hover:
+      value: "{primary-soft-content-color.default}"
+    pressed:
+      value: "{primary-soft-content-color.pressed}"
+    disabled:
+      value: "{disabled-soft-content-color}"
+
+  # Primary Outline
+  primary-outline-background-color:
+    default:
+      value: "{primary-outline-background-color.default}"
+    hover:
+      value: "{primary-outline-background-color.hover}"
+    pressed:
+      value: "{primary-outline-background-color.pressed}"
+    disabled:
+      value: "{disabled-outline-background-color}"
+  primary-outline-content-color:
+    default:
+      value: "{primary-outline-border-color}"
+    hover:
+      value: "{primary-outline-border-color}"
+    pressed:
+      value: "{primary-outline-border-color}"
+    disabled:
+      value: "{disabled-outline-content-color}"
+  primary-outline-border-color:
+    default:
+      value: "{primary-outline-border-color}"
+    disabled:
+      value: "{disabled-outline-border-color}"
+
+  # Secondary Solid
+  secondary-solid-background-color:
+    default:
+      value: "{neutral-solid-background-color.default}"
+    hover:
+      value: "{neutral-solid-background-color.hover}"
+    pressed:
+      value: "{neutral-solid-background-color.pressed}"
+    disabled:
+      value: "{disabled-solid-background-color}"
+  secondary-solid-content-color:
+    default:
+      value: "{neutral-solid-content-color}"
+    hover:
+      value: "{neutral-solid-content-color}"
+    pressed:
+      value: "{neutral-solid-content-color}"
+    disabled:
+      value: "{disabled-solid-content-color}"
+
+  # Secondary Plain
+  secondary-plain-background-color:
+    default:
+      value: "{neutral-plain-background-color.default}"
+    hover:
+      value: "{neutral-plain-background-color.hover}"
+    pressed:
+      value: "{neutral-plain-background-color.pressed}"
+    disabled:
+      value: "{disabled-plain-background-color}"
+  secondary-plain-content-color:
+    default:
+      value: "{neutral-plain-content-color}"
+    hover:
+      value: "{neutral-plain-content-color}"
+    pressed:
+      value: "{neutral-plain-content-color}"
+    disabled:
+      value: "{disabled-plain-content-color}"
+
+  # Secondary Soft
+  secondary-soft-background-color:
+    default:
+      value: "{neutral-soft-background-color.default}"
+    hover:
+      value: "{neutral-soft-background-color.hover}"
+    pressed:
+      value: "{neutral-soft-background-color.pressed}"
+    disabled:
+      value: "{disabled-soft-background-color}"
+  secondary-soft-content-color:
+    default:
+      value: "{neutral-soft-content-color.default}"
+    hover:
+      value: "{neutral-soft-content-color.default}"
+    pressed:
+      value: "{neutral-soft-content-color.pressed}"
+    disabled:
+      value: "{disabled-soft-content-color}"
+
+  # Secondary Outline
+  secondary-outline-background-color:
+    default:
+      value: "{neutral-outline-background-color.default}"
+    hover:
+      value: "{neutral-outline-background-color.hover}"
+    pressed:
+      value: "{neutral-outline-background-color.pressed}"
+    disabled:
+      value: "{disabled-outline-background-color}"
+  secondary-outline-content-color:
+    default:
+      value: "{neutral-outline-content-color}"
+    hover:
+      value: "{neutral-outline-content-color}"
+    pressed:
+      value: "{neutral-outline-content-color}"
+    disabled:
+      value: "{disabled-outline-content-color}"
+  secondary-outline-border-color:
+    default:
+      value: "{neutral-outline-border-color}"
+    disabled:
+      value: "{disabled-outline-border-color}"
+
+  # Danger Solid
+  danger-solid-background-color:
+    default:
+      value: "{danger-solid-background-color.default}"
+    hover:
+      value: "{danger-solid-background-color.hover}"
+    pressed:
+      value: "{danger-solid-background-color.pressed}"
+    disabled:
+      value: "{disabled-solid-background-color}"
+  danger-solid-content-color:
+    default:
+      value: "{danger-solid-content-color}"
+    hover:
+      value: "{danger-solid-content-color}"
+    pressed:
+      value: "{danger-solid-content-color}"
+    disabled:
+      value: "{disabled-solid-content-color}"
+
+  # Danger Plain
+  danger-plain-background-color:
+    default:
+      value: "{danger-plain-background-color.default}"
+    hover:
+      value: "{danger-plain-background-color.hover}"
+    pressed:
+      value: "{danger-plain-background-color.pressed}"
+    disabled:
+      value: "{disabled-plain-background-color}"
+  danger-plain-content-color:
+    default:
+      value: "{danger-plain-content-color}"
+    hover:
+      value: "{danger-plain-content-color}"
+    pressed:
+      value: "{danger-plain-content-color}"
+    disabled:
+      value: "{disabled-plain-content-color}"
+
+  # Danger Soft
+  danger-soft-background-color:
+    default:
+      value: "{danger-soft-background-color.default}"
+    hover:
+      value: "{danger-soft-background-color.hover}"
+    pressed:
+      value: "{danger-soft-background-color.pressed}"
+    disabled:
+      value: "{disabled-soft-background-color}"
+  danger-soft-content-color:
+    default:
+      value: "{danger-soft-content-color.default}"
+    hover:
+      value: "{danger-soft-content-color.default}"
+    pressed:
+      value: "{danger-soft-content-color.pressed}"
+    disabled:
+      value: "{disabled-soft-content-color}"
+
+  # Danger Outline
+  danger-outline-background-color:
+    default:
+      value: "{danger-outline-background-color.default}"
+    hover:
+      value: "{danger-outline-background-color.hover}"
+    pressed:
+      value: "{danger-outline-background-color.pressed}"
+    disabled:
+      value: "{disabled-outline-background-color}"
+  danger-outline-content-color:
+    default:
+      value: "{danger-outline-border-color}"
+    hover:
+      value: "{danger-outline-border-color}"
+    pressed:
+      value: "{danger-outline-border-color}"
+    disabled:
+      value: "{disabled-outline-content-color}"
+  danger-outline-border-color:
+    default:
+      value: "{danger-outline-border-color}"
+    disabled:
+      value: "{disabled-outline-border-color}"
+
+  # Dark Solid
+  dark-solid-background-color:
+    default:
+      value: "{dark-solid-background-color.default}"
+    hover:
+      value: "{dark-solid-background-color.hover}"
+    pressed:
+      value: "{dark-solid-background-color.pressed}"
+    disabled:
+      value: "{disabled-solid-dark-background-color}"
+  dark-solid-content-color:
+    default:
+      value: "{dark-solid-content-color}"
+    hover:
+      value: "{dark-solid-content-color}"
+    pressed:
+      value: "{dark-solid-content-color}"
+    disabled:
+      value: "{disabled-solid-dark-content-color}"
+
+  # Dark Plain
+  dark-plain-background-color:
+    default:
+      value: "{dark-plain-background-color.default}"
+    hover:
+      value: "{dark-plain-background-color.hover}"
+    pressed:
+      value: "{dark-plain-background-color.pressed}"
+    disabled:
+      value: "{disabled-plain-background-color}"
+  dark-plain-content-color:
+    default:
+      value: "{dark-plain-content-color}"
+    hover:
+      value: "{dark-plain-content-color}"
+    pressed:
+      value: "{dark-plain-content-color}"
+    disabled:
+      value: "{disabled-plain-dark-content-color}"
+
+  # Dark Soft
+  dark-soft-background-color:
+    default:
+      value: "{dark-soft-background-color.default}"
+    hover:
+      value: "{dark-soft-background-color.hover}"
+    pressed:
+      value: "{dark-soft-background-color.pressed}"
+    disabled:
+      value: "{disabled-soft-dark-background-color}"
+  dark-soft-content-color:
+    default:
+      value: "{dark-soft-content-color}"
+    hover:
+      value: "{dark-soft-content-color}"
+    pressed:
+      value: "{dark-soft-content-color}"
+    disabled:
+      value: "{disabled-soft-dark-content-color}"
+
+  # Dark Outline
+  dark-outline-background-color:
+    default:
+      value: "{dark-outline-background-color.default}"
+    hover:
+      value: "{dark-outline-background-color.hover}"
+    pressed:
+      value: "{dark-outline-background-color.pressed}"
+    disabled:
+      value: "{disabled-outline-dark-background-color}"
+  dark-outline-content-color:
+    default:
+      value: "{dark-outline-content-color}"
+    hover:
+      value: "{dark-outline-content-color}"
+    pressed:
+      value: "{dark-outline-content-color}"
+    disabled:
+      value: "{disabled-outline-dark-content-color}"
+  dark-outline-border-color:
+    default:
+      value: "{dark-outline-border-color}"
+    disabled:
+      value: "{disabled-outline-dark-border-color}"
+
+  # Light Solid
+  light-solid-background-color:
+    default:
+      value: "{light-solid-background-color.default}"
+    hover:
+      value: "{light-solid-background-color.hover}"
+    pressed:
+      value: "{light-solid-background-color.pressed}"
+    disabled:
+      value: "{disabled-solid-light-background-color}"
+  light-solid-content-color:
+    default:
+      value: "{light-solid-content-color}"
+    hover:
+      value: "{light-solid-content-color}"
+    pressed:
+      value: "{light-solid-content-color}"
+    disabled:
+      value: "{disabled-solid-light-content-color}"
+
+  # Light Plain
+  light-plain-background-color:
+    default:
+      value: "{light-plain-background-color.default}"
+    hover:
+      value: "{light-plain-background-color.hover}"
+    pressed:
+      value: "{light-plain-background-color.pressed}"
+    disabled:
+      value: "{disabled-plain-background-color}"
+  light-plain-content-color:
+    default:
+      value: "{light-plain-content-color}"
+    hover:
+      value: "{light-plain-content-color}"
+    pressed:
+      value: "{light-plain-content-color}"
+    disabled:
+      value: "{disabled-plain-light-content-color}"
+
+  # Light Soft
+  light-soft-background-color:
+    default:
+      value: "{light-soft-background-color.default}"
+    hover:
+      value: "{light-soft-background-color.hover}"
+    pressed:
+      value: "{light-soft-background-color.pressed}"
+    disabled:
+      value: "{disabled-soft-light-background-color}"
+  light-soft-content-color:
+    default:
+      value: "{light-soft-content-color}"
+    hover:
+      value: "{light-soft-content-color}"
+    pressed:
+      value: "{light-soft-content-color}"
+    disabled:
+      value: "{disabled-soft-light-content-color}"
+
+  # Light Outline
+  light-outline-background-color:
+    default:
+      value: "{light-outline-background-color.default}"
+    hover:
+      value: "{light-outline-background-color.hover}"
+    pressed:
+      value: "{light-outline-background-color.pressed}"
+    disabled:
+      value: "{disabled-outline-light-background-color}"
+  light-outline-content-color:
+    default:
+      value: "{light-outline-content-color}"
+    hover:
+      value: "{light-outline-content-color}"
+    pressed:
+      value: "{light-outline-content-color}"
+    disabled:
+      value: "{disabled-outline-light-content-color}"
+  light-outline-border-color:
+    default:
+      value: "{light-outline-border-color}"
+    disabled:
+      value: "{disabled-outline-light-border-color}"
