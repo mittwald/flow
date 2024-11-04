@@ -13,6 +13,7 @@ import clsx from "clsx";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
+import { FileSizeText } from "@/components/FileCard/components/FileSizeText";
 
 export interface FileCardProps
   extends PropsWithClassName,
@@ -45,17 +46,6 @@ export const FileCard = flowComponent("FileCard", (props) => {
     </Avatar>
   );
 
-  const sizeText = sizeInBytes && (
-    <Text className={styles.subTitle}>
-      {new Intl.NumberFormat(undefined, {
-        notation: "compact",
-        style: "unit",
-        unit: "byte",
-        unitDisplay: "narrow",
-      }).format(sizeInBytes)}
-    </Text>
-  );
-
   return (
     <Element className={rootClassName}>
       {avatar}
@@ -63,7 +53,7 @@ export const FileCard = flowComponent("FileCard", (props) => {
         <Text className={styles.title}>
           <b>{name}</b>
         </Text>
-        {sizeText}
+        {sizeInBytes && <FileSizeText sizeInBytes={sizeInBytes} />}
       </span>
       {onDelete && (
         <Button
