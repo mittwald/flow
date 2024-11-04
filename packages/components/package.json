@@ -260,6 +260,9 @@
     "./PropsContext": {
       "types": "./dist/js/types/lib/propsContext/types.d.ts"
     },
+    "./props": {
+      "types": "./dist/js/types/lib/types/props.d.ts"
+    },
     "./RadioGroup/styles.css": "./dist/css/RadioGroup.css",
     "./RadioGroup": {
       "types": "./dist/js/types/components/RadioGroup/index.d.ts",

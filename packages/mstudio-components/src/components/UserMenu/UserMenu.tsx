@@ -4,11 +4,15 @@ import { ContextMenu } from "@mittwald/flow-react-components/ContextMenu";
 import type { PropsContext } from "@mittwald/flow-react-components/PropsContext";
 import PropsContextProvider from "@mittwald/flow-react-components/PropsContextProvider";
 import styles from "./UserMenu.module.scss";
+import type { PropsWithClassName } from "@mittwald/flow-react-components/props";
+import clsx from "clsx";
 
-export type UserMenuProps = PropsWithChildren;
+export type UserMenuProps = PropsWithChildren & PropsWithClassName;
 
 export const UserMenu: FC<UserMenuProps> = (props) => {
-  const { children } = props;
+  const { children, className } = props;
+
+  const rootClassName = clsx(styles.contextMenu, className);
 
   const propsContext: PropsContext = {
     ContextMenu: {
@@ -22,7 +26,7 @@ export const UserMenu: FC<UserMenuProps> = (props) => {
 
   return (
     <PropsContextProvider props={propsContext}>
-      <ContextMenu className={styles.contextMenu}>{children}</ContextMenu>
+      <ContextMenu className={rootClassName}>{children}</ContextMenu>
     </PropsContextProvider>
   );
 };
