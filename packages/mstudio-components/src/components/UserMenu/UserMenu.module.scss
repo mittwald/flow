@@ -1,3 +1,14 @@
-.test {
-  color: red;
+.contextMenu {
+  max-width: 300px;
+}
+
+.menuItem {
+  &:has(.avatar) {
+    justify-content: center;
+  }
+}
+
+.heading {
+  text-align: center;
+  justify-self: center;
 }

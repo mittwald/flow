@@ -1,7 +1,7 @@
 import { create } from "@storybook/theming/create";
 
 export default create({
-  base: "light",
+  base: "dark",
   brandTitle: "Flow - mStudio Components",
   brandUrl: "https://mittwald.de",
   brandImage:
