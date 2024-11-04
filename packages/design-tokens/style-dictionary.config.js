@@ -34,6 +34,9 @@ export default {
           destination: "variables.json",
         },
       ],
+      options: {
+        outputReferences: false,
+      },
     },
     css: {
       transforms: [
