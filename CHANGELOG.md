@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.322](https://github.com/mittwald/flow/compare/0.1.0-alpha.321...0.1.0-alpha.322) (2024-11-04)
+
+### Bug Fixes
+
+- **Activity:** children are not correctly suspended
+  ([e65a0f3](https://github.com/mittwald/flow/commit/e65a0f3dd9e1ace95ea4a3aed9b96e3bde643106))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.321](https://github.com/mittwald/flow/compare/0.1.0-alpha.320...0.1.0-alpha.321) (2024-11-04)
 
 **Note:** Version bump only for package @mittwald/flow-project
