@@ -39,25 +39,31 @@ export const FileCard = flowComponent("FileCard", (props) => {
 
   const stringFormatter = useLocalizedStringFormatter(locales);
 
+  const avatar = (
+    <Avatar color="blue">
+      {type?.includes("image") ? <IconImage /> : <IconFile />}
+    </Avatar>
+  );
+
+  const sizeText = sizeInBytes && (
+    <Text className={styles.subTitle}>
+      {new Intl.NumberFormat(undefined, {
+        notation: "compact",
+        style: "unit",
+        unit: "byte",
+        unitDisplay: "narrow",
+      }).format(sizeInBytes)}
+    </Text>
+  );
+
   return (
     <Element className={rootClassName}>
-      <Avatar color="blue">
-        {type?.includes("image") ? <IconImage /> : <IconFile />}
-      </Avatar>
+      {avatar}
       <span className={styles.text}>
         <Text className={styles.title}>
           <b>{name}</b>
         </Text>
-        {sizeInBytes && (
-          <Text className={styles.subTitle}>
-            {new Intl.NumberFormat(undefined, {
-              notation: "compact",
-              style: "unit",
-              unit: "byte",
-              unitDisplay: "narrow",
-            }).format(sizeInBytes)}
-          </Text>
-        )}
+        {sizeText}
       </span>
       {onDelete && (
         <Button
