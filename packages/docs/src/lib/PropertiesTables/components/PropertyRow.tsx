@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "./PropertyRow.module.css";
 import type { Property } from "../types";
 import { TableRow, TableCell } from "@mittwald/flow-react-components/Table";
 import { InlineCode } from "@mittwald/flow-react-components/InlineCode";
@@ -20,12 +19,7 @@ export const PropertyRow: React.FC<PropertyTableGroupProps> = ({
   return (
     <TableRow>
       <TableCell>
-        <InlineCode>
-          {property.name}
-          <span className={styles.colNameOptional}>
-            {!property.required && "?"}
-          </span>
-        </InlineCode>
+        <InlineCode>{property.name}</InlineCode>
       </TableCell>
       <TableCell>{property.type}</TableCell>
       <TableCell>{property.default || "-"}</TableCell>
