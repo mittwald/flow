@@ -27,6 +27,8 @@ menu-item:
   icon-color:
     default:
       value: "{neutral.color.800}"
+    disabled:
+      value: "{disabled-plain-content-color}"
     current:
       value: "{primary.color.800}"
 
