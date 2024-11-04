@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.319](https://github.com/mittwald/flow/compare/0.1.0-alpha.318...0.1.0-alpha.319) (2024-11-04)
+
+### Features
+
+- **FileCard:** add file card component
+  ([7cd379a](https://github.com/mittwald/flow/commit/7cd379a30dc93f28d743ec6e8f9c8f2fbc7731bd))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.318](https://github.com/mittwald/flow/compare/0.1.0-alpha.317...0.1.0-alpha.318) (2024-11-04)
 
 **Note:** Version bump only for package @mittwald/flow-design-tokens
