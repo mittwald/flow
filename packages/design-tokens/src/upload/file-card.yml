@@ -14,4 +14,4 @@ file-card:
   border-color:
     value: "{neutral-outline-border-color}"
   sub-title-font-size:
-    value: "{font-size.s}"
+    value: "{font-size-text.s}"
