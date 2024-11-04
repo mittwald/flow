@@ -1,3 +1,4 @@
+/* eslint-disable */
 /* auto-generated file */
 export { IconApp } from "./IconApp";
 export { IconBackLink } from "./IconBackLink";
