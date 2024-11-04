@@ -3,6 +3,58 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.321](https://github.com/mittwald/flow/compare/0.1.0-alpha.320...0.1.0-alpha.321) (2024-11-04)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.320](https://github.com/mittwald/flow/compare/0.1.0-alpha.319...0.1.0-alpha.320) (2024-11-04)
+
+### Bug Fixes
+
+- **Tokens:** there should be no references in JSON output
+  ([#936](https://github.com/mittwald/flow/issues/936))
+  ([6c9fa81](https://github.com/mittwald/flow/commit/6c9fa816134ca9dca43321b6b351f47a33e5f677))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.319](https://github.com/mittwald/flow/compare/0.1.0-alpha.318...0.1.0-alpha.319) (2024-11-04)
+
+### Features
+
+- **FileCard:** add file card component
+  ([7cd379a](https://github.com/mittwald/flow/commit/7cd379a30dc93f28d743ec6e8f9c8f2fbc7731bd))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.318](https://github.com/mittwald/flow/compare/0.1.0-alpha.317...0.1.0-alpha.318) (2024-11-04)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.317](https://github.com/mittwald/flow/compare/0.1.0-alpha.316...0.1.0-alpha.317) (2024-10-31)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.316](https://github.com/mittwald/flow/compare/0.1.0-alpha.315...0.1.0-alpha.316) (2024-10-31)
 
 ### Features

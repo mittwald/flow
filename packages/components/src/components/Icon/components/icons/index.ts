@@ -1,3 +1,4 @@
+/* eslint-disable */
 /* auto-generated file */
 export { IconApp } from "./IconApp";
 export { IconBackLink } from "./IconBackLink";
@@ -34,9 +35,11 @@ export { IconEmail } from "./IconEmail";
 export { IconExtension } from "./IconExtension";
 export { IconExternalLink } from "./IconExternalLink";
 export { IconFailed } from "./IconFailed";
+export { IconFile } from "./IconFile";
 export { IconFilter } from "./IconFilter";
 export { IconHide } from "./IconHide";
 export { IconHome } from "./IconHome";
+export { IconImage } from "./IconImage";
 export { IconInfo } from "./IconInfo";
 export { IconInbox } from "./IconInbox";
 export { IconInvoice } from "./IconInvoice";

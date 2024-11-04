@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-react-components",
-  "version": "0.1.0-alpha.316",
+  "version": "0.1.0-alpha.321",
   "type": "module",
   "description": "A React implementation of Flow, mittwald’s design system",
   "homepage": "https://mittwald.github.io/flow",
@@ -130,6 +130,15 @@
     "./FieldError": {
       "types": "./dist/js/types/components/FieldError/index.d.ts",
       "import": "./dist/js/FieldError.js"
+    },
+    "./FileCard/styles.css": "./dist/css/FileCard.css",
+    "./FileCard": {
+      "types": "./dist/js/types/components/FileCard/index.d.ts",
+      "import": "./dist/js/FileCard.js"
+    },
+    "./FileCardList": {
+      "types": "./dist/js/types/components/FileCardList/index.d.ts",
+      "import": "./dist/js/FileCardList.js"
     },
     "./FileField/styles.css": "./dist/css/FileField.css",
     "./FileField": {
