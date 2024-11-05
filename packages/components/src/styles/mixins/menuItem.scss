@@ -1,4 +1,5 @@
 @use "./focus";
+@use "./avatarButton";
 
 @mixin menuItem {
   display: flex;
@@ -68,4 +69,6 @@
       color: var(--menu-item--icon-color--disabled);
     }
   }
+
+  @include avatarButton.avatarButton();
 }

@@ -1,0 +1,39 @@
+@mixin avatarButton {
+  &:has(.avatar) {
+    padding: 0;
+    background: none;
+    width: fit-content;
+    position: relative;
+    border-radius: var(--corner-radius--round);
+
+    .icon {
+      display: none;
+      position: absolute;
+      width: 70%;
+      height: 70%;
+      top: 15%;
+      left: 15%;
+      color: var(--image-button--hover-icon-color);
+    }
+
+    &:hover {
+      .avatar {
+        filter: brightness(var(--image-button--brightness--hover));
+      }
+
+      .icon {
+        display: block;
+      }
+    }
+
+    &[data-pressed] {
+      .avatar {
+        filter: brightness(var(--image-button--brightness--pressed));
+      }
+
+      .icon {
+        display: block;
+      }
+    }
+  }
+}
