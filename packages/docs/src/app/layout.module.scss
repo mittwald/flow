@@ -25,7 +25,7 @@
   align-items: center;
   max-width: 1500px;
   margin: 0 auto;
-  padding: var(--size-px--m) var(--size-px--l);
+  padding: var(--size-px--m) var(--size-px--l) var(--size-px--l);
   flex-wrap: wrap;
   gap: var(--size-rem--m);
 
@@ -36,20 +36,24 @@
     left: 0;
     right: 0;
     height: 250px;
-    background: var(--primary--color--100);
+    background: var(--color--hosting-blue--200);
     position: absolute;
     z-index: -1;
   }
 
-  h1 {
+  .heading {
+    font-size: var(--font-size-heading--xl);
+    color: var(--heading--color);
+    font-weight: bold;
     margin-right: auto;
+    padding-bottom: var(--size-px--s);
   }
 }
 
 .homeLink {
   display: flex;
-  column-gap: var(--size-rem--s);
-  align-items: center;
+  column-gap: var(--size-rem--m);
+  align-items: end;
 }
 
 .logo {
