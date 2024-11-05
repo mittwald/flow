@@ -1,0 +1,11 @@
+heading:
+  color:
+    value: "{primary.color.1000}"
+  color-dark:
+    value: "{dark-plain-content-color}"
+  color-light:
+    value: "{light-plain-content-color}"
+  icon-to-text-spacing:
+    value: "{size-rem.s}"
+  font-weight:
+    value: "{font-weight.bold}"

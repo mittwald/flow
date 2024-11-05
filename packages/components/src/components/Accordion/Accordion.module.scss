@@ -8,6 +8,7 @@
 
   .header {
     display: flex;
+    flex-direction: column;
   }
 
   .headerButton {
@@ -22,6 +23,7 @@
     column-gap: var(--accordion--heading-to-chevron-spacing);
     border: none;
     background: none;
+    width: 100%;
 
     @include focus.focus;
 

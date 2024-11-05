@@ -3,6 +3,157 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.327](https://github.com/mittwald/flow/compare/0.1.0-alpha.326...0.1.0-alpha.327) (2024-11-05)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.326](https://github.com/mittwald/flow/compare/0.1.0-alpha.325...0.1.0-alpha.326) (2024-11-05)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.325](https://github.com/mittwald/flow/compare/0.1.0-alpha.324...0.1.0-alpha.325) (2024-11-05)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.324](https://github.com/mittwald/flow/compare/0.1.0-alpha.323...0.1.0-alpha.324) (2024-11-05)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.323](https://github.com/mittwald/flow/compare/0.1.0-alpha.322...0.1.0-alpha.323) (2024-11-05)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.322](https://github.com/mittwald/flow/compare/0.1.0-alpha.321...0.1.0-alpha.322) (2024-11-04)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.321](https://github.com/mittwald/flow/compare/0.1.0-alpha.320...0.1.0-alpha.321) (2024-11-04)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.320](https://github.com/mittwald/flow/compare/0.1.0-alpha.319...0.1.0-alpha.320) (2024-11-04)
+
+### Bug Fixes
+
+- **Tokens:** there should be no references in JSON output
+  ([#936](https://github.com/mittwald/flow/issues/936))
+  ([6c9fa81](https://github.com/mittwald/flow/commit/6c9fa816134ca9dca43321b6b351f47a33e5f677))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.319](https://github.com/mittwald/flow/compare/0.1.0-alpha.318...0.1.0-alpha.319) (2024-11-04)
+
+### Features
+
+- **FileCard:** add file card component
+  ([7cd379a](https://github.com/mittwald/flow/commit/7cd379a30dc93f28d743ec6e8f9c8f2fbc7731bd))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.318](https://github.com/mittwald/flow/compare/0.1.0-alpha.317...0.1.0-alpha.318) (2024-11-04)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.317](https://github.com/mittwald/flow/compare/0.1.0-alpha.316...0.1.0-alpha.317) (2024-10-31)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.316](https://github.com/mittwald/flow/compare/0.1.0-alpha.315...0.1.0-alpha.316) (2024-10-31)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.315](https://github.com/mittwald/flow/compare/0.1.0-alpha.314...0.1.0-alpha.315) (2024-10-31)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.314](https://github.com/mittwald/flow/compare/0.1.0-alpha.313...0.1.0-alpha.314) (2024-10-30)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.313](https://github.com/mittwald/flow/compare/0.1.0-alpha.312...0.1.0-alpha.313) (2024-10-30)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.312](https://github.com/mittwald/flow/compare/0.1.0-alpha.311...0.1.0-alpha.312) (2024-10-30)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.311](https://github.com/mittwald/flow/compare/0.1.0-alpha.310...0.1.0-alpha.311) (2024-10-30)
 
 **Note:** Version bump only for package @mittwald/flow-design-tokens

@@ -4,7 +4,7 @@
 .segment {
   flex: 1;
   display: grid;
-  column-gap: var(--segment--text-to-icon-spacing);
+  column-gap: var(--form-control--spacing-x);
   grid-template-areas: "label checkmark";
   grid-template-columns: 1fr auto;
   margin-right: -1px; /* Collapse borders */

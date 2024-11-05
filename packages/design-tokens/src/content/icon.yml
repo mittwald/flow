@@ -1,0 +1,11 @@
+icon:
+  size:
+    s:
+      value: 1rem
+    m:
+      value: 1.5rem
+    l:
+      value: 4rem
+  color:
+    value: "{neutral.color.800}"
+
