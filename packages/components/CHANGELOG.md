@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.323](https://github.com/mittwald/flow/compare/0.1.0-alpha.322...0.1.0-alpha.323) (2024-11-05)
+
+### Bug Fixes
+
+- **FileCard:** fix overflow
+  ([5ce52e7](https://github.com/mittwald/flow/commit/5ce52e7d74b163e7e4ef8f6cdf6816bbc3c1763e))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.322](https://github.com/mittwald/flow/compare/0.1.0-alpha.321...0.1.0-alpha.322) (2024-11-04)
 
 ### Bug Fixes
