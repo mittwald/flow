@@ -43,27 +43,12 @@ HSL Lightness-Wert von mehr als 50.
 
 ## Icon (Externer Link)
 
-Rechts neben dem Link kann ein `IconExternalLink` eingefügt werden, um dem User
-den Hinweis zu geben, dass es sich um einen externen Link handelt, der in einem
-neuen Tab geöffnet wird. Wenn der externe Link keinen neuen Tab öffnet, muss
-dieser ohne Icon dargestellt werden.
+Rechts neben dem Link kann ein `IconExternalLink` eingefügt werden. Dieses soll
+den User darauf hinweisen, dass es sich um einen externen Link handelt, der in
+einem neuen Tab geöffnet wird. Das Icon wird auch automatisch neben dem Link
+angezeigt, wenn auf dem Link `target="_blank"` gesetzt ist.
 
 <LiveCodeEditor example="external" alignCenter editorCollapsed />
-
-**Externer Link mit Icon:** Der Link öffnet sich in einem neuen Tab. Sollte nur
-verwendet werden, wenn der Workflow des Users stark unterbrochen wird oder das
-Verlassen der ursprünglichen Seite negative Konsequenzen hat.
-
-**Externer Link ohne Icon**: Der Link öffnet sich bei einem einfachen Klick im
-selben Tab.
-
-## Icon
-
-Links können mit einem Icon versehen werden, um dem User eine zusätzliche
-Information zu geben. Hierfür kann das Icon `Icon` direkt in die `<Link />`
-Component eingefügt werden.
-
-<LiveCodeEditor example="icon" alignCenter editorCollapsed />
 
 ---
 

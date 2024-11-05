@@ -28,7 +28,7 @@ Verwende einen Link, um...
 - den User zu einer neuen Seite zu navigieren.
 - auf einen Ankerpunkt auf der Seite für eine Information zu scrollen.
 - einen Download zu starten.
-- eine externe Seite im selben oder im neuen Tab zu öffnen.
+- eine externe Seite zu öffnen.
 
 ## Link vs. Button
 
@@ -92,29 +92,13 @@ Platzierung sorgfältig überlegt werden. Beispiele für geeignete Stellen sind:
 
 # Inhalt
 
-## Interner Link
+## Interne und externe Links
 
 Interne Links öffnen sich immer im dem Tab, in dem der User sich gerade
 befindet. Der User kann jedoch selbst entscheiden, ob er den Link lieber in
-einem neuen Tab öffnen möchte.
-
-## Externer Link
-
-Externe Links führen den User zu einer Seite außerhalb der Domain. Standardmäßig
-werden sie wie andere Links im **selben Tab** geöffnet, sodass der User selbst
-entscheiden kann, ob er den Link in einem neuen Tab öffnen möchte. In
-Ausnahmefällen sollten externe Links jedoch in einem neuen Tab geöffnet. Öffnet
-sich der Link automatisch in einem neuen Tab, muss ein entsprechendes Icon neben
-dem Link den User darauf hinweisen. In folgenden Situationen ist es sinnvoll,
-den Link in einem **neuen Tab** öffnen zu lassen:
-
-- **Schwierge Rückkehr**: Wenn die Navigation zurück zur ursprünglichen Seite
-  erschwert ist, z. B. durch komplexe Navigationsstrukturen, dynamische Inhalte
-  oder den Verlust von Daten/Prozessen beim Zurücknavigieren
-- **Modals oder OffCanvas**: Wenn der Link in einem Modal oder Off-Canvas-Menü
-  platziert ist, um den Kontext der aktuellen Seite beizubehalten.
-- **Workflow-Unterbrechung**: Wenn das Öffnen im selben Tab den Arbeitsfluss des
-  Users signifikant stören oder unterbrechen würde.
+einem neuen Tab öffnen möchte. Externe Links öffnen sich immer in einem neuen
+Tab. Um das Verhalten dem User zu verdeutlichen, muss neben dem Text das Icon
+`IconExternalLink` angezeigt werden.
 
 ---
 
