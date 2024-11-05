@@ -13,11 +13,11 @@
     "build": "run all build",
     "build:deps:watch": "nx watch --projects=$@ --includeDependentProjects -- nx run-many --targets=build --projects=$(tsx dev/nxDependencies.ts $@)",
     "components": "nx run @mittwald/flow-react-components:\"$@\"",
+    "mstudio-components": "nx run @mittwald/flow-mstudio-react-components:\"$@\"",
     "dev:init-githooks": "yarn dlx simple-git-hooks",
     "docs": "nx run @mittwald/flow-documentation:\"$@\"",
     "format": "prettier --write '**/*.{ts,tsx,yaml,yml,json,md,mdx,js,cjs,mjs,css}'",
     "lint": "eslint .",
-    "mstudio-components": "nx run @mittwald/flow-mstudio-react-components:\"$@\"",
     "test": "run all test"
   },
   "simple-git-hooks": {
