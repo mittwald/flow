@@ -9,6 +9,7 @@
   gap: var(--file-card--spacing);
   align-items: center;
   max-width: 100%;
+  overflow: hidden;
 
   .text {
     display: flex;
