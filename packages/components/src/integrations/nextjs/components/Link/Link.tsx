@@ -3,7 +3,7 @@ import React, { forwardRef } from "react";
 import NextLink from "next/link";
 
 interface Props extends Omit<ComponentProps<"a">, "ref"> {
-  isDisabled: boolean;
+  isDisabled?: boolean;
 }
 
 export const Link = forwardRef<HTMLAnchorElement, Props>(
