@@ -22,7 +22,6 @@ export const PropertyRow: React.FC<PropertyTableGroupProps> = ({
       <TableCell>
         <InlineCode>{property.name}</InlineCode>
         {property.required && <Badge>Required</Badge>}
-        {property.deprecated && <Badge color="orange">Deprecated</Badge>}
       </TableCell>
       <TableCell>{property.type}</TableCell>
       <TableCell>{property.default || "-"}</TableCell>
