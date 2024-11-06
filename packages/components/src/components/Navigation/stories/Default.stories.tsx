@@ -119,3 +119,30 @@ export const WithCollapsableGroups: Story = {
     </Navigation>
   ),
 };
+export const MixedGroups: Story = {
+  render: (props) => (
+    <Navigation aria-label="Main navigation" {...props}>
+      <NavigationGroup collapsable>
+        <Label>General</Label>
+        <Link href="#">Dashboard</Link>
+        <Link href="#" aria-current="page">
+          Performance
+        </Link>
+      </NavigationGroup>
+
+      <NavigationGroup>
+        <Label>General</Label>
+        <Link href="#">Apps</Link>
+        <Link href="#">Databases</Link>
+        <Link href="#">Domains</Link>
+      </NavigationGroup>
+
+      <NavigationGroup collapsable>
+        <Label>Components</Label>
+        <Link href="#">Testsite</Link>
+        <Link href="#">Testsite</Link>
+        <Link href="#">Testsite</Link>
+      </NavigationGroup>
+    </Navigation>
+  ),
+};
