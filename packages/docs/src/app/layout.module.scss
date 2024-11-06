@@ -121,9 +121,6 @@
   padding: 0;
 
   .homeImage {
-    margin-left: -1px;
-    width: calc(100% + 2px);
-    max-width: calc(100% + 2px);
     border-bottom-color: var(--separator--color);
     border-bottom-width: var(--separator--height);
     border-bottom-style: var(--border-style--default);
