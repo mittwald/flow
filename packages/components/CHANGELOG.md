@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.329](https://github.com/mittwald/flow/compare/0.1.0-alpha.328...0.1.0-alpha.329) (2024-11-06)
+
+### Bug Fixes
+
+- **CodeBlock:** Placement of the Copy Button
+  ([#947](https://github.com/mittwald/flow/issues/947))
+  ([fa9e494](https://github.com/mittwald/flow/commit/fa9e49416a767f8de402b0c9f9c81b1a2ef4dfc2))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.328](https://github.com/mittwald/flow/compare/0.1.0-alpha.327...0.1.0-alpha.328) (2024-11-05)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
