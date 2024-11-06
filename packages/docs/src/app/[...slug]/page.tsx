@@ -1,10 +1,10 @@
-import MainContent from "@/app/_components/layout/MainContent/MainContent";
+import TopContent from "@/app/_components/layout/TopContent/TopContent";
 import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
 import type { StaticParams } from "@/lib/mdx/MdxFile";
 import { LayoutCard } from "@mittwald/flow-react-components/LayoutCard";
 import { Tabs } from "@mittwald/flow-react-components/Tabs";
 import React from "react";
-import TabContent from "@/app/_components/layout/TabContent/TabContent";
+import MainContent from "@/app/_components/layout/MainContent/MainContent";
 import { Link } from "@mittwald/flow-react-components/Link";
 import { IconExternalLink } from "@mittwald/flow-react-components/Icons";
 
@@ -51,27 +51,32 @@ export default async function Page(props: Props) {
   );
 
   const component = indexMdxFile?.mdxSource.frontmatter.component;
+  const showTabs = !!developMdxFile || !!guidelinesMdxFile;
 
   return (
     <>
-      {indexMdxFile && <MainContent mdxFile={indexMdxFile} />}
+      {indexMdxFile && <TopContent mdxFile={indexMdxFile} />}
 
-      {(overviewMdxFile || developMdxFile || guidelinesMdxFile) && (
+      {!showTabs && overviewMdxFile && (
+        <LayoutCard>
+          <MainContent mdxFile={overviewMdxFile} />
+        </LayoutCard>
+      )}
+      {overviewMdxFile && showTabs && (
         <LayoutCard>
           <Tabs>
             {overviewMdxFile && (
-              <TabContent mdxFile={overviewMdxFile} tabTitle="Overview" />
+              <MainContent mdxFile={overviewMdxFile} tabTitle="Overview" />
             )}
             {developMdxFile && (
-              <TabContent mdxFile={developMdxFile} tabTitle="Develop" />
+              <MainContent mdxFile={developMdxFile} tabTitle="Develop" />
             )}
             {guidelinesMdxFile && (
-              <TabContent mdxFile={guidelinesMdxFile} tabTitle="Guidelines" />
+              <MainContent mdxFile={guidelinesMdxFile} tabTitle="Guidelines" />
             )}
           </Tabs>
         </LayoutCard>
       )}
-
       {component && (
         <Link
           href={`https://github.com/mittwald/flow/issues/new?title=Feedback%20on%20${component}%20component`}
