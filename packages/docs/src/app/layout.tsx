@@ -9,12 +9,12 @@ import clsx from "clsx";
 import styles from "./layout.module.scss";
 import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
 import { LinkProvider } from "@mittwald/flow-react-components/nextjs";
-import { IconMittwald } from "@mittwald/flow-react-components/Icons";
+import logoMittwald from "../../assets/m-flow_logo.svg";
 import MainNavigation from "@/app/_components/layout/MainNavigation";
 import MobileNavigation from "@/app/_components/layout/MobileNavigation/MobileNavigation";
 import { NotificationProvider } from "@mittwald/flow-react-components/NotificationProvider";
 import { Link } from "@mittwald/flow-react-components/Link";
-import { Text } from "@mittwald/flow-react-components/Text";
+import { Image } from "@mittwald/flow-react-components/Image";
 
 export const metadata: Metadata = {
   title: "Flow – mittwald Design System",
@@ -31,8 +31,7 @@ const RootLayout: FC<PropsWithChildren> = async (props) => {
           <NotificationProvider>
             <header className={styles.header}>
               <Link href="/" className={styles.homeLink}>
-                <IconMittwald size="l" className={styles.logo} />
-                <Text className={styles.heading}>Flow</Text>
+                <Image src={logoMittwald.src} alt="mittwald Flow Logo" />
               </Link>
 
               <HeaderNavigation
