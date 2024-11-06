@@ -22,7 +22,6 @@ export interface LiveCodeEditorProps {
   zoom?: number;
   bgColor?: "default" | "dark" | "light";
   mobile?: boolean;
-  alignCenter?: boolean;
 }
 
 // Waiting for https://github.com/FormidableLabs/react-live/issues/339
@@ -41,7 +40,6 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
     zoom = 1,
     bgColor,
     mobile,
-    alignCenter,
   } = props;
 
   const [editorCollapsed, setEditorCollapsed] = useState(
@@ -82,10 +80,7 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
           className,
         )}
       >
-        <LivePreview
-          className={clsx(styles.preview, alignCenter && styles.center)}
-          style={{ zoom }}
-        />
+        <LivePreview className={clsx(styles.preview)} style={{ zoom }} />
 
         {!editorDisabled && (
           <div className={styles.editorContainer}>

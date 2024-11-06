@@ -19,12 +19,10 @@ export interface DoAndDontTileProps extends PropsWithChildren {
   bgColor?: "default" | "dark" | "light";
   heading?: string;
   mobile?: boolean;
-  alignCenter?: boolean;
 }
 
 export const ExampleTile: FC<DoAndDontTileProps> = (props) => {
-  const { code, text, type, zoom, bgColor, heading, mobile, alignCenter } =
-    props;
+  const { code, text, type, zoom, bgColor, heading, mobile } = props;
 
   const headingIcon =
     type === "do" ? (
@@ -55,7 +53,6 @@ export const ExampleTile: FC<DoAndDontTileProps> = (props) => {
           zoom={zoom}
           bgColor={bgColor}
           mobile={mobile}
-          alignCenter={alignCenter}
         />
       )}
       {text && (
