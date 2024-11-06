@@ -3,17 +3,22 @@
   align-items: flex-start;
   justify-content: space-between;
   border-radius: var(--code--corner-radius);
-  padding: var(--code--padding);
   column-gap: var(--code--spacing);
   font-size: var(--code--font-size);
   font-family: FiraCode, "monospace";
-  overflow-x: auto;
   max-width: 100%;
 
   > pre {
+    overflow-x: auto;
+    padding: var(--code--padding);
     > code {
       text-shadow: none;
     }
+  }
+
+  .copyButton {
+    margin-top: var(--code--padding);
+    margin-right: var(--code--padding);
   }
 
   @mixin variant($color) {
