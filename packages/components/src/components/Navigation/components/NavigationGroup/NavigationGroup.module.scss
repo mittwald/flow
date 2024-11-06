@@ -1,4 +1,7 @@
 .navigationGroup {
+  &:not(.collapsable) ul {
+    padding: var(--accordion--content-padding);
+  }
   &:not(:last-child) {
     margin-bottom: var(--menu--group-to-group-spacing);
   }
@@ -6,5 +9,6 @@
   .label {
     display: block;
     margin-block: var(--menu--label-to-group-spacing);
+    padding-inline-start: var(--accordion--header-padding-x);
   }
 }
