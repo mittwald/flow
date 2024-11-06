@@ -66,13 +66,25 @@ export default async function Page(props: Props) {
         <LayoutCard>
           <Tabs>
             {overviewMdxFile && (
-              <MainContent mdxFile={overviewMdxFile} tabTitle="Overview" />
+              <MainContent
+                showTabs
+                mdxFile={overviewMdxFile}
+                tabTitle="Overview"
+              />
             )}
             {developMdxFile && (
-              <MainContent mdxFile={developMdxFile} tabTitle="Develop" />
+              <MainContent
+                showTabs
+                mdxFile={developMdxFile}
+                tabTitle="Develop"
+              />
             )}
             {guidelinesMdxFile && (
-              <MainContent mdxFile={guidelinesMdxFile} tabTitle="Guidelines" />
+              <MainContent
+                showTabs
+                mdxFile={guidelinesMdxFile}
+                tabTitle="Guidelines"
+              />
             )}
           </Tabs>
         </LayoutCard>
