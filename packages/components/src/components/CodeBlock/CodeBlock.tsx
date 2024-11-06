@@ -35,6 +35,7 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
       </SyntaxHighlighter>
       {copyable && (
         <CopyButton
+          className={styles.copyButton}
           size="s"
           color={color === "default" ? "dark" : color}
           text={code}
