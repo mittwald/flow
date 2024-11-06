@@ -2,8 +2,7 @@
 
 Mit einem Button können Aktionen ausgeführt werden. Entweder wird die Aktion
 direkt im Content-Bereich durchgeführt oder innerhalb eines
-[Modal](/03-components/overlays/modal) oder
-[Off-Canvas](/03-components/overlays/off-canvas), ohne dass die Seite verlassen
+[Modal](/03-components/overlays/modal), ohne dass die Seite verlassen
 werden muss. Ein Button hat eine hohe Sichtbarkeit und sollte daher nicht zu
 übermäßig eingesetzt werden.
 
@@ -11,22 +10,17 @@ werden muss. Ein Button hat eine hohe Sichtbarkeit und sollte daher nicht zu
 
 Achte bei der Verwendung eines Buttons darauf, dass...
 
-- der Text oder das Icon die Aktion klar und verständlich vermittelt.
-- der Button für den Nutzer leicht zu finden und zu bedienen ist.
+- er für den User leicht zu finden und zu bedienen ist.
 - die richtige Art von Button für die auszuführende Aktion gewählt wurde.
-- die vorgegebenen Sizes verwendet werden und die Größe nicht verändert wird, um
-  ein komfortables Anklicken zu gewährleisten.
-- der Button nicht zu übermäßig verwendet wird, damit die gute Sichtbarkeit des
-  Buttons nicht verloren geht.
+- er sparsam und gezielt verwendet wird, um eine gute Sichtbarkeit zu erhalten.
+- der Text oder das Icon die Aktion klar und verständlich vermitteln.
 
 ## Verwendung
 
 Verwende einen Button, um...
 
-- Aktionen – wie z. B. Speichern und Zurücksetzen – innerhalb eines Formulars
-  anzuzeigen.
-- ein [Modal](/03-components/overlays/modal) oder ein
-  [Off-Canvas](/03-components/overlays/off-canvas) zu öffnen.
+- Aktionen wie Speichern und Zurücksetzen in Formularen anzuzeigen.
+- ein [Modal](/03-components/overlays/modal) zu öffnen.
 - einen Erstellungsprozess zu starten oder auszuführen.
 - Aktionen in einem Modal anzubieten.
 
@@ -38,10 +32,9 @@ Anhaltspunkte.
 
 <DoAndDont>
   <Plain heading="Verwende Buttons, um z. B. ...">
-    - eine Aktion auszuführen ohne die Seite zu verlassen.
+    - eine Aktion auszuführen oder ein Event zu starten, ohne die Seite zu verlassen.
     - Formulare zu speichern oder zurückzusetzen.
-    - in einem [Modal](/03-components/overlays/modal) oder [Off-Canvas](/03-components/overlays/off-canvas) zu
-    navigieren und Aktionen auszuwählen.
+    - in einem [Modal](/03-components/overlays/modal) Aktionen auszuwählen.
 
   </Plain>
 
@@ -62,69 +55,68 @@ Anhaltspunkte.
 
 Bei der Positionierung des Buttons sind folgende Punkte zu beachten:
 
-- In den meisten Fällen sollte ein Button nicht zu versteckt sein und vom Nutzer
-  leicht gefunden werden.
-- Wenn es für den Nutzer notwendig ist, einen Button als Button zu
-  identifizieren, sollte ein Kontrastverhältnis zum Hintergrund von mindestens
-  3:1 AA oder besser 4:1 AAA angestrebt werden. Bei farbigen Hintergründen
-  sollten gegebenenfalls die Colors Light oder Dark in Betracht gezogen werden.
-- Verwende niemals zu viele Buttons nebeneinander. Als Richtwert sollten nicht
-  mehr als zwei oder drei Buttons nebeneinander verwendet werden.
-- Viele Buttons haben in komplexeren Komponenten bereits eine feste Position.
-  Zum Beispiel werden Buttons automatisch in der
-  [ActionGroup](/03-components/actions/action-group) positioniert.
+- Ein Button sollte gut sichtbar platziert werden, damit er vom User leicht 
+  gefunden wird.
+- Ein Button kann im Action-Bereich einer [Section](/03-components/structure/section) 
+  platziert werden, wenn er sich unmittelbar auf den Inhalt der Section bezieht.
+- Gruppiere Buttons derselben Variant und Color, um eine klare Struktur zu schaffen. 
+  Nutze dazu eine [ActionGroup](/03-components/actions/action-group).
+- Ein Button sollte immer ausreichend Kontrast zum Hintergrund (min. 3:1) besitzen. 
+  Besonders auf farbigen Hintergründen empfiehlt es sich, dazu die Colors Light oder 
+  Dark zu verwenden.
+- Setze Buttons sparsam ein. Als Faustregel gilt, nicht mehr als zwei bis drei Buttons 
+  nebeneinander zu platzieren.
 
 <MStudio
   example="position-info"
   bgColor="dark"
   heading="Oberhalb des Content-Bereichs"
 >
-  Im mStudio werden Anlege-Button häufig rechts über dem Content-Bereich
-  platziert, damit dieser die Aufmerksamkeit des Nutzers auf sich zieht.
+  Im mStudio werden Anlege-Buttons häufig rechts über dem Content-Bereich
+  platziert, damit dieser die Aufmerksamkeit des Users auf sich zieht.
 </MStudio>
 
 ## Hierarchie
 
-Die verschiedenen Arten von Buttons haben eine Hierarchie untereinander. Das
-heißt, wenn mehrere Buttons nebeneinander verwendet werden, muss darauf geachtet
-werden, welche Buttonart dafür geeignet ist.
+Die verschiedenen Button-Variants folgen einer klaren Hierarchie:
 
-- Für **Hauptaktionen** verwende einen Button als Solid-Variant in den Colors
-  Primary-, Accent- oder Danger. Um Verwirrung zu vermeiden, achte darauf, nur
-  eine Hauptaktion darzustellen. Zum Beispiel können zwei Danger-Buttons mit
-  einer Löschfunktion vom Nutzer nicht direkt unterschieden werden.
-- Wenn eine **Nebenaktion** fast gleichwertig ist wie die Hauptaktion, dann
-  verwende einen Solid-Variant-Button in der Secondary-Color. Ist die
-  Nebenaktion nicht so wichtig und nebensächlicher, dann wird die
-  Secondary-Color mit der Soft-Variant verwendet. Besonders gut ist diese
-  Darstellung für “Schließen”- oder “Zurück”-Buttons geeignet.
-- Wenn Aktionen nicht sofort vom Nutzer bemerkt werden sollen, dann verwende
-  einen Button in der Plain-Variant.
-- Versuche, Buttons desselben Variant und derselben Color zu gruppieren.
+- Verwende die Solid-Variant in den Colors Primary, Accent oder Danger für 
+  **die wichtigsten Aktionen**. In der Regel sollte es pro Ansicht nur eine 
+  Hauptaktion geben.
+- Für **fast gleichwertige Nebenaktionen** eignet sich die Solid-Variante in 
+  der Farbe Secondary.
+- Die Soft-Variante passt gut für **weniger wichtige Nebenaktionen**, wie z. B. 
+  "Schließen" oder "Zurück".
+- Die Outline-Variante kann ebenfalls für Nebenaktionen genutzt werden, wird 
+  jedoch selten verwendet.
+- Für **unauffälligere Aktionen**, die weniger Aufmerksamkeit erfordern, 
+  eignet sich die Plain-Variante.
+- Versuche, Buttons derselben Variant bzw. Color zu gruppieren.
 
 <DoAndDont>
+  <Do example="hierarchy-solid-do">
+    Verwende zwei Solid-Button nebeneinander, wenn beide wichtige Aktionen
+    enthalten.
+  </Do>
+  <Do example="hierarchy-soft-do">
+    Verwende die Soft-Variant, um Nebenaktionen weniger wichtig erscheinen zu
+    lassen.
+  </Do>
+</DoAndDont>
+<DoAndDont>
   <Do example="hierarchy-order-do">
-    Versuche, ähnliche Buttons zu gruppieren. Zum Beispiel, dass Buttons in der
+    Versuche, ähnliche Buttons zu gruppieren. Zum Beispiel so, dass Buttons in der
     Solid-Variant nebeneinander stehen.
   </Do>
   <Dont example="hierarchy-order-dont">
     Ignoriere nicht die Hierarchie der Buttons, die sie zueinander haben.
   </Dont>
 </DoAndDont>
-<DoAndDont>
-  <Do example="hierarchy-soft-do">
-    Verwende die Soft-Variant, um Nebenaktionen weniger wichtig erscheinen zu
-    lassen.
-  </Do>
-  <Do example="hierarchy-solid-do">
-    Verwende zwei Solid-Button nebeneinander, wenn beide wichtige Aktionen
-    enthalten.
-  </Do>
-</DoAndDont>
+
 
 ## Sizes
 
-Buttons sind in der Sizes Medium und Small erhältlich. Die Höhe wird vom Inhalt
+Buttons sind in den Sizes Medium und Small erhältlich. Die Höhe wird vom Inhalt
 des Buttons bestimmt.
 
 - **Medium** ist die Standardgröße und wird in den meisten Fällen verwendet.
@@ -137,13 +129,12 @@ des Buttons bestimmt.
 
 ## Feedback
 
-Zeige dem Nutzer immer an, dass der Klick auf den Button eine Aktion auslöst:
+Zeige dem User immer an, dass der Klick auf den Button eine Aktion auslöst:
 
-- [Modal](/03-components/overlays/modal) oder
-  [Off-Canvas](/03-components/overlays/off-canvas) öffnet sich.
+- Ein [Modal](/03-components/overlays/modal) öffnet sich.
 - Ein Spinner, Häkchen oder ein Kreuz wird angezeigt, um zu signalisieren, dass
   ein Prozess läuft, erfolgreich war oder fehlgeschlagen ist. Für die Steuerung
-  wird die [Action-Komponente](/03-components/actions/action) verwendet.
+  wird die [Action-Component](/03-components/actions/action) verwendet.
 - Mit den unterschiedlichen States eines Buttons, die Interaktivität vermitteln.
 
 ---
@@ -154,18 +145,16 @@ Zeige dem Nutzer immer an, dass der Klick auf den Button eine Aktion auslöst:
 
 Achte beim Verfassen des Textes besonders auf:
 
-- Verwende nie mehr als 2 Wörter im Button.
-- Die Aktion, die sich hinter dem Button verbirgt, muss aus dem Text klar
-  hervorgehen.
-- Der Button sollte nie mehrzeilig werden. Buttontexte sollten immer so gesetzt
-  werden, dass sie auch in kleinen Größen funktionieren. Wenn der Text zu lang
-  wird, wird er automatisch auspunktiert.
-- Das erste Wort sollte immer mit einem Großbuchstaben beginnen. Wörter sollten
-  nicht ausschließlich in Großbuchstaben geschrieben werden.
+- Der Button sollte maximal zwei Wörter als Beschreibung beinhalten.
+- Die Aktion, die sich hinter dem Button verbirgt, sollte klar aus dem Text hervorgehen.
+- Der Text im Button sollte nie mehrzeilig sein und auch auf kleinen Bildschirmgrößen 
+  funktionieren. Zu langer Text wird automatisch auspunktiert.
+- Das erste Wort im Button beginnt immer mit einem Großbuchstaben. Vermeide es, den 
+  Button ausschließlich in Großbuchstaben zu beschreiben.
 
 <DoAndDont>
   <Do example="text-length-do">
-    Verwende maximal zwei Wörter, um die Aktion exakt zu beschreiben.
+    Beschreibe die Aktion kurz und prägnant.
   </Do>
   <Dont example="text-length-dont">
     Werde nicht mehrzeilig und verwende nicht zu viele Wörter.
@@ -177,16 +166,13 @@ Achte beim Verfassen des Textes besonders auf:
     Beschreibe exakt und kurz, welche Aktion sich hinter den Buttons verbergen.
   </Do>
   <Dont example="text-clarity-dont" zoom={0.7} bgColor="dark">
-    Verwirre die Nutzer nicht mit mehrdeutigen Begriffen.
+    Verwirre den User nicht mit mehrdeutigen Begriffen.
   </Dont>
 </DoAndDont>
 
 ## Icon
 
-Achte bei der Auswahl des Icons besonders auf...
-
-- ein universell verständliches Icon.
-- dass die [Icon-Komponente](/03-components/content/icon) verwendet wird.
+Achte bei der Auswahl des Icon besonders darauf, dass die [Icon-Component](/03-components/content/icon) verwendet und ein universell verständliches Icon gewählt wird.
 
 <DoAndDont>
   <Do example="icon-clarity-do">
@@ -200,11 +186,14 @@ Achte bei der Auswahl des Icons besonders auf...
 
 ### Text mit Icon
 
-Beachte besonders bei einem Button mit Text und einem Icon:
+Bei einer Kombination von Text und Icon muss das Icon dem User einen Mehrwert bieten. 
+Es darf keinem rein dekorativen Zweck dienen und sollte dem User stattdessen helfen, 
+die Funktion des Buttons zu verstehen.
 
-- Das Icon muss eindeutig zeigen, dass sich hinter dem Button eine besondere
-  Funktion verbirgt. Dies kann z. B. bei einer Dropdown-Funktion durch ein
-  Chevron-Icon erreicht werden.
+- Das Icon darf keinen rein dekorativen Zweck erfüllen.
+- Das Icon sollte dem User verdeutlichen, welche Funktion oder Aktion sich hinter 
+  dem Button verbirgt. Dies kann z. B. der Fall sein, wenn ein Chevron-Icon den User 
+  darauf hinweist, dass der Button ein Dropdown öffnet. 
 
 <Do example="icon-context-menu-do">
   Das Chevron-Icon zeigt an, dass ein Dropdown sich nach einem Klick öffnet.
@@ -216,10 +205,9 @@ Beachte besonders bei einem Button mit Text und einem Icon:
 
 ## Responsive Layout
 
-Bei schmaleren Bildschirmgrößen behält der Button die vorgegebene Breite. Eine
-Ausnahme bilden die Buttons in der
-[Modal](/03-components/overlays/modal)-Navigation. Wenn die Bildschirmbreite
-kleiner als 400 px ist, nehmen diese die volle Breite des Contents an.
+Buttons behalten auch auf schmaleren Bildschirmen ihre Breite, es sei denn, sie befinden 
+sich in der [Modal](/03-components/overlays/modal)-Navigation. Dort füllen sie die volle 
+Breite des Contents an, wenn die Bildschirmbreite kleiner als 400 px ist.
 
 <DoAndDont>
   <Do
@@ -256,8 +244,12 @@ Achte beim Button darauf, dass...
 
 ## Icon
 
-Das Icon erhält automatisch das Attribut **aria-hidden=true**. Verwende das
-Attribut **aria-label** bei dem Button, um die zugehörige Aktion zu beschreiben.
+Bei einem reinen Icon-Button müssen folgende Dinge beachtet werden:
+
+- Das Icon erhält in diesem Fall automatisch das Attribut **aria-hidden=true**.
+- Verwende ein **aria-label**, um die Aktion des Buttons zu beschreiben.
+- Achte außerdem darauf, einen Tooltip anzuzeigen, der die Aktion beschreibt.
+
 
 ### Color Light und Dark
 
@@ -265,6 +257,7 @@ Achte bei den Colors Light und Dark auf einen genügenden Kontrast zum
 Hintergrund. Es wird empfohlen, eine Color in Light zu verwenden, wenn der HSL
 Lightness-Wert des Hintergrunds weniger als 50 ist. Die Color Dark wird für
 Hintergründe empfohlen, die einen HSL Lightness-Wert von größer als 50 haben.
+
 Für beide Colors gilt: Je weiter der HSL Lightness-Wert von 50 entfernt ist,
 desto besser ist der Kontrast.
 
