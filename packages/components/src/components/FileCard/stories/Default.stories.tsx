@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { FileCard } from "@/components/FileCard";
+import { dummyText } from "@/lib/dev/dummyText";
 
 const meta: Meta<typeof FileCard> = {
   title: "Upload/FileCard",
@@ -38,5 +39,11 @@ export const WithLinkAndOnDelete: Story = {
     onDelete: () => {
       console.log("deleted");
     },
+  },
+};
+
+export const WithImage: Story = {
+  args: {
+    imageSrc: dummyText.imageSrc,
   },
 };

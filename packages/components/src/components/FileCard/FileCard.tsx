@@ -1,8 +1,6 @@
 import React from "react";
-import { Avatar } from "@/components/Avatar";
+import { Avatar } from "./components/Avatar";
 import { Text } from "@/components/Text";
-import { IconFile } from "@/components/Icon/components/icons";
-import IconImage from "@/components/Icon/components/icons/IconImage";
 import type {
   PropsWithClassName,
   PropsWithElementType,
@@ -23,6 +21,7 @@ export interface FileCardProps
   type?: string;
   onDelete?: () => void;
   sizeInBytes?: number;
+  imageSrc?: string;
 }
 
 export const FileCard = flowComponent("FileCard", (props) => {
@@ -37,17 +36,12 @@ export const FileCard = flowComponent("FileCard", (props) => {
     href,
     target,
     download,
+    imageSrc,
   } = props;
 
   const rootClassName = clsx(styles.fileCard, className);
 
   const Element = elementType;
-
-  const avatar = (
-    <Avatar color="blue">
-      {type?.includes("image") ? <IconImage /> : <IconFile />}
-    </Avatar>
-  );
 
   return (
     <Element className={rootClassName}>
@@ -60,7 +54,7 @@ export const FileCard = flowComponent("FileCard", (props) => {
           target={target}
           download={download}
         >
-          {avatar}
+          <Avatar type={type} imageSrc={imageSrc} />
           <span className={styles.text}>
             <Text className={styles.title}>
               <b>{name}</b>
