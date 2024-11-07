@@ -23,7 +23,7 @@ export const Avatar: FC<Props> = (props) => {
 
   return (
     <AvatarComponent color="blue">
-      {type?.includes("image") ? <IconImage /> : <IconFile />}
+      {type?.startsWith("image") ? <IconImage /> : <IconFile />}
     </AvatarComponent>
   );
 };
