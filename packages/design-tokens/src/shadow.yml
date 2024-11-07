@@ -1,0 +1,5 @@
+shadow:
+  content:
+    value: "rgba(0, 0, 0, 0.1) 0 {size-px.xs} {size-px.s}"
+  overlay:
+    value: "rgba(0, 0, 0, 0.14) 0 {size-px.m} {size-px.l}"

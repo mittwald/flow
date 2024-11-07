@@ -1,45 +1,60 @@
-# Beispiel
+# Playground
+
+Verwende `<Link />`, um einen Link darzustellen.
 
 <LiveCodeEditor />
 
 ---
 
-# Mit Icon
+## Inline
 
-<LiveCodeEditor example="icon" editorCollapsed />
-
----
-
-# Inline
-
-Benutze das `inline` Property wenn du den Link innerhalb eines Textblocks
-benutzen möchtest.
-
-<LiveCodeEditor example="inline" editorCollapsed />
-
-Links innerhalb der `<Text />` Komponente werden automatisch als Inline Link
+Links innerhalb des `<Text />` -Tags werden automatisch als Inline Link
 gerendert.
 
 <LiveCodeEditor example="inlineText" editorCollapsed />
 
 ---
 
-# Externer Link
+## Color
 
-Wird auf einem Link `target="_blank"` gesetzt, erhält dieser automatisch ein
-`ExternalLinkIcon` um zu verdeutlichen, dass sich der Link in einem neuen Tab
-öffnet.
+Der Link kann in den drei Colors **Primary**, **Light** und **Dark** dargestellt
+werden. Light und Dark eignen sich besonders gut für Links auf
+farbigen/dekorativen Hintergründen.
+
+<LiveCodeEditor example="primary" editorCollapsed />
+
+<LiveCodeEditor example="light" bgColor="dark" editorCollapsed />
+
+<LiveCodeEditor example="dark" bgColor="light" editorCollapsed />
+
+**Primary**: Im Standardfall wird die Color Primary verwendet, da das leuchtende
+Blau als Hinweis (Signifier) darauf dient, dass es sich um einen anklickbaren
+Link handelt.
+
+**Light**: Verwende die Light-Color bei dunklen Hintergründen mit einem HSL
+Lightness-Wert von weniger als 50.
+
+**Dark**: Verwende die Dark-Color bei hellen, farbigen Hintergründen mit einem
+HSL Lightness-Wert von mehr als 50.
+
+---
+
+# Kombiniere mit ...
+
+## Icon (Externer Link)
+
+Rechts neben dem Link kann ein `IconExternalLink` eingefügt werden. Dieses soll
+den User darauf hinweisen, dass es sich um einen externen Link handelt, der in
+einem neuen Tab geöffnet wird. Das Icon wird auch automatisch neben dem Link
+angezeigt, wenn auf dem Link `target="_blank"` gesetzt ist.
 
 <LiveCodeEditor example="external" editorCollapsed />
 
 ---
 
-# Color Light und Dark
+## States
 
-## Dark
+Ein Link hat vier verschiedene States: **Default**, **Hover**, **Pressed** und
+**Disabled**.
 
-<LiveCodeEditor example="dark" bgColor="light" editorCollapsed />
-
-## Light
-
-<LiveCodeEditor example="light" bgColor="dark" editorCollapsed />
+<LiveCodeEditor example="disabled" editorCollapsed />
