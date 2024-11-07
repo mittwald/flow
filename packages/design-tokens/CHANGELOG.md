@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.336](https://github.com/mittwald/flow/compare/0.1.0-alpha.335...0.1.0-alpha.336) (2024-11-07)
+
+### Features
+
+- **FileCard:** Add Link and Image to FileCard
+  ([#957](https://github.com/mittwald/flow/issues/957))
+  ([0543759](https://github.com/mittwald/flow/commit/05437591d71134e87694306c30571aab5b04299f))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.335](https://github.com/mittwald/flow/compare/0.1.0-alpha.334...0.1.0-alpha.335) (2024-11-06)
 
 **Note:** Version bump only for package @mittwald/flow-design-tokens
