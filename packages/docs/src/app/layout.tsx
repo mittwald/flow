@@ -15,6 +15,7 @@ import MobileNavigation from "@/app/_components/layout/MobileNavigation/MobileNa
 import { NotificationProvider } from "@mittwald/flow-react-components/NotificationProvider";
 import { Link } from "@mittwald/flow-react-components/Link";
 import { Image } from "@mittwald/flow-react-components/Image";
+import { Footer } from "@/app/_components/layout/Footer/Footer";
 
 export const metadata: Metadata = {
   title: "Flow – mittwald Design System",
@@ -47,6 +48,7 @@ const RootLayout: FC<PropsWithChildren> = async (props) => {
               <MainNavigation docs={docs.map((mdx) => mdx.serialize())} />
               <main className={styles.main}>{props.children}</main>
             </div>
+            <Footer />
           </NotificationProvider>
         </LinkProvider>
       </body>
