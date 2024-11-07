@@ -25,3 +25,18 @@ export const WithOnDelete: Story = {
     },
   },
 };
+
+export const WithLink: Story = {
+  args: {
+    href: "#",
+  },
+};
+
+export const WithLinkAndOnDelete: Story = {
+  args: {
+    href: "#",
+    onDelete: () => {
+      console.log("deleted");
+    },
+  },
+};

@@ -13,5 +13,22 @@ export default meta;
 type Story = StoryObj<typeof FileCard>;
 
 export const LongName: Story = {
-  args: { name: dummyText.long, sizeInBytes: 47500 },
+  args: {
+    name: dummyText.long,
+    sizeInBytes: 47500,
+    onDelete: () => {
+      console.log("deleted");
+    },
+  },
+};
+
+export const LongNameAndLink: Story = {
+  args: {
+    name: dummyText.long,
+    sizeInBytes: 47500,
+    onDelete: () => {
+      console.log("deleted");
+    },
+    href: "#",
+  },
 };
