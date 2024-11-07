@@ -4,7 +4,7 @@
   row-gap: var(--section--content-to-content-spacing);
   container-type: inline-size;
 
-  + .section {
+  + &:not(.hideSeparator) .section {
     margin-block-start: var(--section--section-to-section-spacing);
     border-block-start-width: var(--section--border-width);
     border-block-start-style: var(--section--border-style);
