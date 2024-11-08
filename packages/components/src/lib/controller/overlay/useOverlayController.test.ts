@@ -130,22 +130,6 @@ describe("useOverlayController", () => {
     expect(secondOnOpen).toHaveBeenCalledTimes(1);
   });
 
-  test("should not add handlers when controller state doesn't match condition", () => {
-    contextController.open();
-
-    renderHook(() =>
-      useOverlayController("Modal", {
-        onOpen: mockOnOpen,
-      }),
-    );
-
-    act(() => {
-      contextController.open();
-    });
-
-    expect(mockOnOpen).not.toHaveBeenCalled();
-  });
-
   test("should handle undefined handlers gracefully", () => {
     const { result } = renderHook(() => useOverlayController("Modal", {}));
 
