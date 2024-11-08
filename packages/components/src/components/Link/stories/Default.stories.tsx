@@ -71,4 +71,10 @@ export const Light: Story = {
 
 export const ExternalLink: Story = {
   args: { target: "_blank" },
+  render: (props) => <Link {...props}>mittwald.de</Link>,
+};
+
+export const Download: Story = {
+  args: { target: "_blank", download: true },
+  render: (props) => <Link {...props}>Download file</Link>,
 };
