@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.337](https://github.com/mittwald/flow/compare/0.1.0-alpha.336...0.1.0-alpha.337) (2024-11-08)
+
+### Bug Fixes
+
+- **FileCard:** add background to file card
+  ([710a1d1](https://github.com/mittwald/flow/commit/710a1d17eb5db9bed63236773cb2dc904a816bb2))
+- **Link:** dont show icon on unstyled link
+  ([ce54e53](https://github.com/mittwald/flow/commit/ce54e53d9162d321272e8cb92b130e67facd2450))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.336](https://github.com/mittwald/flow/compare/0.1.0-alpha.335...0.1.0-alpha.336) (2024-11-07)
 
 ### Features
