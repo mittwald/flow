@@ -54,11 +54,13 @@
       }
     }
 
-    .text {
-      --button-width: calc(
-        var(--icon--size--s) + var(--button--padding-s-icon-only) * 2
-      );
-      padding-right: calc(var(--file-card--spacing) + var(--button-width));
+    &:has(.deleteButton) {
+      .text {
+        --button-width: calc(
+          var(--icon--size--s) + var(--button--padding-s-icon-only) * 2
+        );
+        padding-right: calc(var(--file-card--spacing) + var(--button-width));
+      }
     }
 
     .deleteButton {
