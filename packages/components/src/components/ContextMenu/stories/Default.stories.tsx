@@ -8,6 +8,8 @@ import { Button } from "@/components/Button";
 import { Separator } from "@/components/Separator";
 import { Heading } from "@/components/Heading";
 import { Section } from "@/components/Section";
+import { IconServer } from "@/components/Icon/components/icons";
+import { Text } from "@/components/Text";
 
 const meta: Meta<typeof ContextMenu> = {
   title: "Actions/ContextMenu",
@@ -107,6 +109,34 @@ export const WithContextMenuSection: Story = {
           </MenuItem>
           <MenuItem href="https://www.google.de">www.google.de</MenuItem>
           <MenuItem href="https://www.adobe.com">www.adobe.com</MenuItem>
+        </Section>
+      </ContextMenu>
+    </ContextMenuTrigger>
+  ),
+  args: {
+    defaultOpen: true,
+  },
+};
+
+export const WithIcon: Story = {
+  render: (props) => (
+    <ContextMenuTrigger>
+      <Button>Trigger</Button>
+      <ContextMenu selectionMode="navigation" {...props}>
+        <Section>
+          <Heading>Websites</Heading>
+          <MenuItem href="https://www.mittwald.de" id="https://www.mittwald.de">
+            <IconServer />
+            <Text>www.mittwald.de</Text>
+          </MenuItem>
+          <MenuItem href="https://www.google.de">
+            <IconServer />
+            <Text>www.google.de</Text>
+          </MenuItem>
+          <MenuItem isDisabled={true} href="https://www.adobe.com">
+            <IconServer />
+            <Text>www.adobe.com</Text>
+          </MenuItem>
         </Section>
       </ContextMenu>
     </ContextMenuTrigger>

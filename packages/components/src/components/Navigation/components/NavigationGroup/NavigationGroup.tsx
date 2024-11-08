@@ -16,7 +16,11 @@ export interface NavigationGroupProps
 export const NavigationGroup: FC<NavigationGroupProps> = (props) => {
   const { children, className, collapsable, ...rest } = props;
 
-  const rootClassName = clsx(styles.navigationGroup, className);
+  const rootClassName = clsx(
+    styles.navigationGroup,
+    collapsable && styles.collapsable,
+    className,
+  );
 
   const generatedId = useId();
 

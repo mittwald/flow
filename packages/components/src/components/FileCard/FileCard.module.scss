@@ -3,13 +3,19 @@
   border-width: var(--file-card--border-width);
   border-style: var(--file-card--border-style);
   border-radius: var(--file-card--corner-radius);
-  padding-inline: var(--file-card--padding-x);
-  padding-block: var(--file-card--padding-y);
-  display: flex;
-  gap: var(--file-card--spacing);
-  align-items: center;
   max-width: 100%;
   overflow: hidden;
+  position: relative;
+  background-color: var(--file-card--background-color--default);
+
+  &:not(:has(.link)),
+  .link {
+    display: flex;
+    align-items: center;
+    padding-inline: var(--file-card--padding-x);
+    padding-block: var(--file-card--padding-y);
+    gap: var(--file-card--spacing);
+  }
 
   .text {
     display: flex;
@@ -27,6 +33,41 @@
 
     .subTitle {
       font-size: var(--file-card--sub-title-font-size);
+    }
+  }
+
+  &:has(.link) {
+    display: grid;
+    grid-template-areas: "content";
+
+    .link {
+      flex-grow: 1;
+      grid-area: content;
+      overflow: hidden;
+
+      &:hover {
+        background-color: var(--file-card--background-color--hover);
+      }
+
+      &[data-pressed] {
+        background-color: var(--file-card--background-color--pressed);
+      }
+    }
+
+    &:has(.deleteButton) {
+      .text {
+        --button-width: calc(
+          var(--icon--size--s) + var(--button--padding-s-icon-only) * 2
+        );
+        padding-right: calc(var(--file-card--spacing) + var(--button-width));
+      }
+    }
+
+    .deleteButton {
+      grid-area: content;
+      margin-right: var(--file-card--padding-x);
+      justify-self: end;
+      align-self: center;
     }
   }
 }

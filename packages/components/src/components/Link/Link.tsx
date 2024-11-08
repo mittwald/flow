@@ -9,9 +9,7 @@ import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import type { PropsWithClassName } from "@/lib/types/props";
 import { linkContext } from "@/components/Link/context";
-import { IconExternalLink } from "@/components/Icon/components/icons";
-import locales from "./locales/*.locale.json";
-import { useLocalizedStringFormatter } from "react-aria";
+import { LinkIcon } from "@/components/Link/components/LinkIcon";
 
 export interface LinkProps
   extends PropsWithChildren<
@@ -64,8 +62,6 @@ export const Link = flowComponent("Link", (props) => {
     "aria-current": ariaCurrent,
   } as Record<string, unknown>;
 
-  const stringFormatter = useLocalizedStringFormatter(locales);
-
   return (
     <ClearPropsContext>
       <Link
@@ -76,11 +72,7 @@ export const Link = flowComponent("Link", (props) => {
       >
         <PropsContextProvider props={propsContext}>
           {children}
-          {props.target === "_blank" && (
-            <IconExternalLink
-              aria-label={stringFormatter.format("link.external")}
-            />
-          )}
+          <LinkIcon {...props} />
         </PropsContextProvider>
       </Link>
     </ClearPropsContext>

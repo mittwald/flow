@@ -1,5 +1,6 @@
 @use "@/styles/mixins/ellipsis";
 @use "@/styles/mixins/focus";
+@use "@/styles/mixins/avatarButton";
 
 .button {
   position: relative;
@@ -23,9 +24,7 @@
   &:where(.outline) {
     border-width: var(--button--border-width);
     border-style: var(--button--border-style);
-    padding-block: calc(
-      var(--button--padding-y) - var(--button--border-width)
-    );
+    padding-block: calc(var(--button--padding-y) - var(--button--border-width));
     padding-inline: calc(
       var(--button--padding-x) - var(--button--border-width)
     );
@@ -54,16 +53,13 @@
     justify-self: center;
   }
 
-  &:where(:has(.avatar)) {
-    padding: 0;
-    border-radius: var(--corner-radius--round);
-  }
-
   &:where(:has(.icon):not(:has(.text))) {
     padding: var(--button--padding-icon-only);
 
     &:where(.outline) {
-      padding: calc(var(--button--padding-icon-only) - var(--button--border-width));
+      padding: calc(
+        var(--button--padding-icon-only) - var(--button--border-width)
+      );
     }
   }
 
@@ -127,7 +123,9 @@
       padding: var(--button--padding-s-icon-only);
 
       &:where(.outline) {
-        padding: calc(var(--button--padding-s-icon-only) - var(--button--border-width));
+        padding: calc(
+          var(--button--padding-s-icon-only) - var(--button--border-width)
+        );
       }
     }
 
@@ -211,4 +209,6 @@
   @include variant(secondary, outline);
   @include variant(dark, outline);
   @include variant(light, outline);
+
+  @include avatarButton.avatarButton();
 }
