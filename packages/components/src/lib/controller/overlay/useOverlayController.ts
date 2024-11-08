@@ -34,18 +34,18 @@ export const useOverlayController = (
   useEffect(() => {
     const disposers: (() => void)[] = [];
 
-    if (onOpen && !controller.isOpen) {
+    if (onOpen) {
       disposers.push(controller.addOnOpen(onOpen));
     }
 
-    if (onClose && controller.isOpen) {
+    if (onClose) {
       disposers.push(controller.addOnClose(onClose));
     }
 
     return () => {
       disposers.forEach((dispose) => dispose());
     };
-  }, [onOpen, onClose, controller.isOpen]);
+  }, [onOpen, onClose]);
 
   return controller;
 };

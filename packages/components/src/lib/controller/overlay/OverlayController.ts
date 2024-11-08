@@ -2,16 +2,19 @@ import { action, makeObservable, observable } from "mobx";
 import useSelector from "@/lib/mobx/useSelector";
 import { useRef } from "react";
 
+type OpenStateHandler = () => void;
+type DisposerFn = () => void;
+
 export interface OverlayControllerOptions {
   isDefaultOpen?: boolean;
-  onOpen?: () => void;
-  onClose?: () => void;
+  onOpen?: OpenStateHandler;
+  onClose?: OpenStateHandler;
 }
 
 export class OverlayController {
   public isOpen: boolean;
-  private onOpenHandlers = new Set<() => void>();
-  private onCloseHandlers = new Set<() => void>();
+  private onOpenHandlers = new Set<OpenStateHandler>();
+  private onCloseHandlers = new Set<OpenStateHandler>();
 
   public constructor(options?: OverlayControllerOptions) {
     makeObservable(this, {
@@ -35,14 +38,14 @@ export class OverlayController {
     return useRef(new OverlayController(options)).current;
   }
 
-  public addOnOpen(handler: () => void): () => void {
+  public addOnOpen(handler: OpenStateHandler): DisposerFn {
     this.onOpenHandlers.add(handler);
     return () => {
       this.onOpenHandlers.delete(handler);
     };
   }
 
-  public addOnClose(handler: () => void): () => void {
+  public addOnClose(handler: OpenStateHandler): DisposerFn {
     this.onCloseHandlers.add(handler);
     return () => {
       this.onCloseHandlers.delete(handler);
