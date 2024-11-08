@@ -6,6 +6,7 @@
   max-width: 100%;
   overflow: hidden;
   position: relative;
+  background-color: var(--file-card--background-color--default);
 
   &:not(:has(.link)),
   .link {

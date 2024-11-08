@@ -16,6 +16,8 @@ file-card:
   sub-title-font-size:
     value: "{font-size-text.s}"
   background-color:
+    default:
+      value: "{neutral.color.100}"
     hover:
       value: "{neutral-outline-background-color.hover}"
     pressed:
