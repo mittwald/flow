@@ -6,6 +6,7 @@ import { customComponents } from "@/lib/mdx/components/MdxFileView/customCompone
 import Markdown from "react-markdown";
 import { omit } from "remeda";
 import { Badge } from "@mittwald/flow-react-components/Badge";
+import styles from "./PropertyRow.module.css";
 
 export interface PropertyTableGroupProps {
   property: Property;
@@ -19,9 +20,10 @@ export const PropertyRow: React.FC<PropertyTableGroupProps> = ({
     .replaceAll(/{@link (\S+)}/g, "[$1]($1)");
   return (
     <TableRow>
-      <TableCell>
+      <TableCell className={styles.nameCell}>
         <InlineCode>{property.name}</InlineCode>
         {property.required && <Badge>Required</Badge>}
+        <Badge>Required</Badge>
       </TableCell>
       <TableCell>{property.type}</TableCell>
       <TableCell>{property.default || "-"}</TableCell>
