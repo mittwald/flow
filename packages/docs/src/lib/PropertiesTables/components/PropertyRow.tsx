@@ -23,7 +23,6 @@ export const PropertyRow: React.FC<PropertyTableGroupProps> = ({
       <TableCell className={styles.nameCell}>
         <InlineCode>{property.name}</InlineCode>
         {property.required && <Badge>Required</Badge>}
-        <Badge>Required</Badge>
       </TableCell>
       <TableCell>{property.type}</TableCell>
       <TableCell>{property.default || "-"}</TableCell>
