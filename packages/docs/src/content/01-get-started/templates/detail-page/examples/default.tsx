@@ -25,26 +25,89 @@ import { ActionGroup } from "@mittwald/flow-react-components/ActionGroup";
 import { Action } from "@mittwald/flow-react-components/Action";
 
 export default () => {
+  const domain = {
+    id: "4",
+    hostname: "example.de",
+    domain: "example.de",
+    type: "Domain",
+    ssl: undefined,
+  };
+
+  const updateOwnerModal = (
+    <Modal>
+      <Heading>Domain-Inhaber bearbeiten</Heading>
+
+      <Content>
+        <Section>
+          <ColumnLayout>
+            <TextField isRequired defaultValue="Max">
+              <Label>Vorname</Label>
+            </TextField>
+            <TextField isRequired defaultValue="Mustermann">
+              <Label>Nachname</Label>
+            </TextField>
+            <ColumnLayout gap="s" s={[2, 1]}>
+              <TextField
+                isRequired
+                defaultValue="Königsberger Str"
+              >
+                <Label>Straße</Label>
+              </TextField>
+              <TextField isRequired defaultValue="4">
+                <Label>Hausnr.</Label>
+              </TextField>
+            </ColumnLayout>
+            <ColumnLayout gap="s" s={[1, 2]}>
+              <TextField isRequired defaultValue="32339">
+                <Label>PLZ</Label>
+              </TextField>
+              <TextField
+                isRequired
+                defaultValue="Espelkamp"
+              >
+                <Label>Ort</Label>
+              </TextField>
+            </ColumnLayout>
+          </ColumnLayout>
+        </Section>
+      </Content>
+
+      <ActionGroup>
+        <Action closeOverlay="Modal">
+          <Button color="secondary" variant="soft">
+            Abbrechen
+          </Button>
+          <Button color="accent" type="submit">
+            Speichern
+          </Button>
+        </Action>
+      </ActionGroup>
+    </Modal>
+  );
+
   return (
     <LayoutCard>
       <Section>
-        <Alert status="danger">
-          <Heading>
-            Es konnte kein SSL-Zertifikat ausgestellt werden
-          </Heading>
-          <Content>
-            <Text>
-              Für diese Domain konnte kein SSL-Zertifikat
-              ausgestellt werden, da example.de nicht per
-              DNS auf deine Server-IP zeigt. Ändere den
-              A-Record oder CNAME auf die Server-IP zeigen.
-              Es kann einige Minuten dauern, bis das
-              Zertifikat bei korrekten Einstellungen
-              ausgestellt ist.
-            </Text>
-            <Link>SSL-Zertifikat ausstellen</Link>
-          </Content>
-        </Alert>
+        {!domain.ssl && (
+          <Alert status="danger">
+            <Heading>
+              Es konnte kein SSL-Zertifikat ausgestellt
+              werden
+            </Heading>
+            <Content>
+              <Text>
+                Für diese Domain konnte kein SSL-Zertifikat
+                ausgestellt werden, da {domain.hostname}{" "}
+                nicht per DNS auf deine Server-IP zeigt.
+                Ändere den A-Record oder CNAME auf die
+                Server-IP zeigen. Es kann einige Minuten
+                dauern, bis das Zertifikat bei korrekten
+                Einstellungen ausgestellt ist.
+              </Text>
+              <Link>SSL-Zertifikat ausstellen</Link>
+            </Content>
+          </Alert>
+        )}
       </Section>
       <Section>
         <Header>
@@ -63,11 +126,11 @@ export default () => {
         <ColumnLayout s={[1, 1]}>
           <LabeledValue>
             <Label>Domain-Ziel</Label>
-            <Text>example.de</Text>
+            <Text>{domain.domain}</Text>
           </LabeledValue>
           <LabeledValue>
             <Label>Zertifikat</Label>
-            <Text>-</Text>
+            <Text>{domain.ssl ? domain.ssl : "-"}</Text>
           </LabeledValue>
         </ColumnLayout>
       </Section>
@@ -78,67 +141,7 @@ export default () => {
             <Button color="secondary" variant="soft">
               Bearbeiten
             </Button>
-            <Modal>
-              <Heading>Domain-Inhaber bearbeiten</Heading>
-
-              <Content>
-                <Section>
-                  <ColumnLayout>
-                    <TextField
-                      isRequired
-                      defaultValue="Max"
-                    >
-                      <Label>Vorname</Label>
-                    </TextField>
-                    <TextField
-                      isRequired
-                      defaultValue="Mustermann"
-                    >
-                      <Label>Nachname</Label>
-                    </TextField>
-                    <ColumnLayout gap="s" s={[2, 1]}>
-                      <TextField
-                        isRequired
-                        defaultValue="Königsberger Str"
-                      >
-                        <Label>Straße</Label>
-                      </TextField>
-                      <TextField
-                        isRequired
-                        defaultValue="4"
-                      >
-                        <Label>Hausnr.</Label>
-                      </TextField>
-                    </ColumnLayout>
-                    <ColumnLayout gap="s" s={[1, 2]}>
-                      <TextField
-                        isRequired
-                        defaultValue="32339"
-                      >
-                        <Label>PLZ</Label>
-                      </TextField>
-                      <TextField
-                        isRequired
-                        defaultValue="Espelkamp"
-                      >
-                        <Label>Ort</Label>
-                      </TextField>
-                    </ColumnLayout>
-                  </ColumnLayout>
-                </Section>
-              </Content>
-
-              <ActionGroup>
-                <Action closeOverlay="Modal">
-                  <Button color="secondary" variant="soft">
-                    Abbrechen
-                  </Button>
-                  <Button color="accent" type="submit">
-                    Speichern
-                  </Button>
-                </Action>
-              </ActionGroup>
-            </Modal>
+            {updateOwnerModal}
           </ModalTrigger>
         </Header>
         <ColumnLayout>

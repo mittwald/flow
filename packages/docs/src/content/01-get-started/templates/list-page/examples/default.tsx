@@ -92,6 +92,165 @@ export default () => {
   ];
   const DomainList = typedList<Domain>();
 
+  const addDomainModal = (
+    <Modal offCanvas>
+      <Heading>Domain anlegen</Heading>
+      <Content>
+        <Section>
+          <Heading>Wunsch-Domain</Heading>
+          <Text>
+            Eine Liste der Top-Level-Domains findest du auf
+            unserer{" "}
+            <Link
+              target="_blank"
+              href="https://www.mittwald.de/produkte/domains"
+            >
+              Domain-Seite
+            </Link>
+            .
+          </Text>
+          <TextField isRequired>
+            <Label>Domain</Label>
+          </TextField>
+        </Section>
+        <Section>
+          <Header>
+            <Heading>Domain-Inhaber</Heading>
+            <ModalTrigger>
+              <Button color="accent">Hinzufügen</Button>
+              <Modal>
+                <Heading>Domain-Inhaber</Heading>
+                <Content>
+                  <Section>
+                    <ColumnLayout>
+                      <TextField isRequired>
+                        <Label>Vorname</Label>
+                      </TextField>
+                      <TextField isRequired>
+                        <Label>Nachname</Label>
+                      </TextField>
+                      <ColumnLayout gap="s" s={[2, 1]}>
+                        <TextField isRequired>
+                          <Label>Straße</Label>
+                        </TextField>
+                        <TextField isRequired>
+                          <Label>Hausnr.</Label>
+                        </TextField>
+                      </ColumnLayout>
+                      <ColumnLayout gap="s" s={[1, 2]}>
+                        <TextField isRequired>
+                          <Label>PLZ</Label>
+                        </TextField>
+                        <TextField isRequired>
+                          <Label>Ort</Label>
+                        </TextField>
+                      </ColumnLayout>
+                    </ColumnLayout>
+                  </Section>
+                </Content>
+                <ActionGroup>
+                  <Action closeOverlay="Modal">
+                    <Button
+                      color="secondary"
+                      variant="soft"
+                    >
+                      Abbrechen
+                    </Button>
+                    <Button color="accent">
+                      Domaininhaber hinzufügen
+                    </Button>
+                  </Action>
+                </ActionGroup>
+              </Modal>
+            </ModalTrigger>
+          </Header>
+          <Text>
+            Du hast noch keinen Domain-Inhaber angelegt.
+          </Text>
+        </Section>
+        <Section>
+          <Heading>Bestellübersicht</Heading>
+          <ColumnLayout>
+            <div
+              style={{
+                display: "flex",
+                gap: "var(--size-px--s)",
+              }}
+            >
+              <Avatar>
+                <Initials>Max Mustermann</Initials>
+              </Avatar>
+              <Text>
+                <b>Meine Organisation</b>
+                <br />
+                Max Mustermann
+                <br />
+                Königsberger Str. 4, 32339 Espelkamp
+              </Text>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                gap: "var(--size-px--s)",
+              }}
+            >
+              <Avatar>
+                <IconInvoice />
+              </Avatar>
+              <Text>
+                <b>Rechnung</b>
+                <br />
+                Max Mustermann
+                <br />
+                Königsberger Str. 4, 32339 Espelkamp
+              </Text>
+            </div>
+          </ColumnLayout>
+          <Table>
+            <TableHeader>
+              <TableColumn>Artikel</TableColumn>
+              <TableColumn>Preis</TableColumn>
+            </TableHeader>
+            <TableBody>
+              <TableRow>
+                <TableCell>Beispiel Domain</TableCell>
+                <TableCell>0,00 €</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Einrichtungsgebühr</TableCell>
+                <TableCell>0,00 €</TableCell>
+              </TableRow>
+              <TableFooterRow>
+                <TableCell>Gesamtpreis</TableCell>
+                <TableCell>0,00 €</TableCell>
+              </TableFooterRow>
+            </TableBody>
+          </Table>
+          <CheckboxButton isRequired>
+            Ich verstehe, dass ein Klick auf
+            “Kostenpflichtig buchen” keinerlei Auswirkungen
+            hat, da es sich um einen rein fiktiven
+            Bestellprozess handelt. Es wird keine Bestellung
+            ausgelöst und wir speichern keine Daten. Hier
+            passiert nichts, daher sind AGBs und Datenschutz
+            überflüssig.
+          </CheckboxButton>
+        </Section>
+      </Content>
+      <ActionGroup>
+        <Action closeOverlay="Modal">
+          <Button color="secondary" variant="soft">
+            Abbrechen
+          </Button>
+          <Button color="accent">
+            Kostenpflichtig bestellen
+          </Button>
+          ‚
+        </Action>
+      </ActionGroup>
+    </Modal>
+  );
+
   return (
     <LayoutCard>
       <Section>
@@ -110,188 +269,7 @@ export default () => {
                 <Button color="accent">
                   Domain anlegen
                 </Button>
-                <Modal offCanvas>
-                  <Heading>Domain anlegen</Heading>
-                  <Content>
-                    <Section>
-                      <Heading>Wunsch-Domain</Heading>
-                      <Text>
-                        Eine Liste der Top-Level-Domains
-                        findest du auf unserer{" "}
-                        <Link
-                          target="_blank"
-                          href="https://www.mittwald.de/produkte/domains"
-                        >
-                          Domain-Seite
-                        </Link>
-                        .
-                      </Text>
-                      <TextField isRequired>
-                        <Label>Domain</Label>
-                      </TextField>
-                    </Section>
-                    <Section>
-                      <Header>
-                        <Heading>Domain-Inhaber</Heading>
-                        <ModalTrigger>
-                          <Button color="accent">
-                            Hinzufügen
-                          </Button>
-                          <Modal>
-                            <Heading>
-                              Domain-Inhaber
-                            </Heading>
-                            <Content>
-                              <Section>
-                                <ColumnLayout>
-                                  <TextField isRequired>
-                                    <Label>Vorname</Label>
-                                  </TextField>
-                                  <TextField isRequired>
-                                    <Label>Nachname</Label>
-                                  </TextField>
-                                  <ColumnLayout
-                                    gap="s"
-                                    s={[2, 1]}
-                                  >
-                                    <TextField isRequired>
-                                      <Label>Straße</Label>
-                                    </TextField>
-                                    <TextField isRequired>
-                                      <Label>Hausnr.</Label>
-                                    </TextField>
-                                  </ColumnLayout>
-                                  <ColumnLayout
-                                    gap="s"
-                                    s={[1, 2]}
-                                  >
-                                    <TextField isRequired>
-                                      <Label>PLZ</Label>
-                                    </TextField>
-                                    <TextField isRequired>
-                                      <Label>Ort</Label>
-                                    </TextField>
-                                  </ColumnLayout>
-                                </ColumnLayout>
-                              </Section>
-                            </Content>
-                            <ActionGroup>
-                              <Action closeOverlay="Modal">
-                                <Button
-                                  color="secondary"
-                                  variant="soft"
-                                >
-                                  Abbrechen
-                                </Button>
-                                <Button color="accent">
-                                  Domaininhaber hinzufügen
-                                </Button>
-                              </Action>
-                            </ActionGroup>
-                          </Modal>
-                        </ModalTrigger>
-                      </Header>
-                      <Text>
-                        Du hast noch keinen Domain-Inhaber
-                        angelegt.
-                      </Text>
-                    </Section>
-                    <Section>
-                      <Heading>Bestellübersicht</Heading>
-                      <ColumnLayout>
-                        <div
-                          style={{
-                            display: "flex",
-                            gap: "var(--size-px--s)",
-                          }}
-                        >
-                          <Avatar>
-                            <Initials>
-                              Max Mustermann
-                            </Initials>
-                          </Avatar>
-                          <Text>
-                            <b>Meine Organisation</b>
-                            <br />
-                            Max Mustermann
-                            <br />
-                            Königsberger Str. 4, 32339
-                            Espelkamp
-                          </Text>
-                        </div>
-                        <div
-                          style={{
-                            display: "flex",
-                            gap: "var(--size-px--s)",
-                          }}
-                        >
-                          <Avatar>
-                            <IconInvoice />
-                          </Avatar>
-                          <Text>
-                            <b>Rechnung</b>
-                            <br />
-                            Max Mustermann
-                            <br />
-                            Königsberger Str. 4, 32339
-                            Espelkamp
-                          </Text>
-                        </div>
-                      </ColumnLayout>
-                      <Table>
-                        <TableHeader>
-                          <TableColumn>Artikel</TableColumn>
-                          <TableColumn>Preis</TableColumn>
-                        </TableHeader>
-                        <TableBody>
-                          <TableRow>
-                            <TableCell>
-                              Beispiel Domain
-                            </TableCell>
-                            <TableCell>0,00 €</TableCell>
-                          </TableRow>
-                          <TableRow>
-                            <TableCell>
-                              Einrichtungsgebühr
-                            </TableCell>
-                            <TableCell>0,00 €</TableCell>
-                          </TableRow>
-                          <TableFooterRow>
-                            <TableCell>
-                              Gesamtpreis
-                            </TableCell>
-                            <TableCell>0,00 €</TableCell>
-                          </TableFooterRow>
-                        </TableBody>
-                      </Table>
-                      <CheckboxButton isRequired>
-                        Ich verstehe, dass ein Klick auf
-                        “Kostenpflichtig buchen” keinerlei
-                        Auswirkungen hat, da es sich um
-                        einen rein fiktiven Bestellprozess
-                        handelt. Es wird keine Bestellung
-                        ausgelöst und wir speichern keine
-                        Daten. Hier passiert nichts, daher
-                        sind AGBs und Datenschutz
-                        überflüssig.
-                      </CheckboxButton>
-                    </Section>
-                  </Content>
-                  <ActionGroup>
-                    <Action closeOverlay="Modal">
-                      <Button
-                        color="secondary"
-                        variant="soft"
-                      >
-                        Abbrechen
-                      </Button>
-                      <Button color="accent">
-                        Kostenpflichtig bestellen
-                      </Button>
-                      ‚
-                    </Action>
-                  </ActionGroup>
-                </Modal>
+                {addDomainModal}
               </ModalTrigger>
             </ActionGroup>
             <DomainList.StaticData data={domains} />
