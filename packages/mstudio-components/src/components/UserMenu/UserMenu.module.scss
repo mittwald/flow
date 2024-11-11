@@ -1,14 +1,11 @@
 .contextMenu {
   max-width: 300px;
-}
 
-.menuItem {
-  &:has(.avatar) {
-    justify-content: center;
+  section:first-of-type {
+    align-items: center;
+
+    .heading {
+      text-align: center;
+    }
   }
-}
-
-.heading {
-  text-align: center;
-  justify-self: center;
 }

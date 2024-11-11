@@ -18,7 +18,7 @@ export const UserMenu: FC<UserMenuProps> = (props) => {
     ContextMenu: {
       MenuItem: {
         className: styles.menuItem,
-        Avatar: { size: "l", className: styles.avatar },
+        Avatar: { size: "l" },
       },
       Heading: { level: 4, className: styles.heading },
     },
