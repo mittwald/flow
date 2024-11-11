@@ -1,5 +1,5 @@
 .contextMenu {
-  max-width: 300px;
+  max-width: var(--user-menu--max-width);
 
   section:first-of-type {
     align-items: center;
