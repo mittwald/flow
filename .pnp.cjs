@@ -4547,7 +4547,7 @@ const RAW_RUNTIME_STATE =
           ["framer-motion", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:11.11.7"],\
           ["fs-jetpack", "npm:5.1.0"],\
           ["glob", "npm:10.4.5"],\
-          ["happy-dom", "npm:15.7.4"],\
+          ["happy-dom", "npm:15.11.0"],\
           ["html-react-parser", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:5.1.18"],\
           ["invariant", "npm:2.2.4"],\
           ["luxon", "npm:3.5.0"],\
@@ -4660,7 +4660,7 @@ const RAW_RUNTIME_STATE =
           ["framer-motion", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:11.11.7"],\
           ["fs-jetpack", "npm:5.1.0"],\
           ["glob", "npm:10.4.5"],\
-          ["happy-dom", "npm:15.7.4"],\
+          ["happy-dom", "npm:15.11.0"],\
           ["html-react-parser", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:5.1.18"],\
           ["invariant", "npm:2.2.4"],\
           ["luxon", "npm:3.5.0"],\
@@ -4764,7 +4764,7 @@ const RAW_RUNTIME_STATE =
           ["framer-motion", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:11.11.7"],\
           ["fs-jetpack", "npm:5.1.0"],\
           ["glob", "npm:10.4.5"],\
-          ["happy-dom", "npm:15.7.4"],\
+          ["happy-dom", "npm:15.11.0"],\
           ["html-react-parser", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:5.1.18"],\
           ["invariant", "npm:2.2.4"],\
           ["luxon", "npm:3.5.0"],\
@@ -4833,7 +4833,7 @@ const RAW_RUNTIME_STATE =
           ["@types/react-dom", "npm:18.3.0"],\
           ["@vitejs/plugin-react", "virtual:649ed574e8ed74b53db458e9e4771992d2daa055e666eb2eb76170d0ec585eb503de1ad63b372c79992a2f41b1faaa1c7d60636a6363eeef01a7038db931cfae#npm:4.3.2"],\
           ["@vitest/coverage-v8", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:2.1.2"],\
-          ["happy-dom", "npm:15.7.4"],\
+          ["happy-dom", "npm:15.11.0"],\
           ["mobx", "npm:6.13.3"],\
           ["mobx-react-lite", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:4.0.7"],\
           ["nx", "virtual:0f196ee022db0ef66dff42eeb9a201ea1a8aaaf1b346295bb86504146fb5e4442a0e1868781449daca06e09c92640d77d857bea488d43129e59692cf7ae1bee5#npm:20.0.0"],\
@@ -4867,7 +4867,7 @@ const RAW_RUNTIME_STATE =
           ["@types/react-dom", "npm:18.3.0"],\
           ["@vitejs/plugin-react", "virtual:649ed574e8ed74b53db458e9e4771992d2daa055e666eb2eb76170d0ec585eb503de1ad63b372c79992a2f41b1faaa1c7d60636a6363eeef01a7038db931cfae#npm:4.3.2"],\
           ["@vitest/coverage-v8", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:2.1.2"],\
-          ["happy-dom", "npm:15.7.4"],\
+          ["happy-dom", "npm:15.11.0"],\
           ["mobx", "npm:6.13.3"],\
           ["mobx-react-lite", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:4.0.7"],\
           ["nx", "virtual:0f196ee022db0ef66dff42eeb9a201ea1a8aaaf1b346295bb86504146fb5e4442a0e1868781449daca06e09c92640d77d857bea488d43129e59692cf7ae1bee5#npm:20.0.0"],\
@@ -16305,10 +16305,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["happy-dom", [\
-      ["npm:15.7.4", {\
-        "packageLocation": "./.yarn/cache/happy-dom-npm-15.7.4-babe1b542a-406b6b86d5.zip/node_modules/happy-dom/",\
+      ["npm:15.11.0", {\
+        "packageLocation": "./.yarn/cache/happy-dom-npm-15.11.0-2b4c36448e-ff9bb6e0cb.zip/node_modules/happy-dom/",\
         "packageDependencies": [\
-          ["happy-dom", "npm:15.7.4"],\
+          ["happy-dom", "npm:15.11.0"],\
           ["entities", "npm:4.5.0"],\
           ["webidl-conversions", "npm:7.0.0"],\
           ["whatwg-mimetype", "npm:3.0.0"]\
@@ -25279,7 +25279,7 @@ const RAW_RUNTIME_STATE =
           ["@vitest/utils", "npm:2.1.2"],\
           ["chai", "npm:5.1.1"],\
           ["debug", "virtual:c9e1a4b59e37cb479517edede3bf2093b28c0ca1a9d0e517f3c345075bd1e468980b94b4957e389116607ee7155441dfd7d09e19a4229d5d09bcf06244401590#npm:4.3.7"],\
-          ["happy-dom", "npm:15.7.4"],\
+          ["happy-dom", "npm:15.11.0"],\
           ["jsdom", null],\
           ["magic-string", "npm:0.30.11"],\
           ["pathe", "npm:1.1.2"],\
