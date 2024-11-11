@@ -4,12 +4,12 @@ import React, { ComponentProps, FC } from "react";
 import { IconFileInfo as Tabler } from "@tabler/icons-react";
 import { Icon } from "@/components/Icon";
 
-export const IconContractPosition: FC<
-  Omit<ComponentProps<typeof Icon>, "children">
-> = (props) => (
+export const IconContract: FC<Omit<ComponentProps<typeof Icon>, "children">> = (
+  props,
+) => (
   <Icon {...props}>
     <Tabler />
   </Icon>
 );
 
-export default IconContractPosition;
+export default IconContract;

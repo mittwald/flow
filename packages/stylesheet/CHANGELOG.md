@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.339](https://github.com/mittwald/flow/compare/0.1.0-alpha.338...0.1.0-alpha.339) (2024-11-11)
+
+**Note:** Version bump only for package @mittwald/flow-stylesheet
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.338](https://github.com/mittwald/flow/compare/0.1.0-alpha.337...0.1.0-alpha.338) (2024-11-08)
 
 **Note:** Version bump only for package @mittwald/flow-stylesheet

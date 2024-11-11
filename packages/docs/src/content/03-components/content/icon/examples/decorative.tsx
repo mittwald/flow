@@ -5,8 +5,8 @@ import {
   IconCamera,
   IconChangelog,
   IconClock,
+  IconContract,
   IconContractPartner,
-  IconContractPosition,
   IconCronjob,
   IconCustomer,
   IconDashboard,
@@ -129,8 +129,8 @@ import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
     <IconPayment />
   </LabeledValue>
   <LabeledValue>
-    <Label>Contract Position</Label>
-    <IconContractPosition />
+    <Label>Contract</Label>
+    <IconContract />
   </LabeledValue>
   <LabeledValue>
     <Label>Camera</Label>
