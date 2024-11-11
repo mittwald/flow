@@ -18,7 +18,7 @@ export { IconClose } from "./IconClose";
 export { IconCode } from "./IconCode";
 export { IconContextMenu } from "./IconContextMenu";
 export { IconContractPartner } from "./IconContractPartner";
-export { IconContractPosition } from "./IconContractPosition";
+export { IconContract } from "./IconContract";
 export { IconCopy } from "./IconCopy";
 export { IconCronjob } from "./IconCronjob";
 export { IconCustomer } from "./IconCustomer";

@@ -1,9 +1,6 @@
 import React from "react";
-import { Avatar } from "@/components/Avatar";
+import { Avatar } from "./components/Avatar";
 import { Text } from "@/components/Text";
-import { IconClose, IconFile } from "@/components/Icon/components/icons";
-import IconImage from "@/components/Icon/components/icons/IconImage";
-import { Button } from "@/components/Button";
 import type {
   PropsWithClassName,
   PropsWithElementType,
@@ -11,17 +8,20 @@ import type {
 import styles from "./FileCard.module.scss";
 import clsx from "clsx";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import locales from "./locales/*.locale.json";
-import { useLocalizedStringFormatter } from "react-aria";
 import { FileSizeText } from "@/components/FileCard/components/FileSizeText";
+import { Link, type LinkProps } from "@/components/Link";
+import Wrap from "@/components/Wrap";
+import { DeleteButton } from "@/components/FileCard/components/DeleteButton";
 
 export interface FileCardProps
   extends PropsWithClassName,
-    PropsWithElementType<"div" | "li"> {
+    PropsWithElementType<"div" | "li">,
+    Pick<LinkProps, "onPress" | "href" | "target" | "download"> {
   name: string;
   type?: string;
   onDelete?: () => void;
   sizeInBytes?: number;
+  imageSrc?: string;
 }
 
 export const FileCard = flowComponent("FileCard", (props) => {
@@ -32,40 +32,38 @@ export const FileCard = flowComponent("FileCard", (props) => {
     name,
     className,
     elementType = "div",
+    onPress,
+    href,
+    target,
+    download,
+    imageSrc,
   } = props;
 
   const rootClassName = clsx(styles.fileCard, className);
 
   const Element = elementType;
 
-  const stringFormatter = useLocalizedStringFormatter(locales);
-
-  const avatar = (
-    <Avatar color="blue">
-      {type?.includes("image") ? <IconImage /> : <IconFile />}
-    </Avatar>
-  );
-
   return (
     <Element className={rootClassName}>
-      {avatar}
-      <span className={styles.text}>
-        <Text className={styles.title}>
-          <b>{name}</b>
-        </Text>
-        {sizeInBytes && <FileSizeText sizeInBytes={sizeInBytes} />}
-      </span>
-      {onDelete && (
-        <Button
-          aria-label={stringFormatter.format(`fileCard.delete`)}
-          size="s"
-          variant="plain"
-          color="secondary"
-          onPress={onDelete}
+      <Wrap if={href || onPress}>
+        <Link
+          className={styles.link}
+          unstyled
+          href={href}
+          onPress={onPress}
+          target={target}
+          download={download}
         >
-          <IconClose />
-        </Button>
-      )}
+          <Avatar type={type} imageSrc={imageSrc} />
+          <span className={styles.text}>
+            <Text className={styles.title}>
+              <b>{name}</b>
+            </Text>
+            {sizeInBytes && <FileSizeText sizeInBytes={sizeInBytes} />}
+          </span>
+        </Link>
+      </Wrap>
+      {onDelete && <DeleteButton onDelete={onDelete} />}
     </Element>
   );
 });
