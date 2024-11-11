@@ -129,7 +129,7 @@ import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
     <IconPayment />
   </LabeledValue>
   <LabeledValue>
-    <Label>Contract Position</Label>
+    <Label>Contract</Label>
     <IconContract />
   </LabeledValue>
   <LabeledValue>
