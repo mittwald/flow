@@ -10,7 +10,7 @@ export interface OptionProps
   extends Omit<Aria.ListBoxItemProps, "children" | "value" | "id">,
     PropsWithChildren,
     FlowComponentProps {
-  value?: string;
+  value?: string | number;
 }
 
 export const Option = flowComponent("Option", (props) => {

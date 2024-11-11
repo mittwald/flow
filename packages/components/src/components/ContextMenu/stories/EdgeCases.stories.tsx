@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import ContextMenu, {
-  MenuItem,
   ContextMenuTrigger,
+  MenuItem,
 } from "@/components/ContextMenu";
 import { Button } from "@/components/Button";
 import defaultMeta from "./Default.stories";
@@ -17,6 +17,7 @@ export default meta;
 type Story = StoryObj<typeof ContextMenu>;
 
 export const LongTexts: Story = {
+  args: { width: 400 },
   render: (props) => (
     <ContextMenuTrigger>
       <Button>Trigger</Button>

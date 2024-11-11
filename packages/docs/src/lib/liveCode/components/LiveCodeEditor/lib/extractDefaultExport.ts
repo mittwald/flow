@@ -15,16 +15,17 @@ export default function extractDefaultExport(code: string): string {
   });
 
   const defaultExport = tree.body.find(
-    (it): it is ExportDefaultDeclaration =>
-      it.type === "ExportDefaultDeclaration",
+    (statement): statement is ExportDefaultDeclaration =>
+      statement.type === "ExportDefaultDeclaration",
   );
 
   if (
     defaultExport === undefined &&
-    tree.body.some((it) => it.type === "ExpressionStatement")
+    tree.body.some((statement) => statement.type === "ExpressionStatement")
   ) {
     const expressionStatement = tree.body.find(
-      (it): it is ExpressionStatement => it.type === "ExpressionStatement",
+      (statement): statement is ExpressionStatement =>
+        statement.type === "ExpressionStatement",
     );
     if (expressionStatement == undefined) {
       throw new Error("Default export needs to be expression.");
@@ -62,7 +63,8 @@ function extractCode(
   }
   if (expression.type === "FunctionDeclaration") {
     const returnStatement = expression.body.body.find(
-      (it): it is ReturnStatement => it.type === "ReturnStatement",
+      (statement): statement is ReturnStatement =>
+        statement.type === "ReturnStatement",
     );
     if (returnStatement == undefined || returnStatement.argument == undefined) {
       throw Error("Function does not have return statement.");

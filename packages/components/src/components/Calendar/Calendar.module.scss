@@ -5,7 +5,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: var(--calendar--header-to-day-spacing);
+    margin-bottom: var(--calendar--spacing);
 
     h2 {
       font-size: var(--calendar--heading-font-size);
@@ -13,15 +13,14 @@
   }
 
   :global(.react-aria-CalendarHeaderCell) {
-    font-size: var(--calendar--day-font-size);
+    font-size: var(--calendar--cell-font-size);
   }
 
   table {
-    border-spacing: var(--calendar--cell-spacing);
+    border-spacing: var(--calendar--spacing);
   }
 
   :global(.react-aria-CalendarCell) {
-    @include focus.focus;
     width: var(--calendar--cell-size);
     height: var(--calendar--cell-size);
     display: inline-flex;
@@ -29,29 +28,33 @@
     justify-content: center;
     cursor: default;
     border-radius: var(--calendar--cell-corner-radius);
-    font-size: var(--font-size--s);
+    font-size: var(--calendar--cell-font-size);
+
+    @include focus.focus;
 
     &[data-outside-month] {
       display: none;
     }
 
     &:hover {
-      background: var(--calendar--day-background-color--hover);
+      background: var(--calendar--cell-background-color--hover);
     }
 
     &[data-pressed] {
-      background: var(--calendar--day-background-color--pressed);
+      background: var(--calendar--cell-background-color--pressed);
     }
 
     &[data-selected] {
-      background: var(--calendar--day-background-color--selected);
-      color: var(--calendar--day-content-color--selected);
+      background: var(--calendar--cell-background-color--selected);
+      color: var(--calendar--cell-content-color--selected);
     }
 
     &[data-disabled] {
-      background: var(--calendar--day-background-color--disabled);
-      color: var(--calendar--day-content-color--disabled);
+      background: var(--calendar--cell-background-color--disabled);
+      color: var(--calendar--cell-content-color--disabled);
     }
+
+    @include focus.focus;
   }
 
   &.range {
@@ -62,7 +65,7 @@
       &[data-selected] {
         &:before {
           content: "";
-          background: var(--calendar--day-range-background-color);
+          background: var(--calendar--cell-range-background-color);
           width: calc(100% + 0.375rem);
           height: 100%;
           position: absolute;
@@ -80,20 +83,20 @@
 
         &:hover {
           &:after {
-            background: var(--calendar--day-background-color--hover);
+            background: var(--calendar--cell-background-color--hover);
           }
         }
 
         &[data-pressed] {
           &:after {
-            background: var(--calendar--day-background-color--pressed);
+            background: var(--calendar--cell-background-color--pressed);
           }
         }
 
         &[data-selection-start],
         &[data-selection-end] {
           &:after {
-            background: var(--calendar--day-background-color--selected);
+            background: var(--calendar--cell-background-color--selected);
           }
         }
 
@@ -114,7 +117,7 @@
         }
 
         &:not([data-selection-start]):not([data-selection-end]) {
-          color: var(--content--color--default);
+          color: var(--text--color--default);
           background: none;
         }
 

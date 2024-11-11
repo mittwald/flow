@@ -1,0 +1,55 @@
+slider:
+  value-font-weight:
+    value: "{font-weight.bold}"
+  value-to-label-spacing:
+    value: "{size-rem.xs}"
+  text-to-track-spacing:
+    value: "{size-rem.xs}"
+  text-color:
+    disabled:
+      value: "{disabled-plain-content-color}"
+  track-background-color:
+    default:
+      value: "{primary-soft-background-color.default}"
+    disabled:
+      value: "{disabled-soft-background-color}"
+  track-background-color-fill:
+    default:
+      value: "{primary-solid-background-color.default}"
+    disabled:
+      value: "{disabled-solid-background-color}"
+  track-height:
+    value: "{size-rem.xs}"
+  track-corner-radius:
+    value: "{corner-radius.default}"
+
+  thumb-border-color:
+    default:
+      value: "{primary-solid-background-color.default}"
+    disabled:
+      value: "{disabled-solid-background-color}"
+  thumb-border-width:
+    value: "{size-rem.xs}"
+  thumb-border-style:
+    value: "{border-style.default}"
+  thumb-corner-radius:
+    value: "{corner-radius.round}"
+  thumb-size:
+    value: "{size-rem.l}"
+  thumb-background-color:
+    default:
+      value: "{neutral.color.100}"
+    pressed:
+      value: "{primary-solid-background-color.default}"
+
+  initial-marker-height:
+    value: "{size-rem.m}"
+  initial-marker-width:
+    value: "{size-rem.xs}"
+  initial-marker-background-color:
+    default:
+      value: "{primary-solid-background-color.default}"
+    disabled:
+      value: "{disabled-solid-background-color}"
+  initial-marker-corner-radius:
+    value: "{corner-radius.default}"

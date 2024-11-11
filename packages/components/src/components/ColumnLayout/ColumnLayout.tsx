@@ -3,12 +3,16 @@ import React from "react";
 import styles from "./ColumnLayout.module.scss";
 import { getColumns } from "./lib/getColumns";
 import clsx from "clsx";
-import type { PropsWithClassName } from "@/lib/types/props";
+import type {
+  PropsWithClassName,
+  PropsWithElementType,
+} from "@/lib/types/props";
 
 type GapSize = "s" | "m" | "l";
 
 export interface ColumnLayoutProps
   extends PropsWithChildren,
+    PropsWithElementType<"div" | "ul">,
     PropsWithClassName {
   s?: number[];
   m?: number[];
@@ -28,6 +32,8 @@ export const ColumnLayout: FC<ColumnLayoutProps> = (props) => {
     gap = "m",
     rowGap = gap,
     columnGap = gap,
+    elementType = "div",
+    "aria-label": ariaLabel,
   } = props;
 
   const columnsS = s ? getColumns(s) : undefined;
@@ -44,9 +50,13 @@ export const ColumnLayout: FC<ColumnLayoutProps> = (props) => {
 
   const rootClassName = clsx(styles.columnLayoutContainer, className);
 
+  const Element = elementType;
+
   return (
     <div className={rootClassName} style={style}>
-      <div className={styles.columnLayout}>{children}</div>
+      <Element aria-label={ariaLabel} className={styles.columnLayout}>
+        {children}
+      </Element>
     </div>
   );
 };

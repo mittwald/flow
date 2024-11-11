@@ -1,7 +1,5 @@
 .heading {
   color: var(--heading--color);
-  display: flex;
-  column-gap: var(--heading--icon-to-text-spacing);
   font-size: var(--font-size);
   font-weight: var(--heading--font-weight);
   --heading-line-height: calc(var(--font-size) * var(--line-height--default));
@@ -14,39 +12,54 @@
     color: var(--heading--color-light);
   }
 
-  .icon,
-  > :global(.flow--alert-icon) {
-    height: var(--heading-line-height);
-    width: var(--heading-line-height);
+  .headingText {
+    .icon,
+    > :global(.flow--alert-icon) {
+      height: var(--heading-line-height);
+      width: var(--heading-line-height);
+      vertical-align: bottom;
+      display: inline-block;
+      margin-inline-end: var(--heading--icon-to-text-spacing);
+    }
+
+    &:not(:last-child):has(+ .headingContent:not(:empty)) {
+      margin-inline-end: var(--heading--icon-to-text-spacing);
+    }
   }
 
   .headingContent {
+    vertical-align: bottom;
+    display: inline-flex;
     height: var(--heading-line-height);
-    display: flex;
     align-items: center;
+    column-gap: var(--heading--icon-to-text-spacing);
+
+    &:empty {
+      display: none;
+    }
   }
 
   &:where(h1) {
-    --font-size: var(--heading-font-size--xl);
+    --font-size: var(--font-size-heading--xl);
   }
 
   &:where(h2) {
-    --font-size: var(--heading-font-size--m);
+    --font-size: var(--font-size-heading--m);
   }
 
   &:where(h3) {
-    --font-size: var(--heading-font-size--s);
+    --font-size: var(--font-size-heading--s);
   }
 
   &:where(h4),
   &:where(h5),
   &:where(h6) {
-    --font-size: var(--heading-font-size--xs);
+    --font-size: var(--font-size-heading--xs);
   }
 
   @mixin size($size) {
     &.#{$size} {
-      --font-size: var(--heading-font-size--#{$size});
+      --font-size: var(--font-size-heading--#{$size});
     }
   }
 
@@ -60,6 +73,6 @@
 
 @media (max-width: 550px) {
   .heading:where(h1) {
-    --font-size: var(--heading-font-size--l);
+    --font-size: var(--font-size-heading--l);
   }
 }

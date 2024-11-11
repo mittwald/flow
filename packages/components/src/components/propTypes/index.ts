@@ -50,6 +50,10 @@ import type { DateRangePickerProps } from "@/components/DateRangePicker";
 import type { TimeFieldProps } from "@/components/TimeField";
 import type { AlertIconProps } from "@/components/AlertIcon";
 import type { ListSummaryProps } from "@/components/List/components/ListSummary/ListSummary";
+import type { SegmentedControlProps } from "@/components/SegmentedControl";
+import type { SegmentProps } from "src/components/SegmentedControl/components/Segment";
+import type { FileCardProps } from "@/components/FileCard";
+import type { FileFieldProps } from "@/components/FileField";
 
 export * from "./types";
 
@@ -70,12 +74,15 @@ export interface FlowComponentPropsTypes {
   ContextMenuSection: ContextMenuSectionProps;
   ContextMenuTrigger: OverlayTriggerProps;
   ContextualHelp: ContextualHelpProps;
+  ContextualHelpTrigger: OverlayTriggerProps;
   CopyButton: CopyButtonProps;
   CounterBadge: CounterBadgeProps;
   DatePicker: DatePickerProps<Aria.DateValue>;
   DateRangePicker: DateRangePickerProps<Aria.DateValue>;
   FieldDescription: FieldDescriptionProps;
   FieldError: FieldErrorProps;
+  FileCard: FileCardProps;
+  FileField: FileFieldProps;
   Header: HeaderProps;
   Heading: HeadingProps;
   Icon: IconProps;
@@ -98,6 +105,8 @@ export interface FlowComponentPropsTypes {
   RadioGroup: RadioGroupProps;
   SearchField: SearchFieldProps;
   Section: SectionProps;
+  Segment: SegmentProps;
+  SegmentedControl: SegmentedControlProps;
   Select: SelectProps;
   Slider: SliderProps;
   Switch: SwitchProps;
@@ -129,12 +138,15 @@ const propsContextSupportingComponentsMap: Record<
   ContextMenuSection: true,
   ContextMenuTrigger: true,
   ContextualHelp: true,
+  ContextualHelpTrigger: true,
   CopyButton: true,
   CounterBadge: true,
   DatePicker: true,
   DateRangePicker: true,
   FieldDescription: true,
   FieldError: true,
+  FileCard: true,
+  FileField: true,
   Header: true,
   Heading: true,
   Icon: true,
@@ -157,6 +169,8 @@ const propsContextSupportingComponentsMap: Record<
   RadioGroup: true,
   SearchField: true,
   Section: true,
+  Segment: true,
+  SegmentedControl: true,
   Select: true,
   Slider: true,
   Switch: true,
