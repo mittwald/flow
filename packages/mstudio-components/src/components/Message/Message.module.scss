@@ -1,0 +1,15 @@
+.message {
+  border-radius: var(--message--corner-radius);
+  padding-inline: var(--message--padding-x);
+  padding-block: var(--message--padding-y);
+
+  background-color: var(--message--background-color-sender);
+
+  &.responder {
+    background-color: var(--message--background-color-responder);
+  }
+
+  &.internal {
+    background-color: var(--message--background-color-internal);
+  }
+}

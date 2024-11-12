@@ -4497,6 +4497,7 @@ const RAW_RUNTIME_STATE =
           ["@testing-library/react", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:16.0.1"],\
           ["@testing-library/user-event", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:14.5.2"],\
           ["@types/invariant", "npm:2.2.37"],\
+          ["@types/luxon", "npm:3.4.2"],\
           ["@types/node", "npm:22.7.5"],\
           ["@types/prettier", "npm:3.0.0"],\
           ["@types/prop-types", "npm:15.7.13"],\
@@ -4511,6 +4512,7 @@ const RAW_RUNTIME_STATE =
           ["glob", "npm:10.4.5"],\
           ["happy-dom", "npm:15.7.4"],\
           ["html-react-parser", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:5.1.18"],\
+          ["luxon", "npm:3.5.0"],\
           ["next", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:14.2.15"],\
           ["nx", "virtual:0f196ee022db0ef66dff42eeb9a201ea1a8aaaf1b346295bb86504146fb5e4442a0e1868781449daca06e09c92640d77d857bea488d43129e59692cf7ae1bee5#npm:20.0.0"],\
           ["object-code", "npm:1.3.3"],\
