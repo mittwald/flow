@@ -107,7 +107,10 @@ export default () => {
       <Heading>Domain-Ziel ändern</Heading>
       <Content>
         <Section>
-          <TextField isRequired>
+          <TextField
+            isRequired
+            defaultValue={domain.hostname}
+          >
             <Label>Domain-Ziel</Label>
           </TextField>
         </Section>
@@ -179,7 +182,7 @@ export default () => {
       <ColumnLayout s={[1, 1]}>
         <LabeledValue>
           <Label>Domain-Ziel</Label>
-          <Text>{domain.domain}</Text>
+          <Text>{domain.hostname}</Text>
         </LabeledValue>
         <LabeledValue>
           <Label>Zertifikat</Label>
@@ -204,17 +207,10 @@ export default () => {
         <LabeledValue>
           <Label>Inhaber</Label>
           <Text>
-            Max Mustermann
+            {domain.owner.firstName} {domain.owner.lastName}
             <br />
-            Königsberger Str. 4, 32339 Espelkamp
-          </Text>
-        </LabeledValue>
-        <LabeledValue>
-          <Label>Kontaktdaten</Label>
-          <Text>
-            max@mustermann.de
-            <br />
-            0163/123456789
+            {domain.owner.street} {domain.owner.houseNumber}
+            , {domain.owner.zip} {domain.owner.city}
           </Text>
         </LabeledValue>
       </ColumnLayout>
