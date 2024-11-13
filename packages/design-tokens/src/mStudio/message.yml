@@ -7,8 +7,10 @@ message:
     value: "{size-px.m}"
   spacing-y:
     value: "{size-rem.s}"
+  spacing-x:
+    value: "{size-rem.m}"
   background-color-responder:
-    value: "{color.gray.300}"
+    value: "{color.gray.400}"
   background-color-sender:
     value: "{color.hosting-blue.200}"
   background-color-internal:

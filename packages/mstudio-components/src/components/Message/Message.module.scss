@@ -1,15 +1,88 @@
 .message {
-  border-radius: var(--message--corner-radius);
-  padding-inline: var(--message--padding-x);
-  padding-block: var(--message--padding-y);
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--message--spacing-y);
+  width: max-content;
+  max-width: 100%;
 
-  background-color: var(--message--background-color-sender);
+  .content {
+    grid-area: content;
+    border-radius: var(--message--corner-radius);
+    padding-inline: var(--message--padding-x);
+    padding-block: var(--message--padding-y);
+    background-color: var(--message--background-color-sender);
+  }
 
-  &.responder {
+  &.responder .content {
     background-color: var(--message--background-color-responder);
   }
 
-  &.internal {
+  &.internal .content {
     background-color: var(--message--background-color-internal);
+  }
+
+  .header {
+    display: flex;
+    column-gap: var(--message--spacing-x);
+    row-gap: var(--message--spacing-y);
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: var(--font-size-text--s);
+
+    :global(.flow-mstudio--avatar-value) {
+      flex-grow: 1;
+      order: 1;
+    }
+
+    .date {
+      font-size: var(--font-size-text--s);
+      order: 2;
+    }
+
+    .action {
+      order: 3;
+    }
+  }
+
+  &.right {
+    .header {
+      flex-direction: row-reverse;
+
+      :global(.flow-mstudio--avatar-value) {
+        flex-direction: row-reverse;
+
+        :global(.flow--text) {
+          text-align: end;
+        }
+      }
+    }
+  }
+
+  &.shared {
+    .content {
+      outline-width: var(--message--shared-outline-width);
+      outline-offset: calc(var(--message--shared-outline-width) * -1);
+      outline-color: var(--message--shared-outline-color);
+      outline-style: solid;
+      animation: flash 2s ease-in forwards;
+
+      @keyframes flash {
+        0% {
+          outline-color: var(--message--shared-outline-color);
+        }
+        25% {
+          outline-color: var(--color--transparent);
+        }
+        50% {
+          outline-color: var(--message--shared-outline-color);
+        }
+        75% {
+          outline-color: var(--color--transparent);
+        }
+        100% {
+          outline-color: var(--message--shared-outline-color);
+        }
+      }
+    }
   }
 }

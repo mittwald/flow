@@ -2,27 +2,62 @@ import type { FC, PropsWithChildren } from "react";
 import React from "react";
 import clsx from "clsx";
 import styles from "./Message.module.scss";
-import Text from "@mittwald/flow-react-components/Text";
-import type { DateTime } from "luxon";
-import { Content } from "@mittwald/flow-react-components/Content";
+import type { PropsContext } from "@mittwald/flow-react-components/PropsContext";
+import PropsContextProvider from "@mittwald/flow-react-components/PropsContextProvider";
+import { IconContextMenu } from "@mittwald/flow-react-components/Icons";
+import type { PropsWithClassName } from "@mittwald/flow-react-components/props";
 
-export interface MessageProps extends PropsWithChildren {
+export interface MessageProps extends PropsWithChildren, PropsWithClassName {
   /** @default "sender" */
   type?: "responder" | "sender" | "internal";
-  date: DateTime;
+  orientation?: "left" | "right";
+  shared?: boolean;
 }
 
 export const Message: FC<MessageProps> = (props) => {
-  const { type = "sender", children } = props;
+  const {
+    type = "sender",
+    children,
+    className,
+    orientation = "left",
+    shared,
+  } = props;
 
-  const rootClassName = clsx(styles.message, styles[type]);
+  const rootClassName = clsx(
+    styles.message,
+    styles[type],
+    styles[orientation],
+    shared && styles.shared,
+    className,
+  );
+
+  const propsContext: PropsContext = {
+    Content: { className: styles.content },
+    Header: {
+      className: styles.header,
+      Button: {
+        className: styles.action,
+        size: "s",
+        variant: "plain",
+        color: "secondary",
+      },
+      ContextMenuTrigger: {
+        Button: {
+          className: styles.action,
+          size: "s",
+          variant: "plain",
+          color: "secondary",
+          children: <IconContextMenu />,
+        },
+      },
+      Text: { className: styles.date },
+    },
+  };
 
   return (
-    <article className={rootClassName}>
-      <Content className={styles.messageContent}>
-        <Text>{children}</Text>
-      </Content>
-    </article>
+    <PropsContextProvider props={propsContext}>
+      <article className={rootClassName}>{children}</article>
+    </PropsContextProvider>
   );
 };
 
