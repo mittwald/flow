@@ -45,7 +45,10 @@ export const Footer: FC = () => {
               <Heading level={3}>Hilf uns, Flow noch besser zu machen!</Heading>
               Fehlt dir eine bestimmte Component oder etwas Anderes? Hast du
               Feedback? Dann teile es uns gerne auf GitHub mit.
-              <Link color="dark" href="#">
+              <Link
+                color="dark"
+                href="https://github.com/mittwald/flow/issues/new?template=general-style-guide-feedback.md"
+              >
                 Feedback zu Flow geben
               </Link>
             </Section>
