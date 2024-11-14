@@ -1,8 +1,14 @@
 .footer {
   background-color: var(--color--hosting-blue--200);
+  margin: 0;
+
+  & > * {
+    max-width: 1500px;
+    margin: 0 auto;
+  }
 }
 
-@media (max-width: 1200px) {
+@container (max-width: 850px) {
   .feedbackPicture {
     display: none;
   }

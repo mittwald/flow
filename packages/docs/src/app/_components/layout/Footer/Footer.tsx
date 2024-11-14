@@ -16,7 +16,7 @@ import clsx from "clsx";
 export const Footer: FC = () => {
   return (
     <LayoutCard elementType="footer" className={styles.footer}>
-      <ColumnLayout m={[1, 1, 2]} l={[1, 1, 3]}>
+      <ColumnLayout m={[1, 1, 2]} l={[1, 1, 2, 1]}>
         <Section>
           <Header>
             <Heading level={3}>Contributoren-Seiten</Heading>
@@ -39,27 +39,25 @@ export const Footer: FC = () => {
             Datenschutz
           </Link>
         </Section>
-        <>
-          <ColumnLayout m={[1]} l={[1, 1]}>
-            <Section>
-              <Heading level={3}>Hilf uns, Flow noch besser zu machen!</Heading>
-              Fehlt dir eine bestimmte Component oder etwas Anderes? Hast du
-              Feedback? Dann teile es uns gerne auf GitHub mit.
-              <Link
-                color="dark"
-                href="https://github.com/mittwald/flow/issues/new?template=general-style-guide-feedback.md"
-              >
-                Feedback zu Flow geben
-              </Link>
-            </Section>
-            <Image
-              src={feedback.src}
-              alt="Styleguide Feedback"
-              className={clsx(styles.feedbackPicture)}
-            />
-          </ColumnLayout>
-        </>
+
+        <Section>
+          <Heading level={3}>Hilf uns, Flow noch besser zu machen!</Heading>
+          Fehlt dir eine bestimmte Component oder etwas Anderes? Hast du
+          Feedback? Dann teile es uns gerne auf GitHub mit.
+          <Link
+            color="dark"
+            href="https://github.com/mittwald/flow/issues/new?template=general-style-guide-feedback.md"
+          >
+            Feedback zu Flow geben
+          </Link>
+        </Section>
+        <Image
+          src={feedback.src}
+          alt="Styleguide Feedback"
+          className={clsx(styles.feedbackPicture)}
+        />
       </ColumnLayout>
+      <br />
       <small>
         <Image src={logoMittwald.src} alt="mittwald Logo" />© 2024 Mittwald CM
         Service GmbH & Co. KG
