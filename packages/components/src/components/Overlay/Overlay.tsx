@@ -1,27 +1,29 @@
 import * as Aria from "react-aria-components";
 import type { FC, PropsWithChildren } from "react";
 import React from "react";
-import styles from "./ModalOverlay.module.scss";
+import styles from "./Overlay.module.scss";
 import clsx from "clsx";
 import type { OverlayController } from "@/lib/controller";
 import { useOverlayController } from "@/lib/controller";
 import OverlayContextProvider from "@/lib/controller/overlay/OverlayContextProvider";
 
-export interface ModalOverlayProps extends PropsWithChildren {
+export interface OverlayProps extends PropsWithChildren {
   controller?: OverlayController;
   isDismissable?: boolean;
   className?: string;
+  overlayType?: "Modal" | "LightBox";
 }
 
-export const ModalOverlay: FC<ModalOverlayProps> = (props) => {
+export const Overlay: FC<OverlayProps> = (props) => {
   const {
     controller: controllerFromProps,
     children,
     isDismissable = true,
     className,
+    overlayType = "Modal",
   } = props;
 
-  const controllerFromContext = useOverlayController("Modal", {
+  const controllerFromContext = useOverlayController(overlayType, {
     reuseControllerFromContext: true,
   });
 
@@ -49,4 +51,4 @@ export const ModalOverlay: FC<ModalOverlayProps> = (props) => {
   );
 };
 
-export default ModalOverlay;
+export default Overlay;

@@ -1,0 +1,33 @@
+.lightBox {
+  background-color: var(--light-box--overlay-background-color);
+
+  [role="dialog"] {
+    outline: none;
+    display: flex;
+    justify-content: center;
+    column-gap: var(--light-box--spacing);
+    max-width: var(--light-box--max-width);
+    max-height: var(--light-box--max-height);
+  }
+
+  .content {
+    overflow: auto;
+    border-radius: var(--light-box--corner-radius);
+  }
+
+  &.fitScreen {
+    .content {
+      > * {
+        max-height: var(--light-box--max-height);
+      }
+    }
+  }
+
+  .actions,
+  .actionGroup [role="group"] {
+    display: flex;
+    row-gap: var(--light-box--spacing);
+    flex-direction: column;
+    flex-shrink: 0;
+  }
+}

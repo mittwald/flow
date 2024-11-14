@@ -72,6 +72,7 @@ export const buildConfig = (opts: Options) => {
     Label: "./src/components/Label/index.ts",
     LabeledValue: "./src/components/LabeledValue/index.ts",
     LayoutCard: "./src/components/LayoutCard/index.ts",
+    LightBox: "./src/components/LightBox/index.ts",
     Link: "./src/components/Link/index.ts",
     List: "./src/components/List/index.ts",
     "List/ListLoaderAsyncResource":

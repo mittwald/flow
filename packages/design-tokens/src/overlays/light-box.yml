@@ -1,0 +1,11 @@
+light-box:
+  overlay-background-color:
+    value: "{dark.color.600}"
+  max-width:
+    value: "calc(100vw - {size-px.l})"
+  max-height:
+    value: "calc(100vh - {size-px.l})"
+  corner-radius:
+    value: "{corner-radius.default}"
+  spacing:
+    value: "{size-px.s}"

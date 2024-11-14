@@ -1,3 +1,3 @@
 overlay:
   background-color:
-    value: rgba(0, 0, 0, 0.3)
+    value: "{dark.color.200}"

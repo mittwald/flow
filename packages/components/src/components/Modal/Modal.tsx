@@ -8,7 +8,7 @@ import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import type { OverlayController } from "@/lib/controller/overlay";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import { ModalOverlay } from "@/components/ModalOverlay";
+import { Overlay } from "@/components/Overlay";
 import { Header } from "@/components/Header";
 import { Action } from "@/components/Action";
 import { Button } from "@/components/Button";
@@ -68,7 +68,7 @@ export const Modal = flowComponent("Modal", (props) => {
   };
 
   return (
-    <ModalOverlay className={rootClassName} controller={controller} {...rest}>
+    <Overlay className={rootClassName} controller={controller} {...rest}>
       <PropsContextProvider props={propsContext}>
         <TunnelProvider>
           <Header className={styles.header}>
@@ -88,7 +88,7 @@ export const Modal = flowComponent("Modal", (props) => {
           {children}
         </TunnelProvider>
       </PropsContextProvider>
-    </ModalOverlay>
+    </Overlay>
   );
 });
 
