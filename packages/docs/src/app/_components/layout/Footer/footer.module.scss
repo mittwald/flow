@@ -1,0 +1,9 @@
+.footer {
+  background-color: var(--color--hosting-blue--200);
+}
+
+@media (max-width: 1200px) {
+  .feedbackPicture {
+    display: none;
+  }
+}
