@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.346](https://github.com/mittwald/flow/compare/0.1.0-alpha.345...0.1.0-alpha.346) (2024-11-14)
+
+### Bug Fixes
+
+- **OverlayController:** fix overlayController handler management
+  ([cfd55bf](https://github.com/mittwald/flow/commit/cfd55bf9075a445f2bd6c48d36a0274d0bc32f2f))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.345](https://github.com/mittwald/flow/compare/0.1.0-alpha.344...0.1.0-alpha.345) (2024-11-14)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
