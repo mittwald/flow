@@ -28,6 +28,7 @@ export default function loadProperties(name: string): Properties | null {
         default: prop.defaultValue ? prop.defaultValue.value : null,
         description: prop.description,
         required: prop.required,
+        deprecated: prop.description.includes("@deprecated"),
         type,
       };
     });

@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import defaultMeta from "./Default.stories";
 import { FileCard } from "@/components/FileCard";
 import { dummyText } from "@/lib/dev/dummyText";
+import { action } from "@storybook/addon-actions";
 
 const meta: Meta<typeof FileCard> = {
   ...defaultMeta,
@@ -13,5 +14,22 @@ export default meta;
 type Story = StoryObj<typeof FileCard>;
 
 export const LongName: Story = {
-  args: { name: dummyText.long, sizeInBytes: 47500 },
+  args: {
+    name: dummyText.long,
+    sizeInBytes: 47500,
+    onDelete: () => {
+      action("onDelete");
+    },
+  },
+};
+
+export const LongNameAndLink: Story = {
+  args: {
+    name: dummyText.long,
+    sizeInBytes: 47500,
+    onDelete: () => {
+      action("onDelete");
+    },
+    href: "#",
+  },
 };

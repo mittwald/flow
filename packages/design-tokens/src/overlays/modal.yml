@@ -26,3 +26,5 @@ modal:
     value: "{size-px.s}"
   off-canvas-header-background-color:
     value: "{neutral.color.200}"
+  off-canvas-max-width:
+    value: "calc(100vw - {size-px.m})"
