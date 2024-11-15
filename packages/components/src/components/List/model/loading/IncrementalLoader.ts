@@ -12,6 +12,8 @@ import { times } from "remeda";
 import { IncrementalLoaderState } from "@/components/List/model/loading/IncrementalLoaderState";
 import { hash } from "object-code";
 
+type AsyncResourceLoadingState = AsyncResource["state"]["value"];
+
 const emptyData: never[] = [];
 
 export class IncrementalLoader<T> {
@@ -97,15 +99,16 @@ export class IncrementalLoader<T> {
     asyncResource: AsyncResource<DataLoaderResult<T>>,
     batchIndex: number,
   ): void {
-    useEffect(() => {
+    const setNewState = (newState: AsyncResourceLoadingState) => {
       this.loaderState.setBatchLoadingState(
         batchIndex,
-        asyncResource.state.value,
+        this.loaderState.isBatchLoaded(batchIndex) ? "loaded" : newState,
       );
+    };
 
-      return asyncResource.state.observe((newState) => {
-        this.loaderState.setBatchLoadingState(batchIndex, newState);
-      });
+    useEffect(() => {
+      setNewState(asyncResource.state.value);
+      return asyncResource.state.observe(setNewState);
     }, [asyncResource, batchIndex]);
   }
 
