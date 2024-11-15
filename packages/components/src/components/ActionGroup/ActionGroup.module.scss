@@ -5,6 +5,10 @@
     order: 3;
   }
 
+  .primary:only-child {
+    margin-left: auto;
+  }
+
   .secondary {
     order: 2;
   }
