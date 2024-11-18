@@ -23,7 +23,8 @@ const meta: Meta<typeof Message> = {
         <ContextMenuTrigger>
           <Button />
           <ContextMenu>
-            <MenuItem>Item 1</MenuItem>
+            <MenuItem>Bearbeiten</MenuItem>
+            <MenuItem>Löschen</MenuItem>
           </ContextMenu>
         </ContextMenuTrigger>
         <Align>

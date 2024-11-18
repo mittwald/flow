@@ -48,7 +48,7 @@
     .header {
       flex-direction: row-reverse;
 
-      :global(.flow-mstudio--avatar-value) {
+      :global(.flow-mstudio--align) {
         flex-direction: row-reverse;
 
         :global(.flow--text) {
