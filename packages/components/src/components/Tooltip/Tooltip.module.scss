@@ -9,37 +9,37 @@
   transform: translate3d(0, 0, 0);
   box-shadow: var(--tooltip--box-shadow);
 
-  --translate-origin-length: var(--tooltip--tooltip-to-content-spacing) / 2;
+  --translate-origin-length: var(--tooltip--tooltip-to-trigger-spacing) / 2;
 
   /* Placement */
   &[data-placement="top"] {
-    margin-bottom: var(--tooltip--tooltip-to-content-spacing);
+    margin-bottom: var(--tooltip--tooltip-to-trigger-spacing);
     --translate-origin: translateY(var(--translate-origin-length));
   }
 
   &[data-placement="bottom"] {
-    margin-top: var(--tooltip--tooltip-to-content-spacing);
+    margin-top: var(--tooltip--tooltip-to-trigger-spacing);
     --translate-origin: translateY(var(--translate-origin-length) * -1);
 
-    .arrow svg {
+    .tip svg {
       transform: rotate(180deg);
     }
   }
 
   &[data-placement="right"] {
-    margin-left: var(--tooltip--tooltip-to-content-spacing);
+    margin-left: var(--tooltip--tooltip-to-trigger-spacing);
     --translate-origin: translateX(var(--translate-origin-length) * -1);
 
-    .arrow svg {
+    .tip svg {
       transform: rotate(90deg);
     }
   }
 
   &[data-placement="left"] {
-    margin-right: var(--tooltip--tooltip-to-content-spacing);
+    margin-right: var(--tooltip--tooltip-to-trigger-spacing);
     --translate-origin: translateX(var(--translate-origin-length));
 
-    .arrow svg {
+    .tip svg {
       transform: rotate(-90deg);
     }
   }
@@ -54,9 +54,9 @@
     animation: slide 200ms reverse ease-in;
   }
 
-  .arrow {
-    width: var(--tooltip--arrow-size);
-    height: var(--tooltip--arrow-size);
+  .tip {
+    width: var(--tooltip--tip-size);
+    height: var(--tooltip--tip-size);
 
     svg {
       display: block;
