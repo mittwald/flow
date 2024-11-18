@@ -75,4 +75,8 @@ export class IncrementalLoaderState<T> {
   public useIsLoading(): boolean {
     return useSelector(() => this.isLoading);
   }
+
+  public isBatchLoaded(batchIndex: number) {
+    return batchIndex in this.dataBatches;
+  }
 }

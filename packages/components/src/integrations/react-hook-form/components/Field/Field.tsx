@@ -57,7 +57,7 @@ export function Field<T extends FieldValues>(props: Props<T>) {
           TextField: formControlProps,
           Select: {
             ...formControlProps,
-            defaultSelectedKey: formControlProps.value,
+            selectedKey: formControlProps.value,
           },
           Slider: formControlProps,
           DatePicker: formControlProps,

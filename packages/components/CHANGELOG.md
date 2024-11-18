@@ -3,6 +3,101 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.348](https://github.com/mittwald/flow/compare/0.1.0-alpha.347...0.1.0-alpha.348) (2024-11-18)
+
+### Bug Fixes
+
+- **Field:** fix Select is not updating its value
+  ([#977](https://github.com/mittwald/flow/issues/977))
+  ([1adecf5](https://github.com/mittwald/flow/commit/1adecf539c9c0fe46537d6fcd87f82968860eed8))
+- **List:** fix initial loading also visible on reload
+  ([#978](https://github.com/mittwald/flow/issues/978))
+  ([e4307cd](https://github.com/mittwald/flow/commit/e4307cd9823ed9e1b3982a1edee81654a14e353b))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.347](https://github.com/mittwald/flow/compare/0.1.0-alpha.346...0.1.0-alpha.347) (2024-11-15)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.346](https://github.com/mittwald/flow/compare/0.1.0-alpha.345...0.1.0-alpha.346) (2024-11-14)
+
+### Bug Fixes
+
+- **OverlayController:** fix overlayController handler management
+  ([cfd55bf](https://github.com/mittwald/flow/commit/cfd55bf9075a445f2bd6c48d36a0274d0bc32f2f))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.345](https://github.com/mittwald/flow/compare/0.1.0-alpha.344...0.1.0-alpha.345) (2024-11-14)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.344](https://github.com/mittwald/flow/compare/0.1.0-alpha.343...0.1.0-alpha.344) (2024-11-12)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.343](https://github.com/mittwald/flow/compare/0.1.0-alpha.342...0.1.0-alpha.343) (2024-11-12)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.342](https://github.com/mittwald/flow/compare/0.1.0-alpha.341...0.1.0-alpha.342) (2024-11-12)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.341](https://github.com/mittwald/flow/compare/0.1.0-alpha.340...0.1.0-alpha.341) (2024-11-12)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.340](https://github.com/mittwald/flow/compare/0.1.0-alpha.339...0.1.0-alpha.340) (2024-11-11)
+
+### Bug Fixes
+
+- **Notification:** Also call onClose handler from notification component props
+  if notification comes from an NotificationProvider
+  ([29bc5f0](https://github.com/mittwald/flow/commit/29bc5f01f151a7889912e24e889ecb2efe3c210a))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.339](https://github.com/mittwald/flow/compare/0.1.0-alpha.338...0.1.0-alpha.339) (2024-11-11)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
