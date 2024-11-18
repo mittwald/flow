@@ -3,10 +3,6 @@ menu:
     value: "{size-px.xs}"
   group-to-group-spacing:
     value: "{size-px.m}"
-  label-to-group-spacing:
-    value: "{size-px.xs}"
-  separator-to-item-spacing:
-    value: "{size-px.s}"
 
 menu-item:
   font-weight:
@@ -18,7 +14,7 @@ menu-item:
     value: "{size-px.s}"
   padding-y:
     value: "{size-px.xs}"
-  icon-to-text-spacing:
+  spacing:
     value: "{size-rem.s}"
 
   color:
