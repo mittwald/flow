@@ -6,7 +6,7 @@ import { Text } from "@mittwald/flow-react-components/Text";
 import { Align } from "@/components/Align";
 
 const meta: Meta<typeof Align> = {
-  title: "Align",
+  title: "Align/Avatar + Text",
   component: Align,
   render: (props) => (
     <Align {...props}>

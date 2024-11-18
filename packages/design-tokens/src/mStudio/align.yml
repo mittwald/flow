@@ -1,3 +1,4 @@
 align:
-  spacing:
-    value: "{size-rem.s}"
+  avatar-text:
+    spacing:
+      value: "{size-rem.s}"
