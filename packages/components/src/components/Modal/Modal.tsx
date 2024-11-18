@@ -73,17 +73,15 @@ export const Modal = flowComponent("Modal", (props) => {
         <TunnelProvider>
           <Header className={styles.header}>
             <TunnelExit id="heading" />
-            {offCanvas && (
-              <Action closeOverlay="Modal">
-                <Button
-                  variant="plain"
-                  color="secondary"
-                  className={styles.closeButton}
-                >
-                  <IconClose />
-                </Button>
-              </Action>
-            )}
+            <Action closeOverlay="Modal">
+              <Button
+                variant="plain"
+                color="secondary"
+                className={styles.closeButton}
+              >
+                <IconClose />
+              </Button>
+            </Action>
           </Header>
           {children}
         </TunnelProvider>
