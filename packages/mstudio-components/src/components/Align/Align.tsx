@@ -1,19 +1,17 @@
 import type { FC, PropsWithChildren } from "react";
 import React from "react";
 import type { PropsWithClassName } from "@mittwald/flow-react-components/props";
-import styles from "./AvatarValue.module.scss";
+import styles from "./Align.module.scss";
 import clsx from "clsx";
 import type { PropsContext } from "@mittwald/flow-react-components/PropsContext";
 import PropsContextProvider from "@mittwald/flow-react-components/PropsContextProvider";
 
-export interface AvatarValueProps
-  extends PropsWithChildren,
-    PropsWithClassName {}
+export interface AlignProps extends PropsWithChildren, PropsWithClassName {}
 
-export const AvatarValue: FC<AvatarValueProps> = (props) => {
+export const Align: FC<AlignProps> = (props) => {
   const { children, className } = props;
 
-  const rootClassName = clsx(styles.avatarValue, className);
+  const rootClassName = clsx(styles.align, className);
 
   const propsContext: PropsContext = {
     Text: { className: styles.text },
@@ -27,4 +25,4 @@ export const AvatarValue: FC<AvatarValueProps> = (props) => {
   );
 };
 
-export default AvatarValue;
+export default Align;

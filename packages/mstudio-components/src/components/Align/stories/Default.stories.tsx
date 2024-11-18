@@ -3,13 +3,13 @@ import React from "react";
 import { Avatar } from "@mittwald/flow-react-components/Avatar";
 import { Initials } from "@mittwald/flow-react-components/Initials";
 import { Text } from "@mittwald/flow-react-components/Text";
-import { AvatarValue } from "@/components/AvatarValue";
+import { Align } from "@/components/Align";
 
-const meta: Meta<typeof AvatarValue> = {
-  title: "AvatarValue",
-  component: AvatarValue,
+const meta: Meta<typeof Align> = {
+  title: "Align",
+  component: Align,
   render: (props) => (
-    <AvatarValue {...props}>
+    <Align {...props}>
       <Avatar>
         <Initials>Max Mustermann</Initials>
       </Avatar>
@@ -17,18 +17,18 @@ const meta: Meta<typeof AvatarValue> = {
         <b>Max Mustermann</b>
         Organisationsinhaber
       </Text>
-    </AvatarValue>
+    </Align>
   ),
 };
 export default meta;
 
-type Story = StoryObj<typeof AvatarValue>;
+type Story = StoryObj<typeof Align>;
 
 export const Default: Story = {};
 
 export const Multiline: Story = {
   render: (props) => (
-    <AvatarValue {...props}>
+    <Align {...props}>
       <Avatar>
         <Initials>Max Mustermann</Initials>
       </Avatar>
@@ -40,19 +40,34 @@ export const Multiline: Story = {
         <br />
         0163/123456789
       </Text>
-    </AvatarValue>
+    </Align>
   ),
 };
 
 export const Singleline: Story = {
   render: (props) => (
-    <AvatarValue {...props}>
+    <Align {...props}>
       <Avatar>
         <Initials>Max Mustermann</Initials>
       </Avatar>
       <Text>
         <b>Max Mustermann</b>
       </Text>
-    </AvatarValue>
+    </Align>
+  ),
+};
+
+export const WithoutBoldText: Story = {
+  render: (props) => (
+    <Align {...props}>
+      <Avatar>
+        <Initials>Max Mustermann</Initials>
+      </Avatar>
+      <Text>
+        Max Mustermann
+        <br />
+        Organisationsinhaber
+      </Text>
+    </Align>
   ),
 };

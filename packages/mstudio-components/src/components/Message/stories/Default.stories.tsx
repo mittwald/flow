@@ -12,7 +12,7 @@ import { Avatar } from "@mittwald/flow-react-components/Avatar";
 import { Initials } from "@mittwald/flow-react-components/Initials";
 import { Text } from "@mittwald/flow-react-components/Text";
 import { Header } from "@mittwald/flow-react-components/Header";
-import { AvatarValue } from "@/components/AvatarValue";
+import { Align } from "@/components/Align";
 
 const meta: Meta<typeof Message> = {
   title: "Message",
@@ -26,7 +26,7 @@ const meta: Meta<typeof Message> = {
             <MenuItem>Item 1</MenuItem>
           </ContextMenu>
         </ContextMenuTrigger>
-        <AvatarValue>
+        <Align>
           <Avatar>
             <Initials>Max Mustermann</Initials>
           </Avatar>
@@ -34,7 +34,7 @@ const meta: Meta<typeof Message> = {
             <b>Max Mustermann</b>
             Organisationsinhaber
           </Text>
-        </AvatarValue>
+        </Align>
         <Text>01.09.2024, 12:45</Text>
       </Header>
 

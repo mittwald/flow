@@ -1,0 +1,30 @@
+.align {
+  display: flex;
+  gap: var(--align--spacing);
+
+  .text {
+    font-size: var(--font-size-text--s);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+
+    b {
+      font-size: var(--font-size-text--m);
+    }
+  }
+
+  --first-two-lines-height: calc(var(--line-height--s) * 2);
+
+  &:has(b) {
+    --first-two-lines-height: calc(
+      var(--line-height--m) + var(--line-height--s)
+    );
+  }
+
+  .avatar {
+    margin-top: calc(
+      (var(--first-two-lines-height) - var(--avatar--size--m)) / 2
+    );
+  }
+}
