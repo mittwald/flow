@@ -76,9 +76,9 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
     <ClearPropsContext>
       <Popover
         {...rest}
-        contentClassName={styles.popoverContent}
         controller={overlayController}
         isDialogContent={false}
+        padding="s"
       >
         <OverlayContextProvider
           type="ContextMenu"
