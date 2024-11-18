@@ -203,6 +203,11 @@
       "types": "./dist/js/types/components/LayoutCard/index.d.ts",
       "import": "./dist/js/LayoutCard.js"
     },
+    "./LightBox/styles.css": "./dist/css/LightBox.css",
+    "./LightBox": {
+      "types": "./dist/js/types/components/LightBox/index.d.ts",
+      "import": "./dist/js/LightBox.js"
+    },
     "./Link/styles.css": "./dist/css/Link.css",
     "./Link": {
       "types": "./dist/js/types/components/Link/index.d.ts",

@@ -5,6 +5,7 @@ import type { LabelProps } from "@/components/Label";
 import type { ContentProps } from "@/components/Content";
 import type { LayoutCardProps } from "@/components/LayoutCard";
 import type { LinkProps } from "@/components/Link";
+import type { LightBoxProps } from "@/components/LightBox";
 import type { FieldErrorProps } from "@/components/FieldError";
 import type { FieldDescriptionProps } from "@/components/FieldDescription";
 import type { AlertProps } from "@/components/Alert";
@@ -51,7 +52,7 @@ import type { TimeFieldProps } from "@/components/TimeField";
 import type { AlertIconProps } from "@/components/AlertIcon";
 import type { ListSummaryProps } from "@/components/List/components/ListSummary/ListSummary";
 import type { SegmentedControlProps } from "@/components/SegmentedControl";
-import type { SegmentProps } from "src/components/SegmentedControl/components/Segment";
+import type { SegmentProps } from "@/components/SegmentedControl/components/Segment";
 import type { FileCardProps } from "@/components/FileCard";
 import type { FileFieldProps } from "@/components/FileField";
 
@@ -90,6 +91,7 @@ export interface FlowComponentPropsTypes {
   Initials: InitialsProps;
   Label: LabelProps;
   LayoutCard: LayoutCardProps;
+  LightBox: LightBoxProps;
   Link: LinkProps;
   List: ListProps<never>;
   ListSummary: ListSummaryProps;
@@ -154,6 +156,7 @@ const propsContextSupportingComponentsMap: Record<
   Initials: true,
   Label: true,
   LayoutCard: true,
+  LightBox: true,
   Link: true,
   List: true,
   ListSummary: true,
