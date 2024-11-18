@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.348](https://github.com/mittwald/flow/compare/0.1.0-alpha.347...0.1.0-alpha.348) (2024-11-18)
+
+### Bug Fixes
+
+- **Field:** fix Select is not updating its value
+  ([#977](https://github.com/mittwald/flow/issues/977))
+  ([1adecf5](https://github.com/mittwald/flow/commit/1adecf539c9c0fe46537d6fcd87f82968860eed8))
+- **List:** fix initial loading also visible on reload
+  ([#978](https://github.com/mittwald/flow/issues/978))
+  ([e4307cd](https://github.com/mittwald/flow/commit/e4307cd9823ed9e1b3982a1edee81654a14e353b))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.347](https://github.com/mittwald/flow/compare/0.1.0-alpha.346...0.1.0-alpha.347) (2024-11-15)
 
 **Note:** Version bump only for package @mittwald/flow-project
