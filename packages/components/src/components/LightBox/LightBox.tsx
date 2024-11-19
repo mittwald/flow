@@ -8,11 +8,11 @@ import type { PropsWithClassName } from "@/lib/types/props";
 import { Overlay } from "@/components/Overlay";
 import clsx from "clsx";
 import type { OverlayController } from "@/lib/controller";
+import { useOverlayController } from "@/lib/controller";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import { Button } from "@/components/Button";
 import { IconClose } from "@/components/Icon/components/icons";
-import { Action } from "@/components/Action";
 import styles from "./LightBox.module.scss";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 
@@ -26,7 +26,7 @@ export interface LightBoxProps
 
 export const LightBox = flowComponent("LightBox", (props) => {
   const {
-    controller,
+    controller: controllerFromProps,
     children,
     refProp: ignoredRef,
     className,
@@ -49,6 +49,12 @@ export const LightBox = flowComponent("LightBox", (props) => {
     },
   };
 
+  const controllerFromContext = useOverlayController("LightBox", {
+    reuseControllerFromContext: true,
+  });
+
+  const controller = controllerFromProps ?? controllerFromContext;
+
   return (
     <Overlay
       overlayType="LightBox"
@@ -60,11 +66,9 @@ export const LightBox = flowComponent("LightBox", (props) => {
         <TunnelProvider>
           <div className={styles.content}>{children}</div>
           <div className={styles.actions}>
-            <Action closeOverlay="LightBox">
-              <Button color="light" variant="soft">
-                <IconClose />
-              </Button>
-            </Action>
+            <Button color="light" variant="soft" onPress={controller?.close}>
+              <IconClose />
+            </Button>
             <TunnelExit id="actionGroup" />
           </div>
         </TunnelProvider>
