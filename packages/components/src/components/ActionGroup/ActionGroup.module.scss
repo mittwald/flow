@@ -3,14 +3,18 @@
 
   .primary {
     order: 3;
-  }
-
-  .primary:only-child {
-    margin-left: auto;
+    &:only-child {
+      margin-left: auto;
+    }
   }
 
   .secondary {
+    margin-left: auto;
     order: 2;
+
+    ~ .secondary {
+      margin-left: unset;
+    }
   }
 
   .abort {
