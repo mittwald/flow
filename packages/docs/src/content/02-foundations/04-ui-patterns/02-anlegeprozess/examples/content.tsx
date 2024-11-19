@@ -35,6 +35,7 @@ import Table, {
 import CheckboxButton from "@mittwald/flow-react-components/CheckboxButton";
 import { Action } from "@mittwald/flow-react-components/Action";
 import { LayoutCard } from "@mittwald/flow-react-components/LayoutCard";
+import AlertBadge from "@mittwald/flow-react-components/AlertBadge";
 
 export default () => {
   interface Domain {
