@@ -3135,6 +3135,7 @@ __metadata:
     react-dom: "npm:^18.3.1"
     react-element-to-jsx-string: "npm:^15.0.0"
     react-hook-form: "npm:^7.53.0"
+    react-markdown: "npm:^9.0.1"
     react-stately: "npm:^3.33.0"
     react-syntax-highlighter: "npm:^15.5.0"
     remeda: "npm:^2.15.0"

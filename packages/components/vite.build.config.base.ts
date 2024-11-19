@@ -79,6 +79,7 @@ export const buildConfig = (opts: Options) => {
     "List/ListLoaderAsyncResource":
       "./src/components/List/setupComponents/ListLoaderAsyncResource.ts",
     LoadingSpinner: "./src/components/LoadingSpinner/index.ts",
+    Markdown: "./src/components/Markdown/index.ts",
     MenuItem: "./src/components/MenuItem/index.ts",
     Modal: "./src/components/Modal/index.ts",
     Navigation: "./src/components/Navigation/index.ts",
