@@ -73,7 +73,6 @@ export const Action = flowComponent("Action", (props) => {
           ? action.confirmationModalController
           : action.getOverlayController("Modal");
       }),
-
       ActionGroup: {
         Button: actionButtonContext,
       },
