@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.351](https://github.com/mittwald/flow/compare/0.1.0-alpha.350...0.1.0-alpha.351) (2024-11-19)
+
+### Features
+
+- **Align:** add Align component
+  ([d552a3a](https://github.com/mittwald/flow/commit/d552a3a9178f718f45f70df174f346d109856f58))
+- **List:** add option to toggle list details
+  ([1bc22a4](https://github.com/mittwald/flow/commit/1bc22a4d4b87d77ee5dd1af7bded7331ceaeff12))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.350](https://github.com/mittwald/flow/compare/0.1.0-alpha.349...0.1.0-alpha.350) (2024-11-19)
 
 ### Bug Fixes
