@@ -4454,7 +4454,7 @@ const RAW_RUNTIME_STATE =
           ["remark-frontmatter", "npm:5.0.0"],\
           ["remark-gfm", "npm:4.0.0"],\
           ["remark-mdx-frontmatter", "npm:5.0.0"],\
-          ["remeda", "npm:2.15.0"],\
+          ["remeda", "npm:2.17.3"],\
           ["sass", "npm:1.79.4"],\
           ["tsx", "npm:4.19.1"],\
           ["typescript", "patch:typescript@npm%3A5.6.3#optional!builtin<compat/typescript>::version=5.6.3&hash=8c6c40"],\
@@ -4572,7 +4572,7 @@ const RAW_RUNTIME_STATE =
           ["react-markdown", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:9.0.1"],\
           ["react-stately", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.33.0"],\
           ["react-syntax-highlighter", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:15.6.1"],\
-          ["remeda", "npm:2.15.0"],\
+          ["remeda", "npm:2.17.3"],\
           ["rimraf", "npm:6.0.1"],\
           ["rollup", "npm:4.24.0"],\
           ["sass", "npm:1.79.4"],\
@@ -4686,7 +4686,7 @@ const RAW_RUNTIME_STATE =
           ["react-markdown", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:9.0.1"],\
           ["react-stately", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.33.0"],\
           ["react-syntax-highlighter", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:15.6.1"],\
-          ["remeda", "npm:2.15.0"],\
+          ["remeda", "npm:2.17.3"],\
           ["rimraf", "npm:6.0.1"],\
           ["rollup", "npm:4.24.0"],\
           ["sass", "npm:1.79.4"],\
@@ -4791,7 +4791,7 @@ const RAW_RUNTIME_STATE =
           ["react-markdown", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:9.0.1"],\
           ["react-stately", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:3.33.0"],\
           ["react-syntax-highlighter", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:15.6.1"],\
-          ["remeda", "npm:2.15.0"],\
+          ["remeda", "npm:2.17.3"],\
           ["rimraf", "npm:6.0.1"],\
           ["rollup", "npm:4.24.0"],\
           ["sass", "npm:1.79.4"],\
@@ -22455,11 +22455,11 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["remeda", [\
-      ["npm:2.15.0", {\
-        "packageLocation": "./.yarn/cache/remeda-npm-2.15.0-528798e129-a1e6693be8.zip/node_modules/remeda/",\
+      ["npm:2.17.3", {\
+        "packageLocation": "./.yarn/cache/remeda-npm-2.17.3-2fa26329e7-ec9fc2dae7.zip/node_modules/remeda/",\
         "packageDependencies": [\
-          ["remeda", "npm:2.15.0"],\
-          ["type-fest", "npm:4.26.1"]\
+          ["remeda", "npm:2.17.3"],\
+          ["type-fest", "npm:4.27.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -24244,6 +24244,13 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/type-fest-npm-4.26.1-274c31182d-d2719ff8d3.zip/node_modules/type-fest/",\
         "packageDependencies": [\
           ["type-fest", "npm:4.26.1"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:4.27.0", {\
+        "packageLocation": "./.yarn/cache/type-fest-npm-4.27.0-db24c0fe69-30c8ebe121.zip/node_modules/type-fest/",\
+        "packageDependencies": [\
+          ["type-fest", "npm:4.27.0"]\
         ],\
         "linkType": "HARD"\
       }]\

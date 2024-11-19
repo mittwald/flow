@@ -16953,11 +16953,11 @@ __metadata:
   linkType: hard
 
 "remeda@npm:^2.15.0":
-  version: 2.15.0
-  resolution: "remeda@npm:2.15.0"
+  version: 2.17.3
+  resolution: "remeda@npm:2.17.3"
   dependencies:
-    type-fest: "npm:^4.26.1"
-  checksum: 10c0/a1e6693be8e57fd16ffd49873356387f3227550d3c60a6ec90d9f3798f5830abb007d0a2834a4ee7b9c6bdf56a118444537fcc922fada98aa0aadc0587a92fff
+    type-fest: "npm:^4.27.0"
+  checksum: 10c0/ec9fc2dae7816cb7dad2e2e2dc8bda79e6bfabf55a5bd9cf725e3b03cb6ed4ae9b43e7bb7f45ad1070327c937e20827873b24f6c525c33c899d06fc91690ab1f
   languageName: node
   linkType: hard
 
@@ -18590,10 +18590,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"type-fest@npm:^4.18.2, type-fest@npm:^4.26.1":
+"type-fest@npm:^4.18.2":
   version: 4.26.1
   resolution: "type-fest@npm:4.26.1"
   checksum: 10c0/d2719ff8d380befe8a3c61068f37f28d6fa2849fd140c5d2f0f143099e371da6856aad7c97e56b83329d45bfe504afe9fd936a7cff600cc0d46aa9ffb008d6c6
+  languageName: node
+  linkType: hard
+
+"type-fest@npm:^4.27.0":
+  version: 4.27.0
+  resolution: "type-fest@npm:4.27.0"
+  checksum: 10c0/30c8ebe1219725021f5b5006081bd828c4e915de0de65e9a87065f566a96ece706846b2c874ac04c0dcfdfe6b4ae47ad15d3285c9aab162cb79c026dfb2e7556
   languageName: node
   linkType: hard
 
