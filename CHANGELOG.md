@@ -3,6 +3,51 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.351](https://github.com/mittwald/flow/compare/0.1.0-alpha.350...0.1.0-alpha.351) (2024-11-19)
+
+### Bug Fixes
+
+- **Align:** remove color
+  ([a94bc2b](https://github.com/mittwald/flow/commit/a94bc2be07c55f22f6b8ce23a17a3b800c37b68b))
+
+### Features
+
+- add mstudio components package
+  ([5a6fbd3](https://github.com/mittwald/flow/commit/5a6fbd373b2d34bd5fb78413840769233da6a822))
+- add user menu component
+  ([8a2845f](https://github.com/mittwald/flow/commit/8a2845fba7f7411592fc7e86e5636876fb7ce4a1))
+- add user menu component
+  ([fe29fae](https://github.com/mittwald/flow/commit/fe29fae1f1c4d3748dd5e47c10a5a6faad474288))
+- **Align:** add Align component
+  ([08047eb](https://github.com/mittwald/flow/commit/08047eb16e5b71c06b64163a747651a4763018bb))
+- **Align:** add Align component
+  ([2808aa7](https://github.com/mittwald/flow/commit/2808aa7bb489f20d370e0a972b9195f64973e4e5))
+- **Align:** add Align component
+  ([2089308](https://github.com/mittwald/flow/commit/20893084057983b6740fd8338c9a6e4b60bd230c))
+- **Align:** add Align component
+  ([1516133](https://github.com/mittwald/flow/commit/1516133fca94868931f5e99f26afd198e2ca952d))
+- **Align:** add Align component
+  ([1225ad2](https://github.com/mittwald/flow/commit/1225ad2e3b77dcd69cd3ae1405f78d7daaf3de04))
+- **Align:** add Align component
+  ([acbf372](https://github.com/mittwald/flow/commit/acbf37228b2ece920f0add7d87a9ca9c9f697941))
+- **Align:** add Align component
+  ([9dac2d4](https://github.com/mittwald/flow/commit/9dac2d498e5ae30a6b6705abe57142f67f36df40))
+- **Message:** add message component
+  ([1775ac6](https://github.com/mittwald/flow/commit/1775ac640114e90183a5ff265575df47152a3f71))
+- **Message:** add mstudio message component
+  ([ac9528d](https://github.com/mittwald/flow/commit/ac9528d4660e49b8e138fe273a13ff79b441ff89))
+- **UserMenu:** add tokens
+  ([52bf4fd](https://github.com/mittwald/flow/commit/52bf4fd443c87699f7eb300e3d324edc4ba63325))
+- **UserMenu:** add user menu
+  ([024b6d3](https://github.com/mittwald/flow/commit/024b6d3f0f50d01dce80e6801736f423bc0b6448))
+- **UserMenu:** add user menu
+  ([52fce99](https://github.com/mittwald/flow/commit/52fce99481d694dbc5f1973bfaf3c22507f3bed7))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.350](https://github.com/mittwald/flow/compare/0.1.0-alpha.349...0.1.0-alpha.350) (2024-11-19)
 
 ### Bug Fixes

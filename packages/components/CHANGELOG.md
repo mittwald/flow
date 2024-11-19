@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.351](https://github.com/mittwald/flow/compare/0.1.0-alpha.350...0.1.0-alpha.351) (2024-11-19)
+
+### Bug Fixes
+
+- **Align:** remove color
+  ([a94bc2b](https://github.com/mittwald/flow/commit/a94bc2be07c55f22f6b8ce23a17a3b800c37b68b))
+
+### Features
+
+- add user menu component
+  ([8a2845f](https://github.com/mittwald/flow/commit/8a2845fba7f7411592fc7e86e5636876fb7ce4a1))
+- add user menu component
+  ([fe29fae](https://github.com/mittwald/flow/commit/fe29fae1f1c4d3748dd5e47c10a5a6faad474288))
+- **Align:** add Align component
+  ([08047eb](https://github.com/mittwald/flow/commit/08047eb16e5b71c06b64163a747651a4763018bb))
+- **Align:** add Align component
+  ([2808aa7](https://github.com/mittwald/flow/commit/2808aa7bb489f20d370e0a972b9195f64973e4e5))
+- **Align:** add Align component
+  ([2089308](https://github.com/mittwald/flow/commit/20893084057983b6740fd8338c9a6e4b60bd230c))
+- **Align:** add Align component
+  ([1516133](https://github.com/mittwald/flow/commit/1516133fca94868931f5e99f26afd198e2ca952d))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.350](https://github.com/mittwald/flow/compare/0.1.0-alpha.349...0.1.0-alpha.350) (2024-11-19)
 
 ### Bug Fixes

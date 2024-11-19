@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.351](https://github.com/mittwald/flow/compare/0.1.0-alpha.350...0.1.0-alpha.351) (2024-11-19)
+
+### Features
+
+- **Align:** add Align component
+  ([2089308](https://github.com/mittwald/flow/commit/20893084057983b6740fd8338c9a6e4b60bd230c))
+- **Align:** add Align component
+  ([1225ad2](https://github.com/mittwald/flow/commit/1225ad2e3b77dcd69cd3ae1405f78d7daaf3de04))
+- **Align:** add Align component
+  ([9dac2d4](https://github.com/mittwald/flow/commit/9dac2d498e5ae30a6b6705abe57142f67f36df40))
+- **Message:** add message component
+  ([1775ac6](https://github.com/mittwald/flow/commit/1775ac640114e90183a5ff265575df47152a3f71))
+- **Message:** add mstudio message component
+  ([ac9528d](https://github.com/mittwald/flow/commit/ac9528d4660e49b8e138fe273a13ff79b441ff89))
+- **UserMenu:** add tokens
+  ([52bf4fd](https://github.com/mittwald/flow/commit/52bf4fd443c87699f7eb300e3d324edc4ba63325))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.350](https://github.com/mittwald/flow/compare/0.1.0-alpha.349...0.1.0-alpha.350) (2024-11-19)
 
 **Note:** Version bump only for package @mittwald/flow-design-tokens
