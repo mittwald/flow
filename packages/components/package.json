@@ -39,6 +39,11 @@
       "types": "./dist/js/types/components/AlertIcon/index.d.ts",
       "import": "./dist/js/AlertIcon.js"
     },
+    "./Align/styles.css": "./dist/css/Align.css",
+    "./Align": {
+      "types": "./dist/js/types/components/Align/index.d.ts",
+      "import": "./dist/js/Align.js"
+    },
     "./Avatar/styles.css": "./dist/css/Avatar.css",
     "./Avatar": {
       "types": "./dist/js/types/components/Avatar/index.d.ts",
@@ -226,6 +231,11 @@
     "./LoadingSpinner": {
       "types": "./dist/js/types/components/LoadingSpinner/index.d.ts",
       "import": "./dist/js/LoadingSpinner.js"
+    },
+    "./Markdown/styles.css": "./dist/css/Markdown.css",
+    "./Markdown": {
+      "types": "./dist/js/types/components/Markdown/index.d.ts",
+      "import": "./dist/js/Markdown.js"
     },
     "./MenuItem/styles.css": "./dist/css/MenuItem.css",
     "./MenuItem": {
@@ -432,6 +442,7 @@
     "react-aria": "^3.35.0",
     "react-aria-components": "^1.4.0",
     "react-children-utilities": "^2.10.0",
+    "react-markdown": "^9.0.1",
     "react-stately": "^3.33.0",
     "react-syntax-highlighter": "^15.5.0",
     "remeda": "^2.15.0",
