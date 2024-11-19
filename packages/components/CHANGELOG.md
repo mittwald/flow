@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.352](https://github.com/mittwald/flow/compare/0.1.0-alpha.351...0.1.0-alpha.352) (2024-11-19)
+
+### Features
+
+- **Markdown:** Add Markdown component
+  ([#993](https://github.com/mittwald/flow/issues/993))
+  ([f290a82](https://github.com/mittwald/flow/commit/f290a827f0dd4065ad987c2572840233be064692))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.351](https://github.com/mittwald/flow/compare/0.1.0-alpha.350...0.1.0-alpha.351) (2024-11-19)
 
 ### Features
