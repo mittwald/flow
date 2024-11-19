@@ -1,0 +1,4 @@
+align:
+  avatar-text:
+    spacing:
+      value: "{size-rem.s}"
