@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import { Avatar } from "@mittwald/flow-react-components/Avatar";
-import { Initials } from "@mittwald/flow-react-components/Initials";
-import { Text } from "@mittwald/flow-react-components/Text";
 import { Align } from "@/components/Align";
+import { Avatar } from "@/components/Avatar";
+import { Initials } from "@/components/Initials";
+import { Text } from "@/components/Text";
 
 const meta: Meta<typeof Align> = {
-  title: "Align/Avatar + Text",
+  title: "Structure/Align/Avatar + Text",
   component: Align,
   render: (props) => (
     <Align {...props}>

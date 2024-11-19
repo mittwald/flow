@@ -3,8 +3,8 @@ import React from "react";
 import type { PropsWithClassName } from "@mittwald/flow-react-components/props";
 import styles from "./Align.module.scss";
 import clsx from "clsx";
-import type { PropsContext } from "@mittwald/flow-react-components/PropsContext";
-import PropsContextProvider from "@mittwald/flow-react-components/PropsContextProvider";
+import type { PropsContext } from "@/lib/propsContext";
+import PropsContextProvider from "@/lib/propsContext/PropsContextProvider";
 
 export interface AlignProps extends PropsWithChildren, PropsWithClassName {}
 
