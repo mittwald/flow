@@ -40,6 +40,7 @@ export default () => {
   interface Domain {
     hostname: string;
     type: "Domain" | "Subdomain" | "Default-Domain";
+    ssl?: string;
   }
 
   const domains: Domain[] = [
@@ -50,10 +51,12 @@ export default () => {
     {
       hostname: "www.toujours.de",
       type: "Subdomain",
+      ssl: "Let’s Encrypt",
     },
     {
       hostname: "p-lis5uw.project.space",
       type: "Default-Domain",
+      ssl: "Let’s Encrypt",
     },
   ];
   const DomainList = typedList<Domain>();
@@ -226,7 +229,14 @@ export default () => {
                       <IconHome />
                     )}
                   </Avatar>
-                  <Heading>{domain.hostname}</Heading>
+                  <Heading>
+                    {domain.hostname}{" "}
+                    {!domain.ssl && (
+                      <AlertBadge status="danger">
+                        SSL-Zertifikat
+                      </AlertBadge>
+                    )}
+                  </Heading>
                   <Text>{domain.type}</Text>
                 </ListItemView>
               )}
