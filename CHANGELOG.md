@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.350](https://github.com/mittwald/flow/compare/0.1.0-alpha.349...0.1.0-alpha.350) (2024-11-19)
+
+### Bug Fixes
+
+- fix foundation links
+  ([b17858a](https://github.com/mittwald/flow/commit/b17858a3af5bf85cdc4bc23c58493894bde17f79))
+- **LightBox:** fix LightBox controller
+  ([5cc4507](https://github.com/mittwald/flow/commit/5cc4507745997e7fa9b5a8e2d2a941c7c72d2e35))
+- **LightBox:** fix LightBox controller
+  ([f3e84af](https://github.com/mittwald/flow/commit/f3e84af39e6d927f1bcdd4f0e9d513ff4e2a658b))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.349](https://github.com/mittwald/flow/compare/0.1.0-alpha.348...0.1.0-alpha.349) (2024-11-18)
 
 ### Features
