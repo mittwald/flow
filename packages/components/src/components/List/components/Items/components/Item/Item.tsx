@@ -6,6 +6,7 @@ import type { Key } from "react-aria-components";
 import * as Aria from "react-aria-components";
 import { useList } from "@/components/List/hooks/useList";
 import { SkeletonView } from "@/components/List/components/Items/components/Item/components/SkeletonView/SkeletonView";
+import { useGridItemProps } from "@/components/List/components/Items/components/Item/hooks/useGridItemProps";
 
 interface Props extends PropsWithChildren {
   id: Key;
@@ -13,19 +14,20 @@ interface Props extends PropsWithChildren {
 }
 
 export const Item = (props: Props) => {
-  const { id, data, children } = props;
+  const { id, data } = props;
   const list = useList();
+
   const itemView = list.itemView;
+
+  const { gridItemProps, children } = useGridItemProps(props);
 
   if (!itemView) {
     return null;
   }
 
-  const onAction = itemView.list.onAction;
-
   const textValue = itemView.textValue ? itemView.textValue(data) : undefined;
   const href = itemView.href ? itemView.href(data) : undefined;
-  const hasAction = !!onAction || !!href;
+  const hasAction = !!gridItemProps.onAction || !!href;
 
   return (
     <Aria.GridListItem
@@ -37,13 +39,11 @@ export const Item = (props: Props) => {
           props.isSelected && styles.isSelected,
         )
       }
-      onAction={() => onAction && onAction(data)}
       textValue={textValue}
       href={href}
+      {...gridItemProps}
     >
-      <Suspense fallback={<SkeletonView />}>
-        {children ?? itemView.render(data)}
-      </Suspense>
+      <Suspense fallback={<SkeletonView />}>{children}</Suspense>
     </Aria.GridListItem>
   );
 };

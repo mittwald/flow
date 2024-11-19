@@ -68,7 +68,7 @@ export const View = (props: Props) => {
 
   return (
     <div className={rootClassName}>
-      <PropsContextProvider props={propsContext}>
+      <PropsContextProvider props={propsContext} mergeInParentContext>
         <TunnelProvider>
           {children}
           <div className={styles.title}>

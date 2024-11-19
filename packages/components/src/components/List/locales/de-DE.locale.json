@@ -11,5 +11,7 @@
   "list.settings.viewMode.list": "Liste",
   "list.settings.viewMode.table": "Tabelle",
   "list.showMore": "Mehr anzeigen",
-  "list.sorting": "Sortierung"
+  "list.sorting": "Sortierung",
+  "list.toggleExpandButton.collapse": "Weniger anzeigen",
+  "list.toggleExpandButton.expand": "Mehr anzeigen"
 }
