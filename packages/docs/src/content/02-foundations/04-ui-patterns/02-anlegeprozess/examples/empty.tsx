@@ -31,6 +31,7 @@ import {
   TableRow,
 } from "@mittwald/flow-react-components/Table";
 import { CheckboxButton } from "@mittwald/flow-react-components/CheckboxButton";
+import { Align } from "@mittwald/flow-react-components/Align";
 
 <LayoutCard>
   <IllustratedMessage>
@@ -79,40 +80,32 @@ import { CheckboxButton } from "@mittwald/flow-react-components/CheckboxButton";
           <Section>
             <Heading>Bestellübersicht</Heading>
             <ColumnLayout>
-              <div
-                style={{
-                  display: "flex",
-                  gap: "var(--size-px--s)",
-                }}
-              >
+              <Align>
                 <Avatar color="blue">
                   <Initials>Max Mustermann</Initials>
                 </Avatar>
                 <Text>
                   <b>Meine Organisation</b>
+                  Franz Müller
                   <br />
-                  Max Mustermann
+                  Jackenweg 44a
                   <br />
-                  Königsberger Str. 4, 32339 Espelkamp
+                  12893 Lanzhausen
                 </Text>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  gap: "var(--size-px--s)",
-                }}
-              >
+              </Align>
+              <Align>
                 <Avatar color="blue">
                   <IconInvoice />
                 </Avatar>
                 <Text>
                   <b>Rechnung</b>
+                  Franz Müller
                   <br />
-                  Max Mustermann
+                  Jackenweg 44a
                   <br />
-                  Königsberger Str. 4, 32339 Espelkamp
+                  12893 Lanzhausen
                 </Text>
-              </div>
+              </Align>
             </ColumnLayout>
             <Table>
               <TableHeader>

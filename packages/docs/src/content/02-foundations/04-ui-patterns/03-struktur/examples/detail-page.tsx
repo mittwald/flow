@@ -16,6 +16,11 @@ import LabeledValue from "@mittwald/flow-react-components/LabeledValue";
 import { Alert } from "@mittwald/flow-react-components/Alert";
 import { Content } from "@mittwald/flow-react-components/Content";
 import { Action } from "@mittwald/flow-react-components/Action";
+import {
+  Tab,
+  Tabs,
+  TabTitle,
+} from "@mittwald/flow-react-components/Tabs";
 
 export default () => {
   const domain = {
@@ -125,8 +130,21 @@ export default () => {
 
   return (
     <LayoutCard>
-      {domainDetailsSection}
-      {domainOwnerSection}
+      <Tabs>
+        <Tab>
+          <TabTitle>Allgemein</TabTitle>
+          {domainDetailsSection}
+          {domainOwnerSection}
+        </Tab>
+        <Tab>
+          <TabTitle>DNS</TabTitle>
+          <Text>not implemented</Text>
+        </Tab>
+        <Tab>
+          <TabTitle>Pfade</TabTitle>
+          <Text>not implemented</Text>
+        </Tab>
+      </Tabs>
     </LayoutCard>
   );
 };
