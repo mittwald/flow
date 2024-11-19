@@ -39,6 +39,11 @@
       "types": "./dist/js/types/components/AlertIcon/index.d.ts",
       "import": "./dist/js/AlertIcon.js"
     },
+    "./Align/styles.css": "./dist/css/Align.css",
+    "./Align": {
+      "types": "./dist/js/types/components/Align/index.d.ts",
+      "import": "./dist/js/Align.js"
+    },
     "./Avatar/styles.css": "./dist/css/Avatar.css",
     "./Avatar": {
       "types": "./dist/js/types/components/Avatar/index.d.ts",
