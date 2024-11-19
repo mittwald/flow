@@ -15,7 +15,7 @@ export const Align: FC<AlignProps> = (props) => {
 
   const propsContext: PropsContext = {
     Text: { className: styles.text },
-    Avatar: { className: styles.avatar, size: "m", color: "blue" },
+    Avatar: { className: styles.avatar, size: "m" },
   };
 
   return (
