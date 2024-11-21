@@ -13,7 +13,7 @@ import feedback from "../../../../../assets/Styleguide-Footer_Feedback.svg";
 import logoMittwald from "../../../../../assets/mittwald-logo-footer.svg";
 import clsx from "clsx";
 
-export const Footer: FC = () => {
+const Footer: FC = () => {
   return (
     <LayoutCard elementType="footer" className={styles.footer}>
       <ColumnLayout m={[1, 1, 2]} l={[1, 1, 2, 1]}>
@@ -65,3 +65,5 @@ export const Footer: FC = () => {
     </LayoutCard>
   );
 };
+
+export default Footer;
