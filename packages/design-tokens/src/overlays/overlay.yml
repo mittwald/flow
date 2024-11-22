@@ -1,0 +1,3 @@
+overlay:
+  background-color:
+    value: "{dark.color.200}"

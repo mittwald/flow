@@ -1,0 +1,18 @@
+section:
+  border-width:
+    value: "{separator.height}"
+  border-style:
+    value: "{border-style.default}"
+  border-color:
+    value: "{separator.color}"
+  section-to-section-spacing:
+    value: "{size-rem.xl}"
+  content-to-content-spacing:
+    value: "{size-rem.m}"
+  sub-heading-spacing:
+    value: "{size-rem.s}"
+section-header:
+  action-to-action-spacing:
+    value: "{size-rem.s}"
+  heading-to-actions-spacing:
+    value: "{size-rem.m}"

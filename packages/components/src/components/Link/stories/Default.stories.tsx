@@ -3,11 +3,11 @@ import Link from "../Link";
 import { action } from "@storybook/addon-actions";
 import React from "react";
 import { Text } from "@/components/Text";
-import { IconExternalLink } from "@/components/Icon/components/icons";
 import {
   storyBackgroundDark,
   storyBackgroundLight,
 } from "@/lib/dev/storyBackgrounds";
+import { IconDownload } from "@/components/Icon/components/icons";
 
 const meta: Meta<typeof Link> = {
   title: "Navigation/Link",
@@ -49,8 +49,8 @@ export const Disabled: Story = { args: { isDisabled: true } };
 export const WithIcon: Story = {
   render: (props) => (
     <Link {...props} href="https://mittwald.de">
-      mittwald.de
-      <IconExternalLink aria-label="external link" />
+      Download invoice
+      <IconDownload aria-label="download" />
     </Link>
   ),
 };
@@ -67,4 +67,14 @@ export const Light: Story = {
   parameters: {
     backgrounds: storyBackgroundDark,
   },
+};
+
+export const ExternalLink: Story = {
+  args: { target: "_blank" },
+  render: (props) => <Link {...props}>mittwald.de</Link>,
+};
+
+export const Download: Story = {
+  args: { target: "_blank", download: true },
+  render: (props) => <Link {...props}>Download file</Link>,
 };

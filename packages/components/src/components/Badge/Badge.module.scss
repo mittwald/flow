@@ -93,17 +93,19 @@
       .button {
         border-color: var(--badge--#{$color}-border-color);
         background-color: var(--badge--#{$color}-background-color--default);
-        color: var(--badge--#{$color}-content-color);
+        color: var(--badge--#{$color}-content-color--default);
       }
 
       &:not(.disabled) {
         .button {
           &:hover {
             background-color: var(--badge--#{$color}-background-color--hover);
+            color: var(--badge--#{$color}-content-color--hover);
           }
 
           &[data-pressed] {
             background-color: var(--badge--#{$color}-background-color--pressed);
+            color: var(--badge--#{$color}-content-color--pressed);
           }
         }
       }

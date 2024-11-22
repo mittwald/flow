@@ -1,0 +1,8 @@
+image-button:
+  brightness:
+    hover:
+      value: 62.5%
+    pressed:
+      value: 50%
+  hover-icon-color:
+    value: "{color.gray.100}"

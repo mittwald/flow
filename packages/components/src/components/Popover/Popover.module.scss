@@ -9,7 +9,7 @@
   border-width: var(--popover--border-width);
   border-style: var(--popover--border-style);
   border-color: var(--popover--border-color);
-  max-width: calc(100% - calc(var(--popover--popover-to-trigger-spacing) * 2));
+  max-width: 90vw;
 
   :where(.content) {
     overflow-y: auto;
@@ -20,11 +20,15 @@
     }
   }
 
-  .tip svg {
-    display: block;
-    fill: var(--popover--background-color);
-    stroke: var(--popover--border-color);
-    stroke-width: var(--popover--border-width);
+  .tip {
+    width: var(--popover--tip-width);
+
+    svg {
+      display: block;
+      fill: var(--popover--background-color);
+      stroke: var(--popover--border-color);
+      stroke-width: var(--popover--border-width);
+    }
   }
 
   &[data-placement="top"] {

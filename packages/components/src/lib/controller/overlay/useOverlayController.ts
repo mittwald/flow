@@ -2,6 +2,7 @@ import { useOverlayContext } from "@/lib/controller/overlay/context";
 import type { OverlayControllerOptions } from "@/lib/controller/overlay/OverlayController";
 import { OverlayController } from "@/lib/controller/overlay/OverlayController";
 import type { FlowComponentName } from "@/components/propTypes";
+import { useEffect } from "react";
 
 interface Options extends OverlayControllerOptions {
   reuseControllerFromContext?: boolean;
@@ -25,7 +26,26 @@ export const useOverlayController = (
   });
   const controllerFromContext = useOverlayContext()[overlayType];
 
-  return reuseControllerFromContext && controllerFromContext
-    ? controllerFromContext
-    : newController;
+  const controller =
+    reuseControllerFromContext && controllerFromContext
+      ? controllerFromContext
+      : newController;
+
+  useEffect(() => {
+    const disposers: (() => void)[] = [];
+
+    if (onOpen) {
+      disposers.push(controller.addOnOpen(onOpen));
+    }
+
+    if (onClose) {
+      disposers.push(controller.addOnClose(onClose));
+    }
+
+    return () => {
+      disposers.forEach((dispose) => dispose());
+    };
+  }, [onOpen, onClose]);
+
+  return controller;
 };

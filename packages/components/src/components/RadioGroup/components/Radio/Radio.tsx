@@ -10,30 +10,23 @@ import { ClearPropsContext } from "@/lib/propsContext";
 
 export interface RadioProps
   extends PropsWithChildren<Omit<Aria.RadioProps, "children">>,
-    FlowComponentProps {
-  /** @internal */
-  unstyled?: boolean;
-}
+    FlowComponentProps {}
 
 export const Radio = flowComponent("Radio", (props) => {
-  const {
-    children,
-    className,
-    unstyled = false,
-    refProp: ref,
-    ...rest
-  } = props;
+  const { children, className, refProp: ref, ...rest } = props;
 
-  const rootClassName = unstyled ? className : clsx(styles.radio, className);
+  const rootClassName = clsx(styles.radio, className);
 
   return (
     <ClearPropsContext>
       <Aria.Radio {...rest} className={rootClassName} ref={ref}>
         {({ isSelected }) => (
           <>
-            {isSelected
-              ? !unstyled && <IconRadioOn className={styles.icon} />
-              : !unstyled && <IconRadioOff className={styles.icon} />}
+            {isSelected ? (
+              <IconRadioOn className={styles.icon} />
+            ) : (
+              <IconRadioOff className={styles.icon} />
+            )}
             {children}
           </>
         )}
