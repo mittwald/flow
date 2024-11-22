@@ -1,18 +1,13 @@
 import { createRemoteElement } from "@remote-dom/core/elements";
-import type { PickRemoteElementEventListeners } from "@/lib/types";
 
 export interface RemoteRhfFormElementProps {
   onSubmit?: (values: unknown) => Promise<void> | void;
 }
 
-export const RemoteRhfFormElement = createRemoteElement<
-  RemoteRhfFormElementProps,
-  object,
-  object,
-  PickRemoteElementEventListeners<RemoteRhfFormElementProps>
->({
-  events: ["submit"],
-});
+export const RemoteRhfFormElement =
+  createRemoteElement<RemoteRhfFormElementProps>({
+    events: ["submit"],
+  });
 
 declare global {
   interface HTMLElementTagNameMap {

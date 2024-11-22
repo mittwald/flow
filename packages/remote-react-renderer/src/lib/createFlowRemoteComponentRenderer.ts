@@ -32,7 +32,7 @@ interface Opts {
   eventPropMatchers?: EventPropMatcher[];
 }
 
-export const createFlowRemoteComponentsRenderer = <
+export const createFlowRemoteComponentRenderer = <
   P extends Record<string, unknown>,
 >(
   component: ComponentType<P>,

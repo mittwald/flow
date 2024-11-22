@@ -1,14 +1,8 @@
 import { createRemoteElement } from "@remote-dom/core/elements";
-import type { PickRemoteElementEventListeners } from "@/lib/types";
 import type { AlertIconProps } from "@mittwald/flow-react-components/AlertIcon";
 export type { AlertIconProps } from "@mittwald/flow-react-components/AlertIcon";
 
-export const RemoteAlertIconElement = createRemoteElement<
-  AlertIconProps,
-  object,
-  object,
-  PickRemoteElementEventListeners<AlertIconProps>
->({
+export const RemoteAlertIconElement = createRemoteElement<AlertIconProps>({
   properties: ["color", "size"],
 });
 

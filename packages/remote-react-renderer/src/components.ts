@@ -4,7 +4,7 @@ import { Content } from "@mittwald/flow-react-components/Content";
 import { Heading } from "@mittwald/flow-react-components/Heading";
 import { Button } from "@mittwald/flow-react-components/Button";
 import { Icon } from "@mittwald/flow-react-components/Icon";
-import { createFlowRemoteComponentsRenderer } from "@/lib/createFlowRemoteComponentsRenderer";
+import { createFlowRemoteComponentRenderer } from "@/lib/createFlowRemoteComponentRenderer";
 import type { RemoteComponentsMap } from "@/lib/types";
 import { Modal, ModalTrigger } from "@mittwald/flow-react-components/Modal";
 import { Action } from "@mittwald/flow-react-components/Action";
@@ -16,17 +16,17 @@ import type { FlowRemoteElementKeys } from "@mittwald/flow-remote-elements";
 import { Input } from "@/components/Input";
 
 export const components: RemoteComponentsMap<FlowRemoteElementKeys> = {
-  "flr-action": createFlowRemoteComponentsRenderer(Action),
-  "flr-alert": createFlowRemoteComponentsRenderer(Alert),
-  "flr-alert-icon": createFlowRemoteComponentsRenderer(AlertIcon),
-  "flr-content": createFlowRemoteComponentsRenderer(Content),
-  "flr-heading": createFlowRemoteComponentsRenderer(Heading),
-  "flr-button": createFlowRemoteComponentsRenderer(Button),
-  "flr-icon": createFlowRemoteComponentsRenderer(Icon),
-  "flr-modal": createFlowRemoteComponentsRenderer(Modal),
-  "flr-modal-trigger": createFlowRemoteComponentsRenderer(ModalTrigger),
-  "flr-section": createFlowRemoteComponentsRenderer(Section),
-  "flr-text": createFlowRemoteComponentsRenderer(Text),
+  "flr-action": createFlowRemoteComponentRenderer(Action),
+  "flr-alert": createFlowRemoteComponentRenderer(Alert),
+  "flr-alert-icon": createFlowRemoteComponentRenderer(AlertIcon),
+  "flr-content": createFlowRemoteComponentRenderer(Content),
+  "flr-heading": createFlowRemoteComponentRenderer(Heading),
+  "flr-button": createFlowRemoteComponentRenderer(Button),
+  "flr-icon": createFlowRemoteComponentRenderer(Icon),
+  "flr-modal": createFlowRemoteComponentRenderer(Modal),
+  "flr-modal-trigger": createFlowRemoteComponentRenderer(ModalTrigger),
+  "flr-section": createFlowRemoteComponentRenderer(Section),
+  "flr-text": createFlowRemoteComponentRenderer(Text),
   "flr-input": createRemoteComponentRenderer(Input),
   "flr-form": createRemoteComponentRenderer(Form),
 };

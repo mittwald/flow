@@ -1,16 +1,12 @@
 import { createRemoteElement } from "@remote-dom/core/elements";
-import type { PickRemoteElementEventListeners } from "@/lib/types";
 import type { ModalTriggerProps } from "@mittwald/flow-react-components/Modal";
 export type { ModalTriggerProps } from "@mittwald/flow-react-components/Modal";
 
-export const RemoteModalTriggerElement = createRemoteElement<
-  ModalTriggerProps,
-  object,
-  object,
-  PickRemoteElementEventListeners<ModalTriggerProps>
->({
-  properties: ["isDefaultOpen"],
-});
+export const RemoteModalTriggerElement = createRemoteElement<ModalTriggerProps>(
+  {
+    properties: ["isDefaultOpen"],
+  },
+);
 
 declare global {
   interface HTMLElementTagNameMap {

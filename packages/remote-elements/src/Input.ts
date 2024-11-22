@@ -1,5 +1,4 @@
 import { createRemoteElement } from "@remote-dom/core/elements";
-import type { PickRemoteElementEventListeners } from "@/lib/types";
 
 export interface RemoteInputElementProps {
   name?: string;
@@ -10,12 +9,7 @@ export interface RemoteInputElementProps {
   onFocus?: () => void;
 }
 
-export const RemoteInputElement = createRemoteElement<
-  RemoteInputElementProps,
-  object,
-  object,
-  PickRemoteElementEventListeners<RemoteInputElementProps>
->({
+export const RemoteInputElement = createRemoteElement<RemoteInputElementProps>({
   properties: ["type", "value", "name"],
   events: ["change", "blur", "focus"],
 });

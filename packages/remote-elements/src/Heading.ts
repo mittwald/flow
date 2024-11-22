@@ -1,14 +1,8 @@
 import { createRemoteElement } from "@remote-dom/core/elements";
-import type { PickRemoteElementEventListeners } from "@/lib/types";
 import type { HeadingProps } from "@mittwald/flow-react-components/Heading";
 export type { HeadingProps } from "@mittwald/flow-react-components/Heading";
 
-export const RemoteHeadingElement = createRemoteElement<
-  HeadingProps,
-  object,
-  object,
-  PickRemoteElementEventListeners<HeadingProps>
->({
+export const RemoteHeadingElement = createRemoteElement<HeadingProps>({
   properties: ["color"],
 });
 

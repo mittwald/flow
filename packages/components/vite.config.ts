@@ -1,5 +1,4 @@
 import { defineConfig } from "vite";
-import postcssNesting from "postcss-nesting";
 import { cssModuleClassNameGenerator } from "./dev/cssModuleClassNameGenerator";
 import path from "path";
 import viteI18nPlugin from "./dev/viteI18nPlugin";
@@ -16,9 +15,6 @@ export default defineConfig({
     ],
   },
   css: {
-    postcss: {
-      plugins: [postcssNesting],
-    },
     modules: {
       generateScopedName: cssModuleClassNameGenerator,
     },

@@ -1,14 +1,8 @@
 import { createRemoteElement } from "@remote-dom/core/elements";
-import type { PickRemoteElementEventListeners } from "@/lib/types";
 import type { IconProps } from "@mittwald/flow-react-components/Icon";
 export type { IconProps } from "@mittwald/flow-react-components/Icon";
 
-export const RemoteIconElement = createRemoteElement<
-  IconProps,
-  object,
-  object,
-  PickRemoteElementEventListeners<IconProps>
->({
+export const RemoteIconElement = createRemoteElement<IconProps>({
   properties: ["color", "size"],
 });
 

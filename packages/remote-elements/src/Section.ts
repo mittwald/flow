@@ -1,14 +1,8 @@
 import { createRemoteElement } from "@remote-dom/core/elements";
-import type { PickRemoteElementEventListeners } from "@/lib/types";
 import type { SectionProps } from "@mittwald/flow-react-components/Section";
 export type { SectionProps } from "@mittwald/flow-react-components/Section";
 
-export const RemoteSectionElement = createRemoteElement<
-  SectionProps,
-  object,
-  object,
-  PickRemoteElementEventListeners<SectionProps>
->({
+export const RemoteSectionElement = createRemoteElement<SectionProps>({
   properties: [],
 });
 

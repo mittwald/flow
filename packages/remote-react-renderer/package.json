@@ -13,6 +13,10 @@
     "./react-hook-form": {
       "types": "./dist/types/integrations/react-hook-form/index.d.ts",
       "import": "./dist/react-hook-form.js"
+    },
+    "./polyfill": {
+      "types": "./dist/types/polyfill.d.ts",
+      "import": "./dist/polyfill.js"
     }
   },
   "files": [
@@ -29,22 +33,23 @@
   },
   "dependencies": {
     "@mittwald/flow-react-components": "workspace:^",
+    "@mittwald/flow-remote-core": "workspace:^",
     "@mittwald/flow-remote-elements": "workspace:^",
-    "@remote-dom/core": "^1.5.0",
-    "@remote-dom/react": "^1.2.0",
-    "remeda": "^2.15.0"
+    "@remote-dom/core": "^1.5.1",
+    "@remote-dom/react": "^1.2.1",
+    "remeda": "^2.17.3"
   },
   "devDependencies": {
-    "@types/node": "^22.7.5",
-    "@types/react": "^18.3.11",
-    "nx": "^20.0.0",
+    "@types/node": "^22.9.1",
+    "@types/react": "^18.3.12",
+    "nx": "^20.1.2",
     "prettier": "^3.3.3",
     "react": "^18.3.1",
-    "react-hook-form": "^7.53.0",
+    "react-hook-form": "^7.53.2",
     "typescript": "^5.6.3",
-    "vite": "^5.4.8",
+    "vite": "^5.4.11",
     "vite-plugin-checker": "^0.8.0",
-    "vite-plugin-dts": "^4.2.3",
+    "vite-plugin-dts": "^4.3.0",
     "vite-plugin-externalize-deps": "^0.8.0"
   },
   "peerDependencies": {
