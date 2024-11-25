@@ -7,7 +7,7 @@
   left: 0;
   height: 6px;
   overflow: hidden;
-  border-top: 1px solid var(--progress-bar--bar-border-color);
+  border-top: 1px solid var(--progress-bar--border-color);
 
   @include complexity.animation-in("height");
   @include complexity.animation-in("border-top-color");

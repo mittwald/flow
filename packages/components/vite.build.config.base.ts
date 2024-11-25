@@ -86,6 +86,7 @@ export const buildConfig = (opts: Options) => {
     Notification: "./src/components/Notification/index.ts",
     NotificationProvider: "./src/components/NotificationProvider/index.ts",
     NumberField: "./src/components/NumberField/index.ts",
+    PasswordCreationField: "./src/components/PasswordCreationField/index.ts",
     Popover: "./src/components/Popover/index.ts",
     ProgressBar: "./src/components/ProgressBar/index.ts",
     PropsContextProvider: "./src/lib/propsContext/PropsContextProvider.tsx",
