@@ -95,7 +95,9 @@ import { MenuItem } from "@mittwald/flow-react-components/MenuItem";
           Wir freuen uns auf deine Anmerkungen und Wünsche
           zu Flow.
         </Text>
-        <Link href="#">Zum GitHub Repository</Link>
+        <Link href="https://github.com/mittwald/flow">
+          Zum GitHub Repository
+        </Link>
       </Section>
     </LayoutCard>
   </ColumnLayout>
