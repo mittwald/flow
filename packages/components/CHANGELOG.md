@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.353](https://github.com/mittwald/flow/compare/0.1.0-alpha.352...0.1.0-alpha.353) (2024-11-25)
+
+### Features
+
+- **NotificationProvider:** export NotificationController types
+  ([#998](https://github.com/mittwald/flow/issues/998))
+  ([f1618ce](https://github.com/mittwald/flow/commit/f1618ced26fa5fafb73e344fa856651e4fd92f9d))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.352](https://github.com/mittwald/flow/compare/0.1.0-alpha.351...0.1.0-alpha.352) (2024-11-19)
 
 ### Features
