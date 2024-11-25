@@ -390,9 +390,6 @@
       "types": "./dist/js/types/integrations/react-hook-form/index.d.ts",
       "import": "./dist/js/react-hook-form.js"
     },
-    "./types": {
-      "types": "./dist/js/types/lib/types/props.d.ts"
-    },
     "./globals.css": "./dist/css/globals.css",
     "./all.css": "./dist/js/all.css",
     "./doc-properties": "./out/doc-properties.json"
