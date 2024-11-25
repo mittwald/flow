@@ -34,9 +34,11 @@ export const useGridItemProps = (props: P) => {
   if (!accordion) {
     return {
       gridItemProps: {
-        onAction: () => {
-          onAction?.(data);
-        },
+        onAction: onAction
+          ? () => {
+              onAction?.(data);
+            }
+          : undefined,
       },
       children,
     };
