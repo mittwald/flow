@@ -1,0 +1,60 @@
+.message {
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--message--spacing-y);
+  width: max-content;
+  max-width: 100%;
+
+  .content {
+    grid-area: content;
+    border-radius: var(--message--corner-radius);
+    padding-inline: var(--message--padding-x);
+    padding-block: var(--message--padding-y);
+    background-color: var(--message--background-color-sender);
+  }
+
+  &.responder .content {
+    background-color: var(--message--background-color-responder);
+  }
+
+  &.internal .content {
+    background-color: var(--message--background-color-internal);
+  }
+
+  .header {
+    display: flex;
+    column-gap: var(--message--spacing-x);
+    row-gap: var(--message--spacing-y);
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: var(--font-size-text--s);
+
+    :global(.flow-mstudio--avatar-value) {
+      flex-grow: 1;
+      order: 1;
+    }
+
+    .date {
+      font-size: var(--font-size-text--s);
+      order: 2;
+    }
+
+    .action {
+      order: 3;
+    }
+  }
+
+  &.right {
+    .header {
+      flex-direction: row-reverse;
+
+      .user {
+        flex-direction: row-reverse;
+
+        .text {
+          text-align: end;
+        }
+      }
+    }
+  }
+}

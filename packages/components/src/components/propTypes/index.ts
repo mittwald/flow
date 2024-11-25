@@ -55,6 +55,7 @@ import type { SegmentedControlProps } from "@/components/SegmentedControl";
 import type { SegmentProps } from "@/components/SegmentedControl/components/Segment";
 import type { FileCardProps } from "@/components/FileCard";
 import type { FileFieldProps } from "@/components/FileField";
+import type { AlignProps } from "@/components/Align";
 
 export * from "./types";
 
@@ -64,6 +65,7 @@ export interface FlowComponentPropsTypes {
   Alert: AlertProps;
   AlertBadge: AlertBadgeProps;
   AlertIcon: AlertIconProps;
+  Align: AlignProps;
   Avatar: AvatarProps;
   Badge: BadgeProps;
   Button: ButtonProps;
@@ -130,6 +132,7 @@ const propsContextSupportingComponentsMap: Record<
   Alert: true,
   AlertBadge: true,
   AlertIcon: true,
+  Align: true,
   Badge: true,
   Button: true,
   Checkbox: true,

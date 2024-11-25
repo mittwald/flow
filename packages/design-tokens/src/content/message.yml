@@ -1,0 +1,17 @@
+message:
+  corner-radius:
+    value: "{corner-radius.default}"
+  padding-y:
+    value: "{size-px.s}"
+  padding-x:
+    value: "{size-px.m}"
+  spacing-y:
+    value: "{size-rem.s}"
+  spacing-x:
+    value: "{size-rem.m}"
+  background-color-responder:
+    value: "{color.gray.400}"
+  background-color-sender:
+    value: "{color.hosting-blue.200}"
+  background-color-internal:
+    value: "{color.royal-orange.200}"
