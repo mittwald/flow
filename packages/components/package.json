@@ -268,8 +268,8 @@
       "import": "./dist/js/NumberField.js"
     },
     "./PasswordCreationField": {
-      "types": "./dist/types/components/PasswordCreationField/index.d.ts",
-      "import": "./dist/PasswordCreationField.js"
+      "types": "./dist/js/types/components/PasswordCreationField/index.d.ts",
+      "import": "./dist/js/PasswordCreationField.js"
     },
     "./Popover/styles.css": "./dist/css/Popover.css",
     "./Popover": {
