@@ -1,3 +1,4 @@
+import type { ListProps } from "@/components/List/List";
 import List from "@/components/List/List";
 import { TypedListFilter } from "@/components/List/setupComponents/ListFilter";
 import { TypedListSorting } from "@/components/List/setupComponents/ListSorting";
@@ -7,14 +8,30 @@ import { TypedListLoaderAsyncResource } from "@/components/List/setupComponents/
 import { TypedListStaticData } from "@/components/List/setupComponents/ListStaticData";
 import { TypedListSearch } from "@/components/List/setupComponents/ListSearch";
 import { View } from "@/components/List/components/Items/components/Item/components/View";
+import type { ComponentType } from "react";
+import { TableColumn } from "@/components/List/setupComponents/TableColumn";
+import { TableCell } from "@/components/List/setupComponents/TableCell";
+import { TableHeader } from "@/components/List/setupComponents/TableHeader";
+import { TableRow } from "@/components/List/setupComponents/TableRow";
+import { TableBody } from "@/components/List/setupComponents/TableBody";
+import { Table } from "@/components/List/setupComponents/Table";
+
+export const TypedList = <T>() =>
+  List as unknown as ComponentType<ListProps<T>>;
 
 export const typedList = <T>() => ({
-  List: List,
+  List: TypedList<T>(),
   Filter: TypedListFilter<T>(),
   Search: TypedListSearch<T>(),
   Sorting: TypedListSorting<T>(),
   Item: TypedListItem<T>(),
   ItemView: View,
+  TableHeader: TableHeader<T>,
+  TableColumn: TableColumn<T>,
+  TableBody: TableBody<T>,
+  TableRow: TableRow<T>,
+  TableCell: TableCell<T>,
+  Table: Table<T>,
   StaticData: TypedListStaticData<T>(),
   LoaderAsync: TypedListLoaderAsync<T>(),
   LoaderAsyncResource: TypedListLoaderAsyncResource<T>(),

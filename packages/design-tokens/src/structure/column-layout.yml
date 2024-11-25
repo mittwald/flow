@@ -1,0 +1,10 @@
+column-layout:
+  content-to-content-spacing:
+    value: "{size-rem.m}"
+  gap:
+    s:
+      value: "{size-px.s}"
+    m:
+      value: "{size-px.m}"
+    l:
+      value: "{size-px.l}"

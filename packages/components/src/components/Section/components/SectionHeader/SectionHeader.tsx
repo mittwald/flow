@@ -29,6 +29,24 @@ export const SectionHeader: FC<SectionHeaderProps> = (props) => {
         tunnelId: null,
       },
     },
+    PopoverTrigger: {
+      tunnelId: "actions",
+      Button: {
+        tunnelId: null,
+      },
+    },
+    ModalTrigger: {
+      tunnelId: "actions",
+      Button: {
+        tunnelId: null,
+      },
+    },
+    ContextualHelpTrigger: {
+      tunnelId: "actions",
+      Button: {
+        tunnelId: null,
+      },
+    },
     Action: {
       tunnelId: "actions",
       Button: {
@@ -38,6 +56,9 @@ export const SectionHeader: FC<SectionHeaderProps> = (props) => {
     Heading: {
       level: 2,
       className: styles.heading,
+    },
+    Link: {
+      tunnelId: "actions",
     },
   };
 

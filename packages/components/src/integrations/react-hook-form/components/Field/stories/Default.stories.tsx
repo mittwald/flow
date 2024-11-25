@@ -17,6 +17,11 @@ import { Checkbox } from "@/components/Checkbox";
 import Select, { Option } from "@/components/Select";
 import { Slider } from "@/components/Slider";
 import { sleep } from "@/lib/promises/sleep";
+import DatePicker from "@/components/DatePicker";
+import { DateRangePicker } from "@/components/DateRangePicker";
+import { getLocalTimeZone, today } from "@internationalized/date";
+import { TimeField } from "@/components/TimeField";
+import { TextArea } from "@/components/TextArea";
 import { PasswordCreationField } from "@/components/PasswordCreationField";
 
 const submitAction = action("submit");
@@ -34,6 +39,10 @@ const meta: Meta<typeof Field> = {
       testing: boolean;
       interests: string[];
       storage: number;
+      date: string;
+      dateRange: string;
+      time: string;
+      message: string;
     }
 
     const handleOnSubmit = async (values: Values) => {
@@ -56,12 +65,7 @@ const meta: Meta<typeof Field> = {
     return (
       <Form form={form} onSubmit={handleOnSubmit}>
         <Section>
-          <Field
-            name="firstName"
-            rules={{
-              required: "Please enter your name",
-            }}
-          >
+          <Field name="firstName">
             <TextField>
               <Label>First name</Label>
               <FieldDescription>The first part of your name</FieldDescription>
@@ -155,6 +159,35 @@ const meta: Meta<typeof Field> = {
             >
               <Label>Storage</Label>
             </Slider>
+          </Field>
+
+          <Field name="date" rules={{ required: "Please enter a date" }}>
+            <DatePicker minValue={today(getLocalTimeZone())}>
+              <Label>Future Date</Label>
+            </DatePicker>
+          </Field>
+
+          <Field name="dateRange">
+            <DateRangePicker>
+              <Label>Date Range</Label>
+            </DateRangePicker>
+          </Field>
+
+          <Field name="time" rules={{ required: "Please enter a time" }}>
+            <TimeField>
+              <Label>Time</Label>
+            </TimeField>
+          </Field>
+
+          <Field
+            name="message"
+            rules={{
+              required: "Please enter a message",
+            }}
+          >
+            <TextArea rows={1} autoResizeMaxRows={5}>
+              <Label>Message</Label>
+            </TextArea>
           </Field>
 
           <ActionGroup>

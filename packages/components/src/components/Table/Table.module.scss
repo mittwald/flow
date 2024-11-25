@@ -1,6 +1,6 @@
 .tableContainer {
   width: 100%;
-  overflow: scroll;
+  overflow-x: auto;
 }
 
 .table {
@@ -18,9 +18,9 @@
     font-weight: var(--table--header-font-weight);
   }
 
-  .body {
+  :where(.body) {
     tr {
-      &:nth-of-type(odd) {
+      &:where(:nth-of-type(odd):not(.footer)) {
         background-color: var(--table--background-color-accent);
       }
 
@@ -35,6 +35,13 @@
           border-block-start-width: var(--table--header-border-width);
         }
       }
+
+      &.footer {
+        td {
+          border-block-start-width: var(--table--footer-border-width);
+          font-weight: var(--table--footer-font-weight);
+        }
+      }
     }
   }
 
@@ -44,5 +51,12 @@
     padding-block: var(--table--padding-y);
     text-align: start;
     vertical-align: top;
+  }
+
+  &.vertical-align-middle {
+    .cell,
+    .column {
+      vertical-align: middle;
+    }
   }
 }

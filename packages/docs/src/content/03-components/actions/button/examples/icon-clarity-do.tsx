@@ -13,4 +13,7 @@ import {
   <Button variant="plain">
     <IconFilter />
   </Button>
+  <Button variant="outline">
+    <IconFilter />
+  </Button>
 </Row>;

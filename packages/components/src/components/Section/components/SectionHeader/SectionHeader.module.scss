@@ -9,5 +9,10 @@
     display: flex;
     gap: var(--section-header--action-to-action-spacing);
     margin-inline-start: auto;
+    flex-wrap: wrap;
+  }
+
+  &:not(:first-child) {
+    margin-top: var(--section--sub-heading-spacing);
   }
 }

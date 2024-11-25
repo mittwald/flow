@@ -1,0 +1,181 @@
+code:
+  font-size:
+    value: "{font-size-text.s}"
+  line-height:
+    value: "{line-height.m}"
+  padding-x:
+    value: "{size-px.xs}"
+  padding:
+    value: "{size-px.m}"
+  corner-radius:
+    value: "{corner-radius.default}"
+  spacing:
+    value: "{size-px.m}"
+
+  # Default Color
+  default-background-color:
+    value: "{neutral-soft-background-color.default}"
+  default-content-color:
+    value: "{neutral-soft-content-color.default}"
+  default-syntax-color-addition:
+    value: "#397300"
+  default-syntax-color-built-in:
+    value: "#397300"
+  default-syntax-color-bullet:
+    value: "#397300"
+  default-syntax-color-code:
+    value: "#397300"
+  default-syntax-color-comment:
+    value: "#666666"
+  default-syntax-color-deletion:
+    value: "#880000"
+  default-syntax-color-link:
+    value: "#a94747"
+  default-syntax-color-literal:
+    value: "#4c6d3b"
+  default-syntax-color-meta:
+    value: "#1e6e94"
+  default-syntax-color-meta-string:
+    value: "#326d8b"
+  default-syntax-color-number:
+    value: "#880000"
+  default-syntax-color-quote:
+    value: "#880000"
+  default-syntax-color-regexp:
+    value: "#a94747"
+  default-syntax-color-section:
+    value: "#880000"
+  default-syntax-color-selector-attr:
+    value: "#a94747"
+  default-syntax-color-selector-class:
+    value: "#880000"
+  default-syntax-color-selector-id:
+    value: "#880000"
+  default-syntax-color-selector-pseudo:
+    value: "#a94747"
+  default-syntax-color-string:
+    value: "#880000"
+  default-syntax-color-symbol:
+    value: "#a94747"
+  default-syntax-color-template-tag:
+    value: "#880000"
+  default-syntax-color-template-variable:
+    value: "#a94747"
+  default-syntax-color-title:
+    value: "#880000"
+  default-syntax-color-type:
+    value: "#880000"
+  default-syntax-color-variable:
+    value: "#a94747"
+
+  # Light Color
+  light-background-color:
+    value: "{light-soft-background-color.default}"
+  light-content-color:
+    value: "{light-soft-content-color}"
+  light-syntax-color-addition:
+    value: "#68d100"
+  light-syntax-color-built-in:
+    value: "#68d100"
+  light-syntax-color-bullet:
+    value: "#68d100"
+  light-syntax-color-code:
+    value: "#68d100"
+  light-syntax-color-comment:
+    value: "#b8b8b8"
+  light-syntax-color-deletion:
+    value: "#ff9e9e"
+  light-syntax-color-link:
+    value: "#dcacac"
+  light-syntax-color-literal:
+    value: "#9fc28e"
+  light-syntax-color-meta:
+    value: "#77c0e4"
+  light-syntax-color-meta-string:
+    value: "#8ebfd7"
+  light-syntax-color-number:
+    value: "#ff9e9e"
+  light-syntax-color-pseudo:
+    value: "#dcacac"
+  light-syntax-color-quote:
+    value: "#ff9e9e"
+  light-syntax-color-regexp:
+    value: "#dcacac"
+  light-syntax-color-section:
+    value: "#ff9e9e"
+  light-syntax-color-selector-attr:
+    value: "#dcacac"
+  light-syntax-color-selector-class:
+    value: "#ff9e9e"
+  light-syntax-color-selector-id:
+    value: "#ff9e9e"
+  light-syntax-color-string:
+    value: "#ff9e9e"
+  light-syntax-color-symbol:
+    value: "#dcacac"
+  light-syntax-color-template-tag:
+    value: "#ff9e9e"
+  light-syntax-color-template-variable:
+    value: "#dcacac"
+  light-syntax-color-title:
+    value: "#ff9e9e"
+  light-syntax-color-type:
+    value: "#ff9e9e"
+  light-syntax-color-variable:
+    value: "#dcacac"
+
+  # Dark Color
+  dark-background-color:
+    value: "{dark-soft-background-color.default}"
+  dark-content-color:
+    value: "{dark-soft-content-color}"
+  dark-syntax-color-addition:
+    value: "#306100"
+  dark-syntax-color-built-in:
+    value: "#306100"
+  dark-syntax-color-bullet:
+    value: "#306100"
+  dark-syntax-color-code:
+    value: "#306100"
+  dark-syntax-color-comment:
+    value: "#575757"
+  dark-syntax-color-deletion:
+    value: "#880000"
+  dark-syntax-color-link:
+    value: "#8c3b3b"
+  dark-syntax-color-literal:
+    value: "#405d32"
+  dark-syntax-color-meta:
+    value: "#195b7b"
+  dark-syntax-color-meta-string:
+    value: "#2a5b74"
+  dark-syntax-color-number:
+    value: "#880000"
+  dark-syntax-color-pseudo:
+    value: "#8c3b3b"
+  dark-syntax-color-quote:
+    value: "#880000"
+  dark-syntax-color-regexp:
+    value: "#8c3b3b"
+  dark-syntax-color-section:
+    value: "#880000"
+  dark-syntax-color-selector-attr:
+    value: "#8c3b3b"
+  dark-syntax-color-selector-class:
+    value: "#880000"
+  dark-syntax-color-selector-id:
+    value: "#880000"
+  dark-syntax-color-string:
+    value: "#880000"
+  dark-syntax-color-symbol:
+    value: "#8c3b3b"
+  dark-syntax-color-template-tag:
+    value: "#880000"
+  dark-syntax-color-template-variable:
+    value: "#8c3b3b"
+  dark-syntax-color-title:
+    value: "#880000"
+  dark-syntax-color-type:
+    value: "#880000"
+  dark-syntax-color-variable:
+    value: "#8c3b3b"

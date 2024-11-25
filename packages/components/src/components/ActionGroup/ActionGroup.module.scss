@@ -1,46 +1,62 @@
-.actionGroupContainer {
-  container-type: inline-size;
-}
-
 .actionGroup {
-  gap: var(--action-group--button-to-button-spacing);
-  display: grid;
-  grid-template-areas: "abort secondary primary";
-  grid-auto-columns: 1fr auto auto;
+  display: flex;
 
   .primary {
-    grid-area: primary;
+    order: 3;
   }
 
   .secondary {
-    grid-area: secondary;
-    display: flex;
-    flex-direction: row;
-    gap: var(--action-group--button-to-button-spacing);
-    &:empty {
-      display: none;
-    }
+    order: 2;
   }
 
   .abort {
-    grid-area: abort;
+    order: 1;
+    margin-right: auto;
+  }
+}
+
+.actionGroupContainer {
+  @extend .s;
+
+  &.ignoreBreakpoint {
+    .actionGroup {
+      flex-wrap: wrap;
+    }
   }
 
-  @container (max-width: 550px) {
-    display: flex;
-    flex-direction: column-reverse;
+  &:not(.ignoreBreakpoint) {
+    container-type: inline-size;
 
-    .primary,
-    .secondary,
-    .abort {
-      width: 100%;
-    }
+    .actionGroup {
+      @container (max-width: 550px) {
+        display: flex;
+        flex-direction: column-reverse;
 
-    .secondary {
-      flex-direction: column-reverse;
-      & > * {
-        width: 100%;
+        .primary,
+        .secondary,
+        .abort {
+          width: 100%;
+        }
+
+        .secondary {
+          flex-direction: column-reverse;
+
+          & > * {
+            width: 100%;
+          }
+        }
       }
     }
   }
+
+  @mixin spacing($spacing) {
+    &.#{$spacing} {
+      .actionGroup {
+        gap: var(--action-group--spacing--#{$spacing});
+      }
+    }
+  }
+
+  @include spacing(s);
+  @include spacing(m);
 }

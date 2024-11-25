@@ -4,15 +4,25 @@ import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import styles from "../../Table.module.scss";
 
-export type TableRowProps = Aria.RowProps<never>;
+export type TableRowProps = Aria.RowProps<never> & {
+  /** @internal */
+  footer?: boolean;
+};
 
 export const TableRow: FC<TableRowProps> = (props) => {
-  const { children, className, ...rest } = props;
-
-  const rootClassName = clsx(styles.row, className);
+  const { children, className, footer, ...rest } = props;
 
   return (
-    <Aria.Row className={rootClassName} {...rest}>
+    <Aria.Row
+      className={(props) =>
+        clsx(
+          styles.row,
+          footer && styles.footer,
+          typeof className === "function" ? className(props) : className,
+        )
+      }
+      {...rest}
+    >
       {children}
     </Aria.Row>
   );

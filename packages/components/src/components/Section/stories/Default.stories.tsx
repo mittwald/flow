@@ -7,7 +7,7 @@ import { TextField } from "@/components/TextField";
 import { Label } from "@/components/Label";
 import { Link } from "@/components/Link";
 import { Switch } from "@/components/Switch";
-import { StatusBadge } from "@/components/StatusBadge";
+import { AlertBadge } from "@/components/AlertBadge";
 import Header from "@/components/Header";
 import {
   IconContextMenu,
@@ -17,6 +17,13 @@ import { Button } from "@/components/Button";
 import { dummyText } from "@/lib/dev/dummyText";
 import { Action } from "@/components/Action";
 import { Modal } from "@/components/Modal";
+import {
+  ContextualHelp,
+  ContextualHelpTrigger,
+} from "@/components/ContextualHelp";
+import ContextMenuTrigger from "@/components/ContextMenu/components/ContextMenuTrigger";
+import { ContextMenu } from "@/components/ContextMenu";
+import MenuItem from "@/components/MenuItem";
 
 const meta: Meta<typeof Section> = {
   title: "Structure/Section",
@@ -73,13 +80,19 @@ export const WithHeaderContent: Story = {
       <Section {...props}>
         <Header>
           <Heading>
-            Newsletter <StatusBadge>Subscribed</StatusBadge>
+            Newsletter <AlertBadge>Subscribed</AlertBadge>
           </Heading>
 
           <Switch defaultSelected>Subscription</Switch>
           <Button variant="soft" color="secondary">
             Start database migration
           </Button>
+          <ContextualHelpTrigger>
+            <Button />
+            <ContextualHelp>
+              Additional information about database migration
+            </ContextualHelp>
+          </ContextualHelpTrigger>
         </Header>
         <Text>
           Upcoming releases, new features and tips about your hosting - we bring
@@ -91,7 +104,7 @@ export const WithHeaderContent: Story = {
         <Header>
           <Heading>
             My Project with a looooooooooong name
-            <StatusBadge status="danger">Deactivated</StatusBadge>
+            <AlertBadge status="danger">Deactivated</AlertBadge>
           </Heading>
           <Action>
             <Modal slot="actionConfirm">
@@ -113,12 +126,43 @@ export const WithHeaderContent: Story = {
       <Section {...props}>
         <Header>
           <Heading>My Project</Heading>
-          <Button variant="soft" color="secondary">
-            <IconContextMenu />
-          </Button>
+          <ContextMenuTrigger>
+            <Button variant="soft" color="secondary">
+              <IconContextMenu />
+            </Button>
+            <ContextMenu>
+              <MenuItem>Item 1</MenuItem>
+              <MenuItem>Item 2</MenuItem>
+            </ContextMenu>
+          </ContextMenuTrigger>
           <Button color="danger">Deactivate</Button>
         </Header>
         <Text>{dummyText.medium}</Text>
+      </Section>
+    </>
+  ),
+};
+
+export const WithSubHeadings: Story = {
+  render: (props) => (
+    <>
+      <Section {...props}>
+        <Heading>Heading</Heading>
+        <Text>{dummyText.long}</Text>
+        <Heading level={3}>Sub-Heading</Heading>
+        <Text>{dummyText.long}</Text>
+      </Section>
+      <Section {...props}>
+        <Header>
+          <Heading>Heading</Heading>
+          <Button>Button</Button>
+        </Header>
+        <Text>{dummyText.long}</Text>
+        <Header>
+          <Heading level={3}>Sub-Heading</Heading>
+          <Button>Button</Button>
+        </Header>
+        <Text>{dummyText.long}</Text>
       </Section>
     </>
   ),

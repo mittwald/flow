@@ -1,4 +1,4 @@
-import "@mittwald/flow-react-components/styles";
+import "@mittwald/flow-react-components/all.css";
 import "./global.scss";
 import "./layout.module.scss";
 import type { Metadata } from "next";
@@ -7,15 +7,14 @@ import React from "react";
 import HeaderNavigation from "@/app/_components/layout/HeaderNavigation/HeaderNavigation";
 import clsx from "clsx";
 import styles from "./layout.module.scss";
-import Heading from "@mittwald/flow-react-components/Heading";
 import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
-import StatusBadge from "@mittwald/flow-react-components/StatusBadge";
-import LayoutCard from "@mittwald/flow-react-components/LayoutCard";
 import { LinkProvider } from "@mittwald/flow-react-components/nextjs";
-import { IconMittwald } from "@mittwald/flow-react-components/Icons";
+import logoMittwald from "../../assets/m-flow_logo.svg";
 import MainNavigation from "@/app/_components/layout/MainNavigation";
 import MobileNavigation from "@/app/_components/layout/MobileNavigation/MobileNavigation";
 import { NotificationProvider } from "@mittwald/flow-react-components/NotificationProvider";
+import { Link } from "@mittwald/flow-react-components/Link";
+import { Image } from "@mittwald/flow-react-components/Image";
 
 export const metadata: Metadata = {
   title: "Flow – mittwald Design System",
@@ -31,13 +30,10 @@ const RootLayout: FC<PropsWithChildren> = async (props) => {
         <LinkProvider>
           <NotificationProvider>
             <header className={styles.header}>
-              <IconMittwald size="l" className={styles.logo} />
-              <Heading level={1} className={styles.heading}>
-                Flow
-              </Heading>
-              <StatusBadge className={styles.betaBadge} status="warning">
-                beta
-              </StatusBadge>
+              <Link href="/" className={styles.homeLink}>
+                <Image src={logoMittwald.src} alt="mittwald Flow Logo" />
+              </Link>
+
               <HeaderNavigation
                 className={styles.headerNavigation}
                 docs={docs.map((mdx) => mdx.serialize())}
@@ -48,9 +44,7 @@ const RootLayout: FC<PropsWithChildren> = async (props) => {
               />
             </header>
             <div className={styles.center}>
-              <LayoutCard className={styles.mainNavigation}>
-                <MainNavigation docs={docs.map((mdx) => mdx.serialize())} />
-              </LayoutCard>
+              <MainNavigation docs={docs.map((mdx) => mdx.serialize())} />
               <main className={styles.main}>{props.children}</main>
             </div>
           </NotificationProvider>

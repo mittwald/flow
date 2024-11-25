@@ -7,7 +7,7 @@
   row-gap: var(--slider--text-to-track-spacing);
 
   --button-size: calc(
-    var(--button--line-height-s) + var(--button--padding-s) * 2
+    var(--button--line-height-s) + var(--button--padding-s-y) * 2
   );
 
   .text {
@@ -76,7 +76,10 @@
 
     &[data-focus-visible] {
       @include focus.focus;
-      outline-offset: var(--size-px--xs);
+
+      & {
+        outline-offset: var(--size-px--xs);
+      }
     }
   }
 

@@ -1,7 +1,5 @@
 .heading {
   color: var(--heading--color);
-  display: flex;
-  column-gap: var(--heading--icon-to-text-spacing);
   font-size: var(--font-size);
   font-weight: var(--heading--font-weight);
   --heading-line-height: calc(var(--font-size) * var(--line-height--default));
@@ -14,33 +12,67 @@
     color: var(--heading--color-light);
   }
 
-  .icon {
-    height: var(--heading-line-height);
-    width: var(--font-size);
-  }
+  .headingText {
+    .icon,
+    > :global(.flow--alert-icon) {
+      height: var(--heading-line-height);
+      width: var(--heading-line-height);
+      vertical-align: bottom;
+      display: inline-block;
+      margin-inline-end: var(--heading--icon-to-text-spacing);
+    }
 
-  .headingContent {
-    height: var(--heading-line-height);
-    display: flex;
-    align-items: center;
-  }
-
-  @mixin level($level) {
-    &.h#{$level} {
-      --font-size: var(--heading--h#{$level}-font-size);
+    &:not(:last-child):has(+ .headingContent:not(:empty)) {
+      margin-inline-end: var(--heading--icon-to-text-spacing);
     }
   }
 
-  @include level(1);
-  @include level(2);
-  @include level(3);
-  @include level(4);
-  @include level(5);
-  @include level(6);
+  .headingContent {
+    vertical-align: bottom;
+    display: inline-flex;
+    height: var(--heading-line-height);
+    align-items: center;
+    column-gap: var(--heading--icon-to-text-spacing);
+
+    &:empty {
+      display: none;
+    }
+  }
+
+  &:where(h1) {
+    --font-size: var(--font-size-heading--xl);
+  }
+
+  &:where(h2) {
+    --font-size: var(--font-size-heading--m);
+  }
+
+  &:where(h3) {
+    --font-size: var(--font-size-heading--s);
+  }
+
+  &:where(h4),
+  &:where(h5),
+  &:where(h6) {
+    --font-size: var(--font-size-heading--xs);
+  }
+
+  @mixin size($size) {
+    &.#{$size} {
+      --font-size: var(--font-size-heading--#{$size});
+    }
+  }
+
+  @include size("xs");
+  @include size("s");
+  @include size("m");
+  @include size("l");
+  @include size("xl");
+  @include size("xxl");
 }
 
 @media (max-width: 550px) {
-  .heading.h1 {
-    --font-size: var(--heading--h1-font-size-mobile);
+  .heading:where(h1) {
+    --font-size: var(--font-size-heading--l);
   }
 }

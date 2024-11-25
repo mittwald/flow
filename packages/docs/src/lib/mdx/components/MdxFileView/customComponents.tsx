@@ -1,25 +1,37 @@
 import styles from "./customComponents.module.css";
 import Heading from "@mittwald/flow-react-components/Heading";
 import type { MDXComponents } from "mdx/types";
-import InlineAlert from "@mittwald/flow-react-components/InlineAlert";
+import Alert from "@mittwald/flow-react-components/Alert";
 import Content from "@mittwald/flow-react-components/Content";
 import React from "react";
 import CopyButton from "@mittwald/flow-react-components/CopyButton";
 import Link from "@mittwald/flow-react-components/Link";
 import Text from "@mittwald/flow-react-components/Text";
 import { LinkProvider } from "@mittwald/flow-react-components/nextjs";
-import DoAndDont from "@/lib/mdx/components/DoAndDont/DoAndDont";
-import { IconExternalLink } from "@mittwald/flow-react-components/Icons";
+import ExamplesContainer from "@/lib/mdx/components/DoAndDont/ExamplesContainer";
 import { ColumnLayout } from "@mittwald/flow-react-components/ColumnLayout";
 import { InlineCode } from "@mittwald/flow-react-components/InlineCode";
 import { Separator } from "@mittwald/flow-react-components/Separator";
+import { DesignTokenTable } from "@/lib/mdx/components/DesignTokenTable/DesignTokenTable";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableColumn,
+  TableHeader,
+  TableRow,
+} from "@mittwald/flow-react-components/Table";
+import { Label } from "@mittwald/flow-react-components/Label";
 
 export const customComponents: MDXComponents = {
   Content: Content,
   Heading: Heading,
-  InlineAlert: InlineAlert,
-  DoAndDont: DoAndDont,
+  Alert: Alert,
+  DoAndDont: ExamplesContainer,
   ColumnLayout: ColumnLayout,
+  DesignTokenTable: DesignTokenTable,
+  Label: Label,
+  Link: Link,
 
   pre: ({ children }) => (
     <div className={styles.preContainer}>
@@ -46,19 +58,19 @@ export const customComponents: MDXComponents = {
   li: ({ children }) => <li className={styles.li}>{children}</li>,
 
   h1: ({ children }) => (
-    <Heading level={2} className={styles.heading2}>
+    <Heading level={2} size="l" className={styles.heading2}>
       {children}
     </Heading>
   ),
 
   h2: ({ children }) => (
-    <Heading level={3} className={styles.heading}>
+    <Heading level={3} size="m" className={styles.heading}>
       {children}
     </Heading>
   ),
 
   h3: ({ children }) => (
-    <Heading level={4} className={styles.heading}>
+    <Heading level={4} size="s" className={styles.heading}>
       {children}
     </Heading>
   ),
@@ -74,7 +86,6 @@ export const customComponents: MDXComponents = {
       return (
         <Link href={href} inline>
           {children}
-          <IconExternalLink />
         </Link>
       );
     }
@@ -89,4 +100,11 @@ export const customComponents: MDXComponents = {
   },
 
   hr: () => <Separator className={styles.separator} />,
+
+  table: ({ children }) => <Table>{children}</Table>,
+  thead: ({ children }) => <TableHeader>{children}</TableHeader>,
+  tr: ({ children }) => <TableRow>{children}</TableRow>,
+  th: ({ children }) => <TableColumn>{children}</TableColumn>,
+  tbody: ({ children }) => <TableBody>{children}</TableBody>,
+  td: ({ children }) => <TableCell>{children}</TableCell>,
 };

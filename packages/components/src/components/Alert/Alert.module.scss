@@ -1,0 +1,39 @@
+.alert {
+  border-radius: var(--alert--corner-radius);
+  border-width: var(--alert--border-width);
+  border-style: var(--alert--border-style);
+  border-inline-start-width: var(--alert--border-x-start-width);
+  padding: var(--alert--padding);
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--alert--heading-to-content-spacing);
+  width: 100%;
+
+  @extend .info;
+
+  /* Elements */
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: var(--alert--content-to-content-spacing);
+  }
+
+  /* Status */
+
+  @mixin status($status) {
+    &.#{$status} {
+      border-color: var(--alert--#{$status}-border-color);
+
+      .heading {
+        color: var(--alert--#{$status}-heading-color);
+      }
+    }
+  }
+
+  @include status(info);
+  @include status(warning);
+  @include status(danger);
+  @include status(success);
+}

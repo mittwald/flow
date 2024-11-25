@@ -5,16 +5,17 @@ import type { LabelProps } from "@/components/Label";
 import type { ContentProps } from "@/components/Content";
 import type { LayoutCardProps } from "@/components/LayoutCard";
 import type { LinkProps } from "@/components/Link";
+import type { LightBoxProps } from "@/components/LightBox";
 import type { FieldErrorProps } from "@/components/FieldError";
 import type { FieldDescriptionProps } from "@/components/FieldDescription";
-import type { InlineAlertProps } from "@/components/InlineAlert";
+import type { AlertProps } from "@/components/Alert";
 import type { HeadingProps } from "@/components/Heading";
 import type { InitialsProps } from "@/components/Initials";
 import type { ImageProps } from "@/components/Image";
 import type { CopyButtonProps } from "@/components/CopyButton";
 import type { HeaderProps } from "@/components/Header/";
 import type { SwitchProps } from "@/components/Switch";
-import type { StatusBadgeProps } from "@/components/StatusBadge";
+import type { AlertBadgeProps } from "@/components/AlertBadge";
 import type { ActionGroupProps } from "@/components/ActionGroup";
 import type { AvatarProps } from "@/components/Avatar";
 import type { ActionProps } from "@/components/Action";
@@ -44,13 +45,28 @@ import type { OverlayTriggerProps } from "@/components/OverlayTrigger";
 import type { ListProps } from "@/components/List";
 import type { PasswordCreationFieldProps } from "@/components/PasswordCreationField";
 import type { SearchFieldProps } from "@/components/SearchField";
+import type { BadgeProps } from "@/components/Badge";
+import type { DatePickerProps } from "@/components/DatePicker";
+import type * as Aria from "react-aria-components";
+import type { DateRangePickerProps } from "@/components/DateRangePicker";
+import type { TimeFieldProps } from "@/components/TimeField";
+import type { AlertIconProps } from "@/components/AlertIcon";
+import type { ListSummaryProps } from "@/components/List/components/ListSummary/ListSummary";
+import type { SegmentedControlProps } from "@/components/SegmentedControl";
+import type { SegmentProps } from "@/components/SegmentedControl/components/Segment";
+import type { FileCardProps } from "@/components/FileCard";
+import type { FileFieldProps } from "@/components/FileField";
 
 export * from "./types";
 
 export interface FlowComponentPropsTypes {
   Action: ActionProps;
   ActionGroup: ActionGroupProps;
+  Alert: AlertProps;
+  AlertBadge: AlertBadgeProps;
+  AlertIcon: AlertIconProps;
   Avatar: AvatarProps;
+  Badge: BadgeProps;
   Button: ButtonProps;
   Checkbox: CheckboxProps;
   CheckboxButton: CheckboxButtonProps;
@@ -60,39 +76,50 @@ export interface FlowComponentPropsTypes {
   ContextMenuSection: ContextMenuSectionProps;
   ContextMenuTrigger: OverlayTriggerProps;
   ContextualHelp: ContextualHelpProps;
+  ContextualHelpTrigger: OverlayTriggerProps;
   CopyButton: CopyButtonProps;
   CounterBadge: CounterBadgeProps;
+  DatePicker: DatePickerProps<Aria.DateValue>;
+  DateRangePicker: DateRangePickerProps<Aria.DateValue>;
   FieldDescription: FieldDescriptionProps;
   FieldError: FieldErrorProps;
+  FileCard: FileCardProps;
+  FileField: FileFieldProps;
   Header: HeaderProps;
   Heading: HeadingProps;
   Icon: IconProps;
   Image: ImageProps;
   Initials: InitialsProps;
-  InlineAlert: InlineAlertProps;
   Label: LabelProps;
   LayoutCard: LayoutCardProps;
+  LightBox: LightBoxProps;
   Link: LinkProps;
-  List: ListProps;
+  List: ListProps<never>;
+  ListSummary: ListSummaryProps;
   MenuItem: MenuItemProps;
   Modal: ModalProps;
+  ModalTrigger: OverlayTriggerProps;
   NumberField: NumberFieldProps;
   Option: OptionProps;
   PasswordCreationField: PasswordCreationFieldProps;
   Popover: PopoverProps;
+  PopoverTrigger: OverlayTriggerProps;
   Radio: RadioProps;
   RadioButton: RadioButtonProps;
   RadioGroup: RadioGroupProps;
   SearchField: SearchFieldProps;
   Section: SectionProps;
+  Segment: SegmentProps;
+  SegmentedControl: SegmentedControlProps;
   Select: SelectProps;
   Slider: SliderProps;
-  StatusBadge: StatusBadgeProps;
   Switch: SwitchProps;
   Tabs: TabsProps;
+  TabTitle: TabsProps;
   Text: TextProps;
   TextArea: TextAreaProps;
   TextField: TextFieldProps;
+  TimeField: TimeFieldProps<Aria.TimeValue>;
 }
 
 const propsContextSupportingComponentsMap: Record<
@@ -102,6 +129,10 @@ const propsContextSupportingComponentsMap: Record<
   Action: true,
   ActionGroup: true,
   Avatar: true,
+  Alert: true,
+  AlertBadge: true,
+  AlertIcon: true,
+  Badge: true,
   Button: true,
   Checkbox: true,
   CheckboxButton: true,
@@ -111,40 +142,51 @@ const propsContextSupportingComponentsMap: Record<
   ContextMenuSection: true,
   ContextMenuTrigger: true,
   ContextualHelp: true,
+  ContextualHelpTrigger: true,
   CopyButton: true,
   CounterBadge: true,
+  DatePicker: true,
+  DateRangePicker: true,
   FieldDescription: true,
   FieldError: true,
+  FileCard: true,
+  FileField: true,
   Header: true,
   Heading: true,
   Icon: true,
   Image: true,
   Initials: true,
-  InlineAlert: true,
   Label: true,
   LayoutCard: true,
+  LightBox: true,
   Link: true,
   List: true,
+  ListSummary: true,
   MenuItem: true,
   Modal: true,
+  ModalTrigger: true,
   NumberField: true,
   Radio: true,
   Option: true,
   PasswordCreationField: true,
   Popover: true,
+  PopoverTrigger: true,
   RadioButton: true,
   RadioGroup: true,
   SearchField: true,
   Section: true,
+  Segment: true,
+  SegmentedControl: true,
   Select: true,
   Slider: true,
-  StatusBadge: true,
   Switch: true,
   Tabs: true,
+  TabTitle: true,
   TestComponent: true,
   Text: true,
   TextArea: true,
   TextField: true,
+  TimeField: true,
 };
 
 export const propsContextSupportingComponents = Object.keys(

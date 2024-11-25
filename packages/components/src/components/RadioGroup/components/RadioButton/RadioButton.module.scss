@@ -1,13 +1,13 @@
 @use "../../../../styles/mixins/formControl";
 
 .radioButton {
-  @include formControl.formControl();
   display: grid;
-  row-gap: var(--radio-button--text-to-text-spacing);
-  column-gap: var(--radio-button--icon-to-text-spacing);
-  border-radius: var(--form-control--corner-radius);
+  row-gap: var(--form-control--spacing-y);
+  column-gap: var(--form-control--spacing-x);
   grid-template-areas: "icon label";
   grid-template-columns: auto 1fr;
+
+  @include formControl.formControl();
 
   &.radioButton {
     width: auto;
@@ -21,7 +21,7 @@
     grid-template-rows: auto 1fr;
 
     .label {
-      font-weight: var(--radio-button--label-font-weight-with-content);
+      font-weight: var(--font-weight--bold);
     }
   }
 }

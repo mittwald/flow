@@ -1,4 +1,7 @@
-# Beispiel
+# Playground
+
+Verwende `<Section />`, um eine Section darzustellen. Eine Section erzeugt
+automatisch feste Abstände zwischen den Elementen, die in ihr platziert werden.
 
 <LiveCodeEditor />
 
@@ -6,26 +9,51 @@
 
 # Mehrere Sections
 
+Wenn du mehrere Sections untereinander platzierst, werden sie automatisch durch
+einen [Separator](/03-components/structure/separator) getrennt.
+
 <LiveCodeEditor example="multiple" editorCollapsed />
 
 ---
 
-# Mit StatusBadge
+# Kombiniere mit...
 
-<LiveCodeEditor example="status-badge" editorCollapsed />
+## Actions
 
----
-
-# Mit Actions
-
-Im Header können Switches oder Buttons, oder auch eine Mischung aus beidem
+Die Section unterstützt in der rechten oberen Ecke einen Bereich, der für
+Actions reserviert ist. Dort kann ein [Link](/03-components/navigation/link),
+[Switch](/03-components/form-controls/switch),
+[Button](/03-components/actions/button) oder eine Kombination dieser Components
 verwendet werden.
+
+<LiveCodeEditor example="link" editorCollapsed />
 
 <LiveCodeEditor example="switch" editorCollapsed />
 
-<LiveCodeEditor example="buttons" editorCollapsed />
-
-Gibt es mehr als zwei Buttons sollen alle außer dem Primary Button in ein
-ContextMenu gepackt werden.
+Es können maximal zwei Buttons nebeneinander dargestellt werden. Gibt es mehr
+als zwei Buttons, sollte nur die Hauptaktion sichtbar sein. Alle anderen Buttons
+müssen in ein [ContextMenu](/03-components/actions/context-menu).
 
 <LiveCodeEditor example="context-menu" editorCollapsed />
+
+---
+
+# AlertBadge
+
+Die [Heading](/03-components/content/heading) kann mit einem
+[AlertBadge](/03-components/status/alert-badge) erweitert werden. So wird der
+[AlertBadge](/03-components/status/alert-badge) erweitert werden. So wird der
+User schnell über den Status des Inhaltes einer Section informiert.
+
+<LiveCodeEditor example="alert-badge" editorCollapsed />
+
+---
+
+# Sub-Headings
+
+Um deine Section noch weiter zu unterteilen, kannst du weitere Headings
+hinzufügen, diese sollten ein niedrigeres Level als die Haupt-Heading (H2) der
+Section haben. Um die Unterteilung optisch zu verdeutlichen, erhalten die
+Sub-Headings automatisch einen größeren Abstand zum darüberliegenden Content
+
+<LiveCodeEditor example="sub-heading" editorCollapsed />

@@ -2,27 +2,27 @@
 
 .radio {
   display: grid;
-  column-gap: var(--radio--icon-to-text-spacing);
+  column-gap: var(--form-control--spacing-x);
   grid-template-columns: auto 1fr;
   width: fit-content;
 
   @include focus.focus;
 
   .icon {
-    color: var(--checkbox--icon-color--default);
+    color: var(--choice--icon-color--default);
   }
 
   &[data-selected] {
     .icon {
-      color: var(--radio--icon-color--selected);
+      color: var(--choice--icon-color--selected);
     }
   }
 
   &[data-disabled] {
-    color: var(--radio--color--disabled);
+    color: var(--text--color--disabled);
 
     .icon {
-      color: var(--radio--icon-color--disabled);
+      color: var(--choice--icon-color--disabled);
     }
   }
 }

@@ -34,6 +34,10 @@ export const View = (props: Props) => {
     Button: {
       className: styles.action,
     },
+    ActionGroup: {
+      className: styles.action,
+      ignoreBreakpoint: true,
+    },
     Content: {
       className: dynamic((p) => getStyleForContentSlot(p.slot)),
       tunnelId: "topContent",
@@ -64,7 +68,7 @@ export const View = (props: Props) => {
 
   return (
     <div className={rootClassName}>
-      <PropsContextProvider props={propsContext}>
+      <PropsContextProvider props={propsContext} mergeInParentContext>
         <TunnelProvider>
           {children}
           <div className={styles.title}>

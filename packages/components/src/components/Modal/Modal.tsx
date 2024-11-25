@@ -8,7 +8,7 @@ import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import type { OverlayController } from "@/lib/controller/overlay";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import { ModalOverlay } from "@/components/ModalOverlay";
+import { Overlay } from "@/components/Overlay";
 import { Header } from "@/components/Header";
 import { Action } from "@/components/Action";
 import { Button } from "@/components/Button";
@@ -22,6 +22,7 @@ export interface ModalProps
   /** @default "s" */
   size?: "s" | "m";
   offCanvas?: boolean;
+  offCanvasOrientation?: "left" | "right";
   controller?: OverlayController;
   slot?: string;
   isDismissable?: boolean;
@@ -35,18 +36,25 @@ export const Modal = flowComponent("Modal", (props) => {
     children,
     refProp: ignoredRef,
     className,
+    offCanvasOrientation = "right",
     ...rest
   } = props;
 
   const rootClassName = clsx(
     offCanvas ? styles.offCanvas : styles.modal,
     styles[`size-${size}`],
+    styles[offCanvasOrientation],
     className,
   );
 
   const propsContext: PropsContext = {
     Content: {
-      elementType: React.Fragment,
+      className: styles.content,
+      Section: {
+        Heading: {
+          level: 3,
+        },
+      },
     },
     Heading: {
       level: 2,
@@ -55,18 +63,17 @@ export const Modal = flowComponent("Modal", (props) => {
     },
     ActionGroup: {
       className: styles.actionGroup,
-      tunnelId: "buttons",
+      spacing: "m",
     },
   };
 
   return (
-    <ModalOverlay className={rootClassName} controller={controller} {...rest}>
+    <Overlay className={rootClassName} controller={controller} {...rest}>
       <PropsContextProvider props={propsContext}>
         <TunnelProvider>
-          {offCanvas && (
-            <Header className={styles.header}>
-              <TunnelExit id="heading" />
-
+          <Header className={styles.header}>
+            <TunnelExit id="heading" />
+            {offCanvas && (
               <Action closeOverlay="Modal">
                 <Button
                   variant="plain"
@@ -76,16 +83,12 @@ export const Modal = flowComponent("Modal", (props) => {
                   <IconClose />
                 </Button>
               </Action>
-            </Header>
-          )}
-          <div className={styles.content}>
-            {!offCanvas && <TunnelExit id="heading" />}
-            {children}
-          </div>
-          <TunnelExit id="buttons" />
+            )}
+          </Header>
+          {children}
         </TunnelProvider>
       </PropsContextProvider>
-    </ModalOverlay>
+    </Overlay>
   );
 });
 

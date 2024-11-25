@@ -4,6 +4,12 @@ import defaultMeta from "./Default.stories";
 import { IconMember } from "@/components/Icon/components/icons";
 import React from "react";
 import { dummyText } from "@/lib/dev/dummyText";
+import { AlertBadge } from "@/components/AlertBadge";
+import ContextualHelpTrigger from "../../ContextualHelp/components/ContextualHelpTrigger";
+import { Button } from "@/components/Button";
+import { ContextualHelp } from "@/components/ContextualHelp";
+import { Text } from "@/components/Text";
+import { Badge } from "@/components/Badge";
 
 const meta: Meta<typeof Heading> = {
   ...defaultMeta,
@@ -19,6 +25,31 @@ export const LongText: Story = {
     <Heading {...props}>
       <IconMember />
       {dummyText.medium}
+    </Heading>
+  ),
+};
+
+export const WithAlertBadge: Story = {
+  render: (props) => (
+    <Heading {...props}>
+      <IconMember />
+      {dummyText.long}
+      <AlertBadge>Alert</AlertBadge>
+      <Badge>Badge</Badge>
+    </Heading>
+  ),
+};
+
+export const WithContextualHelp: Story = {
+  render: (props) => (
+    <Heading {...props}>
+      {dummyText.long}
+      <ContextualHelpTrigger>
+        <Button />
+        <ContextualHelp {...props}>
+          <Text>{dummyText.medium}</Text>
+        </ContextualHelp>
+      </ContextualHelpTrigger>
     </Heading>
   ),
 };

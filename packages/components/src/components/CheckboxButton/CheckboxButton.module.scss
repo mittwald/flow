@@ -1,14 +1,14 @@
 @use "../../styles/mixins/formControl";
 
 .checkboxButton {
-  @include formControl.formControl();
   display: grid;
-  row-gap: var(--checkbox-button--text-to-text-spacing);
-  column-gap: var(--checkbox-button--icon-to-text-spacing);
-  border-radius: var(--form-control--corner-radius);
+  row-gap: var(--form-control--spacing-y);
+  column-gap: var(--form-control--spacing-x);
   grid-template-areas: "icon label";
   grid-template-columns: auto 1fr;
-  width: auto;
+  width: fit-content;
+
+  @include formControl.formControl();
 
   /* Elements */
 
@@ -29,11 +29,16 @@
     grid-template-rows: auto 1fr;
 
     .label {
-      font-weight: var(--checkbox-button--label-font-weight-with-content);
+      font-weight: var(--font-weight--bold);
     }
   }
 
   &:focus-within:not([data-selected]):not([data-focus-visible]) {
     border-color: var(--form-control--border-color--default);
+  }
+
+  &[data-invalid]:not([data-selected]) {
+    border-color: var(--form-control--border-color--invalid);
+    background-color: var(--form-control--background-color--invalid);
   }
 }

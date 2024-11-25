@@ -1,5 +1,5 @@
-import StyleDictionary from "style-dictionary";
 import yaml from "js-yaml";
+import StyleDictionary from "style-dictionary";
 
 StyleDictionary.registerParser({
   pattern: /\.yml$/,
@@ -21,7 +21,23 @@ StyleDictionary.registerTransform({
 export default {
   parsers: ["yml-parser"],
   source: ["src/**/*.yml"],
+  log: {
+    verbosity: "verbose",
+  },
   platforms: {
+    json: {
+      buildPath: "dist/",
+      transformGroup: "js",
+      files: [
+        {
+          format: "json",
+          destination: "variables.json",
+        },
+      ],
+      options: {
+        outputReferences: false,
+      },
+    },
     css: {
       transforms: [
         // roughly the predefined css transform group

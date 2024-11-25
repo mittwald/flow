@@ -30,7 +30,7 @@ export const useProps = <C extends FlowComponentName>(
 
   return mergeProps(
     contextProps
-      ? omitBy(
+      ? omitBy<FlowComponentProps<C>>(
           contextProps,
           (value, key) =>
             propsContextSupportingComponents.includes(

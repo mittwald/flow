@@ -41,6 +41,40 @@ export const RawText: Story = {
   ),
 };
 
+export const UnorderedList: Story = {
+  render: (props) => (
+    <Text {...props}>
+      Text with unordered list:
+      <ul>
+        <li>Item</li>
+        <li>Item</li>
+        <li>Item</li>
+      </ul>
+    </Text>
+  ),
+};
+
+export const OrderedList: Story = {
+  render: (props) => (
+    <Text {...props}>
+      Text with ordered list:
+      <ol>
+        <li>Item</li>
+        <li>Item</li>
+        <li>Item</li>
+      </ol>
+    </Text>
+  ),
+};
+
+export const SmallText: Story = {
+  render: (props) => (
+    <Text {...props}>
+      <small>Small Text</small>
+    </Text>
+  ),
+};
+
 export const Dark: Story = {
   args: { color: "dark" },
   parameters: {

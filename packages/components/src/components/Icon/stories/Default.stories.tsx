@@ -3,10 +3,6 @@ import Icon from "@/components/Icon/Icon";
 import React from "react";
 import { IconStar } from "@tabler/icons-react";
 import { IconProject } from "@/components/Icon/components/icons";
-import {
-  storyBackgroundDark,
-  storyBackgroundLight,
-} from "@/lib/dev/storyBackgrounds";
 
 const meta: Meta<typeof Icon> = {
   title: "Content/Icon",
@@ -65,18 +61,4 @@ export const CustomSvg: Story = {
       </svg>
     </Icon>
   ),
-};
-
-export const Dark: Story = {
-  args: { color: "dark" },
-  parameters: {
-    backgrounds: storyBackgroundLight,
-  },
-};
-
-export const Light: Story = {
-  args: { color: "light" },
-  parameters: {
-    backgrounds: storyBackgroundDark,
-  },
 };

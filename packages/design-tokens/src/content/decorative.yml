@@ -1,0 +1,48 @@
+decorative:
+  # Blue
+  blue-background-color:
+    value: "{color.hosting-blue.200}"
+  blue-content-accent-color:
+    value: "{color.hosting-blue.800}"
+  blue-content-color:
+    value: "{color.hosting-blue.1000}"
+
+  # Teal
+  teal-background-color:
+    value: "{color.super-teal.200}"
+  teal-content-accent-color:
+    value: "{color.super-teal.800}"
+  teal-content-color:
+    value: "{color.super-teal.1000}"
+
+  # Green
+  green-background-color:
+    value: "{color.espelkamp-green.200}"
+  green-content-accent-color:
+    value: "{color.espelkamp-green.800}"
+  green-content-color:
+    value: "{color.espelkamp-green.1000}"
+
+  # Violet
+  violet-background-color:
+    value: "{color.soft-contrast-violet.200}"
+  violet-content-accent-color:
+    value: "{color.soft-contrast-violet.800}"
+  violet-content-color:
+    value: "{color.soft-contrast-violet.1000}"
+
+  # Lilac
+  lilac-background-color:
+    value: "{color.bright-lilac.200}"
+  lilac-content-accent-color:
+    value: "{color.bright-lilac.800}"
+  lilac-content-color:
+    value: "{color.bright-lilac.1000}"
+
+  # Disabled
+  disabled-background-color:
+    value: "{color.gray.300}"
+  disabled-content-accent-color:
+    value: "{color.gray.500}"
+  disabled-content-color:
+    value: "{color.gray.600}"

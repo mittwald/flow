@@ -1,11 +1,11 @@
 import type { PropsWithChildren } from "react";
 import React from "react";
-import styles from "./Popover.module.scss";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import { type OverlayController, useOverlayController } from "@/lib/controller";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import OverlayContextProvider from "@/lib/controller/overlay/OverlayContextProvider";
+import styles from "./Popover.module.scss";
 
 export interface PopoverProps
   extends PropsWithChildren<Omit<Aria.PopoverProps, "children">> {
@@ -13,6 +13,7 @@ export interface PopoverProps
   isDialogContent?: boolean;
   controller?: OverlayController;
   contentClassName?: string;
+  width?: string | number;
 }
 
 export const Popover = flowComponent("Popover", (props) => {
@@ -25,12 +26,13 @@ export const Popover = flowComponent("Popover", (props) => {
     withTip,
     refProp: ref,
     defaultOpen = false,
+    width,
     ...rest
   } = props;
 
   const controllerFromContext = useOverlayController("Popover", {
     reuseControllerFromContext: true,
-    defaultOpen,
+    isDefaultOpen: defaultOpen,
   });
 
   const controller = controllerFromProps ?? controllerFromContext;
@@ -48,6 +50,7 @@ export const Popover = flowComponent("Popover", (props) => {
       ref={ref}
       isOpen={isOpen}
       onOpenChange={(isOpen) => controller.setOpen(isOpen)}
+      style={{ width }}
     >
       {withTip && (
         <Aria.OverlayArrow className={styles.tip}>

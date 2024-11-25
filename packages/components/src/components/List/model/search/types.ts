@@ -18,4 +18,5 @@ export type SearchValue = string | undefined;
 export interface SearchShape<IgnoredT> {
   render?: SearchFieldRenderComponent;
   textFieldProps: SupportedSearchFieldProps;
+  defaultValue?: string;
 }

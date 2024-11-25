@@ -1,10 +1,15 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Button from "../Button";
 import React from "react";
-import { IconPlus } from "@/components/Icon/components/icons";
+import { IconCamera, IconPlus } from "@/components/Icon/components/icons";
 import { action } from "@storybook/addon-actions";
 import { Text } from "@/components/Text";
 import IconChevronDown from "@/components/Icon/components/icons/IconChevronDown";
+import { Avatar } from "@/components/Avatar";
+import { Tooltip } from "@/components/Tooltip";
+import TooltipTrigger from "@/components/Tooltip/components/TooltipTrigger";
+import { dummyText } from "@/lib/dev/dummyText";
+import { Image } from "@/components/Image";
 
 const meta: Meta<typeof Button> = {
   title: "Actions/Button",
@@ -23,7 +28,7 @@ const meta: Meta<typeof Button> = {
     },
     variant: {
       control: "inline-radio",
-      options: ["plain", "solid", "soft"],
+      options: ["plain", "solid", "soft", "outline"],
     },
     size: {
       control: "inline-radio",
@@ -42,7 +47,6 @@ const meta: Meta<typeof Button> = {
 export default meta;
 
 type Story = StoryObj<typeof Button>;
-
 export const Default: Story = {};
 
 export const Small: Story = {
@@ -87,4 +91,18 @@ export const SmallWithTextAndIcon: Story = {
   args: {
     size: "s",
   },
+};
+
+export const WithAvatar: Story = {
+  render: (props) => (
+    <TooltipTrigger>
+      <Button {...props}>
+        <Avatar size="l">
+          <Image alt="Gopher" src={dummyText.imageSrc} />
+        </Avatar>
+        <IconCamera />
+      </Button>
+      <Tooltip>Profilbild ändern</Tooltip>
+    </TooltipTrigger>
+  ),
 };

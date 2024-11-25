@@ -1,15 +1,17 @@
-import MainContent from "@/app/_components/layout/MainContent/MainContent";
+import TopContent from "@/app/_components/layout/TopContent/TopContent";
 import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
 import type { StaticParams } from "@/lib/mdx/MdxFile";
 import { LayoutCard } from "@mittwald/flow-react-components/LayoutCard";
 import { Tabs } from "@mittwald/flow-react-components/Tabs";
 import React from "react";
-import TabContent from "@/app/_components/layout/TabContent/TabContent";
+import MainContent from "@/app/_components/layout/MainContent/MainContent";
+import { Link } from "@mittwald/flow-react-components/Link";
+import { IconExternalLink } from "@mittwald/flow-react-components/Icons";
 
 const contentFolder = "src/content";
 
 interface Props {
-  params: StaticParams;
+  params: Promise<StaticParams>;
 }
 
 export const generateStaticParams = async (): Promise<StaticParams[]> => {
@@ -17,52 +19,82 @@ export const generateStaticParams = async (): Promise<StaticParams[]> => {
 };
 
 export const generateMetadata = async (props: Props) => {
-  return await MdxFileFactory.generateMetadata(contentFolder, props.params);
+  const params = await props.params;
+  return await MdxFileFactory.generateMetadata(contentFolder, params);
 };
 
 export default async function Page(props: Props) {
+  const params = await props.params;
+
   const indexMdxFile = await MdxFileFactory.fromParams(
     contentFolder,
-    props.params,
+    params,
     "index",
   );
 
   const overviewMdxFile = await MdxFileFactory.fromParams(
     contentFolder,
-    props.params,
+    params,
     "overview",
   );
 
   const developMdxFile = await MdxFileFactory.fromParams(
     contentFolder,
-    props.params,
+    params,
     "develop",
   );
 
   const guidelinesMdxFile = await MdxFileFactory.fromParams(
     contentFolder,
-    props.params,
+    params,
     "guidelines",
   );
 
+  const component = indexMdxFile?.mdxSource.frontmatter.component;
+  const showTabs = !!developMdxFile || !!guidelinesMdxFile;
+
   return (
     <>
-      {indexMdxFile && <MainContent mdxFile={indexMdxFile} />}
+      {indexMdxFile && <TopContent mdxFile={indexMdxFile} />}
 
-      {(overviewMdxFile || developMdxFile || guidelinesMdxFile) && (
+      {!showTabs && overviewMdxFile && (
+        <LayoutCard>
+          <MainContent mdxFile={overviewMdxFile} />
+        </LayoutCard>
+      )}
+      {overviewMdxFile && showTabs && (
         <LayoutCard>
           <Tabs>
             {overviewMdxFile && (
-              <TabContent mdxFile={overviewMdxFile} tabTitle="Overview" />
+              <MainContent
+                showTabs
+                mdxFile={overviewMdxFile}
+                tabTitle="Overview"
+              />
             )}
             {developMdxFile && (
-              <TabContent mdxFile={developMdxFile} tabTitle="Develop" />
+              <MainContent
+                showTabs
+                mdxFile={developMdxFile}
+                tabTitle="Develop"
+              />
             )}
             {guidelinesMdxFile && (
-              <TabContent mdxFile={guidelinesMdxFile} tabTitle="Guidelines" />
+              <MainContent
+                showTabs
+                mdxFile={guidelinesMdxFile}
+                tabTitle="Guidelines"
+              />
             )}
           </Tabs>
         </LayoutCard>
+      )}
+      {component && (
+        <Link
+          href={`https://github.com/mittwald/flow/issues/new?title=Feedback%20on%20${component}%20component`}
+        >
+          Feedback geben <IconExternalLink />
+        </Link>
       )}
     </>
   );

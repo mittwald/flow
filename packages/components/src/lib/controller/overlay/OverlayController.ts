@@ -2,10 +2,21 @@ import { action, makeObservable, observable } from "mobx";
 import useSelector from "@/lib/mobx/useSelector";
 import { useRef } from "react";
 
+type OpenStateHandler = () => void;
+type DisposerFn = () => void;
+
+export interface OverlayControllerOptions {
+  isDefaultOpen?: boolean;
+  onOpen?: OpenStateHandler;
+  onClose?: OpenStateHandler;
+}
+
 export class OverlayController {
   public isOpen: boolean;
+  private onOpenHandlers = new Set<OpenStateHandler>();
+  private onCloseHandlers = new Set<OpenStateHandler>();
 
-  public constructor(isDefaultOpen = false) {
+  public constructor(options?: OverlayControllerOptions) {
     makeObservable(this, {
       isOpen: observable,
       open: action.bound,
@@ -13,27 +24,70 @@ export class OverlayController {
       toggle: action.bound,
       setOpen: action.bound,
     });
-    this.isOpen = isDefaultOpen;
+    this.isOpen = options?.isDefaultOpen ?? false;
+
+    if (options?.onOpen) {
+      this.onOpenHandlers.add(options.onOpen);
+    }
+    if (options?.onClose) {
+      this.onCloseHandlers.add(options.onClose);
+    }
   }
 
-  public static useNew(isDefaultOpen?: boolean) {
-    return useRef(new OverlayController(isDefaultOpen)).current;
+  public static useNew(options?: OverlayControllerOptions): OverlayController {
+    return useRef(new OverlayController(options)).current;
+  }
+
+  public addOnOpen(handler: OpenStateHandler): DisposerFn {
+    this.onOpenHandlers.add(handler);
+    return () => {
+      this.onOpenHandlers.delete(handler);
+    };
+  }
+
+  public addOnClose(handler: OpenStateHandler): DisposerFn {
+    this.onCloseHandlers.add(handler);
+    return () => {
+      this.onCloseHandlers.delete(handler);
+    };
+  }
+
+  private executeOnClose(): void {
+    this.onCloseHandlers.forEach((handler) => handler());
+  }
+
+  private executeOnOpen(): void {
+    this.onOpenHandlers.forEach((handler) => handler());
   }
 
   public open(): void {
     this.isOpen = true;
+    this.executeOnOpen();
   }
 
   public close(): void {
     this.isOpen = false;
+    this.executeOnClose();
   }
 
   public toggle(): void {
     this.isOpen = !this.isOpen;
+
+    if (this.isOpen) {
+      this.executeOnOpen();
+    } else {
+      this.executeOnClose();
+    }
   }
 
   public setOpen(to: boolean): void {
     this.isOpen = to;
+
+    if (to) {
+      this.executeOnOpen();
+    } else {
+      this.executeOnClose();
+    }
   }
 
   public useIsOpen(): boolean {

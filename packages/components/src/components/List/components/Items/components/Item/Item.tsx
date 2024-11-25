@@ -1,35 +1,49 @@
 import type { FC, PropsWithChildren } from "react";
-import React from "react";
+import React, { Suspense } from "react";
 import styles from "./Item.module.scss";
 import clsx from "clsx";
+import type { Key } from "react-aria-components";
 import * as Aria from "react-aria-components";
 import { useList } from "@/components/List/hooks/useList";
+import { SkeletonView } from "@/components/List/components/Items/components/Item/components/SkeletonView/SkeletonView";
+import { useGridItemProps } from "@/components/List/components/Items/components/Item/hooks/useGridItemProps";
 
 interface Props extends PropsWithChildren {
+  id: Key;
   data: never;
 }
 
 export const Item = (props: Props) => {
-  const { data, children } = props;
+  const { id, data } = props;
   const list = useList();
+
   const itemView = list.itemView;
-  const onAction = itemView.onAction;
+
+  const { gridItemProps, children } = useGridItemProps(props);
+
+  if (!itemView) {
+    return null;
+  }
 
   const textValue = itemView.textValue ? itemView.textValue(data) : undefined;
-  const itemAction = onAction ? () => onAction(data) : undefined;
   const href = itemView.href ? itemView.href(data) : undefined;
-  const hasAction = list.hasAction || !!itemAction || !!href;
-
-  const rootClassName = clsx(styles.item, hasAction && styles.hasAction);
+  const hasAction = !!gridItemProps.onAction || !!href;
 
   return (
     <Aria.GridListItem
-      className={rootClassName}
-      onAction={itemAction}
+      id={id}
+      className={(props) =>
+        clsx(
+          styles.item,
+          hasAction && styles.hasAction,
+          props.isSelected && styles.isSelected,
+        )
+      }
       textValue={textValue}
       href={href}
+      {...gridItemProps}
     >
-      {children ?? itemView.render(data)}
+      <Suspense fallback={<SkeletonView />}>{children}</Suspense>
     </Aria.GridListItem>
   );
 };

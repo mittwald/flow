@@ -1,4 +1,4 @@
-import type { FC, PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 import React from "react";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
@@ -19,7 +19,7 @@ export interface SliderProps
   showInitialMarker?: boolean;
 }
 
-export const Slider: FC<SliderProps> = flowComponent("Slider", (props) => {
+export const Slider = flowComponent("Slider", (props) => {
   const {
     className,
     children,
@@ -69,6 +69,7 @@ export const Slider: FC<SliderProps> = flowComponent("Slider", (props) => {
               variant="plain"
               className={styles.decrement}
               isDisabled={isDisabled}
+              excludeFromTabOrder
             >
               <IconMinus />
             </Button>
@@ -80,6 +81,7 @@ export const Slider: FC<SliderProps> = flowComponent("Slider", (props) => {
               variant="plain"
               className={styles.increment}
               isDisabled={isDisabled}
+              excludeFromTabOrder
             >
               <IconPlus />
             </Button>

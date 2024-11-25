@@ -1,21 +1,3 @@
-@font-face {
-  font-family: "Inter";
-  src: url(../fonts/Inter-Regular.woff2);
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Inter";
-  src: url(../fonts/Inter-Bold.woff2);
-  font-weight: bold;
-}
-
-@font-face {
-  font-family: "RobotoMono";
-  src: url(../fonts/RobotoMono-Regular.ttf);
-}
-
 /**
   CSS reset for all Flow components that
   - are not part of other Flow components (avoid eager reset)
@@ -69,7 +51,7 @@ html body *:where([class*="flow--"]:not([class*="flow--"] [class*="flow--"])) {
   line-height: var(--line-height--default);
   font-size: var(--size-rem--m);
   font-weight: var(--font-weight--normal);
-  color: var(--content--color--default);
+  color: var(--text--color--default);
 
   /*
   Josh's Custom CSS Reset

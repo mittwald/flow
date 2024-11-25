@@ -5,19 +5,25 @@ import ActionGroup from "@mittwald/flow-react-components/ActionGroup";
 import Button from "@mittwald/flow-react-components/Button";
 import Heading from "@mittwald/flow-react-components/Heading";
 import Action from "@mittwald/flow-react-components/Action";
+import { Section } from "@mittwald/flow-react-components/Section";
 
 <StaticModal>
-  <div className="flow--modal--content">
+  <header className="flow--modal--header">
     <Heading>Organisation anlegen</Heading>
-    <Text>
-      Eine Organisation kannst du dir wie ein Unternehmen
-      vorstellen. An diesem Ort verwaltest du deine
-      Mitarbeiter, Zahlungsmodalitäten und kannst deine
-      Rechnungen einsehen.
-    </Text>
-    <TextField>
-      <Label>Organisationsname</Label>
-    </TextField>
+  </header>
+
+  <div className="flow--modal--content">
+    <Section>
+      <Text>
+        Eine Organisation kannst du dir wie ein Unternehmen
+        vorstellen. An diesem Ort verwaltest du deine
+        Mitarbeiter, Zahlungsmodalitäten und kannst deine
+        Rechnungen einsehen.
+      </Text>
+      <TextField>
+        <Label>Organisationsname</Label>
+      </TextField>
+    </Section>
   </div>
   <ActionGroup className="flow--modal--action-group">
     <Action closeOverlay="Modal">

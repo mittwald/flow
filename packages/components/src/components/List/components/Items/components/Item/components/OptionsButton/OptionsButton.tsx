@@ -17,6 +17,7 @@ export const OptionsButton: FC<Props> = (props) => {
     <ContextMenuTrigger>
       <Button
         variant="plain"
+        color="secondary"
         className={className}
         aria-label={stringFormatter.format("list.options")}
       >

@@ -41,3 +41,7 @@ export const WithContent: Story = {
     </CheckboxButton>
   ),
 };
+
+export const Invalid: Story = {
+  args: { isInvalid: true },
+};

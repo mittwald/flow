@@ -1,4 +1,5 @@
 export interface Domain {
+  id: string;
   hostname: string;
   domain: string;
   type: "Subdomain" | "Domain";
@@ -60,6 +61,7 @@ export const getDomains = async (req: Request): Promise<Response> => {
 
 export const domains: Domain[] = [
   {
+    id: "abc-1",
     hostname: "my-domain.de",
     domain: "my-domain.de",
     type: "Domain",
@@ -67,6 +69,7 @@ export const domains: Domain[] = [
     tld: "de",
   },
   {
+    id: "abc-2",
     hostname: "www.my-domain.de",
     domain: "my-domain.de",
     type: "Subdomain",
@@ -74,6 +77,7 @@ export const domains: Domain[] = [
     tld: "de",
   },
   {
+    id: "abc-3",
     hostname: "www.one-more-domain.com",
     domain: "one-more-domain.com",
     type: "Subdomain",
@@ -81,6 +85,7 @@ export const domains: Domain[] = [
     tld: "com",
   },
   {
+    id: "abc-4",
     hostname: "shop.one-more-domain.com",
     domain: "one-more-domain.com",
     type: "Subdomain",
@@ -88,6 +93,7 @@ export const domains: Domain[] = [
     tld: "com",
   },
   {
+    id: "abc-5",
     hostname: "blog.my-domain.de",
     domain: "my-domain.de",
     type: "Subdomain",
@@ -95,6 +101,7 @@ export const domains: Domain[] = [
     tld: "de",
   },
   {
+    id: "abc-6",
     hostname: "another-domain.de",
     domain: "another-domain.de",
     type: "Domain",
@@ -102,6 +109,7 @@ export const domains: Domain[] = [
     tld: "de",
   },
   {
+    id: "abc-7",
     hostname: "one-more-domain.com",
     domain: "one-more-domain.com",
     type: "Domain",

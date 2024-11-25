@@ -9,6 +9,7 @@ import {
   storyBackgroundDark,
   storyBackgroundLight,
 } from "@/lib/dev/storyBackgrounds";
+import { ActionGroup } from "@/components/ActionGroup";
 
 const meta: Meta<typeof IllustratedMessage> = {
   title: "Content/Illustrated Message",
@@ -26,7 +27,7 @@ const meta: Meta<typeof IllustratedMessage> = {
       control: "inline-radio",
     },
   },
-  args: { color: "info" },
+  args: { color: "primary" },
 };
 export default meta;
 
@@ -34,9 +35,9 @@ type Story = StoryObj<typeof IllustratedMessage>;
 
 export const Default: Story = {};
 
-export const Negative: Story = {
+export const Danger: Story = {
   render: (props) => (
-    <IllustratedMessage {...props} color="negative">
+    <IllustratedMessage {...props} color="danger">
       <IconDanger />
       <Heading>No access</Heading>
       <Text>You do not have the required permissions to access this page.</Text>
@@ -57,4 +58,20 @@ export const Light: Story = {
   parameters: {
     backgrounds: storyBackgroundDark,
   },
+};
+
+export const WithActionGroup: Story = {
+  render: (props) => (
+    <IllustratedMessage {...props}>
+      <IconApp />
+      <Heading>No apps installed</Heading>
+      <Text>Create your first app to start working on your website.</Text>
+      <ActionGroup>
+        <Button variant="soft" color="secondary">
+          Go back
+        </Button>
+        <Button>Create app</Button>
+      </ActionGroup>
+    </IllustratedMessage>
+  ),
 };

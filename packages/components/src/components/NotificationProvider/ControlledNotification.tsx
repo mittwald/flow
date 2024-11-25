@@ -22,6 +22,7 @@ export const ControlledNotification: FC<Props> = (props) => {
     },
     onClose: () => {
       controller.remove(notification.meta.id);
+      notification.element.props.onClose?.();
     },
     onFocus: () => {
       notification.meta.autoCloseTimer.pause();

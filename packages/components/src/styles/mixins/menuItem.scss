@@ -1,4 +1,5 @@
 @use "./focus";
+@use "./avatarButton";
 
 @mixin menuItem {
   display: flex;
@@ -7,10 +8,17 @@
   border-radius: var(--menu-item--corner-radius);
   background-color: var(--menu-item--background-color--default);
   padding: var(--menu-item--padding-y) var(--menu-item--padding-x);
-  cursor: default;
   align-items: center;
 
+  &:not(a) {
+    cursor: default;
+  }
+
   @include focus.focus;
+
+  & {
+    outline-offset: calc(var(--size-px--xxs) * -1);
+  }
 
   /* Elements */
   .icon {
@@ -57,5 +65,10 @@
   &[aria-disabled] {
     background-color: var(--menu-item--disabled-background-color);
     color: var(--menu-item--disabled-color);
+    .icon {
+      color: var(--menu-item--icon-color--disabled);
+    }
   }
+
+  @include avatarButton.avatarButton();
 }

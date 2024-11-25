@@ -1,0 +1,47 @@
+@use "@/styles/mixins/formControl.scss";
+
+.dateRangeInput {
+  display: flex;
+  justify-content: space-between;
+
+  @include formControl.formControl();
+
+  > div {
+    display: flex;
+    align-items: center;
+  }
+
+  :global(.react-aria-DateInput) {
+    display: flex;
+  }
+
+  :global(.react-aria-DateSegment) {
+    border-radius: var(--date-picker--date-segment-corner-radius);
+
+    &:focus {
+      background: var(--date-picker--date-segment-background-color--focused);
+      outline: none;
+    }
+  }
+
+  > span {
+    display: flex;
+    align-items: center;
+  }
+
+  :global(.react-aria-DateInput):first-of-type {
+    padding-inline-end: 2px;
+  }
+
+  :global(.react-aria-DateInput):last-of-type {
+    padding-inline-start: 2px;
+  }
+
+  :global(.flow--button) {
+    margin-block: calc((var(--form-control--padding-y) - 1px) * -1);
+    margin-inline-end: calc(var(--form-control--padding-x) * -1);
+    padding: calc(
+      var(--button--padding-icon-only) - var(--form-control--border-width)
+    );
+  }
+}
