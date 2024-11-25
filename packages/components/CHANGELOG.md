@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.354](https://github.com/mittwald/flow/compare/0.1.0-alpha.353...0.1.0-alpha.354) (2024-11-25)
+
+### Bug Fixes
+
+- **Notification:** Add Suspense to NotificationContainer
+  ([#1002](https://github.com/mittwald/flow/issues/1002))
+  ([843b8ed](https://github.com/mittwald/flow/commit/843b8ed1816bce2a2af3187504b7b108fdae75a0))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.353](https://github.com/mittwald/flow/compare/0.1.0-alpha.352...0.1.0-alpha.353) (2024-11-25)
 
 ### Features
