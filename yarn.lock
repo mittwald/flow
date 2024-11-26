@@ -3227,6 +3227,51 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mittwald/flow-demo-remote-dom@workspace:demos/remote-dom":
+  version: 0.0.0-use.local
+  resolution: "@mittwald/flow-demo-remote-dom@workspace:demos/remote-dom"
+  dependencies:
+    "@internationalized/date": "npm:^3.6.0"
+    "@mfalkenberg/react-live-ssr": "npm:^4.1.7"
+    "@mittwald/flow-design-tokens": "workspace:^"
+    "@mittwald/flow-react-components": "workspace:^"
+    "@mittwald/flow-remote-elements": "workspace:^"
+    "@mittwald/flow-remote-react-components": "workspace:^"
+    "@mittwald/flow-remote-react-renderer": "workspace:^"
+    "@mittwald/react-use-promise": "npm:^2.6.0"
+    "@tabler/icons-react": "npm:^3.22.0"
+    "@types/node": "npm:^22.9.1"
+    "@types/react": "npm:^18.3.12"
+    "@types/react-dom": "npm:^18.3.1"
+    "@yarnpkg/pnpify": "npm:^4.1.3"
+    acorn: "patch:acorn@npm%3A8.11.2#~/.yarn/patches/acorn-npm-8.11.2-a470f49bb6.patch"
+    acorn-typescript: "npm:^1.4.13"
+    clsx: "npm:^2.1.1"
+    dot-prop: "npm:^9.0.0"
+    eslint: "npm:^9.15.0"
+    fs-jetpack: "npm:^5.1.0"
+    glob: "npm:^11.0.0"
+    humanize-string: "npm:^3.0.0"
+    next: "npm:~15.0.3"
+    nx: "npm:^20.1.2"
+    parse-es-import: "npm:^0.6.0"
+    prism-react-renderer: "npm:^2.4.0"
+    raw-loader: "npm:^4.0.2"
+    react: "npm:^18.3.1"
+    react-docgen-typescript: "npm:^2.2.2"
+    react-dom: "npm:^18.3.1"
+    react-hook-form: "npm:^7.53.2"
+    react-markdown: "npm:^9.0.1"
+    remark-frontmatter: "npm:^5.0.0"
+    remark-gfm: "npm:^4.0.0"
+    remeda: "npm:^2.17.3"
+    sass: "npm:^1.81.0"
+    tsx: "npm:^4.19.2"
+    typescript: "npm:^5.6.3"
+    webpack: "npm:^5.96.1"
+  languageName: unknown
+  linkType: soft
+
 "@mittwald/flow-design-tokens@workspace:^, @mittwald/flow-design-tokens@workspace:packages/design-tokens":
   version: 0.0.0-use.local
   resolution: "@mittwald/flow-design-tokens@workspace:packages/design-tokens"
@@ -3291,7 +3336,7 @@ __metadata:
   resolution: "@mittwald/flow-project@workspace:."
   dependencies:
     "@eslint/js": "npm:^9.15.0"
-    "@nx/devkit": "npm:^20.1.3"
+    "@nx/devkit": "npm:^20.1.2"
     "@types/eslint__js": "npm:^8.42.3"
     eslint: "npm:^9.15.0"
     eslint-config-prettier: "npm:^9.1.0"
@@ -3411,6 +3456,7 @@ __metadata:
     storybook: "npm:^8.4.5"
     storybook-addon-rtl: "npm:^1.0.1"
     tsx: "npm:^4.19.2"
+    type-fest: "npm:^4.27.0"
     typescript: "npm:^5.7.2"
     typescript-plugin-css-modules: "npm:^5.1.0"
     use-callback-ref: "npm:^1.3.2"
@@ -3433,6 +3479,99 @@ __metadata:
       optional: true
     next:
       optional: true
+    react-hook-form:
+      optional: true
+  languageName: unknown
+  linkType: soft
+
+"@mittwald/flow-remote-core@workspace:^, @mittwald/flow-remote-core@workspace:packages/remote-core":
+  version: 0.0.0-use.local
+  resolution: "@mittwald/flow-remote-core@workspace:packages/remote-core"
+  dependencies:
+    "@quilted/threads": "npm:^3.1.2"
+    "@remote-dom/core": "npm:^1.5.1"
+    "@types/node": "npm:^22.9.1"
+    nx: "npm:^20.1.2"
+    prettier: "npm:^3.3.3"
+    typescript: "npm:^5.6.3"
+    vite: "npm:^5.4.11"
+    vite-plugin-checker: "npm:^0.8.0"
+    vite-plugin-dts: "npm:^4.3.0"
+    vite-plugin-externalize-deps: "npm:^0.8.0"
+  languageName: unknown
+  linkType: soft
+
+"@mittwald/flow-remote-elements@workspace:^, @mittwald/flow-remote-elements@workspace:packages/remote-elements":
+  version: 0.0.0-use.local
+  resolution: "@mittwald/flow-remote-elements@workspace:packages/remote-elements"
+  dependencies:
+    "@mittwald/flow-react-components": "workspace:^"
+    "@remote-dom/core": "npm:^1.5.1"
+    "@types/node": "npm:^22.9.1"
+    nx: "npm:^20.1.2"
+    prettier: "npm:^3.3.3"
+    type-fest: "npm:^4.27.0"
+    typescript: "npm:^5.6.3"
+    vite: "npm:^5.4.11"
+    vite-plugin-checker: "npm:^0.8.0"
+    vite-plugin-dts: "npm:^4.3.0"
+    vite-plugin-externalize-deps: "npm:^0.8.0"
+  languageName: unknown
+  linkType: soft
+
+"@mittwald/flow-remote-react-components@workspace:^, @mittwald/flow-remote-react-components@workspace:packages/remote-react-components":
+  version: 0.0.0-use.local
+  resolution: "@mittwald/flow-remote-react-components@workspace:packages/remote-react-components"
+  dependencies:
+    "@mittwald/flow-remote-core": "workspace:^"
+    "@mittwald/flow-remote-elements": "workspace:^"
+    "@remote-dom/core": "npm:^1.5.1"
+    "@remote-dom/react": "npm:^1.2.1"
+    "@types/node": "npm:^22.9.1"
+    "@types/react": "npm:^18.3.12"
+    nx: "npm:^20.1.2"
+    prettier: "npm:^3.3.3"
+    react: "npm:^18.3.1"
+    react-hook-form: "npm:^7.53.2"
+    typescript: "npm:^5.6.3"
+    vite: "npm:^5.4.11"
+    vite-plugin-checker: "npm:^0.8.0"
+    vite-plugin-dts: "npm:^4.3.0"
+    vite-plugin-externalize-deps: "npm:^0.8.0"
+  peerDependencies:
+    react: ~18.3.0
+    react-hook-form: "*"
+  peerDependenciesMeta:
+    react-hook-form:
+      optional: true
+  languageName: unknown
+  linkType: soft
+
+"@mittwald/flow-remote-react-renderer@workspace:^, @mittwald/flow-remote-react-renderer@workspace:packages/remote-react-renderer":
+  version: 0.0.0-use.local
+  resolution: "@mittwald/flow-remote-react-renderer@workspace:packages/remote-react-renderer"
+  dependencies:
+    "@mittwald/flow-react-components": "workspace:^"
+    "@mittwald/flow-remote-core": "workspace:^"
+    "@mittwald/flow-remote-elements": "workspace:^"
+    "@remote-dom/core": "npm:^1.5.1"
+    "@remote-dom/react": "npm:^1.2.1"
+    "@types/node": "npm:^22.9.1"
+    "@types/react": "npm:^18.3.12"
+    nx: "npm:^20.1.2"
+    prettier: "npm:^3.3.3"
+    react: "npm:^18.3.1"
+    react-hook-form: "npm:^7.53.2"
+    remeda: "npm:^2.17.3"
+    typescript: "npm:^5.6.3"
+    vite: "npm:^5.4.11"
+    vite-plugin-checker: "npm:^0.8.0"
+    vite-plugin-dts: "npm:^4.3.0"
+    vite-plugin-externalize-deps: "npm:^0.8.0"
+  peerDependencies:
+    react: ~18.3.0
+    react-hook-form: "*"
+  peerDependenciesMeta:
     react-hook-form:
       optional: true
   languageName: unknown
@@ -3892,7 +4031,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nx/devkit@npm:20.1.3, @nx/devkit@npm:>=17.1.2 < 21, @nx/devkit@npm:^20.1.3":
+"@nx/devkit@npm:20.1.3, @nx/devkit@npm:>=17.1.2 < 21, @nx/devkit@npm:^20.1.2":
   version: 20.1.3
   resolution: "@nx/devkit@npm:20.1.3"
   dependencies:
@@ -4459,6 +4598,36 @@ __metadata:
   version: 0.1.1
   resolution: "@pkgr/core@npm:0.1.1"
   checksum: 10c0/3f7536bc7f57320ab2cf96f8973664bef624710c403357429fbf680a5c3b4843c1dbd389bb43daa6b1f6f1f007bb082f5abcb76bb2b5dc9f421647743b71d3d8
+  languageName: node
+  linkType: hard
+
+"@preact/signals-core@npm:^1.6.0":
+  version: 1.8.0
+  resolution: "@preact/signals-core@npm:1.8.0"
+  checksum: 10c0/fa773157621d881e7aefddb8dbded805d8203600211040cc4b5907726e288a163fa58558c1d36bc7085d75e6488af0a806322bbbed005d08be76a76f40244246
+  languageName: node
+  linkType: hard
+
+"@quilted/events@npm:^2.1.1":
+  version: 2.1.1
+  resolution: "@quilted/events@npm:2.1.1"
+  dependencies:
+    "@preact/signals-core": "npm:^1.6.0"
+  checksum: 10c0/53fac9526fbe86777b8ce6d6eb1295be78c29beaff2a8bc609134a0bfb63752fcebeeb6334bfbe3c0fd02710ade399cc40dc1c2e8ebae1ed825efbf8cddc8556
+  languageName: node
+  linkType: hard
+
+"@quilted/threads@npm:^3.1.2":
+  version: 3.1.2
+  resolution: "@quilted/threads@npm:3.1.2"
+  dependencies:
+    "@quilted/events": "npm:^2.1.1"
+  peerDependencies:
+    "@preact/signals-core": ^1.6.0
+  peerDependenciesMeta:
+    "@preact/signals-core":
+      optional: true
+  checksum: 10c0/7c386d63c4a7688bafe1ae3353f2763991dc74fcdc17a6505a08cca8537780b8218b127d1f5f38c36aab070de5ad7fa7e56a6fb244b68fbb4f460b80341781ea
   languageName: node
   linkType: hard
 
@@ -6031,6 +6200,46 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@remote-dom/core@npm:^1.5.0, @remote-dom/core@npm:^1.5.1":
+  version: 1.5.1
+  resolution: "@remote-dom/core@npm:1.5.1"
+  dependencies:
+    "@remote-dom/polyfill": "npm:^1.4.2"
+    htm: "npm:^3.1.1"
+  peerDependencies:
+    "@preact/signals-core": ^1.3.0
+  peerDependenciesMeta:
+    "@preact/signals-core":
+      optional: true
+    preact:
+      optional: true
+  checksum: 10c0/4d2678161676ace51e4ea64dde1676982c068d40982a7c0f7919f8f0429087f5790758611c7d31a27baddc097c8ca443d1b5a1ee9fb41094a48d251c386053ea
+  languageName: node
+  linkType: hard
+
+"@remote-dom/polyfill@npm:^1.4.2":
+  version: 1.4.2
+  resolution: "@remote-dom/polyfill@npm:1.4.2"
+  checksum: 10c0/2bb307ed237be598244f5f946a7762e389b3b5755c29de7c2ab37e537cc5581eba687cb5285cc241318dc6c098c6496a6abd471beb869d80a1fc2617fde9e35e
+  languageName: node
+  linkType: hard
+
+"@remote-dom/react@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "@remote-dom/react@npm:1.2.1"
+  dependencies:
+    "@remote-dom/core": "npm:^1.5.0"
+    "@types/react": "npm:^18.0.0"
+    htm: "npm:^3.1.1"
+  peerDependencies:
+    react: ^17.0.0 || ^18.0.0
+  peerDependenciesMeta:
+    react:
+      optional: true
+  checksum: 10c0/596071c094d8070c75dee046bd556705bc4b38982df20f4037eb22cda9be5be9e4930ddfe63df9d8ff6517c53b8b3db9c422e9baaca277d97993d67f00c797ee
+  languageName: node
+  linkType: hard
+
 "@rollup/pluginutils@npm:^5.0.2, @rollup/pluginutils@npm:^5.1.0":
   version: 5.1.0
   resolution: "@rollup/pluginutils@npm:5.1.0"
@@ -7464,7 +7673,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:22.10.0, @types/node@npm:^22.10.0":
+"@types/node@npm:22.10.0, @types/node@npm:^22.10.0, @types/node@npm:^22.9.1":
   version: 22.10.0
   resolution: "@types/node@npm:22.10.0"
   dependencies:
@@ -7593,7 +7802,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:^18.3.12":
+"@types/react@npm:^18.0.0, @types/react@npm:^18.3.12":
   version: 18.3.12
   resolution: "@types/react@npm:18.3.12"
   dependencies:
@@ -12421,6 +12630,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"htm@npm:^3.1.1":
+  version: 3.1.1
+  resolution: "htm@npm:3.1.1"
+  checksum: 10c0/0de4c8fff2b8e76c162235ae80dbf93ca5eef1575bd50596a06ce9bebf1a6da5efc467417c53034a9ffa2ab9ecff819cbec041dc9087894b2b900ad4de26c7e7
+  languageName: node
+  linkType: hard
+
 "html-dom-parser@npm:5.0.10":
   version: 5.0.10
   resolution: "html-dom-parser@npm:5.0.10"
@@ -15548,7 +15764,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nx@npm:20.1.3, nx@npm:>=17.1.2 < 21, nx@npm:^20.1.3":
+"nx@npm:20.1.3, nx@npm:>=17.1.2 < 21, nx@npm:^20.1.2, nx@npm:^20.1.3":
   version: 20.1.3
   resolution: "nx@npm:20.1.3"
   dependencies:
@@ -16640,7 +16856,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^3.4.0":
+"prettier@npm:^3.3.3, prettier@npm:^3.4.0":
   version: 3.4.0
   resolution: "prettier@npm:3.4.0"
   bin:
@@ -17500,7 +17716,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"remeda@npm:^2.17.4":
+"remeda@npm:^2.17.3, remeda@npm:^2.17.4":
   version: 2.17.4
   resolution: "remeda@npm:2.17.4"
   dependencies:
@@ -19349,7 +19565,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^5.7.2":
+"typescript@npm:^5.6.3, typescript@npm:^5.7.2":
   version: 5.7.2
   resolution: "typescript@npm:5.7.2"
   bin:
@@ -19389,7 +19605,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A^5.7.2#optional!builtin<compat/typescript>":
+"typescript@patch:typescript@npm%3A^5.6.3#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A^5.7.2#optional!builtin<compat/typescript>":
   version: 5.7.2
   resolution: "typescript@patch:typescript@npm%3A5.7.2#optional!builtin<compat/typescript>::version=5.7.2&hash=5786d5"
   bin:
