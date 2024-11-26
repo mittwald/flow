@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.355](https://github.com/mittwald/flow/compare/0.1.0-alpha.354...0.1.0-alpha.355) (2024-11-26)
+
+### Bug Fixes
+
+- **List:** list item without action should not have a hover effect
+  ([#999](https://github.com/mittwald/flow/issues/999))
+  ([2dc94b8](https://github.com/mittwald/flow/commit/2dc94b8b9da0c207e38186e65c2693c1e31a5bf1))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.354](https://github.com/mittwald/flow/compare/0.1.0-alpha.353...0.1.0-alpha.354) (2024-11-25)
 
 ### Bug Fixes
