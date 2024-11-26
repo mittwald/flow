@@ -12,4 +12,9 @@
   display: flex;
   flex-direction: column;
   row-gap: var(--menu--item-to-item-spacing);
+
+  &:has(:global(.flow--avatar)) {
+    align-items: center;
+    padding-top: var(--context-menu--padding);
+  }
 }

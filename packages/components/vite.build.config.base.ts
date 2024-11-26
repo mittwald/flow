@@ -37,6 +37,7 @@ export const buildConfig = (opts: Options) => {
     Alert: "./src/components/Alert/index.ts",
     AlertBadge: "./src/components/AlertBadge/index.ts",
     AlertIcon: "./src/components/AlertIcon/index.ts",
+    Align: "./src/components/Align/index.ts",
     Avatar: "./src/components/Avatar/index.ts",
     Badge: "./src/components/Badge/index.ts",
     Breadcrumb: "./src/components/Breadcrumb/index.ts",
@@ -78,6 +79,7 @@ export const buildConfig = (opts: Options) => {
     "List/ListLoaderAsyncResource":
       "./src/components/List/setupComponents/ListLoaderAsyncResource.ts",
     LoadingSpinner: "./src/components/LoadingSpinner/index.ts",
+    Markdown: "./src/components/Markdown/index.ts",
     MenuItem: "./src/components/MenuItem/index.ts",
     Modal: "./src/components/Modal/index.ts",
     Navigation: "./src/components/Navigation/index.ts",

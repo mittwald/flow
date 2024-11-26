@@ -42,6 +42,7 @@ export interface ListShape<T> extends ListSupportedComponentProps {
   table?: TableShape<T>;
 
   onAction?: ItemActionFn<T>;
+  accordion?: boolean;
   getItemId?: GetItemId<T>;
   onChange?: OnListChanged<T>;
   defaultViewMode?: ListViewMode;

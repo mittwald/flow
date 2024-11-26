@@ -1,4 +1,5 @@
 import type { ComponentProps, FC } from "react";
+import { Suspense } from "react";
 import React from "react";
 import ReactDOM from "react-dom";
 import clsx from "clsx";
@@ -36,10 +37,12 @@ export const NotificationContainer: FC<NotificationsContainerProps> = (
                 bounce: 0,
               }}
             >
-              <ControlledNotification
-                notification={n}
-                controller={controller}
-              />
+              <Suspense>
+                <ControlledNotification
+                  notification={n}
+                  controller={controller}
+                />
+              </Suspense>
             </m.div>
           ))}
         </AnimatePresence>

@@ -82,7 +82,7 @@ const Home: FC = () => {
             <Text>
               Erfahre mehr über die Grundlagen unseres Design Systems.
             </Text>
-            <Link href="02-foundations/content-guidelines/fehlermeldungen">
+            <Link href="02-foundations/01-design/01-design-tokens">
               Foundations
             </Link>
           </Section>
