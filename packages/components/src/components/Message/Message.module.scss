@@ -17,10 +17,6 @@
     background-color: var(--message--background-color-responder);
   }
 
-  &.internal .content {
-    background-color: var(--message--background-color-internal);
-  }
-
   .header {
     display: flex;
     column-gap: var(--message--spacing-x);

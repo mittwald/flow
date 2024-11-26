@@ -13,5 +13,3 @@ message:
     value: "{color.gray.400}"
   background-color-sender:
     value: "{color.hosting-blue.200}"
-  background-color-internal:
-    value: "{color.royal-orange.200}"

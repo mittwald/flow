@@ -33,7 +33,6 @@ const meta: Meta<typeof Message> = {
           </Avatar>
           <Text>
             <b>Max Mustermann</b>
-            <br />
             Organisationsinhaber
           </Text>
         </Align>
@@ -54,10 +53,7 @@ export const Default: Story = {};
 
 export const Responder: Story = { args: { type: "responder" } };
 
-export const Internal: Story = { args: { type: "internal" } };
-
 export const MessageOnly: Story = {
-  args: { type: "internal" },
   render: (props) => (
     <Message {...props}>
       <Content>

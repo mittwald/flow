@@ -9,7 +9,7 @@ import PropsContextProvider from "@/lib/propsContext/PropsContextProvider";
 
 export interface MessageProps extends PropsWithChildren, PropsWithClassName {
   /** @default "sender" */
-  type?: "responder" | "sender" | "internal";
+  type?: "responder" | "sender";
   orientation?: "left" | "right";
 }
 
