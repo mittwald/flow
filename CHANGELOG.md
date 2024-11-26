@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.356](https://github.com/mittwald/flow/compare/0.1.0-alpha.355...0.1.0-alpha.356) (2024-11-26)
+
+### Features
+
+- **ContextMenu:** support Avatar in ContextMenu
+  ([#1003](https://github.com/mittwald/flow/issues/1003))
+  ([5f03c84](https://github.com/mittwald/flow/commit/5f03c8441cb67ff5248457fbe2ba5697f5e0b1c4))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.355](https://github.com/mittwald/flow/compare/0.1.0-alpha.354...0.1.0-alpha.355) (2024-11-26)
 
 ### Bug Fixes
