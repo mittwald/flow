@@ -20,7 +20,6 @@
   }
 
   .breadcrumbItem {
-    font-size: var(--breadcrumb--font-size);
     display: flex;
     align-items: center;
     min-width: 0;
@@ -35,6 +34,12 @@
         font-weight: var(--breadcrumb--font-weight--current);
       }
     }
+
+    &[data-disabled="true"] {
+      .link {
+        cursor: unset;
+      }
+    }
   }
 
   /* Colors */
@@ -44,13 +49,15 @@
       .breadcrumbItem {
         color: var(--breadcrumb--color-#{$color}--default);
 
-        .link:not([data-disabled="true"]) {
-          &:hover {
-            color: var(--breadcrumb--color-#{$color}--hover);
-          }
+        &:not([data-disabled="true"]) {
+          .link {
+            &:hover {
+              color: var(--breadcrumb--color-#{$color}--hover);
+            }
 
-          &[data-pressed] {
-            color: var(--breadcrumb--color-#{$color}--pressed);
+            &[data-pressed] {
+              color: var(--breadcrumb--color-#{$color}--pressed);
+            }
           }
         }
       }
