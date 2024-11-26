@@ -25,8 +25,7 @@
     flex-wrap: wrap;
     font-size: var(--font-size-text--s);
 
-    :global(.flow-mstudio--avatar-value) {
-      flex-grow: 1;
+    .user {
       order: 1;
     }
 
