@@ -10,4 +10,8 @@
   .item {
     @include menuItem.menuItem();
   }
+
+  hr {
+    margin-bottom: var(--menu--group-to-group-spacing);
+  }
 }
