@@ -45,7 +45,6 @@ export const Message: FC<MessageProps> = (props) => {
       Text: { className: styles.date },
       Align: {
         className: styles.user,
-        Text: { className: styles.text },
       },
     },
   };

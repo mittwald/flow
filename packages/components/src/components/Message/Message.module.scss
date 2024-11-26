@@ -51,7 +51,7 @@
       .user {
         flex-direction: row-reverse;
 
-        .text {
+        :global(.flow--text) {
           text-align: end;
         }
       }
