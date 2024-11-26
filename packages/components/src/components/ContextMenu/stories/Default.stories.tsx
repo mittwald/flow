@@ -8,8 +8,10 @@ import { Button } from "@/components/Button";
 import { Separator } from "@/components/Separator";
 import { Heading } from "@/components/Heading";
 import { Section } from "@/components/Section";
-import { IconServer } from "@/components/Icon/components/icons";
+import { IconCamera, IconServer } from "@/components/Icon/components/icons";
 import { Text } from "@/components/Text";
+import { Avatar } from "@/components/Avatar";
+import { Initials } from "@/components/Initials";
 
 const meta: Meta<typeof ContextMenu> = {
   title: "Actions/ContextMenu",
@@ -147,3 +149,34 @@ export const WithIcon: Story = {
 };
 
 export const CustomWidth: Story = { args: { width: 400 } };
+
+export const WithAvatar: Story = {
+  render: (props) => (
+    <ContextMenuTrigger>
+      <Button>Trigger</Button>
+      <ContextMenu selectionMode="navigation" {...props}>
+        <Section>
+          <MenuItem>
+            <Avatar>
+              <Initials>Max Mustermann</Initials>
+            </Avatar>
+            <IconCamera />
+          </MenuItem>
+          <Heading>Max Mustermann</Heading>
+        </Section>
+        <Separator />
+        <Section>
+          <MenuItem>
+            <Text>Settings</Text>
+          </MenuItem>
+          <MenuItem>
+            <Text>Logout</Text>
+          </MenuItem>
+        </Section>
+      </ContextMenu>
+    </ContextMenuTrigger>
+  ),
+  args: {
+    defaultOpen: true,
+  },
+};

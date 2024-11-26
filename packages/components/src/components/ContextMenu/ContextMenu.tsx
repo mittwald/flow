@@ -57,11 +57,17 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
   const propsContext: PropsContext = {
     MenuItem: {
       selectionVariant,
+      Avatar: {
+        size: "l",
+      },
     },
 
     Section: {
       MenuItem: {
         selectionVariant,
+        Avatar: {
+          size: "l",
+        },
       },
       renderContextMenuSection: true,
     },
