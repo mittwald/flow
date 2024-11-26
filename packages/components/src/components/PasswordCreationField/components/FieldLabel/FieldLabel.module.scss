@@ -1,0 +1,18 @@
+.passwordFieldLabel {
+  display: flex;
+  flex-grow: 1;
+  column-gap: var(--label--spacing);
+}
+
+.helpButton {
+  display: inline;
+}
+
+.generateButton {
+  margin-inline-start: auto;
+}
+
+.rule {
+  display: flex;
+  column-gap: var(--password-creation-field--rule-to-rule-spacing);
+}
