@@ -7,8 +7,10 @@ import { mapValues } from "remeda";
 type EventHandler = (event: unknown) => void;
 
 const mapEventHandler =
-  (eventHandler: EventHandler) => (ignoredEvent: unknown) => {
-    return eventHandler("foo");
+  (eventHandler: EventHandler) => (ignoredEvent: object) => {
+    const { target, src, ...rest } = ignoredEvent;
+    console.log(rest);
+    return eventHandler(rest);
   };
 
 export const defaultEventPropMatcher = /on[A-Z].*/;
