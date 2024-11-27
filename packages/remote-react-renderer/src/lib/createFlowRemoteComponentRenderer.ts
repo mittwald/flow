@@ -9,7 +9,6 @@ type EventHandler = (event: unknown) => void;
 const mapEventHandler =
   (eventHandler: EventHandler) => (ignoredEvent: object) => {
     const { target, src, ...rest } = ignoredEvent;
-    console.log(rest);
     return eventHandler(rest);
   };
 
