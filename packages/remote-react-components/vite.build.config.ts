@@ -17,7 +17,6 @@ export default defineConfig(
       lib: {
         entry: {
           index: "./src/index.ts",
-          polyfill: "./src/polyfill.ts",
           "react-hook-form": "./src/integrations/react-hook-form/index.ts",
         },
         formats: ["es"],

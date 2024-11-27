@@ -62,7 +62,7 @@ const RAW_RUNTIME_STATE =
     ["@mittwald/flow-design-tokens", ["workspace:packages/design-tokens"]],\
     ["@mittwald/flow-documentation", ["workspace:packages/docs"]],\
     ["@mittwald/flow-project", ["workspace:."]],\
-    ["@mittwald/flow-react-components", ["virtual:050e94f92f8fddebbfc2bfb35f82462cc5de493fb7355eed91de427065b0fab71e18926f2b4746e569f552b8709bc8bef66c072366b2974e884d4fac4b6f7982#workspace:packages/components", "virtual:39267f7d1d40a14b42458597fe6198d5e449ecd1ebd963310e6a7dc2bf5f231a586f90f0776fdc524f32f4b519ca728990d891316dd6a1927b2c9dabc0180864#workspace:packages/components", "virtual:51f9073027a665d1a8831937737b86a911a9d91a08d5a7b63302b1faa11d74c5f05e22acfaa937568c499270acb8fabc7228004d0d8ef4bb6af0566e81cef7bd#workspace:packages/components", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#workspace:packages/components", "workspace:packages/components"]],\
+    ["@mittwald/flow-react-components", ["virtual:050e94f92f8fddebbfc2bfb35f82462cc5de493fb7355eed91de427065b0fab71e18926f2b4746e569f552b8709bc8bef66c072366b2974e884d4fac4b6f7982#workspace:packages/components", "virtual:39267f7d1d40a14b42458597fe6198d5e449ecd1ebd963310e6a7dc2bf5f231a586f90f0776fdc524f32f4b519ca728990d891316dd6a1927b2c9dabc0180864#workspace:packages/components", "virtual:51f9073027a665d1a8831937737b86a911a9d91a08d5a7b63302b1faa11d74c5f05e22acfaa937568c499270acb8fabc7228004d0d8ef4bb6af0566e81cef7bd#workspace:packages/components", "virtual:8f0cc77a78c3d73d46527d25b5c7fdc96e801745329d67ccc3c2a0e06ed8dd2ad7d9089e3bd5a0e9702bbcefea0630b06b43ca952b4eca5be77b2ea22469fd7e#workspace:packages/components", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#workspace:packages/components", "workspace:packages/components"]],\
     ["@mittwald/flow-remote-core", ["workspace:packages/remote-core"]],\
     ["@mittwald/flow-remote-elements", ["workspace:packages/remote-elements"]],\
     ["@mittwald/flow-remote-react-components", ["virtual:39267f7d1d40a14b42458597fe6198d5e449ecd1ebd963310e6a7dc2bf5f231a586f90f0776fdc524f32f4b519ca728990d891316dd6a1927b2c9dabc0180864#workspace:packages/remote-react-components", "workspace:packages/remote-react-components"]],\
@@ -4949,8 +4949,10 @@ const RAW_RUNTIME_STATE =
         "packagePeers": [\
           "@types/mittwald__react-use-promise",\
           "@types/next",\
+          "@types/react-dom",\
           "@types/react-hook-form",\
           "@types/react",\
+          "react-dom",\
           "react-hook-form",\
           "react"\
         ],\
@@ -5178,6 +5180,118 @@ const RAW_RUNTIME_STATE =
           "@types/mittwald__react-use-promise",\
           "@types/next",\
           "@types/react-hook-form"\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:8f0cc77a78c3d73d46527d25b5c7fdc96e801745329d67ccc3c2a0e06ed8dd2ad7d9089e3bd5a0e9702bbcefea0630b06b43ca952b4eca5be77b2ea22469fd7e#workspace:packages/components", {\
+        "packageLocation": "./.yarn/__virtual__/@mittwald-flow-react-components-virtual-b09e41caca/1/packages/components/",\
+        "packageDependencies": [\
+          ["@mittwald/flow-react-components", "virtual:8f0cc77a78c3d73d46527d25b5c7fdc96e801745329d67ccc3c2a0e06ed8dd2ad7d9089e3bd5a0e9702bbcefea0630b06b43ca952b4eca5be77b2ea22469fd7e#workspace:packages/components"],\
+          ["@chakra-ui/live-region", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:2.1.0"],\
+          ["@faker-js/faker", "npm:9.2.0"],\
+          ["@internationalized/date", "npm:3.6.0"],\
+          ["@internationalized/string-compiler", "npm:3.2.6"],\
+          ["@mittwald/flow-design-tokens", "workspace:packages/design-tokens"],\
+          ["@mittwald/react-tunnel", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#workspace:packages/react-tunnel"],\
+          ["@mittwald/react-use-promise", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:2.6.0"],\
+          ["@nx/storybook", "npm:20.1.3"],\
+          ["@react-aria/form", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:3.0.11"],\
+          ["@react-aria/utils", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:3.26.0"],\
+          ["@react-stately/form", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:3.1.0"],\
+          ["@react-types/shared", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:3.26.0"],\
+          ["@storybook/addon-a11y", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:8.4.5"],\
+          ["@storybook/addon-actions", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:8.4.5"],\
+          ["@storybook/addon-essentials", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:8.4.5"],\
+          ["@storybook/addon-interactions", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:8.4.5"],\
+          ["@storybook/addon-links", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:8.4.5"],\
+          ["@storybook/blocks", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:8.4.5"],\
+          ["@storybook/components", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:8.4.5"],\
+          ["@storybook/core-events", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:8.4.5"],\
+          ["@storybook/manager-api", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:8.4.5"],\
+          ["@storybook/preview-api", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:8.4.5"],\
+          ["@storybook/react", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:8.4.5"],\
+          ["@storybook/react-vite", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:8.4.5"],\
+          ["@storybook/test", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:8.4.5"],\
+          ["@storybook/theming", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:8.4.5"],\
+          ["@tabler/icons-react", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:3.22.0"],\
+          ["@tanstack/react-table", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:8.20.5"],\
+          ["@testing-library/dom", "npm:10.4.0"],\
+          ["@testing-library/jest-dom", "npm:6.6.3"],\
+          ["@testing-library/react", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:16.0.1"],\
+          ["@testing-library/user-event", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:14.5.2"],\
+          ["@types/invariant", "npm:2.2.37"],\
+          ["@types/luxon", "npm:3.4.2"],\
+          ["@types/mittwald__react-use-promise", null],\
+          ["@types/next", null],\
+          ["@types/node", "npm:22.10.0"],\
+          ["@types/prettier", "npm:3.0.0"],\
+          ["@types/prop-types", "npm:15.7.13"],\
+          ["@types/react", "npm:18.3.12"],\
+          ["@types/react-dom", "npm:18.3.1"],\
+          ["@types/react-hook-form", null],\
+          ["@types/react-syntax-highlighter", "npm:15.5.13"],\
+          ["@types/rollup", "npm:0.54.0"],\
+          ["@vitejs/plugin-react", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:4.3.3"],\
+          ["@vitest/coverage-v8", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:2.1.5"],\
+          ["clsx", "npm:2.1.1"],\
+          ["copy-to-clipboard", "npm:3.3.3"],\
+          ["decamelize", "npm:6.0.0"],\
+          ["dot-prop", "npm:9.0.0"],\
+          ["framer-motion", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:11.11.17"],\
+          ["fs-jetpack", "npm:5.1.0"],\
+          ["glob", "npm:10.4.5"],\
+          ["happy-dom", "npm:15.11.6"],\
+          ["html-react-parser", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:5.1.18"],\
+          ["invariant", "npm:2.2.4"],\
+          ["luxon", "npm:3.5.0"],\
+          ["mobx", "npm:6.13.5"],\
+          ["mobx-react-lite", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:4.0.7"],\
+          ["next", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:14.2.18"],\
+          ["nx", "virtual:78682487791321da4105660f09e35a98019f433bf75ca5ebb4f0b7bcb1f7b79eae3873a55f3c825c974c9169c38b01882d8ce398a584c2a124e2c0098e3aa2db#npm:20.1.3"],\
+          ["object-code", "npm:1.3.3"],\
+          ["postcss", "npm:8.4.49"],\
+          ["postcss-nested-import", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:1.3.0"],\
+          ["postcss-nesting", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:13.0.1"],\
+          ["prettier", "npm:3.4.0"],\
+          ["prop-types", "npm:15.8.1"],\
+          ["react", "npm:18.3.1"],\
+          ["react-aria", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:3.36.0"],\
+          ["react-aria-components", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:1.5.0"],\
+          ["react-children-utilities", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:2.10.0"],\
+          ["react-docgen-typescript", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:2.2.2"],\
+          ["react-dom", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:18.3.1"],\
+          ["react-element-to-jsx-string", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:15.0.0"],\
+          ["react-hook-form", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:7.53.2"],\
+          ["react-markdown", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:9.0.1"],\
+          ["react-stately", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:3.34.0"],\
+          ["react-syntax-highlighter", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:15.6.1"],\
+          ["remeda", "npm:2.17.4"],\
+          ["rimraf", "npm:6.0.1"],\
+          ["rollup", "npm:4.24.4"],\
+          ["sass", "npm:1.81.0"],\
+          ["storybook", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:8.4.5"],\
+          ["storybook-addon-rtl", "npm:1.0.1"],\
+          ["tsx", "npm:4.19.2"],\
+          ["type-fest", "npm:4.28.1"],\
+          ["typescript", "patch:typescript@npm%3A5.7.2#optional!builtin<compat/typescript>::version=5.7.2&hash=5786d5"],\
+          ["typescript-plugin-css-modules", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:5.1.0"],\
+          ["use-callback-ref", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:1.3.2"],\
+          ["vite", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:5.4.11"],\
+          ["vite-plugin-banner", "npm:0.8.0"],\
+          ["vite-plugin-checker", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:0.8.0"],\
+          ["vite-plugin-dts", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:4.3.0"],\
+          ["vite-plugin-externalize-deps", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:0.8.0"],\
+          ["vitest", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:2.1.5"],\
+          ["yaml", "npm:2.6.1"],\
+          ["zod", "npm:3.23.8"]\
+        ],\
+        "packagePeers": [\
+          "@types/mittwald__react-use-promise",\
+          "@types/next",\
+          "@types/react-hook-form",\
+          "@types/react",\
+          "react-hook-form",\
+          "react"\
         ],\
         "linkType": "SOFT"\
       }],\
@@ -5502,10 +5616,12 @@ const RAW_RUNTIME_STATE =
           ["@remote-dom/react", "virtual:65f3a67881e32801568ca31af1835da61490f833b665d1ca172eb047e524db9498b7d52fa37e052a389aad69aab73e47358c2b1459396e04016be5bc2b3a4b81#npm:1.2.1"],\
           ["@types/node", "npm:22.10.0"],\
           ["@types/react", "npm:18.3.12"],\
+          ["@types/react-dom", "npm:18.3.1"],\
           ["@types/react-hook-form", null],\
           ["nx", "virtual:78682487791321da4105660f09e35a98019f433bf75ca5ebb4f0b7bcb1f7b79eae3873a55f3c825c974c9169c38b01882d8ce398a584c2a124e2c0098e3aa2db#npm:20.1.3"],\
           ["prettier", "npm:3.4.0"],\
           ["react", "npm:18.3.1"],\
+          ["react-dom", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:18.3.1"],\
           ["react-hook-form", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:7.53.2"],\
           ["remeda", "npm:2.17.4"],\
           ["typescript", "patch:typescript@npm%3A5.7.2#optional!builtin<compat/typescript>::version=5.7.2&hash=5786d5"],\
@@ -5515,8 +5631,10 @@ const RAW_RUNTIME_STATE =
           ["vite-plugin-externalize-deps", "virtual:51f9073027a665d1a8831937737b86a911a9d91a08d5a7b63302b1faa11d74c5f05e22acfaa937568c499270acb8fabc7228004d0d8ef4bb6af0566e81cef7bd#npm:0.8.0"]\
         ],\
         "packagePeers": [\
+          "@types/react-dom",\
           "@types/react-hook-form",\
           "@types/react",\
+          "react-dom",\
           "react-hook-form",\
           "react"\
         ],\
@@ -5526,7 +5644,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./packages/remote-react-renderer/",\
         "packageDependencies": [\
           ["@mittwald/flow-remote-react-renderer", "workspace:packages/remote-react-renderer"],\
-          ["@mittwald/flow-react-components", "virtual:050e94f92f8fddebbfc2bfb35f82462cc5de493fb7355eed91de427065b0fab71e18926f2b4746e569f552b8709bc8bef66c072366b2974e884d4fac4b6f7982#workspace:packages/components"],\
+          ["@mittwald/flow-react-components", "virtual:8f0cc77a78c3d73d46527d25b5c7fdc96e801745329d67ccc3c2a0e06ed8dd2ad7d9089e3bd5a0e9702bbcefea0630b06b43ca952b4eca5be77b2ea22469fd7e#workspace:packages/components"],\
           ["@mittwald/flow-remote-core", "workspace:packages/remote-core"],\
           ["@mittwald/flow-remote-elements", "workspace:packages/remote-elements"],\
           ["@remote-dom/core", "virtual:51f9073027a665d1a8831937737b86a911a9d91a08d5a7b63302b1faa11d74c5f05e22acfaa937568c499270acb8fabc7228004d0d8ef4bb6af0566e81cef7bd#npm:1.5.1"],\

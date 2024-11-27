@@ -3570,6 +3570,7 @@ __metadata:
     vite-plugin-externalize-deps: "npm:^0.8.0"
   peerDependencies:
     react: ~18.3.0
+    react-dom: ~18.3.0
     react-hook-form: "*"
   peerDependenciesMeta:
     react-hook-form:

@@ -1,1 +1,1 @@
-export * from "./FlowRemoteReactRenderer";
+export * from "./RemoteRenderer";

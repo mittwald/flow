@@ -8,7 +8,7 @@ type EventHandler = (event: unknown) => void;
 
 const mapEventHandler =
   (eventHandler: EventHandler) => (ignoredEvent: unknown) => {
-    return eventHandler(undefined);
+    return eventHandler("foo");
   };
 
 export const defaultEventPropMatcher = /on[A-Z].*/;
