@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.359](https://github.com/mittwald/flow/compare/0.1.0-alpha.358...0.1.0-alpha.359) (2024-11-28)
+
+### Features
+
+- **Message:** add message component
+  ([#1004](https://github.com/mittwald/flow/issues/1004))
+  ([dcecea5](https://github.com/mittwald/flow/commit/dcecea54bafde3ef6812d2c62ac78875d4fbc32f))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.358](https://github.com/mittwald/flow/compare/0.1.0-alpha.357...0.1.0-alpha.358) (2024-11-27)
 
 **Note:** Version bump only for package @mittwald/flow-design-tokens
