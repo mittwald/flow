@@ -1,17 +1,13 @@
 import { createRemoteElement } from "@remote-dom/core/elements";
 import type { ButtonProps } from "@mittwald/flow-react-components/Button";
+import { dispatchEvent } from "@/lib/dispatchEvent";
 
 export type { ButtonProps } from "@mittwald/flow-react-components/Button";
 
 export const RemoteButtonElement = createRemoteElement<ButtonProps>({
   events: {
     press: {
-      dispatchEvent: (event: object) => {
-        const { type, ...rest } = event;
-        const c = new Event(type);
-        Object.assign(c, rest);
-        return c;
-      },
+      dispatchEvent,
     },
   },
   properties: {

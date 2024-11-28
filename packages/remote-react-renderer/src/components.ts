@@ -10,9 +10,9 @@ import { Action } from "@mittwald/flow-react-components/Action";
 import { Section } from "@mittwald/flow-react-components/Section";
 import { Text } from "@mittwald/flow-react-components/Text";
 import { createRemoteComponentRenderer } from "@remote-dom/react/host";
-import { Form } from "@/components/Form";
+import { SimpleForm } from "@/components/SimpleForm";
 import type { FlowRemoteElementKeys } from "@mittwald/flow-remote-elements";
-import { Input } from "@/components/Input";
+import { SimpleInput } from "@/components/SimpleInput";
 import { createFlowRemoteComponentRenderer } from "@/lib/createFlowRemoteComponentRenderer";
 
 export const components: RemoteComponentsMap<FlowRemoteElementKeys> = {
@@ -27,6 +27,6 @@ export const components: RemoteComponentsMap<FlowRemoteElementKeys> = {
   "flr-modal-trigger": createRemoteComponentRenderer(ModalTrigger),
   "flr-section": createRemoteComponentRenderer(Section),
   "flr-text": createRemoteComponentRenderer(Text),
-  "flr-input": createRemoteComponentRenderer(Input),
-  "flr-form": createRemoteComponentRenderer(Form),
+  "flr-simple-input": createRemoteComponentRenderer(SimpleInput),
+  "flr-simple-form": createRemoteComponentRenderer(SimpleForm),
 };

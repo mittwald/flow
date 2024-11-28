@@ -11,7 +11,7 @@ export * from "./ModalTrigger";
 export * from "./Section";
 export * from "./Text";
 export * from "./Content";
-export * from "./Form";
-export * from "./Input";
+export * from "./SimpleForm";
+export * from "./SimpleInput";
 
 export type FlowRemoteElementKeys = FlowRemoteElementKeysOfTagNameMap<"flr">;

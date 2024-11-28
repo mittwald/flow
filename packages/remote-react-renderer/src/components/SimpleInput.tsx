@@ -16,7 +16,7 @@ type X = {
     : InputProps[K];
 };
 
-export const Input: FC = forwardRef<HTMLInputElement, X>((props, ref) => {
+export const SimpleInput: FC = forwardRef<HTMLInputElement, X>((props, ref) => {
   const {
     children: ignored,
     onFocus,
