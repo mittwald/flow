@@ -6,4 +6,4 @@ light-box:
   max-height:
     value: "calc(100dvh - {size-px.l})"
   spacing:
-    value: "{size-px.s}"
+    value: "{size-px.m}"
