@@ -28,68 +28,76 @@ export interface ModalProps
   isDismissable?: boolean;
 }
 
-export const Modal = flowComponent("Modal", (props) => {
-  const {
-    size = "s",
-    offCanvas,
-    controller,
-    children,
-    refProp: ignoredRef,
-    className,
-    offCanvasOrientation = "right",
-    ...rest
-  } = props;
+export const Modal = flowComponent<"Modal", HTMLDivElement>(
+  "Modal",
+  (props) => {
+    const {
+      size = "s",
+      offCanvas,
+      controller,
+      children,
+      refProp,
+      className,
+      offCanvasOrientation = "right",
+      ...rest
+    } = props;
 
-  const rootClassName = clsx(
-    offCanvas ? styles.offCanvas : styles.modal,
-    styles[`size-${size}`],
-    styles[offCanvasOrientation],
-    className,
-  );
+    const rootClassName = clsx(
+      offCanvas ? styles.offCanvas : styles.modal,
+      styles[`size-${size}`],
+      styles[offCanvasOrientation],
+      className,
+    );
 
-  const propsContext: PropsContext = {
-    Content: {
-      className: styles.content,
-      Section: {
-        Heading: {
-          level: 3,
+    const propsContext: PropsContext = {
+      Content: {
+        className: styles.content,
+        Section: {
+          Heading: {
+            level: 3,
+          },
         },
       },
-    },
-    Heading: {
-      level: 2,
-      slot: "title",
-      tunnelId: "heading",
-    },
-    ActionGroup: {
-      className: styles.actionGroup,
-      spacing: "m",
-    },
-  };
+      Heading: {
+        level: 2,
+        slot: "title",
+        tunnelId: "heading",
+      },
+      ActionGroup: {
+        className: styles.actionGroup,
+        spacing: "m",
+      },
+    };
 
-  return (
-    <Overlay className={rootClassName} controller={controller} {...rest}>
-      <PropsContextProvider props={propsContext}>
-        <TunnelProvider>
-          <Header className={styles.header}>
-            <TunnelExit id="heading" />
-            {offCanvas && (
-              <Action closeOverlay="Modal">
-                <Button
-                  variant="plain"
-                  color="secondary"
-                  className={styles.closeButton}
-                >
-                  <IconClose />
-                </Button>
-              </Action>
-            )}
-          </Header>
-          {children}
-        </TunnelProvider>
-      </PropsContextProvider>
-    </Overlay>
-  );
-});
+    return (
+      <Overlay
+        className={rootClassName}
+        controller={controller}
+        ref={refProp}
+        {...rest}
+      >
+        <PropsContextProvider props={propsContext}>
+          <TunnelProvider>
+            <Header className={styles.header}>
+              <TunnelExit id="heading" />
+              {offCanvas && (
+                <Action closeOverlay="Modal">
+                  <Button
+                    variant="plain"
+                    color="secondary"
+                    className={styles.closeButton}
+                  >
+                    <IconClose />
+                  </Button>
+                </Action>
+              )}
+            </Header>
+            {children}
+          </TunnelProvider>
+        </PropsContextProvider>
+      </Overlay>
+    );
+  },
+);
 
 export default Modal;
