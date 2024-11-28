@@ -242,6 +242,11 @@
       "types": "./dist/js/types/components/MenuItem/index.d.ts",
       "import": "./dist/js/MenuItem.js"
     },
+    "./Message/styles.css": "./dist/css/Message.css",
+    "./Message": {
+      "types": "./dist/js/types/components/Message/index.d.ts",
+      "import": "./dist/js/Message.js"
+    },
     "./Modal/styles.css": "./dist/css/Modal.css",
     "./Modal": {
       "types": "./dist/js/types/components/Modal/index.d.ts",
