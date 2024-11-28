@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "jsx": "react",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "types": ["./types.d.ts"]
+  },
+  "exclude": ["node_modules", "dist"],
+  "extends": "../../tsconfig.json",
+  "include": ["**/*.ts"]
+}
