@@ -8,7 +8,7 @@ type EventHandler = (event: unknown) => void;
 
 const mapEventHandler =
   (eventHandler: EventHandler) => (ignoredEvent: object) => {
-    const { target: ignoredTarget, src: ignoredTarget, ...rest } = ignoredEvent;
+    const { target: ignoredTarget, src: ignoredSrc, ...rest } = ignoredEvent;
     return eventHandler(rest);
   };
 
