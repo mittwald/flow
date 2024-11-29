@@ -12,7 +12,7 @@ table:
   padding-y:
     value: "{size-px.s}"
   header-color:
-    value: "{primary.color.1000}"
+    value: "{heading.color}"
   header-font-weight:
     value: "{font-weight.bold}"
   header-border-width:
