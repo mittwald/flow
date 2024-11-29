@@ -1,4 +1,3 @@
-import { FlowRemoteEvent } from "@/events/FlowRemoteEvent";
 import { standard } from "@/events/serializers";
 
 export type EventHandler = (event: unknown) => void;
@@ -16,7 +15,3 @@ export const mapEventHandler =
 
 export type EventSerialization = (event: unknown) => unknown;
 export type EventSerializationMap = Record<string, EventSerialization>;
-
-export const dispatchFlowRemoteEvent = (type: string) => (detail: unknown) => {
-  return new FlowRemoteEvent(type, detail);
-};

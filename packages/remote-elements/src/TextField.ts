@@ -1,5 +1,4 @@
 import type { TextFieldProps } from "@mittwald/flow-react-components/TextField";
-import { dispatchFlowRemoteEvent } from "@mittwald/flow-remote-core";
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
 
 export type { TextFieldProps } from "@mittwald/flow-react-components/TextField";
@@ -13,9 +12,7 @@ export class RemoteTextFieldElement extends FlowRemoteElement<TextFieldProps> {
 
   static get remoteEvents() {
     return {
-      change: {
-        dispatchEvent: dispatchFlowRemoteEvent("change"),
-      },
+      change: {},
     };
   }
 }

@@ -1,6 +1,5 @@
 import type { EmptyObject } from "type-fest";
-import { RemoteElement } from "@remote-dom/core/elements";
-import { FlowRemoteEvent } from "@mittwald/flow-remote-core";
+import { RemoteElement, RemoteEvent } from "@remote-dom/core/elements";
 
 // eslint-disable-next-line
 type ExplicitAny = any;
@@ -32,7 +31,7 @@ export class FlowRemoteElement<
 
     const wrappedEventListener: EventListener = (event) => {
       const finalEvent =
-        event instanceof FlowRemoteEvent ? (event.detail as Event) : event;
+        event instanceof RemoteEvent ? (event.detail as never) : event;
       return finalListener?.(finalEvent);
     };
 

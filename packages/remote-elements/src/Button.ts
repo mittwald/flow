@@ -1,5 +1,4 @@
 import type { ButtonProps } from "@mittwald/flow-react-components/Button";
-import { dispatchFlowRemoteEvent } from "@mittwald/flow-remote-core";
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
 
 export type { ButtonProps } from "@mittwald/flow-react-components/Button";
@@ -13,9 +12,7 @@ export class RemoteButtonElement extends FlowRemoteElement<ButtonProps> {
 
   static get remoteEvents() {
     return {
-      press: {
-        dispatchEvent: dispatchFlowRemoteEvent("press"),
-      },
+      press: {},
     };
   }
 }
