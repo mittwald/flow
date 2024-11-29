@@ -37,7 +37,7 @@
     "@mittwald/flow-remote-elements": "workspace:^",
     "@remote-dom/core": "^1.5.1",
     "@remote-dom/react": "^1.2.1",
-    "remeda": "^2.17.3"
+    "remeda": "^2.17.4"
   },
   "devDependencies": {
     "@types/node": "^22.9.1",

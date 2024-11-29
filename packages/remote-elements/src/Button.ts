@@ -1,19 +1,24 @@
-import { createRemoteElement } from "@remote-dom/core/elements";
 import type { ButtonProps } from "@mittwald/flow-react-components/Button";
-import { dispatchEvent } from "@/lib/dispatchEvent";
+import { dispatchFlowRemoteEvent } from "@mittwald/flow-remote-core";
+import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
 
 export type { ButtonProps } from "@mittwald/flow-react-components/Button";
 
-export const RemoteButtonElement = createRemoteElement<ButtonProps>({
-  events: {
-    press: {
-      dispatchEvent,
-    },
-  },
-  properties: {
-    color: {},
-  },
-});
+export class RemoteButtonElement extends FlowRemoteElement<ButtonProps> {
+  static get remoteProperties() {
+    return {
+      color: {},
+    };
+  }
+
+  static get remoteEvents() {
+    return {
+      press: {
+        dispatchEvent: dispatchFlowRemoteEvent("press"),
+      },
+    };
+  }
+}
 
 declare global {
   interface HTMLElementTagNameMap {

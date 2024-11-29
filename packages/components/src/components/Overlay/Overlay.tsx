@@ -1,7 +1,6 @@
 import * as Aria from "react-aria-components";
 import type { PropsWithChildren } from "react";
-import { FC, forwardRef } from "react";
-import React from "react";
+import React, { forwardRef } from "react";
 import styles from "./Overlay.module.scss";
 import clsx from "clsx";
 import type { OverlayController } from "@/lib/controller";

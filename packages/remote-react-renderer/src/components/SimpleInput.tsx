@@ -1,11 +1,11 @@
 import type { FC } from "react";
 import React, { forwardRef } from "react";
-import type { RemoteInputElement } from "@mittwald/flow-remote-elements";
+import type { RemoteSimpleInputElement } from "@mittwald/flow-remote-elements";
 import type { RemoteComponentPropsFromElementConstructor } from "@remote-dom/react";
 import type { RemoteEvent } from "@remote-dom/core/elements";
 
 export type InputProps = RemoteComponentPropsFromElementConstructor<
-  typeof RemoteInputElement
+  typeof RemoteSimpleInputElement
 >;
 
 type X = {

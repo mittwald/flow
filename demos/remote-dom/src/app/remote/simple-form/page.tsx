@@ -1,11 +1,15 @@
 "use client";
-import { Alert, Heading, Text } from "@mittwald/flow-remote-react-components";
+import {
+  SimpleForm,
+  Heading,
+  Text,
+} from "@mittwald/flow-remote-react-components";
 
 export default function Page() {
   return (
-    <Form>
+    <SimpleForm>
       <Heading>Alert title</Heading>
       <Text>Alert text</Text>
-    </Form>
+    </SimpleForm>
   );
 }

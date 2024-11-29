@@ -2,49 +2,40 @@ import type { ComponentType, PropsWithoutRef, PropsWithRef } from "react";
 import { createElement, forwardRef } from "react";
 import type { RemoteComponentRendererProps } from "@remote-dom/react/host";
 import { createRemoteComponentRenderer } from "@remote-dom/react/host";
-import { mapValues } from "remeda";
-
-type EventHandler = (event: unknown) => void;
-
-const mapEventHandler =
-  (eventHandler: EventHandler) => (ignoredEvent: object) => {
-    const { target: ignoredTarget, src: ignoredSrc, ...rest } = ignoredEvent;
-    return eventHandler(rest);
-  };
+import { isFunction, mapValues } from "remeda";
+import type {
+  EventSerializationMap,
+  EventHandler,
+} from "@mittwald/flow-remote-core";
+import { mapEventHandler } from "@mittwald/flow-remote-core";
 
 export const defaultEventPropMatcher = /on[A-Z].*/;
 
-const mapProperty =
-  (eventPropMatchers: EventPropMatcher[]) => (val: unknown, key: string) => {
-    if (
-      eventPropMatchers.some(
-        (m) => (typeof m === "string" && key === m) || key.match(m),
-      ) &&
-      typeof val === "function"
-    ) {
-      return mapEventHandler(val as EventHandler);
-    }
-    return val;
-  };
+const mapProperty = (val: unknown, key: string, init: InitObject) => {
+  if (key.match(defaultEventPropMatcher) && isFunction(val)) {
+    return mapEventHandler(val as EventHandler, key, init.eventSerialization);
+  }
+  return val;
+};
 
-type EventPropMatcher = string | RegExp;
-
-interface Opts {
-  eventPropMatchers?: EventPropMatcher[];
+interface InitObject {
+  eventSerialization?: EventSerializationMap;
 }
 
 export const createFlowRemoteComponentRenderer = <
   P extends Record<string, unknown>,
 >(
   component: ComponentType<P>,
-  opts: Opts = {},
+  init: InitObject = {},
 ): ComponentType<PropsWithRef<RemoteComponentRendererProps>> => {
-  const { eventPropMatchers = [defaultEventPropMatcher] } = opts;
   const HostComponentWithRef = forwardRef(function HostComponent(
     props: PropsWithoutRef<P>,
     ref: unknown,
   ) {
-    const hostComponentProps = mapValues(props, mapProperty(eventPropMatchers));
+    const hostComponentProps = mapValues(props, (v, k) =>
+      mapProperty(v, k, init),
+    );
+
     return createElement(component, {
       ...hostComponentProps,
       refProp: ref,

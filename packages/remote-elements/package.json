@@ -29,7 +29,9 @@
   },
   "dependencies": {
     "@mittwald/flow-react-components": "workspace:^",
+    "@mittwald/flow-remote-core": "workspace:^",
     "@remote-dom/core": "^1.5.1",
+    "remeda": "^2.17.4",
     "type-fest": "^4.27.0"
   },
   "devDependencies": {
