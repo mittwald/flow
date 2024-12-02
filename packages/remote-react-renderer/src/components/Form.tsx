@@ -1,4 +1,4 @@
-import type { FC, FormHTMLAttributes } from "react";
+import type { FC, FormEventHandler, FormHTMLAttributes } from "react";
 import React, { forwardRef } from "react";
 
 type RemoteServerAction = (payload: Record<string, unknown>) => void;
@@ -9,30 +9,33 @@ type FormProps = Pick<FormHTMLAttributes<HTMLFormElement>, "action"> & {
 };
 
 export const Form: FC = forwardRef<HTMLFormElement, FormProps>((props, ref) => {
-  const { action: remoteAction, ...rest } = props;
+  const { action: remoteAction, onSubmit, ...rest } = props;
 
   const hostAction = remoteAction
     ? typeof remoteAction === "string"
       ? remoteAction
-      : (payload: FormData) => {
+      : (formData: FormData) => {
           const remoteServerAction = remoteAction as RemoteServerAction;
-          remoteServerAction(Object.fromEntries(payload.entries()));
+          const formDataObject = Object.fromEntries(
+            Array.from(formData.entries()),
+          );
+          return remoteServerAction(formDataObject);
         }
     : undefined;
+
+  const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+    const formData = new FormData(e.currentTarget);
+    const formDataObject = Object.fromEntries(Array.from(formData.entries()));
+    e.preventDefault();
+    onSubmit?.(formDataObject);
+  };
 
   return (
     <form
       ref={ref}
       {...rest}
       action={hostAction as DefaultAction | undefined}
-      onSubmit={(e) => {
-        const formData = new FormData(e.currentTarget);
-        const formDataObject = Object.fromEntries(
-          Array.from(formData.entries()),
-        );
-        e.preventDefault();
-        props.onSubmit?.(formDataObject);
-      }}
+      onSubmit={onSubmit ? handleSubmit : undefined}
     />
   );
 });

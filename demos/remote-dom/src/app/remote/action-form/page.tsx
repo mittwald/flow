@@ -1,30 +1,18 @@
 "use client";
 import {
-  Section,
-  CodeBlock,
-  Form,
-  TextField,
   Button,
+  Form,
+  Section,
+  TextField,
 } from "@mittwald/flow-remote-react-components";
-import { useState } from "react";
+import { formServerAction } from "@/app/remote/actions";
 
 export default function Page() {
-  const [event, setEvent] = useState<unknown>();
-
-  interface FormData {
-    test: string;
-  }
-
   return (
-    <Form
-      onSubmit={(data: FormData) => {
-        setEvent(data);
-      }}
-    >
+    <Form action={formServerAction}>
       <Section>
         <TextField name="test" aria-label="Test" />
         <Button type="submit">Submit</Button>
-        <CodeBlock code={JSON.stringify(event, undefined, 2)} />
       </Section>
     </Form>
   );
