@@ -396,7 +396,7 @@
       "import": "./dist/js/react-hook-form.js"
     },
     "./globals.css": "./dist/css/globals.css",
-    "./all.css": "./dist/js/all.css",
+    "./all.css": "./dist/css/all.css",
     "./doc-properties": "./out/doc-properties.json"
   },
   "files": [
