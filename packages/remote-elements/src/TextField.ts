@@ -7,6 +7,7 @@ export class RemoteTextFieldElement extends FlowRemoteElement<TextFieldProps> {
   static get remoteProperties() {
     return {
       "aria-label": {},
+      name: {},
     };
   }
 

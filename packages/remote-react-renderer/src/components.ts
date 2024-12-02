@@ -10,9 +10,8 @@ import { Action } from "@mittwald/flow-react-components/Action";
 import { Section } from "@mittwald/flow-react-components/Section";
 import { Text } from "@mittwald/flow-react-components/Text";
 import { createRemoteComponentRenderer } from "@remote-dom/react/host";
-import { SimpleForm } from "@/components/SimpleForm";
+import { Form } from "@/components/Form";
 import type { FlowRemoteElementKeys } from "@mittwald/flow-remote-elements";
-import { SimpleInput } from "@/components/SimpleInput";
 import { createFlowRemoteComponentRenderer } from "@/lib/createFlowRemoteComponentRenderer";
 import CodeBlock from "@mittwald/flow-react-components/CodeBlock";
 import TextField from "@mittwald/flow-react-components/TextField";
@@ -35,8 +34,7 @@ export const components: RemoteComponentsMap<FlowRemoteElementKeys> = {
   "flr-section": createRemoteComponentRenderer(Section),
   "flr-text": createRemoteComponentRenderer(Text),
   "flr-code-block": createRemoteComponentRenderer(CodeBlock),
-  "flr-simple-input": createRemoteComponentRenderer(SimpleInput),
-  "flr-simple-form": createRemoteComponentRenderer(SimpleForm),
+  "flr-form": createFlowRemoteComponentRenderer(Form),
   "flr-text-field": createFlowRemoteComponentRenderer(TextField),
   "flr-list": createFlowRemoteComponentRenderer(List),
   "flr-list-item": createFlowRemoteComponentRenderer(ListItem),

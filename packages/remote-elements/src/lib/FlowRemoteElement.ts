@@ -1,5 +1,7 @@
 import type { EmptyObject } from "type-fest";
 import { RemoteElement, RemoteEvent } from "@remote-dom/core/elements";
+import { isObjectType, omit } from "remeda";
+import { getObjectKeysIncludingProtoTypes } from "@/lib/getObjectKeysIncludingProtoTypes";
 
 // eslint-disable-next-line
 type ExplicitAny = any;
@@ -30,8 +32,20 @@ export class FlowRemoteElement<
       : null;
 
     const wrappedEventListener: EventListener = (event) => {
-      const finalEvent =
-        event instanceof RemoteEvent ? (event.detail as never) : event;
+      let finalEvent = event;
+
+      if (event instanceof RemoteEvent) {
+        if (isObjectType(event.detail)) {
+          const propsToLiftUpFromDetails = omit(
+            event.detail,
+            getObjectKeysIncludingProtoTypes(event) as never,
+          );
+          Object.assign(event, propsToLiftUpFromDetails);
+        } else {
+          finalEvent = event.detail as never;
+        }
+      }
+
       return finalListener?.(finalEvent);
     };
 
