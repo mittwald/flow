@@ -14,6 +14,7 @@ export default function Layout(props: PropsWithChildren) {
         <Link href="/host/event-handler">Event handler</Link>
         <Link href="/host/modal">Modal</Link>
         <Link href="/host/simple-form">Simple Form</Link>
+        <Link href="/host/action-form">Action Form</Link>
       </HeaderNavigation>
       <Separator />
       <main className={styles.mainContainer}>

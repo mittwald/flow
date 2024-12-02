@@ -38,7 +38,7 @@ export const createFlowRemoteComponentRenderer = <
 
     return createElement(component, {
       ...hostComponentProps,
-      refProp: ref,
+      ref,
     } as unknown as P);
   });
 
