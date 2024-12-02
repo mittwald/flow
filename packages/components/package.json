@@ -489,7 +489,7 @@
     "@vitest/coverage-v8": "~2.1.6",
     "decamelize": "^6.0.0",
     "fs-jetpack": "^5.1.0",
-    "glob": "^10.4.5",
+    "glob": "^11.0.0",
     "happy-dom": "^15.11.7",
     "next": "^14.2.18",
     "nx": "^20.1.3",

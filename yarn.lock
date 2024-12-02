@@ -3305,7 +3305,7 @@ __metadata:
     dot-prop: "npm:^9.0.0"
     framer-motion: "npm:^11.12.0"
     fs-jetpack: "npm:^5.1.0"
-    glob: "npm:^10.4.5"
+    glob: "npm:^11.0.0"
     happy-dom: "npm:^15.11.7"
     html-react-parser: "npm:^5.1.18"
     invariant: "npm:^2.2.4"
@@ -11304,7 +11304,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"glob@npm:^10.2.2, glob@npm:^10.3.10, glob@npm:^10.4.1, glob@npm:^10.4.2, glob@npm:^10.4.5":
+"glob@npm:^10.2.2, glob@npm:^10.3.10, glob@npm:^10.4.1, glob@npm:^10.4.2":
   version: 10.4.5
   resolution: "glob@npm:10.4.5"
   dependencies:
