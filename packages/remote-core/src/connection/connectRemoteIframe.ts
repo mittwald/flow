@@ -18,7 +18,8 @@ export const connectRemoteIframe = (opts: Opts) => {
 
 export const connectRemoteIframeRef =
   (connection: RemoteConnection) => (ref: HTMLIFrameElement | null) => {
-    if (ref) {
+    if (ref && !("__remoteConnectionEstablished" in ref)) {
+      Object.assign(ref, { __remoteConnectionEstablished: true });
       connectRemoteIframe({
         iframe: ref,
         connection,
