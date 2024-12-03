@@ -14,7 +14,7 @@ const Footer: FC = () => {
     <LayoutCard elementType="footer" className={styles.footer}>
       <div className={styles.footerColumnLayout}>
         <div className={styles.footerSection}>
-          <Heading level={3}>Contributoren-Seiten</Heading>
+          <Heading level={3}>Ressourcen</Heading>
           <div className={styles.footerSectionContent}>
             <Link color="dark" href="https://github.com/mittwald/flow">
               GitHub Repo
