@@ -23,7 +23,9 @@ export type PickRemoteElementEventListeners<T> = RemoveOnPrefixInKeys<
   PickEventHandler<T>
 >;
 
-export type FlowRemoteElementKeysOfTagNameMap<T extends string> = keyof Omit<
-  HTMLElementTagNameMap,
-  Filter<keyof HTMLElementTagNameMap, `${T}-${string}`>
->;
+export type FlowRemoteElementKeysOfTagNameMap<T extends string> =
+  | keyof Omit<
+      HTMLElementTagNameMap,
+      Filter<keyof HTMLElementTagNameMap, `${T}-${string}`>
+    >
+  | "remote-fragment";

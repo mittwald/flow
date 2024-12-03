@@ -9,7 +9,10 @@ import { Modal, ModalTrigger } from "@mittwald/flow-react-components/Modal";
 import { Action } from "@mittwald/flow-react-components/Action";
 import { Section } from "@mittwald/flow-react-components/Section";
 import { Text } from "@mittwald/flow-react-components/Text";
-import { createRemoteComponentRenderer } from "@remote-dom/react/host";
+import {
+  createRemoteComponentRenderer,
+  RemoteFragmentRenderer,
+} from "@remote-dom/react/host";
 import { Form } from "@/components/Form";
 import type { FlowRemoteElementKeys } from "@mittwald/flow-remote-elements";
 import { createFlowRemoteComponentRenderer } from "@/lib/createFlowRemoteComponentRenderer";
@@ -39,4 +42,5 @@ export const components: RemoteComponentsMap<FlowRemoteElementKeys> = {
   "flr-list": createFlowRemoteComponentRenderer(List),
   "flr-list-item": createFlowRemoteComponentRenderer(ListItem),
   "flr-list-static-data": createFlowRemoteComponentRenderer(ListStaticData),
+  "remote-fragment": RemoteFragmentRenderer,
 };
