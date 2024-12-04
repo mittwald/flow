@@ -31,6 +31,7 @@ export const TextFieldBase = forwardRef<HTMLInputElement, TextFieldBaseProps>(
       Label: {
         className: styles.label,
         optional: !props.isRequired,
+        required: props.isRequired,
       },
       FieldDescription: {
         className: styles.fieldDescription,
