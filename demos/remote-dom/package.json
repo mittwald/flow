@@ -19,21 +19,21 @@
     "@mittwald/react-use-promise": "^2.6.0",
     "clsx": "^2.1.1",
     "next": "~15.0.3",
-    "react": "~18.3.0",
-    "react-dom": "~18.3.0",
+    "react": "~18.3.1",
+    "react-dom": "~18.3.1",
     "react-hook-form": "^7.53.2",
-    "remeda": "^2.17.3",
-    "sass": "^1.81.0",
-    "webpack": "^5.96.1"
+    "remeda": "^2.17.4",
+    "sass": "^1.82.0",
+    "webpack": "^5.97.0"
   },
   "devDependencies": {
-    "@types/node": "^22.9.1",
+    "@types/node": "^22.10.1",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@yarnpkg/pnpify": "^4.1.3",
-    "eslint": "^9.15.0",
-    "nx": "^20.1.2",
-    "typescript": "^5.6.3"
+    "eslint": "^9.16.0",
+    "nx": "^20.1.4",
+    "typescript": "^5.7.2"
   },
   "nx": {
     "targets": {
