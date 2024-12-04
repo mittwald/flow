@@ -16,12 +16,9 @@ export async function login(formState: unknown | null, formData: FormData) {
   };
 }
 
-export async function formServerAction(
-  formState: unknown | null,
-  formData: FormData,
-) {
+export async function formServerAction(formData: FormData) {
+  console.log(formData);
   await sleep();
-  console.log(formData, formState, "Server");
 
   return {
     success: true,
