@@ -1,4 +1,5 @@
 import type { IsEqual } from "type-fest";
+import type { RemoteFragmentElement } from "@remote-dom/core/elements";
 
 type Filter<KeyType, ExcludeType> =
   IsEqual<KeyType, ExcludeType> extends true
@@ -23,9 +24,13 @@ export type PickRemoteElementEventListeners<T> = RemoveOnPrefixInKeys<
   PickEventHandler<T>
 >;
 
-export type FlowRemoteElementKeysOfTagNameMap<T extends string> =
-  | keyof Omit<
-      HTMLElementTagNameMap,
-      Filter<keyof HTMLElementTagNameMap, `${T}-${string}`>
-    >
-  | "remote-fragment";
+export type FlowRemoteElementKeysOfTagNameMap<T extends string> = keyof Omit<
+  HTMLElementTagNameMap,
+  Filter<keyof HTMLElementTagNameMap, `${T}-${string}`>
+>;
+
+declare global {
+  interface HTMLElementTagNameMap {
+    "remote-fragment": InstanceType<typeof RemoteFragmentElement>;
+  }
+}
