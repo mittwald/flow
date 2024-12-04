@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.363](https://github.com/mittwald/flow/compare/0.1.0-alpha.362...0.1.0-alpha.363) (2024-12-04)
+
+### Bug Fixes
+
+- **Section:** fix section separator
+  ([#1039](https://github.com/mittwald/flow/issues/1039))
+  ([a94eca5](https://github.com/mittwald/flow/commit/a94eca566df23aa508691503614f8731de8adbdf))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.362](https://github.com/mittwald/flow/compare/0.1.0-alpha.361...0.1.0-alpha.362) (2024-12-04)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
