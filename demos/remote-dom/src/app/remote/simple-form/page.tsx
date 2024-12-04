@@ -1,5 +1,7 @@
 "use client";
 import {
+  Select,
+  Option,
   Section,
   CodeBlock,
   Form,
@@ -12,7 +14,8 @@ export default function Page() {
   const [event, setEvent] = useState<unknown>();
 
   interface FormData {
-    test: string;
+    text: string;
+    select: string;
   }
 
   return (
@@ -22,7 +25,18 @@ export default function Page() {
       }}
     >
       <Section>
-        <TextField name="test" aria-label="Test" />
+        <TextField name="text" aria-label="Text" />
+        <Select name="select" aria-label="Select">
+          <Option value="Foo" textValue="Foo">
+            Foo
+          </Option>
+          <Option value="Bar" textValue="Bar">
+            Bar
+          </Option>
+          <Option value="Baz" textValue="Baz">
+            Baz
+          </Option>
+        </Select>
         <Button type="submit">Submit</Button>
         <CodeBlock code={JSON.stringify(event, undefined, 2)} />
       </Section>

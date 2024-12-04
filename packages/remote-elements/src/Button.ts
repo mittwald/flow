@@ -8,6 +8,7 @@ export class RemoteButtonElement extends FlowRemoteElement<ButtonProps> {
     return {
       color: {},
       variant: {},
+      type: {},
     };
   }
 

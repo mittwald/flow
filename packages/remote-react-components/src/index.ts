@@ -12,6 +12,8 @@ export * from "./Form";
 export * from "./Content";
 export * from "./Root";
 export * from "./Suspense";
+export * from "./Select";
+export * from "./Option";
 export * from "./CodeBlock";
 export * from "./TextField";
 export * from "./List";

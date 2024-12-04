@@ -24,6 +24,7 @@ import {
   ListStaticData,
 } from "@mittwald/flow-react-components/List";
 import { Activity } from "@mittwald/flow-react-components/Activity";
+import Select, { Option } from "@mittwald/flow-react-components/Select";
 
 export const components: RemoteComponentsMap<FlowRemoteElementKeys> = {
   "flr-action": createRemoteComponentRenderer(Action),
@@ -37,6 +38,8 @@ export const components: RemoteComponentsMap<FlowRemoteElementKeys> = {
   "flr-modal": createRemoteComponentRenderer(Modal),
   "flr-modal-trigger": createRemoteComponentRenderer(ModalTrigger),
   "flr-section": createRemoteComponentRenderer(Section),
+  "flr-option": createFlowRemoteComponentRenderer(Option),
+  "flr-select": createFlowRemoteComponentRenderer(Select),
   "flr-text": createRemoteComponentRenderer(Text),
   "flr-code-block": createRemoteComponentRenderer(CodeBlock),
   "flr-form": createFlowRemoteComponentRenderer(Form),
@@ -44,5 +47,5 @@ export const components: RemoteComponentsMap<FlowRemoteElementKeys> = {
   "flr-list": createFlowRemoteComponentRenderer(List),
   "flr-list-item": createFlowRemoteComponentRenderer(ListItem),
   "flr-list-static-data": createFlowRemoteComponentRenderer(ListStaticData),
-  "remote-fragment": RemoteFragmentRenderer,
+  "flr-fragment": RemoteFragmentRenderer,
 };
