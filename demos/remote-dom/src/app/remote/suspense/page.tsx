@@ -1,7 +1,7 @@
 "use client";
-import { Button } from "@mittwald/flow-remote-react-components";
-import { Suspense, useState } from "react";
-import { useEffect } from "react";
+import { Suspense, Button } from "@mittwald/flow-remote-react-components";
+import { useEffect, useState } from "react";
+import { TextField } from "@mittwald/flow-remote-react-components";
 
 export const useIsMounted = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -30,7 +30,7 @@ const createDataFetcher = () => {
           title: "Ik bin ein Berliner",
         };
         resolve(null);
-      }, 5000);
+      }, 2000);
     });
     return promise;
   };
@@ -63,7 +63,7 @@ const CrazyButton = () => {
     const foo = setInterval(() => {
       fetcher.reset();
       setFoo((p) => !p);
-    }, 8000);
+    }, 2000);
 
     return () => {
       clearInterval(foo);
@@ -71,6 +71,12 @@ const CrazyButton = () => {
   }, []);
 
   return <Button>{data.title}</Button>;
+};
+
+const Toggle = () => {
+  const [a, b] = useState(false);
+
+  return <Button onPress={() => b((x) => !x)}>{a ? "on" : "off"}</Button>;
 };
 
 export default function Page() {
@@ -81,10 +87,10 @@ export default function Page() {
   }
 
   return (
-    <>
-      <Suspense fallback={<Button>Loading....</Button>}>
-        <CrazyButton />
-      </Suspense>
-    </>
+    <Suspense fallback={<>Loading....</>}>
+      <CrazyButton />
+      <TextField />
+      <Toggle />
+    </Suspense>
   );
 }

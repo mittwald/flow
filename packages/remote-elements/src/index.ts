@@ -1,6 +1,7 @@
 import type { FlowRemoteElementKeysOfTagNameMap } from "@/lib/types";
 
 export * from "./Action";
+export * from "./Activity";
 export * from "./Alert";
 export * from "./AlertIcon";
 export * from "./Button";

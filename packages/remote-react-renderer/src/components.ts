@@ -23,9 +23,11 @@ import {
   ListItem,
   ListStaticData,
 } from "@mittwald/flow-react-components/List";
+import { Activity } from "@mittwald/flow-react-components/Activity";
 
 export const components: RemoteComponentsMap<FlowRemoteElementKeys> = {
   "flr-action": createRemoteComponentRenderer(Action),
+  "flr-activity": createRemoteComponentRenderer(Activity),
   "flr-alert": createRemoteComponentRenderer(Alert),
   "flr-alert-icon": createRemoteComponentRenderer(AlertIcon),
   "flr-content": createRemoteComponentRenderer(Content),
