@@ -1,22 +1,77 @@
 .secondaryNavigation {
-  --secondars-navigation-width: 272px;
-  --secondars-navigation-padding-x: var(--size-px--m);
-  padding-inline: var(--secondars-navigation-padding-x);
+  --secondary-navigation-width: 272px;
+  --secondary-navigation-padding-x: var(--size-px--m);
+  padding-inline: var(--secondary-navigation-padding-x);
 
-  width: var(--secondars-navigation-width);
+  width: var(--secondary-navigation-width);
 
-  :global(.flow--avatar) {
-    width: var(--secondars-navigation-width);
+  .avatarContainer {
+    width: var(--secondary-navigation-width);
     height: 156px;
     margin-top: calc(var(--layout-card--padding) * -1);
-    margin-inline-start: calc(var(--secondars-navigation-padding-x) * -1);
+    margin-inline-start: calc(var(--secondary-navigation-padding-x) * -1);
     border-top-right-radius: var(--corner-radius--default);
     border-top-left-radius: var(--corner-radius--default);
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    :global(.flow--avatar--initials) {
-      font-size: var(--size-rem--xxl);
+    .avatar {
+      position: relative;
+
+      &:has(img) {
+        background: none;
+      }
+
+      .initials {
+        font-size: var(--size-px--xxl);
+      }
+
+      img {
+        max-width: 100%;
+        max-height: 100%;
+      }
+    }
+
+    &:not(.rounded) {
+      .avatar {
+        width: 100%;
+        height: 100%;
+        border-top-right-radius: var(--corner-radius--default);
+        border-top-left-radius: var(--corner-radius--default);
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+    }
+
+    &.rounded {
+      .avatar {
+        width: 132px;
+        height: 132px;
+        border-width: var(--border-width--200);
+        border-style: var(--border-style--default);
+        border-color: var(--neutral--color--100);
+
+        img {
+          width: auto;
+          height: auto;
+        }
+      }
+    }
+
+    .background {
+      position: absolute;
+      top: -5%;
+      left: -5%;
+      width: 110%;
+      height: 110%;
+      max-width: none;
+      filter: blur(var(--size-px--s)) brightness(0.9);
+      background-size: 140%;
+      background-position: center center;
+      object-fit: cover;
     }
   }
 

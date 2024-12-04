@@ -10,20 +10,20 @@ import {
   IconDashboard,
   IconDomain,
 } from "@/components/Icon/components/icons";
-import { Avatar } from "@/components/Avatar";
 import clsx from "clsx";
 import { Heading } from "@/components/Heading";
 import { Label } from "@/components/Label";
 import { dummyText } from "@/lib/dev/dummyText";
-import { Image } from "@/components/Image";
+import SecondaryNavigationAvatar from "@/components/mstudio/SecondaryNavigation/SecondaryNavigationAvatar";
 
 export const SecondaryNavigation: FC = () => {
   return (
     <LayoutCard className={clsx(styles.secondaryNavigation)}>
-      <Avatar>
-        {/* <Initials>Mein Projekt</Initials> */}
-        <Image alt="Gopher" src={dummyText.imageSrc} />
-      </Avatar>
+      <SecondaryNavigationAvatar
+        title="Max Mustermann"
+        imgSrc={dummyText.imageSrc}
+        rounded
+      />
       <Heading>Mein Projekt</Heading>
       <Navigation>
         <NavigationGroup collapsable>
