@@ -9,7 +9,7 @@
   padding-block: calc(var(--badge--padding-y) - (var(--badge--border-width)));
   display: flex;
   align-items: center;
-  column-gap: var(--alert-badge--icon-to-text-spacing);
+  column-gap: var(--badge--spacing);
   max-width: fit-content;
   border-style: var(--badge--border-style);
   border-width: var(--badge--border-width);

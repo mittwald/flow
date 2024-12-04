@@ -17,10 +17,10 @@
     align-items: center;
     text-align: start;
     flex-grow: 1;
-    padding-inline: var(--accordion--header-padding-x);
-    padding-block: var(--accordion--header-padding-y);
-    border-radius: var(--accordion--header-corner-radius);
-    column-gap: var(--accordion--heading-to-chevron-spacing);
+    padding-inline: var(--accordion--padding-x);
+    padding-block: var(--accordion--padding-y);
+    border-radius: var(--accordion--corner-radius);
+    column-gap: var(--accordion--spacing);
     border: none;
     background: none;
     width: 100%;
@@ -28,7 +28,7 @@
     @include focus.focus;
 
     &:hover {
-      background-color: var(--accordion--header-background-color--hover);
+      background-color: var(--accordion--background-color--hover);
     }
   }
 
@@ -37,7 +37,7 @@
     grid-template-rows: 0fr;
     transition-property: grid-template-rows, visibility, padding;
     transition-duration: var(--transition--duration--slow);
-    padding-inline: var(--accordion--content-padding);
+    padding-inline: var(--accordion--padding-x);
     visibility: hidden;
   }
 
@@ -51,16 +51,16 @@
   }
 
   &.outline {
-    border-color: var(--form-control--border-color--default);
-    border-width: var(--form-control--border-width);
-    border-style: var(--form-control--border-style);
-    border-radius: var(--form-control--corner-radius);
+    border-color: var(--accordion--border-color);
+    border-width: var(--accordion--border-width);
+    border-style: var(--accordion--border-style);
+    border-radius: var(--accordion--corner-radius);
   }
 
   &.expanded {
     .content {
       grid-template-rows: 1fr;
-      padding-block: var(--accordion--content-padding);
+      padding-block: var(--accordion--padding-y);
       visibility: visible;
     }
 
