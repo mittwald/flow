@@ -3,7 +3,11 @@ import type { AlertProps } from "@mittwald/flow-react-components/Alert";
 export type { AlertProps } from "@mittwald/flow-react-components/Alert";
 
 export const RemoteAlertElement = createRemoteElement<AlertProps>({
-  properties: ["color", "status"],
+  properties: {
+    color: {},
+    status: {},
+  },
+  events: {},
 });
 
 declare global {
