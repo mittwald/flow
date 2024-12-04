@@ -1,6 +1,7 @@
 import type { FC, PropsWithChildren, ReactNode } from "react";
 import React, { Suspense as ReactSuspense, useEffect, useState } from "react";
 import { Activity } from "@/Activity";
+import { useIsMounted } from "@/hooks/useIsMounted";
 
 interface Props extends PropsWithChildren {
   fallback?: ReactNode;
@@ -8,8 +9,13 @@ interface Props extends PropsWithChildren {
 
 export const Suspense: FC<Props> = (props) => {
   const { children, fallback } = props;
-
   const [isLoading, setIsLoading] = useState(false);
+
+  const isMounted = useIsMounted();
+
+  if (!isMounted) {
+    return null;
+  }
 
   const Fallback: FC = () => {
     useEffect(() => {

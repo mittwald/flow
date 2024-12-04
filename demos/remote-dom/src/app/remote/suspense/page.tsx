@@ -1,22 +1,9 @@
 "use client";
 import { Suspense, Button } from "@mittwald/flow-remote-react-components";
 import { useEffect, useState } from "react";
-import { TextField } from "@mittwald/flow-remote-react-components";
-
-export const useIsMounted = () => {
-  const [isMounted, setIsMounted] = useState(false);
-  useEffect(
-    () => {
-      setIsMounted(true);
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [],
-  );
-  return isMounted;
-};
 
 interface Data {
-  title: string;
+  generated: string;
 }
 
 const createDataFetcher = () => {
@@ -27,10 +14,10 @@ const createDataFetcher = () => {
     promise = new Promise((resolve) => {
       setTimeout(() => {
         data = {
-          title: "Ik bin ein Berliner",
+          generated: "Generated: " + new Date().toLocaleString("de-DE"),
         };
         resolve(null);
-      }, 2000);
+      }, 1_000);
     });
     return promise;
   };
@@ -55,42 +42,45 @@ const createDataFetcher = () => {
 
 const fetcher = createDataFetcher();
 
-const CrazyButton = () => {
+const EnhancedDataComponent = () => {
   const data = fetcher.read();
-  const [foo, setFoo] = useState(false);
+  const [reloadTimer, setReloadTimer] = useState(5);
+  const [buttonPressState, setButtonPressState] = useState(0);
 
   useEffect(() => {
-    const foo = setInterval(() => {
+    let timer: unknown;
+
+    if (reloadTimer <= 0) {
       fetcher.reset();
-      setFoo((p) => !p);
-    }, 2000);
+      setReloadTimer(5);
+    } else {
+      timer = setTimeout(() => {
+        setReloadTimer((t) => t - 1);
+      }, 1_000);
+    }
 
     return () => {
-      clearInterval(foo);
+      if (timer) {
+        clearInterval(timer as number);
+      }
     };
-  }, []);
+  }, [reloadTimer]);
 
-  return <Button>{data.title}</Button>;
-};
-
-const Toggle = () => {
-  const [a, b] = useState(false);
-
-  return <Button onPress={() => b((x) => !x)}>{a ? "on" : "off"}</Button>;
+  return (
+    <>
+      <>Promise API DATA: "{data.generated}"</>
+      <Button onPress={() => setButtonPressState((p) => p + 1)}>
+        Button {buttonPressState}x clicked
+      </Button>
+      Reload Data in {reloadTimer} seconds...
+    </>
+  );
 };
 
 export default function Page() {
-  const isMounted = useIsMounted();
-
-  if (!isMounted) {
-    return null;
-  }
-
   return (
     <Suspense fallback={<>Loading....</>}>
-      <CrazyButton />
-      <TextField />
-      <Toggle />
+      <EnhancedDataComponent />
     </Suspense>
   );
 }
