@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.366](https://github.com/mittwald/flow/compare/0.1.0-alpha.365...0.1.0-alpha.366) (2024-12-05)
+
+### Features
+
+- **Icon:** add forward icon
+  ([#1045](https://github.com/mittwald/flow/issues/1045))
+  ([d599c28](https://github.com/mittwald/flow/commit/d599c28075e786f1dc47b4b2a9a0348ff6c0e343))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.365](https://github.com/mittwald/flow/compare/0.1.0-alpha.364...0.1.0-alpha.365) (2024-12-05)
 
 ### Bug Fixes
