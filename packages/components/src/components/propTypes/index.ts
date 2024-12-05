@@ -56,7 +56,7 @@ import type { SegmentProps } from "@/components/SegmentedControl/components/Segm
 import type { FileCardProps } from "@/components/FileCard";
 import type { FileFieldProps } from "@/components/FileField";
 import type { AlignProps } from "@/components/Align";
-import { CountrySelectProps } from "@/components/CountrySelect";
+import type { CountrySelectProps } from "@/components/CountrySelect";
 
 export * from "./types";
 

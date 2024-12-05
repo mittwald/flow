@@ -55,9 +55,7 @@ export const WithAllProps: Story = {
   render: (props) => (
     <CountrySelect {...props}>
       <Label>Country</Label>
-      <FieldDescription>
-        Complete example with all properties
-      </FieldDescription>
+      <FieldDescription>Complete example with all properties</FieldDescription>
       <FieldError>Fehlerbeispiel</FieldError>
     </CountrySelect>
   ),
