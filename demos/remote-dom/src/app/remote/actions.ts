@@ -16,11 +16,9 @@ export async function login(formState: unknown | null, formData: FormData) {
   };
 }
 
-export async function formServerAction(formData: FormData) {
-  console.log(formData);
+export async function formServerAction(prevState: number, formData: FormData) {
+  console.log("Calling form server action with data: ", formData);
   await sleep();
-
-  return {
-    success: true,
-  };
+  console.log("Done");
+  return prevState + 1;
 }

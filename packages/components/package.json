@@ -482,8 +482,8 @@
     "@types/node": "22.10.1",
     "@types/prettier": "^3.0.0",
     "@types/prop-types": "^15.7.13",
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
+    "@types/react": "npm:types-react@rc",
+    "@types/react-dom": "npm:types-react-dom@rc",
     "@types/react-syntax-highlighter": "^15.5.13",
     "@types/rollup": "^0.54.0",
     "@vitejs/plugin-react": "^4.3.4",
@@ -499,9 +499,9 @@
     "postcss-nesting": "^13.0.1",
     "prettier": "^3.4.2",
     "prop-types": "^15.8.1",
-    "react": "^18.3.1",
+    "react": "19.0.0-rc.1",
     "react-docgen-typescript": "^2.2.2",
-    "react-dom": "^18.3.1",
+    "react-dom": "19.0.0-rc.1",
     "react-element-to-jsx-string": "^15.0.0",
     "react-hook-form": "^7.53.2",
     "rimraf": "^6.0.1",
@@ -523,8 +523,8 @@
   "peerDependencies": {
     "@mittwald/react-use-promise": "^2.3.12",
     "next": "*",
-    "react": "~18.3.0",
-    "react-dom": "~18.3.0",
+    "react": "19.0.0-rc.1",
+    "react-dom": "19.0.0-rc.1",
     "react-hook-form": "*"
   },
   "peerDependenciesMeta": {
@@ -537,6 +537,10 @@
     "react-hook-form": {
       "optional": true
     }
+  },
+  "overrides": {
+    "@types/react": "npm:types-react@rc",
+    "@types/react-dom": "npm:types-react-dom@rc"
   },
   "nx": {
     "targets": {

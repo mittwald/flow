@@ -1,41 +1,32 @@
-import type { FC, FormEventHandler, FormHTMLAttributes } from "react";
+import type { FC, FormEvent, FormHTMLAttributes } from "react";
 import React, { forwardRef } from "react";
 
-type RemoteServerAction = (payload: Record<string, unknown>) => void;
-type DefaultAction = string;
-
 type FormProps = Pick<FormHTMLAttributes<HTMLFormElement>, "action"> & {
-  onSubmit?: (data: unknown) => void;
+  onSubmit?: (data: Record<string, unknown>) => void;
 };
 
-export const Form: FC = forwardRef<HTMLFormElement, FormProps>((props, ref) => {
-  const { action: remoteAction, onSubmit, ...rest } = props;
+const getFormDataObject = (formData: FormData): Record<string, unknown> =>
+  Object.fromEntries(Array.from(formData.entries()));
 
-  const hostAction = remoteAction
-    ? typeof remoteAction === "string"
-      ? remoteAction
-      : (formData: FormData) => {
-          const remoteServerAction = remoteAction as RemoteServerAction;
-          const formDataObject = Object.fromEntries(
-            Array.from(formData.entries()),
-          );
-          return remoteServerAction(formDataObject);
-        }
+export const Form: FC = forwardRef<HTMLFormElement, FormProps>((props, ref) => {
+  const {
+    action: actionFromProps,
+    onSubmit: onSubmitFromProps,
+    ...rest
+  } = props;
+
+  const action =
+    typeof actionFromProps === "function"
+      ? (formData: FormData) =>
+          actionFromProps(getFormDataObject(formData) as unknown as FormData)
+      : actionFromProps;
+
+  const onSubmit = onSubmitFromProps
+    ? (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        onSubmitFromProps(getFormDataObject(new FormData(e.currentTarget)));
+      }
     : undefined;
 
-  const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
-    const formData = new FormData(e.currentTarget);
-    const formDataObject = Object.fromEntries(Array.from(formData.entries()));
-    e.preventDefault();
-    onSubmit?.(formDataObject);
-  };
-
-  return (
-    <form
-      ref={ref}
-      {...rest}
-      action={hostAction as DefaultAction | undefined}
-      onSubmit={onSubmit ? handleSubmit : undefined}
-    />
-  );
+  return <form ref={ref} {...rest} action={action} onSubmit={onSubmit} />;
 });
