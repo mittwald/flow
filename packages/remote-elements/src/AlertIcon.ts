@@ -3,7 +3,7 @@ import type { AlertIconProps } from "@mittwald/flow-react-components/AlertIcon";
 export type { AlertIconProps } from "@mittwald/flow-react-components/AlertIcon";
 
 export const RemoteAlertIconElement = createRemoteElement<AlertIconProps>({
-  properties: ["color", "size"],
+  properties: ["status"],
 });
 
 declare global {
