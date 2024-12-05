@@ -56,7 +56,7 @@ export const WithAllProps: Story = {
     <CountrySelect {...props}>
       <Label>Country</Label>
       <FieldDescription>Complete example with all properties</FieldDescription>
-      <FieldError>Fehlerbeispiel</FieldError>
+      <FieldError/>
     </CountrySelect>
   ),
 };
