@@ -29,7 +29,7 @@ export const Required: Story = {
 };
 
 export const WithDefaultValue: Story = {
-  args: { defaultCountry: "DE" },
+  args: { defaultSelectedKey: "DE" },
 };
 
 export const WithDachFirst: Story = {

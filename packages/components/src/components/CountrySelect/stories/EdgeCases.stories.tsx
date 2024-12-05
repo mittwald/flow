@@ -15,7 +15,7 @@ export default meta;
 type Story = StoryObj<typeof CountrySelect>;
 
 export const NonExistentCountryCode: Story = {
-  args: { defaultCountry: "XX" },
+  args: { defaultSelectedKey: "XX" },
   render: (props) => (
     <CountrySelect {...props}>
       <Label>Country</Label>
@@ -27,7 +27,7 @@ export const WithCustomOnChange: Story = {
   render: (props) => (
     <CountrySelect
       {...props}
-      onCountryChange={(code) => {
+      onSelectionChange={(code) => {
         console.log(`Selected country: ${code}`);
         alert(`Selected country code: ${code}`);
       }}
@@ -40,14 +40,14 @@ export const WithCustomOnChange: Story = {
 export const WithDachFirstAndDefault: Story = {
   args: {
     dachFirst: true,
-    defaultCountry: "FR",
+    defaultSelectedKey: "FR",
   },
 };
 
 export const WithAllProps: Story = {
   args: {
     dachFirst: true,
-    defaultCountry: "DE",
+    defaultSelectedKey: "DE",
     isRequired: true,
     isDisabled: false,
     className: "custom-class",

@@ -1,25 +1,19 @@
 import type { PropsWithChildren } from "react";
 import React from "react";
-import { Select } from "@/components/Select";
+import { Select, SelectProps } from "@/components/Select";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import type { PropsWithClassName } from "@/lib/types/props";
 import { Option } from "@/components/Select/components/Option";
-import { CountryList } from "@/components/CountrySelect/components/CountryList";
+import { useLocalizedStringFormatter } from "react-aria";
+import locales from "./locales/*.locale.json";
 
 export interface CountrySelectProps
   extends PropsWithChildren<
-      Omit<
-        React.ComponentProps<typeof Select>,
-        "children" | "className" | "defaultSelectedKey"
-      >
+      Omit<SelectProps, "children">
     >,
     FlowComponentProps,
     PropsWithClassName {
-  /** Optional default selected country code */
-  defaultCountry?: string;
-  /** Optional callback when country selection changes */
-  onCountryChange?: (countryCode: string) => void;
   /** Optional flag to show DACH countries at the beginning of the list */
   dachFirst?: boolean;
 }
@@ -28,19 +22,20 @@ export const CountrySelect = flowComponent(
   "CountrySelect",
   (props: CountrySelectProps) => {
     const {
-      defaultCountry,
-      onCountryChange,
       dachFirst = false,
       className,
       children,
       ...rest
     } = props;
 
+    const stringFormatter = useLocalizedStringFormatter(locales);
     const dachCountries = ["DE", "AT", "CH"];
-
-    const countryEntries = Object.entries(CountryList).map(([code, name]) => ({
+    const countryCodes = Object.keys(locales["de-DE"])
+      .filter(key => key.startsWith('countries.'))
+      .map(key => key.replace('countries.', ''));
+    const countryEntries = countryCodes.map((code) => ({
       code,
-      name,
+      name: stringFormatter.format(`countries.${code}`),
       isDach: dachCountries.includes(code),
     }));
 
@@ -49,17 +44,13 @@ export const CountrySelect = flowComponent(
         if (a.isDach && !b.isDach) return -1;
         if (!a.isDach && b.isDach) return 1;
       }
-      return a.name.localeCompare(b.name, "de");
+      return a.name.localeCompare(b.name);
     });
 
     return (
       <Select
         {...rest}
         className={className}
-        defaultSelectedKey={defaultCountry}
-        onSelectionChange={(key) => {
-          onCountryChange?.(String(key));
-        }}
       >
         {children}
         {sortedCountries.map((country) => (
