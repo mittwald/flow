@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.365](https://github.com/mittwald/flow/compare/0.1.0-alpha.364...0.1.0-alpha.365) (2024-12-05)
+
+### Bug Fixes
+
+- **Modal:** fix close button for confirmation controller
+  ([#1042](https://github.com/mittwald/flow/issues/1042))
+  ([b64a67e](https://github.com/mittwald/flow/commit/b64a67e24622bfdcf8dee3412cb82eeb767790e3))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.364](https://github.com/mittwald/flow/compare/0.1.0-alpha.363...0.1.0-alpha.364) (2024-12-05)
 
 ### Features
