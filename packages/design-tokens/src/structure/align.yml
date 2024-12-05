@@ -2,3 +2,6 @@ align:
   avatar-text:
     spacing:
       value: "{size-rem.s}"
+  input-button:
+    spacing:
+      value: "{size-px.m}"
