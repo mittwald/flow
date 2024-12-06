@@ -18,6 +18,7 @@ export { IconClock } from "./IconClock";
 export { IconClose } from "./IconClose";
 export { IconCode } from "./IconCode";
 export { IconContextMenu } from "./IconContextMenu";
+export { IconContextMenuVertical } from "./IconContextMenuVertical";
 export { IconContractPartner } from "./IconContractPartner";
 export { IconContract } from "./IconContract";
 export { IconCopy } from "./IconCopy";
