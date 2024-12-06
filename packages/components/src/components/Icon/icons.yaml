@@ -16,6 +16,7 @@ Clock: Clock
 Close: X
 Code: Code
 ContextMenu: Dots
+ContextMenuVertical: DotsVertical
 ContractPartner: FileDescription
 Contract: FileInfo
 Copy: Copy
