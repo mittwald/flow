@@ -4645,6 +4645,7 @@ const RAW_RUNTIME_STATE =
           ["@mittwald/flow-remote-react-components", "virtual:39267f7d1d40a14b42458597fe6198d5e449ecd1ebd963310e6a7dc2bf5f231a586f90f0776fdc524f32f4b519ca728990d891316dd6a1927b2c9dabc0180864#workspace:packages/remote-react-components"],\
           ["@mittwald/flow-remote-react-renderer", "virtual:39267f7d1d40a14b42458597fe6198d5e449ecd1ebd963310e6a7dc2bf5f231a586f90f0776fdc524f32f4b519ca728990d891316dd6a1927b2c9dabc0180864#workspace:packages/remote-react-renderer"],\
           ["@mittwald/react-use-promise", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:2.6.0"],\
+          ["@tabler/icons-react", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:3.24.0"],\
           ["@types/node", "npm:22.10.1"],\
           ["@types/react", "npm:19.0.0"],\
           ["@types/react-dom", "npm:19.0.0"],\
