@@ -47,4 +47,10 @@
       }
     }
   }
+
+  &:has(.text):has(.copyButton) {
+    display: flex;
+    align-self: center;
+    column-gap: var(--align--text-copyButton--spacing);
+  }
 }
