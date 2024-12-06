@@ -25,6 +25,7 @@ import {
 } from "@mittwald/flow-react-components/List";
 import { Activity } from "@mittwald/flow-react-components/Activity";
 import { stringChildrenExtractor } from "@/lib/stringChildrenExtractor";
+import Select, { Option } from "@mittwald/flow-react-components/Select";
 
 export const components: RemoteComponentsMap<FlowRemoteElementKeys> = {
   "flr-action": createRemoteComponentRenderer(Action),
@@ -34,6 +35,8 @@ export const components: RemoteComponentsMap<FlowRemoteElementKeys> = {
   "flr-content": createRemoteComponentRenderer(Content),
   "flr-heading": createRemoteComponentRenderer(Heading),
   "flr-button": createFlowRemoteComponentRenderer(Button),
+  "flr-option": createFlowRemoteComponentRenderer(Option),
+  "flr-select": createFlowRemoteComponentRenderer(Select),
   "flr-icon": createRemoteComponentRenderer(stringChildrenExtractor(Icon)),
   "flr-modal": createRemoteComponentRenderer(Modal),
   "flr-modal-trigger": createRemoteComponentRenderer(ModalTrigger),
