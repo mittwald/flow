@@ -1,12 +1,15 @@
-import type { FC, FormEvent, FormHTMLAttributes } from "react";
+import type {
+  FC,
+  FormEvent,
+  FormHTMLAttributes,
+  PropsWithChildren,
+} from "react";
 import React, { forwardRef } from "react";
+import { getFormDataObject } from "@/components/lib/getFormDataObject";
 
 type FormProps = Pick<FormHTMLAttributes<HTMLFormElement>, "action"> & {
   onSubmit?: (data: Record<string, unknown>) => void;
-};
-
-const getFormDataObject = (formData: FormData): Record<string, unknown> =>
-  Object.fromEntries(Array.from(formData.entries()));
+} & PropsWithChildren;
 
 export const Form: FC = forwardRef<HTMLFormElement, FormProps>((props, ref) => {
   const {

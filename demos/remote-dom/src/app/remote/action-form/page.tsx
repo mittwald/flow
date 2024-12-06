@@ -5,9 +5,17 @@ import {
   Form,
   Section,
   TextField,
+  CodeBlock,
 } from "@mittwald/flow-remote-react-components";
 import { formServerAction } from "@/app/remote/actions";
+import type { FC } from "react";
+import { useFormStatus } from "react-dom";
 import { useActionState } from "react";
+
+const FormStatus: FC = () => {
+  const status = useFormStatus();
+  return <CodeBlock code={JSON.stringify(status, undefined, 2)} />;
+};
 
 export default function Page() {
   const [callCount, dispatchFormServerAction, isPending] = useActionState(
@@ -23,6 +31,7 @@ export default function Page() {
           Submit
         </Button>
         <Text>Called {callCount} times</Text>
+        <FormStatus />
       </Section>
     </Form>
   );
