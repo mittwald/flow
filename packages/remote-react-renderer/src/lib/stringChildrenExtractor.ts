@@ -1,38 +1,38 @@
-import {
-  createElement,
-  FunctionComponent,
-  FunctionComponentElement,
-  PropsWithChildren,
-  ReactElement,
-} from "react";
-import { isArray } from "remeda";
+import type { FunctionComponent, PropsWithChildren, ReactNode } from "react";
+import { createElement, isValidElement } from "react";
 
-const extractRemoteTextRendererStrings = (object: string | any | any[]): string | undefined => {
-  if (typeof object === 'string') {
-    return object;
-
-  } else if ("type" in object && "name" in object.type && object.type.name === "RemoteTextRenderer") {
-    return extractRemoteTextRendererStrings((object as ReactElement<any>).props.remote.data);
-
-  } else if (Array.isArray(object)) {
-    return object.map(e => extractRemoteTextRendererStrings(e)).join(' ');
-  }
-
-  return undefined;
+interface RemoteReactElementProps {
+  remote?: {
+    data?: ReactNode;
+  };
 }
 
-export const stringChildrenExtractor = <P extends Record<string, unknown>>(component: FunctionComponent) => (props: PropsWithChildren<P>): FunctionComponentElement<P> => {
-  const extractedStrings = extractRemoteTextRendererStrings(props.children);
-  if(typeof extractedStrings === "string") {
-    return createElement<P>(component, {
-      ...props,
-      children: extractedStrings,
-    })
+const extractRemoteTextRendererStrings = (node: ReactNode): ReactNode => {
+  if (Array.isArray(node)) {
+    return node.map((e) => extractRemoteTextRendererStrings(e)).join(" ");
   }
 
-  const children = props.children;
-  return createElement<P>(component, {
-    ...props,
-    children: isArray(children) && children.length >= 1 ? children[0] : children,
-  });
-}
+  if (
+    isValidElement<RemoteReactElementProps>(node) &&
+    typeof node.type === "function" &&
+    node.type.name === "RemoteTextRenderer"
+  ) {
+    return extractRemoteTextRendererStrings(node.props.remote?.data);
+  }
+
+  return node;
+};
+
+export const stringChildrenExtractor =
+  <P extends PropsWithChildren>(
+    component: FunctionComponent<P>,
+  ): FunctionComponent<P> =>
+  (props) => {
+    const extractedStrings = extractRemoteTextRendererStrings(props.children);
+
+    return createElement<P>(
+      component,
+      props,
+      Array.isArray(extractedStrings) ? extractedStrings[0] : extractedStrings,
+    );
+  };
