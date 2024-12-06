@@ -1,5 +1,6 @@
 import {
   IconApp,
+  IconAutoresponder,
   IconBackup,
   IconCalendar,
   IconCamera,
@@ -204,5 +205,9 @@ import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
   <LabeledValue>
     <Label>Forward</Label>
     <IconForward />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Autoresponder</Label>
+    <IconAutoresponder />
   </LabeledValue>
 </ColumnLayout>;

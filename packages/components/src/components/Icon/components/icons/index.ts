@@ -1,6 +1,7 @@
 /* eslint-disable */
 /* auto-generated file */
 export { IconApp } from "./IconApp";
+export { IconAutoresponder } from "./IconAutoresponder";
 export { IconBackLink } from "./IconBackLink";
 export { IconBackup } from "./IconBackup";
 export { IconCamera } from "./IconCamera";
