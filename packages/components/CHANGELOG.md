@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.368](https://github.com/mittwald/flow/compare/0.1.0-alpha.367...0.1.0-alpha.368) (2024-12-06)
+
+### Features
+
+- **Icon:** add autoresponder icon
+  ([#1047](https://github.com/mittwald/flow/issues/1047))
+  ([128f63f](https://github.com/mittwald/flow/commit/128f63f4d68905e7c36643c53cff8dd9a52f4bb3))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.367](https://github.com/mittwald/flow/compare/0.1.0-alpha.366...0.1.0-alpha.367) (2024-12-06)
 
 ### Features
