@@ -115,10 +115,6 @@
       "types": "./dist/js/types/components/CounterBadge/index.d.ts",
       "import": "./dist/js/CounterBadge.js"
     },
-    "./CountrySelect": {
-      "types": "./dist/js/types/components/CountrySelect/index.d.ts",
-      "import": "./dist/js/CountrySelect.js"
-    },
     "./DatePicker/styles.css": "./dist/css/DatePicker.css",
     "./DatePicker": {
       "types": "./dist/js/types/components/DatePicker/index.d.ts",
