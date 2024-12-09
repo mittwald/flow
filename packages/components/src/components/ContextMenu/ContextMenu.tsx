@@ -56,8 +56,6 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
 
   const selectionVariant = getMenuItemSelectionVariant(selectionMode);
 
-  console.log("menu", selectionVariant);
-
   const propsContext: PropsContext = {
     MenuItem: {
       selectionVariant,

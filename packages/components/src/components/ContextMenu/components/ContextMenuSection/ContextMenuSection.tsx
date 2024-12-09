@@ -25,8 +25,6 @@ export const ContextMenuSection = flowComponent(
 
     const selectionVariant = getMenuItemSelectionVariant(selectionMode);
 
-    console.log("section", selectionVariant);
-
     const propsContext: PropsContext = {
       Heading: {
         level: 5,
