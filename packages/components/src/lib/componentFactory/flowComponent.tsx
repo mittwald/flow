@@ -6,7 +6,7 @@ import type {
   ComponentProps,
   ComponentType,
   ForwardRefExoticComponent,
-  LegacyRef,
+  Ref,
   PropsWithoutRef,
   ReactElement,
   ReactNode,
@@ -23,26 +23,31 @@ export interface FlowComponentProps extends PropsWithTunnel {
   wrapWith?: ReactElement;
 }
 
-type FlowComponentImplementationProps<C extends FlowComponentName> = Omit<
+type FlowComponentImplementationProps<C extends FlowComponentName, R> = Omit<
   FlowComponentPropsOfName<C>,
   keyof FlowComponentProps
 > & {
   /** @internal */
-  refProp?: LegacyRef<never>;
+  refProp?: Ref<R>;
 };
 
-type FlowComponentImplementationType<C extends FlowComponentName> =
-  ComponentType<FlowComponentImplementationProps<C>>;
+type FlowComponentImplementationType<
+  C extends FlowComponentName,
+  R = never,
+> = ComponentType<FlowComponentImplementationProps<C, R>>;
 
-type FlowComponentType<C extends FlowComponentName> = ForwardRefExoticComponent<
-  PropsWithoutRef<FlowComponentPropsOfName<C>> & RefAttributes<never>
+type FlowComponentType<
+  C extends FlowComponentName,
+  R,
+> = ForwardRefExoticComponent<
+  PropsWithoutRef<FlowComponentPropsOfName<C>> & RefAttributes<R>
 >;
 
-export function flowComponent<C extends FlowComponentName>(
+export function flowComponent<C extends FlowComponentName, R = never>(
   componentName: C,
-  ImplementationComponentType: FlowComponentImplementationType<C>,
-): FlowComponentType<C> {
-  return forwardRef<never, FlowComponentPropsOfName<C>>((props, ref) => {
+  ImplementationComponentType: FlowComponentImplementationType<C, R>,
+): FlowComponentType<C, R> {
+  return forwardRef<R, FlowComponentPropsOfName<C>>((props, ref) => {
     const { tunnelId, wrapWith, ...propsWithContext } = useProps(
       componentName,
       props as FlowComponentPropsOfName<C>,
