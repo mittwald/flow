@@ -53,7 +53,7 @@ export const buildConfig = (opts: Options) => {
     controller: "./src/lib/controller/index.ts",
     CopyButton: "./src/components/CopyButton/index.ts",
     CounterBadge: "./src/components/CounterBadge/index.ts",
-    CountrySelect: "./src/components/CountrySelect/index.ts",
+    CountrySelect: "./src/components/CountryOptions/index.ts",
     DatePicker: "./src/components/DatePicker/index.ts",
     DateRangePicker: "./src/components/DateRangePicker/index.ts",
     EmulatedBoldText: "./src/components/EmulatedBoldText/index.ts",
