@@ -57,6 +57,7 @@ export { IconMinus } from "./IconMinus";
 export { IconNotification } from "./IconNotification";
 export { IconNumber } from "./IconNumber";
 export { IconOrder } from "./IconOrder";
+export { IconPassword } from "./IconPassword";
 export { IconPayment } from "./IconPayment";
 export { IconPending } from "./IconPending";
 export { IconPerformance } from "./IconPerformance";

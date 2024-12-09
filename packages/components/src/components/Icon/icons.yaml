@@ -55,6 +55,7 @@ Minus: Minus
 Notification: Bell
 Number: Hash
 Order: ShoppingCart
+Password: Lock
 Payment: CreditCard
 Pending: Loader2
 Performance: ChartHistogram
