@@ -4,6 +4,7 @@ import React from "react";
 import { Label } from "@/components/Label";
 import FieldDescription from "@/components/FieldDescription";
 import { FieldError } from "@/components/FieldError";
+import { CountryOptions } from "@/components/Select/components/CountryOptions";
 
 const meta: Meta<typeof Select> = {
   title: "Form Controls/Select",
@@ -84,6 +85,14 @@ export const WithNumbers: Story = {
       <Option value={2}>2</Option>
       <Option value={3}>3</Option>
       <Option value={4}>4</Option>
+    </Select>
+  ),
+};
+
+export const WithCountryOptions: Story = {
+  render: (props) => (
+    <Select {...props}>
+      <CountryOptions />
     </Select>
   ),
 };
