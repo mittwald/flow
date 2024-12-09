@@ -1,6 +1,8 @@
 .footer {
+  container-type: inline-size;
   background-color: var(--color--hosting-blue--200);
   margin: 0;
+  padding: var(--size-px--xxl);
 
   & > * {
     max-width: 1500px;
@@ -8,8 +10,60 @@
   }
 }
 
+.footerColumnLayout {
+  display: grid;
+  gap: var(--size-px--xxl);
+  grid-template-columns: 1fr 1fr 2fr 1fr;
+}
+
+.feedbackPicture {
+  grid-row: span 2 / span 2;
+}
+
+.mittwaldLogo {
+  display: grid;
+  grid-column: span 2 / span 2;
+  gap: var(--size-px--s);
+}
+
+.footerSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-px--s);
+  font-size: var(--font-size-text--s);
+}
+
+.footerSectionContent {
+  display: grid;
+  gap: var(--size-px--xs);
+}
+
 @container (max-width: 850px) {
   .feedbackPicture {
     display: none;
+  }
+
+  .mittwaldLogo {
+    grid-column: span 3 / span 3;
+  }
+
+  .footerColumnLayout {
+    grid-template-columns: 1fr 1fr 2fr;
+  }
+}
+
+@container (max-width: 550px) {
+  .footer {
+    padding: var(--size-px--xl);
+  }
+
+  .mittwaldLogo {
+    grid-column: auto;
+    margin-top: var(--size-px--xl);
+  }
+
+  .footerColumnLayout {
+    grid-template-columns: 1fr;
+    gap: var(--size-px--xl);
   }
 }
