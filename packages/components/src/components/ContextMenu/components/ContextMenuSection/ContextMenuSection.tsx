@@ -9,8 +9,10 @@ import styles from "../../ContextMenu.module.scss";
 import type { ContextMenuSelectionMode } from "@/components/ContextMenu/lib";
 import {
   getAriaSelectionMode,
+  getCloseOverlayType,
   getMenuItemSelectionVariant,
 } from "@/components/ContextMenu/lib";
+import { Action } from "@/components/Action";
 
 export type ContextMenuSectionProps = PropsWithChildren &
   FlowComponentProps & {
@@ -22,6 +24,8 @@ export const ContextMenuSection = flowComponent(
     const { children, selectionMode, ...rest } = props;
 
     const selectionVariant = getMenuItemSelectionVariant(selectionMode);
+
+    console.log("section", selectionVariant);
 
     const propsContext: PropsContext = {
       Heading: {
@@ -40,7 +44,11 @@ export const ContextMenuSection = flowComponent(
         className={styles.section}
       >
         <PropsContextProvider props={propsContext} mergeInParentContext>
-          {children}
+          <Action skip>
+            <Action closeOverlay={getCloseOverlayType(selectionMode)}>
+              {children}
+            </Action>
+          </Action>
         </PropsContextProvider>
       </Aria.MenuSection>
     );

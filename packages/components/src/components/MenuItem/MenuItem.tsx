@@ -23,6 +23,8 @@ export const MenuItem = flowComponent("MenuItem", (props) => {
     ...rest
   } = props;
 
+  console.log("item", selectionVariant);
+
   const rootClassName = clsx(styles.menuItem, className);
 
   return (

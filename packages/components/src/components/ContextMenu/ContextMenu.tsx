@@ -14,6 +14,7 @@ import { Action } from "@/components/Action";
 import type { ContextMenuSelectionMode } from "@/components/ContextMenu/lib";
 import {
   getAriaSelectionMode,
+  getCloseOverlayType,
   getMenuItemSelectionVariant,
 } from "@/components/ContextMenu/lib";
 
@@ -55,6 +56,8 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
 
   const selectionVariant = getMenuItemSelectionVariant(selectionMode);
 
+  console.log("menu", selectionVariant);
+
   const propsContext: PropsContext = {
     MenuItem: {
       selectionVariant,
@@ -65,19 +68,21 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
 
     Section: {
       MenuItem: {
-        selectionVariant,
         Avatar: {
           size: "l",
         },
       },
       renderContextMenuSection: true,
     },
-  };
 
-  const closeOverlayType =
-    selectionMode === "single" || selectionMode === "navigation"
-      ? "ContextMenu"
-      : undefined;
+    ContextMenuSection: {
+      MenuItem: {
+        Avatar: {
+          size: "l",
+        },
+      },
+    },
+  };
 
   return (
     <ClearPropsContext>
@@ -102,7 +107,9 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
             ref={ref}
           >
             <PropsContextProvider props={propsContext}>
-              <Action closeOverlay={closeOverlayType}>{children}</Action>
+              <Action closeOverlay={getCloseOverlayType(selectionMode)}>
+                {children}
+              </Action>
             </PropsContextProvider>
           </Aria.Menu>
         </OverlayContextProvider>

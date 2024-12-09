@@ -56,7 +56,7 @@ export const MenuItemContent: FC<Props> = (props) => {
       isSelected ? (
       <Switch isReadOnly isSelected />
     ) : selectionVariant === "switch" && !isSelected ? (
-      <Switch isReadOnly />
+      <Switch isReadOnly isSelected={false} />
     ) : selectionMode === "single" && isSelected ? (
       <IconRadioOn />
     ) : selectionMode === "single" && !isSelected ? (
