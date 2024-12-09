@@ -1,12 +1,6 @@
-tab-list:
-  background-color:
-    value: "{neutral.color.400}"
-
-tab:
-  padding-y:
+tabs:
+  padding:
     value: "{size-px.m}"
-  padding-x:
-    value: "{size-px.l}"
   background-color:
     default:
       value: "{neutral-soft-background-color.default}"
@@ -17,20 +11,13 @@ tab:
     selected:
       value: "{neutral.color.100}"
   color:
-    default:
-      value: "{neutral-soft-content-color.default}"
-    hover:
-      value: "{neutral-soft-content-color.default}"
-    pressed:
-      value: "{neutral-soft-content-color.pressed}"
+    value: "{neutral-soft-content-color.default}"
   disabled-color:
-    value: "{neutral.color.600}"
-  disabled-background-color:
-    value: "{neutral-soft-background-color.default}"
+    value: "{disabled-soft-content-color}"
   font-weight:
     selected:
       value: "{font-weight.bold}"
-  text-to-status-spacing:
+  spacing:
     value: "{size-rem.s}"
 
 tab-panel:

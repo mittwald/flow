@@ -31,7 +31,7 @@
   }
 
   .icon + .text {
-    margin-inline-start: var(--menu-item--icon-to-text-spacing);
+    margin-inline-start: var(--menu-item--spacing);
   }
 
   &:hover {
@@ -65,6 +65,7 @@
   &[aria-disabled] {
     background-color: var(--menu-item--disabled-background-color);
     color: var(--menu-item--disabled-color);
+
     .icon {
       color: var(--menu-item--icon-color--disabled);
     }

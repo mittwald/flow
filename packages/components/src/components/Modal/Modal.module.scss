@@ -42,7 +42,13 @@
   .header {
     grid-area: header;
     padding-inline: var(--modal--padding);
-    padding-block: var(--modal--padding);
+    padding-block: var(--modal--header-padding-y);
+    border-bottom-width: var(--modal--border-width);
+    border-bottom-style: var(--modal--border-style);
+    border-bottom-color: var(--modal--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .content {
@@ -51,17 +57,16 @@
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    padding-inline: var(--modal--padding);
-    padding-bottom: var(--modal--padding-bottom);
+    padding: var(--modal--padding);
   }
 
   .actionGroup {
     grid-area: actionGroup;
-    padding: var(--modal--action-group-padding);
-    background-color: var(--modal--action-group-background-color);
-    border-top-color: var(--modal--action-group-border-color);
-    border-top-width: var(--modal--action-group-border-top-width);
-    border-top-style: var(--modal--action-group-border-style);
+    padding: var(--modal--padding);
+    background-color: var(--modal--footer-background-color);
+    border-top-width: var(--modal--border-width);
+    border-top-style: var(--modal--border-style);
+    border-top-color: var(--modal--border-color);
   }
 }
 
@@ -90,7 +95,7 @@
     > div {
       border-radius: var(--modal--corner-radius);
       max-height: calc(100dvh - var(--size-px--xxl));
-      max-width: calc(100vw - var(--size-px--xxl));
+      max-width: calc(100dvw - var(--size-px--xxl));
 
       &[data-entering] {
         animation: modal-zoom var(--transition--duration--slow)
@@ -127,21 +132,6 @@
       }
     }
   }
-
-  .header {
-    border-bottom-width: var(--separator--height);
-    border-bottom-style: var(--border-style--default);
-    border-bottom-color: var(--separator--color);
-    padding-block: var(--modal--off-canvas-padding-y);
-    background-color: var(--modal--off-canvas-header-background-color);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .content {
-    padding-top: var(--modal--padding);
-  }
 }
 
 /* Mobile Tray */
@@ -161,18 +151,6 @@
       &[data-entering] {
         animation: modal-slide-up var(--transition--duration--slow);
       }
-    }
-
-    .header {
-      padding-top: var(--modal--padding);
-    }
-
-    .content {
-      overflow: visible;
-    }
-
-    .closeButton {
-      display: none;
     }
   }
 }

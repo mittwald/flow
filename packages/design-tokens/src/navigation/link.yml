@@ -5,7 +5,7 @@ link:
     value: "{line-height.m}"
   font-weight:
     value: "{font-weight.bold}"
-  text-to-icon-spacing:
+  spacing:
     value: "{size-rem.xs}"
 
   color:

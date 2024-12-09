@@ -1,5 +1,5 @@
 .contextualHelp {
-  row-gap: var(--contextual-help--content-to-content-spacing);
+  row-gap: var(--popover--spacing);
   display: flex;
   flex-direction: column;
   max-width: var(--contextual-help--max-width);
