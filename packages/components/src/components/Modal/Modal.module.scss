@@ -70,22 +70,20 @@
   }
 }
 
-@media (min-width: 550px) {
-  .modal,
-  .offCanvas {
-    @extend .size-s;
+.modal,
+.offCanvas {
+  @extend .size-s;
 
-    @mixin size($size) {
-      &.size-#{$size} {
-        > div {
-          width: var(--modal--size--#{$size});
-        }
+  @mixin size($size) {
+    &.size-#{$size} {
+      > div {
+        width: var(--modal--size--#{$size});
       }
     }
-
-    @include size(s);
-    @include size(m);
   }
+
+  @include size(s);
+  @include size(m);
 }
 
 /* Normal Modal Desktop */
