@@ -11,6 +11,7 @@ import {
   IconClose,
   IconCode,
   IconContextMenu,
+  IconContextMenuVertical,
   IconCopy,
   IconDelete,
   IconDownload,
@@ -80,6 +81,10 @@ import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
   <LabeledValue>
     <Label>Context Menu</Label>
     <IconContextMenu />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Context Menu Vertical</Label>
+    <IconContextMenuVertical />
   </LabeledValue>
   <LabeledValue>
     <Label>Maximize</Label>
