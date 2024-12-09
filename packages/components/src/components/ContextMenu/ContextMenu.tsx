@@ -11,6 +11,11 @@ import type { MenuItemProps } from "@/components/MenuItem";
 import { useOverlayController } from "@/lib/controller";
 import OverlayContextProvider from "@/lib/controller/overlay/OverlayContextProvider";
 import { Action } from "@/components/Action";
+import type { ContextMenuSelectionMode } from "@/components/ContextMenu/lib";
+import {
+  getAriaSelectionMode,
+  getMenuItemSelectionVariant,
+} from "@/components/ContextMenu/lib";
 
 export interface ContextMenuProps
   extends Omit<PopoverProps, "withTip">,
@@ -23,7 +28,7 @@ export interface ContextMenuProps
       | "disabledKeys"
     >,
     FlowComponentProps {
-  selectionMode?: "single" | "multiple" | "navigation";
+  selectionMode?: ContextMenuSelectionMode;
   width?: string | number;
 }
 
@@ -48,11 +53,7 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
   const overlayController =
     overlayControllerFromProps ?? overlayControllerFromContext;
 
-  const ariaSelectionMode =
-    selectionMode === "navigation" ? "none" : selectionMode;
-
-  const selectionVariant =
-    selectionMode === "navigation" ? "navigation" : "control";
+  const selectionVariant = getMenuItemSelectionVariant(selectionMode);
 
   const propsContext: PropsContext = {
     MenuItem: {
@@ -93,7 +94,7 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
           <Aria.Menu
             className={styles.contextMenu}
             onAction={onAction}
-            selectionMode={ariaSelectionMode}
+            selectionMode={getAriaSelectionMode(selectionMode)}
             selectedKeys={selectedKeys}
             defaultSelectedKeys={defaultSelectedKeys}
             disabledKeys={disabledKeys}
