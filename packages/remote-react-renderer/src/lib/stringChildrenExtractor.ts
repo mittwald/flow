@@ -27,7 +27,7 @@ export const stringChildrenExtractor =
   <P extends PropsWithChildren>(
     component: FunctionComponent<P>,
   ): FunctionComponent<P> =>
-  (props) => {
+  (props: P) => {
     const extractedStrings = extractRemoteTextRendererStrings(props.children);
 
     return createElement<P>(
