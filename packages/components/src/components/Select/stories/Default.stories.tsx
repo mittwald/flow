@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Select, { Option } from "../index";
+import Select, { Option, sortByDachFirst } from "../index";
 import React from "react";
 import { Label } from "@/components/Label";
 import FieldDescription from "@/components/FieldDescription";
@@ -93,6 +93,14 @@ export const WithCountryOptions: Story = {
   render: (props) => (
     <Select {...props}>
       <CountryOptions />
+    </Select>
+  ),
+};
+
+export const WithCountryOptionsAndCustomSort: Story = {
+  render: (props) => (
+    <Select {...props}>
+      <CountryOptions sortBy={sortByDachFirst} />
     </Select>
   ),
 };
