@@ -167,3 +167,31 @@ export const WithSubHeadings: Story = {
     </>
   ),
 };
+
+export const HideSeperator: Story = {
+  render: (props) => (
+    <>
+      <Section {...props} hideSeparator>
+        <Heading>
+          <IconMember />
+          Personal Information
+        </Heading>
+        <TextField isRequired defaultValue="John">
+          <Label>First name</Label>
+        </TextField>
+        <TextField isRequired defaultValue="Doe">
+          <Label>Last name</Label>
+        </TextField>
+      </Section>
+      <Section {...props}>
+        <Heading>Newsletter</Heading>
+        <Text>
+          Upcoming releases, new features and tips about your hosting - we bring
+          you the most important information in your inbox. Subscribe to our
+          newsletter and stay up to date.
+        </Text>
+        <Link href="#">Subscribe</Link>
+      </Section>
+    </>
+  ),
+};

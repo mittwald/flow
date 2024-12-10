@@ -78,6 +78,7 @@ export const Modal = flowComponent("Modal", (props) => {
                 variant="plain"
                 color="secondary"
                 className={styles.closeButton}
+                onPress={controller?.close}
               >
                 <IconClose />
               </Button>

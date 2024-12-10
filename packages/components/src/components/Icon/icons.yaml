@@ -1,4 +1,5 @@
 App: AppWindow
+Autoresponder: ArrowBackUpDouble
 BackLink: ArrowLeft
 Backup: History
 Camera: Camera
@@ -25,7 +26,7 @@ Dashboard: BorderAll
 Database: Database
 Calendar: Calendar
 Delete: Trash
-DeliveryBox: Inbox
+DeliveryBox: MailShare
 Domain: World
 Download: Download
 Edit: Edit
@@ -35,6 +36,7 @@ ExternalLink: ExternalLink
 Failed: X
 File: File
 Filter: Filter
+Forward: ArrowRight
 Hide: EyeOff
 Home: Home
 Image: Photo
