@@ -6,6 +6,9 @@
 
   + .section {
     margin-block-start: var(--section--section-to-section-spacing);
+  }
+
+  &:not(.hideSeparator) + .section {
     border-block-start-width: var(--section--border-width);
     border-block-start-style: var(--section--border-style);
     border-block-start-color: var(--section--border-color);

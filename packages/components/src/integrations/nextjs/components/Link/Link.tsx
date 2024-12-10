@@ -18,6 +18,8 @@ export const Link = forwardRef<HTMLAnchorElement, Props>(
         }
       : {};
 
+    console.log(props);
+
     return (
       <NextLink
         href={href}

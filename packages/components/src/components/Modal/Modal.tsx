@@ -80,17 +80,16 @@ export const Modal = flowComponent<"Modal", HTMLDivElement>(
           <TunnelProvider>
             <Header className={styles.header}>
               <TunnelExit id="heading" />
-              {offCanvas && (
-                <Action closeOverlay="Modal">
-                  <Button
-                    variant="plain"
-                    color="secondary"
-                    className={styles.closeButton}
-                  >
-                    <IconClose />
-                  </Button>
-                </Action>
-              )}
+              <Action closeOverlay="Modal">
+                <Button
+                  variant="plain"
+                  color="secondary"
+                  className={styles.closeButton}
+                  onPress={controller?.close}
+                >
+                  <IconClose />
+                </Button>
+              </Action>
             </Header>
             {children}
           </TunnelProvider>

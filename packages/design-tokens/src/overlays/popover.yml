@@ -4,7 +4,10 @@ popover:
   corner-radius:
     value: "{corner-radius.default}"
   padding:
-    value: "{size-px.m}"
+    m:
+      value: "{size-px.m}"
+    s:
+      value: "{size-px.s}"
   background-color:
     value: "{neutral.color.100}"
   min-width:
@@ -15,6 +18,8 @@ popover:
     value: "{border-style.default}"
   border-color:
     value: "{neutral-outline-border-color}"
+  spacing:
+    value: "{size-px.s}"
   popover-to-trigger-spacing:
     value: "{size-px.m}"
   tip-height:

@@ -2,7 +2,7 @@ tooltip:
   background-color:
     value: "{neutral.color.900}"
   color:
-    value: "{neutral.color.100}"
+    value: "{text.color.light}"
   padding-x:
     value: "{size-px.s}"
   padding-y:
@@ -11,9 +11,11 @@ tooltip:
     value: "{font-size-text.s}"
   max-width:
     value: 300px
-  tooltip-to-content-spacing:
+  tooltip-to-trigger-spacing:
     value: "{size-px.s}"
-  arrow-size:
+  tip-size:
     value: "{size-px.s}"
   box-shadow:
     value: "{shadow.overlay}"
+  header-corner-radius:
+    value: "{corner-radius.default}"

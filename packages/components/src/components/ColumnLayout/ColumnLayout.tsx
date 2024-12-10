@@ -7,6 +7,8 @@ import type {
   PropsWithClassName,
   PropsWithElementType,
 } from "@/lib/types/props";
+import type { PropsContext } from "@/lib/propsContext";
+import { PropsContextProvider } from "@/lib/propsContext";
 
 type GapSize = "s" | "m" | "l";
 
@@ -52,10 +54,18 @@ export const ColumnLayout: FC<ColumnLayoutProps> = (props) => {
 
   const Element = elementType;
 
+  const propsContext: PropsContext = {
+    Section: {
+      hideSeparator: true,
+    },
+  };
+
   return (
     <div className={rootClassName} style={style}>
       <Element aria-label={ariaLabel} className={styles.columnLayout}>
-        {children}
+        <PropsContextProvider props={propsContext}>
+          {children}
+        </PropsContextProvider>
       </Element>
     </div>
   );

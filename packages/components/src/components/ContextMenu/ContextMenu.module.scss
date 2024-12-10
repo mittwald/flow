@@ -3,10 +3,6 @@
   flex-direction: column;
   row-gap: var(--menu--item-to-item-spacing);
 
-  hr {
-    margin-block: var(--menu--separator-to-item-spacing);
-  }
-
   &:focus-visible {
     outline: none;
   }
@@ -21,8 +17,4 @@
     align-items: center;
     padding-top: var(--context-menu--padding);
   }
-}
-
-.popoverContent.popoverContent {
-  padding: var(--context-menu--padding);
 }

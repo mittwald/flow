@@ -3,8 +3,6 @@ modal:
     value: "{corner-radius.default}"
   padding:
     value: "{size-px.l}"
-  padding-bottom:
-    value: "{size-px.xl}"
   background-color:
     value: "{neutral.color.100}"
   size:
@@ -12,19 +10,15 @@ modal:
       value: 660px
     m:
       value: 900px
-  action-group-padding:
-    value: "{size-rem.l}"
-  action-group-background-color:
+  footer-background-color:
     value: "{neutral.color.300}"
-  action-group-border-color:
-    value: "{neutral.color.400}"
-  action-group-border-top-width:
+  border-color:
+    value: "{neutral-outline-border-color}"
+  border-width:
     value: "{border-width.100}"
-  action-group-border-style:
+  border-style:
     value: "{border-style.default}"
-  off-canvas-padding-y:
+  header-padding-y:
     value: "{size-px.s}"
-  off-canvas-header-background-color:
-    value: "{neutral.color.200}"
   off-canvas-max-width:
-    value: "calc(100vw - {size-px.m})"
+    value: "calc(100dvw - {size-px.m})"
