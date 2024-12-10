@@ -26,8 +26,11 @@ import {
 import { Activity } from "@mittwald/flow-react-components/Activity";
 import { stringChildrenExtractor } from "@/lib/stringChildrenExtractor";
 import Select, { Option } from "@mittwald/flow-react-components/Select";
+import { elementFactory } from "@/lib/elementFactory";
 
-export const components: RemoteComponentsMap<FlowRemoteElementKeys> = {
+export const components: RemoteComponentsMap<
+  FlowRemoteElementKeys | "svg" | "circle" | "g" | "path"
+> = {
   "flr-action": createRemoteComponentRenderer(Action),
   "flr-activity": createRemoteComponentRenderer(Activity),
   "flr-alert": createRemoteComponentRenderer(Alert),
@@ -49,4 +52,8 @@ export const components: RemoteComponentsMap<FlowRemoteElementKeys> = {
   "flr-list-item": createFlowRemoteComponentRenderer(ListItem),
   "flr-list-static-data": createFlowRemoteComponentRenderer(ListStaticData),
   "flr-fragment": RemoteFragmentRenderer,
+  svg: createRemoteComponentRenderer(elementFactory("svg")),
+  circle: createRemoteComponentRenderer(elementFactory("circle")),
+  g: createRemoteComponentRenderer(elementFactory("g")),
+  path: createRemoteComponentRenderer(elementFactory("path")),
 };
