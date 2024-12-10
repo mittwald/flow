@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.372](https://github.com/mittwald/flow/compare/0.1.0-alpha.371...0.1.0-alpha.372) (2024-12-10)
+
+**Note:** Version bump only for package @mittwald/react-tunnel
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.371](https://github.com/mittwald/flow/compare/0.1.0-alpha.370...0.1.0-alpha.371) (2024-12-10)
 
 **Note:** Version bump only for package @mittwald/react-tunnel
