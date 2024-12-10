@@ -38,7 +38,7 @@ export const Section = flowComponent("Section", (props) => {
   const rootClassName = clsx(
     styles.section,
     className,
-    styles.hideSeparator && hideSeparator,
+    hideSeparator && styles.hideSeparator,
   );
 
   const headingId = useId();
