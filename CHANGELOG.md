@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.371](https://github.com/mittwald/flow/compare/0.1.0-alpha.370...0.1.0-alpha.371) (2024-12-10)
+
+### Bug Fixes
+
+- **Modal:** fix mobile off canvas
+  ([#1055](https://github.com/mittwald/flow/issues/1055))
+  ([eb20386](https://github.com/mittwald/flow/commit/eb203862e3a9b9a30f7adeb3903eba385bd5c5f5))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.370](https://github.com/mittwald/flow/compare/0.1.0-alpha.369...0.1.0-alpha.370) (2024-12-10)
 
 ### Bug Fixes
