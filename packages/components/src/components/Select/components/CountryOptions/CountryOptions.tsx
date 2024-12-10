@@ -6,6 +6,11 @@ import { useLocalizedStringFormatter } from "react-aria";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import locales from "./locales/*.locale.json";
+import type {
+  CountrySortFn,
+  CountrySortKey,
+} from "@/components/Select/components/CountryOptions/components/CountrySort";
+import { getCountrySort } from "@/components/Select/components/CountryOptions/components/CountrySort";
 
 export interface CountryEntry {
   code: string;
@@ -19,13 +24,12 @@ export interface CountryOptionsProps<T = object>
   extends PropsWithChildren<Omit<ListBoxProps<T>, "children">>,
     FlowComponentProps {
   filterBy?: CountryFilterFn;
-  /** Optional flag to prioritize DACH countries */
-  dachFirst?: boolean;
+  sortBy?: CountrySortFn | CountrySortKey;
 }
 
 export const CountryOptions = flowComponent(
   "CountryOptions",
-  ({ filterBy = () => true, dachFirst = false }: CountryOptionsProps) => {
+  ({ filterBy = () => true, sortBy = "byName" }: CountryOptionsProps) => {
     const stringFormatter = useLocalizedStringFormatter(locales);
     const dachCountries = ["DE", "AT", "CH"];
 
@@ -46,14 +50,8 @@ export const CountryOptions = flowComponent(
             isDach: dachCountries.includes(code),
           }))
           .filter(filterBy)
-          .sort((a, b) => {
-            if (dachFirst) {
-              if (a.isDach && !b.isDach) return -1;
-              if (!a.isDach && b.isDach) return 1;
-            }
-            return a.name.localeCompare(b.name);
-          }),
-      [countryCodes, stringFormatter, filterBy, dachFirst],
+          .sort(getCountrySort(sortBy)),
+      [countryCodes, stringFormatter, filterBy, sortBy],
     );
 
     return (

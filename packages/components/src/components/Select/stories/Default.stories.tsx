@@ -5,6 +5,7 @@ import { Label } from "@/components/Label";
 import FieldDescription from "@/components/FieldDescription";
 import { FieldError } from "@/components/FieldError";
 import { CountryOptions } from "@/components/Select/components/CountryOptions";
+import { countrySorts } from "@/components/Select/components/CountryOptions/components/CountrySort";
 
 const meta: Meta<typeof Select> = {
   title: "Form Controls/Select",
