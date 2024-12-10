@@ -3484,6 +3484,7 @@ __metadata:
     nx: "npm:^20.2.1"
     prettier: "npm:^3.4.2"
     react: "npm:19.0.0"
+    react-children-utilities: "npm:^2.10.0"
     react-dom: "npm:19.0.0"
     react-hook-form: "npm:^7.54.0"
     remeda: "npm:^2.17.4"
