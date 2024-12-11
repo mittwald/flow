@@ -21,7 +21,10 @@ export const cloneElement = <P>(
         ...props,
         ...child.props.element.properties,
       };
-    } else if (index === undefined && React.isValidElement<P>(child)) {
+    } else if (
+      (index === undefined || index === 0) &&
+      React.isValidElement<P>(child)
+    ) {
       if (children.length >= 1) {
         return React.cloneElement<P>(child, props, children);
       }
