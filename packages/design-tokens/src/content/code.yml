@@ -5,6 +5,8 @@ code:
     value: "{line-height.m}"
   padding-x:
     value: "{size-px.xs}"
+  padding-y:
+    value: "{size-px.xxs}"
   padding:
     value: "{size-px.m}"
   corner-radius:
