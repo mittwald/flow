@@ -7,12 +7,18 @@ import { SkeletonText } from "@/components/SkeletonText";
 
 export interface TableCellProps
   extends Omit<Aria.CellProps, "children">,
-    PropsWithChildren {}
+    PropsWithChildren {
+  rowHeader?: boolean;
+}
 
 export const TableCell: FC<TableCellProps> = (props) => {
-  const { children, className, ...rest } = props;
+  const { children, className, rowHeader, ...rest } = props;
 
-  const rootClassName = clsx(styles.cell, className);
+  const rootClassName = clsx(
+    styles.cell,
+    rowHeader && styles.rowHeader,
+    className,
+  );
 
   return (
     <Aria.Cell className={rootClassName} {...rest}>
