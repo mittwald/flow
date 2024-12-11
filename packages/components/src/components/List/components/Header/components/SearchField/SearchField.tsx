@@ -1,5 +1,5 @@
 import type { FC, KeyboardEvent } from "react";
-import React, { createElement, useState } from "react";
+import React, { createElement, useEffect, useState } from "react";
 import type { PropsWithClassName } from "@/lib/types/props";
 import type { Search } from "@/components/List/model/search/Search";
 import type { SearchFieldRenderComponent } from "@/components/List/model/search/types";
@@ -11,9 +11,24 @@ interface Props extends PropsWithClassName {
 }
 
 const DefaultSearchFieldRender: SearchFieldRenderComponent = (props) => {
-  const { className, onChange, value, ...searchFieldProps } = props;
+  const { className, onChange, value, autoSubmit, ...searchFieldProps } = props;
 
   const [searchString, setSearchString] = useState(value ?? "");
+
+  const submitSearch = (searchString: string) => {
+    if (searchString.trim() === "") {
+      onChange(undefined);
+    } else {
+      onChange(searchString);
+    }
+  };
+
+  useEffect(() => {
+    if (autoSubmit) {
+      const timeOut = setTimeout(() => submitSearch(searchString), 800);
+      return () => clearTimeout(timeOut);
+    }
+  }, [searchString]);
 
   useOnChange(value, () => {
     setSearchString(value ?? "");
@@ -26,11 +41,7 @@ const DefaultSearchFieldRender: SearchFieldRenderComponent = (props) => {
 
   const handleKeyPress = (e: KeyboardEvent) => {
     if (e.key === "Enter") {
-      if (searchString.trim() === "") {
-        onChange(undefined);
-      } else {
-        onChange(searchString);
-      }
+      submitSearch(searchString);
     } else if (e.key === "Escape") {
       clearSearch();
     }
