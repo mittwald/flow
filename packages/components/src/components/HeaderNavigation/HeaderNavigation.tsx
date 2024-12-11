@@ -13,7 +13,7 @@ import { Text } from "@/components/Text";
 export interface HeaderNavigationProps
   extends PropsWithChildren<ComponentProps<"nav">>,
     PropsWithClassName {
-  /** @default "primary" */
+  /** The color of the header navigation. @default "primary" */
   color?: "primary" | "dark" | "light";
 }
 

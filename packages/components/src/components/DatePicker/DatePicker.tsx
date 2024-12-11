@@ -14,6 +14,7 @@ import { Calendar } from "@/components/Calendar";
 
 export interface DatePickerProps<T extends Aria.DateValue>
   extends PropsWithChildren<Omit<Aria.DatePickerProps<T>, "children">> {
+  /** The error message that is displayed below the input. */
   errorMessage?: ReactNode;
 }
 
