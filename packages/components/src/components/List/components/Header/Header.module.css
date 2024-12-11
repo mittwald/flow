@@ -13,7 +13,6 @@
 
   .pickerList {
     display: flex;
-    flex-grow: 9999;
     flex-wrap: wrap;
     gap: var(--list--content-to-content-spacing);
   }
@@ -23,15 +22,16 @@
     flex-grow: 1;
     gap: var(--list--content-to-content-spacing);
     flex-wrap: wrap-reverse;
-    justify-content: space-between;
+    justify-content: end;
   }
 
   .searchField {
-    width: 180px;
+    max-width: 180px;
     flex-grow: 1;
-  }
+    transition: max-width var(--transition--duration--default);
 
-  .actions {
-    margin-left: auto;
+    &:has(input:focus) {
+      max-width: 600px;
+    }
   }
 }
