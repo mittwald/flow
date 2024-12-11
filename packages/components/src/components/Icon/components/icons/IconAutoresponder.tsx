@@ -1,10 +1,10 @@
 /* eslint-disable */
 /* auto-generated file */
 import React, { ComponentProps, FC } from "react";
-import { IconMailShare as Tabler } from "@tabler/icons-react";
+import { IconArrowBackUpDouble as Tabler } from "@tabler/icons-react";
 import { Icon } from "@/components/Icon";
 
-export const IconDeliveryBox: FC<
+export const IconAutoresponder: FC<
   Omit<ComponentProps<typeof Icon>, "children">
 > = (props) => (
   <Icon {...props}>
@@ -12,4 +12,4 @@ export const IconDeliveryBox: FC<
   </Icon>
 );
 
-export default IconDeliveryBox;
+export default IconAutoresponder;

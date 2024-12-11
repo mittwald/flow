@@ -13,6 +13,8 @@ export interface SectionProps
     FlowComponentProps {
   /** @internal */
   renderContextMenuSection?: boolean;
+  /** @internal */
+  hideSeparator?: boolean;
 }
 
 export const Section = flowComponent("Section", (props) => {
@@ -21,6 +23,7 @@ export const Section = flowComponent("Section", (props) => {
     className,
     refProp: ref,
     renderContextMenuSection,
+    hideSeparator,
     ...rest
   } = props;
 
@@ -32,7 +35,11 @@ export const Section = flowComponent("Section", (props) => {
     return <ContextMenuSection>{children}</ContextMenuSection>;
   }
 
-  const rootClassName = clsx(styles.section, className);
+  const rootClassName = clsx(
+    styles.section,
+    className,
+    hideSeparator && styles.hideSeparator,
+  );
 
   const headingId = useId();
 
