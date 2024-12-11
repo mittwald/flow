@@ -10,7 +10,7 @@ import type {
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 
-type GapSize = "s" | "m" | "l";
+type GapSize = "s" | "m" | "l" | "xl";
 
 export interface ColumnLayoutProps
   extends PropsWithChildren,
