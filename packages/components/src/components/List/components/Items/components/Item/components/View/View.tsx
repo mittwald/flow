@@ -5,42 +5,41 @@ import type { PropsContext } from "@/lib/propsContext";
 import { dynamic, PropsContextProvider } from "@/lib/propsContext";
 import { OptionsButton } from "@/components/List/components/Items/components/Item/components/OptionsButton";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
-import type {
-  PropsWithClassName,
-  PropsWithContainerBreakpointSize,
-} from "@/lib/types/props";
+import type { PropsWithClassName } from "@/lib/types/props";
 import clsx from "clsx";
-import { getContainerBreakpointSizeClassName } from "@/lib/getContainerBreakpointSizeClassName";
 
-type Props = PropsWithChildren &
-  PropsWithClassName &
-  PropsWithContainerBreakpointSize;
+type Props = PropsWithChildren & PropsWithClassName;
 
 const getStyleForContentSlot = (slot?: string) =>
   slot === "top"
     ? styles.topContent
     : slot === "bottom"
-      ? styles.content
+      ? styles.bottomContent
       : styles.topContent;
 
 export const View = (props: Props) => {
-  const { children, className, containerBreakpointSize = "m" } = props;
+  const { children, className } = props;
 
   const propsContext: PropsContext = {
     ContextMenu: {
       wrapWith: <OptionsButton className={styles.action} />,
       placement: "bottom end",
+      tunnelId: "button",
     },
     Button: {
       className: styles.action,
+      tunnelId: "button",
     },
     ActionGroup: {
       className: styles.action,
       ignoreBreakpoint: true,
+      tunnelId: "button",
+      Button: {
+        tunnelId: null,
+      },
     },
     Content: {
       className: dynamic((p) => getStyleForContentSlot(p.slot)),
-      tunnelId: "topContent",
     },
     Avatar: {
       className: styles.avatar,
@@ -60,21 +59,19 @@ export const View = (props: Props) => {
     },
   };
 
-  const rootClassName = clsx(
-    styles.view,
-    className,
-    styles[getContainerBreakpointSizeClassName(containerBreakpointSize)],
-  );
+  const rootClassName = clsx(styles.view, className);
 
   return (
     <div className={rootClassName}>
       <PropsContextProvider props={propsContext} mergeInParentContext>
         <TunnelProvider>
-          {children}
-          <div className={styles.title}>
-            <TunnelExit id="title" />
+          <div className={styles.content}>
+            {children}
+            <div className={styles.title}>
+              <TunnelExit id="title" />
+            </div>
           </div>
-          <TunnelExit id="topContent" />
+          <TunnelExit id="button" />
         </TunnelProvider>
       </PropsContextProvider>
     </div>
