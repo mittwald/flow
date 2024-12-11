@@ -4,7 +4,7 @@
   --title-width: 30ch;
   padding: var(--list-item--padding);
   display: grid;
-  gap: var(--list-item--content-to-content-spacing);
+  gap: var(--list-item--spacing);
 
   &:has(.title:not(:empty)):has(.topContent):has(.content):has(.action) {
     grid-template-areas:
@@ -93,7 +93,7 @@
   .title {
     grid-area: title;
     display: grid;
-    grid-column-gap: var(--list-item--content-to-content-spacing);
+    grid-column-gap: var(--list-item--avatar-to-title-spacing);
     grid-template-areas:
       "avatar title   "
       "avatar subtitle";
@@ -149,11 +149,11 @@
   }
 
   @include containerBreakpointSizes.containerBreakpointSizes(
-    250,
-    450,
-    650,
-    850,
-    1050
+                  250,
+                  450,
+                  650,
+                  850,
+                  1050
   ) {
     &:has(.title:not(:empty)):has(.topContent):has(.content):has(.action) {
       grid-template-areas:

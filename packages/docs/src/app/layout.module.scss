@@ -76,7 +76,7 @@
 .tabContent {
   display: flex;
   flex-direction: column;
-  row-gap: var(--section--content-to-content-spacing);
+  row-gap: var(--section--spacing);
 }
 
 @media (max-width: 900px) {

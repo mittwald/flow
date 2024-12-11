@@ -15,6 +15,6 @@
 
   &:has(:global(.flow--avatar)) {
     align-items: center;
-    padding-top: var(--context-menu--padding);
+    padding-top: var(--menu--item-to-item-spacing);
   }
 }

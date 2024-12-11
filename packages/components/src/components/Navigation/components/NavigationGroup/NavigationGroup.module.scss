@@ -1,6 +1,7 @@
 .navigationGroup {
   &:not(.collapsable) ul {
-    padding: var(--accordion--content-padding);
+    padding-inline: var(--accordion--padding-x);
+    padding-block: var(--accordion--padding-y);
   }
 
   &:not(:last-child) {
@@ -9,7 +10,7 @@
 
   .label {
     display: block;
-    padding-inline-start: var(--accordion--header-padding-x);
-    padding-block: var(--accordion--header-padding-y);
+    padding-inline-start: var(--accordion--padding-x);
+    padding-block: var(--accordion--padding-y);
   }
 }

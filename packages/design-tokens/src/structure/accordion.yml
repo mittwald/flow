@@ -1,15 +1,21 @@
 accordion:
-  heading-to-chevron-spacing:
+  spacing:
     value: "{size-rem.s}"
-
-  header-corner-radius:
+  corner-radius:
     value: "{corner-radius.default}"
-  header-padding-x:
+  border-width:
+    value: "{border-width.100}"
+  border-style:
+    value: "{border-style.default}"
+  border-color:
+    value: "{neutral-outline-border-color}"
+  padding-x:
     value: "{size-px.s}"
-  header-padding-y:
+  padding-y:
     value: "{size-px.xs}"
-  header-background-color:
+  background-color:
     hover:
-      value: "{primary-plain-background-color.hover}"
-  content-padding:
-    value: "{size-px.s}"
+      value: "{primary.color.100}"
+    pressed:
+      value: "{primary.color.100}"
+
