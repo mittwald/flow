@@ -58,15 +58,17 @@ export const Link = flowComponent("Link", (props) => {
     },
   };
 
-  const unsupportedTypingsLinkProps = {
-    "aria-current": ariaCurrent,
-  } as Record<string, unknown>;
+  const unsupportedTypingsLinkProps = ariaCurrent
+    ? ({
+        "aria-current": true,
+      } as Record<string, unknown>)
+    : {};
 
   return (
     <ClearPropsContext>
       <Link
-        {...rest}
         {...unsupportedTypingsLinkProps}
+        {...rest}
         className={rootClassName}
         ref={ref}
       >

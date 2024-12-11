@@ -6,6 +6,7 @@ import { extractSvgFromString } from "@/components/Icon/lib/extractSvgFromString
 import { ClearPropsContext } from "@/lib/propsContext";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import { cloneElement } from "@/lib/react/cloneElement";
 
 type SvgAttributeProps = SVGAttributes<SVGSVGElement>;
 
@@ -54,7 +55,7 @@ export const Icon = flowComponent("Icon", (props) => {
 
   return (
     <ClearPropsContext>
-      {React.cloneElement(iconElement, iconProps)}
+      {cloneElement(iconElement, iconProps)}
     </ClearPropsContext>
   );
 });
