@@ -14,7 +14,7 @@ export interface CodeBlockProps
   copyable?: boolean;
   /** The color of the code block. @default "default" */
   color?: "default" | "light" | "dark";
-  /** The code to display inside the code block */
+  /** The code to display inside the code block. */
   code: string | string[];
 }
 
