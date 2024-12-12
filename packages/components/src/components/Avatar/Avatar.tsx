@@ -22,7 +22,7 @@ export interface AvatarProps
   extends PropsWithChildren,
     PropsWithClassName,
     FlowComponentProps {
-  /** The size of the avatar @default "m" */
+  /** The size of the avatar. @default "m" */
   size?: "xs" | "s" | "m" | "l";
   /** The color of icons and initials inside the avatar. */
   color?: AvatarColors;

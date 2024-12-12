@@ -13,7 +13,7 @@ export interface PropsWithTunnel {
 }
 
 export interface PropsWithClassName {
-  /** A class name for the element */
+  /** The elements class name. */
   className?: string;
 }
 
