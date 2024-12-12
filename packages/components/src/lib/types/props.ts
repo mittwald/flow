@@ -3,6 +3,7 @@ import type { ExoticComponent, HTMLAttributes, ReactHTML } from "react";
 export type Status = "info" | "success" | "warning" | "danger";
 
 export type PropsWithStatus<T extends Status = Status, P = unknown> = P & {
+  /** The elements status */
   status?: T;
 };
 
@@ -12,6 +13,7 @@ export interface PropsWithTunnel {
 }
 
 export interface PropsWithClassName {
+  /** A class name for the element */
   className?: string;
 }
 

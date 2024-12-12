@@ -4,7 +4,9 @@ import styles from "./Skeleton.module.scss";
 import clsx from "clsx";
 
 export interface SkeletonProps extends ComponentProps<"div"> {
+  /** The width of the skeleton. */
   width?: string;
+  /** The height of the skeleton. */
   height?: string;
 }
 
