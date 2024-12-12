@@ -9,6 +9,7 @@ type SupportedSearchFieldProps = Pick<
 interface SearchFieldRenderProps extends SupportedSearchFieldProps {
   onChange: (value: SearchValue) => unknown;
   value: SearchValue;
+  autoSubmit?: boolean;
 }
 
 export type SearchFieldRenderComponent = ComponentType<SearchFieldRenderProps>;
