@@ -10,8 +10,6 @@ export const Link = forwardRef<HTMLAnchorElement, Props>(
   function Link(props, ref) {
     const { href, isDisabled, ...rest } = props;
 
-    console.log(props);
-
     return (
       <NextLink
         href={href ?? "#"}
