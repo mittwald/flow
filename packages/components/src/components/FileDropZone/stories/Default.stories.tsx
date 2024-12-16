@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 import { action } from "@storybook/addon-actions";
 import { Button } from "@/components/Button";
 import { ActionGroup } from "@/components/ActionGroup";
-import { IconUpload } from "@/components/Icon/components/icons";
+import { IconImage, IconUpload } from "@/components/Icon/components/icons";
 import { Heading } from "@/components/Heading";
 import { FileField } from "@/components/FileField";
 import { Text } from "@/components/Text";
@@ -57,11 +57,11 @@ export const WithAcceptedTypes: Story = {
     return (
       <Section>
         <FileDropZone {...props} onChange={setFiles}>
-          <IconUpload />
-          <Heading>Datei ablegen</Heading>
+          <IconImage />
+          <Heading>Bild ablegen</Heading>
           <Text>Erlaubtes Dateiformat ist image/png.</Text>
           <FileField name="file" onChange={setFiles}>
-            <Button>Datei auswählen</Button>
+            <Button>Bild auswählen</Button>
           </FileField>
         </FileDropZone>
         <FileCardList>
