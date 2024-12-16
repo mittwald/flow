@@ -7,6 +7,12 @@ import { FileCard } from "@/components/FileCard";
 import { Form, typedField } from "@/integrations/react-hook-form";
 import { useForm } from "react-hook-form";
 import { action } from "@storybook/addon-actions";
+import { Button } from "@/components/Button";
+import { ActionGroup } from "@/components/ActionGroup";
+import { IconUpload } from "@/components/Icon/components/icons";
+import { Heading } from "@/components/Heading";
+import { FileField } from "@/components/FileField";
+import { Text } from "@/components/Text";
 
 const meta: Meta<typeof FileDropZone> = {
   title: "Upload/FileDropZone",
@@ -16,9 +22,16 @@ const meta: Meta<typeof FileDropZone> = {
   },
   render: (props) => {
     const [files, setFiles] = useState<FileList | null>(null);
+
     return (
       <Section>
-        <FileDropZone {...props} onChange={setFiles} />
+        <FileDropZone {...props} onChange={setFiles}>
+          <IconUpload />
+          <Heading>Datei ablegen</Heading>
+          <FileField name="file" onChange={setFiles}>
+            <Button>Datei auswählen</Button>
+          </FileField>
+        </FileDropZone>
         <FileCardList>
           {[...(files ?? [])].map((f) => (
             <FileCard name={f.name} key={f.name} />
@@ -36,11 +49,54 @@ const submitAction = action("submit");
 
 export const Default: Story = {};
 
-export const WithAcceptedTypes: Story = { args: { accept: "image/png" } };
+export const WithAcceptedTypes: Story = {
+  args: { accept: "image/png" },
+  render: (props) => {
+    const [files, setFiles] = useState<FileList | null>(null);
 
-export const Multiple: Story = { args: { multiple: true } };
+    return (
+      <Section>
+        <FileDropZone {...props} onChange={setFiles}>
+          <IconUpload />
+          <Heading>Datei ablegen</Heading>
+          <Text>Erlaubtes Dateiformat ist image/png.</Text>
+          <FileField name="file" onChange={setFiles}>
+            <Button>Datei auswählen</Button>
+          </FileField>
+        </FileDropZone>
+        <FileCardList>
+          {[...(files ?? [])].map((f) => (
+            <FileCard name={f.name} key={f.name} />
+          ))}
+        </FileCardList>
+      </Section>
+    );
+  },
+};
 
-export const WithSize: Story = { args: { size: 10 } };
+export const Multiple: Story = {
+  args: { multiple: true },
+  render: (props) => {
+    const [files, setFiles] = useState<FileList | null>(null);
+
+    return (
+      <Section>
+        <FileDropZone {...props} onChange={setFiles}>
+          <IconUpload />
+          <Heading>Dateien ablegen</Heading>
+          <FileField name="file" onChange={setFiles}>
+            <Button>Dateien auswählen</Button>
+          </FileField>
+        </FileDropZone>
+        <FileCardList>
+          {[...(files ?? [])].map((f) => (
+            <FileCard name={f.name} key={f.name} />
+          ))}
+        </FileCardList>
+      </Section>
+    );
+  },
+};
 
 export const WithReactHookForm: Story = {
   render: (props) => {
@@ -53,18 +109,25 @@ export const WithReactHookForm: Story = {
     return (
       <Form form={form} onSubmit={submitAction}>
         <Section>
-          <Field name="file">
-            <FileDropZone
-              {...props}
-              onChange={(f) => form.setValue("file", f)}
-            />
-          </Field>
+          <FileDropZone {...props} onChange={(f) => form.setValue("file", f)}>
+            <IconUpload />
+            <Heading>Datei ablegen</Heading>
+            <Field name="file" rules={{ required: "Please choose a file" }}>
+              <FileField name="file">
+                <Button>Datei auswählen</Button>
+              </FileField>
+            </Field>
+          </FileDropZone>
+
           <FileCardList>
             {[...(form.watch("file") ?? [])].map((f) => (
               <FileCard name={f.name} key={f.name} />
             ))}
           </FileCardList>
         </Section>
+        <ActionGroup>
+          <Button type="submit">Upload</Button>
+        </ActionGroup>
       </Form>
     );
   },
