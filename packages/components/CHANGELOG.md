@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.381](https://github.com/mittwald/flow/compare/0.1.0-alpha.380...0.1.0-alpha.381) (2024-12-17)
+
+### Bug Fixes
+
+- tabler icon chunks ([#1077](https://github.com/mittwald/flow/issues/1077))
+  ([7d4ba58](https://github.com/mittwald/flow/commit/7d4ba58545e2f128fc7e8f8f99f0e5784089860c))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.380](https://github.com/mittwald/flow/compare/0.1.0-alpha.379...0.1.0-alpha.380) (2024-12-12)
 
 ### Bug Fixes
