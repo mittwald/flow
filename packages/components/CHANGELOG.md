@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.384](https://github.com/mittwald/flow/compare/0.1.0-alpha.383...0.1.0-alpha.384) (2024-12-18)
+
+### Bug Fixes
+
+- **List:** fix responsive list item
+  ([#1059](https://github.com/mittwald/flow/issues/1059))
+  ([a8fc2db](https://github.com/mittwald/flow/commit/a8fc2db6e0c19b77ebcd6c103770b301c836a780))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.383](https://github.com/mittwald/flow/compare/0.1.0-alpha.382...0.1.0-alpha.383) (2024-12-18)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
