@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.386](https://github.com/mittwald/flow/compare/0.1.0-alpha.385...0.1.0-alpha.386) (2024-12-18)
+
+### Features
+
+- **List:** add auto submit to search
+  ([#1069](https://github.com/mittwald/flow/issues/1069))
+  ([93bb0d6](https://github.com/mittwald/flow/commit/93bb0d6d8f6b87347e7aad1e61e5a99ad2556b4c))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.385](https://github.com/mittwald/flow/compare/0.1.0-alpha.384...0.1.0-alpha.385) (2024-12-18)
 
 ### Features
