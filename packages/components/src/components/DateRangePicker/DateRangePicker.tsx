@@ -14,6 +14,7 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface DateRangePickerProps<T extends Aria.DateValue>
   extends PropsWithChildren<Omit<Aria.DateRangePickerProps<T>, "children">> {
+  /** The error message that is displayed below the input. */
   errorMessage?: ReactNode;
 }
 

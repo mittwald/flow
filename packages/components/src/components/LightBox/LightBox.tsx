@@ -20,7 +20,12 @@ export interface LightBoxProps
   extends PropsWithChildren,
     FlowComponentProps,
     PropsWithClassName {
+  /** An overlay controller to control the light box state. */
   controller?: OverlayController;
+  /**
+   * Whether content can be displayed larger than the available space in the
+   * screen. @default true
+   */
   fitScreen?: boolean;
 }
 

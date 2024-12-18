@@ -56,6 +56,7 @@ import type { SegmentProps } from "@/components/SegmentedControl/components/Segm
 import type { FileCardProps } from "@/components/FileCard";
 import type { FileFieldProps } from "@/components/FileField";
 import type { AlignProps } from "@/components/Align";
+import type { CountryOptionsProps } from "@/components/Select/components/CountryOptions";
 
 export * from "./types";
 
@@ -80,6 +81,7 @@ export interface FlowComponentPropsTypes {
   ContextualHelpTrigger: OverlayTriggerProps;
   CopyButton: CopyButtonProps;
   CounterBadge: CounterBadgeProps;
+  CountryOptions: CountryOptionsProps;
   DatePicker: DatePickerProps<Aria.DateValue>;
   DateRangePicker: DateRangePickerProps<Aria.DateValue>;
   FieldDescription: FieldDescriptionProps;
@@ -146,6 +148,7 @@ const propsContextSupportingComponentsMap: Record<
   ContextualHelpTrigger: true,
   CopyButton: true,
   CounterBadge: true,
+  CountryOptions: true,
   DatePicker: true,
   DateRangePicker: true,
   FieldDescription: true,

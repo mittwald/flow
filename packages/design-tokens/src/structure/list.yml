@@ -1,5 +1,5 @@
 list:
-  content-to-content-spacing:
+  spacing:
     value: "{size-px.s}"
   block-to-block-spacing:
     value: "{size-px.m}"
@@ -13,8 +13,10 @@ list-item:
     value: "{border-width.100}"
   border-style:
     value: "{border-style.default}"
-  content-to-content-spacing:
+  spacing:
     value: "{size-px.m}"
+  avatar-to-title-spacing:
+    value: "{size-px.s}"
   background-color:
     default:
       value: "{neutral.color.200}"

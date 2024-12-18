@@ -15,7 +15,7 @@ badge:
     value: "{size-rem.xs}"
   padding-x:
     value: "{size-rem.s}"
-  content-to-content-spacing:
+  spacing:
     value: "{size-rem.xs}"
 
   # Neutral
@@ -30,8 +30,6 @@ badge:
       value: "{color.gray.500}"
   neutral-content-color:
     default:
-      value: "{color.gray.900}"
-    hover:
       value: "{color.gray.900}"
     pressed:
       value: "{color.gray.1000}"
@@ -53,8 +51,6 @@ badge:
   blue-content-color:
     default:
       value: "{color.hosting-blue.900}"
-    hover:
-      value: "{color.hosting-blue.900}"
     pressed:
       value: "{color.hosting-blue.1000}"
   blue-scope-background-color:
@@ -74,8 +70,6 @@ badge:
       value: "{color.mittwald-navy.300}"
   navy-content-color:
     default:
-      value: "{color.mittwald-navy.900}"
-    hover:
       value: "{color.mittwald-navy.900}"
     pressed:
       value: "{color.mittwald-navy.1000}"
@@ -97,8 +91,6 @@ badge:
   violet-content-color:
     default:
       value: "{color.soft-contrast-violet.900}"
-    hover:
-      value: "{color.soft-contrast-violet.900}"
     pressed:
       value: "{color.soft-contrast-violet.1000}"
   violet-scope-background-color:
@@ -118,8 +110,6 @@ badge:
       value: "{color.super-teal.300}"
   teal-content-color:
     default:
-      value: "{color.super-teal.900}"
-    hover:
       value: "{color.super-teal.900}"
     pressed:
       value: "{color.super-teal.1000}"
@@ -141,8 +131,6 @@ badge:
   lilac-content-color:
     default:
       value: "{color.bright-lilac.900}"
-    hover:
-      value: "{color.bright-lilac.900}"
     pressed:
       value: "{color.bright-lilac.1000}"
   lilac-scope-background-color:
@@ -162,8 +150,6 @@ badge:
       value: "{color.amaranth-red.300}"
   red-content-color:
     default:
-      value: "{color.amaranth-red.900}"
-    hover:
       value: "{color.amaranth-red.900}"
     pressed:
       value: "{color.amaranth-red.1000}"
@@ -185,8 +171,6 @@ badge:
   green-content-color:
     default:
       value: "{color.espelkamp-green.900}"
-    hover:
-      value: "{color.espelkamp-green.900}"
     pressed:
       value: "{color.espelkamp-green.1000}"
   green-scope-background-color:
@@ -206,8 +190,6 @@ badge:
       value: "{color.royal-orange.300}"
   orange-content-color:
     default:
-      value: "{color.royal-orange.900}"
-    hover:
       value: "{color.royal-orange.900}"
     pressed:
       value: "{color.royal-orange.1000}"
@@ -229,8 +211,6 @@ badge:
   dark-content-color:
     default:
       value: "{dark.color.800}"
-    hover:
-      value: "{dark.color.800}"
     pressed:
       value: "{dark.color.800}"
   dark-scope-background-color:
@@ -251,8 +231,6 @@ badge:
   light-content-color:
     default:
       value: "{light.color.800}"
-    hover:
-      value: "{light.color.800}"
     pressed:
       value: "{light.color.800}"
   light-scope-background-color:
@@ -264,9 +242,9 @@ badge:
   disabled-border-color:
     value: "{disabled-outline-border-color}"
   disabled-background-color:
-    value: "{disabled-soft-background-color}"
+    value: "{disabled-outline-background-color}"
   disabled-content-color:
-    value: "{disabled-soft-content-color}"
+    value: "{disabled-outline-content-color}"
   disabled-scope-background-color:
     value: "{disabled-solid-background-color}"
   disabled-scope-content-color:

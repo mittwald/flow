@@ -1,7 +1,4 @@
 alert-badge:
-  icon-to-text-spacing:
-    value: "{size-rem.xs}"
-
   # Info
   info-background-color:
     value: "{info-soft-background-color.default}"

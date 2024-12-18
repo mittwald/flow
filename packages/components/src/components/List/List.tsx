@@ -43,6 +43,7 @@ export interface ListProps<T>
       | "filters"
       | "sorting"
     > {
+  /** The number of items to be displayed on one page. */
   batchSize?: number;
 }
 

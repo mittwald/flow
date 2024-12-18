@@ -20,6 +20,7 @@ export interface FileFieldProps
       Aria.TextFieldProps,
       "isRequired" | "isInvalid" | "validationBehavior" | "isDisabled"
     > {
+  /** Handler that is called when the file input changes. */
   onChange?: FileInputOnChangeHandler;
 }
 

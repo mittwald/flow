@@ -5,6 +5,7 @@ import clsx from "clsx";
 import styles from "./Table.module.scss";
 
 export type TableProps = Aria.TableProps & {
+  /** The vertical alignment of the table cells content. */
   verticalAlign?: "top" | "middle";
 };
 export const Table: FC<TableProps> = (props) => {

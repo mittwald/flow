@@ -6,26 +6,49 @@ import { PropsContextProvider } from "@/lib/propsContext";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import styles from "../../ContextMenu.module.scss";
+import type { ContextMenuSelectionMode } from "@/components/ContextMenu/lib";
+import {
+  getAriaSelectionMode,
+  getCloseOverlayType,
+  getMenuItemSelectionVariant,
+} from "@/components/ContextMenu/lib";
+import { Action } from "@/components/Action";
 
-export type ContextMenuSectionProps = PropsWithChildren & FlowComponentProps;
+export type ContextMenuSectionProps = PropsWithChildren &
+  FlowComponentProps & {
+    selectionMode?: ContextMenuSelectionMode;
+  };
 export const ContextMenuSection = flowComponent(
   "ContextMenuSection",
   (props) => {
-    const { children } = props;
+    const { children, selectionMode, ...rest } = props;
+
+    const selectionVariant = getMenuItemSelectionVariant(selectionMode);
 
     const propsContext: PropsContext = {
       Heading: {
         level: 5,
         wrapWith: <Aria.Header />,
       },
+      MenuItem: {
+        selectionVariant,
+      },
     };
 
     return (
-      <Aria.Section className={styles.section}>
+      <Aria.MenuSection
+        {...rest}
+        selectionMode={getAriaSelectionMode(selectionMode)}
+        className={styles.section}
+      >
         <PropsContextProvider props={propsContext} mergeInParentContext>
-          {children}
+          <Action skip>
+            <Action closeOverlay={getCloseOverlayType(selectionMode)}>
+              {children}
+            </Action>
+          </Action>
         </PropsContextProvider>
-      </Aria.Section>
+      </Aria.MenuSection>
     );
   },
 );
