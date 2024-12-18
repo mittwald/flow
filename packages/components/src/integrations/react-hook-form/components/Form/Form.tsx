@@ -1,5 +1,6 @@
 import type {
   ComponentProps,
+  ComponentType,
   FormEventHandler,
   PropsWithChildren,
 } from "react";
@@ -18,10 +19,17 @@ interface Props<F extends FieldValues>
     PropsWithChildren {
   form: UseFormReturn<F>;
   onSubmit: FormOnSubmitHandler<F>;
+  formComponent?: ComponentType<"form">;
 }
 
 export function Form<F extends FieldValues>(props: Props<F>) {
-  const { form, children, onSubmit, ...formProps } = props;
+  const {
+    form,
+    children,
+    onSubmit,
+    formComponent: FormView = (p) => <form {...p} />,
+    ...formProps
+  } = props;
 
   const isAsyncSubmit = useRef(false);
 
@@ -45,9 +53,9 @@ export function Form<F extends FieldValues>(props: Props<F>) {
   return (
     <FormContextProvider value={{ form }}>
       <SubmitButtonStateProvider isAsyncSubmit={isAsyncSubmit}>
-        <form {...formProps} onSubmit={handleOnSubmit}>
+        <FormView {...formProps} onSubmit={handleOnSubmit}>
           {children}
-        </form>
+        </FormView>
         <AutoFormResetEffect />
       </SubmitButtonStateProvider>
     </FormContextProvider>

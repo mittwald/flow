@@ -1,32 +1,37 @@
 import type { FC, KeyboardEvent } from "react";
-import React, { createElement, useEffect, useState } from "react";
-import type { PropsWithClassName } from "@/lib/types/props";
-import type { Search } from "@/components/List/model/search/Search";
-import type { SearchFieldRenderComponent } from "@/components/List/model/search/types";
+import React, { useEffect, useState } from "react";
 import { useOnChange } from "@/lib/hooks";
 import { SearchField as SearchFieldComponent } from "@/components/SearchField";
+import type {
+  SearchShape,
+  SearchValue,
+} from "@/components/List/model/search/types";
 
-interface Props extends PropsWithClassName {
-  search: Search<never>;
+type TextFieldProps = SearchShape<never>["textFieldProps"];
+
+interface Props extends TextFieldProps {
+  onChange?: (value: SearchValue) => void;
+  value?: SearchValue;
+  autoSubmit?: boolean;
 }
 
 const autoSubmitTimeout = 800;
 
-const DefaultSearchFieldRender: SearchFieldRenderComponent = (props) => {
-  const { className, onChange, value, autoSubmit, ...searchFieldProps } = props;
+export const SearchField: FC<Props> = (props) => {
+  const { onChange, value, autoSubmit, ...textFieldProps } = props;
 
   const [searchString, setSearchString] = useState(value ?? "");
 
   const submitSearch = () => {
     if (searchString.trim() === "") {
-      onChange(undefined);
+      onChange?.(undefined);
     } else {
-      onChange(searchString);
+      onChange?.(searchString);
     }
   };
 
   useEffect(() => {
-    if (autoSubmit) {
+    if (value) {
       const timeout = setTimeout(() => submitSearch(), autoSubmitTimeout);
       return () => clearTimeout(timeout);
     }
@@ -37,7 +42,7 @@ const DefaultSearchFieldRender: SearchFieldRenderComponent = (props) => {
   }, [searchString]);
 
   const clearSearch = () => {
-    onChange(undefined);
+    onChange?.(undefined);
     setSearchString("");
   };
 
@@ -51,24 +56,11 @@ const DefaultSearchFieldRender: SearchFieldRenderComponent = (props) => {
 
   return (
     <SearchFieldComponent
-      className={className}
       value={searchString}
       onKeyUp={handleKeyPress}
       onChange={(value) => setSearchString(value)}
       onClear={clearSearch}
-      {...searchFieldProps}
+      {...textFieldProps}
     />
   );
-};
-
-export const SearchField: FC<Props> = (props) => {
-  const { className, search } = props;
-  const render = search.render ?? DefaultSearchFieldRender;
-
-  return createElement(render, {
-    className,
-    value: search.value,
-    onChange: search.setValue.bind(search),
-    ...search.textFieldProps,
-  });
 };

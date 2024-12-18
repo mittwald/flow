@@ -1,37 +1,33 @@
-import type { FC } from "react";
-import React from "react";
-import { useList } from "@/components/List/hooks/useList";
-import styles from "./ActiveFilters.module.scss";
-import { Text } from "@/components/Text";
+import type { FC, PropsWithChildren } from "react";
+import React, { Children } from "react";
+import styles from "./ActiveFilterList.module.scss";
 import { Button } from "@/components/Button";
 import { IconDelete, IconSave } from "@/components/Icon/components/icons";
-import locales from "../../../../locales/*.locale.json";
+import locales from "../../../locales/*.locale.json";
 import { Translate } from "@/lib/react/components/Translate";
-import { observer } from "mobx-react-lite";
 import { useLocalizedStringFormatter } from "react-aria";
 import { Tooltip, TooltipTrigger } from "@/components/Tooltip";
 import { Icon } from "@/components/Icon";
 import { IconArrowBackUp } from "@tabler/icons-react";
-import { Badge } from "@/components/Badge";
 
-export const ActiveFilters: FC = observer(() => {
-  const list = useList();
+interface Props extends PropsWithChildren {
+  onResetFilters?: () => void;
+  onClearFilters?: () => void;
+  onStoreFilterDefaultSettings?: () => void;
+  someFiltersChanged?: boolean;
+}
+
+export const ActiveFilterList: FC<Props> = (props) => {
+  const {
+    onResetFilters,
+    onClearFilters,
+    onStoreFilterDefaultSettings,
+    someFiltersChanged,
+    children,
+  } = props;
   const formatter = useLocalizedStringFormatter(locales);
 
-  const activeFilterValues = list.filters
-    .flatMap((f) => f.values)
-    .filter((v) => v.isActive);
-
-  const activeFilters = activeFilterValues.map((v) => (
-    <Badge key={v.id} onClose={() => v.deactivate()}>
-      <Text>{v.render()}</Text>
-    </Badge>
-  ));
-
-  const someFiltersChanged =
-    list.filters.filter((f) => f.hasChanged()).length > 0;
-
-  const storeFiltersButton = list.supportsSettingsStorage &&
+  const storeFiltersButton = onStoreFilterDefaultSettings &&
     someFiltersChanged && (
       <TooltipTrigger>
         <Tooltip>
@@ -41,7 +37,7 @@ export const ActiveFilters: FC = observer(() => {
           size="s"
           variant="plain"
           color="secondary"
-          onPress={() => list.storeFilterDefaultSettings()}
+          onPress={onStoreFilterDefaultSettings}
           aria-label={formatter.format("list.filters.store")}
         >
           <IconSave />
@@ -58,7 +54,7 @@ export const ActiveFilters: FC = observer(() => {
         size="s"
         variant="plain"
         color="secondary"
-        onPress={() => list.resetFilters()}
+        onPress={onResetFilters}
         aria-label={formatter.format("list.filters.reset")}
       >
         <Icon>
@@ -68,8 +64,8 @@ export const ActiveFilters: FC = observer(() => {
     </TooltipTrigger>
   ) : undefined;
 
-  const removeAllFiltersButton =
-    activeFilters.length > 0 ? (
+  const clearFiltersButton =
+    Children.count(children) > 0 ? (
       <TooltipTrigger>
         <Tooltip>
           <Translate locales={locales}>list.filters.clear</Translate>
@@ -78,7 +74,7 @@ export const ActiveFilters: FC = observer(() => {
           size="s"
           variant="plain"
           color="secondary"
-          onPress={() => list.clearFilters()}
+          onPress={onClearFilters}
         >
           <Icon>
             <IconDelete />
@@ -88,7 +84,7 @@ export const ActiveFilters: FC = observer(() => {
     ) : undefined;
 
   if (
-    activeFilters.length === 0 &&
+    Children.count(children) === 0 &&
     !storeFiltersButton &&
     !resetFiltersButton
   ) {
@@ -97,12 +93,12 @@ export const ActiveFilters: FC = observer(() => {
 
   return (
     <div className={styles.activeFilters}>
-      {activeFilters}
+      {children}
       {storeFiltersButton}
       {resetFiltersButton}
-      {removeAllFiltersButton}
+      {clearFiltersButton}
     </div>
   );
-});
+};
 
-export default ActiveFilters;
+export default ActiveFilterList;

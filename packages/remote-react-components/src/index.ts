@@ -18,4 +18,3 @@ export * from "./CodeBlock";
 export * from "./TextField";
 export * from "./List";
 export * from "./ListItem";
-export * from "./ListStaticData";

@@ -1,15 +1,11 @@
 "use client";
-import {
-  List,
-  ListItem,
-  ListStaticData,
-} from "@mittwald/flow-remote-react-components";
+import { Alert, Heading, Text } from "@mittwald/flow-remote-react-components";
 
 export default function Page() {
   return (
-    <List>
-      <ListStaticData data={[{ foo: "bar" }]} />
-      <ListItem></ListItem>
-    </List>
+    <Alert>
+      <Heading>Alert title</Heading>
+      <Text>Alert text</Text>
+    </Alert>
   );
 }

@@ -1,6 +1,6 @@
 @use "@/styles/mixins/focus";
 
-.sortingPickerItem {
+.sortingPickerMenuItem {
   border-radius: var(--context-menu--corner-radius);
   padding: var(--context-menu--padding);
   display: flex;
