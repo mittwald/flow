@@ -1,6 +1,5 @@
 import type List from "@/components/List/model/List";
 import type {
-  SearchFieldRenderComponent,
   SearchShape,
   SearchValue,
 } from "@/components/List/model/search/types";
@@ -8,16 +7,16 @@ import type { InitialTableState } from "@tanstack/react-table";
 
 export class Search<T> {
   public readonly list: List<T>;
-  public readonly render?: SearchFieldRenderComponent;
   public readonly textFieldProps: SearchShape<T>["textFieldProps"];
   private onUpdateCallbacks = new Set<() => unknown>();
   private readonly defaultValue?: string;
+  private readonly autoSubmit?: boolean;
 
   public constructor(list: List<T>, searchShape: SearchShape<T>) {
     this.list = list;
-    this.render = searchShape.render;
     this.textFieldProps = searchShape.textFieldProps;
     this.defaultValue = searchShape.defaultValue;
+    this.autoSubmit = searchShape.autoSubmit;
   }
 
   public get value(): SearchValue {

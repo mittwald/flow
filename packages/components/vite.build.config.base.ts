@@ -61,6 +61,7 @@ export const buildConfig = (opts: Options) => {
     FileField: "./src/components/FileField/index.ts",
     FileCard: "./src/components/FileCard/index.ts",
     FileCardList: "./src/components/FileCardList/index.ts",
+    Fragment: "./src/components/Fragment/index.ts",
     Header: "./src/components/Header/index.ts",
     HeaderNavigation: "./src/components/HeaderNavigation/index.ts",
     Heading: "./src/components/Heading/index.ts",
@@ -78,6 +79,7 @@ export const buildConfig = (opts: Options) => {
     List: "./src/components/List/index.ts",
     "List/ListLoaderAsyncResource":
       "./src/components/List/setupComponents/ListLoaderAsyncResource.ts",
+    "List/Views": "./src/components/List/viewComponents/index.ts",
     LoadingSpinner: "./src/components/LoadingSpinner/index.ts",
     Markdown: "./src/components/Markdown/index.ts",
     MenuItem: "./src/components/MenuItem/index.ts",
