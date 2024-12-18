@@ -35,7 +35,7 @@
       border-block-end-width: var(--table--header-border-width);
     }
 
-    &.hidden {
+    &:empty {
       display: none;
     }
   }

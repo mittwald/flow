@@ -95,10 +95,7 @@ export const WithFooter: Story = {
 export const WithRowHeader: Story = {
   render: (props) => (
     <Table {...props} aria-label="Order overview">
-      <TableHeader hidden>
-        <TableColumn>Article</TableColumn>
-        <TableColumn>Price</TableColumn>
-      </TableHeader>
+      <TableHeader></TableHeader>
       <TableBody>
         <TableRow>
           <TableCell rowHeader>proSpace (2 vCPU / 4 GB RAM)</TableCell>
