@@ -10,12 +10,14 @@ interface Props extends PropsWithClassName {
   search: Search<never>;
 }
 
+const autoSubmitTimeout = 800;
+
 const DefaultSearchFieldRender: SearchFieldRenderComponent = (props) => {
   const { className, onChange, value, autoSubmit, ...searchFieldProps } = props;
 
   const [searchString, setSearchString] = useState(value ?? "");
 
-  const submitSearch = (searchString: string) => {
+  const submitSearch = () => {
     if (searchString.trim() === "") {
       onChange(undefined);
     } else {
@@ -25,10 +27,10 @@ const DefaultSearchFieldRender: SearchFieldRenderComponent = (props) => {
 
   useEffect(() => {
     if (autoSubmit) {
-      const timeOut = setTimeout(() => submitSearch(searchString), 800);
-      return () => clearTimeout(timeOut);
+      const timeout = setTimeout(() => submitSearch(), autoSubmitTimeout);
+      return () => clearTimeout(timeout);
     }
-  }, [searchString]);
+  }, [searchString, autoSubmit]);
 
   useOnChange(value, () => {
     setSearchString(value ?? "");
@@ -41,7 +43,7 @@ const DefaultSearchFieldRender: SearchFieldRenderComponent = (props) => {
 
   const handleKeyPress = (e: KeyboardEvent) => {
     if (e.key === "Enter") {
-      submitSearch(searchString);
+      submitSearch();
     } else if (e.key === "Escape") {
       clearSearch();
     }
