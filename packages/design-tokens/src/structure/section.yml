@@ -10,7 +10,7 @@ section:
   content-to-content-spacing:
     value: "{size-rem.m}"
   sub-heading-spacing:
-    value: "{size-rem.s}"
+    value: "{size-rem.m}"
 section-header:
   action-to-action-spacing:
     value: "{size-rem.s}"
