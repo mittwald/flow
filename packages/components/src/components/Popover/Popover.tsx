@@ -9,11 +9,18 @@ import styles from "./Popover.module.scss";
 
 export interface PopoverProps
   extends PropsWithChildren<Omit<Aria.PopoverProps, "children">> {
+  /**
+   * Whether the popover should display a tip, pointing towards the trigger
+   * element.
+   */
   withTip?: boolean;
+  /** Whether the popover contains a dialog. */
   isDialogContent?: boolean;
+  /** An overlay controller to control the popover state. */
   controller?: OverlayController;
+  /** A fixed width for the popover. */
   width?: string | number;
-  /** @default "m" */
+  /** The popovers padding. @default "m" */
   padding?: "s" | "m";
 }
 

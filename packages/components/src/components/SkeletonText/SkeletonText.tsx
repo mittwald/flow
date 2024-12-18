@@ -3,6 +3,7 @@ import React from "react";
 import styles from "./SkeletonText.module.scss";
 
 export interface SkeletonTextProps extends ComponentProps<"div"> {
+  /** The width of the skeleton text. */
   width?: string;
 }
 

@@ -16,18 +16,21 @@ import { useAriaAnnounceActionState } from "@/components/Action/lib/ariaLive";
 export interface ButtonProps
   extends PropsWithChildren<Aria.ButtonProps>,
     FlowComponentProps {
+  /** Slot for button placement in action groups. */
   slot?: string;
-  /** @default "primary" */
+  /** The color of the button. @default "primary" */
   color?: "primary" | "accent" | "secondary" | "danger" | "dark" | "light";
-  /** @default "solid" */
+  /** The visual variant of the button. @default "solid" */
   variant?: "plain" | "solid" | "soft" | "outline";
-  /** @default "m" */
+  /** The size of the button. @default "m" */
   size?: "m" | "s";
-
+  /** Disables button but keeps it focusable. */
   "aria-disabled"?: boolean;
-
+  /** Whether the button is in a pending state. */
   isPending?: boolean;
+  /** Whether the button is in a succeeded state. */
   isSucceeded?: boolean;
+  /** Whether the button is in a failed state. */
   isFailed?: boolean;
   /** @internal */
   unstyled?: boolean;

@@ -9,8 +9,9 @@ import * as Aria from "react-aria-components";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 
 export interface HeadingProps extends Aria.HeadingProps, FlowComponentProps {
+  /** The font size of the heading. */
   size?: "xs" | "s" | "m" | "l" | "xl" | "xxl";
-  /** @default "primary" */
+  /** The color of the heading. @default "primary" */
   color?: "primary" | "dark" | "light";
 }
 

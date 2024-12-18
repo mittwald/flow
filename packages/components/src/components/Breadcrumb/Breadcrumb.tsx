@@ -11,7 +11,7 @@ import { PropsContextProvider } from "@/lib/propsContext";
 export interface BreadcrumbProps
   extends Omit<Aria.BreadcrumbsProps<BreadcrumbItemProps>, "children">,
     PropsWithChildren {
-  /** @default "primary" */
+  /** The color of the breadcrumb. @default "primary" */
   color?: "primary" | "dark" | "light";
 }
 

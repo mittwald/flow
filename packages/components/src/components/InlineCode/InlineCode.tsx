@@ -6,6 +6,7 @@ import { ClearPropsContext } from "@/lib/propsContext";
 
 export interface InlineCodeProps
   extends PropsWithChildren<ComponentProps<"code">> {
+  /** The color schema of the inline code component. */
   color?: "default" | "light" | "dark";
 }
 

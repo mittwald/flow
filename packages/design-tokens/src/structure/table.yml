@@ -11,8 +11,6 @@ table:
     value: "{size-px.m}"
   padding-y:
     value: "{size-px.s}"
-  header-color:
-    value: "{heading.color}"
   header-font-weight:
     value: "{font-weight.bold}"
   header-border-width:

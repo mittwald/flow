@@ -1,37 +1,37 @@
 .header {
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--list--spacing);
+
+  .pickerListAndSearch {
     display: flex;
-    flex-direction: column;
-    row-gap: var(--list--spacing);
+    gap: var(--list--block-to-block-spacing);
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap-reverse;
+  }
 
-    .pickerListAndSearch {
-        display: flex;
-        gap: var(--list--block-to-block-spacing);
-        align-items: center;
-        justify-content: space-between;
-        flex-wrap: wrap-reverse;
-    }
+  .pickerList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--list--spacing);
+  }
 
-    .pickerList {
-        display: flex;
-        flex-grow: 9999;
-        flex-wrap: wrap;
-        gap: var(--list--spacing);
-    }
+  .searchAndActions {
+    display: flex;
+    flex-grow: 1;
+    gap: var(--list--spacing);
+    flex-wrap: wrap-reverse;
+    justify-content: end;
+  }
 
-    .searchAndActions {
-        display: flex;
-        flex-grow: 1;
-        gap: var(--list--spacing);
-        flex-wrap: wrap-reverse;
-        justify-content: space-between;
-    }
+  .searchField {
+    max-width: 180px;
+    flex-grow: 1;
+    transition: max-width var(--transition--duration--default);
 
-    .searchField {
-        width: 180px;
-        flex-grow: 1;
+    &:has(input:focus) {
+      max-width: 600px;
     }
-
-    .actions {
-        margin-left: auto;
-    }
+  }
 }

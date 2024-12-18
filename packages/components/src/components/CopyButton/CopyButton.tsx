@@ -16,11 +16,18 @@ import { Action } from "@/components/Action";
 export interface CopyButtonProps
   extends Omit<ButtonProps, "onPress" | "aria-label" | "render">,
     FlowComponentProps {
+  /** The text to copy. */
   text: ReactNode;
 }
 
 export const CopyButton = flowComponent("CopyButton", (props) => {
-  const { text, refProp: ref, variant = "plain", ...buttonProps } = props;
+  const {
+    text,
+    refProp: ref,
+    variant = "plain",
+    color = "secondary",
+    ...buttonProps
+  } = props;
 
   const stringFormatter = useLocalizedStringFormatter(locales);
 
@@ -39,6 +46,7 @@ export const CopyButton = flowComponent("CopyButton", (props) => {
             {...buttonProps}
             ref={ref}
             variant={variant}
+            color={color}
           >
             <IconCopy />
           </Button>

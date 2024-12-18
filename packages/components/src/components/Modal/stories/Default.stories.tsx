@@ -14,6 +14,7 @@ import { asyncLongFunction } from "@/components/Button/stories/lib";
 import { Field, Form } from "@/integrations/react-hook-form";
 import { useForm } from "react-hook-form";
 import { action } from "@storybook/addon-actions";
+import { Section } from "@/components/Section";
 
 const meta: Meta<typeof Modal> = {
   title: "Overlays/Modal",
@@ -38,12 +39,15 @@ const meta: Meta<typeof Modal> = {
       >
         <Heading>New Customer</Heading>
         <Content>
-          <Text>
-            Create a new customer to manage your projects, members and payments.
-          </Text>
-          <TextField>
-            <Label>Customer name</Label>
-          </TextField>
+          <Section>
+            <Text>
+              Create a new customer to manage your projects, members and
+              payments.
+            </Text>
+            <TextField>
+              <Label>Customer name</Label>
+            </TextField>
+          </Section>
         </Content>
         <ActionGroup>
           <Action closeOverlay="Modal">
