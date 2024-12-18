@@ -1,24 +1,67 @@
+/* eslint-disable */
+/* prettier-ignore */
+/* This file is auto-generated with the remote-components-generator */
+import { createRemoteElement } from "@remote-dom/core/elements";
 import type { ButtonProps } from "@mittwald/flow-react-components/Button";
-import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-
 export type { ButtonProps } from "@mittwald/flow-react-components/Button";
 
-export class RemoteButtonElement extends FlowRemoteElement<ButtonProps> {
-  static get remoteProperties() {
-    return {
-      color: {},
-      variant: {},
-      type: {},
-      isPending: {},
-    };
-  }
-
-  static get remoteEvents() {
-    return {
-      press: {},
-    };
-  }
-}
+export const RemoteButtonElement = createRemoteElement<ButtonProps>({
+  properties: {
+    slot: {},
+    color: {},
+    variant: {},
+    size: {},
+    "aria-disabled": {},
+    isPending: {},
+    isSucceeded: {},
+    isFailed: {},
+    unstyled: {},
+    ariaSlot: {},
+    form: {},
+    formAction: {},
+    formEncType: {},
+    formMethod: {},
+    formNoValidate: {},
+    formTarget: {},
+    name: {},
+    value: {},
+    "aria-label": {},
+    "aria-labelledby": {},
+    "aria-describedby": {},
+    "aria-details": {},
+    "aria-haspopup": {},
+    isDisabled: {},
+    autoFocus: {},
+    excludeFromTabOrder: {},
+    id: {},
+    type: {},
+    "aria-controls": {},
+    "aria-expanded": {},
+    "aria-pressed": {},
+    preventFocusOnPress: {},
+    children: {},
+    className: {},
+    style: {},
+    wrapWith: {},
+    ref: {},
+    key: {},
+  },
+  events: {
+    focus: {},
+    blur: {},
+    focusChange: {},
+    keyDown: {},
+    keyUp: {},
+    press: {},
+    pressStart: {},
+    pressEnd: {},
+    pressChange: {},
+    pressUp: {},
+    hoverStart: {},
+    hoverEnd: {},
+    hoverChange: {},
+  },
+});
 
 declare global {
   interface HTMLElementTagNameMap {

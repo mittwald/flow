@@ -5,7 +5,7 @@
     "incremental": true,
     "jsx": "react",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "module": "ESNext",
+    "module": "esnext",
     "moduleResolution": "Bundler",
     "skipLibCheck": true,
     "strict": true,
