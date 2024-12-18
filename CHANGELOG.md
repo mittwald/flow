@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.390](https://github.com/mittwald/flow/compare/0.1.0-alpha.389...0.1.0-alpha.390) (2024-12-18)
+
+### Features
+
+- **ContextMenu:** support switch and selection mode in context menu section
+  ([#1051](https://github.com/mittwald/flow/issues/1051))
+  ([42c750e](https://github.com/mittwald/flow/commit/42c750e92b17ace552af2d08a41d41b791bd05ef))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.389](https://github.com/mittwald/flow/compare/0.1.0-alpha.388...0.1.0-alpha.389) (2024-12-18)
 
 **Note:** Version bump only for package @mittwald/flow-project
