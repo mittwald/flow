@@ -1,7 +1,7 @@
 .header {
   display: flex;
   flex-direction: column;
-  row-gap: var(--list--content-to-content-spacing);
+  row-gap: var(--list--spacing);
 
   .pickerListAndSearch {
     display: flex;
@@ -14,13 +14,13 @@
   .pickerList {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--list--content-to-content-spacing);
+    gap: var(--list--spacing);
   }
 
   .searchAndActions {
     display: flex;
     flex-grow: 1;
-    gap: var(--list--content-to-content-spacing);
+    gap: var(--list--spacing);
     flex-wrap: wrap-reverse;
     justify-content: end;
   }
