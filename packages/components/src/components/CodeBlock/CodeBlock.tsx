@@ -10,8 +10,11 @@ import styles from "./CodeBlock.module.scss";
 export interface CodeBlockProps
   extends Omit<SyntaxHighlighterProps, "children">,
     PropsWithClassName {
+  /** Adds a copy icon to the code block to copy its content. */
   copyable?: boolean;
+  /** The color of the code block. @default "default" */
   color?: "default" | "light" | "dark";
+  /** The code to display inside the code block. */
   code: string | string[];
 }
 

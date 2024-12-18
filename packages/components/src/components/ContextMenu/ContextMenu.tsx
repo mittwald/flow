@@ -29,7 +29,9 @@ export interface ContextMenuProps
       | "disabledKeys"
     >,
     FlowComponentProps {
+  /** The type of selection that is allowed in the context menu. */
   selectionMode?: ContextMenuSelectionMode;
+  /** Sets the context menu to a fixed width. */
   width?: string | number;
 }
 

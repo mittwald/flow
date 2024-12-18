@@ -7,7 +7,7 @@ import { PropsContextProvider } from "@/lib/propsContext";
 
 export interface IllustratedMessageProps
   extends PropsWithChildren<ComponentProps<"div">> {
-  /** @default "primary" */
+  /** The color of the illustrated message. @default "primary" */
   color?: "primary" | "danger" | "light" | "dark";
 }
 

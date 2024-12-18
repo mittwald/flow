@@ -13,6 +13,10 @@ export interface TextAreaProps
   extends Omit<TextFieldBaseProps, "input">,
     Pick<Aria.TextAreaProps, "placeholder" | "rows">,
     FlowComponentProps {
+  /**
+   * Whether the text area should grow if its content gets longer than its
+   * initial height.
+   */
   autoResizeMaxRows?: number;
 }
 

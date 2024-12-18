@@ -3,6 +3,212 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.387](https://github.com/mittwald/flow/compare/0.1.0-alpha.386...0.1.0-alpha.387) (2024-12-18)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.386](https://github.com/mittwald/flow/compare/0.1.0-alpha.385...0.1.0-alpha.386) (2024-12-18)
+
+### Features
+
+- **List:** add auto submit to search
+  ([#1069](https://github.com/mittwald/flow/issues/1069))
+  ([93bb0d6](https://github.com/mittwald/flow/commit/93bb0d6d8f6b87347e7aad1e61e5a99ad2556b4c))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.385](https://github.com/mittwald/flow/compare/0.1.0-alpha.384...0.1.0-alpha.385) (2024-12-18)
+
+### Features
+
+- **List:** update search field size
+  ([#1068](https://github.com/mittwald/flow/issues/1068))
+  ([22e7008](https://github.com/mittwald/flow/commit/22e7008e0047fab8a5bda8afe8d6655fabfee2a7))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.384](https://github.com/mittwald/flow/compare/0.1.0-alpha.383...0.1.0-alpha.384) (2024-12-18)
+
+### Bug Fixes
+
+- **List:** fix responsive list item
+  ([#1059](https://github.com/mittwald/flow/issues/1059))
+  ([a8fc2db](https://github.com/mittwald/flow/commit/a8fc2db6e0c19b77ebcd6c103770b301c836a780))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.383](https://github.com/mittwald/flow/compare/0.1.0-alpha.382...0.1.0-alpha.383) (2024-12-18)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.382](https://github.com/mittwald/flow/compare/0.1.0-alpha.381...0.1.0-alpha.382) (2024-12-18)
+
+### Bug Fixes
+
+- **List:** fix error when using defaultValues
+  ([#1082](https://github.com/mittwald/flow/issues/1082))
+  ([68ec508](https://github.com/mittwald/flow/commit/68ec508b2a7cc3c9594212c1e80dc1af3ce47ce7))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.381](https://github.com/mittwald/flow/compare/0.1.0-alpha.380...0.1.0-alpha.381) (2024-12-17)
+
+### Bug Fixes
+
+- tabler icon chunks ([#1077](https://github.com/mittwald/flow/issues/1077))
+  ([7d4ba58](https://github.com/mittwald/flow/commit/7d4ba58545e2f128fc7e8f8f99f0e5784089860c))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.380](https://github.com/mittwald/flow/compare/0.1.0-alpha.379...0.1.0-alpha.380) (2024-12-12)
+
+### Bug Fixes
+
+- **docs:** layout of the footer component
+  ([#1036](https://github.com/mittwald/flow/issues/1036))
+  ([d8adfa4](https://github.com/mittwald/flow/commit/d8adfa4c8d67b2cb40356b6d932f3d72f59a3bce))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.379](https://github.com/mittwald/flow/compare/0.1.0-alpha.378...0.1.0-alpha.379) (2024-12-11)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.378](https://github.com/mittwald/flow/compare/0.1.0-alpha.377...0.1.0-alpha.378) (2024-12-11)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.377](https://github.com/mittwald/flow/compare/0.1.0-alpha.376...0.1.0-alpha.377) (2024-12-11)
+
+### Features
+
+- **Icon:** add vertical context menu icon and password icon
+  ([#1048](https://github.com/mittwald/flow/issues/1048))
+  ([4d189a8](https://github.com/mittwald/flow/commit/4d189a8f2e363f813d23a1daf3bcbfdc35cf8ddb))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.376](https://github.com/mittwald/flow/compare/0.1.0-alpha.375...0.1.0-alpha.376) (2024-12-11)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.375](https://github.com/mittwald/flow/compare/0.1.0-alpha.374...0.1.0-alpha.375) (2024-12-11)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.374](https://github.com/mittwald/flow/compare/0.1.0-alpha.373...0.1.0-alpha.374) (2024-12-10)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.373](https://github.com/mittwald/flow/compare/0.1.0-alpha.372...0.1.0-alpha.373) (2024-12-10)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.372](https://github.com/mittwald/flow/compare/0.1.0-alpha.371...0.1.0-alpha.372) (2024-12-10)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.371](https://github.com/mittwald/flow/compare/0.1.0-alpha.370...0.1.0-alpha.371) (2024-12-10)
+
+### Bug Fixes
+
+- **Modal:** fix mobile off canvas
+  ([#1055](https://github.com/mittwald/flow/issues/1055))
+  ([eb20386](https://github.com/mittwald/flow/commit/eb203862e3a9b9a30f7adeb3903eba385bd5c5f5))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.370](https://github.com/mittwald/flow/compare/0.1.0-alpha.369...0.1.0-alpha.370) (2024-12-10)
+
+### Bug Fixes
+
+- **FieldError:** fix field error alignment
+  ([#1057](https://github.com/mittwald/flow/issues/1057))
+  ([c77a656](https://github.com/mittwald/flow/commit/c77a6567ed9f7da8609a70cffc63af69c3f1ecbb))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.369](https://github.com/mittwald/flow/compare/0.1.0-alpha.368...0.1.0-alpha.369) (2024-12-09)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.368](https://github.com/mittwald/flow/compare/0.1.0-alpha.367...0.1.0-alpha.368) (2024-12-06)
 
 ### Features

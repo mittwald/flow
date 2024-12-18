@@ -22,3 +22,5 @@ modal:
     value: "{size-px.s}"
   off-canvas-max-width:
     value: "calc(100dvw - {size-px.m})"
+  content-min-height:
+    value: 120px
