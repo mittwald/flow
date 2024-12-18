@@ -16,11 +16,22 @@ export interface ColumnLayoutProps
   extends PropsWithChildren,
     PropsWithElementType<"div" | "ul">,
     PropsWithClassName {
+  /** Column layout for container size s. */
   s?: number[];
+  /** Column layout for container size m. */
   m?: number[];
+  /** Column layout for container size l. */
   l?: number[];
+  /**
+   * Size of the row and column gap between the content blocks inside the column
+   * layout.
+   *
+   * @default "m"
+   */
   gap?: GapSize;
+  /** Size of the row gap between the content blocks inside the column layout. */
   rowGap?: GapSize;
+  /** Size of the column gap between the content blocks inside the column layout. */
   columnGap?: GapSize;
 }
 

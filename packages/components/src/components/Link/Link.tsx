@@ -17,9 +17,11 @@ export interface LinkProps
     >,
     FlowComponentProps,
     PropsWithClassName {
+  /** Whether the link should be styled for being displayed inside a text. */
   inline?: boolean;
+  /** An alternative link component. */
   linkComponent?: ComponentType<Omit<ComponentProps<"a">, "ref">>;
-  /** @default "primary" */
+  /** The color of the link. @default "primary" */
   color?: "primary" | "dark" | "light";
 
   /** @internal */

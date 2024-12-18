@@ -11,6 +11,7 @@ import { Separator } from "@/components/Separator";
 import { CodeBlock } from "@/components/CodeBlock";
 
 export interface MarkdownProps extends Omit<Options, "components"> {
+  /** The color schema of the markdown component. */
   color?: "dark" | "light" | "default";
 }
 

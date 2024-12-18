@@ -12,7 +12,9 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 export interface LabelProps
   extends PropsWithChildren<Omit<Aria.LabelProps, "children">>,
     FlowComponentProps {
+  /** Whether the label should show an "optional" indicator. */
   optional?: boolean;
+  /** Whether the label should be displayed as disabled. */
   isDisabled?: boolean;
   /* @internal */
   unstyled?: boolean;

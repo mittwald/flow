@@ -17,10 +17,15 @@ export interface FileCardProps
   extends PropsWithClassName,
     PropsWithElementType<"div" | "li">,
     Pick<LinkProps, "onPress" | "href" | "target" | "download"> {
+  /** The name of the file. */
   name: string;
+  /** The type of the file. */
   type?: string;
+  /** Handler that is called when the file cards delete button is clicked. */
   onDelete?: () => void;
+  /** The size of the file in bytes. */
   sizeInBytes?: number;
+  /** The source of an image file. */
   imageSrc?: string;
 }
 
