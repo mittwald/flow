@@ -3,13 +3,13 @@
 .view {
   display: flex;
   padding: var(--list-item--padding);
-  gap: var(--list-item--content-to-content-spacing);
+  gap: var(--list-item--spacing);
   align-items: start;
 
   .content {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--list-item--content-to-content-spacing);
+    gap: var(--list-item--spacing);
     align-items: center;
     flex-grow: 1;
   }
@@ -18,7 +18,7 @@
     order: 0;
     flex-grow: 1;
     display: grid;
-    grid-column-gap: var(--list-item--content-to-content-spacing);
+    grid-column-gap: var(--list-item--avatar-to-title-spacing);
     grid-template-areas:
       "avatar title   "
       "avatar subtitle";

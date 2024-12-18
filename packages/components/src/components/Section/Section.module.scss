@@ -1,7 +1,7 @@
 .section {
   display: flex;
   flex-direction: column;
-  row-gap: var(--section--content-to-content-spacing);
+  row-gap: var(--section--spacing);
   container-type: inline-size;
 
   + .section {
@@ -9,9 +9,9 @@
   }
 
   &:not(.hideSeparator) + .section {
-    border-block-start-width: var(--section--border-width);
-    border-block-start-style: var(--section--border-style);
-    border-block-start-color: var(--section--border-color);
+    border-block-start-width: var(--separator--height);
+    border-block-start-style: var(--border-style--default);
+    border-block-start-color: var(--separator--color);
     padding-block-start: var(--section--section-to-section-spacing);
   }
 
