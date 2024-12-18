@@ -39,7 +39,7 @@ export const Avatar = flowComponent("Avatar", (props) => {
     styles.avatar,
     styles[`size-${size}`],
     className,
-    styles[(color ?? hasInitials) ? getColorFromChildren(children) : "blue"],
+    styles[color ?? (hasInitials ? getColorFromChildren(children) : "blue")],
   );
 
   const propsContext: PropsContext = {
