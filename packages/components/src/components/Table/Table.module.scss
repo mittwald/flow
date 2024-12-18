@@ -13,8 +13,7 @@
   border-spacing: 0;
   background-color: var(--table--background-color);
 
-  .column,
-  .rowHeader {
+  .column {
     font-weight: var(--table--header-font-weight);
     text-align: start;
   }
