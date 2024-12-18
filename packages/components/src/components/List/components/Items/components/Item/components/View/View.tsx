@@ -52,7 +52,7 @@ export const View = (props: Props) => {
     },
     Text: {
       className: styles.text,
-      tunnelId: "title",
+      tunnelId: "text",
     },
     Link: {
       unstyled: true,
@@ -69,6 +69,9 @@ export const View = (props: Props) => {
             {children}
             <div className={styles.title}>
               <TunnelExit id="title" />
+              <div className={styles.subTitle}>
+                <TunnelExit id="text" />
+              </div>
             </div>
           </div>
           <TunnelExit id="button" />

@@ -140,3 +140,16 @@ export const WithActionGroup: Story = {
     </View>
   ),
 };
+
+export const WithMultipleTexts: Story = {
+  render: () => (
+    <View>
+      <Avatar>
+        <Image alt="John Doe" src={dummyText.imageSrc} />
+      </Avatar>
+      <Heading>John Doe</Heading>
+      <Text>Mittwald</Text>
+      <Text>Development</Text>
+    </View>
+  ),
+};
