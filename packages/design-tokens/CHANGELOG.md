@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.388](https://github.com/mittwald/flow/compare/0.1.0-alpha.387...0.1.0-alpha.388) (2024-12-18)
+
+### Features
+
+- **Table:** support row header
+  ([#1058](https://github.com/mittwald/flow/issues/1058))
+  ([b73cfdd](https://github.com/mittwald/flow/commit/b73cfdd0d5603846c7ae0ad1882453ad58e1d6d2))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.387](https://github.com/mittwald/flow/compare/0.1.0-alpha.386...0.1.0-alpha.387) (2024-12-18)
 
 **Note:** Version bump only for package @mittwald/flow-design-tokens
