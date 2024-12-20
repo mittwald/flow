@@ -41,7 +41,7 @@
 
   .body {
     .row {
-      &:nth-of-type(odd):not(.footer) {
+      &:where(:nth-of-type(odd):not(.footer)) {
         background-color: var(--table--background-color-accent);
       }
 
