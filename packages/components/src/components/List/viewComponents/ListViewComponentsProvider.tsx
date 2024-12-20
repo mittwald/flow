@@ -1,0 +1,36 @@
+import type Header from "@/components/List/viewComponents/Header/Header";
+import type { FC, PropsWithChildren } from "react";
+import React, { createContext, useContext } from "react";
+import type { FilterPicker } from "@/components/List/viewComponents/Header/FilterPicker/FilterPicker";
+import type { FilterPickerMenuItem } from "@/components/List/viewComponents/Header/FilterPicker/FilterPickerMenuItem";
+import type {
+  ActiveFilterItem,
+  ActiveFilterList,
+} from "@/components/List/viewComponents/Header";
+import type Fragment from "@/components/Fragment";
+import type Items from "@/components/List/viewComponents/Items/Items";
+import type Item from "@/components/List/viewComponents/Items/Item";
+
+interface Context {
+  fragment?: typeof Fragment;
+  header?: typeof Header;
+  filterPicker?: typeof FilterPicker;
+  filterPickerMenuItem?: typeof FilterPickerMenuItem;
+  activeFilterList?: typeof ActiveFilterList;
+  activeFilterItem?: typeof ActiveFilterItem;
+  items?: typeof Items;
+  item?: typeof Item;
+}
+
+const context = createContext<Context>({});
+
+export const useListViewComponents = () => useContext(context);
+
+interface Props extends PropsWithChildren {
+  components: Partial<Context>;
+}
+
+export const ListViewComponentsProvider: FC<Props> = (props) => {
+  const { components, children } = props;
+  return <context.Provider value={components}>{children}</context.Provider>;
+};
