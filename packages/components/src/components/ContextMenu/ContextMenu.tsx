@@ -76,6 +76,7 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
     },
 
     ContextMenuSection: {
+      selectionMode,
       MenuItem: {
         Avatar: {
           size: "l",
@@ -106,7 +107,10 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
             onSelectionChange={onSelectionChange}
             ref={ref}
           >
-            <PropsContextProvider props={propsContext}>
+            <PropsContextProvider
+              props={propsContext}
+              dependencies={[selectionMode]}
+            >
               <Action closeOverlay={getCloseOverlayType(selectionMode)}>
                 {children}
               </Action>
