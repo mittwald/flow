@@ -1,10 +1,4 @@
-export const demoData: {
-  name: string;
-  language: string;
-  id: string;
-  bio: string;
-  version: number;
-}[] = [
+export const demoData = [
   {
     name: "Adeel Solangi",
     language: "Sindhi",

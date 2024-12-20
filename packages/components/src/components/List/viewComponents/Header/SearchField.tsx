@@ -6,6 +6,8 @@ import type {
   SearchShape,
   SearchValue,
 } from "@/components/List/model/search/types";
+import styles from "./Header.module.css";
+import clsx from "clsx";
 
 type TextFieldProps = SearchShape<never>["textFieldProps"];
 
@@ -18,7 +20,7 @@ interface Props extends TextFieldProps {
 const autoSubmitTimeout = 800;
 
 export const SearchField: FC<Props> = (props) => {
-  const { onChange, value, autoSubmit, ...textFieldProps } = props;
+  const { onChange, value, autoSubmit, className, ...textFieldProps } = props;
 
   const [searchString, setSearchString] = useState(value ?? "");
 
@@ -54,8 +56,11 @@ export const SearchField: FC<Props> = (props) => {
     }
   };
 
+  const rootClassName = clsx(className, styles.searchField);
+
   return (
     <SearchFieldComponent
+      className={rootClassName}
       value={searchString}
       onKeyUp={handleKeyPress}
       onChange={(value) => setSearchString(value)}

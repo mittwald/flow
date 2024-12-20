@@ -5,7 +5,7 @@ import clsx from "clsx";
 import type { PropsWithClassName } from "@/lib/types/props";
 import { TunnelExit } from "@mittwald/react-tunnel";
 import type { SearchValue } from "@/components/List/model/search/types";
-import { SearchField } from "./SearchField/SearchField";
+import { SearchField } from "./SearchField";
 
 interface Props extends PropsWithClassName {
   showSearch?: boolean;

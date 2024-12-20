@@ -7,6 +7,7 @@ import {
   RemoteListActiveFilterListElement,
   RemoteListItemsElement,
   RemoteListItemElement,
+  RemoteListElement,
 } from "@mittwald/flow-remote-elements";
 import {
   List as FlowList,
@@ -20,9 +21,15 @@ import { Fragment } from "@/Fragment";
 const components = {
   fragment: Fragment,
 
+  list: createRemoteComponent("flr-list", RemoteListElement, {}),
+
   items: createRemoteComponent("flr-list-items", RemoteListItemsElement, {}),
 
-  item: createRemoteComponent("flr-list-item", RemoteListItemElement, {}),
+  item: createRemoteComponent("flr-list-item", RemoteListItemElement, {
+    eventProps: {
+      onAction: { event: "action" } as never,
+    },
+  }),
 
   header: createRemoteComponent("flr-list-header", RemoteListHeaderElement, {
     slotProps: {

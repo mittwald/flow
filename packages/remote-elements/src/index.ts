@@ -20,6 +20,7 @@ export * from "./CodeBlock";
 export * from "./List";
 export * from "./ListItems";
 export * from "./ListItem";
+export * from "./ListItemView";
 export * from "./ListHeader";
 export * from "./ListFilterPicker";
 export * from "./ListFilterPickerMenuItem";

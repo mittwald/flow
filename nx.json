@@ -51,6 +51,5 @@
       "cache": true,
       "inputs": ["default"]
     }
-  },
-  "useDaemonProcess": false
+  }
 }

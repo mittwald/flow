@@ -3262,6 +3262,7 @@ __metadata:
     eslint-config-prettier: "npm:^9.1.0"
     eslint-plugin-json: "npm:^4.0.1"
     eslint-plugin-prettier: "npm:^5.2.1"
+    eslint-scope: "npm:^8.2.0"
     lerna: "npm:^8.1.9"
     nx: "npm:^20.2.2"
     prettier: "npm:^3.4.2"
@@ -3281,7 +3282,9 @@ __metadata:
       unplugged: true
     "@react-types/shared":
       unplugged: true
-    "@remote-dom/react@1.2.1":
+    "@remote-dom/core":
+      unplugged: true
+    "@remote-dom/react":
       unplugged: true
     "@types/react":
       unplugged: true
@@ -6170,7 +6173,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@remote-dom/core@npm:^1.5.0":
+"@remote-dom/core@npm:1.5.1":
   version: 1.5.1
   resolution: "@remote-dom/core@npm:1.5.1"
   dependencies:
@@ -6184,23 +6187,6 @@ __metadata:
     preact:
       optional: true
   checksum: 10c0/4d2678161676ace51e4ea64dde1676982c068d40982a7c0f7919f8f0429087f5790758611c7d31a27baddc097c8ca443d1b5a1ee9fb41094a48d251c386053ea
-  languageName: node
-  linkType: hard
-
-"@remote-dom/core@npm:^1.5.2":
-  version: 1.5.2
-  resolution: "@remote-dom/core@npm:1.5.2"
-  dependencies:
-    "@remote-dom/polyfill": "npm:^1.4.2"
-    htm: "npm:^3.1.1"
-  peerDependencies:
-    "@preact/signals-core": ^1.3.0
-  peerDependenciesMeta:
-    "@preact/signals-core":
-      optional: true
-    preact:
-      optional: true
-  checksum: 10c0/e673dc5ce8802c239e034f4ea28f500938271c9caadb5c7a11725196867c0f602f3da15ca3df07340108259975de49fd6e5b01f91f9fb20757c605c27df44d84
   languageName: node
   linkType: hard
 

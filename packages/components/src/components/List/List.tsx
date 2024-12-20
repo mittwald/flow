@@ -27,6 +27,8 @@ import { ActionGroup } from "@/components/ActionGroup";
 import { deepHas } from "@/lib/react/deepHas";
 import DataLoader from "./components/DataLoader";
 import { Items } from "@/components/List/components/Items";
+import { useListViewComponents } from "@/components/List/viewComponents/ListViewComponentsProvider";
+import ListView from "@/components/List/viewComponents/List/List";
 
 export interface ListProps<T>
   extends PropsWithChildren,
@@ -46,6 +48,8 @@ export interface ListProps<T>
 
 export const List = flowComponent("List", (props) => {
   const { children, batchSize, onChange, refProp: ref, ...restProps } = props;
+
+  const { list: View = ListView } = useListViewComponents();
 
   const listLoaderAsync = deepFindOfType(
     children,
@@ -166,10 +170,12 @@ export const List = flowComponent("List", (props) => {
             list: listModel,
           }}
         >
-          <DataLoader />
-          {children}
-          <Header hasActionGroup={hasActionGroup} />
-          <Items />
+          <View ref={ref}>
+            <DataLoader />
+            {children}
+            <Header hasActionGroup={hasActionGroup} />
+            <Items />
+          </View>
         </listContext.Provider>
       </TunnelProvider>
     </PropsContextProvider>

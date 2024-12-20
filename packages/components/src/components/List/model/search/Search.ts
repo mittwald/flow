@@ -10,7 +10,7 @@ export class Search<T> {
   public readonly textFieldProps: SearchShape<T>["textFieldProps"];
   private onUpdateCallbacks = new Set<() => unknown>();
   private readonly defaultValue?: string;
-  private readonly autoSubmit?: boolean;
+  public readonly autoSubmit?: boolean;
 
   public constructor(list: List<T>, searchShape: SearchShape<T>) {
     this.list = list;

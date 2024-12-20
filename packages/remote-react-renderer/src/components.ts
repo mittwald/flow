@@ -19,7 +19,7 @@ import type { FlowRemoteElementKeys } from "@mittwald/flow-remote-elements";
 import { createFlowRemoteComponentRenderer } from "@/lib/createFlowRemoteComponentRenderer";
 import CodeBlock from "@mittwald/flow-react-components/CodeBlock";
 import TextField from "@mittwald/flow-react-components/TextField";
-import { List, ListItem } from "@mittwald/flow-react-components/List";
+import { List, ListItemView } from "@mittwald/flow-react-components/List";
 import * as ListViews from "@mittwald/flow-react-components/List/Views";
 import { Activity } from "@mittwald/flow-react-components/Activity";
 import { stringChildrenExtractor } from "@/lib/stringChildrenExtractor";
@@ -51,6 +51,7 @@ export const components: RemoteComponentsMap<
   "flr-list": createFlowRemoteComponentRenderer(List),
   "flr-list-items": createFlowRemoteComponentRenderer(ListViews.Items),
   "flr-list-item": createFlowRemoteComponentRenderer(ListViews.Item),
+  "flr-list-item-view": createFlowRemoteComponentRenderer(ListItemView),
   "flr-list-header": createRemoteComponentRenderer(ListViews.Header),
   "flr-list-active-filter-list": createFlowRemoteComponentRenderer(
     ListViews.ActiveFilterList,

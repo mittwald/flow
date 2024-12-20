@@ -8,6 +8,7 @@ export class RemoteListHeaderElement extends FlowRemoteElement {
     return {
       showSearch: {},
       searchValue: {},
+      autoSubmitSearch: {},
     };
   }
   static get remoteEvents() {

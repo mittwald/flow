@@ -6,7 +6,7 @@ import { Text } from "@/components/Text";
 import { Heading } from "@/components/Heading";
 import { Section } from "@/components/Section";
 import MenuItem from "@/components/MenuItem";
-import locales from "../../../locales/*.locale.json";
+import locales from "../../locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 import { IconView } from "@/components/Icon/components/icons";
 import type { ListViewMode } from "@/components/List/model/types";

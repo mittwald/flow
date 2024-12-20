@@ -12,12 +12,8 @@ export default function Page() {
         bottom: 0,
         left: 0,
         right: 0,
-        height: "50%",
-        minHeight: "300px",
-        position: "fixed",
+        height: "600px",
         width: "100%",
-        boxSizing: "border-box",
-        paddingInline: "10%",
       }}
     />
   );

@@ -8,7 +8,7 @@ export type { RenderItemFn } from "@/components/List/model/item/types";
 export { View as ListItemView } from "./components/Items/components/Item/components/View";
 export * from "./components/ListSummary";
 export * from "./viewComponents/Header/Header";
-export * from "./viewComponents/Header/SearchField/SearchField";
+export * from "./viewComponents/Header/SearchField";
 export * from "./viewComponents/Header/FilterPicker/FilterPickerMenuItem";
 export * from "./viewComponents/Header/FilterPicker/FilterPicker";
 export * from "./viewComponents/ListViewComponentsProvider";
