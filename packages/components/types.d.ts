@@ -1,5 +1,6 @@
 /// <reference types="vite/client" />
 import type React from "react";
+import type { JSX as Jsx } from "react/jsx-runtime";
 
 // allow forwardRef with generic types
 declare module "react" {
@@ -17,4 +18,17 @@ declare module "*.locale.json" {
   import type { LocalizedStrings } from "react-aria";
   const langFile: LocalizedStrings;
   export default langFile;
+}
+
+// React 19 types fix
+declare global {
+  namespace JSX {
+    type ElementType = Jsx.ElementType;
+    type ElementClass = Jsx.ElementClass;
+    type Element = Jsx.Element;
+    type IntrinsicElements = Jsx.IntrinsicElements;
+    type ElementAttributesProperty = Jsx.ElementAttributesProperty;
+    type ElementChildrenAttribute = Jsx.ElementChildrenAttribute;
+    type IntrinsicClassAttributes = Jsx.IntrinsicClassAttributes<never>;
+  }
 }

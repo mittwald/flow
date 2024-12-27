@@ -28,7 +28,7 @@ const TestComponent: FC<PropsWithChildren<TestComponentProps>> = (props) => {
   return (
     <>
       <span data-testid="prop-value">{testProp ?? "undefined"}</span>
-      {isValidElement(children)
+      {isValidElement<Record<string, unknown>>(children)
         ? cloneElement(children, {
             ...children.props,
             "data-additional-prop": true,

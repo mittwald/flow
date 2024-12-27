@@ -65,7 +65,7 @@ function BasicForm<F extends FieldValues>(
           onSubmit={handleOnSubmit}
         >
           {children}
-        </form>
+        </FormView>
         <AutoFormResetEffect />
       </SubmitButtonStateProvider>
     </FormContextProvider>

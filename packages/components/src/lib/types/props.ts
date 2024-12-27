@@ -17,7 +17,7 @@ export interface PropsWithClassName {
   className?: string;
 }
 
-export type PropsWithElementType<T extends keyof HTMLElementType = never> =
+export type PropsWithElementType<T extends HTMLElementType = never> =
   HTMLAttributes<HTMLElement> & {
     elementType?: T | ExoticComponent;
   };

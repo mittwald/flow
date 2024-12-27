@@ -10,6 +10,7 @@ import type {
 import type Fragment from "@/components/Fragment";
 import type Items from "@/components/List/viewComponents/Items/Items";
 import type Item from "@/components/List/viewComponents/Items/Item";
+import type ListView from "@/components/List/viewComponents/List/List";
 
 interface Context {
   fragment?: typeof Fragment;
@@ -20,6 +21,7 @@ interface Context {
   activeFilterItem?: typeof ActiveFilterItem;
   items?: typeof Items;
   item?: typeof Item;
+  list?: typeof ListView;
 }
 
 const context = createContext<Context>({});
