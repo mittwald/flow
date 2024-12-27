@@ -15,7 +15,7 @@ export type FormOnSubmitHandler<F extends FieldValues> = Parameters<
   UseFormReturn<F>["handleSubmit"]
 >[0];
 
-export interface FormProps<F extends FieldValues = Record<string, unknown>>
+export interface FormProps<F extends FieldValues>
   extends Omit<ComponentProps<"form">, "onSubmit">,
     PropsWithChildren {
   form: UseFormReturn<F>;
