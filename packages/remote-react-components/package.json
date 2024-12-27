@@ -9,10 +9,6 @@
     ".": {
       "types": "./dist/types/index.d.ts",
       "default": "./dist/index.js"
-    },
-    "./react-hook-form": {
-      "types": "./dist/types/integrations/react-hook-form/index.d.ts",
-      "import": "./dist/react-hook-form.js"
     }
   },
   "files": [
@@ -28,6 +24,7 @@
     "test:compile": "run tsc --noEmit"
   },
   "dependencies": {
+    "@mittwald/flow-react-components": "workspace:^",
     "@mittwald/flow-remote-core": "workspace:^",
     "@mittwald/flow-remote-elements": "workspace:^",
     "@remote-dom/core": "^1.5.2",
@@ -47,6 +44,7 @@
     "vite-plugin-externalize-deps": "^0.8.0"
   },
   "peerDependencies": {
+    "@mittwald/flow-react-components": "workspace:^",
     "react": "19.0.0-rc.1",
     "react-hook-form": "*"
   },

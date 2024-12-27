@@ -9,10 +9,6 @@
     ".": {
       "types": "./dist/types/index.d.ts",
       "default": "./dist/index.js"
-    },
-    "./react-hook-form": {
-      "types": "./dist/types/integrations/react-hook-form/index.d.ts",
-      "import": "./dist/react-hook-form.js"
     }
   },
   "files": [
@@ -31,6 +27,7 @@
     "@mittwald/flow-react-components": "workspace:^",
     "@mittwald/flow-remote-core": "workspace:^",
     "@remote-dom/core": "^1.5.2",
+    "react-hook-form": "^7.54.0",
     "remeda": "^2.17.4",
     "type-fest": "^4.30.0"
   },

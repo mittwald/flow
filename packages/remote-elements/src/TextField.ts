@@ -8,12 +8,17 @@ export class RemoteTextFieldElement extends FlowRemoteElement<TextFieldProps> {
     return {
       "aria-label": {},
       name: {},
+      value: {},
+      form: {},
+      type: {},
     };
   }
 
   static get remoteEvents() {
     return {
       change: {},
+      blur: {},
+      focus: {},
     };
   }
 }

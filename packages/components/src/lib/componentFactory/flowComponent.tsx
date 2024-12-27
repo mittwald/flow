@@ -15,9 +15,9 @@ import type {
 import { cloneElement } from "react";
 import React, { forwardRef } from "react";
 import type { PropsWithTunnel } from "@/lib/types/props";
-import { useProps } from "@/lib/propsContext";
 import { TunnelEntry } from "@mittwald/react-tunnel";
 import SlotContextProvider from "@/lib/slotContext/SlotContextProvider";
+import { useProps } from "@/lib/hooks/useProps";
 
 export interface FlowComponentProps extends PropsWithTunnel {
   wrapWith?: ReactElement;

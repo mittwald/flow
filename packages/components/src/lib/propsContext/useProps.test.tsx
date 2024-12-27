@@ -10,7 +10,7 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import useProps from "@/lib/propsContext/useProps";
+import useProps from "@/lib/hooks/useProps";
 import { render, screen } from "@testing-library/react";
 import PropsContextProvider from "@/lib/propsContext/PropsContextProvider";
 import dynamic from "@/lib/propsContext/dynamicProps/dynamic";

@@ -10,15 +10,16 @@ import type { PropsWithClassName } from "@/lib/types/props";
 
 export interface TextFieldProps
   extends Omit<TextFieldBaseProps, "input" | "className">,
-    Pick<Aria.InputProps, "placeholder">,
+    Pick<Aria.InputProps, "placeholder" | "form">,
     PropsWithClassName,
     FlowComponentProps {}
 
 export const TextField = flowComponent("TextField", (props) => {
-  const { children, placeholder, refProp: ref, ...rest } = props;
+  const { children, placeholder, refProp: ref, form, ...rest } = props;
 
   const input = (
     <Aria.Input
+      form={form}
       placeholder={placeholder}
       className={styles.textField}
       ref={ref}

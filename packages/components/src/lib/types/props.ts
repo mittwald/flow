@@ -1,4 +1,4 @@
-import type { ExoticComponent, HTMLAttributes, ReactHTML } from "react";
+import type { ExoticComponent, HTMLAttributes, HTMLElementType } from "react";
 
 export type Status = "info" | "success" | "warning" | "danger";
 
@@ -15,7 +15,7 @@ export interface PropsWithClassName {
   className?: string;
 }
 
-export type PropsWithElementType<T extends keyof ReactHTML = never> =
+export type PropsWithElementType<T extends keyof HTMLElementType = never> =
   HTMLAttributes<HTMLElement> & {
     elementType?: T | ExoticComponent;
   };
