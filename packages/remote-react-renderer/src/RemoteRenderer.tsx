@@ -1,7 +1,7 @@
 "use client";
 import type { RemoteComponentRendererProps } from "@remote-dom/react/host";
 import { RemoteReceiver, RemoteRootRenderer } from "@remote-dom/react/host";
-import type { ComponentType, FC } from "react";
+import type { ComponentType, CSSProperties, FC } from "react";
 import React, { useMemo } from "react";
 import { components } from "@/components";
 import type { RemoteComponentsMap } from "@/lib/types";
@@ -11,10 +11,11 @@ import { connectRemoteIframeRef } from "@mittwald/flow-remote-core";
 export interface RemoteRendererProps {
   integrations?: RemoteComponentsMap<never>[];
   src: string;
+  iframeStyle?: CSSProperties;
 }
 
 export const RemoteRenderer: FC<RemoteRendererProps> = (props) => {
-  const { integrations = [], src } = props;
+  const { integrations = [], src, iframeStyle } = props;
   const receiver = useMemo(() => new RemoteReceiver(), []);
 
   const mergedComponents = useMemo(() => {
@@ -36,14 +37,16 @@ export const RemoteRenderer: FC<RemoteRendererProps> = (props) => {
     <iframe
       ref={connectRemoteIframeRef(receiver.connection)}
       src={src}
-      style={{
-        visibility: "hidden",
-        height: 0,
-        width: 0,
-        border: "none",
-        position: "absolute",
-        marginLeft: "-9999px",
-      }}
+      style={
+        iframeStyle ?? {
+          visibility: "hidden",
+          height: 0,
+          width: 0,
+          border: "none",
+          position: "absolute",
+          marginLeft: "-9999px",
+        }
+      }
     />
   );
 

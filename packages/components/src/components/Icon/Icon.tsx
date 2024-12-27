@@ -1,19 +1,19 @@
 import type { PropsWithChildren, SVGAttributes } from "react";
-import React, { useMemo } from "react";
+import React, { useMemo, cloneElement } from "react";
 import styles from "./Icon.module.scss";
 import clsx from "clsx";
 import { extractSvgFromString } from "@/components/Icon/lib/extractSvgFromString";
 import { ClearPropsContext } from "@/lib/propsContext";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import { cloneElement } from "@/lib/react/cloneElement";
+// import { cloneElement } from "@/lib/react/cloneElement";
 
 type SvgAttributeProps = SVGAttributes<SVGSVGElement>;
 
 export interface IconProps
   extends PropsWithChildren<Omit<SvgAttributeProps, "name">>,
     FlowComponentProps {
-  /** @default "m" */
+  /** The size of the icon. @default "m" */
   size?: "s" | "m" | "l";
 }
 

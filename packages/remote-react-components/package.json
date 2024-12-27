@@ -31,9 +31,10 @@
     "@remote-dom/react": "^1.2.1"
   },
   "devDependencies": {
+    "@mittwald/flow-react-components": "workspace:^",
     "@types/node": "^22.10.1",
     "@types/react": "^19.0.1",
-    "nx": "^20.2.1",
+    "nx": "^20.2.2",
     "prettier": "^3.4.2",
     "react": "19.0.0",
     "react-hook-form": "^7.54.0",

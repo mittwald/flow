@@ -1,6 +1,19 @@
-import { createRemoteElement } from "@remote-dom/core/elements";
+import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
 
-export const RemoteListItemElement = createRemoteElement({});
+export class RemoteListItemElement extends FlowRemoteElement {
+  static get remoteEvents() {
+    return {
+      action: {},
+    };
+  }
+  static get remoteProperties() {
+    return {
+      id: {},
+      textValue: {},
+      href: {},
+    };
+  }
+}
 
 declare global {
   interface HTMLElementTagNameMap {

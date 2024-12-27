@@ -1,0 +1,21 @@
+body {
+  background-color: bisque;
+}
+
+script {
+  display: none;
+}
+
+* {
+  background-color: rgba(0, 0, 0, 0.1);
+  display: block;
+  font-family: sans-serif;
+}
+
+[flr-*] {
+  display: none;
+}
+
+* * {
+  padding-left: 20px;
+}

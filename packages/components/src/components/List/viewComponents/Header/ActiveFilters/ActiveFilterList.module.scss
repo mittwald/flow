@@ -1,0 +1,12 @@
+.activeFilters {
+  display: flex;
+  flex-direction: row;
+  column-gap: var(--list--spacing);
+  row-gap: var(--list--spacing);
+  flex-wrap: wrap;
+  align-items: center;
+
+  .clearButton {
+    margin-inline-start: auto;
+  }
+}

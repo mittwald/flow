@@ -2,11 +2,8 @@ import type { PropsWithChildren } from "react";
 import React from "react";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { listContext } from "./listContext";
-import { DataLoader } from "@/components/List/components/DataLoader";
 import { Header } from "@/components/List/components/Header";
-import styles from "./List.module.css";
 import ListModel from "@/components/List/model/List";
-import { Items } from "@/components/List/components/Items";
 import { deepFilterByType, deepFindOfType } from "@/lib/react/deepFindOfType";
 import { ListLoaderAsync } from "@/components/List/setupComponents/ListLoaderAsync";
 import { ListFilter } from "@/components/List/setupComponents/ListFilter";
@@ -15,21 +12,23 @@ import { ListItem } from "@/components/List/setupComponents/ListItem";
 import { ListStaticData } from "@/components/List/setupComponents/ListStaticData";
 import { ListLoaderAsyncResource } from "@/components/List/setupComponents/ListLoaderAsyncResource";
 import type { IncrementalLoaderShape } from "@/components/List/model/loading/types";
-import Footer from "./components/Footer";
 import { ListSearch } from "@/components/List/setupComponents/ListSearch";
 import type { ListShape } from "@/components/List/model/types";
 import { TableColumn } from "@/components/List/setupComponents/TableColumn";
 import { TableRow } from "@/components/List/setupComponents/TableRow";
 import { TableCell } from "@/components/List/setupComponents/TableCell";
-import { Table } from "@/components/List/components/Table";
 import { Table as TableSetupComponent } from "@/components/List/setupComponents/Table";
 import { TableHeader } from "@/components/List/setupComponents/TableHeader";
 import { TableBody } from "@/components/List/setupComponents/TableBody";
-import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
+import { TunnelProvider } from "@mittwald/react-tunnel";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
-import headerStyles from "./components/Header/Header.module.css";
+import headerStyles from "./viewComponents/Header/Header.module.css";
 import { ActionGroup } from "@/components/ActionGroup";
 import { deepHas } from "@/lib/react/deepHas";
+import DataLoader from "./components/DataLoader";
+import { Items } from "@/components/List/components/Items";
+import { useListViewComponents } from "@/components/List/viewComponents/ListViewComponentsProvider";
+import ListView from "@/components/List/viewComponents/List/List";
 
 export interface ListProps<T>
   extends PropsWithChildren,
@@ -43,11 +42,14 @@ export interface ListProps<T>
       | "filters"
       | "sorting"
     > {
+  /** The number of items to be displayed on one page. */
   batchSize?: number;
 }
 
 export const List = flowComponent("List", (props) => {
   const { children, batchSize, onChange, refProp: ref, ...restProps } = props;
+
+  const { list: View = ListView } = useListViewComponents();
 
   const listLoaderAsync = deepFindOfType(
     children,
@@ -109,9 +111,9 @@ export const List = flowComponent("List", (props) => {
     ),
     search: searchProps
       ? {
-          render: searchProps.children,
           textFieldProps: searchProps,
           defaultValue: searchProps.defaultValue,
+          autoSubmit: searchProps.autoSubmit,
         }
       : undefined,
     sorting: deepFilterByType(children, ListSorting<never>).map((s) => s.props),
@@ -168,20 +170,12 @@ export const List = flowComponent("List", (props) => {
             list: listModel,
           }}
         >
-          <DataLoader />
-          <div className={styles.list} ref={ref}>
+          <View ref={ref}>
+            <DataLoader />
             {children}
             <Header hasActionGroup={hasActionGroup} />
-
-            <div>
-              {listModel.items.entries.length > 0 && (
-                <TunnelExit id="listSummary" />
-              )}
-              {listModel.viewMode === "list" && <Items />}
-              {listModel.viewMode === "table" && <Table />}
-            </div>
-            <Footer />
-          </div>
+            <Items />
+          </View>
         </listContext.Provider>
       </TunnelProvider>
     </PropsContextProvider>

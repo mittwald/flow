@@ -1,4 +1,4 @@
-import type { ComponentType, FC, ReactNode } from "react";
+import type { ComponentType, FC, PropsWithChildren, ReactNode } from "react";
 import React from "react";
 import { OverlayController } from "@/lib/controller";
 import type { PropsContext } from "@/lib/propsContext";
@@ -12,9 +12,12 @@ type AriaComponentType = ComponentType<{
   children: ReactNode;
 }>;
 
-export interface OverlayTriggerProps extends FlowComponentProps {
+export interface OverlayTriggerProps
+  extends FlowComponentProps,
+    PropsWithChildren {
+  /** Whether the overlay should be open initially. */
   isDefaultOpen?: boolean;
-  children: ReactNode;
+  /** A controller to control the state of the overlay. */
   controller?: OverlayController;
 }
 

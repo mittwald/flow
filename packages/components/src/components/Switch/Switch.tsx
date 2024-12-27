@@ -12,7 +12,10 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 export interface SwitchProps
   extends PropsWithChildren<Omit<Aria.SwitchProps, "children">>,
     FlowComponentProps {
-  /** @default "trailing" */
+  /**
+   * Whether the label should appear before or after the switch. @default
+   * "trailing"
+   */
   labelPosition?: "leading" | "trailing";
 }
 

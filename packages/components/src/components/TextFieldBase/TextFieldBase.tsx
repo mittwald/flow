@@ -12,7 +12,9 @@ import { useLocalizedStringFormatter } from "react-aria";
 
 export interface TextFieldBaseProps
   extends PropsWithChildren<Omit<Aria.TextFieldProps, "children">> {
+  /** The input element */
   input: ReactNode;
+  /** Whether a character count should be displayed inside the field description. */
   showCharacterCount?: boolean;
 }
 

@@ -7,6 +7,9 @@
       <sourceFolder url="file://$MODULE_DIR$/packages/docs/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/.nx" />
       <excludeFolder url="file://$MODULE_DIR$/.yarn" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/components/coverage" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/components/out" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/docs/out" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

@@ -1,23 +1,21 @@
 import type { FC } from "react";
 import React from "react";
-import { SortingPicker } from "@/components/List/components/Header/components/SortingPicker";
-import FilterPicker from "@/components/List/components/Header/components/FilterPicker";
-import styles from "./Header.module.css";
-import clsx from "clsx";
-import { ActiveFilters } from "@/components/List/components/Header/components/ActiveFilters";
 import { useList } from "@/components/List/hooks/useList";
-import type { PropsWithClassName } from "@/lib/types/props";
-import { SearchField } from "@/components/List/components/Header/components/SearchField/SearchField";
-import { ViewModeMenu } from "@/components/List/components/Header/components/ViewModeMenu/ViewModeMenu";
-import { TunnelExit } from "@mittwald/react-tunnel";
+import { useListViewComponents } from "@/components/List/viewComponents/ListViewComponentsProvider";
+import { FilterPicker } from "@/components/List/components/Header/components/FilterPicker/FilterPicker";
+import HeaderView from "@/components/List/viewComponents/Header/Header";
+import Fragment from "@/components/Fragment";
+import { ActiveFilterList } from "@/components/List/components/Header/components/ActiveFilterList";
 
-interface Props extends PropsWithClassName {
+interface Props {
   hasActionGroup?: boolean;
 }
 
 export const Header: FC<Props> = (props) => {
-  const { className, hasActionGroup } = props;
+  const { hasActionGroup } = props;
   const list = useList();
+  const { header: View = HeaderView, fragment: FragmentView = Fragment } =
+    useListViewComponents();
 
   if (
     list.filters.length === 0 &&
@@ -34,22 +32,20 @@ export const Header: FC<Props> = (props) => {
   ));
 
   return (
-    <div className={clsx(className, styles.header)}>
-      <div className={styles.pickerListAndSearch}>
-        <div className={styles.pickerList}>
-          <ViewModeMenu />
-          <SortingPicker />
-          {filterPickerList}
-        </div>
-        <div className={styles.searchAndActions}>
-          {list.search && (
-            <SearchField className={styles.searchField} search={list.search} />
-          )}
-          <TunnelExit id="actions" />
-        </div>
-      </div>
-      <ActiveFilters />
-    </div>
+    <View
+      onSearchChanged={(search) => {
+        list.search?.setValue(search);
+      }}
+      autoSubmitSearch={list.search?.autoSubmit}
+      searchValue={list.search?.value}
+      showSearch={!!list.search}
+      filterPickerList={<FragmentView>{filterPickerList}</FragmentView>}
+      activeFilterList={
+        <FragmentView>
+          <ActiveFilterList />
+        </FragmentView>
+      }
+    />
   );
 };
 

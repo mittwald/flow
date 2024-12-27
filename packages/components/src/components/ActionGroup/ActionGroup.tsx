@@ -15,7 +15,9 @@ export interface ActionGroupProps
   extends PropsWithChildren,
     FlowComponentProps,
     PropsWithClassName {
+  /** Whether the breakpoints for a compact version should be ignored. */
   ignoreBreakpoint?: boolean;
+  /** The spacing between the buttons inside the action group. @default "m" */
   spacing?: "s" | "m";
 }
 
