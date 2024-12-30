@@ -20,13 +20,12 @@ export interface FormProps<F extends FieldValues>
     PropsWithChildren {
   form: UseFormReturn<F>;
   onSubmit: FormOnSubmitHandler<F>;
-  formComponent?: ComponentType<ComponentProps<"form">>;
+  formComponent?: ComponentType<
+    PropsWithChildren<{ id: string; onSubmit?: FormEventHandler }>
+  >;
 }
 
-function BasicForm<F extends FieldValues>(
-  props: FormProps<F>,
-  ref: React.ForwardedRef<HTMLFormElement>,
-) {
+export function Form<F extends FieldValues>(props: FormProps<F>) {
   const {
     form,
     children,
@@ -58,12 +57,7 @@ function BasicForm<F extends FieldValues>(
   return (
     <FormContextProvider value={{ form, id: formId }}>
       <SubmitButtonStateProvider isAsyncSubmit={isAsyncSubmit}>
-        <FormView
-          {...formProps}
-          id={formId}
-          ref={ref}
-          onSubmit={handleOnSubmit}
-        >
+        <FormView {...formProps} id={formId} onSubmit={handleOnSubmit}>
           {children}
         </FormView>
         <AutoFormResetEffect />
@@ -71,5 +65,3 @@ function BasicForm<F extends FieldValues>(
     </FormContextProvider>
   );
 }
-
-export const Form = React.forwardRef(BasicForm);

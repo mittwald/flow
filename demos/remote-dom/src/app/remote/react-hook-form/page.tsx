@@ -1,11 +1,8 @@
 "use client";
 
-import {
-  TextField,
-  Button,
-  Form as RemoteForm,
-} from "@mittwald/flow-remote-react-components";
-import { Form, Field } from "@mittwald/flow-react-components/react-hook-form";
+import { TextField, Button } from "@mittwald/flow-remote-react-components";
+import { Field } from "@mittwald/flow-react-components/react-hook-form";
+import { Form } from "@mittwald/flow-remote-react-components/react-hook-form";
 import { useForm } from "react-hook-form";
 
 export default function Page() {
@@ -17,11 +14,7 @@ export default function Page() {
   });
 
   return (
-    <Form
-      form={form}
-      formComponent={RemoteForm}
-      onSubmit={(data) => console.log("here", data)}
-    >
+    <Form form={form} onSubmit={(data) => console.log("here", data)}>
       <Field rules={{ required: true }} name={"email"}>
         <TextField type="text" />
       </Field>

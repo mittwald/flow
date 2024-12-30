@@ -17,6 +17,7 @@ export default defineConfig(
       lib: {
         entry: {
           index: "./src/index.ts",
+          "react-hook-form": "./src/integrations/react-hook-form/index.ts",
         },
         formats: ["es"],
       },
