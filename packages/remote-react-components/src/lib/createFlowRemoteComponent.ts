@@ -1,4 +1,4 @@
-import { createElement, useContext } from "react";
+import { createElement } from "react";
 import type {
   RemoteElement,
   RemoteElementConstructor,
@@ -42,9 +42,6 @@ export function createFlowRemoteComponent<
 
   return (props) => {
     const combinedProps = useProps(flowComponentTag, props);
-
-    console.log(combinedProps);
-
     return createElement(element, combinedProps as never);
   };
 }
