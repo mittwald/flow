@@ -11,6 +11,7 @@ export class RemoteTextFieldElement extends FlowRemoteElement<TextFieldProps> {
       value: {},
       form: {},
       type: {},
+      isInvalid: {},
     };
   }
 
