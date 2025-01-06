@@ -11,7 +11,9 @@ import { Activity } from "@/components/Activity";
 
 export interface AccordionProps
   extends PropsWithChildren<ComponentProps<"div">> {
+  /** Whether the accordion should be initially expanded. */
   defaultExpanded?: boolean;
+  /** The visual variant of the accordion. @default "default" */
   variant?: "default" | "outline";
 }
 

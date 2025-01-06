@@ -8,8 +8,9 @@ import { IconContextMenu } from "@/components/Icon/components/icons";
 import PropsContextProvider from "@/lib/propsContext/PropsContextProvider";
 
 export interface MessageProps extends PropsWithChildren, PropsWithClassName {
-  /** @default "sender" */
+  /** Determines the color of the message. @default "sender" */
   type?: "responder" | "sender";
+  /** The orientation of the chat message. */
   orientation?: "left" | "right";
 }
 

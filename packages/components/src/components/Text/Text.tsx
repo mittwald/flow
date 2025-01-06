@@ -17,7 +17,9 @@ export interface TextProps
     Omit<Aria.TextProps, "children" | "elementType">,
     PropsWithElementType<"span" | "div" | "p">,
     FlowComponentProps {
+  /* Whether the elements width should match the width it would have with mold text. */
   emulateBoldWidth?: boolean;
+  /* The color of the text. */
   color?: "light" | "dark";
 }
 

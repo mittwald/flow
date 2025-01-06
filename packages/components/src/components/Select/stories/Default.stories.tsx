@@ -1,9 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Select, { Option } from "../index";
+import Select, { Option, sortByDachFirst } from "../index";
 import React from "react";
 import { Label } from "@/components/Label";
 import FieldDescription from "@/components/FieldDescription";
 import { FieldError } from "@/components/FieldError";
+import { CountryOptions } from "@/components/Select/components/CountryOptions";
 
 const meta: Meta<typeof Select> = {
   title: "Form Controls/Select",
@@ -84,6 +85,22 @@ export const WithNumbers: Story = {
       <Option value={2}>2</Option>
       <Option value={3}>3</Option>
       <Option value={4}>4</Option>
+    </Select>
+  ),
+};
+
+export const WithCountryOptions: Story = {
+  render: (props) => (
+    <Select {...props}>
+      <CountryOptions />
+    </Select>
+  ),
+};
+
+export const WithCountryOptionsAndCustomSort: Story = {
+  render: (props) => (
+    <Select {...props}>
+      <CountryOptions sortBy={sortByDachFirst} />
     </Select>
   ),
 };

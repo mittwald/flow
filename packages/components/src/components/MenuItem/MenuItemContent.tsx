@@ -15,9 +15,10 @@ import { deepHas } from "@/lib/react/deepHas";
 import { Wrap } from "@/components/Wrap";
 import clsx from "clsx";
 import { Avatar } from "@/components/Avatar";
+import { Switch } from "@/components/Switch";
 
 interface Props extends Aria.MenuItemRenderProps, PropsWithChildren {
-  selectionVariant?: "control" | "navigation";
+  selectionVariant?: "control" | "navigation" | "switch";
 }
 
 export const MenuItemContent: FC<Props> = (props) => {
@@ -44,12 +45,19 @@ export const MenuItemContent: FC<Props> = (props) => {
     Icon: {
       className: clsx(styles.controlIcon, styles.icon),
     },
+    Switch: {
+      className: clsx(styles.controlIcon, styles.switch),
+    },
   };
 
   const selectionIcon =
     selectionMode === "none" ||
-    selectionVariant === "navigation" ? null : selectionMode === "single" &&
+    selectionVariant === "navigation" ? null : selectionVariant === "switch" &&
       isSelected ? (
+      <Switch isReadOnly isSelected />
+    ) : selectionVariant === "switch" && !isSelected ? (
+      <Switch isReadOnly />
+    ) : selectionMode === "single" && isSelected ? (
       <IconRadioOn />
     ) : selectionMode === "single" && !isSelected ? (
       <IconRadioOff />

@@ -1,4 +1,8 @@
-import plugin, { generateVirtualFileId, moduleId } from "./viteI18nPlugin";
+import {
+  generateVirtualFileId,
+  moduleId,
+  viteI18nPlugin as plugin,
+} from "./viteI18nPlugin";
 import { test, describe, expect, vi } from "vitest";
 import type {
   PartialResolvedId,

@@ -5,7 +5,7 @@
   "scripts": {
     "build": "run next build",
     "build:deps:watch": "run -T build:deps:watch @mittwald/flow-demo-remote-dom",
-    "dev": "run nx run-many --outputStyle=stream --projects=@mittwald/flow-demo-remote-dom --targets=start,build:deps:watch,build:imports",
+    "dev": "run nx run-many --outputStyle=stream --projects=@mittwald/flow-demo-remote-dom --targets=start,build:deps:watch",
     "start": "run next dev",
     "test:compile": "run tsc --noEmit"
   },
@@ -22,18 +22,18 @@
     "next": "~15.0.4",
     "react": "19.0.0",
     "react-dom": "19.0.0",
-    "react-hook-form": "^7.53.2",
+    "react-hook-form": "^7.54.0",
     "remeda": "^2.17.4",
     "sass": "^1.82.0",
     "webpack": "^5.97.1"
   },
   "devDependencies": {
     "@types/node": "^22.10.1",
-    "@types/react": "^19.0.0",
-    "@types/react-dom": "^19.0.0",
+    "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.2",
     "@yarnpkg/pnpify": "^4.1.3",
     "eslint": "^9.16.0",
-    "nx": "^20.2.0",
+    "nx": "^20.2.2",
     "typescript": "^5.7.2"
   },
   "overrides": {

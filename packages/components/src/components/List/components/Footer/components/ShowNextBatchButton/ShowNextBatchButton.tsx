@@ -1,12 +1,11 @@
 import type { FC } from "react";
 import React from "react";
-import type { ButtonProps } from "@/components/Button";
 import { Button } from "@/components/Button";
 import { useList } from "@/components/List/hooks/useList";
 import locales from "../../../../locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 
-export const ShowNextBatchButton: FC<ButtonProps> = (props) => {
+export const ShowNextBatchButton: FC = (props) => {
   const stringFormatter = useLocalizedStringFormatter(locales);
   const list = useList();
   const isLoading = list.loader.useIsLoading();

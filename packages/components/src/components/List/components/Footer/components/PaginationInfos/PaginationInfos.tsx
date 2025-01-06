@@ -1,13 +1,12 @@
 import locales from "../../../../locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
-import type { TextProps } from "@/components/Text";
 import { Text } from "@/components/Text";
 import type { FC } from "react";
 import React from "react";
 import { useList } from "@/components/List/hooks/useList";
 import { Skeleton } from "@/components/Skeleton";
 
-export const PaginationInfos: FC<TextProps> = (props) => {
+export const PaginationInfos: FC = () => {
   const stringFormatter = useLocalizedStringFormatter(locales);
 
   const list = useList();
@@ -31,7 +30,7 @@ export const PaginationInfos: FC<TextProps> = (props) => {
     })
   );
 
-  return <Text {...props}>{text}</Text>;
+  return <Text>{text}</Text>;
 };
 
 export default PaginationInfos;

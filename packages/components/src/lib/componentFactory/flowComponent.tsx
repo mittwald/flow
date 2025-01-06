@@ -5,19 +5,18 @@ import type {
 import type {
   ComponentProps,
   ComponentType,
-  ForwardRefExoticComponent,
   Ref,
-  PropsWithoutRef,
   ReactElement,
   ReactNode,
   RefAttributes,
+  FunctionComponent,
 } from "react";
 import { cloneElement } from "react";
-import React, { forwardRef } from "react";
+import React from "react";
 import type { PropsWithTunnel } from "@/lib/types/props";
-import { useProps } from "@/lib/propsContext";
 import { TunnelEntry } from "@mittwald/react-tunnel";
 import SlotContextProvider from "@/lib/slotContext/SlotContextProvider";
+import { useProps } from "@/lib/hooks/useProps";
 
 export interface FlowComponentProps extends PropsWithTunnel {
   wrapWith?: ReactElement;
@@ -36,18 +35,17 @@ type FlowComponentImplementationType<
   R = never,
 > = ComponentType<FlowComponentImplementationProps<C, R>>;
 
-type FlowComponentType<
-  C extends FlowComponentName,
-  R,
-> = ForwardRefExoticComponent<
-  PropsWithoutRef<FlowComponentPropsOfName<C>> & RefAttributes<R>
+type FlowComponentType<C extends FlowComponentName, R> = FunctionComponent<
+  FlowComponentPropsOfName<C> & RefAttributes<R>
 >;
 
 export function flowComponent<C extends FlowComponentName, R = never>(
   componentName: C,
   ImplementationComponentType: FlowComponentImplementationType<C, R>,
 ): FlowComponentType<C, R> {
-  return forwardRef<R, FlowComponentPropsOfName<C>>((props, ref) => {
+  return (propsFromArgument) => {
+    const { ref, ...props } = propsFromArgument;
+
     const { tunnelId, wrapWith, ...propsWithContext } = useProps(
       componentName,
       props as FlowComponentPropsOfName<C>,
@@ -64,7 +62,7 @@ export function flowComponent<C extends FlowComponentName, R = never>(
 
     let element: ReactNode = <ImplementationComponentType {...propsWithRef} />;
 
-    if ("slot" in props && !!props.slot) {
+    if ("slot" in props && !!props.slot && typeof props.slot === "string") {
       element = (
         <SlotContextProvider slot={props.slot} component={componentName}>
           {element}
@@ -81,5 +79,5 @@ export function flowComponent<C extends FlowComponentName, R = never>(
     }
 
     return element;
-  });
+  };
 }

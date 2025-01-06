@@ -1,12 +1,12 @@
 import type { FC, PropsWithChildren } from "react";
-import React, { Suspense } from "react";
+import React from "react";
 import styles from "./Item.module.scss";
-import clsx from "clsx";
 import type { Key } from "react-aria-components";
 import * as Aria from "react-aria-components";
 import { useList } from "@/components/List/hooks/useList";
-import { SkeletonView } from "@/components/List/components/Items/components/Item/components/SkeletonView/SkeletonView";
 import { useGridItemProps } from "@/components/List/components/Items/components/Item/hooks/useGridItemProps";
+import { useListViewComponents } from "@/components/List";
+import ItemView from "@/components/List/viewComponents/Items/Item";
 
 interface Props extends PropsWithChildren {
   id: Key;
@@ -17,34 +17,20 @@ export const Item = (props: Props) => {
   const { id, data } = props;
   const list = useList();
 
-  const itemView = list.itemView;
+  const itemViewSettings = list.itemView;
+  const { item: View = ItemView } = useListViewComponents();
 
   const { gridItemProps, children } = useGridItemProps(props);
 
-  if (!itemView) {
-    return null;
-  }
-
-  const textValue = itemView.textValue ? itemView.textValue(data) : undefined;
-  const href = itemView.href ? itemView.href(data) : undefined;
-  const hasAction = !!gridItemProps.onAction || !!href;
+  const textValue = itemViewSettings?.textValue
+    ? itemViewSettings.textValue(data)
+    : "---";
+  const href = itemViewSettings?.href ? itemViewSettings.href(data) : undefined;
 
   return (
-    <Aria.GridListItem
-      id={id}
-      className={(props) =>
-        clsx(
-          styles.item,
-          hasAction && styles.hasAction,
-          props.isSelected && styles.isSelected,
-        )
-      }
-      textValue={textValue}
-      href={href}
-      {...gridItemProps}
-    >
-      <Suspense fallback={<SkeletonView />}>{children}</Suspense>
-    </Aria.GridListItem>
+    <View id={id} textValue={textValue} key={id} href={href} {...gridItemProps}>
+      {children}
+    </View>
   );
 };
 

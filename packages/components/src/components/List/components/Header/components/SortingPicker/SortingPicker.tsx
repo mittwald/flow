@@ -1,20 +1,19 @@
 import type { FC } from "react";
 import React from "react";
-import { SortingPickerItem } from "@/components/List/components/Header/components/SortingPickerItem";
 import { useList } from "@/components/List/hooks/useList";
-import { Text } from "@/components/Text";
-import { IconSorting } from "@/components/Icon/components/icons";
-import { Button } from "@/components/Button";
-import { ContextMenu, ContextMenuTrigger } from "@/components/ContextMenu";
 import locales from "../../../../locales/*.locale.json";
-import { Translate } from "@/lib/react/components/Translate";
+import { SortingPicker as View } from "@/components/List/viewComponents/Header/SortingPicker/SortingPicker";
+import { useLocalizedStringFormatter } from "react-aria";
+import { SortingPickerMenuItem } from "@/components/List/components/Header/components/SortingPicker/SortingPickerMenuItem";
 
 export const SortingPicker: FC = () => {
   const list = useList();
 
   const pickerItems = list.visibleSorting.map((s) => (
-    <SortingPickerItem sorting={s} key={s.id} />
+    <SortingPickerMenuItem sorting={s} key={s.id} />
   ));
+
+  const stringFormatter = useLocalizedStringFormatter(locales);
 
   if (pickerItems.length === 0) {
     return null;
@@ -22,31 +21,17 @@ export const SortingPicker: FC = () => {
 
   const pickerLabelSorting = list.visibleSorting.find((s) => s.isSorted());
 
-  const text = (
-    <Text>
-      {pickerLabelSorting ? (
-        <>{pickerLabelSorting.name ?? pickerLabelSorting.property}</>
-      ) : (
-        <Translate locales={locales}>list.sorting</Translate>
-      )}
-    </Text>
-  );
+  const text = pickerLabelSorting
+    ? (pickerLabelSorting.name ?? pickerLabelSorting.property)
+    : stringFormatter.format("list.sorting");
 
   return (
-    <ContextMenuTrigger>
-      <Button variant="outline" color="secondary">
-        {text}
-        <IconSorting />
-      </Button>
-      <ContextMenu
-        selectionMode="single"
-        selectedKeys={pickerLabelSorting ? [pickerLabelSorting.id] : []}
-        onAction={(id) => {
-          list.getSorting(String(id)).enable();
-        }}
-      >
-        {pickerItems}
-      </ContextMenu>
-    </ContextMenuTrigger>
+    <View
+      buttonText={text}
+      selectedKeys={pickerLabelSorting ? [pickerLabelSorting.id] : []}
+      onAction={(id) => {
+        list.getSorting(String(id)).enable();
+      }}
+    />
   );
 };
