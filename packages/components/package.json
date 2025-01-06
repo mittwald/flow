@@ -555,11 +555,21 @@
       "build:docs-properties": {
         "cache": true,
         "inputs": [
-          "{projectRoot}/src/components/**/*",
+          "{projectRoot}/src/components/**/*.ts",
+          "{projectRoot}/src/components/**/*.tsx",
           "{projectRoot}/dev/createDocPropertiesJson.ts"
         ],
         "outputs": [
           "{projectRoot}/out"
+        ]
+      },
+      "build:css": {
+        "cache": true,
+        "inputs": [
+          "{projectRoot}/src/**/*.css"
+        ],
+        "outputs": [
+          "{projectRoot}/dist/css"
         ]
       }
     }

@@ -1,22 +1,7 @@
 import type { FlowRemoteElementKeysOfTagNameMap } from "@/lib/types";
+export * from "./auto-generated/index";
 
-export * from "./Action";
-export * from "./Activity";
-export * from "./Select";
-export * from "./Alert";
-export * from "./AlertIcon";
-export * from "./Button";
-export * from "./Icon";
-export * from "./Heading";
-export * from "./Modal";
-export * from "./ModalTrigger";
-export * from "./Section";
-export * from "./Text";
-export * from "./Content";
-export * from "./Fragment";
 export * from "./Form";
-export * from "./TextField";
-export * from "./CodeBlock";
 export * from "./List";
 export * from "./ListItems";
 export * from "./ListItem";
@@ -26,6 +11,8 @@ export * from "./ListFilterPicker";
 export * from "./ListFilterPickerMenuItem";
 export * from "./ListActiveFilterItem";
 export * from "./ListActiveFilterList";
-export * from "./Option";
+export * from "./ListLoadNextBatchButton";
+export * from "./ListPaginationInfos";
+export * from "./ListFooter";
 
 export type FlowRemoteElementKeys = FlowRemoteElementKeysOfTagNameMap<"flr">;

@@ -65,6 +65,13 @@ export const components: RemoteComponentsMap<
   "flr-list-filter-picker-menu-item": createFlowRemoteComponentRenderer(
     ListViews.FilterPickerMenuItem,
   ),
+  "flr-list-footer": createRemoteComponentRenderer(ListViews.Footer),
+  "flr-list-load-next-batch-button": createFlowRemoteComponentRenderer(
+    ListViews.LoadNextBatchButton,
+  ),
+  "flr-list-pagination-infos": createRemoteComponentRenderer(
+    ListViews.PaginationInfos,
+  ),
 
   "remote-fragment": RemoteFragmentRenderer,
 

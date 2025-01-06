@@ -1,0 +1,16 @@
+/* eslint-disable */
+/* prettier-ignore */
+/* This file is auto-generated with the remote-components-generator */
+import createFlowRemoteComponent from "@/lib/createFlowRemoteComponent";
+import { RemoteActionElement } from "@mittwald/flow-remote-elements";
+
+export const Action = createFlowRemoteComponent(
+  "flr-action",
+  "Action",
+  RemoteActionElement,
+  {
+    eventProps: {
+      onAction: { event: "action" } as never,
+    },
+  },
+);

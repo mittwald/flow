@@ -11,6 +11,9 @@ import type Fragment from "@/components/Fragment";
 import type Items from "@/components/List/viewComponents/Items/Items";
 import type Item from "@/components/List/viewComponents/Items/Item";
 import type ListView from "@/components/List/viewComponents/List/List";
+import type PaginationInfos from "@/components/List/viewComponents/Footer/PaginationInfos";
+import type LoadNextBatchButton from "@/components/List/viewComponents/Footer/LoadNextBatchButton";
+import type { Footer } from "@/components/List/viewComponents/Footer";
 
 interface Context {
   fragment?: typeof Fragment;
@@ -22,6 +25,9 @@ interface Context {
   items?: typeof Items;
   item?: typeof Item;
   list?: typeof ListView;
+  footer?: typeof Footer;
+  paginationInfos?: typeof PaginationInfos;
+  loadNextBatchButton?: typeof LoadNextBatchButton;
 }
 
 const context = createContext<Context>({});
