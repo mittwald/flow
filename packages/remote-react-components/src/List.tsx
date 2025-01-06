@@ -19,7 +19,7 @@ import {
 import type { FC } from "react";
 import React from "react";
 import { createRemoteComponent } from "@remote-dom/react";
-import { Fragment } from "@/Fragment";
+import { Fragment } from "@/auto-generated/Fragment";
 
 const components = {
   fragment: Fragment,
