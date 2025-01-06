@@ -28,6 +28,7 @@
     "test:compile": "run tsc --noEmit"
   },
   "dependencies": {
+    "@mittwald/flow-react-components": "workspace:^",
     "@mittwald/flow-remote-core": "workspace:^",
     "@mittwald/flow-remote-elements": "workspace:^",
     "@remote-dom/core": "^1.5.2",

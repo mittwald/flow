@@ -10,10 +10,6 @@
       "types": "./dist/types/index.d.ts",
       "default": "./dist/index.js"
     },
-    "./react-hook-form": {
-      "types": "./dist/types/integrations/react-hook-form/index.d.ts",
-      "import": "./dist/react-hook-form.js"
-    },
     "./polyfill": {
       "types": "./dist/types/polyfill.d.ts",
       "import": "./dist/polyfill.js"

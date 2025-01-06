@@ -22,3 +22,11 @@ export async function formServerAction(prevState: number, formData: FormData) {
   console.log("Done");
   return prevState + 1;
 }
+
+export async function formReactHookServerAction(
+  prevState: unknown,
+  formData: FormData,
+) {
+  await sleep();
+  console.log("action form", formData);
+}

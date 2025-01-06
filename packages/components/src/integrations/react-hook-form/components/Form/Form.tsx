@@ -4,6 +4,7 @@ import type {
   FormEventHandler,
   PropsWithChildren,
 } from "react";
+import { useId } from "react";
 import React, { useRef } from "react";
 import type { FieldValues, UseFormReturn } from "react-hook-form";
 import { FormContextProvider } from "@/integrations/react-hook-form/components/context/formContext";
@@ -14,15 +15,17 @@ export type FormOnSubmitHandler<F extends FieldValues> = Parameters<
   UseFormReturn<F>["handleSubmit"]
 >[0];
 
-interface Props<F extends FieldValues>
+export interface FormProps<F extends FieldValues>
   extends Omit<ComponentProps<"form">, "onSubmit">,
     PropsWithChildren {
   form: UseFormReturn<F>;
   onSubmit: FormOnSubmitHandler<F>;
-  formComponent?: ComponentType<"form">;
+  formComponent?: ComponentType<
+    PropsWithChildren<{ id: string; onSubmit?: FormEventHandler }>
+  >;
 }
 
-export function Form<F extends FieldValues>(props: Props<F>) {
+export function Form<F extends FieldValues>(props: FormProps<F>) {
   const {
     form,
     children,
@@ -31,6 +34,7 @@ export function Form<F extends FieldValues>(props: Props<F>) {
     ...formProps
   } = props;
 
+  const formId = useId();
   const isAsyncSubmit = useRef(false);
 
   const handleOnSubmit: FormEventHandler = (e) => {
@@ -51,9 +55,9 @@ export function Form<F extends FieldValues>(props: Props<F>) {
   };
 
   return (
-    <FormContextProvider value={{ form }}>
+    <FormContextProvider value={{ form, id: formId }}>
       <SubmitButtonStateProvider isAsyncSubmit={isAsyncSubmit}>
-        <FormView {...formProps} onSubmit={handleOnSubmit}>
+        <FormView {...formProps} id={formId} onSubmit={handleOnSubmit}>
           {children}
         </FormView>
         <AutoFormResetEffect />

@@ -67,18 +67,22 @@ export const Markdown: FC<MarkdownProps> = (props) => {
     pre: (props) => {
       const preElementContent = Children.toArray(props.children)[0];
 
+      if (!(typeof preElementContent === "string")) {
+        throw new Error("Element must be a string");
+      }
+
       return (
         <CodeBlock
           copyable={false}
           color={color}
           language={
-            isValidElement(preElementContent) &&
+            isValidElement<{ className?: string }>(preElementContent) &&
             preElementContent.props.className
               ? preElementContent.props.className.replace("language-", "")
               : undefined
           }
           code={
-            isValidElement(preElementContent)
+            isValidElement<{ children: string }>(preElementContent)
               ? preElementContent.props.children
               : preElementContent
           }

@@ -1,4 +1,9 @@
-import { createRemoteComponent } from "@remote-dom/react";
 import { RemoteIconElement } from "@mittwald/flow-remote-elements";
+import createFlowRemoteComponent from "@/lib/createFlowRemoteComponent";
 
-export const Icon = createRemoteComponent("flr-icon", RemoteIconElement, {});
+export const Icon = createFlowRemoteComponent(
+  "flr-icon",
+  "Icon",
+  RemoteIconElement,
+  {},
+);

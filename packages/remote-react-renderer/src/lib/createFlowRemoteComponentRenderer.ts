@@ -1,4 +1,4 @@
-import type { ComponentType, PropsWithoutRef, PropsWithRef } from "react";
+import type { ComponentType, PropsWithoutRef } from "react";
 import { createElement, forwardRef } from "react";
 import type { RemoteComponentRendererProps } from "@remote-dom/react/host";
 import { createRemoteComponentRenderer } from "@remote-dom/react/host";
@@ -27,7 +27,7 @@ export const createFlowRemoteComponentRenderer = <
 >(
   component: ComponentType<P>,
   init: InitObject = {},
-): ComponentType<PropsWithRef<RemoteComponentRendererProps>> => {
+): ComponentType<RemoteComponentRendererProps> => {
   const HostComponentWithRef = forwardRef(function HostComponent(
     props: PropsWithoutRef<P>,
     ref: unknown,

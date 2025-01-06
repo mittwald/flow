@@ -18,7 +18,8 @@ interface Props<T extends FieldValues>
 export function Field<T extends FieldValues>(props: Props<T>) {
   const { children, control, ...rest } = props;
 
-  const controlFromContext = useFormContext<T>().form?.control;
+  const formContext = useFormContext<T>();
+  const controlFromContext = formContext.form?.control;
 
   return (
     <Controller
@@ -32,6 +33,7 @@ export function Field<T extends FieldValues>(props: Props<T>) {
 
         const formControlProps = {
           ...field,
+          form: formContext.id,
           isRequired: !!rest.rules?.required,
           isInvalid: invalid,
           validationBehavior: "aria" as const,

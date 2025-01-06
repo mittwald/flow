@@ -10,7 +10,7 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import useProps from "@/lib/propsContext/useProps";
+import useProps from "@/lib/hooks/useProps";
 import { render, screen } from "@testing-library/react";
 import PropsContextProvider from "@/lib/propsContext/PropsContextProvider";
 import dynamic from "@/lib/propsContext/dynamicProps/dynamic";
@@ -28,7 +28,7 @@ const TestComponent: FC<PropsWithChildren<TestComponentProps>> = (props) => {
   return (
     <>
       <span data-testid="prop-value">{testProp ?? "undefined"}</span>
-      {isValidElement(children)
+      {isValidElement<Record<string, unknown>>(children)
         ? cloneElement(children, {
             ...children.props,
             "data-additional-prop": true,
