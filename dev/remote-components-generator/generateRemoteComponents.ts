@@ -8,6 +8,7 @@ import jetpack from "fs-jetpack";
 import { prepareTypeScriptOutput } from "./generation/prepareTypeScriptOutput";
 import { generateRemoteElementFile } from "./generation/generateRemoteElementFile";
 import { remoteComponentGeneratorConfig } from "./config";
+import type { RemoteComponentGeneratorConfig } from "./types/config";
 
 const componentFileLoader = new ComponentFileLoader();
 const componentFileContentLoader = new ComponentFileContentLoader(
@@ -15,7 +16,7 @@ const componentFileContentLoader = new ComponentFileContentLoader(
 );
 
 async function generate() {
-  const config = remoteComponentGeneratorConfig;
+  const config: RemoteComponentGeneratorConfig = remoteComponentGeneratorConfig;
 
   console.log("🤓 Read component specification file");
   const componentSpecificationFile = await componentFileLoader.loadFile();
@@ -29,12 +30,28 @@ async function generate() {
   console.log("✅  Done");
   console.log("");
 
-  console.log("💣 Remove ignored components");
-  config.ignoreComponents.map((ignoredComponent) => {
-    components = components.filter(
-      (item) => item.displayName != ignoredComponent,
-    );
-  });
+  console.log("💣 Remove ignored components and props");
+  for (const [componentName, componentConfig] of Object.entries(
+    config.components,
+  )) {
+    if (componentConfig.ignore) {
+      console.log(` .. removing "${componentName}"`);
+      components = components.filter(
+        (item) => item.displayName != componentName,
+      );
+    }
+    if (componentConfig.ignoreProps) {
+      const component = components.find(
+        (item) => item.displayName == componentName,
+      );
+      if (component?.props) {
+        componentConfig.ignoreProps.map((ignoredProp) => {
+          console.log(` .. removing ${componentName}'s "${ignoredProp}" prop`);
+          delete component.props[ignoredProp];
+        });
+      }
+    }
+  }
   console.log("✅  Done");
   console.log("");
 
