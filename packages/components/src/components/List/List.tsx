@@ -3,6 +3,7 @@ import React from "react";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { listContext } from "./listContext";
 import { Header } from "@/components/List/components/Header";
+import { Footer } from "@/components/List/components/Footer";
 import ListModel from "@/components/List/model/List";
 import { deepFilterByType, deepFindOfType } from "@/lib/react/deepFindOfType";
 import { ListLoaderAsync } from "@/components/List/setupComponents/ListLoaderAsync";
@@ -171,10 +172,11 @@ export const List = flowComponent("List", (props) => {
           }}
         >
           <View ref={ref}>
-            <DataLoader />
             {children}
+            <DataLoader />
             <Header hasActionGroup={hasActionGroup} />
             <Items />
+            <Footer />
           </View>
         </listContext.Provider>
       </TunnelProvider>

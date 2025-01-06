@@ -8,6 +8,9 @@ import {
   RemoteListItemsElement,
   RemoteListItemElement,
   RemoteListElement,
+  RemoteListFooterElement,
+  RemoteListPaginationInfosElement,
+  RemoteListLoadNextBatchButtonElement,
 } from "@mittwald/flow-remote-elements";
 import {
   List as FlowList,
@@ -89,6 +92,24 @@ const components = {
       },
       eventProps: {
         onAction: { event: "action" } as never,
+      },
+    },
+  ),
+
+  paginationInfos: createRemoteComponent(
+    "flr-list-pagination-infos",
+    RemoteListPaginationInfosElement,
+    {},
+  ),
+
+  footer: createRemoteComponent("flr-list-footer", RemoteListFooterElement, {}),
+
+  loadNextBatchButton: createRemoteComponent(
+    "flr-list-load-next-batch-button",
+    RemoteListLoadNextBatchButtonElement,
+    {
+      eventProps: {
+        onPress: { event: "press" } as never,
       },
     },
   ),

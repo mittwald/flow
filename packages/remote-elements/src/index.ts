@@ -26,6 +26,9 @@ export * from "./ListFilterPicker";
 export * from "./ListFilterPickerMenuItem";
 export * from "./ListActiveFilterItem";
 export * from "./ListActiveFilterList";
+export * from "./ListLoadNextBatchButton";
+export * from "./ListPaginationInfos";
+export * from "./ListFooter";
 export * from "./Option";
 
 export type FlowRemoteElementKeys = FlowRemoteElementKeysOfTagNameMap<"flr">;

@@ -1,12 +1,13 @@
 import type { FC } from "react";
 import React from "react";
-import { Button } from "@/components/Button";
 import { useList } from "@/components/List/hooks/useList";
-import locales from "../../../../locales/*.locale.json";
-import { useLocalizedStringFormatter } from "react-aria";
+import ShowNextBatchButtonView from "@/components/List/viewComponents/Footer/LoadNextBatchButton";
+import { useListViewComponents } from "@/components/List";
 
-export const ShowNextBatchButton: FC = (props) => {
-  const stringFormatter = useLocalizedStringFormatter(locales);
+export const ShowNextBatchButton: FC = () => {
+  const { loadNextBatchButton: View = ShowNextBatchButtonView } =
+    useListViewComponents();
+
   const list = useList();
   const isLoading = list.loader.useIsLoading();
   const isInitiallyLoading = list.loader.useIsInitiallyLoading();
@@ -18,16 +19,11 @@ export const ShowNextBatchButton: FC = (props) => {
   }
 
   return (
-    <Button
+    <View
       isPending={isLoading && !isInitiallyLoading}
       isDisabled={isInitiallyLoading}
-      {...props}
       onPress={() => list.batches.nextBatch()}
-      variant="plain"
-      size="s"
-    >
-      {stringFormatter.format("list.showMore")}
-    </Button>
+    />
   );
 };
 

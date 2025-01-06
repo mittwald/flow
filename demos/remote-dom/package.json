@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "build": "run next build",
-    "build:deps:watch": "run -T build:deps:watch @mittwald/flow-demo-remote-dom",
+    "build:deps:watch": "nx watch -d -p \"@mittwald/flow-demo-remote-dom\" -- nx run-many -t build -p \\$NX_PROJECT_NAME --exclude=\"@mittwald/flow-demo-remote-dom\"",
     "dev": "run nx run-many --outputStyle=stream --projects=@mittwald/flow-demo-remote-dom --targets=start,build:deps:watch",
     "start": "run next dev",
     "test:compile": "run tsc --noEmit"

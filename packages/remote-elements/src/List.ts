@@ -1,7 +1,8 @@
-import { createRemoteElement } from "@remote-dom/core/elements";
+import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
+
 export type { ListProps } from "@mittwald/flow-react-components/List";
 
-export const RemoteListElement = createRemoteElement({});
+export class RemoteListElement extends FlowRemoteElement {}
 
 declare global {
   interface HTMLElementTagNameMap {
