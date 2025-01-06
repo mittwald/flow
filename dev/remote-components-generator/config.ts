@@ -1,4 +1,4 @@
 export const remoteComponentGeneratorConfig = {
-  ignoreComponents: ["ActionStateContext"],
+  components: {},
   ignoreProps: ["tunnelId", "ref", "key"],
 };
