@@ -38,39 +38,52 @@ async function generate() {
   console.log("✅  Done");
   console.log("");
 
-  console.log("📝️ Generating remote-react-component files");
-  for (const component of components) {
-    const remoteReactComponentFile =
-      generateRemoteReactComponentFile(component);
-    await jetpack.writeAsync(
-      `packages/remote-react-components/src/${component.displayName}.ts`,
-      await prepareTypeScriptOutput(remoteReactComponentFile),
-    );
-  }
-  const remoteReactComponentsIndexFile =
-    generateRemoteReactComponentIndexFile(components);
-  await jetpack.writeAsync(
-    "packages/remote-react-components/src/index.ts",
-    await prepareTypeScriptOutput(remoteReactComponentsIndexFile),
-  );
-  console.log("✅  Done");
-  console.log("");
+  {
+    console.log("📝️ Generating remote-react-component files");
 
-  console.log("📝️ Generating remote-element files");
-  for (const component of components) {
-    const remoteElementFile = generateRemoteElementFile(component);
+    const dir = `packages/remote-react-components/src/auto-generated`;
+    jetpack.remove(dir);
+
+    for (const component of components) {
+      const remoteReactComponentFile =
+        generateRemoteReactComponentFile(component);
+      await jetpack.writeAsync(
+        `${dir}/${component.displayName}.ts`,
+        await prepareTypeScriptOutput(remoteReactComponentFile),
+      );
+    }
+    const indexFile = generateRemoteReactComponentIndexFile(components);
     await jetpack.writeAsync(
-      `packages/remote-elements/src/${component.displayName}.ts`,
-      await prepareTypeScriptOutput(remoteElementFile),
+      `${dir}/index.ts`,
+      await prepareTypeScriptOutput(indexFile),
     );
+    console.log("✅  Done");
+    console.log("");
   }
-  await jetpack.writeAsync(
-    "packages/remote-elements/src/index.ts",
-    await prepareTypeScriptOutput(remoteReactComponentsIndexFile),
-  );
-  console.log("✅  Done");
-  console.log("");
-  console.log("✅  Generation finished successfully");
+
+  {
+    console.log("📝️ Generating remote-element files");
+
+    const dir = `packages/remote-elements/src/auto-generated`;
+    const indexFile = generateRemoteReactComponentIndexFile(components);
+
+    jetpack.remove(dir);
+
+    for (const component of components) {
+      const remoteElementFile = generateRemoteElementFile(component);
+      await jetpack.writeAsync(
+        `${dir}/${component.displayName}.ts`,
+        await prepareTypeScriptOutput(remoteElementFile),
+      );
+    }
+    await jetpack.writeAsync(
+      `${dir}/index.ts`,
+      await prepareTypeScriptOutput(indexFile),
+    );
+    console.log("✅  Done");
+    console.log("");
+    console.log("✅  Generation finished successfully");
+  }
 }
 
 void generate();

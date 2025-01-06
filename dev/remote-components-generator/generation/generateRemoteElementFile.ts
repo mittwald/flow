@@ -31,22 +31,24 @@ export function generateRemoteElementFile(
   };
 
   return `\
-    import { createRemoteElement } from "@remote-dom/core/elements";
+    import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
     import type { ${t.propsType} } from "@mittwald/flow-react-components/${t.name}";
     export type { ${t.propsType} } from "@mittwald/flow-react-components/${t.name}";
     
-    export const ${t.element} = createRemoteElement<${t.propsType}>({
-      properties: {
-        ${t.props}
-      },
-      ${
-        t.events && t.events.length > 0
-          ? `events: {
-          ${t.events}
-        },`
-          : "events: {},"
+    
+    export class ${t.element} extends FlowRemoteElement<${t.propsType}> {
+      static get remoteProperties() {
+        return {
+          ${t.props}
+        };
       }
-    });
+
+      static get remoteEvents() {
+        return {
+          ${t.events}
+        };
+      }
+    }    
     
     declare global {
       interface HTMLElementTagNameMap {
