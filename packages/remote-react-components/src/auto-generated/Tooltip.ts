@@ -6,6 +6,7 @@ import { RemoteTooltipElement } from "@mittwald/flow-remote-elements";
 
 export const Tooltip = createFlowRemoteComponent(
   "flr-tooltip",
+  "Tooltip",
   RemoteTooltipElement,
   {
     eventProps: {

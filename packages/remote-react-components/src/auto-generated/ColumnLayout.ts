@@ -6,6 +6,7 @@ import { RemoteColumnLayoutElement } from "@mittwald/flow-remote-elements";
 
 export const ColumnLayout = createFlowRemoteComponent(
   "flr-column-layout",
+  "ColumnLayout",
   RemoteColumnLayoutElement,
   {
     eventProps: {

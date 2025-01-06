@@ -6,6 +6,7 @@ import { RemoteLayoutCardElement } from "@mittwald/flow-remote-elements";
 
 export const LayoutCard = createFlowRemoteComponent(
   "flr-layout-card",
+  "LayoutCard",
   RemoteLayoutCardElement,
   {
     eventProps: {

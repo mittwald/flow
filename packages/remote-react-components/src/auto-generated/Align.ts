@@ -6,6 +6,7 @@ import { RemoteAlignElement } from "@mittwald/flow-remote-elements";
 
 export const Align = createFlowRemoteComponent(
   "flr-align",
+  "Align",
   RemoteAlignElement,
   {},
 );

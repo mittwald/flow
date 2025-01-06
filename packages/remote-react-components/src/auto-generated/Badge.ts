@@ -6,6 +6,7 @@ import { RemoteBadgeElement } from "@mittwald/flow-remote-elements";
 
 export const Badge = createFlowRemoteComponent(
   "flr-badge",
+  "Badge",
   RemoteBadgeElement,
   {
     eventProps: {

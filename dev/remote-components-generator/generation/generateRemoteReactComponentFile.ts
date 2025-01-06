@@ -26,7 +26,7 @@ export function generateRemoteReactComponentFile(
     import createFlowRemoteComponent from "@/lib/createFlowRemoteComponent";
     import { ${t.component} } from "@mittwald/flow-remote-elements";
 
-    export const ${t.name} = createFlowRemoteComponent("flr-${kebabize(t.name)}", ${t.component}, {${
+    export const ${t.name} = createFlowRemoteComponent("flr-${kebabize(t.name)}", "${t.name}", ${t.component}, {${
       t.events && t.events.length > 0
         ? `eventProps: {
           ${t.events}

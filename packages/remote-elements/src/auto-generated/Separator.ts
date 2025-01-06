@@ -13,8 +13,8 @@ export class RemoteSeparatorElement extends FlowRemoteElement<SeparatorProps> {
       "aria-describedby": {},
       "aria-details": {},
       id: {},
-      style: {},
       className: {},
+      style: {},
       slot: {},
       elementType: {},
     };

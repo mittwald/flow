@@ -6,6 +6,7 @@ import { RemoteModalElement } from "@mittwald/flow-remote-elements";
 
 export const Modal = createFlowRemoteComponent(
   "flr-modal",
+  "Modal",
   RemoteModalElement,
   {},
 );

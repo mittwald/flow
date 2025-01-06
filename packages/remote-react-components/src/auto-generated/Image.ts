@@ -6,6 +6,7 @@ import { RemoteImageElement } from "@mittwald/flow-remote-elements";
 
 export const Image = createFlowRemoteComponent(
   "flr-image",
+  "Image",
   RemoteImageElement,
   {
     eventProps: {

@@ -6,6 +6,7 @@ import { RemoteInlineCodeElement } from "@mittwald/flow-remote-elements";
 
 export const InlineCode = createFlowRemoteComponent(
   "flr-inline-code",
+  "InlineCode",
   RemoteInlineCodeElement,
   {
     eventProps: {

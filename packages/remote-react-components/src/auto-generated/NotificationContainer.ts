@@ -6,6 +6,7 @@ import { RemoteNotificationContainerElement } from "@mittwald/flow-remote-elemen
 
 export const NotificationContainer = createFlowRemoteComponent(
   "flr-notification-container",
+  "NotificationContainer",
   RemoteNotificationContainerElement,
   {
     eventProps: {

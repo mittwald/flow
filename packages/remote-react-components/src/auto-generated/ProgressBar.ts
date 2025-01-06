@@ -6,6 +6,7 @@ import { RemoteProgressBarElement } from "@mittwald/flow-remote-elements";
 
 export const ProgressBar = createFlowRemoteComponent(
   "flr-progress-bar",
+  "ProgressBar",
   RemoteProgressBarElement,
   {},
 );

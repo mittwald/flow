@@ -8,7 +8,10 @@ import type {
   RemoteComponentTypeFromElementConstructor,
 } from "@remote-dom/react";
 import { createRemoteComponent } from "@remote-dom/react";
-import { useProps } from "@mittwald/flow-react-components/hooks";
+import {
+  useProps,
+  isFlowComponentName,
+} from "@mittwald/flow-react-components/hooks";
 
 export function createFlowRemoteComponent<
   Tag extends keyof HTMLElementTagNameMap,
@@ -28,7 +31,7 @@ export function createFlowRemoteComponent<
   Props extends Record<string, any> = {},
 >(
   tag: Tag,
-  flowComponentTag: Parameters<typeof useProps>[0],
+  flowComponentTag: string,
   Element: ElementConstructor | undefined = customElements.get(tag) as any,
   {
     slotProps = true,
@@ -40,10 +43,14 @@ export function createFlowRemoteComponent<
     eventProps,
   });
 
-  return (props) => {
-    const combinedProps = useProps(flowComponentTag, props);
-    return createElement(element, combinedProps as never);
-  };
+  if (isFlowComponentName(flowComponentTag)) {
+    return (props) => {
+      const combinedProps = useProps(flowComponentTag, props);
+      return createElement(element, combinedProps as never);
+    };
+  }
+
+  return element;
 }
 
 export default createFlowRemoteComponent;

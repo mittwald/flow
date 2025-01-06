@@ -6,6 +6,7 @@ import { RemotePopoverElement } from "@mittwald/flow-remote-elements";
 
 export const Popover = createFlowRemoteComponent(
   "flr-popover",
+  "Popover",
   RemotePopoverElement,
   {
     eventProps: {

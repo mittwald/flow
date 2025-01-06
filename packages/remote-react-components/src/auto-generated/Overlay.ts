@@ -6,6 +6,7 @@ import { RemoteOverlayElement } from "@mittwald/flow-remote-elements";
 
 export const Overlay = createFlowRemoteComponent(
   "flr-overlay",
+  "Overlay",
   RemoteOverlayElement,
   {},
 );

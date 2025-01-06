@@ -6,6 +6,7 @@ import { RemoteBreadcrumbElement } from "@mittwald/flow-remote-elements";
 
 export const Breadcrumb = createFlowRemoteComponent(
   "flr-breadcrumb",
+  "Breadcrumb",
   RemoteBreadcrumbElement,
   {
     eventProps: {

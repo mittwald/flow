@@ -6,6 +6,7 @@ import { RemoteSectionElement } from "@mittwald/flow-remote-elements";
 
 export const Section = createFlowRemoteComponent(
   "flr-section",
+  "Section",
   RemoteSectionElement,
   {
     eventProps: {

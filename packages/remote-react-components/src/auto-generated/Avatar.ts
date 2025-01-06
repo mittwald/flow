@@ -6,6 +6,7 @@ import { RemoteAvatarElement } from "@mittwald/flow-remote-elements";
 
 export const Avatar = createFlowRemoteComponent(
   "flr-avatar",
+  "Avatar",
   RemoteAvatarElement,
   {},
 );

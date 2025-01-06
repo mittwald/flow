@@ -6,6 +6,7 @@ import { RemoteSkeletonElement } from "@mittwald/flow-remote-elements";
 
 export const Skeleton = createFlowRemoteComponent(
   "flr-skeleton",
+  "Skeleton",
   RemoteSkeletonElement,
   {
     eventProps: {

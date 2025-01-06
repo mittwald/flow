@@ -6,6 +6,7 @@ import { RemoteCheckboxGroupElement } from "@mittwald/flow-remote-elements";
 
 export const CheckboxGroup = createFlowRemoteComponent(
   "flr-checkbox-group",
+  "CheckboxGroup",
   RemoteCheckboxGroupElement,
   {
     eventProps: {

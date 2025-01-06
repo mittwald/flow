@@ -6,6 +6,7 @@ import { RemoteActivityElement } from "@mittwald/flow-remote-elements";
 
 export const Activity = createFlowRemoteComponent(
   "flr-activity",
+  "Activity",
   RemoteActivityElement,
   {},
 );

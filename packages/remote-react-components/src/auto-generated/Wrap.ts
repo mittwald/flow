@@ -6,6 +6,7 @@ import { RemoteWrapElement } from "@mittwald/flow-remote-elements";
 
 export const Wrap = createFlowRemoteComponent(
   "flr-wrap",
+  "Wrap",
   RemoteWrapElement,
   {},
 );

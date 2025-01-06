@@ -6,6 +6,7 @@ import { RemoteSkeletonTextElement } from "@mittwald/flow-remote-elements";
 
 export const SkeletonText = createFlowRemoteComponent(
   "flr-skeleton-text",
+  "SkeletonText",
   RemoteSkeletonTextElement,
   {
     eventProps: {

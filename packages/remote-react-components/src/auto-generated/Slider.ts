@@ -6,6 +6,7 @@ import { RemoteSliderElement } from "@mittwald/flow-remote-elements";
 
 export const Slider = createFlowRemoteComponent(
   "flr-slider",
+  "Slider",
   RemoteSliderElement,
   {
     eventProps: {

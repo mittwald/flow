@@ -6,6 +6,7 @@ import { RemoteActionElement } from "@mittwald/flow-remote-elements";
 
 export const Action = createFlowRemoteComponent(
   "flr-action",
+  "Action",
   RemoteActionElement,
   {
     eventProps: {

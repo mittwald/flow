@@ -9,6 +9,8 @@ export class RemoteNumberFieldElement extends FlowRemoteElement<NumberFieldProps
   static get remoteProperties() {
     return {
       validationBehavior: {},
+      minValue: {},
+      maxValue: {},
       isDisabled: {},
       isReadOnly: {},
       isRequired: {},
@@ -23,12 +25,10 @@ export class RemoteNumberFieldElement extends FlowRemoteElement<NumberFieldProps
       "aria-details": {},
       id: {},
       name: {},
-      style: {},
       className: {},
+      style: {},
       slot: {},
       step: {},
-      minValue: {},
-      maxValue: {},
       decrementAriaLabel: {},
       incrementAriaLabel: {},
       isWheelDisabled: {},
@@ -49,12 +49,12 @@ export class RemoteNumberFieldElement extends FlowRemoteElement<NumberFieldProps
       copy: {},
       cut: {},
       paste: {},
-      compositionStart: {},
       compositionEnd: {},
+      compositionStart: {},
       compositionUpdate: {},
-      select: {},
       beforeInput: {},
       input: {},
+      select: {},
     };
   }
 }

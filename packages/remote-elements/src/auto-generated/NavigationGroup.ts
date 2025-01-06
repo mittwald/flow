@@ -2,42 +2,35 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { LabelProps } from "@mittwald/flow-react-components/Label";
-export type { LabelProps } from "@mittwald/flow-react-components/Label";
+import type { NavigationGroupProps } from "@mittwald/flow-react-components/NavigationGroup";
+export type { NavigationGroupProps } from "@mittwald/flow-react-components/NavigationGroup";
 
-export class RemoteLabelElement extends FlowRemoteElement<LabelProps> {
+export class RemoteNavigationGroupElement extends FlowRemoteElement<NavigationGroupProps> {
   static get remoteProperties() {
     return {
-      optional: {},
-      isDisabled: {},
-      unstyled: {},
-      autoFocus: {},
-      defaultValue: {},
-      "aria-label": {},
-      "aria-labelledby": {},
-      "aria-describedby": {},
-      "aria-details": {},
-      id: {},
-      className: {},
-      style: {},
-      slot: {},
-      form: {},
-      title: {},
+      collapsable: {},
       defaultChecked: {},
+      defaultValue: {},
       suppressContentEditableWarning: {},
       suppressHydrationWarning: {},
       accessKey: {},
       autoCapitalize: {},
+      autoFocus: {},
+      className: {},
       contentEditable: {},
       contextMenu: {},
       dir: {},
       draggable: {},
       enterKeyHint: {},
       hidden: {},
+      id: {},
       lang: {},
       nonce: {},
+      slot: {},
       spellCheck: {},
+      style: {},
       tabIndex: {},
+      title: {},
       translate: {},
       radioGroup: {},
       role: {},
@@ -82,7 +75,9 @@ export class RemoteLabelElement extends FlowRemoteElement<LabelProps> {
       "aria-colspan": {},
       "aria-controls": {},
       "aria-current": {},
+      "aria-describedby": {},
       "aria-description": {},
+      "aria-details": {},
       "aria-disabled": {},
       "aria-dropeffect": {},
       "aria-errormessage": {},
@@ -93,6 +88,8 @@ export class RemoteLabelElement extends FlowRemoteElement<LabelProps> {
       "aria-hidden": {},
       "aria-invalid": {},
       "aria-keyshortcuts": {},
+      "aria-label": {},
+      "aria-labelledby": {},
       "aria-level": {},
       "aria-live": {},
       "aria-modal": {},
@@ -118,21 +115,13 @@ export class RemoteLabelElement extends FlowRemoteElement<LabelProps> {
       "aria-valuemin": {},
       "aria-valuenow": {},
       "aria-valuetext": {},
-      dangerouslySetInnerHTML: {},
-      elementType: {},
-      htmlFor: {},
       children: {},
-      wrapWith: {},
+      dangerouslySetInnerHTML: {},
     };
   }
 
   static get remoteEvents() {
     return {
-      focus: {},
-      blur: {},
-      keyDown: {},
-      keyUp: {},
-      change: {},
       copy: {},
       copyCapture: {},
       cut: {},
@@ -145,8 +134,11 @@ export class RemoteLabelElement extends FlowRemoteElement<LabelProps> {
       compositionStartCapture: {},
       compositionUpdate: {},
       compositionUpdateCapture: {},
+      focus: {},
       focusCapture: {},
+      blur: {},
       blurCapture: {},
+      change: {},
       changeCapture: {},
       beforeInput: {},
       beforeInputCapture: {},
@@ -162,9 +154,11 @@ export class RemoteLabelElement extends FlowRemoteElement<LabelProps> {
       loadCapture: {},
       error: {},
       errorCapture: {},
+      keyDown: {},
       keyDownCapture: {},
       keyPress: {},
       keyPressCapture: {},
+      keyUp: {},
       keyUpCapture: {},
       abort: {},
       abortCapture: {},
@@ -302,8 +296,8 @@ export class RemoteLabelElement extends FlowRemoteElement<LabelProps> {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "flr-label": InstanceType<typeof RemoteLabelElement>;
+    "flr-navigation-group": InstanceType<typeof RemoteNavigationGroupElement>;
   }
 }
 
-customElements.define("flr-label", RemoteLabelElement);
+customElements.define("flr-navigation-group", RemoteNavigationGroupElement);

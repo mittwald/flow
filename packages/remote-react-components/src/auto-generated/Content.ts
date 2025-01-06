@@ -6,6 +6,7 @@ import { RemoteContentElement } from "@mittwald/flow-remote-elements";
 
 export const Content = createFlowRemoteComponent(
   "flr-content",
+  "Content",
   RemoteContentElement,
   {
     eventProps: {

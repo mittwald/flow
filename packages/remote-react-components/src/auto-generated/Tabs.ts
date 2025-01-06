@@ -4,8 +4,13 @@
 import createFlowRemoteComponent from "@/lib/createFlowRemoteComponent";
 import { RemoteTabsElement } from "@mittwald/flow-remote-elements";
 
-export const Tabs = createFlowRemoteComponent("flr-tabs", RemoteTabsElement, {
-  eventProps: {
-    onSelectionChange: { event: "selectionChange" } as never,
+export const Tabs = createFlowRemoteComponent(
+  "flr-tabs",
+  "Tabs",
+  RemoteTabsElement,
+  {
+    eventProps: {
+      onSelectionChange: { event: "selectionChange" } as never,
+    },
   },
-});
+);

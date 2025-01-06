@@ -6,6 +6,7 @@ import { RemoteFileFieldElement } from "@mittwald/flow-remote-elements";
 
 export const FileField = createFlowRemoteComponent(
   "flr-file-field",
+  "FileField",
   RemoteFileFieldElement,
   {
     eventProps: {

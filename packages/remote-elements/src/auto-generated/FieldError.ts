@@ -9,8 +9,8 @@ export class RemoteFieldErrorElement extends FlowRemoteElement<FieldErrorProps> 
   static get remoteProperties() {
     return {
       id: {},
-      style: {},
       className: {},
+      style: {},
       children: {},
       wrapWith: {},
     };

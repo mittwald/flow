@@ -6,6 +6,7 @@ import { RemoteInitialsElement } from "@mittwald/flow-remote-elements";
 
 export const Initials = createFlowRemoteComponent(
   "flr-initials",
+  "Initials",
   RemoteInitialsElement,
   {},
 );

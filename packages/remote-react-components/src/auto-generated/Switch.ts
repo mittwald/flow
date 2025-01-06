@@ -6,6 +6,7 @@ import { RemoteSwitchElement } from "@mittwald/flow-remote-elements";
 
 export const Switch = createFlowRemoteComponent(
   "flr-switch",
+  "Switch",
   RemoteSwitchElement,
   {
     eventProps: {

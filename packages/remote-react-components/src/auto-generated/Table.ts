@@ -6,6 +6,7 @@ import { RemoteTableElement } from "@mittwald/flow-remote-elements";
 
 export const Table = createFlowRemoteComponent(
   "flr-table",
+  "Table",
   RemoteTableElement,
   {
     eventProps: {

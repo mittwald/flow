@@ -6,6 +6,7 @@ import { RemoteHeadingElement } from "@mittwald/flow-remote-elements";
 
 export const Heading = createFlowRemoteComponent(
   "flr-heading",
+  "Heading",
   RemoteHeadingElement,
   {
     eventProps: {

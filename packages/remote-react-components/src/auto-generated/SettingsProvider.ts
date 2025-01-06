@@ -6,6 +6,7 @@ import { RemoteSettingsProviderElement } from "@mittwald/flow-remote-elements";
 
 export const SettingsProvider = createFlowRemoteComponent(
   "flr-settings-provider",
+  "SettingsProvider",
   RemoteSettingsProviderElement,
   {},
 );

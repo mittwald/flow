@@ -6,6 +6,7 @@ import { RemoteIllustratedMessageElement } from "@mittwald/flow-remote-elements"
 
 export const IllustratedMessage = createFlowRemoteComponent(
   "flr-illustrated-message",
+  "IllustratedMessage",
   RemoteIllustratedMessageElement,
   {
     eventProps: {

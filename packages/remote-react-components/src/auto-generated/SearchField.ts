@@ -6,6 +6,7 @@ import { RemoteSearchFieldElement } from "@mittwald/flow-remote-elements";
 
 export const SearchField = createFlowRemoteComponent(
   "flr-search-field",
+  "SearchField",
   RemoteSearchFieldElement,
   {
     eventProps: {
@@ -18,13 +19,13 @@ export const SearchField = createFlowRemoteComponent(
       onCopy: { event: "copy" } as never,
       onCut: { event: "cut" } as never,
       onPaste: { event: "paste" } as never,
-      onCompositionStart: { event: "compositionStart" } as never,
       onCompositionEnd: { event: "compositionEnd" } as never,
+      onCompositionStart: { event: "compositionStart" } as never,
       onCompositionUpdate: { event: "compositionUpdate" } as never,
-      onSelect: { event: "select" } as never,
       onBeforeInput: { event: "beforeInput" } as never,
       onInput: { event: "input" } as never,
       onSubmit: { event: "submit" } as never,
+      onSelect: { event: "select" } as never,
       onClear: { event: "clear" } as never,
     },
   },

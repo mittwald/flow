@@ -9,10 +9,9 @@ export class RemoteContextualHelpElement extends FlowRemoteElement<ContextualHel
   static get remoteProperties() {
     return {
       children: {},
-      style: {},
       className: {},
+      style: {},
       slot: {},
-      width: {},
       isOpen: {},
       placement: {},
       containerPadding: {},
@@ -35,6 +34,7 @@ export class RemoteContextualHelpElement extends FlowRemoteElement<ContextualHel
       defaultOpen: {},
       isDialogContent: {},
       controller: {},
+      width: {},
       padding: {},
     };
   }

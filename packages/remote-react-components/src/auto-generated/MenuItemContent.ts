@@ -6,6 +6,7 @@ import { RemoteMenuItemContentElement } from "@mittwald/flow-remote-elements";
 
 export const MenuItemContent = createFlowRemoteComponent(
   "flr-menu-item-content",
+  "MenuItemContent",
   RemoteMenuItemContentElement,
   {},
 );

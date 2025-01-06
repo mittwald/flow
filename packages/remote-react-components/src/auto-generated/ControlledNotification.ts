@@ -6,6 +6,7 @@ import { RemoteControlledNotificationElement } from "@mittwald/flow-remote-eleme
 
 export const ControlledNotification = createFlowRemoteComponent(
   "flr-controlled-notification",
+  "ControlledNotification",
   RemoteControlledNotificationElement,
   {},
 );

@@ -6,6 +6,7 @@ import { RemoteEmulatedBoldTextElement } from "@mittwald/flow-remote-elements";
 
 export const EmulatedBoldText = createFlowRemoteComponent(
   "flr-emulated-bold-text",
+  "EmulatedBoldText",
   RemoteEmulatedBoldTextElement,
   {
     eventProps: {

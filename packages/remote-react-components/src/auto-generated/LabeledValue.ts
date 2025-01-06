@@ -6,6 +6,7 @@ import { RemoteLabeledValueElement } from "@mittwald/flow-remote-elements";
 
 export const LabeledValue = createFlowRemoteComponent(
   "flr-labeled-value",
+  "LabeledValue",
   RemoteLabeledValueElement,
   {},
 );

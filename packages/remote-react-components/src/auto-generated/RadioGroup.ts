@@ -6,6 +6,7 @@ import { RemoteRadioGroupElement } from "@mittwald/flow-remote-elements";
 
 export const RadioGroup = createFlowRemoteComponent(
   "flr-radio-group",
+  "RadioGroup",
   RemoteRadioGroupElement,
   {
     eventProps: {

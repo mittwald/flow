@@ -6,6 +6,7 @@ import { RemoteButtonElement } from "@mittwald/flow-remote-elements";
 
 export const Button = createFlowRemoteComponent(
   "flr-button",
+  "Button",
   RemoteButtonElement,
   {
     eventProps: {

@@ -6,6 +6,7 @@ import { RemoteTimeFieldElement } from "@mittwald/flow-remote-elements";
 
 export const TimeField = createFlowRemoteComponent(
   "flr-time-field",
+  "TimeField",
   RemoteTimeFieldElement,
   {
     eventProps: {

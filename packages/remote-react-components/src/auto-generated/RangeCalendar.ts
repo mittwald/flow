@@ -6,6 +6,7 @@ import { RemoteRangeCalendarElement } from "@mittwald/flow-remote-elements";
 
 export const RangeCalendar = createFlowRemoteComponent(
   "flr-range-calendar",
+  "RangeCalendar",
   RemoteRangeCalendarElement,
   {},
 );

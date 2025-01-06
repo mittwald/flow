@@ -6,6 +6,7 @@ import { RemoteOverlayTriggerElement } from "@mittwald/flow-remote-elements";
 
 export const OverlayTrigger = createFlowRemoteComponent(
   "flr-overlay-trigger",
+  "OverlayTrigger",
   RemoteOverlayTriggerElement,
   {},
 );

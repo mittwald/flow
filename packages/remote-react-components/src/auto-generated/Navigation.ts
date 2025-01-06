@@ -6,6 +6,7 @@ import { RemoteNavigationElement } from "@mittwald/flow-remote-elements";
 
 export const Navigation = createFlowRemoteComponent(
   "flr-navigation",
+  "Navigation",
   RemoteNavigationElement,
   {
     eventProps: {

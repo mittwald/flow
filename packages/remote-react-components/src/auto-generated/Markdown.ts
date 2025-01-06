@@ -6,6 +6,7 @@ import { RemoteMarkdownElement } from "@mittwald/flow-remote-elements";
 
 export const Markdown = createFlowRemoteComponent(
   "flr-markdown",
+  "Markdown",
   RemoteMarkdownElement,
   {},
 );

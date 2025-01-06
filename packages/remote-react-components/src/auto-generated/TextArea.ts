@@ -6,6 +6,7 @@ import { RemoteTextAreaElement } from "@mittwald/flow-remote-elements";
 
 export const TextArea = createFlowRemoteComponent(
   "flr-text-area",
+  "TextArea",
   RemoteTextAreaElement,
   {
     eventProps: {
@@ -18,12 +19,12 @@ export const TextArea = createFlowRemoteComponent(
       onCopy: { event: "copy" } as never,
       onCut: { event: "cut" } as never,
       onPaste: { event: "paste" } as never,
-      onCompositionStart: { event: "compositionStart" } as never,
       onCompositionEnd: { event: "compositionEnd" } as never,
+      onCompositionStart: { event: "compositionStart" } as never,
       onCompositionUpdate: { event: "compositionUpdate" } as never,
-      onSelect: { event: "select" } as never,
       onBeforeInput: { event: "beforeInput" } as never,
       onInput: { event: "input" } as never,
+      onSelect: { event: "select" } as never,
     },
   },
 );

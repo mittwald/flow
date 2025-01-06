@@ -6,6 +6,7 @@ import { RemoteAlertElement } from "@mittwald/flow-remote-elements";
 
 export const Alert = createFlowRemoteComponent(
   "flr-alert",
+  "Alert",
   RemoteAlertElement,
   {
     eventProps: {

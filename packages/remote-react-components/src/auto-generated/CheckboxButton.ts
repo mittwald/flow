@@ -6,6 +6,7 @@ import { RemoteCheckboxButtonElement } from "@mittwald/flow-remote-elements";
 
 export const CheckboxButton = createFlowRemoteComponent(
   "flr-checkbox-button",
+  "CheckboxButton",
   RemoteCheckboxButtonElement,
   {
     eventProps: {

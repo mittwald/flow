@@ -6,6 +6,7 @@ import { RemoteSelectElement } from "@mittwald/flow-remote-elements";
 
 export const Select = createFlowRemoteComponent(
   "flr-select",
+  "Select",
   RemoteSelectElement,
   {
     eventProps: {

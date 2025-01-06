@@ -6,6 +6,7 @@ import { RemoteActionGroupElement } from "@mittwald/flow-remote-elements";
 
 export const ActionGroup = createFlowRemoteComponent(
   "flr-action-group",
+  "ActionGroup",
   RemoteActionGroupElement,
   {},
 );

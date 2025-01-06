@@ -1,6 +1,6 @@
 import type { FC, PropsWithChildren, ReactNode } from "react";
 import React, { Suspense as ReactSuspense, useEffect, useState } from "react";
-import { Activity } from "@/Activity";
+import { Activity } from "@/auto-generated";
 import { useIsMounted } from "@/hooks/useIsMounted";
 
 interface Props extends PropsWithChildren {

@@ -6,6 +6,7 @@ import { RemoteSegmentedControlElement } from "@mittwald/flow-remote-elements";
 
 export const SegmentedControl = createFlowRemoteComponent(
   "flr-segmented-control",
+  "SegmentedControl",
   RemoteSegmentedControlElement,
   {
     eventProps: {
