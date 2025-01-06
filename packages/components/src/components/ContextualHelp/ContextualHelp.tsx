@@ -13,7 +13,7 @@ export const ContextualHelp = flowComponent("ContextualHelp", (props) => {
   const {
     children,
     controller: controllerFromProps,
-    refProp: ignoredRef,
+    ref: ignoredRef,
     ...rest
   } = props;
 

@@ -27,7 +27,7 @@ export interface FileFieldProps
 export const FileField = flowComponent("FileField", (props) => {
   const {
     children,
-    refProp: ref,
+    ref,
     isRequired,
     isInvalid,
     isDisabled,

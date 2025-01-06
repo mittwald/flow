@@ -37,14 +37,14 @@ export function Field<T extends FieldValues>(props: Props<T>) {
           isRequired: !!rest.rules?.required,
           isInvalid: invalid,
           validationBehavior: "aria" as const,
-          children: dynamic((p) => (
-            <>
-              {p.children}
-              <FieldError>{error?.message}</FieldError>
-            </>
-          )),
-          ref: undefined,
-          refProp: field.ref,
+          children: dynamic((p) => {
+            return (
+              <>
+                {p.children}
+                <FieldError>{error?.message}</FieldError>
+              </>
+            );
+          }),
         };
 
         const propsContext: PropsContext = {

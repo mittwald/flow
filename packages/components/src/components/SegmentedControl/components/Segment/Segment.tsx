@@ -13,7 +13,7 @@ export interface SegmentProps
     FlowComponentProps {}
 
 export const Segment = flowComponent("Segment", (props) => {
-  const { children, className, refProp: ref, ...rest } = props;
+  const { children, className, ref, ...rest } = props;
 
   const rootClassName = clsx(styles.segment, className);
 

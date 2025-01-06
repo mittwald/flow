@@ -22,7 +22,7 @@ export const Heading = flowComponent("Heading", (props) => {
     level = 2,
     color = "primary",
     size,
-    refProp: ref,
+    ref,
     ...rest
   } = props;
 

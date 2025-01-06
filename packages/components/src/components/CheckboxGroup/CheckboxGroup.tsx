@@ -21,7 +21,7 @@ export interface CheckboxGroupProps
     FlowComponentProps {}
 
 export const CheckboxGroup = flowComponent("CheckboxGroup", (props) => {
-  const { children, className, s, m, l, refProp: ref, ...rest } = props;
+  const { children, className, s, m, l, ref, ...rest } = props;
 
   const rootClassName = clsx(formFieldStyles.formField, className);
 

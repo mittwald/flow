@@ -38,7 +38,7 @@ export const Link = flowComponent("Link", (props) => {
     color = "primary",
     unstyled = false,
     "aria-current": ariaCurrent,
-    refProp: ref,
+    ref,
     ...rest
   } = props;
 

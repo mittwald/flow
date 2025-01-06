@@ -31,7 +31,7 @@ export interface AvatarProps
 }
 
 export const Avatar = flowComponent("Avatar", (props) => {
-  const { children, className, color, size = "m", refProp: ref } = props;
+  const { children, className, color, size = "m", ref } = props;
 
   const hasInitials = deepHas(children, Initials);
 

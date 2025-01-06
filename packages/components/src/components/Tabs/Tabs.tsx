@@ -19,7 +19,7 @@ export const Tabs = flowComponent("Tabs", (props) => {
     className,
     defaultSelectedKey,
     disabledKeys,
-    refProp: ref,
+    ref,
     ...rest
   } = props;
 

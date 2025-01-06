@@ -21,7 +21,7 @@ export const Section = flowComponent("Section", (props) => {
   const {
     children,
     className,
-    refProp: ref,
+    ref,
     renderContextMenuSection,
     hideSeparator,
     ...rest

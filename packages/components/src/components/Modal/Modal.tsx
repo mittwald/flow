@@ -47,7 +47,7 @@ export const Modal = flowComponent<"Modal", HTMLDivElement>(
       offCanvas,
       controller,
       children,
-      refProp,
+      ref,
       className,
       offCanvasOrientation = "right",
       ...rest
@@ -84,7 +84,7 @@ export const Modal = flowComponent<"Modal", HTMLDivElement>(
       <Overlay
         className={rootClassName}
         controller={controller}
-        ref={refProp}
+        ref={ref}
         {...rest}
       >
         <PropsContextProvider props={propsContext}>

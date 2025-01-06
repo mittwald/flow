@@ -44,7 +44,7 @@ export const Badge = flowComponent("Badge", (props) => {
     children,
     className,
     color = "neutral",
-    refProp: ref,
+    ref,
     onPress,
     onClose,
     isDisabled,

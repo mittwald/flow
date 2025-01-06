@@ -27,7 +27,7 @@ type FlowComponentImplementationProps<C extends FlowComponentName, R> = Omit<
   keyof FlowComponentProps
 > & {
   /** @internal */
-  refProp?: Ref<R>;
+  ref?: Ref<R>;
 };
 
 type FlowComponentImplementationType<
@@ -56,8 +56,8 @@ export function flowComponent<C extends FlowComponentName, R = never>(
     >;
 
     const propsWithRef = {
-      refProp: ref,
       ...implementationTypeProps,
+      ref,
     };
 
     let element: ReactNode = <ImplementationComponentType {...propsWithRef} />;

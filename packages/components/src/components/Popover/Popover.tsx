@@ -31,7 +31,7 @@ export const Popover = flowComponent("Popover", (props) => {
     isDialogContent = false,
     controller: controllerFromProps,
     withTip,
-    refProp: ref,
+    ref,
     defaultOpen = false,
     width,
     padding = "m",

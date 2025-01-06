@@ -23,7 +23,7 @@ export const Icon = flowComponent("Icon", (props) => {
     "aria-label": ariaLabel,
     children,
     size = "m",
-    refProp: ignoredRef,
+    ref: ignoredRef,
     ...svgAttributes
   } = props;
 

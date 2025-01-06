@@ -20,7 +20,7 @@ export const Content = flowComponent("Content", (props) => {
   const {
     children,
     elementType = "div",
-    refProp: ref,
+    ref,
     clearPropsContext = true,
     ...rest
   } = props;

@@ -15,7 +15,7 @@ export interface TextFieldProps
     FlowComponentProps {}
 
 export const TextField = flowComponent("TextField", (props) => {
-  const { children, placeholder, refProp: ref, form, ...rest } = props;
+  const { children, placeholder, ref, form, ...rest } = props;
 
   const input = (
     <Aria.Input

@@ -17,7 +17,7 @@ export interface CheckboxProps
     FlowComponentProps {}
 
 export const Checkbox = flowComponent("Checkbox", (props) => {
-  const { children, className, refProp: ref, ...rest } = props;
+  const { children, className, ref, ...rest } = props;
 
   const rootClassName = clsx(styles.checkbox, className);
 

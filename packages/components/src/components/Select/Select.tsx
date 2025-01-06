@@ -40,7 +40,7 @@ export const Select = flowComponent("Select", (props) => {
       // default: do nothing
     },
     controller: controllerFromProps,
-    refProp: ref,
+    ref,
     ...rest
   } = props;
 

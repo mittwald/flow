@@ -23,7 +23,7 @@ export interface CopyButtonProps
 export const CopyButton = flowComponent("CopyButton", (props) => {
   const {
     text,
-    refProp: ref,
+    ref,
     variant = "plain",
     color = "secondary",
     ...buttonProps

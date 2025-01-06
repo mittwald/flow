@@ -1,5 +1,4 @@
 /// <reference types="vite/client" />
-import type React from "react";
 import type { JSX as Jsx } from "react/jsx-runtime";
 
 declare global {
@@ -24,11 +23,4 @@ declare global {
     type ElementChildrenAttribute = Jsx.ElementChildrenAttribute;
     type IntrinsicClassAttributes = Jsx.IntrinsicClassAttributes<never>;
   }
-}
-
-// allow forwardRef with generic types
-declare module "react" {
-  function forwardRef<T, P = Record<string, unknown>>(
-    render: (props: P, ref: React.Ref<T>) => React.ReactNode | null,
-  ): (props: P & React.RefAttributes<T>) => React.ReactNode | null;
 }

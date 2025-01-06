@@ -16,7 +16,7 @@ export interface HeaderProps
 export const Header = flowComponent("Header", (props) => {
   const {
     children,
-    refProp: ref,
+    ref,
     elementType = "header",
     renderSectionHeader,
     className,

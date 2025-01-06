@@ -26,7 +26,7 @@ export const TextArea = flowComponent("TextArea", (props) => {
     placeholder,
     rows = 5,
     autoResizeMaxRows = rows,
-    refProp: ref,
+    ref,
     ...rest
   } = props;
 

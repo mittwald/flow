@@ -14,7 +14,7 @@ export interface OptionProps
 }
 
 export const Option = flowComponent("Option", (props) => {
-  const { className, children, value, refProp: ref, ...rest } = props;
+  const { className, children, value, ref, ...rest } = props;
 
   const rootClassName = clsx(styles.option, className);
 

@@ -19,7 +19,7 @@ export interface SearchFieldProps
     FlowComponentProps {}
 
 export const SearchField = flowComponent("SearchField", (props) => {
-  const { children, className, refProp: ref, ...rest } = props;
+  const { children, className, ref, ...rest } = props;
 
   const rootClassName = clsx(
     formFieldStyles.formField,

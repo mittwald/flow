@@ -25,7 +25,7 @@ export const ActionGroup = flowComponent("ActionGroup", (props) => {
   const {
     children,
     className,
-    refProp: ref,
+    ref,
     ignoreBreakpoint,
     spacing = "s",
     ...rest

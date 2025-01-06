@@ -7,7 +7,7 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 export interface ImageProps extends ComponentProps<"img">, FlowComponentProps {}
 
 export const Image = flowComponent("Image", (props) => {
-  const { refProp: ref, ...rest } = props;
+  const { ref, ...rest } = props;
   return (
     <ClearPropsContext>
       <img {...rest} ref={ref} />

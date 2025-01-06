@@ -47,7 +47,7 @@ export interface ListProps<T>
 }
 
 export const List = flowComponent("List", (props) => {
-  const { children, batchSize, onChange, refProp: ref, ...restProps } = props;
+  const { children, batchSize, onChange, ref, ...restProps } = props;
 
   const { list: View = ListView } = useListViewComponents();
 

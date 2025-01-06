@@ -15,13 +15,7 @@ export interface MenuItemProps
 }
 
 export const MenuItem = flowComponent("MenuItem", (props) => {
-  const {
-    children,
-    className,
-    selectionVariant,
-    refProp: ref,
-    ...rest
-  } = props;
+  const { children, className, selectionVariant, ref, ...rest } = props;
 
   const rootClassName = clsx(styles.menuItem, className);
 

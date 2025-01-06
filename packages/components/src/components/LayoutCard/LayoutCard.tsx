@@ -14,13 +14,7 @@ export interface LayoutCardProps
     FlowComponentProps {}
 
 export const LayoutCard = flowComponent("LayoutCard", (props) => {
-  const {
-    children,
-    className,
-    elementType = "div",
-    refProp: ref,
-    ...rest
-  } = props;
+  const { children, className, elementType = "div", ref, ...rest } = props;
 
   const rootClassName = clsx(styles.layoutCard, className);
 

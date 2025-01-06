@@ -25,7 +25,7 @@ export const SegmentedControl = flowComponent("SegmentedControl", (props) => {
     children,
     className,
     containerBreakpointSize = "m",
-    refProp: ref,
+    ref,
     ...rest
   } = props;
 

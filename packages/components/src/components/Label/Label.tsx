@@ -26,7 +26,7 @@ export const Label = flowComponent("Label", (props) => {
     className,
     optional,
     isDisabled,
-    refProp: ref,
+    ref,
     unstyled = false,
     ...rest
   } = props;

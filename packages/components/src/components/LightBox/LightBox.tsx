@@ -33,7 +33,7 @@ export const LightBox = flowComponent("LightBox", (props) => {
   const {
     controller: controllerFromProps,
     children,
-    refProp: ignoredRef,
+    ref: ignoredRef,
     className,
     fitScreen = true,
     ...rest

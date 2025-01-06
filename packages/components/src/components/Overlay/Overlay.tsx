@@ -1,6 +1,6 @@
 import * as Aria from "react-aria-components";
-import type { PropsWithChildren } from "react";
-import React, { forwardRef } from "react";
+import type { FC, PropsWithChildren, Ref } from "react";
+import React from "react";
 import styles from "./Overlay.module.scss";
 import clsx from "clsx";
 import type { OverlayController } from "@/lib/controller";
@@ -9,6 +9,7 @@ import OverlayContextProvider from "@/lib/controller/overlay/OverlayContextProvi
 import type { PropsWithClassName } from "@/lib/types/props";
 
 export interface OverlayProps extends PropsWithChildren, PropsWithClassName {
+  ref?: Ref<HTMLDivElement>;
   /** The controller to control the overlay state. */
   controller?: OverlayController;
   /** Whether the overlay can be closed by clicking outside of it. */
@@ -17,44 +18,43 @@ export interface OverlayProps extends PropsWithChildren, PropsWithClassName {
   overlayType?: "Modal" | "LightBox";
 }
 
-export const Overlay = forwardRef<HTMLDivElement, OverlayProps>(
-  (props, ref) => {
-    const {
-      controller: controllerFromProps,
-      children,
-      isDismissable = true,
-      className,
-      overlayType = "Modal",
-    } = props;
+export const Overlay: FC<OverlayProps> = (props) => {
+  const {
+    controller: controllerFromProps,
+    children,
+    isDismissable = true,
+    className,
+    overlayType = "Modal",
+    ref,
+  } = props;
 
-    const controllerFromContext = useOverlayController(overlayType, {
-      reuseControllerFromContext: true,
-    });
+  const controllerFromContext = useOverlayController(overlayType, {
+    reuseControllerFromContext: true,
+  });
 
-    const controller = controllerFromProps ?? controllerFromContext;
+  const controller = controllerFromProps ?? controllerFromContext;
 
-    const isOpen = controller.useIsOpen();
+  const isOpen = controller.useIsOpen();
 
-    const rootClassName = clsx(styles.overlay, className);
+  const rootClassName = clsx(styles.overlay, className);
 
-    return (
-      <Aria.ModalOverlay
-        className={rootClassName}
-        isDismissable={isDismissable}
-        isOpen={isOpen}
-        onOpenChange={(isOpen) => controller.setOpen(isOpen)}
-        ref={ref}
-      >
-        <Aria.Modal>
-          <Aria.Dialog>
-            <OverlayContextProvider type="Modal" controller={controller}>
-              {children}
-            </OverlayContextProvider>
-          </Aria.Dialog>
-        </Aria.Modal>
-      </Aria.ModalOverlay>
-    );
-  },
-);
+  return (
+    <Aria.ModalOverlay
+      className={rootClassName}
+      isDismissable={isDismissable}
+      isOpen={isOpen}
+      onOpenChange={(isOpen) => controller.setOpen(isOpen)}
+      ref={ref}
+    >
+      <Aria.Modal>
+        <Aria.Dialog>
+          <OverlayContextProvider type="Modal" controller={controller}>
+            {children}
+          </OverlayContextProvider>
+        </Aria.Dialog>
+      </Aria.Modal>
+    </Aria.ModalOverlay>
+  );
+};
 
 export default Overlay;
