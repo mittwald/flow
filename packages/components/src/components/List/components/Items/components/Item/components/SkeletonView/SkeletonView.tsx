@@ -12,7 +12,7 @@ export const SkeletonView: FC = () => {
 
   return (
     <View>
-      {list.tile && <Skeleton height="200px" />}
+      {list.tile && <Skeleton style={{ aspectRatio: 16 / 9 }} />}
       <Heading>
         <SkeletonText width="200px" />
       </Heading>
