@@ -3360,6 +3360,8 @@ __metadata:
     react-dom: ~18.3.0
     react-hook-form: "*"
   peerDependenciesMeta:
+    "@mittwald/password-tools-js":
+      optional: true
     "@mittwald/react-use-promise":
       optional: true
     next:

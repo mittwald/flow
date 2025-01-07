@@ -535,6 +535,9 @@
     "react-hook-form": "*"
   },
   "peerDependenciesMeta": {
+    "@mittwald/password-tools-js": {
+      "optional": true
+    },
     "@mittwald/react-use-promise": {
       "optional": true
     },
