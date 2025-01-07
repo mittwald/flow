@@ -1,10 +1,6 @@
 import type { RuleValidationResult } from "@mittwald/password-tools-js/rules";
 import type translate from "@/lib/react/components/Translate";
 
-/**
- * @param rule
- * @param shortVersion
- */
 const generateTranslationString = (
   rule: Partial<RuleValidationResult>,
   shortVersion = false,

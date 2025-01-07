@@ -1,10 +1,7 @@
 import { type RuleValidationResult } from "@mittwald/password-tools-js/rules";
 import type { ResolvedPolicyValidationResult } from "@/components/PasswordCreationField/PasswordCreationField";
 
-/**
- * @param result
- * @internal
- */
+/** @internal */
 export const getStatusTextFromPolicyValidationResult = (
   result?: ResolvedPolicyValidationResult,
 ): undefined | Partial<RuleValidationResult> => {
