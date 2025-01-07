@@ -168,6 +168,9 @@
     "react-hook-form": "*"
   },
   "peerDependenciesMeta": {
+    "@mittwald/password-tools-js": {
+      "optional": true
+    },
     "@internationalized/date": {
       "optional": true
     },
