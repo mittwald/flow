@@ -1,6 +1,7 @@
 /* eslint-disable */
 /* auto-generated file */
 export { IconApp } from "./IconApp";
+export { IconAutoresponder } from "./IconAutoresponder";
 export { IconBackLink } from "./IconBackLink";
 export { IconBackup } from "./IconBackup";
 export { IconCamera } from "./IconCamera";
@@ -17,6 +18,7 @@ export { IconClock } from "./IconClock";
 export { IconClose } from "./IconClose";
 export { IconCode } from "./IconCode";
 export { IconContextMenu } from "./IconContextMenu";
+export { IconContextMenuVertical } from "./IconContextMenuVertical";
 export { IconContractPartner } from "./IconContractPartner";
 export { IconContract } from "./IconContract";
 export { IconCopy } from "./IconCopy";
@@ -37,6 +39,7 @@ export { IconExternalLink } from "./IconExternalLink";
 export { IconFailed } from "./IconFailed";
 export { IconFile } from "./IconFile";
 export { IconFilter } from "./IconFilter";
+export { IconForward } from "./IconForward";
 export { IconHide } from "./IconHide";
 export { IconHome } from "./IconHome";
 export { IconImage } from "./IconImage";
@@ -54,6 +57,7 @@ export { IconMinus } from "./IconMinus";
 export { IconNotification } from "./IconNotification";
 export { IconNumber } from "./IconNumber";
 export { IconOrder } from "./IconOrder";
+export { IconPassword } from "./IconPassword";
 export { IconPayment } from "./IconPayment";
 export { IconPending } from "./IconPending";
 export { IconPerformance } from "./IconPerformance";

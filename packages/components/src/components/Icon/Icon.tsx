@@ -12,7 +12,7 @@ type SvgAttributeProps = SVGAttributes<SVGSVGElement>;
 export interface IconProps
   extends PropsWithChildren<Omit<SvgAttributeProps, "name">>,
     FlowComponentProps {
-  /** @default "m" */
+  /** The size of the icon. @default "m" */
   size?: "s" | "m" | "l";
 }
 

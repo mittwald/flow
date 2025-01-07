@@ -1,6 +1,4 @@
 column-layout:
-  content-to-content-spacing:
-    value: "{size-rem.m}"
   gap:
     s:
       value: "{size-px.s}"
@@ -8,3 +6,5 @@ column-layout:
       value: "{size-px.m}"
     l:
       value: "{size-px.l}"
+    xl:
+      value: "{size-px.xl}"

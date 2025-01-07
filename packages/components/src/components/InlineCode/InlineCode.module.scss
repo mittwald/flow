@@ -5,8 +5,9 @@
   word-wrap: break-word;
   background-color: var(--code--background-color);
   padding-inline: var(--code--padding-x);
+  padding-block: var(--code--padding-y);
   border-radius: var(--code--corner-radius);
-  display: inline-block;
+  display: inline;
   width: fit-content;
   max-width: 100%;
 

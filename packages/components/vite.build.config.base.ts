@@ -81,6 +81,7 @@ export const buildConfig = (opts: Options) => {
     LoadingSpinner: "./src/components/LoadingSpinner/index.ts",
     Markdown: "./src/components/Markdown/index.ts",
     MenuItem: "./src/components/MenuItem/index.ts",
+    Message: "./src/components/Message/index.ts",
     Modal: "./src/components/Modal/index.ts",
     Navigation: "./src/components/Navigation/index.ts",
     Notification: "./src/components/Notification/index.ts",

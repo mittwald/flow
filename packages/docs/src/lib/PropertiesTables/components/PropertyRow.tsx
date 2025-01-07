@@ -1,12 +1,11 @@
 import React from "react";
 import type { Property } from "../types";
-import { TableRow, TableCell } from "@mittwald/flow-react-components/Table";
+import { TableCell, TableRow } from "@mittwald/flow-react-components/Table";
 import { InlineCode } from "@mittwald/flow-react-components/InlineCode";
 import { customComponents } from "@/lib/mdx/components/MdxFileView/customComponents";
 import Markdown from "react-markdown";
 import { omit } from "remeda";
 import { Badge } from "@mittwald/flow-react-components/Badge";
-import styles from "./PropertyRow.module.css";
 
 export interface PropertyTableGroupProps {
   property: Property;
@@ -20,7 +19,7 @@ export const PropertyRow: React.FC<PropertyTableGroupProps> = ({
     .replaceAll(/{@link (\S+)}/g, "[$1]($1)");
   return (
     <TableRow>
-      <TableCell className={styles.nameCell}>
+      <TableCell>
         <InlineCode>{property.name}</InlineCode>
         {property.required && <Badge>Required</Badge>}
       </TableCell>

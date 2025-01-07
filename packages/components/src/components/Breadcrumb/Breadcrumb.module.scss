@@ -8,23 +8,18 @@
   align-items: center;
 
   .link {
-    padding-inline: var(--breadcrumb-item--padding-x);
-    font-weight: var(--breadcrumb-item--font-weight--default);
+    padding-inline: var(--breadcrumb--spacing);
+    font-weight: var(--breadcrumb--font-weight--default);
+    text-decoration: underline;
 
     @include focus.focus;
 
     & {
       @include ellipsis.ellipsis;
     }
-
-    &:hover {
-      text-decoration: underline;
-    }
   }
 
   .breadcrumbItem {
-    color: var(--breadcrumb-item--color);
-    font-size: var(--breadcrumb-item--font-size);
     display: flex;
     align-items: center;
     min-width: 0;
@@ -36,20 +31,44 @@
 
       .link {
         text-decoration: none;
-        font-weight: var(--breadcrumb-item--font-weight--current);
+        font-weight: var(--breadcrumb--font-weight--current);
+      }
+    }
+
+    &:first-child .link {
+      padding-inline-start: 0;
+    }
+
+    &[data-disabled="true"] {
+      .link {
+        cursor: unset;
       }
     }
   }
 
-  &.dark {
-    .breadcrumbItem {
-      color: var(--breadcrumb-item--color-dark);
+  /* Colors */
+
+  @mixin variant($color) {
+    &:where(.#{$color}) {
+      .breadcrumbItem {
+        color: var(--breadcrumb--color-#{$color}--default);
+
+        &:not([data-disabled="true"]) {
+          .link {
+            &:hover {
+              color: var(--breadcrumb--color-#{$color}--hover);
+            }
+
+            &[data-pressed] {
+              color: var(--breadcrumb--color-#{$color}--pressed);
+            }
+          }
+        }
+      }
     }
   }
 
-  &.light {
-    .breadcrumbItem {
-      color: var(--breadcrumb-item--color-light);
-    }
-  }
+  @include variant(primary);
+  @include variant(dark);
+  @include variant(light);
 }

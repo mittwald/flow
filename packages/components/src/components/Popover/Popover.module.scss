@@ -13,7 +13,11 @@
 
   :where(.content) {
     overflow-y: auto;
-    padding: var(--popover--padding);
+    padding: var(--popover--padding--m);
+
+    &.padding-s {
+      padding: var(--popover--padding--s);
+    }
 
     &:focus-visible {
       outline: none;
@@ -29,6 +33,10 @@
       stroke: var(--popover--border-color);
       stroke-width: var(--popover--border-width);
     }
+  }
+
+  hr {
+    margin-block: var(--popover--spacing);
   }
 
   &[data-placement="top"] {

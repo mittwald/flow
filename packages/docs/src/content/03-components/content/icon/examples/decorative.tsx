@@ -1,5 +1,6 @@
 import {
   IconApp,
+  IconAutoresponder,
   IconBackup,
   IconCalendar,
   IconCamera,
@@ -15,12 +16,14 @@ import {
   IconDomain,
   IconEmail,
   IconExtension,
+  IconForward,
   IconInbox,
   IconInvoice,
   IconMember,
   IconMittwald,
   IconNumber,
   IconOrder,
+  IconPassword,
   IconPayment,
   IconPerformance,
   IconProject,
@@ -199,5 +202,17 @@ import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
   <LabeledValue>
     <Label>SshKey</Label>
     <IconSshKey />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Forward</Label>
+    <IconForward />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Autoresponder</Label>
+    <IconAutoresponder />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Password</Label>
+    <IconPassword />
   </LabeledValue>
 </ColumnLayout>;

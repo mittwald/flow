@@ -1,14 +1,27 @@
-breadcrumb-item:
-  color:
-    value: "{heading.color}"
+breadcrumb:
+  color-primary:
+    default:
+      value: "{primary.color.1000}"
+    hover:
+      value: "{primary.color.900}"
+    pressed:
+      value: "{primary.color.800}"
   color-light:
-    value: "{light-plain-content-color}"
+    default:
+      value: "{light.color.800}"
+    hover:
+      value: "{light.color.700}"
+    pressed:
+      value: "{light.color.600}"
   color-dark:
-    value: "{dark-plain-content-color}"
-  padding-x:
-    value: "{size-px.xs}"
-  font-size:
-    value: "{font-size-text.s}"
+    default:
+      value: "{dark.color.800}"
+    hover:
+      value: "{dark.color.700}"
+    pressed:
+      value: "{dark.color.600}"
+  spacing:
+    value: "{size-rem.s}"
   font-weight:
     default:
       value: "{font-weight.normal}"

@@ -12,8 +12,9 @@ import locales from "./locales/*.locale.json";
 export interface ProgressBarProps
   extends PropsWithChildren<Omit<Aria.ProgressBarProps, "children">>,
     PropsWithStatus {
+  /** Whether the max value should be displayed. */
   showMaxValue?: boolean;
-  /** @default "m" */
+  /** The size variant of the progress bar @default "m" */
   size?: "s" | "m";
 }
 

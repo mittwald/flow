@@ -1,14 +1,16 @@
 .navigationGroup {
   &:not(.collapsable) ul {
-    padding: var(--accordion--content-padding);
+    padding-inline: var(--accordion--padding-x);
+    padding-block: var(--accordion--padding-y);
   }
+
   &:not(:last-child) {
     margin-bottom: var(--menu--group-to-group-spacing);
   }
 
   .label {
     display: block;
-    margin-block: var(--menu--label-to-group-spacing);
-    padding-inline-start: var(--accordion--header-padding-x);
+    padding-inline-start: var(--accordion--padding-x);
+    padding-block: var(--accordion--padding-y);
   }
 }

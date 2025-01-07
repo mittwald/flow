@@ -1,15 +1,21 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import ContextMenu, {
+  ContextMenuSection,
   ContextMenuTrigger,
   MenuItem,
 } from "@/components/ContextMenu";
 import { Button } from "@/components/Button";
 import { Separator } from "@/components/Separator";
 import { Heading } from "@/components/Heading";
-import { Section } from "@/components/Section";
-import { IconServer } from "@/components/Icon/components/icons";
+import {
+  IconCamera,
+  IconEmail,
+  IconServer,
+} from "@/components/Icon/components/icons";
 import { Text } from "@/components/Text";
+import { Avatar } from "@/components/Avatar";
+import { Initials } from "@/components/Initials";
 
 const meta: Meta<typeof ContextMenu> = {
   title: "Actions/ContextMenu",
@@ -102,14 +108,14 @@ export const WithContextMenuSection: Story = {
     <ContextMenuTrigger>
       <Button>Trigger</Button>
       <ContextMenu selectionMode="navigation" {...props}>
-        <Section>
+        <ContextMenuSection>
           <Heading>Websites</Heading>
           <MenuItem href="https://www.mittwald.de" id="https://www.mittwald.de">
             www.mittwald.de
           </MenuItem>
           <MenuItem href="https://www.google.de">www.google.de</MenuItem>
           <MenuItem href="https://www.adobe.com">www.adobe.com</MenuItem>
-        </Section>
+        </ContextMenuSection>
       </ContextMenu>
     </ContextMenuTrigger>
   ),
@@ -123,7 +129,7 @@ export const WithIcon: Story = {
     <ContextMenuTrigger>
       <Button>Trigger</Button>
       <ContextMenu selectionMode="navigation" {...props}>
-        <Section>
+        <ContextMenuSection>
           <Heading>Websites</Heading>
           <MenuItem href="https://www.mittwald.de" id="https://www.mittwald.de">
             <IconServer />
@@ -137,7 +143,7 @@ export const WithIcon: Story = {
             <IconServer />
             <Text>www.adobe.com</Text>
           </MenuItem>
-        </Section>
+        </ContextMenuSection>
       </ContextMenu>
     </ContextMenuTrigger>
   ),
@@ -147,3 +153,59 @@ export const WithIcon: Story = {
 };
 
 export const CustomWidth: Story = { args: { width: 400 } };
+
+export const WithAvatar: Story = {
+  render: (props) => (
+    <ContextMenuTrigger>
+      <Button>Trigger</Button>
+      <ContextMenu selectionMode="navigation" {...props}>
+        <ContextMenuSection>
+          <MenuItem>
+            <Avatar>
+              <Initials>Max Mustermann</Initials>
+            </Avatar>
+            <IconCamera />
+          </MenuItem>
+          <Heading>Max Mustermann</Heading>
+        </ContextMenuSection>
+        <Separator />
+        <ContextMenuSection>
+          <MenuItem>
+            <Text>Settings</Text>
+          </MenuItem>
+          <MenuItem>
+            <Text>Logout</Text>
+          </MenuItem>
+        </ContextMenuSection>
+      </ContextMenu>
+    </ContextMenuTrigger>
+  ),
+  args: {
+    defaultOpen: true,
+  },
+};
+
+export const WithSectionSelectionMode: Story = {
+  render: (props) => (
+    <ContextMenuTrigger>
+      <Button>Trigger</Button>
+      <ContextMenu {...props}>
+        <ContextMenuSection selectionMode="switch">
+          <MenuItem>
+            <Text>Spam protection</Text>
+          </MenuItem>
+        </ContextMenuSection>
+        <Separator />
+        <ContextMenuSection selectionMode="navigation">
+          <MenuItem>
+            <IconEmail />
+            <Text>Update email address</Text>
+          </MenuItem>
+        </ContextMenuSection>
+      </ContextMenu>
+    </ContextMenuTrigger>
+  ),
+  args: {
+    defaultOpen: true,
+  },
+};

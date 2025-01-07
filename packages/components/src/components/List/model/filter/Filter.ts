@@ -19,20 +19,19 @@ import { customPropertyPrefix } from "@/components/List/model/types";
 import { difference, unique } from "remeda";
 import { FilterValue } from "@/components/List/model/filter/FilterValue";
 import z from "zod";
+import { toArray } from "@/lib/array/toArray";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const equalsPropertyMatcher: FilterMatcher<any, never, never> = (
+const equalsPropertyMatcher: FilterMatcher<unknown, never, never> = (
   filterValue,
   propertyValue,
 ) => filterValue === propertyValue;
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const stringCastRenderMethod: PropertyValueRenderMethod<any> = (value) =>
+const stringCastRenderMethod: PropertyValueRenderMethod<unknown> = (value) =>
   String(value);
 
 export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
   public static readonly settingsStorageSchema = z
-    .record(z.array(z.unknown()))
+    .record(z.array(z.string()))
     .optional();
 
   private _values?: FilterValue[] | undefined;
@@ -44,31 +43,22 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
   public readonly renderItem: PropertyValueRenderMethod<TMatchValue>;
   public readonly name?: string;
   private onFilterUpdateCallbacks = new Set<() => unknown>();
-  private readonly defaultSelectedValues?: FilterValue[];
+  private readonly defaultSelectedValues?: readonly NonNullable<TMatchValue>[];
 
   public constructor(list: List<T>, shape: FilterShape<T, TProp, TMatchValue>) {
     this.list = list;
     this.property = shape.property;
     this.mode = shape.mode ?? "one";
-    this._values = shape.values?.map((v) => new FilterValue(this, v));
+    this._values = shape.values?.map((v) => FilterValue.create(this, v));
     this.matcher = shape.matcher ?? equalsPropertyMatcher;
     this.renderItem = shape.renderItem ?? stringCastRenderMethod;
     this.name = shape.name;
 
-    this.defaultSelectedValues = shape.defaultSelected
-      ? this.values.filter((v) =>
-          shape.defaultSelected?.some((d) => d === v.value),
-        )
-      : undefined;
+    this.defaultSelectedValues = shape.defaultSelected;
   }
 
-  private getStoredDefaultSelectedValues() {
-    const storedValues =
-      this.list.getStoredFilterDefaultSettings()?.[String(this.property)];
-
-    return storedValues
-      ? this.values.filter((v) => storedValues.includes(v.id))
-      : undefined;
+  private getStoredSelectedIds() {
+    return this.list.getStoredFilterDefaultSettings()?.[String(this.property)];
   }
 
   public updateInitialState(initialState: InitialTableState) {
@@ -104,25 +94,27 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
 
   private checkFilterMatches(
     property: unknown,
-    filterValue: FilterValue,
+    filterValueInput: unknown,
   ): boolean {
-    if (filterValue === null) {
+    if (filterValueInput === null) {
       return true;
     }
-
-    const toArray = (val: FilterValue | FilterValue[]): FilterValue[] =>
-      Array.isArray(val) ? val : [val];
 
     const predicate = (filterValue: FilterValue) =>
       this.matcher(filterValue.value as never, property as never);
 
+    const toFilterValue = (something: unknown) =>
+      FilterValue.create(this, something);
+
     if (this.mode === "all") {
-      return toArray(filterValue).every(predicate);
+      return toArray(filterValueInput).map(toFilterValue).every(predicate);
     } else if (this.mode === "some") {
-      const filterArr = toArray(filterValue);
-      return filterArr.length === 0 || filterArr.some(predicate);
+      const filterArr = toArray(filterValueInput);
+      return (
+        filterArr.length === 0 || filterArr.map(toFilterValue).some(predicate)
+      );
     } else if (this.mode === "one") {
-      return predicate(filterValue);
+      return predicate(toFilterValue(filterValueInput));
     }
 
     throw new Error(`Unknown filter mode '${this.mode}'`);
@@ -147,7 +139,7 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
       Array.from(this.getTableColumn().getFacetedUniqueValues().keys())
         .flatMap((v) => v)
         .filter((v) => v !== undefined && v !== null),
-    ).map((v) => new FilterValue(this, v));
+    ).map((v) => FilterValue.create(this, v));
   }
 
   private checkIfValueIsUnknown(value: FilterValue) {
@@ -179,12 +171,10 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
   }
 
   public getArrayValue(): FilterValue[] {
-    const currentValue = this.getValue();
-    return Array.isArray(currentValue)
-      ? currentValue
-      : currentValue === null
-        ? []
-        : [currentValue];
+    const value = this.getValue();
+    return value === null
+      ? []
+      : toArray(value).map((v) => FilterValue.create(this, v));
   }
 
   public isValueActive(value: FilterValue): boolean {
@@ -214,7 +204,8 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
 
   public hasChanged(): boolean {
     const currentValues = this.getArrayValue().map((v) => v.value);
-    const initialValues = (this.getInitialValues() ?? []).map((v) => v.value);
+    const initialValues =
+      this.getInitialFilterValues()?.map((v) => v.value) ?? [];
 
     return (
       currentValues.length !== initialValues.length ||
@@ -223,7 +214,11 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
   }
 
   private getInitialValues() {
-    return this.getStoredDefaultSelectedValues() ?? this.defaultSelectedValues;
+    return this.getStoredSelectedIds() ?? this.defaultSelectedValues;
+  }
+
+  private getInitialFilterValues() {
+    return this.getInitialValues()?.map((v) => FilterValue.create(this, v));
   }
 
   public resetValues(): void {

@@ -158,6 +158,10 @@ export class ReactTable<T> {
       s.updateTableColumnDef(getOrCreateColumnDef(s.property)),
     );
 
+    this.list.loader.staticDataProperties.forEach((property) => {
+      getOrCreateColumnDef(property);
+    });
+
     return Array.from(columnDefsMap.values());
   }
 }

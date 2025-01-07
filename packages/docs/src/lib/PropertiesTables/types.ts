@@ -9,6 +9,4 @@ export interface Property {
 
 export type PropertyCategories = "events" | "accessibility" | "other";
 
-export type Properties = {
-  [key in PropertyCategories]: Property[];
-};
+export type Properties = Record<PropertyCategories, Property[]>;

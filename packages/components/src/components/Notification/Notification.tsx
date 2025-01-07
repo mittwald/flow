@@ -13,9 +13,16 @@ import { IconClose } from "@/components/Icon/components/icons";
 export interface NotificationProps
   extends PropsWithChildren<ComponentProps<"div">>,
     PropsWithStatus {
+  /** A link that is triggered when clicking the notification. */
   href?: string;
+  /** Whether the notification should disappear automatically after some time. */
   autoClose?: boolean;
+  /** Handler that is called when the notification is clicked. */
   onClick?: () => void;
+  /**
+   * Handler that is called when the close button of the notification is
+   * clicked.
+   */
   onClose?: () => void;
 }
 
