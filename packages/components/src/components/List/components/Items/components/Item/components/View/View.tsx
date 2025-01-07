@@ -7,6 +7,8 @@ import { OptionsButton } from "@/components/List/components/Items/components/Ite
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import type { PropsWithClassName } from "@/lib/types/props";
 import clsx from "clsx";
+import { useList } from "@/components/List";
+import { Wrap } from "@/components/Wrap";
 
 type Props = PropsWithChildren & PropsWithClassName;
 
@@ -19,6 +21,7 @@ const getStyleForContentSlot = (slot?: string) =>
 
 export const View = (props: Props) => {
   const { children, className } = props;
+  const list = useList();
 
   const propsContext: PropsContext = {
     ContextMenu: {
@@ -45,6 +48,9 @@ export const View = (props: Props) => {
       className: styles.avatar,
       tunnelId: "title",
     },
+    Image: {
+      className: styles.image,
+    },
     Heading: {
       className: styles.heading,
       level: 5,
@@ -59,7 +65,7 @@ export const View = (props: Props) => {
     },
   };
 
-  const rootClassName = clsx(styles.view, className);
+  const rootClassName = clsx(styles.view, list.tile && styles.tile, className);
 
   return (
     <div className={rootClassName}>
@@ -67,14 +73,19 @@ export const View = (props: Props) => {
         <TunnelProvider>
           <div className={styles.content}>
             {children}
-            <div className={styles.title}>
-              <TunnelExit id="title" />
-              <div className={styles.subTitle}>
-                <TunnelExit id="text" />
+            <Wrap if={list.tile}>
+              <div className={styles.tileContent}>
+                <div className={styles.title}>
+                  <TunnelExit id="title" />
+                  <div className={styles.subTitle}>
+                    <TunnelExit id="text" />
+                  </div>
+                </div>
+                {list.tile && <TunnelExit id="button" />}
               </div>
-            </div>
+            </Wrap>
           </div>
-          <TunnelExit id="button" />
+          {!list.tile && <TunnelExit id="button" />}
         </TunnelProvider>
       </PropsContextProvider>
     </div>

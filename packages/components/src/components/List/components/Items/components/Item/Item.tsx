@@ -37,6 +37,7 @@ export const Item = (props: Props) => {
           styles.item,
           hasAction && styles.hasAction,
           props.isSelected && styles.isSelected,
+          list.tile && styles.tile,
         )
       }
       textValue={textValue}
@@ -48,10 +49,21 @@ export const Item = (props: Props) => {
   );
 };
 
-export const ItemContainer: FC<PropsWithChildren> = (props) => (
-  <Aria.GridListItem textValue="-" className={styles.item}>
-    {props.children}
-  </Aria.GridListItem>
-);
+export const ItemContainer: FC<PropsWithChildren> = (props) => {
+  const list = useList();
+
+  return (
+    <Aria.GridListItem
+      textValue="-"
+      className={clsx(
+        styles.item,
+        styles.fallbackItem,
+        list.tile && styles.tile,
+      )}
+    >
+      {props.children}
+    </Aria.GridListItem>
+  );
+};
 
 export default Item;

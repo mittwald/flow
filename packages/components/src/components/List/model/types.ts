@@ -43,6 +43,7 @@ export interface ListShape<T> extends ListSupportedComponentProps {
 
   onAction?: ItemActionFn<T>;
   accordion?: boolean;
+  tile?: boolean;
   getItemId?: GetItemId<T>;
   onChange?: OnListChanged<T>;
   defaultViewMode?: ListViewMode;

@@ -77,4 +77,24 @@
     order: 4;
     width: 100%;
   }
+
+  &.tile {
+    padding: 0;
+
+    .image {
+      width: 100%;
+      border-color: var(--list-item--border-color);
+      border-width: var(--list-item--border-width);
+      border-style: var(--list-item--border-style);
+    }
+
+    .tileContent {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      padding-inline: var(--list-item--spacing);
+      padding-bottom: var(--list-item--spacing);
+      width: 100%;
+    }
+  }
 }

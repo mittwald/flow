@@ -21,7 +21,11 @@ export const Items: FC = () => {
     <Item key={item.id} data={item.data} id={item.id} />
   ));
 
-  const rootClassName = clsx(styles.items, isLoading && styles.isLoading);
+  const rootClassName = clsx(
+    styles.items,
+    isLoading && styles.isLoading,
+    list.tile && styles.tiles,
+  );
 
   return (
     <div aria-hidden={isInitiallyLoading} aria-busy={isLoading}>
