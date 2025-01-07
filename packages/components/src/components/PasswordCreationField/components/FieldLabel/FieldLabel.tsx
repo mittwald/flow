@@ -6,17 +6,15 @@ import {
   ContextualHelpTrigger,
 } from "@/components/ContextualHelp";
 import { Heading } from "@/components/Heading";
-import { Text } from "@/components/Text";
 import styles from "./FieldLabel.module.scss";
 import type { ActionFn } from "@/components/Action";
 import { Action } from "@/components/Action";
-import { IconCircleCheck, IconCircleMinus } from "@tabler/icons-react";
 import { useLocalizedStringFormatter } from "react-aria";
-import generateValidationTranslation from "@/components/PasswordCreationField/lib/generateValidationTranslation";
 import type * as Aria from "react-aria-components";
 import type { ResolvedPolicyValidationResult } from "@/components/PasswordCreationField/PasswordCreationField";
 import { isCryptographicSecureRandom } from "@mittwald/password-tools-js/generator";
 import locales from "./../../locales/*.locale.json";
+import ValidationResultEntry from "@/components/PasswordCreationField/components/ValidationResultEntry/ValidationResultEntry";
 
 export type PasswordFieldLabelProps = PropsWithChildren<{
   policyValidationResult?: ResolvedPolicyValidationResult;
@@ -24,11 +22,7 @@ export type PasswordFieldLabelProps = PropsWithChildren<{
 }> &
   Pick<Aria.InputProps, "disabled">;
 
-/**
- * @class
- * @param props
- * @internal
- */
+/** @internal */
 export const FieldLabel: FC<PasswordFieldLabelProps> = (props) => {
   const {
     children,
@@ -42,30 +36,7 @@ export const FieldLabel: FC<PasswordFieldLabelProps> = (props) => {
     ?.filter((r) => {
       return policyValidationResult?.isEmptyValueValidation ? !r.isValid : true;
     })
-    .map((r) => {
-      const icon = r.isValid ? (
-        <IconCircleCheck color="green" />
-      ) : (
-        <IconCircleMinus color="red" />
-      );
-
-      const [translationKey, translationValues] = generateValidationTranslation(
-        r,
-        true,
-      );
-
-      return (
-        <Text
-          className={styles.rule}
-          data-rule={r.ruleType}
-          data-rule-valid={r.isValid}
-          key={translationKey}
-        >
-          {icon}
-          {translate.format(translationKey, translationValues)}
-        </Text>
-      );
-    });
+    .map((r) => <ValidationResultEntry result={r} />);
 
   return (
     <>
