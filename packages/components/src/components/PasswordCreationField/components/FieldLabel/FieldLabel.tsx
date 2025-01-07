@@ -11,17 +11,16 @@ import styles from "./FieldLabel.module.scss";
 import type { ActionFn } from "@/components/Action";
 import { Action } from "@/components/Action";
 import { IconCircleCheck, IconCircleMinus } from "@tabler/icons-react";
-import type { LocalizedStrings } from "react-aria";
 import { useLocalizedStringFormatter } from "react-aria";
 import generateValidationTranslation from "@/components/PasswordCreationField/lib/generateValidationTranslation";
 import type * as Aria from "react-aria-components";
 import type { ResolvedPolicyValidationResult } from "@/components/PasswordCreationField/PasswordCreationField";
 import { isCryptographicSecureRandom } from "@mittwald/password-tools-js/generator";
+import locales from "./../../locales/*.locale.json";
 
 export type PasswordFieldLabelProps = PropsWithChildren<{
   policyValidationResult?: ResolvedPolicyValidationResult;
   onGeneratePasswordAction?: ActionFn;
-  locales?: LocalizedStrings;
 }> &
   Pick<Aria.InputProps, "disabled">;
 
@@ -36,7 +35,6 @@ export const FieldLabel: FC<PasswordFieldLabelProps> = (props) => {
     onGeneratePasswordAction,
     policyValidationResult,
     disabled,
-    locales = {},
   } = props;
   const translate = useLocalizedStringFormatter(locales);
 
