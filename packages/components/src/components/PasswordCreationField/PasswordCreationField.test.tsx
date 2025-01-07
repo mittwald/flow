@@ -1,4 +1,4 @@
-import { render, fireEvent } from "@testing-library/react";
+import { render, fireEvent, waitFor } from "@testing-library/react";
 import React from "react";
 import { assert, expect, test } from "vitest";
 import { act } from "react";
@@ -69,13 +69,15 @@ describe("PasswordCreationField Tests", () => {
       "false",
     );
 
-    await act(() =>
-      fireEvent.input(inputElement, { target: { value: "123" } }),
-    );
+    await act(() => {
+      fireEvent.input(inputElement, { target: { value: "123" } });
+    });
 
-    expect(complexityElement).toHaveAttribute(
-      "data-complexity-visible",
-      "true",
+    await waitFor(() =>
+      expect(complexityElement).toHaveAttribute(
+        "data-complexity-visible",
+        "true",
+      ),
     );
   });
 
