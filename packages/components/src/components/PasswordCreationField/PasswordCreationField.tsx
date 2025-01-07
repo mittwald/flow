@@ -29,7 +29,6 @@ import FieldLabel from "@/components/PasswordCreationField/components/FieldLabel
 import { IconHide, IconShow } from "@/components/Icon/components/icons";
 import getStatusTextFromPolicyValidationResult from "@/components/PasswordCreationField/lib/getStatusTextFromPolicyValidationResult";
 import locales from "./locales/*.locale.json";
-import type { LocalizedStrings } from "react-aria";
 import { useLocalizedStringFormatter } from "react-aria";
 import generateValidationTranslation from "@/components/PasswordCreationField/lib/generateValidationTranslation";
 import { RuleType } from "@mittwald/password-tools-js/rules";
@@ -69,7 +68,6 @@ export interface PasswordCreationFieldProps
         Partial<Pick<Aria.FieldErrorRenderProps, "validationErrors">>
     >,
     FlowComponentProps {
-  locales?: LocalizedStrings;
   value?: string;
   defaultValue?: string;
   validationPolicy?: Policy;
@@ -94,13 +92,11 @@ export const PasswordCreationField = flowComponent(
       onChange,
       isInvalid,
       validationPolicy = defaultPasswordCreationPolicy,
-      locales: localesFromProps = {},
       isRequired,
       ...rest
     } = props;
 
-    const passwordCreationFieldLocales = { ...locales, ...localesFromProps };
-    const translate = useLocalizedStringFormatter(passwordCreationFieldLocales);
+    const translate = useLocalizedStringFormatter(locales);
 
     const promiseQueue = useRef(
       new PromiseQueue({ autoStart: true, concurrency: 1 }),
@@ -253,7 +249,6 @@ export const PasswordCreationField = flowComponent(
         children: dynamic((localProps) => {
           return (
             <FieldLabel
-              locales={passwordCreationFieldLocales}
               disabled={isDisabled}
               onGeneratePasswordAction={onPasswordGenerateHandler}
               policyValidationResult={policyValidationResult}
