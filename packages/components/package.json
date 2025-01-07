@@ -160,6 +160,7 @@
   },
   "peerDependencies": {
     "@internationalized/date": "^3.6.0",
+    "@mittwald/password-tools-js": "^2.1.2",
     "@mittwald/react-use-promise": "^2.3.12",
     "next": "*",
     "react": "^19",
