@@ -10,11 +10,7 @@ export interface ComplexityIndicatorProps {
   policyValidationResult?: ResolvedPolicyValidationResult;
 }
 
-/**
- * @class
- * @param props
- * @internal
- */
+/** @internal */
 export const ComplexityIndicator: FC<ComplexityIndicatorProps> = (props) => {
   const { policyValidationResult, isLoading } = props;
 
@@ -31,6 +27,7 @@ export const ComplexityIndicator: FC<ComplexityIndicatorProps> = (props) => {
 
   return (
     <div
+      aria-hidden={true}
       data-container="complexity"
       data-complexity-visible={complexityFulfilledPercentage !== 0}
       data-complexity-status={policyValidationStatus}
