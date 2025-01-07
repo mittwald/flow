@@ -1,10 +1,9 @@
-import { useDeferredValue } from "react";
-import { useRef } from "react";
 import React, {
   type PropsWithChildren,
   startTransition,
   useEffect,
   useState,
+  useRef,
 } from "react";
 import {
   ClearPropsContext,
@@ -38,6 +37,9 @@ import PromiseQueue from "p-queue";
 import ComplexityIndicator from "@/components/PasswordCreationField/components/ComplexityIndicator/ComplexityIndicator";
 import { type PolicyValidationResult } from "@mittwald/password-tools-js/policy";
 import { type RuleValidationResult } from "@mittwald/password-tools-js/rules";
+import { useDebounceValue } from "usehooks-ts";
+
+const validationDebounceMilliseconds = 200;
 
 export const defaultPasswordCreationPolicy = Policy.fromDeclaration({
   minComplexity: 3,
@@ -105,12 +107,19 @@ export const PasswordCreationField = flowComponent(
     const valueControlType = useRef<"controlled" | "uncontrolled">(
       valueFromProps === undefined ? "uncontrolled" : "controlled",
     ).current;
-    const [uncontrolledValue, setUncontrolledValue] = useState(
+    const [uncontrolledValue, setUncontrolledValueRaw] = useState(
       defaultValue ?? "",
     );
     const value =
       valueControlType === "controlled" ? valueFromProps : uncontrolledValue;
-    const deferredValue = useDeferredValue(value);
+    const [bouncedValue, setDebouncedValue] = useDebounceValue(
+      value ?? "",
+      validationDebounceMilliseconds,
+    );
+    const setUncontrolledValue = (value: string) => {
+      setUncontrolledValueRaw(value);
+      setDebouncedValue(value);
+    };
 
     const [isPasswordRevealed, setIsPasswordRevealed] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -143,17 +152,15 @@ export const PasswordCreationField = flowComponent(
 
     useEffect(() => {
       setIsLoading(true);
-      const valueToCheck = deferredValue ?? "";
-
       void promiseQueue.add(async () => {
-        const validationResult = validationPolicy.validate(valueToCheck);
+        const validationResult = validationPolicy.validate(bouncedValue);
         return Promise.all([
           validationResult.isValid,
           validationResult.complexity,
           ...validationResult.ruleResults,
         ]);
       });
-    }, [deferredValue, validationPolicy]);
+    }, [bouncedValue, validationPolicy]);
 
     promiseQueue.on("completed", ([isValid, complexity, ...ruleResults]) => {
       if (promiseQueue.size === 0) {
