@@ -36,7 +36,14 @@ export const FieldLabel: FC<PasswordFieldLabelProps> = (props) => {
     ?.filter((r) => {
       return policyValidationResult?.isEmptyValueValidation ? !r.isValid : true;
     })
-    .map((r) => <ValidationResultEntry result={r} />);
+    .map((result, index) => {
+      return (
+        <ValidationResultEntry
+          key={`${result.identifier}-${index}`}
+          result={result}
+        />
+      );
+    });
 
   return (
     <>
