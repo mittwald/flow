@@ -8,7 +8,6 @@ import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import type { PropsWithClassName } from "@/lib/types/props";
 import clsx from "clsx";
 import { useList } from "@/components/List";
-import { Wrap } from "@/components/Wrap";
 
 type Props = PropsWithChildren & PropsWithClassName;
 
@@ -43,13 +42,11 @@ export const View = (props: Props) => {
     },
     Content: {
       className: dynamic((p) => getStyleForContentSlot(p.slot)),
+      tunnelId: dynamic((p) => (p.slot === "bottom" ? p.slot : undefined)),
     },
     Avatar: {
       className: styles.avatar,
-      tunnelId: "title",
-    },
-    Image: {
-      className: styles.image,
+      tunnelId: "avatar",
     },
     Heading: {
       className: styles.heading,
@@ -71,21 +68,41 @@ export const View = (props: Props) => {
     <div className={rootClassName}>
       <PropsContextProvider props={propsContext} mergeInParentContext>
         <TunnelProvider>
-          <div className={styles.content}>
-            {children}
-            <Wrap if={list.tile}>
-              <div className={styles.tileContent}>
+          {list.tile && (
+            <>
+              <div className={styles.avatarContainer}>
+                <TunnelExit id="avatar" />
+              </div>
+              <div className={styles.content}>
                 <div className={styles.title}>
                   <TunnelExit id="title" />
                   <div className={styles.subTitle}>
                     <TunnelExit id="text" />
                   </div>
                 </div>
-                {list.tile && <TunnelExit id="button" />}
+                <TunnelExit id="button" />
+                {children}
+                <TunnelExit id="bottom" />
               </div>
-            </Wrap>
-          </div>
-          {!list.tile && <TunnelExit id="button" />}
+            </>
+          )}
+
+          {!list.tile && (
+            <>
+              <div className={styles.content}>
+                <div className={styles.title}>
+                  <TunnelExit id="avatar" />
+                  <TunnelExit id="title" />
+                  <div className={styles.subTitle}>
+                    <TunnelExit id="text" />
+                  </div>
+                </div>
+                {children}
+              </div>
+              <TunnelExit id="button" />
+              <TunnelExit id="bottom" />
+            </>
+          )}
         </TunnelProvider>
       </PropsContextProvider>
     </div>

@@ -17,8 +17,6 @@ import { Button } from "@/components/Button";
 import IconDownload from "@/components/Icon/components/icons/IconDownload";
 import { ActionGroup } from "@/components/ActionGroup";
 import { Content } from "@/components/Content";
-import { Image } from "@/components/Image";
-import { dummyText } from "@/lib/dev/dummyText";
 
 const loadDomains: AsyncDataLoader<Domain> = async (opts) => {
   const response = await getDomains({
@@ -252,7 +250,13 @@ export const WithTile: Story = {
           <DomainList.Item textValue={(domain) => domain.hostname}>
             {(domain) => (
               <DomainList.ItemView>
-                <Image src={dummyText.imageSrc} />
+                <Avatar color={domain.type === "Domain" ? "blue" : "teal"}>
+                  {domain.type === "Domain" ? (
+                    <IconDomain />
+                  ) : (
+                    <IconSubdomain />
+                  )}
+                </Avatar>
                 <Heading>
                   {domain.hostname}
                   {!domain.verified && (

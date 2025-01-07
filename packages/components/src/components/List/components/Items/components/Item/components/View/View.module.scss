@@ -4,7 +4,8 @@
   display: flex;
   padding: var(--list-item--padding);
   gap: var(--list-item--spacing);
-  align-items: start;
+  align-items: center;
+  flex-wrap: wrap;
 
   .content {
     display: flex;
@@ -81,19 +82,40 @@
   &.tile {
     padding: 0;
 
-    .image {
+    .avatarContainer {
       width: 100%;
-      border-color: var(--list-item--border-color);
-      border-width: var(--list-item--border-width);
-      border-style: var(--list-item--border-style);
+      overflow: hidden;
+      border-bottom-color: var(--list-item--border-color);
+      border-bottom-width: var(--list-item--border-width);
+      border-bottom-style: var(--list-item--border-style);
+      aspect-ratio: 16 / 9;
     }
 
-    .tileContent {
+    .avatar {
+      width: 100%;
+      height: 100%;
+      border-radius: 0;
+
+      :global(.flow--avatar--icon) {
+        width: var(--size-px--xxl);
+        height: var(--size-px--xxl);
+      }
+
+      :global(.flow--avatar--initials) {
+        font-size: var(--size-px--xxl);
+      }
+    }
+
+    .content {
       display: flex;
       justify-content: space-between;
       align-items: start;
       padding-inline: var(--list-item--spacing);
       padding-bottom: var(--list-item--spacing);
+      width: 100%;
+    }
+
+    .topContent {
       width: 100%;
     }
   }

@@ -41,14 +41,14 @@
     &:where(.hasAction) {
       &:not(.isSelected) {
         &:hover {
-          img {
+          :global(.flow--avatar) {
             filter: brightness(var(--image-button--brightness--hover));
           }
         }
       }
 
       &[data-pressed] {
-        img {
+        :global(.flow--avatar) {
           filter: brightness(var(--image-button--brightness--pressed));
         }
       }
