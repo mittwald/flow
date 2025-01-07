@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import React from "react";
 import { useList } from "@/components/List/hooks/useList";
-import styles from "./Items.module.css";
+import styles from "./Items.module.scss";
 import clsx from "clsx";
 import * as Aria from "react-aria-components";
 import Item from "@/components/List/components/Items/components/Item/Item";
