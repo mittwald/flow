@@ -3352,6 +3352,7 @@ __metadata:
     yaml: "npm:^2.6.1"
     zod: "npm:^3.23.8"
   peerDependencies:
+    "@mittwald/password-tools-js": ^2.1.2
     "@mittwald/react-use-promise": ^2.3.12
     next: "*"
     react: ~18.3.0

@@ -4739,6 +4739,7 @@ const RAW_RUNTIME_STATE =
           ["@testing-library/user-event", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:14.5.2"],\
           ["@types/invariant", "npm:2.2.37"],\
           ["@types/luxon", "npm:3.4.2"],\
+          ["@types/mittwald__password-tools-js", null],\
           ["@types/mittwald__react-use-promise", null],\
           ["@types/next", null],\
           ["@types/node", "npm:22.10.1"],\
@@ -4804,6 +4805,7 @@ const RAW_RUNTIME_STATE =
           ["zod", "npm:3.23.8"]\
         ],\
         "packagePeers": [\
+          "@types/mittwald__password-tools-js",\
           "@types/mittwald__react-use-promise",\
           "@types/next",\
           "@types/react-dom",\
@@ -4855,6 +4857,7 @@ const RAW_RUNTIME_STATE =
           ["@testing-library/user-event", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:14.5.2"],\
           ["@types/invariant", "npm:2.2.37"],\
           ["@types/luxon", "npm:3.4.2"],\
+          ["@types/mittwald__password-tools-js", null],\
           ["@types/mittwald__react-use-promise", null],\
           ["@types/next", null],\
           ["@types/node", "npm:22.10.1"],\
@@ -4920,6 +4923,7 @@ const RAW_RUNTIME_STATE =
           ["zod", "npm:3.23.8"]\
         ],\
         "packagePeers": [\
+          "@types/mittwald__password-tools-js",\
           "@types/mittwald__react-use-promise",\
           "@types/next",\
           "@types/react-hook-form"\

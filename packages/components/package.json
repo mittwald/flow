@@ -526,6 +526,7 @@
     "yaml": "^2.6.1"
   },
   "peerDependencies": {
+    "@mittwald/password-tools-js": "^2.1.2",
     "@mittwald/react-use-promise": "^2.3.12",
     "next": "*",
     "react": "~18.3.0",
