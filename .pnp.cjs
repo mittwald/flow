@@ -4834,6 +4834,7 @@ const RAW_RUNTIME_STATE =
           ["@types/rollup", "npm:0.54.0"],\
           ["@vitejs/plugin-react", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:4.3.4"],\
           ["@vitest/coverage-v8", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:2.1.8"],\
+          ["camelcase", "npm:8.0.0"],\
           ["clsx", "npm:2.1.1"],\
           ["copy-to-clipboard", "npm:3.3.3"],\
           ["decamelize", "npm:6.0.0"],\
@@ -4946,6 +4947,7 @@ const RAW_RUNTIME_STATE =
           ["@types/rollup", "npm:0.54.0"],\
           ["@vitejs/plugin-react", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:4.3.4"],\
           ["@vitest/coverage-v8", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:2.1.8"],\
+          ["camelcase", "npm:8.0.0"],\
           ["clsx", "npm:2.1.1"],\
           ["copy-to-clipboard", "npm:3.3.3"],\
           ["decamelize", "npm:6.0.0"],\
@@ -5060,6 +5062,7 @@ const RAW_RUNTIME_STATE =
           ["@types/rollup", "npm:0.54.0"],\
           ["@vitejs/plugin-react", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:4.3.4"],\
           ["@vitest/coverage-v8", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:2.1.8"],\
+          ["camelcase", "npm:8.0.0"],\
           ["clsx", "npm:2.1.1"],\
           ["copy-to-clipboard", "npm:3.3.3"],\
           ["decamelize", "npm:6.0.0"],\
@@ -5176,6 +5179,7 @@ const RAW_RUNTIME_STATE =
           ["@types/rollup", "npm:0.54.0"],\
           ["@vitejs/plugin-react", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:4.3.4"],\
           ["@vitest/coverage-v8", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:2.1.8"],\
+          ["camelcase", "npm:8.0.0"],\
           ["clsx", "npm:2.1.1"],\
           ["copy-to-clipboard", "npm:3.3.3"],\
           ["decamelize", "npm:6.0.0"],\
@@ -5286,6 +5290,7 @@ const RAW_RUNTIME_STATE =
           ["@types/rollup", "npm:0.54.0"],\
           ["@vitejs/plugin-react", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:4.3.4"],\
           ["@vitest/coverage-v8", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:2.1.8"],\
+          ["camelcase", "npm:8.0.0"],\
           ["clsx", "npm:2.1.1"],\
           ["copy-to-clipboard", "npm:3.3.3"],\
           ["decamelize", "npm:6.0.0"],\
@@ -5399,6 +5404,7 @@ const RAW_RUNTIME_STATE =
           ["@types/rollup", "npm:0.54.0"],\
           ["@vitejs/plugin-react", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:4.3.4"],\
           ["@vitest/coverage-v8", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:2.1.8"],\
+          ["camelcase", "npm:8.0.0"],\
           ["clsx", "npm:2.1.1"],\
           ["copy-to-clipboard", "npm:3.3.3"],\
           ["decamelize", "npm:6.0.0"],\
@@ -5514,6 +5520,7 @@ const RAW_RUNTIME_STATE =
           ["@types/rollup", "npm:0.54.0"],\
           ["@vitejs/plugin-react", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:4.3.4"],\
           ["@vitest/coverage-v8", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:2.1.8"],\
+          ["camelcase", "npm:8.0.0"],\
           ["clsx", "npm:2.1.1"],\
           ["copy-to-clipboard", "npm:3.3.3"],\
           ["decamelize", "npm:6.0.0"],\
@@ -5620,6 +5627,7 @@ const RAW_RUNTIME_STATE =
           ["@types/rollup", "npm:0.54.0"],\
           ["@vitejs/plugin-react", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:4.3.4"],\
           ["@vitest/coverage-v8", "virtual:96c76dac93d10279a91d04639a9f86a74e22248d121e6224c0b18f2005172200563a941e3bb5acd6d5eb764b0970e162b472a20fd98300ec44848eb12f67900d#npm:2.1.8"],\
+          ["camelcase", "npm:8.0.0"],\
           ["clsx", "npm:2.1.1"],\
           ["copy-to-clipboard", "npm:3.3.3"],\
           ["decamelize", "npm:6.0.0"],\
@@ -14251,6 +14259,13 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/camelcase-npm-5.3.1-5db8af62c5-92ff9b443b.zip/node_modules/camelcase/",\
         "packageDependencies": [\
           ["camelcase", "npm:5.3.1"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:8.0.0", {\
+        "packageLocation": "./.yarn/cache/camelcase-npm-8.0.0-a3fa03dcc3-56c5fe072f.zip/node_modules/camelcase/",\
+        "packageDependencies": [\
+          ["camelcase", "npm:8.0.0"]\
         ],\
         "linkType": "HARD"\
       }]\

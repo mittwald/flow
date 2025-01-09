@@ -9,6 +9,10 @@ export const Alert = createFlowRemoteComponent(
   "Alert",
   RemoteAlertElement,
   {
+    slotProps: {
+      wrapper: false,
+    },
+
     eventProps: {
       onCopy: { event: "copy" } as never,
       onCopyCapture: { event: "copyCapture" } as never,

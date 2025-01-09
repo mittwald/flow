@@ -1,11 +1,11 @@
 import type { FC } from "react";
 import React from "react";
 import { useList } from "@/components/List/hooks/useList";
-import { useListViewComponents } from "@/components/List/viewComponents/ListViewComponentsProvider";
 import { FilterPicker } from "@/components/List/components/Header/components/FilterPicker/FilterPicker";
-import HeaderView from "@/components/List/viewComponents/Header/Header";
-import Fragment from "@/components/Fragment";
+import DefaultView from "@/components/List/views/Header/Header";
+import DefaultFragmentView from "@/components/Fragment";
 import { ActiveFilterList } from "@/components/List/components/Header/components/ActiveFilterList";
+import { useViewComponents } from "@/lib/viewComponentContext/useViewComponents";
 
 interface Props {
   hasActionGroup?: boolean;
@@ -14,8 +14,11 @@ interface Props {
 export const Header: FC<Props> = (props) => {
   const { hasActionGroup } = props;
   const list = useList();
-  const { header: View = HeaderView, fragment: FragmentView = Fragment } =
-    useListViewComponents();
+
+  const {
+    Header: View = DefaultView,
+    Fragment: FragmentView = DefaultFragmentView,
+  } = useViewComponents("List");
 
   if (
     list.filters.length === 0 &&

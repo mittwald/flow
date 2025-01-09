@@ -9,6 +9,10 @@ export const TimeField = createFlowRemoteComponent(
   "TimeField",
   RemoteTimeFieldElement,
   {
+    slotProps: {
+      wrapper: false,
+    },
+
     eventProps: {
       onFocus: { event: "focus" } as never,
       onBlur: { event: "blur" } as never,

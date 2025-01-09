@@ -12,12 +12,7 @@ import AlertBadge from "@/components/AlertBadge";
 import type { Domain } from "../testData/domainApi";
 import { getDomains, getTypes } from "../testData/domainApi";
 import { Section } from "@/components/Section";
-import {
-  ListViewComponentsProvider,
-  ListItemView,
-  ListSummary,
-  typedList,
-} from "@/components/List";
+import { ListItemView, ListSummary, typedList } from "@/components/List";
 import { Button } from "@/components/Button";
 import IconDownload from "@/components/Icon/components/icons/IconDownload";
 import { ActionGroup } from "@/components/ActionGroup";
@@ -53,11 +48,7 @@ const meta: Meta<typeof List> = {
     const availableTypes = usePromise(getTypes, []);
 
     return (
-      <ListViewComponentsProvider
-        components={{
-          header: () => <>Hello</>,
-        }}
-      >
+      <>
         <Heading>Domains</Heading>
         <DomainList.List
           batchSize={5}
@@ -138,7 +129,7 @@ const meta: Meta<typeof List> = {
             )}
           </DomainList.Item>
         </DomainList.List>
-      </ListViewComponentsProvider>
+      </>
     );
   },
 };

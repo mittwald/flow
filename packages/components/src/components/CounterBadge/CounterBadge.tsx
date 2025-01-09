@@ -12,6 +12,7 @@ export interface CounterBadgeProps
   count?: number;
 }
 
+/** @flr-generate all */
 export const CounterBadge = flowComponent("CounterBadge", (props) => {
   const { className, count, ref, ...rest } = props;
 

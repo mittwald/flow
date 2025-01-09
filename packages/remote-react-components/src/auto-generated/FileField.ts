@@ -9,6 +9,10 @@ export const FileField = createFlowRemoteComponent(
   "FileField",
   RemoteFileFieldElement,
   {
+    slotProps: {
+      wrapper: false,
+    },
+
     eventProps: {
       onChange: { event: "change" } as never,
     },

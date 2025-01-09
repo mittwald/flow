@@ -11,6 +11,7 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface RadioButtonProps extends RadioProps, FlowComponentProps {}
 
+/** @flr-generate all */
 export const RadioButton = flowComponent("RadioButton", (props) => {
   const { children, className, ref, ...rest } = props;
 

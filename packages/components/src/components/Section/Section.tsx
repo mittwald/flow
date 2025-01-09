@@ -17,6 +17,7 @@ export interface SectionProps
   hideSeparator?: boolean;
 }
 
+/** @flr-generate all */
 export const Section = flowComponent("Section", (props) => {
   const {
     children,

@@ -9,6 +9,10 @@ export const CounterBadge = createFlowRemoteComponent(
   "CounterBadge",
   RemoteCounterBadgeElement,
   {
+    slotProps: {
+      wrapper: false,
+    },
+
     eventProps: {
       onCopy: { event: "copy" } as never,
       onCopyCapture: { event: "copyCapture" } as never,

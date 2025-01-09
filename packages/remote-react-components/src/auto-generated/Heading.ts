@@ -9,6 +9,10 @@ export const Heading = createFlowRemoteComponent(
   "Heading",
   RemoteHeadingElement,
   {
+    slotProps: {
+      wrapper: false,
+    },
+
     eventProps: {
       onCopy: { event: "copy" } as never,
       onCopyCapture: { event: "copyCapture" } as never,

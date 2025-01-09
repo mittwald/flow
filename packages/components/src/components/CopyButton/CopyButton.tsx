@@ -20,6 +20,7 @@ export interface CopyButtonProps
   text: ReactNode;
 }
 
+/** @flr-generate all */
 export const CopyButton = flowComponent("CopyButton", (props) => {
   const {
     text,

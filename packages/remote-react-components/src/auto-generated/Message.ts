@@ -8,5 +8,11 @@ export const Message = createFlowRemoteComponent(
   "flr-message",
   "Message",
   RemoteMessageElement,
-  {},
+  {
+    slotProps: {
+      wrapper: false,
+    },
+
+    eventProps: {},
+  },
 );

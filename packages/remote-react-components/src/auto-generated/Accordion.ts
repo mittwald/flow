@@ -9,6 +9,10 @@ export const Accordion = createFlowRemoteComponent(
   "Accordion",
   RemoteAccordionElement,
   {
+    slotProps: {
+      wrapper: false,
+    },
+
     eventProps: {
       onCopy: { event: "copy" } as never,
       onCopyCapture: { event: "copyCapture" } as never,

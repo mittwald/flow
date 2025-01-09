@@ -9,6 +9,10 @@ export const FileCard = createFlowRemoteComponent(
   "FileCard",
   RemoteFileCardElement,
   {
+    slotProps: {
+      wrapper: false,
+    },
+
     eventProps: {
       onDelete: { event: "delete" } as never,
       onCopy: { event: "copy" } as never,

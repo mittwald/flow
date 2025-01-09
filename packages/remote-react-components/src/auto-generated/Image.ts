@@ -9,6 +9,10 @@ export const Image = createFlowRemoteComponent(
   "Image",
   RemoteImageElement,
   {
+    slotProps: {
+      wrapper: false,
+    },
+
     eventProps: {
       onCopy: { event: "copy" } as never,
       onCopyCapture: { event: "copyCapture" } as never,

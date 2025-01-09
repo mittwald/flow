@@ -9,6 +9,10 @@ export const Action = createFlowRemoteComponent(
   "Action",
   RemoteActionElement,
   {
+    slotProps: {
+      wrapper: false,
+    },
+
     eventProps: {
       onAction: { event: "action" } as never,
     },

@@ -9,6 +9,10 @@ export const Notification = createFlowRemoteComponent(
   "Notification",
   RemoteNotificationElement,
   {
+    slotProps: {
+      wrapper: false,
+    },
+
     eventProps: {
       onClick: { event: "click" } as never,
       onClose: { event: "close" } as never,

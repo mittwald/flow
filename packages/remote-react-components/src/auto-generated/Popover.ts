@@ -9,6 +9,10 @@ export const Popover = createFlowRemoteComponent(
   "Popover",
   RemotePopoverElement,
   {
+    slotProps: {
+      wrapper: false,
+    },
+
     eventProps: {
       onOpenChange: { event: "openChange" } as never,
     },

@@ -9,6 +9,10 @@ export const Button = createFlowRemoteComponent(
   "Button",
   RemoteButtonElement,
   {
+    slotProps: {
+      wrapper: false,
+    },
+
     eventProps: {
       onFocus: { event: "focus" } as never,
       onBlur: { event: "blur" } as never,

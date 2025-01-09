@@ -13,6 +13,7 @@ export interface LayoutCardProps
     PropsWithElementType<"div" | "main" | "footer" | "header">,
     FlowComponentProps {}
 
+/** @flr-generate all */
 export const LayoutCard = flowComponent("LayoutCard", (props) => {
   const { children, className, elementType = "div", ref, ...rest } = props;
 

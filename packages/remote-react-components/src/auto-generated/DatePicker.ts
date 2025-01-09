@@ -9,14 +9,18 @@ export const DatePicker = createFlowRemoteComponent(
   "DatePicker",
   RemoteDatePickerElement,
   {
+    slotProps: {
+      wrapper: false,
+    },
+
     eventProps: {
+      onOpenChange: { event: "openChange" } as never,
       onFocus: { event: "focus" } as never,
       onBlur: { event: "blur" } as never,
       onFocusChange: { event: "focusChange" } as never,
       onKeyDown: { event: "keyDown" } as never,
       onKeyUp: { event: "keyUp" } as never,
       onChange: { event: "change" } as never,
-      onOpenChange: { event: "openChange" } as never,
     },
   },
 );

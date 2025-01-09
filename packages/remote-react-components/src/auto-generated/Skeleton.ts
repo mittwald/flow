@@ -9,6 +9,10 @@ export const Skeleton = createFlowRemoteComponent(
   "Skeleton",
   RemoteSkeletonElement,
   {
+    slotProps: {
+      wrapper: false,
+    },
+
     eventProps: {
       onCopy: { event: "copy" } as never,
       onCopyCapture: { event: "copyCapture" } as never,

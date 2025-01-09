@@ -1,12 +1,12 @@
 import type { FC } from "react";
 import React from "react";
 import { useList } from "@/components/List/hooks/useList";
-import ShowNextBatchButtonView from "@/components/List/viewComponents/Footer/LoadNextBatchButton";
-import { useListViewComponents } from "@/components/List";
+import ShowNextBatchButtonView from "@/components/List/views/Footer/LoadNextBatchButton";
+import { useViewComponents } from "@/lib/viewComponentContext/useViewComponents";
 
 export const ShowNextBatchButton: FC = () => {
-  const { loadNextBatchButton: View = ShowNextBatchButtonView } =
-    useListViewComponents();
+  const { LoadNextBatchButton: View = ShowNextBatchButtonView } =
+    useViewComponents("List");
 
   const list = useList();
   const isLoading = list.loader.useIsLoading();

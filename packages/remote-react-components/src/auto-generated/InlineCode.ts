@@ -9,6 +9,10 @@ export const InlineCode = createFlowRemoteComponent(
   "InlineCode",
   RemoteInlineCodeElement,
   {
+    slotProps: {
+      wrapper: false,
+    },
+
     eventProps: {
       onCopy: { event: "copy" } as never,
       onCopyCapture: { event: "copyCapture" } as never,

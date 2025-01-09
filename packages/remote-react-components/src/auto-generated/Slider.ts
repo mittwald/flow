@@ -9,6 +9,10 @@ export const Slider = createFlowRemoteComponent(
   "Slider",
   RemoteSliderElement,
   {
+    slotProps: {
+      wrapper: false,
+    },
+
     eventProps: {
       onChange: { event: "change" } as never,
       onChangeEnd: { event: "changeEnd" } as never,

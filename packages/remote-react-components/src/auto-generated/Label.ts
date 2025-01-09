@@ -9,6 +9,10 @@ export const Label = createFlowRemoteComponent(
   "Label",
   RemoteLabelElement,
   {
+    slotProps: {
+      wrapper: false,
+    },
+
     eventProps: {
       onFocus: { event: "focus" } as never,
       onBlur: { event: "blur" } as never,

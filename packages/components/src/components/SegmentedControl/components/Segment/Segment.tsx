@@ -12,6 +12,7 @@ export interface SegmentProps
   extends PropsWithChildren<Omit<Aria.RadioProps, "children">>,
     FlowComponentProps {}
 
+/** @flr-generate all */
 export const Segment = flowComponent("Segment", (props) => {
   const { children, className, ref, ...rest } = props;
 

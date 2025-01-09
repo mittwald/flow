@@ -231,9 +231,9 @@
       "types": "./dist/js/types/components/List/components/ListLoaderAsyncResource.d.ts",
       "import": "./dist/js/List/ListLoaderAsyncResource.js"
     },
-    "./List/Views": {
-      "types": "./dist/js/types/components/List/viewComponents/index.d.ts",
-      "import": "./dist/js/List/Views.js"
+    "./List/views": {
+      "types": "./dist/js/types/components/List/views/index.d.ts",
+      "import": "./dist/js/List/views.js"
     },
     "./LoadingSpinner/styles.css": "./dist/css/LoadingSpinner.css",
     "./LoadingSpinner": {
@@ -391,6 +391,10 @@
       "types": "./dist/js/types/components/Wrap/index.d.ts",
       "import": "./dist/js/Wrap.js"
     },
+    "./ViewComponentContext": {
+      "types": "./dist/js/types/lib/ViewComponentContext/index.d.ts",
+      "import": "./dist/js/ViewComponentContext.js"
+    },
     "./hooks": {
       "types": "./dist/js/types/lib/hooks/index.d.ts",
       "import": "./dist/js/hooks.js"
@@ -399,9 +403,17 @@
       "types": "./dist/js/types/integrations/nextjs/index.d.ts",
       "import": "./dist/js/nextjs.js"
     },
-    "./react-hook-form": {
-      "types": "./dist/js/types/integrations/react-hook-form/index.d.ts",
-      "import": "./dist/js/react-hook-form.js"
+    "./react-hook-form/Form": {
+      "types": "./dist/js/types/integrations/react-hook-form/components/Form/index.d.ts",
+      "import": "./dist/js/react-hook-form/Form.js"
+    },
+    "./react-hook-form/Field": {
+      "types": "./dist/js/types/integrations/react-hook-form/components/Field/index.d.ts",
+      "import": "./dist/js/react-hook-form/Field.js"
+    },
+    "./react-hook-form/Field/views": {
+      "types": "./dist/js/types/integrations/react-hook-form/components/Field/views/index.d.ts",
+      "import": "./dist/js/react-hook-form/Field/views.js"
     },
     "./globals.css": "./dist/css/globals.css",
     "./all.css": "./dist/js/all.css",
@@ -422,6 +434,7 @@
     "build:deps:watch": "run -T build:deps:watch @mittwald/flow-react-components",
     "build:docs-properties": "run tsx dev/createDocPropertiesJson.ts",
     "build:icons": "run tsx dev/icons/generate.ts",
+    "build:remote-components": "run tsx dev/remote-components-generator/generateRemoteComponents.ts",
     "build:storybook": "run storybook build",
     "dev": "run nx run-many --outputStyle=stream --projects=@mittwald/flow-react-components --targets=start,build:deps:watch",
     "start": "run storybook dev --port 6006",
@@ -496,6 +509,7 @@
     "@types/rollup": "^0.54.0",
     "@vitejs/plugin-react": "^4.3.4",
     "@vitest/coverage-v8": "~2.1.8",
+    "camelcase": "^8.0.0",
     "decamelize": "^6.0.0",
     "fs-jetpack": "^5.1.0",
     "glob": "^10.4.5",
@@ -552,11 +566,25 @@
   },
   "nx": {
     "targets": {
+      "build:remote-components": {
+        "cache": true,
+        "inputs": [
+          "{projectRoot}/out/doc-properties.json",
+          "{projectRoot}/dev/remote-components-generator/**/*"
+        ],
+        "dependsOn": [
+          "build:docs-properties"
+        ],
+        "outputs": [
+          "{workspaceRoot}/packages/remote-elements/src/auto-generated/**/*",
+          "{workspaceRoot}/packages/remote-react-components/src/auto-generated/**/*",
+          "{workspaceRoot}/packages/remote-react-renderer/src/auto-generated/**/*"
+        ]
+      },
       "build:docs-properties": {
         "cache": true,
         "inputs": [
-          "{projectRoot}/src/components/**/*.ts",
-          "{projectRoot}/src/components/**/*.tsx",
+          "{projectRoot}/src/**/*.{ts,tsx}",
           "{projectRoot}/dev/createDocPropertiesJson.ts"
         ],
         "outputs": [

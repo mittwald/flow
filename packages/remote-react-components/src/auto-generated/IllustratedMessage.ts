@@ -9,6 +9,10 @@ export const IllustratedMessage = createFlowRemoteComponent(
   "IllustratedMessage",
   RemoteIllustratedMessageElement,
   {
+    slotProps: {
+      wrapper: false,
+    },
+
     eventProps: {
       onCopy: { event: "copy" } as never,
       onCopyCapture: { event: "copyCapture" } as never,

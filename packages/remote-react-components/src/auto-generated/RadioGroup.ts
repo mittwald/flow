@@ -9,6 +9,10 @@ export const RadioGroup = createFlowRemoteComponent(
   "RadioGroup",
   RemoteRadioGroupElement,
   {
+    slotProps: {
+      wrapper: false,
+    },
+
     eventProps: {
       onFocus: { event: "focus" } as never,
       onBlur: { event: "blur" } as never,

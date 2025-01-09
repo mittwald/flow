@@ -9,6 +9,10 @@ export const Link = createFlowRemoteComponent(
   "Link",
   RemoteLinkElement,
   {
+    slotProps: {
+      wrapper: false,
+    },
+
     eventProps: {
       onFocus: { event: "focus" } as never,
       onBlur: { event: "blur" } as never,

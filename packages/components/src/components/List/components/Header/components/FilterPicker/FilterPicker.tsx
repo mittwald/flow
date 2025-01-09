@@ -1,10 +1,10 @@
 import type { FC } from "react";
 import React from "react";
 import type { Filter } from "@/components/List/model/filter/Filter";
-import { FilterPicker as FilterPickerView } from "@/components/List/viewComponents/Header/FilterPicker/FilterPicker";
-import { FilterPickerMenuItem as FilterPickerMenuItemView } from "@/components/List/viewComponents/Header/FilterPicker/FilterPickerMenuItem";
-import { useListViewComponents } from "@/components/List";
+import { FilterPicker as FilterPickerView } from "@/components/List/views/Header/FilterPicker/FilterPicker";
+import { FilterPickerMenuItem as FilterPickerMenuItemView } from "@/components/List/views/Header/FilterPicker/FilterPickerMenuItem";
 import Fragment from "@/components/Fragment";
+import { useViewComponents } from "@/lib/viewComponentContext/useViewComponents";
 
 interface Props {
   filter: Filter<never, never, never>;
@@ -14,10 +14,10 @@ export const FilterPicker: FC<Props> = (props) => {
   const { filter } = props;
 
   const {
-    filterPicker: View = FilterPickerView,
-    filterPickerMenuItem: ItemView = FilterPickerMenuItemView,
-    fragment: FragmentView = Fragment,
-  } = useListViewComponents();
+    FilterPicker: View = FilterPickerView,
+    FilterPickerMenuItem: ItemView = FilterPickerMenuItemView,
+    Fragment: FragmentView = Fragment,
+  } = useViewComponents("List");
 
   const { values, mode, name, property } = filter;
 

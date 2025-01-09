@@ -15,22 +15,26 @@ export type FormOnSubmitHandler<F extends FieldValues> = Parameters<
   UseFormReturn<F>["handleSubmit"]
 >[0];
 
+type FormComponentType = ComponentType<
+  PropsWithChildren<{ id: string; onSubmit?: FormEventHandler }>
+>;
+
 export interface FormProps<F extends FieldValues>
   extends Omit<ComponentProps<"form">, "onSubmit">,
     PropsWithChildren {
   form: UseFormReturn<F>;
   onSubmit: FormOnSubmitHandler<F>;
-  formComponent?: ComponentType<
-    PropsWithChildren<{ id: string; onSubmit?: FormEventHandler }>
-  >;
+  formComponent?: FormComponentType;
 }
+
+const DefaultFormComponent: FormComponentType = (p) => <form {...p} />;
 
 export function Form<F extends FieldValues>(props: FormProps<F>) {
   const {
     form,
     children,
     onSubmit,
-    formComponent: FormView = (p) => <form {...p} />,
+    formComponent: FormView = DefaultFormComponent,
     ...formProps
   } = props;
 

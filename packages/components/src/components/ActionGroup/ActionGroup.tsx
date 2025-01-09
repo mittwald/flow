@@ -21,6 +21,7 @@ export interface ActionGroupProps
   spacing?: "s" | "m";
 }
 
+/** @flr-generate all */
 export const ActionGroup = flowComponent("ActionGroup", (props) => {
   const {
     children,

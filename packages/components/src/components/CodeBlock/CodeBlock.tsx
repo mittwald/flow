@@ -22,6 +22,7 @@ export interface CodeBlockProps
 const SyntaxHighlighter =
   SyntaxHighlighterNative as unknown as React.FC<SyntaxHighlighterProps>;
 
+/** @flr-generate all */
 export const CodeBlock: FC<CodeBlockProps> = (props) => {
   const { code, className, copyable, color = "default", ...rest } = props;
 

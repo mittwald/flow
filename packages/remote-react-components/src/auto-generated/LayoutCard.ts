@@ -9,6 +9,10 @@ export const LayoutCard = createFlowRemoteComponent(
   "LayoutCard",
   RemoteLayoutCardElement,
   {
+    slotProps: {
+      wrapper: false,
+    },
+
     eventProps: {
       onCopy: { event: "copy" } as never,
       onCopyCapture: { event: "copyCapture" } as never,

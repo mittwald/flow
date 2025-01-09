@@ -9,6 +9,10 @@ export const Table = createFlowRemoteComponent(
   "Table",
   RemoteTableElement,
   {
+    slotProps: {
+      wrapper: false,
+    },
+
     eventProps: {
       onRowAction: { event: "rowAction" } as never,
       onSelectionChange: { event: "selectionChange" } as never,

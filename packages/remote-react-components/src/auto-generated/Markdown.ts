@@ -8,5 +8,11 @@ export const Markdown = createFlowRemoteComponent(
   "flr-markdown",
   "Markdown",
   RemoteMarkdownElement,
-  {},
+  {
+    slotProps: {
+      wrapper: false,
+    },
+
+    eventProps: {},
+  },
 );

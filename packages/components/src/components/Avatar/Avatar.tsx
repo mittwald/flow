@@ -30,6 +30,7 @@ export interface AvatarProps
   color?: AvatarColors;
 }
 
+/** @flr-generate all */
 export const Avatar = flowComponent("Avatar", (props) => {
   const { children, className, color, size = "m", ref } = props;
 

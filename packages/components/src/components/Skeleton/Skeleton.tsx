@@ -10,6 +10,7 @@ export interface SkeletonProps extends ComponentProps<"div"> {
   height?: string;
 }
 
+/** @flr-generate all */
 export const Skeleton: FC<SkeletonProps> = (props) => {
   const { width, height, className, ...rest } = props;
 

@@ -6,6 +6,7 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface ImageProps extends ComponentProps<"img">, FlowComponentProps {}
 
+/** @flr-generate all */
 export const Image = flowComponent("Image", (props) => {
   const { ref, ...rest } = props;
   return (

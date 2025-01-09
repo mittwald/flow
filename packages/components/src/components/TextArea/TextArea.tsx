@@ -20,6 +20,7 @@ export interface TextAreaProps
   autoResizeMaxRows?: number;
 }
 
+/** @flr-generate all */
 export const TextArea = flowComponent("TextArea", (props) => {
   const {
     children,

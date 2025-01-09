@@ -14,6 +14,7 @@ export interface MessageProps extends PropsWithChildren, PropsWithClassName {
   orientation?: "left" | "right";
 }
 
+/** @flr-generate all */
 export const Message: FC<MessageProps> = (props) => {
   const { type = "sender", children, className, orientation = "left" } = props;
 

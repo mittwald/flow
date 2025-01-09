@@ -1,13 +1,12 @@
 "use client";
 
 import {
-  List,
   ListItemView,
   Heading,
   Text,
 } from "@mittwald/flow-remote-react-components";
 import React from "react";
-import { typedList } from "@mittwald/flow-react-components/List";
+import { List, typedList } from "@mittwald/flow-react-components/List";
 import { demoData } from "@/app/remote/list/demoData";
 
 export default function Page() {

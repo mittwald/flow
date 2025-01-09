@@ -12,19 +12,22 @@
     "all": "nx run-many --targets=\"$@\"",
     "build": "run all build",
     "build:deps:watch": "nx watch --projects=$@ --includeDependentProjects -- nx run-many --targets=build --projects=$(tsx dev/nxDependencies.ts $@) --exclude=$@",
-    "build:remote-components": "tsx ./dev/remote-components-generator/generateRemoteComponents.ts",
     "components": "nx run @mittwald/flow-react-components:\"$@\"",
     "demo:remote-dom": "nx run @mittwald/flow-demo-remote-dom:\"$@\"",
     "dev:init-githooks": "yarn dlx simple-git-hooks",
     "docs": "nx run @mittwald/flow-documentation:\"$@\"",
     "format": "prettier --write '**/*.{ts,tsx,yaml,yml,json,md,mdx,js,cjs,mjs,css}'",
     "lint": "eslint .",
+    "remote-elements": "nx run @mittwald/flow-remote-elements:\"$@\"",
     "test": "run all test"
   },
   "simple-git-hooks": {
     "post-checkout": "yarn install",
     "post-merge": "yarn install",
     "pre-commit": "yarn lint"
+  },
+  "dependencies": {
+    "eslint-scope": "^8.2.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.16.0",
@@ -88,8 +91,5 @@
   "workspaces": [
     "packages/*",
     "demos/*"
-  ],
-  "dependencies": {
-    "eslint-scope": "^8.2.0"
-  }
+  ]
 }

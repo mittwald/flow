@@ -8,5 +8,11 @@ export const Modal = createFlowRemoteComponent(
   "flr-modal",
   "Modal",
   RemoteModalElement,
-  {},
+  {
+    slotProps: {
+      wrapper: false,
+    },
+
+    eventProps: {},
+  },
 );

@@ -9,6 +9,10 @@ export const SearchField = createFlowRemoteComponent(
   "SearchField",
   RemoteSearchFieldElement,
   {
+    slotProps: {
+      wrapper: false,
+    },
+
     eventProps: {
       onFocus: { event: "focus" } as never,
       onBlur: { event: "blur" } as never,

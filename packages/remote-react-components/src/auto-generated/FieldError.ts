@@ -8,5 +8,11 @@ export const FieldError = createFlowRemoteComponent(
   "flr-field-error",
   "FieldError",
   RemoteFieldErrorElement,
-  {},
+  {
+    slotProps: {
+      wrapper: false,
+    },
+
+    eventProps: {},
+  },
 );

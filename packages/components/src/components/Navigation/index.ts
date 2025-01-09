@@ -1,4 +1,4 @@
 import { Navigation } from "./Navigation";
 export { Navigation, type NavigationProps } from "./Navigation";
-export * from "../NavigationGroup";
+export * from "./components/NavigationGroup";
 export default Navigation;

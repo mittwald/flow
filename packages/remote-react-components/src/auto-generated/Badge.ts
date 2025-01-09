@@ -9,6 +9,10 @@ export const Badge = createFlowRemoteComponent(
   "Badge",
   RemoteBadgeElement,
   {
+    slotProps: {
+      wrapper: false,
+    },
+
     eventProps: {
       onPress: { event: "press" } as never,
       onClose: { event: "close" } as never,

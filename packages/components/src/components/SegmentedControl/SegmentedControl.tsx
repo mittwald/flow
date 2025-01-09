@@ -20,6 +20,7 @@ export interface SegmentedControlProps
     FlowComponentProps,
     PropsWithContainerBreakpointSize {}
 
+/** @flr-generate all */
 export const SegmentedControl = flowComponent("SegmentedControl", (props) => {
   const {
     children,

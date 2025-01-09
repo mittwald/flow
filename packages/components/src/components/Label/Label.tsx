@@ -20,6 +20,7 @@ export interface LabelProps
   unstyled?: boolean;
 }
 
+/** @flr-generate all */
 export const Label = flowComponent("Label", (props) => {
   const {
     children,

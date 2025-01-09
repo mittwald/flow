@@ -15,6 +15,7 @@ export interface AlertBadgeProps
     FlowComponentProps,
     PropsWithClassName {}
 
+/** @flr-generate all */
 export const AlertBadge = flowComponent("AlertBadge", (props) => {
   const { children, className, status = "info", ref, ...rest } = props;
 

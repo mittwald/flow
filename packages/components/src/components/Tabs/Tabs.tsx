@@ -13,6 +13,7 @@ export interface TabsProps
     PropsWithChildren,
     FlowComponentProps {}
 
+/** @flr-generate all */
 export const Tabs = flowComponent("Tabs", (props) => {
   const {
     children,

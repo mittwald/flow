@@ -9,6 +9,10 @@ export const ContextMenu = createFlowRemoteComponent(
   "ContextMenu",
   RemoteContextMenuElement,
   {
+    slotProps: {
+      wrapper: false,
+    },
+
     eventProps: {
       onOpenChange: { event: "openChange" } as never,
       onAction: { event: "action" } as never,

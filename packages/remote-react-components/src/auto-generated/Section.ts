@@ -9,6 +9,10 @@ export const Section = createFlowRemoteComponent(
   "Section",
   RemoteSectionElement,
   {
+    slotProps: {
+      wrapper: false,
+    },
+
     eventProps: {
       onCopy: { event: "copy" } as never,
       onCopyCapture: { event: "copyCapture" } as never,

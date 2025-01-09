@@ -8,5 +8,11 @@ export const ModalTrigger = createFlowRemoteComponent(
   "flr-modal-trigger",
   "ModalTrigger",
   RemoteModalTriggerElement,
-  {},
+  {
+    slotProps: {
+      wrapper: false,
+    },
+
+    eventProps: {},
+  },
 );

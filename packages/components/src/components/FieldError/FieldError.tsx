@@ -1,5 +1,4 @@
 import type { PropsWithChildren } from "react";
-import { useId } from "react";
 import React from "react";
 import styles from "./FieldError.module.scss";
 import * as Aria from "react-aria-components";
@@ -13,39 +12,22 @@ export interface FieldErrorProps
   extends PropsWithChildren<Omit<Aria.FieldErrorProps, "children">>,
     FlowComponentProps {}
 
+/** @flr-generate all */
 export const FieldError = flowComponent("FieldError", (props) => {
-  const { children, className, ref, ...rest } = props;
-
-  const id = useId();
+  const { children, className, ...rest } = props;
 
   const rootClassName = clsx(styles.fieldError, className);
 
-  console.log("WOW", id, children, React.Children.count(children));
-
   return (
     <ClearPropsContext>
-      {React.Children.count(children) >= 1 && (
-        <Aria.FieldError {...rest} className={rootClassName} ref={ref}>
+      <Aria.FieldError {...rest} className={rootClassName}>
+        {({ validationErrors }) => (
           <>
             <IconDanger size="s" />
-            asd
-            <span>asd{children}</span>
+            <span>{children ? children : validationErrors.join(" ")}</span>
           </>
-        </Aria.FieldError>
-      )}
-      {React.Children.count(children) === 0 && (
-        <Aria.FieldError {...rest} className={rootClassName} ref={ref}>
-          {({ validationErrors }) => {
-            return (
-              <>
-                <IconDanger size="s" />
-                asd2
-                <span>{validationErrors.join(" ")}</span>
-              </>
-            );
-          }}
-        </Aria.FieldError>
-      )}
+        )}
+      </Aria.FieldError>
     </ClearPropsContext>
   );
 });

@@ -5,8 +5,8 @@ import type { Key } from "react-aria-components";
 import * as Aria from "react-aria-components";
 import { useList } from "@/components/List/hooks/useList";
 import { useGridItemProps } from "@/components/List/components/Items/components/Item/hooks/useGridItemProps";
-import { useListViewComponents } from "@/components/List";
-import ItemView from "@/components/List/viewComponents/Items/Item";
+import ItemView from "@/components/List/views/Items/ItemContainer";
+import { useViewComponents } from "@/lib/viewComponentContext/useViewComponents";
 
 interface Props extends PropsWithChildren {
   id: Key;
@@ -18,7 +18,7 @@ export const Item = (props: Props) => {
   const list = useList();
 
   const itemViewSettings = list.itemView;
-  const { item: View = ItemView } = useListViewComponents();
+  const { Item: View = ItemView } = useViewComponents("List");
 
   const { gridItemProps, children } = useGridItemProps(props);
 

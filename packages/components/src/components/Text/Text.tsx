@@ -23,6 +23,7 @@ export interface TextProps
   color?: "light" | "dark";
 }
 
+/** @flr-generate all */
 export const Text = flowComponent("Text", (props) => {
   const {
     children,

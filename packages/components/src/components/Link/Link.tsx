@@ -29,6 +29,7 @@ export interface LinkProps
   "aria-current"?: string;
 }
 
+/** @flr-generate all */
 export const Link = flowComponent("Link", (props) => {
   const {
     children,

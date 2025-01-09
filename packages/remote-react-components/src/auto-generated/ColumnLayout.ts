@@ -9,6 +9,10 @@ export const ColumnLayout = createFlowRemoteComponent(
   "ColumnLayout",
   RemoteColumnLayoutElement,
   {
+    slotProps: {
+      wrapper: false,
+    },
+
     eventProps: {
       onCopy: { event: "copy" } as never,
       onCopyCapture: { event: "copyCapture" } as never,

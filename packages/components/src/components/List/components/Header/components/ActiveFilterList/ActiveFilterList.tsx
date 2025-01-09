@@ -2,17 +2,17 @@ import type { FC } from "react";
 import React from "react";
 import { useList } from "@/components/List/hooks/useList";
 import { observer } from "mobx-react-lite";
-import ActiveFilterItemView from "@/components/List/viewComponents/Header/ActiveFilters/ActiveFilterItem";
-import ActiveFilterListView from "@/components/List/viewComponents/Header/ActiveFilters/ActiveFilterList";
-import { useListViewComponents } from "@/components/List";
+import ActiveFilterItemView from "@/components/List/views/Header/ActiveFilters/ActiveFilterItem";
+import ActiveFilterListView from "@/components/List/views/Header/ActiveFilters/ActiveFilterList";
+import { useViewComponents } from "@/lib/viewComponentContext/useViewComponents";
 
 export const ActiveFilterList: FC = observer(() => {
   const list = useList();
 
   const {
-    activeFilterList: View = ActiveFilterListView,
-    activeFilterItem: ItemView = ActiveFilterItemView,
-  } = useListViewComponents();
+    ActiveFilterList: View = ActiveFilterListView,
+    ActiveFilterItem: ItemView = ActiveFilterItemView,
+  } = useViewComponents("List");
 
   const activeFilterValues = list.filters
     .flatMap((f) => f.values)

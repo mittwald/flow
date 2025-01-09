@@ -8,5 +8,11 @@ export const Fragment = createFlowRemoteComponent(
   "flr-fragment",
   "Fragment",
   RemoteFragmentElement,
-  {},
+  {
+    slotProps: {
+      wrapper: false,
+    },
+
+    eventProps: {},
+  },
 );

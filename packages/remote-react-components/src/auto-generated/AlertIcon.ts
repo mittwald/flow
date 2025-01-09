@@ -9,6 +9,10 @@ export const AlertIcon = createFlowRemoteComponent(
   "AlertIcon",
   RemoteAlertIconElement,
   {
+    slotProps: {
+      wrapper: false,
+    },
+
     eventProps: {
       onFocus: { event: "focus" } as never,
       onBlur: { event: "blur" } as never,

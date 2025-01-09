@@ -8,5 +8,11 @@ export const LabeledValue = createFlowRemoteComponent(
   "flr-labeled-value",
   "LabeledValue",
   RemoteLabeledValueElement,
-  {},
+  {
+    slotProps: {
+      wrapper: false,
+    },
+
+    eventProps: {},
+  },
 );

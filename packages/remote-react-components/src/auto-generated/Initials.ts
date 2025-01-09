@@ -8,5 +8,11 @@ export const Initials = createFlowRemoteComponent(
   "flr-initials",
   "Initials",
   RemoteInitialsElement,
-  {},
+  {
+    slotProps: {
+      wrapper: false,
+    },
+
+    eventProps: {},
+  },
 );

@@ -23,15 +23,15 @@ import { TableHeader } from "@/components/List/setupComponents/TableHeader";
 import { TableBody } from "@/components/List/setupComponents/TableBody";
 import { TunnelProvider } from "@mittwald/react-tunnel";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
-import headerStyles from "./viewComponents/Header/Header.module.css";
+import headerStyles from "./views/Header/Header.module.css";
 import { ActionGroup } from "@/components/ActionGroup";
 import { deepHas } from "@/lib/react/deepHas";
 import DataLoader from "./components/DataLoader";
 import { Items } from "@/components/List/components/Items";
-import { useListViewComponents } from "@/components/List/viewComponents/ListViewComponentsProvider";
-import ListView from "@/components/List/viewComponents/List/List";
+import DefaultView from "@/components/List/views/List/List";
+import { useViewComponents } from "@/lib/viewComponentContext/useViewComponents";
 
-export interface ListProps<T>
+export interface ListProps<T = never>
   extends PropsWithChildren,
     Omit<
       ListShape<T>,
@@ -47,10 +47,14 @@ export interface ListProps<T>
   batchSize?: number;
 }
 
+/**
+ * @flr-generate all
+ * @flr-slot-props filterPickerList,activeFilterList
+ */
 export const List = flowComponent("List", (props) => {
   const { children, batchSize, onChange, ref, ...restProps } = props;
 
-  const { list: View = ListView } = useListViewComponents();
+  const { List: View = DefaultView } = useViewComponents("List");
 
   const listLoaderAsync = deepFindOfType(
     children,

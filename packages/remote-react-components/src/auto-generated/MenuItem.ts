@@ -9,6 +9,10 @@ export const MenuItem = createFlowRemoteComponent(
   "MenuItem",
   RemoteMenuItemElement,
   {
+    slotProps: {
+      wrapper: false,
+    },
+
     eventProps: {
       onAction: { event: "action" } as never,
       onHoverStart: { event: "hoverStart" } as never,

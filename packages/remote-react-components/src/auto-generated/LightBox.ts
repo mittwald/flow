@@ -8,5 +8,11 @@ export const LightBox = createFlowRemoteComponent(
   "flr-light-box",
   "LightBox",
   RemoteLightBoxElement,
-  {},
+  {
+    slotProps: {
+      wrapper: false,
+    },
+
+    eventProps: {},
+  },
 );

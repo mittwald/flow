@@ -24,6 +24,7 @@ export interface PopoverProps
   padding?: "s" | "m";
 }
 
+/** @flr-generate all */
 export const Popover = flowComponent("Popover", (props) => {
   const {
     children,

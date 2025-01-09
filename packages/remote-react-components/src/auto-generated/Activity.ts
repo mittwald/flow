@@ -8,5 +8,11 @@ export const Activity = createFlowRemoteComponent(
   "flr-activity",
   "Activity",
   RemoteActivityElement,
-  {},
+  {
+    slotProps: {
+      wrapper: false,
+    },
+
+    eventProps: {},
+  },
 );

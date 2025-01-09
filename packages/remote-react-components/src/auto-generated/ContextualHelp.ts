@@ -9,6 +9,10 @@ export const ContextualHelp = createFlowRemoteComponent(
   "ContextualHelp",
   RemoteContextualHelpElement,
   {
+    slotProps: {
+      wrapper: false,
+    },
+
     eventProps: {
       onOpenChange: { event: "openChange" } as never,
     },

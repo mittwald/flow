@@ -9,6 +9,10 @@ export const HeaderNavigation = createFlowRemoteComponent(
   "HeaderNavigation",
   RemoteHeaderNavigationElement,
   {
+    slotProps: {
+      wrapper: false,
+    },
+
     eventProps: {
       onCopy: { event: "copy" } as never,
       onCopyCapture: { event: "copyCapture" } as never,

@@ -14,6 +14,7 @@ export interface TextFieldProps
     PropsWithClassName,
     FlowComponentProps {}
 
+/** @flr-generate all */
 export const TextField = flowComponent("TextField", (props) => {
   const { children, placeholder, ref, form, ...rest } = props;
 

@@ -18,6 +18,7 @@ export interface AlertProps
     PropsWithStatus,
     FlowComponentProps {}
 
+/** @flr-generate all */
 export const Alert = flowComponent("Alert", (props) => {
   const { children, className, status = "info", ref, ...rest } = props;
 

@@ -9,6 +9,10 @@ export const Breadcrumb = createFlowRemoteComponent(
   "Breadcrumb",
   RemoteBreadcrumbElement,
   {
+    slotProps: {
+      wrapper: false,
+    },
+
     eventProps: {
       onAction: { event: "action" } as never,
     },

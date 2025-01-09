@@ -8,5 +8,11 @@ export const Avatar = createFlowRemoteComponent(
   "flr-avatar",
   "Avatar",
   RemoteAvatarElement,
-  {},
+  {
+    slotProps: {
+      wrapper: false,
+    },
+
+    eventProps: {},
+  },
 );

@@ -9,6 +9,10 @@ export const TextArea = createFlowRemoteComponent(
   "TextArea",
   RemoteTextAreaElement,
   {
+    slotProps: {
+      wrapper: false,
+    },
+
     eventProps: {
       onFocus: { event: "focus" } as never,
       onBlur: { event: "blur" } as never,

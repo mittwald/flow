@@ -39,6 +39,7 @@ export interface ModalProps
   isDismissable?: boolean;
 }
 
+/** @flr-generate all */
 export const Modal = flowComponent<"Modal", HTMLDivElement>(
   "Modal",
   (props) => {

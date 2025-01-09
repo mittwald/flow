@@ -12,12 +12,13 @@ import { FieldError } from "@/components/FieldError";
 import { useOverlayController } from "@/lib/controller";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
-export interface DateRangePickerProps<T extends Aria.DateValue>
+export interface DateRangePickerProps<T extends Aria.DateValue = Aria.DateValue>
   extends PropsWithChildren<Omit<Aria.DateRangePickerProps<T>, "children">> {
   /** The error message that is displayed below the input. */
   errorMessage?: ReactNode;
 }
 
+/** @flr-generate all */
 export const DateRangePicker = flowComponent("DateRangePicker", (props) => {
   const { children, className, errorMessage, onChange, ...rest } = props;
 

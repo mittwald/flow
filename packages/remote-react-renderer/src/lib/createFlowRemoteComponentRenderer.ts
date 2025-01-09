@@ -2,39 +2,25 @@ import type { ComponentType, PropsWithoutRef } from "react";
 import { createElement, forwardRef } from "react";
 import type { RemoteComponentRendererProps } from "@remote-dom/react/host";
 import { createRemoteComponentRenderer } from "@remote-dom/react/host";
-import { isFunction, mapValues } from "remeda";
-import type {
-  EventSerializationMap,
-  EventHandler,
-} from "@mittwald/flow-remote-core";
+import { mapValues } from "remeda";
 import { mapEventHandler } from "@mittwald/flow-remote-core";
+import { isEventProp } from "@/lib/propClassifiers";
 
-export const defaultEventPropMatcher = /on[A-Z].*/;
-
-const mapProperty = (val: unknown, key: string, init: InitObject) => {
-  if (key.match(defaultEventPropMatcher) && isFunction(val)) {
-    return mapEventHandler(val as EventHandler, key, init.eventSerialization);
+const mapProperty = (val: unknown, key: string) => {
+  if (isEventProp(key, val)) {
+    return mapEventHandler(val, key);
   }
   return val;
 };
 
-interface InitObject {
-  eventSerialization?: EventSerializationMap;
-}
-
-export const createFlowRemoteComponentRenderer = <
-  P extends Record<string, unknown>,
->(
+export const createFlowRemoteComponentRenderer = <P extends object>(
   component: ComponentType<P>,
-  init: InitObject = {},
 ): ComponentType<RemoteComponentRendererProps> => {
   const HostComponentWithRef = forwardRef(function HostComponent(
     props: PropsWithoutRef<P>,
     ref: unknown,
   ) {
-    const hostComponentProps = mapValues(props, (v, k) =>
-      mapProperty(v, k, init),
-    );
+    const hostComponentProps = mapValues(props, (v, k) => mapProperty(v, k));
 
     return createElement(component, {
       ...hostComponentProps,

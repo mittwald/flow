@@ -9,6 +9,10 @@ export const Tooltip = createFlowRemoteComponent(
   "Tooltip",
   RemoteTooltipElement,
   {
+    slotProps: {
+      wrapper: false,
+    },
+
     eventProps: {
       onOpenChange: { event: "openChange" } as never,
     },

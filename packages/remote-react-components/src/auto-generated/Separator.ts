@@ -8,5 +8,11 @@ export const Separator = createFlowRemoteComponent(
   "flr-separator",
   "Separator",
   RemoteSeparatorElement,
-  {},
+  {
+    slotProps: {
+      wrapper: false,
+    },
+
+    eventProps: {},
+  },
 );

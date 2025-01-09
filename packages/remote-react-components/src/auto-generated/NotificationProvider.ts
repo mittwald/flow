@@ -9,6 +9,10 @@ export const NotificationProvider = createFlowRemoteComponent(
   "NotificationProvider",
   RemoteNotificationProviderElement,
   {
+    slotProps: {
+      wrapper: false,
+    },
+
     eventProps: {
       onCopy: { event: "copy" } as never,
       onCopyCapture: { event: "copyCapture" } as never,
