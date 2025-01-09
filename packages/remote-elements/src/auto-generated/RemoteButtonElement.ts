@@ -1,4 +1,3 @@
-/* eslint-disable */
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
@@ -40,9 +39,6 @@ export class RemoteButtonElement extends FlowRemoteElement<RemoteButtonElementPr
       type: {},
       preventFocusOnPress: {},
       excludeFromTabOrder: {},
-      className: {},
-      style: {},
-      wrapWith: {},
     };
   }
 

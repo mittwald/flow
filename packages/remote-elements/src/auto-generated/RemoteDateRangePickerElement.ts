@@ -1,4 +1,3 @@
-/* eslint-disable */
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
@@ -15,8 +14,6 @@ export class RemoteDateRangePickerElement extends FlowRemoteElement<RemoteDateRa
       "aria-labelledby": {},
       "aria-describedby": {},
       "aria-details": {},
-      className: {},
-      style: {},
       validationBehavior: {},
       hourCycle: {},
       granularity: {},

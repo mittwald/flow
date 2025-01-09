@@ -1,4 +1,3 @@
-/* eslint-disable */
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
@@ -16,7 +15,6 @@ export class RemoteNavigationGroupElement extends FlowRemoteElement<RemoteNaviga
       accessKey: {},
       autoCapitalize: {},
       autoFocus: {},
-      className: {},
       contentEditable: {},
       contextMenu: {},
       dir: {},
@@ -28,7 +26,6 @@ export class RemoteNavigationGroupElement extends FlowRemoteElement<RemoteNaviga
       nonce: {},
       slot: {},
       spellCheck: {},
-      style: {},
       tabIndex: {},
       title: {},
       translate: {},
@@ -115,7 +112,6 @@ export class RemoteNavigationGroupElement extends FlowRemoteElement<RemoteNaviga
       "aria-valuemin": {},
       "aria-valuenow": {},
       "aria-valuetext": {},
-      dangerouslySetInnerHTML: {},
     };
   }
 

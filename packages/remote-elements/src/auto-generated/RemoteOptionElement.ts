@@ -1,4 +1,3 @@
-/* eslint-disable */
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
@@ -10,8 +9,6 @@ export class RemoteOptionElement extends FlowRemoteElement<RemoteOptionElementPr
     return {
       value: {},
       "aria-label": {},
-      className: {},
-      style: {},
       isDisabled: {},
       rel: {},
       target: {},
@@ -22,7 +19,6 @@ export class RemoteOptionElement extends FlowRemoteElement<RemoteOptionElementPr
       referrerPolicy: {},
       routerOptions: {},
       textValue: {},
-      wrapWith: {},
     };
   }
 

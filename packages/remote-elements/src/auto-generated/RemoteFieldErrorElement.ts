@@ -1,4 +1,3 @@
-/* eslint-disable */
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
@@ -8,10 +7,7 @@ export type { FieldErrorProps as RemoteFieldErrorElementProps } from "@mittwald/
 export class RemoteFieldErrorElement extends FlowRemoteElement<RemoteFieldErrorElementProps> {
   static get remoteProperties() {
     return {
-      className: {},
-      style: {},
       id: {},
-      wrapWith: {},
     };
   }
 

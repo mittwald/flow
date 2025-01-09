@@ -1,4 +1,3 @@
-/* eslint-disable */
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
@@ -16,7 +15,6 @@ export class RemoteActionElement extends FlowRemoteElement<RemoteActionElementPr
       break: {},
       skip: {},
       showFeedback: {},
-      wrapWith: {},
     };
   }
 

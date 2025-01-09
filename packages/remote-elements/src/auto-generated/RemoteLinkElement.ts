@@ -1,4 +1,3 @@
-/* eslint-disable */
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
@@ -17,7 +16,6 @@ export class RemoteLinkElement extends FlowRemoteElement<RemoteLinkElementProps>
       "aria-labelledby": {},
       "aria-describedby": {},
       "aria-details": {},
-      style: {},
       isDisabled: {},
       autoFocus: {},
       rel: {},
@@ -28,8 +26,6 @@ export class RemoteLinkElement extends FlowRemoteElement<RemoteLinkElementProps>
       ping: {},
       referrerPolicy: {},
       routerOptions: {},
-      wrapWith: {},
-      className: {},
     };
   }
 

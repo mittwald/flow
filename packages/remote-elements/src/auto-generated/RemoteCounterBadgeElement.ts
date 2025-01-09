@@ -1,4 +1,3 @@
-/* eslint-disable */
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
@@ -16,7 +15,6 @@ export class RemoteCounterBadgeElement extends FlowRemoteElement<RemoteCounterBa
       accessKey: {},
       autoCapitalize: {},
       autoFocus: {},
-      className: {},
       contentEditable: {},
       contextMenu: {},
       dir: {},
@@ -28,7 +26,6 @@ export class RemoteCounterBadgeElement extends FlowRemoteElement<RemoteCounterBa
       nonce: {},
       slot: {},
       spellCheck: {},
-      style: {},
       tabIndex: {},
       title: {},
       translate: {},
@@ -115,9 +112,7 @@ export class RemoteCounterBadgeElement extends FlowRemoteElement<RemoteCounterBa
       "aria-valuemin": {},
       "aria-valuenow": {},
       "aria-valuetext": {},
-      dangerouslySetInnerHTML: {},
       elementType: {},
-      wrapWith: {},
     };
   }
 

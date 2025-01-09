@@ -1,4 +1,3 @@
-/* eslint-disable */
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
@@ -9,7 +8,6 @@ export class RemoteTableCellElement extends FlowRemoteElement<RemoteTableCellEle
   static get remoteProperties() {
     return {
       rowHeader: {},
-      className: {},
       id: {},
       textValue: {},
     };

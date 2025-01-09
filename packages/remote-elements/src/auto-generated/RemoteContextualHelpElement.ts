@@ -1,4 +1,3 @@
-/* eslint-disable */
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
@@ -20,8 +19,6 @@ export class RemoteContextualHelpElement extends FlowRemoteElement<RemoteContext
       shouldFlip: {},
       isOpen: {},
       defaultOpen: {},
-      className: {},
-      style: {},
       slot: {},
       boundaryElement: {},
       scrollRef: {},

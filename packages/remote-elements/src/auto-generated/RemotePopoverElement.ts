@@ -1,4 +1,3 @@
-/* eslint-disable */
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
@@ -25,8 +24,6 @@ export class RemotePopoverElement extends FlowRemoteElement<RemotePopoverElement
       shouldFlip: {},
       isOpen: {},
       defaultOpen: {},
-      className: {},
-      style: {},
       slot: {},
       boundaryElement: {},
       scrollRef: {},

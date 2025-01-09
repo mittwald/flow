@@ -1,4 +1,3 @@
-/* eslint-disable */
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
@@ -12,7 +11,6 @@ export class RemoteTextFieldElement extends FlowRemoteElement<RemoteTextFieldEle
       "aria-labelledby": {},
       "aria-describedby": {},
       "aria-details": {},
-      style: {},
       validationBehavior: {},
       isDisabled: {},
       isReadOnly: {},
@@ -39,8 +37,6 @@ export class RemoteTextFieldElement extends FlowRemoteElement<RemoteTextFieldEle
       showCharacterCount: {},
       form: {},
       placeholder: {},
-      className: {},
-      wrapWith: {},
     };
   }
 

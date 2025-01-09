@@ -1,4 +1,3 @@
-/* eslint-disable */
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
@@ -7,9 +6,7 @@ export type { LabeledValueProps as RemoteLabeledValueElementProps } from "@mittw
 
 export class RemoteLabeledValueElement extends FlowRemoteElement<RemoteLabeledValueElementProps> {
   static get remoteProperties() {
-    return {
-      className: {},
-    };
+    return {};
   }
 
   static get remoteEvents() {

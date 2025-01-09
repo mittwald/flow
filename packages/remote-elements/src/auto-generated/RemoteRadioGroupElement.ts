@@ -1,4 +1,3 @@
-/* eslint-disable */
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
@@ -12,8 +11,6 @@ export class RemoteRadioGroupElement extends FlowRemoteElement<RemoteRadioGroupE
       "aria-labelledby": {},
       "aria-describedby": {},
       "aria-details": {},
-      className: {},
-      style: {},
       validationBehavior: {},
       isDisabled: {},
       isReadOnly: {},
@@ -27,7 +24,6 @@ export class RemoteRadioGroupElement extends FlowRemoteElement<RemoteRadioGroupE
       slot: {},
       "aria-errormessage": {},
       orientation: {},
-      wrapWith: {},
       s: {},
       m: {},
       l: {},

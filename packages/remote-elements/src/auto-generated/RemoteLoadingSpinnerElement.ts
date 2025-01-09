@@ -1,4 +1,3 @@
-/* eslint-disable */
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
@@ -15,8 +14,6 @@ export class RemoteLoadingSpinnerElement extends FlowRemoteElement<RemoteLoading
       "aria-labelledby": {},
       "aria-describedby": {},
       "aria-details": {},
-      className: {},
-      style: {},
       end: {},
       id: {},
       width: {},
@@ -79,7 +76,6 @@ export class RemoteLoadingSpinnerElement extends FlowRemoteElement<RemoteLoading
       "aria-valuemin": {},
       "aria-valuenow": {},
       "aria-valuetext": {},
-      dangerouslySetInnerHTML: {},
       height: {},
       max: {},
       media: {},
@@ -322,7 +318,6 @@ export class RemoteLoadingSpinnerElement extends FlowRemoteElement<RemoteLoading
       yChannelSelector: {},
       z: {},
       zoomAndPan: {},
-      wrapWith: {},
     };
   }
 

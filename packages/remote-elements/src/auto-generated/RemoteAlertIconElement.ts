@@ -1,4 +1,3 @@
-/* eslint-disable */
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
@@ -16,8 +15,6 @@ export class RemoteAlertIconElement extends FlowRemoteElement<RemoteAlertIconEle
       "aria-labelledby": {},
       "aria-describedby": {},
       "aria-details": {},
-      className: {},
-      style: {},
       end: {},
       id: {},
       width: {},
@@ -80,7 +77,6 @@ export class RemoteAlertIconElement extends FlowRemoteElement<RemoteAlertIconEle
       "aria-valuemin": {},
       "aria-valuenow": {},
       "aria-valuetext": {},
-      dangerouslySetInnerHTML: {},
       height: {},
       max: {},
       media: {},
@@ -323,7 +319,6 @@ export class RemoteAlertIconElement extends FlowRemoteElement<RemoteAlertIconEle
       yChannelSelector: {},
       z: {},
       zoomAndPan: {},
-      wrapWith: {},
     };
   }
 

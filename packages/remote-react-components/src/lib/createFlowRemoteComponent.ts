@@ -13,13 +13,16 @@ import {
   isFlowComponentName,
 } from "@mittwald/flow-react-components/hooks";
 
+// eslint-disable-next-line  @typescript-eslint/no-explicit-any
+type AnyRecord = Record<string, any>;
+
 export function createFlowRemoteComponent<
   Tag extends keyof HTMLElementTagNameMap,
   ElementConstructor extends RemoteElementConstructor<
-    any,
-    any,
-    any,
-    any
+    AnyRecord,
+    AnyRecord,
+    AnyRecord,
+    AnyRecord
   > = HTMLElementTagNameMap[Tag] extends RemoteElement<
     infer Properties,
     infer Methods,
@@ -28,14 +31,14 @@ export function createFlowRemoteComponent<
   >
     ? RemoteElementConstructor<Properties, Methods, Slots, EventListeners>
     : never,
-  Props extends Record<string, any> = {},
+  Props extends AnyRecord = AnyRecord,
 >(
   tag: Tag,
   flowComponentTag: string,
-  Element: ElementConstructor | undefined = customElements.get(tag) as any,
+  Element: ElementConstructor | undefined = customElements.get(tag) as never,
   {
     slotProps = true,
-    eventProps = {} as any,
+    eventProps = {} as never,
   }: RemoteComponentOptions<ElementConstructor, Props> = {},
 ): RemoteComponentTypeFromElementConstructor<ElementConstructor> {
   const element = createRemoteComponent(tag, Element, {

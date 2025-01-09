@@ -7,10 +7,8 @@ import Heading from "@mittwald/flow-react-components/Heading";
 import Action from "@mittwald/flow-react-components/Action";
 import { useOverlayController } from "@mittwald/flow-react-components/controller";
 import { useForm } from "react-hook-form";
-import {
-  Form,
-  typedField,
-} from "@mittwald/flow-react-components/react-hook-form";
+import { Form } from "@mittwald/flow-react-components/react-hook-form/Form";
+import { typedField } from "@mittwald/flow-react-components/react-hook-form/Field";
 import { TextField } from "@mittwald/flow-react-components/TextField";
 
 export default () => {

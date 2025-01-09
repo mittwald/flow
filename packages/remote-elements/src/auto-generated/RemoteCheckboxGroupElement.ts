@@ -1,4 +1,3 @@
-/* eslint-disable */
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
@@ -12,8 +11,6 @@ export class RemoteCheckboxGroupElement extends FlowRemoteElement<RemoteCheckbox
       "aria-labelledby": {},
       "aria-describedby": {},
       "aria-details": {},
-      className: {},
-      style: {},
       validationBehavior: {},
       isDisabled: {},
       isReadOnly: {},
@@ -29,7 +26,6 @@ export class RemoteCheckboxGroupElement extends FlowRemoteElement<RemoteCheckbox
       s: {},
       m: {},
       l: {},
-      wrapWith: {},
     };
   }
 

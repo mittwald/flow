@@ -8,6 +8,10 @@ export const Activity = createFlowRemoteComponent(
   "Activity",
   RemoteActivityElement,
   {
+    slotProps: {
+      wrapper: false,
+    },
+
     eventProps: {},
   },
 );

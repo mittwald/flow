@@ -1,4 +1,3 @@
-/* eslint-disable */
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
@@ -14,8 +13,6 @@ export class RemoteCountryOptionsElement extends FlowRemoteElement<RemoteCountry
       "aria-labelledby": {},
       "aria-describedby": {},
       "aria-details": {},
-      className: {},
-      style: {},
       autoFocus: {},
       id: {},
       slot: {},
@@ -32,7 +29,6 @@ export class RemoteCountryOptionsElement extends FlowRemoteElement<RemoteCountry
       renderEmptyState: {},
       layout: {},
       dependencies: {},
-      wrapWith: {},
     };
   }
 

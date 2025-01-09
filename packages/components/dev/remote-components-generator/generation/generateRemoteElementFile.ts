@@ -3,7 +3,6 @@ import { componentModulePathOf } from "../lib/componentModulePathOf";
 import { isEvent, isProp, isSlot } from "../lib/propClassifiers";
 import { remoteElementTagNameOf } from "../lib/remoteElementTagNameOf";
 import { remoteComponentNameOf } from "../lib/remoteComponentNameOf";
-import { remoteComponentBaseNameOf } from "../lib/remoteComponentBaseNameOf";
 
 export function generateRemoteElementFile(c: ComponentDoc) {
   const componentProps = c.props;
@@ -38,7 +37,6 @@ export function generateRemoteElementFile(c: ComponentDoc) {
     import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
     import type { ${t.propsType} as ${t.propsAliasType} } from "@mittwald/flow-react-components/${t.exportPath}";
     export type { ${t.propsType} as ${t.propsAliasType} } from "@mittwald/flow-react-components/${t.exportPath}";
-    
     
     export class ${t.element} extends FlowRemoteElement<${t.propsAliasType}> {
       static get remoteProperties() {

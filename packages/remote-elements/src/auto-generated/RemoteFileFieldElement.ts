@@ -1,4 +1,3 @@
-/* eslint-disable */
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
@@ -8,7 +7,6 @@ export type { FileFieldProps as RemoteFileFieldElementProps } from "@mittwald/fl
 export class RemoteFileFieldElement extends FlowRemoteElement<RemoteFileFieldElementProps> {
   static get remoteProperties() {
     return {
-      wrapWith: {},
       name: {},
       accept: {},
       multiple: {},

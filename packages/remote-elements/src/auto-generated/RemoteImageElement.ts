@@ -1,4 +1,3 @@
-/* eslint-disable */
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
@@ -27,7 +26,6 @@ export class RemoteImageElement extends FlowRemoteElement<RemoteImageElementProp
       accessKey: {},
       autoCapitalize: {},
       autoFocus: {},
-      className: {},
       contentEditable: {},
       contextMenu: {},
       dir: {},
@@ -39,7 +37,6 @@ export class RemoteImageElement extends FlowRemoteElement<RemoteImageElementProp
       nonce: {},
       slot: {},
       spellCheck: {},
-      style: {},
       tabIndex: {},
       title: {},
       translate: {},
@@ -126,8 +123,6 @@ export class RemoteImageElement extends FlowRemoteElement<RemoteImageElementProp
       "aria-valuemin": {},
       "aria-valuenow": {},
       "aria-valuetext": {},
-      dangerouslySetInnerHTML: {},
-      wrapWith: {},
     };
   }
 

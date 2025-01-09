@@ -1,4 +1,3 @@
-/* eslint-disable */
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
@@ -15,7 +14,6 @@ export class RemoteSelectElement extends FlowRemoteElement<RemoteSelectElementPr
       "aria-labelledby": {},
       "aria-describedby": {},
       "aria-details": {},
-      style: {},
       validationBehavior: {},
       isDisabled: {},
       isRequired: {},
@@ -31,8 +29,6 @@ export class RemoteSelectElement extends FlowRemoteElement<RemoteSelectElementPr
       placeholder: {},
       selectedKey: {},
       defaultSelectedKey: {},
-      wrapWith: {},
-      className: {},
     };
   }
 

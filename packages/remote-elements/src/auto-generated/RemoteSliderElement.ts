@@ -1,4 +1,3 @@
-/* eslint-disable */
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
@@ -9,7 +8,6 @@ export class RemoteSliderElement extends FlowRemoteElement<RemoteSliderElementPr
   static get remoteProperties() {
     return {
       showInitialMarker: {},
-      wrapWith: {},
       formatOptions: {},
       "aria-label": {},
       "aria-labelledby": {},
@@ -23,8 +21,6 @@ export class RemoteSliderElement extends FlowRemoteElement<RemoteSliderElementPr
       id: {},
       orientation: {},
       step: {},
-      className: {},
-      style: {},
       slot: {},
       name: {},
     };

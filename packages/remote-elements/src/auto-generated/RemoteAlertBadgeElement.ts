@@ -1,4 +1,3 @@
-/* eslint-disable */
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
@@ -9,8 +8,6 @@ export class RemoteAlertBadgeElement extends FlowRemoteElement<RemoteAlertBadgeE
   static get remoteProperties() {
     return {
       status: {},
-      wrapWith: {},
-      className: {},
     };
   }
 

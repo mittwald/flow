@@ -1,4 +1,3 @@
-/* eslint-disable */
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
@@ -7,10 +6,7 @@ export type { InitialsProps as RemoteInitialsElementProps } from "@mittwald/flow
 
 export class RemoteInitialsElement extends FlowRemoteElement<RemoteInitialsElementProps> {
   static get remoteProperties() {
-    return {
-      className: {},
-      wrapWith: {},
-    };
+    return {};
   }
 
   static get remoteEvents() {

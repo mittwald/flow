@@ -1,8 +1,6 @@
 import { useForm } from "react-hook-form";
-import {
-  Field,
-  Form,
-} from "@mittwald/flow-react-components/react-hook-form";
+import { Field } from "@mittwald/flow-react-components/react-hook-form/Field";
+import { Form } from "@mittwald/flow-react-components/react-hook-form/Form";
 import { TextField } from "@mittwald/flow-react-components/TextField";
 import { Label } from "@mittwald/flow-react-components/Label";
 import { ActionGroup } from "@mittwald/flow-react-components/ActionGroup";
