@@ -1,4 +1,3 @@
-/* eslint-disable */
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import createFlowRemoteComponent from "@/lib/createFlowRemoteComponent";
@@ -9,10 +8,6 @@ export const Section = createFlowRemoteComponent(
   "Section",
   RemoteSectionElement,
   {
-    slotProps: {
-      wrapper: false,
-    },
-
     eventProps: {
       onCopy: { event: "copy" } as never,
       onCopyCapture: { event: "copyCapture" } as never,

@@ -36,16 +36,16 @@
   },
   "devDependencies": {
     "@mittwald/flow-react-components": "workspace:^",
-    "@types/node": "^22.10.1",
-    "@types/react": "^19.0.1",
-    "nx": "^20.2.2",
+    "@types/node": "^22.10.5",
+    "@types/react": "^19.0.4",
+    "nx": "^20.3.1",
     "prettier": "^3.4.2",
     "react": "19.0.0",
-    "react-hook-form": "^7.54.0",
-    "typescript": "^5.7.2",
+    "react-hook-form": "^7.54.2",
+    "typescript": "^5.7.3",
     "vite": "^5.4.11",
     "vite-plugin-checker": "^0.8.0",
-    "vite-plugin-dts": "^4.3.0",
+    "vite-plugin-dts": "^4.4.0",
     "vite-plugin-externalize-deps": "^0.8.0"
   },
   "peerDependencies": {
