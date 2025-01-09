@@ -7,8 +7,8 @@ export type { MessageProps as RemoteMessageElementProps } from "@mittwald/flow-r
 export class RemoteMessageElement extends FlowRemoteElement<RemoteMessageElementProps> {
   static get remoteProperties() {
     return {
-      type: {},
       orientation: {},
+      type: {},
     };
   }
 

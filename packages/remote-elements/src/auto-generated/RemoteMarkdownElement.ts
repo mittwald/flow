@@ -7,9 +7,9 @@ export type { MarkdownProps as RemoteMarkdownElementProps } from "@mittwald/flow
 export class RemoteMarkdownElement extends FlowRemoteElement<RemoteMarkdownElementProps> {
   static get remoteProperties() {
     return {
-      color: {},
       allowElement: {},
       allowedElements: {},
+      color: {},
       disallowedElements: {},
       rehypePlugins: {},
       remarkPlugins: {},

@@ -13,10 +13,10 @@ export const RadioGroup = createFlowRemoteComponent(
     },
 
     eventProps: {
-      onFocus: { event: "focus" } as never,
       onBlur: { event: "blur" } as never,
-      onFocusChange: { event: "focusChange" } as never,
       onChange: { event: "change" } as never,
+      onFocus: { event: "focus" } as never,
+      onFocusChange: { event: "focusChange" } as never,
     },
   },
 );

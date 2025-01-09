@@ -7,16 +7,16 @@ export type { BreadcrumbProps as RemoteBreadcrumbElementProps } from "@mittwald/
 export class RemoteBreadcrumbElement extends FlowRemoteElement<RemoteBreadcrumbElementProps> {
   static get remoteProperties() {
     return {
-      color: {},
-      "aria-label": {},
-      "aria-labelledby": {},
       "aria-describedby": {},
       "aria-details": {},
-      isDisabled: {},
-      id: {},
-      slot: {},
-      items: {},
+      "aria-label": {},
+      "aria-labelledby": {},
+      color: {},
       dependencies: {},
+      id: {},
+      isDisabled: {},
+      items: {},
+      slot: {},
     };
   }
 

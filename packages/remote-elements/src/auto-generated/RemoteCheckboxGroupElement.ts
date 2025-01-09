@@ -7,34 +7,34 @@ export type { CheckboxGroupProps as RemoteCheckboxGroupElementProps } from "@mit
 export class RemoteCheckboxGroupElement extends FlowRemoteElement<RemoteCheckboxGroupElementProps> {
   static get remoteProperties() {
     return {
-      "aria-label": {},
-      "aria-labelledby": {},
       "aria-describedby": {},
       "aria-details": {},
-      validationBehavior: {},
-      isDisabled: {},
-      isReadOnly: {},
-      isRequired: {},
-      isInvalid: {},
-      validate: {},
-      value: {},
+      "aria-errormessage": {},
+      "aria-label": {},
+      "aria-labelledby": {},
       defaultValue: {},
       id: {},
-      name: {},
-      slot: {},
-      "aria-errormessage": {},
-      s: {},
-      m: {},
+      isDisabled: {},
+      isInvalid: {},
+      isReadOnly: {},
+      isRequired: {},
       l: {},
+      m: {},
+      name: {},
+      s: {},
+      slot: {},
+      validate: {},
+      validationBehavior: {},
+      value: {},
     };
   }
 
   static get remoteEvents() {
     return {
-      focus: {},
       blur: {},
-      focusChange: {},
       change: {},
+      focus: {},
+      focusChange: {},
     };
   }
 

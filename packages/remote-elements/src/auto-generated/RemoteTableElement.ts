@@ -7,20 +7,20 @@ export type { TableProps as RemoteTableElementProps } from "@mittwald/flow-react
 export class RemoteTableElement extends FlowRemoteElement<RemoteTableElementProps> {
   static get remoteProperties() {
     return {
-      selectionBehavior: {},
-      disabledBehavior: {},
-      dragAndDropHooks: {},
-      selectedKeys: {},
-      defaultSelectedKeys: {},
-      disabledKeys: {},
-      selectionMode: {},
-      disallowEmptySelection: {},
-      sortDescriptor: {},
-      slot: {},
-      "aria-label": {},
-      "aria-labelledby": {},
       "aria-describedby": {},
       "aria-details": {},
+      "aria-label": {},
+      "aria-labelledby": {},
+      defaultSelectedKeys: {},
+      disabledBehavior: {},
+      disabledKeys: {},
+      disallowEmptySelection: {},
+      dragAndDropHooks: {},
+      selectedKeys: {},
+      selectionBehavior: {},
+      selectionMode: {},
+      slot: {},
+      sortDescriptor: {},
       verticalAlign: {},
     };
   }
@@ -28,9 +28,9 @@ export class RemoteTableElement extends FlowRemoteElement<RemoteTableElementProp
   static get remoteEvents() {
     return {
       rowAction: {},
+      scroll: {},
       selectionChange: {},
       sortChange: {},
-      scroll: {},
     };
   }
 

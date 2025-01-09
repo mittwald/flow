@@ -13,8 +13,8 @@ export const ListActiveFilterListView = createFlowRemoteComponent(
     },
 
     eventProps: {
-      onResetFilters: { event: "resetFilters" } as never,
       onClearFilters: { event: "clearFilters" } as never,
+      onResetFilters: { event: "resetFilters" } as never,
       onStoreFilterDefaultSettings: {
         event: "storeFilterDefaultSettings",
       } as never,

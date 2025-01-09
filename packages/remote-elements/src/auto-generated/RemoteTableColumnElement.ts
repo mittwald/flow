@@ -7,14 +7,14 @@ export type { TableColumnProps as RemoteTableColumnElementProps } from "@mittwal
 export class RemoteTableColumnElement extends FlowRemoteElement<RemoteTableColumnElementProps> {
   static get remoteProperties() {
     return {
-      id: {},
       allowsSorting: {},
+      defaultWidth: {},
+      id: {},
       isRowHeader: {},
+      maxWidth: {},
+      minWidth: {},
       textValue: {},
       width: {},
-      defaultWidth: {},
-      minWidth: {},
-      maxWidth: {},
     };
   }
 

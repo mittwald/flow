@@ -7,18 +7,18 @@ export type { TabsProps as RemoteTabsElementProps } from "@mittwald/flow-react-c
 export class RemoteTabsElement extends FlowRemoteElement<RemoteTabsElementProps> {
   static get remoteProperties() {
     return {
-      "aria-label": {},
-      "aria-labelledby": {},
       "aria-describedby": {},
       "aria-details": {},
-      isDisabled: {},
-      id: {},
-      slot: {},
-      orientation: {},
-      disabledKeys: {},
-      selectedKey: {},
+      "aria-label": {},
+      "aria-labelledby": {},
       defaultSelectedKey: {},
+      disabledKeys: {},
+      id: {},
+      isDisabled: {},
       keyboardActivation: {},
+      orientation: {},
+      selectedKey: {},
+      slot: {},
     };
   }
 

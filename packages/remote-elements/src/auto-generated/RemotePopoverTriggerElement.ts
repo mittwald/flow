@@ -7,8 +7,8 @@ export type { PopoverTriggerProps as RemotePopoverTriggerElementProps } from "@m
 export class RemotePopoverTriggerElement extends FlowRemoteElement<RemotePopoverTriggerElementProps> {
   static get remoteProperties() {
     return {
-      isDefaultOpen: {},
       controller: {},
+      isDefaultOpen: {},
     };
   }
 

@@ -7,26 +7,26 @@ export type { TabTitleProps as RemoteTabTitleElementProps } from "@mittwald/flow
 export class RemoteTabTitleElement extends FlowRemoteElement<RemoteTabTitleElementProps> {
   static get remoteProperties() {
     return {
-      "aria-label": {},
-      "aria-labelledby": {},
       "aria-describedby": {},
       "aria-details": {},
-      rel: {},
-      target: {},
-      href: {},
+      "aria-label": {},
+      "aria-labelledby": {},
       download: {},
+      href: {},
       hrefLang: {},
       ping: {},
       referrerPolicy: {},
+      rel: {},
       routerOptions: {},
+      target: {},
     };
   }
 
   static get remoteEvents() {
     return {
-      hoverStart: {},
-      hoverEnd: {},
       hoverChange: {},
+      hoverEnd: {},
+      hoverStart: {},
     };
   }
 

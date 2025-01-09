@@ -7,41 +7,41 @@ export type { TimeFieldProps as RemoteTimeFieldElementProps } from "@mittwald/fl
 export class RemoteTimeFieldElement extends FlowRemoteElement<RemoteTimeFieldElementProps> {
   static get remoteProperties() {
     return {
-      errorMessage: {},
-      "aria-label": {},
-      "aria-labelledby": {},
       "aria-describedby": {},
       "aria-details": {},
-      validationBehavior: {},
-      hourCycle: {},
+      "aria-label": {},
+      "aria-labelledby": {},
+      autoFocus: {},
+      defaultValue: {},
+      errorMessage: {},
       granularity: {},
       hideTimeZone: {},
-      shouldForceLeadingZeros: {},
-      placeholderValue: {},
-      minValue: {},
-      maxValue: {},
+      hourCycle: {},
+      id: {},
       isDisabled: {},
+      isInvalid: {},
       isReadOnly: {},
       isRequired: {},
-      isInvalid: {},
-      validate: {},
-      autoFocus: {},
-      value: {},
-      defaultValue: {},
-      id: {},
+      maxValue: {},
+      minValue: {},
       name: {},
+      placeholderValue: {},
+      shouldForceLeadingZeros: {},
       slot: {},
+      validate: {},
+      validationBehavior: {},
+      value: {},
     };
   }
 
   static get remoteEvents() {
     return {
-      focus: {},
       blur: {},
+      change: {},
+      focus: {},
       focusChange: {},
       keyDown: {},
       keyUp: {},
-      change: {},
     };
   }
 

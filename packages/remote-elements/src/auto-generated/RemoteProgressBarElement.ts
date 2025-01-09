@@ -7,21 +7,21 @@ export type { ProgressBarProps as RemoteProgressBarElementProps } from "@mittwal
 export class RemoteProgressBarElement extends FlowRemoteElement<RemoteProgressBarElementProps> {
   static get remoteProperties() {
     return {
-      showMaxValue: {},
-      size: {},
-      "aria-label": {},
-      "aria-labelledby": {},
       "aria-describedby": {},
       "aria-details": {},
-      minValue: {},
-      maxValue: {},
-      value: {},
-      id: {},
-      slot: {},
-      isIndeterminate: {},
+      "aria-label": {},
+      "aria-labelledby": {},
       formatOptions: {},
-      valueLabel: {},
+      id: {},
+      isIndeterminate: {},
+      maxValue: {},
+      minValue: {},
+      showMaxValue: {},
+      size: {},
+      slot: {},
       status: {},
+      value: {},
+      valueLabel: {},
     };
   }
 

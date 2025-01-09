@@ -7,26 +7,26 @@ export type { ListProps as RemoteListElementProps } from "@mittwald/flow-react-c
 export class RemoteListElement extends FlowRemoteElement<RemoteListElementProps> {
   static get remoteProperties() {
     return {
-      batchSize: {},
+      accordion: {},
       "aria-label": {},
       "aria-labelledby": {},
-      selectedKeys: {},
+      batchSize: {},
       defaultSelectedKeys: {},
-      disabledKeys: {},
-      selectionMode: {},
-      disallowEmptySelection: {},
-      selectionBehavior: {},
-      settingStorageKey: {},
-      accordion: {},
-      getItemId: {},
       defaultViewMode: {},
+      disabledKeys: {},
+      disallowEmptySelection: {},
+      getItemId: {},
+      selectedKeys: {},
+      selectionBehavior: {},
+      selectionMode: {},
+      settingStorageKey: {},
     };
   }
 
   static get remoteEvents() {
     return {
-      change: {},
       action: {},
+      change: {},
       selectionChange: {},
     };
   }

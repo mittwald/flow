@@ -14,9 +14,9 @@ export const Table = createFlowRemoteComponent(
 
     eventProps: {
       onRowAction: { event: "rowAction" } as never,
+      onScroll: { event: "scroll" } as never,
       onSelectionChange: { event: "selectionChange" } as never,
       onSortChange: { event: "sortChange" } as never,
-      onScroll: { event: "scroll" } as never,
     },
   },
 );

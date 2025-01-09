@@ -7,10 +7,10 @@ export type { TableBodyProps as RemoteTableBodyElementProps } from "@mittwald/fl
 export class RemoteTableBodyElement extends FlowRemoteElement<RemoteTableBodyElementProps> {
   static get remoteProperties() {
     return {
-      renderEmptyState: {},
       dependencies: {},
       disabledKeys: {},
       items: {},
+      renderEmptyState: {},
     };
   }
 

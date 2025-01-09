@@ -7,8 +7,8 @@ export type { ActivityProps as RemoteActivityElementProps } from "@mittwald/flow
 export class RemoteActivityElement extends FlowRemoteElement<RemoteActivityElementProps> {
   static get remoteProperties() {
     return {
-      isActive: {},
       inactiveDelay: {},
+      isActive: {},
     };
   }
 

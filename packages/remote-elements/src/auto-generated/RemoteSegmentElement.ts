@@ -7,29 +7,29 @@ export type { SegmentProps as RemoteSegmentElementProps } from "@mittwald/flow-r
 export class RemoteSegmentElement extends FlowRemoteElement<RemoteSegmentElementProps> {
   static get remoteProperties() {
     return {
-      "aria-label": {},
-      "aria-labelledby": {},
       "aria-describedby": {},
       "aria-details": {},
-      isDisabled: {},
+      "aria-label": {},
+      "aria-labelledby": {},
       autoFocus: {},
-      value: {},
       id: {},
-      slot: {},
       inputRef: {},
+      isDisabled: {},
+      slot: {},
+      value: {},
     };
   }
 
   static get remoteEvents() {
     return {
-      focus: {},
       blur: {},
+      focus: {},
       focusChange: {},
+      hoverChange: {},
+      hoverEnd: {},
+      hoverStart: {},
       keyDown: {},
       keyUp: {},
-      hoverStart: {},
-      hoverEnd: {},
-      hoverChange: {},
     };
   }
 

@@ -13,8 +13,8 @@ export const List = createFlowRemoteComponent(
     },
 
     eventProps: {
-      onChange: { event: "change" } as never,
       onAction: { event: "action" } as never,
+      onChange: { event: "change" } as never,
       onSelectionChange: { event: "selectionChange" } as never,
     },
   },

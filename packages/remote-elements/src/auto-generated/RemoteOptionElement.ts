@@ -7,27 +7,27 @@ export type { OptionProps as RemoteOptionElementProps } from "@mittwald/flow-rea
 export class RemoteOptionElement extends FlowRemoteElement<RemoteOptionElementProps> {
   static get remoteProperties() {
     return {
-      value: {},
       "aria-label": {},
-      isDisabled: {},
-      rel: {},
-      target: {},
-      href: {},
       download: {},
+      href: {},
       hrefLang: {},
+      isDisabled: {},
       ping: {},
       referrerPolicy: {},
+      rel: {},
       routerOptions: {},
+      target: {},
       textValue: {},
+      value: {},
     };
   }
 
   static get remoteEvents() {
     return {
       action: {},
-      hoverStart: {},
-      hoverEnd: {},
       hoverChange: {},
+      hoverEnd: {},
+      hoverStart: {},
     };
   }
 

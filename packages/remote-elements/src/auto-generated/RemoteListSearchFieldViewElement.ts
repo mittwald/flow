@@ -7,9 +7,9 @@ export type { SearchFieldProps as RemoteListSearchFieldViewElementProps } from "
 export class RemoteListSearchFieldViewElement extends FlowRemoteElement<RemoteListSearchFieldViewElementProps> {
   static get remoteProperties() {
     return {
-      value: {},
-      autoSubmit: {},
       autoFocus: {},
+      autoSubmit: {},
+      value: {},
     };
   }
 

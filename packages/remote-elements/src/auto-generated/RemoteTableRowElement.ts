@@ -7,30 +7,30 @@ export type { TableRowProps as RemoteTableRowElementProps } from "@mittwald/flow
 export class RemoteTableRowElement extends FlowRemoteElement<RemoteTableRowElementProps> {
   static get remoteProperties() {
     return {
-      id: {},
       columns: {},
-      value: {},
       dependencies: {},
-      textValue: {},
-      isDisabled: {},
+      download: {},
+      footer: {},
       href: {},
       hrefLang: {},
-      target: {},
-      rel: {},
-      download: {},
+      id: {},
+      isDisabled: {},
       ping: {},
       referrerPolicy: {},
+      rel: {},
       routerOptions: {},
-      footer: {},
+      target: {},
+      textValue: {},
+      value: {},
     };
   }
 
   static get remoteEvents() {
     return {
       action: {},
-      hoverStart: {},
-      hoverEnd: {},
       hoverChange: {},
+      hoverEnd: {},
+      hoverStart: {},
     };
   }
 

@@ -7,43 +7,43 @@ export type { LinkProps as RemoteLinkElementProps } from "@mittwald/flow-react-c
 export class RemoteLinkElement extends FlowRemoteElement<RemoteLinkElementProps> {
   static get remoteProperties() {
     return {
-      inline: {},
-      linkComponent: {},
-      color: {},
-      unstyled: {},
       "aria-current": {},
-      "aria-label": {},
-      "aria-labelledby": {},
       "aria-describedby": {},
       "aria-details": {},
-      isDisabled: {},
+      "aria-label": {},
+      "aria-labelledby": {},
       autoFocus: {},
-      rel: {},
-      target: {},
-      href: {},
+      color: {},
       download: {},
+      href: {},
       hrefLang: {},
+      inline: {},
+      isDisabled: {},
+      linkComponent: {},
       ping: {},
       referrerPolicy: {},
+      rel: {},
       routerOptions: {},
+      target: {},
+      unstyled: {},
     };
   }
 
   static get remoteEvents() {
     return {
-      focus: {},
       blur: {},
+      focus: {},
       focusChange: {},
+      hoverChange: {},
+      hoverEnd: {},
+      hoverStart: {},
       keyDown: {},
       keyUp: {},
       press: {},
-      pressStart: {},
-      pressEnd: {},
       pressChange: {},
+      pressEnd: {},
+      pressStart: {},
       pressUp: {},
-      hoverStart: {},
-      hoverEnd: {},
-      hoverChange: {},
     };
   }
 

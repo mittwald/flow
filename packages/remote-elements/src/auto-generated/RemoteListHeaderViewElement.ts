@@ -7,9 +7,9 @@ export type { HeaderProps as RemoteListHeaderViewElementProps } from "@mittwald/
 export class RemoteListHeaderViewElement extends FlowRemoteElement<RemoteListHeaderViewElementProps> {
   static get remoteProperties() {
     return {
-      showSearch: {},
       autoSubmitSearch: {},
       searchValue: {},
+      showSearch: {},
     };
   }
 
@@ -20,7 +20,7 @@ export class RemoteListHeaderViewElement extends FlowRemoteElement<RemoteListHea
   }
 
   static get remoteSlots() {
-    return ["filterPickerList", "activeFilterList"];
+    return ["activeFilterList", "filterPickerList"];
   }
 }
 

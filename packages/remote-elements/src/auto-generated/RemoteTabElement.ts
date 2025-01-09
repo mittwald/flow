@@ -7,10 +7,10 @@ export type { TabProps as RemoteTabElementProps } from "@mittwald/flow-react-com
 export class RemoteTabElement extends FlowRemoteElement<RemoteTabElementProps> {
   static get remoteProperties() {
     return {
-      "aria-label": {},
-      "aria-labelledby": {},
       "aria-describedby": {},
       "aria-details": {},
+      "aria-label": {},
+      "aria-labelledby": {},
       id: {},
       shouldForceMount: {},
     };

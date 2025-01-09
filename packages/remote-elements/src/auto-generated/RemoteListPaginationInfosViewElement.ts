@@ -7,9 +7,9 @@ export type { PaginationInfosProps as RemoteListPaginationInfosViewElementProps 
 export class RemoteListPaginationInfosViewElement extends FlowRemoteElement<RemoteListPaginationInfosViewElementProps> {
   static get remoteProperties() {
     return {
+      isInitiallyLoading: {},
       totalItemsCount: {},
       visibleItemsCount: {},
-      isInitiallyLoading: {},
     };
   }
 

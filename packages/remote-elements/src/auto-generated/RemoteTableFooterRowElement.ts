@@ -7,30 +7,30 @@ export type { TableFooterRowProps as RemoteTableFooterRowElementProps } from "@m
 export class RemoteTableFooterRowElement extends FlowRemoteElement<RemoteTableFooterRowElementProps> {
   static get remoteProperties() {
     return {
-      id: {},
       columns: {},
-      value: {},
       dependencies: {},
-      textValue: {},
-      isDisabled: {},
+      download: {},
+      footer: {},
       href: {},
       hrefLang: {},
-      target: {},
-      rel: {},
-      download: {},
+      id: {},
+      isDisabled: {},
       ping: {},
       referrerPolicy: {},
+      rel: {},
       routerOptions: {},
-      footer: {},
+      target: {},
+      textValue: {},
+      value: {},
     };
   }
 
   static get remoteEvents() {
     return {
       action: {},
-      hoverStart: {},
-      hoverEnd: {},
       hoverChange: {},
+      hoverEnd: {},
+      hoverStart: {},
     };
   }
 

@@ -13,8 +13,8 @@ export class RemoteListActiveFilterListViewElement extends FlowRemoteElement<Rem
 
   static get remoteEvents() {
     return {
-      resetFilters: {},
       clearFilters: {},
+      resetFilters: {},
       storeFilterDefaultSettings: {},
     };
   }

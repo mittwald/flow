@@ -7,9 +7,9 @@ export type { CodeBlockProps as RemoteCodeBlockElementProps } from "@mittwald/fl
 export class RemoteCodeBlockElement extends FlowRemoteElement<RemoteCodeBlockElementProps> {
   static get remoteProperties() {
     return {
-      copyable: {},
-      color: {},
       code: {},
+      color: {},
+      copyable: {},
     };
   }
 

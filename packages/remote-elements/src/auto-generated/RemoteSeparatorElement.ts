@@ -7,13 +7,13 @@ export type { SeparatorProps as RemoteSeparatorElementProps } from "@mittwald/fl
 export class RemoteSeparatorElement extends FlowRemoteElement<RemoteSeparatorElementProps> {
   static get remoteProperties() {
     return {
-      "aria-label": {},
-      "aria-labelledby": {},
       "aria-describedby": {},
       "aria-details": {},
+      "aria-label": {},
+      "aria-labelledby": {},
+      elementType: {},
       id: {},
       slot: {},
-      elementType: {},
     };
   }
 

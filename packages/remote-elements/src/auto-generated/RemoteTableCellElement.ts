@@ -7,8 +7,8 @@ export type { TableCellProps as RemoteTableCellElementProps } from "@mittwald/fl
 export class RemoteTableCellElement extends FlowRemoteElement<RemoteTableCellElementProps> {
   static get remoteProperties() {
     return {
-      rowHeader: {},
       id: {},
+      rowHeader: {},
       textValue: {},
     };
   }

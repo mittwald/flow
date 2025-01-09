@@ -7,42 +7,42 @@ export type { CheckboxProps as RemoteCheckboxElementProps } from "@mittwald/flow
 export class RemoteCheckboxElement extends FlowRemoteElement<RemoteCheckboxElementProps> {
   static get remoteProperties() {
     return {
-      "aria-label": {},
-      "aria-labelledby": {},
+      "aria-controls": {},
       "aria-describedby": {},
       "aria-details": {},
-      validationBehavior: {},
+      "aria-errormessage": {},
+      "aria-label": {},
+      "aria-labelledby": {},
+      autoFocus: {},
+      defaultSelected: {},
+      excludeFromTabOrder: {},
+      id: {},
+      inputRef: {},
       isDisabled: {},
+      isIndeterminate: {},
+      isInvalid: {},
       isReadOnly: {},
       isRequired: {},
-      isInvalid: {},
-      validate: {},
-      autoFocus: {},
-      value: {},
-      id: {},
+      isSelected: {},
       name: {},
       slot: {},
-      "aria-controls": {},
-      "aria-errormessage": {},
-      excludeFromTabOrder: {},
-      isIndeterminate: {},
-      defaultSelected: {},
-      isSelected: {},
-      inputRef: {},
+      validate: {},
+      validationBehavior: {},
+      value: {},
     };
   }
 
   static get remoteEvents() {
     return {
-      focus: {},
       blur: {},
+      change: {},
+      focus: {},
       focusChange: {},
+      hoverChange: {},
+      hoverEnd: {},
+      hoverStart: {},
       keyDown: {},
       keyUp: {},
-      change: {},
-      hoverStart: {},
-      hoverEnd: {},
-      hoverChange: {},
     };
   }
 

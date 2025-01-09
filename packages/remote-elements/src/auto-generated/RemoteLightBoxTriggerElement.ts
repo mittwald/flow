@@ -7,8 +7,8 @@ export type { LightBoxTriggerProps as RemoteLightBoxTriggerElementProps } from "
 export class RemoteLightBoxTriggerElement extends FlowRemoteElement<RemoteLightBoxTriggerElementProps> {
   static get remoteProperties() {
     return {
-      isDefaultOpen: {},
       controller: {},
+      isDefaultOpen: {},
     };
   }
 

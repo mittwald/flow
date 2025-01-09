@@ -14,6 +14,7 @@ import type { ComponentDoc } from "react-docgen-typescript";
 import { remoteComponentNameOf } from "./lib/remoteComponentNameOf";
 import { generateRemoteReactRendererComponentsFile } from "./generation/generateRemoteReactRendererComponentsFile";
 import { remoteComponentBaseNameOf } from "./lib/remoteComponentBaseNameOf";
+import { prop, sortBy } from "remeda";
 
 const jetpack = jp.dir("../..");
 
@@ -30,7 +31,10 @@ async function generate() {
 
   console.log("🧐 Parse component specification file");
 
-  components = components.filter((c) => checkTagIsSet(c.tags, "generate"));
+  components = sortBy(
+    components.filter((c) => checkTagIsSet(c.tags, "generate")),
+    prop("filePath"),
+  );
 
   console.log("✅  Done");
   console.log("");
@@ -42,6 +46,7 @@ async function generate() {
       delete c.props[ignoredProp];
     });
   }
+
   console.log("✅  Done");
   console.log("");
 

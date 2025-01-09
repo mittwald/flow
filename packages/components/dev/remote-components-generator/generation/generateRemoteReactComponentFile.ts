@@ -10,6 +10,7 @@ export function generateRemoteReactComponentFile(c: ComponentDoc) {
     remoteComponentName: remoteComponentNameOf(c),
     name: remoteComponentBaseNameOf(c),
     events: Object.keys(componentProps)
+      .sort()
       .filter((propName) => propName.startsWith("on"))
       .map((propName) => {
         const formattedName = propName[2].toLowerCase() + propName.slice(3);

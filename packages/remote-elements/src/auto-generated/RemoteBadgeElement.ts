@@ -14,8 +14,8 @@ export class RemoteBadgeElement extends FlowRemoteElement<RemoteBadgeElementProp
 
   static get remoteEvents() {
     return {
-      press: {},
       close: {},
+      press: {},
     };
   }
 

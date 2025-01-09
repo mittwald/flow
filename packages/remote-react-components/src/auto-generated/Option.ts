@@ -14,9 +14,9 @@ export const Option = createFlowRemoteComponent(
 
     eventProps: {
       onAction: { event: "action" } as never,
-      onHoverStart: { event: "hoverStart" } as never,
-      onHoverEnd: { event: "hoverEnd" } as never,
       onHoverChange: { event: "hoverChange" } as never,
+      onHoverEnd: { event: "hoverEnd" } as never,
+      onHoverStart: { event: "hoverStart" } as never,
     },
   },
 );

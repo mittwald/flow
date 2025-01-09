@@ -7,29 +7,29 @@ export type { RadioProps as RemoteRadioElementProps } from "@mittwald/flow-react
 export class RemoteRadioElement extends FlowRemoteElement<RemoteRadioElementProps> {
   static get remoteProperties() {
     return {
-      "aria-label": {},
-      "aria-labelledby": {},
       "aria-describedby": {},
       "aria-details": {},
-      isDisabled: {},
+      "aria-label": {},
+      "aria-labelledby": {},
       autoFocus: {},
-      value: {},
       id: {},
-      slot: {},
       inputRef: {},
+      isDisabled: {},
+      slot: {},
+      value: {},
     };
   }
 
   static get remoteEvents() {
     return {
-      focus: {},
       blur: {},
+      focus: {},
       focusChange: {},
+      hoverChange: {},
+      hoverEnd: {},
+      hoverStart: {},
       keyDown: {},
       keyUp: {},
-      hoverStart: {},
-      hoverEnd: {},
-      hoverChange: {},
     };
   }
 

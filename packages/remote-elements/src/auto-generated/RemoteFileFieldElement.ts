@@ -7,13 +7,13 @@ export type { FileFieldProps as RemoteFileFieldElementProps } from "@mittwald/fl
 export class RemoteFileFieldElement extends FlowRemoteElement<RemoteFileFieldElementProps> {
   static get remoteProperties() {
     return {
-      name: {},
       accept: {},
-      multiple: {},
-      validationBehavior: {},
       isDisabled: {},
-      isRequired: {},
       isInvalid: {},
+      isRequired: {},
+      multiple: {},
+      name: {},
+      validationBehavior: {},
     };
   }
 

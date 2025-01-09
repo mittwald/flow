@@ -7,8 +7,8 @@ export type { ModalTriggerProps as RemoteModalTriggerElementProps } from "@mittw
 export class RemoteModalTriggerElement extends FlowRemoteElement<RemoteModalTriggerElementProps> {
   static get remoteProperties() {
     return {
-      isDefaultOpen: {},
       controller: {},
+      isDefaultOpen: {},
     };
   }
 

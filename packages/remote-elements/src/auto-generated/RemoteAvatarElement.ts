@@ -7,8 +7,8 @@ export type { AvatarProps as RemoteAvatarElementProps } from "@mittwald/flow-rea
 export class RemoteAvatarElement extends FlowRemoteElement<RemoteAvatarElementProps> {
   static get remoteProperties() {
     return {
-      size: {},
       color: {},
+      size: {},
     };
   }
 

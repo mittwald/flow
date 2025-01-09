@@ -13,12 +13,12 @@ export const TimeField = createFlowRemoteComponent(
     },
 
     eventProps: {
-      onFocus: { event: "focus" } as never,
       onBlur: { event: "blur" } as never,
+      onChange: { event: "change" } as never,
+      onFocus: { event: "focus" } as never,
       onFocusChange: { event: "focusChange" } as never,
       onKeyDown: { event: "keyDown" } as never,
       onKeyUp: { event: "keyUp" } as never,
-      onChange: { event: "change" } as never,
     },
   },
 );

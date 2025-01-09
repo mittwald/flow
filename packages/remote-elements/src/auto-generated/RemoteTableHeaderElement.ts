@@ -14,9 +14,9 @@ export class RemoteTableHeaderElement extends FlowRemoteElement<RemoteTableHeade
 
   static get remoteEvents() {
     return {
-      hoverStart: {},
-      hoverEnd: {},
       hoverChange: {},
+      hoverEnd: {},
+      hoverStart: {},
     };
   }
 

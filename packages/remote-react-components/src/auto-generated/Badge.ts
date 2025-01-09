@@ -13,8 +13,8 @@ export const Badge = createFlowRemoteComponent(
     },
 
     eventProps: {
-      onPress: { event: "press" } as never,
       onClose: { event: "close" } as never,
+      onPress: { event: "press" } as never,
     },
   },
 );

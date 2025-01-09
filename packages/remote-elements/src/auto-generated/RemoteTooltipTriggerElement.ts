@@ -7,12 +7,12 @@ export type { TooltipTriggerProps as RemoteTooltipTriggerElementProps } from "@m
 export class RemoteTooltipTriggerElement extends FlowRemoteElement<RemoteTooltipTriggerElementProps> {
   static get remoteProperties() {
     return {
-      isOpen: {},
-      defaultOpen: {},
-      isDisabled: {},
-      trigger: {},
-      delay: {},
       closeDelay: {},
+      defaultOpen: {},
+      delay: {},
+      isDisabled: {},
+      isOpen: {},
+      trigger: {},
     };
   }
 

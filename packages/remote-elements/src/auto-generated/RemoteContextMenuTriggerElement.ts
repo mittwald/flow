@@ -7,8 +7,8 @@ export type { ContextMenuTriggerProps as RemoteContextMenuTriggerElementProps } 
 export class RemoteContextMenuTriggerElement extends FlowRemoteElement<RemoteContextMenuTriggerElementProps> {
   static get remoteProperties() {
     return {
-      isDefaultOpen: {},
       controller: {},
+      isDefaultOpen: {},
     };
   }
 

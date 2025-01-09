@@ -7,12 +7,12 @@ export type { ModalProps as RemoteModalElementProps } from "@mittwald/flow-react
 export class RemoteModalElement extends FlowRemoteElement<RemoteModalElementProps> {
   static get remoteProperties() {
     return {
-      size: {},
+      controller: {},
+      isDismissable: {},
       offCanvas: {},
       offCanvasOrientation: {},
-      controller: {},
+      size: {},
       slot: {},
-      isDismissable: {},
     };
   }
 

@@ -7,9 +7,9 @@ export type { ItemContainerProps as RemoteListItemContainerViewElementProps } fr
 export class RemoteListItemContainerViewElement extends FlowRemoteElement<RemoteListItemContainerViewElementProps> {
   static get remoteProperties() {
     return {
+      href: {},
       id: {},
       textValue: {},
-      href: {},
     };
   }
 

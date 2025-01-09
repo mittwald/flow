@@ -7,8 +7,8 @@ export type { ContextualHelpTriggerProps as RemoteContextualHelpTriggerElementPr
 export class RemoteContextualHelpTriggerElement extends FlowRemoteElement<RemoteContextualHelpTriggerElementProps> {
   static get remoteProperties() {
     return {
-      isDefaultOpen: {},
       controller: {},
+      isDefaultOpen: {},
     };
   }
 

@@ -13,10 +13,10 @@ export const CountryOptions = createFlowRemoteComponent(
     },
 
     eventProps: {
-      onFocus: { event: "focus" } as never,
-      onBlur: { event: "blur" } as never,
-      onFocusChange: { event: "focusChange" } as never,
       onAction: { event: "action" } as never,
+      onBlur: { event: "blur" } as never,
+      onFocus: { event: "focus" } as never,
+      onFocusChange: { event: "focusChange" } as never,
       onScroll: { event: "scroll" } as never,
       onSelectionChange: { event: "selectionChange" } as never,
     },

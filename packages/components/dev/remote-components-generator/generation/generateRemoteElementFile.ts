@@ -14,6 +14,7 @@ export function generateRemoteElementFile(c: ComponentDoc) {
     propsAliasType: `${remoteComponentNameOf(c)}Props`,
     name: c.displayName,
     props: Object.keys(componentProps)
+      .sort()
       .filter((prop) => isProp(c, prop))
       .map((propName) => {
         const key = propName.includes("-") ? `'${propName}'` : propName;
@@ -21,10 +22,12 @@ export function generateRemoteElementFile(c: ComponentDoc) {
       })
       .join(",\n"),
     slots: Object.keys(componentProps)
+      .sort()
       .filter((prop) => isSlot(c, prop))
       .map((prop) => `"${prop}"`)
       .join(","),
     events: Object.keys(componentProps)
+      .sort()
       .filter((prop) => isEvent(prop))
       .map((propName) => {
         const formattedName = propName[2].toLowerCase() + propName.slice(3);

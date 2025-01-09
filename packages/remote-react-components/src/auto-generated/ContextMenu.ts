@@ -13,8 +13,8 @@ export const ContextMenu = createFlowRemoteComponent(
     },
 
     eventProps: {
-      onOpenChange: { event: "openChange" } as never,
       onAction: { event: "action" } as never,
+      onOpenChange: { event: "openChange" } as never,
       onSelectionChange: { event: "selectionChange" } as never,
     },
   },

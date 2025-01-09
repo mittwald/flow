@@ -7,16 +7,16 @@ export type { ItemsProps as RemoteListItemsViewElementProps } from "@mittwald/fl
 export class RemoteListItemsViewElement extends FlowRemoteElement<RemoteListItemsViewElementProps> {
   static get remoteProperties() {
     return {
-      isLoading: {},
-      isInitiallyLoading: {},
-      "aria-labelledby": {},
       "aria-label": {},
-      selectionBehavior: {},
-      selectionMode: {},
-      disallowEmptySelection: {},
-      selectedKeys: {},
+      "aria-labelledby": {},
       defaultSelectedKeys: {},
       disabledKeys: {},
+      disallowEmptySelection: {},
+      isInitiallyLoading: {},
+      isLoading: {},
+      selectedKeys: {},
+      selectionBehavior: {},
+      selectionMode: {},
     };
   }
 

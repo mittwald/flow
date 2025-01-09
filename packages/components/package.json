@@ -392,7 +392,7 @@
       "import": "./dist/js/Wrap.js"
     },
     "./ViewComponentContext": {
-      "types": "./dist/js/types/lib/ViewComponentContext/index.d.ts",
+      "types": "./dist/js/types/lib/viewComponentContext/index.d.ts",
       "import": "./dist/js/ViewComponentContext.js"
     },
     "./hooks": {

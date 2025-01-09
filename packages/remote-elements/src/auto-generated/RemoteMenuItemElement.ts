@@ -7,29 +7,29 @@ export type { MenuItemProps as RemoteMenuItemElementProps } from "@mittwald/flow
 export class RemoteMenuItemElement extends FlowRemoteElement<RemoteMenuItemElementProps> {
   static get remoteProperties() {
     return {
-      selectionVariant: {},
       "aria-label": {},
-      isDisabled: {},
-      value: {},
-      id: {},
-      rel: {},
-      target: {},
-      href: {},
       download: {},
+      href: {},
       hrefLang: {},
+      id: {},
+      isDisabled: {},
       ping: {},
       referrerPolicy: {},
+      rel: {},
       routerOptions: {},
+      selectionVariant: {},
+      target: {},
       textValue: {},
+      value: {},
     };
   }
 
   static get remoteEvents() {
     return {
       action: {},
-      hoverStart: {},
-      hoverEnd: {},
       hoverChange: {},
+      hoverEnd: {},
+      hoverStart: {},
     };
   }
 

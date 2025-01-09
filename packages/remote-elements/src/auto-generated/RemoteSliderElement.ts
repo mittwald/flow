@@ -7,22 +7,22 @@ export type { SliderProps as RemoteSliderElementProps } from "@mittwald/flow-rea
 export class RemoteSliderElement extends FlowRemoteElement<RemoteSliderElementProps> {
   static get remoteProperties() {
     return {
-      showInitialMarker: {},
-      formatOptions: {},
-      "aria-label": {},
-      "aria-labelledby": {},
       "aria-describedby": {},
       "aria-details": {},
-      minValue: {},
-      maxValue: {},
-      isDisabled: {},
-      value: {},
+      "aria-label": {},
+      "aria-labelledby": {},
       defaultValue: {},
+      formatOptions: {},
       id: {},
-      orientation: {},
-      step: {},
-      slot: {},
+      isDisabled: {},
+      maxValue: {},
+      minValue: {},
       name: {},
+      orientation: {},
+      showInitialMarker: {},
+      slot: {},
+      step: {},
+      value: {},
     };
   }
 

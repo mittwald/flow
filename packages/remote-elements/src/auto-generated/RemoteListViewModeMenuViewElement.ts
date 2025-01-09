@@ -7,8 +7,8 @@ export type { ViewModeMenuProps as RemoteListViewModeMenuViewElementProps } from
 export class RemoteListViewModeMenuViewElement extends FlowRemoteElement<RemoteListViewModeMenuViewElementProps> {
   static get remoteProperties() {
     return {
-      selectedViewMode: {},
       availableViewModes: {},
+      selectedViewMode: {},
     };
   }
 

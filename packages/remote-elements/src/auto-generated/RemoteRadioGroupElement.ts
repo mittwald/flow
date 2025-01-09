@@ -7,35 +7,35 @@ export type { RadioGroupProps as RemoteRadioGroupElementProps } from "@mittwald/
 export class RemoteRadioGroupElement extends FlowRemoteElement<RemoteRadioGroupElementProps> {
   static get remoteProperties() {
     return {
-      "aria-label": {},
-      "aria-labelledby": {},
       "aria-describedby": {},
       "aria-details": {},
-      validationBehavior: {},
-      isDisabled: {},
-      isReadOnly: {},
-      isRequired: {},
-      isInvalid: {},
-      validate: {},
-      value: {},
+      "aria-errormessage": {},
+      "aria-label": {},
+      "aria-labelledby": {},
       defaultValue: {},
       id: {},
+      isDisabled: {},
+      isInvalid: {},
+      isReadOnly: {},
+      isRequired: {},
+      l: {},
+      m: {},
       name: {},
-      slot: {},
-      "aria-errormessage": {},
       orientation: {},
       s: {},
-      m: {},
-      l: {},
+      slot: {},
+      validate: {},
+      validationBehavior: {},
+      value: {},
     };
   }
 
   static get remoteEvents() {
     return {
-      focus: {},
       blur: {},
-      focusChange: {},
       change: {},
+      focus: {},
+      focusChange: {},
     };
   }
 

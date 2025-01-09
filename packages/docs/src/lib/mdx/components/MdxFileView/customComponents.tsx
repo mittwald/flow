@@ -1,8 +1,8 @@
 import styles from "./customComponents.module.css";
 import Heading from "@mittwald/flow-react-components/Heading";
-import type { MDXComponents } from "mdx/types";
 import Alert from "@mittwald/flow-react-components/Alert";
 import Content from "@mittwald/flow-react-components/Content";
+import type { PropsWithChildren } from "react";
 import React from "react";
 import CopyButton from "@mittwald/flow-react-components/CopyButton";
 import Link from "@mittwald/flow-react-components/Link";
@@ -23,7 +23,7 @@ import {
 } from "@mittwald/flow-react-components/Table";
 import { Label } from "@mittwald/flow-react-components/Label";
 
-export const customComponents: MDXComponents = {
+export const customComponents = {
   Content: Content,
   Heading: Heading,
   Alert: Alert,
@@ -33,7 +33,7 @@ export const customComponents: MDXComponents = {
   Label: Label,
   Link: Link,
 
-  pre: ({ children }) => (
+  pre: ({ children }: PropsWithChildren) => (
     <div className={styles.preContainer}>
       <pre className={styles.pre}>{children}</pre>
       <CopyButton
@@ -45,43 +45,49 @@ export const customComponents: MDXComponents = {
     </div>
   ),
 
-  code: ({ children }) => <InlineCode>{children}</InlineCode>,
+  code: ({ children }: PropsWithChildren) => (
+    <InlineCode>{children}</InlineCode>
+  ),
 
-  p: ({ children }) => (
+  p: ({ children }: PropsWithChildren) => (
     <Text className={styles.p} elementType="p">
       {children}
     </Text>
   ),
 
-  ul: ({ children }) => <ul className={styles.ul}>{children}</ul>,
+  ul: ({ children }: PropsWithChildren) => (
+    <ul className={styles.ul}>{children}</ul>
+  ),
 
-  li: ({ children }) => <li className={styles.li}>{children}</li>,
+  li: ({ children }: PropsWithChildren) => (
+    <li className={styles.li}>{children}</li>
+  ),
 
-  h1: ({ children }) => (
+  h1: ({ children }: PropsWithChildren) => (
     <Heading level={2} size="l" className={styles.heading2}>
       {children}
     </Heading>
   ),
 
-  h2: ({ children }) => (
+  h2: ({ children }: PropsWithChildren) => (
     <Heading level={3} size="m" className={styles.heading}>
       {children}
     </Heading>
   ),
 
-  h3: ({ children }) => (
+  h3: ({ children }: PropsWithChildren) => (
     <Heading level={4} size="s" className={styles.heading}>
       {children}
     </Heading>
   ),
 
-  h4: ({ children }) => (
+  h4: ({ children }: PropsWithChildren) => (
     <Heading level={5} className={styles.heading}>
       {children}
     </Heading>
   ),
 
-  a: ({ children, href }) => {
+  a: ({ children, href }: PropsWithChildren<{ href?: string }>) => {
     if (href?.startsWith("http")) {
       return (
         <Link href={href} inline>
@@ -101,10 +107,14 @@ export const customComponents: MDXComponents = {
 
   hr: () => <Separator className={styles.separator} />,
 
-  table: ({ children }) => <Table>{children}</Table>,
-  thead: ({ children }) => <TableHeader>{children}</TableHeader>,
-  tr: ({ children }) => <TableRow>{children}</TableRow>,
-  th: ({ children }) => <TableColumn>{children}</TableColumn>,
-  tbody: ({ children }) => <TableBody>{children}</TableBody>,
-  td: ({ children }) => <TableCell>{children}</TableCell>,
-};
+  table: ({ children }: PropsWithChildren) => <Table>{children}</Table>,
+  thead: ({ children }: PropsWithChildren) => (
+    <TableHeader>{children}</TableHeader>
+  ),
+  tr: ({ children }: PropsWithChildren) => <TableRow>{children}</TableRow>,
+  th: ({ children }: PropsWithChildren) => (
+    <TableColumn>{children}</TableColumn>
+  ),
+  tbody: ({ children }: PropsWithChildren) => <TableBody>{children}</TableBody>,
+  td: ({ children }: PropsWithChildren) => <TableCell>{children}</TableCell>,
+} as const;

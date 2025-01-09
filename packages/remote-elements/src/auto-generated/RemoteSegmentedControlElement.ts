@@ -7,33 +7,33 @@ export type { SegmentedControlProps as RemoteSegmentedControlElementProps } from
 export class RemoteSegmentedControlElement extends FlowRemoteElement<RemoteSegmentedControlElementProps> {
   static get remoteProperties() {
     return {
-      "aria-label": {},
-      "aria-labelledby": {},
       "aria-describedby": {},
       "aria-details": {},
-      validationBehavior: {},
-      isDisabled: {},
-      isReadOnly: {},
-      isRequired: {},
-      isInvalid: {},
-      validate: {},
-      value: {},
+      "aria-errormessage": {},
+      "aria-label": {},
+      "aria-labelledby": {},
+      containerBreakpointSize: {},
       defaultValue: {},
       id: {},
+      isDisabled: {},
+      isInvalid: {},
+      isReadOnly: {},
+      isRequired: {},
       name: {},
-      slot: {},
-      "aria-errormessage": {},
       orientation: {},
-      containerBreakpointSize: {},
+      slot: {},
+      validate: {},
+      validationBehavior: {},
+      value: {},
     };
   }
 
   static get remoteEvents() {
     return {
-      focus: {},
       blur: {},
-      focusChange: {},
       change: {},
+      focus: {},
+      focusChange: {},
     };
   }
 

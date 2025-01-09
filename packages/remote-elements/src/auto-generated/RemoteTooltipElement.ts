@@ -7,22 +7,22 @@ export type { TooltipProps as RemoteTooltipElementProps } from "@mittwald/flow-r
 export class RemoteTooltipElement extends FlowRemoteElement<RemoteTooltipElementProps> {
   static get remoteProperties() {
     return {
-      arrowBoundaryOffset: {},
-      triggerRef: {},
-      isEntering: {},
-      isExiting: {},
       UNSTABLE_portalContainer: {},
-      placement: {},
-      containerPadding: {},
-      offset: {},
-      crossOffset: {},
-      shouldFlip: {},
-      isOpen: {},
-      defaultOpen: {},
-      "aria-label": {},
-      "aria-labelledby": {},
       "aria-describedby": {},
       "aria-details": {},
+      "aria-label": {},
+      "aria-labelledby": {},
+      arrowBoundaryOffset: {},
+      containerPadding: {},
+      crossOffset: {},
+      defaultOpen: {},
+      isEntering: {},
+      isExiting: {},
+      isOpen: {},
+      offset: {},
+      placement: {},
+      shouldFlip: {},
+      triggerRef: {},
     };
   }
 

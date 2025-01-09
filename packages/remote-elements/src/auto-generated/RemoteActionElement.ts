@@ -9,12 +9,12 @@ export class RemoteActionElement extends FlowRemoteElement<RemoteActionElementPr
     return {
       action: {},
       actionModel: {},
+      break: {},
       closeOverlay: {},
       openOverlay: {},
-      toggleOverlay: {},
-      break: {},
-      skip: {},
       showFeedback: {},
+      skip: {},
+      toggleOverlay: {},
     };
   }
 
