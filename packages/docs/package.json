@@ -55,10 +55,6 @@
     "react-docgen-typescript": "^2.2.2",
     "typescript": "^5.7.3"
   },
-  "overrides": {
-    "@types/react": "npm:types-react@rc",
-    "@types/react-dom": "npm:types-react-dom@rc"
-  },
   "nx": {
     "targets": {
       "build": {

@@ -545,8 +545,8 @@
   "peerDependencies": {
     "@mittwald/react-use-promise": "^2.3.12",
     "next": "*",
-    "react": "19.0.0-rc.1",
-    "react-dom": "19.0.0-rc.1",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
     "react-hook-form": "*"
   },
   "peerDependenciesMeta": {
@@ -559,10 +559,6 @@
     "react-hook-form": {
       "optional": true
     }
-  },
-  "overrides": {
-    "@types/react": "npm:types-react@rc",
-    "@types/react-dom": "npm:types-react-dom@rc"
   },
   "nx": {
     "targets": {

@@ -9994,14 +9994,14 @@ const RAW_RUNTIME_STATE =
     ]],\
     ["@remote-dom/core", [\
       ["npm:1.5.1", {\
-        "packageLocation": "./.yarn/unplugged/@remote-dom-core-virtual-40f12bcd93/node_modules/@remote-dom/core/",\
+        "packageLocation": "./.yarn/cache/@remote-dom-core-npm-1.5.1-daec202e77-4d26781616.zip/node_modules/@remote-dom/core/",\
         "packageDependencies": [\
           ["@remote-dom/core", "npm:1.5.1"]\
         ],\
         "linkType": "SOFT"\
       }],\
       ["virtual:a3deb3558b7c556d6157280684f3db06f691dac9300d77c9dff1ffc2d0569e9c27e9b6599fc2cf0046a0bd6c04d7e89690f5a40040da02614a2032b874e5b978#npm:1.5.1", {\
-        "packageLocation": "./.yarn/unplugged/@remote-dom-core-virtual-40f12bcd93/node_modules/@remote-dom/core/",\
+        "packageLocation": "./.yarn/__virtual__/@remote-dom-core-virtual-40f12bcd93/0/cache/@remote-dom-core-npm-1.5.1-daec202e77-4d26781616.zip/node_modules/@remote-dom/core/",\
         "packageDependencies": [\
           ["@remote-dom/core", "virtual:a3deb3558b7c556d6157280684f3db06f691dac9300d77c9dff1ffc2d0569e9c27e9b6599fc2cf0046a0bd6c04d7e89690f5a40040da02614a2032b874e5b978#npm:1.5.1"],\
           ["@preact/signals-core", null],\
@@ -10031,14 +10031,14 @@ const RAW_RUNTIME_STATE =
     ]],\
     ["@remote-dom/react", [\
       ["npm:1.2.1", {\
-        "packageLocation": "./.yarn/unplugged/@remote-dom-react-virtual-0e672c5ba8/node_modules/@remote-dom/react/",\
+        "packageLocation": "./.yarn/cache/@remote-dom-react-npm-1.2.1-9f6aba3a23-596071c094.zip/node_modules/@remote-dom/react/",\
         "packageDependencies": [\
           ["@remote-dom/react", "npm:1.2.1"]\
         ],\
         "linkType": "SOFT"\
       }],\
       ["virtual:65f3a67881e32801568ca31af1835da61490f833b665d1ca172eb047e524db9498b7d52fa37e052a389aad69aab73e47358c2b1459396e04016be5bc2b3a4b81#npm:1.2.1", {\
-        "packageLocation": "./.yarn/unplugged/@remote-dom-react-virtual-0e672c5ba8/node_modules/@remote-dom/react/",\
+        "packageLocation": "./.yarn/__virtual__/@remote-dom-react-virtual-0e672c5ba8/0/cache/@remote-dom-react-npm-1.2.1-9f6aba3a23-596071c094.zip/node_modules/@remote-dom/react/",\
         "packageDependencies": [\
           ["@remote-dom/react", "virtual:65f3a67881e32801568ca31af1835da61490f833b665d1ca172eb047e524db9498b7d52fa37e052a389aad69aab73e47358c2b1459396e04016be5bc2b3a4b81#npm:1.2.1"],\
           ["@remote-dom/core", "virtual:a3deb3558b7c556d6157280684f3db06f691dac9300d77c9dff1ffc2d0569e9c27e9b6599fc2cf0046a0bd6c04d7e89690f5a40040da02614a2032b874e5b978#npm:1.5.1"],\
@@ -32293,18 +32293,20 @@ Require stack:
     }
     return false;
   };
-  const originalExtensionJSFunction = require$$0.Module._extensions[`.js`];
-  require$$0.Module._extensions[`.js`] = function(module, filename) {
-    if (filename.endsWith(`.js`)) {
-      const pkg = readPackageScope(filename);
-      if (pkg && pkg.data?.type === `module`) {
-        const err = ERR_REQUIRE_ESM(filename, module.parent?.filename);
-        Error.captureStackTrace(err);
-        throw err;
+  if (!process.features.require_module) {
+    const originalExtensionJSFunction = require$$0.Module._extensions[`.js`];
+    require$$0.Module._extensions[`.js`] = function(module, filename) {
+      if (filename.endsWith(`.js`)) {
+        const pkg = readPackageScope(filename);
+        if (pkg && pkg.data?.type === `module`) {
+          const err = ERR_REQUIRE_ESM(filename, module.parent?.filename);
+          Error.captureStackTrace(err);
+          throw err;
+        }
       }
-    }
-    originalExtensionJSFunction.call(this, module, filename);
-  };
+      originalExtensionJSFunction.call(this, module, filename);
+    };
+  }
   const originalDlopen = process.dlopen;
   process.dlopen = function(...args) {
     const [module, filename, ...rest] = args;

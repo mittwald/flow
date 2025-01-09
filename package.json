@@ -2,7 +2,7 @@
   "name": "@mittwald/flow-project",
   "private": true,
   "version": "0.0.0",
-  "packageManager": "yarn@4.5.3",
+  "packageManager": "yarn@4.6.0",
   "type": "module",
   "license": "MIT",
   "engines": {
@@ -70,12 +70,6 @@
       "unplugged": true
     },
     "@react-types/shared": {
-      "unplugged": true
-    },
-    "@remote-dom/core": {
-      "unplugged": true
-    },
-    "@remote-dom/react": {
       "unplugged": true
     },
     "@types/react": {

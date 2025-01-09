@@ -3318,10 +3318,6 @@ __metadata:
       unplugged: true
     "@react-types/shared":
       unplugged: true
-    "@remote-dom/core":
-      unplugged: true
-    "@remote-dom/react":
-      unplugged: true
     "@types/react":
       unplugged: true
     react-aria-components:
@@ -3433,8 +3429,8 @@ __metadata:
   peerDependencies:
     "@mittwald/react-use-promise": ^2.3.12
     next: "*"
-    react: 19.0.0-rc.1
-    react-dom: 19.0.0-rc.1
+    react: 19.0.0
+    react-dom: 19.0.0
     react-hook-form: "*"
   peerDependenciesMeta:
     "@mittwald/react-use-promise":
@@ -3507,7 +3503,7 @@ __metadata:
     vite-plugin-externalize-deps: "npm:^0.8.0"
   peerDependencies:
     "@mittwald/flow-react-components": "workspace:^"
-    react: 19.0.0-rc.1
+    react: 19.0.0
     react-hook-form: "*"
   peerDependenciesMeta:
     react-hook-form:
@@ -3539,8 +3535,8 @@ __metadata:
     vite-plugin-dts: "npm:^4.4.0"
     vite-plugin-externalize-deps: "npm:^0.8.0"
   peerDependencies:
-    react: 19.0.0-rc.1
-    react-dom: 19.0.0-rc.1
+    react: 19.0.0
+    react-dom: 19.0.0
     react-hook-form: "*"
   peerDependenciesMeta:
     react-hook-form:
@@ -3583,8 +3579,8 @@ __metadata:
     vite-plugin-externalize-deps: "npm:^0.8.0"
     vitest: "npm:^2.1.8"
   peerDependencies:
-    react: ^18.2.0
-    react-dom: ^18.2.0
+    react: ^19.0.0
+    react-dom: ^19.0.0
   languageName: unknown
   linkType: soft
 
