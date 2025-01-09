@@ -1,5 +1,0 @@
-.nameCell {
-  display: flex;
-  gap: var(--size-px--s);
-  flex-wrap: wrap;
-}

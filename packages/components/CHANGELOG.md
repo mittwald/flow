@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.391](https://github.com/mittwald/flow/compare/0.1.0-alpha.390...0.1.0-alpha.391) (2024-12-18)
+
+### Bug Fixes
+
+- **Avatar:** fix avatar color
+  ([#1086](https://github.com/mittwald/flow/issues/1086))
+  ([0e9d09e](https://github.com/mittwald/flow/commit/0e9d09e17c6e3a12e6bd204afaf2fb2c1eab79ab))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.390](https://github.com/mittwald/flow/compare/0.1.0-alpha.389...0.1.0-alpha.390) (2024-12-18)
 
 ### Features
