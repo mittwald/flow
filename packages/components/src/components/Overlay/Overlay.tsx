@@ -1,5 +1,5 @@
 import * as Aria from "react-aria-components";
-import type { FC, PropsWithChildren } from "react";
+import type { FC, PropsWithChildren, Ref } from "react";
 import React from "react";
 import styles from "./Overlay.module.scss";
 import clsx from "clsx";
@@ -9,6 +9,7 @@ import OverlayContextProvider from "@/lib/controller/overlay/OverlayContextProvi
 import type { PropsWithClassName } from "@/lib/types/props";
 
 export interface OverlayProps extends PropsWithChildren, PropsWithClassName {
+  ref?: Ref<HTMLDivElement>;
   /** The controller to control the overlay state. */
   controller?: OverlayController;
   /** Whether the overlay can be closed by clicking outside of it. */
@@ -24,6 +25,7 @@ export const Overlay: FC<OverlayProps> = (props) => {
     isDismissable = true,
     className,
     overlayType = "Modal",
+    ref,
   } = props;
 
   const controllerFromContext = useOverlayController(overlayType, {
@@ -42,6 +44,7 @@ export const Overlay: FC<OverlayProps> = (props) => {
       isDismissable={isDismissable}
       isOpen={isOpen}
       onOpenChange={(isOpen) => controller.setOpen(isOpen)}
+      ref={ref}
     >
       <Aria.Modal>
         <Aria.Dialog>

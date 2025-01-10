@@ -1,0 +1,61 @@
+{
+  "name": "@mittwald/flow-remote-react-components",
+  "version": "0.2.0-alpha.1",
+  "type": "module",
+  "description": "React components that can be used in a remote environment",
+  "homepage": "https://mittwald.github.io/flow",
+  "repository": "https://github.com/mittwald/flow",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./react-hook-form": {
+      "types": "./dist/types/integrations/react-hook-form/index.d.ts",
+      "import": "./dist/react-hook-form.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=20.11"
+  },
+  "scripts": {
+    "build": "run vite build --config vite.build.config.ts",
+    "build:deps:watch": "run -T build:deps:watch @mittwald/flow-react-components",
+    "test": "",
+    "test:compile": "run tsc --noEmit"
+  },
+  "dependencies": {
+    "@mittwald/flow-react-components": "workspace:^",
+    "@mittwald/flow-remote-core": "workspace:^",
+    "@mittwald/flow-remote-elements": "workspace:^",
+    "@remote-dom/core": "^1.5.2",
+    "@remote-dom/react": "^1.2.1"
+  },
+  "devDependencies": {
+    "@mittwald/flow-react-components": "workspace:^",
+    "@types/node": "^22.10.5",
+    "@types/react": "^19.0.4",
+    "nx": "^20.3.1",
+    "prettier": "^3.4.2",
+    "react": "19.0.0",
+    "react-hook-form": "^7.54.2",
+    "typescript": "^5.7.3",
+    "vite": "^5.4.11",
+    "vite-plugin-checker": "^0.8.0",
+    "vite-plugin-dts": "^4.4.0",
+    "vite-plugin-externalize-deps": "^0.8.0"
+  },
+  "peerDependencies": {
+    "@mittwald/flow-react-components": "workspace:^",
+    "react": "19.0.0",
+    "react-hook-form": "*"
+  },
+  "peerDependenciesMeta": {
+    "react-hook-form": {
+      "optional": true
+    }
+  }
+}

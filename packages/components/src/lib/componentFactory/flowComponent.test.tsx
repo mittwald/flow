@@ -1,6 +1,6 @@
 import { expectTypeOf, test, vitest } from "vitest";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import type { ComponentType, LegacyRef, PropsWithChildren } from "react";
+import type { ComponentType, Ref, PropsWithChildren } from "react";
 import React from "react";
 import { render } from "@testing-library/react";
 import { HTMLDivElement } from "happy-dom";
@@ -15,7 +15,7 @@ const getComponentName = (name: string): FlowComponentName => {
 };
 
 type FlowComponentProps<P> = PropsWithTunnel & {
-  refProp?: LegacyRef<never>;
+  ref?: Ref<never>;
 } & P;
 
 const testComponent1Name = getComponentName("Test1");
@@ -33,7 +33,7 @@ type TestComponent = ComponentType<TestComponentProps>;
 const TestComponent1 = flowComponent(
   testComponent1Name,
   (props: TestComponentProps) => (
-    <div data-testid="test1" ref={props.refProp}>
+    <div data-testid="test1" ref={props.ref}>
       {props.prop && <div data-testid="prop">{props.prop}</div>}
       {props.otherProp && <div data-testid="otherProp">{props.otherProp}</div>}
       {props.children && <div data-testid="children1">{props.children}</div>}
@@ -44,7 +44,7 @@ const TestComponent1 = flowComponent(
 const TestComponent2 = flowComponent(
   testComponent2Name,
   (props: TestComponentProps) => (
-    <div data-testid="test2" ref={props.refProp}>
+    <div data-testid="test2" ref={props.ref}>
       {props.prop && <div data-testid="prop">{props.prop}</div>}
       {props.otherProp && <div data-testid="otherProp">{props.otherProp}</div>}
       {props.children && <div data-testid="children2">{props.children}</div>}
@@ -54,7 +54,7 @@ const TestComponent2 = flowComponent(
 
 test("ref is forwarded to component", () => {
   const ref = vitest.fn();
-  render(<TestComponent1 refProp={ref} />);
+  render(<TestComponent1 ref={ref} />);
   const refArg = ref.mock.calls[0][0];
   expectTypeOf(refArg).toMatchTypeOf(HTMLDivElement);
 });

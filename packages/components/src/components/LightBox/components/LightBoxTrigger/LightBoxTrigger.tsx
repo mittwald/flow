@@ -4,7 +4,10 @@ import React from "react";
 import type { OverlayTriggerProps } from "@/components/OverlayTrigger";
 import { OverlayTrigger } from "@/components/OverlayTrigger";
 
-export const LightBoxTrigger: FC<OverlayTriggerProps> = (props) => {
+export type LightBoxTriggerProps = OverlayTriggerProps;
+
+/** @flr-generate all */
+export const LightBoxTrigger: FC<LightBoxTriggerProps> = (props) => {
   const { children, ...triggerProps } = props;
   return (
     <OverlayTrigger

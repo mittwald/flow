@@ -30,7 +30,7 @@ export const PropertyRow: React.FC<PropertyTableGroupProps> = ({
           components={omit(customComponents, [
             "Content",
             "Heading",
-            "InlineAlert",
+            "Alert",
             "DoAndDont",
             "ColumnLayout",
           ])}

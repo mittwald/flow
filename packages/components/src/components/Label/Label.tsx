@@ -20,13 +20,14 @@ export interface LabelProps
   unstyled?: boolean;
 }
 
+/** @flr-generate all */
 export const Label = flowComponent("Label", (props) => {
   const {
     children,
     className,
     optional,
     isDisabled,
-    refProp: ref,
+    ref,
     unstyled = false,
     ...rest
   } = props;

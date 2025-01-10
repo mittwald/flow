@@ -11,6 +11,7 @@ export interface IllustratedMessageProps
   color?: "primary" | "danger" | "light" | "dark";
 }
 
+/** @flr-generate all */
 export const IllustratedMessage: FC<IllustratedMessageProps> = (props) => {
   const { className, children, color = "primary", ...rest } = props;
 

@@ -1,0 +1,48 @@
+import type { ComponentDoc } from "react-docgen-typescript";
+import { remoteElementTagNameOf } from "../lib/remoteElementTagNameOf";
+import { remoteComponentNameOf } from "../lib/remoteComponentNameOf";
+import { remoteComponentBaseNameOf } from "../lib/remoteComponentBaseNameOf";
+
+export function generateRemoteReactComponentFile(c: ComponentDoc) {
+  const componentProps = c.props;
+
+  const t = {
+    remoteComponentName: remoteComponentNameOf(c),
+    name: remoteComponentBaseNameOf(c),
+    events: Object.keys(componentProps)
+      .sort()
+      .filter((propName) => propName.startsWith("on"))
+      .map((propName) => {
+        const formattedName = propName[2].toLowerCase() + propName.slice(3);
+        return `${propName}: { event: "${formattedName}" } as never`;
+      })
+      .join(",\n"),
+  };
+
+  return `\
+    import createFlowRemoteComponent from "@/lib/createFlowRemoteComponent";
+    import { ${t.remoteComponentName} } from "@mittwald/flow-remote-elements";
+
+    export const ${t.name} = createFlowRemoteComponent("${remoteElementTagNameOf(c)}", "${t.name}", ${t.remoteComponentName}, {
+      slotProps: {
+        wrapper: false,
+      },
+      
+      eventProps: {
+          ${t.events}
+        },      
+    });
+  `;
+}
+
+export function generateRemoteReactComponentIndexFile(
+  componentSpecifications: ComponentDoc[],
+) {
+  let indexFile = "";
+
+  componentSpecifications.map((component) => {
+    indexFile += `export * from "./${remoteComponentBaseNameOf(component)}";`;
+  });
+
+  return indexFile;
+}

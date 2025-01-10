@@ -1,15 +1,18 @@
 import type { FC } from "react";
 import React from "react";
-import styles from "./Footer.module.scss";
 import { PaginationInfos } from "@/components/List/components/Footer/components/PaginationInfos";
 import { ShowNextBatchButton } from "@/components/List/components/Footer/components/ShowNextBatchButton";
+import { Footer as DefaultView } from "../../views/Footer";
+import { useViewComponents } from "@/lib/viewComponentContext/useViewComponents";
 
 export const Footer: FC = () => {
+  const View = useViewComponents("List").Footer ?? DefaultView;
+
   return (
-    <div className={styles.footer}>
+    <View>
       <PaginationInfos />
       <ShowNextBatchButton />
-    </div>
+    </View>
   );
 };
 

@@ -29,6 +29,7 @@ export interface LinkProps
   "aria-current"?: string;
 }
 
+/** @flr-generate all */
 export const Link = flowComponent("Link", (props) => {
   const {
     children,
@@ -38,7 +39,7 @@ export const Link = flowComponent("Link", (props) => {
     color = "primary",
     unstyled = false,
     "aria-current": ariaCurrent,
-    refProp: ref,
+    ref,
     ...rest
   } = props;
 
@@ -60,15 +61,17 @@ export const Link = flowComponent("Link", (props) => {
     },
   };
 
-  const unsupportedTypingsLinkProps = {
-    "aria-current": ariaCurrent,
-  } as Record<string, unknown>;
+  const unsupportedTypingsLinkProps = ariaCurrent
+    ? ({
+        "aria-current": true,
+      } as Record<string, unknown>)
+    : {};
 
   return (
     <ClearPropsContext>
       <Link
-        {...rest}
         {...unsupportedTypingsLinkProps}
+        {...rest}
         className={rootClassName}
         ref={ref}
       >

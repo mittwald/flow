@@ -23,13 +23,14 @@ export interface TextProps
   color?: "light" | "dark";
 }
 
+/** @flr-generate all */
 export const Text = flowComponent("Text", (props) => {
   const {
     children,
     className,
     elementType = "span",
     emulateBoldWidth,
-    refProp: ref,
+    ref,
     color,
     ...rest
   } = props;

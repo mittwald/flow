@@ -35,6 +35,7 @@ export interface ContextMenuProps
   width?: string | number;
 }
 
+/** @flr-generate all */
 export const ContextMenu = flowComponent("ContextMenu", (props) => {
   const {
     children,
@@ -44,7 +45,7 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
     defaultSelectedKeys,
     disabledKeys,
     onSelectionChange,
-    refProp: ref,
+    ref,
     controller: overlayControllerFromProps,
     ...rest
   } = props;

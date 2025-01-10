@@ -39,12 +39,13 @@ export interface BadgeProps
   isDisabled?: boolean;
 }
 
+/** @flr-generate all */
 export const Badge = flowComponent("Badge", (props) => {
   const {
     children,
     className,
     color = "neutral",
-    refProp: ref,
+    ref,
     onPress,
     onClose,
     isDisabled,

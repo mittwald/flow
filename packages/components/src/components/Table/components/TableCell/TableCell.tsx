@@ -12,6 +12,7 @@ export interface TableCellProps
   rowHeader?: boolean;
 }
 
+/** @flr-generate all */
 export const TableCell: FC<TableCellProps> = (props) => {
   const { children, className, rowHeader, ...rest } = props;
 

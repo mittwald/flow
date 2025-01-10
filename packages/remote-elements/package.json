@@ -1,0 +1,44 @@
+{
+  "name": "@mittwald/flow-remote-elements",
+  "version": "0.2.0-alpha.1",
+  "type": "module",
+  "description": "Flow compatible remote elements that can be used in a remote environment",
+  "homepage": "https://mittwald.github.io/flow",
+  "repository": "https://github.com/mittwald/flow",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=20.11"
+  },
+  "scripts": {
+    "build": "run vite build --config vite.build.config.ts",
+    "build:deps:watch": "run -T build:deps:watch @mittwald/flow-react-components",
+    "test": "",
+    "test:compile": "run tsc --noEmit"
+  },
+  "dependencies": {
+    "@mittwald/flow-react-components": "workspace:^",
+    "@mittwald/flow-remote-core": "workspace:^",
+    "@remote-dom/core": "^1.5.2",
+    "react-hook-form": "^7.54.2",
+    "remeda": "^2.19.0",
+    "type-fest": "^4.32.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "nx": "^20.3.1",
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.3",
+    "vite": "^5.4.11",
+    "vite-plugin-checker": "^0.8.0",
+    "vite-plugin-dts": "^4.4.0",
+    "vite-plugin-externalize-deps": "^0.8.0"
+  }
+}

@@ -1,14 +1,12 @@
-import locales from "../../../../locales/*.locale.json";
-import { useLocalizedStringFormatter } from "react-aria";
-import type { TextProps } from "@/components/Text";
-import { Text } from "@/components/Text";
 import type { FC } from "react";
 import React from "react";
 import { useList } from "@/components/List/hooks/useList";
-import { Skeleton } from "@/components/Skeleton";
+import PaginationInfosView from "@/components/List/views/Footer/PaginationInfos";
+import { useViewComponents } from "@/lib/viewComponentContext/useViewComponents";
 
-export const PaginationInfos: FC<TextProps> = (props) => {
-  const stringFormatter = useLocalizedStringFormatter(locales);
+export const PaginationInfos: FC = () => {
+  const { PaginationInfos: View = PaginationInfosView } =
+    useViewComponents("List");
 
   const list = useList();
   const pagination = list.batches;
@@ -22,16 +20,13 @@ export const PaginationInfos: FC<TextProps> = (props) => {
     return null;
   }
 
-  const text = isInitiallyLoading ? (
-    <Skeleton width="200px" />
-  ) : (
-    stringFormatter.format("list.paginationInfo", {
-      visibleItemsCount,
-      totalItemsCount,
-    })
+  return (
+    <View
+      totalItemsCount={totalItemsCount}
+      visibleItemsCount={visibleItemsCount}
+      isInitiallyLoading={isInitiallyLoading}
+    />
   );
-
-  return <Text {...props}>{text}</Text>;
 };
 
 export default PaginationInfos;

@@ -35,6 +35,7 @@ export interface ColumnLayoutProps
   columnGap?: GapSize;
 }
 
+/** @flr-generate all */
 export const ColumnLayout: FC<ColumnLayoutProps> = (props) => {
   const {
     children,

@@ -9,8 +9,9 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface FieldDescriptionProps extends TextProps, FlowComponentProps {}
 
+/** @flr-generate all */
 export const FieldDescription = flowComponent("FieldDescription", (props) => {
-  const { children, className, refProp: ref, ...rest } = props;
+  const { children, className, ref, ...rest } = props;
 
   const rootClassName = clsx(styles.fieldDescription, className);
 
