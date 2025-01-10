@@ -57,5 +57,5 @@ jobs:
             --conventional-commits --conventional-prerelease="*" \
             --message "chore(release): bump version to %v" \
             --yes --no-private \
-            --pre-dist-tag experimental
+            --pre-dist-tag experimental \
             --tag-version-prefix ""
