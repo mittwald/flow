@@ -59,4 +59,4 @@ jobs:
             --message "chore(release): bump version to %v" \
             --yes --no-private \
             --tag-version-prefix ""
-            --dist-tag experimental
+            --pre-dist-tag experimental
