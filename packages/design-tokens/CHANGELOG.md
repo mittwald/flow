@@ -3,6 +3,99 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.4](https://github.com/mittwald/flow/compare/v0.1.0-alpha.165...v0.2.0-alpha.4) (2025-01-10)
+
+### Bug Fixes
+
+- **docs:** layout of the footer component
+  ([#1036](https://github.com/mittwald/flow/issues/1036))
+  ([d8adfa4](https://github.com/mittwald/flow/commit/d8adfa4c8d67b2cb40356b6d932f3d72f59a3bce))
+- **FileCard:** add background to file card
+  ([710a1d1](https://github.com/mittwald/flow/commit/710a1d17eb5db9bed63236773cb2dc904a816bb2))
+- fix colors after neutral color token update
+  ([909d356](https://github.com/mittwald/flow/commit/909d3567b7d9b9999ebd99aa6c23623841a830d3))
+- **Label:** center content in label
+  ([80ba98d](https://github.com/mittwald/flow/commit/80ba98d321b1ccb6c01ce10a90708916421ef984))
+- **Link:** add dark and light disabled colors
+  ([#738](https://github.com/mittwald/flow/issues/738))
+  ([7a555e3](https://github.com/mittwald/flow/commit/7a555e32ac8c35e71b770d809a568a0326bcf1f2))
+- **Tokens:** there should be no references in JSON output
+  ([#936](https://github.com/mittwald/flow/issues/936))
+  ([6c9fa81](https://github.com/mittwald/flow/commit/6c9fa816134ca9dca43321b6b351f47a33e5f677))
+- **Tooltip:** add box shadow to tooltip
+  ([ff91676](https://github.com/mittwald/flow/commit/ff91676d9d2252c49a6441ef021b58b58f2bd2ec))
+
+### Features
+
+- add DatePicker and DataRangePicker
+  ([3d20fbc](https://github.com/mittwald/flow/commit/3d20fbc382ed1baf6231434c148c39ec9aabc16e))
+- add disabled dark and light outline tokens
+  ([266981f](https://github.com/mittwald/flow/commit/266981faef0726c803c9c22683161415b5ec5eb9))
+- add remote components
+  ([f14914b](https://github.com/mittwald/flow/commit/f14914ba844845aa224b0f5bb37e1a07d9a7851e))
+- **Align:** add Align component
+  ([d552a3a](https://github.com/mittwald/flow/commit/d552a3a9178f718f45f70df174f346d109856f58))
+- **Align:** support input and button
+  ([#1040](https://github.com/mittwald/flow/issues/1040))
+  ([daacfa8](https://github.com/mittwald/flow/commit/daacfa8e854764210955fd82bce6128f37116c82))
+- **Align:** support text and copy button
+  ([#1046](https://github.com/mittwald/flow/issues/1046))
+  ([c3a3cb1](https://github.com/mittwald/flow/commit/c3a3cb18e4631c067c9f8877702402b94b8dd131))
+- **Avatar:** add new colors
+  ([#615](https://github.com/mittwald/flow/issues/615))
+  ([90f565b](https://github.com/mittwald/flow/commit/90f565bbe1dfce18f19bc002ad4fe9da203f9011))
+- **Badge:** add badge component
+  ([#689](https://github.com/mittwald/flow/issues/689))
+  ([1ce3804](https://github.com/mittwald/flow/commit/1ce3804d6e371bc0760e1335422e47801f0ba1e4))
+- **CodeBlock:** add code block component
+  ([fe0a80e](https://github.com/mittwald/flow/commit/fe0a80e20c0c0350758d74d6a5973f76d471b02e))
+- **CodeBlock:** add custom colors
+  ([ed8b454](https://github.com/mittwald/flow/commit/ed8b4541508383dace50ee43fed8135b7dd7c80a))
+- **CodeBlock:** fix tokens
+  ([8f521d8](https://github.com/mittwald/flow/commit/8f521d89d7adfd51b31876bd5ae8430a09919ded))
+- **FileCard:** add file card component
+  ([7cd379a](https://github.com/mittwald/flow/commit/7cd379a30dc93f28d743ec6e8f9c8f2fbc7731bd))
+- **FileCard:** Add Link and Image to FileCard
+  ([#957](https://github.com/mittwald/flow/issues/957))
+  ([0543759](https://github.com/mittwald/flow/commit/05437591d71134e87694306c30571aab5b04299f))
+- implement outline variant for button component
+  ([#814](https://github.com/mittwald/flow/issues/814))
+  ([2179bb5](https://github.com/mittwald/flow/commit/2179bb541f0c9a000dfa7a9e71060b0ea8f45f99))
+- **LightBox:** add LightBox component
+  ([#972](https://github.com/mittwald/flow/issues/972))
+  ([b648941](https://github.com/mittwald/flow/commit/b64894173863aa4f8b1b14ba0a15bf71831d498f))
+- **List:** add action groups to list
+  ([c9f1b37](https://github.com/mittwald/flow/commit/c9f1b377bedd543f5e2f689ebd07321fc80ff300))
+- **Markdown:** Add Markdown component
+  ([#993](https://github.com/mittwald/flow/issues/993))
+  ([f290a82](https://github.com/mittwald/flow/commit/f290a827f0dd4065ad987c2572840233be064692))
+- **Message:** add message component
+  ([#1004](https://github.com/mittwald/flow/issues/1004))
+  ([dcecea5](https://github.com/mittwald/flow/commit/dcecea54bafde3ef6812d2c62ac78875d4fbc32f))
+- **Section:** add actions to header
+  ([#582](https://github.com/mittwald/flow/issues/582))
+  ([a3174f5](https://github.com/mittwald/flow/commit/a3174f599aa9a199b8a6a93df7405e374885370f))
+- **Section:** add spacing to sub headings in sections
+  ([#890](https://github.com/mittwald/flow/issues/890))
+  ([9710032](https://github.com/mittwald/flow/commit/971003226121d8a577cc7df99ebf15592904021d))
+- **Section:** support contextual help in section header
+  ([2f29e19](https://github.com/mittwald/flow/commit/2f29e190a9e5002aeed92208e6f56271c5e1baff))
+- **Table:** add table footer
+  ([1e298d3](https://github.com/mittwald/flow/commit/1e298d343d7b0b6419b0a4df0867cfab0a587e3a))
+- **Table:** support row header
+  ([#1058](https://github.com/mittwald/flow/issues/1058))
+  ([b73cfdd](https://github.com/mittwald/flow/commit/b73cfdd0d5603846c7ae0ad1882453ad58e1d6d2))
+- **TimeField:** add time field component
+  ([#725](https://github.com/mittwald/flow/issues/725))
+  ([1aa6336](https://github.com/mittwald/flow/commit/1aa63363fdd181b62df09ffe7917d26c237043d9))
+- **Tokens:** export tokens as JSON
+  ([1c52ccc](https://github.com/mittwald/flow/commit/1c52cccd0b6c5cb08a55180fd99f68cfbbe5f05e))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.2.0-alpha.3](https://github.com/mittwald/flow/compare/0.2.0-alpha.2...0.2.0-alpha.3) (2025-01-10)
 
 **Note:** Version bump only for package @mittwald/flow-design-tokens

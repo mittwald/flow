@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.4](https://github.com/mittwald/flow/compare/v0.1.0-alpha.165...v0.2.0-alpha.4) (2025-01-10)
+
+### Bug Fixes
+
+- **Tabs:** fix Tabs crashing when used in Activity
+  ([be087bc](https://github.com/mittwald/flow/commit/be087bca064825243f0dabb1a23e57a91a3c4e53))
+- **Tunnel:** fix not showing entries when used in Activity
+  ([1a9d7f0](https://github.com/mittwald/flow/commit/1a9d7f0ee7943068d2fa1dcf43a60f31fc30461a))
+
+### Features
+
+- add remote components
+  ([f14914b](https://github.com/mittwald/flow/commit/f14914ba844845aa224b0f5bb37e1a07d9a7851e))
+- **Tunnel:** support static entry ID
+  ([7ed7c10](https://github.com/mittwald/flow/commit/7ed7c10e1f1b667c93d4a9ec0359eae05266c1d2))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.2.0-alpha.3](https://github.com/mittwald/flow/compare/0.2.0-alpha.2...0.2.0-alpha.3) (2025-01-10)
 
 **Note:** Version bump only for package @mittwald/react-tunnel
