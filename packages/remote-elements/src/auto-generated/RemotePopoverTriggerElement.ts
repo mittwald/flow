@@ -1,6 +1,6 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import { FlowRemoteElement } from "@mittwald/flow-remote-core";
+import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
 import type { PopoverTriggerProps as RemotePopoverTriggerElementProps } from "@mittwald/flow-react-components/Popover";
 export type { PopoverTriggerProps as RemotePopoverTriggerElementProps } from "@mittwald/flow-react-components/Popover";
 

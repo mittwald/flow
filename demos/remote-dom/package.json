@@ -9,7 +9,6 @@
   },
   "dependencies": {
     "@internationalized/date": "^3.6.0",
-    "@mittwald/flow-design-tokens": "workspace:*",
     "@mittwald/flow-react-components": "workspace:*",
     "@mittwald/flow-remote-react-components": "workspace:*",
     "@mittwald/flow-remote-react-renderer": "workspace:*",

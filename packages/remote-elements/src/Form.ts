@@ -1,4 +1,4 @@
-import { FlowRemoteElement } from "@mittwald/flow-remote-core";
+import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
 
 export type RemoteFormElementProps = {
   id?: string;

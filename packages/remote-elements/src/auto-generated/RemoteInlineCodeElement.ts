@@ -1,6 +1,6 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import { FlowRemoteElement } from "@mittwald/flow-remote-core";
+import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
 import type { InlineCodeProps as RemoteInlineCodeElementProps } from "@mittwald/flow-react-components/InlineCode";
 export type { InlineCodeProps as RemoteInlineCodeElementProps } from "@mittwald/flow-react-components/InlineCode";
 

@@ -1,7 +1,7 @@
 import type { EmptyObject } from "type-fest";
 import { RemoteElement, RemoteEvent } from "@remote-dom/core/elements";
 import { isObjectType, omit } from "remeda";
-import { getObjectKeysIncludingProtoTypes } from "@/elements/getObjectKeysIncludingProtoTypes";
+import { getObjectKeysIncludingProtoTypes } from "@/lib/getObjectKeysIncludingProtoTypes";
 
 // eslint-disable-next-line
 type ExplicitAny = any;

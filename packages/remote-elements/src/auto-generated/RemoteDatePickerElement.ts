@@ -1,6 +1,6 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import { FlowRemoteElement } from "@mittwald/flow-remote-core";
+import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
 import type { DatePickerProps as RemoteDatePickerElementProps } from "@mittwald/flow-react-components/DatePicker";
 export type { DatePickerProps as RemoteDatePickerElementProps } from "@mittwald/flow-react-components/DatePicker";
 

@@ -1,6 +1,6 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import { FlowRemoteElement } from "@mittwald/flow-remote-core";
+import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
 import type { ContextMenuTriggerProps as RemoteContextMenuTriggerElementProps } from "@mittwald/flow-react-components/ContextMenu";
 export type { ContextMenuTriggerProps as RemoteContextMenuTriggerElementProps } from "@mittwald/flow-react-components/ContextMenu";
 

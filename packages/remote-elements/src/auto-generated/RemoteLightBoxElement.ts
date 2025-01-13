@@ -1,6 +1,6 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import { FlowRemoteElement } from "@mittwald/flow-remote-core";
+import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
 import type { LightBoxProps as RemoteLightBoxElementProps } from "@mittwald/flow-react-components/LightBox";
 export type { LightBoxProps as RemoteLightBoxElementProps } from "@mittwald/flow-react-components/LightBox";
 

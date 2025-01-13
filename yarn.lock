@@ -3195,7 +3195,6 @@ __metadata:
   resolution: "@mittwald/flow-demo-remote-dom@workspace:demos/remote-dom"
   dependencies:
     "@internationalized/date": "npm:^3.6.0"
-    "@mittwald/flow-design-tokens": "workspace:*"
     "@mittwald/flow-react-components": "workspace:*"
     "@mittwald/flow-remote-react-components": "workspace:*"
     "@mittwald/flow-remote-react-renderer": "workspace:*"
@@ -3452,12 +3451,13 @@ __metadata:
     nx: "npm:^20.3.1"
     prettier: "npm:^3.4.2"
     remeda: "npm:^2.19.0"
-    type-fest: "npm:^4.32.0"
     typescript: "npm:^5.7.3"
     vite: "npm:^5.4.11"
     vite-plugin-checker: "npm:^0.8.0"
     vite-plugin-dts: "npm:^4.4.0"
     vite-plugin-externalize-deps: "npm:^0.8.0"
+  peerDependencies:
+    "@remote-dom/core": ^1.5.2
   languageName: unknown
   linkType: soft
 
@@ -3467,6 +3467,7 @@ __metadata:
   dependencies:
     "@mittwald/flow-react-components": "workspace:*"
     "@mittwald/flow-remote-core": "workspace:*"
+    "@remote-dom/core": "npm:^1.5.2"
     "@types/node": "npm:^22.10.5"
     nx: "npm:^20.3.1"
     prettier: "npm:^3.4.2"

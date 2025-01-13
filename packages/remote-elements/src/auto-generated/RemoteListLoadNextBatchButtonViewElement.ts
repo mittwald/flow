@@ -1,6 +1,6 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import { FlowRemoteElement } from "@mittwald/flow-remote-core";
+import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
 import type { LoadNextBatchButtonProps as RemoteListLoadNextBatchButtonViewElementProps } from "@mittwald/flow-react-components/List/views";
 export type { LoadNextBatchButtonProps as RemoteListLoadNextBatchButtonViewElementProps } from "@mittwald/flow-react-components/List/views";
 
