@@ -48,7 +48,6 @@ export * from "./RemoteLayoutCardElement";
 export * from "./RemoteLightBoxElement";
 export * from "./RemoteLightBoxTriggerElement";
 export * from "./RemoteLinkElement";
-export * from "./RemoteListElement";
 export * from "./RemoteListActiveFilterItemViewElement";
 export * from "./RemoteListActiveFilterListViewElement";
 export * from "./RemoteListFilterPickerMenuItemViewElement";

@@ -4,9 +4,10 @@ import {
   ListItemView,
   Heading,
   Text,
+  List,
+  typedList,
 } from "@mittwald/flow-remote-react-components";
 import React from "react";
-import { List, typedList } from "@mittwald/flow-react-components/List";
 import { demoData } from "@/app/remote/list/demoData";
 
 export default function Page() {

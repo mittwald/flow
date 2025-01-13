@@ -47,10 +47,6 @@ export interface ListProps<T = never>
   batchSize?: number;
 }
 
-/**
- * @flr-generate all
- * @flr-slot-props filterPickerList,activeFilterList
- */
 export const List = flowComponent("List", (props) => {
   const { children, batchSize, onChange, ref, ...restProps } = props;
 

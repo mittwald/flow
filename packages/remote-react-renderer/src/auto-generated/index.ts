@@ -49,7 +49,6 @@ import { LayoutCard as LayoutCard } from "@mittwald/flow-react-components/Layout
 import { LightBox as LightBox } from "@mittwald/flow-react-components/LightBox";
 import { LightBoxTrigger as LightBoxTrigger } from "@mittwald/flow-react-components/LightBox";
 import { Link as Link } from "@mittwald/flow-react-components/Link";
-import { List as List } from "@mittwald/flow-react-components/List";
 import { ActiveFilterItem as ListActiveFilterItemView } from "@mittwald/flow-react-components/List/views";
 import { ActiveFilterList as ListActiveFilterListView } from "@mittwald/flow-react-components/List/views";
 import { FilterPickerMenuItem as ListFilterPickerMenuItemView } from "@mittwald/flow-react-components/List/views";
@@ -165,7 +164,6 @@ export const flowComponents = {
   "flr-light-box": createFlowRemoteComponentRenderer(LightBox),
   "flr-light-box-trigger": createFlowRemoteComponentRenderer(LightBoxTrigger),
   "flr-link": createFlowRemoteComponentRenderer(Link),
-  "flr-list": createFlowRemoteComponentRenderer(List),
   "flr-list-active-filter-item-view": createFlowRemoteComponentRenderer(
     ListActiveFilterItemView,
   ),

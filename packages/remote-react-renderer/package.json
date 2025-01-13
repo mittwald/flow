@@ -28,7 +28,6 @@
     "test:compile": "run tsc --noEmit"
   },
   "dependencies": {
-    "@mittwald/flow-react-components": "workspace:*",
     "@mittwald/flow-remote-core": "workspace:*",
     "@mittwald/flow-remote-elements": "workspace:*",
     "@remote-dom/core": "^1.5.2",
@@ -37,6 +36,7 @@
     "remeda": "^2.19.0"
   },
   "devDependencies": {
+    "@mittwald/flow-react-components": "workspace:*",
     "@types/node": "^22.10.5",
     "@types/react": "^19.0.4",
     "nx": "^20.3.1",
@@ -51,6 +51,7 @@
     "vite-plugin-externalize-deps": "^0.8.0"
   },
   "peerDependencies": {
+    "@mittwald/flow-react-components": "workspace:*",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-hook-form": "*"

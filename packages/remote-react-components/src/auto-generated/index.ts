@@ -48,7 +48,6 @@ export * from "./LayoutCard";
 export * from "./LightBox";
 export * from "./LightBoxTrigger";
 export * from "./Link";
-export * from "./List";
 export * from "./ListActiveFilterItemView";
 export * from "./ListActiveFilterListView";
 export * from "./ListFilterPickerMenuItemView";
