@@ -11,7 +11,9 @@
         "build:icons",
         "build:imports",
         "build:css",
-        "build:docs-properties"
+        "build:base",
+        "build:docs-properties",
+        "build:remote-components"
       ],
       "cache": true
     },
@@ -46,10 +48,6 @@
     "build:imports": {
       "cache": true,
       "inputs": ["default", "{projectRoot}/src/content/**/*.mdx"]
-    },
-    "build:base": {
-      "cache": true,
-      "inputs": ["default"]
     }
   }
 }

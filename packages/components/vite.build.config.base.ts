@@ -61,6 +61,7 @@ export const buildConfig = (opts: Options) => {
     FileField: "./src/components/FileField/index.ts",
     FileCard: "./src/components/FileCard/index.ts",
     FileCardList: "./src/components/FileCardList/index.ts",
+    Fragment: "./src/components/Fragment/index.ts",
     Header: "./src/components/Header/index.ts",
     HeaderNavigation: "./src/components/HeaderNavigation/index.ts",
     Heading: "./src/components/Heading/index.ts",
@@ -78,6 +79,7 @@ export const buildConfig = (opts: Options) => {
     List: "./src/components/List/index.ts",
     "List/ListLoaderAsyncResource":
       "./src/components/List/setupComponents/ListLoaderAsyncResource.ts",
+    "List/views": "./src/components/List/views/index.ts",
     LoadingSpinner: "./src/components/LoadingSpinner/index.ts",
     Markdown: "./src/components/Markdown/index.ts",
     MenuItem: "./src/components/MenuItem/index.ts",
@@ -110,10 +112,16 @@ export const buildConfig = (opts: Options) => {
     TimeField: "./src/components/TimeField/index.ts",
     Tooltip: "./src/components/Tooltip/index.ts",
     Wrap: "./src/components/Wrap/index.ts",
+    ViewComponentContext: "./src/lib/viewComponentContext/index.ts",
     globals: "./src/styles/index.ts",
     hooks: "./src/lib/hooks/index.ts",
     nextjs: "./src/integrations/nextjs/index.ts",
-    "react-hook-form": "./src/integrations/react-hook-form/index.ts",
+    "react-hook-form/Form":
+      "./src/integrations/react-hook-form/components/Form/index.ts",
+    "react-hook-form/Field":
+      "./src/integrations/react-hook-form/components/Field/index.ts",
+    "react-hook-form/Field/views":
+      "./src/integrations/react-hook-form/components/Field/views/index.ts",
   };
 
   return defineConfig(

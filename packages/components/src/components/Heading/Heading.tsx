@@ -15,6 +15,7 @@ export interface HeadingProps extends Aria.HeadingProps, FlowComponentProps {
   color?: "primary" | "dark" | "light";
 }
 
+/** @flr-generate all */
 export const Heading = flowComponent("Heading", (props) => {
   const {
     children,
@@ -22,7 +23,7 @@ export const Heading = flowComponent("Heading", (props) => {
     level = 2,
     color = "primary",
     size,
-    refProp: ref,
+    ref,
     ...rest
   } = props;
 

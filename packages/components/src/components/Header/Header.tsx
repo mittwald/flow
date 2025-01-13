@@ -13,10 +13,11 @@ export interface HeaderProps
   renderSectionHeader?: boolean;
 }
 
+/** @flr-generate all */
 export const Header = flowComponent("Header", (props) => {
   const {
     children,
-    refProp: ref,
+    ref,
     elementType = "header",
     renderSectionHeader,
     className,

@@ -58,6 +58,7 @@ const disablePendingProps = (props: ButtonProps) => {
   return props;
 };
 
+/** @flr-generate all */
 export const Button = flowComponent("Button", (props) => {
   props = disablePendingProps(props);
 
@@ -71,7 +72,7 @@ export const Button = flowComponent("Button", (props) => {
     isSucceeded,
     isFailed,
     "aria-disabled": ariaDisabled,
-    refProp: ref,
+    ref,
     slot: ignoredSlotProp,
     ariaSlot: slot,
     unstyled,

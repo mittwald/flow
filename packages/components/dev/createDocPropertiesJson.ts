@@ -11,10 +11,16 @@ async function parse(): Promise<ComponentDoc[]> {
     shouldRemoveUndefinedFromOptional: true,
     savePropValueAsString: true,
   });
+
   console.log("📚 Building component docs");
-  const files = await glob("./src/components/*/*.tsx", {
-    ignore: ["src/**/*.stories.tsx", "src/**/*.test.tsx"],
+  const files = await glob("./src/{components,integrations}/**/*.tsx", {
+    ignore: [
+      "src/**/*.stories.tsx",
+      "src/**/*.test.tsx",
+      "src/components/Icon/components/icons/**/*",
+    ],
   });
+
   return parser.parse(files);
 }
 

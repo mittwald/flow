@@ -24,7 +24,7 @@ export const Switch = flowComponent("Switch", (props) => {
     children,
     className,
     labelPosition = "trailing",
-    refProp: ref,
+    ref,
     ...rest
   } = props;
 

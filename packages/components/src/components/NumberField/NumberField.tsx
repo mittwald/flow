@@ -21,8 +21,9 @@ export interface NumberFieldProps
   extends PropsWithChildren<Omit<Aria.NumberFieldProps, "children">>,
     FlowComponentProps {}
 
+/** @flr-generate all */
 export const NumberField = flowComponent("NumberField", (props) => {
-  const { children, className, refProp: ref, ...rest } = props;
+  const { children, className, ref, ...rest } = props;
 
   const rootClassName = clsx(formFieldStyles.formField, className);
 

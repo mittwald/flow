@@ -16,8 +16,9 @@ export interface CheckboxProps
   extends PropsWithChildren<Omit<Aria.CheckboxProps, "children">>,
     FlowComponentProps {}
 
+/** @flr-generate all */
 export const Checkbox = flowComponent("Checkbox", (props) => {
-  const { children, className, refProp: ref, ...rest } = props;
+  const { children, className, ref, ...rest } = props;
 
   const rootClassName = clsx(styles.checkbox, className);
 

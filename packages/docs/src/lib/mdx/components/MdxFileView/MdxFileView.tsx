@@ -154,16 +154,20 @@ export const MdxFileView: FC<Props> = (props) => {
   return (
     <NextMDXRemote
       {...mdxFile.mdxSource}
-      components={{
-        LiveCodeEditor: ExampleLiveCodeEditor,
-        PropertiesTables: ExamplePropertiesTables,
-        Do: ExampleDo,
-        Dont: ExampleDont,
-        Info: ExampleInfo,
-        MStudio: ExampleStudio,
-        Plain: ExamplePlain,
-        ...customComponents,
-      }}
+      components={
+        {
+          LiveCodeEditor: ExampleLiveCodeEditor,
+          PropertiesTables: ExamplePropertiesTables,
+          Do: ExampleDo,
+          Dont: ExampleDont,
+          Info: ExampleInfo,
+          MStudio: ExampleStudio,
+          Plain: ExamplePlain,
+          ...customComponents,
+          // @todo: remove when MDXRemote types are fixed
+          // eslint-disable-next-line  @typescript-eslint/no-explicit-any
+        } as any
+      }
     />
   );
 };

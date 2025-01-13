@@ -9,7 +9,8 @@ import { Controller } from "react-hook-form";
 import type { PropsContext } from "@/lib/propsContext";
 import { dynamic, PropsContextProvider } from "@/lib/propsContext";
 import { useFormContext } from "@/integrations/react-hook-form/components/context/formContext";
-import { FieldError } from "@/components/FieldError";
+import { useViewComponents } from "@/lib/viewComponentContext/useViewComponents";
+import ContentViewDefault from "@/integrations/react-hook-form/components/Field/views/Content";
 
 interface Props<T extends FieldValues>
   extends Omit<ControllerProps<T>, "render">,
@@ -18,7 +19,10 @@ interface Props<T extends FieldValues>
 export function Field<T extends FieldValues>(props: Props<T>) {
   const { children, control, ...rest } = props;
 
-  const controlFromContext = useFormContext<T>().form?.control;
+  const formContext = useFormContext<T>();
+  const controlFromContext = formContext.form?.control;
+
+  const ContentView = useViewComponents("Field").Content ?? ContentViewDefault;
 
   return (
     <Controller
@@ -32,17 +36,15 @@ export function Field<T extends FieldValues>(props: Props<T>) {
 
         const formControlProps = {
           ...field,
+          form: formContext.id,
           isRequired: !!rest.rules?.required,
           isInvalid: invalid,
           validationBehavior: "aria" as const,
           children: dynamic((p) => (
-            <>
+            <ContentView errorMessage={error?.message}>
               {p.children}
-              <FieldError>{error?.message}</FieldError>
-            </>
+            </ContentView>
           )),
-          ref: undefined,
-          refProp: field.ref,
         };
 
         const propsContext: PropsContext = {

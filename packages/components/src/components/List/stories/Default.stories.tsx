@@ -48,7 +48,7 @@ const meta: Meta<typeof List> = {
     const availableTypes = usePromise(getTypes, []);
 
     return (
-      <Section>
+      <>
         <Heading>Domains</Heading>
         <DomainList.List
           batchSize={5}
@@ -129,7 +129,7 @@ const meta: Meta<typeof List> = {
             )}
           </DomainList.Item>
         </DomainList.List>
-      </Section>
+      </>
     );
   },
 };

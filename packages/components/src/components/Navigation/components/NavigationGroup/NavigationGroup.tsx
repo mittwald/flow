@@ -13,6 +13,7 @@ export interface NavigationGroupProps
   collapsable?: boolean;
 }
 
+/** @flr-generate all */
 export const NavigationGroup: FC<NavigationGroupProps> = (props) => {
   const { children, className, collapsable, ...rest } = props;
 

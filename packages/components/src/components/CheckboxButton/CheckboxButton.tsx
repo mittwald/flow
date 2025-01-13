@@ -13,8 +13,9 @@ export interface CheckboxButtonProps
   extends CheckboxProps,
     FlowComponentProps {}
 
+/** @flr-generate all */
 export const CheckboxButton = flowComponent("CheckboxButton", (props) => {
-  const { children, className, refProp: ref, ...rest } = props;
+  const { children, className, ref, ...rest } = props;
 
   const rootClassName = clsx(styles.checkboxButton, className);
 

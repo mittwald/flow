@@ -18,6 +18,8 @@ export type ContextMenuSectionProps = PropsWithChildren &
   FlowComponentProps & {
     selectionMode?: ContextMenuSelectionMode;
   };
+
+/** @flr-generate all */
 export const ContextMenuSection = flowComponent(
   "ContextMenuSection",
   (props) => {

@@ -31,13 +31,7 @@ const defaultSortBy: CountrySortFn = (left, right) =>
 const voidSortBy: CountrySortFn = () => 0;
 const defaultFilterBy: CountryFilterFn = () => true;
 
-export interface CountryOptionsProps<T = object>
-  extends PropsWithChildren<Omit<ListBoxProps<T>, "children">>,
-    FlowComponentProps {
-  filterBy?: CountryFilterFn;
-  sortBy?: CountrySortFn;
-}
-
+/** @flr-generate all */
 export const CountryOptions = flowComponent(
   "CountryOptions",
   ({

@@ -54,7 +54,7 @@ const generateComponentIntlContent = (
   return `{${langObject.join(",")}}`;
 };
 
-export default {
+export const viteI18nPlugin: Plugin = {
   name: "handle-i18n-import",
   enforce: "pre",
   handleHotUpdate: async ({ file, server }) => {
@@ -74,7 +74,7 @@ export default {
         });
     }
   },
-  async resolveId(id: string, importer: string) {
+  async resolveId(id, importer) {
     const match = id.match(importPathInfosRegEx);
     if (match && importer) {
       const importerDirectory = path.dirname(importer);
@@ -92,7 +92,7 @@ export default {
       };
     }
   },
-  load(id: string) {
+  load(id) {
     if (id.startsWith(moduleId)) {
       const virtualFileModule = this.getModuleInfo(id);
 
@@ -110,4 +110,4 @@ export default {
       }
     }
   },
-} as Plugin;
+};
