@@ -3684,6 +3684,7 @@ __metadata:
     "@mittwald/flow-react-components": "workspace:*"
     "@mittwald/flow-remote-core": "workspace:*"
     "@mittwald/flow-remote-elements": "workspace:*"
+    "@remote-dom/core": "npm:^1.5.2"
     "@remote-dom/react": "npm:^1.2.1"
     "@types/node": "npm:^22.10.5"
     "@types/react": "npm:^19.0.4"
