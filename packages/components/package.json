@@ -436,6 +436,7 @@
     "build:icons": "run tsx dev/icons/generate.ts",
     "build:remote-components": "run tsx dev/remote-components-generator/generateRemoteComponents.ts",
     "build:storybook": "run storybook build",
+    "clean": "rimraf dist",
     "dev": "run nx run-many --outputStyle=stream --projects=@mittwald/flow-react-components --targets=start,build:deps:watch",
     "start": "run storybook dev --port 6006",
     "test": "",
@@ -458,7 +459,7 @@
     "clsx": "^2.1.1",
     "copy-to-clipboard": "^3.3.3",
     "dot-prop": "^9.0.0",
-    "framer-motion": "^11.16.1",
+    "framer-motion": "^11.17.0",
     "html-react-parser": "^5.2.2",
     "invariant": "^2.2.4",
     "luxon": "^3.5.0",
@@ -537,7 +538,7 @@
     "vite": "^5.4.11",
     "vite-plugin-banner": "^0.8.0",
     "vite-plugin-checker": "^0.8.0",
-    "vite-plugin-dts": "^4.4.0",
+    "vite-plugin-dts": "^4.5.0",
     "vite-plugin-externalize-deps": "^0.8.0",
     "vitest": "~2.1.8",
     "yaml": "^2.7.0"
@@ -561,6 +562,9 @@
     }
   },
   "nx": {
+    "implicitDependencies": [
+      "@mittwald/flow-design-tokens"
+    ],
     "targets": {
       "build:remote-components": {
         "cache": true,
