@@ -26,7 +26,6 @@
   "dependencies": {
     "@mittwald/flow-react-components": "workspace:*",
     "@mittwald/flow-remote-core": "workspace:*",
-    "@remote-dom/core": "^1.5.2",
     "react-hook-form": "^7.54.2",
     "remeda": "^2.19.0",
     "type-fest": "^4.32.0"

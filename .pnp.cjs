@@ -5720,6 +5720,7 @@ const RAW_RUNTIME_STATE =
           ["nx", "virtual:78682487791321da4105660f09e35a98019f433bf75ca5ebb4f0b7bcb1f7b79eae3873a55f3c825c974c9169c38b01882d8ce398a584c2a124e2c0098e3aa2db#npm:20.3.1"],\
           ["prettier", "npm:3.4.2"],\
           ["remeda", "npm:2.19.0"],\
+          ["type-fest", "npm:4.32.0"],\
           ["typescript", "patch:typescript@npm%3A5.7.3#optional!builtin<compat/typescript>::version=5.7.3&hash=5786d5"],\
           ["vite", "virtual:a3deb3558b7c556d6157280684f3db06f691dac9300d77c9dff1ffc2d0569e9c27e9b6599fc2cf0046a0bd6c04d7e89690f5a40040da02614a2032b874e5b978#npm:5.4.11"],\
           ["vite-plugin-checker", "virtual:a3deb3558b7c556d6157280684f3db06f691dac9300d77c9dff1ffc2d0569e9c27e9b6599fc2cf0046a0bd6c04d7e89690f5a40040da02614a2032b874e5b978#npm:0.8.0"],\
@@ -5736,7 +5737,6 @@ const RAW_RUNTIME_STATE =
           ["@mittwald/flow-remote-elements", "workspace:packages/remote-elements"],\
           ["@mittwald/flow-react-components", "virtual:51f9073027a665d1a8831937737b86a911a9d91a08d5a7b63302b1faa11d74c5f05e22acfaa937568c499270acb8fabc7228004d0d8ef4bb6af0566e81cef7bd#workspace:packages/components"],\
           ["@mittwald/flow-remote-core", "workspace:packages/remote-core"],\
-          ["@remote-dom/core", "virtual:a3deb3558b7c556d6157280684f3db06f691dac9300d77c9dff1ffc2d0569e9c27e9b6599fc2cf0046a0bd6c04d7e89690f5a40040da02614a2032b874e5b978#npm:1.5.1"],\
           ["@types/node", "npm:22.10.5"],\
           ["nx", "virtual:78682487791321da4105660f09e35a98019f433bf75ca5ebb4f0b7bcb1f7b79eae3873a55f3c825c974c9169c38b01882d8ce398a584c2a124e2c0098e3aa2db#npm:20.3.1"],\
           ["prettier", "npm:3.4.2"],\

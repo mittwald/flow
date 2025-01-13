@@ -26,7 +26,8 @@
   "dependencies": {
     "@quilted/threads": "^3.1.2",
     "@remote-dom/core": "^1.5.2",
-    "remeda": "^2.19.0"
+    "remeda": "^2.19.0",
+    "type-fest": "^4.32.0"
   },
   "devDependencies": {
     "@types/node": "^22.10.5",

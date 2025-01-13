@@ -1,6 +1,6 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
+import { FlowRemoteElement } from "@mittwald/flow-remote-core";
 import type { SegmentProps as RemoteSegmentElementProps } from "@mittwald/flow-react-components/SegmentedControl";
 export type { SegmentProps as RemoteSegmentElementProps } from "@mittwald/flow-react-components/SegmentedControl";
 

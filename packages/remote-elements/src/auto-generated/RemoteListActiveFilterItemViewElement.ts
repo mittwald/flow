@@ -1,6 +1,6 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
+import { FlowRemoteElement } from "@mittwald/flow-remote-core";
 import type { ActiveFilterItemProps as RemoteListActiveFilterItemViewElementProps } from "@mittwald/flow-react-components/List/views";
 export type { ActiveFilterItemProps as RemoteListActiveFilterItemViewElementProps } from "@mittwald/flow-react-components/List/views";
 

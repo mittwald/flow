@@ -1,6 +1,6 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
+import { FlowRemoteElement } from "@mittwald/flow-remote-core";
 import type { ActivityProps as RemoteActivityElementProps } from "@mittwald/flow-react-components/Activity";
 export type { ActivityProps as RemoteActivityElementProps } from "@mittwald/flow-react-components/Activity";
 

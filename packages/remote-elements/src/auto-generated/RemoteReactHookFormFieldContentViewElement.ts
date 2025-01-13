@@ -1,6 +1,6 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
+import { FlowRemoteElement } from "@mittwald/flow-remote-core";
 import type { ContentProps as RemoteReactHookFormFieldContentViewElementProps } from "@mittwald/flow-react-components/react-hook-form/Field/views";
 export type { ContentProps as RemoteReactHookFormFieldContentViewElementProps } from "@mittwald/flow-react-components/react-hook-form/Field/views";
 

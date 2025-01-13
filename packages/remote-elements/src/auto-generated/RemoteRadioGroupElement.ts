@@ -1,6 +1,6 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
+import { FlowRemoteElement } from "@mittwald/flow-remote-core";
 import type { RadioGroupProps as RemoteRadioGroupElementProps } from "@mittwald/flow-react-components/RadioGroup";
 export type { RadioGroupProps as RemoteRadioGroupElementProps } from "@mittwald/flow-react-components/RadioGroup";
 

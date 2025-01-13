@@ -1,6 +1,6 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
+import { FlowRemoteElement } from "@mittwald/flow-remote-core";
 import type { ModalProps as RemoteModalElementProps } from "@mittwald/flow-react-components/Modal";
 export type { ModalProps as RemoteModalElementProps } from "@mittwald/flow-react-components/Modal";
 

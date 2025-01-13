@@ -42,7 +42,7 @@ export function generateRemoteElementFile(c: ComponentDoc) {
   };
 
   return `\
-    import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
+    import { FlowRemoteElement } from "@mittwald/flow-remote-core";
     import type { ${t.propsType} as ${t.propsAliasType} } from "@mittwald/flow-react-components/${t.exportPath}";
     export type { ${t.propsType} as ${t.propsAliasType} } from "@mittwald/flow-react-components/${t.exportPath}";
     
