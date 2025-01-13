@@ -53,8 +53,8 @@ export function flowComponent<C extends FlowComponentName>(
     >;
 
     const propsWithRef = {
-      refProp: ref,
       ...implementationTypeProps,
+      refProp: ref,
     };
 
     let element: ReactNode = <ImplementationComponentType {...propsWithRef} />;

@@ -22,6 +22,7 @@ import { DateRangePicker } from "@/components/DateRangePicker";
 import { getLocalTimeZone, today } from "@internationalized/date";
 import { TimeField } from "@/components/TimeField";
 import { TextArea } from "@/components/TextArea";
+import { PasswordCreationField } from "@/components/PasswordCreationField";
 
 const submitAction = action("submit");
 
@@ -32,6 +33,7 @@ const meta: Meta<typeof Field> = {
     interface Values {
       firstName: string;
       lastName: string;
+      password: string;
       age: number;
       gender: string;
       testing: boolean;
@@ -52,6 +54,7 @@ const meta: Meta<typeof Field> = {
       defaultValues: {
         firstName: "",
         lastName: "",
+        password: "",
         gender: "",
         storage: 200,
       },
@@ -82,7 +85,16 @@ const meta: Meta<typeof Field> = {
               <Option value="Peters">Peters</Option>
             </Select>
           </Field>
-
+          <Field
+            name="password"
+            rules={{
+              required: "Please enter a password",
+            }}
+          >
+            <PasswordCreationField>
+              <Label>Password</Label>
+            </PasswordCreationField>
+          </Field>
           <Field
             name="age"
             rules={{
