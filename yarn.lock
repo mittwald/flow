@@ -3195,11 +3195,11 @@ __metadata:
   resolution: "@mittwald/flow-demo-remote-dom@workspace:demos/remote-dom"
   dependencies:
     "@internationalized/date": "npm:^3.6.0"
-    "@mittwald/flow-design-tokens": "workspace:^"
-    "@mittwald/flow-react-components": "workspace:^"
-    "@mittwald/flow-remote-elements": "workspace:^"
-    "@mittwald/flow-remote-react-components": "workspace:^"
-    "@mittwald/flow-remote-react-renderer": "workspace:^"
+    "@mittwald/flow-design-tokens": "workspace:*"
+    "@mittwald/flow-react-components": "workspace:*"
+    "@mittwald/flow-remote-elements": "workspace:*"
+    "@mittwald/flow-remote-react-components": "workspace:*"
+    "@mittwald/flow-remote-react-renderer": "workspace:*"
     "@mittwald/react-use-promise": "npm:^2.6.0"
     "@tabler/icons-react": "npm:^3.28.1"
     "@types/node": "npm:^22.10.5"
@@ -3220,7 +3220,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@mittwald/flow-design-tokens@workspace:^, @mittwald/flow-design-tokens@workspace:packages/design-tokens":
+"@mittwald/flow-design-tokens@workspace:*, @mittwald/flow-design-tokens@workspace:packages/design-tokens":
   version: 0.0.0-use.local
   resolution: "@mittwald/flow-design-tokens@workspace:packages/design-tokens"
   dependencies:
@@ -3240,8 +3240,8 @@ __metadata:
     "@mdx-js/loader": "npm:^3.1.0"
     "@mdx-js/react": "npm:^3.1.0"
     "@mfalkenberg/react-live-ssr": "npm:^4.1.7"
-    "@mittwald/flow-design-tokens": "workspace:^"
-    "@mittwald/flow-react-components": "workspace:^"
+    "@mittwald/flow-design-tokens": "workspace:*"
+    "@mittwald/flow-react-components": "workspace:*"
     "@next/mdx": "npm:^14.2.23"
     "@tabler/icons-react": "npm:^3.28.1"
     "@types/mdx": "npm:^2.0.13"
@@ -3327,7 +3327,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@mittwald/flow-react-components@workspace:^, @mittwald/flow-react-components@workspace:packages/components":
+"@mittwald/flow-react-components@workspace:*, @mittwald/flow-react-components@workspace:packages/components":
   version: 0.0.0-use.local
   resolution: "@mittwald/flow-react-components@workspace:packages/components"
   dependencies:
@@ -3335,8 +3335,8 @@ __metadata:
     "@faker-js/faker": "npm:^9.3.0"
     "@internationalized/date": "npm:^3.6.0"
     "@internationalized/string-compiler": "npm:^3.2.6"
-    "@mittwald/flow-design-tokens": "workspace:^"
-    "@mittwald/react-tunnel": "workspace:^"
+    "@mittwald/flow-design-tokens": "workspace:*"
+    "@mittwald/react-tunnel": "workspace:*"
     "@mittwald/react-use-promise": "npm:^2.6.0"
     "@nx/storybook": "npm:^20.3.1"
     "@react-aria/form": "npm:^3.0.11"
@@ -3442,7 +3442,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@mittwald/flow-remote-core@workspace:^, @mittwald/flow-remote-core@workspace:packages/remote-core":
+"@mittwald/flow-remote-core@workspace:*, @mittwald/flow-remote-core@workspace:packages/remote-core":
   version: 0.0.0-use.local
   resolution: "@mittwald/flow-remote-core@workspace:packages/remote-core"
   dependencies:
@@ -3460,12 +3460,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@mittwald/flow-remote-elements@workspace:^, @mittwald/flow-remote-elements@workspace:packages/remote-elements":
+"@mittwald/flow-remote-elements@workspace:*, @mittwald/flow-remote-elements@workspace:packages/remote-elements":
   version: 0.0.0-use.local
   resolution: "@mittwald/flow-remote-elements@workspace:packages/remote-elements"
   dependencies:
-    "@mittwald/flow-react-components": "workspace:^"
-    "@mittwald/flow-remote-core": "workspace:^"
+    "@mittwald/flow-react-components": "workspace:*"
+    "@mittwald/flow-remote-core": "workspace:*"
     "@remote-dom/core": "npm:^1.5.2"
     "@types/node": "npm:^22.10.5"
     nx: "npm:^20.3.1"
@@ -3481,13 +3481,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@mittwald/flow-remote-react-components@workspace:^, @mittwald/flow-remote-react-components@workspace:packages/remote-react-components":
+"@mittwald/flow-remote-react-components@workspace:*, @mittwald/flow-remote-react-components@workspace:packages/remote-react-components":
   version: 0.0.0-use.local
   resolution: "@mittwald/flow-remote-react-components@workspace:packages/remote-react-components"
   dependencies:
-    "@mittwald/flow-react-components": "workspace:^"
-    "@mittwald/flow-remote-core": "workspace:^"
-    "@mittwald/flow-remote-elements": "workspace:^"
+    "@mittwald/flow-react-components": "workspace:*"
+    "@mittwald/flow-remote-core": "workspace:*"
+    "@mittwald/flow-remote-elements": "workspace:*"
     "@remote-dom/core": "npm:^1.5.2"
     "@remote-dom/react": "npm:^1.2.1"
     "@types/node": "npm:^22.10.5"
@@ -3502,7 +3502,7 @@ __metadata:
     vite-plugin-dts: "npm:^4.4.0"
     vite-plugin-externalize-deps: "npm:^0.8.0"
   peerDependencies:
-    "@mittwald/flow-react-components": "workspace:^"
+    "@mittwald/flow-react-components": "workspace:*"
     react: 19.0.0
     react-hook-form: "*"
   peerDependenciesMeta:
@@ -3511,13 +3511,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@mittwald/flow-remote-react-renderer@workspace:^, @mittwald/flow-remote-react-renderer@workspace:packages/remote-react-renderer":
+"@mittwald/flow-remote-react-renderer@workspace:*, @mittwald/flow-remote-react-renderer@workspace:packages/remote-react-renderer":
   version: 0.0.0-use.local
   resolution: "@mittwald/flow-remote-react-renderer@workspace:packages/remote-react-renderer"
   dependencies:
-    "@mittwald/flow-react-components": "workspace:^"
-    "@mittwald/flow-remote-core": "workspace:^"
-    "@mittwald/flow-remote-elements": "workspace:^"
+    "@mittwald/flow-react-components": "workspace:*"
+    "@mittwald/flow-remote-core": "workspace:*"
+    "@mittwald/flow-remote-elements": "workspace:*"
     "@remote-dom/core": "npm:^1.5.2"
     "@remote-dom/react": "npm:^1.2.1"
     "@types/node": "npm:^22.10.5"
@@ -3548,12 +3548,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@mittwald/flow-stylesheet@workspace:packages/stylesheet"
   dependencies:
-    "@mittwald/flow-react-components": "workspace:^"
+    "@mittwald/flow-react-components": "workspace:*"
     resolve-package-path: "npm:^4.0.3"
   languageName: unknown
   linkType: soft
 
-"@mittwald/react-tunnel@workspace:^, @mittwald/react-tunnel@workspace:packages/react-tunnel":
+"@mittwald/react-tunnel@workspace:*, @mittwald/react-tunnel@workspace:packages/react-tunnel":
   version: 0.0.0-use.local
   resolution: "@mittwald/react-tunnel@workspace:packages/react-tunnel"
   dependencies:

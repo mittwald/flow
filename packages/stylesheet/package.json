@@ -15,7 +15,7 @@
     "build": "node build.js"
   },
   "devDependencies": {
-    "@mittwald/flow-react-components": "workspace:^",
+    "@mittwald/flow-react-components": "workspace:*",
     "resolve-package-path": "^4.0.3"
   }
 }
