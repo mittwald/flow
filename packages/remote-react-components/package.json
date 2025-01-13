@@ -35,7 +35,6 @@
     "@remote-dom/react": "^1.2.1"
   },
   "devDependencies": {
-    "@mittwald/flow-react-components": "workspace:*",
     "@types/node": "^22.10.5",
     "@types/react": "^19.0.4",
     "nx": "^20.3.1",
@@ -49,7 +48,6 @@
     "vite-plugin-externalize-deps": "^0.8.0"
   },
   "peerDependencies": {
-    "@mittwald/flow-react-components": "workspace:*",
     "react": "19.0.0",
     "react-hook-form": "*"
   },
