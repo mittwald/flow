@@ -17,6 +17,7 @@ export default defineConfig(
       lib: {
         entry: {
           index: "./src/index.ts",
+          polyfill: "./src/polyfill.ts",
         },
         formats: ["es"],
       },

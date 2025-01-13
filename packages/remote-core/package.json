@@ -9,6 +9,10 @@
     ".": {
       "types": "./dist/types/index.d.ts",
       "default": "./dist/index.js"
+    },
+    "./polyfill": {
+      "types": "./dist/types/polyfill.d.ts",
+      "default": "./dist/polyfill.js"
     }
   },
   "files": [

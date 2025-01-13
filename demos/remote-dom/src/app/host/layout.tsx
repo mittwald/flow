@@ -1,4 +1,4 @@
-import "@mittwald/flow-react-components/all.css";
+import "@mittwald/flow-stylesheet/css";
 import "@mittwald/flow-remote-react-renderer/polyfill";
 import type { PropsWithChildren } from "react";
 import HeaderNavigation from "@mittwald/flow-react-components/HeaderNavigation";

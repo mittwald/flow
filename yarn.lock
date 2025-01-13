@@ -3197,9 +3197,9 @@ __metadata:
     "@internationalized/date": "npm:^3.6.0"
     "@mittwald/flow-design-tokens": "workspace:*"
     "@mittwald/flow-react-components": "workspace:*"
-    "@mittwald/flow-remote-elements": "workspace:*"
     "@mittwald/flow-remote-react-components": "workspace:*"
     "@mittwald/flow-remote-react-renderer": "workspace:*"
+    "@mittwald/flow-stylesheet": "workspace:*"
     "@mittwald/react-use-promise": "npm:^2.6.0"
     "@tabler/icons-react": "npm:^3.28.1"
     "@types/node": "npm:^22.10.5"
@@ -3518,7 +3518,6 @@ __metadata:
     "@mittwald/flow-react-components": "workspace:*"
     "@mittwald/flow-remote-core": "workspace:*"
     "@mittwald/flow-remote-elements": "workspace:*"
-    "@remote-dom/core": "npm:^1.5.2"
     "@remote-dom/react": "npm:^1.2.1"
     "@types/node": "npm:^22.10.5"
     "@types/react": "npm:^19.0.4"
@@ -3544,7 +3543,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@mittwald/flow-stylesheet@workspace:packages/stylesheet":
+"@mittwald/flow-stylesheet@workspace:*, @mittwald/flow-stylesheet@workspace:packages/stylesheet":
   version: 0.0.0-use.local
   resolution: "@mittwald/flow-stylesheet@workspace:packages/stylesheet"
   dependencies:
