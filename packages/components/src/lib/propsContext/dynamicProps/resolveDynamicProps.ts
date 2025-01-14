@@ -1,10 +1,10 @@
 import type {
   FlowComponentName,
   FlowComponentProps,
-} from "@/components/propTypes";
-import { isDynamicProp } from "@/lib/propsContext/dynamicProps/isDynamicProp";
-import type { ComponentPropsContext } from "@/lib/propsContext/types";
-import { isFlowComponentProp } from "@/lib/propsContext/isFlowComponentProp";
+} from "~/components/propTypes";
+import { isDynamicProp } from "~/lib/propsContext/dynamicProps/isDynamicProp";
+import type { ComponentPropsContext } from "~/lib/propsContext/types";
+import { isFlowComponentProp } from "~/lib/propsContext/isFlowComponentProp";
 
 export const resolveDynamicProps = <C extends FlowComponentName>(
   contextProps: ComponentPropsContext<C>,

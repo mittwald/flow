@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import IllustratedMessage from "../IllustratedMessage";
 import React from "react";
-import { Heading } from "@/components/Heading";
-import { Text } from "@/components/Text";
-import { Button } from "@/components/Button";
-import { IconApp, IconDanger } from "@/components/Icon/components/icons";
+import { Heading } from "~/components/Heading";
+import { Text } from "~/components/Text";
+import { Button } from "~/components/Button";
+import { IconApp, IconDanger } from "~/components/Icon/components/icons";
 import {
   storyBackgroundDark,
   storyBackgroundLight,
-} from "@/lib/dev/storyBackgrounds";
-import { ActionGroup } from "@/components/ActionGroup";
+} from "~/lib/dev/storyBackgrounds";
+import { ActionGroup } from "~/components/ActionGroup";
 
 const meta: Meta<typeof IllustratedMessage> = {
   title: "Content/Illustrated Message",

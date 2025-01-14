@@ -2,7 +2,7 @@ import type { FC, ReactNode } from "react";
 import React from "react";
 import styles from "./Header.module.css";
 import { TunnelExit } from "@mittwald/react-tunnel";
-import type { SearchValue } from "@/components/List/model/search/types";
+import type { SearchValue } from "~/components/List/model/search/types";
 import { SearchField } from "./SearchField";
 
 export interface HeaderProps {

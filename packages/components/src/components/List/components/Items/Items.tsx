@@ -1,9 +1,9 @@
 import type { FC } from "react";
 import React from "react";
-import { useList } from "@/components/List/hooks/useList";
-import Item from "@/components/List/components/Items/components/Item/Item";
-import ItemsView from "@/components/List/views/Items/Items";
-import { useViewComponents } from "@/lib/viewComponentContext/useViewComponents";
+import { useList } from "~/components/List/hooks/useList";
+import Item from "~/components/List/components/Items/components/Item/Item";
+import ItemsView from "~/components/List/views/Items/Items";
+import { useViewComponents } from "~/lib/viewComponentContext/useViewComponents";
 
 export const Items: FC = () => {
   const list = useList();

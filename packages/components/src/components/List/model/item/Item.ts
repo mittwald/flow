@@ -1,4 +1,4 @@
-import type { ItemCollection } from "@/components/List/model/item/ItemCollection";
+import type { ItemCollection } from "~/components/List/model/item/ItemCollection";
 import type { Row } from "@tanstack/react-table";
 
 export class Item<T> {

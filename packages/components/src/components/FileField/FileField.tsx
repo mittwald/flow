@@ -1,16 +1,16 @@
-import formFieldStyles from "@/components/FormField/FormField.module.scss";
+import formFieldStyles from "~/components/FormField/FormField.module.scss";
 import { useFormValidation } from "@react-aria/form";
 import { useFormValidationState } from "@react-stately/form";
 import type { PropsWithChildren } from "react";
 import React, { useMemo, useRef } from "react";
 import type * as Aria from "react-aria-components";
 import { FieldErrorContext, InputContext } from "react-aria-components";
-import type { FileInputOnChangeHandler } from "@/components/FileField/components/FileInput";
-import { FileInput } from "@/components/FileField/components/FileInput";
-import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
-import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import type { PropsContext } from "@/lib/propsContext";
-import { PropsContextProvider } from "@/lib/propsContext";
+import type { FileInputOnChangeHandler } from "~/components/FileField/components/FileInput";
+import { FileInput } from "~/components/FileField/components/FileInput";
+import type { FlowComponentProps } from "~/lib/componentFactory/flowComponent";
+import { flowComponent } from "~/lib/componentFactory/flowComponent";
+import type { PropsContext } from "~/lib/propsContext";
+import { PropsContextProvider } from "~/lib/propsContext";
 
 export interface FileFieldProps
   extends PropsWithChildren,

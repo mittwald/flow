@@ -2,12 +2,12 @@ import type { ComponentProps, FC, PropsWithChildren, ReactNode } from "react";
 import React, { useId, useState } from "react";
 import clsx from "clsx";
 import styles from "./Accordion.module.scss";
-import type { PropsContext } from "@/lib/propsContext";
-import { dynamic, PropsContextProvider } from "@/lib/propsContext";
-import { Button } from "@/components/Button";
-import { IconChevronDown } from "@/components/Icon/components/icons";
+import type { PropsContext } from "~/lib/propsContext";
+import { dynamic, PropsContextProvider } from "~/lib/propsContext";
+import { Button } from "~/components/Button";
+import { IconChevronDown } from "~/components/Icon/components/icons";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
-import { Activity } from "@/components/Activity";
+import { Activity } from "~/components/Activity";
 
 export interface AccordionProps
   extends PropsWithChildren<ComponentProps<"div">> {

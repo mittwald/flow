@@ -1,11 +1,11 @@
 import type { FC, KeyboardEvent } from "react";
 import React, { useEffect, useState } from "react";
-import { useOnChange } from "@/lib/hooks";
-import { SearchField as SearchFieldComponent } from "@/components/SearchField";
+import { useOnChange } from "~/lib/hooks";
+import { SearchField as SearchFieldComponent } from "~/components/SearchField";
 import type {
   SearchShape,
   SearchValue,
-} from "@/components/List/model/search/types";
+} from "~/components/List/model/search/types";
 import styles from "./Header.module.css";
 import clsx from "clsx";
 

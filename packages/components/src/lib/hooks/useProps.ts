@@ -1,15 +1,15 @@
 import type {
   FlowComponentName,
   FlowComponentProps,
-} from "@/components/propTypes";
-import { propsContextSupportingComponents } from "@/components/propTypes";
+} from "~/components/propTypes";
+import { propsContextSupportingComponents } from "~/components/propTypes";
 import { mergeProps } from "@react-aria/utils";
-import { resolveDynamicProps } from "@/lib/propsContext/dynamicProps/resolveDynamicProps";
-import { useContextProps } from "@/lib/propsContext/propsContext";
-import wrapChildrenWithNestedPropsContext from "@/lib/propsContext/nestedPropsContext/wrapChildrenWithNestedPropsContext";
+import { resolveDynamicProps } from "~/lib/propsContext/dynamicProps/resolveDynamicProps";
+import { useContextProps } from "~/lib/propsContext/propsContext";
+import wrapChildrenWithNestedPropsContext from "~/lib/propsContext/nestedPropsContext/wrapChildrenWithNestedPropsContext";
 import { omitBy } from "remeda";
-import type { PropsContext } from "@/lib/propsContext/types";
-import isDynamicProp from "@/lib/propsContext/dynamicProps/isDynamicProp";
+import type { PropsContext } from "~/lib/propsContext/types";
+import isDynamicProp from "~/lib/propsContext/dynamicProps/isDynamicProp";
 
 export const useProps = <C extends FlowComponentName>(
   component: C,

@@ -1,0 +1,5 @@
+{
+  "name": "tokens",
+  "projectType": "library",
+  "sourceRoot": "packages/design-tokens/src"
+}

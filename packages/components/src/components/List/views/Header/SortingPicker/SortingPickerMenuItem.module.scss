@@ -1,4 +1,4 @@
-@use "@/styles/mixins/focus";
+@use "~/styles/mixins/focus";
 
 .sortingPickerMenuItem {
   border-radius: var(--context-menu--corner-radius);

@@ -1,0 +1,16 @@
+{
+  "name": "remote-core",
+  "projectType": "library",
+  "sourceRoot": "packages/remote-core/src",
+  "targets": {
+    "build": {
+      "dependsOn": [
+        "^build",
+        {
+          "projects": ["components"],
+          "target": "build:remote-components"
+        }
+      ]
+    }
+  }
+}

@@ -1,8 +1,8 @@
 import type { FC, PropsWithChildren } from "react";
 import React, { createContext, useContext } from "react";
-import NotificationController from "@/components/NotificationProvider/NotificationController";
-import type { NotificationsContainerProps } from "@/components/NotificationProvider/NotificationContainer";
-import NotificationContainer from "@/components/NotificationProvider/NotificationContainer";
+import NotificationController from "~/components/NotificationProvider/NotificationController";
+import type { NotificationsContainerProps } from "~/components/NotificationProvider/NotificationContainer";
+import NotificationContainer from "~/components/NotificationProvider/NotificationContainer";
 
 export type NotificationProviderProps =
   PropsWithChildren<NotificationsContainerProps>;

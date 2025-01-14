@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import React from "react";
-import { useList } from "@/components/List";
+import { useList } from "~/components/List";
 import {
   Table as TableComponent,
   TableBody,
@@ -8,11 +8,11 @@ import {
   TableColumn,
   TableHeader,
   TableRow,
-} from "@/components/Table";
-import { TableLoadingView } from "@/components/List/components/Table/components/TableLoadingView";
+} from "~/components/Table";
+import { TableLoadingView } from "~/components/List/components/Table/components/TableLoadingView";
 import styles from "./Table.module.css";
 import clsx from "clsx";
-import { EmptyView } from "@/components/List/components/EmptyView/EmptyView";
+import { EmptyView } from "~/components/List/components/EmptyView/EmptyView";
 
 export const Table: FC = () => {
   const list = useList();

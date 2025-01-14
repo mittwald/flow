@@ -56,14 +56,14 @@ jobs:
         run: git branch --track main origin/main
 
       - name: Build 🔨
-        run: yarn docs build
+        run: yarn nx build docs
 
       - name: Upload files to GitHub Pages 🚀
         uses: maaaathis/github-action-push-to-another-repository@main
         env:
           API_TOKEN_GITHUB: ${{ secrets.PUBLISH_PAT }}
         with:
-          source-directory: packages/docs/out
+          source-directory: apps/docs/out
           destination-github-username: mittwald
           destination-repository-name: flow-previews
           target-branch: main

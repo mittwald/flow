@@ -2,18 +2,18 @@ import type { PropsWithChildren } from "react";
 import React from "react";
 import styles from "./Modal.module.scss";
 import clsx from "clsx";
-import type { PropsContext } from "@/lib/propsContext";
-import { PropsContextProvider } from "@/lib/propsContext";
+import type { PropsContext } from "~/lib/propsContext";
+import { PropsContextProvider } from "~/lib/propsContext";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
-import type { OverlayController } from "@/lib/controller/overlay";
-import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
-import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import { Overlay } from "@/components/Overlay";
-import { Header } from "@/components/Header";
-import { Action } from "@/components/Action";
-import { Button } from "@/components/Button";
-import { IconClose } from "@/components/Icon/components/icons";
-import type { PropsWithClassName } from "@/lib/types/props";
+import type { OverlayController } from "~/lib/controller/overlay";
+import type { FlowComponentProps } from "~/lib/componentFactory/flowComponent";
+import { flowComponent } from "~/lib/componentFactory/flowComponent";
+import { Overlay } from "~/components/Overlay";
+import { Header } from "~/components/Header";
+import { Action } from "~/components/Action";
+import { Button } from "~/components/Button";
+import { IconClose } from "~/components/Icon/components/icons";
+import type { PropsWithClassName } from "~/lib/types/props";
 
 export interface ModalProps
   extends PropsWithChildren,

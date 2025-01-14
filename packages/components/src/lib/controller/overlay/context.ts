@@ -1,6 +1,6 @@
 import { createContext, useContext } from "react";
-import type { OverlayController } from "@/lib/controller/overlay/OverlayController";
-import type { FlowComponentName } from "@/components/propTypes";
+import type { OverlayController } from "~/lib/controller/overlay/OverlayController";
+import type { FlowComponentName } from "~/components/propTypes";
 
 export type OverlayContext = Partial<
   Record<FlowComponentName, OverlayController | undefined>

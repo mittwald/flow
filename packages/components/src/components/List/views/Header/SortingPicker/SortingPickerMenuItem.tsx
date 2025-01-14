@@ -1,6 +1,6 @@
 import type { FC, PropsWithChildren } from "react";
 import React from "react";
-import { MenuItem } from "@/components/ContextMenu";
+import { MenuItem } from "~/components/ContextMenu";
 
 export interface SortingPickerMenuItemProps extends PropsWithChildren {
   id: string;

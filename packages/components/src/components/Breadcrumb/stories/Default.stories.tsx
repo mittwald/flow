@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import { Link } from "@/components/Link";
-import { Breadcrumb } from "@/components/Breadcrumb";
+import { Link } from "~/components/Link";
+import { Breadcrumb } from "~/components/Breadcrumb";
 import {
   storyBackgroundDark,
   storyBackgroundLight,
-} from "@/lib/dev/storyBackgrounds";
+} from "~/lib/dev/storyBackgrounds";
 
 const meta: Meta<typeof Breadcrumb> = {
   title: "Navigation/Breadcrumb",

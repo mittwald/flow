@@ -1,5 +1,5 @@
 import { createElement } from "react";
-import { mapReactElementAttributes } from "@/lib/mapReactElementAttributes";
+import { mapReactElementAttributes } from "~/lib/mapReactElementAttributes";
 
 export type ElementTagNameMap = HTMLElementTagNameMap &
   Pick<

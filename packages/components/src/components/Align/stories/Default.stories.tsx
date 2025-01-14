@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import { Align } from "@/components/Align";
-import { Avatar } from "@/components/Avatar";
-import { Initials } from "@/components/Initials";
-import { Text } from "@/components/Text";
+import { Align } from "~/components/Align";
+import { Avatar } from "~/components/Avatar";
+import { Initials } from "~/components/Initials";
+import { Text } from "~/components/Text";
 
 const meta: Meta<typeof Align> = {
   title: "Structure/Align/Avatar + Text",

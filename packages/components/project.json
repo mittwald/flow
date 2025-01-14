@@ -1,0 +1,40 @@
+{
+  "implicitDependencies": ["tokens"],
+  "name": "components",
+  "projectType": "library",
+  "sourceRoot": "packages/components/src",
+  "targets": {
+    "build:icons": {
+      "cache": true,
+      "inputs": [
+        "{projectRoot}/dev/icons/**/*",
+        "{projectRoot}/src/components/Icon/tablerMappings.yaml"
+      ]
+    },
+    "build:remote-components": {
+      "cache": true,
+      "inputs": [
+        "{projectRoot}/out/doc-properties.json",
+        "{projectRoot}/dev/remote-components-generator/**/*"
+      ],
+      "dependsOn": ["build:docs-properties"],
+      "outputs": [
+        "{workspaceRoot}/packages/remote-elements/src/auto-generated/**/*",
+        "{workspaceRoot}/packages/remote-react-components/src/auto-generated/**/*",
+        "{workspaceRoot}/packages/remote-react-renderer/src/auto-generated/**/*"
+      ]
+    },
+    "build": {
+      "cache": true,
+      "dependsOn": ["build:icons", "^build"]
+    },
+    "build:docs-properties": {
+      "cache": true,
+      "inputs": [
+        "{projectRoot}/src/**/*.{ts,tsx}",
+        "{projectRoot}/dev/createDocPropertiesJson.ts"
+      ],
+      "outputs": ["{projectRoot}/out"]
+    }
+  }
+}

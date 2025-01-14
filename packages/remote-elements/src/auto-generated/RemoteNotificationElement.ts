@@ -1,15 +1,15 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
+import { FlowRemoteElement } from "~/lib/FlowRemoteElement";
 import type { NotificationProps as RemoteNotificationElementProps } from "@mittwald/flow-react-components/Notification";
 export type { NotificationProps as RemoteNotificationElementProps } from "@mittwald/flow-react-components/Notification";
 
 export class RemoteNotificationElement extends FlowRemoteElement<RemoteNotificationElementProps> {
-  static get remoteAttributes() {
+  static override get remoteAttributes() {
     return [];
   }
 
-  static get remoteProperties() {
+  static override get remoteProperties() {
     return {
       about: {},
       accessKey: {},
@@ -109,7 +109,6 @@ export class RemoteNotificationElement extends FlowRemoteElement<RemoteNotificat
       security: {},
       slot: {},
       spellCheck: {},
-      status: {},
       suppressContentEditableWarning: {},
       suppressHydrationWarning: {},
       tabIndex: {},
@@ -121,7 +120,7 @@ export class RemoteNotificationElement extends FlowRemoteElement<RemoteNotificat
     };
   }
 
-  static get remoteEvents() {
+  static override get remoteEvents() {
     return {
       abort: {},
       abortCapture: {},
@@ -295,7 +294,7 @@ export class RemoteNotificationElement extends FlowRemoteElement<RemoteNotificat
     };
   }
 
-  static get remoteSlots() {
+  static override get remoteSlots() {
     return [];
   }
 }

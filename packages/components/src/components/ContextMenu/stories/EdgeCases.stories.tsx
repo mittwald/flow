@@ -3,10 +3,10 @@ import React from "react";
 import ContextMenu, {
   ContextMenuTrigger,
   MenuItem,
-} from "@/components/ContextMenu";
-import { Button } from "@/components/Button";
+} from "~/components/ContextMenu";
+import { Button } from "~/components/Button";
 import defaultMeta from "./Default.stories";
-import { dummyText } from "@/lib/dev/dummyText";
+import { dummyText } from "~/lib/dev/dummyText";
 
 const meta: Meta<typeof ContextMenu> = {
   ...defaultMeta,

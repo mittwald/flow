@@ -30,7 +30,7 @@ export function generateRemoteElementFile(c: ComponentDoc) {
       .sort()
       .filter((prop) => isEvent(prop))
       .map((propName) => {
-        const formattedName = propName[2].toLowerCase() + propName.slice(3);
+        const formattedName = propName[2]?.toLowerCase() + propName.slice(3);
         return `${formattedName}: {}`;
       })
       .join(",\n"),
@@ -42,28 +42,28 @@ export function generateRemoteElementFile(c: ComponentDoc) {
   };
 
   return `\
-    import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
+    import { FlowRemoteElement } from "~/lib/FlowRemoteElement";
     import type { ${t.propsType} as ${t.propsAliasType} } from "@mittwald/flow-react-components/${t.exportPath}";
     export type { ${t.propsType} as ${t.propsAliasType} } from "@mittwald/flow-react-components/${t.exportPath}";
     
     export class ${t.element} extends FlowRemoteElement<${t.propsAliasType}> {
-      static get remoteAttributes() {
+      static override get remoteAttributes() {
         return [${t.attributes}];
       }
 
-      static get remoteProperties() {
+      static override get remoteProperties() {
         return {
           ${t.props}
         };
       }
 
-      static get remoteEvents() {
+      static override get remoteEvents() {
         return {
           ${t.events}
         };
       }
 
-      static get remoteSlots() {
+      static override get remoteSlots() {
         return [${t.slots}];
       }
     }    

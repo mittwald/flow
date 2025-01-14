@@ -1,15 +1,15 @@
-import ContextMenu, { ContextMenuTrigger } from "@/components/ContextMenu";
+import ContextMenu, { ContextMenuTrigger } from "~/components/ContextMenu";
 import type { FC } from "react";
 import React from "react";
-import { Button } from "@/components/Button";
-import { Text } from "@/components/Text";
-import { Heading } from "@/components/Heading";
-import { Section } from "@/components/Section";
-import MenuItem from "@/components/MenuItem";
+import { Button } from "~/components/Button";
+import { Text } from "~/components/Text";
+import { Heading } from "~/components/Heading";
+import { Section } from "~/components/Section";
+import MenuItem from "~/components/MenuItem";
 import locales from "../../locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
-import { IconView } from "@/components/Icon/components/icons";
-import type { ListViewMode } from "@/components/List/model/types";
+import { IconView } from "~/components/Icon/components/icons";
+import type { ListViewMode } from "~/components/List/model/types";
 
 export interface ViewModeMenuProps {
   selectedViewMode: ListViewMode;

@@ -1,10 +1,10 @@
 import React from "react";
 import styles from "./Heading.module.scss";
 import clsx from "clsx";
-import type { PropsContext } from "@/lib/propsContext";
-import { ClearPropsContext, PropsContextProvider } from "@/lib/propsContext";
-import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
-import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import type { PropsContext } from "~/lib/propsContext";
+import { ClearPropsContext, PropsContextProvider } from "~/lib/propsContext";
+import type { FlowComponentProps } from "~/lib/componentFactory/flowComponent";
+import { flowComponent } from "~/lib/componentFactory/flowComponent";
 import * as Aria from "react-aria-components";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 

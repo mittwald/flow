@@ -6,7 +6,7 @@ import { glob } from "glob";
 import type { ComponentDoc } from "react-docgen-typescript";
 
 async function parse(): Promise<ComponentDoc[]> {
-  const parser = docgen.withCustomConfig("./tsconfig.json", {
+  const parser = docgen.withDefaultConfig({
     skipChildrenPropWithoutDoc: false,
     shouldRemoveUndefinedFromOptional: true,
     savePropValueAsString: true,

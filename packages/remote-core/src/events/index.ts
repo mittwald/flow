@@ -1,4 +1,4 @@
-import { standard } from "@/events/serializers";
+import { standard } from "~/events/serializers";
 
 export type EventHandler = (event: unknown) => void;
 

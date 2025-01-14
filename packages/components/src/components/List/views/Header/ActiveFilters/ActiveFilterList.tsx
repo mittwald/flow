@@ -1,13 +1,13 @@
 import type { FC, PropsWithChildren } from "react";
 import React, { Children } from "react";
 import styles from "./ActiveFilterList.module.scss";
-import { Button } from "@/components/Button";
-import { IconDelete, IconSave } from "@/components/Icon/components/icons";
+import { Button } from "~/components/Button";
+import { IconDelete, IconSave } from "~/components/Icon/components/icons";
 import locales from "../../../locales/*.locale.json";
-import { Translate } from "@/lib/react/components/Translate";
+import { Translate } from "~/lib/react/components/Translate";
 import { useLocalizedStringFormatter } from "react-aria";
-import { Tooltip, TooltipTrigger } from "@/components/Tooltip";
-import { Icon } from "@/components/Icon";
+import { Tooltip, TooltipTrigger } from "~/components/Tooltip";
+import { Icon } from "~/components/Icon";
 import { IconArrowBackUp } from "@tabler/icons-react";
 
 export interface ActiveFilterListProps extends PropsWithChildren {

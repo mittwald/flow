@@ -1,3 +1,3 @@
-import { Wrap } from "@/components/Wrap/Wrap";
+import { Wrap } from "~/components/Wrap/Wrap";
 export * from "./Wrap";
 export default Wrap;

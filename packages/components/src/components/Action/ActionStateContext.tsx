@@ -1,7 +1,7 @@
 import type { FC, PropsWithChildren } from "react";
 import React, { useEffect } from "react";
-import { ActionModel } from "@/components/Action/models/ActionModel";
-import Action from "@/components/Action/index";
+import { ActionModel } from "~/components/Action/models/ActionModel";
+import Action from "~/components/Action/index";
 
 interface Props extends PropsWithChildren {
   isStarted?: boolean;

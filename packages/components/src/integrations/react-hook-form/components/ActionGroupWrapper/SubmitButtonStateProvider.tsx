@@ -1,10 +1,10 @@
 import type { FC, MutableRefObject, PropsWithChildren } from "react";
 import React from "react";
-import { ActionStateContext } from "@/components/Action/ActionStateContext";
-import { useFormContext } from "@/integrations/react-hook-form/components/context/formContext";
+import { ActionStateContext } from "~/components/Action/ActionStateContext";
+import { useFormContext } from "~/integrations/react-hook-form/components/context/formContext";
 import { useFormState } from "react-hook-form";
-import type { PropsContext } from "@/lib/propsContext";
-import { dynamic, PropsContextProvider } from "@/lib/propsContext";
+import type { PropsContext } from "~/lib/propsContext";
+import { dynamic, PropsContextProvider } from "~/lib/propsContext";
 
 interface Props extends PropsWithChildren {
   isAsyncSubmit: MutableRefObject<boolean>;

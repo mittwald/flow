@@ -2,12 +2,12 @@ import type { ComponentProps, FC, PropsWithChildren } from "react";
 import React from "react";
 import styles from "./Navigation.module.scss";
 import clsx from "clsx";
-import { NavigationGroup } from "@/components/Navigation";
-import { Wrap } from "@/components/Wrap";
-import type { PropsContext } from "@/lib/propsContext";
-import { PropsContextProvider } from "@/lib/propsContext";
-import type { PropsWithClassName } from "@/lib/types/props";
-import { deepHas } from "@/lib/react/deepHas";
+import { NavigationGroup } from "~/components/Navigation";
+import { Wrap } from "~/components/Wrap";
+import type { PropsContext } from "~/lib/propsContext";
+import { PropsContextProvider } from "~/lib/propsContext";
+import type { PropsWithClassName } from "~/lib/types/props";
+import { deepHas } from "~/lib/react/deepHas";
 
 export interface NavigationProps
   extends PropsWithChildren<ComponentProps<"nav">>,

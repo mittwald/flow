@@ -1,29 +1,29 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Section from "../Section";
 import React from "react";
-import { Heading } from "@/components/Heading";
-import { Text } from "@/components/Text";
-import { TextField } from "@/components/TextField";
-import { Label } from "@/components/Label";
-import { Link } from "@/components/Link";
-import { Switch } from "@/components/Switch";
-import { AlertBadge } from "@/components/AlertBadge";
-import Header from "@/components/Header";
+import { Heading } from "~/components/Heading";
+import { Text } from "~/components/Text";
+import { TextField } from "~/components/TextField";
+import { Label } from "~/components/Label";
+import { Link } from "~/components/Link";
+import { Switch } from "~/components/Switch";
+import { AlertBadge } from "~/components/AlertBadge";
+import Header from "~/components/Header";
 import {
   IconContextMenu,
   IconMember,
-} from "@/components/Icon/components/icons";
-import { Button } from "@/components/Button";
-import { dummyText } from "@/lib/dev/dummyText";
-import { Action } from "@/components/Action";
-import { Modal } from "@/components/Modal";
+} from "~/components/Icon/components/icons";
+import { Button } from "~/components/Button";
+import { dummyText } from "~/lib/dev/dummyText";
+import { Action } from "~/components/Action";
+import { Modal } from "~/components/Modal";
 import {
   ContextualHelp,
   ContextualHelpTrigger,
-} from "@/components/ContextualHelp";
-import ContextMenuTrigger from "@/components/ContextMenu/components/ContextMenuTrigger";
-import { ContextMenu } from "@/components/ContextMenu";
-import MenuItem from "@/components/MenuItem";
+} from "~/components/ContextualHelp";
+import ContextMenuTrigger from "~/components/ContextMenu/components/ContextMenuTrigger";
+import { ContextMenu } from "~/components/ContextMenu";
+import MenuItem from "~/components/MenuItem";
 
 const meta: Meta<typeof Section> = {
   title: "Structure/Section",

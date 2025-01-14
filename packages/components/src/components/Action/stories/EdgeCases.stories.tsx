@@ -5,8 +5,8 @@ import {
   asyncFunction,
   syncFunction,
   button,
-} from "@/components/Button/stories/lib";
-import { Action } from "@/components/Action";
+} from "~/components/Button/stories/lib";
+import { Action } from "~/components/Action";
 
 const meta: Meta<typeof Action> = {
   ...defaultMeta,

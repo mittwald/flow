@@ -3,12 +3,12 @@ import React, { useId } from "react";
 import * as Aria from "react-aria-components";
 import styles from "./TabList.module.scss";
 import { TunnelExit } from "@mittwald/react-tunnel";
-import { useObserveOverflow } from "@/lib/hooks/dom/useObserveOverflow";
-import { ContextMenu, ContextMenuTrigger } from "@/components/ContextMenu";
-import { Button } from "@/components/Button";
-import { IconContextMenu } from "@/components/Icon/components/icons";
+import { useObserveOverflow } from "~/lib/hooks/dom/useObserveOverflow";
+import { ContextMenu, ContextMenuTrigger } from "~/components/ContextMenu";
+import { Button } from "~/components/Button";
+import { IconContextMenu } from "~/components/Icon/components/icons";
 import clsx from "clsx";
-import TabTitleCollapsed from "@/components/Tabs/components/TabTitle/TabTitleCollapsed";
+import TabTitleCollapsed from "~/components/Tabs/components/TabTitle/TabTitleCollapsed";
 
 interface Props {
   selection: Aria.Key | undefined;

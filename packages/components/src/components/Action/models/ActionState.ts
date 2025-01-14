@@ -4,9 +4,9 @@ import {
   makeObservable,
   observable,
 } from "mobx";
-import useSelector from "@/lib/mobx/useSelector";
+import useSelector from "~/lib/mobx/useSelector";
 import { useRef } from "react";
-import { sleep } from "@/lib/promises/sleep";
+import { sleep } from "~/lib/promises/sleep";
 
 export type ActionStateValue =
   | "isIdle"

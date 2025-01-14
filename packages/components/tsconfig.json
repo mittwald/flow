@@ -1,16 +1,18 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "jsx": "react",
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "paths": {
-      "@/*": ["src/*"]
-    },
     "plugins": [{ "name": "typescript-plugin-css-modules" }],
-    "types": ["vitest/globals", "@testing-library/jest-dom", "./types.d.ts"]
+    "types": ["./types.d.ts"]
   },
-  "exclude": ["node_modules", "dist"],
-  "extends": "../../tsconfig.json",
-  "include": ["**/*.ts", "**/*.tsx", "./dev/vitest/setupFiles.ts"]
+  "extends": "@mittwald/typescript-config/react-library.json",
+  "references": [
+    {
+      "path": "../react-tunnel"
+    },
+    {
+      "path": "./tsconfig.dev.json"
+    },
+    {
+      "path": "./tsconfig.vite.json"
+    }
+  ]
 }

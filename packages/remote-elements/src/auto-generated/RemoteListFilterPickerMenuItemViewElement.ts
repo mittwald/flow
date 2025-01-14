@@ -1,27 +1,27 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
+import { FlowRemoteElement } from "~/lib/FlowRemoteElement";
 import type { FilterPickerMenuItemProps as RemoteListFilterPickerMenuItemViewElementProps } from "@mittwald/flow-react-components/List/views";
 export type { FilterPickerMenuItemProps as RemoteListFilterPickerMenuItemViewElementProps } from "@mittwald/flow-react-components/List/views";
 
 export class RemoteListFilterPickerMenuItemViewElement extends FlowRemoteElement<RemoteListFilterPickerMenuItemViewElementProps> {
-  static get remoteAttributes() {
+  static override get remoteAttributes() {
     return [];
   }
 
-  static get remoteProperties() {
+  static override get remoteProperties() {
     return {
       id: {},
     };
   }
 
-  static get remoteEvents() {
+  static override get remoteEvents() {
     return {
       action: {},
     };
   }
 
-  static get remoteSlots() {
+  static override get remoteSlots() {
     return [];
   }
 }

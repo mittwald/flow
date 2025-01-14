@@ -1,4 +1,4 @@
-import possibleStandardNames from "@/lib/possibleStandardNames";
+import possibleStandardNames from "~/lib/possibleStandardNames";
 
 export type SupportedProperties = Partial<
   Record<

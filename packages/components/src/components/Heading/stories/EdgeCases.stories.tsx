@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Heading from "../Heading";
 import defaultMeta from "./Default.stories";
-import { IconMember } from "@/components/Icon/components/icons";
+import { IconMember } from "~/components/Icon/components/icons";
 import React from "react";
-import { dummyText } from "@/lib/dev/dummyText";
-import { AlertBadge } from "@/components/AlertBadge";
+import { dummyText } from "~/lib/dev/dummyText";
+import { AlertBadge } from "~/components/AlertBadge";
 import ContextualHelpTrigger from "../../ContextualHelp/components/ContextualHelpTrigger";
-import { Button } from "@/components/Button";
-import { ContextualHelp } from "@/components/ContextualHelp";
-import { Text } from "@/components/Text";
-import { Badge } from "@/components/Badge";
+import { Button } from "~/components/Button";
+import { ContextualHelp } from "~/components/ContextualHelp";
+import { Text } from "~/components/Text";
+import { Badge } from "~/components/Badge";
 
 const meta: Meta<typeof Heading> = {
   ...defaultMeta,

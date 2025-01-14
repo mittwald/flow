@@ -1,4 +1,4 @@
-import type { SettingsJson } from "@/components/SettingsProvider/models/SettingsStore";
+import type { SettingsJson } from "~/components/SettingsProvider/models/SettingsStore";
 
 export interface SettingsBackend {
   store(settings: SettingsJson): Promise<void>;

@@ -1,14 +1,14 @@
 import { useContext } from "react";
-import { OverlayController } from "@/lib/controller";
+import { OverlayController } from "~/lib/controller";
 import invariant from "invariant";
-import type { ActionProps } from "@/components/Action/types";
-import { actionContext } from "@/components/Action/context";
-import { ActionState } from "@/components/Action/models/ActionState";
-import { ActionExecution } from "@/components/Action/models/ActionExecution";
-import { ActionStateContext } from "@/components/Action/models/ActionStateContext";
-import type { OverlayContext } from "@/lib/controller/overlay/context";
-import { useOverlayContext } from "@/lib/controller/overlay/context";
-import type { FlowComponentName } from "@/components/propTypes";
+import type { ActionProps } from "~/components/Action/types";
+import { actionContext } from "~/components/Action/context";
+import { ActionState } from "~/components/Action/models/ActionState";
+import { ActionExecution } from "~/components/Action/models/ActionExecution";
+import { ActionStateContext } from "~/components/Action/models/ActionStateContext";
+import type { OverlayContext } from "~/lib/controller/overlay/context";
+import { useOverlayContext } from "~/lib/controller/overlay/context";
+import type { FlowComponentName } from "~/components/propTypes";
 
 interface InitObject {
   actionProps: ActionProps;

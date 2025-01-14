@@ -17,6 +17,6 @@ export type {
   AsyncDataLoader,
   AsyncResourceFactory,
   DataLoaderResult,
-} from "@/components/List/model/loading/types";
+} from "~/components/List/model/loading/types";
 
-export type { RenderItemFn } from "@/components/List/model/item/types";
+export type { RenderItemFn } from "~/components/List/model/item/types";

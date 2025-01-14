@@ -1,28 +1,28 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
+import { FlowRemoteElement } from "~/lib/FlowRemoteElement";
 import type { LoadNextBatchButtonProps as RemoteListLoadNextBatchButtonViewElementProps } from "@mittwald/flow-react-components/List/views";
 export type { LoadNextBatchButtonProps as RemoteListLoadNextBatchButtonViewElementProps } from "@mittwald/flow-react-components/List/views";
 
 export class RemoteListLoadNextBatchButtonViewElement extends FlowRemoteElement<RemoteListLoadNextBatchButtonViewElementProps> {
-  static get remoteAttributes() {
+  static override get remoteAttributes() {
     return [];
   }
 
-  static get remoteProperties() {
+  static override get remoteProperties() {
     return {
       isDisabled: {},
       isPending: {},
     };
   }
 
-  static get remoteEvents() {
+  static override get remoteEvents() {
     return {
       press: {},
     };
   }
 
-  static get remoteSlots() {
+  static override get remoteSlots() {
     return [];
   }
 }

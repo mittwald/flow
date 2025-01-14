@@ -2,17 +2,17 @@ import type {
   ActiveFilterItem,
   ActiveFilterList,
   Header,
-} from "@/components/List/views/Header";
-import type { ViewComponent } from "@/lib/viewComponentContext";
-import type { FilterPicker } from "@/components/List/views/Header/FilterPicker/FilterPicker";
-import type { FilterPickerMenuItem } from "@/components/List/views/Header/FilterPicker/FilterPickerMenuItem";
-import type Fragment from "@/components/Fragment";
-import type Items from "@/components/List/views/Items/Items";
-import type ItemContainer from "@/components/List/views/Items/ItemContainer";
-import type List from "@/components/List/views/List/List";
-import type PaginationInfos from "@/components/List/views/Footer/PaginationInfos";
-import type LoadNextBatchButton from "@/components/List/views/Footer/LoadNextBatchButton";
-import type { Footer } from "@/components/List/views/Footer";
+} from "~/components/List/views/Header";
+import type { ViewComponent } from "~/lib/viewComponentContext";
+import type { FilterPicker } from "~/components/List/views/Header/FilterPicker/FilterPicker";
+import type { FilterPickerMenuItem } from "~/components/List/views/Header/FilterPicker/FilterPickerMenuItem";
+import type Fragment from "~/components/Fragment";
+import type Items from "~/components/List/views/Items/Items";
+import type ItemContainer from "~/components/List/views/Items/ItemContainer";
+import type List from "~/components/List/views/List/List";
+import type PaginationInfos from "~/components/List/views/Footer/PaginationInfos";
+import type LoadNextBatchButton from "~/components/List/views/Footer/LoadNextBatchButton";
+import type { Footer } from "~/components/List/views/Footer";
 
 export * from "./Header";
 export * from "./Items";

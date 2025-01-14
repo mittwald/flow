@@ -24,3 +24,6 @@ declare global {
     type IntrinsicClassAttributes = Jsx.IntrinsicClassAttributes<never>;
   }
 }
+
+import "vitest/globals";
+import "@testing-library/jest-dom";

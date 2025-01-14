@@ -1,7 +1,7 @@
-import type { ActionModel } from "@/components/Action/models/ActionModel";
-import { callFunctionsInOrder } from "@/lib/promises/callFunctionsInOrder";
-import { callAndReact } from "@/lib/promises/callAndReact";
-import { getExecutionFunction } from "@/components/Action/models/getExecutionFunction";
+import type { ActionModel } from "~/components/Action/models/ActionModel";
+import { callFunctionsInOrder } from "~/lib/promises/callFunctionsInOrder";
+import { callAndReact } from "~/lib/promises/callAndReact";
+import { getExecutionFunction } from "~/components/Action/models/getExecutionFunction";
 
 export class ActionExecutionBatch {
   private readonly actions: ActionModel[] = [];
@@ -21,7 +21,7 @@ export class ActionExecutionBatch {
     }
 
     const batchFeedback =
-      this.actions[this.actions.length - 1].actionProps.showFeedback;
+      this.actions[this.actions.length - 1]?.actionProps.showFeedback;
 
     const executionState = this.baseAction.state.withFeedback(
       this.baseAction.needsConfirmation ? false : batchFeedback,

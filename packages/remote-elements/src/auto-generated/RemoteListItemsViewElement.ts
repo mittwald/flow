@@ -1,36 +1,26 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
+import { FlowRemoteElement } from "~/lib/FlowRemoteElement";
 import type { ItemsProps as RemoteListItemsViewElementProps } from "@mittwald/flow-react-components/List/views";
 export type { ItemsProps as RemoteListItemsViewElementProps } from "@mittwald/flow-react-components/List/views";
 
 export class RemoteListItemsViewElement extends FlowRemoteElement<RemoteListItemsViewElementProps> {
-  static get remoteAttributes() {
+  static override get remoteAttributes() {
     return [];
   }
 
-  static get remoteProperties() {
+  static override get remoteProperties() {
     return {
-      "aria-label": {},
-      "aria-labelledby": {},
-      defaultSelectedKeys: {},
-      disabledKeys: {},
-      disallowEmptySelection: {},
       isInitiallyLoading: {},
       isLoading: {},
-      selectedKeys: {},
-      selectionBehavior: {},
-      selectionMode: {},
     };
   }
 
-  static get remoteEvents() {
-    return {
-      selectionChange: {},
-    };
+  static override get remoteEvents() {
+    return {};
   }
 
-  static get remoteSlots() {
+  static override get remoteSlots() {
     return [];
   }
 }

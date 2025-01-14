@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import React from "react";
-import type { ButtonProps } from "@/components/Button";
-import { Button } from "@/components/Button";
+import type { ButtonProps } from "~/components/Button";
+import { Button } from "~/components/Button";
 import locales from "../../locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 

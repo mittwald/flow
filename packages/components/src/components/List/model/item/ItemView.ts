@@ -1,7 +1,7 @@
 import type { ReactElement, ReactNode } from "react";
 import { createElement } from "react";
-import type { RenderItemFn } from "@/components/List/model/item/types";
-import type List from "@/components/List/model/List";
+import type { RenderItemFn } from "~/components/List/model/item/types";
+import type List from "~/components/List/model/List";
 
 export interface ItemViewShape<T> {
   textValue?: (data: T) => string;

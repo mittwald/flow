@@ -1,8 +1,8 @@
 import type { FC } from "react";
 import React from "react";
-import { useList } from "@/components/List";
-import type { PropsWithClassName } from "@/lib/types/props";
-import { FilterPicker } from "@/components/List/components/Header/components/FilterPicker/FilterPicker";
+import { useList } from "~/components/List";
+import type { PropsWithClassName } from "~/lib/types/props";
+import { FilterPicker } from "~/components/List/components/Header/components/FilterPicker/FilterPicker";
 
 interface Props extends PropsWithClassName {
   hasActionGroup?: boolean;

@@ -1,4 +1,4 @@
-import type { FlowComponentPropsTypes } from "@/components/propTypes/index";
+import type { FlowComponentPropsTypes } from "~/components/propTypes/index";
 
 export type FlowComponentName = keyof FlowComponentPropsTypes;
 

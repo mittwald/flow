@@ -1,10 +1,10 @@
 import type { FC } from "react";
 import React from "react";
-import { useList } from "@/components/List/hooks/useList";
+import { useList } from "~/components/List/hooks/useList";
 import { observer } from "mobx-react-lite";
-import ActiveFilterItemView from "@/components/List/views/Header/ActiveFilters/ActiveFilterItem";
-import ActiveFilterListView from "@/components/List/views/Header/ActiveFilters/ActiveFilterList";
-import { useViewComponents } from "@/lib/viewComponentContext/useViewComponents";
+import ActiveFilterItemView from "~/components/List/views/Header/ActiveFilters/ActiveFilterItem";
+import ActiveFilterListView from "~/components/List/views/Header/ActiveFilters/ActiveFilterList";
+import { useViewComponents } from "~/lib/viewComponentContext/useViewComponents";
 
 export const ActiveFilterList: FC = observer(() => {
   const list = useList();

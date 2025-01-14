@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Popover from "../Popover";
 import React from "react";
-import Button from "@/components/Button";
-import { PopoverTrigger } from "@/components/Popover";
-import { useOverlayController } from "@/lib/controller";
+import Button from "~/components/Button";
+import { PopoverTrigger } from "~/components/Popover";
+import { useOverlayController } from "~/lib/controller";
 
 const meta: Meta<typeof Popover> = {
   title: "Overlays/Popover",

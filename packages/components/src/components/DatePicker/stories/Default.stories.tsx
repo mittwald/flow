@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import DatePicker from "../index";
-import { Label } from "@/components/Label";
-import { FieldDescription } from "@/components/FieldDescription";
+import { Label } from "~/components/Label";
+import { FieldDescription } from "~/components/FieldDescription";
 import { today, getLocalTimeZone, parseDate } from "@internationalized/date";
 
 const meta: Meta<typeof DatePicker> = {

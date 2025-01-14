@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import { useContext, useEffect, useId, useRef } from "react";
-import tunnelContext from "@/context";
-import type { TunnelChildren } from "@/types";
+import tunnelContext from "~/context";
+import type { TunnelChildren } from "~/types";
 
 interface Props {
   id?: string;

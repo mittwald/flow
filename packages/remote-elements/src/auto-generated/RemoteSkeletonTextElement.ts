@@ -1,15 +1,15 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
+import { FlowRemoteElement } from "~/lib/FlowRemoteElement";
 import type { SkeletonTextProps as RemoteSkeletonTextElementProps } from "@mittwald/flow-react-components/SkeletonText";
 export type { SkeletonTextProps as RemoteSkeletonTextElementProps } from "@mittwald/flow-react-components/SkeletonText";
 
 export class RemoteSkeletonTextElement extends FlowRemoteElement<RemoteSkeletonTextElementProps> {
-  static get remoteAttributes() {
+  static override get remoteAttributes() {
     return [];
   }
 
-  static get remoteProperties() {
+  static override get remoteProperties() {
     return {
       about: {},
       accessKey: {},
@@ -119,7 +119,7 @@ export class RemoteSkeletonTextElement extends FlowRemoteElement<RemoteSkeletonT
     };
   }
 
-  static get remoteEvents() {
+  static override get remoteEvents() {
     return {
       abort: {},
       abortCapture: {},
@@ -292,7 +292,7 @@ export class RemoteSkeletonTextElement extends FlowRemoteElement<RemoteSkeletonT
     };
   }
 
-  static get remoteSlots() {
+  static override get remoteSlots() {
     return [];
   }
 }

@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import LabeledValue from "../LabeledValue";
 import defaultMeta from "./Default.stories";
-import { dummyText } from "@/lib/dev/dummyText";
-import { Label } from "@/components/Label";
-import { Content } from "@/components/Content";
+import { dummyText } from "~/lib/dev/dummyText";
+import { Label } from "~/components/Label";
+import { Content } from "~/components/Content";
 import React from "react";
-import { CopyButton } from "@/components/CopyButton";
+import { CopyButton } from "~/components/CopyButton";
 
 const meta: Meta<typeof LabeledValue> = {
   title: "Content/LabeledValue/Edge Cases",

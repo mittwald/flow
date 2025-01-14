@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import { CounterBadge } from "@/components/CounterBadge";
-import Button from "@/components/Button";
-import { IconNotification } from "@/components/Icon/components/icons";
+import { CounterBadge } from "~/components/CounterBadge";
+import Button from "~/components/Button";
+import { IconNotification } from "~/components/Icon/components/icons";
 
 const meta: Meta<typeof CounterBadge> = {
   title: "Status/CounterBadge",

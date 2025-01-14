@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Badge, { badgeColors } from "../Badge";
 import React from "react";
-import { Text } from "@/components/Text";
-import { Label } from "@/components/Label";
-import { ContextMenu } from "@/components/ContextMenu";
-import MenuItem from "@/components/MenuItem";
-import { useOverlayController } from "@/lib/controller";
+import { Text } from "~/components/Text";
+import { Label } from "~/components/Label";
+import { ContextMenu } from "~/components/ContextMenu";
+import MenuItem from "~/components/MenuItem";
+import { useOverlayController } from "~/lib/controller";
 import {
   storyBackgroundDark,
   storyBackgroundLight,
-} from "@/lib/dev/storyBackgrounds";
+} from "~/lib/dev/storyBackgrounds";
 
 const meta: Meta<typeof Badge> = {
   title: "Status/Badge",

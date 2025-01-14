@@ -1,8 +1,8 @@
 import type { FC } from "react";
 import React from "react";
-import { useList } from "@/components/List/hooks/useList";
-import ShowNextBatchButtonView from "@/components/List/views/Footer/LoadNextBatchButton";
-import { useViewComponents } from "@/lib/viewComponentContext/useViewComponents";
+import { useList } from "~/components/List/hooks/useList";
+import ShowNextBatchButtonView from "~/components/List/views/Footer/LoadNextBatchButton";
+import { useViewComponents } from "~/lib/viewComponentContext/useViewComponents";
 
 export const ShowNextBatchButton: FC = () => {
   const { LoadNextBatchButton: View = ShowNextBatchButtonView } =

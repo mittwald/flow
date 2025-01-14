@@ -1,15 +1,14 @@
 {
-  "compilerOptions": {
-    "baseUrl": ".",
-    "jsx": "react",
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "paths": {
-      "@/*": ["src/*"]
+  "extends": "@mittwald/typescript-config/web-library.json",
+  "references": [
+    {
+      "path": "./tsconfig.vite.json"
     },
-    "types": ["./types.d.ts"]
-  },
-  "exclude": ["node_modules", "dist"],
-  "extends": "../../tsconfig.json",
-  "include": ["**/*.ts"]
+    {
+      "path": "../remote-core"
+    },
+    {
+      "path": "../components"
+    }
+  ]
 }

@@ -16,7 +16,7 @@ import {
   ListLoadNextBatchButtonView,
   ListPaginationInfosView,
   ReactHookFormFieldContentView,
-} from "@/auto-generated";
+} from "~/auto-generated";
 
 type Props = PropsWithChildren;
 

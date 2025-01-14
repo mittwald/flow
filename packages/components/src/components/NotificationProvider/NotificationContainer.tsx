@@ -4,10 +4,10 @@ import React from "react";
 import ReactDOM from "react-dom";
 import clsx from "clsx";
 import styles from "./NotificationContainer.module.scss";
-import ControlledNotification from "@/components/NotificationProvider/ControlledNotification";
+import ControlledNotification from "~/components/NotificationProvider/ControlledNotification";
 import { AnimatePresence, domAnimation, LazyMotion, m } from "framer-motion";
 import { useIsSSR } from "react-aria";
-import { useNotificationController } from "@/components/NotificationProvider/NotificationProvider";
+import { useNotificationController } from "~/components/NotificationProvider/NotificationProvider";
 
 export type NotificationsContainerProps = ComponentProps<"div">;
 

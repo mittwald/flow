@@ -1,11 +1,11 @@
 import type { FC } from "react";
 import React from "react";
-import { useList } from "@/components/List/hooks/useList";
-import { FilterPicker } from "@/components/List/components/Header/components/FilterPicker/FilterPicker";
-import DefaultView from "@/components/List/views/Header/Header";
-import DefaultFragmentView from "@/components/Fragment";
-import { ActiveFilterList } from "@/components/List/components/Header/components/ActiveFilterList";
-import { useViewComponents } from "@/lib/viewComponentContext/useViewComponents";
+import { useList } from "~/components/List/hooks/useList";
+import { FilterPicker } from "~/components/List/components/Header/components/FilterPicker/FilterPicker";
+import DefaultView from "~/components/List/views/Header/Header";
+import DefaultFragmentView from "~/components/Fragment";
+import { ActiveFilterList } from "~/components/List/components/Header/components/ActiveFilterList";
+import { useViewComponents } from "~/lib/viewComponentContext/useViewComponents";
 
 interface Props {
   hasActionGroup?: boolean;

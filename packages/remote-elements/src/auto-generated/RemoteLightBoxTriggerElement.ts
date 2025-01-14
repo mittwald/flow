@@ -1,26 +1,23 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
+import { FlowRemoteElement } from "~/lib/FlowRemoteElement";
 import type { LightBoxTriggerProps as RemoteLightBoxTriggerElementProps } from "@mittwald/flow-react-components/LightBox";
 export type { LightBoxTriggerProps as RemoteLightBoxTriggerElementProps } from "@mittwald/flow-react-components/LightBox";
 
 export class RemoteLightBoxTriggerElement extends FlowRemoteElement<RemoteLightBoxTriggerElementProps> {
-  static get remoteAttributes() {
+  static override get remoteAttributes() {
     return [];
   }
 
-  static get remoteProperties() {
-    return {
-      controller: {},
-      isDefaultOpen: {},
-    };
-  }
-
-  static get remoteEvents() {
+  static override get remoteProperties() {
     return {};
   }
 
-  static get remoteSlots() {
+  static override get remoteEvents() {
+    return {};
+  }
+
+  static override get remoteSlots() {
     return [];
   }
 }

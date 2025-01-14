@@ -1,10 +1,10 @@
 import type { FC, PropsWithChildren } from "react";
 import React from "react";
-import { Button } from "@/components/Button";
+import { Button } from "~/components/Button";
 import {
   IconChevronDown,
   IconChevronUp,
-} from "@/components/Icon/components/icons";
+} from "~/components/Icon/components/icons";
 import locales from "../../../../../locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 

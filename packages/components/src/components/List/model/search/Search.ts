@@ -1,8 +1,8 @@
-import type List from "@/components/List/model/List";
+import type List from "~/components/List/model/List";
 import type {
   SearchShape,
   SearchValue,
-} from "@/components/List/model/search/types";
+} from "~/components/List/model/search/types";
 import type { InitialTableState } from "@tanstack/react-table";
 
 export class Search<T> {

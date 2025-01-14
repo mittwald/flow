@@ -1,15 +1,15 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
+import { FlowRemoteElement } from "~/lib/FlowRemoteElement";
 import type { CodeBlockProps as RemoteCodeBlockElementProps } from "@mittwald/flow-react-components/CodeBlock";
 export type { CodeBlockProps as RemoteCodeBlockElementProps } from "@mittwald/flow-react-components/CodeBlock";
 
 export class RemoteCodeBlockElement extends FlowRemoteElement<RemoteCodeBlockElementProps> {
-  static get remoteAttributes() {
+  static override get remoteAttributes() {
     return [];
   }
 
-  static get remoteProperties() {
+  static override get remoteProperties() {
     return {
       code: {},
       color: {},
@@ -17,11 +17,11 @@ export class RemoteCodeBlockElement extends FlowRemoteElement<RemoteCodeBlockEle
     };
   }
 
-  static get remoteEvents() {
+  static override get remoteEvents() {
     return {};
   }
 
-  static get remoteSlots() {
+  static override get remoteSlots() {
     return [];
   }
 }

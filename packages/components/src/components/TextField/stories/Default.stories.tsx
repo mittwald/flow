@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { TextField } from "../index";
 import React from "react";
-import { Label } from "@/components/Label";
+import { Label } from "~/components/Label";
 import { action } from "@storybook/addon-actions";
-import FieldDescription from "@/components/FieldDescription/FieldDescription";
+import FieldDescription from "~/components/FieldDescription/FieldDescription";
 import { Form } from "react-aria-components";
-import { Button } from "@/components/Button";
-import { FieldError } from "@/components/FieldError";
+import { Button } from "~/components/Button";
+import { FieldError } from "~/components/FieldError";
 
 const meta: Meta<typeof TextField> = {
   title: "Form Controls/TextField",

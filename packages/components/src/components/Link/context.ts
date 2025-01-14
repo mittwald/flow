@@ -1,4 +1,4 @@
-import type { LinkProps } from "@/components/Link/index";
+import type { LinkProps } from "~/components/Link/index";
 import { createContext } from "react";
 
 interface LinkContext {

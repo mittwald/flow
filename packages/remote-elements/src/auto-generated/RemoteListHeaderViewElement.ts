@@ -1,15 +1,15 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
+import { FlowRemoteElement } from "~/lib/FlowRemoteElement";
 import type { HeaderProps as RemoteListHeaderViewElementProps } from "@mittwald/flow-react-components/List/views";
 export type { HeaderProps as RemoteListHeaderViewElementProps } from "@mittwald/flow-react-components/List/views";
 
 export class RemoteListHeaderViewElement extends FlowRemoteElement<RemoteListHeaderViewElementProps> {
-  static get remoteAttributes() {
+  static override get remoteAttributes() {
     return [];
   }
 
-  static get remoteProperties() {
+  static override get remoteProperties() {
     return {
       autoSubmitSearch: {},
       searchValue: {},
@@ -17,13 +17,13 @@ export class RemoteListHeaderViewElement extends FlowRemoteElement<RemoteListHea
     };
   }
 
-  static get remoteEvents() {
+  static override get remoteEvents() {
     return {
       searchChanged: {},
     };
   }
 
-  static get remoteSlots() {
+  static override get remoteSlots() {
     return ["activeFilterList", "filterPickerList"];
   }
 }

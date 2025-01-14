@@ -1,4 +1,4 @@
-import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
+import { FlowRemoteElement } from "~/lib/FlowRemoteElement";
 
 export type RemoteFormElementProps = {
   id?: string;
@@ -7,13 +7,13 @@ export type RemoteFormElementProps = {
 } & Partial<Pick<HTMLFormElement, "enctype" | "method">>;
 
 export class RemoteFormElement extends FlowRemoteElement<RemoteFormElementProps> {
-  static get remoteEvents() {
+  static override get remoteEvents() {
     return {
       submit: {},
     };
   }
 
-  static get remoteProperties() {
+  static override get remoteProperties() {
     return {
       id: {},
       method: {},

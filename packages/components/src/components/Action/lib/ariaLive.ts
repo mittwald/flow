@@ -2,7 +2,7 @@ import { useLocalizedStringFormatter } from "react-aria";
 import locales from "../locales/*.locale.json";
 import { useEffect } from "react";
 import { useLiveRegion } from "@chakra-ui/live-region";
-import type { ActionStateValue } from "@/components/Action/models/ActionState";
+import type { ActionStateValue } from "~/components/Action/models/ActionState";
 
 interface Options {
   isPendingText?: string;

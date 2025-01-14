@@ -2,7 +2,7 @@
   "name": "@mittwald/flow-project",
   "private": true,
   "version": "0.0.0",
-  "packageManager": "yarn@4.6.0",
+  "packageManager": "yarn@4.5.3",
   "type": "module",
   "license": "MIT",
   "engines": {
@@ -11,16 +11,13 @@
   "scripts": {
     "all": "nx run-many --targets=\"$@\"",
     "build": "run all build",
-    "build:deps:watch": "nx watch --projects=$@ --includeDependentProjects -- nx run-many --targets=build --projects=$(tsx dev/nxDependencies.ts $@) --exclude=$@",
     "clean": "nx reset && run all clean",
-    "components": "nx run @mittwald/flow-react-components:\"$@\"",
-    "demo:remote-dom": "nx run @mittwald/flow-demo-remote-dom:\"$@\"",
+    "dev": "concurrently \"yarn watch $@\" \"yarn nx dev $@\"",
     "dev:init-githooks": "yarn dlx simple-git-hooks",
-    "docs": "nx run @mittwald/flow-documentation:\"$@\"",
     "format": "prettier --write '**/*.{ts,tsx,yaml,yml,json,md,mdx,js,cjs,mjs,css}'",
     "lint": "eslint .",
-    "remote-elements": "nx run @mittwald/flow-remote-elements:\"$@\"",
-    "test": "run all test"
+    "test": "run all test",
+    "watch": "nx watch --projects=\"$@\" --includeDependentProjects -- run nx run-many -t build -p \\$NX_PROJECT_NAME --exclude=\"$@\""
   },
   "simple-git-hooks": {
     "post-checkout": "yarn install",
@@ -28,7 +25,9 @@
     "pre-commit": "yarn lint"
   },
   "dependencies": {
-    "eslint-scope": "^8.2.0"
+    "eslint-scope": "^8.2.0",
+    "react": "19.0.0",
+    "react-dom": "19.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.18.0",
@@ -36,12 +35,13 @@
     "@lerna-lite/publish": "^3.11.0",
     "@nx/devkit": "20.3.1",
     "@types/eslint__js": "^8.42.3",
-    "@types/node": "^22.10.5",
+    "@types/node": "^22.10.6",
     "@types/verror": "^1.10.10",
     "@types/yieldable-json": "^2.0.2",
+    "concurrently": "^9.1.2",
     "dot-prop": "^9.0.0",
     "eslint": "^9.18.0",
-    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-json": "^4.0.1",
     "eslint-plugin-prettier": "^5.2.1",
     "fs-jetpack": "^5.1.0",
@@ -54,7 +54,7 @@
     "simple-git-hooks": "^2.11.1",
     "tsx": "^4.19.2",
     "typescript": "^5.7.3",
-    "typescript-eslint": "^8.19.1",
+    "typescript-eslint": "^8.20.0",
     "verror": "^1.10.1",
     "yieldable-json": "^2.1.0"
   },
@@ -71,9 +71,6 @@
     "@react-types/menu": {
       "unplugged": true
     },
-    "@react-types/shared": {
-      "unplugged": true
-    },
     "@types/react": {
       "unplugged": true
     },
@@ -86,6 +83,6 @@
   },
   "workspaces": [
     "packages/*",
-    "demos/*"
+    "apps/*"
   ]
 }

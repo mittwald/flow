@@ -5,7 +5,7 @@ import type {
   PropsWithChildren,
 } from "react";
 import React, { forwardRef } from "react";
-import { getFormDataObject } from "@/components/lib/getFormDataObject";
+import { getFormDataObject } from "~/components/lib/getFormDataObject";
 
 type FormProps = Pick<FormHTMLAttributes<HTMLFormElement>, "action"> & {
   onSubmit?: (data: Record<string, unknown>) => void;

@@ -3,8 +3,8 @@ import React, { Suspense } from "react";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import styles from "../../Table.module.scss";
-import { SkeletonText } from "@/components/SkeletonText";
-import { TableColumn } from "@/components/Table";
+import { SkeletonText } from "~/components/SkeletonText";
+import { TableColumn } from "~/components/Table";
 
 export interface TableCellProps
   extends Omit<Aria.CellProps, "children" | "style">,

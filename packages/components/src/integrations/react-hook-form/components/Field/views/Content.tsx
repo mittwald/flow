@@ -1,6 +1,6 @@
 import type { FC, PropsWithChildren } from "react";
 import React from "react";
-import { FieldError } from "@/components/FieldError";
+import { FieldError } from "~/components/FieldError";
 
 export interface ContentProps extends PropsWithChildren {
   errorMessage?: string;

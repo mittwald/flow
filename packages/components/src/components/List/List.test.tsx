@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { List, ListFilter, ListItem, ListStaticData } from "@/components/List";
+import { List, ListFilter, ListItem, ListStaticData } from "~/components/List";
 import type { ReactNode } from "react";
 import React from "react";
 import { test } from "vitest";

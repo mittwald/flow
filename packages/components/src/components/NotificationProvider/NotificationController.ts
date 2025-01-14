@@ -1,9 +1,9 @@
 import type { ReactElement } from "react";
 import { useRef } from "react";
-import useSelector from "@/lib/mobx/useSelector";
+import useSelector from "~/lib/mobx/useSelector";
 import { action, makeObservable, observable } from "mobx";
-import Timer from "@/lib/timer/Timer";
-import type { NotificationProps } from "@/components/Notification";
+import Timer from "~/lib/timer/Timer";
+import type { NotificationProps } from "~/components/Notification";
 
 interface NotificationMetaData {
   readonly id: number;

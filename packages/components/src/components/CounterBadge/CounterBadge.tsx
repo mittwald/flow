@@ -1,9 +1,9 @@
 import React from "react";
-import type { PropsWithElementType } from "@/lib/types/props";
+import type { PropsWithElementType } from "~/lib/types/props";
 import clsx from "clsx";
 import styles from "./CounterBadge.module.scss";
-import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
-import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import type { FlowComponentProps } from "~/lib/componentFactory/flowComponent";
+import { flowComponent } from "~/lib/componentFactory/flowComponent";
 
 export interface CounterBadgeProps
   extends PropsWithElementType<"span">,

@@ -1,5 +1,5 @@
-import type { SettingsBackend } from "@/components/SettingsProvider/backends/types";
-import type { SettingsJson } from "@/components/SettingsProvider/models/SettingsStore";
+import type { SettingsBackend } from "~/components/SettingsProvider/backends/types";
+import type { SettingsJson } from "~/components/SettingsProvider/models/SettingsStore";
 
 export class LocalStorageSettingsBackend implements SettingsBackend {
   private readonly storageKey: string;

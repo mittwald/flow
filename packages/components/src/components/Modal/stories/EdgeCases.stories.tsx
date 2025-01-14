@@ -1,16 +1,16 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Modal from "../Modal";
 import React from "react";
-import { Button } from "@/components/Button";
+import { Button } from "~/components/Button";
 import defaultMeta from "./Default.stories";
-import { Content } from "@/components/Content";
-import { Section } from "@/components/Section";
-import { Text } from "@/components/Text";
-import { ActionGroup } from "@/components/ActionGroup";
-import { dummyText } from "@/lib/dev/dummyText";
-import Heading from "@/components/Heading";
-import { Action } from "@/components/Action";
-import { useOverlayController } from "@/lib/controller";
+import { Content } from "~/components/Content";
+import { Section } from "~/components/Section";
+import { Text } from "~/components/Text";
+import { ActionGroup } from "~/components/ActionGroup";
+import { dummyText } from "~/lib/dev/dummyText";
+import Heading from "~/components/Heading";
+import { Action } from "~/components/Action";
+import { useOverlayController } from "~/lib/controller";
 
 const meta: Meta<typeof Modal> = {
   ...defaultMeta,

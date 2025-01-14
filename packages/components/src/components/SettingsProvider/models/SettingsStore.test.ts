@@ -1,4 +1,4 @@
-import { SettingsStore } from "@/components/SettingsProvider/models/SettingsStore";
+import { SettingsStore } from "~/components/SettingsProvider/models/SettingsStore";
 import z from "zod";
 
 const schema = z.array(z.string());

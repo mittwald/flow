@@ -3,10 +3,10 @@ import type { FC, PropsWithChildren, Ref } from "react";
 import React from "react";
 import styles from "./Overlay.module.scss";
 import clsx from "clsx";
-import type { OverlayController } from "@/lib/controller";
-import { useOverlayController } from "@/lib/controller";
-import OverlayContextProvider from "@/lib/controller/overlay/OverlayContextProvider";
-import type { PropsWithClassName } from "@/lib/types/props";
+import type { OverlayController } from "~/lib/controller";
+import { useOverlayController } from "~/lib/controller";
+import OverlayContextProvider from "~/lib/controller/overlay/OverlayContextProvider";
+import type { PropsWithClassName } from "~/lib/types/props";
 
 export interface OverlayProps extends PropsWithChildren, PropsWithClassName {
   ref?: Ref<HTMLDivElement>;

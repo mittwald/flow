@@ -1,5 +1,5 @@
 import type { Content } from "./Content";
-import type { ViewComponent } from "@/lib/viewComponentContext";
+import type { ViewComponent } from "~/lib/viewComponentContext";
 
 export * from "./Content";
 

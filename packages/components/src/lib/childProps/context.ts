@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import type { ChildPropsStore } from "@/lib/childProps/ChildPropsStore";
+import type { ChildPropsStore } from "~/lib/childProps/ChildPropsStore";
 
 type ChildPropsContext = Record<string, ChildPropsStore>;
 

@@ -1,8 +1,8 @@
 import type {
   SupportedSettingsBackend,
   SettingsBackend,
-} from "@/components/SettingsProvider/backends/types";
-import { LocalStorageSettingsBackend } from "@/components/SettingsProvider/backends/LocalStorageSettingsBackend";
+} from "~/components/SettingsProvider/backends/types";
+import { LocalStorageSettingsBackend } from "~/components/SettingsProvider/backends/LocalStorageSettingsBackend";
 
 export const settingsBackendFactory = (
   backend: SupportedSettingsBackend,

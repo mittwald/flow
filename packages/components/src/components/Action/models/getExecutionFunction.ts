@@ -1,7 +1,7 @@
-import type { ActionModel } from "@/components/Action/models/ActionModel";
-import type { ActionFn } from "@/components/Action";
-import type { OverlayController } from "@/lib/controller";
-import type { FlowComponentName } from "@/components/propTypes";
+import type { ActionModel } from "~/components/Action/models/ActionModel";
+import type { ActionFn } from "~/components/Action";
+import type { OverlayController } from "~/lib/controller";
+import type { FlowComponentName } from "~/components/propTypes";
 
 const voidAction = () => {
   // do nothing

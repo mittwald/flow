@@ -3,17 +3,17 @@ import React from "react";
 import styles from "./CheckboxGroup.module.scss";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
-import type { PropsContext } from "@/lib/propsContext";
-import { PropsContextProvider } from "@/lib/propsContext";
-import { FieldError } from "@/components/FieldError";
-import { CheckboxButton } from "@/components/CheckboxButton";
+import type { PropsContext } from "~/lib/propsContext";
+import { PropsContextProvider } from "~/lib/propsContext";
+import { FieldError } from "~/components/FieldError";
+import { CheckboxButton } from "~/components/CheckboxButton";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import formFieldStyles from "../FormField/FormField.module.scss";
-import type { ColumnLayoutProps } from "@/components/ColumnLayout";
-import { ColumnLayout } from "@/components/ColumnLayout";
-import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
-import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import { deepHas } from "@/lib/react/deepHas";
+import type { ColumnLayoutProps } from "~/components/ColumnLayout";
+import { ColumnLayout } from "~/components/ColumnLayout";
+import type { FlowComponentProps } from "~/lib/componentFactory/flowComponent";
+import { flowComponent } from "~/lib/componentFactory/flowComponent";
+import { deepHas } from "~/lib/react/deepHas";
 
 export interface CheckboxGroupProps
   extends PropsWithChildren<Omit<Aria.CheckboxGroupProps, "children">>,

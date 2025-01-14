@@ -1,7 +1,7 @@
 /* eslint-disable */
 /* auto-generated file */
-import React, { ComponentProps, FC } from "react";
-import { Icon } from "@/components/Icon";
+import React, { type ComponentProps, type FC } from "react";
+import { Icon } from "~/components/Icon";
 
 export const IconMittwald: FC<Omit<ComponentProps<typeof Icon>, "children">> = (
   props,

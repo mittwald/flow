@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import { Popover, PopoverTrigger } from "@/components/Popover";
-import Button from "@/components/Button";
-import { dummyText } from "@/lib/dev/dummyText";
+import { Popover, PopoverTrigger } from "~/components/Popover";
+import Button from "~/components/Button";
+import { dummyText } from "~/lib/dev/dummyText";
 import defaultMeta from "./Default.stories";
 
 const meta: Meta<typeof Popover> = {

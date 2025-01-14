@@ -1,7 +1,7 @@
 import type {
   FlowComponentName,
   FlowComponentProps as FlowComponentPropsOfName,
-} from "@/components/propTypes";
+} from "~/components/propTypes";
 import type {
   ComponentProps,
   ComponentType,
@@ -13,10 +13,10 @@ import type {
 } from "react";
 import { cloneElement } from "react";
 import React from "react";
-import type { PropsWithTunnel } from "@/lib/types/props";
+import type { PropsWithTunnel } from "~/lib/types/props";
 import { TunnelEntry } from "@mittwald/react-tunnel";
-import SlotContextProvider from "@/lib/slotContext/SlotContextProvider";
-import { useProps } from "@/lib/hooks/useProps";
+import SlotContextProvider from "~/lib/slotContext/SlotContextProvider";
+import { useProps } from "~/lib/hooks/useProps";
 
 export interface FlowComponentProps extends PropsWithTunnel {
   wrapWith?: ReactElement;

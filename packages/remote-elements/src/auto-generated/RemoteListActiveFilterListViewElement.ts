@@ -1,21 +1,21 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
+import { FlowRemoteElement } from "~/lib/FlowRemoteElement";
 import type { ActiveFilterListProps as RemoteListActiveFilterListViewElementProps } from "@mittwald/flow-react-components/List/views";
 export type { ActiveFilterListProps as RemoteListActiveFilterListViewElementProps } from "@mittwald/flow-react-components/List/views";
 
 export class RemoteListActiveFilterListViewElement extends FlowRemoteElement<RemoteListActiveFilterListViewElementProps> {
-  static get remoteAttributes() {
+  static override get remoteAttributes() {
     return [];
   }
 
-  static get remoteProperties() {
+  static override get remoteProperties() {
     return {
       someFiltersChanged: {},
     };
   }
 
-  static get remoteEvents() {
+  static override get remoteEvents() {
     return {
       clearFilters: {},
       resetFilters: {},
@@ -23,7 +23,7 @@ export class RemoteListActiveFilterListViewElement extends FlowRemoteElement<Rem
     };
   }
 
-  static get remoteSlots() {
+  static override get remoteSlots() {
     return [];
   }
 }

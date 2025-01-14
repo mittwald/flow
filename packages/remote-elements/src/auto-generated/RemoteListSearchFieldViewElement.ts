@@ -1,29 +1,28 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
+import { FlowRemoteElement } from "~/lib/FlowRemoteElement";
 import type { SearchFieldProps as RemoteListSearchFieldViewElementProps } from "@mittwald/flow-react-components/List/views";
 export type { SearchFieldProps as RemoteListSearchFieldViewElementProps } from "@mittwald/flow-react-components/List/views";
 
 export class RemoteListSearchFieldViewElement extends FlowRemoteElement<RemoteListSearchFieldViewElementProps> {
-  static get remoteAttributes() {
+  static override get remoteAttributes() {
     return [];
   }
 
-  static get remoteProperties() {
+  static override get remoteProperties() {
     return {
-      autoFocus: {},
       autoSubmit: {},
       value: {},
     };
   }
 
-  static get remoteEvents() {
+  static override get remoteEvents() {
     return {
       change: {},
     };
   }
 
-  static get remoteSlots() {
+  static override get remoteSlots() {
     return [];
   }
 }

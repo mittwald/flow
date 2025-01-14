@@ -13,14 +13,14 @@ export function generateRemoteReactComponentFile(c: ComponentDoc) {
       .sort()
       .filter((propName) => propName.startsWith("on"))
       .map((propName) => {
-        const formattedName = propName[2].toLowerCase() + propName.slice(3);
+        const formattedName = propName[2]?.toLowerCase() + propName.slice(3);
         return `${propName}: { event: "${formattedName}" } as never`;
       })
       .join(",\n"),
   };
 
   return `\
-    import createFlowRemoteComponent from "@/lib/createFlowRemoteComponent";
+    import createFlowRemoteComponent from "~/lib/createFlowRemoteComponent";
     import { ${t.remoteComponentName} } from "@mittwald/flow-remote-elements";
 
     export const ${t.name} = createFlowRemoteComponent("${remoteElementTagNameOf(c)}", "${t.name}", ${t.remoteComponentName}, {

@@ -1,13 +1,13 @@
 import React from "react";
-import { Align } from "@/components/Align";
-import { TextField } from "@/components/TextField";
-import { Label } from "@/components/Label";
-import { Button } from "@/components/Button";
+import { Align } from "~/components/Align";
+import { TextField } from "~/components/TextField";
+import { Label } from "~/components/Label";
+import { Button } from "~/components/Button";
 import type { Meta, StoryObj } from "@storybook/react";
 import defaultMeta from "./Default.stories";
-import { NumberField } from "@/components/NumberField";
-import { TextArea } from "@/components/TextArea";
-import { Option, Select } from "@/components/Select";
+import { NumberField } from "~/components/NumberField";
+import { TextArea } from "~/components/TextArea";
+import { Option, Select } from "~/components/Select";
 
 const meta: Meta<typeof Align> = {
   ...defaultMeta,

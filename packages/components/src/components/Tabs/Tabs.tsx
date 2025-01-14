@@ -4,9 +4,9 @@ import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import styles from "./Tabs.module.scss";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
-import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
-import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import { TabList } from "@/components/Tabs/components/TabList";
+import type { FlowComponentProps } from "~/lib/componentFactory/flowComponent";
+import { flowComponent } from "~/lib/componentFactory/flowComponent";
+import { TabList } from "~/components/Tabs/components/TabList";
 
 export interface TabsProps
   extends Omit<Aria.TabsProps, "children">,

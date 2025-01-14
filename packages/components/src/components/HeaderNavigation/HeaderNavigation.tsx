@@ -4,11 +4,11 @@ import {
   dynamic,
   type PropsContext,
   PropsContextProvider,
-} from "@/lib/propsContext";
+} from "~/lib/propsContext";
 import clsx from "clsx";
 import styles from "./HeaderNavigation.module.scss";
-import type { PropsWithClassName } from "@/lib/types/props";
-import { Text } from "@/components/Text";
+import type { PropsWithClassName } from "~/lib/types/props";
+import { Text } from "~/components/Text";
 
 export interface HeaderNavigationProps
   extends PropsWithChildren<ComponentProps<"nav">>,

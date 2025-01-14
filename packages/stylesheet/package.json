@@ -19,10 +19,5 @@
     "@mittwald/flow-react-components": "workspace:*",
     "resolve-package-path": "^4.0.3",
     "rimraf": "^6.0.1"
-  },
-  "nx": {
-    "implicitDependencies": [
-      "@mittwald/flow-react-components"
-    ]
   }
 }

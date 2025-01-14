@@ -1,8 +1,8 @@
 import type {
   FlowComponentName,
   FlowComponentPropName,
-} from "@/components/propTypes";
-import { isFlowComponentName } from "@/lib/propsContext/isFlowComponentName";
+} from "~/components/propTypes";
+import { isFlowComponentName } from "~/lib/propsContext/isFlowComponentName";
 
 export function isFlowComponentProp<C extends FlowComponentName>(
   something: unknown,

@@ -4,7 +4,7 @@ import type { RemoteComponentRendererProps } from "@remote-dom/react/host";
 import { createRemoteComponentRenderer } from "@remote-dom/react/host";
 import { mapValues } from "remeda";
 import { mapEventHandler } from "@mittwald/flow-remote-core";
-import { isEventProp } from "@/lib/propClassifiers";
+import { isEventProp } from "~/lib/propClassifiers";
 
 const mapProperty = (val: unknown, key: string) => {
   if (isEventProp(key, val)) {

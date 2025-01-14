@@ -3,10 +3,10 @@ import React from "react";
 import styles from "./Item.module.scss";
 import type { Key } from "react-aria-components";
 import * as Aria from "react-aria-components";
-import { useList } from "@/components/List/hooks/useList";
-import { useGridItemProps } from "@/components/List/components/Items/components/Item/hooks/useGridItemProps";
-import ItemView from "@/components/List/views/Items/ItemContainer";
-import { useViewComponents } from "@/lib/viewComponentContext/useViewComponents";
+import { useList } from "~/components/List/hooks/useList";
+import { useGridItemProps } from "~/components/List/components/Items/components/Item/hooks/useGridItemProps";
+import ItemView from "~/components/List/views/Items/ItemContainer";
+import { useViewComponents } from "~/lib/viewComponentContext/useViewComponents";
 
 interface Props extends PropsWithChildren {
   id: Key;

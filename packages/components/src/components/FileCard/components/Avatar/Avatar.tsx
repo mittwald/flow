@@ -1,9 +1,9 @@
 import type { FC } from "react";
 import React from "react";
 import IconImage from "../../../Icon/components/icons/IconImage";
-import { IconFile } from "@/components/Icon/components/icons";
-import { Avatar as AvatarComponent } from "@/components/Avatar";
-import { Image } from "@/components/Image";
+import { IconFile } from "~/components/Icon/components/icons";
+import { Avatar as AvatarComponent } from "~/components/Avatar";
+import { Image } from "~/components/Image";
 
 interface Props {
   type?: string;

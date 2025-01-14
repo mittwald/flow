@@ -3,7 +3,7 @@ import React from "react";
 import styles from "./Items.module.css";
 import clsx from "clsx";
 import * as Aria from "react-aria-components";
-import type { ListSupportedComponentProps } from "@/components/List/model/types";
+import type { ListSupportedComponentProps } from "~/components/List/model/types";
 
 export interface ItemsProps
   extends PropsWithChildren,

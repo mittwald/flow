@@ -3,8 +3,8 @@ import type { RemoteComponentRendererProps } from "@remote-dom/react/host";
 import { RemoteReceiver, RemoteRootRenderer } from "@remote-dom/react/host";
 import type { ComponentType, CSSProperties, FC } from "react";
 import React, { useMemo } from "react";
-import { components } from "@/components";
-import type { RemoteComponentsMap } from "@/lib/types";
+import { components } from "~/components";
+import type { RemoteComponentsMap } from "~/lib/types";
 import { reduce } from "remeda";
 import { connectRemoteIframeRef } from "@mittwald/flow-remote-core";
 

@@ -1,10 +1,10 @@
 import type { FC, PropsWithChildren } from "react";
 import React, { Children } from "react";
-import { Text } from "@/components/Text";
-import { IconSorting } from "@/components/Icon/components/icons";
-import { Button } from "@/components/Button";
-import type { ContextMenuProps } from "@/components/ContextMenu";
-import { ContextMenu, ContextMenuTrigger } from "@/components/ContextMenu";
+import { Text } from "~/components/Text";
+import { IconSorting } from "~/components/Icon/components/icons";
+import { Button } from "~/components/Button";
+import type { ContextMenuProps } from "~/components/ContextMenu";
+import { ContextMenu, ContextMenuTrigger } from "~/components/ContextMenu";
 
 export interface SortingPickerProps
   extends PropsWithChildren,

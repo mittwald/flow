@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
+import { viewComponentContext } from "~/lib/viewComponentContext/viewComponentContext";
 
 export const useViewComponents = <T extends keyof FlowViewComponents>(
   name: T,

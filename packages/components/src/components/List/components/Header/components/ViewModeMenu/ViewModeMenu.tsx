@@ -1,8 +1,8 @@
 import type { FC } from "react";
 import React from "react";
-import { useList } from "@/components/List";
-import type { ListViewMode } from "@/components/List/model/types";
-import { ViewModeMenu as View } from "@/components/List/views/Header/ViewModeMenu";
+import { useList } from "~/components/List";
+import type { ListViewMode } from "~/components/List/model/types";
+import { ViewModeMenu as View } from "~/components/List/views/Header/ViewModeMenu";
 
 export const ViewModeMenu: FC = () => {
   const list = useList();

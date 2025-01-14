@@ -1,28 +1,28 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
+import { FlowRemoteElement } from "~/lib/FlowRemoteElement";
 import type { ViewModeMenuProps as RemoteListViewModeMenuViewElementProps } from "@mittwald/flow-react-components/List/views";
 export type { ViewModeMenuProps as RemoteListViewModeMenuViewElementProps } from "@mittwald/flow-react-components/List/views";
 
 export class RemoteListViewModeMenuViewElement extends FlowRemoteElement<RemoteListViewModeMenuViewElementProps> {
-  static get remoteAttributes() {
+  static override get remoteAttributes() {
     return [];
   }
 
-  static get remoteProperties() {
+  static override get remoteProperties() {
     return {
       availableViewModes: {},
       selectedViewMode: {},
     };
   }
 
-  static get remoteEvents() {
+  static override get remoteEvents() {
     return {
       viewModeSelected: {},
     };
   }
 
-  static get remoteSlots() {
+  static override get remoteSlots() {
     return [];
   }
 }

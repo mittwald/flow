@@ -1,8 +1,8 @@
 import type { FC } from "react";
 import React, { cloneElement } from "react";
-import { useList } from "@/components/List/hooks/useList";
-import { SkeletonView } from "@/components/List/components/Items/components/Item/components/SkeletonView/SkeletonView";
-import { ItemContainer } from "@/components/List/components/Items/components/Item/Item";
+import { useList } from "~/components/List/hooks/useList";
+import { SkeletonView } from "~/components/List/components/Items/components/Item/components/SkeletonView/SkeletonView";
+import { ItemContainer } from "~/components/List/components/Items/components/Item/Item";
 
 export const FallbackItems: FC = () => {
   const list = useList();

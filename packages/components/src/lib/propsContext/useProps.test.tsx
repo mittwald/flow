@@ -10,12 +10,12 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import useProps from "@/lib/hooks/useProps";
+import useProps from "~/lib/hooks/useProps";
 import { render, screen } from "@testing-library/react";
-import PropsContextProvider from "@/lib/propsContext/PropsContextProvider";
-import dynamic from "@/lib/propsContext/dynamicProps/dynamic";
-import type { PropsContext } from "@/lib/propsContext/types";
-import type { TestComponentProps } from "@/lib/propsContext/test";
+import PropsContextProvider from "~/lib/propsContext/PropsContextProvider";
+import dynamic from "~/lib/propsContext/dynamicProps/dynamic";
+import type { PropsContext } from "~/lib/propsContext/types";
+import type { TestComponentProps } from "~/lib/propsContext/test";
 import { beforeEach, describe, expect, test } from "vitest";
 
 let renderCount: number;

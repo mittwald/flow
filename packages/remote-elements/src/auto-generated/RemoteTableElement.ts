@@ -1,15 +1,15 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
+import { FlowRemoteElement } from "~/lib/FlowRemoteElement";
 import type { TableProps as RemoteTableElementProps } from "@mittwald/flow-react-components/Table";
 export type { TableProps as RemoteTableElementProps } from "@mittwald/flow-react-components/Table";
 
 export class RemoteTableElement extends FlowRemoteElement<RemoteTableElementProps> {
-  static get remoteAttributes() {
+  static override get remoteAttributes() {
     return [];
   }
 
-  static get remoteProperties() {
+  static override get remoteProperties() {
     return {
       "aria-describedby": {},
       "aria-details": {},
@@ -29,7 +29,7 @@ export class RemoteTableElement extends FlowRemoteElement<RemoteTableElementProp
     };
   }
 
-  static get remoteEvents() {
+  static override get remoteEvents() {
     return {
       rowAction: {},
       scroll: {},
@@ -38,7 +38,7 @@ export class RemoteTableElement extends FlowRemoteElement<RemoteTableElementProp
     };
   }
 
-  static get remoteSlots() {
+  static override get remoteSlots() {
     return [];
   }
 }

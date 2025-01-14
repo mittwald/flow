@@ -5,7 +5,7 @@ import React from "react";
 import {
   storyBackgroundDark,
   storyBackgroundLight,
-} from "@/lib/dev/storyBackgrounds";
+} from "~/lib/dev/storyBackgrounds";
 
 const meta: Meta<typeof Button> = {
   ...defaultMeta,

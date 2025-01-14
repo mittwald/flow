@@ -1,5 +1,5 @@
 import type { ComponentType } from "react";
-import type { TableRowShape } from "@/components/List/model/table/types";
+import type { TableRowShape } from "~/components/List/model/table/types";
 
 type Props<T> = Omit<TableRowShape<T>, "cells">;
 

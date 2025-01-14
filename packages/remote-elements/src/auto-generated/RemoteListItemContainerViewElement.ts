@@ -1,15 +1,15 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
+import { FlowRemoteElement } from "~/lib/FlowRemoteElement";
 import type { ItemContainerProps as RemoteListItemContainerViewElementProps } from "@mittwald/flow-react-components/List/views";
 export type { ItemContainerProps as RemoteListItemContainerViewElementProps } from "@mittwald/flow-react-components/List/views";
 
 export class RemoteListItemContainerViewElement extends FlowRemoteElement<RemoteListItemContainerViewElementProps> {
-  static get remoteAttributes() {
+  static override get remoteAttributes() {
     return [];
   }
 
-  static get remoteProperties() {
+  static override get remoteProperties() {
     return {
       href: {},
       id: {},
@@ -17,13 +17,13 @@ export class RemoteListItemContainerViewElement extends FlowRemoteElement<Remote
     };
   }
 
-  static get remoteEvents() {
+  static override get remoteEvents() {
     return {
       action: {},
     };
   }
 
-  static get remoteSlots() {
+  static override get remoteSlots() {
     return [];
   }
 }

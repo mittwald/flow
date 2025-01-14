@@ -3,9 +3,9 @@ import React from "react";
 import * as Aria from "react-aria-components";
 import styles from "./MenuItem.module.scss";
 import clsx from "clsx";
-import { MenuItemContent } from "@/components/MenuItem/components/MenuItemContent";
-import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
-import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import { MenuItemContent } from "~/components/MenuItem/components/MenuItemContent";
+import type { FlowComponentProps } from "~/lib/componentFactory/flowComponent";
+import { flowComponent } from "~/lib/componentFactory/flowComponent";
 
 export interface MenuItemProps
   extends Omit<Aria.MenuItemProps, "children">,

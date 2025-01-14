@@ -1,26 +1,23 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
+import { FlowRemoteElement } from "~/lib/FlowRemoteElement";
 import type { ModalTriggerProps as RemoteModalTriggerElementProps } from "@mittwald/flow-react-components/Modal";
 export type { ModalTriggerProps as RemoteModalTriggerElementProps } from "@mittwald/flow-react-components/Modal";
 
 export class RemoteModalTriggerElement extends FlowRemoteElement<RemoteModalTriggerElementProps> {
-  static get remoteAttributes() {
+  static override get remoteAttributes() {
     return [];
   }
 
-  static get remoteProperties() {
-    return {
-      controller: {},
-      isDefaultOpen: {},
-    };
-  }
-
-  static get remoteEvents() {
+  static override get remoteProperties() {
     return {};
   }
 
-  static get remoteSlots() {
+  static override get remoteEvents() {
+    return {};
+  }
+
+  static override get remoteSlots() {
     return [];
   }
 }

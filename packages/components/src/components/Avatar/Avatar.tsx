@@ -2,14 +2,14 @@ import type { PropsWithChildren } from "react";
 import React from "react";
 import styles from "./Avatar.module.scss";
 import clsx from "clsx";
-import type { PropsContext } from "@/lib/propsContext";
-import { ClearPropsContext, PropsContextProvider } from "@/lib/propsContext";
-import { getColorFromChildren } from "@/components/Avatar/lib/getColorFromChildren";
-import type { PropsWithClassName } from "@/lib/types/props";
-import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
-import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import { deepHas } from "@/lib/react/deepHas";
-import { Initials } from "@/components/Initials";
+import type { PropsContext } from "~/lib/propsContext";
+import { ClearPropsContext, PropsContextProvider } from "~/lib/propsContext";
+import { getColorFromChildren } from "~/components/Avatar/lib/getColorFromChildren";
+import type { PropsWithClassName } from "~/lib/types/props";
+import type { FlowComponentProps } from "~/lib/componentFactory/flowComponent";
+import { flowComponent } from "~/lib/componentFactory/flowComponent";
+import { deepHas } from "~/lib/react/deepHas";
+import { Initials } from "~/components/Initials";
 
 export const avatarColors = [
   "blue",

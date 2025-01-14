@@ -1,15 +1,15 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
+import { FlowRemoteElement } from "~/lib/FlowRemoteElement";
 import type { InlineCodeProps as RemoteInlineCodeElementProps } from "@mittwald/flow-react-components/InlineCode";
 export type { InlineCodeProps as RemoteInlineCodeElementProps } from "@mittwald/flow-react-components/InlineCode";
 
 export class RemoteInlineCodeElement extends FlowRemoteElement<RemoteInlineCodeElementProps> {
-  static get remoteAttributes() {
+  static override get remoteAttributes() {
     return [];
   }
 
-  static get remoteProperties() {
+  static override get remoteProperties() {
     return {
       about: {},
       accessKey: {},
@@ -118,7 +118,7 @@ export class RemoteInlineCodeElement extends FlowRemoteElement<RemoteInlineCodeE
     };
   }
 
-  static get remoteEvents() {
+  static override get remoteEvents() {
     return {
       abort: {},
       abortCapture: {},
@@ -291,7 +291,7 @@ export class RemoteInlineCodeElement extends FlowRemoteElement<RemoteInlineCodeE
     };
   }
 
-  static get remoteSlots() {
+  static override get remoteSlots() {
     return [];
   }
 }

@@ -4,7 +4,7 @@ import styles from "./Item.module.scss";
 import clsx from "clsx";
 import type { Key } from "react-aria-components";
 import * as Aria from "react-aria-components";
-import { SkeletonView } from "@/components/List/components/Items/components/Item/components/SkeletonView/SkeletonView";
+import { SkeletonView } from "~/components/List/components/Items/components/Item/components/SkeletonView/SkeletonView";
 
 export interface ItemContainerProps extends PropsWithChildren {
   id: Key;

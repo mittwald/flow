@@ -3,11 +3,11 @@ import React from "react";
 import {
   ContextualHelp,
   ContextualHelpTrigger,
-} from "@/components/ContextualHelp";
-import { Heading } from "@/components/Heading";
-import { Text } from "@/components/Text";
-import { Link } from "@/components/Link";
-import { Button } from "@/components/Button";
+} from "~/components/ContextualHelp";
+import { Heading } from "~/components/Heading";
+import { Text } from "~/components/Text";
+import { Link } from "~/components/Link";
+import { Button } from "~/components/Button";
 
 const meta: Meta<typeof ContextualHelp> = {
   title: "Overlays/ContextualHelp",

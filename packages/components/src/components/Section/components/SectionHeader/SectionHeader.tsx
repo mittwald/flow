@@ -2,9 +2,9 @@ import type { FC, PropsWithChildren } from "react";
 import React from "react";
 import styles from "./SectionHeader.module.scss";
 import clsx from "clsx";
-import type { PropsContext } from "@/lib/propsContext";
-import { PropsContextProvider } from "@/lib/propsContext";
-import type { PropsWithClassName } from "@/lib/types/props";
+import type { PropsContext } from "~/lib/propsContext";
+import { PropsContextProvider } from "~/lib/propsContext";
+import type { PropsWithClassName } from "~/lib/types/props";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 
 export type SectionHeaderProps = PropsWithChildren & PropsWithClassName;

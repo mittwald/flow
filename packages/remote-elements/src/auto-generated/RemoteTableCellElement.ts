@@ -1,15 +1,15 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
+import { FlowRemoteElement } from "~/lib/FlowRemoteElement";
 import type { TableCellProps as RemoteTableCellElementProps } from "@mittwald/flow-react-components/Table";
 export type { TableCellProps as RemoteTableCellElementProps } from "@mittwald/flow-react-components/Table";
 
 export class RemoteTableCellElement extends FlowRemoteElement<RemoteTableCellElementProps> {
-  static get remoteAttributes() {
+  static override get remoteAttributes() {
     return [];
   }
 
-  static get remoteProperties() {
+  static override get remoteProperties() {
     return {
       id: {},
       rowHeader: {},
@@ -17,11 +17,11 @@ export class RemoteTableCellElement extends FlowRemoteElement<RemoteTableCellEle
     };
   }
 
-  static get remoteEvents() {
+  static override get remoteEvents() {
     return {};
   }
 
-  static get remoteSlots() {
+  static override get remoteSlots() {
     return [];
   }
 }

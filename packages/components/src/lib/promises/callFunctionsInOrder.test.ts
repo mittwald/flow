@@ -1,5 +1,5 @@
 import { beforeEach, expect, test } from "vitest";
-import { callFunctionsInOrder } from "@/lib/promises/callFunctionsInOrder";
+import { callFunctionsInOrder } from "~/lib/promises/callFunctionsInOrder";
 
 let history: string[];
 

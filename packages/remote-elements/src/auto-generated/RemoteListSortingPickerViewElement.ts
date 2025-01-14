@@ -1,28 +1,28 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
+import { FlowRemoteElement } from "~/lib/FlowRemoteElement";
 import type { SortingPickerProps as RemoteListSortingPickerViewElementProps } from "@mittwald/flow-react-components/List/views";
 export type { SortingPickerProps as RemoteListSortingPickerViewElementProps } from "@mittwald/flow-react-components/List/views";
 
 export class RemoteListSortingPickerViewElement extends FlowRemoteElement<RemoteListSortingPickerViewElementProps> {
-  static get remoteAttributes() {
+  static override get remoteAttributes() {
     return [];
   }
 
-  static get remoteProperties() {
+  static override get remoteProperties() {
     return {
       buttonText: {},
       selectedKeys: {},
     };
   }
 
-  static get remoteEvents() {
+  static override get remoteEvents() {
     return {
       action: {},
     };
   }
 
-  static get remoteSlots() {
+  static override get remoteSlots() {
     return [];
   }
 }

@@ -1,9 +1,9 @@
 import locales from "../../locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
-import { Text } from "@/components/Text";
+import { Text } from "~/components/Text";
 import type { FC } from "react";
 import React from "react";
-import { Skeleton } from "@/components/Skeleton";
+import { Skeleton } from "~/components/Skeleton";
 
 export interface PaginationInfosProps {
   totalItemsCount: number;

@@ -4,12 +4,12 @@ import type {
   ColumnSort,
   SortDirection,
 } from "@tanstack/react-table";
-import type List from "@/components/List/model/List";
+import type List from "~/components/List/model/List";
 import type {
   SortingDefaultMode,
   SortingShape,
-} from "@/components/List/model/sorting/types";
-import type { PropertyName } from "@/components/List/model/types";
+} from "~/components/List/model/sorting/types";
+import type { PropertyName } from "~/components/List/model/types";
 
 export class Sorting<T> {
   public readonly list: List<T>;

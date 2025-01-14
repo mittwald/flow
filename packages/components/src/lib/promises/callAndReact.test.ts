@@ -1,5 +1,5 @@
 import { test, expect, vi, beforeEach } from "vitest";
-import { callAndReact } from "@/lib/promises/callAndReact";
+import { callAndReact } from "~/lib/promises/callAndReact";
 
 let history: string[];
 

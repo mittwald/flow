@@ -3,9 +3,9 @@ import dts from "vite-plugin-dts";
 import baseConfig from "./vite.config";
 import { externalizeDeps } from "vite-plugin-externalize-deps";
 
-export default defineConfig(
-  // @todo: fix this type cast
-  mergeConfig(baseConfig, {
+export default mergeConfig(
+  baseConfig,
+  defineConfig({
     plugins: [
       externalizeDeps(),
       dts({

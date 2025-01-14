@@ -5,8 +5,8 @@ import styles from "./Breadcrumb.module.scss";
 import clsx from "clsx";
 import type { BreadcrumbItemProps } from "./components/BreadcrumbItem";
 import { BreadcrumbItem } from "./components/BreadcrumbItem";
-import type { PropsContext } from "@/lib/propsContext";
-import { PropsContextProvider } from "@/lib/propsContext";
+import type { PropsContext } from "~/lib/propsContext";
+import { PropsContextProvider } from "~/lib/propsContext";
 
 export interface BreadcrumbProps
   extends Omit<Aria.BreadcrumbsProps<BreadcrumbItemProps>, "children">,

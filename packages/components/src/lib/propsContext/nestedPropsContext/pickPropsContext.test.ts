@@ -1,6 +1,6 @@
 import { expect, test } from "vitest";
-import { pickPropsContext } from "@/lib/propsContext/nestedPropsContext/pickPropsContext";
-import type { ComponentPropsContext } from "@/lib/propsContext/types";
+import { pickPropsContext } from "~/lib/propsContext/nestedPropsContext/pickPropsContext";
+import type { ComponentPropsContext } from "~/lib/propsContext/types";
 
 test.each<[ComponentPropsContext<"Text">, ComponentPropsContext<"Text">]>([
   [{ className: "bar" }, {}],

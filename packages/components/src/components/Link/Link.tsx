@@ -1,15 +1,15 @@
 import type { ComponentProps, ComponentType, PropsWithChildren } from "react";
 import React, { useContext } from "react";
 import * as Aria from "react-aria-components";
-import type { PropsContext } from "@/lib/propsContext";
-import { ClearPropsContext, PropsContextProvider } from "@/lib/propsContext";
+import type { PropsContext } from "~/lib/propsContext";
+import { ClearPropsContext, PropsContextProvider } from "~/lib/propsContext";
 import styles from "./Link.module.scss";
 import clsx from "clsx";
-import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
-import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import type { PropsWithClassName } from "@/lib/types/props";
-import { linkContext } from "@/components/Link/context";
-import { LinkIcon } from "@/components/Link/components/LinkIcon";
+import type { FlowComponentProps } from "~/lib/componentFactory/flowComponent";
+import { flowComponent } from "~/lib/componentFactory/flowComponent";
+import type { PropsWithClassName } from "~/lib/types/props";
+import { linkContext } from "~/components/Link/context";
+import { LinkIcon } from "~/components/Link/components/LinkIcon";
 
 export interface LinkProps
   extends PropsWithChildren<

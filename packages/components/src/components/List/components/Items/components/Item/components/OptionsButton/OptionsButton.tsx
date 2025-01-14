@@ -1,11 +1,11 @@
 import type { FC, PropsWithChildren } from "react";
 import React from "react";
-import { Button } from "@/components/Button";
-import { IconContextMenu } from "@/components/Icon/components/icons";
-import { ContextMenuTrigger } from "@/components/ContextMenu";
+import { Button } from "~/components/Button";
+import { IconContextMenu } from "~/components/Icon/components/icons";
+import { ContextMenuTrigger } from "~/components/ContextMenu";
 import locales from "../../../../../../locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
-import type { PropsWithClassName } from "@/lib/types/props";
+import type { PropsWithClassName } from "~/lib/types/props";
 
 interface Props extends PropsWithChildren, PropsWithClassName {}
 

@@ -1,15 +1,15 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
+import { FlowRemoteElement } from "~/lib/FlowRemoteElement";
 import type { NavigationGroupProps as RemoteNavigationGroupElementProps } from "@mittwald/flow-react-components/Navigation";
 export type { NavigationGroupProps as RemoteNavigationGroupElementProps } from "@mittwald/flow-react-components/Navigation";
 
 export class RemoteNavigationGroupElement extends FlowRemoteElement<RemoteNavigationGroupElementProps> {
-  static get remoteAttributes() {
+  static override get remoteAttributes() {
     return [];
   }
 
-  static get remoteProperties() {
+  static override get remoteProperties() {
     return {
       about: {},
       accessKey: {},
@@ -119,7 +119,7 @@ export class RemoteNavigationGroupElement extends FlowRemoteElement<RemoteNaviga
     };
   }
 
-  static get remoteEvents() {
+  static override get remoteEvents() {
     return {
       abort: {},
       abortCapture: {},
@@ -292,7 +292,7 @@ export class RemoteNavigationGroupElement extends FlowRemoteElement<RemoteNaviga
     };
   }
 
-  static get remoteSlots() {
+  static override get remoteSlots() {
     return [];
   }
 }

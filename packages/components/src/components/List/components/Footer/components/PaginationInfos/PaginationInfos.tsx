@@ -1,8 +1,8 @@
 import type { FC } from "react";
 import React from "react";
-import { useList } from "@/components/List/hooks/useList";
-import PaginationInfosView from "@/components/List/views/Footer/PaginationInfos";
-import { useViewComponents } from "@/lib/viewComponentContext/useViewComponents";
+import { useList } from "~/components/List/hooks/useList";
+import PaginationInfosView from "~/components/List/views/Footer/PaginationInfos";
+import { useViewComponents } from "~/lib/viewComponentContext/useViewComponents";
 
 export const PaginationInfos: FC = () => {
   const { PaginationInfos: View = PaginationInfosView } =

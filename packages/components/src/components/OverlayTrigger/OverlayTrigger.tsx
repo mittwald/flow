@@ -1,11 +1,11 @@
 import type { ComponentType, FC, PropsWithChildren, ReactNode } from "react";
 import React from "react";
-import { OverlayController } from "@/lib/controller";
-import type { PropsContext } from "@/lib/propsContext";
-import { PropsContextProvider } from "@/lib/propsContext";
-import type { FlowComponentName } from "@/components/propTypes";
-import OverlayContextProvider from "@/lib/controller/overlay/OverlayContextProvider";
-import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { OverlayController } from "~/lib/controller";
+import type { PropsContext } from "~/lib/propsContext";
+import { PropsContextProvider } from "~/lib/propsContext";
+import type { FlowComponentName } from "~/components/propTypes";
+import OverlayContextProvider from "~/lib/controller/overlay/OverlayContextProvider";
+import type { FlowComponentProps } from "~/lib/componentFactory/flowComponent";
 
 type AriaComponentType = ComponentType<{
   isOpen?: boolean;

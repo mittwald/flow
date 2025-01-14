@@ -23,23 +23,23 @@
   },
   "scripts": {
     "build": "run vite build --config vite.build.config.ts",
-    "build:deps:watch": "run -T build:deps:watch @mittwald/flow-react-components",
     "clean": "rimraf dist",
     "test": "",
     "test:compile": "run tsc --noEmit"
   },
   "dependencies": {
     "@quilted/threads": "^3.1.2",
-    "remeda": "^2.19.0"
+    "remeda": "^2.19.1"
   },
   "devDependencies": {
+    "@mittwald/typescript-config": "workspace:*",
     "@remote-dom/core": "^1.5.2",
-    "@types/node": "^22.10.5",
+    "@types/node": "^22.10.6",
     "nx": "^20.3.1",
     "prettier": "^3.4.2",
     "rimraf": "^6.0.1",
     "typescript": "^5.7.3",
-    "vite": "^5.4.11",
+    "vite": "^6.0.7",
     "vite-plugin-checker": "^0.8.0",
     "vite-plugin-dts": "^4.5.0",
     "vite-plugin-externalize-deps": "^0.8.0"

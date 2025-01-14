@@ -1,13 +1,13 @@
 import { expectTypeOf, test, vitest } from "vitest";
-import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "~/lib/componentFactory/flowComponent";
 import type { ComponentType, Ref, PropsWithChildren } from "react";
 import React from "react";
 import { render } from "@testing-library/react";
 import { HTMLDivElement } from "happy-dom";
-import type { FlowComponentName } from "@/components/propTypes";
-import { propsContextSupportingComponents } from "@/components/propTypes";
-import type { PropsWithTunnel } from "@/lib/types/props";
-import { PropsContextProvider } from "@/lib/propsContext";
+import type { FlowComponentName } from "~/components/propTypes";
+import { propsContextSupportingComponents } from "~/components/propTypes";
+import type { PropsWithTunnel } from "~/lib/types/props";
+import { PropsContextProvider } from "~/lib/propsContext";
 
 const getComponentName = (name: string): FlowComponentName => {
   propsContextSupportingComponents.push(name as FlowComponentName);
@@ -55,7 +55,7 @@ const TestComponent2 = flowComponent(
 test("ref is forwarded to component", () => {
   const ref = vitest.fn();
   render(<TestComponent1 ref={ref} />);
-  const refArg = ref.mock.calls[0][0];
+  const refArg = ref.mock.calls[0]?.[0];
   expectTypeOf(refArg).toMatchTypeOf(HTMLDivElement);
 });
 

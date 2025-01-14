@@ -1,6 +1,6 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import createFlowRemoteComponent from "@/lib/createFlowRemoteComponent";
+import createFlowRemoteComponent from "~/lib/createFlowRemoteComponent";
 import { RemoteListItemsViewElement } from "@mittwald/flow-remote-elements";
 
 export const ListItemsView = createFlowRemoteComponent(
@@ -12,8 +12,6 @@ export const ListItemsView = createFlowRemoteComponent(
       wrapper: false,
     },
 
-    eventProps: {
-      onSelectionChange: { event: "selectionChange" } as never,
-    },
+    eventProps: {},
   },
 );

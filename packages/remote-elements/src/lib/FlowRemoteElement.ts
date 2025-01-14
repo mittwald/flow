@@ -1,7 +1,7 @@
 import type { EmptyObject } from "type-fest";
 import { RemoteElement, RemoteEvent } from "@remote-dom/core/elements";
 import { isObjectType, omit } from "remeda";
-import { getObjectKeysIncludingProtoTypes } from "@/lib/getObjectKeysIncludingProtoTypes";
+import { getObjectKeysIncludingProtoTypes } from "~/lib/getObjectKeysIncludingProtoTypes";
 
 // eslint-disable-next-line
 type ExplicitAny = any;
@@ -20,7 +20,7 @@ export class FlowRemoteElement<
     EventListenerOrEventListenerObject
   >();
 
-  public addEventListener(
+  public override addEventListener(
     type: string,
     listener: EventListenerOrEventListenerObject,
     options?: boolean | AddEventListenerOptions,
@@ -54,7 +54,7 @@ export class FlowRemoteElement<
     return super.addEventListener(type, wrappedEventListener, options);
   }
 
-  public removeEventListener(
+  public override removeEventListener(
     type: string,
     listener: EventListenerOrEventListenerObject,
     options?: boolean | EventListenerOptions,

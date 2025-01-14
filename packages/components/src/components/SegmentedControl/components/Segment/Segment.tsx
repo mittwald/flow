@@ -3,10 +3,10 @@ import React from "react";
 import styles from "./Segment.module.scss";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
-import { IconCheck } from "@/components/Icon/components/icons";
-import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
-import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import { ClearPropsContext } from "@/lib/propsContext";
+import { IconCheck } from "~/components/Icon/components/icons";
+import type { FlowComponentProps } from "~/lib/componentFactory/flowComponent";
+import { flowComponent } from "~/lib/componentFactory/flowComponent";
+import { ClearPropsContext } from "~/lib/propsContext";
 
 export interface SegmentProps
   extends PropsWithChildren<Omit<Aria.RadioProps, "children">>,

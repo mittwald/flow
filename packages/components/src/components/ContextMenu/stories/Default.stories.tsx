@@ -4,18 +4,18 @@ import ContextMenu, {
   ContextMenuSection,
   ContextMenuTrigger,
   MenuItem,
-} from "@/components/ContextMenu";
-import { Button } from "@/components/Button";
-import { Separator } from "@/components/Separator";
-import { Heading } from "@/components/Heading";
+} from "~/components/ContextMenu";
+import { Button } from "~/components/Button";
+import { Separator } from "~/components/Separator";
+import { Heading } from "~/components/Heading";
 import {
   IconCamera,
   IconEmail,
   IconServer,
-} from "@/components/Icon/components/icons";
-import { Text } from "@/components/Text";
-import { Avatar } from "@/components/Avatar";
-import { Initials } from "@/components/Initials";
+} from "~/components/Icon/components/icons";
+import { Text } from "~/components/Text";
+import { Avatar } from "~/components/Avatar";
+import { Initials } from "~/components/Initials";
 
 const meta: Meta<typeof ContextMenu> = {
   title: "Actions/ContextMenu",

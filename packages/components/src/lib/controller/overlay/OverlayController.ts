@@ -1,5 +1,5 @@
 import { action, makeObservable, observable } from "mobx";
-import useSelector from "@/lib/mobx/useSelector";
+import useSelector from "~/lib/mobx/useSelector";
 import { useRef } from "react";
 
 type OpenStateHandler = () => void;

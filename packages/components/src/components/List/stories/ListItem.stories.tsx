@@ -2,19 +2,19 @@ import type { Meta, StoryObj } from "@storybook/react";
 import type List from "../List";
 import type { FC, PropsWithChildren } from "react";
 import React from "react";
-import { Heading } from "@/components/Heading";
-import { Text } from "@/components/Text";
-import { ContextMenu, MenuItem } from "@/components/ContextMenu";
+import { Heading } from "~/components/Heading";
+import { Text } from "~/components/Text";
+import { ContextMenu, MenuItem } from "~/components/ContextMenu";
 import defaultMeta from "./Default.stories";
-import { Avatar } from "@/components/Avatar";
-import { dummyText } from "@/lib/dev/dummyText";
-import Image from "@/components/Image";
-import { Content } from "@/components/Content";
-import { AlertBadge } from "@/components/AlertBadge";
-import { ListItemView } from "@/components/List";
-import { ActionGroup } from "@/components/ActionGroup";
-import { Button } from "@/components/Button";
-import { IconStar } from "@/components/Icon/components/icons";
+import { Avatar } from "~/components/Avatar";
+import { dummyText } from "~/lib/dev/dummyText";
+import Image from "~/components/Image";
+import { Content } from "~/components/Content";
+import { AlertBadge } from "~/components/AlertBadge";
+import { ListItemView } from "~/components/List";
+import { ActionGroup } from "~/components/ActionGroup";
+import { Button } from "~/components/Button";
+import { IconStar } from "~/components/Icon/components/icons";
 
 const ContentPlaceholder: FC<PropsWithChildren> = (props) => (
   <div

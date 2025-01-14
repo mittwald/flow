@@ -1,8 +1,8 @@
 import type {
   TableColumnShape,
   TableColumnSupportedComponentProps,
-} from "@/components/List/model/table/types";
-import type { TableHeader } from "@/components/List/model/table/TableHeader";
+} from "~/components/List/model/table/types";
+import type { TableHeader } from "~/components/List/model/table/TableHeader";
 
 export class TableColumn<T> {
   public readonly tableHeader: TableHeader<T>;

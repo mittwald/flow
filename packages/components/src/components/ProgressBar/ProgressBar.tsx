@@ -4,9 +4,9 @@ import React from "react";
 import styles from "./ProgressBar.module.scss";
 import clsx from "clsx";
 import { useLocalizedStringFormatter, useNumberFormatter } from "react-aria";
-import type { PropsWithStatus } from "@/lib/types/props";
-import type { PropsContext } from "@/lib/propsContext";
-import { PropsContextProvider } from "@/lib/propsContext";
+import type { PropsWithStatus } from "~/lib/types/props";
+import type { PropsContext } from "~/lib/propsContext";
+import { PropsContextProvider } from "~/lib/propsContext";
 import locales from "./locales/*.locale.json";
 
 export interface ProgressBarProps

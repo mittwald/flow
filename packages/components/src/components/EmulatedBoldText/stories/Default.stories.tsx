@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import EmulatedBoldText from "@/components/EmulatedBoldText";
+import EmulatedBoldText from "~/components/EmulatedBoldText";
 import React from "react";
 
 const meta: Meta<typeof EmulatedBoldText> = {

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Image from "../Image";
 import React from "react";
-import { dummyText } from "@/lib/dev/dummyText";
+import { dummyText } from "~/lib/dev/dummyText";
 
 const meta: Meta<typeof Image> = {
   title: "Content/Image",

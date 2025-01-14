@@ -2,9 +2,9 @@ import type { Meta, StoryObj } from "@storybook/react";
 import Badge from "../Badge";
 import defaultMeta from "./Default.stories";
 import React from "react";
-import { dummyText } from "@/lib/dev/dummyText";
-import { Text } from "@/components/Text";
-import { Label } from "@/components/Label";
+import { dummyText } from "~/lib/dev/dummyText";
+import { Text } from "~/components/Text";
+import { Label } from "~/components/Label";
 
 const meta: Meta<typeof Badge> = {
   ...defaultMeta,

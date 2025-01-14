@@ -2,9 +2,9 @@ import type { PropsWithChildren } from "react";
 import React from "react";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
-import { type OverlayController, useOverlayController } from "@/lib/controller";
-import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import OverlayContextProvider from "@/lib/controller/overlay/OverlayContextProvider";
+import { type OverlayController, useOverlayController } from "~/lib/controller";
+import { flowComponent } from "~/lib/componentFactory/flowComponent";
+import OverlayContextProvider from "~/lib/controller/overlay/OverlayContextProvider";
 import styles from "./Popover.module.scss";
 
 export interface PopoverProps

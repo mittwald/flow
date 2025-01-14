@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Checkbox } from "../index";
 import React from "react";
 import defaultMeta from "./Default.stories";
-import { dummyText } from "@/lib/dev/dummyText";
+import { dummyText } from "~/lib/dev/dummyText";
 
 const meta: Meta<typeof Checkbox> = {
   title: "Form Controls/Checkbox/Edge Cases",

@@ -20,7 +20,7 @@ const config = {
       },
     },
     {
-      files: ["packages/docs/src/content/**/examples/*.tsx"],
+      files: ["apps/docs/src/content/**/examples/*.tsx"],
       options: {
         printWidth: 60,
       },

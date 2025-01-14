@@ -1,15 +1,15 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
+import { FlowRemoteElement } from "~/lib/FlowRemoteElement";
 import type { PaginationInfosProps as RemoteListPaginationInfosViewElementProps } from "@mittwald/flow-react-components/List/views";
 export type { PaginationInfosProps as RemoteListPaginationInfosViewElementProps } from "@mittwald/flow-react-components/List/views";
 
 export class RemoteListPaginationInfosViewElement extends FlowRemoteElement<RemoteListPaginationInfosViewElementProps> {
-  static get remoteAttributes() {
+  static override get remoteAttributes() {
     return [];
   }
 
-  static get remoteProperties() {
+  static override get remoteProperties() {
     return {
       isInitiallyLoading: {},
       totalItemsCount: {},
@@ -17,11 +17,11 @@ export class RemoteListPaginationInfosViewElement extends FlowRemoteElement<Remo
     };
   }
 
-  static get remoteEvents() {
+  static override get remoteEvents() {
     return {};
   }
 
-  static get remoteSlots() {
+  static override get remoteSlots() {
     return [];
   }
 }

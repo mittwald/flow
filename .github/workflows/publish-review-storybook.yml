@@ -56,7 +56,7 @@ jobs:
         run: yarn build --exclude @mittwald/flow-documentation
 
       - name: Build Storybook 🔨
-        run: yarn components build:storybook
+        run: yarn nx build:storybook components
 
       - name: Upload files to GitHub Pages 🚀
         uses: maaaathis/github-action-push-to-another-repository@main

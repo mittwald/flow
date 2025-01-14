@@ -1,11 +1,11 @@
 import { render, screen } from "@testing-library/react";
-import { Modal, ModalTrigger } from "@/components/Modal";
+import { Modal, ModalTrigger } from "~/components/Modal";
 import React, { act } from "react";
-import { Content } from "@/components/Content";
-import { ContextMenu, ContextMenuTrigger } from "@/components/ContextMenu";
-import { Button } from "@/components/Button";
-import MenuItem from "@/components/MenuItem";
-import userEvent from "@/lib/dev/vitestUserEvent";
+import { Content } from "~/components/Content";
+import { ContextMenu, ContextMenuTrigger } from "~/components/ContextMenu";
+import { Button } from "~/components/Button";
+import MenuItem from "~/components/MenuItem";
+import userEvent from "~/lib/dev/vitestUserEvent";
 import { vitest } from "vitest";
 
 beforeEach(() => {

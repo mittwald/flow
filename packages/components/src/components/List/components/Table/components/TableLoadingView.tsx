@@ -7,9 +7,9 @@ import {
   TableColumn,
   TableHeader,
   TableRow,
-} from "@/components/Table";
-import { SkeletonText } from "@/components/SkeletonText";
-import type { TableSupportedComponentProps } from "@/components/List/model/table/types";
+} from "~/components/Table";
+import { SkeletonText } from "~/components/SkeletonText";
+import type { TableSupportedComponentProps } from "~/components/List/model/table/types";
 
 export const TableLoadingView: FC<TableSupportedComponentProps> = (props) => {
   return (

@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Alert from "../Alert";
 import React from "react";
-import { Heading } from "@/components/Heading";
-import { Content } from "@/components/Content";
-import { dummyText } from "@/lib/dev/dummyText";
+import { Heading } from "~/components/Heading";
+import { Content } from "~/components/Content";
+import { dummyText } from "~/lib/dev/dummyText";
 import defaultMeta from "./Default.stories";
 
 const meta: Meta<typeof Alert> = {

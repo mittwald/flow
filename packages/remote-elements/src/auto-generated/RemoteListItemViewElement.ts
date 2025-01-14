@@ -1,23 +1,23 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
+import { FlowRemoteElement } from "~/lib/FlowRemoteElement";
 import type { ListItemViewProps as RemoteListItemViewElementProps } from "@mittwald/flow-react-components/List";
 export type { ListItemViewProps as RemoteListItemViewElementProps } from "@mittwald/flow-react-components/List";
 
 export class RemoteListItemViewElement extends FlowRemoteElement<RemoteListItemViewElementProps> {
-  static get remoteAttributes() {
+  static override get remoteAttributes() {
     return [];
   }
 
-  static get remoteProperties() {
+  static override get remoteProperties() {
     return {};
   }
 
-  static get remoteEvents() {
+  static override get remoteEvents() {
     return {};
   }
 
-  static get remoteSlots() {
+  static override get remoteSlots() {
     return [];
   }
 }

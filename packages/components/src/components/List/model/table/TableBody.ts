@@ -1,9 +1,9 @@
-import type { Table } from "@/components/List/model/table/Table";
+import type { Table } from "~/components/List/model/table/Table";
 import type {
   TableBodyShape,
   TableBodySupportedComponentProps,
-} from "@/components/List/model/table/types";
-import { TableRow } from "@/components/List/model/table/TableRow";
+} from "~/components/List/model/table/types";
+import { TableRow } from "~/components/List/model/table/TableRow";
 
 export class TableBody<T> {
   public readonly table: Table<T>;

@@ -1,4 +1,4 @@
-import type { Filter } from "@/components/List/model/filter/Filter";
+import type { Filter } from "~/components/List/model/filter/Filter";
 import { isShallowEqual } from "remeda";
 import { hash } from "object-code";
 

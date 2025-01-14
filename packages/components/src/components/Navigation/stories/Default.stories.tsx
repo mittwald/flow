@@ -4,11 +4,11 @@ import {
   IconCustomer,
   IconProject,
   IconServer,
-} from "@/components/Icon/components/icons";
-import { Text } from "@/components/Text";
-import { Link } from "@/components/Link";
-import { Navigation, NavigationGroup } from "@/components/Navigation";
-import Label from "@/components/Label";
+} from "~/components/Icon/components/icons";
+import { Text } from "~/components/Text";
+import { Link } from "~/components/Link";
+import { Navigation, NavigationGroup } from "~/components/Navigation";
+import Label from "~/components/Label";
 
 const meta: Meta<typeof Navigation> = {
   title: "Navigation/Navigation",

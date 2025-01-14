@@ -1,9 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import React, { act } from "react";
-import Action from "@/components/Action";
-import { Button } from "@/components/Button";
+import Action from "~/components/Action";
+import { Button } from "~/components/Button";
 import type { Mock } from "vitest";
-import userEvent from "@/lib/dev/vitestUserEvent";
+import userEvent from "~/lib/dev/vitestUserEvent";
 
 const asyncActionDuration = 700;
 const sleep = () =>

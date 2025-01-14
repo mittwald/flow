@@ -1,12 +1,12 @@
 import type { ForwardedRef } from "react";
 import React, { useRef } from "react";
 import * as Aria from "react-aria-components";
-import type { TextFieldBaseProps } from "@/components/TextFieldBase";
-import { TextFieldBase } from "@/components/TextFieldBase";
+import type { TextFieldBaseProps } from "~/components/TextFieldBase";
+import { TextFieldBase } from "~/components/TextFieldBase";
 import styles from "./TextArea.module.scss";
-import { ClearPropsContext } from "@/lib/propsContext";
-import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
-import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import { ClearPropsContext } from "~/lib/propsContext";
+import type { FlowComponentProps } from "~/lib/componentFactory/flowComponent";
+import { flowComponent } from "~/lib/componentFactory/flowComponent";
 import { mergeRefs } from "@react-aria/utils";
 
 export interface TextAreaProps

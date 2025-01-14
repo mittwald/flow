@@ -3,8 +3,8 @@ import React from "react";
 import {
   IconDownload,
   IconExternalLink,
-} from "@/components/Icon/components/icons";
-import type { LinkProps } from "@/components/Link";
+} from "~/components/Icon/components/icons";
+import type { LinkProps } from "~/components/Link";
 import locales from "../../locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 

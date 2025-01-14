@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import ActionGroup from "../ActionGroup";
 import React from "react";
-import { Button } from "@/components/Button";
-import { Action } from "@/components/Action";
-import { sleep } from "@/lib/promises/sleep";
+import { Button } from "~/components/Button";
+import { Action } from "~/components/Action";
+import { sleep } from "~/lib/promises/sleep";
 
 const meta: Meta<typeof ActionGroup> = {
   title: "Actions/ActionGroup",

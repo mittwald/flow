@@ -1,11 +1,11 @@
 import React from "react";
-import type { PopoverProps } from "@/components/Popover";
-import { Popover } from "@/components/Popover";
+import type { PopoverProps } from "~/components/Popover";
+import { Popover } from "~/components/Popover";
 import styles from "./ContextualHelp.module.scss";
-import type { PropsContext } from "@/lib/propsContext";
-import { PropsContextProvider } from "@/lib/propsContext";
-import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import { useOverlayController } from "@/lib/controller";
+import type { PropsContext } from "~/lib/propsContext";
+import { PropsContextProvider } from "~/lib/propsContext";
+import { flowComponent } from "~/lib/componentFactory/flowComponent";
+import { useOverlayController } from "~/lib/controller";
 
 export type ContextualHelpProps = Omit<PopoverProps, "withTip">;
 

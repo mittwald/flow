@@ -2,9 +2,9 @@ import type { FC } from "react";
 import React from "react";
 import type { SyntaxHighlighterProps } from "react-syntax-highlighter";
 import SyntaxHighlighterNative from "react-syntax-highlighter";
-import type { PropsWithClassName } from "@/lib/types/props";
+import type { PropsWithClassName } from "~/lib/types/props";
 import clsx from "clsx";
-import { CopyButton } from "@/components/CopyButton";
+import { CopyButton } from "~/components/CopyButton";
 import styles from "./CodeBlock.module.scss";
 
 export interface CodeBlockProps

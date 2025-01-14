@@ -1,4 +1,4 @@
-import type { SortingShape } from "@/components/List/model/sorting/types";
+import type { SortingShape } from "~/components/List/model/sorting/types";
 import type { ComponentType } from "react";
 
 type Props<T> = SortingShape<T>;

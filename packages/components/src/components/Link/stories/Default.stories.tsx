@@ -2,12 +2,12 @@ import type { Meta, StoryObj } from "@storybook/react";
 import Link from "../Link";
 import { action } from "@storybook/addon-actions";
 import React from "react";
-import { Text } from "@/components/Text";
+import { Text } from "~/components/Text";
 import {
   storyBackgroundDark,
   storyBackgroundLight,
-} from "@/lib/dev/storyBackgrounds";
-import { IconDownload } from "@/components/Icon/components/icons";
+} from "~/lib/dev/storyBackgrounds";
+import { IconDownload } from "~/components/Icon/components/icons";
 
 const meta: Meta<typeof Link> = {
   title: "Navigation/Link",

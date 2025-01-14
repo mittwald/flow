@@ -6,4 +6,6 @@ dist
 .pnp*
 
 /.nx/cache
-packages/docs/src/lib/liveCode/dynamicImports.ts
+apps/docs/src/lib/liveCode/dynamicImports.ts
+
+/.nx/workspace-data

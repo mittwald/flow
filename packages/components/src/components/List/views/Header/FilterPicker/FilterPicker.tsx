@@ -1,10 +1,10 @@
 import type { FC, PropsWithChildren, ReactNode } from "react";
 import React from "react";
-import { Button } from "@/components/Button";
-import { Text } from "@/components/Text";
-import type { ContextMenuProps } from "@/components/ContextMenu";
-import { ContextMenu, ContextMenuTrigger } from "@/components/ContextMenu";
-import { IconFilter } from "@/components/Icon/components/icons";
+import { Button } from "~/components/Button";
+import { Text } from "~/components/Text";
+import type { ContextMenuProps } from "~/components/ContextMenu";
+import { ContextMenu, ContextMenuTrigger } from "~/components/ContextMenu";
+import { IconFilter } from "~/components/Icon/components/icons";
 
 export interface FilterPickerProps
   extends Pick<ContextMenuProps, "selectionMode" | "selectedKeys">,

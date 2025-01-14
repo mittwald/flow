@@ -1,10 +1,10 @@
 import type { FC } from "react";
 import React from "react";
-import { useList } from "@/components/List/hooks/useList";
+import { useList } from "~/components/List/hooks/useList";
 import locales from "../../../../locales/*.locale.json";
-import { SortingPicker as View } from "@/components/List/views/Header/SortingPicker/SortingPicker";
+import { SortingPicker as View } from "~/components/List/views/Header/SortingPicker/SortingPicker";
 import { useLocalizedStringFormatter } from "react-aria";
-import { SortingPickerMenuItem } from "@/components/List/components/Header/components/SortingPicker/SortingPickerMenuItem";
+import { SortingPickerMenuItem } from "~/components/List/components/Header/components/SortingPicker/SortingPickerMenuItem";
 
 export const SortingPicker: FC = () => {
   const list = useList();

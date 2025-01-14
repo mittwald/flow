@@ -6,9 +6,9 @@ import clsx from "clsx";
 import type {
   PropsWithClassName,
   PropsWithElementType,
-} from "@/lib/types/props";
-import type { PropsContext } from "@/lib/propsContext";
-import { PropsContextProvider } from "@/lib/propsContext";
+} from "~/lib/types/props";
+import type { PropsContext } from "~/lib/propsContext";
+import { PropsContextProvider } from "~/lib/propsContext";
 
 type GapSize = "s" | "m" | "l" | "xl";
 

@@ -1,11 +1,11 @@
 import type { PropsWithChildren } from "react";
 import React from "react";
 import styles from "./ListItemView.module.scss";
-import type { PropsContext } from "@/lib/propsContext";
-import { dynamic, PropsContextProvider } from "@/lib/propsContext";
-import { OptionsButton } from "@/components/List/components/Items/components/Item/components/OptionsButton";
+import type { PropsContext } from "~/lib/propsContext";
+import { dynamic, PropsContextProvider } from "~/lib/propsContext";
+import { OptionsButton } from "~/components/List/components/Items/components/Item/components/OptionsButton";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
-import type { PropsWithClassName } from "@/lib/types/props";
+import type { PropsWithClassName } from "~/lib/types/props";
 import clsx from "clsx";
 
 export type ListItemViewProps = PropsWithChildren & PropsWithClassName;

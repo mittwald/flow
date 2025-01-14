@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import { useEffect } from "react";
-import { useFormContext } from "@/integrations/react-hook-form/components/context/formContext";
+import { useFormContext } from "~/integrations/react-hook-form/components/context/formContext";
 import { useFormState } from "react-hook-form";
 
 /**
