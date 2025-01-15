@@ -11,6 +11,10 @@
       "dependsOn": ["^build"],
       "cache": false
     },
+    "build:deps": {
+      "dependsOn": ["^build"],
+      "cache": false
+    },
     "start": {
       "dependsOn": ["^build"],
       "cache": false

@@ -1,7 +1,7 @@
+import Activity from "@mittwald/flow-react-components/Activity";
 import type { FC, PropsWithChildren, ReactNode } from "react";
 import React, { Suspense as ReactSuspense, useEffect, useState } from "react";
 import { useIsMounted } from "~/hooks/useIsMounted";
-import { Activity } from "~/auto-generated";
 
 interface Props extends PropsWithChildren {
   fallback?: ReactNode;

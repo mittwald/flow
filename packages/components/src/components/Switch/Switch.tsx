@@ -19,6 +19,7 @@ export interface SwitchProps
   labelPosition?: "leading" | "trailing";
 }
 
+/** @flr-generate all */
 export const Switch = flowComponent("Switch", (props) => {
   const {
     children,

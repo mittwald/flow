@@ -1,3 +1,4 @@
+export * from "./view";
 import { ContextualHelp } from "./ContextualHelp";
 
 export { type ContextualHelpProps, ContextualHelp } from "./ContextualHelp";

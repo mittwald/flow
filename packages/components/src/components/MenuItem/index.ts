@@ -1,3 +1,4 @@
+export * from "./view";
 import { MenuItem } from "./MenuItem";
 
 export { MenuItem, type MenuItemProps } from "./MenuItem";

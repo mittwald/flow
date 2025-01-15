@@ -15,6 +15,8 @@ import { remoteComponentNameOf } from "./lib/remoteComponentNameOf";
 import { generateRemoteReactRendererComponentsFile } from "./generation/generateRemoteReactRendererComponentsFile";
 import { remoteComponentBaseNameOf } from "./lib/remoteComponentBaseNameOf";
 import { sortBy } from "remeda";
+import { generateViewComponent } from "./generation/generateViewComponent";
+import path from "path";
 
 const jetpack = jp.dir("../..");
 
@@ -109,9 +111,29 @@ async function generate() {
     );
 
     console.log("✅  Done");
+    console.log("");
   }
 
-  console.log("");
+  {
+    console.log("📝️ Generating view component declaration files");
+
+    for (const component of components) {
+      const content = generateViewComponent(component);
+      const filePath = path.dirname(component.filePath);
+      const componentsPackagePath = filePath.startsWith("/")
+        ? ""
+        : "packages/components/";
+
+      await jetpack.writeAsync(
+        `${componentsPackagePath}${filePath}/view.ts`,
+        await prepareTypeScriptOutput(content),
+      );
+    }
+
+    console.log("✅  Done");
+    console.log("");
+  }
+
   console.log("✅  Generation finished successfully");
 }
 

@@ -1,3 +1,4 @@
+export * from "./view";
 import { Section } from "./Section";
 
 export { type SectionProps, Section } from "./Section";

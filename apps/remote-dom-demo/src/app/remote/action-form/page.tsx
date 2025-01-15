@@ -7,7 +7,7 @@ import {
   TextField,
   CodeBlock,
 } from "@mittwald/flow-remote-react-components";
-import { formServerAction } from "@/app/remote/actions";
+import { formServerAction } from "~/app/remote/actions";
 import type { FC } from "react";
 import { useFormStatus } from "react-dom";
 import { useActionState } from "react";

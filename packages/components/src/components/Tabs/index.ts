@@ -1,3 +1,4 @@
+export * from "./view";
 import { Tabs } from "./Tabs";
 
 export { type TabsProps, Tabs } from "./Tabs";

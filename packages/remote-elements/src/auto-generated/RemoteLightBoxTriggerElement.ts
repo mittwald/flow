@@ -10,7 +10,10 @@ export class RemoteLightBoxTriggerElement extends FlowRemoteElement<RemoteLightB
   }
 
   static override get remoteProperties() {
-    return {};
+    return {
+      controller: {},
+      isDefaultOpen: {},
+    };
   }
 
   static override get remoteEvents() {

@@ -1,12 +1,14 @@
 import type { FC } from "react";
 import React from "react";
 import { useList } from "~/components/List/hooks/useList";
-import PaginationInfosView from "~/components/List/views/Footer/PaginationInfos";
-import { useViewComponents } from "~/lib/viewComponentContext/useViewComponents";
+import { useViewComponent } from "~/lib/viewComponentContext/useViewComponent";
+import * as ListViews from "~/components/List/views";
 
 export const PaginationInfos: FC = () => {
-  const { PaginationInfos: View = PaginationInfosView } =
-    useViewComponents("List");
+  const View = useViewComponent(
+    "ListPaginationInfosView",
+    ListViews.PaginationInfos,
+  );
 
   const list = useList();
   const pagination = list.batches;

@@ -15,7 +15,6 @@ const nonResolvingPromise = new Promise<{ default: ComponentType<unknown> }>(
 
 const SuspenseTrigger = lazy(() => nonResolvingPromise);
 
-/** @flr-generate all */
 export const Activity: FC<ActivityProps> = (props) => {
   const { children, isActive: isActiveFromProps = true, inactiveDelay } = props;
 

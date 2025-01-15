@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "run next build",
+    "build:deps": "",
     "build:imports": "run tsx dev/generateLiveCodeEditorGlobalImports.ts",
     "dev": "run next dev",
     "test:compile": "run tsc --noEmit"
@@ -45,7 +46,7 @@
   "devDependencies": {
     "@mittwald/typescript-config": "workspace:*",
     "@types/node": "^22.10.6",
-    "@types/react": "^19.0.6",
+    "@types/react": "^19.0.7",
     "@types/react-dom": "^19.0.3",
     "@yarnpkg/pnpify": "^4.1.3",
     "eslint": "^9.18.0",

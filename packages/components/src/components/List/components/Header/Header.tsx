@@ -2,10 +2,11 @@ import type { FC } from "react";
 import React from "react";
 import { useList } from "~/components/List/hooks/useList";
 import { FilterPicker } from "~/components/List/components/Header/components/FilterPicker/FilterPicker";
-import DefaultView from "~/components/List/views/Header/Header";
-import DefaultFragmentView from "~/components/Fragment";
 import { ActiveFilterList } from "~/components/List/components/Header/components/ActiveFilterList";
-import { useViewComponents } from "~/lib/viewComponentContext/useViewComponents";
+import { useViewComponent } from "~/lib/viewComponentContext/useViewComponent";
+import { ViewModeMenu } from "~/components/List/components/Header/components/ViewModeMenu/ViewModeMenu";
+import * as ListViews from "~/components/List/views";
+import Fragment from "~/components/Fragment";
 
 interface Props {
   hasActionGroup?: boolean;
@@ -15,10 +16,10 @@ export const Header: FC<Props> = (props) => {
   const { hasActionGroup } = props;
   const list = useList();
 
-  const {
-    Header: View = DefaultView,
-    Fragment: FragmentView = DefaultFragmentView,
-  } = useViewComponents("List");
+  const Views = {
+    Header: useViewComponent("ListHeaderView", ListViews.Header),
+    Fragment: useViewComponent("Fragment", Fragment),
+  };
 
   if (
     list.filters.length === 0 &&
@@ -35,18 +36,23 @@ export const Header: FC<Props> = (props) => {
   ));
 
   return (
-    <View
+    <Views.Header
       onSearchChanged={(search) => {
         list.search?.setValue(search);
       }}
       autoSubmitSearch={list.search?.autoSubmit}
       searchValue={list.search?.value}
       showSearch={!!list.search}
-      filterPickerList={<FragmentView>{filterPickerList}</FragmentView>}
+      filterPickerList={<Views.Fragment>{filterPickerList}</Views.Fragment>}
+      viewModeMenu={
+        <Views.Fragment>
+          <ViewModeMenu />
+        </Views.Fragment>
+      }
       activeFilterList={
-        <FragmentView>
+        <Views.Fragment>
           <ActiveFilterList />
-        </FragmentView>
+        </Views.Fragment>
       }
     />
   );

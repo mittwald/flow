@@ -1,3 +1,4 @@
+export * from "./view";
 import { IllustratedMessage } from "./IllustratedMessage";
 
 export {

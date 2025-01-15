@@ -1,3 +1,4 @@
+export * from "./view";
 import type { FC, PropsWithChildren, ReactNode } from "react";
 import React from "react";
 import { Button } from "~/components/Button";

@@ -1,3 +1,4 @@
+export * from "./view";
 import { FieldDescription } from "./FieldDescription";
 
 export {

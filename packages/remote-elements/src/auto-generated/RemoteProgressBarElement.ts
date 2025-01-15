@@ -23,6 +23,7 @@ export class RemoteProgressBarElement extends FlowRemoteElement<RemoteProgressBa
       showMaxValue: {},
       size: {},
       slot: {},
+      status: {},
       value: {},
     };
   }

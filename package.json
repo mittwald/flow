@@ -12,16 +12,16 @@
     "all": "nx run-many --targets=\"$@\"",
     "build": "run all build",
     "clean": "nx reset && run all clean",
-    "dev": "concurrently \"yarn watch $@\" \"yarn nx dev $@\"",
+    "dev": "yarn nx build:deps $@ && concurrently \"yarn watch $@\" \"yarn nx dev $@\"",
     "dev:init-githooks": "yarn dlx simple-git-hooks",
     "format": "prettier --write '**/*.{ts,tsx,yaml,yml,json,md,mdx,js,cjs,mjs,css}'",
     "lint": "eslint .",
     "test": "run all test",
-    "watch": "nx watch --projects=\"$@\" --includeDependentProjects -- run nx run-many -t build -p \\$NX_PROJECT_NAME --exclude=\"$@\""
+    "watch": "nx watch --projects=\"$@\" --includeDependentProjects -- run nx build:deps \"$@\""
   },
   "simple-git-hooks": {
-    "post-checkout": "yarn install",
-    "post-merge": "yarn install",
+    "post-checkout": "yarn install && yarn clean",
+    "post-merge": "yarn install && yarn clean",
     "pre-commit": "yarn lint"
   },
   "dependencies": {
@@ -43,7 +43,7 @@
     "eslint": "^9.18.0",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-json": "^4.0.1",
-    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-prettier": "^5.2.2",
     "fs-jetpack": "^5.1.0",
     "nx": "20.3.1",
     "prettier": "^3.4.2",

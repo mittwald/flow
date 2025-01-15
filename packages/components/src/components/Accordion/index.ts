@@ -1,3 +1,4 @@
+export * from "./view";
 import { Accordion } from "./Accordion";
 
 export { Accordion, type AccordionProps } from "./Accordion";

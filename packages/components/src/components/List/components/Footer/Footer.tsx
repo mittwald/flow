@@ -2,11 +2,11 @@ import type { FC } from "react";
 import React from "react";
 import { PaginationInfos } from "~/components/List/components/Footer/components/PaginationInfos";
 import { ShowNextBatchButton } from "~/components/List/components/Footer/components/ShowNextBatchButton";
-import { Footer as DefaultView } from "../../views/Footer";
-import { useViewComponents } from "~/lib/viewComponentContext/useViewComponents";
+import { useViewComponent } from "~/lib/viewComponentContext/useViewComponent";
+import * as ListViews from "~/components/List/views";
 
 export const Footer: FC = () => {
-  const View = useViewComponents("List").Footer ?? DefaultView;
+  const View = useViewComponent("ListFooterView", ListViews.Footer);
 
   return (
     <View>

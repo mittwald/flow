@@ -1,3 +1,4 @@
+export * from "./view";
 import { RadioGroup } from "./RadioGroup";
 
 export { type RadioGroupProps, RadioGroup } from "./RadioGroup";

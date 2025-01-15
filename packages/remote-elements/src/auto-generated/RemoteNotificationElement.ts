@@ -109,6 +109,7 @@ export class RemoteNotificationElement extends FlowRemoteElement<RemoteNotificat
       security: {},
       slot: {},
       spellCheck: {},
+      status: {},
       suppressContentEditableWarning: {},
       suppressHydrationWarning: {},
       tabIndex: {},

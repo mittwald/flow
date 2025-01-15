@@ -1,9 +1,10 @@
+export * from "./view";
 import type { FC, ReactNode } from "react";
 import React from "react";
 import styles from "./Header.module.css";
 import { TunnelExit } from "@mittwald/react-tunnel";
 import type { SearchValue } from "~/components/List/model/search/types";
-import { SearchField } from "./SearchField";
+import { SearchField } from "./SearchField/SearchField";
 
 export interface HeaderProps {
   showSearch?: boolean;
@@ -12,12 +13,10 @@ export interface HeaderProps {
   searchValue?: SearchValue;
   filterPickerList?: ReactNode;
   activeFilterList?: ReactNode;
+  viewModeMenu?: ReactNode;
 }
 
-/**
- * @flr-generate all
- * @flr-slot-props filterPickerList,activeFilterList
- */
+/** @flr-generate all */
 export const Header: FC<HeaderProps> = (props) => {
   const {
     showSearch,
@@ -26,12 +25,16 @@ export const Header: FC<HeaderProps> = (props) => {
     searchValue,
     filterPickerList,
     activeFilterList,
+    viewModeMenu,
   } = props;
 
   return (
     <div className={styles.header}>
       <div className={styles.pickerListAndSearch}>
-        <div className={styles.pickerList}>{filterPickerList}</div>
+        <div className={styles.pickerList}>
+          {viewModeMenu}
+          {filterPickerList}
+        </div>
         <div className={styles.searchAndActions}>
           {showSearch && (
             <SearchField

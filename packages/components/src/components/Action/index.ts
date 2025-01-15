@@ -1,3 +1,4 @@
+export * from "./view";
 import { Action } from "./Action";
 
 export { Action } from "./Action";

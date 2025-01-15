@@ -6,9 +6,6 @@
   "extends": "../typescript-config/react-library.json",
   "references": [
     {
-      "path": "../react-tunnel"
-    },
-    {
       "path": "./tsconfig.dev.json"
     },
     {

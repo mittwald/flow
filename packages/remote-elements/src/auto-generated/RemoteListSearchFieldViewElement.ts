@@ -11,6 +11,7 @@ export class RemoteListSearchFieldViewElement extends FlowRemoteElement<RemoteLi
 
   static override get remoteProperties() {
     return {
+      autoFocus: {},
       autoSubmit: {},
       value: {},
     };

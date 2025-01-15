@@ -1,3 +1,4 @@
+export * from "./view";
 import { DateRangePicker } from "./DateRangePicker";
 
 export { type DateRangePickerProps, DateRangePicker } from "./DateRangePicker";

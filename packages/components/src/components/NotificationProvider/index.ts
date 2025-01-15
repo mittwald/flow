@@ -1,3 +1,4 @@
+export * from "./view";
 import NotificationProvider from "./NotificationProvider";
 
 export {

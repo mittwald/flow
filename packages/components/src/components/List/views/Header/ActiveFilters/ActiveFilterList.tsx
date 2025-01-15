@@ -1,3 +1,4 @@
+export * from "./view";
 import type { FC, PropsWithChildren } from "react";
 import React, { Children } from "react";
 import styles from "./ActiveFilterList.module.scss";

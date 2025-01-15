@@ -11,13 +11,23 @@ export class RemoteListItemsViewElement extends FlowRemoteElement<RemoteListItem
 
   static override get remoteProperties() {
     return {
+      "aria-label": {},
+      "aria-labelledby": {},
+      defaultSelectedKeys: {},
+      disabledKeys: {},
+      disallowEmptySelection: {},
       isInitiallyLoading: {},
       isLoading: {},
+      selectedKeys: {},
+      selectionBehavior: {},
+      selectionMode: {},
     };
   }
 
   static override get remoteEvents() {
-    return {};
+    return {
+      selectionChange: {},
+    };
   }
 
   static override get remoteSlots() {

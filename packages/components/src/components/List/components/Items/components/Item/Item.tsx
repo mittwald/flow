@@ -5,8 +5,8 @@ import type { Key } from "react-aria-components";
 import * as Aria from "react-aria-components";
 import { useList } from "~/components/List/hooks/useList";
 import { useGridItemProps } from "~/components/List/components/Items/components/Item/hooks/useGridItemProps";
-import ItemView from "~/components/List/views/Items/ItemContainer";
-import { useViewComponents } from "~/lib/viewComponentContext/useViewComponents";
+import { useViewComponent } from "~/lib/viewComponentContext/useViewComponent";
+import * as ListViews from "~/components/List/views";
 
 interface Props extends PropsWithChildren {
   id: Key;
@@ -18,7 +18,12 @@ export const Item = (props: Props) => {
   const list = useList();
 
   const itemViewSettings = list.itemView;
-  const { Item: View = ItemView } = useViewComponents("List");
+  const Views = {
+    ItemContainer: useViewComponent(
+      "ListItemContainerView",
+      ListViews.ItemContainer,
+    ),
+  };
 
   const { gridItemProps, children } = useGridItemProps(props);
 
@@ -28,9 +33,15 @@ export const Item = (props: Props) => {
   const href = itemViewSettings?.href ? itemViewSettings.href(data) : undefined;
 
   return (
-    <View id={id} textValue={textValue} key={id} href={href} {...gridItemProps}>
+    <Views.ItemContainer
+      id={id}
+      textValue={textValue}
+      key={id}
+      href={href}
+      {...gridItemProps}
+    >
       {children}
-    </View>
+    </Views.ItemContainer>
   );
 };
 

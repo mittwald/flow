@@ -12,6 +12,8 @@ export const ListItemsView = createFlowRemoteComponent(
       wrapper: false,
     },
 
-    eventProps: {},
+    eventProps: {
+      onSelectionChange: { event: "selectionChange" } as never,
+    },
   },
 );

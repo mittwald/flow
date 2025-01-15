@@ -1,18 +1,18 @@
 import type { FC } from "react";
 import React from "react";
 import { useList } from "~/components/List";
-import {
-  Table as TableComponent,
+import styles from "./Table.module.css";
+import clsx from "clsx";
+import { EmptyView } from "~/components/List/views/EmptyView/EmptyView";
+import { TableLoadingMessage } from "~/components/List/views/Table";
+import { useViewComponent } from "~/lib/viewComponentContext/useViewComponent";
+import TableView, {
   TableBody,
   TableCell,
   TableColumn,
   TableHeader,
   TableRow,
 } from "~/components/Table";
-import { TableLoadingView } from "~/components/List/components/Table/components/TableLoadingView";
-import styles from "./Table.module.css";
-import clsx from "clsx";
-import { EmptyView } from "~/components/List/components/EmptyView/EmptyView";
 
 export const Table: FC = () => {
   const list = useList();
@@ -22,12 +22,21 @@ export const Table: FC = () => {
   const isLoading = list.loader.useIsLoading();
   const isInitiallyLoading = list.loader.useIsInitiallyLoading();
 
+  const Views = {
+    Table: useViewComponent("Table", TableView),
+    TableHeader: useViewComponent("TableHeader", TableHeader),
+    TableColumn: useViewComponent("TableColumn", TableColumn),
+    TableBody: useViewComponent("TableBody", TableBody),
+    TableRow: useViewComponent("TableRow", TableRow),
+    TableCell: useViewComponent("TableCell", TableCell),
+  };
+
   if (!table) {
     return null;
   }
 
   if (isInitiallyLoading) {
-    return <TableLoadingView {...table.componentProps} />;
+    return <TableLoadingMessage {...table.componentProps} />;
   }
 
   if (listIsEmpty) {
@@ -43,22 +52,22 @@ export const Table: FC = () => {
   );
 
   return (
-    <TableComponent
+    <Views.Table
       {...list.componentProps}
       {...table.componentProps}
       className={tableClassName}
     >
-      <TableHeader {...table.header.componentProps}>
+      <Views.TableHeader {...table.header.componentProps}>
         {table.header.columns.map((col, i) => (
-          <TableColumn key={i} {...col.componentProps} />
+          <Views.TableColumn key={i} {...col.componentProps} />
         ))}
-      </TableHeader>
-      <TableBody
+      </Views.TableHeader>
+      <Views.TableBody
         {...table.body.componentProps}
         renderEmptyState={() => <EmptyView />}
       >
         {list.items.entries.map((item) => (
-          <TableRow
+          <Views.TableRow
             className={(props) =>
               clsx(
                 styles.row,
@@ -73,13 +82,13 @@ export const Table: FC = () => {
             {...table.body.row.componentProps}
           >
             {table.body.row?.cells.map((cell, i) => (
-              <TableCell key={i} {...cell.componentProps}>
+              <Views.TableCell key={i} {...cell.componentProps}>
                 {cell.renderFn ? cell.renderFn(item.data, list) : undefined}
-              </TableCell>
+              </Views.TableCell>
             ))}
-          </TableRow>
+          </Views.TableRow>
         ))}
-      </TableBody>
-    </TableComponent>
+      </Views.TableBody>
+    </Views.Table>
   );
 };

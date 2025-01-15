@@ -1,4 +1,3 @@
-/* eslint-disable */
 /* auto-generated file */
 import React, { type ComponentProps, type FC } from "react";
 import { IconUser as Tabler } from "@tabler/icons-react";

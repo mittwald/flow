@@ -1,3 +1,4 @@
+export * from "./view";
 import { Notification } from "./Notification";
 
 export { type NotificationProps, Notification } from "./Notification";

@@ -6,6 +6,7 @@ import { Header } from "~/components/List/components/Header";
 import { Footer } from "~/components/List/components/Footer";
 import ListModel from "~/components/List/model/List";
 import { deepFilterByType, deepFindOfType } from "~/lib/react/deepFindOfType";
+import { List as ListView } from "~/components/List/views/List";
 import { ListLoaderAsync } from "~/components/List/setupComponents/ListLoaderAsync";
 import { ListFilter } from "~/components/List/setupComponents/ListFilter";
 import { ListSorting } from "~/components/List/setupComponents/ListSorting";
@@ -28,8 +29,8 @@ import { ActionGroup } from "~/components/ActionGroup";
 import { deepHas } from "~/lib/react/deepHas";
 import DataLoader from "./components/DataLoader";
 import { Items } from "~/components/List/components/Items";
-import DefaultView from "~/components/List/views/List/List";
-import { useViewComponents } from "~/lib/viewComponentContext/useViewComponents";
+import { useViewComponent } from "~/lib/viewComponentContext/useViewComponent";
+import { Table } from "~/components/List/components/Table";
 
 export interface ListProps<T = never>
   extends PropsWithChildren,
@@ -50,7 +51,7 @@ export interface ListProps<T = never>
 export const List = flowComponent("List", (props) => {
   const { children, batchSize, onChange, ref, ...restProps } = props;
 
-  const { List: View = DefaultView } = useViewComponents("List");
+  const View = useViewComponent("ListListView", ListView);
 
   const listLoaderAsync = deepFindOfType(
     children,
@@ -175,7 +176,8 @@ export const List = flowComponent("List", (props) => {
             {children}
             <DataLoader />
             <Header hasActionGroup={hasActionGroup} />
-            <Items />
+            {listModel.viewMode === "list" && <Items />}
+            {listModel.viewMode === "table" && <Table />}
             <Footer />
           </View>
         </listContext.Provider>

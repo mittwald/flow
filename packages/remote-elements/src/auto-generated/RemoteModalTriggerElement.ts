@@ -10,7 +10,10 @@ export class RemoteModalTriggerElement extends FlowRemoteElement<RemoteModalTrig
   }
 
   static override get remoteProperties() {
-    return {};
+    return {
+      controller: {},
+      isDefaultOpen: {},
+    };
   }
 
   static override get remoteEvents() {

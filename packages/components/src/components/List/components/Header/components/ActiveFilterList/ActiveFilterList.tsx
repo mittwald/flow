@@ -2,17 +2,20 @@ import type { FC } from "react";
 import React from "react";
 import { useList } from "~/components/List/hooks/useList";
 import { observer } from "mobx-react-lite";
-import ActiveFilterItemView from "~/components/List/views/Header/ActiveFilters/ActiveFilterItem";
-import ActiveFilterListView from "~/components/List/views/Header/ActiveFilters/ActiveFilterList";
-import { useViewComponents } from "~/lib/viewComponentContext/useViewComponents";
+import { useViewComponent } from "~/lib/viewComponentContext/useViewComponent";
+import * as ListViews from "~/components/List/views";
+import Fragment from "~/components/Fragment";
 
 export const ActiveFilterList: FC = observer(() => {
   const list = useList();
 
-  const {
-    ActiveFilterList: View = ActiveFilterListView,
-    ActiveFilterItem: ItemView = ActiveFilterItemView,
-  } = useViewComponents("List");
+  const Views = {
+    ActiveFilterItem: useViewComponent(
+      "ListActiveFilterItemView",
+      ListViews.ActiveFilterItem,
+    ),
+    ActiveFilterList: useViewComponent("ListActiveFilterListView", Fragment),
+  };
 
   const activeFilterValues = list.filters
     .flatMap((f) => f.values)
@@ -22,7 +25,7 @@ export const ActiveFilterList: FC = observer(() => {
     list.filters.filter((f) => f.hasChanged()).length > 0;
 
   return (
-    <View
+    <Views.ActiveFilterList
       onResetFilters={() => list.resetFilters()}
       onClearFilters={() => list.clearFilters()}
       onStoreFilterDefaultSettings={
@@ -33,11 +36,11 @@ export const ActiveFilterList: FC = observer(() => {
       someFiltersChanged={someFiltersChanged}
     >
       {activeFilterValues.map((v) => (
-        <ItemView onRemove={() => v.deactivate()} key={v.id}>
+        <Views.ActiveFilterItem onRemove={() => v.deactivate()} key={v.id}>
           {v.render()}
-        </ItemView>
+        </Views.ActiveFilterItem>
       ))}
-    </View>
+    </Views.ActiveFilterList>
   );
 });
 

@@ -36,7 +36,6 @@ export default mergeConfig(
           CounterBadge: "./src/components/CounterBadge/index.ts",
           DatePicker: "./src/components/DatePicker/index.ts",
           DateRangePicker: "./src/components/DateRangePicker/index.ts",
-          EmulatedBoldText: "./src/components/EmulatedBoldText/index.ts",
           FieldDescription: "./src/components/FieldDescription/index.ts",
           FieldError: "./src/components/FieldError/index.ts",
           FileField: "./src/components/FileField/index.ts",

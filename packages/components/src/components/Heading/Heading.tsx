@@ -1,3 +1,4 @@
+export * from "./view";
 import React from "react";
 import styles from "./Heading.module.scss";
 import clsx from "clsx";

@@ -1,3 +1,4 @@
+export * from "./view";
 import { ContextMenu } from "./ContextMenu";
 
 export { type ContextMenuProps, ContextMenu } from "./ContextMenu";

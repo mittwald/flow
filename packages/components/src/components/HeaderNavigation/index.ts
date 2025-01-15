@@ -1,3 +1,4 @@
+export * from "./view";
 import { HeaderNavigation } from "./HeaderNavigation";
 
 export {

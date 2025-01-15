@@ -24,7 +24,7 @@ export class RemoteListHeaderViewElement extends FlowRemoteElement<RemoteListHea
   }
 
   static override get remoteSlots() {
-    return ["activeFilterList", "filterPickerList"];
+    return ["activeFilterList", "filterPickerList", "viewModeMenu"];
   }
 }
 

@@ -1,3 +1,4 @@
+export * from "./view";
 import { TextField } from "./TextField";
 
 export { type TextFieldProps, TextField } from "./TextField";

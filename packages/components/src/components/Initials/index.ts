@@ -1,3 +1,4 @@
+export * from "./view";
 import { Initials } from "./Initials";
 
 export { type InitialsProps, Initials } from "./Initials";
