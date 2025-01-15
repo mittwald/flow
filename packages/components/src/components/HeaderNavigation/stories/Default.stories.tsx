@@ -15,8 +15,8 @@ import { Image } from "~/components/Image";
 import { dummyText } from "~/lib/dev/dummyText";
 import Avatar from "~/components/Avatar";
 import ContextMenu, {
-  MenuItem,
   ContextMenuTrigger,
+  MenuItem,
 } from "~/components/ContextMenu";
 import {
   storyBackgroundDark,

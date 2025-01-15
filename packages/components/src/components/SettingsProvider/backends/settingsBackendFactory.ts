@@ -1,6 +1,6 @@
 import type {
-  SupportedSettingsBackend,
   SettingsBackend,
+  SupportedSettingsBackend,
 } from "~/components/SettingsProvider/backends/types";
 import { LocalStorageSettingsBackend } from "~/components/SettingsProvider/backends/LocalStorageSettingsBackend";
 

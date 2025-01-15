@@ -1,5 +1,5 @@
 {
-  "extends": "@mittwald/typescript-config/react-library.json",
+  "extends": "../typescript-config/react-library.json",
   "references": [
     {
       "path": "./tsconfig.vite.json"

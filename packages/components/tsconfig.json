@@ -3,7 +3,7 @@
     "plugins": [{ "name": "typescript-plugin-css-modules" }],
     "types": ["./types.d.ts"]
   },
-  "extends": "@mittwald/typescript-config/react-library.json",
+  "extends": "../typescript-config/react-library.json",
   "references": [
     {
       "path": "../react-tunnel"

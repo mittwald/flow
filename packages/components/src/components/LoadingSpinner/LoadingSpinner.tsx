@@ -1,7 +1,7 @@
 import type { FC } from "react";
+import React from "react";
 import { IconPending } from "~/components/Icon/components/icons";
 import styles from "./LoadingSpinner.module.scss";
-import React from "react";
 import type { IconProps } from "~/components/Icon";
 import clsx from "clsx";
 

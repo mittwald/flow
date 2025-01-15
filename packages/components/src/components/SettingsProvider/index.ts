@@ -3,4 +3,5 @@ export type { SettingsBackend } from "~/components/SettingsProvider/backends/typ
 export type { SettingsJson } from "~/components/SettingsProvider/models/SettingsStore";
 
 import { SettingsProvider } from "~/components/SettingsProvider/SettingsProvider";
+
 export default SettingsProvider;

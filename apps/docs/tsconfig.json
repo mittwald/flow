@@ -1,5 +1,5 @@
 {
-  "extends": "@mittwald/typescript-config/nextjs.json",
+  "extends": "../../packages/typescript-config/nextjs.json",
   "include": [
     "${configDir}/src/**/*.tsx",
     "${configDir}/src/**/*.ts",
