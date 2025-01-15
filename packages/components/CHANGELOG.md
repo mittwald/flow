@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.394](https://github.com/mittwald/flow/compare/0.1.0-alpha.393...0.1.0-alpha.394) (2025-01-15)
+
+### Bug Fixes
+
+- **Notification:** Fix "Timer not started" error for notifications that should
+  not auto close ([#1101](https://github.com/mittwald/flow/issues/1101))
+  ([f9b5975](https://github.com/mittwald/flow/commit/f9b59756da9c4aeebc08c5eb62c0efef98fa9c9a))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.393](https://github.com/mittwald/flow/compare/0.1.0-alpha.392...0.1.0-alpha.393) (2025-01-10)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
