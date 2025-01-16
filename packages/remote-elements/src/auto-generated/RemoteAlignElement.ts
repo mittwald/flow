@@ -10,7 +10,9 @@ export class RemoteAlignElement extends FlowRemoteElement<RemoteAlignElementProp
   }
 
   static override get remoteProperties() {
-    return {};
+    return {
+      className: {},
+    };
   }
 
   static override get remoteEvents() {

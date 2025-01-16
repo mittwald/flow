@@ -11,6 +11,7 @@ export class RemoteModalElement extends FlowRemoteElement<RemoteModalElementProp
 
   static override get remoteProperties() {
     return {
+      className: {},
       controller: {},
       isDismissable: {},
       offCanvas: {},

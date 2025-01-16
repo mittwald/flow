@@ -8,10 +8,8 @@ import type {
   RemoteComponentTypeFromElementConstructor,
 } from "@remote-dom/react";
 import { createRemoteComponent } from "@remote-dom/react";
-import {
-  useProps,
-  isFlowComponentName,
-} from "@mittwald/flow-react-components/hooks";
+import { isFlowComponentName } from "@mittwald/flow-react-components/hooks";
+import { flowComponent } from "@mittwald/flow-react-components/internal";
 
 // eslint-disable-next-line  @typescript-eslint/no-explicit-any
 type AnyRecord = Record<string, any>;
@@ -47,10 +45,9 @@ export function createFlowRemoteComponent<
   });
 
   if (isFlowComponentName(flowComponentTag)) {
-    return (props) => {
-      const combinedProps = useProps(flowComponentTag, props);
-      return createElement(element, combinedProps as never);
-    };
+    return flowComponent(flowComponentTag, (p) => {
+      return createElement(element, p as never);
+    });
   }
 
   return element;

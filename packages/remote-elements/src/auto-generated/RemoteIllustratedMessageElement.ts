@@ -70,6 +70,7 @@ export class RemoteIllustratedMessageElement extends FlowRemoteElement<RemoteIll
       autoCorrect: {},
       autoFocus: {},
       autoSave: {},
+      className: {},
       color: {},
       content: {},
       contentEditable: {},

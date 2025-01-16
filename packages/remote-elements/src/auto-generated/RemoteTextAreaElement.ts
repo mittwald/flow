@@ -22,6 +22,7 @@ export class RemoteTextAreaElement extends FlowRemoteElement<RemoteTextAreaEleme
       autoComplete: {},
       autoFocus: {},
       autoResizeMaxRows: {},
+      className: {},
       defaultValue: {},
       excludeFromTabOrder: {},
       id: {},

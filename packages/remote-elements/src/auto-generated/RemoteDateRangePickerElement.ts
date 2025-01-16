@@ -17,6 +17,7 @@ export class RemoteDateRangePickerElement extends FlowRemoteElement<RemoteDateRa
       "aria-label": {},
       "aria-labelledby": {},
       autoFocus: {},
+      className: {},
       defaultOpen: {},
       defaultValue: {},
       endName: {},

@@ -1,18 +1,19 @@
 import type { FC } from "react";
 import React from "react";
+import styles from "./Footer.module.scss";
 import { PaginationInfos } from "~/components/List/components/Footer/components/PaginationInfos";
 import { ShowNextBatchButton } from "~/components/List/components/Footer/components/ShowNextBatchButton";
-import { useViewComponent } from "~/lib/viewComponentContext/useViewComponent";
-import * as ListViews from "~/components/List/views";
+import { useViewComponents } from "~/lib/viewComponentContext/useViewComponent";
+import { Div } from "~/components/Div";
 
 export const Footer: FC = () => {
-  const View = useViewComponent("ListFooterView", ListViews.Footer);
+  const { DivView } = useViewComponents(["Div", Div]);
 
   return (
-    <View>
+    <DivView className={styles.footer}>
       <PaginationInfos />
       <ShowNextBatchButton />
-    </View>
+    </DivView>
   );
 };
 

@@ -1,9 +1,10 @@
 import type { FC } from "react";
 import React from "react";
-import IconImage from "../../../Icon/components/icons/IconImage";
 import { IconFile } from "~/components/Icon/components/icons";
 import { Avatar as AvatarComponent } from "~/components/Avatar";
 import { Image } from "~/components/Image";
+import Icon from "~/components/Icon";
+import { IconPhoto } from "@tabler/icons-react";
 
 interface Props {
   type?: string;
@@ -23,7 +24,13 @@ export const Avatar: FC<Props> = (props) => {
 
   return (
     <AvatarComponent color="blue">
-      {type?.startsWith("image") ? <IconImage /> : <IconFile />}
+      {type?.startsWith("image") ? (
+        <Icon>
+          <IconPhoto />
+        </Icon>
+      ) : (
+        <IconFile />
+      )}
     </AvatarComponent>
   );
 };

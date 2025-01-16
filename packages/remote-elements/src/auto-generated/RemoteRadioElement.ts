@@ -16,6 +16,7 @@ export class RemoteRadioElement extends FlowRemoteElement<RemoteRadioElementProp
       "aria-label": {},
       "aria-labelledby": {},
       autoFocus: {},
+      className: {},
       id: {},
       inputRef: {},
       isDisabled: {},

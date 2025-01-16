@@ -11,6 +11,7 @@ export class RemoteLightBoxElement extends FlowRemoteElement<RemoteLightBoxEleme
 
   static override get remoteProperties() {
     return {
+      className: {},
       controller: {},
       fitScreen: {},
     };

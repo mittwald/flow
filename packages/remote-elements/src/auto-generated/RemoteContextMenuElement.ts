@@ -14,6 +14,7 @@ export class RemoteContextMenuElement extends FlowRemoteElement<RemoteContextMen
       UNSTABLE_portalContainer: {},
       arrowBoundaryOffset: {},
       boundaryElement: {},
+      className: {},
       containerPadding: {},
       controller: {},
       crossOffset: {},

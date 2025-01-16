@@ -12,6 +12,7 @@ export class RemoteOptionElement extends FlowRemoteElement<RemoteOptionElementPr
   static override get remoteProperties() {
     return {
       "aria-label": {},
+      className: {},
       download: {},
       href: {},
       hrefLang: {},

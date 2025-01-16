@@ -15,6 +15,7 @@ export class RemoteTabsElement extends FlowRemoteElement<RemoteTabsElementProps>
       "aria-details": {},
       "aria-label": {},
       "aria-labelledby": {},
+      className: {},
       defaultSelectedKey: {},
       disabledKeys: {},
       id: {},

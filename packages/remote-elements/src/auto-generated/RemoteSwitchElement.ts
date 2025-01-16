@@ -17,6 +17,7 @@ export class RemoteSwitchElement extends FlowRemoteElement<RemoteSwitchElementPr
       "aria-label": {},
       "aria-labelledby": {},
       autoFocus: {},
+      className: {},
       defaultSelected: {},
       excludeFromTabOrder: {},
       id: {},

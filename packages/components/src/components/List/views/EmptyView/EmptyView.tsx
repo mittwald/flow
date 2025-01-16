@@ -7,7 +7,10 @@ import { Text } from "~/components/Text";
 import locales from "../../locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 
-export const EmptyView: FC = () => {
+export type EmptyViewProps = Record<string, never>;
+
+/** @flr-generate all */
+export const EmptyView: FC<EmptyViewProps> = () => {
   const stringFormatter = useLocalizedStringFormatter(locales);
 
   return (

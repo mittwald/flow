@@ -70,6 +70,7 @@ export class RemoteContentElement extends FlowRemoteElement<RemoteContentElement
       autoCorrect: {},
       autoFocus: {},
       autoSave: {},
+      className: {},
       clearPropsContext: {},
       color: {},
       content: {},

@@ -16,6 +16,7 @@ export class RemoteRadioGroupElement extends FlowRemoteElement<RemoteRadioGroupE
       "aria-errormessage": {},
       "aria-label": {},
       "aria-labelledby": {},
+      className: {},
       defaultValue: {},
       id: {},
       isDisabled: {},

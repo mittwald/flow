@@ -4,7 +4,6 @@ export const config = {
     "ref",
     "key",
     "children",
-    "className",
     "style",
     "dangerouslySetInnerHTML",
     "wrapWith",

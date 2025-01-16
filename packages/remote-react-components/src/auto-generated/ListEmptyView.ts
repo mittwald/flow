@@ -1,0 +1,17 @@
+/* prettier-ignore */
+/* This file is auto-generated with the remote-components-generator */
+import createFlowRemoteComponent from "~/lib/createFlowRemoteComponent";
+import { RemoteListEmptyViewElement } from "@mittwald/flow-remote-elements";
+
+export const ListEmptyView = createFlowRemoteComponent(
+  "flr-list-empty-view",
+  "ListEmptyView",
+  RemoteListEmptyViewElement,
+  {
+    slotProps: {
+      wrapper: false,
+    },
+
+    eventProps: {},
+  },
+);

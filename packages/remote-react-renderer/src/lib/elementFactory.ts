@@ -1,7 +1,9 @@
 import { createElement } from "react";
-import { mapReactElementAttributes } from "~/lib/mapReactElementAttributes";
+import { mapKeys } from "remeda";
+import clsx from "clsx";
+import { mapAttributeToReactProperty } from "~/lib/mapAttributeToReactProperty";
 
-export type ElementTagNameMap = HTMLElementTagNameMap &
+type ElementTagNameMap = HTMLElementTagNameMap &
   Pick<
     SVGElementTagNameMap,
     Exclude<keyof SVGElementTagNameMap, keyof HTMLElementTagNameMap>
@@ -9,6 +11,16 @@ export type ElementTagNameMap = HTMLElementTagNameMap &
 
 export const elementFactory =
   <E extends keyof ElementTagNameMap>(element: E) =>
-  (props: ElementTagNameMap[E]) => {
-    return createElement(element, mapReactElementAttributes(props));
+  (props: Record<string, unknown>) => {
+    const result = { ...props };
+
+    // merge className and class
+    result["className"] = clsx(
+      String(result["className"]),
+      String(result["class"]),
+    );
+
+    delete result["class"];
+
+    return createElement(element, mapKeys(result, mapAttributeToReactProperty));
   };

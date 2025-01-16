@@ -1,4 +1,3 @@
-export * from "./view";
 import { Icon } from "./Icon";
 
 export { type IconProps, Icon } from "./Icon";

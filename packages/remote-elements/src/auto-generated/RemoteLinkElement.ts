@@ -17,6 +17,7 @@ export class RemoteLinkElement extends FlowRemoteElement<RemoteLinkElementProps>
       "aria-label": {},
       "aria-labelledby": {},
       autoFocus: {},
+      className: {},
       color: {},
       download: {},
       href: {},

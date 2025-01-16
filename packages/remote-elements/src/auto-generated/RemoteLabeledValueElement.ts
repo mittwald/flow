@@ -10,7 +10,9 @@ export class RemoteLabeledValueElement extends FlowRemoteElement<RemoteLabeledVa
   }
 
   static override get remoteProperties() {
-    return {};
+    return {
+      className: {},
+    };
   }
 
   static override get remoteEvents() {

@@ -2,11 +2,12 @@ import type { PropsWithChildren } from "react";
 import React from "react";
 import { flowComponent } from "~/lib/componentFactory/flowComponent";
 import { listContext } from "./listContext";
+import { DataLoader } from "~/components/List/components/DataLoader";
 import { Header } from "~/components/List/components/Header";
-import { Footer } from "~/components/List/components/Footer";
+import styles from "./List.module.css";
 import ListModel from "~/components/List/model/List";
+import { Items } from "~/components/List/components/Items";
 import { deepFilterByType, deepFindOfType } from "~/lib/react/deepFindOfType";
-import { List as ListView } from "~/components/List/views/List";
 import { ListLoaderAsync } from "~/components/List/setupComponents/ListLoaderAsync";
 import { ListFilter } from "~/components/List/setupComponents/ListFilter";
 import { ListSorting } from "~/components/List/setupComponents/ListSorting";
@@ -14,25 +15,25 @@ import { ListItem } from "~/components/List/setupComponents/ListItem";
 import { ListStaticData } from "~/components/List/setupComponents/ListStaticData";
 import { ListLoaderAsyncResource } from "~/components/List/setupComponents/ListLoaderAsyncResource";
 import type { IncrementalLoaderShape } from "~/components/List/model/loading/types";
+import Footer from "./components/Footer";
 import { ListSearch } from "~/components/List/setupComponents/ListSearch";
 import type { ListShape } from "~/components/List/model/types";
 import { TableColumn } from "~/components/List/setupComponents/TableColumn";
 import { TableRow } from "~/components/List/setupComponents/TableRow";
 import { TableCell } from "~/components/List/setupComponents/TableCell";
+import { Table } from "~/components/List/components/Table";
 import { Table as TableSetupComponent } from "~/components/List/setupComponents/Table";
 import { TableHeader } from "~/components/List/setupComponents/TableHeader";
 import { TableBody } from "~/components/List/setupComponents/TableBody";
-import { TunnelProvider } from "@mittwald/react-tunnel";
+import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import { type PropsContext, PropsContextProvider } from "~/lib/propsContext";
-import headerStyles from "./views/Header/Header.module.css";
+import headerStyles from "./components/Header/Header.module.css";
 import { ActionGroup } from "~/components/ActionGroup";
 import { deepHas } from "~/lib/react/deepHas";
-import DataLoader from "./components/DataLoader";
-import { Items } from "~/components/List/components/Items";
-import { useViewComponent } from "~/lib/viewComponentContext/useViewComponent";
-import { Table } from "~/components/List/components/Table";
+import { useViewComponents } from "~/lib/viewComponentContext/useViewComponent";
+import { Div } from "~/components/Div";
 
-export interface ListProps<T = never>
+export interface ListProps<T>
   extends PropsWithChildren,
     Omit<
       ListShape<T>,
@@ -50,8 +51,6 @@ export interface ListProps<T = never>
 
 export const List = flowComponent("List", (props) => {
   const { children, batchSize, onChange, ref, ...restProps } = props;
-
-  const View = useViewComponent("ListListView", ListView);
 
   const listLoaderAsync = deepFindOfType(
     children,
@@ -113,9 +112,9 @@ export const List = flowComponent("List", (props) => {
     ),
     search: searchProps
       ? {
+          render: searchProps.children,
           textFieldProps: searchProps,
           defaultValue: searchProps.defaultValue,
-          autoSubmit: searchProps.autoSubmit,
         }
       : undefined,
     sorting: deepFilterByType(children, ListSorting<never>).map((s) => s.props),
@@ -164,6 +163,8 @@ export const List = flowComponent("List", (props) => {
 
   const hasActionGroup = deepHas(children, ActionGroup);
 
+  const { DivView } = useViewComponents(["Div", Div]);
+
   return (
     <PropsContextProvider props={propsContext}>
       <TunnelProvider>
@@ -172,14 +173,20 @@ export const List = flowComponent("List", (props) => {
             list: listModel,
           }}
         >
-          <View ref={ref}>
+          <DataLoader />
+          <DivView className={styles.list} ref={ref}>
             {children}
-            <DataLoader />
             <Header hasActionGroup={hasActionGroup} />
-            {listModel.viewMode === "list" && <Items />}
-            {listModel.viewMode === "table" && <Table />}
+
+            <DivView>
+              {listModel.items.entries.length > 0 && (
+                <TunnelExit id="listSummary" />
+              )}
+              {listModel.viewMode === "list" && <Items />}
+              {listModel.viewMode === "table" && <Table />}
+            </DivView>
             <Footer />
-          </View>
+          </DivView>
         </listContext.Provider>
       </TunnelProvider>
     </PropsContextProvider>

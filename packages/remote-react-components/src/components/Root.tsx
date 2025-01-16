@@ -1,7 +1,7 @@
 import type { FC, PropsWithChildren } from "react";
 import React from "react";
 import { connectHostIframeRef } from "@mittwald/flow-remote-core";
-import { ViewComponentContextProvider } from "@mittwald/flow-react-components/ViewComponentContext";
+import { ViewComponentContextProvider } from "@mittwald/flow-react-components/internal";
 import * as viewComponents from "~/auto-generated";
 
 type Props = PropsWithChildren;

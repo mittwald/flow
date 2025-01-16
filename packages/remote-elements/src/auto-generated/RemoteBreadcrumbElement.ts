@@ -15,6 +15,7 @@ export class RemoteBreadcrumbElement extends FlowRemoteElement<RemoteBreadcrumbE
       "aria-details": {},
       "aria-label": {},
       "aria-labelledby": {},
+      className: {},
       color: {},
       dependencies: {},
       id: {},

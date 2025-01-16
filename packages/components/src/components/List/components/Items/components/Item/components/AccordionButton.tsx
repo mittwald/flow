@@ -7,6 +7,7 @@ import {
 } from "~/components/Icon/components/icons";
 import locales from "../../../../../locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
+import { useViewComponents } from "~/lib/viewComponentContext/useViewComponent";
 
 interface Props extends PropsWithChildren {
   isExpanded: boolean;
@@ -17,10 +18,11 @@ interface Props extends PropsWithChildren {
 export const AccordionButton: FC<Props> = (props) => {
   const { isExpanded, toggle, children, contentElementId } = props;
   const stringFormatter = useLocalizedStringFormatter(locales);
+  const { ButtonView } = useViewComponents(["Button", Button]);
 
   return (
     <>
-      <Button
+      <ButtonView
         variant="plain"
         color="secondary"
         onPress={toggle}
@@ -31,7 +33,7 @@ export const AccordionButton: FC<Props> = (props) => {
         aria-expanded={isExpanded}
       >
         {isExpanded ? <IconChevronUp /> : <IconChevronDown />}
-      </Button>
+      </ButtonView>
       {isExpanded && children}
     </>
   );

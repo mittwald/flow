@@ -70,6 +70,7 @@ export class RemoteAlertElement extends FlowRemoteElement<RemoteAlertElementProp
       autoCorrect: {},
       autoFocus: {},
       autoSave: {},
+      className: {},
       color: {},
       content: {},
       contentEditable: {},

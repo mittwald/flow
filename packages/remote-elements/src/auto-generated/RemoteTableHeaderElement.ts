@@ -11,6 +11,7 @@ export class RemoteTableHeaderElement extends FlowRemoteElement<RemoteTableHeade
 
   static override get remoteProperties() {
     return {
+      className: {},
       columns: {},
       dependencies: {},
     };

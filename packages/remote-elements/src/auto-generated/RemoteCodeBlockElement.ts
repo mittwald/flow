@@ -11,6 +11,7 @@ export class RemoteCodeBlockElement extends FlowRemoteElement<RemoteCodeBlockEle
 
   static override get remoteProperties() {
     return {
+      className: {},
       code: {},
       color: {},
       copyable: {},

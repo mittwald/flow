@@ -1,25 +1,27 @@
 import type { FC } from "react";
 import React from "react";
+import { SortingPicker } from "~/components/List/components/Header/components/SortingPicker";
+import FilterPicker from "~/components/List/components/Header/components/FilterPicker";
+import styles from "./Header.module.css";
+import clsx from "clsx";
+import { ActiveFilters } from "~/components/List/components/Header/components/ActiveFilters";
 import { useList } from "~/components/List/hooks/useList";
-import { FilterPicker } from "~/components/List/components/Header/components/FilterPicker/FilterPicker";
-import { ActiveFilterList } from "~/components/List/components/Header/components/ActiveFilterList";
-import { useViewComponent } from "~/lib/viewComponentContext/useViewComponent";
+import type { PropsWithClassName } from "~/lib/types/props";
+import { SearchField } from "~/components/List/components/Header/components/SearchField/SearchField";
 import { ViewModeMenu } from "~/components/List/components/Header/components/ViewModeMenu/ViewModeMenu";
-import * as ListViews from "~/components/List/views";
-import Fragment from "~/components/Fragment";
+import { TunnelExit } from "@mittwald/react-tunnel";
+import { useViewComponents } from "~/lib/viewComponentContext/useViewComponent";
+import { Div } from "~/components/Div";
 
-interface Props {
+interface Props extends PropsWithClassName {
   hasActionGroup?: boolean;
 }
 
 export const Header: FC<Props> = (props) => {
-  const { hasActionGroup } = props;
+  const { className, hasActionGroup } = props;
   const list = useList();
 
-  const Views = {
-    Header: useViewComponent("ListHeaderView", ListViews.Header),
-    Fragment: useViewComponent("Fragment", Fragment),
-  };
+  const { DivView } = useViewComponents(["Div", Div]);
 
   if (
     list.filters.length === 0 &&
@@ -36,25 +38,22 @@ export const Header: FC<Props> = (props) => {
   ));
 
   return (
-    <Views.Header
-      onSearchChanged={(search) => {
-        list.search?.setValue(search);
-      }}
-      autoSubmitSearch={list.search?.autoSubmit}
-      searchValue={list.search?.value}
-      showSearch={!!list.search}
-      filterPickerList={<Views.Fragment>{filterPickerList}</Views.Fragment>}
-      viewModeMenu={
-        <Views.Fragment>
+    <DivView className={clsx(className, styles.header)}>
+      <DivView className={styles.pickerListAndSearch}>
+        <DivView className={styles.pickerList}>
           <ViewModeMenu />
-        </Views.Fragment>
-      }
-      activeFilterList={
-        <Views.Fragment>
-          <ActiveFilterList />
-        </Views.Fragment>
-      }
-    />
+          <SortingPicker />
+          {filterPickerList}
+        </DivView>
+        <DivView className={styles.searchAndActions}>
+          {list.search && (
+            <SearchField className={styles.searchField} search={list.search} />
+          )}
+          <TunnelExit id="actions" />
+        </DivView>
+      </DivView>
+      <ActiveFilters />
+    </DivView>
   );
 };
 

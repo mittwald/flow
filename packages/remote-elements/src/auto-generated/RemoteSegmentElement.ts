@@ -16,6 +16,7 @@ export class RemoteSegmentElement extends FlowRemoteElement<RemoteSegmentElement
       "aria-label": {},
       "aria-labelledby": {},
       autoFocus: {},
+      className: {},
       id: {},
       inputRef: {},
       isDisabled: {},

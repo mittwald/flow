@@ -71,6 +71,7 @@ export class RemoteImageElement extends FlowRemoteElement<RemoteImageElementProp
       autoCorrect: {},
       autoFocus: {},
       autoSave: {},
+      className: {},
       color: {},
       content: {},
       contentEditable: {},

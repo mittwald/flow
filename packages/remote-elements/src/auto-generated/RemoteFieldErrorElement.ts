@@ -11,6 +11,7 @@ export class RemoteFieldErrorElement extends FlowRemoteElement<RemoteFieldErrorE
 
   static override get remoteProperties() {
     return {
+      className: {},
       id: {},
     };
   }

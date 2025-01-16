@@ -1,8 +1,7 @@
 import type { PropsWithChildren, SVGAttributes } from "react";
-import React, { useMemo } from "react";
+import React from "react";
 import styles from "./Icon.module.scss";
 import clsx from "clsx";
-import { extractSvgFromString } from "~/components/Icon/lib/extractSvgFromString";
 import { ClearPropsContext } from "~/lib/propsContext";
 import type { FlowComponentProps } from "~/lib/componentFactory/flowComponent";
 import { flowComponent } from "~/lib/componentFactory/flowComponent";
@@ -34,22 +33,15 @@ export const Icon = flowComponent("Icon", (props) => {
     role: "img",
     "aria-hidden": !ariaLabel,
     "aria-label": ariaLabel,
-
     className: clsx(styles.icon, className, styles[`size-${size}`]),
   };
 
-  const isCustomSvgString = typeof children === "string";
-
-  // @warning: extractSvgFromString might be a performance-killer
-  const iconElement = useMemo(
-    () => (isCustomSvgString ? extractSvgFromString(children) : children),
-    [isCustomSvgString, children],
-  );
+  const iconElement = React.Children.toArray(children)[0];
 
   if (!React.isValidElement(iconElement)) {
     throw new Error(
       `Expected children of Icon component to be a valid React element (got ${String(
-        iconElement,
+        children,
       )})`,
     );
   }

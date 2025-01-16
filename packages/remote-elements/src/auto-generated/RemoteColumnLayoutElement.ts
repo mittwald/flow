@@ -70,6 +70,7 @@ export class RemoteColumnLayoutElement extends FlowRemoteElement<RemoteColumnLay
       autoCorrect: {},
       autoFocus: {},
       autoSave: {},
+      className: {},
       color: {},
       columnGap: {},
       content: {},

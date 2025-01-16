@@ -11,6 +11,7 @@ export class RemoteBadgeElement extends FlowRemoteElement<RemoteBadgeElementProp
 
   static override get remoteProperties() {
     return {
+      className: {},
       color: {},
       isDisabled: {},
     };

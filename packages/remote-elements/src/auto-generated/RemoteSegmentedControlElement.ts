@@ -16,6 +16,7 @@ export class RemoteSegmentedControlElement extends FlowRemoteElement<RemoteSegme
       "aria-errormessage": {},
       "aria-label": {},
       "aria-labelledby": {},
+      className: {},
       containerBreakpointSize: {},
       defaultValue: {},
       id: {},

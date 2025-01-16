@@ -2,13 +2,15 @@
 import React, { type ComponentProps, type FC } from "react";
 import { IconEye as Tabler } from "@tabler/icons-react";
 import { Icon } from "~/components/Icon";
+import { useViewComponents } from "~/lib/viewComponentContext/useViewComponent";
 
 export const IconShow: FC<Omit<ComponentProps<typeof Icon>, "children">> = (
   props,
-) => (
-  <Icon {...props}>
-    <Tabler />
-  </Icon>
-);
-
-export default IconShow;
+) => {
+  const { IconView } = useViewComponents(["Icon", Icon]);
+  return (
+    <IconView {...props}>
+      <Tabler />
+    </IconView>
+  );
+};

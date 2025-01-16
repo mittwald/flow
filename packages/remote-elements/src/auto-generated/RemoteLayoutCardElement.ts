@@ -70,6 +70,7 @@ export class RemoteLayoutCardElement extends FlowRemoteElement<RemoteLayoutCardE
       autoCorrect: {},
       autoFocus: {},
       autoSave: {},
+      className: {},
       color: {},
       content: {},
       contentEditable: {},

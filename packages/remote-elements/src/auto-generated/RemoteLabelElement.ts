@@ -70,6 +70,7 @@ export class RemoteLabelElement extends FlowRemoteElement<RemoteLabelElementProp
       autoCorrect: {},
       autoFocus: {},
       autoSave: {},
+      className: {},
       color: {},
       content: {},
       contentEditable: {},

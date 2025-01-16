@@ -15,6 +15,7 @@ export class RemoteProgressBarElement extends FlowRemoteElement<RemoteProgressBa
       "aria-details": {},
       "aria-label": {},
       "aria-labelledby": {},
+      className: {},
       formatOptions: {},
       id: {},
       isIndeterminate: {},

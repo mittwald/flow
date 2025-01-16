@@ -11,6 +11,7 @@ export class RemoteAvatarElement extends FlowRemoteElement<RemoteAvatarElementPr
 
   static override get remoteProperties() {
     return {
+      className: {},
       color: {},
       size: {},
     };

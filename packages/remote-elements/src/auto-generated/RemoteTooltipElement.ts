@@ -17,6 +17,7 @@ export class RemoteTooltipElement extends FlowRemoteElement<RemoteTooltipElement
       "aria-label": {},
       "aria-labelledby": {},
       arrowBoundaryOffset: {},
+      className: {},
       containerPadding: {},
       crossOffset: {},
       defaultOpen: {},

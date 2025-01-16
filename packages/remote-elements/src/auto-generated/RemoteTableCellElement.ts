@@ -11,6 +11,7 @@ export class RemoteTableCellElement extends FlowRemoteElement<RemoteTableCellEle
 
   static override get remoteProperties() {
     return {
+      className: {},
       id: {},
       rowHeader: {},
       textValue: {},

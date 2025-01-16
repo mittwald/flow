@@ -10,7 +10,9 @@ export class RemoteInitialsElement extends FlowRemoteElement<RemoteInitialsEleme
   }
 
   static override get remoteProperties() {
-    return {};
+    return {
+      className: {},
+    };
   }
 
   static override get remoteEvents() {

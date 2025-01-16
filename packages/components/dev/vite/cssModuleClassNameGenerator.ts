@@ -1,6 +1,7 @@
 import decamelize from "decamelize";
+import path from "path";
 
-const parentDir = __dirname;
+const packagesDir = path.resolve(__dirname, "../..");
 
 export const cssModuleClassNameGenerator = (
   name: string,
@@ -11,8 +12,8 @@ export const cssModuleClassNameGenerator = (
     return name;
   }
 
-  const relativeFilename = filename.startsWith(parentDir)
-    ? filename.slice(parentDir.length)
+  const relativeFilename = filename.startsWith(packagesDir)
+    ? filename.slice(packagesDir.length)
     : filename;
 
   if (!/.*\.module\.s?css/.test(relativeFilename)) {

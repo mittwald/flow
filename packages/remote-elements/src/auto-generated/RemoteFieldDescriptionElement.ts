@@ -70,6 +70,7 @@ export class RemoteFieldDescriptionElement extends FlowRemoteElement<RemoteField
       autoCorrect: {},
       autoFocus: {},
       autoSave: {},
+      className: {},
       color: {},
       content: {},
       contentEditable: {},

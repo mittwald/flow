@@ -1,12 +1,12 @@
 import type { FC, PropsWithChildren } from "react";
-import React from "react";
+import React, { Suspense } from "react";
 import styles from "./Item.module.scss";
 import type { Key } from "react-aria-components";
-import * as Aria from "react-aria-components";
 import { useList } from "~/components/List/hooks/useList";
+import { SkeletonView } from "~/components/List/components/Items/components/Item/components/SkeletonView/SkeletonView";
 import { useGridItemProps } from "~/components/List/components/Items/components/Item/hooks/useGridItemProps";
-import { useViewComponent } from "~/lib/viewComponentContext/useViewComponent";
-import * as ListViews from "~/components/List/views";
+import { useViewComponents } from "~/lib/viewComponentContext/useViewComponent";
+import { GridListItem } from "~/components/List/components/Items/views/GridListItem";
 
 interface Props extends PropsWithChildren {
   id: Key;
@@ -17,38 +17,47 @@ export const Item = (props: Props) => {
   const { id, data } = props;
   const list = useList();
 
-  const itemViewSettings = list.itemView;
-  const Views = {
-    ItemContainer: useViewComponent(
-      "ListItemContainerView",
-      ListViews.ItemContainer,
-    ),
-  };
+  const itemView = list.itemView;
 
   const { gridItemProps, children } = useGridItemProps(props);
 
-  const textValue = itemViewSettings?.textValue
-    ? itemViewSettings.textValue(data)
-    : "---";
-  const href = itemViewSettings?.href ? itemViewSettings.href(data) : undefined;
+  const { ItemsGridListItemView } = useViewComponents([
+    "ItemsGridListItem",
+    GridListItem,
+  ]);
+
+  if (!itemView) {
+    return null;
+  }
+
+  const textValue = itemView.textValue ? itemView.textValue(data) : undefined;
+  const href = itemView.href ? itemView.href(data) : undefined;
+  const hasAction = !!gridItemProps.onAction || !!href;
 
   return (
-    <Views.ItemContainer
+    <ItemsGridListItemView
       id={id}
       textValue={textValue}
-      key={id}
       href={href}
+      hasAction={hasAction}
       {...gridItemProps}
     >
-      {children}
-    </Views.ItemContainer>
+      <Suspense fallback={<SkeletonView />}>{children}</Suspense>
+    </ItemsGridListItemView>
   );
 };
 
-export const ItemContainer: FC<PropsWithChildren> = (props) => (
-  <Aria.GridListItem textValue="-" className={styles.item}>
-    {props.children}
-  </Aria.GridListItem>
-);
+export const ItemContainer: FC<PropsWithChildren> = (props) => {
+  const { ItemsGridListItemView } = useViewComponents([
+    "ItemsGridListItem",
+    GridListItem,
+  ]);
+
+  return (
+    <ItemsGridListItemView textValue="-" className={styles.item}>
+      {props.children}
+    </ItemsGridListItemView>
+  );
+};
 
 export default Item;

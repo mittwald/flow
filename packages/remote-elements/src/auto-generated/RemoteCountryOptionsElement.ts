@@ -16,6 +16,7 @@ export class RemoteCountryOptionsElement extends FlowRemoteElement<RemoteCountry
       "aria-label": {},
       "aria-labelledby": {},
       autoFocus: {},
+      className: {},
       defaultSelectedKeys: {},
       dependencies: {},
       disabledKeys: {},

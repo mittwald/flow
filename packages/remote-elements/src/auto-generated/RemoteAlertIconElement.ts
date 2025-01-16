@@ -86,6 +86,7 @@ export class RemoteAlertIconElement extends FlowRemoteElement<RemoteAlertIconEle
       by: {},
       calcMode: {},
       capHeight: {},
+      className: {},
       clip: {},
       clipPath: {},
       clipPathUnits: {},

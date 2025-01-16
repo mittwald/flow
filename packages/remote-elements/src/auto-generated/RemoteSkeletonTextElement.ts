@@ -70,6 +70,7 @@ export class RemoteSkeletonTextElement extends FlowRemoteElement<RemoteSkeletonT
       autoCorrect: {},
       autoFocus: {},
       autoSave: {},
+      className: {},
       color: {},
       content: {},
       contentEditable: {},

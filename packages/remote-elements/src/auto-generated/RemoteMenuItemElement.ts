@@ -12,6 +12,7 @@ export class RemoteMenuItemElement extends FlowRemoteElement<RemoteMenuItemEleme
   static override get remoteProperties() {
     return {
       "aria-label": {},
+      className: {},
       download: {},
       href: {},
       hrefLang: {},

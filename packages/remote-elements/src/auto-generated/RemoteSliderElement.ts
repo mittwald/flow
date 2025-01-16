@@ -15,6 +15,7 @@ export class RemoteSliderElement extends FlowRemoteElement<RemoteSliderElementPr
       "aria-details": {},
       "aria-label": {},
       "aria-labelledby": {},
+      className: {},
       defaultValue: {},
       formatOptions: {},
       id: {},

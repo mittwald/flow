@@ -21,6 +21,7 @@ export class RemoteSearchFieldElement extends FlowRemoteElement<RemoteSearchFiel
       "aria-labelledby": {},
       autoComplete: {},
       autoFocus: {},
+      className: {},
       defaultValue: {},
       excludeFromTabOrder: {},
       id: {},

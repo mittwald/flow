@@ -2,13 +2,15 @@
 import React, { type ComponentProps, type FC } from "react";
 import { IconCalendarCheck as Tabler } from "@tabler/icons-react";
 import { Icon } from "~/components/Icon";
+import { useViewComponents } from "~/lib/viewComponentContext/useViewComponent";
 
 export const IconCronjob: FC<Omit<ComponentProps<typeof Icon>, "children">> = (
   props,
-) => (
-  <Icon {...props}>
-    <Tabler />
-  </Icon>
-);
-
-export default IconCronjob;
+) => {
+  const { IconView } = useViewComponents(["Icon", Icon]);
+  return (
+    <IconView {...props}>
+      <Tabler />
+    </IconView>
+  );
+};

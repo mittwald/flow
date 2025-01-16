@@ -14,6 +14,7 @@ export class RemotePopoverElement extends FlowRemoteElement<RemotePopoverElement
       UNSTABLE_portalContainer: {},
       arrowBoundaryOffset: {},
       boundaryElement: {},
+      className: {},
       containerPadding: {},
       controller: {},
       crossOffset: {},

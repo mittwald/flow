@@ -71,6 +71,7 @@ export class RemoteNotificationElement extends FlowRemoteElement<RemoteNotificat
       autoCorrect: {},
       autoFocus: {},
       autoSave: {},
+      className: {},
       color: {},
       content: {},
       contentEditable: {},

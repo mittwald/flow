@@ -70,6 +70,7 @@ export class RemoteNavigationElement extends FlowRemoteElement<RemoteNavigationE
       autoCorrect: {},
       autoFocus: {},
       autoSave: {},
+      className: {},
       color: {},
       content: {},
       contentEditable: {},

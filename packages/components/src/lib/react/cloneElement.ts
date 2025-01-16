@@ -18,8 +18,8 @@ export const cloneElement = <P>(
       "properties" in child.props.element
     ) {
       child.props.element.properties = {
-        ...props,
         ...child.props.element.properties,
+        ...props,
       };
     } else if (
       (index === undefined || index === 0) &&

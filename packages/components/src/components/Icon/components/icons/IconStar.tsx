@@ -2,13 +2,15 @@
 import React, { type ComponentProps, type FC } from "react";
 import { IconStar as Tabler } from "@tabler/icons-react";
 import { Icon } from "~/components/Icon";
+import { useViewComponents } from "~/lib/viewComponentContext/useViewComponent";
 
 export const IconStar: FC<Omit<ComponentProps<typeof Icon>, "children">> = (
   props,
-) => (
-  <Icon {...props}>
-    <Tabler />
-  </Icon>
-);
-
-export default IconStar;
+) => {
+  const { IconView } = useViewComponents(["Icon", Icon]);
+  return (
+    <IconView {...props}>
+      <Tabler />
+    </IconView>
+  );
+};

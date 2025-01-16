@@ -19,6 +19,6 @@ export const remoteComponentBaseNameOf = (c: ComponentDoc) => {
       pascalCase: true,
     }) +
     componentName +
-    (viewName ? viewName + "View" : "")
+    (viewName ? viewName : "")
   );
 };

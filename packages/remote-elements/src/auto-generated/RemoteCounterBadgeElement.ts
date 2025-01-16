@@ -70,6 +70,7 @@ export class RemoteCounterBadgeElement extends FlowRemoteElement<RemoteCounterBa
       autoCorrect: {},
       autoFocus: {},
       autoSave: {},
+      className: {},
       color: {},
       content: {},
       contentEditable: {},

@@ -11,6 +11,7 @@ export class RemoteAlertBadgeElement extends FlowRemoteElement<RemoteAlertBadgeE
 
   static override get remoteProperties() {
     return {
+      className: {},
       status: {},
     };
   }

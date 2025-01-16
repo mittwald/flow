@@ -70,6 +70,7 @@ export class RemoteAccordionElement extends FlowRemoteElement<RemoteAccordionEle
       autoCorrect: {},
       autoFocus: {},
       autoSave: {},
+      className: {},
       color: {},
       content: {},
       contentEditable: {},

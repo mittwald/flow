@@ -16,6 +16,7 @@ export class RemoteRadioButtonElement extends FlowRemoteElement<RemoteRadioButto
       "aria-label": {},
       "aria-labelledby": {},
       autoFocus: {},
+      className: {},
       id: {},
       inputRef: {},
       isDisabled: {},

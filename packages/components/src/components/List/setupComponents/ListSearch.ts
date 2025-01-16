@@ -1,7 +1,11 @@
-import type { SearchShape } from "~/components/List/model/search/types";
+import type {
+  SearchFieldRenderComponent,
+  SearchShape,
+} from "~/components/List/model/search/types";
 import type { ComponentType } from "react";
 
 type Props<T> = Omit<SearchShape<T>, "render" | "textFieldProps"> & {
+  children?: SearchFieldRenderComponent;
   autoSubmit?: boolean;
 } & SearchShape<T>["textFieldProps"];
 

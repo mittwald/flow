@@ -16,6 +16,7 @@ export class RemoteCheckboxGroupElement extends FlowRemoteElement<RemoteCheckbox
       "aria-errormessage": {},
       "aria-label": {},
       "aria-labelledby": {},
+      className: {},
       defaultValue: {},
       id: {},
       isDisabled: {},

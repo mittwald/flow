@@ -21,6 +21,7 @@ export class RemoteTextFieldElement extends FlowRemoteElement<RemoteTextFieldEle
       "aria-labelledby": {},
       autoComplete: {},
       autoFocus: {},
+      className: {},
       defaultValue: {},
       excludeFromTabOrder: {},
       form: {},

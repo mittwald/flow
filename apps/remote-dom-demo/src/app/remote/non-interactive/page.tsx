@@ -10,7 +10,7 @@ import {
 export default function Page() {
   return (
     <>
-      <Alert>
+      <Alert status="danger">
         <Heading>Alert title</Heading>
         <Text>Alert text</Text>
         <TextField>

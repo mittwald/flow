@@ -28,6 +28,7 @@ import { CounterBadge as CounterBadge } from "@mittwald/flow-react-components/Co
 import { CountryOptions as CountryOptions } from "@mittwald/flow-react-components/Select";
 import { DatePicker as DatePicker } from "@mittwald/flow-react-components/DatePicker";
 import { DateRangePicker as DateRangePicker } from "@mittwald/flow-react-components/DateRangePicker";
+import { Div as Div } from "@mittwald/flow-react-components/Div";
 import { FieldDescription as FieldDescription } from "@mittwald/flow-react-components/FieldDescription";
 import { FieldError as FieldError } from "@mittwald/flow-react-components/FieldError";
 import { FileCard as FileCard } from "@mittwald/flow-react-components/FileCard";
@@ -42,28 +43,15 @@ import { IllustratedMessage as IllustratedMessage } from "@mittwald/flow-react-c
 import { Image as Image } from "@mittwald/flow-react-components/Image";
 import { Initials as Initials } from "@mittwald/flow-react-components/Initials";
 import { InlineCode as InlineCode } from "@mittwald/flow-react-components/InlineCode";
+import { GridList as ItemsGridList } from "@mittwald/flow-react-components/List";
+import { GridListItem as ItemsGridListItem } from "@mittwald/flow-react-components/List";
 import { Label as Label } from "@mittwald/flow-react-components/Label";
 import { LabeledValue as LabeledValue } from "@mittwald/flow-react-components/LabeledValue";
 import { LayoutCard as LayoutCard } from "@mittwald/flow-react-components/LayoutCard";
 import { LightBox as LightBox } from "@mittwald/flow-react-components/LightBox";
 import { LightBoxTrigger as LightBoxTrigger } from "@mittwald/flow-react-components/LightBox";
 import { Link as Link } from "@mittwald/flow-react-components/Link";
-import { ActiveFilterItem as ListActiveFilterItemView } from "@mittwald/flow-react-components/List/views";
-import { ActiveFilterList as ListActiveFilterListView } from "@mittwald/flow-react-components/List/views";
-import { FilterPickerMenuItem as ListFilterPickerMenuItemView } from "@mittwald/flow-react-components/List/views";
-import { FilterPicker as ListFilterPickerView } from "@mittwald/flow-react-components/List/views";
-import { Footer as ListFooterView } from "@mittwald/flow-react-components/List/views";
-import { Header as ListHeaderView } from "@mittwald/flow-react-components/List/views";
-import { ItemContainer as ListItemContainerView } from "@mittwald/flow-react-components/List/views";
-import { ListItemView as ListItemView } from "@mittwald/flow-react-components/List";
-import { Items as ListItemsView } from "@mittwald/flow-react-components/List/views";
-import { List as ListListView } from "@mittwald/flow-react-components/List/views";
-import { LoadNextBatchButton as ListLoadNextBatchButtonView } from "@mittwald/flow-react-components/List/views";
-import { PaginationInfos as ListPaginationInfosView } from "@mittwald/flow-react-components/List/views";
-import { SearchField as ListSearchFieldView } from "@mittwald/flow-react-components/List/views";
-import { SortingPickerMenuItem as ListSortingPickerMenuItemView } from "@mittwald/flow-react-components/List/views";
-import { SortingPicker as ListSortingPickerView } from "@mittwald/flow-react-components/List/views";
-import { ViewModeMenu as ListViewModeMenuView } from "@mittwald/flow-react-components/List/views";
+import { EmptyView as ListEmptyView } from "@mittwald/flow-react-components/List";
 import { LoadingSpinner as LoadingSpinner } from "@mittwald/flow-react-components/LoadingSpinner";
 import { Markdown as Markdown } from "@mittwald/flow-react-components/Markdown";
 import { MenuItem as MenuItem } from "@mittwald/flow-react-components/MenuItem";
@@ -82,7 +70,6 @@ import { ProgressBar as ProgressBar } from "@mittwald/flow-react-components/Prog
 import { Radio as Radio } from "@mittwald/flow-react-components/RadioGroup";
 import { RadioButton as RadioButton } from "@mittwald/flow-react-components/RadioGroup";
 import { RadioGroup as RadioGroup } from "@mittwald/flow-react-components/RadioGroup";
-import { Content as ReactHookFormFieldContentView } from "@mittwald/flow-react-components/react-hook-form/Field/views";
 import { SearchField as SearchField } from "@mittwald/flow-react-components/SearchField";
 import { Section as Section } from "@mittwald/flow-react-components/Section";
 import { Segment as Segment } from "@mittwald/flow-react-components/SegmentedControl";
@@ -142,6 +129,7 @@ export const flowComponents = {
   "flr-country-options": createFlowRemoteComponentRenderer(CountryOptions),
   "flr-date-picker": createFlowRemoteComponentRenderer(DatePicker),
   "flr-date-range-picker": createFlowRemoteComponentRenderer(DateRangePicker),
+  "flr-div": createFlowRemoteComponentRenderer(Div),
   "flr-field-description": createFlowRemoteComponentRenderer(FieldDescription),
   "flr-field-error": createFlowRemoteComponentRenderer(FieldError),
   "flr-file-card": createFlowRemoteComponentRenderer(FileCard),
@@ -157,47 +145,16 @@ export const flowComponents = {
   "flr-image": createFlowRemoteComponentRenderer(Image),
   "flr-initials": createFlowRemoteComponentRenderer(Initials),
   "flr-inline-code": createFlowRemoteComponentRenderer(InlineCode),
+  "flr-items-grid-list": createFlowRemoteComponentRenderer(ItemsGridList),
+  "flr-items-grid-list-item":
+    createFlowRemoteComponentRenderer(ItemsGridListItem),
   "flr-label": createFlowRemoteComponentRenderer(Label),
   "flr-labeled-value": createFlowRemoteComponentRenderer(LabeledValue),
   "flr-layout-card": createFlowRemoteComponentRenderer(LayoutCard),
   "flr-light-box": createFlowRemoteComponentRenderer(LightBox),
   "flr-light-box-trigger": createFlowRemoteComponentRenderer(LightBoxTrigger),
   "flr-link": createFlowRemoteComponentRenderer(Link),
-  "flr-list-active-filter-item-view": createFlowRemoteComponentRenderer(
-    ListActiveFilterItemView,
-  ),
-  "flr-list-active-filter-list-view": createFlowRemoteComponentRenderer(
-    ListActiveFilterListView,
-  ),
-  "flr-list-filter-picker-menu-item-view": createFlowRemoteComponentRenderer(
-    ListFilterPickerMenuItemView,
-  ),
-  "flr-list-filter-picker-view":
-    createFlowRemoteComponentRenderer(ListFilterPickerView),
-  "flr-list-footer-view": createFlowRemoteComponentRenderer(ListFooterView),
-  "flr-list-header-view": createFlowRemoteComponentRenderer(ListHeaderView),
-  "flr-list-item-container-view": createFlowRemoteComponentRenderer(
-    ListItemContainerView,
-  ),
-  "flr-list-item-view": createFlowRemoteComponentRenderer(ListItemView),
-  "flr-list-items-view": createFlowRemoteComponentRenderer(ListItemsView),
-  "flr-list-list-view": createFlowRemoteComponentRenderer(ListListView),
-  "flr-list-load-next-batch-button-view": createFlowRemoteComponentRenderer(
-    ListLoadNextBatchButtonView,
-  ),
-  "flr-list-pagination-infos-view": createFlowRemoteComponentRenderer(
-    ListPaginationInfosView,
-  ),
-  "flr-list-search-field-view":
-    createFlowRemoteComponentRenderer(ListSearchFieldView),
-  "flr-list-sorting-picker-menu-item-view": createFlowRemoteComponentRenderer(
-    ListSortingPickerMenuItemView,
-  ),
-  "flr-list-sorting-picker-view": createFlowRemoteComponentRenderer(
-    ListSortingPickerView,
-  ),
-  "flr-list-view-mode-menu-view":
-    createFlowRemoteComponentRenderer(ListViewModeMenuView),
+  "flr-list-empty-view": createFlowRemoteComponentRenderer(ListEmptyView),
   "flr-loading-spinner": createFlowRemoteComponentRenderer(LoadingSpinner),
   "flr-markdown": createFlowRemoteComponentRenderer(Markdown),
   "flr-menu-item": createFlowRemoteComponentRenderer(MenuItem),
@@ -217,9 +174,6 @@ export const flowComponents = {
   "flr-radio": createFlowRemoteComponentRenderer(Radio),
   "flr-radio-button": createFlowRemoteComponentRenderer(RadioButton),
   "flr-radio-group": createFlowRemoteComponentRenderer(RadioGroup),
-  "flr-react-hook-form-field-content-view": createFlowRemoteComponentRenderer(
-    ReactHookFormFieldContentView,
-  ),
   "flr-search-field": createFlowRemoteComponentRenderer(SearchField),
   "flr-section": createFlowRemoteComponentRenderer(Section),
   "flr-segment": createFlowRemoteComponentRenderer(Segment),

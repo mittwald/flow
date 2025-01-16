@@ -70,6 +70,7 @@ export class RemoteInlineCodeElement extends FlowRemoteElement<RemoteInlineCodeE
       autoCorrect: {},
       autoFocus: {},
       autoSave: {},
+      className: {},
       color: {},
       content: {},
       contentEditable: {},

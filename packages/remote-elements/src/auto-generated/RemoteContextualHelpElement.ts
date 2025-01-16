@@ -14,6 +14,7 @@ export class RemoteContextualHelpElement extends FlowRemoteElement<RemoteContext
       UNSTABLE_portalContainer: {},
       arrowBoundaryOffset: {},
       boundaryElement: {},
+      className: {},
       containerPadding: {},
       controller: {},
       crossOffset: {},

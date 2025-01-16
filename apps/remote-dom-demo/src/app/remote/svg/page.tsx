@@ -9,11 +9,6 @@ import {
 } from "@mittwald/flow-remote-react-components";
 import { IconCircleCheck } from "@tabler/icons-react";
 
-const svgString = `\
-<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="100" cy="100" r="100" />
-</svg>`;
-
 const svgElement = (
   <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
     <g>
@@ -35,9 +30,6 @@ export default function Page() {
 
       <Heading level={4}>SVG element</Heading>
       <Icon>{svgElement}</Icon>
-
-      <Heading level={4}>SVG-String</Heading>
-      <Icon>{svgString}</Icon>
     </Section>
   );
 }

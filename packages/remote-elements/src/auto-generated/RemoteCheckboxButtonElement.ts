@@ -18,6 +18,7 @@ export class RemoteCheckboxButtonElement extends FlowRemoteElement<RemoteCheckbo
       "aria-label": {},
       "aria-labelledby": {},
       autoFocus: {},
+      className: {},
       defaultSelected: {},
       excludeFromTabOrder: {},
       id: {},

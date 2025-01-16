@@ -22,6 +22,7 @@ export class RemoteButtonElement extends FlowRemoteElement<RemoteButtonElementPr
       "aria-pressed": {},
       ariaSlot: {},
       autoFocus: {},
+      className: {},
       color: {},
       excludeFromTabOrder: {},
       form: {},

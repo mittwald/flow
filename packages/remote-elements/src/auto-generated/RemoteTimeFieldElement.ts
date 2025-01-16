@@ -16,6 +16,7 @@ export class RemoteTimeFieldElement extends FlowRemoteElement<RemoteTimeFieldEle
       "aria-label": {},
       "aria-labelledby": {},
       autoFocus: {},
+      className: {},
       defaultValue: {},
       granularity: {},
       hideTimeZone: {},

@@ -70,6 +70,7 @@ export class RemoteFileCardListElement extends FlowRemoteElement<RemoteFileCardL
       autoCorrect: {},
       autoFocus: {},
       autoSave: {},
+      className: {},
       color: {},
       columnGap: {},
       content: {},

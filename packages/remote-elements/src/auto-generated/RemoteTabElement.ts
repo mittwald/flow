@@ -15,6 +15,7 @@ export class RemoteTabElement extends FlowRemoteElement<RemoteTabElementProps> {
       "aria-details": {},
       "aria-label": {},
       "aria-labelledby": {},
+      className: {},
       id: {},
       shouldForceMount: {},
     };

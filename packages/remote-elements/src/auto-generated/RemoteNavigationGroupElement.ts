@@ -70,6 +70,7 @@ export class RemoteNavigationGroupElement extends FlowRemoteElement<RemoteNaviga
       autoCorrect: {},
       autoFocus: {},
       autoSave: {},
+      className: {},
       collapsable: {},
       color: {},
       content: {},

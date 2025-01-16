@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  ListItemView,
   Heading,
   Text,
   List,
@@ -20,14 +19,14 @@ export default function Page() {
       </DemoList.Filter>
       <DemoList.Search autoSubmit />
       <DemoList.StaticData data={demoData} />
-      <DemoList.Item>
+      <DemoList.Item textValue={(d) => d.name}>
         {(d) => (
-          <ListItemView>
+          <DemoList.ItemView>
             <Heading>
               {d.name} ({d.language})
             </Heading>
             <Text>{d.bio}</Text>
-          </ListItemView>
+          </DemoList.ItemView>
         )}
       </DemoList.Item>
       <DemoList.Table>

@@ -70,6 +70,7 @@ export class RemoteNotificationProviderElement extends FlowRemoteElement<RemoteN
       autoCorrect: {},
       autoFocus: {},
       autoSave: {},
+      className: {},
       color: {},
       content: {},
       contentEditable: {},

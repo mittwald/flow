@@ -107,6 +107,10 @@
       "types": "./dist/js/types/components/DateRangePicker/index.d.ts",
       "import": "./dist/js/DateRangePicker.js"
     },
+    "./Div": {
+      "types": "./dist/js/types/components/Div/index.d.ts",
+      "import": "./dist/js/Div.js"
+    },
     "./FieldDescription": {
       "types": "./dist/js/types/components/FieldDescription/index.d.ts",
       "import": "./dist/js/FieldDescription.js"
@@ -199,10 +203,6 @@
     "./List/ListLoaderAsyncResource": {
       "types": "./dist/js/types/components/List/components/ListLoaderAsyncResource.d.ts",
       "import": "./dist/js/List/ListLoaderAsyncResource.js"
-    },
-    "./List/views": {
-      "types": "./dist/js/types/components/List/views/index.d.ts",
-      "import": "./dist/js/List/views.js"
     },
     "./LoadingSpinner/styles.css": "./dist/css/LoadingSpinner.css",
     "./LoadingSpinner": {
@@ -360,9 +360,9 @@
       "types": "./dist/js/types/components/Wrap/index.d.ts",
       "import": "./dist/js/Wrap.js"
     },
-    "./ViewComponentContext": {
-      "types": "./dist/js/types/lib/viewComponentContext/index.d.ts",
-      "import": "./dist/js/ViewComponentContext.js"
+    "./internal": {
+      "types": "./dist/js/types/internal.d.ts",
+      "import": "./dist/js/internal.js"
     },
     "./hooks": {
       "types": "./dist/js/types/lib/hooks/index.d.ts",
@@ -379,10 +379,6 @@
     "./react-hook-form/Field": {
       "types": "./dist/js/types/integrations/react-hook-form/components/Field/index.d.ts",
       "import": "./dist/js/react-hook-form/Field.js"
-    },
-    "./react-hook-form/Field/views": {
-      "types": "./dist/js/types/integrations/react-hook-form/components/Field/views/index.d.ts",
-      "import": "./dist/js/react-hook-form/Field/views.js"
     },
     "./globals.css": "./dist/css/globals.css",
     "./all.css": "./dist/js/all.css",

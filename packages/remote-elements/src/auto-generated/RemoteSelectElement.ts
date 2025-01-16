@@ -17,6 +17,7 @@ export class RemoteSelectElement extends FlowRemoteElement<RemoteSelectElementPr
       "aria-labelledby": {},
       autoComplete: {},
       autoFocus: {},
+      className: {},
       controller: {},
       defaultOpen: {},
       defaultSelectedKey: {},

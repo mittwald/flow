@@ -15,6 +15,7 @@ export class RemoteSeparatorElement extends FlowRemoteElement<RemoteSeparatorEle
       "aria-details": {},
       "aria-label": {},
       "aria-labelledby": {},
+      className: {},
       elementType: {},
       id: {},
       slot: {},

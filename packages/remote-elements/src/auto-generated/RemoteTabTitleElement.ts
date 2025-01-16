@@ -15,6 +15,7 @@ export class RemoteTabTitleElement extends FlowRemoteElement<RemoteTabTitleEleme
       "aria-details": {},
       "aria-label": {},
       "aria-labelledby": {},
+      className: {},
       download: {},
       href: {},
       hrefLang: {},

@@ -86,6 +86,7 @@ export class RemoteIconElement extends FlowRemoteElement<RemoteIconElementProps>
       by: {},
       calcMode: {},
       capHeight: {},
+      className: {},
       clip: {},
       clipPath: {},
       clipPathUnits: {},

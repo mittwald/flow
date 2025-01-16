@@ -163,10 +163,6 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
     return this._values ?? this.valuesFromTableState;
   }
 
-  public findValueById(id: string) {
-    return this.values.find((v) => v.id === id);
-  }
-
   private get valuesFromTableState(): FilterValue[] {
     if (!this._valuesFromTableState) {
       this._valuesFromTableState = this.getValuesFromTableState();

@@ -1,1 +1,3 @@
-export { FilterPickerList } from "./FilterPickerList";
+import { FilterPicker } from "./FilterPicker";
+export { FilterPicker } from "./FilterPicker";
+export default FilterPicker;
