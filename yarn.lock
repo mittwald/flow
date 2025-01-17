@@ -3577,6 +3577,7 @@ __metadata:
     "@react-aria/utils": "npm:^3.26.0"
     "@react-stately/form": "npm:^3.1.0"
     "@react-types/shared": "npm:^3.26.0"
+    "@remote-dom/react": "npm:^1.2.1"
     "@storybook/addon-a11y": "npm:^8.4.7"
     "@storybook/addon-actions": "npm:^8.4.7"
     "@storybook/addon-essentials": "npm:^8.4.7"

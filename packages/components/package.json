@@ -445,6 +445,7 @@
     "@mittwald/react-use-promise": "^2.6.0",
     "@mittwald/typescript-config": "workspace:*",
     "@nx/storybook": "^20.3.1",
+    "@remote-dom/react": "^1.2.1",
     "@storybook/addon-a11y": "^8.4.7",
     "@storybook/addon-actions": "^8.4.7",
     "@storybook/addon-essentials": "^8.4.7",

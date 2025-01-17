@@ -5198,6 +5198,7 @@ const RAW_RUNTIME_STATE =
           ["@react-aria/utils", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:3.26.0"],\
           ["@react-stately/form", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:3.1.0"],\
           ["@react-types/shared", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:3.26.0"],\
+          ["@remote-dom/react", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:1.2.1"],\
           ["@storybook/addon-a11y", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:8.4.7"],\
           ["@storybook/addon-actions", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:8.4.7"],\
           ["@storybook/addon-essentials", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:8.4.7"],\
@@ -5312,6 +5313,7 @@ const RAW_RUNTIME_STATE =
           ["@react-aria/utils", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:3.26.0"],\
           ["@react-stately/form", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:3.1.0"],\
           ["@react-types/shared", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:3.26.0"],\
+          ["@remote-dom/react", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:1.2.1"],\
           ["@storybook/addon-a11y", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:8.4.7"],\
           ["@storybook/addon-actions", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:8.4.7"],\
           ["@storybook/addon-essentials", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:8.4.7"],\
@@ -5424,6 +5426,7 @@ const RAW_RUNTIME_STATE =
           ["@react-aria/utils", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:3.26.0"],\
           ["@react-stately/form", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:3.1.0"],\
           ["@react-types/shared", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:3.26.0"],\
+          ["@remote-dom/react", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:1.2.1"],\
           ["@storybook/addon-a11y", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:8.4.7"],\
           ["@storybook/addon-actions", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:8.4.7"],\
           ["@storybook/addon-essentials", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:8.4.7"],\
@@ -5541,6 +5544,7 @@ const RAW_RUNTIME_STATE =
           ["@react-aria/utils", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:3.26.0"],\
           ["@react-stately/form", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:3.1.0"],\
           ["@react-types/shared", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:3.26.0"],\
+          ["@remote-dom/react", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:1.2.1"],\
           ["@storybook/addon-a11y", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:8.4.7"],\
           ["@storybook/addon-actions", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:8.4.7"],\
           ["@storybook/addon-essentials", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:8.4.7"],\
@@ -5656,6 +5660,7 @@ const RAW_RUNTIME_STATE =
           ["@react-aria/utils", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:3.26.0"],\
           ["@react-stately/form", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:3.1.0"],\
           ["@react-types/shared", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:3.26.0"],\
+          ["@remote-dom/react", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:1.2.1"],\
           ["@storybook/addon-a11y", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:8.4.7"],\
           ["@storybook/addon-actions", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:8.4.7"],\
           ["@storybook/addon-essentials", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:8.4.7"],\
@@ -5774,6 +5779,7 @@ const RAW_RUNTIME_STATE =
           ["@react-aria/utils", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:3.26.0"],\
           ["@react-stately/form", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:3.1.0"],\
           ["@react-types/shared", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:3.26.0"],\
+          ["@remote-dom/react", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:1.2.1"],\
           ["@storybook/addon-a11y", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:8.4.7"],\
           ["@storybook/addon-actions", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:8.4.7"],\
           ["@storybook/addon-essentials", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:8.4.7"],\
@@ -5885,6 +5891,7 @@ const RAW_RUNTIME_STATE =
           ["@react-aria/utils", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:3.26.0"],\
           ["@react-stately/form", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:3.1.0"],\
           ["@react-types/shared", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:3.26.0"],\
+          ["@remote-dom/react", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:1.2.1"],\
           ["@storybook/addon-a11y", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:8.4.7"],\
           ["@storybook/addon-actions", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:8.4.7"],\
           ["@storybook/addon-essentials", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:8.4.7"],\
@@ -5979,7 +5986,7 @@ const RAW_RUNTIME_STATE =
           ["@mittwald/flow-remote-core", "virtual:51f9073027a665d1a8831937737b86a911a9d91a08d5a7b63302b1faa11d74c5f05e22acfaa937568c499270acb8fabc7228004d0d8ef4bb6af0566e81cef7bd#workspace:packages/remote-core"],\
           ["@mittwald/typescript-config", "workspace:packages/typescript-config"],\
           ["@quilted/threads", "virtual:845a85a940347017e1a97332f8d964c13b98ae36f0b9053d8689f331e4f3b37b2cd2101dd8c525cf544d3911714922abb512a741a7f0fa50dc201310af3867d0#npm:3.1.2"],\
-          ["@remote-dom/core", "virtual:51f9073027a665d1a8831937737b86a911a9d91a08d5a7b63302b1faa11d74c5f05e22acfaa937568c499270acb8fabc7228004d0d8ef4bb6af0566e81cef7bd#npm:1.5.1"],\
+          ["@remote-dom/core", "virtual:b4d6d53b88e2982758be01ac5ffac772e1f9d5686d8726d65feae2ff97771adde07d2d308a2d218ae3e76f71654be3c8768b1592c965f313e8394c7f0ea62700#npm:1.5.1"],\
           ["@types/node", "npm:22.10.6"],\
           ["@types/remote-dom__core", null],\
           ["nx", "virtual:39c8c25d260eb1bf02df2a54b39359db7b3370463ab66b81ab8af2464f36109363fcf65528ed61bea6211f97dae28bd320ee3af3dba7e77d2aaeb5c743004d80#npm:20.3.1"],\
@@ -6004,7 +6011,7 @@ const RAW_RUNTIME_STATE =
           ["@mittwald/flow-remote-core", "workspace:packages/remote-core"],\
           ["@mittwald/typescript-config", "workspace:packages/typescript-config"],\
           ["@quilted/threads", "virtual:845a85a940347017e1a97332f8d964c13b98ae36f0b9053d8689f331e4f3b37b2cd2101dd8c525cf544d3911714922abb512a741a7f0fa50dc201310af3867d0#npm:3.1.2"],\
-          ["@remote-dom/core", "virtual:51f9073027a665d1a8831937737b86a911a9d91a08d5a7b63302b1faa11d74c5f05e22acfaa937568c499270acb8fabc7228004d0d8ef4bb6af0566e81cef7bd#npm:1.5.1"],\
+          ["@remote-dom/core", "virtual:b4d6d53b88e2982758be01ac5ffac772e1f9d5686d8726d65feae2ff97771adde07d2d308a2d218ae3e76f71654be3c8768b1592c965f313e8394c7f0ea62700#npm:1.5.1"],\
           ["@types/node", "npm:22.10.6"],\
           ["nx", "virtual:39c8c25d260eb1bf02df2a54b39359db7b3370463ab66b81ab8af2464f36109363fcf65528ed61bea6211f97dae28bd320ee3af3dba7e77d2aaeb5c743004d80#npm:20.3.1"],\
           ["prettier", "npm:3.4.2"],\
@@ -6027,7 +6034,7 @@ const RAW_RUNTIME_STATE =
           ["@mittwald/flow-react-components", "virtual:51f9073027a665d1a8831937737b86a911a9d91a08d5a7b63302b1faa11d74c5f05e22acfaa937568c499270acb8fabc7228004d0d8ef4bb6af0566e81cef7bd#workspace:packages/components"],\
           ["@mittwald/flow-remote-core", "virtual:51f9073027a665d1a8831937737b86a911a9d91a08d5a7b63302b1faa11d74c5f05e22acfaa937568c499270acb8fabc7228004d0d8ef4bb6af0566e81cef7bd#workspace:packages/remote-core"],\
           ["@mittwald/typescript-config", "workspace:packages/typescript-config"],\
-          ["@remote-dom/core", "virtual:51f9073027a665d1a8831937737b86a911a9d91a08d5a7b63302b1faa11d74c5f05e22acfaa937568c499270acb8fabc7228004d0d8ef4bb6af0566e81cef7bd#npm:1.5.1"],\
+          ["@remote-dom/core", "virtual:b4d6d53b88e2982758be01ac5ffac772e1f9d5686d8726d65feae2ff97771adde07d2d308a2d218ae3e76f71654be3c8768b1592c965f313e8394c7f0ea62700#npm:1.5.1"],\
           ["@types/node", "npm:22.10.6"],\
           ["nx", "virtual:39c8c25d260eb1bf02df2a54b39359db7b3370463ab66b81ab8af2464f36109363fcf65528ed61bea6211f97dae28bd320ee3af3dba7e77d2aaeb5c743004d80#npm:20.3.1"],\
           ["prettier", "npm:3.4.2"],\
@@ -6053,8 +6060,8 @@ const RAW_RUNTIME_STATE =
           ["@mittwald/flow-remote-core", "virtual:51f9073027a665d1a8831937737b86a911a9d91a08d5a7b63302b1faa11d74c5f05e22acfaa937568c499270acb8fabc7228004d0d8ef4bb6af0566e81cef7bd#workspace:packages/remote-core"],\
           ["@mittwald/flow-remote-elements", "workspace:packages/remote-elements"],\
           ["@mittwald/typescript-config", "workspace:packages/typescript-config"],\
-          ["@remote-dom/core", "virtual:51f9073027a665d1a8831937737b86a911a9d91a08d5a7b63302b1faa11d74c5f05e22acfaa937568c499270acb8fabc7228004d0d8ef4bb6af0566e81cef7bd#npm:1.5.1"],\
-          ["@remote-dom/react", "virtual:11857decb965f319cfa8122b205eb1df73d4d774e712eb585f7df91db052f3f2b06fa8c51771eecf997bb4eb3e8d473effff8527016a8987bfabae2a09858a8b#npm:1.2.1"],\
+          ["@remote-dom/core", "virtual:b4d6d53b88e2982758be01ac5ffac772e1f9d5686d8726d65feae2ff97771adde07d2d308a2d218ae3e76f71654be3c8768b1592c965f313e8394c7f0ea62700#npm:1.5.1"],\
+          ["@remote-dom/react", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:1.2.1"],\
           ["@types/mittwald__flow-react-components", null],\
           ["@types/node", "npm:22.10.6"],\
           ["@types/react", "npm:19.0.7"],\
@@ -6088,8 +6095,8 @@ const RAW_RUNTIME_STATE =
           ["@mittwald/flow-remote-core", "virtual:51f9073027a665d1a8831937737b86a911a9d91a08d5a7b63302b1faa11d74c5f05e22acfaa937568c499270acb8fabc7228004d0d8ef4bb6af0566e81cef7bd#workspace:packages/remote-core"],\
           ["@mittwald/flow-remote-elements", "workspace:packages/remote-elements"],\
           ["@mittwald/typescript-config", "workspace:packages/typescript-config"],\
-          ["@remote-dom/core", "virtual:51f9073027a665d1a8831937737b86a911a9d91a08d5a7b63302b1faa11d74c5f05e22acfaa937568c499270acb8fabc7228004d0d8ef4bb6af0566e81cef7bd#npm:1.5.1"],\
-          ["@remote-dom/react", "virtual:11857decb965f319cfa8122b205eb1df73d4d774e712eb585f7df91db052f3f2b06fa8c51771eecf997bb4eb3e8d473effff8527016a8987bfabae2a09858a8b#npm:1.2.1"],\
+          ["@remote-dom/core", "virtual:b4d6d53b88e2982758be01ac5ffac772e1f9d5686d8726d65feae2ff97771adde07d2d308a2d218ae3e76f71654be3c8768b1592c965f313e8394c7f0ea62700#npm:1.5.1"],\
+          ["@remote-dom/react", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:1.2.1"],\
           ["@types/node", "npm:22.10.6"],\
           ["@types/react", "npm:19.0.7"],\
           ["nx", "virtual:39c8c25d260eb1bf02df2a54b39359db7b3370463ab66b81ab8af2464f36109363fcf65528ed61bea6211f97dae28bd320ee3af3dba7e77d2aaeb5c743004d80#npm:20.3.1"],\
@@ -6115,8 +6122,8 @@ const RAW_RUNTIME_STATE =
           ["@mittwald/flow-remote-core", "virtual:51f9073027a665d1a8831937737b86a911a9d91a08d5a7b63302b1faa11d74c5f05e22acfaa937568c499270acb8fabc7228004d0d8ef4bb6af0566e81cef7bd#workspace:packages/remote-core"],\
           ["@mittwald/flow-remote-elements", "workspace:packages/remote-elements"],\
           ["@mittwald/typescript-config", "workspace:packages/typescript-config"],\
-          ["@remote-dom/core", "virtual:51f9073027a665d1a8831937737b86a911a9d91a08d5a7b63302b1faa11d74c5f05e22acfaa937568c499270acb8fabc7228004d0d8ef4bb6af0566e81cef7bd#npm:1.5.1"],\
-          ["@remote-dom/react", "virtual:11857decb965f319cfa8122b205eb1df73d4d774e712eb585f7df91db052f3f2b06fa8c51771eecf997bb4eb3e8d473effff8527016a8987bfabae2a09858a8b#npm:1.2.1"],\
+          ["@remote-dom/core", "virtual:b4d6d53b88e2982758be01ac5ffac772e1f9d5686d8726d65feae2ff97771adde07d2d308a2d218ae3e76f71654be3c8768b1592c965f313e8394c7f0ea62700#npm:1.5.1"],\
+          ["@remote-dom/react", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:1.2.1"],\
           ["@types/mittwald__flow-react-components", null],\
           ["@types/node", "npm:22.10.6"],\
           ["@types/react", "npm:19.0.7"],\
@@ -6157,8 +6164,8 @@ const RAW_RUNTIME_STATE =
           ["@mittwald/flow-remote-core", "virtual:51f9073027a665d1a8831937737b86a911a9d91a08d5a7b63302b1faa11d74c5f05e22acfaa937568c499270acb8fabc7228004d0d8ef4bb6af0566e81cef7bd#workspace:packages/remote-core"],\
           ["@mittwald/flow-remote-elements", "workspace:packages/remote-elements"],\
           ["@mittwald/typescript-config", "workspace:packages/typescript-config"],\
-          ["@remote-dom/core", "virtual:51f9073027a665d1a8831937737b86a911a9d91a08d5a7b63302b1faa11d74c5f05e22acfaa937568c499270acb8fabc7228004d0d8ef4bb6af0566e81cef7bd#npm:1.5.1"],\
-          ["@remote-dom/react", "virtual:11857decb965f319cfa8122b205eb1df73d4d774e712eb585f7df91db052f3f2b06fa8c51771eecf997bb4eb3e8d473effff8527016a8987bfabae2a09858a8b#npm:1.2.1"],\
+          ["@remote-dom/core", "virtual:b4d6d53b88e2982758be01ac5ffac772e1f9d5686d8726d65feae2ff97771adde07d2d308a2d218ae3e76f71654be3c8768b1592c965f313e8394c7f0ea62700#npm:1.5.1"],\
+          ["@remote-dom/react", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:1.2.1"],\
           ["@types/node", "npm:22.10.6"],\
           ["@types/react", "npm:19.0.7"],\
           ["clsx", "npm:2.1.1"],\
@@ -10211,10 +10218,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:51f9073027a665d1a8831937737b86a911a9d91a08d5a7b63302b1faa11d74c5f05e22acfaa937568c499270acb8fabc7228004d0d8ef4bb6af0566e81cef7bd#npm:1.5.1", {\
-        "packageLocation": "./.yarn/__virtual__/@remote-dom-core-virtual-7729ac60e7/0/cache/@remote-dom-core-npm-1.5.1-daec202e77-4d26781616.zip/node_modules/@remote-dom/core/",\
+      ["virtual:b4d6d53b88e2982758be01ac5ffac772e1f9d5686d8726d65feae2ff97771adde07d2d308a2d218ae3e76f71654be3c8768b1592c965f313e8394c7f0ea62700#npm:1.5.1", {\
+        "packageLocation": "./.yarn/__virtual__/@remote-dom-core-virtual-94643c5fe0/0/cache/@remote-dom-core-npm-1.5.1-daec202e77-4d26781616.zip/node_modules/@remote-dom/core/",\
         "packageDependencies": [\
-          ["@remote-dom/core", "virtual:51f9073027a665d1a8831937737b86a911a9d91a08d5a7b63302b1faa11d74c5f05e22acfaa937568c499270acb8fabc7228004d0d8ef4bb6af0566e81cef7bd#npm:1.5.1"],\
+          ["@remote-dom/core", "virtual:b4d6d53b88e2982758be01ac5ffac772e1f9d5686d8726d65feae2ff97771adde07d2d308a2d218ae3e76f71654be3c8768b1592c965f313e8394c7f0ea62700#npm:1.5.1"],\
           ["@preact/signals-core", null],\
           ["@remote-dom/polyfill", "npm:1.4.2"],\
           ["@types/preact", null],\
@@ -10248,11 +10255,11 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:11857decb965f319cfa8122b205eb1df73d4d774e712eb585f7df91db052f3f2b06fa8c51771eecf997bb4eb3e8d473effff8527016a8987bfabae2a09858a8b#npm:1.2.1", {\
-        "packageLocation": "./.yarn/__virtual__/@remote-dom-react-virtual-125288190f/0/cache/@remote-dom-react-npm-1.2.1-9f6aba3a23-596071c094.zip/node_modules/@remote-dom/react/",\
+      ["virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:1.2.1", {\
+        "packageLocation": "./.yarn/__virtual__/@remote-dom-react-virtual-b4d6d53b88/0/cache/@remote-dom-react-npm-1.2.1-9f6aba3a23-596071c094.zip/node_modules/@remote-dom/react/",\
         "packageDependencies": [\
-          ["@remote-dom/react", "virtual:11857decb965f319cfa8122b205eb1df73d4d774e712eb585f7df91db052f3f2b06fa8c51771eecf997bb4eb3e8d473effff8527016a8987bfabae2a09858a8b#npm:1.2.1"],\
-          ["@remote-dom/core", "virtual:51f9073027a665d1a8831937737b86a911a9d91a08d5a7b63302b1faa11d74c5f05e22acfaa937568c499270acb8fabc7228004d0d8ef4bb6af0566e81cef7bd#npm:1.5.1"],\
+          ["@remote-dom/react", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:1.2.1"],\
+          ["@remote-dom/core", "virtual:b4d6d53b88e2982758be01ac5ffac772e1f9d5686d8726d65feae2ff97771adde07d2d308a2d218ae3e76f71654be3c8768b1592c965f313e8394c7f0ea62700#npm:1.5.1"],\
           ["@types/react", "npm:19.0.7"],\
           ["htm", "npm:3.1.1"],\
           ["react", "npm:19.0.0"]\
