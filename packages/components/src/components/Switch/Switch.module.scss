@@ -20,7 +20,6 @@
     position: relative;
     transition-property: background-color;
     transition-duration: var(--transition--duration--default);
-    align-self: start;
 
     @include focus.focus;
   }
