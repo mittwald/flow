@@ -1,8 +1,10 @@
 .actionGroup {
   display: flex;
+  align-items: center;
 
   .primary {
     order: 3;
+
     &:only-child {
       margin-left: auto;
     }
