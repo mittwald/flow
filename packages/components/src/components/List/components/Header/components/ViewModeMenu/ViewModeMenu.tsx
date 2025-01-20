@@ -1,10 +1,12 @@
-import ContextMenu, { ContextMenuTrigger } from "@/components/ContextMenu";
+import ContextMenu, {
+  ContextMenuSection,
+  ContextMenuTrigger,
+} from "@/components/ContextMenu";
 import type { FC } from "react";
 import React from "react";
 import { Button } from "@/components/Button";
 import { Text } from "@/components/Text";
 import { Heading } from "@/components/Heading";
-import { Section } from "@/components/Section";
 import MenuItem from "@/components/MenuItem";
 import locales from "../../../../locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
@@ -44,8 +46,8 @@ export const ViewModeMenu: FC = () => {
         </Text>
         <IconView />
       </Button>
-      <ContextMenu selectionMode="single" selectedKeys={[selectedViewMode]}>
-        <Section>
+      <ContextMenu selectedKeys={[selectedViewMode]}>
+        <ContextMenuSection selectionMode="single">
           <Heading>{stringFormatter.format("list.settings.viewMode")}</Heading>
           {availableViewModes.map((viewMode) => (
             <MenuItem
@@ -58,7 +60,7 @@ export const ViewModeMenu: FC = () => {
               {stringFormatter.format(`list.settings.viewMode.${viewMode}`)}
             </MenuItem>
           ))}
-        </Section>
+        </ContextMenuSection>
       </ContextMenu>
     </ContextMenuTrigger>
   );

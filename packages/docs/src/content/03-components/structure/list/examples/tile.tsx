@@ -17,7 +17,7 @@ export default () => {
   const DomainList = typedList<Domain>();
 
   return (
-    <DomainList.List batchSize={6} tile>
+    <DomainList.List batchSize={6} tiles>
       <DomainList.StaticData data={domains} />
       <DomainList.Item>
         {(domain) => (
