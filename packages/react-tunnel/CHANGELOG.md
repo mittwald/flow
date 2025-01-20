@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.10](https://github.com/mittwald/flow/compare/0.2.0-alpha.9...0.2.0-alpha.10) (2025-01-20)
+
+### Features
+
+* build view componentsgen ([3586d27](https://github.com/mittwald/flow/commit/3586d27090665a758c4dcf14bf458cf05dee95c8))
+
 # [0.2.0-alpha.9](https://github.com/mittwald/flow/compare/0.2.0-alpha.8...0.2.0-alpha.9) (2025-01-13)
 
 **Note:** Version bump only for package @mittwald/react-tunnel
