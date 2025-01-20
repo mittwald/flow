@@ -6,7 +6,7 @@ export type { DivProps as RemoteDivElementProps } from "@mittwald/flow-react-com
 
 export class RemoteDivElement extends FlowRemoteElement<RemoteDivElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

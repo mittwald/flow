@@ -6,7 +6,7 @@ export type { IllustratedMessageProps as RemoteIllustratedMessageElementProps } 
 
 export class RemoteIllustratedMessageElement extends FlowRemoteElement<RemoteIllustratedMessageElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

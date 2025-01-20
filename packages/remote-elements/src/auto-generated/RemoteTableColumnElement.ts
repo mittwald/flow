@@ -6,7 +6,7 @@ export type { TableColumnProps as RemoteTableColumnElementProps } from "@mittwal
 
 export class RemoteTableColumnElement extends FlowRemoteElement<RemoteTableColumnElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

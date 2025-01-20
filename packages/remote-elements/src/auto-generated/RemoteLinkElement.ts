@@ -6,7 +6,7 @@ export type { LinkProps as RemoteLinkElementProps } from "@mittwald/flow-react-c
 
 export class RemoteLinkElement extends FlowRemoteElement<RemoteLinkElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

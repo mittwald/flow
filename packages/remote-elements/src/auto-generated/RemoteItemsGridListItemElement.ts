@@ -6,7 +6,7 @@ export type { GridListItemProps as RemoteItemsGridListItemElementProps } from "@
 
 export class RemoteItemsGridListItemElement extends FlowRemoteElement<RemoteItemsGridListItemElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

@@ -6,7 +6,7 @@ export type { RadioButtonProps as RemoteRadioButtonElementProps } from "@mittwal
 
 export class RemoteRadioButtonElement extends FlowRemoteElement<RemoteRadioButtonElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

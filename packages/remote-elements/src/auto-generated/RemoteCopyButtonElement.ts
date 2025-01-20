@@ -6,7 +6,7 @@ export type { CopyButtonProps as RemoteCopyButtonElementProps } from "@mittwald/
 
 export class RemoteCopyButtonElement extends FlowRemoteElement<RemoteCopyButtonElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

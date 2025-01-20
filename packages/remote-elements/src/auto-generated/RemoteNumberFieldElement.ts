@@ -6,7 +6,7 @@ export type { NumberFieldProps as RemoteNumberFieldElementProps } from "@mittwal
 
 export class RemoteNumberFieldElement extends FlowRemoteElement<RemoteNumberFieldElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

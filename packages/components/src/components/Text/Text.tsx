@@ -24,7 +24,7 @@ export interface TextProps
 }
 
 /** @flr-generate all */
-export const Text = flowComponent("Text", (props) => {
+export const Text = flowComponent<"Text", HTMLDivElement>("Text", (props) => {
   const {
     children,
     className,

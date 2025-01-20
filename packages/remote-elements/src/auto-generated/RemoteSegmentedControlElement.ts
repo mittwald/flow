@@ -6,7 +6,7 @@ export type { SegmentedControlProps as RemoteSegmentedControlElementProps } from
 
 export class RemoteSegmentedControlElement extends FlowRemoteElement<RemoteSegmentedControlElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

@@ -6,7 +6,7 @@ export type { AvatarProps as RemoteAvatarElementProps } from "@mittwald/flow-rea
 
 export class RemoteAvatarElement extends FlowRemoteElement<RemoteAvatarElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

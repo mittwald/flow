@@ -6,7 +6,7 @@ export type { AccordionProps as RemoteAccordionElementProps } from "@mittwald/fl
 
 export class RemoteAccordionElement extends FlowRemoteElement<RemoteAccordionElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

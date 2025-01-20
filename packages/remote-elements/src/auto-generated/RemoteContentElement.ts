@@ -6,7 +6,7 @@ export type { ContentProps as RemoteContentElementProps } from "@mittwald/flow-r
 
 export class RemoteContentElement extends FlowRemoteElement<RemoteContentElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

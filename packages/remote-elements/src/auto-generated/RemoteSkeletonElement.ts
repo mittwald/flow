@@ -6,7 +6,7 @@ export type { SkeletonProps as RemoteSkeletonElementProps } from "@mittwald/flow
 
 export class RemoteSkeletonElement extends FlowRemoteElement<RemoteSkeletonElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

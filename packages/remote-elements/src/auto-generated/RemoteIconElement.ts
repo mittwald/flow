@@ -6,7 +6,7 @@ export type { IconProps as RemoteIconElementProps } from "@mittwald/flow-react-c
 
 export class RemoteIconElement extends FlowRemoteElement<RemoteIconElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

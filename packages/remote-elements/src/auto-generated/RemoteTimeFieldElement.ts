@@ -6,7 +6,7 @@ export type { TimeFieldProps as RemoteTimeFieldElementProps } from "@mittwald/fl
 
 export class RemoteTimeFieldElement extends FlowRemoteElement<RemoteTimeFieldElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

@@ -5,19 +5,13 @@ import styles from "./Items.module.css";
 import clsx from "clsx";
 import Item from "~/components/List/components/Items/components/Item/Item";
 import { FallbackItems } from "~/components/List/components/Items/components/FallbackItems/FallbackItems";
-import GridList from "~/components/List/components/Items/views/GridList/GridList";
-import { Div } from "~/components/Div";
-import { useViewComponents } from "~/lib/viewComponentContext/useViewComponent";
+import ItemsGridListView from "~/views/ItemsGridListView";
+import DivView from "~/views/DivView";
 
 export const Items: FC = () => {
   const list = useList();
   const isLoading = list.loader.useIsLoading();
   const isInitiallyLoading = list.loader.useIsInitiallyLoading();
-
-  const { DivView, ItemsGridListView } = useViewComponents(
-    ["Div", Div],
-    ["ItemsGridList", GridList],
-  );
 
   if (!list.itemView) {
     return null;

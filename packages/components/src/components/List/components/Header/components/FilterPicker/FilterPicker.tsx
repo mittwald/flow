@@ -1,15 +1,12 @@
 import type { FC } from "react";
 import React from "react";
 import type { Filter } from "~/components/List/model/filter/Filter";
-import { Button } from "~/components/Button";
-import { Text } from "~/components/Text";
-import {
-  ContextMenu,
-  ContextMenuTrigger,
-  MenuItem,
-} from "~/components/ContextMenu";
-import { useViewComponents } from "~/lib/viewComponentContext/useViewComponent";
 import { IconFilter } from "~/components/Icon/components/icons";
+import MenuItemView from "~/views/MenuItemView";
+import ContextMenuTriggerView from "~/views/ContextMenuTriggerView";
+import TextView from "~/views/TextView";
+import ContextMenuView from "~/views/ContextMenuView";
+import ButtonView from "~/views/ButtonView";
 
 interface Props {
   filter: Filter<never, never, never>;
@@ -19,20 +16,6 @@ export const FilterPicker: FC<Props> = (props) => {
   const { filter } = props;
 
   const { values, mode, name, property } = filter;
-
-  const {
-    MenuItemView,
-    ContextMenuView,
-    ButtonView,
-    TextView,
-    ContextMenuTriggerView,
-  } = useViewComponents(
-    ["MenuItem", MenuItem],
-    ["Button", Button],
-    ["Text", Text],
-    ["ContextMenu", ContextMenu],
-    ["ContextMenuTrigger", ContextMenuTrigger],
-  );
 
   const items = values.map((v) => (
     <MenuItemView

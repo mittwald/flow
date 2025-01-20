@@ -6,7 +6,7 @@ export type { BadgeProps as RemoteBadgeElementProps } from "@mittwald/flow-react
 
 export class RemoteBadgeElement extends FlowRemoteElement<RemoteBadgeElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

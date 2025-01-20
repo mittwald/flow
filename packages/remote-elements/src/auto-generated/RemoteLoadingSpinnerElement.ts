@@ -6,7 +6,7 @@ export type { LoadingSpinnerProps as RemoteLoadingSpinnerElementProps } from "@m
 
 export class RemoteLoadingSpinnerElement extends FlowRemoteElement<RemoteLoadingSpinnerElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

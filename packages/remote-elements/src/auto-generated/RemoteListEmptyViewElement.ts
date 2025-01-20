@@ -6,7 +6,7 @@ export type { EmptyViewProps as RemoteListEmptyViewElementProps } from "@mittwal
 
 export class RemoteListEmptyViewElement extends FlowRemoteElement<RemoteListEmptyViewElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

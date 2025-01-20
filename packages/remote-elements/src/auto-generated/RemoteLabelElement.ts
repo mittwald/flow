@@ -6,7 +6,7 @@ export type { LabelProps as RemoteLabelElementProps } from "@mittwald/flow-react
 
 export class RemoteLabelElement extends FlowRemoteElement<RemoteLabelElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

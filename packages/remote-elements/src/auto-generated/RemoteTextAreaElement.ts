@@ -6,7 +6,7 @@ export type { TextAreaProps as RemoteTextAreaElementProps } from "@mittwald/flow
 
 export class RemoteTextAreaElement extends FlowRemoteElement<RemoteTextAreaElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

@@ -1,17 +1,17 @@
-import ContextMenu, { ContextMenuTrigger } from "~/components/ContextMenu";
 import type { FC } from "react";
 import React from "react";
-import { Button } from "~/components/Button";
-import { Text } from "~/components/Text";
-import { Heading } from "~/components/Heading";
-import { Section } from "~/components/Section";
-import MenuItem from "~/components/MenuItem";
 import locales from "../../../../locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 import { useList } from "~/components/List";
 import type { ListViewMode } from "~/components/List/model/types";
-import { useViewComponents } from "~/lib/viewComponentContext/useViewComponent";
 import { IconView } from "~/components/Icon/components/icons";
+import ContextMenuTriggerView from "~/views/ContextMenuTriggerView";
+import ButtonView from "~/views/ButtonView";
+import TextView from "~/views/TextView";
+import ContextMenuView from "~/views/ContextMenuView";
+import SectionView from "~/views/SectionView";
+import MenuItemView from "~/views/MenuItemView";
+import HeadingView from "~/views/HeadingView";
 
 export const ViewModeMenu: FC = () => {
   const stringFormatter = useLocalizedStringFormatter(locales);
@@ -25,24 +25,6 @@ export const ViewModeMenu: FC = () => {
   if (list.table) {
     availableViewModes.push("table");
   }
-
-  const {
-    ButtonView,
-    ContextMenuView,
-    HeadingView,
-    SectionView,
-    TextView,
-    MenuItemView,
-    ContextMenuTriggerView,
-  } = useViewComponents(
-    ["Button", Button],
-    ["Text", Text],
-    ["ContextMenu", ContextMenu],
-    ["ContextMenuTrigger", ContextMenuTrigger],
-    ["Section", Section],
-    ["Heading", Heading],
-    ["MenuItem", MenuItem],
-  );
 
   if (availableViewModes.length <= 1) {
     return null;

@@ -6,7 +6,7 @@ export type { FieldDescriptionProps as RemoteFieldDescriptionElementProps } from
 
 export class RemoteFieldDescriptionElement extends FlowRemoteElement<RemoteFieldDescriptionElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

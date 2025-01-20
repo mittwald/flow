@@ -17,14 +17,16 @@ export function generateRemoteReactRendererComponentsFile(
     mapEntries: components
       .map(
         (c) => `\
-          "${remoteElementTagNameOf(c)}": createFlowRemoteComponentRenderer(${remoteComponentBaseNameOf(c)}),`,
+          "${remoteElementTagNameOf(c)}": createFlowRemoteComponentRenderer(
+            lazy(() => import("@mittwald/flow-react-components/${componentModulePathOf(c)}").then((module) => ({ default: module.${c.displayName} })))
+          ),`,
       )
       .join("\n"),
   };
 
   return `
     import { createFlowRemoteComponentRenderer } from "~/lib/createFlowRemoteComponentRenderer";
-    ${t.imports}
+    import { lazy } from "react";
     
     export const flowComponents = {
       ${t.mapEntries}

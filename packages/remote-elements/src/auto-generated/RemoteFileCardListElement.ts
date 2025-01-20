@@ -6,7 +6,7 @@ export type { FileCardListProps as RemoteFileCardListElementProps } from "@mittw
 
 export class RemoteFileCardListElement extends FlowRemoteElement<RemoteFileCardListElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

@@ -59,106 +59,110 @@ const disablePendingProps = (props: ButtonProps) => {
 };
 
 /** @flr-generate all */
-export const Button = flowComponent("Button", (props) => {
-  props = disablePendingProps(props);
+export const Button = flowComponent<"Button", HTMLButtonElement>(
+  "Button",
+  (props) => {
+    props = disablePendingProps(props);
 
-  const {
-    color = "primary",
-    variant = "solid",
-    children,
-    className,
-    size = "m",
-    isPending,
-    isSucceeded,
-    isFailed,
-    "aria-disabled": ariaDisabled,
-    ref,
-    slot: ignoredSlotProp,
-    ariaSlot: slot,
-    unstyled,
-    ...restProps
-  } = props;
+    const {
+      color = "primary",
+      variant = "solid",
+      children,
+      className,
+      size = "m",
+      isPending,
+      isSucceeded,
+      isFailed,
+      "aria-disabled": ariaDisabled,
+      ref,
+      slot: ignoredSlotProp,
+      ariaSlot: slot,
+      unstyled,
+      ...restProps
+    } = props;
 
-  const rootClassName = unstyled
-    ? className
-    : clsx(
-        styles.button,
-        isPending && styles.isPending,
-        isSucceeded && styles.isSucceeded,
-        isFailed && styles.isFailed,
-        styles[`size-${size}`],
-        styles[color],
-        styles[variant],
-        className,
-        /**
-         * Workaround warning: The Aria.Button does not support "aria-disabled"
-         * by now, so this Button will be visually disabled via CSS.
-         */
-        ariaDisabled && styles.ariaDisabled,
-      );
+    const rootClassName = unstyled
+      ? className
+      : clsx(
+          styles.button,
+          isPending && styles.isPending,
+          isSucceeded && styles.isSucceeded,
+          isFailed && styles.isFailed,
+          styles[`size-${size}`],
+          styles[color],
+          styles[variant],
+          className,
+          /**
+           * Workaround warning: The Aria.Button does not support
+           * "aria-disabled" by now, so this Button will be visually disabled
+           * via CSS.
+           */
+          ariaDisabled && styles.ariaDisabled,
+        );
 
-  useAriaAnnounceActionState(
-    isPending
-      ? "isPending"
-      : isSucceeded
-        ? "isSucceeded"
-        : isFailed
-          ? "isFailed"
-          : "isIdle",
-  );
+    useAriaAnnounceActionState(
+      isPending
+        ? "isPending"
+        : isSucceeded
+          ? "isSucceeded"
+          : isFailed
+            ? "isFailed"
+            : "isIdle",
+    );
 
-  const propsContext: PropsContext = {
-    Icon: {
-      className: styles.icon,
-      "aria-hidden": true,
-      size,
-    },
-    Text: {
-      className: styles.text,
-    },
-    Avatar: {
-      className: styles.avatar,
-    },
-    CounterBadge: {
-      className: styles.counterBadge,
-    },
-  };
+    const propsContext: PropsContext = {
+      Icon: {
+        className: styles.icon,
+        "aria-hidden": true,
+        size,
+      },
+      Text: {
+        className: styles.text,
+      },
+      Avatar: {
+        className: styles.avatar,
+      },
+      CounterBadge: {
+        className: styles.counterBadge,
+      },
+    };
 
-  const StateIconComponent = isSucceeded
-    ? IconSucceeded
-    : isFailed
-      ? IconFailed
-      : isPending
-        ? LoadingSpinner
-        : undefined;
+    const StateIconComponent = isSucceeded
+      ? IconSucceeded
+      : isFailed
+        ? IconFailed
+        : isPending
+          ? LoadingSpinner
+          : undefined;
 
-  const stateIcon = StateIconComponent && (
-    <StateIconComponent size={size} className={styles.stateIcon} />
-  );
+    const stateIcon = StateIconComponent && (
+      <StateIconComponent size={size} className={styles.stateIcon} />
+    );
 
-  const isStringContent = typeof children === "string";
+    const isStringContent = typeof children === "string";
 
-  return (
-    <ClearPropsContext>
-      <Aria.Button
-        className={rootClassName}
-        ref={ref}
-        slot={slot}
-        {...restProps}
-      >
-        <PropsContextProvider props={propsContext}>
-          <Wrap if={!unstyled}>
-            <span className={styles.content}>
-              <Wrap if={isStringContent}>
-                <Text className={styles.text}>{children}</Text>
-              </Wrap>
-            </span>
-          </Wrap>
-        </PropsContextProvider>
-        {stateIcon}
-      </Aria.Button>
-    </ClearPropsContext>
-  );
-});
+    return (
+      <ClearPropsContext>
+        <Aria.Button
+          className={rootClassName}
+          ref={ref}
+          slot={slot}
+          {...restProps}
+        >
+          <PropsContextProvider props={propsContext}>
+            <Wrap if={!unstyled}>
+              <span className={styles.content}>
+                <Wrap if={isStringContent}>
+                  <Text className={styles.text}>{children}</Text>
+                </Wrap>
+              </span>
+            </Wrap>
+          </PropsContextProvider>
+          {stateIcon}
+        </Aria.Button>
+      </ClearPropsContext>
+    );
+  },
+);
 
 export default Button;

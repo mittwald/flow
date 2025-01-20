@@ -6,7 +6,7 @@ export type { InlineCodeProps as RemoteInlineCodeElementProps } from "@mittwald/
 
 export class RemoteInlineCodeElement extends FlowRemoteElement<RemoteInlineCodeElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

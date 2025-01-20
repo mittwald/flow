@@ -6,7 +6,7 @@ export type { TableRowProps as RemoteTableRowElementProps } from "@mittwald/flow
 
 export class RemoteTableRowElement extends FlowRemoteElement<RemoteTableRowElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

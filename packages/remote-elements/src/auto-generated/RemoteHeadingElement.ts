@@ -6,7 +6,7 @@ export type { HeadingProps as RemoteHeadingElementProps } from "@mittwald/flow-r
 
 export class RemoteHeadingElement extends FlowRemoteElement<RemoteHeadingElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

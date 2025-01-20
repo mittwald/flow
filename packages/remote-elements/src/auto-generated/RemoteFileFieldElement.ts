@@ -6,7 +6,7 @@ export type { FileFieldProps as RemoteFileFieldElementProps } from "@mittwald/fl
 
 export class RemoteFileFieldElement extends FlowRemoteElement<RemoteFileFieldElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

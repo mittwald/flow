@@ -6,7 +6,7 @@ export type { AlertIconProps as RemoteAlertIconElementProps } from "@mittwald/fl
 
 export class RemoteAlertIconElement extends FlowRemoteElement<RemoteAlertIconElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

@@ -6,7 +6,7 @@ export type { PopoverProps as RemotePopoverElementProps } from "@mittwald/flow-r
 
 export class RemotePopoverElement extends FlowRemoteElement<RemotePopoverElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

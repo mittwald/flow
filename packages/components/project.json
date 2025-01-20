@@ -9,6 +9,10 @@
       "inputs": [
         "{projectRoot}/dev/icons/**/*",
         "{projectRoot}/src/components/Icon/tablerMappings.yaml"
+      ],
+      "outputs": [
+        "{projectRoot}/src/components/Icon/components/icons/*.tsx",
+        "{projectRoot}/src/components/Icon/components/icons/index.ts"
       ]
     },
     "build:remote-components": {
@@ -27,7 +31,7 @@
     },
     "build": {
       "cache": true,
-      "dependsOn": ["build:icons", "^build"]
+      "dependsOn": ["build:icons", "build:remote-components", "^build"]
     },
     "build:docs-properties": {
       "cache": true,

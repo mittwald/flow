@@ -6,7 +6,7 @@ export type { SearchFieldProps as RemoteSearchFieldElementProps } from "@mittwal
 
 export class RemoteSearchFieldElement extends FlowRemoteElement<RemoteSearchFieldElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

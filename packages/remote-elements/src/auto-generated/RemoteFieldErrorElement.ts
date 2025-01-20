@@ -6,7 +6,7 @@ export type { FieldErrorProps as RemoteFieldErrorElementProps } from "@mittwald/
 
 export class RemoteFieldErrorElement extends FlowRemoteElement<RemoteFieldErrorElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

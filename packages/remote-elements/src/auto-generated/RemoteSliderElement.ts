@@ -6,7 +6,7 @@ export type { SliderProps as RemoteSliderElementProps } from "@mittwald/flow-rea
 
 export class RemoteSliderElement extends FlowRemoteElement<RemoteSliderElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

@@ -6,7 +6,7 @@ export type { TooltipProps as RemoteTooltipElementProps } from "@mittwald/flow-r
 
 export class RemoteTooltipElement extends FlowRemoteElement<RemoteTooltipElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

@@ -6,7 +6,7 @@ export type { SeparatorProps as RemoteSeparatorElementProps } from "@mittwald/fl
 
 export class RemoteSeparatorElement extends FlowRemoteElement<RemoteSeparatorElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

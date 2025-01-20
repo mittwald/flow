@@ -6,7 +6,7 @@ export type { LabeledValueProps as RemoteLabeledValueElementProps } from "@mittw
 
 export class RemoteLabeledValueElement extends FlowRemoteElement<RemoteLabeledValueElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

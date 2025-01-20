@@ -6,7 +6,7 @@ export type { SectionProps as RemoteSectionElementProps } from "@mittwald/flow-r
 
 export class RemoteSectionElement extends FlowRemoteElement<RemoteSectionElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

@@ -6,7 +6,7 @@ export type { FragmentProps as RemoteFragmentElementProps } from "@mittwald/flow
 
 export class RemoteFragmentElement extends FlowRemoteElement<RemoteFragmentElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

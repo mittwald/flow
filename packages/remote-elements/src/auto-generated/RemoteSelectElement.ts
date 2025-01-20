@@ -6,7 +6,7 @@ export type { SelectProps as RemoteSelectElementProps } from "@mittwald/flow-rea
 
 export class RemoteSelectElement extends FlowRemoteElement<RemoteSelectElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

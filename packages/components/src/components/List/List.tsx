@@ -30,8 +30,7 @@ import { type PropsContext, PropsContextProvider } from "~/lib/propsContext";
 import headerStyles from "./components/Header/Header.module.css";
 import { ActionGroup } from "~/components/ActionGroup";
 import { deepHas } from "~/lib/react/deepHas";
-import { useViewComponents } from "~/lib/viewComponentContext/useViewComponent";
-import { Div } from "~/components/Div";
+import DivView from "~/views/DivView";
 
 export interface ListProps<T>
   extends PropsWithChildren,
@@ -162,8 +161,6 @@ export const List = flowComponent("List", (props) => {
   };
 
   const hasActionGroup = deepHas(children, ActionGroup);
-
-  const { DivView } = useViewComponents(["Div", Div]);
 
   return (
     <PropsContextProvider props={propsContext}>

@@ -6,7 +6,7 @@ export type { TableFooterRowProps as RemoteTableFooterRowElementProps } from "@m
 
 export class RemoteTableFooterRowElement extends FlowRemoteElement<RemoteTableFooterRowElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

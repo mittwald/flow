@@ -6,7 +6,7 @@ export type { ContextMenuTriggerProps as RemoteContextMenuTriggerElementProps } 
 
 export class RemoteContextMenuTriggerElement extends FlowRemoteElement<RemoteContextMenuTriggerElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

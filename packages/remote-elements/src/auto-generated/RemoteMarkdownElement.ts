@@ -6,7 +6,7 @@ export type { MarkdownProps as RemoteMarkdownElementProps } from "@mittwald/flow
 
 export class RemoteMarkdownElement extends FlowRemoteElement<RemoteMarkdownElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

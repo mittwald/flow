@@ -6,7 +6,7 @@ export type { SwitchProps as RemoteSwitchElementProps } from "@mittwald/flow-rea
 
 export class RemoteSwitchElement extends FlowRemoteElement<RemoteSwitchElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

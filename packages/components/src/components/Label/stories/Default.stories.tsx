@@ -29,7 +29,7 @@ export const WithContextualHelp: Story = {
       <Text>Label</Text>
       <ContextualHelpTrigger>
         <Button />
-        <ContextualHelp {...props}>
+        <ContextualHelp>
           <Heading>Rights & roles</Heading>
           <Text>
             Each user profile is assigned a role in mStudio for each project

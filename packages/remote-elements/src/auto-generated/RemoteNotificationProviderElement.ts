@@ -6,7 +6,7 @@ export type { NotificationProviderProps as RemoteNotificationProviderElementProp
 
 export class RemoteNotificationProviderElement extends FlowRemoteElement<RemoteNotificationProviderElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

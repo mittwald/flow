@@ -6,7 +6,7 @@ export type { TextProps as RemoteTextElementProps } from "@mittwald/flow-react-c
 
 export class RemoteTextElement extends FlowRemoteElement<RemoteTextElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

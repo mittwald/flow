@@ -7,8 +7,7 @@ import { OptionsButton } from "~/components/List/components/Items/components/Ite
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import type { PropsWithClassName } from "~/lib/types/props";
 import clsx from "clsx";
-import { useViewComponents } from "~/lib/viewComponentContext/useViewComponent";
-import { Div } from "~/components/Div";
+import DivView from "~/views/DivView";
 
 type Props = PropsWithChildren & PropsWithClassName;
 
@@ -21,8 +20,6 @@ const getStyleForContentSlot = (slot?: string) =>
 
 export const View = (props: Props) => {
   const { children, className } = props;
-
-  const { DivView } = useViewComponents(["Div", Div]);
 
   const propsContext: PropsContext = {
     ContextMenu: {

@@ -34,9 +34,12 @@ export function generateRemoteElementFile(c: ComponentDoc) {
         return `${formattedName}: {}`;
       })
       .join(",\n"),
-    attributes: Object.keys(componentProps)
-      .sort()
-      .filter((prop) => isAttribute(c, prop))
+    attributes: [
+      "style",
+      ...Object.keys(componentProps)
+        .sort()
+        .filter((prop) => isAttribute(c, prop)),
+    ]
       .map((p) => `"${p}"`)
       .join(","),
   };

@@ -6,7 +6,7 @@ export type { AlertBadgeProps as RemoteAlertBadgeElementProps } from "@mittwald/
 
 export class RemoteAlertBadgeElement extends FlowRemoteElement<RemoteAlertBadgeElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

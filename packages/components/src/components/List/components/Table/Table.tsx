@@ -1,41 +1,18 @@
 import type { FC } from "react";
 import React from "react";
 import { useList } from "~/components/List";
-import {
-  Table as TableComponent,
-  TableBody,
-  TableCell,
-  TableColumn,
-  TableHeader,
-  TableRow,
-} from "~/components/Table";
 import { TableLoadingView } from "~/components/List/components/Table/components/TableLoadingView";
 import styles from "./Table.module.css";
 import clsx from "clsx";
-import { useViewComponents } from "~/lib/viewComponentContext/useViewComponent";
-import { EmptyView } from "~/components/List/views/EmptyView";
-import { SkeletonText } from "~/components/SkeletonText";
+import ListEmptyViewView from "~/views/ListEmptyViewView";
+import TableView from "~/views/TableView";
+import TableHeaderView from "~/views/TableHeaderView";
+import TableBodyView from "~/views/TableBodyView";
+import TableRowView from "~/views/TableRowView";
+import TableCellView from "~/views/TableCellView";
+import TableColumnView from "~/views/TableColumnView";
 
 export const Table: FC = () => {
-  const {
-    TableView,
-    TableBodyView,
-    TableCellView,
-    TableHeaderView,
-    TableRowView,
-    TableColumnView,
-    ListEmptyViewView,
-  } = useViewComponents(
-    ["Table", TableComponent],
-    ["TableHeader", TableHeader],
-    ["SkeletonText", SkeletonText],
-    ["TableBody", TableBody],
-    ["TableRow", TableRow],
-    ["TableCell", TableCell],
-    ["TableColumn", TableColumn],
-    ["ListEmptyView", EmptyView],
-  );
-
   const list = useList();
   const table = list.table;
   const listIsEmpty = list.useIsEmpty();

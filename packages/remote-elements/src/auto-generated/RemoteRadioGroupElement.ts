@@ -6,7 +6,7 @@ export type { RadioGroupProps as RemoteRadioGroupElementProps } from "@mittwald/
 
 export class RemoteRadioGroupElement extends FlowRemoteElement<RemoteRadioGroupElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

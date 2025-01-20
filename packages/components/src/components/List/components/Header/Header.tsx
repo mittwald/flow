@@ -10,8 +10,7 @@ import type { PropsWithClassName } from "~/lib/types/props";
 import { SearchField } from "~/components/List/components/Header/components/SearchField/SearchField";
 import { ViewModeMenu } from "~/components/List/components/Header/components/ViewModeMenu/ViewModeMenu";
 import { TunnelExit } from "@mittwald/react-tunnel";
-import { useViewComponents } from "~/lib/viewComponentContext/useViewComponent";
-import { Div } from "~/components/Div";
+import DivView from "~/views/DivView";
 
 interface Props extends PropsWithClassName {
   hasActionGroup?: boolean;
@@ -20,8 +19,6 @@ interface Props extends PropsWithClassName {
 export const Header: FC<Props> = (props) => {
   const { className, hasActionGroup } = props;
   const list = useList();
-
-  const { DivView } = useViewComponents(["Div", Div]);
 
   if (
     list.filters.length === 0 &&

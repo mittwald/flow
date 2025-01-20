@@ -6,7 +6,7 @@ export type { CountryOptionsProps as RemoteCountryOptionsElementProps } from "@m
 
 export class RemoteCountryOptionsElement extends FlowRemoteElement<RemoteCountryOptionsElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

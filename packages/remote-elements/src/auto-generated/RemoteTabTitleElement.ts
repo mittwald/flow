@@ -6,7 +6,7 @@ export type { TabTitleProps as RemoteTabTitleElementProps } from "@mittwald/flow
 
 export class RemoteTabTitleElement extends FlowRemoteElement<RemoteTabTitleElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

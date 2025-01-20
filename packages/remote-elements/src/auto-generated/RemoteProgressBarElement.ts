@@ -6,7 +6,7 @@ export type { ProgressBarProps as RemoteProgressBarElementProps } from "@mittwal
 
 export class RemoteProgressBarElement extends FlowRemoteElement<RemoteProgressBarElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

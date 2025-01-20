@@ -6,7 +6,7 @@ export type { InitialsProps as RemoteInitialsElementProps } from "@mittwald/flow
 
 export class RemoteInitialsElement extends FlowRemoteElement<RemoteInitialsElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

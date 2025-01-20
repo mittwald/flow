@@ -6,7 +6,7 @@ export type { TableProps as RemoteTableElementProps } from "@mittwald/flow-react
 
 export class RemoteTableElement extends FlowRemoteElement<RemoteTableElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

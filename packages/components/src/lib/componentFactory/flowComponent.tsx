@@ -39,7 +39,7 @@ type FlowComponentType<C extends FlowComponentName, R> = FunctionComponent<
   FlowComponentPropsOfName<C> & RefAttributes<R>
 >;
 
-export function flowComponent<C extends FlowComponentName, R = never>(
+export function flowComponent<C extends FlowComponentName, R = HTMLDivElement>(
   componentName: C,
   ImplementationComponentType: FlowComponentImplementationType<C, R>,
 ): FlowComponentType<C, R> {

@@ -3,12 +3,9 @@ import React from "react";
 import styles from "./Footer.module.scss";
 import { PaginationInfos } from "~/components/List/components/Footer/components/PaginationInfos";
 import { ShowNextBatchButton } from "~/components/List/components/Footer/components/ShowNextBatchButton";
-import { useViewComponents } from "~/lib/viewComponentContext/useViewComponent";
-import { Div } from "~/components/Div";
+import DivView from "~/views/DivView";
 
 export const Footer: FC = () => {
-  const { DivView } = useViewComponents(["Div", Div]);
-
   return (
     <DivView className={styles.footer}>
       <PaginationInfos />

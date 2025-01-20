@@ -6,7 +6,7 @@ export type { ImageProps as RemoteImageElementProps } from "@mittwald/flow-react
 
 export class RemoteImageElement extends FlowRemoteElement<RemoteImageElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

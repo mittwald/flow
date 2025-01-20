@@ -6,7 +6,7 @@ export type { MessageProps as RemoteMessageElementProps } from "@mittwald/flow-r
 
 export class RemoteMessageElement extends FlowRemoteElement<RemoteMessageElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

@@ -6,7 +6,7 @@ export type { LightBoxProps as RemoteLightBoxElementProps } from "@mittwald/flow
 
 export class RemoteLightBoxElement extends FlowRemoteElement<RemoteLightBoxElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

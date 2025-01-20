@@ -6,7 +6,7 @@ export type { RadioProps as RemoteRadioElementProps } from "@mittwald/flow-react
 
 export class RemoteRadioElement extends FlowRemoteElement<RemoteRadioElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

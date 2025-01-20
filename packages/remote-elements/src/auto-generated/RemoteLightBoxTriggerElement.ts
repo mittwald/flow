@@ -6,7 +6,7 @@ export type { LightBoxTriggerProps as RemoteLightBoxTriggerElementProps } from "
 
 export class RemoteLightBoxTriggerElement extends FlowRemoteElement<RemoteLightBoxTriggerElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

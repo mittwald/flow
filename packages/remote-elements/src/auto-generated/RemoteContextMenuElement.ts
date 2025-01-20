@@ -6,7 +6,7 @@ export type { ContextMenuProps as RemoteContextMenuElementProps } from "@mittwal
 
 export class RemoteContextMenuElement extends FlowRemoteElement<RemoteContextMenuElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

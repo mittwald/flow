@@ -6,7 +6,7 @@ export type { HeaderNavigationProps as RemoteHeaderNavigationElementProps } from
 
 export class RemoteHeaderNavigationElement extends FlowRemoteElement<RemoteHeaderNavigationElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

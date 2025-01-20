@@ -6,7 +6,7 @@ export type { ModalProps as RemoteModalElementProps } from "@mittwald/flow-react
 
 export class RemoteModalElement extends FlowRemoteElement<RemoteModalElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

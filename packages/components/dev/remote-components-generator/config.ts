@@ -4,8 +4,8 @@ export const config = {
     "ref",
     "key",
     "children",
-    "style",
     "dangerouslySetInnerHTML",
     "wrapWith",
+    "style",
   ],
 } as const;

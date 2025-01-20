@@ -6,7 +6,7 @@ export type { ActionGroupProps as RemoteActionGroupElementProps } from "@mittwal
 
 export class RemoteActionGroupElement extends FlowRemoteElement<RemoteActionGroupElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

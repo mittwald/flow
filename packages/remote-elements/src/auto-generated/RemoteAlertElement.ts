@@ -6,7 +6,7 @@ export type { AlertProps as RemoteAlertElementProps } from "@mittwald/flow-react
 
 export class RemoteAlertElement extends FlowRemoteElement<RemoteAlertElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

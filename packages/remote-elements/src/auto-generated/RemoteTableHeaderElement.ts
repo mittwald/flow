@@ -6,7 +6,7 @@ export type { TableHeaderProps as RemoteTableHeaderElementProps } from "@mittwal
 
 export class RemoteTableHeaderElement extends FlowRemoteElement<RemoteTableHeaderElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

@@ -40,36 +40,28 @@ export interface BadgeProps
 }
 
 /** @flr-generate all */
-export const Badge = flowComponent("Badge", (props) => {
-  const {
-    children,
-    className,
-    color = "neutral",
-    ref,
-    onPress,
-    onClose,
-    isDisabled,
-    ...rest
-  } = props;
+export const Badge = flowComponent<"Badge", HTMLDivElement>(
+  "Badge",
+  (props) => {
+    const {
+      children,
+      className,
+      color = "neutral",
+      ref,
+      onPress,
+      onClose,
+      isDisabled,
+      ...rest
+    } = props;
 
-  const rootClassName = clsx(
-    styles.badge,
-    styles[color],
-    isDisabled && styles.disabled,
-    className,
-  );
+    const rootClassName = clsx(
+      styles.badge,
+      styles[color],
+      isDisabled && styles.disabled,
+      className,
+    );
 
-  const propsContext: PropsContext = {
-    Label: {
-      elementType: "span",
-      className: styles.scope,
-      unstyled: true,
-    },
-    Text: {
-      elementType: "span",
-      className: styles.value,
-    },
-    Button: {
+    const propsContext: PropsContext = {
       Label: {
         elementType: "span",
         className: styles.scope,
@@ -79,38 +71,49 @@ export const Badge = flowComponent("Badge", (props) => {
         elementType: "span",
         className: styles.value,
       },
-    },
-  };
+      Button: {
+        Label: {
+          elementType: "span",
+          className: styles.scope,
+          unstyled: true,
+        },
+        Text: {
+          elementType: "span",
+          className: styles.value,
+        },
+      },
+    };
 
-  return (
-    <PropsContextProvider props={propsContext}>
-      <div className={rootClassName} {...rest} ref={ref}>
-        {!onPress && <div className={styles.content}>{children}</div>}
-        {onPress && (
-          <Button
-            isDisabled={isDisabled}
-            unstyled
-            className={styles.button}
-            onPress={onPress}
-          >
-            {children}
-          </Button>
-        )}
-        {onClose && (
-          <Button
-            className={styles.close}
-            size="s"
-            color="dark"
-            variant="plain"
-            onPress={onClose}
-            isDisabled={isDisabled}
-          >
-            <IconClose />
-          </Button>
-        )}
-      </div>
-    </PropsContextProvider>
-  );
-});
+    return (
+      <PropsContextProvider props={propsContext}>
+        <div className={rootClassName} {...rest} ref={ref}>
+          {!onPress && <div className={styles.content}>{children}</div>}
+          {onPress && (
+            <Button
+              isDisabled={isDisabled}
+              unstyled
+              className={styles.button}
+              onPress={onPress}
+            >
+              {children}
+            </Button>
+          )}
+          {onClose && (
+            <Button
+              className={styles.close}
+              size="s"
+              color="dark"
+              variant="plain"
+              onPress={onClose}
+              isDisabled={isDisabled}
+            >
+              <IconClose />
+            </Button>
+          )}
+        </div>
+      </PropsContextProvider>
+    );
+  },
+);
 
 export default Badge;

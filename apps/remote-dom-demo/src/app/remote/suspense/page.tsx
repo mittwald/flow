@@ -2,28 +2,27 @@
 import {
   Button,
   Section,
-  Suspense,
-  TextField,
   Text,
+  TextField,
 } from "@mittwald/flow-remote-react-components";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { AsyncResource } from "@mittwald/react-use-promise";
 
-const getDateNow = () =>
-  new Promise<Date>((res) => setTimeout(() => res(new Date()), 1000));
+const getAsyncValue = () =>
+  new Promise<number>((res) => setTimeout(() => res(42), 2000));
 
-const getDateNowResource = new AsyncResource(getDateNow);
+const getDateNowResource = new AsyncResource(getAsyncValue);
 
 const EnhancedDataComponent = () => {
-  const now = getDateNowResource.use({
+  const value = getDateNowResource.use({
     keepValueWhileLoading: false,
   });
 
   const [buttonPressState, setButtonPressState] = useState(0);
 
   return (
-    <Section>
-      <Text>Promise data: {now.toLocaleString("de-DE")}</Text>
+    <>
+      <Text>Promise data: {value}</Text>
       <Button onPress={() => getDateNowResource.refresh()}>Reload</Button>
       <Button
         color="secondary"
@@ -33,14 +32,16 @@ const EnhancedDataComponent = () => {
         Button {buttonPressState}x clicked
       </Button>
       <TextField />
-    </Section>
+    </>
   );
 };
 
 export default function Page() {
   return (
     <Suspense fallback={<Text>Loading....</Text>}>
-      <EnhancedDataComponent />
+      <Section>
+        <EnhancedDataComponent />
+      </Section>
     </Suspense>
   );
 }

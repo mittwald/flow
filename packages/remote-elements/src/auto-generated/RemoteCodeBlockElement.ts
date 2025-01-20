@@ -6,7 +6,7 @@ export type { CodeBlockProps as RemoteCodeBlockElementProps } from "@mittwald/fl
 
 export class RemoteCodeBlockElement extends FlowRemoteElement<RemoteCodeBlockElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

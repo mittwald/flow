@@ -13,27 +13,30 @@ export interface RadioProps
     FlowComponentProps {}
 
 /** @flr-generate all */
-export const Radio = flowComponent("Radio", (props) => {
-  const { children, className, ref, ...rest } = props;
+export const Radio = flowComponent<"Radio", HTMLLabelElement>(
+  "Radio",
+  (props) => {
+    const { children, className, ref, ...rest } = props;
 
-  const rootClassName = clsx(styles.radio, className);
+    const rootClassName = clsx(styles.radio, className);
 
-  return (
-    <ClearPropsContext>
-      <Aria.Radio {...rest} className={rootClassName} ref={ref}>
-        {({ isSelected }) => (
-          <>
-            {isSelected ? (
-              <IconRadioOn className={styles.icon} />
-            ) : (
-              <IconRadioOff className={styles.icon} />
-            )}
-            {children}
-          </>
-        )}
-      </Aria.Radio>
-    </ClearPropsContext>
-  );
-});
+    return (
+      <ClearPropsContext>
+        <Aria.Radio {...rest} className={rootClassName} ref={ref}>
+          {({ isSelected }) => (
+            <>
+              {isSelected ? (
+                <IconRadioOn className={styles.icon} />
+              ) : (
+                <IconRadioOff className={styles.icon} />
+              )}
+              {children}
+            </>
+          )}
+        </Aria.Radio>
+      </ClearPropsContext>
+    );
+  },
+);
 
 export default Radio;

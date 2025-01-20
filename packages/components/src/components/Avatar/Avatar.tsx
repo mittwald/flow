@@ -31,36 +31,39 @@ export interface AvatarProps
 }
 
 /** @flr-generate all */
-export const Avatar = flowComponent("Avatar", (props) => {
-  const { children, className, color, size = "m", ref } = props;
+export const Avatar = flowComponent<"Avatar", HTMLDivElement>(
+  "Avatar",
+  (props) => {
+    const { children, className, color, size = "m", ref } = props;
 
-  const hasInitials = deepHas(children, Initials);
+    const hasInitials = deepHas(children, Initials);
 
-  const rootClassName = clsx(
-    styles.avatar,
-    styles[`size-${size}`],
-    className,
-    styles[color ?? (hasInitials ? getColorFromChildren(children) : "blue")],
-  );
+    const rootClassName = clsx(
+      styles.avatar,
+      styles[`size-${size}`],
+      className,
+      styles[color ?? (hasInitials ? getColorFromChildren(children) : "blue")],
+    );
 
-  const propsContext: PropsContext = {
-    Initials: {
-      className: styles.initials,
-    },
-    Icon: {
-      className: styles.icon,
-    },
-  };
+    const propsContext: PropsContext = {
+      Initials: {
+        className: styles.initials,
+      },
+      Icon: {
+        className: styles.icon,
+      },
+    };
 
-  return (
-    <ClearPropsContext>
-      <div className={rootClassName} ref={ref}>
-        <PropsContextProvider props={propsContext}>
-          {children}
-        </PropsContextProvider>
-      </div>
-    </ClearPropsContext>
-  );
-});
+    return (
+      <ClearPropsContext>
+        <div className={rootClassName} ref={ref}>
+          <PropsContextProvider props={propsContext}>
+            {children}
+          </PropsContextProvider>
+        </div>
+      </ClearPropsContext>
+    );
+  },
+);
 
 export default Avatar;

@@ -6,7 +6,7 @@ export type { CounterBadgeProps as RemoteCounterBadgeElementProps } from "@mittw
 
 export class RemoteCounterBadgeElement extends FlowRemoteElement<RemoteCounterBadgeElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

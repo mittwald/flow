@@ -6,7 +6,7 @@ export type { ModalTriggerProps as RemoteModalTriggerElementProps } from "@mittw
 
 export class RemoteModalTriggerElement extends FlowRemoteElement<RemoteModalTriggerElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

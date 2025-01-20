@@ -9,8 +9,7 @@ import { Controller } from "react-hook-form";
 import type { PropsContext } from "~/lib/propsContext";
 import { dynamic, PropsContextProvider } from "~/lib/propsContext";
 import { useFormContext } from "~/integrations/react-hook-form/components/context/formContext";
-import { useViewComponents } from "~/lib/viewComponentContext/useViewComponent";
-import FieldError from "~/components/FieldError";
+import FieldErrorView from "~/views/FieldErrorView";
 
 interface Props<T extends FieldValues>
   extends Omit<ControllerProps<T>, "render">,
@@ -21,8 +20,6 @@ export function Field<T extends FieldValues>(props: Props<T>) {
 
   const formContext = useFormContext<T>();
   const controlFromContext = formContext.form?.control;
-
-  const { FieldErrorView } = useViewComponents(["FieldError", FieldError]);
 
   return (
     <Controller

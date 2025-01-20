@@ -20,6 +20,7 @@ export function generateRemoteReactComponentFile(c: ComponentDoc) {
   };
 
   return `\
+    "use client";
     import createFlowRemoteComponent from "~/lib/createFlowRemoteComponent";
     import { ${t.remoteComponentName} } from "@mittwald/flow-remote-elements";
 

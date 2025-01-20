@@ -6,7 +6,7 @@ export type { PopoverTriggerProps as RemotePopoverTriggerElementProps } from "@m
 
 export class RemotePopoverTriggerElement extends FlowRemoteElement<RemotePopoverTriggerElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

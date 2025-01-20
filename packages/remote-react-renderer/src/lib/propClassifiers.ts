@@ -8,3 +8,8 @@ export const isEventProp = (
   value: unknown,
 ): value is EventHandler =>
   !!name.match(defaultEventPropMatcher) && isFunction(value);
+
+export const isStyleProp = (name: string): boolean => name === "style";
+
+export const isReactSuspendedStyle = (value: unknown): boolean =>
+  value === "display: none !important;";

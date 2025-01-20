@@ -6,7 +6,7 @@ export type { SkeletonTextProps as RemoteSkeletonTextElementProps } from "@mittw
 
 export class RemoteSkeletonTextElement extends FlowRemoteElement<RemoteSkeletonTextElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

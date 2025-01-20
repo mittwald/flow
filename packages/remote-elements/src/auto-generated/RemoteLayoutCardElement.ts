@@ -6,7 +6,7 @@ export type { LayoutCardProps as RemoteLayoutCardElementProps } from "@mittwald/
 
 export class RemoteLayoutCardElement extends FlowRemoteElement<RemoteLayoutCardElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

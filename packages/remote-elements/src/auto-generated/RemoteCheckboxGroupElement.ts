@@ -6,7 +6,7 @@ export type { CheckboxGroupProps as RemoteCheckboxGroupElementProps } from "@mit
 
 export class RemoteCheckboxGroupElement extends FlowRemoteElement<RemoteCheckboxGroupElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

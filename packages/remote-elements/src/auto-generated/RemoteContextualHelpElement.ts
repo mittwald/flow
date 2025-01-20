@@ -6,7 +6,7 @@ export type { ContextualHelpProps as RemoteContextualHelpElementProps } from "@m
 
 export class RemoteContextualHelpElement extends FlowRemoteElement<RemoteContextualHelpElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

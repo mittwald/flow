@@ -21,33 +21,36 @@ export interface LabelProps
 }
 
 /** @flr-generate all */
-export const Label = flowComponent("Label", (props) => {
-  const {
-    children,
-    className,
-    optional,
-    isDisabled,
-    ref,
-    unstyled = false,
-    ...rest
-  } = props;
+export const Label = flowComponent<"Label", HTMLLabelElement>(
+  "Label",
+  (props) => {
+    const {
+      children,
+      className,
+      optional,
+      isDisabled,
+      ref,
+      unstyled = false,
+      ...rest
+    } = props;
 
-  const stringFormatter = useLocalizedStringFormatter(locales);
+    const stringFormatter = useLocalizedStringFormatter(locales);
 
-  const rootClassName = unstyled
-    ? className
-    : clsx(styles.label, isDisabled && styles.disabled, className);
+    const rootClassName = unstyled
+      ? className
+      : clsx(styles.label, isDisabled && styles.disabled, className);
 
-  const optionalMarker = " " + stringFormatter.format("label.optional");
+    const optionalMarker = " " + stringFormatter.format("label.optional");
 
-  return (
-    <ClearPropsContext>
-      <Aria.Label {...rest} className={rootClassName} ref={ref}>
-        {children}
-        {optional && optionalMarker}
-      </Aria.Label>
-    </ClearPropsContext>
-  );
-});
+    return (
+      <ClearPropsContext>
+        <Aria.Label {...rest} className={rootClassName} ref={ref}>
+          {children}
+          {optional && optionalMarker}
+        </Aria.Label>
+      </ClearPropsContext>
+    );
+  },
+);
 
 export default Label;

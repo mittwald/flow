@@ -13,19 +13,22 @@ export interface SegmentProps
     FlowComponentProps {}
 
 /** @flr-generate all */
-export const Segment = flowComponent("Segment", (props) => {
-  const { children, className, ref, ...rest } = props;
+export const Segment = flowComponent<"Segment", HTMLLabelElement>(
+  "Segment",
+  (props) => {
+    const { children, className, ref, ...rest } = props;
 
-  const rootClassName = clsx(styles.segment, className);
+    const rootClassName = clsx(styles.segment, className);
 
-  return (
-    <ClearPropsContext>
-      <Aria.Radio {...rest} className={rootClassName} ref={ref}>
-        {children}
-        <IconCheck className={styles.checkmark} />
-      </Aria.Radio>
-    </ClearPropsContext>
-  );
-});
+    return (
+      <ClearPropsContext>
+        <Aria.Radio {...rest} className={rootClassName} ref={ref}>
+          {children}
+          <IconCheck className={styles.checkmark} />
+        </Aria.Radio>
+      </ClearPropsContext>
+    );
+  },
+);
 
 export default Segment;

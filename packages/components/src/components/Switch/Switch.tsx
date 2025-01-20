@@ -20,37 +20,40 @@ export interface SwitchProps
 }
 
 /** @flr-generate all */
-export const Switch = flowComponent("Switch", (props) => {
-  const {
-    children,
-    className,
-    labelPosition = "trailing",
-    ref,
-    ...rest
-  } = props;
+export const Switch = flowComponent<"Switch", HTMLLabelElement>(
+  "Switch",
+  (props) => {
+    const {
+      children,
+      className,
+      labelPosition = "trailing",
+      ref,
+      ...rest
+    } = props;
 
-  const rootClassName = clsx(
-    styles.switch,
-    styles[`label-${labelPosition}`],
-    className,
-  );
+    const rootClassName = clsx(
+      styles.switch,
+      styles[`label-${labelPosition}`],
+      className,
+    );
 
-  return (
-    <ClearPropsContext>
-      <Aria.Switch {...rest} className={rootClassName} ref={ref}>
-        {({ isSelected }) => (
-          <>
-            <div className={styles.track}>
-              <div className={styles.handle}>
-                {isSelected ? <IconCheck size="s" /> : <IconClose size="s" />}
+    return (
+      <ClearPropsContext>
+        <Aria.Switch {...rest} className={rootClassName} ref={ref}>
+          {({ isSelected }) => (
+            <>
+              <div className={styles.track}>
+                <div className={styles.handle}>
+                  {isSelected ? <IconCheck size="s" /> : <IconClose size="s" />}
+                </div>
               </div>
-            </div>
-            {children && <Label className={styles.label}>{children}</Label>}
-          </>
-        )}
-      </Aria.Switch>
-    </ClearPropsContext>
-  );
-});
+              {children && <Label className={styles.label}>{children}</Label>}
+            </>
+          )}
+        </Aria.Switch>
+      </ClearPropsContext>
+    );
+  },
+);
 
 export default Switch;

@@ -6,7 +6,7 @@ export type { ActionProps as RemoteActionElementProps } from "@mittwald/flow-rea
 
 export class RemoteActionElement extends FlowRemoteElement<RemoteActionElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

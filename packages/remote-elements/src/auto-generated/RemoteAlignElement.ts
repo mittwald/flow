@@ -6,7 +6,7 @@ export type { AlignProps as RemoteAlignElementProps } from "@mittwald/flow-react
 
 export class RemoteAlignElement extends FlowRemoteElement<RemoteAlignElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

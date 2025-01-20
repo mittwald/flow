@@ -6,7 +6,7 @@ export type { ColumnLayoutProps as RemoteColumnLayoutElementProps } from "@mittw
 
 export class RemoteColumnLayoutElement extends FlowRemoteElement<RemoteColumnLayoutElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

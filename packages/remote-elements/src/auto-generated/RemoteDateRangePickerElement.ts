@@ -6,7 +6,7 @@ export type { DateRangePickerProps as RemoteDateRangePickerElementProps } from "
 
 export class RemoteDateRangePickerElement extends FlowRemoteElement<RemoteDateRangePickerElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

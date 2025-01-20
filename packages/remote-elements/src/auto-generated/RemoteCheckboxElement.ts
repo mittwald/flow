@@ -6,7 +6,7 @@ export type { CheckboxProps as RemoteCheckboxElementProps } from "@mittwald/flow
 
 export class RemoteCheckboxElement extends FlowRemoteElement<RemoteCheckboxElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

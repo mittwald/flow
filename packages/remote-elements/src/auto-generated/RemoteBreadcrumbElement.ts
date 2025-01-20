@@ -6,7 +6,7 @@ export type { BreadcrumbProps as RemoteBreadcrumbElementProps } from "@mittwald/
 
 export class RemoteBreadcrumbElement extends FlowRemoteElement<RemoteBreadcrumbElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {

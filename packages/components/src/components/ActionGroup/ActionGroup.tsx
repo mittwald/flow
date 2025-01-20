@@ -22,46 +22,49 @@ export interface ActionGroupProps
 }
 
 /** @flr-generate all */
-export const ActionGroup = flowComponent("ActionGroup", (props) => {
-  const {
-    children,
-    className,
-    ref,
-    ignoreBreakpoint,
-    spacing = "s",
-    ...rest
-  } = props;
+export const ActionGroup = flowComponent<"ActionGroup", HTMLDivElement>(
+  "ActionGroup",
+  (props) => {
+    const {
+      children,
+      className,
+      ref,
+      ignoreBreakpoint,
+      spacing = "s",
+      ...rest
+    } = props;
 
-  const rootClassName = clsx(
-    styles.actionGroupContainer,
-    className,
-    ignoreBreakpoint && styles.ignoreBreakpoint,
-    styles[spacing],
-  );
+    const rootClassName = clsx(
+      styles.actionGroupContainer,
+      className,
+      ignoreBreakpoint && styles.ignoreBreakpoint,
+      styles[spacing],
+    );
 
-  const propsContext: PropsContext = {
-    Button: {
-      slot: dynamic((props) => getActionGroupSlot(props)),
-      className: dynamic((props) => {
-        const slot = getActionGroupSlot(props);
-        return clsx(props.className, styles[slot]);
-      }),
-    },
-  };
+    const propsContext: PropsContext = {
+      Button: {
+        slot: dynamic((props) => getActionGroupSlot(props)),
+        className: dynamic((props) => {
+          const slot = getActionGroupSlot(props);
+          return clsx(props.className, styles[slot]);
+        }),
+      },
+    };
 
-  return (
-    <ActionStateContextProvider>
-      <PropsContextProvider props={propsContext} mergeInParentContext>
-        <TunnelProvider>
-          <div {...rest} className={rootClassName} ref={ref}>
-            <div className={styles.actionGroup} role="group">
-              {children}
+    return (
+      <ActionStateContextProvider>
+        <PropsContextProvider props={propsContext} mergeInParentContext>
+          <TunnelProvider>
+            <div {...rest} className={rootClassName} ref={ref}>
+              <div className={styles.actionGroup} role="group">
+                {children}
+              </div>
             </div>
-          </div>
-        </TunnelProvider>
-      </PropsContextProvider>
-    </ActionStateContextProvider>
-  );
-});
+          </TunnelProvider>
+        </PropsContextProvider>
+      </ActionStateContextProvider>
+    );
+  },
+);
 
 export default ActionGroup;

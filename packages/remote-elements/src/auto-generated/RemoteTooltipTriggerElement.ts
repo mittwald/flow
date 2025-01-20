@@ -6,7 +6,7 @@ export type { TooltipTriggerProps as RemoteTooltipTriggerElementProps } from "@m
 
 export class RemoteTooltipTriggerElement extends FlowRemoteElement<RemoteTooltipTriggerElementProps> {
   static override get remoteAttributes() {
-    return [];
+    return ["style"];
   }
 
   static override get remoteProperties() {
