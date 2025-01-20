@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.395](https://github.com/mittwald/flow/compare/0.1.0-alpha.394...0.1.0-alpha.395) (2025-01-20)
+
+### Features
+
+- **ActionGroup:** support switch
+  ([#1105](https://github.com/mittwald/flow/issues/1105))
+  ([5415c9d](https://github.com/mittwald/flow/commit/5415c9dc01fc2cef7a701ba547625f6eb2f0a9d5))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.394](https://github.com/mittwald/flow/compare/0.1.0-alpha.393...0.1.0-alpha.394) (2025-01-15)
 
 ### Bug Fixes
