@@ -93,13 +93,15 @@
       border-bottom-color: var(--list-item--border-color);
       border-bottom-width: var(--list-item--border-width);
       border-bottom-style: var(--list-item--border-style);
+      border-top-left-radius: var(--corner-radius--default);
+      border-top-right-radius: var(--corner-radius--default);
       aspect-ratio: 16 / 9;
     }
 
     .avatar {
       width: 100%;
       height: 100%;
-      border-radius: var(--corner-radius--default);
+      border-radius: 0;
 
       :global(.flow--avatar--icon) {
         width: var(--size-px--xxl);

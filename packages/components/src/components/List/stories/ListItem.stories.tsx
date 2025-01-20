@@ -21,17 +21,11 @@ import { Initials } from "@/components/Initials";
 const meta: Meta<typeof List> = {
   ...defaultMeta,
   title: "Structure/List/ListItem",
-  argTypes: {
-    tiles: {
-      control: "boolean",
-    },
-  },
-  args: { tiles: false },
-  render: (props) => {
+  render: () => {
     const List = typedList<{ name: string }>();
 
     return (
-      <List.List tiles={props.tiles}>
+      <List.List tiles>
         <List.StaticData data={[{ name: "John Doe" }]} />
         <List.Item textValue={(user) => user.name}>
           {(user) => (
@@ -61,11 +55,11 @@ type Story = StoryObj<typeof List>;
 export const Default: Story = {};
 
 export const WithTopContent: Story = {
-  render: (props) => {
+  render: () => {
     const List = typedList<{ mail: string }>();
 
     return (
-      <List.List tiles={props.tiles}>
+      <List.List tiles>
         <List.StaticData data={[{ mail: "john@doe.de" }]} />
         <List.Item textValue={(mail) => mail.mail}>
           {(mail) => (
@@ -91,11 +85,11 @@ export const WithTopContent: Story = {
 };
 
 export const WithBottomContent: Story = {
-  render: (props) => {
+  render: () => {
     const List = typedList<{ name: string }>();
 
     return (
-      <List.List tiles={props.tiles}>
+      <List.List tiles>
         <List.StaticData data={[{ name: "John Doe" }]} />
         <List.Item textValue={(user) => user.name}>
           {(user) => (
@@ -118,11 +112,11 @@ export const WithBottomContent: Story = {
 };
 
 export const WithActionGroup: Story = {
-  render: (props) => {
+  render: () => {
     const List = typedList<{ name: string }>();
 
     return (
-      <List.List tiles={props.tiles}>
+      <List.List tiles>
         <List.StaticData data={[{ name: "John Doe" }]} />
         <List.Item textValue={(user) => user.name}>
           {(user) => (
@@ -149,11 +143,11 @@ export const WithActionGroup: Story = {
 };
 
 export const WithMultipleTexts: Story = {
-  render: (props) => {
+  render: () => {
     const List = typedList<{ name: string }>();
 
     return (
-      <List.List tiles={props.tiles}>
+      <List.List tiles>
         <List.StaticData data={[{ name: "John Doe" }]} />
         <List.Item textValue={(user) => user.name}>
           {(user) => (
