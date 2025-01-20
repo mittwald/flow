@@ -15,20 +15,28 @@ export const ControlledNotification: FC<Props> = (props) => {
 
   return cloneElement(notification.element, {
     onMouseEnter: () => {
-      notification.meta.autoCloseTimer.pause();
+      if (notification.element.props.autoClose) {
+        notification.meta.autoCloseTimer.pause();
+      }
     },
     onMouseLeave: () => {
-      notification.meta.autoCloseTimer.resume();
+      if (notification.element.props.autoClose) {
+        notification.meta.autoCloseTimer.resume();
+      }
     },
     onClose: () => {
       controller.remove(notification.meta.id);
       notification.element.props.onClose?.();
     },
     onFocus: () => {
-      notification.meta.autoCloseTimer.pause();
+      if (notification.element.props.autoClose) {
+        notification.meta.autoCloseTimer.pause();
+      }
     },
     onBlur: () => {
-      notification.meta.autoCloseTimer.resume();
+      if (notification.element.props.autoClose) {
+        notification.meta.autoCloseTimer.resume();
+      }
     },
   });
 };
