@@ -11,10 +11,11 @@ import { useGridItemProps } from "@/components/List/components/Items/components/
 interface Props extends PropsWithChildren {
   id: Key;
   data: never;
+  tiles?: boolean;
 }
 
 export const Item = (props: Props) => {
-  const { id, data } = props;
+  const { id, data, tiles } = props;
   const list = useList();
 
   const itemView = list.itemView;
@@ -37,7 +38,7 @@ export const Item = (props: Props) => {
           styles.item,
           hasAction && styles.hasAction,
           props.isSelected && styles.isSelected,
-          list.tile && styles.tile,
+          tiles && styles.tile,
         )
       }
       textValue={textValue}
@@ -49,19 +50,17 @@ export const Item = (props: Props) => {
   );
 };
 
-export const ItemContainer: FC<PropsWithChildren> = (props) => {
-  const list = useList();
+export const ItemContainer: FC<PropsWithChildren & { tiles?: boolean }> = (
+  props,
+) => {
+  const { tiles, children } = props;
 
   return (
     <Aria.GridListItem
       textValue="-"
-      className={clsx(
-        styles.item,
-        styles.fallbackItem,
-        list.tile && styles.tile,
-      )}
+      className={clsx(styles.item, styles.fallbackItem, tiles && styles.tile)}
     >
-      {props.children}
+      {children}
     </Aria.GridListItem>
   );
 };

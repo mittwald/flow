@@ -51,6 +51,7 @@ const meta: Meta<typeof List> = {
       <Section>
         <Heading>Domains</Heading>
         <DomainList.List
+          tiles
           batchSize={5}
           aria-label="Domains"
           onAction={(domain) => console.log(domain.hostname)}
@@ -214,65 +215,6 @@ export const WithAccordion: Story = {
             )}
           </InvoiceList.Item>
         </InvoiceList.List>
-      </Section>
-    );
-  },
-};
-
-export const WithTile: Story = {
-  render: () => {
-    const DomainList = typedList<Domain>();
-    const availableTypes = usePromise(getTypes, []);
-
-    return (
-      <Section>
-        <Heading>Domains</Heading>
-        <DomainList.List
-          batchSize={5}
-          aria-label="Domains"
-          onAction={(domain) => console.log(domain.hostname)}
-          tile
-        >
-          <DomainList.LoaderAsync manualPagination manualSorting={false}>
-            {loadDomains}
-          </DomainList.LoaderAsync>
-          <DomainList.Filter
-            values={availableTypes}
-            property="type"
-            mode="all"
-            name="Typ"
-            defaultSelected={["Domain"]}
-          />
-          <DomainList.Search autoFocus autoSubmit />
-          <DomainList.Sorting property="domain" name="A-Z" />
-          <DomainList.Sorting property="domain" name="Z-A" direction="desc" />
-
-          <DomainList.Item textValue={(domain) => domain.hostname}>
-            {(domain) => (
-              <DomainList.ItemView>
-                <Avatar color={domain.type === "Domain" ? "blue" : "teal"}>
-                  {domain.type === "Domain" ? (
-                    <IconDomain />
-                  ) : (
-                    <IconSubdomain />
-                  )}
-                </Avatar>
-                <Heading>
-                  {domain.hostname}
-                  {!domain.verified && (
-                    <AlertBadge status="warning">Not verified</AlertBadge>
-                  )}
-                </Heading>
-                <Text>{domain.type}</Text>
-
-                <ContextMenu>
-                  <MenuItem>Show details</MenuItem>
-                  <MenuItem>Delete</MenuItem>
-                </ContextMenu>
-              </DomainList.ItemView>
-            )}
-          </DomainList.Item>
-        </DomainList.List>
       </Section>
     );
   },

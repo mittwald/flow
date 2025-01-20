@@ -10,6 +10,7 @@
   "list.settings.viewMode": "View",
   "list.settings.viewMode.list": "List",
   "list.settings.viewMode.table": "Table",
+  "list.settings.viewMode.tiles": "Tiles",
   "list.showMore": "Show more",
   "list.sorting": "Sorting",
   "list.toggleExpandButton.collapse": "Show less",

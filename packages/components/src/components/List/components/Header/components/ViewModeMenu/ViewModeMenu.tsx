@@ -24,6 +24,9 @@ export const ViewModeMenu: FC = () => {
   if (list.table) {
     availableViewModes.push("table");
   }
+  if (list.tiles) {
+    availableViewModes.push("tiles");
+  }
 
   if (availableViewModes.length <= 1) {
     return null;

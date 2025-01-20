@@ -22,7 +22,7 @@ import z from "zod";
 
 export class List<T> {
   public static readonly viewModeSettingsStorageSchema = z
-    .enum(["list", "table"])
+    .enum(["list", "table", "tiles"])
     .optional();
   public readonly filters: Filter<T, never, never>[];
   public readonly itemView?: ItemView<T>;
@@ -35,7 +35,7 @@ export class List<T> {
   public readonly loader: IncrementalLoader<T>;
   public readonly onAction?: ItemActionFn<T>;
   public readonly accordion: boolean;
-  public readonly tile: boolean;
+  public readonly tiles: boolean;
   public readonly getItemId?: GetItemId<T>;
   public readonly componentProps: ListSupportedComponentProps;
   public viewMode: ListViewMode;
@@ -61,7 +61,7 @@ export class List<T> {
       getItemId,
       defaultViewMode,
       accordion = false,
-      tile = false,
+      tiles = false,
       ...componentProps
     } = shape;
 
@@ -81,7 +81,7 @@ export class List<T> {
     this.search = search ? new Search(this, search) : undefined;
     this.itemView = itemView ? new ItemView(this, itemView) : undefined;
     this.accordion = accordion;
-    this.tile = tile;
+    this.tiles = tiles;
     this.table = table ? new Table(this, table) : undefined;
     this.batches = new BatchesController(this, batchesController);
     this.componentProps = componentProps;

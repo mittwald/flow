@@ -8,7 +8,13 @@ import Item from "@/components/List/components/Items/components/Item/Item";
 import { EmptyView } from "@/components/List/components/EmptyView/EmptyView";
 import { FallbackItems } from "@/components/List/components/Items/components/FallbackItems/FallbackItems";
 
-export const Items: FC = () => {
+interface Props {
+  tiles?: boolean;
+}
+
+export const Items: FC<Props> = (props) => {
+  const { tiles } = props;
+
   const list = useList();
   const isLoading = list.loader.useIsLoading();
   const isInitiallyLoading = list.loader.useIsInitiallyLoading();
@@ -18,13 +24,13 @@ export const Items: FC = () => {
   }
 
   const rows = list.items.entries.map((item) => (
-    <Item key={item.id} data={item.data} id={item.id} />
+    <Item key={item.id} data={item.data} id={item.id} tiles={tiles} />
   ));
 
   const rootClassName = clsx(
     styles.items,
     isLoading && styles.isLoading,
-    list.tile && styles.tiles,
+    tiles && styles.tiles,
   );
 
   return (

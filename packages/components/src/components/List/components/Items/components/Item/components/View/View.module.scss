@@ -25,7 +25,8 @@
       "avatar subtitle";
     grid-template-columns: auto 1fr;
 
-    &:empty {
+    &:empty,
+    .subTitle:empty {
       display: none;
     }
 
@@ -36,7 +37,7 @@
       grid-template-columns: 1fr;
     }
 
-    &:not(:has(.subTitle)) {
+    &:has(.subTitle:empty) {
       grid-template-areas: "avatar title";
 
       &:not(:has(.avatar)) {
@@ -82,6 +83,10 @@
   &.tile {
     padding: 0;
 
+    .action {
+      display: none;
+    }
+
     .avatarContainer {
       width: 100%;
       overflow: hidden;
@@ -94,7 +99,7 @@
     .avatar {
       width: 100%;
       height: 100%;
-      border-radius: 0;
+      border-radius: var(--corner-radius--default);
 
       :global(.flow--avatar--icon) {
         width: var(--size-px--xxl);

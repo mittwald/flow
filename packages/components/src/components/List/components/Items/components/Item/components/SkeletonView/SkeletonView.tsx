@@ -10,9 +10,11 @@ import { Skeleton } from "@/components/Skeleton";
 export const SkeletonView: FC = () => {
   const list = useList();
 
+  const showTiles = list.viewMode === "tiles";
+
   return (
     <View>
-      {list.tile && <Skeleton style={{ aspectRatio: 16 / 9 }} />}
+      {showTiles && <Skeleton style={{ aspectRatio: 16 / 9 }} />}
       <Heading>
         <SkeletonText width="200px" />
       </Heading>

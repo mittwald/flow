@@ -22,16 +22,16 @@ const meta: Meta<typeof List> = {
   ...defaultMeta,
   title: "Structure/List/ListItem",
   argTypes: {
-    tile: {
+    tiles: {
       control: "boolean",
     },
   },
-  args: { tile: false },
+  args: { tiles: false },
   render: (props) => {
     const List = typedList<{ name: string }>();
 
     return (
-      <List.List tile={props.tile}>
+      <List.List tiles={props.tiles}>
         <List.StaticData data={[{ name: "John Doe" }]} />
         <List.Item textValue={(user) => user.name}>
           {(user) => (
@@ -65,7 +65,7 @@ export const WithTopContent: Story = {
     const List = typedList<{ mail: string }>();
 
     return (
-      <List.List tile={props.tile}>
+      <List.List tiles={props.tiles}>
         <List.StaticData data={[{ mail: "john@doe.de" }]} />
         <List.Item textValue={(mail) => mail.mail}>
           {(mail) => (
@@ -95,7 +95,7 @@ export const WithBottomContent: Story = {
     const List = typedList<{ name: string }>();
 
     return (
-      <List.List tile={props.tile}>
+      <List.List tiles={props.tiles}>
         <List.StaticData data={[{ name: "John Doe" }]} />
         <List.Item textValue={(user) => user.name}>
           {(user) => (
@@ -122,7 +122,7 @@ export const WithActionGroup: Story = {
     const List = typedList<{ name: string }>();
 
     return (
-      <List.List tile={props.tile}>
+      <List.List tiles={props.tiles}>
         <List.StaticData data={[{ name: "John Doe" }]} />
         <List.Item textValue={(user) => user.name}>
           {(user) => (
@@ -153,7 +153,7 @@ export const WithMultipleTexts: Story = {
     const List = typedList<{ name: string }>();
 
     return (
-      <List.List tile={props.tile}>
+      <List.List tiles={props.tiles}>
         <List.StaticData data={[{ name: "John Doe" }]} />
         <List.Item textValue={(user) => user.name}>
           {(user) => (

@@ -22,6 +22,8 @@ export const View = (props: Props) => {
   const { children, className } = props;
   const list = useList();
 
+  const showTiles = list.viewMode === "tiles";
+
   const propsContext: PropsContext = {
     ContextMenu: {
       wrapWith: <OptionsButton className={styles.action} />,
@@ -62,13 +64,13 @@ export const View = (props: Props) => {
     },
   };
 
-  const rootClassName = clsx(styles.view, list.tile && styles.tile, className);
+  const rootClassName = clsx(styles.view, showTiles && styles.tile, className);
 
   return (
     <div className={rootClassName}>
       <PropsContextProvider props={propsContext} mergeInParentContext>
         <TunnelProvider>
-          {list.tile && (
+          {showTiles && (
             <>
               <div className={styles.avatarContainer}>
                 <TunnelExit id="avatar" />
@@ -87,7 +89,7 @@ export const View = (props: Props) => {
             </>
           )}
 
-          {!list.tile && (
+          {!showTiles && (
             <>
               <div className={styles.content}>
                 <div className={styles.title}>
