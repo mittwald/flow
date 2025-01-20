@@ -28,19 +28,19 @@
     "@mittwald/flow-remote-core": "workspace:*",
     "@remote-dom/core": "^1.5.2",
     "react-hook-form": "^7.54.2",
-    "remeda": "^2.19.1",
+    "remeda": "^2.19.2",
     "type-fest": "^4.32.0"
   },
   "devDependencies": {
     "@mittwald/typescript-config": "workspace:*",
-    "@types/node": "^22.10.6",
-    "nx": "^20.3.1",
+    "@types/node": "^22.10.7",
+    "nx": "^20.3.2",
     "prettier": "^3.4.2",
     "rimraf": "^6.0.1",
     "typescript": "^5.7.3",
-    "vite": "^6.0.7",
+    "vite": "^6.0.9",
     "vite-plugin-checker": "^0.8.0",
     "vite-plugin-dts": "^4.5.0",
-    "vite-plugin-externalize-deps": "^0.8.0"
+    "vite-plugin-externalize-deps": "^0.9.0"
   }
 }

@@ -13,6 +13,7 @@ export class RemoteSearchFieldElement extends FlowRemoteElement<RemoteSearchFiel
     return {
       "aria-activedescendant": {},
       "aria-autocomplete": {},
+      "aria-controls": {},
       "aria-describedby": {},
       "aria-details": {},
       "aria-errormessage": {},
@@ -20,6 +21,7 @@ export class RemoteSearchFieldElement extends FlowRemoteElement<RemoteSearchFiel
       "aria-label": {},
       "aria-labelledby": {},
       autoComplete: {},
+      autoCorrect: {},
       autoFocus: {},
       className: {},
       defaultValue: {},
@@ -35,6 +37,7 @@ export class RemoteSearchFieldElement extends FlowRemoteElement<RemoteSearchFiel
       name: {},
       pattern: {},
       slot: {},
+      spellCheck: {},
       type: {},
       validate: {},
       validationBehavior: {},

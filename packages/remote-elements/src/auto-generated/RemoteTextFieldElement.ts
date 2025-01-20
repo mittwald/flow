@@ -13,6 +13,7 @@ export class RemoteTextFieldElement extends FlowRemoteElement<RemoteTextFieldEle
     return {
       "aria-activedescendant": {},
       "aria-autocomplete": {},
+      "aria-controls": {},
       "aria-describedby": {},
       "aria-details": {},
       "aria-errormessage": {},
@@ -20,6 +21,7 @@ export class RemoteTextFieldElement extends FlowRemoteElement<RemoteTextFieldEle
       "aria-label": {},
       "aria-labelledby": {},
       autoComplete: {},
+      autoCorrect: {},
       autoFocus: {},
       className: {},
       defaultValue: {},
@@ -38,6 +40,7 @@ export class RemoteTextFieldElement extends FlowRemoteElement<RemoteTextFieldEle
       placeholder: {},
       showCharacterCount: {},
       slot: {},
+      spellCheck: {},
       type: {},
       validate: {},
       validationBehavior: {},

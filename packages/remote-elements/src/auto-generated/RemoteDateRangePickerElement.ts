@@ -21,6 +21,7 @@ export class RemoteDateRangePickerElement extends FlowRemoteElement<RemoteDateRa
       defaultOpen: {},
       defaultValue: {},
       endName: {},
+      firstDayOfWeek: {},
       granularity: {},
       hideTimeZone: {},
       hourCycle: {},
