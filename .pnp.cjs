@@ -6687,6 +6687,7 @@ const RAW_RUNTIME_STATE =
           ["rimraf", "npm:6.0.1"],\
           ["typescript", "patch:typescript@npm%3A5.7.3#optional!builtin<compat/typescript>::version=5.7.3&hash=5786d5"],\
           ["vite", "virtual:e54c008492398c9abbb273b5a37b3518a9062a39d6533ac09090545217e28744f958ea738119c5be59e1e118297242d6fdfeb009faeeb911e1ca0cf7dfb33536#npm:6.0.9"],\
+          ["vite-plugin-banner", "npm:0.8.0"],\
           ["vite-plugin-checker", "virtual:e54c008492398c9abbb273b5a37b3518a9062a39d6533ac09090545217e28744f958ea738119c5be59e1e118297242d6fdfeb009faeeb911e1ca0cf7dfb33536#npm:0.8.0"],\
           ["vite-plugin-dts", "virtual:e54c008492398c9abbb273b5a37b3518a9062a39d6533ac09090545217e28744f958ea738119c5be59e1e118297242d6fdfeb009faeeb911e1ca0cf7dfb33536#npm:4.5.0"],\
           ["vite-plugin-externalize-deps", "virtual:e54c008492398c9abbb273b5a37b3518a9062a39d6533ac09090545217e28744f958ea738119c5be59e1e118297242d6fdfeb009faeeb911e1ca0cf7dfb33536#npm:0.9.0"]\
@@ -6725,6 +6726,7 @@ const RAW_RUNTIME_STATE =
           ["rimraf", "npm:6.0.1"],\
           ["typescript", "patch:typescript@npm%3A5.7.3#optional!builtin<compat/typescript>::version=5.7.3&hash=5786d5"],\
           ["vite", "virtual:e54c008492398c9abbb273b5a37b3518a9062a39d6533ac09090545217e28744f958ea738119c5be59e1e118297242d6fdfeb009faeeb911e1ca0cf7dfb33536#npm:6.0.9"],\
+          ["vite-plugin-banner", "npm:0.8.0"],\
           ["vite-plugin-checker", "virtual:e54c008492398c9abbb273b5a37b3518a9062a39d6533ac09090545217e28744f958ea738119c5be59e1e118297242d6fdfeb009faeeb911e1ca0cf7dfb33536#npm:0.8.0"],\
           ["vite-plugin-dts", "virtual:e54c008492398c9abbb273b5a37b3518a9062a39d6533ac09090545217e28744f958ea738119c5be59e1e118297242d6fdfeb009faeeb911e1ca0cf7dfb33536#npm:4.5.0"],\
           ["vite-plugin-externalize-deps", "virtual:e54c008492398c9abbb273b5a37b3518a9062a39d6533ac09090545217e28744f958ea738119c5be59e1e118297242d6fdfeb009faeeb911e1ca0cf7dfb33536#npm:0.9.0"]\
