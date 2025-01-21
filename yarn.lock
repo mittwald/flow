@@ -3071,7 +3071,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@internationalized/date@npm:^3.7.0":
+"@internationalized/date@npm:^3.6.0, @internationalized/date@npm:^3.7.0":
   version: 3.7.0
   resolution: "@internationalized/date@npm:3.7.0"
   dependencies:
@@ -3768,7 +3768,7 @@ __metadata:
   dependencies:
     "@chakra-ui/live-region": "npm:^2.1.0"
     "@faker-js/faker": "npm:^9.4.0"
-    "@internationalized/date": "npm:^3.7.0"
+    "@internationalized/date": "npm:^3.6.0"
     "@internationalized/string-compiler": "npm:^3.2.6"
     "@mittwald/flow-design-tokens": "workspace:*"
     "@mittwald/react-tunnel": "workspace:*"
@@ -3864,13 +3864,14 @@ __metadata:
     yaml: "npm:^2.7.0"
     zod: "npm:^3.24.1"
   peerDependencies:
+    "@internationalized/date": ^3.6.0
     "@mittwald/react-use-promise": ^2.3.12
     next: "*"
     react: 19.0.0
     react-dom: 19.0.0
     react-hook-form: "*"
   peerDependenciesMeta:
-    "@mittwald/react-use-promise":
+    "@internationalized/date":
       optional: true
     next:
       optional: true

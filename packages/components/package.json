@@ -374,7 +374,6 @@
   },
   "dependencies": {
     "@chakra-ui/live-region": "^2.1.0",
-    "@internationalized/date": "^3.7.0",
     "@internationalized/string-compiler": "^3.2.6",
     "@mittwald/react-tunnel": "workspace:*",
     "@mittwald/react-use-promise": "^2.6.0",
@@ -413,6 +412,7 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^9.4.0",
+    "@internationalized/date": "^3.6.0",
     "@mittwald/flow-design-tokens": "workspace:*",
     "@mittwald/react-use-promise": "^2.6.0",
     "@mittwald/typescript-config": "workspace:*",
@@ -475,6 +475,7 @@
     "yaml": "^2.7.0"
   },
   "peerDependencies": {
+    "@internationalized/date": "^3.6.0",
     "@mittwald/react-use-promise": "^2.3.12",
     "next": "*",
     "react": "19.0.0",
@@ -482,7 +483,7 @@
     "react-hook-form": "*"
   },
   "peerDependenciesMeta": {
-    "@mittwald/react-use-promise": {
+    "@internationalized/date": {
       "optional": true
     },
     "next": {
