@@ -72,7 +72,7 @@ const RAW_RUNTIME_STATE =
     ["@mittwald/flow-documentation", ["workspace:apps/docs"]],\
     ["@mittwald/flow-project", ["workspace:."]],\
     ["@mittwald/flow-react-components", ["virtual:02399c813f620f3e07c5bf63601a96aadcfae5ba2d921a0fbecd43bc5f5b62b8479ea8e19241468fcf9e95b5637db6a0790fb274b7e8458034a162926a681d40#workspace:packages/components", "virtual:51f9073027a665d1a8831937737b86a911a9d91a08d5a7b63302b1faa11d74c5f05e22acfaa937568c499270acb8fabc7228004d0d8ef4bb6af0566e81cef7bd#workspace:packages/components", "virtual:79d01b4414b0d22dd7a97fbb53051f0dc816b375d4d1fbd24e5dda130b90adaaa29635b74c78b9f343a5b41fbe10aad756dd398dd4d2d995bbab45a353a07790#workspace:packages/components", "virtual:8f0cc77a78c3d73d46527d25b5c7fdc96e801745329d67ccc3c2a0e06ed8dd2ad7d9089e3bd5a0e9702bbcefea0630b06b43ca952b4eca5be77b2ea22469fd7e#workspace:packages/components", "virtual:c61360d86060b11dc12d13c6a3e4151f63957df6cf13d1eccb1534ed68342488d1553c3b8fc9f6f414995f23c4ef79a65c8cdc3785c69f7bfa4f98b8c64e5464#workspace:packages/components", "virtual:f09e910c1b508d3d7569e5bd3d1b58e6c8eedf483d3ecb00a35f3e6fff907cff61fcf2c7acd90c04d26e337186c1afc7265f77161911bcd5beabe7070df91545#workspace:packages/components", "workspace:packages/components"]],\
-    ["@mittwald/flow-remote-core", ["virtual:11857decb965f319cfa8122b205eb1df73d4d774e712eb585f7df91db052f3f2b06fa8c51771eecf997bb4eb3e8d473effff8527016a8987bfabae2a09858a8b#workspace:packages/remote-core", "workspace:packages/remote-core"]],\
+    ["@mittwald/flow-remote-core", ["workspace:packages/remote-core"]],\
     ["@mittwald/flow-remote-elements", ["virtual:02399c813f620f3e07c5bf63601a96aadcfae5ba2d921a0fbecd43bc5f5b62b8479ea8e19241468fcf9e95b5637db6a0790fb274b7e8458034a162926a681d40#workspace:packages/remote-elements", "virtual:11857decb965f319cfa8122b205eb1df73d4d774e712eb585f7df91db052f3f2b06fa8c51771eecf997bb4eb3e8d473effff8527016a8987bfabae2a09858a8b#workspace:packages/remote-elements", "virtual:8f0cc77a78c3d73d46527d25b5c7fdc96e801745329d67ccc3c2a0e06ed8dd2ad7d9089e3bd5a0e9702bbcefea0630b06b43ca952b4eca5be77b2ea22469fd7e#workspace:packages/remote-elements", "workspace:packages/remote-elements"]],\
     ["@mittwald/flow-remote-react-components", ["virtual:c61360d86060b11dc12d13c6a3e4151f63957df6cf13d1eccb1534ed68342488d1553c3b8fc9f6f414995f23c4ef79a65c8cdc3785c69f7bfa4f98b8c64e5464#workspace:packages/remote-react-components", "workspace:packages/remote-react-components"]],\
     ["@mittwald/flow-remote-react-renderer", ["virtual:c61360d86060b11dc12d13c6a3e4151f63957df6cf13d1eccb1534ed68342488d1553c3b8fc9f6f414995f23c4ef79a65c8cdc3785c69f7bfa4f98b8c64e5464#workspace:packages/remote-react-renderer", "workspace:packages/remote-react-renderer"]],\
@@ -6462,37 +6462,12 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@mittwald/flow-remote-core", [\
-      ["virtual:11857decb965f319cfa8122b205eb1df73d4d774e712eb585f7df91db052f3f2b06fa8c51771eecf997bb4eb3e8d473effff8527016a8987bfabae2a09858a8b#workspace:packages/remote-core", {\
-        "packageLocation": "./.yarn/__virtual__/@mittwald-flow-remote-core-virtual-a3988b1c0b/1/packages/remote-core/",\
-        "packageDependencies": [\
-          ["@mittwald/flow-remote-core", "virtual:11857decb965f319cfa8122b205eb1df73d4d774e712eb585f7df91db052f3f2b06fa8c51771eecf997bb4eb3e8d473effff8527016a8987bfabae2a09858a8b#workspace:packages/remote-core"],\
-          ["@mittwald/typescript-config", "workspace:packages/typescript-config"],\
-          ["@quilted/threads", "virtual:a3988b1c0b7ef61078188fa2b29ee1bc3fa6d42ec9fd2849105482f78bf6460bcf5422c2f4b769d78fa6a02d01dbf5aeda1fc026236a72bc759cb587b2a79bd3#npm:3.1.2"],\
-          ["@remote-dom/core", "virtual:b4d6d53b88e2982758be01ac5ffac772e1f9d5686d8726d65feae2ff97771adde07d2d308a2d218ae3e76f71654be3c8768b1592c965f313e8394c7f0ea62700#npm:1.5.1"],\
-          ["@types/node", "npm:22.10.7"],\
-          ["@types/remote-dom__core", null],\
-          ["nx", "virtual:39c8c25d260eb1bf02df2a54b39359db7b3370463ab66b81ab8af2464f36109363fcf65528ed61bea6211f97dae28bd320ee3af3dba7e77d2aaeb5c743004d80#npm:20.3.2"],\
-          ["prettier", "npm:3.4.2"],\
-          ["remeda", "npm:2.19.2"],\
-          ["rimraf", "npm:6.0.1"],\
-          ["typescript", "patch:typescript@npm%3A5.7.3#optional!builtin<compat/typescript>::version=5.7.3&hash=5786d5"],\
-          ["vite", "virtual:e54c008492398c9abbb273b5a37b3518a9062a39d6533ac09090545217e28744f958ea738119c5be59e1e118297242d6fdfeb009faeeb911e1ca0cf7dfb33536#npm:6.0.9"],\
-          ["vite-plugin-checker", "virtual:e54c008492398c9abbb273b5a37b3518a9062a39d6533ac09090545217e28744f958ea738119c5be59e1e118297242d6fdfeb009faeeb911e1ca0cf7dfb33536#npm:0.8.0"],\
-          ["vite-plugin-dts", "virtual:e54c008492398c9abbb273b5a37b3518a9062a39d6533ac09090545217e28744f958ea738119c5be59e1e118297242d6fdfeb009faeeb911e1ca0cf7dfb33536#npm:4.5.0"],\
-          ["vite-plugin-externalize-deps", "virtual:e54c008492398c9abbb273b5a37b3518a9062a39d6533ac09090545217e28744f958ea738119c5be59e1e118297242d6fdfeb009faeeb911e1ca0cf7dfb33536#npm:0.9.0"]\
-        ],\
-        "packagePeers": [\
-          "@remote-dom/core",\
-          "@types/remote-dom__core"\
-        ],\
-        "linkType": "SOFT"\
-      }],\
       ["workspace:packages/remote-core", {\
         "packageLocation": "./packages/remote-core/",\
         "packageDependencies": [\
           ["@mittwald/flow-remote-core", "workspace:packages/remote-core"],\
           ["@mittwald/typescript-config", "workspace:packages/typescript-config"],\
-          ["@quilted/threads", "virtual:a3988b1c0b7ef61078188fa2b29ee1bc3fa6d42ec9fd2849105482f78bf6460bcf5422c2f4b769d78fa6a02d01dbf5aeda1fc026236a72bc759cb587b2a79bd3#npm:3.1.2"],\
+          ["@quilted/threads", "virtual:a3deb3558b7c556d6157280684f3db06f691dac9300d77c9dff1ffc2d0569e9c27e9b6599fc2cf0046a0bd6c04d7e89690f5a40040da02614a2032b874e5b978#npm:3.1.2"],\
           ["@remote-dom/core", "virtual:b4d6d53b88e2982758be01ac5ffac772e1f9d5686d8726d65feae2ff97771adde07d2d308a2d218ae3e76f71654be3c8768b1592c965f313e8394c7f0ea62700#npm:1.5.1"],\
           ["@types/node", "npm:22.10.7"],\
           ["nx", "virtual:39c8c25d260eb1bf02df2a54b39359db7b3370463ab66b81ab8af2464f36109363fcf65528ed61bea6211f97dae28bd320ee3af3dba7e77d2aaeb5c743004d80#npm:20.3.2"],\
@@ -6514,9 +6489,8 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@mittwald/flow-remote-elements", "virtual:02399c813f620f3e07c5bf63601a96aadcfae5ba2d921a0fbecd43bc5f5b62b8479ea8e19241468fcf9e95b5637db6a0790fb274b7e8458034a162926a681d40#workspace:packages/remote-elements"],\
           ["@mittwald/flow-react-components", "virtual:02399c813f620f3e07c5bf63601a96aadcfae5ba2d921a0fbecd43bc5f5b62b8479ea8e19241468fcf9e95b5637db6a0790fb274b7e8458034a162926a681d40#workspace:packages/components"],\
-          ["@mittwald/flow-remote-core", "virtual:11857decb965f319cfa8122b205eb1df73d4d774e712eb585f7df91db052f3f2b06fa8c51771eecf997bb4eb3e8d473effff8527016a8987bfabae2a09858a8b#workspace:packages/remote-core"],\
+          ["@mittwald/flow-remote-core", "workspace:packages/remote-core"],\
           ["@mittwald/typescript-config", "workspace:packages/typescript-config"],\
-          ["@remote-dom/core", "virtual:b4d6d53b88e2982758be01ac5ffac772e1f9d5686d8726d65feae2ff97771adde07d2d308a2d218ae3e76f71654be3c8768b1592c965f313e8394c7f0ea62700#npm:1.5.1"],\
           ["@types/mittwald__flow-react-components", null],\
           ["@types/node", "npm:22.10.7"],\
           ["nx", "virtual:39c8c25d260eb1bf02df2a54b39359db7b3370463ab66b81ab8af2464f36109363fcf65528ed61bea6211f97dae28bd320ee3af3dba7e77d2aaeb5c743004d80#npm:20.3.2"],\
@@ -6542,9 +6516,8 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@mittwald/flow-remote-elements", "virtual:11857decb965f319cfa8122b205eb1df73d4d774e712eb585f7df91db052f3f2b06fa8c51771eecf997bb4eb3e8d473effff8527016a8987bfabae2a09858a8b#workspace:packages/remote-elements"],\
           ["@mittwald/flow-react-components", "virtual:c61360d86060b11dc12d13c6a3e4151f63957df6cf13d1eccb1534ed68342488d1553c3b8fc9f6f414995f23c4ef79a65c8cdc3785c69f7bfa4f98b8c64e5464#workspace:packages/components"],\
-          ["@mittwald/flow-remote-core", "virtual:11857decb965f319cfa8122b205eb1df73d4d774e712eb585f7df91db052f3f2b06fa8c51771eecf997bb4eb3e8d473effff8527016a8987bfabae2a09858a8b#workspace:packages/remote-core"],\
+          ["@mittwald/flow-remote-core", "workspace:packages/remote-core"],\
           ["@mittwald/typescript-config", "workspace:packages/typescript-config"],\
-          ["@remote-dom/core", "virtual:b4d6d53b88e2982758be01ac5ffac772e1f9d5686d8726d65feae2ff97771adde07d2d308a2d218ae3e76f71654be3c8768b1592c965f313e8394c7f0ea62700#npm:1.5.1"],\
           ["@types/mittwald__flow-react-components", null],\
           ["@types/node", "npm:22.10.7"],\
           ["nx", "virtual:39c8c25d260eb1bf02df2a54b39359db7b3370463ab66b81ab8af2464f36109363fcf65528ed61bea6211f97dae28bd320ee3af3dba7e77d2aaeb5c743004d80#npm:20.3.2"],\
@@ -6570,9 +6543,8 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@mittwald/flow-remote-elements", "virtual:8f0cc77a78c3d73d46527d25b5c7fdc96e801745329d67ccc3c2a0e06ed8dd2ad7d9089e3bd5a0e9702bbcefea0630b06b43ca952b4eca5be77b2ea22469fd7e#workspace:packages/remote-elements"],\
           ["@mittwald/flow-react-components", "virtual:8f0cc77a78c3d73d46527d25b5c7fdc96e801745329d67ccc3c2a0e06ed8dd2ad7d9089e3bd5a0e9702bbcefea0630b06b43ca952b4eca5be77b2ea22469fd7e#workspace:packages/components"],\
-          ["@mittwald/flow-remote-core", "virtual:11857decb965f319cfa8122b205eb1df73d4d774e712eb585f7df91db052f3f2b06fa8c51771eecf997bb4eb3e8d473effff8527016a8987bfabae2a09858a8b#workspace:packages/remote-core"],\
+          ["@mittwald/flow-remote-core", "workspace:packages/remote-core"],\
           ["@mittwald/typescript-config", "workspace:packages/typescript-config"],\
-          ["@remote-dom/core", "virtual:b4d6d53b88e2982758be01ac5ffac772e1f9d5686d8726d65feae2ff97771adde07d2d308a2d218ae3e76f71654be3c8768b1592c965f313e8394c7f0ea62700#npm:1.5.1"],\
           ["@types/mittwald__flow-react-components", null],\
           ["@types/node", "npm:22.10.7"],\
           ["nx", "virtual:39c8c25d260eb1bf02df2a54b39359db7b3370463ab66b81ab8af2464f36109363fcf65528ed61bea6211f97dae28bd320ee3af3dba7e77d2aaeb5c743004d80#npm:20.3.2"],\
@@ -6598,9 +6570,8 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@mittwald/flow-remote-elements", "workspace:packages/remote-elements"],\
           ["@mittwald/flow-react-components", "virtual:51f9073027a665d1a8831937737b86a911a9d91a08d5a7b63302b1faa11d74c5f05e22acfaa937568c499270acb8fabc7228004d0d8ef4bb6af0566e81cef7bd#workspace:packages/components"],\
-          ["@mittwald/flow-remote-core", "virtual:11857decb965f319cfa8122b205eb1df73d4d774e712eb585f7df91db052f3f2b06fa8c51771eecf997bb4eb3e8d473effff8527016a8987bfabae2a09858a8b#workspace:packages/remote-core"],\
+          ["@mittwald/flow-remote-core", "workspace:packages/remote-core"],\
           ["@mittwald/typescript-config", "workspace:packages/typescript-config"],\
-          ["@remote-dom/core", "virtual:b4d6d53b88e2982758be01ac5ffac772e1f9d5686d8726d65feae2ff97771adde07d2d308a2d218ae3e76f71654be3c8768b1592c965f313e8394c7f0ea62700#npm:1.5.1"],\
           ["@types/node", "npm:22.10.7"],\
           ["nx", "virtual:39c8c25d260eb1bf02df2a54b39359db7b3370463ab66b81ab8af2464f36109363fcf65528ed61bea6211f97dae28bd320ee3af3dba7e77d2aaeb5c743004d80#npm:20.3.2"],\
           ["prettier", "npm:3.4.2"],\
@@ -6623,10 +6594,9 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@mittwald/flow-remote-react-components", "virtual:c61360d86060b11dc12d13c6a3e4151f63957df6cf13d1eccb1534ed68342488d1553c3b8fc9f6f414995f23c4ef79a65c8cdc3785c69f7bfa4f98b8c64e5464#workspace:packages/remote-react-components"],\
           ["@mittwald/flow-react-components", "virtual:c61360d86060b11dc12d13c6a3e4151f63957df6cf13d1eccb1534ed68342488d1553c3b8fc9f6f414995f23c4ef79a65c8cdc3785c69f7bfa4f98b8c64e5464#workspace:packages/components"],\
-          ["@mittwald/flow-remote-core", "virtual:11857decb965f319cfa8122b205eb1df73d4d774e712eb585f7df91db052f3f2b06fa8c51771eecf997bb4eb3e8d473effff8527016a8987bfabae2a09858a8b#workspace:packages/remote-core"],\
+          ["@mittwald/flow-remote-core", "workspace:packages/remote-core"],\
           ["@mittwald/flow-remote-elements", "virtual:11857decb965f319cfa8122b205eb1df73d4d774e712eb585f7df91db052f3f2b06fa8c51771eecf997bb4eb3e8d473effff8527016a8987bfabae2a09858a8b#workspace:packages/remote-elements"],\
           ["@mittwald/typescript-config", "workspace:packages/typescript-config"],\
-          ["@remote-dom/core", "virtual:b4d6d53b88e2982758be01ac5ffac772e1f9d5686d8726d65feae2ff97771adde07d2d308a2d218ae3e76f71654be3c8768b1592c965f313e8394c7f0ea62700#npm:1.5.1"],\
           ["@remote-dom/react", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:1.2.1"],\
           ["@types/mittwald__flow-react-components", null],\
           ["@types/node", "npm:22.10.7"],\
@@ -6658,10 +6628,9 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@mittwald/flow-remote-react-components", "workspace:packages/remote-react-components"],\
           ["@mittwald/flow-react-components", "virtual:02399c813f620f3e07c5bf63601a96aadcfae5ba2d921a0fbecd43bc5f5b62b8479ea8e19241468fcf9e95b5637db6a0790fb274b7e8458034a162926a681d40#workspace:packages/components"],\
-          ["@mittwald/flow-remote-core", "virtual:11857decb965f319cfa8122b205eb1df73d4d774e712eb585f7df91db052f3f2b06fa8c51771eecf997bb4eb3e8d473effff8527016a8987bfabae2a09858a8b#workspace:packages/remote-core"],\
+          ["@mittwald/flow-remote-core", "workspace:packages/remote-core"],\
           ["@mittwald/flow-remote-elements", "virtual:02399c813f620f3e07c5bf63601a96aadcfae5ba2d921a0fbecd43bc5f5b62b8479ea8e19241468fcf9e95b5637db6a0790fb274b7e8458034a162926a681d40#workspace:packages/remote-elements"],\
           ["@mittwald/typescript-config", "workspace:packages/typescript-config"],\
-          ["@remote-dom/core", "virtual:b4d6d53b88e2982758be01ac5ffac772e1f9d5686d8726d65feae2ff97771adde07d2d308a2d218ae3e76f71654be3c8768b1592c965f313e8394c7f0ea62700#npm:1.5.1"],\
           ["@remote-dom/react", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:1.2.1"],\
           ["@types/node", "npm:22.10.7"],\
           ["@types/react", "npm:19.0.7"],\
@@ -6685,10 +6654,9 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@mittwald/flow-remote-react-renderer", "virtual:c61360d86060b11dc12d13c6a3e4151f63957df6cf13d1eccb1534ed68342488d1553c3b8fc9f6f414995f23c4ef79a65c8cdc3785c69f7bfa4f98b8c64e5464#workspace:packages/remote-react-renderer"],\
           ["@mittwald/flow-react-components", "virtual:c61360d86060b11dc12d13c6a3e4151f63957df6cf13d1eccb1534ed68342488d1553c3b8fc9f6f414995f23c4ef79a65c8cdc3785c69f7bfa4f98b8c64e5464#workspace:packages/components"],\
-          ["@mittwald/flow-remote-core", "virtual:11857decb965f319cfa8122b205eb1df73d4d774e712eb585f7df91db052f3f2b06fa8c51771eecf997bb4eb3e8d473effff8527016a8987bfabae2a09858a8b#workspace:packages/remote-core"],\
+          ["@mittwald/flow-remote-core", "workspace:packages/remote-core"],\
           ["@mittwald/flow-remote-elements", "virtual:11857decb965f319cfa8122b205eb1df73d4d774e712eb585f7df91db052f3f2b06fa8c51771eecf997bb4eb3e8d473effff8527016a8987bfabae2a09858a8b#workspace:packages/remote-elements"],\
           ["@mittwald/typescript-config", "workspace:packages/typescript-config"],\
-          ["@remote-dom/core", "virtual:b4d6d53b88e2982758be01ac5ffac772e1f9d5686d8726d65feae2ff97771adde07d2d308a2d218ae3e76f71654be3c8768b1592c965f313e8394c7f0ea62700#npm:1.5.1"],\
           ["@remote-dom/react", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:1.2.1"],\
           ["@types/mittwald__flow-react-components", null],\
           ["@types/node", "npm:22.10.7"],\
@@ -6727,10 +6695,9 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@mittwald/flow-remote-react-renderer", "workspace:packages/remote-react-renderer"],\
           ["@mittwald/flow-react-components", "virtual:8f0cc77a78c3d73d46527d25b5c7fdc96e801745329d67ccc3c2a0e06ed8dd2ad7d9089e3bd5a0e9702bbcefea0630b06b43ca952b4eca5be77b2ea22469fd7e#workspace:packages/components"],\
-          ["@mittwald/flow-remote-core", "virtual:11857decb965f319cfa8122b205eb1df73d4d774e712eb585f7df91db052f3f2b06fa8c51771eecf997bb4eb3e8d473effff8527016a8987bfabae2a09858a8b#workspace:packages/remote-core"],\
+          ["@mittwald/flow-remote-core", "workspace:packages/remote-core"],\
           ["@mittwald/flow-remote-elements", "virtual:8f0cc77a78c3d73d46527d25b5c7fdc96e801745329d67ccc3c2a0e06ed8dd2ad7d9089e3bd5a0e9702bbcefea0630b06b43ca952b4eca5be77b2ea22469fd7e#workspace:packages/remote-elements"],\
           ["@mittwald/typescript-config", "workspace:packages/typescript-config"],\
-          ["@remote-dom/core", "virtual:b4d6d53b88e2982758be01ac5ffac772e1f9d5686d8726d65feae2ff97771adde07d2d308a2d218ae3e76f71654be3c8768b1592c965f313e8394c7f0ea62700#npm:1.5.1"],\
           ["@remote-dom/react", "virtual:c563c850c0b0bdd0841745cc7b35570078e33268f2e6270d144a05bb87b0e4398e0f1eaaed43979b64b1ff19330e78f444b739e5c6b684b2cce3c6956c89e49c#npm:1.2.1"],\
           ["@types/node", "npm:22.10.7"],\
           ["@types/react", "npm:19.0.7"],\
@@ -8014,10 +7981,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:a3988b1c0b7ef61078188fa2b29ee1bc3fa6d42ec9fd2849105482f78bf6460bcf5422c2f4b769d78fa6a02d01dbf5aeda1fc026236a72bc759cb587b2a79bd3#npm:3.1.2", {\
-        "packageLocation": "./.yarn/__virtual__/@quilted-threads-virtual-2e52553ebd/0/cache/@quilted-threads-npm-3.1.2-52f403c13e-7c386d63c4.zip/node_modules/@quilted/threads/",\
+      ["virtual:a3deb3558b7c556d6157280684f3db06f691dac9300d77c9dff1ffc2d0569e9c27e9b6599fc2cf0046a0bd6c04d7e89690f5a40040da02614a2032b874e5b978#npm:3.1.2", {\
+        "packageLocation": "./.yarn/__virtual__/@quilted-threads-virtual-5d4a593c67/0/cache/@quilted-threads-npm-3.1.2-52f403c13e-7c386d63c4.zip/node_modules/@quilted/threads/",\
         "packageDependencies": [\
-          ["@quilted/threads", "virtual:a3988b1c0b7ef61078188fa2b29ee1bc3fa6d42ec9fd2849105482f78bf6460bcf5422c2f4b769d78fa6a02d01dbf5aeda1fc026236a72bc759cb587b2a79bd3#npm:3.1.2"],\
+          ["@quilted/threads", "virtual:a3deb3558b7c556d6157280684f3db06f691dac9300d77c9dff1ffc2d0569e9c27e9b6599fc2cf0046a0bd6c04d7e89690f5a40040da02614a2032b874e5b978#npm:3.1.2"],\
           ["@preact/signals-core", null],\
           ["@quilted/events", "npm:2.1.1"],\
           ["@types/preact__signals-core", null]\

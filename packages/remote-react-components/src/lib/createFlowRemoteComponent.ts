@@ -2,7 +2,7 @@ import { createElement } from "react";
 import type {
   RemoteElement,
   RemoteElementConstructor,
-} from "@remote-dom/core/elements";
+} from "@mittwald/flow-remote-core";
 import type {
   RemoteComponentOptions,
   RemoteComponentTypeFromElementConstructor,

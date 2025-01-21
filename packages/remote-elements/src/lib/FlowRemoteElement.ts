@@ -1,5 +1,5 @@
 import type { EmptyObject } from "type-fest";
-import { RemoteElement, RemoteEvent } from "@remote-dom/core/elements";
+import { RemoteElement, RemoteEvent } from "@mittwald/flow-remote-core";
 import { isObjectType, omit } from "remeda";
 import { getObjectKeysIncludingProtoTypes } from "~/lib/getObjectKeysIncludingProtoTypes";
 

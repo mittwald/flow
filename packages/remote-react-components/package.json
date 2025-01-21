@@ -42,14 +42,13 @@
   "dependencies": {
     "@mittwald/flow-remote-core": "workspace:*",
     "@mittwald/flow-remote-elements": "workspace:*",
-    "@remote-dom/core": "^1.5.2",
-    "@remote-dom/react": "^1.2.1"
+    "@remote-dom/react": "^1.2.1",
+    "@types/react": "^19.0.7"
   },
   "devDependencies": {
     "@mittwald/flow-react-components": "workspace:*",
     "@mittwald/typescript-config": "workspace:*",
     "@types/node": "^22.10.7",
-    "@types/react": "^19.0.7",
     "nx": "^20.3.2",
     "prettier": "^3.4.2",
     "react": "19.0.0",
