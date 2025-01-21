@@ -29,9 +29,13 @@ export interface BadgeProps
   extends PropsWithChildren,
     FlowComponentProps,
     PropsWithClassName {
+  /** Handler that is called when the badge is pressed. */
   onPress?: (e: PressEvent) => void;
+  /** Handler that is called when the badges close icon is pressed. */
   onClose?: (e: PressEvent) => void;
+  /** The color of the badge. @default "neutral" */
   color?: BadgeColors;
+  /** Whether the badge is disabled. */
   isDisabled?: boolean;
 }
 

@@ -23,7 +23,9 @@ export interface SelectProps
     >,
     FlowComponentProps,
     PropsWithClassName {
+  /** Handler that is called when the selected value changes. */
   onChange?: (value: string | number) => void;
+  /** An overlay controller to control the select option popover state. */
   controller?: OverlayController;
 }
 

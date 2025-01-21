@@ -6,11 +6,14 @@ import clsx from "clsx";
 import type { OverlayController } from "@/lib/controller";
 import { useOverlayController } from "@/lib/controller";
 import OverlayContextProvider from "@/lib/controller/overlay/OverlayContextProvider";
+import type { PropsWithClassName } from "@/lib/types/props";
 
-export interface OverlayProps extends PropsWithChildren {
+export interface OverlayProps extends PropsWithChildren, PropsWithClassName {
+  /** The controller to control the overlay state. */
   controller?: OverlayController;
+  /** Whether the overlay can be closed by clicking outside of it. */
   isDismissable?: boolean;
-  className?: string;
+  /** Whether the overlay is a modal or a light box. */
   overlayType?: "Modal" | "LightBox";
 }
 
