@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.13](https://github.com/mittwald/flow/compare/0.2.0-alpha.12...0.2.0-alpha.13) (2025-01-21)
+
+### Bug Fixes
+
+* re-export remote types to fix TS builds ([161dd58](https://github.com/mittwald/flow/commit/161dd587b430f040293b4f9fccfabd6fcbec97b3))
+
+### Features
+
+* add codemod for Flow Remote ([2ec9020](https://github.com/mittwald/flow/commit/2ec9020cedd19dfc7d927cc08b846a955d53c971))
+
 # [0.2.0-alpha.12](https://github.com/mittwald/flow/compare/0.2.0-alpha.11...0.2.0-alpha.12) (2025-01-21)
 
 ### Bug Fixes
