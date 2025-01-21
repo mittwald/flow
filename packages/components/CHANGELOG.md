@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.17](https://github.com/mittwald/flow/compare/0.2.0-alpha.16...0.2.0-alpha.17) (2025-01-21)
+
+### Bug Fixes
+
+* add missing export ([4ed108e](https://github.com/mittwald/flow/commit/4ed108e3e5dcd80d1c236777ebb18628fd2f64a1))
+
 # [0.2.0-alpha.16](https://github.com/mittwald/flow/compare/0.2.0-alpha.15...0.2.0-alpha.16) (2025-01-21)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
