@@ -208,7 +208,7 @@ export const WithFileField: Story = {
           </FileField>
           <Button>Add</Button>
         </Header>
-        <Text>Add at least one domains.</Text>
+        <Text>Add at least one domain.</Text>
       </Section>
     </>
   ),
