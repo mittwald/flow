@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.397](https://github.com/mittwald/flow/compare/0.1.0-alpha.396...0.1.0-alpha.397) (2025-01-21)
+
+### Features
+
+- **Section:** support file field in section header
+  ([#1115](https://github.com/mittwald/flow/issues/1115))
+  ([e2d26ae](https://github.com/mittwald/flow/commit/e2d26aecad6b2a3d67c673042e3a19f50d436a2b))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.396](https://github.com/mittwald/flow/compare/0.1.0-alpha.395...0.1.0-alpha.396) (2025-01-21)
 
 ### Bug Fixes
