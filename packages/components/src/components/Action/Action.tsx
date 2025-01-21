@@ -37,7 +37,6 @@ const actionButtonContext: ComponentPropsContext<"Button"> = {
   }),
 };
 
-/** @flr-generate all */
 export const Action = flowComponent("Action", (props) => {
   const { children, actionModel: actionModelFromProps, ...actionProps } = props;
   const newActionModel = ActionModel.useNew(actionProps);

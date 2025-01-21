@@ -1,7 +1,6 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 export * from "./RemoteAccordionElement";
-export * from "./RemoteActionElement";
 export * from "./RemoteActionGroupElement";
 export * from "./RemoteAlertElement";
 export * from "./RemoteAlertBadgeElement";

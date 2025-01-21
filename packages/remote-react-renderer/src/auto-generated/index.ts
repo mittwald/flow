@@ -11,13 +11,6 @@ export const flowComponents = {
       })),
     ),
   ),
-  "flr-action": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Action").then((module) => ({
-        default: module.Action,
-      })),
-    ),
-  ),
   "flr-action-group": createFlowRemoteComponentRenderer(
     lazy(() =>
       import("@mittwald/flow-react-components/ActionGroup").then((module) => ({

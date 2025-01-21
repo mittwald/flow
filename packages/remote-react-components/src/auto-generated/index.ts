@@ -1,7 +1,6 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 export * from "./Accordion";
-export * from "./Action";
 export * from "./ActionGroup";
 export * from "./Alert";
 export * from "./AlertBadge";
