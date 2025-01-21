@@ -1,0 +1,13 @@
+{
+  "name": "@mittwald/flow-codemods",
+  "private": true,
+  "version": "0.1.0",
+  "devDependencies": {
+    "@types/jscodeshift": "^0.12.0",
+    "jscodeshift": "^17.1.2",
+    "typescript": "^5.7.3"
+  },
+  "peerDependencies": {
+    "jscodeshift": "^17.1.2"
+  }
+}
