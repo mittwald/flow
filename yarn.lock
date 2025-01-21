@@ -3942,6 +3942,7 @@ __metadata:
     rimraf: "npm:^6.0.1"
     typescript: "npm:^5.7.3"
     vite: "npm:^6.0.9"
+    vite-plugin-banner: "npm:^0.8.0"
     vite-plugin-checker: "npm:^0.8.0"
     vite-plugin-dts: "npm:^4.5.0"
     vite-plugin-externalize-deps: "npm:^0.9.0"
