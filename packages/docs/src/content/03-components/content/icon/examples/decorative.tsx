@@ -41,6 +41,12 @@ import {
   IconTerminate,
   IconTicket,
   IconUser,
+  IconMove,
+  IconVhost,
+  IconCertificate,
+  IconSparkles,
+  IconDirectory,
+  IconFile,
 } from "@mittwald/flow-react-components/Icons";
 import Label from "@mittwald/flow-react-components/Label";
 import LabeledValue from "@mittwald/flow-react-components/LabeledValue";
@@ -58,6 +64,10 @@ import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
   <LabeledValue>
     <Label>Star Filled</Label>
     <IconStarFilled />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Sparkles</Label>
+    <IconSparkles />
   </LabeledValue>
   <LabeledValue>
     <Label>Project</Label>
@@ -92,8 +102,28 @@ import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
     <IconDomain />
   </LabeledValue>
   <LabeledValue>
+    <Label>Vhost</Label>
+    <IconVhost />
+  </LabeledValue>
+  <LabeledValue>
     <Label>Subdomain</Label>
     <IconSubdomain />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Certificate</Label>
+    <IconCertificate />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Move</Label>
+    <IconMove />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Directory</Label>
+    <IconDirectory />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>File</Label>
+    <IconFile />
   </LabeledValue>
   <LabeledValue>
     <Label>Database</Label>

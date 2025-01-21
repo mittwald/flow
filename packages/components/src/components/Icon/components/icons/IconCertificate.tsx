@@ -1,10 +1,10 @@
 /* eslint-disable */
 /* auto-generated file */
 import React, { ComponentProps, FC } from "react";
-import { IconWorldWww as Tabler } from "@tabler/icons-react";
+import { IconFileCertificate as Tabler } from "@tabler/icons-react";
 import { Icon } from "@/components/Icon";
 
-export const IconSubdomain: FC<
+export const IconCertificate: FC<
   Omit<ComponentProps<typeof Icon>, "children">
 > = (props) => (
   <Icon {...props}>
@@ -12,4 +12,4 @@ export const IconSubdomain: FC<
   </Icon>
 );
 
-export default IconSubdomain;
+export default IconCertificate;

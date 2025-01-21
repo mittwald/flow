@@ -4,6 +4,7 @@ BackLink: ArrowLeft
 Backup: History
 Camera: Camera
 Changelog: ClipboardList
+Certificate: FileCertificate
 Check: Check
 CheckboxChecked: SquareCheckFilled
 CheckboxEmpty: Square
@@ -25,6 +26,7 @@ Customer: Building
 Danger: AlertTriangle
 Dashboard: BorderAll
 Database: Database
+Directory: Folder
 Calendar: Calendar
 Delete: Trash
 DeliveryBox: MailShare
@@ -51,6 +53,7 @@ Maximize: Maximize
 Member: UsersGroup
 Menu: Menu2
 Minimize: Minimize
+Move: TruckDelivery
 Minus: Minus
 Notification: Bell
 Number: Hash
@@ -76,11 +79,12 @@ Show: Eye
 Sorting: ArrowsUpDown
 SpamProtectionOff: Shield
 SpamProtectionOn: ShieldCheckFilled
+Sparkles: Sparkles
 SshKey: Key
 SshSftp: Door
 Star: Star
 StarFilled: StarFilled
-Subdomain: Subtask
+Subdomain: WorldWww
 Succeeded: Check
 Success: CircleCheck
 Support: Headset
@@ -89,6 +93,7 @@ Ticket: Ticket
 Undo: ArrowBackUp
 User: User
 View: List
+Vhost: WorldShare
 Warning: AlertCircle
 Mittwald:
   svg: |
