@@ -27,9 +27,9 @@ const meta: Meta<typeof FileDropZone> = {
       <Section>
         <FileDropZone {...props} onChange={setFiles}>
           <IconUpload />
-          <Heading>Datei ablegen</Heading>
+          <Heading>Drop file</Heading>
           <FileField name="file" onChange={setFiles}>
-            <Button>Datei auswählen</Button>
+            <Button>Select file</Button>
           </FileField>
         </FileDropZone>
         <FileCardList>
@@ -58,10 +58,10 @@ export const WithAcceptedTypes: Story = {
       <Section>
         <FileDropZone {...props} onChange={setFiles}>
           <IconImage />
-          <Heading>Bild ablegen</Heading>
-          <Text>Erlaubtes Dateiformat ist image/png.</Text>
+          <Heading>Drop image</Heading>
+          <Text>Only image/png images are allowed.</Text>
           <FileField name="file" onChange={setFiles}>
-            <Button>Bild auswählen</Button>
+            <Button>Select image</Button>
           </FileField>
         </FileDropZone>
         <FileCardList>
@@ -83,9 +83,9 @@ export const Multiple: Story = {
       <Section>
         <FileDropZone {...props} onChange={setFiles}>
           <IconUpload />
-          <Heading>Dateien ablegen</Heading>
+          <Heading>Drop files</Heading>
           <FileField name="file" onChange={setFiles}>
-            <Button>Dateien auswählen</Button>
+            <Button>Select files</Button>
           </FileField>
         </FileDropZone>
         <FileCardList>
@@ -99,6 +99,7 @@ export const Multiple: Story = {
 };
 
 export const WithReactHookForm: Story = {
+  args: { accept: "image/png" },
   render: (props) => {
     const form = useForm<{
       file: FileList | null;
@@ -109,16 +110,15 @@ export const WithReactHookForm: Story = {
     return (
       <Form form={form} onSubmit={submitAction}>
         <Section>
-          <FileDropZone {...props} onChange={(f) => form.setValue("file", f)}>
-            <IconUpload />
-            <Heading>Datei ablegen</Heading>
-            <Field name="file" rules={{ required: "Please choose a file" }}>
+          <Field name="file" rules={{ required: "Please choose a file" }}>
+            <FileDropZone {...props} onChange={(f) => form.setValue("file", f)}>
+              <IconUpload />
+              <Heading>Drop file</Heading>
               <FileField name="file">
-                <Button>Datei auswählen</Button>
+                <Button>Select file</Button>
               </FileField>
-            </Field>
-          </FileDropZone>
-
+            </FileDropZone>
+          </Field>
           <FileCardList>
             {[...(form.watch("file") ?? [])].map((f) => (
               <FileCard name={f.name} key={f.name} />
