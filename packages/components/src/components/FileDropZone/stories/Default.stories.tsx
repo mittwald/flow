@@ -99,7 +99,6 @@ export const Multiple: Story = {
 };
 
 export const WithReactHookForm: Story = {
-  args: { accept: "image/png" },
   render: (props) => {
     const form = useForm<{
       file: FileList | null;
