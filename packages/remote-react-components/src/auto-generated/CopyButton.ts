@@ -3,6 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "~/lib/createFlowRemoteComponent";
 import { RemoteCopyButtonElement } from "@mittwald/flow-remote-elements";
+export { type RemoteCopyButtonElement } from "@mittwald/flow-remote-elements";
 
 export const CopyButton = createFlowRemoteComponent(
   "flr-copy-button",

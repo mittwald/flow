@@ -3,6 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "~/lib/createFlowRemoteComponent";
 import { RemoteInlineCodeElement } from "@mittwald/flow-remote-elements";
+export { type RemoteInlineCodeElement } from "@mittwald/flow-remote-elements";
 
 export const InlineCode = createFlowRemoteComponent(
   "flr-inline-code",

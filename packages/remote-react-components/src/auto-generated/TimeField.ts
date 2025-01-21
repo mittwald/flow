@@ -3,6 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "~/lib/createFlowRemoteComponent";
 import { RemoteTimeFieldElement } from "@mittwald/flow-remote-elements";
+export { type RemoteTimeFieldElement } from "@mittwald/flow-remote-elements";
 
 export const TimeField = createFlowRemoteComponent(
   "flr-time-field",

@@ -3,6 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "~/lib/createFlowRemoteComponent";
 import { RemoteBadgeElement } from "@mittwald/flow-remote-elements";
+export { type RemoteBadgeElement } from "@mittwald/flow-remote-elements";
 
 export const Badge = createFlowRemoteComponent(
   "flr-badge",

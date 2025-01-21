@@ -3,6 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "~/lib/createFlowRemoteComponent";
 import { RemoteFileFieldElement } from "@mittwald/flow-remote-elements";
+export { type RemoteFileFieldElement } from "@mittwald/flow-remote-elements";
 
 export const FileField = createFlowRemoteComponent(
   "flr-file-field",

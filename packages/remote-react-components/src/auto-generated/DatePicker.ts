@@ -3,6 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "~/lib/createFlowRemoteComponent";
 import { RemoteDatePickerElement } from "@mittwald/flow-remote-elements";
+export { type RemoteDatePickerElement } from "@mittwald/flow-remote-elements";
 
 export const DatePicker = createFlowRemoteComponent(
   "flr-date-picker",

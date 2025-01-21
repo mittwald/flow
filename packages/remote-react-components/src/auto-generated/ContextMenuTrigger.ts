@@ -3,6 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "~/lib/createFlowRemoteComponent";
 import { RemoteContextMenuTriggerElement } from "@mittwald/flow-remote-elements";
+export { type RemoteContextMenuTriggerElement } from "@mittwald/flow-remote-elements";
 
 export const ContextMenuTrigger = createFlowRemoteComponent(
   "flr-context-menu-trigger",

@@ -3,6 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "~/lib/createFlowRemoteComponent";
 import { RemoteLabelElement } from "@mittwald/flow-remote-elements";
+export { type RemoteLabelElement } from "@mittwald/flow-remote-elements";
 
 export const Label = createFlowRemoteComponent(
   "flr-label",

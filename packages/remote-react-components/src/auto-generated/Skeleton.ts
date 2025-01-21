@@ -3,6 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "~/lib/createFlowRemoteComponent";
 import { RemoteSkeletonElement } from "@mittwald/flow-remote-elements";
+export { type RemoteSkeletonElement } from "@mittwald/flow-remote-elements";
 
 export const Skeleton = createFlowRemoteComponent(
   "flr-skeleton",

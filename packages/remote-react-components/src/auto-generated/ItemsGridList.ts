@@ -3,6 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "~/lib/createFlowRemoteComponent";
 import { RemoteItemsGridListElement } from "@mittwald/flow-remote-elements";
+export { type RemoteItemsGridListElement } from "@mittwald/flow-remote-elements";
 
 export const ItemsGridList = createFlowRemoteComponent(
   "flr-items-grid-list",

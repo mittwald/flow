@@ -3,6 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "~/lib/createFlowRemoteComponent";
 import { RemoteListSummaryElement } from "@mittwald/flow-remote-elements";
+export { type RemoteListSummaryElement } from "@mittwald/flow-remote-elements";
 
 export const ListSummary = createFlowRemoteComponent(
   "flr-list-summary",

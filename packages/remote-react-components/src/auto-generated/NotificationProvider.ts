@@ -3,6 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "~/lib/createFlowRemoteComponent";
 import { RemoteNotificationProviderElement } from "@mittwald/flow-remote-elements";
+export { type RemoteNotificationProviderElement } from "@mittwald/flow-remote-elements";
 
 export const NotificationProvider = createFlowRemoteComponent(
   "flr-notification-provider",

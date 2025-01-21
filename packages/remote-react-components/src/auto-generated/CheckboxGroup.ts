@@ -3,6 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "~/lib/createFlowRemoteComponent";
 import { RemoteCheckboxGroupElement } from "@mittwald/flow-remote-elements";
+export { type RemoteCheckboxGroupElement } from "@mittwald/flow-remote-elements";
 
 export const CheckboxGroup = createFlowRemoteComponent(
   "flr-checkbox-group",

@@ -3,6 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "~/lib/createFlowRemoteComponent";
 import { RemoteTableBodyElement } from "@mittwald/flow-remote-elements";
+export { type RemoteTableBodyElement } from "@mittwald/flow-remote-elements";
 
 export const TableBody = createFlowRemoteComponent(
   "flr-table-body",

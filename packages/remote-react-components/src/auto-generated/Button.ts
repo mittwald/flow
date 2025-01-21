@@ -3,6 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "~/lib/createFlowRemoteComponent";
 import { RemoteButtonElement } from "@mittwald/flow-remote-elements";
+export { type RemoteButtonElement } from "@mittwald/flow-remote-elements";
 
 export const Button = createFlowRemoteComponent(
   "flr-button",

@@ -3,6 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "~/lib/createFlowRemoteComponent";
 import { RemoteAvatarElement } from "@mittwald/flow-remote-elements";
+export { type RemoteAvatarElement } from "@mittwald/flow-remote-elements";
 
 export const Avatar = createFlowRemoteComponent(
   "flr-avatar",

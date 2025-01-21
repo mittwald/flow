@@ -3,6 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "~/lib/createFlowRemoteComponent";
 import { RemoteFileCardListElement } from "@mittwald/flow-remote-elements";
+export { type RemoteFileCardListElement } from "@mittwald/flow-remote-elements";
 
 export const FileCardList = createFlowRemoteComponent(
   "flr-file-card-list",

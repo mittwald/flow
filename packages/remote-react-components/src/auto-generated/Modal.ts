@@ -3,6 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "~/lib/createFlowRemoteComponent";
 import { RemoteModalElement } from "@mittwald/flow-remote-elements";
+export { type RemoteModalElement } from "@mittwald/flow-remote-elements";
 
 export const Modal = createFlowRemoteComponent(
   "flr-modal",

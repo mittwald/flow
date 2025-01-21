@@ -3,6 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "~/lib/createFlowRemoteComponent";
 import { RemoteSliderElement } from "@mittwald/flow-remote-elements";
+export { type RemoteSliderElement } from "@mittwald/flow-remote-elements";
 
 export const Slider = createFlowRemoteComponent(
   "flr-slider",

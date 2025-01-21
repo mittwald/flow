@@ -3,6 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "~/lib/createFlowRemoteComponent";
 import { RemoteActionGroupElement } from "@mittwald/flow-remote-elements";
+export { type RemoteActionGroupElement } from "@mittwald/flow-remote-elements";
 
 export const ActionGroup = createFlowRemoteComponent(
   "flr-action-group",

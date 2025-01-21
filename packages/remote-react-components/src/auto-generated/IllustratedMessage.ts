@@ -3,6 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "~/lib/createFlowRemoteComponent";
 import { RemoteIllustratedMessageElement } from "@mittwald/flow-remote-elements";
+export { type RemoteIllustratedMessageElement } from "@mittwald/flow-remote-elements";
 
 export const IllustratedMessage = createFlowRemoteComponent(
   "flr-illustrated-message",

@@ -3,6 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "~/lib/createFlowRemoteComponent";
 import { RemoteListEmptyViewElement } from "@mittwald/flow-remote-elements";
+export { type RemoteListEmptyViewElement } from "@mittwald/flow-remote-elements";
 
 export const ListEmptyView = createFlowRemoteComponent(
   "flr-list-empty-view",

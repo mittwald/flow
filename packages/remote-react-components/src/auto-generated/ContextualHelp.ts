@@ -3,6 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "~/lib/createFlowRemoteComponent";
 import { RemoteContextualHelpElement } from "@mittwald/flow-remote-elements";
+export { type RemoteContextualHelpElement } from "@mittwald/flow-remote-elements";
 
 export const ContextualHelp = createFlowRemoteComponent(
   "flr-contextual-help",

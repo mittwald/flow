@@ -3,6 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "~/lib/createFlowRemoteComponent";
 import { RemoteLoadingSpinnerElement } from "@mittwald/flow-remote-elements";
+export { type RemoteLoadingSpinnerElement } from "@mittwald/flow-remote-elements";
 
 export const LoadingSpinner = createFlowRemoteComponent(
   "flr-loading-spinner",

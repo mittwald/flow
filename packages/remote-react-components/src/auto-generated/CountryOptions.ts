@@ -3,6 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "~/lib/createFlowRemoteComponent";
 import { RemoteCountryOptionsElement } from "@mittwald/flow-remote-elements";
+export { type RemoteCountryOptionsElement } from "@mittwald/flow-remote-elements";
 
 export const CountryOptions = createFlowRemoteComponent(
   "flr-country-options",

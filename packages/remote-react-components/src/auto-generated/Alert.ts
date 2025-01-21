@@ -3,6 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "~/lib/createFlowRemoteComponent";
 import { RemoteAlertElement } from "@mittwald/flow-remote-elements";
+export { type RemoteAlertElement } from "@mittwald/flow-remote-elements";
 
 export const Alert = createFlowRemoteComponent(
   "flr-alert",

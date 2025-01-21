@@ -3,6 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "~/lib/createFlowRemoteComponent";
 import { RemoteNavigationGroupElement } from "@mittwald/flow-remote-elements";
+export { type RemoteNavigationGroupElement } from "@mittwald/flow-remote-elements";
 
 export const NavigationGroup = createFlowRemoteComponent(
   "flr-navigation-group",

@@ -3,6 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "~/lib/createFlowRemoteComponent";
 import { RemoteSegmentElement } from "@mittwald/flow-remote-elements";
+export { type RemoteSegmentElement } from "@mittwald/flow-remote-elements";
 
 export const Segment = createFlowRemoteComponent(
   "flr-segment",
