@@ -18,13 +18,13 @@ export const ViewModeMenu: FC = () => {
   const selectedViewMode = list.viewMode;
 
   const availableViewModes: ListViewMode[] = [];
-  if (list.itemView) {
+  if (list.itemView?.showList) {
     availableViewModes.push("list");
   }
   if (list.table) {
     availableViewModes.push("table");
   }
-  if (list.tiles) {
+  if (list.itemView?.showTiles) {
     availableViewModes.push("tiles");
   }
 

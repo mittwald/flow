@@ -35,7 +35,6 @@ export class List<T> {
   public readonly loader: IncrementalLoader<T>;
   public readonly onAction?: ItemActionFn<T>;
   public readonly accordion: boolean;
-  public readonly tiles: boolean;
   public readonly getItemId?: GetItemId<T>;
   public readonly componentProps: ListSupportedComponentProps;
   public viewMode: ListViewMode;
@@ -61,7 +60,6 @@ export class List<T> {
       getItemId,
       defaultViewMode,
       accordion = false,
-      tiles = false,
       ...componentProps
     } = shape;
 
@@ -81,7 +79,6 @@ export class List<T> {
     this.search = search ? new Search(this, search) : undefined;
     this.itemView = itemView ? new ItemView(this, itemView) : undefined;
     this.accordion = accordion;
-    this.tiles = tiles;
     this.table = table ? new Table(this, table) : undefined;
     this.batches = new BatchesController(this, batchesController);
     this.componentProps = componentProps;

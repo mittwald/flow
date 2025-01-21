@@ -17,9 +17,9 @@ export default () => {
   const DomainList = typedList<Domain>();
 
   return (
-    <DomainList.List batchSize={6} tiles>
+    <DomainList.List batchSize={6}>
       <DomainList.StaticData data={domains} />
-      <DomainList.Item>
+      <DomainList.Item showTiles>
         {(domain) => (
           <DomainList.ItemView>
             <Avatar

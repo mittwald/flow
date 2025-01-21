@@ -24,7 +24,7 @@ export const Header: FC<Props> = (props) => {
     list.visibleSorting.length === 0 &&
     !list.search &&
     !list.table &&
-    !list.tiles &&
+    !(list.itemView?.showTiles && list.itemView?.showList) &&
     !hasActionGroup
   ) {
     return null;

@@ -51,7 +51,6 @@ const meta: Meta<typeof List> = {
       <Section>
         <Heading>Domains</Heading>
         <DomainList.List
-          tiles
           batchSize={5}
           aria-label="Domains"
           onAction={(domain) => console.log(domain.hostname)}
@@ -104,7 +103,7 @@ const meta: Meta<typeof List> = {
             </DomainList.TableBody>
           </DomainList.Table>
 
-          <DomainList.Item textValue={(domain) => domain.hostname}>
+          <DomainList.Item showTiles textValue={(domain) => domain.hostname}>
             {(domain) => (
               <DomainList.ItemView>
                 <Avatar color={domain.type === "Domain" ? "blue" : "teal"}>

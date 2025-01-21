@@ -25,9 +25,9 @@ const meta: Meta<typeof List> = {
     const List = typedList<{ name: string }>();
 
     return (
-      <List.List tiles>
+      <List.List>
         <List.StaticData data={[{ name: "John Doe" }]} />
-        <List.Item textValue={(user) => user.name}>
+        <List.Item showTiles textValue={(user) => user.name}>
           {(user) => (
             <List.ItemView>
               <Avatar>
@@ -59,9 +59,9 @@ export const WithTopContent: Story = {
     const List = typedList<{ mail: string }>();
 
     return (
-      <List.List tiles>
+      <List.List>
         <List.StaticData data={[{ mail: "john@doe.de" }]} />
-        <List.Item textValue={(mail) => mail.mail}>
+        <List.Item showTiles textValue={(mail) => mail.mail}>
           {(mail) => (
             <List.ItemView>
               <Avatar>
@@ -89,9 +89,9 @@ export const WithBottomContent: Story = {
     const List = typedList<{ name: string }>();
 
     return (
-      <List.List tiles>
+      <List.List>
         <List.StaticData data={[{ name: "John Doe" }]} />
-        <List.Item textValue={(user) => user.name}>
+        <List.Item showTiles textValue={(user) => user.name}>
           {(user) => (
             <List.ItemView>
               <Avatar>
@@ -116,9 +116,9 @@ export const WithActionGroup: Story = {
     const List = typedList<{ name: string }>();
 
     return (
-      <List.List tiles>
+      <List.List>
         <List.StaticData data={[{ name: "John Doe" }]} />
-        <List.Item textValue={(user) => user.name}>
+        <List.Item showTiles textValue={(user) => user.name}>
           {(user) => (
             <List.ItemView>
               <Avatar>
@@ -147,9 +147,9 @@ export const WithMultipleTexts: Story = {
     const List = typedList<{ name: string }>();
 
     return (
-      <List.List tiles>
+      <List.List>
         <List.StaticData data={[{ name: "John Doe" }]} />
-        <List.Item textValue={(user) => user.name}>
+        <List.Item showTiles textValue={(user) => user.name}>
           {(user) => (
             <List.ItemView>
               <Avatar>
