@@ -3945,7 +3945,6 @@ __metadata:
     vite-plugin-dts: "npm:^4.5.0"
     vite-plugin-externalize-deps: "npm:^0.9.0"
   peerDependencies:
-    "@mittwald/flow-react-components": "workspace:*"
     react: 19.0.0
     react-hook-form: "*"
   peerDependenciesMeta:
