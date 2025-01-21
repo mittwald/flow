@@ -4,6 +4,7 @@ import React from "react";
 import { Button } from "@/components/Button";
 import { Action } from "@/components/Action";
 import { sleep } from "@/lib/promises/sleep";
+import { Switch } from "@/components/Switch";
 
 const meta: Meta<typeof ActionGroup> = {
   title: "Actions/ActionGroup",
@@ -84,4 +85,13 @@ export const WithExtraSecondaryAction: Story = {
 
 export const Mobile: Story = {
   parameters: { viewport: { defaultViewport: "mobile1" } },
+};
+
+export const WithSwitch: Story = {
+  render: (props) => (
+    <ActionGroup {...props}>
+      <Button slot="secondary">Edit</Button>
+      <Switch slot="primary">Activate</Switch>
+    </ActionGroup>
+  ),
 };
