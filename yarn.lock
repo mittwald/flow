@@ -3921,6 +3921,8 @@ __metadata:
     vite-plugin-checker: "npm:^0.8.0"
     vite-plugin-dts: "npm:^4.5.0"
     vite-plugin-externalize-deps: "npm:^0.9.0"
+  peerDependencies:
+    "@mittwald/flow-react-components": "workspace:*"
   languageName: unknown
   linkType: soft
 
