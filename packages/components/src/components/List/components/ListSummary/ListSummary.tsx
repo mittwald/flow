@@ -8,6 +8,7 @@ export interface ListSummaryProps
   extends FlowComponentProps,
     PropsWithChildren {}
 
+/** @flr-generate all */
 export const ListSummary = flowComponent("ListSummary", (props) => {
   const { children } = props;
 

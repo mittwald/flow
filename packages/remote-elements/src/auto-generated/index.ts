@@ -51,6 +51,7 @@ export * from "./RemoteLightBoxElement";
 export * from "./RemoteLightBoxTriggerElement";
 export * from "./RemoteLinkElement";
 export * from "./RemoteListEmptyViewElement";
+export * from "./RemoteListSummaryElement";
 export * from "./RemoteLoadingSpinnerElement";
 export * from "./RemoteMarkdownElement";
 export * from "./RemoteMenuItemElement";

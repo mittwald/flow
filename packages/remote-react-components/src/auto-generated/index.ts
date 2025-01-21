@@ -51,6 +51,7 @@ export * from "./LightBox";
 export * from "./LightBoxTrigger";
 export * from "./Link";
 export * from "./ListEmptyView";
+export * from "./ListSummary";
 export * from "./LoadingSpinner";
 export * from "./Markdown";
 export * from "./MenuItem";

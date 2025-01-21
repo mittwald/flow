@@ -361,6 +361,13 @@ export const flowComponents = {
       })),
     ),
   ),
+  "flr-list-summary": createFlowRemoteComponentRenderer(
+    lazy(() =>
+      import("@mittwald/flow-react-components/List").then((module) => ({
+        default: module.ListSummary,
+      })),
+    ),
+  ),
   "flr-loading-spinner": createFlowRemoteComponentRenderer(
     lazy(() =>
       import("@mittwald/flow-react-components/LoadingSpinner").then(
