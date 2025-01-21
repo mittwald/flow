@@ -6,6 +6,7 @@ import type { PropsWithClassName } from "@/lib/types/props";
 import type { PropsContext } from "@/lib/propsContext";
 import { IconContextMenu } from "@/components/Icon/components/icons";
 import PropsContextProvider from "@/lib/propsContext/PropsContextProvider";
+import { useAltKeySelectionProps } from "@/lib/hooks/useAltKeySelectionProps";
 
 export interface MessageProps extends PropsWithChildren, PropsWithClassName {
   /** Determines the color of the message. @default "sender" */
@@ -23,6 +24,8 @@ export const Message: FC<MessageProps> = (props) => {
     styles[orientation],
     className,
   );
+
+  const altKeySelectionProps = useAltKeySelectionProps(props);
 
   const propsContext: PropsContext = {
     Content: { className: styles.content },
@@ -52,7 +55,9 @@ export const Message: FC<MessageProps> = (props) => {
 
   return (
     <PropsContextProvider props={propsContext}>
-      <article className={rootClassName}>{children}</article>
+      <article className={rootClassName} {...altKeySelectionProps}>
+        {children}
+      </article>
     </PropsContextProvider>
   );
 };

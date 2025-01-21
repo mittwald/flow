@@ -1,5 +1,4 @@
-import type { PropsWithChildren } from "react";
-import React from "react";
+import React, { type PropsWithChildren } from "react";
 import * as Aria from "react-aria-components";
 import type { PropsContext } from "@/lib/propsContext";
 import { ClearPropsContext, PropsContextProvider } from "@/lib/propsContext";
@@ -11,6 +10,7 @@ import { EmulatedBoldText } from "@/components/EmulatedBoldText";
 import { Wrap } from "@/components/Wrap";
 import clsx from "clsx";
 import styles from "./Text.module.scss";
+import { useAltKeySelectionProps } from "@/lib/hooks/useAltKeySelectionProps";
 
 export interface TextProps
   extends PropsWithChildren,
@@ -34,6 +34,11 @@ export const Text = flowComponent("Text", (props) => {
     ...rest
   } = props;
 
+  const commonProps = {
+    ref,
+    ...useAltKeySelectionProps(rest),
+  };
+
   const rootClassName = clsx(styles.text, color && styles[color], className);
 
   const textProps = { ...rest, className: rootClassName };
@@ -55,7 +60,7 @@ export const Text = flowComponent("Text", (props) => {
   if (!props.slot) {
     const Element = elementType;
     return (
-      <Element {...textProps} ref={ref}>
+      <Element {...commonProps} {...textProps}>
         {childrenElement}
       </Element>
     );
@@ -68,7 +73,7 @@ export const Text = flowComponent("Text", (props) => {
 
   return (
     <ClearPropsContext>
-      <Aria.Text {...textProps} elementType={elementType} ref={ref}>
+      <Aria.Text {...commonProps} {...textProps} elementType={elementType}>
         {childrenElement}
       </Aria.Text>
     </ClearPropsContext>
