@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.396](https://github.com/mittwald/flow/compare/0.1.0-alpha.395...0.1.0-alpha.396) (2025-01-21)
+
+### Features
+
+- **Markdown:** support blockquote
+  ([#1112](https://github.com/mittwald/flow/issues/1112))
+  ([b48fadb](https://github.com/mittwald/flow/commit/b48fadb22077a4e3be885289f15981759356a74b))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.395](https://github.com/mittwald/flow/compare/0.1.0-alpha.394...0.1.0-alpha.395) (2025-01-20)
 
 **Note:** Version bump only for package @mittwald/flow-design-tokens
