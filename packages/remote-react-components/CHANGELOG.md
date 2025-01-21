@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.12](https://github.com/mittwald/flow/compare/0.2.0-alpha.11...0.2.0-alpha.12) (2025-01-21)
+
+### Bug Fixes
+
+* add missing remote exports ([8c02c4b](https://github.com/mittwald/flow/commit/8c02c4b7375efed70c3786d690b4ffbfc12f6ba7))
+
 # [0.2.0-alpha.11](https://github.com/mittwald/flow/compare/0.2.0-alpha.10...0.2.0-alpha.11) (2025-01-20)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components
