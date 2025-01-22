@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.398](https://github.com/mittwald/flow/compare/0.1.0-alpha.397...0.1.0-alpha.398) (2025-01-22)
+
+### Features
+
+- **List:** add tile view
+  ([2058342](https://github.com/mittwald/flow/commit/205834235c856b649b0fd1be26b9693f86cbb9dc))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.397](https://github.com/mittwald/flow/compare/0.1.0-alpha.396...0.1.0-alpha.397) (2025-01-21)
 
 ### Features
