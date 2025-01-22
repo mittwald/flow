@@ -52,6 +52,6 @@ export type PropertyRecord<T, TValue> = Partial<
   Record<PropertyName<T>, TValue>
 >;
 
-export type ListViewMode = "table" | "list";
+export type ListViewMode = "table" | "list" | "tiles";
 export type ItemActionFn<T> = (data: T) => void;
 export type GetItemId<T> = (data: T) => string;

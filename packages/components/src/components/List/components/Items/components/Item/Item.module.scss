@@ -31,4 +31,27 @@
       background-color: var(--list-item--background-color--pressed);
     }
   }
+
+  &.tile {
+    border-color: var(--list-item--border-color);
+    border-width: var(--list-item--border-width);
+    border-style: var(--list-item--border-style);
+    border-radius: var(--list-item--corner-radius);
+
+    &:where(.hasAction) {
+      &:not(.isSelected) {
+        &:hover {
+          :global(.flow--avatar) {
+            filter: brightness(var(--image-button--brightness--hover));
+          }
+        }
+      }
+
+      &[data-pressed] {
+        :global(.flow--avatar) {
+          filter: brightness(var(--image-button--brightness--pressed));
+        }
+      }
+    }
+  }
 }

@@ -4,14 +4,23 @@ import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
 import View from "@/components/List/components/Items/components/Item/components/View/View";
 import SkeletonText from "@/components/SkeletonText";
+import { useList } from "@/components/List";
+import { Skeleton } from "@/components/Skeleton";
 
-export const SkeletonView: FC = () => (
-  <View>
-    <Heading>
-      <SkeletonText width="200px" />
-    </Heading>
-    <Text>
-      <SkeletonText width="300px" />
-    </Text>
-  </View>
-);
+export const SkeletonView: FC = () => {
+  const list = useList();
+
+  const showTiles = list.viewMode === "tiles";
+
+  return (
+    <View>
+      {showTiles && <Skeleton style={{ aspectRatio: 16 / 9 }} />}
+      <Heading>
+        <SkeletonText width="200px" />
+      </Heading>
+      <Text>
+        <SkeletonText width="300px" />
+      </Text>
+    </View>
+  );
+};
