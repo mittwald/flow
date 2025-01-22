@@ -24,6 +24,7 @@ import {
   IconForward,
   IconInbox,
   IconInvoice,
+  IconLink,
   IconMember,
   IconMittwald,
   IconMobile,
@@ -259,5 +260,9 @@ import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
   <LabeledValue>
     <Label>Bulb</Label>
     <IconBulb />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Link</Label>
+    <IconLink />
   </LabeledValue>
 </ColumnLayout>;
