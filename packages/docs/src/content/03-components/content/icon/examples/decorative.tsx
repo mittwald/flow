@@ -2,8 +2,10 @@ import {
   IconApp,
   IconAutoresponder,
   IconBackup,
+  IconBulb,
   IconCalendar,
   IconCamera,
+  IconCertificate,
   IconChangelog,
   IconClock,
   IconContract,
@@ -13,14 +15,19 @@ import {
   IconDashboard,
   IconDatabase,
   IconDeliveryBox,
+  IconDesktop,
+  IconDirectory,
   IconDomain,
   IconEmail,
   IconExtension,
+  IconFile,
   IconForward,
   IconInbox,
   IconInvoice,
   IconMember,
   IconMittwald,
+  IconMobile,
+  IconMove,
   IconNumber,
   IconOrder,
   IconPassword,
@@ -32,6 +39,7 @@ import {
   IconServer,
   IconSpamProtectionOff,
   IconSpamProtectionOn,
+  IconSparkles,
   IconSshKey,
   IconSshSftp,
   IconStar,
@@ -41,12 +49,7 @@ import {
   IconTerminate,
   IconTicket,
   IconUser,
-  IconMove,
   IconVhost,
-  IconCertificate,
-  IconSparkles,
-  IconDirectory,
-  IconFile,
 } from "@mittwald/flow-react-components/Icons";
 import Label from "@mittwald/flow-react-components/Label";
 import LabeledValue from "@mittwald/flow-react-components/LabeledValue";
@@ -244,5 +247,17 @@ import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
   <LabeledValue>
     <Label>Password</Label>
     <IconPassword />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Desktop</Label>
+    <IconDesktop />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Mobile</Label>
+    <IconMobile />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Bulb</Label>
+    <IconBulb />
   </LabeledValue>
 </ColumnLayout>;
