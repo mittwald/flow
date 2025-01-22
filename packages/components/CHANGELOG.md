@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.399](https://github.com/mittwald/flow/compare/0.1.0-alpha.398...0.1.0-alpha.399) (2025-01-22)
+
+### Features
+
+- **icon:** add mobile, desktop, link and bulb icon
+  ([#1123](https://github.com/mittwald/flow/issues/1123))
+  ([30e6700](https://github.com/mittwald/flow/commit/30e6700baa8103ffb242ba8363ab7bea14c404a6))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.398](https://github.com/mittwald/flow/compare/0.1.0-alpha.397...0.1.0-alpha.398) (2025-01-22)
 
 ### Features
