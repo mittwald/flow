@@ -46,6 +46,12 @@ export const ActionGroup = flowComponent("ActionGroup", (props) => {
         return clsx(props.className, styles[slot]);
       }),
     },
+    Switch: {
+      labelPosition: "leading",
+      className: dynamic((props) => {
+        return clsx(props.className, props.slot && styles[props.slot]);
+      }),
+    },
   };
 
   return (

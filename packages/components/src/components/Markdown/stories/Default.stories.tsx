@@ -19,7 +19,8 @@ const meta: Meta<typeof Markdown> = {
         '    "name": "My Project"\n' +
         "}\n" +
         "```\n" +
-        "[link](#)" +
+        "[link](#)\n" +
+        "> Block quote" +
         "\n - Unordered list item 1 \n - Unordered list item 2 " +
         "\n 1. Ordered list item 1 \n 2. Ordered list item 2"}
     </Markdown>

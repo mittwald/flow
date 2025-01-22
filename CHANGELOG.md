@@ -3,6 +3,60 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.397](https://github.com/mittwald/flow/compare/0.1.0-alpha.396...0.1.0-alpha.397) (2025-01-21)
+
+### Features
+
+- **Section:** support file field in section header
+  ([#1115](https://github.com/mittwald/flow/issues/1115))
+  ([e2d26ae](https://github.com/mittwald/flow/commit/e2d26aecad6b2a3d67c673042e3a19f50d436a2b))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.396](https://github.com/mittwald/flow/compare/0.1.0-alpha.395...0.1.0-alpha.396) (2025-01-21)
+
+### Bug Fixes
+
+- **CheckboxButton:** remove order
+  ([#1110](https://github.com/mittwald/flow/issues/1110))
+  ([4cec2c5](https://github.com/mittwald/flow/commit/4cec2c5f31ed5c912fb883f79052b8eb97e00106))
+- **List:** make list sorting case insensitive
+  ([#1109](https://github.com/mittwald/flow/issues/1109))
+  ([d23c616](https://github.com/mittwald/flow/commit/d23c616247a70595c04c70fe0607abc3a1201cb0))
+- **Table:** fix hover color
+  ([#1106](https://github.com/mittwald/flow/issues/1106))
+  ([c1854f8](https://github.com/mittwald/flow/commit/c1854f82e02457262d73436e65c55bc8f65b7328))
+
+### Features
+
+- **icons:** add icons for vhost, certificate, move, directory and sparkles
+  ([#1114](https://github.com/mittwald/flow/issues/1114))
+  ([d07dda6](https://github.com/mittwald/flow/commit/d07dda68f3c8432c2541f4fad0d70c6a8ad9c157))
+- **Markdown:** support blockquote
+  ([#1112](https://github.com/mittwald/flow/issues/1112))
+  ([b48fadb](https://github.com/mittwald/flow/commit/b48fadb22077a4e3be885289f15981759356a74b))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.395](https://github.com/mittwald/flow/compare/0.1.0-alpha.394...0.1.0-alpha.395) (2025-01-20)
+
+### Features
+
+- **ActionGroup:** support switch
+  ([#1105](https://github.com/mittwald/flow/issues/1105))
+  ([5415c9d](https://github.com/mittwald/flow/commit/5415c9dc01fc2cef7a701ba547625f6eb2f0a9d5))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.394](https://github.com/mittwald/flow/compare/0.1.0-alpha.393...0.1.0-alpha.394) (2025-01-15)
 
 ### Bug Fixes
