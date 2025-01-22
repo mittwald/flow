@@ -2,6 +2,7 @@ App: AppWindow
 Autoresponder: ArrowBackUpDouble
 BackLink: ArrowLeft
 Backup: History
+Bulb: Bulb
 Camera: Camera
 Changelog: ClipboardList
 Certificate: FileCertificate
@@ -26,6 +27,7 @@ Customer: Building
 Danger: AlertTriangle
 Dashboard: BorderAll
 Database: Database
+Desktop: DeviceImac
 Directory: Folder
 Calendar: Calendar
 Delete: Trash
@@ -46,6 +48,7 @@ Image: Photo
 Info: InfoCircle
 Inbox: Inbox
 Invoice: FileEuro
+Link: Link
 Lock: Lock
 LockOpen: LockOpen
 Logout: Power
@@ -53,6 +56,7 @@ Maximize: Maximize
 Member: UsersGroup
 Menu: Menu2
 Minimize: Minimize
+Mobile: DeviceMobile
 Move: TruckDelivery
 Minus: Minus
 Notification: Bell
