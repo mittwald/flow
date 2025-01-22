@@ -37,6 +37,7 @@ import {
   IconSupport,
   IconTerminate,
   IconTicket,
+  IconLink,
   IconUser,
 } from "@mittwald/flow-react-components/Icons";
 import Label from "@mittwald/flow-react-components/Label";
@@ -199,5 +200,9 @@ import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
   <LabeledValue>
     <Label>SshKey</Label>
     <IconSshKey />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Link</Label>
+    <IconLink />
   </LabeledValue>
 </ColumnLayout>;
