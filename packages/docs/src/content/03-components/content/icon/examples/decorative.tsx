@@ -250,4 +250,8 @@ import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
     <Label>Link</Label>
     <IconLink />
   </LabeledValue>
+  <LabeledValue>
+    <Label>Link</Label>
+    <IconLink />
+  </LabeledValue>
 </ColumnLayout>;
