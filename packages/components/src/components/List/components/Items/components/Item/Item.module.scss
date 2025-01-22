@@ -33,10 +33,7 @@
   }
 
   &.tile {
-    border-color: var(--list-item--border-color);
-    border-width: var(--list-item--border-width);
-    border-style: var(--list-item--border-style);
-    border-radius: var(--list-item--corner-radius);
+    border: none;
 
     &:where(.hasAction) {
       &:not(.isSelected) {
