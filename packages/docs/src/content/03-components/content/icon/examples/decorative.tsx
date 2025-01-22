@@ -40,6 +40,7 @@ import {
   IconSupport,
   IconTerminate,
   IconTicket,
+  IconLink,
   IconUser,
   IconMove,
   IconVhost,
@@ -244,5 +245,9 @@ import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
   <LabeledValue>
     <Label>Password</Label>
     <IconPassword />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Link</Label>
+    <IconLink />
   </LabeledValue>
 </ColumnLayout>;
