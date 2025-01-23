@@ -6,7 +6,7 @@ import { useActionState } from "react";
 import { formServerAction } from "~/app/remote/actions";
 
 export default function Page() {
-  const [, formAction] = useActionState(formServerAction, null);
+  const [, formAction] = useActionState(formServerAction, 0);
 
   return (
     <form action={formAction}>

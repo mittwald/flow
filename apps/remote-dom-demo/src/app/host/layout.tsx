@@ -1,5 +1,5 @@
 import "@mittwald/flow-stylesheet/css";
-import "@mittwald/flow-remote-react-renderer/polyfill";
+import "./global.css";
 import type { PropsWithChildren } from "react";
 import HeaderNavigation from "@mittwald/flow-react-components/HeaderNavigation";
 import { Link } from "@mittwald/flow-react-components/Link";
@@ -23,7 +23,7 @@ export default function Layout(props: PropsWithChildren) {
         <Link href="/host/performance">Performance</Link>
       </HeaderNavigation>
       <Separator />
-      <main className={styles.mainContainer}>
+      <main>
         <div>{props.children}</div>
       </main>
     </div>

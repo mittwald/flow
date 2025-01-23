@@ -12,10 +12,6 @@ script {
   font-family: sans-serif;
 }
 
-[flr-*] {
-  display: none;
-}
-
 * * {
   padding-left: 20px;
 }

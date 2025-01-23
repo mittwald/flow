@@ -1,6 +1,5 @@
 export * from "./List";
 export * from "./Form";
-export * from "./Root";
 
 /**
  * Using named re-exports here (and not "export * from ..."), because of Next.JS

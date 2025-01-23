@@ -3892,6 +3892,7 @@ __metadata:
     prettier: "npm:^3.4.2"
     remeda: "npm:^2.19.2"
     rimraf: "npm:^6.0.1"
+    rollup-preserve-directives: "npm:^1.1.3"
     typescript: "npm:^5.7.3"
     vite: "npm:^6.0.9"
     vite-plugin-checker: "npm:^0.8.0"
@@ -3940,6 +3941,7 @@ __metadata:
     react: "npm:19.0.0"
     react-hook-form: "npm:^7.54.2"
     rimraf: "npm:^6.0.1"
+    rollup-preserve-directives: "npm:^1.1.3"
     typescript: "npm:^5.7.3"
     vite: "npm:^6.0.9"
     vite-plugin-banner: "npm:^0.8.0"
@@ -3975,6 +3977,7 @@ __metadata:
     react-hook-form: "npm:^7.54.2"
     remeda: "npm:^2.19.2"
     rimraf: "npm:^6.0.1"
+    rollup-preserve-directives: "npm:^1.1.3"
     typescript: "npm:^5.7.3"
     vite: "npm:^6.0.9"
     vite-plugin-banner: "npm:^0.8.0"
@@ -14057,7 +14060,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"magic-string@npm:^0.30.0, magic-string@npm:^0.30.12, magic-string@npm:^0.30.17":
+"magic-string@npm:^0.30.0, magic-string@npm:^0.30.12, magic-string@npm:^0.30.17, magic-string@npm:^0.30.5":
   version: 0.30.17
   resolution: "magic-string@npm:0.30.17"
   dependencies:
@@ -17731,6 +17734,17 @@ __metadata:
   bin:
     rimraf: dist/esm/bin.mjs
   checksum: 10c0/b30b6b072771f0d1e73b4ca5f37bb2944ee09375be9db5f558fcd3310000d29dfcfa93cf7734d75295ad5a7486dc8e40f63089ced1722a664539ffc0c3ece8c6
+  languageName: node
+  linkType: hard
+
+"rollup-preserve-directives@npm:^1.1.3":
+  version: 1.1.3
+  resolution: "rollup-preserve-directives@npm:1.1.3"
+  dependencies:
+    magic-string: "npm:^0.30.5"
+  peerDependencies:
+    rollup: ^2.0.0 || ^3.0.0 || ^4.0.0
+  checksum: 10c0/a3d1ecb0672f5dd15c8350d6c741345dfbc267e33d9f1c805a22af264d58fc7abb407bd57b8fceee7d522bd57948898c2f55361572e6735085e69d842055b680
   languageName: node
   linkType: hard
 

@@ -9,10 +9,6 @@
     ".": {
       "types": "./dist/types/index.d.ts",
       "default": "./dist/index.js"
-    },
-    "./polyfill": {
-      "types": "./dist/types/polyfill.d.ts",
-      "default": "./dist/polyfill.js"
     }
   },
   "files": [
@@ -38,6 +34,7 @@
     "nx": "^20.3.2",
     "prettier": "^3.4.2",
     "rimraf": "^6.0.1",
+    "rollup-preserve-directives": "^1.1.3",
     "typescript": "^5.7.3",
     "vite": "^6.0.9",
     "vite-plugin-checker": "^0.8.0",

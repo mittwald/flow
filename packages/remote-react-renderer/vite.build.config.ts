@@ -3,11 +3,13 @@ import { defineConfig, mergeConfig } from "vite";
 import dts from "vite-plugin-dts";
 import baseConfig from "./vite.config";
 import { externalizeDeps } from "vite-plugin-externalize-deps";
+import preserveDirectives from "rollup-preserve-directives";
 
 export default mergeConfig(
   baseConfig,
   defineConfig({
     plugins: [
+      preserveDirectives(),
       banner((filename) =>
         filename.endsWith(".js") ? '"use client"\r\n/* */' : "",
       ),
@@ -21,7 +23,7 @@ export default mergeConfig(
       lib: {
         entry: {
           index: "./src/index.ts",
-          polyfill: "./src/polyfill.ts",
+          RemoteRenderer: "./src/RemoteRenderer.tsx",
         },
         formats: ["es"],
       },

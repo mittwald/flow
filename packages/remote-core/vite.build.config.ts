@@ -1,3 +1,4 @@
+import preserveDirectives from "rollup-preserve-directives";
 import { defineConfig, mergeConfig } from "vite";
 import dts from "vite-plugin-dts";
 import baseConfig from "./vite.config";
@@ -7,6 +8,7 @@ export default mergeConfig(
   baseConfig,
   defineConfig({
     plugins: [
+      preserveDirectives(),
       externalizeDeps(),
       dts({
         include: ["src"],
@@ -17,7 +19,6 @@ export default mergeConfig(
       lib: {
         entry: {
           index: "./src/index.ts",
-          polyfill: "./src/polyfill.ts",
         },
         formats: ["es"],
       },

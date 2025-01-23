@@ -1,15 +1,16 @@
 import { ThreadNestedIframe } from "@quilted/threads";
-import {
-  type RemoteConnection,
-  RemoteMutationObserver,
-} from "@remote-dom/core/elements";
+import { type RemoteConnection } from "@remote-dom/core/elements";
 
 export const connectHostIframe = (iframe: HTMLIFrameElement) => {
   new ThreadNestedIframe({
     exports: {
       render: (connection: RemoteConnection) => {
-        const observer = new RemoteMutationObserver(connection);
-        observer.observe(iframe);
+        import("@remote-dom/core/elements").then(
+          ({ RemoteMutationObserver }) => {
+            const observer = new RemoteMutationObserver(connection);
+            observer.observe(iframe);
+          },
+        );
       },
     },
   });
