@@ -6,6 +6,7 @@ import View from "@/components/List/components/Items/components/Item/components/
 import SkeletonText from "@/components/SkeletonText";
 import { useList } from "@/components/List";
 import { Skeleton } from "@/components/Skeleton";
+import { Avatar } from "@/components/Avatar";
 
 export const SkeletonView: FC = () => {
   const list = useList();
@@ -14,7 +15,11 @@ export const SkeletonView: FC = () => {
 
   return (
     <View>
-      {showTiles && <Skeleton style={{ aspectRatio: 16 / 9 }} />}
+      {showTiles && (
+        <Avatar>
+          <Skeleton style={{ aspectRatio: 16 / 9 }} />
+        </Avatar>
+      )}
       <Heading>
         <SkeletonText width="200px" />
       </Heading>
