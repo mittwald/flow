@@ -31,7 +31,7 @@ export const NavigationGroup: FC<NavigationGroupProps> = (props) => {
       "aria-hidden": true,
     },
     Link: {
-      tunnelId: "links",
+      tunnelId: "groupLinks",
     },
   };
 
@@ -43,7 +43,7 @@ export const NavigationGroup: FC<NavigationGroupProps> = (props) => {
             {children}
             <Content clearPropsContext={false}>
               <ul>
-                <TunnelExit id="links" />
+                <TunnelExit id="groupLinks" />
               </ul>
             </Content>
           </Accordion>
@@ -64,7 +64,7 @@ export const NavigationGroup: FC<NavigationGroupProps> = (props) => {
             {children}
             <TunnelExit id="Label" />
             <ul>
-              <TunnelExit id="links" />
+              <TunnelExit id="groupLinks" />
             </ul>
           </PropsContextProvider>
         </section>
