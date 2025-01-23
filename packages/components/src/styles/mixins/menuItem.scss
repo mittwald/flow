@@ -26,20 +26,8 @@
 
   /* Elements */
   .icon {
-    order: 0;
     color: var(--menu-item--icon-color--default);
-  }
-
-  .text {
-    order: 1;
-  }
-
-  .icon + .text {
-    margin-inline-start: var(--menu-item--spacing);
-  }
-
-  .switch {
-    order: 2;
+    margin-inline-end: var(--menu-item--spacing);
   }
 
   &:hover {

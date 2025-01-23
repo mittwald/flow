@@ -10,11 +10,7 @@ import {
   IconRadioOff,
   IconRadioOn,
 } from "@/components/Icon/components/icons";
-import { Text } from "@/components/Text";
-import { deepHas } from "@/lib/react/deepHas";
-import { Wrap } from "@/components/Wrap";
 import clsx from "clsx";
-import { Avatar } from "@/components/Avatar";
 import { Switch } from "@/components/Switch";
 
 interface Props extends Aria.MenuItemRenderProps, PropsWithChildren {
@@ -67,18 +63,13 @@ export const MenuItemContent: FC<Props> = (props) => {
       <IconCheckboxEmpty />
     );
 
-  const hasText = deepHas(children, Text);
-  const hasAvatar = deepHas(children, Avatar);
-
   return (
     <>
       <PropsContextProvider props={controlIconPropsContext}>
         {selectionIcon}
       </PropsContextProvider>
       <PropsContextProvider props={propsContext}>
-        <Wrap if={!hasText && !hasAvatar}>
-          <Text>{children}</Text>
-        </Wrap>
+        {children}
       </PropsContextProvider>
     </>
   );
