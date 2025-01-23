@@ -5,6 +5,10 @@
     display: flex;
     flex-direction: column;
     row-gap: var(--menu--item-to-item-spacing);
+
+    &:empty {
+      display: none;
+    }
   }
 
   .item {
