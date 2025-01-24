@@ -33,4 +33,24 @@
       background-color: var(--list-item--background-color--pressed);
     }
   }
+
+  &.tile {
+    border: none;
+
+    &:where(.hasAction) {
+      &:not(.isSelected) {
+        &:hover {
+          :global(.flow--avatar) {
+            filter: brightness(var(--image-button--brightness--hover));
+          }
+        }
+      }
+
+      &[data-pressed] {
+        :global(.flow--avatar) {
+          filter: brightness(var(--image-button--brightness--pressed));
+        }
+      }
+    }
+  }
 }

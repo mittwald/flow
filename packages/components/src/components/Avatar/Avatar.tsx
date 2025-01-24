@@ -8,8 +8,6 @@ import { getColorFromChildren } from "@/components/Avatar/lib/getColorFromChildr
 import type { PropsWithClassName } from "@/lib/types/props";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import { deepHas } from "@/lib/react/deepHas";
-import { Initials } from "@/components/Initials";
 
 export const avatarColors = [
   "blue",
@@ -33,13 +31,12 @@ export interface AvatarProps
 export const Avatar = flowComponent("Avatar", (props) => {
   const { children, className, color, size = "m", refProp: ref } = props;
 
-  const hasInitials = deepHas(children, Initials);
-
   const rootClassName = clsx(
     styles.avatar,
     styles[`size-${size}`],
     className,
-    styles[color ?? (hasInitials ? getColorFromChildren(children) : "blue")],
+    styles[color ?? "blue"],
+    !color && styles[`dynamic-${getColorFromChildren(children)}`],
   );
 
   const propsContext: PropsContext = {

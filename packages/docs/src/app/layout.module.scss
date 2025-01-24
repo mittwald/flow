@@ -77,6 +77,10 @@
   display: flex;
   flex-direction: column;
   row-gap: var(--section--spacing);
+
+  > h3 {
+    margin-top: var(--size-px--m);
+  }
 }
 
 @media (max-width: 900px) {

@@ -95,6 +95,11 @@ export const Markdown: FC<MarkdownProps> = (props) => {
         <ol>{props.children}</ol>
       </Text>
     ),
+    blockquote: (props) => (
+      <Text color={textColor}>
+        <blockquote>{props.children}</blockquote>
+      </Text>
+    ),
   };
 
   return (

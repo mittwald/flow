@@ -7,4 +7,8 @@
   :global(.flow--checkbox-button) {
     width: auto;
   }
+
+  &:empty {
+    display: none;
+  }
 }

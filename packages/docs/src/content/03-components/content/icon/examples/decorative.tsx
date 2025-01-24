@@ -2,8 +2,10 @@ import {
   IconApp,
   IconAutoresponder,
   IconBackup,
+  IconBulb,
   IconCalendar,
   IconCamera,
+  IconCertificate,
   IconChangelog,
   IconClock,
   IconContract,
@@ -13,14 +15,20 @@ import {
   IconDashboard,
   IconDatabase,
   IconDeliveryBox,
+  IconDesktop,
+  IconDirectory,
   IconDomain,
   IconEmail,
   IconExtension,
+  IconFile,
   IconForward,
   IconInbox,
   IconInvoice,
+  IconLink,
   IconMember,
   IconMittwald,
+  IconMobile,
+  IconMove,
   IconNumber,
   IconOrder,
   IconPassword,
@@ -32,6 +40,7 @@ import {
   IconServer,
   IconSpamProtectionOff,
   IconSpamProtectionOn,
+  IconSparkles,
   IconSshKey,
   IconSshSftp,
   IconStar,
@@ -41,6 +50,7 @@ import {
   IconTerminate,
   IconTicket,
   IconUser,
+  IconVhost,
 } from "@mittwald/flow-react-components/Icons";
 import Label from "@mittwald/flow-react-components/Label";
 import LabeledValue from "@mittwald/flow-react-components/LabeledValue";
@@ -58,6 +68,10 @@ import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
   <LabeledValue>
     <Label>Star Filled</Label>
     <IconStarFilled />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Sparkles</Label>
+    <IconSparkles />
   </LabeledValue>
   <LabeledValue>
     <Label>Project</Label>
@@ -92,8 +106,28 @@ import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
     <IconDomain />
   </LabeledValue>
   <LabeledValue>
+    <Label>Vhost</Label>
+    <IconVhost />
+  </LabeledValue>
+  <LabeledValue>
     <Label>Subdomain</Label>
     <IconSubdomain />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Certificate</Label>
+    <IconCertificate />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Move</Label>
+    <IconMove />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Directory</Label>
+    <IconDirectory />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>File</Label>
+    <IconFile />
   </LabeledValue>
   <LabeledValue>
     <Label>Database</Label>
@@ -214,5 +248,21 @@ import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
   <LabeledValue>
     <Label>Password</Label>
     <IconPassword />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Desktop</Label>
+    <IconDesktop />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Mobile</Label>
+    <IconMobile />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Bulb</Label>
+    <IconBulb />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Link</Label>
+    <IconLink />
   </LabeledValue>
 </ColumnLayout>;
