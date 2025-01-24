@@ -7,7 +7,6 @@ import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import * as Aria from "react-aria-components";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
-import { useAltKeySelectionProps } from "@/lib/hooks/useAltKeySelectionProps";
 
 export interface HeadingProps extends Aria.HeadingProps, FlowComponentProps {
   /** The font size of the heading. */
@@ -26,8 +25,6 @@ export const Heading = flowComponent("Heading", (props) => {
     refProp: ref,
     ...rest
   } = props;
-
-  const altKeySelectionProps = useAltKeySelectionProps(props);
 
   const rootClassName = clsx(
     styles.heading,
@@ -62,7 +59,6 @@ export const Heading = flowComponent("Heading", (props) => {
           level={level}
           className={rootClassName}
           {...rest}
-          {...altKeySelectionProps}
           ref={ref}
         >
           <span className={styles.headingText}>
