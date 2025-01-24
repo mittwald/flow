@@ -16,10 +16,8 @@ export const Options: FC<OptionsProps> = (props) => {
 
   const rootClassName = clsx(styles.options, className);
 
-  const isOpen = controller.useIsOpen();
-
   return (
-    <Popover className={styles.popover} isOpen={isOpen} controller={controller}>
+    <Popover className={styles.popover} controller={controller}>
       <Aria.ListBox className={rootClassName} {...rest}>
         {children}
       </Aria.ListBox>
