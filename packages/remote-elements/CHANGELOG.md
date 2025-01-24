@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.20](https://github.com/mittwald/flow/compare/0.2.0-alpha.19...0.2.0-alpha.20) (2025-01-24)
+
+### Bug Fixes
+
+* fix SSR issues ([552f9e2](https://github.com/mittwald/flow/commit/552f9e2f264dc688aedf4ab4aedf5e465f9c0f86))
+
 # [0.2.0-alpha.19](https://github.com/mittwald/flow/compare/0.2.0-alpha.18...0.2.0-alpha.19) (2025-01-23)
 
 **Note:** Version bump only for package @mittwald/flow-remote-elements
