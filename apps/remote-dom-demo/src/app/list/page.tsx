@@ -7,7 +7,7 @@ import {
   typedList,
 } from "@mittwald/flow-remote-react-components";
 import React from "react";
-import { demoData } from "~/app/remote/list/demoData";
+import { demoData } from "~/app/list/demoData";
 
 export default function Page() {
   const DemoList = typedList<(typeof demoData)[number]>();

@@ -51,6 +51,7 @@
     "@types/react": "^19.0.7"
   },
   "devDependencies": {
+    "@mittwald/flow-remote-react-renderer": "workspace:*",
     "@mittwald/typescript-config": "workspace:*",
     "@types/node": "^22.10.7",
     "nx": "^20.3.2",
@@ -67,10 +68,14 @@
     "vite-plugin-externalize-deps": "^0.9.0"
   },
   "peerDependencies": {
+    "@mittwald/flow-remote-react-renderer": "workspace:*",
     "react": "19.0.0",
     "react-hook-form": "*"
   },
   "peerDependenciesMeta": {
+    "@mittwald/flow-remote-react-renderer": {
+      "optional": true
+    },
     "react-hook-form": {
       "optional": true
     }

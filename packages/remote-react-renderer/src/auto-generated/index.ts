@@ -1,674 +1,205 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { createFlowRemoteComponentRenderer } from "~/lib/createFlowRemoteComponentRenderer";
-import { lazy } from "react";
+import { Accordion as Accordion } from "@mittwald/flow-react-components/Accordion";
+import { ActionGroup as ActionGroup } from "@mittwald/flow-react-components/ActionGroup";
+import { Alert as Alert } from "@mittwald/flow-react-components/Alert";
+import { AlertBadge as AlertBadge } from "@mittwald/flow-react-components/AlertBadge";
+import { AlertIcon as AlertIcon } from "@mittwald/flow-react-components/AlertIcon";
+import { Align as Align } from "@mittwald/flow-react-components/Align";
+import { Avatar as Avatar } from "@mittwald/flow-react-components/Avatar";
+import { Badge as Badge } from "@mittwald/flow-react-components/Badge";
+import { Breadcrumb as Breadcrumb } from "@mittwald/flow-react-components/Breadcrumb";
+import { Button as Button } from "@mittwald/flow-react-components/Button";
+import { Checkbox as Checkbox } from "@mittwald/flow-react-components/Checkbox";
+import { CheckboxButton as CheckboxButton } from "@mittwald/flow-react-components/CheckboxButton";
+import { CheckboxGroup as CheckboxGroup } from "@mittwald/flow-react-components/CheckboxGroup";
+import { CodeBlock as CodeBlock } from "@mittwald/flow-react-components/CodeBlock";
+import { ColumnLayout as ColumnLayout } from "@mittwald/flow-react-components/ColumnLayout";
+import { Content as Content } from "@mittwald/flow-react-components/Content";
+import { ContextMenu as ContextMenu } from "@mittwald/flow-react-components/ContextMenu";
+import { ContextMenuSection as ContextMenuSection } from "@mittwald/flow-react-components/ContextMenu";
+import { ContextMenuTrigger as ContextMenuTrigger } from "@mittwald/flow-react-components/ContextMenu";
+import { ContextualHelp as ContextualHelp } from "@mittwald/flow-react-components/ContextualHelp";
+import { ContextualHelpTrigger as ContextualHelpTrigger } from "@mittwald/flow-react-components/ContextualHelp";
+import { CopyButton as CopyButton } from "@mittwald/flow-react-components/CopyButton";
+import { CounterBadge as CounterBadge } from "@mittwald/flow-react-components/CounterBadge";
+import { CountryOptions as CountryOptions } from "@mittwald/flow-react-components/Select";
+import { DatePicker as DatePicker } from "@mittwald/flow-react-components/DatePicker";
+import { DateRangePicker as DateRangePicker } from "@mittwald/flow-react-components/DateRangePicker";
+import { Div as Div } from "@mittwald/flow-react-components/Div";
+import { FieldDescription as FieldDescription } from "@mittwald/flow-react-components/FieldDescription";
+import { FieldError as FieldError } from "@mittwald/flow-react-components/FieldError";
+import { FileCard as FileCard } from "@mittwald/flow-react-components/FileCard";
+import { FileCardList as FileCardList } from "@mittwald/flow-react-components/FileCardList";
+import { FileField as FileField } from "@mittwald/flow-react-components/FileField";
+import { Fragment as Fragment } from "@mittwald/flow-react-components/Fragment";
+import { Header as Header } from "@mittwald/flow-react-components/Header";
+import { HeaderNavigation as HeaderNavigation } from "@mittwald/flow-react-components/HeaderNavigation";
+import { Heading as Heading } from "@mittwald/flow-react-components/Heading";
+import { Icon as Icon } from "@mittwald/flow-react-components/Icon";
+import { IllustratedMessage as IllustratedMessage } from "@mittwald/flow-react-components/IllustratedMessage";
+import { Image as Image } from "@mittwald/flow-react-components/Image";
+import { Initials as Initials } from "@mittwald/flow-react-components/Initials";
+import { InlineCode as InlineCode } from "@mittwald/flow-react-components/InlineCode";
+import { GridList as ItemsGridList } from "@mittwald/flow-react-components/List";
+import { GridListItem as ItemsGridListItem } from "@mittwald/flow-react-components/List";
+import { Label as Label } from "@mittwald/flow-react-components/Label";
+import { LabeledValue as LabeledValue } from "@mittwald/flow-react-components/LabeledValue";
+import { LayoutCard as LayoutCard } from "@mittwald/flow-react-components/LayoutCard";
+import { LightBox as LightBox } from "@mittwald/flow-react-components/LightBox";
+import { LightBoxTrigger as LightBoxTrigger } from "@mittwald/flow-react-components/LightBox";
+import { Link as Link } from "@mittwald/flow-react-components/Link";
+import { EmptyView as ListEmptyView } from "@mittwald/flow-react-components/List";
+import { ListSummary as ListSummary } from "@mittwald/flow-react-components/List";
+import { LoadingSpinner as LoadingSpinner } from "@mittwald/flow-react-components/LoadingSpinner";
+import { Markdown as Markdown } from "@mittwald/flow-react-components/Markdown";
+import { MenuItem as MenuItem } from "@mittwald/flow-react-components/MenuItem";
+import { Message as Message } from "@mittwald/flow-react-components/Message";
+import { Modal as Modal } from "@mittwald/flow-react-components/Modal";
+import { ModalTrigger as ModalTrigger } from "@mittwald/flow-react-components/Modal";
+import { Navigation as Navigation } from "@mittwald/flow-react-components/Navigation";
+import { NavigationGroup as NavigationGroup } from "@mittwald/flow-react-components/Navigation";
+import { Notification as Notification } from "@mittwald/flow-react-components/Notification";
+import { NotificationProvider as NotificationProvider } from "@mittwald/flow-react-components/NotificationProvider";
+import { NumberField as NumberField } from "@mittwald/flow-react-components/NumberField";
+import { Option as Option } from "@mittwald/flow-react-components/Select";
+import { Popover as Popover } from "@mittwald/flow-react-components/Popover";
+import { PopoverTrigger as PopoverTrigger } from "@mittwald/flow-react-components/Popover";
+import { ProgressBar as ProgressBar } from "@mittwald/flow-react-components/ProgressBar";
+import { Radio as Radio } from "@mittwald/flow-react-components/RadioGroup";
+import { RadioButton as RadioButton } from "@mittwald/flow-react-components/RadioGroup";
+import { RadioGroup as RadioGroup } from "@mittwald/flow-react-components/RadioGroup";
+import { SearchField as SearchField } from "@mittwald/flow-react-components/SearchField";
+import { Section as Section } from "@mittwald/flow-react-components/Section";
+import { Segment as Segment } from "@mittwald/flow-react-components/SegmentedControl";
+import { SegmentedControl as SegmentedControl } from "@mittwald/flow-react-components/SegmentedControl";
+import { Select as Select } from "@mittwald/flow-react-components/Select";
+import { Separator as Separator } from "@mittwald/flow-react-components/Separator";
+import { Skeleton as Skeleton } from "@mittwald/flow-react-components/Skeleton";
+import { SkeletonText as SkeletonText } from "@mittwald/flow-react-components/SkeletonText";
+import { Slider as Slider } from "@mittwald/flow-react-components/Slider";
+import { Switch as Switch } from "@mittwald/flow-react-components/Switch";
+import { Tab as Tab } from "@mittwald/flow-react-components/Tabs";
+import { TabTitle as TabTitle } from "@mittwald/flow-react-components/Tabs";
+import { Table as Table } from "@mittwald/flow-react-components/Table";
+import { TableBody as TableBody } from "@mittwald/flow-react-components/Table";
+import { TableCell as TableCell } from "@mittwald/flow-react-components/Table";
+import { TableColumn as TableColumn } from "@mittwald/flow-react-components/Table";
+import { TableFooterRow as TableFooterRow } from "@mittwald/flow-react-components/Table";
+import { TableHeader as TableHeader } from "@mittwald/flow-react-components/Table";
+import { TableRow as TableRow } from "@mittwald/flow-react-components/Table";
+import { Tabs as Tabs } from "@mittwald/flow-react-components/Tabs";
+import { Text as Text } from "@mittwald/flow-react-components/Text";
+import { TextArea as TextArea } from "@mittwald/flow-react-components/TextArea";
+import { TextField as TextField } from "@mittwald/flow-react-components/TextField";
+import { TimeField as TimeField } from "@mittwald/flow-react-components/TimeField";
+import { Tooltip as Tooltip } from "@mittwald/flow-react-components/Tooltip";
+import { TooltipTrigger as TooltipTrigger } from "@mittwald/flow-react-components/Tooltip";
 
 export const flowComponents = {
-  "flr-accordion": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Accordion").then((module) => ({
-        default: module.Accordion,
-      })),
-    ),
-  ),
-  "flr-action-group": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/ActionGroup").then((module) => ({
-        default: module.ActionGroup,
-      })),
-    ),
-  ),
-  "flr-alert": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Alert").then((module) => ({
-        default: module.Alert,
-      })),
-    ),
-  ),
-  "flr-alert-badge": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/AlertBadge").then((module) => ({
-        default: module.AlertBadge,
-      })),
-    ),
-  ),
-  "flr-alert-icon": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/AlertIcon").then((module) => ({
-        default: module.AlertIcon,
-      })),
-    ),
-  ),
-  "flr-align": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Align").then((module) => ({
-        default: module.Align,
-      })),
-    ),
-  ),
-  "flr-avatar": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Avatar").then((module) => ({
-        default: module.Avatar,
-      })),
-    ),
-  ),
-  "flr-badge": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Badge").then((module) => ({
-        default: module.Badge,
-      })),
-    ),
-  ),
-  "flr-breadcrumb": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Breadcrumb").then((module) => ({
-        default: module.Breadcrumb,
-      })),
-    ),
-  ),
-  "flr-button": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Button").then((module) => ({
-        default: module.Button,
-      })),
-    ),
-  ),
-  "flr-checkbox": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Checkbox").then((module) => ({
-        default: module.Checkbox,
-      })),
-    ),
-  ),
-  "flr-checkbox-button": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/CheckboxButton").then(
-        (module) => ({ default: module.CheckboxButton }),
-      ),
-    ),
-  ),
-  "flr-checkbox-group": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/CheckboxGroup").then(
-        (module) => ({ default: module.CheckboxGroup }),
-      ),
-    ),
-  ),
-  "flr-code-block": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/CodeBlock").then((module) => ({
-        default: module.CodeBlock,
-      })),
-    ),
-  ),
-  "flr-column-layout": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/ColumnLayout").then((module) => ({
-        default: module.ColumnLayout,
-      })),
-    ),
-  ),
-  "flr-content": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Content").then((module) => ({
-        default: module.Content,
-      })),
-    ),
-  ),
-  "flr-context-menu": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/ContextMenu").then((module) => ({
-        default: module.ContextMenu,
-      })),
-    ),
-  ),
-  "flr-context-menu-section": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/ContextMenu").then((module) => ({
-        default: module.ContextMenuSection,
-      })),
-    ),
-  ),
-  "flr-context-menu-trigger": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/ContextMenu").then((module) => ({
-        default: module.ContextMenuTrigger,
-      })),
-    ),
-  ),
-  "flr-contextual-help": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/ContextualHelp").then(
-        (module) => ({ default: module.ContextualHelp }),
-      ),
-    ),
-  ),
+  "flr-accordion": createFlowRemoteComponentRenderer(Accordion),
+  "flr-action-group": createFlowRemoteComponentRenderer(ActionGroup),
+  "flr-alert": createFlowRemoteComponentRenderer(Alert),
+  "flr-alert-badge": createFlowRemoteComponentRenderer(AlertBadge),
+  "flr-alert-icon": createFlowRemoteComponentRenderer(AlertIcon),
+  "flr-align": createFlowRemoteComponentRenderer(Align),
+  "flr-avatar": createFlowRemoteComponentRenderer(Avatar),
+  "flr-badge": createFlowRemoteComponentRenderer(Badge),
+  "flr-breadcrumb": createFlowRemoteComponentRenderer(Breadcrumb),
+  "flr-button": createFlowRemoteComponentRenderer(Button),
+  "flr-checkbox": createFlowRemoteComponentRenderer(Checkbox),
+  "flr-checkbox-button": createFlowRemoteComponentRenderer(CheckboxButton),
+  "flr-checkbox-group": createFlowRemoteComponentRenderer(CheckboxGroup),
+  "flr-code-block": createFlowRemoteComponentRenderer(CodeBlock),
+  "flr-column-layout": createFlowRemoteComponentRenderer(ColumnLayout),
+  "flr-content": createFlowRemoteComponentRenderer(Content),
+  "flr-context-menu": createFlowRemoteComponentRenderer(ContextMenu),
+  "flr-context-menu-section":
+    createFlowRemoteComponentRenderer(ContextMenuSection),
+  "flr-context-menu-trigger":
+    createFlowRemoteComponentRenderer(ContextMenuTrigger),
+  "flr-contextual-help": createFlowRemoteComponentRenderer(ContextualHelp),
   "flr-contextual-help-trigger": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/ContextualHelp").then(
-        (module) => ({ default: module.ContextualHelpTrigger }),
-      ),
-    ),
-  ),
-  "flr-copy-button": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/CopyButton").then((module) => ({
-        default: module.CopyButton,
-      })),
-    ),
-  ),
-  "flr-counter-badge": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/CounterBadge").then((module) => ({
-        default: module.CounterBadge,
-      })),
-    ),
-  ),
-  "flr-country-options": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Select").then((module) => ({
-        default: module.CountryOptions,
-      })),
-    ),
-  ),
-  "flr-date-picker": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/DatePicker").then((module) => ({
-        default: module.DatePicker,
-      })),
-    ),
-  ),
-  "flr-date-range-picker": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/DateRangePicker").then(
-        (module) => ({ default: module.DateRangePicker }),
-      ),
-    ),
-  ),
-  "flr-div": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Div").then((module) => ({
-        default: module.Div,
-      })),
-    ),
-  ),
-  "flr-field-description": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/FieldDescription").then(
-        (module) => ({ default: module.FieldDescription }),
-      ),
-    ),
-  ),
-  "flr-field-error": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/FieldError").then((module) => ({
-        default: module.FieldError,
-      })),
-    ),
-  ),
-  "flr-file-card": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/FileCard").then((module) => ({
-        default: module.FileCard,
-      })),
-    ),
-  ),
-  "flr-file-card-list": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/FileCardList").then((module) => ({
-        default: module.FileCardList,
-      })),
-    ),
-  ),
-  "flr-file-field": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/FileField").then((module) => ({
-        default: module.FileField,
-      })),
-    ),
-  ),
-  "flr-fragment": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Fragment").then((module) => ({
-        default: module.Fragment,
-      })),
-    ),
-  ),
-  "flr-header": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Header").then((module) => ({
-        default: module.Header,
-      })),
-    ),
-  ),
-  "flr-header-navigation": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/HeaderNavigation").then(
-        (module) => ({ default: module.HeaderNavigation }),
-      ),
-    ),
-  ),
-  "flr-heading": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Heading").then((module) => ({
-        default: module.Heading,
-      })),
-    ),
-  ),
-  "flr-icon": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Icon").then((module) => ({
-        default: module.Icon,
-      })),
-    ),
-  ),
-  "flr-illustrated-message": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/IllustratedMessage").then(
-        (module) => ({ default: module.IllustratedMessage }),
-      ),
-    ),
-  ),
-  "flr-image": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Image").then((module) => ({
-        default: module.Image,
-      })),
-    ),
-  ),
-  "flr-initials": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Initials").then((module) => ({
-        default: module.Initials,
-      })),
-    ),
-  ),
-  "flr-inline-code": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/InlineCode").then((module) => ({
-        default: module.InlineCode,
-      })),
-    ),
-  ),
-  "flr-items-grid-list": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/List").then((module) => ({
-        default: module.GridList,
-      })),
-    ),
-  ),
-  "flr-items-grid-list-item": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/List").then((module) => ({
-        default: module.GridListItem,
-      })),
-    ),
-  ),
-  "flr-label": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Label").then((module) => ({
-        default: module.Label,
-      })),
-    ),
-  ),
-  "flr-labeled-value": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/LabeledValue").then((module) => ({
-        default: module.LabeledValue,
-      })),
-    ),
-  ),
-  "flr-layout-card": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/LayoutCard").then((module) => ({
-        default: module.LayoutCard,
-      })),
-    ),
-  ),
-  "flr-light-box": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/LightBox").then((module) => ({
-        default: module.LightBox,
-      })),
-    ),
-  ),
-  "flr-light-box-trigger": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/LightBox").then((module) => ({
-        default: module.LightBoxTrigger,
-      })),
-    ),
-  ),
-  "flr-link": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Link").then((module) => ({
-        default: module.Link,
-      })),
-    ),
-  ),
-  "flr-list-empty-view": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/List").then((module) => ({
-        default: module.EmptyView,
-      })),
-    ),
-  ),
-  "flr-list-summary": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/List").then((module) => ({
-        default: module.ListSummary,
-      })),
-    ),
-  ),
-  "flr-loading-spinner": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/LoadingSpinner").then(
-        (module) => ({ default: module.LoadingSpinner }),
-      ),
-    ),
-  ),
-  "flr-markdown": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Markdown").then((module) => ({
-        default: module.Markdown,
-      })),
-    ),
-  ),
-  "flr-menu-item": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/MenuItem").then((module) => ({
-        default: module.MenuItem,
-      })),
-    ),
-  ),
-  "flr-message": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Message").then((module) => ({
-        default: module.Message,
-      })),
-    ),
-  ),
-  "flr-modal": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Modal").then((module) => ({
-        default: module.Modal,
-      })),
-    ),
-  ),
-  "flr-modal-trigger": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Modal").then((module) => ({
-        default: module.ModalTrigger,
-      })),
-    ),
-  ),
-  "flr-navigation": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Navigation").then((module) => ({
-        default: module.Navigation,
-      })),
-    ),
-  ),
-  "flr-navigation-group": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Navigation").then((module) => ({
-        default: module.NavigationGroup,
-      })),
-    ),
-  ),
-  "flr-notification": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Notification").then((module) => ({
-        default: module.Notification,
-      })),
-    ),
-  ),
-  "flr-notification-provider": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/NotificationProvider").then(
-        (module) => ({ default: module.NotificationProvider }),
-      ),
-    ),
-  ),
-  "flr-number-field": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/NumberField").then((module) => ({
-        default: module.NumberField,
-      })),
-    ),
-  ),
-  "flr-option": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Select").then((module) => ({
-        default: module.Option,
-      })),
-    ),
-  ),
-  "flr-popover": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Popover").then((module) => ({
-        default: module.Popover,
-      })),
-    ),
-  ),
-  "flr-popover-trigger": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Popover").then((module) => ({
-        default: module.PopoverTrigger,
-      })),
-    ),
-  ),
-  "flr-progress-bar": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/ProgressBar").then((module) => ({
-        default: module.ProgressBar,
-      })),
-    ),
-  ),
-  "flr-radio": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/RadioGroup").then((module) => ({
-        default: module.Radio,
-      })),
-    ),
-  ),
-  "flr-radio-button": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/RadioGroup").then((module) => ({
-        default: module.RadioButton,
-      })),
-    ),
-  ),
-  "flr-radio-group": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/RadioGroup").then((module) => ({
-        default: module.RadioGroup,
-      })),
-    ),
-  ),
-  "flr-search-field": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/SearchField").then((module) => ({
-        default: module.SearchField,
-      })),
-    ),
-  ),
-  "flr-section": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Section").then((module) => ({
-        default: module.Section,
-      })),
-    ),
-  ),
-  "flr-segment": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/SegmentedControl").then(
-        (module) => ({ default: module.Segment }),
-      ),
-    ),
-  ),
-  "flr-segmented-control": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/SegmentedControl").then(
-        (module) => ({ default: module.SegmentedControl }),
-      ),
-    ),
-  ),
-  "flr-select": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Select").then((module) => ({
-        default: module.Select,
-      })),
-    ),
-  ),
-  "flr-separator": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Separator").then((module) => ({
-        default: module.Separator,
-      })),
-    ),
-  ),
-  "flr-skeleton": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Skeleton").then((module) => ({
-        default: module.Skeleton,
-      })),
-    ),
-  ),
-  "flr-skeleton-text": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/SkeletonText").then((module) => ({
-        default: module.SkeletonText,
-      })),
-    ),
-  ),
-  "flr-slider": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Slider").then((module) => ({
-        default: module.Slider,
-      })),
-    ),
-  ),
-  "flr-switch": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Switch").then((module) => ({
-        default: module.Switch,
-      })),
-    ),
-  ),
-  "flr-tab": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Tabs").then((module) => ({
-        default: module.Tab,
-      })),
-    ),
-  ),
-  "flr-tab-title": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Tabs").then((module) => ({
-        default: module.TabTitle,
-      })),
-    ),
-  ),
-  "flr-table": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Table").then((module) => ({
-        default: module.Table,
-      })),
-    ),
-  ),
-  "flr-table-body": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Table").then((module) => ({
-        default: module.TableBody,
-      })),
-    ),
-  ),
-  "flr-table-cell": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Table").then((module) => ({
-        default: module.TableCell,
-      })),
-    ),
-  ),
-  "flr-table-column": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Table").then((module) => ({
-        default: module.TableColumn,
-      })),
-    ),
-  ),
-  "flr-table-footer-row": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Table").then((module) => ({
-        default: module.TableFooterRow,
-      })),
-    ),
-  ),
-  "flr-table-header": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Table").then((module) => ({
-        default: module.TableHeader,
-      })),
-    ),
-  ),
-  "flr-table-row": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Table").then((module) => ({
-        default: module.TableRow,
-      })),
-    ),
-  ),
-  "flr-tabs": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Tabs").then((module) => ({
-        default: module.Tabs,
-      })),
-    ),
-  ),
-  "flr-text": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Text").then((module) => ({
-        default: module.Text,
-      })),
-    ),
-  ),
-  "flr-text-area": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/TextArea").then((module) => ({
-        default: module.TextArea,
-      })),
-    ),
-  ),
-  "flr-text-field": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/TextField").then((module) => ({
-        default: module.TextField,
-      })),
-    ),
-  ),
-  "flr-time-field": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/TimeField").then((module) => ({
-        default: module.TimeField,
-      })),
-    ),
-  ),
-  "flr-tooltip": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Tooltip").then((module) => ({
-        default: module.Tooltip,
-      })),
-    ),
-  ),
-  "flr-tooltip-trigger": createFlowRemoteComponentRenderer(
-    lazy(() =>
-      import("@mittwald/flow-react-components/Tooltip").then((module) => ({
-        default: module.TooltipTrigger,
-      })),
-    ),
-  ),
+    ContextualHelpTrigger,
+  ),
+  "flr-copy-button": createFlowRemoteComponentRenderer(CopyButton),
+  "flr-counter-badge": createFlowRemoteComponentRenderer(CounterBadge),
+  "flr-country-options": createFlowRemoteComponentRenderer(CountryOptions),
+  "flr-date-picker": createFlowRemoteComponentRenderer(DatePicker),
+  "flr-date-range-picker": createFlowRemoteComponentRenderer(DateRangePicker),
+  "flr-div": createFlowRemoteComponentRenderer(Div),
+  "flr-field-description": createFlowRemoteComponentRenderer(FieldDescription),
+  "flr-field-error": createFlowRemoteComponentRenderer(FieldError),
+  "flr-file-card": createFlowRemoteComponentRenderer(FileCard),
+  "flr-file-card-list": createFlowRemoteComponentRenderer(FileCardList),
+  "flr-file-field": createFlowRemoteComponentRenderer(FileField),
+  "flr-fragment": createFlowRemoteComponentRenderer(Fragment),
+  "flr-header": createFlowRemoteComponentRenderer(Header),
+  "flr-header-navigation": createFlowRemoteComponentRenderer(HeaderNavigation),
+  "flr-heading": createFlowRemoteComponentRenderer(Heading),
+  "flr-icon": createFlowRemoteComponentRenderer(Icon),
+  "flr-illustrated-message":
+    createFlowRemoteComponentRenderer(IllustratedMessage),
+  "flr-image": createFlowRemoteComponentRenderer(Image),
+  "flr-initials": createFlowRemoteComponentRenderer(Initials),
+  "flr-inline-code": createFlowRemoteComponentRenderer(InlineCode),
+  "flr-items-grid-list": createFlowRemoteComponentRenderer(ItemsGridList),
+  "flr-items-grid-list-item":
+    createFlowRemoteComponentRenderer(ItemsGridListItem),
+  "flr-label": createFlowRemoteComponentRenderer(Label),
+  "flr-labeled-value": createFlowRemoteComponentRenderer(LabeledValue),
+  "flr-layout-card": createFlowRemoteComponentRenderer(LayoutCard),
+  "flr-light-box": createFlowRemoteComponentRenderer(LightBox),
+  "flr-light-box-trigger": createFlowRemoteComponentRenderer(LightBoxTrigger),
+  "flr-link": createFlowRemoteComponentRenderer(Link),
+  "flr-list-empty-view": createFlowRemoteComponentRenderer(ListEmptyView),
+  "flr-list-summary": createFlowRemoteComponentRenderer(ListSummary),
+  "flr-loading-spinner": createFlowRemoteComponentRenderer(LoadingSpinner),
+  "flr-markdown": createFlowRemoteComponentRenderer(Markdown),
+  "flr-menu-item": createFlowRemoteComponentRenderer(MenuItem),
+  "flr-message": createFlowRemoteComponentRenderer(Message),
+  "flr-modal": createFlowRemoteComponentRenderer(Modal),
+  "flr-modal-trigger": createFlowRemoteComponentRenderer(ModalTrigger),
+  "flr-navigation": createFlowRemoteComponentRenderer(Navigation),
+  "flr-navigation-group": createFlowRemoteComponentRenderer(NavigationGroup),
+  "flr-notification": createFlowRemoteComponentRenderer(Notification),
+  "flr-notification-provider":
+    createFlowRemoteComponentRenderer(NotificationProvider),
+  "flr-number-field": createFlowRemoteComponentRenderer(NumberField),
+  "flr-option": createFlowRemoteComponentRenderer(Option),
+  "flr-popover": createFlowRemoteComponentRenderer(Popover),
+  "flr-popover-trigger": createFlowRemoteComponentRenderer(PopoverTrigger),
+  "flr-progress-bar": createFlowRemoteComponentRenderer(ProgressBar),
+  "flr-radio": createFlowRemoteComponentRenderer(Radio),
+  "flr-radio-button": createFlowRemoteComponentRenderer(RadioButton),
+  "flr-radio-group": createFlowRemoteComponentRenderer(RadioGroup),
+  "flr-search-field": createFlowRemoteComponentRenderer(SearchField),
+  "flr-section": createFlowRemoteComponentRenderer(Section),
+  "flr-segment": createFlowRemoteComponentRenderer(Segment),
+  "flr-segmented-control": createFlowRemoteComponentRenderer(SegmentedControl),
+  "flr-select": createFlowRemoteComponentRenderer(Select),
+  "flr-separator": createFlowRemoteComponentRenderer(Separator),
+  "flr-skeleton": createFlowRemoteComponentRenderer(Skeleton),
+  "flr-skeleton-text": createFlowRemoteComponentRenderer(SkeletonText),
+  "flr-slider": createFlowRemoteComponentRenderer(Slider),
+  "flr-switch": createFlowRemoteComponentRenderer(Switch),
+  "flr-tab": createFlowRemoteComponentRenderer(Tab),
+  "flr-tab-title": createFlowRemoteComponentRenderer(TabTitle),
+  "flr-table": createFlowRemoteComponentRenderer(Table),
+  "flr-table-body": createFlowRemoteComponentRenderer(TableBody),
+  "flr-table-cell": createFlowRemoteComponentRenderer(TableCell),
+  "flr-table-column": createFlowRemoteComponentRenderer(TableColumn),
+  "flr-table-footer-row": createFlowRemoteComponentRenderer(TableFooterRow),
+  "flr-table-header": createFlowRemoteComponentRenderer(TableHeader),
+  "flr-table-row": createFlowRemoteComponentRenderer(TableRow),
+  "flr-tabs": createFlowRemoteComponentRenderer(Tabs),
+  "flr-text": createFlowRemoteComponentRenderer(Text),
+  "flr-text-area": createFlowRemoteComponentRenderer(TextArea),
+  "flr-text-field": createFlowRemoteComponentRenderer(TextField),
+  "flr-time-field": createFlowRemoteComponentRenderer(TimeField),
+  "flr-tooltip": createFlowRemoteComponentRenderer(Tooltip),
+  "flr-tooltip-trigger": createFlowRemoteComponentRenderer(TooltipTrigger),
 } as const;
 
 export default flowComponents;

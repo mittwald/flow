@@ -3932,6 +3932,7 @@ __metadata:
     "@mittwald/flow-react-components": "workspace:*"
     "@mittwald/flow-remote-core": "workspace:*"
     "@mittwald/flow-remote-elements": "workspace:*"
+    "@mittwald/flow-remote-react-renderer": "workspace:*"
     "@mittwald/typescript-config": "workspace:*"
     "@remote-dom/react": "npm:^1.2.1"
     "@types/node": "npm:^22.10.7"
@@ -3949,9 +3950,12 @@ __metadata:
     vite-plugin-dts: "npm:^4.5.0"
     vite-plugin-externalize-deps: "npm:^0.9.0"
   peerDependencies:
+    "@mittwald/flow-remote-react-renderer": "workspace:*"
     react: 19.0.0
     react-hook-form: "*"
   peerDependenciesMeta:
+    "@mittwald/flow-remote-react-renderer":
+      optional: true
     react-hook-form:
       optional: true
   languageName: unknown
