@@ -76,10 +76,6 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
 
   const controller = controllerFromProps ?? controllerFromContext;
 
-  const isOpen = controller.useIsOpen();
-
-  console.log(isOpen);
-
   return (
     <Aria.ComboBox
       menuTrigger={menuTrigger}

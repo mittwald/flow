@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Select, { Option, sortByDachFirst } from "../index";
+import Select, { sortByDachFirst } from "../index";
+import Option from "@/components/Option";
 import React from "react";
 import { Label } from "@/components/Label";
 import FieldDescription from "@/components/FieldDescription";

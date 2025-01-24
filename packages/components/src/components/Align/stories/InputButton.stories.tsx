@@ -7,7 +7,8 @@ import type { Meta, StoryObj } from "@storybook/react";
 import defaultMeta from "./Default.stories";
 import { NumberField } from "@/components/NumberField";
 import { TextArea } from "@/components/TextArea";
-import { Option, Select } from "@/components/Select";
+import { Option } from "@/components/Option";
+import { Select } from "@/components/Select";
 
 const meta: Meta<typeof Align> = {
   ...defaultMeta,

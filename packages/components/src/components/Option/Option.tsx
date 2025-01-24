@@ -7,19 +7,24 @@ import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface OptionProps
-  extends Omit<Aria.ListBoxItemProps, "children" | "value" | "id">,
+  extends Omit<Aria.ListBoxItemProps, "children" | "value">,
     PropsWithChildren,
     FlowComponentProps {
   value?: string | number;
 }
 
 export const Option = flowComponent("Option", (props) => {
-  const { className, children, value, refProp: ref, ...rest } = props;
+  const { className, children, value, id, refProp: ref, ...rest } = props;
 
   const rootClassName = clsx(styles.option, className);
 
   return (
-    <Aria.ListBoxItem className={rootClassName} ref={ref} {...rest} id={value}>
+    <Aria.ListBoxItem
+      className={rootClassName}
+      ref={ref}
+      {...rest}
+      id={id ?? value}
+    >
       {children}
     </Aria.ListBoxItem>
   );

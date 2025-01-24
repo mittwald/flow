@@ -10,7 +10,7 @@
     text-align: left;
 
     @include formControl.formControl();
-    padding-inline-end: var(--button--padding);
+    padding-inline-end: var(--button--padding-x);
   }
 
   &[data-invalid] {

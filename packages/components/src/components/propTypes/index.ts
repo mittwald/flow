@@ -20,7 +20,7 @@ import type { ActionGroupProps } from "@/components/ActionGroup";
 import type { AvatarProps } from "@/components/Avatar";
 import type { ActionProps } from "@/components/Action";
 import type { ContextMenuProps, MenuItemProps } from "@/components/ContextMenu";
-import type { OptionProps, SelectProps } from "@/components/Select";
+import type { SelectProps } from "@/components/Select";
 import type {
   RadioButtonProps,
   RadioGroupProps,
@@ -57,6 +57,8 @@ import type { FileCardProps } from "@/components/FileCard";
 import type { FileFieldProps } from "@/components/FileField";
 import type { AlignProps } from "@/components/Align";
 import type { CountryOptionsProps } from "@/components/Select/components/CountryOptions";
+import type { ComboBoxProps } from "@/components/ComboBox";
+import type { OptionProps } from "@/components/Option";
 
 export * from "./types";
 
@@ -73,6 +75,7 @@ export interface FlowComponentPropsTypes {
   Checkbox: CheckboxProps;
   CheckboxButton: CheckboxButtonProps;
   CheckboxGroup: CheckboxGroupProps;
+  ComboBox: ComboBoxProps;
   Content: ContentProps;
   ContextMenu: ContextMenuProps;
   ContextMenuSection: ContextMenuSectionProps;
@@ -140,6 +143,7 @@ const propsContextSupportingComponentsMap: Record<
   Checkbox: true,
   CheckboxButton: true,
   CheckboxGroup: true,
+  ComboBox: true,
   Content: true,
   ContextMenu: true,
   ContextMenuSection: true,
