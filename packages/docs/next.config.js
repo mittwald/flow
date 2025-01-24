@@ -7,13 +7,8 @@ import remarkGfm from "remark-gfm"; // Tables, footnotes, strikethrough, task li
 const nextConfig = {
   output: "export",
   basePath: process.env.NEXT_BASE_PATH ?? "",
-  pageExtensions: ["js", "jsx", "mdx", "ts", "tsx", "example"],
+  pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
   webpack: (config, _) => {
-    config.module.rules.push({
-      test: /_examples\/.*$/i,
-      use: "raw-loader",
-    });
-
     return config;
   },
   transpilePackages: ["next-mdx-remote"],

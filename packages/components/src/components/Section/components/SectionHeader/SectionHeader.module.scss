@@ -1,6 +1,6 @@
 .sectionHeader {
   display: flex;
-  gap: var(--section-header--heading-to-actions-spacing);
+  gap: var(--section-header--heading-to-action-spacing);
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
@@ -10,5 +10,9 @@
     gap: var(--section-header--action-to-action-spacing);
     margin-inline-start: auto;
     flex-wrap: wrap;
+  }
+
+  &:not(:first-child) {
+    margin-top: var(--section--sub-heading-spacing);
   }
 }

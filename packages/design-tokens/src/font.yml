@@ -7,15 +7,17 @@ line-height:
   default:
     value: 1.5
   m:
-    value: "calc({font-size.m} * 1.5)"
-font-size:
+    value: "calc({font-size-text.m} * 1.5)"
+  s:
+    value: "calc({font-size-text.s} * 1.5)"
+font-size-text:
   default:
-    value: "{font-size.m}"
+    value: "{font-size-text.m}"
   s:
     value: 0.875rem
   m:
     value: 1rem
-heading-font-size:
+font-size-heading:
   xs:
     value: 1rem
   s:
@@ -28,11 +30,3 @@ heading-font-size:
     value: 2rem
   xxl:
     value: 2.625rem
-content:
-  color:
-    default:
-      value: "{neutral.color.1000}"
-    light:
-      value: "{light-plain-content-color.default}"
-    dark:
-      value: "{dark-plain-content-color.default}"

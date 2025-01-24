@@ -47,8 +47,8 @@ export const Activity: FC<Props> = (props) => {
 
   return (
     <Suspense fallback={null}>
-      {children}
       {!isActive && <SuspenseTrigger />}
+      {children}
     </Suspense>
   );
 };

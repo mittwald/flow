@@ -1,0 +1,24 @@
+text:
+  color:
+    default:
+      value: "{neutral.color.1000}"
+    light:
+      value: "{light-plain-content-color}"
+    dark:
+      value: "{dark-plain-content-color}"
+    disabled:
+      value: "{disabled-plain-content-color}"
+  max-width:
+    value: "780px"
+
+  blockquote-border-width:
+    value: "{border-width.300}"
+  blockquote-border-style:
+    value: "{border-style.default}"
+  blockquote-border-color:
+    value: "{info-outline-border-color}"
+  blockquote-padding:
+    value: "{size-rem.s}"
+
+  list-padding:
+    value: "{size-rem.l}"

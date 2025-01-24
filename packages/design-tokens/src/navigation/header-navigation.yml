@@ -1,0 +1,34 @@
+header-navigation:
+  padding:
+    value: "{size-px.s}"
+  spacing:
+    value: "{size-rem.m}"
+  corner-radius:
+    value: "{corner-radius.default}"
+  corner-radius-round:
+    value: "{corner-radius.round}"
+  color:
+    value: "{primary.color.1000}"
+  color-dark:
+    value: "{dark-plain-content-color}"
+  color-light:
+    value: "{light-plain-content-color}"
+  background-color:
+    hover:
+      value: "{primary-plain-background-color.hover}"
+    pressed:
+      value: "{primary-plain-background-color.pressed}"
+  background-color-dark:
+    hover:
+      value: "{dark-plain-background-color.hover}"
+    pressed:
+      value: "{dark-plain-background-color.pressed}"
+  background-color-light:
+    hover:
+      value: "{light-plain-background-color.hover}"
+    pressed:
+      value: "{light-plain-background-color.pressed}"
+  font-weight-current:
+    value: "{font-weight.bold}"
+  underline-width-current:
+    value: "{border-width.200}"

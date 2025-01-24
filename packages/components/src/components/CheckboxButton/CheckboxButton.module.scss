@@ -2,13 +2,17 @@
 
 .checkboxButton {
   display: grid;
-  row-gap: var(--checkbox-button--text-to-text-spacing);
-  column-gap: var(--checkbox-button--icon-to-text-spacing);
+  row-gap: var(--form-control--spacing-y);
+  column-gap: var(--form-control--spacing-x);
   grid-template-areas: "icon label";
   grid-template-columns: auto 1fr;
   width: fit-content;
 
   @include formControl.formControl();
+
+  & {
+    order: unset;
+  }
 
   /* Elements */
 
@@ -29,7 +33,7 @@
     grid-template-rows: auto 1fr;
 
     .label {
-      font-weight: var(--checkbox-button--label-font-weight-with-content);
+      font-weight: var(--font-weight--bold);
     }
   }
 

@@ -2,16 +2,16 @@
   color: inherit;
 
   &:where(.light) {
-    color: var(--content--color--light);
+    color: var(--text--color--light);
   }
 
   &:where(.dark) {
-    color: var(--content--color--dark);
+    color: var(--text--color--dark);
   }
 
   ul,
   ol {
-    padding-left: var(--size-rem--l);
+    padding-left: var(--text--list-padding);
   }
 
   ul {
@@ -21,6 +21,13 @@
   }
 
   small {
-    font-size: var(--font-size--s);
+    font-size: var(--font-size-text--s);
+  }
+
+  blockquote {
+    border-left-width: var(--text--blockquote-border-width);
+    border-left-style: var(--text--blockquote-border-style);
+    border-left-color: var(--text--blockquote-border-color);
+    padding-left: var(--text--blockquote-padding);
   }
 }

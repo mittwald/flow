@@ -1,0 +1,5 @@
+separator:
+  color:
+    value: "{neutral-outline-border-color}"
+  height:
+    value: "{border-width.100}"

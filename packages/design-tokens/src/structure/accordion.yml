@@ -1,0 +1,21 @@
+accordion:
+  spacing:
+    value: "{size-rem.s}"
+  corner-radius:
+    value: "{corner-radius.default}"
+  border-width:
+    value: "{border-width.100}"
+  border-style:
+    value: "{border-style.default}"
+  border-color:
+    value: "{neutral-outline-border-color}"
+  padding-x:
+    value: "{size-px.s}"
+  padding-y:
+    value: "{size-px.xs}"
+  background-color:
+    hover:
+      value: "{primary.color.100}"
+    pressed:
+      value: "{primary.color.100}"
+

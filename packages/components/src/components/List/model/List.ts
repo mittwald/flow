@@ -21,6 +21,9 @@ import type { SettingsStore } from "@/components/SettingsProvider/models/Setting
 import z from "zod";
 
 export class List<T> {
+  public static readonly viewModeSettingsStorageSchema = z
+    .enum(["list", "table", "tiles"])
+    .optional();
   public readonly filters: Filter<T, never, never>[];
   public readonly itemView?: ItemView<T>;
   public readonly table?: Table<T>;
@@ -31,20 +34,16 @@ export class List<T> {
   public readonly batches: BatchesController<T>;
   public readonly loader: IncrementalLoader<T>;
   public readonly onAction?: ItemActionFn<T>;
+  public readonly accordion: boolean;
   public readonly getItemId?: GetItemId<T>;
   public readonly componentProps: ListSupportedComponentProps;
   public viewMode: ListViewMode;
   public readonly setViewMode: (viewMode: ListViewMode) => void;
-
-  private readonly settingsStore?: SettingsStore;
   public readonly supportsSettingsStorage: boolean;
   public readonly settingStorageKey?: string;
+  private readonly settingsStore?: SettingsStore;
   private readonly viewModeStorageKey?: string;
   private readonly filterSettingsStorageKey?: string;
-
-  public static readonly viewModeSettingsStorageSchema = z
-    .enum(["list", "table"])
-    .optional();
 
   public constructor(shape: ListShape<T>) {
     const {
@@ -60,6 +59,7 @@ export class List<T> {
       onAction,
       getItemId,
       defaultViewMode,
+      accordion = false,
       ...componentProps
     } = shape;
 
@@ -78,6 +78,7 @@ export class List<T> {
     this.sorting = sorting.map((shape) => new Sorting<T>(this, shape));
     this.search = search ? new Search(this, search) : undefined;
     this.itemView = itemView ? new ItemView(this, itemView) : undefined;
+    this.accordion = accordion;
     this.table = table ? new Table(this, table) : undefined;
     this.batches = new BatchesController(this, batchesController);
     this.componentProps = componentProps;

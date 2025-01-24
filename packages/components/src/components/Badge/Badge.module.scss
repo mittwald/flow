@@ -38,7 +38,7 @@
     .button,
     .content {
       padding-inline-end: calc(
-        var(--content-size) + var(--badge--content-to-content-spacing)
+              var(--content-size) + var(--badge--spacing)
       );
     }
   }
@@ -50,13 +50,13 @@
     }
 
     .value {
-      padding-inline-start: var(--badge--content-to-content-spacing);
+      padding-inline-start: var(--badge--spacing);
       padding-inline-end: var(--badge--padding-x);
     }
 
     .scope {
       padding-inline-start: var(--badge--padding-x);
-      padding-inline-end: var(--badge--content-to-content-spacing);
+      padding-inline-end: var(--badge--spacing);
       height: 100%;
       flex-shrink: 0;
     }
@@ -67,7 +67,7 @@
         padding-inline-end: var(--content-size);
 
         .value {
-          padding-inline-end: var(--badge--content-to-content-spacing);
+          padding-inline-end: var(--badge--spacing);
         }
       }
     }
@@ -80,7 +80,7 @@
     border-end-end-radius: var(--badge-size);
     border-start-end-radius: var(--badge-size);
     margin-inline-start: calc(
-      (var(--badge-size) - var(--badge--border-width)) * -1
+            (var(--badge-size) - var(--badge--border-width)) * -1
     );
     margin-top: var(--badge--border-width);
   }
@@ -93,7 +93,7 @@
       .button {
         border-color: var(--badge--#{$color}-border-color);
         background-color: var(--badge--#{$color}-background-color--default);
-        color: var(--badge--#{$color}-content-color);
+        color: var(--badge--#{$color}-content-color--default);
       }
 
       &:not(.disabled) {
@@ -104,6 +104,7 @@
 
           &[data-pressed] {
             background-color: var(--badge--#{$color}-background-color--pressed);
+            color: var(--badge--#{$color}-content-color--pressed);
           }
         }
       }

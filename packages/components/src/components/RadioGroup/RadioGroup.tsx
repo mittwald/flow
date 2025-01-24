@@ -4,50 +4,30 @@ import styles from "./RadioGroup.module.scss";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
-import { dynamic, PropsContextProvider } from "@/lib/propsContext";
+import { PropsContextProvider } from "@/lib/propsContext";
 import { FieldError } from "@/components/FieldError";
 import type { ColumnLayoutProps } from "@/components/ColumnLayout";
 import { ColumnLayout } from "@/components/ColumnLayout";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import formFieldStyles from "../FormField/FormField.module.scss";
-import { deepFindOfType } from "@/lib/react/deepFindOfType";
-import RadioButton from "./components/RadioButton";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import { IconCheck } from "@/components/Icon/components/icons";
-import mergePropsContext from "@/lib/propsContext/mergePropsContext";
-import type { PropsWithContainerBreakpointSize } from "@/lib/types/props";
-import { getContainerBreakpointSizeClassName } from "@/lib/getContainerBreakpointSizeClassName";
 
 export interface RadioGroupProps
   extends PropsWithChildren<Omit<Aria.RadioGroupProps, "children">>,
     FlowComponentProps,
-    Pick<ColumnLayoutProps, "s" | "m" | "l">,
-    PropsWithContainerBreakpointSize {
-  variant?: "segmented" | "default";
-}
+    Pick<ColumnLayoutProps, "s" | "m" | "l"> {}
 
 export const RadioGroup = flowComponent("RadioGroup", (props) => {
-  const {
-    children,
-    className,
-    variant = "default",
-    s,
-    m,
-    l,
-    containerBreakpointSize = "m",
-    refProp: ref,
-    ...rest
-  } = props;
+  const { children, className, s, m, l, refProp: ref, ...rest } = props;
 
   const rootClassName = clsx(
     formFieldStyles.formField,
     styles.radioGroupContainer,
     className,
-    styles[getContainerBreakpointSizeClassName(containerBreakpointSize)],
   );
 
-  let propsContext: PropsContext = {
+  const propsContext: PropsContext = {
     Label: {
       className: formFieldStyles.label,
     },
@@ -60,65 +40,30 @@ export const RadioGroup = flowComponent("RadioGroup", (props) => {
       tunnelId: "fieldError",
     },
     RadioButton: {
-      tunnelId: "radios",
+      tunnelId: "radioButtons",
     },
     Radio: {
       tunnelId: "radios",
     },
   };
 
-  if (variant === "segmented") {
-    propsContext = mergePropsContext(propsContext, {
-      Radio: {
-        className: styles.segment,
-        unstyled: true,
-        children: dynamic((props) => (
-          <>
-            {props.children}
-            <IconCheck className={styles.checkmark} />
-          </>
-        )),
-      },
-    });
-  }
-
-  const hasRadioButtons = !!deepFindOfType(children, RadioButton);
-
-  if (variant === "segmented" && hasRadioButtons) {
-    console.warn(
-      "<RadioButton/> is not supported in 'segmented' variant of <RadioGroup />",
-    );
-  }
-
   return (
     <Aria.RadioGroup {...rest} className={rootClassName} ref={ref}>
       <TunnelProvider>
         <PropsContextProvider
+          dependencies={["radio"]}
           props={propsContext}
-          dependencies={[variant]}
           mergeInParentContext
         >
           {children}
 
-          {variant === "segmented" && (
-            <div className={styles.segmentedGroup}>
-              <div className={styles.segments}>
-                <TunnelExit id="radios" />
-              </div>
-            </div>
-          )}
+          <ColumnLayout s={s} m={m} l={l} className={styles.radioGroup}>
+            <TunnelExit id="radioButtons" />
+          </ColumnLayout>
 
-          {variant === "default" && hasRadioButtons && (
-            <ColumnLayout s={s} m={m} l={l} className={styles.radioGroup}>
-              <TunnelExit id="radios" />
-            </ColumnLayout>
-          )}
-
-          {variant === "default" && !hasRadioButtons && (
-            <div className={styles.radioGroup}>
-              <TunnelExit id="radios" />
-            </div>
-          )}
+          <div className={styles.radioGroup}>
+            <TunnelExit id="radios" />
+          </div>
 
           <TunnelExit id="fieldDescription" />
           <TunnelExit id="fieldError" />

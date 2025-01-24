@@ -9,6 +9,7 @@ import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import type { PropsWithClassName } from "@/lib/types/props";
 import { linkContext } from "@/components/Link/context";
+import { LinkIcon } from "@/components/Link/components/LinkIcon";
 
 export interface LinkProps
   extends PropsWithChildren<
@@ -16,9 +17,11 @@ export interface LinkProps
     >,
     FlowComponentProps,
     PropsWithClassName {
+  /** Whether the link should be styled for being displayed inside a text. */
   inline?: boolean;
+  /** An alternative link component. */
   linkComponent?: ComponentType<Omit<ComponentProps<"a">, "ref">>;
-  /** @default "primary" */
+  /** The color of the link. @default "primary" */
   color?: "primary" | "dark" | "light";
 
   /** @internal */
@@ -71,6 +74,7 @@ export const Link = flowComponent("Link", (props) => {
       >
         <PropsContextProvider props={propsContext}>
           {children}
+          <LinkIcon {...props} />
         </PropsContextProvider>
       </Link>
     </ClearPropsContext>

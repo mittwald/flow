@@ -11,6 +11,7 @@ import styles from "./TimeField.module.scss";
 
 export interface TimeFieldProps<T extends Aria.TimeValue>
   extends PropsWithChildren<Omit<Aria.TimeFieldProps<T>, "children">> {
+  /** An error message to be displayed below the field */
   errorMessage?: ReactNode;
 }
 

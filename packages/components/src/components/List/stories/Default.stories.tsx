@@ -16,6 +16,7 @@ import { ListItemView, ListSummary, typedList } from "@/components/List";
 import { Button } from "@/components/Button";
 import IconDownload from "@/components/Icon/components/icons/IconDownload";
 import { ActionGroup } from "@/components/ActionGroup";
+import { Content } from "@/components/Content";
 
 const loadDomains: AsyncDataLoader<Domain> = async (opts) => {
   const response = await getDomains({
@@ -70,7 +71,7 @@ const meta: Meta<typeof List> = {
             name="Typ"
             defaultSelected={["Domain"]}
           />
-          <DomainList.Search autoFocus />
+          <DomainList.Search autoFocus autoSubmit />
           <DomainList.Sorting property="domain" name="A-Z" />
           <DomainList.Sorting property="domain" name="Z-A" direction="desc" />
           <DomainList.Sorting property="type" name="Typ" defaultEnabled />
@@ -102,7 +103,7 @@ const meta: Meta<typeof List> = {
             </DomainList.TableBody>
           </DomainList.Table>
 
-          <DomainList.Item textValue={(domain) => domain.hostname}>
+          <DomainList.Item showTiles textValue={(domain) => domain.hostname}>
             {(domain) => (
               <DomainList.ItemView>
                 <Avatar color={domain.type === "Domain" ? "blue" : "teal"}>
@@ -170,6 +171,45 @@ export const WithSummary: Story = {
                 <Text>
                   {invoice.date} - {invoice.amount}
                 </Text>
+              </ListItemView>
+            )}
+          </InvoiceList.Item>
+        </InvoiceList.List>
+      </Section>
+    );
+  },
+};
+
+export const WithAccordion: Story = {
+  render: () => {
+    const InvoiceList = typedList<{
+      id: string;
+      date: string;
+      amount: string;
+    }>();
+
+    return (
+      <Section>
+        <Heading>Invoices</Heading>
+        <InvoiceList.List batchSize={5} aria-label="Invoices" accordion>
+          <InvoiceList.StaticData
+            data={[
+              { id: "RG100000", date: "1.9.2024", amount: "25,00 €" },
+              { id: "RG100001", date: "12.9.2024", amount: "12,00 €" },
+              { id: "RG100002", date: "3.10.2024", amount: "4,00 €" },
+            ]}
+          />
+          <InvoiceList.Item
+            defaultExpanded={(invoice) => invoice.id === "RG100001"}
+          >
+            {(invoice) => (
+              <ListItemView>
+                <Heading>{invoice.id}</Heading>
+                <Content slot="bottom">
+                  <Text>
+                    {invoice.date} - {invoice.amount}
+                  </Text>
+                </Content>
               </ListItemView>
             )}
           </InvoiceList.Item>

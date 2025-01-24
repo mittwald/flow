@@ -1,10 +1,8 @@
-import "@testing-library/jest-dom/vitest";
 import { render, screen } from "@testing-library/react";
 import React, { act } from "react";
 import Action from "@/components/Action";
 import { Button } from "@/components/Button";
 import type { Mock } from "vitest";
-import { beforeEach, vitest } from "vitest";
 import userEvent from "@/lib/dev/vitestUserEvent";
 
 const asyncActionDuration = 700;

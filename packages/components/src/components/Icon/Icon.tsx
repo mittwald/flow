@@ -12,9 +12,8 @@ type SvgAttributeProps = SVGAttributes<SVGSVGElement>;
 export interface IconProps
   extends PropsWithChildren<Omit<SvgAttributeProps, "name">>,
     FlowComponentProps {
-  /** @default "m" */
+  /** The size of the icon. @default "m" */
   size?: "s" | "m" | "l";
-  color?: "light" | "dark";
 }
 
 export const Icon = flowComponent("Icon", (props) => {
@@ -23,7 +22,6 @@ export const Icon = flowComponent("Icon", (props) => {
     "aria-label": ariaLabel,
     children,
     size = "m",
-    color,
     refProp: ignoredRef,
     ...svgAttributes
   } = props;
@@ -35,12 +33,7 @@ export const Icon = flowComponent("Icon", (props) => {
     "aria-hidden": !ariaLabel,
     "aria-label": ariaLabel,
 
-    className: clsx(
-      styles.icon,
-      className,
-      styles[`size-${size}`],
-      color && styles[color],
-    ),
+    className: clsx(styles.icon, className, styles[`size-${size}`]),
   };
 
   const isCustomSvgString = typeof children === "string";

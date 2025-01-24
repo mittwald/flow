@@ -11,6 +11,9 @@ import { useEffect } from "react";
 import { times } from "remeda";
 import { IncrementalLoaderState } from "@/components/List/model/loading/IncrementalLoaderState";
 import { hash } from "object-code";
+import type { PropertyName } from "@/components/List/model/types";
+
+type AsyncResourceLoadingState = AsyncResource["state"]["value"];
 
 const emptyData: never[] = [];
 
@@ -21,6 +24,7 @@ export class IncrementalLoader<T> {
   public readonly manualFiltering: boolean;
   public readonly manualPagination: boolean;
   public readonly loaderState: IncrementalLoaderState<T>;
+  public readonly staticDataProperties: PropertyName<T>[] = [];
 
   private constructor(list: List<T>, shape: IncrementalLoaderShape<T> = {}) {
     const { source } = shape;
@@ -50,6 +54,8 @@ export class IncrementalLoader<T> {
     this.manualSorting = manualSorting ?? this.manualPagination;
     this.list.filters.forEach((f) => f.onFilterUpdated(() => this.reset()));
     this.list.search?.onUpdated(() => this.reset());
+
+    this.initStaticDataProperties();
   }
 
   public static useNew<T>(
@@ -57,6 +63,27 @@ export class IncrementalLoader<T> {
     shape: IncrementalLoaderShape<T> = {},
   ): IncrementalLoader<T> {
     return new IncrementalLoader(list, shape);
+  }
+
+  private initStaticDataProperties() {
+    const addPropertiesOfDataEntry = (data: unknown) => {
+      if (typeof data !== "object" || data === null) {
+        return;
+      }
+
+      (Object.keys(data) as PropertyName<T>[])
+        .filter((p) => !this.staticDataProperties.includes(p))
+        .forEach((p) => {
+          this.staticDataProperties.push(p);
+        });
+    };
+
+    if ("staticData" in this.dataSource) {
+      this.dataSource.staticData
+        // collect properties from just the first 100 items
+        .slice(0, 100)
+        .forEach(addPropertiesOfDataEntry);
+    }
   }
 
   private reset(): void {
@@ -97,15 +124,16 @@ export class IncrementalLoader<T> {
     asyncResource: AsyncResource<DataLoaderResult<T>>,
     batchIndex: number,
   ): void {
-    useEffect(() => {
+    const setNewState = (newState: AsyncResourceLoadingState) => {
       this.loaderState.setBatchLoadingState(
         batchIndex,
-        asyncResource.state.value,
+        this.loaderState.isBatchLoaded(batchIndex) ? "loaded" : newState,
       );
+    };
 
-      return asyncResource.state.observe((newState) => {
-        this.loaderState.setBatchLoadingState(batchIndex, newState);
-      });
+    useEffect(() => {
+      setNewState(asyncResource.state.value);
+      return asyncResource.state.observe(setNewState);
     }, [asyncResource, batchIndex]);
   }
 

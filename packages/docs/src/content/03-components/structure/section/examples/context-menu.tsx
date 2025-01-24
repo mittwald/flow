@@ -35,25 +35,23 @@ import Text from "@mittwald/flow-react-components/Text";
     <Button color="danger">Deaktivieren</Button>
   </Header>
 
-  <Content>
-    <ColumnLayout>
-      <LabeledValue>
-        <Label>Projektname</Label>
-        <Content>Dolce Vita</Content>
-      </LabeledValue>
-      <LabeledValue>
-        <Label>Short-ID</Label>
-        <Content>p-lol3qe</Content>
-        <CopyButton text="p-lol3qe" />
-      </LabeledValue>
-      <LabeledValue>
-        <Label>Projektdomain</Label>
-        <Link>
-          <Text>p-lol3qe.project.space</Text>
-          <IconExternalLink />
-        </Link>
-        <CopyButton text="p-lol3qe.project.space" />
-      </LabeledValue>
-    </ColumnLayout>
-  </Content>
+  <ColumnLayout>
+    <LabeledValue>
+      <Label>Projektname</Label>
+      <Content>Dolce Vita</Content>
+    </LabeledValue>
+    <LabeledValue>
+      <Label>Short-ID</Label>
+      <Content>p-lol3qe</Content>
+      <CopyButton text="p-lol3qe" />
+    </LabeledValue>
+    <LabeledValue>
+      <Label>Projektdomain</Label>
+      <Link>
+        <Text>p-lol3qe.project.space</Text>
+        <IconExternalLink />
+      </Link>
+      <CopyButton text="p-lol3qe.project.space" />
+    </LabeledValue>
+  </ColumnLayout>
 </Section>;

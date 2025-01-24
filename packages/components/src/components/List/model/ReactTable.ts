@@ -50,12 +50,22 @@ export class ReactTable<T> {
     this.table = this.useReactTable(onChange, tableOptions);
   }
 
+  public get searchString(): SearchValue {
+    return this.table.getState().globalFilter;
+  }
+
   public static useNew<T>(
     list: List<T>,
     onChange?: OnListChanged<T>,
     tableOptions: Partial<TableOptions<T>> = {},
   ): ReactTable<T> {
     return new ReactTable<T>(list, onChange, tableOptions);
+  }
+
+  public getTableColumn(property: PropertyName<T>): Column<T> {
+    const column = this.table.getColumn(property as string);
+    invariant(!!column, `Column #${property} is not defined`);
+    return column;
   }
 
   private useReactTable(
@@ -121,16 +131,6 @@ export class ReactTable<T> {
     this.updateSortingState([...additionalHiddenSorting, ...newSortingState]);
   }
 
-  public get searchString(): SearchValue {
-    return this.table.getState().globalFilter;
-  }
-
-  public getTableColumn(property: PropertyName<T>): Column<T> {
-    const column = this.table.getColumn(property as string);
-    invariant(!!column, `Column #${property} is not defined`);
-    return column;
-  }
-
   private getTableColumnDefs(): ColumnDef<T>[] {
     const columnDefsMap = new Map<PropertyName<T>, ColumnDef<T>>();
 
@@ -144,6 +144,7 @@ export class ReactTable<T> {
         accessorKey: p as string,
         enableSorting: false,
         enableColumnFilter: false,
+        sortingFn: "alphanumeric",
       };
 
       columnDefsMap.set(p, newDef);
@@ -157,6 +158,10 @@ export class ReactTable<T> {
     this.list.sorting.forEach((s) =>
       s.updateTableColumnDef(getOrCreateColumnDef(s.property)),
     );
+
+    this.list.loader.staticDataProperties.forEach((property) => {
+      getOrCreateColumnDef(property);
+    });
 
     return Array.from(columnDefsMap.values());
   }

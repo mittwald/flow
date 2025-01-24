@@ -65,12 +65,7 @@ const meta: Meta<typeof Field> = {
     return (
       <Form form={form} onSubmit={handleOnSubmit}>
         <Section>
-          <Field
-            name="firstName"
-            rules={{
-              required: "Please enter your name",
-            }}
-          >
+          <Field name="firstName">
             <TextField>
               <Label>First name</Label>
               <FieldDescription>The first part of your name</FieldDescription>

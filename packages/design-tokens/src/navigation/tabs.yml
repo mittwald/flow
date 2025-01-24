@@ -1,0 +1,25 @@
+tabs:
+  padding:
+    value: "{size-px.m}"
+  background-color:
+    default:
+      value: "{neutral-soft-background-color.default}"
+    hover:
+      value: "{neutral-soft-background-color.hover}"
+    pressed:
+      value: "{neutral-soft-background-color.pressed}"
+    selected:
+      value: "{neutral.color.100}"
+  color:
+    value: "{neutral-soft-content-color.default}"
+  disabled-color:
+    value: "{disabled-soft-content-color}"
+  font-weight:
+    selected:
+      value: "{font-weight.bold}"
+  spacing:
+    value: "{size-rem.s}"
+
+tab-panel:
+  padding:
+    value: "{size-px.xl}"

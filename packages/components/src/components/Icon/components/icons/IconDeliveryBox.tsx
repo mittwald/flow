@@ -1,7 +1,7 @@
 /* eslint-disable */
 /* auto-generated file */
 import React, { ComponentProps, FC } from "react";
-import { IconInbox as Tabler } from "@tabler/icons-react";
+import { IconMailShare as Tabler } from "@tabler/icons-react";
 import { Icon } from "@/components/Icon";
 
 export const IconDeliveryBox: FC<

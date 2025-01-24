@@ -4,7 +4,7 @@ import { IconDanger } from "@mittwald/flow-react-components/Icons";
 import Text from "@mittwald/flow-react-components/Text";
 import Button from "@mittwald/flow-react-components/Button";
 
-<IllustratedMessage color="negative">
+<IllustratedMessage color="danger">
   <IconDanger />
   <Heading>Kein Zugriff</Heading>
   <Text>

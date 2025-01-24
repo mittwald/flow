@@ -8,7 +8,7 @@ import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import type { OverlayController } from "@/lib/controller/overlay";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import { ModalOverlay } from "@/components/ModalOverlay";
+import { Overlay } from "@/components/Overlay";
 import { Header } from "@/components/Header";
 import { Action } from "@/components/Action";
 import { Button } from "@/components/Button";
@@ -19,12 +19,23 @@ export interface ModalProps
   extends PropsWithChildren,
     FlowComponentProps,
     PropsWithClassName {
-  /** @default "s" */
+  /** The size of the modal. @default "s" */
   size?: "s" | "m";
+  /** Whether the modal should be displayed as an off canvas. */
   offCanvas?: boolean;
+  /**
+   * Whether the off canvas should be displayed on the right or left side of the
+   * screen. @default "right"
+   */
   offCanvasOrientation?: "left" | "right";
+  /** An overlay controller to control the modal state. */
   controller?: OverlayController;
+  /**
+   * Accepts "actionConfirm" to use the modal as a confirmation modal for an
+   * action.
+   */
   slot?: string;
+  /** Whether the modal can be closed by clicking outside of it. */
   isDismissable?: boolean;
 }
 
@@ -68,27 +79,26 @@ export const Modal = flowComponent("Modal", (props) => {
   };
 
   return (
-    <ModalOverlay className={rootClassName} controller={controller} {...rest}>
+    <Overlay className={rootClassName} controller={controller} {...rest}>
       <PropsContextProvider props={propsContext}>
         <TunnelProvider>
           <Header className={styles.header}>
             <TunnelExit id="heading" />
-            {offCanvas && (
-              <Action closeOverlay="Modal">
-                <Button
-                  variant="plain"
-                  color="secondary"
-                  className={styles.closeButton}
-                >
-                  <IconClose />
-                </Button>
-              </Action>
-            )}
+            <Action closeOverlay="Modal">
+              <Button
+                variant="plain"
+                color="secondary"
+                className={styles.closeButton}
+                onPress={controller?.close}
+              >
+                <IconClose />
+              </Button>
+            </Action>
           </Header>
           {children}
         </TunnelProvider>
       </PropsContextProvider>
-    </ModalOverlay>
+    </Overlay>
   );
 });
 

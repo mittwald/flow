@@ -1,13 +1,22 @@
 .actionGroup {
-  gap: var(--action-group--button-to-button-spacing--s);
   display: flex;
+  align-items: center;
 
   .primary {
     order: 3;
+
+    &:only-child {
+      margin-left: auto;
+    }
   }
 
   .secondary {
+    margin-left: auto;
     order: 2;
+
+    ~ .secondary {
+      margin-left: unset;
+    }
   }
 
   .abort {
@@ -53,7 +62,7 @@
   @mixin spacing($spacing) {
     &.#{$spacing} {
       .actionGroup {
-        gap: var(--action-group--button-to-button-spacing--#{$spacing});
+        gap: var(--action-group--spacing--#{$spacing});
       }
     }
   }

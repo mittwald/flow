@@ -15,7 +15,9 @@ export interface ActionGroupProps
   extends PropsWithChildren,
     FlowComponentProps,
     PropsWithClassName {
+  /** Whether the breakpoints for a compact version should be ignored. */
   ignoreBreakpoint?: boolean;
+  /** The spacing between the buttons inside the action group. @default "m" */
   spacing?: "s" | "m";
 }
 
@@ -42,6 +44,12 @@ export const ActionGroup = flowComponent("ActionGroup", (props) => {
       className: dynamic((props) => {
         const slot = getActionGroupSlot(props);
         return clsx(props.className, styles[slot]);
+      }),
+    },
+    Switch: {
+      labelPosition: "leading",
+      className: dynamic((props) => {
+        return clsx(props.className, props.slot && styles[props.slot]);
       }),
     },
   };

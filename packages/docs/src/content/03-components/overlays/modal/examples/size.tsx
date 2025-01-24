@@ -9,7 +9,6 @@ import ActionGroup from "@mittwald/flow-react-components/ActionGroup";
 import Button from "@mittwald/flow-react-components/Button";
 import Heading from "@mittwald/flow-react-components/Heading";
 import Action from "@mittwald/flow-react-components/Action";
-import Option from "@mittwald/flow-react-components/Option";
 import { sleepLong } from "@/content/03-components/actions/action/examples/lib";
 import Section from "@mittwald/flow-react-components/Section";
 import {
@@ -17,16 +16,22 @@ import {
   IconSettings,
   IconSshSftp,
 } from "@mittwald/flow-react-components/Icons";
-import { Select } from "@mittwald/flow-react-components/Select";
+import {
+  Option,
+  Select,
+} from "@mittwald/flow-react-components/Select";
 import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
 import { Switch } from "@mittwald/flow-react-components/Switch";
 import Link from "@mittwald/flow-react-components/Link";
 import { DatePicker } from "@mittwald/flow-react-components/DatePicker";
 import FieldDescription from "@mittwald/flow-react-components/FieldDescription";
 import RadioGroup, {
-  Radio,
   RadioButton,
 } from "@mittwald/flow-react-components/RadioGroup";
+import {
+  Segment,
+  SegmentedControl,
+} from "@mittwald/flow-react-components/SegmentedControl";
 
 export default () => {
   return (
@@ -233,13 +238,10 @@ export default () => {
                 Wähle zwischen der Authentifikation per
                 Passwort oder über einen SSH-Key.
               </Text>
-              <RadioGroup
-                variant="segmented"
-                value="password"
-              >
-                <Radio value="password">Passwort</Radio>
-                <Radio value="ssh">SSH-Key</Radio>
-              </RadioGroup>
+              <SegmentedControl value="password">
+                <Segment value="password">Passwort</Segment>
+                <Segment value="ssh">SSH-Key</Segment>
+              </SegmentedControl>
               <ColumnLayout s={[1, 1]}>
                 <TextField isRequired>
                   <Label>Passwort</Label>

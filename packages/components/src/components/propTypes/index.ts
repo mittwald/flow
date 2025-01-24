@@ -5,6 +5,7 @@ import type { LabelProps } from "@/components/Label";
 import type { ContentProps } from "@/components/Content";
 import type { LayoutCardProps } from "@/components/LayoutCard";
 import type { LinkProps } from "@/components/Link";
+import type { LightBoxProps } from "@/components/LightBox";
 import type { FieldErrorProps } from "@/components/FieldError";
 import type { FieldDescriptionProps } from "@/components/FieldDescription";
 import type { AlertProps } from "@/components/Alert";
@@ -19,7 +20,7 @@ import type { ActionGroupProps } from "@/components/ActionGroup";
 import type { AvatarProps } from "@/components/Avatar";
 import type { ActionProps } from "@/components/Action";
 import type { ContextMenuProps, MenuItemProps } from "@/components/ContextMenu";
-import type { SelectProps } from "@/components/Select";
+import type { OptionProps, SelectProps } from "@/components/Select";
 import type {
   RadioButtonProps,
   RadioGroupProps,
@@ -50,8 +51,12 @@ import type { DateRangePickerProps } from "@/components/DateRangePicker";
 import type { TimeFieldProps } from "@/components/TimeField";
 import type { AlertIconProps } from "@/components/AlertIcon";
 import type { ListSummaryProps } from "@/components/List/components/ListSummary/ListSummary";
-import type { ComboBoxProps } from "@/components/ComboBox";
-import type { OptionProps } from "@/components/Option";
+import type { SegmentedControlProps } from "@/components/SegmentedControl";
+import type { SegmentProps } from "@/components/SegmentedControl/components/Segment";
+import type { FileCardProps } from "@/components/FileCard";
+import type { FileFieldProps } from "@/components/FileField";
+import type { AlignProps } from "@/components/Align";
+import type { CountryOptionsProps } from "@/components/Select/components/CountryOptions";
 
 export * from "./types";
 
@@ -61,7 +66,7 @@ export interface FlowComponentPropsTypes {
   Alert: AlertProps;
   AlertBadge: AlertBadgeProps;
   AlertIcon: AlertIconProps;
-  ComboBox: ComboBoxProps;
+  Align: AlignProps;
   Avatar: AvatarProps;
   Badge: BadgeProps;
   Button: ButtonProps;
@@ -73,12 +78,16 @@ export interface FlowComponentPropsTypes {
   ContextMenuSection: ContextMenuSectionProps;
   ContextMenuTrigger: OverlayTriggerProps;
   ContextualHelp: ContextualHelpProps;
+  ContextualHelpTrigger: OverlayTriggerProps;
   CopyButton: CopyButtonProps;
   CounterBadge: CounterBadgeProps;
+  CountryOptions: CountryOptionsProps;
   DatePicker: DatePickerProps<Aria.DateValue>;
   DateRangePicker: DateRangePickerProps<Aria.DateValue>;
   FieldDescription: FieldDescriptionProps;
   FieldError: FieldErrorProps;
+  FileCard: FileCardProps;
+  FileField: FileFieldProps;
   Header: HeaderProps;
   Heading: HeadingProps;
   Icon: IconProps;
@@ -86,6 +95,7 @@ export interface FlowComponentPropsTypes {
   Initials: InitialsProps;
   Label: LabelProps;
   LayoutCard: LayoutCardProps;
+  LightBox: LightBoxProps;
   Link: LinkProps;
   List: ListProps<never>;
   ListSummary: ListSummaryProps;
@@ -101,6 +111,8 @@ export interface FlowComponentPropsTypes {
   RadioGroup: RadioGroupProps;
   SearchField: SearchFieldProps;
   Section: SectionProps;
+  Segment: SegmentProps;
+  SegmentedControl: SegmentedControlProps;
   Select: SelectProps;
   Slider: SliderProps;
   Switch: SwitchProps;
@@ -118,11 +130,11 @@ const propsContextSupportingComponentsMap: Record<
 > = {
   Action: true,
   ActionGroup: true,
+  Avatar: true,
   Alert: true,
   AlertBadge: true,
   AlertIcon: true,
-  ComboBox: true,
-  Avatar: true,
+  Align: true,
   Badge: true,
   Button: true,
   Checkbox: true,
@@ -133,12 +145,16 @@ const propsContextSupportingComponentsMap: Record<
   ContextMenuSection: true,
   ContextMenuTrigger: true,
   ContextualHelp: true,
+  ContextualHelpTrigger: true,
   CopyButton: true,
   CounterBadge: true,
+  CountryOptions: true,
   DatePicker: true,
   DateRangePicker: true,
   FieldDescription: true,
   FieldError: true,
+  FileCard: true,
+  FileField: true,
   Header: true,
   Heading: true,
   Icon: true,
@@ -146,6 +162,7 @@ const propsContextSupportingComponentsMap: Record<
   Initials: true,
   Label: true,
   LayoutCard: true,
+  LightBox: true,
   Link: true,
   List: true,
   ListSummary: true,
@@ -161,6 +178,8 @@ const propsContextSupportingComponentsMap: Record<
   RadioGroup: true,
   SearchField: true,
   Section: true,
+  Segment: true,
+  SegmentedControl: true,
   Select: true,
   Slider: true,
   Switch: true,

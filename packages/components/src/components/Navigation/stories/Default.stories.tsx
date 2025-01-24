@@ -9,7 +9,6 @@ import { Text } from "@/components/Text";
 import { Link } from "@/components/Link";
 import { Navigation, NavigationGroup } from "@/components/Navigation";
 import Label from "@/components/Label";
-import { Separator } from "@/components/Separator";
 
 const meta: Meta<typeof Navigation> = {
   title: "Navigation/Navigation",
@@ -75,30 +74,6 @@ export const WithGroups: Story = {
     </Navigation>
   ),
 };
-
-export const WithSeparator: Story = {
-  render: (props) => (
-    <Navigation aria-label="Main navigation" {...props}>
-      <NavigationGroup>
-        <Label>General</Label>
-        <Link href="#">Dashboard</Link>
-        <Link href="#" aria-current="page">
-          Performance
-        </Link>
-      </NavigationGroup>
-
-      <Separator />
-
-      <NavigationGroup>
-        <Label>Components</Label>
-        <Link href="#">Apps</Link>
-        <Link href="#">Databases</Link>
-        <Link href="#">Domains</Link>
-      </NavigationGroup>
-    </Navigation>
-  ),
-};
-
 export const WithCollapsableGroups: Story = {
   render: (props) => (
     <Navigation aria-label="Main navigation" {...props}>
@@ -115,6 +90,33 @@ export const WithCollapsableGroups: Story = {
         <Link href="#">Apps</Link>
         <Link href="#">Databases</Link>
         <Link href="#">Domains</Link>
+      </NavigationGroup>
+    </Navigation>
+  ),
+};
+export const MixedGroups: Story = {
+  render: (props) => (
+    <Navigation aria-label="Main navigation" {...props}>
+      <NavigationGroup collapsable>
+        <Label>General</Label>
+        <Link href="#">Dashboard</Link>
+        <Link href="#" aria-current="page">
+          Performance
+        </Link>
+      </NavigationGroup>
+
+      <NavigationGroup>
+        <Label>General</Label>
+        <Link href="#">Apps</Link>
+        <Link href="#">Databases</Link>
+        <Link href="#">Domains</Link>
+      </NavigationGroup>
+
+      <NavigationGroup collapsable>
+        <Label>Components</Label>
+        <Link href="#">Testsite</Link>
+        <Link href="#">Testsite</Link>
+        <Link href="#">Testsite</Link>
       </NavigationGroup>
     </Navigation>
   ),

@@ -7,12 +7,12 @@ import { PropsContextProvider } from "@/lib/propsContext";
 
 export interface IllustratedMessageProps
   extends PropsWithChildren<ComponentProps<"div">> {
-  /** @default "info" */
-  color?: "info" | "negative" | "light" | "dark";
+  /** The color of the illustrated message. @default "primary" */
+  color?: "primary" | "danger" | "light" | "dark";
 }
 
 export const IllustratedMessage: FC<IllustratedMessageProps> = (props) => {
-  const { className, children, color = "info", ...rest } = props;
+  const { className, children, color = "primary", ...rest } = props;
 
   const rootClassName = clsx(styles.illustratedMessageContainer, className);
 
@@ -23,11 +23,9 @@ export const IllustratedMessage: FC<IllustratedMessageProps> = (props) => {
     Icon: {
       className: styles.icon,
       size: "l",
-      color: lightOrDarkColor,
     },
     Heading: {
       className: styles.heading,
-      color: lightOrDarkColor,
     },
     Text: {
       className: styles.text,
@@ -35,6 +33,10 @@ export const IllustratedMessage: FC<IllustratedMessageProps> = (props) => {
     },
     Button: {
       color: lightOrDarkColor ?? "accent",
+    },
+    ActionGroup: {
+      ignoreBreakpoint: true,
+      className: styles.actionGroup,
     },
   };
 

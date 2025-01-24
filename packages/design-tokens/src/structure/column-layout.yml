@@ -1,0 +1,10 @@
+column-layout:
+  gap:
+    s:
+      value: "{size-px.s}"
+    m:
+      value: "{size-px.m}"
+    l:
+      value: "{size-px.l}"
+    xl:
+      value: "{size-px.xl}"

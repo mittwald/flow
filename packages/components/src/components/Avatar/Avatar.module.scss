@@ -6,7 +6,7 @@
   flex-shrink: 0;
 
   background-color: var(--background-color);
-  color: var(--content-accent-color);
+  color: var(--content-color);
 
   display: flex;
   align-items: center;
@@ -47,12 +47,11 @@
 
   /* Variants */
   @mixin color($color) {
+    &.dynamic-#{$color}:has(.initials),
     &.#{$color} {
-      --background-color: var(--initials--color-#{$color}-background-color);
-      --content-color: var(--initials--color-#{$color}-content-color);
-      --content-accent-color: var(
-        --initials--color-#{$color}-content-accent-color
-      );
+      --background-color: var(--decorative--#{$color}-background-color);
+      --content-color: var(--decorative--#{$color}-content-color);
+      --content-accent-color: var(--decorative--#{$color}-content-accent-color);
     }
   }
 

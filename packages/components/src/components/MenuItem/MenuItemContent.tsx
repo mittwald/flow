@@ -10,13 +10,11 @@ import {
   IconRadioOff,
   IconRadioOn,
 } from "@/components/Icon/components/icons";
-import { Text } from "@/components/Text";
-import { deepHas } from "@/lib/react/deepHas";
-import { Wrap } from "@/components/Wrap";
 import clsx from "clsx";
+import { Switch } from "@/components/Switch";
 
 interface Props extends Aria.MenuItemRenderProps, PropsWithChildren {
-  selectionVariant?: "control" | "navigation";
+  selectionVariant?: "control" | "navigation" | "switch";
 }
 
 export const MenuItemContent: FC<Props> = (props) => {
@@ -34,18 +32,28 @@ export const MenuItemContent: FC<Props> = (props) => {
     Text: {
       className: styles.text,
     },
+    Avatar: {
+      className: styles.avatar,
+    },
   };
 
   const controlIconPropsContext: PropsContext = {
     Icon: {
       className: clsx(styles.controlIcon, styles.icon),
     },
+    Switch: {
+      className: clsx(styles.controlIcon, styles.switch),
+    },
   };
 
   const selectionIcon =
     selectionMode === "none" ||
-    selectionVariant === "navigation" ? null : selectionMode === "single" &&
+    selectionVariant === "navigation" ? null : selectionVariant === "switch" &&
       isSelected ? (
+      <Switch isReadOnly isSelected />
+    ) : selectionVariant === "switch" && !isSelected ? (
+      <Switch isReadOnly />
+    ) : selectionMode === "single" && isSelected ? (
       <IconRadioOn />
     ) : selectionMode === "single" && !isSelected ? (
       <IconRadioOff />
@@ -55,17 +63,13 @@ export const MenuItemContent: FC<Props> = (props) => {
       <IconCheckboxEmpty />
     );
 
-  const hasText = deepHas(children, Text);
-
   return (
     <>
       <PropsContextProvider props={controlIconPropsContext}>
         {selectionIcon}
       </PropsContextProvider>
       <PropsContextProvider props={propsContext}>
-        <Wrap if={!hasText}>
-          <Text>{children}</Text>
-        </Wrap>
+        {children}
       </PropsContextProvider>
     </>
   );

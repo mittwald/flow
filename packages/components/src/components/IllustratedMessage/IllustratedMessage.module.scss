@@ -7,10 +7,7 @@
   flex-direction: column;
   align-items: center;
   padding: var(--illustrated-message--padding);
-
-  @container (max-width: 550px) {
-    padding: var(--illustrated-message--padding--mobile);
-  }
+  row-gap: var(--illustrated-message--spacing);
 
   /* Elements */
 
@@ -19,25 +16,36 @@
     margin-bottom: var(--illustrated-message--icon-to-heading-spacing);
   }
 
-  .heading {
-    margin-bottom: var(--illustrated-message--heading-to-text-spacing);
+  .text, .heading {
+    max-width: var(--text--max-width);
     text-align: center;
   }
 
-  .text {
-    margin-bottom: var(--illustrated-message--text-to-button-spacing);
-    text-align: center;
-  }
+  .actionGroup [role="group"] {
+    justify-content: center;
 
-  /* Negative */
-
-  &.negative {
-    :where(.icon) {
-      color: var(--illustrated-message--negative-icon-color);
-    }
-
-    .heading {
-      color: var(--illustrated-message--negative-heading-color);
+    button {
+      margin: 0;
     }
   }
+
+  /* Color */
+
+  @mixin status($color) {
+    &.#{$color} {
+      :where(.icon) {
+        color: var(--illustrated-message--#{$color}-icon-color);
+      }
+
+      .heading {
+        color: var(--illustrated-message--#{$color}-heading-color);
+      }
+
+    }
+  }
+
+  @include status(primary);
+  @include status(danger);
+  @include status(dark);
+  @include status(light);
 }

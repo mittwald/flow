@@ -1,0 +1,91 @@
+# Best Practices
+
+Ein Layout fügt verschiedene Elemente der Benutzeroberfläche zu einer logischen
+Struktur zusammen. Die folgenden Punkte sind hilfreich, um ein gutes Layout zu
+erstellen:
+
+- Ein Layout sollte den Fokus immer auf die Aufgaben des Users legen.
+- Ein konsistentes Layout hilft dem User, die Website schneller zu verstehen, da
+  nicht ständig neue Layouts erlernt werden müssen.
+- Der Fokus des Layouts sollte auf dem Content-Bereich liegen, da hier die
+  Hauptaktionen des Users liegen. Achte hier besonders auf die strukturelle
+  Hierarchie und die inhaltlichen Beziehungen des Contents.
+- Ein Layout sollte immer responsiv sein, damit die Benutzeroberfläche auch auf
+  kleineren Bildschirmen funktioniert. Im Layout ist grade das Zusammenspiel von
+  Header, Side-Navigation und Content-Bereich für die Responsivität relevant.
+
+---
+
+# Genereller Aufbau
+
+Grob lassen sich die meisten Layouts, die mit Flow erstellt werden können, in 4
+Bereiche einteilen: **Header**, **Side-Navigation**, **Content** und
+**Overlay**. Das Layout innerhalb dieser Bereiche wird durch verschiedene
+Components und deren Komposition bestimmt. In unseren Components ist das
+[Spacing](/02-foundations/02-structure/02-spacing) bereits integriert.
+
+Verschiedene Layouts mit Code zum Kopieren finden sich unter Code Templates.
+
+<DoAndDont>
+  <Info example="general-layout" heading="Layout-Aufbau">
+    Grobes Layout einer Seite. Eingeteilt in Header-, Side-Navigation- und
+    Content-Bereich.
+  </Info>
+  <MStudio example="mStudio-layout" heading="mStudio Aufbau">
+    Grobes Layout des mStudios. Darstellung mit Primary und Secondary
+    Navigation.
+  </MStudio>
+</DoAndDont>
+
+## Header
+
+Der Header-Bereich befindet sich im oberen Bereich des Layouts und ist auf jeder
+Seite identisch. Er kann das Logo sowie eine
+[HeaderNavigation](/03-components/navigation/header-navigation) enthalten. Ein
+Hauptbestandteil der HeaderNavigation sind primäre Navigationspunkte. Ergänzend
+gibt es [Buttons](/03-components/actions/button), die Overlays oder
+[ContextMenus](/03-components/actions/context-menu) öffnen, wie beispielsweise
+für die Suche, das NotificationCenter oder das ProfilMenu. Im Header-Bereich
+sollten ausschließlich wichtige Elemente angezeigt werden, die auf allen Seiten
+sichtbar sein müssen.
+
+## Side-Navigation
+
+Die Side-Navigation befindet sich entweder direkt links neben dem
+Content-Bereich oder fest am linken Bildschirmrand. Sie muss nicht nur aus einer
+Navigation bestehen, sondern kann auch aus einer Primary und einer Secondary
+Navigation bestehen.
+
+Zum Aufbau einer Side-Navigation kann eine
+[LayoutCard](/03-components/structure/layout-card) mit der Component
+[Navigation](/03-components/navigation/navigation) gefüllt werden.
+
+## Content
+
+Der Content-Bereich stellt dem User Informationen zur Verfügung, damit er seine
+Aufgabe erfüllen kann. Der Inhalt variiert von Seite zu Seite, es wird jedoch
+empfohlen, den Inhalt nach einem wiederkehrenden Muster anzuordnen, das bereits
+auf anderen Seiten verwendet wurde.
+
+Die Navigationsstruktur im Content-Bereich folgt ebenfalls einem klaren Muster.
+Im Content-Bereich können [Tabs](/03-components/navigation/tabs) und
+[List](/03-components/structure/list) verwendet werden, um die Inhalte zu teilen
+oder in die Tiefe zu navigieren. Bei der Navigation in tiefere Ebenen, z. B.
+über eine List, bietet eine [Breadcrumb](/03-components/navigation/breadcrumb)
+eine Orientierungshilfe.
+
+Der Content wird von einer [LayoutCard](/03-components/structure/layout-card)
+umschlossen. Um innerhalb der LayoutCard die richtigen Abstände in vertikaler
+und horizontaler Richtung sicherzustellen, sollten die Layout-Components
+[Section](/03-components/structure/section) und
+[ColumnLayout](/03-components/structure/column-layout) verwendet werden.
+
+## Overlay
+
+Ein Overlay öffnet sich über der eigentlichen Seite. Größere Overlays wie
+[Modals](/03-components/overlays/modal) und
+[OffCanvas](/03-components/overlays/modal) erhalten zusätzlich einen Backdrop,
+damit sich der User besser auf den angezeigten Inhalt konzentrieren kann.
+Andere, kleinere Overlays wie [ContextMenu](/03-components/actions/context-menu)
+oder [Tooltip](/03-components/overlays/tooltip) erhalten keinen Backdrop für die
+im Hintergrund angezeigte Seite.

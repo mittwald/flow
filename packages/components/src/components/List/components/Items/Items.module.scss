@@ -1,0 +1,29 @@
+.items {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--list-item--corner-radius);
+  border-color: var(--list-item--border-color);
+  border-width: var(--list-item--border-width);
+  border-style: var(--list-item--border-style);
+  overflow: hidden;
+
+  &:empty {
+    display: none;
+  }
+
+  &.isLoading {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  &[data-empty="true"] {
+    border: none;
+  }
+
+  &.tiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    border: none;
+    gap: var(--list-item--spacing);
+  }
+}

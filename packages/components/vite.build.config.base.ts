@@ -27,7 +27,7 @@ export const buildConfig = (opts: Options) => {
           }),
         ];
 
-  const cssCodeSplit = mode === "cssChunks" ? true : false;
+  const cssCodeSplit = mode === "cssChunks";
 
   const entryPoints: LibraryOptions["entry"] = {
     Accordion: "./src/components/Accordion/index.ts",
@@ -37,6 +37,7 @@ export const buildConfig = (opts: Options) => {
     Alert: "./src/components/Alert/index.ts",
     AlertBadge: "./src/components/AlertBadge/index.ts",
     AlertIcon: "./src/components/AlertIcon/index.ts",
+    Align: "./src/components/Align/index.ts",
     Avatar: "./src/components/Avatar/index.ts",
     Badge: "./src/components/Badge/index.ts",
     Breadcrumb: "./src/components/Breadcrumb/index.ts",
@@ -58,6 +59,9 @@ export const buildConfig = (opts: Options) => {
     EmulatedBoldText: "./src/components/EmulatedBoldText/index.ts",
     FieldDescription: "./src/components/FieldDescription/index.ts",
     FieldError: "./src/components/FieldError/index.ts",
+    FileField: "./src/components/FileField/index.ts",
+    FileCard: "./src/components/FileCard/index.ts",
+    FileCardList: "./src/components/FileCardList/index.ts",
     Header: "./src/components/Header/index.ts",
     HeaderNavigation: "./src/components/HeaderNavigation/index.ts",
     Heading: "./src/components/Heading/index.ts",
@@ -70,12 +74,15 @@ export const buildConfig = (opts: Options) => {
     Label: "./src/components/Label/index.ts",
     LabeledValue: "./src/components/LabeledValue/index.ts",
     LayoutCard: "./src/components/LayoutCard/index.ts",
+    LightBox: "./src/components/LightBox/index.ts",
     Link: "./src/components/Link/index.ts",
     List: "./src/components/List/index.ts",
     "List/ListLoaderAsyncResource":
       "./src/components/List/setupComponents/ListLoaderAsyncResource.ts",
     LoadingSpinner: "./src/components/LoadingSpinner/index.ts",
+    Markdown: "./src/components/Markdown/index.ts",
     MenuItem: "./src/components/MenuItem/index.ts",
+    Message: "./src/components/Message/index.ts",
     Modal: "./src/components/Modal/index.ts",
     Navigation: "./src/components/Navigation/index.ts",
     Notification: "./src/components/Notification/index.ts",
@@ -89,6 +96,7 @@ export const buildConfig = (opts: Options) => {
     Render: "./src/lib/react/components/Render/index.ts",
     SearchField: "./src/components/SearchField/index.ts",
     Section: "./src/components/Section/index.ts",
+    SegmentedControl: "./src/components/SegmentedControl/index.ts",
     Select: "./src/components/Select/index.ts",
     Separator: "./src/components/Separator/index.ts",
     SettingsProvider: "./src/components/SettingsProvider/index.ts",

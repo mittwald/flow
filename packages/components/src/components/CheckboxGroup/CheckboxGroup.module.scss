@@ -2,5 +2,13 @@
   order: 2;
   display: flex;
   flex-direction: column;
-  row-gap: var(--checkbox-group--checkbox-to-checkbox-spacing);
+  row-gap: var(--form-control--spacing-y);
+
+  :global(.flow--checkbox-button) {
+    width: auto;
+  }
+
+  &:empty {
+    display: none;
+  }
 }

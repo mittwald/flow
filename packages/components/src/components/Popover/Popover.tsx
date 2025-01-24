@@ -9,24 +9,32 @@ import styles from "./Popover.module.scss";
 
 export interface PopoverProps
   extends PropsWithChildren<Omit<Aria.PopoverProps, "children">> {
+  /**
+   * Whether the popover should display a tip, pointing towards the trigger
+   * element.
+   */
   withTip?: boolean;
+  /** Whether the popover contains a dialog. */
   isDialogContent?: boolean;
+  /** An overlay controller to control the popover state. */
   controller?: OverlayController;
-  contentClassName?: string;
+  /** A fixed width for the popover. */
   width?: string | number;
+  /** The popovers padding. @default "m" */
+  padding?: "s" | "m";
 }
 
 export const Popover = flowComponent("Popover", (props) => {
   const {
     children,
     className,
-    contentClassName,
     isDialogContent = false,
     controller: controllerFromProps,
     withTip,
     refProp: ref,
     defaultOpen = false,
     width,
+    padding = "m",
     ...rest
   } = props;
 
@@ -50,6 +58,7 @@ export const Popover = flowComponent("Popover", (props) => {
       ref={ref}
       isOpen={isOpen}
       onOpenChange={(isOpen) => controller.setOpen(isOpen)}
+      style={{ width }}
     >
       {withTip && (
         <Aria.OverlayArrow className={styles.tip}>
@@ -59,8 +68,10 @@ export const Popover = flowComponent("Popover", (props) => {
         </Aria.OverlayArrow>
       )}
       <ContentComponent
-        style={{ width }}
-        className={clsx(styles.content, contentClassName)}
+        className={clsx(
+          styles.content,
+          padding && styles[`padding-${padding}`],
+        )}
       >
         <OverlayContextProvider type="Popover" controller={controller}>
           {children}

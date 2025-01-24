@@ -22,8 +22,9 @@ export interface AvatarProps
   extends PropsWithChildren,
     PropsWithClassName,
     FlowComponentProps {
-  /** @default "m" */
+  /** The size of the avatar. @default "m" */
   size?: "xs" | "s" | "m" | "l";
+  /** The color of icons and initials inside the avatar. */
   color?: AvatarColors;
 }
 
@@ -34,7 +35,8 @@ export const Avatar = flowComponent("Avatar", (props) => {
     styles.avatar,
     styles[`size-${size}`],
     className,
-    styles[color ?? getColorFromChildren(children)],
+    styles[color ?? "blue"],
+    !color && styles[`dynamic-${getColorFromChildren(children)}`],
   );
 
   const propsContext: PropsContext = {

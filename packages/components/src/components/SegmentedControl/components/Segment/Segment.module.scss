@@ -1,0 +1,41 @@
+@use "@/styles/mixins/focus";
+@use "../../../../styles/mixins/formControl";
+
+.segment {
+  flex: 1;
+  display: grid;
+  column-gap: var(--form-control--spacing-x);
+  grid-template-areas: "label checkmark";
+  grid-template-columns: 1fr auto;
+  margin-right: -1px; /* Collapse borders */
+
+  @include formControl.formControl();
+
+  & {
+    border-radius: 0;
+  }
+
+  &:first-of-type {
+    border-start-start-radius: var(--form-control--corner-radius);
+    border-end-start-radius: var(--form-control--corner-radius);
+  }
+
+  &:last-of-type {
+    border-start-end-radius: var(--form-control--corner-radius);
+    border-end-end-radius: var(--form-control--corner-radius);
+    margin: 0;
+  }
+
+  .checkmark {
+    grid-area: checkmark;
+    display: none;
+  }
+
+  &[data-selected] {
+    z-index: 1;
+
+    .checkmark {
+      display: block;
+    }
+  }
+}

@@ -6,11 +6,12 @@ import { ClearPropsContext } from "@/lib/propsContext";
 
 export interface InlineCodeProps
   extends PropsWithChildren<ComponentProps<"code">> {
-  color?: "neutral" | "light" | "dark";
+  /** The color schema of the inline code component. */
+  color?: "default" | "light" | "dark";
 }
 
 export const InlineCode: FC<InlineCodeProps> = (props) => {
-  const { children, className, color = "neutral", ...rest } = props;
+  const { children, className, color = "default", ...rest } = props;
 
   const rootClassName = clsx(styles.inlineCode, className, styles[color]);
 

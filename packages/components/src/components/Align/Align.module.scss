@@ -1,0 +1,56 @@
+.align {
+  &:has(.avatar):has(.text) {
+    display: flex;
+    gap: var(--align--avatar-text--spacing);
+
+    .text {
+      font-size: var(--font-size-text--s);
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      align-self: center;
+
+      b {
+        font-size: var(--font-size-text--m);
+      }
+    }
+
+    --first-two-lines-height: calc(var(--line-height--s) * 2);
+
+    &:has(b) {
+      --first-two-lines-height: calc(
+        var(--line-height--m) + var(--line-height--s)
+      );
+    }
+
+    .avatar {
+      margin-top: calc(
+        (var(--first-two-lines-height) - var(--avatar--size--m)) / 2
+      );
+    }
+  }
+
+  &:has(:global(.flow--form-field)):has(.button) {
+    display: flex;
+    align-items: start;
+    column-gap: var(--align--input-button--spacing);
+
+    :first-child {
+      flex-grow: 1;
+    }
+
+    &:has(label) {
+      .button {
+        margin-top: calc(
+          var(--label--font-size) * 1.5 + var(--form-control--spacing-y)
+        );
+      }
+    }
+  }
+
+  &:has(.text):has(.copyButton) {
+    display: flex;
+    align-self: center;
+    column-gap: var(--align--text-copyButton--spacing);
+  }
+}

@@ -1,7 +1,7 @@
 .footer {
-  font-size: var(--font-size--s);
+  font-size: var(--font-size-text--s);
   display: flex;
   flex-direction: column;
   align-items: center;
-  row-gap: var(--list--content-to-content-spacing);
+  row-gap: var(--list--spacing);
 }

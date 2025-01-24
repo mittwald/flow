@@ -1,0 +1,21 @@
+counter-badge:
+  font-size:
+    value: 0.625rem
+  font-weight:
+    value: "{font-weight.bold}"
+  height:
+    value: 1.25rem
+  height-empty:
+    value: 0.75rem
+  padding-inline:
+    value: "{size-rem.xs}"
+  background-color:
+    value: "{success-solid-background-color.default}"
+  content-color:
+    value: "{success-solid-content-color}"
+  border-width:
+    value: "{border-width.200}"
+  border-style:
+    value: "{border-style.default}"
+  border-color:
+    value: "{neutral.color.100}"

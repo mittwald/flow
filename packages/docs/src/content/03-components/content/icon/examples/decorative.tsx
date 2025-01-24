@@ -1,26 +1,37 @@
 import {
   IconApp,
+  IconAutoresponder,
   IconBackup,
+  IconBulb,
   IconCalendar,
   IconCamera,
+  IconCertificate,
   IconChangelog,
   IconClock,
+  IconContract,
   IconContractPartner,
-  IconContractPosition,
   IconCronjob,
   IconCustomer,
   IconDashboard,
   IconDatabase,
   IconDeliveryBox,
+  IconDesktop,
+  IconDirectory,
   IconDomain,
   IconEmail,
   IconExtension,
+  IconFile,
+  IconForward,
   IconInbox,
   IconInvoice,
+  IconLink,
   IconMember,
   IconMittwald,
+  IconMobile,
+  IconMove,
   IconNumber,
   IconOrder,
+  IconPassword,
   IconPayment,
   IconPerformance,
   IconProject,
@@ -29,6 +40,7 @@ import {
   IconServer,
   IconSpamProtectionOff,
   IconSpamProtectionOn,
+  IconSparkles,
   IconSshKey,
   IconSshSftp,
   IconStar,
@@ -38,6 +50,7 @@ import {
   IconTerminate,
   IconTicket,
   IconUser,
+  IconVhost,
 } from "@mittwald/flow-react-components/Icons";
 import Label from "@mittwald/flow-react-components/Label";
 import LabeledValue from "@mittwald/flow-react-components/LabeledValue";
@@ -55,6 +68,10 @@ import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
   <LabeledValue>
     <Label>Star Filled</Label>
     <IconStarFilled />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Sparkles</Label>
+    <IconSparkles />
   </LabeledValue>
   <LabeledValue>
     <Label>Project</Label>
@@ -89,8 +106,28 @@ import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
     <IconDomain />
   </LabeledValue>
   <LabeledValue>
+    <Label>Vhost</Label>
+    <IconVhost />
+  </LabeledValue>
+  <LabeledValue>
     <Label>Subdomain</Label>
     <IconSubdomain />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Certificate</Label>
+    <IconCertificate />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Move</Label>
+    <IconMove />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Directory</Label>
+    <IconDirectory />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>File</Label>
+    <IconFile />
   </LabeledValue>
   <LabeledValue>
     <Label>Database</Label>
@@ -129,8 +166,8 @@ import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
     <IconPayment />
   </LabeledValue>
   <LabeledValue>
-    <Label>Contract Position</Label>
-    <IconContractPosition />
+    <Label>Contract</Label>
+    <IconContract />
   </LabeledValue>
   <LabeledValue>
     <Label>Camera</Label>
@@ -199,5 +236,33 @@ import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
   <LabeledValue>
     <Label>SshKey</Label>
     <IconSshKey />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Forward</Label>
+    <IconForward />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Autoresponder</Label>
+    <IconAutoresponder />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Password</Label>
+    <IconPassword />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Desktop</Label>
+    <IconDesktop />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Mobile</Label>
+    <IconMobile />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Bulb</Label>
+    <IconBulb />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Link</Label>
+    <IconLink />
   </LabeledValue>
 </ColumnLayout>;

@@ -1,0 +1,26 @@
+modal:
+  corner-radius:
+    value: "{corner-radius.default}"
+  padding:
+    value: "{size-px.l}"
+  background-color:
+    value: "{neutral.color.100}"
+  size:
+    s:
+      value: 660px
+    m:
+      value: 900px
+  footer-background-color:
+    value: "{neutral.color.300}"
+  border-color:
+    value: "{neutral-outline-border-color}"
+  border-width:
+    value: "{border-width.100}"
+  border-style:
+    value: "{border-style.default}"
+  header-padding-y:
+    value: "{size-px.s}"
+  off-canvas-max-width:
+    value: "calc(100dvw - {size-px.m})"
+  content-min-height:
+    value: 120px

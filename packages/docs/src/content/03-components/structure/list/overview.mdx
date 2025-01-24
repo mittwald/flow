@@ -27,6 +27,8 @@ Nutze `<List.Sorting />` innerhalb der List, um eine Sortiermethode anzulegen.
 
 Verwende `<List.Search />` innerhalb der List, um ein
 [SearchField](/03-components/form-controls/search-field) anzuzeigen.
+Standardmäßig wird die Suche bei Klick auf Enter gestartet. Um die Suche
+automatisch zu starten, kann das Property `autoSubmit` gesetzt werden.
 
 <LiveCodeEditor example="search" editorCollapsed />
 
@@ -60,3 +62,20 @@ Verwende eine `<ListSummary/>` um eine Zusammenfassung, wie beispielsweise die
 Summe der Beträge, anzuzeigen.
 
 <LiveCodeEditor example="summary" editorCollapsed />
+
+## Mit Accordion
+
+Aktiviere das Accordion-Verhalten über die `accordion` Property. So lässt sich
+ein Listen-Element durch Klick ein- bzw. ausklappen. Der erweiterte Inhalt muss
+dann in `<Content slot="bottom" />` enthalten sein.
+
+<LiveCodeEditor example="accordion" editorCollapsed />
+
+## Mit Kacheln
+
+Im List.Item kann über die Properties `showTiles` und `showList` ausgewählt
+werden wie die List Items dargestellt werden. `showList` ist im default auf true
+gesetzt. Sind beide Werte gesetzt, kann über das Ansichts-Menü zwischen den
+beiden Darstellungen gewechselt werden.
+
+<LiveCodeEditor example="tile" editorCollapsed />

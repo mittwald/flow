@@ -11,7 +11,7 @@ export interface MenuItemProps
   extends Omit<Aria.MenuItemProps, "children">,
     PropsWithChildren,
     FlowComponentProps {
-  selectionVariant?: "control" | "navigation";
+  selectionVariant?: "control" | "navigation" | "switch";
 }
 
 export const MenuItem = flowComponent("MenuItem", (props) => {
