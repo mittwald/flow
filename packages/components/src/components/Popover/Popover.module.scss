@@ -9,7 +9,7 @@
   border-width: var(--popover--border-width);
   border-style: var(--popover--border-style);
   border-color: var(--popover--border-color);
-  max-width: 90vw;
+  max-width: 100dvw;
 
   :where(.content) {
     overflow-y: auto;
