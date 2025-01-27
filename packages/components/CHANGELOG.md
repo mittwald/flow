@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.404](https://github.com/mittwald/flow/compare/0.1.0-alpha.403...0.1.0-alpha.404) (2025-01-27)
+
+### Features
+
+- **FileDropZone:** add file drop zone component
+  ([041cab7](https://github.com/mittwald/flow/commit/041cab79ecfd141867c1785b25d59138aefd0df2))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.403](https://github.com/mittwald/flow/compare/0.1.0-alpha.402...0.1.0-alpha.403) (2025-01-24)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
