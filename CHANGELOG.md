@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.406](https://github.com/mittwald/flow/compare/0.1.0-alpha.405...0.1.0-alpha.406) (2025-01-27)
+
+### Features
+
+- **List:** update tile width and add maxTileWidth property
+  ([#1134](https://github.com/mittwald/flow/issues/1134))
+  ([6ee9289](https://github.com/mittwald/flow/commit/6ee9289b3776ff3443fa45e4536e73897687784e))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.405](https://github.com/mittwald/flow/compare/0.1.0-alpha.404...0.1.0-alpha.405) (2025-01-27)
 
 ### Features
