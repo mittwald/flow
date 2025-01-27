@@ -1,5 +1,6 @@
-import ComboBox from "@mittwald/flow-react-components/ComboBox";
-import Option from "@mittwald/flow-react-components/Option";
+import ComboBox, {
+  Option,
+} from "@mittwald/flow-react-components/ComboBox";
 import Label from "@mittwald/flow-react-components/Label";
 
 <ComboBox>
