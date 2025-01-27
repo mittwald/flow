@@ -165,3 +165,27 @@ export const WithMultipleTexts: Story = {
     );
   },
 };
+
+export const WithCustomTileMaxWidth: Story = {
+  render: () => {
+    const List = typedList<{ name: string }>();
+
+    return (
+      <List.List>
+        <List.StaticData data={[{ name: "John Doe" }]} />
+        <List.Item tileMaxWidth={100} showTiles textValue={(user) => user.name}>
+          {(user) => (
+            <List.ItemView>
+              <Avatar>
+                <Image alt={user.name} src={dummyText.imageSrc} />
+              </Avatar>
+              <Heading>{user.name}</Heading>
+              <Text>Mittwald</Text>
+              <Text>Development</Text>
+            </List.ItemView>
+          )}
+        </List.Item>
+      </List.List>
+    );
+  },
+};

@@ -39,6 +39,9 @@ export const Items: FC<Props> = (props) => {
         className={rootClassName}
         {...list.componentProps}
         renderEmptyState={() => <EmptyView />}
+        style={{
+          gridTemplateColumns: `repeat(auto-fill, minmax(${list.itemView.tileMaxWidth}px, 1fr))`,
+        }}
       >
         {isInitiallyLoading ? <FallbackItems /> : rows}
       </Aria.GridList>

@@ -11,6 +11,7 @@ export interface ItemViewShape<T> {
   fallback?: ReactElement;
   showList?: boolean;
   showTiles?: boolean;
+  tileMaxWidth?: number;
 }
 
 export class ItemView<T> {
@@ -21,6 +22,7 @@ export class ItemView<T> {
   public readonly fallback?: ReactElement;
   public readonly showTiles?: boolean;
   public readonly showList?: boolean;
+  public readonly tileMaxWidth: number;
   private readonly renderFn?: RenderItemFn<T>;
 
   public constructor(list: List<T>, shape: ItemViewShape<T> = {}) {
@@ -32,6 +34,7 @@ export class ItemView<T> {
       renderFn,
       showTiles,
       showList = true,
+      tileMaxWidth = 230,
     } = shape;
     this.list = list;
     this.textValue = textValue;
@@ -41,6 +44,7 @@ export class ItemView<T> {
     this.fallback = fallback;
     this.showTiles = showTiles;
     this.showList = showList;
+    this.tileMaxWidth = tileMaxWidth;
   }
 
   private static fallbackRenderItemFn: RenderItemFn<never> = (item) =>
