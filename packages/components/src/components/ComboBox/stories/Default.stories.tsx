@@ -96,12 +96,8 @@ export const Emails: Story = {
     const domains = ["a.de", "b.de", "c.de"];
 
     const options = value?.includes("@")
-      ? domains.map((d, i) => (
-          <Option
-            id={i.toString()}
-            key={i}
-            value={value?.split("@")[0] + "@" + d}
-          >
+      ? domains.map((d) => (
+          <Option key={d} value={value?.split("@")[0] + "@" + d}>
             {value?.split("@")[0] + "@" + d}
           </Option>
         ))
