@@ -277,11 +277,6 @@
       "types": "./dist/js/types/components/NumberField/index.d.ts",
       "import": "./dist/js/NumberField.js"
     },
-    "./Option/styles.css": "./dist/css/Option.css",
-    "./Option": {
-      "types": "./dist/js/types/components/Option/index.d.ts",
-      "import": "./dist/js/Option.js"
-    },
     "./Popover/styles.css": "./dist/css/Popover.css",
     "./Popover": {
       "types": "./dist/js/types/components/Popover/index.d.ts",

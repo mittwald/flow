@@ -1,8 +1,7 @@
 import { beforeEach, expect, vitest } from "vitest";
 import { useForm } from "react-hook-form";
 import { Form, typedField } from "@/integrations/react-hook-form";
-import { Option } from "@/components/Option";
-import { Select } from "@/components/Select";
+import { Option, Select } from "@/components/Select";
 import React from "react";
 import { Button } from "@/components/Button";
 import { Label } from "@/components/Label";

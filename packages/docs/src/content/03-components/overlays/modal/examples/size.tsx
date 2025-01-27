@@ -16,8 +16,10 @@ import {
   IconSettings,
   IconSshSftp,
 } from "@mittwald/flow-react-components/Icons";
-import { Select } from "@mittwald/flow-react-components/Select";
-import { Option } from "@mittwald/flow-react-components/Option";
+import {
+  Option,
+  Select,
+} from "@mittwald/flow-react-components/Select";
 import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
 import { Switch } from "@mittwald/flow-react-components/Switch";
 import Link from "@mittwald/flow-react-components/Link";
