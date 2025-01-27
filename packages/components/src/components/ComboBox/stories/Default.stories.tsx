@@ -103,8 +103,6 @@ export const Emails: Story = {
         ))
       : null;
 
-    console.log(options);
-
     return (
       <Section>
         <ComboBox {...props} isRequired onInputChange={(v) => setValue(v)}>
@@ -123,39 +121,6 @@ export const Emails: Story = {
           </Select>
         </ColumnLayout>
       </Section>
-    );
-  },
-};
-
-export const Files: Story = {
-  render: (props) => {
-    const files1 = ["home", "var"];
-    const files2 = ["home/www", "home/backup", "home/etc"];
-    const files3 = ["var/foo", "var/bar"];
-    const [files, setFiles] = useState<string[]>(files1);
-
-    const options = files.map((f) => (
-      <Option key={f} value={f}>
-        {f}
-      </Option>
-    ));
-
-    return (
-      <ComboBox
-        {...props}
-        isRequired
-        onSelectionChange={(v) => {
-          if (v === "home") {
-            setFiles(files2);
-          }
-          if (v === "var") {
-            setFiles(files3);
-          }
-        }}
-      >
-        <Label>Domain</Label>
-        {options}
-      </ComboBox>
     );
   },
 };

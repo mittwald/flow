@@ -24,12 +24,12 @@
         background-color: transparent;
       }
     }
+  }
 
-    &:hover {
-      input,
-      .toggle {
-        background-color: var(--form-control--background-color--hover);
-      }
+  &:not([data-disabled="true"]):hover {
+    input,
+    .toggle {
+      background-color: var(--form-control--background-color--hover);
     }
   }
 }
