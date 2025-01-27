@@ -145,6 +145,11 @@
       "types": "./dist/js/types/components/FileCardList/index.d.ts",
       "import": "./dist/js/FileCardList.js"
     },
+    "./FileDropZone/styles.css": "./dist/css/FileDropZone.css",
+    "./FileDropZone": {
+      "types": "./dist/js/types/components/FileDropZone/index.d.ts",
+      "import": "./dist/js/FileDropZone.js"
+    },
     "./FileField/styles.css": "./dist/css/FileField.css",
     "./FileField": {
       "types": "./dist/js/types/components/FileField/index.d.ts",

@@ -15,3 +15,5 @@ border-width:
 border-style:
   default:
     value: "solid"
+  dashed:
+    value: "dashed"
