@@ -24,6 +24,7 @@ import {
 import ContextMenuTrigger from "@/components/ContextMenu/components/ContextMenuTrigger";
 import { ContextMenu } from "@/components/ContextMenu";
 import MenuItem from "@/components/MenuItem";
+import { FileField } from "@/components/FileField";
 
 const meta: Meta<typeof Section> = {
   title: "Structure/Section",
@@ -191,6 +192,23 @@ export const HideSeperator: Story = {
           newsletter and stay up to date.
         </Text>
         <Link href="#">Subscribe</Link>
+      </Section>
+    </>
+  ),
+};
+
+export const WithFileField: Story = {
+  render: (props) => (
+    <>
+      <Section {...props} hideSeparator>
+        <Header>
+          <Heading>Domains</Heading>
+          <FileField>
+            <Button>Import CSV</Button>
+          </FileField>
+          <Button>Add</Button>
+        </Header>
+        <Text>Add at least one domain.</Text>
       </Section>
     </>
   ),
