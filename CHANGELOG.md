@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.405](https://github.com/mittwald/flow/compare/0.1.0-alpha.404...0.1.0-alpha.405) (2025-01-27)
+
+### Features
+
+- **Combobox:** add combo box component
+  ([bad2280](https://github.com/mittwald/flow/commit/bad228014a5be44e605f9d39af6139acd3371c51))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.404](https://github.com/mittwald/flow/compare/0.1.0-alpha.403...0.1.0-alpha.404) (2025-01-27)
 
 ### Features
