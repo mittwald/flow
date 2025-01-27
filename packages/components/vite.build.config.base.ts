@@ -47,6 +47,7 @@ export const buildConfig = (opts: Options) => {
     CheckboxGroup: "./src/components/CheckboxGroup/index.ts",
     CodeBlock: "./src/components/CodeBlock/index.ts",
     ColumnLayout: "./src/components/ColumnLayout/index.ts",
+    ComboBox: "./src/components/ComboBox/index.ts",
     Content: "./src/components/Content/index.ts",
     ContextMenu: "./src/components/ContextMenu/index.ts",
     ContextualHelp: "./src/components/ContextualHelp/index.ts",

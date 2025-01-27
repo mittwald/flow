@@ -3,18 +3,18 @@ import React from "react";
 import * as Aria from "react-aria-components";
 import { Popover } from "@/components/Popover";
 import clsx from "clsx";
-import type { OptionProps } from "@/components/Select";
 import styles from "./Options.module.scss";
-import { useOverlayController } from "@/lib/controller";
+import type { OverlayController } from "@/lib/controller";
+import type { OptionProps } from "@/components/Option";
 
-export type OptionsProps = Aria.ListBoxProps<OptionProps>;
+export interface OptionsProps extends Aria.ListBoxProps<OptionProps> {
+  controller: OverlayController;
+}
 
 export const Options: FC<OptionsProps> = (props) => {
-  const { className, children, ...rest } = props;
+  const { className, children, controller, ...rest } = props;
 
   const rootClassName = clsx(styles.options, className);
-
-  const controller = useOverlayController("Select");
 
   return (
     <Popover className={styles.popover} controller={controller}>

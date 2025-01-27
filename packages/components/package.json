@@ -88,6 +88,11 @@
       "types": "./dist/js/types/components/ColumnLayout/index.d.ts",
       "import": "./dist/js/ColumnLayout.js"
     },
+    "./ComboBox/styles.css": "./dist/css/ComboBox.css",
+    "./ComboBox": {
+      "types": "./dist/js/types/components/ComboBox/index.d.ts",
+      "import": "./dist/js/ComboBox.js"
+    },
     "./Content": {
       "types": "./dist/js/types/components/Content/index.d.ts",
       "import": "./dist/js/Content.js"
