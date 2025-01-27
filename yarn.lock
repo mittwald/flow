@@ -3628,6 +3628,7 @@ __metadata:
     "@internationalized/date": "npm:^3.7.0"
     "@mittwald/flow-react-components": "workspace:*"
     "@mittwald/flow-remote-react-components": "workspace:*"
+    "@mittwald/flow-remote-react-renderer": "workspace:*"
     "@mittwald/flow-stylesheet": "workspace:*"
     "@mittwald/react-use-promise": "npm:^2.6.0"
     "@mittwald/typescript-config": "workspace:*"
