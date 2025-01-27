@@ -54,6 +54,8 @@ export const View = (props: Props) => {
       className: styles.heading,
       level: 5,
       tunnelId: "title",
+      Badge: { className: styles.badge },
+      AlertBadge: { className: styles.badge },
     },
     Text: {
       className: styles.text,
