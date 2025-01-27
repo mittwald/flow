@@ -17,8 +17,9 @@
       }
     ],
     "resolveJsonModule": true,
-    "target": "ES5"
+    "target": "ES2015"
   },
+  "exclude": ["node_modules", "dist"],
   "extends": "../../tsconfig.json",
   "include": [
     "types.d.ts",
@@ -26,6 +27,5 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-  ],
-  "exclude": ["node_modules", "dist"]
+  ]
 }

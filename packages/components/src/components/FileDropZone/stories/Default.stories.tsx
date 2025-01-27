@@ -109,15 +109,18 @@ export const WithReactHookForm: Story = {
     return (
       <Form form={form} onSubmit={submitAction}>
         <Section>
-          <Field name="file" rules={{ required: "Please choose a file" }}>
-            <FileDropZone {...props} onChange={(f) => form.setValue("file", f)}>
-              <IconUpload />
-              <Heading>Drop file</Heading>
-              <FileField name="file">
-                <Button>Select file</Button>
+          <FileDropZone {...props} onChange={(f) => form.setValue("file", f)}>
+            <IconUpload />
+            <Heading>Drop file</Heading>
+            <Field name="file" rules={{ required: "Please choose a file" }}>
+              <FileField>
+                <Button variant="outline" color="dark">
+                  Select file
+                </Button>
               </FileField>
-            </FileDropZone>
-          </Field>
+            </Field>
+          </FileDropZone>
+
           <FileCardList>
             {[...(form.watch("file") ?? [])].map((f) => (
               <FileCard name={f.name} key={f.name} />

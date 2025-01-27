@@ -61,6 +61,7 @@ export const buildConfig = (opts: Options) => {
     FileField: "./src/components/FileField/index.ts",
     FileCard: "./src/components/FileCard/index.ts",
     FileCardList: "./src/components/FileCardList/index.ts",
+    FileDropZone: "./src/components/FileDropZone/index.ts",
     Header: "./src/components/Header/index.ts",
     HeaderNavigation: "./src/components/HeaderNavigation/index.ts",
     Heading: "./src/components/Heading/index.ts",
