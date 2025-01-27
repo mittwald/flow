@@ -68,6 +68,7 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
   const handleOnSelectionChange = (key: Key | null) => {
     onChange(String(key));
     onSelectionChange(key);
+    controller.open();
   };
 
   const controllerFromContext = useOverlayController("ComboBox", {

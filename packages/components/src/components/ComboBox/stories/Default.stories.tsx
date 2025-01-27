@@ -89,16 +89,23 @@ export const WithFieldError: Story = {
   ),
 };
 
-export const EmailTest: Story = {
+export const Emails: Story = {
   render: (props) => {
     const [value, setValue] = useState<string>();
+
     const domains = ["a.de", "b.de", "c.de"];
 
-    const options = domains.map((d, i) => (
-      <Option id={i.toString()} key={i} value={value?.split("@")[0] + "@" + d}>
-        {value?.split("@")[0] + "@" + d}
-      </Option>
-    ));
+    const options = value?.includes("@")
+      ? domains.map((d, i) => (
+          <Option
+            id={i.toString()}
+            key={i}
+            value={value?.split("@")[0] + "@" + d}
+          >
+            {value?.split("@")[0] + "@" + d}
+          </Option>
+        ))
+      : null;
 
     console.log(options);
 
@@ -124,10 +131,11 @@ export const EmailTest: Story = {
   },
 };
 
-export const FileTest: Story = {
+export const Files: Story = {
   render: (props) => {
     const files1 = ["home", "var"];
     const files2 = ["home/www", "home/backup", "home/etc"];
+    const files3 = ["var/foo", "var/bar"];
     const [files, setFiles] = useState<string[]>(files1);
 
     const options = files.map((f) => (
@@ -136,14 +144,17 @@ export const FileTest: Story = {
       </Option>
     ));
 
-    console.log(options);
-
     return (
       <ComboBox
         {...props}
         isRequired
-        onChange={() => {
-          setFiles(files2);
+        onSelectionChange={(v) => {
+          if (v === "home") {
+            setFiles(files2);
+          }
+          if (v === "var") {
+            setFiles(files3);
+          }
         }}
       >
         <Label>Domain</Label>
