@@ -20,7 +20,9 @@
     border-bottom-style: var(--list-item--border-style);
   }
 
-  &:where(.hasAction) {
+  &:where(.hasAction):not(
+      &:has(:global(.flow--list--items--item--view--bottom-content):hover)
+    ) {
     &:not(.isSelected) {
       &:hover {
         background-color: var(--list-item--background-color--hover);

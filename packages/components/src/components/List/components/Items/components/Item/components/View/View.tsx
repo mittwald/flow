@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from "react";
+import type { ComponentProps, PropsWithChildren } from "react";
 import React from "react";
 import styles from "./View.module.scss";
 import type { PropsContext } from "@/lib/propsContext";
@@ -11,18 +11,22 @@ import { useList } from "@/components/List";
 
 type Props = PropsWithChildren & PropsWithClassName;
 
-const getStyleForContentSlot = (slot?: string) =>
-  slot === "top"
-    ? styles.topContent
-    : slot === "bottom"
-      ? styles.bottomContent
-      : styles.topContent;
-
 export const View = (props: Props) => {
   const { children, className } = props;
   const list = useList();
 
   const showTiles = list.viewMode === "tiles";
+
+  const contentProps: Record<string, ComponentProps<"div">> = {
+    bottom: {
+      onMouseDown: (e) => e.stopPropagation(),
+      onPointerDown: (e) => e.stopPropagation(),
+      className: styles.bottomContent,
+    },
+    top: {
+      className: styles.topContent,
+    },
+  };
 
   const propsContext: PropsContext = {
     ContextMenu: {
@@ -43,7 +47,11 @@ export const View = (props: Props) => {
       },
     },
     Content: {
-      className: dynamic((p) => getStyleForContentSlot(p.slot)),
+      className: dynamic((p) => contentProps[p.slot ?? "top"].className),
+      onMouseDown: dynamic((p) => contentProps[p.slot ?? "top"].onMouseDown),
+      onPointerDown: dynamic(
+        (p) => contentProps[p.slot ?? "top"].onPointerDown,
+      ),
       tunnelId: dynamic((p) => (p.slot === "bottom" ? p.slot : undefined)),
     },
     Avatar: {
