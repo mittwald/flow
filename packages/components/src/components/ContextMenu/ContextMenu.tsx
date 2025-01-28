@@ -33,6 +33,8 @@ export interface ContextMenuProps
   selectionMode?: ContextMenuSelectionMode;
   /** Sets the context menu to a fixed width. */
   width?: string | number;
+  /** @internal */
+  closeOverlay?: boolean;
 }
 
 export const ContextMenu = flowComponent("ContextMenu", (props) => {
@@ -46,6 +48,7 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
     onSelectionChange,
     refProp: ref,
     controller: overlayControllerFromProps,
+    closeOverlay,
     ...rest
   } = props;
 
@@ -107,7 +110,9 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
             ref={ref}
           >
             <PropsContextProvider props={propsContext}>
-              <Action closeOverlay={getCloseOverlayType(selectionMode)}>
+              <Action
+                closeOverlay={getCloseOverlayType(selectionMode, closeOverlay)}
+              >
                 {children}
               </Action>
             </PropsContextProvider>

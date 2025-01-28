@@ -1,0 +1,7 @@
+.contextMenu {
+  width: var(--trigger-width);
+}
+
+.menuItem[data-focused="true"] {
+  background-color: var(--menu-item--background-color--hover);
+}
