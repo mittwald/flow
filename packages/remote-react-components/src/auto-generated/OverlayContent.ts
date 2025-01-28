@@ -2,13 +2,13 @@
 /* This file is auto-generated with the remote-components-generator */
 "use client";
 import createFlowRemoteComponent from "~/lib/createFlowRemoteComponent";
-import { RemotePopoverElement } from "@mittwald/flow-remote-elements";
-export { type RemotePopoverElement } from "@mittwald/flow-remote-elements";
+import { RemoteOverlayContentElement } from "@mittwald/flow-remote-elements";
+export { type RemoteOverlayContentElement } from "@mittwald/flow-remote-elements";
 
-export const Popover = createFlowRemoteComponent(
-  "flr-popover",
-  "Popover",
-  RemotePopoverElement,
+export const OverlayContent = createFlowRemoteComponent(
+  "flr-overlay-content",
+  "OverlayContent",
+  RemoteOverlayContentElement,
   {
     slotProps: {
       wrapper: false,

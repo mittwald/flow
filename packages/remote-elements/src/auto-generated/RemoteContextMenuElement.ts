@@ -16,7 +16,6 @@ export class RemoteContextMenuElement extends FlowRemoteElement<RemoteContextMen
       boundaryElement: {},
       className: {},
       containerPadding: {},
-      controller: {},
       crossOffset: {},
       defaultOpen: {},
       defaultSelectedKeys: {},

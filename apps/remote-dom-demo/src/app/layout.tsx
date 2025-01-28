@@ -20,7 +20,10 @@ export default function Layout(props: PropsWithChildren) {
             <HeaderNavigation>
               <Link href="/non-interactive">Non-interactive</Link>
               <Link href="/event-handler">Event handler</Link>
+              <Link href="/context-menu">Context Menu</Link>
+              <Link href="/popover">Popover</Link>
               <Link href="/modal">Modal</Link>
+              <Link href="/overlay-controller">Overlay controller</Link>
               <Link href="/simple-form">Simple Form</Link>
               <Link href="/action-form">Action Form</Link>
               <Link href="/react-hook-form">React Hook Form</Link>

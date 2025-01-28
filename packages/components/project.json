@@ -17,10 +17,7 @@
     },
     "build:remote-components": {
       "cache": true,
-      "inputs": [
-        "{projectRoot}/out/doc-properties.json",
-        "{projectRoot}/dev/remote-components-generator/**/*"
-      ],
+      "inputs": ["{projectRoot}/dev/remote-components-generator/**/*"],
       "dependsOn": ["build:docs-properties"],
       "outputs": [
         "{projectRoot}/src/components/**/view.ts",
@@ -39,7 +36,7 @@
         "{projectRoot}/src/**/*.{ts,tsx}",
         "{projectRoot}/dev/createDocPropertiesJson.ts"
       ],
-      "outputs": ["{projectRoot}/out"]
+      "outputs": ["{projectRoot}/out/doc-properties.json"]
     }
   }
 }

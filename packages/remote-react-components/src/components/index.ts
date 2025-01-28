@@ -7,6 +7,11 @@ export * from "./Form";
  */
 export { Wrap } from "@mittwald/flow-react-components/Wrap";
 export {
+  Popover,
+  PopoverTrigger,
+} from "@mittwald/flow-react-components/Popover";
+export { Modal, ModalTrigger } from "@mittwald/flow-react-components/Modal";
+export {
   Action,
   type ActionFn,
   type ActionProps,

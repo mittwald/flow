@@ -11,7 +11,6 @@ export class RemoteContextMenuTriggerElement extends FlowRemoteElement<RemoteCon
 
   static override get remoteProperties() {
     return {
-      controller: {},
       isDefaultOpen: {},
     };
   }

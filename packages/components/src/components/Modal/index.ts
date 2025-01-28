@@ -1,4 +1,3 @@
-export * from "./view";
 import { Modal } from "./Modal";
 
 export * from "./components/ModalTrigger";

@@ -1,5 +1,6 @@
 export const config = {
   ignoreProps: [
+    "controller",
     "tunnelId",
     "ref",
     "key",

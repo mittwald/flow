@@ -1,13 +1,13 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import React, { type FC, useContext } from "react";
-import { PopoverTrigger, type PopoverTriggerProps } from "~/components/Popover";
+import { OverlayContent, type OverlayContentProps } from "~/components/Overlay";
 import { viewComponentContext } from "~/lib/viewComponentContext/viewComponentContext";
 
-const PopoverTriggerView: FC<PopoverTriggerProps> = (props) => {
+const OverlayContentView: FC<OverlayContentProps> = (props) => {
   const View =
-    useContext(viewComponentContext)["PopoverTrigger"] ?? PopoverTrigger;
+    useContext(viewComponentContext)["OverlayContent"] ?? OverlayContent;
   return <View {...props} />;
 };
 
-export default PopoverTriggerView;
+export default OverlayContentView;

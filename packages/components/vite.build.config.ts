@@ -70,6 +70,8 @@ export default mergeConfig(
           NotificationProvider:
             "./src/components/NotificationProvider/index.ts",
           NumberField: "./src/components/NumberField/index.ts",
+          Overlay: "./src/components/Overlay/index.ts",
+          OverlayTrigger: "./src/components/OverlayTrigger/index.ts",
           Popover: "./src/components/Popover/index.ts",
           ProgressBar: "./src/components/ProgressBar/index.ts",
           PropsContextProvider:

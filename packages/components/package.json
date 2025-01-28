@@ -235,6 +235,14 @@
       "types": "./dist/js/types/components/NumberField/index.d.ts",
       "import": "./dist/js/NumberField.js"
     },
+    "./Overlay": {
+      "types": "./dist/js/types/components/Overlay/index.d.ts",
+      "import": "./dist/js/Overlay.js"
+    },
+    "./OverlayTrigger": {
+      "types": "./dist/js/types/components/OverlayTrigger/index.d.ts",
+      "import": "./dist/js/OverlayTrigger.js"
+    },
     "./Popover": {
       "types": "./dist/js/types/components/Popover/index.d.ts",
       "import": "./dist/js/Popover.js"

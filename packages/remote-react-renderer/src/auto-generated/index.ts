@@ -27,6 +27,7 @@ import { CounterBadge as CounterBadge } from "@mittwald/flow-react-components/Co
 import { CountryOptions as CountryOptions } from "@mittwald/flow-react-components/Select";
 import { DatePicker as DatePicker } from "@mittwald/flow-react-components/DatePicker";
 import { DateRangePicker as DateRangePicker } from "@mittwald/flow-react-components/DateRangePicker";
+import { DialogTrigger as DialogTrigger } from "@mittwald/flow-react-components/OverlayTrigger";
 import { Div as Div } from "@mittwald/flow-react-components/Div";
 import { FieldDescription as FieldDescription } from "@mittwald/flow-react-components/FieldDescription";
 import { FieldError as FieldError } from "@mittwald/flow-react-components/FieldError";
@@ -56,16 +57,14 @@ import { LoadingSpinner as LoadingSpinner } from "@mittwald/flow-react-component
 import { Markdown as Markdown } from "@mittwald/flow-react-components/Markdown";
 import { MenuItem as MenuItem } from "@mittwald/flow-react-components/MenuItem";
 import { Message as Message } from "@mittwald/flow-react-components/Message";
-import { Modal as Modal } from "@mittwald/flow-react-components/Modal";
-import { ModalTrigger as ModalTrigger } from "@mittwald/flow-react-components/Modal";
 import { Navigation as Navigation } from "@mittwald/flow-react-components/Navigation";
 import { NavigationGroup as NavigationGroup } from "@mittwald/flow-react-components/Navigation";
 import { Notification as Notification } from "@mittwald/flow-react-components/Notification";
 import { NotificationProvider as NotificationProvider } from "@mittwald/flow-react-components/NotificationProvider";
 import { NumberField as NumberField } from "@mittwald/flow-react-components/NumberField";
 import { Option as Option } from "@mittwald/flow-react-components/Select";
-import { Popover as Popover } from "@mittwald/flow-react-components/Popover";
-import { PopoverTrigger as PopoverTrigger } from "@mittwald/flow-react-components/Popover";
+import { OverlayContent as OverlayContent } from "@mittwald/flow-react-components/Overlay";
+import { PopoverContent as PopoverContent } from "@mittwald/flow-react-components/Popover";
 import { ProgressBar as ProgressBar } from "@mittwald/flow-react-components/ProgressBar";
 import { Radio as Radio } from "@mittwald/flow-react-components/RadioGroup";
 import { RadioButton as RadioButton } from "@mittwald/flow-react-components/RadioGroup";
@@ -128,6 +127,7 @@ export const flowComponents = {
   "flr-country-options": createFlowRemoteComponentRenderer(CountryOptions),
   "flr-date-picker": createFlowRemoteComponentRenderer(DatePicker),
   "flr-date-range-picker": createFlowRemoteComponentRenderer(DateRangePicker),
+  "flr-dialog-trigger": createFlowRemoteComponentRenderer(DialogTrigger),
   "flr-div": createFlowRemoteComponentRenderer(Div),
   "flr-field-description": createFlowRemoteComponentRenderer(FieldDescription),
   "flr-field-error": createFlowRemoteComponentRenderer(FieldError),
@@ -159,8 +159,6 @@ export const flowComponents = {
   "flr-markdown": createFlowRemoteComponentRenderer(Markdown),
   "flr-menu-item": createFlowRemoteComponentRenderer(MenuItem),
   "flr-message": createFlowRemoteComponentRenderer(Message),
-  "flr-modal": createFlowRemoteComponentRenderer(Modal),
-  "flr-modal-trigger": createFlowRemoteComponentRenderer(ModalTrigger),
   "flr-navigation": createFlowRemoteComponentRenderer(Navigation),
   "flr-navigation-group": createFlowRemoteComponentRenderer(NavigationGroup),
   "flr-notification": createFlowRemoteComponentRenderer(Notification),
@@ -168,8 +166,8 @@ export const flowComponents = {
     createFlowRemoteComponentRenderer(NotificationProvider),
   "flr-number-field": createFlowRemoteComponentRenderer(NumberField),
   "flr-option": createFlowRemoteComponentRenderer(Option),
-  "flr-popover": createFlowRemoteComponentRenderer(Popover),
-  "flr-popover-trigger": createFlowRemoteComponentRenderer(PopoverTrigger),
+  "flr-overlay-content": createFlowRemoteComponentRenderer(OverlayContent),
+  "flr-popover-content": createFlowRemoteComponentRenderer(PopoverContent),
   "flr-progress-bar": createFlowRemoteComponentRenderer(ProgressBar),
   "flr-radio": createFlowRemoteComponentRenderer(Radio),
   "flr-radio-button": createFlowRemoteComponentRenderer(RadioButton),

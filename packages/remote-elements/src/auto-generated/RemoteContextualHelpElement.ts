@@ -16,7 +16,6 @@ export class RemoteContextualHelpElement extends FlowRemoteElement<RemoteContext
       boundaryElement: {},
       className: {},
       containerPadding: {},
-      controller: {},
       crossOffset: {},
       defaultOpen: {},
       isDialogContent: {},

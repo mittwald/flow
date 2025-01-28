@@ -18,7 +18,6 @@ export class RemoteSelectElement extends FlowRemoteElement<RemoteSelectElementPr
       autoComplete: {},
       autoFocus: {},
       className: {},
-      controller: {},
       defaultOpen: {},
       defaultSelectedKey: {},
       disabledKeys: {},

@@ -9,11 +9,11 @@ import type { OverlayController } from "~/lib/controller/overlay";
 import type { FlowComponentProps } from "~/lib/componentFactory/flowComponent";
 import { flowComponent } from "~/lib/componentFactory/flowComponent";
 import { Overlay } from "~/components/Overlay";
-import { Header } from "~/components/Header";
 import { Action } from "~/components/Action";
-import { Button } from "~/components/Button";
 import { IconClose } from "~/components/Icon/components/icons";
 import type { PropsWithClassName } from "~/lib/types/props";
+import HeaderView from "~/views/HeaderView";
+import ButtonView from "~/views/ButtonView";
 
 export interface ModalProps
   extends PropsWithChildren,
@@ -39,7 +39,6 @@ export interface ModalProps
   isDismissable?: boolean;
 }
 
-/** @flr-generate all */
 export const Modal = flowComponent<"Modal", HTMLDivElement>(
   "Modal",
   (props) => {
@@ -90,19 +89,19 @@ export const Modal = flowComponent<"Modal", HTMLDivElement>(
       >
         <PropsContextProvider props={propsContext}>
           <TunnelProvider>
-            <Header className={styles.header}>
+            <HeaderView className={styles.header}>
               <TunnelExit id="heading" />
               <Action closeOverlay="Modal">
-                <Button
+                <ButtonView
                   variant="plain"
                   color="secondary"
                   className={styles.closeButton}
                   onPress={controller?.close}
                 >
                   <IconClose />
-                </Button>
+                </ButtonView>
               </Action>
-            </Header>
+            </HeaderView>
             {children}
           </TunnelProvider>
         </PropsContextProvider>
