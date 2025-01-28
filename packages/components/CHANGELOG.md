@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.24](https://github.com/mittwald/flow/compare/0.2.0-alpha.23...0.2.0-alpha.24) (2025-01-28)
+
+### Features
+
+* support Popover/Modals/ContextMenu ([7fc22d9](https://github.com/mittwald/flow/commit/7fc22d959d19e4c56ab6edf3694e3947b7770a39))
+
 # [0.2.0-alpha.23](https://github.com/mittwald/flow/compare/0.2.0-alpha.22...0.2.0-alpha.23) (2025-01-28)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
