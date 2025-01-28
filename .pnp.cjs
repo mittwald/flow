@@ -4637,7 +4637,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./packages/docs/",\
         "packageDependencies": [\
           ["@mittwald/flow-documentation", "workspace:packages/docs"],\
-          ["@internationalized/date", "npm:3.6.0"],\
+          ["@internationalized/date", "npm:3.7.0"],\
           ["@mdx-js/loader", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:3.1.0"],\
           ["@mdx-js/react", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:3.1.0"],\
           ["@mfalkenberg/react-live-ssr", "virtual:c4e1b5de3c2221b63a822911bcf0be057e450c9772904486db938942efc684c035d907717e21ec2b40cde01712fe1164bb28cd81903edc8b86d34febd372a71c#npm:4.1.7"],\
