@@ -66,10 +66,7 @@ export const Files: Story = {
       <Form onSubmit={() => action("submit")} form={form}>
         <Autocomplete controller={contextMenuController} {...props}>
           <Field name="file">
-            <TextField
-              onFocus={() => contextMenuController.open()}
-              onInput={() => contextMenuController.open()}
-            >
+            <TextField>
               <Label>Autocomplete</Label>
             </TextField>
           </Field>

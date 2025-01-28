@@ -48,7 +48,7 @@ export const Autocomplete: FC<AutocompleteProps> = (props) => {
         className: styles.menuItem,
       },
     },
-    // ToDo: Funktioniert nicht innerhalb eines Form Fields
+
     TextField: {
       onFocus: () => controller.open(),
       onInput: () => controller.open(),

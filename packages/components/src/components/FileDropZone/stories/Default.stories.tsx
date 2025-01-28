@@ -114,9 +114,7 @@ export const WithReactHookForm: Story = {
             <Heading>Drop file</Heading>
             <Field name="file" rules={{ required: "Please choose a file" }}>
               <FileField>
-                <Button variant="outline" color="dark">
-                  Select file
-                </Button>
+                <Button>Select file</Button>
               </FileField>
             </Field>
           </FileDropZone>
