@@ -4756,7 +4756,7 @@ const RAW_RUNTIME_STATE =
           ["dot-prop", "npm:9.0.0"],\
           ["framer-motion", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:11.12.0"],\
           ["fs-jetpack", "npm:5.1.0"],\
-          ["glob", "npm:10.4.5"],\
+          ["glob", "npm:11.0.0"],\
           ["happy-dom", "npm:15.11.7"],\
           ["html-react-parser", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:5.1.18"],\
           ["invariant", "npm:2.2.4"],\
@@ -4870,7 +4870,7 @@ const RAW_RUNTIME_STATE =
           ["dot-prop", "npm:9.0.0"],\
           ["framer-motion", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:11.12.0"],\
           ["fs-jetpack", "npm:5.1.0"],\
-          ["glob", "npm:10.4.5"],\
+          ["glob", "npm:11.0.0"],\
           ["happy-dom", "npm:15.11.7"],\
           ["html-react-parser", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:5.1.18"],\
           ["invariant", "npm:2.2.4"],\
@@ -4975,7 +4975,7 @@ const RAW_RUNTIME_STATE =
           ["dot-prop", "npm:9.0.0"],\
           ["framer-motion", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:11.12.0"],\
           ["fs-jetpack", "npm:5.1.0"],\
-          ["glob", "npm:10.4.5"],\
+          ["glob", "npm:11.0.0"],\
           ["happy-dom", "npm:15.11.7"],\
           ["html-react-parser", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:5.1.18"],\
           ["invariant", "npm:2.2.4"],\
