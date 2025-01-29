@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.26](https://github.com/mittwald/flow/compare/0.2.0-alpha.25...0.2.0-alpha.26) (2025-01-29)
+
+### Bug Fixes
+
+* fix remote context menu display issue ([7d9855e](https://github.com/mittwald/flow/commit/7d9855e5e19b791b7514ff23a95907fb438a06ce))
+
 # [0.2.0-alpha.25](https://github.com/mittwald/flow/compare/0.2.0-alpha.24...0.2.0-alpha.25) (2025-01-29)
 
 ### Bug Fixes
