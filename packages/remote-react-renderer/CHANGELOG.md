@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.25](https://github.com/mittwald/flow/compare/0.2.0-alpha.24...0.2.0-alpha.25) (2025-01-29)
+
+### Bug Fixes
+
+* fix remote Context Menu ([25f032e](https://github.com/mittwald/flow/commit/25f032e0c95202e503fcb0c4d553e67ae9b464a2))
+* fix remote ListItemView ([22ca167](https://github.com/mittwald/flow/commit/22ca167f537ebf80ea956806d723836676323648))
+
 # [0.2.0-alpha.24](https://github.com/mittwald/flow/compare/0.2.0-alpha.23...0.2.0-alpha.24) (2025-01-28)
 
 ### Features
