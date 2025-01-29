@@ -23,7 +23,7 @@ export default mergeConfig(
       lib: {
         entry: {
           index: "./src/index.ts",
-          Root: "./src/components/Root.tsx",
+          RemoteRoot: "./src/components/RemoteRoot.tsx",
           Icons: "./src/Icons.ts",
           hooks: "./src/hooks.ts",
           controller: "./src/controller.ts",

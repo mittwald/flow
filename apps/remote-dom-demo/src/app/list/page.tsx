@@ -20,7 +20,7 @@ export default function Page() {
 
   return (
     <Section>
-      <List onAction={console.log} batchSize={10}>
+      <List onAction={console.log} batchSize={10} aria-label="Demo">
         <DemoList.Filter property="language" name="Language">
           {(val) => <>{val}</>}
         </DemoList.Filter>
@@ -38,6 +38,7 @@ export default function Page() {
               <Text>{d.bio.slice(0, 100)}</Text>
               <ContextMenu>
                 <MenuItem>
+                  <IconEmail />
                   <Text>Menu item</Text>
                 </MenuItem>
               </ContextMenu>

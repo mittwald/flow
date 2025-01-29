@@ -10,7 +10,7 @@ export interface RootClientProps extends PropsWithChildren {
   showPreview?: boolean;
 }
 
-export const RootClient: FC<RootClientProps> = (props) => {
+export const RemoteRootClient: FC<RootClientProps> = (props) => {
   const { children, showPreview = false } = props;
 
   const params = new URLSearchParams(document.location.search);
@@ -41,4 +41,4 @@ export const RootClient: FC<RootClientProps> = (props) => {
   return <Preview />;
 };
 
-export default RootClient;
+export default RemoteRootClient;

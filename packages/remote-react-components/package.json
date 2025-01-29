@@ -10,9 +10,9 @@
       "types": "./dist/types/index.d.ts",
       "default": "./dist/index.js"
     },
-    "./Root": {
-      "types": "./dist/types/components/Root.d.ts",
-      "default": "./dist/Root.js"
+    "./RemoteRoot": {
+      "types": "./dist/types/components/RemoteRoot.d.ts",
+      "default": "./dist/RemoteRoot.js"
     },
     "./Icons": {
       "types": "./dist/types/Icons.d.ts",

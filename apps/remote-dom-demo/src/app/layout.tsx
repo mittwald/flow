@@ -6,7 +6,7 @@ import HeaderNavigation from "@mittwald/flow-react-components/HeaderNavigation";
 import { Link } from "@mittwald/flow-react-components/Link";
 import styles from "./layout.module.css";
 import { Separator } from "@mittwald/flow-react-components/Separator";
-import Root from "@mittwald/flow-remote-react-components/Root";
+import RemoteRoot from "@mittwald/flow-remote-react-components/RemoteRoot";
 import { usePathname } from "next/navigation";
 
 export default function Layout(props: PropsWithChildren) {
@@ -36,9 +36,9 @@ export default function Layout(props: PropsWithChildren) {
             <Separator />
             <main>
               <div>
-                <Root key={p} showPreview>
+                <RemoteRoot key={p} showPreview>
                   {props.children}
-                </Root>
+                </RemoteRoot>
               </div>
             </main>
           </div>

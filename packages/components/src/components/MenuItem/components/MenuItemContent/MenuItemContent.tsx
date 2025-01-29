@@ -1,7 +1,7 @@
 import type { FC, PropsWithChildren } from "react";
 import React from "react";
 import type * as Aria from "react-aria-components";
-import styles from "../MenuItem.module.scss";
+import styles from "../../MenuItem.module.scss";
 import type { PropsContext } from "~/lib/propsContext";
 import { PropsContextProvider } from "~/lib/propsContext";
 import {
@@ -10,12 +10,10 @@ import {
   IconRadioOff,
   IconRadioOn,
 } from "~/components/Icon/components/icons";
-import { Text } from "~/components/Text";
-import { deepHas } from "~/lib/react/deepHas";
-import { Wrap } from "~/components/Wrap";
 import clsx from "clsx";
-import { Avatar } from "~/components/Avatar";
 import { Switch } from "~/components/Switch";
+import { Wrap } from "~/components/Wrap";
+import { Text } from "~/components/Text";
 
 interface Props extends Aria.MenuItemRenderProps, PropsWithChildren {
   selectionVariant?: "control" | "navigation" | "switch";
@@ -67,16 +65,13 @@ export const MenuItemContent: FC<Props> = (props) => {
       <IconCheckboxEmpty />
     );
 
-  const hasText = deepHas(children, Text);
-  const hasAvatar = deepHas(children, Avatar);
-
   return (
     <>
       <PropsContextProvider props={controlIconPropsContext}>
         {selectionIcon}
       </PropsContextProvider>
       <PropsContextProvider props={propsContext}>
-        <Wrap if={!hasText && !hasAvatar}>
+        <Wrap if={!!selectionIcon}>
           <Text>{children}</Text>
         </Wrap>
       </PropsContextProvider>

@@ -3,7 +3,7 @@ import React from "react";
 import * as Aria from "react-aria-components";
 import styles from "./MenuItem.module.scss";
 import clsx from "clsx";
-import { MenuItemContent } from "~/components/MenuItem/components/MenuItemContent";
+import { MenuItemContent } from "~/components/MenuItem/components/MenuItemContent/MenuItemContent";
 import type { FlowComponentProps } from "~/lib/componentFactory/flowComponent";
 import { flowComponent } from "~/lib/componentFactory/flowComponent";
 
