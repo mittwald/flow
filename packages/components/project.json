@@ -17,10 +17,14 @@
     },
     "build:remote-components": {
       "cache": true,
-      "inputs": ["{projectRoot}/dev/remote-components-generator/**/*"],
+      "inputs": [
+        "{projectRoot}/dev/remote-components-generator/**/*",
+        "{projectRoot}/src/**/*"
+      ],
       "dependsOn": ["build:docs-properties"],
       "outputs": [
         "{projectRoot}/src/components/**/view.ts",
+        "{projectRoot}/src/views/*",
         "{workspaceRoot}/packages/remote-elements/src/auto-generated/**/*",
         "{workspaceRoot}/packages/remote-react-components/src/auto-generated/**/*",
         "{workspaceRoot}/packages/remote-react-renderer/src/auto-generated/**/*"
