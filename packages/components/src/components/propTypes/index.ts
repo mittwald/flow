@@ -1,68 +1,68 @@
-import type { TextProps } from "~/components/Text";
-import type { ButtonProps } from "~/components/Button";
-import type { IconProps } from "~/components/Icon";
-import type { LabelProps } from "~/components/Label";
-import type { ContentProps } from "~/components/Content";
-import type { LayoutCardProps } from "~/components/LayoutCard";
-import type { LinkProps } from "~/components/Link";
-import type { LightBoxProps } from "~/components/LightBox";
-import type { FieldErrorProps } from "~/components/FieldError";
-import type { FieldDescriptionProps } from "~/components/FieldDescription";
-import type { AlertProps } from "~/components/Alert";
-import type { HeadingProps } from "~/components/Heading";
-import type { InitialsProps } from "~/components/Initials";
-import type { ImageProps } from "~/components/Image";
-import type { CopyButtonProps } from "~/components/CopyButton";
-import type { HeaderProps } from "~/components/Header/";
-import type { SwitchProps } from "~/components/Switch";
-import type { AlertBadgeProps } from "~/components/AlertBadge";
-import type { ActionGroupProps } from "~/components/ActionGroup";
-import type { AvatarProps } from "~/components/Avatar";
-import type { ActionProps } from "~/components/Action";
+import type { TextProps } from "@/components/Text";
+import type { ButtonProps } from "@/components/Button";
+import type { IconProps } from "@/components/Icon";
+import type { LabelProps } from "@/components/Label";
+import type { ContentProps } from "@/components/Content";
+import type { LayoutCardProps } from "@/components/LayoutCard";
+import type { LinkProps } from "@/components/Link";
+import type { LightBoxProps } from "@/components/LightBox";
+import type { FieldErrorProps } from "@/components/FieldError";
+import type { FieldDescriptionProps } from "@/components/FieldDescription";
+import type { AlertProps } from "@/components/Alert";
+import type { HeadingProps } from "@/components/Heading";
+import type { InitialsProps } from "@/components/Initials";
+import type { ImageProps } from "@/components/Image";
+import type { CopyButtonProps } from "@/components/CopyButton";
+import type { HeaderProps } from "@/components/Header/";
+import type { SwitchProps } from "@/components/Switch";
+import type { AlertBadgeProps } from "@/components/AlertBadge";
+import type { ActionGroupProps } from "@/components/ActionGroup";
+import type { AvatarProps } from "@/components/Avatar";
+import type { ActionProps } from "@/components/Action";
 import type {
   ContextMenuProps,
   ContextMenuTriggerProps,
   MenuItemProps,
-} from "~/components/ContextMenu";
-import type { OptionProps, SelectProps } from "~/components/Select";
+} from "@/components/ContextMenu";
+import type { OptionProps, SelectProps } from "@/components/Select";
 import type {
   RadioButtonProps,
   RadioGroupProps,
   RadioProps,
-} from "~/components/RadioGroup";
-import type { TextFieldProps } from "~/components/TextField";
-import type { NumberFieldProps } from "~/components/NumberField";
-import type { TextAreaProps } from "~/components/TextArea";
-import type { CheckboxGroupProps } from "~/components/CheckboxGroup";
-import type { CheckboxProps } from "~/components/Checkbox";
-import type { CheckboxButtonProps } from "~/components/CheckboxButton";
-import type { TabsProps } from "~/components/Tabs";
-import type { ModalProps, ModalTriggerProps } from "~/components/Modal";
-import type { SectionProps } from "~/components/Section";
-import type { SliderProps } from "~/components/Slider";
-import type { CounterBadgeProps } from "~/components/CounterBadge";
-import type { FlowComponentName } from "~/components/propTypes/types";
+} from "@/components/RadioGroup";
+import type { TextFieldProps } from "@/components/TextField";
+import type { NumberFieldProps } from "@/components/NumberField";
+import type { TextAreaProps } from "@/components/TextArea";
+import type { CheckboxGroupProps } from "@/components/CheckboxGroup";
+import type { CheckboxProps } from "@/components/Checkbox";
+import type { CheckboxButtonProps } from "@/components/CheckboxButton";
+import type { TabsProps } from "@/components/Tabs";
+import type { ModalProps, ModalTriggerProps } from "@/components/Modal";
+import type { SectionProps } from "@/components/Section";
+import type { SliderProps } from "@/components/Slider";
+import type { CounterBadgeProps } from "@/components/CounterBadge";
+import type { FlowComponentName } from "@/components/propTypes/types";
 import type {
   ContextualHelpProps,
   ContextualHelpTriggerProps,
-} from "~/components/ContextualHelp";
-import type { PopoverProps, PopoverTriggerProps } from "~/components/Popover";
-import type { ContextMenuSectionProps } from "~/components/ContextMenu/components/ContextMenuSection";
-import type { ListProps } from "~/components/List";
-import type { SearchFieldProps } from "~/components/SearchField";
-import type { BadgeProps } from "~/components/Badge";
-import type { DatePickerProps } from "~/components/DatePicker";
+} from "@/components/ContextualHelp";
+import type { PopoverProps, PopoverTriggerProps } from "@/components/Popover";
+import type { ContextMenuSectionProps } from "@/components/ContextMenu/components/ContextMenuSection";
+import type { ListProps } from "@/components/List";
+import type { SearchFieldProps } from "@/components/SearchField";
+import type { BadgeProps } from "@/components/Badge";
+import type { DatePickerProps } from "@/components/DatePicker";
 import type * as Aria from "react-aria-components";
-import type { DateRangePickerProps } from "~/components/DateRangePicker";
-import type { TimeFieldProps } from "~/components/TimeField";
-import type { AlertIconProps } from "~/components/AlertIcon";
-import type { ListSummaryProps } from "~/components/List/components/ListSummary/ListSummary";
-import type { SegmentedControlProps } from "~/components/SegmentedControl";
-import type { SegmentProps } from "~/components/SegmentedControl/components/Segment";
-import type { FileCardProps } from "~/components/FileCard";
-import type { FileFieldProps } from "~/components/FileField";
-import type { AlignProps } from "~/components/Align";
-import type { CountryOptionsProps } from "~/components/Select/components/CountryOptions";
+import type { DateRangePickerProps } from "@/components/DateRangePicker";
+import type { TimeFieldProps } from "@/components/TimeField";
+import type { AlertIconProps } from "@/components/AlertIcon";
+import type { ListSummaryProps } from "@/components/List/components/ListSummary/ListSummary";
+import type { SegmentedControlProps } from "@/components/SegmentedControl";
+import type { SegmentProps } from "@/components/SegmentedControl/components/Segment";
+import type { FileCardProps } from "@/components/FileCard";
+import type { FileFieldProps } from "@/components/FileField";
+import type { AlignProps } from "@/components/Align";
+import type { CountryOptionsProps } from "@/components/Select/components/CountryOptions";
 
 export * from "./types";
 

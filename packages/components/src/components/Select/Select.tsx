@@ -2,20 +2,20 @@ import type { PropsWithChildren } from "react";
 import React from "react";
 import type { Key } from "react-aria-components";
 import * as Aria from "react-aria-components";
-import type { PropsContext } from "~/lib/propsContext";
-import { PropsContextProvider } from "~/lib/propsContext";
-import formFieldStyles from "~/components/FormField/FormField.module.scss";
-import { FieldError } from "~/components/FieldError";
+import type { PropsContext } from "@/lib/propsContext";
+import { PropsContextProvider } from "@/lib/propsContext";
+import formFieldStyles from "@/components/FormField/FormField.module.scss";
+import { FieldError } from "@/components/FieldError";
 import styles from "./Select.module.scss";
 import clsx from "clsx";
-import { IconChevronDown } from "~/components/Icon/components/icons";
-import type { FlowComponentProps } from "~/lib/componentFactory/flowComponent";
-import { flowComponent } from "~/lib/componentFactory/flowComponent";
-import { Options } from "~/components/Select/components/Options";
+import { IconChevronDown } from "@/components/Icon/components/icons";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import { Options } from "@/components/Select/components/Options";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
-import type { PropsWithClassName } from "~/lib/types/props";
-import { type OverlayController, useOverlayController } from "~/lib/controller";
-import OverlayContextProvider from "~/lib/controller/overlay/OverlayContextProvider";
+import type { PropsWithClassName } from "@/lib/types/props";
+import { type OverlayController, useOverlayController } from "@/lib/controller";
+import OverlayContextProvider from "@/lib/controller/overlay/OverlayContextProvider";
 
 export interface SelectProps
   extends PropsWithChildren<

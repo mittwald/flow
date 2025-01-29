@@ -1,7 +1,7 @@
 import type { FC, PropsWithChildren } from "react";
 import styles from "../MdxFileView/customComponents.module.css";
 import { Text } from "@mittwald/flow-react-components/Text";
-import LiveCodeEditor from "~/lib/liveCode/components/LiveCodeEditor";
+import LiveCodeEditor from "@/lib/liveCode/components/LiveCodeEditor";
 import clsx from "clsx";
 import { Heading } from "@mittwald/flow-react-components/Heading";
 import {

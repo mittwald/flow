@@ -6,8 +6,8 @@ import type {
   TableHeaderProps,
   TableProps,
   TableRowProps,
-} from "~/components/Table";
-import type { RenderItemFn } from "~/components/List";
+} from "@/components/Table";
+import type { RenderItemFn } from "@/components/List";
 
 /** Cell */
 export type TableCellSupportedComponentProps = Omit<TableCellProps, "children">;

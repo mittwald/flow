@@ -2,16 +2,16 @@ import type { FC, PropsWithChildren } from "react";
 import React from "react";
 import type * as Aria from "react-aria-components";
 import styles from "../../MenuItem.module.scss";
-import type { PropsContext } from "~/lib/propsContext";
-import { PropsContextProvider } from "~/lib/propsContext";
+import type { PropsContext } from "@/lib/propsContext";
+import { PropsContextProvider } from "@/lib/propsContext";
 import {
   IconCheckboxChecked,
   IconCheckboxEmpty,
   IconRadioOff,
   IconRadioOn,
-} from "~/components/Icon/components/icons";
+} from "@/components/Icon/components/icons";
 import clsx from "clsx";
-import { Switch } from "~/components/Switch";
+import { Switch } from "@/components/Switch";
 
 interface Props extends Aria.MenuItemRenderProps, PropsWithChildren {
   selectionVariant?: "control" | "navigation" | "switch";

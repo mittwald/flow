@@ -4,8 +4,8 @@ import React, { type FC, useContext } from "react";
 import {
   DialogTrigger,
   type DialogTriggerProps,
-} from "~/components/OverlayTrigger";
-import { viewComponentContext } from "~/lib/viewComponentContext/viewComponentContext";
+} from "@/components/OverlayTrigger";
+import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const DialogTriggerView: FC<DialogTriggerProps> = (props) => {
   const View =

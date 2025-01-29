@@ -5,11 +5,11 @@ import Navigation, {
   NavigationGroup,
 } from "@mittwald/flow-react-components/Navigation";
 import Heading from "@mittwald/flow-react-components/Heading";
-import type { SerializedMdxFile } from "~/lib/mdx/MdxFile";
-import { MdxFile } from "~/lib/mdx/MdxFile";
-import { GroupText } from "~/app/_components/layout/MainNavigation/components/GroupText";
-import type { MdxDirectoryTree } from "~/lib/mdx/components/buildDirectoryTree";
-import { buildDirectoryTree } from "~/lib/mdx/components/buildDirectoryTree";
+import type { SerializedMdxFile } from "@/lib/mdx/MdxFile";
+import { MdxFile } from "@/lib/mdx/MdxFile";
+import { GroupText } from "@/app/_components/layout/MainNavigation/components/GroupText";
+import type { MdxDirectoryTree } from "@/lib/mdx/components/buildDirectoryTree";
+import { buildDirectoryTree } from "@/lib/mdx/components/buildDirectoryTree";
 import { usePathname } from "next/navigation";
 import { Link } from "@mittwald/flow-react-components/Link";
 import { Label } from "@mittwald/flow-react-components/Label";
@@ -17,7 +17,7 @@ import { Section } from "@mittwald/flow-react-components/Section";
 import { useOverlayController } from "@mittwald/flow-react-components/controller";
 import { useOnChange } from "@mittwald/flow-react-components/hooks";
 import { SearchField } from "@mittwald/flow-react-components/SearchField";
-import styles from "~/app/layout.module.scss";
+import styles from "@/app/layout.module.scss";
 import { LayoutCard } from "@mittwald/flow-react-components/LayoutCard";
 import { Wrap } from "@mittwald/flow-react-components/Wrap";
 

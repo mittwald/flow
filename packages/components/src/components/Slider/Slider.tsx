@@ -1,14 +1,14 @@
 import type { PropsWithChildren } from "react";
 import React from "react";
-import type { FlowComponentProps } from "~/lib/componentFactory/flowComponent";
-import { flowComponent } from "~/lib/componentFactory/flowComponent";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import styles from "./Slider.module.scss";
-import type { PropsContext } from "~/lib/propsContext";
-import { PropsContextProvider } from "~/lib/propsContext";
-import { Button } from "~/components/Button";
-import { IconMinus, IconPlus } from "~/components/Icon/components/icons";
+import type { PropsContext } from "@/lib/propsContext";
+import { PropsContextProvider } from "@/lib/propsContext";
+import { Button } from "@/components/Button";
+import { IconMinus, IconPlus } from "@/components/Icon/components/icons";
 import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 

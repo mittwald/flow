@@ -1,8 +1,8 @@
 import type { AsyncResource } from "@mittwald/react-use-promise";
 import { action, computed, makeObservable, observable } from "mobx";
-import useSelector from "~/lib/mobx/useSelector";
+import useSelector from "@/lib/mobx/useSelector";
 import { useRef } from "react";
-import type { ListData } from "~/components/List/model/loading/types";
+import type { ListData } from "@/components/List/model/loading/types";
 
 type AsyncResourceLoadingState = AsyncResource["state"]["value"];
 type DataBatches<T> = ListData<T>[];

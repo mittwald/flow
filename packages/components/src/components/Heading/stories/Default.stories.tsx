@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Heading from "../Heading";
 import React from "react";
-import { IconMember } from "~/components/Icon/components/icons";
+import { IconMember } from "@/components/Icon/components/icons";
 import {
   storyBackgroundDark,
   storyBackgroundLight,
-} from "~/lib/dev/storyBackgrounds";
+} from "@/lib/dev/storyBackgrounds";
 
 const meta: Meta<typeof Heading> = {
   title: "Content/Heading",

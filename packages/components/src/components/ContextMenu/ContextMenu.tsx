@@ -1,22 +1,22 @@
 import React from "react";
 import type * as Aria from "react-aria-components";
 import styles from "./ContextMenu.module.scss";
-import type { FlowComponentProps } from "~/lib/componentFactory/flowComponent";
-import { flowComponent } from "~/lib/componentFactory/flowComponent";
-import { Popover, type PopoverProps } from "~/components/Popover";
-import type { PropsContext } from "~/lib/propsContext";
-import { ClearPropsContext, PropsContextProvider } from "~/lib/propsContext";
-import type { MenuItemProps } from "~/components/MenuItem";
-import { useOverlayController } from "~/lib/controller";
-import { OverlayContextProvider } from "~/lib/controller/overlay/OverlayContextProvider";
-import { Action } from "~/components/Action";
-import type { ContextMenuSelectionMode } from "~/components/ContextMenu/lib";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import { Popover, type PopoverProps } from "@/components/Popover";
+import type { PropsContext } from "@/lib/propsContext";
+import { ClearPropsContext, PropsContextProvider } from "@/lib/propsContext";
+import type { MenuItemProps } from "@/components/MenuItem";
+import { useOverlayController } from "@/lib/controller";
+import { OverlayContextProvider } from "@/lib/controller/overlay/OverlayContextProvider";
+import { Action } from "@/components/Action";
+import type { ContextMenuSelectionMode } from "@/components/ContextMenu/lib";
 import {
   getAriaSelectionMode,
   getCloseOverlayType,
   getMenuItemSelectionVariant,
-} from "~/components/ContextMenu/lib";
-import ContextMenuContentView from "~/views/ContextMenuContentView";
+} from "@/components/ContextMenu/lib";
+import ContextMenuContentView from "@/views/ContextMenuContentView";
 
 export interface ContextMenuProps
   extends Omit<PopoverProps, "withTip">,

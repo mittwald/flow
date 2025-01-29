@@ -1,10 +1,10 @@
 import type { FC } from "react";
 import React from "react";
-import type { ButtonProps } from "~/components/Button";
-import { useList } from "~/components/List/hooks/useList";
+import type { ButtonProps } from "@/components/Button";
+import { useList } from "@/components/List/hooks/useList";
 import locales from "../../../../locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
-import ButtonView from "~/views/ButtonView";
+import ButtonView from "@/views/ButtonView";
 
 export const ShowNextBatchButton: FC<ButtonProps> = (props) => {
   const stringFormatter = useLocalizedStringFormatter(locales);

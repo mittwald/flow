@@ -1,6 +1,6 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import { FlowRemoteElement } from "~/lib/FlowRemoteElement";
+import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
 import type { ButtonProps as RemoteButtonElementProps } from "@mittwald/flow-react-components/Button";
 export type { ButtonProps as RemoteButtonElementProps } from "@mittwald/flow-react-components/Button";
 

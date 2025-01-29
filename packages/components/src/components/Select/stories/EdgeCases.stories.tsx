@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Select, { Option } from "../index";
 import React from "react";
-import { Label } from "~/components/Label";
+import { Label } from "@/components/Label";
 import defaultMeta from "./Default.stories";
-import { dummyText } from "~/lib/dev/dummyText";
+import { dummyText } from "@/lib/dev/dummyText";
 
 const meta: Meta<typeof Select> = {
   ...defaultMeta,

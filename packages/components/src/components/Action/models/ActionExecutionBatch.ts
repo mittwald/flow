@@ -1,7 +1,7 @@
-import type { ActionModel } from "~/components/Action/models/ActionModel";
-import { callFunctionsInOrder } from "~/lib/promises/callFunctionsInOrder";
-import { callAndReact } from "~/lib/promises/callAndReact";
-import { getExecutionFunction } from "~/components/Action/models/getExecutionFunction";
+import type { ActionModel } from "@/components/Action/models/ActionModel";
+import { callFunctionsInOrder } from "@/lib/promises/callFunctionsInOrder";
+import { callAndReact } from "@/lib/promises/callAndReact";
+import { getExecutionFunction } from "@/components/Action/models/getExecutionFunction";
 
 export class ActionExecutionBatch {
   private readonly actions: ActionModel[] = [];

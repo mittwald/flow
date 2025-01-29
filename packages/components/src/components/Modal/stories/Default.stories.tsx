@@ -1,20 +1,20 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import Button from "~/components/Button";
-import Text from "~/components/Text";
-import TextField from "~/components/TextField";
-import Label from "~/components/Label";
-import Content from "~/components/Content";
-import Heading from "~/components/Heading";
-import Modal, { ModalTrigger } from "~/components/Modal";
-import { useOverlayController } from "~/lib/controller/overlay/useOverlayController";
-import { Action } from "~/components/Action";
-import { ActionGroup } from "~/components/ActionGroup";
-import { asyncLongFunction } from "~/components/Button/stories/lib";
-import { Field, Form } from "~/integrations/react-hook-form";
+import Button from "@/components/Button";
+import Text from "@/components/Text";
+import TextField from "@/components/TextField";
+import Label from "@/components/Label";
+import Content from "@/components/Content";
+import Heading from "@/components/Heading";
+import Modal, { ModalTrigger } from "@/components/Modal";
+import { useOverlayController } from "@/lib/controller/overlay/useOverlayController";
+import { Action } from "@/components/Action";
+import { ActionGroup } from "@/components/ActionGroup";
+import { asyncLongFunction } from "@/components/Button/stories/lib";
+import { Field, Form } from "@/integrations/react-hook-form";
 import { useForm } from "react-hook-form";
 import { action } from "@storybook/addon-actions";
-import { Section } from "~/components/Section";
+import { Section } from "@/components/Section";
 
 const meta: Meta<typeof Modal> = {
   title: "Overlays/Modal",

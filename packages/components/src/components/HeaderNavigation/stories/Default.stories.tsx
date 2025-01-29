@@ -6,24 +6,24 @@ import {
   IconSearch,
   IconSettings,
   IconSupport,
-} from "~/components/Icon/components/icons";
-import { Link } from "~/components/Link";
-import { HeaderNavigation } from "~/components/HeaderNavigation";
-import Button from "~/components/Button";
-import Text from "~/components/Text";
-import { Image } from "~/components/Image";
-import { dummyText } from "~/lib/dev/dummyText";
-import Avatar from "~/components/Avatar";
+} from "@/components/Icon/components/icons";
+import { Link } from "@/components/Link";
+import { HeaderNavigation } from "@/components/HeaderNavigation";
+import Button from "@/components/Button";
+import Text from "@/components/Text";
+import { Image } from "@/components/Image";
+import { dummyText } from "@/lib/dev/dummyText";
+import Avatar from "@/components/Avatar";
 import ContextMenu, {
   ContextMenuTrigger,
   MenuItem,
-} from "~/components/ContextMenu";
+} from "@/components/ContextMenu";
 import {
   storyBackgroundDark,
   storyBackgroundLight,
-} from "~/lib/dev/storyBackgrounds";
-import { Modal, ModalTrigger } from "~/components/Modal";
-import { Heading } from "~/components/Heading";
+} from "@/lib/dev/storyBackgrounds";
+import { Modal, ModalTrigger } from "@/components/Modal";
+import { Heading } from "@/components/Heading";
 
 const meta: Meta<typeof HeaderNavigation> = {
   title: "Navigation/HeaderNavigation",

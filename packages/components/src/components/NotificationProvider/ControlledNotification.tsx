@@ -3,7 +3,7 @@ import { cloneElement } from "react";
 import type {
   NotificationController,
   NotificationData,
-} from "~/components/NotificationProvider/NotificationController";
+} from "@/components/NotificationProvider/NotificationController";
 
 interface Props {
   notification: NotificationData;

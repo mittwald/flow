@@ -4,11 +4,11 @@ import type { TabPanelRenderProps } from "react-aria-components";
 import * as Aria from "react-aria-components";
 import styles from "./Tab.module.scss";
 import clsx from "clsx";
-import { TabContextProvider } from "~/components/Tabs/components/Tab/context";
+import { TabContextProvider } from "@/components/Tabs/components/Tab/context";
 import { TunnelEntry } from "@mittwald/react-tunnel";
-import type { PropsContext } from "~/lib/propsContext";
-import { PropsContextProvider } from "~/lib/propsContext";
-import { Activity } from "~/components/Activity";
+import type { PropsContext } from "@/lib/propsContext";
+import { PropsContextProvider } from "@/lib/propsContext";
+import { Activity } from "@/components/Activity";
 
 export interface TabProps
   extends Omit<Aria.TabPanelProps, "children">,

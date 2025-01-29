@@ -1,16 +1,16 @@
 import type { FC } from "react";
 import React from "react";
-import { useList } from "~/components/List";
-import { TableLoadingView } from "~/components/List/components/Table/components/TableLoadingView";
+import { useList } from "@/components/List";
+import { TableLoadingView } from "@/components/List/components/Table/components/TableLoadingView";
 import styles from "./Table.module.css";
 import clsx from "clsx";
-import ListEmptyViewView from "~/views/ListEmptyViewView";
-import TableView from "~/views/TableView";
-import TableHeaderView from "~/views/TableHeaderView";
-import TableBodyView from "~/views/TableBodyView";
-import TableRowView from "~/views/TableRowView";
-import TableCellView from "~/views/TableCellView";
-import TableColumnView from "~/views/TableColumnView";
+import ListEmptyViewView from "@/views/ListEmptyViewView";
+import TableView from "@/views/TableView";
+import TableHeaderView from "@/views/TableHeaderView";
+import TableBodyView from "@/views/TableBodyView";
+import TableRowView from "@/views/TableRowView";
+import TableCellView from "@/views/TableCellView";
+import TableColumnView from "@/views/TableColumnView";
 
 export const Table: FC = () => {
   const list = useList();

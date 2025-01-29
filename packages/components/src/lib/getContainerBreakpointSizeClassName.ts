@@ -1,4 +1,4 @@
-import type { ContainerBreakpointSize } from "~/lib/types/props";
+import type { ContainerBreakpointSize } from "@/lib/types/props";
 
 export const getContainerBreakpointSizeClassName = (
   containerBreakpointSize: ContainerBreakpointSize,

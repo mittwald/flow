@@ -1,8 +1,8 @@
 import React from "react";
-import type { OverlayTriggerProps } from "~/components/OverlayTrigger";
-import { OverlayTrigger } from "~/components/OverlayTrigger";
-import { flowComponent } from "~/lib/componentFactory/flowComponent";
-import MenuTriggerView from "~/views/MenuTriggerView";
+import type { OverlayTriggerProps } from "@/components/OverlayTrigger";
+import { OverlayTrigger } from "@/components/OverlayTrigger";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import MenuTriggerView from "@/views/MenuTriggerView";
 
 export type ContextMenuTriggerProps = OverlayTriggerProps;
 

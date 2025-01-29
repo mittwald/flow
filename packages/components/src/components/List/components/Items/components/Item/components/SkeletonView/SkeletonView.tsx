@@ -1,9 +1,9 @@
 import type { FC } from "react";
 import React from "react";
-import ListItemView from "~/components/List/components/ListItemView/ListItemView";
-import HeadingView from "~/views/HeadingView";
-import SkeletonTextView from "~/views/SkeletonTextView";
-import TextView from "~/views/TextView";
+import ListItemView from "@/components/List/components/ListItemView/ListItemView";
+import HeadingView from "@/views/HeadingView";
+import SkeletonTextView from "@/views/SkeletonTextView";
+import TextView from "@/views/TextView";
 
 export const SkeletonView: FC = () => {
   return (

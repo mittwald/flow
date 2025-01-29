@@ -1,10 +1,10 @@
-import type { FilterShape } from "~/components/List/model/filter/types";
+import type { FilterShape } from "@/components/List/model/filter/types";
 import type { ReactNode } from "react";
 import type {
   PropertyName,
   PropertyValue,
   PropertyValueRenderMethod,
-} from "~/components/List/model/types";
+} from "@/components/List/model/types";
 
 type Props<T, TProp extends PropertyName<T>, TMatcherValue> = Omit<
   FilterShape<T, TProp, TMatcherValue>,

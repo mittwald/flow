@@ -1,8 +1,8 @@
 import React from "react";
-import type { OverlayTriggerProps } from "~/components/OverlayTrigger";
-import { OverlayTrigger } from "~/components/OverlayTrigger";
-import { flowComponent } from "~/lib/componentFactory/flowComponent";
-import DialogTriggerView from "~/views/DialogTriggerView";
+import type { OverlayTriggerProps } from "@/components/OverlayTrigger";
+import { OverlayTrigger } from "@/components/OverlayTrigger";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import DialogTriggerView from "@/views/DialogTriggerView";
 
 export type PopoverTriggerProps = OverlayTriggerProps;
 

@@ -15,13 +15,13 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import type List from "~/components/List/model/List";
+import type List from "@/components/List/model/List";
 import invariant from "invariant";
 import type {
   OnListChanged,
   PropertyName,
-} from "~/components/List/model/types";
-import type { SearchValue } from "~/components/List/model/search/types";
+} from "@/components/List/model/types";
+import type { SearchValue } from "@/components/List/model/search/types";
 import type { Dispatch, SetStateAction } from "react";
 import { useEffect, useState } from "react";
 

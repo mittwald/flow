@@ -3,7 +3,7 @@ import type {
   FlowComponentPropName,
   FlowComponentProps,
   FlowComponentPropType,
-} from "~/components/propTypes";
+} from "@/components/propTypes";
 
 export interface DynamicProp<
   C extends FlowComponentName,

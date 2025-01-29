@@ -1,12 +1,12 @@
 import type { FC } from "react";
 import React from "react";
-import { useList } from "~/components/List/hooks/useList";
+import { useList } from "@/components/List/hooks/useList";
 import styles from "./Items.module.css";
 import clsx from "clsx";
-import Item from "~/components/List/components/Items/components/Item/Item";
-import { FallbackItems } from "~/components/List/components/Items/components/FallbackItems/FallbackItems";
-import ItemsGridListView from "~/views/ItemsGridListView";
-import DivView from "~/views/DivView";
+import Item from "@/components/List/components/Items/components/Item/Item";
+import { FallbackItems } from "@/components/List/components/Items/components/FallbackItems/FallbackItems";
+import ItemsGridListView from "@/views/ItemsGridListView";
+import DivView from "@/views/DivView";
 
 export const Items: FC = () => {
   const list = useList();

@@ -1,14 +1,14 @@
 import type { PropsWithChildren } from "react";
 import React from "react";
 import * as Aria from "react-aria-components";
-import type { PropsContext } from "~/lib/propsContext";
-import { ClearPropsContext, PropsContextProvider } from "~/lib/propsContext";
-import type { PropsWithElementType } from "~/lib/types/props";
+import type { PropsContext } from "@/lib/propsContext";
+import { ClearPropsContext, PropsContextProvider } from "@/lib/propsContext";
+import type { PropsWithElementType } from "@/lib/types/props";
 import invariant from "invariant";
-import type { FlowComponentProps } from "~/lib/componentFactory/flowComponent";
-import { flowComponent } from "~/lib/componentFactory/flowComponent";
-import { EmulatedBoldText } from "~/components/EmulatedBoldText";
-import { Wrap } from "~/components/Wrap";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import { EmulatedBoldText } from "@/components/EmulatedBoldText";
+import { Wrap } from "@/components/Wrap";
 import clsx from "clsx";
 import styles from "./Text.module.scss";
 

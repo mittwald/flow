@@ -4,22 +4,22 @@ import type {
   ColumnFilter,
   InitialTableState,
 } from "@tanstack/react-table";
-import type List from "~/components/List/model/List";
+import type List from "@/components/List/model/List";
 import { getProperty } from "dot-prop";
 import type {
   FilterMatcher,
   FilterMode,
   FilterShape,
-} from "~/components/List/model/filter/types";
+} from "@/components/List/model/filter/types";
 import type {
   PropertyName,
   PropertyValueRenderMethod,
-} from "~/components/List/model/types";
-import { customPropertyPrefix } from "~/components/List/model/types";
+} from "@/components/List/model/types";
+import { customPropertyPrefix } from "@/components/List/model/types";
 import { difference, unique } from "remeda";
-import { FilterValue } from "~/components/List/model/filter/FilterValue";
+import { FilterValue } from "@/components/List/model/filter/FilterValue";
 import z from "zod";
-import { toArray } from "~/lib/array/toArray";
+import { toArray } from "@/lib/array/toArray";
 
 const equalsPropertyMatcher: FilterMatcher<unknown, never, never> = (
   filterValue,

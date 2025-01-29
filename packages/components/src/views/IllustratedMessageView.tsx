@@ -4,8 +4,8 @@ import React, { type FC, useContext } from "react";
 import {
   IllustratedMessage,
   type IllustratedMessageProps,
-} from "~/components/IllustratedMessage";
-import { viewComponentContext } from "~/lib/viewComponentContext/viewComponentContext";
+} from "@/components/IllustratedMessage";
+import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const IllustratedMessageView: FC<IllustratedMessageProps> = (props) => {
   const View =

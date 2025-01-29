@@ -4,18 +4,18 @@ import "./layout.module.scss";
 import type { Metadata } from "next";
 import type { FC, PropsWithChildren } from "react";
 import React from "react";
-import HeaderNavigation from "~/app/_components/layout/HeaderNavigation/HeaderNavigation";
+import HeaderNavigation from "@/app/_components/layout/HeaderNavigation/HeaderNavigation";
 import clsx from "clsx";
 import styles from "./layout.module.scss";
-import { MdxFileFactory } from "~/lib/mdx/MdxFileFactory";
+import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
 import { LinkProvider } from "@mittwald/flow-react-components/nextjs";
 import logoMittwald from "../../assets/m-flow_logo.svg";
-import MainNavigation from "~/app/_components/layout/MainNavigation";
-import MobileNavigation from "~/app/_components/layout/MobileNavigation/MobileNavigation";
+import MainNavigation from "@/app/_components/layout/MainNavigation";
+import MobileNavigation from "@/app/_components/layout/MobileNavigation/MobileNavigation";
 import { NotificationProvider } from "@mittwald/flow-react-components/NotificationProvider";
 import { Link } from "@mittwald/flow-react-components/Link";
 import { Image } from "@mittwald/flow-react-components/Image";
-import Footer from "~/app/_components/layout/Footer/Footer";
+import Footer from "@/app/_components/layout/Footer/Footer";
 
 export const metadata: Metadata = {
   title: "Flow – mittwald Design System",

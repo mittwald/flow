@@ -3,7 +3,7 @@ import React from "react";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import styles from "../../Popover.module.scss";
-import type { PropsWithClassName } from "~/lib/types/props";
+import type { PropsWithClassName } from "@/lib/types/props";
 
 export interface PopoverContentProps
   extends PropsWithChildren,

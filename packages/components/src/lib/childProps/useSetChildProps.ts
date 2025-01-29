@@ -1,6 +1,6 @@
 import { useId, useLayoutEffect } from "react";
-import type { ChildProps } from "~/lib/childProps/ChildPropsStore";
-import { ChildPropsStore } from "~/lib/childProps/ChildPropsStore";
+import type { ChildProps } from "@/lib/childProps/ChildPropsStore";
+import { ChildPropsStore } from "@/lib/childProps/ChildPropsStore";
 
 export const useSetChildProps = (scope: string, props: ChildProps): void => {
   const store = ChildPropsStore.useFromContext(scope);

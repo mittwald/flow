@@ -1,9 +1,9 @@
 import type { FC } from "react";
 import React from "react";
-import type { ColumnLayoutProps } from "~/components/ColumnLayout";
-import { ColumnLayout } from "~/components/ColumnLayout";
-import type { PropsContext } from "~/lib/propsContext";
-import { PropsContextProvider } from "~/lib/propsContext";
+import type { ColumnLayoutProps } from "@/components/ColumnLayout";
+import { ColumnLayout } from "@/components/ColumnLayout";
+import type { PropsContext } from "@/lib/propsContext";
+import { PropsContextProvider } from "@/lib/propsContext";
 
 export type FileCardListProps = Omit<ColumnLayoutProps, "elementType">;
 

@@ -1,6 +1,6 @@
-import { useList } from "~/components/List/hooks/useList";
+import { useList } from "@/components/List/hooks/useList";
 import React from "react";
-import { Render } from "~/lib/react/components/Render";
+import { Render } from "@/lib/react/components/Render";
 
 export const DataLoader = () => {
   const loaderHooks = useList().loader.getLoaderInvocationHooks();

@@ -1,4 +1,4 @@
-import { liveCodeEditorGlobalImports } from "~/lib/liveCode/dynamicImports";
+import { liveCodeEditorGlobalImports } from "@/lib/liveCode/dynamicImports";
 import type { FC } from "react";
 
 export const getDynamicComponent = (name: string): unknown => {

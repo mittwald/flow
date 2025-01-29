@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import { CodeBlock } from "~/components/CodeBlock";
+import { CodeBlock } from "@/components/CodeBlock";
 import {
   storyBackgroundDark,
   storyBackgroundLight,
-} from "~/lib/dev/storyBackgrounds";
+} from "@/lib/dev/storyBackgrounds";
 
 const meta: Meta<typeof CodeBlock> = {
   title: "Content/CodeBlock",

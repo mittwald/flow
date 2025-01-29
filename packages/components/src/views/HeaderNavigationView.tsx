@@ -4,8 +4,8 @@ import React, { type FC, useContext } from "react";
 import {
   HeaderNavigation,
   type HeaderNavigationProps,
-} from "~/components/HeaderNavigation";
-import { viewComponentContext } from "~/lib/viewComponentContext/viewComponentContext";
+} from "@/components/HeaderNavigation";
+import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const HeaderNavigationView: FC<HeaderNavigationProps> = (props) => {
   const View =

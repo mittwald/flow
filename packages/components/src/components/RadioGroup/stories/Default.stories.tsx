@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Radio, RadioButton, RadioGroup } from "../index";
 import React from "react";
-import { Label } from "~/components/Label";
+import { Label } from "@/components/Label";
 import { action } from "@storybook/addon-actions";
-import { FieldError } from "~/components/FieldError";
-import { Text } from "~/components/Text";
-import { Content } from "~/components/Content";
+import { FieldError } from "@/components/FieldError";
+import { Text } from "@/components/Text";
+import { Content } from "@/components/Content";
 
 const meta: Meta<typeof RadioGroup> = {
   title: "Form Controls/RadioGroup",

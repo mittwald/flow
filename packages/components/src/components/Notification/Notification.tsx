@@ -1,14 +1,14 @@
 import type { ComponentProps, FC, PropsWithChildren } from "react";
 import React from "react";
-import type { PropsWithStatus } from "~/lib/types/props";
+import type { PropsWithStatus } from "@/lib/types/props";
 import styles from "./Notification.module.scss";
 import clsx from "clsx";
-import type { PropsContext } from "~/lib/propsContext";
-import { dynamic, PropsContextProvider } from "~/lib/propsContext";
-import { AlertIcon } from "~/components/AlertIcon";
-import { Link } from "~/components/Link";
-import { Button } from "~/components/Button";
-import { IconClose } from "~/components/Icon/components/icons";
+import type { PropsContext } from "@/lib/propsContext";
+import { dynamic, PropsContextProvider } from "@/lib/propsContext";
+import { AlertIcon } from "@/components/AlertIcon";
+import { Link } from "@/components/Link";
+import { Button } from "@/components/Button";
+import { IconClose } from "@/components/Icon/components/icons";
 
 export interface NotificationProps
   extends PropsWithChildren<ComponentProps<"div">>,

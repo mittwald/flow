@@ -1,11 +1,11 @@
 import type { FC } from "react";
 import React from "react";
 import * as Aria from "react-aria-components";
-import { Popover } from "~/components/Popover";
+import { Popover } from "@/components/Popover";
 import clsx from "clsx";
-import type { OptionProps } from "~/components/Select";
+import type { OptionProps } from "@/components/Select";
 import styles from "./Options.module.scss";
-import { useOverlayController } from "~/lib/controller";
+import { useOverlayController } from "@/lib/controller";
 
 export type OptionsProps = Aria.ListBoxProps<OptionProps>;
 

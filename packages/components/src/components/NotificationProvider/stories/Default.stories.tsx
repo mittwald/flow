@@ -3,10 +3,10 @@ import React, { useEffect } from "react";
 import {
   NotificationProvider,
   useNotificationController,
-} from "~/components/NotificationProvider";
-import { Text } from "~/components/Text";
-import { Notification } from "~/components/Notification";
-import { Heading } from "~/components/Heading";
+} from "@/components/NotificationProvider";
+import { Text } from "@/components/Text";
+import { Notification } from "@/components/Notification";
+import { Heading } from "@/components/Heading";
 
 const meta: Meta<{ autoClose: boolean }> = {
   title: "Status/Notifications",

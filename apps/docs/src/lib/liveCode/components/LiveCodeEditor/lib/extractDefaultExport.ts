@@ -6,7 +6,7 @@ import type {
   FunctionDeclaration,
   ReturnStatement,
 } from "acorn";
-import { tsxParser } from "~/lib/tsxParser";
+import { tsxParser } from "@/lib/tsxParser";
 
 export default function extractDefaultExport(code: string): string {
   const tree = tsxParser.parse(code, {

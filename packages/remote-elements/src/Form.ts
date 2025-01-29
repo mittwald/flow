@@ -1,4 +1,4 @@
-import { FlowRemoteElement } from "~/lib/FlowRemoteElement";
+import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
 
 export type RemoteFormElementProps = {
   id?: string;

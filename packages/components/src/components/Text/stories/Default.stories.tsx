@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Text from "../Text";
 import React from "react";
-import Section from "~/components/Section";
+import Section from "@/components/Section";
 import {
   storyBackgroundDark,
   storyBackgroundLight,
-} from "~/lib/dev/storyBackgrounds";
+} from "@/lib/dev/storyBackgrounds";
 
 const meta: Meta<typeof Text> = {
   title: "Content/Text",

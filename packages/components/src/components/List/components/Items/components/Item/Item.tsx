@@ -2,10 +2,10 @@ import type { FC, PropsWithChildren } from "react";
 import React, { Suspense } from "react";
 import styles from "./Item.module.scss";
 import type { Key } from "react-aria-components";
-import { useList } from "~/components/List/hooks/useList";
-import { SkeletonView } from "~/components/List/components/Items/components/Item/components/SkeletonView/SkeletonView";
-import { useGridItemProps } from "~/components/List/components/Items/components/Item/hooks/useGridItemProps";
-import ItemsGridListItemView from "~/views/ItemsGridListItemView";
+import { useList } from "@/components/List/hooks/useList";
+import { SkeletonView } from "@/components/List/components/Items/components/Item/components/SkeletonView/SkeletonView";
+import { useGridItemProps } from "@/components/List/components/Items/components/Item/hooks/useGridItemProps";
+import ItemsGridListItemView from "@/views/ItemsGridListItemView";
 
 interface Props extends PropsWithChildren {
   id: Key;

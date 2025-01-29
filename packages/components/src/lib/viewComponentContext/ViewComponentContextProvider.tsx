@@ -2,7 +2,7 @@ import type { FC, PropsWithChildren } from "react";
 import { useMemo } from "react";
 import React from "react";
 import { useContext } from "react";
-import { viewComponentContext } from "~/lib/viewComponentContext/viewComponentContext";
+import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 interface Props extends PropsWithChildren {
   components: Partial<FlowViewComponents>;

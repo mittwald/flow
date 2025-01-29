@@ -3,9 +3,9 @@ import React from "react";
 import {
   overlayContext,
   useOverlayContext,
-} from "~/lib/controller/overlay/context";
-import type { FlowComponentName } from "~/components/propTypes";
-import type { OverlayController } from "~/lib/controller";
+} from "@/lib/controller/overlay/context";
+import type { FlowComponentName } from "@/components/propTypes";
+import type { OverlayController } from "@/lib/controller";
 
 interface Props extends PropsWithChildren {
   type: FlowComponentName;

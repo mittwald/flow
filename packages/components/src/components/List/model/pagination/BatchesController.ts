@@ -1,5 +1,5 @@
-import type List from "~/components/List/model/List";
-import type { BatchesControllerShape } from "~/components/List/model/pagination/types";
+import type List from "@/components/List/model/List";
+import type { BatchesControllerShape } from "@/components/List/model/pagination/types";
 import type { Table } from "@tanstack/react-table";
 
 export class BatchesController<T> {

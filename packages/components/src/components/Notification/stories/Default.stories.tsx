@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import { Heading } from "~/components/Heading";
-import { Notification } from "~/components/Notification";
-import { Text } from "~/components/Text";
+import { Heading } from "@/components/Heading";
+import { Notification } from "@/components/Notification";
+import { Text } from "@/components/Text";
 import { action } from "@storybook/addon-actions";
 
 const meta: Meta<typeof Notification> = {

@@ -1,4 +1,4 @@
-import type { AsyncDataLoaderShape } from "~/components/List/model/loading/types";
+import type { AsyncDataLoaderShape } from "@/components/List/model/loading/types";
 import type { ComponentType } from "react";
 
 type Props<T> = Omit<AsyncDataLoaderShape<T>, "asyncLoader"> & {

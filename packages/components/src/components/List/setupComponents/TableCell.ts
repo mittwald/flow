@@ -1,6 +1,6 @@
 import type { ComponentType } from "react";
-import type { TableCellShape } from "~/components/List/model/table/types";
-import type { RenderItemFn } from "~/components/List";
+import type { TableCellShape } from "@/components/List/model/table/types";
+import type { RenderItemFn } from "@/components/List";
 
 type Props<T> = Omit<TableCellShape<T>, "renderFn"> & {
   children: RenderItemFn<T>;

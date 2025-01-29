@@ -7,7 +7,7 @@ import {
   isEventProp,
   isReactSuspendedStyle,
   isStyleProp,
-} from "~/lib/propClassifiers";
+} from "@/lib/propClassifiers";
 
 const mapProperty = (val: unknown, key: string) => {
   if (isEventProp(key, val)) {

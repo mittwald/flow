@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import { Markdown } from "~/components/Markdown";
+import { Markdown } from "@/components/Markdown";
 import {
   storyBackgroundDark,
   storyBackgroundLight,
-} from "~/lib/dev/storyBackgrounds";
+} from "@/lib/dev/storyBackgrounds";
 
 const meta: Meta<typeof Markdown> = {
   title: "Content/Markdown",

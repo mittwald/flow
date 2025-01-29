@@ -3,10 +3,10 @@ import React from "react";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import styles from "./TabTitle.module.scss";
-import { Text } from "~/components/Text";
-import { useTabContext } from "~/components/Tabs/components/Tab/context";
+import { Text } from "@/components/Text";
+import { useTabContext } from "@/components/Tabs/components/Tab/context";
 import { TunnelEntry } from "@mittwald/react-tunnel";
-import { MenuItem } from "~/components/MenuItem";
+import { MenuItem } from "@/components/MenuItem";
 
 export interface TabTitleProps
   extends Omit<Aria.TabProps, "children" | "id" | "isDisabled">,

@@ -1,20 +1,20 @@
-import type { ListProps } from "~/components/List/List";
-import List from "~/components/List/List";
-import { TypedListFilter } from "~/components/List/setupComponents/ListFilter";
-import { TypedListSorting } from "~/components/List/setupComponents/ListSorting";
-import { TypedListItem } from "~/components/List/setupComponents/ListItem";
-import { TypedListLoaderAsync } from "~/components/List/setupComponents/ListLoaderAsync";
-import { TypedListLoaderAsyncResource } from "~/components/List/setupComponents/ListLoaderAsyncResource";
-import { TypedListStaticData } from "~/components/List/setupComponents/ListStaticData";
-import { TypedListSearch } from "~/components/List/setupComponents/ListSearch";
-import { ListItemView } from "~/components/List";
+import type { ListProps } from "@/components/List/List";
+import List from "@/components/List/List";
+import { TypedListFilter } from "@/components/List/setupComponents/ListFilter";
+import { TypedListSorting } from "@/components/List/setupComponents/ListSorting";
+import { TypedListItem } from "@/components/List/setupComponents/ListItem";
+import { TypedListLoaderAsync } from "@/components/List/setupComponents/ListLoaderAsync";
+import { TypedListLoaderAsyncResource } from "@/components/List/setupComponents/ListLoaderAsyncResource";
+import { TypedListStaticData } from "@/components/List/setupComponents/ListStaticData";
+import { TypedListSearch } from "@/components/List/setupComponents/ListSearch";
+import { ListItemView } from "@/components/List";
 import type { ComponentType } from "react";
-import { TableColumn } from "~/components/List/setupComponents/TableColumn";
-import { TableCell } from "~/components/List/setupComponents/TableCell";
-import { TableHeader } from "~/components/List/setupComponents/TableHeader";
-import { TableRow } from "~/components/List/setupComponents/TableRow";
-import { TableBody } from "~/components/List/setupComponents/TableBody";
-import { Table } from "~/components/List/setupComponents/Table";
+import { TableColumn } from "@/components/List/setupComponents/TableColumn";
+import { TableCell } from "@/components/List/setupComponents/TableCell";
+import { TableHeader } from "@/components/List/setupComponents/TableHeader";
+import { TableRow } from "@/components/List/setupComponents/TableRow";
+import { TableBody } from "@/components/List/setupComponents/TableBody";
+import { Table } from "@/components/List/setupComponents/Table";
 
 export const TypedList = <T>() =>
   List as unknown as ComponentType<ListProps<T>>;

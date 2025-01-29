@@ -1,18 +1,18 @@
 import {
   flowComponent,
   type FlowComponentProps,
-} from "~/lib/componentFactory/flowComponent";
-import type { PropsWithContainerBreakpointSize } from "~/lib/types/props";
+} from "@/lib/componentFactory/flowComponent";
+import type { PropsWithContainerBreakpointSize } from "@/lib/types/props";
 import type { PropsWithChildren } from "react";
 import React from "react";
 import * as Aria from "react-aria-components";
-import formFieldStyles from "~/components/FormField/FormField.module.scss";
+import formFieldStyles from "@/components/FormField/FormField.module.scss";
 import styles from "./SegmentedControl.module.scss";
-import { getContainerBreakpointSizeClassName } from "~/lib/getContainerBreakpointSizeClassName";
-import type { PropsContext } from "~/lib/propsContext";
-import { PropsContextProvider } from "~/lib/propsContext";
+import { getContainerBreakpointSizeClassName } from "@/lib/getContainerBreakpointSizeClassName";
+import type { PropsContext } from "@/lib/propsContext";
+import { PropsContextProvider } from "@/lib/propsContext";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
-import { FieldError } from "~/components/FieldError";
+import { FieldError } from "@/components/FieldError";
 import clsx from "clsx";
 
 export interface SegmentedControlProps

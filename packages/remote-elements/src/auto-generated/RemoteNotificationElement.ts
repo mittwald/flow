@@ -1,6 +1,6 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import { FlowRemoteElement } from "~/lib/FlowRemoteElement";
+import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
 import type { NotificationProps as RemoteNotificationElementProps } from "@mittwald/flow-react-components/Notification";
 export type { NotificationProps as RemoteNotificationElementProps } from "@mittwald/flow-react-components/Notification";
 

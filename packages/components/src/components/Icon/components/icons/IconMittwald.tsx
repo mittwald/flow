@@ -1,6 +1,6 @@
 /* auto-generated file */
 import React, { type ComponentProps, type FC } from "react";
-import { Icon } from "~/components/Icon";
+import { Icon } from "@/components/Icon";
 
 export const IconMittwald: FC<Omit<ComponentProps<typeof Icon>, "children">> = (
   props,

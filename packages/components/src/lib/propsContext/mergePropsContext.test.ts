@@ -1,6 +1,6 @@
 import { expect, test } from "vitest";
 import mergePropsContext from "./mergePropsContext";
-import type { PropsContext } from "~/lib/propsContext";
+import type { PropsContext } from "@/lib/propsContext";
 
 test.each<{ first: PropsContext; second: PropsContext; merged: PropsContext }>([
   { first: {}, second: {}, merged: {} },

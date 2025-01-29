@@ -3,17 +3,17 @@ import React from "react";
 import styles from "./RadioGroup.module.scss";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
-import type { PropsContext } from "~/lib/propsContext";
-import { PropsContextProvider } from "~/lib/propsContext";
-import { FieldError } from "~/components/FieldError";
-import type { ColumnLayoutProps } from "~/components/ColumnLayout";
-import { ColumnLayout } from "~/components/ColumnLayout";
+import type { PropsContext } from "@/lib/propsContext";
+import { PropsContextProvider } from "@/lib/propsContext";
+import { FieldError } from "@/components/FieldError";
+import type { ColumnLayoutProps } from "@/components/ColumnLayout";
+import { ColumnLayout } from "@/components/ColumnLayout";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import formFieldStyles from "../FormField/FormField.module.scss";
 import RadioButton from "./components/RadioButton";
-import type { FlowComponentProps } from "~/lib/componentFactory/flowComponent";
-import { flowComponent } from "~/lib/componentFactory/flowComponent";
-import { deepHas } from "~/lib/react/deepHas";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import { deepHas } from "@/lib/react/deepHas";
 
 export interface RadioGroupProps
   extends PropsWithChildren<Omit<Aria.RadioGroupProps, "children">>,

@@ -1,12 +1,12 @@
 import React from "react";
 import styles from "./CheckboxButton.module.scss";
 import clsx from "clsx";
-import type { PropsContext } from "~/lib/propsContext";
-import { ClearPropsContext, PropsContextProvider } from "~/lib/propsContext";
-import type { CheckboxProps } from "~/components/Checkbox";
-import { Checkbox } from "~/components/Checkbox";
-import type { FlowComponentProps } from "~/lib/componentFactory/flowComponent";
-import { flowComponent } from "~/lib/componentFactory/flowComponent";
+import type { PropsContext } from "@/lib/propsContext";
+import { ClearPropsContext, PropsContextProvider } from "@/lib/propsContext";
+import type { CheckboxProps } from "@/components/Checkbox";
+import { Checkbox } from "@/components/Checkbox";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface CheckboxButtonProps
   extends CheckboxProps,

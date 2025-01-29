@@ -1,7 +1,7 @@
 import type { FC, PropsWithChildren } from "react";
 import React from "react";
-import type { FlowComponentName } from "~/components/propTypes";
-import { slotContext, useSlotContext } from "~/lib/slotContext/slotContext";
+import type { FlowComponentName } from "@/components/propTypes";
+import { slotContext, useSlotContext } from "@/lib/slotContext/slotContext";
 
 interface Props extends PropsWithChildren {
   slot: string;

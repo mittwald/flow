@@ -4,8 +4,8 @@ import React, { type FC, useContext } from "react";
 import {
   ContextualHelpTrigger,
   type ContextualHelpTriggerProps,
-} from "~/components/ContextualHelp";
-import { viewComponentContext } from "~/lib/viewComponentContext/viewComponentContext";
+} from "@/components/ContextualHelp";
+import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const ContextualHelpTriggerView: FC<ContextualHelpTriggerProps> = (props) => {
   const View =

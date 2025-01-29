@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import defaultMeta from "./Default.stories";
-import { Accordion } from "~/components/Accordion";
-import { Heading } from "~/components/Heading";
-import { Content } from "~/components/Content";
-import { dummyText } from "~/lib/dev/dummyText";
+import { Accordion } from "@/components/Accordion";
+import { Heading } from "@/components/Heading";
+import { Content } from "@/components/Content";
+import { dummyText } from "@/lib/dev/dummyText";
 
 const meta: Meta<typeof Accordion> = {
   ...defaultMeta,

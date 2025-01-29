@@ -1,4 +1,4 @@
-import type { MdxFile } from "~/lib/mdx/MdxFile";
+import type { MdxFile } from "@/lib/mdx/MdxFile";
 
 export interface MdxDirectoryTree {
   [key: string]: MdxFile | MdxDirectoryTree;

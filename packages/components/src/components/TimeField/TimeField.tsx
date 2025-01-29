@@ -1,11 +1,11 @@
 import type { PropsWithChildren, ReactNode } from "react";
 import React from "react";
 import * as Aria from "react-aria-components";
-import { flowComponent } from "~/lib/componentFactory/flowComponent";
-import type { PropsContext } from "~/lib/propsContext";
-import { PropsContextProvider } from "~/lib/propsContext";
-import formFieldStyles from "~/components/FormField/FormField.module.scss";
-import { FieldError } from "~/components/FieldError";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import type { PropsContext } from "@/lib/propsContext";
+import { PropsContextProvider } from "@/lib/propsContext";
+import formFieldStyles from "@/components/FormField/FormField.module.scss";
+import { FieldError } from "@/components/FieldError";
 import clsx from "clsx";
 import styles from "./TimeField.module.scss";
 

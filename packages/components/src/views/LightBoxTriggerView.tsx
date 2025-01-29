@@ -4,8 +4,8 @@ import React, { type FC, useContext } from "react";
 import {
   LightBoxTrigger,
   type LightBoxTriggerProps,
-} from "~/components/LightBox";
-import { viewComponentContext } from "~/lib/viewComponentContext/viewComponentContext";
+} from "@/components/LightBox";
+import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const LightBoxTriggerView: FC<LightBoxTriggerProps> = (props) => {
   const View =

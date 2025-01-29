@@ -1,7 +1,7 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 "use client";
-import createFlowRemoteComponent from "~/lib/createFlowRemoteComponent";
+import createFlowRemoteComponent from "@/lib/createFlowRemoteComponent";
 import { RemoteHeaderNavigationElement } from "@mittwald/flow-remote-elements";
 export { type RemoteHeaderNavigationElement } from "@mittwald/flow-remote-elements";
 

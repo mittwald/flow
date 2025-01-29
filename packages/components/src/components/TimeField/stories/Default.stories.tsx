@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import { Label } from "~/components/Label";
+import { Label } from "@/components/Label";
 import { action } from "@storybook/addon-actions";
-import FieldDescription from "~/components/FieldDescription/FieldDescription";
-import { FieldError } from "~/components/FieldError";
-import { TimeField } from "~/components/TimeField";
+import FieldDescription from "@/components/FieldDescription/FieldDescription";
+import { FieldError } from "@/components/FieldError";
+import { TimeField } from "@/components/TimeField";
 import { Time } from "@internationalized/date";
 
 const meta: Meta<typeof TimeField> = {

@@ -4,8 +4,8 @@ import React, { type FC, useContext } from "react";
 import {
   SegmentedControl,
   type SegmentedControlProps,
-} from "~/components/SegmentedControl";
-import { viewComponentContext } from "~/lib/viewComponentContext/viewComponentContext";
+} from "@/components/SegmentedControl";
+import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const SegmentedControlView: FC<SegmentedControlProps> = (props) => {
   const View =

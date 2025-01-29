@@ -4,8 +4,8 @@ import React, { type FC, useContext } from "react";
 import {
   Notification,
   type NotificationProps,
-} from "~/components/Notification";
-import { viewComponentContext } from "~/lib/viewComponentContext/viewComponentContext";
+} from "@/components/Notification";
+import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const NotificationView: FC<NotificationProps> = (props) => {
   const View = useContext(viewComponentContext)["Notification"] ?? Notification;

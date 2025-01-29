@@ -1,6 +1,6 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import { createFlowRemoteComponentRenderer } from "~/lib/createFlowRemoteComponentRenderer";
+import { createFlowRemoteComponentRenderer } from "@/lib/createFlowRemoteComponentRenderer";
 import { Accordion as Accordion } from "@mittwald/flow-react-components/Accordion";
 import { ActionGroup as ActionGroup } from "@mittwald/flow-react-components/ActionGroup";
 import { Alert as Alert } from "@mittwald/flow-react-components/Alert";

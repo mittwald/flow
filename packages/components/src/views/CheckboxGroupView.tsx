@@ -4,8 +4,8 @@ import React, { type FC, useContext } from "react";
 import {
   CheckboxGroup,
   type CheckboxGroupProps,
-} from "~/components/CheckboxGroup";
-import { viewComponentContext } from "~/lib/viewComponentContext/viewComponentContext";
+} from "@/components/CheckboxGroup";
+import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const CheckboxGroupView: FC<CheckboxGroupProps> = (props) => {
   const View =

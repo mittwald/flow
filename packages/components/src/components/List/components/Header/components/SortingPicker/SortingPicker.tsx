@@ -1,13 +1,13 @@
 import type { FC } from "react";
 import React from "react";
-import { SortingPickerItem } from "~/components/List/components/Header/components/SortingPickerItem";
-import { useList } from "~/components/List/hooks/useList";
-import ContextMenu, { ContextMenuTrigger } from "~/components/ContextMenu";
+import { SortingPickerItem } from "@/components/List/components/Header/components/SortingPickerItem";
+import { useList } from "@/components/List/hooks/useList";
+import ContextMenu, { ContextMenuTrigger } from "@/components/ContextMenu";
 import locales from "../../../../locales/*.locale.json";
-import { Translate } from "~/lib/react/components/Translate";
-import TextView from "~/views/TextView";
-import ButtonView from "~/views/ButtonView";
-import { IconSorting } from "~/components/Icon/components/icons";
+import { Translate } from "@/lib/react/components/Translate";
+import TextView from "@/views/TextView";
+import ButtonView from "@/views/ButtonView";
+import { IconSorting } from "@/components/Icon/components/icons";
 
 export const SortingPicker: FC = () => {
   const list = useList();

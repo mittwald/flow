@@ -2,8 +2,8 @@ import type { ComponentProps, FC, PropsWithChildren } from "react";
 import React from "react";
 import styles from "./IllustratedMessage.module.scss";
 import clsx from "clsx";
-import type { PropsContext } from "~/lib/propsContext";
-import { PropsContextProvider } from "~/lib/propsContext";
+import type { PropsContext } from "@/lib/propsContext";
+import { PropsContextProvider } from "@/lib/propsContext";
 
 export interface IllustratedMessageProps
   extends PropsWithChildren<ComponentProps<"div">> {

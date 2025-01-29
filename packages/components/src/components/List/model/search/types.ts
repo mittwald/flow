@@ -1,5 +1,5 @@
 import type { ComponentType } from "react";
-import type { SearchFieldProps } from "~/components/SearchField";
+import type { SearchFieldProps } from "@/components/SearchField";
 
 type SupportedSearchFieldProps = Pick<
   SearchFieldProps,

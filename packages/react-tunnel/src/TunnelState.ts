@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import type { ObservableMap } from "mobx";
 import { action, makeObservable, observable } from "mobx";
-import type { TunnelChildren } from "~/types";
+import type { TunnelChildren } from "@/types";
 
 const defaultId = "default";
 

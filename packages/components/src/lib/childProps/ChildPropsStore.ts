@@ -1,7 +1,7 @@
 import { action, makeObservable, observable } from "mobx";
 import { useContext, useRef } from "react";
-import useSelector from "~/lib/mobx/useSelector";
-import { childPropsContext } from "~/lib/childProps/context";
+import useSelector from "@/lib/mobx/useSelector";
+import { childPropsContext } from "@/lib/childProps/context";
 
 export type ChildProps = object;
 

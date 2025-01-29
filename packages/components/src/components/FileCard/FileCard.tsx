@@ -1,17 +1,17 @@
 import React from "react";
 import { Avatar } from "./components/Avatar";
-import { Text } from "~/components/Text";
+import { Text } from "@/components/Text";
 import type {
   PropsWithClassName,
   PropsWithElementType,
-} from "~/lib/types/props";
+} from "@/lib/types/props";
 import styles from "./FileCard.module.scss";
 import clsx from "clsx";
-import { flowComponent } from "~/lib/componentFactory/flowComponent";
-import { FileSizeText } from "~/components/FileCard/components/FileSizeText";
-import { Link, type LinkProps } from "~/components/Link";
-import Wrap from "~/components/Wrap";
-import { DeleteButton } from "~/components/FileCard/components/DeleteButton";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import { FileSizeText } from "@/components/FileCard/components/FileSizeText";
+import { Link, type LinkProps } from "@/components/Link";
+import Wrap from "@/components/Wrap";
+import { DeleteButton } from "@/components/FileCard/components/DeleteButton";
 
 export interface FileCardProps
   extends PropsWithClassName,

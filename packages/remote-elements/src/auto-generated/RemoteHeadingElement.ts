@@ -1,6 +1,6 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import { FlowRemoteElement } from "~/lib/FlowRemoteElement";
+import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
 import type { HeadingProps as RemoteHeadingElementProps } from "@mittwald/flow-react-components/Heading";
 export type { HeadingProps as RemoteHeadingElementProps } from "@mittwald/flow-react-components/Heading";
 

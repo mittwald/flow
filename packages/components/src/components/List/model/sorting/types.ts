@@ -1,5 +1,5 @@
 import type { SortDirection } from "@tanstack/react-table";
-import type { PropertyName } from "~/components/List/model/types";
+import type { PropertyName } from "@/components/List/model/types";
 
 export type SortingDefaultMode = boolean | "hidden";
 

@@ -2,10 +2,10 @@ import type { FC, PropsWithChildren } from "react";
 import React from "react";
 import clsx from "clsx";
 import styles from "./Message.module.scss";
-import type { PropsWithClassName } from "~/lib/types/props";
-import type { PropsContext } from "~/lib/propsContext";
-import { IconContextMenu } from "~/components/Icon/components/icons";
-import PropsContextProvider from "~/lib/propsContext/PropsContextProvider";
+import type { PropsWithClassName } from "@/lib/types/props";
+import type { PropsContext } from "@/lib/propsContext";
+import { IconContextMenu } from "@/components/Icon/components/icons";
+import PropsContextProvider from "@/lib/propsContext/PropsContextProvider";
 
 export interface MessageProps extends PropsWithChildren, PropsWithClassName {
   /** Determines the color of the message. @default "sender" */

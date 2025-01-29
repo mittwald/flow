@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Breadcrumb from "../index";
 import React from "react";
-import { dummyText } from "~/lib/dev/dummyText";
+import { dummyText } from "@/lib/dev/dummyText";
 import defaultMeta from "./Default.stories";
-import { Link } from "~/components/Link";
+import { Link } from "@/components/Link";
 
 const meta: Meta<typeof Breadcrumb> = {
   ...defaultMeta,

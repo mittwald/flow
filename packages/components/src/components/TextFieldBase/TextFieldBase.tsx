@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import * as Aria from "react-aria-components";
 import styles from "../FormField/FormField.module.scss";
 import clsx from "clsx";
-import type { PropsContext } from "~/lib/propsContext";
-import { ClearPropsContext, PropsContextProvider } from "~/lib/propsContext";
-import { FieldError } from "~/components/FieldError";
-import { FieldDescription } from "~/components/FieldDescription";
+import type { PropsContext } from "@/lib/propsContext";
+import { ClearPropsContext, PropsContextProvider } from "@/lib/propsContext";
+import { FieldError } from "@/components/FieldError";
+import { FieldDescription } from "@/components/FieldDescription";
 import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 

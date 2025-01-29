@@ -1,5 +1,5 @@
-import type { ActionModel } from "~/components/Action/models/ActionModel";
-import { ActionExecutionBatch } from "~/components/Action/models/ActionExecutionBatch";
+import type { ActionModel } from "@/components/Action/models/ActionModel";
+import { ActionExecutionBatch } from "@/components/Action/models/ActionExecutionBatch";
 
 export class ActionExecution {
   private readonly action: ActionModel;

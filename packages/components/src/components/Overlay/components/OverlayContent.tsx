@@ -1,7 +1,7 @@
 import * as Aria from "react-aria-components";
 import type { FC, PropsWithChildren, Ref } from "react";
 import React from "react";
-import type { PropsWithClassName } from "~/lib/types/props";
+import type { PropsWithClassName } from "@/lib/types/props";
 
 export interface OverlayContentProps
   extends PropsWithChildren,

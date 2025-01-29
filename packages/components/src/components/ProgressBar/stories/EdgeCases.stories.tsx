@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import ProgressBar from "../ProgressBar";
 import defaultMeta from "./Default.stories";
-import { Label } from "~/components/Label";
+import { Label } from "@/components/Label";
 import React from "react";
-import { dummyText } from "~/lib/dev/dummyText";
+import { dummyText } from "@/lib/dev/dummyText";
 
 const meta: Meta<typeof ProgressBar> = {
   ...defaultMeta,

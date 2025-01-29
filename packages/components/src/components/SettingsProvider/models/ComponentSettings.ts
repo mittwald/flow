@@ -1,7 +1,7 @@
 import { makeAutoObservable, ObservableMap, toJS } from "mobx";
 import type { ZodSchema } from "zod";
 import type z from "zod";
-import { mobxMapToObject } from "~/lib/mobx/mobxMapToObject";
+import { mobxMapToObject } from "@/lib/mobx/mobxMapToObject";
 import { mapValues } from "remeda";
 
 export type ComponentSettingsJson = Record<string, string>;

@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Button from "../Button";
 import React from "react";
-import { IconCamera, IconPlus } from "~/components/Icon/components/icons";
+import { IconCamera, IconPlus } from "@/components/Icon/components/icons";
 import { action } from "@storybook/addon-actions";
-import { Text } from "~/components/Text";
-import IconChevronDown from "~/components/Icon/components/icons/IconChevronDown";
-import { Avatar } from "~/components/Avatar";
-import { Tooltip } from "~/components/Tooltip";
-import TooltipTrigger from "~/components/Tooltip/components/TooltipTrigger";
-import { dummyText } from "~/lib/dev/dummyText";
-import { Image } from "~/components/Image";
+import { Text } from "@/components/Text";
+import IconChevronDown from "@/components/Icon/components/icons/IconChevronDown";
+import { Avatar } from "@/components/Avatar";
+import { Tooltip } from "@/components/Tooltip";
+import TooltipTrigger from "@/components/Tooltip/components/TooltipTrigger";
+import { dummyText } from "@/lib/dev/dummyText";
+import { Image } from "@/components/Image";
 
 const meta: Meta<typeof Button> = {
   title: "Actions/Button",

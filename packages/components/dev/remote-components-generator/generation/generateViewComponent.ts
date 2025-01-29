@@ -10,7 +10,7 @@ export function generateViewComponentDeclaration(c: ComponentDoc) {
 
   return `\
     import type { ${t.componentName} } from "./${t.componentName}";
-    import type { ViewComponent } from "~/lib/viewComponentContext";
+    import type { ViewComponent } from "@/lib/viewComponentContext";
 
     declare global {
       interface FlowViewComponents {
@@ -29,8 +29,8 @@ export function generateViewComponent(c: ComponentDoc) {
 
   return `\
     import React, { type FC, useContext } from "react";
-    import { ${t.componentName}, type ${t.componentName}Props } from "~/components/${t.componentPath}";
-    import { viewComponentContext } from "~/lib/viewComponentContext/viewComponentContext";
+    import { ${t.componentName}, type ${t.componentName}Props } from "@/components/${t.componentPath}";
+    import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
     
     const ${t.viewComponentName}View: FC<${t.componentName}Props> = (props) => {
       const View = useContext(viewComponentContext)["${t.viewComponentName}"] ?? ${t.componentName};

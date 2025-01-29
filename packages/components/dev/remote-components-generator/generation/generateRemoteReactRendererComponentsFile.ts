@@ -23,7 +23,7 @@ export function generateRemoteReactRendererComponentsFile(
   };
 
   return `
-    import { createFlowRemoteComponentRenderer } from "~/lib/createFlowRemoteComponentRenderer";
+    import { createFlowRemoteComponentRenderer } from "@/lib/createFlowRemoteComponentRenderer";
     ${t.imports}
     
     export const flowComponents = {

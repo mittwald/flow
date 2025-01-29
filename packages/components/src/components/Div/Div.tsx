@@ -1,5 +1,5 @@
 import type { FC, PropsWithChildren, Ref } from "react";
-import type { PropsWithClassName } from "~/lib/types/props";
+import type { PropsWithClassName } from "@/lib/types/props";
 
 export interface DivProps extends PropsWithChildren, PropsWithClassName {
   ref?: Ref<HTMLDivElement>;

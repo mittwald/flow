@@ -1,6 +1,6 @@
 import Button from "@mittwald/flow-react-components/Button";
 import Action from "@mittwald/flow-react-components/Action";
-import { sleepLong } from "~/content/03-components/actions/action/examples/lib";
+import { sleepLong } from "@/content/03-components/actions/action/examples/lib";
 import Heading from "@mittwald/flow-react-components/Heading";
 import { Content } from "@mittwald/flow-react-components/Content";
 import ActionGroup from "@mittwald/flow-react-components/ActionGroup";

@@ -1,6 +1,6 @@
 import * as Aria from "react-aria-components";
 import type { FC } from "react";
-import styles from "~/components/List/components/Items/components/Item/Item.module.scss";
+import styles from "@/components/List/components/Items/components/Item/Item.module.scss";
 import clsx from "clsx";
 
 export type GridListItemProps = Aria.GridListItemProps<never> & {

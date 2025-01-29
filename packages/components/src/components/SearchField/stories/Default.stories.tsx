@@ -2,9 +2,9 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { SearchField } from "../index";
 import React from "react";
 import { action } from "@storybook/addon-actions";
-import { Label } from "~/components/Label";
-import FieldDescription from "~/components/FieldDescription";
-import { FieldError } from "~/components/FieldError";
+import { Label } from "@/components/Label";
+import FieldDescription from "@/components/FieldDescription";
+import { FieldError } from "@/components/FieldError";
 
 const meta: Meta<typeof SearchField> = {
   title: "Form Controls/SearchField",

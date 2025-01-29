@@ -9,7 +9,7 @@ export default defineConfig({
   resolve: {
     alias: [
       {
-        find: /~\//,
+        find: /@\//,
         replacement: path.resolve(__dirname) + "/src/",
       },
       {

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Skeleton from "../Skeleton";
 import React from "react";
-import { storyBackgroundDark } from "~/lib/dev/storyBackgrounds";
+import { storyBackgroundDark } from "@/lib/dev/storyBackgrounds";
 
 const meta: Meta<typeof Skeleton> = {
   title: "Content/Skeleton",

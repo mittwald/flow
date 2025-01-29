@@ -1,10 +1,10 @@
 import type { FC, KeyboardEvent } from "react";
 import React, { createElement, useEffect, useState } from "react";
-import type { PropsWithClassName } from "~/lib/types/props";
-import type { Search } from "~/components/List/model/search/Search";
-import type { SearchFieldRenderComponent } from "~/components/List/model/search/types";
-import { useOnChange } from "~/lib/hooks";
-import SearchFieldView from "~/views/SearchFieldView";
+import type { PropsWithClassName } from "@/lib/types/props";
+import type { Search } from "@/components/List/model/search/Search";
+import type { SearchFieldRenderComponent } from "@/components/List/model/search/types";
+import { useOnChange } from "@/lib/hooks";
+import SearchFieldView from "@/views/SearchFieldView";
 
 interface Props extends PropsWithClassName {
   search: Search<never>;

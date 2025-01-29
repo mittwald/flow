@@ -6,8 +6,8 @@ import type {
   MdxFileExamples,
   MdxFileMeta,
   StaticParams,
-} from "~/lib/mdx/MdxFile";
-import { MdxFile } from "~/lib/mdx/MdxFile";
+} from "@/lib/mdx/MdxFile";
+import { MdxFile } from "@/lib/mdx/MdxFile";
 import type { Metadata } from "next";
 import remarkGfm from "remark-gfm";
 

@@ -1,5 +1,5 @@
 import type { ImportDeclaration, Literal } from "acorn";
-import { tsxParser } from "~/lib/tsxParser";
+import { tsxParser } from "@/lib/tsxParser";
 
 interface ImportDefinition {
   names: string[];

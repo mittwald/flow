@@ -1,10 +1,10 @@
-import TopContent from "~/app/_components/layout/TopContent/TopContent";
-import { MdxFileFactory } from "~/lib/mdx/MdxFileFactory";
-import type { StaticParams } from "~/lib/mdx/MdxFile";
+import TopContent from "@/app/_components/layout/TopContent/TopContent";
+import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
+import type { StaticParams } from "@/lib/mdx/MdxFile";
 import { LayoutCard } from "@mittwald/flow-react-components/LayoutCard";
 import { Tabs } from "@mittwald/flow-react-components/Tabs";
 import React from "react";
-import MainContent from "~/app/_components/layout/MainContent/MainContent";
+import MainContent from "@/app/_components/layout/MainContent/MainContent";
 import { Link } from "@mittwald/flow-react-components/Link";
 import { IconExternalLink } from "@mittwald/flow-react-components/Icons";
 

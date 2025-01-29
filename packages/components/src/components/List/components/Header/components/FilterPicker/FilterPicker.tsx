@@ -1,11 +1,11 @@
 import type { FC } from "react";
 import React from "react";
-import type { Filter } from "~/components/List/model/filter/Filter";
-import { IconFilter } from "~/components/Icon/components/icons";
-import MenuItemView from "~/views/MenuItemView";
-import TextView from "~/views/TextView";
-import ButtonView from "~/views/ButtonView";
-import ContextMenu, { ContextMenuTrigger } from "~/components/ContextMenu";
+import type { Filter } from "@/components/List/model/filter/Filter";
+import { IconFilter } from "@/components/Icon/components/icons";
+import MenuItemView from "@/views/MenuItemView";
+import TextView from "@/views/TextView";
+import ButtonView from "@/views/ButtonView";
+import ContextMenu, { ContextMenuTrigger } from "@/components/ContextMenu";
 
 interface Props {
   filter: Filter<never, never, never>;

@@ -1,9 +1,9 @@
 import type { FC, PropsWithChildren } from "react";
 import { useContext } from "react";
-import tunnelContext from "~/context";
+import tunnelContext from "@/context";
 import { observer } from "mobx-react-lite";
 import React from "react";
-import type { TunnelChildren } from "~/types";
+import type { TunnelChildren } from "@/types";
 
 interface Props extends PropsWithChildren {
   id?: string;

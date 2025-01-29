@@ -8,11 +8,11 @@ import CopyButton from "@mittwald/flow-react-components/CopyButton";
 import Link from "@mittwald/flow-react-components/Link";
 import Text from "@mittwald/flow-react-components/Text";
 import { LinkProvider } from "@mittwald/flow-react-components/nextjs";
-import ExamplesContainer from "~/lib/mdx/components/DoAndDont/ExamplesContainer";
+import ExamplesContainer from "@/lib/mdx/components/DoAndDont/ExamplesContainer";
 import { ColumnLayout } from "@mittwald/flow-react-components/ColumnLayout";
 import { InlineCode } from "@mittwald/flow-react-components/InlineCode";
 import { Separator } from "@mittwald/flow-react-components/Separator";
-import { DesignTokenTable } from "~/lib/mdx/components/DesignTokenTable/DesignTokenTable";
+import { DesignTokenTable } from "@/lib/mdx/components/DesignTokenTable/DesignTokenTable";
 import {
   Table,
   TableBody,

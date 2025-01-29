@@ -1,9 +1,9 @@
 import React from "react";
-import { Align } from "~/components/Align";
-import { Text } from "~/components/Text";
+import { Align } from "@/components/Align";
+import { Text } from "@/components/Text";
 import type { Meta, StoryObj } from "@storybook/react";
 import defaultMeta from "./Default.stories";
-import { CopyButton } from "~/components/CopyButton";
+import { CopyButton } from "@/components/CopyButton";
 
 const meta: Meta<typeof Align> = {
   ...defaultMeta,

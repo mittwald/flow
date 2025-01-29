@@ -1,5 +1,5 @@
 import type { ComponentType } from "react";
-import type { TableColumnShape } from "~/components/List/model/table/types";
+import type { TableColumnShape } from "@/components/List/model/table/types";
 
 type Props<IgnoredT> = TableColumnShape;
 

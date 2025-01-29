@@ -1,11 +1,11 @@
 import type { FC } from "react";
 import React from "react";
-import { Button } from "~/components/Button";
+import { Button } from "@/components/Button";
 import * as Aria from "react-aria-components";
 import {
   IconChevronLeft,
   IconChevronRight,
-} from "~/components/Icon/components/icons";
+} from "@/components/Icon/components/icons";
 
 export const CalendarHeader: FC = () => {
   return (

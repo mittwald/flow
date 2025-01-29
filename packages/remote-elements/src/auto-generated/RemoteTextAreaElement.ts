@@ -1,6 +1,6 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import { FlowRemoteElement } from "~/lib/FlowRemoteElement";
+import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
 import type { TextAreaProps as RemoteTextAreaElementProps } from "@mittwald/flow-react-components/TextArea";
 export type { TextAreaProps as RemoteTextAreaElementProps } from "@mittwald/flow-react-components/TextArea";
 

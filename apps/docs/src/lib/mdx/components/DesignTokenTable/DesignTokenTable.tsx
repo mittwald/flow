@@ -9,7 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@mittwald/flow-react-components/Table";
-import { Sample } from "~/lib/mdx/components/DesignTokenTable/Samples/Sample";
+import { Sample } from "@/lib/mdx/components/DesignTokenTable/Samples/Sample";
 
 interface Props {
   path: string;

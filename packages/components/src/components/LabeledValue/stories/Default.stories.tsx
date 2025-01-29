@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import LabeledValue from "../LabeledValue";
 import React from "react";
-import { Label } from "~/components/Label";
-import { Content } from "~/components/Content";
-import { CopyButton } from "~/components/CopyButton";
-import { InlineCode } from "~/components/InlineCode";
-import { Link } from "~/components/Link";
+import { Label } from "@/components/Label";
+import { Content } from "@/components/Content";
+import { CopyButton } from "@/components/CopyButton";
+import { InlineCode } from "@/components/InlineCode";
+import { Link } from "@/components/Link";
 
 const meta: Meta<typeof LabeledValue> = {
   title: "Content/LabeledValue",

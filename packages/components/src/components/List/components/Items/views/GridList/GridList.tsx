@@ -1,6 +1,6 @@
 import * as Aria from "react-aria-components";
 import type { FC } from "react";
-import { EmptyView } from "~/components/List/views/EmptyView";
+import { EmptyView } from "@/components/List/views/EmptyView";
 
 export type GridListProps = Aria.GridListProps<never>;
 

@@ -1,17 +1,17 @@
 import type { ComponentProps, PropsWithChildren } from "react";
 import React from "react";
-import type { PropsContext } from "~/lib/propsContext";
+import type { PropsContext } from "@/lib/propsContext";
 import {
   ClearPropsContext,
   dynamic,
   PropsContextProvider,
-} from "~/lib/propsContext";
+} from "@/lib/propsContext";
 import styles from "./Alert.module.scss";
 import clsx from "clsx";
-import { AlertIcon } from "~/components/AlertIcon";
-import type { PropsWithStatus } from "~/lib/types/props";
-import type { FlowComponentProps } from "~/lib/componentFactory/flowComponent";
-import { flowComponent } from "~/lib/componentFactory/flowComponent";
+import { AlertIcon } from "@/components/AlertIcon";
+import type { PropsWithStatus } from "@/lib/types/props";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface AlertProps
   extends PropsWithChildren<ComponentProps<"aside">>,

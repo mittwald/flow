@@ -1,10 +1,10 @@
 import type { FC } from "react";
 import React from "react";
-import type { MdxFile } from "~/lib/mdx/MdxFile";
-import MdxFileView from "~/lib/mdx/components/MdxFileView";
+import type { MdxFile } from "@/lib/mdx/MdxFile";
+import MdxFileView from "@/lib/mdx/components/MdxFileView";
 import { Tab, TabTitle } from "@mittwald/flow-react-components/Tabs";
 import styles from "../../../layout.module.scss";
-import { MdxFileFactory } from "~/lib/mdx/MdxFileFactory";
+import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
 import * as path from "path";
 
 interface Props {

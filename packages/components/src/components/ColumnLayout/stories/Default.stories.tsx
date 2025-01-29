@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import ColumnLayout from "../ColumnLayout";
 import React from "react";
-import { TextField } from "~/components/TextField";
-import { Label } from "~/components/Label";
-import { Alert } from "~/components/Alert";
-import { Heading } from "~/components/Heading";
-import { Section } from "~/components/Section";
+import { TextField } from "@/components/TextField";
+import { Label } from "@/components/Label";
+import { Alert } from "@/components/Alert";
+import { Heading } from "@/components/Heading";
+import { Section } from "@/components/Section";
 
 const meta: Meta<typeof ColumnLayout> = {
   title: "Structure/ColumnLayout",

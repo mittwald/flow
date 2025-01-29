@@ -6,8 +6,8 @@ import { LayoutCard } from "@mittwald/flow-react-components/LayoutCard";
 import { Section } from "@mittwald/flow-react-components/Section";
 import { ColumnLayout } from "@mittwald/flow-react-components/ColumnLayout";
 import { IconExternalLink } from "@mittwald/flow-react-components/Icons";
-import type { MdxFile } from "~/lib/mdx/MdxFile";
-import MdxFileView from "~/lib/mdx/components/MdxFileView";
+import type { MdxFile } from "@/lib/mdx/MdxFile";
+import MdxFileView from "@/lib/mdx/components/MdxFileView";
 
 interface Props {
   mdxFile: MdxFile;

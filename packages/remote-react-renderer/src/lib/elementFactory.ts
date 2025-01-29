@@ -1,7 +1,7 @@
 import { createElement } from "react";
 import { mapKeys } from "remeda";
 import clsx from "clsx";
-import { mapAttributeToReactProperty } from "~/lib/mapAttributeToReactProperty";
+import { mapAttributeToReactProperty } from "@/lib/mapAttributeToReactProperty";
 
 type ElementTagNameMap = HTMLElementTagNameMap &
   Pick<

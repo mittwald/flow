@@ -2,7 +2,7 @@ import type {
   PropsWithElementType,
   PropsWithStatus,
   Status,
-} from "~/lib/types/props";
+} from "@/lib/types/props";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function testStatusCanBeOmitted() {

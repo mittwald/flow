@@ -1,13 +1,13 @@
 import { expectTypeOf, test, vitest } from "vitest";
-import { flowComponent } from "~/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import type { ComponentType, Ref, PropsWithChildren } from "react";
 import React from "react";
 import { render } from "@testing-library/react";
 import { HTMLDivElement } from "happy-dom";
-import type { FlowComponentName } from "~/components/propTypes";
-import { propsContextSupportingComponents } from "~/components/propTypes";
-import type { PropsWithTunnel } from "~/lib/types/props";
-import { PropsContextProvider } from "~/lib/propsContext";
+import type { FlowComponentName } from "@/components/propTypes";
+import { propsContextSupportingComponents } from "@/components/propTypes";
+import type { PropsWithTunnel } from "@/lib/types/props";
+import { PropsContextProvider } from "@/lib/propsContext";
 
 const getComponentName = (name: string): FlowComponentName => {
   propsContextSupportingComponents.push(name as FlowComponentName);

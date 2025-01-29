@@ -21,8 +21,8 @@ const getTablerIconFileContent = (
 ): string => `\
   import React, { type ComponentProps, type FC } from "react";
   import { Icon${iconTabler} as Tabler } from "@tabler/icons-react";
-  import { type Icon } from "~/components/Icon";
-  import View from "~/views/IconView";
+  import { type Icon } from "@/components/Icon";
+  import View from "@/views/IconView";
   
   export const Icon${iconName}: FC<Omit<ComponentProps<typeof Icon>, "children">> = (
     props,
@@ -42,7 +42,7 @@ const getCustomSvgFileContent = (
   iconSvg: CustomSvgIconDefinition,
 ): string => `\
   import React, { type ComponentProps, type FC } from "react";
-  import { Icon } from "~/components/Icon";
+  import { Icon } from "@/components/Icon";
   
   export const Icon${iconName}: FC<Omit<ComponentProps<typeof Icon>, "children">> = (
     props,

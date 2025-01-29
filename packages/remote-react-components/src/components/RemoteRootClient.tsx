@@ -3,8 +3,8 @@ import type { FC, PropsWithChildren } from "react";
 import React from "react";
 import { connectHostIframeRef } from "@mittwald/flow-remote-core";
 import { ViewComponentContextProvider } from "@mittwald/flow-react-components/internal";
-import * as viewComponents from "~/auto-generated";
-import Preview from "~/components/Preview";
+import * as viewComponents from "@/auto-generated";
+import Preview from "@/components/Preview";
 
 export interface RootClientProps extends PropsWithChildren {
   showPreview?: boolean;

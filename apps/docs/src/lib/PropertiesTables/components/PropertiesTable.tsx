@@ -6,7 +6,7 @@ import {
   TableColumn,
   TableHeader,
 } from "@mittwald/flow-react-components/Table";
-import type { Property } from "~/lib/PropertiesTables/types";
+import type { Property } from "@/lib/PropertiesTables/types";
 
 interface PropertiesTableProps {
   properties: Property[];

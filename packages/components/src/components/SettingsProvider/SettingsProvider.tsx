@@ -6,11 +6,11 @@ import React, {
   useMemo,
   useRef,
 } from "react";
-import type { SupportedSettingsBackend } from "~/components/SettingsProvider/backends/types";
+import type { SupportedSettingsBackend } from "@/components/SettingsProvider/backends/types";
 import { autorun } from "mobx";
 import { getAsyncResource } from "@mittwald/react-use-promise";
-import { SettingsStore } from "~/components/SettingsProvider/models/SettingsStore";
-import { settingsBackendFactory } from "~/components/SettingsProvider/backends/settingsBackendFactory";
+import { SettingsStore } from "@/components/SettingsProvider/models/SettingsStore";
+import { settingsBackendFactory } from "@/components/SettingsProvider/backends/settingsBackendFactory";
 
 type Props = PropsWithChildren &
   SupportedSettingsBackend & {

@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Link from "../Link";
 import React from "react";
-import { dummyText } from "~/lib/dev/dummyText";
+import { dummyText } from "@/lib/dev/dummyText";
 import defaultMeta from "./Default.stories";
-import { IconExternalLink } from "~/components/Icon/components/icons";
+import { IconExternalLink } from "@/components/Icon/components/icons";
 
 const meta: Meta<typeof Link> = {
   ...defaultMeta,

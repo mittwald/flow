@@ -1,4 +1,4 @@
-import ExampleSvg from "~/content/01-get-started/stylesheet/examples/components/ExampleSvg";
+import ExampleSvg from "@/content/01-get-started/stylesheet/examples/components/ExampleSvg";
 
 <aside className="flow--alert">
   <h3 className="flow--heading flow--heading--h3 flow--alert--heading">

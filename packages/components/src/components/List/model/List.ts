@@ -1,23 +1,23 @@
-import { ItemCollection } from "~/components/List/model/item/ItemCollection";
-import { BatchesController } from "~/components/List/model/pagination/BatchesController";
+import { ItemCollection } from "@/components/List/model/item/ItemCollection";
+import { BatchesController } from "@/components/List/model/pagination/BatchesController";
 import { Filter } from "./filter/Filter";
-import { Sorting } from "~/components/List/model/sorting/Sorting";
-import ReactTable from "~/components/List/model/ReactTable";
+import { Sorting } from "@/components/List/model/sorting/Sorting";
+import ReactTable from "@/components/List/model/ReactTable";
 import type {
   GetItemId,
   ItemActionFn,
   ListShape,
   ListSupportedComponentProps,
   ListViewMode,
-} from "~/components/List/model/types";
-import { IncrementalLoader } from "~/components/List/model/loading/IncrementalLoader";
+} from "@/components/List/model/types";
+import { IncrementalLoader } from "@/components/List/model/loading/IncrementalLoader";
 import invariant from "invariant";
-import { Search } from "~/components/List/model/search/Search";
-import { ItemView } from "~/components/List/model/item/ItemView";
-import { Table } from "~/components/List/model/table/Table";
+import { Search } from "@/components/List/model/search/Search";
+import { ItemView } from "@/components/List/model/item/ItemView";
+import { Table } from "@/components/List/model/table/Table";
 import { useEffect, useState } from "react";
-import { useSettings } from "~/components/SettingsProvider/SettingsProvider";
-import type { SettingsStore } from "~/components/SettingsProvider/models/SettingsStore";
+import { useSettings } from "@/components/SettingsProvider/SettingsProvider";
+import type { SettingsStore } from "@/components/SettingsProvider/models/SettingsStore";
 import z from "zod";
 
 export class List<T> {

@@ -1,14 +1,14 @@
 import type { FC } from "react";
-import { ColorSample } from "~/lib/mdx/components/DesignTokenTable/Samples/ColorSample";
-import { CornerRadiusSample } from "~/lib/mdx/components/DesignTokenTable/Samples/CornerRadiusSample";
-import { SizeSample } from "~/lib/mdx/components/DesignTokenTable/Samples/SizeSample";
-import { FontSizeSample } from "~/lib/mdx/components/DesignTokenTable/Samples/FontSizeSample";
-import { PaddingSample } from "~/lib/mdx/components/DesignTokenTable/Samples/PaddingSample";
-import { MarginSample } from "~/lib/mdx/components/DesignTokenTable/Samples/MarginSample";
-import { BorderStyleSample } from "~/lib/mdx/components/DesignTokenTable/Samples/BorderStyleSample";
-import { BorderWidthSample } from "~/lib/mdx/components/DesignTokenTable/Samples/BorderWidthSample";
-import { FontWeightSample } from "~/lib/mdx/components/DesignTokenTable/Samples/FontWeightSample";
-import { LineHeightSample } from "~/lib/mdx/components/DesignTokenTable/Samples/LineHeightSample";
+import { ColorSample } from "@/lib/mdx/components/DesignTokenTable/Samples/ColorSample";
+import { CornerRadiusSample } from "@/lib/mdx/components/DesignTokenTable/Samples/CornerRadiusSample";
+import { SizeSample } from "@/lib/mdx/components/DesignTokenTable/Samples/SizeSample";
+import { FontSizeSample } from "@/lib/mdx/components/DesignTokenTable/Samples/FontSizeSample";
+import { PaddingSample } from "@/lib/mdx/components/DesignTokenTable/Samples/PaddingSample";
+import { MarginSample } from "@/lib/mdx/components/DesignTokenTable/Samples/MarginSample";
+import { BorderStyleSample } from "@/lib/mdx/components/DesignTokenTable/Samples/BorderStyleSample";
+import { BorderWidthSample } from "@/lib/mdx/components/DesignTokenTable/Samples/BorderWidthSample";
+import { FontWeightSample } from "@/lib/mdx/components/DesignTokenTable/Samples/FontWeightSample";
+import { LineHeightSample } from "@/lib/mdx/components/DesignTokenTable/Samples/LineHeightSample";
 
 interface SampleProps {
   tokenName: string;

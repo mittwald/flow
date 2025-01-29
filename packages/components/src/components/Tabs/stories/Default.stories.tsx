@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import { Tab, Tabs, TabTitle } from "~/components/Tabs";
-import { Section } from "~/components/Section";
-import { Heading } from "~/components/Heading";
-import { Text } from "~/components/Text";
-import { TextField } from "~/components/TextField";
-import { Label } from "~/components/Label";
-import { LabeledValue } from "~/components/LabeledValue";
-import { Switch } from "~/components/Switch";
-import { Header } from "~/components/Header";
-import { AlertIcon } from "~/components/AlertIcon";
+import { Tab, Tabs, TabTitle } from "@/components/Tabs";
+import { Section } from "@/components/Section";
+import { Heading } from "@/components/Heading";
+import { Text } from "@/components/Text";
+import { TextField } from "@/components/TextField";
+import { Label } from "@/components/Label";
+import { LabeledValue } from "@/components/LabeledValue";
+import { Switch } from "@/components/Switch";
+import { Header } from "@/components/Header";
+import { AlertIcon } from "@/components/AlertIcon";
 
 const meta: Meta<typeof Tabs> = {
   title: "Navigation/Tabs",

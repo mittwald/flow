@@ -1,10 +1,10 @@
 import { makeAutoObservable, ObservableMap } from "mobx";
-import { ComponentSettings } from "~/components/SettingsProvider/models/ComponentSettings";
-import type { FlowComponentName } from "~/components/propTypes";
+import { ComponentSettings } from "@/components/SettingsProvider/models/ComponentSettings";
+import type { FlowComponentName } from "@/components/propTypes";
 import { mapValues } from "remeda";
 import type { ZodSchema } from "zod";
 import type z from "zod";
-import { mobxMapToObject } from "~/lib/mobx/mobxMapToObject";
+import { mobxMapToObject } from "@/lib/mobx/mobxMapToObject";
 
 export class SettingsStore {
   public readonly componentSettings: ObservableMap<

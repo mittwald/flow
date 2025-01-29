@@ -1,11 +1,11 @@
 import locales from "../../../../locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
-import type { TextProps } from "~/components/Text";
+import type { TextProps } from "@/components/Text";
 import type { FC } from "react";
 import React from "react";
-import { useList } from "~/components/List/hooks/useList";
-import SkeletonView from "~/views/SkeletonView";
-import TextView from "~/views/TextView";
+import { useList } from "@/components/List/hooks/useList";
+import SkeletonView from "@/views/SkeletonView";
+import TextView from "@/views/TextView";
 
 export const PaginationInfos: FC<TextProps> = (props) => {
   const stringFormatter = useLocalizedStringFormatter(locales);

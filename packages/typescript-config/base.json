@@ -24,7 +24,7 @@
     "baseUrl": "${configDir}",
     "rootDir": "${configDir}/src",
     "paths": {
-      "~/*": ["./src/*"]
+      "@/*": ["./src/*"]
     }
   },
   "display": "Base Configuration",

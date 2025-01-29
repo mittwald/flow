@@ -4,8 +4,8 @@ import React, { type FC, useContext } from "react";
 import {
   ContextMenuContent,
   type ContextMenuContentProps,
-} from "~/components/ContextMenu";
-import { viewComponentContext } from "~/lib/viewComponentContext/viewComponentContext";
+} from "@/components/ContextMenu";
+import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const ContextMenuContentView: FC<ContextMenuContentProps> = (props) => {
   const View =

@@ -1,8 +1,8 @@
 import type { FC, PropsWithChildren } from "react";
 import React, { createContext, useContext, useEffect, useRef } from "react";
-import type { ActionState } from "~/components/Action/models/ActionState";
+import type { ActionState } from "@/components/Action/models/ActionState";
 import { action, computed, makeObservable, observable } from "mobx";
-import useSelector from "~/lib/mobx/useSelector";
+import useSelector from "@/lib/mobx/useSelector";
 
 export class ActionStateContext {
   public states = new Set<ActionState>();

@@ -7,7 +7,7 @@ import ActionGroup from "@mittwald/flow-react-components/ActionGroup";
 import Button from "@mittwald/flow-react-components/Button";
 import Heading from "@mittwald/flow-react-components/Heading";
 import Action from "@mittwald/flow-react-components/Action";
-import { sleepLong } from "~/content/03-components/actions/action/examples/lib";
+import { sleepLong } from "@/content/03-components/actions/action/examples/lib";
 import { useOverlayController } from "@mittwald/flow-react-components/controller";
 import Section from "@mittwald/flow-react-components/Section";
 

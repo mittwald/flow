@@ -5,12 +5,12 @@ import {
   IconInfo,
   IconSuccess,
   IconWarning,
-} from "~/components/Icon/components/icons";
+} from "@/components/Icon/components/icons";
 import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
-import type { PropsWithStatus, Status } from "~/lib/types/props";
-import type { IconProps } from "~/components/Icon";
-import { ClearPropsContext } from "~/lib/propsContext";
+import type { PropsWithStatus, Status } from "@/lib/types/props";
+import type { IconProps } from "@/components/Icon";
+import { ClearPropsContext } from "@/lib/propsContext";
 import clsx from "clsx";
 import styles from "./AlertIcon.module.scss";
 

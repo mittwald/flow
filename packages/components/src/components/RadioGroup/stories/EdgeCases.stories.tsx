@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Radio, RadioButton, RadioGroup } from "../index";
 import React from "react";
-import { dummyText } from "~/lib/dev/dummyText";
+import { dummyText } from "@/lib/dev/dummyText";
 import defaultMeta from "./Default.stories";
-import { Text } from "~/components/Text";
-import { Content } from "~/components/Content";
+import { Text } from "@/components/Text";
+import { Content } from "@/components/Content";
 
 const meta: Meta<typeof RadioGroup> = {
   title: "Form Controls/RadioGroup/Edge Cases",

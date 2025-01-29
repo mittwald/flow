@@ -1,8 +1,8 @@
-import type { DynamicProp } from "~/lib/propsContext/dynamicProps/types";
+import type { DynamicProp } from "@/lib/propsContext/dynamicProps/types";
 import type {
   FlowComponentName,
   FlowComponentPropName,
-} from "~/components/propTypes";
+} from "@/components/propTypes";
 
 export function isDynamicProp<
   C extends FlowComponentName,

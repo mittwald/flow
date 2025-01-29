@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import InlineCode from "../InlineCode";
 import React from "react";
-import { Text } from "~/components/Text";
+import { Text } from "@/components/Text";
 import defaultStories from "./Default.stories";
-import { dummyText } from "~/lib/dev/dummyText";
-import Section from "~/components/Section";
+import { dummyText } from "@/lib/dev/dummyText";
+import Section from "@/components/Section";
 
 const meta: Meta<typeof InlineCode> = {
   ...defaultStories,

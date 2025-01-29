@@ -2,12 +2,12 @@ import type { PropsWithChildren } from "react";
 import React from "react";
 import styles from "./AlertBadge.module.scss";
 import clsx from "clsx";
-import { AlertIcon } from "~/components/AlertIcon";
-import { Text } from "~/components/Text";
-import type { PropsWithClassName, PropsWithStatus } from "~/lib/types/props";
-import { ClearPropsContext } from "~/lib/propsContext";
-import type { FlowComponentProps } from "~/lib/componentFactory/flowComponent";
-import { flowComponent } from "~/lib/componentFactory/flowComponent";
+import { AlertIcon } from "@/components/AlertIcon";
+import { Text } from "@/components/Text";
+import type { PropsWithClassName, PropsWithStatus } from "@/lib/types/props";
+import { ClearPropsContext } from "@/lib/propsContext";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface AlertBadgeProps
   extends PropsWithChildren,

@@ -4,8 +4,8 @@ import React, { type FC, useContext } from "react";
 import {
   FileCardList,
   type FileCardListProps,
-} from "~/components/FileCardList";
-import { viewComponentContext } from "~/lib/viewComponentContext/viewComponentContext";
+} from "@/components/FileCardList";
+import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const FileCardListView: FC<FileCardListProps> = (props) => {
   const View = useContext(viewComponentContext)["FileCardList"] ?? FileCardList;

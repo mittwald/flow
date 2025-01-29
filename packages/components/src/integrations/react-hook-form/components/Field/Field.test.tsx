@@ -1,10 +1,10 @@
 import { beforeEach, expect, vitest } from "vitest";
 import { useForm } from "react-hook-form";
-import { Form, typedField } from "~/integrations/react-hook-form";
-import { Option, Select } from "~/components/Select";
+import { Form, typedField } from "@/integrations/react-hook-form";
+import { Option, Select } from "@/components/Select";
 import React from "react";
-import { Button } from "~/components/Button";
-import { Label } from "~/components/Label";
+import { Button } from "@/components/Button";
+import { Label } from "@/components/Label";
 import { act, fireEvent, render, screen } from "@testing-library/react";
 
 const handleSubmit = vitest.fn();

@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { Render } from "~/lib/react/components/Render/Render";
+import { Render } from "@/lib/react/components/Render/Render";
 import React from "react";
 import { expect, test } from "vitest";
 

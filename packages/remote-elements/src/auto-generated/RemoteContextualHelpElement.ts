@@ -1,6 +1,6 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import { FlowRemoteElement } from "~/lib/FlowRemoteElement";
+import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
 import type { ContextualHelpProps as RemoteContextualHelpElementProps } from "@mittwald/flow-react-components/ContextualHelp";
 export type { ContextualHelpProps as RemoteContextualHelpElementProps } from "@mittwald/flow-react-components/ContextualHelp";
 

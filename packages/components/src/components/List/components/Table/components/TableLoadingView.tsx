@@ -1,14 +1,14 @@
 import type { FC } from "react";
 import React from "react";
-import { SkeletonText } from "~/components/SkeletonText";
-import type { TableSupportedComponentProps } from "~/components/List/model/table/types";
-import TableView from "~/views/TableView";
-import TableColumnView from "~/views/TableColumnView";
-import TableBodyView from "~/views/TableBodyView";
-import TableRowView from "~/views/TableRowView";
-import SkeletonTextView from "~/views/SkeletonTextView";
-import TableHeaderView from "~/views/TableHeaderView";
-import TableCellView from "~/views/TableCellView";
+import { SkeletonText } from "@/components/SkeletonText";
+import type { TableSupportedComponentProps } from "@/components/List/model/table/types";
+import TableView from "@/views/TableView";
+import TableColumnView from "@/views/TableColumnView";
+import TableBodyView from "@/views/TableBodyView";
+import TableRowView from "@/views/TableRowView";
+import SkeletonTextView from "@/views/SkeletonTextView";
+import TableHeaderView from "@/views/TableHeaderView";
+import TableCellView from "@/views/TableCellView";
 
 export const TableLoadingView: FC<TableSupportedComponentProps> = (props) => {
   return (

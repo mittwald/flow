@@ -1,5 +1,5 @@
-import type { FlowComponentName } from "~/components/propTypes";
-import { useSlotContext } from "~/lib/slotContext/slotContext";
+import type { FlowComponentName } from "@/components/propTypes";
+import { useSlotContext } from "@/lib/slotContext/slotContext";
 
 export const useContextSlot = (
   component: FlowComponentName,

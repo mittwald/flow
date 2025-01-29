@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import { Text } from "~/components/Text";
-import { dummyText } from "~/lib/dev/dummyText";
+import { Text } from "@/components/Text";
+import { dummyText } from "@/lib/dev/dummyText";
 import defaultMeta from "./Default.stories";
 import { IllustratedMessage } from "../IllustratedMessage";
-import { Heading } from "~/components/Heading";
-import { Button } from "~/components/Button";
-import { IconApp } from "~/components/Icon/components/icons";
+import { Heading } from "@/components/Heading";
+import { Button } from "@/components/Button";
+import { IconApp } from "@/components/Icon/components/icons";
 
 const meta: Meta<typeof IllustratedMessage> = {
   ...defaultMeta,

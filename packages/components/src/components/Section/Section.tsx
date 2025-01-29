@@ -2,11 +2,11 @@ import type { ComponentProps, PropsWithChildren } from "react";
 import React, { useId } from "react";
 import styles from "./Section.module.scss";
 import clsx from "clsx";
-import type { PropsContext } from "~/lib/propsContext";
-import { PropsContextProvider } from "~/lib/propsContext";
-import type { FlowComponentProps } from "~/lib/componentFactory/flowComponent";
-import { flowComponent } from "~/lib/componentFactory/flowComponent";
-import { ContextMenuSection } from "~/components/ContextMenu/components/ContextMenuSection";
+import type { PropsContext } from "@/lib/propsContext";
+import { PropsContextProvider } from "@/lib/propsContext";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import { ContextMenuSection } from "@/components/ContextMenu/components/ContextMenuSection";
 
 export interface SectionProps
   extends PropsWithChildren<ComponentProps<"section">>,

@@ -1,17 +1,17 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React, { useState } from "react";
-import { Label } from "~/components/Label";
-import { FileField } from "~/components/FileField";
-import { Button } from "~/components/Button";
-import { Section } from "~/components/Section";
-import { FieldError } from "~/components/FieldError";
-import { FieldDescription } from "~/components/FieldDescription";
+import { Label } from "@/components/Label";
+import { FileField } from "@/components/FileField";
+import { Button } from "@/components/Button";
+import { Section } from "@/components/Section";
+import { FieldError } from "@/components/FieldError";
+import { FieldDescription } from "@/components/FieldDescription";
 import { IconPaperclip } from "@tabler/icons-react";
-import { Icon } from "~/components/Icon";
+import { Icon } from "@/components/Icon";
 import { useForm } from "react-hook-form";
-import { Form, typedField } from "~/integrations/react-hook-form";
+import { Form, typedField } from "@/integrations/react-hook-form";
 import { action } from "@storybook/addon-actions";
-import { ActionGroup } from "~/components/ActionGroup";
+import { ActionGroup } from "@/components/ActionGroup";
 
 const meta: Meta<typeof FileField> = {
   title: "Form Controls/FileField",

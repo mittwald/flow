@@ -2,7 +2,7 @@ import { typedList } from "@mittwald/flow-react-components/List";
 import {
   type Domain,
   domains,
-} from "~/content/03-components/structure/list/examples/domainApi";
+} from "@/content/03-components/structure/list/examples/domainApi";
 import Avatar from "@mittwald/flow-react-components/Avatar";
 import Heading from "@mittwald/flow-react-components/Heading";
 import Text from "@mittwald/flow-react-components/Text";

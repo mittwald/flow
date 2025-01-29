@@ -3,10 +3,10 @@ import React from "react";
 import {
   IconChevronDown,
   IconChevronUp,
-} from "~/components/Icon/components/icons";
+} from "@/components/Icon/components/icons";
 import locales from "../../../../../locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
-import ButtonView from "~/views/ButtonView";
+import ButtonView from "@/views/ButtonView";
 
 interface Props extends PropsWithChildren {
   isExpanded: boolean;

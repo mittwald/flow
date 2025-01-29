@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import LoadingSpinner from "~/components/LoadingSpinner/LoadingSpinner";
+import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 
 const meta: Meta<typeof LoadingSpinner> = {
   title: "Status/LoadingSpinner",

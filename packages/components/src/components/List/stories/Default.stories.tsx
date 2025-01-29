@@ -1,22 +1,22 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import List from "../List";
 import React from "react";
-import { Heading } from "~/components/Heading";
-import { Text } from "~/components/Text";
+import { Heading } from "@/components/Heading";
+import { Text } from "@/components/Text";
 import { usePromise } from "@mittwald/react-use-promise";
-import type { AsyncDataLoader } from "~/components/List/model/loading/types";
-import { Avatar } from "~/components/Avatar";
-import { ContextMenu, MenuItem } from "~/components/ContextMenu";
-import { IconDomain, IconSubdomain } from "~/components/Icon/components/icons";
-import AlertBadge from "~/components/AlertBadge";
+import type { AsyncDataLoader } from "@/components/List/model/loading/types";
+import { Avatar } from "@/components/Avatar";
+import { ContextMenu, MenuItem } from "@/components/ContextMenu";
+import { IconDomain, IconSubdomain } from "@/components/Icon/components/icons";
+import AlertBadge from "@/components/AlertBadge";
 import type { Domain } from "../testData/domainApi";
 import { getDomains, getTypes } from "../testData/domainApi";
-import { Section } from "~/components/Section";
-import { ListItemView, ListSummary, typedList } from "~/components/List";
-import { Button } from "~/components/Button";
-import IconDownload from "~/components/Icon/components/icons/IconDownload";
-import { ActionGroup } from "~/components/ActionGroup";
-import { Content } from "~/components/Content";
+import { Section } from "@/components/Section";
+import { ListItemView, ListSummary, typedList } from "@/components/List";
+import { Button } from "@/components/Button";
+import IconDownload from "@/components/Icon/components/icons/IconDownload";
+import { ActionGroup } from "@/components/ActionGroup";
+import { Content } from "@/components/Content";
 
 const loadDomains: AsyncDataLoader<Domain> = async (opts) => {
   const response = await getDomains({

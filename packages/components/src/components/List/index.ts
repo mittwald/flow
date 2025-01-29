@@ -3,8 +3,8 @@ export type {
   AsyncDataLoader,
   AsyncResourceFactory,
   DataLoaderResult,
-} from "~/components/List/model/loading/types";
-export type { RenderItemFn } from "~/components/List/model/item/types";
+} from "@/components/List/model/loading/types";
+export type { RenderItemFn } from "@/components/List/model/item/types";
 
 export * from "./components/ListSummary";
 export * from "./components/ListItemView";

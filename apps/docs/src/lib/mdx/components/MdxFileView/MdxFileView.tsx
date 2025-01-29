@@ -1,15 +1,15 @@
 "use client";
 import type { FC } from "react";
 import { MDXRemote as NextMDXRemote } from "next-mdx-remote";
-import type { LiveCodeEditorProps } from "~/lib/liveCode/components/LiveCodeEditor/LiveCodeEditor";
-import LiveCodeEditor from "~/lib/liveCode/components/LiveCodeEditor/LiveCodeEditor";
-import { PropertiesTables } from "~/lib/PropertiesTables/PropertiesTables";
-import { MdxFile } from "~/lib/mdx/MdxFile";
-import type { SerializedMdxFile } from "~/lib/mdx/MdxFile";
-import { customComponents } from "~/lib/mdx/components/MdxFileView/customComponents";
+import type { LiveCodeEditorProps } from "@/lib/liveCode/components/LiveCodeEditor/LiveCodeEditor";
+import LiveCodeEditor from "@/lib/liveCode/components/LiveCodeEditor/LiveCodeEditor";
+import { PropertiesTables } from "@/lib/PropertiesTables/PropertiesTables";
+import { MdxFile } from "@/lib/mdx/MdxFile";
+import type { SerializedMdxFile } from "@/lib/mdx/MdxFile";
+import { customComponents } from "@/lib/mdx/components/MdxFileView/customComponents";
 import styles from "./customComponents.module.css";
-import type { DoAndDontTileProps } from "~/lib/mdx/components/DoAndDont/ExampleTile";
-import ExampleTile from "~/lib/mdx/components/DoAndDont/ExampleTile";
+import type { DoAndDontTileProps } from "@/lib/mdx/components/DoAndDont/ExampleTile";
+import ExampleTile from "@/lib/mdx/components/DoAndDont/ExampleTile";
 
 interface Props {
   mdxFile: SerializedMdxFile;

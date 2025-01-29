@@ -2,8 +2,8 @@ import type {
   PropertyName,
   PropertyValue,
   PropertyValueRenderMethod,
-} from "~/components/List/model/types";
-import type { ItemType } from "~/lib/types/array";
+} from "@/components/List/model/types";
+import type { ItemType } from "@/lib/types/array";
 
 export type FilterMode = "all" | "some" | "one";
 

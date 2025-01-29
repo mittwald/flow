@@ -1,13 +1,13 @@
 import React from "react";
-import { ActionModel as ActionModel } from "~/components/Action/models/ActionModel";
-import type { PropsContext } from "~/lib/propsContext";
-import { dynamic, PropsContextProvider } from "~/lib/propsContext";
-import { ActionContextProvider } from "~/components/Action/context";
-import { useActionStateContext } from "~/components/Action/models/ActionStateContext";
-import { useConfirmationModalButtonSlot } from "~/components/Action/hooks/useConfirmationModalButtonSlot";
-import { useActionButtonState } from "~/components/Action/hooks/useActionButtonState";
-import type { ComponentPropsContext } from "~/lib/propsContext/types";
-import { flowComponent } from "~/lib/componentFactory/flowComponent";
+import { ActionModel as ActionModel } from "@/components/Action/models/ActionModel";
+import type { PropsContext } from "@/lib/propsContext";
+import { dynamic, PropsContextProvider } from "@/lib/propsContext";
+import { ActionContextProvider } from "@/components/Action/context";
+import { useActionStateContext } from "@/components/Action/models/ActionStateContext";
+import { useConfirmationModalButtonSlot } from "@/components/Action/hooks/useConfirmationModalButtonSlot";
+import { useActionButtonState } from "@/components/Action/hooks/useActionButtonState";
+import type { ComponentPropsContext } from "@/lib/propsContext/types";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 const actionButtonContext: ComponentPropsContext<"Button"> = {
   onPress: dynamic((props) => {

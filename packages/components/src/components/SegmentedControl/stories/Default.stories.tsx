@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Segment, SegmentedControl } from "../index";
 import React from "react";
-import { Label } from "~/components/Label";
+import { Label } from "@/components/Label";
 import { action } from "@storybook/addon-actions";
-import { FieldError } from "~/components/FieldError";
+import { FieldError } from "@/components/FieldError";
 
 const meta: Meta<typeof SegmentedControl> = {
   title: "Form Controls/SegmentedControl",

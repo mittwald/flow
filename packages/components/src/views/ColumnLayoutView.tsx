@@ -4,8 +4,8 @@ import React, { type FC, useContext } from "react";
 import {
   ColumnLayout,
   type ColumnLayoutProps,
-} from "~/components/ColumnLayout";
-import { viewComponentContext } from "~/lib/viewComponentContext/viewComponentContext";
+} from "@/components/ColumnLayout";
+import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const ColumnLayoutView: FC<ColumnLayoutProps> = (props) => {
   const View = useContext(viewComponentContext)["ColumnLayout"] ?? ColumnLayout;

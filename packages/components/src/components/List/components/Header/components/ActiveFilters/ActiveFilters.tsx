@@ -1,23 +1,23 @@
 import type { FC } from "react";
 import React from "react";
-import { useList } from "~/components/List/hooks/useList";
+import { useList } from "@/components/List/hooks/useList";
 import styles from "./ActiveFilters.module.scss";
 import locales from "../../../../locales/*.locale.json";
-import { Translate } from "~/lib/react/components/Translate";
+import { Translate } from "@/lib/react/components/Translate";
 import { observer } from "mobx-react-lite";
 import { useLocalizedStringFormatter } from "react-aria";
-import { TooltipTrigger } from "~/components/Tooltip";
+import { TooltipTrigger } from "@/components/Tooltip";
 import {
   IconClose,
   IconSave,
   IconUndo,
-} from "~/components/Icon/components/icons";
-import ButtonView from "~/views/ButtonView";
-import TooltipView from "~/views/TooltipView";
-import DivView from "~/views/DivView";
-import BadgeView from "~/views/BadgeView";
-import TooltipTriggerView from "~/views/TooltipTriggerView";
-import TextView from "~/views/TextView";
+} from "@/components/Icon/components/icons";
+import ButtonView from "@/views/ButtonView";
+import TooltipView from "@/views/TooltipView";
+import DivView from "@/views/DivView";
+import BadgeView from "@/views/BadgeView";
+import TooltipTriggerView from "@/views/TooltipTriggerView";
+import TextView from "@/views/TextView";
 
 export const ActiveFilters: FC = observer(() => {
   const list = useList();

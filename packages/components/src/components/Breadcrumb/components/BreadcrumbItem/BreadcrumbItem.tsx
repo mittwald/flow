@@ -3,7 +3,7 @@ import React from "react";
 import * as Aria from "react-aria-components";
 import styles from "../../Breadcrumb.module.scss";
 import clsx from "clsx";
-import { IconChevronRight } from "~/components/Icon/components/icons";
+import { IconChevronRight } from "@/components/Icon/components/icons";
 
 export type BreadcrumbItemProps = PropsWithChildren;
 

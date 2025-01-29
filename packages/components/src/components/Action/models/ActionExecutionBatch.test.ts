@@ -1,11 +1,11 @@
 import { expect, test } from "vitest";
 import { renderHook } from "@testing-library/react";
-import type { ActionStateValue } from "~/components/Action/models/ActionState";
-import type { ActionProps } from "~/components/Action";
-import { ActionModel } from "~/components/Action/models/ActionModel";
-import { ActionExecutionBatch } from "~/components/Action/models/ActionExecutionBatch";
+import type { ActionStateValue } from "@/components/Action/models/ActionState";
+import type { ActionProps } from "@/components/Action";
+import { ActionModel } from "@/components/Action/models/ActionModel";
+import { ActionExecutionBatch } from "@/components/Action/models/ActionExecutionBatch";
 import { autorun } from "mobx";
-import { sleep } from "~/lib/promises/sleep";
+import { sleep } from "@/lib/promises/sleep";
 
 vi.useFakeTimers({});
 

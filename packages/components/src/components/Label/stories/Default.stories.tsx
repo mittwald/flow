@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Label from "../Label";
 import React from "react";
-import { Button } from "~/components/Button";
+import { Button } from "@/components/Button";
 import {
   ContextualHelp,
   ContextualHelpTrigger,
-} from "~/components/ContextualHelp";
-import { Heading } from "~/components/Heading";
-import { Text } from "~/components/Text";
-import { Link } from "~/components/Link";
+} from "@/components/ContextualHelp";
+import { Heading } from "@/components/Heading";
+import { Text } from "@/components/Text";
+import { Link } from "@/components/Link";
 
 const meta: Meta<typeof Label> = {
   title: "Content/Label",

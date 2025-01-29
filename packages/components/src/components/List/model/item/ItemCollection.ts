@@ -1,5 +1,5 @@
-import type List from "~/components/List/model/List";
-import { Item } from "~/components/List/model/item/Item";
+import type List from "@/components/List/model/List";
+import { Item } from "@/components/List/model/item/Item";
 
 export class ItemCollection<T> {
   public readonly list: List<T>;

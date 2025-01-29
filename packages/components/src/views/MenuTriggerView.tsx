@@ -4,8 +4,8 @@ import React, { type FC, useContext } from "react";
 import {
   MenuTrigger,
   type MenuTriggerProps,
-} from "~/components/OverlayTrigger";
-import { viewComponentContext } from "~/lib/viewComponentContext/viewComponentContext";
+} from "@/components/OverlayTrigger";
+import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const MenuTriggerView: FC<MenuTriggerProps> = (props) => {
   const View = useContext(viewComponentContext)["MenuTrigger"] ?? MenuTrigger;

@@ -1,8 +1,8 @@
 "use client";
 import { type FC, Suspense } from "react";
 import React from "react";
-import { useIsMounted } from "~/hooks/useIsMounted";
-import type { RootClientProps } from "~/components/RemoteRootClient";
+import { useIsMounted } from "@/hooks/useIsMounted";
+import type { RootClientProps } from "@/components/RemoteRootClient";
 
 const ClientComponent = React.lazy(() => import("./RemoteRootClient"));
 

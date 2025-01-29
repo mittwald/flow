@@ -1,17 +1,17 @@
-import type List from "~/components/List/model/List";
+import type List from "@/components/List/model/List";
 import type {
   DataLoaderOptions,
   DataLoaderResult,
   DataSource,
   IncrementalLoaderShape,
-} from "~/components/List/model/loading/types";
+} from "@/components/List/model/loading/types";
 import type { AsyncResource } from "@mittwald/react-use-promise";
 import { getAsyncResource } from "@mittwald/react-use-promise";
 import { useEffect } from "react";
 import { times } from "remeda";
-import { IncrementalLoaderState } from "~/components/List/model/loading/IncrementalLoaderState";
+import { IncrementalLoaderState } from "@/components/List/model/loading/IncrementalLoaderState";
 import { hash } from "object-code";
-import type { PropertyName } from "~/components/List/model/types";
+import type { PropertyName } from "@/components/List/model/types";
 
 type AsyncResourceLoadingState = AsyncResource["state"]["value"];
 

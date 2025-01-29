@@ -6,10 +6,10 @@ import type {
   UseFormReturn,
 } from "react-hook-form";
 import { Controller } from "react-hook-form";
-import type { PropsContext } from "~/lib/propsContext";
-import { dynamic, PropsContextProvider } from "~/lib/propsContext";
-import { useFormContext } from "~/integrations/react-hook-form/components/context/formContext";
-import FieldErrorView from "~/views/FieldErrorView";
+import type { PropsContext } from "@/lib/propsContext";
+import { dynamic, PropsContextProvider } from "@/lib/propsContext";
+import { useFormContext } from "@/integrations/react-hook-form/components/context/formContext";
+import FieldErrorView from "@/views/FieldErrorView";
 
 interface Props<T extends FieldValues>
   extends Omit<ControllerProps<T>, "render">,

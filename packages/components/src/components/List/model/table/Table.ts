@@ -1,10 +1,10 @@
 import type {
   TableShape,
   TableSupportedComponentProps,
-} from "~/components/List/model/table/types";
-import type List from "~/components/List/model/List";
-import { TableHeader } from "~/components/List/model/table/TableHeader";
-import { TableBody } from "~/components/List/model/table/TableBody";
+} from "@/components/List/model/table/types";
+import type List from "@/components/List/model/List";
+import { TableHeader } from "@/components/List/model/table/TableHeader";
+import { TableBody } from "@/components/List/model/table/TableBody";
 
 export class Table<T> {
   public readonly list: List<T>;

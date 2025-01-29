@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import { Message } from "~/components/Message";
-import { Header } from "~/components/Header";
-import { ContextMenu, ContextMenuTrigger } from "~/components/ContextMenu";
-import { Button } from "~/components/Button";
-import MenuItem from "~/components/MenuItem";
-import { Align } from "~/components/Align";
-import { Avatar } from "~/components/Avatar";
-import { Initials } from "~/components/Initials";
-import { Content } from "~/components/Content";
-import { Text } from "~/components/Text";
+import { Message } from "@/components/Message";
+import { Header } from "@/components/Header";
+import { ContextMenu, ContextMenuTrigger } from "@/components/ContextMenu";
+import { Button } from "@/components/Button";
+import MenuItem from "@/components/MenuItem";
+import { Align } from "@/components/Align";
+import { Avatar } from "@/components/Avatar";
+import { Initials } from "@/components/Initials";
+import { Content } from "@/components/Content";
+import { Text } from "@/components/Text";
 
 const meta: Meta<typeof Message> = {
   title: "Content/Message",

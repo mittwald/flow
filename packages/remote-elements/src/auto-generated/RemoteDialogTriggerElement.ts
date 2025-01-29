@@ -1,6 +1,6 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import { FlowRemoteElement } from "~/lib/FlowRemoteElement";
+import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
 import type { DialogTriggerProps as RemoteDialogTriggerElementProps } from "@mittwald/flow-react-components/OverlayTrigger";
 export type { DialogTriggerProps as RemoteDialogTriggerElementProps } from "@mittwald/flow-react-components/OverlayTrigger";
 

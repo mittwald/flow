@@ -4,18 +4,18 @@ import * as Aria from "react-aria-components";
 import formFieldStyles from "../FormField/FormField.module.scss";
 import styles from "./NumberField.module.scss";
 import clsx from "clsx";
-import type { PropsContext } from "~/lib/propsContext";
-import { ClearPropsContext, PropsContextProvider } from "~/lib/propsContext";
-import { FieldError } from "~/components/FieldError";
-import { Button } from "~/components/Button";
+import type { PropsContext } from "@/lib/propsContext";
+import { ClearPropsContext, PropsContextProvider } from "@/lib/propsContext";
+import { FieldError } from "@/components/FieldError";
+import { Button } from "@/components/Button";
 import {
   IconChevronDown,
   IconChevronUp,
   IconMinus,
   IconPlus,
-} from "~/components/Icon/components/icons";
-import type { FlowComponentProps } from "~/lib/componentFactory/flowComponent";
-import { flowComponent } from "~/lib/componentFactory/flowComponent";
+} from "@/components/Icon/components/icons";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface NumberFieldProps
   extends PropsWithChildren<Omit<Aria.NumberFieldProps, "children">>,

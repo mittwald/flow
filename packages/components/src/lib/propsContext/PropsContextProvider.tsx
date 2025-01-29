@@ -1,8 +1,8 @@
 import type { DependencyList, FC, PropsWithChildren } from "react";
 import React, { useMemo } from "react";
-import type { PropsContext as PropsContextShape } from "~/lib/propsContext/types";
-import { propsContext, useContextProps } from "~/lib/propsContext/propsContext";
-import mergePropsContext from "~/lib/propsContext/mergePropsContext";
+import type { PropsContext as PropsContextShape } from "@/lib/propsContext/types";
+import { propsContext, useContextProps } from "@/lib/propsContext/propsContext";
+import mergePropsContext from "@/lib/propsContext/mergePropsContext";
 
 interface Props extends PropsWithChildren {
   props: PropsContextShape;

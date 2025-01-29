@@ -4,8 +4,8 @@ import React, { type FC, useContext } from "react";
 import {
   ListItemViewContent,
   type ListItemViewContentProps,
-} from "~/components/List";
-import { viewComponentContext } from "~/lib/viewComponentContext/viewComponentContext";
+} from "@/components/List";
+import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const ListItemViewContentView: FC<ListItemViewContentProps> = (props) => {
   const View =

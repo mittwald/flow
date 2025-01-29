@@ -2,8 +2,8 @@ import type { FC } from "react";
 import React from "react";
 import styles from "./DateInput.module.scss";
 import * as Aria from "react-aria-components";
-import { Button } from "~/components/Button";
-import { IconCalendar } from "~/components/Icon/components/icons";
+import { Button } from "@/components/Button";
+import { IconCalendar } from "@/components/Icon/components/icons";
 
 export interface DateInputProps {
   isDisabled?: boolean;

@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import React from "react";
 import styles from "./TabTitle.module.scss";
-import type { PropsWithClassName } from "~/lib/types/props";
+import type { PropsWithClassName } from "@/lib/types/props";
 import clsx from "clsx";
 import { TunnelExit } from "@mittwald/react-tunnel";
 

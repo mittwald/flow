@@ -1,6 +1,6 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import { FlowRemoteElement } from "~/lib/FlowRemoteElement";
+import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
 import type { SearchFieldProps as RemoteSearchFieldElementProps } from "@mittwald/flow-react-components/SearchField";
 export type { SearchFieldProps as RemoteSearchFieldElementProps } from "@mittwald/flow-react-components/SearchField";
 

@@ -1,12 +1,12 @@
 import type { PropsWithChildren, ReactNode } from "react";
 import React from "react";
 import styles from "../../ListItemView.module.scss";
-import type { PropsWithClassName } from "~/lib/types/props";
+import type { PropsWithClassName } from "@/lib/types/props";
 import {
   dynamic,
   type PropsContext,
   PropsContextProvider,
-} from "~/lib/propsContext";
+} from "@/lib/propsContext";
 
 export type ListItemViewContentProps = PropsWithChildren &
   PropsWithClassName & {

@@ -4,8 +4,8 @@ import React, { type FC, useContext } from "react";
 import {
   LoadingSpinner,
   type LoadingSpinnerProps,
-} from "~/components/LoadingSpinner";
-import { viewComponentContext } from "~/lib/viewComponentContext/viewComponentContext";
+} from "@/components/LoadingSpinner";
+import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const LoadingSpinnerView: FC<LoadingSpinnerProps> = (props) => {
   const View =

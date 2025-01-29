@@ -6,8 +6,8 @@ import {
   LivePreview,
   LiveProvider,
 } from "@mfalkenberg/react-live-ssr";
-import { extractEditorScope } from "~/lib/liveCode/components/LiveCodeEditor/lib/extractEditorScope";
-import extractDefaultExport from "~/lib/liveCode/components/LiveCodeEditor/lib/extractDefaultExport";
+import { extractEditorScope } from "@/lib/liveCode/components/LiveCodeEditor/lib/extractEditorScope";
+import extractDefaultExport from "@/lib/liveCode/components/LiveCodeEditor/lib/extractDefaultExport";
 import styles from "./LiveCodeEditor.module.css";
 import * as EditorComponents from "./components";
 import clsx from "clsx";

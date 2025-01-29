@@ -1,4 +1,4 @@
-import type { ButtonProps } from "~/components/Button";
+import type { ButtonProps } from "@/components/Button";
 
 export const getActionGroupSlot = (props: ButtonProps): string => {
   const { slot: slotFromProps, ...buttonProps } = props;

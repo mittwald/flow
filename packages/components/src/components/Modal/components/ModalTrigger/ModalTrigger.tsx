@@ -1,11 +1,11 @@
 import type { FC } from "react";
 import React from "react";
-import type { OverlayTriggerProps } from "~/components/OverlayTrigger";
-import { OverlayTrigger } from "~/components/OverlayTrigger";
+import type { OverlayTriggerProps } from "@/components/OverlayTrigger";
+import { OverlayTrigger } from "@/components/OverlayTrigger";
 import type { Simplify } from "type-fest";
-import DialogTriggerView from "~/views/DialogTriggerView";
+import DialogTriggerView from "@/views/DialogTriggerView";
 
-export type { OverlayTriggerProps } from "~/components/OverlayTrigger";
+export type { OverlayTriggerProps } from "@/components/OverlayTrigger";
 
 export type ModalTriggerProps = Simplify<OverlayTriggerProps>;
 

@@ -1,13 +1,13 @@
 import * as Aria from "react-aria-components";
 import React from "react";
-import type { OverlayTriggerProps } from "~/components/OverlayTrigger";
-import { OverlayTrigger } from "~/components/OverlayTrigger";
-import type { PropsContext } from "~/lib/propsContext";
-import { PropsContextProvider } from "~/lib/propsContext";
+import type { OverlayTriggerProps } from "@/components/OverlayTrigger";
+import { OverlayTrigger } from "@/components/OverlayTrigger";
+import type { PropsContext } from "@/lib/propsContext";
+import { PropsContextProvider } from "@/lib/propsContext";
 import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
-import { IconInfo } from "~/components/Icon/components/icons";
-import { flowComponent } from "~/lib/componentFactory/flowComponent";
+import { IconInfo } from "@/components/Icon/components/icons";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export type ContextualHelpTriggerProps = OverlayTriggerProps;
 

@@ -7,10 +7,10 @@ import {
   IconCheckboxChecked,
   IconCheckboxEmpty,
   IconCheckboxIndeterminate,
-} from "~/components/Icon/components/icons";
-import { ClearPropsContext } from "~/lib/propsContext";
-import type { FlowComponentProps } from "~/lib/componentFactory/flowComponent";
-import { flowComponent } from "~/lib/componentFactory/flowComponent";
+} from "@/components/Icon/components/icons";
+import { ClearPropsContext } from "@/lib/propsContext";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface CheckboxProps
   extends PropsWithChildren<Omit<Aria.CheckboxProps, "children">>,

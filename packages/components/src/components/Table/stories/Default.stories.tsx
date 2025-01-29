@@ -7,10 +7,10 @@ import {
   TableColumn,
   TableHeader,
   TableRow,
-} from "~/components/Table";
-import { InlineCode } from "~/components/InlineCode";
-import { dummyText } from "~/lib/dev/dummyText";
-import { TableFooterRow } from "~/components/Table/components/TableFooterRow";
+} from "@/components/Table";
+import { InlineCode } from "@/components/InlineCode";
+import { dummyText } from "@/lib/dev/dummyText";
+import { TableFooterRow } from "@/components/Table/components/TableFooterRow";
 
 const meta: Meta<typeof Table> = {
   title: "Structure/Table",

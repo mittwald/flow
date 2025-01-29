@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Section from "../Section";
 import React from "react";
-import { Heading } from "~/components/Heading";
-import { Text } from "~/components/Text";
-import { Switch } from "~/components/Switch";
+import { Heading } from "@/components/Heading";
+import { Text } from "@/components/Text";
+import { Switch } from "@/components/Switch";
 import defaultStories from "./Default.stories";
-import { dummyText } from "~/lib/dev/dummyText";
-import Header from "~/components/Header";
+import { dummyText } from "@/lib/dev/dummyText";
+import Header from "@/components/Header";
 
 const meta: Meta<typeof Section> = {
   ...defaultStories,

@@ -4,8 +4,8 @@ import React, { type FC, useContext } from "react";
 import {
   CounterBadge,
   type CounterBadgeProps,
-} from "~/components/CounterBadge";
-import { viewComponentContext } from "~/lib/viewComponentContext/viewComponentContext";
+} from "@/components/CounterBadge";
+import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const CounterBadgeView: FC<CounterBadgeProps> = (props) => {
   const View = useContext(viewComponentContext)["CounterBadge"] ?? CounterBadge;

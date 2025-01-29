@@ -1,11 +1,11 @@
 import { renderHook, act } from "@testing-library/react";
-import { useOverlayController } from "~/lib/controller";
-import { useOverlayContext } from "~/lib/controller/overlay/context";
-import { OverlayController } from "~/lib/controller";
+import { useOverlayController } from "@/lib/controller";
+import { useOverlayContext } from "@/lib/controller/overlay/context";
+import { OverlayController } from "@/lib/controller";
 import type { Mock } from "vitest";
 import { vitest, describe, test, expect, beforeEach } from "vitest";
 
-vitest.mock("~/lib/controller/overlay/context", () => ({
+vitest.mock("@/lib/controller/overlay/context", () => ({
   useOverlayContext: vitest.fn(),
 }));
 

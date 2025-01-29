@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import type List from "../List";
 import React from "react";
-import { Heading } from "~/components/Heading";
-import { Text } from "~/components/Text";
+import { Heading } from "@/components/Heading";
+import { Text } from "@/components/Text";
 import defaultMeta from "./Default.stories";
-import { ListItemView, typedList } from "~/components/List";
-import { Render } from "~/lib/react/components/Render";
+import { ListItemView, typedList } from "@/components/List";
+import { Render } from "@/lib/react/components/Render";
 import { usePromise } from "@mittwald/react-use-promise";
 
 const meta: Meta<typeof List> = {

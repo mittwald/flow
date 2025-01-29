@@ -4,8 +4,8 @@ import React, { type FC, useContext } from "react";
 import {
   LabeledValue,
   type LabeledValueProps,
-} from "~/components/LabeledValue";
-import { viewComponentContext } from "~/lib/viewComponentContext/viewComponentContext";
+} from "@/components/LabeledValue";
+import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const LabeledValueView: FC<LabeledValueProps> = (props) => {
   const View = useContext(viewComponentContext)["LabeledValue"] ?? LabeledValue;

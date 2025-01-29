@@ -5,13 +5,13 @@ import {
   asyncLongFunction,
   button,
   syncFunction,
-} from "~/components/Button/stories/lib";
-import { Modal } from "~/components/Modal";
-import { ActionGroup } from "~/components/ActionGroup";
-import { Button } from "~/components/Button";
-import { Heading } from "~/components/Heading";
-import { Content } from "~/components/Content";
-import { Action } from "~/components/Action";
+} from "@/components/Button/stories/lib";
+import { Modal } from "@/components/Modal";
+import { ActionGroup } from "@/components/ActionGroup";
+import { Button } from "@/components/Button";
+import { Heading } from "@/components/Heading";
+import { Content } from "@/components/Content";
+import { Action } from "@/components/Action";
 
 const meta: Meta<typeof Action> = {
   title: "Actions/Action",
