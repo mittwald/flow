@@ -91,6 +91,10 @@
     animation: popover-slide var(--transition--duration--default) reverse
       ease-in;
   }
+
+  &:has(:global(.flow--context-menu):empty) {
+    display: none;
+  }
 }
 
 @keyframes popover-slide {

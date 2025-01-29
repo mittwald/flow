@@ -35,6 +35,7 @@ export const Popover = flowComponent("Popover", (props) => {
     defaultOpen = false,
     width,
     padding = "m",
+    style,
     ...rest
   } = props;
 
@@ -58,7 +59,7 @@ export const Popover = flowComponent("Popover", (props) => {
       ref={ref}
       isOpen={isOpen}
       onOpenChange={(isOpen) => controller.setOpen(isOpen)}
-      style={{ width }}
+      style={{ ...style, width }}
     >
       {withTip && (
         <Aria.OverlayArrow className={styles.tip}>

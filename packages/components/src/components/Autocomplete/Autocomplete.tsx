@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import React from "react";
+import React, { useRef } from "react";
 import * as Aria from "react-aria-components";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
@@ -35,7 +35,7 @@ export const Autocomplete: FC<AutocompleteProps> = (props) => {
     return contains(textValue, inputValue);
   };
 
-  const triggerRef = React.useRef(null);
+  const triggerRef = useRef<HTMLDivElement>(null);
 
   const propsContext: PropsContext = {
     ContextMenu: {
