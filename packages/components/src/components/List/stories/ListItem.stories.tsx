@@ -11,7 +11,7 @@ import { dummyText } from "~/lib/dev/dummyText";
 import Image from "~/components/Image";
 import { Content } from "~/components/Content";
 import { AlertBadge } from "~/components/AlertBadge";
-import { View } from "~/components/List/components/Items/components/Item/components/View";
+import { ListItemView } from "~/components/List";
 import { ActionGroup } from "~/components/ActionGroup";
 import { Button } from "~/components/Button";
 import { IconStar } from "~/components/Icon/components/icons";
@@ -39,7 +39,7 @@ const meta: Meta<typeof List> = {
   title: "Structure/List/ListItem",
   decorators: [(story) => <div>{story()}</div>],
   render: () => (
-    <View>
+    <ListItemView>
       <Avatar>
         <Image alt="John Doe" src={dummyText.imageSrc} />
       </Avatar>
@@ -50,7 +50,7 @@ const meta: Meta<typeof List> = {
       <ContextMenu>
         <MenuItem>Show details</MenuItem>
       </ContextMenu>
-    </View>
+    </ListItemView>
   ),
 };
 
@@ -62,7 +62,7 @@ export const Default: Story = {};
 
 export const WithTopContent: Story = {
   render: () => (
-    <View>
+    <ListItemView>
       <Avatar>
         <Image alt="John Doe" src={dummyText.imageSrc} />
       </Avatar>
@@ -74,13 +74,13 @@ export const WithTopContent: Story = {
       <ContextMenu>
         <MenuItem>Show details</MenuItem>
       </ContextMenu>
-    </View>
+    </ListItemView>
   ),
 };
 
 export const WithContent: Story = {
   render: () => (
-    <View>
+    <ListItemView>
       <Avatar>
         <Image alt="John Doe" src={dummyText.imageSrc} />
       </Avatar>
@@ -95,13 +95,13 @@ export const WithContent: Story = {
       <ContextMenu>
         <MenuItem>Show details</MenuItem>
       </ContextMenu>
-    </View>
+    </ListItemView>
   ),
 };
 
 export const SmallSpace: Story = {
   render: () => (
-    <View>
+    <ListItemView>
       <Avatar>
         <Image alt="John Doe" src={dummyText.imageSrc} />
       </Avatar>
@@ -116,14 +116,14 @@ export const SmallSpace: Story = {
       <ContextMenu>
         <MenuItem>Show details</MenuItem>
       </ContextMenu>
-    </View>
+    </ListItemView>
   ),
   parameters: { viewport: { defaultViewport: "mobile1" } },
 };
 
 export const WithActionGroup: Story = {
   render: () => (
-    <View>
+    <ListItemView>
       <Avatar>
         <Image alt="John Doe" src={dummyText.imageSrc} />
       </Avatar>
@@ -137,19 +137,19 @@ export const WithActionGroup: Story = {
           <MenuItem>Show details</MenuItem>
         </ContextMenu>
       </ActionGroup>
-    </View>
+    </ListItemView>
   ),
 };
 
 export const WithMultipleTexts: Story = {
   render: () => (
-    <View>
+    <ListItemView>
       <Avatar>
         <Image alt="John Doe" src={dummyText.imageSrc} />
       </Avatar>
       <Heading>John Doe</Heading>
       <Text>Mittwald</Text>
       <Text>Development</Text>
-    </View>
+    </ListItemView>
   ),
 };

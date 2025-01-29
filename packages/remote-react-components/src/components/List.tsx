@@ -1,6 +1,7 @@
 export {
-  type ListProps,
   List,
-  typedList,
+  type ListProps,
   ListItemView,
+  type ListItemViewProps,
+  typedList,
 } from "@mittwald/flow-react-components/List";

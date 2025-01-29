@@ -5,6 +5,7 @@ import {
   ContextMenu,
   Heading,
   List,
+  ListItemView,
   MenuItem,
   Section,
   Text,
@@ -27,7 +28,7 @@ export default function Page() {
         <DemoList.StaticData data={demoData} />
         <DemoList.Item textValue={(d) => d.name}>
           {(d) => (
-            <DemoList.ItemView>
+            <ListItemView>
               <Avatar>
                 <IconEmail />
               </Avatar>
@@ -40,7 +41,7 @@ export default function Page() {
                   <Text>Menu item</Text>
                 </MenuItem>
               </ContextMenu>
-            </DemoList.ItemView>
+            </ListItemView>
           )}
         </DemoList.Item>
         <DemoList.Table>

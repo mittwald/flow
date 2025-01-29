@@ -51,6 +51,7 @@ import { LightBox as LightBox } from "@mittwald/flow-react-components/LightBox";
 import { LightBoxTrigger as LightBoxTrigger } from "@mittwald/flow-react-components/LightBox";
 import { Link as Link } from "@mittwald/flow-react-components/Link";
 import { EmptyView as ListEmptyView } from "@mittwald/flow-react-components/List";
+import { ListItemViewContent as ListItemViewContent } from "@mittwald/flow-react-components/List";
 import { ListSummary as ListSummary } from "@mittwald/flow-react-components/List";
 import { LoadingSpinner as LoadingSpinner } from "@mittwald/flow-react-components/LoadingSpinner";
 import { Markdown as Markdown } from "@mittwald/flow-react-components/Markdown";
@@ -153,6 +154,8 @@ export const flowComponents = {
   "flr-light-box-trigger": createFlowRemoteComponentRenderer(LightBoxTrigger),
   "flr-link": createFlowRemoteComponentRenderer(Link),
   "flr-list-empty-view": createFlowRemoteComponentRenderer(ListEmptyView),
+  "flr-list-item-view-content":
+    createFlowRemoteComponentRenderer(ListItemViewContent),
   "flr-list-summary": createFlowRemoteComponentRenderer(ListSummary),
   "flr-loading-spinner": createFlowRemoteComponentRenderer(LoadingSpinner),
   "flr-markdown": createFlowRemoteComponentRenderer(Markdown),

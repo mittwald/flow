@@ -5,9 +5,9 @@ export type {
   DataLoaderResult,
 } from "~/components/List/model/loading/types";
 export type { RenderItemFn } from "~/components/List/model/item/types";
-export { View as ListItemView } from "./components/Items/components/Item/components/View";
 
 export * from "./components/ListSummary";
+export * from "./components/ListItemView";
 export * from "./components/Items/views/GridList";
 export * from "./components/Items/views/GridListItem";
 export * from "./views/EmptyView";

@@ -50,6 +50,7 @@ export * from "./LightBox";
 export * from "./LightBoxTrigger";
 export * from "./Link";
 export * from "./ListEmptyView";
+export * from "./ListItemViewContent";
 export * from "./ListSummary";
 export * from "./LoadingSpinner";
 export * from "./Markdown";
