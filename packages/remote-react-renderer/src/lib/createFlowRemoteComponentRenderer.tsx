@@ -1,4 +1,4 @@
-import { type ComponentType, forwardRef, type PropsWithoutRef } from "react";
+import { type ComponentType } from "react";
 import type { RemoteComponentRendererProps } from "@remote-dom/react/host";
 import { createRemoteComponentRenderer } from "@remote-dom/react/host";
 import { mapValues } from "remeda";
@@ -27,16 +27,12 @@ const mapProperty = (val: unknown, key: string) => {
 export const createFlowRemoteComponentRenderer = <P extends object>(
   Component: ComponentType<P>,
 ): ComponentType<RemoteComponentRendererProps> => {
-  const HostComponentWithRef = forwardRef(function HostComponent(
-    props: PropsWithoutRef<P>,
-    ref: unknown,
-  ) {
+  function HostComponent(props: P) {
     const hostComponentProps = mapValues(props, (v, k) =>
       mapProperty(v, k),
     ) as P;
 
-    return <Component {...hostComponentProps} ref={ref} />;
-  });
-
-  return createRemoteComponentRenderer(HostComponentWithRef);
+    return <Component {...hostComponentProps} />;
+  }
+  return createRemoteComponentRenderer(HostComponent);
 };
