@@ -23,10 +23,10 @@ export interface LinkProps
   linkComponent?: ComponentType<Omit<ComponentProps<"a">, "ref">>;
   /** The color of the link. @default "primary" */
   color?: "primary" | "dark" | "light";
-
+  "aria-current"?: string;
+  slot?: string;
   /** @internal */
   unstyled?: boolean;
-  "aria-current"?: string;
 }
 
 export const Link = flowComponent("Link", (props) => {
@@ -39,6 +39,7 @@ export const Link = flowComponent("Link", (props) => {
     unstyled = false,
     "aria-current": ariaCurrent,
     refProp: ref,
+    slot: ignoredSlotProp,
     ...rest
   } = props;
 
