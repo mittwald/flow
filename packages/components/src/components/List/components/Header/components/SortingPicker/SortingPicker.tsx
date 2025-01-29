@@ -2,13 +2,12 @@ import type { FC } from "react";
 import React from "react";
 import { SortingPickerItem } from "~/components/List/components/Header/components/SortingPickerItem";
 import { useList } from "~/components/List/hooks/useList";
-import { ContextMenuTrigger } from "~/components/ContextMenu";
+import ContextMenu, { ContextMenuTrigger } from "~/components/ContextMenu";
 import locales from "../../../../locales/*.locale.json";
 import { Translate } from "~/lib/react/components/Translate";
 import TextView from "~/views/TextView";
 import ButtonView from "~/views/ButtonView";
 import { IconSorting } from "~/components/Icon/components/icons";
-import ContextMenuView from "~/views/ContextMenuView";
 
 export const SortingPicker: FC = () => {
   const list = useList();
@@ -39,7 +38,7 @@ export const SortingPicker: FC = () => {
         {text}
         <IconSorting />
       </ButtonView>
-      <ContextMenuView
+      <ContextMenu
         selectionMode="single"
         selectedKeys={pickerLabelSorting ? [pickerLabelSorting.id] : []}
         onAction={(id) => {
@@ -47,7 +46,7 @@ export const SortingPicker: FC = () => {
         }}
       >
         {pickerItems}
-      </ContextMenuView>
+      </ContextMenu>
     </ContextMenuTrigger>
   );
 };

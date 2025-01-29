@@ -5,7 +5,7 @@ import { useLocalizedStringFormatter } from "react-aria";
 import type { PropsWithClassName } from "~/lib/types/props";
 import { IconContextMenu } from "~/components/Icon/components/icons";
 import ButtonView from "~/views/ButtonView";
-import ContextMenuTriggerView from "~/views/ContextMenuTriggerView";
+import { ContextMenuTrigger } from "~/components/ContextMenu";
 
 interface Props extends PropsWithChildren, PropsWithClassName {}
 
@@ -14,7 +14,7 @@ export const OptionsButton: FC<Props> = (props) => {
   const stringFormatter = useLocalizedStringFormatter(locales);
 
   return (
-    <ContextMenuTriggerView>
+    <ContextMenuTrigger>
       <ButtonView
         variant="plain"
         color="secondary"
@@ -25,7 +25,7 @@ export const OptionsButton: FC<Props> = (props) => {
         <IconContextMenu />
       </ButtonView>
       {children}
-    </ContextMenuTriggerView>
+    </ContextMenuTrigger>
   );
 };
 

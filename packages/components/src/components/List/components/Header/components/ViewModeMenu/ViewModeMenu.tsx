@@ -5,13 +5,12 @@ import { useLocalizedStringFormatter } from "react-aria";
 import { useList } from "~/components/List";
 import type { ListViewMode } from "~/components/List/model/types";
 import { IconView } from "~/components/Icon/components/icons";
-import ContextMenuTriggerView from "~/views/ContextMenuTriggerView";
 import ButtonView from "~/views/ButtonView";
 import TextView from "~/views/TextView";
-import ContextMenuView from "~/views/ContextMenuView";
 import SectionView from "~/views/SectionView";
 import MenuItemView from "~/views/MenuItemView";
 import HeadingView from "~/views/HeadingView";
+import ContextMenu, { ContextMenuTrigger } from "~/components/ContextMenu";
 
 export const ViewModeMenu: FC = () => {
   const stringFormatter = useLocalizedStringFormatter(locales);
@@ -31,7 +30,7 @@ export const ViewModeMenu: FC = () => {
   }
 
   return (
-    <ContextMenuTriggerView>
+    <ContextMenuTrigger>
       <ButtonView
         variant="outline"
         color="secondary"
@@ -42,7 +41,7 @@ export const ViewModeMenu: FC = () => {
         </TextView>
         <IconView />
       </ButtonView>
-      <ContextMenuView selectionMode="single" selectedKeys={[selectedViewMode]}>
+      <ContextMenu selectionMode="single" selectedKeys={[selectedViewMode]}>
         <SectionView>
           <HeadingView>
             {stringFormatter.format("list.settings.viewMode")}
@@ -59,7 +58,7 @@ export const ViewModeMenu: FC = () => {
             </MenuItemView>
           ))}
         </SectionView>
-      </ContextMenuView>
-    </ContextMenuTriggerView>
+      </ContextMenu>
+    </ContextMenuTrigger>
   );
 };

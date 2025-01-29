@@ -17,9 +17,8 @@ import { CheckboxGroup as CheckboxGroup } from "@mittwald/flow-react-components/
 import { CodeBlock as CodeBlock } from "@mittwald/flow-react-components/CodeBlock";
 import { ColumnLayout as ColumnLayout } from "@mittwald/flow-react-components/ColumnLayout";
 import { Content as Content } from "@mittwald/flow-react-components/Content";
-import { ContextMenu as ContextMenu } from "@mittwald/flow-react-components/ContextMenu";
+import { ContextMenuContent as ContextMenuContent } from "@mittwald/flow-react-components/ContextMenu";
 import { ContextMenuSection as ContextMenuSection } from "@mittwald/flow-react-components/ContextMenu";
-import { ContextMenuTrigger as ContextMenuTrigger } from "@mittwald/flow-react-components/ContextMenu";
 import { ContextualHelp as ContextualHelp } from "@mittwald/flow-react-components/ContextualHelp";
 import { ContextualHelpTrigger as ContextualHelpTrigger } from "@mittwald/flow-react-components/ContextualHelp";
 import { CopyButton as CopyButton } from "@mittwald/flow-react-components/CopyButton";
@@ -56,6 +55,7 @@ import { ListSummary as ListSummary } from "@mittwald/flow-react-components/List
 import { LoadingSpinner as LoadingSpinner } from "@mittwald/flow-react-components/LoadingSpinner";
 import { Markdown as Markdown } from "@mittwald/flow-react-components/Markdown";
 import { MenuItem as MenuItem } from "@mittwald/flow-react-components/MenuItem";
+import { MenuTrigger as MenuTrigger } from "@mittwald/flow-react-components/OverlayTrigger";
 import { Message as Message } from "@mittwald/flow-react-components/Message";
 import { Navigation as Navigation } from "@mittwald/flow-react-components/Navigation";
 import { NavigationGroup as NavigationGroup } from "@mittwald/flow-react-components/Navigation";
@@ -113,11 +113,10 @@ export const flowComponents = {
   "flr-code-block": createFlowRemoteComponentRenderer(CodeBlock),
   "flr-column-layout": createFlowRemoteComponentRenderer(ColumnLayout),
   "flr-content": createFlowRemoteComponentRenderer(Content),
-  "flr-context-menu": createFlowRemoteComponentRenderer(ContextMenu),
+  "flr-context-menu-content":
+    createFlowRemoteComponentRenderer(ContextMenuContent),
   "flr-context-menu-section":
     createFlowRemoteComponentRenderer(ContextMenuSection),
-  "flr-context-menu-trigger":
-    createFlowRemoteComponentRenderer(ContextMenuTrigger),
   "flr-contextual-help": createFlowRemoteComponentRenderer(ContextualHelp),
   "flr-contextual-help-trigger": createFlowRemoteComponentRenderer(
     ContextualHelpTrigger,
@@ -158,6 +157,7 @@ export const flowComponents = {
   "flr-loading-spinner": createFlowRemoteComponentRenderer(LoadingSpinner),
   "flr-markdown": createFlowRemoteComponentRenderer(Markdown),
   "flr-menu-item": createFlowRemoteComponentRenderer(MenuItem),
+  "flr-menu-trigger": createFlowRemoteComponentRenderer(MenuTrigger),
   "flr-message": createFlowRemoteComponentRenderer(Message),
   "flr-navigation": createFlowRemoteComponentRenderer(Navigation),
   "flr-navigation-group": createFlowRemoteComponentRenderer(NavigationGroup),

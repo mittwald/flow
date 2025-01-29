@@ -3,10 +3,9 @@ import React from "react";
 import type { Filter } from "~/components/List/model/filter/Filter";
 import { IconFilter } from "~/components/Icon/components/icons";
 import MenuItemView from "~/views/MenuItemView";
-import ContextMenuTriggerView from "~/views/ContextMenuTriggerView";
 import TextView from "~/views/TextView";
-import ContextMenuView from "~/views/ContextMenuView";
 import ButtonView from "~/views/ButtonView";
+import ContextMenu, { ContextMenuTrigger } from "~/components/ContextMenu";
 
 interface Props {
   filter: Filter<never, never, never>;
@@ -32,17 +31,17 @@ export const FilterPicker: FC<Props> = (props) => {
   const activeFilterKeys = values.filter((v) => v.isActive).map((v) => v.id);
 
   return (
-    <ContextMenuTriggerView>
+    <ContextMenuTrigger>
       <ButtonView variant="outline" color="secondary">
         <TextView>{name ?? property}</TextView>
         <IconFilter />
       </ButtonView>
-      <ContextMenuView
+      <ContextMenu
         selectionMode={mode === "one" ? "single" : "multiple"}
         selectedKeys={activeFilterKeys}
       >
         {items}
-      </ContextMenuView>
-    </ContextMenuTriggerView>
+      </ContextMenu>
+    </ContextMenuTrigger>
   );
 };

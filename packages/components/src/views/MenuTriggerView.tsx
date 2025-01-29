@@ -1,12 +1,15 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import React, { type FC, useContext } from "react";
-import { ContextMenu, type ContextMenuProps } from "~/components/ContextMenu";
+import {
+  MenuTrigger,
+  type MenuTriggerProps,
+} from "~/components/OverlayTrigger";
 import { viewComponentContext } from "~/lib/viewComponentContext/viewComponentContext";
 
-const ContextMenuView: FC<ContextMenuProps> = (props) => {
-  const View = useContext(viewComponentContext)["ContextMenu"] ?? ContextMenu;
+const MenuTriggerView: FC<MenuTriggerProps> = (props) => {
+  const View = useContext(viewComponentContext)["MenuTrigger"] ?? MenuTrigger;
   return <View {...props} />;
 };
 
-export default ContextMenuView;
+export default MenuTriggerView;

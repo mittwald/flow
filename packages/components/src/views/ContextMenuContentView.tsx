@@ -2,16 +2,16 @@
 /* This file is auto-generated with the remote-components-generator */
 import React, { type FC, useContext } from "react";
 import {
-  ContextMenuTrigger,
-  type ContextMenuTriggerProps,
+  ContextMenuContent,
+  type ContextMenuContentProps,
 } from "~/components/ContextMenu";
 import { viewComponentContext } from "~/lib/viewComponentContext/viewComponentContext";
 
-const ContextMenuTriggerView: FC<ContextMenuTriggerProps> = (props) => {
+const ContextMenuContentView: FC<ContextMenuContentProps> = (props) => {
   const View =
-    useContext(viewComponentContext)["ContextMenuTrigger"] ??
-    ContextMenuTrigger;
+    useContext(viewComponentContext)["ContextMenuContent"] ??
+    ContextMenuContent;
   return <View {...props} />;
 };
 
-export default ContextMenuTriggerView;
+export default ContextMenuContentView;
