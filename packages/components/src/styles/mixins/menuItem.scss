@@ -34,8 +34,8 @@
     order: 1;
   }
 
-  .icon + .text {
-    margin-inline-start: var(--menu-item--spacing);
+  .icon {
+    margin-inline-end: var(--menu-item--spacing);
   }
 
   .switch {

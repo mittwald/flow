@@ -12,8 +12,6 @@ import {
 } from "~/components/Icon/components/icons";
 import clsx from "clsx";
 import { Switch } from "~/components/Switch";
-import { Wrap } from "~/components/Wrap";
-import { Text } from "~/components/Text";
 
 interface Props extends Aria.MenuItemRenderProps, PropsWithChildren {
   selectionVariant?: "control" | "navigation" | "switch";
@@ -71,9 +69,7 @@ export const MenuItemContent: FC<Props> = (props) => {
         {selectionIcon}
       </PropsContextProvider>
       <PropsContextProvider props={propsContext}>
-        <Wrap if={!!selectionIcon}>
-          <Text>{children}</Text>
-        </Wrap>
+        {children}
       </PropsContextProvider>
     </>
   );
