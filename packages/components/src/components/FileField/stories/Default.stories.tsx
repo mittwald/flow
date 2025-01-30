@@ -12,8 +12,6 @@ import { useForm } from "react-hook-form";
 import { Form, typedField } from "@/integrations/react-hook-form";
 import { action } from "@storybook/addon-actions";
 import { ActionGroup } from "@/components/ActionGroup";
-import { FileCardList } from "@/components/FileCardList";
-import { FileCard } from "@/components/FileCard";
 
 const meta: Meta<typeof FileField> = {
   title: "Form Controls/FileField",
@@ -116,55 +114,6 @@ export const WithReactHookForm: Story = {
           </ActionGroup>
         </Section>
       </Form>
-    );
-  },
-};
-
-export const Test: Story = {
-  render: () => {
-    const form = useForm<{
-      file: FileList | null;
-    }>();
-
-    const Field = typedField(form);
-
-    const handleSubmit = async () => {
-      //do nothing
-    };
-
-    const watchedFiles = form.watch("file");
-
-    return (
-      <>
-        <Form form={form} onSubmit={handleSubmit}>
-          <Section>
-            <Field name="file" rules={{ required: "Please choose a file" }}>
-              <FileField multiple>
-                <Label>Certificate</Label>
-                <Button variant="outline" color="secondary">
-                  Select
-                </Button>
-              </FileField>
-            </Field>
-
-            <FileCardList>
-              {[...(watchedFiles ?? [])].map((file) => (
-                <FileCard
-                  type={"certificate"}
-                  onDelete={() => {
-                    form.resetField("file");
-                  }}
-                  name={file.name}
-                  key={file.name}
-                />
-              ))}
-            </FileCardList>
-            <ActionGroup>
-              <Button type="submit">Upload</Button>
-            </ActionGroup>
-          </Section>
-        </Form>
-      </>
     );
   },
 };
