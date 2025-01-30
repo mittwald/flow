@@ -3,18 +3,33 @@
   flex-direction: column;
   row-gap: var(--message--spacing-y);
   width: max-content;
-  max-width: 100%;
+  max-width: min(100%, var(--text--max-width));
 
   .content {
     grid-area: content;
     border-radius: var(--message--corner-radius);
     padding-inline: var(--message--padding-x);
     padding-block: var(--message--padding-y);
-    background-color: var(--message--background-color-sender);
+    background-color: var(--message--background-color-responder);
   }
 
-  &.responder .content {
-    background-color: var(--message--background-color-responder);
+  &.sender {
+    align-self: flex-end;
+    .header {
+      flex-direction: row-reverse;
+
+      .user {
+        flex-direction: row-reverse;
+
+        :global(.flow--text) {
+          text-align: end;
+        }
+      }
+    }
+
+    .content {
+      background-color: var(--message--background-color-sender);
+    }
   }
 
   .header {
@@ -37,20 +52,6 @@
 
     .action {
       order: 3;
-    }
-  }
-
-  &.right {
-    .header {
-      flex-direction: row-reverse;
-
-      .user {
-        flex-direction: row-reverse;
-
-        :global(.flow--text) {
-          text-align: end;
-        }
-      }
     }
   }
 }
