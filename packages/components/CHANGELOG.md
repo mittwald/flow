@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.408](https://github.com/mittwald/flow/compare/0.1.0-alpha.407...0.1.0-alpha.408) (2025-01-30)
+
+### Features
+
+- **MessageThread:** add message thread component
+  ([138892f](https://github.com/mittwald/flow/commit/138892f895fad8f7e5ae37e58c2b824dec98948e))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.407](https://github.com/mittwald/flow/compare/0.1.0-alpha.406...0.1.0-alpha.407) (2025-01-28)
 
 ### Features
