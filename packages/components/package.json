@@ -257,6 +257,11 @@
       "types": "./dist/js/types/components/Message/index.d.ts",
       "import": "./dist/js/Message.js"
     },
+    "./MessageThread/styles.css": "./dist/css/MessageThread.css",
+    "./MessageThread": {
+      "types": "./dist/js/types/components/MessageThread/index.d.ts",
+      "import": "./dist/js/MessageThread.js"
+    },
     "./Modal/styles.css": "./dist/css/Modal.css",
     "./Modal": {
       "types": "./dist/js/types/components/Modal/index.d.ts",
