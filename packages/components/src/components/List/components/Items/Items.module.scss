@@ -19,4 +19,10 @@
   &[data-empty="true"] {
     border: none;
   }
+
+  &.tiles {
+    display: grid;
+    border: none;
+    gap: var(--list-item--spacing);
+  }
 }

@@ -75,6 +75,10 @@
       "types": "./dist/js/types/components/ColumnLayout/index.d.ts",
       "import": "./dist/js/ColumnLayout.js"
     },
+    "./ComboBox": {
+      "types": "./dist/js/types/components/ComboBox/index.d.ts",
+      "import": "./dist/js/ComboBox.js"
+    },
     "./Content": {
       "types": "./dist/js/types/components/Content/index.d.ts",
       "import": "./dist/js/Content.js"
@@ -126,6 +130,10 @@
     "./FileCardList": {
       "types": "./dist/js/types/components/FileCardList/index.d.ts",
       "import": "./dist/js/FileCardList.js"
+    },
+    "./FileDropZone": {
+      "types": "./dist/js/types/components/FileDropZone/index.d.ts",
+      "import": "./dist/js/FileDropZone.js"
     },
     "./FileField": {
       "types": "./dist/js/types/components/FileField/index.d.ts",
@@ -242,6 +250,10 @@
     "./OverlayTrigger": {
       "types": "./dist/js/types/components/OverlayTrigger/index.d.ts",
       "import": "./dist/js/OverlayTrigger.js"
+    },
+    "./Option": {
+      "types": "./dist/js/types/components/Option/index.d.ts",
+      "import": "./dist/js/Option.js"
     },
     "./Popover": {
       "types": "./dist/js/types/components/Popover/index.d.ts",

@@ -1,26 +1,30 @@
 # Change Log
 
-All notable changes to this project will be documented in this file.
-See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
 # [0.2.0-alpha.26](https://github.com/mittwald/flow/compare/0.2.0-alpha.25...0.2.0-alpha.26) (2025-01-29)
 
 ### Bug Fixes
 
-* fix remote context menu display issue ([7d9855e](https://github.com/mittwald/flow/commit/7d9855e5e19b791b7514ff23a95907fb438a06ce))
+- fix remote context menu display issue
+  ([7d9855e](https://github.com/mittwald/flow/commit/7d9855e5e19b791b7514ff23a95907fb438a06ce))
 
 # [0.2.0-alpha.25](https://github.com/mittwald/flow/compare/0.2.0-alpha.24...0.2.0-alpha.25) (2025-01-29)
 
 ### Bug Fixes
 
-* fix remote Context Menu ([25f032e](https://github.com/mittwald/flow/commit/25f032e0c95202e503fcb0c4d553e67ae9b464a2))
-* fix remote ListItemView ([22ca167](https://github.com/mittwald/flow/commit/22ca167f537ebf80ea956806d723836676323648))
+- fix remote Context Menu
+  ([25f032e](https://github.com/mittwald/flow/commit/25f032e0c95202e503fcb0c4d553e67ae9b464a2))
+- fix remote ListItemView
+  ([22ca167](https://github.com/mittwald/flow/commit/22ca167f537ebf80ea956806d723836676323648))
 
 # [0.2.0-alpha.24](https://github.com/mittwald/flow/compare/0.2.0-alpha.23...0.2.0-alpha.24) (2025-01-28)
 
 ### Features
 
-* support Popover/Modals/ContextMenu ([7fc22d9](https://github.com/mittwald/flow/commit/7fc22d959d19e4c56ab6edf3694e3947b7770a39))
+- support Popover/Modals/ContextMenu
+  ([7fc22d9](https://github.com/mittwald/flow/commit/7fc22d959d19e4c56ab6edf3694e3947b7770a39))
 
 # [0.2.0-alpha.23](https://github.com/mittwald/flow/compare/0.2.0-alpha.22...0.2.0-alpha.23) (2025-01-28)
 
@@ -30,20 +34,24 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* fix remote preview ([6a0715a](https://github.com/mittwald/flow/commit/6a0715aff82c5cdad4df3c78845bd8dedfbe59d6))
+- fix remote preview
+  ([6a0715a](https://github.com/mittwald/flow/commit/6a0715aff82c5cdad4df3c78845bd8dedfbe59d6))
 
 # [0.2.0-alpha.21](https://github.com/mittwald/flow/compare/0.2.0-alpha.20...0.2.0-alpha.21) (2025-01-27)
 
 ### Features
 
-* support preview ([f03d561](https://github.com/mittwald/flow/commit/f03d561ff74b7873d5d228e9c0fc9e0f290e36e0))
+- support preview
+  ([f03d561](https://github.com/mittwald/flow/commit/f03d561ff74b7873d5d228e9c0fc9e0f290e36e0))
 
 # [0.2.0-alpha.20](https://github.com/mittwald/flow/compare/0.2.0-alpha.19...0.2.0-alpha.20) (2025-01-24)
 
 ### Bug Fixes
 
-* fix exports ([8d52eb1](https://github.com/mittwald/flow/commit/8d52eb10379ec95c5cfa4eecd0474c791a8d9041))
-* fix SSR issues ([552f9e2](https://github.com/mittwald/flow/commit/552f9e2f264dc688aedf4ab4aedf5e465f9c0f86))
+- fix exports
+  ([8d52eb1](https://github.com/mittwald/flow/commit/8d52eb10379ec95c5cfa4eecd0474c791a8d9041))
+- fix SSR issues
+  ([552f9e2](https://github.com/mittwald/flow/commit/552f9e2f264dc688aedf4ab4aedf5e465f9c0f86))
 
 # [0.2.0-alpha.19](https://github.com/mittwald/flow/compare/0.2.0-alpha.18...0.2.0-alpha.19) (2025-01-23)
 
@@ -73,13 +81,15 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* re-export remote types to fix TS builds ([161dd58](https://github.com/mittwald/flow/commit/161dd587b430f040293b4f9fccfabd6fcbec97b3))
+- re-export remote types to fix TS builds
+  ([161dd58](https://github.com/mittwald/flow/commit/161dd587b430f040293b4f9fccfabd6fcbec97b3))
 
 # [0.2.0-alpha.12](https://github.com/mittwald/flow/compare/0.2.0-alpha.11...0.2.0-alpha.12) (2025-01-21)
 
 ### Bug Fixes
 
-* add missing remote exports ([8c02c4b](https://github.com/mittwald/flow/commit/8c02c4b7375efed70c3786d690b4ffbfc12f6ba7))
+- add missing remote exports
+  ([8c02c4b](https://github.com/mittwald/flow/commit/8c02c4b7375efed70c3786d690b4ffbfc12f6ba7))
 
 # [0.2.0-alpha.11](https://github.com/mittwald/flow/compare/0.2.0-alpha.10...0.2.0-alpha.11) (2025-01-20)
 
@@ -89,11 +99,13 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* fix List export ([602f627](https://github.com/mittwald/flow/commit/602f627ea41fe973c8f68dc4903dbaddab88b78c))
+- fix List export
+  ([602f627](https://github.com/mittwald/flow/commit/602f627ea41fe973c8f68dc4903dbaddab88b78c))
 
 ### Features
 
-* build view componentsgen ([3586d27](https://github.com/mittwald/flow/commit/3586d27090665a758c4dcf14bf458cf05dee95c8))
+- build view componentsgen
+  ([3586d27](https://github.com/mittwald/flow/commit/3586d27090665a758c4dcf14bf458cf05dee95c8))
 
 # [0.2.0-alpha.9](https://github.com/mittwald/flow/compare/0.2.0-alpha.8...0.2.0-alpha.9) (2025-01-13)
 

@@ -34,6 +34,7 @@ export const Item = (props: Props) => {
       textValue={textValue}
       href={href}
       hasAction={hasAction}
+      isTile={list.viewMode === "tiles"}
       {...gridItemProps}
     >
       <Suspense fallback={<SkeletonView />}>{children}</Suspense>
@@ -41,9 +42,14 @@ export const Item = (props: Props) => {
   );
 };
 
-export const ItemContainer: FC<PropsWithChildren> = (props) => {
+export const ItemContainer: FC<Props> = (props) => {
+  const list = useList();
   return (
-    <ItemsGridListItemView textValue="-" className={styles.item}>
+    <ItemsGridListItemView
+      textValue="-"
+      className={styles.item}
+      isTile={list.viewMode === "tiles"}
+    >
       {props.children}
     </ItemsGridListItemView>
   );

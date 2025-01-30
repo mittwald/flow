@@ -179,7 +179,8 @@ export const List = flowComponent("List", (props) => {
               {listModel.items.entries.length > 0 && (
                 <TunnelExit id="listSummary" />
               )}
-              {listModel.viewMode === "list" && <Items />}
+              {(listModel.viewMode === "list" ||
+                listModel.viewMode === "tiles") && <Items />}
               {listModel.viewMode === "table" && <Table />}
             </DivView>
             <Footer />

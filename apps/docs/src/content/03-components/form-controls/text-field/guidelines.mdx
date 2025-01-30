@@ -49,10 +49,10 @@ gekennzeichnet.
 
 ## Label
 
-Jedes TextField sollte ein passendes [Label](/03-components/content/label) 
-besitzen. Ein gutes Label vermittelt alle notwendigen Informationen, um das TextField 
-korrekt auszufüllen. Außerdem sollte es knapp (max. 2 Wörter), präzise und weder 
-versteckt noch auspunktiert sein.
+Jedes TextField sollte ein passendes [Label](/03-components/content/label)
+besitzen. Ein gutes Label vermittelt alle notwendigen Informationen, um das
+TextField korrekt auszufüllen. Außerdem sollte es knapp (max. 2 Wörter), präzise
+und weder versteckt noch auspunktiert sein.
 
   <Do example="default">
     Verwende ein kurzes, präzises Label, das essentielle Eingabeanforderungen kommuniziert.
@@ -75,9 +75,9 @@ Formatierungsbeispiele liefern.
 Placeholder sind nicht accessible und dürfen daher keine Informationen
 enthalten, die für das korrekte Ausfüllen des TextFields erforderlich sind. Das
 größte Problem ist, dass Placeholder verschwinden, sobald Text eingegeben wird.
-Darüber hinaus werden sie von manchen Assistenztechnologien nicht korrekt erkannt
-und sind kognitiv schwieriger zu verarbeiten als die FieldDescription. Statt
-einen Placeholder zu verwenden, ergänze das TextField mit ...
+Darüber hinaus werden sie von manchen Assistenztechnologien nicht korrekt
+erkannt und sind kognitiv schwieriger zu verarbeiten als die FieldDescription.
+Statt einen Placeholder zu verwenden, ergänze das TextField mit ...
 
 - einem [Label](/03-components/content/label) für Informationen, die essenziell
   für das Verständnis der Eingabeanforderungen sind.
@@ -102,11 +102,12 @@ Das TextField kann sowohl über die Tastatur erreicht und aktiviert werden als
 auch mit Assistenztechnologien angesteuert werden. Damit auch der Inhalt
 barrierefrei ist, solltest du:
 
-- wenn möglich ein [Label](/03-components/content/label) verwenden, welches essenzielle
-  Eingabeanforderungen über das Label kommuniziert. Können die Eingabeanforderungen an 
-  das TextField durch den Kontext erschlossen werden, kann auf den Einsatz eines Labels 
-  verzichtet werden. In diesem Fall muss das TextField über **aria-labelledby** verknüpft 
-  oder über ein **aria-label** beschrieben werden.
+- wenn möglich ein [Label](/03-components/content/label) verwenden, welches
+  essenzielle Eingabeanforderungen über das Label kommuniziert. Können die
+  Eingabeanforderungen an das TextField durch den Kontext erschlossen werden,
+  kann auf den Einsatz eines Labels verzichtet werden. In diesem Fall muss das
+  TextField über **aria-labelledby** verknüpft oder über ein **aria-label**
+  beschrieben werden.
 - die FieldDescription nutzen, um Unterstützung, Beispiele oder
   Formatierungshilfen zu geben.
 - Placeholder nicht für Inhalte verwenden, die zum Ausfüllen des TextFields

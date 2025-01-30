@@ -21,6 +21,9 @@ import type { SettingsStore } from "@/components/SettingsProvider/models/Setting
 import z from "zod";
 
 export class List<T> {
+  public static readonly viewModeSettingsStorageSchema = z
+    .enum(["list", "table", "tiles"])
+    .optional();
   public readonly filters: Filter<T, never, never>[];
   public readonly itemView?: ItemView<T>;
   public readonly table?: Table<T>;
@@ -36,16 +39,11 @@ export class List<T> {
   public readonly componentProps: ListSupportedComponentProps;
   public viewMode: ListViewMode;
   public readonly setViewMode: (viewMode: ListViewMode) => void;
-
-  private readonly settingsStore?: SettingsStore;
   public readonly supportsSettingsStorage: boolean;
   public readonly settingStorageKey?: string;
+  private readonly settingsStore?: SettingsStore;
   private readonly viewModeStorageKey?: string;
   private readonly filterSettingsStorageKey?: string;
-
-  public static readonly viewModeSettingsStorageSchema = z
-    .enum(["list", "table"])
-    .optional();
 
   public constructor(shape: ListShape<T>) {
     const {
@@ -97,6 +95,7 @@ export class List<T> {
       defaultViewMode ?? this.getStoredViewModeDefaultSetting() ?? "list",
     );
     this.viewMode = viewMode;
+
     this.setViewMode = (viewMode) => {
       setViewMode(viewMode);
       if (this.settingsStore && this.viewModeStorageKey) {

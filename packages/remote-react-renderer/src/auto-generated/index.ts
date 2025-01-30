@@ -63,7 +63,7 @@ import { NavigationGroup as NavigationGroup } from "@mittwald/flow-react-compone
 import { Notification as Notification } from "@mittwald/flow-react-components/Notification";
 import { NotificationProvider as NotificationProvider } from "@mittwald/flow-react-components/NotificationProvider";
 import { NumberField as NumberField } from "@mittwald/flow-react-components/NumberField";
-import { Option as Option } from "@mittwald/flow-react-components/Select";
+import { Option as Option } from "@mittwald/flow-react-components/Option";
 import { OverlayContent as OverlayContent } from "@mittwald/flow-react-components/Overlay";
 import { PopoverContent as PopoverContent } from "@mittwald/flow-react-components/Popover";
 import { ProgressBar as ProgressBar } from "@mittwald/flow-react-components/ProgressBar";

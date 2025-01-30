@@ -5,19 +5,21 @@ import clsx from "clsx";
 
 export type GridListItemProps = Aria.GridListItemProps<never> & {
   hasAction?: boolean;
+  isTile?: boolean;
 };
 
 /** @flr-generate all */
 export const GridListItem: FC<GridListItemProps> = (props) => {
-  const { hasAction, ...restProps } = props;
+  const { hasAction, isTile, ...restProps } = props;
   return (
     <Aria.GridListItem
       {...restProps}
-      className={(props) =>
+      className={(renderProps) =>
         clsx(
           styles.item,
           hasAction && styles.hasAction,
-          props.isSelected && styles.isSelected,
+          isTile && styles.tile,
+          renderProps.isSelected && styles.isSelected,
         )
       }
     />

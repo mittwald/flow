@@ -28,6 +28,7 @@ export default mergeConfig(
           CheckboxGroup: "./src/components/CheckboxGroup/index.ts",
           CodeBlock: "./src/components/CodeBlock/index.ts",
           ColumnLayout: "./src/components/ColumnLayout/index.ts",
+          ComboBox: "./src/components/ComboBox/index.ts",
           Content: "./src/components/Content/index.ts",
           ContextMenu: "./src/components/ContextMenu/index.ts",
           ContextualHelp: "./src/components/ContextualHelp/index.ts",
@@ -42,6 +43,7 @@ export default mergeConfig(
           FileField: "./src/components/FileField/index.ts",
           FileCard: "./src/components/FileCard/index.ts",
           FileCardList: "./src/components/FileCardList/index.ts",
+          FileDropZone: "./src/components/FileDropZone/index.ts",
           Fragment: "./src/components/Fragment/index.ts",
           Header: "./src/components/Header/index.ts",
           HeaderNavigation: "./src/components/HeaderNavigation/index.ts",
@@ -70,6 +72,7 @@ export default mergeConfig(
           NotificationProvider:
             "./src/components/NotificationProvider/index.ts",
           NumberField: "./src/components/NumberField/index.ts",
+          Option: "./src/components/Option/index.ts",
           Overlay: "./src/components/Overlay/index.ts",
           OverlayTrigger: "./src/components/OverlayTrigger/index.ts",
           Popover: "./src/components/Popover/index.ts",

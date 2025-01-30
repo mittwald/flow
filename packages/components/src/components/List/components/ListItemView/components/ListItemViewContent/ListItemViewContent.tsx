@@ -1,19 +1,22 @@
-import type { PropsWithChildren, ReactNode } from "react";
+import type { ComponentProps, PropsWithChildren, ReactNode } from "react";
 import React from "react";
 import styles from "../../ListItemView.module.scss";
-import type { PropsWithClassName } from "@/lib/types/props";
 import {
   dynamic,
   type PropsContext,
   PropsContextProvider,
 } from "@/lib/propsContext";
+import type { ListViewMode } from "@/components/List/model/types";
+import clsx from "clsx";
 
-export type ListItemViewContentProps = PropsWithChildren &
-  PropsWithClassName & {
-    title?: ReactNode;
-    subTitle?: ReactNode;
-    button?: ReactNode;
-  };
+export type ListItemViewContentProps = PropsWithChildren & {
+  title?: ReactNode;
+  subTitle?: ReactNode;
+  avatar?: ReactNode;
+  button?: ReactNode;
+  bottom?: ReactNode;
+  viewMode?: ListViewMode;
+};
 
 const getStyleForContentSlot = (slot?: string) =>
   slot === "top"
@@ -24,7 +27,18 @@ const getStyleForContentSlot = (slot?: string) =>
 
 /** @flr-generate all */
 export const ListItemViewContent = (props: ListItemViewContentProps) => {
-  const { children, className, title, subTitle, button } = props;
+  const { children, avatar, title, subTitle, button, bottom, viewMode } = props;
+
+  const contentProps: Record<string, ComponentProps<"div">> = {
+    bottom: {
+      onMouseDown: (e) => e.stopPropagation(),
+      onPointerDown: (e) => e.stopPropagation(),
+      className: styles.bottomContent,
+    },
+    top: {
+      className: styles.topContent,
+    },
+  };
 
   const propsContext: PropsContext = {
     ContextMenu: {
@@ -39,6 +53,10 @@ export const ListItemViewContent = (props: ListItemViewContentProps) => {
     },
     Content: {
       className: dynamic((p) => getStyleForContentSlot(p.slot)),
+      onMouseDown: dynamic((p) => contentProps[p.slot ?? "top"]?.onMouseDown),
+      onPointerDown: dynamic(
+        (p) => contentProps[p.slot ?? "top"]?.onPointerDown,
+      ),
     },
     Avatar: {
       className: styles.avatar,
@@ -46,6 +64,8 @@ export const ListItemViewContent = (props: ListItemViewContentProps) => {
     Heading: {
       className: styles.heading,
       level: 5,
+      Badge: { className: styles.badge },
+      AlertBadge: { className: styles.badge },
     },
     Text: {
       className: styles.text,
@@ -55,17 +75,40 @@ export const ListItemViewContent = (props: ListItemViewContentProps) => {
     },
   };
 
+  const className = clsx(styles.view, viewMode === "tiles" && styles.tile);
+
   return (
     <PropsContextProvider props={propsContext} mergeInParentContext>
       <div className={className}>
-        <div className={styles.content}>
-          {children}
-          <div className={styles.title}>
-            {title}
-            <div className={styles.subTitle}>{subTitle}</div>
-          </div>
-        </div>
-        {button}
+        {viewMode === "list" && (
+          <>
+            <div className={styles.content}>
+              {children}
+              <div className={styles.title}>
+                {avatar}
+                {title}
+                <div className={styles.subTitle}>{subTitle}</div>
+              </div>
+            </div>
+            {button}
+            {bottom}
+          </>
+        )}
+
+        {viewMode === "tiles" && (
+          <>
+            <div className={styles.avatarContainer}>{avatar}</div>
+            <div className={styles.content}>
+              <div className={styles.title}>
+                {title}
+                <div className={styles.subTitle}>{subTitle}</div>
+              </div>
+              {button}
+              {children}
+              {bottom}
+            </div>
+          </>
+        )}
       </div>
     </PropsContextProvider>
   );

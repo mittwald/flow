@@ -1,5 +1,9 @@
 .columnLayoutContainer {
   container-type: inline-size;
+
+  &:has(.columnLayout:empty) {
+    display: none;
+  }
 }
 
 .columnLayout {

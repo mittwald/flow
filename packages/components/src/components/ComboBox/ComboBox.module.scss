@@ -1,0 +1,35 @@
+@use "@/styles/mixins/formControl.scss";
+
+.comboBox {
+  .input {
+    order: 2;
+    display: grid;
+    grid-template-areas: "input";
+
+    input {
+      @include formControl.formControl();
+      grid-area: input;
+    }
+
+    .toggle {
+      grid-area: input;
+      justify-self: end;
+      margin: var(--form-control--border-width);
+
+      &:hover {
+        background-color: transparent;
+      }
+
+      &[data-pressed] {
+        background-color: transparent;
+      }
+    }
+  }
+
+  &:not([data-disabled="true"]):hover {
+    input,
+    .toggle {
+      background-color: var(--form-control--background-color--hover);
+    }
+  }
+}

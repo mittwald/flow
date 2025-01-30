@@ -14,7 +14,8 @@ import { Radio, RadioGroup } from "@/components/RadioGroup";
 import { Switch } from "@/components/Switch";
 import { CheckboxGroup } from "@/components/CheckboxGroup";
 import { Checkbox } from "@/components/Checkbox";
-import Select, { Option } from "@/components/Select";
+import Select from "@/components/Select";
+import { Option } from "@/components/Option";
 import { Slider } from "@/components/Slider";
 import { sleep } from "@/lib/promises/sleep";
 import DatePicker from "@/components/DatePicker";
@@ -22,6 +23,7 @@ import { DateRangePicker } from "@/components/DateRangePicker";
 import { getLocalTimeZone, today } from "@internationalized/date";
 import { TimeField } from "@/components/TimeField";
 import { TextArea } from "@/components/TextArea";
+import { ComboBox } from "@/components/ComboBox";
 
 const submitAction = action("submit");
 
@@ -41,6 +43,7 @@ const meta: Meta<typeof Field> = {
       dateRange: string;
       time: string;
       message: string;
+      domain: string;
     }
 
     const handleOnSubmit = async (values: Values) => {
@@ -176,6 +179,19 @@ const meta: Meta<typeof Field> = {
             <TextArea rows={1} autoResizeMaxRows={5}>
               <Label>Message</Label>
             </TextArea>
+          </Field>
+
+          <Field
+            name="domain"
+            rules={{
+              required: "Please select a domain",
+            }}
+          >
+            <ComboBox>
+              <Label>Domain</Label>
+              <Option value="mydomain.de">mydomain.de</Option>
+              <Option value="anotherdomain.com">anotherdomain.com</Option>
+            </ComboBox>
           </Field>
 
           <ActionGroup>

@@ -1,19 +1,30 @@
 import type { FC } from "react";
 import React from "react";
-import ListItemView from "@/components/List/components/ListItemView/ListItemView";
-import HeadingView from "@/views/HeadingView";
-import SkeletonTextView from "@/views/SkeletonTextView";
-import TextView from "@/views/TextView";
+import { Heading } from "@/components/Heading";
+import { Text } from "@/components/Text";
+import SkeletonText from "@/components/SkeletonText";
+import { ListItemView, useList } from "@/components/List";
+import { Skeleton } from "@/components/Skeleton";
+import { Avatar } from "@/components/Avatar";
 
 export const SkeletonView: FC = () => {
+  const list = useList();
+
+  const showTiles = list.viewMode === "tiles";
+
   return (
     <ListItemView>
-      <HeadingView>
-        <SkeletonTextView width="200px" />
-      </HeadingView>
-      <TextView>
-        <SkeletonTextView width="300px" />
-      </TextView>
+      {showTiles && (
+        <Avatar>
+          <Skeleton style={{ aspectRatio: 16 / 9 }} />
+        </Avatar>
+      )}
+      <Heading>
+        <SkeletonText width="200px" />
+      </Heading>
+      <Text>
+        <SkeletonText width="300px" />
+      </Text>
     </ListItemView>
   );
 };

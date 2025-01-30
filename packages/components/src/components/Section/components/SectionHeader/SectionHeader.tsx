@@ -23,6 +23,7 @@ export const SectionHeader: FC<SectionHeaderProps> = (props) => {
       size: "s",
       tunnelId: "actions",
     },
+    FileField: { tunnelId: "actions", Button: { size: "s" } },
     ContextMenuTrigger: {
       tunnelId: "actions",
       Button: {

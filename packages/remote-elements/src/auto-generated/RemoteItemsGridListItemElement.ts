@@ -18,6 +18,7 @@ export class RemoteItemsGridListItemElement extends FlowRemoteElement<RemoteItem
       hrefLang: {},
       id: {},
       isDisabled: {},
+      isTile: {},
       ping: {},
       referrerPolicy: {},
       rel: {},

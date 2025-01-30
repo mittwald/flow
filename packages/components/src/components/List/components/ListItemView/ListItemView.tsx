@@ -2,17 +2,17 @@ import type { PropsWithChildren } from "react";
 import React from "react";
 import styles from "./ListItemView.module.scss";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
-import type { PropsWithClassName } from "@/lib/types/props";
 import ListItemViewContentView from "@/views/ListItemViewContentView";
-import clsx from "clsx";
 import FragmentView from "@/views/FragmentView";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { OptionsButton } from "@/components/List/components/Items/components/Item/components/OptionsButton";
+import { useList } from "@/components/List";
 
-export type ListItemViewProps = PropsWithChildren & PropsWithClassName;
+export type ListItemViewProps = PropsWithChildren;
 
 export const ListItemView = (props: ListItemViewProps) => {
-  const { children, className } = props;
+  const { children } = props;
+  const list = useList();
 
   const propsContext: PropsContext = {
     ContextMenu: {
@@ -29,7 +29,7 @@ export const ListItemView = (props: ListItemViewProps) => {
       },
     },
     Avatar: {
-      tunnelId: "title",
+      tunnelId: "avatar",
     },
     Heading: {
       tunnelId: "title",
@@ -39,15 +39,19 @@ export const ListItemView = (props: ListItemViewProps) => {
     },
   };
 
-  const rootClassName = clsx(styles.view, className);
-
   return (
     <PropsContextProvider props={propsContext} mergeInParentContext>
       <TunnelProvider>
         <ListItemViewContentView
+          viewMode={list.viewMode}
           title={
             <FragmentView>
               <TunnelExit id="title" />
+            </FragmentView>
+          }
+          avatar={
+            <FragmentView>
+              <TunnelExit id="avatar" />
             </FragmentView>
           }
           button={
@@ -60,7 +64,6 @@ export const ListItemView = (props: ListItemViewProps) => {
               <TunnelExit id="text" />
             </FragmentView>
           }
-          className={rootClassName}
         >
           {children}
         </ListItemViewContentView>

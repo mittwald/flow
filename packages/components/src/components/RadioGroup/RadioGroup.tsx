@@ -10,10 +10,8 @@ import type { ColumnLayoutProps } from "@/components/ColumnLayout";
 import { ColumnLayout } from "@/components/ColumnLayout";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import formFieldStyles from "../FormField/FormField.module.scss";
-import RadioButton from "./components/RadioButton";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import { deepHas } from "@/lib/react/deepHas";
 
 export interface RadioGroupProps
   extends PropsWithChildren<Omit<Aria.RadioGroupProps, "children">>,
@@ -43,14 +41,12 @@ export const RadioGroup = flowComponent("RadioGroup", (props) => {
       tunnelId: "fieldError",
     },
     RadioButton: {
-      tunnelId: "radios",
+      tunnelId: "radioButtons",
     },
     Radio: {
       tunnelId: "radios",
     },
   };
-
-  const hasRadioButtons = deepHas(children, RadioButton);
 
   return (
     <Aria.RadioGroup {...rest} className={rootClassName} ref={ref}>
@@ -62,17 +58,13 @@ export const RadioGroup = flowComponent("RadioGroup", (props) => {
         >
           {children}
 
-          {hasRadioButtons && (
-            <ColumnLayout s={s} m={m} l={l} className={styles.radioGroup}>
-              <TunnelExit id="radios" />
-            </ColumnLayout>
-          )}
+          <ColumnLayout s={s} m={m} l={l} className={styles.radioGroup}>
+            <TunnelExit id="radioButtons" />
+          </ColumnLayout>
 
-          {!hasRadioButtons && (
-            <div className={styles.radioGroup}>
-              <TunnelExit id="radios" />
-            </div>
-          )}
+          <div className={styles.radioGroup}>
+            <TunnelExit id="radios" />
+          </div>
 
           <TunnelExit id="fieldDescription" />
           <TunnelExit id="fieldError" />

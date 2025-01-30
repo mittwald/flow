@@ -20,7 +20,9 @@
     border-bottom-style: var(--list-item--border-style);
   }
 
-  &:where(.hasAction) {
+  &:where(.hasAction):not(
+      &:has(:global(.flow--list--items--item--view--bottom-content):hover)
+    ) {
     &:not(.isSelected) {
       &:hover {
         background-color: var(--list-item--background-color--hover);
@@ -29,6 +31,26 @@
 
     &[data-pressed] {
       background-color: var(--list-item--background-color--pressed);
+    }
+  }
+
+  &.tile {
+    border: none;
+
+    &:where(.hasAction) {
+      &:not(.isSelected) {
+        &:hover {
+          :global(.flow--avatar) {
+            filter: brightness(var(--image-button--brightness--hover));
+          }
+        }
+      }
+
+      &[data-pressed] {
+        :global(.flow--avatar) {
+          filter: brightness(var(--image-button--brightness--pressed));
+        }
+      }
     }
   }
 }
