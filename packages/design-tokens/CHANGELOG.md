@@ -1,5 +1,52 @@
 # Change Log
 
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.2.0-alpha.27](https://github.com/mittwald/flow/compare/0.2.0-alpha.26...0.2.0-alpha.27) (2025-01-30)
+
+# [0.1.0-alpha.407](https://github.com/mittwald/flow/compare/0.1.0-alpha.406...0.1.0-alpha.407) (2025-01-28)
+
+# [0.1.0-alpha.406](https://github.com/mittwald/flow/compare/0.1.0-alpha.405...0.1.0-alpha.406) (2025-01-27)
+
+# [0.1.0-alpha.405](https://github.com/mittwald/flow/compare/0.1.0-alpha.404...0.1.0-alpha.405) (2025-01-27)
+
+# [0.1.0-alpha.404](https://github.com/mittwald/flow/compare/0.2.0-alpha.22...0.1.0-alpha.404) (2025-01-27)
+
+### Features
+
+* **FileDropZone:** add file drop zone component ([041cab7](https://github.com/mittwald/flow/commit/041cab79ecfd141867c1785b25d59138aefd0df2))
+
+# [0.1.0-alpha.403](https://github.com/mittwald/flow/compare/0.1.0-alpha.402...0.1.0-alpha.403) (2025-01-24)
+
+# [0.1.0-alpha.402](https://github.com/mittwald/flow/compare/0.2.0-alpha.19...0.1.0-alpha.402) (2025-01-24)
+
+# [0.1.0-alpha.401](https://github.com/mittwald/flow/compare/0.1.0-alpha.400...0.1.0-alpha.401) (2025-01-23)
+
+# [0.1.0-alpha.400](https://github.com/mittwald/flow/compare/0.1.0-alpha.399...0.1.0-alpha.400) (2025-01-23)
+
+# [0.1.0-alpha.399](https://github.com/mittwald/flow/compare/0.1.0-alpha.398...0.1.0-alpha.399) (2025-01-22)
+
+# [0.1.0-alpha.398](https://github.com/mittwald/flow/compare/0.2.0-alpha.18...0.1.0-alpha.398) (2025-01-22)
+
+# [0.1.0-alpha.397](https://github.com/mittwald/flow/compare/0.1.0-alpha.396...0.1.0-alpha.397) (2025-01-21)
+
+# [0.1.0-alpha.396](https://github.com/mittwald/flow/compare/0.2.0-alpha.16...0.1.0-alpha.396) (2025-01-21)
+
+### Features
+
+* **Markdown:** support blockquote ([#1112](https://github.com/mittwald/flow/issues/1112)) ([b48fadb](https://github.com/mittwald/flow/commit/b48fadb22077a4e3be885289f15981759356a74b))
+
+# [0.1.0-alpha.395](https://github.com/mittwald/flow/compare/0.1.0-alpha.394...0.1.0-alpha.395) (2025-01-20)
+
+# [0.1.0-alpha.394](https://github.com/mittwald/flow/compare/0.2.0-alpha.9...0.1.0-alpha.394) (2025-01-15)
+
+# [0.1.0-alpha.393](https://github.com/mittwald/flow/compare/0.2.0-alpha.3...0.1.0-alpha.393) (2025-01-10)
+
+# [0.1.0-alpha.392](https://github.com/mittwald/flow/compare/0.2.0-alpha.2...0.1.0-alpha.392) (2025-01-10)
+
+# Change Log
+
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
