@@ -29,6 +29,9 @@ export const LabeledValue: FC<LabeledValueProps> = (props) => {
       variant: "plain",
       size: "s",
     },
+    Link: {
+      inline: true,
+    },
   };
 
   return (
