@@ -23,18 +23,34 @@ const Footer: FC = () => {
           className={styles.footerColumnLayout}
         >
           <FooterSection title="Ressourcen">
-            <Link color="dark" href="https://github.com/mittwald/flow">
+            <Link
+              color="dark"
+              href="https://github.com/mittwald/flow"
+              target="_blank"
+            >
               GitHub Repo
             </Link>
-            <Link color="dark" href="https://developer.mittwald.de/">
+            <Link
+              color="dark"
+              href="https://developer.mittwald.de/"
+              target="_blank"
+            >
               Developer-Portal
             </Link>
           </FooterSection>
           <FooterSection title="Rechtliches">
-            <Link color="dark" href="https://www.mittwald.de/impressum">
+            <Link
+              color="dark"
+              href="https://www.mittwald.de/impressum"
+              target="_blank"
+            >
               Impressum
             </Link>
-            <Link color="dark" href="https://www.mittwald.de/datenschutz">
+            <Link
+              color="dark"
+              href="https://www.mittwald.de/datenschutz"
+              target="_blank"
+            >
               Datenschutz
             </Link>
           </FooterSection>
@@ -45,6 +61,7 @@ const Footer: FC = () => {
               className={styles.feedbackLink}
               color="dark"
               href="https://github.com/mittwald/flow/issues/new?template=general-style-guide-feedback.md"
+              target="_blank"
             >
               Feedback zu Flow geben
             </Link>
