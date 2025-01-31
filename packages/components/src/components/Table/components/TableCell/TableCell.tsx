@@ -10,12 +10,24 @@ export interface TableCellProps
   extends Omit<Aria.CellProps, "children" | "style">,
     PropsWithChildren {
   rowHeader?: boolean;
+  /** @default "start" */
+  horizontalAlign?: "start" | "center";
 }
 
 export const TableCell: FC<TableCellProps> = (props) => {
-  const { children, className, rowHeader, ...rest } = props;
+  const {
+    children,
+    className,
+    rowHeader,
+    horizontalAlign = "start",
+    ...rest
+  } = props;
 
-  const rootClassName = clsx(styles.cell, className);
+  const rootClassName = clsx(
+    styles.cell,
+    styles[`horizontal-align-${horizontalAlign}`],
+    className,
+  );
 
   const content = (
     <Suspense fallback={<SkeletonText width="100px" />}>{children}</Suspense>
