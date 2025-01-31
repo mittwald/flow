@@ -8,6 +8,7 @@ import type { FieldValues, UseFormReturn } from "react-hook-form";
 import { FormContextProvider } from "@/integrations/react-hook-form/components/context/formContext";
 import { SubmitButtonStateProvider } from "@/integrations/react-hook-form/components/ActionGroupWrapper/SubmitButtonStateProvider";
 import { AutoFormResetEffect } from "../AutoFormResetEffect/AutoFormResetEffect";
+import { useOverlayController } from "@/lib/controller";
 
 export type FormOnSubmitHandler<F extends FieldValues> = Parameters<
   UseFormReturn<F>["handleSubmit"]
@@ -18,12 +19,27 @@ interface Props<F extends FieldValues>
     PropsWithChildren {
   form: UseFormReturn<F>;
   onSubmit: FormOnSubmitHandler<F>;
+  disableFormResetOnModalClose?: boolean;
 }
 
 export function Form<F extends FieldValues>(props: Props<F>) {
-  const { form, children, onSubmit, ...formProps } = props;
-
+  const {
+    form,
+    children,
+    onSubmit,
+    disableFormResetOnModalClose,
+    ...formProps
+  } = props;
   const isAsyncSubmit = useRef(false);
+
+  if (!disableFormResetOnModalClose) {
+    useOverlayController("Modal", {
+      reuseControllerFromContext: true,
+      onClose: () => {
+        form.reset();
+      },
+    });
+  }
 
   const handleOnSubmit: FormEventHandler = (e) => {
     const { isSubmitting, isValidating } = form.control._formState;
