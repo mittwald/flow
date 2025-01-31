@@ -379,18 +379,18 @@
     "node": ">=20.11"
   },
   "scripts": {
-    "build": "run vite build --config vite.build.config.ts",
+    "build": "vite build --config vite.build.config.ts",
     "build:deps": "",
-    "build:docs-properties": "run tsx dev/createDocPropertiesJson.ts",
-    "build:icons": "run tsx dev/icons/generate.ts",
-    "build:remote-components": "run tsx dev/remote-components-generator/generateRemoteComponents.ts",
-    "build:storybook": "run storybook build",
+    "build:docs-properties": "tsx dev/createDocPropertiesJson.ts",
+    "build:icons": "tsx dev/icons/generate.ts",
+    "build:remote-components": "tsx dev/remote-components-generator/generateRemoteComponents.ts",
+    "build:storybook": "storybook build",
     "clean": "rimraf dist out",
     "dev": "storybook dev --port 6006",
     "postbuild:css": "rimraf dist/css/**/*.js",
     "test": "",
-    "test:compile": "run tsc --noEmit",
-    "test:unit": "run vitest run"
+    "test:compile": "tsc --noEmit",
+    "test:unit": "vitest run"
   },
   "dependencies": {
     "@chakra-ui/live-region": "^2.1.0",

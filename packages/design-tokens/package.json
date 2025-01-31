@@ -13,7 +13,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "run style-dictionary build -c style-dictionary.config.js",
+    "build": "style-dictionary build -c style-dictionary.config.js",
     "clean": "rimraf dist"
   },
   "devDependencies": {

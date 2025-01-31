@@ -2,27 +2,27 @@
   "name": "@mittwald/flow-project",
   "private": true,
   "version": "0.0.0",
-  "packageManager": "yarn@4.5.3",
+  "packageManager": "pnpm@9.15.4+sha512.b2dc20e2fc72b3e18848459b37359a32064663e5627a51e4c74b2c29dd8e8e0491483c3abb40789cfd578bf362fb6ba8261b05f0387d76792ed6e23ea3b1b6a0",
   "type": "module",
   "license": "MIT",
   "engines": {
     "node": ">=20.11"
   },
   "scripts": {
-    "all": "nx run-many --targets=\"$@\"",
-    "build": "run all build",
-    "clean": "nx reset && run all clean",
-    "dev": "yarn nx build:deps $@ && concurrently \"yarn watch $@\" \"yarn nx dev $@\"",
-    "dev:init-githooks": "yarn dlx simple-git-hooks",
+    "build": "nx run-many --targets=build",
+    "clean": "nx reset",
+    "postclean": "nx run-many --targets=clean",
+    "dev": "nx build:deps $@ && concurrently \"yarn watch $@\" \"yarn nx dev $@\"",
+    "dev:init-githooks": "pnpm dlx simple-git-hooks",
     "format": "prettier --write '**/*.{ts,tsx,yaml,yml,json,md,mdx,js,cjs,mjs,css}'",
     "lint": "eslint .",
-    "test": "run all test",
+    "test": "nx run-many --targets=test",
     "watch": "nx watch --projects=\"$@\" --includeDependentProjects -- run nx build:deps \"$@\""
   },
   "simple-git-hooks": {
-    "post-checkout": "yarn install && yarn clean",
-    "post-merge": "yarn install && yarn clean",
-    "pre-commit": "yarn lint"
+    "post-checkout": "pnpm install && pnpm clean",
+    "post-merge": "pnpm install && pnpm clean",
+    "pre-commit": "pnpm lint"
   },
   "dependencies": {
     "eslint-scope": "^8.2.0",
@@ -58,6 +58,11 @@
     "typescript-eslint": "^8.22.0",
     "verror": "^1.10.1",
     "yieldable-json": "^2.1.0"
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "acorn": "patches/acorn.patch"
+    }
   },
   "resolutions": {
     "@remote-dom/core": "1.5.1"

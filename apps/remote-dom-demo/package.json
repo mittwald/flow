@@ -4,8 +4,8 @@
   "type": "module",
   "scripts": {
     "build:deps": "",
-    "dev": "run next dev",
-    "test:compile": "run tsc --noEmit"
+    "dev": "next dev",
+    "test:compile": "tsc --noEmit"
   },
   "dependencies": {
     "@internationalized/date": "^3.7.0",

@@ -22,10 +22,10 @@
     "node": ">=20.11"
   },
   "scripts": {
-    "build": "run vite build --config vite.build.config.ts",
+    "build": "vite build --config vite.build.config.ts",
     "clean": "rimraf dist",
     "test": "",
-    "test:compile": "run tsc --noEmit"
+    "test:compile": "tsc --noEmit"
   },
   "dependencies": {
     "@mittwald/flow-remote-core": "workspace:*",
