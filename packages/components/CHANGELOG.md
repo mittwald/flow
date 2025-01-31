@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.413](https://github.com/mittwald/flow/compare/0.1.0-alpha.412...0.1.0-alpha.413) (2025-01-31)
+
+### Features
+
+- **Form:** add auto reset functionality when modal closes
+  ([#1144](https://github.com/mittwald/flow/issues/1144))
+  ([207e3dc](https://github.com/mittwald/flow/commit/207e3dcd2f35ddb06556bcc4fd68b88eca384c76))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.412](https://github.com/mittwald/flow/compare/0.1.0-alpha.411...0.1.0-alpha.412) (2025-01-31)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
