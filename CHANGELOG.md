@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.410](https://github.com/mittwald/flow/compare/0.1.0-alpha.409...0.1.0-alpha.410) (2025-01-31)
+
+### Features
+
+- **Link:** update link size
+  ([#1140](https://github.com/mittwald/flow/issues/1140))
+  ([6fb805c](https://github.com/mittwald/flow/commit/6fb805c2cd8bd82653b41fb439fc69a5bf7d1378))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.409](https://github.com/mittwald/flow/compare/0.1.0-alpha.408...0.1.0-alpha.409) (2025-01-31)
 
 **Note:** Version bump only for package @mittwald/flow-project
