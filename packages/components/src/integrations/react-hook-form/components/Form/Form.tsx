@@ -19,7 +19,7 @@ interface Props<F extends FieldValues>
     PropsWithChildren {
   form: UseFormReturn<F>;
   onSubmit: FormOnSubmitHandler<F>;
-  disableFormResetOnModalClose?: boolean;
+  resetFormOnCloseModal?: boolean;
 }
 
 export function Form<F extends FieldValues>(props: Props<F>) {
@@ -27,7 +27,7 @@ export function Form<F extends FieldValues>(props: Props<F>) {
     form,
     children,
     onSubmit,
-    disableFormResetOnModalClose,
+    resetFormOnCloseModal = true,
     ...formProps
   } = props;
   const isAsyncSubmit = useRef(false);
@@ -35,7 +35,7 @@ export function Form<F extends FieldValues>(props: Props<F>) {
   useOverlayController("Modal", {
     reuseControllerFromContext: true,
     onClose: () => {
-      if (!disableFormResetOnModalClose) {
+      if (resetFormOnCloseModal) {
         form.reset();
       }
     },
