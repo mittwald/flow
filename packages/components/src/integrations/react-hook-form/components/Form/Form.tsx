@@ -32,14 +32,14 @@ export function Form<F extends FieldValues>(props: Props<F>) {
   } = props;
   const isAsyncSubmit = useRef(false);
 
-  if (!disableFormResetOnModalClose) {
-    useOverlayController("Modal", {
-      reuseControllerFromContext: true,
-      onClose: () => {
+  useOverlayController("Modal", {
+    reuseControllerFromContext: true,
+    onClose: () => {
+      if (!disableFormResetOnModalClose) {
         form.reset();
-      },
-    });
-  }
+      }
+    },
+  });
 
   const handleOnSubmit: FormEventHandler = (e) => {
     const { isSubmitting, isValidating } = form.control._formState;
