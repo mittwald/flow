@@ -1,8 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { FileCardListProps as RemoteFileCardListElementProps } from "@mittwald/flow-react-components/FileCardList";
-export type { FileCardListProps as RemoteFileCardListElementProps } from "@mittwald/flow-react-components/FileCardList";
+import type { FileCardListProps as RemoteFileCardListElementProps } from "@mittwald/flow-react-components";
+export type { FileCardListProps as RemoteFileCardListElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteFileCardListElement extends FlowRemoteElement<RemoteFileCardListElementProps> {
   static override get remoteAttributes() {

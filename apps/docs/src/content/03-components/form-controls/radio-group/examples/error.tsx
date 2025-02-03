@@ -1,9 +1,9 @@
 import {
   RadioButton,
   RadioGroup,
-} from "@mittwald/flow-react-components/RadioGroup";
-import Label from "@mittwald/flow-react-components/Label";
-import { FieldError } from "@mittwald/flow-react-components/FieldError";
+} from "@mittwald/flow-react-components";
+import { Label } from "@mittwald/flow-react-components";
+import { FieldError } from "@mittwald/flow-react-components";
 
 <RadioGroup isInvalid>
   <Label>Datenbank-Typ</Label>

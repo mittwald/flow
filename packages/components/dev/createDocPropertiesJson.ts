@@ -28,11 +28,11 @@ async function createDocPropertiesJson() {
   const components = await parse();
 
   console.log("📝 Writing output file");
-  if (!fsSync.existsSync("./out/")) {
-    await fs.mkdir("./out/");
+  if (!fsSync.existsSync("./dist/")) {
+    await fs.mkdir("./dist/");
   }
   await fs.writeFile(
-    "./out/doc-properties.json",
+    "./dist/doc-properties.json",
     JSON.stringify(components, null, 2),
   );
 

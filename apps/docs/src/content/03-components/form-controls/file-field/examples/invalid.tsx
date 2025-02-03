@@ -1,7 +1,7 @@
-import Label from "@mittwald/flow-react-components/Label";
-import { FileField } from "@mittwald/flow-react-components/FileField";
-import { Button } from "@mittwald/flow-react-components/Button";
-import { FieldError } from "@mittwald/flow-react-components/FieldError";
+import { Label } from "@mittwald/flow-react-components";
+import { FileField } from "@mittwald/flow-react-components";
+import { Button } from "@mittwald/flow-react-components";
+import { FieldError } from "@mittwald/flow-react-components";
 
 <FileField isInvalid>
   <Label>Zertifikat</Label>

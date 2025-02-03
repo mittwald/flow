@@ -6,7 +6,7 @@ import {
   TableFooterRow,
   TableHeader,
   TableRow,
-} from "@mittwald/flow-react-components/Table";
+} from "@mittwald/flow-react-components";
 
 <Table aria-label="Bestellübersicht">
   <TableHeader>

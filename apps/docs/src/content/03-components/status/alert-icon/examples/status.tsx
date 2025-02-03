@@ -1,4 +1,4 @@
-import AlertIcon from "@mittwald/flow-react-components/AlertIcon";
+import { AlertIcon } from "@mittwald/flow-react-components";
 
 <Row>
   <AlertIcon status="info" />

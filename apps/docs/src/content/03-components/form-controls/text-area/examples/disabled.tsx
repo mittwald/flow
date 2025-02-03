@@ -1,5 +1,5 @@
-import Label from "@mittwald/flow-react-components/Label";
-import TextArea from "@mittwald/flow-react-components/TextArea";
+import { Label } from "@mittwald/flow-react-components";
+import { TextArea } from "@mittwald/flow-react-components";
 
 <TextArea isDisabled>
   <Label>Public Key</Label>

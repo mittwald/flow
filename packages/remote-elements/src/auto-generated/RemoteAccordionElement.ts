@@ -1,8 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { AccordionProps as RemoteAccordionElementProps } from "@mittwald/flow-react-components/Accordion";
-export type { AccordionProps as RemoteAccordionElementProps } from "@mittwald/flow-react-components/Accordion";
+import type { AccordionProps as RemoteAccordionElementProps } from "@mittwald/flow-react-components";
+export type { AccordionProps as RemoteAccordionElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteAccordionElement extends FlowRemoteElement<RemoteAccordionElementProps> {
   static override get remoteAttributes() {

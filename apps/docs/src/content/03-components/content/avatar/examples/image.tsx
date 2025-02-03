@@ -1,5 +1,5 @@
-import Avatar from "@mittwald/flow-react-components/Avatar";
-import Image from "@mittwald/flow-react-components/Image";
+import { Avatar } from "@mittwald/flow-react-components";
+import { Image } from "@mittwald/flow-react-components";
 
 <Avatar>
   <Image

@@ -1,8 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { TableRowProps as RemoteTableRowElementProps } from "@mittwald/flow-react-components/Table";
-export type { TableRowProps as RemoteTableRowElementProps } from "@mittwald/flow-react-components/Table";
+import type { TableRowProps as RemoteTableRowElementProps } from "@mittwald/flow-react-components";
+export type { TableRowProps as RemoteTableRowElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteTableRowElement extends FlowRemoteElement<RemoteTableRowElementProps> {
   static override get remoteAttributes() {

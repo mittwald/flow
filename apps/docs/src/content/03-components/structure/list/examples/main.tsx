@@ -3,22 +3,23 @@ import {
   ListItem,
   ListItemView,
   ListStaticData,
-} from "@mittwald/flow-react-components/List";
+} from "@mittwald/flow-react-components";
 import {
   type Domain,
   domains,
 } from "@/content/03-components/structure/list/examples/domainApi";
-import Avatar from "@mittwald/flow-react-components/Avatar";
-import Heading from "@mittwald/flow-react-components/Heading";
-import Text from "@mittwald/flow-react-components/Text";
-import ContextMenu, {
+import { Avatar } from "@mittwald/flow-react-components";
+import { Heading } from "@mittwald/flow-react-components";
+import { Text } from "@mittwald/flow-react-components";
+import {
+  ContextMenu,
   MenuItem,
-} from "@mittwald/flow-react-components/ContextMenu";
+} from "@mittwald/flow-react-components";
 import {
   IconDomain,
   IconSubdomain,
-} from "@mittwald/flow-react-components/Icons";
-import AlertBadge from "@mittwald/flow-react-components/AlertBadge";
+} from "@mittwald/flow-react-components";
+import { AlertBadge } from "@mittwald/flow-react-components";
 
 <List batchSize={2}>
   <ListStaticData data={domains} />

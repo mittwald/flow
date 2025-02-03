@@ -1,11 +1,11 @@
-import Text from "@mittwald/flow-react-components/Text";
-import TextField from "@mittwald/flow-react-components/TextField";
-import Label from "@mittwald/flow-react-components/Label";
-import ActionGroup from "@mittwald/flow-react-components/ActionGroup";
-import Button from "@mittwald/flow-react-components/Button";
-import Heading from "@mittwald/flow-react-components/Heading";
-import Action from "@mittwald/flow-react-components/Action";
-import { IconEmail } from "@mittwald/flow-react-components/Icons";
+import { Text } from "@mittwald/flow-react-components";
+import { TextField } from "@mittwald/flow-react-components";
+import { Label } from "@mittwald/flow-react-components";
+import { ActionGroup } from "@mittwald/flow-react-components";
+import { Button } from "@mittwald/flow-react-components";
+import { Heading } from "@mittwald/flow-react-components";
+import { Action } from "@mittwald/flow-react-components";
+import { IconEmail } from "@mittwald/flow-react-components";
 
 <StaticModal>
   <div className="flow--modal--content">

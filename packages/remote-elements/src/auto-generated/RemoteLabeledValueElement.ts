@@ -1,8 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { LabeledValueProps as RemoteLabeledValueElementProps } from "@mittwald/flow-react-components/LabeledValue";
-export type { LabeledValueProps as RemoteLabeledValueElementProps } from "@mittwald/flow-react-components/LabeledValue";
+import type { LabeledValueProps as RemoteLabeledValueElementProps } from "@mittwald/flow-react-components";
+export type { LabeledValueProps as RemoteLabeledValueElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteLabeledValueElement extends FlowRemoteElement<RemoteLabeledValueElementProps> {
   static override get remoteAttributes() {

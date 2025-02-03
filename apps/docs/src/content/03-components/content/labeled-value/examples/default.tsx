@@ -1,6 +1,6 @@
-import LabeledValue from "@mittwald/flow-react-components/LabeledValue";
-import Label from "@mittwald/flow-react-components/Label";
-import Content from "@mittwald/flow-react-components/Content";
+import { LabeledValue } from "@mittwald/flow-react-components";
+import { Label } from "@mittwald/flow-react-components";
+import { Content } from "@mittwald/flow-react-components";
 
 <LabeledValue>
   <Label>Speicherplatz</Label>

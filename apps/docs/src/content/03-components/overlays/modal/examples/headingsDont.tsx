@@ -1,4 +1,4 @@
-import Heading from "@mittwald/flow-react-components/Heading";
+import { Heading } from "@mittwald/flow-react-components";
 
 <Column>
   <Heading level={4}>

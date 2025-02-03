@@ -1,9 +1,9 @@
 import {
   Segment,
   SegmentedControl,
-} from "@mittwald/flow-react-components/SegmentedControl";
-import { Label } from "@mittwald/flow-react-components/Label";
-import { FieldDescription } from "@mittwald/flow-react-components/FieldDescription";
+} from "@mittwald/flow-react-components";
+import { Label } from "@mittwald/flow-react-components";
+import { FieldDescription } from "@mittwald/flow-react-components";
 
 <SegmentedControl defaultValue="cloud">
   <Label>Speicherplatz</Label>

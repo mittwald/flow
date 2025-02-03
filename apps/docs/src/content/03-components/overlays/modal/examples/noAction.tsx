@@ -1,9 +1,9 @@
-import ActionGroup from "@mittwald/flow-react-components/ActionGroup";
-import Button from "@mittwald/flow-react-components/Button";
-import Heading from "@mittwald/flow-react-components/Heading";
-import Action from "@mittwald/flow-react-components/Action";
-import Switch from "@mittwald/flow-react-components/Switch";
-import Section from "@mittwald/flow-react-components/Section";
+import { ActionGroup } from "@mittwald/flow-react-components";
+import { Button } from "@mittwald/flow-react-components";
+import { Heading } from "@mittwald/flow-react-components";
+import { Action } from "@mittwald/flow-react-components";
+import { Switch } from "@mittwald/flow-react-components";
+import { Section } from "@mittwald/flow-react-components";
 
 <StaticModal>
   <header className="flow--modal--header">

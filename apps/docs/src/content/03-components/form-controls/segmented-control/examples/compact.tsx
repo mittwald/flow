@@ -1,9 +1,9 @@
-import { Label } from "@mittwald/flow-react-components/Label";
-import { ColumnLayout } from "@mittwald/flow-react-components/ColumnLayout";
+import { Label } from "@mittwald/flow-react-components";
+import { ColumnLayout } from "@mittwald/flow-react-components";
 import {
   Segment,
   SegmentedControl,
-} from "@mittwald/flow-react-components/SegmentedControl";
+} from "@mittwald/flow-react-components";
 
 <ColumnLayout m={[1, 1]}>
   <SegmentedControl

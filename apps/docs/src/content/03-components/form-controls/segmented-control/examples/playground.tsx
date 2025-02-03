@@ -1,8 +1,8 @@
 import {
   Segment,
   SegmentedControl,
-} from "@mittwald/flow-react-components/SegmentedControl";
-import { Label } from "@mittwald/flow-react-components/Label";
+} from "@mittwald/flow-react-components";
+import { Label } from "@mittwald/flow-react-components";
 
 <SegmentedControl defaultValue="ssh-key">
   <Label>Authentifizierungsart</Label>

@@ -1,4 +1,4 @@
-import FileCard from "@mittwald/flow-react-components/FileCard";
+import { FileCard } from "@mittwald/flow-react-components";
 
 <FileCard
   type="image/jpg"

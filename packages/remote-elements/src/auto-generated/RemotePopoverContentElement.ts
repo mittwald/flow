@@ -1,8 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { PopoverContentProps as RemotePopoverContentElementProps } from "@mittwald/flow-react-components/Popover";
-export type { PopoverContentProps as RemotePopoverContentElementProps } from "@mittwald/flow-react-components/Popover";
+import type { PopoverContentProps as RemotePopoverContentElementProps } from "@mittwald/flow-react-components";
+export type { PopoverContentProps as RemotePopoverContentElementProps } from "@mittwald/flow-react-components";
 
 export class RemotePopoverContentElement extends FlowRemoteElement<RemotePopoverContentElementProps> {
   static override get remoteAttributes() {

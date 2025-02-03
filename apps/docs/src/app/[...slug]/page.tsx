@@ -1,12 +1,12 @@
 import TopContent from "@/app/_components/layout/TopContent/TopContent";
 import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
 import type { StaticParams } from "@/lib/mdx/MdxFile";
-import { LayoutCard } from "@mittwald/flow-react-components/LayoutCard";
-import { Tabs } from "@mittwald/flow-react-components/Tabs";
+import { LayoutCard } from "@mittwald/flow-react-components";
+import { Tabs } from "@mittwald/flow-react-components";
 import React from "react";
 import MainContent from "@/app/_components/layout/MainContent/MainContent";
-import { Link } from "@mittwald/flow-react-components/Link";
-import { IconExternalLink } from "@mittwald/flow-react-components/Icons";
+import { Link } from "@mittwald/flow-react-components";
+import { IconExternalLink } from "@mittwald/flow-react-components";
 
 const contentFolder = "src/content";
 

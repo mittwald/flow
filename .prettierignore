@@ -1,3 +1,4 @@
+apps/docs/out
 node_modules
 dist
 .nx

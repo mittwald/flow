@@ -1,8 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { FragmentProps as RemoteFragmentElementProps } from "@mittwald/flow-react-components/Fragment";
-export type { FragmentProps as RemoteFragmentElementProps } from "@mittwald/flow-react-components/Fragment";
+import type { FragmentProps as RemoteFragmentElementProps } from "@mittwald/flow-react-components";
+export type { FragmentProps as RemoteFragmentElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteFragmentElement extends FlowRemoteElement<RemoteFragmentElementProps> {
   static override get remoteAttributes() {

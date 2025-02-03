@@ -1,12 +1,12 @@
-import Section from "@mittwald/flow-react-components/Section";
-import Heading from "@mittwald/flow-react-components/Heading";
-import Switch from "@mittwald/flow-react-components/Switch";
-import Header from "@mittwald/flow-react-components/Header";
-import Text from "@mittwald/flow-react-components/Text";
-import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
-import TextField from "@mittwald/flow-react-components/TextField";
-import Label from "@mittwald/flow-react-components/Label";
-import LabeledValue from "@mittwald/flow-react-components/LabeledValue";
+import { Section } from "@mittwald/flow-react-components";
+import { Heading } from "@mittwald/flow-react-components";
+import { Switch } from "@mittwald/flow-react-components";
+import { Header } from "@mittwald/flow-react-components";
+import { Text } from "@mittwald/flow-react-components";
+import { ColumnLayout } from "@mittwald/flow-react-components";
+import { TextField } from "@mittwald/flow-react-components";
+import { Label } from "@mittwald/flow-react-components";
+import { LabeledValue } from "@mittwald/flow-react-components";
 
 <Section>
   <Header>

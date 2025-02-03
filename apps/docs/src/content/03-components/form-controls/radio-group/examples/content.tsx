@@ -1,8 +1,9 @@
-import RadioGroup, {
+import {
+  RadioGroup,
   RadioButton,
-} from "@mittwald/flow-react-components/RadioGroup";
-import Text from "@mittwald/flow-react-components/Text";
-import Content from "@mittwald/flow-react-components/Content";
+} from "@mittwald/flow-react-components";
+import { Text } from "@mittwald/flow-react-components";
+import { Content } from "@mittwald/flow-react-components";
 
 <RadioGroup
   defaultValue="bookDomain"

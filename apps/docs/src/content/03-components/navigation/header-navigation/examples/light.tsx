@@ -1,7 +1,7 @@
-import Link from "@mittwald/flow-react-components/Link";
-import Button from "@mittwald/flow-react-components/Button";
-import { IconSearch } from "@mittwald/flow-react-components/Icons";
-import HeaderNavigation from "@mittwald/flow-react-components/HeaderNavigation";
+import { Link } from "@mittwald/flow-react-components";
+import { Button } from "@mittwald/flow-react-components";
+import { IconSearch } from "@mittwald/flow-react-components";
+import { HeaderNavigation } from "@mittwald/flow-react-components";
 
 <HeaderNavigation
   aria-label="Header navigation"

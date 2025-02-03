@@ -1,6 +1,6 @@
-import Label from "@mittwald/flow-react-components/Label";
-import TextField from "@mittwald/flow-react-components/TextField";
-import { ColumnLayout } from "@mittwald/flow-react-components/ColumnLayout";
+import { Label } from "@mittwald/flow-react-components";
+import { TextField } from "@mittwald/flow-react-components";
+import { ColumnLayout } from "@mittwald/flow-react-components";
 
 <ColumnLayout m={[1, 1]}>
   <TextField isRequired>

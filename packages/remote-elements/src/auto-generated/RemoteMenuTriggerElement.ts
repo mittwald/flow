@@ -1,8 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { MenuTriggerProps as RemoteMenuTriggerElementProps } from "@mittwald/flow-react-components/OverlayTrigger";
-export type { MenuTriggerProps as RemoteMenuTriggerElementProps } from "@mittwald/flow-react-components/OverlayTrigger";
+import type { MenuTriggerProps as RemoteMenuTriggerElementProps } from "@mittwald/flow-react-components";
+export type { MenuTriggerProps as RemoteMenuTriggerElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteMenuTriggerElement extends FlowRemoteElement<RemoteMenuTriggerElementProps> {
   static override get remoteAttributes() {

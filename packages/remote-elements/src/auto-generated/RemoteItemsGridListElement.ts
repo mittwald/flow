@@ -1,8 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { GridListProps as RemoteItemsGridListElementProps } from "@mittwald/flow-react-components/List";
-export type { GridListProps as RemoteItemsGridListElementProps } from "@mittwald/flow-react-components/List";
+import type { GridListProps as RemoteItemsGridListElementProps } from "@mittwald/flow-react-components";
+export type { GridListProps as RemoteItemsGridListElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteItemsGridListElement extends FlowRemoteElement<RemoteItemsGridListElementProps> {
   static override get remoteAttributes() {

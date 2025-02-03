@@ -1,8 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { ProgressBarProps as RemoteProgressBarElementProps } from "@mittwald/flow-react-components/ProgressBar";
-export type { ProgressBarProps as RemoteProgressBarElementProps } from "@mittwald/flow-react-components/ProgressBar";
+import type { ProgressBarProps as RemoteProgressBarElementProps } from "@mittwald/flow-react-components";
+export type { ProgressBarProps as RemoteProgressBarElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteProgressBarElement extends FlowRemoteElement<RemoteProgressBarElementProps> {
   static override get remoteAttributes() {

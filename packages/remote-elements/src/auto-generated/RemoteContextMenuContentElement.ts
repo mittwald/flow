@@ -1,8 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { ContextMenuContentProps as RemoteContextMenuContentElementProps } from "@mittwald/flow-react-components/ContextMenu";
-export type { ContextMenuContentProps as RemoteContextMenuContentElementProps } from "@mittwald/flow-react-components/ContextMenu";
+import type { ContextMenuContentProps as RemoteContextMenuContentElementProps } from "@mittwald/flow-react-components";
+export type { ContextMenuContentProps as RemoteContextMenuContentElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteContextMenuContentElement extends FlowRemoteElement<RemoteContextMenuContentElementProps> {
   static override get remoteAttributes() {

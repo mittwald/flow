@@ -1,15 +1,16 @@
-import { Button } from "@mittwald/flow-react-components/Button";
-import ContextMenu, {
+import { Button } from "@mittwald/flow-react-components";
+import {
+  ContextMenu,
   ContextMenuTrigger,
   MenuItem,
-} from "@mittwald/flow-react-components/ContextMenu";
-import { Section } from "@mittwald/flow-react-components/Section";
-import { Avatar } from "@mittwald/flow-react-components/Avatar";
-import { Initials } from "@mittwald/flow-react-components/Initials";
-import { IconCamera } from "@mittwald/flow-react-components/Icons";
-import { Heading } from "@mittwald/flow-react-components/Heading";
-import { Separator } from "@mittwald/flow-react-components/Separator";
-import { Text } from "@mittwald/flow-react-components/Text";
+} from "@mittwald/flow-react-components";
+import { Section } from "@mittwald/flow-react-components";
+import { Avatar } from "@mittwald/flow-react-components";
+import { Initials } from "@mittwald/flow-react-components";
+import { IconCamera } from "@mittwald/flow-react-components";
+import { Heading } from "@mittwald/flow-react-components";
+import { Separator } from "@mittwald/flow-react-components";
+import { Text } from "@mittwald/flow-react-components";
 
 <ContextMenuTrigger>
   <Button>Trigger</Button>

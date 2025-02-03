@@ -1,8 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { CountryOptionsProps as RemoteCountryOptionsElementProps } from "@mittwald/flow-react-components/Select";
-export type { CountryOptionsProps as RemoteCountryOptionsElementProps } from "@mittwald/flow-react-components/Select";
+import type { CountryOptionsProps as RemoteCountryOptionsElementProps } from "@mittwald/flow-react-components";
+export type { CountryOptionsProps as RemoteCountryOptionsElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteCountryOptionsElement extends FlowRemoteElement<RemoteCountryOptionsElementProps> {
   static override get remoteAttributes() {

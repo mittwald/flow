@@ -1,9 +1,10 @@
-import ContextMenu, {
+import {
+  ContextMenu,
   ContextMenuTrigger,
-} from "@mittwald/flow-react-components/ContextMenu";
-import Button from "@mittwald/flow-react-components/Button";
-import MenuItem from "@mittwald/flow-react-components/MenuItem";
-import Separator from "@mittwald/flow-react-components/Separator";
+} from "@mittwald/flow-react-components";
+import { Button } from "@mittwald/flow-react-components";
+import { MenuItem } from "@mittwald/flow-react-components";
+import { Separator } from "@mittwald/flow-react-components";
 
 <ContextMenuTrigger>
   <Button>Trigger</Button>

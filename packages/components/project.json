@@ -40,7 +40,7 @@
         "{projectRoot}/src/**/*.{ts,tsx}",
         "{projectRoot}/dev/createDocPropertiesJson.ts"
       ],
-      "outputs": ["{projectRoot}/out/doc-properties.json"]
+      "outputs": ["{projectRoot}/dist/doc-properties.json"]
     }
   }
 }

@@ -1,7 +1,8 @@
-import Label from "@mittwald/flow-react-components/Label";
-import RadioGroup, {
+import { Label } from "@mittwald/flow-react-components";
+import {
+  RadioGroup,
   RadioButton,
-} from "@mittwald/flow-react-components/RadioGroup";
+} from "@mittwald/flow-react-components";
 
 <RadioGroup
   defaultValue="one"

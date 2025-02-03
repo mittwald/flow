@@ -1,7 +1,8 @@
-import Tabs, {
+import {
+  Tabs,
   Tab,
   TabTitle,
-} from "@mittwald/flow-react-components/Tabs";
+} from "@mittwald/flow-react-components";
 
 <Tabs>
   <Tab>

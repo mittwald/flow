@@ -1,10 +1,10 @@
-import Heading from "@mittwald/flow-react-components/Heading";
-import Button from "@mittwald/flow-react-components/Button";
+import { Heading } from "@mittwald/flow-react-components";
+import { Button } from "@mittwald/flow-react-components";
 import {
   ContextualHelp,
   ContextualHelpTrigger,
-} from "@mittwald/flow-react-components/ContextualHelp";
-import Text from "@mittwald/flow-react-components/Text";
+} from "@mittwald/flow-react-components";
+import { Text } from "@mittwald/flow-react-components";
 
 <Heading>
   Rechte & Rollen

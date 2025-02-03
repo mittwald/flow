@@ -1,7 +1,7 @@
-import { Align } from "@mittwald/flow-react-components/Align";
-import { TextField } from "@mittwald/flow-react-components/TextField";
-import { Label } from "@mittwald/flow-react-components/Label";
-import { Button } from "@mittwald/flow-react-components/Button";
+import { Align } from "@mittwald/flow-react-components";
+import { TextField } from "@mittwald/flow-react-components";
+import { Label } from "@mittwald/flow-react-components";
+import { Button } from "@mittwald/flow-react-components";
 
 <Align>
   <TextField>

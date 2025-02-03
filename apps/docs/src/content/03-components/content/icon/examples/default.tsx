@@ -1,3 +1,3 @@
-import { IconHome } from "@mittwald/flow-react-components/Icons";
+import { IconHome } from "@mittwald/flow-react-components";
 
 <IconHome />;

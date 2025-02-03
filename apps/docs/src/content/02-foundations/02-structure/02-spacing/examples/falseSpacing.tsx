@@ -1,7 +1,7 @@
-import { Initials } from "@mittwald/flow-react-components/Initials";
-import { Avatar } from "@mittwald/flow-react-components/Avatar";
-import { Text } from "@mittwald/flow-react-components/Text";
-import { Content } from "@mittwald/flow-react-components/Content";
+import { Initials } from "@mittwald/flow-react-components";
+import { Avatar } from "@mittwald/flow-react-components";
+import { Text } from "@mittwald/flow-react-components";
+import { Content } from "@mittwald/flow-react-components";
 
 <Content
   style={{

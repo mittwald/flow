@@ -1,8 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { TooltipTriggerProps as RemoteTooltipTriggerElementProps } from "@mittwald/flow-react-components/Tooltip";
-export type { TooltipTriggerProps as RemoteTooltipTriggerElementProps } from "@mittwald/flow-react-components/Tooltip";
+import type { TooltipTriggerProps as RemoteTooltipTriggerElementProps } from "@mittwald/flow-react-components";
+export type { TooltipTriggerProps as RemoteTooltipTriggerElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteTooltipTriggerElement extends FlowRemoteElement<RemoteTooltipTriggerElementProps> {
   static override get remoteAttributes() {

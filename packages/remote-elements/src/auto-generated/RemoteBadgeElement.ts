@@ -1,8 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { BadgeProps as RemoteBadgeElementProps } from "@mittwald/flow-react-components/Badge";
-export type { BadgeProps as RemoteBadgeElementProps } from "@mittwald/flow-react-components/Badge";
+import type { BadgeProps as RemoteBadgeElementProps } from "@mittwald/flow-react-components";
+export type { BadgeProps as RemoteBadgeElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteBadgeElement extends FlowRemoteElement<RemoteBadgeElementProps> {
   static override get remoteAttributes() {

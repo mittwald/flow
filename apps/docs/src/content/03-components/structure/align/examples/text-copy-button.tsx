@@ -1,6 +1,6 @@
-import { Align } from "@mittwald/flow-react-components/Align";
-import { Text } from "@mittwald/flow-react-components/Text";
-import { CopyButton } from "@mittwald/flow-react-components/CopyButton";
+import { Align } from "@mittwald/flow-react-components";
+import { Text } from "@mittwald/flow-react-components";
+import { CopyButton } from "@mittwald/flow-react-components";
 
 <Align>
   <Text>mail.agenturserver.de</Text>

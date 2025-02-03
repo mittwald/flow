@@ -1,6 +1,6 @@
-import NumberField from "@mittwald/flow-react-components/NumberField";
-import Label from "@mittwald/flow-react-components/Label";
-import FieldDescription from "@mittwald/flow-react-components/FieldDescription";
+import { NumberField } from "@mittwald/flow-react-components";
+import { Label } from "@mittwald/flow-react-components";
+import { FieldDescription } from "@mittwald/flow-react-components";
 
 <NumberField minValue={0} maxValue={100}>
   <Label>Alter</Label>

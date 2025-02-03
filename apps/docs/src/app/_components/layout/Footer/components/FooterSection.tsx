@@ -1,7 +1,7 @@
 import styles from "./FooterSection.module.scss";
 import type { FC, PropsWithChildren } from "react";
 import React from "react";
-import { Heading } from "@mittwald/flow-react-components/Heading";
+import { Heading } from "@mittwald/flow-react-components";
 
 export interface FooterSectionProps extends PropsWithChildren {
   title: string;

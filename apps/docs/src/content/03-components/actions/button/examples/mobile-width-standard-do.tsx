@@ -1,14 +1,14 @@
-import Button from "@mittwald/flow-react-components/Button";
-import HeaderNavigation from "@mittwald/flow-react-components/HeaderNavigation";
+import { Button } from "@mittwald/flow-react-components";
+import { HeaderNavigation } from "@mittwald/flow-react-components";
 import {
   IconMenu,
   IconSearch,
   IconSupport,
-} from "@mittwald/flow-react-components/Icons";
-import LayoutCard from "@mittwald/flow-react-components/LayoutCard";
-import Heading from "@mittwald/flow-react-components/Heading";
-import Text from "@mittwald/flow-react-components/Text";
-import Section from "@mittwald/flow-react-components/Section";
+} from "@mittwald/flow-react-components";
+import { LayoutCard } from "@mittwald/flow-react-components";
+import { Heading } from "@mittwald/flow-react-components";
+import { Text } from "@mittwald/flow-react-components";
+import { Section } from "@mittwald/flow-react-components";
 
 <Section style={{ height: "100%" }}>
   <HeaderNavigation

@@ -1,8 +1,8 @@
-import LabeledValue from "@mittwald/flow-react-components/LabeledValue";
-import Label from "@mittwald/flow-react-components/Label";
-import Link from "@mittwald/flow-react-components/Link";
-import Text from "@mittwald/flow-react-components/Text";
-import { IconExternalLink } from "@mittwald/flow-react-components/Icons";
+import { LabeledValue } from "@mittwald/flow-react-components";
+import { Label } from "@mittwald/flow-react-components";
+import { Link } from "@mittwald/flow-react-components";
+import { Text } from "@mittwald/flow-react-components";
+import { IconExternalLink } from "@mittwald/flow-react-components";
 
 <Row>
   <LabeledValue>

@@ -1,17 +1,17 @@
 import styles from "./customComponents.module.css";
-import Heading from "@mittwald/flow-react-components/Heading";
-import Alert from "@mittwald/flow-react-components/Alert";
-import Content from "@mittwald/flow-react-components/Content";
+import { Heading } from "@mittwald/flow-react-components";
+import { Alert } from "@mittwald/flow-react-components";
+import { Content } from "@mittwald/flow-react-components";
 import type { PropsWithChildren } from "react";
 import React from "react";
-import CopyButton from "@mittwald/flow-react-components/CopyButton";
-import Link from "@mittwald/flow-react-components/Link";
-import Text from "@mittwald/flow-react-components/Text";
+import { CopyButton } from "@mittwald/flow-react-components";
+import { Link } from "@mittwald/flow-react-components";
+import { Text } from "@mittwald/flow-react-components";
 import { LinkProvider } from "@mittwald/flow-react-components/nextjs";
 import ExamplesContainer from "@/lib/mdx/components/DoAndDont/ExamplesContainer";
-import { ColumnLayout } from "@mittwald/flow-react-components/ColumnLayout";
-import { InlineCode } from "@mittwald/flow-react-components/InlineCode";
-import { Separator } from "@mittwald/flow-react-components/Separator";
+import { ColumnLayout } from "@mittwald/flow-react-components";
+import { InlineCode } from "@mittwald/flow-react-components";
+import { Separator } from "@mittwald/flow-react-components";
 import { DesignTokenTable } from "@/lib/mdx/components/DesignTokenTable/DesignTokenTable";
 import {
   Table,
@@ -20,8 +20,8 @@ import {
   TableColumn,
   TableHeader,
   TableRow,
-} from "@mittwald/flow-react-components/Table";
-import { Label } from "@mittwald/flow-react-components/Label";
+} from "@mittwald/flow-react-components";
+import { Label } from "@mittwald/flow-react-components";
 
 export const customComponents = {
   Content: Content,

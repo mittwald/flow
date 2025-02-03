@@ -1,4 +1,4 @@
-import AlertBadge from "@mittwald/flow-react-components/AlertBadge";
+import { AlertBadge } from "@mittwald/flow-react-components";
 
 <Row>
   <AlertBadge status="info">Archiviert</AlertBadge>

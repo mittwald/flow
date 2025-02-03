@@ -1,6 +1,6 @@
-import Heading from "@mittwald/flow-react-components/Heading";
-import Accordion from "@mittwald/flow-react-components/Accordion";
-import Content from "@mittwald/flow-react-components/Content";
+import { Heading } from "@mittwald/flow-react-components";
+import { Accordion } from "@mittwald/flow-react-components";
+import { Content } from "@mittwald/flow-react-components";
 
 <Accordion defaultExpanded>
   <Heading>Accordion Titel</Heading>

@@ -1,7 +1,7 @@
-import Alert from "@mittwald/flow-react-components/Alert";
-import Heading from "@mittwald/flow-react-components/Heading";
-import Content from "@mittwald/flow-react-components/Content";
-import Button from "@mittwald/flow-react-components/Button";
+import { Alert } from "@mittwald/flow-react-components";
+import { Heading } from "@mittwald/flow-react-components";
+import { Content } from "@mittwald/flow-react-components";
+import { Button } from "@mittwald/flow-react-components";
 
 <Alert>
   <Heading>E-Mail-Adresse wurde archiviert</Heading>

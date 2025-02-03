@@ -1,6 +1,6 @@
-import Checkbox from "@mittwald/flow-react-components/Checkbox";
-import CheckboxGroup from "@mittwald/flow-react-components/CheckboxGroup";
-import Label from "@mittwald/flow-react-components/Label";
+import { Checkbox } from "@mittwald/flow-react-components";
+import { CheckboxGroup } from "@mittwald/flow-react-components";
+import { Label } from "@mittwald/flow-react-components";
 
 <CheckboxGroup>
   <Label>Berechtigungen</Label>

@@ -1,11 +1,11 @@
 import type { FC } from "react";
 import React from "react";
-import Heading from "@mittwald/flow-react-components/Heading";
-import { Link } from "@mittwald/flow-react-components/Link";
-import { LayoutCard } from "@mittwald/flow-react-components/LayoutCard";
-import { Section } from "@mittwald/flow-react-components/Section";
-import { ColumnLayout } from "@mittwald/flow-react-components/ColumnLayout";
-import { IconExternalLink } from "@mittwald/flow-react-components/Icons";
+import { Heading } from "@mittwald/flow-react-components";
+import { Link } from "@mittwald/flow-react-components";
+import { LayoutCard } from "@mittwald/flow-react-components";
+import { Section } from "@mittwald/flow-react-components";
+import { ColumnLayout } from "@mittwald/flow-react-components";
+import { IconExternalLink } from "@mittwald/flow-react-components";
 import type { MdxFile } from "@/lib/mdx/MdxFile";
 import MdxFileView from "@/lib/mdx/components/MdxFileView";
 

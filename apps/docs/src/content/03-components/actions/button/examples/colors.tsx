@@ -1,4 +1,4 @@
-import Button from "@mittwald/flow-react-components/Button";
+import { Button } from "@mittwald/flow-react-components";
 
 <Row>
   <Button color="primary">Fortfahren/Aktion</Button>

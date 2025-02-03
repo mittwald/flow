@@ -1,5 +1,5 @@
-import DateRangePicker from "@mittwald/flow-react-components/DateRangePicker";
-import Label from "@mittwald/flow-react-components/Label";
+import { DateRangePicker } from "@mittwald/flow-react-components";
+import { Label } from "@mittwald/flow-react-components";
 import {
   getLocalTimeZone,
   today,

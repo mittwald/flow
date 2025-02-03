@@ -1,8 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { DivProps as RemoteDivElementProps } from "@mittwald/flow-react-components/Div";
-export type { DivProps as RemoteDivElementProps } from "@mittwald/flow-react-components/Div";
+import type { DivProps as RemoteDivElementProps } from "@mittwald/flow-react-components";
+export type { DivProps as RemoteDivElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteDivElement extends FlowRemoteElement<RemoteDivElementProps> {
   static override get remoteAttributes() {

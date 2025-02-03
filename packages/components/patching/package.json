@@ -1,10 +1,13 @@
 {
   "name": "acorn",
+  "version": "8.14.0",
   "description": "ECMAScript parser",
   "homepage": "https://github.com/acornjs/acorn",
-  "main": "dist/acorn.js",
-  "types": "dist/acorn.d.ts",
-  "module": "dist/acorn.mjs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/acornjs/acorn.git"
+  },
+  "license": "MIT",
   "exports": {
     ".": [
       {
@@ -16,35 +19,21 @@
     ],
     "./package.json": "./package.json"
   },
-  "version": "8.14.0",
+  "bin": {
+    "acorn": "bin/acorn"
+  },
+  "main": "dist/acorn.js",
+  "module": "dist/acorn.mjs",
+  "types": "dist/acorn.d.ts",
   "engines": {
     "node": ">=0.4.0"
   },
-  "maintainers": [
-    {
-      "name": "Marijn Haverbeke",
-      "email": "marijnh@gmail.com",
-      "web": "https://marijnhaverbeke.nl"
-    },
-    {
-      "name": "Ingvar Stepanyan",
-      "email": "me@rreverser.com",
-      "web": "https://rreverser.com/"
-    },
-    {
-      "name": "Adrian Heine",
-      "web": "http://adrianheine.de"
-    }
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/acornjs/acorn.git"
-  },
-  "license": "MIT",
   "scripts": {
     "prepare": "cd ..; npm run build:main"
   },
-  "bin": {
-    "acorn": "bin/acorn"
-  }
+  "maintainers": [
+    "Adrian Heine",
+    "Ingvar Stepanyan <me@rreverser.com>",
+    "Marijn Haverbeke <marijnh@gmail.com>"
+  ]
 }

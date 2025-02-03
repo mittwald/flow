@@ -1,4 +1,4 @@
-import Icon from "@mittwald/flow-react-components/Icon";
+import { Icon } from "@mittwald/flow-react-components";
 
 <Icon>
   <svg

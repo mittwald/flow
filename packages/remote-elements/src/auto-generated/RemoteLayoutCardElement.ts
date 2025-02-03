@@ -1,8 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { LayoutCardProps as RemoteLayoutCardElementProps } from "@mittwald/flow-react-components/LayoutCard";
-export type { LayoutCardProps as RemoteLayoutCardElementProps } from "@mittwald/flow-react-components/LayoutCard";
+import type { LayoutCardProps as RemoteLayoutCardElementProps } from "@mittwald/flow-react-components";
+export type { LayoutCardProps as RemoteLayoutCardElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteLayoutCardElement extends FlowRemoteElement<RemoteLayoutCardElementProps> {
   static override get remoteAttributes() {

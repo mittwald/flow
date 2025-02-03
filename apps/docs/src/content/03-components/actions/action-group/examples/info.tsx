@@ -1,5 +1,5 @@
-import ActionGroup from "@mittwald/flow-react-components/ActionGroup";
-import Button from "@mittwald/flow-react-components/Button";
+import { ActionGroup } from "@mittwald/flow-react-components";
+import { Button } from "@mittwald/flow-react-components";
 
 <ActionGroup>
   <Button slot="primary">Ok</Button>

@@ -1,3 +1,3 @@
-import { SearchField } from "@mittwald/flow-react-components/SearchField";
+import { SearchField } from "@mittwald/flow-react-components";
 
 <SearchField />;

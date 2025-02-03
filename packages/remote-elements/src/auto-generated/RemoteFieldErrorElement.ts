@@ -1,8 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { FieldErrorProps as RemoteFieldErrorElementProps } from "@mittwald/flow-react-components/FieldError";
-export type { FieldErrorProps as RemoteFieldErrorElementProps } from "@mittwald/flow-react-components/FieldError";
+import type { FieldErrorProps as RemoteFieldErrorElementProps } from "@mittwald/flow-react-components";
+export type { FieldErrorProps as RemoteFieldErrorElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteFieldErrorElement extends FlowRemoteElement<RemoteFieldErrorElementProps> {
   static override get remoteAttributes() {

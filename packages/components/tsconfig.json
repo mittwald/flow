@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
     "plugins": [{ "name": "typescript-plugin-css-modules" }],
-    "types": ["./types.d.ts"]
+    "useDefineForClassFields": true
   },
-  "extends": "../typescript-config/react-library.json",
+  "extends": "@mittwald/typescript-config/react-library.json",
   "references": [
     {
       "path": "./tsconfig.dev.json"

@@ -1,8 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { TimeFieldProps as RemoteTimeFieldElementProps } from "@mittwald/flow-react-components/TimeField";
-export type { TimeFieldProps as RemoteTimeFieldElementProps } from "@mittwald/flow-react-components/TimeField";
+import type { TimeFieldProps as RemoteTimeFieldElementProps } from "@mittwald/flow-react-components";
+export type { TimeFieldProps as RemoteTimeFieldElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteTimeFieldElement extends FlowRemoteElement<RemoteTimeFieldElementProps> {
   static override get remoteAttributes() {

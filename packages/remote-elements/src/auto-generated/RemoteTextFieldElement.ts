@@ -1,8 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { TextFieldProps as RemoteTextFieldElementProps } from "@mittwald/flow-react-components/TextField";
-export type { TextFieldProps as RemoteTextFieldElementProps } from "@mittwald/flow-react-components/TextField";
+import type { TextFieldProps as RemoteTextFieldElementProps } from "@mittwald/flow-react-components";
+export type { TextFieldProps as RemoteTextFieldElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteTextFieldElement extends FlowRemoteElement<RemoteTextFieldElementProps> {
   static override get remoteAttributes() {

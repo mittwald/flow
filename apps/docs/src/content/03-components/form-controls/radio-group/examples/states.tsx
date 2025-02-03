@@ -1,7 +1,7 @@
 import {
   RadioButton,
   RadioGroup,
-} from "@mittwald/flow-react-components/RadioGroup";
+} from "@mittwald/flow-react-components";
 
 <RadioGroup
   defaultValue="selected"

@@ -1,8 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { ActionGroupProps as RemoteActionGroupElementProps } from "@mittwald/flow-react-components/ActionGroup";
-export type { ActionGroupProps as RemoteActionGroupElementProps } from "@mittwald/flow-react-components/ActionGroup";
+import type { ActionGroupProps as RemoteActionGroupElementProps } from "@mittwald/flow-react-components";
+export type { ActionGroupProps as RemoteActionGroupElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteActionGroupElement extends FlowRemoteElement<RemoteActionGroupElementProps> {
   static override get remoteAttributes() {

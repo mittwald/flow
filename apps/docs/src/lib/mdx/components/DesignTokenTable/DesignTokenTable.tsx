@@ -8,7 +8,7 @@ import {
   TableColumn,
   TableHeader,
   TableRow,
-} from "@mittwald/flow-react-components/Table";
+} from "@mittwald/flow-react-components";
 import { Sample } from "@/lib/mdx/components/DesignTokenTable/Samples/Sample";
 
 interface Props {

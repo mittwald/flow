@@ -1,35 +1,37 @@
-import Modal, {
+import {
+  Modal,
   ModalTrigger,
-} from "@mittwald/flow-react-components/Modal";
-import Content from "@mittwald/flow-react-components/Content";
-import Text from "@mittwald/flow-react-components/Text";
-import TextField from "@mittwald/flow-react-components/TextField";
-import Label from "@mittwald/flow-react-components/Label";
-import ActionGroup from "@mittwald/flow-react-components/ActionGroup";
-import Button from "@mittwald/flow-react-components/Button";
-import Heading from "@mittwald/flow-react-components/Heading";
-import Action from "@mittwald/flow-react-components/Action";
+} from "@mittwald/flow-react-components";
+import { Content } from "@mittwald/flow-react-components";
+import { Text } from "@mittwald/flow-react-components";
+import { TextField } from "@mittwald/flow-react-components";
+import { Label } from "@mittwald/flow-react-components";
+import { ActionGroup } from "@mittwald/flow-react-components";
+import { Button } from "@mittwald/flow-react-components";
+import { Heading } from "@mittwald/flow-react-components";
+import { Action } from "@mittwald/flow-react-components";
 import { sleepLong } from "@/content/03-components/actions/action/examples/lib";
-import Section from "@mittwald/flow-react-components/Section";
+import { Section } from "@mittwald/flow-react-components";
 import {
   IconBackup,
   IconSettings,
   IconSshSftp,
-} from "@mittwald/flow-react-components/Icons";
-import { Select } from "@mittwald/flow-react-components/Select";
-import { Option } from "@mittwald/flow-react-components/Option";
-import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
-import { Switch } from "@mittwald/flow-react-components/Switch";
-import Link from "@mittwald/flow-react-components/Link";
-import { DatePicker } from "@mittwald/flow-react-components/DatePicker";
-import FieldDescription from "@mittwald/flow-react-components/FieldDescription";
-import RadioGroup, {
+} from "@mittwald/flow-react-components";
+import { Select } from "@mittwald/flow-react-components";
+import { Option } from "@mittwald/flow-react-components";
+import { ColumnLayout } from "@mittwald/flow-react-components";
+import { Switch } from "@mittwald/flow-react-components";
+import { Link } from "@mittwald/flow-react-components";
+import { DatePicker } from "@mittwald/flow-react-components";
+import { FieldDescription } from "@mittwald/flow-react-components";
+import {
+  RadioGroup,
   RadioButton,
-} from "@mittwald/flow-react-components/RadioGroup";
+} from "@mittwald/flow-react-components";
 import {
   Segment,
   SegmentedControl,
-} from "@mittwald/flow-react-components/SegmentedControl";
+} from "@mittwald/flow-react-components";
 
 export default () => {
   return (

@@ -1,4 +1,4 @@
-import ProgressBar from "@mittwald/flow-react-components/ProgressBar";
+import { ProgressBar } from "@mittwald/flow-react-components";
 
 <Row>
   <ProgressBar value={100} status="success">

@@ -1,8 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { NavigationGroupProps as RemoteNavigationGroupElementProps } from "@mittwald/flow-react-components/Navigation";
-export type { NavigationGroupProps as RemoteNavigationGroupElementProps } from "@mittwald/flow-react-components/Navigation";
+import type { NavigationGroupProps as RemoteNavigationGroupElementProps } from "@mittwald/flow-react-components";
+export type { NavigationGroupProps as RemoteNavigationGroupElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteNavigationGroupElement extends FlowRemoteElement<RemoteNavigationGroupElementProps> {
   static override get remoteAttributes() {

@@ -1,8 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { IllustratedMessageProps as RemoteIllustratedMessageElementProps } from "@mittwald/flow-react-components/IllustratedMessage";
-export type { IllustratedMessageProps as RemoteIllustratedMessageElementProps } from "@mittwald/flow-react-components/IllustratedMessage";
+import type { IllustratedMessageProps as RemoteIllustratedMessageElementProps } from "@mittwald/flow-react-components";
+export type { IllustratedMessageProps as RemoteIllustratedMessageElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteIllustratedMessageElement extends FlowRemoteElement<RemoteIllustratedMessageElementProps> {
   static override get remoteAttributes() {

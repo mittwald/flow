@@ -1,8 +1,8 @@
 import {
   Radio,
   RadioGroup,
-} from "@mittwald/flow-react-components/RadioGroup";
-import { Label } from "@mittwald/flow-react-components/Label";
+} from "@mittwald/flow-react-components";
+import { Label } from "@mittwald/flow-react-components";
 
 <div style={{ display: "flex", justifyContent: "center" }}>
   <RadioGroup defaultValue="espelkamp">

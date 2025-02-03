@@ -1,19 +1,20 @@
-import Button from "@mittwald/flow-react-components/Button";
-import HeaderNavigation from "@mittwald/flow-react-components/HeaderNavigation";
+import { Button } from "@mittwald/flow-react-components";
+import { HeaderNavigation } from "@mittwald/flow-react-components";
 import {
   IconLogout,
   IconNotification,
   IconSettings,
   IconSupport,
   IconSearch,
-} from "@mittwald/flow-react-components/Icons";
-import ContextMenu, {
+} from "@mittwald/flow-react-components";
+import {
+  ContextMenu,
   ContextMenuTrigger,
-} from "@mittwald/flow-react-components/ContextMenu";
-import Avatar from "@mittwald/flow-react-components/Avatar";
-import Image from "@mittwald/flow-react-components/Image";
-import Text from "@mittwald/flow-react-components/Text";
-import MenuItem from "@mittwald/flow-react-components/MenuItem";
+} from "@mittwald/flow-react-components";
+import { Avatar } from "@mittwald/flow-react-components";
+import { Image } from "@mittwald/flow-react-components";
+import { Text } from "@mittwald/flow-react-components";
+import { MenuItem } from "@mittwald/flow-react-components";
 
 <HeaderNavigation aria-label="Header navigation">
   <Button>

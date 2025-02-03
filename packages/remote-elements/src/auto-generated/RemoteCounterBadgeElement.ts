@@ -1,8 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { CounterBadgeProps as RemoteCounterBadgeElementProps } from "@mittwald/flow-react-components/CounterBadge";
-export type { CounterBadgeProps as RemoteCounterBadgeElementProps } from "@mittwald/flow-react-components/CounterBadge";
+import type { CounterBadgeProps as RemoteCounterBadgeElementProps } from "@mittwald/flow-react-components";
+export type { CounterBadgeProps as RemoteCounterBadgeElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteCounterBadgeElement extends FlowRemoteElement<RemoteCounterBadgeElementProps> {
   static override get remoteAttributes() {

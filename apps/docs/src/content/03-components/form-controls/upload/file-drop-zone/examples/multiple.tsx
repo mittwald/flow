@@ -1,9 +1,9 @@
-import { Section } from "@mittwald/flow-react-components/Section";
-import { FileDropZone } from "@mittwald/flow-react-components/FileDropZone";
-import { IconUpload } from "@mittwald/flow-react-components/Icons";
-import { Heading } from "@mittwald/flow-react-components/Heading";
-import { FileField } from "@mittwald/flow-react-components/FileField";
-import { Button } from "@mittwald/flow-react-components/Button";
+import { Section } from "@mittwald/flow-react-components";
+import { FileDropZone } from "@mittwald/flow-react-components";
+import { IconUpload } from "@mittwald/flow-react-components";
+import { Heading } from "@mittwald/flow-react-components";
+import { FileField } from "@mittwald/flow-react-components";
+import { Button } from "@mittwald/flow-react-components";
 
 <Section>
   <FileDropZone

@@ -1,4 +1,4 @@
-import Label from "@mittwald/flow-react-components/Label";
+import { Label } from "@mittwald/flow-react-components";
 
 <Column>
   <Label>Bitte gib deinen Vornamen ein</Label>

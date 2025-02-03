@@ -1,8 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { IconProps as RemoteIconElementProps } from "@mittwald/flow-react-components/Icon";
-export type { IconProps as RemoteIconElementProps } from "@mittwald/flow-react-components/Icon";
+import type { IconProps as RemoteIconElementProps } from "@mittwald/flow-react-components";
+export type { IconProps as RemoteIconElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteIconElement extends FlowRemoteElement<RemoteIconElementProps> {
   static override get remoteAttributes() {

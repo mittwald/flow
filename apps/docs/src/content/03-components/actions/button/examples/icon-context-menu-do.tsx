@@ -1,16 +1,16 @@
-import Button from "@mittwald/flow-react-components/Button";
-import Text from "@mittwald/flow-react-components/Text";
+import { Button } from "@mittwald/flow-react-components";
+import { Text } from "@mittwald/flow-react-components";
 import {
   ContextMenu,
   ContextMenuTrigger,
-} from "@mittwald/flow-react-components/ContextMenu";
-import MenuItem from "@mittwald/flow-react-components/MenuItem";
+} from "@mittwald/flow-react-components";
+import { MenuItem } from "@mittwald/flow-react-components";
 import {
   IconChevronDown,
   IconEmail,
-} from "@mittwald/flow-react-components/Icons";
+} from "@mittwald/flow-react-components";
 import { IconAt } from "@tabler/icons-react";
-import { Icon } from "@mittwald/flow-react-components/Icon";
+import { Icon } from "@mittwald/flow-react-components";
 
 <ContextMenuTrigger>
   <Button color="accent">

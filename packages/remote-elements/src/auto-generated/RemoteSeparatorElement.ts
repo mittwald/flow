@@ -1,8 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { SeparatorProps as RemoteSeparatorElementProps } from "@mittwald/flow-react-components/Separator";
-export type { SeparatorProps as RemoteSeparatorElementProps } from "@mittwald/flow-react-components/Separator";
+import type { SeparatorProps as RemoteSeparatorElementProps } from "@mittwald/flow-react-components";
+export type { SeparatorProps as RemoteSeparatorElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteSeparatorElement extends FlowRemoteElement<RemoteSeparatorElementProps> {
   static override get remoteAttributes() {

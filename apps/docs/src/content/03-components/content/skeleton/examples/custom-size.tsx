@@ -1,4 +1,4 @@
-import Skeleton from "@mittwald/flow-react-components/Skeleton";
+import { Skeleton } from "@mittwald/flow-react-components";
 
 <Column>
   <Skeleton style={{ height: "100px" }} />

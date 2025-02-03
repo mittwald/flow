@@ -1,8 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { SwitchProps as RemoteSwitchElementProps } from "@mittwald/flow-react-components/Switch";
-export type { SwitchProps as RemoteSwitchElementProps } from "@mittwald/flow-react-components/Switch";
+import type { SwitchProps as RemoteSwitchElementProps } from "@mittwald/flow-react-components";
+export type { SwitchProps as RemoteSwitchElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteSwitchElement extends FlowRemoteElement<RemoteSwitchElementProps> {
   static override get remoteAttributes() {

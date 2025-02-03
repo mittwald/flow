@@ -1,9 +1,9 @@
-import Button from "@mittwald/flow-react-components/Button";
-import TextField from "@mittwald/flow-react-components/TextField";
+import { Button } from "@mittwald/flow-react-components";
+import { TextField } from "@mittwald/flow-react-components";
 import {
   IconFilter,
   IconSorting,
-} from "@mittwald/flow-react-components/Icons";
+} from "@mittwald/flow-react-components";
 
 <Row>
   <TextField value="Suche" />

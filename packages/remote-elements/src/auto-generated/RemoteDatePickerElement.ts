@@ -1,8 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { DatePickerProps as RemoteDatePickerElementProps } from "@mittwald/flow-react-components/DatePicker";
-export type { DatePickerProps as RemoteDatePickerElementProps } from "@mittwald/flow-react-components/DatePicker";
+import type { DatePickerProps as RemoteDatePickerElementProps } from "@mittwald/flow-react-components";
+export type { DatePickerProps as RemoteDatePickerElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteDatePickerElement extends FlowRemoteElement<RemoteDatePickerElementProps> {
   static override get remoteAttributes() {

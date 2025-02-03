@@ -17,7 +17,6 @@ import { remoteComponentBaseNameOf } from "./lib/remoteComponentBaseNameOf";
 import { sortBy } from "remeda";
 import {
   generateViewComponent,
-  generateViewComponent,
   generateViewComponentDeclaration,
 } from "./generation/generateViewComponent";
 import path from "path";
@@ -28,7 +27,7 @@ async function generate() {
   console.log("🤓 Read component specification file");
   let components: ComponentDoc[] =
     (await jetpack.readAsync(
-      "packages/components/out/doc-properties.json",
+      "packages/components/dist/doc-properties.json",
       "json",
     )) ?? [];
 

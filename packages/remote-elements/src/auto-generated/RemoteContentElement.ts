@@ -1,8 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { ContentProps as RemoteContentElementProps } from "@mittwald/flow-react-components/Content";
-export type { ContentProps as RemoteContentElementProps } from "@mittwald/flow-react-components/Content";
+import type { ContentProps as RemoteContentElementProps } from "@mittwald/flow-react-components";
+export type { ContentProps as RemoteContentElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteContentElement extends FlowRemoteElement<RemoteContentElementProps> {
   static override get remoteAttributes() {

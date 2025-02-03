@@ -1,6 +1,6 @@
-import Accordion from "@mittwald/flow-react-components/Accordion";
-import Content from "@mittwald/flow-react-components/Content";
-import Label from "@mittwald/flow-react-components/Label";
+import { Accordion } from "@mittwald/flow-react-components";
+import { Content } from "@mittwald/flow-react-components";
+import { Label } from "@mittwald/flow-react-components";
 
 <Accordion>
   <Label>Accordion Titel</Label>

@@ -1,6 +1,6 @@
-import Label from "@mittwald/flow-react-components/Label";
-import TextField from "@mittwald/flow-react-components/TextField";
-import FieldDescription from "@mittwald/flow-react-components/FieldDescription";
+import { Label } from "@mittwald/flow-react-components";
+import { TextField } from "@mittwald/flow-react-components";
+import { FieldDescription } from "@mittwald/flow-react-components";
 
 <TextField>
   <Label>URL</Label>

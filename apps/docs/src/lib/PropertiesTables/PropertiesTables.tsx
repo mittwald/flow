@@ -2,10 +2,10 @@
 import React from "react";
 import loadProperties from "./lib/loadProperties";
 import { PropertiesTable } from "@/lib/PropertiesTables/components/PropertiesTable";
-import { Accordion } from "@mittwald/flow-react-components/Accordion";
-import { Heading } from "@mittwald/flow-react-components/Heading";
-import { Content } from "@mittwald/flow-react-components/Content";
-import { useIsMounted } from "@mittwald/flow-react-components/hooks";
+import { Accordion } from "@mittwald/flow-react-components";
+import { Heading } from "@mittwald/flow-react-components";
+import { Content } from "@mittwald/flow-react-components";
+import { useIsMounted } from "@mittwald/flow-react-components";
 
 interface PropertiesTableProps {
   name: string;

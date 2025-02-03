@@ -9,24 +9,24 @@ export default mergeConfig(
   defineConfig({
     experimental: {},
     build: {
+      minify: false,
       sourcemap: true,
       outDir: "dist/js",
+      target: "esnext",
       lib: {
         entry: {
           index: "./src/index.ts",
           internal: "./src/internal.ts",
-          globals: "./src/styles/index.ts",
-          hooks: "./src/lib/hooks/index.ts",
+          "flr-universal": "./src/flr-universal.ts",
+          icons: "./src/internal.ts",
           nextjs: "./src/integrations/nextjs/index.ts",
-          "react-hook-form/Form":
-            "./src/integrations/react-hook-form/components/Form/index.ts",
-          "react-hook-form/Field":
-            "./src/integrations/react-hook-form/components/Field/index.ts",
+          "react-hook-form": "./src/integrations/react-hook-form/index.ts",
         },
         formats: ["es"],
       },
       rollupOptions: {
         output: {
+          format: "es",
           preserveModules: true,
           entryFileNames: "[name].mjs",
           assetFileNames: (assetInfo) => {
@@ -43,7 +43,9 @@ export default mergeConfig(
     },
     plugins: [
       banner((filename) =>
-        filename.endsWith(".js") ? '"use client"\r\n/* */' : "",
+        filename.endsWith(".mjs") && !filename.endsWith("index.mjs")
+          ? '"use client"\r\n/* */'
+          : "",
       ),
       externalizeDeps(),
       dts({

@@ -13,7 +13,7 @@ import {
 } from "@mittwald/flow-remote-react-components";
 import React from "react";
 import { demoData } from "@/app/list/demoData";
-import { IconEmail } from "@mittwald/flow-remote-react-components/Icons";
+import { IconEmail } from "@mittwald/flow-remote-react-components";
 
 export default function Page() {
   const DemoList = typedList<(typeof demoData)[number]>();

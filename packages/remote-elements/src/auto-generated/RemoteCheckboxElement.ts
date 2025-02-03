@@ -1,8 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { CheckboxProps as RemoteCheckboxElementProps } from "@mittwald/flow-react-components/Checkbox";
-export type { CheckboxProps as RemoteCheckboxElementProps } from "@mittwald/flow-react-components/Checkbox";
+import type { CheckboxProps as RemoteCheckboxElementProps } from "@mittwald/flow-react-components";
+export type { CheckboxProps as RemoteCheckboxElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteCheckboxElement extends FlowRemoteElement<RemoteCheckboxElementProps> {
   static override get remoteAttributes() {

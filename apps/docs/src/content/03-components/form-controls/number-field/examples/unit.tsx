@@ -1,5 +1,5 @@
-import NumberField from "@mittwald/flow-react-components/NumberField";
-import Label from "@mittwald/flow-react-components/Label";
+import { NumberField } from "@mittwald/flow-react-components";
+import { Label } from "@mittwald/flow-react-components";
 
 <NumberField
   formatOptions={{

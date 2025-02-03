@@ -11,11 +11,11 @@ import { dynamic, PropsContextProvider } from "@/lib/propsContext";
 import { useFormContext } from "@/integrations/react-hook-form/components/context/formContext";
 import FieldErrorView from "@/views/FieldErrorView";
 
-interface Props<T extends FieldValues>
+export interface FieldProps<T extends FieldValues>
   extends Omit<ControllerProps<T>, "render">,
     PropsWithChildren {}
 
-export function Field<T extends FieldValues>(props: Props<T>) {
+export function Field<T extends FieldValues>(props: FieldProps<T>) {
   const { children, control, ...rest } = props;
 
   const formContext = useFormContext<T>();

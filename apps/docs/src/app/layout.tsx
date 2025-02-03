@@ -1,4 +1,4 @@
-import "@mittwald/flow-react-components/all.css";
+import "@mittwald/flow-react-components";
 import "./global.scss";
 import "./layout.module.scss";
 import type { Metadata } from "next";
@@ -12,9 +12,9 @@ import { LinkProvider } from "@mittwald/flow-react-components/nextjs";
 import logoMittwald from "../../assets/m-flow_logo.svg";
 import MainNavigation from "@/app/_components/layout/MainNavigation";
 import MobileNavigation from "@/app/_components/layout/MobileNavigation/MobileNavigation";
-import { NotificationProvider } from "@mittwald/flow-react-components/NotificationProvider";
-import { Link } from "@mittwald/flow-react-components/Link";
-import { Image } from "@mittwald/flow-react-components/Image";
+import { NotificationProvider } from "@mittwald/flow-react-components";
+import { Link } from "@mittwald/flow-react-components";
+import { Image } from "@mittwald/flow-react-components";
 import Footer from "@/app/_components/layout/Footer/Footer";
 
 export const metadata: Metadata = {

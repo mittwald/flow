@@ -1,4 +1,4 @@
-import { Markdown } from "@mittwald/flow-react-components/Markdown";
+import { Markdown } from "@mittwald/flow-react-components";
 
 <Markdown>
   {

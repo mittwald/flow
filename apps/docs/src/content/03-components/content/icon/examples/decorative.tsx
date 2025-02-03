@@ -51,10 +51,10 @@ import {
   IconTicket,
   IconUser,
   IconVhost,
-} from "@mittwald/flow-react-components/Icons";
-import Label from "@mittwald/flow-react-components/Label";
-import LabeledValue from "@mittwald/flow-react-components/LabeledValue";
-import ColumnLayout from "@mittwald/flow-react-components/ColumnLayout";
+} from "@mittwald/flow-react-components";
+import { Label } from "@mittwald/flow-react-components";
+import { LabeledValue } from "@mittwald/flow-react-components";
+import { ColumnLayout } from "@mittwald/flow-react-components";
 
 <ColumnLayout l={[1, 1, 1, 1, 1]} m={[1, 1, 1]} s={[1, 1]}>
   <LabeledValue>

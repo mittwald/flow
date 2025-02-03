@@ -1,8 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { NumberFieldProps as RemoteNumberFieldElementProps } from "@mittwald/flow-react-components/NumberField";
-export type { NumberFieldProps as RemoteNumberFieldElementProps } from "@mittwald/flow-react-components/NumberField";
+import type { NumberFieldProps as RemoteNumberFieldElementProps } from "@mittwald/flow-react-components";
+export type { NumberFieldProps as RemoteNumberFieldElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteNumberFieldElement extends FlowRemoteElement<RemoteNumberFieldElementProps> {
   static override get remoteAttributes() {

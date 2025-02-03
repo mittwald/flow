@@ -1,13 +1,13 @@
 "use client";
 import type { FC } from "react";
 import React from "react";
-import { HeaderNavigation as HeaderNavigationComponent } from "@mittwald/flow-react-components/HeaderNavigation";
+import { HeaderNavigation as HeaderNavigationComponent } from "@mittwald/flow-react-components";
 import type { SerializedMdxFile } from "@/lib/mdx/MdxFile";
 import { MdxFile } from "@/lib/mdx/MdxFile";
 import { groupBy } from "remeda";
 import { GroupText } from "@/app/_components/layout/MainNavigation/components/GroupText";
 import { usePathname } from "next/navigation";
-import { Link } from "@mittwald/flow-react-components/Link";
+import { Link } from "@mittwald/flow-react-components";
 
 interface Props {
   docs: SerializedMdxFile[];

@@ -1,8 +1,8 @@
-import Heading from "@mittwald/flow-react-components/Heading";
-import IllustratedMessage from "@mittwald/flow-react-components/IllustratedMessage";
-import { IconApp } from "@mittwald/flow-react-components/Icons";
-import Text from "@mittwald/flow-react-components/Text";
-import Button from "@mittwald/flow-react-components/Button";
+import { Heading } from "@mittwald/flow-react-components";
+import { IllustratedMessage } from "@mittwald/flow-react-components";
+import { IconApp } from "@mittwald/flow-react-components";
+import { Text } from "@mittwald/flow-react-components";
+import { Button } from "@mittwald/flow-react-components";
 
 <IllustratedMessage color="dark">
   <IconApp />

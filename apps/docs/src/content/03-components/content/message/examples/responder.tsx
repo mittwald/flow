@@ -1,16 +1,16 @@
-import { Message } from "@mittwald/flow-react-components/Message";
-import { Header } from "@mittwald/flow-react-components/Header";
+import { Message } from "@mittwald/flow-react-components";
+import { Header } from "@mittwald/flow-react-components";
 import {
   ContextMenu,
   ContextMenuTrigger,
-} from "@mittwald/flow-react-components/ContextMenu";
-import { Button } from "@mittwald/flow-react-components/Button";
-import MenuItem from "@mittwald/flow-react-components/MenuItem";
-import { Align } from "@mittwald/flow-react-components/Align";
-import { Avatar } from "@mittwald/flow-react-components/Avatar";
-import { Initials } from "@mittwald/flow-react-components/Initials";
-import { Text } from "@mittwald/flow-react-components/Text";
-import { Content } from "@mittwald/flow-react-components/Content";
+} from "@mittwald/flow-react-components";
+import { Button } from "@mittwald/flow-react-components";
+import { MenuItem } from "@mittwald/flow-react-components";
+import { Align } from "@mittwald/flow-react-components";
+import { Avatar } from "@mittwald/flow-react-components";
+import { Initials } from "@mittwald/flow-react-components";
+import { Text } from "@mittwald/flow-react-components";
+import { Content } from "@mittwald/flow-react-components";
 
 <Message type="responder">
   <Header>

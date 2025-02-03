@@ -2,10 +2,10 @@ import {
   Tab,
   Tabs,
   TabTitle,
-} from "@mittwald/flow-react-components/Tabs";
-import { Alert } from "@mittwald/flow-react-components/Alert";
-import { Heading } from "@mittwald/flow-react-components/Heading";
-import { AlertIcon } from "@mittwald/flow-react-components/AlertIcon";
+} from "@mittwald/flow-react-components";
+import { Alert } from "@mittwald/flow-react-components";
+import { Heading } from "@mittwald/flow-react-components";
+import { AlertIcon } from "@mittwald/flow-react-components";
 
 <Tabs>
   <Tab>

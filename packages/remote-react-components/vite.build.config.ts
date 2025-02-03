@@ -8,10 +8,31 @@ import preserveDirectives from "rollup-preserve-directives";
 export default mergeConfig(
   baseConfig,
   defineConfig({
+    build: {
+      minify: false,
+      sourcemap: true,
+      outDir: "dist/js",
+      lib: {
+        entry: {
+          index: "./src/index.ts",
+          RemoteRoot: "./src/components/RemoteRoot.tsx",
+          "react-hook-form": "./src/integrations/react-hook-form/index.ts",
+        },
+        formats: ["es"],
+      },
+      rollupOptions: {
+        output: {
+          preserveModules: true,
+          entryFileNames: "[name].mjs",
+        },
+      },
+    },
     plugins: [
       preserveDirectives(),
       banner((filename) =>
-        filename.endsWith(".js") ? '"use client"\r\n/* */' : "",
+        filename.endsWith(".mjs") && !filename.endsWith("index.mjs")
+          ? '"use client"\r\n/* */'
+          : "",
       ),
       externalizeDeps(),
       dts({
@@ -19,18 +40,5 @@ export default mergeConfig(
         outDir: "dist/types",
       }),
     ],
-    build: {
-      lib: {
-        entry: {
-          index: "./src/index.ts",
-          RemoteRoot: "./src/components/RemoteRoot.tsx",
-          Icons: "./src/Icons.ts",
-          hooks: "./src/hooks.ts",
-          controller: "./src/controller.ts",
-          "react-hook-form": "./src/integrations/react-hook-form/index.ts",
-        },
-        formats: ["es"],
-      },
-    },
   }),
 );

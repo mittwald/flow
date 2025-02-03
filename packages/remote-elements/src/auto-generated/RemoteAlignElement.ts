@@ -1,8 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { AlignProps as RemoteAlignElementProps } from "@mittwald/flow-react-components/Align";
-export type { AlignProps as RemoteAlignElementProps } from "@mittwald/flow-react-components/Align";
+import type { AlignProps as RemoteAlignElementProps } from "@mittwald/flow-react-components";
+export type { AlignProps as RemoteAlignElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteAlignElement extends FlowRemoteElement<RemoteAlignElementProps> {
   static override get remoteAttributes() {

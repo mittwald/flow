@@ -1,4 +1,4 @@
-import Checkbox from "@mittwald/flow-react-components/Checkbox";
+import { Checkbox } from "@mittwald/flow-react-components";
 
 <Checkbox isIndeterminate>
   Ich stimme den AGBs zu und bestätige, dass ich die

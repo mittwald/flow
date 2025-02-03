@@ -1,11 +1,11 @@
 import React from "react";
 import type { Property } from "../types";
-import { TableCell, TableRow } from "@mittwald/flow-react-components/Table";
-import { InlineCode } from "@mittwald/flow-react-components/InlineCode";
+import { TableCell, TableRow } from "@mittwald/flow-react-components";
+import { InlineCode } from "@mittwald/flow-react-components";
 import { customComponents } from "@/lib/mdx/components/MdxFileView/customComponents";
 import Markdown from "react-markdown";
 import { omit } from "remeda";
-import { Badge } from "@mittwald/flow-react-components/Badge";
+import { Badge } from "@mittwald/flow-react-components";
 
 export interface PropertyTableGroupProps {
   property: Property;

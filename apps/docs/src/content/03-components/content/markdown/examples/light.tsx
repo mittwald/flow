@@ -1,4 +1,4 @@
-import { Markdown } from "@mittwald/flow-react-components/Markdown";
+import { Markdown } from "@mittwald/flow-react-components";
 
 <Markdown color="light">
   Lorem ipsum dolor sit amet **consectetur adipisicing**

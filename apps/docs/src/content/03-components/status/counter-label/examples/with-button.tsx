@@ -1,6 +1,6 @@
-import Button from "@mittwald/flow-react-components/Button";
-import { IconNotification } from "@mittwald/flow-react-components/Icons";
-import CounterBadge from "@mittwald/flow-react-components/CounterBadge";
+import { Button } from "@mittwald/flow-react-components";
+import { IconNotification } from "@mittwald/flow-react-components";
+import { CounterBadge } from "@mittwald/flow-react-components";
 
 <Button aria-label="Benachrichtigungen: 7">
   <IconNotification />

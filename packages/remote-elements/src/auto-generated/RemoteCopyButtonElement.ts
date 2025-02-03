@@ -1,8 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { CopyButtonProps as RemoteCopyButtonElementProps } from "@mittwald/flow-react-components/CopyButton";
-export type { CopyButtonProps as RemoteCopyButtonElementProps } from "@mittwald/flow-react-components/CopyButton";
+import type { CopyButtonProps as RemoteCopyButtonElementProps } from "@mittwald/flow-react-components";
+export type { CopyButtonProps as RemoteCopyButtonElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteCopyButtonElement extends FlowRemoteElement<RemoteCopyButtonElementProps> {
   static override get remoteAttributes() {

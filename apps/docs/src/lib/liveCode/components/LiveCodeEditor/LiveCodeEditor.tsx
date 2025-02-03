@@ -11,7 +11,7 @@ import extractDefaultExport from "@/lib/liveCode/components/LiveCodeEditor/lib/e
 import styles from "./LiveCodeEditor.module.css";
 import * as EditorComponents from "./components";
 import clsx from "clsx";
-import { Button } from "@mittwald/flow-react-components/Button";
+import { Button } from "@mittwald/flow-react-components";
 import { themes } from "prism-react-renderer";
 
 export interface LiveCodeEditorProps {

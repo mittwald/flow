@@ -1,13 +1,13 @@
-import { Label } from "@mittwald/flow-react-components/Label";
+import { Label } from "@mittwald/flow-react-components";
 import { useState } from "react";
-import { FieldDescription } from "@mittwald/flow-react-components/FieldDescription";
-import { ColumnLayout } from "@mittwald/flow-react-components/ColumnLayout";
-import { TextField } from "@mittwald/flow-react-components/TextField";
-import { Section } from "@mittwald/flow-react-components/Section";
+import { FieldDescription } from "@mittwald/flow-react-components";
+import { ColumnLayout } from "@mittwald/flow-react-components";
+import { TextField } from "@mittwald/flow-react-components";
+import { Section } from "@mittwald/flow-react-components";
 import {
   Segment,
   SegmentedControl,
-} from "@mittwald/flow-react-components/SegmentedControl";
+} from "@mittwald/flow-react-components";
 
 export default () => {
   const [showContent, setShowContent] =

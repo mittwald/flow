@@ -1,4 +1,4 @@
-import CodeBlock from "@mittwald/flow-react-components/CodeBlock";
+import { CodeBlock } from "@mittwald/flow-react-components";
 
 <CodeBlock
   language="json"

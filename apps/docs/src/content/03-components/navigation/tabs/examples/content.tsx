@@ -1,15 +1,16 @@
-import Tabs, {
+import {
+  Tabs,
   Tab,
   TabTitle,
-} from "@mittwald/flow-react-components/Tabs";
-import Section from "@mittwald/flow-react-components/Section";
-import Heading from "@mittwald/flow-react-components/Heading";
-import TextField from "@mittwald/flow-react-components/TextField";
-import Label from "@mittwald/flow-react-components/Label";
-import LabeledValue from "@mittwald/flow-react-components/LabeledValue";
-import Text from "@mittwald/flow-react-components/Text";
-import Header from "@mittwald/flow-react-components/Header";
-import Switch from "@mittwald/flow-react-components/Switch";
+} from "@mittwald/flow-react-components";
+import { Section } from "@mittwald/flow-react-components";
+import { Heading } from "@mittwald/flow-react-components";
+import { TextField } from "@mittwald/flow-react-components";
+import { Label } from "@mittwald/flow-react-components";
+import { LabeledValue } from "@mittwald/flow-react-components";
+import { Text } from "@mittwald/flow-react-components";
+import { Header } from "@mittwald/flow-react-components";
+import { Switch } from "@mittwald/flow-react-components";
 
 <Tabs>
   <Tab>

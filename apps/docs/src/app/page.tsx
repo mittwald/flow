@@ -1,13 +1,13 @@
-import LayoutCard from "@mittwald/flow-react-components/LayoutCard";
+import { LayoutCard } from "@mittwald/flow-react-components";
 import type { FC } from "react";
 import React from "react";
-import { Heading } from "@mittwald/flow-react-components/Heading";
-import { Text } from "@mittwald/flow-react-components/Text";
-import { Section } from "@mittwald/flow-react-components/Section";
-import { Link } from "@mittwald/flow-react-components/Link";
-import { ColumnLayout } from "@mittwald/flow-react-components/ColumnLayout";
-import { Image } from "@mittwald/flow-react-components/Image";
-import Icon from "@mittwald/flow-react-components/Icon";
+import { Heading } from "@mittwald/flow-react-components";
+import { Text } from "@mittwald/flow-react-components";
+import { Section } from "@mittwald/flow-react-components";
+import { Link } from "@mittwald/flow-react-components";
+import { ColumnLayout } from "@mittwald/flow-react-components";
+import { Image } from "@mittwald/flow-react-components";
+import { Icon } from "@mittwald/flow-react-components";
 import {
   IconBooks,
   IconComponents,
@@ -15,7 +15,7 @@ import {
 } from "@tabler/icons-react";
 import homeImage from "../../assets/Styleguide_Startseite.svg";
 import styles from "./layout.module.scss";
-import { AlertBadge } from "@mittwald/flow-react-components/AlertBadge";
+import { AlertBadge } from "@mittwald/flow-react-components";
 
 const Home: FC = () => {
   return (

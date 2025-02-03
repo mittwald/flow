@@ -1,5 +1,5 @@
-import Heading from "@mittwald/flow-react-components/Heading";
-import { IconMember } from "@mittwald/flow-react-components/Icons";
+import { Heading } from "@mittwald/flow-react-components";
+import { IconMember } from "@mittwald/flow-react-components";
 
 <Heading>
   <IconMember />

@@ -1,6 +1,6 @@
-import { ColumnLayout } from "@mittwald/flow-react-components/ColumnLayout";
-import { Text } from "@mittwald/flow-react-components/Text";
-import { Badge } from "@mittwald/flow-react-components/Badge";
+import { ColumnLayout } from "@mittwald/flow-react-components";
+import { Text } from "@mittwald/flow-react-components";
+import { Badge } from "@mittwald/flow-react-components";
 
 <ColumnLayout m={[1, 1, 1]}>
   <Text>

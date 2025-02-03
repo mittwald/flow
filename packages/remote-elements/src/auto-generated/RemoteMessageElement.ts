@@ -1,8 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { MessageProps as RemoteMessageElementProps } from "@mittwald/flow-react-components/Message";
-export type { MessageProps as RemoteMessageElementProps } from "@mittwald/flow-react-components/Message";
+import type { MessageProps as RemoteMessageElementProps } from "@mittwald/flow-react-components";
+export type { MessageProps as RemoteMessageElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteMessageElement extends FlowRemoteElement<RemoteMessageElementProps> {
   static override get remoteAttributes() {

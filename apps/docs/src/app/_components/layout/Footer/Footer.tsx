@@ -1,14 +1,14 @@
 "use client";
 import type { FC } from "react";
 import React from "react";
-import { LayoutCard } from "@mittwald/flow-react-components/LayoutCard";
-import { Link } from "@mittwald/flow-react-components/Link";
+import { LayoutCard } from "@mittwald/flow-react-components";
+import { Link } from "@mittwald/flow-react-components";
 import styles from "./footer.module.scss";
-import { Image } from "@mittwald/flow-react-components/Image";
+import { Image } from "@mittwald/flow-react-components";
 import feedback from "../../../../../assets/Styleguide-Footer_Feedback.svg";
 import logoMittwald from "../../../../../assets/mittwald-logo-footer.svg";
 import { FooterSection } from "./components/FooterSection";
-import { ColumnLayout } from "@mittwald/flow-react-components/ColumnLayout";
+import { ColumnLayout } from "@mittwald/flow-react-components";
 
 const Footer: FC = () => {
   return (

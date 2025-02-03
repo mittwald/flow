@@ -1,14 +1,14 @@
-import ActionGroup from "@mittwald/flow-react-components/ActionGroup";
-import Button from "@mittwald/flow-react-components/Button";
+import { ActionGroup } from "@mittwald/flow-react-components";
+import { Button } from "@mittwald/flow-react-components";
 import {
   LightBox,
   LightBoxTrigger,
-} from "@mittwald/flow-react-components/LightBox";
-import { Image } from "@mittwald/flow-react-components/Image";
+} from "@mittwald/flow-react-components";
+import { Image } from "@mittwald/flow-react-components";
 import {
   IconDelete,
   IconDownload,
-} from "@mittwald/flow-react-components/Icons";
+} from "@mittwald/flow-react-components";
 
 <LightBoxTrigger>
   <Button>Open LightBox</Button>

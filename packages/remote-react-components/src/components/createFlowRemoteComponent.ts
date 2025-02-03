@@ -8,7 +8,7 @@ import type {
   RemoteComponentTypeFromElementConstructor,
 } from "@remote-dom/react";
 import { createRemoteComponent } from "@remote-dom/react";
-import { isFlowComponentName } from "@mittwald/flow-react-components/hooks";
+import { isFlowComponentName } from "@mittwald/flow-react-components/internal";
 import { flowComponent } from "@mittwald/flow-react-components/internal";
 
 // eslint-disable-next-line  @typescript-eslint/no-explicit-any

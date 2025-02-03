@@ -5,7 +5,7 @@ import {
   TableBody,
   TableColumn,
   TableHeader,
-} from "@mittwald/flow-react-components/Table";
+} from "@mittwald/flow-react-components";
 import type { Property } from "@/lib/PropertiesTables/types";
 
 interface PropertiesTableProps {

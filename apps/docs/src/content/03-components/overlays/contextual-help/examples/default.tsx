@@ -1,11 +1,11 @@
 import {
   ContextualHelp,
   ContextualHelpTrigger,
-} from "@mittwald/flow-react-components/ContextualHelp";
-import { Heading } from "@mittwald/flow-react-components/Heading";
-import { Text } from "@mittwald/flow-react-components/Text";
-import { Link } from "@mittwald/flow-react-components/Link";
-import { Button } from "@mittwald/flow-react-components/Button";
+} from "@mittwald/flow-react-components";
+import { Heading } from "@mittwald/flow-react-components";
+import { Text } from "@mittwald/flow-react-components";
+import { Link } from "@mittwald/flow-react-components";
+import { Button } from "@mittwald/flow-react-components";
 
 <ContextualHelpTrigger>
   <Button />

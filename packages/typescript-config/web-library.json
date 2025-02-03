@@ -1,14 +1,12 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"],
-
-    /* AND if you're building for a library: */
+    "composite": true,
     "declaration": true,
 
-    /* AND if you're building for a library in a monorepo: */
-    "composite": true,
-    "declarationMap": true
+    "declarationMap": true,
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "types": ["vite/client"]
   },
   "display": "A Web Component Library",
   "extends": "./base.json"

@@ -7,6 +7,7 @@ import type {
 import { useId } from "react";
 import React, { useRef } from "react";
 import type { FieldValues, UseFormReturn } from "react-hook-form";
+import { FormProvider as RhfFormContextProvider } from "react-hook-form";
 import { FormContextProvider } from "@/integrations/react-hook-form/components/context/formContext";
 import { SubmitButtonStateProvider } from "@/integrations/react-hook-form/components/ActionGroupWrapper/SubmitButtonStateProvider";
 import { AutoFormResetEffect } from "../AutoFormResetEffect/AutoFormResetEffect";
@@ -59,13 +60,15 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
   };
 
   return (
-    <FormContextProvider value={{ form, id: formId }}>
-      <SubmitButtonStateProvider isAsyncSubmit={isAsyncSubmit}>
-        <FormView {...formProps} id={formId} onSubmit={handleOnSubmit}>
-          {children}
-        </FormView>
-        <AutoFormResetEffect />
-      </SubmitButtonStateProvider>
-    </FormContextProvider>
+    <RhfFormContextProvider {...form}>
+      <FormContextProvider value={{ form, id: formId }}>
+        <SubmitButtonStateProvider isAsyncSubmit={isAsyncSubmit}>
+          <FormView {...formProps} id={formId} onSubmit={handleOnSubmit}>
+            {children}
+          </FormView>
+          <AutoFormResetEffect />
+        </SubmitButtonStateProvider>
+      </FormContextProvider>
+    </RhfFormContextProvider>
   );
 }

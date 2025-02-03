@@ -1,26 +1,27 @@
-import { LayoutCard } from "@mittwald/flow-react-components/LayoutCard";
-import { IllustratedMessage } from "@mittwald/flow-react-components/IllustratedMessage";
+import { LayoutCard } from "@mittwald/flow-react-components";
+import { IllustratedMessage } from "@mittwald/flow-react-components";
 import {
   IconDomain,
   IconInvoice,
-} from "@mittwald/flow-react-components/Icons";
-import { Heading } from "@mittwald/flow-react-components/Heading";
-import { Text } from "@mittwald/flow-react-components/Text";
-import { Button } from "@mittwald/flow-react-components/Button";
-import Modal, {
+} from "@mittwald/flow-react-components";
+import { Heading } from "@mittwald/flow-react-components";
+import { Text } from "@mittwald/flow-react-components";
+import { Button } from "@mittwald/flow-react-components";
+import {
+  Modal,
   ModalTrigger,
-} from "@mittwald/flow-react-components/Modal";
-import Content from "@mittwald/flow-react-components/Content";
-import { Section } from "@mittwald/flow-react-components/Section";
-import { Link } from "@mittwald/flow-react-components/Link";
-import TextField from "@mittwald/flow-react-components/TextField";
-import Label from "@mittwald/flow-react-components/Label";
-import Header from "@mittwald/flow-react-components/Header";
-import { ColumnLayout } from "@mittwald/flow-react-components/ColumnLayout";
-import { ActionGroup } from "@mittwald/flow-react-components/ActionGroup";
-import Action from "@mittwald/flow-react-components/Action";
-import { Avatar } from "@mittwald/flow-react-components/Avatar";
-import Initials from "@mittwald/flow-react-components/Initials";
+} from "@mittwald/flow-react-components";
+import { Content } from "@mittwald/flow-react-components";
+import { Section } from "@mittwald/flow-react-components";
+import { Link } from "@mittwald/flow-react-components";
+import { TextField } from "@mittwald/flow-react-components";
+import { Label } from "@mittwald/flow-react-components";
+import { Header } from "@mittwald/flow-react-components";
+import { ColumnLayout } from "@mittwald/flow-react-components";
+import { ActionGroup } from "@mittwald/flow-react-components";
+import { Action } from "@mittwald/flow-react-components";
+import { Avatar } from "@mittwald/flow-react-components";
+import { Initials } from "@mittwald/flow-react-components";
 import {
   Table,
   TableBody,
@@ -29,9 +30,9 @@ import {
   TableFooterRow,
   TableHeader,
   TableRow,
-} from "@mittwald/flow-react-components/Table";
-import { CheckboxButton } from "@mittwald/flow-react-components/CheckboxButton";
-import { Align } from "@mittwald/flow-react-components/Align";
+} from "@mittwald/flow-react-components";
+import { CheckboxButton } from "@mittwald/flow-react-components";
+import { Align } from "@mittwald/flow-react-components";
 
 <LayoutCard>
   <IllustratedMessage>

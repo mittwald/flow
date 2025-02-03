@@ -1,8 +1,8 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { OptionProps as RemoteOptionElementProps } from "@mittwald/flow-react-components/Option";
-export type { OptionProps as RemoteOptionElementProps } from "@mittwald/flow-react-components/Option";
+import type { OptionProps as RemoteOptionElementProps } from "@mittwald/flow-react-components";
+export type { OptionProps as RemoteOptionElementProps } from "@mittwald/flow-react-components";
 
 export class RemoteOptionElement extends FlowRemoteElement<RemoteOptionElementProps> {
   static override get remoteAttributes() {

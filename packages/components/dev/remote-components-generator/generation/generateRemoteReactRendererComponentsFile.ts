@@ -10,7 +10,7 @@ export function generateRemoteReactRendererComponentsFile(
     imports: components
       .map(
         (c) => `\
-          import { ${c.displayName} as ${remoteComponentBaseNameOf(c)} } from "@mittwald/flow-react-components/${componentModulePathOf(c)}";
+          import { ${c.displayName} as ${remoteComponentBaseNameOf(c)} } from "@mittwald/flow-react-components${componentModulePathOf(c)}";
         `,
       )
       .join(""),

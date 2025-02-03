@@ -1,9 +1,9 @@
 import {
   Segment,
   SegmentedControl,
-} from "@mittwald/flow-react-components/SegmentedControl";
-import { Label } from "@mittwald/flow-react-components/Label";
-import { Section } from "@mittwald/flow-react-components/Section";
+} from "@mittwald/flow-react-components";
+import { Label } from "@mittwald/flow-react-components";
+import { Section } from "@mittwald/flow-react-components";
 
 <Section>
   <SegmentedControl defaultValue="dev">
