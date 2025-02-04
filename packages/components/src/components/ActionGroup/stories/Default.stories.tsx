@@ -5,6 +5,7 @@ import { Button } from "@/components/Button";
 import { Action } from "@/components/Action";
 import { sleep } from "@/lib/promises/sleep";
 import { Switch } from "@/components/Switch";
+import { Link } from "@/components/Link";
 
 const meta: Meta<typeof ActionGroup> = {
   title: "Actions/ActionGroup",
@@ -92,6 +93,15 @@ export const WithSwitch: Story = {
     <ActionGroup {...props}>
       <Button slot="secondary">Edit</Button>
       <Switch slot="primary">Activate</Switch>
+    </ActionGroup>
+  ),
+};
+
+export const WithLink: Story = {
+  render: (props) => (
+    <ActionGroup {...props}>
+      <Link slot="abort">Forgot password?</Link>
+      <Button color="accent">Login</Button>
     </ActionGroup>
   ),
 };

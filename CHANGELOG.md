@@ -1,37 +1,43 @@
 # Change Log
 
-All notable changes to this project will be documented in this file.
-See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
 # [0.2.0-alpha.27](https://github.com/mittwald/flow/compare/0.2.0-alpha.26...0.2.0-alpha.27) (2025-01-30)
 
 ### Bug Fixes
 
-* fix import in docs ([8f6f3f1](https://github.com/mittwald/flow/commit/8f6f3f1148c3a88c080bb4c308264e8939f5b4a4))
+- fix import in docs
+  ([8f6f3f1](https://github.com/mittwald/flow/commit/8f6f3f1148c3a88c080bb4c308264e8939f5b4a4))
 
 # [0.1.0-alpha.407](https://github.com/mittwald/flow/compare/0.1.0-alpha.406...0.1.0-alpha.407) (2025-01-28)
 
 ### Features
 
-* **List:** prevent list action in bottom content ([80b497c](https://github.com/mittwald/flow/commit/80b497c045e7a6f7e7d404a11f14602d199aa2ec))
+- **List:** prevent list action in bottom content
+  ([80b497c](https://github.com/mittwald/flow/commit/80b497c045e7a6f7e7d404a11f14602d199aa2ec))
 
 # [0.1.0-alpha.406](https://github.com/mittwald/flow/compare/0.1.0-alpha.405...0.1.0-alpha.406) (2025-01-27)
 
 ### Features
 
-* **List:** update tile width and add maxTileWidth property ([#1134](https://github.com/mittwald/flow/issues/1134)) ([6ee9289](https://github.com/mittwald/flow/commit/6ee9289b3776ff3443fa45e4536e73897687784e))
+- **List:** update tile width and add maxTileWidth property
+  ([#1134](https://github.com/mittwald/flow/issues/1134))
+  ([6ee9289](https://github.com/mittwald/flow/commit/6ee9289b3776ff3443fa45e4536e73897687784e))
 
 # [0.1.0-alpha.405](https://github.com/mittwald/flow/compare/0.1.0-alpha.404...0.1.0-alpha.405) (2025-01-27)
 
 ### Features
 
-* **Combobox:** add combo box component ([bad2280](https://github.com/mittwald/flow/commit/bad228014a5be44e605f9d39af6139acd3371c51))
+- **Combobox:** add combo box component
+  ([bad2280](https://github.com/mittwald/flow/commit/bad228014a5be44e605f9d39af6139acd3371c51))
 
 # [0.1.0-alpha.404](https://github.com/mittwald/flow/compare/0.2.0-alpha.22...0.1.0-alpha.404) (2025-01-27)
 
 ### Features
 
-* **FileDropZone:** add file drop zone component ([041cab7](https://github.com/mittwald/flow/commit/041cab79ecfd141867c1785b25d59138aefd0df2))
+- **FileDropZone:** add file drop zone component
+  ([041cab7](https://github.com/mittwald/flow/commit/041cab79ecfd141867c1785b25d59138aefd0df2))
 
 # [0.1.0-alpha.403](https://github.com/mittwald/flow/compare/0.1.0-alpha.402...0.1.0-alpha.403) (2025-01-24)
 
@@ -39,7 +45,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* **Navigation:** hide empty menu list ([#1125](https://github.com/mittwald/flow/issues/1125)) ([a014033](https://github.com/mittwald/flow/commit/a0140337e1ae1eae687b94037888d243cbbbe49d))
+- **Navigation:** hide empty menu list
+  ([#1125](https://github.com/mittwald/flow/issues/1125))
+  ([a014033](https://github.com/mittwald/flow/commit/a0140337e1ae1eae687b94037888d243cbbbe49d))
 
 # [0.1.0-alpha.401](https://github.com/mittwald/flow/compare/0.1.0-alpha.400...0.1.0-alpha.401) (2025-01-23)
 
@@ -47,50 +55,71 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* **List:** fix tile loading skeleton ([#1119](https://github.com/mittwald/flow/issues/1119)) ([27d02f8](https://github.com/mittwald/flow/commit/27d02f83ad80995b2b0af437b2e4d1193d4ae111))
+- **List:** fix tile loading skeleton
+  ([#1119](https://github.com/mittwald/flow/issues/1119))
+  ([27d02f8](https://github.com/mittwald/flow/commit/27d02f83ad80995b2b0af437b2e4d1193d4ae111))
 
 # [0.1.0-alpha.399](https://github.com/mittwald/flow/compare/0.1.0-alpha.398...0.1.0-alpha.399) (2025-01-22)
 
 ### Features
 
-* **icon:** add mobile, desktop, link and bulb icon ([#1123](https://github.com/mittwald/flow/issues/1123)) ([30e6700](https://github.com/mittwald/flow/commit/30e6700baa8103ffb242ba8363ab7bea14c404a6))
+- **icon:** add mobile, desktop, link and bulb icon
+  ([#1123](https://github.com/mittwald/flow/issues/1123))
+  ([30e6700](https://github.com/mittwald/flow/commit/30e6700baa8103ffb242ba8363ab7bea14c404a6))
 
 # [0.1.0-alpha.398](https://github.com/mittwald/flow/compare/0.2.0-alpha.18...0.1.0-alpha.398) (2025-01-22)
 
 ### Features
 
-* **List:** add tile view ([2058342](https://github.com/mittwald/flow/commit/205834235c856b649b0fd1be26b9693f86cbb9dc))
+- **List:** add tile view
+  ([2058342](https://github.com/mittwald/flow/commit/205834235c856b649b0fd1be26b9693f86cbb9dc))
 
 # [0.1.0-alpha.397](https://github.com/mittwald/flow/compare/0.1.0-alpha.396...0.1.0-alpha.397) (2025-01-21)
 
 ### Features
 
-* **Section:** support file field in section header ([#1115](https://github.com/mittwald/flow/issues/1115)) ([e2d26ae](https://github.com/mittwald/flow/commit/e2d26aecad6b2a3d67c673042e3a19f50d436a2b))
+- **Section:** support file field in section header
+  ([#1115](https://github.com/mittwald/flow/issues/1115))
+  ([e2d26ae](https://github.com/mittwald/flow/commit/e2d26aecad6b2a3d67c673042e3a19f50d436a2b))
 
 # [0.1.0-alpha.396](https://github.com/mittwald/flow/compare/0.2.0-alpha.16...0.1.0-alpha.396) (2025-01-21)
 
 ### Bug Fixes
 
-* **CheckboxButton:** remove order ([#1110](https://github.com/mittwald/flow/issues/1110)) ([4cec2c5](https://github.com/mittwald/flow/commit/4cec2c5f31ed5c912fb883f79052b8eb97e00106))
-* **List:** make list sorting case insensitive ([#1109](https://github.com/mittwald/flow/issues/1109)) ([d23c616](https://github.com/mittwald/flow/commit/d23c616247a70595c04c70fe0607abc3a1201cb0))
-* **Table:** fix hover color ([#1106](https://github.com/mittwald/flow/issues/1106)) ([c1854f8](https://github.com/mittwald/flow/commit/c1854f82e02457262d73436e65c55bc8f65b7328))
+- **CheckboxButton:** remove order
+  ([#1110](https://github.com/mittwald/flow/issues/1110))
+  ([4cec2c5](https://github.com/mittwald/flow/commit/4cec2c5f31ed5c912fb883f79052b8eb97e00106))
+- **List:** make list sorting case insensitive
+  ([#1109](https://github.com/mittwald/flow/issues/1109))
+  ([d23c616](https://github.com/mittwald/flow/commit/d23c616247a70595c04c70fe0607abc3a1201cb0))
+- **Table:** fix hover color
+  ([#1106](https://github.com/mittwald/flow/issues/1106))
+  ([c1854f8](https://github.com/mittwald/flow/commit/c1854f82e02457262d73436e65c55bc8f65b7328))
 
 ### Features
 
-* **icons:** add icons for vhost, certificate, move, directory and sparkles ([#1114](https://github.com/mittwald/flow/issues/1114)) ([d07dda6](https://github.com/mittwald/flow/commit/d07dda68f3c8432c2541f4fad0d70c6a8ad9c157))
-* **Markdown:** support blockquote ([#1112](https://github.com/mittwald/flow/issues/1112)) ([b48fadb](https://github.com/mittwald/flow/commit/b48fadb22077a4e3be885289f15981759356a74b))
+- **icons:** add icons for vhost, certificate, move, directory and sparkles
+  ([#1114](https://github.com/mittwald/flow/issues/1114))
+  ([d07dda6](https://github.com/mittwald/flow/commit/d07dda68f3c8432c2541f4fad0d70c6a8ad9c157))
+- **Markdown:** support blockquote
+  ([#1112](https://github.com/mittwald/flow/issues/1112))
+  ([b48fadb](https://github.com/mittwald/flow/commit/b48fadb22077a4e3be885289f15981759356a74b))
 
 # [0.1.0-alpha.395](https://github.com/mittwald/flow/compare/0.1.0-alpha.394...0.1.0-alpha.395) (2025-01-20)
 
 ### Features
 
-* **ActionGroup:** support switch ([#1105](https://github.com/mittwald/flow/issues/1105)) ([5415c9d](https://github.com/mittwald/flow/commit/5415c9dc01fc2cef7a701ba547625f6eb2f0a9d5))
+- **ActionGroup:** support switch
+  ([#1105](https://github.com/mittwald/flow/issues/1105))
+  ([5415c9d](https://github.com/mittwald/flow/commit/5415c9dc01fc2cef7a701ba547625f6eb2f0a9d5))
 
 # [0.1.0-alpha.394](https://github.com/mittwald/flow/compare/0.2.0-alpha.9...0.1.0-alpha.394) (2025-01-15)
 
 ### Bug Fixes
 
-* **Notification:** Fix "Timer not started" error for notifications that should not auto close ([#1101](https://github.com/mittwald/flow/issues/1101)) ([f9b5975](https://github.com/mittwald/flow/commit/f9b59756da9c4aeebc08c5eb62c0efef98fa9c9a))
+- **Notification:** Fix "Timer not started" error for notifications that should
+  not auto close ([#1101](https://github.com/mittwald/flow/issues/1101))
+  ([f9b5975](https://github.com/mittwald/flow/commit/f9b59756da9c4aeebc08c5eb62c0efef98fa9c9a))
 
 # [0.1.0-alpha.393](https://github.com/mittwald/flow/compare/0.2.0-alpha.3...0.1.0-alpha.393) (2025-01-10)
 
@@ -742,6 +771,79 @@ All notable changes to this project will be documented in this file. See
 
 - add remote components
   ([f14914b](https://github.com/mittwald/flow/commit/f14914ba844845aa224b0f5bb37e1a07d9a7851e))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.413](https://github.com/mittwald/flow/compare/0.1.0-alpha.412...0.1.0-alpha.413) (2025-01-31)
+
+### Features
+
+- **Form:** add auto reset functionality when modal closes
+  ([#1144](https://github.com/mittwald/flow/issues/1144))
+  ([207e3dc](https://github.com/mittwald/flow/commit/207e3dcd2f35ddb06556bcc4fd68b88eca384c76))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.412](https://github.com/mittwald/flow/compare/0.1.0-alpha.411...0.1.0-alpha.412) (2025-01-31)
+
+### Bug Fixes
+
+- **docs:** align footer behaviour to new guideline
+  ([#1146](https://github.com/mittwald/flow/issues/1146))
+  ([501b7b8](https://github.com/mittwald/flow/commit/501b7b8eb0119e045b82965e79fdda436672f88d))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.411](https://github.com/mittwald/flow/compare/0.1.0-alpha.410...0.1.0-alpha.411) (2025-01-31)
+
+### Features
+
+- **ActionGroup:** Support link in action group
+  ([#1136](https://github.com/mittwald/flow/issues/1136))
+  ([49bd5ba](https://github.com/mittwald/flow/commit/49bd5ba87111579fa2e03d67ea4fe01484321e2f))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.410](https://github.com/mittwald/flow/compare/0.1.0-alpha.409...0.1.0-alpha.410) (2025-01-31)
+
+### Features
+
+- **Link:** update link size
+  ([#1140](https://github.com/mittwald/flow/issues/1140))
+  ([6fb805c](https://github.com/mittwald/flow/commit/6fb805c2cd8bd82653b41fb439fc69a5bf7d1378))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.409](https://github.com/mittwald/flow/compare/0.1.0-alpha.408...0.1.0-alpha.409) (2025-01-31)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.408](https://github.com/mittwald/flow/compare/0.1.0-alpha.407...0.1.0-alpha.408) (2025-01-30)
+
+### Features
+
+- **MessageThread:** add message thread component
+  ([138892f](https://github.com/mittwald/flow/commit/138892f895fad8f7e5ae37e58c2b824dec98948e))
 
 # Change Log
 

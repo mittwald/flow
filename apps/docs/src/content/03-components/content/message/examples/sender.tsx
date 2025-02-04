@@ -12,7 +12,7 @@ import { Initials } from "@mittwald/flow-react-components";
 import { Text } from "@mittwald/flow-react-components";
 import { Content } from "@mittwald/flow-react-components";
 
-<Message orientation="right">
+<Message type="sender">
   <Header>
     <ContextMenuTrigger>
       <Button />

@@ -1,0 +1,5 @@
+.messageThread {
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--message-thread--spacing);
+}

@@ -55,6 +55,11 @@ export const ActionGroup = flowComponent<"ActionGroup", HTMLDivElement>(
           return clsx(props.className, props.slot && styles[props.slot]);
         }),
       },
+      Link: {
+        className: dynamic((props) => {
+          return clsx(props.className, props.slot && styles[props.slot]);
+        }),
+      },
     };
 
     return (

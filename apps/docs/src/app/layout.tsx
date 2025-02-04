@@ -1,4 +1,4 @@
-import "@mittwald/flow-react-components";
+import "@mittwald/flow-react-components/all.css";
 import "./global.scss";
 import "./layout.module.scss";
 import type { Metadata } from "next";

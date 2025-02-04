@@ -12,7 +12,6 @@ export class RemoteMessageElement extends FlowRemoteElement<RemoteMessageElement
   static override get remoteProperties() {
     return {
       className: {},
-      orientation: {},
       type: {},
     };
   }

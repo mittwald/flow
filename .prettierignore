@@ -5,6 +5,8 @@ dist
 .yarn
 .next
 .pnp*
+pnpm-*
+CHANGELOG.md
 
 /.nx/cache
 apps/docs/src/lib/liveCode/dynamicImports.ts

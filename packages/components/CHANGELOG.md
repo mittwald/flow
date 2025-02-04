@@ -687,6 +687,75 @@ All notable changes to this project will be documented in this file. See
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.413](https://github.com/mittwald/flow/compare/0.1.0-alpha.412...0.1.0-alpha.413) (2025-01-31)
+
+### Features
+
+- **Form:** add auto reset functionality when modal closes
+  ([#1144](https://github.com/mittwald/flow/issues/1144))
+  ([207e3dc](https://github.com/mittwald/flow/commit/207e3dcd2f35ddb06556bcc4fd68b88eca384c76))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.412](https://github.com/mittwald/flow/compare/0.1.0-alpha.411...0.1.0-alpha.412) (2025-01-31)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.411](https://github.com/mittwald/flow/compare/0.1.0-alpha.410...0.1.0-alpha.411) (2025-01-31)
+
+### Features
+
+- **ActionGroup:** Support link in action group
+  ([#1136](https://github.com/mittwald/flow/issues/1136))
+  ([49bd5ba](https://github.com/mittwald/flow/commit/49bd5ba87111579fa2e03d67ea4fe01484321e2f))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.410](https://github.com/mittwald/flow/compare/0.1.0-alpha.409...0.1.0-alpha.410) (2025-01-31)
+
+### Features
+
+- **Link:** update link size
+  ([#1140](https://github.com/mittwald/flow/issues/1140))
+  ([6fb805c](https://github.com/mittwald/flow/commit/6fb805c2cd8bd82653b41fb439fc69a5bf7d1378))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.409](https://github.com/mittwald/flow/compare/0.1.0-alpha.408...0.1.0-alpha.409) (2025-01-31)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.408](https://github.com/mittwald/flow/compare/0.1.0-alpha.407...0.1.0-alpha.408) (2025-01-30)
+
+### Features
+
+- **MessageThread:** add message thread component
+  ([138892f](https://github.com/mittwald/flow/commit/138892f895fad8f7e5ae37e58c2b824dec98948e))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.407](https://github.com/mittwald/flow/compare/0.1.0-alpha.406...0.1.0-alpha.407) (2025-01-28)
 
 ### Features

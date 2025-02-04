@@ -23,10 +23,10 @@ export interface LinkProps
   linkComponent?: ComponentType<Omit<ComponentProps<"a">, "ref">>;
   /** The color of the link. @default "primary" */
   color?: "primary" | "dark" | "light";
-
+  "aria-current"?: string;
+  slot?: string;
   /** @internal */
   unstyled?: boolean;
-  "aria-current"?: string;
 }
 
 /** @flr-generate all */
@@ -42,6 +42,7 @@ export const Link = flowComponent<"Link", HTMLAnchorElement>(
       unstyled = false,
       "aria-current": ariaCurrent,
       ref,
+      slot: ignoredSlotProp,
       ...rest
     } = props;
 
