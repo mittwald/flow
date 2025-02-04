@@ -12,6 +12,7 @@ export default mergeConfig(
       minify: false,
       sourcemap: true,
       outDir: "dist/js",
+      emptyOutDir: false,
       lib: {
         entry: {
           index: "./src/index.ts",

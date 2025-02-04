@@ -11,8 +11,9 @@ export default mergeConfig(
     build: {
       minify: false,
       sourcemap: true,
-      outDir: "dist/js",
+      outDir: "dist",
       target: "esnext",
+      cssMinify: "esbuild",
       lib: {
         entry: {
           index: "./src/index.ts",
@@ -21,22 +22,24 @@ export default mergeConfig(
           icons: "./src/internal.ts",
           nextjs: "./src/integrations/nextjs/index.ts",
           "react-hook-form": "./src/integrations/react-hook-form/index.ts",
+          globals: "./src/styles/index.ts",
         },
         formats: ["es"],
       },
+      emptyOutDir: false,
       rollupOptions: {
         output: {
           format: "es",
           preserveModules: true,
-          entryFileNames: "[name].mjs",
+          entryFileNames: "js/[name].mjs",
           assetFileNames: (assetInfo) => {
             if (assetInfo.names[0] === "flow-react-components.css") {
-              return "all.css";
+              return "css/all.css";
             }
             if (assetInfo.names[0] === "globals.css") {
-              return "globals.css";
+              return "css/globals.css";
             }
-            return assetInfo.names[0] ?? "undefined";
+            return assetInfo.names[0] ?? `undefined`;
           },
         },
       },
@@ -47,7 +50,9 @@ export default mergeConfig(
           ? '"use client"\r\n/* */'
           : "",
       ),
-      externalizeDeps(),
+      externalizeDeps({
+        except: ["@mittwald/flow-design-tokens/css"],
+      }),
       dts({
         include: ["src"],
         outDir: "dist/types",

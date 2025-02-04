@@ -20,6 +20,7 @@ export default mergeConfig(
       }),
     ],
     build: {
+      emptyOutDir: false,
       lib: {
         entry: {
           index: "./src/index.ts",

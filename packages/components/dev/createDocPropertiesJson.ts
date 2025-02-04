@@ -31,8 +31,11 @@ async function createDocPropertiesJson() {
   if (!fsSync.existsSync("./dist/")) {
     await fs.mkdir("./dist/");
   }
+  if (!fsSync.existsSync("./dist/assets")) {
+    await fs.mkdir("./dist/assets");
+  }
   await fs.writeFile(
-    "./dist/doc-properties.json",
+    "./dist/assets/doc-properties.json",
     JSON.stringify(components, null, 2),
   );
 

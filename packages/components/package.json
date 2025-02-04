@@ -26,8 +26,8 @@
       "types": "./dist/types/integrations/react-hook-form/index.d.ts",
       "import": "./dist/js/react-hook-form.mjs"
     },
-    "./all.css": "./dist/js/all.css",
-    "./doc-properties": "./dist/doc-properties.json"
+    "./all.css": "./dist/css/all.css",
+    "./doc-properties": "./dist/assets/doc-properties.json"
   },
   "files": [
     "*.md",
@@ -43,7 +43,7 @@
     "build:icons": "tsx dev/icons/generate.ts",
     "build:remote-components": "tsx dev/remote-components-generator/generateRemoteComponents.ts",
     "build:storybook": "storybook build",
-    "clean": "rimraf dist out",
+    "clean": "rimraf dist",
     "dev": "storybook dev --port 6006",
     "test": "exit 0",
     "test:compile": "tsc --noEmit",
