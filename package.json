@@ -66,10 +66,10 @@
   },
   "resolutions": {
     "@remote-dom/core": "1.5.1",
-    "react": "19",
-    "react-dom": "19",
-    "@types/react": "19",
-    "@types/react-dom": "19"
+    "react": "^19",
+    "react-dom": "^19",
+    "@types/react": "^19",
+    "@types/react-dom": "^19"
   },
   "dependenciesMeta": {
     "@fortawesome/fontawesome-common-types": {

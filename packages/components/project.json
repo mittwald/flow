@@ -37,7 +37,7 @@
     "build:docs-properties": {
       "cache": true,
       "inputs": [
-        "{projectRoot}/src/**/*.{ts,tsx}",
+        "{projectRoot}/src/**/*.tsx",
         "{projectRoot}/dev/createDocPropertiesJson.ts"
       ],
       "outputs": ["{projectRoot}/dist/doc-properties.json"]

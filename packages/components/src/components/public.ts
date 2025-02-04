@@ -52,6 +52,7 @@ export * from "@/components/Modal";
 export * from "@/components/MenuItem";
 export * from "@/components/OverlayTrigger";
 export * from "@/components/Message";
+export * from "@/components/MessageThread";
 export * from "@/components/Navigation";
 export * from "@/components/Notification";
 export * from "@/components/NotificationProvider";

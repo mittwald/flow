@@ -27,7 +27,7 @@ async function generate() {
   console.log("🤓 Read component specification file");
   let components: ComponentDoc[] =
     (await jetpack.readAsync(
-      "packages/components/dist/doc-properties.json",
+      "packages/components/dist/assets/doc-properties.json",
       "json",
     )) ?? [];
 

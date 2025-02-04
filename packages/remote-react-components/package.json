@@ -58,7 +58,7 @@
   },
   "peerDependencies": {
     "@mittwald/flow-remote-react-renderer": "workspace:*",
-    "react": "19.0.0",
+    "react": "19",
     "react-hook-form": "*"
   },
   "peerDependenciesMeta": {
