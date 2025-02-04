@@ -1,6 +1,5 @@
 import "@mittwald/flow-react-components/all.css";
 import "./global.scss";
-import "./layout.module.scss";
 import type { Metadata } from "next";
 import type { FC, PropsWithChildren } from "react";
 import React from "react";
