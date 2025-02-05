@@ -23,6 +23,7 @@ export const Align = flowComponent("Align", (props) => {
     Button: { className: styles.button },
     Avatar: { className: styles.avatar, size: "m" },
     CopyButton: { size: "s", className: styles.copyButton },
+    Icon: { size: "s", className: styles.icon },
   };
 
   return (

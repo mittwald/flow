@@ -53,4 +53,14 @@
     align-self: center;
     column-gap: var(--align--text-copyButton--spacing);
   }
+
+  &:has(> .text):has(> .icon) {
+    display: flex;
+    align-items: center;
+    column-gap: var(--align--icon-text--spacing);
+
+    .icon {
+      color: var(--icon--color);
+    }
+  }
 }
