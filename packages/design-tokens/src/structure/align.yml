@@ -8,3 +8,6 @@ align:
   text-copyButton:
     spacing:
       value: "{size-rem.xs}"
+  icon-text:
+    spacing:
+      value: "{size-rem.s}"
