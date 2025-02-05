@@ -7,44 +7,16 @@ const flowToFlowRemoteTransform: Transform = (fileInfo, { j }) => {
     parser: "ts",
   });
 
-  const subPackages = ["hooks", "controller", "Icons", "react-hook-form"];
-
   root
     .find(j.ImportDeclaration)
-    .filter((i) => String(i.node.source.value).startsWith(`${flowPackage}/`))
+    .filter((i) => String(i.node.source.value).startsWith(flowPackage))
     .forEach((i) => {
-      const specifiers = i.node.specifiers ?? [];
+      const importPath = String(i.node.source.value);
 
-      const packageSubPath = String(i.node.source.value).slice(
-        flowPackage.length + 1,
+      i.node.source.value = importPath.replace(
+        flowPackage,
+        "@mittwald/flow-remote-react-components",
       );
-
-      i.node.source.value = "@mittwald/flow-remote-react-components";
-
-      if (subPackages.includes(packageSubPath)) {
-        i.node.source.value += `/${packageSubPath}`;
-      }
-
-      specifiers.forEach((s, i) => {
-        if (
-          s.type === "ImportDefaultSpecifier" ||
-          s.type === "ImportSpecifier"
-        ) {
-          const name =
-            s.type === "ImportDefaultSpecifier"
-              ? packageSubPath
-              : (s.imported?.name ?? "");
-
-          specifiers[i] = {
-            ...s,
-            type: "ImportSpecifier",
-            imported: {
-              type: "Identifier",
-              name,
-            },
-          };
-        }
-      });
     });
 
   return root.toSource();

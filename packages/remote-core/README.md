@@ -1,4 +1,4 @@
-# @mittwald/flow-remote-elements
+# @mittwald/flow-remote-core
 
 This package is part of
 [Flow – mittwald design system](https://mittwald.github.io/flow/). See the

@@ -15,7 +15,6 @@ const flowImportPaths: Transform = (fileInfo, { j }) => {
       const importPath = String(i.node.source.value);
       const importRelativePath = importPath.slice(flowPackage.length + 1);
 
-      console.log(importRelativePath);
       if (importRelativePath === "doc-properties") {
         return;
       }
