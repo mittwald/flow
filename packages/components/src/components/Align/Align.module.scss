@@ -1,5 +1,5 @@
 .align {
-  &:has(.avatar):has(.text) {
+  &:has(> .avatar):has(> .text) {
     display: flex;
     gap: var(--align--avatar-text--spacing);
 
@@ -30,7 +30,7 @@
     }
   }
 
-  &:has(:global(.flow--form-field)):has(.button) {
+  &:has(> :global(.flow--form-field)):has(> .button) {
     display: flex;
     align-items: start;
     column-gap: var(--align--input-button--spacing);
@@ -48,9 +48,19 @@
     }
   }
 
-  &:has(.text):has(.copyButton) {
+  &:has(> .text):has(> .copyButton) {
     display: flex;
     align-self: center;
     column-gap: var(--align--text-copyButton--spacing);
+  }
+
+  &:has(> .text):has(> .icon) {
+    display: flex;
+    align-items: center;
+    column-gap: var(--align--icon-text--spacing);
+
+    .icon {
+      color: var(--icon--color);
+    }
   }
 }
