@@ -4,5 +4,5 @@ import { IconDomain } from "@mittwald/flow-react-components/Icons";
 
 <Align>
   <IconDomain />
-  <Text>mail.agenturserver1.de</Text>
+  <Text>mail.agenturserver.de</Text>
 </Align>;
