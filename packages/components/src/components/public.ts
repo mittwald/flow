@@ -29,6 +29,7 @@ export * from "@/components/FieldDescription";
 export * from "@/components/FieldError";
 export * from "@/components/FileCard";
 export * from "@/components/FileCardList";
+export * from "@/components/FileDropZone";
 export * from "@/components/FileField";
 export * from "@/components/Fragment";
 export * from "@/components/Header";

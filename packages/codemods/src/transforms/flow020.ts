@@ -7,27 +7,34 @@ const flowImportPaths: Transform = (fileInfo, { j }) => {
     parser: "ts",
   });
 
-  const subPackages = ["react-hook-form", "nextjs"];
-
   root
     .find(j.ImportDeclaration)
     .filter((i) => String(i.node.source.value).startsWith(`${flowPackage}/`))
     .forEach((i) => {
       const specifiers = i.node.specifiers ?? [];
+      const importPath = String(i.node.source.value);
+      const importRelativePath = importPath.slice(flowPackage.length + 1);
 
-      const packageSubPath =
-        String(i.node.source.value)
-          .slice(flowPackage.length + 1)
-          .split("/")[0] ?? "";
-
-      if (i.node.source.value === `${flowPackage}/all.css`) {
+      console.log(importRelativePath);
+      if (importRelativePath === "doc-properties") {
         return;
       }
 
-      i.node.source.value = flowPackage;
+      if (
+        importRelativePath === "all.css" ||
+        importRelativePath === "globals.css" ||
+        importRelativePath === "global.css"
+      ) {
+        i.node.source.value = `${flowPackage}/all.css`;
+        return;
+      }
 
-      if (subPackages.includes(packageSubPath)) {
-        i.node.source.value += `/${packageSubPath}`;
+      if (importRelativePath.startsWith("react-hook-form")) {
+        i.node.source.value = `${flowPackage}/react-hook-form`;
+      } else if (importRelativePath.startsWith("nextjs")) {
+        i.node.source.value = `${flowPackage}/nextjs`;
+      } else {
+        i.node.source.value = flowPackage;
       }
 
       specifiers.forEach((s, i) => {
