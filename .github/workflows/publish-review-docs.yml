@@ -33,11 +33,16 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.PUBLISH_PAT }}
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
       - name: Setup Node 🎛️
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: "yarn"
+          cache: "pnpm"
           registry-url: "https://registry.npmjs.org"
 
       - name: Git Identity 🪪
@@ -45,8 +50,8 @@ jobs:
           git config user.name "${{ github.actor }}"
           git config user.email "${{ github.actor }}@users.noreply.github.com"
 
-      - name: Yarn Install 📦️
-        run: yarn install --immutable
+      - name: pnpm Install 📦️
+        run: pnpm install --frozen-lockfile
 
       - name: Setup NX 1/2 🎛️
         uses: nrwl/nx-set-shas@v4
@@ -56,7 +61,7 @@ jobs:
         run: git branch --track main origin/main
 
       - name: Build 🔨
-        run: yarn nx build docs
+        run: pnpm nx build docs
 
       - name: Upload files to GitHub Pages 🚀
         uses: maaaathis/github-action-push-to-another-repository@main

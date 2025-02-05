@@ -12,14 +12,19 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: "yarn"
-      - run: yarn install --immutable
+          cache: "pnpm"
+      - run: pnpm install --frozen-lockfile
 
       - name: Test components
-        run: yarn components test:unit --coverage.enabled true
+        run: pnpm components test:unit --coverage.enabled true
 
       - name: Report Coverage
         if: always()
