@@ -1,5 +1,131 @@
 # Change Log
 
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.2.0-alpha.28](https://github.com/mittwald/flow/compare/0.1.0-alpha.413...0.2.0-alpha.28) (2025-02-05)
+
+### Bug Fixes
+
+* docs css ([242f822](https://github.com/mittwald/flow/commit/242f822cc1346dfd76a1c1684e2e35c40f2f8da6))
+
+# [0.2.0-alpha.27](https://github.com/mittwald/flow/compare/0.1.0-alpha.408...0.2.0-alpha.27) (2025-01-30)
+
+### Bug Fixes
+
+* fix import in docs ([8f6f3f1](https://github.com/mittwald/flow/commit/8f6f3f1148c3a88c080bb4c308264e8939f5b4a4))
+
+# [0.2.0-alpha.26](https://github.com/mittwald/flow/compare/0.2.0-alpha.25...0.2.0-alpha.26) (2025-01-29)
+
+### Bug Fixes
+
+* fix remote context menu display issue ([7d9855e](https://github.com/mittwald/flow/commit/7d9855e5e19b791b7514ff23a95907fb438a06ce))
+
+# [0.2.0-alpha.25](https://github.com/mittwald/flow/compare/0.2.0-alpha.24...0.2.0-alpha.25) (2025-01-29)
+
+### Bug Fixes
+
+* fix remote Context Menu ([25f032e](https://github.com/mittwald/flow/commit/25f032e0c95202e503fcb0c4d553e67ae9b464a2))
+* fix remote ListItemView ([22ca167](https://github.com/mittwald/flow/commit/22ca167f537ebf80ea956806d723836676323648))
+
+# [0.2.0-alpha.24](https://github.com/mittwald/flow/compare/0.2.0-alpha.23...0.2.0-alpha.24) (2025-01-28)
+
+### Features
+
+* support Popover/Modals/ContextMenu ([7fc22d9](https://github.com/mittwald/flow/commit/7fc22d959d19e4c56ab6edf3694e3947b7770a39))
+
+# [0.2.0-alpha.23](https://github.com/mittwald/flow/compare/0.1.0-alpha.407...0.2.0-alpha.23) (2025-01-28)
+
+# [0.2.0-alpha.22](https://github.com/mittwald/flow/compare/0.2.0-alpha.21...0.2.0-alpha.22) (2025-01-27)
+
+### Bug Fixes
+
+* fix remote preview ([6a0715a](https://github.com/mittwald/flow/commit/6a0715aff82c5cdad4df3c78845bd8dedfbe59d6))
+* update yarn.lock ([a22f7fb](https://github.com/mittwald/flow/commit/a22f7fb3398c27fdd91cb14dcab6cafa0febdcc6))
+
+# [0.2.0-alpha.21](https://github.com/mittwald/flow/compare/0.2.0-alpha.20...0.2.0-alpha.21) (2025-01-27)
+
+### Features
+
+* support preview ([f03d561](https://github.com/mittwald/flow/commit/f03d561ff74b7873d5d228e9c0fc9e0f290e36e0))
+
+# [0.2.0-alpha.20](https://github.com/mittwald/flow/compare/0.1.0-alpha.403...0.2.0-alpha.20) (2025-01-24)
+
+### Bug Fixes
+
+* fix exports ([8d52eb1](https://github.com/mittwald/flow/commit/8d52eb10379ec95c5cfa4eecd0474c791a8d9041))
+* fix SSR issues ([552f9e2](https://github.com/mittwald/flow/commit/552f9e2f264dc688aedf4ab4aedf5e465f9c0f86))
+
+# [0.2.0-alpha.19](https://github.com/mittwald/flow/compare/0.1.0-alpha.401...0.2.0-alpha.19) (2025-01-23)
+
+# [0.2.0-alpha.18](https://github.com/mittwald/flow/compare/0.2.0-alpha.17...0.2.0-alpha.18) (2025-01-21)
+
+# [0.2.0-alpha.17](https://github.com/mittwald/flow/compare/0.1.0-alpha.397...0.2.0-alpha.17) (2025-01-21)
+
+### Bug Fixes
+
+* add missing export ([4ed108e](https://github.com/mittwald/flow/commit/4ed108e3e5dcd80d1c236777ebb18628fd2f64a1))
+
+# [0.2.0-alpha.16](https://github.com/mittwald/flow/compare/0.2.0-alpha.15...0.2.0-alpha.16) (2025-01-21)
+
+# [0.2.0-alpha.15](https://github.com/mittwald/flow/compare/0.2.0-alpha.14...0.2.0-alpha.15) (2025-01-21)
+
+# [0.2.0-alpha.14](https://github.com/mittwald/flow/compare/0.2.0-alpha.13...0.2.0-alpha.14) (2025-01-21)
+
+### Bug Fixes
+
+* use components as peer dependency ([665ee3b](https://github.com/mittwald/flow/commit/665ee3ba2a7620e5855bd23812b29440f124e7a6))
+
+# [0.2.0-alpha.13](https://github.com/mittwald/flow/compare/0.2.0-alpha.12...0.2.0-alpha.13) (2025-01-21)
+
+### Bug Fixes
+
+* re-export remote types to fix TS builds ([161dd58](https://github.com/mittwald/flow/commit/161dd587b430f040293b4f9fccfabd6fcbec97b3))
+
+### Features
+
+* add codemod for Flow Remote ([2ec9020](https://github.com/mittwald/flow/commit/2ec9020cedd19dfc7d927cc08b846a955d53c971))
+
+# [0.2.0-alpha.12](https://github.com/mittwald/flow/compare/0.2.0-alpha.11...0.2.0-alpha.12) (2025-01-21)
+
+### Bug Fixes
+
+* add missing remote exports ([8c02c4b](https://github.com/mittwald/flow/commit/8c02c4b7375efed70c3786d690b4ffbfc12f6ba7))
+
+# [0.2.0-alpha.11](https://github.com/mittwald/flow/compare/0.2.0-alpha.10...0.2.0-alpha.11) (2025-01-20)
+
+# [0.2.0-alpha.10](https://github.com/mittwald/flow/compare/0.1.0-alpha.395...0.2.0-alpha.10) (2025-01-20)
+
+### Bug Fixes
+
+* fix List export ([602f627](https://github.com/mittwald/flow/commit/602f627ea41fe973c8f68dc4903dbaddab88b78c))
+
+### Features
+
+* build view componentsgen ([3586d27](https://github.com/mittwald/flow/commit/3586d27090665a758c4dcf14bf458cf05dee95c8))
+
+# [0.2.0-alpha.9](https://github.com/mittwald/flow/compare/0.2.0-alpha.8...0.2.0-alpha.9) (2025-01-13)
+
+# [0.2.0-alpha.8](https://github.com/mittwald/flow/compare/0.2.0-alpha.7...0.2.0-alpha.8) (2025-01-13)
+
+# [0.2.0-alpha.7](https://github.com/mittwald/flow/compare/0.2.0-alpha.6...0.2.0-alpha.7) (2025-01-13)
+
+# [0.2.0-alpha.6](https://github.com/mittwald/flow/compare/0.2.0-alpha.5...0.2.0-alpha.6) (2025-01-13)
+
+# [0.2.0-alpha.5](https://github.com/mittwald/flow/compare/v0.2.0-alpha.4...0.2.0-alpha.5) (2025-01-10)
+
+# [0.2.0-alpha.4](https://github.com/mittwald/flow/compare/0.1.0-alpha.393...v0.2.0-alpha.4) (2025-01-10)
+
+# [0.2.0-alpha.3](https://github.com/mittwald/flow/compare/0.1.0-alpha.392...0.2.0-alpha.3) (2025-01-10)
+
+# [0.2.0-alpha.2](https://github.com/mittwald/flow/compare/0.1.0-alpha.391...0.2.0-alpha.2) (2025-01-10)
+
+### Features
+
+* add remote components ([f14914b](https://github.com/mittwald/flow/commit/f14914ba844845aa224b0f5bb37e1a07d9a7851e))
+
+# Change Log
+
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
