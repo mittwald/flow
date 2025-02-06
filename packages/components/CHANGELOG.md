@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.29](https://github.com/mittwald/flow/compare/0.2.0-alpha.28...0.2.0-alpha.29) (2025-02-06)
+
+### Bug Fixes
+
+* add missing component export ([e0e929b](https://github.com/mittwald/flow/commit/e0e929be3652d0307302d5f475af8c289d4f0da8))
+
 # [0.2.0-alpha.28](https://github.com/mittwald/flow/compare/0.1.0-alpha.413...0.2.0-alpha.28) (2025-02-05)
 
 # [0.2.0-alpha.27](https://github.com/mittwald/flow/compare/0.1.0-alpha.408...0.2.0-alpha.27) (2025-01-30)
