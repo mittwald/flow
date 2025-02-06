@@ -81,3 +81,5 @@ export * from "@/components/TextField";
 export * from "@/components/TimeField";
 export * from "@/components/Tooltip";
 export * from "@/components/Wrap";
+
+export * from "@/lib/react/components/Render";
