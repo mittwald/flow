@@ -788,6 +788,68 @@ All notable changes to this project will be documented in this file. See
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.419](https://github.com/mittwald/flow/compare/0.1.0-alpha.418...0.1.0-alpha.419) (2025-02-06)
+
+### Bug Fixes
+
+- **Form:** remove form reset on modal close
+  ([#1160](https://github.com/mittwald/flow/issues/1160))
+  ([0ddce97](https://github.com/mittwald/flow/commit/0ddce97b493a2e5dfe996f0ac9bd0dbff4718fe8))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.418](https://github.com/mittwald/flow/compare/0.1.0-alpha.417...0.1.0-alpha.418) (2025-02-05)
+
+### Features
+
+- **Align:** support icon + text
+  ([#1154](https://github.com/mittwald/flow/issues/1154))
+  ([a5632d0](https://github.com/mittwald/flow/commit/a5632d09bdd70524025727ff146d8047cb6c0361))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.417](https://github.com/mittwald/flow/compare/0.1.0-alpha.416...0.1.0-alpha.417) (2025-02-04)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.416](https://github.com/mittwald/flow/compare/0.1.0-alpha.415...0.1.0-alpha.416) (2025-02-04)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.415](https://github.com/mittwald/flow/compare/0.1.0-alpha.414...0.1.0-alpha.415) (2025-02-04)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.414](https://github.com/mittwald/flow/compare/0.1.0-alpha.413...0.1.0-alpha.414) (2025-02-04)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.413](https://github.com/mittwald/flow/compare/0.1.0-alpha.412...0.1.0-alpha.413) (2025-01-31)
 
 ### Features

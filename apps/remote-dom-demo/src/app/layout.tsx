@@ -1,13 +1,15 @@
 "use client";
+import {
+  HeaderNavigation,
+  Link,
+  Separator,
+} from "@mittwald/flow-react-components";
 import "@mittwald/flow-react-components/all.css";
-import type { PropsWithChildren } from "react";
 import { LinkProvider } from "@mittwald/flow-react-components/nextjs";
-import { HeaderNavigation } from "@mittwald/flow-react-components";
-import { Link } from "@mittwald/flow-react-components";
-import styles from "./layout.module.css";
-import { Separator } from "@mittwald/flow-react-components";
-import RemoteRoot from "@mittwald/flow-remote-react-components/RemoteRoot";
+import { RemoteRoot } from "@mittwald/flow-remote-react-components/RemoteRoot";
 import { usePathname } from "next/navigation";
+import type { PropsWithChildren } from "react";
+import styles from "./layout.module.css";
 
 export default function Layout(props: PropsWithChildren) {
   const p = usePathname();
