@@ -788,6 +788,19 @@ All notable changes to this project will be documented in this file. See
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.420](https://github.com/mittwald/flow/compare/0.1.0-alpha.419...0.1.0-alpha.420) (2025-02-10)
+
+### Bug Fixes
+
+- fix List renders without entries
+  ([#1164](https://github.com/mittwald/flow/issues/1164))
+  ([b505747](https://github.com/mittwald/flow/commit/b505747bf80d61d2f4ac7aa7a2078be754719daf))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.419](https://github.com/mittwald/flow/compare/0.1.0-alpha.418...0.1.0-alpha.419) (2025-02-06)
 
 ### Bug Fixes

@@ -5,8 +5,8 @@ import {
   observable,
 } from "mobx";
 import useSelector from "@/lib/mobx/useSelector";
-import { useRef } from "react";
 import { sleep } from "@/lib/promises/sleep";
+import { useStatic } from "@/lib/hooks/useStatic";
 
 export type ActionStateValue =
   | "isIdle"
@@ -37,7 +37,7 @@ export class ActionState {
   }
 
   public static useNew(): ActionState {
-    return useRef(new ActionState()).current;
+    return useStatic(() => new ActionState());
   }
 
   public updateState(newState: ActionStateValue): void {

@@ -1,9 +1,9 @@
 import type { ReactElement } from "react";
-import { useRef } from "react";
 import useSelector from "@/lib/mobx/useSelector";
 import { action, makeObservable, observable } from "mobx";
 import Timer from "@/lib/timer/Timer";
 import type { NotificationProps } from "@/components/Notification";
+import { useStatic } from "@/lib/hooks/useStatic";
 
 interface NotificationMetaData {
   readonly id: number;
@@ -29,7 +29,7 @@ export class NotificationController {
   }
 
   public static useNew(): NotificationController {
-    return useRef(new NotificationController()).current;
+    return useStatic(() => new NotificationController());
   }
 
   public useNotifications(): NotificationData[] {
