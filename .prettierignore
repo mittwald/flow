@@ -1,9 +1,14 @@
+apps/docs/out
 node_modules
 dist
 .nx
 .yarn
 .next
 .pnp*
+pnpm-*
+CHANGELOG.md
 
 /.nx/cache
-packages/docs/src/lib/liveCode/dynamicImports.ts
+apps/docs/src/lib/liveCode/dynamicImports.ts
+
+/.nx/workspace-data

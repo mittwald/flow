@@ -1,15 +1,3 @@
 {
-  "compilerOptions": {
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "jsx": "react",
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["src/*"]
-    },
-    "plugins": [{ "name": "typescript-plugin-css-modules" }]
-  },
-  "extends": "../../tsconfig.json",
-  "include": ["types.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules", "dist"]
+  "extends": "../typescript-config/react-library.json"
 }

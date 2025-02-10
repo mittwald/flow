@@ -12,7 +12,7 @@ export interface OverlayControllerOptions {
 }
 
 export class OverlayController {
-  public isOpen: boolean;
+  public isOpen = false;
   private onOpenHandlers = new Set<OpenStateHandler>();
   private onCloseHandlers = new Set<OpenStateHandler>();
 

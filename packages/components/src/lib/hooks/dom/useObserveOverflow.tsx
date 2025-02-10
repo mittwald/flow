@@ -8,7 +8,7 @@ interface UseObserveOverflowReturn {
 }
 
 export const useObserveOverflow = (): UseObserveOverflowReturn => {
-  const observer = useRef<IntersectionObserver>();
+  const observer = useRef<IntersectionObserver>(null);
   const [isOverflowing, setIsOverflowing] = useState(false);
 
   const ref = useCallbackRef<never>(null, (el: unknown) => {
@@ -49,5 +49,5 @@ export const useObserveOverflow = (): UseObserveOverflowReturn => {
   return {
     ref,
     isOverflowing,
-  };
+  } as never;
 };

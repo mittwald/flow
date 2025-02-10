@@ -1,11 +1,11 @@
 import type { FC, PropsWithChildren } from "react";
 import React from "react";
-import { Button } from "@/components/Button";
-import { IconContextMenu } from "@/components/Icon/components/icons";
-import { ContextMenuTrigger } from "@/components/ContextMenu";
 import locales from "../../../../../../locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 import type { PropsWithClassName } from "@/lib/types/props";
+import { IconContextMenu } from "@/components/Icon/components/icons";
+import ButtonView from "@/views/ButtonView";
+import { ContextMenuTrigger } from "@/components/ContextMenu";
 
 interface Props extends PropsWithChildren, PropsWithClassName {}
 
@@ -15,7 +15,7 @@ export const OptionsButton: FC<Props> = (props) => {
 
   return (
     <ContextMenuTrigger>
-      <Button
+      <ButtonView
         variant="plain"
         color="secondary"
         className={className}
@@ -23,7 +23,7 @@ export const OptionsButton: FC<Props> = (props) => {
         tunnelId={null}
       >
         <IconContextMenu />
-      </Button>
+      </ButtonView>
       {children}
     </ContextMenuTrigger>
   );

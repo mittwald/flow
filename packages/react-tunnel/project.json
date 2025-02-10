@@ -1,0 +1,5 @@
+{
+  "name": "react-tunnel",
+  "projectType": "library",
+  "sourceRoot": "packages/react-tunnel/src"
+}

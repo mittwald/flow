@@ -1,0 +1,17 @@
+{
+  "extends": "../typescript-config/react-library.json",
+  "references": [
+    {
+      "path": "./tsconfig.vite.json"
+    },
+    {
+      "path": "../remote-core"
+    },
+    {
+      "path": "../remote-elements"
+    },
+    {
+      "path": "../components"
+    }
+  ]
+}

@@ -1,7 +1,10 @@
-import * as Aria from "react-aria-components";
 import React from "react";
+import type { OverlayTriggerProps } from "@/components/OverlayTrigger";
 import { OverlayTrigger } from "@/components/OverlayTrigger";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import DialogTriggerView from "@/views/DialogTriggerView";
+
+export type PopoverTriggerProps = OverlayTriggerProps;
 
 export const PopoverTrigger = flowComponent("PopoverTrigger", (props) => {
   const { children, ...triggerProps } = props;
@@ -9,7 +12,7 @@ export const PopoverTrigger = flowComponent("PopoverTrigger", (props) => {
     <OverlayTrigger
       overlayType="Popover"
       {...triggerProps}
-      component={Aria.DialogTrigger}
+      component={DialogTriggerView}
     >
       {children}
     </OverlayTrigger>

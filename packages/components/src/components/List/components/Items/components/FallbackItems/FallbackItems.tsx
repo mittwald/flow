@@ -9,6 +9,8 @@ export const FallbackItems: FC = () => {
   const fallback = list.itemView?.fallback ?? <SkeletonView />;
 
   return Array.from(Array(5)).map((_, i) => (
-    <ItemContainer key={i}>{cloneElement(fallback)}</ItemContainer>
+    <ItemContainer id={i} data={i as never} key={i}>
+      {cloneElement(fallback)}
+    </ItemContainer>
   ));
 };

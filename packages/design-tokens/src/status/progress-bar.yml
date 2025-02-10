@@ -23,7 +23,6 @@ progress-bar:
   background-color:
     value: "{neutral-outline-background-color.default}"
 
-
   # Info
   info-fill-background-color:
     value: "{info-solid-background-color.default}"

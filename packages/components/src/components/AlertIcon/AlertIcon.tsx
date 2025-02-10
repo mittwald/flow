@@ -23,6 +23,7 @@ const icons: Record<Status, ComponentType> = {
   warning: IconWarning,
 };
 
+/** @flr-generate all */
 export const AlertIcon: FC<AlertIconProps> = (props) => {
   const { status = "info", className, ...rest } = props;
 

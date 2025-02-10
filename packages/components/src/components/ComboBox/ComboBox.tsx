@@ -37,7 +37,6 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
       // default: do nothing
     },
     controller: controllerFromProps,
-    refProp: ref,
     ...rest
   } = props;
 
@@ -81,7 +80,6 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
       menuTrigger={menuTrigger}
       className={rootClassName}
       {...rest}
-      ref={ref}
       onSelectionChange={handleOnSelectionChange}
       onOpenChange={(isOpen) => controller.setOpen(isOpen)}
     >

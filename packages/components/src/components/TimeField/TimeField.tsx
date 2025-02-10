@@ -9,12 +9,13 @@ import { FieldError } from "@/components/FieldError";
 import clsx from "clsx";
 import styles from "./TimeField.module.scss";
 
-export interface TimeFieldProps<T extends Aria.TimeValue>
+export interface TimeFieldProps<T extends Aria.TimeValue = Aria.TimeValue>
   extends PropsWithChildren<Omit<Aria.TimeFieldProps<T>, "children">> {
   /** An error message to be displayed below the field */
   errorMessage?: ReactNode;
 }
 
+/** @flr-generate all */
 export const TimeField = flowComponent("TimeField", (props) => {
   const { children, errorMessage, className, ...rest } = props;
 

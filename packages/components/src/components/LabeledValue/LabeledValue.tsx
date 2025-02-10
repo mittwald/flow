@@ -10,6 +10,7 @@ export interface LabeledValueProps
   extends PropsWithChildren,
     PropsWithClassName {}
 
+/** @flr-generate all */
 export const LabeledValue: FC<LabeledValueProps> = (props) => {
   const { children, className } = props;
 

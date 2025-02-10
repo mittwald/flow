@@ -1,4 +1,3 @@
-/* eslint-disable */
 /* auto-generated file */
 export { IconApp } from "./IconApp";
 export { IconAutoresponder } from "./IconAutoresponder";

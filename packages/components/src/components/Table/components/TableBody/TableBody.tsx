@@ -6,6 +6,7 @@ import styles from "../../Table.module.scss";
 
 export type TableBodyProps = Aria.TableBodyProps<never>;
 
+/** @flr-generate all */
 export const TableBody: FC<TableBodyProps> = (props) => {
   const { children, className, ...rest } = props;
 

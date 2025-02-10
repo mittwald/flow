@@ -19,7 +19,11 @@ import type { AlertBadgeProps } from "@/components/AlertBadge";
 import type { ActionGroupProps } from "@/components/ActionGroup";
 import type { AvatarProps } from "@/components/Avatar";
 import type { ActionProps } from "@/components/Action";
-import type { ContextMenuProps, MenuItemProps } from "@/components/ContextMenu";
+import type {
+  ContextMenuProps,
+  ContextMenuTriggerProps,
+  MenuItemProps,
+} from "@/components/ContextMenu";
 import type { SelectProps } from "@/components/Select";
 import type {
   RadioButtonProps,
@@ -33,15 +37,17 @@ import type { CheckboxGroupProps } from "@/components/CheckboxGroup";
 import type { CheckboxProps } from "@/components/Checkbox";
 import type { CheckboxButtonProps } from "@/components/CheckboxButton";
 import type { TabsProps } from "@/components/Tabs";
-import type { ModalProps } from "@/components/Modal";
+import type { ModalProps, ModalTriggerProps } from "@/components/Modal";
 import type { SectionProps } from "@/components/Section";
 import type { SliderProps } from "@/components/Slider";
 import type { CounterBadgeProps } from "@/components/CounterBadge";
 import type { FlowComponentName } from "@/components/propTypes/types";
-import type { ContextualHelpProps } from "@/components/ContextualHelp";
-import type { PopoverProps } from "@/components/Popover";
+import type {
+  ContextualHelpProps,
+  ContextualHelpTriggerProps,
+} from "@/components/ContextualHelp";
+import type { PopoverProps, PopoverTriggerProps } from "@/components/Popover";
 import type { ContextMenuSectionProps } from "@/components/ContextMenu/components/ContextMenuSection";
-import type { OverlayTriggerProps } from "@/components/OverlayTrigger";
 import type { ListProps } from "@/components/List";
 import type { SearchFieldProps } from "@/components/SearchField";
 import type { BadgeProps } from "@/components/Badge";
@@ -79,9 +85,9 @@ export interface FlowComponentPropsTypes {
   Content: ContentProps;
   ContextMenu: ContextMenuProps;
   ContextMenuSection: ContextMenuSectionProps;
-  ContextMenuTrigger: OverlayTriggerProps;
+  ContextMenuTrigger: ContextMenuTriggerProps;
   ContextualHelp: ContextualHelpProps;
-  ContextualHelpTrigger: OverlayTriggerProps;
+  ContextualHelpTrigger: ContextualHelpTriggerProps;
   CopyButton: CopyButtonProps;
   CounterBadge: CounterBadgeProps;
   CountryOptions: CountryOptionsProps;
@@ -104,11 +110,11 @@ export interface FlowComponentPropsTypes {
   ListSummary: ListSummaryProps;
   MenuItem: MenuItemProps;
   Modal: ModalProps;
-  ModalTrigger: OverlayTriggerProps;
+  ModalTrigger: ModalTriggerProps;
   NumberField: NumberFieldProps;
   Option: OptionProps;
   Popover: PopoverProps;
-  PopoverTrigger: OverlayTriggerProps;
+  PopoverTrigger: PopoverTriggerProps;
   Radio: RadioProps;
   RadioButton: RadioButtonProps;
   RadioGroup: RadioGroupProps;

@@ -7,7 +7,7 @@ import { TypedListLoaderAsync } from "@/components/List/setupComponents/ListLoad
 import { TypedListLoaderAsyncResource } from "@/components/List/setupComponents/ListLoaderAsyncResource";
 import { TypedListStaticData } from "@/components/List/setupComponents/ListStaticData";
 import { TypedListSearch } from "@/components/List/setupComponents/ListSearch";
-import { View } from "@/components/List/components/Items/components/Item/components/View";
+import { ListItemView } from "@/components/List";
 import type { ComponentType } from "react";
 import { TableColumn } from "@/components/List/setupComponents/TableColumn";
 import { TableCell } from "@/components/List/setupComponents/TableCell";
@@ -25,7 +25,7 @@ export const typedList = <T>() => ({
   Search: TypedListSearch<T>(),
   Sorting: TypedListSorting<T>(),
   Item: TypedListItem<T>(),
-  ItemView: View,
+  ItemView: ListItemView,
   TableHeader: TableHeader<T>,
   TableColumn: TableColumn<T>,
   TableBody: TableBody<T>,

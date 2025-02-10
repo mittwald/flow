@@ -1,3 +1,4 @@
+export * from "./view";
 import { Message } from "./Message";
 
 export { type MessageProps, Message } from "./Message";

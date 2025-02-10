@@ -1,10 +1,10 @@
 import type { FC } from "react";
 import React from "react";
 import type { ButtonProps } from "@/components/Button";
-import { Button } from "@/components/Button";
 import { useList } from "@/components/List/hooks/useList";
 import locales from "../../../../locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
+import ButtonView from "@/views/ButtonView";
 
 export const ShowNextBatchButton: FC<ButtonProps> = (props) => {
   const stringFormatter = useLocalizedStringFormatter(locales);
@@ -19,7 +19,7 @@ export const ShowNextBatchButton: FC<ButtonProps> = (props) => {
   }
 
   return (
-    <Button
+    <ButtonView
       isPending={isLoading && !isInitiallyLoading}
       isDisabled={isInitiallyLoading}
       {...props}
@@ -28,7 +28,7 @@ export const ShowNextBatchButton: FC<ButtonProps> = (props) => {
       size="s"
     >
       {stringFormatter.format("list.showMore")}
-    </Button>
+    </ButtonView>
   );
 };
 

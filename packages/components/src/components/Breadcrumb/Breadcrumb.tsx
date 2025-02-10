@@ -15,6 +15,7 @@ export interface BreadcrumbProps
   color?: "primary" | "dark" | "light";
 }
 
+/** @flr-generate all */
 export const Breadcrumb: FC<BreadcrumbProps> = (props) => {
   const { children, className, color = "primary", ...rest } = props;
 

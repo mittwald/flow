@@ -1,22 +1,14 @@
-import type { ComponentProps } from "react";
-import React, { forwardRef } from "react";
+import type { ComponentProps, FC, Ref } from "react";
+import React from "react";
 import NextLink from "next/link";
 
 interface Props extends Omit<ComponentProps<"a">, "ref"> {
+  ref?: Ref<HTMLAnchorElement>;
   isDisabled?: boolean;
 }
 
-export const Link = forwardRef<HTMLAnchorElement, Props>(
-  function Link(props, ref) {
-    const { href, isDisabled, ...rest } = props;
+export const Link: FC<Props> = (props) => {
+  const { href, isDisabled, ...rest } = props;
 
-    return (
-      <NextLink
-        href={href ?? "#"}
-        aria-disabled={isDisabled}
-        {...rest}
-        ref={ref}
-      />
-    );
-  },
-);
+  return <NextLink href={href ?? "#"} aria-disabled={isDisabled} {...rest} />;
+};

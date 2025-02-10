@@ -1,0 +1,12 @@
+{
+  "name": "@mittwald/typescript-config",
+  "private": true,
+  "version": "0.1.0",
+  "files": [
+    "base.json",
+    "library.json",
+    "nextjs.json",
+    "react-library.json",
+    "web-library.json"
+  ]
+}

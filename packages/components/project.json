@@ -1,0 +1,46 @@
+{
+  "implicitDependencies": ["tokens"],
+  "name": "components",
+  "projectType": "library",
+  "sourceRoot": "packages/components/src",
+  "targets": {
+    "build:icons": {
+      "cache": true,
+      "inputs": [
+        "{projectRoot}/dev/icons/**/*",
+        "{projectRoot}/src/components/Icon/tablerMappings.yaml"
+      ],
+      "outputs": [
+        "{projectRoot}/src/components/Icon/components/icons/*.tsx",
+        "{projectRoot}/src/components/Icon/components/icons/index.ts"
+      ]
+    },
+    "build:remote-components": {
+      "cache": true,
+      "inputs": [
+        "{projectRoot}/dev/remote-components-generator/**/*",
+        "{projectRoot}/src/**/*"
+      ],
+      "dependsOn": ["build:docs-properties"],
+      "outputs": [
+        "{projectRoot}/src/components/**/view.ts",
+        "{projectRoot}/src/views/*",
+        "{workspaceRoot}/packages/remote-elements/src/auto-generated/**/*",
+        "{workspaceRoot}/packages/remote-react-components/src/auto-generated/**/*",
+        "{workspaceRoot}/packages/remote-react-renderer/src/auto-generated/**/*"
+      ]
+    },
+    "build": {
+      "cache": true,
+      "dependsOn": ["build:icons", "build:remote-components", "^build"]
+    },
+    "build:docs-properties": {
+      "cache": true,
+      "inputs": [
+        "{projectRoot}/src/**/*.tsx",
+        "{projectRoot}/dev/createDocPropertiesJson.ts"
+      ],
+      "outputs": ["{projectRoot}/dist/doc-properties.json"]
+    }
+  }
+}
