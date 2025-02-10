@@ -11,6 +11,7 @@ import {
 import { InlineCode } from "@/components/InlineCode";
 import { dummyText } from "@/lib/dev/dummyText";
 import { TableFooterRow } from "@/components/Table/components/TableFooterRow";
+import { IconCheck, IconClose } from "@/components/Icon/components/icons";
 
 const meta: Meta<typeof Table> = {
   title: "Structure/Table",
@@ -108,6 +109,29 @@ export const WithRowHeader: Story = {
         <TableRow>
           <TableCell rowHeader>20 GB additional storage</TableCell>
           <TableCell>2,00 €</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  ),
+};
+
+export const HorizontallyCenteredColumns: Story = {
+  render: (props) => (
+    <Table {...props} aria-label="Scopes">
+      <TableHeader>
+        <TableColumn>Bereich</TableColumn>
+        <TableColumn horizontalAlign="center">Lesen</TableColumn>
+        <TableColumn horizontalAlign="center">Schreiben</TableColumn>
+      </TableHeader>
+      <TableBody>
+        <TableRow>
+          <TableCell>Projekt</TableCell>
+          <TableCell horizontalAlign="center">
+            <IconCheck />
+          </TableCell>
+          <TableCell horizontalAlign="center">
+            <IconClose />
+          </TableCell>
         </TableRow>
       </TableBody>
     </Table>
