@@ -439,6 +439,7 @@
   "dependencies": {
     "@chakra-ui/live-region": "^2.1.0",
     "@internationalized/date": "^3.6.0",
+    "@internationalized/string": "^3.2.5",
     "@internationalized/string-compiler": "^3.2.6",
     "@mittwald/react-tunnel": "workspace:^",
     "@mittwald/react-use-promise": "^2.6.0",

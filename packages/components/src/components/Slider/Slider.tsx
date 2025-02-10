@@ -10,7 +10,7 @@ import { PropsContextProvider } from "@/lib/propsContext";
 import { Button } from "@/components/Button";
 import { IconMinus, IconPlus } from "@/components/Icon/components/icons";
 import locales from "./locales/*.locale.json";
-import { useLocalizedStringFormatter } from "react-aria";
+import useLocalizedStringFormatter from "@/lib/i18n/useLocalizedStringFormatter";
 
 export interface SliderProps
   extends FlowComponentProps,

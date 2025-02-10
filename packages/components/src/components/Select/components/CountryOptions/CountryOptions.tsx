@@ -2,7 +2,7 @@ import type { PropsWithChildren } from "react";
 import React, { useMemo } from "react";
 import type { ListBoxProps } from "react-aria-components";
 import { Option } from "@/components/Option";
-import { useLocalizedStringFormatter } from "react-aria";
+import useLocalizedStringFormatter from "@/lib/i18n/useLocalizedStringFormatter";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import locales from "./locales/*.locale.json";

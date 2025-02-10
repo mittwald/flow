@@ -4,7 +4,7 @@ import { OverlayTrigger } from "@/components/OverlayTrigger";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import locales from "./locales/*.locale.json";
-import { useLocalizedStringFormatter } from "react-aria";
+import useLocalizedStringFormatter from "@/lib/i18n/useLocalizedStringFormatter";
 import { IconInfo } from "@/components/Icon/components/icons";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 

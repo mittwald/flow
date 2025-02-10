@@ -7,7 +7,7 @@ import { Heading } from "@/components/Heading";
 import { Section } from "@/components/Section";
 import MenuItem from "@/components/MenuItem";
 import locales from "../../../../locales/*.locale.json";
-import { useLocalizedStringFormatter } from "react-aria";
+import useLocalizedStringFormatter from "@/lib/i18n/useLocalizedStringFormatter";
 import { IconView } from "@/components/Icon/components/icons";
 import { useList } from "@/components/List";
 import type { ListViewMode } from "@/components/List/model/types";
