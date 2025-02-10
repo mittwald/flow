@@ -1,6 +1,9 @@
 import { useLocale } from "react-aria-components";
 import { useMemo } from "react";
-import type { LocalizedStrings } from "@internationalized/string";
+import type {
+  LocalizedString,
+  LocalizedStrings,
+} from "@internationalized/string";
 import {
   LocalizedStringDictionary,
   LocalizedStringFormatter,
@@ -8,7 +11,7 @@ import {
 
 const useLocalizedStringFormatter = <
   K extends string = string,
-  T extends string = string,
+  T extends LocalizedString = string,
 >(
   strings: LocalizedStrings<K, T>,
   defaultFallbackLocale = "en-EN",
