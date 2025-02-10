@@ -4707,6 +4707,7 @@ const RAW_RUNTIME_STATE =
           ["@chakra-ui/live-region", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:2.1.0"],\
           ["@faker-js/faker", "npm:9.2.0"],\
           ["@internationalized/date", "npm:3.6.0"],\
+          ["@internationalized/string", "npm:3.2.5"],\
           ["@internationalized/string-compiler", "npm:3.2.6"],\
           ["@mittwald/flow-design-tokens", "workspace:packages/design-tokens"],\
           ["@mittwald/react-tunnel", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#workspace:packages/react-tunnel"],\
@@ -4821,6 +4822,7 @@ const RAW_RUNTIME_STATE =
           ["@chakra-ui/live-region", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:2.1.0"],\
           ["@faker-js/faker", "npm:9.2.0"],\
           ["@internationalized/date", "npm:3.6.0"],\
+          ["@internationalized/string", "npm:3.2.5"],\
           ["@internationalized/string-compiler", "npm:3.2.6"],\
           ["@mittwald/flow-design-tokens", "workspace:packages/design-tokens"],\
           ["@mittwald/react-tunnel", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#workspace:packages/react-tunnel"],\
@@ -4929,6 +4931,7 @@ const RAW_RUNTIME_STATE =
           ["@chakra-ui/live-region", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#npm:2.1.0"],\
           ["@faker-js/faker", "npm:9.2.0"],\
           ["@internationalized/date", "npm:3.6.0"],\
+          ["@internationalized/string", "npm:3.2.5"],\
           ["@internationalized/string-compiler", "npm:3.2.6"],\
           ["@mittwald/flow-design-tokens", "workspace:packages/design-tokens"],\
           ["@mittwald/react-tunnel", "virtual:ab0bf91802555465ebc7d7ba21ec0819758bb9ee11045ccd34f02a13730ce9f42ce681600fe46d0f4f24266bbd2a9c664d502c53968dc8e4b1c38c49b0728fef#workspace:packages/react-tunnel"],\
