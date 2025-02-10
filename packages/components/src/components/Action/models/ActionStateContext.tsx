@@ -1,8 +1,9 @@
 import type { FC, PropsWithChildren } from "react";
-import React, { createContext, useContext, useEffect, useRef } from "react";
+import React, { createContext, useContext, useEffect } from "react";
 import type { ActionState } from "@/components/Action/models/ActionState";
 import { action, computed, makeObservable, observable } from "mobx";
 import useSelector from "@/lib/mobx/useSelector";
+import { useStatic } from "@/lib/hooks/useStatic";
 
 export class ActionStateContext {
   public states = new Set<ActionState>();
@@ -17,7 +18,7 @@ export class ActionStateContext {
   }
 
   public static useNew(): ActionStateContext {
-    return useRef(new ActionStateContext()).current;
+    return useStatic(() => new ActionStateContext());
   }
 
   public static useRegisterState(state: ActionState): void {
