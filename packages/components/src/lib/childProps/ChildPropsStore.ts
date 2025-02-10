@@ -1,7 +1,8 @@
 import { action, makeObservable, observable } from "mobx";
-import { useContext, useRef } from "react";
+import { useContext } from "react";
 import useSelector from "@/lib/mobx/useSelector";
 import { childPropsContext } from "@/lib/childProps/context";
+import { useStatic } from "@/lib/hooks/useStatic";
 
 export type ChildProps = object;
 
@@ -19,7 +20,7 @@ export class ChildPropsStore {
   }
 
   public static useNew(scope: string): ChildPropsStore {
-    return useRef(new ChildPropsStore(scope)).current;
+    return useStatic(() => new ChildPropsStore(scope));
   }
 
   public static useFromContext(scope: string): ChildPropsStore | undefined {
