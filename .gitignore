@@ -16,3 +16,4 @@ apps/docs/src/lib/liveCode/dynamicImports.ts
 coverage
 packages/components/out
 .nx/workspace-data
+coverage/*.json

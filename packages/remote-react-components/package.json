@@ -36,15 +36,15 @@
     "@mittwald/flow-remote-core": "workspace:*",
     "@mittwald/flow-remote-elements": "workspace:*",
     "@remote-dom/react": "^1.2.1",
-    "@types/react": "^19"
+    "@types/react": "^19.0.8"
   },
   "devDependencies": {
     "@mittwald/flow-remote-react-renderer": "workspace:*",
     "@mittwald/typescript-config": "workspace:*",
     "@types/node": "^22.13.1",
-    "nx": "^20.4.1",
-    "prettier": "^3.4.2",
-    "react": "^19",
+    "nx": "^20.4.2",
+    "prettier": "^3.5.0",
+    "react": "^19.0.0",
     "react-hook-form": "^7.54.2",
     "rimraf": "^6.0.1",
     "rollup-plugin-auto-named-exports": "1.0.0-beta.3",
