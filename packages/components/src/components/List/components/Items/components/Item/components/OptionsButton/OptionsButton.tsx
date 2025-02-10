@@ -4,7 +4,7 @@ import { Button } from "@/components/Button";
 import { IconContextMenu } from "@/components/Icon/components/icons";
 import { ContextMenuTrigger } from "@/components/ContextMenu";
 import locales from "../../../../../../locales/*.locale.json";
-import { useLocalizedStringFormatter } from "react-aria";
+import useLocalizedStringFormatter from "@/lib/i18n/useLocalizedStringFormatter";
 import type { PropsWithClassName } from "@/lib/types/props";
 
 interface Props extends PropsWithChildren, PropsWithClassName {}

@@ -12,7 +12,7 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { Button } from "@/components/Button";
 import { IconClose, IconSearch } from "@/components/Icon/components/icons";
 import locales from "./locales/*.locale.json";
-import { useLocalizedStringFormatter } from "react-aria";
+import useLocalizedStringFormatter from "@/lib/i18n/useLocalizedStringFormatter";
 
 export interface SearchFieldProps
   extends PropsWithChildren<Omit<Aria.SearchFieldProps, "children">>,

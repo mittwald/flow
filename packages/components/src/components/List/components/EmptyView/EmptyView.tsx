@@ -5,7 +5,7 @@ import { IconSearch } from "@/components/Icon/components/icons";
 import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
 import locales from "../../locales/*.locale.json";
-import { useLocalizedStringFormatter } from "react-aria";
+import useLocalizedStringFormatter from "@/lib/i18n/useLocalizedStringFormatter";
 
 export const EmptyView: FC = () => {
   const stringFormatter = useLocalizedStringFormatter(locales);

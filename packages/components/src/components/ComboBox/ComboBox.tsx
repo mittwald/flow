@@ -12,7 +12,7 @@ import clsx from "clsx";
 import styles from "./ComboBox.module.scss";
 import formFieldStyles from "@/components/FormField/FormField.module.scss";
 import locales from "./locales/*.locale.json";
-import { useLocalizedStringFormatter } from "react-aria";
+import useLocalizedStringFormatter from "@/lib/i18n/useLocalizedStringFormatter";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { type OverlayController, useOverlayController } from "@/lib/controller";

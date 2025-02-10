@@ -6,7 +6,7 @@ import {
 } from "@/components/Icon/components/icons";
 import type { LinkProps } from "@/components/Link";
 import locales from "../../locales/*.locale.json";
-import { useLocalizedStringFormatter } from "react-aria";
+import useLocalizedStringFormatter from "@/lib/i18n/useLocalizedStringFormatter";
 
 export const LinkIcon: FC<LinkProps> = (props) => {
   const { unstyled, target, download } = props;

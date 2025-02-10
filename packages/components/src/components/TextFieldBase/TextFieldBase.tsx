@@ -8,7 +8,7 @@ import { ClearPropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { FieldError } from "@/components/FieldError";
 import { FieldDescription } from "@/components/FieldDescription";
 import locales from "./locales/*.locale.json";
-import { useLocalizedStringFormatter } from "react-aria";
+import useLocalizedStringFormatter from "@/lib/i18n/useLocalizedStringFormatter";
 
 export interface TextFieldBaseProps
   extends PropsWithChildren<Omit<Aria.TextFieldProps, "children">> {

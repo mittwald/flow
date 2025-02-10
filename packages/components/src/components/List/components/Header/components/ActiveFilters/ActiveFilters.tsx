@@ -8,7 +8,7 @@ import { IconDelete, IconSave } from "@/components/Icon/components/icons";
 import locales from "../../../../locales/*.locale.json";
 import { Translate } from "@/lib/react/components/Translate";
 import { observer } from "mobx-react-lite";
-import { useLocalizedStringFormatter } from "react-aria";
+import useLocalizedStringFormatter from "@/lib/i18n/useLocalizedStringFormatter";
 import { Tooltip, TooltipTrigger } from "@/components/Tooltip";
 import { Icon } from "@/components/Icon";
 import { IconArrowBackUp } from "@tabler/icons-react";

@@ -4,7 +4,7 @@ import styles from "./Label.module.scss";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import { ClearPropsContext } from "@/lib/propsContext";
-import { useLocalizedStringFormatter } from "react-aria";
+import useLocalizedStringFormatter from "@/lib/i18n/useLocalizedStringFormatter";
 import locales from "./locales/*.locale.json";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";

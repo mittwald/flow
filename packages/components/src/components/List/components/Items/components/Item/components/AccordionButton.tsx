@@ -6,7 +6,7 @@ import {
   IconChevronUp,
 } from "@/components/Icon/components/icons";
 import locales from "../../../../../locales/*.locale.json";
-import { useLocalizedStringFormatter } from "react-aria";
+import useLocalizedStringFormatter from "@/lib/i18n/useLocalizedStringFormatter";
 
 interface Props extends PropsWithChildren {
   isExpanded: boolean;
