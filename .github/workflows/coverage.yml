@@ -24,7 +24,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
 
       - name: Test components
-        run: pnpm components test:unit --coverage.enabled true
+        run: pnpm nx test:unit components --coverage.enabled true
 
       - name: Report Coverage
         if: always()
