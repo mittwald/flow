@@ -4,8 +4,10 @@ import { useList } from "@/components/List/hooks/useList";
 import type { FC } from "react";
 import { cloneElement } from "react";
 
+export type FallbackItemsProps = never;
+
 /** @flr-generate all */
-export const FallbackItems: FC = () => {
+export const FallbackItems: FC<FallbackItemsProps> = () => {
   const list = useList();
   const fallback = list.itemView?.fallback ?? <SkeletonView />;
 
