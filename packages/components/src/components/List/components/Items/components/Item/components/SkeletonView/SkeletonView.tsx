@@ -7,6 +7,7 @@ import { ListItemView, useList } from "@/components/List";
 import { Skeleton } from "@/components/Skeleton";
 import { Avatar } from "@/components/Avatar";
 
+/** @flr-generate all */
 export const SkeletonView: FC = () => {
   const list = useList();
 

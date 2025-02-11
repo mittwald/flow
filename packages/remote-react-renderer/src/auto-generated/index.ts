@@ -28,6 +28,7 @@ import { DatePicker as DatePicker } from "@mittwald/flow-react-components";
 import { DateRangePicker as DateRangePicker } from "@mittwald/flow-react-components";
 import { DialogTrigger as DialogTrigger } from "@mittwald/flow-react-components";
 import { Div as Div } from "@mittwald/flow-react-components";
+import { FallbackItems as FallbackItems } from "@mittwald/flow-react-components";
 import { FieldDescription as FieldDescription } from "@mittwald/flow-react-components";
 import { FieldError as FieldError } from "@mittwald/flow-react-components";
 import { FileCard as FileCard } from "@mittwald/flow-react-components";
@@ -78,6 +79,7 @@ import { Select as Select } from "@mittwald/flow-react-components";
 import { Separator as Separator } from "@mittwald/flow-react-components";
 import { Skeleton as Skeleton } from "@mittwald/flow-react-components";
 import { SkeletonText as SkeletonText } from "@mittwald/flow-react-components";
+import { SkeletonView as SkeletonView } from "@mittwald/flow-react-components";
 import { Slider as Slider } from "@mittwald/flow-react-components";
 import { Switch as Switch } from "@mittwald/flow-react-components";
 import { Tab as Tab } from "@mittwald/flow-react-components";
@@ -129,6 +131,7 @@ export const flowComponents = {
   "flr-date-range-picker": createFlowRemoteComponentRenderer(DateRangePicker),
   "flr-dialog-trigger": createFlowRemoteComponentRenderer(DialogTrigger),
   "flr-div": createFlowRemoteComponentRenderer(Div),
+  "flr-fallback-items": createFlowRemoteComponentRenderer(FallbackItems),
   "flr-field-description": createFlowRemoteComponentRenderer(FieldDescription),
   "flr-field-error": createFlowRemoteComponentRenderer(FieldError),
   "flr-file-card": createFlowRemoteComponentRenderer(FileCard),
@@ -183,6 +186,7 @@ export const flowComponents = {
   "flr-separator": createFlowRemoteComponentRenderer(Separator),
   "flr-skeleton": createFlowRemoteComponentRenderer(Skeleton),
   "flr-skeleton-text": createFlowRemoteComponentRenderer(SkeletonText),
+  "flr-skeleton-view": createFlowRemoteComponentRenderer(SkeletonView),
   "flr-slider": createFlowRemoteComponentRenderer(Slider),
   "flr-switch": createFlowRemoteComponentRenderer(Switch),
   "flr-tab": createFlowRemoteComponentRenderer(Tab),
