@@ -8,12 +8,14 @@ export { type RemoteFragmentElement } from "@mittwald/flow-remote-elements";
 export const Fragment = createFlowRemoteComponent(
   "flr-fragment",
   "Fragment",
+  {
+    clearPropsContext: false,
+  },
   RemoteFragmentElement,
   {
     slotProps: {
       wrapper: false,
     },
-
     eventProps: {},
   },
 );

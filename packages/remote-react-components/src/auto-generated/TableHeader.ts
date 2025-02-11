@@ -8,12 +8,14 @@ export { type RemoteTableHeaderElement } from "@mittwald/flow-remote-elements";
 export const TableHeader = createFlowRemoteComponent(
   "flr-table-header",
   "TableHeader",
+  {
+    clearPropsContext: false,
+  },
   RemoteTableHeaderElement,
   {
     slotProps: {
       wrapper: false,
     },
-
     eventProps: {
       onHoverChange: { event: "hoverChange" } as never,
       onHoverEnd: { event: "hoverEnd" } as never,

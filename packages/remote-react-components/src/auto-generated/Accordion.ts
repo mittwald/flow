@@ -8,12 +8,14 @@ export { type RemoteAccordionElement } from "@mittwald/flow-remote-elements";
 export const Accordion = createFlowRemoteComponent(
   "flr-accordion",
   "Accordion",
+  {
+    clearPropsContext: false,
+  },
   RemoteAccordionElement,
   {
     slotProps: {
       wrapper: false,
     },
-
     eventProps: {
       onAbort: { event: "abort" } as never,
       onAbortCapture: { event: "abortCapture" } as never,

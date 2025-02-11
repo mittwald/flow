@@ -15,7 +15,7 @@ export const checkTagIsSet = (
   tags: StringIndexedObject<string> = {},
   key: string,
 ) => {
-  return !!tags[`flr-${key}`];
+  return `flr-${key}` in tags;
 };
 
 export const checkTagIs = (

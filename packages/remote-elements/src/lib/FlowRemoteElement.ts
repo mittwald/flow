@@ -1,7 +1,7 @@
-import type { EmptyObject } from "type-fest";
-import { RemoteElement, RemoteEvent } from "@mittwald/flow-remote-core";
-import { isObjectType, omit } from "remeda";
 import { getObjectKeysIncludingProtoTypes } from "@/lib/getObjectKeysIncludingProtoTypes";
+import { RemoteElement, RemoteEvent } from "@mittwald/flow-remote-core";
+import { isArray, isObjectType, omit } from "remeda";
+import type { EmptyObject } from "type-fest";
 
 // eslint-disable-next-line
 type ExplicitAny = any;
@@ -35,7 +35,7 @@ export class FlowRemoteElement<
       let finalEvent = event;
 
       if (event instanceof RemoteEvent) {
-        if (isObjectType(event.detail)) {
+        if (!isArray(event.detail) && isObjectType(event.detail)) {
           const propsToLiftUpFromDetails = omit(
             event.detail,
             getObjectKeysIncludingProtoTypes(event) as never,

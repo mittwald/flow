@@ -8,12 +8,14 @@ export { type RemoteTextAreaElement } from "@mittwald/flow-remote-elements";
 export const TextArea = createFlowRemoteComponent(
   "flr-text-area",
   "TextArea",
+  {
+    clearPropsContext: false,
+  },
   RemoteTextAreaElement,
   {
     slotProps: {
       wrapper: false,
     },
-
     eventProps: {
       onBeforeInput: { event: "beforeInput" } as never,
       onBlur: { event: "blur" } as never,

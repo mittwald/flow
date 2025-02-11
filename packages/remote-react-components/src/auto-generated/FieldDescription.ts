@@ -8,12 +8,14 @@ export { type RemoteFieldDescriptionElement } from "@mittwald/flow-remote-elemen
 export const FieldDescription = createFlowRemoteComponent(
   "flr-field-description",
   "FieldDescription",
+  {
+    clearPropsContext: false,
+  },
   RemoteFieldDescriptionElement,
   {
     slotProps: {
       wrapper: false,
     },
-
     eventProps: {
       onAbort: { event: "abort" } as never,
       onAbortCapture: { event: "abortCapture" } as never,

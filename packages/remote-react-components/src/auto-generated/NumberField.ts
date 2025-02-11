@@ -8,12 +8,14 @@ export { type RemoteNumberFieldElement } from "@mittwald/flow-remote-elements";
 export const NumberField = createFlowRemoteComponent(
   "flr-number-field",
   "NumberField",
+  {
+    clearPropsContext: false,
+  },
   RemoteNumberFieldElement,
   {
     slotProps: {
       wrapper: false,
     },
-
     eventProps: {
       onBeforeInput: { event: "beforeInput" } as never,
       onBlur: { event: "blur" } as never,

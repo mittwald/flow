@@ -8,12 +8,14 @@ export { type RemoteTextFieldElement } from "@mittwald/flow-remote-elements";
 export const TextField = createFlowRemoteComponent(
   "flr-text-field",
   "TextField",
+  {
+    clearPropsContext: false,
+  },
   RemoteTextFieldElement,
   {
     slotProps: {
       wrapper: false,
     },
-
     eventProps: {
       onBeforeInput: { event: "beforeInput" } as never,
       onBlur: { event: "blur" } as never,

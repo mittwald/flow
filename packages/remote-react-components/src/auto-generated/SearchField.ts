@@ -8,12 +8,14 @@ export { type RemoteSearchFieldElement } from "@mittwald/flow-remote-elements";
 export const SearchField = createFlowRemoteComponent(
   "flr-search-field",
   "SearchField",
+  {
+    clearPropsContext: false,
+  },
   RemoteSearchFieldElement,
   {
     slotProps: {
       wrapper: false,
     },
-
     eventProps: {
       onBeforeInput: { event: "beforeInput" } as never,
       onBlur: { event: "blur" } as never,

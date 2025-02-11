@@ -1,4 +1,8 @@
-import { createElement } from "react";
+import {
+  ClearPropsContext,
+  flowComponent,
+  isFlowComponentName,
+} from "@mittwald/flow-react-components/internal";
 import type {
   RemoteElement,
   RemoteElementConstructor,
@@ -8,11 +12,14 @@ import type {
   RemoteComponentTypeFromElementConstructor,
 } from "@remote-dom/react";
 import { createRemoteComponent } from "@remote-dom/react";
-import { isFlowComponentName } from "@mittwald/flow-react-components/internal";
-import { flowComponent } from "@mittwald/flow-react-components/internal";
+import { createElement } from "react";
 
 // eslint-disable-next-line  @typescript-eslint/no-explicit-any
 type AnyRecord = Record<string, any>;
+
+interface Options {
+  clearPropsContext?: boolean;
+}
 
 export function createFlowRemoteComponent<
   Tag extends keyof HTMLElementTagNameMap,
@@ -33,6 +40,7 @@ export function createFlowRemoteComponent<
 >(
   tag: Tag,
   flowComponentTag: string,
+  options: Options,
   Element: ElementConstructor | undefined = customElements.get(tag) as never,
   {
     slotProps = true,
@@ -46,7 +54,13 @@ export function createFlowRemoteComponent<
 
   if (isFlowComponentName(flowComponentTag)) {
     return flowComponent(flowComponentTag, (p) => {
-      return createElement(element, p as never);
+      const children = options.clearPropsContext ? (
+        <ClearPropsContext>{p.children}</ClearPropsContext>
+      ) : (
+        p.children
+      );
+
+      return createElement(element, p as never, children);
     });
   }
 

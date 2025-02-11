@@ -8,12 +8,14 @@ export { type RemoteTooltipElement } from "@mittwald/flow-remote-elements";
 export const Tooltip = createFlowRemoteComponent(
   "flr-tooltip",
   "Tooltip",
+  {
+    clearPropsContext: false,
+  },
   RemoteTooltipElement,
   {
     slotProps: {
       wrapper: false,
     },
-
     eventProps: {
       onOpenChange: { event: "openChange" } as never,
     },

@@ -8,12 +8,14 @@ export { type RemoteSkeletonElement } from "@mittwald/flow-remote-elements";
 export const Skeleton = createFlowRemoteComponent(
   "flr-skeleton",
   "Skeleton",
+  {
+    clearPropsContext: false,
+  },
   RemoteSkeletonElement,
   {
     slotProps: {
       wrapper: false,
     },
-
     eventProps: {
       onAbort: { event: "abort" } as never,
       onAbortCapture: { event: "abortCapture" } as never,

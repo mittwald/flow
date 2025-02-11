@@ -8,12 +8,14 @@ export { type RemoteSegmentedControlElement } from "@mittwald/flow-remote-elemen
 export const SegmentedControl = createFlowRemoteComponent(
   "flr-segmented-control",
   "SegmentedControl",
+  {
+    clearPropsContext: false,
+  },
   RemoteSegmentedControlElement,
   {
     slotProps: {
       wrapper: false,
     },
-
     eventProps: {
       onBlur: { event: "blur" } as never,
       onChange: { event: "change" } as never,

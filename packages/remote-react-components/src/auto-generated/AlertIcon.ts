@@ -8,12 +8,14 @@ export { type RemoteAlertIconElement } from "@mittwald/flow-remote-elements";
 export const AlertIcon = createFlowRemoteComponent(
   "flr-alert-icon",
   "AlertIcon",
+  {
+    clearPropsContext: false,
+  },
   RemoteAlertIconElement,
   {
     slotProps: {
       wrapper: false,
     },
-
     eventProps: {
       onAbort: { event: "abort" } as never,
       onAbortCapture: { event: "abortCapture" } as never,

@@ -8,12 +8,14 @@ export { type RemoteCheckboxButtonElement } from "@mittwald/flow-remote-elements
 export const CheckboxButton = createFlowRemoteComponent(
   "flr-checkbox-button",
   "CheckboxButton",
+  {
+    clearPropsContext: false,
+  },
   RemoteCheckboxButtonElement,
   {
     slotProps: {
       wrapper: false,
     },
-
     eventProps: {
       onBlur: { event: "blur" } as never,
       onChange: { event: "change" } as never,

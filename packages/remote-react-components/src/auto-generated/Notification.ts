@@ -8,12 +8,14 @@ export { type RemoteNotificationElement } from "@mittwald/flow-remote-elements";
 export const Notification = createFlowRemoteComponent(
   "flr-notification",
   "Notification",
+  {
+    clearPropsContext: false,
+  },
   RemoteNotificationElement,
   {
     slotProps: {
       wrapper: false,
     },
-
     eventProps: {
       onAbort: { event: "abort" } as never,
       onAbortCapture: { event: "abortCapture" } as never,

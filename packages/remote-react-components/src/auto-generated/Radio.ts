@@ -8,12 +8,14 @@ export { type RemoteRadioElement } from "@mittwald/flow-remote-elements";
 export const Radio = createFlowRemoteComponent(
   "flr-radio",
   "Radio",
+  {
+    clearPropsContext: false,
+  },
   RemoteRadioElement,
   {
     slotProps: {
       wrapper: false,
     },
-
     eventProps: {
       onBlur: { event: "blur" } as never,
       onFocus: { event: "focus" } as never,

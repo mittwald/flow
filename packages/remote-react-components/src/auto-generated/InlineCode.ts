@@ -8,12 +8,14 @@ export { type RemoteInlineCodeElement } from "@mittwald/flow-remote-elements";
 export const InlineCode = createFlowRemoteComponent(
   "flr-inline-code",
   "InlineCode",
+  {
+    clearPropsContext: false,
+  },
   RemoteInlineCodeElement,
   {
     slotProps: {
       wrapper: false,
     },
-
     eventProps: {
       onAbort: { event: "abort" } as never,
       onAbortCapture: { event: "abortCapture" } as never,

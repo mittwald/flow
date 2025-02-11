@@ -1,22 +1,24 @@
-import type { PropsWithChildren } from "react";
-import React from "react";
-import * as Aria from "react-aria-components";
-import clsx from "clsx";
-import styles from "./Checkbox.module.scss";
 import {
   IconCheckboxChecked,
   IconCheckboxEmpty,
   IconCheckboxIndeterminate,
 } from "@/components/Icon/components/icons";
-import { ClearPropsContext } from "@/lib/propsContext";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import { ClearPropsContext } from "@/lib/propsContext";
+import clsx from "clsx";
+import type { PropsWithChildren } from "react";
+import * as Aria from "react-aria-components";
+import styles from "./Checkbox.module.scss";
 
 export interface CheckboxProps
   extends PropsWithChildren<Omit<Aria.CheckboxProps, "children">>,
     FlowComponentProps {}
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const Checkbox = flowComponent<"Checkbox", HTMLLabelElement>(
   "Checkbox",
   (props) => {

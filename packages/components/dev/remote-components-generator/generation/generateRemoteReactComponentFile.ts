@@ -1,7 +1,8 @@
 import type { ComponentDoc } from "react-docgen-typescript";
-import { remoteElementTagNameOf } from "../lib/remoteElementTagNameOf";
-import { remoteComponentNameOf } from "../lib/remoteComponentNameOf";
+import { checkTagIsSet } from "../lib/docTags";
 import { remoteComponentBaseNameOf } from "../lib/remoteComponentBaseNameOf";
+import { remoteComponentNameOf } from "../lib/remoteComponentNameOf";
+import { remoteElementTagNameOf } from "../lib/remoteElementTagNameOf";
 
 export function generateRemoteReactComponentFile(c: ComponentDoc) {
   const componentProps = c.props;
@@ -9,6 +10,7 @@ export function generateRemoteReactComponentFile(c: ComponentDoc) {
   const t = {
     remoteComponentName: remoteComponentNameOf(c),
     name: remoteComponentBaseNameOf(c),
+    clearPropsContext: checkTagIsSet(c.tags, "clear-props-context"),
     events: Object.keys(componentProps)
       .sort()
       .filter((propName) => propName.startsWith("on"))
@@ -25,14 +27,19 @@ export function generateRemoteReactComponentFile(c: ComponentDoc) {
     import { ${t.remoteComponentName} } from "@mittwald/flow-remote-elements";
     export { type ${t.remoteComponentName} } from "@mittwald/flow-remote-elements";
 
-    export const ${t.name} = createFlowRemoteComponent("${remoteElementTagNameOf(c)}", "${t.name}", ${t.remoteComponentName}, {
+    export const ${t.name} = createFlowRemoteComponent(
+      "${remoteElementTagNameOf(c)}", 
+      "${t.name}", 
+      {
+        clearPropsContext: ${t.clearPropsContext ? "true" : "false"},
+      },
+      ${t.remoteComponentName}, {
       slotProps: {
         wrapper: false,
-      },
-      
+      },      
       eventProps: {
           ${t.events}
-        },      
+      },
     });
   `;
 }

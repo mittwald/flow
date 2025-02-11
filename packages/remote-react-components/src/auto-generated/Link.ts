@@ -8,12 +8,14 @@ export { type RemoteLinkElement } from "@mittwald/flow-remote-elements";
 export const Link = createFlowRemoteComponent(
   "flr-link",
   "Link",
+  {
+    clearPropsContext: false,
+  },
   RemoteLinkElement,
   {
     slotProps: {
       wrapper: false,
     },
-
     eventProps: {
       onBlur: { event: "blur" } as never,
       onFocus: { event: "focus" } as never,

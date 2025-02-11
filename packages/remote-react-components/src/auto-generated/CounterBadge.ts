@@ -8,12 +8,14 @@ export { type RemoteCounterBadgeElement } from "@mittwald/flow-remote-elements";
 export const CounterBadge = createFlowRemoteComponent(
   "flr-counter-badge",
   "CounterBadge",
+  {
+    clearPropsContext: false,
+  },
   RemoteCounterBadgeElement,
   {
     slotProps: {
       wrapper: false,
     },
-
     eventProps: {
       onAbort: { event: "abort" } as never,
       onAbortCapture: { event: "abortCapture" } as never,

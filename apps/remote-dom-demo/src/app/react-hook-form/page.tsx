@@ -1,8 +1,8 @@
 "use client";
 
 import { Field } from "@mittwald/flow-react-components/react-hook-form";
-import { TextField, Button } from "@mittwald/flow-remote-react-components";
-import { Form } from "@mittwald/flow-remote-react-components/integrations/react-hook-form";
+import { Button, TextField } from "@mittwald/flow-remote-react-components";
+import { Form } from "@mittwald/flow-remote-react-components/react-hook-form";
 import { useForm } from "react-hook-form";
 
 export default function Page() {

@@ -8,12 +8,14 @@ export { type RemoteDatePickerElement } from "@mittwald/flow-remote-elements";
 export const DatePicker = createFlowRemoteComponent(
   "flr-date-picker",
   "DatePicker",
+  {
+    clearPropsContext: false,
+  },
   RemoteDatePickerElement,
   {
     slotProps: {
       wrapper: false,
     },
-
     eventProps: {
       onBlur: { event: "blur" } as never,
       onChange: { event: "change" } as never,

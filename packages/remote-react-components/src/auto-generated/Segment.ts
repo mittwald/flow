@@ -8,12 +8,14 @@ export { type RemoteSegmentElement } from "@mittwald/flow-remote-elements";
 export const Segment = createFlowRemoteComponent(
   "flr-segment",
   "Segment",
+  {
+    clearPropsContext: false,
+  },
   RemoteSegmentElement,
   {
     slotProps: {
       wrapper: false,
     },
-
     eventProps: {
       onBlur: { event: "blur" } as never,
       onFocus: { event: "focus" } as never,

@@ -8,12 +8,14 @@ export { type RemoteMenuTriggerElement } from "@mittwald/flow-remote-elements";
 export const MenuTrigger = createFlowRemoteComponent(
   "flr-menu-trigger",
   "MenuTrigger",
+  {
+    clearPropsContext: false,
+  },
   RemoteMenuTriggerElement,
   {
     slotProps: {
       wrapper: false,
     },
-
     eventProps: {
       onOpenChange: { event: "openChange" } as never,
     },

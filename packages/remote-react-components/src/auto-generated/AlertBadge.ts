@@ -8,12 +8,14 @@ export { type RemoteAlertBadgeElement } from "@mittwald/flow-remote-elements";
 export const AlertBadge = createFlowRemoteComponent(
   "flr-alert-badge",
   "AlertBadge",
+  {
+    clearPropsContext: false,
+  },
   RemoteAlertBadgeElement,
   {
     slotProps: {
       wrapper: false,
     },
-
     eventProps: {},
   },
 );

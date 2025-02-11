@@ -8,12 +8,14 @@ export { type RemoteTableFooterRowElement } from "@mittwald/flow-remote-elements
 export const TableFooterRow = createFlowRemoteComponent(
   "flr-table-footer-row",
   "TableFooterRow",
+  {
+    clearPropsContext: false,
+  },
   RemoteTableFooterRowElement,
   {
     slotProps: {
       wrapper: false,
     },
-
     eventProps: {
       onAction: { event: "action" } as never,
       onHoverChange: { event: "hoverChange" } as never,

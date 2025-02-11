@@ -8,12 +8,14 @@ export { type RemoteTabTitleElement } from "@mittwald/flow-remote-elements";
 export const TabTitle = createFlowRemoteComponent(
   "flr-tab-title",
   "TabTitle",
+  {
+    clearPropsContext: false,
+  },
   RemoteTabTitleElement,
   {
     slotProps: {
       wrapper: false,
     },
-
     eventProps: {
       onHoverChange: { event: "hoverChange" } as never,
       onHoverEnd: { event: "hoverEnd" } as never,

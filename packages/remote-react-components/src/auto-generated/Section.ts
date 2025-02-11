@@ -8,12 +8,14 @@ export { type RemoteSectionElement } from "@mittwald/flow-remote-elements";
 export const Section = createFlowRemoteComponent(
   "flr-section",
   "Section",
+  {
+    clearPropsContext: false,
+  },
   RemoteSectionElement,
   {
     slotProps: {
       wrapper: false,
     },
-
     eventProps: {
       onAbort: { event: "abort" } as never,
       onAbortCapture: { event: "abortCapture" } as never,

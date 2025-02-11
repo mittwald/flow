@@ -8,12 +8,14 @@ export { type RemoteItemsGridListElement } from "@mittwald/flow-remote-elements"
 export const ItemsGridList = createFlowRemoteComponent(
   "flr-items-grid-list",
   "ItemsGridList",
+  {
+    clearPropsContext: false,
+  },
   RemoteItemsGridListElement,
   {
     slotProps: {
       wrapper: false,
     },
-
     eventProps: {
       onAction: { event: "action" } as never,
       onScroll: { event: "scroll" } as never,

@@ -8,12 +8,14 @@ export { type RemoteSwitchElement } from "@mittwald/flow-remote-elements";
 export const Switch = createFlowRemoteComponent(
   "flr-switch",
   "Switch",
+  {
+    clearPropsContext: false,
+  },
   RemoteSwitchElement,
   {
     slotProps: {
       wrapper: false,
     },
-
     eventProps: {
       onBlur: { event: "blur" } as never,
       onChange: { event: "change" } as never,

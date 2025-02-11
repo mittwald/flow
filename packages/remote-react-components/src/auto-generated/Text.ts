@@ -8,12 +8,14 @@ export { type RemoteTextElement } from "@mittwald/flow-remote-elements";
 export const Text = createFlowRemoteComponent(
   "flr-text",
   "Text",
+  {
+    clearPropsContext: false,
+  },
   RemoteTextElement,
   {
     slotProps: {
       wrapper: false,
     },
-
     eventProps: {
       onAbort: { event: "abort" } as never,
       onAbortCapture: { event: "abortCapture" } as never,

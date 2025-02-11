@@ -8,12 +8,14 @@ export { type RemoteHeadingElement } from "@mittwald/flow-remote-elements";
 export const Heading = createFlowRemoteComponent(
   "flr-heading",
   "Heading",
+  {
+    clearPropsContext: false,
+  },
   RemoteHeadingElement,
   {
     slotProps: {
       wrapper: false,
     },
-
     eventProps: {
       onAbort: { event: "abort" } as never,
       onAbortCapture: { event: "abortCapture" } as never,

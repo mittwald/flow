@@ -8,12 +8,14 @@ export { type RemoteLightBoxTriggerElement } from "@mittwald/flow-remote-element
 export const LightBoxTrigger = createFlowRemoteComponent(
   "flr-light-box-trigger",
   "LightBoxTrigger",
+  {
+    clearPropsContext: false,
+  },
   RemoteLightBoxTriggerElement,
   {
     slotProps: {
       wrapper: false,
     },
-
     eventProps: {},
   },
 );

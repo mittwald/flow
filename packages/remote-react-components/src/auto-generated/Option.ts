@@ -8,12 +8,14 @@ export { type RemoteOptionElement } from "@mittwald/flow-remote-elements";
 export const Option = createFlowRemoteComponent(
   "flr-option",
   "Option",
+  {
+    clearPropsContext: false,
+  },
   RemoteOptionElement,
   {
     slotProps: {
       wrapper: false,
     },
-
     eventProps: {
       onAction: { event: "action" } as never,
       onHoverChange: { event: "hoverChange" } as never,

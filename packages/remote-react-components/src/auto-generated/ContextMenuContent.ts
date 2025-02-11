@@ -8,12 +8,14 @@ export { type RemoteContextMenuContentElement } from "@mittwald/flow-remote-elem
 export const ContextMenuContent = createFlowRemoteComponent(
   "flr-context-menu-content",
   "ContextMenuContent",
+  {
+    clearPropsContext: false,
+  },
   RemoteContextMenuContentElement,
   {
     slotProps: {
       wrapper: false,
     },
-
     eventProps: {
       onAction: { event: "action" } as never,
       onClose: { event: "close" } as never,

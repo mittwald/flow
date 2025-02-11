@@ -8,12 +8,14 @@ export { type RemoteDateRangePickerElement } from "@mittwald/flow-remote-element
 export const DateRangePicker = createFlowRemoteComponent(
   "flr-date-range-picker",
   "DateRangePicker",
+  {
+    clearPropsContext: false,
+  },
   RemoteDateRangePickerElement,
   {
     slotProps: {
       wrapper: false,
     },
-
     eventProps: {
       onBlur: { event: "blur" } as never,
       onChange: { event: "change" } as never,

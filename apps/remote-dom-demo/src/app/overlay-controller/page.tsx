@@ -10,8 +10,8 @@ import {
   Section,
   Text,
   TextField,
+  useOverlayController,
 } from "@mittwald/flow-remote-react-components";
-import { useOverlayController } from "@mittwald/flow-remote-react-components/hooks";
 
 export default function Page() {
   const controller = useOverlayController("Modal");

@@ -8,12 +8,14 @@ export { type RemoteIllustratedMessageElement } from "@mittwald/flow-remote-elem
 export const IllustratedMessage = createFlowRemoteComponent(
   "flr-illustrated-message",
   "IllustratedMessage",
+  {
+    clearPropsContext: false,
+  },
   RemoteIllustratedMessageElement,
   {
     slotProps: {
       wrapper: false,
     },
-
     eventProps: {
       onAbort: { event: "abort" } as never,
       onAbortCapture: { event: "abortCapture" } as never,

@@ -8,12 +8,14 @@ export { type RemoteSelectElement } from "@mittwald/flow-remote-elements";
 export const Select = createFlowRemoteComponent(
   "flr-select",
   "Select",
+  {
+    clearPropsContext: false,
+  },
   RemoteSelectElement,
   {
     slotProps: {
       wrapper: false,
     },
-
     eventProps: {
       onBlur: { event: "blur" } as never,
       onChange: { event: "change" } as never,

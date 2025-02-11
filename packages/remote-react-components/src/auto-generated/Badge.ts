@@ -8,12 +8,14 @@ export { type RemoteBadgeElement } from "@mittwald/flow-remote-elements";
 export const Badge = createFlowRemoteComponent(
   "flr-badge",
   "Badge",
+  {
+    clearPropsContext: false,
+  },
   RemoteBadgeElement,
   {
     slotProps: {
       wrapper: false,
     },
-
     eventProps: {
       onClose: { event: "close" } as never,
       onPress: { event: "press" } as never,

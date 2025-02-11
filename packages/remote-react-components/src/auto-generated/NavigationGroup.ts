@@ -8,12 +8,14 @@ export { type RemoteNavigationGroupElement } from "@mittwald/flow-remote-element
 export const NavigationGroup = createFlowRemoteComponent(
   "flr-navigation-group",
   "NavigationGroup",
+  {
+    clearPropsContext: false,
+  },
   RemoteNavigationGroupElement,
   {
     slotProps: {
       wrapper: false,
     },
-
     eventProps: {
       onAbort: { event: "abort" } as never,
       onAbortCapture: { event: "abortCapture" } as never,

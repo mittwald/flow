@@ -8,12 +8,14 @@ export { type RemoteHeaderNavigationElement } from "@mittwald/flow-remote-elemen
 export const HeaderNavigation = createFlowRemoteComponent(
   "flr-header-navigation",
   "HeaderNavigation",
+  {
+    clearPropsContext: false,
+  },
   RemoteHeaderNavigationElement,
   {
     slotProps: {
       wrapper: false,
     },
-
     eventProps: {
       onAbort: { event: "abort" } as never,
       onAbortCapture: { event: "abortCapture" } as never,

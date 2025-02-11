@@ -8,12 +8,14 @@ export { type RemotePopoverContentElement } from "@mittwald/flow-remote-elements
 export const PopoverContent = createFlowRemoteComponent(
   "flr-popover-content",
   "PopoverContent",
+  {
+    clearPropsContext: false,
+  },
   RemotePopoverContentElement,
   {
     slotProps: {
       wrapper: false,
     },
-
     eventProps: {
       onOpenChange: { event: "openChange" } as never,
     },

@@ -9,7 +9,11 @@ const isPrimitive = (something: unknown) =>
   (r.isArray(something) && something.every(isPrimitive));
 
 export const primitiveFlat: EventSerialization = (event) =>
-  isObjectType(event) ? r.pickBy(event as never, isPrimitive) : event;
+  r.isArray(event)
+    ? event.map(primitiveFlat)
+    : isObjectType(event)
+      ? r.pickBy(event as never, isPrimitive)
+      : event;
 
 export const pick =
   (...props: string[]): EventSerialization =>

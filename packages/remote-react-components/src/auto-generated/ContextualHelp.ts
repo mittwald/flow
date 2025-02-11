@@ -8,12 +8,14 @@ export { type RemoteContextualHelpElement } from "@mittwald/flow-remote-elements
 export const ContextualHelp = createFlowRemoteComponent(
   "flr-contextual-help",
   "ContextualHelp",
+  {
+    clearPropsContext: false,
+  },
   RemoteContextualHelpElement,
   {
     slotProps: {
       wrapper: false,
     },
-
     eventProps: {
       onOpenChange: { event: "openChange" } as never,
     },

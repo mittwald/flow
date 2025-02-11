@@ -8,12 +8,14 @@ export { type RemoteCopyButtonElement } from "@mittwald/flow-remote-elements";
 export const CopyButton = createFlowRemoteComponent(
   "flr-copy-button",
   "CopyButton",
+  {
+    clearPropsContext: false,
+  },
   RemoteCopyButtonElement,
   {
     slotProps: {
       wrapper: false,
     },
-
     eventProps: {
       onBlur: { event: "blur" } as never,
       onFocus: { event: "focus" } as never,

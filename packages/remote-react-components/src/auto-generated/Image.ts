@@ -8,12 +8,14 @@ export { type RemoteImageElement } from "@mittwald/flow-remote-elements";
 export const Image = createFlowRemoteComponent(
   "flr-image",
   "Image",
+  {
+    clearPropsContext: false,
+  },
   RemoteImageElement,
   {
     slotProps: {
       wrapper: false,
     },
-
     eventProps: {
       onAbort: { event: "abort" } as never,
       onAbortCapture: { event: "abortCapture" } as never,

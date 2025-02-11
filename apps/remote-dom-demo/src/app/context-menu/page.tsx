@@ -1,9 +1,9 @@
 "use client";
-import { IconApp } from "@mittwald/flow-remote-react-components/Icons";
 import {
   Button,
   ContextMenu,
   ContextMenuTrigger,
+  IconApp,
   MenuItem,
   Text,
 } from "@mittwald/flow-remote-react-components";
