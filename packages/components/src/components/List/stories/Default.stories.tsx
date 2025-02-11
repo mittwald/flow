@@ -105,7 +105,7 @@ const meta: Meta<typeof List> = {
 
           <DomainList.Item showTiles textValue={(domain) => domain.hostname}>
             {(domain) => (
-              <DomainList.ItemView>
+              <ListItemView>
                 <Avatar color={domain.type === "Domain" ? "blue" : "teal"}>
                   {domain.type === "Domain" ? (
                     <IconDomain />
@@ -125,7 +125,7 @@ const meta: Meta<typeof List> = {
                   <MenuItem>Show details</MenuItem>
                   <MenuItem>Delete</MenuItem>
                 </ContextMenu>
-              </DomainList.ItemView>
+              </ListItemView>
             )}
           </DomainList.Item>
         </DomainList.List>

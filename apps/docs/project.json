@@ -1,0 +1,32 @@
+{
+  "implicitDependencies": ["tokens", "components"],
+  "name": "docs",
+  "projectType": "application",
+  "sourceRoot": "apps/docs/src",
+  "targets": {
+    "build:imports": {
+      "cache": true,
+      "inputs": ["default", "{projectRoot}/src/content/**/*.mdx"]
+    },
+    "build": {
+      "dependsOn": [
+        "build:imports",
+        {
+          "projects": ["components"],
+          "target": "build:docs-properties"
+        },
+        "^build"
+      ]
+    },
+    "dev": {
+      "dependsOn": [
+        "build:imports",
+        {
+          "projects": ["components"],
+          "target": "build:docs-properties"
+        },
+        "^build"
+      ]
+    }
+  }
+}

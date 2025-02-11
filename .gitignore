@@ -11,8 +11,9 @@ dist
 nx-cloud.env
 *.log
 *.tsbuildinfo
-packages/docs/src/lib/liveCode/dynamicImports.ts
+apps/docs/src/lib/liveCode/dynamicImports.ts
 .idea/material_theme_project_new.xml
 coverage
 packages/components/out
 .nx/workspace-data
+coverage/*.json

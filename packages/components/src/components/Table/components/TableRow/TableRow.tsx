@@ -9,6 +9,7 @@ export type TableRowProps = Aria.RowProps<never> & {
   footer?: boolean;
 };
 
+/** @flr-generate all */
 export const TableRow: FC<TableRowProps> = (props) => {
   const { children, className, footer, ...rest } = props;
 

@@ -17,6 +17,7 @@ export interface AccordionProps
   variant?: "default" | "outline";
 }
 
+/** @flr-generate all */
 export const Accordion: FC<AccordionProps> = (props) => {
   const {
     children,

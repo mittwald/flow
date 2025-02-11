@@ -2,7 +2,7 @@ import type {
   FlowComponentName,
   FlowComponentPropName,
   FlowComponentPropType,
-} from "@/components/propTypes";
+} from "@/components/propTypes/types";
 import type { DynamicProp } from "./dynamicProps/types";
 
 export type PropsContext = Partial<{

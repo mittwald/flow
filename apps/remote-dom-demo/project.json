@@ -1,0 +1,6 @@
+{
+  "implicitDependencies": ["stylesheet"],
+  "name": "remote-dom-demo",
+  "projectType": "application",
+  "sourceRoot": "apps/remote-dom-demo/src"
+}

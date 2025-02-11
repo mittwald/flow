@@ -1,0 +1,131 @@
+.body {
+  background-color: var(--neutral--color--300);
+}
+
+.center {
+  max-width: 1500px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  column-gap: var(--size-px--l);
+  padding-inline: var(--size-px--l);
+  padding-bottom: var(--size-px--l);
+
+  &:has(.mainNavigation:empty) {
+    grid-template-areas:
+      "main"
+      "footer";
+    grid-template-columns: 1fr;
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: var(--size-px--m) var(--size-px--l) var(--size-px--l);
+  flex-wrap: wrap;
+  gap: var(--size-rem--m);
+
+  &:before {
+    content: "";
+    display: block;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 250px;
+    background: var(--color--hosting-blue--200);
+    position: absolute;
+    z-index: -1;
+  }
+}
+
+.homeLink {
+  display: flex;
+  column-gap: var(--size-rem--m);
+  align-items: end;
+}
+
+.mainNavigation {
+  padding-inline: var(--size-px--l);
+  width: 270px;
+  flex-shrink: 0;
+}
+
+.mobileNavigation {
+  display: none;
+}
+
+.mobileNavigationOffCanvas {
+  section > h2 {
+    display: none;
+  }
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--size-px--l);
+  flex-grow: 1;
+  max-width: 100%;
+}
+
+.tabContent {
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--section--spacing);
+
+  > h3 {
+    margin-top: var(--size-px--m);
+  }
+}
+
+@media (max-width: 900px) {
+  .center {
+    grid-template-areas:
+      "nav   "
+      "main  ";
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto 1fr auto;
+  }
+
+  .mainNavigation,
+  .headerNavigation {
+    display: none;
+  }
+
+  .mobileNavigation {
+    display: block;
+  }
+
+  .mobileNavigationOffCanvas {
+    .mainNavigation {
+      display: block;
+    }
+  }
+
+  .header {
+    padding: var(--size-px--xs) var(--size-px--s) var(--size-px--m);
+    row-gap: var(--size-rem--s);
+  }
+
+  .center {
+    padding-inline: var(--size-px--s);
+  }
+}
+
+.homeTopLayoutCard.homeTopLayoutCard {
+  padding: 0;
+
+  .homeImage {
+    border-bottom-color: var(--separator--color);
+    border-bottom-width: var(--separator--height);
+    border-bottom-style: var(--border-style--default);
+  }
+
+  .homeTopContent {
+    padding: var(--layout-card--padding);
+  }
+}

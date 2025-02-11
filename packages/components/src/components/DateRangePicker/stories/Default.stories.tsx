@@ -3,7 +3,7 @@ import React from "react";
 import { DateRangePicker } from "../index";
 import { Label } from "@/components/Label";
 import { FieldDescription } from "@/components/FieldDescription";
-import { today, getLocalTimeZone, parseDate } from "@internationalized/date";
+import { getLocalTimeZone, parseDate, today } from "@internationalized/date";
 
 const meta: Meta<typeof DateRangePicker> = {
   title: "Form Controls/DateRangePicker",

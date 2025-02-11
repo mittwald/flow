@@ -1,0 +1,5 @@
+{
+  "implicitDependencies": ["components"],
+  "name": "stylesheet",
+  "projectType": "library"
+}

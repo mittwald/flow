@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import React from "react";
 import type { Sorting } from "@/components/List/model/sorting/Sorting";
-import { MenuItem } from "@/components/ContextMenu";
+import MenuItemView from "@/views/MenuItemView";
 
 interface Props {
   sorting: Sorting<never>;
@@ -9,6 +9,5 @@ interface Props {
 
 export const SortingPickerItem: FC<Props> = (props) => {
   const { sorting } = props;
-
-  return <MenuItem id={sorting.id}>{sorting.name}</MenuItem>;
+  return <MenuItemView id={sorting.id}>{sorting.name}</MenuItemView>;
 };

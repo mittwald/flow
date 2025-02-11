@@ -1,21 +1,16 @@
-import type { FC } from "react";
-import React from "react";
-import { useList } from "@/components/List/hooks/useList";
-import styles from "./Items.module.scss";
-import clsx from "clsx";
-import * as Aria from "react-aria-components";
+import { EmptyView } from "@/components/List";
 import Item from "@/components/List/components/Items/components/Item/Item";
-import { EmptyView } from "@/components/List/components/EmptyView/EmptyView";
-import { FallbackItems } from "@/components/List/components/Items/components/FallbackItems/FallbackItems";
+import { useList } from "@/components/List/hooks/useList";
+import DivView from "@/views/DivView";
+import ItemsGridListView from "@/views/ItemsGridListView";
+import clsx from "clsx";
+import type { FC } from "react";
+import styles from "./Items.module.scss";
+import { FallbackItems } from "./components/FallbackItems";
 
-interface Props {
-  tiles?: boolean;
-}
-
-export const Items: FC<Props> = (props) => {
-  const { tiles } = props;
-
+export const Items: FC = () => {
   const list = useList();
+  const tiles = list.viewMode === "tiles";
   const isLoading = list.loader.useIsLoading();
   const isInitiallyLoading = list.loader.useIsInitiallyLoading();
 
@@ -23,8 +18,8 @@ export const Items: FC<Props> = (props) => {
     return null;
   }
 
-  const rows = list.items.entries.map((item) => (
-    <Item key={item.id} data={item.data} id={item.id} tiles={tiles} />
+  const items = list.items.entries.map((item) => (
+    <Item key={item.id} data={item.data} id={item.id} />
   ));
 
   const rootClassName = clsx(
@@ -34,8 +29,8 @@ export const Items: FC<Props> = (props) => {
   );
 
   return (
-    <div aria-hidden={isInitiallyLoading} aria-busy={isLoading}>
-      <Aria.GridList
+    <DivView aria-hidden={isInitiallyLoading} aria-busy={isLoading}>
+      <ItemsGridListView
         className={rootClassName}
         {...list.componentProps}
         renderEmptyState={() => <EmptyView />}
@@ -43,9 +38,9 @@ export const Items: FC<Props> = (props) => {
           gridTemplateColumns: `repeat(auto-fill, minmax(${list.itemView.tileMaxWidth}px, 1fr))`,
         }}
       >
-        {isInitiallyLoading ? <FallbackItems /> : rows}
-      </Aria.GridList>
-    </div>
+        {isInitiallyLoading ? <FallbackItems /> : items}
+      </ItemsGridListView>
+    </DivView>
   );
 };
 

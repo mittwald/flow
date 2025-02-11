@@ -1,0 +1,39 @@
+{
+  "name": "acorn",
+  "version": "8.14.0",
+  "description": "ECMAScript parser",
+  "homepage": "https://github.com/acornjs/acorn",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/acornjs/acorn.git"
+  },
+  "license": "MIT",
+  "exports": {
+    ".": [
+      {
+        "import": "./dist/acorn.mjs",
+        "require": "./dist/acorn.js",
+        "default": "./dist/acorn.js"
+      },
+      "./dist/acorn.js"
+    ],
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "acorn": "bin/acorn"
+  },
+  "main": "dist/acorn.js",
+  "module": "dist/acorn.mjs",
+  "types": "dist/acorn.d.ts",
+  "engines": {
+    "node": ">=0.4.0"
+  },
+  "scripts": {
+    "prepare": "cd ..; npm run build:main"
+  },
+  "maintainers": [
+    "Adrian Heine",
+    "Ingvar Stepanyan <me@rreverser.com>",
+    "Marijn Haverbeke <marijnh@gmail.com>"
+  ]
+}

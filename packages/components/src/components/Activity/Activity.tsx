@@ -2,7 +2,7 @@ import type { ComponentType, FC, PropsWithChildren } from "react";
 import React, { lazy, Suspense, useEffect, useState } from "react";
 import { useIsSSR } from "react-aria";
 
-interface Props extends PropsWithChildren {
+export interface ActivityProps extends PropsWithChildren {
   isActive?: boolean;
   inactiveDelay?: number;
 }
@@ -15,7 +15,7 @@ const nonResolvingPromise = new Promise<{ default: ComponentType<unknown> }>(
 
 const SuspenseTrigger = lazy(() => nonResolvingPromise);
 
-export const Activity: FC<Props> = (props) => {
+export const Activity: FC<ActivityProps> = (props) => {
   const { children, isActive: isActiveFromProps = true, inactiveDelay } = props;
 
   const [isActiveState, setIsActiveState] = useState(isActiveFromProps);

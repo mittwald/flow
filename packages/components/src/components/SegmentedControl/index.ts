@@ -1,3 +1,4 @@
+export * from "./view";
 import { SegmentedControl } from "./SegmentedControl";
 
 export {

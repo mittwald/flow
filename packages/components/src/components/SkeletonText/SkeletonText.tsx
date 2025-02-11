@@ -7,6 +7,7 @@ export interface SkeletonTextProps extends ComponentProps<"div"> {
   width?: string;
 }
 
+/** @flr-generate all */
 export const SkeletonText: FC<SkeletonTextProps> = (props) => {
   const { width, style = {}, ...rest } = props;
   return (

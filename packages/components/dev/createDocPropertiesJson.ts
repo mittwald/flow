@@ -11,10 +11,16 @@ async function parse(): Promise<ComponentDoc[]> {
     shouldRemoveUndefinedFromOptional: true,
     savePropValueAsString: true,
   });
+
   console.log("📚 Building component docs");
-  const files = await glob("./src/components/*/*.tsx", {
-    ignore: ["src/**/*.stories.tsx", "src/**/*.test.tsx"],
+  const files = await glob("./src/{components,integrations}/**/*.tsx", {
+    ignore: [
+      "src/**/*.stories.tsx",
+      "src/**/*.test.tsx",
+      "src/components/Icon/components/icons/**/*",
+    ],
   });
+
   return parser.parse(files);
 }
 
@@ -22,11 +28,14 @@ async function createDocPropertiesJson() {
   const components = await parse();
 
   console.log("📝 Writing output file");
-  if (!fsSync.existsSync("./out/")) {
-    await fs.mkdir("./out/");
+  if (!fsSync.existsSync("./dist/")) {
+    await fs.mkdir("./dist/");
+  }
+  if (!fsSync.existsSync("./dist/assets")) {
+    await fs.mkdir("./dist/assets");
   }
   await fs.writeFile(
-    "./out/doc-properties.json",
+    "./dist/assets/doc-properties.json",
     JSON.stringify(components, null, 2),
   );
 

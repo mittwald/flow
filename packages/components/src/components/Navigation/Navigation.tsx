@@ -11,6 +11,7 @@ export interface NavigationProps
   extends PropsWithChildren<ComponentProps<"nav">>,
     PropsWithClassName {}
 
+/** @flr-generate all */
 export const Navigation: FC<NavigationProps> = (props) => {
   const { className, children, ...rest } = props;
 

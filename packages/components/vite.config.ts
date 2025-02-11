@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
-import { cssModuleClassNameGenerator } from "./dev/cssModuleClassNameGenerator";
+import { cssModuleClassNameGenerator } from "./dev/vite/cssModuleClassNameGenerator";
 import path from "path";
-import viteI18nPlugin from "./dev/viteI18nPlugin";
+import { viteI18nPlugin } from "./dev/vite/viteI18nPlugin";
 
 export default defineConfig({
   assetsInclude: ["/sb-preview/runtime.js"],

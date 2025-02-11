@@ -1,3 +1,4 @@
+export * from "./view";
 import { Alert } from "./Alert";
 
 export { type AlertProps, Alert } from "./Alert";

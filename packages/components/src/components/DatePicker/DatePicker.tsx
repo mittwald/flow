@@ -12,12 +12,16 @@ import { useOverlayController } from "@/lib/controller";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { Calendar } from "@/components/Calendar";
 
-export interface DatePickerProps<T extends Aria.DateValue>
+export interface DatePickerProps<T extends Aria.DateValue = Aria.DateValue>
   extends PropsWithChildren<Omit<Aria.DatePickerProps<T>, "children">> {
   /** The error message that is displayed below the input. */
   errorMessage?: ReactNode;
 }
 
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const DatePicker = flowComponent("DatePicker", (props) => {
   const { children, className, errorMessage, onChange, ...rest } = props;
 

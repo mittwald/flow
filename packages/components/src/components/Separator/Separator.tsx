@@ -6,6 +6,7 @@ import * as Aria from "react-aria-components";
 
 export type SeparatorProps = Omit<Aria.SeparatorProps, "orientation">;
 
+/** @flr-generate all */
 export const Separator: FC<SeparatorProps> = (props) => {
   const { className, ...rest } = props;
 

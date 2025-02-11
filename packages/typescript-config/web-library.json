@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "composite": true,
+    "declaration": true,
+
+    "declarationMap": true,
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "types": ["vite/client"]
+  },
+  "display": "A Web Component Library",
+  "extends": "./base.json"
+}
