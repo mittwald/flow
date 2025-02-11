@@ -6,8 +6,7 @@ export type {
   DataLoaderResult,
 } from "@/components/List/model/loading/types";
 
-export * from "./components/Items/components/FallbackItems";
-export * from "./components/Items/components/Item/components/SkeletonView";
+export * from "./components/Items/components/Item/components/ListItemSkeletonView";
 export * from "./components/Items/views/GridList";
 export * from "./components/Items/views/GridListItem";
 export * from "./components/ListItemView";

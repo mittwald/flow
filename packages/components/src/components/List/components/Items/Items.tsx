@@ -2,11 +2,11 @@ import { EmptyView } from "@/components/List";
 import Item from "@/components/List/components/Items/components/Item/Item";
 import { useList } from "@/components/List/hooks/useList";
 import DivView from "@/views/DivView";
-import FallbackItemsView from "@/views/FallbackItemsView";
 import ItemsGridListView from "@/views/ItemsGridListView";
 import clsx from "clsx";
 import type { FC } from "react";
 import styles from "./Items.module.scss";
+import { FallbackItems } from "./components/FallbackItems";
 
 export const Items: FC = () => {
   const list = useList();
@@ -38,7 +38,7 @@ export const Items: FC = () => {
           gridTemplateColumns: `repeat(auto-fill, minmax(${list.itemView.tileMaxWidth}px, 1fr))`,
         }}
       >
-        {isInitiallyLoading ? <FallbackItemsView /> : items}
+        {isInitiallyLoading ? <FallbackItems /> : items}
       </ItemsGridListView>
     </DivView>
   );
