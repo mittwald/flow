@@ -9,7 +9,7 @@ export const Switch = createFlowRemoteComponent(
   "flr-switch",
   "Switch",
   {
-    clearPropsContext: false,
+    clearPropsContext: true,
   },
   RemoteSwitchElement,
   {

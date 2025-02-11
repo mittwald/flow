@@ -9,7 +9,7 @@ export const NumberField = createFlowRemoteComponent(
   "flr-number-field",
   "NumberField",
   {
-    clearPropsContext: false,
+    clearPropsContext: true,
   },
   RemoteNumberFieldElement,
   {

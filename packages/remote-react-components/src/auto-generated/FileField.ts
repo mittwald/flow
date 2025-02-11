@@ -9,7 +9,7 @@ export const FileField = createFlowRemoteComponent(
   "flr-file-field",
   "FileField",
   {
-    clearPropsContext: false,
+    clearPropsContext: true,
   },
   RemoteFileFieldElement,
   {

@@ -9,7 +9,7 @@ export const Radio = createFlowRemoteComponent(
   "flr-radio",
   "Radio",
   {
-    clearPropsContext: false,
+    clearPropsContext: true,
   },
   RemoteRadioElement,
   {

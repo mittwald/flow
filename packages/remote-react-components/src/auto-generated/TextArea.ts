@@ -9,7 +9,7 @@ export const TextArea = createFlowRemoteComponent(
   "flr-text-area",
   "TextArea",
   {
-    clearPropsContext: false,
+    clearPropsContext: true,
   },
   RemoteTextAreaElement,
   {

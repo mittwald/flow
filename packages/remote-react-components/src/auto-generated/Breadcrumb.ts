@@ -9,7 +9,7 @@ export const Breadcrumb = createFlowRemoteComponent(
   "flr-breadcrumb",
   "Breadcrumb",
   {
-    clearPropsContext: false,
+    clearPropsContext: true,
   },
   RemoteBreadcrumbElement,
   {

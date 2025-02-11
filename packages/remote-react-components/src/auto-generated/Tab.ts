@@ -9,7 +9,7 @@ export const Tab = createFlowRemoteComponent(
   "flr-tab",
   "Tab",
   {
-    clearPropsContext: false,
+    clearPropsContext: true,
   },
   RemoteTabElement,
   {

@@ -9,7 +9,7 @@ export const FieldError = createFlowRemoteComponent(
   "flr-field-error",
   "FieldError",
   {
-    clearPropsContext: false,
+    clearPropsContext: true,
   },
   RemoteFieldErrorElement,
   {

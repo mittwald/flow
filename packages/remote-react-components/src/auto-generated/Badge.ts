@@ -9,7 +9,7 @@ export const Badge = createFlowRemoteComponent(
   "flr-badge",
   "Badge",
   {
-    clearPropsContext: false,
+    clearPropsContext: true,
   },
   RemoteBadgeElement,
   {

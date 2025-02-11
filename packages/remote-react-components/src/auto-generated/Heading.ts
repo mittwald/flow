@@ -9,7 +9,7 @@ export const Heading = createFlowRemoteComponent(
   "flr-heading",
   "Heading",
   {
-    clearPropsContext: false,
+    clearPropsContext: true,
   },
   RemoteHeadingElement,
   {

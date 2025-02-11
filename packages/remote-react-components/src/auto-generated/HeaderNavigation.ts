@@ -9,7 +9,7 @@ export const HeaderNavigation = createFlowRemoteComponent(
   "flr-header-navigation",
   "HeaderNavigation",
   {
-    clearPropsContext: false,
+    clearPropsContext: true,
   },
   RemoteHeaderNavigationElement,
   {

@@ -9,7 +9,7 @@ export const LabeledValue = createFlowRemoteComponent(
   "flr-labeled-value",
   "LabeledValue",
   {
-    clearPropsContext: false,
+    clearPropsContext: true,
   },
   RemoteLabeledValueElement,
   {

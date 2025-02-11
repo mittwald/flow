@@ -9,7 +9,7 @@ export const TimeField = createFlowRemoteComponent(
   "flr-time-field",
   "TimeField",
   {
-    clearPropsContext: false,
+    clearPropsContext: true,
   },
   RemoteTimeFieldElement,
   {

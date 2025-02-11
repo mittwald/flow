@@ -9,7 +9,7 @@ export const ColumnLayout = createFlowRemoteComponent(
   "flr-column-layout",
   "ColumnLayout",
   {
-    clearPropsContext: false,
+    clearPropsContext: true,
   },
   RemoteColumnLayoutElement,
   {

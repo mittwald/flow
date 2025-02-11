@@ -9,7 +9,7 @@ export const ContextualHelp = createFlowRemoteComponent(
   "flr-contextual-help",
   "ContextualHelp",
   {
-    clearPropsContext: false,
+    clearPropsContext: true,
   },
   RemoteContextualHelpElement,
   {

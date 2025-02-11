@@ -9,7 +9,7 @@ export const Segment = createFlowRemoteComponent(
   "flr-segment",
   "Segment",
   {
-    clearPropsContext: false,
+    clearPropsContext: true,
   },
   RemoteSegmentElement,
   {

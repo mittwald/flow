@@ -9,7 +9,7 @@ export const Initials = createFlowRemoteComponent(
   "flr-initials",
   "Initials",
   {
-    clearPropsContext: false,
+    clearPropsContext: true,
   },
   RemoteInitialsElement,
   {

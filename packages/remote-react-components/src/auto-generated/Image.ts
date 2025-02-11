@@ -9,7 +9,7 @@ export const Image = createFlowRemoteComponent(
   "flr-image",
   "Image",
   {
-    clearPropsContext: false,
+    clearPropsContext: true,
   },
   RemoteImageElement,
   {

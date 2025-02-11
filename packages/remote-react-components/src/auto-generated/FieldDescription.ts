@@ -9,7 +9,7 @@ export const FieldDescription = createFlowRemoteComponent(
   "flr-field-description",
   "FieldDescription",
   {
-    clearPropsContext: false,
+    clearPropsContext: true,
   },
   RemoteFieldDescriptionElement,
   {

@@ -9,7 +9,7 @@ export const Message = createFlowRemoteComponent(
   "flr-message",
   "Message",
   {
-    clearPropsContext: false,
+    clearPropsContext: true,
   },
   RemoteMessageElement,
   {

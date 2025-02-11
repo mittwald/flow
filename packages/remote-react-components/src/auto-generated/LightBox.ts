@@ -9,7 +9,7 @@ export const LightBox = createFlowRemoteComponent(
   "flr-light-box",
   "LightBox",
   {
-    clearPropsContext: false,
+    clearPropsContext: true,
   },
   RemoteLightBoxElement,
   {

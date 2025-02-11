@@ -9,7 +9,7 @@ export const DatePicker = createFlowRemoteComponent(
   "flr-date-picker",
   "DatePicker",
   {
-    clearPropsContext: false,
+    clearPropsContext: true,
   },
   RemoteDatePickerElement,
   {

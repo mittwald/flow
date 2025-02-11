@@ -9,7 +9,7 @@ export const Slider = createFlowRemoteComponent(
   "flr-slider",
   "Slider",
   {
-    clearPropsContext: false,
+    clearPropsContext: true,
   },
   RemoteSliderElement,
   {

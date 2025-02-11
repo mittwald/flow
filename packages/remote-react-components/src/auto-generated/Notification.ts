@@ -9,7 +9,7 @@ export const Notification = createFlowRemoteComponent(
   "flr-notification",
   "Notification",
   {
-    clearPropsContext: false,
+    clearPropsContext: true,
   },
   RemoteNotificationElement,
   {

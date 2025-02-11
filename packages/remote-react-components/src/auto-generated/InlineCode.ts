@@ -9,7 +9,7 @@ export const InlineCode = createFlowRemoteComponent(
   "flr-inline-code",
   "InlineCode",
   {
-    clearPropsContext: false,
+    clearPropsContext: true,
   },
   RemoteInlineCodeElement,
   {

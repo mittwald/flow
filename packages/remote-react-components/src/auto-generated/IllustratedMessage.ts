@@ -9,7 +9,7 @@ export const IllustratedMessage = createFlowRemoteComponent(
   "flr-illustrated-message",
   "IllustratedMessage",
   {
-    clearPropsContext: false,
+    clearPropsContext: true,
   },
   RemoteIllustratedMessageElement,
   {

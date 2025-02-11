@@ -9,7 +9,7 @@ export const Icon = createFlowRemoteComponent(
   "flr-icon",
   "Icon",
   {
-    clearPropsContext: false,
+    clearPropsContext: true,
   },
   RemoteIconElement,
   {

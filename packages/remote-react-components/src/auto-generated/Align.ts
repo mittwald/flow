@@ -9,7 +9,7 @@ export const Align = createFlowRemoteComponent(
   "flr-align",
   "Align",
   {
-    clearPropsContext: false,
+    clearPropsContext: true,
   },
   RemoteAlignElement,
   {

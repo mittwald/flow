@@ -9,7 +9,7 @@ export const Avatar = createFlowRemoteComponent(
   "flr-avatar",
   "Avatar",
   {
-    clearPropsContext: false,
+    clearPropsContext: true,
   },
   RemoteAvatarElement,
   {

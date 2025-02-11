@@ -9,7 +9,7 @@ export const Button = createFlowRemoteComponent(
   "flr-button",
   "Button",
   {
-    clearPropsContext: false,
+    clearPropsContext: true,
   },
   RemoteButtonElement,
   {

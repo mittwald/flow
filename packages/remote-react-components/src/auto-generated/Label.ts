@@ -9,7 +9,7 @@ export const Label = createFlowRemoteComponent(
   "flr-label",
   "Label",
   {
-    clearPropsContext: false,
+    clearPropsContext: true,
   },
   RemoteLabelElement,
   {

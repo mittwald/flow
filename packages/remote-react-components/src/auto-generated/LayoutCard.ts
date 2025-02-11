@@ -9,7 +9,7 @@ export const LayoutCard = createFlowRemoteComponent(
   "flr-layout-card",
   "LayoutCard",
   {
-    clearPropsContext: false,
+    clearPropsContext: true,
   },
   RemoteLayoutCardElement,
   {

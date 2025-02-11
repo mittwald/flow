@@ -9,7 +9,7 @@ export const Select = createFlowRemoteComponent(
   "flr-select",
   "Select",
   {
-    clearPropsContext: false,
+    clearPropsContext: true,
   },
   RemoteSelectElement,
   {

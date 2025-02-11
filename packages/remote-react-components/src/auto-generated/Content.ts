@@ -9,7 +9,7 @@ export const Content = createFlowRemoteComponent(
   "flr-content",
   "Content",
   {
-    clearPropsContext: false,
+    clearPropsContext: true,
   },
   RemoteContentElement,
   {

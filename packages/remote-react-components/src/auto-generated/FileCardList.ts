@@ -9,7 +9,7 @@ export const FileCardList = createFlowRemoteComponent(
   "flr-file-card-list",
   "FileCardList",
   {
-    clearPropsContext: false,
+    clearPropsContext: true,
   },
   RemoteFileCardListElement,
   {

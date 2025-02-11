@@ -9,7 +9,7 @@ export const CopyButton = createFlowRemoteComponent(
   "flr-copy-button",
   "CopyButton",
   {
-    clearPropsContext: false,
+    clearPropsContext: true,
   },
   RemoteCopyButtonElement,
   {

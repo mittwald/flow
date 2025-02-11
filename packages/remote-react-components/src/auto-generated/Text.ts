@@ -9,7 +9,7 @@ export const Text = createFlowRemoteComponent(
   "flr-text",
   "Text",
   {
-    clearPropsContext: false,
+    clearPropsContext: true,
   },
   RemoteTextElement,
   {

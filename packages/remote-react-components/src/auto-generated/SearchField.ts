@@ -9,7 +9,7 @@ export const SearchField = createFlowRemoteComponent(
   "flr-search-field",
   "SearchField",
   {
-    clearPropsContext: false,
+    clearPropsContext: true,
   },
   RemoteSearchFieldElement,
   {

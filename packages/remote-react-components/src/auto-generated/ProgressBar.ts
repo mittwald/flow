@@ -9,7 +9,7 @@ export const ProgressBar = createFlowRemoteComponent(
   "flr-progress-bar",
   "ProgressBar",
   {
-    clearPropsContext: false,
+    clearPropsContext: true,
   },
   RemoteProgressBarElement,
   {

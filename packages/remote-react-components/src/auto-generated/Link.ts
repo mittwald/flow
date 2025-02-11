@@ -9,7 +9,7 @@ export const Link = createFlowRemoteComponent(
   "flr-link",
   "Link",
   {
-    clearPropsContext: false,
+    clearPropsContext: true,
   },
   RemoteLinkElement,
   {
