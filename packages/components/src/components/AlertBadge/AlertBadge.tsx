@@ -15,7 +15,10 @@ export interface AlertBadgeProps
     FlowComponentProps,
     PropsWithClassName {}
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const AlertBadge = flowComponent<"AlertBadge", HTMLDivElement>(
   "AlertBadge",
   (props) => {

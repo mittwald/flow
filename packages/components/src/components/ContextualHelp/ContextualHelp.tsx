@@ -9,7 +9,10 @@ import { useOverlayController } from "@/lib/controller";
 
 export type ContextualHelpProps = Omit<PopoverProps, "withTip">;
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const ContextualHelp = flowComponent("ContextualHelp", (props) => {
   const {
     children,

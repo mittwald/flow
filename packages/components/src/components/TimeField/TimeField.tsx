@@ -15,7 +15,10 @@ export interface TimeFieldProps<T extends Aria.TimeValue = Aria.TimeValue>
   errorMessage?: ReactNode;
 }
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const TimeField = flowComponent("TimeField", (props) => {
   const { children, errorMessage, className, ...rest } = props;
 

@@ -21,7 +21,10 @@ export interface NumberFieldProps
   extends PropsWithChildren<Omit<Aria.NumberFieldProps, "children">>,
     FlowComponentProps {}
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const NumberField = flowComponent<"NumberField", HTMLInputElement>(
   "NumberField",
   (props) => {

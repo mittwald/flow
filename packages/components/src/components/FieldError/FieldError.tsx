@@ -12,7 +12,10 @@ export interface FieldErrorProps
   extends PropsWithChildren<Omit<Aria.FieldErrorProps, "children">>,
     FlowComponentProps {}
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const FieldError = flowComponent("FieldError", (props) => {
   const { children, className, ...rest } = props;
 

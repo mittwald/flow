@@ -14,7 +14,10 @@ export interface InitialsProps
     PropsWithClassName,
     FlowComponentProps {}
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const Initials = flowComponent("Initials", (props) => {
   const { children, className, ref } = props;
 

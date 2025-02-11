@@ -23,7 +23,10 @@ export interface TextProps
   color?: "light" | "dark";
 }
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const Text = flowComponent<"Text", HTMLDivElement>("Text", (props) => {
   const {
     children,

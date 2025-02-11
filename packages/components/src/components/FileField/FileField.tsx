@@ -24,7 +24,10 @@ export interface FileFieldProps
   onChange?: FileInputOnChangeHandler;
 }
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const FileField = flowComponent<"FileField", HTMLInputElement>(
   "FileField",
   (props) => {

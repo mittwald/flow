@@ -29,7 +29,10 @@ export interface LinkProps
   unstyled?: boolean;
 }
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const Link = flowComponent<"Link", HTMLAnchorElement>(
   "Link",
   (props) => {

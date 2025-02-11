@@ -14,7 +14,10 @@ export interface TabProps
   extends Omit<Aria.TabPanelProps, "children">,
     PropsWithChildren {}
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const Tab: FC<TabProps> = (props) => {
   const { children, className, id: idFromProps, ...rest } = props;
 

@@ -20,7 +20,10 @@ export interface LabelProps
   unstyled?: boolean;
 }
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const Label = flowComponent<"Label", HTMLLabelElement>(
   "Label",
   (props) => {

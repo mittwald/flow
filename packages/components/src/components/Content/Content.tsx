@@ -16,7 +16,10 @@ export interface ContentProps
   slot?: string;
 }
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const Content = flowComponent("Content", (props) => {
   const {
     children,

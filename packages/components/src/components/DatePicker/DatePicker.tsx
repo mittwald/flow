@@ -18,7 +18,10 @@ export interface DatePickerProps<T extends Aria.DateValue = Aria.DateValue>
   errorMessage?: ReactNode;
 }
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const DatePicker = flowComponent("DatePicker", (props) => {
   const { children, className, errorMessage, onChange, ...rest } = props;
 

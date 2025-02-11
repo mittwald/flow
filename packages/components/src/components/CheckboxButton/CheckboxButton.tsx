@@ -12,7 +12,10 @@ export interface CheckboxButtonProps
   extends CheckboxProps,
     FlowComponentProps {}
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const CheckboxButton = flowComponent<"CheckboxButton", HTMLLabelElement>(
   "CheckboxButton",
   (props) => {

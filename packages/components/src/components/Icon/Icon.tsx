@@ -16,7 +16,10 @@ export interface IconProps
   size?: "s" | "m" | "l";
 }
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const Icon = flowComponent("Icon", (props) => {
   const {
     className,

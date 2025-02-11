@@ -18,7 +18,10 @@ export interface SearchFieldProps
   extends PropsWithChildren<Omit<Aria.SearchFieldProps, "children">>,
     FlowComponentProps {}
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const SearchField = flowComponent<"SearchField", HTMLInputElement>(
   "SearchField",
   (props) => {

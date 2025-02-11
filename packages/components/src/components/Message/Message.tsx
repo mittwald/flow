@@ -12,7 +12,10 @@ export interface MessageProps extends PropsWithChildren, PropsWithClassName {
   type?: "responder" | "sender";
 }
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const Message: FC<MessageProps> = (props) => {
   const { type = "responder", children, className } = props;
 

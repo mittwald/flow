@@ -39,7 +39,10 @@ export interface BadgeProps
   isDisabled?: boolean;
 }
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const Badge = flowComponent<"Badge", HTMLDivElement>(
   "Badge",
   (props) => {

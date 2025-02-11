@@ -12,7 +12,10 @@ export interface RadioProps
   extends PropsWithChildren<Omit<Aria.RadioProps, "children">>,
     FlowComponentProps {}
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const Radio = flowComponent<"Radio", HTMLLabelElement>(
   "Radio",
   (props) => {

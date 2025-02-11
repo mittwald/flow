@@ -19,7 +19,10 @@ export interface SwitchProps
   labelPosition?: "leading" | "trailing";
 }
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const Switch = flowComponent<"Switch", HTMLLabelElement>(
   "Switch",
   (props) => {

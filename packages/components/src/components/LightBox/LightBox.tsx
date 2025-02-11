@@ -29,7 +29,10 @@ export interface LightBoxProps
   fitScreen?: boolean;
 }
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const LightBox = flowComponent("LightBox", (props) => {
   const {
     controller: controllerFromProps,

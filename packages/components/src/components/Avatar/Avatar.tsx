@@ -28,7 +28,10 @@ export interface AvatarProps
   color?: AvatarColors;
 }
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const Avatar = flowComponent<"Avatar", HTMLDivElement>(
   "Avatar",
   (props) => {

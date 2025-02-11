@@ -10,7 +10,10 @@ export interface InlineCodeProps
   color?: "default" | "light" | "dark";
 }
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const InlineCode: FC<InlineCodeProps> = (props) => {
   const { children, className, color = "default", ...rest } = props;
 

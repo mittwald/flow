@@ -28,7 +28,10 @@ export interface SelectProps
   controller?: OverlayController;
 }
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const Select = flowComponent("Select", (props) => {
   const {
     children,
