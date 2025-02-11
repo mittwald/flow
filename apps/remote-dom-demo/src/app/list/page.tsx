@@ -1,22 +1,28 @@
 "use client";
 
+import { demoData } from "@/app/list/demoData";
 import {
   Avatar,
   ContextMenu,
   Heading,
+  IconEmail,
   List,
   ListItemView,
   MenuItem,
   Section,
   Text,
   typedList,
+  useIsMounted,
 } from "@mittwald/flow-remote-react-components";
-import React from "react";
-import { demoData } from "@/app/list/demoData";
-import { IconEmail } from "@mittwald/flow-remote-react-components";
 
 export default function Page() {
   const DemoList = typedList<(typeof demoData)[number]>();
+
+  const isMounted = useIsMounted();
+
+  if (!isMounted) {
+    return null;
+  }
 
   return (
     <Section>
@@ -25,7 +31,18 @@ export default function Page() {
           {(val) => <>{val}</>}
         </DemoList.Filter>
         <DemoList.Search autoSubmit />
-        <DemoList.StaticData data={demoData} />
+        <DemoList.LoaderAsync>
+          {() => {
+            return new Promise((r) => {
+              setTimeout(() => {
+                r({
+                  data: demoData,
+                  itemTotalCount: demoData.length,
+                });
+              }, 1500);
+            });
+          }}
+        </DemoList.LoaderAsync>
         <DemoList.Item textValue={(d) => d.name}>
           {(d) => (
             <ListItemView>

@@ -22,7 +22,7 @@ export const PaginationInfos: FC<TextProps> = (props) => {
   }
 
   const text = isInitiallyLoading ? (
-    <SkeletonView />
+    <SkeletonView width="200px" />
   ) : (
     stringFormatter.format("list.paginationInfo", {
       visibleItemsCount,

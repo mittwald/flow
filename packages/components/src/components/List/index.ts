@@ -6,7 +6,6 @@ export type {
   DataLoaderResult,
 } from "@/components/List/model/loading/types";
 
-export * from "./components/Items/components/Item/components/ListItemSkeletonView";
 export * from "./components/Items/views/GridList";
 export * from "./components/Items/views/GridListItem";
 export * from "./components/ListItemView";
@@ -22,4 +21,6 @@ export * from "./setupComponents/ListFilter";
 export * from "./setupComponents/ListItem";
 export * from "./setupComponents/ListLoaderAsync";
 export * from "./setupComponents/ListSorting";
+export * from "./setupComponents/ListStaticData";
+
 export * from "./setupComponents/ListStaticData";

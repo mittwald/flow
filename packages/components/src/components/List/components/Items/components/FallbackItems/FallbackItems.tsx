@@ -1,15 +1,15 @@
 import { ItemContainer } from "@/components/List/components/Items/components/Item/Item";
 import { useList } from "@/components/List/hooks/useList";
-import ListItemSkeletonViewView from "@/views/ListItemSkeletonViewView";
 import type { FC } from "react";
 import { cloneElement } from "react";
+import { ListItemSkeletonView } from "../Item/components/ListItemSkeletonView/ListItemSkeletonView";
 
 export type FallbackItemsProps = unknown;
 
 export const FallbackItems: FC<FallbackItemsProps> = () => {
   const list = useList();
   const fallback = list.itemView?.fallback ?? (
-    <ListItemSkeletonViewView viewMode={list.viewMode} />
+    <ListItemSkeletonView viewMode={list.viewMode} />
   );
 
   return Array.from(Array(5)).map((_, i) => (

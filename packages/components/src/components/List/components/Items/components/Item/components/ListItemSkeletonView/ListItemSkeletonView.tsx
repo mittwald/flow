@@ -1,6 +1,7 @@
 import type { ListViewMode } from "@/components/List/model/types";
 import AvatarView from "@/views/AvatarView";
 import FragmentView from "@/views/FragmentView";
+import HeadingView from "@/views/HeadingView";
 import ListItemViewContentView from "@/views/ListItemViewContentView";
 import SkeletonTextView from "@/views/SkeletonTextView";
 import SkeletonView from "@/views/SkeletonView";
@@ -11,7 +12,6 @@ export interface ListItemSkeletonViewProps {
   viewMode: ListViewMode;
 }
 
-/** @flr-generate all */
 export const ListItemSkeletonView: FC<ListItemSkeletonViewProps> = (props) => {
   const { viewMode } = props;
 
@@ -19,9 +19,12 @@ export const ListItemSkeletonView: FC<ListItemSkeletonViewProps> = (props) => {
 
   return (
     <ListItemViewContentView
+      viewMode={viewMode}
       title={
         <FragmentView>
-          <SkeletonTextView width="200px" />
+          <HeadingView>
+            <SkeletonTextView width="200px" />
+          </HeadingView>
         </FragmentView>
       }
       avatar={

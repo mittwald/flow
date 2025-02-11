@@ -1,11 +1,11 @@
 import { useGridItemProps } from "@/components/List/components/Items/components/Item/hooks/useGridItemProps";
 import { useList } from "@/components/List/hooks/useList";
 import ItemsGridListItemView from "@/views/ItemsGridListItemView";
-import ListItemSkeletonViewView from "@/views/ListItemSkeletonViewView";
 import type { FC, PropsWithChildren } from "react";
 import { Suspense } from "react";
 import type { Key } from "react-aria-components";
 import styles from "./Item.module.scss";
+import { ListItemSkeletonView } from "./components/ListItemSkeletonView/ListItemSkeletonView";
 
 interface Props extends PropsWithChildren {
   id: Key;
@@ -37,9 +37,7 @@ export const Item = (props: Props) => {
       isTile={list.viewMode === "tiles"}
       {...gridItemProps}
     >
-      <Suspense
-        fallback={<ListItemSkeletonViewView viewMode={list.viewMode} />}
-      >
+      <Suspense fallback={<ListItemSkeletonView viewMode={list.viewMode} />}>
         {children}
       </Suspense>
     </ItemsGridListItemView>
