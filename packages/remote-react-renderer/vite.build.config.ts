@@ -1,9 +1,9 @@
-import banner from "vite-plugin-banner";
-import { defineConfig, mergeConfig } from "vite";
-import dts from "vite-plugin-dts";
-import baseConfig from "./vite.config";
-import { externalizeDeps } from "vite-plugin-externalize-deps";
 import preserveDirectives from "rollup-preserve-directives";
+import { defineConfig, mergeConfig } from "vite";
+import banner from "vite-plugin-banner";
+import dts from "vite-plugin-dts";
+import { externalizeDeps } from "vite-plugin-externalize-deps";
+import baseConfig from "./vite.config";
 
 export default mergeConfig(
   baseConfig,
@@ -11,7 +11,7 @@ export default mergeConfig(
     plugins: [
       preserveDirectives(),
       banner((filename) =>
-        filename.endsWith(".js") ? '"use client"\r\n/* */' : "",
+        filename.endsWith(".mjs") ? '"use client"\r\n/* */' : "",
       ),
       externalizeDeps(),
       dts({
@@ -20,6 +20,9 @@ export default mergeConfig(
       }),
     ],
     build: {
+      minify: false,
+      sourcemap: true,
+      outDir: "dist/js",
       emptyOutDir: false,
       lib: {
         entry: {
@@ -27,6 +30,12 @@ export default mergeConfig(
           RemoteRenderer: "./src/RemoteRenderer.tsx",
         },
         formats: ["es"],
+      },
+      rollupOptions: {
+        output: {
+          preserveModules: true,
+          entryFileNames: "[name].mjs",
+        },
       },
     },
   }),

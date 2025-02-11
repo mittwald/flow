@@ -11,7 +11,7 @@
       "default": "./dist/js/index.mjs"
     },
     "./RemoteRoot": {
-      "types": "./dist/types/RemoteRoot.d.ts",
+      "types": "./dist/types/components/RemoteRoot.d.ts",
       "default": "./dist/js/RemoteRoot.mjs"
     },
     "./react-hook-form": {

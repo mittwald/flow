@@ -8,11 +8,11 @@
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
-      "default": "./dist/index.js"
+      "default": "./dist/js/index.mjs"
     },
     "./RemoteRenderer": {
       "types": "./dist/types/RemoteRenderer.d.ts",
-      "default": "./dist/RemoteRenderer.js"
+      "default": "./dist/js/RemoteRenderer.mjs"
     }
   },
   "files": [
