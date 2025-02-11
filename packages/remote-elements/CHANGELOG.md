@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.34](https://github.com/mittwald/flow/compare/0.2.0-alpha.33...0.2.0-alpha.34) (2025-02-11)
+
+### Bug Fixes
+
+* fix List loading view not rendering remote [#2](https://github.com/mittwald/flow/issues/2) ([643f000](https://github.com/mittwald/flow/commit/643f000c1f6d83b3fdeb149608192c6c3d942eae))
+* fix list loading view remote ([058f895](https://github.com/mittwald/flow/commit/058f89539a6fdbc50cb127662e92ddadc1e55777))
+
 # [0.2.0-alpha.33](https://github.com/mittwald/flow/compare/0.2.0-alpha.32...0.2.0-alpha.33) (2025-02-11)
 
 ### Bug Fixes
