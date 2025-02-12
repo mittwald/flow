@@ -15,7 +15,14 @@
     padding-block-start: var(--section--section-to-section-spacing);
   }
 
-  .heading:not(:first-child) {
-    margin-top: var(--section--sub-heading-spacing);
+  h2.heading:not(:first-child),
+  h3.heading:not(:first-child) {
+    margin-top: var(--section--sub-heading-spacing-m);
+  }
+
+  h4.heading:not(:first-child),
+  h5.heading:not(:first-child),
+  h6.heading:not(:first-child) {
+    margin-top: var(--section--sub-heading-spacing-s);
   }
 }
