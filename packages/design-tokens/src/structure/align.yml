@@ -11,3 +11,6 @@ align:
   icon-text:
     spacing:
       value: "{size-rem.s}"
+  text-contextualHelp:
+    spacing:
+      value: "{size-rem.xs}"
