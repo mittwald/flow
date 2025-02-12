@@ -70,6 +70,7 @@ export function Field<T extends FieldValues>(props: Props<T>) {
           <PropsContextProvider
             props={propsContext}
             dependencies={[renderProps]}
+            mergeInParentContext
           >
             {children}
           </PropsContextProvider>
