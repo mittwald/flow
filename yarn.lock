@@ -3259,6 +3259,7 @@ __metadata:
     "@chakra-ui/live-region": "npm:^2.1.0"
     "@faker-js/faker": "npm:^9.2.0"
     "@internationalized/date": "npm:^3.6.0"
+    "@internationalized/string": "npm:^3.2.5"
     "@internationalized/string-compiler": "npm:^3.2.6"
     "@mittwald/flow-design-tokens": "workspace:^"
     "@mittwald/react-tunnel": "workspace:^"
