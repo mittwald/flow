@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.421](https://github.com/mittwald/flow/compare/0.1.0-alpha.420...0.1.0-alpha.421) (2025-02-12)
+
+### Features
+
+- **Align:** add support for text and contextualHelp
+  ([#1169](https://github.com/mittwald/flow/issues/1169))
+  ([9f408ff](https://github.com/mittwald/flow/commit/9f408ff95405cc9c10177f5280cf5287248473b0))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.420](https://github.com/mittwald/flow/compare/0.1.0-alpha.419...0.1.0-alpha.420) (2025-02-10)
 
 **Note:** Version bump only for package @mittwald/flow-design-tokens
