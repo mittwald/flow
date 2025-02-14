@@ -56,6 +56,7 @@ const meta: Meta<typeof Field> = {
         lastName: "",
         gender: "",
         storage: 200,
+        testing: true,
       },
     });
 
