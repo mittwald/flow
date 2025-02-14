@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.428](https://github.com/mittwald/flow/compare/0.1.0-alpha.427...0.1.0-alpha.428) (2025-02-14)
+
+### Features
+
+- **LabeledValue:** support button in labeled value
+  ([#1175](https://github.com/mittwald/flow/issues/1175))
+  ([3a8f699](https://github.com/mittwald/flow/commit/3a8f699ba17e749b57e9337904920a8607356137))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.427](https://github.com/mittwald/flow/compare/0.1.0-alpha.426...0.1.0-alpha.427) (2025-02-14)
 
 **Note:** Version bump only for package @mittwald/flow-project
