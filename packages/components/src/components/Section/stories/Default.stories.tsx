@@ -152,6 +152,8 @@ export const WithSubHeadings: Story = {
         <Text>{dummyText.long}</Text>
         <Heading level={3}>Sub-Heading</Heading>
         <Text>{dummyText.long}</Text>
+        <Heading level={4}>Sub-Sub-Heading</Heading>
+        <Text>{dummyText.long}</Text>
       </Section>
       <Section {...props}>
         <Header>
