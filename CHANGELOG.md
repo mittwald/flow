@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.423](https://github.com/mittwald/flow/compare/0.1.0-alpha.422...0.1.0-alpha.423) (2025-02-14)
+
+### Bug Fixes
+
+- **Field:** Fix Switch is not reacting to Form defaultValue bug
+  ([#1171](https://github.com/mittwald/flow/issues/1171))
+  ([72a63f4](https://github.com/mittwald/flow/commit/72a63f467be3a206fbbfe77010395a1be060388d))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.422](https://github.com/mittwald/flow/compare/0.1.0-alpha.421...0.1.0-alpha.422) (2025-02-12)
 
 ### Features
