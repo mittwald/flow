@@ -13,3 +13,5 @@ export default meta;
 type Story = StoryObj<typeof Image>;
 
 export const Default: Story = {};
+
+export const WithBorder: Story = { args: { withBorder: true } };
