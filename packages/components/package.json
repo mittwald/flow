@@ -257,6 +257,11 @@
       "types": "./dist/js/types/components/Message/index.d.ts",
       "import": "./dist/js/Message.js"
     },
+    "./MessageSeparator/styles.css": "./dist/css/MessageSeparator.css",
+    "./MessageSeparator": {
+      "types": "./dist/js/types/components/MessageSeparator/index.d.ts",
+      "import": "./dist/js/MessageSeparator.js"
+    },
     "./MessageThread/styles.css": "./dist/css/MessageThread.css",
     "./MessageThread": {
       "types": "./dist/js/types/components/MessageThread/index.d.ts",

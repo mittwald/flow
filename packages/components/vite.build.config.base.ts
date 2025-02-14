@@ -84,6 +84,7 @@ export const buildConfig = (opts: Options) => {
     Markdown: "./src/components/Markdown/index.ts",
     MenuItem: "./src/components/MenuItem/index.ts",
     Message: "./src/components/Message/index.ts",
+    MessageSeparator: "./src/components/MessageSeparator/index.ts",
     MessageThread: "./src/components/MessageThread/index.ts",
     Modal: "./src/components/Modal/index.ts",
     Navigation: "./src/components/Navigation/index.ts",

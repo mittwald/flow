@@ -39,7 +39,7 @@ const ExampleMessage: FC<ExampleMessageProps> = (props) => {
 };
 
 const meta: Meta<typeof MessageThread> = {
-  title: "Content/MessageThread",
+  title: "Chat/MessageThread",
   component: MessageThread,
   render: (props) => (
     <MessageThread {...props}>
