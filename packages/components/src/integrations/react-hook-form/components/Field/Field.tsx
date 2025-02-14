@@ -52,7 +52,10 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
           FileField: formControlProps,
           NumberField: formControlProps,
           RadioGroup: formControlProps,
-          Switch: formControlProps,
+          Switch: {
+            ...formControlProps,
+            isSelected: formControlProps.value,
+          },
           TextArea: formControlProps,
           TextField: formControlProps,
           Select: {

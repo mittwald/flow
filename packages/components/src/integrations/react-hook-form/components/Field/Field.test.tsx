@@ -7,6 +7,7 @@ import React from "react";
 import { Button } from "@/components/Button";
 import { Label } from "@/components/Label";
 import { act, fireEvent, render, screen } from "@testing-library/react";
+import { Switch } from "@/components/Switch";
 
 const handleSubmit = vitest.fn();
 
@@ -56,5 +57,38 @@ describe("Select field", () => {
     expect(handleSubmit).toHaveBeenCalledWith({
       select: "bar",
     });
+  });
+});
+
+describe("Switch field", () => {
+  interface FormValues {
+    switchedField: boolean;
+  }
+
+  const TestForm = () => {
+    const form = useForm<FormValues>({
+      defaultValues: {
+        switchedField: true,
+      },
+    });
+
+    const Field = typedField(form);
+
+    return (
+      <Form form={form} onSubmit={(values) => handleSubmit(values)}>
+        <Field name="switchedField">
+          <Switch data-testid="switch" />
+        </Field>
+        <Button type="submit">Submit</Button>
+      </Form>
+    );
+  };
+
+  test("switch uses default value", async () => {
+    render(<TestForm />);
+
+    expect(screen.getByTestId("switch").getAttribute("data-selected")).toBe(
+      "true",
+    );
   });
 });
