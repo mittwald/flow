@@ -1,0 +1,21 @@
+.messageSeparator {
+  position: relative;
+  display: flex;
+  justify-content: center;
+
+  .separator {
+    position: absolute;
+    top: 50%;
+    inset-inline: 0;
+  }
+
+  .content {
+    background-color: var(--message-separator--background-color);
+    padding-inline: var(--message-separator--padding);
+    position: relative;
+    font-size: var(--message-separator--font-size);
+    color: var(--separator--color);
+    display: inline;
+    text-align: center;
+  }
+}
