@@ -506,7 +506,7 @@
     "fs-jetpack": "^5.1.0",
     "glob": "^10.4.5",
     "happy-dom": "^15.11.7",
-    "next": "^14.2.18",
+    "next": "^15.1.6",
     "nx": "^20.1.3",
     "postcss": "^8.4.49",
     "postcss-nested-import": "^1.3.0",
