@@ -12,7 +12,7 @@ import { Content } from "@/components/Content";
 import { Text } from "@/components/Text";
 
 const meta: Meta<typeof Message> = {
-  title: "Content/Message",
+  title: "Chat/Message",
   component: Message,
   parameters: {
     controls: { exclude: ["className"] },
