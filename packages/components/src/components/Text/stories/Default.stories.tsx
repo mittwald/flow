@@ -88,3 +88,5 @@ export const Light: Story = {
     backgrounds: storyBackgroundDark,
   },
 };
+
+export const AlignEnd: Story = { args: { align: "end" } };

@@ -18,7 +18,6 @@ export const DeleteButton: FC<Props> = (props) => {
     <Button
       className={styles.deleteButton}
       aria-label={stringFormatter.format(`fileCard.delete`)}
-      size="s"
       variant="plain"
       color="secondary"
       onPress={onDelete}
