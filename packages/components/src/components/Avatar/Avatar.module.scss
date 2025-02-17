@@ -4,6 +4,8 @@
   height: var(--avatar-size);
   overflow: hidden;
   flex-shrink: 0;
+  font-weight: var(--font-weight--bold);
+  font-size: calc(var(--avatar-size) * 0.35);
 
   background-color: var(--background-color);
   color: var(--content-color);

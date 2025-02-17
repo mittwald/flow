@@ -1,0 +1,18 @@
+.avatarStack {
+  display: flex;
+  flex-direction: row;
+
+  .avatar {
+    &:not(:last-child) {
+      --mask-size: calc(var(--avatar-size) * 1.25);
+      --mask-cutout: calc(var(--avatar-size) / 2 + var(--border-width--200));
+      --mask-offset: calc(var(--avatar-size) * -0.25);
+      mask: radial-gradient(
+        circle at var(--mask-size) center,
+        transparent var(--mask-cutout),
+        white 0
+      );
+      margin-right: var(--mask-offset);
+    }
+  }
+}
