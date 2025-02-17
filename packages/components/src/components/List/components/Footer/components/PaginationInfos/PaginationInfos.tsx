@@ -1,5 +1,5 @@
 import locales from "../../../../locales/*.locale.json";
-import { useLocalizedStringFormatter } from "react-aria";
+import useLocalizedStringFormatter from "@/lib/i18n/useLocalizedStringFormatter";
 import type { TextProps } from "@/components/Text";
 import { Text } from "@/components/Text";
 import type { FC } from "react";
