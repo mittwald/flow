@@ -37,10 +37,17 @@ export const AvatarStack: FC<AvatarStackProps> = (props) => {
 
   const additionalItemsCount = totalCount - avatarCount;
 
-  const rootClassName = clsx(styles.avatarStack, className);
+  const rootClassName = clsx(
+    styles.avatarStack,
+    styles[`size-${size}`],
+    className,
+  );
 
   const propsContext: PropsContext = {
     Avatar: { className: styles.avatar, size },
+    Button: {
+      className: styles.avatar,
+    },
   };
 
   return (

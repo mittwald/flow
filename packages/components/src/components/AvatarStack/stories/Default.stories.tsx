@@ -10,8 +10,9 @@ import { action } from "@storybook/addon-actions";
 const meta: Meta<typeof AvatarStack> = {
   title: "Content/AvatarStack",
   component: AvatarStack,
+  args: { totalCount: 20 },
   render: (props) => (
-    <AvatarStack {...props} totalCount={20}>
+    <AvatarStack {...props}>
       <Avatar size={props.size}>
         <Image alt="Gopher" src={dummyText.imageSrc} />
       </Avatar>
@@ -30,13 +31,9 @@ type Story = StoryObj<typeof AvatarStack>;
 
 export const Default: Story = {};
 
-export const WithClickableAvatars: Story = {
+export const ClickableAvatars: Story = {
   render: (props) => (
-    <AvatarStack
-      {...props}
-      totalCount={20}
-      onCountPress={action("count clicked")}
-    >
+    <AvatarStack {...props} onCountPress={action("count clicked")}>
       <Button onPress={action("avatar clicked")}>
         <Avatar size={props.size}>
           <Image alt="Gopher" src={dummyText.imageSrc} />
@@ -52,6 +49,23 @@ export const WithClickableAvatars: Story = {
           <Image alt="Gopher" src={dummyText.imageSrc} />
         </Avatar>
       </Button>
+    </AvatarStack>
+  ),
+};
+
+export const WithoutTotalCount: Story = {
+  args: { totalCount: undefined },
+  render: (props) => (
+    <AvatarStack {...props}>
+      <Avatar size={props.size}>
+        <Image alt="Gopher" src={dummyText.imageSrc} />
+      </Avatar>
+      <Avatar size={props.size}>
+        <Image alt="Gopher" src={dummyText.imageSrc} />
+      </Avatar>
+      <Avatar size={props.size}>
+        <Image alt="Gopher" src={dummyText.imageSrc} />
+      </Avatar>
     </AvatarStack>
   ),
 };

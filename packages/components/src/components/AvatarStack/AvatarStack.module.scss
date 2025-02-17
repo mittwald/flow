@@ -5,7 +5,9 @@
   .avatar {
     &:not(:last-child) {
       --mask-size: calc(var(--avatar-size) * 1.25);
-      --mask-cutout: calc(var(--avatar-size) / 2 + var(--border-width--200));
+      --mask-cutout: calc(
+        var(--avatar-size) / 2 + var(--avatar-stack--border-width)
+      );
       --mask-offset: calc(var(--avatar-size) * -0.25);
       mask: radial-gradient(
         circle at var(--mask-size) center,
@@ -15,4 +17,17 @@
       margin-right: var(--mask-offset);
     }
   }
+
+  /* Sizes */
+
+  @mixin size($size) {
+    &.size-#{$size} {
+      --avatar-size: var(--avatar--size--#{$size});
+    }
+  }
+
+  @include size(m);
+  @include size(xs);
+  @include size(s);
+  @include size(l);
 }
