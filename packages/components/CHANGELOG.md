@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.430](https://github.com/mittwald/flow/compare/0.1.0-alpha.429...0.1.0-alpha.430) (2025-02-17)
+
+### Features
+
+- **Text:** add align property
+  ([#1186](https://github.com/mittwald/flow/issues/1186))
+  ([141d516](https://github.com/mittwald/flow/commit/141d516107f980371a0a9fc9f0b01abd1e4aeb6f))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.429](https://github.com/mittwald/flow/compare/0.1.0-alpha.428...0.1.0-alpha.429) (2025-02-17)
 
 ### Bug Fixes
