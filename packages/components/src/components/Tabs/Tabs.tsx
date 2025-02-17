@@ -20,6 +20,7 @@ export const Tabs = flowComponent("Tabs", (props) => {
     defaultSelectedKey,
     disabledKeys,
     refProp: ref,
+    onSelectionChange,
     ...rest
   } = props;
 
@@ -36,13 +37,23 @@ export const Tabs = flowComponent("Tabs", (props) => {
         className={rootClassName}
         {...rest}
         selectedKey={selection}
-        onSelectionChange={setSelection}
+        onSelectionChange={(key) => {
+          setSelection(key);
+          if (onSelectionChange) {
+            onSelectionChange(key);
+          }
+        }}
         disabledKeys={disabledKeys}
         ref={ref}
       >
         <TabList
           selection={selection}
-          onContextMenuSelectionChange={setSelection}
+          onContextMenuSelectionChange={(key) => {
+            setSelection(key);
+            if (onSelectionChange) {
+              onSelectionChange(key);
+            }
+          }}
           disabledKeys={disabledKeys}
         />
         <TunnelExit id="Panels" />
