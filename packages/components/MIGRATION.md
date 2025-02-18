@@ -39,7 +39,7 @@ missing module exports.
 
 ```shell
 npx jscodeshift \
-  -t https://raw.githubusercontent.com/mittwald/flow/refs/heads/0.2.0/packages/codemods/src/transforms/flow020.ts \
+  -t https://raw.githubusercontent.com/mittwald/flow/refs/heads/main/packages/codemods/src/transforms/flow020.ts \
   --parser tsx \
   src
 ```
