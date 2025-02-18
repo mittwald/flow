@@ -46,7 +46,10 @@ export function Field<T extends FieldValues>(props: Props<T>) {
         };
 
         const propsContext: PropsContext = {
-          Checkbox: formControlProps,
+          Checkbox: {
+            ...formControlProps,
+            isSelected: formControlProps.value,
+          },
           CheckboxGroup: formControlProps,
           CheckboxButton: formControlProps,
           FileField: formControlProps,
