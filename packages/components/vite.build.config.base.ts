@@ -39,6 +39,7 @@ export const buildConfig = (opts: Options) => {
     AlertIcon: "./src/components/AlertIcon/index.ts",
     Align: "./src/components/Align/index.ts",
     Avatar: "./src/components/Avatar/index.ts",
+    AvatarStack: "./src/components/AvatarStack/index.ts",
     Badge: "./src/components/Badge/index.ts",
     Breadcrumb: "./src/components/Breadcrumb/index.ts",
     Button: "./src/components/Button/index.ts",

@@ -49,6 +49,11 @@
       "types": "./dist/js/types/components/Avatar/index.d.ts",
       "import": "./dist/js/Avatar.js"
     },
+    "./AvatarStack/styles.css": "./dist/css/AvatarStack.css",
+    "./AvatarStack": {
+      "types": "./dist/js/types/components/AvatarStack/index.d.ts",
+      "import": "./dist/js/AvatarStack.js"
+    },
     "./Badge/styles.css": "./dist/css/Badge.css",
     "./Badge": {
       "types": "./dist/js/types/components/Badge/index.d.ts",
