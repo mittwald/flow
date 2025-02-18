@@ -3,11 +3,12 @@ import React from "react";
 import styles from "./Label.module.scss";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
-import { ClearPropsContext } from "@/lib/propsContext";
+import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { useLocalizedStringFormatter } from "react-aria";
 import locales from "./locales/*.locale.json";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 
 export interface LabelProps
   extends PropsWithChildren<Omit<Aria.LabelProps, "children">>,
@@ -45,13 +46,20 @@ export const Label = flowComponent<"Label", HTMLLabelElement>(
 
     const optionalMarker = " " + stringFormatter.format("label.optional");
 
+    const propsContext: PropsContext = {
+      ContextualHelpTrigger: { tunnelId: "contextualHelp" },
+    };
+
     return (
-      <ClearPropsContext>
-        <Aria.Label {...rest} className={rootClassName} ref={ref}>
-          {children}
-          {optional && optionalMarker}
-        </Aria.Label>
-      </ClearPropsContext>
+      <PropsContextProvider props={propsContext}>
+        <TunnelProvider>
+          <Aria.Label {...rest} className={rootClassName} ref={ref}>
+            {children}
+            {optional && optionalMarker}
+            <TunnelExit id="contextualHelp" />
+          </Aria.Label>
+        </TunnelProvider>
+      </PropsContextProvider>
     );
   },
 );

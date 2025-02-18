@@ -42,3 +42,24 @@ export const WithContextualHelp: Story = {
     </Label>
   ),
 };
+
+export const OptionalWithContextualHelp: Story = {
+  args: { optional: true },
+  render: (props) => (
+    <Label {...props}>
+      <Text>Label</Text>
+      <ContextualHelpTrigger>
+        <Button />
+        <ContextualHelp>
+          <Heading>Rights & roles</Heading>
+          <Text>
+            Each user profile is assigned a role in mStudio for each project
+            and/or organization. This allows you to work in a completely new and
+            modern way.
+          </Text>
+          <Link>Learn more</Link>
+        </ContextualHelp>
+      </ContextualHelpTrigger>
+    </Label>
+  ),
+};
