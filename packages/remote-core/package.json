@@ -26,13 +26,13 @@
   "dependencies": {
     "@quilted/threads": "^3.1.2",
     "@remote-dom/core": "1.5.1",
-    "remeda": "^2.20.1"
+    "remeda": "^2.20.2"
   },
   "devDependencies": {
     "@mittwald/typescript-config": "workspace:*",
-    "@types/node": "^22.13.1",
-    "nx": "^20.4.2",
-    "prettier": "^3.5.0",
+    "@types/node": "^22.13.4",
+    "nx": "^20.4.4",
+    "prettier": "^3.5.1",
     "rimraf": "^6.0.1",
     "rollup-preserve-directives": "^1.1.3",
     "typescript": "^5.7.3",
