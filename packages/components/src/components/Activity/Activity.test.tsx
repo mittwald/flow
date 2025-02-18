@@ -1,6 +1,6 @@
 import { beforeEach, expect, vitest } from "vitest";
 import { render } from "@testing-library/react";
-import React, { useEffect, act } from "react";
+import React, { act, useEffect } from "react";
 import Activity from "@/components/Activity/index";
 
 const rendering = vitest.fn();

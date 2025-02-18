@@ -25,13 +25,17 @@ export interface TextProps
   align?: "start" | "end" | "center";
 }
 
-export const Text = flowComponent("Text", (props) => {
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
+export const Text = flowComponent<"Text", HTMLDivElement>("Text", (props) => {
   const {
     children,
     className,
     elementType = "span",
     emulateBoldWidth,
-    refProp: ref,
+    ref,
     color,
     align = "start",
     ...rest

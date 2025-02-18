@@ -1,3 +1,4 @@
+export * from "./view";
 import React from "react";
 import styles from "./Heading.module.scss";
 import clsx from "clsx";
@@ -15,6 +16,10 @@ export interface HeadingProps extends Aria.HeadingProps, FlowComponentProps {
   color?: "primary" | "dark" | "light";
 }
 
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const Heading = flowComponent("Heading", (props) => {
   const {
     children,
@@ -22,7 +27,7 @@ export const Heading = flowComponent("Heading", (props) => {
     level = 2,
     color = "primary",
     size,
-    refProp: ref,
+    ref,
     ...rest
   } = props;
 

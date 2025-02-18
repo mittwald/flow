@@ -1,14 +1,20 @@
-import type { FC } from "react";
-import React, { cloneElement } from "react";
-import { useList } from "@/components/List/hooks/useList";
-import { SkeletonView } from "@/components/List/components/Items/components/Item/components/SkeletonView/SkeletonView";
 import { ItemContainer } from "@/components/List/components/Items/components/Item/Item";
+import { useList } from "@/components/List/hooks/useList";
+import type { FC } from "react";
+import { cloneElement } from "react";
+import { ListItemSkeletonView } from "../Item/components/ListItemSkeletonView/ListItemSkeletonView";
 
-export const FallbackItems: FC = () => {
+export type FallbackItemsProps = unknown;
+
+export const FallbackItems: FC<FallbackItemsProps> = () => {
   const list = useList();
-  const fallback = list.itemView?.fallback ?? <SkeletonView />;
+  const fallback = list.itemView?.fallback ?? (
+    <ListItemSkeletonView viewMode={list.viewMode} />
+  );
 
   return Array.from(Array(5)).map((_, i) => (
-    <ItemContainer key={i}>{cloneElement(fallback)}</ItemContainer>
+    <ItemContainer id={i} data={i as never} key={i}>
+      {cloneElement(fallback)}
+    </ItemContainer>
   ));
 };

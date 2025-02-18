@@ -24,12 +24,15 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ secrets.PUBLISH_PAT }}
-
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
       - name: Setup Node 🎛️
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: "yarn"
+          cache: "pnpm"
           registry-url: "https://registry.npmjs.org"
 
       - name: Git Identity 🪪
@@ -37,8 +40,8 @@ jobs:
           git config user.name "${{ github.actor }}"
           git config user.email "${{ github.actor }}@users.noreply.github.com"
 
-      - name: Yarn Install 📦️
-        run: yarn install --immutable
+      - name: pnpm Install 📦️
+        run: pnpm install --frozen-lockfile
 
       - name: Setup NX 1/2 🎛️
         uses: nrwl/nx-set-shas@v4
@@ -48,14 +51,14 @@ jobs:
         run: git branch --track main origin/main
 
       - name: Build 🔨
-        run: yarn build --exclude @mittwald/flow-documentation
+        run: pnpm build --exclude @mittwald/flow-documentation
 
       - name: Version and publish 🚀
         run: |
-          yarn lerna publish \
+          pnpm lerna publish \
             --force-publish \
             --conventional-commits --conventional-prerelease="*" \
-            --create-release github \
             --message "chore(release): bump version to %v" \
             --yes --no-private \
+            --pre-dist-tag experimental \
             --tag-version-prefix ""

@@ -28,6 +28,10 @@ export interface SelectProps
   controller?: OverlayController;
 }
 
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const Select = flowComponent("Select", (props) => {
   const {
     children,
@@ -39,7 +43,7 @@ export const Select = flowComponent("Select", (props) => {
       // default: do nothing
     },
     controller: controllerFromProps,
-    refProp: ref,
+    ref,
     ...rest
   } = props;
 

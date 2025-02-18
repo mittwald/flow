@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    /* Base Options: */
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "target": "esnext",
+    "lib": ["esnext"],
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "moduleDetection": "force",
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+
+    /* Strictness */
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+
+    /* Opinion */
+    "incremental": true,
+    "module": "preserve",
+    "outDir": "${configDir}/dist",
+    "baseUrl": "${configDir}",
+    "rootDir": "${configDir}/src",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "display": "Base Configuration",
+  "exclude": ["${configDir}/node_modules", "${configDir}/dist"],
+  "include": ["${configDir}/src", "${configDir}/src/**/*.json"]
+}

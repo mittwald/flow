@@ -14,7 +14,8 @@ import { Radio, RadioGroup } from "@/components/RadioGroup";
 import { Switch } from "@/components/Switch";
 import { CheckboxGroup } from "@/components/CheckboxGroup";
 import { Checkbox } from "@/components/Checkbox";
-import Select, { Option } from "@/components/Select";
+import Select from "@/components/Select";
+import { Option } from "@/components/Option";
 import { Slider } from "@/components/Slider";
 import { sleep } from "@/lib/promises/sleep";
 import DatePicker from "@/components/DatePicker";
@@ -56,7 +57,6 @@ const meta: Meta<typeof Field> = {
         lastName: "",
         gender: "",
         storage: 200,
-        interests: ["foo"],
         testing: true,
       },
     });

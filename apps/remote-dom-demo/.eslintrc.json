@@ -1,0 +1,14 @@
+{
+  "extends": "next/core-web-vitals",
+  "overrides": [
+    {
+      "files": "src/content/**/examples/*.tsx",
+      "rules": {
+        "react/jsx-no-undef": ["off"]
+      }
+    }
+  ],
+  "rules": {
+    "@next/next/no-html-link-for-pages": ["error", "apps/docs/src/app/"]
+  }
+}

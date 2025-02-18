@@ -1,15 +1,17 @@
-/* eslint-disable */
 /* auto-generated file */
-import React, { ComponentProps, FC } from "react";
+import React, { type ComponentProps, type FC } from "react";
 import { IconEye as Tabler } from "@tabler/icons-react";
-import { Icon } from "@/components/Icon";
+import { type Icon } from "@/components/Icon";
+import View from "@/views/IconView";
 
 export const IconShow: FC<Omit<ComponentProps<typeof Icon>, "children">> = (
   props,
-) => (
-  <Icon {...props}>
-    <Tabler />
-  </Icon>
-);
+) => {
+  return (
+    <View {...props}>
+      <Tabler />
+    </View>
+  );
+};
 
 export default IconShow;
