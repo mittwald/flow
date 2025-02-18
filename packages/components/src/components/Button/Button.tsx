@@ -35,7 +35,7 @@ export interface ButtonProps
   /** @internal */
   unstyled?: boolean;
   /** @internal */
-  ariaSlot?: string;
+  ariaSlot?: string | null;
 }
 
 const disablePendingProps = (props: ButtonProps) => {
