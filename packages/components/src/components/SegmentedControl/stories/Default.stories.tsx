@@ -56,3 +56,16 @@ export const WithFieldError: Story = {
     </SegmentedControl>
   ),
 };
+
+export const DisabledSegments: Story = {
+  render: (props) => (
+    <SegmentedControl {...props}>
+      <Label>Role</Label>
+      <Segment value="admin">Admin</Segment>
+      <Segment value="member" isDisabled>
+        Member
+      </Segment>
+      <Segment value="accountant">Accountant</Segment>
+    </SegmentedControl>
+  ),
+};

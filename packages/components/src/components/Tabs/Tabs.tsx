@@ -1,12 +1,12 @@
-import type { PropsWithChildren } from "react";
-import React, { useState } from "react";
-import * as Aria from "react-aria-components";
-import clsx from "clsx";
-import styles from "./Tabs.module.scss";
-import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
+import { TabList } from "@/components/Tabs/components/TabList";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import { TabList } from "@/components/Tabs/components/TabList";
+import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
+import clsx from "clsx";
+import type { PropsWithChildren } from "react";
+import { useState } from "react";
+import * as Aria from "react-aria-components";
+import styles from "./Tabs.module.scss";
 
 export interface TabsProps
   extends Omit<Aria.TabsProps, "children">,
@@ -21,6 +21,7 @@ export const Tabs = flowComponent("Tabs", (props) => {
     defaultSelectedKey,
     disabledKeys,
     ref,
+    onSelectionChange,
     ...rest
   } = props;
 
@@ -37,13 +38,23 @@ export const Tabs = flowComponent("Tabs", (props) => {
         className={rootClassName}
         {...rest}
         selectedKey={selection}
-        onSelectionChange={setSelection}
+        onSelectionChange={(key) => {
+          setSelection(key);
+          if (onSelectionChange) {
+            onSelectionChange(key);
+          }
+        }}
         disabledKeys={disabledKeys}
         ref={ref}
       >
         <TabList
           selection={selection}
-          onContextMenuSelectionChange={setSelection}
+          onContextMenuSelectionChange={(key) => {
+            setSelection(key);
+            if (onSelectionChange) {
+              onSelectionChange(key);
+            }
+          }}
           disabledKeys={disabledKeys}
         />
         <TunnelExit id="Panels" />

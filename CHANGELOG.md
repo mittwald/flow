@@ -1095,6 +1095,146 @@ All notable changes to this project will be documented in this file. See
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.432](https://github.com/mittwald/flow/compare/0.1.0-alpha.431...0.1.0-alpha.432) (2025-02-18)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.431](https://github.com/mittwald/flow/compare/0.1.0-alpha.430...0.1.0-alpha.431) (2025-02-18)
+
+### Bug Fixes
+
+- **Field:** Fix Checkbox is not reacting to Form defaultValue bug
+  ([#1191](https://github.com/mittwald/flow/issues/1191))
+  ([bea6bfb](https://github.com/mittwald/flow/commit/bea6bfb26bb4a718f54082db740e9f45b8aa1ef7))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.430](https://github.com/mittwald/flow/compare/0.1.0-alpha.429...0.1.0-alpha.430) (2025-02-17)
+
+### Features
+
+- **Text:** add align property
+  ([#1186](https://github.com/mittwald/flow/issues/1186))
+  ([141d516](https://github.com/mittwald/flow/commit/141d516107f980371a0a9fc9f0b01abd1e4aeb6f))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.429](https://github.com/mittwald/flow/compare/0.1.0-alpha.428...0.1.0-alpha.429) (2025-02-17)
+
+### Bug Fixes
+
+- **Tabs:** fix onSelectionChange not working
+  ([#1181](https://github.com/mittwald/flow/issues/1181))
+  ([761c4a0](https://github.com/mittwald/flow/commit/761c4a0e6a24ca0842b7282df736f9e03c10bb9d))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.428](https://github.com/mittwald/flow/compare/0.1.0-alpha.427...0.1.0-alpha.428) (2025-02-14)
+
+### Features
+
+- **LabeledValue:** support button in labeled value
+  ([#1175](https://github.com/mittwald/flow/issues/1175))
+  ([3a8f699](https://github.com/mittwald/flow/commit/3a8f699ba17e749b57e9337904920a8607356137))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.427](https://github.com/mittwald/flow/compare/0.1.0-alpha.426...0.1.0-alpha.427) (2025-02-14)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.426](https://github.com/mittwald/flow/compare/0.1.0-alpha.425...0.1.0-alpha.426) (2025-02-14)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.425](https://github.com/mittwald/flow/compare/0.1.0-alpha.424...0.1.0-alpha.425) (2025-02-14)
+
+### Bug Fixes
+
+- **SegmentedControl:** fix disabled segments
+  ([#1174](https://github.com/mittwald/flow/issues/1174))
+  ([fdb3ff0](https://github.com/mittwald/flow/commit/fdb3ff07ae92fbc1e575267e4a493989d003d547))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.424](https://github.com/mittwald/flow/compare/0.1.0-alpha.423...0.1.0-alpha.424) (2025-02-14)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.423](https://github.com/mittwald/flow/compare/0.1.0-alpha.422...0.1.0-alpha.423) (2025-02-14)
+
+### Bug Fixes
+
+- **Field:** Fix Switch is not reacting to Form defaultValue bug
+  ([#1171](https://github.com/mittwald/flow/issues/1171))
+  ([72a63f4](https://github.com/mittwald/flow/commit/72a63f467be3a206fbbfe77010395a1be060388d))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.422](https://github.com/mittwald/flow/compare/0.1.0-alpha.421...0.1.0-alpha.422) (2025-02-12)
+
+### Features
+
+- **table:** add option to horizontally center columns
+  ([#1147](https://github.com/mittwald/flow/issues/1147))
+  ([a1f8752](https://github.com/mittwald/flow/commit/a1f875216faa01d1147b12baedcb50b6f9d2abda))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.421](https://github.com/mittwald/flow/compare/0.1.0-alpha.420...0.1.0-alpha.421) (2025-02-12)
+
+### Features
+
+- **Align:** add support for text and contextualHelp
+  ([#1169](https://github.com/mittwald/flow/issues/1169))
+  ([9f408ff](https://github.com/mittwald/flow/commit/9f408ff95405cc9c10177f5280cf5287248473b0))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.420](https://github.com/mittwald/flow/compare/0.1.0-alpha.419...0.1.0-alpha.420) (2025-02-10)
 
 ### Bug Fixes

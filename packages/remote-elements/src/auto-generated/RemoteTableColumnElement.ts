@@ -14,6 +14,7 @@ export class RemoteTableColumnElement extends FlowRemoteElement<RemoteTableColum
       allowsSorting: {},
       className: {},
       defaultWidth: {},
+      horizontalAlign: {},
       id: {},
       isRowHeader: {},
       maxWidth: {},

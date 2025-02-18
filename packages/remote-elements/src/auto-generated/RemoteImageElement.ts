@@ -128,6 +128,7 @@ export class RemoteImageElement extends FlowRemoteElement<RemoteImageElementProp
       useMap: {},
       vocab: {},
       width: {},
+      withBorder: {},
     };
   }
 

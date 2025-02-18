@@ -13,6 +13,7 @@ export class RemoteFieldDescriptionElement extends FlowRemoteElement<RemoteField
     return {
       about: {},
       accessKey: {},
+      align: {},
       "aria-activedescendant": {},
       "aria-atomic": {},
       "aria-autocomplete": {},

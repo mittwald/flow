@@ -13,6 +13,7 @@ export class RemoteTextElement extends FlowRemoteElement<RemoteTextElementProps>
     return {
       about: {},
       accessKey: {},
+      align: {},
       "aria-activedescendant": {},
       "aria-atomic": {},
       "aria-autocomplete": {},

@@ -30,4 +30,16 @@
     border-left-color: var(--text--blockquote-border-color);
     padding-left: var(--text--blockquote-padding);
   }
+
+  &.align-start {
+    text-align: start;
+  }
+
+  &.align-center {
+    text-align: center;
+  }
+
+  &.align-end {
+    text-align: end;
+  }
 }

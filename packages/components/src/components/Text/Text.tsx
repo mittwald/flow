@@ -21,6 +21,8 @@ export interface TextProps
   emulateBoldWidth?: boolean;
   /* The color of the text. */
   color?: "light" | "dark";
+  /* The alignment of the text. @default "start" */
+  align?: "start" | "end" | "center";
 }
 
 /**
@@ -35,10 +37,16 @@ export const Text = flowComponent<"Text", HTMLDivElement>("Text", (props) => {
     emulateBoldWidth,
     ref,
     color,
+    align = "start",
     ...rest
   } = props;
 
-  const rootClassName = clsx(styles.text, color && styles[color], className);
+  const rootClassName = clsx(
+    styles.text,
+    color && styles[color],
+    align && styles[`align-${align}`],
+    className,
+  );
 
   const textProps = { ...rest, className: rootClassName };
 
