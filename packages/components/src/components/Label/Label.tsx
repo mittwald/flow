@@ -3,11 +3,7 @@ import React from "react";
 import styles from "./Label.module.scss";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
-import {
-  ClearPropsContext,
-  type PropsContext,
-  PropsContextProvider,
-} from "@/lib/propsContext";
+import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { useLocalizedStringFormatter } from "react-aria";
 import locales from "./locales/*.locale.json";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
