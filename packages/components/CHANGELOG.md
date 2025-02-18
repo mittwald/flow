@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.431](https://github.com/mittwald/flow/compare/0.1.0-alpha.430...0.1.0-alpha.431) (2025-02-18)
+
+### Bug Fixes
+
+- **Field:** Fix Checkbox is not reacting to Form defaultValue bug
+  ([#1191](https://github.com/mittwald/flow/issues/1191))
+  ([bea6bfb](https://github.com/mittwald/flow/commit/bea6bfb26bb4a718f54082db740e9f45b8aa1ef7))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [0.1.0-alpha.430](https://github.com/mittwald/flow/compare/0.1.0-alpha.429...0.1.0-alpha.430) (2025-02-17)
 
 ### Features
