@@ -53,9 +53,9 @@ export const ColumnLayout: FC<ColumnLayoutProps> = (props) => {
     "aria-label": ariaLabel,
   } = props;
 
-  const columnsS = s ? getColumns(s) : undefined;
-  const columnsM = m ? getColumns(m) : s ? columnsS : undefined;
-  const columnsL = l ? getColumns(l) : m || s ? columnsM : undefined;
+  const columnsS = s ? getColumns(s) : "1fr";
+  const columnsM = m ? getColumns(m) : s ? columnsS : "1fr 1fr";
+  const columnsL = l ? getColumns(l) : m || s ? columnsM : "1fr 1fr 1fr";
 
   const style = {
     "--column-layout--columns-s": columnsS,

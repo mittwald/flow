@@ -9,13 +9,13 @@
 .columnLayout {
   display: grid;
   gap: var(--column-layout--row-gap) var(--column-layout--column-gap);
-  grid-template-columns: var(--column-layout--columns-l, 1fr 1fr 1fr);
+  grid-template-columns: var(--column-layout--columns-l);
 
   @container (max-width: 850px) {
-    grid-template-columns: var(--column-layout--columns-m, 1fr 1fr);
+    grid-template-columns: var(--column-layout--columns-m);
   }
 
   @container (max-width: 550px) {
-    grid-template-columns: var(--column-layout--columns-s, 1fr);
+    grid-template-columns: var(--column-layout--columns-s);
   }
 }
