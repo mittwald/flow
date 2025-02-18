@@ -1,7 +1,8 @@
-import Tabs, {
+import {
   Tab,
+  Tabs,
   TabTitle,
-} from "@mittwald/flow-react-components/Tabs";
+} from "@mittwald/flow-react-components";
 
 <Tabs defaultSelectedKey="storage">
   <Tab>

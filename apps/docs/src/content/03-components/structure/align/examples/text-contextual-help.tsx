@@ -1,10 +1,10 @@
-import { Align } from "@mittwald/flow-react-components/Align";
-import { Button } from "@mittwald/flow-react-components/Button";
 import {
+  Align,
+  Button,
   ContextualHelp,
   ContextualHelpTrigger,
-} from "@mittwald/flow-react-components/ContextualHelp";
-import { Text } from "@mittwald/flow-react-components/Text";
+  Text,
+} from "@mittwald/flow-react-components";
 
 <Align>
   <Text>mail.agenturserver.de</Text>

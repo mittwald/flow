@@ -1,12 +1,12 @@
 import {
+  InlineCode,
   Table,
   TableBody,
   TableCell,
   TableColumn,
   TableHeader,
   TableRow,
-} from "@mittwald/flow-react-components/Table";
-import { InlineCode } from "@mittwald/flow-react-components/InlineCode";
+} from "@mittwald/flow-react-components";
 
 <Table aria-label="Button Props" verticalAlign="middle">
   <TableHeader>

@@ -1,15 +1,13 @@
 import {
+  IconCheck,
+  IconClose,
   Table,
   TableBody,
   TableCell,
   TableColumn,
   TableHeader,
   TableRow,
-} from "@mittwald/flow-react-components/Table";
-import {
-  IconCheck,
-  IconClose,
-} from "@mittwald/flow-react-components/Icons";
+} from "@mittwald/flow-react-components";
 
 <Table aria-label="Scopes">
   <TableHeader>
