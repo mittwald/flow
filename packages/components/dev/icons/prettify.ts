@@ -12,7 +12,6 @@ const getPrettierOptions = async (): Promise<prettier.Options> => {
 };
 
 const header = `\
-  /* eslint-disable */
   /* auto-generated file */
 `;
 

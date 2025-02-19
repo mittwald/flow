@@ -4,7 +4,8 @@ import NotificationController from "@/components/NotificationProvider/Notificati
 import type { NotificationsContainerProps } from "@/components/NotificationProvider/NotificationContainer";
 import NotificationContainer from "@/components/NotificationProvider/NotificationContainer";
 
-type Props = PropsWithChildren<NotificationsContainerProps>;
+export type NotificationProviderProps =
+  PropsWithChildren<NotificationsContainerProps>;
 
 const context = createContext<NotificationController>(
   new NotificationController(),
@@ -13,7 +14,8 @@ const context = createContext<NotificationController>(
 export const useNotificationController = (): NotificationController =>
   useContext(context);
 
-export const NotificationProvider: FC<Props> = (props) => {
+/** @flr-generate all */
+export const NotificationProvider: FC<NotificationProviderProps> = (props) => {
   const { children, ...containerProps } = props;
   const controller = NotificationController.useNew();
 

@@ -53,4 +53,20 @@
     align-self: center;
     column-gap: var(--align--text-copyButton--spacing);
   }
+
+  &:has(.text):has(.contextualHelpTriggerButton) {
+    display: flex;
+    align-items: center;
+    column-gap: var(--align--text-contextualHelp--spacing);
+  }
+
+  &:has(> .text):has(> .icon) {
+    display: flex;
+    align-items: center;
+    column-gap: var(--align--icon-text--spacing);
+
+    .icon {
+      color: var(--icon--color);
+    }
+  }
 }

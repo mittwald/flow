@@ -27,4 +27,3 @@ illustrated-message:
     value: "{light-plain-content-color}"
   light-heading-color:
     value: "{heading.color-light}"
-

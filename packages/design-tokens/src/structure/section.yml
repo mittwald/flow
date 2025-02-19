@@ -3,8 +3,10 @@ section:
     value: "{size-rem.xl}"
   spacing:
     value: "{size-rem.m}"
-  sub-heading-spacing:
-    value: "{size-rem.m}"
+  sub-heading-spacing-m:
+    value: "{size-rem.l}"
+  sub-heading-spacing-s:
+    value: "{size-rem.s}"
 
 section-header:
   action-to-action-spacing:

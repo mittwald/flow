@@ -1,4 +1,6 @@
+export * from "./view";
 import { IllustratedMessage } from "./IllustratedMessage";
+
 export {
   type IllustratedMessageProps,
   IllustratedMessage,

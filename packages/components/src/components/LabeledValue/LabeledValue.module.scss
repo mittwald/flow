@@ -7,7 +7,7 @@
   column-gap: var(--labeled-value--value-to-action-spacing);
   grid-template-rows: auto 1fr;
 
-  &:has(.button) {
+  &:has(.button:not(:nth-child(2))) {
     grid-template-areas:
       "label label "
       "value button";
@@ -20,7 +20,7 @@
     grid-area: label;
   }
 
-  .button {
+  .button:not(:nth-child(2)) {
     grid-area: button;
     align-self: start;
     justify-self: start;

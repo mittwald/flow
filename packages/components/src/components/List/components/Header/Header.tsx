@@ -10,6 +10,7 @@ import type { PropsWithClassName } from "@/lib/types/props";
 import { SearchField } from "@/components/List/components/Header/components/SearchField/SearchField";
 import { ViewModeMenu } from "@/components/List/components/Header/components/ViewModeMenu/ViewModeMenu";
 import { TunnelExit } from "@mittwald/react-tunnel";
+import DivView from "@/views/DivView";
 
 interface Props extends PropsWithClassName {
   hasActionGroup?: boolean;
@@ -35,22 +36,22 @@ export const Header: FC<Props> = (props) => {
   ));
 
   return (
-    <div className={clsx(className, styles.header)}>
-      <div className={styles.pickerListAndSearch}>
-        <div className={styles.pickerList}>
+    <DivView className={clsx(className, styles.header)}>
+      <DivView className={styles.pickerListAndSearch}>
+        <DivView className={styles.pickerList}>
           <ViewModeMenu />
           <SortingPicker />
           {filterPickerList}
-        </div>
-        <div className={styles.searchAndActions}>
+        </DivView>
+        <DivView className={styles.searchAndActions}>
           {list.search && (
             <SearchField className={styles.searchField} search={list.search} />
           )}
           <TunnelExit id="actions" />
-        </div>
-      </div>
+        </DivView>
+      </DivView>
       <ActiveFilters />
-    </div>
+    </DivView>
   );
 };
 

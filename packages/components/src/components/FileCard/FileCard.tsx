@@ -29,6 +29,7 @@ export interface FileCardProps
   imageSrc?: string;
 }
 
+/** @flr-generate all */
 export const FileCard = flowComponent("FileCard", (props) => {
   const {
     onDelete,

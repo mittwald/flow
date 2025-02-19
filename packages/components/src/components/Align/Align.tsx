@@ -13,6 +13,10 @@ export interface AlignProps
     PropsWithClassName,
     FlowComponentProps {}
 
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const Align = flowComponent("Align", (props) => {
   const { children, className } = props;
 
@@ -23,6 +27,12 @@ export const Align = flowComponent("Align", (props) => {
     Button: { className: styles.button },
     Avatar: { className: styles.avatar, size: "m" },
     CopyButton: { size: "s", className: styles.copyButton },
+    Icon: { size: "s", className: styles.icon },
+    ContextualHelpTrigger: {
+      Button: {
+        className: styles.contextualHelpTriggerButton,
+      },
+    },
   };
 
   return (

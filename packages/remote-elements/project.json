@@ -1,0 +1,17 @@
+{
+  "implicitDependencies": ["components"],
+  "name": "remote-elements",
+  "projectType": "library",
+  "sourceRoot": "packages/remote-elements/src",
+  "targets": {
+    "build": {
+      "dependsOn": [
+        "^build",
+        {
+          "projects": ["components"],
+          "target": "build:remote-components"
+        }
+      ]
+    }
+  }
+}

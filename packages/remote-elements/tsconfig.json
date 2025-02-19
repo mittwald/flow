@@ -1,0 +1,14 @@
+{
+  "extends": "../typescript-config/web-library.json",
+  "references": [
+    {
+      "path": "./tsconfig.vite.json"
+    },
+    {
+      "path": "../remote-core"
+    },
+    {
+      "path": "../components"
+    }
+  ]
+}

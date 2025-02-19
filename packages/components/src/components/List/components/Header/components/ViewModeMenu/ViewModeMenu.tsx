@@ -1,16 +1,16 @@
-import ContextMenu, { ContextMenuTrigger } from "@/components/ContextMenu";
 import type { FC } from "react";
 import React from "react";
-import { Button } from "@/components/Button";
-import { Text } from "@/components/Text";
-import { Heading } from "@/components/Heading";
-import { Section } from "@/components/Section";
-import MenuItem from "@/components/MenuItem";
 import locales from "../../../../locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
-import { IconView } from "@/components/Icon/components/icons";
 import { useList } from "@/components/List";
 import type { ListViewMode } from "@/components/List/model/types";
+import { IconView } from "@/components/Icon/components/icons";
+import ButtonView from "@/views/ButtonView";
+import TextView from "@/views/TextView";
+import SectionView from "@/views/SectionView";
+import MenuItemView from "@/views/MenuItemView";
+import HeadingView from "@/views/HeadingView";
+import ContextMenu, { ContextMenuTrigger } from "@/components/ContextMenu";
 
 export const ViewModeMenu: FC = () => {
   const stringFormatter = useLocalizedStringFormatter(locales);
@@ -34,21 +34,23 @@ export const ViewModeMenu: FC = () => {
 
   return (
     <ContextMenuTrigger>
-      <Button
+      <ButtonView
         variant="outline"
         color="secondary"
         aria-label={stringFormatter.format("list.settings")}
       >
-        <Text>
+        <TextView>
           {stringFormatter.format(`list.settings.viewMode.${selectedViewMode}`)}
-        </Text>
+        </TextView>
         <IconView />
-      </Button>
+      </ButtonView>
       <ContextMenu selectionMode="single" selectedKeys={[selectedViewMode]}>
-        <Section>
-          <Heading>{stringFormatter.format("list.settings.viewMode")}</Heading>
+        <SectionView>
+          <HeadingView>
+            {stringFormatter.format("list.settings.viewMode")}
+          </HeadingView>
           {availableViewModes.map((viewMode) => (
-            <MenuItem
+            <MenuItemView
               id={viewMode}
               key={viewMode}
               onAction={() => {
@@ -56,9 +58,9 @@ export const ViewModeMenu: FC = () => {
               }}
             >
               {stringFormatter.format(`list.settings.viewMode.${viewMode}`)}
-            </MenuItem>
+            </MenuItemView>
           ))}
-        </Section>
+        </SectionView>
       </ContextMenu>
     </ContextMenuTrigger>
   );

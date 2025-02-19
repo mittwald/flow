@@ -4,11 +4,19 @@ import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import styles from "../../Table.module.scss";
 
-export type TableColumnProps = Aria.ColumnProps;
+export interface TableColumnProps extends Aria.ColumnProps {
+  /** @default "start" */
+  horizontalAlign?: "start" | "center";
+}
 
+/** @flr-generate all */
 export const TableColumn: FC<TableColumnProps> = (props) => {
-  const { children, className, ...rest } = props;
-  const rootClassName = clsx(styles.column, className);
+  const { children, className, horizontalAlign = "start", ...rest } = props;
+  const rootClassName = clsx(
+    styles.column,
+    styles[`horizontal-align-${horizontalAlign}`],
+    className,
+  );
 
   return (
     <Aria.Column isRowHeader className={rootClassName} {...rest}>

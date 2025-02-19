@@ -8,6 +8,8 @@ export type TableProps = Aria.TableProps & {
   /** The vertical alignment of the table cells content. */
   verticalAlign?: "top" | "middle";
 };
+
+/** @flr-generate all */
 export const Table: FC<TableProps> = (props) => {
   const { children, className, verticalAlign = "top", ...rest } = props;
 

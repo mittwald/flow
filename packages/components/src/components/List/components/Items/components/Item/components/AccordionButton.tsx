@@ -1,12 +1,12 @@
 import type { FC, PropsWithChildren } from "react";
 import React from "react";
-import { Button } from "@/components/Button";
 import {
   IconChevronDown,
   IconChevronUp,
 } from "@/components/Icon/components/icons";
 import locales from "../../../../../locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
+import ButtonView from "@/views/ButtonView";
 
 interface Props extends PropsWithChildren {
   isExpanded: boolean;
@@ -20,7 +20,7 @@ export const AccordionButton: FC<Props> = (props) => {
 
   return (
     <>
-      <Button
+      <ButtonView
         variant="plain"
         color="secondary"
         onPress={toggle}
@@ -31,7 +31,7 @@ export const AccordionButton: FC<Props> = (props) => {
         aria-expanded={isExpanded}
       >
         {isExpanded ? <IconChevronUp /> : <IconChevronDown />}
-      </Button>
+      </ButtonView>
       {isExpanded && children}
     </>
   );

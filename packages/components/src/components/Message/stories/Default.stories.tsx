@@ -51,7 +51,7 @@ type Story = StoryObj<typeof Message>;
 
 export const Default: Story = {};
 
-export const Responder: Story = { args: { type: "responder" } };
+export const Sender: Story = { args: { type: "sender" } };
 
 export const MessageOnly: Story = {
   render: (props) => (
@@ -62,5 +62,3 @@ export const MessageOnly: Story = {
     </Message>
   ),
 };
-
-export const OrientationRight: Story = { args: { orientation: "right" } };

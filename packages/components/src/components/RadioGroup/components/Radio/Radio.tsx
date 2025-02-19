@@ -12,27 +12,34 @@ export interface RadioProps
   extends PropsWithChildren<Omit<Aria.RadioProps, "children">>,
     FlowComponentProps {}
 
-export const Radio = flowComponent("Radio", (props) => {
-  const { children, className, refProp: ref, ...rest } = props;
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
+export const Radio = flowComponent<"Radio", HTMLLabelElement>(
+  "Radio",
+  (props) => {
+    const { children, className, ref, ...rest } = props;
 
-  const rootClassName = clsx(styles.radio, className);
+    const rootClassName = clsx(styles.radio, className);
 
-  return (
-    <ClearPropsContext>
-      <Aria.Radio {...rest} className={rootClassName} ref={ref}>
-        {({ isSelected }) => (
-          <>
-            {isSelected ? (
-              <IconRadioOn className={styles.icon} />
-            ) : (
-              <IconRadioOff className={styles.icon} />
-            )}
-            {children}
-          </>
-        )}
-      </Aria.Radio>
-    </ClearPropsContext>
-  );
-});
+    return (
+      <ClearPropsContext>
+        <Aria.Radio {...rest} className={rootClassName} ref={ref}>
+          {({ isSelected }) => (
+            <>
+              {isSelected ? (
+                <IconRadioOn className={styles.icon} />
+              ) : (
+                <IconRadioOff className={styles.icon} />
+              )}
+              {children}
+            </>
+          )}
+        </Aria.Radio>
+      </ClearPropsContext>
+    );
+  },
+);
 
 export default Radio;

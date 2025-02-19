@@ -1,0 +1,3 @@
+message-thread:
+  spacing:
+    value: "{size-rem.l}"

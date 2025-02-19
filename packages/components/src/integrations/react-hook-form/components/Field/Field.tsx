@@ -9,16 +9,17 @@ import { Controller } from "react-hook-form";
 import type { PropsContext } from "@/lib/propsContext";
 import { dynamic, PropsContextProvider } from "@/lib/propsContext";
 import { useFormContext } from "@/integrations/react-hook-form/components/context/formContext";
-import { FieldError } from "@/components/FieldError";
+import FieldErrorView from "@/views/FieldErrorView";
 
-interface Props<T extends FieldValues>
+export interface FieldProps<T extends FieldValues>
   extends Omit<ControllerProps<T>, "render">,
     PropsWithChildren {}
 
-export function Field<T extends FieldValues>(props: Props<T>) {
+export function Field<T extends FieldValues>(props: FieldProps<T>) {
   const { children, control, ...rest } = props;
 
-  const controlFromContext = useFormContext<T>().form?.control;
+  const formContext = useFormContext<T>();
+  const controlFromContext = formContext.form?.control;
 
   return (
     <Controller
@@ -32,27 +33,32 @@ export function Field<T extends FieldValues>(props: Props<T>) {
 
         const formControlProps = {
           ...field,
+          form: formContext.id,
           isRequired: !!rest.rules?.required,
           isInvalid: invalid,
           validationBehavior: "aria" as const,
           children: dynamic((p) => (
             <>
               {p.children}
-              <FieldError>{error?.message}</FieldError>
+              <FieldErrorView>{error?.message}</FieldErrorView>
             </>
           )),
-          ref: undefined,
-          refProp: field.ref,
         };
 
         const propsContext: PropsContext = {
-          Checkbox: formControlProps,
+          Checkbox: {
+            ...formControlProps,
+            isSelected: formControlProps.value,
+          },
           CheckboxGroup: formControlProps,
           CheckboxButton: formControlProps,
           FileField: formControlProps,
           NumberField: formControlProps,
           RadioGroup: formControlProps,
-          Switch: formControlProps,
+          Switch: {
+            ...formControlProps,
+            isSelected: formControlProps.value,
+          },
           TextArea: formControlProps,
           TextField: formControlProps,
           Select: {

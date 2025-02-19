@@ -1,7 +1,10 @@
-import * as Aria from "react-aria-components";
 import React from "react";
+import type { OverlayTriggerProps } from "@/components/OverlayTrigger";
 import { OverlayTrigger } from "@/components/OverlayTrigger";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import MenuTriggerView from "@/views/MenuTriggerView";
+
+export type ContextMenuTriggerProps = OverlayTriggerProps;
 
 export const ContextMenuTrigger = flowComponent(
   "ContextMenuTrigger",
@@ -11,7 +14,7 @@ export const ContextMenuTrigger = flowComponent(
       <OverlayTrigger
         overlayType="ContextMenu"
         {...triggerProps}
-        component={Aria.MenuTrigger}
+        component={MenuTriggerView}
       >
         {children}
       </OverlayTrigger>

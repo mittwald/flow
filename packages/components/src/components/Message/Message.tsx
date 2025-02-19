@@ -8,21 +8,18 @@ import { IconContextMenu } from "@/components/Icon/components/icons";
 import PropsContextProvider from "@/lib/propsContext/PropsContextProvider";
 
 export interface MessageProps extends PropsWithChildren, PropsWithClassName {
-  /** Determines the color of the message. @default "sender" */
+  /** Determines the color and orientation of the message. @default "responder" */
   type?: "responder" | "sender";
-  /** The orientation of the chat message. */
-  orientation?: "left" | "right";
 }
 
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const Message: FC<MessageProps> = (props) => {
-  const { type = "sender", children, className, orientation = "left" } = props;
+  const { type = "responder", children, className } = props;
 
-  const rootClassName = clsx(
-    styles.message,
-    styles[type],
-    styles[orientation],
-    className,
-  );
+  const rootClassName = clsx(styles.message, styles[type], className);
 
   const propsContext: PropsContext = {
     Content: { className: styles.content },

@@ -1,3 +1,4 @@
+export * from "./view";
 import { CodeBlock } from "./CodeBlock";
 
 export { type CodeBlockProps, CodeBlock } from "./CodeBlock";

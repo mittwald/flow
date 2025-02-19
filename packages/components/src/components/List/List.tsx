@@ -30,6 +30,7 @@ import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import headerStyles from "./components/Header/Header.module.css";
 import { ActionGroup } from "@/components/ActionGroup";
 import { deepHas } from "@/lib/react/deepHas";
+import DivView from "@/views/DivView";
 
 export interface ListProps<T>
   extends PropsWithChildren,
@@ -48,7 +49,7 @@ export interface ListProps<T>
 }
 
 export const List = flowComponent("List", (props) => {
-  const { children, batchSize, onChange, refProp: ref, ...restProps } = props;
+  const { children, batchSize, onChange, ref, ...restProps } = props;
 
   const listLoaderAsync = deepFindOfType(
     children,
@@ -170,20 +171,20 @@ export const List = flowComponent("List", (props) => {
           }}
         >
           <DataLoader />
-          <div className={styles.list} ref={ref}>
+          <DivView className={styles.list} ref={ref}>
             {children}
             <Header hasActionGroup={hasActionGroup} />
 
-            <div>
+            <DivView>
               {listModel.items.entries.length > 0 && (
                 <TunnelExit id="listSummary" />
               )}
-              {listModel.viewMode === "list" && <Items />}
-              {listModel.viewMode === "tiles" && <Items tiles />}
+              {(listModel.viewMode === "list" ||
+                listModel.viewMode === "tiles") && <Items />}
               {listModel.viewMode === "table" && <Table />}
-            </div>
+            </DivView>
             <Footer />
-          </div>
+          </DivView>
         </listContext.Provider>
       </TunnelProvider>
     </PropsContextProvider>

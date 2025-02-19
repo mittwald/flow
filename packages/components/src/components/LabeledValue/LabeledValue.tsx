@@ -10,6 +10,10 @@ export interface LabeledValueProps
   extends PropsWithChildren,
     PropsWithClassName {}
 
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const LabeledValue: FC<LabeledValueProps> = (props) => {
   const { children, className } = props;
 
@@ -28,6 +32,9 @@ export const LabeledValue: FC<LabeledValueProps> = (props) => {
       className: styles.button,
       variant: "plain",
       size: "s",
+    },
+    Link: {
+      inline: true,
     },
   };
 

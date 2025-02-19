@@ -17,6 +17,10 @@ export interface HeaderNavigationProps
   color?: "primary" | "dark" | "light";
 }
 
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const HeaderNavigation: FC<HeaderNavigationProps> = (props) => {
   const { children, className, color = "primary", ...rest } = props;
 

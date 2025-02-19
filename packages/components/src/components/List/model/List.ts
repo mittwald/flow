@@ -95,6 +95,7 @@ export class List<T> {
       defaultViewMode ?? this.getStoredViewModeDefaultSetting() ?? "list",
     );
     this.viewMode = viewMode;
+
     this.setViewMode = (viewMode) => {
       setViewMode(viewMode);
       if (this.settingsStore && this.viewModeStorageKey) {

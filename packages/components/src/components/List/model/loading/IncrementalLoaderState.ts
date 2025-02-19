@@ -1,8 +1,8 @@
+import type { ListData } from "@/components/List/model/loading/types";
+import useSelector from "@/lib/mobx/useSelector";
 import type { AsyncResource } from "@mittwald/react-use-promise";
 import { action, computed, makeObservable, observable } from "mobx";
-import useSelector from "@/lib/mobx/useSelector";
-import { useRef } from "react";
-import type { ListData } from "@/components/List/model/loading/types";
+import { useStatic } from "@/lib/hooks/useStatic";
 
 type AsyncResourceLoadingState = AsyncResource["state"]["value"];
 type DataBatches<T> = ListData<T>[];
@@ -29,7 +29,7 @@ export class IncrementalLoaderState<T> {
   }
 
   public static useNew<T>(): IncrementalLoaderState<T> {
-    return useRef(new IncrementalLoaderState<T>()).current;
+    return useStatic(() => new IncrementalLoaderState<T>());
   }
 
   public reset(): void {
@@ -65,7 +65,7 @@ export class IncrementalLoaderState<T> {
   }
 
   public useMergedData(): T[] {
-    return useSelector(() => this.mergedData);
+    return useSelector(() => this.mergedData, [this.prevDataBatches]);
   }
 
   public get isLoading(): boolean {

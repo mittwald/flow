@@ -1,6 +1,6 @@
 import { action, makeObservable, observable } from "mobx";
 import useSelector from "@/lib/mobx/useSelector";
-import { useRef } from "react";
+import { useStatic } from "@/lib/hooks/useStatic";
 
 type OpenStateHandler = () => void;
 type DisposerFn = () => void;
@@ -12,7 +12,7 @@ export interface OverlayControllerOptions {
 }
 
 export class OverlayController {
-  public isOpen: boolean;
+  public isOpen = false;
   private onOpenHandlers = new Set<OpenStateHandler>();
   private onCloseHandlers = new Set<OpenStateHandler>();
 
@@ -35,7 +35,7 @@ export class OverlayController {
   }
 
   public static useNew(options?: OverlayControllerOptions): OverlayController {
-    return useRef(new OverlayController(options)).current;
+    return useStatic(() => new OverlayController(options));
   }
 
   public addOnOpen(handler: OpenStateHandler): DisposerFn {

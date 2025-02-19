@@ -15,19 +15,26 @@ export interface AlertBadgeProps
     FlowComponentProps,
     PropsWithClassName {}
 
-export const AlertBadge = flowComponent("AlertBadge", (props) => {
-  const { children, className, status = "info", refProp: ref, ...rest } = props;
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
+export const AlertBadge = flowComponent<"AlertBadge", HTMLDivElement>(
+  "AlertBadge",
+  (props) => {
+    const { children, className, status = "info", ref, ...rest } = props;
 
-  const rootClassName = clsx(styles.alertBadge, styles[status], className);
+    const rootClassName = clsx(styles.alertBadge, styles[status], className);
 
-  return (
-    <ClearPropsContext>
-      <div className={rootClassName} {...rest} ref={ref}>
-        <AlertIcon size="s" className={styles.alertIcon} status={status} />
-        <Text className={styles.text}>{children}</Text>
-      </div>
-    </ClearPropsContext>
-  );
-});
+    return (
+      <ClearPropsContext>
+        <div className={rootClassName} {...rest} ref={ref}>
+          <AlertIcon size="s" className={styles.alertIcon} status={status} />
+          <Text className={styles.text}>{children}</Text>
+        </div>
+      </ClearPropsContext>
+    );
+  },
+);
 
 export default AlertBadge;

@@ -1,4 +1,5 @@
 import { EmulatedBoldText } from "./EmulatedBoldText";
+
 export {
   type EmulatedBoldTextProps,
   EmulatedBoldText,

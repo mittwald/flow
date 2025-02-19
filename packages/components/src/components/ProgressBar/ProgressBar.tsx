@@ -18,6 +18,10 @@ export interface ProgressBarProps
   size?: "s" | "m";
 }
 
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const ProgressBar: FC<ProgressBarProps> = (props) => {
   const {
     children,
