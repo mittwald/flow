@@ -1,33 +1,32 @@
 import type { FC } from "react";
 import React from "react";
-import {
-  Table as TableComponent,
-  TableBody,
-  TableCell,
-  TableColumn,
-  TableHeader,
-  TableRow,
-} from "@/components/Table";
 import { SkeletonText } from "@/components/SkeletonText";
 import type { TableSupportedComponentProps } from "@/components/List/model/table/types";
+import TableView from "@/views/TableView";
+import TableColumnView from "@/views/TableColumnView";
+import TableBodyView from "@/views/TableBodyView";
+import TableRowView from "@/views/TableRowView";
+import SkeletonTextView from "@/views/SkeletonTextView";
+import TableHeaderView from "@/views/TableHeaderView";
+import TableCellView from "@/views/TableCellView";
 
 export const TableLoadingView: FC<TableSupportedComponentProps> = (props) => {
   return (
-    <TableComponent {...props}>
-      <TableHeader>
-        <TableColumn>
+    <TableView {...props}>
+      <TableHeaderView>
+        <TableColumnView>
           <SkeletonText width="100%" />
-        </TableColumn>
-      </TableHeader>
-      <TableBody>
+        </TableColumnView>
+      </TableHeaderView>
+      <TableBodyView>
         {Array.from(Array(5)).map((_, i) => (
-          <TableRow key={i}>
-            <TableCell>
-              <SkeletonText width="100%" />
-            </TableCell>
-          </TableRow>
+          <TableRowView key={i}>
+            <TableCellView>
+              <SkeletonTextView width="100%" />
+            </TableCellView>
+          </TableRowView>
         ))}
-      </TableBody>
-    </TableComponent>
+      </TableBodyView>
+    </TableView>
   );
 };

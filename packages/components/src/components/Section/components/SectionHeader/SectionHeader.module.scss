@@ -12,7 +12,14 @@
     flex-wrap: wrap;
   }
 
-  &:not(:first-child) {
-    margin-top: var(--section--sub-heading-spacing);
+  &:not(:first-child):has(h2),
+  &:not(:first-child):has(h3) {
+    margin-top: var(--section--sub-heading-spacing-m);
+  }
+
+  &:not(:first-child):has(h4),
+  &:not(:first-child):has(h5),
+  &:not(:first-child):has(h6) {
+    margin-top: var(--section--sub-heading-spacing-s);
   }
 }

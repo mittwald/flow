@@ -1,5 +1,527 @@
 # Change Log
 
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.2.0-alpha.41](https://github.com/mittwald/flow/compare/0.2.0-alpha.40...0.2.0-alpha.41) (2025-02-19)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.40](https://github.com/mittwald/flow/compare/0.2.0-alpha.39...0.2.0-alpha.40) (2025-02-19)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.39](https://github.com/mittwald/flow/compare/0.2.0-alpha.38...0.2.0-alpha.39) (2025-02-19)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.38](https://github.com/mittwald/flow/compare/0.2.0-alpha.37...0.2.0-alpha.38) (2025-02-18)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.37](https://github.com/mittwald/flow/compare/0.2.0-alpha.36...0.2.0-alpha.37) (2025-02-18)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.36](https://github.com/mittwald/flow/compare/0.2.0-alpha.35...0.2.0-alpha.36) (2025-02-18)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.35](https://github.com/mittwald/flow/compare/0.1.0-alpha.432...0.2.0-alpha.35) (2025-02-18)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.34](https://github.com/mittwald/flow/compare/0.2.0-alpha.33...0.2.0-alpha.34) (2025-02-11)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.33](https://github.com/mittwald/flow/compare/0.2.0-alpha.32...0.2.0-alpha.33) (2025-02-11)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.32](https://github.com/mittwald/flow/compare/0.2.0-alpha.31...0.2.0-alpha.32) (2025-02-11)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.31](https://github.com/mittwald/flow/compare/0.2.0-alpha.30...0.2.0-alpha.31) (2025-02-11)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.30](https://github.com/mittwald/flow/compare/0.1.0-alpha.420...0.2.0-alpha.30) (2025-02-10)
+
+# [0.2.0-alpha.29](https://github.com/mittwald/flow/compare/0.1.0-alpha.419...0.2.0-alpha.29) (2025-02-06)
+
+# [0.2.0-alpha.28](https://github.com/mittwald/flow/compare/0.1.0-alpha.418...0.2.0-alpha.28) (2025-02-05)
+
+# [0.2.0-alpha.27](https://github.com/mittwald/flow/compare/0.1.0-alpha.408...0.2.0-alpha.27) (2025-01-30)
+
+# [0.2.0-alpha.26](https://github.com/mittwald/flow/compare/0.2.0-alpha.25...0.2.0-alpha.26) (2025-01-29)
+
+# [0.2.0-alpha.25](https://github.com/mittwald/flow/compare/0.2.0-alpha.24...0.2.0-alpha.25) (2025-01-29)
+
+# [0.2.0-alpha.24](https://github.com/mittwald/flow/compare/0.2.0-alpha.23...0.2.0-alpha.24) (2025-01-28)
+
+# [0.2.0-alpha.23](https://github.com/mittwald/flow/compare/0.1.0-alpha.407...0.2.0-alpha.23) (2025-01-28)
+
+# [0.2.0-alpha.22](https://github.com/mittwald/flow/compare/0.2.0-alpha.21...0.2.0-alpha.22) (2025-01-27)
+
+# [0.2.0-alpha.21](https://github.com/mittwald/flow/compare/0.2.0-alpha.20...0.2.0-alpha.21) (2025-01-27)
+
+# [0.2.0-alpha.20](https://github.com/mittwald/flow/compare/0.1.0-alpha.403...0.2.0-alpha.20) (2025-01-24)
+
+# [0.2.0-alpha.19](https://github.com/mittwald/flow/compare/0.1.0-alpha.401...0.2.0-alpha.19) (2025-01-23)
+
+# [0.2.0-alpha.18](https://github.com/mittwald/flow/compare/0.2.0-alpha.17...0.2.0-alpha.18) (2025-01-21)
+
+# [0.2.0-alpha.17](https://github.com/mittwald/flow/compare/0.1.0-alpha.397...0.2.0-alpha.17) (2025-01-21)
+
+# [0.2.0-alpha.16](https://github.com/mittwald/flow/compare/0.2.0-alpha.15...0.2.0-alpha.16) (2025-01-21)
+
+# [0.2.0-alpha.15](https://github.com/mittwald/flow/compare/0.2.0-alpha.14...0.2.0-alpha.15) (2025-01-21)
+
+# [0.2.0-alpha.14](https://github.com/mittwald/flow/compare/0.2.0-alpha.13...0.2.0-alpha.14) (2025-01-21)
+
+# [0.2.0-alpha.13](https://github.com/mittwald/flow/compare/0.2.0-alpha.12...0.2.0-alpha.13) (2025-01-21)
+
+# [0.2.0-alpha.12](https://github.com/mittwald/flow/compare/0.2.0-alpha.11...0.2.0-alpha.12) (2025-01-21)
+
+# [0.2.0-alpha.11](https://github.com/mittwald/flow/compare/0.2.0-alpha.10...0.2.0-alpha.11) (2025-01-20)
+
+# [0.2.0-alpha.10](https://github.com/mittwald/flow/compare/0.1.0-alpha.395...0.2.0-alpha.10) (2025-01-20)
+
+# [0.2.0-alpha.9](https://github.com/mittwald/flow/compare/0.2.0-alpha.8...0.2.0-alpha.9) (2025-01-13)
+
+# [0.2.0-alpha.8](https://github.com/mittwald/flow/compare/0.2.0-alpha.7...0.2.0-alpha.8) (2025-01-13)
+
+# [0.2.0-alpha.7](https://github.com/mittwald/flow/compare/0.2.0-alpha.6...0.2.0-alpha.7) (2025-01-13)
+
+# [0.2.0-alpha.6](https://github.com/mittwald/flow/compare/0.2.0-alpha.5...0.2.0-alpha.6) (2025-01-13)
+
+# [0.2.0-alpha.5](https://github.com/mittwald/flow/compare/v0.2.0-alpha.4...0.2.0-alpha.5) (2025-01-10)
+
+# [0.2.0-alpha.4](https://github.com/mittwald/flow/compare/0.1.0-alpha.393...v0.2.0-alpha.4) (2025-01-10)
+
+# [0.2.0-alpha.3](https://github.com/mittwald/flow/compare/0.1.0-alpha.392...0.2.0-alpha.3) (2025-01-10)
+
+# [0.2.0-alpha.2](https://github.com/mittwald/flow/compare/0.1.0-alpha.391...0.2.0-alpha.2) (2025-01-10)
+
+### Features
+
+* add remote components ([f14914b](https://github.com/mittwald/flow/commit/f14914ba844845aa224b0f5bb37e1a07d9a7851e))
+
+# [0.2.0-alpha.29](https://github.com/mittwald/flow/compare/0.2.0-alpha.28...0.2.0-alpha.29) (2025-02-06)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.28](https://github.com/mittwald/flow/compare/0.1.0-alpha.413...0.2.0-alpha.28) (2025-02-05)
+
+# [0.2.0-alpha.27](https://github.com/mittwald/flow/compare/0.1.0-alpha.408...0.2.0-alpha.27) (2025-01-30)
+
+# [0.2.0-alpha.26](https://github.com/mittwald/flow/compare/0.2.0-alpha.25...0.2.0-alpha.26) (2025-01-29)
+
+# [0.2.0-alpha.25](https://github.com/mittwald/flow/compare/0.2.0-alpha.24...0.2.0-alpha.25) (2025-01-29)
+
+# [0.2.0-alpha.24](https://github.com/mittwald/flow/compare/0.2.0-alpha.23...0.2.0-alpha.24) (2025-01-28)
+
+# [0.2.0-alpha.23](https://github.com/mittwald/flow/compare/0.1.0-alpha.407...0.2.0-alpha.23) (2025-01-28)
+
+# [0.2.0-alpha.22](https://github.com/mittwald/flow/compare/0.2.0-alpha.21...0.2.0-alpha.22) (2025-01-27)
+
+# [0.2.0-alpha.21](https://github.com/mittwald/flow/compare/0.2.0-alpha.20...0.2.0-alpha.21) (2025-01-27)
+
+# [0.2.0-alpha.20](https://github.com/mittwald/flow/compare/0.1.0-alpha.403...0.2.0-alpha.20) (2025-01-24)
+
+# [0.2.0-alpha.19](https://github.com/mittwald/flow/compare/0.1.0-alpha.401...0.2.0-alpha.19) (2025-01-23)
+
+# [0.2.0-alpha.18](https://github.com/mittwald/flow/compare/0.2.0-alpha.17...0.2.0-alpha.18) (2025-01-21)
+
+# [0.2.0-alpha.17](https://github.com/mittwald/flow/compare/0.1.0-alpha.397...0.2.0-alpha.17) (2025-01-21)
+
+# [0.2.0-alpha.16](https://github.com/mittwald/flow/compare/0.2.0-alpha.15...0.2.0-alpha.16) (2025-01-21)
+
+# [0.2.0-alpha.15](https://github.com/mittwald/flow/compare/0.2.0-alpha.14...0.2.0-alpha.15) (2025-01-21)
+
+# [0.2.0-alpha.14](https://github.com/mittwald/flow/compare/0.2.0-alpha.13...0.2.0-alpha.14) (2025-01-21)
+
+# [0.2.0-alpha.13](https://github.com/mittwald/flow/compare/0.2.0-alpha.12...0.2.0-alpha.13) (2025-01-21)
+
+# [0.2.0-alpha.12](https://github.com/mittwald/flow/compare/0.2.0-alpha.11...0.2.0-alpha.12) (2025-01-21)
+
+# [0.2.0-alpha.11](https://github.com/mittwald/flow/compare/0.2.0-alpha.10...0.2.0-alpha.11) (2025-01-20)
+
+# [0.2.0-alpha.10](https://github.com/mittwald/flow/compare/0.1.0-alpha.395...0.2.0-alpha.10) (2025-01-20)
+
+# [0.2.0-alpha.9](https://github.com/mittwald/flow/compare/0.2.0-alpha.8...0.2.0-alpha.9) (2025-01-13)
+
+# [0.2.0-alpha.8](https://github.com/mittwald/flow/compare/0.2.0-alpha.7...0.2.0-alpha.8) (2025-01-13)
+
+# [0.2.0-alpha.7](https://github.com/mittwald/flow/compare/0.2.0-alpha.6...0.2.0-alpha.7) (2025-01-13)
+
+# [0.2.0-alpha.6](https://github.com/mittwald/flow/compare/0.2.0-alpha.5...0.2.0-alpha.6) (2025-01-13)
+
+# [0.2.0-alpha.5](https://github.com/mittwald/flow/compare/v0.2.0-alpha.4...0.2.0-alpha.5) (2025-01-10)
+
+# [0.2.0-alpha.4](https://github.com/mittwald/flow/compare/0.1.0-alpha.393...v0.2.0-alpha.4) (2025-01-10)
+
+# [0.2.0-alpha.3](https://github.com/mittwald/flow/compare/0.1.0-alpha.392...0.2.0-alpha.3) (2025-01-10)
+
+# [0.2.0-alpha.2](https://github.com/mittwald/flow/compare/0.1.0-alpha.391...0.2.0-alpha.2) (2025-01-10)
+
+### Features
+
+* add remote components ([f14914b](https://github.com/mittwald/flow/commit/f14914ba844845aa224b0f5bb37e1a07d9a7851e))
+
+# [0.2.0-alpha.27](https://github.com/mittwald/flow/compare/0.2.0-alpha.26...0.2.0-alpha.27) (2025-01-30)
+
+# [0.1.0-alpha.407](https://github.com/mittwald/flow/compare/0.1.0-alpha.406...0.1.0-alpha.407) (2025-01-28)
+
+# [0.1.0-alpha.406](https://github.com/mittwald/flow/compare/0.1.0-alpha.405...0.1.0-alpha.406) (2025-01-27)
+
+# [0.1.0-alpha.405](https://github.com/mittwald/flow/compare/0.1.0-alpha.404...0.1.0-alpha.405) (2025-01-27)
+
+# [0.1.0-alpha.404](https://github.com/mittwald/flow/compare/0.2.0-alpha.22...0.1.0-alpha.404) (2025-01-27)
+
+### Features
+
+* **FileDropZone:** add file drop zone component ([041cab7](https://github.com/mittwald/flow/commit/041cab79ecfd141867c1785b25d59138aefd0df2))
+
+# [0.1.0-alpha.403](https://github.com/mittwald/flow/compare/0.1.0-alpha.402...0.1.0-alpha.403) (2025-01-24)
+
+# [0.1.0-alpha.402](https://github.com/mittwald/flow/compare/0.2.0-alpha.19...0.1.0-alpha.402) (2025-01-24)
+
+# [0.1.0-alpha.401](https://github.com/mittwald/flow/compare/0.1.0-alpha.400...0.1.0-alpha.401) (2025-01-23)
+
+# [0.1.0-alpha.400](https://github.com/mittwald/flow/compare/0.1.0-alpha.399...0.1.0-alpha.400) (2025-01-23)
+
+# [0.1.0-alpha.399](https://github.com/mittwald/flow/compare/0.1.0-alpha.398...0.1.0-alpha.399) (2025-01-22)
+
+# [0.1.0-alpha.398](https://github.com/mittwald/flow/compare/0.2.0-alpha.18...0.1.0-alpha.398) (2025-01-22)
+
+# [0.1.0-alpha.397](https://github.com/mittwald/flow/compare/0.1.0-alpha.396...0.1.0-alpha.397) (2025-01-21)
+
+# [0.1.0-alpha.396](https://github.com/mittwald/flow/compare/0.2.0-alpha.16...0.1.0-alpha.396) (2025-01-21)
+
+### Features
+
+* **Markdown:** support blockquote ([#1112](https://github.com/mittwald/flow/issues/1112)) ([b48fadb](https://github.com/mittwald/flow/commit/b48fadb22077a4e3be885289f15981759356a74b))
+
+# [0.1.0-alpha.395](https://github.com/mittwald/flow/compare/0.1.0-alpha.394...0.1.0-alpha.395) (2025-01-20)
+
+# [0.1.0-alpha.394](https://github.com/mittwald/flow/compare/0.2.0-alpha.9...0.1.0-alpha.394) (2025-01-15)
+
+# [0.1.0-alpha.393](https://github.com/mittwald/flow/compare/0.2.0-alpha.3...0.1.0-alpha.393) (2025-01-10)
+
+# [0.1.0-alpha.392](https://github.com/mittwald/flow/compare/0.2.0-alpha.2...0.1.0-alpha.392) (2025-01-10)
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.2.0-alpha.26](https://github.com/mittwald/flow/compare/0.2.0-alpha.25...0.2.0-alpha.26) (2025-01-29)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.25](https://github.com/mittwald/flow/compare/0.2.0-alpha.24...0.2.0-alpha.25) (2025-01-29)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.24](https://github.com/mittwald/flow/compare/0.2.0-alpha.23...0.2.0-alpha.24) (2025-01-28)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.23](https://github.com/mittwald/flow/compare/0.2.0-alpha.22...0.2.0-alpha.23) (2025-01-28)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.22](https://github.com/mittwald/flow/compare/0.2.0-alpha.21...0.2.0-alpha.22) (2025-01-27)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.21](https://github.com/mittwald/flow/compare/0.2.0-alpha.20...0.2.0-alpha.21) (2025-01-27)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.20](https://github.com/mittwald/flow/compare/0.2.0-alpha.19...0.2.0-alpha.20) (2025-01-24)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.19](https://github.com/mittwald/flow/compare/0.2.0-alpha.18...0.2.0-alpha.19) (2025-01-23)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.18](https://github.com/mittwald/flow/compare/0.2.0-alpha.17...0.2.0-alpha.18) (2025-01-21)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.17](https://github.com/mittwald/flow/compare/0.2.0-alpha.16...0.2.0-alpha.17) (2025-01-21)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.16](https://github.com/mittwald/flow/compare/0.2.0-alpha.15...0.2.0-alpha.16) (2025-01-21)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.15](https://github.com/mittwald/flow/compare/0.2.0-alpha.14...0.2.0-alpha.15) (2025-01-21)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.14](https://github.com/mittwald/flow/compare/0.2.0-alpha.13...0.2.0-alpha.14) (2025-01-21)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.13](https://github.com/mittwald/flow/compare/0.2.0-alpha.12...0.2.0-alpha.13) (2025-01-21)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.12](https://github.com/mittwald/flow/compare/0.2.0-alpha.11...0.2.0-alpha.12) (2025-01-21)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.11](https://github.com/mittwald/flow/compare/0.2.0-alpha.10...0.2.0-alpha.11) (2025-01-20)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.10](https://github.com/mittwald/flow/compare/0.2.0-alpha.9...0.2.0-alpha.10) (2025-01-20)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.9](https://github.com/mittwald/flow/compare/0.2.0-alpha.8...0.2.0-alpha.9) (2025-01-13)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# [0.2.0-alpha.8](https://github.com/mittwald/flow/compare/0.2.0-alpha.7...0.2.0-alpha.8) (2025-01-13)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.2.0-alpha.7](https://github.com/mittwald/flow/compare/0.2.0-alpha.6...0.2.0-alpha.7) (2025-01-13)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.2.0-alpha.6](https://github.com/mittwald/flow/compare/0.2.0-alpha.5...0.2.0-alpha.6) (2025-01-13)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.2.0-alpha.5](https://github.com/mittwald/flow/compare/v0.2.0-alpha.4...0.2.0-alpha.5) (2025-01-10)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.2.0-alpha.4](https://github.com/mittwald/flow/compare/v0.1.0-alpha.165...v0.2.0-alpha.4) (2025-01-10)
+
+### Bug Fixes
+
+- **docs:** layout of the footer component
+  ([#1036](https://github.com/mittwald/flow/issues/1036))
+  ([d8adfa4](https://github.com/mittwald/flow/commit/d8adfa4c8d67b2cb40356b6d932f3d72f59a3bce))
+- **FileCard:** add background to file card
+  ([710a1d1](https://github.com/mittwald/flow/commit/710a1d17eb5db9bed63236773cb2dc904a816bb2))
+- fix colors after neutral color token update
+  ([909d356](https://github.com/mittwald/flow/commit/909d3567b7d9b9999ebd99aa6c23623841a830d3))
+- **Label:** center content in label
+  ([80ba98d](https://github.com/mittwald/flow/commit/80ba98d321b1ccb6c01ce10a90708916421ef984))
+- **Link:** add dark and light disabled colors
+  ([#738](https://github.com/mittwald/flow/issues/738))
+  ([7a555e3](https://github.com/mittwald/flow/commit/7a555e32ac8c35e71b770d809a568a0326bcf1f2))
+- **Tokens:** there should be no references in JSON output
+  ([#936](https://github.com/mittwald/flow/issues/936))
+  ([6c9fa81](https://github.com/mittwald/flow/commit/6c9fa816134ca9dca43321b6b351f47a33e5f677))
+- **Tooltip:** add box shadow to tooltip
+  ([ff91676](https://github.com/mittwald/flow/commit/ff91676d9d2252c49a6441ef021b58b58f2bd2ec))
+
+### Features
+
+- add DatePicker and DataRangePicker
+  ([3d20fbc](https://github.com/mittwald/flow/commit/3d20fbc382ed1baf6231434c148c39ec9aabc16e))
+- add disabled dark and light outline tokens
+  ([266981f](https://github.com/mittwald/flow/commit/266981faef0726c803c9c22683161415b5ec5eb9))
+- add remote components
+  ([f14914b](https://github.com/mittwald/flow/commit/f14914ba844845aa224b0f5bb37e1a07d9a7851e))
+- **Align:** add Align component
+  ([d552a3a](https://github.com/mittwald/flow/commit/d552a3a9178f718f45f70df174f346d109856f58))
+- **Align:** support input and button
+  ([#1040](https://github.com/mittwald/flow/issues/1040))
+  ([daacfa8](https://github.com/mittwald/flow/commit/daacfa8e854764210955fd82bce6128f37116c82))
+- **Align:** support text and copy button
+  ([#1046](https://github.com/mittwald/flow/issues/1046))
+  ([c3a3cb1](https://github.com/mittwald/flow/commit/c3a3cb18e4631c067c9f8877702402b94b8dd131))
+- **Avatar:** add new colors
+  ([#615](https://github.com/mittwald/flow/issues/615))
+  ([90f565b](https://github.com/mittwald/flow/commit/90f565bbe1dfce18f19bc002ad4fe9da203f9011))
+- **Badge:** add badge component
+  ([#689](https://github.com/mittwald/flow/issues/689))
+  ([1ce3804](https://github.com/mittwald/flow/commit/1ce3804d6e371bc0760e1335422e47801f0ba1e4))
+- **CodeBlock:** add code block component
+  ([fe0a80e](https://github.com/mittwald/flow/commit/fe0a80e20c0c0350758d74d6a5973f76d471b02e))
+- **CodeBlock:** add custom colors
+  ([ed8b454](https://github.com/mittwald/flow/commit/ed8b4541508383dace50ee43fed8135b7dd7c80a))
+- **CodeBlock:** fix tokens
+  ([8f521d8](https://github.com/mittwald/flow/commit/8f521d89d7adfd51b31876bd5ae8430a09919ded))
+- **FileCard:** add file card component
+  ([7cd379a](https://github.com/mittwald/flow/commit/7cd379a30dc93f28d743ec6e8f9c8f2fbc7731bd))
+- **FileCard:** Add Link and Image to FileCard
+  ([#957](https://github.com/mittwald/flow/issues/957))
+  ([0543759](https://github.com/mittwald/flow/commit/05437591d71134e87694306c30571aab5b04299f))
+- implement outline variant for button component
+  ([#814](https://github.com/mittwald/flow/issues/814))
+  ([2179bb5](https://github.com/mittwald/flow/commit/2179bb541f0c9a000dfa7a9e71060b0ea8f45f99))
+- **LightBox:** add LightBox component
+  ([#972](https://github.com/mittwald/flow/issues/972))
+  ([b648941](https://github.com/mittwald/flow/commit/b64894173863aa4f8b1b14ba0a15bf71831d498f))
+- **List:** add action groups to list
+  ([c9f1b37](https://github.com/mittwald/flow/commit/c9f1b377bedd543f5e2f689ebd07321fc80ff300))
+- **Markdown:** Add Markdown component
+  ([#993](https://github.com/mittwald/flow/issues/993))
+  ([f290a82](https://github.com/mittwald/flow/commit/f290a827f0dd4065ad987c2572840233be064692))
+- **Message:** add message component
+  ([#1004](https://github.com/mittwald/flow/issues/1004))
+  ([dcecea5](https://github.com/mittwald/flow/commit/dcecea54bafde3ef6812d2c62ac78875d4fbc32f))
+- **Section:** add actions to header
+  ([#582](https://github.com/mittwald/flow/issues/582))
+  ([a3174f5](https://github.com/mittwald/flow/commit/a3174f599aa9a199b8a6a93df7405e374885370f))
+- **Section:** add spacing to sub headings in sections
+  ([#890](https://github.com/mittwald/flow/issues/890))
+  ([9710032](https://github.com/mittwald/flow/commit/971003226121d8a577cc7df99ebf15592904021d))
+- **Section:** support contextual help in section header
+  ([2f29e19](https://github.com/mittwald/flow/commit/2f29e190a9e5002aeed92208e6f56271c5e1baff))
+- **Table:** add table footer
+  ([1e298d3](https://github.com/mittwald/flow/commit/1e298d343d7b0b6419b0a4df0867cfab0a587e3a))
+- **Table:** support row header
+  ([#1058](https://github.com/mittwald/flow/issues/1058))
+  ([b73cfdd](https://github.com/mittwald/flow/commit/b73cfdd0d5603846c7ae0ad1882453ad58e1d6d2))
+- **TimeField:** add time field component
+  ([#725](https://github.com/mittwald/flow/issues/725))
+  ([1aa6336](https://github.com/mittwald/flow/commit/1aa63363fdd181b62df09ffe7917d26c237043d9))
+- **Tokens:** export tokens as JSON
+  ([1c52ccc](https://github.com/mittwald/flow/commit/1c52cccd0b6c5cb08a55180fd99f68cfbbe5f05e))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.2.0-alpha.3](https://github.com/mittwald/flow/compare/0.2.0-alpha.2...0.2.0-alpha.3) (2025-01-10)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.2.0-alpha.2](https://github.com/mittwald/flow/compare/0.1.0-alpha.391...0.2.0-alpha.2) (2025-01-10)
+
+### Features
+
+- add remote components
+  ([f14914b](https://github.com/mittwald/flow/commit/f14914ba844845aa224b0f5bb37e1a07d9a7851e))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.422](https://github.com/mittwald/flow/compare/0.1.0-alpha.421...0.1.0-alpha.422) (2025-02-12)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.421](https://github.com/mittwald/flow/compare/0.1.0-alpha.420...0.1.0-alpha.421) (2025-02-12)
+
+### Features
+
+- **Align:** add support for text and contextualHelp
+  ([#1169](https://github.com/mittwald/flow/issues/1169))
+  ([9f408ff](https://github.com/mittwald/flow/commit/9f408ff95405cc9c10177f5280cf5287248473b0))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.432](https://github.com/mittwald/flow/compare/0.1.0-alpha.431...0.1.0-alpha.432) (2025-02-18)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.431](https://github.com/mittwald/flow/compare/0.1.0-alpha.430...0.1.0-alpha.431) (2025-02-18)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.430](https://github.com/mittwald/flow/compare/0.1.0-alpha.429...0.1.0-alpha.430) (2025-02-17)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.429](https://github.com/mittwald/flow/compare/0.1.0-alpha.428...0.1.0-alpha.429) (2025-02-17)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.428](https://github.com/mittwald/flow/compare/0.1.0-alpha.427...0.1.0-alpha.428) (2025-02-14)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.427](https://github.com/mittwald/flow/compare/0.1.0-alpha.426...0.1.0-alpha.427) (2025-02-14)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.1.0-alpha.426](https://github.com/mittwald/flow/compare/0.1.0-alpha.425...0.1.0-alpha.426) (2025-02-14)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
+# Change Log
+
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 

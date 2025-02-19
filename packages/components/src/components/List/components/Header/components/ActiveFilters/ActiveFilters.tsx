@@ -2,17 +2,22 @@ import type { FC } from "react";
 import React from "react";
 import { useList } from "@/components/List/hooks/useList";
 import styles from "./ActiveFilters.module.scss";
-import { Text } from "@/components/Text";
-import { Button } from "@/components/Button";
-import { IconDelete, IconSave } from "@/components/Icon/components/icons";
 import locales from "../../../../locales/*.locale.json";
 import { Translate } from "@/lib/react/components/Translate";
 import { observer } from "mobx-react-lite";
 import { useLocalizedStringFormatter } from "react-aria";
-import { Tooltip, TooltipTrigger } from "@/components/Tooltip";
-import { Icon } from "@/components/Icon";
-import { IconArrowBackUp } from "@tabler/icons-react";
-import { Badge } from "@/components/Badge";
+import { TooltipTrigger } from "@/components/Tooltip";
+import {
+  IconClose,
+  IconSave,
+  IconUndo,
+} from "@/components/Icon/components/icons";
+import ButtonView from "@/views/ButtonView";
+import TooltipView from "@/views/TooltipView";
+import DivView from "@/views/DivView";
+import BadgeView from "@/views/BadgeView";
+import TooltipTriggerView from "@/views/TooltipTriggerView";
+import TextView from "@/views/TextView";
 
 export const ActiveFilters: FC = observer(() => {
   const list = useList();
@@ -23,9 +28,9 @@ export const ActiveFilters: FC = observer(() => {
     .filter((v) => v.isActive);
 
   const activeFilters = activeFilterValues.map((v) => (
-    <Badge key={v.id} onClose={() => v.deactivate()}>
-      <Text>{v.render()}</Text>
-    </Badge>
+    <BadgeView key={v.id} onClose={() => v.deactivate()}>
+      <TextView>{v.render()}</TextView>
+    </BadgeView>
   ));
 
   const someFiltersChanged =
@@ -33,11 +38,11 @@ export const ActiveFilters: FC = observer(() => {
 
   const storeFiltersButton = list.supportsSettingsStorage &&
     someFiltersChanged && (
-      <TooltipTrigger>
-        <Tooltip>
+      <TooltipTriggerView>
+        <TooltipView>
           <Translate locales={locales}>list.filters.store</Translate>
-        </Tooltip>
-        <Button
+        </TooltipView>
+        <ButtonView
           size="s"
           variant="plain"
           color="secondary"
@@ -45,45 +50,41 @@ export const ActiveFilters: FC = observer(() => {
           aria-label={formatter.format("list.filters.store")}
         >
           <IconSave />
-        </Button>
-      </TooltipTrigger>
+        </ButtonView>
+      </TooltipTriggerView>
     );
 
   const resetFiltersButton = someFiltersChanged ? (
     <TooltipTrigger>
-      <Tooltip>
+      <TooltipView>
         <Translate locales={locales}>list.filters.reset</Translate>
-      </Tooltip>
-      <Button
+      </TooltipView>
+      <ButtonView
         size="s"
         variant="plain"
         color="secondary"
         onPress={() => list.resetFilters()}
         aria-label={formatter.format("list.filters.reset")}
       >
-        <Icon>
-          <IconArrowBackUp />
-        </Icon>
-      </Button>
+        <IconUndo />
+      </ButtonView>
     </TooltipTrigger>
   ) : undefined;
 
   const removeAllFiltersButton =
     activeFilters.length > 0 ? (
       <TooltipTrigger>
-        <Tooltip>
+        <TooltipView>
           <Translate locales={locales}>list.filters.clear</Translate>
-        </Tooltip>
-        <Button
+        </TooltipView>
+        <ButtonView
           size="s"
           variant="plain"
           color="secondary"
           onPress={() => list.clearFilters()}
         >
-          <Icon>
-            <IconDelete />
-          </Icon>
-        </Button>
+          <IconClose />
+        </ButtonView>
       </TooltipTrigger>
     ) : undefined;
 
@@ -96,12 +97,12 @@ export const ActiveFilters: FC = observer(() => {
   }
 
   return (
-    <div className={styles.activeFilters}>
+    <DivView className={styles.activeFilters}>
       {activeFilters}
       {storeFiltersButton}
       {resetFiltersButton}
       {removeAllFiltersButton}
-    </div>
+    </DivView>
   );
 });
 

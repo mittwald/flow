@@ -12,6 +12,7 @@ export interface TabTitleProps
   extends Omit<Aria.TabProps, "children" | "id" | "isDisabled">,
     PropsWithChildren {}
 
+/** @flr-generate all */
 export const TabTitle: FC<TabTitleProps> = (props) => {
   const { children, className, ...rest } = props;
 

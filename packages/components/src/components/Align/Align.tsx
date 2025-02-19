@@ -13,6 +13,10 @@ export interface AlignProps
     PropsWithClassName,
     FlowComponentProps {}
 
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const Align = flowComponent("Align", (props) => {
   const { children, className } = props;
 

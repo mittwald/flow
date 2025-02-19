@@ -77,9 +77,6 @@ export const AllCustomValues: Story = {
         <TextField>
           <Label>Street</Label>
         </TextField>
-        <TextField>
-          <Label>House number</Label>
-        </TextField>
       </ColumnLayout>
     </Section>
   ),
@@ -140,5 +137,26 @@ export const Gaps: Story = {
         </TextField>
       </ColumnLayout>
     </Section>
+  ),
+};
+
+export const Nested: Story = {
+  render: (props) => (
+    <ColumnLayout {...props} l={[1, 1]}>
+      <TextField>
+        <Label>First name</Label>
+      </TextField>
+      <TextField>
+        <Label>Last name</Label>
+      </TextField>
+      <ColumnLayout>
+        <TextField>
+          <Label>Street</Label>
+        </TextField>
+        <TextField>
+          <Label>House number</Label>
+        </TextField>
+      </ColumnLayout>
+    </ColumnLayout>
   ),
 };

@@ -1,21 +1,19 @@
-import type { FC, PropsWithChildren } from "react";
-import React, { Suspense } from "react";
-import styles from "./Item.module.scss";
-import clsx from "clsx";
-import type { Key } from "react-aria-components";
-import * as Aria from "react-aria-components";
-import { useList } from "@/components/List/hooks/useList";
-import { SkeletonView } from "@/components/List/components/Items/components/Item/components/SkeletonView/SkeletonView";
 import { useGridItemProps } from "@/components/List/components/Items/components/Item/hooks/useGridItemProps";
+import { useList } from "@/components/List/hooks/useList";
+import ItemsGridListItemView from "@/views/ItemsGridListItemView";
+import type { FC, PropsWithChildren } from "react";
+import { Suspense } from "react";
+import type { Key } from "react-aria-components";
+import styles from "./Item.module.scss";
+import { ListItemSkeletonView } from "./components/ListItemSkeletonView/ListItemSkeletonView";
 
 interface Props extends PropsWithChildren {
   id: Key;
   data: never;
-  tiles?: boolean;
 }
 
 export const Item = (props: Props) => {
-  const { id, data, tiles } = props;
+  const { id, data } = props;
   const list = useList();
 
   const itemView = list.itemView;
@@ -31,37 +29,31 @@ export const Item = (props: Props) => {
   const hasAction = !!gridItemProps.onAction || !!href;
 
   return (
-    <Aria.GridListItem
+    <ItemsGridListItemView
       id={id}
-      className={(props) =>
-        clsx(
-          styles.item,
-          hasAction && styles.hasAction,
-          props.isSelected && styles.isSelected,
-          tiles && styles.tile,
-        )
-      }
       textValue={textValue}
       href={href}
+      hasAction={hasAction}
+      isTile={list.viewMode === "tiles"}
       {...gridItemProps}
     >
-      <Suspense fallback={<SkeletonView />}>{children}</Suspense>
-    </Aria.GridListItem>
+      <Suspense fallback={<ListItemSkeletonView viewMode={list.viewMode} />}>
+        {children}
+      </Suspense>
+    </ItemsGridListItemView>
   );
 };
 
-export const ItemContainer: FC<PropsWithChildren & { tiles?: boolean }> = (
-  props,
-) => {
-  const { tiles, children } = props;
-
+export const ItemContainer: FC<Props> = (props) => {
+  const list = useList();
   return (
-    <Aria.GridListItem
+    <ItemsGridListItemView
       textValue="-"
-      className={clsx(styles.item, styles.fallbackItem, tiles && styles.tile)}
+      className={styles.item}
+      isTile={list.viewMode === "tiles"}
     >
-      {children}
-    </Aria.GridListItem>
+      {props.children}
+    </ItemsGridListItemView>
   );
 };
 

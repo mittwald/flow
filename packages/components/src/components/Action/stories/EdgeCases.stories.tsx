@@ -3,8 +3,8 @@ import React from "react";
 import defaultMeta from "./Default.stories";
 import {
   asyncFunction,
-  syncFunction,
   button,
+  syncFunction,
 } from "@/components/Button/stories/lib";
 import { Action } from "@/components/Action";
 

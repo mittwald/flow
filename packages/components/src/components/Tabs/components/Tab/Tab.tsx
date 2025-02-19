@@ -1,4 +1,4 @@
-import type { FC, PropsWithChildren } from "react";
+import type { FC, PropsWithChildren, ReactNode } from "react";
 import React, { useId } from "react";
 import type { TabPanelRenderProps } from "react-aria-components";
 import * as Aria from "react-aria-components";
@@ -14,6 +14,10 @@ export interface TabProps
   extends Omit<Aria.TabPanelProps, "children">,
     PropsWithChildren {}
 
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const Tab: FC<TabProps> = (props) => {
   const { children, className, id: idFromProps, ...rest } = props;
 
@@ -22,7 +26,7 @@ export const Tab: FC<TabProps> = (props) => {
   const generatedId = useId();
   const id = idFromProps ?? generatedId;
 
-  const TabPanelRenderer: FC<TabPanelRenderProps> = (props) => {
+  const TabPanelRenderer = (props: TabPanelRenderProps): Awaited<ReactNode> => {
     const isSelected = props.state.selectedKey === id;
 
     const propsContext: PropsContext = {
