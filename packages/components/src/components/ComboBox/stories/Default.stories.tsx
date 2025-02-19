@@ -105,21 +105,15 @@ export const Emails: Story = {
 
     return (
       <Section>
-        <ComboBox {...props} isRequired onInputChange={(v) => setValue(v)}>
+        <ComboBox
+          {...props}
+          allowsEmptyCollection
+          isRequired
+          onInputChange={(v) => setValue(v)}
+        >
           <Label>Domain</Label>
           {options}
         </ComboBox>
-        <ColumnLayout>
-          <TextField>
-            <Label>Name</Label>
-          </TextField>
-          <Select defaultSelectedKey="@a.de">
-            <Label>Domain</Label>
-            <Option value="@a.de">@a.de</Option>
-            <Option value="@b.de">@b.de</Option>
-            <Option value="@c.de">@c.de</Option>
-          </Select>
-        </ColumnLayout>
       </Section>
     );
   },
