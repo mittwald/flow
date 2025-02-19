@@ -1,9 +1,11 @@
-import { Section } from "@mittwald/flow-react-components";
-import { FileDropZone } from "@mittwald/flow-react-components";
-import { IconUpload } from "@mittwald/flow-react-components";
-import { Heading } from "@mittwald/flow-react-components";
-import { FileField } from "@mittwald/flow-react-components";
-import { Button } from "@mittwald/flow-react-components";
+import {
+  Button,
+  FileDropZone,
+  FileField,
+  Heading,
+  IconUpload,
+  Section,
+} from "@mittwald/flow-react-components";
 
 <Section>
   <FileDropZone onChange={(files) => console.log(files)}>

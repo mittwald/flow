@@ -1,8 +1,8 @@
 import {
+  Label,
   Radio,
   RadioGroup,
 } from "@mittwald/flow-react-components";
-import { Label } from "@mittwald/flow-react-components";
 
 <div style={{ display: "flex", justifyContent: "center" }}>
   <RadioGroup defaultValue="0-10">

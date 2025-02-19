@@ -1,23 +1,21 @@
-import { Header } from "@mittwald/flow-react-components";
-import { Section } from "@mittwald/flow-react-components";
-import { Heading } from "@mittwald/flow-react-components";
-import { Button } from "@mittwald/flow-react-components";
-import { Content } from "@mittwald/flow-react-components";
-import { LabeledValue } from "@mittwald/flow-react-components";
-import { Label } from "@mittwald/flow-react-components";
-import { ColumnLayout } from "@mittwald/flow-react-components";
 import {
-  IconContextMenu,
-  IconExternalLink,
-} from "@mittwald/flow-react-components";
-import {
+  Button,
+  ColumnLayout,
+  Content,
   ContextMenu,
   ContextMenuTrigger,
+  CopyButton,
+  Header,
+  Heading,
+  IconContextMenu,
+  IconExternalLink,
+  Label,
+  LabeledValue,
+  Link,
+  MenuItem,
+  Section,
+  Text,
 } from "@mittwald/flow-react-components";
-import { MenuItem } from "@mittwald/flow-react-components";
-import { Link } from "@mittwald/flow-react-components";
-import { CopyButton } from "@mittwald/flow-react-components";
-import { Text } from "@mittwald/flow-react-components";
 
 <Section>
   <Header>

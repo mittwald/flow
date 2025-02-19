@@ -1,11 +1,11 @@
-import { Navigation } from "@mittwald/flow-react-components";
-import { Text } from "@mittwald/flow-react-components";
 import {
   IconCustomer,
   IconProject,
   IconServer,
+  Link,
+  Navigation,
+  Text,
 } from "@mittwald/flow-react-components";
-import { Link } from "@mittwald/flow-react-components";
 
 <Navigation aria-label="Main menu">
   <Link href="#">

@@ -1,13 +1,13 @@
-import { Label } from "@mittwald/flow-react-components";
-import { useState } from "react";
-import { FieldDescription } from "@mittwald/flow-react-components";
-import { ColumnLayout } from "@mittwald/flow-react-components";
-import { TextField } from "@mittwald/flow-react-components";
-import { Section } from "@mittwald/flow-react-components";
 import {
+  ColumnLayout,
+  FieldDescription,
+  Label,
+  Section,
   Segment,
   SegmentedControl,
+  TextField,
 } from "@mittwald/flow-react-components";
+import { useState } from "react";
 
 export default () => {
   const [showContent, setShowContent] =

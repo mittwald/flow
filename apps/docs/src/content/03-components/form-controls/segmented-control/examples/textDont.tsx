@@ -1,8 +1,8 @@
 import {
+  Label,
   Segment,
   SegmentedControl,
 } from "@mittwald/flow-react-components";
-import { Label } from "@mittwald/flow-react-components";
 
 <SegmentedControl defaultValue="individuell">
   <Label>Wähle deine Einstellungsart aus:</Label>

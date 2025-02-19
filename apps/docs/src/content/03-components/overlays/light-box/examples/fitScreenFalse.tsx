@@ -1,9 +1,9 @@
-import { Button } from "@mittwald/flow-react-components";
 import {
+  Button,
+  Image,
   LightBox,
   LightBoxTrigger,
 } from "@mittwald/flow-react-components";
-import { Image } from "@mittwald/flow-react-components";
 
 <LightBoxTrigger>
   <Button>Open LightBox</Button>

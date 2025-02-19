@@ -1,8 +1,8 @@
-import { Avatar } from "@mittwald/flow-react-components";
-import { Initials } from "@mittwald/flow-react-components";
 import {
+  Avatar,
   IconCustomer,
   IconHome,
+  Initials,
 } from "@mittwald/flow-react-components";
 
 <Row>

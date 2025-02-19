@@ -1,17 +1,17 @@
-import { typedList } from "@mittwald/flow-react-components";
+import {
+  Avatar,
+  ContextMenu,
+  Heading,
+  IconDomain,
+  IconSubdomain,
+  MenuItem,
+  Text,
+  typedList,
+} from "@mittwald/flow-react-components";
 import {
   type Domain,
   domains,
 } from "@/content/03-components/structure/list/examples/domainApi";
-import { Avatar } from "@mittwald/flow-react-components";
-import { Heading } from "@mittwald/flow-react-components";
-import { Text } from "@mittwald/flow-react-components";
-import { ContextMenu } from "@mittwald/flow-react-components";
-import {
-  IconDomain,
-  IconSubdomain,
-} from "@mittwald/flow-react-components";
-import { MenuItem } from "@mittwald/flow-react-components";
 
 export default () => {
   const DomainList = typedList<Domain>();

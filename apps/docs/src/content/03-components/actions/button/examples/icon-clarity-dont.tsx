@@ -1,7 +1,9 @@
-import { Button } from "@mittwald/flow-react-components";
-import { TextField } from "@mittwald/flow-react-components";
+import {
+  Button,
+  Icon,
+  TextField,
+} from "@mittwald/flow-react-components";
 import { IconCat, IconDog } from "@tabler/icons-react";
-import { Icon } from "@mittwald/flow-react-components";
 
 <Row>
   <TextField value="Suche" />

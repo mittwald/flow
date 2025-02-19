@@ -1,8 +1,10 @@
-import { Heading } from "@mittwald/flow-react-components";
-import { Text } from "@mittwald/flow-react-components";
-import { Section } from "@mittwald/flow-react-components";
-import { Header } from "@mittwald/flow-react-components";
-import { Button } from "@mittwald/flow-react-components";
+import {
+  Button,
+  Header,
+  Heading,
+  Section,
+  Text,
+} from "@mittwald/flow-react-components";
 
 <>
   <Section>

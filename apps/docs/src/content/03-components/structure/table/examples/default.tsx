@@ -1,4 +1,5 @@
 import {
+  InlineCode,
   Table,
   TableBody,
   TableCell,
@@ -6,7 +7,6 @@ import {
   TableHeader,
   TableRow,
 } from "@mittwald/flow-react-components";
-import { InlineCode } from "@mittwald/flow-react-components";
 
 <Table aria-label="Button Props">
   <TableHeader>

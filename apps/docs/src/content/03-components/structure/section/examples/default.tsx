@@ -1,6 +1,8 @@
-import { Heading } from "@mittwald/flow-react-components";
-import { Text } from "@mittwald/flow-react-components";
-import { Section } from "@mittwald/flow-react-components";
+import {
+  Heading,
+  Section,
+  Text,
+} from "@mittwald/flow-react-components";
 
 <Section>
   <Heading>Newsletter</Heading>

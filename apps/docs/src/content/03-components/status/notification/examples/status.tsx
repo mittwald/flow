@@ -1,6 +1,8 @@
-import { Heading } from "@mittwald/flow-react-components";
-import { Text } from "@mittwald/flow-react-components";
-import { Notification } from "@mittwald/flow-react-components";
+import {
+  Heading,
+  Notification,
+  Text,
+} from "@mittwald/flow-react-components";
 
 <Row>
   <Notification status="info">

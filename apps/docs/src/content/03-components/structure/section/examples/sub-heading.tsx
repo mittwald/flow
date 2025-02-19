@@ -1,9 +1,11 @@
-import { Section } from "@mittwald/flow-react-components";
-import { Heading } from "@mittwald/flow-react-components";
-import { Text } from "@mittwald/flow-react-components";
-import { LabeledValue } from "@mittwald/flow-react-components";
-import { Label } from "@mittwald/flow-react-components";
-import { InlineCode } from "@mittwald/flow-react-components";
+import {
+  Heading,
+  InlineCode,
+  Label,
+  LabeledValue,
+  Section,
+  Text,
+} from "@mittwald/flow-react-components";
 
 <Section>
   <Heading>DNS Verwaltung</Heading>

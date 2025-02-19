@@ -1,8 +1,8 @@
-import { Button } from "@mittwald/flow-react-components";
-import { Text } from "@mittwald/flow-react-components";
 import {
+  Button,
   IconChevronDown,
   IconClose,
+  Text,
 } from "@mittwald/flow-react-components";
 
 <Row>

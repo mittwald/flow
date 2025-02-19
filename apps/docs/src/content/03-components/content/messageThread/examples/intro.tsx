@@ -1,11 +1,13 @@
-import { Message } from "@mittwald/flow-react-components";
-import { Header } from "@mittwald/flow-react-components";
-import { Align } from "@mittwald/flow-react-components";
-import { Avatar } from "@mittwald/flow-react-components";
-import { Initials } from "@mittwald/flow-react-components";
-import { Text } from "@mittwald/flow-react-components";
-import { Content } from "@mittwald/flow-react-components";
-import { MessageThread } from "@mittwald/flow-react-components";
+import {
+  Align,
+  Avatar,
+  Content,
+  Header,
+  Initials,
+  Message,
+  MessageThread,
+  Text,
+} from "@mittwald/flow-react-components";
 
 <MessageThread>
   <Message type="sender">
