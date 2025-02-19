@@ -37,7 +37,7 @@ export interface ContextMenuProps
   width?: string | number;
   /** @internal */
   closeOverlay?: boolean;
-  triggerRef?: RefObject<HTMLElement>;
+  triggerRef?: RefObject<HTMLElement | null>;
 }
 
 export const ContextMenu = flowComponent("ContextMenu", (props) => {
