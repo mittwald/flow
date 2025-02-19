@@ -93,6 +93,8 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
 
   const [triggerWidth, setTriggerWidth] = useState<string>();
 
+  console.log(triggerWidth);
+
   const onResize = useCallback(() => {
     if (triggerRef?.current) {
       setTriggerWidth(triggerRef.current.offsetWidth + "px");

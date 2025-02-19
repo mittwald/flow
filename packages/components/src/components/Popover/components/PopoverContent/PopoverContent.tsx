@@ -1,4 +1,4 @@
-import type { FC, PropsWithChildren, Ref } from "react";
+import type { CSSProperties, FC, PropsWithChildren, Ref } from "react";
 import React from "react";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
@@ -7,7 +7,8 @@ import type { PropsWithClassName } from "@/lib/types/props";
 
 export interface PopoverContentProps
   extends PropsWithChildren,
-    PropsWithClassName {
+    PropsWithClassName,
+    Pick<Aria.PopoverProps, "style"> {
   withTip?: boolean;
   isDialogContent?: boolean;
   isOpen?: boolean;
@@ -29,6 +30,7 @@ export const PopoverContent: FC<PopoverContentProps> = (props) => {
     isOpen,
     width,
     padding = "m",
+    style,
     ...rest
   } = props;
 
@@ -42,7 +44,7 @@ export const PopoverContent: FC<PopoverContentProps> = (props) => {
       ref={ref}
       isOpen={isOpen}
       onOpenChange={onOpenChange}
-      style={{ width }}
+      style={{ ...style, width }}
     >
       {withTip && (
         <Aria.OverlayArrow className={styles.tip}>
