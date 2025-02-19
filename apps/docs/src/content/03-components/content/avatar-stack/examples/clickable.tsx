@@ -1,7 +1,7 @@
-import Avatar from "@mittwald/flow-react-components/Avatar";
-import { AvatarStack } from "@mittwald/flow-react-components/AvatarStack";
-import { Button } from "@mittwald/flow-react-components/Button";
-import { Initials } from "@mittwald/flow-react-components/Initials";
+import Avatar from "@mittwald/flow-react-components";
+import { AvatarStack } from "@mittwald/flow-react-components";
+import { Button } from "@mittwald/flow-react-components";
+import { Initials } from "@mittwald/flow-react-components";
 
 <AvatarStack
   onCountPress={() => console.log("count clicked")}
