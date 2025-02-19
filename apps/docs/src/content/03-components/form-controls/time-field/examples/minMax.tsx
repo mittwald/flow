@@ -1,7 +1,9 @@
-import { Label } from "@mittwald/flow-react-components";
+import {
+  FieldDescription,
+  Label,
+  TimeField,
+} from "@mittwald/flow-react-components";
 import { Time } from "@internationalized/date";
-import { TimeField } from "@mittwald/flow-react-components";
-import { FieldDescription } from "@mittwald/flow-react-components";
 
 <TimeField
   minValue={new Time(8, 0)}

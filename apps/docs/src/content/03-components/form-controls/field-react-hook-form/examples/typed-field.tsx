@@ -1,8 +1,12 @@
 import { useForm } from "react-hook-form";
-import { Form } from "@mittwald/flow-react-components/react-hook-form";
-import { typedField } from "@mittwald/flow-react-components/react-hook-form";
-import { TextField } from "@mittwald/flow-react-components";
-import { Label } from "@mittwald/flow-react-components";
+import {
+  Form,
+  typedField,
+} from "@mittwald/flow-react-components/react-hook-form";
+import {
+  Label,
+  TextField,
+} from "@mittwald/flow-react-components";
 
 export default () => {
   interface Values {

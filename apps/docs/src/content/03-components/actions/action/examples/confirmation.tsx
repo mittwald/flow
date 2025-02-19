@@ -1,10 +1,12 @@
-import { Button } from "@mittwald/flow-react-components";
-import { Action } from "@mittwald/flow-react-components";
+import {
+  Action,
+  ActionGroup,
+  Button,
+  Content,
+  Heading,
+  Modal,
+} from "@mittwald/flow-react-components";
 import { sleepLong } from "@/content/03-components/actions/action/examples/lib";
-import { Heading } from "@mittwald/flow-react-components";
-import { Content } from "@mittwald/flow-react-components";
-import { ActionGroup } from "@mittwald/flow-react-components";
-import { Modal } from "@mittwald/flow-react-components";
 
 <Action action={sleepLong}>
   <Modal slot="actionConfirm">

@@ -1,6 +1,8 @@
-import { Alert } from "@mittwald/flow-react-components";
-import { Heading } from "@mittwald/flow-react-components";
-import { Content } from "@mittwald/flow-react-components";
+import {
+  Alert,
+  Content,
+  Heading,
+} from "@mittwald/flow-react-components";
 
 <Row>
   <Alert status="info">

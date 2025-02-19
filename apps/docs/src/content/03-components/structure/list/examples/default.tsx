@@ -1,21 +1,21 @@
-import { typedList } from "@mittwald/flow-react-components";
+import {
+  ActionGroup,
+  AlertBadge,
+  Avatar,
+  Button,
+  ContextMenu,
+  Heading,
+  IconDomain,
+  IconDownload,
+  IconSubdomain,
+  MenuItem,
+  Text,
+  typedList,
+} from "@mittwald/flow-react-components";
 import {
   type Domain,
   domains,
 } from "@/content/03-components/structure/list/examples/domainApi";
-import { Avatar } from "@mittwald/flow-react-components";
-import { Heading } from "@mittwald/flow-react-components";
-import { Text } from "@mittwald/flow-react-components";
-import { ContextMenu } from "@mittwald/flow-react-components";
-import {
-  IconDomain,
-  IconDownload,
-  IconSubdomain,
-} from "@mittwald/flow-react-components";
-import { AlertBadge } from "@mittwald/flow-react-components";
-import { MenuItem } from "@mittwald/flow-react-components";
-import { Button } from "@mittwald/flow-react-components";
-import { ActionGroup } from "@mittwald/flow-react-components";
 
 export default () => {
   const DomainList = typedList<Domain>();

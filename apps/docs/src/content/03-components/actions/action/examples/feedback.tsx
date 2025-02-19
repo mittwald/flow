@@ -1,5 +1,7 @@
-import { Button } from "@mittwald/flow-react-components";
-import { Action } from "@mittwald/flow-react-components";
+import {
+  Action,
+  Button,
+} from "@mittwald/flow-react-components";
 
 <Action
   action={() => {

@@ -1,22 +1,20 @@
 import {
+  AlertBadge,
+  Avatar,
+  Content,
+  Heading,
+  IconDomain,
+  IconSubdomain,
   List,
   ListItem,
   ListItemView,
   ListStaticData,
+  Text,
 } from "@mittwald/flow-react-components";
 import {
   type Domain,
   domains,
 } from "@/content/03-components/structure/list/examples/domainApi";
-import { Avatar } from "@mittwald/flow-react-components";
-import { Heading } from "@mittwald/flow-react-components";
-import { Text } from "@mittwald/flow-react-components";
-import {
-  IconDomain,
-  IconSubdomain,
-} from "@mittwald/flow-react-components";
-import { AlertBadge } from "@mittwald/flow-react-components";
-import { Content } from "@mittwald/flow-react-components";
 
 <List batchSize={2} accordion>
   <ListStaticData data={domains} />

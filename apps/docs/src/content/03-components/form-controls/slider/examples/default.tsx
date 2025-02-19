@@ -1,5 +1,7 @@
-import { Label } from "@mittwald/flow-react-components";
-import { Slider } from "@mittwald/flow-react-components";
+import {
+  Label,
+  Slider,
+} from "@mittwald/flow-react-components";
 
 <Slider
   formatOptions={{

@@ -1,28 +1,24 @@
-import { LayoutCard } from "@mittwald/flow-react-components";
-import { IllustratedMessage } from "@mittwald/flow-react-components";
 import {
+  Action,
+  ActionGroup,
+  Align,
+  Avatar,
+  Button,
+  CheckboxButton,
+  ColumnLayout,
+  Content,
+  Header,
+  Heading,
   IconDomain,
   IconInvoice,
-} from "@mittwald/flow-react-components";
-import { Heading } from "@mittwald/flow-react-components";
-import { Text } from "@mittwald/flow-react-components";
-import { Button } from "@mittwald/flow-react-components";
-import {
+  IllustratedMessage,
+  Initials,
+  Label,
+  LayoutCard,
+  Link,
   Modal,
   ModalTrigger,
-} from "@mittwald/flow-react-components";
-import { Content } from "@mittwald/flow-react-components";
-import { Section } from "@mittwald/flow-react-components";
-import { Link } from "@mittwald/flow-react-components";
-import { TextField } from "@mittwald/flow-react-components";
-import { Label } from "@mittwald/flow-react-components";
-import { Header } from "@mittwald/flow-react-components";
-import { ColumnLayout } from "@mittwald/flow-react-components";
-import { ActionGroup } from "@mittwald/flow-react-components";
-import { Action } from "@mittwald/flow-react-components";
-import { Avatar } from "@mittwald/flow-react-components";
-import { Initials } from "@mittwald/flow-react-components";
-import {
+  Section,
   Table,
   TableBody,
   TableCell,
@@ -30,9 +26,9 @@ import {
   TableFooterRow,
   TableHeader,
   TableRow,
+  Text,
+  TextField,
 } from "@mittwald/flow-react-components";
-import { CheckboxButton } from "@mittwald/flow-react-components";
-import { Align } from "@mittwald/flow-react-components";
 
 <LayoutCard>
   <IllustratedMessage>

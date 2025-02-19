@@ -1,5 +1,7 @@
-import { Link } from "@mittwald/flow-react-components";
-import { Text } from "@mittwald/flow-react-components";
+import {
+  Link,
+  Text,
+} from "@mittwald/flow-react-components";
 
 <Text>
   Sieh dir unser <Link href="#">Onboarding</Link> an, um

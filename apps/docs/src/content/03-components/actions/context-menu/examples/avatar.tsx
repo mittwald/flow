@@ -1,16 +1,16 @@
-import { Button } from "@mittwald/flow-react-components";
 import {
+  Avatar,
+  Button,
   ContextMenu,
   ContextMenuTrigger,
+  Heading,
+  IconCamera,
+  Initials,
   MenuItem,
+  Section,
+  Separator,
+  Text,
 } from "@mittwald/flow-react-components";
-import { Section } from "@mittwald/flow-react-components";
-import { Avatar } from "@mittwald/flow-react-components";
-import { Initials } from "@mittwald/flow-react-components";
-import { IconCamera } from "@mittwald/flow-react-components";
-import { Heading } from "@mittwald/flow-react-components";
-import { Separator } from "@mittwald/flow-react-components";
-import { Text } from "@mittwald/flow-react-components";
 
 <ContextMenuTrigger>
   <Button>Trigger</Button>

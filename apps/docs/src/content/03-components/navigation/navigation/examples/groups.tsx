@@ -1,9 +1,9 @@
 import {
+  Label,
+  Link,
   Navigation,
   NavigationGroup,
 } from "@mittwald/flow-react-components";
-import { Link } from "@mittwald/flow-react-components";
-import { Label } from "@mittwald/flow-react-components";
 
 <Navigation aria-label="Main navigation">
   <NavigationGroup>

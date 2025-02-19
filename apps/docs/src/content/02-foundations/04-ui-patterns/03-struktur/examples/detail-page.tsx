@@ -1,25 +1,23 @@
-import { Heading } from "@mittwald/flow-react-components";
-import { Text } from "@mittwald/flow-react-components";
-import { Button } from "@mittwald/flow-react-components";
-import { Section } from "@mittwald/flow-react-components";
-import { Label } from "@mittwald/flow-react-components";
-import { Header } from "@mittwald/flow-react-components";
-import { ColumnLayout } from "@mittwald/flow-react-components";
-import { LayoutCard } from "@mittwald/flow-react-components";
 import {
+  Action,
+  Alert,
+  Button,
+  ColumnLayout,
+  Content,
   ContextMenu,
   ContextMenuTrigger,
+  Header,
+  Heading,
+  IconContextMenu,
+  Label,
+  LabeledValue,
+  LayoutCard,
   MenuItem,
-} from "@mittwald/flow-react-components";
-import { IconContextMenu } from "@mittwald/flow-react-components";
-import { LabeledValue } from "@mittwald/flow-react-components";
-import { Alert } from "@mittwald/flow-react-components";
-import { Content } from "@mittwald/flow-react-components";
-import { Action } from "@mittwald/flow-react-components";
-import {
+  Section,
   Tab,
   Tabs,
   TabTitle,
+  Text,
 } from "@mittwald/flow-react-components";
 
 export default () => {

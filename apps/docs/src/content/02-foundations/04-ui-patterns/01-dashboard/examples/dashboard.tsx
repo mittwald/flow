@@ -1,20 +1,20 @@
-import { ColumnLayout } from "@mittwald/flow-react-components";
-import { LayoutCard } from "@mittwald/flow-react-components";
-import { Section } from "@mittwald/flow-react-components";
-import { Heading } from "@mittwald/flow-react-components";
-import { Header } from "@mittwald/flow-react-components";
-import { Text } from "@mittwald/flow-react-components";
-import { Link } from "@mittwald/flow-react-components";
-import { Button } from "@mittwald/flow-react-components";
-import { IconContextMenu } from "@mittwald/flow-react-components";
-import { LabeledValue } from "@mittwald/flow-react-components";
-import { Label } from "@mittwald/flow-react-components";
-import { CopyButton } from "@mittwald/flow-react-components";
 import {
+  Button,
+  ColumnLayout,
   ContextMenu,
   ContextMenuTrigger,
+  CopyButton,
+  Header,
+  Heading,
+  IconContextMenu,
+  Label,
+  LabeledValue,
+  LayoutCard,
+  Link,
+  MenuItem,
+  Section,
+  Text,
 } from "@mittwald/flow-react-components";
-import { MenuItem } from "@mittwald/flow-react-components";
 
 <ColumnLayout m={[1]} l={[1]}>
   <LayoutCard>

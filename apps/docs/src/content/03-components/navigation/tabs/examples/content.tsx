@@ -1,16 +1,16 @@
 import {
-  Tabs,
+  Header,
+  Heading,
+  Label,
+  LabeledValue,
+  Section,
+  Switch,
   Tab,
+  Tabs,
   TabTitle,
+  Text,
+  TextField,
 } from "@mittwald/flow-react-components";
-import { Section } from "@mittwald/flow-react-components";
-import { Heading } from "@mittwald/flow-react-components";
-import { TextField } from "@mittwald/flow-react-components";
-import { Label } from "@mittwald/flow-react-components";
-import { LabeledValue } from "@mittwald/flow-react-components";
-import { Text } from "@mittwald/flow-react-components";
-import { Header } from "@mittwald/flow-react-components";
-import { Switch } from "@mittwald/flow-react-components";
 
 <Tabs>
   <Tab>

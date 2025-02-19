@@ -1,5 +1,7 @@
-import { Text } from "@mittwald/flow-react-components";
-import { InlineCode } from "@mittwald/flow-react-components";
+import {
+  InlineCode,
+  Text,
+} from "@mittwald/flow-react-components";
 
 <Text color="light">
   Gib <InlineCode color="light">yarn start</InlineCode> ein

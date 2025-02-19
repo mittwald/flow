@@ -1,6 +1,8 @@
-import { Button } from "@mittwald/flow-react-components";
-import { IconClose } from "@mittwald/flow-react-components";
-import { Image } from "@mittwald/flow-react-components";
+import {
+  Button,
+  IconClose,
+  Image,
+} from "@mittwald/flow-react-components";
 
 <div
   className="flow--light-box flow--light-box--fit-screen"

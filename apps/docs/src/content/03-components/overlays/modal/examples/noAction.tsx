@@ -1,9 +1,11 @@
-import { ActionGroup } from "@mittwald/flow-react-components";
-import { Button } from "@mittwald/flow-react-components";
-import { Heading } from "@mittwald/flow-react-components";
-import { Action } from "@mittwald/flow-react-components";
-import { Switch } from "@mittwald/flow-react-components";
-import { Section } from "@mittwald/flow-react-components";
+import {
+  Action,
+  ActionGroup,
+  Button,
+  Heading,
+  Section,
+  Switch,
+} from "@mittwald/flow-react-components";
 
 <StaticModal>
   <header className="flow--modal--header">

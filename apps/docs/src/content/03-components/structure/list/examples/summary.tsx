@@ -1,10 +1,10 @@
 import {
+  Heading,
   ListItemView,
   ListSummary,
+  Text,
   typedList,
 } from "@mittwald/flow-react-components";
-import { Heading } from "@mittwald/flow-react-components";
-import { Text } from "@mittwald/flow-react-components";
 
 export default () => {
   const InvoiceList = typedList<{

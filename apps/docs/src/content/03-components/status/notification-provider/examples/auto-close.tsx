@@ -1,8 +1,10 @@
-import { Button } from "@mittwald/flow-react-components";
-import { Heading } from "@mittwald/flow-react-components";
-import { Text } from "@mittwald/flow-react-components";
-import { useNotificationController } from "@mittwald/flow-react-components";
-import { Notification } from "@mittwald/flow-react-components";
+import {
+  Button,
+  Heading,
+  Notification,
+  Text,
+  useNotificationController,
+} from "@mittwald/flow-react-components";
 
 export default () => {
   const controller = useNotificationController();

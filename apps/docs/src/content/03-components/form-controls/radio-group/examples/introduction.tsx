@@ -1,7 +1,7 @@
-import { Label } from "@mittwald/flow-react-components";
 import {
-  RadioGroup,
+  Label,
   Radio,
+  RadioGroup,
 } from "@mittwald/flow-react-components";
 
 <RadioGroup defaultValue="admin">

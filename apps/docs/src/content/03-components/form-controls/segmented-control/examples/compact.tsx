@@ -1,6 +1,6 @@
-import { Label } from "@mittwald/flow-react-components";
-import { ColumnLayout } from "@mittwald/flow-react-components";
 import {
+  ColumnLayout,
+  Label,
   Segment,
   SegmentedControl,
 } from "@mittwald/flow-react-components";

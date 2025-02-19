@@ -1,14 +1,14 @@
-import { Button } from "@mittwald/flow-react-components";
-import { HeaderNavigation } from "@mittwald/flow-react-components";
 import {
+  Button,
+  HeaderNavigation,
+  Heading,
   IconMenu,
   IconSearch,
   IconSupport,
+  LayoutCard,
+  Section,
+  Text,
 } from "@mittwald/flow-react-components";
-import { LayoutCard } from "@mittwald/flow-react-components";
-import { Heading } from "@mittwald/flow-react-components";
-import { Text } from "@mittwald/flow-react-components";
-import { Section } from "@mittwald/flow-react-components";
 
 <Section style={{ height: "100%" }}>
   <HeaderNavigation

@@ -1,9 +1,11 @@
-import { Heading } from "@mittwald/flow-react-components";
-import { IllustratedMessage } from "@mittwald/flow-react-components";
-import { IconApp } from "@mittwald/flow-react-components";
-import { Text } from "@mittwald/flow-react-components";
-import { Button } from "@mittwald/flow-react-components";
-import { ActionGroup } from "@mittwald/flow-react-components";
+import {
+  ActionGroup,
+  Button,
+  Heading,
+  IconApp,
+  IllustratedMessage,
+  Text,
+} from "@mittwald/flow-react-components";
 
 <IllustratedMessage>
   <IconApp />

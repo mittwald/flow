@@ -1,7 +1,9 @@
-import { Align } from "@mittwald/flow-react-components";
-import { Avatar } from "@mittwald/flow-react-components";
-import { Initials } from "@mittwald/flow-react-components";
-import { Text } from "@mittwald/flow-react-components";
+import {
+  Align,
+  Avatar,
+  Initials,
+  Text,
+} from "@mittwald/flow-react-components";
 
 <Align>
   <Avatar>

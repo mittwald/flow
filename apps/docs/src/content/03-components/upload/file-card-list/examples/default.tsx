@@ -1,5 +1,7 @@
-import { FileCardList } from "@mittwald/flow-react-components";
-import { FileCard } from "@mittwald/flow-react-components";
+import {
+  FileCard,
+  FileCardList,
+} from "@mittwald/flow-react-components";
 
 <FileCardList aria-label="Hochgeladene Dateien">
   <FileCard

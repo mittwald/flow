@@ -1,9 +1,9 @@
 import {
+  FieldDescription,
+  Heading,
   Radio,
   RadioGroup,
 } from "@mittwald/flow-react-components";
-import { Heading } from "@mittwald/flow-react-components";
-import { FieldDescription } from "@mittwald/flow-react-components";
 
 <RadioGroup defaultValue="more">
   <Heading level={4}>

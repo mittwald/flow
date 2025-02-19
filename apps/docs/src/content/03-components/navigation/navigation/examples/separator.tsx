@@ -1,10 +1,10 @@
 import {
+  Label,
+  Link,
   Navigation,
   NavigationGroup,
+  Separator,
 } from "@mittwald/flow-react-components";
-import { Link } from "@mittwald/flow-react-components";
-import { Label } from "@mittwald/flow-react-components";
-import { Separator } from "@mittwald/flow-react-components";
 
 <Navigation aria-label="Main navigation">
   <NavigationGroup>

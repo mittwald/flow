@@ -1,12 +1,14 @@
-import { LabeledValue } from "@mittwald/flow-react-components";
-import { Label } from "@mittwald/flow-react-components";
-import { Content } from "@mittwald/flow-react-components";
-import { CopyButton } from "@mittwald/flow-react-components";
-import { Link } from "@mittwald/flow-react-components";
-import { Text } from "@mittwald/flow-react-components";
-import { IconExternalLink } from "@mittwald/flow-react-components";
-import { ColumnLayout } from "@mittwald/flow-react-components";
-import { InlineCode } from "@mittwald/flow-react-components";
+import {
+  ColumnLayout,
+  Content,
+  CopyButton,
+  IconExternalLink,
+  InlineCode,
+  Label,
+  LabeledValue,
+  Link,
+  Text,
+} from "@mittwald/flow-react-components";
 
 <ColumnLayout l={[1, 1, 1, 1]}>
   <LabeledValue>

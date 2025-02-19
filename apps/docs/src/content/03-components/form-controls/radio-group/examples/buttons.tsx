@@ -1,7 +1,7 @@
-import { Label } from "@mittwald/flow-react-components";
 import {
-  RadioGroup,
+  Label,
   RadioButton,
+  RadioGroup,
 } from "@mittwald/flow-react-components";
 
 <RadioGroup defaultValue="mysql">

@@ -1,15 +1,17 @@
-import { Modal } from "@mittwald/flow-react-components";
-import { Content } from "@mittwald/flow-react-components";
-import { Text } from "@mittwald/flow-react-components";
-import { TextField } from "@mittwald/flow-react-components";
-import { Label } from "@mittwald/flow-react-components";
-import { ActionGroup } from "@mittwald/flow-react-components";
-import { Button } from "@mittwald/flow-react-components";
-import { Heading } from "@mittwald/flow-react-components";
-import { Action } from "@mittwald/flow-react-components";
+import {
+  Action,
+  ActionGroup,
+  Button,
+  Content,
+  Heading,
+  Label,
+  Modal,
+  Section,
+  Text,
+  TextField,
+  useOverlayController,
+} from "@mittwald/flow-react-components";
 import { sleepLong } from "@/content/03-components/actions/action/examples/lib";
-import { useOverlayController } from "@mittwald/flow-react-components";
-import { Section } from "@mittwald/flow-react-components";
 
 export default () => {
   const controller = useOverlayController("Modal");
