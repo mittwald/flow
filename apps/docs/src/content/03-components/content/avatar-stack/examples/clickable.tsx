@@ -1,4 +1,5 @@
-import Avatar, {
+import {
+  Avatar,
   AvatarStack,
   Button,
   Initials,

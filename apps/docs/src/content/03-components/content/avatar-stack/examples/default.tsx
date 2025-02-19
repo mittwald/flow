@@ -1,4 +1,5 @@
-import Avatar, {
+import {
+  Avatar,
   AvatarStack,
   Initials,
 } from "@mittwald/flow-react-components";

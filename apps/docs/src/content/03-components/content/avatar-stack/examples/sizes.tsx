@@ -1,6 +1,8 @@
-import Avatar from "@mittwald/flow-react-components";
-import Initials from "@mittwald/flow-react-components";
-import { AvatarStack } from "@mittwald/flow-react-components";
+import {
+  Avatar,
+  AvatarStack,
+  Initials,
+} from "@mittwald/flow-react-components";
 
 <Row>
   <AvatarStack size="xs">
