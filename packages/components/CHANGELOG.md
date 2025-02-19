@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.40](https://github.com/mittwald/flow/compare/0.2.0-alpha.39...0.2.0-alpha.40) (2025-02-19)
+
+### Bug Fixes
+
+* **ColumnLayout:** nested column layout should not use parent sizes as default ([#1187](https://github.com/mittwald/flow/issues/1187)) ([7377c3e](https://github.com/mittwald/flow/commit/7377c3e6245a851f66a4abbe74c53485c5f6229c))
+
 # [0.2.0-alpha.39](https://github.com/mittwald/flow/compare/0.2.0-alpha.38...0.2.0-alpha.39) (2025-02-19)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
