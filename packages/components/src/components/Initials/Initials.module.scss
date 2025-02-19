@@ -3,6 +3,14 @@
   font-weight: var(--initials--font-weight);
 
   *:nth-child(even) {
+    color: var(--content-color);
+  }
+
+  *:nth-child(odd) {
     color: var(--content-accent-color);
+  }
+
+  *:only-child {
+    color: var(--content-color);
   }
 }
