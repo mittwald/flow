@@ -37,9 +37,7 @@
   &:has(.close) {
     .button,
     .content {
-      padding-inline-end: calc(
-              var(--content-size) + var(--badge--spacing)
-      );
+      padding-inline-end: calc(var(--content-size) + var(--badge--spacing));
     }
   }
 
@@ -80,7 +78,7 @@
     border-end-end-radius: var(--badge-size);
     border-start-end-radius: var(--badge-size);
     margin-inline-start: calc(
-            (var(--badge-size) - var(--badge--border-width)) * -1
+      (var(--badge-size) - var(--badge--border-width)) * -1
     );
     margin-top: var(--badge--border-width);
   }

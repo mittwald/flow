@@ -19,6 +19,10 @@ export interface SliderProps
   showInitialMarker?: boolean;
 }
 
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const Slider = flowComponent("Slider", (props) => {
   const {
     className,

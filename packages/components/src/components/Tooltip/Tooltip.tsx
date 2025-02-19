@@ -8,6 +8,7 @@ export type TooltipProps = PropsWithChildren<
   Omit<Aria.TooltipProps, "children">
 >;
 
+/** @flr-generate all */
 export const Tooltip: FC<TooltipProps> = (props) => {
   const { children, className, ...rest } = props;
 

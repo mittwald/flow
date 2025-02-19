@@ -26,6 +26,10 @@ export interface NotificationProps
   onClose?: () => void;
 }
 
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const Notification: FC<NotificationProps> = (props) => {
   const {
     children,

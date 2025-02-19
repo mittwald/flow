@@ -21,7 +21,7 @@ export class ActionExecutionBatch {
     }
 
     const batchFeedback =
-      this.actions[this.actions.length - 1].actionProps.showFeedback;
+      this.actions[this.actions.length - 1]?.actionProps.showFeedback;
 
     const executionState = this.baseAction.state.withFeedback(
       this.baseAction.needsConfirmation ? false : batchFeedback,

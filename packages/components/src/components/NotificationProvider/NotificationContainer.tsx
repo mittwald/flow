@@ -1,6 +1,5 @@
 import type { ComponentProps, FC } from "react";
-import { Suspense } from "react";
-import React from "react";
+import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
 import clsx from "clsx";
 import styles from "./NotificationContainer.module.scss";

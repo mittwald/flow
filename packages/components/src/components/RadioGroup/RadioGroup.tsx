@@ -18,8 +18,9 @@ export interface RadioGroupProps
     FlowComponentProps,
     Pick<ColumnLayoutProps, "s" | "m" | "l"> {}
 
+/** @flr-generate all */
 export const RadioGroup = flowComponent("RadioGroup", (props) => {
-  const { children, className, s, m, l, refProp: ref, ...rest } = props;
+  const { children, className, s, m, l, ref, ...rest } = props;
 
   const rootClassName = clsx(
     formFieldStyles.formField,

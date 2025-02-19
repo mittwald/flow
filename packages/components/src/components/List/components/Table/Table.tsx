@@ -1,18 +1,16 @@
 import type { FC } from "react";
 import React from "react";
 import { useList } from "@/components/List";
-import {
-  Table as TableComponent,
-  TableBody,
-  TableCell,
-  TableColumn,
-  TableHeader,
-  TableRow,
-} from "@/components/Table";
 import { TableLoadingView } from "@/components/List/components/Table/components/TableLoadingView";
 import styles from "./Table.module.css";
 import clsx from "clsx";
-import { EmptyView } from "@/components/List/components/EmptyView/EmptyView";
+import ListEmptyViewView from "@/views/ListEmptyViewView";
+import TableView from "@/views/TableView";
+import TableHeaderView from "@/views/TableHeaderView";
+import TableBodyView from "@/views/TableBodyView";
+import TableRowView from "@/views/TableRowView";
+import TableCellView from "@/views/TableCellView";
+import TableColumnView from "@/views/TableColumnView";
 
 export const Table: FC = () => {
   const list = useList();
@@ -31,7 +29,7 @@ export const Table: FC = () => {
   }
 
   if (listIsEmpty) {
-    return <EmptyView />;
+    return <ListEmptyViewView />;
   }
 
   const rowAction = table.list.onAction;
@@ -43,22 +41,19 @@ export const Table: FC = () => {
   );
 
   return (
-    <TableComponent
+    <TableView
       {...list.componentProps}
       {...table.componentProps}
       className={tableClassName}
     >
-      <TableHeader {...table.header.componentProps}>
+      <TableHeaderView {...table.header.componentProps}>
         {table.header.columns.map((col, i) => (
-          <TableColumn key={i} {...col.componentProps} />
+          <TableColumnView key={i} {...col.componentProps} />
         ))}
-      </TableHeader>
-      <TableBody
-        {...table.body.componentProps}
-        renderEmptyState={() => <EmptyView />}
-      >
+      </TableHeaderView>
+      <TableBodyView {...table.body.componentProps}>
         {list.items.entries.map((item) => (
-          <TableRow
+          <TableRowView
             className={(props) =>
               clsx(
                 styles.row,
@@ -73,13 +68,13 @@ export const Table: FC = () => {
             {...table.body.row.componentProps}
           >
             {table.body.row?.cells.map((cell, i) => (
-              <TableCell key={i} {...cell.componentProps}>
+              <TableCellView key={i} {...cell.componentProps}>
                 {cell.renderFn ? cell.renderFn(item.data, list) : undefined}
-              </TableCell>
+              </TableCellView>
             ))}
-          </TableRow>
+          </TableRowView>
         ))}
-      </TableBody>
-    </TableComponent>
+      </TableBodyView>
+    </TableView>
   );
 };

@@ -4,7 +4,7 @@ import type { PropsWithClassName } from "@/lib/types/props";
 import type { Search } from "@/components/List/model/search/Search";
 import type { SearchFieldRenderComponent } from "@/components/List/model/search/types";
 import { useOnChange } from "@/lib/hooks";
-import { SearchField as SearchFieldComponent } from "@/components/SearchField";
+import SearchFieldView from "@/views/SearchFieldView";
 
 interface Props extends PropsWithClassName {
   search: Search<never>;
@@ -50,7 +50,7 @@ const DefaultSearchFieldRender: SearchFieldRenderComponent = (props) => {
   };
 
   return (
-    <SearchFieldComponent
+    <SearchFieldView
       className={className}
       value={searchString}
       onKeyUp={handleKeyPress}

@@ -10,3 +10,8 @@
 > and we're looking forward for any feedback on this project in this stage of
 > development. However, please do not rely on any inputs or outputs of this
 > project to remain stable.
+
+## Migration `0.1.0` to `0.2.0`
+
+If you have just upgraded from version`0.1.0` to version `0.2.0`, have a look at
+the [Migration Guide](/packages/components/MIGRATION.md).

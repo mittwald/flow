@@ -15,4 +15,8 @@
   &[data-drop-target] {
     background-color: var(--file-drop-zone--background-color--target);
   }
+
+  :global(.flow--form-field) {
+    align-items: center;
+  }
 }

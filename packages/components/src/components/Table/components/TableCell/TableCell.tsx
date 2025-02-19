@@ -14,6 +14,7 @@ export interface TableCellProps
   horizontalAlign?: "start" | "center";
 }
 
+/** @flr-generate all */
 export const TableCell: FC<TableCellProps> = (props) => {
   const {
     children,

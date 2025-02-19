@@ -5,6 +5,12 @@ import { Label } from "@/components/Label";
 import { action } from "@storybook/addon-actions";
 import FieldDescription from "@/components/FieldDescription/FieldDescription";
 import { FieldError } from "@/components/FieldError";
+import {
+  ContextualHelp,
+  ContextualHelpTrigger,
+} from "@/components/ContextualHelp";
+import { Button } from "@/components/Button";
+import { Text } from "@/components/Text";
 
 const meta: Meta<typeof NumberField> = {
   title: "Form Controls/NumberField",
@@ -65,6 +71,22 @@ export const WithUnit: Story = {
       defaultValue={12}
     >
       <Label>Storage</Label>
+    </NumberField>
+  ),
+};
+
+export const WithContextualHelp: Story = {
+  render: (props) => (
+    <NumberField {...props} minValue={5} maxValue={10}>
+      <Label>
+        Age
+        <ContextualHelpTrigger>
+          <Button ariaSlot={null} />
+          <ContextualHelp>
+            <Text>Enter your age</Text>
+          </ContextualHelp>
+        </ContextualHelpTrigger>
+      </Label>
     </NumberField>
   ),
 };

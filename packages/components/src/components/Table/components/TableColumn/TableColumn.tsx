@@ -9,6 +9,7 @@ export interface TableColumnProps extends Aria.ColumnProps {
   horizontalAlign?: "start" | "center";
 }
 
+/** @flr-generate all */
 export const TableColumn: FC<TableColumnProps> = (props) => {
   const { children, className, horizontalAlign = "start", ...rest } = props;
   const rootClassName = clsx(

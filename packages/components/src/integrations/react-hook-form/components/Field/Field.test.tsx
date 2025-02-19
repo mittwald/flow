@@ -1,12 +1,14 @@
 import { beforeEach, expect, vitest } from "vitest";
 import { useForm } from "react-hook-form";
 import { Form, typedField } from "@/integrations/react-hook-form";
-import { Option, Select } from "@/components/Select";
+import { Select } from "@/components/Select";
+import { Option } from "@/components/Option";
 import React from "react";
 import { Button } from "@/components/Button";
 import { Label } from "@/components/Label";
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import { Switch } from "@/components/Switch";
+import Checkbox from "@/components/Checkbox";
 
 const handleSubmit = vitest.fn();
 
@@ -87,6 +89,39 @@ describe("Switch field", () => {
     render(<TestForm />);
 
     expect(screen.getByTestId("switch").getAttribute("data-selected")).toBe(
+      "true",
+    );
+  });
+});
+
+describe("Checkbox field", () => {
+  interface FormValues {
+    isActive: boolean;
+  }
+
+  const TestForm = () => {
+    const form = useForm<FormValues>({
+      defaultValues: {
+        isActive: true,
+      },
+    });
+
+    const Field = typedField(form);
+
+    return (
+      <Form form={form} onSubmit={(values) => handleSubmit(values)}>
+        <Field name="isActive">
+          <Checkbox data-testid="checkbox" />
+        </Field>
+        <Button type="submit">Submit</Button>
+      </Form>
+    );
+  };
+
+  test("switch uses default value", async () => {
+    render(<TestForm />);
+
+    expect(screen.getByTestId("checkbox").getAttribute("data-selected")).toBe(
       "true",
     );
   });
