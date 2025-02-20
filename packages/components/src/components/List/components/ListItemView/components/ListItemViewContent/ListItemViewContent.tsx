@@ -29,9 +29,6 @@ const getStyleForContentSlot = (slot?: string) =>
 export const ListItemViewContent = (props: ListItemViewContentProps) => {
   const { children, avatar, title, subTitle, button, bottom, viewMode } = props;
 
-  console.log(bottom);
-  console.log(title);
-
   const contentProps: Record<string, ComponentProps<"div">> = {
     bottom: {
       onMouseDown: (e) => e.stopPropagation(),
