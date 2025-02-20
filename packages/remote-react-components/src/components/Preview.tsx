@@ -1,4 +1,4 @@
-import React, { type FC } from "react";
+import React, { type FC, type ReactNode } from "react";
 
 const Fallback: FC = () => null;
 
@@ -10,10 +10,15 @@ const RemoteRenderer = React.lazy(async () => {
   }
 });
 
-export const Preview: FC = () => {
+interface Props {
+  data?: unknown;
+  fallback?: ReactNode;
+}
+
+export const Preview: FC<Props> = (props) => {
   const previewUrl = new URL(document.location.href);
   previewUrl.searchParams.set("preview", "");
-  return <RemoteRenderer src={previewUrl.toString()} />;
+  return <RemoteRenderer src={previewUrl.toString()} {...props} />;
 };
 
 export default Preview;

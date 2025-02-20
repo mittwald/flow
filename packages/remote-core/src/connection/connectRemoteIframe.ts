@@ -8,6 +8,7 @@ interface Opts {
 
 interface ThreadIframeTarget {
   render: (connection: RemoteConnection) => AsyncIterator<unknown>;
+  receiveData: (data: unknown) => void;
 }
 
 export const connectRemoteIframe = (opts: Opts) => {
@@ -17,12 +18,17 @@ export const connectRemoteIframe = (opts: Opts) => {
 };
 
 export const connectRemoteIframeRef =
-  (connection: RemoteConnection) => (ref: HTMLIFrameElement | null) => {
-    if (ref && !("__remoteConnectionEstablished" in ref)) {
-      Object.assign(ref, { __remoteConnectionEstablished: true });
-      connectRemoteIframe({
-        iframe: ref,
-        connection,
-      });
+  (connection: RemoteConnection) =>
+  (ref: HTMLIFrameElement): ThreadIframeTarget => {
+    if ("__remoteConnection" in ref) {
+      return ref.__remoteConnection as ThreadIframeTarget;
     }
+
+    const thread = connectRemoteIframe({
+      iframe: ref,
+      connection,
+    });
+
+    Object.assign(ref, { __remoteConnection: thread.imports });
+    return thread.imports;
   };
