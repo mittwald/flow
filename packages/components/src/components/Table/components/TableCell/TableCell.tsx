@@ -9,7 +9,7 @@ import { TableColumn } from "@/components/Table";
 export interface TableCellProps
   extends Omit<Aria.CellProps, "children" | "style">,
     PropsWithChildren {
-  /** Use cell as row header @default "start" */
+  /** Use cell as row header */
   rowHeader?: boolean;
   /** Horizontal alignment of the cell content @default "start" */
   horizontalAlign?: "start" | "center" | "end";
