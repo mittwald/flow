@@ -10,7 +10,6 @@ import { usePromise } from "@mittwald/react-use-promise";
 import { Avatar } from "@/components/Avatar";
 import { Initials } from "@/components/Initials";
 import { Content } from "@/components/Content";
-import { dummyText } from "@/lib/dev/dummyText";
 import { ContextMenu, MenuItem } from "@/components/ContextMenu";
 
 const meta: Meta<typeof List> = {
