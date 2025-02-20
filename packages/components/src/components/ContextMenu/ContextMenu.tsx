@@ -1,5 +1,6 @@
-import React from "react";
 import type * as Aria from "react-aria-components";
+import type { RefObject } from "react";
+import React, { useCallback, useState } from "react";
 import styles from "./ContextMenu.module.scss";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
@@ -17,9 +18,10 @@ import {
   getMenuItemSelectionVariant,
 } from "@/components/ContextMenu/lib";
 import ContextMenuContentView from "@/views/ContextMenuContentView";
+import { useResizeObserver } from "@react-aria/utils";
 
 export interface ContextMenuProps
-  extends Omit<PopoverProps, "withTip">,
+  extends Omit<PopoverProps, "withTip" | "triggerRef">,
     Pick<
       Aria.MenuProps<MenuItemProps>,
       | "onAction"
@@ -33,6 +35,9 @@ export interface ContextMenuProps
   selectionMode?: ContextMenuSelectionMode;
   /** Sets the context menu to a fixed width. */
   width?: string | number;
+  /** @internal */
+  closeOverlay?: boolean;
+  triggerRef?: RefObject<HTMLElement | null>;
 }
 
 export const ContextMenu = flowComponent("ContextMenu", (props) => {
@@ -46,6 +51,8 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
     onSelectionChange,
     ref,
     controller: overlayControllerFromProps,
+    closeOverlay,
+    triggerRef,
     ...rest
   } = props;
 
@@ -84,6 +91,19 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
     },
   };
 
+  const [triggerWidth, setTriggerWidth] = useState<string>();
+
+  const onResize = useCallback(() => {
+    if (triggerRef?.current) {
+      setTriggerWidth(triggerRef.current.offsetWidth + "px");
+    }
+  }, []);
+
+  useResizeObserver({
+    ref: triggerRef,
+    onResize: onResize,
+  });
+
   return (
     <ClearPropsContext>
       <Popover
@@ -91,6 +111,10 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
         controller={overlayController}
         isDialogContent={false}
         padding="s"
+        triggerRef={triggerRef}
+        style={
+          { "--trigger-width": triggerWidth ?? "0" } as React.CSSProperties
+        }
       >
         <OverlayContextProvider
           type="ContextMenu"
@@ -107,7 +131,9 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
             ref={ref}
           >
             <PropsContextProvider props={propsContext}>
-              <Action closeOverlay={getCloseOverlayType(selectionMode)}>
+              <Action
+                closeOverlay={getCloseOverlayType(selectionMode, closeOverlay)}
+              >
                 {children}
               </Action>
             </PropsContextProvider>
