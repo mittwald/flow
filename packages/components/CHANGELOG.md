@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.46](https://github.com/mittwald/flow/compare/0.2.0-alpha.45...0.2.0-alpha.46) (2025-02-20)
+
+### Bug Fixes
+
+* **ComboBox:** small combobox fixes ([#1199](https://github.com/mittwald/flow/issues/1199)) ([26adfc1](https://github.com/mittwald/flow/commit/26adfc1eb90939e5cc869b4196513e3cd4b8894a))
+
+### Features
+
+* loading view and data provider in RemoteRenderer ([f7cdb53](https://github.com/mittwald/flow/commit/f7cdb5335d69060de0170dacce30f91dafe28f4a))
+* **Table:** support horizontal align "end" in table cells ([300a0b1](https://github.com/mittwald/flow/commit/300a0b103e398b71192b9f829c9365ad776e3474))
+
 # [0.2.0-alpha.45](https://github.com/mittwald/flow/compare/0.2.0-alpha.44...0.2.0-alpha.45) (2025-02-20)
 
 ### Bug Fixes
