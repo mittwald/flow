@@ -105,8 +105,12 @@ export const VeryLongWords: Story = {
               <Avatar>
                 <Initials>{user.name}</Initials>
               </Avatar>
-              <Heading>{user.name}</Heading>
-              <Text>Mittwald</Text>
+              <Heading>
+                HeadingHeadingHeadingHeadingHeadingHeadingHeadingHeadingHeadingHeadingHeadingHeadingHeading
+              </Heading>
+              <Text>
+                SubtitleSubtitleSubtitleSubtitleSubtitleSubtitleSubtitleSubtitleSubtitleSubtitleSubtitleSubtitle
+              </Text>
               <Content slot="top">
                 TopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTop
               </Content>
