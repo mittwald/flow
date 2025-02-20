@@ -1,4 +1,4 @@
-import type { FC, PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 import React from "react";
 import clsx from "clsx";
 import styles from "./Message.module.scss";
