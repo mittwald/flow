@@ -11,24 +11,24 @@ import {
 <Table aria-label="Bestellübersicht">
   <TableHeader>
     <TableColumn>Artikel</TableColumn>
-    <TableColumn>Preis</TableColumn>
+    <TableColumn horizontalAlign="end">Preis</TableColumn>
   </TableHeader>
   <TableBody>
     <TableRow>
       <TableCell>proSpace (2 vCPU / 4 GB RAM)</TableCell>
-      <TableCell>32,00 €</TableCell>
+      <TableCell horizontalAlign="end">32,00 €</TableCell>
     </TableRow>
     <TableRow>
       <TableCell>20 GB Speicherplatz</TableCell>
-      <TableCell>Inklusive</TableCell>
+      <TableCell horizontalAlign="end">Inklusive</TableCell>
     </TableRow>
     <TableRow>
       <TableCell>20 GB Zusatzspeicherplatz</TableCell>
-      <TableCell>2,00 €</TableCell>
+      <TableCell horizontalAlign="end">2,00 €</TableCell>
     </TableRow>
     <TableFooterRow>
       <TableCell>Gesamtpreis</TableCell>
-      <TableCell>34,00 €</TableCell>
+      <TableCell horizontalAlign="end">34,00 €</TableCell>
     </TableFooterRow>
   </TableBody>
 </Table>;
