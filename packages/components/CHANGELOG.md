@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.43](https://github.com/mittwald/flow/compare/0.2.0-alpha.42...0.2.0-alpha.43) (2025-02-20)
+
+### Features
+
+* **Button:** support image in button for lightbox trigger ([#1202](https://github.com/mittwald/flow/issues/1202)) ([46727ea](https://github.com/mittwald/flow/commit/46727ea3dd392d7044f7a156771080db069fa5e1))
+
 # [0.2.0-alpha.42](https://github.com/mittwald/flow/compare/0.2.0-alpha.41...0.2.0-alpha.42) (2025-02-20)
 
 ### Features
