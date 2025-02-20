@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.45](https://github.com/mittwald/flow/compare/0.2.0-alpha.44...0.2.0-alpha.45) (2025-02-20)
+
+### Bug Fixes
+
+* **List:** fix responsive list item behavior ([#1204](https://github.com/mittwald/flow/issues/1204)) ([8354ccf](https://github.com/mittwald/flow/commit/8354ccf0518f3ee77c6d2100ff3e33a839a09f63))
+
 # [0.2.0-alpha.44](https://github.com/mittwald/flow/compare/0.2.0-alpha.43...0.2.0-alpha.44) (2025-02-20)
 
 ### Bug Fixes
