@@ -10,6 +10,7 @@ export interface MessageSeparatorProps
   extends PropsWithChildren,
     PropsWithClassName {}
 
+/** @flr-generate all */
 export const MessageSeparator: FC<MessageSeparatorProps> = (props) => {
   const { children, className } = props;
 
