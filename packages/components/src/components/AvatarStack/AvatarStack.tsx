@@ -23,6 +23,7 @@ export interface AvatarStackProps
   size?: "xs" | "s" | "m" | "l";
 }
 
+/** @flr-generate all */
 export const AvatarStack: FC<AvatarStackProps> = (props) => {
   const {
     className,
@@ -49,7 +50,6 @@ export const AvatarStack: FC<AvatarStackProps> = (props) => {
     },
   };
 
-  /** @flr-generate all */
   return (
     <PropsContextProvider props={propsContext} mergeInParentContext>
       <div className={rootClassName}>
