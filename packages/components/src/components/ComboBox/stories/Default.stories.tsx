@@ -6,9 +6,6 @@ import FieldDescription from "@/components/FieldDescription";
 import { FieldError } from "@/components/FieldError";
 import { ComboBox } from "@/components/ComboBox";
 import { Section } from "@/components/Section";
-import { ColumnLayout } from "@/components/ColumnLayout";
-import { TextField } from "@/components/TextField";
-import { Select } from "@/components/Select";
 
 const meta: Meta<typeof ComboBox> = {
   title: "Form Controls/ComboBox",
@@ -105,21 +102,15 @@ export const Emails: Story = {
 
     return (
       <Section>
-        <ComboBox {...props} isRequired onInputChange={(v) => setValue(v)}>
+        <ComboBox
+          {...props}
+          allowsEmptyCollection
+          isRequired
+          onInputChange={(v) => setValue(v)}
+        >
           <Label>Domain</Label>
           {options}
         </ComboBox>
-        <ColumnLayout>
-          <TextField>
-            <Label>Name</Label>
-          </TextField>
-          <Select defaultSelectedKey="@a.de">
-            <Label>Domain</Label>
-            <Option value="@a.de">@a.de</Option>
-            <Option value="@b.de">@b.de</Option>
-            <Option value="@c.de">@c.de</Option>
-          </Select>
-        </ColumnLayout>
       </Section>
     );
   },
