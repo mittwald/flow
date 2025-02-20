@@ -7,6 +7,10 @@ import defaultMeta from "./Default.stories";
 import { ListItemView, typedList } from "@/components/List";
 import { Render } from "@/lib/react/components/Render";
 import { usePromise } from "@mittwald/react-use-promise";
+import { Avatar } from "@/components/Avatar";
+import { Initials } from "@/components/Initials";
+import { Content } from "@/components/Content";
+import { ContextMenu, MenuItem } from "@/components/ContextMenu";
 
 const meta: Meta<typeof List> = {
   ...defaultMeta,
@@ -83,6 +87,42 @@ export const LoadingTableCell: Story = {
             </List.TableRow>
           </List.TableBody>
         </List.Table>
+      </List.List>
+    );
+  },
+};
+
+export const VeryLongWords: Story = {
+  render: () => {
+    const List = typedList<{ name: string }>();
+
+    return (
+      <List.List>
+        <List.StaticData data={[{ name: "John Doe" }]} />
+        <List.Item showTiles textValue={(user) => user.name}>
+          {(user) => (
+            <List.ItemView>
+              <Avatar>
+                <Initials>{user.name}</Initials>
+              </Avatar>
+              <Heading>
+                HeadingHeadingHeadingHeadingHeadingHeadingHeadingHeadingHeadingHeadingHeadingHeadingHeading
+              </Heading>
+              <Text>
+                SubtitleSubtitleSubtitleSubtitleSubtitleSubtitleSubtitleSubtitleSubtitleSubtitleSubtitleSubtitle
+              </Text>
+              <Content slot="top">
+                TopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTopTop
+              </Content>
+              <Content slot="bottom">
+                BottomBottomBottomBottomBottomBottomBottomBottomBottomBottomBottomBottomBottomBottomBottomBottomBottomBottomBottomBottomBottomBottomBottomBottomBottomBottom
+              </Content>
+              <ContextMenu>
+                <MenuItem>Show details</MenuItem>
+              </ContextMenu>
+            </List.ItemView>
+          )}
+        </List.Item>
       </List.List>
     );
   },

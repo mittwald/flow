@@ -82,15 +82,17 @@ export const ListItemViewContent = (props: ListItemViewContentProps) => {
       <div className={className}>
         {viewMode === "list" && (
           <>
-            <div className={styles.content}>
-              {children}
-              <div className={styles.title}>
-                {avatar}
-                {title}
-                <div className={styles.subTitle}>{subTitle}</div>
+            <div className={styles.contentWrapper}>
+              <div className={styles.content}>
+                {children}
+                <div className={styles.title}>
+                  {avatar}
+                  {title}
+                  <div className={styles.subTitle}>{subTitle}</div>
+                </div>
               </div>
+              {button}
             </div>
-            {button}
             {bottom}
           </>
         )}
