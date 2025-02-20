@@ -69,24 +69,24 @@ export const WithFooter: Story = {
     <Table {...props} aria-label="Order overview">
       <TableHeader>
         <TableColumn>Article</TableColumn>
-        <TableColumn>Price</TableColumn>
+        <TableColumn horizontalAlign="end">Price</TableColumn>
       </TableHeader>
       <TableBody>
         <TableRow>
           <TableCell>proSpace (2 vCPU / 4 GB RAM)</TableCell>
-          <TableCell>32,00 €</TableCell>
+          <TableCell horizontalAlign="end">32,00 €</TableCell>
         </TableRow>
         <TableRow>
           <TableCell>20 GB storage</TableCell>
-          <TableCell>Inclusive</TableCell>
+          <TableCell horizontalAlign="end">Inclusive</TableCell>
         </TableRow>
         <TableRow>
           <TableCell>20 GB additional storage</TableCell>
-          <TableCell>2,00 €</TableCell>
+          <TableCell horizontalAlign="end">2,00 €</TableCell>
         </TableRow>
         <TableFooterRow>
           <TableCell>total</TableCell>
-          <TableCell>34,00 €</TableCell>
+          <TableCell horizontalAlign="end">34,00 €</TableCell>
         </TableFooterRow>
       </TableBody>
     </Table>
