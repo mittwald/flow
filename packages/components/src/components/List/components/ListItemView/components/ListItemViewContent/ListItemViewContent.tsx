@@ -29,6 +29,9 @@ const getStyleForContentSlot = (slot?: string) =>
 export const ListItemViewContent = (props: ListItemViewContentProps) => {
   const { children, avatar, title, subTitle, button, bottom, viewMode } = props;
 
+  console.log(bottom);
+  console.log(title);
+
   const contentProps: Record<string, ComponentProps<"div">> = {
     bottom: {
       onMouseDown: (e) => e.stopPropagation(),
@@ -82,15 +85,17 @@ export const ListItemViewContent = (props: ListItemViewContentProps) => {
       <div className={className}>
         {viewMode === "list" && (
           <>
-            <div className={styles.content}>
-              {children}
-              <div className={styles.title}>
-                {avatar}
-                {title}
-                <div className={styles.subTitle}>{subTitle}</div>
+            <div className={styles.contentWrapper}>
+              <div className={styles.content}>
+                {children}
+                <div className={styles.title}>
+                  {avatar}
+                  {title}
+                  <div className={styles.subTitle}>{subTitle}</div>
+                </div>
               </div>
+              {button}
             </div>
-            {button}
             {bottom}
           </>
         )}

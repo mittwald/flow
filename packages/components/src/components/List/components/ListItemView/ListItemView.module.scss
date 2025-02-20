@@ -4,8 +4,15 @@
   display: flex;
   padding: var(--list-item--padding);
   gap: var(--list-item--spacing);
-  align-items: center;
-  flex-wrap: wrap;
+  flex-direction: column;
+
+  .contentWrapper {
+    display: flex;
+    gap: var(--list-item--spacing);
+    justify-content: space-between;
+    flex-grow: 1;
+    align-items: start;
+  }
 
   .content {
     display: flex;
@@ -69,16 +76,23 @@
   }
 
   .topContent {
-    order: 2;
+    order: 1;
+    word-break: break-word;
   }
 
   .action {
     margin-left: auto;
   }
+  &:has(.avatar),
+  &:has(.subTitle:not(:empty)) {
+    .action {
+      margin-top: var(--size-px--xxs);
+    }
+  }
 
   .bottomContent {
-    order: 4;
     width: 100%;
+    word-break: break-word;
   }
 
   &.tile {
