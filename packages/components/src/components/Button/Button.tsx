@@ -128,6 +128,9 @@ export const Button = flowComponent<"Button", HTMLButtonElement>(
       CounterBadge: {
         className: styles.counterBadge,
       },
+      Image: {
+        className: styles.image,
+      },
     };
 
     const StateIconComponent = isSucceeded

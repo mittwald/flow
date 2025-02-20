@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from "@storybook/react";
 import Image from "../Image";
 import React from "react";
 import { dummyText } from "@/lib/dev/dummyText";
+import { LightBox, LightBoxTrigger } from "@/components/LightBox";
+import { Button } from "@/components/Button";
 
 const meta: Meta<typeof Image> = {
   title: "Content/Image",
