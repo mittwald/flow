@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.44](https://github.com/mittwald/flow/compare/0.2.0-alpha.43...0.2.0-alpha.44) (2025-02-20)
+
+### Bug Fixes
+
+* **AvatarStack:** add generated files ([#1201](https://github.com/mittwald/flow/issues/1201)) ([12e3b8f](https://github.com/mittwald/flow/commit/12e3b8ff1fb68727d89debae9de6a66100496d98))
+
 # [0.2.0-alpha.43](https://github.com/mittwald/flow/compare/0.2.0-alpha.42...0.2.0-alpha.43) (2025-02-20)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components
