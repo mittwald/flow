@@ -7,6 +7,7 @@ export * from "./RemoteAlertBadgeElement";
 export * from "./RemoteAlertIconElement";
 export * from "./RemoteAlignElement";
 export * from "./RemoteAvatarElement";
+export * from "./RemoteAvatarStackElement";
 export * from "./RemoteBadgeElement";
 export * from "./RemoteBreadcrumbElement";
 export * from "./RemoteButtonElement";
