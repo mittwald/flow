@@ -6,6 +6,7 @@ import type { PropsWithClassName } from "@/lib/types/props";
 import type { PropsContext } from "@/lib/propsContext";
 import { IconContextMenu } from "@/components/Icon/components/icons";
 import PropsContextProvider from "@/lib/propsContext/PropsContextProvider";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface MessageProps extends PropsWithChildren, PropsWithClassName {
   /** Determines the color and orientation of the message. @default "responder" */
@@ -16,7 +17,7 @@ export interface MessageProps extends PropsWithChildren, PropsWithClassName {
  * @flr-generate all
  * @flr-clear-props-context
  */
-export const Message: FC<MessageProps> = (props) => {
+export const Message = flowComponent("Message", (props) => {
   const { type = "responder", children, className } = props;
 
   const rootClassName = clsx(styles.message, styles[type], className);
@@ -52,6 +53,6 @@ export const Message: FC<MessageProps> = (props) => {
       <article className={rootClassName}>{children}</article>
     </PropsContextProvider>
   );
-};
+});
 
 export default Message;
