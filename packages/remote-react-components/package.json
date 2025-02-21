@@ -32,7 +32,7 @@
     "test:compile": "tsc --noEmit"
   },
   "dependencies": {
-    "@mfalkenberg/remote-dom-react": "^1.2.2",
+    "@mfalkenberg/remote-dom-react": "^1.2.3",
     "@mittwald/flow-react-components": "workspace:*",
     "@mittwald/flow-remote-core": "workspace:*",
     "@mittwald/flow-remote-elements": "workspace:*",
