@@ -1,6 +1,8 @@
 import { ThreadIframe } from "@quilted/threads";
 import type { RemoteConnection } from "@remote-dom/core/elements";
 
+export type HostData = Record<string, unknown>;
+
 interface Opts {
   connection: RemoteConnection;
   iframe: HTMLIFrameElement;
@@ -8,7 +10,6 @@ interface Opts {
 
 interface ThreadIframeTarget {
   render: (connection: RemoteConnection) => AsyncIterator<unknown>;
-  receiveData: (data: unknown) => void;
 }
 
 export const connectRemoteIframe = (opts: Opts) => {
@@ -18,17 +19,18 @@ export const connectRemoteIframe = (opts: Opts) => {
 };
 
 export const connectRemoteIframeRef =
-  (connection: RemoteConnection) =>
-  (ref: HTMLIFrameElement): ThreadIframeTarget => {
-    if ("__remoteConnection" in ref) {
-      return ref.__remoteConnection as ThreadIframeTarget;
+  (connection: RemoteConnection) => (ref: HTMLIFrameElement | null) => {
+    if (!ref) {
+      return;
     }
 
-    const thread = connectRemoteIframe({
+    if ("__remoteConnectionEstablished" in ref) {
+      return;
+    }
+
+    connectRemoteIframe({
       iframe: ref,
       connection,
     });
-
-    Object.assign(ref, { __remoteConnection: thread.imports });
-    return thread.imports;
+    Object.assign(ref, { __remoteConnectionEstablished: true });
   };

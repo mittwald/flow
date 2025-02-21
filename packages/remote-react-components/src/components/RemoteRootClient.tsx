@@ -7,7 +7,6 @@ import { type FC, type PropsWithChildren, type ReactNode } from "react";
 
 export interface RootClientProps extends PropsWithChildren {
   showPreview?: boolean;
-  data?: unknown;
   fallback?: ReactNode;
 }
 

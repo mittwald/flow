@@ -10,3 +10,4 @@ declare module "*.locale.json" {
   const langFile: LocalizedStrings;
   export default langFile;
 }
+

@@ -11,7 +11,6 @@ const RemoteRenderer = React.lazy(async () => {
 });
 
 interface Props {
-  data?: unknown;
   fallback?: ReactNode;
 }
 

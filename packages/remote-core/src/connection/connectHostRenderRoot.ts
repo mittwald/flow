@@ -4,13 +4,6 @@ import { type RemoteConnection } from "@remote-dom/core/elements";
 export const connectHostRenderRoot = (div: HTMLDivElement) => {
   return new ThreadNestedIframe({
     exports: {
-      receiveData: (data: unknown) => {
-        window.dispatchEvent(
-          new CustomEvent("flr-data-received", {
-            detail: data,
-          }),
-        );
-      },
       render: (connection: RemoteConnection) => {
         import("@remote-dom/core/elements").then(
           ({ RemoteMutationObserver }) => {

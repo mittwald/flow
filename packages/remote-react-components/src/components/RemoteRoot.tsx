@@ -2,7 +2,6 @@
 import type { RootClientProps } from "@/components/RemoteRootClient";
 import { useIsMounted } from "@/hooks/useIsMounted";
 import React, { type FC, Suspense } from "react";
-import { HostDataProvider } from "./HostDataContextProvider";
 
 const ClientComponent = React.lazy(() => import("./RemoteRootClient"));
 
@@ -15,9 +14,7 @@ export const RemoteRoot: FC<RootClientProps> = (props) => {
 
   return (
     <Suspense fallback={props.fallback}>
-      <HostDataProvider>
-        <ClientComponent {...props} />
-      </HostDataProvider>
+      <ClientComponent {...props} />
     </Suspense>
   );
 };
