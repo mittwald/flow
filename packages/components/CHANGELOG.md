@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.51](https://github.com/mittwald/flow/compare/0.2.0-alpha.50...0.2.0-alpha.51) (2025-02-21)
+
+### Bug Fixes
+
+* update to fixed remote react package ([4685e68](https://github.com/mittwald/flow/commit/4685e688f35887e77e7cc7f37edc6155a4ad3201))
+
 # [0.2.0-alpha.50](https://github.com/mittwald/flow/compare/0.2.0-alpha.49...0.2.0-alpha.50) (2025-02-21)
 
 ### Bug Fixes
