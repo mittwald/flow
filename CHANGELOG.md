@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.47](https://github.com/mittwald/flow/compare/0.2.0-alpha.46...0.2.0-alpha.47) (2025-02-21)
+
+### Bug Fixes
+
+* temporary add patch ([d7a146e](https://github.com/mittwald/flow/commit/d7a146e2670e4f3df8ec301f82d73cfbf4e0ff7f))
+
 # [0.2.0-alpha.46](https://github.com/mittwald/flow/compare/0.2.0-alpha.45...0.2.0-alpha.46) (2025-02-20)
 
 ### Bug Fixes
