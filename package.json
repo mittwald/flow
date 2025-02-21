@@ -60,7 +60,8 @@
   },
   "pnpm": {
     "patchedDependencies": {
-      "acorn": "patches/acorn.patch"
+      "acorn": "patches/acorn.patch",
+      "@remote-dom/core": "patches/@remote-dom__core.patch"
     }
   },
   "resolutions": {
