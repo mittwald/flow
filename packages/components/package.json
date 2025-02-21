@@ -90,11 +90,11 @@
   "devDependencies": {
     "@faker-js/faker": "^9.5.0",
     "@internationalized/date": "^3.7.0",
+    "@mfalkenberg/remote-dom-react": "^1.2.2",
     "@mittwald/flow-design-tokens": "workspace:*",
     "@mittwald/react-use-promise": "^2.6.0",
     "@mittwald/typescript-config": "workspace:*",
     "@nx/storybook": "^20.4.5",
-    "@remote-dom/react": "^1.2.1",
     "@storybook/addon-a11y": "^8.5.8",
     "@storybook/addon-actions": "^8.5.8",
     "@storybook/addon-essentials": "^8.5.8",

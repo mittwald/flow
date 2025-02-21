@@ -1,9 +1,12 @@
 "use client";
 import { components } from "@/components";
 import type { RemoteComponentsMap } from "@/lib/types";
+import type { RemoteComponentRendererProps } from "@mfalkenberg/remote-dom-react/host";
+import {
+  RemoteReceiver,
+  RemoteRootRenderer,
+} from "@mfalkenberg/remote-dom-react/host";
 import { connectRemoteIframeRef } from "@mittwald/flow-remote-core";
-import type { RemoteComponentRendererProps } from "@remote-dom/react/host";
-import { RemoteReceiver, RemoteRootRenderer } from "@remote-dom/react/host";
 import type { ComponentType, CSSProperties, FC, ReactNode } from "react";
 import { useMemo, useState } from "react";
 import { reduce } from "remeda";
