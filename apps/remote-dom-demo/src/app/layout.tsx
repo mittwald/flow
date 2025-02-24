@@ -1,7 +1,10 @@
 "use client";
 import {
   HeaderNavigation,
+  Heading,
+  IllustratedMessage,
   Link,
+  LoadingSpinner,
   Separator,
 } from "@mittwald/flow-react-components";
 import "@mittwald/flow-react-components/all.css";
@@ -38,7 +41,16 @@ export default function Layout(props: PropsWithChildren) {
             <Separator />
             <main>
               <div>
-                <RemoteRoot key={p} showPreview>
+                <RemoteRoot
+                  key={p}
+                  showPreview
+                  fallback={
+                    <IllustratedMessage>
+                      <LoadingSpinner />
+                      <Heading>Lade Demo</Heading>
+                    </IllustratedMessage>
+                  }
+                >
                   {props.children}
                 </RemoteRoot>
               </div>

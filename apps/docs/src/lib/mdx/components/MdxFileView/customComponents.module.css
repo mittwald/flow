@@ -5,7 +5,7 @@
 }
 
 .preContainer {
-  background-color: var(--neutral--color--300);
+  background-color: var(--code--default-background-color);
   border-radius: var(--corner-radius--default);
   position: relative;
   min-width: 0;

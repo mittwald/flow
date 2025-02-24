@@ -134,6 +134,19 @@
     }
   }
 
+  &:has(.image) {
+    padding: 0;
+    background: none;
+
+    &:hover .image {
+      filter: brightness(var(--image-button--brightness--hover));
+    }
+
+    &[data-pressed] .image {
+      filter: brightness(var(--image-button--brightness--pressed));
+    }
+  }
+
   /* Variants */
 
   @mixin variant($color, $variant) {

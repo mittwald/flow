@@ -1,6 +1,8 @@
 import type { SettingsBackend } from "@/components/SettingsProvider/backends/types";
 import type { SettingsJson } from "@/components/SettingsProvider/models/SettingsStore";
 
+const localStorageAvailable = typeof localStorage !== "undefined";
+
 export class LocalStorageSettingsBackend implements SettingsBackend {
   private readonly storageKey: string;
 
@@ -9,6 +11,10 @@ export class LocalStorageSettingsBackend implements SettingsBackend {
   }
 
   public async load(): Promise<SettingsJson> {
+    if (!localStorageAvailable) {
+      return {};
+    }
+
     const jsonString = localStorage.getItem(this.storageKey);
     if (jsonString === null) {
       return {};
@@ -17,6 +23,8 @@ export class LocalStorageSettingsBackend implements SettingsBackend {
   }
 
   public async store(settings: SettingsJson): Promise<void> {
-    localStorage.setItem(this.storageKey, JSON.stringify(settings));
+    if (localStorageAvailable) {
+      localStorage.setItem(this.storageKey, JSON.stringify(settings));
+    }
   }
 }

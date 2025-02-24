@@ -4,7 +4,11 @@ import styles from "./ListItemView.module.scss";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import ListItemViewContentView from "@/views/ListItemViewContentView";
 import FragmentView from "@/views/FragmentView";
-import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import {
+  dynamic,
+  type PropsContext,
+  PropsContextProvider,
+} from "@/lib/propsContext";
 import { OptionsButton } from "@/components/List/components/Items/components/Item/components/OptionsButton";
 import { useList } from "@/components/List";
 
@@ -37,6 +41,9 @@ export const ListItemView = (props: ListItemViewProps) => {
     Text: {
       tunnelId: "text",
     },
+    Content: {
+      tunnelId: dynamic((p) => (p.slot === "bottom" ? "bottom" : undefined)),
+    },
   };
 
   return (
@@ -62,6 +69,11 @@ export const ListItemView = (props: ListItemViewProps) => {
           subTitle={
             <FragmentView>
               <TunnelExit id="text" />
+            </FragmentView>
+          }
+          bottom={
+            <FragmentView>
+              <TunnelExit id="bottom" />
             </FragmentView>
           }
         >

@@ -5,8 +5,8 @@ import clsx from "clsx";
 import styles from "../../Table.module.scss";
 
 export interface TableColumnProps extends Aria.ColumnProps {
-  /** @default "start" */
-  horizontalAlign?: "start" | "center";
+  /** Horizontal alignment of the cell content @default "start" */
+  horizontalAlign?: "start" | "center" | "end";
 }
 
 /** @flr-generate all */
