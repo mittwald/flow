@@ -66,6 +66,8 @@ import type { CountryOptionsProps } from "@/components/Select/components/Country
 import type { ComboBoxProps } from "@/components/ComboBox";
 import type { OptionProps } from "@/components/Option";
 import type { MessageProps } from "@/components/Message";
+import type { MessageThreadProps } from "@/components/MessageThread";
+import type { FileCardListProps } from "@/components/FileCardList";
 
 export * from "./types";
 
@@ -97,6 +99,7 @@ export interface FlowComponentPropsTypes {
   FieldDescription: FieldDescriptionProps;
   FieldError: FieldErrorProps;
   FileCard: FileCardProps;
+  FileCardList: FileCardListProps;
   FileField: FileFieldProps;
   Header: HeaderProps;
   Heading: HeadingProps;
@@ -111,6 +114,7 @@ export interface FlowComponentPropsTypes {
   ListSummary: ListSummaryProps;
   MenuItem: MenuItemProps;
   Message: MessageProps;
+  MessageThread: MessageThreadProps;
   Modal: ModalProps;
   ModalTrigger: ModalTriggerProps;
   NumberField: NumberFieldProps;
@@ -166,6 +170,7 @@ const propsContextSupportingComponentsMap: Record<
   FieldDescription: true,
   FieldError: true,
   FileCard: true,
+  FileCardList: true,
   FileField: true,
   Header: true,
   Heading: true,
@@ -180,6 +185,7 @@ const propsContextSupportingComponentsMap: Record<
   ListSummary: true,
   MenuItem: true,
   Message: true,
+  MessageThread: true,
   Modal: true,
   ModalTrigger: true,
   NumberField: true,

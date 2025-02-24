@@ -11,6 +11,7 @@ export * from "./RemoteAvatarStackElement";
 export * from "./RemoteBadgeElement";
 export * from "./RemoteBreadcrumbElement";
 export * from "./RemoteButtonElement";
+export * from "./RemoteChatElement";
 export * from "./RemoteCheckboxElement";
 export * from "./RemoteCheckboxButtonElement";
 export * from "./RemoteCheckboxGroupElement";

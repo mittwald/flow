@@ -1,0 +1,30 @@
+.chat {
+  display: flex;
+  flex-direction: column;
+
+  .messageThread {
+    overflow: auto;
+    padding-bottom: var(--chat--spacing);
+    padding-right: var(--chat--spacing);
+    margin-right: calc(var(--chat--spacing) * -1);
+    flex-grow: 1;
+  }
+
+  .fileCardList {
+    margin-top: var(--chat--spacing);
+  }
+
+  .controls {
+    display: flex;
+    align-items: end;
+    border-top-width: var(--separator--height);
+    border-top-color: var(--separator--color);
+    border-top-style: var(--border-style--default);
+    gap: var(--chat--spacing);
+    padding-top: var(--chat--spacing);
+
+    :global(.flow--form-field) {
+      flex-grow: 1;
+    }
+  }
+}
