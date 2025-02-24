@@ -6,9 +6,14 @@ import type { PropsWithClassName } from "@/lib/types/props";
 import type { PropsContext } from "@/lib/propsContext";
 import { IconContextMenu } from "@/components/Icon/components/icons";
 import PropsContextProvider from "@/lib/propsContext/PropsContextProvider";
-import { flowComponent } from "@/lib/componentFactory/flowComponent";
-
-export interface MessageProps extends PropsWithChildren, PropsWithClassName {
+import {
+  flowComponent,
+  type FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
+export interface MessageProps
+  extends PropsWithChildren,
+    PropsWithClassName,
+    FlowComponentProps {
   /** Determines the color and orientation of the message. @default "responder" */
   type?: "responder" | "sender";
 }
