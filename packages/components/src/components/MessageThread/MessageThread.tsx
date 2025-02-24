@@ -1,4 +1,4 @@
-import type { FC, PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 import React from "react";
 import type { PropsWithClassName } from "@/lib/types/props";
 import clsx from "clsx";
@@ -8,14 +8,20 @@ import {
   type PropsContext,
   PropsContextProvider,
 } from "@/lib/propsContext";
+import {
+  flowComponent,
+  type FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
 
-export type MessageThreadProps = PropsWithChildren & PropsWithClassName;
+export type MessageThreadProps = PropsWithChildren &
+  PropsWithClassName &
+  FlowComponentProps;
 
 /**
  * @flr-generate all
  * @flr-clear-props-context
  */
-export const MessageThread: FC<MessageThreadProps> = (props) => {
+export const MessageThread = flowComponent("MessageThread", (props) => {
   const { children, className } = props;
 
   const rootClassName = clsx(styles.messageThread, className);
@@ -37,4 +43,4 @@ export const MessageThread: FC<MessageThreadProps> = (props) => {
       <div className={rootClassName}>{children}</div>
     </PropsContextProvider>
   );
-};
+});

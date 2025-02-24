@@ -1,0 +1,3 @@
+chat:
+  spacing:
+    value: "{size-px.m}"

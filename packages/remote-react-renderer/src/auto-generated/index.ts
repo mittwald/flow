@@ -12,6 +12,7 @@ import { AvatarStack as AvatarStack } from "@mittwald/flow-react-components";
 import { Badge as Badge } from "@mittwald/flow-react-components";
 import { Breadcrumb as Breadcrumb } from "@mittwald/flow-react-components";
 import { Button as Button } from "@mittwald/flow-react-components";
+import { Chat as Chat } from "@mittwald/flow-react-components";
 import { Checkbox as Checkbox } from "@mittwald/flow-react-components";
 import { CheckboxButton as CheckboxButton } from "@mittwald/flow-react-components";
 import { CheckboxGroup as CheckboxGroup } from "@mittwald/flow-react-components";
@@ -112,6 +113,7 @@ export const flowComponents = {
   "flr-badge": createFlowRemoteComponentRenderer(Badge),
   "flr-breadcrumb": createFlowRemoteComponentRenderer(Breadcrumb),
   "flr-button": createFlowRemoteComponentRenderer(Button),
+  "flr-chat": createFlowRemoteComponentRenderer(Chat),
   "flr-checkbox": createFlowRemoteComponentRenderer(Checkbox),
   "flr-checkbox-button": createFlowRemoteComponentRenderer(CheckboxButton),
   "flr-checkbox-group": createFlowRemoteComponentRenderer(CheckboxGroup),

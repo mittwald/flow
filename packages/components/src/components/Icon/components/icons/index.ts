@@ -1,5 +1,6 @@
 /* auto-generated file */
 export { IconApp } from "./IconApp";
+export { IconAttachment } from "./IconAttachment";
 export { IconAutoresponder } from "./IconAutoresponder";
 export { IconBackLink } from "./IconBackLink";
 export { IconBackup } from "./IconBackup";

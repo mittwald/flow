@@ -11,6 +11,7 @@ export * from "./AvatarStack";
 export * from "./Badge";
 export * from "./Breadcrumb";
 export * from "./Button";
+export * from "./Chat";
 export * from "./Checkbox";
 export * from "./CheckboxButton";
 export * from "./CheckboxGroup";

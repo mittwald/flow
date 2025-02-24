@@ -10,6 +10,7 @@ export * from "@/components/AvatarStack";
 export * from "@/components/Badge";
 export * from "@/components/Breadcrumb";
 export * from "@/components/Button";
+export * from "@/components/Chat";
 export * from "@/components/Checkbox";
 export * from "@/components/CheckboxButton";
 export * from "@/components/CheckboxGroup";
