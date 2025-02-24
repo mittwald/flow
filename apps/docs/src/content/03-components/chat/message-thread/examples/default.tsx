@@ -9,7 +9,6 @@ import {
   MessageThread,
   Text,
 } from "@mittwald/flow-react-components";
-import React from "react";
 
 <MessageThread>
   <Message type="sender">
