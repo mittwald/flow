@@ -60,6 +60,7 @@ import { MenuItem as MenuItem } from "@mittwald/flow-react-components";
 import { MenuTrigger as MenuTrigger } from "@mittwald/flow-react-components";
 import { Message as Message } from "@mittwald/flow-react-components";
 import { MessageSeparator as MessageSeparator } from "@mittwald/flow-react-components";
+import { MessageThread as MessageThread } from "@mittwald/flow-react-components";
 import { Navigation as Navigation } from "@mittwald/flow-react-components";
 import { NavigationGroup as NavigationGroup } from "@mittwald/flow-react-components";
 import { Notification as Notification } from "@mittwald/flow-react-components";
@@ -166,6 +167,7 @@ export const flowComponents = {
   "flr-menu-trigger": createFlowRemoteComponentRenderer(MenuTrigger),
   "flr-message": createFlowRemoteComponentRenderer(Message),
   "flr-message-separator": createFlowRemoteComponentRenderer(MessageSeparator),
+  "flr-message-thread": createFlowRemoteComponentRenderer(MessageThread),
   "flr-navigation": createFlowRemoteComponentRenderer(Navigation),
   "flr-navigation-group": createFlowRemoteComponentRenderer(NavigationGroup),
   "flr-notification": createFlowRemoteComponentRenderer(Notification),

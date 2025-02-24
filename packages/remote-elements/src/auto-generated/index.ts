@@ -59,6 +59,7 @@ export * from "./RemoteMenuItemElement";
 export * from "./RemoteMenuTriggerElement";
 export * from "./RemoteMessageElement";
 export * from "./RemoteMessageSeparatorElement";
+export * from "./RemoteMessageThreadElement";
 export * from "./RemoteNavigationElement";
 export * from "./RemoteNavigationGroupElement";
 export * from "./RemoteNotificationElement";

@@ -59,6 +59,7 @@ export * from "./MenuItem";
 export * from "./MenuTrigger";
 export * from "./Message";
 export * from "./MessageSeparator";
+export * from "./MessageThread";
 export * from "./Navigation";
 export * from "./NavigationGroup";
 export * from "./Notification";

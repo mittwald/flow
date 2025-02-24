@@ -1,3 +1,5 @@
 message-thread:
   spacing:
     value: "{size-rem.l}"
+  indentation:
+    value: "{size-px.m}"
