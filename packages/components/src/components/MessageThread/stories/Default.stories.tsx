@@ -11,6 +11,7 @@ import { Initials } from "@/components/Initials";
 import { Text } from "@/components/Text";
 import { Content } from "@/components/Content";
 import { dummyText } from "@/lib/dev/dummyText";
+import { MessageSeparator } from "@/components/MessageSeparator";
 
 interface ExampleMessageProps extends Pick<MessageProps, "type"> {
   name: string;
@@ -39,7 +40,7 @@ const ExampleMessage: FC<ExampleMessageProps> = (props) => {
 };
 
 const meta: Meta<typeof MessageThread> = {
-  title: "Content/MessageThread",
+  title: "Chat/MessageThread",
   component: MessageThread,
   render: (props) => (
     <MessageThread {...props}>
@@ -48,11 +49,15 @@ const meta: Meta<typeof MessageThread> = {
         content={dummyText.medium}
         type="sender"
       />
+
       <ExampleMessage
         name="John Doe"
         content={dummyText.long}
         type="responder"
       />
+
+      <MessageSeparator {...props}>Conversation closed</MessageSeparator>
+
       <ExampleMessage
         name="Max Mustermann"
         content={dummyText.short}

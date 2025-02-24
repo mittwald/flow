@@ -50,6 +50,7 @@ export * from "@/components/LoadingSpinner";
 export * from "@/components/Markdown";
 export * from "@/components/MenuItem";
 export * from "@/components/Message";
+export * from "@/components/MessageSeparator";
 export * from "@/components/MessageThread";
 export * from "@/components/Modal";
 export * from "@/components/Navigation";

@@ -5,6 +5,7 @@ import {
   Header,
   Initials,
   Message,
+  MessageSeparator,
   MessageThread,
   Text,
 } from "@mittwald/flow-react-components";
@@ -56,6 +57,8 @@ import {
       </Text>
     </Content>
   </Message>
+
+  <MessageSeparator>Ticket geschlossen</MessageSeparator>
 
   <Message type="sender">
     <Header>
