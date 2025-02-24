@@ -1,4 +1,4 @@
-import type { FC, PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 import React from "react";
 import clsx from "clsx";
 import styles from "./Message.module.scss";
@@ -6,8 +6,14 @@ import type { PropsWithClassName } from "@/lib/types/props";
 import type { PropsContext } from "@/lib/propsContext";
 import { IconContextMenu } from "@/components/Icon/components/icons";
 import PropsContextProvider from "@/lib/propsContext/PropsContextProvider";
-
-export interface MessageProps extends PropsWithChildren, PropsWithClassName {
+import {
+  flowComponent,
+  type FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
+export interface MessageProps
+  extends PropsWithChildren,
+    PropsWithClassName,
+    FlowComponentProps {
   /** Determines the color and orientation of the message. @default "responder" */
   type?: "responder" | "sender";
 }
@@ -16,7 +22,7 @@ export interface MessageProps extends PropsWithChildren, PropsWithClassName {
  * @flr-generate all
  * @flr-clear-props-context
  */
-export const Message: FC<MessageProps> = (props) => {
+export const Message = flowComponent("Message", (props) => {
   const { type = "responder", children, className } = props;
 
   const rootClassName = clsx(styles.message, styles[type], className);
@@ -52,6 +58,6 @@ export const Message: FC<MessageProps> = (props) => {
       <article className={rootClassName}>{children}</article>
     </PropsContextProvider>
   );
-};
+});
 
 export default Message;
