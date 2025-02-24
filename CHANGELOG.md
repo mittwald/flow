@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.42](https://github.com/mittwald/flow/compare/0.2.0-alpha.41...0.2.0-alpha.42) (2025-02-20)
+
+### Features
+
+* **AvatarStack:** add avatar stack component ([#1185](https://github.com/mittwald/flow/issues/1185)) ([ebe6cfb](https://github.com/mittwald/flow/commit/ebe6cfbcdcee488fa4ece10f97af1d6ccb91e629))
+
 # [0.2.0-alpha.41](https://github.com/mittwald/flow/compare/0.2.0-alpha.40...0.2.0-alpha.41) (2025-02-19)
 
 ### Bug Fixes
