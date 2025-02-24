@@ -41,18 +41,18 @@ import {
   <Button
     color="secondary"
     variant="plain"
-    aria-label="file attachment"
+    aria-label="Datei anhängen"
   >
     <IconAttachment />
   </Button>
   <TextArea
-    aria-label="message"
+    aria-label="Nachricht"
     rows={1}
     autoResizeMaxRows={4}
   />
-  <Button color="accent">Submit</Button>
+  <Button color="accent">Senden</Button>
   <FileCardList>
-    <FileCard name="Uploaded File 1" />
-    <FileCard name="Uploaded File 2" />
+    <FileCard name="Hochgeladene Datei 1" />
+    <FileCard name="Hochgeladene Datei 2" />
   </FileCardList>
 </Chat>;
