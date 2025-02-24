@@ -65,7 +65,7 @@ import type { AlignProps } from "@/components/Align";
 import type { CountryOptionsProps } from "@/components/Select/components/CountryOptions";
 import type { ComboBoxProps } from "@/components/ComboBox";
 import type { OptionProps } from "@/components/Option";
-import { type MessageProps } from "@/components/Message";
+import type { MessageProps } from "@/components/Message";
 
 export * from "./types";
 
