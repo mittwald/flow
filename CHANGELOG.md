@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.52](https://github.com/mittwald/flow/compare/0.2.0-alpha.51...0.2.0-alpha.52) (2025-02-24)
+
+### Bug Fixes
+
+* fix SSR issue with SettingsProvider ([#1209](https://github.com/mittwald/flow/issues/1209)) ([28d035e](https://github.com/mittwald/flow/commit/28d035e15f4b2af64ec7cd6cf9054015610527a6))
+
 # [0.2.0-alpha.51](https://github.com/mittwald/flow/compare/0.2.0-alpha.50...0.2.0-alpha.51) (2025-02-21)
 
 ### Bug Fixes

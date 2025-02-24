@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.52](https://github.com/mittwald/flow/compare/0.2.0-alpha.51...0.2.0-alpha.52) (2025-02-24)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
 # [0.2.0-alpha.51](https://github.com/mittwald/flow/compare/0.2.0-alpha.50...0.2.0-alpha.51) (2025-02-21)
 
 ### Bug Fixes
