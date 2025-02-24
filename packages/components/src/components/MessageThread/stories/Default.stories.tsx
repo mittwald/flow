@@ -11,6 +11,7 @@ import { Initials } from "@/components/Initials";
 import { Text } from "@/components/Text";
 import { Content } from "@/components/Content";
 import { dummyText } from "@/lib/dev/dummyText";
+import { MessageSeparator } from "@/components/MessageSeparator";
 
 interface ExampleMessageProps extends Pick<MessageProps, "type"> {
   name: string;
@@ -48,11 +49,15 @@ const meta: Meta<typeof MessageThread> = {
         content={dummyText.medium}
         type="sender"
       />
+
       <ExampleMessage
         name="John Doe"
         content={dummyText.long}
         type="responder"
       />
+
+      <MessageSeparator {...props}>Conversation closed</MessageSeparator>
+
       <ExampleMessage
         name="Max Mustermann"
         content={dummyText.short}
