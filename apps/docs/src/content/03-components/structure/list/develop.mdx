@@ -1,3 +1,86 @@
+Die List Component erlaubt das Rendern und Verwalten von Daten in einer
+strukturierten Liste. Daten können entweder **statisch** oder **asynchron**,
+z.B. über eine API geladen werden.
+
+## Möglichkeiten zum Laden von Daten
+
+### 1. Statische Daten
+
+Für die Anzeige statischer Daten kann die Komponente `<StaticData />` verwendet
+werden:
+
+```tsx
+<StaticData data={dataArray} />
+```
+
+- `dataArray`: Ein Array mit den Daten, die direkt in der Liste gerendert
+  werden.
+- Diese Variante ist einfach und benötigt keine zusätzliche Logik für das
+  Nachladen oder Filtern.
+
+### 2. Dynamische Daten (Asynchrones Laden)
+
+Mit `<AsyncData>` können Daten dynamisch aus einer API oder anderen asynchronen
+Quellen nachgeladen werden:
+
+```tsx
+<AsyncData>
+  {async (options) => {
+    const response = await fetchDataFromAPI(options);
+    return {
+      data: response.items,
+      itemTotalCount: response.totalCount,
+    };
+  }}
+</AsyncData>
+```
+
+#### Verhalten & Features
+
+- **Ladeanimation**: Während die Daten geladen werden, wird eine Ladeanimation
+  angezeigt.
+- **Server-seitige Funktionen**:
+  - **Pagination** (`manualPagination`): Aktiviert das serverseitige Paging.
+  - **Sortierung** (`manualSorting`): Die Sortierung erfolgt auf dem Server.
+  - **Filterung** (`manualFiltering`): Filter werden nicht client-seitig
+    angewendet, sondern an den Server weitergeleitet.
+  - **Suche**: Kann ebenfalls serverseitig erfolgen.
+
+## Optionen für die Async Loader Function
+
+Die `<AsyncData>`-Komponente benötigt eine **Async Loader Function**, die die
+Daten anhand von Steuerungsoptionen lädt. Diese Funktion erhält ein
+`options`-Objekt mit den folgenden Parametern:
+
+### Struktur des `options`-Objekts
+
+| Property       | Typ                                                                    | Beschreibung                                                                                             |
+| -------------- | ---------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `filtering`    | `{ [key: string]: { mode: "all" \| "some" \| "one"; values: any[] } }` | Enthält Filter für die Daten. Jedes Key-Value-Paar repräsentiert eine Filterbedingung für ein Datenfeld. |
+| `searchString` | `string`                                                               | Der eingegebene Suchbegriff.                                                                             |
+| `pagination`   | `{ offset: number; limit: number }`                                    | Enthält Offset (Startpunkt) und Limit (maximale Anzahl an Datensätzen).                                  |
+| `sorting`      | `{ [key: string]: "asc" \| "desc" }`                                   | Gibt an, nach welchen Datenfeldern sortiert werden soll.                                                 |
+
+### Rückgabewert der Async Loader Function
+
+Die Funktion muss ein **Object** mit folgender Struktur zurückgeben:
+
+```tsx
+return {
+  data: [
+    /* Array mit den Datensätzen */
+  ],
+  itemTotalCount: 100, // Gesamtanzahl der Datensätze (für Pagination)
+};
+```
+
+| Property         | Typ      | Beschreibung                                                   |
+| ---------------- | -------- | -------------------------------------------------------------- |
+| `data`           | `any[]`  | Array der geladenen Daten.                                     |
+| `itemTotalCount` | `number` | Gesamtanzahl der Datensätze (nur bei Pagination erforderlich). |
+
+---
+
 # Properties
 
 <PropertiesTables />

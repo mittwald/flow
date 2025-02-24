@@ -1,5 +1,7 @@
+import type { RemoteConnection } from "@mfalkenberg/remote-dom-core/elements";
 import { ThreadIframe } from "@quilted/threads";
-import type { RemoteConnection } from "@remote-dom/core/elements";
+
+export type HostData = Record<string, unknown>;
 
 interface Opts {
   connection: RemoteConnection;
@@ -18,11 +20,17 @@ export const connectRemoteIframe = (opts: Opts) => {
 
 export const connectRemoteIframeRef =
   (connection: RemoteConnection) => (ref: HTMLIFrameElement | null) => {
-    if (ref && !("__remoteConnectionEstablished" in ref)) {
-      Object.assign(ref, { __remoteConnectionEstablished: true });
-      connectRemoteIframe({
-        iframe: ref,
-        connection,
-      });
+    if (!ref) {
+      return;
     }
+
+    if ("__remoteConnectionEstablished" in ref) {
+      return;
+    }
+
+    connectRemoteIframe({
+      iframe: ref,
+      connection,
+    });
+    Object.assign(ref, { __remoteConnectionEstablished: true });
   };

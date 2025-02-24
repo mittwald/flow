@@ -64,3 +64,16 @@ export const WithController: Story = {
     );
   },
 };
+
+export const WithImageTrigger: Story = {
+  render: () => (
+    <LightBoxTrigger>
+      <Button>
+        <Image width={100} withBorder alt="Gopher" src={dummyText.imageSrc} />
+      </Button>
+      <LightBox>
+        <Image alt="Gopher" src={dummyText.imageSrc} />
+      </LightBox>
+    </LightBoxTrigger>
+  ),
+};

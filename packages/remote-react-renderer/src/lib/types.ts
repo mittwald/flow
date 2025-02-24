@@ -1,5 +1,5 @@
+import type { RemoteComponentRendererProps } from "@mfalkenberg/remote-dom-react/host";
 import type { ComponentType } from "react";
-import type { RemoteComponentRendererProps } from "@remote-dom/react/host";
 
 export type RemoteComponentsMap<T extends string> = Record<
   T,

@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/react-tunnel",
-  "version": "0.2.0-alpha.42",
+  "version": "0.2.0-alpha.51",
   "type": "module",
   "description": "It's like a Portal – but with React components",
   "keywords": [
@@ -43,13 +43,13 @@
     "@vitejs/plugin-react": "^4.3.4",
     "@vitest/coverage-v8": "^2.1.9",
     "happy-dom": "^16.8.1",
-    "nx": "^20.4.4",
+    "nx": "^20.4.5",
     "prettier": "^3.5.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "rimraf": "^6.0.1",
     "typescript": "^5.7.3",
-    "vite": "^6.1.0",
+    "vite": "^6.1.1",
     "vite-plugin-banner": "^0.8.0",
     "vite-plugin-checker": "^0.8.0",
     "vite-plugin-dts": "^4.5.0",
