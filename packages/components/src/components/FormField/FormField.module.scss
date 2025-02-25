@@ -19,7 +19,8 @@
 
   /* With field error */
 
-  &:has(.fieldError) {
+  &:has(.fieldError),
+  &:has(.customFieldError) {
     .fieldDescription {
       display: none;
     }
