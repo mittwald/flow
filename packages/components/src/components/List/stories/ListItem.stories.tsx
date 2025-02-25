@@ -12,11 +12,7 @@ import { Content } from "@/components/Content";
 import { AlertBadge } from "@/components/AlertBadge";
 import { ActionGroup } from "@/components/ActionGroup";
 import { Button } from "@/components/Button";
-import {
-  IconClose,
-  IconDelete,
-  IconEmail,
-} from "@/components/Icon/components/icons";
+import { IconClose, IconEmail } from "@/components/Icon/components/icons";
 import { typedList } from "@/components/List";
 import { ProgressBar } from "@/components/ProgressBar";
 import { Label } from "@/components/Label";
