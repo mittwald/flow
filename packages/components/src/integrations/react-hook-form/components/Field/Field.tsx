@@ -51,7 +51,10 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
             isSelected: formControlProps.value,
           },
           CheckboxGroup: formControlProps,
-          CheckboxButton: formControlProps,
+          CheckboxButton: {
+            ...formControlProps,
+            isSelected: formControlProps.value,
+          },
           FileField: formControlProps,
           NumberField: formControlProps,
           RadioGroup: formControlProps,
