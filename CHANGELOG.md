@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.57](https://github.com/mittwald/flow/compare/0.2.0-alpha.56...0.2.0-alpha.57) (2025-02-25)
+
+### Bug Fixes
+
+* field description visibility in form fields ([#1215](https://github.com/mittwald/flow/issues/1215)) ([34995e5](https://github.com/mittwald/flow/commit/34995e55cb01dab2efe366c67385f8206825887a))
+
 # [0.2.0-alpha.56](https://github.com/mittwald/flow/compare/0.2.0-alpha.55...0.2.0-alpha.56) (2025-02-25)
 
 ### Bug Fixes
