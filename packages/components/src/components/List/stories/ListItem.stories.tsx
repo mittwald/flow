@@ -12,7 +12,11 @@ import { Content } from "@/components/Content";
 import { AlertBadge } from "@/components/AlertBadge";
 import { ActionGroup } from "@/components/ActionGroup";
 import { Button } from "@/components/Button";
-import { IconEmail } from "@/components/Icon/components/icons";
+import {
+  IconClose,
+  IconDelete,
+  IconEmail,
+} from "@/components/Icon/components/icons";
 import { typedList } from "@/components/List";
 import { ProgressBar } from "@/components/ProgressBar";
 import { Label } from "@/components/Label";
@@ -171,7 +175,7 @@ export const WithCustomTileMaxWidth: Story = {
     const List = typedList<{ name: string }>();
 
     return (
-      <List.List>
+      <List.List defaultViewMode="tiles">
         <List.StaticData data={[{ name: "John Doe" }]} />
         <List.Item tileMaxWidth={100} showTiles textValue={(user) => user.name}>
           {(user) => (
@@ -182,6 +186,28 @@ export const WithCustomTileMaxWidth: Story = {
               <Heading>{user.name}</Heading>
               <Text>Mittwald</Text>
               <Text>Development</Text>
+            </List.ItemView>
+          )}
+        </List.Item>
+      </List.List>
+    );
+  },
+};
+
+export const WithHeadingAndAction: Story = {
+  render: () => {
+    const List = typedList<{ name: string }>();
+
+    return (
+      <List.List>
+        <List.StaticData data={[{ name: "John Doe" }]} />
+        <List.Item textValue={(user) => user.name}>
+          {(user) => (
+            <List.ItemView>
+              <Heading>{user.name}</Heading>
+              <Button color="secondary" variant="plain" slot="secondary">
+                <IconClose />
+              </Button>
             </List.ItemView>
           )}
         </List.Item>
