@@ -25,6 +25,7 @@ import {
   IconForward,
   IconInbox,
   IconInvoice,
+  IconLeaf,
   IconLink,
   IconMember,
   IconMittwald,
@@ -264,5 +265,9 @@ import {
   <LabeledValue>
     <Label>Link</Label>
     <IconLink />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Leaf</Label>
+    <IconLeaf />
   </LabeledValue>
 </ColumnLayout>;
