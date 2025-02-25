@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.56](https://github.com/mittwald/flow/compare/0.2.0-alpha.55...0.2.0-alpha.56) (2025-02-25)
+
+### Bug Fixes
+
+* **CheckboxButton:** default value in react hook form ([#1214](https://github.com/mittwald/flow/issues/1214)) ([5587b75](https://github.com/mittwald/flow/commit/5587b751fb0d3edfc423b608a81da629e8038698))
+
 # [0.2.0-alpha.55](https://github.com/mittwald/flow/compare/0.2.0-alpha.54...0.2.0-alpha.55) (2025-02-24)
 
 **Note:** Version bump only for package @mittwald/flow-project
