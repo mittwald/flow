@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.59](https://github.com/mittwald/flow/compare/0.2.0-alpha.58...0.2.0-alpha.59) (2025-02-25)
+
+### Features
+
+* added LeafIcon ([#1219](https://github.com/mittwald/flow/issues/1219)) ([793c53e](https://github.com/mittwald/flow/commit/793c53eb2da57dcb096d654d22fe9943ea48f5e1))
+
 # [0.2.0-alpha.58](https://github.com/mittwald/flow/compare/0.2.0-alpha.57...0.2.0-alpha.58) (2025-02-25)
 
 ### Bug Fixes
