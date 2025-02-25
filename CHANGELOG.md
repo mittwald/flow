@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.58](https://github.com/mittwald/flow/compare/0.2.0-alpha.57...0.2.0-alpha.58) (2025-02-25)
+
+### Bug Fixes
+
+* **List:** list item layout with only heading and action ([#1216](https://github.com/mittwald/flow/issues/1216)) ([cd21379](https://github.com/mittwald/flow/commit/cd213793f7b6fb1fff8dec4c2dc840e6f9cb3fd3))
+
 # [0.2.0-alpha.57](https://github.com/mittwald/flow/compare/0.2.0-alpha.56...0.2.0-alpha.57) (2025-02-25)
 
 ### Bug Fixes
