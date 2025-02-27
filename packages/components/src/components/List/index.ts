@@ -6,6 +6,8 @@ export type {
   DataLoaderResult,
 } from "@/components/List/model/loading/types";
 
+export type { SortingFn } from "@/components/List/model/sorting/types";
+
 export {
   bigIntSortingFn,
   SortingFunctions,

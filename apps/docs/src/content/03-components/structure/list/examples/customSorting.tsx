@@ -10,21 +10,45 @@ import {
   IconDomain,
   IconSubdomain,
   MenuItem,
+  type SortingFn,
   SortingFunctions,
   Text,
   typedList,
 } from "@mittwald/flow-react-components";
-import type { SortingFn } from "@tanstack/react-table";
 
 export default () => {
-  const DomainList = typedList<Domain>();
+  type DomainWithBigIntId = Omit<Domain, "id"> & {
+    id: bigint;
+    createdAt: Date;
+  };
+
+  const domainsWithDateTime = domains.map(
+    (domain, index) => {
+      const daysAgo =
+        index * 3 + Math.floor(Math.random() * 5);
+      const createdAt = new Date();
+      createdAt.setDate(createdAt.getDate() - daysAgo);
+
+      const bigIntId = BigInt(1000000000000 + index);
+
+      return {
+        ...domain,
+        id: bigIntId,
+        createdAt: createdAt,
+      };
+    },
+  );
+
+  const DomainList = typedList<DomainWithBigIntId>();
 
   const bigIntSorting =
-    SortingFunctions.bigInt as SortingFn<Domain>;
+    SortingFunctions.bigInt as SortingFn<DomainWithBigIntId>;
+  const dateTimeSorting =
+    SortingFunctions.dateTime as SortingFn<DomainWithBigIntId>;
 
   return (
     <DomainList.List batchSize={5}>
-      <DomainList.StaticData data={domains} />
+      <DomainList.StaticData data={domainsWithDateTime} />
 
       <DomainList.Sorting
         property="hostname"
@@ -52,6 +76,19 @@ export default () => {
       />
 
       <DomainList.Sorting
+        property="createdAt"
+        name="Zuletzt geprüft (älteste zuerst)"
+        direction="asc"
+        customSortingFn={dateTimeSorting}
+      />
+      <DomainList.Sorting
+        property="createdAt"
+        name="Zuletzt geprüft (neueste zuerst)"
+        direction="desc"
+        customSortingFn={dateTimeSorting}
+      />
+
+      <DomainList.Sorting
         property="tld"
         name="TLD-Länge (kürzeste zuerst)"
         direction="asc"
@@ -67,7 +104,7 @@ export default () => {
       />
 
       <DomainList.Item>
-        {(domain: Domain) => (
+        {(domain) => (
           <DomainList.ItemView>
             <Avatar
               color={
@@ -91,6 +128,10 @@ export default () => {
             <Text>{domain.type}</Text>
             <Text>ID: {domain.id}</Text>
             <Text>TLD: {domain.tld}</Text>
+            <Text>
+              Erstellt am:{" "}
+              {new Date(domain.createdAt).toLocaleString()}
+            </Text>
 
             <ContextMenu>
               <MenuItem>Details anzeigen</MenuItem>
