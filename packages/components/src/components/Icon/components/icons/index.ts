@@ -50,7 +50,6 @@ export { IconImage } from "./IconImage";
 export { IconInfo } from "./IconInfo";
 export { IconInbox } from "./IconInbox";
 export { IconInvoice } from "./IconInvoice";
-export { IconLeaf } from "./IconLeaf";
 export { IconLink } from "./IconLink";
 export { IconLock } from "./IconLock";
 export { IconLockOpen } from "./IconLockOpen";
