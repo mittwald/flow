@@ -1,4 +1,5 @@
 import type { Row, SortingFn } from "@tanstack/react-table";
+import invariant from "invariant";
 
 export const SortingFunctions = {
   bigInt: ((rowA: Row<bigint>, rowB: Row<bigint>, columnId) => {
@@ -9,10 +10,14 @@ export const SortingFunctions = {
     if (valueB == null) return 1;
 
     try {
+      invariant(
+        typeof valueA === "bigint" && typeof valueB === "bigint",
+        `Expected BigInt values, got ${typeof valueA} and ${typeof valueB}`,
+      );
+
       return valueA < valueB ? -1 : valueA > valueB ? 1 : 0;
     } catch (error) {
-      console.warn(`Fehler beim BigInt-Vergleich: ${error}`);
-      return 0;
+      console.warn(`Error in BigInt comparison: ${error}`);
     }
   }) as SortingFn<unknown>,
 
@@ -43,17 +48,16 @@ export const SortingFunctions = {
             ? new Date(valueB)
             : new Date(String(valueB));
 
-      if (isNaN(dateTimeA.getTime())) throw new Error("Invalid date A");
-      if (isNaN(dateTimeB.getTime())) throw new Error("Invalid date B");
+      invariant(
+        !isNaN(dateTimeA.getTime()) && !isNaN(dateTimeB.getTime()),
+        `Invalid date values: ${valueA} and/or ${valueB}`,
+      );
 
       return dateTimeA.getTime() - dateTimeB.getTime();
     } catch (error) {
       console.warn(
-        `Fehler beim DateTime-Vergleich, Fallback zu String-Vergleich: ${error}`,
+        `Error in DateTime comparison, falling back to string comparison: ${error}`,
       );
-      const strA = String(valueA || "");
-      const strB = String(valueB || "");
-      return strA.localeCompare(strB);
     }
   }) as SortingFn<unknown>,
 };
