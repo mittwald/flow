@@ -10,16 +10,22 @@ import {
   IconDomain,
   IconSubdomain,
   MenuItem,
+  SortingFunctions,
   Text,
   typedList,
 } from "@mittwald/flow-react-components";
+import type { SortingFn } from "@tanstack/react-table";
 
 export default () => {
   const DomainList = typedList<Domain>();
 
+  const bigIntSorting =
+    SortingFunctions.bigInt as SortingFn<Domain>;
+
   return (
     <DomainList.List batchSize={5}>
       <DomainList.StaticData data={domains} />
+
       <DomainList.Sorting
         property="hostname"
         name="Name A bis Z"
@@ -29,18 +35,37 @@ export default () => {
         property="hostname"
         name="Name Z bis A"
         direction="desc"
+      />
+
+      <DomainList.Sorting
+        property="id"
+        name="ID (aufsteigend)"
+        direction="asc"
+        customSortingFn={bigIntSorting}
+      />
+      <DomainList.Sorting
+        property="id"
+        name="ID (absteigend)"
+        direction="desc"
+        customSortingFn={bigIntSorting}
         defaultEnabled
       />
+
       <DomainList.Sorting
         property="tld"
-        name="TLD A bis Z"
+        name="TLD-Länge (kürzeste zuerst)"
         direction="asc"
+        customSortingFn={(rowA, rowB, columnId: string) => {
+          const tldA = String(
+            rowA.getValue(columnId) || "",
+          );
+          const tldB = String(
+            rowB.getValue(columnId) || "",
+          );
+          return tldA.length - tldB.length;
+        }}
       />
-      <DomainList.Sorting
-        property="tld"
-        name="TLD Z bis A"
-        direction="desc"
-      />
+
       <DomainList.Item>
         {(domain: Domain) => (
           <DomainList.ItemView>
@@ -64,6 +89,8 @@ export default () => {
               )}
             </Heading>
             <Text>{domain.type}</Text>
+            <Text>ID: {domain.id}</Text>
+            <Text>TLD: {domain.tld}</Text>
 
             <ContextMenu>
               <MenuItem>Details anzeigen</MenuItem>

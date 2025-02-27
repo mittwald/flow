@@ -1,9 +1,14 @@
-import { dirname, join } from "path";
 import type { StorybookConfig } from "@storybook/react-vite";
+import { dirname, join } from "path";
+import { fileURLToPath } from "url";
 import viteCheckerPlugin from "vite-plugin-checker";
 
 function getAbsolutePath<T extends string>(value: T): T {
-  return dirname(require.resolve(join(value, "package.json"))) as T;
+  return join(
+    dirname(fileURLToPath(import.meta.url)),
+    "../node_modules",
+    value,
+  ) as T;
 }
 
 const config: StorybookConfig = {

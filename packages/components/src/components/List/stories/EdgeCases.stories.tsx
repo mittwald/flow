@@ -1,16 +1,19 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import type List from "../List";
-import React from "react";
-import { Heading } from "@/components/Heading";
-import { Text } from "@/components/Text";
-import defaultMeta from "./Default.stories";
-import { ListItemView, typedList } from "@/components/List";
-import { Render } from "@/lib/react/components/Render";
-import { usePromise } from "@mittwald/react-use-promise";
+import AlertBadge from "@/components/AlertBadge";
 import { Avatar } from "@/components/Avatar";
-import { Initials } from "@/components/Initials";
 import { Content } from "@/components/Content";
 import { ContextMenu, MenuItem } from "@/components/ContextMenu";
+import { Heading } from "@/components/Heading";
+import { Initials } from "@/components/Initials";
+import { ListItemView, SortingFunctions, typedList } from "@/components/List";
+import Section from "@/components/Section";
+import { Text } from "@/components/Text";
+import { IconDomain, IconSubdomain } from "@/flr-universal";
+import { Render } from "@/lib/react/components/Render";
+import { usePromise } from "@mittwald/react-use-promise";
+import type { Meta, StoryObj } from "@storybook/react";
+import type { SortingFn } from "@tanstack/react-table";
+import type List from "../List";
+import defaultMeta from "./Default.stories";
 
 const meta: Meta<typeof List> = {
   ...defaultMeta,
@@ -28,6 +31,59 @@ const getEmail = async (name: string) => {
   await apiSleep();
   return `${name}@info.de`;
 };
+
+interface Domain {
+  id: string;
+  hostname: string;
+  tld: string;
+  type: "Domain" | "Subdomain";
+  verified: boolean;
+}
+
+const domains: Domain[] = [
+  {
+    id: "484743563096096768",
+    hostname: "example.com",
+    tld: "com",
+    type: "Domain",
+    verified: true,
+  },
+  {
+    id: "123456789012345678",
+    hostname: "example.org",
+    tld: "org",
+    type: "Domain",
+    verified: true,
+  },
+  {
+    id: "998877665544332211",
+    hostname: "blog.example.com",
+    tld: "com",
+    type: "Subdomain",
+    verified: false,
+  },
+  {
+    id: "111222333444555666",
+    hostname: "mittwald.de",
+    tld: "de",
+    type: "Domain",
+    verified: true,
+  },
+  {
+    id: "777888999000111222",
+    hostname: "docs.mittwald.de",
+    tld: "de",
+    type: "Subdomain",
+    verified: true,
+  },
+  {
+    id: "555666777888999000",
+    hostname: "example.solutions",
+    tld: "solutions",
+    type: "Domain",
+    verified: false,
+  },
+];
 
 export const LoadingListItem: Story = {
   render: () => {
@@ -126,4 +182,102 @@ export const VeryLongWords: Story = {
       </List.List>
     );
   },
+};
+
+const tldLengthSortingFn: SortingFn<Domain> = (rowA, rowB, columnId) => {
+  const tldA = String(rowA.getValue(columnId) || "");
+  const tldB = String(rowB.getValue(columnId) || "");
+  return tldA.length - tldB.length;
+};
+
+const domainTypeSortingFn: SortingFn<Domain> = (rowA, rowB, columnId) => {
+  const valueA = rowA.getValue(columnId);
+  const valueB = rowB.getValue(columnId);
+
+  if (valueA === "Domain" && valueB === "Subdomain") return -1;
+  if (valueA === "Subdomain" && valueB === "Domain") return 1;
+
+  return String(valueA).localeCompare(String(valueB));
+};
+
+export const CustomSortingList = () => {
+  const DomainList = typedList<Domain>();
+  const bigIntSorting = SortingFunctions.bigInt as SortingFn<Domain>;
+
+  return (
+    <Section>
+      <DomainList.List batchSize={10}>
+        <DomainList.StaticData data={domains} />
+
+        <DomainList.Sorting
+          property="hostname"
+          name="Name A bis Z"
+          direction="asc"
+        />
+        <DomainList.Sorting
+          property="hostname"
+          name="Name Z bis A"
+          direction="desc"
+        />
+
+        <DomainList.Sorting
+          property="id"
+          name="ID (aufsteigend)"
+          direction="asc"
+          customSortingFn={bigIntSorting}
+        />
+        <DomainList.Sorting
+          property="id"
+          name="ID (absteigend)"
+          direction="desc"
+          customSortingFn={bigIntSorting}
+          defaultEnabled
+        />
+
+        <DomainList.Sorting
+          property="tld"
+          name="TLD-Länge (kürzeste zuerst)"
+          direction="asc"
+          customSortingFn={tldLengthSortingFn}
+        />
+        <DomainList.Sorting
+          property="tld"
+          name="TLD-Länge (längste zuerst)"
+          direction="desc"
+          customSortingFn={tldLengthSortingFn}
+        />
+
+        <DomainList.Sorting
+          property="type"
+          name="Typ (Domains zuerst)"
+          direction="asc"
+          customSortingFn={domainTypeSortingFn}
+        />
+
+        <DomainList.Item>
+          {(domain) => (
+            <DomainList.ItemView>
+              <Avatar color={domain.type === "Domain" ? "blue" : "teal"}>
+                {domain.type === "Domain" ? <IconDomain /> : <IconSubdomain />}
+              </Avatar>
+              <Heading>
+                {domain.hostname}
+                {!domain.verified && (
+                  <AlertBadge status="warning">Unverifiziert</AlertBadge>
+                )}
+              </Heading>
+              <Text>{domain.type}</Text>
+              <Text>ID: {domain.id}</Text>
+              <Text>TLD: {domain.tld}</Text>
+
+              <ContextMenu>
+                <MenuItem>Details anzeigen</MenuItem>
+                <MenuItem>Löschen</MenuItem>
+              </ContextMenu>
+            </DomainList.ItemView>
+          )}
+        </DomainList.Item>
+      </DomainList.List>
+    </Section>
+  );
 };
