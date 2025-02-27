@@ -17,7 +17,7 @@ export const SortingFunctions = {
 
       return valueA < valueB ? -1 : valueA > valueB ? 1 : 0;
     } catch (error) {
-      console.warn(`Error in BigInt comparison: ${error}`);
+      console.error(`Error in BigInt comparison: ${error}`);
     }
   }) as SortingFn<unknown>,
 
@@ -55,7 +55,7 @@ export const SortingFunctions = {
 
       return dateTimeA.getTime() - dateTimeB.getTime();
     } catch (error) {
-      console.warn(
+      console.error(
         `Error in DateTime comparison, falling back to string comparison: ${error}`,
       );
     }

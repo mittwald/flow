@@ -19,6 +19,7 @@ import {
 export default () => {
   type DomainWithBigIntId = Omit<Domain, "id"> & {
     id: bigint;
+    originalId: string;
     createdAt: Date;
   };
 
@@ -34,6 +35,7 @@ export default () => {
       return {
         ...domain,
         id: bigIntId,
+        originalId: domain.id,
         createdAt: createdAt,
       };
     },
@@ -62,13 +64,13 @@ export default () => {
       />
 
       <DomainList.Sorting
-        property="id"
+        property="originalId"
         name="ID (aufsteigend)"
         direction="asc"
         customSortingFn={bigIntSorting}
       />
       <DomainList.Sorting
-        property="id"
+        property="originalId"
         name="ID (absteigend)"
         direction="desc"
         customSortingFn={bigIntSorting}
@@ -77,13 +79,13 @@ export default () => {
 
       <DomainList.Sorting
         property="createdAt"
-        name="Zuletzt geprüft (älteste zuerst)"
+        name="Erstellt am (älteste zuerst)"
         direction="asc"
         customSortingFn={dateTimeSorting}
       />
       <DomainList.Sorting
         property="createdAt"
-        name="Zuletzt geprüft (neueste zuerst)"
+        name="Erstellt am (neueste zuerst)"
         direction="desc"
         customSortingFn={dateTimeSorting}
       />
