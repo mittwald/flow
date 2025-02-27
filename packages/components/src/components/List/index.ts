@@ -8,10 +8,7 @@ export type {
 
 export type { SortingFn } from "@/components/List/model/sorting/types";
 
-export {
-  bigIntSortingFn,
-  SortingFunctions,
-} from "./model/sorting/SortingFunctions";
+export { SortingFunctions } from "./model/sorting/SortingFunctions";
 
 export * from "./components/Items/views/GridList";
 export * from "./components/Items/views/GridListItem";
