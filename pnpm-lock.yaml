@@ -141,6 +141,9 @@ importers:
       '@tabler/icons-react':
         specifier: ^3.30.0
         version: 3.30.0(react@19.0.0)
+      '@types/luxon':
+        specifier: ^3.4.2
+        version: 3.4.2
       '@types/mdx':
         specifier: ^2.0.13
         version: 2.0.13
@@ -162,6 +165,9 @@ importers:
       humanize-string:
         specifier: ^3.0.0
         version: 3.0.0
+      luxon:
+        specifier: ^3.5.0
+        version: 3.5.0
       next:
         specifier: ~15.1.7
         version: 15.1.7(@babel/core@7.26.9)(babel-plugin-macros@3.1.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.85.0)

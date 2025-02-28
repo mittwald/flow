@@ -1,5 +1,6 @@
 import type { Row, SortingFn } from "@tanstack/react-table";
 import invariant from "invariant";
+import { DateTime } from "luxon";
 
 export const SortingFunctions = {
   bigInt: ((rowA: Row<bigint>, rowB: Row<bigint>, columnId) => {
@@ -23,41 +24,37 @@ export const SortingFunctions = {
 
   alphanumeric: "alphanumeric" as const,
 
-  dateTime: ((rowA, rowB, columnId) => {
+  dateTime: ((rowA: Row<unknown>, rowB: Row<unknown>, columnId) => {
     const valueA = rowA.getValue(columnId);
     const valueB = rowB.getValue(columnId);
 
     if (valueA == null) return valueB == null ? 0 : -1;
     if (valueB == null) return 1;
 
-    let dateTimeA: Date;
-    let dateTimeB: Date;
+    let dtA: DateTime | null = null;
+    let dtB: DateTime | null = null;
 
-    try {
-      dateTimeA =
-        valueA instanceof Date
-          ? valueA
-          : typeof valueA === "number"
-            ? new Date(valueA)
-            : new Date(String(valueA));
+    if (valueA instanceof DateTime) {
+      dtA = valueA;
+    } else if (typeof valueA === "string") {
+      dtA = DateTime.fromISO(valueA);
+    }
 
-      dateTimeB =
-        valueB instanceof Date
-          ? valueB
-          : typeof valueB === "number"
-            ? new Date(valueB)
-            : new Date(String(valueB));
+    if (valueB instanceof DateTime) {
+      dtB = valueB;
+    } else if (typeof valueB === "string") {
+      dtB = DateTime.fromISO(valueB);
+    }
 
-      invariant(
-        !isNaN(dateTimeA.getTime()) && !isNaN(dateTimeB.getTime()),
-        `Invalid date values: ${valueA} and/or ${valueB}`,
-      );
-
-      return dateTimeA.getTime() - dateTimeB.getTime();
-    } catch (error) {
-      console.error(
-        `Error in DateTime comparison, falling back to string comparison: ${error}`,
-      );
+    if (dtA?.isValid && dtB?.isValid) {
+      return dtA.toMillis() - dtB.toMillis();
+    } else if (dtA?.isValid) {
+      return -1;
+    } else if (dtB?.isValid) {
+      return 1;
+    } else {
+      console.warn("Invalid DateTime values for sorting.");
+      return 0;
     }
   }) as SortingFn<unknown>,
 };

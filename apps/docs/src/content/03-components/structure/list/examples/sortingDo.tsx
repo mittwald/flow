@@ -42,7 +42,7 @@ export default () => {
         direction="desc"
       />
       <DomainList.Item>
-        {(domain: Domain) => (
+        {(domain) => (
           <DomainList.ItemView>
             <Avatar
               color={

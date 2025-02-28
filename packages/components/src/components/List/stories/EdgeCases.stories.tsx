@@ -12,7 +12,9 @@ import { Render } from "@/lib/react/components/Render";
 import { usePromise } from "@mittwald/react-use-promise";
 import type { Meta, StoryObj } from "@storybook/react";
 import type { SortingFn } from "@tanstack/react-table";
+import { DateTime } from "luxon";
 import type List from "../List";
+import { domains } from "../testData/domainApi";
 import defaultMeta from "./Default.stories";
 
 const meta: Meta<typeof List> = {
@@ -31,59 +33,6 @@ const getEmail = async (name: string) => {
   await apiSleep();
   return `${name}@info.de`;
 };
-
-interface Domain {
-  id: string;
-  hostname: string;
-  tld: string;
-  type: "Domain" | "Subdomain";
-  verified: boolean;
-}
-
-const domains: Domain[] = [
-  {
-    id: "484743563096096768",
-    hostname: "example.com",
-    tld: "com",
-    type: "Domain",
-    verified: true,
-  },
-  {
-    id: "123456789012345678",
-    hostname: "example.org",
-    tld: "org",
-    type: "Domain",
-    verified: true,
-  },
-  {
-    id: "998877665544332211",
-    hostname: "blog.example.com",
-    tld: "com",
-    type: "Subdomain",
-    verified: false,
-  },
-  {
-    id: "111222333444555666",
-    hostname: "mittwald.de",
-    tld: "de",
-    type: "Domain",
-    verified: true,
-  },
-  {
-    id: "777888999000111222",
-    hostname: "docs.mittwald.de",
-    tld: "de",
-    type: "Subdomain",
-    verified: true,
-  },
-  {
-    id: "555666777888999000",
-    hostname: "example.solutions",
-    tld: "solutions",
-    type: "Domain",
-    verified: false,
-  },
-];
 
 export const LoadingListItem: Story = {
   render: () => {
@@ -184,13 +133,30 @@ export const VeryLongWords: Story = {
   },
 };
 
-const tldLengthSortingFn: SortingFn<Domain> = (rowA, rowB, columnId) => {
+interface DomainWithBigIntId {
+  id: bigint;
+  hostname: string;
+  tld: string;
+  type: "Domain" | "Subdomain";
+  verified: boolean;
+  createdAt: DateTime;
+}
+
+const tldLengthSortingFn: SortingFn<DomainWithBigIntId> = (
+  rowA,
+  rowB,
+  columnId,
+) => {
   const tldA = String(rowA.getValue(columnId) || "");
   const tldB = String(rowB.getValue(columnId) || "");
   return tldA.length - tldB.length;
 };
 
-const domainTypeSortingFn: SortingFn<Domain> = (rowA, rowB, columnId) => {
+const domainTypeSortingFn: SortingFn<DomainWithBigIntId> = (
+  rowA,
+  rowB,
+  columnId,
+) => {
   const valueA = rowA.getValue(columnId);
   const valueB = rowB.getValue(columnId);
 
@@ -201,13 +167,31 @@ const domainTypeSortingFn: SortingFn<Domain> = (rowA, rowB, columnId) => {
 };
 
 export const CustomSortingList = () => {
-  const DomainList = typedList<Domain>();
-  const bigIntSorting = SortingFunctions.bigInt as SortingFn<Domain>;
+  const domainsWithDateTime = domains.map((domain, index) => {
+    const daysAgo = index * 3 + Math.floor(Math.random() * 5);
+    const createdAt = new Date();
+    createdAt.setDate(createdAt.getDate() - daysAgo);
+
+    const bigIntId = BigInt(1000000000000 + index);
+
+    return {
+      ...domain,
+      id: bigIntId,
+      createdAt: DateTime.fromJSDate(createdAt),
+    };
+  });
+
+  const DomainList = typedList<DomainWithBigIntId>();
+
+  const bigIntSorting =
+    SortingFunctions.bigInt as SortingFn<DomainWithBigIntId>;
+  const dateTimeSorting =
+    SortingFunctions.dateTime as SortingFn<DomainWithBigIntId>;
 
   return (
     <Section>
       <DomainList.List batchSize={10}>
-        <DomainList.StaticData data={domains} />
+        <DomainList.StaticData data={domainsWithDateTime} />
 
         <DomainList.Sorting
           property="hostname"
@@ -231,6 +215,21 @@ export const CustomSortingList = () => {
           name="ID (absteigend)"
           direction="desc"
           customSortingFn={bigIntSorting}
+          defaultEnabled
+        />
+
+        <DomainList.Sorting
+          property="createdAt"
+          name="Erstelldatum (älteste zuerst)"
+          direction="asc"
+          customSortingFn={dateTimeSorting}
+        />
+
+        <DomainList.Sorting
+          property="createdAt"
+          name="Erstelldatum (neueste zuerst)"
+          direction="desc"
+          customSortingFn={dateTimeSorting}
           defaultEnabled
         />
 
@@ -269,7 +268,7 @@ export const CustomSortingList = () => {
               <Text>{domain.type}</Text>
               <Text>ID: {domain.id}</Text>
               <Text>TLD: {domain.tld}</Text>
-
+              <Text>Erstellt am: {domain.createdAt?.toLocaleString()}</Text>
               <ContextMenu>
                 <MenuItem>Details anzeigen</MenuItem>
                 <MenuItem>Löschen</MenuItem>

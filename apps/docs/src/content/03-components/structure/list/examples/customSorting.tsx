@@ -15,11 +15,12 @@ import {
   Text,
   typedList,
 } from "@mittwald/flow-react-components";
+import { DateTime } from "luxon";
 
 export default () => {
   type DomainWithBigIntId = Omit<Domain, "id"> & {
     id: bigint;
-    createdAt: Date;
+    createdAt: DateTime;
   };
 
   const domainsWithDateTime = domains.map(
@@ -34,7 +35,7 @@ export default () => {
       return {
         ...domain,
         id: bigIntId,
-        createdAt: createdAt,
+        createdAt: DateTime.fromJSDate(createdAt),
       };
     },
   );
@@ -130,7 +131,7 @@ export default () => {
             <Text>TLD: {domain.tld}</Text>
             <Text>
               Erstellt am:{" "}
-              {new Date(domain.createdAt).toLocaleString()}
+              {domain.createdAt.toLocaleString()}
             </Text>
 
             <ContextMenu>
