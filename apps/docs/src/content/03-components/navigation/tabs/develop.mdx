@@ -1,3 +1,29 @@
+# Reihenfolge der Tabs
+
+Es kann vorkommen, dass sich durch Rerendering die Reihenfolge der Tabs ändert,
+wenn innerhalb des Tabs Inhalte nachgeladen werden. Um das zu verhindern, sollte
+der Tab-Inhalt in eine eigene Komponente ausgelagert werden und um diese ein
+Suspense gelegt werden.
+
+```
+<Tabs>
+  <Tab>
+    <TabTitle>Tab 1</TabTitle>
+    <Suspense>
+      <Tab1Content/>
+    </Suspense>
+  </Tab>
+  <Tab>
+    <TabTitle>Tab 2</TabTitle>
+    <Suspense>
+      <Tab2Content/>
+    </Suspense>
+  </Tab>
+</Tabs>
+```
+
+---
+
 # Properties
 
 <PropertiesTables />
