@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.62](https://github.com/mittwald/flow/compare/0.2.0-alpha.61...0.2.0-alpha.62) (2025-02-28)
+
+**Note:** Version bump only for package @mittwald/flow-design-tokens
+
 # [0.2.0-alpha.61](https://github.com/mittwald/flow/compare/0.2.0-alpha.60...0.2.0-alpha.61) (2025-02-28)
 
 **Note:** Version bump only for package @mittwald/flow-design-tokens
