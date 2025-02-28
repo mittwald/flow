@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.61](https://github.com/mittwald/flow/compare/0.2.0-alpha.60...0.2.0-alpha.61) (2025-02-28)
+
+### Features
+
+* **List:** support custom sorting functions ([#1220](https://github.com/mittwald/flow/issues/1220)) ([37c4e50](https://github.com/mittwald/flow/commit/37c4e5031d98b0018fcfd3009ff75e2ddda75106))
+
 # [0.2.0-alpha.60](https://github.com/mittwald/flow/compare/0.2.0-alpha.59...0.2.0-alpha.60) (2025-02-27)
 
 ### Bug Fixes
