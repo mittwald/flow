@@ -1,55 +1,31 @@
 slider:
+  color:
+    default:
+      value: "{primary.color.1000}"
+    disabled:
+      value: "{neutral.color.600}"
+  track-color:
+    default:
+      value: "{neutral.color.700}"
+    disabled:
+      value: "{neutral.color.400}"
+  spacing-x:
+    value: "{size-rem.s}"
+  spacing-y:
+    value: "{size-rem.m}"
+  border-width:
+    value: "{border-width.300}"
+  border-style:
+    value: "{border-style.default}"
+  corner-radius:
+    value: "{corner-radius.default}"
   value-font-weight:
     value: "{font-weight.bold}"
-  value-to-label-spacing:
-    value: "{size-rem.xs}"
-  text-to-track-spacing:
-    value: "{size-rem.xs}"
-  text-color:
-    disabled:
-      value: "{disabled-plain-content-color}"
-  track-background-color:
-    default:
-      value: "{primary-soft-background-color.default}"
-    disabled:
-      value: "{disabled-soft-background-color}"
-  track-background-color-fill:
-    default:
-      value: "{primary-solid-background-color.default}"
-    disabled:
-      value: "{disabled-solid-background-color}"
-  track-height:
-    value: "{size-rem.xs}"
-  track-corner-radius:
-    value: "{corner-radius.default}"
-
-  thumb-border-color:
-    default:
-      value: "{primary-solid-background-color.default}"
-    disabled:
-      value: "{disabled-solid-background-color}"
-  thumb-border-width:
-    value: "{size-rem.xs}"
-  thumb-border-style:
-    value: "{border-style.default}"
-  thumb-corner-radius:
+  handle-corner-radius:
     value: "{corner-radius.round}"
-  thumb-size:
+  handle-size:
     value: "{size-rem.l}"
-  thumb-background-color:
-    default:
-      value: "{neutral.color.100}"
-    pressed:
-      value: "{primary-solid-background-color.default}"
-
+  handle-fill-color:
+    value: "{neutral.color.100}"
   initial-marker-height:
     value: "{size-rem.m}"
-  initial-marker-width:
-    value: "{size-rem.xs}"
-  initial-marker-background-color:
-    default:
-      value: "{primary-solid-background-color.default}"
-    disabled:
-      value: "{disabled-solid-background-color}"
-  initial-marker-corner-radius:
-    value: "{corner-radius.default}"

@@ -69,8 +69,8 @@ export const Slider = flowComponent("Slider", (props) => {
             <Button
               onPress={() => state.decrementThumb(0)}
               aria-label={stringFormatter.format("slider.decrement")}
-              size="s"
               variant="plain"
+              color="secondary"
               className={styles.decrement}
               isDisabled={isDisabled}
               excludeFromTabOrder
@@ -81,8 +81,8 @@ export const Slider = flowComponent("Slider", (props) => {
             <Button
               onPress={() => state.incrementThumb(0)}
               aria-label={stringFormatter.format("slider.increment")}
-              size="s"
               variant="plain"
+              color="secondary"
               className={styles.increment}
               isDisabled={isDisabled}
               excludeFromTabOrder
@@ -106,7 +106,7 @@ export const Slider = flowComponent("Slider", (props) => {
                 />
               )}
 
-            <Aria.SliderThumb name={name} className={styles.thumb} />
+            <Aria.SliderThumb name={name} className={styles.handle} />
           </>
         )}
       </Aria.SliderTrack>

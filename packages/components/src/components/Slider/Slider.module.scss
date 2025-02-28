@@ -4,19 +4,16 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  row-gap: var(--slider--text-to-track-spacing);
-
-  --button-size: calc(
-    var(--button--line-height-s) + var(--button--padding-s-y) * 2
-  );
+  row-gap: var(--slider--spacing-y);
+  --button-size: calc(var(--line-height--m) + var(--button--padding-y) * 2);
 
   .text {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    column-gap: var(--slider--value-to-label-spacing);
-    padding: 0 calc(var(--button-size) + var(--slider--value-to-label-spacing));
+    column-gap: var(--slider--spacing-x);
+    padding: 0 calc(var(--button-size) + var(--slider--spacing-x));
 
     .value {
       font-weight: var(--slider--value-font-weight);
@@ -26,52 +23,52 @@
   .track {
     grid-area: track;
     position: relative;
-    height: var(--slider--thumb-size);
+    height: var(--slider--handle-size);
 
     &:before {
       content: "";
       display: block;
       position: absolute;
-      background-color: var(--slider--track-background-color--default);
-      height: var(--slider--track-height);
+      background-color: var(--slider--track-color--default);
+      height: var(--slider--border-width);
       width: 100%;
       top: 50%;
       transform: translateY(-50%);
-      border-radius: var(--slider--track-corner-radius);
+      border-radius: var(--slider--corner-radius);
     }
   }
 
   .fill {
     position: absolute;
-    height: var(--slider--track-height);
-    background-color: var(--slider--track-background-color-fill--default);
-    top: calc(50% - var(--slider--track-height) / 2);
-    border-radius: var(--slider--track-corner-radius);
+    height: var(--slider--border-width);
+    background-color: var(--slider--color--default);
+    top: calc(50% - var(--slider--border-width) / 2);
+    border-radius: var(--slider--corner-radius);
   }
 
   .initialMarker {
     position: absolute;
     height: var(--slider--initial-marker-height);
-    width: var(--slider--initial-marker-width);
-    background-color: var(--slider--initial-marker-background-color--default);
+    width: var(--slider--border-width);
+    background-color: var(--slider--color--default);
     top: calc(50% - var(--slider--initial-marker-height) / 2);
-    border-radius: var(--slider--initial-marker-corner-radius);
+    border-radius: var(--slider--corner-radius);
   }
 
-  .thumb {
-    width: var(--slider--thumb-size);
-    height: var(--slider--thumb-size);
-    border-radius: var(--slider--thumb-corner-radius);
-    background-color: var(--slider--thumb-background-color--default);
-    border-width: var(--slider--thumb-border-width);
-    border-style: var(--slider--thumb-border-style);
-    border-color: var(--slider--thumb-border-color--default);
+  .handle {
+    width: var(--slider--handle-size);
+    height: var(--slider--handle-size);
+    border-radius: var(--slider--handle-corner-radius);
+    background-color: var(--slider--handle-fill-color);
+    border-width: var(--slider--border-width);
+    border-style: var(--slider--border-style);
+    border-color: var(--slider--color--default);
     forced-color-adjust: none;
     top: 50%;
 
     &[data-dragging],
     &[data-focus-visible] {
-      background-color: var(--slider--thumb-background-color--pressed);
+      background-color: var(--slider--color--default);
     }
 
     &[data-focus-visible] {
@@ -86,8 +83,7 @@
   .increment,
   .decrement {
     position: absolute;
-    top: calc((var(--slider--text-to-track-spacing) + var(--button-size)) * -1);
-    right: 0;
+    top: calc((var(--slider--spacing-y) / 2 + var(--button-size)) * -1);
   }
 
   .increment {
@@ -101,26 +97,20 @@
   &.disabled {
     .track {
       &:before {
-        background-color: var(--slider--track-background-color--disabled);
+        background-color: var(--slider--track-color--disabled);
       }
     }
 
     .fill {
-      background-color: var(--slider--track-background-color-fill--disabled);
+      background-color: var(--slider--color--disabled);
     }
 
-    .thumb {
-      border-color: var(--slider--thumb-border-color--disabled);
+    .handle {
+      border-color: var(--slider--color--disabled);
     }
 
     .text {
-      color: var(--slider--text-color--disabled);
-    }
-
-    .initialMarker {
-      background-color: var(
-        --slider--initial-marker-background-color--disabled
-      );
+      color: var(--text--color--disabled);
     }
   }
 }
