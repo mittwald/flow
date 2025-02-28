@@ -1,15 +1,16 @@
-import type {
-  Column,
-  ColumnDef,
-  ColumnSort,
-  SortDirection,
-} from "@tanstack/react-table";
 import type List from "@/components/List/model/List";
 import type {
   SortingDefaultMode,
   SortingShape,
 } from "@/components/List/model/sorting/types";
 import type { PropertyName } from "@/components/List/model/types";
+import type {
+  Column,
+  ColumnDef,
+  ColumnSort,
+  SortDirection,
+  SortingFn,
+} from "@tanstack/react-table";
 
 export class Sorting<T> {
   public readonly list: List<T>;
@@ -17,6 +18,7 @@ export class Sorting<T> {
   public readonly name?: string;
   public readonly direction: SortDirection;
   public readonly defaultEnabled: SortingDefaultMode;
+  public readonly customSortingFn?: SortingFn<T>;
 
   public constructor(list: List<T>, shape: SortingShape<T>) {
     this.list = list;
@@ -24,10 +26,14 @@ export class Sorting<T> {
     this.name = shape.name;
     this.direction = shape.direction ?? "asc";
     this.defaultEnabled = shape.defaultEnabled ?? false;
+    this.customSortingFn = shape.customSortingFn;
   }
 
   public updateTableColumnDef(def: ColumnDef<T>): void {
     def.enableSorting = true;
+    if (this.customSortingFn) {
+      def.sortingFn = this.customSortingFn;
+    }
   }
 
   public getReactTableColumnSort(): ColumnSort {

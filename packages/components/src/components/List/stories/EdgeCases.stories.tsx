@@ -1,16 +1,21 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import type List from "../List";
-import React from "react";
-import { Heading } from "@/components/Heading";
-import { Text } from "@/components/Text";
-import defaultMeta from "./Default.stories";
-import { ListItemView, typedList } from "@/components/List";
-import { Render } from "@/lib/react/components/Render";
-import { usePromise } from "@mittwald/react-use-promise";
+import AlertBadge from "@/components/AlertBadge";
 import { Avatar } from "@/components/Avatar";
-import { Initials } from "@/components/Initials";
 import { Content } from "@/components/Content";
 import { ContextMenu, MenuItem } from "@/components/ContextMenu";
+import { Heading } from "@/components/Heading";
+import { Initials } from "@/components/Initials";
+import { ListItemView, SortingFunctions, typedList } from "@/components/List";
+import Section from "@/components/Section";
+import { Text } from "@/components/Text";
+import { IconDomain, IconSubdomain } from "@/flr-universal";
+import { Render } from "@/lib/react/components/Render";
+import { usePromise } from "@mittwald/react-use-promise";
+import type { Meta, StoryObj } from "@storybook/react";
+import type { SortingFn } from "@tanstack/react-table";
+import { DateTime } from "luxon";
+import type List from "../List";
+import { domains } from "../testData/domainApi";
+import defaultMeta from "./Default.stories";
 
 const meta: Meta<typeof List> = {
   ...defaultMeta,
@@ -126,4 +131,149 @@ export const VeryLongWords: Story = {
       </List.List>
     );
   },
+};
+
+interface DomainWithBigIntId {
+  id: bigint;
+  hostname: string;
+  tld: string;
+  type: "Domain" | "Subdomain";
+  verified: boolean;
+  createdAt: DateTime;
+}
+
+const tldLengthSortingFn: SortingFn<DomainWithBigIntId> = (
+  rowA,
+  rowB,
+  columnId,
+) => {
+  const tldA = String(rowA.getValue(columnId) || "");
+  const tldB = String(rowB.getValue(columnId) || "");
+  return tldA.length - tldB.length;
+};
+
+const domainTypeSortingFn: SortingFn<DomainWithBigIntId> = (
+  rowA,
+  rowB,
+  columnId,
+) => {
+  const valueA = rowA.getValue(columnId);
+  const valueB = rowB.getValue(columnId);
+
+  if (valueA === "Domain" && valueB === "Subdomain") return -1;
+  if (valueA === "Subdomain" && valueB === "Domain") return 1;
+
+  return String(valueA).localeCompare(String(valueB));
+};
+
+export const CustomSortingList = () => {
+  const domainsWithDateTime = domains.map((domain, index) => {
+    const daysAgo = index * 3 + Math.floor(Math.random() * 5);
+    const bigIntId = BigInt(1000000000000 + index);
+
+    return {
+      ...domain,
+      id: bigIntId,
+      createdAt: DateTime.now().minus({ days: daysAgo }),
+    };
+  });
+
+  const DomainList = typedList<DomainWithBigIntId>();
+
+  const bigIntSorting =
+    SortingFunctions.bigInt as SortingFn<DomainWithBigIntId>;
+  const dateTimeSorting =
+    SortingFunctions.dateTime as SortingFn<DomainWithBigIntId>;
+
+  return (
+    <Section>
+      <DomainList.List batchSize={10}>
+        <DomainList.StaticData data={domainsWithDateTime} />
+
+        <DomainList.Sorting
+          property="hostname"
+          name="Name A bis Z"
+          direction="asc"
+        />
+        <DomainList.Sorting
+          property="hostname"
+          name="Name Z bis A"
+          direction="desc"
+        />
+
+        <DomainList.Sorting
+          property="id"
+          name="ID (aufsteigend)"
+          direction="asc"
+          customSortingFn={bigIntSorting}
+        />
+        <DomainList.Sorting
+          property="id"
+          name="ID (absteigend)"
+          direction="desc"
+          customSortingFn={bigIntSorting}
+          defaultEnabled
+        />
+
+        <DomainList.Sorting
+          property="createdAt"
+          name="Erstelldatum (älteste zuerst)"
+          direction="asc"
+          customSortingFn={dateTimeSorting}
+        />
+
+        <DomainList.Sorting
+          property="createdAt"
+          name="Erstelldatum (neueste zuerst)"
+          direction="desc"
+          customSortingFn={dateTimeSorting}
+          defaultEnabled
+        />
+
+        <DomainList.Sorting
+          property="tld"
+          name="TLD-Länge (kürzeste zuerst)"
+          direction="asc"
+          customSortingFn={tldLengthSortingFn}
+        />
+        <DomainList.Sorting
+          property="tld"
+          name="TLD-Länge (längste zuerst)"
+          direction="desc"
+          customSortingFn={tldLengthSortingFn}
+        />
+
+        <DomainList.Sorting
+          property="type"
+          name="Typ (Domains zuerst)"
+          direction="asc"
+          customSortingFn={domainTypeSortingFn}
+        />
+
+        <DomainList.Item>
+          {(domain) => (
+            <DomainList.ItemView>
+              <Avatar color={domain.type === "Domain" ? "blue" : "teal"}>
+                {domain.type === "Domain" ? <IconDomain /> : <IconSubdomain />}
+              </Avatar>
+              <Heading>
+                {domain.hostname}
+                {!domain.verified && (
+                  <AlertBadge status="warning">Unverifiziert</AlertBadge>
+                )}
+              </Heading>
+              <Text>{domain.type}</Text>
+              <Text>ID: {domain.id}</Text>
+              <Text>TLD: {domain.tld}</Text>
+              <Text>Erstellt am: {domain.createdAt?.toLocaleString()}</Text>
+              <ContextMenu>
+                <MenuItem>Details anzeigen</MenuItem>
+                <MenuItem>Löschen</MenuItem>
+              </ContextMenu>
+            </DomainList.ItemView>
+          )}
+        </DomainList.Item>
+      </DomainList.List>
+    </Section>
+  );
 };

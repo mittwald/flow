@@ -1,6 +1,6 @@
 import docGenFile from "@mittwald/flow-react-components/doc-properties";
-import type { Properties, Property } from "../types";
 import type { ComponentDoc } from "react-docgen-typescript";
+import type { Properties, Property } from "../types";
 
 const eventRegex = /^on[A-Z]+.*/;
 const a11yRegex = /^aria-.+/;

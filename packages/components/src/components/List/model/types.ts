@@ -1,15 +1,15 @@
-import type { DeepKeys, DeepValue } from "@tanstack/react-table";
-import type { SortingShape } from "@/components/List/model/sorting/types";
-import type { BatchesControllerShape } from "@/components/List/model/pagination/types";
 import type { FilterShape } from "@/components/List/model/filter/types";
-import type { IncrementalLoaderShape } from "@/components/List/model/loading/types";
-import type { SearchShape } from "@/components/List/model/search/types";
 import type { ItemViewShape } from "@/components/List/model/item/ItemView";
-import type { ReactNode } from "react";
-import type { ItemType } from "@/lib/types/array";
 import type List from "@/components/List/model/List";
+import type { IncrementalLoaderShape } from "@/components/List/model/loading/types";
+import type { BatchesControllerShape } from "@/components/List/model/pagination/types";
+import type { SearchShape } from "@/components/List/model/search/types";
+import type { SortingShape } from "@/components/List/model/sorting/types";
 import type { TableShape } from "@/components/List/model/table/types";
+import type { ItemType } from "@/lib/types/array";
 import type { MultipleSelection, SelectionBehavior } from "@react-types/shared";
+import type { DeepKeys, DeepValue } from "@tanstack/react-table";
+import type { ReactNode } from "react";
 
 export const customPropertyPrefix = "$" as const;
 export type CustomPropertyName = `${typeof customPropertyPrefix}${string}`;

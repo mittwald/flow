@@ -1,11 +1,13 @@
 "use client";
+import { PropertiesTable } from "@/lib/PropertiesTables/components/PropertiesTable";
+import {
+  Accordion,
+  Content,
+  Heading,
+  useIsMounted,
+} from "@mittwald/flow-react-components";
 import React from "react";
 import loadProperties from "./lib/loadProperties";
-import { PropertiesTable } from "@/lib/PropertiesTables/components/PropertiesTable";
-import { Accordion } from "@mittwald/flow-react-components";
-import { Heading } from "@mittwald/flow-react-components";
-import { Content } from "@mittwald/flow-react-components";
-import { useIsMounted } from "@mittwald/flow-react-components";
 
 interface PropertiesTableProps {
   name: string;
