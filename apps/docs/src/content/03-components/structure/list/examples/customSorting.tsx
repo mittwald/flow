@@ -27,15 +27,13 @@ export default () => {
     (domain, index) => {
       const daysAgo =
         index * 3 + Math.floor(Math.random() * 5);
-      const createdAt = new Date();
-      createdAt.setDate(createdAt.getDate() - daysAgo);
 
       const bigIntId = BigInt(1000000000000 + index);
 
       return {
         ...domain,
         id: bigIntId,
-        createdAt: DateTime.fromJSDate(createdAt),
+        createdAt: DateTime.now().minus({ days: daysAgo }),
       };
     },
   );
