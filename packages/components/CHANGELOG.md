@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.63](https://github.com/mittwald/flow/compare/0.2.0-alpha.62...0.2.0-alpha.63) (2025-03-03)
+
+### Features
+
+* **Initials:** support aria hidden ([#1225](https://github.com/mittwald/flow/issues/1225)) ([0f6ede3](https://github.com/mittwald/flow/commit/0f6ede36c23fb025b0b6c80a0a57b4066153a919))
+
 # [0.2.0-alpha.62](https://github.com/mittwald/flow/compare/0.2.0-alpha.61...0.2.0-alpha.62) (2025-02-28)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
