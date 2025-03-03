@@ -12,7 +12,8 @@ import type { PropsWithClassName } from "@/lib/types/props";
 export interface InitialsProps
   extends PropsWithChildren,
     PropsWithClassName,
-    FlowComponentProps {}
+    FlowComponentProps,
+    Pick<HTMLDivElement, "ariaHidden"> {}
 
 /**
  * @flr-generate all
