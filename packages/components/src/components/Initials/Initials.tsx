@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from "react";
+import type { AriaAttributes, PropsWithChildren } from "react";
 import React from "react";
 import { getInitialsFromString } from "./lib/getInitialsFromString";
 import styles from "./Initials.module.scss";
@@ -13,14 +13,14 @@ export interface InitialsProps
   extends PropsWithChildren,
     PropsWithClassName,
     FlowComponentProps,
-    Pick<HTMLDivElement, "ariaHidden"> {}
+    Pick<AriaAttributes, "aria-hidden"> {}
 
 /**
  * @flr-generate all
  * @flr-clear-props-context
  */
 export const Initials = flowComponent("Initials", (props) => {
-  const { children, className, ref } = props;
+  const { children, className, "aria-hidden": ariaHidden, ref } = props;
 
   const textContent = onlyText(children);
   const initials = getInitialsFromString(textContent);
@@ -33,7 +33,12 @@ export const Initials = flowComponent("Initials", (props) => {
 
   return (
     <ClearPropsContext>
-      <div aria-label={textContent} className={rootClassName} ref={ref}>
+      <div
+        aria-hidden={ariaHidden}
+        aria-label={textContent}
+        className={rootClassName}
+        ref={ref}
+      >
         {initialsElements}
       </div>
     </ClearPropsContext>
