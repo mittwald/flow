@@ -2,7 +2,7 @@ export {
   RemoteElement,
   RemoteEvent,
   type RemoteElementConstructor,
-} from "@mfalkenberg/remote-dom-core/elements";
+} from "@remote-dom/core/elements";
 export * from "./connection/connectHostRenderRoot";
 export * from "./connection/connectRemoteIframe";
 export * from "./events";
