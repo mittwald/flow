@@ -14,6 +14,7 @@ const meta: Meta<typeof Slider> = {
   parameters: {
     controls: { exclude: ["tunnelId", "render", "showInitialMarker"] },
   },
+  args: { defaultValue: 20 },
 };
 export default meta;
 
@@ -43,7 +44,7 @@ export const Disabled: Story = { args: { isDisabled: true } };
 
 export const WithInitialMarker: Story = {
   render: (props) => (
-    <Slider {...props} defaultValue={20} showInitialMarker>
+    <Slider {...props} showInitialMarker>
       <Label>Amount</Label>
     </Slider>
   ),
