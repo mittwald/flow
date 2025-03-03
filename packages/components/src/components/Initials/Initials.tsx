@@ -12,14 +12,16 @@ import type { PropsWithClassName } from "@/lib/types/props";
 export interface InitialsProps
   extends PropsWithChildren,
     PropsWithClassName,
-    FlowComponentProps {}
+    FlowComponentProps {
+  "aria-hidden"?: boolean;
+}
 
 /**
  * @flr-generate all
  * @flr-clear-props-context
  */
 export const Initials = flowComponent("Initials", (props) => {
-  const { children, className, ref } = props;
+  const { children, className, "aria-hidden": ariaHidden, ref } = props;
 
   const textContent = onlyText(children);
   const initials = getInitialsFromString(textContent);
@@ -32,7 +34,12 @@ export const Initials = flowComponent("Initials", (props) => {
 
   return (
     <ClearPropsContext>
-      <div aria-label={textContent} className={rootClassName} ref={ref}>
+      <div
+        aria-hidden={ariaHidden}
+        aria-label={textContent}
+        className={rootClassName}
+        ref={ref}
+      >
         {initialsElements}
       </div>
     </ClearPropsContext>
