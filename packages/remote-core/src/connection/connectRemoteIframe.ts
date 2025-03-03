@@ -1,5 +1,5 @@
-import type { RemoteConnection } from "@mfalkenberg/remote-dom-core/elements";
 import { ThreadIframe } from "@quilted/threads";
+import type { RemoteConnection } from "@remote-dom/core/elements";
 
 export type HostData = Record<string, unknown>;
 
