@@ -1,4 +1,4 @@
-import type { AriaAttributes, PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 import React from "react";
 import { getInitialsFromString } from "./lib/getInitialsFromString";
 import styles from "./Initials.module.scss";
