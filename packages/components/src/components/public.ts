@@ -1,6 +1,7 @@
 export * from "@/components/Accordion";
 export * from "@/components/Action";
 export * from "@/components/ActionGroup";
+export * from "@/components/Activity";
 export * from "@/components/Alert";
 export * from "@/components/AlertBadge";
 export * from "@/components/AlertIcon";
