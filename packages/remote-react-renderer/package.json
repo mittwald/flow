@@ -28,9 +28,9 @@
     "test:compile": "tsc --noEmit"
   },
   "dependencies": {
-    "@mfalkenberg/remote-dom-react": "^1.2.2",
     "@mittwald/flow-remote-core": "workspace:*",
     "@mittwald/flow-remote-elements": "workspace:*",
+    "@remote-dom/react": "^1.2.1",
     "@types/react": "^19.0.10",
     "clsx": "^2.1.1",
     "react-children-utilities": "^2.10.0",

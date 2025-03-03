@@ -1,8 +1,3 @@
-import type {
-  RemoteComponentOptions,
-  RemoteComponentTypeFromElementConstructor,
-} from "@mfalkenberg/remote-dom-react";
-import { createRemoteComponent } from "@mfalkenberg/remote-dom-react";
 import {
   ClearPropsContext,
   flowComponent,
@@ -12,6 +7,11 @@ import type {
   RemoteElement,
   RemoteElementConstructor,
 } from "@mittwald/flow-remote-core";
+import type {
+  RemoteComponentOptions,
+  RemoteComponentTypeFromElementConstructor,
+} from "@remote-dom/react";
+import { createRemoteComponent } from "@remote-dom/react";
 import { createElement } from "react";
 
 // eslint-disable-next-line  @typescript-eslint/no-explicit-any

@@ -67,8 +67,7 @@
     "react": "^19",
     "react-dom": "^19",
     "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "@remote-dom/core": "1.5.1"
+    "@types/react-dom": "^19"
   },
   "workspaces": [
     "packages/*",
