@@ -12,8 +12,9 @@ import type { PropsWithClassName } from "@/lib/types/props";
 export interface InitialsProps
   extends PropsWithChildren,
     PropsWithClassName,
-    FlowComponentProps,
-    Pick<AriaAttributes, "aria-hidden"> {}
+    FlowComponentProps {
+  "aria-hidden"?: boolean;
+}
 
 /**
  * @flr-generate all
