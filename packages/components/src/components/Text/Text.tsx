@@ -1,15 +1,15 @@
-import type { PropsWithChildren } from "react";
-import React from "react";
-import * as Aria from "react-aria-components";
-import type { PropsContext } from "@/lib/propsContext";
-import { ClearPropsContext, PropsContextProvider } from "@/lib/propsContext";
-import type { PropsWithElementType } from "@/lib/types/props";
-import invariant from "invariant";
-import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
-import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { EmulatedBoldText } from "@/components/EmulatedBoldText";
 import { Wrap } from "@/components/Wrap";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import type { PropsContext } from "@/lib/propsContext";
+import { PropsContextProvider } from "@/lib/propsContext";
+import type { PropsWithElementType } from "@/lib/types/props";
+import ClearPropsContextView from "@/views/ClearPropsContextView";
 import clsx from "clsx";
+import invariant from "invariant";
+import type { PropsWithChildren } from "react";
+import * as Aria from "react-aria-components";
 import styles from "./Text.module.scss";
 
 export interface TextProps
@@ -25,10 +25,7 @@ export interface TextProps
   align?: "start" | "end" | "center";
 }
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const Text = flowComponent<"Text", HTMLDivElement>("Text", (props) => {
   const {
     children,
@@ -79,11 +76,11 @@ export const Text = flowComponent<"Text", HTMLDivElement>("Text", (props) => {
   );
 
   return (
-    <ClearPropsContext>
+    <ClearPropsContextView>
       <Aria.Text {...textProps} elementType={elementType} ref={ref}>
         {childrenElement}
       </Aria.Text>
-    </ClearPropsContext>
+    </ClearPropsContextView>
   );
 });
 

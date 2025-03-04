@@ -8,9 +8,6 @@ export { type RemoteCodeBlockElement } from "@mittwald/flow-remote-elements";
 export const CodeBlock = createFlowRemoteComponent(
   "flr-code-block",
   "CodeBlock",
-  {
-    clearPropsContext: false,
-  },
   RemoteCodeBlockElement,
   {
     slotProps: {

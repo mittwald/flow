@@ -1,14 +1,13 @@
-import type { PropsWithChildren } from "react";
-import React from "react";
-import styles from "./Label.module.scss";
-import * as Aria from "react-aria-components";
-import clsx from "clsx";
-import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
-import { useLocalizedStringFormatter } from "react-aria";
-import locales from "./locales/*.locale.json";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
+import clsx from "clsx";
+import type { PropsWithChildren } from "react";
+import { useLocalizedStringFormatter } from "react-aria";
+import * as Aria from "react-aria-components";
+import styles from "./Label.module.scss";
+import locales from "./locales/*.locale.json";
 
 export interface LabelProps
   extends PropsWithChildren<Omit<Aria.LabelProps, "children">>,
@@ -21,10 +20,7 @@ export interface LabelProps
   unstyled?: boolean;
 }
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const Label = flowComponent<"Label", HTMLLabelElement>(
   "Label",
   (props) => {

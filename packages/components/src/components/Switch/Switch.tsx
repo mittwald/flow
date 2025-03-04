@@ -1,13 +1,12 @@
-import type { PropsWithChildren } from "react";
-import React from "react";
-import * as Aria from "react-aria-components";
-import styles from "./Switch.module.scss";
-import clsx from "clsx";
 import { IconCheck, IconClose } from "@/components/Icon/components/icons";
 import { Label } from "@/components/Label";
-import { ClearPropsContext } from "@/lib/propsContext";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import ClearPropsContextView from "@/views/ClearPropsContextView";
+import clsx from "clsx";
+import type { PropsWithChildren } from "react";
+import * as Aria from "react-aria-components";
+import styles from "./Switch.module.scss";
 
 export interface SwitchProps
   extends PropsWithChildren<Omit<Aria.SwitchProps, "children">>,
@@ -19,10 +18,7 @@ export interface SwitchProps
   labelPosition?: "leading" | "trailing";
 }
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const Switch = flowComponent<"Switch", HTMLLabelElement>(
   "Switch",
   (props) => {
@@ -41,7 +37,7 @@ export const Switch = flowComponent<"Switch", HTMLLabelElement>(
     );
 
     return (
-      <ClearPropsContext>
+      <ClearPropsContextView>
         <Aria.Switch {...rest} className={rootClassName} ref={ref}>
           {({ isSelected }) => (
             <>
@@ -54,7 +50,7 @@ export const Switch = flowComponent<"Switch", HTMLLabelElement>(
             </>
           )}
         </Aria.Switch>
-      </ClearPropsContext>
+      </ClearPropsContextView>
     );
   },
 );

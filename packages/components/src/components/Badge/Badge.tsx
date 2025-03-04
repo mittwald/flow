@@ -1,14 +1,13 @@
-import type { PropsWithChildren } from "react";
-import React from "react";
-import styles from "./Badge.module.scss";
-import clsx from "clsx";
-import type { PropsWithClassName } from "@/lib/types/props";
-import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
-import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
-import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import type { PressEvent } from "@react-types/shared";
 import { Button } from "@/components/Button";
 import { IconClose } from "@/components/Icon/components/icons";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import type { PropsWithClassName } from "@/lib/types/props";
+import type { PressEvent } from "@react-types/shared";
+import clsx from "clsx";
+import type { PropsWithChildren } from "react";
+import styles from "./Badge.module.scss";
 
 export const badgeColors = [
   "neutral",
@@ -39,10 +38,7 @@ export interface BadgeProps
   isDisabled?: boolean;
 }
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const Badge = flowComponent<"Badge", HTMLDivElement>(
   "Badge",
   (props) => {

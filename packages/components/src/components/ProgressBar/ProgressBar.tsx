@@ -1,13 +1,12 @@
-import * as Aria from "react-aria-components";
-import type { FC, PropsWithChildren } from "react";
-import React from "react";
-import styles from "./ProgressBar.module.scss";
-import clsx from "clsx";
-import { useLocalizedStringFormatter, useNumberFormatter } from "react-aria";
-import type { PropsWithStatus } from "@/lib/types/props";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
+import type { PropsWithStatus } from "@/lib/types/props";
+import clsx from "clsx";
+import type { FC, PropsWithChildren } from "react";
+import { useLocalizedStringFormatter, useNumberFormatter } from "react-aria";
+import * as Aria from "react-aria-components";
 import locales from "./locales/*.locale.json";
+import styles from "./ProgressBar.module.scss";
 
 export interface ProgressBarProps
   extends PropsWithChildren<Omit<Aria.ProgressBarProps, "children">>,
@@ -18,10 +17,7 @@ export interface ProgressBarProps
   size?: "s" | "m";
 }
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const ProgressBar: FC<ProgressBarProps> = (props) => {
   const {
     children,

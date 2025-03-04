@@ -15,6 +15,7 @@ export * from "@/components/Chat";
 export * from "@/components/Checkbox";
 export * from "@/components/CheckboxButton";
 export * from "@/components/CheckboxGroup";
+export * from "@/components/ClearPropsContext";
 export * from "@/components/CodeBlock";
 export * from "@/components/ColumnLayout";
 export * from "@/components/ComboBox";

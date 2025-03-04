@@ -5,7 +5,7 @@ import {
 } from "@/components/Icon/components/icons";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import { ClearPropsContext } from "@/lib/propsContext";
+import ClearPropsContextView from "@/views/ClearPropsContextView";
 import clsx from "clsx";
 import type { PropsWithChildren } from "react";
 import * as Aria from "react-aria-components";
@@ -15,10 +15,7 @@ export interface CheckboxProps
   extends PropsWithChildren<Omit<Aria.CheckboxProps, "children">>,
     FlowComponentProps {}
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const Checkbox = flowComponent<"Checkbox", HTMLLabelElement>(
   "Checkbox",
   (props) => {
@@ -27,7 +24,7 @@ export const Checkbox = flowComponent<"Checkbox", HTMLLabelElement>(
     const rootClassName = clsx(styles.checkbox, className);
 
     return (
-      <ClearPropsContext>
+      <ClearPropsContextView>
         <Aria.Checkbox {...rest} className={rootClassName} ref={ref}>
           {({ isSelected, isIndeterminate }) => (
             <>
@@ -42,7 +39,7 @@ export const Checkbox = flowComponent<"Checkbox", HTMLLabelElement>(
             </>
           )}
         </Aria.Checkbox>
-      </ClearPropsContext>
+      </ClearPropsContextView>
     );
   },
 );

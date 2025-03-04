@@ -1,18 +1,17 @@
-import type { ComponentType, FC } from "react";
-import React from "react";
+import type { IconProps } from "@/components/Icon";
 import {
   IconDanger,
   IconInfo,
   IconSuccess,
   IconWarning,
 } from "@/components/Icon/components/icons";
-import locales from "./locales/*.locale.json";
-import { useLocalizedStringFormatter } from "react-aria";
 import type { PropsWithStatus, Status } from "@/lib/types/props";
-import type { IconProps } from "@/components/Icon";
-import { ClearPropsContext } from "@/lib/propsContext";
+import ClearPropsContextView from "@/views/ClearPropsContextView";
 import clsx from "clsx";
+import type { ComponentType, FC } from "react";
+import { useLocalizedStringFormatter } from "react-aria";
 import styles from "./AlertIcon.module.scss";
+import locales from "./locales/*.locale.json";
 
 export interface AlertIconProps extends PropsWithStatus, IconProps {}
 
@@ -23,10 +22,7 @@ const icons: Record<Status, ComponentType> = {
   warning: IconWarning,
 };
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const AlertIcon: FC<AlertIconProps> = (props) => {
   const { status = "info", className, ...rest } = props;
 
@@ -43,9 +39,9 @@ export const AlertIcon: FC<AlertIconProps> = (props) => {
   };
 
   return (
-    <ClearPropsContext>
+    <ClearPropsContextView>
       <Icon {...iconProps} />
-    </ClearPropsContext>
+    </ClearPropsContextView>
   );
 };
 

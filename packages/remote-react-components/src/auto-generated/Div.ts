@@ -8,9 +8,6 @@ export { type RemoteDivElement } from "@mittwald/flow-remote-elements";
 export const Div = createFlowRemoteComponent(
   "flr-div",
   "Div",
-  {
-    clearPropsContext: false,
-  },
   RemoteDivElement,
   {
     slotProps: {
