@@ -1,6 +1,11 @@
 .actionGroup {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+  justify-content: end;
+  flex-grow: 1;
+
+  @extend .s;
 
   .primary {
     order: 3;
@@ -11,59 +16,17 @@
   }
 
   .secondary {
-    margin-left: auto;
     order: 2;
-
-    ~ .secondary {
-      margin-left: unset;
-    }
   }
 
   .abort {
     order: 1;
     margin-right: auto;
   }
-}
-
-.actionGroupContainer {
-  @extend .s;
-
-  &.ignoreBreakpoint {
-    .actionGroup {
-      flex-wrap: wrap;
-    }
-  }
-
-  &:not(.ignoreBreakpoint) {
-    container-type: inline-size;
-
-    .actionGroup {
-      @container (max-width: 550px) {
-        display: flex;
-        flex-direction: column-reverse;
-
-        .primary,
-        .secondary,
-        .abort {
-          width: 100%;
-        }
-
-        .secondary {
-          flex-direction: column-reverse;
-
-          & > * {
-            width: 100%;
-          }
-        }
-      }
-    }
-  }
 
   @mixin spacing($spacing) {
     &.#{$spacing} {
-      .actionGroup {
-        gap: var(--action-group--spacing--#{$spacing});
-      }
+      gap: var(--action-group--spacing--#{$spacing});
     }
   }
 
