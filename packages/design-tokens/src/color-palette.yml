@@ -215,5 +215,31 @@ color:
     1100:
       value: "#00424a"
 
+  categorical:
+    sea-green:
+      value: "#0fb5ae"
+    palatinate-blue:
+      value: "#4046ca"
+    tangerine:
+      value: "#f68511"
+    magenta:
+      value: "#de3d82"
+    tropical-indigo:
+      value: "#7e84fa"
+    malachite:
+      value: "#72e06a"
+    azure:
+      value: "#147af3"
+    violet:
+      value: "#7326d3"
+    yellow:
+      value: "#e8c600"
+    alloy-orange:
+      value: "#cb5d00"
+    green:
+      value: "#008f5d"
+    lime:
+      value: "#bce931"
+
   transparent:
     value: transparent
