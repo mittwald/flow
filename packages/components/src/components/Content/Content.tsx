@@ -1,10 +1,9 @@
-import type { PropsWithChildren } from "react";
-import React from "react";
-import { ClearPropsContext } from "@/lib/propsContext";
-import type { PropsWithElementType } from "@/lib/types/props";
+import { Wrap } from "@/components/Wrap";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import { Wrap } from "@/components/Wrap";
+import type { PropsWithElementType } from "@/lib/types/props";
+import ClearPropsContextView from "@/views/ClearPropsContextView";
+import type { PropsWithChildren } from "react";
 
 export interface ContentProps
   extends PropsWithChildren,
@@ -16,10 +15,7 @@ export interface ContentProps
   slot?: string;
 }
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const Content = flowComponent("Content", (props) => {
   const {
     children,
@@ -33,11 +29,11 @@ export const Content = flowComponent("Content", (props) => {
 
   return (
     <Wrap if={clearPropsContext}>
-      <ClearPropsContext>
+      <ClearPropsContextView>
         <Element ref={ref} {...rest}>
           {children}
         </Element>
-      </ClearPropsContext>
+      </ClearPropsContextView>
     </Wrap>
   );
 });

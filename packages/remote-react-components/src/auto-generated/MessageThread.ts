@@ -8,9 +8,6 @@ export { type RemoteMessageThreadElement } from "@mittwald/flow-remote-elements"
 export const MessageThread = createFlowRemoteComponent(
   "flr-message-thread",
   "MessageThread",
-  {
-    clearPropsContext: true,
-  },
   RemoteMessageThreadElement,
   {
     slotProps: {

@@ -1,9 +1,8 @@
-import type { ComponentProps, FC, PropsWithChildren } from "react";
-import React from "react";
-import styles from "./IllustratedMessage.module.scss";
-import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
+import clsx from "clsx";
+import type { ComponentProps, FC, PropsWithChildren } from "react";
+import styles from "./IllustratedMessage.module.scss";
 
 export interface IllustratedMessageProps
   extends PropsWithChildren<ComponentProps<"div">> {
@@ -11,10 +10,7 @@ export interface IllustratedMessageProps
   color?: "primary" | "danger" | "light" | "dark";
 }
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const IllustratedMessage: FC<IllustratedMessageProps> = (props) => {
   const { className, children, color = "primary", ...rest } = props;
 

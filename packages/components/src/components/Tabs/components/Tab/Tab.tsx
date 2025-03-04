@@ -1,23 +1,20 @@
+import { Activity } from "@/components/Activity";
+import { TabContextProvider } from "@/components/Tabs/components/Tab/context";
+import type { PropsContext } from "@/lib/propsContext";
+import { PropsContextProvider } from "@/lib/propsContext";
+import { TunnelEntry } from "@mittwald/react-tunnel";
+import clsx from "clsx";
 import type { FC, PropsWithChildren, ReactNode } from "react";
-import React, { useId } from "react";
+import { useId } from "react";
 import type { TabPanelRenderProps } from "react-aria-components";
 import * as Aria from "react-aria-components";
 import styles from "./Tab.module.scss";
-import clsx from "clsx";
-import { TabContextProvider } from "@/components/Tabs/components/Tab/context";
-import { TunnelEntry } from "@mittwald/react-tunnel";
-import type { PropsContext } from "@/lib/propsContext";
-import { PropsContextProvider } from "@/lib/propsContext";
-import { Activity } from "@/components/Activity";
 
 export interface TabProps
   extends Omit<Aria.TabPanelProps, "children">,
     PropsWithChildren {}
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const Tab: FC<TabProps> = (props) => {
   const { children, className, id: idFromProps, ...rest } = props;
 

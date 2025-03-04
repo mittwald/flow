@@ -1,12 +1,11 @@
-import React from "react";
-import * as Aria from "react-aria-components";
 import type { TextFieldBaseProps } from "@/components/TextFieldBase";
 import { TextFieldBase } from "@/components/TextFieldBase";
-import styles from "./TextField.module.scss";
-import { ClearPropsContext } from "@/lib/propsContext";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import type { PropsWithClassName } from "@/lib/types/props";
+import ClearPropsContextView from "@/views/ClearPropsContextView";
+import * as Aria from "react-aria-components";
+import styles from "./TextField.module.scss";
 
 export interface TextFieldProps
   extends Omit<TextFieldBaseProps, "input" | "className">,
@@ -14,10 +13,7 @@ export interface TextFieldProps
     PropsWithClassName,
     FlowComponentProps {}
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const TextField = flowComponent("TextField", (props) => {
   const { children, placeholder, ref, form, ...rest } = props;
 
@@ -31,11 +27,11 @@ export const TextField = flowComponent("TextField", (props) => {
   );
 
   return (
-    <ClearPropsContext>
+    <ClearPropsContextView>
       <TextFieldBase {...rest} input={input}>
         {children}
       </TextFieldBase>
-    </ClearPropsContext>
+    </ClearPropsContextView>
   );
 });
 

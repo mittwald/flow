@@ -1,22 +1,18 @@
-import type { PropsWithChildren } from "react";
-import React from "react";
-import styles from "./Align.module.scss";
-import clsx from "clsx";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import type { PropsContext } from "@/lib/propsContext";
 import PropsContextProvider from "@/lib/propsContext/PropsContextProvider";
 import type { PropsWithClassName } from "@/lib/types/props";
-import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
-import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import clsx from "clsx";
+import type { PropsWithChildren } from "react";
+import styles from "./Align.module.scss";
 
 export interface AlignProps
   extends PropsWithChildren,
     PropsWithClassName,
     FlowComponentProps {}
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const Align = flowComponent("Align", (props) => {
   const { children, className } = props;
 

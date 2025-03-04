@@ -1,15 +1,16 @@
-import type { ComponentProps, ComponentType, PropsWithChildren } from "react";
-import React, { useContext } from "react";
-import * as Aria from "react-aria-components";
-import type { PropsContext } from "@/lib/propsContext";
-import { ClearPropsContext, PropsContextProvider } from "@/lib/propsContext";
-import styles from "./Link.module.scss";
-import clsx from "clsx";
+import { LinkIcon } from "@/components/Link/components/LinkIcon";
+import { linkContext } from "@/components/Link/context";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import type { PropsContext } from "@/lib/propsContext";
+import { PropsContextProvider } from "@/lib/propsContext";
 import type { PropsWithClassName } from "@/lib/types/props";
-import { linkContext } from "@/components/Link/context";
-import { LinkIcon } from "@/components/Link/components/LinkIcon";
+import ClearPropsContextView from "@/views/ClearPropsContextView";
+import clsx from "clsx";
+import type { ComponentProps, ComponentType, PropsWithChildren } from "react";
+import { useContext } from "react";
+import * as Aria from "react-aria-components";
+import styles from "./Link.module.scss";
 
 export interface LinkProps
   extends PropsWithChildren<
@@ -29,10 +30,7 @@ export interface LinkProps
   unstyled?: boolean;
 }
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const Link = flowComponent<"Link", HTMLAnchorElement>(
   "Link",
   (props) => {
@@ -74,7 +72,7 @@ export const Link = flowComponent<"Link", HTMLAnchorElement>(
       : {};
 
     return (
-      <ClearPropsContext>
+      <ClearPropsContextView>
         <Link
           {...unsupportedTypingsLinkProps}
           {...rest}
@@ -86,7 +84,7 @@ export const Link = flowComponent<"Link", HTMLAnchorElement>(
             <LinkIcon {...props} />
           </PropsContextProvider>
         </Link>
-      </ClearPropsContext>
+      </ClearPropsContextView>
     );
   },
 );

@@ -8,9 +8,6 @@ export { type RemoteTableFooterRowElement } from "@mittwald/flow-remote-elements
 export const TableFooterRow = createFlowRemoteComponent(
   "flr-table-footer-row",
   "TableFooterRow",
-  {
-    clearPropsContext: false,
-  },
   RemoteTableFooterRowElement,
   {
     slotProps: {
