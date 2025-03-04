@@ -1,6 +1,6 @@
 import {
   IconCheck,
-  IconClose,
+  IconX,
   Table,
   TableBody,
   TableCell,
@@ -23,10 +23,10 @@ import {
     <TableRow>
       <TableCell>Projekt</TableCell>
       <TableCell horizontalAlign="center">
-        <IconCheck />
+        <IconCheck aria-label="Zugriff" />
       </TableCell>
       <TableCell horizontalAlign="center">
-        <IconClose />
+        <IconX aria-label="Kein Zugriff" />
       </TableCell>
     </TableRow>
   </TableBody>

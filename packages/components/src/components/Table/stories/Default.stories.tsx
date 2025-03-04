@@ -11,7 +11,7 @@ import {
 import { InlineCode } from "@/components/InlineCode";
 import { dummyText } from "@/lib/dev/dummyText";
 import { TableFooterRow } from "@/components/Table/components/TableFooterRow";
-import { IconCheck, IconClose } from "@/components/Icon/components/icons";
+import { IconCheck, IconX } from "@/components/Icon/components/icons";
 
 const meta: Meta<typeof Table> = {
   title: "Structure/Table",
@@ -127,10 +127,10 @@ export const HorizontallyCenteredColumns: Story = {
         <TableRow>
           <TableCell>Projekt</TableCell>
           <TableCell horizontalAlign="center">
-            <IconCheck />
+            <IconCheck aria-label="access" />
           </TableCell>
           <TableCell horizontalAlign="center">
-            <IconClose />
+            <IconX aria-label="no access" />
           </TableCell>
         </TableRow>
       </TableBody>

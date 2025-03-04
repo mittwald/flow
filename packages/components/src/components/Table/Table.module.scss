@@ -35,6 +35,14 @@
     &.horizontal-align-end {
       text-align: end;
     }
+
+    :global(.tabler-icon-x) {
+      color: var(--table--icon-x-color);
+    }
+
+    :global(.tabler-icon-check) {
+      color: var(--table--icon-check-color);
+    }
   }
 
   .header {

@@ -23,3 +23,7 @@ table:
     value: "{neutral.color.100}"
   background-color-accent:
     value: "{neutral.color.300}"
+  icon-x-color:
+    value: "{alert-icon.danger-color}"
+  icon-check-color:
+    value: "{alert-icon.success-color}"

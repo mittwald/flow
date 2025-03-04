@@ -40,6 +40,7 @@ import {
   IconSorting,
   IconUndo,
   IconView,
+  IconX,
   Label,
   LabeledValue,
 } from "@mittwald/flow-react-components";
@@ -193,6 +194,10 @@ import {
   <LabeledValue>
     <Label>Check</Label>
     <IconCheck />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>X</Label>
+    <IconX />
   </LabeledValue>
   <LabeledValue>
     <Label>Download</Label>

@@ -102,6 +102,7 @@ User: User
 View: List
 Vhost: WorldShare
 Warning: AlertCircle
+X: X
 Mittwald:
   svg: |
     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 1746.7 1232" focusable="false" role="img" aria-hidden="true">
