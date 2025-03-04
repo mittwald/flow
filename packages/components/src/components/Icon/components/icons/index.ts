@@ -103,5 +103,4 @@ export { IconUser } from "./IconUser";
 export { IconView } from "./IconView";
 export { IconVhost } from "./IconVhost";
 export { IconWarning } from "./IconWarning";
-export { IconX } from "./IconX";
 export { IconMittwald } from "./IconMittwald";
