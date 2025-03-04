@@ -48,16 +48,11 @@
     }
   }
 
+  &:has(.text):has(.contextualHelpTriggerButton),
   &:has(.text):has(.copyButton) {
     display: flex;
-    align-self: center;
-    column-gap: var(--align--text-copyButton--spacing);
-  }
-
-  &:has(.text):has(.contextualHelpTriggerButton) {
-    display: flex;
     align-items: center;
-    column-gap: var(--align--text-contextualHelp--spacing);
+    column-gap: var(--align--text-button--spacing);
   }
 
   &:has(> .text):has(> .icon) {
