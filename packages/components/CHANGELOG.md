@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.69](https://github.com/mittwald/flow/compare/0.2.0-alpha.68...0.2.0-alpha.69) (2025-03-04)
+
+### Features
+
+* **Form:** add missing type export of FormOnSubmitHandler ([#1233](https://github.com/mittwald/flow/issues/1233)) ([f13035b](https://github.com/mittwald/flow/commit/f13035b61601477521003afa01eeded96cfe5c03))
+
 # [0.2.0-alpha.68](https://github.com/mittwald/flow/compare/0.2.0-alpha.67...0.2.0-alpha.68) (2025-03-04)
 
 ### Features
