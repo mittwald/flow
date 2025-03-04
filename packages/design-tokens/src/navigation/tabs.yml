@@ -19,7 +19,3 @@ tabs:
       value: "{font-weight.bold}"
   spacing:
     value: "{size-rem.s}"
-
-tab-panel:
-  padding:
-    value: "{size-px.xl}"
