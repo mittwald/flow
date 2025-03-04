@@ -11,6 +11,7 @@ import { Avatar } from "@/components/Avatar";
 import Image from "@/components/Image";
 import { Heading } from "@/components/Heading";
 import { Content } from "@/components/Content";
+import { ActionGroup } from "@/components/ActionGroup";
 
 const meta: Meta<typeof Flex> = {
   title: "Structure/Flex",
@@ -21,8 +22,10 @@ const meta: Meta<typeof Flex> = {
       <Section>
         <Text>{dummyText.medium}</Text>
       </Section>
-      <Flex justify="end" align="end" grow>
-        <Button color="accent">Install</Button>
+      <Flex align="end" grow>
+        <ActionGroup>
+          <Button color="accent">Install</Button>
+        </ActionGroup>
       </Flex>
     </LayoutCard>
   ),

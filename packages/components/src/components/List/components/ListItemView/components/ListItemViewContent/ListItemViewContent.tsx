@@ -49,7 +49,6 @@ export const ListItemViewContent = (props: ListItemViewContentProps) => {
     },
     ActionGroup: {
       className: styles.action,
-      ignoreBreakpoint: true,
     },
     Content: {
       className: dynamic((p) => getStyleForContentSlot(p.slot)),
