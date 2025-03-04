@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.68](https://github.com/mittwald/flow/compare/0.2.0-alpha.67...0.2.0-alpha.68) (2025-03-04)
+
+### Features
+
+* **General:** add missing export of PropsContextProvider ([#1232](https://github.com/mittwald/flow/issues/1232)) ([e0fd458](https://github.com/mittwald/flow/commit/e0fd45880fcaf6815d6c2728120b0472d0872134))
+
 # [0.2.0-alpha.67](https://github.com/mittwald/flow/compare/0.2.0-alpha.66...0.2.0-alpha.67) (2025-03-04)
 
 ### Features
