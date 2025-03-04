@@ -8,9 +8,6 @@ export { type RemoteTableCellElement } from "@mittwald/flow-remote-elements";
 export const TableCell = createFlowRemoteComponent(
   "flr-table-cell",
   "TableCell",
-  {
-    clearPropsContext: false,
-  },
   RemoteTableCellElement,
   {
     slotProps: {

@@ -1,27 +1,20 @@
-import type { ComponentProps, PropsWithChildren } from "react";
-import React from "react";
-import type { PropsContext } from "@/lib/propsContext";
-import {
-  ClearPropsContext,
-  dynamic,
-  PropsContextProvider,
-} from "@/lib/propsContext";
-import styles from "./Alert.module.scss";
-import clsx from "clsx";
 import { AlertIcon } from "@/components/AlertIcon";
-import type { PropsWithStatus } from "@/lib/types/props";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import type { PropsContext } from "@/lib/propsContext";
+import { dynamic, PropsContextProvider } from "@/lib/propsContext";
+import type { PropsWithStatus } from "@/lib/types/props";
+import ClearPropsContextView from "@/views/ClearPropsContextView";
+import clsx from "clsx";
+import type { ComponentProps, PropsWithChildren } from "react";
+import styles from "./Alert.module.scss";
 
 export interface AlertProps
   extends PropsWithChildren<ComponentProps<"aside">>,
     PropsWithStatus,
     FlowComponentProps {}
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const Alert = flowComponent<"Alert", HTMLElement>("Alert", (props) => {
   const { children, className, status = "info", ref, ...rest } = props;
 
@@ -48,13 +41,13 @@ export const Alert = flowComponent<"Alert", HTMLElement>("Alert", (props) => {
   };
 
   return (
-    <ClearPropsContext>
+    <ClearPropsContextView>
       <aside {...rest} className={rootClassName} ref={ref}>
         <PropsContextProvider props={propsContext}>
           {children}
         </PropsContextProvider>
       </aside>
-    </ClearPropsContext>
+    </ClearPropsContextView>
   );
 });
 

@@ -1,13 +1,12 @@
-import type { PropsWithChildren } from "react";
-import React from "react";
-import styles from "./AlertBadge.module.scss";
-import clsx from "clsx";
 import { AlertIcon } from "@/components/AlertIcon";
 import { Text } from "@/components/Text";
-import type { PropsWithClassName, PropsWithStatus } from "@/lib/types/props";
-import { ClearPropsContext } from "@/lib/propsContext";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import type { PropsWithClassName, PropsWithStatus } from "@/lib/types/props";
+import ClearPropsContextView from "@/views/ClearPropsContextView";
+import clsx from "clsx";
+import type { PropsWithChildren } from "react";
+import styles from "./AlertBadge.module.scss";
 
 export interface AlertBadgeProps
   extends PropsWithChildren,
@@ -15,10 +14,7 @@ export interface AlertBadgeProps
     FlowComponentProps,
     PropsWithClassName {}
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const AlertBadge = flowComponent<"AlertBadge", HTMLDivElement>(
   "AlertBadge",
   (props) => {
@@ -27,12 +23,12 @@ export const AlertBadge = flowComponent<"AlertBadge", HTMLDivElement>(
     const rootClassName = clsx(styles.alertBadge, styles[status], className);
 
     return (
-      <ClearPropsContext>
+      <ClearPropsContextView>
         <div className={rootClassName} {...rest} ref={ref}>
           <AlertIcon size="s" className={styles.alertIcon} status={status} />
           <Text className={styles.text}>{children}</Text>
         </div>
-      </ClearPropsContext>
+      </ClearPropsContextView>
     );
   },
 );

@@ -8,9 +8,6 @@ export { type RemoteFieldErrorElement } from "@mittwald/flow-remote-elements";
 export const FieldError = createFlowRemoteComponent(
   "flr-field-error",
   "FieldError",
-  {
-    clearPropsContext: true,
-  },
   RemoteFieldErrorElement,
   {
     slotProps: {

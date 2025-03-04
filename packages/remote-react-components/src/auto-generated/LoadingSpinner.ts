@@ -8,9 +8,6 @@ export { type RemoteLoadingSpinnerElement } from "@mittwald/flow-remote-elements
 export const LoadingSpinner = createFlowRemoteComponent(
   "flr-loading-spinner",
   "LoadingSpinner",
-  {
-    clearPropsContext: false,
-  },
   RemoteLoadingSpinnerElement,
   {
     slotProps: {

@@ -8,9 +8,6 @@ export { type RemoteTableHeaderElement } from "@mittwald/flow-remote-elements";
 export const TableHeader = createFlowRemoteComponent(
   "flr-table-header",
   "TableHeader",
-  {
-    clearPropsContext: false,
-  },
   RemoteTableHeaderElement,
   {
     slotProps: {
