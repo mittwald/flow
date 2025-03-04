@@ -1,5 +1,4 @@
 import type { ComponentType, FC } from "react";
-import React from "react";
 import {
   IconDanger,
   IconInfo,
@@ -11,8 +10,6 @@ import { useLocalizedStringFormatter } from "react-aria";
 import type { PropsWithStatus, Status } from "@/lib/types/props";
 import type { IconProps } from "@/components/Icon";
 import { ClearPropsContext } from "@/lib/propsContext";
-import clsx from "clsx";
-import styles from "./AlertIcon.module.scss";
 
 export interface AlertIconProps extends PropsWithStatus, IconProps {}
 
@@ -28,16 +25,14 @@ const icons: Record<Status, ComponentType> = {
  * @flr-clear-props-context
  */
 export const AlertIcon: FC<AlertIconProps> = (props) => {
-  const { status = "info", className, ...rest } = props;
-
-  const rootClassName = clsx(styles.alertIcon, styles[status], className);
+  const { status = "info", ...rest } = props;
 
   const stringFormatter = useLocalizedStringFormatter(locales);
 
   const Icon = icons[status];
 
   const iconProps: IconProps = {
-    className: rootClassName,
+    status,
     "aria-label": stringFormatter.format(`alertIcon.${status}`),
     ...rest,
   };
