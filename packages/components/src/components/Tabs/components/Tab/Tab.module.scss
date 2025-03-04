@@ -5,8 +5,14 @@
   height: 0;
 
   &[id] {
-    padding: var(--tab-panel--padding);
+    padding: var(--layout-card--padding);
     opacity: 1;
     height: auto;
+  }
+}
+
+@media (max-width: 550px) {
+  .tabPanel[id] {
+    padding: var(--layout-card--padding-mobile);
   }
 }

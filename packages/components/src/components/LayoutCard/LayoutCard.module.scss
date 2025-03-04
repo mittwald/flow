@@ -9,3 +9,13 @@
     margin: calc(var(--layout-card--padding) * -1);
   }
 }
+
+@media (max-width: 550px) {
+  .layoutCard {
+    padding: var(--layout-card--padding-mobile);
+
+    > .tabs {
+      margin: calc(var(--layout-card--padding-mobile) * -1);
+    }
+  }
+}
