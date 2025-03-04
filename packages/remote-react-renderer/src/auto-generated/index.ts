@@ -35,6 +35,7 @@ import { FieldError as FieldError } from "@mittwald/flow-react-components";
 import { FileCard as FileCard } from "@mittwald/flow-react-components";
 import { FileCardList as FileCardList } from "@mittwald/flow-react-components";
 import { FileField as FileField } from "@mittwald/flow-react-components";
+import { Flex as Flex } from "@mittwald/flow-react-components";
 import { Fragment as Fragment } from "@mittwald/flow-react-components";
 import { Header as Header } from "@mittwald/flow-react-components";
 import { HeaderNavigation as HeaderNavigation } from "@mittwald/flow-react-components";
@@ -140,6 +141,7 @@ export const flowComponents = {
   "flr-file-card": createFlowRemoteComponentRenderer(FileCard),
   "flr-file-card-list": createFlowRemoteComponentRenderer(FileCardList),
   "flr-file-field": createFlowRemoteComponentRenderer(FileField),
+  "flr-flex": createFlowRemoteComponentRenderer(Flex),
   "flr-fragment": createFlowRemoteComponentRenderer(Fragment),
   "flr-header": createFlowRemoteComponentRenderer(Header),
   "flr-header-navigation": createFlowRemoteComponentRenderer(HeaderNavigation),

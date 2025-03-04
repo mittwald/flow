@@ -14,6 +14,7 @@ export interface FlexProps extends PropsWithChildren, PropsWithClassName {
   wrap?: CSSProperties["flexWrap"];
 }
 
+/** @flr-generate all */
 export const Flex: FC<FlexProps> = (props) => {
   const {
     children,
