@@ -11,10 +11,6 @@ button:
     value: "{size-rem.s}"
   pending-icon-color:
     value: "{neutral.color.1000}"
-  succeeded-icon-color:
-    value: "{success.color.800}"
-  failed-icon-color:
-    value: "{danger.color.800}"
   border-width:
     value: "{border-width.100}"
   border-style:

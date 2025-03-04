@@ -127,10 +127,10 @@ export const HorizontallyCenteredColumns: Story = {
         <TableRow>
           <TableCell>Projekt</TableCell>
           <TableCell horizontalAlign="center">
-            <IconCheck />
+            <IconCheck status="success" />
           </TableCell>
           <TableCell horizontalAlign="center">
-            <IconClose />
+            <IconClose status="danger" />
           </TableCell>
         </TableRow>
       </TableBody>
