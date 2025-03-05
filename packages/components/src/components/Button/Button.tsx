@@ -142,7 +142,11 @@ export const Button = flowComponent<"Button", HTMLButtonElement>(
           : undefined;
 
     const stateIcon = StateIconComponent && (
-      <StateIconComponent size={size} className={styles.stateIcon} />
+      <StateIconComponent
+        size={size}
+        className={styles.stateIcon}
+        status={isFailed ? "danger" : isSucceeded ? "success" : undefined}
+      />
     );
 
     const isStringContent = typeof children === "string";
