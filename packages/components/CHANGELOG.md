@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.73](https://github.com/mittwald/flow/compare/0.2.0-alpha.72...0.2.0-alpha.73) (2025-03-05)
+
+### Bug Fixes
+
+* **Modal:** fix modal styling with form inside content ([#1243](https://github.com/mittwald/flow/issues/1243)) ([1758f2e](https://github.com/mittwald/flow/commit/1758f2ee3741808d6016ae68d0360a15fe342bb0))
+
 # [0.2.0-alpha.72](https://github.com/mittwald/flow/compare/0.2.0-alpha.71...0.2.0-alpha.72) (2025-03-05)
 
 ### Features
