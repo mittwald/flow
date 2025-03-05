@@ -243,7 +243,6 @@ export class RemoteIconElement extends FlowRemoteElement<RemoteIconElementProps>
       speed: {},
       spreadMethod: {},
       startOffset: {},
-      status: {},
       stdDeviation: {},
       stemh: {},
       stemv: {},
