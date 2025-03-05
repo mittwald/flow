@@ -15,6 +15,7 @@ import { Field, Form } from "@/integrations/react-hook-form";
 import { useForm } from "react-hook-form";
 import { action } from "@storybook/addon-actions";
 import { Section } from "@/components/Section";
+import Align from "@/components/Align";
 
 const meta: Meta<typeof Modal> = {
   title: "Overlays/Modal",
@@ -196,7 +197,7 @@ export const OffCanvasWithForm: Story = {
 
         <Modal offCanvas {...props} controller={modalController}>
           <Form form={form} onSubmit={() => modalController.close()}>
-            <Heading>Add Customer</Heading>
+            <Heading>Add customer</Heading>
             <Content>
               <Field name="name" rules={{ required: "Please enter a name" }}>
                 <TextField>
@@ -215,6 +216,45 @@ export const OffCanvasWithForm: Story = {
               </Action>
             </ActionGroup>
           </Form>
+        </Modal>
+      </>
+    );
+  },
+};
+
+export const WithFormInside: Story = {
+  render: (props) => {
+    const form = useForm<{ name: string }>();
+    const modalController = useOverlayController("Modal");
+
+    return (
+      <>
+        <Button color="accent" onPress={modalController.open}>
+          Add nameservers
+        </Button>
+
+        <Modal {...props} controller={modalController}>
+          <Heading>Add nameservers</Heading>
+          <Content>
+            <Form form={form} onSubmit={() => modalController.close()}>
+              <Align>
+                <Field name="name" rules={{ required: "Please enter a name" }}>
+                  <TextField>
+                    <Label>Nameservers</Label>
+                  </TextField>
+                </Field>
+                <Button type="submit">Add</Button>
+              </Align>
+            </Form>
+          </Content>
+          <ActionGroup>
+            <Button color="accent">Submit</Button>
+            <Action closeOverlay="Modal">
+              <Button variant="soft" color="secondary">
+                Abort
+              </Button>
+            </Action>
+          </ActionGroup>
         </Modal>
       </>
     );
