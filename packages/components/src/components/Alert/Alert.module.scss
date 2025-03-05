@@ -9,6 +9,14 @@
   row-gap: var(--alert--heading-to-content-spacing);
   width: 100%;
 
+  .icon {
+    height: var(--heading-line-height);
+    width: var(--heading-line-height);
+    vertical-align: bottom;
+    display: inline-block;
+    margin-inline-end: var(--heading--icon-to-text-spacing);
+  }
+
   @extend .info;
 
   /* Elements */
