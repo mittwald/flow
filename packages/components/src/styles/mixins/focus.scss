@@ -9,6 +9,7 @@
   &[data-focused],
   &:focus {
     outline-style: none;
+    box-shadow: none;
   }
 
   &[data-focus-visible],
@@ -19,5 +20,6 @@
 
   &[data-focused]:not([data-focus-visible]):focus-visible {
     outline-style: none;
+    box-shadow: none;
   }
 }
