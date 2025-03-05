@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.74](https://github.com/mittwald/flow/compare/0.2.0-alpha.73...0.2.0-alpha.74) (2025-03-05)
+
+### Bug Fixes
+
+* **Alert:** fix icon styling ([#1244](https://github.com/mittwald/flow/issues/1244)) ([3ab6833](https://github.com/mittwald/flow/commit/3ab6833259c14229977e2ba94f9e05d87bc8e7ab))
+
 # [0.2.0-alpha.73](https://github.com/mittwald/flow/compare/0.2.0-alpha.72...0.2.0-alpha.73) (2025-03-05)
 
 ### Bug Fixes
