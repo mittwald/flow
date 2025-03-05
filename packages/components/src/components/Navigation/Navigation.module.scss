@@ -1,6 +1,9 @@
 @use "@/styles/mixins/menuItem";
 
 .navigation {
+  display: flex;
+  flex-direction: column;
+
   ul {
     display: flex;
     flex-direction: column;

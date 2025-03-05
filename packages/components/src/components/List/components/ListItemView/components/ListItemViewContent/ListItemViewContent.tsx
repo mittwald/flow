@@ -49,7 +49,6 @@ export const ListItemViewContent = (props: ListItemViewContentProps) => {
     },
     ActionGroup: {
       className: styles.action,
-      ignoreBreakpoint: true,
     },
     Content: {
       className: dynamic((p) => getStyleForContentSlot(p.slot)),
@@ -75,7 +74,10 @@ export const ListItemViewContent = (props: ListItemViewContentProps) => {
     },
   };
 
-  const className = clsx(styles.view, viewMode === "tiles" && styles.tile);
+  const className = clsx(
+    styles.view,
+    viewMode === "tiles" ? styles.tileView : styles.listView,
+  );
 
   return (
     <PropsContextProvider props={propsContext} mergeInParentContext>

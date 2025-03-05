@@ -4,6 +4,8 @@
   border-radius: var(--layout-card--corner-radius);
   padding: var(--layout-card--padding);
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 
   > .tabs {
     margin: calc(var(--layout-card--padding) * -1);
