@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.72](https://github.com/mittwald/flow/compare/0.2.0-alpha.71...0.2.0-alpha.72) (2025-03-05)
+
+### Features
+
+* **Icon:** support status in icon ([#1241](https://github.com/mittwald/flow/issues/1241)) ([6f7028d](https://github.com/mittwald/flow/commit/6f7028d88f2cc29b7b6447bc2bdd38c29868a581))
+
 # [0.2.0-alpha.71](https://github.com/mittwald/flow/compare/0.2.0-alpha.70...0.2.0-alpha.71) (2025-03-05)
 
 ### Bug Fixes
