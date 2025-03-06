@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.76](https://github.com/mittwald/flow/compare/0.2.0-alpha.75...0.2.0-alpha.76) (2025-03-06)
+
+### Bug Fixes
+
+* fix props context not properly cleared in remote components ([#1240](https://github.com/mittwald/flow/issues/1240)) ([4152991](https://github.com/mittwald/flow/commit/4152991202061163e4cbf1e66b85bb8309abfc4f))
+
 # [0.2.0-alpha.75](https://github.com/mittwald/flow/compare/0.2.0-alpha.74...0.2.0-alpha.75) (2025-03-06)
 
 ### Bug Fixes
