@@ -8,9 +8,6 @@ export { type RemoteHeaderNavigationElement } from "@mittwald/flow-remote-elemen
 export const HeaderNavigation = createFlowRemoteComponent(
   "flr-header-navigation",
   "HeaderNavigation",
-  {
-    clearPropsContext: true,
-  },
   RemoteHeaderNavigationElement,
   {
     slotProps: {

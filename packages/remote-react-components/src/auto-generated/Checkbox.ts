@@ -8,9 +8,6 @@ export { type RemoteCheckboxElement } from "@mittwald/flow-remote-elements";
 export const Checkbox = createFlowRemoteComponent(
   "flr-checkbox",
   "Checkbox",
-  {
-    clearPropsContext: true,
-  },
   RemoteCheckboxElement,
   {
     slotProps: {

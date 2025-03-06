@@ -1,17 +1,17 @@
-import type { PropsWithChildren } from "react";
-import React from "react";
-import styles from "./Button.module.scss";
-import * as Aria from "react-aria-components";
-import clsx from "clsx";
-import type { PropsContext } from "@/lib/propsContext";
-import { ClearPropsContext, PropsContextProvider } from "@/lib/propsContext";
+import { useAriaAnnounceActionState } from "@/components/Action/lib/ariaLive";
 import { IconFailed, IconSucceeded } from "@/components/Icon/components/icons";
-import { Wrap } from "@/components/Wrap";
+import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 import { Text } from "@/components/Text";
+import { Wrap } from "@/components/Wrap";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
-import { useAriaAnnounceActionState } from "@/components/Action/lib/ariaLive";
+import type { PropsContext } from "@/lib/propsContext";
+import { PropsContextProvider } from "@/lib/propsContext";
+import ClearPropsContextView from "@/views/ClearPropsContextView";
+import clsx from "clsx";
+import type { PropsWithChildren } from "react";
+import * as Aria from "react-aria-components";
+import styles from "./Button.module.scss";
 
 export interface ButtonProps
   extends PropsWithChildren<Aria.ButtonProps>,
@@ -58,10 +58,7 @@ const disablePendingProps = (props: ButtonProps) => {
   return props;
 };
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const Button = flowComponent<"Button", HTMLButtonElement>(
   "Button",
   (props) => {
@@ -152,7 +149,7 @@ export const Button = flowComponent<"Button", HTMLButtonElement>(
     const isStringContent = typeof children === "string";
 
     return (
-      <ClearPropsContext>
+      <ClearPropsContextView>
         <Aria.Button
           className={rootClassName}
           ref={ref}
@@ -170,7 +167,7 @@ export const Button = flowComponent<"Button", HTMLButtonElement>(
           </PropsContextProvider>
           {stateIcon}
         </Aria.Button>
-      </ClearPropsContext>
+      </ClearPropsContextView>
     );
   },
 );

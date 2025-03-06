@@ -1,21 +1,17 @@
-import type { PropsWithChildren } from "react";
-import React from "react";
-import styles from "./Radio.module.scss";
-import * as Aria from "react-aria-components";
-import clsx from "clsx";
 import { IconRadioOff, IconRadioOn } from "@/components/Icon/components/icons";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import { ClearPropsContext } from "@/lib/propsContext";
+import ClearPropsContextView from "@/views/ClearPropsContextView";
+import clsx from "clsx";
+import type { PropsWithChildren } from "react";
+import * as Aria from "react-aria-components";
+import styles from "./Radio.module.scss";
 
 export interface RadioProps
   extends PropsWithChildren<Omit<Aria.RadioProps, "children">>,
     FlowComponentProps {}
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const Radio = flowComponent<"Radio", HTMLLabelElement>(
   "Radio",
   (props) => {
@@ -24,7 +20,7 @@ export const Radio = flowComponent<"Radio", HTMLLabelElement>(
     const rootClassName = clsx(styles.radio, className);
 
     return (
-      <ClearPropsContext>
+      <ClearPropsContextView>
         <Aria.Radio {...rest} className={rootClassName} ref={ref}>
           {({ isSelected }) => (
             <>
@@ -37,7 +33,7 @@ export const Radio = flowComponent<"Radio", HTMLLabelElement>(
             </>
           )}
         </Aria.Radio>
-      </ClearPropsContext>
+      </ClearPropsContextView>
     );
   },
 );

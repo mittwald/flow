@@ -8,9 +8,6 @@ export { type RemoteListEmptyViewElement } from "@mittwald/flow-remote-elements"
 export const ListEmptyView = createFlowRemoteComponent(
   "flr-list-empty-view",
   "ListEmptyView",
-  {
-    clearPropsContext: false,
-  },
   RemoteListEmptyViewElement,
   {
     slotProps: {

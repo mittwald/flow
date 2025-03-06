@@ -1,13 +1,13 @@
-import type { PropsWithChildren } from "react";
-import React from "react";
-import styles from "./Avatar.module.scss";
-import clsx from "clsx";
-import type { PropsContext } from "@/lib/propsContext";
-import { ClearPropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { getColorFromChildren } from "@/components/Avatar/lib/getColorFromChildren";
-import type { PropsWithClassName } from "@/lib/types/props";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import type { PropsContext } from "@/lib/propsContext";
+import { PropsContextProvider } from "@/lib/propsContext";
+import type { PropsWithClassName } from "@/lib/types/props";
+import ClearPropsContextView from "@/views/ClearPropsContextView";
+import clsx from "clsx";
+import type { PropsWithChildren } from "react";
+import styles from "./Avatar.module.scss";
 
 export const avatarColors = [
   "blue",
@@ -28,10 +28,7 @@ export interface AvatarProps
   color?: AvatarColors;
 }
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const Avatar = flowComponent<"Avatar", HTMLDivElement>(
   "Avatar",
   (props) => {
@@ -55,13 +52,13 @@ export const Avatar = flowComponent<"Avatar", HTMLDivElement>(
     };
 
     return (
-      <ClearPropsContext>
+      <ClearPropsContextView>
         <div className={rootClassName} ref={ref}>
           <PropsContextProvider props={propsContext}>
             {children}
           </PropsContextProvider>
         </div>
-      </ClearPropsContext>
+      </ClearPropsContextView>
     );
   },
 );
