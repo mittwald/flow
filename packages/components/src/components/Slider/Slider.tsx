@@ -1,15 +1,16 @@
-import { Button } from "@/components/Button";
-import { IconMinus, IconPlus } from "@/components/Icon/components/icons";
+import type { PropsWithChildren } from "react";
+import React from "react";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import * as Aria from "react-aria-components";
+import clsx from "clsx";
+import styles from "./Slider.module.scss";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
-import clsx from "clsx";
-import type { PropsWithChildren } from "react";
-import { useLocalizedStringFormatter } from "react-aria";
-import * as Aria from "react-aria-components";
+import { Button } from "@/components/Button";
+import { IconMinus, IconPlus } from "@/components/Icon/components/icons";
 import locales from "./locales/*.locale.json";
-import styles from "./Slider.module.scss";
+import { useLocalizedStringFormatter } from "react-aria";
 
 export interface SliderProps
   extends FlowComponentProps,
@@ -18,7 +19,10 @@ export interface SliderProps
   showInitialMarker?: boolean;
 }
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const Slider = flowComponent("Slider", (props) => {
   const {
     className,

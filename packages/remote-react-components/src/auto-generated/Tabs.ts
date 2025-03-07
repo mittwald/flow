@@ -8,6 +8,9 @@ export { type RemoteTabsElement } from "@mittwald/flow-remote-elements";
 export const Tabs = createFlowRemoteComponent(
   "flr-tabs",
   "Tabs",
+  {
+    clearPropsContext: false,
+  },
   RemoteTabsElement,
   {
     slotProps: {

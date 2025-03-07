@@ -1,11 +1,12 @@
-import type { PropsContext } from "@/lib/propsContext";
-import { PropsContextProvider } from "@/lib/propsContext";
-import clsx from "clsx";
 import type { FC, PropsWithChildren } from "react";
+import React from "react";
 import * as Aria from "react-aria-components";
 import styles from "./Breadcrumb.module.scss";
+import clsx from "clsx";
 import type { BreadcrumbItemProps } from "./components/BreadcrumbItem";
 import { BreadcrumbItem } from "./components/BreadcrumbItem";
+import type { PropsContext } from "@/lib/propsContext";
+import { PropsContextProvider } from "@/lib/propsContext";
 
 export interface BreadcrumbProps
   extends Omit<Aria.BreadcrumbsProps<BreadcrumbItemProps>, "children">,
@@ -14,7 +15,10 @@ export interface BreadcrumbProps
   color?: "primary" | "dark" | "light";
 }
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const Breadcrumb: FC<BreadcrumbProps> = (props) => {
   const { children, className, color = "primary", ...rest } = props;
 

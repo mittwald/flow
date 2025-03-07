@@ -1,16 +1,19 @@
+import React from "react";
+import styles from "./RadioButton.module.scss";
+import clsx from "clsx";
+import type { PropsContext } from "@/lib/propsContext";
+import { ClearPropsContext, PropsContextProvider } from "@/lib/propsContext";
 import type { RadioProps } from "@/components/RadioGroup";
 import { Radio } from "@/components/RadioGroup";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import type { PropsContext } from "@/lib/propsContext";
-import { PropsContextProvider } from "@/lib/propsContext";
-import ClearPropsContextView from "@/views/ClearPropsContextView";
-import clsx from "clsx";
-import styles from "./RadioButton.module.scss";
 
 export interface RadioButtonProps extends RadioProps, FlowComponentProps {}
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const RadioButton = flowComponent<"RadioButton", HTMLLabelElement>(
   "RadioButton",
   (props) => {
@@ -28,13 +31,13 @@ export const RadioButton = flowComponent<"RadioButton", HTMLLabelElement>(
     };
 
     return (
-      <ClearPropsContextView>
+      <ClearPropsContext>
         <Radio {...rest} className={rootClassName} ref={ref}>
           <PropsContextProvider props={propsContext}>
             {children}
           </PropsContextProvider>
         </Radio>
-      </ClearPropsContextView>
+      </ClearPropsContext>
     );
   },
 );

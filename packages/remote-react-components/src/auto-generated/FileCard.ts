@@ -8,6 +8,9 @@ export { type RemoteFileCardElement } from "@mittwald/flow-remote-elements";
 export const FileCard = createFlowRemoteComponent(
   "flr-file-card",
   "FileCard",
+  {
+    clearPropsContext: false,
+  },
   RemoteFileCardElement,
   {
     slotProps: {

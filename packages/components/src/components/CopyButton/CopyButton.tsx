@@ -1,16 +1,17 @@
-import { Action } from "@/components/Action";
+import type { ReactNode } from "react";
+import React from "react";
+import copy from "copy-to-clipboard";
 import type { ButtonProps } from "@/components/Button";
 import { Button } from "@/components/Button";
 import { IconCopy } from "@/components/Icon/components/icons";
+import locales from "./locales/*.locale.json";
+import { useLocalizedStringFormatter } from "react-aria";
 import { Tooltip, TooltipTrigger } from "@/components/Tooltip";
+import { onlyText } from "react-children-utilities";
+import { ClearPropsContext } from "@/lib/propsContext";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import ClearPropsContextView from "@/views/ClearPropsContextView";
-import copy from "copy-to-clipboard";
-import type { ReactNode } from "react";
-import { useLocalizedStringFormatter } from "react-aria";
-import { onlyText } from "react-children-utilities";
-import locales from "./locales/*.locale.json";
+import { Action } from "@/components/Action";
 
 export interface CopyButtonProps
   extends Omit<ButtonProps, "onPress" | "aria-label" | "render">,
@@ -19,7 +20,10 @@ export interface CopyButtonProps
   text: ReactNode;
 }
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const CopyButton = flowComponent<"CopyButton", HTMLButtonElement>(
   "CopyButton",
   (props) => {
@@ -40,7 +44,7 @@ export const CopyButton = flowComponent<"CopyButton", HTMLButtonElement>(
     };
 
     return (
-      <ClearPropsContextView>
+      <ClearPropsContext>
         <TooltipTrigger>
           <Action action={copyValue} showFeedback>
             <Button
@@ -55,7 +59,7 @@ export const CopyButton = flowComponent<"CopyButton", HTMLButtonElement>(
           </Action>
           <Tooltip>{tooltip}</Tooltip>
         </TooltipTrigger>
-      </ClearPropsContextView>
+      </ClearPropsContext>
     );
   },
 );

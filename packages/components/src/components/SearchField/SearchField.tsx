@@ -1,24 +1,27 @@
-import { Button } from "@/components/Button";
-import { FieldError } from "@/components/FieldError";
-import { IconClose, IconSearch } from "@/components/Icon/components/icons";
-import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
-import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import type { PropsContext } from "@/lib/propsContext";
-import { PropsContextProvider } from "@/lib/propsContext";
-import ClearPropsContextView from "@/views/ClearPropsContextView";
-import clsx from "clsx";
 import type { PropsWithChildren } from "react";
-import { useLocalizedStringFormatter } from "react-aria";
+import React from "react";
 import * as Aria from "react-aria-components";
 import formFieldStyles from "../FormField/FormField.module.scss";
-import locales from "./locales/*.locale.json";
 import styles from "./SearchField.module.scss";
+import clsx from "clsx";
+import type { PropsContext } from "@/lib/propsContext";
+import { ClearPropsContext, PropsContextProvider } from "@/lib/propsContext";
+import { FieldError } from "@/components/FieldError";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import { Button } from "@/components/Button";
+import { IconClose, IconSearch } from "@/components/Icon/components/icons";
+import locales from "./locales/*.locale.json";
+import { useLocalizedStringFormatter } from "react-aria";
 
 export interface SearchFieldProps
   extends PropsWithChildren<Omit<Aria.SearchFieldProps, "children">>,
     FlowComponentProps {}
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const SearchField = flowComponent<"SearchField", HTMLInputElement>(
   "SearchField",
   (props) => {
@@ -48,7 +51,7 @@ export const SearchField = flowComponent<"SearchField", HTMLInputElement>(
     };
 
     return (
-      <ClearPropsContextView>
+      <ClearPropsContext>
         <Aria.SearchField
           aria-label={searchText}
           {...rest}
@@ -74,7 +77,7 @@ export const SearchField = flowComponent<"SearchField", HTMLInputElement>(
           </div>
           <FieldError className={formFieldStyles.fieldError} />
         </Aria.SearchField>
-      </ClearPropsContextView>
+      </ClearPropsContext>
     );
   },
 );

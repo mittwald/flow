@@ -1,15 +1,16 @@
-import { FieldError } from "@/components/FieldError";
-import { Popover } from "@/components/Popover";
-import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import { useOverlayController } from "@/lib/controller";
+import type { PropsWithChildren, ReactNode } from "react";
+import React from "react";
+import styles from "../FormField/FormField.module.scss";
+import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
-import clsx from "clsx";
-import type { PropsWithChildren, ReactNode } from "react";
 import * as Aria from "react-aria-components";
+import { Popover } from "@/components/Popover";
 import { RangeCalendar } from "../Calendar/RangeCalendar";
-import styles from "../FormField/FormField.module.scss";
 import { DateRangeInput } from "./components/DateRangeInput";
+import { FieldError } from "@/components/FieldError";
+import { useOverlayController } from "@/lib/controller";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface DateRangePickerProps<T extends Aria.DateValue = Aria.DateValue>
   extends PropsWithChildren<Omit<Aria.DateRangePickerProps<T>, "children">> {
@@ -17,7 +18,10 @@ export interface DateRangePickerProps<T extends Aria.DateValue = Aria.DateValue>
   errorMessage?: ReactNode;
 }
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const DateRangePicker = flowComponent("DateRangePicker", (props) => {
   const { children, className, errorMessage, onChange, ...rest } = props;
 

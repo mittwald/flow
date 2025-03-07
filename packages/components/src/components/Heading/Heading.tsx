@@ -1,13 +1,13 @@
 export * from "./view";
+import React from "react";
+import styles from "./Heading.module.scss";
+import clsx from "clsx";
+import type { PropsContext } from "@/lib/propsContext";
+import { ClearPropsContext, PropsContextProvider } from "@/lib/propsContext";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import type { PropsContext } from "@/lib/propsContext";
-import { PropsContextProvider } from "@/lib/propsContext";
-import ClearPropsContextView from "@/views/ClearPropsContextView";
-import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
-import clsx from "clsx";
 import * as Aria from "react-aria-components";
-import styles from "./Heading.module.scss";
+import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 
 export interface HeadingProps extends Aria.HeadingProps, FlowComponentProps {
   /** The font size of the heading. */
@@ -16,7 +16,10 @@ export interface HeadingProps extends Aria.HeadingProps, FlowComponentProps {
   color?: "primary" | "dark" | "light";
 }
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const Heading = flowComponent("Heading", (props) => {
   const {
     children,
@@ -55,7 +58,7 @@ export const Heading = flowComponent("Heading", (props) => {
   };
 
   return (
-    <ClearPropsContextView>
+    <ClearPropsContext>
       <TunnelProvider>
         <Aria.Heading
           level={level}
@@ -73,7 +76,7 @@ export const Heading = flowComponent("Heading", (props) => {
           </span>
         </Aria.Heading>
       </TunnelProvider>
-    </ClearPropsContextView>
+    </ClearPropsContext>
   );
 });
 

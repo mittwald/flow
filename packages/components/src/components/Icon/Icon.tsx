@@ -1,12 +1,12 @@
+import type { PropsWithChildren, SVGAttributes } from "react";
+import React from "react";
+import styles from "./Icon.module.scss";
+import clsx from "clsx";
+import { ClearPropsContext } from "@/lib/propsContext";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { cloneElement } from "@/lib/react/cloneElement";
 import type { PropsWithStatus } from "@/lib/types/props";
-import ClearPropsContextView from "@/views/ClearPropsContextView";
-import clsx from "clsx";
-import type { PropsWithChildren, SVGAttributes } from "react";
-import React from "react";
-import styles from "./Icon.module.scss";
 
 type SvgAttributeProps = SVGAttributes<SVGSVGElement>;
 
@@ -18,7 +18,10 @@ export interface IconProps
   size?: "s" | "m" | "l";
 }
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const Icon = flowComponent("Icon", (props) => {
   const {
     className,
@@ -55,9 +58,9 @@ export const Icon = flowComponent("Icon", (props) => {
   }
 
   return (
-    <ClearPropsContextView>
+    <ClearPropsContext>
       {cloneElement(iconElement, iconProps)}
-    </ClearPropsContextView>
+    </ClearPropsContext>
   );
 });
 

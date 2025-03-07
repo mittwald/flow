@@ -1,19 +1,20 @@
-import { Button } from "@/components/Button";
-import { IconClose } from "@/components/Icon/components/icons";
-import { Overlay } from "@/components/Overlay";
 import {
   flowComponent,
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
+import type { PropsWithChildren } from "react";
+import React from "react";
+import type { PropsWithClassName } from "@/lib/types/props";
+import { Overlay } from "@/components/Overlay";
+import clsx from "clsx";
 import type { OverlayController } from "@/lib/controller";
 import { useOverlayController } from "@/lib/controller";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
-import type { PropsWithClassName } from "@/lib/types/props";
-import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
-import clsx from "clsx";
-import type { PropsWithChildren } from "react";
+import { Button } from "@/components/Button";
+import { IconClose } from "@/components/Icon/components/icons";
 import styles from "./LightBox.module.scss";
+import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 
 export interface LightBoxProps
   extends PropsWithChildren,
@@ -28,7 +29,10 @@ export interface LightBoxProps
   fitScreen?: boolean;
 }
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const LightBox = flowComponent("LightBox", (props) => {
   const {
     controller: controllerFromProps,

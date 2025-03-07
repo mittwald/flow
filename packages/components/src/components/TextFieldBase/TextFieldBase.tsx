@@ -1,15 +1,14 @@
-import { FieldDescription } from "@/components/FieldDescription";
-import { FieldError } from "@/components/FieldError";
-import type { PropsContext } from "@/lib/propsContext";
-import { PropsContextProvider } from "@/lib/propsContext";
-import ClearPropsContextView from "@/views/ClearPropsContextView";
-import clsx from "clsx";
 import type { FC, PropsWithChildren, ReactNode, Ref } from "react";
-import { useState } from "react";
-import { useLocalizedStringFormatter } from "react-aria";
+import React, { useState } from "react";
 import * as Aria from "react-aria-components";
 import styles from "../FormField/FormField.module.scss";
+import clsx from "clsx";
+import type { PropsContext } from "@/lib/propsContext";
+import { ClearPropsContext, PropsContextProvider } from "@/lib/propsContext";
+import { FieldError } from "@/components/FieldError";
+import { FieldDescription } from "@/components/FieldDescription";
 import locales from "./locales/*.locale.json";
+import { useLocalizedStringFormatter } from "react-aria";
 
 export interface TextFieldBaseProps
   extends PropsWithChildren<Omit<Aria.TextFieldProps, "children">> {
@@ -61,7 +60,7 @@ export const TextFieldBase: FC<TextFieldBaseProps> = (props) => {
   );
 
   return (
-    <ClearPropsContextView>
+    <ClearPropsContext>
       <Aria.TextField
         {...rest}
         className={rootClassName}
@@ -78,7 +77,7 @@ export const TextFieldBase: FC<TextFieldBaseProps> = (props) => {
         )}
         <FieldError className={styles.fieldError} />
       </Aria.TextField>
-    </ClearPropsContextView>
+    </ClearPropsContext>
   );
 };
 

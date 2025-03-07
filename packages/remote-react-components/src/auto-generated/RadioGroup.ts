@@ -8,6 +8,9 @@ export { type RemoteRadioGroupElement } from "@mittwald/flow-remote-elements";
 export const RadioGroup = createFlowRemoteComponent(
   "flr-radio-group",
   "RadioGroup",
+  {
+    clearPropsContext: false,
+  },
   RemoteRadioGroupElement,
   {
     slotProps: {

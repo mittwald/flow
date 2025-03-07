@@ -8,6 +8,9 @@ export { type RemoteSkeletonElement } from "@mittwald/flow-remote-elements";
 export const Skeleton = createFlowRemoteComponent(
   "flr-skeleton",
   "Skeleton",
+  {
+    clearPropsContext: false,
+  },
   RemoteSkeletonElement,
   {
     slotProps: {

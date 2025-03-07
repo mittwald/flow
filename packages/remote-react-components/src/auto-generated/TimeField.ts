@@ -8,6 +8,9 @@ export { type RemoteTimeFieldElement } from "@mittwald/flow-remote-elements";
 export const TimeField = createFlowRemoteComponent(
   "flr-time-field",
   "TimeField",
+  {
+    clearPropsContext: true,
+  },
   RemoteTimeFieldElement,
   {
     slotProps: {

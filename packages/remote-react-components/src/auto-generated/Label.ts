@@ -8,6 +8,9 @@ export { type RemoteLabelElement } from "@mittwald/flow-remote-elements";
 export const Label = createFlowRemoteComponent(
   "flr-label",
   "Label",
+  {
+    clearPropsContext: true,
+  },
   RemoteLabelElement,
   {
     slotProps: {

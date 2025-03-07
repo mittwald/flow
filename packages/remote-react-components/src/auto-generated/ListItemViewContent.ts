@@ -8,6 +8,9 @@ export { type RemoteListItemViewContentElement } from "@mittwald/flow-remote-ele
 export const ListItemViewContent = createFlowRemoteComponent(
   "flr-list-item-view-content",
   "ListItemViewContent",
+  {
+    clearPropsContext: false,
+  },
   RemoteListItemViewContentElement,
   {
     slotProps: {
