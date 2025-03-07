@@ -12,8 +12,9 @@
 .footerWrapper {
   display: flex;
   gap: var(--size-px--xxl);
-  max-width: 1500px;
+  width: 1500px;
   margin: 0 auto;
+  max-width: 100%;
 }
 
 .mittwaldLogo {
