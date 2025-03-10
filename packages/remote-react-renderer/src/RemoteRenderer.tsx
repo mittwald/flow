@@ -7,6 +7,7 @@ import { components } from "@/components";
 import type { RemoteComponentsMap } from "@/lib/types";
 import { reduce } from "remeda";
 import { connectRemoteIframeRef } from "@mittwald/flow-remote-core";
+import Iframe from "@/components/Iframe";
 
 export interface RemoteRendererProps {
   integrations?: RemoteComponentsMap<never>[];
@@ -34,7 +35,7 @@ export const RemoteRenderer: FC<RemoteRendererProps> = (props) => {
   }, [...integrations]);
 
   const remoteFrame = (
-    <iframe
+    <Iframe
       ref={connectRemoteIframeRef(receiver.connection)}
       src={src}
       style={
