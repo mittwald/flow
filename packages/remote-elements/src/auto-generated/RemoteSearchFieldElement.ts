@@ -25,6 +25,7 @@ export class RemoteSearchFieldElement extends FlowRemoteElement<RemoteSearchFiel
       autoFocus: {},
       className: {},
       defaultValue: {},
+      enterKeyHint: {},
       excludeFromTabOrder: {},
       id: {},
       inputMode: {},

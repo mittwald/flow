@@ -1,12 +1,13 @@
-import * as docgen from "react-docgen-typescript";
-import * as fs from "fs/promises";
 import * as fsSync from "fs";
+import * as fs from "fs/promises";
 import { glob } from "glob";
+import path from "path";
+import * as docgen from "react-docgen-typescript";
 
 import type { ComponentDoc } from "react-docgen-typescript";
 
 async function parse(): Promise<ComponentDoc[]> {
-  const parser = docgen.withCustomConfig("./tsconfig.json", {
+  const parser = docgen.withCustomConfig(path.resolve("./tsconfig.json"), {
     skipChildrenPropWithoutDoc: false,
     shouldRemoveUndefinedFromOptional: true,
     savePropValueAsString: true,
