@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.83](https://github.com/mittwald/flow/compare/0.2.0-alpha.82...0.2.0-alpha.83) (2025-03-10)
+
+### Bug Fixes
+
+* fix missing props when using remote components ([#1257](https://github.com/mittwald/flow/issues/1257)) ([9eec3f9](https://github.com/mittwald/flow/commit/9eec3f973c8297cf5d7734346cf1a30bacb13e76))
+
 # [0.2.0-alpha.82](https://github.com/mittwald/flow/compare/0.2.0-alpha.81...0.2.0-alpha.82) (2025-03-10)
 
 **Note:** Version bump only for package @mittwald/flow-project
