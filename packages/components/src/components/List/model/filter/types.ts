@@ -20,4 +20,5 @@ export interface FilterShape<T, TProp extends PropertyName<T>, TMatcherValue> {
   values?: readonly TMatcherValue[];
   name?: string;
   defaultSelected?: readonly NonNullable<TMatcherValue>[];
+  selected?: readonly NonNullable<TMatcherValue>[];
 }
