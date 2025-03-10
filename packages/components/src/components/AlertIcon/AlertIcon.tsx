@@ -9,7 +9,7 @@ import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 import type { PropsWithStatus, Status } from "@/lib/types/props";
 import type { IconProps } from "@/components/Icon";
-import { ClearPropsContext } from "@/lib/propsContext";
+import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
 
 export interface AlertIconProps extends PropsWithStatus, IconProps {}
 

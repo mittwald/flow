@@ -1,4 +1,4 @@
-import { ClearPropsContext } from "@/components/ClearPropsContext";
+import { ClearPropsContext } from "@/components/ClearPropsContext/ClearPropsContext";
 import Wrap from "@/components/Wrap";
 import mergePropsContext from "@/lib/propsContext/mergePropsContext";
 import { propsContext, useContextProps } from "@/lib/propsContext/propsContext";

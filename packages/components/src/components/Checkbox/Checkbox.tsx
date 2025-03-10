@@ -5,7 +5,7 @@ import {
 } from "@/components/Icon/components/icons";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import { ClearPropsContext } from "@/lib/propsContext";
+import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
 import clsx from "clsx";
 import type { PropsWithChildren } from "react";
 import * as Aria from "react-aria-components";

@@ -2,11 +2,8 @@ import { AlertIcon } from "@/components/AlertIcon";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import type { PropsContext } from "@/lib/propsContext";
-import {
-  ClearPropsContext,
-  dynamic,
-  PropsContextProvider,
-} from "@/lib/propsContext";
+import { dynamic, PropsContextProvider } from "@/lib/propsContext";
+import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
 import type { PropsWithStatus } from "@/lib/types/props";
 import clsx from "clsx";
 import type { ComponentProps, PropsWithChildren } from "react";

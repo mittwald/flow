@@ -3,7 +3,7 @@ import React from "react";
 import styles from "./FieldError.module.scss";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
-import { ClearPropsContext } from "@/lib/propsContext";
+import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
 import { IconDanger } from "@/components/Icon/components/icons";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";

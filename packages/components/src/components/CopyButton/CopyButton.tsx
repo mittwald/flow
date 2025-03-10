@@ -8,7 +8,7 @@ import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 import { Tooltip, TooltipTrigger } from "@/components/Tooltip";
 import { onlyText } from "react-children-utilities";
-import { ClearPropsContext } from "@/lib/propsContext";
+import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { Action } from "@/components/Action";

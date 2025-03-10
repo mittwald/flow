@@ -7,7 +7,7 @@ import * as Aria from "react-aria-components";
 import { DateInput } from "./components/DateInput";
 import { FieldError } from "@/components/FieldError";
 import styles from "../FormField/FormField.module.scss";
-import { Popover } from "@/components/Popover";
+import { Popover } from "@/components/Popover/Popover";
 import { useOverlayController } from "@/lib/controller";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { Calendar } from "@/components/Calendar";

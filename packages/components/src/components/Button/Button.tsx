@@ -4,7 +4,7 @@ import styles from "./Button.module.scss";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
-import { ClearPropsContext, PropsContextProvider } from "@/lib/propsContext";
+import { PropsContextProvider } from "@/lib/propsContext";
 import { IconFailed, IconSucceeded } from "@/components/Icon/components/icons";
 import { Wrap } from "@/components/Wrap";
 import { Text } from "@/components/Text";
@@ -12,6 +12,7 @@ import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 import { useAriaAnnounceActionState } from "@/components/Action/lib/ariaLive";
+import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
 
 export interface ButtonProps
   extends PropsWithChildren<Aria.ButtonProps>,

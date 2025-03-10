@@ -5,7 +5,7 @@ import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import * as Aria from "react-aria-components";
-import { Popover } from "@/components/Popover";
+import { Popover } from "@/components/Popover/Popover";
 import { RangeCalendar } from "../Calendar/RangeCalendar";
 import { DateRangeInput } from "./components/DateRangeInput";
 import { FieldError } from "@/components/FieldError";

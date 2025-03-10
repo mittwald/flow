@@ -3,7 +3,7 @@ import React from "react";
 import { getInitialsFromString } from "./lib/getInitialsFromString";
 import styles from "./Initials.module.scss";
 import clsx from "clsx";
-import { ClearPropsContext } from "@/lib/propsContext";
+import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
 import { onlyText } from "react-children-utilities";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";

@@ -5,7 +5,8 @@ import formFieldStyles from "../FormField/FormField.module.scss";
 import styles from "./NumberField.module.scss";
 import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
-import { ClearPropsContext, PropsContextProvider } from "@/lib/propsContext";
+import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
+import { PropsContextProvider } from "@/lib/propsContext";
 import { FieldError } from "@/components/FieldError";
 import { Button } from "@/components/Button";
 import {

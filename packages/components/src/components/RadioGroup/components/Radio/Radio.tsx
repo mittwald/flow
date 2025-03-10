@@ -6,7 +6,7 @@ import clsx from "clsx";
 import { IconRadioOff, IconRadioOn } from "@/components/Icon/components/icons";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import { ClearPropsContext } from "@/lib/propsContext";
+import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
 
 export interface RadioProps
   extends PropsWithChildren<Omit<Aria.RadioProps, "children">>,

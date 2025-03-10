@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import React from "react";
 import * as Aria from "react-aria-components";
-import { Popover } from "@/components/Popover";
+import { Popover } from "@/components/Popover/Popover";
 import clsx from "clsx";
 import styles from "./Options.module.scss";
 import type { OverlayController } from "@/lib/controller";

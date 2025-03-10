@@ -1,6 +1,6 @@
 import React from "react";
-import type { PopoverProps } from "@/components/Popover";
-import { Popover } from "@/components/Popover";
+import type { PopoverProps } from "@/components/Popover/Popover";
+import { Popover } from "@/components/Popover/Popover";
 import styles from "./ContextualHelp.module.scss";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";

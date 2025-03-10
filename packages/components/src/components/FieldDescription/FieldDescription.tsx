@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./FieldDescription.module.scss";
 import clsx from "clsx";
-import { ClearPropsContext } from "@/lib/propsContext";
+import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
 import type { TextProps } from "@/components/Text";
 import { Text } from "@/components/Text";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";

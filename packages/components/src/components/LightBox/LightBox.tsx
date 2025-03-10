@@ -5,7 +5,7 @@ import {
 import type { PropsWithChildren } from "react";
 import React from "react";
 import type { PropsWithClassName } from "@/lib/types/props";
-import { Overlay } from "@/components/Overlay";
+import { Overlay } from "@/components/Overlay/Overlay";
 import clsx from "clsx";
 import type { OverlayController } from "@/lib/controller";
 import { useOverlayController } from "@/lib/controller";

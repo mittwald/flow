@@ -5,7 +5,7 @@ import clsx from "clsx";
 import { AlertIcon } from "@/components/AlertIcon";
 import { Text } from "@/components/Text";
 import type { PropsWithClassName, PropsWithStatus } from "@/lib/types/props";
-import { ClearPropsContext } from "@/lib/propsContext";
+import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 

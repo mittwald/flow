@@ -2,11 +2,11 @@ import type { PropsWithChildren, SVGAttributes } from "react";
 import React from "react";
 import styles from "./Icon.module.scss";
 import clsx from "clsx";
-import { ClearPropsContext } from "@/lib/propsContext";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { cloneElement } from "@/lib/react/cloneElement";
 import type { PropsWithStatus } from "@/lib/types/props";
+import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
 
 type SvgAttributeProps = SVGAttributes<SVGSVGElement>;
 

@@ -5,7 +5,7 @@ import styles from "./Switch.module.scss";
 import clsx from "clsx";
 import { IconCheck, IconClose } from "@/components/Icon/components/icons";
 import { Label } from "@/components/Label";
-import { ClearPropsContext } from "@/lib/propsContext";
+import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
