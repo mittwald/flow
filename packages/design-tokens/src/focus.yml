@@ -1,6 +1,8 @@
 focus:
   outline-color:
     value: "{primary.color.800}"
+  secondary-outline-color:
+    value: "{neutral.color.100}"
   outline-offset:
     value: "{size-px.xxs}"
   outline-width:

@@ -243,6 +243,7 @@ export class RemoteLoadingSpinnerElement extends FlowRemoteElement<RemoteLoading
       speed: {},
       spreadMethod: {},
       startOffset: {},
+      status: {},
       stdDeviation: {},
       stemh: {},
       stemv: {},

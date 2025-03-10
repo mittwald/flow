@@ -16,6 +16,7 @@ import { Chat as Chat } from "@mittwald/flow-react-components";
 import { Checkbox as Checkbox } from "@mittwald/flow-react-components";
 import { CheckboxButton as CheckboxButton } from "@mittwald/flow-react-components";
 import { CheckboxGroup as CheckboxGroup } from "@mittwald/flow-react-components";
+import { ClearPropsContext as ClearPropsContext } from "@mittwald/flow-react-components";
 import { CodeBlock as CodeBlock } from "@mittwald/flow-react-components";
 import { ColumnLayout as ColumnLayout } from "@mittwald/flow-react-components";
 import { Content as Content } from "@mittwald/flow-react-components";
@@ -118,6 +119,8 @@ export const flowComponents = {
   "flr-checkbox": createFlowRemoteComponentRenderer(Checkbox),
   "flr-checkbox-button": createFlowRemoteComponentRenderer(CheckboxButton),
   "flr-checkbox-group": createFlowRemoteComponentRenderer(CheckboxGroup),
+  "flr-clear-props-context":
+    createFlowRemoteComponentRenderer(ClearPropsContext),
   "flr-code-block": createFlowRemoteComponentRenderer(CodeBlock),
   "flr-column-layout": createFlowRemoteComponentRenderer(ColumnLayout),
   "flr-content": createFlowRemoteComponentRenderer(Content),

@@ -1,14 +1,13 @@
-import type { CSSProperties, FC, PropsWithChildren } from "react";
-import React from "react";
-import styles from "./ColumnLayout.module.scss";
-import { getColumns } from "./lib/getColumns";
-import clsx from "clsx";
+import type { PropsContext } from "@/lib/propsContext";
+import { PropsContextProvider } from "@/lib/propsContext";
 import type {
   PropsWithClassName,
   PropsWithElementType,
 } from "@/lib/types/props";
-import type { PropsContext } from "@/lib/propsContext";
-import { PropsContextProvider } from "@/lib/propsContext";
+import clsx from "clsx";
+import type { CSSProperties, FC, PropsWithChildren } from "react";
+import styles from "./ColumnLayout.module.scss";
+import { getColumns } from "./lib/getColumns";
 
 type GapSize = "s" | "m" | "l" | "xl";
 
@@ -35,10 +34,7 @@ export interface ColumnLayoutProps
   columnGap?: GapSize;
 }
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const ColumnLayout: FC<ColumnLayoutProps> = (props) => {
   const {
     children,

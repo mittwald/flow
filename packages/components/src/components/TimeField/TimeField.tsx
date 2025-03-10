@@ -1,12 +1,11 @@
-import type { PropsWithChildren, ReactNode } from "react";
-import React from "react";
-import * as Aria from "react-aria-components";
+import { FieldError } from "@/components/FieldError";
+import formFieldStyles from "@/components/FormField/FormField.module.scss";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
-import formFieldStyles from "@/components/FormField/FormField.module.scss";
-import { FieldError } from "@/components/FieldError";
 import clsx from "clsx";
+import type { PropsWithChildren, ReactNode } from "react";
+import * as Aria from "react-aria-components";
 import styles from "./TimeField.module.scss";
 
 export interface TimeFieldProps<T extends Aria.TimeValue = Aria.TimeValue>
@@ -15,10 +14,7 @@ export interface TimeFieldProps<T extends Aria.TimeValue = Aria.TimeValue>
   errorMessage?: ReactNode;
 }
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const TimeField = flowComponent("TimeField", (props) => {
   const { children, errorMessage, className, ...rest } = props;
 

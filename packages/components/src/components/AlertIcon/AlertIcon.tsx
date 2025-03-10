@@ -1,18 +1,15 @@
-import type { ComponentType, FC } from "react";
-import React from "react";
+import type { IconProps } from "@/components/Icon";
 import {
   IconDanger,
   IconInfo,
   IconSuccess,
   IconWarning,
 } from "@/components/Icon/components/icons";
-import locales from "./locales/*.locale.json";
-import { useLocalizedStringFormatter } from "react-aria";
 import type { PropsWithStatus, Status } from "@/lib/types/props";
-import type { IconProps } from "@/components/Icon";
-import { ClearPropsContext } from "@/lib/propsContext";
-import clsx from "clsx";
-import styles from "./AlertIcon.module.scss";
+import ClearPropsContextView from "@/views/ClearPropsContextView";
+import type { ComponentType, FC } from "react";
+import { useLocalizedStringFormatter } from "react-aria";
+import locales from "./locales/*.locale.json";
 
 export interface AlertIconProps extends PropsWithStatus, IconProps {}
 
@@ -23,29 +20,24 @@ const icons: Record<Status, ComponentType> = {
   warning: IconWarning,
 };
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const AlertIcon: FC<AlertIconProps> = (props) => {
-  const { status = "info", className, ...rest } = props;
-
-  const rootClassName = clsx(styles.alertIcon, styles[status], className);
+  const { status = "info", ...rest } = props;
 
   const stringFormatter = useLocalizedStringFormatter(locales);
 
   const Icon = icons[status];
 
   const iconProps: IconProps = {
-    className: rootClassName,
+    status,
     "aria-label": stringFormatter.format(`alertIcon.${status}`),
     ...rest,
   };
 
   return (
-    <ClearPropsContext>
+    <ClearPropsContextView>
       <Icon {...iconProps} />
-    </ClearPropsContext>
+    </ClearPropsContextView>
   );
 };
 

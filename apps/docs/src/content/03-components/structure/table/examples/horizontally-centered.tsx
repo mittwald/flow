@@ -23,10 +23,13 @@ import {
     <TableRow>
       <TableCell>Projekt</TableCell>
       <TableCell horizontalAlign="center">
-        <IconCheck />
+        <IconCheck status="success" aria-label="Zugriff" />
       </TableCell>
       <TableCell horizontalAlign="center">
-        <IconClose />
+        <IconClose
+          status="danger"
+          aria-label="Kein Zugriff"
+        />
       </TableCell>
     </TableRow>
   </TableBody>

@@ -31,6 +31,14 @@
     padding-inline-end: calc(
       var(--button-width) + var(--heading--icon-to-text-spacing)
     );
+
+    .icon {
+      height: var(--heading-line-height);
+      width: var(--heading-line-height);
+      vertical-align: bottom;
+      display: inline-block;
+      margin-inline-end: var(--heading--icon-to-text-spacing);
+    }
   }
 
   .text {

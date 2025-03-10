@@ -3,6 +3,52 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.77](https://github.com/mittwald/flow/compare/0.2.0-alpha.76...0.2.0-alpha.77) (2025-03-07)
+
+### Bug Fixes
+
+* **Notification:** fix icon styling ([#1248](https://github.com/mittwald/flow/issues/1248)) ([66640a4](https://github.com/mittwald/flow/commit/66640a40ef822aef14ab03c0a32d12252c0b6af5))
+
+# [0.2.0-alpha.76](https://github.com/mittwald/flow/compare/0.2.0-alpha.75...0.2.0-alpha.76) (2025-03-06)
+
+### Bug Fixes
+
+* fix props context not properly cleared in remote components ([#1240](https://github.com/mittwald/flow/issues/1240)) ([4152991](https://github.com/mittwald/flow/commit/4152991202061163e4cbf1e66b85bb8309abfc4f))
+
+# [0.2.0-alpha.75](https://github.com/mittwald/flow/compare/0.2.0-alpha.74...0.2.0-alpha.75) (2025-03-06)
+
+### Bug Fixes
+
+* use patched remote packages ([#1246](https://github.com/mittwald/flow/issues/1246)) ([09fa922](https://github.com/mittwald/flow/commit/09fa922626fb0f799985669d1118792f9aa7ebba))
+
+# [0.2.0-alpha.74](https://github.com/mittwald/flow/compare/0.2.0-alpha.73...0.2.0-alpha.74) (2025-03-05)
+
+### Bug Fixes
+
+* **Alert:** fix icon styling ([#1244](https://github.com/mittwald/flow/issues/1244)) ([3ab6833](https://github.com/mittwald/flow/commit/3ab6833259c14229977e2ba94f9e05d87bc8e7ab))
+
+# [0.2.0-alpha.73](https://github.com/mittwald/flow/compare/0.2.0-alpha.72...0.2.0-alpha.73) (2025-03-05)
+
+### Bug Fixes
+
+* **Modal:** fix modal styling with form inside content ([#1243](https://github.com/mittwald/flow/issues/1243)) ([1758f2e](https://github.com/mittwald/flow/commit/1758f2ee3741808d6016ae68d0360a15fe342bb0))
+
+# [0.2.0-alpha.72](https://github.com/mittwald/flow/compare/0.2.0-alpha.71...0.2.0-alpha.72) (2025-03-05)
+
+### Features
+
+* **Icon:** support status in icon ([#1241](https://github.com/mittwald/flow/issues/1241)) ([6f7028d](https://github.com/mittwald/flow/commit/6f7028d88f2cc29b7b6447bc2bdd38c29868a581))
+
+# [0.2.0-alpha.71](https://github.com/mittwald/flow/compare/0.2.0-alpha.70...0.2.0-alpha.71) (2025-03-05)
+
+### Bug Fixes
+
+* outline style for safari ([#1242](https://github.com/mittwald/flow/issues/1242)) ([d6adf34](https://github.com/mittwald/flow/commit/d6adf34f80e5bbd73d70de1afc5fdd15eb3122a0))
+
+# [0.2.0-alpha.70](https://github.com/mittwald/flow/compare/0.2.0-alpha.69...0.2.0-alpha.70) (2025-03-04)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
 # [0.2.0-alpha.69](https://github.com/mittwald/flow/compare/0.2.0-alpha.68...0.2.0-alpha.69) (2025-03-04)
 
 ### Features

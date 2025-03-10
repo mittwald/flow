@@ -13,8 +13,7 @@
   }
 
   .headingText {
-    .icon,
-    > :global(.flow--alert-icon) {
+    .icon {
       height: var(--heading-line-height);
       width: var(--heading-line-height);
       vertical-align: bottom;
