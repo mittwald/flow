@@ -35,7 +35,6 @@ export const IllustratedMessage: FC<IllustratedMessageProps> = (props) => {
       color: lightOrDarkColor ?? "accent",
     },
     ActionGroup: {
-      ignoreBreakpoint: true,
       className: styles.actionGroup,
     },
   };

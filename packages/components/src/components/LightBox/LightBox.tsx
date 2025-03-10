@@ -50,7 +50,6 @@ export const LightBox = flowComponent("LightBox", (props) => {
       className: styles.actionGroup,
       Button: { variant: "soft", color: "light" },
       tunnelId: "actionGroup",
-      ignoreBreakpoint: true,
     },
   };
 

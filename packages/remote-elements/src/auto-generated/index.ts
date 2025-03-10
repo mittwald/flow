@@ -35,6 +35,7 @@ export * from "./RemoteFieldErrorElement";
 export * from "./RemoteFileCardElement";
 export * from "./RemoteFileCardListElement";
 export * from "./RemoteFileFieldElement";
+export * from "./RemoteFlexElement";
 export * from "./RemoteFragmentElement";
 export * from "./RemoteHeaderElement";
 export * from "./RemoteHeaderNavigationElement";
