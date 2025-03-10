@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.81](https://github.com/mittwald/flow/compare/0.2.0-alpha.80...0.2.0-alpha.81) (2025-03-10)
+
+### Bug Fixes
+
+* **List:** fix empty view for tiles ([#1254](https://github.com/mittwald/flow/issues/1254)) ([4cf3484](https://github.com/mittwald/flow/commit/4cf348477dca0809cf61d889a77e3dde408b1f39))
+
 # [0.2.0-alpha.80](https://github.com/mittwald/flow/compare/0.2.0-alpha.79...0.2.0-alpha.80) (2025-03-10)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
