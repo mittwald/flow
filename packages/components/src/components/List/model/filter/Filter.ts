@@ -44,6 +44,7 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
   public readonly name?: string;
   private onFilterUpdateCallbacks = new Set<() => unknown>();
   private readonly defaultSelectedValues?: readonly NonNullable<TMatchValue>[];
+  private readonly selectedValues?: readonly NonNullable<TMatchValue>[];
 
   public constructor(list: List<T>, shape: FilterShape<T, TProp, TMatchValue>) {
     this.list = list;
@@ -55,6 +56,7 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
     this.name = shape.name;
 
     this.defaultSelectedValues = shape.defaultSelected;
+    this.selectedValues = shape.selected;
   }
 
   private getStoredSelectedIds() {
@@ -214,6 +216,14 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
   }
 
   private getInitialValues() {
+    return (
+      this.selectedValues ??
+      this.getStoredSelectedIds() ??
+      this.defaultSelectedValues
+    );
+  }
+
+  private getInitialValuesWithoutControlledValues() {
     return this.getStoredSelectedIds() ?? this.defaultSelectedValues;
   }
 
@@ -223,7 +233,7 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
 
   public resetValues(): void {
     let resetTo: unknown;
-    const initialValues = this.getInitialValues();
+    const initialValues = this.getInitialValuesWithoutControlledValues();
 
     if (initialValues) {
       resetTo = initialValues;

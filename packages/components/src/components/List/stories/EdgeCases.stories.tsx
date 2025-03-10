@@ -14,8 +14,11 @@ import type { Meta, StoryObj } from "@storybook/react";
 import type { SortingFn } from "@tanstack/react-table";
 import { DateTime } from "luxon";
 import type List from "../List";
-import { domains } from "../testData/domainApi";
-import defaultMeta from "./Default.stories";
+import { type Domain, domains, getTypes } from "../testData/domainApi";
+import defaultMeta, { loadDomains } from "./Default.stories";
+import React, { type PropsWithChildren } from "react";
+import { SettingsProvider } from "@/components/SettingsProvider";
+import { Alert } from "@/components/Alert";
 
 const meta: Meta<typeof List> = {
   ...defaultMeta,
@@ -275,5 +278,80 @@ export const CustomSortingList = () => {
         </DomainList.Item>
       </DomainList.List>
     </Section>
+  );
+};
+
+const DefaultDomainList: React.FC<PropsWithChildren> = ({ children }) => {
+  const DomainList = typedList<Domain>();
+
+  return (
+    <DomainList.List
+      batchSize={5}
+      aria-label="Domains"
+      settingStorageKey="Domains"
+      onAction={(domain) => console.log(domain.hostname)}
+    >
+      <DomainList.LoaderAsync manualPagination manualSorting={false}>
+        {loadDomains}
+      </DomainList.LoaderAsync>
+      {children}
+
+      <DomainList.Item textValue={(domain) => domain.hostname}>
+        {(domain) => (
+          <ListItemView>
+            <Avatar color={domain.type === "Domain" ? "blue" : "teal"}>
+              {domain.type === "Domain" ? <IconDomain /> : <IconSubdomain />}
+            </Avatar>
+            <Heading>
+              {domain.hostname}
+              {!domain.verified && (
+                <AlertBadge status="warning">Not verified</AlertBadge>
+              )}
+            </Heading>
+            <Text>{domain.type}</Text>
+
+            <ContextMenu>
+              <MenuItem>Show details</MenuItem>
+              <MenuItem>Delete</MenuItem>
+            </ContextMenu>
+          </ListItemView>
+        )}
+      </DomainList.Item>
+    </DomainList.List>
+  );
+};
+
+export const PreFilteredList = () => {
+  const DomainList = typedList<Domain>();
+  const availableTypes = usePromise(getTypes, []);
+
+  return (
+    <SettingsProvider storageKey="domainList" type="localStorage">
+      <Section>
+        <Alert>This two lists have the same settingsKey ("Domains")</Alert>
+
+        <Heading>Not fixed filters</Heading>
+        <DefaultDomainList>
+          <DomainList.Filter
+            values={availableTypes}
+            property="type"
+            mode="all"
+            name="Typ"
+            defaultSelected={["Domain"]}
+          />
+        </DefaultDomainList>
+
+        <Heading>Fixed filters</Heading>
+        <DefaultDomainList>
+          <DomainList.Filter
+            values={availableTypes}
+            property="type"
+            mode="all"
+            name="Typ"
+            selected={["Domain", "Subdomain"]}
+          />
+        </DefaultDomainList>
+      </Section>
+    </SettingsProvider>
   );
 };

@@ -18,7 +18,7 @@ import IconDownload from "@/components/Icon/components/icons/IconDownload";
 import { ActionGroup } from "@/components/ActionGroup";
 import { Content } from "@/components/Content";
 
-const loadDomains: AsyncDataLoader<Domain> = async (opts) => {
+export const loadDomains: AsyncDataLoader<Domain> = async (opts) => {
   const response = await getDomains({
     pagination: opts?.pagination
       ? {
