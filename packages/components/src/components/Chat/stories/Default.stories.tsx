@@ -15,7 +15,7 @@ import { TextArea } from "@/components/TextArea";
 import IconAttachment from "@/components/Icon/components/icons/IconAttachment";
 import { FileCardList } from "@/components/FileCardList";
 import { FileCard } from "@/components/FileCard";
-import { Form } from "@/integrations/react-hook-form";
+import { Field, Form } from "@/integrations/react-hook-form";
 import { action } from "@storybook/addon-actions";
 import { useForm } from "react-hook-form";
 
@@ -132,7 +132,9 @@ export const WithForm: Story = {
             action("submitted");
           }}
         >
-          <TextArea aria-label="message" rows={1} autoResizeMaxRows={4} />
+          <Field name="message">
+            <TextArea aria-label="message" rows={1} autoResizeMaxRows={4} />
+          </Field>
           <Button color="accent">Submit</Button>
         </Form>
       </Chat>
