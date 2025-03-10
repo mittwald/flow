@@ -1,16 +1,16 @@
 "use client";
 import {
+  Action,
+  ActionGroup,
   Button,
+  Content,
   Heading,
+  Label,
   Modal,
   ModalTrigger,
-  Content,
   Section,
   Text,
-  ActionGroup,
-  Label,
   TextField,
-  Action,
 } from "@mittwald/flow-remote-react-components";
 
 export default function Page() {
@@ -22,6 +22,7 @@ export default function Page() {
           <Heading>Modal title</Heading>
           <Content>
             <Section>
+              <Heading>Bla</Heading>
               <Text>
                 Eine Organisation kannst du dir wie ein Unternehmen vorstellen.
                 An diesem Ort verwaltest du deine Mitarbeiter,

@@ -15,6 +15,7 @@ export * from "./RemoteChatElement";
 export * from "./RemoteCheckboxElement";
 export * from "./RemoteCheckboxButtonElement";
 export * from "./RemoteCheckboxGroupElement";
+export * from "./RemoteClearPropsContextContentElement";
 export * from "./RemoteCodeBlockElement";
 export * from "./RemoteColumnLayoutElement";
 export * from "./RemoteContentElement";

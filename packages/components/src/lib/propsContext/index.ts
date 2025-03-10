@@ -1,5 +1,5 @@
-export { propsContext } from "./propsContext";
-export { ClearPropsContext } from "@/lib/propsContext/ClearPropsContext";
-export { PropsContextProvider } from "./PropsContextProvider";
+export * from "@/components/ClearPropsContext";
 export { dynamic } from "./dynamicProps/dynamic";
+export { propsContext } from "./propsContext";
+export { PropsContextProvider } from "./PropsContextProvider";
 export type { PropsContext } from "./types";

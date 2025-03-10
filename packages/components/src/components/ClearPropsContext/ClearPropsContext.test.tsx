@@ -1,10 +1,9 @@
-import { render, screen } from "@testing-library/react";
-import PropsContextProvider from "@/lib/propsContext/PropsContextProvider";
-import type { FC } from "react";
-import React from "react";
+import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
 import useProps from "@/lib/hooks/useProps";
-import ClearPropsContext from "@/lib/propsContext/ClearPropsContext";
+import PropsContextProvider from "@/lib/propsContext/PropsContextProvider";
 import type { TestComponentProps } from "@/lib/propsContext/test";
+import { render, screen } from "@testing-library/react";
+import type { FC } from "react";
 import { expect, test } from "vitest";
 
 const ComponentUsingProps: FC<TestComponentProps> = (props) => {

@@ -1,8 +1,10 @@
-import type { DependencyList, FC, PropsWithChildren } from "react";
-import React, { useMemo } from "react";
-import type { PropsContext as PropsContextShape } from "@/lib/propsContext/types";
-import { propsContext, useContextProps } from "@/lib/propsContext/propsContext";
+import { ClearPropsContext } from "@/components/ClearPropsContext";
+import Wrap from "@/components/Wrap";
 import mergePropsContext from "@/lib/propsContext/mergePropsContext";
+import { propsContext, useContextProps } from "@/lib/propsContext/propsContext";
+import type { PropsContext as PropsContextShape } from "@/lib/propsContext/types";
+import type { DependencyList, FC, PropsWithChildren } from "react";
+import { useMemo } from "react";
 
 interface Props extends PropsWithChildren {
   props: PropsContextShape;
@@ -31,9 +33,13 @@ export const PropsContextProvider: FC<Props> = (props) => {
   );
 
   return (
-    <propsContext.Provider value={propsWithParentPropsContext}>
-      {children}
-    </propsContext.Provider>
+    <Wrap if={!mergeInParentContext}>
+      <ClearPropsContext>
+        <propsContext.Provider value={propsWithParentPropsContext}>
+          {children}
+        </propsContext.Provider>
+      </ClearPropsContext>
+    </Wrap>
   );
 };
 

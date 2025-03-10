@@ -15,6 +15,7 @@ export * from "./Chat";
 export * from "./Checkbox";
 export * from "./CheckboxButton";
 export * from "./CheckboxGroup";
+export * from "./ClearPropsContextContent";
 export * from "./CodeBlock";
 export * from "./ColumnLayout";
 export * from "./Content";
