@@ -1,7 +1,7 @@
+import { mapAttributeToReactProperty } from "@/lib/mapAttributeToReactProperty";
+import clsx from "clsx";
 import { createElement } from "react";
 import { mapKeys } from "remeda";
-import clsx from "clsx";
-import { mapAttributeToReactProperty } from "@/lib/mapAttributeToReactProperty";
 
 type ElementTagNameMap = HTMLElementTagNameMap &
   Pick<
@@ -16,8 +16,8 @@ export const elementFactory =
 
     // merge className and class
     result["className"] = clsx(
-      String(result["className"]),
-      String(result["class"]),
+      "className" in result && String(result["className"]),
+      "class" in result && String(result["class"]),
     );
 
     delete result["class"];

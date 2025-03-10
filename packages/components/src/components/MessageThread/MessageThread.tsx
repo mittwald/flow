@@ -1,22 +1,26 @@
-import {
-  flowComponent,
-  type FlowComponentProps,
-} from "@/lib/componentFactory/flowComponent";
+import type { PropsWithChildren } from "react";
+import React from "react";
+import type { PropsWithClassName } from "@/lib/types/props";
+import clsx from "clsx";
+import styles from "./MessageThread.module.scss";
 import {
   dynamic,
   type PropsContext,
   PropsContextProvider,
 } from "@/lib/propsContext";
-import type { PropsWithClassName } from "@/lib/types/props";
-import clsx from "clsx";
-import type { PropsWithChildren } from "react";
-import styles from "./MessageThread.module.scss";
+import {
+  flowComponent,
+  type FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
 
 export type MessageThreadProps = PropsWithChildren &
   PropsWithClassName &
   FlowComponentProps;
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const MessageThread = flowComponent("MessageThread", (props) => {
   const { children, className } = props;
 

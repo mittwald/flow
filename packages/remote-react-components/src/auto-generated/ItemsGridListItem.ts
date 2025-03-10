@@ -8,6 +8,9 @@ export { type RemoteItemsGridListItemElement } from "@mittwald/flow-remote-eleme
 export const ItemsGridListItem = createFlowRemoteComponent(
   "flr-items-grid-list-item",
   "ItemsGridListItem",
+  {
+    clearPropsContext: false,
+  },
   RemoteItemsGridListItemElement,
   {
     slotProps: {

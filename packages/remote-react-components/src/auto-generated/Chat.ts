@@ -8,6 +8,9 @@ export { type RemoteChatElement } from "@mittwald/flow-remote-elements";
 export const Chat = createFlowRemoteComponent(
   "flr-chat",
   "Chat",
+  {
+    clearPropsContext: false,
+  },
   RemoteChatElement,
   {
     slotProps: {

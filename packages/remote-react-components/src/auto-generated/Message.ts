@@ -8,6 +8,9 @@ export { type RemoteMessageElement } from "@mittwald/flow-remote-elements";
 export const Message = createFlowRemoteComponent(
   "flr-message",
   "Message",
+  {
+    clearPropsContext: true,
+  },
   RemoteMessageElement,
   {
     slotProps: {

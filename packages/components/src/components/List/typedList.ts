@@ -7,7 +7,7 @@ import { TypedListLoaderAsync } from "@/components/List/setupComponents/ListLoad
 import { TypedListLoaderAsyncResource } from "@/components/List/setupComponents/ListLoaderAsyncResource";
 import { TypedListStaticData } from "@/components/List/setupComponents/ListStaticData";
 import { TypedListSearch } from "@/components/List/setupComponents/ListSearch";
-import { ListItemView } from "@/components/List";
+import { ListItemView } from "@/components/List/components/ListItemView/ListItemView";
 import type { ComponentType } from "react";
 import { TableColumn } from "@/components/List/setupComponents/TableColumn";
 import { TableCell } from "@/components/List/setupComponents/TableCell";

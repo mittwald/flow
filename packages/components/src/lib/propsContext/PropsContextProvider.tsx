@@ -1,8 +1,6 @@
-import Wrap from "@/components/Wrap";
 import mergePropsContext from "@/lib/propsContext/mergePropsContext";
 import { propsContext, useContextProps } from "@/lib/propsContext/propsContext";
 import type { PropsContext as PropsContextShape } from "@/lib/propsContext/types";
-import ClearPropsContextView from "@/views/ClearPropsContextView";
 import type { DependencyList, FC, PropsWithChildren } from "react";
 import { useMemo } from "react";
 
@@ -33,13 +31,9 @@ export const PropsContextProvider: FC<Props> = (props) => {
   );
 
   return (
-    <Wrap if={!mergeInParentContext}>
-      <ClearPropsContextView>
-        <propsContext.Provider value={propsWithParentPropsContext}>
-          {children}
-        </propsContext.Provider>
-      </ClearPropsContextView>
-    </Wrap>
+    <propsContext.Provider value={propsWithParentPropsContext}>
+      {children}
+    </propsContext.Provider>
   );
 };
 

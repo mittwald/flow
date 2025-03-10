@@ -1,7 +1,7 @@
+import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
 import useProps from "@/lib/hooks/useProps";
 import PropsContextProvider from "@/lib/propsContext/PropsContextProvider";
 import type { TestComponentProps } from "@/lib/propsContext/test";
-import ClearPropsContextView from "@/views/ClearPropsContextView";
 import { render, screen } from "@testing-library/react";
 import type { FC } from "react";
 import { expect, test } from "vitest";
@@ -23,9 +23,9 @@ test("Component clears the context for children", () => {
         },
       }}
     >
-      <ClearPropsContextView>
+      <ClearPropsContext>
         <ComponentUsingProps />
-      </ClearPropsContextView>
+      </ClearPropsContext>
     </PropsContextProvider>,
   );
 

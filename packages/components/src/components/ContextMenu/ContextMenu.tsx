@@ -6,14 +6,14 @@ import {
   getMenuItemSelectionVariant,
 } from "@/components/ContextMenu/lib";
 import type { MenuItemProps } from "@/components/MenuItem";
-import { Popover, type PopoverProps } from "@/components/Popover";
+import { Popover, type PopoverProps } from "@/components/Popover/Popover";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { useOverlayController } from "@/lib/controller";
 import { OverlayContextProvider } from "@/lib/controller/overlay/OverlayContextProvider";
 import type { PropsContext } from "@/lib/propsContext";
+import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
-import ClearPropsContextView from "@/views/ClearPropsContextView";
 import ContextMenuContentView from "@/views/ContextMenuContentView";
 import type * as Aria from "react-aria-components";
 import styles from "./ContextMenu.module.scss";
@@ -85,7 +85,7 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
   };
 
   return (
-    <ClearPropsContextView>
+    <ClearPropsContext>
       <Popover
         {...rest}
         controller={overlayController}
@@ -114,7 +114,7 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
           </ContextMenuContentView>
         </OverlayContextProvider>
       </Popover>
-    </ClearPropsContextView>
+    </ClearPropsContext>
   );
 });
 

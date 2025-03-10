@@ -8,6 +8,9 @@ export { type RemoteColumnLayoutElement } from "@mittwald/flow-remote-elements";
 export const ColumnLayout = createFlowRemoteComponent(
   "flr-column-layout",
   "ColumnLayout",
+  {
+    clearPropsContext: true,
+  },
   RemoteColumnLayoutElement,
   {
     slotProps: {

@@ -8,6 +8,9 @@ export { type RemoteListSummaryElement } from "@mittwald/flow-remote-elements";
 export const ListSummary = createFlowRemoteComponent(
   "flr-list-summary",
   "ListSummary",
+  {
+    clearPropsContext: false,
+  },
   RemoteListSummaryElement,
   {
     slotProps: {

@@ -1,18 +1,22 @@
+import type { PropsWithChildren } from "react";
+import React from "react";
+import styles from "./LayoutCard.module.scss";
+import clsx from "clsx";
+import type { PropsWithElementType } from "@/lib/types/props";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
-import type { PropsWithElementType } from "@/lib/types/props";
-import clsx from "clsx";
-import type { PropsWithChildren } from "react";
-import styles from "./LayoutCard.module.scss";
 
 export interface LayoutCardProps
   extends PropsWithChildren,
     PropsWithElementType<"div" | "main" | "footer" | "header">,
     FlowComponentProps {}
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const LayoutCard = flowComponent("LayoutCard", (props) => {
   const { children, className, elementType = "div", ref, ...rest } = props;
 

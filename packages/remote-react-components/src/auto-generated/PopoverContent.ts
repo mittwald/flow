@@ -8,6 +8,9 @@ export { type RemotePopoverContentElement } from "@mittwald/flow-remote-elements
 export const PopoverContent = createFlowRemoteComponent(
   "flr-popover-content",
   "PopoverContent",
+  {
+    clearPropsContext: false,
+  },
   RemotePopoverContentElement,
   {
     slotProps: {

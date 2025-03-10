@@ -8,6 +8,9 @@ export { type RemoteSeparatorElement } from "@mittwald/flow-remote-elements";
 export const Separator = createFlowRemoteComponent(
   "flr-separator",
   "Separator",
+  {
+    clearPropsContext: false,
+  },
   RemoteSeparatorElement,
   {
     slotProps: {

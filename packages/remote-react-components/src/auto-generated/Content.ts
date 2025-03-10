@@ -8,6 +8,9 @@ export { type RemoteContentElement } from "@mittwald/flow-remote-elements";
 export const Content = createFlowRemoteComponent(
   "flr-content",
   "Content",
+  {
+    clearPropsContext: true,
+  },
   RemoteContentElement,
   {
     slotProps: {
