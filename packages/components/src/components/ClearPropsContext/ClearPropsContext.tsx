@@ -7,11 +7,11 @@ export type ClearPropsContextProps = PropsWithChildren;
 export const ClearPropsContext: FC<ClearPropsContextProps> = (props) => {
   const { children, ...restProps } = props;
   return (
-    <ClearPropsContextContentView {...restProps}>
-      <ClearPropsContextContent {...restProps}>
+    <ClearPropsContextContent {...restProps}>
+      <ClearPropsContextContentView {...restProps}>
         {children}
-      </ClearPropsContextContent>
-    </ClearPropsContextContentView>
+      </ClearPropsContextContentView>
+    </ClearPropsContextContent>
   );
 };
 

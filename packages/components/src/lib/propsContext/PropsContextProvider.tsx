@@ -1,5 +1,3 @@
-import { ClearPropsContext } from "@/components/ClearPropsContext/ClearPropsContext";
-import Wrap from "@/components/Wrap";
 import mergePropsContext from "@/lib/propsContext/mergePropsContext";
 import { propsContext, useContextProps } from "@/lib/propsContext/propsContext";
 import type { PropsContext as PropsContextShape } from "@/lib/propsContext/types";
@@ -33,13 +31,9 @@ export const PropsContextProvider: FC<Props> = (props) => {
   );
 
   return (
-    <Wrap if={!mergeInParentContext}>
-      <ClearPropsContext>
-        <propsContext.Provider value={propsWithParentPropsContext}>
-          {children}
-        </propsContext.Provider>
-      </ClearPropsContext>
-    </Wrap>
+    <propsContext.Provider value={propsWithParentPropsContext}>
+      {children}
+    </propsContext.Provider>
   );
 };
 

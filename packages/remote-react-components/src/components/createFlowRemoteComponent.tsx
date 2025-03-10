@@ -4,7 +4,7 @@ import type {
 } from "@mfalkenberg/remote-dom-react";
 import { createRemoteComponent } from "@mfalkenberg/remote-dom-react";
 import {
-  ClearPropsContext,
+  ClearPropsContextContent,
   flowComponent,
   isFlowComponentName,
 } from "@mittwald/flow-react-components/internal";
@@ -54,8 +54,14 @@ export function createFlowRemoteComponent<
 
   if (isFlowComponentName(flowComponentTag)) {
     return flowComponent(flowComponentTag, (p) => {
+      /**
+       * Notice: <ClearPropsContextContent> is used here, to just clear the
+       * context on remote side. Otherwise a corresponding <ClearPropsContext>
+       * component will be rendered as parent of all host children, which
+       * potentially clears more props as desired.
+       */
       const children = options.clearPropsContext ? (
-        <ClearPropsContext>{p.children}</ClearPropsContext>
+        <ClearPropsContextContent>{p.children}</ClearPropsContextContent>
       ) : (
         p.children
       );
