@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.80](https://github.com/mittwald/flow/compare/0.2.0-alpha.79...0.2.0-alpha.80) (2025-03-10)
+
+### Features
+
+* **Remote:** fix branch that is used for codeMod migration from flow to flowRemote components ([#1253](https://github.com/mittwald/flow/issues/1253)) ([b2ef6a4](https://github.com/mittwald/flow/commit/b2ef6a447e35592cb3a36c961f90db98d466609d))
+
 # [0.2.0-alpha.79](https://github.com/mittwald/flow/compare/0.2.0-alpha.78...0.2.0-alpha.79) (2025-03-10)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components
