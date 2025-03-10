@@ -1,14 +1,14 @@
+import { CodeBlock } from "@/components/CodeBlock";
+import { Heading } from "@/components/Heading";
+import { InlineCode } from "@/components/InlineCode";
+import { Link } from "@/components/Link";
+import { Separator } from "@/components/Separator";
+import { Text } from "@/components/Text";
 import type { FC, ReactNode } from "react";
-import React, { Children, isValidElement } from "react";
+import { Children, isValidElement } from "react";
 import type { Components, Options } from "react-markdown";
 import ReactMarkdown from "react-markdown";
-import { Link } from "@/components/Link";
-import { Text } from "@/components/Text";
 import styles from "./Markdown.module.scss";
-import { InlineCode } from "@/components/InlineCode";
-import { Heading } from "@/components/Heading";
-import { Separator } from "@/components/Separator";
-import { CodeBlock } from "@/components/CodeBlock";
 
 export interface MarkdownProps extends Omit<Options, "components"> {
   /** The color schema of the markdown component. */
@@ -112,13 +112,11 @@ export const Markdown: FC<MarkdownProps> = (props) => {
   };
 
   return (
-    <ReactMarkdown
-      {...rest}
-      components={components}
-      className={styles.markdown}
-    >
-      {children}
-    </ReactMarkdown>
+    <div className={styles.markdown}>
+      <ReactMarkdown {...rest} components={components}>
+        {children}
+      </ReactMarkdown>
+    </div>
   );
 };
 
