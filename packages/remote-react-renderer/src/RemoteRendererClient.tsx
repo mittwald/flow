@@ -11,23 +11,35 @@ import {
   type ComponentType,
   type CSSProperties,
   type FC,
-  type ReactNode,
-  Suspense,
+  useLayoutEffect,
+  useRef,
+  useState,
 } from "react";
 import { useMemo } from "react";
 import { reduce } from "remeda";
-import Iframe from "@/components/Iframe";
 
 export interface RemoteRendererProps {
   integrations?: RemoteComponentsMap<never>[];
   src: string;
-  iframeStyle?: CSSProperties;
-  fallback?: ReactNode;
 }
 
+interface PromiseObject {
+  promise: null | Promise<void>;
+  resolve?: CallableFunction;
+  reject?: CallableFunction;
+}
+
+export const HiddenIframeStyle: CSSProperties = {
+  visibility: "hidden",
+  height: 0,
+  width: 0,
+  border: "none",
+  position: "absolute",
+  marginLeft: "-9999px",
+};
+
 export const RemoteRendererClient: FC<RemoteRendererProps> = (props) => {
-  const { integrations = [], src, iframeStyle, fallback } = props;
-  const receiver = useMemo(() => new RemoteReceiver(), []);
+  const { integrations = [], src } = props;
 
   const mergedComponents = useMemo(() => {
     return new Map<string, ComponentType<RemoteComponentRendererProps>>(
@@ -44,31 +56,46 @@ export const RemoteRendererClient: FC<RemoteRendererProps> = (props) => {
     );
   }, [...integrations]);
 
-  const connect = connectRemoteIframeRef(receiver.connection);
+  const receiver = useMemo(() => new RemoteReceiver(), []);
+  const awaiter = useRef<PromiseObject>({
+    promise: null,
+  }).current;
 
-  const remoteFrame = (
-    <Suspense fallback={fallback}>
-      <Iframe
-        ref={connect}
-        src={src}
-        style={
-          iframeStyle ?? {
-            visibility: "hidden",
-            height: 0,
-            width: 0,
-            border: "none",
-            position: "absolute",
-            marginLeft: "-9999px",
-          }
-        }
-      />
-    </Suspense>
-  );
+  const [initialRendered, forceRerender] = useState(false);
+  const connect = connectRemoteIframeRef(receiver.connection);
+  receiver.subscribe({ id: receiver.root.id }, () => {
+    if (awaiter.promise !== null && awaiter.resolve) {
+      awaiter.resolve();
+    }
+  });
+
+  useLayoutEffect(() => {
+    if (awaiter.promise !== null || initialRendered) {
+      return;
+    }
+
+    awaiter.promise = new Promise((resolve, reject) => {
+      awaiter.resolve = () => {
+        awaiter.promise = null;
+        resolve();
+      };
+      awaiter.reject = () => {
+        awaiter.promise = null;
+        reject();
+      };
+    });
+
+    forceRerender(true);
+  }, [forceRerender]);
+
+  if (awaiter.promise !== null) {
+    throw awaiter.promise;
+  }
 
   return (
     <>
       <RemoteRootRenderer components={mergedComponents} receiver={receiver} />
-      {remoteFrame}
+      <iframe ref={connect} src={src} style={HiddenIframeStyle} />
     </>
   );
 };

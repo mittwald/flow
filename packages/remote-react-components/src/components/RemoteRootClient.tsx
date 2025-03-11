@@ -3,11 +3,10 @@ import * as viewComponents from "@/auto-generated";
 import Preview from "@/components/Preview";
 import { ViewComponentContextProvider } from "@mittwald/flow-react-components/internal";
 import { connectHostRenderRootRef } from "@mittwald/flow-remote-core";
-import { type FC, type PropsWithChildren, type ReactNode } from "react";
+import { type FC, type PropsWithChildren } from "react";
 
 export interface RootClientProps extends PropsWithChildren {
   showPreview?: boolean;
-  fallback?: ReactNode;
 }
 
 export const RemoteRootClient: FC<RootClientProps> = (props) => {

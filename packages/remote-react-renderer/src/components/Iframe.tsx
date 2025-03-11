@@ -1,39 +1,54 @@
 "use client";
 
-import { type ComponentPropsWithRef, type ReactNode, useEffect } from "react";
+import {
+  type ComponentPropsWithRef,
+  type CSSProperties,
+  type FC,
+  type ReactNode,
+  useEffect,
+} from "react";
 import React, { useLayoutEffect, useRef, useState } from "react";
 
-export type IFrameProps = ComponentPropsWithRef<"iframe"> & {
+type IFrameProps = ComponentPropsWithRef<"iframe"> & {
   fallback?: ReactNode;
 };
 
-export interface PromiseObject {
+interface PromiseObject {
   loaded: boolean;
   promise: null | Promise<void>;
   resolve?: CallableFunction;
   reject?: CallableFunction;
 }
 
-function Iframe(props: IFrameProps) {
+export const HiddenIframeStyle: CSSProperties = {
+  visibility: "hidden",
+  height: 0,
+  width: 0,
+  border: "none",
+  position: "absolute",
+  marginLeft: "-9999px",
+};
+
+const Iframe: FC<IFrameProps> = (props) => {
   const { onError, onLoad, src, ref, style, ...rest } = props;
   const awaiter = useRef<PromiseObject>({
     loaded: false,
     promise: null,
   }).current;
 
-  const [, triggerLoad] = useState(false);
-  const iframe = useRef<HTMLIFrameElement>(null);
+  const [, forceRerender] = useState(false);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   useEffect(() => {
-    if (src && iframe.current) {
+    if (src && iframeRef.current) {
       awaiter.loaded = false;
-      iframe.current.src = src;
+      iframeRef.current.src = src;
 
       if (ref && typeof ref === "function") {
-        return ref(iframe.current);
+        return ref(iframeRef.current);
       }
     }
-  }, [src, iframe]);
+  }, [src, iframeRef]);
 
   useLayoutEffect(() => {
     if (!awaiter.loaded) {
@@ -50,9 +65,9 @@ function Iframe(props: IFrameProps) {
         };
       });
 
-      triggerLoad(true);
+      forceRerender(true);
     }
-  }, [triggerLoad, awaiter.loaded]);
+  }, [forceRerender, awaiter.loaded]);
 
   if (awaiter.promise !== null) {
     throw awaiter.promise;
@@ -61,20 +76,8 @@ function Iframe(props: IFrameProps) {
   return (
     <iframe
       {...rest}
-      style={
-        style ??
-        (awaiter.loaded
-          ? undefined
-          : {
-              visibility: "hidden",
-              height: 0,
-              width: 0,
-              border: "none",
-              position: "absolute",
-              marginLeft: "-9999px",
-            })
-      }
-      ref={iframe}
+      style={style ?? (awaiter.loaded ? undefined : HiddenIframeStyle)}
+      ref={iframeRef}
       onLoad={(event) => {
         if (awaiter.resolve) {
           awaiter.resolve();
@@ -90,6 +93,6 @@ function Iframe(props: IFrameProps) {
       }}
     />
   );
-}
+};
 
 export default Iframe;
