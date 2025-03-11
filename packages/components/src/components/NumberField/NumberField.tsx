@@ -29,7 +29,7 @@ export interface NumberFieldProps
 export const NumberField = flowComponent<"NumberField", HTMLInputElement>(
   "NumberField",
   (props) => {
-    const { children, className, ref, ...rest } = props;
+    const { children, className, ref, isWheelDisabled = true, ...rest } = props;
 
     const rootClassName = clsx(formFieldStyles.formField, className);
 
@@ -48,7 +48,11 @@ export const NumberField = flowComponent<"NumberField", HTMLInputElement>(
 
     return (
       <ClearPropsContext>
-        <Aria.NumberField {...rest} className={rootClassName}>
+        <Aria.NumberField
+          isWheelDisabled={isWheelDisabled}
+          {...rest}
+          className={rootClassName}
+        >
           <Aria.Group className={styles.group}>
             <Button
               ariaSlot="decrement"
