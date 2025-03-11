@@ -25,6 +25,7 @@ export class RemoteTextFieldElement extends FlowRemoteElement<RemoteTextFieldEle
       autoFocus: {},
       className: {},
       defaultValue: {},
+      enterKeyHint: {},
       excludeFromTabOrder: {},
       form: {},
       id: {},
