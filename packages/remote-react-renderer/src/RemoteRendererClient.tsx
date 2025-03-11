@@ -63,7 +63,7 @@ export const RemoteRendererClient: FC<RemoteRendererProps> = (props) => {
       return;
     }
 
-    awaiter.promise = new Promise((resolve, reject) => {
+    awaiter.promise = new Promise((resolve) => {
       awaiter.resolve = () => {
         awaiter.promise = null;
         resolve();
