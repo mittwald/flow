@@ -7,9 +7,16 @@ import {
   RemoteRootRenderer,
 } from "@mfalkenberg/remote-dom-react/host";
 import { connectRemoteIframeRef } from "@mittwald/flow-remote-core";
-import type { ComponentType, CSSProperties, FC, ReactNode } from "react";
-import { useMemo, useState } from "react";
+import {
+  type ComponentType,
+  type CSSProperties,
+  type FC,
+  type ReactNode,
+  Suspense,
+} from "react";
+import { useMemo } from "react";
 import { reduce } from "remeda";
+import Iframe from "@/components/Iframe";
 
 export interface RemoteRendererProps {
   integrations?: RemoteComponentsMap<never>[];
@@ -39,29 +46,27 @@ export const RemoteRendererClient: FC<RemoteRendererProps> = (props) => {
 
   const connect = connectRemoteIframeRef(receiver.connection);
 
-  const [iframeHasLoaded, setIframeHasLoaded] = useState(false);
-
   const remoteFrame = (
-    <iframe
-      onLoad={() => setIframeHasLoaded(true)}
-      ref={connect}
-      src={src}
-      style={
-        iframeStyle ?? {
-          visibility: "hidden",
-          height: 0,
-          width: 0,
-          border: "none",
-          position: "absolute",
-          marginLeft: "-9999px",
+    <Suspense fallback={fallback}>
+      <Iframe
+        ref={connect}
+        src={src}
+        style={
+          iframeStyle ?? {
+            visibility: "hidden",
+            height: 0,
+            width: 0,
+            border: "none",
+            position: "absolute",
+            marginLeft: "-9999px",
+          }
         }
-      }
-    />
+      />
+    </Suspense>
   );
 
   return (
     <>
-      {!iframeHasLoaded && fallback}
       <RemoteRootRenderer components={mergedComponents} receiver={receiver} />
       {remoteFrame}
     </>
