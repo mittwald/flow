@@ -60,6 +60,7 @@ function Iframe(props: IFrameProps) {
 
   return (
     <iframe
+      {...rest}
       style={
         style ??
         (awaiter.loaded
@@ -73,7 +74,6 @@ function Iframe(props: IFrameProps) {
               marginLeft: "-9999px",
             })
       }
-      {...rest}
       ref={iframe}
       onLoad={(event) => {
         if (awaiter.resolve) {
