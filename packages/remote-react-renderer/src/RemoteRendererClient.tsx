@@ -7,20 +7,28 @@ import {
   RemoteRootRenderer,
 } from "@mfalkenberg/remote-dom-react/host";
 import { connectRemoteIframeRef } from "@mittwald/flow-remote-core";
-import type { ComponentType, CSSProperties, FC, ReactNode } from "react";
-import { useMemo, useState } from "react";
+import {
+  type ComponentType,
+  type FC,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
+import { useMemo } from "react";
 import { reduce } from "remeda";
 
 export interface RemoteRendererProps {
   integrations?: RemoteComponentsMap<never>[];
   src: string;
-  iframeStyle?: CSSProperties;
-  fallback?: ReactNode;
+}
+
+interface PromiseObject {
+  promise: null | Promise<void>;
+  resolve?: CallableFunction;
 }
 
 export const RemoteRendererClient: FC<RemoteRendererProps> = (props) => {
-  const { integrations = [], src, iframeStyle, fallback } = props;
-  const receiver = useMemo(() => new RemoteReceiver(), []);
+  const { integrations = [], src } = props;
 
   const mergedComponents = useMemo(() => {
     return new Map<string, ComponentType<RemoteComponentRendererProps>>(
@@ -37,33 +45,53 @@ export const RemoteRendererClient: FC<RemoteRendererProps> = (props) => {
     );
   }, [...integrations]);
 
+  const receiver = useMemo(() => new RemoteReceiver(), []);
+  const awaiter = useRef<PromiseObject>({
+    promise: null,
+  }).current;
+
+  const [initialRendered, forceRerender] = useState(false);
   const connect = connectRemoteIframeRef(receiver.connection);
+  receiver.subscribe({ id: receiver.root.id }, () => {
+    if (awaiter.promise !== null && awaiter.resolve) {
+      awaiter.resolve();
+    }
+  });
 
-  const [iframeHasLoaded, setIframeHasLoaded] = useState(false);
+  useLayoutEffect(() => {
+    if (awaiter.promise !== null || initialRendered) {
+      return;
+    }
 
-  const remoteFrame = (
-    <iframe
-      onLoad={() => setIframeHasLoaded(true)}
-      ref={connect}
-      src={src}
-      style={
-        iframeStyle ?? {
+    awaiter.promise = new Promise((resolve) => {
+      awaiter.resolve = () => {
+        awaiter.promise = null;
+        resolve();
+      };
+    });
+
+    forceRerender(true);
+  }, [forceRerender]);
+
+  if (awaiter.promise !== null) {
+    throw awaiter.promise;
+  }
+
+  return (
+    <>
+      <RemoteRootRenderer components={mergedComponents} receiver={receiver} />
+      <iframe
+        ref={connect}
+        src={src}
+        style={{
           visibility: "hidden",
           height: 0,
           width: 0,
           border: "none",
           position: "absolute",
           marginLeft: "-9999px",
-        }
-      }
-    />
-  );
-
-  return (
-    <>
-      {!iframeHasLoaded && fallback}
-      <RemoteRootRenderer components={mergedComponents} receiver={receiver} />
-      {remoteFrame}
+        }}
+      />
     </>
   );
 };

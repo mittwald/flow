@@ -11,7 +11,7 @@ import "@mittwald/flow-react-components/all.css";
 import { LinkProvider } from "@mittwald/flow-react-components/nextjs";
 import { RemoteRoot } from "@mittwald/flow-remote-react-components/RemoteRoot";
 import { usePathname } from "next/navigation";
-import type { PropsWithChildren } from "react";
+import { type PropsWithChildren, Suspense } from "react";
 import styles from "./layout.module.css";
 
 export default function Layout(props: PropsWithChildren) {
@@ -41,9 +41,7 @@ export default function Layout(props: PropsWithChildren) {
             <Separator />
             <main>
               <div>
-                <RemoteRoot
-                  key={p}
-                  showPreview
+                <Suspense
                   fallback={
                     <IllustratedMessage>
                       <LoadingSpinner />
@@ -51,8 +49,10 @@ export default function Layout(props: PropsWithChildren) {
                     </IllustratedMessage>
                   }
                 >
-                  {props.children}
-                </RemoteRoot>
+                  <RemoteRoot key={p} showPreview>
+                    {props.children}
+                  </RemoteRoot>
+                </Suspense>
               </div>
             </main>
           </div>
