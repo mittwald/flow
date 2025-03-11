@@ -25,52 +25,48 @@ export const Markdown: FC<MarkdownProps> = (props) => {
   const components: Components = {
     a: (props) => (
       <Link target="_blank" color={headingAndLinkColor} href={props.href}>
-        {props.children as ReactNode}
+        {props.children}
       </Link>
     ),
     p: (props) => (
-      <Text elementType="p" className={styles.text} color={textColor}>
-        {props.children as ReactNode}
+      <Text elementType="p" color={textColor}>
+        {props.children}
       </Text>
     ),
-    code: (props) => (
-      <InlineCode color={color}>{props.children as ReactNode}</InlineCode>
-    ),
+    code: (props) => <InlineCode color={color}>{props.children}</InlineCode>,
     h1: (props) => (
-      <Heading className={styles.heading} level={1} color={headingAndLinkColor}>
-        {props.children as ReactNode}
+      <Heading level={1} color={headingAndLinkColor}>
+        {props.children}
       </Heading>
     ),
     h2: (props) => (
-      <Heading className={styles.heading} level={2} color={headingAndLinkColor}>
-        {props.children as ReactNode}
+      <Heading level={2} color={headingAndLinkColor}>
+        {props.children}
       </Heading>
     ),
     h3: (props) => (
-      <Heading className={styles.heading} level={3} color={headingAndLinkColor}>
-        {props.children as ReactNode}
+      <Heading level={3} color={headingAndLinkColor}>
+        {props.children}
       </Heading>
     ),
     h4: (props) => (
-      <Heading className={styles.heading} level={4} color={headingAndLinkColor}>
-        {props.children as ReactNode}
+      <Heading level={4} color={headingAndLinkColor}>
+        {props.children}
       </Heading>
     ),
     h5: (props) => (
-      <Heading className={styles.heading} level={5} color={headingAndLinkColor}>
-        {props.children as ReactNode}
+      <Heading level={5} color={headingAndLinkColor}>
+        {props.children}
       </Heading>
     ),
     h6: (props) => (
-      <Heading className={styles.heading} level={6} color={headingAndLinkColor}>
-        {props.children as ReactNode}
+      <Heading level={6} color={headingAndLinkColor}>
+        {props.children}
       </Heading>
     ),
     hr: () => <Separator />,
     pre: (props) => {
-      const preElementContent = Children.toArray(
-        props.children as ReactNode,
-      )[0];
+      const preElementContent = Children.toArray(props.children)[0];
 
       if (!(typeof preElementContent === "string")) {
         throw new Error("Element must be a string");
