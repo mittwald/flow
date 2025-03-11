@@ -9,7 +9,6 @@ import {
 import { connectRemoteIframeRef } from "@mittwald/flow-remote-core";
 import {
   type ComponentType,
-  type CSSProperties,
   type FC,
   useLayoutEffect,
   useRef,
@@ -26,17 +25,7 @@ export interface RemoteRendererProps {
 interface PromiseObject {
   promise: null | Promise<void>;
   resolve?: CallableFunction;
-  reject?: CallableFunction;
 }
-
-export const HiddenIframeStyle: CSSProperties = {
-  visibility: "hidden",
-  height: 0,
-  width: 0,
-  border: "none",
-  position: "absolute",
-  marginLeft: "-9999px",
-};
 
 export const RemoteRendererClient: FC<RemoteRendererProps> = (props) => {
   const { integrations = [], src } = props;
@@ -79,10 +68,6 @@ export const RemoteRendererClient: FC<RemoteRendererProps> = (props) => {
         awaiter.promise = null;
         resolve();
       };
-      awaiter.reject = () => {
-        awaiter.promise = null;
-        reject();
-      };
     });
 
     forceRerender(true);
@@ -95,7 +80,18 @@ export const RemoteRendererClient: FC<RemoteRendererProps> = (props) => {
   return (
     <>
       <RemoteRootRenderer components={mergedComponents} receiver={receiver} />
-      <iframe ref={connect} src={src} style={HiddenIframeStyle} />
+      <iframe
+        ref={connect}
+        src={src}
+        style={{
+          visibility: "hidden",
+          height: 0,
+          width: 0,
+          border: "none",
+          position: "absolute",
+          marginLeft: "-9999px",
+        }}
+      />
     </>
   );
 };
