@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.84](https://github.com/mittwald/flow/compare/0.2.0-alpha.83...0.2.0-alpha.84) (2025-03-11)
+
+### Features
+
+* **NumberField:** disable wheel as default ([#1261](https://github.com/mittwald/flow/issues/1261)) ([f94a462](https://github.com/mittwald/flow/commit/f94a4620bb275de2c0637a43719d537c10bd4e04))
+
 # [0.2.0-alpha.83](https://github.com/mittwald/flow/compare/0.2.0-alpha.82...0.2.0-alpha.83) (2025-03-10)
 
 ### Bug Fixes
