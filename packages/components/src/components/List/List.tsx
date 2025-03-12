@@ -27,7 +27,6 @@ import DivView from "@/views/DivView";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import type { PropsWithChildren } from "react";
 import Footer from "./components/Footer";
-import headerStyles from "./components/Header/Header.module.css";
 import styles from "./List.module.css";
 import { listContext } from "./listContext";
 
