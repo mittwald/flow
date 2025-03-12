@@ -1,8 +1,7 @@
-import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import * as Recharts from "recharts";
 import type { CategoricalChartProps } from "recharts/types/chart/generateCategoricalChart";
 import tokens from "@mittwald/flow-design-tokens/variables.json";
-import type { FC } from "react";
+import type { FC, PropsWithChildren } from "react";
 
 export const categoricalColors = Object.keys(
   tokens.color.categorical,
@@ -10,8 +9,11 @@ export const categoricalColors = Object.keys(
 export type CategoricalColors = (typeof categoricalColors)[number];
 
 export interface AreaChartProps
-  extends Omit<CategoricalChartProps, "style">,
-    FlowComponentProps {}
+  extends Pick<
+      CategoricalChartProps,
+      "data" | "className" | "syncId" | "syncMethod"
+    >,
+    PropsWithChildren {}
 
 /** @flr-generate all */
 export const AreaChart: FC<AreaChartProps> = (props) => {

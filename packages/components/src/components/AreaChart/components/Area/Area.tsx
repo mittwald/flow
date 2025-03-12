@@ -4,17 +4,16 @@ import tokens from "@mittwald/flow-design-tokens/variables.json";
 import type { CategoricalColors } from "../../AreaChart";
 
 export interface AreaProps
-  extends Omit<
+  extends Pick<
     Recharts.AreaProps,
     | "className"
-    | "style"
-    | "children"
-    | "fill"
-    | "stroke"
-    | "strokeWidth"
-    | "strokeOpacity"
-    | "activeDot"
-    | "dot"
+    | "dataKey"
+    | "stackId"
+    | "fillOpacity"
+    | "xAxisId"
+    | "yAxisId"
+    | "type"
+    | "unit"
   > {
   color?: CategoricalColors;
 }
@@ -47,18 +46,20 @@ const getCategoricalColor = (color: CategoricalColors) => {
 };
 
 export const Area: FC<AreaProps> = (props) => {
-  const { color = "sea-green", ...rest } = props;
+  const { color = "sea-green", stackId = 1, fillOpacity = 1, ...rest } = props;
 
   return (
-    <Recharts.Area
-      stackId={1}
-      activeDot={<CustomDot color={getCategoricalColor(color)} />}
-      fillOpacity={1}
-      {...rest}
-      fill={getCategoricalColor(color)}
-      stroke={tokens.area["border-color"].value}
-      strokeWidth={tokens.area["border-width"].value}
-    />
+    <>
+      <Recharts.Area
+        stackId={stackId}
+        fillOpacity={fillOpacity}
+        {...rest}
+        activeDot={<CustomDot color={getCategoricalColor(color)} />}
+        fill={getCategoricalColor(color)}
+        stroke={tokens.area["border-color"].value}
+        strokeWidth={tokens.area["border-width"].value}
+      />
+    </>
   );
 };
 

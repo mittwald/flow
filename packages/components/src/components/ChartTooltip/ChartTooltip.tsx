@@ -7,25 +7,22 @@ import type {
 import styles from "../Popover/Popover.module.scss";
 import { LegendItem } from "../Legend/components/LegendItem";
 import Heading from "../Heading";
+import clsx from "clsx";
 
-export type ChartTooltipProps = Omit<
+export type ChartTooltipProps = Pick<
   Recharts.TooltipProps<ValueType, NameType>,
-  | "content"
-  | "contentStyle"
-  | "labelClassName"
-  | "labelFormatter"
-  | "labelStyle"
-  | "wrapperClassName"
-  | "wrapperStyle"
+  "wrapperClassName" | "allowEscapeViewBox"
 >;
 
 const CustomTooltip = (
   props: Recharts.TooltipContentProps<ValueType, NameType>,
 ) => {
-  const { active, payload, label } = props;
+  const { active, payload, label, wrapperClassName } = props;
+  const className = clsx(wrapperClassName, styles.popover);
+
   if (active && payload && payload.length) {
     return (
-      <div className={styles.popover}>
+      <div className={className}>
         <div className={styles.content}>
           <Heading level={3}>{label}</Heading>
           {payload.map((i) => (

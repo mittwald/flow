@@ -2,9 +2,9 @@ import type { FC } from "react";
 import * as Recharts from "recharts";
 import tokens from "@mittwald/flow-design-tokens/variables.json";
 
-export type CartesianGridProps = Omit<
+export type CartesianGridProps = Pick<
   Recharts.CartesianGridProps,
-  "content" | "contentStyle" | "stroke" | "strokeWidth"
+  "className" | "vertical" | "horizontal" | "strokeDasharray"
 >;
 
 export const CartesianGrid: FC<CartesianGridProps> = (props) => {
@@ -12,8 +12,8 @@ export const CartesianGrid: FC<CartesianGridProps> = (props) => {
 
   return (
     <Recharts.CartesianGrid
-      {...rest}
       vertical={vertical}
+      {...rest}
       stroke={tokens["cartesian-grid"].color.value}
       strokeWidth={tokens["cartesian-grid"]["stroke-width"].value}
     />

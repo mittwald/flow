@@ -2,25 +2,29 @@ import type { FC } from "react";
 import * as Recharts from "recharts";
 import tokens from "@mittwald/flow-design-tokens/variables.json";
 
-export type XAxisProps = Omit<
+export type XAxisProps = Pick<
   Recharts.XAxisProps,
-  "fontFamily" | "fontSize" | "tick" | "tickMargin" | "tickSize"
+  | "className"
+  | "dataKey"
+  | "orientation"
+  | "allowDecimals"
+  | "allowDataOverflow"
+  | "interval"
+  | "minTickGap"
+  | "scale"
 >;
 
 export const XAxis: FC<XAxisProps> = (props) => {
-  const { orientation, ...rest } = props;
-
   return (
     <Recharts.XAxis
+      {...props}
       fontFamily="Inter"
       fontSize={tokens.axis["font-size"].value}
-      orientation={orientation}
       tick={{
         fill: tokens.axis["text-color"].value,
       }}
       tickMargin={parseInt(tokens.axis.spacing.value)}
       tickSize={parseInt(tokens.axis["tick-size"].value)}
-      {...rest}
     />
   );
 };

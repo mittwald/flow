@@ -5,9 +5,9 @@ import { LegendItem } from "./components/LegendItem";
 import styles from "./Legend.module.scss";
 import tokens from "@mittwald/flow-design-tokens/variables.json";
 
-export type LegendProps = Omit<
+export type LegendProps = Pick<
   Recharts.LegendProps,
-  "content" | "font-family" | "font-size"
+  "className" | "verticalAlign"
 >;
 
 export const Legend: FC<LegendProps> = (props) => {
