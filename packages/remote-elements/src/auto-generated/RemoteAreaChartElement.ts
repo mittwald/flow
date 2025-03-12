@@ -11,52 +11,15 @@ export class RemoteAreaChartElement extends FlowRemoteElement<RemoteAreaChartEle
 
   static override get remoteProperties() {
     return {
-      accessibilityLayer: {},
-      barCategoryGap: {},
-      barGap: {},
-      barSize: {},
       className: {},
-      compact: {},
-      cx: {},
-      cy: {},
       data: {},
-      dataKey: {},
-      desc: {},
-      endAngle: {},
-      height: {},
-      id: {},
-      innerRadius: {},
-      layout: {},
-      margin: {},
-      maxBarSize: {},
-      outerRadius: {},
-      reverseStackOrder: {},
-      role: {},
-      stackOffset: {},
-      startAngle: {},
       syncId: {},
       syncMethod: {},
-      tabIndex: {},
-      throttleDelay: {},
-      title: {},
-      width: {},
     };
   }
 
   static override get remoteEvents() {
-    return {
-      click: {},
-      contextMenu: {},
-      doubleClick: {},
-      mouseDown: {},
-      mouseEnter: {},
-      mouseLeave: {},
-      mouseMove: {},
-      mouseUp: {},
-      touchEnd: {},
-      touchMove: {},
-      touchStart: {},
-    };
+    return {};
   }
 
   static override get remoteSlots() {
