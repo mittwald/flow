@@ -22,7 +22,6 @@ import { TableRow } from "@/components/List/setupComponents/TableRow";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { deepFilterByType, deepFindOfType } from "@/lib/react/deepFindOfType";
-import { ActionGroup } from "@/components/ActionGroup";
 import { deepHas } from "@/lib/react/deepHas";
 import DivView from "@/views/DivView";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";

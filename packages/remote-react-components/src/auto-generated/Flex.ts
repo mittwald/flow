@@ -8,6 +8,9 @@ export { type RemoteFlexElement } from "@mittwald/flow-remote-elements";
 export const Flex = createFlowRemoteComponent(
   "flr-flex",
   "Flex",
+  {
+    clearPropsContext: false,
+  },
   RemoteFlexElement,
   {
     slotProps: {
