@@ -1,5 +1,14 @@
-import { Button } from "@/components/Button";
+import type { PropsWithChildren } from "react";
+import React from "react";
+import * as Aria from "react-aria-components";
+import formFieldStyles from "../FormField/FormField.module.scss";
+import styles from "./NumberField.module.scss";
+import clsx from "clsx";
+import type { PropsContext } from "@/lib/propsContext";
+import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
+import { PropsContextProvider } from "@/lib/propsContext";
 import { FieldError } from "@/components/FieldError";
+import { Button } from "@/components/Button";
 import {
   IconChevronDown,
   IconChevronUp,
@@ -8,24 +17,19 @@ import {
 } from "@/components/Icon/components/icons";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import type { PropsContext } from "@/lib/propsContext";
-import { PropsContextProvider } from "@/lib/propsContext";
-import ClearPropsContextView from "@/views/ClearPropsContextView";
-import clsx from "clsx";
-import type { PropsWithChildren } from "react";
-import * as Aria from "react-aria-components";
-import formFieldStyles from "../FormField/FormField.module.scss";
-import styles from "./NumberField.module.scss";
 
 export interface NumberFieldProps
   extends PropsWithChildren<Omit<Aria.NumberFieldProps, "children">>,
     FlowComponentProps {}
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const NumberField = flowComponent<"NumberField", HTMLInputElement>(
   "NumberField",
   (props) => {
-    const { children, className, ref, ...rest } = props;
+    const { children, className, ref, isWheelDisabled = true, ...rest } = props;
 
     const rootClassName = clsx(formFieldStyles.formField, className);
 
@@ -43,8 +47,12 @@ export const NumberField = flowComponent<"NumberField", HTMLInputElement>(
     };
 
     return (
-      <ClearPropsContextView>
-        <Aria.NumberField {...rest} className={rootClassName}>
+      <ClearPropsContext>
+        <Aria.NumberField
+          isWheelDisabled={isWheelDisabled}
+          {...rest}
+          className={rootClassName}
+        >
           <Aria.Group className={styles.group}>
             <Button
               ariaSlot="decrement"
@@ -73,7 +81,7 @@ export const NumberField = flowComponent<"NumberField", HTMLInputElement>(
           </PropsContextProvider>
           <FieldError className={formFieldStyles.fieldError} />
         </Aria.NumberField>
-      </ClearPropsContextView>
+      </ClearPropsContext>
     );
   },
 );

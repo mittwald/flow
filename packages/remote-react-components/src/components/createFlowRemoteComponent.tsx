@@ -4,6 +4,7 @@ import type {
 } from "@mfalkenberg/remote-dom-react";
 import { createRemoteComponent } from "@mfalkenberg/remote-dom-react";
 import {
+  ClearPropsContextContent,
   flowComponent,
   isFlowComponentName,
 } from "@mittwald/flow-react-components/internal";
@@ -15,6 +16,10 @@ import { createElement } from "react";
 
 // eslint-disable-next-line  @typescript-eslint/no-explicit-any
 type AnyRecord = Record<string, any>;
+
+interface Options {
+  clearPropsContext?: boolean;
+}
 
 export function createFlowRemoteComponent<
   Tag extends keyof HTMLElementTagNameMap,
@@ -35,6 +40,7 @@ export function createFlowRemoteComponent<
 >(
   tag: Tag,
   flowComponentTag: string,
+  options: Options,
   Element: ElementConstructor | undefined = customElements.get(tag) as never,
   {
     slotProps = true,
@@ -47,9 +53,21 @@ export function createFlowRemoteComponent<
   });
 
   if (isFlowComponentName(flowComponentTag)) {
-    return flowComponent(flowComponentTag, (p) =>
-      createElement(element, p as never),
-    );
+    return flowComponent(flowComponentTag, (p) => {
+      /**
+       * Notice: <ClearPropsContextContent> is used here, to just clear the
+       * context on remote side. Otherwise a corresponding <ClearPropsContext>
+       * component will be rendered as parent of all host children, which
+       * potentially clears more props as desired.
+       */
+      const children = options.clearPropsContext ? (
+        <ClearPropsContextContent>{p.children}</ClearPropsContextContent>
+      ) : (
+        p.children
+      );
+
+      return createElement(element, p as never, children);
+    });
   }
 
   return element;

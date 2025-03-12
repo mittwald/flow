@@ -17,7 +17,7 @@ yarn add @mittwald/flow-remote-react-components@experimental
 
 ```shell
 npx jscodeshift \
-  -t https://raw.githubusercontent.com/mittwald/flow/refs/heads/0.2.0/packages/codemods/src/transforms/flowRemote.ts \
+  -t https://raw.githubusercontent.com/mittwald/flow/refs/heads/main/packages/codemods/src/transforms/flowRemote.ts \
   --parser tsx \
   src
 ```

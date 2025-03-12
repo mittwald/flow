@@ -19,6 +19,7 @@ import { type OverlayController, useOverlayController } from "@/lib/controller";
 
 export interface ComboBoxProps
   extends Omit<Aria.ComboBoxProps<never>, "children">,
+    Pick<Aria.InputProps, "placeholder">,
     PropsWithChildren,
     FlowComponentProps {
   onChange?: (value: string) => void;
@@ -37,6 +38,7 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
       // default: do nothing
     },
     controller: controllerFromProps,
+    placeholder,
     ...rest
   } = props;
 
@@ -86,7 +88,7 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
       <PropsContextProvider props={propsContext}>
         <TunnelProvider>
           <div className={styles.input}>
-            <Aria.Input />
+            <Aria.Input placeholder={placeholder} />
             <Button
               className={styles.toggle}
               aria-label={stringFormatter.format("comboBox.showOptions")}

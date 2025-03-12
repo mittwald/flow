@@ -1,13 +1,13 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
-    "jsx": "preserve", // next does its own jsx transformation
+    "jsx": "preserve",
     "lib": ["dom", "dom.iterable", "esnext"],
     "noEmit": true,
-    "rootDir": "${configDir}", // nextjs targets files outside of src in root as well
+    "rootDir": "${configDir}",
     "plugins": [
       {
-        "name": "next" // plugin comes installed with nextjs
+        "name": "next"
       }
     ]
   },

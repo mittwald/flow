@@ -3,6 +3,54 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.86](https://github.com/mittwald/flow/compare/0.2.0-alpha.85...0.2.0-alpha.86) (2025-03-11)
+
+### Features
+
+* add suspense to remote renderer ([b7f9131](https://github.com/mittwald/flow/commit/b7f913112e0771ba946c7f5d71fb8034a83d9d04))
+
+# [0.2.0-alpha.85](https://github.com/mittwald/flow/compare/0.2.0-alpha.84...0.2.0-alpha.85) (2025-03-11)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.84](https://github.com/mittwald/flow/compare/0.2.0-alpha.83...0.2.0-alpha.84) (2025-03-11)
+
+### Features
+
+* **NumberField:** disable wheel as default ([#1261](https://github.com/mittwald/flow/issues/1261)) ([f94a462](https://github.com/mittwald/flow/commit/f94a4620bb275de2c0637a43719d537c10bd4e04))
+
+# [0.2.0-alpha.83](https://github.com/mittwald/flow/compare/0.2.0-alpha.82...0.2.0-alpha.83) (2025-03-10)
+
+### Bug Fixes
+
+* fix missing props when using remote components ([#1257](https://github.com/mittwald/flow/issues/1257)) ([9eec3f9](https://github.com/mittwald/flow/commit/9eec3f973c8297cf5d7734346cf1a30bacb13e76))
+
+# [0.2.0-alpha.82](https://github.com/mittwald/flow/compare/0.2.0-alpha.81...0.2.0-alpha.82) (2025-03-10)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.81](https://github.com/mittwald/flow/compare/0.2.0-alpha.80...0.2.0-alpha.81) (2025-03-10)
+
+### Bug Fixes
+
+* **List:** fix empty view for tiles ([#1254](https://github.com/mittwald/flow/issues/1254)) ([4cf3484](https://github.com/mittwald/flow/commit/4cf348477dca0809cf61d889a77e3dde408b1f39))
+
+# [0.2.0-alpha.80](https://github.com/mittwald/flow/compare/0.2.0-alpha.79...0.2.0-alpha.80) (2025-03-10)
+
+### Features
+
+* **Remote:** fix branch that is used for codeMod migration from flow to flowRemote components ([#1253](https://github.com/mittwald/flow/issues/1253)) ([b2ef6a4](https://github.com/mittwald/flow/commit/b2ef6a447e35592cb3a36c961f90db98d466609d))
+
+# [0.2.0-alpha.79](https://github.com/mittwald/flow/compare/0.2.0-alpha.78...0.2.0-alpha.79) (2025-03-10)
+
+### Features
+
+* **ComboBox:** add placeholder ([#1249](https://github.com/mittwald/flow/issues/1249)) ([590354a](https://github.com/mittwald/flow/commit/590354a3434d81f0a178081d884fb51f26d02cb1))
+
+# [0.2.0-alpha.78](https://github.com/mittwald/flow/compare/0.2.0-alpha.77...0.2.0-alpha.78) (2025-03-10)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
 # [0.2.0-alpha.77](https://github.com/mittwald/flow/compare/0.2.0-alpha.76...0.2.0-alpha.77) (2025-03-07)
 
 ### Bug Fixes

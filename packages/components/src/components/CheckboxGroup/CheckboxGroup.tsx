@@ -17,7 +17,10 @@ export interface CheckboxGroupProps
     Pick<ColumnLayoutProps, "s" | "m" | "l">,
     FlowComponentProps {}
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const CheckboxGroup = flowComponent("CheckboxGroup", (props) => {
   const { children, className, s, m, l, ref, ...rest } = props;
 

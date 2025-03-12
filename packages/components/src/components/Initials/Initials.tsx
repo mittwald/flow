@@ -1,12 +1,13 @@
+import type { PropsWithChildren } from "react";
+import React from "react";
+import { getInitialsFromString } from "./lib/getInitialsFromString";
+import styles from "./Initials.module.scss";
+import clsx from "clsx";
+import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
+import { onlyText } from "react-children-utilities";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import type { PropsWithClassName } from "@/lib/types/props";
-import ClearPropsContextView from "@/views/ClearPropsContextView";
-import clsx from "clsx";
-import type { PropsWithChildren } from "react";
-import { onlyText } from "react-children-utilities";
-import styles from "./Initials.module.scss";
-import { getInitialsFromString } from "./lib/getInitialsFromString";
 
 export interface InitialsProps
   extends PropsWithChildren,
@@ -15,7 +16,10 @@ export interface InitialsProps
   "aria-hidden"?: boolean;
 }
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const Initials = flowComponent("Initials", (props) => {
   const { children, className, "aria-hidden": ariaHidden, ref } = props;
 
@@ -29,7 +33,7 @@ export const Initials = flowComponent("Initials", (props) => {
   ));
 
   return (
-    <ClearPropsContextView>
+    <ClearPropsContext>
       <div
         aria-hidden={ariaHidden}
         aria-label={textContent}
@@ -38,7 +42,7 @@ export const Initials = flowComponent("Initials", (props) => {
       >
         {initialsElements}
       </div>
-    </ClearPropsContextView>
+    </ClearPropsContext>
   );
 });
 

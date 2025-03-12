@@ -1,13 +1,13 @@
+import type { ForwardedRef } from "react";
+import React, { useRef } from "react";
+import * as Aria from "react-aria-components";
 import type { TextFieldBaseProps } from "@/components/TextFieldBase";
 import { TextFieldBase } from "@/components/TextFieldBase";
+import styles from "./TextArea.module.scss";
+import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import ClearPropsContextView from "@/views/ClearPropsContextView";
 import { mergeRefs } from "@react-aria/utils";
-import type { ForwardedRef } from "react";
-import { useRef } from "react";
-import * as Aria from "react-aria-components";
-import styles from "./TextArea.module.scss";
 
 export interface TextAreaProps
   extends Omit<TextFieldBaseProps, "input">,
@@ -20,7 +20,10 @@ export interface TextAreaProps
   autoResizeMaxRows?: number;
 }
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const TextArea = flowComponent("TextArea", (props) => {
   const {
     children,
@@ -64,11 +67,11 @@ export const TextArea = flowComponent("TextArea", (props) => {
   );
 
   return (
-    <ClearPropsContextView>
+    <ClearPropsContext>
       <TextFieldBase {...rest} input={input}>
         {children}
       </TextFieldBase>
-    </ClearPropsContextView>
+    </ClearPropsContext>
   );
 });
 

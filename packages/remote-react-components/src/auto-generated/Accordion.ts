@@ -8,6 +8,9 @@ export { type RemoteAccordionElement } from "@mittwald/flow-remote-elements";
 export const Accordion = createFlowRemoteComponent(
   "flr-accordion",
   "Accordion",
+  {
+    clearPropsContext: false,
+  },
   RemoteAccordionElement,
   {
     slotProps: {

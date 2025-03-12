@@ -15,6 +15,9 @@ import { TextArea } from "@/components/TextArea";
 import IconAttachment from "@/components/Icon/components/icons/IconAttachment";
 import { FileCardList } from "@/components/FileCardList";
 import { FileCard } from "@/components/FileCard";
+import { Field, Form } from "@/integrations/react-hook-form";
+import { action } from "@storybook/addon-actions";
+import { useForm } from "react-hook-form";
 
 const meta: Meta<typeof Chat> = {
   title: "Chat/Chat",
@@ -22,7 +25,7 @@ const meta: Meta<typeof Chat> = {
   parameters: {
     controls: { exclude: ["className"] },
   },
-  args: { height: 500 },
+  args: { height: 400 },
   render: (props) => (
     <Chat {...props}>
       <MessageThread>
@@ -99,4 +102,42 @@ export const WithUpload: Story = {
       </FileCardList>
     </Chat>
   ),
+};
+
+export const WithForm: Story = {
+  render: (props) => {
+    const form = useForm();
+    return (
+      <Chat {...props}>
+        <MessageThread>
+          <Message>
+            <Header>
+              <Align>
+                <Avatar>
+                  <Initials>Max Mustermann</Initials>
+                </Avatar>
+                <Text>
+                  <b>Max Mustermann</b>
+                </Text>
+              </Align>
+            </Header>
+            <Content>
+              <Text>{dummyText.long}</Text>
+            </Content>
+          </Message>
+        </MessageThread>
+        <Form
+          form={form}
+          onSubmit={() => {
+            action("submitted");
+          }}
+        >
+          <Field name="message">
+            <TextArea aria-label="message" rows={1} autoResizeMaxRows={4} />
+          </Field>
+          <Button color="accent">Submit</Button>
+        </Form>
+      </Chat>
+    );
+  },
 };

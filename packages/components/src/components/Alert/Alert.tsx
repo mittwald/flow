@@ -3,8 +3,8 @@ import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import type { PropsContext } from "@/lib/propsContext";
 import { dynamic, PropsContextProvider } from "@/lib/propsContext";
+import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
 import type { PropsWithStatus } from "@/lib/types/props";
-import ClearPropsContextView from "@/views/ClearPropsContextView";
 import clsx from "clsx";
 import type { ComponentProps, PropsWithChildren } from "react";
 import styles from "./Alert.module.scss";
@@ -14,7 +14,10 @@ export interface AlertProps
     PropsWithStatus,
     FlowComponentProps {}
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const Alert = flowComponent<"Alert", HTMLElement>("Alert", (props) => {
   const { children, className, status = "info", ref, ...rest } = props;
 
@@ -41,13 +44,13 @@ export const Alert = flowComponent<"Alert", HTMLElement>("Alert", (props) => {
   };
 
   return (
-    <ClearPropsContextView>
+    <ClearPropsContext>
       <aside {...rest} className={rootClassName} ref={ref}>
         <PropsContextProvider props={propsContext}>
           {children}
         </PropsContextProvider>
       </aside>
-    </ClearPropsContextView>
+    </ClearPropsContext>
   );
 });
 

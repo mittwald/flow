@@ -8,6 +8,9 @@ export { type RemoteInitialsElement } from "@mittwald/flow-remote-elements";
 export const Initials = createFlowRemoteComponent(
   "flr-initials",
   "Initials",
+  {
+    clearPropsContext: true,
+  },
   RemoteInitialsElement,
   {
     slotProps: {

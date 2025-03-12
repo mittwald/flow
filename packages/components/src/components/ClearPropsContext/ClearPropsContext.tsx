@@ -1,12 +1,18 @@
-import { propsContext } from "@/lib/propsContext/propsContext";
+import { ClearPropsContextContent } from "@/components/ClearPropsContext/components";
+import ClearPropsContextContentView from "@/views/ClearPropsContextContentView";
 import type { FC, PropsWithChildren } from "react";
 
 export type ClearPropsContextProps = PropsWithChildren;
 
-/** @flr-generate all */
 export const ClearPropsContext: FC<ClearPropsContextProps> = (props) => {
-  const { children } = props;
-  return <propsContext.Provider value={{}}>{children}</propsContext.Provider>;
+  const { children, ...restProps } = props;
+  return (
+    <ClearPropsContextContent {...restProps}>
+      <ClearPropsContextContentView {...restProps}>
+        {children}
+      </ClearPropsContextContentView>
+    </ClearPropsContextContent>
+  );
 };
 
 export default ClearPropsContext;

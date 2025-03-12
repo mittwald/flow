@@ -8,6 +8,9 @@ export { type RemoteIllustratedMessageElement } from "@mittwald/flow-remote-elem
 export const IllustratedMessage = createFlowRemoteComponent(
   "flr-illustrated-message",
   "IllustratedMessage",
+  {
+    clearPropsContext: true,
+  },
   RemoteIllustratedMessageElement,
   {
     slotProps: {

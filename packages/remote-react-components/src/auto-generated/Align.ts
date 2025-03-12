@@ -8,6 +8,9 @@ export { type RemoteAlignElement } from "@mittwald/flow-remote-elements";
 export const Align = createFlowRemoteComponent(
   "flr-align",
   "Align",
+  {
+    clearPropsContext: true,
+  },
   RemoteAlignElement,
   {
     slotProps: {

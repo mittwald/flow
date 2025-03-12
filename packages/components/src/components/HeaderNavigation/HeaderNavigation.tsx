@@ -1,13 +1,14 @@
-import { Text } from "@/components/Text";
+import type { ComponentProps, FC, PropsWithChildren } from "react";
+import React from "react";
 import {
   dynamic,
   type PropsContext,
   PropsContextProvider,
 } from "@/lib/propsContext";
-import type { PropsWithClassName } from "@/lib/types/props";
 import clsx from "clsx";
-import type { ComponentProps, FC, PropsWithChildren } from "react";
 import styles from "./HeaderNavigation.module.scss";
+import type { PropsWithClassName } from "@/lib/types/props";
+import { Text } from "@/components/Text";
 
 export interface HeaderNavigationProps
   extends PropsWithChildren<ComponentProps<"nav">>,
@@ -16,7 +17,10 @@ export interface HeaderNavigationProps
   color?: "primary" | "dark" | "light";
 }
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const HeaderNavigation: FC<HeaderNavigationProps> = (props) => {
   const { children, className, color = "primary", ...rest } = props;
 

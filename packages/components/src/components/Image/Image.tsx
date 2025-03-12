@@ -1,6 +1,6 @@
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import ClearPropsContextView from "@/views/ClearPropsContextView";
+import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
 import clsx from "clsx";
 import type { ComponentProps } from "react";
 import styles from "./Image.module.scss";
@@ -10,16 +10,19 @@ export interface ImageProps extends ComponentProps<"img">, FlowComponentProps {
   withBorder?: boolean;
 }
 
-/** @flr-generate all */
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const Image = flowComponent("Image", (props) => {
   const { className, withBorder, ...rest } = props;
 
   const rootClassName = clsx(withBorder && styles.border, className);
 
   return (
-    <ClearPropsContextView>
+    <ClearPropsContext>
       <img className={rootClassName} {...rest} />
-    </ClearPropsContextView>
+    </ClearPropsContext>
   );
 });
 

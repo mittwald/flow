@@ -8,7 +8,7 @@ import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import type { OverlayController } from "@/lib/controller/overlay";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import { Overlay } from "@/components/Overlay";
+import { Overlay } from "@/components/Overlay/Overlay";
 import { Action } from "@/components/Action";
 import { IconClose } from "@/components/Icon/components/icons";
 import type { PropsWithClassName } from "@/lib/types/props";

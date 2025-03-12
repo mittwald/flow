@@ -8,6 +8,9 @@ export { type RemoteLightBoxElement } from "@mittwald/flow-remote-elements";
 export const LightBox = createFlowRemoteComponent(
   "flr-light-box",
   "LightBox",
+  {
+    clearPropsContext: true,
+  },
   RemoteLightBoxElement,
   {
     slotProps: {

@@ -8,6 +8,9 @@ export { type RemoteDialogTriggerElement } from "@mittwald/flow-remote-elements"
 export const DialogTrigger = createFlowRemoteComponent(
   "flr-dialog-trigger",
   "DialogTrigger",
+  {
+    clearPropsContext: false,
+  },
   RemoteDialogTriggerElement,
   {
     slotProps: {

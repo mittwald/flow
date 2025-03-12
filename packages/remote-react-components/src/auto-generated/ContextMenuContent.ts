@@ -8,6 +8,9 @@ export { type RemoteContextMenuContentElement } from "@mittwald/flow-remote-elem
 export const ContextMenuContent = createFlowRemoteComponent(
   "flr-context-menu-content",
   "ContextMenuContent",
+  {
+    clearPropsContext: false,
+  },
   RemoteContextMenuContentElement,
   {
     slotProps: {
