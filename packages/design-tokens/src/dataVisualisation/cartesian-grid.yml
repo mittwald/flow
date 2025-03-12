@@ -1,0 +1,5 @@
+cartesian-grid:
+  color:
+    value: "{color.gray.700}"
+  stroke-width:
+    value: "{border-width.100}"

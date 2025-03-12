@@ -1,0 +1,13 @@
+axis:
+  axis-to-tick-spacing:
+    value: "{size-px.s}"
+  font-size:
+    value: "{font-size-text.s}"
+  color:
+    value: "{color.gray.700}"
+  text-color:
+    value: "{neutral.color.1000}"
+  stroke-width:
+    value: "{border-width.100}"
+  tick-size:
+    value: "{size-px.s}"

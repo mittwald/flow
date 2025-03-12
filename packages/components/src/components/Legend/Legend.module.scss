@@ -1,0 +1,6 @@
+.legendContent {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  gap: var(--legend--item-spacing);
+}

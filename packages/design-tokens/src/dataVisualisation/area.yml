@@ -1,0 +1,5 @@
+area:
+  border-width:
+    value: "{border-width.200}"
+  border-color:
+    value: "#FFFFFF"

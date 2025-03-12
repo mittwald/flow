@@ -1,0 +1,12 @@
+.legendItem {
+  display: flex;
+  flex-direction: row;
+  gap: var(--legend-item--marker-to-label-spacing);
+  align-items: center;
+
+  .colorSquare {
+    height: var(--legend-item--marker--size);
+    width: var(--legend-item--marker--size);
+    border-radius: var(--legend-item--marker--corner-radius);
+  }
+}
