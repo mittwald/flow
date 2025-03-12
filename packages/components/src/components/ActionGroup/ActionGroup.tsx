@@ -15,8 +15,6 @@ export interface ActionGroupProps
   extends PropsWithChildren,
     FlowComponentProps,
     PropsWithClassName {
-  /** Whether the breakpoints for a compact version should be ignored. */
-  ignoreBreakpoint?: boolean;
   /** The spacing between the buttons inside the action group. @default "m" */
   spacing?: "s" | "m";
 }
@@ -29,17 +27,12 @@ export const ActionGroup = flowComponent<"ActionGroup", HTMLDivElement>(
       children,
       className,
       ref,
-      ignoreBreakpoint,
+
       spacing = "s",
       ...rest
     } = props;
 
-    const rootClassName = clsx(
-      styles.actionGroupContainer,
-      className,
-      ignoreBreakpoint && styles.ignoreBreakpoint,
-      styles[spacing],
-    );
+    const rootClassName = clsx(styles.actionGroup, className, styles[spacing]);
 
     const propsContext: PropsContext = {
       Button: {
@@ -66,10 +59,8 @@ export const ActionGroup = flowComponent<"ActionGroup", HTMLDivElement>(
       <ActionStateContextProvider>
         <PropsContextProvider props={propsContext} mergeInParentContext>
           <TunnelProvider>
-            <div {...rest} className={rootClassName} ref={ref}>
-              <div className={styles.actionGroup} role="group">
-                {children}
-              </div>
+            <div {...rest} className={rootClassName} ref={ref} role="group">
+              {children}
             </div>
           </TunnelProvider>
         </PropsContextProvider>
