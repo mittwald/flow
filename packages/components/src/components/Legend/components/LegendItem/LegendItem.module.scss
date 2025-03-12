@@ -1,7 +1,7 @@
 .legendItem {
   display: flex;
   flex-direction: row;
-  gap: var(--legend-item--marker-to-label-spacing);
+  gap: var(--legend-item--spacing);
   align-items: center;
 
   .colorSquare {

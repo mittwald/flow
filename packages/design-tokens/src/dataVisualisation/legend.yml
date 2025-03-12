@@ -3,7 +3,7 @@ legend:
     value: "{size-px.m}"
 
 legend-item:
-  marker-to-label-spacing:
+  spacing:
     value: "{size-rem.s}"
   marker:
     size:

@@ -2,4 +2,4 @@ area:
   border-width:
     value: "{border-width.200}"
   border-color:
-    value: "#FFFFFF"
+    value: "{neutral.color.100}"
