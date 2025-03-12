@@ -6,6 +6,7 @@ export * from "@/components/Alert";
 export * from "@/components/AlertBadge";
 export * from "@/components/AlertIcon";
 export * from "@/components/Align";
+export * from "@/components/AreaChart";
 export * from "@/components/Avatar";
 export * from "@/components/AvatarStack";
 export * from "@/components/Badge";
