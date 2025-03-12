@@ -1,5 +1,5 @@
 axis:
-  axis-to-tick-spacing:
+  spacing:
     value: "{size-px.s}"
   font-size:
     value: "{font-size-text.s}"

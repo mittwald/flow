@@ -18,7 +18,7 @@ export const XAxis: FC<XAxisProps> = (props) => {
       tick={{
         fill: tokens.axis["text-color"].value,
       }}
-      tickMargin={parseInt(tokens.axis["axis-to-tick-spacing"].value)}
+      tickMargin={parseInt(tokens.axis.spacing.value)}
       tickSize={parseInt(tokens.axis["tick-size"].value)}
       {...rest}
     />

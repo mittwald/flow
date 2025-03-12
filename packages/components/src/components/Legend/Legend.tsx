@@ -3,6 +3,7 @@ import * as Recharts from "recharts";
 import type { ContentType } from "recharts/types/component/DefaultLegendContent";
 import { LegendItem } from "./components/LegendItem";
 import styles from "./Legend.module.scss";
+import tokens from "@mittwald/flow-design-tokens/variables.json";
 
 export type LegendProps = Omit<
   Recharts.LegendProps,
@@ -24,7 +25,7 @@ export const Legend: FC<LegendProps> = (props) => {
               color={
                 entry.payload && "fill" in entry.payload
                   ? (entry.payload?.fill as string)
-                  : "#FFFFFF"
+                  : tokens.color.gray[100].value
               }
             />
           </li>

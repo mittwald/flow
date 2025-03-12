@@ -68,7 +68,6 @@ import type { OptionProps } from "@/components/Option";
 import type { MessageProps } from "@/components/Message";
 import type { MessageThreadProps } from "@/components/MessageThread";
 import type { FileCardListProps } from "@/components/FileCardList";
-import type { AreaChartProps } from "@/components/AreaChart";
 
 export * from "./types";
 
@@ -79,7 +78,6 @@ export interface FlowComponentPropsTypes {
   AlertBadge: AlertBadgeProps;
   AlertIcon: AlertIconProps;
   Align: AlignProps;
-  AreaChart: AreaChartProps;
   Avatar: AvatarProps;
   Badge: BadgeProps;
   Button: ButtonProps;
@@ -152,7 +150,6 @@ const propsContextSupportingComponentsMap: Record<
   AlertBadge: true,
   AlertIcon: true,
   Align: true,
-  AreaChart: true,
   Badge: true,
   Button: true,
   Checkbox: true,
