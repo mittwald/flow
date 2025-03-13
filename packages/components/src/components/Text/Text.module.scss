@@ -1,5 +1,6 @@
 .text {
   color: inherit;
+  white-space: pre-line;
 
   &:where(.light) {
     color: var(--text--color--light);
