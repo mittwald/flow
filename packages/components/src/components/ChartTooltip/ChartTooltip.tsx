@@ -9,26 +9,56 @@ import { LegendItem } from "../Legend/components/LegendItem";
 import Heading from "../Heading";
 import clsx from "clsx";
 
-export type ChartTooltipProps = Pick<
-  Recharts.TooltipProps<ValueType, NameType>,
-  "wrapperClassName" | "allowEscapeViewBox"
->;
+interface WithTooltipFormatters {
+  formatter?: (
+    value: ValueType,
+    name: NameType,
+    index: number,
+    unit?: string | number,
+  ) => string;
+  headingFormatter?: (title: string) => string;
+}
 
-const CustomTooltip = (
-  props: Recharts.TooltipContentProps<ValueType, NameType>,
-) => {
-  const { active, payload, label, wrapperClassName } = props;
+export interface ChartTooltipProps
+  extends Pick<
+      Recharts.TooltipProps<ValueType, NameType>,
+      "wrapperClassName" | "allowEscapeViewBox"
+    >,
+    WithTooltipFormatters {}
+
+interface TooltipContentProps
+  extends Pick<
+      Recharts.TooltipContentProps<ValueType, NameType>,
+      "active" | "payload" | "label" | "wrapperClassName"
+    >,
+    WithTooltipFormatters {}
+
+const CustomTooltip = (props: TooltipContentProps) => {
+  const {
+    active,
+    payload,
+    formatter,
+    headingFormatter,
+    label,
+    wrapperClassName,
+  } = props;
   const className = clsx(wrapperClassName, styles.popover);
 
   if (active && payload && payload.length) {
     return (
       <div className={className}>
         <div className={styles.content}>
-          <Heading level={3}>{label}</Heading>
-          {payload.map((i) => (
+          <Heading level={3}>
+            {headingFormatter ? headingFormatter(label) : label}
+          </Heading>
+          {payload.map((i, index) => (
             <LegendItem
               color={i.fill}
-              title={`${i.dataKey} ${i.value}${i.unit ? ` ${i.unit}` : ""}`}
+              title={
+                formatter
+                  ? formatter(i.value, i.dataKey, index, i.unit)
+                  : `${i.dataKey} ${i.value}${i.unit ? ` ${i.unit}` : ""}`
+              }
               key={i.dataKey}
             />
           ))}
@@ -41,10 +71,25 @@ const CustomTooltip = (
 };
 
 export const ChartTooltip: FC<ChartTooltipProps> = (props) => {
+  const { formatter, headingFormatter, ...rest } = props;
   return (
     <Recharts.Tooltip
-      {...props}
-      content={(props) => <CustomTooltip {...props} />}
+      {...rest}
+      content={(props) => {
+        const {
+          formatter: ignoredFormatter,
+          labelFormatter: ignoredLabelFormatter,
+          ...rest
+        } = props;
+
+        return (
+          <CustomTooltip
+            formatter={formatter}
+            headingFormatter={headingFormatter}
+            {...rest}
+          />
+        );
+      }}
     />
   );
 };
