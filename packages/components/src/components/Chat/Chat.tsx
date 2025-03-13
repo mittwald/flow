@@ -18,7 +18,6 @@ export const Chat: FC<ChatProps> = (props) => {
 
   const propsContext: PropsContext = {
     MessageThread: {
-      className: styles.messageThread,
       tunnelId: "messageThread",
     },
     FileCardList: { className: styles.fileCardList, tunnelId: "fileCardList" },
@@ -28,7 +27,9 @@ export const Chat: FC<ChatProps> = (props) => {
     <PropsContextProvider props={propsContext} mergeInParentContext>
       <div style={{ height }} className={rootClassName}>
         <TunnelProvider>
-          <TunnelExit id="messageThread" />
+          <div className={styles.messageThreadContainer}>
+            <TunnelExit id="messageThread" />
+          </div>
           <div className={styles.controls}>{children}</div>
           <TunnelExit id="fileCardList" />
         </TunnelProvider>
