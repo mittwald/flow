@@ -15,6 +15,9 @@
 
   .column {
     font-weight: var(--table--header-font-weight);
+    &:empty {
+      display: none;
+    }
   }
 
   .cell,
