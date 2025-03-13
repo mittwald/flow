@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.88](https://github.com/mittwald/flow/compare/0.2.0-alpha.87...0.2.0-alpha.88) (2025-03-13)
+
+### Bug Fixes
+
+* **Table:** add required columns ([#1267](https://github.com/mittwald/flow/issues/1267)) ([bed4335](https://github.com/mittwald/flow/commit/bed433592c176ccc198c500102a0459d9c6adef3))
+
+### Features
+
+* **Chat:** scroll to bottom ([#1266](https://github.com/mittwald/flow/issues/1266)) ([224103d](https://github.com/mittwald/flow/commit/224103de8c227b6369bcc328b6ae4c23e75ed53c))
+
 # [0.2.0-alpha.87](https://github.com/mittwald/flow/compare/0.2.0-alpha.86...0.2.0-alpha.87) (2025-03-12)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
