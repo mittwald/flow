@@ -30,9 +30,10 @@ export const Default: Story = {};
 
 export const Disabled: Story = { args: { isDisabled: true } };
 
-export const Required: Story = {
-  args: { isRequired: true },
-};
+// has no effect, @see https://github.com/adobe/react-spectrum/issues/7221
+export const Autofocus: Story = { args: { autoFocus: true } };
+
+export const Required: Story = { args: { isRequired: true } };
 
 export const WithFieldDescription: Story = {
   render: (props) => (
