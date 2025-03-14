@@ -12,7 +12,6 @@ export class RemoteButtonElement extends FlowRemoteElement<RemoteButtonElementPr
   static override get remoteProperties() {
     return {
       "aria-controls": {},
-      "aria-current": {},
       "aria-describedby": {},
       "aria-details": {},
       "aria-disabled": {},

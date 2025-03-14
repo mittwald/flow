@@ -26,7 +26,7 @@ export interface RemoteRendererProps {
 }
 
 interface PromiseObject {
-  promise: null | Promise<void> | Error;
+  result: null | Promise<void> | Error;
   resolve: CallableFunction;
   reject: CallableFunction;
 }
@@ -49,13 +49,13 @@ export const RemoteRendererClient: FC<RemoteRendererProps> = (props) => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const checkRenderTimeout = useRef<number>(null);
   const awaiter = useRef<PromiseObject>({
-    promise: null,
+    result: null,
     resolve: voidFunction,
     reject: voidFunction,
   }).current;
 
-  if (awaiter.promise !== null) {
-    throw awaiter.promise;
+  if (awaiter.result !== null) {
+    throw awaiter.result;
   }
 
   const clearRenderTimeout = () => {
@@ -98,16 +98,16 @@ export const RemoteRendererClient: FC<RemoteRendererProps> = (props) => {
     clearRenderTimeout();
     iframeRef.current.src = src;
 
-    awaiter.promise = new Promise((resolve, reject) => {
+    awaiter.result = new Promise((resolve, reject) => {
       awaiter.resolve = () => {
         clearRenderTimeout();
         resolve();
-        awaiter.promise = null;
+        awaiter.result = null;
       };
       awaiter.reject = (reason: string) => {
         clearRenderTimeout();
         reject();
-        awaiter.promise = new Error(reason);
+        awaiter.result = new Error(reason);
       };
     });
 

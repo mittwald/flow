@@ -26,7 +26,6 @@ export class RemoteTextAreaElement extends FlowRemoteElement<RemoteTextAreaEleme
       autoResizeMaxRows: {},
       className: {},
       defaultValue: {},
-      enterKeyHint: {},
       excludeFromTabOrder: {},
       id: {},
       inputMode: {},

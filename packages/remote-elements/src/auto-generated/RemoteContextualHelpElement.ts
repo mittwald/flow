@@ -12,10 +12,6 @@ export class RemoteContextualHelpElement extends FlowRemoteElement<RemoteContext
   static override get remoteProperties() {
     return {
       UNSTABLE_portalContainer: {},
-      "aria-describedby": {},
-      "aria-details": {},
-      "aria-label": {},
-      "aria-labelledby": {},
       arrowBoundaryOffset: {},
       boundaryElement: {},
       className: {},
