@@ -6,6 +6,7 @@ export * from "./Alert";
 export * from "./AlertBadge";
 export * from "./AlertIcon";
 export * from "./Align";
+export * from "./AreaChart";
 export * from "./Avatar";
 export * from "./AvatarStack";
 export * from "./Badge";

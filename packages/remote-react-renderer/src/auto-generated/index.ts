@@ -7,6 +7,7 @@ import { Alert as Alert } from "@mittwald/flow-react-components";
 import { AlertBadge as AlertBadge } from "@mittwald/flow-react-components";
 import { AlertIcon as AlertIcon } from "@mittwald/flow-react-components";
 import { Align as Align } from "@mittwald/flow-react-components";
+import { AreaChart as AreaChart } from "@mittwald/flow-react-components";
 import { Avatar as Avatar } from "@mittwald/flow-react-components";
 import { AvatarStack as AvatarStack } from "@mittwald/flow-react-components";
 import { Badge as Badge } from "@mittwald/flow-react-components";
@@ -110,6 +111,7 @@ export const flowComponents = {
   "flr-alert-badge": createFlowRemoteComponentRenderer(AlertBadge),
   "flr-alert-icon": createFlowRemoteComponentRenderer(AlertIcon),
   "flr-align": createFlowRemoteComponentRenderer(Align),
+  "flr-area-chart": createFlowRemoteComponentRenderer(AreaChart),
   "flr-avatar": createFlowRemoteComponentRenderer(Avatar),
   "flr-avatar-stack": createFlowRemoteComponentRenderer(AvatarStack),
   "flr-badge": createFlowRemoteComponentRenderer(Badge),
