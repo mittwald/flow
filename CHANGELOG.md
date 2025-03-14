@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.89](https://github.com/mittwald/flow/compare/0.2.0-alpha.88...0.2.0-alpha.89) (2025-03-14)
+
+### Bug Fixes
+
+* change default exports to fix storybooks ([#1269](https://github.com/mittwald/flow/issues/1269)) ([b8819df](https://github.com/mittwald/flow/commit/b8819df9223862d31f4b003ee3e064c65c5cbd96))
+
 # [0.2.0-alpha.88](https://github.com/mittwald/flow/compare/0.2.0-alpha.87...0.2.0-alpha.88) (2025-03-13)
 
 ### Bug Fixes
