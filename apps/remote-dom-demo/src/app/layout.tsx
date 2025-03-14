@@ -13,6 +13,12 @@ import { RemoteRoot } from "@mittwald/flow-remote-react-components/RemoteRoot";
 import { usePathname } from "next/navigation";
 import { type PropsWithChildren, Suspense } from "react";
 import styles from "./layout.module.css";
+import type { ErrorComponent } from "next/dist/client/components/error-boundary";
+import { ErrorBoundary } from "next/dist/client/components/error-boundary";
+
+const Error: ErrorComponent = (props) => {
+  return <>REMOTE RENDER ERROR: {props.error.message}</>;
+};
 
 export default function Layout(props: PropsWithChildren) {
   const p = usePathname();
@@ -41,18 +47,20 @@ export default function Layout(props: PropsWithChildren) {
             <Separator />
             <main>
               <div>
-                <Suspense
-                  fallback={
-                    <IllustratedMessage>
-                      <LoadingSpinner />
-                      <Heading>Lade Demo</Heading>
-                    </IllustratedMessage>
-                  }
-                >
-                  <RemoteRoot key={p} showPreview>
-                    {props.children}
-                  </RemoteRoot>
-                </Suspense>
+                <ErrorBoundary errorComponent={Error}>
+                  <Suspense
+                    fallback={
+                      <IllustratedMessage>
+                        <LoadingSpinner />
+                        <Heading>Lade Demo</Heading>
+                      </IllustratedMessage>
+                    }
+                  >
+                    <RemoteRoot key={p} showPreview>
+                      {props.children}
+                    </RemoteRoot>
+                  </Suspense>
+                </ErrorBoundary>
               </div>
             </main>
           </div>
