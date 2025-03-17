@@ -1,3 +1,4 @@
+export * from "@/components/AccentBox";
 export * from "@/components/Accordion";
 export * from "@/components/Action";
 export * from "@/components/ActionGroup";
