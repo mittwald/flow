@@ -22,7 +22,7 @@ import { reduce } from "remeda";
 export interface RemoteRendererProps {
   integrations?: RemoteComponentsMap<never>[];
   src: string;
-  renderErrorTimeout?: number;
+  timeout?: number;
 }
 
 interface PromiseObject {
@@ -31,7 +31,7 @@ interface PromiseObject {
   reject: CallableFunction;
 }
 
-export const HiddenIframeStyle: CSSProperties = {
+const HiddenIframeStyle: CSSProperties = {
   visibility: "hidden",
   height: 0,
   width: 0,
@@ -43,7 +43,7 @@ export const HiddenIframeStyle: CSSProperties = {
 const voidFunction = () => null;
 
 export const RemoteRendererClient: FC<RemoteRendererProps> = (props) => {
-  const { integrations = [], renderErrorTimeout = 10000, src } = props;
+  const { integrations = [], timeout = 10000, src } = props;
   const [, forceRerender] = useState<boolean>(false);
 
   const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -120,7 +120,7 @@ export const RemoteRendererClient: FC<RemoteRendererProps> = (props) => {
         awaiter.reject(
           "RemoteRenderTimeout reached. Remote URL was successfully loaded but no Remote Component was rendered in time.",
         ),
-      renderErrorTimeout,
+      timeout,
     );
   };
 
