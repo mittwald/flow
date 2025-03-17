@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.90](https://github.com/mittwald/flow/compare/0.2.0-alpha.89...0.2.0-alpha.90) (2025-03-17)
+
+### Bug Fixes
+
+* **Text:** remove white-space pre-line ([#1277](https://github.com/mittwald/flow/issues/1277)) ([5db2551](https://github.com/mittwald/flow/commit/5db25511e4de981ca05d806657cc968b5b13f33b))
+
 # [0.2.0-alpha.89](https://github.com/mittwald/flow/compare/0.2.0-alpha.88...0.2.0-alpha.89) (2025-03-14)
 
 ### Bug Fixes
