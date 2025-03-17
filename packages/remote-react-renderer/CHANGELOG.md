@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.92](https://github.com/mittwald/flow/compare/0.2.0-alpha.91...0.2.0-alpha.92) (2025-03-17)
+
+### Features
+
+* throw error if remote rendering fails ([796bdc7](https://github.com/mittwald/flow/commit/796bdc7f8a0b0a710d507e0521794b20bb9cad5c))
+
 # [0.2.0-alpha.91](https://github.com/mittwald/flow/compare/0.2.0-alpha.90...0.2.0-alpha.91) (2025-03-17)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-renderer
