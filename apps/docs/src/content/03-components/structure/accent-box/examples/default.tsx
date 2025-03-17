@@ -13,7 +13,7 @@ import {
       Dein Cronjob läuft in weniger als
       5-Minuten-Intervallen. Das verbraucht mehr Ressourcen.
       Falls das nicht unbedingt nötig ist, kannst du ein
-      längeres Intervall wählren - das spart Energie und
+      längeres Intervall wählen - das spart Energie und
       schützt das Klima
     </Text>
     <Link href="#" target="_blank">
