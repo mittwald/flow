@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.91](https://github.com/mittwald/flow/compare/0.2.0-alpha.90...0.2.0-alpha.91) (2025-03-17)
+
+### Bug Fixes
+
+* **LightBox:** close on click outside everywhere ([#1278](https://github.com/mittwald/flow/issues/1278)) ([30eb888](https://github.com/mittwald/flow/commit/30eb88838180bf027da9d9baf2e81a16f8f29c1e))
+
 # [0.2.0-alpha.90](https://github.com/mittwald/flow/compare/0.2.0-alpha.89...0.2.0-alpha.90) (2025-03-17)
 
 ### Bug Fixes
