@@ -1,14 +1,12 @@
 .modal,
 .offCanvas {
-  overflow: hidden;
-
   > div {
     background-color: var(--modal--background-color);
     overflow: hidden;
   }
 
   [role="dialog"],
-  [role="dialog"]>form {
+  [role="dialog"] > form {
     overflow: hidden;
     outline: none;
     display: grid;
@@ -16,7 +14,7 @@
     max-height: inherit;
   }
 
-  [role="dialog"]:not(:has(>form)) {
+  [role="dialog"]:not(:has(> form)) {
     grid-template-areas:
       "header"
       "content"
@@ -24,14 +22,14 @@
     grid-template-rows: auto 1fr auto;
   }
 
-  [role="dialog"]:has(>form) {
+  [role="dialog"]:has(> form) {
     grid-template-areas:
       "header"
       "content";
     grid-template-rows: auto 1fr;
   }
 
-  [role="dialog"]>form {
+  [role="dialog"] > form {
     grid-area: content;
     grid-template-areas:
       "content"
@@ -49,6 +47,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: var(--section-header--heading-to-action-spacing);
   }
 
   .content {
