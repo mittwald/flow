@@ -15,3 +15,5 @@ type Story = StoryObj<typeof Image>;
 export const Default: Story = {};
 
 export const WithBorder: Story = { args: { withBorder: true } };
+
+export const WithAspectRation: Story = { args: { aspectRatio: 16 / 9 } };

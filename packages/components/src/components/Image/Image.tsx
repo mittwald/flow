@@ -6,8 +6,13 @@ import type { ComponentProps } from "react";
 import styles from "./Image.module.scss";
 
 export interface ImageProps extends ComponentProps<"img">, FlowComponentProps {
-  /** Display the image with border and rounded edges */
+  /** Display the image with border and rounded edges. */
   withBorder?: boolean;
+  /**
+   * The aspect ratio of the images container. Larger images will be centered
+   * and their overflow will be hidden.
+   */
+  aspectRatio?: number;
 }
 
 /**
@@ -15,13 +20,22 @@ export interface ImageProps extends ComponentProps<"img">, FlowComponentProps {
  * @flr-clear-props-context
  */
 export const Image = flowComponent("Image", (props) => {
-  const { className, withBorder, ...rest } = props;
+  const { className, withBorder, style, aspectRatio, ...rest } = props;
 
-  const rootClassName = clsx(withBorder && styles.border, className);
+  const rootClassName = clsx(
+    styles.image,
+    withBorder && styles.border,
+    aspectRatio && styles.aspectRatio,
+    className,
+  );
 
   return (
     <ClearPropsContext>
-      <img className={rootClassName} {...rest} />
+      <img
+        className={rootClassName}
+        style={{ ...style, aspectRatio }}
+        {...rest}
+      />
     </ClearPropsContext>
   );
 });

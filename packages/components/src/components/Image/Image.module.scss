@@ -1,6 +1,15 @@
-.border {
-  border-width: var(--image--border-width);
-  border-style: var(--image--border-style);
-  border-radius: var(--image--corner-radius);
-  border-color: var(--image--border-color);
+.image {
+  max-width: 100%;
+  &.border {
+    border-width: var(--image--border-width);
+    border-style: var(--image--border-style);
+    border-radius: var(--image--corner-radius);
+    border-color: var(--image--border-color);
+  }
+  &.aspectRatio {
+    overflow-clip-margin: unset;
+    object-fit: cover;
+    width: fit-content;
+    overflow: hidden;
+  }
 }
