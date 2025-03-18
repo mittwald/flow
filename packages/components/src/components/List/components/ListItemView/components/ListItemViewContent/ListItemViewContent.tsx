@@ -2,7 +2,6 @@ import type { ComponentProps, PropsWithChildren, ReactNode } from "react";
 import React from "react";
 import styles from "../../ListItemView.module.scss";
 import {
-  ClearPropsContext,
   dynamic,
   type PropsContext,
   PropsContextProvider,
