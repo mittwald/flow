@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.95](https://github.com/mittwald/flow/compare/0.2.0-alpha.94...0.2.0-alpha.95) (2025-03-18)
+
+### Features
+
+* **AccentBox:** add accent box component ([#1279](https://github.com/mittwald/flow/issues/1279)) ([16cdfb4](https://github.com/mittwald/flow/commit/16cdfb4915be1097b5df4998257e77833b661473))
+
 # [0.2.0-alpha.94](https://github.com/mittwald/flow/compare/0.2.0-alpha.93...0.2.0-alpha.94) (2025-03-18)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components
