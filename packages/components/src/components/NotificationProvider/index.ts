@@ -1,5 +1,4 @@
 export * from "./view";
-import NotificationProvider from "./NotificationProvider";
 
 export {
   useNotificationController,
@@ -8,4 +7,4 @@ export {
 export { type NotificationProviderProps } from "./NotificationProvider";
 export { NotificationController } from "./NotificationController";
 
-export default NotificationProvider;
+export { default } from "./NotificationProvider";

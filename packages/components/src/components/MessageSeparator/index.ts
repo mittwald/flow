@@ -1,7 +1,5 @@
-import { MessageSeparator } from "./MessageSeparator";
-
 export {
   type MessageSeparatorProps,
   MessageSeparator,
 } from "./MessageSeparator";
-export default MessageSeparator;
+export { default } from "./MessageSeparator";

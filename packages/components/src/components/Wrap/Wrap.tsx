@@ -12,3 +12,5 @@ export const Wrap: FC<{
 
   return children.props.children;
 };
+
+export default Wrap;
