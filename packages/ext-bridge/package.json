@@ -1,14 +1,14 @@
 {
-  "name": "@mittwald/flow-remote-core",
+  "name": "@mittwald/ext-bridge",
   "version": "0.2.0-alpha.92",
   "type": "module",
-  "description": "Core functionality to setup a remote/host environment",
+  "description": "Bridge for mStudio embedded frontend extensions",
   "homepage": "https://mittwald.github.io/flow",
   "repository": "https://github.com/mittwald/flow",
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
-      "default": "./dist/index.js"
+      "default": "./dist/js/index.mjs"
     }
   },
   "files": [
@@ -24,10 +24,10 @@
     "test:compile": "tsc --noEmit"
   },
   "dependencies": {
-    "@mfalkenberg/remote-dom-core": "^1.7.5",
-    "@mittwald/ext-bridge": "workspace:*",
-    "@quilted/threads": "^3.1.3",
-    "remeda": "^2.21.1"
+    "axios": "^1.8.3",
+    "jose": "^6.0.10",
+    "std-env": "^3.8.1",
+    "zod": "^3.24.2"
   },
   "devDependencies": {
     "@mittwald/typescript-config": "workspace:*",

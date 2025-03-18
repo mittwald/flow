@@ -1,12 +1,14 @@
 "use client";
 import * as viewComponents from "@/auto-generated";
 import Preview from "@/components/Preview";
+import type { ExtBridgeFunctions } from "@mittwald/ext-bridge";
 import { ViewComponentContextProvider } from "@mittwald/flow-react-components/internal";
 import { connectHostRenderRootRef } from "@mittwald/flow-remote-core";
 import { type FC, type PropsWithChildren } from "react";
 
 export interface RootClientProps extends PropsWithChildren {
   showPreview?: boolean;
+  extBridgeImplementation?: ExtBridgeFunctions;
 }
 
 export const RemoteRootClient: FC<RootClientProps> = (props) => {

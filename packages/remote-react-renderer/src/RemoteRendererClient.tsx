@@ -7,6 +7,7 @@ import {
   RemoteReceiver,
   RemoteRootRenderer,
 } from "@mfalkenberg/remote-dom-react/host";
+import type { ExtBridgeFunctions } from "@mittwald/ext-bridge";
 import { connectRemoteIframeRef } from "@mittwald/flow-remote-core";
 import {
   type ComponentType,
@@ -23,6 +24,7 @@ export interface RemoteRendererProps {
   integrations?: RemoteComponentsMap<never>[];
   src: string;
   timeout?: number;
+  extBridgeImplementation?: ExtBridgeFunctions;
 }
 
 interface PromiseObject {
@@ -43,7 +45,13 @@ const HiddenIframeStyle: CSSProperties = {
 const voidFunction = () => null;
 
 export const RemoteRendererClient: FC<RemoteRendererProps> = (props) => {
-  const { integrations = [], timeout = 10000, src } = props;
+  const {
+    integrations = [],
+    timeout = 10_000,
+    src,
+    extBridgeImplementation,
+  } = props;
+
   const [, forceRerender] = useState<boolean>(false);
 
   const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -88,7 +96,10 @@ export const RemoteRendererClient: FC<RemoteRendererProps> = (props) => {
     return remoteReceiver;
   }, []);
 
-  const connect = connectRemoteIframeRef(receiver.connection);
+  const connect = connectRemoteIframeRef(
+    receiver.connection,
+    extBridgeImplementation,
+  );
 
   useLayoutEffect(() => {
     if (!src || !iframeRef.current || iframeRef.current.src === src) {

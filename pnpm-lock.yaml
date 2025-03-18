@@ -263,7 +263,7 @@ importers:
         version: link:../../packages/stylesheet
       '@mittwald/react-use-promise':
         specifier: ^3.0.1
-        version: 3.0.1(axios@1.8.2)(react@19.0.0)
+        version: 3.0.1(axios@1.8.3)(react@19.0.0)
       '@tabler/icons-react':
         specifier: ^3.31.0
         version: 3.31.0(react@19.0.0)
@@ -342,7 +342,7 @@ importers:
         version: link:../react-tunnel
       '@mittwald/react-use-promise':
         specifier: ^3.0.1
-        version: 3.0.1(axios@1.8.2)(react@19.0.0)
+        version: 3.0.1(axios@1.8.3)(react@19.0.0)
       '@react-aria/form':
         specifier: ^3.0.14
         version: 3.0.14(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -648,6 +648,55 @@ importers:
         specifier: ^4.3.3
         version: 4.3.3
 
+  packages/ext-bridge:
+    dependencies:
+      axios:
+        specifier: ^1.8.3
+        version: 1.8.3
+      jose:
+        specifier: ^6.0.10
+        version: 6.0.10
+      std-env:
+        specifier: ^3.8.1
+        version: 3.8.1
+      zod:
+        specifier: ^3.24.2
+        version: 3.24.2
+    devDependencies:
+      '@mittwald/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      '@types/node':
+        specifier: ^22.13.10
+        version: 22.13.10
+      nx:
+        specifier: ^20.5.0
+        version: 20.5.0
+      prettier:
+        specifier: ^3.5.3
+        version: 3.5.3
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
+      rollup-preserve-directives:
+        specifier: ^1.1.3
+        version: 1.1.3(rollup@4.35.0)
+      typescript:
+        specifier: ^5.8.2
+        version: 5.8.2
+      vite:
+        specifier: ^6.2.1
+        version: 6.2.1(@types/node@22.13.10)(less@4.2.2)(sass@1.85.1)(stylus@0.62.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0)
+      vite-plugin-checker:
+        specifier: ^0.9.0
+        version: 0.9.0(eslint@9.22.0)(optionator@0.9.4)(typescript@5.8.2)(vite@6.2.1(@types/node@22.13.10)(less@4.2.2)(sass@1.85.1)(stylus@0.62.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0))
+      vite-plugin-dts:
+        specifier: ^4.5.3
+        version: 4.5.3(@types/node@22.13.10)(rollup@4.35.0)(typescript@5.8.2)(vite@6.2.1(@types/node@22.13.10)(less@4.2.2)(sass@1.85.1)(stylus@0.62.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0))
+      vite-plugin-externalize-deps:
+        specifier: ^0.9.0
+        version: 0.9.0(vite@6.2.1(@types/node@22.13.10)(less@4.2.2)(sass@1.85.1)(stylus@0.62.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0))
+
   packages/react-tunnel:
     dependencies:
       mobx:
@@ -726,6 +775,9 @@ importers:
       '@mfalkenberg/remote-dom-core':
         specifier: ^1.7.5
         version: 1.7.5(@preact/signals-core@1.8.0)
+      '@mittwald/ext-bridge':
+        specifier: workspace:*
+        version: link:../ext-bridge
       '@quilted/threads':
         specifier: ^3.1.3
         version: 3.1.3(@preact/signals-core@1.8.0)
@@ -821,6 +873,9 @@ importers:
       '@mfalkenberg/remote-dom-react':
         specifier: 1.2.3
         version: 1.2.3(@preact/signals-core@1.8.0)(react@19.0.0)
+      '@mittwald/ext-bridge':
+        specifier: workspace:*
+        version: link:../ext-bridge
       '@mittwald/flow-react-components':
         specifier: workspace:*
         version: link:../components
@@ -888,6 +943,9 @@ importers:
       '@mfalkenberg/remote-dom-react':
         specifier: 1.2.3
         version: 1.2.3(@preact/signals-core@1.8.0)(react@19.0.0)
+      '@mittwald/ext-bridge':
+        specifier: workspace:*
+        version: link:../ext-bridge
       '@mittwald/flow-remote-core':
         specifier: workspace:*
         version: link:../remote-core
@@ -4197,8 +4255,8 @@ packages:
     resolution: {integrity: sha512-Xm7bpRXnDSX2YE2YFfBk2FnF0ep6tmG7xPh8iHee8MIcrgq762Nkce856dYtJYLkuIoYZvGfTs/PbZhideTcEg==}
     engines: {node: '>=4'}
 
-  axios@1.8.2:
-    resolution: {integrity: sha512-ls4GYBm5aig9vWx8AWDSGLpnpDQRtWAfrjU+EuytuODrFBkqesN2RkOQCBzrA1RQNHw1SmRMSDDDSwzNAYQ6Rg==}
+  axios@1.8.3:
+    resolution: {integrity: sha512-iP4DebzoNlP/YN2dpwCgb8zoCmhtkajzS48JvwmkSkXvPI3DHc7m+XYL5tGnSlJtR6nImXZmdCuN5aP8dh1d8A==}
 
   babel-plugin-const-enum@1.2.0:
     resolution: {integrity: sha512-o1m/6iyyFnp9MRsK1dHF3bneqyf3AlM2q3A/YbgQr2pCat6B6XJVDv2TXqzfY2RYUi4mak6WAksSBPlyYGx9dg==}
@@ -5843,6 +5901,9 @@ packages:
 
   jju@1.4.0:
     resolution: {integrity: sha512-8wb9Yw966OSxApiCt0K3yNJL8pnNeIv+OEq2YMidz4FKP6nonSRoOXc80iXY4JaN2FC11B9qsNmDsm+ZOfMROA==}
+
+  jose@6.0.10:
+    resolution: {integrity: sha512-skIAxZqcMkOrSwjJvplIPYrlXGpxTPnro2/QWTDCxAdWQrSTV5/KqspMWmi5WAx5+ULswASJiZ0a+1B/Lxt9cw==}
 
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
@@ -10050,7 +10111,7 @@ snapshots:
 
   '@microsoft/tsdoc@0.15.1': {}
 
-  '@mittwald/react-use-promise@3.0.1(axios@1.8.2)(react@19.0.0)':
+  '@mittwald/react-use-promise@3.0.1(axios@1.8.3)(react@19.0.0)':
     dependencies:
       '@types/luxon': 3.4.2
       browser-or-node: 3.0.0
@@ -10059,7 +10120,7 @@ snapshots:
       object-code: 1.3.3
       react: 19.0.0
     optionalDependencies:
-      axios: 1.8.2
+      axios: 1.8.3
 
   '@mswjs/interceptors@0.37.6':
     dependencies:
@@ -12795,7 +12856,7 @@ snapshots:
 
   axe-core@4.10.3: {}
 
-  axios@1.8.2:
+  axios@1.8.3:
     dependencies:
       follow-redirects: 1.15.9
       form-data: 4.0.2
@@ -14573,6 +14634,8 @@ snapshots:
 
   jju@1.4.0: {}
 
+  jose@6.0.10: {}
+
   js-tokens@4.0.0: {}
 
   js-yaml@3.14.1:
@@ -15722,7 +15785,7 @@ snapshots:
       '@yarnpkg/lockfile': 1.1.0
       '@yarnpkg/parsers': 3.0.2
       '@zkochan/js-yaml': 0.0.7
-      axios: 1.8.2
+      axios: 1.8.3
       chalk: 4.1.2
       cli-cursor: 3.1.0
       cli-spinners: 2.6.1

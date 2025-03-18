@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "@mfalkenberg/remote-dom-react": "1.2.3",
+    "@mittwald/ext-bridge": "workspace:*",
     "@mittwald/flow-remote-core": "workspace:*",
     "@mittwald/flow-remote-elements": "workspace:*",
     "@types/react": "^19.0.10",
