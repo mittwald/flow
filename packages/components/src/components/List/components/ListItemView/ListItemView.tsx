@@ -44,6 +44,9 @@ export const ListItemView = (props: ListItemViewProps) => {
     Content: {
       tunnelId: dynamic((p) => (p.slot === "bottom" ? "bottom" : undefined)),
     },
+    Checkbox: {
+      tunnelId: "checkbox",
+    },
   };
 
   return (
@@ -74,6 +77,11 @@ export const ListItemView = (props: ListItemViewProps) => {
           bottom={
             <FragmentView>
               <TunnelExit id="bottom" />
+            </FragmentView>
+          }
+          checkbox={
+            <FragmentView>
+              <TunnelExit id="checkbox" />
             </FragmentView>
           }
         >

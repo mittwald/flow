@@ -16,6 +16,8 @@ import { DateTime } from "luxon";
 import type List from "../List";
 import { domains } from "../testData/domainApi";
 import defaultMeta from "./Default.stories";
+import { Checkbox } from "@/components/Checkbox";
+import React from "react";
 
 const meta: Meta<typeof List> = {
   ...defaultMeta,
@@ -107,6 +109,7 @@ export const VeryLongWords: Story = {
         <List.Item showTiles textValue={(user) => user.name}>
           {(user) => (
             <List.ItemView>
+              <Checkbox aria-label="select user" />
               <Avatar>
                 <Initials>{user.name}</Initials>
               </Avatar>

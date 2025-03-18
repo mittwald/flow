@@ -20,7 +20,7 @@ export class RemoteListItemViewContentElement extends FlowRemoteElement<RemoteLi
   }
 
   static override get remoteSlots() {
-    return ["avatar", "bottom", "button", "subTitle", "title"];
+    return ["avatar", "bottom", "button", "checkbox", "subTitle", "title"];
   }
 }
 
