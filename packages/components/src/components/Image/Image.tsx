@@ -20,7 +20,8 @@ export interface ImageProps extends ComponentProps<"img">, FlowComponentProps {
  * @flr-clear-props-context
  */
 export const Image = flowComponent("Image", (props) => {
-  const { className, withBorder, style, aspectRatio, ...rest } = props;
+  const { className, withBorder, style, aspectRatio, width, height, ...rest } =
+    props;
 
   const rootClassName = clsx(
     styles.image,
@@ -33,7 +34,7 @@ export const Image = flowComponent("Image", (props) => {
     <ClearPropsContext>
       <img
         className={rootClassName}
-        style={{ ...style, aspectRatio }}
+        style={{ ...style, aspectRatio, width, height }}
         {...rest}
       />
     </ClearPropsContext>
