@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.94](https://github.com/mittwald/flow/compare/0.2.0-alpha.93...0.2.0-alpha.94) (2025-03-18)
+
+### Bug Fixes
+
+* **Modal:** fix unwanted resize in off canvas ([#1282](https://github.com/mittwald/flow/issues/1282)) ([51aa1f7](https://github.com/mittwald/flow/commit/51aa1f7f30b49deb4e921e1e7025667e96c578b6))
+
 # [0.2.0-alpha.93](https://github.com/mittwald/flow/compare/0.2.0-alpha.92...0.2.0-alpha.93) (2025-03-18)
 
 **Note:** Version bump only for package @mittwald/flow-project
