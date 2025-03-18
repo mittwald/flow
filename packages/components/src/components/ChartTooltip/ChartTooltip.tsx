@@ -5,9 +5,11 @@ import type {
   ValueType,
 } from "recharts/types/component/DefaultTooltipContent";
 import styles from "../Popover/Popover.module.scss";
+import tooltipStyles from "./ChartTooltip.module.scss";
 import { LegendItem } from "../Legend/components/LegendItem";
 import Heading from "../Heading";
 import clsx from "clsx";
+import { PopoverTip } from "../Popover/components/PopoverTip";
 
 interface WithTooltipFormatters {
   formatter?: (
@@ -47,21 +49,24 @@ const CustomTooltip = (props: TooltipContentProps) => {
   if (active && payload && payload.length) {
     return (
       <div className={className}>
+        <PopoverTip className={tooltipStyles.tip} />
         <div className={styles.content}>
           <Heading level={3}>
             {headingFormatter ? headingFormatter(label) : label}
           </Heading>
-          {payload.map((i, index) => (
-            <LegendItem
-              color={i.fill}
-              title={
-                formatter
-                  ? formatter(i.value, i.dataKey, index, i.unit)
-                  : `${i.dataKey} ${i.value}${i.unit ? ` ${i.unit}` : ""}`
-              }
-              key={i.dataKey}
-            />
-          ))}
+          {payload
+            .filter((i) => i.fill !== "none")
+            .map((i, index) => (
+              <LegendItem
+                color={i.fill}
+                title={
+                  formatter
+                    ? formatter(i.value, i.dataKey, index, i.unit)
+                    : `${i.dataKey} ${i.value}${i.unit ? ` ${i.unit}` : ""}`
+                }
+                key={i.dataKey}
+              />
+            ))}
         </div>
       </div>
     );
@@ -90,6 +95,7 @@ export const ChartTooltip: FC<ChartTooltipProps> = (props) => {
           />
         );
       }}
+      cursor={false}
     />
   );
 };

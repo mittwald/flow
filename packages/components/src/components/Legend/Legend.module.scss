@@ -1,6 +1,13 @@
+.legendWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 .legendContent {
   list-style-type: none;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   gap: var(--legend--spacing);
 }

@@ -17,20 +17,29 @@ export const Legend: FC<LegendProps> = (props) => {
     const { payload } = props;
 
     return (
-      <ul className={styles.legendContent}>
-        {payload?.map((entry, index) => (
-          <li key={`legendItem-${index}`}>
-            <LegendItem
-              title={entry.dataKey?.toString() ?? ""}
-              color={
-                entry.payload && "fill" in entry.payload
-                  ? (entry.payload?.fill as string)
-                  : tokens.color.gray[100].value
-              }
-            />
-          </li>
-        ))}
-      </ul>
+      <div className={styles.legendWrapper}>
+        <ul className={styles.legendContent}>
+          {payload
+            ?.filter(
+              (entry) =>
+                entry.payload &&
+                "fill" in entry.payload &&
+                entry.payload?.fill !== "none",
+            )
+            .map((entry, index) => (
+              <li key={`legendItem-${index}`}>
+                <LegendItem
+                  title={entry.dataKey?.toString() ?? ""}
+                  color={
+                    entry.payload && "fill" in entry.payload
+                      ? (entry.payload?.fill as string)
+                      : tokens.color.gray[100].value
+                  }
+                />
+              </li>
+            ))}
+        </ul>
+      </div>
     );
   };
 

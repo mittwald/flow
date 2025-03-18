@@ -10,12 +10,15 @@ export interface AreaProps
     | "dataKey"
     | "stackId"
     | "fillOpacity"
+    | "key"
     | "xAxisId"
     | "yAxisId"
     | "type"
     | "unit"
   > {
   color?: CategoricalColors;
+  /** @internal */
+  onlyDots?: boolean;
 }
 
 const CustomDot: FC<Recharts.DotProps & { color: string }> = ({
@@ -46,7 +49,13 @@ const getCategoricalColor = (color: CategoricalColors) => {
 };
 
 export const Area: FC<AreaProps> = (props) => {
-  const { color = "sea-green", stackId = 1, fillOpacity = 1, ...rest } = props;
+  const {
+    color = "sea-green",
+    stackId = 1,
+    fillOpacity = 1,
+    onlyDots = true,
+    ...rest
+  } = props;
 
   return (
     <>
@@ -54,10 +63,12 @@ export const Area: FC<AreaProps> = (props) => {
         stackId={stackId}
         fillOpacity={fillOpacity}
         {...rest}
-        activeDot={<CustomDot color={getCategoricalColor(color)} />}
-        fill={getCategoricalColor(color)}
-        stroke={tokens.area["border-color"].value}
-        strokeWidth={tokens.area["border-width"].value}
+        activeDot={
+          onlyDots ? <CustomDot color={getCategoricalColor(color)} /> : false
+        }
+        fill={onlyDots ? "none" : getCategoricalColor(color)}
+        stroke={onlyDots ? "none" : tokens.area["border-color"].value}
+        strokeWidth={onlyDots ? undefined : tokens.area["border-width"].value}
       />
     </>
   );
