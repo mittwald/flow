@@ -2,6 +2,7 @@ import type { ComponentProps, PropsWithChildren, ReactNode } from "react";
 import React from "react";
 import styles from "../../ListItemView.module.scss";
 import {
+  ClearPropsContext,
   dynamic,
   type PropsContext,
   PropsContextProvider,
@@ -15,6 +16,7 @@ export type ListItemViewContentProps = PropsWithChildren & {
   avatar?: ReactNode;
   button?: ReactNode;
   bottom?: ReactNode;
+  checkbox?: ReactNode;
   viewMode?: ListViewMode;
 };
 
@@ -27,7 +29,16 @@ const getStyleForContentSlot = (slot?: string) =>
 
 /** @flr-generate all */
 export const ListItemViewContent = (props: ListItemViewContentProps) => {
-  const { children, avatar, title, subTitle, button, bottom, viewMode } = props;
+  const {
+    children,
+    avatar,
+    title,
+    subTitle,
+    button,
+    bottom,
+    checkbox,
+    viewMode,
+  } = props;
 
   const contentProps: Record<string, ComponentProps<"div">> = {
     bottom: {
@@ -87,10 +98,13 @@ export const ListItemViewContent = (props: ListItemViewContentProps) => {
             <div className={styles.contentWrapper}>
               <div className={styles.content}>
                 {children}
-                <div className={styles.title}>
+                <div className={styles.header}>
+                  <div className={styles.checkboxContainer}>{checkbox}</div>
                   {avatar}
-                  {title}
-                  <div className={styles.subTitle}>{subTitle}</div>
+                  <div className={styles.title}>
+                    {title}
+                    <div className={styles.subTitle}>{subTitle}</div>
+                  </div>
                 </div>
               </div>
               {button}
@@ -103,9 +117,12 @@ export const ListItemViewContent = (props: ListItemViewContentProps) => {
           <>
             <div className={styles.avatarContainer}>{avatar}</div>
             <div className={styles.content}>
-              <div className={styles.title}>
-                {title}
-                <div className={styles.subTitle}>{subTitle}</div>
+              <div className={styles.header}>
+                <div className={styles.checkboxContainer}>{checkbox}</div>
+                <div className={styles.title}>
+                  {title}
+                  <div className={styles.subTitle}>{subTitle}</div>
+                </div>
               </div>
               {button}
               {children}
