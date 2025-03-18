@@ -6,7 +6,5 @@ export * from "./components/TableHeader";
 export * from "./components/TableRow";
 export * from "./components/TableFooterRow";
 
-import { Table } from "./Table";
-
 export { type TableProps, Table } from "./Table";
-export default Table;
+export { default } from "./Table";

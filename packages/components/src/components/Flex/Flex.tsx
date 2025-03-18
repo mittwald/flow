@@ -65,3 +65,4 @@ export const Flex: FC<FlexProps> = (props) => {
     </div>
   );
 };
+export default Flex;

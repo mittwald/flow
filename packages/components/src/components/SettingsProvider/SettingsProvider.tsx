@@ -48,3 +48,5 @@ export const SettingsProvider: FC<Props> = (props) => {
 
   return <context.Provider value={settingsStore}>{children}</context.Provider>;
 };
+
+export default SettingsProvider;

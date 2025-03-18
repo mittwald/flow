@@ -65,3 +65,5 @@ export const AvatarStack: FC<AvatarStackProps> = (props) => {
     </PropsContextProvider>
   );
 };
+
+export default AvatarStack;

@@ -44,3 +44,5 @@ export const MessageThread = flowComponent("MessageThread", (props) => {
     </PropsContextProvider>
   );
 });
+
+export default MessageThread;

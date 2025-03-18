@@ -68,10 +68,12 @@ import type { OptionProps } from "@/components/Option";
 import type { MessageProps } from "@/components/Message";
 import type { MessageThreadProps } from "@/components/MessageThread";
 import type { FileCardListProps } from "@/components/FileCardList";
+import type { AccentBoxProps } from "@/components/AccentBox";
 
 export * from "./types";
 
 export interface FlowComponentPropsTypes {
+  AccentBox: AccentBoxProps;
   Action: ActionProps;
   ActionGroup: ActionGroupProps;
   Alert: AlertProps;
@@ -143,6 +145,7 @@ const propsContextSupportingComponentsMap: Record<
   keyof FlowComponentPropsTypes,
   true
 > = {
+  AccentBox: true,
   Action: true,
   ActionGroup: true,
   Avatar: true,

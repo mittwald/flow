@@ -28,6 +28,7 @@ export const LayoutCard = flowComponent("LayoutCard", (props) => {
     Tabs: {
       className: styles.tabs,
     },
+    AccentBox: { className: styles.accentBox },
   };
 
   return (

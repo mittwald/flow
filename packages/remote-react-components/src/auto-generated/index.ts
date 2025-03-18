@@ -1,5 +1,6 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
+export * from "./AccentBox";
 export * from "./Accordion";
 export * from "./ActionGroup";
 export * from "./Alert";

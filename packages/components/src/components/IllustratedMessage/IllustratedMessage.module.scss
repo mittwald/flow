@@ -16,12 +16,13 @@
     margin-bottom: var(--illustrated-message--icon-to-heading-spacing);
   }
 
-  .text, .heading {
+  .text,
+  .heading {
     max-width: var(--text--max-width);
     text-align: center;
   }
 
-  .actionGroup [role="group"] {
+  .actionGroup {
     justify-content: center;
 
     button {
@@ -40,7 +41,6 @@
       .heading {
         color: var(--illustrated-message--#{$color}-heading-color);
       }
-
     }
   }
 

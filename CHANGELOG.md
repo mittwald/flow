@@ -3,6 +3,56 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.95](https://github.com/mittwald/flow/compare/0.2.0-alpha.94...0.2.0-alpha.95) (2025-03-18)
+
+### Features
+
+* **AccentBox:** add accent box component ([#1279](https://github.com/mittwald/flow/issues/1279)) ([16cdfb4](https://github.com/mittwald/flow/commit/16cdfb4915be1097b5df4998257e77833b661473))
+
+# [0.2.0-alpha.94](https://github.com/mittwald/flow/compare/0.2.0-alpha.93...0.2.0-alpha.94) (2025-03-18)
+
+### Bug Fixes
+
+* **Modal:** fix unwanted resize in off canvas ([#1282](https://github.com/mittwald/flow/issues/1282)) ([51aa1f7](https://github.com/mittwald/flow/commit/51aa1f7f30b49deb4e921e1e7025667e96c578b6))
+
+# [0.2.0-alpha.93](https://github.com/mittwald/flow/compare/0.2.0-alpha.92...0.2.0-alpha.93) (2025-03-18)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.92](https://github.com/mittwald/flow/compare/0.2.0-alpha.91...0.2.0-alpha.92) (2025-03-17)
+
+### Features
+
+* throw error if remote rendering fails ([796bdc7](https://github.com/mittwald/flow/commit/796bdc7f8a0b0a710d507e0521794b20bb9cad5c))
+
+# [0.2.0-alpha.91](https://github.com/mittwald/flow/compare/0.2.0-alpha.90...0.2.0-alpha.91) (2025-03-17)
+
+### Bug Fixes
+
+* **LightBox:** close on click outside everywhere ([#1278](https://github.com/mittwald/flow/issues/1278)) ([30eb888](https://github.com/mittwald/flow/commit/30eb88838180bf027da9d9baf2e81a16f8f29c1e))
+
+# [0.2.0-alpha.90](https://github.com/mittwald/flow/compare/0.2.0-alpha.89...0.2.0-alpha.90) (2025-03-17)
+
+### Bug Fixes
+
+* **Text:** remove white-space pre-line ([#1277](https://github.com/mittwald/flow/issues/1277)) ([5db2551](https://github.com/mittwald/flow/commit/5db25511e4de981ca05d806657cc968b5b13f33b))
+
+# [0.2.0-alpha.89](https://github.com/mittwald/flow/compare/0.2.0-alpha.88...0.2.0-alpha.89) (2025-03-14)
+
+### Bug Fixes
+
+* change default exports to fix storybooks ([#1269](https://github.com/mittwald/flow/issues/1269)) ([b8819df](https://github.com/mittwald/flow/commit/b8819df9223862d31f4b003ee3e064c65c5cbd96))
+
+# [0.2.0-alpha.88](https://github.com/mittwald/flow/compare/0.2.0-alpha.87...0.2.0-alpha.88) (2025-03-13)
+
+### Bug Fixes
+
+* **Table:** add required columns ([#1267](https://github.com/mittwald/flow/issues/1267)) ([bed4335](https://github.com/mittwald/flow/commit/bed433592c176ccc198c500102a0459d9c6adef3))
+
+### Features
+
+* **Chat:** scroll to bottom ([#1266](https://github.com/mittwald/flow/issues/1266)) ([224103d](https://github.com/mittwald/flow/commit/224103de8c227b6369bcc328b6ae4c23e75ed53c))
+
 # [0.2.0-alpha.87](https://github.com/mittwald/flow/compare/0.2.0-alpha.86...0.2.0-alpha.87) (2025-03-12)
 
 **Note:** Version bump only for package @mittwald/flow-project

@@ -23,3 +23,4 @@ export const MessageSeparator: FC<MessageSeparatorProps> = (props) => {
     </span>
   );
 };
+export default MessageSeparator;

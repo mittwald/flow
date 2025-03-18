@@ -1,5 +1,4 @@
 export * from "./view";
-import { FieldError } from "./FieldError";
 
 export { type FieldErrorProps, FieldError } from "./FieldError";
-export default FieldError;
+export { default } from "./FieldError";

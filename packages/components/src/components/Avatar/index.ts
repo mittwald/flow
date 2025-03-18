@@ -1,5 +1,4 @@
 export * from "./view";
-import { Avatar } from "./Avatar";
 
 export { Avatar, type AvatarProps } from "./Avatar";
-export default Avatar;
+export { default } from "./Avatar";

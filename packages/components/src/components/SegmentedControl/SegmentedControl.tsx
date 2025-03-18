@@ -79,3 +79,5 @@ export const SegmentedControl = flowComponent("SegmentedControl", (props) => {
     </Aria.RadioGroup>
   );
 });
+
+export default SegmentedControl;

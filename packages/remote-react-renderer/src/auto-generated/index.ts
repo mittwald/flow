@@ -1,6 +1,7 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { createFlowRemoteComponentRenderer } from "@/lib/createFlowRemoteComponentRenderer";
+import { AccentBox as AccentBox } from "@mittwald/flow-react-components";
 import { Accordion as Accordion } from "@mittwald/flow-react-components";
 import { ActionGroup as ActionGroup } from "@mittwald/flow-react-components";
 import { Alert as Alert } from "@mittwald/flow-react-components";
@@ -105,6 +106,7 @@ import { Tooltip as Tooltip } from "@mittwald/flow-react-components";
 import { TooltipTrigger as TooltipTrigger } from "@mittwald/flow-react-components";
 
 export const flowComponents = {
+  "flr-accent-box": createFlowRemoteComponentRenderer(AccentBox),
   "flr-accordion": createFlowRemoteComponentRenderer(Accordion),
   "flr-action-group": createFlowRemoteComponentRenderer(ActionGroup),
   "flr-alert": createFlowRemoteComponentRenderer(Alert),

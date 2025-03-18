@@ -53,3 +53,5 @@ export const OverlayTrigger: FC<Props> = (props) => {
     </OverlayContextProvider>
   );
 };
+
+export default OverlayTrigger;
