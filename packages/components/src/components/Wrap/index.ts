@@ -1,4 +1,2 @@
-import { Wrap } from "@/components/Wrap/Wrap";
-
 export * from "./Wrap";
-export default Wrap;
+export { default } from "@/components/Wrap/Wrap";

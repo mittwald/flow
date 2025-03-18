@@ -87,3 +87,5 @@ export const Action = flowComponent("Action", (props) => {
     </ActionContextProvider>
   );
 });
+
+export default Action;

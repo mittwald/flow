@@ -1,5 +1,3 @@
-import { Activity } from "@/components/Activity/Activity";
-
 export * from "@/components/Activity/Activity";
 
-export default Activity;
+export { default } from "@/components/Activity/Activity";

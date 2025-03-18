@@ -97,3 +97,4 @@ export const FileField = flowComponent<"FileField", HTMLInputElement>(
     );
   },
 );
+export default FileField;

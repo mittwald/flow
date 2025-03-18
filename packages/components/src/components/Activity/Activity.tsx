@@ -52,3 +52,4 @@ export const Activity: FC<ActivityProps> = (props) => {
     </Suspense>
   );
 };
+export default Activity;

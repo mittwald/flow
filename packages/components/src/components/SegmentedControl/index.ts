@@ -1,5 +1,4 @@
 export * from "./view";
-import { SegmentedControl } from "./SegmentedControl";
 
 export {
   type SegmentedControlProps,
@@ -7,4 +6,4 @@ export {
 } from "./SegmentedControl";
 
 export * from "./components/Segment";
-export default SegmentedControl;
+export { default } from "./SegmentedControl";

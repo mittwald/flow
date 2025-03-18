@@ -1,5 +1,4 @@
 export * from "./view";
-import { Label } from "./Label";
 
 export { type LabelProps, Label } from "./Label";
-export default Label;
+export { default } from "./Label";

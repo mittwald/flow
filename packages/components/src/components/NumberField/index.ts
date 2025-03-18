@@ -1,5 +1,4 @@
 export * from "./view";
-import { NumberField } from "./NumberField";
 
 export { type NumberFieldProps, NumberField } from "./NumberField";
-export default NumberField;
+export { default } from "./NumberField";
