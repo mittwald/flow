@@ -243,3 +243,15 @@ color:
 
   transparent:
     value: transparent
+
+  gradient:
+    value:
+      "radial-gradient(circle at 27.74% 38.09%,#d8e9f8,transparent
+      60%),radial-gradient(circle at 63.98% 99.4%,#e4b8ff,transparent
+      37%),radial-gradient(circle at 79.7% 64.93%,#d8e9f8,transparent
+      52%),radial-gradient(circle at 10.9% 91.41%,#d8e9f8,transparent
+      56%),radial-gradient(circle at 3.68% 3.26%,#0056ff,transparent
+      31%),radial-gradient(circle at 99.62% 17.78%,#48c7d8,transparent
+      26%),radial-gradient(circle at 58.65% 24.91%,#d8e9f8,transparent
+      55%),radial-gradient(circle at 53.23% 52.72%,#d8e9f8,transparent
+      100%),radial-gradient(circle at 50% 50%,#fff,#fff 100%)"

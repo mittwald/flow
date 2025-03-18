@@ -1,0 +1,28 @@
+.accentBox {
+  padding: var(--accent-box--padding);
+  border-radius: var(--accent-box--corner-radius);
+  isolation: isolate;
+  position: relative;
+
+  > svg {
+    position: absolute;
+    top: var(--accent-box--padding);
+    right: var(--accent-box--padding);
+    height: calc(100% - var(--accent-box--padding) * 2);
+    max-width: calc(100% - var(--accent-box--padding) * 2);
+    width: auto;
+    color: var(--accent-box--icon-color-blue);
+    z-index: -1;
+  }
+
+  /* Color */
+
+  @mixin status($color) {
+    &.#{$color} {
+      background: var(--accent-box--background-color-#{$color});
+    }
+  }
+
+  @include status("blue");
+  @include status("gradient");
+}
