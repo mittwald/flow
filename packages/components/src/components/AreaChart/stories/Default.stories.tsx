@@ -70,7 +70,7 @@ export default meta;
 
 export const Default: Story = {
   render: (props) => (
-    <div style={{ height: "250px" }}>
+    <div style={{ height: "70vh" }}>
       <AreaChart {...props}>
         <CartesianGrid />
         <Area dataKey="ab" />

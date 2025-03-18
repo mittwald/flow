@@ -51,26 +51,24 @@ const getCategoricalColor = (color: CategoricalColors) => {
 export const Area: FC<AreaProps> = (props) => {
   const {
     color = "sea-green",
-    stackId = 1,
+    stackId = "1",
     fillOpacity = 1,
     onlyDots = true,
     ...rest
   } = props;
 
   return (
-    <>
-      <Recharts.Area
-        stackId={stackId}
-        fillOpacity={fillOpacity}
-        {...rest}
-        activeDot={
-          onlyDots ? <CustomDot color={getCategoricalColor(color)} /> : false
-        }
-        fill={onlyDots ? "none" : getCategoricalColor(color)}
-        stroke={onlyDots ? "none" : tokens.area["border-color"].value}
-        strokeWidth={onlyDots ? undefined : tokens.area["border-width"].value}
-      />
-    </>
+    <Recharts.Area
+      stackId={stackId}
+      fillOpacity={fillOpacity}
+      {...rest}
+      activeDot={
+        onlyDots ? <CustomDot color={getCategoricalColor(color)} /> : false
+      }
+      fill={onlyDots ? "none" : getCategoricalColor(color)}
+      stroke={onlyDots ? "none" : tokens.area["border-color"].value}
+      strokeWidth={onlyDots ? undefined : tokens.area["border-width"].value}
+    />
   );
 };
 
