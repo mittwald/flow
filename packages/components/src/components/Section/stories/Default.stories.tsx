@@ -25,6 +25,9 @@ import ContextMenuTrigger from "@/components/ContextMenu/components/ContextMenuT
 import { ContextMenu } from "@/components/ContextMenu";
 import MenuItem from "@/components/MenuItem";
 import { FileField } from "@/components/FileField";
+import { Field, Form } from "@/integrations/react-hook-form";
+import { useForm } from "react-hook-form";
+import { action } from "@storybook/addon-actions";
 
 const meta: Meta<typeof Section> = {
   title: "Structure/Section",
@@ -214,4 +217,38 @@ export const WithFileField: Story = {
       </Section>
     </>
   ),
+};
+
+export const WithForm: Story = {
+  render: (props) => {
+    const form = useForm();
+
+    return (
+      <Section {...props}>
+        <Form form={form} onSubmit={() => action("submit")}>
+          <Heading>
+            <IconMember />
+            Personal Information
+          </Heading>
+          <Field name="firstName">
+            <TextField isRequired defaultValue="John">
+              <Label>First name</Label>
+            </TextField>
+          </Field>
+          <Field name="lastName">
+            <TextField isRequired defaultValue="Doe">
+              <Label>Last name</Label>
+            </TextField>
+          </Field>
+          <Heading level={3}>Newsletter</Heading>
+          <Text>
+            Upcoming releases, new features and tips about your hosting - we
+            bring you the most important information in your inbox. Subscribe to
+            our newsletter and stay up to date.
+          </Text>
+          <Link href="#">Subscribe</Link>
+        </Form>
+      </Section>
+    );
+  },
 };
