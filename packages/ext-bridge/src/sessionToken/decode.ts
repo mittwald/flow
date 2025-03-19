@@ -22,7 +22,7 @@ export const decode = (jwt: string) => {
   });
 
   if (parsed.error) {
-    throw new Error("Session token payload invalid: " + String(parsed.error));
+    throw new Error("Session token payload invalid: " + parsed.error.message);
   }
 
   return parsed.data;

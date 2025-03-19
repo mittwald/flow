@@ -1,4 +1,4 @@
-import type { ExtBridgeFunctions } from "@mittwald/ext-bridge";
+import type { ExtBridgeRemoteApi } from "@mittwald/ext-bridge";
 import React, { type FC } from "react";
 
 const LazyRemoteRenderer = React.lazy(
@@ -6,7 +6,7 @@ const LazyRemoteRenderer = React.lazy(
 );
 
 interface Props {
-  extBridgeImplementation?: ExtBridgeFunctions;
+  extBridgeImplementation?: ExtBridgeRemoteApi;
 }
 
 export const Preview: FC<Props> = (props) => {

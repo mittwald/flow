@@ -1,14 +1,14 @@
 "use client";
 import * as viewComponents from "@/auto-generated";
 import Preview from "@/components/Preview";
-import type { ExtBridgeFunctions } from "@mittwald/ext-bridge";
+import type { ExtBridgeRemoteApi } from "@mittwald/ext-bridge";
 import { ViewComponentContextProvider } from "@mittwald/flow-react-components/internal";
 import { connectHostRenderRootRef } from "@mittwald/flow-remote-core";
-import { type FC, type PropsWithChildren } from "react";
+import { Suspense, type FC, type PropsWithChildren } from "react";
 
 export interface RootClientProps extends PropsWithChildren {
   showPreview?: boolean;
-  extBridgeImplementation?: ExtBridgeFunctions;
+  extBridgeImplementation?: ExtBridgeRemoteApi;
 }
 
 export const RemoteRootClient: FC<RootClientProps> = (props) => {
@@ -19,11 +19,13 @@ export const RemoteRootClient: FC<RootClientProps> = (props) => {
 
   const root = (
     <div ref={connectHostRenderRootRef}>
-      <ViewComponentContextProvider
-        components={viewComponents as FlowViewComponents}
-      >
-        {children}
-      </ViewComponentContextProvider>
+      <Suspense>
+        <ViewComponentContextProvider
+          components={viewComponents as FlowViewComponents}
+        >
+          {children}
+        </ViewComponentContextProvider>
+      </Suspense>
     </div>
   );
 

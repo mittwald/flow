@@ -1,4 +1,4 @@
-import type { ExtBridgeFunctions } from "./types";
+import type { ExtBridgeRemoteApi } from "@mittwald/ext-bridge";
 
 export const emptyImplementation = new Proxy(
   {},
@@ -7,4 +7,4 @@ export const emptyImplementation = new Proxy(
       throw new Error("Missing implementation for MwExtBridge");
     },
   },
-) as ExtBridgeFunctions;
+) as ExtBridgeRemoteApi;

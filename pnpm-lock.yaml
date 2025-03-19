@@ -249,6 +249,9 @@ importers:
       '@internationalized/date':
         specifier: ^3.7.0
         version: 3.7.0
+      '@mittwald/ext-bridge':
+        specifier: workspace:*
+        version: link:../../packages/ext-bridge
       '@mittwald/flow-react-components':
         specifier: workspace:*
         version: link:../../packages/components
@@ -267,6 +270,9 @@ importers:
       '@tabler/icons-react':
         specifier: ^3.31.0
         version: 3.31.0(react@19.0.0)
+      axios:
+        specifier: 1.8.3
+        version: 1.8.3
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -650,6 +656,9 @@ importers:
 
   packages/ext-bridge:
     dependencies:
+      '@mittwald/react-use-promise':
+        specifier: ^3.0.1
+        version: 3.0.1(axios@1.8.3)(react@19.0.0)
       axios:
         specifier: ^1.8.3
         version: 1.8.3
@@ -669,12 +678,24 @@ importers:
       '@types/node':
         specifier: ^22.13.10
         version: 22.13.10
+      '@types/react':
+        specifier: ^19
+        version: 19.0.10
+      '@types/react-dom':
+        specifier: ^19
+        version: 19.0.4(@types/react@19.0.10)
       nx:
         specifier: ^20.5.0
         version: 20.5.0
       prettier:
         specifier: ^3.5.3
         version: 3.5.3
+      react:
+        specifier: ^19
+        version: 19.0.0
+      react-dom:
+        specifier: ^19
+        version: 19.0.0(react@19.0.0)
       rimraf:
         specifier: ^6.0.1
         version: 6.0.1
@@ -775,9 +796,6 @@ importers:
       '@mfalkenberg/remote-dom-core':
         specifier: ^1.7.5
         version: 1.7.5(@preact/signals-core@1.8.0)
-      '@mittwald/ext-bridge':
-        specifier: workspace:*
-        version: link:../ext-bridge
       '@quilted/threads':
         specifier: ^3.1.3
         version: 3.1.3(@preact/signals-core@1.8.0)
@@ -785,6 +803,9 @@ importers:
         specifier: ^2.21.1
         version: 2.21.1
     devDependencies:
+      '@mittwald/ext-bridge':
+        specifier: workspace:*
+        version: link:../ext-bridge
       '@mittwald/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
@@ -873,9 +894,6 @@ importers:
       '@mfalkenberg/remote-dom-react':
         specifier: 1.2.3
         version: 1.2.3(@preact/signals-core@1.8.0)(react@19.0.0)
-      '@mittwald/ext-bridge':
-        specifier: workspace:*
-        version: link:../ext-bridge
       '@mittwald/flow-react-components':
         specifier: workspace:*
         version: link:../components
@@ -889,6 +907,9 @@ importers:
         specifier: ^19
         version: 19.0.10
     devDependencies:
+      '@mittwald/ext-bridge':
+        specifier: workspace:*
+        version: link:../ext-bridge
       '@mittwald/flow-remote-react-renderer':
         specifier: workspace:*
         version: link:../remote-react-renderer

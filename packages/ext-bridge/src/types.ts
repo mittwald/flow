@@ -1,14 +1,17 @@
-import type { LoadingApi } from "@/loading";
-import type { SessionToken } from "@/sessionToken/types";
+import type { ExtBridgeConfig } from "@/config/types";
+import type { loadingApi } from "@/loading";
+export type { ExtBridgeConfig } from "@/config/types";
 
-export type ContextParameters = Record<string, string>;
+type LoadingApi = typeof loadingApi;
 
-export interface ExtBridgeFunctions {
-  getSessionToken: () => Promise<SessionToken>;
-  getContextParameters: () => Promise<ContextParameters>;
+export interface ExtBridgeRemoteApi {
+  getSessionToken: () => Promise<string>;
+  getConfig: () => Promise<ExtBridgeConfig>;
 }
 
-export type ExtBridge = ExtBridgeFunctions & LoadingApi;
+export interface ExtBridge extends ExtBridgeRemoteApi, LoadingApi {
+  config: ExtBridgeConfig;
+}
 
 declare global {
   // eslint-disable-next-line no-var

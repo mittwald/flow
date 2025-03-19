@@ -1,5 +1,5 @@
 import type { HostExports, RemoteExports } from "@/connection/types";
-import { delegateExtBridgeFunctions } from "@/lib/delegateExtBridgeFunctions";
+import { delegateExtBridgeRemoteFunctions } from "@/ext-bridge/delegateExtBridgeRemoteFunctions";
 import { type RemoteConnection } from "@mfalkenberg/remote-dom-core/elements";
 import { ThreadNestedIframe } from "@quilted/threads";
 
@@ -16,7 +16,13 @@ export const connectHostRenderRoot = (div: HTMLDivElement) => {
     },
   });
 
-  delegateExtBridgeFunctions(thread);
+  thread.imports.setIsReady();
+
+  if (typeof mwExtBridge !== "undefined") {
+    delegateExtBridgeRemoteFunctions(thread);
+    mwExtBridge.setIsReady();
+  }
+
   return thread;
 };
 

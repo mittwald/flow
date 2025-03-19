@@ -7,7 +7,7 @@ import {
   RemoteReceiver,
   RemoteRootRenderer,
 } from "@mfalkenberg/remote-dom-react/host";
-import type { ExtBridgeFunctions } from "@mittwald/ext-bridge";
+import type { ExtBridgeRemoteApi } from "@mittwald/ext-bridge";
 import { connectRemoteIframeRef } from "@mittwald/flow-remote-core";
 import {
   type ComponentType,
@@ -24,13 +24,15 @@ export interface RemoteRendererProps {
   integrations?: RemoteComponentsMap<never>[];
   src: string;
   timeout?: number;
-  extBridgeImplementation?: ExtBridgeFunctions;
+  extBridgeImplementation?: ExtBridgeRemoteApi;
 }
 
 interface PromiseObject {
-  result: null | Promise<void> | Error;
-  resolve: CallableFunction;
-  reject: CallableFunction;
+  result: null | Promise<void[]> | Error;
+  resolveRenderer: CallableFunction;
+  rejectRenderer: CallableFunction;
+  resolveConnection: CallableFunction;
+  rejectConnection: CallableFunction;
 }
 
 const HiddenIframeStyle: CSSProperties = {
@@ -56,10 +58,13 @@ export const RemoteRendererClient: FC<RemoteRendererProps> = (props) => {
 
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const checkRenderTimeout = useRef<number>(null);
+
   const awaiter = useRef<PromiseObject>({
     result: null,
-    resolve: voidFunction,
-    reject: voidFunction,
+    resolveConnection: voidFunction,
+    rejectConnection: voidFunction,
+    resolveRenderer: voidFunction,
+    rejectRenderer: voidFunction,
   }).current;
 
   if (awaiter.result !== null) {
@@ -89,17 +94,20 @@ export const RemoteRendererClient: FC<RemoteRendererProps> = (props) => {
 
   const receiver = useMemo(() => {
     const remoteReceiver = new RemoteReceiver();
-    remoteReceiver.subscribe({ id: remoteReceiver.root.id }, () =>
-      awaiter.resolve(),
-    );
+    remoteReceiver.subscribe({ id: remoteReceiver.root.id }, () => {
+      awaiter.resolveRenderer();
+    });
 
     return remoteReceiver;
   }, []);
 
-  const connect = connectRemoteIframeRef(
-    receiver.connection,
-    extBridgeImplementation,
-  );
+  const connect = connectRemoteIframeRef({
+    connection: receiver.connection,
+    extBridgeImplementation: extBridgeImplementation,
+    onReady: () => {
+      awaiter.resolveConnection();
+    },
+  });
 
   useLayoutEffect(() => {
     if (!src || !iframeRef.current || iframeRef.current.src === src) {
@@ -109,18 +117,30 @@ export const RemoteRendererClient: FC<RemoteRendererProps> = (props) => {
     clearRenderTimeout();
     iframeRef.current.src = src;
 
-    awaiter.result = new Promise((resolve, reject) => {
-      awaiter.resolve = () => {
-        clearRenderTimeout();
-        resolve();
-        awaiter.result = null;
-      };
-      awaiter.reject = (reason: string) => {
-        clearRenderTimeout();
-        reject();
-        awaiter.result = new Error(reason);
-      };
-    });
+    awaiter.result = Promise.all<void>([
+      new Promise((resolve, reject) => {
+        awaiter.resolveRenderer = () => {
+          clearRenderTimeout();
+          resolve();
+          awaiter.result = null;
+        };
+        awaiter.rejectRenderer = (reason: string) => {
+          clearRenderTimeout();
+          reject();
+          awaiter.result = new Error(reason);
+        };
+      }),
+      new Promise((resolve, reject) => {
+        awaiter.resolveConnection = () => {
+          resolve();
+          awaiter.result = null;
+        };
+        awaiter.rejectConnection = (reason: string) => {
+          reject();
+          awaiter.result = new Error(reason);
+        };
+      }),
+    ]);
 
     forceRerender((old) => !old);
   }, [src, iframeRef]);
@@ -128,7 +148,7 @@ export const RemoteRendererClient: FC<RemoteRendererProps> = (props) => {
   const onIframeLoaded = () => {
     checkRenderTimeout.current = setTimeout(
       () =>
-        awaiter.reject(
+        awaiter.rejectRenderer(
           "RemoteRenderTimeout reached. Remote URL was successfully loaded but no Remote Component was rendered in time.",
         ),
       timeout,
@@ -136,7 +156,9 @@ export const RemoteRendererClient: FC<RemoteRendererProps> = (props) => {
   };
 
   const onIframeError = () =>
-    awaiter.reject("Remote URL could not be reached and was not loaded.");
+    awaiter.resolveRenderer(
+      "Remote URL could not be reached and was not loaded.",
+    );
 
   return (
     <>

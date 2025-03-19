@@ -1,18 +1,16 @@
-/** @internal */
-export interface LoadingApi {
-  ready: Promise<void>;
-  _setIsReady: () => void;
-}
+import { parseConfig } from "@/config/parse";
 
-let setIsReady: () => void = () => {
-  throw new Error("Unexpected call of setIsReady()");
+let resolveReadyPromise: () => void = () => {
+  throw new Error("Unexpected call of resolveReadyPromise()");
 };
 
-export const loadingApi: LoadingApi = {
+export const loadingApi = {
   ready: new Promise<void>((res) => {
-    setIsReady = res;
+    resolveReadyPromise = res;
   }),
-  _setIsReady: () => {
-    setIsReady();
+  setIsReady: async () => {
+    const config = await mwExtBridge.getConfig();
+    mwExtBridge.config = parseConfig(config);
+    resolveReadyPromise();
   },
-};
+} as const;

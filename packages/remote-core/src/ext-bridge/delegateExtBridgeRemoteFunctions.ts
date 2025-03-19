@@ -1,13 +1,13 @@
-import type { ExtBridgeFunctions } from "@mittwald/ext-bridge";
+import type { ExtBridgeRemoteApi } from "@mittwald/ext-bridge";
 import type { ThreadNestedIframe } from "@quilted/threads";
 
 const fnNames = Object.keys({
   getSessionToken: true,
-  getContextParameters: true,
-} satisfies Record<keyof ExtBridgeFunctions, true>);
+  getConfig: true,
+} satisfies Record<keyof ExtBridgeRemoteApi, true>);
 
 /** Delegation is required because `thread.imports` is Proxy object */
-export const delegateExtBridgeFunctions = (
+export const delegateExtBridgeRemoteFunctions = (
   thread: ThreadNestedIframe<unknown, unknown>,
 ) => {
   const hostExports = thread.imports as Record<string, CallableFunction>;
@@ -18,6 +18,4 @@ export const delegateExtBridgeFunctions = (
   });
 
   Object.assign(mwExtBridge, Object.fromEntries(delegationEntries));
-
-  mwExtBridge._setIsReady();
 };

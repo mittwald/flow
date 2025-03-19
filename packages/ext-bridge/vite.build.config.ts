@@ -24,6 +24,7 @@ export default mergeConfig(
       lib: {
         entry: {
           index: "./src/index.ts",
+          react: "./src/react/index.ts",
         },
         formats: ["es"],
       },
