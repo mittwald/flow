@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.98](https://github.com/mittwald/flow/compare/0.2.0-alpha.97...0.2.0-alpha.98) (2025-03-19)
+
+### Features
+
+* **Image:** support aspect ratio ([#1284](https://github.com/mittwald/flow/issues/1284)) ([3eeb8d6](https://github.com/mittwald/flow/commit/3eeb8d6dda8ce4441a84f9a3c71810fe2a74185a))
+
 # [0.2.0-alpha.97](https://github.com/mittwald/flow/compare/0.2.0-alpha.96...0.2.0-alpha.97) (2025-03-19)
 
 **Note:** Version bump only for package @mittwald/flow-remote-elements
