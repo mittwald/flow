@@ -74,7 +74,6 @@
 
   /* States */
 
-
   &.isPending,
   &.isFailed,
   &.isSucceeded {
@@ -89,8 +88,8 @@
     }
   }
 
-  &.isPending{
-    .stateIcon{
+  &.isPending {
+    .stateIcon {
       color: var(--button--pending-icon-color);
     }
   }
@@ -131,6 +130,7 @@
   &:has(.image) {
     padding: 0;
     background: none;
+    height: fit-content;
 
     &:hover .image {
       filter: brightness(var(--image-button--brightness--hover));

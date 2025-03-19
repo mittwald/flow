@@ -67,6 +67,7 @@ export class RemoteImageElement extends FlowRemoteElement<RemoteImageElementProp
       "aria-valuemin": {},
       "aria-valuenow": {},
       "aria-valuetext": {},
+      aspectRatio: {},
       autoCapitalize: {},
       autoCorrect: {},
       autoFocus: {},

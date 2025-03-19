@@ -132,6 +132,9 @@
       border-top-left-radius: var(--corner-radius--default);
       border-top-right-radius: var(--corner-radius--default);
       aspect-ratio: 16 / 9;
+      img {
+        overflow-clip-margin: unset;
+      }
     }
 
     .avatar {
