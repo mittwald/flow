@@ -128,10 +128,10 @@ export const WithActionGroup: Story = {
               <Heading>{user.name}</Heading>
               <Text>Mittwald</Text>
               <ActionGroup>
-                <Button color="secondary" variant="soft" slot="secondary">
+                <Button color="secondary" variant="soft">
                   Edit
                 </Button>
-                <Button color="danger" variant="soft" slot="secondary">
+                <Button color="danger" variant="soft">
                   Delete
                 </Button>
               </ActionGroup>
