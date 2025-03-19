@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.97](https://github.com/mittwald/flow/compare/0.2.0-alpha.96...0.2.0-alpha.97) (2025-03-19)
+
+### Features
+
+* **List:** avoid default abort button position in action group ([#1286](https://github.com/mittwald/flow/issues/1286)) ([87b36cf](https://github.com/mittwald/flow/commit/87b36cfc52fed1d4399b26214d0c1555e3b0eb9c))
+
 # [0.2.0-alpha.96](https://github.com/mittwald/flow/compare/0.2.0-alpha.95...0.2.0-alpha.96) (2025-03-18)
 
 ### Features
