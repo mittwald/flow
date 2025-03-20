@@ -1,10 +1,11 @@
-import type { FC, MutableRefObject, PropsWithChildren } from "react";
-import React from "react";
+import React, {
+  type FC,
+  type MutableRefObject,
+  type PropsWithChildren,
+} from "react";
 import { ActionStateContext } from "@/components/Action/ActionStateContext";
 import { useFormContext } from "@/integrations/react-hook-form/components/context/formContext";
 import { useFormState } from "react-hook-form";
-import type { PropsContext } from "@/lib/propsContext";
-import { dynamic, PropsContextProvider } from "@/lib/propsContext";
 
 interface Props extends PropsWithChildren {
   isAsyncSubmit: MutableRefObject<boolean>;
@@ -39,19 +40,9 @@ const ActionStateContextWrapper: FC<Props> = (props) => {
 export const SubmitButtonStateProvider: FC<Props> = (props) => {
   const { children, isAsyncSubmit } = props;
 
-  const propsContext: PropsContext = {
-    ActionGroup: {
-      children: dynamic((p) => (
-        <ActionStateContextWrapper isAsyncSubmit={isAsyncSubmit}>
-          {p.children}
-        </ActionStateContextWrapper>
-      )),
-    },
-  };
-
   return (
-    <PropsContextProvider props={propsContext} mergeInParentContext>
+    <ActionStateContextWrapper isAsyncSubmit={isAsyncSubmit}>
       {children}
-    </PropsContextProvider>
+    </ActionStateContextWrapper>
   );
 };
