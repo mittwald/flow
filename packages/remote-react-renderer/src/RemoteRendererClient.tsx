@@ -40,9 +40,7 @@ export const RemoteRendererClient: FC<RemoteRendererProps> = (props) => {
   const connectionAwaiter = useAwaiter([src]);
   const loadingAwaiter = useAwaiter([src]);
 
-  const [iframeAssignedSrc, setIframeAssignedSrc] = useState<string | null>(
-    null,
-  );
+  const [connectedSrc, setConnectedSrc] = useState<string | null>(null);
 
   const remoteComponents = useMergedComponents(integrations);
 
@@ -84,7 +82,7 @@ export const RemoteRendererClient: FC<RemoteRendererProps> = (props) => {
       ]),
     ]);
 
-  const awaitLoadingPromise = iframeAssignedSrc === src;
+  const awaitLoadingPromise = connectedSrc === src;
   usePromise(overallLoading, awaitLoadingPromise ? [] : null, {
     loaderId: src,
   });
@@ -97,7 +95,7 @@ export const RemoteRendererClient: FC<RemoteRendererProps> = (props) => {
         src={src}
         ref={(ref) => {
           connect(ref);
-          setIframeAssignedSrc(src);
+          setConnectedSrc(src);
         }}
         onLoad={loadingAwaiter.resolve}
         onError={loadingAwaiter.reject}
