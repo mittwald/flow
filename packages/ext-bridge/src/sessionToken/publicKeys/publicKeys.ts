@@ -1,18 +1,17 @@
 import { fetchPublicKey } from "@/sessionToken/publicKeys/fetchPublicKey";
-import type { PublicKey } from "@/sessionToken/publicKeys/types";
+import { importSPKI } from "jose";
 
-const cache = new Map<string, PublicKey>();
+const cache = new Map<string, CryptoKey>();
 
-export const getPublicKey = async (serial: string): Promise<PublicKey> => {
+export const getPublicKey = async (serial: string): Promise<CryptoKey> => {
   const cached = cache.get(serial);
   if (cached) {
     return cached;
   }
 
   const publicKeyFromApi = await fetchPublicKey(serial);
-  // @todo: result musst be converted into real key
-  const publicKey = publicKeyFromApi as PublicKey;
-  cache.set(serial, publicKey);
+  const cryptoKey = await importSPKI(publicKeyFromApi, "Ed25519");
 
-  return publicKey;
+  cache.set(serial, cryptoKey);
+  return cryptoKey;
 };

@@ -9,8 +9,12 @@ interface ApiResponse {
 
 export const fetchPublicKey = async (serial: string) => {
   const response = await axios<ApiResponse>({
-    url: `https://${MW_EXT_API_URL}/v2/webhook-public-keys/${serial}`,
+    url: `https://${MW_EXT_API_URL}/v2/public-keys/${serial}`,
     validateStatus: (status) => status === 200,
+    params: {
+      format: "spki",
+      purpose: "session_key",
+    },
   });
-  return response.data;
+  return response.data.key;
 };
