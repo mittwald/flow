@@ -5,8 +5,7 @@ import {
 
 <Text>
   <b>
-    Veröffentliche
-    <Color color="violet"> eigene Features</Color> im
-    mStudio
+    Veröffentliche{" "}
+    <Color color="violet">eigene Features</Color> im mStudio
   </b>
 </Text>;
