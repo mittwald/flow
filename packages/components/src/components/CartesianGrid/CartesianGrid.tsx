@@ -7,6 +7,7 @@ export type CartesianGridProps = Pick<
   "className" | "vertical" | "horizontal" | "strokeDasharray"
 >;
 
+/** @flr-generate all */
 export const CartesianGrid: FC<CartesianGridProps> = (props) => {
   const { vertical = false, ...rest } = props;
 

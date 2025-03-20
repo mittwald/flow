@@ -10,45 +10,45 @@ import Legend from "@/components/Legend";
 const chartData = [
   {
     name: "Stat 1",
-    ab: 4000,
-    cd: 2400,
-    ef: 2400,
+    firstKey: 4000,
+    secondKey: 2400,
+    thirdKey: 2400,
   },
   {
     name: "Stat 2",
-    ab: 3000,
-    cd: 1398,
-    ef: 2210,
+    firstKey: 3000,
+    secondKey: 1398,
+    thirdKey: 2210,
   },
   {
     name: "Stat 3",
-    ab: 2000,
-    cd: 9800,
-    ef: 2290,
+    firstKey: 2000,
+    secondKey: 9800,
+    thirdKey: 2290,
   },
   {
     name: "Stat 4",
-    ab: 2780,
-    cd: 3908,
-    ef: 2000,
+    firstKey: 2780,
+    secondKey: 3908,
+    thirdKey: 2000,
   },
   {
     name: "Stat 5",
-    ab: 1890,
-    cd: 4800,
-    ef: 2181,
+    firstKey: 1890,
+    secondKey: 4800,
+    thirdKey: 2181,
   },
   {
     name: "Stat 6",
-    ab: 2390,
-    cd: 3800,
-    ef: 2500,
+    firstKey: 2390,
+    secondKey: 3800,
+    thirdKey: 2500,
   },
   {
     name: "Stat 7",
-    ab: 3490,
-    cd: 4300,
-    ef: 2100,
+    firstKey: 3490,
+    secondKey: 4300,
+    thirdKey: 2100,
   },
 ];
 
@@ -73,11 +73,11 @@ export const Default: Story = {
     <div style={{ height: "70vh" }}>
       <AreaChart {...props}>
         <CartesianGrid />
-        <Area dataKey="ab" />
-        <Area dataKey="cd" color="palatinate-blue" />
-        <Area dataKey="ef" color="tangerine" />
+        <Area dataKey="firstKey" />
+        <Area dataKey="secondKey" color="palatinate-blue" />
+        <Area dataKey="thirdKey" color="tangerine" />
         <XAxis dataKey="name" />
-        <YAxis />
+        <YAxis interval="equidistantPreserveStart" />
         <ChartTooltip />
         <Legend />
       </AreaChart>
@@ -91,9 +91,9 @@ export const MultipleSynced: Story = {
       <div style={{ height: "250px" }}>
         <AreaChart {...props} syncId="syncedAreaCharts">
           <CartesianGrid />
-          <Area dataKey="ab" />
-          <Area dataKey="cd" color="palatinate-blue" />
-          <Area dataKey="ef" color="tangerine" />
+          <Area dataKey="firstKey" />
+          <Area dataKey="secondKey" color="palatinate-blue" />
+          <Area dataKey="thirdKey" color="tangerine" />
           <XAxis dataKey="name" />
           <YAxis />
           <ChartTooltip />
@@ -103,9 +103,9 @@ export const MultipleSynced: Story = {
       <div style={{ height: "250px" }}>
         <AreaChart {...props} syncId="syncedAreaCharts">
           <CartesianGrid />
-          <Area dataKey="ab" color="magenta" />
-          <Area dataKey="cd" color="tropical-indigo" />
-          <Area dataKey="ef" color="malachite" />
+          <Area dataKey="firstKey" color="magenta" />
+          <Area dataKey="secondKey" color="tropical-indigo" />
+          <Area dataKey="thirdKey" color="malachite" />
           <XAxis dataKey="name" />
           <YAxis />
           <ChartTooltip />

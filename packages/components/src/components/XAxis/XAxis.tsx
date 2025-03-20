@@ -12,8 +12,11 @@ export type XAxisProps = Pick<
   | "interval"
   | "minTickGap"
   | "scale"
+  | "type"
+  | "domain"
 >;
 
+/** @flr-generate all */
 export const XAxis: FC<XAxisProps> = (props) => {
   return (
     <Recharts.XAxis

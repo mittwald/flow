@@ -1,6 +1,8 @@
 legend:
-  spacing:
+  spacing-x:
     value: "{size-px.m}"
+  spacing-y:
+    value: "{size-px.s}"
 
 legend-item:
   spacing:

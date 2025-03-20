@@ -8,16 +8,22 @@ export type YAxisProps = Pick<
   | "dataKey"
   | "orientation"
   | "allowDecimals"
-  | "allowDataOverflow"
   | "interval"
   | "minTickGap"
   | "scale"
+  | "type"
+  | "domain"
 >;
 
+/** @flr-generate all */
 export const YAxis: FC<YAxisProps> = (props) => {
+  const { domain = [0, (dataMax) => dataMax / 2], ...rest } = props;
+
   return (
     <Recharts.YAxis
-      {...props}
+      {...rest}
+      allowDataOverflow
+      domain={domain}
       fontFamily="Inter"
       fontSize={tokens.axis["font-size"].value}
       tick={{

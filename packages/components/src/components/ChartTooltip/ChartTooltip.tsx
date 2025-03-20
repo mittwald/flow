@@ -4,21 +4,28 @@ import type {
   NameType,
   ValueType,
 } from "recharts/types/component/DefaultTooltipContent";
-import styles from "../Popover/Popover.module.scss";
-import tooltipStyles from "./ChartTooltip.module.scss";
-import { LegendItem } from "../Legend/components/LegendItem";
-import Heading from "../Heading";
-import clsx from "clsx";
-import { PopoverTip } from "../Popover/components/PopoverTip";
+import { TooltipContent } from "./components";
 
-interface WithTooltipFormatters {
-  formatter?: (
-    value: ValueType,
-    name: NameType,
-    index: number,
-    unit?: string | number,
-  ) => string;
-  headingFormatter?: (title: string) => string;
+export type TooltipLineFormatter = (
+  value: ValueType,
+  name: NameType,
+  index: number,
+  unit?: string | number,
+) => string;
+
+export type TooltipHeadingFormatter = (title: string) => string;
+
+export interface WithTooltipFormatters {
+  /**
+   * A formatter function for the lines in the tooltip. Can be used for purposes
+   * like translations.
+   */
+  formatter?: TooltipLineFormatter;
+  /**
+   * A formatter function for the heading of the tooltip. Can be used for
+   * purposes like translations.
+   */
+  headingFormatter?: TooltipHeadingFormatter;
 }
 
 export interface ChartTooltipProps
@@ -28,53 +35,7 @@ export interface ChartTooltipProps
     >,
     WithTooltipFormatters {}
 
-interface TooltipContentProps
-  extends Pick<
-      Recharts.TooltipContentProps<ValueType, NameType>,
-      "active" | "payload" | "label" | "wrapperClassName"
-    >,
-    WithTooltipFormatters {}
-
-const CustomTooltip = (props: TooltipContentProps) => {
-  const {
-    active,
-    payload,
-    formatter,
-    headingFormatter,
-    label,
-    wrapperClassName,
-  } = props;
-  const className = clsx(wrapperClassName, styles.popover);
-
-  if (active && payload && payload.length) {
-    return (
-      <div className={className}>
-        <PopoverTip className={tooltipStyles.tip} />
-        <div className={styles.content}>
-          <Heading level={3}>
-            {headingFormatter ? headingFormatter(label) : label}
-          </Heading>
-          {payload
-            .filter((i) => i.fill !== "none")
-            .map((i, index) => (
-              <LegendItem
-                color={i.fill}
-                title={
-                  formatter
-                    ? formatter(i.value, i.dataKey, index, i.unit)
-                    : `${i.dataKey} ${i.value}${i.unit ? ` ${i.unit}` : ""}`
-                }
-                key={i.dataKey}
-              />
-            ))}
-        </div>
-      </div>
-    );
-  }
-
-  return null;
-};
-
+/** @flr-generate all */
 export const ChartTooltip: FC<ChartTooltipProps> = (props) => {
   const { formatter, headingFormatter, ...rest } = props;
   return (
@@ -88,7 +49,7 @@ export const ChartTooltip: FC<ChartTooltipProps> = (props) => {
         } = props;
 
         return (
-          <CustomTooltip
+          <TooltipContent
             formatter={formatter}
             headingFormatter={headingFormatter}
             {...rest}
