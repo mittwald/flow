@@ -41,6 +41,11 @@ export const RemoteRendererClient: FC<RemoteRendererProps> = (props) => {
   const loadingAwaiter = useAwaiter([src]);
 
   const [connectedSrc, setConnectedSrc] = useState<string | null>(null);
+  const [remoteError, setRemoteError] = useState<string | undefined>();
+
+  if (remoteError) {
+    throw new Error(remoteError);
+  }
 
   const remoteComponents = useMergedComponents(integrations);
 
@@ -57,6 +62,7 @@ export const RemoteRendererClient: FC<RemoteRendererProps> = (props) => {
     connection: receiver.connection,
     extBridgeImplementation: extBridgeImplementation,
     onReady: connectionAwaiter.resolve,
+    onError: setRemoteError,
   });
 
   const timeoutPromise = (message: string) =>

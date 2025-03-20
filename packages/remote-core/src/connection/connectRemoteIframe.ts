@@ -1,4 +1,8 @@
-import type { HostExports, RemoteExports } from "@/connection/types";
+import type {
+  HostExports,
+  HostToRemoteConnection,
+  RemoteExports,
+} from "@/connection/types";
 import { emptyImplementation } from "@/ext-bridge/implementation";
 import type { RemoteConnection } from "@mfalkenberg/remote-dom-core/elements";
 import { type ExtBridgeRemoteApi } from "@mittwald/ext-bridge";
@@ -8,14 +12,16 @@ interface Opts {
   connection: RemoteConnection;
   iframe: HTMLIFrameElement;
   onReady?: () => void;
+  onError?: (error: string) => void;
   extBridgeImplementation?: ExtBridgeRemoteApi;
 }
 
-export const connectRemoteIframe = (opts: Opts) => {
+export const connectRemoteIframe = (opts: Opts): HostToRemoteConnection => {
   const {
     connection,
     iframe,
     onReady,
+    onError,
     extBridgeImplementation = emptyImplementation,
   } = opts;
 
@@ -25,10 +31,14 @@ export const connectRemoteIframe = (opts: Opts) => {
       setIsReady: async () => {
         onReady?.();
       },
+      setError: async (error: string) => {
+        onError?.(error);
+      },
     },
   });
 
   thread.imports.render(connection);
+  return thread;
 };
 
 export const connectRemoteIframeRef =
@@ -37,13 +47,14 @@ export const connectRemoteIframeRef =
       return;
     }
 
-    if ("__remoteConnectionEstablished" in ref) {
-      return;
+    if ("__remoteConnection" in ref) {
+      return ref["__remoteConnection"] as HostToRemoteConnection;
     }
 
-    connectRemoteIframe({
+    const connection = connectRemoteIframe({
       iframe: ref,
       ...opts,
     });
-    Object.assign(ref, { __remoteConnectionEstablished: true });
+    Object.assign(ref, { __remoteConnection: connection });
+    return connection;
   };

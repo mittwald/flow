@@ -41,6 +41,7 @@ export default function Layout(props: PropsWithChildren) {
               <Link href="/rhf-form">RHF Form</Link>
               <Link href="/suspense">Suspense</Link>
               <Link href="/ext-bridge">Ext Bridge</Link>
+              <Link href="/error">Error</Link>
               <Link href="/svg">Icon/SVG</Link>
               <Link href="/list">List</Link>
               <Link href="/performance">Performance</Link>

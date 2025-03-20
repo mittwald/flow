@@ -1,9 +1,15 @@
-import type { HostExports, RemoteExports } from "@/connection/types";
+import type {
+  HostExports,
+  RemoteExports,
+  RemoteToHostConnection,
+} from "@/connection/types";
 import { delegateExtBridgeRemoteFunctions } from "@/ext-bridge/delegateExtBridgeRemoteFunctions";
 import { type RemoteConnection } from "@mfalkenberg/remote-dom-core/elements";
 import { ThreadNestedIframe } from "@quilted/threads";
 
-export const connectHostRenderRoot = (div: HTMLDivElement) => {
+export const connectHostRenderRoot = (
+  div: HTMLDivElement,
+): RemoteToHostConnection => {
   const thread = new ThreadNestedIframe<HostExports, RemoteExports>({
     exports: {
       render: (connection: RemoteConnection) =>
@@ -27,9 +33,14 @@ export const connectHostRenderRoot = (div: HTMLDivElement) => {
 };
 
 export const connectHostRenderRootRef = (ref: HTMLDivElement | null) => {
-  if (ref === null || "__remoteConnectionEstablished" in ref) {
+  if (ref === null) {
     return;
   }
-  connectHostRenderRoot(ref);
-  Object.assign(ref, { __remoteConnectionEstablished: true });
+  if ("__remoteConnection" in ref) {
+    return ref["__remoteConnection"] as RemoteToHostConnection;
+  }
+
+  const connection = connectHostRenderRoot(ref);
+  Object.assign(ref, { __remoteConnection: connection });
+  return connection;
 };
