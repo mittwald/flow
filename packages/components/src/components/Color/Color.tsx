@@ -6,6 +6,8 @@ export interface ColorProps extends PropsWithChildren {
   color?: "blue" | "violet" | "teal" | "lilac";
 }
 
+/** @flr-generate all */
+
 export const Color: FC<ColorProps> = (props) => {
   const { children, color = "blue" } = props;
 
