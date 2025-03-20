@@ -264,15 +264,9 @@ importers:
       '@mittwald/flow-stylesheet':
         specifier: workspace:*
         version: link:../../packages/stylesheet
-      '@mittwald/react-use-promise':
-        specifier: ^3.0.3
-        version: 3.0.3(axios@1.8.3)(react@19.0.0)
       '@tabler/icons-react':
         specifier: ^3.31.0
         version: 3.31.0(react@19.0.0)
-      axios:
-        specifier: 1.8.3
-        version: 1.8.3
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
