@@ -249,6 +249,9 @@ importers:
       '@internationalized/date':
         specifier: ^3.7.0
         version: 3.7.0
+      '@mittwald/ext-bridge':
+        specifier: workspace:*
+        version: link:../../packages/ext-bridge
       '@mittwald/flow-react-components':
         specifier: workspace:*
         version: link:../../packages/components
@@ -261,9 +264,6 @@ importers:
       '@mittwald/flow-stylesheet':
         specifier: workspace:*
         version: link:../../packages/stylesheet
-      '@mittwald/react-use-promise':
-        specifier: ^3.0.1
-        version: 3.0.1(axios@1.8.2)(react@19.0.0)
       '@tabler/icons-react':
         specifier: ^3.31.0
         version: 3.31.0(react@19.0.0)
@@ -341,8 +341,8 @@ importers:
         specifier: workspace:*
         version: link:../react-tunnel
       '@mittwald/react-use-promise':
-        specifier: ^3.0.1
-        version: 3.0.1(axios@1.8.2)(react@19.0.0)
+        specifier: ^3.0.3
+        version: 3.0.3(axios@1.8.3)(react@19.0.0)
       '@react-aria/form':
         specifier: ^3.0.14
         version: 3.0.14(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -648,6 +648,70 @@ importers:
         specifier: ^4.3.3
         version: 4.3.3
 
+  packages/ext-bridge:
+    dependencies:
+      '@mittwald/react-use-promise':
+        specifier: ^3.0.3
+        version: 3.0.3(axios@1.8.3)(react@19.0.0)
+      axios:
+        specifier: ^1.8.3
+        version: 1.8.3
+      jose:
+        specifier: ^6.0.10
+        version: 6.0.10
+      std-env:
+        specifier: ^3.8.1
+        version: 3.8.1
+      zod:
+        specifier: ^3.24.2
+        version: 3.24.2
+    devDependencies:
+      '@mittwald/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      '@types/node':
+        specifier: ^22.13.10
+        version: 22.13.10
+      '@types/react':
+        specifier: ^19
+        version: 19.0.10
+      '@types/react-dom':
+        specifier: ^19
+        version: 19.0.4(@types/react@19.0.10)
+      nx:
+        specifier: ^20.5.0
+        version: 20.5.0
+      prettier:
+        specifier: ^3.5.3
+        version: 3.5.3
+      react:
+        specifier: ^19
+        version: 19.0.0
+      react-dom:
+        specifier: ^19
+        version: 19.0.0(react@19.0.0)
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
+      rollup-preserve-directives:
+        specifier: ^1.1.3
+        version: 1.1.3(rollup@4.35.0)
+      typescript:
+        specifier: ^5.8.2
+        version: 5.8.2
+      vite:
+        specifier: ^6.2.1
+        version: 6.2.1(@types/node@22.13.10)(less@4.2.2)(sass@1.85.1)(stylus@0.62.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0)
+      vite-plugin-checker:
+        specifier: ^0.9.0
+        version: 0.9.0(eslint@9.22.0)(optionator@0.9.4)(typescript@5.8.2)(vite@6.2.1(@types/node@22.13.10)(less@4.2.2)(sass@1.85.1)(stylus@0.62.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0))
+      vite-plugin-dts:
+        specifier: ^4.5.3
+        version: 4.5.3(@types/node@22.13.10)(rollup@4.35.0)(typescript@5.8.2)(vite@6.2.1(@types/node@22.13.10)(less@4.2.2)(sass@1.85.1)(stylus@0.62.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0))
+      vite-plugin-externalize-deps:
+        specifier: ^0.9.0
+        version: 0.9.0(vite@6.2.1(@types/node@22.13.10)(less@4.2.2)(sass@1.85.1)(stylus@0.62.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0))
+
   packages/react-tunnel:
     dependencies:
       mobx:
@@ -733,6 +797,9 @@ importers:
         specifier: ^2.21.1
         version: 2.21.1
     devDependencies:
+      '@mittwald/ext-bridge':
+        specifier: workspace:*
+        version: link:../ext-bridge
       '@mittwald/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
@@ -833,7 +900,13 @@ importers:
       '@types/react':
         specifier: ^19
         version: 19.0.10
+      react-error-boundary:
+        specifier: ^5.0.0
+        version: 5.0.0(react@19.0.0)
     devDependencies:
+      '@mittwald/ext-bridge':
+        specifier: workspace:*
+        version: link:../ext-bridge
       '@mittwald/flow-remote-react-renderer':
         specifier: workspace:*
         version: link:../remote-react-renderer
@@ -888,12 +961,18 @@ importers:
       '@mfalkenberg/remote-dom-react':
         specifier: 1.2.3
         version: 1.2.3(@preact/signals-core@1.8.0)(react@19.0.0)
+      '@mittwald/ext-bridge':
+        specifier: workspace:*
+        version: link:../ext-bridge
       '@mittwald/flow-remote-core':
         specifier: workspace:*
         version: link:../remote-core
       '@mittwald/flow-remote-elements':
         specifier: workspace:*
         version: link:../remote-elements
+      '@mittwald/react-use-promise':
+        specifier: ^3.0.3
+        version: 3.0.3(axios@1.8.3)(react@19.0.0)
       '@types/react':
         specifier: ^19
         version: 19.0.10
@@ -1528,6 +1607,10 @@ packages:
     engines: {node: '>=6.9.0'}
     peerDependencies:
       '@babel/core': ^7.0.0-0
+
+  '@babel/runtime@7.26.10':
+    resolution: {integrity: sha512-2WJMeRQPHKSPemqk/awGrAiuFfzBmOIPXKizAsVhWH9YJqLZ0H+HS4c8loHGgW6utJ3E/ejXQUsiGaQy2NZ9Fw==}
+    engines: {node: '>=6.9.0'}
 
   '@babel/runtime@7.26.9':
     resolution: {integrity: sha512-aA63XwOkcl4xxQa3HjPMqOP6LiK0ZDv3mUPYEFXkpHbaFjtGggE1A61FjFzJnB+p7/oy2gA8E+rcBNl/zC1tMg==}
@@ -2178,8 +2261,8 @@ packages:
   '@microsoft/tsdoc@0.15.1':
     resolution: {integrity: sha512-4aErSrCR/On/e5G2hDP0wjooqDdauzEbIq8hIkIe5pXV0rtWJZvdCEKL0ykZxex+IxIwBp0eGeV48hQN07dXtw==}
 
-  '@mittwald/react-use-promise@3.0.1':
-    resolution: {integrity: sha512-yVkxRSSQC6gF4n0cjY/FB9OvOcQpKqXFt+HVZGVzXlyQddJFAlSWGzih+3HodqVCmfI7jBDQBcH3QuI8XzwqHQ==}
+  '@mittwald/react-use-promise@3.0.3':
+    resolution: {integrity: sha512-OHy2zDtD3reJbr20Sf75f1/VvsGEnci7IsxkA6Tv+seIuVBvthbvPwd6eX5rc8RWyh1hSVq8PETCGjiEu4fRtw==}
     peerDependencies:
       axios: ^1.6.7
       react: ^19
@@ -4197,8 +4280,8 @@ packages:
     resolution: {integrity: sha512-Xm7bpRXnDSX2YE2YFfBk2FnF0ep6tmG7xPh8iHee8MIcrgq762Nkce856dYtJYLkuIoYZvGfTs/PbZhideTcEg==}
     engines: {node: '>=4'}
 
-  axios@1.8.2:
-    resolution: {integrity: sha512-ls4GYBm5aig9vWx8AWDSGLpnpDQRtWAfrjU+EuytuODrFBkqesN2RkOQCBzrA1RQNHw1SmRMSDDDSwzNAYQ6Rg==}
+  axios@1.8.3:
+    resolution: {integrity: sha512-iP4DebzoNlP/YN2dpwCgb8zoCmhtkajzS48JvwmkSkXvPI3DHc7m+XYL5tGnSlJtR6nImXZmdCuN5aP8dh1d8A==}
 
   babel-plugin-const-enum@1.2.0:
     resolution: {integrity: sha512-o1m/6iyyFnp9MRsK1dHF3bneqyf3AlM2q3A/YbgQr2pCat6B6XJVDv2TXqzfY2RYUi4mak6WAksSBPlyYGx9dg==}
@@ -5844,6 +5927,9 @@ packages:
   jju@1.4.0:
     resolution: {integrity: sha512-8wb9Yw966OSxApiCt0K3yNJL8pnNeIv+OEq2YMidz4FKP6nonSRoOXc80iXY4JaN2FC11B9qsNmDsm+ZOfMROA==}
 
+  jose@6.0.10:
+    resolution: {integrity: sha512-skIAxZqcMkOrSwjJvplIPYrlXGpxTPnro2/QWTDCxAdWQrSTV5/KqspMWmi5WAx5+ULswASJiZ0a+1B/Lxt9cw==}
+
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
 
@@ -7210,6 +7296,11 @@ packages:
       react: ^19
       react-dom: ^19
       react-is: ^19.0.0
+
+  react-error-boundary@5.0.0:
+    resolution: {integrity: sha512-tnjAxG+IkpLephNcePNA7v6F/QpWLH8He65+DmedchDwg162JZqx4NmbXj0mlAYVVEd81OW7aFhmbsScYfiAFQ==}
+    peerDependencies:
+      react: ^19
 
   react-hook-form@7.54.2:
     resolution: {integrity: sha512-eHpAUgUjWbZocoQYUHposymRb4ZP6d0uwUnooL2uOybA9/3tPUvoAKqEWK1WaSiTxxOfTpffNZP7QwlnM3/gEg==}
@@ -9298,6 +9389,10 @@ snapshots:
       pirates: 4.0.6
       source-map-support: 0.5.21
 
+  '@babel/runtime@7.26.10':
+    dependencies:
+      regenerator-runtime: 0.14.1
+
   '@babel/runtime@7.26.9':
     dependencies:
       regenerator-runtime: 0.14.1
@@ -10050,7 +10145,7 @@ snapshots:
 
   '@microsoft/tsdoc@0.15.1': {}
 
-  '@mittwald/react-use-promise@3.0.1(axios@1.8.2)(react@19.0.0)':
+  '@mittwald/react-use-promise@3.0.3(axios@1.8.3)(react@19.0.0)':
     dependencies:
       '@types/luxon': 3.4.2
       browser-or-node: 3.0.0
@@ -10058,8 +10153,9 @@ snapshots:
       minimatch: 10.0.1
       object-code: 1.3.3
       react: 19.0.0
+      react-error-boundary: 5.0.0(react@19.0.0)
     optionalDependencies:
-      axios: 1.8.2
+      axios: 1.8.3
 
   '@mswjs/interceptors@0.37.6':
     dependencies:
@@ -10318,7 +10414,7 @@ snapshots:
       '@babel/plugin-transform-runtime': 7.26.9(@babel/core@7.26.9)
       '@babel/preset-env': 7.26.9(@babel/core@7.26.9)
       '@babel/preset-typescript': 7.26.0(@babel/core@7.26.9)
-      '@babel/runtime': 7.26.9
+      '@babel/runtime': 7.26.10
       '@nx/devkit': 20.5.0(nx@20.5.0)
       '@nx/workspace': 20.5.0
       '@zkochan/js-yaml': 0.0.7
@@ -10362,7 +10458,7 @@ snapshots:
       '@babel/plugin-transform-runtime': 7.26.9(@babel/core@7.26.9)
       '@babel/preset-env': 7.26.9(@babel/core@7.26.9)
       '@babel/preset-typescript': 7.26.0(@babel/core@7.26.9)
-      '@babel/runtime': 7.26.9
+      '@babel/runtime': 7.26.10
       '@nx/devkit': 20.5.0(nx@20.5.0)
       '@nx/workspace': 20.5.0
       '@zkochan/js-yaml': 0.0.7
@@ -12795,7 +12891,7 @@ snapshots:
 
   axe-core@4.10.3: {}
 
-  axios@1.8.2:
+  axios@1.8.3:
     dependencies:
       follow-redirects: 1.15.9
       form-data: 4.0.2
@@ -12814,7 +12910,7 @@ snapshots:
 
   babel-plugin-macros@3.1.0:
     dependencies:
-      '@babel/runtime': 7.26.9
+      '@babel/runtime': 7.26.10
       cosmiconfig: 7.1.0
       resolve: 1.22.10
 
@@ -14573,6 +14669,8 @@ snapshots:
 
   jju@1.4.0: {}
 
+  jose@6.0.10: {}
+
   js-tokens@4.0.0: {}
 
   js-yaml@3.14.1:
@@ -15722,7 +15820,7 @@ snapshots:
       '@yarnpkg/lockfile': 1.1.0
       '@yarnpkg/parsers': 3.0.2
       '@zkochan/js-yaml': 0.0.7
-      axios: 1.8.2
+      axios: 1.8.3
       chalk: 4.1.2
       cli-cursor: 3.1.0
       cli-spinners: 2.6.1
@@ -16121,7 +16219,7 @@ snapshots:
 
   polished@4.3.1:
     dependencies:
-      '@babel/runtime': 7.26.9
+      '@babel/runtime': 7.26.10
 
   possible-typed-array-names@1.1.0: {}
 
@@ -16446,6 +16544,11 @@ snapshots:
       react-dom: 19.0.0(react@19.0.0)
       react-is: 18.3.1
 
+  react-error-boundary@5.0.0(react@19.0.0):
+    dependencies:
+      '@babel/runtime': 7.26.10
+      react: 19.0.0
+
   react-hook-form@7.54.2(react@19.0.0):
     dependencies:
       react: 19.0.0
@@ -16650,7 +16753,7 @@ snapshots:
 
   regenerator-transform@0.15.2:
     dependencies:
-      '@babel/runtime': 7.26.9
+      '@babel/runtime': 7.26.10
 
   regexpu-core@6.2.0:
     dependencies:
