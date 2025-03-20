@@ -8,7 +8,10 @@ import {
   RemoteRootRenderer,
 } from "@mfalkenberg/remote-dom-react/host";
 import type { ExtBridgeRemoteApi } from "@mittwald/ext-bridge";
-import { connectRemoteIframeRef } from "@mittwald/flow-remote-core";
+import {
+  connectRemoteIframeRef,
+  RemoteError,
+} from "@mittwald/flow-remote-core";
 import { usePromise } from "@mittwald/react-use-promise";
 import { type CSSProperties, type FC, useMemo, useState } from "react";
 
@@ -44,7 +47,7 @@ export const RemoteRendererClient: FC<RemoteRendererProps> = (props) => {
   const [remoteError, setRemoteError] = useState<string | undefined>();
 
   if (remoteError) {
-    throw new Error(remoteError);
+    throw new RemoteError(`Remote rendering failed: ${remoteError}`);
   }
 
   const remoteComponents = useMergedComponents(integrations);
@@ -68,7 +71,7 @@ export const RemoteRendererClient: FC<RemoteRendererProps> = (props) => {
   const timeoutPromise = (message: string) =>
     new Promise((_, rej) => {
       setTimeout(() => {
-        rej(new Error(`${message}: Timeout reached`));
+        rej(new RemoteError(`${message}: Timeout reached`));
       }, timeoutMs);
     });
 
