@@ -1,3 +1,4 @@
+import { ExtBridgeError } from "@/error";
 import { sessionTokenPayload } from "@/sessionToken/schemas";
 import type { SessionTokenPayload } from "@/sessionToken/types";
 import { decodeJwt } from "jose";
@@ -22,7 +23,9 @@ export const decode = (jwt: string) => {
   });
 
   if (parsed.error) {
-    throw new Error("Session token payload invalid: " + parsed.error.message);
+    throw new ExtBridgeError(
+      "Session token payload invalid: " + parsed.error.message,
+    );
   }
 
   return parsed.data;

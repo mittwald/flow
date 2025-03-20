@@ -1,7 +1,8 @@
 import { parseConfig } from "@/config/parse";
+import { ExtBridgeError } from "@/error";
 
 let resolveReadyPromise: () => void = () => {
-  throw new Error("Unexpected call of resolveReadyPromise()");
+  throw new ExtBridgeError("Unexpected call of resolveReadyPromise()");
 };
 
 export const loadingApi = {

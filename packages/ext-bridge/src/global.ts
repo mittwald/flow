@@ -5,7 +5,7 @@ const isAlreadyDefined = typeof globalThis.mwExtBridge !== "undefined";
 
 if (isAlreadyDefined) {
   console.warn(
-    "MwExtBrdige is already defined. The @mittwald/ext-bridge package is probably installed multiple times.",
+    "mwExtBridge is already defined. The @mittwald/ext-bridge package is probably installed multiple times.",
   );
 }
 
