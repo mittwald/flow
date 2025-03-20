@@ -12,9 +12,7 @@ gesetzt werden.
 
 ---
 
-# Kombiniere mit...
-
-## RadioButton
+# RadioButtons
 
 RadioGroups können statt mit einfachen **Radios** auch mit **RadioButtons**
 gefüllt werden. Ersetze dafür `<Radio />` mit `<RadioButton />`. Anders als
@@ -23,7 +21,7 @@ Text und Subtext – darstellen und dürfen auch nebeneinander gesetzt werden.
 
 <LiveCodeEditor example="buttons" editorCollapsed />
 
-## Weiterem Inhalt
+## Weiterer Inhalt
 
 Anstelle einer einfachen Bezeichnung kann der `<RadioButton />` auch mit
 zusätzlichem Inhalt gefüllt werden. Verwende dazu innerhalb des
@@ -32,22 +30,22 @@ zusätzlichem Inhalt gefüllt werden. Verwende dazu innerhalb des
 
 <LiveCodeEditor example="content" editorCollapsed />
 
-## FieldDescription
-
-Unterhalb der `<Radio />` oder `<RadioButton />` kann eine hilfreiche
-`<FieldDescription />` eingebaut werden.
-
-<LiveCodeEditor example="fieldDescription" editorCollapsed />
-
----
-
-# Mit benutzerdefinierten Spalten
+## Benutzerdefinierte Spalten
 
 Die RadioGroup verwendet das
 [ColumnLayout](/03-components/structure/column-layout), um eine Anpassung der
 Spalten zu ermöglichen.
 
 <LiveCodeEditor example="customColumns" editorCollapsed />
+
+---
+
+# Mit FieldDescription
+
+Unterhalb der `<Radio />` oder `<RadioButton />` kann eine hilfreiche
+`<FieldDescription />` eingebaut werden.
+
+<LiveCodeEditor example="fieldDescription" editorCollapsed />
 
 ---
 
@@ -76,3 +74,15 @@ ist (siehe
 [Fehlermeldungen](/02-foundations/03-content-guidelines/02-fehlermeldungen)). Da
 häufig eine Option in der RadioGroup vorselektiert ist, wird das obige Beispiel
 nur selten benötigt.
+
+---
+
+# Kombiniere mit ...
+
+## ContextualHelp
+
+Benutze die [ContextualHelp](/03-components/overlays/contextual-help)
+Komponente, wenn du weitere Informationen bereitstellen möchtest, und diese zu
+lang für die FieldDescription sind.
+
+<LiveCodeEditor example="contextualHelp" editorCollapsed />
