@@ -1,5 +1,6 @@
 import {
   AccentBox,
+  Color,
   Flex,
   Heading,
   LayoutCard,
@@ -12,10 +13,17 @@ import {
     <Flex align="center" wrap="wrap" gap="m">
       <Flex direction="column" grow>
         <Heading size="l">
-          mStudio Extension selber entwickeln
+          <Color color="violet">mStudio Extension</Color>{" "}
+          selber entwickeln
         </Heading>
-        <Text color="dark">
-          <b>Veröffentliche eigene Features im mStudio</b>
+        <Text>
+          <b>
+            <Color>
+              Veröffentliche{" "}
+              <Color color="violet">eigene Features</Color>{" "}
+              im mStudio
+            </Color>
+          </b>
         </Text>
       </Flex>
       <Link target="_blank" href="#" color="dark">

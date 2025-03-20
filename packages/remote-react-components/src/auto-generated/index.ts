@@ -18,6 +18,7 @@ export * from "./CheckboxButton";
 export * from "./CheckboxGroup";
 export * from "./ClearPropsContextContent";
 export * from "./CodeBlock";
+export * from "./Color";
 export * from "./ColumnLayout";
 export * from "./Content";
 export * from "./ContextMenuContent";
