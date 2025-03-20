@@ -23,6 +23,10 @@
     gap: var(--list--spacing);
     flex-wrap: wrap-reverse;
     justify-content: end;
+
+    > * {
+      flex-grow: 0;
+    }
   }
 
   .searchField {
