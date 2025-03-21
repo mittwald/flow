@@ -13,6 +13,6 @@ const contextParameters = z
     projectId: z.string().optional(),
     customerId: z.string().optional(),
   })
-  .catchall(z.string());
+  .catchall(z.string().optional());
 
 export const config = z.union([baseConfig, contextParameters]);

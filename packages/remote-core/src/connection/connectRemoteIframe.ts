@@ -3,10 +3,13 @@ import type {
   HostToRemoteConnection,
   RemoteExports,
 } from "@/connection/types";
+import { debug } from "@/debug";
 import { emptyImplementation } from "@/ext-bridge/implementation";
 import type { RemoteConnection } from "@mfalkenberg/remote-dom-core/elements";
 import { type ExtBridgeRemoteApi } from "@mittwald/ext-bridge";
 import { ThreadIframe } from "@quilted/threads";
+
+const dbg = debug.extend("host");
 
 interface Opts {
   connection: RemoteConnection;
@@ -17,6 +20,7 @@ interface Opts {
 }
 
 export const connectRemoteIframe = (opts: Opts): HostToRemoteConnection => {
+  dbg("initialising connection");
   const {
     connection,
     iframe,
@@ -29,14 +33,24 @@ export const connectRemoteIframe = (opts: Opts): HostToRemoteConnection => {
     exports: {
       ...extBridgeImplementation,
       setIsReady: async () => {
+        dbg(
+          "connection set to ready (onReady callback: %s)",
+          onReady ? "yes" : "no",
+        );
         onReady?.();
       },
       setError: async (error: string) => {
+        dbg(
+          "received error '%s' (onError callback: %s)",
+          error,
+          onError ? "yes" : "no",
+        );
         onError?.(error);
       },
     },
   });
 
+  dbg("start rendering");
   thread.imports.render(connection);
   return thread;
 };
