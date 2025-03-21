@@ -1,0 +1,14 @@
+legend:
+  spacing-x:
+    value: "{size-px.m}"
+  spacing-y:
+    value: "{size-px.s}"
+
+legend-item:
+  spacing:
+    value: "{size-rem.s}"
+  marker:
+    size:
+      value: "{size-rem.m}"
+    corner-radius:
+      value: "{corner-radius.default}"

@@ -1,0 +1,9 @@
+.legendContent {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--legend--spacing-x);
+  margin-top: var(--legend--spacing-y);
+}
