@@ -4,9 +4,11 @@ import React from "react";
 import { Label } from "@/components/Label";
 import { action } from "@storybook/addon-actions";
 import FieldDescription from "@/components/FieldDescription/FieldDescription";
-import { Form } from "react-aria-components";
 import { Button } from "@/components/Button";
 import { FieldError } from "@/components/FieldError";
+import { Form } from "@/integrations/react-hook-form";
+import { useForm } from "react-hook-form";
+import { sleep } from "@/lib/promises/sleep";
 
 const meta: Meta<typeof TextField> = {
   title: "Form Controls/TextField",
@@ -65,22 +67,19 @@ export const WithFieldError: Story = {
   ),
 };
 
-// ToDo: submit fixen
-
 export const WithForm: Story = {
-  render: (props) => (
-    <Form
-      onSubmit={() => {
-        // do nothing
-      }}
-    >
-      <TextField {...props} type="email" inputMode="email" isRequired>
-        <Label>Email</Label>
-      </TextField>
-      <br />
-      <Button type="submit">Submit</Button>
-    </Form>
-  ),
+  render: (props) => {
+    const form = useForm();
+    return (
+      <Form form={form} onSubmit={async () => await sleep(2000)}>
+        <TextField {...props} type="email" inputMode="email" isRequired>
+          <Label>Email</Label>
+        </TextField>
+        <br />
+        <Button type="submit">Submit</Button>
+      </Form>
+    );
+  },
 };
 
 export const ShowCharacterCount: Story = {

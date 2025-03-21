@@ -10,11 +10,11 @@ import {
 import "@mittwald/flow-react-components/all.css";
 import { LinkProvider } from "@mittwald/flow-react-components/nextjs";
 import { RemoteRoot } from "@mittwald/flow-remote-react-components/RemoteRoot";
+import type { ErrorComponent } from "next/dist/client/components/error-boundary";
+import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 import { usePathname } from "next/navigation";
 import { type PropsWithChildren, Suspense } from "react";
 import styles from "./layout.module.css";
-import type { ErrorComponent } from "next/dist/client/components/error-boundary";
-import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 
 const Error: ErrorComponent = (props) => {
   return <>REMOTE RENDER ERROR: {props.error.message}</>;
@@ -40,6 +40,8 @@ export default function Layout(props: PropsWithChildren) {
               <Link href="/react-hook-form">React Hook Form</Link>
               <Link href="/rhf-form">RHF Form</Link>
               <Link href="/suspense">Suspense</Link>
+              <Link href="/ext-bridge">Ext Bridge</Link>
+              <Link href="/error">Error</Link>
               <Link href="/svg">Icon/SVG</Link>
               <Link href="/list">List</Link>
               <Link href="/performance">Performance</Link>
@@ -56,7 +58,19 @@ export default function Layout(props: PropsWithChildren) {
                       </IllustratedMessage>
                     }
                   >
-                    <RemoteRoot key={p} showPreview>
+                    <RemoteRoot
+                      key={p}
+                      showPreview
+                      extBridgeImplementation={{
+                        getConfig: async () => ({
+                          extensionId: "ext-id",
+                          extensionInstanceId: "exti-id",
+                          sessionId: "session-id",
+                          userId: "user-id",
+                        }),
+                        getSessionToken: async () => "session-token",
+                      }}
+                    >
                       {props.children}
                     </RemoteRoot>
                   </Suspense>

@@ -9,13 +9,14 @@ import {
   flowComponent,
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
+import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 
 export interface AccentBoxProps
   extends PropsWithChildren,
     PropsWithElementType<"div" | "section" | "article">,
     PropsWithClassName,
     FlowComponentProps {
-  color?: "blue" | "gradient";
+  color?: "blue" | "green" | "gradient";
 }
 
 /** @flr-generate all */
@@ -26,7 +27,21 @@ export const AccentBox = flowComponent("AccentBox", (props) => {
 
   const Element = elementType;
 
-  return <Element className={rootClassName}>{children}</Element>;
+  const contentColor = color === "green" ? "dark" : undefined;
+
+  const propsContext: PropsContext = {
+    Link: {
+      color: contentColor,
+    },
+    Text: { color: contentColor },
+    Heading: { color: contentColor },
+  };
+
+  return (
+    <PropsContextProvider props={propsContext}>
+      <Element className={rootClassName}>{children}</Element>
+    </PropsContextProvider>
+  );
 });
 
 export default AccentBox;

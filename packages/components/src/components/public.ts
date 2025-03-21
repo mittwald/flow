@@ -17,6 +17,7 @@ export * from "@/components/Checkbox";
 export * from "@/components/CheckboxButton";
 export * from "@/components/CheckboxGroup";
 export * from "@/components/CodeBlock";
+export * from "@/components/Color";
 export * from "@/components/ColumnLayout";
 export * from "@/components/ComboBox";
 export * from "@/components/Content";

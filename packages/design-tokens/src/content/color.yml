@@ -1,0 +1,9 @@
+color:
+  blue:
+    value: "{primary.color.1000}"
+  violet:
+    value: "{color.soft-contrast-violet.800}"
+  teal:
+    value: "{color.super-teal.800}"
+  lilac:
+    value: "{color.bright-lilac.800}"

@@ -19,6 +19,7 @@ import { CheckboxButton as CheckboxButton } from "@mittwald/flow-react-component
 import { CheckboxGroup as CheckboxGroup } from "@mittwald/flow-react-components";
 import { ClearPropsContextContent as ClearPropsContextContent } from "@mittwald/flow-react-components";
 import { CodeBlock as CodeBlock } from "@mittwald/flow-react-components";
+import { Color as Color } from "@mittwald/flow-react-components";
 import { ColumnLayout as ColumnLayout } from "@mittwald/flow-react-components";
 import { Content as Content } from "@mittwald/flow-react-components";
 import { ContextMenuContent as ContextMenuContent } from "@mittwald/flow-react-components";
@@ -125,6 +126,7 @@ export const flowComponents = {
     ClearPropsContextContent,
   ),
   "flr-code-block": createFlowRemoteComponentRenderer(CodeBlock),
+  "flr-color": createFlowRemoteComponentRenderer(Color),
   "flr-column-layout": createFlowRemoteComponentRenderer(ColumnLayout),
   "flr-content": createFlowRemoteComponentRenderer(Content),
   "flr-context-menu-content":
