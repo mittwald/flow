@@ -1,37 +1,28 @@
 "use client";
 
-import { components } from "@/components";
+import { useAwaiter } from "@/hooks/useAwaiter";
+import { useMergedComponents } from "@/hooks/useMergedComponents";
 import type { RemoteComponentsMap } from "@/lib/types";
-import type { RemoteComponentRendererProps } from "@mfalkenberg/remote-dom-react/host";
 import {
   RemoteReceiver,
   RemoteRootRenderer,
 } from "@mfalkenberg/remote-dom-react/host";
-import { connectRemoteIframeRef } from "@mittwald/flow-remote-core";
+import type { ExtBridgeRemoteApi } from "@mittwald/ext-bridge";
 import {
-  type ComponentType,
-  type CSSProperties,
-  type FC,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
-import { reduce } from "remeda";
+  connectRemoteIframeRef,
+  RemoteError,
+} from "@mittwald/flow-remote-core";
+import { usePromise } from "@mittwald/react-use-promise";
+import { type CSSProperties, type FC, useMemo, useState } from "react";
 
 export interface RemoteRendererProps {
   integrations?: RemoteComponentsMap<never>[];
   src: string;
-  timeout?: number;
+  timeoutMs?: number;
+  extBridgeImplementation?: ExtBridgeRemoteApi;
 }
 
-interface PromiseObject {
-  result: null | Promise<void> | Error;
-  resolve: CallableFunction;
-  reject: CallableFunction;
-}
-
-const HiddenIframeStyle: CSSProperties = {
+const hiddenIframeStyle: CSSProperties = {
   visibility: "hidden",
   height: 0,
   width: 0,
@@ -40,104 +31,84 @@ const HiddenIframeStyle: CSSProperties = {
   marginLeft: "-9999px",
 };
 
-const voidFunction = () => null;
-
 export const RemoteRendererClient: FC<RemoteRendererProps> = (props) => {
-  const { integrations = [], timeout = 10000, src } = props;
-  const [, forceRerender] = useState<boolean>(false);
+  const {
+    integrations = [],
+    timeoutMs = 10_000,
+    src,
+    extBridgeImplementation,
+  } = props;
 
-  const iframeRef = useRef<HTMLIFrameElement>(null);
-  const checkRenderTimeout = useRef<number>(null);
-  const awaiter = useRef<PromiseObject>({
-    result: null,
-    resolve: voidFunction,
-    reject: voidFunction,
-  }).current;
+  const renderAwaiter = useAwaiter([src]);
+  const connectionAwaiter = useAwaiter([src]);
+  const loadingAwaiter = useAwaiter([src]);
 
-  if (awaiter.result !== null) {
-    throw awaiter.result;
+  const [connectedSrc, setConnectedSrc] = useState<string | null>(null);
+  const [remoteError, setRemoteError] = useState<string | undefined>();
+
+  if (remoteError) {
+    throw new RemoteError(`Remote rendering failed: ${remoteError}`);
   }
 
-  const clearRenderTimeout = () => {
-    if (checkRenderTimeout.current) {
-      clearTimeout(checkRenderTimeout.current);
-    }
-  };
-
-  const mergedComponents = useMemo(() => {
-    return new Map<string, ComponentType<RemoteComponentRendererProps>>(
-      Object.entries(
-        reduce(
-          [...integrations, components],
-          (merged, current) => ({
-            ...merged,
-            ...current,
-          }),
-          {},
-        ),
-      ),
-    );
-  }, [...integrations]);
+  const remoteComponents = useMergedComponents(integrations);
 
   const receiver = useMemo(() => {
     const remoteReceiver = new RemoteReceiver();
-    remoteReceiver.subscribe({ id: remoteReceiver.root.id }, () =>
-      awaiter.resolve(),
+    remoteReceiver.subscribe(
+      { id: remoteReceiver.root.id },
+      renderAwaiter.resolve,
     );
-
     return remoteReceiver;
-  }, []);
+  }, [src]);
 
-  const connect = connectRemoteIframeRef(receiver.connection);
+  const connect = connectRemoteIframeRef({
+    connection: receiver.connection,
+    extBridgeImplementation: extBridgeImplementation,
+    onReady: connectionAwaiter.resolve,
+    onError: setRemoteError,
+  });
 
-  useLayoutEffect(() => {
-    if (!src || !iframeRef.current || iframeRef.current.src === src) {
-      return;
-    }
-
-    clearRenderTimeout();
-    iframeRef.current.src = src;
-
-    awaiter.result = new Promise((resolve, reject) => {
-      awaiter.resolve = () => {
-        clearRenderTimeout();
-        resolve();
-        awaiter.result = null;
-      };
-      awaiter.reject = (reason: string) => {
-        clearRenderTimeout();
-        reject();
-        awaiter.result = new Error(reason);
-      };
+  const timeoutPromise = (message: string) =>
+    new Promise((_, rej) => {
+      setTimeout(() => {
+        rej(new RemoteError(`${message}: Timeout reached`));
+      }, timeoutMs);
     });
 
-    forceRerender((old) => !old);
-  }, [src, iframeRef]);
+  const overallLoading = () =>
+    Promise.all([
+      Promise.race([
+        loadingAwaiter.promise,
+        timeoutPromise("Remote URL could not be loaded"),
+      ]),
+      Promise.race([
+        connectionAwaiter.promise,
+        timeoutPromise("Could not establish remote connection"),
+      ]),
+      Promise.race([
+        renderAwaiter.promise,
+        timeoutPromise("Remote rendering failed"),
+      ]),
+    ]);
 
-  const onIframeLoaded = () => {
-    checkRenderTimeout.current = setTimeout(
-      () =>
-        awaiter.reject(
-          "RemoteRenderTimeout reached. Remote URL was successfully loaded but no Remote Component was rendered in time.",
-        ),
-      timeout,
-    );
-  };
-
-  const onIframeError = () =>
-    awaiter.reject("Remote URL could not be reached and was not loaded.");
+  const awaitLoadingPromise = connectedSrc === src;
+  usePromise(overallLoading, awaitLoadingPromise ? [] : null, {
+    loaderId: src,
+  });
 
   return (
     <>
-      <RemoteRootRenderer components={mergedComponents} receiver={receiver} />
+      <RemoteRootRenderer components={remoteComponents} receiver={receiver} />
       <iframe
+        key={src}
+        src={src}
         ref={(ref) => {
-          iframeRef.current = ref;
-          return connect(ref);
+          connect(ref);
+          setConnectedSrc(src);
         }}
-        onLoad={onIframeLoaded}
-        onError={onIframeError}
-        style={HiddenIframeStyle}
+        onLoad={loadingAwaiter.resolve}
+        onError={loadingAwaiter.reject}
+        style={hiddenIframeStyle}
       />
     </>
   );

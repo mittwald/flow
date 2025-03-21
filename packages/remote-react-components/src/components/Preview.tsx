@@ -1,23 +1,18 @@
-import React, { type FC, type ReactNode } from "react";
+import type { ExtBridgeRemoteApi } from "@mittwald/ext-bridge";
+import React, { type FC } from "react";
 
-const Fallback: FC = () => null;
-
-const RemoteRenderer = React.lazy(async () => {
-  try {
-    return await import("@mittwald/flow-remote-react-renderer/RemoteRenderer");
-  } catch {
-    return { default: Fallback };
-  }
-});
+const LazyRemoteRenderer = React.lazy(
+  () => import("@mittwald/flow-remote-react-renderer/RemoteRenderer"),
+);
 
 interface Props {
-  fallback?: ReactNode;
+  extBridgeImplementation?: ExtBridgeRemoteApi;
 }
 
 export const Preview: FC<Props> = (props) => {
   const previewUrl = new URL(document.location.href);
   previewUrl.searchParams.set("preview", "");
-  return <RemoteRenderer src={previewUrl.toString()} {...props} />;
+  return <LazyRemoteRenderer src={previewUrl.toString()} {...props} />;
 };
 
 export default Preview;

@@ -1,36 +1,60 @@
+import type {
+  HostExports,
+  HostToRemoteConnection,
+  RemoteExports,
+} from "@/connection/types";
+import { emptyImplementation } from "@/ext-bridge/implementation";
 import type { RemoteConnection } from "@mfalkenberg/remote-dom-core/elements";
+import { type ExtBridgeRemoteApi } from "@mittwald/ext-bridge";
 import { ThreadIframe } from "@quilted/threads";
-
-export type HostData = Record<string, unknown>;
 
 interface Opts {
   connection: RemoteConnection;
   iframe: HTMLIFrameElement;
+  onReady?: () => void;
+  onError?: (error: string) => void;
+  extBridgeImplementation?: ExtBridgeRemoteApi;
 }
 
-interface ThreadIframeTarget {
-  render: (connection: RemoteConnection) => AsyncIterator<unknown>;
-}
+export const connectRemoteIframe = (opts: Opts): HostToRemoteConnection => {
+  const {
+    connection,
+    iframe,
+    onReady,
+    onError,
+    extBridgeImplementation = emptyImplementation,
+  } = opts;
 
-export const connectRemoteIframe = (opts: Opts) => {
-  const thread = new ThreadIframe<ThreadIframeTarget>(opts.iframe);
-  thread.imports.render(opts.connection);
+  const thread = new ThreadIframe<RemoteExports, HostExports>(iframe, {
+    exports: {
+      ...extBridgeImplementation,
+      setIsReady: async () => {
+        onReady?.();
+      },
+      setError: async (error: string) => {
+        onError?.(error);
+      },
+    },
+  });
+
+  thread.imports.render(connection);
   return thread;
 };
 
 export const connectRemoteIframeRef =
-  (connection: RemoteConnection) => (ref: HTMLIFrameElement | null) => {
+  (opts: Omit<Opts, "iframe">) => (ref: HTMLIFrameElement | null) => {
     if (!ref) {
       return;
     }
 
-    if ("__remoteConnectionEstablished" in ref) {
-      return;
+    if ("__remoteConnection" in ref) {
+      return ref["__remoteConnection"] as HostToRemoteConnection;
     }
 
-    connectRemoteIframe({
+    const connection = connectRemoteIframe({
       iframe: ref,
-      connection,
+      ...opts,
     });
-    Object.assign(ref, { __remoteConnectionEstablished: true });
+    Object.assign(ref, { __remoteConnection: connection });
+    return connection;
   };
