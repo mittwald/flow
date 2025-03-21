@@ -3,7 +3,12 @@ import React from "react";
 import DatePicker from "../index";
 import { Label } from "@/components/Label";
 import { FieldDescription } from "@/components/FieldDescription";
-import { getLocalTimeZone, parseDate, today } from "@internationalized/date";
+import {
+  type DateValue,
+  getLocalTimeZone,
+  parseDate,
+  today,
+} from "@internationalized/date";
 
 const meta: Meta<typeof DatePicker> = {
   title: "Form Controls/DatePicker",
@@ -47,6 +52,18 @@ export const FutureDatesOnly: Story = {
     <DatePicker isRequired {...props}>
       <Label>Future Date</Label>
       <FieldDescription>Select a future date</FieldDescription>
+    </DatePicker>
+  ),
+};
+
+export const OnlyOneDayInMonth: Story = {
+  render: (props) => (
+    <DatePicker
+      isRequired
+      isDateUnavailable={(date: DateValue) => date.day !== 1}
+      {...props}
+    >
+      <Label>Future Date</Label>
     </DatePicker>
   ),
 };
