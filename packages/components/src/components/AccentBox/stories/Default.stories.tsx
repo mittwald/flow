@@ -63,6 +63,20 @@ export const WithIcon: Story = {
   ),
 };
 
+export const Green: Story = {
+  args: { color: "green" },
+  render: (props) => (
+    <AccentBox {...props}>
+      <IconStar />
+      <Section>
+        <Heading>Heading</Heading>
+        <Text>{dummyText.long}</Text>
+        <Link>Link</Link>
+      </Section>
+    </AccentBox>
+  ),
+};
+
 export const InLayoutCard: Story = {
   args: { color: "blue" },
   render: (props) => (

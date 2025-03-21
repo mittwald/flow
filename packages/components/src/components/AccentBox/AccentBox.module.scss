@@ -11,7 +11,6 @@
     height: calc(100% - var(--accent-box--padding) * 2);
     max-width: calc(100% - var(--accent-box--padding) * 2);
     width: auto;
-    color: var(--accent-box--icon-color-blue);
     z-index: -1;
   }
 
@@ -20,9 +19,13 @@
   @mixin status($color) {
     &.#{$color} {
       background: var(--accent-box--background-color-#{$color});
+      > svg {
+        color: var(--accent-box--icon-color-#{$color});
+      }
     }
   }
 
   @include status("blue");
+  @include status("green");
   @include status("gradient");
 }

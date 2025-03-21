@@ -32,7 +32,7 @@
 
   &:has(:global(.flow--form-field)):has(.button) {
     display: flex;
-    align-items: start;
+    align-items: flex-start;
     column-gap: var(--align--input-button--spacing);
 
     :first-child {
