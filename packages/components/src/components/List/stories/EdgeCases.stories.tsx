@@ -65,6 +65,35 @@ export const LoadingListItem: Story = {
   },
 };
 
+export const LoadingTile: Story = {
+  render: () => {
+    const List = typedList<{ name: string }>();
+
+    return (
+      <List.List defaultViewMode="tiles" batchSize={5} aria-label="List">
+        <List.StaticData data={[{ name: "John" }, { name: "Max" }]} />
+
+        <List.Item showTiles showList={false} textValue={(item) => item.name}>
+          {(item) => (
+            <Render>
+              {() => {
+                const email = usePromise(getEmail, [item.name]);
+
+                return (
+                  <ListItemView>
+                    <Heading>{item.name}</Heading>
+                    <Text>{email}</Text>
+                  </ListItemView>
+                );
+              }}
+            </Render>
+          )}
+        </List.Item>
+      </List.List>
+    );
+  },
+};
+
 export const LoadingTableCell: Story = {
   render: () => {
     const List = typedList<{ name: string }>();
