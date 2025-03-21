@@ -11,13 +11,15 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 
 export interface LabelProps
-  extends PropsWithChildren<Omit<Aria.LabelProps, "children">>,
+  extends PropsWithChildren<
+      Pick<Aria.LabelProps, "className" | "id" | "style" | "slot">
+    >,
     FlowComponentProps {
   /** Whether the label should show an "optional" indicator. */
   optional?: boolean;
   /** Whether the label should be displayed as disabled. */
   isDisabled?: boolean;
-  /* @internal */
+  /** @internal */
   unstyled?: boolean;
 }
 
