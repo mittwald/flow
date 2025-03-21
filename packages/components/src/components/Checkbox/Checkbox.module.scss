@@ -1,9 +1,8 @@
 @use "@/styles/mixins/focus";
 
 .checkbox {
-  display: grid;
+  display: flex;
   column-gap: var(--form-control--spacing-x);
-  grid-template-columns: auto 1fr;
   width: fit-content;
 
   @include focus.focus;
