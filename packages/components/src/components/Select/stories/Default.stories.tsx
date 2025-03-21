@@ -6,6 +6,13 @@ import FieldDescription from "@/components/FieldDescription";
 import { FieldError } from "@/components/FieldError";
 import { CountryOptions } from "@/components/Select/components/CountryOptions";
 import { Option } from "@/components/Option";
+import {
+  ContextualHelp,
+  ContextualHelpTrigger,
+} from "@/components/ContextualHelp";
+import { dummyText } from "@/lib/dev/dummyText";
+import { Button } from "@/components/Button";
+import { Text } from "@/components/Text";
 
 const meta: Meta<typeof Select> = {
   title: "Form Controls/Select",
@@ -102,6 +109,28 @@ export const WithCountryOptionsAndCustomSort: Story = {
   render: (props) => (
     <Select {...props}>
       <CountryOptions sortBy={sortByDachFirst} />
+    </Select>
+  ),
+};
+
+export const WithContextualHelp: Story = {
+  render: (props) => (
+    <Select {...props}>
+      <Label>
+        App
+        <ContextualHelpTrigger>
+          <Button />
+          <ContextualHelp>
+            <Text>{dummyText.short}</Text>
+          </ContextualHelp>
+        </ContextualHelpTrigger>
+      </Label>
+      <Option>WordPress</Option>
+      <Option>TYPO3</Option>
+      <Option>Contao</Option>
+      <Option>Drupal</Option>
+      <Option>Joomla!</Option>
+      <Option>Matomo</Option>
     </Select>
   ),
 };

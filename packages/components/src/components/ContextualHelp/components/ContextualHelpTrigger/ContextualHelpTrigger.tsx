@@ -26,6 +26,7 @@ export const ContextualHelpTrigger = flowComponent(
         children: <IconInfo />,
         size: "s",
         variant: "plain",
+        ariaSlot: null,
       },
     };
 

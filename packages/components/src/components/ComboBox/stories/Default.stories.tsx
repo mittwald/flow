@@ -6,6 +6,13 @@ import FieldDescription from "@/components/FieldDescription";
 import { FieldError } from "@/components/FieldError";
 import { ComboBox } from "@/components/ComboBox";
 import { Section } from "@/components/Section";
+import {
+  ContextualHelp,
+  ContextualHelpTrigger,
+} from "@/components/ContextualHelp";
+import { Button } from "@/components/Button";
+import { Text } from "@/components/Text";
+import { dummyText } from "@/lib/dev/dummyText";
 
 const meta: Meta<typeof ComboBox> = {
   title: "Form Controls/ComboBox",
@@ -129,6 +136,30 @@ export const WithPlaceholder: Story = {
       <Option>onemoredomain.de</Option>
       <Option>www.onemoredomain.de</Option>
       <FieldError>Select a domain to continue</FieldError>
+    </ComboBox>
+  ),
+};
+
+export const WithContextualHelp: Story = {
+  render: (props) => (
+    <ComboBox {...props}>
+      <Label>
+        Domain
+        <ContextualHelpTrigger>
+          <Button />
+          <ContextualHelp>
+            <Text>{dummyText.short}</Text>
+          </ContextualHelp>
+        </ContextualHelpTrigger>
+      </Label>
+      <Option>mydomain.de</Option>
+      <Option>shop.mydomain.de</Option>
+      <Option>anotherdomain.com</Option>
+      <Option>www.anotherdomain.com</Option>
+      <Option>anotherdomain.com/shop</Option>
+      <Option>anotherdomain.com/blog</Option>
+      <Option>onemoredomain.de</Option>
+      <Option>www.onemoredomain.de</Option>
     </ComboBox>
   ),
 };
