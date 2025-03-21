@@ -1,3 +1,4 @@
+import { debug } from "@/debug";
 import { ExtBridgeError } from "@/error";
 import { sessionTokenPayload } from "@/sessionToken/schemas";
 import type { SessionTokenPayload } from "@/sessionToken/types";
@@ -5,7 +6,10 @@ import { decodeJwt } from "jose";
 
 type JwtPayloadType = Omit<SessionTokenPayload, "userId">;
 
-export const decode = (jwt: string) => {
+export const decode = (sessionToken: string) => {
+  const dbgSession = `...${sessionToken.slice(-5)}`;
+  debug("decoding session token (token: %s)", dbgSession);
+
   const {
     sub,
     aud: ignoredAud,
@@ -15,8 +19,9 @@ export const decode = (jwt: string) => {
     jti: ignoredJti,
     nbf: ignoredNbf,
     ...rest
-  } = decodeJwt<JwtPayloadType>(jwt);
+  } = decodeJwt<JwtPayloadType>(sessionToken);
 
+  debug("parsing session token payload (token: %s)", dbgSession);
   const parsed = sessionTokenPayload.safeParse({
     userId: sub,
     ...rest,

@@ -30,12 +30,14 @@
   "dependencies": {
     "@mittwald/react-use-promise": "^3.0.3",
     "axios": "^1.8.3",
+    "debug": "^4.4.0",
     "jose": "^6.0.10",
     "std-env": "^3.8.1",
     "zod": "^3.24.2"
   },
   "devDependencies": {
     "@mittwald/typescript-config": "workspace:*",
+    "@types/debug": "^4.1.12",
     "@types/node": "^22.13.10",
     "@types/react": "^19",
     "@types/react-dom": "^19",
