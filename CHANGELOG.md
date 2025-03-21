@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.107](https://github.com/mittwald/flow/compare/0.2.0-alpha.106...0.2.0-alpha.107) (2025-03-21)
+
+### Bug Fixes
+
+* **Calendar:** add disabled style for unavailable dates ([#1304](https://github.com/mittwald/flow/issues/1304)) ([417132d](https://github.com/mittwald/flow/commit/417132ddca98c926e5a55084729571aad7841c75))
+
+# [0.2.0-alpha.106](https://github.com/mittwald/flow/compare/0.2.0-alpha.105...0.2.0-alpha.106) (2025-03-21)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
 # [0.2.0-alpha.105](https://github.com/mittwald/flow/compare/0.2.0-alpha.104...0.2.0-alpha.105) (2025-03-21)
 
 ### Features
