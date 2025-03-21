@@ -10,8 +10,8 @@ export const loadingApi = {
     resolveReadyPromise = res;
   }),
   setIsReady: async () => {
-    const config = await mwExtBridge.getConfig();
-    mwExtBridge.config = parseConfig(config);
+    const config = await mittwald.extBridge.getConfig();
+    mittwald.extBridge.config = parseConfig(config);
     resolveReadyPromise();
   },
 } as const;

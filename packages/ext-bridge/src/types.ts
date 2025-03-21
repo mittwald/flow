@@ -14,6 +14,10 @@ export interface ExtBridge extends ExtBridgeRemoteApi, LoadingApi {
 }
 
 declare global {
+  interface mittwald {
+    extBridge: ExtBridge;
+  }
+
   // eslint-disable-next-line no-var
-  var mwExtBridge: ExtBridge;
+  var mittwald: mittwald;
 }
