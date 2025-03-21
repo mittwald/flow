@@ -11,7 +11,9 @@ export class RemoteLabelElement extends FlowRemoteElement<RemoteLabelElementProp
 
   static override get remoteProperties() {
     return {
+      "aria-hidden": {},
       className: {},
+      elementType: {},
       id: {},
       isDisabled: {},
       optional: {},

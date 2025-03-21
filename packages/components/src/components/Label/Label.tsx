@@ -12,7 +12,10 @@ import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 
 export interface LabelProps
   extends PropsWithChildren<
-      Pick<Aria.LabelProps, "className" | "id" | "style" | "slot">
+      Pick<
+        Aria.LabelProps,
+        "className" | "id" | "style" | "slot" | "elementType" | "aria-hidden"
+      >
     >,
     FlowComponentProps {
   /** Whether the label should show an "optional" indicator. */
