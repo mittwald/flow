@@ -27,12 +27,8 @@ export default () => {
         >
           <Select>
             <Label>App</Label>
-            <Option>WordPress</Option>
-            <Option>TYPO3</Option>
-            <Option>Contao</Option>
-            <Option>Drupal</Option>
-            <Option>Joomla!</Option>
-            <Option>Matomo</Option>
+            <Option value="wordpress">WordPress</Option>
+            <Option value="typo3">TYPO3</Option>
           </Select>
         </Field>
         <Button type="submit">Speichern</Button>
