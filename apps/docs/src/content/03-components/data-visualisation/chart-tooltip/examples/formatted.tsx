@@ -3,7 +3,6 @@ import {
   AreaChart,
   CartesianGrid,
   ChartTooltip,
-  Legend,
   XAxis,
   YAxis,
 } from "@mittwald/flow-react-components";
@@ -86,7 +85,6 @@ export default () => {
             `${title} seit Monitoringbeginn`
           }
         />
-        <Legend formatter={(text) => mapName(text)} />
       </AreaChart>
     </div>
   );
