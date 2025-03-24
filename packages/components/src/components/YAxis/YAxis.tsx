@@ -13,6 +13,7 @@ export type YAxisProps = Pick<
   | "scale"
   | "type"
   | "domain"
+  | "hide"
 >;
 
 /** @flr-generate all */
