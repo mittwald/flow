@@ -7,7 +7,7 @@ import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
 import clsx from "clsx";
-import type { PropsWithChildren } from "react";
+import React, { type PropsWithChildren } from "react";
 import * as Aria from "react-aria-components";
 import styles from "./Checkbox.module.scss";
 
