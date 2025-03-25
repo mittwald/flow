@@ -1,32 +1,20 @@
-import type { FC } from "react";
-import * as Recharts from "recharts";
-import LegendContent from "./components/LegendContent/LegendContent";
+import type { PropsWithClassName } from "@/lib/types/props";
+import clsx from "clsx";
+import type { FC, PropsWithChildren } from "react";
+import styles from "./Legend.module.scss";
 
-export type LegendFormatter = (text: string) => string;
-
-export interface WithLegendFormatters {
-  /**
-   * A formatter function for the texts of the Legend. Can be used for purposes
-   * like translations.
-   */
-  formatter?: LegendFormatter;
-}
-
-export type LegendProps = Pick<
-  Recharts.LegendProps,
-  "className" | "verticalAlign"
-> &
-  WithLegendFormatters;
+export type LegendProps = PropsWithChildren & PropsWithClassName;
 
 /** @flr-generate all */
 export const Legend: FC<LegendProps> = (props) => {
-  const { formatter, ...rest } = props;
+  const { children, className, ...rest } = props;
+
+  const rootClassName = clsx(styles.legend, className);
 
   return (
-    <Recharts.Legend
-      {...rest}
-      content={<LegendContent formatter={formatter} />}
-    />
+    <ul className={rootClassName} {...rest}>
+      {children}
+    </ul>
   );
 };
 

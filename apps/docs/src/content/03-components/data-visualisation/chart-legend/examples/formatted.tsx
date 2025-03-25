@@ -1,7 +1,7 @@
 import {
   Area,
   AreaChart,
-  Legend,
+  ChartLegend,
 } from "@mittwald/flow-react-components";
 
 export default () => {
@@ -62,7 +62,7 @@ export default () => {
         <Area dataKey="firstKey" />
         <Area dataKey="secondKey" color="palatinate-blue" />
         <Area dataKey="thirdKey" color="tangerine" />
-        <Legend formatter={(text) => mapName(text)} />
+        <ChartLegend formatter={(text) => mapName(text)} />
       </AreaChart>
     </div>
   );

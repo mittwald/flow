@@ -1,7 +1,7 @@
 import {
   Area,
   AreaChart,
-  Legend,
+  ChartLegend,
 } from "@mittwald/flow-react-components";
 
 <div style={{ height: "300px" }}>
@@ -46,6 +46,6 @@ import {
   >
     <Area dataKey="firstKey" />
     <Area dataKey="secondKey" color="palatinate-blue" />
-    <Legend />
+    <ChartLegend />
   </AreaChart>
 </div>;

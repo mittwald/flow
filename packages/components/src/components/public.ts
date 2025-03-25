@@ -14,6 +14,7 @@ export * from "@/components/Badge";
 export * from "@/components/Breadcrumb";
 export * from "@/components/Button";
 export * from "@/components/CartesianGrid";
+export * from "@/components/ChartLegend";
 export * from "@/components/ChartTooltip";
 export * from "@/components/Chat";
 export * from "@/components/Checkbox";

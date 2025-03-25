@@ -22,7 +22,6 @@ export const XAxis: FC<XAxisProps> = (props) => {
   return (
     <Recharts.XAxis
       {...props}
-      fontFamily="Inter"
       fontSize={tokens.axis["font-size"].value}
       tick={{
         fill: tokens.axis["text-color"].value,

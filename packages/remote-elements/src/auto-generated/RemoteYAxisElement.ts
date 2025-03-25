@@ -15,6 +15,7 @@ export class RemoteYAxisElement extends FlowRemoteElement<RemoteYAxisElementProp
       className: {},
       dataKey: {},
       domain: {},
+      hide: {},
       interval: {},
       minTickGap: {},
       orientation: {},

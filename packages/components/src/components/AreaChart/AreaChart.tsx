@@ -1,6 +1,5 @@
 import * as Recharts from "recharts";
 import type { CategoricalChartProps } from "recharts/types/chart/generateCategoricalChart";
-import tokens from "@mittwald/flow-design-tokens/variables.json";
 import {
   Children,
   cloneElement,
@@ -10,11 +9,8 @@ import {
 } from "react";
 import { Area, type AreaProps } from "./components/Area";
 import CartesianGrid from "../CartesianGrid";
-
-export const categoricalColors = Object.keys(
-  tokens.color.categorical,
-) as (keyof typeof tokens.color.categorical)[];
-export type CategoricalColors = (typeof categoricalColors)[number];
+import clsx from "clsx";
+import styles from "./AreaChart.module.scss";
 
 export interface AreaChartProps
   extends Pick<
@@ -25,7 +21,9 @@ export interface AreaChartProps
 
 /** @flr-generate all */
 export const AreaChart: FC<AreaChartProps> = (props) => {
-  const { children, data, ...rest } = props;
+  const { children, data, className, ...rest } = props;
+
+  const rootClassName = clsx(styles.areaChart, className);
 
   // render order: grid, areas without dots, other children, areas with dots
   // this is needed to ensure that the dots will always overlay the areas
@@ -60,7 +58,7 @@ export const AreaChart: FC<AreaChartProps> = (props) => {
 
   return (
     <Recharts.ResponsiveContainer>
-      <Recharts.AreaChart data={data} {...rest}>
+      <Recharts.AreaChart data={data} className={rootClassName} {...rest}>
         {gridChildren}
         {areasWithoutDots}
         {otherChildren}

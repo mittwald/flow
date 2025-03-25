@@ -25,7 +25,6 @@ export const YAxis: FC<YAxisProps> = (props) => {
       {...rest}
       allowDataOverflow
       domain={domain}
-      fontFamily="Inter"
       fontSize={tokens.axis["font-size"].value}
       tick={{
         fill: tokens.axis["text-color"].value,

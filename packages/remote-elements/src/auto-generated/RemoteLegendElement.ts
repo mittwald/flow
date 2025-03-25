@@ -12,8 +12,6 @@ export class RemoteLegendElement extends FlowRemoteElement<RemoteLegendElementPr
   static override get remoteProperties() {
     return {
       className: {},
-      formatter: {},
-      verticalAlign: {},
     };
   }
 

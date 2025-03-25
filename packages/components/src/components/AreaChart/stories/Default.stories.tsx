@@ -5,7 +5,7 @@ import ChartTooltip from "@/components/ChartTooltip";
 import CartesianGrid from "@/components/CartesianGrid";
 import XAxis from "@/components/XAxis";
 import YAxis from "@/components/YAxis";
-import Legend from "@/components/Legend";
+import ChartLegend from "@/components/ChartLegend";
 
 const chartData = [
   {
@@ -79,7 +79,7 @@ export const Default: Story = {
         <XAxis dataKey="name" />
         <YAxis interval="equidistantPreserveStart" />
         <ChartTooltip />
-        <Legend />
+        <ChartLegend />
       </AreaChart>
     </div>
   ),
@@ -97,7 +97,7 @@ export const MultipleSynced: Story = {
           <XAxis dataKey="name" />
           <YAxis />
           <ChartTooltip />
-          <Legend />
+          <ChartLegend />
         </AreaChart>
       </div>
       <div style={{ height: "250px" }}>
@@ -109,7 +109,7 @@ export const MultipleSynced: Story = {
           <XAxis dataKey="name" />
           <YAxis />
           <ChartTooltip />
-          <Legend />
+          <ChartLegend />
         </AreaChart>
       </div>
     </>

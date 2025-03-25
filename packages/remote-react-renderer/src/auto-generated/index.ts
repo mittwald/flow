@@ -16,6 +16,7 @@ import { Badge as Badge } from "@mittwald/flow-react-components";
 import { Breadcrumb as Breadcrumb } from "@mittwald/flow-react-components";
 import { Button as Button } from "@mittwald/flow-react-components";
 import { CartesianGrid as CartesianGrid } from "@mittwald/flow-react-components";
+import { ChartLegend as ChartLegend } from "@mittwald/flow-react-components";
 import { ChartTooltip as ChartTooltip } from "@mittwald/flow-react-components";
 import { Chat as Chat } from "@mittwald/flow-react-components";
 import { Checkbox as Checkbox } from "@mittwald/flow-react-components";
@@ -128,6 +129,7 @@ export const flowComponents = {
   "flr-breadcrumb": createFlowRemoteComponentRenderer(Breadcrumb),
   "flr-button": createFlowRemoteComponentRenderer(Button),
   "flr-cartesian-grid": createFlowRemoteComponentRenderer(CartesianGrid),
+  "flr-chart-legend": createFlowRemoteComponentRenderer(ChartLegend),
   "flr-chart-tooltip": createFlowRemoteComponentRenderer(ChartTooltip),
   "flr-chat": createFlowRemoteComponentRenderer(Chat),
   "flr-checkbox": createFlowRemoteComponentRenderer(Checkbox),

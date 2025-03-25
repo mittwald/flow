@@ -15,6 +15,7 @@ export * from "./RemoteBadgeElement";
 export * from "./RemoteBreadcrumbElement";
 export * from "./RemoteButtonElement";
 export * from "./RemoteCartesianGridElement";
+export * from "./RemoteChartLegendElement";
 export * from "./RemoteChartTooltipElement";
 export * from "./RemoteChatElement";
 export * from "./RemoteCheckboxElement";

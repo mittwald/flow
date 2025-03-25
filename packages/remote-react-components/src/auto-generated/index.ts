@@ -15,6 +15,7 @@ export * from "./Badge";
 export * from "./Breadcrumb";
 export * from "./Button";
 export * from "./CartesianGrid";
+export * from "./ChartLegend";
 export * from "./ChartTooltip";
 export * from "./Chat";
 export * from "./Checkbox";
