@@ -1,10 +1,16 @@
 accent-box:
   background-color-blue:
     value: "{color.hosting-blue.100}"
-  icon-color-blue:
-    value: "{color.hosting-blue.200}"
+  background-color-green:
+    value: "#D8F5D6"
   background-color-gradient:
     value: "{color.gradient}"
+  icon-color-blue:
+    value: "{color.hosting-blue.200}"
+  icon-color-green:
+    value: "#c4e3c1"
+  icon-color-gradient:
+    value: "#002b7b14"
   padding:
     value: "{size-px.m}"
   corner-radius:

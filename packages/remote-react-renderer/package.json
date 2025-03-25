@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-remote-react-renderer",
-  "version": "0.2.0-alpha.95",
+  "version": "0.2.0-alpha.113",
   "type": "module",
   "description": "React rendering for Flow Remote Elements",
   "homepage": "https://mittwald.github.io/flow",
@@ -29,9 +29,11 @@
   },
   "dependencies": {
     "@mfalkenberg/remote-dom-react": "1.2.3",
+    "@mittwald/ext-bridge": "workspace:*",
     "@mittwald/flow-remote-core": "workspace:*",
     "@mittwald/flow-remote-elements": "workspace:*",
-    "@types/react": "^19.0.10",
+    "@mittwald/react-use-promise": "^3.0.3",
+    "@types/react": "^19",
     "clsx": "^2.1.1",
     "react-children-utilities": "^2.10.0",
     "remeda": "^2.21.1"
@@ -42,8 +44,8 @@
     "@types/node": "^22.13.10",
     "nx": "^20.5.0",
     "prettier": "^3.5.3",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "^19",
+    "react-dom": "^19",
     "react-hook-form": "^7.54.2",
     "rimraf": "^6.0.1",
     "rollup-preserve-directives": "^1.1.3",

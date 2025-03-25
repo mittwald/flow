@@ -1,0 +1,5 @@
+{
+  "name": "ext-bridge",
+  "projectType": "library",
+  "sourceRoot": "packages/ext-bridge/src"
+}

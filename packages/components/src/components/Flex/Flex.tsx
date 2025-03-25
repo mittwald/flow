@@ -44,8 +44,18 @@ export const Flex: FC<FlexProps> = (props) => {
       className={rootClassName}
       style={{
         flexDirection: direction,
-        alignItems: align,
-        justifyContent: justify,
+        alignItems:
+          align === "end"
+            ? "flex-end"
+            : align === "start"
+              ? "flex-start"
+              : align,
+        justifyContent:
+          justify === "end"
+            ? "flex-end"
+            : justify === "start"
+              ? "flex-start"
+              : justify,
 
         columnGap: columnGap
           ? `var(--size-px--${columnGap})`

@@ -4,10 +4,19 @@
   display: flex;
   flex-direction: column;
 
+  .checkboxContainer {
+    display: flex;
+    align-items: center;
+    &:empty {
+      display: none;
+    }
+  }
+
   .content {
     display: flex;
     gap: var(--list-item--spacing);
     flex-grow: 1;
+    flex-wrap: wrap;
   }
 
   .topContent {
@@ -23,8 +32,11 @@
     color: var(--text--color--default);
   }
 
-  .title {
+  .header {
     word-break: break-word;
+    display: flex;
+    gap: var(--list-item--avatar-to-title-spacing);
+    max-width: 100%;
   }
 
   .subTitle {
@@ -46,7 +58,7 @@
       gap: var(--list-item--spacing);
       justify-content: space-between;
       flex-grow: 1;
-      align-items: start;
+      align-items: flex-start;
     }
 
     .content {
@@ -56,56 +68,34 @@
 
     .action {
       margin-left: auto;
+      button {
+        margin-right: 0;
+      }
     }
 
-    .title {
+    .header {
       order: 0;
       flex-grow: 1;
-      display: grid;
-      grid-column-gap: var(--list-item--avatar-to-title-spacing);
-      grid-template-areas:
-        "avatar title   "
-        "avatar subtitle";
-      grid-template-columns: auto 1fr;
+      align-items: center;
 
       &:empty,
       .subTitle:empty {
         display: none;
       }
 
-      &:not(:has(.avatar)) {
-        grid-template-areas:
-          "title   "
-          "subtitle";
-        grid-template-columns: 1fr;
+      .avatar,
+      .checkboxContainer {
+        align-self: start;
       }
-
-      &:has(.subTitle:empty) {
-        grid-template-areas: "avatar title";
-
-        &:not(:has(.avatar)) {
-          grid-template-areas: "title";
-        }
-      }
-
-      .avatar {
-        grid-area: avatar;
-        align-self: center;
-      }
-
-      .heading {
-        grid-area: title;
-        align-self: center;
-      }
-
-      .subTitle {
-        grid-area: subtitle;
+      .checkboxContainer {
+        height: var(--avatar--size--m);
       }
     }
 
-    &:has(.avatar),
     &:has(.subTitle:not(:empty)) {
-      .action {
+      .action,
+      .avatar,
+      .checkboxContainer {
         margin-top: var(--size-px--xxs);
       }
     }
@@ -121,13 +111,13 @@
     border-width: var(--list-item--border-width);
     border-style: var(--list-item--border-style);
     border-radius: var(--list-item--corner-radius);
-    align-content: start;
+    align-content: flex-start;
     height: 100%;
 
     .content {
       flex-direction: column;
       justify-content: space-between;
-      align-items: start;
+      align-items: flex-start;
       padding-inline: var(--list-item--padding);
       padding-bottom: var(--list-item--padding);
       width: 100%;
@@ -146,6 +136,9 @@
       border-top-left-radius: var(--corner-radius--default);
       border-top-right-radius: var(--corner-radius--default);
       aspect-ratio: 16 / 9;
+      img {
+        overflow-clip-margin: unset;
+      }
     }
 
     .avatar {
@@ -161,6 +154,11 @@
       :global(.flow--avatar--initials) {
         font-size: var(--size-px--xxl);
       }
+    }
+
+    .checkboxContainer {
+      height: 100%;
+      max-height: var(--avatar--size--m);
     }
 
     .title {

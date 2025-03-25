@@ -17,6 +17,7 @@ import { typedList } from "@/components/List";
 import { ProgressBar } from "@/components/ProgressBar";
 import { Label } from "@/components/Label";
 import { Initials } from "@/components/Initials";
+import { Checkbox } from "@/components/Checkbox";
 
 const meta: Meta<typeof List> = {
   ...defaultMeta,
@@ -127,10 +128,10 @@ export const WithActionGroup: Story = {
               <Heading>{user.name}</Heading>
               <Text>Mittwald</Text>
               <ActionGroup>
-                <Button color="secondary" variant="soft" slot="secondary">
+                <Button color="secondary" variant="soft">
                   Edit
                 </Button>
-                <Button color="danger" variant="soft" slot="secondary">
+                <Button color="danger" variant="soft">
                   Delete
                 </Button>
               </ActionGroup>
@@ -204,6 +205,53 @@ export const WithHeadingAndAction: Story = {
               <Button color="secondary" variant="plain" slot="secondary">
                 <IconClose />
               </Button>
+            </List.ItemView>
+          )}
+        </List.Item>
+      </List.List>
+    );
+  },
+};
+
+export const WithCheckbox: Story = {
+  render: () => {
+    const List = typedList<{ mail: string }>();
+
+    return (
+      <List.List>
+        <List.StaticData data={[{ mail: "john@doe.de" }]} />
+        <List.Table>
+          <List.TableHeader>
+            <List.TableColumn>
+              <Checkbox aria-label="select all" />
+            </List.TableColumn>
+            <List.TableColumn>Mail address</List.TableColumn>
+          </List.TableHeader>
+          <List.TableBody>
+            <List.TableRow>
+              <List.TableCell>
+                {() => <Checkbox aria-label="select address" />}
+              </List.TableCell>
+              <List.TableCell>{(mail) => mail.mail}</List.TableCell>
+            </List.TableRow>
+          </List.TableBody>
+        </List.Table>
+        <List.Item showTiles textValue={(mail) => mail.mail}>
+          {(mail) => (
+            <List.ItemView>
+              <Checkbox aria-label="select address" />
+              <Avatar>
+                <IconEmail />
+              </Avatar>
+              <Heading>{mail.mail}</Heading>
+              <Content>
+                <ProgressBar value={50}>
+                  <Label>Storage</Label>
+                </ProgressBar>
+              </Content>
+              <ContextMenu>
+                <MenuItem>Show details</MenuItem>
+              </ContextMenu>
             </List.ItemView>
           )}
         </List.Item>

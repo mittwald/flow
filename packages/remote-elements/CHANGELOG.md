@@ -3,6 +3,82 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.113](https://github.com/mittwald/flow/compare/0.2.0-alpha.112...0.2.0-alpha.113) (2025-03-24)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+# [0.2.0-alpha.112](https://github.com/mittwald/flow/compare/0.2.0-alpha.111...0.2.0-alpha.112) (2025-03-21)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+# [0.2.0-alpha.111](https://github.com/mittwald/flow/compare/0.2.0-alpha.110...0.2.0-alpha.111) (2025-03-21)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+# [0.2.0-alpha.110](https://github.com/mittwald/flow/compare/0.2.0-alpha.109...0.2.0-alpha.110) (2025-03-21)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+# [0.2.0-alpha.109](https://github.com/mittwald/flow/compare/0.2.0-alpha.108...0.2.0-alpha.109) (2025-03-21)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+# [0.2.0-alpha.108](https://github.com/mittwald/flow/compare/0.2.0-alpha.107...0.2.0-alpha.108) (2025-03-21)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+# [0.2.0-alpha.107](https://github.com/mittwald/flow/compare/0.2.0-alpha.106...0.2.0-alpha.107) (2025-03-21)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+# [0.2.0-alpha.106](https://github.com/mittwald/flow/compare/0.2.0-alpha.105...0.2.0-alpha.106) (2025-03-21)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+# [0.2.0-alpha.105](https://github.com/mittwald/flow/compare/0.2.0-alpha.104...0.2.0-alpha.105) (2025-03-21)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+# [0.2.0-alpha.104](https://github.com/mittwald/flow/compare/0.2.0-alpha.103...0.2.0-alpha.104) (2025-03-21)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+# [0.2.0-alpha.103](https://github.com/mittwald/flow/compare/0.2.0-alpha.102...0.2.0-alpha.103) (2025-03-20)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+# [0.2.0-alpha.102](https://github.com/mittwald/flow/compare/0.2.0-alpha.101...0.2.0-alpha.102) (2025-03-20)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+# [0.2.0-alpha.101](https://github.com/mittwald/flow/compare/0.2.0-alpha.100...0.2.0-alpha.101) (2025-03-20)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+# [0.2.0-alpha.100](https://github.com/mittwald/flow/compare/0.2.0-alpha.99...0.2.0-alpha.100) (2025-03-20)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+# [0.2.0-alpha.99](https://github.com/mittwald/flow/compare/0.2.0-alpha.98...0.2.0-alpha.99) (2025-03-19)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+# [0.2.0-alpha.98](https://github.com/mittwald/flow/compare/0.2.0-alpha.97...0.2.0-alpha.98) (2025-03-19)
+
+### Features
+
+* **Image:** support aspect ratio ([#1284](https://github.com/mittwald/flow/issues/1284)) ([3eeb8d6](https://github.com/mittwald/flow/commit/3eeb8d6dda8ce4441a84f9a3c71810fe2a74185a))
+
+# [0.2.0-alpha.97](https://github.com/mittwald/flow/compare/0.2.0-alpha.96...0.2.0-alpha.97) (2025-03-19)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+# [0.2.0-alpha.96](https://github.com/mittwald/flow/compare/0.2.0-alpha.95...0.2.0-alpha.96) (2025-03-18)
+
+### Features
+
+* **List:** support checkbox in list item ([#1285](https://github.com/mittwald/flow/issues/1285)) ([c882fed](https://github.com/mittwald/flow/commit/c882fed18cda53c9dbba2c5dcdb7b2474dc18b90))
+
 # [0.2.0-alpha.95](https://github.com/mittwald/flow/compare/0.2.0-alpha.94...0.2.0-alpha.95) (2025-03-18)
 
 ### Features

@@ -19,7 +19,7 @@
   .controls:not(:has(form)),
   .controls form {
     display: flex;
-    align-items: end;
+    align-items: flex-end;
     border-top-width: var(--separator--height);
     border-top-color: var(--separator--color);
     border-top-style: var(--border-style--default);

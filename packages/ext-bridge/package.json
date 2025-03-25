@@ -1,0 +1,66 @@
+{
+  "name": "@mittwald/ext-bridge",
+  "version": "0.2.0-alpha.113",
+  "type": "module",
+  "description": "Bridge for mStudio embedded frontend extensions",
+  "homepage": "https://mittwald.github.io/flow",
+  "repository": "https://github.com/mittwald/flow",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "default": "./dist/js/index.mjs"
+    },
+    "./react": {
+      "types": "./dist/types/react/index.d.ts",
+      "default": "./dist/js/react.mjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=20.11"
+  },
+  "scripts": {
+    "build": "vite build --config vite.build.config.ts",
+    "clean": "rimraf dist",
+    "test": "exit 0",
+    "test:compile": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@mittwald/react-use-promise": "^3.0.3",
+    "axios": "^1.8.3",
+    "jose": "^6.0.10",
+    "std-env": "^3.8.1",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@mittwald/typescript-config": "workspace:*",
+    "@types/node": "^22.13.10",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "nx": "^20.5.0",
+    "prettier": "^3.5.3",
+    "react": "^19",
+    "react-dom": "^19",
+    "rimraf": "^6.0.1",
+    "rollup-preserve-directives": "^1.1.3",
+    "typescript": "^5.8.2",
+    "vite": "^6.2.1",
+    "vite-plugin-checker": "^0.9.0",
+    "vite-plugin-dts": "^4.5.3",
+    "vite-plugin-externalize-deps": "^0.9.0"
+  },
+  "peerDependencies": {
+    "react": "^19",
+    "react-dom": "^19"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    }
+  }
+}

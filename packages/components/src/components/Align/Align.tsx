@@ -36,7 +36,7 @@ export const Align = flowComponent("Align", (props) => {
   };
 
   return (
-    <PropsContextProvider props={propsContext}>
+    <PropsContextProvider props={propsContext} mergeInParentContext>
       <div className={rootClassName}>{children}</div>
     </PropsContextProvider>
   );

@@ -16,6 +16,8 @@ import { DateTime } from "luxon";
 import type List from "../List";
 import { domains } from "../testData/domainApi";
 import defaultMeta from "./Default.stories";
+import { Checkbox } from "@/components/Checkbox";
+import React from "react";
 
 const meta: Meta<typeof List> = {
   ...defaultMeta,
@@ -43,6 +45,35 @@ export const LoadingListItem: Story = {
         <List.StaticData data={[{ name: "John" }, { name: "Max" }]} />
 
         <List.Item textValue={(item) => item.name}>
+          {(item) => (
+            <Render>
+              {() => {
+                const email = usePromise(getEmail, [item.name]);
+
+                return (
+                  <ListItemView>
+                    <Heading>{item.name}</Heading>
+                    <Text>{email}</Text>
+                  </ListItemView>
+                );
+              }}
+            </Render>
+          )}
+        </List.Item>
+      </List.List>
+    );
+  },
+};
+
+export const LoadingTile: Story = {
+  render: () => {
+    const List = typedList<{ name: string }>();
+
+    return (
+      <List.List defaultViewMode="tiles" batchSize={5} aria-label="List">
+        <List.StaticData data={[{ name: "John" }, { name: "Max" }]} />
+
+        <List.Item showTiles showList={false} textValue={(item) => item.name}>
           {(item) => (
             <Render>
               {() => {
@@ -107,6 +138,7 @@ export const VeryLongWords: Story = {
         <List.Item showTiles textValue={(user) => user.name}>
           {(user) => (
             <List.ItemView>
+              <Checkbox aria-label="select user" />
               <Avatar>
                 <Initials>{user.name}</Initials>
               </Avatar>

@@ -22,7 +22,11 @@
     flex-grow: 1;
     gap: var(--list--spacing);
     flex-wrap: wrap-reverse;
-    justify-content: end;
+    justify-content: flex-end;
+
+    > * {
+      flex-grow: 0;
+    }
   }
 
   .searchField {

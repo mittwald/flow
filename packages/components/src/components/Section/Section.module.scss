@@ -4,6 +4,12 @@
   row-gap: var(--section--spacing);
   container-type: inline-size;
 
+  > form {
+    display: flex;
+    flex-direction: column;
+    row-gap: var(--section--spacing);
+  }
+
   + .section {
     margin-block-start: var(--section--section-to-section-spacing);
   }

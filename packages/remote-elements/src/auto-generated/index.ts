@@ -22,6 +22,7 @@ export * from "./RemoteCheckboxButtonElement";
 export * from "./RemoteCheckboxGroupElement";
 export * from "./RemoteClearPropsContextContentElement";
 export * from "./RemoteCodeBlockElement";
+export * from "./RemoteColorElement";
 export * from "./RemoteColumnLayoutElement";
 export * from "./RemoteContentElement";
 export * from "./RemoteContextMenuContentElement";

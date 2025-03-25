@@ -1,10 +1,13 @@
-import type { FC } from "react";
+import type { FC, PropsWithChildren } from "react";
 import React from "react";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import styles from "../../Table.module.scss";
+import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 
-export interface TableColumnProps extends Aria.ColumnProps {
+export interface TableColumnProps
+  extends Omit<Aria.ColumnProps, "children">,
+    PropsWithChildren {
   /** Horizontal alignment of the cell content @default "start" */
   horizontalAlign?: "start" | "center" | "end";
 }
@@ -18,9 +21,13 @@ export const TableColumn: FC<TableColumnProps> = (props) => {
     className,
   );
 
+  const propsContext: PropsContext = { Checkbox: { slot: null } };
+
   return (
     <Aria.Column isRowHeader className={rootClassName} {...rest}>
-      {children}
+      <PropsContextProvider props={propsContext}>
+        {children}
+      </PropsContextProvider>
     </Aria.Column>
   );
 };

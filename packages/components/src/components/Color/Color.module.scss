@@ -1,0 +1,10 @@
+@mixin color($color) {
+  .#{$color} {
+    color: var(--color--#{$color});
+  }
+}
+
+@include color("blue");
+@include color("violet");
+@include color("teal");
+@include color("lilac");
