@@ -11,17 +11,20 @@ import { Area, type AreaProps } from "./components/Area";
 import CartesianGrid from "../CartesianGrid";
 import clsx from "clsx";
 import styles from "./AreaChart.module.scss";
+import Wrap from "../Wrap";
 
 export interface AreaChartProps
   extends Pick<
       CategoricalChartProps,
       "data" | "className" | "syncId" | "syncMethod"
     >,
-    PropsWithChildren {}
+    PropsWithChildren {
+  height?: string;
+}
 
 /** @flr-generate all */
 export const AreaChart: FC<AreaChartProps> = (props) => {
-  const { children, data, className, ...rest } = props;
+  const { children, data, className, height, ...rest } = props;
 
   const rootClassName = clsx(styles.areaChart, className);
 
@@ -57,14 +60,18 @@ export const AreaChart: FC<AreaChartProps> = (props) => {
   });
 
   return (
-    <Recharts.ResponsiveContainer>
-      <Recharts.AreaChart data={data} className={rootClassName} {...rest}>
-        {gridChildren}
-        {areasWithoutDots}
-        {otherChildren}
-        {areasWithDots}
-      </Recharts.AreaChart>
-    </Recharts.ResponsiveContainer>
+    <Wrap if={height}>
+      <div style={{ height }}>
+        <Recharts.ResponsiveContainer>
+          <Recharts.AreaChart data={data} className={rootClassName} {...rest}>
+            {gridChildren}
+            {areasWithoutDots}
+            {otherChildren}
+            {areasWithDots}
+          </Recharts.AreaChart>
+        </Recharts.ResponsiveContainer>
+      </div>
+    </Wrap>
   );
 };
 

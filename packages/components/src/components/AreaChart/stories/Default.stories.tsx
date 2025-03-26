@@ -70,48 +70,42 @@ export default meta;
 
 export const Default: Story = {
   render: (props) => (
-    <div style={{ height: "70vh" }}>
-      <AreaChart {...props}>
-        <CartesianGrid />
-        <Area dataKey="firstKey" />
-        <Area dataKey="secondKey" color="palatinate-blue" />
-        <Area dataKey="thirdKey" color="tangerine" />
-        <XAxis dataKey="name" />
-        <YAxis interval="equidistantPreserveStart" />
-        <ChartTooltip />
-        <ChartLegend />
-      </AreaChart>
-    </div>
+    <AreaChart {...props} height="70vh">
+      <CartesianGrid />
+      <Area dataKey="firstKey" />
+      <Area dataKey="secondKey" color="palatinate-blue" />
+      <Area dataKey="thirdKey" color="tangerine" />
+      <XAxis dataKey="name" />
+      <YAxis interval="equidistantPreserveStart" />
+      <ChartTooltip />
+      <ChartLegend />
+    </AreaChart>
   ),
 };
 
 export const MultipleSynced: Story = {
   render: (props) => (
     <>
-      <div style={{ height: "250px" }}>
-        <AreaChart {...props} syncId="syncedAreaCharts">
-          <CartesianGrid />
-          <Area dataKey="firstKey" />
-          <Area dataKey="secondKey" color="palatinate-blue" />
-          <Area dataKey="thirdKey" color="tangerine" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <ChartTooltip />
-          <ChartLegend />
-        </AreaChart>
-      </div>
-      <div style={{ height: "250px" }}>
-        <AreaChart {...props} syncId="syncedAreaCharts">
-          <CartesianGrid />
-          <Area dataKey="firstKey" color="magenta" />
-          <Area dataKey="secondKey" color="tropical-indigo" />
-          <Area dataKey="thirdKey" color="malachite" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <ChartTooltip />
-          <ChartLegend />
-        </AreaChart>
-      </div>
+      <AreaChart {...props} height="250px" syncId="syncedAreaCharts">
+        <CartesianGrid />
+        <Area dataKey="firstKey" />
+        <Area dataKey="secondKey" color="palatinate-blue" />
+        <Area dataKey="thirdKey" color="tangerine" />
+        <XAxis dataKey="name" />
+        <YAxis />
+        <ChartTooltip />
+        <ChartLegend />
+      </AreaChart>
+      <AreaChart {...props} height="250px" syncId="syncedAreaCharts">
+        <CartesianGrid />
+        <Area dataKey="firstKey" color="magenta" />
+        <Area dataKey="secondKey" color="tropical-indigo" />
+        <Area dataKey="thirdKey" color="malachite" />
+        <XAxis dataKey="name" />
+        <YAxis />
+        <ChartTooltip />
+        <ChartLegend />
+      </AreaChart>
     </>
   ),
 };
