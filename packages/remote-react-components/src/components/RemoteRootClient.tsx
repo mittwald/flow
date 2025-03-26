@@ -14,10 +14,16 @@ import { ErrorBoundary } from "react-error-boundary";
 export interface RootClientProps extends PropsWithChildren {
   showPreview?: boolean;
   extBridgeImplementation?: ExtBridgeRemoteApi;
+  disableExtBridge?: boolean;
 }
 
 export const RemoteRootClient: FC<RootClientProps> = (props) => {
-  const { children, showPreview = false, ...previewProps } = props;
+  const {
+    children,
+    showPreview = false,
+    disableExtBridge,
+    ...previewProps
+  } = props;
 
   const params = new URLSearchParams(document.location.search);
   const isInPreviewFrame = params.has("preview");
@@ -29,10 +35,12 @@ export const RemoteRootClient: FC<RootClientProps> = (props) => {
     connectionRef.current?.imports.setError(stringifyError(error));
   };
 
+  const connect = connectHostRenderRootRef({ disableExtBridge });
+
   const root = (
     <div
       ref={(div) => {
-        connectionRef.current = connectHostRenderRootRef(div);
+        connectionRef.current = connect(div);
         if (errorRef.current) {
           handleRenderError(errorRef.current);
         }

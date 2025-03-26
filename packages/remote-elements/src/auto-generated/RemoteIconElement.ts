@@ -460,6 +460,8 @@ export class RemoteIconElement extends FlowRemoteElement<RemoteIconElementProps>
       resizeCapture: {},
       scroll: {},
       scrollCapture: {},
+      scrollEnd: {},
+      scrollEndCapture: {},
       seeked: {},
       seekedCapture: {},
       seeking: {},

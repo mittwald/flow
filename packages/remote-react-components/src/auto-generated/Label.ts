@@ -156,6 +156,8 @@ export const Label = createFlowRemoteComponent(
       onResizeCapture: { event: "resizeCapture" } as never,
       onScroll: { event: "scroll" } as never,
       onScrollCapture: { event: "scrollCapture" } as never,
+      onScrollEnd: { event: "scrollEnd" } as never,
+      onScrollEndCapture: { event: "scrollEndCapture" } as never,
       onSeeked: { event: "seeked" } as never,
       onSeekedCapture: { event: "seekedCapture" } as never,
       onSeeking: { event: "seeking" } as never,

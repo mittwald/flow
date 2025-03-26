@@ -7,9 +7,16 @@ import { delegateExtBridgeRemoteFunctions } from "@/ext-bridge/delegateExtBridge
 import { type RemoteConnection } from "@mfalkenberg/remote-dom-core/elements";
 import { ThreadNestedIframe } from "@quilted/threads";
 
+interface Options {
+  disableExtBridge?: boolean;
+}
+
 export const connectHostRenderRoot = (
   div: HTMLDivElement,
+  opts: Options = {},
 ): RemoteToHostConnection => {
+  const { disableExtBridge = false } = opts;
+
   const thread = new ThreadNestedIframe<HostExports, RemoteExports>({
     exports: {
       render: (connection: RemoteConnection) =>
@@ -24,7 +31,7 @@ export const connectHostRenderRoot = (
 
   thread.imports.setIsReady();
 
-  if (typeof mittwald.extBridge !== "undefined") {
+  if (typeof mittwald.extBridge !== "undefined" && !disableExtBridge) {
     delegateExtBridgeRemoteFunctions(thread);
     mittwald.extBridge.setIsReady();
   }
@@ -32,15 +39,16 @@ export const connectHostRenderRoot = (
   return thread;
 };
 
-export const connectHostRenderRootRef = (ref: HTMLDivElement | null) => {
-  if (ref === null) {
-    return;
-  }
-  if ("__remoteConnection" in ref) {
-    return ref["__remoteConnection"] as RemoteToHostConnection;
-  }
+export const connectHostRenderRootRef =
+  (opts?: Options) => (ref: HTMLDivElement | null) => {
+    if (ref === null) {
+      return;
+    }
+    if ("__remoteConnection" in ref) {
+      return ref["__remoteConnection"] as RemoteToHostConnection;
+    }
 
-  const connection = connectHostRenderRoot(ref);
-  Object.assign(ref, { __remoteConnection: connection });
-  return connection;
-};
+    const connection = connectHostRenderRoot(ref, opts);
+    Object.assign(ref, { __remoteConnection: connection });
+    return connection;
+  };

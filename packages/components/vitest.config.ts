@@ -1,6 +1,6 @@
-import defaultConfig from "./vite.config";
 import { mergeConfig } from "vite";
 import { defineConfig } from "vitest/config";
+import defaultConfig from "./vite.config";
 
 export default mergeConfig(
   defaultConfig,
@@ -9,10 +9,7 @@ export default mergeConfig(
       globals: true,
       globalSetup: "./dev/vitest/setupGlobal.ts",
       setupFiles: "./dev/vitest/setupFiles.ts",
-      environmentMatchGlobs: [
-        ["dev/**", "node"],
-        ["src/**", "happy-dom"],
-      ],
+
       coverage: {
         reporter: ["json-summary", "json"],
         reportOnFailure: true,

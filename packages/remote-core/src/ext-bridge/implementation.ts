@@ -1,11 +1,11 @@
 import { RemoteError } from "@/error";
 import type { ExtBridgeRemoteApi } from "@mittwald/ext-bridge";
 
-export const emptyImplementation = new Proxy(
-  {},
-  {
-    get() {
-      throw new RemoteError("Missing implementation for mittwald.extBridge");
-    },
-  },
-) as ExtBridgeRemoteApi;
+const throwIt = async () => {
+  throw new RemoteError("Missing implementation for mittwald.extBridge");
+};
+
+export const emptyImplementation: ExtBridgeRemoteApi = {
+  getSessionToken: throwIt,
+  getConfig: throwIt,
+};
