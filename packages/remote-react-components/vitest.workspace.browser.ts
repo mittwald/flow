@@ -4,6 +4,9 @@ export default defineWorkspace([
   {
     extends: "vite.config.ts",
     cacheDir: "node_modules/.vitest-browser",
+    optimizeDeps: {
+      include: ["react/jsx-dev-runtime"],
+    },
     test: {
       globalSetup: "src/dev/globalTestSetup.ts",
       include: ["src/**/*.browser.test.{ts,tsx}"],
