@@ -25,4 +25,10 @@
       color: var(--choice--icon-color--disabled);
     }
   }
+
+  &[data-invalid]:not([data-selected]) {
+    .icon {
+      color: var(--form-control--border-color--invalid);
+    }
+  }
 }

@@ -8,11 +8,16 @@ import { Alert as Alert } from "@mittwald/flow-react-components";
 import { AlertBadge as AlertBadge } from "@mittwald/flow-react-components";
 import { AlertIcon as AlertIcon } from "@mittwald/flow-react-components";
 import { Align as Align } from "@mittwald/flow-react-components";
+import { Area as Area } from "@mittwald/flow-react-components";
+import { AreaChart as AreaChart } from "@mittwald/flow-react-components";
 import { Avatar as Avatar } from "@mittwald/flow-react-components";
 import { AvatarStack as AvatarStack } from "@mittwald/flow-react-components";
 import { Badge as Badge } from "@mittwald/flow-react-components";
 import { Breadcrumb as Breadcrumb } from "@mittwald/flow-react-components";
 import { Button as Button } from "@mittwald/flow-react-components";
+import { CartesianGrid as CartesianGrid } from "@mittwald/flow-react-components";
+import { ChartLegend as ChartLegend } from "@mittwald/flow-react-components";
+import { ChartTooltip as ChartTooltip } from "@mittwald/flow-react-components";
 import { Chat as Chat } from "@mittwald/flow-react-components";
 import { Checkbox as Checkbox } from "@mittwald/flow-react-components";
 import { CheckboxButton as CheckboxButton } from "@mittwald/flow-react-components";
@@ -53,6 +58,7 @@ import { GridListItem as ItemsGridListItem } from "@mittwald/flow-react-componen
 import { Label as Label } from "@mittwald/flow-react-components";
 import { LabeledValue as LabeledValue } from "@mittwald/flow-react-components";
 import { LayoutCard as LayoutCard } from "@mittwald/flow-react-components";
+import { Legend as Legend } from "@mittwald/flow-react-components";
 import { LightBox as LightBox } from "@mittwald/flow-react-components";
 import { LightBoxTrigger as LightBoxTrigger } from "@mittwald/flow-react-components";
 import { Link as Link } from "@mittwald/flow-react-components";
@@ -104,6 +110,8 @@ import { TextField as TextField } from "@mittwald/flow-react-components";
 import { TimeField as TimeField } from "@mittwald/flow-react-components";
 import { Tooltip as Tooltip } from "@mittwald/flow-react-components";
 import { TooltipTrigger as TooltipTrigger } from "@mittwald/flow-react-components";
+import { XAxis as XAxis } from "@mittwald/flow-react-components";
+import { YAxis as YAxis } from "@mittwald/flow-react-components";
 
 export const flowComponents = {
   "flr-accent-box": createFlowRemoteComponentRenderer(AccentBox),
@@ -113,11 +121,16 @@ export const flowComponents = {
   "flr-alert-badge": createFlowRemoteComponentRenderer(AlertBadge),
   "flr-alert-icon": createFlowRemoteComponentRenderer(AlertIcon),
   "flr-align": createFlowRemoteComponentRenderer(Align),
+  "flr-area": createFlowRemoteComponentRenderer(Area),
+  "flr-area-chart": createFlowRemoteComponentRenderer(AreaChart),
   "flr-avatar": createFlowRemoteComponentRenderer(Avatar),
   "flr-avatar-stack": createFlowRemoteComponentRenderer(AvatarStack),
   "flr-badge": createFlowRemoteComponentRenderer(Badge),
   "flr-breadcrumb": createFlowRemoteComponentRenderer(Breadcrumb),
   "flr-button": createFlowRemoteComponentRenderer(Button),
+  "flr-cartesian-grid": createFlowRemoteComponentRenderer(CartesianGrid),
+  "flr-chart-legend": createFlowRemoteComponentRenderer(ChartLegend),
+  "flr-chart-tooltip": createFlowRemoteComponentRenderer(ChartTooltip),
   "flr-chat": createFlowRemoteComponentRenderer(Chat),
   "flr-checkbox": createFlowRemoteComponentRenderer(Checkbox),
   "flr-checkbox-button": createFlowRemoteComponentRenderer(CheckboxButton),
@@ -166,6 +179,7 @@ export const flowComponents = {
   "flr-label": createFlowRemoteComponentRenderer(Label),
   "flr-labeled-value": createFlowRemoteComponentRenderer(LabeledValue),
   "flr-layout-card": createFlowRemoteComponentRenderer(LayoutCard),
+  "flr-legend": createFlowRemoteComponentRenderer(Legend),
   "flr-light-box": createFlowRemoteComponentRenderer(LightBox),
   "flr-light-box-trigger": createFlowRemoteComponentRenderer(LightBoxTrigger),
   "flr-link": createFlowRemoteComponentRenderer(Link),
@@ -219,6 +233,8 @@ export const flowComponents = {
   "flr-time-field": createFlowRemoteComponentRenderer(TimeField),
   "flr-tooltip": createFlowRemoteComponentRenderer(Tooltip),
   "flr-tooltip-trigger": createFlowRemoteComponentRenderer(TooltipTrigger),
+  "flr-x-axis": createFlowRemoteComponentRenderer(XAxis),
+  "flr-y-axis": createFlowRemoteComponentRenderer(YAxis),
 } as const;
 
 export default flowComponents;

@@ -1,4 +1,4 @@
-import type { CSSProperties, FC, PropsWithChildren } from "react";
+import type { CSSProperties, PropsWithChildren } from "react";
 import React from "react";
 import styles from "./ColumnLayout.module.scss";
 import { getColumns } from "./lib/getColumns";
@@ -9,6 +9,7 @@ import type {
 } from "@/lib/types/props";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 type GapSize = "s" | "m" | "l" | "xl";
 
@@ -39,7 +40,7 @@ export interface ColumnLayoutProps
  * @flr-generate all
  * @flr-clear-props-context
  */
-export const ColumnLayout: FC<ColumnLayoutProps> = (props) => {
+export const ColumnLayout = flowComponent("ColumnLayout", (props) => {
   const {
     children,
     className,
@@ -84,6 +85,6 @@ export const ColumnLayout: FC<ColumnLayoutProps> = (props) => {
       </Element>
     </div>
   );
-};
+});
 
 export default ColumnLayout;

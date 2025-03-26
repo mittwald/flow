@@ -14,5 +14,5 @@ import {
   step={20}
   showInitialMarker
 >
-  <Label>Storage</Label>
+  <Label>Speicherplatz</Label>
 </Slider>;

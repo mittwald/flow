@@ -69,6 +69,7 @@ import type { MessageProps } from "@/components/Message";
 import type { MessageThreadProps } from "@/components/MessageThread";
 import type { FileCardListProps } from "@/components/FileCardList";
 import type { AccentBoxProps } from "@/components/AccentBox";
+import type { ColumnLayoutProps } from "@/components/ColumnLayout";
 
 export * from "./types";
 
@@ -86,6 +87,7 @@ export interface FlowComponentPropsTypes {
   Checkbox: CheckboxProps;
   CheckboxButton: CheckboxButtonProps;
   CheckboxGroup: CheckboxGroupProps;
+  ColumnLayout: ColumnLayoutProps;
   ComboBox: ComboBoxProps;
   Content: ContentProps;
   ContextMenu: ContextMenuProps;
@@ -158,6 +160,7 @@ const propsContextSupportingComponentsMap: Record<
   Checkbox: true,
   CheckboxButton: true,
   CheckboxGroup: true,
+  ColumnLayout: true,
   ComboBox: true,
   Content: true,
   ContextMenu: true,

@@ -13,7 +13,7 @@ export const fetchPublicKey = async (serial: string) => {
     validateStatus: (status) => status === 200,
     params: {
       format: "spki",
-      purpose: "session_key",
+      purpose: "session_token",
     },
   });
   return response.data.key;
