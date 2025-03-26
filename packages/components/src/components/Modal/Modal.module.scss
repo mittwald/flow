@@ -70,10 +70,12 @@
     border-top-color: var(--modal--border-color);
   }
 
-  .accentBox {
-    position: sticky;
-    height: fit-content;
-    top: 0;
+  .columnLayout {
+    .accentBox {
+      position: sticky;
+      height: fit-content;
+      top: 0;
+    }
   }
 }
 

@@ -282,8 +282,10 @@ export const LargeOffCanvas: Story = {
               <Text>{dummyText.long}</Text>
             </Section>
             <AccentBox>
-              <Heading level={4}>Overview</Heading>
-              <Text>{dummyText.medium}</Text>
+              <Section>
+                <Heading level={4}>Overview</Heading>
+                <Text>{dummyText.medium}</Text>
+              </Section>
             </AccentBox>
           </ColumnLayout>
 
