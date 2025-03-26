@@ -50,7 +50,8 @@
     gap: var(--section-header--heading-to-action-spacing);
   }
 
-  .content {
+  .content,
+  .columnLayout {
     grid-area: content;
     overflow-x: hidden;
     overflow-y: auto;
@@ -68,6 +69,12 @@
     border-top-style: var(--modal--border-style);
     border-top-color: var(--modal--border-color);
   }
+
+  .accentBox {
+    position: sticky;
+    height: fit-content;
+    top: 0;
+  }
 }
 
 .modal,
@@ -84,6 +91,7 @@
 
   @include size(s);
   @include size(m);
+  @include size(l);
 }
 
 /* Normal Modal Desktop */

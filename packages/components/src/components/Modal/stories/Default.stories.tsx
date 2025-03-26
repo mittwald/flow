@@ -16,6 +16,9 @@ import { useForm } from "react-hook-form";
 import { action } from "@storybook/addon-actions";
 import { Section } from "@/components/Section";
 import Align from "@/components/Align";
+import { ColumnLayout } from "@/components/ColumnLayout";
+import { AccentBox } from "@/components/AccentBox";
+import { dummyText } from "@/lib/dev/dummyText";
 
 const meta: Meta<typeof Modal> = {
   title: "Overlays/Modal",
@@ -257,6 +260,43 @@ export const WithFormInside: Story = {
           </ActionGroup>
         </Modal>
       </>
+    );
+  },
+};
+
+export const LargeOffCanvas: Story = {
+  args: { size: "l", offCanvas: true },
+  render: (props) => {
+    return (
+      <ModalTrigger>
+        <Button color="accent">Book tariff</Button>
+
+        <Modal {...props}>
+          <Heading>Book tariff</Heading>
+
+          <ColumnLayout>
+            <Section>
+              <Heading>Configuration</Heading>
+              <Text>{dummyText.long}</Text>
+              <Text>{dummyText.long}</Text>
+              <Text>{dummyText.long}</Text>
+            </Section>
+            <AccentBox>
+              <Heading level={4}>Overview</Heading>
+              <Text>{dummyText.medium}</Text>
+            </AccentBox>
+          </ColumnLayout>
+
+          <ActionGroup>
+            <Button color="accent">Submit</Button>
+            <Action closeOverlay="Modal">
+              <Button variant="soft" color="secondary">
+                Abort
+              </Button>
+            </Action>
+          </ActionGroup>
+        </Modal>
+      </ModalTrigger>
     );
   },
 };
