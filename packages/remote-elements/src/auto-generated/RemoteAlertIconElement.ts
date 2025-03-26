@@ -460,6 +460,8 @@ export class RemoteAlertIconElement extends FlowRemoteElement<RemoteAlertIconEle
       resizeCapture: {},
       scroll: {},
       scrollCapture: {},
+      scrollEnd: {},
+      scrollEndCapture: {},
       seeked: {},
       seekedCapture: {},
       seeking: {},

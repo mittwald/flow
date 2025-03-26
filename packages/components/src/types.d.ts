@@ -1,4 +1,5 @@
 /// <reference types="vite/client" />
+import "@vitest/browser/matchers.d.ts";
 import type { JSX as Jsx } from "react/jsx-runtime";
 
 declare global {
@@ -30,5 +31,5 @@ declare global {
   }
 }
 
-import "vitest/globals";
 import "@testing-library/jest-dom";
+import "vitest/globals";

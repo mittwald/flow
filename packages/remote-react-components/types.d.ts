@@ -1,4 +1,5 @@
 /// <reference types="vite/client" />
+import "@vitest/browser/matchers.d.ts";
 
 declare module "*.module.css" {
   const classes: Record<string, string>;

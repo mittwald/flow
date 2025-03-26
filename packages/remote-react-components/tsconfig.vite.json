@@ -3,5 +3,5 @@
     "types": ["node"]
   },
   "extends": "./tsconfig.json",
-  "include": ["./vite.*.ts"]
+  "include": ["./vite.*.ts", "./vitest.*.ts"]
 }

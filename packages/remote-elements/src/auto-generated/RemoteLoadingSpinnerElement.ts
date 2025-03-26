@@ -460,6 +460,8 @@ export class RemoteLoadingSpinnerElement extends FlowRemoteElement<RemoteLoading
       resizeCapture: {},
       scroll: {},
       scrollCapture: {},
+      scrollEnd: {},
+      scrollEndCapture: {},
       seeked: {},
       seekedCapture: {},
       seeking: {},

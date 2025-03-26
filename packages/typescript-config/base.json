@@ -1,7 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
-    /* Base Options: */
     "esModuleInterop": true,
     "skipLibCheck": true,
     "target": "esnext",
@@ -13,15 +12,13 @@
     "verbatimModuleSyntax": true,
     "stripInternal": true,
 
-    /* Strictness */
     "strict": true,
     "noUncheckedIndexedAccess": true,
     "noImplicitOverride": true,
 
-    /* Opinion */
     "incremental": true,
     "module": "preserve",
-    "outDir": "${configDir}/dist",
+    "outDir": "${configDir}/dist/types",
     "baseUrl": "${configDir}",
     "rootDir": "${configDir}/src",
     "paths": {
