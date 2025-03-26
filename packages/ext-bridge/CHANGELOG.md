@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.116](https://github.com/mittwald/flow/compare/0.2.0-alpha.115...0.2.0-alpha.116) (2025-03-26)
+
+### Bug Fixes
+
+* **ext-bridge:** fix public key fetching ([#1324](https://github.com/mittwald/flow/issues/1324)) ([ab7bd33](https://github.com/mittwald/flow/commit/ab7bd3316107cf1cabbf5a6295f3dcf893a26aaa))
+
 # [0.2.0-alpha.115](https://github.com/mittwald/flow/compare/0.2.0-alpha.114...0.2.0-alpha.115) (2025-03-26)
 
 **Note:** Version bump only for package @mittwald/ext-bridge
