@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.120](https://github.com/mittwald/flow/compare/0.2.0-alpha.119...0.2.0-alpha.120) (2025-03-27)
+
+### Features
+
+* **Flex:** add padding ([#1328](https://github.com/mittwald/flow/issues/1328)) ([81e964b](https://github.com/mittwald/flow/commit/81e964bccbcd2e23c5a0feefa52c72e12559a46f))
+
 # [0.2.0-alpha.119](https://github.com/mittwald/flow/compare/0.2.0-alpha.118...0.2.0-alpha.119) (2025-03-27)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
