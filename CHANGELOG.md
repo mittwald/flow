@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.117](https://github.com/mittwald/flow/compare/0.2.0-alpha.116...0.2.0-alpha.117) (2025-03-27)
+
+### Features
+
+* **FileCard:** Support ContextMenu in FileCard ([#1323](https://github.com/mittwald/flow/issues/1323)) ([02b5562](https://github.com/mittwald/flow/commit/02b5562578947b11c7c0271e50595f4c5faf13ed))
+
 # [0.2.0-alpha.116](https://github.com/mittwald/flow/compare/0.2.0-alpha.115...0.2.0-alpha.116) (2025-03-26)
 
 ### Bug Fixes
