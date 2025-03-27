@@ -1,6 +1,13 @@
 {
   "implicitDependencies": ["tokens"],
   "name": "components",
+  "namedInputs": {
+    "components-src": [
+      "{projectRoot}/src/**/*",
+      "!{projectRoot}/src/views/*",
+      "!{projectRoot}/src/components/**/view.ts"
+    ]
+  },
   "projectType": "library",
   "sourceRoot": "packages/components/src",
   "targets": {
@@ -19,7 +26,7 @@
       "cache": true,
       "inputs": [
         "{projectRoot}/dev/remote-components-generator/**/*",
-        "{projectRoot}/src/**/*"
+        "components-src"
       ],
       "dependsOn": ["build:docs-properties"],
       "outputs": [
@@ -32,15 +39,16 @@
     },
     "build": {
       "cache": true,
-      "dependsOn": ["build:icons", "build:remote-components", "^build"]
+      "dependsOn": ["build:icons", "build:remote-components", "^build"],
+      "inputs": ["components-src"]
     },
     "build:docs-properties": {
       "cache": true,
       "inputs": [
-        "{projectRoot}/src/**/*.tsx",
+        "components-src",
         "{projectRoot}/dev/createDocPropertiesJson.ts"
       ],
-      "outputs": ["{projectRoot}/dist/doc-properties.json"]
+      "outputs": ["{projectRoot}/dist/assets/doc-properties.json"]
     }
   }
 }
