@@ -14,7 +14,7 @@ export const MessageThread = createFlowRemoteComponent(
   RemoteMessageThreadElement,
   {
     slotProps: {
-      wrapper: false,
+      wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {},
   },

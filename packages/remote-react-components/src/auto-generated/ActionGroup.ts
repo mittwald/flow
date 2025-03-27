@@ -14,7 +14,7 @@ export const ActionGroup = createFlowRemoteComponent(
   RemoteActionGroupElement,
   {
     slotProps: {
-      wrapper: false,
+      wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {},
   },

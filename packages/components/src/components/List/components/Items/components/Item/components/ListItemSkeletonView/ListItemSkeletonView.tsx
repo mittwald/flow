@@ -1,6 +1,5 @@
 import type { ListViewMode } from "@/components/List/model/types";
 import AvatarView from "@/views/AvatarView";
-import FragmentView from "@/views/FragmentView";
 import HeadingView from "@/views/HeadingView";
 import ListItemViewContentView from "@/views/ListItemViewContentView";
 import SkeletonTextView from "@/views/SkeletonTextView";
@@ -21,27 +20,21 @@ export const ListItemSkeletonView: FC<ListItemSkeletonViewProps> = (props) => {
     <ListItemViewContentView
       viewMode={viewMode}
       title={
-        <FragmentView>
-          <HeadingView>
-            <SkeletonTextView width="200px" />
-          </HeadingView>
-        </FragmentView>
+        <HeadingView>
+          <SkeletonTextView width="200px" />
+        </HeadingView>
       }
       avatar={
         showTiles && (
-          <FragmentView>
-            <AvatarView>
-              <SkeletonView style={{ aspectRatio: 16 / 9 }} />
-            </AvatarView>
-          </FragmentView>
+          <AvatarView>
+            <SkeletonView style={{ aspectRatio: 16 / 9 }} />
+          </AvatarView>
         )
       }
       subTitle={
-        <FragmentView>
-          <TextView>
-            <SkeletonTextView width="300px" />
-          </TextView>
-        </FragmentView>
+        <TextView>
+          <SkeletonTextView width="300px" />
+        </TextView>
       }
     />
   );

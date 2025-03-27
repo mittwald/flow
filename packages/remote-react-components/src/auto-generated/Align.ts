@@ -14,7 +14,7 @@ export const Align = createFlowRemoteComponent(
   RemoteAlignElement,
   {
     slotProps: {
-      wrapper: false,
+      wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {},
   },

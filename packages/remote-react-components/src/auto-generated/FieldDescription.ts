@@ -14,7 +14,7 @@ export const FieldDescription = createFlowRemoteComponent(
   RemoteFieldDescriptionElement,
   {
     slotProps: {
-      wrapper: false,
+      wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {
       onAbort: { event: "abort" } as never,

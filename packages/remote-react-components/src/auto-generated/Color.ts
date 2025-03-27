@@ -14,7 +14,7 @@ export const Color = createFlowRemoteComponent(
   RemoteColorElement,
   {
     slotProps: {
-      wrapper: false,
+      wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {},
   },

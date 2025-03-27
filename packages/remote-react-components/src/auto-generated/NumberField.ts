@@ -14,7 +14,7 @@ export const NumberField = createFlowRemoteComponent(
   RemoteNumberFieldElement,
   {
     slotProps: {
-      wrapper: false,
+      wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {
       onBeforeInput: { event: "beforeInput" } as never,

@@ -38,7 +38,6 @@ export * from "./FileCard";
 export * from "./FileCardList";
 export * from "./FileField";
 export * from "./Flex";
-export * from "./Fragment";
 export * from "./Header";
 export * from "./HeaderNavigation";
 export * from "./Heading";

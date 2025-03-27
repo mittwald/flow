@@ -14,7 +14,7 @@ export const SearchField = createFlowRemoteComponent(
   RemoteSearchFieldElement,
   {
     slotProps: {
-      wrapper: false,
+      wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {
       onBeforeInput: { event: "beforeInput" } as never,

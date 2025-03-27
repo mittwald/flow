@@ -14,7 +14,7 @@ export const AlertBadge = createFlowRemoteComponent(
   RemoteAlertBadgeElement,
   {
     slotProps: {
-      wrapper: false,
+      wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {},
   },

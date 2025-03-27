@@ -14,7 +14,7 @@ export const Div = createFlowRemoteComponent(
   RemoteDivElement,
   {
     slotProps: {
-      wrapper: false,
+      wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {},
   },
