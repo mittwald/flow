@@ -5,6 +5,11 @@
   "sourceRoot": "packages/remote-react-components/src",
   "targets": {
     "build": {
+      "inputs": [
+        "default",
+        "{projectRoot}/src/**/*",
+        "!{projectRoot}/src/auto-generated/**/*"
+      ],
       "dependsOn": [
         "^build",
         {
