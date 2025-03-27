@@ -12,6 +12,8 @@ import { FileSizeText } from "@/components/FileCard/components/FileSizeText";
 import { Link, type LinkProps } from "@/components/Link";
 import Wrap from "@/components/Wrap";
 import { DeleteButton } from "@/components/FileCard/components/DeleteButton";
+import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import { OptionsButton } from "@/components/List/components/Items/components/Item/components/OptionsButton";
 
 export interface FileCardProps
   extends PropsWithClassName,
@@ -43,34 +45,47 @@ export const FileCard = flowComponent("FileCard", (props) => {
     target,
     download,
     imageSrc,
+    children,
   } = props;
 
   const rootClassName = clsx(styles.fileCard, className);
 
+  const propsContext: PropsContext = {
+    ContextMenu: {
+      wrapWith: <OptionsButton />,
+      placement: "bottom right",
+    },
+  };
+
   const Element = elementType;
 
   return (
-    <Element className={rootClassName}>
-      <Wrap if={href || onPress}>
-        <Link
-          className={styles.link}
-          unstyled
-          href={href}
-          onPress={onPress}
-          target={target}
-          download={download}
-        >
-          <Avatar type={type} imageSrc={imageSrc} />
-          <span className={styles.text}>
-            <Text className={styles.title}>
-              <b>{name}</b>
-            </Text>
-            {sizeInBytes && <FileSizeText sizeInBytes={sizeInBytes} />}
-          </span>
-        </Link>
-      </Wrap>
-      {onDelete && <DeleteButton onDelete={onDelete} />}
-    </Element>
+    <PropsContextProvider props={propsContext} mergeInParentContext>
+      <Element className={rootClassName}>
+        <Wrap if={href || onPress}>
+          <Link
+            className={styles.link}
+            unstyled
+            href={href}
+            onPress={onPress}
+            target={target}
+            download={download}
+          >
+            <Avatar type={type} imageSrc={imageSrc} />
+            <span className={styles.text}>
+              <Text className={styles.title}>
+                <b>{name}</b>
+              </Text>
+              {sizeInBytes && <FileSizeText sizeInBytes={sizeInBytes} />}
+            </span>
+          </Link>
+        </Wrap>
+        {onDelete && children === undefined && (
+          <DeleteButton onDelete={onDelete} />
+        )}
+        {children}
+      </Element>
+    </PropsContextProvider>
   );
 });
 

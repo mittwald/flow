@@ -3,6 +3,8 @@ import React from "react";
 import { FileCard } from "@/components/FileCard";
 import { dummyText } from "@/lib/dev/dummyText";
 import { action } from "@storybook/addon-actions";
+import { ContextMenu } from "@/components/ContextMenu";
+import MenuItem from "@/components/MenuItem";
 
 const meta: Meta<typeof FileCard> = {
   title: "Upload/FileCard",
@@ -43,6 +45,15 @@ export const WithLinkAndOnDelete: Story = {
   },
 };
 
+export const WithContextMenu: Story = {
+  render: (props) => (
+    <FileCard {...props}>
+      <ContextMenu>
+        <MenuItem>Löschen</MenuItem>
+      </ContextMenu>
+    </FileCard>
+  ),
+};
 export const WithImage: Story = {
   args: {
     imageSrc: dummyText.imageSrc,
