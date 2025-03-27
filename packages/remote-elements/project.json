@@ -11,6 +11,11 @@
           "projects": ["components"],
           "target": "build:remote-components"
         }
+      ],
+      "inputs": [
+        "default",
+        "{projectRoot}/src/**/*",
+        "!{projectRoot}/src/auto-generated/**/*"
       ]
     }
   }

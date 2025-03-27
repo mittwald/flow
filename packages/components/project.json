@@ -3,6 +3,7 @@
   "name": "components",
   "namedInputs": {
     "components-src": [
+      "default",
       "{projectRoot}/src/**/*",
       "!{projectRoot}/src/views/*",
       "!{projectRoot}/src/components/**/view.ts"

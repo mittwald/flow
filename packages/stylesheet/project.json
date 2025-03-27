@@ -1,5 +1,11 @@
 {
   "implicitDependencies": ["components"],
   "name": "stylesheet",
-  "projectType": "library"
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "inputs": ["{projectRoot}/build.js", "default"],
+      "outputs": ["{projectRoot}/dist/*"]
+    }
+  }
 }
