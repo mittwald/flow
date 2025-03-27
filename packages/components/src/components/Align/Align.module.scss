@@ -2,6 +2,7 @@
   &:has(.avatar):has(.text) {
     display: flex;
     gap: var(--align--avatar-text--spacing);
+    height: fit-content;
 
     .text {
       font-size: var(--font-size-text--s);
@@ -35,7 +36,7 @@
     align-items: flex-start;
     column-gap: var(--align--input-button--spacing);
 
-    :first-child {
+    :global(.flow--form-field) {
       flex-grow: 1;
     }
 

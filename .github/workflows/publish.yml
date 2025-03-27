@@ -53,7 +53,7 @@ jobs:
         run: git branch --track main origin/main
 
       - name: Build 🔨
-        run: pnpm build --exclude @mittwald/flow-documentation
+        run: pnpm build
 
       - name: Version and publish 🚀
         run: |

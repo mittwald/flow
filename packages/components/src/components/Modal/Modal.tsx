@@ -20,7 +20,7 @@ export interface ModalProps
     FlowComponentProps,
     PropsWithClassName {
   /** The size of the modal. @default "s" */
-  size?: "s" | "m";
+  size?: "s" | "m" | "l";
   /** Whether the modal should be displayed as an off canvas. */
   offCanvas?: boolean;
   /**
@@ -68,6 +68,17 @@ export const Modal = flowComponent<"Modal", HTMLDivElement>(
             level: 3,
           },
         },
+      },
+      ColumnLayout: {
+        l: [2, 1],
+        m: [1],
+        className: styles.columnLayout,
+        Section: {
+          Heading: {
+            level: 3,
+          },
+        },
+        AccentBox: { className: styles.accentBox, color: "neutral" },
       },
       Heading: {
         level: 2,

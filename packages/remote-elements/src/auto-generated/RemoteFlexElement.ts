@@ -18,6 +18,11 @@ export class RemoteFlexElement extends FlowRemoteElement<RemoteFlexElementProps>
       gap: {},
       grow: {},
       justify: {},
+      padding: {},
+      paddingBottom: {},
+      paddingLeft: {},
+      paddingRight: {},
+      paddingTop: {},
       rowGap: {},
       wrap: {},
     };

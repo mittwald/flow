@@ -17,5 +17,5 @@ export const delegateExtBridgeRemoteFunctions = (
     return [fn, delegation];
   });
 
-  Object.assign(mwExtBridge, Object.fromEntries(delegationEntries));
+  Object.assign(mittwald.extBridge, Object.fromEntries(delegationEntries));
 };

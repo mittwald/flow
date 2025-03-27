@@ -36,6 +36,7 @@
     word-break: break-word;
     display: flex;
     gap: var(--list-item--avatar-to-title-spacing);
+    max-width: 100%;
   }
 
   .subTitle {

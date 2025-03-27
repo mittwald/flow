@@ -11,9 +11,12 @@ export interface SkeletonTextProps extends ComponentProps<"div"> {
 export const SkeletonText: FC<SkeletonTextProps> = (props) => {
   const { width, style = {}, ...rest } = props;
   return (
-    <div aria-hidden style={{ width, ...style }} {...rest}>
-      <div className={styles.skeletonText} />
-    </div>
+    <div
+      aria-hidden
+      className={styles.skeletonText}
+      style={{ width, ...style }}
+      {...rest}
+    />
   );
 };
 

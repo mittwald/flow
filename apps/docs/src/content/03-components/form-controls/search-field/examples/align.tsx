@@ -6,5 +6,5 @@ import {
 
 <Align>
   <SearchField />
-  <Button>Hinzufügen</Button>
+  <Button>Suchen</Button>
 </Align>;

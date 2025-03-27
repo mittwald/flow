@@ -12,6 +12,9 @@ import Image from "@/components/Image";
 import { Heading } from "@/components/Heading";
 import { Content } from "@/components/Content";
 import { ActionGroup } from "@/components/ActionGroup";
+import { RadioButton, RadioGroup } from "@/components/RadioGroup";
+import { Separator } from "@/components/Separator";
+import { Link } from "@/components/Link";
 
 const meta: Meta<typeof Flex> = {
   title: "Structure/Flex",
@@ -65,6 +68,67 @@ export const ListItemContent: Story = {
           )}
         </List.Item>
       </List.List>
+    );
+  },
+};
+
+export const WithPadding: Story = {
+  render: () => {
+    return (
+      <RadioGroup aria-label="tariffs">
+        <RadioButton value="tariff1">
+          <Flex
+            direction="column"
+            gap="s"
+            align="center"
+            paddingTop="m"
+            paddingBottom="m"
+            paddingRight="xl"
+          >
+            <Text align="center">
+              <b>Shared Webhosting</b>
+              <br />
+              proSpace lite
+            </Text>
+            <Text>
+              Ab <b>10 €</b>
+            </Text>
+            <Separator />
+            <Text>{dummyText.short}</Text>
+            <Flex grow align="end" paddingTop="m">
+              <Link href="#" target="_blank">
+                Mehr erfahren
+              </Link>
+            </Flex>
+          </Flex>
+        </RadioButton>
+        <RadioButton value="tariff2">
+          <Flex
+            direction="column"
+            gap="s"
+            align="center"
+            paddingTop="m"
+            paddingBottom="m"
+            paddingRight="xl"
+          >
+            <Text align="center">
+              <b>Managed Cloud Hosting</b>
+              <br />
+              proSpace
+            </Text>
+            <Text>
+              Ab <b>32 €</b>
+            </Text>
+            <Separator />
+            <Text>{dummyText.medium}</Text>
+            <Flex grow align="end" paddingTop="m">
+              <Link href="#" target="_blank">
+                Mehr erfahren
+              </Link>
+            </Flex>
+          </Flex>
+        </RadioButton>
+      </RadioGroup>
     );
   },
 };

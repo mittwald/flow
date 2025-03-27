@@ -8,7 +8,7 @@
     "node": ">=20.11"
   },
   "scripts": {
-    "build": "nx run-many --targets=build",
+    "build": "nx run-many --targets=build --exclude docs",
     "clean": "nx reset",
     "postclean": "nx run-many --targets=clean",
     "dev": "nx build:deps $@ && concurrently \"yarn watch $@\" \"yarn nx dev $@\"",

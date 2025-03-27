@@ -3,6 +3,76 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.120](https://github.com/mittwald/flow/compare/0.2.0-alpha.119...0.2.0-alpha.120) (2025-03-27)
+
+### Features
+
+* **Flex:** add padding ([#1328](https://github.com/mittwald/flow/issues/1328)) ([81e964b](https://github.com/mittwald/flow/commit/81e964bccbcd2e23c5a0feefa52c72e12559a46f))
+
+# [0.2.0-alpha.119](https://github.com/mittwald/flow/compare/0.2.0-alpha.118...0.2.0-alpha.119) (2025-03-27)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.118](https://github.com/mittwald/flow/compare/0.2.0-alpha.117...0.2.0-alpha.118) (2025-03-27)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.117](https://github.com/mittwald/flow/compare/0.2.0-alpha.116...0.2.0-alpha.117) (2025-03-27)
+
+### Features
+
+* **FileCard:** Support ContextMenu in FileCard ([#1323](https://github.com/mittwald/flow/issues/1323)) ([02b5562](https://github.com/mittwald/flow/commit/02b5562578947b11c7c0271e50595f4c5faf13ed))
+
+# [0.2.0-alpha.116](https://github.com/mittwald/flow/compare/0.2.0-alpha.115...0.2.0-alpha.116) (2025-03-26)
+
+### Bug Fixes
+
+* **ext-bridge:** fix public key fetching ([#1324](https://github.com/mittwald/flow/issues/1324)) ([ab7bd33](https://github.com/mittwald/flow/commit/ab7bd3316107cf1cabbf5a6295f3dcf893a26aaa))
+
+# [0.2.0-alpha.115](https://github.com/mittwald/flow/compare/0.2.0-alpha.114...0.2.0-alpha.115) (2025-03-26)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.114](https://github.com/mittwald/flow/compare/0.2.0-alpha.113...0.2.0-alpha.114) (2025-03-26)
+
+### Features
+
+* **AreaChart:** add area chart ([#1265](https://github.com/mittwald/flow/issues/1265)) ([24a6343](https://github.com/mittwald/flow/commit/24a63434ae3da843ee5ef73ef48616e8a951acb9))
+
+# [0.2.0-alpha.113](https://github.com/mittwald/flow/compare/0.2.0-alpha.112...0.2.0-alpha.113) (2025-03-24)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.112](https://github.com/mittwald/flow/compare/0.2.0-alpha.111...0.2.0-alpha.112) (2025-03-21)
+
+### Bug Fixes
+
+* **ContextualHelp:** fix ContextualHelp in Field Labels + Documentation ([#1293](https://github.com/mittwald/flow/issues/1293)) ([bab4356](https://github.com/mittwald/flow/commit/bab4356f859a16c87ffdb555d5f1540b22c47c3d))
+
+# [0.2.0-alpha.111](https://github.com/mittwald/flow/compare/0.2.0-alpha.110...0.2.0-alpha.111) (2025-03-21)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.110](https://github.com/mittwald/flow/compare/0.2.0-alpha.109...0.2.0-alpha.110) (2025-03-21)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.109](https://github.com/mittwald/flow/compare/0.2.0-alpha.108...0.2.0-alpha.109) (2025-03-21)
+
+### Bug Fixes
+
+* small style fixes ([#1305](https://github.com/mittwald/flow/issues/1305)) ([69082de](https://github.com/mittwald/flow/commit/69082de5e31cc9a9950c4558601a840ff3f2ecf8))
+
+# [0.2.0-alpha.108](https://github.com/mittwald/flow/compare/0.2.0-alpha.107...0.2.0-alpha.108) (2025-03-21)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.107](https://github.com/mittwald/flow/compare/0.2.0-alpha.106...0.2.0-alpha.107) (2025-03-21)
+
+### Bug Fixes
+
+* **Calendar:** add disabled style for unavailable dates ([#1304](https://github.com/mittwald/flow/issues/1304)) ([417132d](https://github.com/mittwald/flow/commit/417132ddca98c926e5a55084729571aad7841c75))
+
 # [0.2.0-alpha.106](https://github.com/mittwald/flow/compare/0.2.0-alpha.105...0.2.0-alpha.106) (2025-03-21)
 
 **Note:** Version bump only for package @mittwald/flow-project
