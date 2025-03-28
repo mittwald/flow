@@ -14,7 +14,7 @@ export const Switch = createFlowRemoteComponent(
   RemoteSwitchElement,
   {
     slotProps: {
-      wrapper: false,
+      wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {
       onBlur: { event: "blur" } as never,

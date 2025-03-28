@@ -14,7 +14,7 @@ export const AccentBox = createFlowRemoteComponent(
   RemoteAccentBoxElement,
   {
     slotProps: {
-      wrapper: false,
+      wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {
       onAbort: { event: "abort" } as never,

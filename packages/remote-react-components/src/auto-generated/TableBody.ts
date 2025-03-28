@@ -14,7 +14,7 @@ export const TableBody = createFlowRemoteComponent(
   RemoteTableBodyElement,
   {
     slotProps: {
-      wrapper: false,
+      wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {},
   },

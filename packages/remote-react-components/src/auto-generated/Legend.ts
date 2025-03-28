@@ -14,7 +14,7 @@ export const Legend = createFlowRemoteComponent(
   RemoteLegendElement,
   {
     slotProps: {
-      wrapper: false,
+      wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {},
   },

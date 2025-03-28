@@ -14,7 +14,7 @@ export const ContextualHelpTrigger = createFlowRemoteComponent(
   RemoteContextualHelpTriggerElement,
   {
     slotProps: {
-      wrapper: false,
+      wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {},
   },

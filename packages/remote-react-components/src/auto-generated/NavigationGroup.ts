@@ -14,7 +14,7 @@ export const NavigationGroup = createFlowRemoteComponent(
   RemoteNavigationGroupElement,
   {
     slotProps: {
-      wrapper: false,
+      wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {
       onAbort: { event: "abort" } as never,

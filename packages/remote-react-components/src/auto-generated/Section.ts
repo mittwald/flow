@@ -14,7 +14,7 @@ export const Section = createFlowRemoteComponent(
   RemoteSectionElement,
   {
     slotProps: {
-      wrapper: false,
+      wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {
       onAbort: { event: "abort" } as never,

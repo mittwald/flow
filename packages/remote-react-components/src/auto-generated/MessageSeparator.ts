@@ -14,7 +14,7 @@ export const MessageSeparator = createFlowRemoteComponent(
   RemoteMessageSeparatorElement,
   {
     slotProps: {
-      wrapper: false,
+      wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {},
   },

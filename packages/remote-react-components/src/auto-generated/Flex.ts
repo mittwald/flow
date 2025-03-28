@@ -14,7 +14,7 @@ export const Flex = createFlowRemoteComponent(
   RemoteFlexElement,
   {
     slotProps: {
-      wrapper: false,
+      wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {},
   },

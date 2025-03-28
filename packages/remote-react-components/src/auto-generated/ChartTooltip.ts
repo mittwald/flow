@@ -14,7 +14,7 @@ export const ChartTooltip = createFlowRemoteComponent(
   RemoteChartTooltipElement,
   {
     slotProps: {
-      wrapper: false,
+      wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {},
   },

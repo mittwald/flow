@@ -14,7 +14,7 @@ export const MenuItem = createFlowRemoteComponent(
   RemoteMenuItemElement,
   {
     slotProps: {
-      wrapper: false,
+      wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {
       onAction: { event: "action" } as never,

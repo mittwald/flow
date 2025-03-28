@@ -14,7 +14,7 @@ export const ClearPropsContextContent = createFlowRemoteComponent(
   RemoteClearPropsContextContentElement,
   {
     slotProps: {
-      wrapper: false,
+      wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {},
   },

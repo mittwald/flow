@@ -14,7 +14,7 @@ export const LightBox = createFlowRemoteComponent(
   RemoteLightBoxElement,
   {
     slotProps: {
-      wrapper: false,
+      wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {},
   },

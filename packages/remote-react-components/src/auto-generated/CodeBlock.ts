@@ -14,7 +14,7 @@ export const CodeBlock = createFlowRemoteComponent(
   RemoteCodeBlockElement,
   {
     slotProps: {
-      wrapper: false,
+      wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {},
   },

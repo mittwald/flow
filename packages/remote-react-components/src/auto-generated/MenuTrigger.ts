@@ -14,7 +14,7 @@ export const MenuTrigger = createFlowRemoteComponent(
   RemoteMenuTriggerElement,
   {
     slotProps: {
-      wrapper: false,
+      wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {
       onOpenChange: { event: "openChange" } as never,

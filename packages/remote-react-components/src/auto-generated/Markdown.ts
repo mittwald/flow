@@ -14,7 +14,7 @@ export const Markdown = createFlowRemoteComponent(
   RemoteMarkdownElement,
   {
     slotProps: {
-      wrapper: false,
+      wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {},
   },

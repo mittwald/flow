@@ -14,7 +14,7 @@ export const TableColumn = createFlowRemoteComponent(
   RemoteTableColumnElement,
   {
     slotProps: {
-      wrapper: false,
+      wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {},
   },

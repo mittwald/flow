@@ -14,7 +14,7 @@ export const ChartLegend = createFlowRemoteComponent(
   RemoteChartLegendElement,
   {
     slotProps: {
-      wrapper: false,
+      wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {},
   },

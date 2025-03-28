@@ -14,7 +14,7 @@ export const XAxis = createFlowRemoteComponent(
   RemoteXAxisElement,
   {
     slotProps: {
-      wrapper: false,
+      wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {},
   },

@@ -14,7 +14,7 @@ export const LoadingSpinner = createFlowRemoteComponent(
   RemoteLoadingSpinnerElement,
   {
     slotProps: {
-      wrapper: false,
+      wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {
       onAbort: { event: "abort" } as never,

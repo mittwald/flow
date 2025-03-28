@@ -14,7 +14,7 @@ export const ListSummary = createFlowRemoteComponent(
   RemoteListSummaryElement,
   {
     slotProps: {
-      wrapper: false,
+      wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {},
   },

@@ -4,7 +4,7 @@ import type {
   RemoteToHostConnection,
 } from "@/connection/types";
 import { delegateExtBridgeRemoteFunctions } from "@/ext-bridge/delegateExtBridgeRemoteFunctions";
-import { type RemoteConnection } from "@mfalkenberg/remote-dom-core/elements";
+import type { RemoteConnection } from "@mfalkenberg/remote-dom-core/elements";
 import { ThreadNestedIframe } from "@quilted/threads";
 
 export const connectHostRenderRoot = (

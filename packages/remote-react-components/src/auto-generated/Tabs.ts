@@ -14,7 +14,7 @@ export const Tabs = createFlowRemoteComponent(
   RemoteTabsElement,
   {
     slotProps: {
-      wrapper: false,
+      wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {
       onSelectionChange: { event: "selectionChange" } as never,

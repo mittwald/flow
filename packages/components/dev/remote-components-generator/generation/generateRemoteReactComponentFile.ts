@@ -35,7 +35,7 @@ export function generateRemoteReactComponentFile(c: ComponentDoc) {
       },
       ${t.remoteComponentName}, {
       slotProps: {
-        wrapper: false,
+        wrapper: "flr-slot-root-wrapper",
       },      
       eventProps: {
           ${t.events}
