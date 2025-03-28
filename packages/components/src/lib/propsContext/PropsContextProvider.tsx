@@ -1,3 +1,5 @@
+import Wrap from "@/components/Wrap";
+import { ClearPropsContext } from "@/internal";
 import mergePropsContext from "@/lib/propsContext/mergePropsContext";
 import { propsContext, useContextProps } from "@/lib/propsContext/propsContext";
 import type { PropsContext as PropsContextShape } from "@/lib/propsContext/types";
@@ -30,10 +32,19 @@ export const PropsContextProvider: FC<Props> = (props) => {
     [memoizedProps, parentPropsContext, mergeInParentContext],
   );
 
+  /**
+   * <ClearPropsContext> is used here, because it has remote support, and
+   * clearing context (!mergeInParentContext) is also applied while rendering on
+   * host side.
+   */
   return (
-    <propsContext.Provider value={propsWithParentPropsContext}>
-      {children}
-    </propsContext.Provider>
+    <Wrap if={!mergeInParentContext}>
+      <ClearPropsContext>
+        <propsContext.Provider value={propsWithParentPropsContext}>
+          {children}
+        </propsContext.Provider>
+      </ClearPropsContext>
+    </Wrap>
   );
 };
 
