@@ -21,7 +21,7 @@ export class RemoteSlotRootWrapper extends FlowRemoteElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "flr-fragment": InstanceType<typeof RemoteSlotRootWrapper>;
+    "flr-slot-root-wrapper"": InstanceType<typeof RemoteSlotRootWrapper>;
   }
 }
 
