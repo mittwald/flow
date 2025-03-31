@@ -3,7 +3,6 @@ import React from "react";
 import styles from "./ListItemView.module.scss";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import ListItemViewContentView from "@/views/ListItemViewContentView";
-import FragmentView from "@/views/FragmentView";
 import {
   dynamic,
   type PropsContext,
@@ -54,36 +53,12 @@ export const ListItemView = (props: ListItemViewProps) => {
       <TunnelProvider>
         <ListItemViewContentView
           viewMode={list.viewMode}
-          title={
-            <FragmentView>
-              <TunnelExit id="title" />
-            </FragmentView>
-          }
-          avatar={
-            <FragmentView>
-              <TunnelExit id="avatar" />
-            </FragmentView>
-          }
-          button={
-            <FragmentView>
-              <TunnelExit id="button" />
-            </FragmentView>
-          }
-          subTitle={
-            <FragmentView>
-              <TunnelExit id="text" />
-            </FragmentView>
-          }
-          bottom={
-            <FragmentView>
-              <TunnelExit id="bottom" />
-            </FragmentView>
-          }
-          checkbox={
-            <FragmentView>
-              <TunnelExit id="checkbox" />
-            </FragmentView>
-          }
+          title={<TunnelExit id="title" />}
+          avatar={<TunnelExit id="avatar" />}
+          button={<TunnelExit id="button" />}
+          subTitle={<TunnelExit id="text" />}
+          bottom={<TunnelExit id="bottom" />}
+          checkbox={<TunnelExit id="checkbox" />}
         >
           {children}
         </ListItemViewContentView>

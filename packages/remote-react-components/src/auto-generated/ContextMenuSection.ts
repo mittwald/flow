@@ -14,7 +14,7 @@ export const ContextMenuSection = createFlowRemoteComponent(
   RemoteContextMenuSectionElement,
   {
     slotProps: {
-      wrapper: false,
+      wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {},
   },

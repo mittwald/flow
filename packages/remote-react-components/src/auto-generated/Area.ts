@@ -14,7 +14,7 @@ export const Area = createFlowRemoteComponent(
   RemoteAreaElement,
   {
     slotProps: {
-      wrapper: false,
+      wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {
       onlyDots: { event: "lyDots" } as never,

@@ -14,7 +14,7 @@ export const ProgressBar = createFlowRemoteComponent(
   RemoteProgressBarElement,
   {
     slotProps: {
-      wrapper: false,
+      wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {},
   },

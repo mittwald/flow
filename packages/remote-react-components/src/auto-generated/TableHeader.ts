@@ -14,7 +14,7 @@ export const TableHeader = createFlowRemoteComponent(
   RemoteTableHeaderElement,
   {
     slotProps: {
-      wrapper: false,
+      wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {
       onHoverChange: { event: "hoverChange" } as never,

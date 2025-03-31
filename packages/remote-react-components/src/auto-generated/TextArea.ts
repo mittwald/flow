@@ -14,7 +14,7 @@ export const TextArea = createFlowRemoteComponent(
   RemoteTextAreaElement,
   {
     slotProps: {
-      wrapper: false,
+      wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {
       onBeforeInput: { event: "beforeInput" } as never,

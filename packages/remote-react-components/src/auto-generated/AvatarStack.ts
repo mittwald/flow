@@ -14,7 +14,7 @@ export const AvatarStack = createFlowRemoteComponent(
   RemoteAvatarStackElement,
   {
     slotProps: {
-      wrapper: false,
+      wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {
       onCountPress: { event: "countPress" } as never,

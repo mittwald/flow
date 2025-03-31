@@ -14,7 +14,7 @@ export const Table = createFlowRemoteComponent(
   RemoteTableElement,
   {
     slotProps: {
-      wrapper: false,
+      wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {
       onRowAction: { event: "rowAction" } as never,

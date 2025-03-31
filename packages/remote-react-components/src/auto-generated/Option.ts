@@ -14,7 +14,7 @@ export const Option = createFlowRemoteComponent(
   RemoteOptionElement,
   {
     slotProps: {
-      wrapper: false,
+      wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {
       onAction: { event: "action" } as never,

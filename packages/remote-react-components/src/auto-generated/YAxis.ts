@@ -14,7 +14,7 @@ export const YAxis = createFlowRemoteComponent(
   RemoteYAxisElement,
   {
     slotProps: {
-      wrapper: false,
+      wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {},
   },

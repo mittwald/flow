@@ -14,7 +14,7 @@ export const Badge = createFlowRemoteComponent(
   RemoteBadgeElement,
   {
     slotProps: {
-      wrapper: false,
+      wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {
       onClose: { event: "close" } as never,

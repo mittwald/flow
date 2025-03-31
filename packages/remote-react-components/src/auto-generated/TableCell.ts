@@ -14,7 +14,7 @@ export const TableCell = createFlowRemoteComponent(
   RemoteTableCellElement,
   {
     slotProps: {
-      wrapper: false,
+      wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {},
   },

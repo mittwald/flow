@@ -14,7 +14,7 @@ export const AreaChart = createFlowRemoteComponent(
   RemoteAreaChartElement,
   {
     slotProps: {
-      wrapper: false,
+      wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {},
   },

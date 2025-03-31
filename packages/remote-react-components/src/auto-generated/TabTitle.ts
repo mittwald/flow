@@ -14,7 +14,7 @@ export const TabTitle = createFlowRemoteComponent(
   RemoteTabTitleElement,
   {
     slotProps: {
-      wrapper: false,
+      wrapper: "flr-slot-root-wrapper",
     },
     eventProps: {
       onHoverChange: { event: "hoverChange" } as never,
