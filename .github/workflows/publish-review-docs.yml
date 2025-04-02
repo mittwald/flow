@@ -73,6 +73,7 @@ jobs:
           destination-repository-name: flow-previews
           target-branch: main
           target-directory: "${{ env.TARGET_PATH }}"
+          clear-target-directory: true
 
       - name: Output the URL
         run: echo "${{ job.environment.url }}"
