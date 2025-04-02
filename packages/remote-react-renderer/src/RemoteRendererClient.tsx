@@ -6,7 +6,7 @@ import type { RemoteComponentsMap } from "@/lib/types";
 import {
   RemoteReceiver,
   RemoteRootRenderer,
-} from "@mfalkenberg/remote-dom-react/host";
+} from "@mittwald/remote-dom-react/host";
 import type { ExtBridgeRemoteApi } from "@mittwald/ext-bridge";
 import {
   connectRemoteIframeRef,

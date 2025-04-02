@@ -3,8 +3,8 @@ import {
   isReactSuspendedStyle,
   isStyleProp,
 } from "@/lib/propClassifiers";
-import type { RemoteComponentRendererProps } from "@mfalkenberg/remote-dom-react/host";
-import { createRemoteComponentRenderer } from "@mfalkenberg/remote-dom-react/host";
+import type { RemoteComponentRendererProps } from "@mittwald/remote-dom-react/host";
+import { createRemoteComponentRenderer } from "@mittwald/remote-dom-react/host";
 import { mapEventHandler } from "@mittwald/flow-remote-core";
 import { type ComponentType } from "react";
 import { mapValues } from "remeda";

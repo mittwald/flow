@@ -1,8 +1,8 @@
 import type {
   RemoteComponentOptions,
   RemoteComponentTypeFromElementConstructor,
-} from "@mfalkenberg/remote-dom-react";
-import { createRemoteComponent } from "@mfalkenberg/remote-dom-react";
+} from "@mittwald/remote-dom-react";
+import { createRemoteComponent } from "@mittwald/remote-dom-react";
 import {
   ClearPropsContextContent,
   flowComponent,
