@@ -1,4 +1,4 @@
-import type { RemoteComponentRendererProps } from "@mfalkenberg/remote-dom-react/host";
+import type { RemoteComponentRendererProps } from "@mittwald/remote-dom-react/host";
 import type { Attributes, ReactElement } from "react";
 import React from "react";
 

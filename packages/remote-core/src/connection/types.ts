@@ -1,4 +1,4 @@
-import type { RemoteConnection } from "@mfalkenberg/remote-dom-core";
+import type { RemoteConnection } from "@mittwald/remote-dom-core";
 import type { ExtBridgeRemoteApi } from "@mittwald/ext-bridge";
 import type { ThreadIframe, ThreadNestedIframe } from "@quilted/threads";
 

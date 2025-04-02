@@ -4,7 +4,7 @@ import type {
   RemoteExports,
 } from "@/connection/types";
 import { emptyImplementation } from "@/ext-bridge/implementation";
-import type { RemoteConnection } from "@mfalkenberg/remote-dom-core/elements";
+import type { RemoteConnection } from "@mittwald/remote-dom-core/elements";
 import { type ExtBridgeRemoteApi } from "@mittwald/ext-bridge";
 import { ThreadIframe } from "@quilted/threads";
 

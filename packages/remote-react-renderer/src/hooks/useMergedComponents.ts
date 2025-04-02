@@ -1,6 +1,6 @@
 import { components } from "@/components";
 import type { RemoteComponentsMap } from "@/lib/types";
-import type { RemoteComponentRendererProps } from "@mfalkenberg/remote-dom-react/host";
+import type { RemoteComponentRendererProps } from "@mittwald/remote-dom-react/host";
 import { type ComponentType, useMemo } from "react";
 import { reduce } from "remeda";
 
