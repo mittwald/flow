@@ -3,6 +3,8 @@ list:
     value: "{size-px.s}"
   block-to-block-spacing:
     value: "{size-px.m}"
+  filter-to-search-spacing:
+    value: "{size-px.xxl}"
 
 list-item:
   corner-radius:
