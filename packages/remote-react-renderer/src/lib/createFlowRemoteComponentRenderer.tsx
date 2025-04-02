@@ -34,7 +34,5 @@ export const createFlowRemoteComponentRenderer = <P extends object>(
 
     return <Component {...hostComponentProps} />;
   }
-  return createRemoteComponentRenderer(
-    HostComponent,
-  ) as ComponentType<RemoteComponentRendererProps>;
+  return createRemoteComponentRenderer(HostComponent);
 };
