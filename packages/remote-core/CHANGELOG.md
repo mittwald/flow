@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.124](https://github.com/mittwald/flow/compare/0.2.0-alpha.123...0.2.0-alpha.124) (2025-04-02)
+
+**Note:** Version bump only for package @mittwald/flow-remote-core
+
 # [0.2.0-alpha.123](https://github.com/mittwald/flow/compare/0.2.0-alpha.122...0.2.0-alpha.123) (2025-04-02)
 
 ### Bug Fixes
