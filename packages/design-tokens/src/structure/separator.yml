@@ -3,3 +3,5 @@ separator:
     value: "{neutral-outline-border-color}"
   height:
     value: "{border-width.100}"
+  border-style:
+    value: "{border-style.default}"
