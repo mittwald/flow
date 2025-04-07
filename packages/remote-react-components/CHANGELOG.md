@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.128](https://github.com/mittwald/flow/compare/0.2.0-alpha.127...0.2.0-alpha.128) (2025-04-07)
+
+### Bug Fixes
+
+* update to bug-fixed remote packages [#2](https://github.com/mittwald/flow/issues/2) ([99654b5](https://github.com/mittwald/flow/commit/99654b533c08953145e1814df9c3414b60f361dc))
+
 # [0.2.0-alpha.127](https://github.com/mittwald/flow/compare/0.2.0-alpha.126...0.2.0-alpha.127) (2025-04-07)
 
 ### Bug Fixes
