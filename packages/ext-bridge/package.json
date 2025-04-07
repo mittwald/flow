@@ -28,7 +28,7 @@
     "test:compile": "tsc --noEmit"
   },
   "dependencies": {
-    "@mittwald/react-use-promise": "^3.0.3",
+    "@mittwald/react-use-promise": "^3.0.4",
     "axios": "^1.8.3",
     "jose": "^6.0.10",
     "std-env": "^3.8.1",
