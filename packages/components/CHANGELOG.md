@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.127](https://github.com/mittwald/flow/compare/0.2.0-alpha.126...0.2.0-alpha.127) (2025-04-07)
+
+### Bug Fixes
+
+* update lock file ([f52894b](https://github.com/mittwald/flow/commit/f52894b32c90bd9f38c49fd51f45ee6eca7c1377))
+
 # [0.2.0-alpha.126](https://github.com/mittwald/flow/compare/0.2.0-alpha.125...0.2.0-alpha.126) (2025-04-07)
 
 ### Bug Fixes
