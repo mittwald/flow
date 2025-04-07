@@ -94,7 +94,7 @@
     "@internationalized/date": "^3.7.0",
     "@mittwald/flow-design-tokens": "workspace:*",
     "@mittwald/react-use-promise": "^2.6.0",
-    "@mittwald/remote-dom-react": "1.2.2-mittwald.2",
+    "@mittwald/remote-dom-react": "1.2.2-mittwald.3",
     "@mittwald/typescript-config": "workspace:*",
     "@nx/storybook": "^20.5.0",
     "@storybook/addon-a11y": "^8.6.4",
