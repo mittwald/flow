@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.133](https://github.com/mittwald/flow/compare/0.2.0-alpha.132...0.2.0-alpha.133) (2025-04-08)
+
+### Features
+
+* **Rating:** Add Rating component ([#1350](https://github.com/mittwald/flow/issues/1350)) ([986a6d8](https://github.com/mittwald/flow/commit/986a6d80d2e1cf0d1ab4be75eaf7bc8c86e89ee8))
+
 # [0.2.0-alpha.132](https://github.com/mittwald/flow/compare/0.2.0-alpha.131...0.2.0-alpha.132) (2025-04-08)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components
