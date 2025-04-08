@@ -1,10 +1,10 @@
 /* auto-generated file */
 import React, { type ComponentProps, type FC } from "react";
-import { IconClock as Tabler } from "@tabler/icons-react";
+import { IconSparkles as Tabler } from "@tabler/icons-react";
 import { type Icon } from "@/components/Icon";
 import View from "@/views/IconView";
 
-export const IconClock: FC<Omit<ComponentProps<typeof Icon>, "children">> = (
+export const IconAI: FC<Omit<ComponentProps<typeof Icon>, "children">> = (
   props,
 ) => {
   return (
@@ -14,4 +14,4 @@ export const IconClock: FC<Omit<ComponentProps<typeof Icon>, "children">> = (
   );
 };
 
-export default IconClock;
+export default IconAI;

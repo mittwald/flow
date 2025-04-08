@@ -4,7 +4,7 @@ import { IconCalendar as Tabler } from "@tabler/icons-react";
 import { type Icon } from "@/components/Icon";
 import View from "@/views/IconView";
 
-export const IconCalendar: FC<Omit<ComponentProps<typeof Icon>, "children">> = (
+export const IconDate: FC<Omit<ComponentProps<typeof Icon>, "children">> = (
   props,
 ) => {
   return (
@@ -14,4 +14,4 @@ export const IconCalendar: FC<Omit<ComponentProps<typeof Icon>, "children">> = (
   );
 };
 
-export default IconCalendar;
+export default IconDate;

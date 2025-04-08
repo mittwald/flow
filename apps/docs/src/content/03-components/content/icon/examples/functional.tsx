@@ -1,5 +1,6 @@
 import {
   ColumnLayout,
+  IconAttachment,
   IconBackLink,
   IconCheck,
   IconCheckboxChecked,
@@ -21,12 +22,14 @@ import {
   IconFilter,
   IconHide,
   IconHome,
+  IconLink,
   IconLogout,
   IconMaximize,
   IconMenu,
   IconMinimize,
   IconMinus,
   IconNotification,
+  IconPause,
   IconPlus,
   IconRadioOff,
   IconRadioOn,
@@ -34,11 +37,14 @@ import {
   IconRefresh,
   IconSave,
   IconSearch,
+  IconSend,
   IconSettings,
   IconShare,
   IconShow,
   IconSorting,
+  IconStart,
   IconUndo,
+  IconUpload,
   IconView,
   Label,
   LabeledValue,
@@ -53,7 +59,6 @@ import {
     <Label>Notification</Label>
     <IconNotification />
   </LabeledValue>
-
   <LabeledValue>
     <Label>Logout</Label>
     <IconLogout />
@@ -79,11 +84,11 @@ import {
     <IconSorting />
   </LabeledValue>
   <LabeledValue>
-    <Label>Context Menu</Label>
+    <Label>ContextMenu</Label>
     <IconContextMenu />
   </LabeledValue>
   <LabeledValue>
-    <Label>Context Menu Vertical</Label>
+    <Label>ContextMenuVertical</Label>
     <IconContextMenuVertical />
   </LabeledValue>
   <LabeledValue>
@@ -123,19 +128,19 @@ import {
     <IconBackLink />
   </LabeledValue>
   <LabeledValue>
-    <Label>External Link</Label>
+    <Label>ExternalLink</Label>
     <IconExternalLink />
   </LabeledValue>
   <LabeledValue>
-    <Label>Chevron Down</Label>
+    <Label>ChevronDown</Label>
     <IconChevronDown />
   </LabeledValue>
   <LabeledValue>
-    <Label>Chevron Left</Label>
+    <Label>ChevronLeft</Label>
     <IconChevronLeft />
   </LabeledValue>
   <LabeledValue>
-    <Label>Chevron Right</Label>
+    <Label>ChevronRight</Label>
     <IconChevronRight />
   </LabeledValue>
   <LabeledValue>
@@ -167,15 +172,15 @@ import {
     <IconCode />
   </LabeledValue>
   <LabeledValue>
-    <Label>Checkbox Checked</Label>
+    <Label>CheckboxChecked</Label>
     <IconCheckboxChecked />
   </LabeledValue>
   <LabeledValue>
-    <Label>Checkbox Empty</Label>
+    <Label>CheckboxEmpty</Label>
     <IconCheckboxEmpty />
   </LabeledValue>
   <LabeledValue>
-    <Label>Checkbox Indeterminate</Label>
+    <Label>CheckboxIndeterminate</Label>
     <IconCheckboxIndeterminate />
   </LabeledValue>
   <LabeledValue>
@@ -205,5 +210,29 @@ import {
   <LabeledValue>
     <Label>Undo</Label>
     <IconUndo />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Upload</Label>
+    <IconUpload />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Send</Label>
+    <IconSend />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Attachment</Label>
+    <IconAttachment />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Pause</Label>
+    <IconPause />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Start</Label>
+    <IconStart />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Link</Label>
+    <IconLink />
   </LabeledValue>
 </ColumnLayout>;

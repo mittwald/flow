@@ -1,12 +1,12 @@
 /* auto-generated file */
 import React, { type ComponentProps, type FC } from "react";
-import { IconSparkles as Tabler } from "@tabler/icons-react";
+import { IconPackage as Tabler } from "@tabler/icons-react";
 import { type Icon } from "@/components/Icon";
 import View from "@/views/IconView";
 
-export const IconSparkles: FC<Omit<ComponentProps<typeof Icon>, "children">> = (
-  props,
-) => {
+export const IconContainer: FC<
+  Omit<ComponentProps<typeof Icon>, "children">
+> = (props) => {
   return (
     <View {...props}>
       <Tabler />
@@ -14,4 +14,4 @@ export const IconSparkles: FC<Omit<ComponentProps<typeof Icon>, "children">> = (
   );
 };
 
-export default IconSparkles;
+export default IconContainer;

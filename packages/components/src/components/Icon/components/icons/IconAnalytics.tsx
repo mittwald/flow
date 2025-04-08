@@ -1,10 +1,10 @@
 /* auto-generated file */
 import React, { type ComponentProps, type FC } from "react";
-import { IconFileDescription as Tabler } from "@tabler/icons-react";
+import { IconBrandSpeedtest as Tabler } from "@tabler/icons-react";
 import { type Icon } from "@/components/Icon";
 import View from "@/views/IconView";
 
-export const IconContractPartner: FC<
+export const IconAnalytics: FC<
   Omit<ComponentProps<typeof Icon>, "children">
 > = (props) => {
   return (
@@ -14,4 +14,4 @@ export const IconContractPartner: FC<
   );
 };
 
-export default IconContractPartner;
+export default IconAnalytics;
