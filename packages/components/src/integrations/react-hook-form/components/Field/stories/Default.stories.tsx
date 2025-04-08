@@ -58,6 +58,7 @@ const meta: Meta<typeof Field> = {
         gender: "",
         storage: 200,
         testing: true,
+        domain: "mydomain.de",
       },
     });
 
