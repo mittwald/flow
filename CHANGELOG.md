@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.130](https://github.com/mittwald/flow/compare/0.2.0-alpha.129...0.2.0-alpha.130) (2025-04-08)
+
+### Features
+
+* **Icon:** Update Icons ([#1348](https://github.com/mittwald/flow/issues/1348)) ([4d65b99](https://github.com/mittwald/flow/commit/4d65b99f6d8842e4b4922a56f0de9add6e321a64))
+
 # [0.2.0-alpha.129](https://github.com/mittwald/flow/compare/0.2.0-alpha.128...0.2.0-alpha.129) (2025-04-08)
 
 **Note:** Version bump only for package @mittwald/flow-project
