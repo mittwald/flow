@@ -28,3 +28,26 @@ export const LongText: Story = {
     </ProgressBar>
   ),
 };
+
+export const WithManySegments: Story = {
+  args: {
+    segments: [
+      { title: "Item 1", value: 5 },
+      { title: "Item 2", value: 10 },
+      { title: "Item 3", value: 4 },
+      { title: "Item 4", value: 7 },
+      { title: "Item 5", value: 12 },
+      { title: "Item 6", value: 24 },
+      { title: "Item 7", value: 5 },
+      { title: "Item 8", value: 8 },
+      { title: "Item 9", value: 3 },
+      { title: "Item 10", value: 6 },
+      { title: "Item 11", value: 16 },
+    ],
+  },
+  render: (props) => (
+    <ProgressBar {...props}>
+      <Label>Storage</Label>
+    </ProgressBar>
+  ),
+};

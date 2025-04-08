@@ -6,10 +6,10 @@ import clsx from "clsx";
 import type { PropsWithStatus } from "@/lib/types/props";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
-import type { CategoricalColors } from "@/lib/tokens/CategoricalColors";
 import { ProgressBarValue } from "@/components/ProgressBar/components/ProgressBarValue";
 import { ProgressBarBar } from "@/components/ProgressBar/components/ProgressBarBar";
 import { ProgressBarLegend } from "@/components/ProgressBar/components/ProgressBarLegend";
+import type { CategoricalColors } from "@/lib/tokens/CategoricalColors";
 
 export interface ProgressBarProps
   extends PropsWithChildren<Omit<Aria.ProgressBarProps, "children">>,
@@ -19,7 +19,7 @@ export interface ProgressBarProps
   /** The size variant of the progress bar. @default "m" */
   size?: "s" | "m" | "l";
   /** Divides the fill of the progress bar into segments */
-  segments?: { color: CategoricalColors; value: number; title: string }[];
+  segments?: { value: number; title: string; color?: CategoricalColors }[];
   /**
    * Whether the legend component is shown when segments are used. @default:
    * true

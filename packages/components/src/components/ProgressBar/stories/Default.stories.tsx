@@ -70,8 +70,8 @@ export const Small: Story = {
 export const WithSegments: Story = {
   args: {
     segments: [
-      { title: "Item 1", value: 20, color: "violet" },
-      { title: "Item 2", value: 30, color: "sea-green" },
+      { title: "Item 1", value: 20 },
+      { title: "Item 2", value: 30 },
     ],
     size: "l",
   },
@@ -88,8 +88,8 @@ export const WithSegmentsAndUnit: Story = {
     showMaxValue: true,
     maxValue: 60,
     segments: [
-      { title: "Backups", value: 20, color: "violet" },
-      { title: "Databases", value: 30, color: "sea-green" },
+      { title: "Backups", value: 20 },
+      { title: "Databases", value: 30 },
     ],
     size: "l",
   },
@@ -106,8 +106,8 @@ export const WithSegmentsAndWithoutLegend: Story = {
     showMaxValue: true,
     maxValue: 60,
     segments: [
-      { title: "Backups", value: 20, color: "violet" },
-      { title: "Databases", value: 30, color: "sea-green" },
+      { title: "Backups", value: 20 },
+      { title: "Databases", value: 30 },
     ],
     size: "s",
     showLegend: false,
