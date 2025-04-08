@@ -1,4 +1,5 @@
 import {
+  Flex,
   Heading,
   ListItemView,
   ListSummary,
@@ -16,11 +17,11 @@ export default () => {
   return (
     <InvoiceList.List batchSize={5} aria-label="Invoices">
       <ListSummary>
-        <Text
-          style={{ display: "block", textAlign: "right" }}
-        >
-          <b>Gesamt: 41,00 €</b>
-        </Text>
+        <Flex justify="end">
+          <Text>
+            <b>Gesamt: 41,00 €</b>
+          </Text>
+        </Flex>
       </ListSummary>
       <InvoiceList.StaticData
         data={[

@@ -18,7 +18,7 @@ export interface TableCellShape<T> extends TableCellSupportedComponentProps {
 /** Row */
 export type TableRowSupportedComponentProps = Omit<
   TableRowProps,
-  "onAction" | "children"
+  "onAction" | "children" | "footer"
 >;
 export interface TableRowShape<T>
   extends TableRowSupportedComponentProps,
