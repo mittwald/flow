@@ -3,18 +3,13 @@ import {
   AreaChart,
   CartesianGrid,
   ChartTooltip,
+  Flex,
   Legend,
   XAxis,
   YAxis,
 } from "@mittwald/flow-react-components";
 
-<div
-  style={{
-    display: "flex",
-    flexDirection: "column",
-    gap: "16px",
-  }}
->
+<Flex direction="column" gap="m">
   <AreaChart
     data={[
       {
@@ -81,4 +76,4 @@ import {
     <ChartTooltip />
     <Legend />
   </AreaChart>
-</div>;
+</Flex>;
