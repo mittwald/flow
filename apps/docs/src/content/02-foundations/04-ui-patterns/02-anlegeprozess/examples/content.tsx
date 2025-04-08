@@ -12,7 +12,7 @@ import {
   Heading,
   IconDomain,
   IconHome,
-  IconInvoice,
+  IconPayment,
   IconSubdomain,
   Initials,
   Label,
@@ -112,7 +112,7 @@ export default () => {
             </Align>
             <Align>
               <Avatar color="blue">
-                <IconInvoice />
+                <IconPayment />
               </Avatar>
               <Text>
                 <b>Rechnung</b>

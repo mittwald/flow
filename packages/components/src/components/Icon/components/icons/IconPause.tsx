@@ -1,10 +1,10 @@
 /* auto-generated file */
 import React, { type ComponentProps, type FC } from "react";
-import { IconBulb as Tabler } from "@tabler/icons-react";
+import { IconPlayerPause as Tabler } from "@tabler/icons-react";
 import { type Icon } from "@/components/Icon";
 import View from "@/views/IconView";
 
-export const IconBulb: FC<Omit<ComponentProps<typeof Icon>, "children">> = (
+export const IconPause: FC<Omit<ComponentProps<typeof Icon>, "children">> = (
   props,
 ) => {
   return (
@@ -14,4 +14,4 @@ export const IconBulb: FC<Omit<ComponentProps<typeof Icon>, "children">> = (
   );
 };
 
-export default IconBulb;
+export default IconPause;

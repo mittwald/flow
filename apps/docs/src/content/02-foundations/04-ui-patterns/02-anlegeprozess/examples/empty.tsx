@@ -10,7 +10,7 @@ import {
   Header,
   Heading,
   IconDomain,
-  IconInvoice,
+  IconPayment,
   IllustratedMessage,
   Initials,
   Label,
@@ -92,7 +92,7 @@ import {
               </Align>
               <Align>
                 <Avatar color="blue">
-                  <IconInvoice />
+                  <IconPayment />
                 </Avatar>
                 <Text>
                   <b>Rechnung</b>

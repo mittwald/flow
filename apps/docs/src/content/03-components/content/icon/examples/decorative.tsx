@@ -1,20 +1,21 @@
 import {
   ColumnLayout,
+  IconAI,
+  IconAnalytics,
   IconApp,
   IconAutoresponder,
   IconBackup,
-  IconBulb,
-  IconCalendar,
   IconCamera,
   IconCertificate,
   IconChangelog,
-  IconClock,
+  IconContainer,
   IconContract,
-  IconContractPartner,
+  IconContributor,
   IconCronjob,
   IconCustomer,
   IconDashboard,
   IconDatabase,
+  IconDate,
   IconDeliveryBox,
   IconDesktop,
   IconDirectory,
@@ -22,26 +23,25 @@ import {
   IconEmail,
   IconExtension,
   IconFile,
-  IconForward,
-  IconInbox,
-  IconInvoice,
-  IconLink,
+  IconForwardAddress,
+  IconLeadFyndr,
+  IconMainUser,
+  IconMarketplace,
   IconMember,
   IconMittwald,
   IconMobile,
+  IconMonitoring,
   IconMove,
   IconNumber,
   IconOrder,
   IconPassword,
   IconPayment,
-  IconPerformance,
+  IconPicture,
   IconProject,
-  IconSearchEngine,
+  IconRegistry,
   IconSecurity,
   IconServer,
-  IconSpamProtectionOff,
-  IconSpamProtectionOn,
-  IconSparkles,
+  IconSsh,
   IconSshKey,
   IconSshSftp,
   IconStar,
@@ -50,8 +50,10 @@ import {
   IconSupport,
   IconTerminate,
   IconTicket,
+  IconTime,
   IconUser,
   IconVhost,
+  IconVolume,
   Label,
   LabeledValue,
 } from "@mittwald/flow-react-components";
@@ -66,12 +68,12 @@ import {
     <IconStar />
   </LabeledValue>
   <LabeledValue>
-    <Label>Star Filled</Label>
+    <Label>StarFilled</Label>
     <IconStarFilled />
   </LabeledValue>
   <LabeledValue>
-    <Label>Sparkles</Label>
-    <IconSparkles />
+    <Label>AI</Label>
+    <IconAI />
   </LabeledValue>
   <LabeledValue>
     <Label>Project</Label>
@@ -90,11 +92,11 @@ import {
     <IconSupport />
   </LabeledValue>
   <LabeledValue>
-    <Label>E-Mail</Label>
+    <Label>Email</Label>
     <IconEmail />
   </LabeledValue>
   <LabeledValue>
-    <Label>Delivery Box</Label>
+    <Label>DeliveryBox</Label>
     <IconDeliveryBox />
   </LabeledValue>
   <LabeledValue>
@@ -146,20 +148,20 @@ import {
     <IconOrder />
   </LabeledValue>
   <LabeledValue>
-    <Label>Performance</Label>
-    <IconPerformance />
+    <Label>Monitoring</Label>
+    <IconMonitoring />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Analytics</Label>
+    <IconAnalytics />
   </LabeledValue>
   <LabeledValue>
     <Label>Ticket</Label>
     <IconTicket />
   </LabeledValue>
   <LabeledValue>
-    <Label>ContractPartner</Label>
-    <IconContractPartner />
-  </LabeledValue>
-  <LabeledValue>
-    <Label>Invoice</Label>
-    <IconInvoice />
+    <Label>Contributor</Label>
+    <IconContributor />
   </LabeledValue>
   <LabeledValue>
     <Label>Payment</Label>
@@ -190,36 +192,36 @@ import {
     <IconUser />
   </LabeledValue>
   <LabeledValue>
-    <Label>Search Engine</Label>
-    <IconSearchEngine />
+    <Label>Marketplace</Label>
+    <IconMarketplace />
   </LabeledValue>
   <LabeledValue>
-    <Label>Ssh Sftp</Label>
+    <Label>SshSftp</Label>
     <IconSshSftp />
   </LabeledValue>
   <LabeledValue>
-    <Label>Inbox</Label>
-    <IconInbox />
+    <Label>LeadFyndr</Label>
+    <IconLeadFyndr />
   </LabeledValue>
   <LabeledValue>
-    <Label>Spam Protection Off</Label>
-    <IconSpamProtectionOff />
+    <Label>Container</Label>
+    <IconContainer />
   </LabeledValue>
   <LabeledValue>
-    <Label>Spam Protection On</Label>
-    <IconSpamProtectionOn />
+    <Label>Volume</Label>
+    <IconVolume />
   </LabeledValue>
   <LabeledValue>
     <Label>Number</Label>
     <IconNumber />
   </LabeledValue>
   <LabeledValue>
-    <Label>Clock</Label>
-    <IconClock />
+    <Label>Time</Label>
+    <IconTime />
   </LabeledValue>
   <LabeledValue>
-    <Label>Calendar</Label>
-    <IconCalendar />
+    <Label>Date</Label>
+    <IconDate />
   </LabeledValue>
   <LabeledValue>
     <Label>Dashboard</Label>
@@ -238,8 +240,8 @@ import {
     <IconSshKey />
   </LabeledValue>
   <LabeledValue>
-    <Label>Forward</Label>
-    <IconForward />
+    <Label>ForwardAddress</Label>
+    <IconForwardAddress />
   </LabeledValue>
   <LabeledValue>
     <Label>Autoresponder</Label>
@@ -258,11 +260,19 @@ import {
     <IconMobile />
   </LabeledValue>
   <LabeledValue>
-    <Label>Bulb</Label>
-    <IconBulb />
+    <Label>Registry</Label>
+    <IconRegistry />
   </LabeledValue>
   <LabeledValue>
-    <Label>Link</Label>
-    <IconLink />
+    <Label>Picture</Label>
+    <IconPicture />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>MainUser</Label>
+    <IconMainUser />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Ssh</Label>
+    <IconSsh />
   </LabeledValue>
 </ColumnLayout>;

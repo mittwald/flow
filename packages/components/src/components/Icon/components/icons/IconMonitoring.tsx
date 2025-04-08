@@ -4,7 +4,7 @@ import { IconChartHistogram as Tabler } from "@tabler/icons-react";
 import { type Icon } from "@/components/Icon";
 import View from "@/views/IconView";
 
-export const IconPerformance: FC<
+export const IconMonitoring: FC<
   Omit<ComponentProps<typeof Icon>, "children">
 > = (props) => {
   return (
@@ -14,4 +14,4 @@ export const IconPerformance: FC<
   );
 };
 
-export default IconPerformance;
+export default IconMonitoring;

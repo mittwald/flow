@@ -1,12 +1,12 @@
 /* auto-generated file */
 import React, { type ComponentProps, type FC } from "react";
-import { IconFileDescription as Tabler } from "@tabler/icons-react";
+import { IconArrowRight as Tabler } from "@tabler/icons-react";
 import { type Icon } from "@/components/Icon";
 import View from "@/views/IconView";
 
-export const IconContract: FC<Omit<ComponentProps<typeof Icon>, "children">> = (
-  props,
-) => {
+export const IconForwardAddress: FC<
+  Omit<ComponentProps<typeof Icon>, "children">
+> = (props) => {
   return (
     <View {...props}>
       <Tabler />
@@ -14,4 +14,4 @@ export const IconContract: FC<Omit<ComponentProps<typeof Icon>, "children">> = (
   );
 };
 
-export default IconContract;
+export default IconForwardAddress;

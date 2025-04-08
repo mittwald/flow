@@ -1,10 +1,10 @@
 /* auto-generated file */
 import React, { type ComponentProps, type FC } from "react";
-import { IconShield as Tabler } from "@tabler/icons-react";
+import { IconHeartHandshake as Tabler } from "@tabler/icons-react";
 import { type Icon } from "@/components/Icon";
 import View from "@/views/IconView";
 
-export const IconSpamProtectionOff: FC<
+export const IconContributor: FC<
   Omit<ComponentProps<typeof Icon>, "children">
 > = (props) => {
   return (
@@ -14,4 +14,4 @@ export const IconSpamProtectionOff: FC<
   );
 };
 
-export default IconSpamProtectionOff;
+export default IconContributor;

@@ -3,7 +3,7 @@ import React from "react";
 import styles from "./DateRangeInput.module.scss";
 import * as Aria from "react-aria-components";
 import { Button } from "@/components/Button";
-import { IconCalendar } from "@/components/Icon/components/icons";
+import { IconDate } from "@/components/Icon/components/icons";
 
 export interface DateInputProps {
   isDisabled?: boolean;
@@ -24,7 +24,7 @@ export const DateRangeInput: FC<DateInputProps> = (props) => {
         </Aria.DateInput>
       </div>
       <Button variant="plain" color="secondary" isDisabled={isDisabled}>
-        <IconCalendar />
+        <IconDate />
       </Button>
     </Aria.Group>
   );
