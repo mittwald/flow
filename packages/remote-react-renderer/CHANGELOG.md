@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.131](https://github.com/mittwald/flow/compare/0.2.0-alpha.130...0.2.0-alpha.131) (2025-04-08)
+
+### Features
+
+* **BigNumber:** Add BigNumber component ([#1349](https://github.com/mittwald/flow/issues/1349)) ([c75c17f](https://github.com/mittwald/flow/commit/c75c17fb2539168cfde3a47058b2e5e887ec8a93))
+
 # [0.2.0-alpha.130](https://github.com/mittwald/flow/compare/0.2.0-alpha.129...0.2.0-alpha.130) (2025-04-08)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-renderer
