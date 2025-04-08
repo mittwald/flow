@@ -1,0 +1,19 @@
+.rating {
+  display: flex;
+
+  .star {
+    color: var(--rating--star-color);
+  }
+  .starFilled {
+    color: var(--rating--star-filled-color);
+  }
+
+  @mixin size($size) {
+    &.size-#{$size} {
+      column-gap: var(--rating--spacing--#{$size});
+    }
+  }
+
+  @include size(s);
+  @include size(m);
+}

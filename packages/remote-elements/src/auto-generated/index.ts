@@ -83,6 +83,7 @@ export * from "./RemoteProgressBarElement";
 export * from "./RemoteRadioElement";
 export * from "./RemoteRadioButtonElement";
 export * from "./RemoteRadioGroupElement";
+export * from "./RemoteRatingElement";
 export * from "./RemoteSearchFieldElement";
 export * from "./RemoteSectionElement";
 export * from "./RemoteSegmentElement";

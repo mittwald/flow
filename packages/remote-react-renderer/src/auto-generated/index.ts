@@ -84,6 +84,7 @@ import { ProgressBar as ProgressBar } from "@mittwald/flow-react-components";
 import { Radio as Radio } from "@mittwald/flow-react-components";
 import { RadioButton as RadioButton } from "@mittwald/flow-react-components";
 import { RadioGroup as RadioGroup } from "@mittwald/flow-react-components";
+import { Rating as Rating } from "@mittwald/flow-react-components";
 import { SearchField as SearchField } from "@mittwald/flow-react-components";
 import { Section as Section } from "@mittwald/flow-react-components";
 import { Segment as Segment } from "@mittwald/flow-react-components";
@@ -207,6 +208,7 @@ export const flowComponents = {
   "flr-radio": createFlowRemoteComponentRenderer(Radio),
   "flr-radio-button": createFlowRemoteComponentRenderer(RadioButton),
   "flr-radio-group": createFlowRemoteComponentRenderer(RadioGroup),
+  "flr-rating": createFlowRemoteComponentRenderer(Rating),
   "flr-search-field": createFlowRemoteComponentRenderer(SearchField),
   "flr-section": createFlowRemoteComponentRenderer(Section),
   "flr-segment": createFlowRemoteComponentRenderer(Segment),
