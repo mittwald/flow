@@ -1,5 +1,3 @@
-import type { CategoricalColors } from "@/lib/tokens/CategoricalColors";
-
 export const getCategoricalColorByIndex = (index: number) => {
   switch (index) {
     case 0:
