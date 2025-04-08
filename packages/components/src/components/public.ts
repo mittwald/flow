@@ -11,6 +11,7 @@ export * from "@/components/AreaChart";
 export * from "@/components/Avatar";
 export * from "@/components/AvatarStack";
 export * from "@/components/Badge";
+export * from "@/components/BigNumber";
 export * from "@/components/Breadcrumb";
 export * from "@/components/Button";
 export * from "@/components/CartesianGrid";

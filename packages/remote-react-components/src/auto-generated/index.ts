@@ -12,6 +12,7 @@ export * from "./AreaChart";
 export * from "./Avatar";
 export * from "./AvatarStack";
 export * from "./Badge";
+export * from "./BigNumber";
 export * from "./Breadcrumb";
 export * from "./Button";
 export * from "./CartesianGrid";

@@ -13,6 +13,7 @@ import { AreaChart as AreaChart } from "@mittwald/flow-react-components";
 import { Avatar as Avatar } from "@mittwald/flow-react-components";
 import { AvatarStack as AvatarStack } from "@mittwald/flow-react-components";
 import { Badge as Badge } from "@mittwald/flow-react-components";
+import { BigNumber as BigNumber } from "@mittwald/flow-react-components";
 import { Breadcrumb as Breadcrumb } from "@mittwald/flow-react-components";
 import { Button as Button } from "@mittwald/flow-react-components";
 import { CartesianGrid as CartesianGrid } from "@mittwald/flow-react-components";
@@ -125,6 +126,7 @@ export const flowComponents = {
   "flr-avatar": createFlowRemoteComponentRenderer(Avatar),
   "flr-avatar-stack": createFlowRemoteComponentRenderer(AvatarStack),
   "flr-badge": createFlowRemoteComponentRenderer(Badge),
+  "flr-big-number": createFlowRemoteComponentRenderer(BigNumber),
   "flr-breadcrumb": createFlowRemoteComponentRenderer(Breadcrumb),
   "flr-button": createFlowRemoteComponentRenderer(Button),
   "flr-cartesian-grid": createFlowRemoteComponentRenderer(CartesianGrid),
