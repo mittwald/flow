@@ -9,7 +9,7 @@ import {
 
 <ColumnLayout>
   <AccentBox>
-    <Flex direction="column" gap="xs" align="center">
+    <Flex direction="column" gap="s" align="center">
       <BigNumber>
         <Text>250 ms</Text>
         <Text>Dateioperationen</Text>
