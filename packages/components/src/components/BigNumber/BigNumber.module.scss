@@ -1,0 +1,17 @@
+.bigNumber {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  row-gap: var(--big-number--spacing);
+  font-size: var(--big-number--top-font-size);
+  font-weight: var(--big-number--font-weight);
+
+  .text {
+    text-align: center;
+
+    &:not(:first-child) {
+      font-size: var(--big-number--bottom-font-size);
+    }
+  }
+}

@@ -12,6 +12,7 @@ export * from "./RemoteAreaChartElement";
 export * from "./RemoteAvatarElement";
 export * from "./RemoteAvatarStackElement";
 export * from "./RemoteBadgeElement";
+export * from "./RemoteBigNumberElement";
 export * from "./RemoteBreadcrumbElement";
 export * from "./RemoteButtonElement";
 export * from "./RemoteCartesianGridElement";
