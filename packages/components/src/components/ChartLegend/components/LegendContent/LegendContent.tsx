@@ -1,8 +1,8 @@
 import type { Props } from "recharts/types/component/DefaultLegendContent";
 import type { WithChartLegendFormatters } from "../../ChartLegend";
 import type { FC } from "react";
-import tokens from "@mittwald/flow-design-tokens/variables.json";
 import Legend, { LegendItem } from "@/components/Legend";
+import type { CategoricalColors } from "@/lib/tokens/CategoricalColors";
 
 type LegendContentType = Omit<Props, "formatter"> & WithChartLegendFormatters;
 
@@ -22,19 +22,18 @@ const LegendContent: FC<LegendContentType> = (props) => {
           return (
             <LegendItem
               key={`legendItem-${index}`}
-              title={
-                entry.dataKey
-                  ? formatter
-                    ? formatter(entry.dataKey?.toString())
-                    : entry.dataKey.toString()
-                  : ""
-              }
               color={
                 entry.payload && "fill" in entry.payload
-                  ? (entry.payload?.fill as string)
-                  : tokens.color.gray[100].value
+                  ? (entry.payload?.fill as CategoricalColors)
+                  : undefined
               }
-            />
+            >
+              {entry.dataKey
+                ? formatter
+                  ? formatter(entry.dataKey?.toString())
+                  : entry.dataKey.toString()
+                : ""}
+            </LegendItem>
           );
         })}
     </Legend>

@@ -1,33 +1,28 @@
 import Text from "@/components/Text";
-import type { FC } from "react";
+import type { FC, PropsWithChildren } from "react";
 import styles from "./LegendItem.module.scss";
-import {
-  categoricalColors,
-  type CategoricalColors,
-} from "@/lib/tokens/CategoricalColors";
+import { type CategoricalColors } from "@/lib/tokens/CategoricalColors";
 import { getCategoricalColorValue } from "@/lib/tokens/getCategoricalColorValue";
+import tokens from "@mittwald/flow-design-tokens/variables.json";
 
-export interface LegendItemProps {
-  color: string | CategoricalColors;
-  title: string;
+export interface LegendItemProps extends PropsWithChildren {
+  color?: CategoricalColors;
 }
 
 export const LegendItem: FC<LegendItemProps> = (props) => {
-  const { title, color } = props;
+  const { children, color } = props;
   return (
     <li className={styles.legendItem}>
       <div
         className={styles.colorSquare}
         style={{
-          backgroundColor: categoricalColors.includes(
-            color as CategoricalColors,
-          )
-            ? getCategoricalColorValue(color as CategoricalColors)
-            : color,
+          backgroundColor: color
+            ? getCategoricalColorValue(color)
+            : tokens.color.gray[100].value,
         }}
       />
       <Text>
-        <small>{title}</small>
+        <small>{children}</small>
       </Text>
     </li>
   );

@@ -14,7 +14,7 @@ const meta: Meta<typeof ProgressBar> = {
     },
     size: {
       control: "inline-radio",
-      options: ["s", "m"],
+      options: ["s", "m", "l"],
     },
   },
   render: (props) => (
@@ -65,4 +65,56 @@ export const WithMaxValue: Story = {
 
 export const Small: Story = {
   args: { size: "s" },
+};
+
+export const WithSegments: Story = {
+  args: {
+    segments: [
+      { title: "Item 1", value: 20, color: "violet" },
+      { title: "Item 2", value: 30, color: "sea-green" },
+    ],
+    size: "l",
+  },
+  render: (props) => (
+    <ProgressBar {...props}>
+      <Label>Storage</Label>
+    </ProgressBar>
+  ),
+};
+
+export const WithSegmentsAndUnit: Story = {
+  args: {
+    formatOptions: { style: "unit", unit: "gigabyte" },
+    showMaxValue: true,
+    maxValue: 60,
+    segments: [
+      { title: "Backups", value: 20, color: "violet" },
+      { title: "Databases", value: 30, color: "sea-green" },
+    ],
+    size: "l",
+  },
+  render: (props) => (
+    <ProgressBar {...props}>
+      <Label>Storage</Label>
+    </ProgressBar>
+  ),
+};
+
+export const WithSegmentsAndWithoutLegend: Story = {
+  args: {
+    formatOptions: { style: "unit", unit: "gigabyte" },
+    showMaxValue: true,
+    maxValue: 60,
+    segments: [
+      { title: "Backups", value: 20, color: "violet" },
+      { title: "Databases", value: 30, color: "sea-green" },
+    ],
+    size: "s",
+    showLegend: false,
+  },
+  render: (props) => (
+    <ProgressBar {...props}>
+      <Label>Storage</Label>
+    </ProgressBar>
+  ),
 };

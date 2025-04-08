@@ -3,19 +3,28 @@ import type { FC, PropsWithChildren } from "react";
 import React from "react";
 import styles from "./ProgressBar.module.scss";
 import clsx from "clsx";
-import { useLocalizedStringFormatter, useNumberFormatter } from "react-aria";
 import type { PropsWithStatus } from "@/lib/types/props";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
-import locales from "./locales/*.locale.json";
+import type { CategoricalColors } from "@/lib/tokens/CategoricalColors";
+import { ProgressBarValue } from "@/components/ProgressBar/components/ProgressBarValue";
+import { ProgressBarBar } from "@/components/ProgressBar/components/ProgressBarBar";
+import { ProgressBarLegend } from "@/components/ProgressBar/components/ProgressBarLegend";
 
 export interface ProgressBarProps
   extends PropsWithChildren<Omit<Aria.ProgressBarProps, "children">>,
     PropsWithStatus {
   /** Whether the max value should be displayed. */
   showMaxValue?: boolean;
-  /** The size variant of the progress bar @default "m" */
-  size?: "s" | "m";
+  /** The size variant of the progress bar. @default "m" */
+  size?: "s" | "m" | "l";
+  /** Divides the fill of the progress bar into segments */
+  segments?: { color: CategoricalColors; value: number; title: string }[];
+  /**
+   * Whether the legend component is shown when segments are used. @default:
+   * true
+   */
+  showLegend?: boolean;
 }
 
 /**
@@ -29,6 +38,11 @@ export const ProgressBar: FC<ProgressBarProps> = (props) => {
     status = "info",
     showMaxValue,
     size = "m",
+    segments,
+    value,
+    formatOptions,
+    showLegend = true,
+    maxValue,
     ...rest
   } = props;
 
@@ -39,15 +53,6 @@ export const ProgressBar: FC<ProgressBarProps> = (props) => {
     styles[status],
   );
 
-  const stringFormatter = useLocalizedStringFormatter(locales);
-
-  const formatter = useNumberFormatter(props.formatOptions);
-
-  const maxValueText =
-    showMaxValue && props.maxValue
-      ? formatter.format(props.maxValue)
-      : undefined;
-
   const propsContext: PropsContext = {
     Label: {
       className: styles.label,
@@ -55,22 +60,45 @@ export const ProgressBar: FC<ProgressBarProps> = (props) => {
     },
   };
 
+  const segmentsTotalValue = segments
+    ? segments.map((s) => s.value).reduce((a, b) => a + b, 0)
+    : undefined;
+
   return (
-    <Aria.ProgressBar className={rootClassName} {...rest}>
-      {({ percentage, valueText }) => (
-        <PropsContextProvider props={propsContext}>
-          {children}
-          <span className={styles.value}>
-            {maxValueText
-              ? `${valueText} ${stringFormatter.format("progressBar.of")} ${maxValueText}`
-              : valueText}
-          </span>
-          <div className={styles.bar}>
-            <div className={styles.fill} style={{ width: percentage + "%" }} />
-          </div>
-        </PropsContextProvider>
-      )}
-    </Aria.ProgressBar>
+    <>
+      <Aria.ProgressBar
+        className={rootClassName}
+        value={segmentsTotalValue ?? value}
+        formatOptions={formatOptions}
+        maxValue={maxValue}
+        {...rest}
+      >
+        {({ percentage, valueText }) => (
+          <PropsContextProvider props={propsContext}>
+            {children}
+
+            <ProgressBarValue
+              showMaxValue={showMaxValue}
+              maxValue={maxValue}
+              valueText={valueText}
+              formatOptions={formatOptions}
+            />
+
+            <ProgressBarBar
+              percentage={percentage}
+              segmentsTotalValue={segmentsTotalValue}
+              segments={segments}
+            />
+
+            <ProgressBarLegend
+              showLegend={showLegend}
+              segments={segments}
+              formatOptions={formatOptions}
+            />
+          </PropsContextProvider>
+        )}
+      </Aria.ProgressBar>
+    </>
   );
 };
 
