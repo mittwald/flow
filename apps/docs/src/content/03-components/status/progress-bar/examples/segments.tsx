@@ -7,15 +7,16 @@ import {
   value={500}
   maxValue={1000}
   size="l"
+  showMaxValue
   formatOptions={{ style: "unit", unit: "gigabyte" }}
   segments={[
     { value: 280, title: "E-Mails" },
     {
-      value: 150,
+      value: 170,
       title: "Datenbanken",
     },
     {
-      value: 150,
+      value: 110,
       title: "Backups",
     },
   ]}
