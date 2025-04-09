@@ -19,6 +19,7 @@ export interface RemoteRendererBrowserProps {
   integrations?: RemoteComponentsMap<never>[];
   src: string;
   timeoutMs?: number;
+  onPathnameChanged?: (pathname: string) => void;
   extBridgeImplementation?: ExtBridgeConnectionApi;
 }
 
@@ -39,6 +40,7 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
     timeoutMs = 10_000,
     src,
     extBridgeImplementation,
+    onPathnameChanged,
   } = props;
 
   const renderAwaiter = useAwaiter([src]);
@@ -68,6 +70,7 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
     extBridgeImplementation: extBridgeImplementation,
     onReady: connectionAwaiter.resolve,
     onError: setRemoteError,
+    onPathnameChanged,
   });
 
   const timeoutPromise = (message: string) =>

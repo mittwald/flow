@@ -5,6 +5,7 @@ import type { ThreadIframe, ThreadNestedIframe } from "@quilted/threads";
 export interface HostExports extends ExtBridgeConnectionApi {
   setIsReady: () => Promise<void>;
   setError: (error: string) => Promise<void>;
+  setPathname: (pathname: string) => Promise<void>;
 }
 
 export interface RemoteExports {
