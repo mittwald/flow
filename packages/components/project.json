@@ -6,7 +6,8 @@
       "default",
       "{projectRoot}/src/**/*",
       "!{projectRoot}/src/views/*",
-      "!{projectRoot}/src/components/**/view.ts"
+      "!{projectRoot}/src/components/**/view.ts",
+      "!{projectRoot}/src/**/*.yaml"
     ]
   },
   "projectType": "library",
@@ -16,12 +17,9 @@
       "cache": true,
       "inputs": [
         "{projectRoot}/dev/icons/**/*",
-        "{projectRoot}/src/components/Icon/tablerMappings.yaml"
+        "{projectRoot}/src/components/Icon/icons.yaml"
       ],
-      "outputs": [
-        "{projectRoot}/src/components/Icon/components/icons/*.tsx",
-        "{projectRoot}/src/components/Icon/components/icons/index.ts"
-      ]
+      "outputs": ["{projectRoot}/src/components/Icon/components/icons/*"]
     },
     "build:remote-components": {
       "cache": true,
@@ -47,6 +45,7 @@
       "cache": true,
       "inputs": [
         "components-src",
+        "!{projectRoot}/src/components/Icon/components/icons/*",
         "{projectRoot}/dev/createDocPropertiesJson.ts"
       ],
       "outputs": ["{projectRoot}/dist/assets/doc-properties.json"]
