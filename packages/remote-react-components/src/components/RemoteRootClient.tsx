@@ -1,5 +1,6 @@
 "use client";
 import * as viewComponents from "@/auto-generated";
+import { useWatchPathname } from "@/hooks/useWatchPathname";
 import { stringifyError } from "@/lib/stringifyError";
 import type { ExtBridgeRemoteApi } from "@mittwald/ext-bridge";
 import { ViewComponentContextProvider } from "@mittwald/flow-react-components/internal";
@@ -24,6 +25,10 @@ export const RemoteRootClient: FC<RootClientProps> = (props) => {
     errorRef.current = error;
     connectionRef.current?.imports.setError(stringifyError(error));
   };
+
+  useWatchPathname((pathname) =>
+    connectionRef.current?.imports.setPathname(pathname),
+  );
 
   return (
     <div

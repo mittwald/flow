@@ -3,22 +3,23 @@
 import { useAwaiter } from "@/hooks/useAwaiter";
 import { useMergedComponents } from "@/hooks/useMergedComponents";
 import type { RemoteComponentsMap } from "@/lib/types";
-import {
-  RemoteReceiver,
-  RemoteRootRenderer,
-} from "@mittwald/remote-dom-react/host";
 import type { ExtBridgeRemoteApi } from "@mittwald/ext-bridge";
 import {
   connectRemoteIframeRef,
   RemoteError,
 } from "@mittwald/flow-remote-core";
 import { usePromise } from "@mittwald/react-use-promise";
+import {
+  RemoteReceiver,
+  RemoteRootRenderer,
+} from "@mittwald/remote-dom-react/host";
 import { type CSSProperties, type FC, useMemo, useState } from "react";
 
 export interface RemoteRendererProps {
   integrations?: RemoteComponentsMap<never>[];
   src: string;
   timeoutMs?: number;
+  onPathnameChanged?: (pathname: string) => void;
   extBridgeImplementation?: ExtBridgeRemoteApi;
 }
 
@@ -37,6 +38,7 @@ export const RemoteRendererClient: FC<RemoteRendererProps> = (props) => {
     timeoutMs = 10_000,
     src,
     extBridgeImplementation,
+    onPathnameChanged,
   } = props;
 
   const renderAwaiter = useAwaiter([src]);
@@ -66,6 +68,7 @@ export const RemoteRendererClient: FC<RemoteRendererProps> = (props) => {
     extBridgeImplementation: extBridgeImplementation,
     onReady: connectionAwaiter.resolve,
     onError: setRemoteError,
+    onPathnameChanged,
   });
 
   const timeoutPromise = (message: string) =>
