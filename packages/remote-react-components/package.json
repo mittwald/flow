@@ -41,7 +41,6 @@
   },
   "devDependencies": {
     "@mittwald/ext-bridge": "workspace:*",
-    "@mittwald/flow-remote-react-renderer": "workspace:*",
     "@mittwald/typescript-config": "workspace:*",
     "@types/node": "^22.13.10",
     "nx": "^20.5.0",
@@ -60,15 +59,11 @@
   },
   "peerDependencies": {
     "@mittwald/ext-bridge": "workspace:*",
-    "@mittwald/flow-remote-react-renderer": "workspace:*",
     "react": "^19",
     "react-hook-form": "*"
   },
   "peerDependenciesMeta": {
     "@mittwald/ext-bridge": {
-      "optional": true
-    },
-    "@mittwald/flow-remote-react-renderer": {
       "optional": true
     },
     "react-hook-form": {
