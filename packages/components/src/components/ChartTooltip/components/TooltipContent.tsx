@@ -40,15 +40,11 @@ export const TooltipContent = (props: TooltipContentProps) => {
           {payload
             .filter((i) => i.fill !== "none")
             .map((i, index) => (
-              <LegendItem
-                color={i.fill}
-                title={
-                  formatter
-                    ? formatter(i.value, i.dataKey, index, i.unit)
-                    : `${i.dataKey} ${i.value}${i.unit ? ` ${i.unit}` : ""}`
-                }
-                key={i.dataKey}
-              />
+              <LegendItem color={i.fill} key={i.dataKey}>
+                {formatter
+                  ? formatter(i.value, i.dataKey, index, i.unit)
+                  : `${i.dataKey} ${i.value}${i.unit ? ` ${i.unit}` : ""}`}
+              </LegendItem>
             ))}
         </div>
       </div>
