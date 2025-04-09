@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.134](https://github.com/mittwald/flow/compare/0.2.0-alpha.133...0.2.0-alpha.134) (2025-04-09)
+
+### Bug Fixes
+
+* **ComboBox:** fix default value + add react hook form stories ([#1352](https://github.com/mittwald/flow/issues/1352)) ([63be0ef](https://github.com/mittwald/flow/commit/63be0ef0973cbd50c0820a995d4a0e27344bbb2f))
+
 # [0.2.0-alpha.133](https://github.com/mittwald/flow/compare/0.2.0-alpha.132...0.2.0-alpha.133) (2025-04-08)
 
 ### Features
