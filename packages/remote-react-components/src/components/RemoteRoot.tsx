@@ -1,5 +1,6 @@
 "use client";
 import * as viewComponents from "@/auto-generated";
+import { useWatchPathname } from "@/hooks/useWatchPathname";
 import { stringifyError } from "@/lib/stringifyError";
 import { ViewComponentContextProvider } from "@mittwald/flow-react-components/internal";
 import {
@@ -27,6 +28,10 @@ export const RemoteRoot: FC<PropsWithChildren> = (props) => {
     renderErrorRef.current = error;
     connectionRef.current?.imports.setError(stringifyError(error));
   };
+
+  useWatchPathname((pathname) =>
+    connectionRef.current?.imports.setPathname(pathname),
+  );
 
   if (connectionError) {
     throw connectionError;

@@ -13,6 +13,7 @@ interface Opts {
   iframe: HTMLIFrameElement;
   onReady?: () => void;
   onError?: (error: string) => void;
+  onPathnameChanged?: (url: string) => void;
   extBridgeImplementation?: ExtBridgeConnectionApi;
 }
 
@@ -22,6 +23,7 @@ export const connectRemoteIframe = (opts: Opts): HostToRemoteConnection => {
     iframe,
     onReady,
     onError,
+    onPathnameChanged,
     extBridgeImplementation = emptyImplementation,
   } = opts;
 
@@ -33,6 +35,9 @@ export const connectRemoteIframe = (opts: Opts): HostToRemoteConnection => {
       },
       setError: async (error: string) => {
         onError?.(error);
+      },
+      setPathname: async (pathname: string) => {
+        onPathnameChanged?.(pathname);
       },
     },
   });
