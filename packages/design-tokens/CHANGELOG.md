@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.135](https://github.com/mittwald/flow/compare/0.2.0-alpha.134...0.2.0-alpha.135) (2025-04-09)
+
+### Features
+
+* **ProgressBar:** add segments ([#1353](https://github.com/mittwald/flow/issues/1353)) ([54784b8](https://github.com/mittwald/flow/commit/54784b89ac9a69e38a5d66dad06df4f900bf9c0f))
+
 # [0.2.0-alpha.134](https://github.com/mittwald/flow/compare/0.2.0-alpha.133...0.2.0-alpha.134) (2025-04-09)
 
 **Note:** Version bump only for package @mittwald/flow-design-tokens
