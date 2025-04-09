@@ -73,7 +73,10 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
           DateRangePicker: formControlProps,
           TimeField: formControlProps,
           SegmentedControl: formControlProps,
-          ComboBox: formControlProps,
+          ComboBox: {
+            ...formControlProps,
+            defaultInputValue: formControlProps.value,
+          },
           SearchField: formControlProps,
         };
 
