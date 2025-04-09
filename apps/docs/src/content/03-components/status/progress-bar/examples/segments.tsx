@@ -4,7 +4,6 @@ import {
 } from "@mittwald/flow-react-components";
 
 <ProgressBar
-  value={500}
   maxValue={1000}
   size="l"
   showMaxValue
