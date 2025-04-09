@@ -6,12 +6,12 @@ import { Column } from "@/lib/liveCode/components/LiveCodeEditor/components";
 
 <Column>
   <ProgressBar size="s" value={50}>
-    <Label>Speicher</Label>
+    <Label>Größe S</Label>
   </ProgressBar>
   <ProgressBar size="m" value={50}>
-    <Label>Speicher</Label>
+    <Label>Größe M</Label>
   </ProgressBar>
   <ProgressBar size="l" value={50}>
-    <Label>Speicher</Label>
+    <Label>Größe L</Label>
   </ProgressBar>
 </Column>;
