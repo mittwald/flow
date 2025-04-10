@@ -17,6 +17,7 @@ import { Button } from "@/components/Button";
 import IconDownload from "@/components/Icon/components/icons/IconDownload";
 import { ActionGroup } from "@/components/ActionGroup";
 import { Content } from "@/components/Content";
+import { Flex } from "@/components/Flex";
 
 const loadDomains: AsyncDataLoader<Domain> = async (opts) => {
   const response = await getDomains({
@@ -153,9 +154,11 @@ export const WithSummary: Story = {
         <Heading>Invoices</Heading>
         <InvoiceList.List batchSize={5} aria-label="Invoices">
           <ListSummary>
-            <Text style={{ display: "block", textAlign: "right" }}>
-              <b>total: 42,00 €</b>
-            </Text>
+            <Flex justify="end">
+              <Text>
+                <b>Gesamt: 41,00 €</b>
+              </Text>
+            </Flex>
           </ListSummary>
           <InvoiceList.StaticData
             data={[
@@ -193,9 +196,11 @@ export const WithSummaryBottom: Story = {
         <Heading>Invoices</Heading>
         <InvoiceList.List batchSize={5} aria-label="Invoices">
           <ListSummary position="bottom">
-            <Text style={{ display: "block", textAlign: "right" }}>
-              <b>total: 42,00 €</b>
-            </Text>
+            <Flex justify="end">
+              <Text>
+                <b>Gesamt: 41,00 €</b>
+              </Text>
+            </Flex>
           </ListSummary>
           <InvoiceList.StaticData
             data={[
