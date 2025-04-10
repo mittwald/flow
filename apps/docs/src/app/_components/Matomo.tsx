@@ -7,14 +7,13 @@ export const Matomo: FC = () => {
     // @ts-ignore
     const _mtm = (window._mtm = window._mtm || []);
     _mtm.push({ "mtm.startTime": new Date().getTime(), event: "mtm.Start" });
-    (function () {
-      const d = document,
-        g = d.createElement("script"),
-        s = d.getElementsByTagName("script")[0];
-      g.async = true;
-      g.src = "https://td.mittwald.de/js/container_72wp3khC.js";
-      s?.parentNode?.insertBefore(g, s);
-    })();
+    const d = document,
+      g = d.createElement("script"),
+      s = d.getElementsByTagName("script")[0];
+    g.async = true;
+    g.src = "https://td.mittwald.de/js/container_s2HTtJKN.js";
+    s?.parentNode?.insertBefore(g, s);
   }, []);
+
   return <></>;
 };
