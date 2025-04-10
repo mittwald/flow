@@ -1,7 +1,7 @@
 import "@mittwald/flow-react-components/all.css";
 import "./global.scss";
 import type { Metadata } from "next";
-import type { FC, PropsWithChildren } from "react";
+import { type FC, type PropsWithChildren, useEffect } from "react";
 import React from "react";
 import HeaderNavigation from "@/app/_components/layout/HeaderNavigation/HeaderNavigation";
 import clsx from "clsx";
@@ -15,6 +15,7 @@ import { NotificationProvider } from "@mittwald/flow-react-components";
 import { Link } from "@mittwald/flow-react-components";
 import { Image } from "@mittwald/flow-react-components";
 import Footer from "@/app/_components/layout/Footer/Footer";
+import { Matomo } from "@/app/_components/Matomo";
 
 export const metadata: Metadata = {
   title: "Flow – mittwald Design System",
@@ -27,6 +28,7 @@ const RootLayout: FC<PropsWithChildren> = async (props) => {
   return (
     <html lang="en">
       <body className={bodyClassName}>
+        <Matomo />
         <LinkProvider>
           <NotificationProvider>
             <header className={styles.header}>
