@@ -1,9 +1,12 @@
 "use client";
 import { type FC, useEffect } from "react";
+import { isArray } from "remeda";
 
 export const Matomo: FC = () => {
   useEffect(() => {
-    const _paq = (window._paq = window._paq || []);
+    const _paq = (
+      "_paq" in window && isArray(window._paq) ? window._paq : []
+    ) as unknown[];
     /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
     _paq.push(["trackPageView"]);
     _paq.push(["enableLinkTracking"]);
@@ -19,7 +22,9 @@ export const Matomo: FC = () => {
       s?.parentNode?.insertBefore(g, s);
     })();
 
-    const _mtm = (window._mtm = window._mtm || []);
+    const _mtm = (
+      "_mtm" in window && isArray(window._mtm) ? window._mtm : []
+    ) as unknown[];
     _mtm.push({ "mtm.startTime": new Date().getTime(), event: "mtm.Start" });
     (function () {
       const d = document,
