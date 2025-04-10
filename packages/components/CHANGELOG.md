@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.137](https://github.com/mittwald/flow/compare/0.2.0-alpha.136...0.2.0-alpha.137) (2025-04-10)
+
+### Features
+
+* return notification ID to allow manual closing ([#1359](https://github.com/mittwald/flow/issues/1359)) ([c67c7e2](https://github.com/mittwald/flow/commit/c67c7e22e90769ad063b0d8106c7924f8bbcac9e))
+
 # [0.2.0-alpha.136](https://github.com/mittwald/flow/compare/0.2.0-alpha.135...0.2.0-alpha.136) (2025-04-10)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
