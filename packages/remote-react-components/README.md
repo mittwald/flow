@@ -10,7 +10,10 @@ homepage for more details.
 
 ```shell
 yarn remove @mittwald/flow-react-components
-yarn add @mittwald/flow-remote-react-components@experimental
+yarn add @mittwald/flow-remote-react-components
+
+pnpm remove @mittwald/flow-react-components
+pnpm add @mittwald/flow-remote-react-components
 ```
 
 #### Adjust imports in your code
