@@ -29,9 +29,10 @@
   .headingContent {
     vertical-align: bottom;
     display: inline-flex;
-    height: var(--heading-line-height);
+    min-height: var(--heading-line-height);
     align-items: center;
-    column-gap: var(--heading--icon-to-text-spacing);
+    gap: var(--heading--icon-to-text-spacing);
+    flex-wrap: wrap;
 
     &:empty {
       display: none;
