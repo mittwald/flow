@@ -144,6 +144,9 @@ export const VeryLongWords: Story = {
               </Avatar>
               <Heading>
                 HeadingHeadingHeadingHeadingHeadingHeadingHeadingHeadingHeadingHeadingHeadingHeadingHeading
+                <AlertBadge status="warning">
+                  AlertBadgeAlertBadgeAlertBadgeAlertBadgeAlertBadgeAlertBadgeAlertBadgeAlertBadge
+                </AlertBadge>
               </Heading>
               <Text>
                 SubtitleSubtitleSubtitleSubtitleSubtitleSubtitleSubtitleSubtitleSubtitleSubtitleSubtitleSubtitle

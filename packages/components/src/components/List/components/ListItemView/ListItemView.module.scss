@@ -7,6 +7,7 @@
   .checkboxContainer {
     display: flex;
     align-items: center;
+    flex-shrink: 0;
     &:empty {
       display: none;
     }
@@ -49,6 +50,10 @@
     }
   }
 
+  .badge {
+    max-width: 100%;
+  }
+
   &.listView {
     padding: var(--list-item--padding);
     gap: var(--list-item--spacing);
@@ -64,6 +69,12 @@
     .content {
       align-items: center;
       align-self: center;
+      max-width: 100%;
+    }
+
+    .title {
+      max-width: 100%;
+      min-width: 0;
     }
 
     .action {
@@ -103,6 +114,10 @@
     .topContent {
       order: 1;
     }
+
+    :global(.flow--heading--heading-content) {
+      max-width: 100%;
+    }
   }
 
   &.tileView {
@@ -113,6 +128,7 @@
     border-radius: var(--list-item--corner-radius);
     align-content: flex-start;
     height: 100%;
+    position: relative;
 
     .content {
       flex-direction: column;
@@ -163,21 +179,12 @@
 
     .title {
       width: 100%;
-      position: relative;
 
-      &:has(.badge) {
-        padding-bottom: calc(
-          var(--size-rem--xxs) + var(--badge--line-height) +
-            var(--badge--padding-y) * 2
-        );
-
-        .badge {
-          position: absolute;
-          bottom: 0;
-          right: 0;
-          left: 0;
-          margin-left: auto;
-        }
+      :global(.flow--heading--heading-content) {
+        position: absolute;
+        top: var(--list-item--padding);
+        left: var(--list-item--padding);
+        right: var(--list-item--padding);
       }
     }
 
