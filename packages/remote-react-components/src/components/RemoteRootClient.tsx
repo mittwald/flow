@@ -1,6 +1,6 @@
 "use client";
 import * as viewComponents from "@/auto-generated";
-import Preview from "@/components/Preview";
+import { useWatchPathname } from "@/hooks/useWatchPathname";
 import { stringifyError } from "@/lib/stringifyError";
 import type { ExtBridgeRemoteApi } from "@mittwald/ext-bridge";
 import { ViewComponentContextProvider } from "@mittwald/flow-react-components/internal";
@@ -12,15 +12,12 @@ import { Suspense, useRef, type FC, type PropsWithChildren } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
 export interface RootClientProps extends PropsWithChildren {
-  showPreview?: boolean;
   extBridgeImplementation?: ExtBridgeRemoteApi;
 }
 
 export const RemoteRootClient: FC<RootClientProps> = (props) => {
-  const { children, showPreview = false, ...previewProps } = props;
+  const { children } = props;
 
-  const params = new URLSearchParams(document.location.search);
-  const isInPreviewFrame = params.has("preview");
   const connectionRef = useRef<RemoteToHostConnection>(undefined);
   const errorRef = useRef<unknown>(undefined);
 
@@ -29,7 +26,11 @@ export const RemoteRootClient: FC<RootClientProps> = (props) => {
     connectionRef.current?.imports.setError(stringifyError(error));
   };
 
-  const root = (
+  useWatchPathname((pathname) =>
+    connectionRef.current?.imports.setPathname(pathname),
+  );
+
+  return (
     <div
       ref={(div) => {
         connectionRef.current = connectHostRenderRootRef(div);
@@ -54,12 +55,6 @@ export const RemoteRootClient: FC<RootClientProps> = (props) => {
       </ErrorBoundary>
     </div>
   );
-
-  if (isInPreviewFrame || !showPreview) {
-    return root;
-  }
-
-  return <Preview {...previewProps} />;
 };
 
 export default RemoteRootClient;
