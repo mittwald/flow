@@ -9,7 +9,7 @@ import type {
 import { useId, useRef } from "react";
 import type { FieldValues, UseFormReturn } from "react-hook-form";
 import { FormProvider as RhfFormContextProvider } from "react-hook-form";
-import { AutoFormResetEffect } from "../AutoFormResetEffect/AutoFormResetEffect";
+import { AfterFormSubmitEffect } from "../AfterFormSubmitEffect/AfterFormSubmitEffect";
 
 export type FormOnSubmitHandler<F extends FieldValues> = Parameters<
   UseFormReturn<F>["handleSubmit"]
@@ -40,6 +40,7 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
 
   const formId = useId();
   const isAsyncSubmit = useRef(false);
+  const submitHandlerResultRef = useRef<unknown>(null);
 
   const handleOnSubmit: FormEventHandler = (e) => {
     const { isSubmitting, isValidating } = form.control._formState;
@@ -51,9 +52,12 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
       return;
     }
 
+    submitHandlerResultRef.current = undefined;
+
     form.handleSubmit((values) => {
       const result = onSubmit(values, e);
       isAsyncSubmit.current = result instanceof Promise;
+      submitHandlerResultRef.current = result;
       return result;
     })(e);
   };
@@ -65,8 +69,10 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
           <FormView {...formProps} id={formId} onSubmit={handleOnSubmit}>
             {children}
           </FormView>
-          <AutoFormResetEffect />
         </SubmitButtonStateProvider>
+        <AfterFormSubmitEffect
+          submitHandlerResultRef={submitHandlerResultRef}
+        />
       </FormContextProvider>
     </RhfFormContextProvider>
   );
