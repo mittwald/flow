@@ -68,7 +68,7 @@
 
   @mixin status($status) {
     &.#{$status} {
-      --background-color: var(--avatar--#{$status}-status-background);
+      --background-color: var(--avatar--#{$status}-status-background-color);
     }
   }
 

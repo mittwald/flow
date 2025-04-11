@@ -8,11 +8,11 @@ avatar:
       value: 2.5rem
     l:
       value: "{size-rem.xxl}"
-  info-status-background:
+  info-status-background-color:
     value: "{info.color.200}"
-  warning-status-background:
+  warning-status-background-color:
     value: "{warning.color.200}"
-  danger-status-background:
+  danger-status-background-color:
     value: "{danger.color.200}"
-  success-status-background:
+  success-status-background-color:
     value: "{success.color.200}"
