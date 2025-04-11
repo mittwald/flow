@@ -27,6 +27,10 @@ const meta: Meta<typeof Avatar> = {
       control: "inline-radio",
       options: avatarColors,
     },
+    status: {
+      control: "inline-radio",
+      options: ["info", "success", "warning", "danger"],
+    },
   },
 };
 export default meta;
@@ -50,4 +54,9 @@ export const WithIcon: Story = {
     </Avatar>
   ),
   args: { color: "blue" },
+};
+
+export const WithStatus: Story = {
+  render: (props) => <Avatar {...props} />,
+  args: { status: "danger" },
 };

@@ -14,6 +14,7 @@ export class RemoteAvatarElement extends FlowRemoteElement<RemoteAvatarElementPr
       className: {},
       color: {},
       size: {},
+      status: {},
     };
   }
 
