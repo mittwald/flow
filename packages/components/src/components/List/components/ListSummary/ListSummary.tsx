@@ -3,17 +3,29 @@ import React from "react";
 import styles from "./ListSummary.module.scss";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import clsx from "clsx";
 
 export interface ListSummaryProps
   extends FlowComponentProps,
-    PropsWithChildren {}
+    PropsWithChildren {
+  /** Whether the summary is placed above or underneath the list @default: "top" */
+  position?: "top" | "bottom";
+}
 
 /** @flr-generate all */
 export const ListSummary = flowComponent("ListSummary", (props) => {
-  const { children } = props;
+  const { children, position = "top" } = props;
+
+  if (position === "bottom") {
+    return (
+      <footer className={clsx(styles.listSummary, styles.bottom)} {...props}>
+        {children}
+      </footer>
+    );
+  }
 
   return (
-    <header className={styles.listSummary} {...props}>
+    <header className={clsx(styles.listSummary, styles.top)} {...props}>
       {children}
     </header>
   );

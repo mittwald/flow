@@ -171,7 +171,7 @@ export const List = flowComponent("List", (props) => {
             {children}
             <Header hasActionGroup={hasActionGroup} />
 
-            <DivView>
+            <DivView className={styles.listWrapper}>
               {listModel.items.entries.length > 0 && (
                 <TunnelExit id="listSummary" />
               )}
