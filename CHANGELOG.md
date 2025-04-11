@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.141](https://github.com/mittwald/flow/compare/0.2.0-alpha.140...0.2.0-alpha.141) (2025-04-11)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
 # [0.2.0-alpha.140](https://github.com/mittwald/flow/compare/0.2.0-alpha.139...0.2.0-alpha.140) (2025-04-11)
 
 ### Features
