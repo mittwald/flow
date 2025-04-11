@@ -9,10 +9,10 @@ const baseConfig = z.object({
 
 const contextParameters = z
   .object({
-    appId: z.string().optional(),
+    appInstallationId: z.string().optional(),
     projectId: z.string().optional(),
     customerId: z.string().optional(),
   })
   .catchall(z.string());
 
-export const config = z.union([baseConfig, contextParameters]);
+export const config = baseConfig.merge(contextParameters);
