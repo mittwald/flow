@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.142](https://github.com/mittwald/flow/compare/0.2.0-alpha.141...0.2.0-alpha.142) (2025-04-11)
+
+### Bug Fixes
+
+* **ext-bridge:** fix config type + tests ([#1371](https://github.com/mittwald/flow/issues/1371)) ([5804ed4](https://github.com/mittwald/flow/commit/5804ed4ee5d7a0739a6e8a2a8b485452e96670c9))
+
 # [0.2.0-alpha.141](https://github.com/mittwald/flow/compare/0.2.0-alpha.140...0.2.0-alpha.141) (2025-04-11)
 
 **Note:** Version bump only for package @mittwald/ext-bridge
