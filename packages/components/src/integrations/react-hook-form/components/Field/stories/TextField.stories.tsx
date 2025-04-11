@@ -1,14 +1,13 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
-import { useForm } from "react-hook-form";
-import { action } from "@storybook/addon-actions";
-import { TextField } from "@/components/TextField";
-import { Label } from "@/components/Label";
-import { Field, Form, typedField } from "@/integrations/react-hook-form";
-import { Button } from "@/components/Button";
-import { Section } from "@/components/Section";
 import { ActionGroup } from "@/components/ActionGroup";
+import { Button } from "@/components/Button";
+import { Label } from "@/components/Label";
+import { Section } from "@/components/Section";
+import { TextField } from "@/components/TextField";
+import { Field, Form, typedField } from "@/integrations/react-hook-form";
 import { sleep } from "@/lib/promises/sleep";
+import { action } from "@storybook/addon-actions";
+import type { Meta, StoryObj } from "@storybook/react";
+import { useForm } from "react-hook-form";
 
 const submitAction = action("submit");
 
@@ -82,3 +81,43 @@ export default meta;
 type Story = StoryObj<typeof Field>;
 
 export const Default: Story = {};
+
+export const WithTransformedValue: Story = {
+  render: () => {
+    interface Values {
+      name: string;
+    }
+
+    const handleOnSubmit = (values: Values) => {
+      submitAction(values);
+    };
+
+    const form = useForm<Values>({
+      defaultValues: {
+        name: "",
+      },
+    });
+
+    const Field = typedField(form);
+
+    return (
+      <Form form={form} onSubmit={handleOnSubmit}>
+        <Section>
+          <Field name="name">
+            <TextField
+              value={form.watch("name")}
+              onChange={(val) => {
+                form.setValue("name", val.toUpperCase());
+              }}
+            >
+              <Label>Name</Label>
+            </TextField>
+          </Field>
+          <ActionGroup>
+            <Button type="submit">Submit</Button>
+          </ActionGroup>
+        </Section>
+      </Form>
+    );
+  },
+};

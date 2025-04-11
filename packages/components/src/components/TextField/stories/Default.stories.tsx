@@ -1,14 +1,14 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { TextField } from "../index";
-import React from "react";
-import { Label } from "@/components/Label";
-import { action } from "@storybook/addon-actions";
-import FieldDescription from "@/components/FieldDescription/FieldDescription";
 import { Button } from "@/components/Button";
+import FieldDescription from "@/components/FieldDescription/FieldDescription";
 import { FieldError } from "@/components/FieldError";
+import { Label } from "@/components/Label";
 import { Form } from "@/integrations/react-hook-form";
-import { useForm } from "react-hook-form";
 import { sleep } from "@/lib/promises/sleep";
+import { action } from "@storybook/addon-actions";
+import type { Meta, StoryObj } from "@storybook/react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { TextField } from "../index";
 
 const meta: Meta<typeof TextField> = {
   title: "Form Controls/TextField",
@@ -47,6 +47,22 @@ export const WithDefaultValue: Story = {
       <Label>URL</Label>
     </TextField>
   ),
+};
+
+export const WithControlledValue: Story = {
+  render: (props) => {
+    const [value, setValue] = useState("");
+
+    return (
+      <TextField
+        {...props}
+        value={value}
+        onChange={(val) => setValue(val.toUpperCase())}
+      >
+        <Label>URL</Label>
+      </TextField>
+    );
+  },
 };
 
 export const WithPlaceholder: Story = {

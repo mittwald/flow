@@ -1,14 +1,15 @@
-import { beforeEach, expect, vitest } from "vitest";
-import { useForm } from "react-hook-form";
-import { Form, typedField } from "@/integrations/react-hook-form";
-import { Select } from "@/components/Select";
-import { Option } from "@/components/Option";
-import React from "react";
 import { Button } from "@/components/Button";
-import { Label } from "@/components/Label";
-import { act, fireEvent, render, screen } from "@testing-library/react";
-import { Switch } from "@/components/Switch";
 import Checkbox from "@/components/Checkbox";
+import { Label } from "@/components/Label";
+import { Option } from "@/components/Option";
+import { Select } from "@/components/Select";
+import { Switch } from "@/components/Switch";
+import TextField from "@/components/TextField";
+import { Form, typedField } from "@/integrations/react-hook-form";
+import { act, fireEvent, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { useForm } from "react-hook-form";
+import { beforeEach, expect, vitest } from "vitest";
 
 const handleSubmit = vitest.fn();
 
@@ -124,5 +125,70 @@ describe("Checkbox field", () => {
     expect(screen.getByTestId("checkbox").getAttribute("data-selected")).toBe(
       "true",
     );
+  });
+});
+
+describe("Text field", () => {
+  interface Values {
+    testDefaultValue: string;
+    testUncontrolled: string;
+    testControlled: string;
+  }
+
+  const TestForm = () => {
+    const form = useForm<Values>({
+      defaultValues: {
+        testDefaultValue: "default-value",
+      },
+    });
+    const Field = typedField(form);
+
+    return (
+      <Form form={form} onSubmit={(values) => handleSubmit(values)}>
+        <Field name="testUncontrolled">
+          <TextField
+            aria-label="testUncontrolled"
+            onChange={(val) => {
+              // setting form value will not effect inputs display value when uncontrolled
+              form.setValue("testUncontrolled", val.toUpperCase());
+            }}
+          />
+        </Field>
+        <Field name="testControlled">
+          <TextField
+            aria-label="testControlled"
+            onChange={(val) => {
+              form.setValue("testControlled", val.toUpperCase());
+            }}
+            value={form.watch("testControlled")}
+          />
+        </Field>
+        <Field name="testDefaultValue">
+          <TextField aria-label="testDefaultValue" />
+        </Field>
+        <Button type="submit">Submit</Button>
+      </Form>
+    );
+  };
+
+  test("default value works", async () => {
+    render(<TestForm />);
+    expect(screen.getByDisplayValue("default-value")).toBeInTheDocument();
+  });
+
+  test("is not controlled by default", async () => {
+    const user = userEvent.setup();
+    render(<TestForm />);
+    const field = screen.getByLabelText("testUncontrolled");
+    await user.type(field, "new name");
+    expect(screen.getByDisplayValue("new name")).toBeInTheDocument();
+  });
+
+  test("can be used as controlled input", async () => {
+    const user = userEvent.setup();
+    render(<TestForm />);
+    const field = screen.getByLabelText("testControlled");
+    await user.type(field, "new name");
+    expect(screen.getByDisplayValue("NEW NAME")).toBeInTheDocument();
   });
 });
