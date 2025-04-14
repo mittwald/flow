@@ -1,6 +1,6 @@
 "use client";
 import type { RootClientProps } from "@/components/RemoteRootClient";
-import { useIsMounted } from "@/hooks/useIsMounted";
+import { useIsMounted } from "@mittwald/flow-react-components";
 import React, { type FC } from "react";
 
 const ClientComponent = React.lazy(() => import("./RemoteRootClient"));

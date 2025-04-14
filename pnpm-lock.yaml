@@ -796,6 +796,9 @@ importers:
 
   packages/remote-core:
     dependencies:
+      '@lit-labs/ssr-dom-shim':
+        specifier: ^1.3.0
+        version: 1.3.0
       '@mittwald/remote-dom-core':
         specifier: 1.7.0-mittwald.3
         version: 1.7.0-mittwald.3(@preact/signals-core@1.8.0)
@@ -2211,6 +2214,9 @@ packages:
   '@lerna-lite/version@3.12.2':
     resolution: {integrity: sha512-UcX6fj6/bsCIba3rd0jfxLNGVoM6UZp6ANE4Fx6vGDZW0KapgqhRcroyV3rTePlY+/udI2QliDJFE0yL5mH1fQ==}
     engines: {node: ^18.0.0 || >=20.0.0}
+
+  '@lit-labs/ssr-dom-shim@1.3.0':
+    resolution: {integrity: sha512-nQIWonJ6eFAvUUrSlwyHDm/aE8PBDu5kRpL0vHMg6K8fK3Diq1xdPjTnsJSwxABhaZ+5eBi1btQB5ShUTKo4nQ==}
 
   '@mdx-js/loader@3.1.0':
     resolution: {integrity: sha512-xU/lwKdOyfXtQGqn3VnJjlDrmKXEvMi1mgYxVmukEUtVycIz1nh7oQ40bKTd4cA7rLStqu0740pnhGYxGoqsCg==}
@@ -10255,6 +10261,8 @@ snapshots:
       - bluebird
       - supports-color
       - typescript
+
+  '@lit-labs/ssr-dom-shim@1.3.0': {}
 
   '@mdx-js/loader@3.1.0(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))(webpack@5.98.0)':
     dependencies:
