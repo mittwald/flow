@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.146](https://github.com/mittwald/flow/compare/0.2.0-alpha.145...0.2.0-alpha.146) (2025-04-14)
+
+### Bug Fixes
+
+* **Components:** fix crash instead of using fallback language ([#1381](https://github.com/mittwald/flow/issues/1381)) ([81be139](https://github.com/mittwald/flow/commit/81be139fb0bef414175a4557217262b24499e6e3))
+* **Notification:** Notification interaction should not close Overlay ([#1375](https://github.com/mittwald/flow/issues/1375)) ([7240c70](https://github.com/mittwald/flow/commit/7240c70f8b1a78e84dc2f243bd062ab12115fbd0))
+
 # [0.2.0-alpha.145](https://github.com/mittwald/flow/compare/0.2.0-alpha.144...0.2.0-alpha.145) (2025-04-11)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
