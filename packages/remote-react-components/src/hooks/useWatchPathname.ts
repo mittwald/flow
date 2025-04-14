@@ -3,6 +3,10 @@ import { useEffect, useRef } from "react";
 type Callback = (pathname: string) => void;
 
 export const useWatchPathname = (callback: Callback) => {
+  if (typeof location === "undefined") {
+    return;
+  }
+
   const storedHref = useRef(location.href);
 
   useEffect(() => {
