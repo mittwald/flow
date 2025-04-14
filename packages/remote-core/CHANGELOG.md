@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.147](https://github.com/mittwald/flow/compare/0.2.0-alpha.146...0.2.0-alpha.147) (2025-04-14)
+
+### Features
+
+* **Remote:** support SSR by adding Node shims ([#1383](https://github.com/mittwald/flow/issues/1383)) ([0af7f26](https://github.com/mittwald/flow/commit/0af7f26adcff9c15ea99069216f72d7981f8a0d1))
+
 # [0.2.0-alpha.146](https://github.com/mittwald/flow/compare/0.2.0-alpha.145...0.2.0-alpha.146) (2025-04-14)
 
 **Note:** Version bump only for package @mittwald/flow-remote-core
