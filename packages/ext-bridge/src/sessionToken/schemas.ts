@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const extensionScopes = z.string().array();
-export const extensionContext = z.enum(["project", "organization"]);
+export const extensionContext = z.enum(["project", "customer"]);
 
 export const sessionTokenPayload = z.object({
   sessionId: z.string(),
