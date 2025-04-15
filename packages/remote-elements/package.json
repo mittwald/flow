@@ -8,7 +8,7 @@
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
-      "default": "./dist/js/index.js"
+      "default": "./dist/js/index.mjs"
     }
   },
   "files": [
