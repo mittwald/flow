@@ -24,7 +24,10 @@ export const connectHostRenderRoot = (
 
   thread.imports.setIsReady();
 
-  if (typeof mittwald.extBridge !== "undefined") {
+  if (
+    typeof mittwald !== "undefined" &&
+    typeof mittwald.extBridge !== "undefined"
+  ) {
     delegateExtBridgeRemoteFunctions(thread);
     mittwald.extBridge.setIsReady();
   }
