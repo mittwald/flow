@@ -1,7 +1,10 @@
 import type { PropsWithChildren, ReactNode } from "react";
 import React from "react";
 import * as Aria from "react-aria-components";
-import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import {
+  flowComponent,
+  type FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import formFieldStyles from "@/components/FormField/FormField.module.scss";
@@ -10,7 +13,8 @@ import clsx from "clsx";
 import styles from "./TimeField.module.scss";
 
 export interface TimeFieldProps<T extends Aria.TimeValue = Aria.TimeValue>
-  extends PropsWithChildren<Omit<Aria.TimeFieldProps<T>, "children">> {
+  extends PropsWithChildren<Omit<Aria.TimeFieldProps<T>, "children">>,
+    FlowComponentProps<HTMLInputElement> {
   /** An error message to be displayed below the field */
   errorMessage?: ReactNode;
 }
@@ -20,7 +24,7 @@ export interface TimeFieldProps<T extends Aria.TimeValue = Aria.TimeValue>
  * @flr-clear-props-context
  */
 export const TimeField = flowComponent("TimeField", (props) => {
-  const { children, errorMessage, className, ...rest } = props;
+  const { children, errorMessage, className, ref, ...rest } = props;
 
   const rootClassName = clsx(formFieldStyles.formField, className);
 
@@ -39,7 +43,12 @@ export const TimeField = flowComponent("TimeField", (props) => {
   };
 
   return (
-    <Aria.TimeField hourCycle={24} className={rootClassName} {...rest}>
+    <Aria.TimeField
+      ref={ref}
+      hourCycle={24}
+      className={rootClassName}
+      {...rest}
+    >
       <PropsContextProvider props={propsContext}>
         {children}
       </PropsContextProvider>

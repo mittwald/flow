@@ -13,7 +13,7 @@ import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 
 export interface SliderProps
-  extends FlowComponentProps,
+  extends FlowComponentProps<HTMLDivElement>,
     PropsWithChildren<Aria.SliderProps>,
     Pick<Aria.SliderThumbProps, "name"> {
   showInitialMarker?: boolean;

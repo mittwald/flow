@@ -10,10 +10,14 @@ import { RangeCalendar } from "../Calendar/RangeCalendar";
 import { DateRangeInput } from "./components/DateRangeInput";
 import { FieldError } from "@/components/FieldError";
 import { useOverlayController } from "@/lib/controller";
-import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import {
+  flowComponent,
+  type FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
 
 export interface DateRangePickerProps<T extends Aria.DateValue = Aria.DateValue>
-  extends PropsWithChildren<Omit<Aria.DateRangePickerProps<T>, "children">> {
+  extends PropsWithChildren<Omit<Aria.DateRangePickerProps<T>, "children">>,
+    FlowComponentProps {
   /** The error message that is displayed below the input. */
   errorMessage?: ReactNode;
 }
@@ -23,7 +27,7 @@ export interface DateRangePickerProps<T extends Aria.DateValue = Aria.DateValue>
  * @flr-clear-props-context
  */
 export const DateRangePicker = flowComponent("DateRangePicker", (props) => {
-  const { children, className, errorMessage, onChange, ...rest } = props;
+  const { children, className, errorMessage, onChange, ref, ...rest } = props;
 
   const rootClassName = clsx(styles.formField, className);
 
@@ -44,6 +48,7 @@ export const DateRangePicker = flowComponent("DateRangePicker", (props) => {
 
   return (
     <Aria.DateRangePicker
+      ref={ref}
       {...rest}
       className={rootClassName}
       onOpenChange={(v) => popoverController.setOpen(v)}

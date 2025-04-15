@@ -11,38 +11,35 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface CheckboxButtonProps
   extends CheckboxProps,
-    FlowComponentProps {}
+    FlowComponentProps<HTMLLabelElement> {}
 
 /**
  * @flr-generate all
  * @flr-clear-props-context
  */
-export const CheckboxButton = flowComponent<"CheckboxButton", HTMLLabelElement>(
-  "CheckboxButton",
-  (props) => {
-    const { children, className, ref, ...rest } = props;
+export const CheckboxButton = flowComponent("CheckboxButton", (props) => {
+  const { children, className, ref, ...rest } = props;
 
-    const rootClassName = clsx(styles.checkboxButton, className);
+  const rootClassName = clsx(styles.checkboxButton, className);
 
-    const propsContext: PropsContext = {
-      Text: {
-        className: styles.label,
-      },
-      Content: {
-        className: styles.content,
-      },
-    };
+  const propsContext: PropsContext = {
+    Text: {
+      className: styles.label,
+    },
+    Content: {
+      className: styles.content,
+    },
+  };
 
-    return (
-      <ClearPropsContext>
-        <Checkbox {...rest} className={rootClassName} ref={ref}>
-          <PropsContextProvider props={propsContext}>
-            {children}
-          </PropsContextProvider>
-        </Checkbox>
-      </ClearPropsContext>
-    );
-  },
-);
+  return (
+    <ClearPropsContext>
+      <Checkbox {...rest} className={rootClassName} ref={ref}>
+        <PropsContextProvider props={propsContext}>
+          {children}
+        </PropsContextProvider>
+      </Checkbox>
+    </ClearPropsContext>
+  );
+});
 
 export default CheckboxButton;

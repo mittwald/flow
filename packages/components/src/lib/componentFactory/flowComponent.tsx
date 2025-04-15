@@ -16,11 +16,11 @@ import type { PropsWithTunnel } from "@/lib/types/props";
 import { TunnelEntry } from "@mittwald/react-tunnel";
 import SlotContextProvider from "@/lib/slotContext/SlotContextProvider";
 import { useProps } from "@/lib/hooks/useProps";
-import { useMergeRefs } from "use-callback-ref";
+import { mergeRefs } from "@react-aria/utils";
 
 type RefType<T> = T extends RefAttributes<infer R> ? R : undefined;
 
-export interface FlowComponentProps<R = undefined>
+export interface FlowComponentProps<R = HTMLDivElement>
   extends PropsWithTunnel,
     RefAttributes<R> {
   wrapWith?: ReactElement;
@@ -61,7 +61,7 @@ export function flowComponent<C extends FlowComponentName>(
       typeof ImplementationComponentType
     >;
 
-    const mergedRef = useMergeRefs([refFromProps, refFromContext]);
+    const mergedRef = mergeRefs(refFromProps, refFromContext);
     const propsWithRef = {
       ...implementationTypeProps,
       ref: mergedRef,

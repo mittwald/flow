@@ -9,14 +9,18 @@ import type {
 } from "@/lib/types/props";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
-import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import {
+  flowComponent,
+  type FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
 
 type GapSize = "s" | "m" | "l" | "xl";
 
 export interface ColumnLayoutProps
   extends PropsWithChildren,
     PropsWithElementType<"div" | "ul">,
-    PropsWithClassName {
+    PropsWithClassName,
+    FlowComponentProps<unknown> {
   /** Column layout for container size s. */
   s?: number[];
   /** Column layout for container size m. */
@@ -52,6 +56,7 @@ export const ColumnLayout = flowComponent("ColumnLayout", (props) => {
     columnGap = gap,
     elementType = "div",
     "aria-label": ariaLabel,
+    ref,
   } = props;
 
   const columnsS = s ? getColumns(s) : "1fr";
@@ -78,7 +83,11 @@ export const ColumnLayout = flowComponent("ColumnLayout", (props) => {
 
   return (
     <div className={rootClassName} style={style}>
-      <Element aria-label={ariaLabel} className={styles.columnLayout}>
+      <Element
+        ref={ref as never}
+        aria-label={ariaLabel}
+        className={styles.columnLayout}
+      >
         <PropsContextProvider props={propsContext}>
           {children}
         </PropsContextProvider>
