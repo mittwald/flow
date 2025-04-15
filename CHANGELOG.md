@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.150](https://github.com/mittwald/flow/compare/0.2.0-alpha.149...0.2.0-alpha.150) (2025-04-15)
+
+### Bug Fixes
+
+* **Ext Bridge:** fix schema ([887bdb0](https://github.com/mittwald/flow/commit/887bdb08c05b43cc78bd367254620c1ced35382b))
+
 # [0.2.0-alpha.149](https://github.com/mittwald/flow/compare/0.2.0-alpha.148...0.2.0-alpha.149) (2025-04-15)
 
 **Note:** Version bump only for package @mittwald/flow-project
