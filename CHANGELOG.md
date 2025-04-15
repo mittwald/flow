@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.148](https://github.com/mittwald/flow/compare/0.2.0-alpha.147...0.2.0-alpha.148) (2025-04-15)
+
+### Bug Fixes
+
+* **List:** correct arrow navigation mode in Tiles view ([#1385](https://github.com/mittwald/flow/issues/1385)) ([724bc4b](https://github.com/mittwald/flow/commit/724bc4bb123d07a4e2d8eb698d87ebdb46e4b19e))
+
 # [0.2.0-alpha.147](https://github.com/mittwald/flow/compare/0.2.0-alpha.146...0.2.0-alpha.147) (2025-04-14)
 
 ### Features
