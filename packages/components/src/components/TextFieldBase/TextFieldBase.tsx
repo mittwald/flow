@@ -1,4 +1,4 @@
-import type { FC, PropsWithChildren, ReactNode, Ref } from "react";
+import type { FC, PropsWithChildren, ReactNode } from "react";
 import React, { useState } from "react";
 import * as Aria from "react-aria-components";
 import styles from "../FormField/FormField.module.scss";
@@ -13,7 +13,6 @@ import { useLocalizedStringFormatter } from "react-aria";
 
 export interface TextFieldBaseProps
   extends PropsWithChildren<Omit<Aria.TextFieldProps, "children">> {
-  ref?: Ref<HTMLInputElement>;
   /** The input element */
   input: ReactNode;
   /** Whether a character count should be displayed inside the field description. */

@@ -5,7 +5,6 @@ import type {
 import type {
   ComponentProps,
   ComponentType,
-  Ref,
   ReactElement,
   ReactNode,
   RefAttributes,
@@ -17,47 +16,55 @@ import type { PropsWithTunnel } from "@/lib/types/props";
 import { TunnelEntry } from "@mittwald/react-tunnel";
 import SlotContextProvider from "@/lib/slotContext/SlotContextProvider";
 import { useProps } from "@/lib/hooks/useProps";
+import { useMergeRefs } from "use-callback-ref";
 
-export interface FlowComponentProps extends PropsWithTunnel {
+type RefType<T> = T extends RefAttributes<infer R> ? R : undefined;
+
+export interface FlowComponentProps<R = undefined>
+  extends PropsWithTunnel,
+    RefAttributes<R> {
   wrapWith?: ReactElement;
 }
 
-type FlowComponentImplementationProps<C extends FlowComponentName, R> = Omit<
+type FlowComponentImplementationProps<C extends FlowComponentName> = Omit<
   FlowComponentPropsOfName<C>,
   keyof FlowComponentProps
-> & {
-  /** @internal */
-  ref?: Ref<R>;
-};
+> &
+  RefAttributes<RefType<FlowComponentPropsOfName<C>>>;
 
-type FlowComponentImplementationType<
-  C extends FlowComponentName,
-  R = never,
-> = ComponentType<FlowComponentImplementationProps<C, R>>;
+type FlowComponentImplementationType<C extends FlowComponentName> =
+  ComponentType<FlowComponentImplementationProps<C>>;
 
-type FlowComponentType<C extends FlowComponentName, R> = FunctionComponent<
-  FlowComponentPropsOfName<C> & RefAttributes<R>
+type FlowComponentType<C extends FlowComponentName> = FunctionComponent<
+  FlowComponentPropsOfName<C> &
+    RefAttributes<RefType<FlowComponentPropsOfName<C>>>
 >;
 
-export function flowComponent<C extends FlowComponentName, R = HTMLDivElement>(
+export function flowComponent<C extends FlowComponentName>(
   componentName: C,
-  ImplementationComponentType: FlowComponentImplementationType<C, R>,
-): FlowComponentType<C, R> {
+  ImplementationComponentType: FlowComponentImplementationType<C>,
+): FlowComponentType<C> {
   return (propsFromArgument) => {
-    const { ref, ...props } = propsFromArgument;
+    const { ref: refFromProps = null, ...props } = propsFromArgument;
 
-    const { tunnelId, wrapWith, ...propsWithContext } = useProps(
+    const {
+      ref: refFromContext = null,
+      tunnelId,
+      wrapWith,
+      ...propsWithContext
+    } = useProps(
       componentName,
       props as FlowComponentPropsOfName<C>,
-    ) as FlowComponentProps;
+    ) as FlowComponentProps<RefType<FlowComponentPropsOfName<C>>>;
 
     const implementationTypeProps = propsWithContext as ComponentProps<
       typeof ImplementationComponentType
     >;
 
+    const mergedRef = useMergeRefs([refFromProps, refFromContext]);
     const propsWithRef = {
       ...implementationTypeProps,
-      ref,
+      ref: mergedRef,
     };
 
     let element: ReactNode = <ImplementationComponentType {...propsWithRef} />;

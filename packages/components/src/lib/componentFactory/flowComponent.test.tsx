@@ -1,12 +1,14 @@
 import { expectTypeOf, test, vitest } from "vitest";
-import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import type { ComponentType, Ref, PropsWithChildren } from "react";
+import {
+  flowComponent,
+  type FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
+import type { ComponentType, PropsWithChildren } from "react";
 import React from "react";
 import { render } from "@testing-library/react";
-import { HTMLDivElement } from "happy-dom";
+import { HTMLDivElement as HappyHTMLDivElement } from "happy-dom";
 import type { FlowComponentName } from "@/components/propTypes";
 import { propsContextSupportingComponents } from "@/components/propTypes";
-import type { PropsWithTunnel } from "@/lib/types/props";
 import { PropsContextProvider } from "@/lib/propsContext";
 
 const getComponentName = (name: string): FlowComponentName => {
@@ -14,49 +16,44 @@ const getComponentName = (name: string): FlowComponentName => {
   return name as FlowComponentName;
 };
 
-type FlowComponentProps<P> = PropsWithTunnel & {
-  ref?: Ref<never>;
-} & P;
-
 const testComponent1Name = getComponentName("Test1");
 const testComponent2Name = getComponentName("Test2");
 
-type TestComponentProps = FlowComponentProps<
+type TestComponentProps = FlowComponentProps<HTMLIFrameElement> &
   PropsWithChildren<{
     prop?: string;
     otherProp?: string;
-  }>
->;
+  }>;
 
 type TestComponent = ComponentType<TestComponentProps>;
 
-const TestComponent1 = flowComponent(
-  testComponent1Name,
-  (props: TestComponentProps) => (
+const TestComponent1 = flowComponent(testComponent1Name, (p) => {
+  const props = p as TestComponentProps;
+  return (
     <div data-testid="test1" ref={props.ref}>
       {props.prop && <div data-testid="prop">{props.prop}</div>}
       {props.otherProp && <div data-testid="otherProp">{props.otherProp}</div>}
       {props.children && <div data-testid="children1">{props.children}</div>}
     </div>
-  ),
-) as TestComponent;
+  );
+}) as TestComponent;
 
-const TestComponent2 = flowComponent(
-  testComponent2Name,
-  (props: TestComponentProps) => (
+const TestComponent2 = flowComponent(testComponent2Name, (p) => {
+  const props = p as TestComponentProps;
+  return (
     <div data-testid="test2" ref={props.ref}>
       {props.prop && <div data-testid="prop">{props.prop}</div>}
       {props.otherProp && <div data-testid="otherProp">{props.otherProp}</div>}
       {props.children && <div data-testid="children2">{props.children}</div>}
     </div>
-  ),
-) as TestComponent;
+  );
+}) as TestComponent;
 
 test("ref is forwarded to component", () => {
   const ref = vitest.fn();
   render(<TestComponent1 ref={ref} />);
   const refArg = ref.mock.calls[0]?.[0];
-  expectTypeOf(refArg).toMatchTypeOf(HTMLDivElement);
+  expectTypeOf(refArg).toMatchTypeOf(HappyHTMLDivElement);
 });
 
 describe("propsContext", () => {
