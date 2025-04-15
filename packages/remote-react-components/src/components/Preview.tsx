@@ -1,4 +1,5 @@
 import type { ExtBridgeRemoteApi } from "@mittwald/ext-bridge";
+import { useIsMounted } from "@mittwald/flow-react-components";
 import React, { type FC } from "react";
 
 const LazyRemoteRenderer = React.lazy(
@@ -10,6 +11,11 @@ interface Props {
 }
 
 export const Preview: FC<Props> = (props) => {
+  const isMounted = useIsMounted();
+  if (!isMounted) {
+    return null;
+  }
+
   const previewUrl = new URL(document.location.href);
   previewUrl.searchParams.set("preview", "");
   return <LazyRemoteRenderer src={previewUrl.toString()} {...props} />;

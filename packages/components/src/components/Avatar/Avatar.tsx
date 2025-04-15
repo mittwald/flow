@@ -6,9 +6,10 @@ import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
 import { getColorFromChildren } from "@/components/Avatar/lib/getColorFromChildren";
-import type { PropsWithClassName } from "@/lib/types/props";
+import type { PropsWithClassName, Status } from "@/lib/types/props";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import { AlertIcon } from "@/components/AlertIcon";
 
 export const avatarColors = [
   "blue",
@@ -27,6 +28,11 @@ export interface AvatarProps
   size?: "xs" | "s" | "m" | "l";
   /** The color of icons and initials inside the avatar. */
   color?: AvatarColors;
+  /**
+   * Adds status icon and color to the avatar. May only be used if the status is
+   * explained by an element (like text or label) nearby.
+   */
+  status?: Status;
 }
 
 /**
@@ -36,13 +42,14 @@ export interface AvatarProps
 export const Avatar = flowComponent<"Avatar", HTMLDivElement>(
   "Avatar",
   (props) => {
-    const { children, className, color, size = "m", ref } = props;
+    const { children, className, color, size = "m", status, ref } = props;
 
     const rootClassName = clsx(
       styles.avatar,
       styles[`size-${size}`],
       className,
-      styles[color ?? "blue"],
+      !status && styles[color ?? "blue"],
+      status && styles[status],
       !color && styles[`dynamic-${getColorFromChildren(children)}`],
     );
 
@@ -59,7 +66,8 @@ export const Avatar = flowComponent<"Avatar", HTMLDivElement>(
       <ClearPropsContext>
         <div className={rootClassName} ref={ref}>
           <PropsContextProvider props={propsContext}>
-            {children}
+            {!status && children}
+            {status && <AlertIcon className={styles.icon} status={status} />}
           </PropsContextProvider>
         </div>
       </ClearPropsContext>

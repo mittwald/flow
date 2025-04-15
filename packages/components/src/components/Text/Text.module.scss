@@ -31,15 +31,15 @@
     padding-left: var(--text--blockquote-padding);
   }
 
-  &.align-start {
+  &:where(.align-start) {
     text-align: start;
   }
 
-  &.align-center {
+  &:where(.align-center) {
     text-align: center;
   }
 
-  &.align-end {
+  &:where(.align-end) {
     text-align: end;
   }
 }

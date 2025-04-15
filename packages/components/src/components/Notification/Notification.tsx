@@ -1,14 +1,13 @@
-import type { ComponentProps, FC, PropsWithChildren } from "react";
-import React from "react";
-import type { PropsWithStatus } from "@/lib/types/props";
-import styles from "./Notification.module.scss";
-import clsx from "clsx";
-import type { PropsContext } from "@/lib/propsContext";
-import { dynamic, PropsContextProvider } from "@/lib/propsContext";
 import { AlertIcon } from "@/components/AlertIcon";
-import { Link } from "@/components/Link";
 import { Button } from "@/components/Button";
 import { IconClose } from "@/components/Icon/components/icons";
+import { Link } from "@/components/Link";
+import type { PropsContext } from "@/lib/propsContext";
+import { dynamic, PropsContextProvider } from "@/lib/propsContext";
+import type { PropsWithStatus } from "@/lib/types/props";
+import clsx from "clsx";
+import type { ComponentProps, FC, PropsWithChildren } from "react";
+import styles from "./Notification.module.scss";
 
 export interface NotificationProps
   extends PropsWithChildren<ComponentProps<"div">>,
@@ -79,7 +78,13 @@ export const Notification: FC<NotificationProps> = (props) => {
   );
 
   return (
-    <div {...rest} className={rootClassName} role={role}>
+    <div
+      {...rest}
+      className={rootClassName}
+      role={role}
+      // See https://github.com/adobe/react-spectrum/blob/main/packages/%40react-aria/interactions/src/useInteractOutside.ts#L126C31-L126C58
+      data-react-aria-top-layer
+    >
       <Link unstyled href={href} className={styles.link} onPress={onClick}>
         <PropsContextProvider props={propsContext}>
           {children}

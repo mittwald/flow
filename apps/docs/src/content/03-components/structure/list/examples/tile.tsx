@@ -1,4 +1,5 @@
 import {
+  AlertBadge,
   Avatar,
   ContextMenu,
   Heading,
@@ -33,7 +34,14 @@ export default () => {
                 <IconSubdomain />
               )}
             </Avatar>
-            <Heading>{domain.hostname}</Heading>
+            <Heading>
+              {domain.hostname}
+              {!domain.verified && (
+                <AlertBadge status="warning">
+                  Unverifiziert
+                </AlertBadge>
+              )}
+            </Heading>
             <Text>{domain.type}</Text>
 
             <ContextMenu>

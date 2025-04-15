@@ -10,7 +10,9 @@ export class RemoteListSummaryElement extends FlowRemoteElement<RemoteListSummar
   }
 
   static override get remoteProperties() {
-    return {};
+    return {
+      position: {},
+    };
   }
 
   static override get remoteEvents() {

@@ -26,12 +26,29 @@ Property `formatOptions` können aber auch andere Einheiten gewählt werden. (s.
 
 ---
 
-# Small
+# Größen
 
-<LiveCodeEditor example="small" editorCollapsed />
+<LiveCodeEditor example="size" editorCollapsed />
 
 ---
 
 # Status
 
 <LiveCodeEditor example="status" editorCollapsed />
+
+---
+
+# Segmente
+
+Die Anzeige der ProgressBar kann über das `segments` Property um einzelne
+Abschnitte ergänzt werden. Der `value` ergibt sich in diesem Fall aus der Summe
+der Werte der einzelnen Segmente. Um die einzelnen Werte näher zu erläutern wird
+automatisch die `Legend` Component angezeigt. Über das `showLegend` Property
+kann diese ein- und ausgeblendet werden.
+
+Die Farben der Segmente werden automatisch festgelegt, können aber über das
+`color` Property überschrieben werden. Beim Überschreiben muss darauf geachtet
+werden, dass nebeneinander liegende Farben weiterhin einen ausreichenden
+Kontrast zueinander haben.
+
+<LiveCodeEditor example="segments" editorCollapsed />

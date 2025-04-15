@@ -22,19 +22,18 @@ const LegendContent: FC<LegendContentType> = (props) => {
           return (
             <LegendItem
               key={`legendItem-${index}`}
-              title={
-                entry.dataKey
-                  ? formatter
-                    ? formatter(entry.dataKey?.toString())
-                    : entry.dataKey.toString()
-                  : ""
-              }
               color={
                 entry.payload && "fill" in entry.payload
                   ? (entry.payload?.fill as string)
                   : tokens.color.gray[100].value
               }
-            />
+            >
+              {entry.dataKey
+                ? formatter
+                  ? formatter(entry.dataKey?.toString())
+                  : entry.dataKey.toString()
+                : ""}
+            </LegendItem>
           );
         })}
     </Legend>

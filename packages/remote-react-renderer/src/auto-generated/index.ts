@@ -13,6 +13,7 @@ import { AreaChart as AreaChart } from "@mittwald/flow-react-components";
 import { Avatar as Avatar } from "@mittwald/flow-react-components";
 import { AvatarStack as AvatarStack } from "@mittwald/flow-react-components";
 import { Badge as Badge } from "@mittwald/flow-react-components";
+import { BigNumber as BigNumber } from "@mittwald/flow-react-components";
 import { Breadcrumb as Breadcrumb } from "@mittwald/flow-react-components";
 import { Button as Button } from "@mittwald/flow-react-components";
 import { CartesianGrid as CartesianGrid } from "@mittwald/flow-react-components";
@@ -83,6 +84,7 @@ import { ProgressBar as ProgressBar } from "@mittwald/flow-react-components";
 import { Radio as Radio } from "@mittwald/flow-react-components";
 import { RadioButton as RadioButton } from "@mittwald/flow-react-components";
 import { RadioGroup as RadioGroup } from "@mittwald/flow-react-components";
+import { Rating as Rating } from "@mittwald/flow-react-components";
 import { SearchField as SearchField } from "@mittwald/flow-react-components";
 import { Section as Section } from "@mittwald/flow-react-components";
 import { Segment as Segment } from "@mittwald/flow-react-components";
@@ -125,6 +127,7 @@ export const flowComponents = {
   "flr-avatar": createFlowRemoteComponentRenderer(Avatar),
   "flr-avatar-stack": createFlowRemoteComponentRenderer(AvatarStack),
   "flr-badge": createFlowRemoteComponentRenderer(Badge),
+  "flr-big-number": createFlowRemoteComponentRenderer(BigNumber),
   "flr-breadcrumb": createFlowRemoteComponentRenderer(Breadcrumb),
   "flr-button": createFlowRemoteComponentRenderer(Button),
   "flr-cartesian-grid": createFlowRemoteComponentRenderer(CartesianGrid),
@@ -205,6 +208,7 @@ export const flowComponents = {
   "flr-radio": createFlowRemoteComponentRenderer(Radio),
   "flr-radio-button": createFlowRemoteComponentRenderer(RadioButton),
   "flr-radio-group": createFlowRemoteComponentRenderer(RadioGroup),
+  "flr-rating": createFlowRemoteComponentRenderer(Rating),
   "flr-search-field": createFlowRemoteComponentRenderer(SearchField),
   "flr-section": createFlowRemoteComponentRenderer(Section),
   "flr-segment": createFlowRemoteComponentRenderer(Segment),

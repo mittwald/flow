@@ -1,15 +1,14 @@
+import { useFormContext } from "@/integrations/react-hook-form/components/context/formContext";
+import type { PropsContext } from "@/lib/propsContext";
+import { dynamic, PropsContextProvider } from "@/lib/propsContext";
+import FieldErrorView from "@/views/FieldErrorView";
 import type { PropsWithChildren } from "react";
-import React from "react";
 import type {
   ControllerProps,
   FieldValues,
   UseFormReturn,
 } from "react-hook-form";
 import { Controller } from "react-hook-form";
-import type { PropsContext } from "@/lib/propsContext";
-import { dynamic, PropsContextProvider } from "@/lib/propsContext";
-import { useFormContext } from "@/integrations/react-hook-form/components/context/formContext";
-import FieldErrorView from "@/views/FieldErrorView";
 
 export interface FieldProps<T extends FieldValues>
   extends Omit<ControllerProps<T>, "render">,
@@ -45,7 +44,18 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
           )),
         };
 
+        const uncontrolledFormControlProps = {
+          ...formControlProps,
+          value: undefined,
+          defaultValue: field.value,
+        };
+
         const propsContext: PropsContext = {
+          // uncontrolled fields – see https://github.com/mittwald/flow/issues/1341
+          SearchField: uncontrolledFormControlProps,
+          TextField: uncontrolledFormControlProps,
+          TextArea: uncontrolledFormControlProps,
+
           Checkbox: {
             ...formControlProps,
             isSelected: formControlProps.value,
@@ -62,8 +72,6 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
             ...formControlProps,
             isSelected: formControlProps.value,
           },
-          TextArea: formControlProps,
-          TextField: formControlProps,
           Select: {
             ...formControlProps,
             selectedKey: formControlProps.value,
@@ -73,8 +81,10 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
           DateRangePicker: formControlProps,
           TimeField: formControlProps,
           SegmentedControl: formControlProps,
-          ComboBox: formControlProps,
-          SearchField: formControlProps,
+          ComboBox: {
+            ...formControlProps,
+            defaultInputValue: formControlProps.value,
+          },
         };
 
         return (

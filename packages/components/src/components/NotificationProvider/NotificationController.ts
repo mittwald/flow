@@ -1,9 +1,9 @@
-import type { ReactElement } from "react";
-import useSelector from "@/lib/mobx/useSelector";
-import { action, makeObservable, observable } from "mobx";
-import Timer from "@/lib/timer/Timer";
 import type { NotificationProps } from "@/components/Notification";
 import { useStatic } from "@/lib/hooks/useStatic";
+import useSelector from "@/lib/mobx/useSelector";
+import Timer from "@/lib/timer/Timer";
+import { action, makeObservable, observable } from "mobx";
+import type { ReactElement } from "react";
 
 interface NotificationMetaData {
   readonly id: number;
@@ -36,7 +36,7 @@ export class NotificationController {
     return useSelector(() => Array.from(this.notificationsData.values()));
   }
 
-  public add(notification: ReactElement<NotificationProps>): void {
+  public add(notification: ReactElement<NotificationProps>): number {
     const id = this.id++;
 
     const meta: NotificationMetaData = {
@@ -55,6 +55,8 @@ export class NotificationController {
         this.remove(id);
       });
     }
+
+    return id;
   }
 
   public remove(id: number): void {

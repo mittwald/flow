@@ -3,6 +3,131 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.148](https://github.com/mittwald/flow/compare/0.2.0-alpha.147...0.2.0-alpha.148) (2025-04-15)
+
+### Bug Fixes
+
+* **List:** correct arrow navigation mode in Tiles view ([#1385](https://github.com/mittwald/flow/issues/1385)) ([724bc4b](https://github.com/mittwald/flow/commit/724bc4bb123d07a4e2d8eb698d87ebdb46e4b19e))
+
+# [0.2.0-alpha.147](https://github.com/mittwald/flow/compare/0.2.0-alpha.146...0.2.0-alpha.147) (2025-04-14)
+
+### Features
+
+* **Remote:** support SSR by adding Node shims ([#1383](https://github.com/mittwald/flow/issues/1383)) ([0af7f26](https://github.com/mittwald/flow/commit/0af7f26adcff9c15ea99069216f72d7981f8a0d1))
+
+# [0.2.0-alpha.146](https://github.com/mittwald/flow/compare/0.2.0-alpha.145...0.2.0-alpha.146) (2025-04-14)
+
+### Bug Fixes
+
+* **Components:** fix crash instead of using fallback language ([#1381](https://github.com/mittwald/flow/issues/1381)) ([81be139](https://github.com/mittwald/flow/commit/81be139fb0bef414175a4557217262b24499e6e3))
+* **Notification:** Notification interaction should not close Overlay ([#1375](https://github.com/mittwald/flow/issues/1375)) ([7240c70](https://github.com/mittwald/flow/commit/7240c70f8b1a78e84dc2f243bd062ab12115fbd0))
+
+# [0.2.0-alpha.145](https://github.com/mittwald/flow/compare/0.2.0-alpha.144...0.2.0-alpha.145) (2025-04-11)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.144](https://github.com/mittwald/flow/compare/0.2.0-alpha.143...0.2.0-alpha.144) (2025-04-11)
+
+### Features
+
+* **Avatar:** support status in avatar ([#1372](https://github.com/mittwald/flow/issues/1372)) ([87b91c0](https://github.com/mittwald/flow/commit/87b91c07cc48458da9aaab1e0ab5a5a3fda73a6e))
+
+# [0.2.0-alpha.143](https://github.com/mittwald/flow/compare/0.2.0-alpha.142...0.2.0-alpha.143) (2025-04-11)
+
+### Features
+
+* **List:** allow bottom position for summary ([#1361](https://github.com/mittwald/flow/issues/1361)) ([343be63](https://github.com/mittwald/flow/commit/343be637cf5b64ecbb4a03f8fcb8ca7bac3faebf))
+
+# [0.2.0-alpha.142](https://github.com/mittwald/flow/compare/0.2.0-alpha.141...0.2.0-alpha.142) (2025-04-11)
+
+### Bug Fixes
+
+* **ext-bridge:** fix config type + tests ([#1371](https://github.com/mittwald/flow/issues/1371)) ([5804ed4](https://github.com/mittwald/flow/commit/5804ed4ee5d7a0739a6e8a2a8b485452e96670c9))
+
+# [0.2.0-alpha.141](https://github.com/mittwald/flow/compare/0.2.0-alpha.140...0.2.0-alpha.141) (2025-04-11)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.140](https://github.com/mittwald/flow/compare/0.2.0-alpha.139...0.2.0-alpha.140) (2025-04-11)
+
+### Features
+
+* **List:** update badge position ([#1369](https://github.com/mittwald/flow/issues/1369)) ([3fd3142](https://github.com/mittwald/flow/commit/3fd31429c133cd1191d1cb0279df4f0e8dad8979))
+
+# [0.2.0-alpha.139](https://github.com/mittwald/flow/compare/0.2.0-alpha.138...0.2.0-alpha.139) (2025-04-10)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.138](https://github.com/mittwald/flow/compare/0.2.0-alpha.137...0.2.0-alpha.138) (2025-04-10)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.137](https://github.com/mittwald/flow/compare/0.2.0-alpha.136...0.2.0-alpha.137) (2025-04-10)
+
+### Features
+
+* return notification ID to allow manual closing ([#1359](https://github.com/mittwald/flow/issues/1359)) ([c67c7e2](https://github.com/mittwald/flow/commit/c67c7e22e90769ad063b0d8106c7924f8bbcac9e))
+
+# [0.2.0-alpha.136](https://github.com/mittwald/flow/compare/0.2.0-alpha.135...0.2.0-alpha.136) (2025-04-10)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.135](https://github.com/mittwald/flow/compare/0.2.0-alpha.134...0.2.0-alpha.135) (2025-04-09)
+
+### Features
+
+* **ProgressBar:** add segments ([#1353](https://github.com/mittwald/flow/issues/1353)) ([54784b8](https://github.com/mittwald/flow/commit/54784b89ac9a69e38a5d66dad06df4f900bf9c0f))
+
+# [0.2.0-alpha.134](https://github.com/mittwald/flow/compare/0.2.0-alpha.133...0.2.0-alpha.134) (2025-04-09)
+
+### Bug Fixes
+
+* **ComboBox:** fix default value + add react hook form stories ([#1352](https://github.com/mittwald/flow/issues/1352)) ([63be0ef](https://github.com/mittwald/flow/commit/63be0ef0973cbd50c0820a995d4a0e27344bbb2f))
+
+# [0.2.0-alpha.133](https://github.com/mittwald/flow/compare/0.2.0-alpha.132...0.2.0-alpha.133) (2025-04-08)
+
+### Features
+
+* **Rating:** Add Rating component ([#1350](https://github.com/mittwald/flow/issues/1350)) ([986a6d8](https://github.com/mittwald/flow/commit/986a6d80d2e1cf0d1ab4be75eaf7bc8c86e89ee8))
+
+# [0.2.0-alpha.132](https://github.com/mittwald/flow/compare/0.2.0-alpha.131...0.2.0-alpha.132) (2025-04-08)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.131](https://github.com/mittwald/flow/compare/0.2.0-alpha.130...0.2.0-alpha.131) (2025-04-08)
+
+### Features
+
+* **BigNumber:** Add BigNumber component ([#1349](https://github.com/mittwald/flow/issues/1349)) ([c75c17f](https://github.com/mittwald/flow/commit/c75c17fb2539168cfde3a47058b2e5e887ec8a93))
+
+# [0.2.0-alpha.130](https://github.com/mittwald/flow/compare/0.2.0-alpha.129...0.2.0-alpha.130) (2025-04-08)
+
+### Features
+
+* **Icon:** Update Icons ([#1348](https://github.com/mittwald/flow/issues/1348)) ([4d65b99](https://github.com/mittwald/flow/commit/4d65b99f6d8842e4b4922a56f0de9add6e321a64))
+
+# [0.2.0-alpha.129](https://github.com/mittwald/flow/compare/0.2.0-alpha.128...0.2.0-alpha.129) (2025-04-08)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.128](https://github.com/mittwald/flow/compare/0.2.0-alpha.127...0.2.0-alpha.128) (2025-04-07)
+
+### Bug Fixes
+
+* update to bug-fixed remote packages [#2](https://github.com/mittwald/flow/issues/2) ([99654b5](https://github.com/mittwald/flow/commit/99654b533c08953145e1814df9c3414b60f361dc))
+
+# [0.2.0-alpha.127](https://github.com/mittwald/flow/compare/0.2.0-alpha.126...0.2.0-alpha.127) (2025-04-07)
+
+### Bug Fixes
+
+* update lock file ([f52894b](https://github.com/mittwald/flow/commit/f52894b32c90bd9f38c49fd51f45ee6eca7c1377))
+
+# [0.2.0-alpha.126](https://github.com/mittwald/flow/compare/0.2.0-alpha.125...0.2.0-alpha.126) (2025-04-07)
+
+### Bug Fixes
+
+* update to bug-fixed remote packages ([54b53cd](https://github.com/mittwald/flow/commit/54b53cdd05964843c0b4e7d2635fd4c524206691))
+
 # [0.2.0-alpha.125](https://github.com/mittwald/flow/compare/0.2.0-alpha.124...0.2.0-alpha.125) (2025-04-03)
 
 ### Features

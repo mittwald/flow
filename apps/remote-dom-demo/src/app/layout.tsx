@@ -67,6 +67,8 @@ export default function Layout(props: PropsWithChildren) {
                           extensionInstanceId: "exti-id",
                           sessionId: "session-id",
                           userId: "user-id",
+                          appInstallationId: "appi-id",
+                          additionalProp: "add-prop",
                         }),
                         getSessionToken: async () => "session-token",
                       }}

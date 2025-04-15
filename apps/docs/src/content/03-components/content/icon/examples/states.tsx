@@ -13,16 +13,16 @@ import {
 
 <ColumnLayout l={[1, 1, 1, 1, 1]} m={[1, 1, 1]} s={[1, 1]}>
   <LabeledValue>
-    <Label>Danger</Label>
-    <IconDanger />
+    <Label>Success</Label>
+    <IconSuccess />
   </LabeledValue>
   <LabeledValue>
     <Label>Warning</Label>
     <IconWarning />
   </LabeledValue>
   <LabeledValue>
-    <Label>Success</Label>
-    <IconSuccess />
+    <Label>Danger</Label>
+    <IconDanger />
   </LabeledValue>
   <LabeledValue>
     <Label>Info</Label>
@@ -33,11 +33,11 @@ import {
     <IconPending />
   </LabeledValue>
   <LabeledValue>
-    <Label>Failed</Label>
-    <IconFailed />
-  </LabeledValue>
-  <LabeledValue>
     <Label>Succeeded</Label>
     <IconSucceeded />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Failed</Label>
+    <IconFailed />
   </LabeledValue>
 </ColumnLayout>;

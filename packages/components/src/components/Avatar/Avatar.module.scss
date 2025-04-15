@@ -47,7 +47,8 @@
   @include size(s);
   @include size(l);
 
-  /* Variants */
+  /* Colors */
+
   @mixin color($color) {
     &.dynamic-#{$color}:has(.initials),
     &.#{$color} {
@@ -62,4 +63,17 @@
   @include color("green");
   @include color("violet");
   @include color("lilac");
+
+  /* Status */
+
+  @mixin status($status) {
+    &.#{$status} {
+      --background-color: var(--avatar--#{$status}-status-background-color);
+    }
+  }
+
+  @include status("info");
+  @include status("success");
+  @include status("warning");
+  @include status("danger");
 }

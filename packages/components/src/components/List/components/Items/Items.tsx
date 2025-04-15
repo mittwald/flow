@@ -37,6 +37,7 @@ export const Items: FC = () => {
         style={{
           gridTemplateColumns: `repeat(auto-fill, minmax(${list.itemView.tileMaxWidth}px, 1fr))`,
         }}
+        layout={list.viewMode === "tiles" ? "grid" : "stack"}
       >
         {isInitiallyLoading ? <FallbackItems /> : items}
       </ItemsGridListView>

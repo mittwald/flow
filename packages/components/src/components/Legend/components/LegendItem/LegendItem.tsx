@@ -1,5 +1,5 @@
 import Text from "@/components/Text";
-import type { FC } from "react";
+import type { FC, PropsWithChildren } from "react";
 import styles from "./LegendItem.module.scss";
 import {
   categoricalColors,
@@ -7,13 +7,13 @@ import {
 } from "@/lib/tokens/CategoricalColors";
 import { getCategoricalColorValue } from "@/lib/tokens/getCategoricalColorValue";
 
-export interface LegendItemProps {
-  color: string | CategoricalColors;
-  title: string;
+export interface LegendItemProps extends PropsWithChildren {
+  color?: CategoricalColors | string;
 }
 
 export const LegendItem: FC<LegendItemProps> = (props) => {
-  const { title, color } = props;
+  const { children, color } = props;
+
   return (
     <li className={styles.legendItem}>
       <div
@@ -27,7 +27,7 @@ export const LegendItem: FC<LegendItemProps> = (props) => {
         }}
       />
       <Text>
-        <small>{title}</small>
+        <small>{children}</small>
       </Text>
     </li>
   );
