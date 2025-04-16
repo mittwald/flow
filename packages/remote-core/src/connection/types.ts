@@ -1,8 +1,8 @@
+import type { ExtBridgeConnectionApi } from "@mittwald/ext-bridge";
 import type { RemoteConnection } from "@mittwald/remote-dom-core";
-import type { ExtBridgeRemoteApi } from "@mittwald/ext-bridge";
 import type { ThreadIframe, ThreadNestedIframe } from "@quilted/threads";
 
-export interface HostExports extends ExtBridgeRemoteApi {
+export interface HostExports extends ExtBridgeConnectionApi {
   setIsReady: () => Promise<void>;
   setError: (error: string) => Promise<void>;
 }

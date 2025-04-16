@@ -3,23 +3,23 @@
 import { useAwaiter } from "@/hooks/useAwaiter";
 import { useMergedComponents } from "@/hooks/useMergedComponents";
 import type { RemoteComponentsMap } from "@/lib/types";
-import {
-  RemoteReceiver,
-  RemoteRootRenderer,
-} from "@mittwald/remote-dom-react/host";
-import type { ExtBridgeRemoteApi } from "@mittwald/ext-bridge";
+import type { ExtBridgeConnectionApi } from "@mittwald/ext-bridge";
 import {
   connectRemoteIframeRef,
   RemoteError,
 } from "@mittwald/flow-remote-core";
 import { usePromise } from "@mittwald/react-use-promise";
+import {
+  RemoteReceiver,
+  RemoteRootRenderer,
+} from "@mittwald/remote-dom-react/host";
 import { type CSSProperties, type FC, useMemo, useState } from "react";
 
-export interface RemoteRendererProps {
+export interface RemoteRendererBrowserProps {
   integrations?: RemoteComponentsMap<never>[];
   src: string;
   timeoutMs?: number;
-  extBridgeImplementation?: ExtBridgeRemoteApi;
+  extBridgeImplementation?: ExtBridgeConnectionApi;
 }
 
 const hiddenIframeStyle: CSSProperties = {
@@ -31,7 +31,9 @@ const hiddenIframeStyle: CSSProperties = {
   marginLeft: "-9999px",
 };
 
-export const RemoteRendererClient: FC<RemoteRendererProps> = (props) => {
+export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
+  props,
+) => {
   const {
     integrations = [],
     timeoutMs = 10_000,
@@ -114,4 +116,4 @@ export const RemoteRendererClient: FC<RemoteRendererProps> = (props) => {
   );
 };
 
-export default RemoteRendererClient;
+export default RemoteRendererBrowser;

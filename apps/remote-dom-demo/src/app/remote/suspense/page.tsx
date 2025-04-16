@@ -1,63 +1,63 @@
 "use client";
 import {
+  BrowserOnly,
   Button,
   Heading,
   Section,
   Text,
   TextField,
 } from "@mittwald/flow-remote-react-components";
+import { getAsyncResource } from "@mittwald/react-use-promise";
 import { type FC, Suspense, useState } from "react";
-import { AsyncResource } from "@mittwald/react-use-promise";
 
-const getAsyncValue = () =>
+const getAsyncValue = (sleepMs: number) =>
   new Promise<number>((res) => {
-    const waitFor = (Math.floor(Math.random() * 10) + 1) * 1000;
-    setTimeout(() => res(waitFor), waitFor);
+    setTimeout(() => res(sleepMs), sleepMs);
   });
 
-const EnhancedDataComponent = (foo = ""): FC => {
-  const getDateNowResource = new AsyncResource(getAsyncValue);
-  return () => {
-    const value = getDateNowResource.use({
-      keepValueWhileLoading: false,
-    });
+interface Props {
+  sleepMs: number;
+  foo: string;
+}
 
-    const [buttonPressState, setButtonPressState] = useState(0);
+const EnhancedDataComponent: FC<Props> = (props) => {
+  const asyncResource = getAsyncResource(getAsyncValue, [props.sleepMs]);
 
-    return (
-      <Section>
-        <Heading>{foo}</Heading>
-        <Text>Promise WaitFor: {value} seconds</Text>
-        <Button onPress={() => getDateNowResource.refresh()}>Reload</Button>
-        <Button
-          color="secondary"
-          variant="soft"
-          onPress={() => setButtonPressState((p) => p + 1)}
-        >
-          <Text>Button {buttonPressState}x clicked</Text>
-        </Button>
-        <TextField />
-      </Section>
-    );
-  };
+  const value = asyncResource.use({
+    keepValueWhileLoading: false,
+  });
+
+  const [buttonPressState, setButtonPressState] = useState(0);
+
+  return (
+    <Section>
+      <Heading>{props.foo}</Heading>
+      <Text>Promise WaitFor: {value} seconds</Text>
+      <Button onPress={() => asyncResource.refresh()}>Reload</Button>
+      <Button
+        color="secondary"
+        variant="soft"
+        onPress={() => setButtonPressState((p) => p + 1)}
+      >
+        <Text>Button {buttonPressState}x clicked</Text>
+      </Button>
+      <TextField />
+    </Section>
+  );
 };
-
-const Foo = EnhancedDataComponent("[Content-1]");
-const Bar = EnhancedDataComponent("[Content-2]");
-const Baz = EnhancedDataComponent("[Content-3]");
 
 export default function Page() {
   return (
-    <>
+    <BrowserOnly>
       <Suspense fallback={<Heading>[Loading-1]</Heading>}>
-        <Foo />
+        <EnhancedDataComponent foo="[Content-1]" sleepMs={1500} />
       </Suspense>
       <Suspense fallback={<Heading>[Loading-2]</Heading>}>
-        <Bar />
+        <EnhancedDataComponent foo="[Content-2]" sleepMs={1100} />
       </Suspense>
       <Suspense fallback={<Heading>[Loading-3]</Heading>}>
-        <Baz />
+        <EnhancedDataComponent foo="[Content-3]" sleepMs={1700} />
       </Suspense>
-    </>
+    </BrowserOnly>
   );
 }

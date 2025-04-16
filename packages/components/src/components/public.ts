@@ -13,6 +13,7 @@ export * from "@/components/AvatarStack";
 export * from "@/components/Badge";
 export * from "@/components/BigNumber";
 export * from "@/components/Breadcrumb";
+export * from "@/components/BrowserOnly";
 export * from "@/components/Button";
 export * from "@/components/CartesianGrid";
 export * from "@/components/ChartLegend";

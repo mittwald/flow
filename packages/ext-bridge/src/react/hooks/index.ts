@@ -1,1 +1,1 @@
-export * from "./useExtBridge";
+export * from "./useConfig";

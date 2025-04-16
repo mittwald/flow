@@ -2,6 +2,7 @@ export * from "@/components/Icon/components/icons";
 
 export {
   Action,
+  BrowserOnly,
   ContextMenu,
   ContextMenuTrigger,
   List,
@@ -15,6 +16,7 @@ export {
   Wrap,
   type ActionFn,
   type ActionProps,
+  type BrowserOnlyProps,
   type ContextMenuProps,
   type ContextMenuTriggerProps,
   type ListItemViewProps,

@@ -4,8 +4,8 @@ import type {
   RemoteExports,
 } from "@/connection/types";
 import { emptyImplementation } from "@/ext-bridge/implementation";
+import type { ExtBridgeConnectionApi } from "@mittwald/ext-bridge";
 import type { RemoteConnection } from "@mittwald/remote-dom-core/elements";
-import { type ExtBridgeRemoteApi } from "@mittwald/ext-bridge";
 import { ThreadIframe } from "@quilted/threads";
 
 interface Opts {
@@ -13,7 +13,7 @@ interface Opts {
   iframe: HTMLIFrameElement;
   onReady?: () => void;
   onError?: (error: string) => void;
-  extBridgeImplementation?: ExtBridgeRemoteApi;
+  extBridgeImplementation?: ExtBridgeConnectionApi;
 }
 
 export const connectRemoteIframe = (opts: Opts): HostToRemoteConnection => {

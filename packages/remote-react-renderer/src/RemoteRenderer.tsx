@@ -1,14 +1,18 @@
 "use client";
-import { type FC } from "react";
-import React from "react";
-import { useIsMounted } from "@/hooks/useIsMounted";
-import type { RemoteRendererProps } from "@/RemoteRendererClient";
+import type { RemoteRendererBrowserProps } from "@/RemoteRendererBrowser";
+import { BrowserOnly } from "@mittwald/flow-react-components";
+import React, { type FC } from "react";
 
-const RemoteRendererClient = React.lazy(() => import("./RemoteRendererClient"));
+const RemoteRendererBrowser = React.lazy(
+  () => import("./RemoteRendererBrowser"),
+);
 
-export const RemoteRenderer: FC<RemoteRendererProps> = (props) => {
-  const isMounted = useIsMounted();
-  return isMounted ? <RemoteRendererClient {...props} /> : null;
+export const RemoteRenderer: FC<RemoteRendererBrowserProps> = (props) => {
+  return (
+    <BrowserOnly>
+      <RemoteRendererBrowser {...props} />
+    </BrowserOnly>
+  );
 };
 
 export default RemoteRenderer;
