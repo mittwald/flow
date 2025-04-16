@@ -14,18 +14,26 @@ export interface ListSummaryProps
 
 /** @flr-generate all */
 export const ListSummary = flowComponent("ListSummary", (props) => {
-  const { children, position = "top" } = props;
+  const { children, position = "top", ref } = props;
 
   if (position === "bottom") {
     return (
-      <footer className={clsx(styles.listSummary, styles.bottom)} {...props}>
+      <footer
+        ref={ref}
+        className={clsx(styles.listSummary, styles.bottom)}
+        {...props}
+      >
         {children}
       </footer>
     );
   }
 
   return (
-    <header className={clsx(styles.listSummary, styles.top)} {...props}>
+    <header
+      ref={ref}
+      className={clsx(styles.listSummary, styles.top)}
+      {...props}
+    >
       {children}
     </header>
   );

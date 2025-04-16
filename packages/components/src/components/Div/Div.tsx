@@ -1,9 +1,10 @@
-import type { FC, PropsWithChildren, Ref } from "react";
+import type { FC, PropsWithChildren, RefAttributes } from "react";
 import type { PropsWithClassName } from "@/lib/types/props";
 
-export interface DivProps extends PropsWithChildren, PropsWithClassName {
-  ref?: Ref<HTMLDivElement>;
-}
+export interface DivProps
+  extends PropsWithChildren,
+    PropsWithClassName,
+    RefAttributes<HTMLDivElement> {}
 
 /** @flr-generate all */
 export const Div: FC<DivProps> = (props) => {

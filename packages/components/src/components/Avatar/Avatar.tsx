@@ -39,40 +39,37 @@ export interface AvatarProps
  * @flr-generate all
  * @flr-clear-props-context
  */
-export const Avatar = flowComponent<"Avatar", HTMLDivElement>(
-  "Avatar",
-  (props) => {
-    const { children, className, color, size = "m", status, ref } = props;
+export const Avatar = flowComponent("Avatar", (props) => {
+  const { children, className, color, size = "m", status, ref } = props;
 
-    const rootClassName = clsx(
-      styles.avatar,
-      styles[`size-${size}`],
-      className,
-      !status && styles[color ?? "blue"],
-      status && styles[status],
-      !color && styles[`dynamic-${getColorFromChildren(children)}`],
-    );
+  const rootClassName = clsx(
+    styles.avatar,
+    styles[`size-${size}`],
+    className,
+    !status && styles[color ?? "blue"],
+    status && styles[status],
+    !color && styles[`dynamic-${getColorFromChildren(children)}`],
+  );
 
-    const propsContext: PropsContext = {
-      Initials: {
-        className: styles.initials,
-      },
-      Icon: {
-        className: styles.icon,
-      },
-    };
+  const propsContext: PropsContext = {
+    Initials: {
+      className: styles.initials,
+    },
+    Icon: {
+      className: styles.icon,
+    },
+  };
 
-    return (
-      <ClearPropsContext>
-        <div className={rootClassName} ref={ref}>
-          <PropsContextProvider props={propsContext}>
-            {!status && children}
-            {status && <AlertIcon className={styles.icon} status={status} />}
-          </PropsContextProvider>
-        </div>
-      </ClearPropsContext>
-    );
-  },
-);
+  return (
+    <ClearPropsContext>
+      <div className={rootClassName} ref={ref}>
+        <PropsContextProvider props={propsContext}>
+          {!status && children}
+          {status && <AlertIcon className={styles.icon} status={status} />}
+        </PropsContextProvider>
+      </div>
+    </ClearPropsContext>
+  );
+});
 
 export default Avatar;

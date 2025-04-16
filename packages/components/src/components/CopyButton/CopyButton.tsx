@@ -15,7 +15,7 @@ import { Action } from "@/components/Action";
 
 export interface CopyButtonProps
   extends Omit<ButtonProps, "onPress" | "aria-label" | "render">,
-    FlowComponentProps {
+    FlowComponentProps<HTMLButtonElement> {
   /** The text to copy. */
   text: ReactNode;
 }
@@ -24,44 +24,41 @@ export interface CopyButtonProps
  * @flr-generate all
  * @flr-clear-props-context
  */
-export const CopyButton = flowComponent<"CopyButton", HTMLButtonElement>(
-  "CopyButton",
-  (props) => {
-    const {
-      text,
-      ref,
-      variant = "plain",
-      color = "secondary",
-      ...buttonProps
-    } = props;
+export const CopyButton = flowComponent("CopyButton", (props) => {
+  const {
+    text,
+    ref,
+    variant = "plain",
+    color = "secondary",
+    ...buttonProps
+  } = props;
 
-    const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(locales);
 
-    const tooltip = stringFormatter.format("copyButton.copy");
+  const tooltip = stringFormatter.format("copyButton.copy");
 
-    const copyValue = () => {
-      copy(onlyText(text));
-    };
+  const copyValue = () => {
+    copy(onlyText(text));
+  };
 
-    return (
-      <ClearPropsContext>
-        <TooltipTrigger>
-          <Action action={copyValue} showFeedback>
-            <Button
-              aria-label={tooltip}
-              {...buttonProps}
-              ref={ref}
-              variant={variant}
-              color={color}
-            >
-              <IconCopy />
-            </Button>
-          </Action>
-          <Tooltip>{tooltip}</Tooltip>
-        </TooltipTrigger>
-      </ClearPropsContext>
-    );
-  },
-);
+  return (
+    <ClearPropsContext>
+      <TooltipTrigger>
+        <Action action={copyValue} showFeedback>
+          <Button
+            aria-label={tooltip}
+            {...buttonProps}
+            ref={ref}
+            variant={variant}
+            color={color}
+          >
+            <IconCopy />
+          </Button>
+        </Action>
+        <Tooltip>{tooltip}</Tooltip>
+      </TooltipTrigger>
+    </ClearPropsContext>
+  );
+});
 
 export default CopyButton;

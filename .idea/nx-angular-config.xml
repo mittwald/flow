@@ -1,4 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="NxAngularConfigService" workspaceLocation="file://$PROJECT_DIR$/nx.json" />
+  <component name="NxAngularConfigService" workspaceLocation="file://$PROJECT_DIR$/nx.json">
+    <projects>
+      <project name="components" file="file://$PROJECT_DIR$/packages/components/project.json" />
+      <project name="docs" file="file://$PROJECT_DIR$/apps/docs/project.json" />
+      <project name="ext-bridge" file="file://$PROJECT_DIR$/packages/ext-bridge/project.json" />
+      <project name="react-tunnel" file="file://$PROJECT_DIR$/packages/react-tunnel/project.json" />
+      <project name="remote-core" file="file://$PROJECT_DIR$/packages/remote-core/project.json" />
+      <project name="remote-dom-demo" file="file://$PROJECT_DIR$/apps/remote-dom-demo/project.json" />
+      <project name="remote-elements" file="file://$PROJECT_DIR$/packages/remote-elements/project.json" />
+      <project name="remote-react-components" file="file://$PROJECT_DIR$/packages/remote-react-components/project.json" />
+      <project name="remote-react-renderer" file="file://$PROJECT_DIR$/packages/remote-react-renderer/project.json" />
+      <project name="stylesheet" file="file://$PROJECT_DIR$/packages/stylesheet/project.json" />
+      <project name="tokens" file="file://$PROJECT_DIR$/packages/design-tokens/project.json" />
+    </projects>
+  </component>
 </project>

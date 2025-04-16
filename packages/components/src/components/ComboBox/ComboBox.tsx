@@ -39,6 +39,7 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
     },
     controller: controllerFromProps,
     placeholder,
+    ref,
     ...rest
   } = props;
 
@@ -79,6 +80,7 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
 
   return (
     <Aria.ComboBox
+      ref={ref}
       menuTrigger={menuTrigger}
       className={rootClassName}
       {...rest}

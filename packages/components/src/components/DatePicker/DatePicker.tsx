@@ -9,11 +9,15 @@ import { FieldError } from "@/components/FieldError";
 import styles from "../FormField/FormField.module.scss";
 import { Popover } from "@/components/Popover/Popover";
 import { useOverlayController } from "@/lib/controller";
-import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import {
+  flowComponent,
+  type FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
 import { Calendar } from "@/components/Calendar";
 
 export interface DatePickerProps<T extends Aria.DateValue = Aria.DateValue>
-  extends PropsWithChildren<Omit<Aria.DatePickerProps<T>, "children">> {
+  extends PropsWithChildren<Omit<Aria.DatePickerProps<T>, "children">>,
+    FlowComponentProps {
   /** The error message that is displayed below the input. */
   errorMessage?: ReactNode;
 }
@@ -23,7 +27,7 @@ export interface DatePickerProps<T extends Aria.DateValue = Aria.DateValue>
  * @flr-clear-props-context
  */
 export const DatePicker = flowComponent("DatePicker", (props) => {
-  const { children, className, errorMessage, onChange, ...rest } = props;
+  const { children, className, errorMessage, onChange, ref, ...rest } = props;
 
   const rootClassName = clsx(styles.formField, className);
 
@@ -44,6 +48,7 @@ export const DatePicker = flowComponent("DatePicker", (props) => {
 
   return (
     <Aria.DatePicker
+      ref={ref}
       {...rest}
       className={rootClassName}
       onOpenChange={(v) => popoverController.setOpen(v)}

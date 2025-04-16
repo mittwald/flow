@@ -39,86 +39,83 @@ export interface ModalProps
   isDismissable?: boolean;
 }
 
-export const Modal = flowComponent<"Modal", HTMLDivElement>(
-  "Modal",
-  (props) => {
-    const {
-      size = "s",
-      offCanvas,
-      controller,
-      children,
-      ref,
-      className,
-      offCanvasOrientation = "right",
-      ...rest
-    } = props;
+export const Modal = flowComponent("Modal", (props) => {
+  const {
+    size = "s",
+    offCanvas,
+    controller,
+    children,
+    ref,
+    className,
+    offCanvasOrientation = "right",
+    ...rest
+  } = props;
 
-    const rootClassName = clsx(
-      offCanvas ? styles.offCanvas : styles.modal,
-      styles[`size-${size}`],
-      styles[offCanvasOrientation],
-      className,
-    );
+  const rootClassName = clsx(
+    offCanvas ? styles.offCanvas : styles.modal,
+    styles[`size-${size}`],
+    styles[offCanvasOrientation],
+    className,
+  );
 
-    const propsContext: PropsContext = {
-      Content: {
-        className: styles.content,
-        Section: {
-          Heading: {
-            level: 3,
-          },
+  const propsContext: PropsContext = {
+    Content: {
+      className: styles.content,
+      Section: {
+        Heading: {
+          level: 3,
         },
       },
-      ColumnLayout: {
-        l: [2, 1],
-        m: [1],
-        className: styles.columnLayout,
-        Section: {
-          Heading: {
-            level: 3,
-          },
+    },
+    ColumnLayout: {
+      l: [2, 1],
+      m: [1],
+      className: styles.columnLayout,
+      Section: {
+        Heading: {
+          level: 3,
         },
-        AccentBox: { className: styles.accentBox, color: "neutral" },
       },
-      Heading: {
-        level: 2,
-        slot: "title",
-        tunnelId: "heading",
-      },
-      ActionGroup: {
-        className: styles.actionGroup,
-        spacing: "m",
-      },
-    };
+      AccentBox: { className: styles.accentBox, color: "neutral" },
+    },
+    Heading: {
+      level: 2,
+      slot: "title",
+      tunnelId: "heading",
+    },
+    ActionGroup: {
+      className: styles.actionGroup,
+      spacing: "m",
+    },
+  };
 
-    return (
-      <Overlay
-        className={rootClassName}
-        controller={controller}
-        ref={ref}
-        {...rest}
-      >
-        <PropsContextProvider props={propsContext}>
-          <TunnelProvider>
-            <HeaderView className={styles.header}>
-              <TunnelExit id="heading" />
-              <Action closeOverlay="Modal">
-                <ButtonView
-                  variant="plain"
-                  color="secondary"
-                  className={styles.closeButton}
-                  onPress={controller?.close}
-                >
-                  <IconClose />
-                </ButtonView>
-              </Action>
-            </HeaderView>
-            {children}
-          </TunnelProvider>
-        </PropsContextProvider>
-      </Overlay>
-    );
-  },
-);
+  return (
+    <Overlay
+      className={rootClassName}
+      controller={controller}
+      ref={ref}
+      {...rest}
+    >
+      <PropsContextProvider props={propsContext}>
+        <TunnelProvider>
+          <HeaderView className={styles.header}>
+            <TunnelExit id="heading" />
+            <Action closeOverlay="Modal">
+              <ButtonView
+                variant="plain"
+                color="secondary"
+                className={styles.closeButton}
+                onPress={controller?.close}
+              >
+                <IconClose />
+              </ButtonView>
+            </Action>
+          </HeaderView>
+          {children}
+        </TunnelProvider>
+      </PropsContextProvider>
+    </Overlay>
+  );
+});
 
 export default Modal;

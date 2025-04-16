@@ -17,70 +17,67 @@ import { useLocalizedStringFormatter } from "react-aria";
 
 export interface SearchFieldProps
   extends PropsWithChildren<Omit<Aria.SearchFieldProps, "children">>,
-    FlowComponentProps {}
+    FlowComponentProps<HTMLInputElement> {}
 
 /**
  * @flr-generate all
  * @flr-clear-props-context
  */
-export const SearchField = flowComponent<"SearchField", HTMLInputElement>(
-  "SearchField",
-  (props) => {
-    const { children, className, ref, ...rest } = props;
+export const SearchField = flowComponent("SearchField", (props) => {
+  const { children, className, ref, ...rest } = props;
 
-    const rootClassName = clsx(
-      formFieldStyles.formField,
-      styles.searchField,
-      className,
-    );
+  const rootClassName = clsx(
+    formFieldStyles.formField,
+    styles.searchField,
+    className,
+  );
 
-    const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(locales);
 
-    const searchText = stringFormatter.format(`searchField.search`);
+  const searchText = stringFormatter.format(`searchField.search`);
 
-    const propsContext: PropsContext = {
-      Label: {
-        className: formFieldStyles.label,
-        optional: !props.isRequired,
-      },
-      FieldDescription: {
-        className: formFieldStyles.fieldDescription,
-      },
-      FieldError: {
-        className: formFieldStyles.customFieldError,
-      },
-    };
+  const propsContext: PropsContext = {
+    Label: {
+      className: formFieldStyles.label,
+      optional: !props.isRequired,
+    },
+    FieldDescription: {
+      className: formFieldStyles.fieldDescription,
+    },
+    FieldError: {
+      className: formFieldStyles.customFieldError,
+    },
+  };
 
-    return (
-      <ClearPropsContext>
-        <Aria.SearchField
-          aria-label={searchText}
-          {...rest}
-          className={rootClassName}
-        >
-          <PropsContextProvider props={propsContext}>
-            {children}
-          </PropsContextProvider>
-          <div className={styles.inputContainer}>
-            <IconSearch className={styles.searchIcon} />
-            <Aria.Input
-              placeholder={searchText}
-              className={styles.input}
-              ref={ref}
-            />
-            <Button
-              className={styles.clearButton}
-              variant="plain"
-              color="secondary"
-            >
-              <IconClose />
-            </Button>
-          </div>
-          <FieldError className={formFieldStyles.fieldError} />
-        </Aria.SearchField>
-      </ClearPropsContext>
-    );
-  },
-);
+  return (
+    <ClearPropsContext>
+      <Aria.SearchField
+        aria-label={searchText}
+        {...rest}
+        className={rootClassName}
+      >
+        <PropsContextProvider props={propsContext}>
+          {children}
+        </PropsContextProvider>
+        <div className={styles.inputContainer}>
+          <IconSearch className={styles.searchIcon} />
+          <Aria.Input
+            placeholder={searchText}
+            className={styles.input}
+            ref={ref}
+          />
+          <Button
+            className={styles.clearButton}
+            variant="plain"
+            color="secondary"
+          >
+            <IconClose />
+          </Button>
+        </div>
+        <FieldError className={formFieldStyles.fieldError} />
+      </Aria.SearchField>
+    </ClearPropsContext>
+  );
+});
 
 export default SearchField;
