@@ -7,7 +7,10 @@ import type {
 } from "@/lib/types/props";
 import styles from "./FileCard.module.scss";
 import clsx from "clsx";
-import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import {
+  flowComponent,
+  type FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
 import { FileSizeText } from "@/components/FileCard/components/FileSizeText";
 import { Link, type LinkProps } from "@/components/Link";
 import Wrap from "@/components/Wrap";
@@ -16,7 +19,8 @@ import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { OptionsButton } from "@/components/List/components/Items/components/Item/components/OptionsButton";
 
 export interface FileCardProps
-  extends PropsWithClassName,
+  extends FlowComponentProps<HTMLDivElement | HTMLLIElement>,
+    PropsWithClassName,
     PropsWithElementType<"div" | "li">,
     Pick<LinkProps, "onPress" | "href" | "target" | "download"> {
   /** The name of the file. */
@@ -34,6 +38,7 @@ export interface FileCardProps
 /** @flr-generate all */
 export const FileCard = flowComponent("FileCard", (props) => {
   const {
+    ref,
     onDelete,
     type,
     sizeInBytes,
@@ -61,7 +66,7 @@ export const FileCard = flowComponent("FileCard", (props) => {
 
   return (
     <PropsContextProvider props={propsContext} mergeInParentContext>
-      <Element className={rootClassName}>
+      <Element ref={ref as never} className={rootClassName}>
         <Wrap if={href || onPress}>
           <Link
             className={styles.link}
