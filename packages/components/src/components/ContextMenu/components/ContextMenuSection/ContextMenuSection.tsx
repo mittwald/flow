@@ -23,7 +23,7 @@ export type ContextMenuSectionProps = PropsWithChildren &
 export const ContextMenuSection = flowComponent(
   "ContextMenuSection",
   (props) => {
-    const { children, selectionMode, ...rest } = props;
+    const { children, selectionMode, ref, ...rest } = props;
 
     const selectionVariant = getMenuItemSelectionVariant(selectionMode);
 
@@ -39,6 +39,7 @@ export const ContextMenuSection = flowComponent(
 
     return (
       <Aria.MenuSection
+        ref={ref}
         {...rest}
         selectionMode={getAriaSelectionMode(selectionMode)}
         className={styles.section}

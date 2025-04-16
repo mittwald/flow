@@ -12,7 +12,7 @@ export interface TextFieldProps
   extends Omit<TextFieldBaseProps, "input" | "className">,
     Pick<Aria.InputProps, "placeholder" | "form">,
     PropsWithClassName,
-    FlowComponentProps {}
+    FlowComponentProps<HTMLInputElement> {}
 
 /**
  * @flr-generate all

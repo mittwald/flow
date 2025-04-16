@@ -1,4 +1,4 @@
-import type { FC, PropsWithChildren, ReactNode, Ref } from "react";
+import { type FC, type PropsWithChildren, type ReactNode } from "react";
 import React, { useState } from "react";
 import * as Aria from "react-aria-components";
 import styles from "../FormField/FormField.module.scss";
@@ -10,10 +10,11 @@ import { FieldError } from "@/components/FieldError";
 import { FieldDescription } from "@/components/FieldDescription";
 import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 
 export interface TextFieldBaseProps
-  extends PropsWithChildren<Omit<Aria.TextFieldProps, "children">> {
-  ref?: Ref<HTMLInputElement>;
+  extends PropsWithChildren<Omit<Aria.TextFieldProps, "children">>,
+    Pick<FlowComponentProps<HTMLInputElement>, "ref"> {
   /** The input element */
   input: ReactNode;
   /** Whether a character count should be displayed inside the field description. */
@@ -21,7 +22,8 @@ export interface TextFieldBaseProps
 }
 
 export const TextFieldBase: FC<TextFieldBaseProps> = (props) => {
-  const { children, className, input, showCharacterCount, ...rest } = props;
+  const { children, className, input, showCharacterCount, ref, ...rest } =
+    props;
   const [charactersCount, setCharactersCount] = useState(
     props.value?.length ?? 0,
   );
@@ -63,6 +65,7 @@ export const TextFieldBase: FC<TextFieldBaseProps> = (props) => {
   return (
     <ClearPropsContext>
       <Aria.TextField
+        ref={ref}
         {...rest}
         className={rootClassName}
         onChange={handleOnChange}

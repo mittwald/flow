@@ -16,7 +16,7 @@ export interface LinkProps
   extends PropsWithChildren<
       Omit<Aria.LinkProps, "children" | "slot" | "className">
     >,
-    FlowComponentProps,
+    FlowComponentProps<HTMLAnchorElement>,
     PropsWithClassName {
   /** Whether the link should be styled for being displayed inside a text. */
   inline?: boolean;
@@ -34,62 +34,64 @@ export interface LinkProps
  * @flr-generate all
  * @flr-clear-props-context
  */
-export const Link = flowComponent<"Link", HTMLAnchorElement>(
-  "Link",
-  (props) => {
-    const {
-      children,
-      className,
-      inline,
-      linkComponent: linkComponentFromProps,
-      color = "primary",
-      unstyled = false,
-      "aria-current": ariaCurrent,
-      ref,
-      slot: ignoredSlotProp,
-      ...rest
-    } = props;
+export const Link = flowComponent("Link", (props) => {
+  const {
+    children,
+    className,
+    inline,
+    linkComponent: linkComponentFromProps,
+    color = "primary",
+    unstyled = false,
+    "aria-current": ariaCurrent,
+    ref,
+    slot: ignoredSlotProp,
+    ...rest
+  } = props;
 
-    const { linkComponent: linkComponentFromContext } = useContext(linkContext);
-    const Link = linkComponentFromProps
-      ? linkComponentFromProps
-      : props.href && linkComponentFromContext
-        ? linkComponentFromContext
-        : Aria.Link;
+  const { linkComponent: linkComponentFromContext } = useContext(linkContext);
+  const Link = linkComponentFromProps
+    ? linkComponentFromProps
+    : props.href && linkComponentFromContext
+      ? linkComponentFromContext
+      : Aria.Link;
 
-    const rootClassName = unstyled
-      ? className
-      : clsx(styles.link, inline && styles.inline, styles[color], className);
+  const rootClassName = unstyled
+    ? className
+    : clsx(
+        styles.link,
+        inline && styles.inline,
+        styles[color as keyof typeof styles],
+        className,
+      );
 
-    const propsContext: PropsContext = {
-      Icon: {
-        className: styles.icon,
-        size: "s",
-      },
-    };
+  const propsContext: PropsContext = {
+    Icon: {
+      className: styles.icon,
+      size: "s",
+    },
+  };
 
-    const unsupportedTypingsLinkProps = ariaCurrent
-      ? ({
-          "aria-current": true,
-        } as Record<string, unknown>)
-      : {};
+  const unsupportedTypingsLinkProps = ariaCurrent
+    ? ({
+        "aria-current": true,
+      } as Record<string, unknown>)
+    : {};
 
-    return (
-      <ClearPropsContext>
-        <Link
-          {...unsupportedTypingsLinkProps}
-          {...rest}
-          className={rootClassName}
-          ref={ref}
-        >
-          <PropsContextProvider props={propsContext}>
-            {children}
-            <LinkIcon {...props} />
-          </PropsContextProvider>
-        </Link>
-      </ClearPropsContext>
-    );
-  },
-);
+  return (
+    <ClearPropsContext>
+      <Link
+        {...unsupportedTypingsLinkProps}
+        {...rest}
+        className={rootClassName}
+        ref={ref}
+      >
+        <PropsContextProvider props={propsContext}>
+          {children}
+          <LinkIcon {...props} />
+        </PropsContextProvider>
+      </Link>
+    </ClearPropsContext>
+  );
+});
 
 export default Link;

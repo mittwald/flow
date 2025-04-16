@@ -1,4 +1,3 @@
-import type { ForwardedRef } from "react";
 import React, { useRef } from "react";
 import * as Aria from "react-aria-components";
 import type { TextFieldBaseProps } from "@/components/TextFieldBase";
@@ -10,9 +9,9 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { mergeRefs } from "@react-aria/utils";
 
 export interface TextAreaProps
-  extends Omit<TextFieldBaseProps, "input">,
+  extends Omit<TextFieldBaseProps, "input" | "ref">,
     Pick<Aria.TextAreaProps, "placeholder" | "rows">,
-    FlowComponentProps {
+    FlowComponentProps<HTMLTextAreaElement> {
   /**
    * Whether the text area should grow if its content gets longer than its
    * initial height.
@@ -34,18 +33,18 @@ export const TextArea = flowComponent("TextArea", (props) => {
     ...rest
   } = props;
 
-  const resizeRef = useRef<HTMLTextAreaElement>(null);
+  const localRef = useRef<HTMLTextAreaElement>(null);
 
   const getHeight = (rows: number) => {
     return `calc(var(--line-height--m) * ${rows} + (var(--form-control--padding-y) * 2))`;
   };
 
   const updateHeight = () => {
-    if (resizeRef.current && rows !== autoResizeMaxRows) {
+    if (localRef.current && rows !== autoResizeMaxRows) {
       // https://stackoverflow.com/a/60795884
-      resizeRef.current.style.height = "0px";
-      const scrollHeight = resizeRef.current.scrollHeight;
-      resizeRef.current.style.height = scrollHeight + "px";
+      localRef.current.style.height = "0px";
+      const scrollHeight = localRef.current.scrollHeight;
+      localRef.current.style.height = scrollHeight + "px";
     }
   };
 
@@ -54,10 +53,7 @@ export const TextArea = flowComponent("TextArea", (props) => {
       rows={rows}
       placeholder={placeholder}
       className={styles.textArea}
-      ref={mergeRefs(
-        ref as ForwardedRef<HTMLTextAreaElement | null>,
-        resizeRef,
-      )}
+      ref={mergeRefs(localRef, ref)}
       onChange={updateHeight}
       style={{
         minHeight: getHeight(rows),

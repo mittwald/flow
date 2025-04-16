@@ -17,13 +17,13 @@ export interface FieldErrorProps
  * @flr-clear-props-context
  */
 export const FieldError = flowComponent("FieldError", (props) => {
-  const { children, className, ...rest } = props;
+  const { children, className, ref, ...rest } = props;
 
   const rootClassName = clsx(styles.fieldError, className);
 
   return (
     <ClearPropsContext>
-      <Aria.FieldError {...rest} className={rootClassName}>
+      <Aria.FieldError ref={ref} {...rest} className={rootClassName}>
         {({ validationErrors }) => (
           <>
             <IconDanger size="s" />

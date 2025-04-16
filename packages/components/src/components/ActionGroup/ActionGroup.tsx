@@ -13,60 +13,57 @@ import { getActionGroupSlot } from "@/components/ActionGroup/lib/getActionGroupS
 
 export interface ActionGroupProps
   extends PropsWithChildren,
-    FlowComponentProps,
+    FlowComponentProps<HTMLDivElement>,
     PropsWithClassName {
   /** The spacing between the buttons inside the action group. @default "m" */
   spacing?: "s" | "m";
 }
 
 /** @flr-generate all */
-export const ActionGroup = flowComponent<"ActionGroup", HTMLDivElement>(
-  "ActionGroup",
-  (props) => {
-    const {
-      children,
-      className,
-      ref,
+export const ActionGroup = flowComponent("ActionGroup", (props) => {
+  const {
+    children,
+    className,
+    ref,
 
-      spacing = "s",
-      ...rest
-    } = props;
+    spacing = "s",
+    ...rest
+  } = props;
 
-    const rootClassName = clsx(styles.actionGroup, className, styles[spacing]);
+  const rootClassName = clsx(styles.actionGroup, className, styles[spacing]);
 
-    const propsContext: PropsContext = {
-      Button: {
-        slot: dynamic((props) => getActionGroupSlot(props)),
-        className: dynamic((props) => {
-          const slot = getActionGroupSlot(props);
-          return clsx(props.className, styles[slot]);
-        }),
-      },
-      Switch: {
-        labelPosition: "leading",
-        className: dynamic((props) => {
-          return clsx(props.className, props.slot && styles[props.slot]);
-        }),
-      },
-      Link: {
-        className: dynamic((props) => {
-          return clsx(props.className, props.slot && styles[props.slot]);
-        }),
-      },
-    };
+  const propsContext: PropsContext = {
+    Button: {
+      slot: dynamic((props) => getActionGroupSlot(props)),
+      className: dynamic((props) => {
+        const slot = getActionGroupSlot(props);
+        return clsx(props.className, styles[slot]);
+      }),
+    },
+    Switch: {
+      labelPosition: "leading",
+      className: dynamic((props) => {
+        return clsx(props.className, props.slot && styles[props.slot]);
+      }),
+    },
+    Link: {
+      className: dynamic((props) => {
+        return clsx(props.className, props.slot && styles[props.slot]);
+      }),
+    },
+  };
 
-    return (
-      <ActionStateContextProvider>
-        <PropsContextProvider props={propsContext} mergeInParentContext>
-          <TunnelProvider>
-            <div {...rest} className={rootClassName} ref={ref} role="group">
-              {children}
-            </div>
-          </TunnelProvider>
-        </PropsContextProvider>
-      </ActionStateContextProvider>
-    );
-  },
-);
+  return (
+    <ActionStateContextProvider>
+      <PropsContextProvider props={propsContext} mergeInParentContext>
+        <TunnelProvider>
+          <div {...rest} className={rootClassName} ref={ref} role="group">
+            {children}
+          </div>
+        </TunnelProvider>
+      </PropsContextProvider>
+    </ActionStateContextProvider>
+  );
+});
 
 export default ActionGroup;

@@ -12,13 +12,13 @@ import styles from "./Alert.module.scss";
 export interface AlertProps
   extends PropsWithChildren<ComponentProps<"aside">>,
     PropsWithStatus,
-    FlowComponentProps {}
+    FlowComponentProps<HTMLElement> {}
 
 /**
  * @flr-generate all
  * @flr-clear-props-context
  */
-export const Alert = flowComponent<"Alert", HTMLElement>("Alert", (props) => {
+export const Alert = flowComponent("Alert", (props) => {
   const { children, className, status = "info", ref, ...rest } = props;
 
   const rootClassName = clsx(styles.alert, styles[status], className);

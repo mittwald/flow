@@ -19,7 +19,10 @@ import { TableCell } from "@/components/List/setupComponents/TableCell";
 import { TableColumn } from "@/components/List/setupComponents/TableColumn";
 import { TableHeader } from "@/components/List/setupComponents/TableHeader";
 import { TableRow } from "@/components/List/setupComponents/TableRow";
-import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import {
+  flowComponent,
+  type FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { deepFilterByType, deepFindOfType } from "@/lib/react/deepFindOfType";
 import { deepHas } from "@/lib/react/deepHas";
@@ -32,6 +35,7 @@ import { listContext } from "./listContext";
 
 export interface ListProps<T>
   extends PropsWithChildren,
+    FlowComponentProps,
     Omit<
       ListShape<T>,
       | "search"

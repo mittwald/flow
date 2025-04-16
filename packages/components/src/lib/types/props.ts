@@ -1,4 +1,4 @@
-import type { ExoticComponent, HTMLAttributes, HTMLElementType } from "react";
+import type { ExoticComponent, HTMLAttributes } from "react";
 
 export type Status = "info" | "success" | "warning" | "danger";
 
@@ -17,10 +17,11 @@ export interface PropsWithClassName {
   className?: string;
 }
 
-export type PropsWithElementType<T extends HTMLElementType = never> =
-  HTMLAttributes<HTMLElement> & {
-    elementType?: T | ExoticComponent;
-  };
+export type PropsWithElementType<
+  T extends keyof HTMLElementTagNameMap = never,
+> = HTMLAttributes<HTMLElement> & {
+  elementType?: T | ExoticComponent;
+};
 
 export type ContainerBreakpointSize = "xs" | "s" | "m" | "l" | "xl";
 

@@ -12,7 +12,7 @@ import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 
 export interface LabelProps
   extends PropsWithChildren<Omit<Aria.LabelProps, "children">>,
-    FlowComponentProps {
+    FlowComponentProps<HTMLLabelElement> {
   /** Whether the label should show an "optional" indicator. */
   optional?: boolean;
   /** Whether the label should be displayed as disabled. */
@@ -25,43 +25,40 @@ export interface LabelProps
  * @flr-generate all
  * @flr-clear-props-context
  */
-export const Label = flowComponent<"Label", HTMLLabelElement>(
-  "Label",
-  (props) => {
-    const {
-      children,
-      className,
-      optional,
-      isDisabled,
-      ref,
-      unstyled = false,
-      ...rest
-    } = props;
+export const Label = flowComponent("Label", (props) => {
+  const {
+    children,
+    className,
+    optional,
+    isDisabled,
+    ref,
+    unstyled = false,
+    ...rest
+  } = props;
 
-    const stringFormatter = useLocalizedStringFormatter(locales);
+  const stringFormatter = useLocalizedStringFormatter(locales);
 
-    const rootClassName = unstyled
-      ? className
-      : clsx(styles.label, isDisabled && styles.disabled, className);
+  const rootClassName = unstyled
+    ? className
+    : clsx(styles.label, isDisabled && styles.disabled, className);
 
-    const optionalMarker = " " + stringFormatter.format("label.optional");
+  const optionalMarker = " " + stringFormatter.format("label.optional");
 
-    const propsContext: PropsContext = {
-      ContextualHelpTrigger: { tunnelId: "contextualHelp" },
-    };
+  const propsContext: PropsContext = {
+    ContextualHelpTrigger: { tunnelId: "contextualHelp" },
+  };
 
-    return (
-      <PropsContextProvider props={propsContext}>
-        <TunnelProvider>
-          <Aria.Label {...rest} className={rootClassName} ref={ref}>
-            {children}
-            {optional && optionalMarker}
-            <TunnelExit id="contextualHelp" />
-          </Aria.Label>
-        </TunnelProvider>
-      </PropsContextProvider>
-    );
-  },
-);
+  return (
+    <PropsContextProvider props={propsContext}>
+      <TunnelProvider>
+        <Aria.Label {...rest} className={rootClassName} ref={ref}>
+          {children}
+          {optional && optionalMarker}
+          <TunnelExit id="contextualHelp" />
+        </Aria.Label>
+      </TunnelProvider>
+    </PropsContextProvider>
+  );
+});
 
 export default Label;
