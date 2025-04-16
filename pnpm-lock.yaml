@@ -919,9 +919,6 @@ importers:
       '@mittwald/ext-bridge':
         specifier: workspace:*
         version: link:../ext-bridge
-      '@mittwald/flow-remote-react-renderer':
-        specifier: workspace:*
-        version: link:../remote-react-renderer
       '@mittwald/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
