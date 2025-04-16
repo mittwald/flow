@@ -7,8 +7,15 @@
   "repository": "https://github.com/mittwald/flow",
   "exports": {
     ".": {
-      "types": "./dist/types/index.d.ts",
-      "default": "./dist/js/index.mjs"
+      "types": "./dist/types/index.d.ts"
+    },
+    "./node": {
+      "types": "./dist/types/index-node.d.ts",
+      "node": "./dist/js/index-node.mjs"
+    },
+    "./browser": {
+      "types": "./dist/types/index-browser.d.ts",
+      "default": "./dist/js/index-browser.mjs"
     },
     "./react": {
       "types": "./dist/types/react/index.d.ts",

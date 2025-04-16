@@ -9,7 +9,7 @@ interface ApiResponse {
 
 export const fetchPublicKey = async (serial: string) => {
   const response = await axios<ApiResponse>({
-    url: `https://${MW_EXT_API_URL}/v2/public-keys/${serial}`,
+    url: `${MW_EXT_API_URL}/v2/public-keys/${serial}`,
     validateStatus: (status) => status === 200,
     params: {
       format: "spki",
