@@ -1,7 +1,6 @@
+import { getExtBridge } from "@/getExtBridge";
 import { usePromise } from "@mittwald/react-use-promise";
 
-export const useExtBridge = () =>
-  usePromise(async () => {
-    await globalThis.mittwald.extBridge.ready;
-    return globalThis.mittwald.extBridge;
-  }, []);
+export const useExtBridge = () => {
+  return usePromise(getExtBridge, []);
+};

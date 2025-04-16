@@ -3,14 +3,17 @@ import type {
   RemoteExports,
   RemoteToHostConnection,
 } from "@/connection/types";
-import { delegateExtBridgeRemoteFunctions } from "@/ext-bridge/delegateExtBridgeRemoteFunctions";
-import type { RemoteConnection } from "@mittwald/remote-dom-core/elements";
+import { RemoteError } from "@/error";
+import { type RemoteConnection } from "@mittwald/remote-dom-core/elements";
 import { ThreadNestedIframe } from "@quilted/threads";
 
-export const connectHostRenderRoot = (
+const incompatibleParentFrameError = () =>
+  new RemoteError("Could not find any compatible parent frame");
+
+export const connectHostRenderRoot = async (
   div: HTMLDivElement,
-): RemoteToHostConnection => {
-  const thread = new ThreadNestedIframe<HostExports, RemoteExports>({
+): Promise<RemoteToHostConnection> => {
+  const connection = new ThreadNestedIframe<HostExports, RemoteExports>({
     exports: {
       render: (connection: RemoteConnection) =>
         import("@mittwald/remote-dom-core/elements").then(
@@ -22,14 +25,28 @@ export const connectHostRenderRoot = (
     },
   });
 
-  thread.imports.setIsReady();
-
-  if (typeof mittwald.extBridge !== "undefined") {
-    delegateExtBridgeRemoteFunctions(thread);
-    mittwald.extBridge.setIsReady();
+  if (connection.parent === window) {
+    throw incompatibleParentFrameError();
   }
 
-  return thread;
+  try {
+    await connection.imports.setIsReady();
+
+    if (typeof mwExtBridge !== "undefined") {
+      mwExtBridge.connection = connection.imports;
+      await mwExtBridge.readiness.setIsReady();
+    }
+
+    return connection;
+  } catch (error) {
+    if (
+      error instanceof Error &&
+      /No '.*' method is exported from this thread/.test(error.message)
+    ) {
+      throw incompatibleParentFrameError();
+    }
+    throw error;
+  }
 };
 
 export const connectHostRenderRootRef = (ref: HTMLDivElement | null) => {
@@ -37,7 +54,7 @@ export const connectHostRenderRootRef = (ref: HTMLDivElement | null) => {
     return;
   }
   if ("__remoteConnection" in ref) {
-    return ref["__remoteConnection"] as RemoteToHostConnection;
+    return ref["__remoteConnection"] as Promise<RemoteToHostConnection>;
   }
 
   const connection = connectHostRenderRoot(ref);

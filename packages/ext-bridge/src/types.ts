@@ -1,23 +1,21 @@
 import type { ExtBridgeConfig } from "@/config/types";
-import type { loadingApi } from "@/loading";
+import type { readinessApi } from "@/readiness";
 export type { ExtBridgeConfig } from "@/config/types";
 
-type LoadingApi = typeof loadingApi;
+type ReadinessApi = typeof readinessApi;
 
-export interface ExtBridgeRemoteApi {
+export interface ExtBridgeConnectionApi {
   getSessionToken: () => Promise<string>;
   getConfig: () => Promise<ExtBridgeConfig>;
 }
 
-export interface ExtBridge extends ExtBridgeRemoteApi, LoadingApi {
+export interface ExtBridge {
+  readiness: ReadinessApi;
+  connection: ExtBridgeConnectionApi;
   config: ExtBridgeConfig;
 }
 
 declare global {
-  interface mittwald {
-    extBridge: ExtBridge;
-  }
-
   // eslint-disable-next-line no-var
-  var mittwald: mittwald;
+  var mwExtBridge: ExtBridge;
 }

@@ -1,8 +1,8 @@
+import preserveDirectives from "rollup-preserve-directives";
 import { defineConfig, mergeConfig } from "vite";
 import dts from "vite-plugin-dts";
-import baseConfig from "./vite.config";
 import { externalizeDeps } from "vite-plugin-externalize-deps";
-import preserveDirectives from "rollup-preserve-directives";
+import baseConfig from "./vite.config";
 
 export default mergeConfig(
   baseConfig,
@@ -16,12 +16,23 @@ export default mergeConfig(
       }),
     ],
     build: {
+      minify: false,
+      sourcemap: true,
+      outDir: "dist/js",
+      target: "esnext",
       emptyOutDir: false,
       lib: {
         entry: {
           index: "./src/index.ts",
         },
         formats: ["es"],
+      },
+      rollupOptions: {
+        output: {
+          format: "es",
+          preserveModules: true,
+          entryFileNames: "[name].mjs",
+        },
       },
     },
   }),

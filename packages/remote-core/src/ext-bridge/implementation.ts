@@ -1,5 +1,5 @@
 import { RemoteError } from "@/error";
-import type { ExtBridgeRemoteApi } from "@mittwald/ext-bridge";
+import type { ExtBridgeConnectionApi } from "@mittwald/ext-bridge";
 
 export const emptyImplementation = new Proxy(
   {},
@@ -8,4 +8,4 @@ export const emptyImplementation = new Proxy(
       throw new RemoteError("Missing implementation for mittwald.extBridge");
     },
   },
-) as ExtBridgeRemoteApi;
+) as ExtBridgeConnectionApi;

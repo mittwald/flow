@@ -1,17 +1,23 @@
 "use client";
-import { useExtBridge } from "@mittwald/ext-bridge/react";
-import { CodeBlock, Section } from "@mittwald/flow-remote-react-components";
+import { useConfig } from "@mittwald/ext-bridge/react";
+import {
+  BrowserOnly,
+  CodeBlock,
+  Section,
+} from "@mittwald/flow-remote-react-components";
 
 const BridgeInfo = () => {
-  const bridge = useExtBridge();
+  const config = useConfig();
 
-  return <CodeBlock code={JSON.stringify(bridge.config)} />;
+  return <CodeBlock code={JSON.stringify(config)} />;
 };
 
 export default function Page() {
   return (
     <Section>
-      <BridgeInfo />
+      <BrowserOnly>
+        <BridgeInfo />
+      </BrowserOnly>
     </Section>
   );
 }

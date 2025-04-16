@@ -24,6 +24,8 @@ export default mergeConfig(
       lib: {
         entry: {
           index: "./src/index.ts",
+          "index-node": "./src/index-node.ts",
+          "index-browser": "./src/index-browser.ts",
           react: "./src/react/index.ts",
         },
         formats: ["es"],
