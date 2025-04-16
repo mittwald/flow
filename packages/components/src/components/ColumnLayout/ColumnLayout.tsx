@@ -16,11 +16,12 @@ import {
 
 type GapSize = "s" | "m" | "l" | "xl";
 
-export interface ColumnLayoutProps
-  extends PropsWithChildren,
-    PropsWithElementType<"div" | "ul">,
+export interface ColumnLayoutProps<
+  T extends keyof HTMLElementTagNameMap = "div" | "ul",
+> extends PropsWithChildren,
+    PropsWithElementType<T>,
     PropsWithClassName,
-    FlowComponentProps<unknown> {
+    FlowComponentProps<HTMLElementTagNameMap[T]> {
   /** Column layout for container size s. */
   s?: number[];
   /** Column layout for container size m. */
