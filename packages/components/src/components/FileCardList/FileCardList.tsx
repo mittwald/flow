@@ -9,7 +9,7 @@ import {
 } from "@/lib/componentFactory/flowComponent";
 
 export type FileCardListProps = Omit<ColumnLayoutProps, "elementType"> &
-  FlowComponentProps;
+  FlowComponentProps<HTMLUListElement>;
 
 /**
  * @flr-generate all
