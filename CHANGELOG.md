@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.156](https://github.com/mittwald/flow/compare/0.2.0-alpha.155...0.2.0-alpha.156) (2025-04-17)
+
+### Features
+
+* add callback that triggers after form submit ([3997f3d](https://github.com/mittwald/flow/commit/3997f3dfd0494b98a9148454bc792bdac692ed02))
+
 # [0.2.0-alpha.155](https://github.com/mittwald/flow/compare/0.2.0-alpha.154...0.2.0-alpha.155) (2025-04-16)
 
 ### Bug Fixes
