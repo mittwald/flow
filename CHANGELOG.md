@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.157](https://github.com/mittwald/flow/compare/0.2.0-alpha.156...0.2.0-alpha.157) (2025-04-23)
+
+### Bug Fixes
+
+* **Remote:** do not render modal children if closed ([#1398](https://github.com/mittwald/flow/issues/1398)) ([11f3903](https://github.com/mittwald/flow/commit/11f3903b386bddae3e013ab016e97862824e3190))
+
 # [0.2.0-alpha.156](https://github.com/mittwald/flow/compare/0.2.0-alpha.155...0.2.0-alpha.156) (2025-04-17)
 
 ### Features
