@@ -47,7 +47,7 @@ export const Overlay: FC<OverlayProps> = (props) => {
       className={rootClassName}
     >
       <OverlayContextProvider type="Modal" controller={controller}>
-        {children}
+        {isOpen && children}
       </OverlayContextProvider>
     </OverlayContentView>
   );
