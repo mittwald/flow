@@ -28,7 +28,7 @@ export const TunnelExit: FC<Props> = observer((props) => {
     : null;
 
   if (typeof children === "function") {
-    return <>{children(renderedTunnelChildren)}</>;
+    return children(renderedTunnelChildren);
   }
 
   return renderedTunnelChildren ?? children;

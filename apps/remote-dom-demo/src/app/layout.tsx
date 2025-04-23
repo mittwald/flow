@@ -18,6 +18,7 @@ import type { ErrorComponent } from "next/dist/client/components/error-boundary"
 import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 import { type PropsWithChildren, Suspense } from "react";
 import styles from "./layout.module.css";
+import { TunnelExit } from "@mittwald/react-tunnel";
 
 const Error: ErrorComponent = (props) => {
   return <>REMOTE RENDER ERROR: {props.error.message}</>;
@@ -61,12 +62,14 @@ export default function Layout(props: PropsWithChildren) {
                 <Link href="/host/react-hook-form">React Hook Form</Link>
                 <Link href="/host/rhf-form">RHF Form</Link>
                 <Link href="/host/suspense">Suspense</Link>
+                <Link href="/host/tunnel">Tunnel</Link>
                 <Link href="/host/ext-bridge">Ext Bridge</Link>
                 <Link href="/host/error">Error</Link>
                 <Link href="/host/svg">Icon/SVG</Link>
                 <Link href="/host/list">List</Link>
                 <Link href="/host/navigation/page1">Navigation</Link>
                 <Link href="/host/performance">Performance</Link>
+                <TunnelExit id="@flr-remote-demo" />
               </HeaderNavigation>
               <Separator />
               <main>
