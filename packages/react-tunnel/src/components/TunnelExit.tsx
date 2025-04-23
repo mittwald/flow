@@ -1,12 +1,15 @@
-import type { FC, PropsWithChildren } from "react";
+import type { FC, ReactNode } from "react";
 import { useContext } from "react";
 import tunnelContext from "@/context";
 import { observer } from "mobx-react-lite";
-import React from "react";
 import type { TunnelChildren } from "@/types";
 
-interface Props extends PropsWithChildren {
+interface Props {
   id?: string;
+  children?:
+    | ReactNode
+    | undefined
+    | ((tunnelChildren?: ReactNode | undefined) => ReactNode | undefined);
 }
 
 const ChildrenRenderer: FC<{ children: TunnelChildren }> = (props) => {
@@ -17,13 +20,18 @@ const ChildrenRenderer: FC<{ children: TunnelChildren }> = (props) => {
 export const TunnelExit: FC<Props> = observer((props) => {
   const { children, id } = props;
   const tunnelChildren = useContext(tunnelContext).getChildren(id);
-  if (tunnelChildren) {
-    return tunnelChildren.map(([entryId, children]) => (
-      <ChildrenRenderer key={entryId}>{children}</ChildrenRenderer>
-    ));
+
+  const renderedTunnelChildren = tunnelChildren
+    ? tunnelChildren.map(([entryId, children]) => (
+        <ChildrenRenderer key={entryId}>{children}</ChildrenRenderer>
+      ))
+    : null;
+
+  if (typeof children === "function") {
+    return <>{children(renderedTunnelChildren)}</>;
   }
 
-  return children;
+  return renderedTunnelChildren ?? children;
 });
 
 export default TunnelExit;
