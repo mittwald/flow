@@ -13,6 +13,7 @@ export {
   PopoverTrigger,
   SettingsProvider,
   typedList,
+  NotificationProvider,
   Wrap,
   type ActionFn,
   type ActionProps,
@@ -23,6 +24,8 @@ export {
   type ListProps,
   type ModalProps,
   type ModalTriggerProps,
+  type NotificationProviderProps,
+  type WrapProps,
 } from "@/components/public";
 
 export * from "@/lib/controller/public";

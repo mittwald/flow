@@ -74,7 +74,6 @@ export * from "./MessageThread";
 export * from "./Navigation";
 export * from "./NavigationGroup";
 export * from "./Notification";
-export * from "./NotificationProvider";
 export * from "./NumberField";
 export * from "./Option";
 export * from "./OverlayContent";

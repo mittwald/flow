@@ -1,5 +1,3 @@
-export * from "./view";
-
 export {
   useNotificationController,
   NotificationProvider,

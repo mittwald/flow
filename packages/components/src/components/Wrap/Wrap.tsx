@@ -1,9 +1,11 @@
 import type { FC, PropsWithChildren, ReactElement } from "react";
 
-export const Wrap: FC<{
+export interface WrapProps {
   if: unknown;
   children: ReactElement<PropsWithChildren>;
-}> = (props) => {
+}
+
+export const Wrap: FC<WrapProps> = (props) => {
   const { if: _if, children } = props;
 
   if (_if) {

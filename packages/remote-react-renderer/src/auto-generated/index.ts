@@ -75,7 +75,6 @@ import { MessageThread as MessageThread } from "@mittwald/flow-react-components"
 import { Navigation as Navigation } from "@mittwald/flow-react-components";
 import { NavigationGroup as NavigationGroup } from "@mittwald/flow-react-components";
 import { Notification as Notification } from "@mittwald/flow-react-components";
-import { NotificationProvider as NotificationProvider } from "@mittwald/flow-react-components";
 import { NumberField as NumberField } from "@mittwald/flow-react-components";
 import { Option as Option } from "@mittwald/flow-react-components";
 import { OverlayContent as OverlayContent } from "@mittwald/flow-react-components";
@@ -198,8 +197,6 @@ export const flowComponents = {
   "flr-navigation": createFlowRemoteComponentRenderer(Navigation),
   "flr-navigation-group": createFlowRemoteComponentRenderer(NavigationGroup),
   "flr-notification": createFlowRemoteComponentRenderer(Notification),
-  "flr-notification-provider":
-    createFlowRemoteComponentRenderer(NotificationProvider),
   "flr-number-field": createFlowRemoteComponentRenderer(NumberField),
   "flr-option": createFlowRemoteComponentRenderer(Option),
   "flr-overlay-content": createFlowRemoteComponentRenderer(OverlayContent),

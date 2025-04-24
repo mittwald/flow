@@ -1,5 +1,6 @@
 "use client";
-import * as viewComponents from "@/auto-generated";
+import * as remoteComponents from "@/auto-generated";
+import * as customViewComponents from "@/views";
 import { stringifyError } from "@/lib/stringifyError";
 import { ViewComponentContextProvider } from "@mittwald/flow-react-components/internal";
 import {
@@ -14,6 +15,11 @@ import {
   type PropsWithChildren,
 } from "react";
 import { ErrorBoundary } from "react-error-boundary";
+
+const viewComponents = {
+  ...remoteComponents,
+  ...customViewComponents,
+} as FlowViewComponents;
 
 export const RemoteRoot: FC<PropsWithChildren> = (props) => {
   const { children } = props;
@@ -55,9 +61,7 @@ export const RemoteRoot: FC<PropsWithChildren> = (props) => {
         }}
       >
         <Suspense>
-          <ViewComponentContextProvider
-            components={viewComponents as FlowViewComponents}
-          >
+          <ViewComponentContextProvider components={viewComponents}>
             {children}
           </ViewComponentContextProvider>
         </Suspense>

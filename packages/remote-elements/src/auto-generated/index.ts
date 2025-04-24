@@ -74,7 +74,6 @@ export * from "./RemoteMessageThreadElement";
 export * from "./RemoteNavigationElement";
 export * from "./RemoteNavigationGroupElement";
 export * from "./RemoteNotificationElement";
-export * from "./RemoteNotificationProviderElement";
 export * from "./RemoteNumberFieldElement";
 export * from "./RemoteOptionElement";
 export * from "./RemoteOverlayContentElement";
