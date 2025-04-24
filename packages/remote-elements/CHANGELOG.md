@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.158](https://github.com/mittwald/flow/compare/0.2.0-alpha.157...0.2.0-alpha.158) (2025-04-24)
+
+### Features
+
+* **Remote:** support Notifications from remote ([#1401](https://github.com/mittwald/flow/issues/1401)) ([4933816](https://github.com/mittwald/flow/commit/493381666d1eb1d698c9c230c4a6554b6ca0554b))
+
 # [0.2.0-alpha.157](https://github.com/mittwald/flow/compare/0.2.0-alpha.156...0.2.0-alpha.157) (2025-04-23)
 
 **Note:** Version bump only for package @mittwald/flow-remote-elements
