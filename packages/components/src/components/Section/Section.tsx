@@ -33,7 +33,9 @@ export const Section = flowComponent("Section", (props) => {
   }
 
   if (renderContextMenuSection) {
-    return <ContextMenuSection>{children}</ContextMenuSection>;
+    return (
+      <ContextMenuSection ref={ref as never}>{children}</ContextMenuSection>
+    );
   }
 
   const rootClassName = clsx(

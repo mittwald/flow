@@ -8,7 +8,7 @@ import SectionHeader from "@/components/Section/components/SectionHeader/Section
 export interface HeaderProps
   extends PropsWithChildren,
     PropsWithElementType<"div" | "header" | "span">,
-    FlowComponentProps {
+    FlowComponentProps<HTMLDivElement | HTMLHeadElement | HTMLSpanElement> {
   /** @internal */
   renderSectionHeader?: boolean;
 }
@@ -25,13 +25,17 @@ export const Header = flowComponent("Header", (props) => {
   } = props;
 
   if (renderSectionHeader) {
-    return <SectionHeader className={className}>{children}</SectionHeader>;
+    return (
+      <SectionHeader ref={ref as never} className={className}>
+        {children}
+      </SectionHeader>
+    );
   }
 
   const Element = elementType;
 
   return (
-    <Element {...rest} className={className} ref={ref}>
+    <Element {...rest} className={className} ref={ref as never}>
       {children}
     </Element>
   );
