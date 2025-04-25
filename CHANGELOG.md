@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.160](https://github.com/mittwald/flow/compare/0.2.0-alpha.159...0.2.0-alpha.160) (2025-04-25)
+
+### Bug Fixes
+
+* **Remote:** fix context menu position when used in section header ([26aa76e](https://github.com/mittwald/flow/commit/26aa76e93485296640c804891bd17500b15d1d57))
+
 # [0.2.0-alpha.159](https://github.com/mittwald/flow/compare/0.2.0-alpha.158...0.2.0-alpha.159) (2025-04-25)
 
 ### Bug Fixes
