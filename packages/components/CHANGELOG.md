@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.159](https://github.com/mittwald/flow/compare/0.2.0-alpha.158...0.2.0-alpha.159) (2025-04-25)
+
+### Bug Fixes
+
+* allow context-overwrite of nullish React children ([#1403](https://github.com/mittwald/flow/issues/1403)) ([5ae6675](https://github.com/mittwald/flow/commit/5ae667568e6e8099fe4b689a95048431904cdbbf))
+
 # [0.2.0-alpha.158](https://github.com/mittwald/flow/compare/0.2.0-alpha.157...0.2.0-alpha.158) (2025-04-24)
 
 ### Features
