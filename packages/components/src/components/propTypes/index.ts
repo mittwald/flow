@@ -70,6 +70,7 @@ import type { MessageThreadProps } from "@/components/MessageThread";
 import type { FileCardListProps } from "@/components/FileCardList";
 import type { AccentBoxProps } from "@/components/AccentBox";
 import type { ColumnLayoutProps } from "@/components/ColumnLayout";
+import type { MenuTriggerProps } from "@/components/OverlayTrigger";
 
 export * from "./types";
 
@@ -117,6 +118,7 @@ export interface FlowComponentPropsTypes {
   List: ListProps<never>;
   ListSummary: ListSummaryProps;
   MenuItem: MenuItemProps;
+  MenuTrigger: MenuTriggerProps;
   Message: MessageProps;
   MessageThread: MessageThreadProps;
   Modal: ModalProps;
@@ -190,6 +192,7 @@ const propsContextSupportingComponentsMap: Record<
   List: true,
   ListSummary: true,
   MenuItem: true,
+  MenuTrigger: true,
   Message: true,
   MessageThread: true,
   Modal: true,

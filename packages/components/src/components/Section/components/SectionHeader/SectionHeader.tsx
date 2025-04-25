@@ -1,5 +1,4 @@
 import type { FC, PropsWithChildren } from "react";
-import React from "react";
 import styles from "./SectionHeader.module.scss";
 import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
@@ -24,7 +23,7 @@ export const SectionHeader: FC<SectionHeaderProps> = (props) => {
       tunnelId: "actions",
     },
     FileField: { tunnelId: "actions", Button: { size: "s" } },
-    ContextMenuTrigger: {
+    MenuTrigger: {
       tunnelId: "actions",
       Button: {
         tunnelId: null,
