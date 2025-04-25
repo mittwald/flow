@@ -4,12 +4,7 @@ import type {
   FC,
   PropsWithChildren,
 } from "react";
-import React, {
-  cloneElement,
-  isValidElement,
-  useEffect,
-  useState,
-} from "react";
+import { cloneElement, isValidElement, useEffect, useState } from "react";
 import useProps from "@/lib/hooks/useProps";
 import { render, screen } from "@testing-library/react";
 import PropsContextProvider from "@/lib/propsContext/PropsContextProvider";
@@ -286,4 +281,52 @@ test("Children properties are forwarded, when wrapped in nested PropsContextProv
   expect(
     screen.getByTestId("inner").getAttribute("data-additional-prop"),
   ).not.toBeNull();
+});
+
+test("Null children property will be overwritten by context", () => {
+  render(
+    <PropsContextProvider
+      props={{
+        TestComponent: {
+          children: <div data-testid="inner" />,
+        },
+      }}
+    >
+      <TestComponent>{null}</TestComponent>
+    </PropsContextProvider>,
+  );
+
+  expect(screen.getByTestId("inner")).toBeDefined();
+});
+
+test("Empty children property will be overwritten by context", () => {
+  render(
+    <PropsContextProvider
+      props={{
+        TestComponent: {
+          children: <div data-testid="inner" />,
+        },
+      }}
+    >
+      <TestComponent>{[]}</TestComponent>
+    </PropsContextProvider>,
+  );
+
+  expect(screen.getByTestId("inner")).toBeDefined();
+});
+
+test("Null array children property will be overwritten by context", () => {
+  render(
+    <PropsContextProvider
+      props={{
+        TestComponent: {
+          children: <div data-testid="inner" />,
+        },
+      }}
+    >
+      <TestComponent>{[null, undefined]}</TestComponent>
+    </PropsContextProvider>,
+  );
+
+  expect(screen.getByTestId("inner")).toBeDefined();
 });
