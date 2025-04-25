@@ -25,6 +25,7 @@ const mapProperty = (val: unknown, key: string) => {
 };
 
 export const createFlowRemoteComponentRenderer = <P extends object>(
+  name: string,
   Component: ComponentType<P>,
 ): ComponentType<RemoteComponentRendererProps> => {
   function HostComponent(props: P) {
@@ -34,5 +35,8 @@ export const createFlowRemoteComponentRenderer = <P extends object>(
 
     return <Component {...hostComponentProps} />;
   }
-  return createRemoteComponentRenderer(HostComponent);
+  HostComponent.displayName = `FlowRemoteRenderer(${name})`;
+  return createRemoteComponentRenderer(HostComponent, {
+    name: `RemoteRenderer(${name})`,
+  });
 };

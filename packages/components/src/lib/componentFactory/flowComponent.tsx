@@ -11,7 +11,6 @@ import type {
   FunctionComponent,
 } from "react";
 import { cloneElement } from "react";
-import React from "react";
 import type { PropsWithTunnel } from "@/lib/types/props";
 import { TunnelEntry } from "@mittwald/react-tunnel";
 import SlotContextProvider from "@/lib/slotContext/SlotContextProvider";
@@ -44,7 +43,10 @@ export function flowComponent<C extends FlowComponentName>(
   componentName: C,
   ImplementationComponentType: FlowComponentImplementationType<C>,
 ): FlowComponentType<C> {
-  return (propsFromArgument) => {
+  type Props = FlowComponentPropsOfName<C> &
+    RefAttributes<RefType<FlowComponentPropsOfName<C>>>;
+
+  function Component(propsFromArgument: Props) {
     const { ref: refFromProps = null, ...props } = propsFromArgument;
 
     const {
@@ -67,6 +69,8 @@ export function flowComponent<C extends FlowComponentName>(
       ref: mergedRef,
     };
 
+    ImplementationComponentType.displayName = `FlowComponentImpl(${componentName})`;
+
     let element: ReactNode = <ImplementationComponentType {...propsWithRef} />;
 
     if ("slot" in props && !!props.slot && typeof props.slot === "string") {
@@ -86,5 +90,8 @@ export function flowComponent<C extends FlowComponentName>(
     }
 
     return element;
-  };
+  }
+
+  Component.displayName = `FlowComponent(${componentName})`;
+  return Component;
 }

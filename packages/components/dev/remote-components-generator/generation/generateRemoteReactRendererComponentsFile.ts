@@ -17,7 +17,7 @@ export function generateRemoteReactRendererComponentsFile(
     mapEntries: components
       .map(
         (c) => `\
-          "${remoteElementTagNameOf(c)}": createFlowRemoteComponentRenderer(${remoteComponentBaseNameOf(c)}),`,
+          "${remoteElementTagNameOf(c)}": createFlowRemoteComponentRenderer("${remoteComponentBaseNameOf(c)}", ${remoteComponentBaseNameOf(c)}),`,
       )
       .join("\n"),
   };
