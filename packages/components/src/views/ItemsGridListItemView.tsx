@@ -1,7 +1,9 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import React, { type FC, useContext } from "react";
-import { GridListItem, type GridListItemProps } from "@/components/List";
+import type { FC } from "react";
+import type { GridListItemProps } from "@/components/List";
+import React, { useContext } from "react";
+import { GridListItem } from "@/components/List";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const ItemsGridListItemView: FC<GridListItemProps> = (props) => {

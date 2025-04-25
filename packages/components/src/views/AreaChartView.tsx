@@ -1,7 +1,9 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import React, { type FC, useContext } from "react";
-import { AreaChart, type AreaChartProps } from "@/components/AreaChart";
+import type { FC } from "react";
+import type { AreaChartProps } from "@/components/AreaChart";
+import React, { useContext } from "react";
+import { AreaChart } from "@/components/AreaChart";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const AreaChartView: FC<AreaChartProps> = (props) => {

@@ -1,7 +1,8 @@
 import "@mittwald/flow-react-components/all.css";
 import "./global.scss";
 import type { Metadata } from "next";
-import React, { type FC, type PropsWithChildren } from "react";
+import React from "react";
+import type { FC, PropsWithChildren } from "react";
 import HeaderNavigation from "@/app/_components/layout/HeaderNavigation/HeaderNavigation";
 import clsx from "clsx";
 import styles from "./layout.module.scss";

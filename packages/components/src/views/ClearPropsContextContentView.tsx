@@ -1,10 +1,9 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import React, { type FC, useContext } from "react";
-import {
-  ClearPropsContextContent,
-  type ClearPropsContextContentProps,
-} from "@/components/ClearPropsContext";
+import type { FC } from "react";
+import type { ClearPropsContextContentProps } from "@/components/ClearPropsContext";
+import React, { useContext } from "react";
+import { ClearPropsContextContent } from "@/components/ClearPropsContext";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const ClearPropsContextContentView: FC<ClearPropsContextContentProps> = (

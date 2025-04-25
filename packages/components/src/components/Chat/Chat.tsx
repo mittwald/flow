@@ -2,7 +2,8 @@ import type { CSSProperties, FC, PropsWithChildren } from "react";
 import clsx from "clsx";
 import type { PropsWithClassName } from "@/lib/types/props";
 import styles from "./Chat.module.scss";
-import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import { PropsContextProvider } from "@/lib/propsContext";
+import type { PropsContext } from "@/lib/propsContext";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 
 export interface ChatProps extends PropsWithChildren, PropsWithClassName {

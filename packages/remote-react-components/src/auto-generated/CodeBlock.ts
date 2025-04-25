@@ -3,7 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "@/components/createFlowRemoteComponent";
 import { RemoteCodeBlockElement } from "@mittwald/flow-remote-elements";
-export { type RemoteCodeBlockElement } from "@mittwald/flow-remote-elements";
+export type { RemoteCodeBlockElement } from "@mittwald/flow-remote-elements";
 
 export const CodeBlock = createFlowRemoteComponent(
   "flr-code-block",

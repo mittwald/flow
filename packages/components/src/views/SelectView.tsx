@@ -1,7 +1,9 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import React, { type FC, useContext } from "react";
-import { Select, type SelectProps } from "@/components/Select";
+import type { FC } from "react";
+import type { SelectProps } from "@/components/Select";
+import React, { useContext } from "react";
+import { Select } from "@/components/Select";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const SelectView: FC<SelectProps> = (props) => {

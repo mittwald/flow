@@ -1,4 +1,4 @@
-export * from "./view";
+import "./view";
 
 export { type RadioGroupProps, RadioGroup } from "./RadioGroup";
 export * from "./components/Radio";

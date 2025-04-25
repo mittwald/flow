@@ -1,6 +1,7 @@
 import eslint from "@eslint/js";
 import tseslint from "typescript-eslint";
 import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
+import importPlugin from "eslint-plugin-import";
 
 export default tseslint.config(
   {
@@ -14,8 +15,20 @@ export default tseslint.config(
       ".nx",
     ],
   },
+  eslint.configs.recommended,
+  eslintPluginPrettierRecommended,
+  importPlugin.flatConfigs.recommended,
+  importPlugin.flatConfigs.typescript,
+  ...tseslint.configs.recommended,
+  ...tseslint.configs.stylistic,
   {
     rules: {
+      "import/no-unresolved": "off",
+      "import/no-duplicates": "off",
+      "import/no-named-as-default": "off",
+      "import/no-named-as-default-member": "off",
+      "import/namespace": "off",
+      "import/consistent-type-specifier-style": ["error", "prefer-top-level"],
       "linebreak-style": ["error", "unix"],
       quotes: [
         "error",
@@ -41,8 +54,4 @@ export default tseslint.config(
       ],
     },
   },
-  eslint.configs.recommended,
-  eslintPluginPrettierRecommended,
-  ...tseslint.configs.recommended,
-  ...tseslint.configs.stylistic,
 );

@@ -1,7 +1,5 @@
-import {
-  type Domain,
-  domains,
-} from "@/content/03-components/structure/list/examples/domainApi";
+import { domains } from "@/content/03-components/structure/list/examples/domainApi";
+import type { Domain } from "@/content/03-components/structure/list/examples/domainApi";
 import {
   AlertBadge,
   Avatar,
@@ -10,11 +8,11 @@ import {
   IconDomain,
   IconSubdomain,
   MenuItem,
-  type SortingFn,
   SortingFunctions,
   Text,
   typedList,
 } from "@mittwald/flow-react-components";
+import type { SortingFn } from "@mittwald/flow-react-components";
 import { DateTime } from "luxon";
 
 export default () => {

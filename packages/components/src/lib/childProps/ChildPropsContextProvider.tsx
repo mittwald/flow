@@ -1,6 +1,7 @@
 import type { FC } from "react";
 import React from "react";
-import { type PropsWithChildren, useContext, useMemo } from "react";
+import { useContext, useMemo } from "react";
+import type { PropsWithChildren } from "react";
 import { ChildPropsStore } from "@/lib/childProps/ChildPropsStore";
 import { childPropsContext } from "@/lib/childProps/context";
 

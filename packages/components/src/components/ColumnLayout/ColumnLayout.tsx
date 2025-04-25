@@ -9,10 +9,8 @@ import type {
 } from "@/lib/types/props";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
-import {
-  flowComponent,
-  type FlowComponentProps,
-} from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 
 type GapSize = "s" | "m" | "l" | "xl";
 

@@ -1,4 +1,4 @@
-import { type FC } from "react";
+import type { FC } from "react";
 import * as Recharts from "recharts";
 import tokens from "@mittwald/flow-design-tokens/variables.json";
 import { AreaDot } from "../AreaDot";

@@ -3,7 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "@/components/createFlowRemoteComponent";
 import { RemoteSeparatorElement } from "@mittwald/flow-remote-elements";
-export { type RemoteSeparatorElement } from "@mittwald/flow-remote-elements";
+export type { RemoteSeparatorElement } from "@mittwald/flow-remote-elements";
 
 export const Separator = createFlowRemoteComponent(
   "flr-separator",

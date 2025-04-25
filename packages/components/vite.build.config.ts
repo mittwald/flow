@@ -39,7 +39,7 @@ export default mergeConfig(
             if (assetInfo.names[0] === "globals.css") {
               return "css/globals.css";
             }
-            return assetInfo.names[0] ?? `undefined`;
+            return assetInfo.names[0] ?? "undefined";
           },
         },
       },

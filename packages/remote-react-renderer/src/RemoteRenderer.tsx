@@ -1,7 +1,8 @@
 "use client";
 import type { RemoteRendererBrowserProps } from "@/RemoteRendererBrowser";
 import { BrowserOnly } from "@mittwald/flow-react-components";
-import React, { type FC } from "react";
+import React from "react";
+import type { FC } from "react";
 
 const RemoteRendererBrowser = React.lazy(
   () => import("./RemoteRendererBrowser"),

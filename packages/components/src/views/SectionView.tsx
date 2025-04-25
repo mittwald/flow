@@ -1,7 +1,9 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import React, { type FC, useContext } from "react";
-import { Section, type SectionProps } from "@/components/Section";
+import type { FC } from "react";
+import type { SectionProps } from "@/components/Section";
+import React, { useContext } from "react";
+import { Section } from "@/components/Section";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const SectionView: FC<SectionProps> = (props) => {

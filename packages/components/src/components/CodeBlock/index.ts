@@ -1,4 +1,4 @@
-export * from "./view";
+import "./view";
 
 export { type CodeBlockProps, CodeBlock } from "./CodeBlock";
 export { default } from "./CodeBlock";

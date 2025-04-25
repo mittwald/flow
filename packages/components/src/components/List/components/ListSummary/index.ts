@@ -1,4 +1,4 @@
-export * from "./view";
+import "./view";
 import { ListSummary } from "./ListSummary";
 
 export { ListSummary, type ListSummaryProps } from "./ListSummary";

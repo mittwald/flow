@@ -14,7 +14,8 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { Options } from "@/components/Options";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import type { PropsWithClassName } from "@/lib/types/props";
-import { type OverlayController, useOverlayController } from "@/lib/controller";
+import { useOverlayController } from "@/lib/controller";
+import type { OverlayController } from "@/lib/controller";
 
 export interface SelectProps
   extends PropsWithChildren<

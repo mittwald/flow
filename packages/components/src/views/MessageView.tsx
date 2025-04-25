@@ -1,7 +1,9 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import React, { type FC, useContext } from "react";
-import { Message, type MessageProps } from "@/components/Message";
+import type { FC } from "react";
+import type { MessageProps } from "@/components/Message";
+import React, { useContext } from "react";
+import { Message } from "@/components/Message";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const MessageView: FC<MessageProps> = (props) => {

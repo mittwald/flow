@@ -3,7 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "@/components/createFlowRemoteComponent";
 import { RemoteFieldDescriptionElement } from "@mittwald/flow-remote-elements";
-export { type RemoteFieldDescriptionElement } from "@mittwald/flow-remote-elements";
+export type { RemoteFieldDescriptionElement } from "@mittwald/flow-remote-elements";
 
 export const FieldDescription = createFlowRemoteComponent(
   "flr-field-description",

@@ -3,7 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "@/components/createFlowRemoteComponent";
 import { RemotePopoverContentElement } from "@mittwald/flow-remote-elements";
-export { type RemotePopoverContentElement } from "@mittwald/flow-remote-elements";
+export type { RemotePopoverContentElement } from "@mittwald/flow-remote-elements";
 
 export const PopoverContent = createFlowRemoteComponent(
   "flr-popover-content",

@@ -1,7 +1,9 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import React, { type FC, useContext } from "react";
-import { Header, type HeaderProps } from "@/components/Header";
+import type { FC } from "react";
+import type { HeaderProps } from "@/components/Header";
+import React, { useContext } from "react";
+import { Header } from "@/components/Header";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const HeaderView: FC<HeaderProps> = (props) => {

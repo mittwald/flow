@@ -1,7 +1,9 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import React, { type FC, useContext } from "react";
-import { Div, type DivProps } from "@/components/Div";
+import type { FC } from "react";
+import type { DivProps } from "@/components/Div";
+import React, { useContext } from "react";
+import { Div } from "@/components/Div";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const DivView: FC<DivProps> = (props) => {

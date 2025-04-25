@@ -3,7 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "@/components/createFlowRemoteComponent";
 import { RemoteSearchFieldElement } from "@mittwald/flow-remote-elements";
-export { type RemoteSearchFieldElement } from "@mittwald/flow-remote-elements";
+export type { RemoteSearchFieldElement } from "@mittwald/flow-remote-elements";
 
 export const SearchField = createFlowRemoteComponent(
   "flr-search-field",

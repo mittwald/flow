@@ -54,7 +54,7 @@ async function generateImportMappings(pattern: string, outputPath: string) {
   const generatedFileContents = `
 /* eslint-disable */
 /* auto-generated file */
-import { type ImportMapping } from "@/lib/liveCode/types";
+import type { ImportMapping } from "@/lib/liveCode/types";
 import { lazy } from "react";
 ${staticImports.filter((i) => i !== undefined).join("\r\n")}
 

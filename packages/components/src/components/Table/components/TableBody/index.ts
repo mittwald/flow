@@ -1,4 +1,4 @@
-export * from "./view";
+import "./view";
 import { TableBody } from "./TableBody";
 
 export { type TableBodyProps, TableBody } from "./TableBody";

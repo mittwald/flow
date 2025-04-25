@@ -1,7 +1,9 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import React, { type FC, useContext } from "react";
-import { Icon, type IconProps } from "@/components/Icon";
+import type { FC } from "react";
+import type { IconProps } from "@/components/Icon";
+import React, { useContext } from "react";
+import { Icon } from "@/components/Icon";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const IconView: FC<IconProps> = (props) => {

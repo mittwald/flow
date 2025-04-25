@@ -1,5 +1,6 @@
 import styles from "@/components/ProgressBar/ProgressBar.module.scss";
-import React, { type FC } from "react";
+import React from "react";
+import type { FC } from "react";
 import { useLocalizedStringFormatter, useNumberFormatter } from "react-aria";
 import locales from "../locales/*.locale.json";
 import type { ProgressBarProps } from "@/components/ProgressBar";

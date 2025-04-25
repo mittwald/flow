@@ -7,15 +7,15 @@ import type {
 } from "@/lib/types/props";
 import styles from "./FileCard.module.scss";
 import clsx from "clsx";
-import {
-  flowComponent,
-  type FlowComponentProps,
-} from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { FileSizeText } from "@/components/FileCard/components/FileSizeText";
-import { Link, type LinkProps } from "@/components/Link";
+import { Link } from "@/components/Link";
+import type { LinkProps } from "@/components/Link";
 import Wrap from "@/components/Wrap";
 import { DeleteButton } from "@/components/FileCard/components/DeleteButton";
-import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import { PropsContextProvider } from "@/lib/propsContext";
+import type { PropsContext } from "@/lib/propsContext";
 import { OptionsButton } from "@/components/List/components/Items/components/Item/components/OptionsButton";
 
 export interface FileCardProps

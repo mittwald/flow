@@ -3,7 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "@/components/createFlowRemoteComponent";
 import { RemoteMarkdownElement } from "@mittwald/flow-remote-elements";
-export { type RemoteMarkdownElement } from "@mittwald/flow-remote-elements";
+export type { RemoteMarkdownElement } from "@mittwald/flow-remote-elements";
 
 export const Markdown = createFlowRemoteComponent(
   "flr-markdown",

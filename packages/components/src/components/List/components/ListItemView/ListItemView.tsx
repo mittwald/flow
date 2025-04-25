@@ -3,11 +3,8 @@ import React from "react";
 import styles from "./ListItemView.module.scss";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import ListItemViewContentView from "@/views/ListItemViewContentView";
-import {
-  dynamic,
-  type PropsContext,
-  PropsContextProvider,
-} from "@/lib/propsContext";
+import { dynamic, PropsContextProvider } from "@/lib/propsContext";
+import type { PropsContext } from "@/lib/propsContext";
 import { OptionsButton } from "@/components/List/components/Items/components/Item/components/OptionsButton";
 import { useList } from "@/components/List";
 

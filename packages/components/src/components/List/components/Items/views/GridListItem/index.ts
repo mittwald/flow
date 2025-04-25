@@ -1,2 +1,2 @@
-export * from "./view";
+import "./view";
 export * from "./GridListItem";

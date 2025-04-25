@@ -1,4 +1,4 @@
-export * from "./view";
+import "./view";
 
 export * from "./components/LightBoxTrigger";
 export { type LightBoxProps, LightBox } from "./LightBox";

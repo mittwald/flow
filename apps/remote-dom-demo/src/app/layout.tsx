@@ -16,7 +16,8 @@ import "@mittwald/flow-react-components/all.css";
 import { LinkProvider } from "@mittwald/flow-react-components/nextjs";
 import type { ErrorComponent } from "next/dist/client/components/error-boundary";
 import { ErrorBoundary } from "next/dist/client/components/error-boundary";
-import { type PropsWithChildren, Suspense } from "react";
+import { Suspense } from "react";
+import type { PropsWithChildren } from "react";
 import styles from "./layout.module.css";
 
 const Error: ErrorComponent = (props) => {

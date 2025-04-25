@@ -3,12 +3,8 @@ import React from "react";
 import DatePicker from "../index";
 import { Label } from "@/components/Label";
 import { FieldDescription } from "@/components/FieldDescription";
-import {
-  type DateValue,
-  getLocalTimeZone,
-  parseDate,
-  today,
-} from "@internationalized/date";
+import { getLocalTimeZone, parseDate, today } from "@internationalized/date";
+import type { DateValue } from "@internationalized/date";
 
 const meta: Meta<typeof DatePicker> = {
   title: "Form Controls/DatePicker",

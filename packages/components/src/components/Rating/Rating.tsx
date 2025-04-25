@@ -1,4 +1,5 @@
-import React, { type FC } from "react";
+import React from "react";
+import type { FC } from "react";
 import { IconStar, IconStarFilled } from "@/components/Icon/components/icons";
 import styles from "./Rating.module.scss";
 import type { PropsWithClassName } from "@/lib/types/props";

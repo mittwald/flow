@@ -1,4 +1,4 @@
-export * from "./view";
+import "./view";
 
 export { type FileCardProps, FileCard } from "./FileCard";
 export { default } from "./FileCard";

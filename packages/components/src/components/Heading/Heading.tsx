@@ -1,5 +1,4 @@
-export * from "./view";
-import React from "react";
+import "./view";
 import styles from "./Heading.module.scss";
 import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";

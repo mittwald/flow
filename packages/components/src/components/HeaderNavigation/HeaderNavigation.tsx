@@ -1,10 +1,7 @@
 import type { ComponentProps, FC, PropsWithChildren } from "react";
 import React from "react";
-import {
-  dynamic,
-  type PropsContext,
-  PropsContextProvider,
-} from "@/lib/propsContext";
+import { dynamic, PropsContextProvider } from "@/lib/propsContext";
+import type { PropsContext } from "@/lib/propsContext";
 import clsx from "clsx";
 import styles from "./HeaderNavigation.module.scss";
 import type { PropsWithClassName } from "@/lib/types/props";

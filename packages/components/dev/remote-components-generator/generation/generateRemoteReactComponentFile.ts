@@ -25,7 +25,7 @@ export function generateRemoteReactComponentFile(c: ComponentDoc) {
     "use client";
     import createFlowRemoteComponent from "@/components/createFlowRemoteComponent";
     import { ${t.remoteComponentName} } from "@mittwald/flow-remote-elements";
-    export { type ${t.remoteComponentName} } from "@mittwald/flow-remote-elements";
+    export type { ${t.remoteComponentName} } from "@mittwald/flow-remote-elements";
 
     export const ${t.name} = createFlowRemoteComponent(
       "${remoteElementTagNameOf(c)}", 

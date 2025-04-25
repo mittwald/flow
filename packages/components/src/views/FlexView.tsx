@@ -1,7 +1,9 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import React, { type FC, useContext } from "react";
-import { Flex, type FlexProps } from "@/components/Flex";
+import type { FC } from "react";
+import type { FlexProps } from "@/components/Flex";
+import React, { useContext } from "react";
+import { Flex } from "@/components/Flex";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const FlexView: FC<FlexProps> = (props) => {

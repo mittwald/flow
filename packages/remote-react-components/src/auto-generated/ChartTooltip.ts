@@ -3,7 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "@/components/createFlowRemoteComponent";
 import { RemoteChartTooltipElement } from "@mittwald/flow-remote-elements";
-export { type RemoteChartTooltipElement } from "@mittwald/flow-remote-elements";
+export type { RemoteChartTooltipElement } from "@mittwald/flow-remote-elements";
 
 export const ChartTooltip = createFlowRemoteComponent(
   "flr-chart-tooltip",

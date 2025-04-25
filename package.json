@@ -24,6 +24,7 @@
     "pre-commit": "pnpm lint"
   },
   "dependencies": {
+    "eslint-plugin-import": "^2.31.0",
     "eslint-scope": "^8.3.0",
     "react": "^19",
     "react-dom": "^19"

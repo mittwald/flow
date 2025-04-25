@@ -1,8 +1,6 @@
 import { expectTypeOf, test, vitest } from "vitest";
-import {
-  flowComponent,
-  type FlowComponentProps,
-} from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import type { ComponentType, PropsWithChildren } from "react";
 import React from "react";
 import { render } from "@testing-library/react";

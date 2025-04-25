@@ -1,4 +1,4 @@
-export * from "./view";
+import "./view";
 import { TableFooterRow } from "./TableFooterRow";
 
 export { TableFooterRow } from "./TableFooterRow";

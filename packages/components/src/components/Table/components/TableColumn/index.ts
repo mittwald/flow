@@ -1,4 +1,4 @@
-export * from "./view";
+import "./view";
 import { TableColumn } from "./TableColumn";
 
 export { type TableColumnProps, TableColumn } from "./TableColumn";

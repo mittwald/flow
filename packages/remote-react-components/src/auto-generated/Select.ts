@@ -3,7 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "@/components/createFlowRemoteComponent";
 import { RemoteSelectElement } from "@mittwald/flow-remote-elements";
-export { type RemoteSelectElement } from "@mittwald/flow-remote-elements";
+export type { RemoteSelectElement } from "@mittwald/flow-remote-elements";
 
 export const Select = createFlowRemoteComponent(
   "flr-select",

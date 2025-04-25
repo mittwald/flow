@@ -3,7 +3,8 @@ import React from "react";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import styles from "../../Table.module.scss";
-import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import { PropsContextProvider } from "@/lib/propsContext";
+import type { PropsContext } from "@/lib/propsContext";
 
 export interface TableColumnProps
   extends Omit<Aria.ColumnProps, "children">,

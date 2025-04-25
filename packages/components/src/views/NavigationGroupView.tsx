@@ -1,10 +1,9 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import React, { type FC, useContext } from "react";
-import {
-  NavigationGroup,
-  type NavigationGroupProps,
-} from "@/components/Navigation";
+import type { FC } from "react";
+import type { NavigationGroupProps } from "@/components/Navigation";
+import React, { useContext } from "react";
+import { NavigationGroup } from "@/components/Navigation";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const NavigationGroupView: FC<NavigationGroupProps> = (props) => {

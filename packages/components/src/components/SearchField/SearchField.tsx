@@ -34,7 +34,7 @@ export const SearchField = flowComponent("SearchField", (props) => {
 
   const stringFormatter = useLocalizedStringFormatter(locales);
 
-  const searchText = stringFormatter.format(`searchField.search`);
+  const searchText = stringFormatter.format("searchField.search");
 
   const propsContext: PropsContext = {
     Label: {

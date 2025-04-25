@@ -1,8 +1,9 @@
 /* auto-generated file */
-import React, { type ComponentProps, type FC } from "react";
+import React from "react";
 import { IconCircleDotFilled as Tabler } from "@tabler/icons-react";
-import { type Icon } from "@/components/Icon";
 import View from "@/views/IconView";
+import type { ComponentProps, FC } from "react";
+import type { Icon } from "@/components/Icon";
 
 export const IconRadioOn: FC<Omit<ComponentProps<typeof Icon>, "children">> = (
   props,

@@ -6,10 +6,8 @@ import type { PropsWithClassName } from "@/lib/types/props";
 import type { PropsContext } from "@/lib/propsContext";
 import { IconContextMenu } from "@/components/Icon/components/icons";
 import PropsContextProvider from "@/lib/propsContext/PropsContextProvider";
-import {
-  flowComponent,
-  type FlowComponentProps,
-} from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 export interface MessageProps
   extends PropsWithChildren,
     PropsWithClassName,

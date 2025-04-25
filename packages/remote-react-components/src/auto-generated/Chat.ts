@@ -3,7 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "@/components/createFlowRemoteComponent";
 import { RemoteChatElement } from "@mittwald/flow-remote-elements";
-export { type RemoteChatElement } from "@mittwald/flow-remote-elements";
+export type { RemoteChatElement } from "@mittwald/flow-remote-elements";
 
 export const Chat = createFlowRemoteComponent(
   "flr-chat",

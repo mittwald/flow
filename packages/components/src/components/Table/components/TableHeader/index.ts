@@ -1,4 +1,4 @@
-export * from "./view";
+import "./view";
 import { TableHeader } from "./TableHeader";
 
 export { type TableHeaderProps, TableHeader } from "./TableHeader";

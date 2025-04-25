@@ -3,7 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "@/components/createFlowRemoteComponent";
 import { RemoteAlertBadgeElement } from "@mittwald/flow-remote-elements";
-export { type RemoteAlertBadgeElement } from "@mittwald/flow-remote-elements";
+export type { RemoteAlertBadgeElement } from "@mittwald/flow-remote-elements";
 
 export const AlertBadge = createFlowRemoteComponent(
   "flr-alert-badge",

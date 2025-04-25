@@ -8,7 +8,8 @@ import { Button } from "@/components/Button";
 import { Section } from "@/components/Section";
 import { ActionGroup } from "@/components/ActionGroup";
 import { sleep } from "@/lib/promises/sleep";
-import { type CalendarDate, parseDate } from "@internationalized/date";
+import { parseDate } from "@internationalized/date";
+import type { CalendarDate } from "@internationalized/date";
 import { getLocalTimeZone, today } from "@internationalized/date";
 import DatePicker from "@/components/DatePicker";
 

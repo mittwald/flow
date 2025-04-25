@@ -1,10 +1,9 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import React, { type FC, useContext } from "react";
-import {
-  SegmentedControl,
-  type SegmentedControlProps,
-} from "@/components/SegmentedControl";
+import type { FC } from "react";
+import type { SegmentedControlProps } from "@/components/SegmentedControl";
+import React, { useContext } from "react";
+import { SegmentedControl } from "@/components/SegmentedControl";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const SegmentedControlView: FC<SegmentedControlProps> = (props) => {

@@ -1,7 +1,9 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import React, { type FC, useContext } from "react";
-import { AlertBadge, type AlertBadgeProps } from "@/components/AlertBadge";
+import type { FC } from "react";
+import type { AlertBadgeProps } from "@/components/AlertBadge";
+import React, { useContext } from "react";
+import { AlertBadge } from "@/components/AlertBadge";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const AlertBadgeView: FC<AlertBadgeProps> = (props) => {

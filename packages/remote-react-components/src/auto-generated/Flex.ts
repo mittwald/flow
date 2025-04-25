@@ -3,7 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "@/components/createFlowRemoteComponent";
 import { RemoteFlexElement } from "@mittwald/flow-remote-elements";
-export { type RemoteFlexElement } from "@mittwald/flow-remote-elements";
+export type { RemoteFlexElement } from "@mittwald/flow-remote-elements";
 
 export const Flex = createFlowRemoteComponent(
   "flr-flex",

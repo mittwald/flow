@@ -3,7 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "@/components/createFlowRemoteComponent";
 import { RemoteMenuItemElement } from "@mittwald/flow-remote-elements";
-export { type RemoteMenuItemElement } from "@mittwald/flow-remote-elements";
+export type { RemoteMenuItemElement } from "@mittwald/flow-remote-elements";
 
 export const MenuItem = createFlowRemoteComponent(
   "flr-menu-item",

@@ -3,10 +3,8 @@ import type { ColumnLayoutProps } from "@/components/ColumnLayout";
 import { ColumnLayout } from "@/components/ColumnLayout";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
-import {
-  flowComponent,
-  type FlowComponentProps,
-} from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 
 export type FileCardListProps = Omit<ColumnLayoutProps, "elementType"> &
   FlowComponentProps<HTMLUListElement>;

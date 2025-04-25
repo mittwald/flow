@@ -2,7 +2,8 @@ import type { FC, PropsWithChildren } from "react";
 import type { PropsWithClassName } from "@/lib/types/props";
 import clsx from "clsx";
 import styles from "./BigNumber.module.scss";
-import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import { PropsContextProvider } from "@/lib/propsContext";
+import type { PropsContext } from "@/lib/propsContext";
 
 export type BigNumberProps = PropsWithChildren & PropsWithClassName;
 

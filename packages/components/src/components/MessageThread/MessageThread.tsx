@@ -3,15 +3,10 @@ import React from "react";
 import type { PropsWithClassName } from "@/lib/types/props";
 import clsx from "clsx";
 import styles from "./MessageThread.module.scss";
-import {
-  dynamic,
-  type PropsContext,
-  PropsContextProvider,
-} from "@/lib/propsContext";
-import {
-  flowComponent,
-  type FlowComponentProps,
-} from "@/lib/componentFactory/flowComponent";
+import { dynamic, PropsContextProvider } from "@/lib/propsContext";
+import type { PropsContext } from "@/lib/propsContext";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 
 export type MessageThreadProps = PropsWithChildren &
   PropsWithClassName &

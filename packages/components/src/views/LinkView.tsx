@@ -1,7 +1,9 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import React, { type FC, useContext } from "react";
-import { Link, type LinkProps } from "@/components/Link";
+import type { FC } from "react";
+import type { LinkProps } from "@/components/Link";
+import React, { useContext } from "react";
+import { Link } from "@/components/Link";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const LinkView: FC<LinkProps> = (props) => {

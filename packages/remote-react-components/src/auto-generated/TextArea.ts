@@ -3,7 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "@/components/createFlowRemoteComponent";
 import { RemoteTextAreaElement } from "@mittwald/flow-remote-elements";
-export { type RemoteTextAreaElement } from "@mittwald/flow-remote-elements";
+export type { RemoteTextAreaElement } from "@mittwald/flow-remote-elements";
 
 export const TextArea = createFlowRemoteComponent(
   "flr-text-area",

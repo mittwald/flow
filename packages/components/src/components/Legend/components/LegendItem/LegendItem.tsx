@@ -1,10 +1,8 @@
 import Text from "@/components/Text";
 import type { FC, PropsWithChildren } from "react";
 import styles from "./LegendItem.module.scss";
-import {
-  categoricalColors,
-  type CategoricalColors,
-} from "@/lib/tokens/CategoricalColors";
+import { categoricalColors } from "@/lib/tokens/CategoricalColors";
+import type { CategoricalColors } from "@/lib/tokens/CategoricalColors";
 import { getCategoricalColorValue } from "@/lib/tokens/getCategoricalColorValue";
 
 export interface LegendItemProps extends PropsWithChildren {

@@ -1,7 +1,9 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import React, { type FC, useContext } from "react";
-import { AccentBox, type AccentBoxProps } from "@/components/AccentBox";
+import type { FC } from "react";
+import type { AccentBoxProps } from "@/components/AccentBox";
+import React, { useContext } from "react";
+import { AccentBox } from "@/components/AccentBox";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const AccentBoxView: FC<AccentBoxProps> = (props) => {

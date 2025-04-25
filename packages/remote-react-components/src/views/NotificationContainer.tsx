@@ -1,6 +1,6 @@
 import { useNotificationController } from "@mittwald/flow-react-components";
 import { ControlledNotification } from "@mittwald/flow-react-components/internal";
-import { type FC } from "react";
+import type { FC } from "react";
 
 export const NotificationContainer: FC = () => {
   const controller = useNotificationController();

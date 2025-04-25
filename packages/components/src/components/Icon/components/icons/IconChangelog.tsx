@@ -1,8 +1,9 @@
 /* auto-generated file */
-import React, { type ComponentProps, type FC } from "react";
+import React from "react";
 import { IconClipboardList as Tabler } from "@tabler/icons-react";
-import { type Icon } from "@/components/Icon";
 import View from "@/views/IconView";
+import type { ComponentProps, FC } from "react";
+import type { Icon } from "@/components/Icon";
 
 export const IconChangelog: FC<
   Omit<ComponentProps<typeof Icon>, "children">

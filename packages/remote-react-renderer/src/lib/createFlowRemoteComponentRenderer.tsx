@@ -6,7 +6,7 @@ import {
 import type { RemoteComponentRendererProps } from "@mittwald/remote-dom-react/host";
 import { createRemoteComponentRenderer } from "@mittwald/remote-dom-react/host";
 import { mapEventHandler } from "@mittwald/flow-remote-core";
-import { type ComponentType } from "react";
+import type { ComponentType } from "react";
 import { mapValues } from "remeda";
 
 const mapProperty = (val: unknown, key: string) => {

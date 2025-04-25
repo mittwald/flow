@@ -1,10 +1,9 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import React, { type FC, useContext } from "react";
-import {
-  CounterBadge,
-  type CounterBadgeProps,
-} from "@/components/CounterBadge";
+import type { FC } from "react";
+import type { CounterBadgeProps } from "@/components/CounterBadge";
+import React, { useContext } from "react";
+import { CounterBadge } from "@/components/CounterBadge";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const CounterBadgeView: FC<CounterBadgeProps> = (props) => {

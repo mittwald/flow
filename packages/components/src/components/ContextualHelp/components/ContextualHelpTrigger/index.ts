@@ -1,4 +1,4 @@
-export * from "./view";
+import "./view";
 import { ContextualHelpTrigger } from "./ContextualHelpTrigger";
 
 export * from "./ContextualHelpTrigger";

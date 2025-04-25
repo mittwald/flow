@@ -1,10 +1,9 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import React, { type FC, useContext } from "react";
-import {
-  CheckboxGroup,
-  type CheckboxGroupProps,
-} from "@/components/CheckboxGroup";
+import type { FC } from "react";
+import type { CheckboxGroupProps } from "@/components/CheckboxGroup";
+import React, { useContext } from "react";
+import { CheckboxGroup } from "@/components/CheckboxGroup";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const CheckboxGroupView: FC<CheckboxGroupProps> = (props) => {

@@ -1,10 +1,9 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import React, { type FC, useContext } from "react";
-import {
-  CartesianGrid,
-  type CartesianGridProps,
-} from "@/components/CartesianGrid";
+import type { FC } from "react";
+import type { CartesianGridProps } from "@/components/CartesianGrid";
+import React, { useContext } from "react";
+import { CartesianGrid } from "@/components/CartesianGrid";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const CartesianGridView: FC<CartesianGridProps> = (props) => {

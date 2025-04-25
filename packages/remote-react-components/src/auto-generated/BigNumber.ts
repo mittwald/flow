@@ -3,7 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "@/components/createFlowRemoteComponent";
 import { RemoteBigNumberElement } from "@mittwald/flow-remote-elements";
-export { type RemoteBigNumberElement } from "@mittwald/flow-remote-elements";
+export type { RemoteBigNumberElement } from "@mittwald/flow-remote-elements";
 
 export const BigNumber = createFlowRemoteComponent(
   "flr-big-number",

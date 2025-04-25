@@ -3,7 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "@/components/createFlowRemoteComponent";
 import { RemoteSwitchElement } from "@mittwald/flow-remote-elements";
-export { type RemoteSwitchElement } from "@mittwald/flow-remote-elements";
+export type { RemoteSwitchElement } from "@mittwald/flow-remote-elements";
 
 export const Switch = createFlowRemoteComponent(
   "flr-switch",

@@ -3,7 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "@/components/createFlowRemoteComponent";
 import { RemoteCounterBadgeElement } from "@mittwald/flow-remote-elements";
-export { type RemoteCounterBadgeElement } from "@mittwald/flow-remote-elements";
+export type { RemoteCounterBadgeElement } from "@mittwald/flow-remote-elements";
 
 export const CounterBadge = createFlowRemoteComponent(
   "flr-counter-badge",

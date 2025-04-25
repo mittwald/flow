@@ -5,11 +5,10 @@ import type {
 } from "@/lib/types/props";
 import clsx from "clsx";
 import styles from "./AccentBox.module.scss";
-import {
-  flowComponent,
-  type FlowComponentProps,
-} from "@/lib/componentFactory/flowComponent";
-import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { PropsContextProvider } from "@/lib/propsContext";
+import type { PropsContext } from "@/lib/propsContext";
 
 export interface AccentBoxProps
   extends PropsWithChildren,

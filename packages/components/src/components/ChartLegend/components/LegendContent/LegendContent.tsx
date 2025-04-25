@@ -6,7 +6,7 @@ import Legend, { LegendItem } from "@/components/Legend";
 
 type LegendContentType = Omit<Props, "formatter"> & WithChartLegendFormatters;
 
-const LegendContent: FC<LegendContentType> = (props) => {
+export const LegendContent: FC<LegendContentType> = (props) => {
   const { formatter, payload } = props;
 
   return (

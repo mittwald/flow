@@ -3,7 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "@/components/createFlowRemoteComponent";
 import { RemoteDialogTriggerElement } from "@mittwald/flow-remote-elements";
-export { type RemoteDialogTriggerElement } from "@mittwald/flow-remote-elements";
+export type { RemoteDialogTriggerElement } from "@mittwald/flow-remote-elements";
 
 export const DialogTrigger = createFlowRemoteComponent(
   "flr-dialog-trigger",

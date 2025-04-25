@@ -1,7 +1,9 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import React, { type FC, useContext } from "react";
-import { SearchField, type SearchFieldProps } from "@/components/SearchField";
+import type { FC } from "react";
+import type { SearchFieldProps } from "@/components/SearchField";
+import React, { useContext } from "react";
+import { SearchField } from "@/components/SearchField";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const SearchFieldView: FC<SearchFieldProps> = (props) => {

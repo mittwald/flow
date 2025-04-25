@@ -1,7 +1,9 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import React, { type FC, useContext } from "react";
-import { Avatar, type AvatarProps } from "@/components/Avatar";
+import type { FC } from "react";
+import type { AvatarProps } from "@/components/Avatar";
+import React, { useContext } from "react";
+import { Avatar } from "@/components/Avatar";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const AvatarView: FC<AvatarProps> = (props) => {

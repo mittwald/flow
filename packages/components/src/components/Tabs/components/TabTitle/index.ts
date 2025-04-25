@@ -1,4 +1,4 @@
-export * from "./view";
+import "./view";
 import { TabTitle } from "./TabTitle";
 
 export { type TabTitleProps, TabTitle } from "./TabTitle";

@@ -15,7 +15,8 @@ import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import { type OverlayController, useOverlayController } from "@/lib/controller";
+import { useOverlayController } from "@/lib/controller";
+import type { OverlayController } from "@/lib/controller";
 
 export interface ComboBoxProps
   extends Omit<Aria.ComboBoxProps<never>, "children">,

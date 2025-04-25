@@ -3,7 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "@/components/createFlowRemoteComponent";
 import { RemoteAccordionElement } from "@mittwald/flow-remote-elements";
-export { type RemoteAccordionElement } from "@mittwald/flow-remote-elements";
+export type { RemoteAccordionElement } from "@mittwald/flow-remote-elements";
 
 export const Accordion = createFlowRemoteComponent(
   "flr-accordion",

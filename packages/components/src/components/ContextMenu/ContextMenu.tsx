@@ -6,7 +6,8 @@ import {
   getMenuItemSelectionVariant,
 } from "@/components/ContextMenu/lib";
 import type { MenuItemProps } from "@/components/MenuItem";
-import { Popover, type PopoverProps } from "@/components/Popover/Popover";
+import { Popover } from "@/components/Popover/Popover";
+import type { PopoverProps } from "@/components/Popover/Popover";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { useOverlayController } from "@/lib/controller";

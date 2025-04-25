@@ -1,4 +1,4 @@
-export * from "./view";
+import "./view";
 
 export { type CheckboxProps, Checkbox } from "./Checkbox";
 export { default } from "./Checkbox";

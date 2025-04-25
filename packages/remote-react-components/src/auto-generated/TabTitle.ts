@@ -3,7 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "@/components/createFlowRemoteComponent";
 import { RemoteTabTitleElement } from "@mittwald/flow-remote-elements";
-export { type RemoteTabTitleElement } from "@mittwald/flow-remote-elements";
+export type { RemoteTabTitleElement } from "@mittwald/flow-remote-elements";
 
 export const TabTitle = createFlowRemoteComponent(
   "flr-tab-title",

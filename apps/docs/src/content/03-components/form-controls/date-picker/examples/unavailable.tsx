@@ -3,7 +3,7 @@ import {
   FieldDescription,
   Label,
 } from "@mittwald/flow-react-components";
-import { type DateValue } from "@internationalized/date";
+import type { DateValue } from "@internationalized/date";
 
 <DatePicker
   isRequired

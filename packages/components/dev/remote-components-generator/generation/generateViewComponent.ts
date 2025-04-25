@@ -28,8 +28,10 @@ export function generateViewComponent(c: ComponentDoc) {
   };
 
   return `\
-    import React, { type FC, useContext } from "react";
-    import { ${t.componentName}, type ${t.componentName}Props } from "@/components/${t.componentPath}";
+    import type { FC } from "react";
+    import type { ${t.componentName}Props } from "@/components/${t.componentPath}";
+    import React, { useContext } from "react";
+    import { ${t.componentName}, } from "@/components/${t.componentPath}";
     import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
     
     const ${t.viewComponentName}View: FC<${t.componentName}Props> = (props) => {

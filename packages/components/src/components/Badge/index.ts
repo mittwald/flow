@@ -1,4 +1,4 @@
-export * from "./view";
+import "./view";
 
 export { type BadgeProps, Badge } from "./Badge";
 export { default } from "./Badge";

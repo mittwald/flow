@@ -3,7 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "@/components/createFlowRemoteComponent";
 import { RemoteHeaderNavigationElement } from "@mittwald/flow-remote-elements";
-export { type RemoteHeaderNavigationElement } from "@mittwald/flow-remote-elements";
+export type { RemoteHeaderNavigationElement } from "@mittwald/flow-remote-elements";
 
 export const HeaderNavigation = createFlowRemoteComponent(
   "flr-header-navigation",

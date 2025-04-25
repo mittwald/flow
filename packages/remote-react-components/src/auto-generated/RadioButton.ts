@@ -3,7 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "@/components/createFlowRemoteComponent";
 import { RemoteRadioButtonElement } from "@mittwald/flow-remote-elements";
-export { type RemoteRadioButtonElement } from "@mittwald/flow-remote-elements";
+export type { RemoteRadioButtonElement } from "@mittwald/flow-remote-elements";
 
 export const RadioButton = createFlowRemoteComponent(
   "flr-radio-button",

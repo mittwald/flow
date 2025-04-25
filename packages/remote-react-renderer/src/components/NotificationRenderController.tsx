@@ -1,9 +1,10 @@
 import {
   useNotificationController,
-  type NotificationProps,
   Notification,
 } from "@mittwald/flow-react-components";
-import { useEffect, useRef, type FC } from "react";
+import type { NotificationProps } from "@mittwald/flow-react-components";
+import { useEffect, useRef } from "react";
+import type { FC } from "react";
 
 export const NotificationRenderController: FC<NotificationProps> = (props) => {
   const notifications = useNotificationController();

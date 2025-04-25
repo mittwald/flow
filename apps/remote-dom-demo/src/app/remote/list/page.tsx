@@ -1,6 +1,6 @@
 "use client";
 
-import { demoData } from "@/app/list/demoData";
+import { demoData } from "@/app/remote/list/demoData";
 import {
   Avatar,
   BrowserOnly,

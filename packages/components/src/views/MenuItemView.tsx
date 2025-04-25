@@ -1,7 +1,9 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import React, { type FC, useContext } from "react";
-import { MenuItem, type MenuItemProps } from "@/components/MenuItem";
+import type { FC } from "react";
+import type { MenuItemProps } from "@/components/MenuItem";
+import React, { useContext } from "react";
+import { MenuItem } from "@/components/MenuItem";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const MenuItemView: FC<MenuItemProps> = (props) => {

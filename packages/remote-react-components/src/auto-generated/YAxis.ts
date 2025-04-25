@@ -3,7 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "@/components/createFlowRemoteComponent";
 import { RemoteYAxisElement } from "@mittwald/flow-remote-elements";
-export { type RemoteYAxisElement } from "@mittwald/flow-remote-elements";
+export type { RemoteYAxisElement } from "@mittwald/flow-remote-elements";
 
 export const YAxis = createFlowRemoteComponent(
   "flr-y-axis",

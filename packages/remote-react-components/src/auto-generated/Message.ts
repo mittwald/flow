@@ -3,7 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "@/components/createFlowRemoteComponent";
 import { RemoteMessageElement } from "@mittwald/flow-remote-elements";
-export { type RemoteMessageElement } from "@mittwald/flow-remote-elements";
+export type { RemoteMessageElement } from "@mittwald/flow-remote-elements";
 
 export const Message = createFlowRemoteComponent(
   "flr-message",

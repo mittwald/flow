@@ -1,4 +1,4 @@
-import prettier from "prettier";
+import * as prettier from "prettier";
 
 export const format = async (ts: string): Promise<string> => {
   return prettier.format(ts, {

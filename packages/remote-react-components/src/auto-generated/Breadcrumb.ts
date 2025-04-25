@@ -3,7 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "@/components/createFlowRemoteComponent";
 import { RemoteBreadcrumbElement } from "@mittwald/flow-remote-elements";
-export { type RemoteBreadcrumbElement } from "@mittwald/flow-remote-elements";
+export type { RemoteBreadcrumbElement } from "@mittwald/flow-remote-elements";
 
 export const Breadcrumb = createFlowRemoteComponent(
   "flr-breadcrumb",

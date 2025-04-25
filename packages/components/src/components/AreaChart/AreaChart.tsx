@@ -1,13 +1,9 @@
 import * as Recharts from "recharts";
 import type { CategoricalChartProps } from "recharts/types/chart/generateCategoricalChart";
-import {
-  Children,
-  cloneElement,
-  type FC,
-  type PropsWithChildren,
-  type ReactElement,
-} from "react";
-import { Area, type AreaProps } from "./components/Area";
+import { Children, cloneElement } from "react";
+import type { FC, PropsWithChildren, ReactElement } from "react";
+import { Area } from "./components/Area";
+import type { AreaProps } from "./components/Area";
 import CartesianGrid from "../CartesianGrid";
 import clsx from "clsx";
 import styles from "./AreaChart.module.scss";

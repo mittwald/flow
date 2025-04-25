@@ -8,7 +8,8 @@ import {
   TextField,
 } from "@mittwald/flow-remote-react-components";
 import { getAsyncResource } from "@mittwald/react-use-promise";
-import { type FC, Suspense, useState } from "react";
+import { Suspense, useState } from "react";
+import type { FC } from "react";
 
 const getAsyncValue = (sleepMs: number) =>
   new Promise<number>((res) => {

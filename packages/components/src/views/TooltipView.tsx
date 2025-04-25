@@ -1,7 +1,9 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import React, { type FC, useContext } from "react";
-import { Tooltip, type TooltipProps } from "@/components/Tooltip";
+import type { FC } from "react";
+import type { TooltipProps } from "@/components/Tooltip";
+import React, { useContext } from "react";
+import { Tooltip } from "@/components/Tooltip";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const TooltipView: FC<TooltipProps> = (props) => {

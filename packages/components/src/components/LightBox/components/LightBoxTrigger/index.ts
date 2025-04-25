@@ -1,4 +1,4 @@
-export * from "./view";
+import "./view";
 import { LightBoxTrigger } from "./LightBoxTrigger";
 
 export * from "./LightBoxTrigger";

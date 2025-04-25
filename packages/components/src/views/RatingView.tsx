@@ -1,7 +1,9 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import React, { type FC, useContext } from "react";
-import { Rating, type RatingProps } from "@/components/Rating";
+import type { FC } from "react";
+import type { RatingProps } from "@/components/Rating";
+import React, { useContext } from "react";
+import { Rating } from "@/components/Rating";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const RatingView: FC<RatingProps> = (props) => {

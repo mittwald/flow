@@ -1,7 +1,5 @@
-import {
-  flowComponent,
-  type FlowComponentProps,
-} from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import type { PropsWithChildren } from "react";
 import React from "react";
 import type { PropsWithClassName } from "@/lib/types/props";

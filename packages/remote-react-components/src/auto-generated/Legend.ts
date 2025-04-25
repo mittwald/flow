@@ -3,7 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "@/components/createFlowRemoteComponent";
 import { RemoteLegendElement } from "@mittwald/flow-remote-elements";
-export { type RemoteLegendElement } from "@mittwald/flow-remote-elements";
+export type { RemoteLegendElement } from "@mittwald/flow-remote-elements";
 
 export const Legend = createFlowRemoteComponent(
   "flr-legend",

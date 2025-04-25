@@ -3,7 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "@/components/createFlowRemoteComponent";
 import { RemoteAccentBoxElement } from "@mittwald/flow-remote-elements";
-export { type RemoteAccentBoxElement } from "@mittwald/flow-remote-elements";
+export type { RemoteAccentBoxElement } from "@mittwald/flow-remote-elements";
 
 export const AccentBox = createFlowRemoteComponent(
   "flr-accent-box",

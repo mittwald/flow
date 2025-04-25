@@ -1,7 +1,9 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import React, { type FC, useContext } from "react";
-import { XAxis, type XAxisProps } from "@/components/XAxis";
+import type { FC } from "react";
+import type { XAxisProps } from "@/components/XAxis";
+import React, { useContext } from "react";
+import { XAxis } from "@/components/XAxis";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const XAxisView: FC<XAxisProps> = (props) => {

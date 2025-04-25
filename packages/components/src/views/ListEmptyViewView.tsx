@@ -1,7 +1,9 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import React, { type FC, useContext } from "react";
-import { EmptyView, type EmptyViewProps } from "@/components/List";
+import type { FC } from "react";
+import type { EmptyViewProps } from "@/components/List";
+import React, { useContext } from "react";
+import { EmptyView } from "@/components/List";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const ListEmptyViewView: FC<EmptyViewProps> = (props) => {

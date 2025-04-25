@@ -3,7 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "@/components/createFlowRemoteComponent";
 import { RemoteHeaderElement } from "@mittwald/flow-remote-elements";
-export { type RemoteHeaderElement } from "@mittwald/flow-remote-elements";
+export type { RemoteHeaderElement } from "@mittwald/flow-remote-elements";
 
 export const Header = createFlowRemoteComponent(
   "flr-header",

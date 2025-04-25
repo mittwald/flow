@@ -1,4 +1,4 @@
-export * from "./view";
+import "./view";
 import { ListItemViewContent } from "./ListItemViewContent";
 export {
   ListItemViewContent,

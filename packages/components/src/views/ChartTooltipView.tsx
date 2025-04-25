@@ -1,10 +1,9 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import React, { type FC, useContext } from "react";
-import {
-  ChartTooltip,
-  type ChartTooltipProps,
-} from "@/components/ChartTooltip";
+import type { FC } from "react";
+import type { ChartTooltipProps } from "@/components/ChartTooltip";
+import React, { useContext } from "react";
+import { ChartTooltip } from "@/components/ChartTooltip";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const ChartTooltipView: FC<ChartTooltipProps> = (props) => {

@@ -1,7 +1,9 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import React, { type FC, useContext } from "react";
-import { Skeleton, type SkeletonProps } from "@/components/Skeleton";
+import type { FC } from "react";
+import type { SkeletonProps } from "@/components/Skeleton";
+import React, { useContext } from "react";
+import { Skeleton } from "@/components/Skeleton";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const SkeletonView: FC<SkeletonProps> = (props) => {

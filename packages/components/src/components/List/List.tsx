@@ -19,11 +19,10 @@ import { TableCell } from "@/components/List/setupComponents/TableCell";
 import { TableColumn } from "@/components/List/setupComponents/TableColumn";
 import { TableHeader } from "@/components/List/setupComponents/TableHeader";
 import { TableRow } from "@/components/List/setupComponents/TableRow";
-import {
-  flowComponent,
-  type FlowComponentProps,
-} from "@/lib/componentFactory/flowComponent";
-import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import { PropsContextProvider } from "@/lib/propsContext";
+import type { PropsContext } from "@/lib/propsContext";
 import { deepFilterByType, deepFindOfType } from "@/lib/react/deepFindOfType";
 import { deepHas } from "@/lib/react/deepHas";
 import DivView from "@/views/DivView";

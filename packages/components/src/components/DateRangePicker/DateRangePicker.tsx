@@ -10,10 +10,8 @@ import { RangeCalendar } from "../Calendar/RangeCalendar";
 import { DateRangeInput } from "./components/DateRangeInput";
 import { FieldError } from "@/components/FieldError";
 import { useOverlayController } from "@/lib/controller";
-import {
-  flowComponent,
-  type FlowComponentProps,
-} from "@/lib/componentFactory/flowComponent";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 
 export interface DateRangePickerProps<T extends Aria.DateValue = Aria.DateValue>
   extends PropsWithChildren<Omit<Aria.DateRangePickerProps<T>, "children">>,

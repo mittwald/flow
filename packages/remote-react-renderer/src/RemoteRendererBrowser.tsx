@@ -13,7 +13,8 @@ import {
   RemoteReceiver,
   RemoteRootRenderer,
 } from "@mittwald/remote-dom-react/host";
-import { type CSSProperties, type FC, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
+import type { CSSProperties, FC } from "react";
 
 export interface RemoteRendererBrowserProps {
   integrations?: RemoteComponentsMap<never>[];

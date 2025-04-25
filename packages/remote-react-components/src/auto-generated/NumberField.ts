@@ -3,7 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "@/components/createFlowRemoteComponent";
 import { RemoteNumberFieldElement } from "@mittwald/flow-remote-elements";
-export { type RemoteNumberFieldElement } from "@mittwald/flow-remote-elements";
+export type { RemoteNumberFieldElement } from "@mittwald/flow-remote-elements";
 
 export const NumberField = createFlowRemoteComponent(
   "flr-number-field",

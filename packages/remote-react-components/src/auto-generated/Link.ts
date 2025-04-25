@@ -3,7 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "@/components/createFlowRemoteComponent";
 import { RemoteLinkElement } from "@mittwald/flow-remote-elements";
-export { type RemoteLinkElement } from "@mittwald/flow-remote-elements";
+export type { RemoteLinkElement } from "@mittwald/flow-remote-elements";
 
 export const Link = createFlowRemoteComponent(
   "flr-link",

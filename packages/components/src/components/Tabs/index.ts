@@ -1,4 +1,4 @@
-export * from "./view";
+import "./view";
 
 export { type TabsProps, Tabs } from "./Tabs";
 export * from "./components/TabTitle";

@@ -1,10 +1,9 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import React, { type FC, useContext } from "react";
-import {
-  LightBoxTrigger,
-  type LightBoxTriggerProps,
-} from "@/components/LightBox";
+import type { FC } from "react";
+import type { LightBoxTriggerProps } from "@/components/LightBox";
+import React, { useContext } from "react";
+import { LightBoxTrigger } from "@/components/LightBox";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const LightBoxTriggerView: FC<LightBoxTriggerProps> = (props) => {

@@ -58,7 +58,7 @@ async function generate() {
   {
     console.log("📝️ Generating remote-react-component files");
 
-    const dir = `packages/remote-react-components/src/auto-generated`;
+    const dir = "packages/remote-react-components/src/auto-generated";
     jetpack.remove(dir);
 
     for (const component of components) {
@@ -81,7 +81,7 @@ async function generate() {
   {
     console.log("📝️ Generating remote-element files");
 
-    const dir = `packages/remote-elements/src/auto-generated`;
+    const dir = "packages/remote-elements/src/auto-generated";
     const indexFile = generateRemoteElementIndexFile(components);
 
     jetpack.remove(dir);
@@ -104,7 +104,7 @@ async function generate() {
   {
     console.log("📝️ Generating React-renderer map file");
 
-    const dir = `packages/remote-react-renderer/src/auto-generated`;
+    const dir = "packages/remote-react-renderer/src/auto-generated";
     const content = generateRemoteReactRendererComponentsFile(components);
     jetpack.remove(dir);
 
@@ -138,7 +138,7 @@ async function generate() {
 
     console.log("📝️ Generating view components");
 
-    const dir = `packages/components/src/views`;
+    const dir = "packages/components/src/views";
     jetpack.remove(dir);
 
     for (const component of components) {

@@ -1,4 +1,4 @@
-import { type FC, type PropsWithChildren, type ReactNode } from "react";
+import type { FC, PropsWithChildren, ReactNode } from "react";
 import React, { useState } from "react";
 import * as Aria from "react-aria-components";
 import styles from "../FormField/FormField.module.scss";

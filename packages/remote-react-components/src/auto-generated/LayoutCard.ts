@@ -3,7 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "@/components/createFlowRemoteComponent";
 import { RemoteLayoutCardElement } from "@mittwald/flow-remote-elements";
-export { type RemoteLayoutCardElement } from "@mittwald/flow-remote-elements";
+export type { RemoteLayoutCardElement } from "@mittwald/flow-remote-elements";
 
 export const LayoutCard = createFlowRemoteComponent(
   "flr-layout-card",

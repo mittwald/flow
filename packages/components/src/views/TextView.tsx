@@ -1,7 +1,9 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import React, { type FC, useContext } from "react";
-import { Text, type TextProps } from "@/components/Text";
+import type { FC } from "react";
+import type { TextProps } from "@/components/Text";
+import React, { useContext } from "react";
+import { Text } from "@/components/Text";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const TextView: FC<TextProps> = (props) => {

@@ -1,4 +1,5 @@
-import { useMemo, type DependencyList } from "react";
+import { useMemo } from "react";
+import type { DependencyList } from "react";
 
 interface Awaiter<T = undefined> {
   promise: Promise<T>;

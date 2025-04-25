@@ -1,10 +1,9 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import React, { type FC, useContext } from "react";
-import {
-  DialogTrigger,
-  type DialogTriggerProps,
-} from "@/components/OverlayTrigger";
+import type { FC } from "react";
+import type { DialogTriggerProps } from "@/components/OverlayTrigger";
+import React, { useContext } from "react";
+import { DialogTrigger } from "@/components/OverlayTrigger";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const DialogTriggerView: FC<DialogTriggerProps> = (props) => {

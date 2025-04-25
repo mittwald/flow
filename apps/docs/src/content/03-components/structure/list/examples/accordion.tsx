@@ -11,10 +11,8 @@ import {
   ListStaticData,
   Text,
 } from "@mittwald/flow-react-components";
-import {
-  type Domain,
-  domains,
-} from "@/content/03-components/structure/list/examples/domainApi";
+import { domains } from "@/content/03-components/structure/list/examples/domainApi";
+import type { Domain } from "@/content/03-components/structure/list/examples/domainApi";
 
 <List batchSize={2} accordion>
   <ListStaticData data={domains} />

@@ -1,7 +1,9 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import React, { type FC, useContext } from "react";
-import { TableFooterRow, type TableFooterRowProps } from "@/components/Table";
+import type { FC } from "react";
+import type { TableFooterRowProps } from "@/components/Table";
+import React, { useContext } from "react";
+import { TableFooterRow } from "@/components/Table";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const TableFooterRowView: FC<TableFooterRowProps> = (props) => {

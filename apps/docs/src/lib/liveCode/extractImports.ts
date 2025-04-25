@@ -22,7 +22,7 @@ export function extractRawImports(moduleCode: string): ImportDefinition[] {
   });
 
   const imports = tree.body.filter((node): node is ImportDeclaration => {
-    return node.type === "ImportDeclaration";
+    return node.type === "ImportDeclaration" && !isTypeImport(node);
   });
 
   return imports.map((declaration) => {

@@ -3,7 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "@/components/createFlowRemoteComponent";
 import { RemoteTableElement } from "@mittwald/flow-remote-elements";
-export { type RemoteTableElement } from "@mittwald/flow-remote-elements";
+export type { RemoteTableElement } from "@mittwald/flow-remote-elements";
 
 export const Table = createFlowRemoteComponent(
   "flr-table",

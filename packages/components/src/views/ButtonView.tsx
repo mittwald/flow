@@ -1,7 +1,9 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
-import React, { type FC, useContext } from "react";
-import { Button, type ButtonProps } from "@/components/Button";
+import type { FC } from "react";
+import type { ButtonProps } from "@/components/Button";
+import React, { useContext } from "react";
+import { Button } from "@/components/Button";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const ButtonView: FC<ButtonProps> = (props) => {

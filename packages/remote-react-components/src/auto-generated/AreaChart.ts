@@ -3,7 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "@/components/createFlowRemoteComponent";
 import { RemoteAreaChartElement } from "@mittwald/flow-remote-elements";
-export { type RemoteAreaChartElement } from "@mittwald/flow-remote-elements";
+export type { RemoteAreaChartElement } from "@mittwald/flow-remote-elements";
 
 export const AreaChart = createFlowRemoteComponent(
   "flr-area-chart",

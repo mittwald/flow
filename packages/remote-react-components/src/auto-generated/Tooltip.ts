@@ -3,7 +3,7 @@
 "use client";
 import createFlowRemoteComponent from "@/components/createFlowRemoteComponent";
 import { RemoteTooltipElement } from "@mittwald/flow-remote-elements";
-export { type RemoteTooltipElement } from "@mittwald/flow-remote-elements";
+export type { RemoteTooltipElement } from "@mittwald/flow-remote-elements";
 
 export const Tooltip = createFlowRemoteComponent(
   "flr-tooltip",

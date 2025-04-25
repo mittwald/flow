@@ -4,7 +4,7 @@ import type {
   RemoteToHostConnection,
 } from "@/connection/types";
 import { RemoteError } from "@/error";
-import { type RemoteConnection } from "@mittwald/remote-dom-core/elements";
+import type { RemoteConnection } from "@mittwald/remote-dom-core/elements";
 import { ThreadNestedIframe } from "@quilted/threads";
 
 const incompatibleParentFrameError = () =>
