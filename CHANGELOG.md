@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.161](https://github.com/mittwald/flow/compare/0.2.0-alpha.160...0.2.0-alpha.161) (2025-04-25)
+
+### Bug Fixes
+
+* less strict children empty check ([cff5a23](https://github.com/mittwald/flow/commit/cff5a2344048383e99f494ce43a2009c967829b2))
+
 # [0.2.0-alpha.160](https://github.com/mittwald/flow/compare/0.2.0-alpha.159...0.2.0-alpha.160) (2025-04-25)
 
 ### Bug Fixes
