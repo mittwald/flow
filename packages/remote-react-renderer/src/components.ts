@@ -11,6 +11,9 @@ const htmlComponentsMap = {
   g: createRemoteComponentRenderer(elementFactory("g")),
   path: createRemoteComponentRenderer(elementFactory("path")),
   strong: createRemoteComponentRenderer(elementFactory("strong")),
+  ul: createRemoteComponentRenderer(elementFactory("ul")),
+  ol: createRemoteComponentRenderer(elementFactory("ol")),
+  li: createRemoteComponentRenderer(elementFactory("li")),
 } as const;
 
 const flowComponentsMap = {
