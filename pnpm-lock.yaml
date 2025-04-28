@@ -12,7 +12,7 @@ overrides:
 
 patchedDependencies:
   acorn:
-    hash: 58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f
+    hash: 6si3ktymthureqnmnpjiya5mwy
     path: patches/acorn.patch
 
 importers:
@@ -118,7 +118,7 @@ importers:
         version: 3.7.0
       '@mdx-js/loader':
         specifier: ^3.1.0
-        version: 3.1.0(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))(webpack@5.98.0)
+        version: 3.1.0(acorn@8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy))(webpack@5.98.0)
       '@mdx-js/react':
         specifier: ^3.1.0
         version: 3.1.0(@types/react@19.0.10)(react@19.1.0)
@@ -133,7 +133,7 @@ importers:
         version: link:../../packages/components
       '@next/mdx':
         specifier: ^15.2.1
-        version: 15.2.1(@mdx-js/loader@3.1.0(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))(webpack@5.98.0))(@mdx-js/react@3.1.0(@types/react@19.0.10)(react@19.1.0))
+        version: 15.2.1(@mdx-js/loader@3.1.0(acorn@8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy))(webpack@5.98.0))(@mdx-js/react@3.1.0(@types/react@19.0.10)(react@19.1.0))
       '@tabler/icons-react':
         specifier: ^3.31.0
         version: 3.31.0(react@19.1.0)
@@ -145,10 +145,10 @@ importers:
         version: 2.0.13
       acorn:
         specifier: 8.14.1
-        version: 8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+        version: 8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy)
       acorn-typescript:
         specifier: ^1.4.13
-        version: 1.4.13(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))
+        version: 1.4.13(acorn@8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy))
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -169,7 +169,7 @@ importers:
         version: 15.2.1(@babel/core@7.26.9)(babel-plugin-macros@3.1.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.85.1)
       next-mdx-remote:
         specifier: ^5.0.0
-        version: 5.0.0(@types/react@19.0.10)(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))(react@19.1.0)
+        version: 5.0.0(@types/react@19.0.10)(acorn@8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy))(react@19.1.0)
       parse-es-import:
         specifier: ^0.6.0
         version: 0.6.0
@@ -202,7 +202,7 @@ importers:
         version: 5.0.0
       remeda:
         specifier: ^2.21.1
-        version: 2.21.1
+        version: 2.21.3
       sass:
         specifier: ^1.85.1
         version: 1.85.1
@@ -287,7 +287,7 @@ importers:
         version: 7.54.2(react@19.1.0)
       remeda:
         specifier: ^2.21.1
-        version: 2.21.1
+        version: 2.21.3
       sass:
         specifier: ^1.85.1
         version: 1.85.1
@@ -435,7 +435,7 @@ importers:
         version: 3.0.0-alpha.9(@types/react@19.0.10)(redux@5.0.1)
       remeda:
         specifier: ^2.21.1
-        version: 2.21.1
+        version: 2.21.3
       type-fest:
         specifier: ^4.37.0
         version: 4.37.0
@@ -807,7 +807,7 @@ importers:
         version: 3.1.3(@preact/signals-core@1.8.0)
       remeda:
         specifier: ^2.21.1
-        version: 2.21.1
+        version: 2.21.3
     devDependencies:
       '@mittwald/ext-bridge':
         specifier: workspace:*
@@ -853,7 +853,7 @@ importers:
         version: link:../remote-core
       remeda:
         specifier: ^2.21.1
-        version: 2.21.1
+        version: 2.21.3
       type-fest:
         specifier: ^4.37.0
         version: 4.37.0
@@ -993,7 +993,7 @@ importers:
         version: 2.10.0(react@19.1.0)
       remeda:
         specifier: ^2.21.1
-        version: 2.21.1
+        version: 2.21.3
     devDependencies:
       '@mittwald/flow-react-components':
         specifier: workspace:*
@@ -6844,6 +6844,7 @@ packages:
   node-domexception@1.0.0:
     resolution: {integrity: sha512-/jKZoMpw0F8GRwl4/eLROPA3cfcXtLApP0QzLmUT/HuPCZWyB7IY9ZrMeKw2O/nFIqPQB3PVM9aYm0F312AXDQ==}
     engines: {node: '>=10.5.0'}
+    deprecated: Use your platform's native DOMException instead
 
   node-fetch@3.3.2:
     resolution: {integrity: sha512-dRB78srN/l6gqWulah9SrxeYnxeddIG30+GOqK/9OlLVyLg3HPnr6SqOWTWOXKRwC2eGYCkZ59NNuSgvSrpgOA==}
@@ -7719,8 +7720,8 @@ packages:
   remark-stringify@11.0.0:
     resolution: {integrity: sha512-1OSmLd3awB/t8qdoEOMazZkNsfVTeY4fTsgzcQFdXNq8ToTN4ZGwrMnlda4K6smTFKD+GRV6O48i6Z4iKgPPpw==}
 
-  remeda@2.21.1:
-    resolution: {integrity: sha512-7I3JaB+geXL0Vq8V3TEwX6mMlWUCv18OdweAovYKiwDCbjKYf1DIHB58B6z8K7juPuZ1whwj79fOvUaHHHjbew==}
+  remeda@2.21.3:
+    resolution: {integrity: sha512-XXrZdLA10oEOQhLLzEJEiFFSKi21REGAkHdImIb4rt/XXy8ORGXh5HCcpUOsElfPNDb+X6TA/+wkh+p2KffYmg==}
 
   require-directory@2.1.1:
     resolution: {integrity: sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==}
@@ -8392,6 +8393,10 @@ packages:
 
   type-fest@4.37.0:
     resolution: {integrity: sha512-S/5/0kFftkq27FPNye0XM1e2NsnoD/3FS+pBmbjmmtLT6I+i344KoOf7pvXreaFsDamWeaJX55nczA1m5PsBDg==}
+    engines: {node: '>=16'}
+
+  type-fest@4.40.1:
+    resolution: {integrity: sha512-9YvLNnORDpI+vghLU/Nf+zSv0kL47KbVJ1o3sKgoTefl6i+zebxbiDQWoe/oWWqPhIgQdRZRT1KA9sCPL810SA==}
     engines: {node: '>=16'}
 
   typedarray-to-buffer@1.0.4:
@@ -10340,9 +10345,9 @@ snapshots:
 
   '@lit-labs/ssr-dom-shim@1.3.0': {}
 
-  '@mdx-js/loader@3.1.0(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))(webpack@5.98.0)':
+  '@mdx-js/loader@3.1.0(acorn@8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy))(webpack@5.98.0)':
     dependencies:
-      '@mdx-js/mdx': 3.1.0(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))
+      '@mdx-js/mdx': 3.1.0(acorn@8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy))
       source-map: 0.7.4
     optionalDependencies:
       webpack: 5.98.0
@@ -10350,7 +10355,7 @@ snapshots:
       - acorn
       - supports-color
 
-  '@mdx-js/mdx@3.1.0(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))':
+  '@mdx-js/mdx@3.1.0(acorn@8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy))':
     dependencies:
       '@types/estree': 1.0.6
       '@types/estree-jsx': 1.0.5
@@ -10364,7 +10369,7 @@ snapshots:
       hast-util-to-jsx-runtime: 2.3.6
       markdown-extensions: 2.0.0
       recma-build-jsx: 1.0.0
-      recma-jsx: 1.0.0(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))
+      recma-jsx: 1.0.0(acorn@8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy))
       recma-stringify: 1.0.0
       rehype-recma: 1.0.0
       remark-mdx: 3.1.0
@@ -10480,11 +10485,11 @@ snapshots:
     dependencies:
       fast-glob: 3.3.1
 
-  '@next/mdx@15.2.1(@mdx-js/loader@3.1.0(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))(webpack@5.98.0))(@mdx-js/react@3.1.0(@types/react@19.0.10)(react@19.1.0))':
+  '@next/mdx@15.2.1(@mdx-js/loader@3.1.0(acorn@8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy))(webpack@5.98.0))(@mdx-js/react@3.1.0(@types/react@19.0.10)(react@19.1.0))':
     dependencies:
       source-map: 0.7.4
     optionalDependencies:
-      '@mdx-js/loader': 3.1.0(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))(webpack@5.98.0)
+      '@mdx-js/loader': 3.1.0(acorn@8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy))(webpack@5.98.0)
       '@mdx-js/react': 3.1.0(@types/react@19.0.10)(react@19.1.0)
 
   '@next/swc-darwin-arm64@15.2.1':
@@ -13111,20 +13116,20 @@ snapshots:
     dependencies:
       xtend: 3.0.0
 
-  acorn-jsx@5.3.2(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)):
+  acorn-jsx@5.3.2(acorn@8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy)):
     dependencies:
-      acorn: 8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+      acorn: 8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy)
 
-  acorn-typescript@1.4.13(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)):
+  acorn-typescript@1.4.13(acorn@8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy)):
     dependencies:
-      acorn: 8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+      acorn: 8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy)
 
   acorn-walk@8.3.4:
     dependencies:
-      acorn: 8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+      acorn: 8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy)
     optional: true
 
-  acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f): {}
+  acorn@8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy): {}
 
   add-stream@1.0.0: {}
 
@@ -14136,7 +14141,7 @@ snapshots:
   esast-util-from-js@2.0.1:
     dependencies:
       '@types/estree-jsx': 1.0.5
-      acorn: 8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+      acorn: 8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy)
       esast-util-from-estree: 2.0.0
       vfile-message: 4.0.2
 
@@ -14258,8 +14263,8 @@ snapshots:
 
   espree@10.3.0:
     dependencies:
-      acorn: 8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
-      acorn-jsx: 5.3.2(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))
+      acorn: 8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy)
+      acorn-jsx: 5.3.2(acorn@8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy))
       eslint-visitor-keys: 4.2.0
 
   esprima@4.0.1: {}
@@ -15775,8 +15780,8 @@ snapshots:
 
   micromark-extension-mdxjs@3.0.0:
     dependencies:
-      acorn: 8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
-      acorn-jsx: 5.3.2(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))
+      acorn: 8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy)
+      acorn-jsx: 5.3.2(acorn@8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy))
       micromark-extension-mdx-expression: 3.0.0
       micromark-extension-mdx-jsx: 3.0.1
       micromark-extension-mdx-md: 2.0.0
@@ -16021,7 +16026,7 @@ snapshots:
 
   mlly@1.7.4:
     dependencies:
-      acorn: 8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+      acorn: 8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy)
       pathe: 2.0.3
       pkg-types: 1.3.1
       ufo: 1.5.4
@@ -16113,10 +16118,10 @@ snapshots:
     dependencies:
       type-fest: 2.19.0
 
-  next-mdx-remote@5.0.0(@types/react@19.0.10)(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))(react@19.1.0):
+  next-mdx-remote@5.0.0(@types/react@19.0.10)(acorn@8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy))(react@19.1.0):
     dependencies:
       '@babel/code-frame': 7.26.2
-      '@mdx-js/mdx': 3.1.0(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))
+      '@mdx-js/mdx': 3.1.0(acorn@8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy))
       '@mdx-js/react': 3.1.0(@types/react@19.0.10)(react@19.1.0)
       react: 19.1.0
       unist-util-remove: 3.1.1
@@ -16555,8 +16560,8 @@ snapshots:
 
   parse-es-import@0.6.0:
     dependencies:
-      acorn: 8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
-      acorn-jsx: 5.3.2(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))
+      acorn: 8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy)
+      acorn-jsx: 5.3.2(acorn@8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy))
 
   parse-json@5.2.0:
     dependencies:
@@ -16577,7 +16582,7 @@ snapshots:
     dependencies:
       '@babel/code-frame': 7.26.2
       index-to-position: 0.1.2
-      type-fest: 4.37.0
+      type-fest: 4.40.1
 
   parse-node-version@1.0.1: {}
 
@@ -17154,21 +17159,21 @@ snapshots:
     dependencies:
       find-up: 6.3.0
       read-pkg: 8.1.0
-      type-fest: 4.37.0
+      type-fest: 4.40.1
 
   read-pkg@8.1.0:
     dependencies:
       '@types/normalize-package-data': 2.4.4
       normalize-package-data: 6.0.2
       parse-json: 7.1.1
-      type-fest: 4.37.0
+      type-fest: 4.40.1
 
   read-pkg@9.0.1:
     dependencies:
       '@types/normalize-package-data': 2.4.4
       normalize-package-data: 6.0.2
       parse-json: 8.1.0
-      type-fest: 4.37.0
+      type-fest: 4.40.1
       unicorn-magic: 0.1.0
 
   readable-stream@1.0.34:
@@ -17249,9 +17254,9 @@ snapshots:
       estree-util-build-jsx: 3.0.1
       vfile: 6.0.3
 
-  recma-jsx@1.0.0(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)):
+  recma-jsx@1.0.0(acorn@8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy)):
     dependencies:
-      acorn-jsx: 5.3.2(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))
+      acorn-jsx: 5.3.2(acorn@8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy))
       estree-util-to-js: 2.0.0
       recma-parse: 1.0.0
       recma-stringify: 1.0.0
@@ -17384,9 +17389,9 @@ snapshots:
       mdast-util-to-markdown: 2.1.2
       unified: 11.0.5
 
-  remeda@2.21.1:
+  remeda@2.21.3:
     dependencies:
-      type-fest: 4.37.0
+      type-fest: 4.40.1
 
   require-directory@2.1.1: {}
 
@@ -17952,7 +17957,7 @@ snapshots:
   terser@5.39.0:
     dependencies:
       '@jridgewell/source-map': 0.3.6
-      acorn: 8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+      acorn: 8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy)
       commander: 2.20.3
       source-map-support: 0.5.21
 
@@ -18050,7 +18055,7 @@ snapshots:
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
       '@types/node': 22.13.10
-      acorn: 8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+      acorn: 8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy)
       acorn-walk: 8.3.4
       arg: 4.1.3
       create-require: 1.1.1
@@ -18095,6 +18100,8 @@ snapshots:
   type-fest@3.13.1: {}
 
   type-fest@4.37.0: {}
+
+  type-fest@4.40.1: {}
 
   typedarray-to-buffer@1.0.4: {}
 
@@ -18227,7 +18234,7 @@ snapshots:
 
   unplugin@1.16.1:
     dependencies:
-      acorn: 8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+      acorn: 8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy)
       webpack-virtual-modules: 0.6.2
 
   update-browserslist-db@1.1.3(browserslist@4.24.4):
@@ -18563,7 +18570,7 @@ snapshots:
       '@webassemblyjs/ast': 1.14.1
       '@webassemblyjs/wasm-edit': 1.14.1
       '@webassemblyjs/wasm-parser': 1.14.1
-      acorn: 8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+      acorn: 8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy)
       browserslist: 4.24.4
       chrome-trace-event: 1.0.4
       enhanced-resolve: 5.18.1
@@ -18660,7 +18667,7 @@ snapshots:
       deepmerge-ts: 7.1.5
       read-pkg: 9.0.1
       sort-keys: 5.1.0
-      type-fest: 4.37.0
+      type-fest: 4.40.1
       write-json-file: 6.0.0
 
   ws@8.18.1: {}
