@@ -27,7 +27,7 @@ const RootLayout: FC<PropsWithChildren> = async (props) => {
   const docs = await MdxFileFactory.fromDir("src/content");
 
   return (
-    <html lang="en">
+    <html lang="de">
       <body className={bodyClassName}>
         <Matomo />
         <LinkProvider>
