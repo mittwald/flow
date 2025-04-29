@@ -2,7 +2,7 @@ import formFieldStyles from "@/components/FormField/FormField.module.scss";
 import { useFormValidation } from "@react-aria/form";
 import { useFormValidationState } from "@react-stately/form";
 import type { PropsWithChildren } from "react";
-import { useMemo, useRef } from "react";
+import { useMemo } from "react";
 import type * as Aria from "react-aria-components";
 import { FieldErrorContext, InputContext } from "react-aria-components";
 import type { FileInputOnChangeHandler } from "@/components/FileField/components/FileInput";
