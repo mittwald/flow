@@ -5,6 +5,8 @@ import {
   Form,
   Section,
   TextField,
+  FileField,
+  Label,
   CodeBlock,
 } from "@mittwald/flow-remote-react-components";
 import { formServerAction } from "@/app/actions";
@@ -27,6 +29,12 @@ export default function Page() {
     <Form action={dispatchFormServerAction}>
       <Section>
         <TextField name="test" aria-label="Test" />
+        <FileField name="certificate">
+          <Label>Zertifikat</Label>
+          <Button variant="outline" color="secondary">
+            Auswählen
+          </Button>
+        </FileField>
         <Button type="submit" isPending={isPending}>
           Submit
         </Button>

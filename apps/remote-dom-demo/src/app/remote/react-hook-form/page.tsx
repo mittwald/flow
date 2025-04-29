@@ -1,15 +1,22 @@
 "use client";
 
-import { Field } from "@mittwald/flow-react-components/react-hook-form";
-import { Button, TextField } from "@mittwald/flow-remote-react-components";
-import { Form } from "@mittwald/flow-remote-react-components/react-hook-form";
+import {
+  Button,
+  TextField,
+  FileField,
+  Label,
+} from "@mittwald/flow-remote-react-components";
+import {
+  Form,
+  Field,
+} from "@mittwald/flow-remote-react-components/react-hook-form";
 import { useForm } from "react-hook-form";
 
 export default function Page() {
   const form = useForm({
     defaultValues: {
-      email: "foo",
-      password: "",
+      email: "test",
+      file: [],
     },
   });
 
@@ -19,7 +26,6 @@ export default function Page() {
         rules={{
           validate: {
             customRule: (val) => {
-              console.log("foo");
               return val === "test" ? true : "Waaaa";
             },
           },
@@ -28,7 +34,16 @@ export default function Page() {
       >
         <TextField type="text" />
       </Field>
+      <Field name={"file"}>
+        <FileField>
+          <Label>Zertifikat</Label>
+          <Button variant="outline" color="secondary">
+            Auswählen
+          </Button>
+        </FileField>
+      </Field>
       <Button type={"submit"}>Login</Button>
+      <Button type={"reset"}>Reset</Button>
     </Form>
   );
 }

@@ -4,6 +4,8 @@ import {
   Option,
   Section,
   CodeBlock,
+  FileField,
+  Label,
   Form,
   TextField,
   Button,
@@ -16,6 +18,7 @@ export default function Page() {
   interface FormData {
     text: string;
     select: string;
+    certificate: [];
   }
 
   return (
@@ -37,6 +40,12 @@ export default function Page() {
             Baz
           </Option>
         </Select>
+        <FileField multiple name="certificate">
+          <Label>Zertifikat</Label>
+          <Button variant="outline" color="secondary">
+            Auswählen
+          </Button>
+        </FileField>
         <Button type="submit">Submit</Button>
         <CodeBlock code={JSON.stringify(event, undefined, 2)} />
       </Section>

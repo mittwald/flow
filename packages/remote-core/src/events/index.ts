@@ -1,6 +1,10 @@
 import { standard } from "@/events/serializers";
+import resolveNestedPromises from "@/utils/promise";
+import { eventValueTransformer } from "@/utils/eventValueTransformer";
 
 export type EventHandler = (event: unknown) => void;
+export type EventSerialization = (event: unknown) => unknown;
+export type EventSerializationMap = Record<string, EventSerialization>;
 
 export const mapEventHandler =
   (
@@ -10,8 +14,8 @@ export const mapEventHandler =
   ) =>
   (event: unknown) => {
     const serialize = eventSerialization[eventName] ?? standard;
-    return eventHandler(serialize(event));
-  };
+    const data = eventValueTransformer(serialize(event));
 
-export type EventSerialization = (event: unknown) => unknown;
-export type EventSerializationMap = Record<string, EventSerialization>;
+    resolveNestedPromises(data).then(eventHandler);
+    return null;
+  };

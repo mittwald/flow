@@ -11,6 +11,7 @@ import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
+import { useObjectRef } from "@react-aria/utils";
 
 export interface FileFieldProps
   extends PropsWithChildren,
@@ -39,7 +40,7 @@ export const FileField = flowComponent("FileField", (props) => {
     onChange,
     ...restInputProps
   } = props;
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useObjectRef(ref);
 
   const formValidationState = useFormValidationState({
     value: undefined,
