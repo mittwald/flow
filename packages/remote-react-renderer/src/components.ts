@@ -17,9 +17,13 @@ const htmlComponentsMap = {
 } as const;
 
 const flowComponentsMap = {
-  "flr-form": createFlowRemoteComponentRenderer(Form),
-  "flr-slot-root-wrapper": createFlowRemoteComponentRenderer(SlotRootWrapper),
+  "flr-form": createFlowRemoteComponentRenderer("Form", Form),
+  "flr-slot-root-wrapper": createFlowRemoteComponentRenderer(
+    "SlotRootWrapper",
+    SlotRootWrapper,
+  ),
   "flr-notification": createFlowRemoteComponentRenderer(
+    "Notification",
     NotificationRenderController,
   ),
 };
