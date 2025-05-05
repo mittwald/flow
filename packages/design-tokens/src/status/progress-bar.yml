@@ -16,7 +16,7 @@ progress-bar:
     m:
       value: "{size-rem.m}"
     s:
-      value: 0.375rem
+      value: "{size-rem.s}"
     l:
       value: "{size-rem.l}"
   corner-radius:
