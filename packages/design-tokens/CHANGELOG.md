@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.166](https://github.com/mittwald/flow/compare/0.2.0-alpha.165...0.2.0-alpha.166) (2025-05-05)
+
+### Bug Fixes
+
+* **progress-bar:** update small size value to use size.s design token ([#1429](https://github.com/mittwald/flow/issues/1429)) ([fa27fa1](https://github.com/mittwald/flow/commit/fa27fa1fcc9f47d232777ad6a463818214c9f68c))
+
 # [0.2.0-alpha.165](https://github.com/mittwald/flow/compare/0.2.0-alpha.164...0.2.0-alpha.165) (2025-04-30)
 
 **Note:** Version bump only for package @mittwald/flow-design-tokens
