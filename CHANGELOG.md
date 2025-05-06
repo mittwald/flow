@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.170](https://github.com/mittwald/flow/compare/0.2.0-alpha.169...0.2.0-alpha.170) (2025-05-06)
+
+### Features
+
+* **Remote:** support version for backwards compatibility ([#1432](https://github.com/mittwald/flow/issues/1432)) ([4a9ee6f](https://github.com/mittwald/flow/commit/4a9ee6f5515927471f7d762f330e4d23b0de6ad4))
+
 # [0.2.0-alpha.169](https://github.com/mittwald/flow/compare/0.2.0-alpha.168...0.2.0-alpha.169) (2025-05-06)
 
 ### Features
