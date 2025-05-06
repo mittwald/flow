@@ -1,6 +1,7 @@
 "use client";
 import * as remoteComponents from "@/auto-generated";
 import * as customViewComponents from "@/views";
+import { useWatchPathname } from "@/hooks/useWatchPathname";
 import { stringifyError } from "@/lib/stringifyError";
 import { ViewComponentContextProvider } from "@mittwald/flow-react-components/internal";
 import {
@@ -11,6 +12,7 @@ import {
   Suspense,
   useRef,
   useState,
+  useTransition,
   type FC,
   type PropsWithChildren,
 } from "react";
@@ -21,11 +23,18 @@ const viewComponents = {
   ...customViewComponents,
 } as FlowViewComponents;
 
-export const RemoteRoot: FC<PropsWithChildren> = (props) => {
-  const { children } = props;
+export interface RemoteRootProps extends PropsWithChildren {
+  onHostPathnameChanged?: (pathname: string) => void;
+}
+
+export const RemoteRoot: FC<RemoteRootProps> = (props) => {
+  const { children, onHostPathnameChanged } = props;
 
   const connectionRef = useRef<RemoteToHostConnection>(undefined);
   const [connectionError, setConnectionError] = useState(null);
+
+  const [pathnameChangedPending, startPathnameChangedTransition] =
+    useTransition();
 
   const renderErrorRef = useRef<unknown>(undefined);
 
@@ -34,14 +43,26 @@ export const RemoteRoot: FC<PropsWithChildren> = (props) => {
     connectionRef.current?.imports.setError(stringifyError(error));
   };
 
+  useWatchPathname((pathname) =>
+    connectionRef.current?.imports.setNavigationState({
+      pathname,
+      isPending: pathnameChangedPending,
+    }),
+  );
+
   if (connectionError) {
     throw connectionError;
   }
 
+  const connect = connectHostRenderRootRef({
+    onPathnameChanged: (pathname) =>
+      startPathnameChangedTransition(() => onHostPathnameChanged?.(pathname)),
+  });
+
   return (
     <div
       ref={(div) => {
-        connectHostRenderRootRef(div)
+        connect(div)
           ?.then((connection) => {
             connectionRef.current = connection;
           })

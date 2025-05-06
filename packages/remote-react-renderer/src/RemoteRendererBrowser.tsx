@@ -7,18 +7,29 @@ import type { ExtBridgeConnectionApi } from "@mittwald/ext-bridge";
 import {
   connectRemoteIframeRef,
   RemoteError,
+  type HostToRemoteConnection,
+  type NavigationState,
 } from "@mittwald/flow-remote-core";
 import { usePromise } from "@mittwald/react-use-promise";
 import {
   RemoteReceiver,
   RemoteRootRenderer,
 } from "@mittwald/remote-dom-react/host";
-import { type CSSProperties, type FC, useMemo, useState } from "react";
+import {
+  type CSSProperties,
+  type FC,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 
 export interface RemoteRendererBrowserProps {
   integrations?: RemoteComponentsMap<never>[];
   src: string;
   timeoutMs?: number;
+  onNavigationStateChanged?: (state: NavigationState) => void;
+  hostPathname?: string;
   extBridgeImplementation?: ExtBridgeConnectionApi;
 }
 
@@ -39,6 +50,8 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
     timeoutMs = 10_000,
     src,
     extBridgeImplementation,
+    onNavigationStateChanged,
+    hostPathname,
   } = props;
 
   const renderAwaiter = useAwaiter([src]);
@@ -47,6 +60,7 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
 
   const [connectedSrc, setConnectedSrc] = useState<string | null>(null);
   const [remoteError, setRemoteError] = useState<string | undefined>();
+  const connection = useRef<HostToRemoteConnection | undefined>(undefined);
 
   if (remoteError) {
     throw new RemoteError(`Remote rendering failed: ${remoteError}`);
@@ -63,11 +77,18 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
     return remoteReceiver;
   }, [src]);
 
+  useLayoutEffect(() => {
+    if (hostPathname && connection.current) {
+      connection.current.imports.setPathname(hostPathname);
+    }
+  }, [hostPathname]);
+
   const connect = connectRemoteIframeRef({
     connection: receiver.connection,
     extBridgeImplementation: extBridgeImplementation,
     onReady: connectionAwaiter.resolve,
     onError: setRemoteError,
+    onNavigationStateChanged,
   });
 
   const timeoutPromise = (message: string) =>
@@ -102,10 +123,9 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
     <>
       <RemoteRootRenderer components={remoteComponents} receiver={receiver} />
       <iframe
-        key={src}
         src={src}
         ref={(ref) => {
-          connect(ref);
+          connection.current = connect(ref);
           setConnectedSrc(src);
         }}
         onLoad={loadingAwaiter.resolve}

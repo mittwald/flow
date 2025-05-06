@@ -7,21 +7,31 @@ import { RemoteError } from "@/error";
 import { type RemoteConnection } from "@mittwald/remote-dom-core/elements";
 import { ThreadNestedIframe } from "@quilted/threads";
 
+interface Options {
+  root: HTMLDivElement;
+  onPathnameChanged?: (pathname: string) => void;
+}
+
 const incompatibleParentFrameError = () =>
   new RemoteError("Could not find any compatible parent frame");
 
 export const connectHostRenderRoot = async (
-  div: HTMLDivElement,
+  options: Options,
 ): Promise<RemoteToHostConnection> => {
+  const { root, onPathnameChanged } = options;
+
   const connection = new ThreadNestedIframe<HostExports, RemoteExports>({
     exports: {
       render: (connection: RemoteConnection) =>
         import("@mittwald/remote-dom-core/elements").then(
           ({ RemoteMutationObserver }) => {
             const observer = new RemoteMutationObserver(connection);
-            observer.observe(div);
+            observer.observe(root);
           },
         ),
+      setPathname: async (pathname) => {
+        onPathnameChanged?.(pathname);
+      },
     },
   });
 
@@ -49,15 +59,19 @@ export const connectHostRenderRoot = async (
   }
 };
 
-export const connectHostRenderRootRef = (ref: HTMLDivElement | null) => {
-  if (ref === null) {
-    return;
-  }
-  if ("__remoteConnection" in ref) {
-    return ref["__remoteConnection"] as Promise<RemoteToHostConnection>;
-  }
+export const connectHostRenderRootRef =
+  (opts: Omit<Options, "root">) => (ref: HTMLDivElement | null) => {
+    if (ref === null) {
+      return;
+    }
+    if ("__remoteConnection" in ref) {
+      return ref["__remoteConnection"] as Promise<RemoteToHostConnection>;
+    }
 
-  const connection = connectHostRenderRoot(ref);
-  Object.assign(ref, { __remoteConnection: connection });
-  return connection;
-};
+    const connection = connectHostRenderRoot({
+      root: ref,
+      ...opts,
+    });
+    Object.assign(ref, { __remoteConnection: connection });
+    return connection;
+  };
