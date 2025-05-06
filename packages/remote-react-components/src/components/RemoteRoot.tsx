@@ -12,6 +12,7 @@ import {
   Suspense,
   useRef,
   useState,
+  useTransition,
   type FC,
   type PropsWithChildren,
 } from "react";
@@ -22,11 +23,18 @@ const viewComponents = {
   ...customViewComponents,
 } as FlowViewComponents;
 
-export const RemoteRoot: FC<PropsWithChildren> = (props) => {
-  const { children } = props;
+export interface RemoteRootProps extends PropsWithChildren {
+  onHostPathnameChanged?: (pathname: string) => void;
+}
+
+export const RemoteRoot: FC<RemoteRootProps> = (props) => {
+  const { children, onHostPathnameChanged } = props;
 
   const connectionRef = useRef<RemoteToHostConnection>(undefined);
   const [connectionError, setConnectionError] = useState(null);
+
+  const [pathnameChangedPending, startPathnameChangedTransition] =
+    useTransition();
 
   const renderErrorRef = useRef<unknown>(undefined);
 
@@ -36,17 +44,25 @@ export const RemoteRoot: FC<PropsWithChildren> = (props) => {
   };
 
   useWatchPathname((pathname) =>
-    connectionRef.current?.imports.setPathname(pathname),
+    connectionRef.current?.imports.setNavigationState({
+      pathname,
+      isPending: pathnameChangedPending,
+    }),
   );
 
   if (connectionError) {
     throw connectionError;
   }
 
+  const connect = connectHostRenderRootRef({
+    onPathnameChanged: (pathname) =>
+      startPathnameChangedTransition(() => onHostPathnameChanged?.(pathname)),
+  });
+
   return (
     <div
       ref={(div) => {
-        connectHostRenderRootRef(div)
+        connect(div)
           ?.then((connection) => {
             connectionRef.current = connection;
           })

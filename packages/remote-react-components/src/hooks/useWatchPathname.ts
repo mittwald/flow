@@ -10,6 +10,7 @@ export const useWatchPathname = (callback: Callback) => {
   const storedHref = useRef(location.href);
 
   useEffect(() => {
+    /** Need to poll here, because no appropriate browser API exists */
     const checker = setInterval(() => {
       const href = location.href;
       if (href !== storedHref.current) {

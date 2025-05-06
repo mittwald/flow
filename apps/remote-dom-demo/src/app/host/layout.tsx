@@ -1,39 +1,50 @@
 "use client";
+import { getHostPath, getRemotePath } from "@/app/_lib/navigation";
+import {
+  Heading,
+  IllustratedMessage,
+  LoadingSpinner,
+} from "@mittwald/flow-react-components";
 import { RemoteRenderer } from "@mittwald/flow-remote-react-renderer";
 import { usePathname, useRouter } from "next/navigation";
-import { useRef } from "react";
-
-const isNavigationExample = (path: string) => path.includes("/navigation/");
+import { useRef, useState } from "react";
 
 export default function HostPage() {
   const router = useRouter();
-
-  const path = usePathname();
-
-  const remotePath = path.replace("/host/", "/remote/");
-  const prevRemotePath = useRef(remotePath);
-
-  const navigatedInsideExample =
-    isNavigationExample(path) && isNavigationExample(prevRemotePath.current);
-
-  const src = navigatedInsideExample ? prevRemotePath.current : remotePath;
-  prevRemotePath.current = src;
+  const hostPath = usePathname();
+  const remotePath = getRemotePath(hostPath);
+  const srcRef = useRef(remotePath);
+  const [isNavigating, setIsNavigating] = useState(false);
 
   return (
-    <RemoteRenderer
-      onPathnameChanged={(pathname) =>
-        router.push(pathname.replace("/remote/", "/host/"))
-      }
-      src={src}
-      extBridgeImplementation={{
-        getConfig: async () => ({
-          extensionId: "ext-id",
-          extensionInstanceId: "exti-id",
-          sessionId: "session-id",
-          userId: "user-id",
-        }),
-        getSessionToken: async () => "session-token",
-      }}
-    />
+    <>
+      {isNavigating && (
+        <IllustratedMessage>
+          <LoadingSpinner />
+          <Heading>Lade Demo</Heading>
+        </IllustratedMessage>
+      )}
+      <RemoteRenderer
+        onNavigationStateChanged={(state) => {
+          const { pathname, isPending } = state;
+          router.replace(getHostPath(pathname));
+          setIsNavigating(isPending);
+        }}
+        hostPathname={hostPath}
+        src={srcRef.current}
+        extBridgeImplementation={{
+          getConfig: async () => ({
+            extensionId: "ext-id",
+            extensionInstanceId: "exti-id",
+            sessionId: "session-id",
+            userId: "user-id",
+            appInstallationId: "appi-id",
+            customerId: "customer-id",
+            projectId: "project-id",
+          }),
+          getSessionToken: async () => "session-token",
+        }}
+      />
+    </>
   );
 }
