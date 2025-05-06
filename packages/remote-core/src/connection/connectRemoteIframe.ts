@@ -28,23 +28,27 @@ export const connectRemoteIframe = (opts: Options): HostToRemoteConnection => {
     extBridgeImplementation = emptyImplementation,
   } = opts;
 
-  const thread = new ThreadIframe<RemoteExports, HostExports>(iframe, {
-    exports: {
-      ...extBridgeImplementation,
-      setIsReady: async () => {
-        onReady?.();
+  const result = {
+    thread: new ThreadIframe<RemoteExports, HostExports>(iframe, {
+      exports: {
+        ...extBridgeImplementation,
+        setIsReady: async (version = 1) => {
+          result.version = version;
+          onReady?.();
+        },
+        setError: async (error: string) => {
+          onError?.(error);
+        },
+        setNavigationState: async (state) => {
+          onNavigationStateChanged?.(state);
+        },
       },
-      setError: async (error: string) => {
-        onError?.(error);
-      },
-      setNavigationState: async (state) => {
-        onNavigationStateChanged?.(state);
-      },
-    },
-  });
+    }),
+    version: 0,
+  };
 
-  thread.imports.render(connection);
-  return thread;
+  result.thread.imports.render(connection);
+  return result;
 };
 
 export const connectRemoteIframeRef =
