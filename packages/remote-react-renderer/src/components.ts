@@ -14,6 +14,7 @@ const htmlComponentsMap = {
   ul: createRemoteComponentRenderer(elementFactory("ul")),
   ol: createRemoteComponentRenderer(elementFactory("ol")),
   li: createRemoteComponentRenderer(elementFactory("li")),
+  small: createRemoteComponentRenderer(elementFactory("small")),
 } as const;
 
 /**
