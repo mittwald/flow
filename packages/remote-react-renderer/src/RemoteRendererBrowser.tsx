@@ -79,7 +79,10 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
 
   useLayoutEffect(() => {
     if (hostPathname && connection.current) {
-      connection.current.imports.setPathname(hostPathname);
+      const { thread, version } = connection.current;
+      if (version >= 2) {
+        thread.imports.setPathname(hostPathname);
+      }
     }
   }, [hostPathname]);
 

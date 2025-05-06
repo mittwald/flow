@@ -40,7 +40,7 @@ export const connectHostRenderRoot = async (
   }
 
   try {
-    await connection.imports.setIsReady();
+    await connection.imports.setIsReady(2);
 
     if (typeof mwExtBridge !== "undefined") {
       mwExtBridge.connection = connection.imports;
