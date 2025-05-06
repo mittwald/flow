@@ -1,9 +1,27 @@
 import type { CSSProperties, FC, PropsWithChildren } from "react";
-import type { PropsWithClassName } from "@/lib/types/props";
+import type {
+  PropsWithClassName,
+  PropsWithElementType,
+} from "@/lib/types/props";
 import clsx from "clsx";
 import styles from "./Flex.module.scss";
 
-export interface FlexProps extends PropsWithChildren, PropsWithClassName {
+export interface FlexProps
+  extends PropsWithChildren,
+    PropsWithClassName,
+    PropsWithElementType<
+      | "div"
+      | "aside"
+      | "ul"
+      | "li"
+      | "ol"
+      | "section"
+      | "main"
+      | "span"
+      | "p"
+      | "footer"
+      | "header"
+    > {
   /** The flexDirection value of the element. @default "row" */
   direction?: CSSProperties["flexDirection"];
   /** The alignItems value of the element. @default "start" */
@@ -50,12 +68,15 @@ export const Flex: FC<FlexProps> = (props) => {
     paddingBottom,
     paddingLeft,
     paddingRight,
+    elementType = "div",
   } = props;
 
   const rootClassName = clsx(styles.flex, className);
 
+  const Element = elementType;
+
   return (
-    <div
+    <Element
       className={rootClassName}
       style={{
         flexDirection: direction,
@@ -107,7 +128,7 @@ export const Flex: FC<FlexProps> = (props) => {
       }}
     >
       {children}
-    </div>
+    </Element>
   );
 };
 export default Flex;
