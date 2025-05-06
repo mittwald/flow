@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.169](https://github.com/mittwald/flow/compare/0.2.0-alpha.168...0.2.0-alpha.169) (2025-05-06)
+
+### Features
+
+* **Remote:** allow script tag on remote ([0c5c4be](https://github.com/mittwald/flow/commit/0c5c4be0ba5cd0d673704b8573e16184f3832486))
+
 # [0.2.0-alpha.168](https://github.com/mittwald/flow/compare/0.2.0-alpha.167...0.2.0-alpha.168) (2025-05-06)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-renderer
