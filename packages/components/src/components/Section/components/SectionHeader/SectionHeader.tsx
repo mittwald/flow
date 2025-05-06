@@ -55,7 +55,6 @@ export const SectionHeader: FC<SectionHeaderProps> = (props) => {
     },
     Heading: {
       level: 2,
-      className: styles.heading,
     },
     Link: {
       tunnelId: "actions",
