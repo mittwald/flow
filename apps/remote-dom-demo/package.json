@@ -14,6 +14,7 @@
     "@mittwald/flow-remote-react-components": "workspace:*",
     "@mittwald/flow-remote-react-renderer": "workspace:*",
     "@mittwald/flow-stylesheet": "workspace:*",
+    "@mittwald/react-tunnel": "workspace:*",
     "@mittwald/react-use-promise": "^3.0.4",
     "@tabler/icons-react": "^3.31.0",
     "clsx": "^2.1.1",

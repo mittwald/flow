@@ -109,5 +109,6 @@ export * from "./RemoteTextFieldElement";
 export * from "./RemoteTimeFieldElement";
 export * from "./RemoteTooltipElement";
 export * from "./RemoteTooltipTriggerElement";
+export * from "./RemoteTunnelEntryElement";
 export * from "./RemoteXAxisElement";
 export * from "./RemoteYAxisElement";

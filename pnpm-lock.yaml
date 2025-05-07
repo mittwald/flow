@@ -264,6 +264,9 @@ importers:
       '@mittwald/flow-stylesheet':
         specifier: workspace:*
         version: link:../../packages/stylesheet
+      '@mittwald/react-tunnel':
+        specifier: workspace:*
+        version: link:../../packages/react-tunnel
       '@mittwald/react-use-promise':
         specifier: ^3.0.4
         version: 3.0.4(axios@1.8.3)(react@19.1.0)

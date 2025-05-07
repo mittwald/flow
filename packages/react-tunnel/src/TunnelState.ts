@@ -60,9 +60,21 @@ export class TunnelState {
     this.preparedChildren.set(tunnelId, tunnelEntries);
   }
 
+  private deleteChildrenFromMap(
+    map: Map<string, Map<string, TunnelChildren>>,
+    tunnelId: string,
+    entryId: string,
+  ): void {
+    const mapEntries = map.get(tunnelId);
+    mapEntries?.delete(entryId);
+    if (mapEntries?.size === 0) {
+      map.delete(tunnelId);
+    }
+  }
+
   public deleteChildren(tunnelId: string = defaultId, entryId: string): void {
-    this.children.get(tunnelId)?.delete(entryId);
-    this.preparedChildren.get(tunnelId)?.delete(entryId);
+    this.deleteChildrenFromMap(this.children, tunnelId, entryId);
+    this.deleteChildrenFromMap(this.preparedChildren, tunnelId, entryId);
   }
 
   public getChildren(
