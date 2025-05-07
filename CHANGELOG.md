@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.171](https://github.com/mittwald/flow/compare/0.2.0-alpha.170...0.2.0-alpha.171) (2025-05-07)
+
+### Features
+
+* **Remote:** Allow `small` as remote component ([80d56ca](https://github.com/mittwald/flow/commit/80d56cae4e4c6f0bf18f794e4dca919f8251fb69))
+
 # [0.2.0-alpha.170](https://github.com/mittwald/flow/compare/0.2.0-alpha.169...0.2.0-alpha.170) (2025-05-06)
 
 ### Features
