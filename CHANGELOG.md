@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.173](https://github.com/mittwald/flow/compare/0.2.0-alpha.172...0.2.0-alpha.173) (2025-05-07)
+
+### Bug Fixes
+
+* **Flex:** default values for align and justify  ([#1435](https://github.com/mittwald/flow/issues/1435)) ([a81563a](https://github.com/mittwald/flow/commit/a81563aa034da98f25ed0e1be2777bc4be0bd146))
+
 # [0.2.0-alpha.172](https://github.com/mittwald/flow/compare/0.2.0-alpha.171...0.2.0-alpha.172) (2025-05-07)
 
 ### Features
