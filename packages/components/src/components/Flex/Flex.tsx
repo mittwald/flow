@@ -56,8 +56,8 @@ export const Flex: FC<FlexProps> = (props) => {
     children,
     className,
     direction = "row",
-    align = "start",
-    justify = "start",
+    align,
+    justify,
     gap,
     columnGap,
     rowGap,
@@ -85,13 +85,13 @@ export const Flex: FC<FlexProps> = (props) => {
             ? "flex-end"
             : align === "start"
               ? "flex-start"
-              : align,
+              : undefined,
         justifyContent:
           justify === "end"
             ? "flex-end"
             : justify === "start"
               ? "flex-start"
-              : justify,
+              : undefined,
 
         columnGap: columnGap
           ? `var(--size-px--${columnGap})`
