@@ -85,13 +85,13 @@ export const Flex: FC<FlexProps> = (props) => {
             ? "flex-end"
             : align === "start"
               ? "flex-start"
-              : undefined,
+              : align,
         justifyContent:
           justify === "end"
             ? "flex-end"
             : justify === "start"
               ? "flex-start"
-              : undefined,
+              : justify,
 
         columnGap: columnGap
           ? `var(--size-px--${columnGap})`
