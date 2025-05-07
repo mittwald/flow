@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.172](https://github.com/mittwald/flow/compare/0.2.0-alpha.171...0.2.0-alpha.172) (2025-05-07)
+
+### Features
+
+* **Remote:** add RemoteTunnelEntry ([ce63c57](https://github.com/mittwald/flow/commit/ce63c57f5194b4d7acae34aa993d209bebe7cfcf))
+
 # [0.2.0-alpha.171](https://github.com/mittwald/flow/compare/0.2.0-alpha.170...0.2.0-alpha.171) (2025-05-07)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components
