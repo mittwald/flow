@@ -155,3 +155,37 @@ test("Fallback content in exit is rendered again when not rendering entry", asyn
 
   expect(dom.getByTestId("exit").innerText).toBe("Fallback!");
 });
+
+test("Render function in TunnelExit gets children from TunnelEntry", async () => {
+  const dom = render(
+    <TunnelProvider>
+      <div data-testid="exit">
+        <TunnelExit>{(children) => <>{children} Tunnel!</>}</TunnelExit>
+      </div>
+      <TunnelEntry>Hello</TunnelEntry>
+    </TunnelProvider>,
+  );
+
+  expect(dom.getByTestId("exit").innerText).toBe("Hello Tunnel!");
+});
+
+test("Render function in TunnelExit gets updated children from TunnelEntry", async () => {
+  const dom = render(
+    <TunnelProvider>
+      <div data-testid="exit">
+        <TunnelExit>{(children) => <>{children} Tunnel!</>}</TunnelExit>
+      </div>
+      <TunnelEntry>Hello</TunnelEntry>
+    </TunnelProvider>,
+  );
+
+  dom.rerender(
+    <TunnelProvider>
+      <div data-testid="exit">
+        <TunnelExit>{(children) => <>{children} Tunnel!</>}</TunnelExit>
+      </div>
+      <TunnelEntry>Hi</TunnelEntry>
+    </TunnelProvider>,
+  );
+  expect(dom.getByTestId("exit").innerText).toBe("Hi Tunnel!");
+});
