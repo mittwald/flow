@@ -1,7 +1,6 @@
 import { defineConfig } from "vite";
 import { cssModuleClassNameGenerator } from "./dev/vite/cssModuleClassNameGenerator";
 import path from "path";
-import viteI18nPlugin from "./dev/viteI18nPlugin";
 import { nodePolyfills as viteNodePolyfills } from "vite-plugin-node-polyfills";
 import { viteI18nPlugin } from "./dev/vite/viteI18nPlugin";
 

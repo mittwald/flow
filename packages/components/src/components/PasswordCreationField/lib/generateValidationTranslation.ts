@@ -1,5 +1,5 @@
 import type { RuleValidationResult } from "@mittwald/password-tools-js/rules";
-import type translate from "@/lib/react/components/Translate";
+import { isArray } from "remeda";
 
 const generateTranslationString = (
   rule: Partial<RuleValidationResult>,
@@ -32,10 +32,13 @@ const generateTranslationString = (
 export const generateValidationTranslation = (
   r: Partial<RuleValidationResult>,
   shotVersion = false,
-): [string, Parameters<typeof translate>[1]] => {
+): [string, Record<string, string | number | boolean> | undefined] => {
   const translationKey = generateTranslationString(r, shotVersion);
 
-  return [translationKey, r];
+  return [
+    translationKey,
+    r as unknown as Record<string, string | number | boolean> | undefined,
+  ];
 };
 
 export default generateValidationTranslation;

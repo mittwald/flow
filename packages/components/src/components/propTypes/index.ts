@@ -72,7 +72,6 @@ import type { FileCardListProps } from "@/components/FileCardList";
 import type { AccentBoxProps } from "@/components/AccentBox";
 import type { ColumnLayoutProps } from "@/components/ColumnLayout";
 import type { MenuTriggerProps } from "@/components/OverlayTrigger";
-import type { PasswordCreationFieldProps } from "src/components/PasswordCreationField";
 
 export * from "./types";
 

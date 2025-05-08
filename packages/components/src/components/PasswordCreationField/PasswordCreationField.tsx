@@ -69,7 +69,7 @@ export interface PasswordCreationFieldProps
       Omit<Aria.TextFieldProps, "children" | "value" | "defaultValue"> &
         Partial<Pick<Aria.FieldErrorRenderProps, "validationErrors">>
     >,
-    FlowComponentProps {
+    FlowComponentProps<HTMLInputElement> {
   value?: string;
   defaultValue?: string;
   validationPolicy?: Policy;
@@ -89,7 +89,7 @@ export const PasswordCreationField = flowComponent(
       value: valueFromProps,
       defaultValue,
       className,
-      refProp: ref,
+      ref,
       isDisabled,
       onChange,
       isInvalid,
@@ -339,6 +339,7 @@ export const PasswordCreationField = flowComponent(
               {children}
             </PropsContextProvider>
           </Aria.TextField>
+          <FieldError className={formFieldStyles.fieldError} />
         </TunnelProvider>
       </ClearPropsContext>
     );

@@ -9,6 +9,7 @@ import type {
   UseFormReturn,
 } from "react-hook-form";
 import { Controller } from "react-hook-form";
+import { FieldError } from "@/components/FieldError";
 
 export interface FieldProps<T extends FieldValues>
   extends Omit<ControllerProps<T>, "render">,
@@ -37,19 +38,21 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
           isInvalid: invalid,
           validationBehavior: "aria" as const,
           children: dynamic((p) => {
-            if (!error?.message) {
-              return p.children;
-            }
-
             return (
               <>
                 {p.children}
-                <FieldError>{error?.message}</FieldError>
+                <FieldErrorView>{error?.message}</FieldErrorView>
               </>
             );
           }),
           ref: undefined,
           refProp: field.ref,
+        };
+
+        const uncontrolledFormControlProps = {
+          ...formControlProps,
+          value: undefined,
+          defaultValue: field.value,
         };
 
         const propsContext: PropsContext = {
