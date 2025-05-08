@@ -2,6 +2,7 @@
 
 import { useAwaiter } from "@/hooks/useAwaiter";
 import { useMergedComponents } from "@/hooks/useMergedComponents";
+import { useUpdateHostPathnameOnRemote } from "@/hooks/useUpdateHostPathnameOnRemote";
 import type { RemoteComponentsMap } from "@/lib/types";
 import type { ExtBridgeConnectionApi } from "@mittwald/ext-bridge";
 import {
@@ -15,14 +16,7 @@ import {
   RemoteReceiver,
   RemoteRootRenderer,
 } from "@mittwald/remote-dom-react/host";
-import {
-  type CSSProperties,
-  type FC,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { type CSSProperties, type FC, useMemo, useRef, useState } from "react";
 
 export interface RemoteRendererBrowserProps {
   integrations?: RemoteComponentsMap<never>[];
@@ -77,14 +71,7 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
     return remoteReceiver;
   }, [src]);
 
-  useLayoutEffect(() => {
-    if (hostPathname && connection.current) {
-      const { thread, version } = connection.current;
-      if (version >= 2) {
-        thread.imports.setPathname(hostPathname);
-      }
-    }
-  }, [hostPathname]);
+  useUpdateHostPathnameOnRemote(hostPathname, connection.current);
 
   const connect = connectRemoteIframeRef({
     connection: receiver.connection,
