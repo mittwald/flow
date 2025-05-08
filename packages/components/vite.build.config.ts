@@ -16,10 +16,9 @@ export default mergeConfig(
       cssMinify: "esbuild",
       lib: {
         entry: {
-          index: "./src/index.ts",
-          internal: "./src/internal.ts",
-          "flr-universal": "./src/flr-universal.ts",
-          icons: "./src/internal.ts",
+          default: "./src/index/default.ts",
+          internal: "./src/index/internal.ts",
+          "flr-universal": "./src/index/flr-universal.ts",
           nextjs: "./src/integrations/nextjs/index.ts",
           "react-hook-form": "./src/integrations/react-hook-form/index.ts",
           globals: "./src/styles/index.ts",

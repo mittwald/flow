@@ -7,7 +7,7 @@ import { Initials } from "@/components/Initials";
 import { ListItemView, SortingFunctions, typedList } from "@/components/List";
 import Section from "@/components/Section";
 import { Text } from "@/components/Text";
-import { IconDomain, IconSubdomain } from "@/flr-universal";
+import { IconDomain, IconSubdomain } from "@/index/flr-universal";
 import { Render } from "@/lib/react/components/Render";
 import { usePromise } from "@mittwald/react-use-promise";
 import type { Meta, StoryObj } from "@storybook/react";
@@ -17,7 +17,6 @@ import type List from "../List";
 import { domains } from "../testData/domainApi";
 import defaultMeta from "./Default.stories";
 import { Checkbox } from "@/components/Checkbox";
-import React from "react";
 
 const meta: Meta<typeof List> = {
   ...defaultMeta,
