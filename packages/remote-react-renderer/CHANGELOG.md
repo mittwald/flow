@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.174](https://github.com/mittwald/flow/compare/0.2.0-alpha.173...0.2.0-alpha.174) (2025-05-08)
+
+### Bug Fixes
+
+* **Remote:** do not skip "" host pathname updates on remote ([3bcac46](https://github.com/mittwald/flow/commit/3bcac4614fd2169fdd7bce1b5cbe1cfdab1bbb85))
+
 # [0.2.0-alpha.173](https://github.com/mittwald/flow/compare/0.2.0-alpha.172...0.2.0-alpha.173) (2025-05-07)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-renderer
