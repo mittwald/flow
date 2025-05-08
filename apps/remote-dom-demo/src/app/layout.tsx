@@ -69,7 +69,7 @@ export default function Layout(props: PropsWithChildren) {
                 <Link href="/host/list">List</Link>
                 <Link href="/host/navigation/page1">Navigation</Link>
                 <Link href="/host/performance">Performance</Link>
-                <TunnelExit id="@flr-remote-demo" />
+                <TunnelExit id="remote-demo" />
               </HeaderNavigation>
               <Separator />
               <main>
