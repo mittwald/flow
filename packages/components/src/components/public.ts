@@ -75,6 +75,7 @@ export * from "@/components/Popover";
 export * from "@/components/ProgressBar";
 export * from "@/components/RadioGroup";
 export * from "@/components/Rating";
+export * from "@/components/RouterProvider";
 export * from "@/components/SearchField";
 export * from "@/components/Section";
 export * from "@/components/SegmentedControl";

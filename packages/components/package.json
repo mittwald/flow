@@ -7,15 +7,15 @@
   "repository": "https://github.com/mittwald/flow",
   "exports": {
     ".": {
-      "types": "./dist/types/index.d.ts",
-      "import": "./dist/js/index.mjs"
+      "types": "./dist/types/index/default.d.ts",
+      "import": "./dist/js/default.mjs"
     },
     "./internal": {
-      "types": "./dist/types/internal.d.ts",
+      "types": "./dist/types/index/internal.d.ts",
       "import": "./dist/js/internal.mjs"
     },
     "./flr-universal": {
-      "types": "./dist/types/flr-universal.d.ts",
+      "types": "./dist/types/index/flr-universal.d.ts",
       "import": "./dist/js/flr-universal.mjs"
     },
     "./nextjs": {

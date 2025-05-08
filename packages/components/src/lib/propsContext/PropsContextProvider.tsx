@@ -1,5 +1,5 @@
 import Wrap from "@/components/Wrap";
-import { ClearPropsContext } from "@/internal";
+import { ClearPropsContext } from "@/index/internal";
 import mergePropsContext from "@/lib/propsContext/mergePropsContext";
 import { propsContext, useContextProps } from "@/lib/propsContext/propsContext";
 import type { PropsContext as PropsContextShape } from "@/lib/propsContext/types";

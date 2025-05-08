@@ -1,12 +1,11 @@
 import "@mittwald/flow-react-components/all.css";
 import "./global.scss";
 import type { Metadata } from "next";
-import React, { type FC, type PropsWithChildren } from "react";
+import { type FC, type PropsWithChildren } from "react";
 import HeaderNavigation from "@/app/_components/layout/HeaderNavigation/HeaderNavigation";
 import clsx from "clsx";
 import styles from "./layout.module.scss";
 import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
-import { LinkProvider } from "@mittwald/flow-react-components/nextjs";
 import logoMittwald from "../../assets/m-flow_logo.svg";
 import MainNavigation from "@/app/_components/layout/MainNavigation";
 import MobileNavigation from "@/app/_components/layout/MobileNavigation/MobileNavigation";
@@ -17,6 +16,7 @@ import {
 } from "@mittwald/flow-react-components";
 import Footer from "@/app/_components/layout/Footer/Footer";
 import { Matomo } from "@/app/_components/Matomo";
+import { RouterProvider } from "@mittwald/flow-react-components/nextjs";
 
 export const metadata: Metadata = {
   title: "Flow – mittwald Design System",
@@ -29,8 +29,8 @@ const RootLayout: FC<PropsWithChildren> = async (props) => {
   return (
     <html lang="de">
       <body className={bodyClassName}>
-        <Matomo />
-        <LinkProvider>
+        <RouterProvider>
+          <Matomo />
           <NotificationProvider>
             <header className={styles.header}>
               <Link href="/" className={styles.homeLink}>
@@ -51,7 +51,7 @@ const RootLayout: FC<PropsWithChildren> = async (props) => {
             </div>
             <Footer />
           </NotificationProvider>
-        </LinkProvider>
+        </RouterProvider>
       </body>
     </html>
   );

@@ -13,7 +13,7 @@ import {
   useNotificationController,
 } from "@mittwald/flow-react-components";
 import "@mittwald/flow-react-components/all.css";
-import { LinkProvider } from "@mittwald/flow-react-components/nextjs";
+import { RouterProvider } from "@mittwald/flow-react-components/nextjs";
 import type { ErrorComponent } from "next/dist/client/components/error-boundary";
 import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 import { type PropsWithChildren, Suspense } from "react";
@@ -28,7 +28,7 @@ export default function Layout(props: PropsWithChildren) {
   return (
     <html lang="en">
       <body>
-        <LinkProvider>
+        <RouterProvider>
           <NotificationProvider>
             <div className={styles.rootContainer}>
               <HeaderNavigation>
@@ -90,7 +90,7 @@ export default function Layout(props: PropsWithChildren) {
               </main>
             </div>
           </NotificationProvider>
-        </LinkProvider>
+        </RouterProvider>
       </body>
     </html>
   );
