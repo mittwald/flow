@@ -8,7 +8,7 @@ export interface NavigationState {
 }
 
 export interface HostExports extends ExtBridgeConnectionApi {
-  setIsReady: (version?: number) => Promise<void>;
+  setIsReady: (version?: Version) => Promise<void>;
   setError: (error: string) => Promise<void>;
   setNavigationState: (state: NavigationState) => Promise<void>;
 }
@@ -26,4 +26,10 @@ export type RemoteToHostConnection = ThreadNestedIframe<
 export interface HostToRemoteConnection {
   version: number;
   thread: ThreadIframe<RemoteExports, HostExports>;
+}
+
+export enum Version {
+  vUnknown = 0,
+  v1 = 1,
+  v2 = 2,
 }
