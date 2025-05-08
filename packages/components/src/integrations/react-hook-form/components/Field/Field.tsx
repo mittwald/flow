@@ -36,12 +36,16 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
           isRequired: !!rest.rules?.required,
           isInvalid: invalid,
           validationBehavior: "aria" as const,
-          children: dynamic((p) => (
-            <>
-              {p.children}
-              <FieldErrorView>{error?.message}</FieldErrorView>
-            </>
-          )),
+          children: dynamic((p) => {
+            return (
+              <>
+                {p.children}
+                <FieldErrorView>{error?.message}</FieldErrorView>
+              </>
+            );
+          }),
+          ref: undefined,
+          refProp: field.ref,
         };
 
         const uncontrolledFormControlProps = {
@@ -77,6 +81,7 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
             selectedKey: formControlProps.value,
           },
           Slider: formControlProps,
+          PasswordCreationField: formControlProps,
           DatePicker: formControlProps,
           DateRangePicker: formControlProps,
           TimeField: formControlProps,

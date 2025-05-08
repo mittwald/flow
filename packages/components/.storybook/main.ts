@@ -26,10 +26,6 @@ const config: StorybookConfig = {
       // no options
     },
   },
-  core: {},
-  docs: {
-    autodocs: "tag",
-  },
   viteFinal: async (conf) => {
     // See why dynamic import: see https://github.com/storybookjs/storybook/issues/26291#issuecomment-1978193283
     const { mergeConfig } = await import("vite");

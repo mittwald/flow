@@ -10,4 +10,13 @@
   &.disabled {
     color: var(--label--color--disabled);
   }
+
+  > div {
+    display: inline-flex;
+    order: 1;
+  }
+
+  & .optional {
+    order: 0;
+  }
 }
