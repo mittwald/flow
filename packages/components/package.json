@@ -98,7 +98,7 @@
     "@internationalized/date": "^3.7.0",
     "@mittwald/flow-design-tokens": "workspace:*",
     "@mittwald/password-tools-js": "^2.1.2",
-    "@mittwald/react-use-promise": "^2.6.0",
+    "@mittwald/react-use-promise": "^3.0.4",
     "@mittwald/remote-dom-react": "1.2.2-mittwald.3",
     "@mittwald/typescript-config": "workspace:*",
     "@nx/storybook": "^20.7.1",

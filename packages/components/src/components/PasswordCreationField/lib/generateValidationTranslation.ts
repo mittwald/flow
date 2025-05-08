@@ -1,5 +1,4 @@
 import type { RuleValidationResult } from "@mittwald/password-tools-js/rules";
-import { isArray } from "remeda";
 
 const generateTranslationString = (
   rule: Partial<RuleValidationResult>,

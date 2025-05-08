@@ -9,7 +9,6 @@ import type {
   UseFormReturn,
 } from "react-hook-form";
 import { Controller } from "react-hook-form";
-import { FieldError } from "@/components/FieldError";
 
 export interface FieldProps<T extends FieldValues>
   extends Omit<ControllerProps<T>, "render">,
