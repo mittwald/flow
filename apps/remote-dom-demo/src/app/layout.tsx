@@ -67,7 +67,7 @@ export default function Layout(props: PropsWithChildren) {
                 <Link href="/host/error">Error</Link>
                 <Link href="/host/svg">Icon/SVG</Link>
                 <Link href="/host/list">List</Link>
-                <Link href="/host/navigation/page1">Navigation</Link>
+                <Link href="/host/navigation">Navigation</Link>
                 <Link href="/host/performance">Performance</Link>
                 <TunnelExit id="remote-demo" />
               </HeaderNavigation>

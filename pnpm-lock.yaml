@@ -264,6 +264,9 @@ importers:
       '@mittwald/flow-stylesheet':
         specifier: workspace:*
         version: link:../../packages/stylesheet
+      '@mittwald/mstudio-ext-react-components':
+        specifier: workspace:*
+        version: link:../../packages/mstudio-ext-react-components
       '@mittwald/react-tunnel':
         specifier: workspace:*
         version: link:../../packages/react-tunnel
@@ -723,6 +726,58 @@ importers:
       vitest:
         specifier: ^3.1.1
         version: 3.1.1(@types/debug@4.1.12)(@types/node@22.13.10)(happy-dom@17.4.3)(less@4.2.2)(msw@2.7.3(@types/node@22.13.10)(typescript@5.8.2))(sass@1.85.1)(stylus@0.62.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0)
+
+  packages/mstudio-ext-react-components:
+    dependencies:
+      '@mittwald/flow-remote-react-components':
+        specifier: workspace:*
+        version: link:../remote-react-components
+      '@types/react':
+        specifier: ^19
+        version: 19.0.10
+    devDependencies:
+      '@mittwald/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      '@types/node':
+        specifier: ^22.13.10
+        version: 22.13.10
+      nx:
+        specifier: ^20.5.0
+        version: 20.5.0
+      prettier:
+        specifier: ^3.5.3
+        version: 3.5.3
+      react:
+        specifier: ^19.1.0
+        version: 19.1.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
+      rollup-plugin-auto-named-exports:
+        specifier: 1.0.0-beta.3
+        version: 1.0.0-beta.3
+      rollup-preserve-directives:
+        specifier: ^1.1.3
+        version: 1.1.3(rollup@4.35.0)
+      typescript:
+        specifier: ^5.8.2
+        version: 5.8.2
+      vite:
+        specifier: ^6.2.1
+        version: 6.2.1(@types/node@22.13.10)(less@4.2.2)(sass@1.85.1)(stylus@0.62.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0)
+      vite-plugin-banner:
+        specifier: ^0.8.0
+        version: 0.8.0
+      vite-plugin-checker:
+        specifier: ^0.9.0
+        version: 0.9.0(eslint@9.22.0)(optionator@0.9.4)(typescript@5.8.2)(vite@6.2.1(@types/node@22.13.10)(less@4.2.2)(sass@1.85.1)(stylus@0.62.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0))
+      vite-plugin-dts:
+        specifier: ^4.5.3
+        version: 4.5.3(@types/node@22.13.10)(rollup@4.35.0)(typescript@5.8.2)(vite@6.2.1(@types/node@22.13.10)(less@4.2.2)(sass@1.85.1)(stylus@0.62.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0))
+      vite-plugin-externalize-deps:
+        specifier: ^0.9.0
+        version: 0.9.0(vite@6.2.1(@types/node@22.13.10)(less@4.2.2)(sass@1.85.1)(stylus@0.62.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0))
 
   packages/react-tunnel:
     dependencies:

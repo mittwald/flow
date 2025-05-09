@@ -1,0 +1,12 @@
+{
+  "implicitDependencies": ["remote-react-components"],
+  "name": "mstudio-ext-react-components",
+  "projectType": "library",
+  "sourceRoot": "packages/mstudio-ext-react-components/src",
+  "targets": {
+    "build": {
+      "inputs": ["default", "{projectRoot}/src/**/*"],
+      "dependsOn": ["^build"]
+    }
+  }
+}
