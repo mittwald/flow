@@ -32,7 +32,7 @@
     "@mittwald/flow-react-components": "workspace:*",
     "@mittwald/typescript-config": "workspace:*",
     "@types/node": "^22.13.10",
-    "nx": "^20.5.0",
+    "nx": "^20.8.1",
     "prettier": "^3.5.3",
     "rimraf": "^6.0.1",
     "rollup-preserve-directives": "^1.1.3",
