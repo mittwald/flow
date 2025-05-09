@@ -118,6 +118,7 @@ export class RemoteHeadingElement extends FlowRemoteElement<RemoteHeadingElement
       typeof: {},
       unselectable: {},
       vocab: {},
+      wrap: {},
     };
   }
 
