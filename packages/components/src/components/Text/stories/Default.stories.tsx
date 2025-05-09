@@ -6,6 +6,7 @@ import {
   storyBackgroundDark,
   storyBackgroundLight,
 } from "@/lib/dev/storyBackgrounds";
+import { InlineCode } from "@/components/InlineCode";
 
 const meta: Meta<typeof Text> = {
   title: "Content/Text",
@@ -90,3 +91,28 @@ export const Light: Story = {
 };
 
 export const AlignEnd: Story = { args: { align: "end" } };
+
+export const WrapBalance: Story = {
+  render: (props) => (
+    <Section>
+      <Text>
+        <strong>
+          Without specified <InlineCode>wrap</InlineCode>:
+        </strong>
+      </Text>
+      <Text {...props} align="center">
+        This is a centered text in a small container so the text is wrapped.
+      </Text>
+      <Text>
+        <strong>
+          With <InlineCode>wrap: balance</InlineCode>:
+        </strong>
+      </Text>
+      <Text {...props} align="center" wrap="balance">
+        This is a centered text in a small container so the text is wrapped.
+      </Text>
+    </Section>
+  ),
+
+  parameters: { viewport: { defaultViewport: "mobile2" } },
+};
