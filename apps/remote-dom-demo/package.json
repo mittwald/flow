@@ -33,7 +33,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9.22.0",
-    "nx": "^20.5.0",
+    "nx": "^20.8.1",
     "typescript": "^5.8.2"
   },
   "overrides": {
