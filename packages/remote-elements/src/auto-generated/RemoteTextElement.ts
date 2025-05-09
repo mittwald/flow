@@ -119,6 +119,7 @@ export class RemoteTextElement extends FlowRemoteElement<RemoteTextElementProps>
       typeof: {},
       unselectable: {},
       vocab: {},
+      wrap: {},
     };
   }
 

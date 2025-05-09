@@ -24,6 +24,8 @@ export interface TextProps
   color?: "light" | "dark";
   /* The alignment of the text. @default "start" */
   align?: "start" | "end" | "center";
+  /* The text-wrap property of the text. @default undefined */
+  wrap?: "wrap" | "balance" | "pretty";
 }
 
 /**
@@ -39,6 +41,7 @@ export const Text = flowComponent("Text", (props) => {
     ref,
     color,
     align = "start",
+    wrap,
     ...rest
   } = props;
 
@@ -46,6 +49,7 @@ export const Text = flowComponent("Text", (props) => {
     styles.text,
     color && styles[color],
     align && styles[`align-${align}`],
+    wrap && styles[`wrap-${wrap}`],
     className,
   );
 

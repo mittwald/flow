@@ -6,6 +6,7 @@ import {
   storyBackgroundDark,
   storyBackgroundLight,
 } from "@/lib/dev/storyBackgrounds";
+import { Section } from "@/components/Section";
 
 const meta: Meta<typeof Heading> = {
   title: "Content/Heading",
@@ -66,4 +67,16 @@ export const Light: Story = {
   parameters: {
     backgrounds: storyBackgroundDark,
   },
+};
+
+export const Wrap: Story = {
+  render: (props) => (
+    <Section>
+      <Heading {...props}>Personal Information of the current user</Heading>
+      <Heading {...props} wrap="balance">
+        Personal Information of the current user
+      </Heading>
+    </Section>
+  ),
+  parameters: { viewport: { defaultViewport: "mobile2" } },
 };

@@ -15,6 +15,8 @@ export interface HeadingProps extends Aria.HeadingProps, FlowComponentProps {
   size?: "xs" | "s" | "m" | "l" | "xl" | "xxl";
   /** The color of the heading. @default "primary" */
   color?: "primary" | "dark" | "light";
+  /** The text-wrap property of the text. @default undefined */
+  wrap?: "wrap" | "balance";
 }
 
 /**
@@ -27,6 +29,7 @@ export const Heading = flowComponent("Heading", (props) => {
     className,
     level = 2,
     color = "primary",
+    wrap,
     size,
     ref,
     ...rest
@@ -36,6 +39,7 @@ export const Heading = flowComponent("Heading", (props) => {
     styles.heading,
     size && styles[size],
     styles[color],
+    wrap && styles[`wrap-${wrap}`],
     className,
   );
 
