@@ -15,3 +15,13 @@
 
 If you have just upgraded from version`0.1.0` to version `0.2.0`, have a look at
 the [Migration Guide](/packages/components/MIGRATION.md).
+
+## Contributing
+
+### Dev Environment
+
+To start the dev environment for the components package, run:
+
+```shell
+pnpm nx dev components
+```
