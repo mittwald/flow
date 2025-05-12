@@ -12,7 +12,7 @@ overrides:
 
 patchedDependencies:
   acorn:
-    hash: 58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f
+    hash: 6si3ktymthureqnmnpjiya5mwy
     path: patches/acorn.patch
 
 importers:
@@ -118,7 +118,7 @@ importers:
         version: 3.8.0
       '@mdx-js/loader':
         specifier: ^3.1.0
-        version: 3.1.0(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))(webpack@5.98.0)
+        version: 3.1.0(acorn@8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy))(webpack@5.98.0)
       '@mdx-js/react':
         specifier: ^3.1.0
         version: 3.1.0(@types/react@19.0.10)(react@19.1.0)
@@ -133,7 +133,7 @@ importers:
         version: link:../../packages/components
       '@next/mdx':
         specifier: ^15.2.1
-        version: 15.2.1(@mdx-js/loader@3.1.0(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))(webpack@5.98.0))(@mdx-js/react@3.1.0(@types/react@19.0.10)(react@19.1.0))
+        version: 15.2.1(@mdx-js/loader@3.1.0(acorn@8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy))(webpack@5.98.0))(@mdx-js/react@3.1.0(@types/react@19.0.10)(react@19.1.0))
       '@tabler/icons-react':
         specifier: ^3.31.0
         version: 3.31.0(react@19.1.0)
@@ -145,10 +145,10 @@ importers:
         version: 2.0.13
       acorn:
         specifier: 8.14.1
-        version: 8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+        version: 8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy)
       acorn-typescript:
         specifier: ^1.4.13
-        version: 1.4.13(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))
+        version: 1.4.13(acorn@8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy))
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -169,7 +169,7 @@ importers:
         version: 15.2.1(@babel/core@7.26.9)(babel-plugin-macros@3.1.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.85.1)
       next-mdx-remote:
         specifier: ^5.0.0
-        version: 5.0.0(@types/react@19.0.10)(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))(react@19.1.0)
+        version: 5.0.0(@types/react@19.0.10)(acorn@8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy))(react@19.1.0)
       parse-es-import:
         specifier: ^0.6.0
         version: 0.6.0
@@ -586,7 +586,7 @@ importers:
         version: 19.1.0(react@19.1.0)
       react-element-to-jsx-string:
         specifier: ^17.0.0
-        version: 17.0.0(react-dom@19.1.0(react@19.1.0))(react-is@19.0.0)(react@19.1.0)
+        version: 17.0.1(react-dom@19.1.0(react@19.1.0))(react-is@19.0.0)(react@19.1.0)
       react-hook-form:
         specifier: ^7.54.2
         version: 7.54.2(react@19.1.0)
@@ -744,7 +744,7 @@ importers:
         version: 22.13.10
       nx:
         specifier: ^20.5.0
-        version: 20.5.0
+        version: 20.8.1
       prettier:
         specifier: ^3.5.3
         version: 3.5.3
@@ -765,19 +765,19 @@ importers:
         version: 5.8.2
       vite:
         specifier: ^6.2.1
-        version: 6.2.1(@types/node@22.13.10)(less@4.2.2)(sass@1.85.1)(stylus@0.62.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0)
+        version: 6.3.5(@types/node@22.13.10)(less@4.2.2)(sass@1.85.1)(stylus@0.62.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0)
       vite-plugin-banner:
         specifier: ^0.8.0
         version: 0.8.0
       vite-plugin-checker:
         specifier: ^0.9.0
-        version: 0.9.0(eslint@9.22.0)(optionator@0.9.4)(typescript@5.8.2)(vite@6.2.1(@types/node@22.13.10)(less@4.2.2)(sass@1.85.1)(stylus@0.62.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0))
+        version: 0.9.3(eslint@9.22.0)(optionator@0.9.4)(typescript@5.8.2)(vite@6.3.5(@types/node@22.13.10)(less@4.2.2)(sass@1.85.1)(stylus@0.62.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0))
       vite-plugin-dts:
         specifier: ^4.5.3
-        version: 4.5.3(@types/node@22.13.10)(rollup@4.35.0)(typescript@5.8.2)(vite@6.2.1(@types/node@22.13.10)(less@4.2.2)(sass@1.85.1)(stylus@0.62.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0))
+        version: 4.5.3(@types/node@22.13.10)(rollup@4.35.0)(typescript@5.8.2)(vite@6.3.5(@types/node@22.13.10)(less@4.2.2)(sass@1.85.1)(stylus@0.62.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0))
       vite-plugin-externalize-deps:
         specifier: ^0.9.0
-        version: 0.9.0(vite@6.2.1(@types/node@22.13.10)(less@4.2.2)(sass@1.85.1)(stylus@0.62.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0))
+        version: 0.9.0(vite@6.3.5(@types/node@22.13.10)(less@4.2.2)(sass@1.85.1)(stylus@0.62.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0))
 
   packages/react-tunnel:
     dependencies:
@@ -1132,6 +1132,10 @@ packages:
     resolution: {integrity: sha512-RJlIHRueQgwWitWgF8OdFYGZX328Ax5BCemNGlqHfplnRT9ESi8JkFlvaVYbS+UubVY6dpv87Fs2u5M29iNFVQ==}
     engines: {node: '>=6.9.0'}
 
+  '@babel/code-frame@7.27.1':
+    resolution: {integrity: sha512-cjQ7ZlQ0Mv3b47hABuTevyTuYN4i+loJKGeV9flcCgIK37cCXRh+L1bd3iBHlynerhQ7BhCkn2BPbQUL+rGqFg==}
+    engines: {node: '>=6.9.0'}
+
   '@babel/compat-data@7.26.8':
     resolution: {integrity: sha512-oH5UPLMWR3L2wEFLnFJ1TZXqHufiTKAiLfqw5zkhS4dKXLJ10yVztfil/twG8EDTA4F/tvVNw9nOl4ZMslB8rQ==}
     engines: {node: '>=6.9.0'}
@@ -1213,6 +1217,10 @@ packages:
 
   '@babel/helper-validator-identifier@7.25.9':
     resolution: {integrity: sha512-Ed61U6XJc3CVRfkERJWDz4dJwKe7iLmmJsbOGu9wSloNSFttHV0I8g6UAgb7qnK5ly5bGLPd4oXZlxCdANBOWQ==}
+    engines: {node: '>=6.9.0'}
+
+  '@babel/helper-validator-identifier@7.27.1':
+    resolution: {integrity: sha512-D2hP9eA+Sqx1kBZgzxZh0y1trbuU+JoDkiEwqhQ36nodYqJwyEIhPSdMNd7lOm/4io72luTPWH20Yda0xOuUow==}
     engines: {node: '>=6.9.0'}
 
   '@babel/helper-validator-option@7.25.9':
@@ -6910,6 +6918,7 @@ packages:
   node-domexception@1.0.0:
     resolution: {integrity: sha512-/jKZoMpw0F8GRwl4/eLROPA3cfcXtLApP0QzLmUT/HuPCZWyB7IY9ZrMeKw2O/nFIqPQB3PVM9aYm0F312AXDQ==}
     engines: {node: '>=10.5.0'}
+    deprecated: Use your platform's native DOMException instead
 
   node-fetch@3.3.2:
     resolution: {integrity: sha512-dRB78srN/l6gqWulah9SrxeYnxeddIG30+GOqK/9OlLVyLg3HPnr6SqOWTWOXKRwC2eGYCkZ59NNuSgvSrpgOA==}
@@ -7576,8 +7585,8 @@ packages:
     peerDependencies:
       react: ^19.1.0
 
-  react-element-to-jsx-string@17.0.0:
-    resolution: {integrity: sha512-R0wqLsBwvEfIHhhtVxZUgUlwohnkxY2A11UhUFKgA1we/kurVF/v/2RRET5coyY+v/czQFTPI+YvDZ3lxhyEwQ==}
+  react-element-to-jsx-string@17.0.1:
+    resolution: {integrity: sha512-GMX16Yo+nuqDq4GlrHGaK/coQKEuiXaKEg8tCfKnOC34F2LiUYE6JeQKyirh0YgjhTXUxxONcj1gZa86OW1R6A==}
     peerDependencies:
       react: ^19.1.0
       react-dom: ^19.1.0
@@ -8706,6 +8715,40 @@ packages:
       vue-tsc:
         optional: true
 
+  vite-plugin-checker@0.9.3:
+    resolution: {integrity: sha512-Tf7QBjeBtG7q11zG0lvoF38/2AVUzzhMNu+Wk+mcsJ00Rk/FpJ4rmUviVJpzWkagbU13cGXvKpt7CMiqtxVTbQ==}
+    engines: {node: '>=14.16'}
+    peerDependencies:
+      '@biomejs/biome': '>=1.7'
+      eslint: '>=7'
+      meow: ^13.2.0
+      optionator: ^0.9.4
+      stylelint: '>=16'
+      typescript: '*'
+      vite: '>=2.0.0'
+      vls: '*'
+      vti: '*'
+      vue-tsc: ~2.2.10
+    peerDependenciesMeta:
+      '@biomejs/biome':
+        optional: true
+      eslint:
+        optional: true
+      meow:
+        optional: true
+      optionator:
+        optional: true
+      stylelint:
+        optional: true
+      typescript:
+        optional: true
+      vls:
+        optional: true
+      vti:
+        optional: true
+      vue-tsc:
+        optional: true
+
   vite-plugin-dts@4.5.3:
     resolution: {integrity: sha512-P64VnD00dR+e8S26ESoFELqc17+w7pKkwlBpgXteOljFyT0zDwD8hH4zXp49M/kciy//7ZbVXIwQCekBJjfWzA==}
     peerDependencies:
@@ -9056,6 +9099,12 @@ snapshots:
       js-tokens: 4.0.0
       picocolors: 1.1.1
 
+  '@babel/code-frame@7.27.1':
+    dependencies:
+      '@babel/helper-validator-identifier': 7.27.1
+      js-tokens: 4.0.0
+      picocolors: 1.1.1
+
   '@babel/compat-data@7.26.8': {}
 
   '@babel/core@7.26.9':
@@ -9186,6 +9235,8 @@ snapshots:
   '@babel/helper-string-parser@7.25.9': {}
 
   '@babel/helper-validator-identifier@7.25.9': {}
+
+  '@babel/helper-validator-identifier@7.27.1': {}
 
   '@babel/helper-validator-option@7.25.9': {}
 
@@ -9458,7 +9509,7 @@ snapshots:
       '@babel/core': 7.26.9
       '@babel/helper-module-transforms': 7.26.0(@babel/core@7.26.9)
       '@babel/helper-plugin-utils': 7.26.5
-      '@babel/helper-validator-identifier': 7.25.9
+      '@babel/helper-validator-identifier': 7.27.1
       '@babel/traverse': 7.26.9
     transitivePeerDependencies:
       - supports-color
@@ -9773,7 +9824,7 @@ snapshots:
 
   '@babel/traverse@7.26.9':
     dependencies:
-      '@babel/code-frame': 7.26.2
+      '@babel/code-frame': 7.27.1
       '@babel/generator': 7.26.9
       '@babel/parser': 7.26.9
       '@babel/template': 7.26.9
@@ -10410,9 +10461,9 @@ snapshots:
 
   '@lit-labs/ssr-dom-shim@1.3.0': {}
 
-  '@mdx-js/loader@3.1.0(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))(webpack@5.98.0)':
+  '@mdx-js/loader@3.1.0(acorn@8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy))(webpack@5.98.0)':
     dependencies:
-      '@mdx-js/mdx': 3.1.0(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))
+      '@mdx-js/mdx': 3.1.0(acorn@8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy))
       source-map: 0.7.4
     optionalDependencies:
       webpack: 5.98.0
@@ -10420,7 +10471,7 @@ snapshots:
       - acorn
       - supports-color
 
-  '@mdx-js/mdx@3.1.0(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))':
+  '@mdx-js/mdx@3.1.0(acorn@8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy))':
     dependencies:
       '@types/estree': 1.0.6
       '@types/estree-jsx': 1.0.5
@@ -10434,7 +10485,7 @@ snapshots:
       hast-util-to-jsx-runtime: 2.3.6
       markdown-extensions: 2.0.0
       recma-build-jsx: 1.0.0
-      recma-jsx: 1.0.0(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))
+      recma-jsx: 1.0.0(acorn@8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy))
       recma-stringify: 1.0.0
       rehype-recma: 1.0.0
       remark-mdx: 3.1.0
@@ -10550,11 +10601,11 @@ snapshots:
     dependencies:
       fast-glob: 3.3.1
 
-  '@next/mdx@15.2.1(@mdx-js/loader@3.1.0(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))(webpack@5.98.0))(@mdx-js/react@3.1.0(@types/react@19.0.10)(react@19.1.0))':
+  '@next/mdx@15.2.1(@mdx-js/loader@3.1.0(acorn@8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy))(webpack@5.98.0))(@mdx-js/react@3.1.0(@types/react@19.0.10)(react@19.1.0))':
     dependencies:
       source-map: 0.7.4
     optionalDependencies:
-      '@mdx-js/loader': 3.1.0(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))(webpack@5.98.0)
+      '@mdx-js/loader': 3.1.0(acorn@8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy))(webpack@5.98.0)
       '@mdx-js/react': 3.1.0(@types/react@19.0.10)(react@19.1.0)
 
   '@next/swc-darwin-arm64@15.2.1':
@@ -13181,20 +13232,20 @@ snapshots:
     dependencies:
       xtend: 3.0.0
 
-  acorn-jsx@5.3.2(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)):
+  acorn-jsx@5.3.2(acorn@8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy)):
     dependencies:
-      acorn: 8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+      acorn: 8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy)
 
-  acorn-typescript@1.4.13(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)):
+  acorn-typescript@1.4.13(acorn@8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy)):
     dependencies:
-      acorn: 8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+      acorn: 8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy)
 
   acorn-walk@8.3.4:
     dependencies:
-      acorn: 8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+      acorn: 8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy)
     optional: true
 
-  acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f): {}
+  acorn@8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy): {}
 
   add-stream@1.0.0: {}
 
@@ -14206,7 +14257,7 @@ snapshots:
   esast-util-from-js@2.0.1:
     dependencies:
       '@types/estree-jsx': 1.0.5
-      acorn: 8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+      acorn: 8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy)
       esast-util-from-estree: 2.0.0
       vfile-message: 4.0.2
 
@@ -14328,8 +14379,8 @@ snapshots:
 
   espree@10.3.0:
     dependencies:
-      acorn: 8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
-      acorn-jsx: 5.3.2(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))
+      acorn: 8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy)
+      acorn-jsx: 5.3.2(acorn@8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy))
       eslint-visitor-keys: 4.2.0
 
   esprima@4.0.1: {}
@@ -15849,8 +15900,8 @@ snapshots:
 
   micromark-extension-mdxjs@3.0.0:
     dependencies:
-      acorn: 8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
-      acorn-jsx: 5.3.2(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))
+      acorn: 8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy)
+      acorn-jsx: 5.3.2(acorn@8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy))
       micromark-extension-mdx-expression: 3.0.0
       micromark-extension-mdx-jsx: 3.0.1
       micromark-extension-mdx-md: 2.0.0
@@ -16095,7 +16146,7 @@ snapshots:
 
   mlly@1.7.4:
     dependencies:
-      acorn: 8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+      acorn: 8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy)
       pathe: 2.0.3
       pkg-types: 1.3.1
       ufo: 1.5.4
@@ -16187,10 +16238,10 @@ snapshots:
     dependencies:
       type-fest: 2.19.0
 
-  next-mdx-remote@5.0.0(@types/react@19.0.10)(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))(react@19.1.0):
+  next-mdx-remote@5.0.0(@types/react@19.0.10)(acorn@8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy))(react@19.1.0):
     dependencies:
       '@babel/code-frame': 7.26.2
-      '@mdx-js/mdx': 3.1.0(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))
+      '@mdx-js/mdx': 3.1.0(acorn@8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy))
       '@mdx-js/react': 3.1.0(@types/react@19.0.10)(react@19.1.0)
       react: 19.1.0
       unist-util-remove: 3.1.1
@@ -16629,19 +16680,19 @@ snapshots:
 
   parse-es-import@0.6.0:
     dependencies:
-      acorn: 8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
-      acorn-jsx: 5.3.2(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))
+      acorn: 8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy)
+      acorn-jsx: 5.3.2(acorn@8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy))
 
   parse-json@5.2.0:
     dependencies:
-      '@babel/code-frame': 7.26.2
+      '@babel/code-frame': 7.27.1
       error-ex: 1.3.2
       json-parse-even-better-errors: 2.3.1
       lines-and-columns: 1.2.4
 
   parse-json@7.1.1:
     dependencies:
-      '@babel/code-frame': 7.26.2
+      '@babel/code-frame': 7.27.1
       error-ex: 1.3.2
       json-parse-even-better-errors: 3.0.2
       lines-and-columns: 2.0.4
@@ -16649,7 +16700,7 @@ snapshots:
 
   parse-json@8.1.0:
     dependencies:
-      '@babel/code-frame': 7.26.2
+      '@babel/code-frame': 7.27.1
       index-to-position: 0.1.2
       type-fest: 4.37.0
 
@@ -17102,7 +17153,7 @@ snapshots:
       react: 19.1.0
       scheduler: 0.26.0
 
-  react-element-to-jsx-string@17.0.0(react-dom@19.1.0(react@19.1.0))(react-is@19.0.0)(react@19.1.0):
+  react-element-to-jsx-string@17.0.1(react-dom@19.1.0(react@19.1.0))(react-is@19.0.0)(react@19.1.0):
     dependencies:
       '@base2/pretty-print-object': 1.0.2
       is-plain-object: 5.0.0
@@ -17323,9 +17374,9 @@ snapshots:
       estree-util-build-jsx: 3.0.1
       vfile: 6.0.3
 
-  recma-jsx@1.0.0(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)):
+  recma-jsx@1.0.0(acorn@8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy)):
     dependencies:
-      acorn-jsx: 5.3.2(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))
+      acorn-jsx: 5.3.2(acorn@8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy))
       estree-util-to-js: 2.0.0
       recma-parse: 1.0.0
       recma-stringify: 1.0.0
@@ -18026,7 +18077,7 @@ snapshots:
   terser@5.39.0:
     dependencies:
       '@jridgewell/source-map': 0.3.6
-      acorn: 8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+      acorn: 8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy)
       commander: 2.20.3
       source-map-support: 0.5.21
 
@@ -18129,7 +18180,7 @@ snapshots:
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
       '@types/node': 22.13.10
-      acorn: 8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+      acorn: 8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy)
       acorn-walk: 8.3.4
       arg: 4.1.3
       create-require: 1.1.1
@@ -18306,7 +18357,7 @@ snapshots:
 
   unplugin@1.16.1:
     dependencies:
-      acorn: 8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+      acorn: 8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy)
       webpack-virtual-modules: 0.6.2
 
   update-browserslist-db@1.1.3(browserslist@4.24.4):
@@ -18464,6 +18515,23 @@ snapshots:
       strip-ansi: 7.1.0
       tiny-invariant: 1.3.3
       tinyglobby: 0.2.12
+      vite: 6.3.5(@types/node@22.13.10)(less@4.2.2)(sass@1.85.1)(stylus@0.62.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0)
+      vscode-uri: 3.1.0
+    optionalDependencies:
+      eslint: 9.22.0
+      optionator: 0.9.4
+      typescript: 5.8.2
+
+  vite-plugin-checker@0.9.3(eslint@9.22.0)(optionator@0.9.4)(typescript@5.8.2)(vite@6.3.5(@types/node@22.13.10)(less@4.2.2)(sass@1.85.1)(stylus@0.62.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0)):
+    dependencies:
+      '@babel/code-frame': 7.27.1
+      chokidar: 4.0.3
+      npm-run-path: 6.0.0
+      picocolors: 1.1.1
+      picomatch: 4.0.2
+      strip-ansi: 7.1.0
+      tiny-invariant: 1.3.3
+      tinyglobby: 0.2.13
       vite: 6.3.5(@types/node@22.13.10)(less@4.2.2)(sass@1.85.1)(stylus@0.62.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0)
       vscode-uri: 3.1.0
     optionalDependencies:
@@ -18645,7 +18713,7 @@ snapshots:
       '@webassemblyjs/ast': 1.14.1
       '@webassemblyjs/wasm-edit': 1.14.1
       '@webassemblyjs/wasm-parser': 1.14.1
-      acorn: 8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+      acorn: 8.14.1(patch_hash=6si3ktymthureqnmnpjiya5mwy)
       browserslist: 4.24.4
       chrome-trace-event: 1.0.4
       enhanced-resolve: 5.18.1
