@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.178](https://github.com/mittwald/flow/compare/0.2.0-alpha.177...0.2.0-alpha.178) (2025-05-12)
+
+### Features
+
+* **remote:** Allow s (strikethrough) as remote component ([#1447](https://github.com/mittwald/flow/issues/1447)) ([b3af99b](https://github.com/mittwald/flow/commit/b3af99bf0917457b88aa8529759eaf5a9f488699))
+
 # [0.2.0-alpha.177](https://github.com/mittwald/flow/compare/0.2.0-alpha.176...0.2.0-alpha.177) (2025-05-09)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-renderer
