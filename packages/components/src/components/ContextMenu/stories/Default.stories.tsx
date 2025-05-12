@@ -199,6 +199,7 @@ export const WithSectionSelectionMode: Story = {
           </MenuItem>
         </ContextMenuSection>
         <Separator />
+
         <ContextMenuSection selectionMode="navigation">
           <MenuItem>
             <IconEmail />
