@@ -190,8 +190,11 @@ export const WithSectionSelectionMode: Story = {
     <ContextMenuTrigger>
       <Button>Trigger</Button>
       <ContextMenu {...props}>
-        <ContextMenuSection selectionMode="switch">
-          <MenuItem>
+        <ContextMenuSection
+          selectionMode="switch"
+          defaultSelectedKeys={["spamProtection"]}
+        >
+          <MenuItem id="spamProtection">
             <Text>Spam protection</Text>
           </MenuItem>
         </ContextMenuSection>
