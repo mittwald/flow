@@ -69,6 +69,13 @@
   @include size("l");
   @include size("xl");
   @include size("xxl");
+
+  &:where(.wrap-wrap) {
+    text-wrap: wrap;
+  }
+  &:where(.wrap-balance) {
+    text-wrap: balance;
+  }
 }
 
 @media (max-width: 550px) {
