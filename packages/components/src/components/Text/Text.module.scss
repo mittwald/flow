@@ -42,4 +42,14 @@
   &:where(.align-end) {
     text-align: end;
   }
+
+  &:where(.wrap-wrap) {
+    text-wrap: wrap;
+  }
+  &:where(.wrap-balance) {
+    text-wrap: balance;
+  }
+  &:where(.wrap-pretty) {
+    text-wrap: pretty;
+  }
 }

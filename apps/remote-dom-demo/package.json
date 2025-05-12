@@ -14,6 +14,7 @@
     "@mittwald/flow-remote-react-components": "workspace:*",
     "@mittwald/flow-remote-react-renderer": "workspace:*",
     "@mittwald/flow-stylesheet": "workspace:*",
+    "@mittwald/mstudio-ext-react-components": "workspace:*",
     "@mittwald/react-tunnel": "workspace:*",
     "@mittwald/react-use-promise": "^3.0.4",
     "@tabler/icons-react": "^3.31.0",
@@ -33,7 +34,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9.22.0",
-    "nx": "^20.5.0",
+    "nx": "^20.8.1",
     "typescript": "^5.8.2"
   },
   "overrides": {
