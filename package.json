@@ -31,7 +31,7 @@
   "devDependencies": {
     "@eslint/js": "^9.22.0",
     "@lerna-lite/cli": "^3.12.1",
-    "@lerna-lite/publish": "^3.12.2",
+    "@lerna-lite/publish": "^4.1.1",
     "@nx/devkit": "20.8.1",
     "@types/node": "^22.13.10",
     "@types/verror": "^1.10.11",
