@@ -343,9 +343,6 @@ importers:
       '@internationalized/string-compiler':
         specifier: ^3.2.6
         version: 3.2.6
-      '@mittwald/password-validation':
-        specifier: ^2.1.0-alpha.5
-        version: 2.1.0-alpha.12
       '@mittwald/react-tunnel':
         specifier: workspace:*
         version: link:../react-tunnel
@@ -418,9 +415,6 @@ importers:
       object-code:
         specifier: ^1.3.3
         version: 1.3.3
-      p-queue:
-        specifier: ^8.1.0
-        version: 8.1.0
       react-aria:
         specifier: ^3.38.1
         version: 3.38.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -454,9 +448,6 @@ importers:
       usehooks-ts:
         specifier: ^3.1.1
         version: 3.1.1(react@19.1.0)
-      vite-plugin-node-polyfills:
-        specifier: ^0.23.0
-        version: 0.23.0(rollup@4.35.0)(vite@6.2.1(@types/node@22.13.10)(less@4.2.2)(sass@1.85.1)(stylus@0.62.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0))
       zod:
         specifier: ^3.24.2
         version: 3.24.2
@@ -471,7 +462,7 @@ importers:
         specifier: workspace:*
         version: link:../design-tokens
       '@mittwald/password-tools-js':
-        specifier: ^2.1.2
+        specifier: ^2.1.4
         version: 2.1.4
       '@mittwald/remote-dom-react':
         specifier: 1.2.2-mittwald.3
@@ -569,6 +560,9 @@ importers:
       nx:
         specifier: ^20.5.0
         version: 20.5.0
+      p-queue:
+        specifier: ^8.1.0
+        version: 8.1.0
       playwright:
         specifier: ^1.51.0
         version: 1.51.0
@@ -641,6 +635,9 @@ importers:
       vite-plugin-externalize-deps:
         specifier: ^0.9.0
         version: 0.9.0(vite@6.2.1(@types/node@22.13.10)(less@4.2.2)(sass@1.85.1)(stylus@0.62.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0))
+      vite-plugin-node-polyfills:
+        specifier: ^0.23.0
+        version: 0.23.0(rollup@4.35.0)(vite@6.2.1(@types/node@22.13.10)(less@4.2.2)(sass@1.85.1)(stylus@0.62.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0))
       vitest:
         specifier: ~3.0.8
         version: 3.0.8(@types/debug@4.1.12)(@types/node@22.13.10)(@vitest/browser@3.0.8)(happy-dom@17.4.3)(less@4.2.2)(msw@2.7.3(@types/node@22.13.10)(typescript@5.8.2))(sass@1.85.1)(stylus@0.62.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0)
@@ -2272,10 +2269,6 @@ packages:
 
   '@mittwald/password-tools-js@2.1.4':
     resolution: {integrity: sha512-Z8VB5ww+mAsuP+wvNlagGIihDUeGzErPIolOA87ILaEWem7kue9FTkpPyKFazbo7F4naeRwXsXFGkTSjQQW5kQ==}
-    hasBin: true
-
-  '@mittwald/password-validation@2.1.0-alpha.12':
-    resolution: {integrity: sha512-0b8FxcdVD5J63j2j6Gn6MM07+mSoIiPsObT9Jlk2dmgXEq2K/nf8dN6G/VDE/RjqXPjIKRwmCqDMHtWYvm1Mmg==}
     hasBin: true
 
   '@mittwald/react-use-promise@3.0.4':
@@ -6118,10 +6111,6 @@ packages:
   is-node-process@1.2.0:
     resolution: {integrity: sha512-Vg4o6/fqPxIjtxgUH5QLJhwZ7gW5diGCVlXpuUfELC62CuxM1iHcRe51f2W1FDy04Ai4KJkagKjx3XaqyfRKXw==}
 
-  is-number@4.0.0:
-    resolution: {integrity: sha512-rSklcAIlf1OmFdyAqbnWTLVelsQ58uvZ66S/ZyawjWqIviTWCjg2PzVGw8WUA+nNuPTqb4wgA+NszrJ+08LlgQ==}
-    engines: {node: '>=0.10.0'}
-
   is-number@7.0.0:
     resolution: {integrity: sha512-41Cifkg6e8TylSpdtTpeLVMqvSBEVzTttHvERD741+pnZ8ANv0004MRL43QKPDlK9cGvNp6NZWZUBlbGXYxxng==}
     engines: {node: '>=0.12.0'}
@@ -6258,9 +6247,6 @@ packages:
 
   jose@6.0.10:
     resolution: {integrity: sha512-skIAxZqcMkOrSwjJvplIPYrlXGpxTPnro2/QWTDCxAdWQrSTV5/KqspMWmi5WAx5+ULswASJiZ0a+1B/Lxt9cw==}
-
-  js-sha1@0.6.0:
-    resolution: {integrity: sha512-01gwBFreYydzmU9BmZxpVk6svJJHrVxEN3IOiGl6VO93bVKYETJ0sIth6DASI6mIFdt7NmfX9UiByRzsYHGU9w==}
 
   js-sha1@0.7.0:
     resolution: {integrity: sha512-oQZ1Mo7440BfLSv9TX87VNEyU52pXPVG19F9PL3gTgNt0tVxlZ8F4O6yze3CLuLx28TxotxvlyepCNaaV0ZjMw==}
@@ -6581,9 +6567,6 @@ packages:
   math-intrinsics@1.1.0:
     resolution: {integrity: sha512-/IXtbwEk5HTPyEwyKX6hGkYXxM9nbj64B+ilVJnC/R6B0pH5G4V3b0pVbL7DBj4tkhBAppbQUlf6F6Xl9LHu1g==}
     engines: {node: '>= 0.4'}
-
-  math-random@1.0.4:
-    resolution: {integrity: sha512-rUxjysqif/BZQH2yhd5Aaq7vXMSx9NdEsQcyA07uEzIvxgI7zIr33gGsh+RU0/XjmQpCW7RsVof1vlkvQVCK5A==}
 
   md5.js@1.3.5:
     resolution: {integrity: sha512-xitP+WxNPcTTOgnTJcrhM0xvdPepipPSf3I8EIpGKeFLjt3PlJLIDG3u8EX53ZIubkb+5U2+3rELYpEhHhzdkg==}
@@ -7648,10 +7631,6 @@ packages:
 
   queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
-
-  randomatic@3.1.1:
-    resolution: {integrity: sha512-TuDE5KxZ0J461RVjrJZCJc+J+zCkTb1MbH9AQUq68sMhOMcy9jLcb3BrZKgp9q9Ncltdg4QVqWrH02W2EFFVYw==}
-    engines: {node: '>= 0.10.0'}
 
   randombytes@2.1.0:
     resolution: {integrity: sha512-vYl3iOX+4CKUWuxGi9Ukhie6fsqXqS9FE2Zaic4tNFD2N2QQaXOMFbuKK4QmDHC0JO6B1Zp41J0LpT0oR68amQ==}
@@ -10705,30 +10684,6 @@ snapshots:
       license-checker-rseidelsohn: 4.4.2
       ora: 5.4.1
       pretty-error: 4.0.0
-      typescript-json-schema: 0.61.0
-      verror: 1.10.1
-      yaml: 2.7.0
-      yargs: 17.7.2
-    transitivePeerDependencies:
-      - '@swc/core'
-      - '@swc/wasm'
-      - supports-color
-
-  '@mittwald/password-validation@2.1.0-alpha.12':
-    dependencies:
-      '@zxcvbn-ts/core': 3.0.4
-      '@zxcvbn-ts/language-common': 3.0.4
-      '@zxcvbn-ts/language-de': 3.0.2
-      '@zxcvbn-ts/language-en': 3.0.2
-      ajv: 8.17.1
-      axios: 1.8.3(debug@4.4.0)
-      debug: 4.4.0
-      fs-jetpack: 5.1.0
-      js-sha1: 0.6.0
-      json2yaml: 1.1.0
-      ora: 5.4.1
-      pretty-error: 4.0.0
-      randomatic: 3.1.1
       typescript-json-schema: 0.61.0
       verror: 1.10.1
       yaml: 2.7.0
@@ -15382,8 +15337,6 @@ snapshots:
 
   is-node-process@1.2.0: {}
 
-  is-number@4.0.0: {}
-
   is-number@7.0.0: {}
 
   is-obj@2.0.0: {}
@@ -15505,8 +15458,6 @@ snapshots:
   jju@1.4.0: {}
 
   jose@6.0.10: {}
-
-  js-sha1@0.6.0: {}
 
   js-sha1@0.7.0: {}
 
@@ -15871,8 +15822,6 @@ snapshots:
   markdown-table@3.0.4: {}
 
   math-intrinsics@1.1.0: {}
-
-  math-random@1.0.4: {}
 
   md5.js@1.3.5:
     dependencies:
@@ -17399,12 +17348,6 @@ snapshots:
   querystringify@2.2.0: {}
 
   queue-microtask@1.2.3: {}
-
-  randomatic@3.1.1:
-    dependencies:
-      is-number: 4.0.0
-      kind-of: 6.0.3
-      math-random: 1.0.4
 
   randombytes@2.1.0:
     dependencies:
