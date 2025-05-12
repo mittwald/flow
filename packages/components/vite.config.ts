@@ -1,17 +1,11 @@
 import { defineConfig } from "vite";
-import { cssModuleClassNameGenerator } from "./dev/vite/cssModuleClassNameGenerator";
 import path from "path";
-import { nodePolyfills as viteNodePolyfills } from "vite-plugin-node-polyfills";
+import { cssModuleClassNameGenerator } from "./dev/vite/cssModuleClassNameGenerator";
 import { viteI18nPlugin } from "./dev/vite/viteI18nPlugin";
 
 export default defineConfig({
   assetsInclude: ["/sb-preview/runtime.js"],
-  plugins: [
-    viteNodePolyfills({
-      protocolImports: true,
-    }),
-    viteI18nPlugin,
-  ],
+  plugins: [viteI18nPlugin],
   resolve: {
     alias: [
       {
