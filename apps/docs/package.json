@@ -53,7 +53,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9.22.0",
     "glob": "^11.0.1",
-    "nx": "^20.5.0",
+    "nx": "^20.8.1",
     "react-docgen-typescript": "^2.2.2",
     "typescript": "^5.8.2"
   }
