@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.180](https://github.com/mittwald/flow/compare/0.2.0-alpha.179...0.2.0-alpha.180) (2025-05-12)
+
+### Features
+
+* **Remote:** include search params in watched remote URL ([#1456](https://github.com/mittwald/flow/issues/1456)) ([9331427](https://github.com/mittwald/flow/commit/933142743aa7c7362998549e081913b90c9193d8))
+
 # [0.2.0-alpha.179](https://github.com/mittwald/flow/compare/0.2.0-alpha.178...0.2.0-alpha.179) (2025-05-12)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components
