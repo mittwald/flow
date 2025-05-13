@@ -11,6 +11,7 @@ export class RemoteContextMenuSectionElement extends FlowRemoteElement<RemoteCon
 
   static override get remoteProperties() {
     return {
+      defaultSelectedKeys: {},
       selectionMode: {},
     };
   }
