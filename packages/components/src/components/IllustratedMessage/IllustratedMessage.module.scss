@@ -1,7 +1,3 @@
-.illustratedMessageContainer {
-  container-type: inline-size;
-}
-
 .illustratedMessage {
   display: flex;
   flex-direction: column;
@@ -28,6 +24,10 @@
     button {
       margin: 0;
     }
+  }
+
+  .progressBar {
+    max-width: 400px;
   }
 
   /* Color */

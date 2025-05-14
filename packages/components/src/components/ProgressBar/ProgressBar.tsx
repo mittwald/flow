@@ -1,5 +1,5 @@
 import * as Aria from "react-aria-components";
-import type { FC, PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 import React from "react";
 import styles from "./ProgressBar.module.scss";
 import clsx from "clsx";
@@ -10,10 +10,15 @@ import { ProgressBarValue } from "@/components/ProgressBar/components/ProgressBa
 import { ProgressBarBar } from "@/components/ProgressBar/components/ProgressBarBar";
 import { ProgressBarLegend } from "@/components/ProgressBar/components/ProgressBarLegend";
 import type { CategoricalColors } from "@/lib/tokens/CategoricalColors";
+import {
+  flowComponent,
+  type FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
 
 export interface ProgressBarProps
   extends PropsWithChildren<Omit<Aria.ProgressBarProps, "children">>,
-    PropsWithStatus {
+    PropsWithStatus,
+    FlowComponentProps {
   /** Whether the max value should be displayed. */
   showMaxValue?: boolean;
   /** The size variant of the progress bar. @default "m" */
@@ -31,7 +36,7 @@ export interface ProgressBarProps
  * @flr-generate all
  * @flr-clear-props-context
  */
-export const ProgressBar: FC<ProgressBarProps> = (props) => {
+export const ProgressBar = flowComponent("ProgressBar", (props) => {
   const {
     children,
     className,
@@ -100,6 +105,6 @@ export const ProgressBar: FC<ProgressBarProps> = (props) => {
       </Aria.ProgressBar>
     </>
   );
-};
+});
 
 export default ProgressBar;
