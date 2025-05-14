@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.182](https://github.com/mittwald/flow/compare/0.2.0-alpha.181...0.2.0-alpha.182) (2025-05-14)
+
+### Bug Fixes
+
+* **List:** update tile translation ([097dc27](https://github.com/mittwald/flow/commit/097dc27d968f975df613dd27e26e7730df21e36b))
+
+### Features
+
+* **IllustratedMessage:** support progress bar in illustrated message ([8819fe0](https://github.com/mittwald/flow/commit/8819fe088f99981240906d905b70389b9096de10))
+* **Text:** support icon in text ([6a847ca](https://github.com/mittwald/flow/commit/6a847cab8f17c9688d9b94422e63bf02437f63fb))
+
 # [0.2.0-alpha.181](https://github.com/mittwald/flow/compare/0.2.0-alpha.180...0.2.0-alpha.181) (2025-05-13)
 
 ### Bug Fixes
