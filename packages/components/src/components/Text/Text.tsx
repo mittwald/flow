@@ -59,6 +59,7 @@ export const Text = flowComponent("Text", (props) => {
     Link: {
       inline: true,
     },
+    Icon: { className: styles.icon },
   };
 
   const childrenElement = (
