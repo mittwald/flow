@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.183](https://github.com/mittwald/flow/compare/0.2.0-alpha.182...0.2.0-alpha.183) (2025-05-14)
+
+### Features
+
+* **Modal:** update large modal size ([#1462](https://github.com/mittwald/flow/issues/1462)) ([50beee4](https://github.com/mittwald/flow/commit/50beee4e991e16ece23c41aceb1f213323995d15))
+
 # [0.2.0-alpha.182](https://github.com/mittwald/flow/compare/0.2.0-alpha.181...0.2.0-alpha.182) (2025-05-14)
 
 ### Bug Fixes
