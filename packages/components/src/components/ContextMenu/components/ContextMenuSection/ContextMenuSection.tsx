@@ -13,9 +13,11 @@ import {
   getMenuItemSelectionVariant,
 } from "@/components/ContextMenu/lib";
 import { Action } from "@/components/Action";
+import type { MenuItemProps } from "@/components/MenuItem";
 
 export type ContextMenuSectionProps = PropsWithChildren &
-  FlowComponentProps & {
+  FlowComponentProps &
+  Pick<Aria.MenuSectionProps<MenuItemProps>, "defaultSelectedKeys"> & {
     selectionMode?: ContextMenuSelectionMode;
   };
 
