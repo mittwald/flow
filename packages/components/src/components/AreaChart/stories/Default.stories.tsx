@@ -6,6 +6,8 @@ import CartesianGrid from "@/components/CartesianGrid";
 import XAxis from "@/components/XAxis";
 import YAxis from "@/components/YAxis";
 import ChartLegend from "@/components/ChartLegend";
+import IllustratedMessage from "@/components/IllustratedMessage";
+import { Heading, IconMonitoring } from "@/components/public";
 
 const chartData = [
   {
@@ -108,4 +110,28 @@ export const MultipleSynced: Story = {
       </AreaChart>
     </>
   ),
+};
+
+export const WithEmptyView: Story = {
+  render: () => {
+    const emptyView = () => (
+      <IllustratedMessage>
+        <IconMonitoring />
+        <Heading>Keine Daten verfügbar</Heading>
+      </IllustratedMessage>
+    );
+
+    return (
+      <AreaChart emptyView={emptyView} height="70vh">
+        <CartesianGrid />
+        <Area dataKey="firstKey" />
+        <Area dataKey="secondKey" color="palatinate-blue" />
+        <Area dataKey="thirdKey" color="tangerine" />
+        <XAxis dataKey="name" />
+        <YAxis interval="equidistantPreserveStart" />
+        <ChartTooltip />
+        <ChartLegend />
+      </AreaChart>
+    );
+  },
 };

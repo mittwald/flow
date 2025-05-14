@@ -13,6 +13,8 @@ export class RemoteAreaChartElement extends FlowRemoteElement<RemoteAreaChartEle
     return {
       className: {},
       data: {},
+      emptyView: {},
+      flexGrow: {},
       height: {},
       syncId: {},
       syncMethod: {},
