@@ -14,12 +14,9 @@ import {
   XAxis,
   YAxis,
 } from "@mittwald/flow-react-components";
-import type { FC } from "react";
 
 export default () => {
-  const EmptyView: FC<AreaChartEmptyViewProps> = (
-    props,
-  ) => {
+  const EmptyView = (props: AreaChartEmptyViewProps) => {
     if (props.data === undefined) {
       return (
         <IllustratedMessage color="danger">
@@ -38,7 +35,7 @@ export default () => {
     );
   };
 
-  const Chart: FC<AreaChartEmptyViewProps> = (props) => {
+  const Chart = (props: AreaChartEmptyViewProps) => {
     return (
       <AreaChart
         emptyView={EmptyView}
