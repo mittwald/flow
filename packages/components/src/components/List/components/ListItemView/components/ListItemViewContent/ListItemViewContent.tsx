@@ -108,28 +108,6 @@ export const ListItemViewContent = (props: ListItemViewContentProps) => {
     </div>
   );
 
-  if ((s || m || l) && viewMode === "list") {
-    return (
-      <PropsContextProvider props={propsContext} mergeInParentContext>
-        <div className={className}>
-          <div className={styles.contentWrapper}>
-            <ColumnLayout
-              s={s}
-              m={m}
-              l={l}
-              className={clsx(styles.content, styles.columnLayout)}
-            >
-              {header}
-              {children}
-            </ColumnLayout>
-            {button}
-          </div>
-          {bottom}
-        </div>
-      </PropsContextProvider>
-    );
-  }
-
   return (
     <PropsContextProvider props={propsContext} mergeInParentContext>
       <div className={className}>
