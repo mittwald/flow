@@ -1,7 +1,6 @@
 import { useFormContext } from "@/integrations/react-hook-form/components/context/formContext";
 import type { PropsContext } from "@/lib/propsContext";
 import { dynamic, PropsContextProvider } from "@/lib/propsContext";
-import FieldErrorView from "@/views/FieldErrorView";
 import type { PropsWithChildren } from "react";
 import type {
   ControllerProps,
@@ -9,6 +8,7 @@ import type {
   UseFormReturn,
 } from "react-hook-form";
 import { Controller } from "react-hook-form";
+import FieldErrorView from "@/views/FieldErrorView";
 
 export interface FieldProps<T extends FieldValues>
   extends Omit<ControllerProps<T>, "render">,
@@ -30,6 +30,16 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
           fieldState: { error, invalid },
         } = renderProps;
 
+        const hasErrorMessage = !!error?.message;
+        const hasErrorType = !!error?.type;
+        const errorMessage = invalid
+          ? hasErrorMessage
+            ? error?.message
+            : hasErrorType
+              ? error?.type
+              : "missingErrorMessage"
+          : undefined;
+
         const formControlProps = {
           ...field,
           form: formContext.id,
@@ -37,12 +47,16 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
           isInvalid: invalid,
           validationBehavior: "aria" as const,
           children: dynamic((p) => {
-            return (
-              <>
-                {p.children}
-                <FieldErrorView>{error?.message}</FieldErrorView>
-              </>
-            );
+            if (invalid) {
+              return (
+                <>
+                  {p.children}
+                  <FieldErrorView>{errorMessage}</FieldErrorView>
+                </>
+              );
+            }
+
+            return p.children;
           }),
           ref: undefined,
           refProp: field.ref,

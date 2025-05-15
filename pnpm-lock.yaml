@@ -131,6 +131,9 @@ importers:
       '@mittwald/flow-react-components':
         specifier: workspace:*
         version: link:../../packages/components
+      '@mittwald/password-tools-js':
+        specifier: ^2.1.4
+        version: 2.1.4
       '@next/mdx':
         specifier: ^15.2.1
         version: 15.2.1(@mdx-js/loader@3.1.0(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))(webpack@5.98.0))(@mdx-js/react@3.1.0(@types/react@19.0.10)(react@19.1.0))

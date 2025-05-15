@@ -1,4 +1,4 @@
-import type { FC, PropsWithChildren } from "react";
+import type { FC } from "react";
 import React from "react";
 import { Button } from "@/components/Button";
 import {
@@ -6,7 +6,7 @@ import {
   ContextualHelpTrigger,
 } from "@/components/ContextualHelp";
 import { Heading } from "@/components/Heading";
-import styles from "./FieldLabel.module.scss";
+import stylesFieldLabel from "./FieldLabel.module.scss";
 import type { ActionFn } from "@/components/Action";
 import { Action } from "@/components/Action";
 import { useLocalizedStringFormatter } from "react-aria";
@@ -15,20 +15,22 @@ import type { ResolvedPolicyValidationResult } from "@/components/PasswordCreati
 import { isCryptographicSecureRandom } from "@mittwald/password-tools-js/generator";
 import locales from "./../../locales/*.locale.json";
 import ValidationResultEntry from "@/components/PasswordCreationField/components/ValidationResultEntry/ValidationResultEntry";
+import { TunnelExit } from "@mittwald/react-tunnel";
+import clsx from "clsx";
 
-export type PasswordFieldLabelProps = PropsWithChildren<{
+export type PasswordFieldLabelProps = {
+  className?: string;
   policyValidationResult?: ResolvedPolicyValidationResult;
   onGeneratePasswordAction?: ActionFn;
-}> &
-  Pick<Aria.InputProps, "disabled">;
+} & Pick<Aria.InputProps, "disabled">;
 
 /** @internal */
 export const FieldLabel: FC<PasswordFieldLabelProps> = (props) => {
   const {
-    children,
     onGeneratePasswordAction,
     policyValidationResult,
     disabled,
+    className,
   } = props;
   const translate = useLocalizedStringFormatter(locales);
 
@@ -46,38 +48,37 @@ export const FieldLabel: FC<PasswordFieldLabelProps> = (props) => {
     });
 
   return (
-    <>
-      {children}
-      <div className={styles.passwordFieldLabel}>
-        <ContextualHelpTrigger>
+    <div className={clsx(className, stylesFieldLabel.passwordFieldLabel)}>
+      <TunnelExit id="label" />
+      <ContextualHelpTrigger>
+        <Button
+          data-component="showPasswordRules"
+          isDisabled={disabled}
+          className={clsx(stylesFieldLabel.button, stylesFieldLabel.helpButton)}
+        />
+        <ContextualHelp>
+          <Heading>{translate.format("password.requirements.heading")}</Heading>
+          {validationResultComponents}
+        </ContextualHelp>
+      </ContextualHelpTrigger>
+      {onGeneratePasswordAction && isCryptographicSecureRandom && (
+        <Action action={onGeneratePasswordAction}>
           <Button
-            data-component="showPasswordRules"
+            data-component="generatePassword"
             isDisabled={disabled}
-            className={styles.helpButton}
-          />
-          <ContextualHelp>
-            <Heading>
-              {translate.format("password.requirements.heading")}
-            </Heading>
-            {validationResultComponents}
-          </ContextualHelp>
-        </ContextualHelpTrigger>
-        {onGeneratePasswordAction && isCryptographicSecureRandom && (
-          <Action action={onGeneratePasswordAction}>
-            <Button
-              data-component="generatePassword"
-              isDisabled={disabled}
-              className={styles.generateButton}
-              variant="plain"
-              color="dark"
-              size="s"
-            >
-              {translate.format("button.generate")}
-            </Button>
-          </Action>
-        )}
-      </div>
-    </>
+            className={clsx(
+              stylesFieldLabel.button,
+              stylesFieldLabel.generateButton,
+            )}
+            variant="plain"
+            color="dark"
+            size="s"
+          >
+            {translate.format("button.generate")}
+          </Button>
+        </Action>
+      )}
+    </div>
   );
 };
 

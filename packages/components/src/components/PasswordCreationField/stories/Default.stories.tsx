@@ -1,12 +1,16 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { PasswordCreationField } from "../index";
-import React from "react";
+import React, { useState } from "react";
 import { Label } from "@/components/Label";
 import { action } from "@storybook/addon-actions";
-import { Form } from "react-aria-components";
 import type { PolicyDeclaration } from "@mittwald/password-tools-js/policy";
 import { RuleType, SequenceType } from "@mittwald/password-tools-js/rules";
 import { Policy } from "@mittwald/password-tools-js/policy";
+import { useForm } from "react-hook-form";
+import { sleep } from "@/lib/promises/sleep";
+import { Button } from "@/components/Button";
+import { Field, Form } from "@/integrations/react-hook-form";
+import { IconDanger } from "@/components/Icon/components/icons";
 
 const policyDecl: PolicyDeclaration = {
   minComplexity: 3,
@@ -75,19 +79,57 @@ export const Required: Story = {
   args: { isRequired: true },
 };
 
+export const WithDefaultValue: Story = {
+  args: { defaultValue: "helloMoto" },
+};
+
+export const WithControlledValue: Story = {
+  render: (props) => {
+    const [value, setValue] = useState("defaultControlled");
+
+    return (
+      <PasswordCreationField
+        {...props}
+        value={value}
+        onChange={(val) => setValue(val.toUpperCase())}
+      >
+        <Label>Password</Label>
+      </PasswordCreationField>
+    );
+  },
+};
+
+export const WithCustomButtons: Story = {
+  render: (props) => {
+    return (
+      <PasswordCreationField {...props}>
+        <Label>Password</Label>
+        <Button>
+          <IconDanger />
+        </Button>
+      </PasswordCreationField>
+    );
+  },
+};
+
 export const WithForm: Story = {
   render: () => {
     const policy = Policy.fromDeclaration(policyDecl);
-
+    const form = useForm({
+      defaultValues: {
+        password: "",
+      },
+    });
     return (
-      <Form
-        onSubmit={() => {
-          // do nothing
-        }}
-      >
-        <PasswordCreationField validationPolicy={policy}>
-          <Label>Password</Label>
-        </PasswordCreationField>
+      <Form form={form} onSubmit={async () => await sleep(2000)}>
+        <Field rules={{ required: true }} name="password">
+          <PasswordCreationField validationPolicy={policy}>
+            <Label>Password</Label>
+            <Button>asd</Button>
+          </PasswordCreationField>
+        </Field>
+        <br />
+        <Button type="submit">Submit</Button>
       </Form>
     );
   },

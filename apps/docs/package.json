@@ -17,6 +17,7 @@
     "@mfalkenberg/react-live-ssr": "^4.1.7",
     "@mittwald/flow-design-tokens": "workspace:*",
     "@mittwald/flow-react-components": "workspace:*",
+    "@mittwald/password-tools-js": "^2.1.4",
     "@next/mdx": "^15.2.1",
     "@tabler/icons-react": "^3.31.0",
     "@types/luxon": "^3.4.2",

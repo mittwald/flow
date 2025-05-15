@@ -81,6 +81,10 @@ export interface ResolvedPolicyValidationResult extends PolicyValidationResult {
   ruleResults: RuleValidationResult[];
 }
 
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const PasswordCreationField = flowComponent(
   "PasswordCreationField",
   (props) => {
@@ -92,7 +96,7 @@ export const PasswordCreationField = flowComponent(
       ref,
       isDisabled,
       onChange,
-      isInvalid,
+      isInvalid: invalidFromProps,
       validationPolicy = defaultPasswordCreationPolicy,
       isRequired,
       ...rest
@@ -134,8 +138,10 @@ export const PasswordCreationField = flowComponent(
       },
       ruleResults: [],
     };
-    const [policyValidationResult, setPolicyValidationResult] =
-      useState<ResolvedPolicyValidationResult>(initialValidationState);
+
+    const [policyValidationResult, setPolicyValidationResult] = useState(
+      initialValidationState,
+    );
 
     const statusTextFromValidationResult =
       getStatusTextFromPolicyValidationResult(policyValidationResult);
@@ -149,6 +155,11 @@ export const PasswordCreationField = flowComponent(
         translationValues,
       );
     }
+
+    const isInvalid =
+      invalidFromProps ||
+      (!policyValidationResult?.isEmptyValueValidation &&
+        !statusTextFromValidationResult?.isValid);
 
     useEffect(() => {
       setIsLoading(true);
@@ -251,30 +262,17 @@ export const PasswordCreationField = flowComponent(
         className: dynamic((p) => clsx(p.className, styles.button)),
       },
       Label: {
-        optional: !isRequired,
         className: formFieldStyles.label,
-        children: dynamic((localProps) => {
-          return (
-            <FieldLabel
-              disabled={isDisabled}
-              onGeneratePasswordAction={onPasswordGenerateHandler}
-              policyValidationResult={policyValidationResult}
-            >
-              {localProps.children}
-            </FieldLabel>
-          );
-        }),
+        tunnelId: "label",
+        optional: !isRequired,
+        isDisabled: isDisabled,
       },
       FieldDescription: {
         className: formFieldStyles.fieldDescription,
       },
       FieldError: {
         className: formFieldStyles.customFieldError,
-        children: dynamic((p) => {
-          if (p.children) {
-            return p.children;
-          }
-
+        children: dynamic(() => {
           if (translatedStatusText) {
             return translatedStatusText;
           }
@@ -282,23 +280,26 @@ export const PasswordCreationField = flowComponent(
       },
     };
 
-    const rootClassName = clsx(className, formFieldStyles.formField);
+    const customButtonContext: PropsContext = {
+      Button: propsContext.Button,
+    };
 
     return (
       <ClearPropsContext>
         <TunnelProvider>
+          <FieldLabel
+            disabled={isDisabled}
+            onGeneratePasswordAction={onPasswordGenerateHandler}
+            policyValidationResult={policyValidationResult}
+          />
           <Aria.TextField
             type={isPasswordRevealed ? "text" : "password"}
             value={value}
             onChange={onPasswordInputChangeHandler}
             onPaste={onPasswordPasteHandler}
-            className={rootClassName}
+            className={clsx(className, formFieldStyles.formField)}
             isDisabled={isDisabled}
-            isInvalid={
-              isInvalid ||
-              (!policyValidationResult?.isEmptyValueValidation &&
-                !statusTextFromValidationResult?.isValid)
-            }
+            isInvalid={isInvalid}
             isRequired={isRequired}
             {...rest}
           >
@@ -308,21 +309,14 @@ export const PasswordCreationField = flowComponent(
             >
               <Aria.Input className={styles.input} ref={ref} value={value} />
               <Aria.Group className={styles.buttonContainer}>
-                <Action action={togglePasswordVisibilityHandler}>
-                  <Button
-                    data-component="toggleRevealPassword"
-                    isDisabled={isDisabled}
-                    className={styles.button}
-                    slot="button"
-                    size="m"
-                    variant="plain"
-                    color="secondary"
-                    aria-label="Show password in plaintext"
-                  >
-                    {isPasswordRevealed ? <IconShow /> : <IconHide />}
-                  </Button>
-                </Action>
-                <TunnelExit id="button" />
+                <PropsContextProvider props={customButtonContext}>
+                  <Action action={togglePasswordVisibilityHandler}>
+                    <Button data-component="toggleRevealPassword" slot="button">
+                      {!isPasswordRevealed ? <IconShow /> : <IconHide />}
+                    </Button>
+                  </Action>
+                  <TunnelExit id="button" />
+                </PropsContextProvider>
               </Aria.Group>
               <ComplexityIndicator
                 isLoading={isLoading}
@@ -339,7 +333,6 @@ export const PasswordCreationField = flowComponent(
               {children}
             </PropsContextProvider>
           </Aria.TextField>
-          <FieldError className={formFieldStyles.fieldError} />
         </TunnelProvider>
       </ClearPropsContext>
     );
