@@ -176,12 +176,15 @@ describe("Text field", () => {
     expect(screen.getByDisplayValue("default-value")).toBeInTheDocument();
   });
 
-  test("is not controlled by default", async () => {
+  test("updates its value (by ref) event if not controlled", async () => {
     const user = userEvent.setup();
     render(<TestForm />);
     const field = screen.getByLabelText("testUncontrolled");
     await user.type(field, "new name");
-    expect(screen.getByDisplayValue("new name")).toBeInTheDocument();
+    expect(screen.getByDisplayValue("NEW NAME")).toBeInTheDocument();
+    expect(screen.getByDisplayValue("NEW NAME").hasAttribute("value")).toBe(
+      false,
+    );
   });
 
   test("can be used as controlled input", async () => {
@@ -190,5 +193,8 @@ describe("Text field", () => {
     const field = screen.getByLabelText("testControlled");
     await user.type(field, "new name");
     expect(screen.getByDisplayValue("NEW NAME")).toBeInTheDocument();
+    expect(screen.getByDisplayValue("NEW NAME").getAttribute("value")).toBe(
+      "NEW NAME",
+    );
   });
 });

@@ -20,6 +20,7 @@ const meta: Meta<typeof Field> = {
       nameDefaultValue: string;
       nameRequired: string;
       nameMaxLength: string;
+      controlledName: string;
     }
 
     const handleOnSubmit = async (values: Values) => {
@@ -33,6 +34,7 @@ const meta: Meta<typeof Field> = {
         nameDefaultValue: "John",
         nameRequired: "",
         nameMaxLength: "",
+        controlledName: "",
       },
     });
 
@@ -68,7 +70,22 @@ const meta: Meta<typeof Field> = {
             </TextField>
           </Field>
 
+          <Field name="controlledName">
+            <TextField value={form.watch("controlledName").toUpperCase()}>
+              <Label>Name</Label>
+            </TextField>
+          </Field>
+
           <ActionGroup>
+            <Button
+              variant="soft"
+              color="secondary"
+              onPress={() => {
+                form.reset();
+              }}
+            >
+              Reset
+            </Button>
             <Button type="submit">Submit</Button>
           </ActionGroup>
         </Section>

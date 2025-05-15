@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import * as Aria from "react-aria-components";
 import type { TextFieldBaseProps } from "@/components/TextFieldBase";
 import { TextFieldBase } from "@/components/TextFieldBase";
@@ -7,6 +7,7 @@ import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext"
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { mergeRefs } from "@react-aria/utils";
+import { ReactAriaControlledValueFix } from "@/lib/react/ReactAriaControlledValueFix";
 
 export interface TextAreaProps
   extends Omit<TextFieldBaseProps, "input" | "ref">,
@@ -49,17 +50,22 @@ export const TextArea = flowComponent("TextArea", (props) => {
   };
 
   const input = (
-    <Aria.TextArea
-      rows={rows}
-      placeholder={placeholder}
-      className={styles.textArea}
-      ref={mergeRefs(localRef, ref)}
-      onChange={updateHeight}
-      style={{
-        minHeight: getHeight(rows),
-        maxHeight: getHeight(autoResizeMaxRows),
-      }}
-    />
+    <ReactAriaControlledValueFix
+      inputContext={Aria.TextAreaContext}
+      props={props}
+    >
+      <Aria.TextArea
+        rows={rows}
+        placeholder={placeholder}
+        className={styles.textArea}
+        ref={mergeRefs(localRef, ref)}
+        onChange={updateHeight}
+        style={{
+          minHeight: getHeight(rows),
+          maxHeight: getHeight(autoResizeMaxRows),
+        }}
+      />
+    </ReactAriaControlledValueFix>
   );
 
   return (
