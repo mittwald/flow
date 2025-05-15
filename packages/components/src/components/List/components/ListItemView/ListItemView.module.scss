@@ -58,6 +58,10 @@
     padding: var(--list-item--padding);
     gap: var(--list-item--spacing);
 
+    .columnLayout {
+      flex-grow: 1;
+    }
+
     .contentWrapper {
       display: flex;
       gap: var(--list-item--spacing);

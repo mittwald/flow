@@ -9,13 +9,47 @@
 .columnLayout {
   display: grid;
   gap: var(--column-layout--row-gap) var(--column-layout--column-gap);
-  grid-template-columns: var(--column-layout--columns-l);
 
-  @container (max-width: 850px) {
+  @mixin hide($size) {
+    &.hide-#{$size}-1 {
+      > :nth-child(1) {
+        display: none;
+      }
+    }
+    &.hide-#{$size}-2 {
+      > :nth-child(2) {
+        display: none;
+      }
+    }
+    &.hide-#{$size}-3 {
+      > :nth-child(3) {
+        display: none;
+      }
+    }
+    &.hide-#{$size}-4 {
+      > :nth-child(4) {
+        display: none;
+      }
+    }
+    &.hide-#{$size}-5 {
+      > :nth-child(5) {
+        display: none;
+      }
+    }
+  }
+
+  @container (min-width:851px) {
+    grid-template-columns: var(--column-layout--columns-l);
+    @include hide("l");
+  }
+
+  @container (max-width: 850px) and (min-width:551px) {
     grid-template-columns: var(--column-layout--columns-m);
+    @include hide("m");
   }
 
   @container (max-width: 550px) {
     grid-template-columns: var(--column-layout--columns-s);
+    @include hide("s");
   }
 }

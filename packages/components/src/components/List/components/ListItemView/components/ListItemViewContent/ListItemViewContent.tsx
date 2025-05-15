@@ -8,16 +8,22 @@ import {
 } from "@/lib/propsContext";
 import type { ListViewMode } from "@/components/List/model/types";
 import clsx from "clsx";
+import {
+  ColumnLayout,
+  type ColumnLayoutProps,
+} from "@/components/ColumnLayout";
 
-export type ListItemViewContentProps = PropsWithChildren & {
-  title?: ReactNode;
-  subTitle?: ReactNode;
-  avatar?: ReactNode;
-  button?: ReactNode;
-  bottom?: ReactNode;
-  checkbox?: ReactNode;
-  viewMode?: ListViewMode;
-};
+export type ListItemViewContentProps = PropsWithChildren &
+  Pick<ColumnLayoutProps, "s" | "m" | "l"> & {
+    title?: ReactNode;
+    subTitle?: ReactNode;
+    avatar?: ReactNode;
+    button?: ReactNode;
+    bottom?: ReactNode;
+    checkbox?: ReactNode;
+    viewMode?: ListViewMode;
+    columnLayout?: boolean;
+  };
 
 const getStyleForContentSlot = (slot?: string) =>
   slot === "top"
@@ -37,6 +43,7 @@ export const ListItemViewContent = (props: ListItemViewContentProps) => {
     bottom,
     checkbox,
     viewMode,
+    columnLayout,
   } = props;
 
   const contentProps: Record<string, ComponentProps<"div">> = {
@@ -82,12 +89,44 @@ export const ListItemViewContent = (props: ListItemViewContentProps) => {
     Link: {
       unstyled: true,
     },
+    ColumnLayout: {
+      className: styles.columnLayout,
+      Header: {
+        className: styles.header,
+        Avatar: {
+          className: styles.avatar,
+        },
+        Heading: {
+          className: styles.heading,
+          level: 5,
+          Badge: { className: styles.badge },
+          AlertBadge: { className: styles.badge },
+        },
+        Text: {
+          className: styles.text,
+        },
+      },
+    },
   };
 
   const className = clsx(
     styles.view,
     viewMode === "tiles" ? styles.tileView : styles.listView,
   );
+
+  if (columnLayout && viewMode === "list") {
+    return (
+      <PropsContextProvider props={propsContext} mergeInParentContext>
+        <div className={className}>
+          <div className={styles.contentWrapper}>
+            <div className={styles.content}>{children}</div>
+            {button}
+          </div>
+          {bottom}
+        </div>
+      </PropsContextProvider>
+    );
+  }
 
   return (
     <PropsContextProvider props={propsContext} mergeInParentContext>
@@ -97,6 +136,7 @@ export const ListItemViewContent = (props: ListItemViewContentProps) => {
             <div className={styles.contentWrapper}>
               <div className={styles.content}>
                 {children}
+
                 <div className={styles.header}>
                   <div className={styles.checkboxContainer}>{checkbox}</div>
                   {avatar}

@@ -10,6 +10,10 @@ import {
 } from "@/lib/propsContext";
 import { OptionsButton } from "@/components/List/components/Items/components/Item/components/OptionsButton";
 import { useList } from "@/components/List";
+import { deepHas } from "@/lib/react/deepHas";
+import { ColumnLayout } from "@/components/ColumnLayout";
+import invariant from "invariant";
+import { has } from "mobx";
 
 export type ListItemViewProps = PropsWithChildren;
 
@@ -48,6 +52,13 @@ export const ListItemView = (props: ListItemViewProps) => {
     },
   };
 
+  const hasColumnLayout = deepHas(children, ColumnLayout);
+
+  invariant(
+    !hasColumnLayout || list.viewMode !== "tiles",
+    "ColumnLayout can not be used for tiles",
+  );
+
   return (
     <PropsContextProvider props={propsContext} mergeInParentContext>
       <TunnelProvider>
@@ -59,6 +70,7 @@ export const ListItemView = (props: ListItemViewProps) => {
           subTitle={<TunnelExit id="text" />}
           bottom={<TunnelExit id="bottom" />}
           checkbox={<TunnelExit id="checkbox" />}
+          columnLayout={hasColumnLayout}
         >
           {children}
         </ListItemViewContentView>

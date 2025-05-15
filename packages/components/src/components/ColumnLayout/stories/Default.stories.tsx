@@ -6,6 +6,9 @@ import { Label } from "@/components/Label";
 import { Alert } from "@/components/Alert";
 import { Heading } from "@/components/Heading";
 import { Section } from "@/components/Section";
+import { Text } from "@/components/Text";
+import { Image } from "@/components/Image";
+import { dummyText } from "@/lib/dev/dummyText";
 
 const meta: Meta<typeof ColumnLayout> = {
   title: "Structure/ColumnLayout",
@@ -157,6 +160,15 @@ export const Nested: Story = {
           <Label>House number</Label>
         </TextField>
       </ColumnLayout>
+    </ColumnLayout>
+  ),
+};
+
+export const HiddenColumns: Story = {
+  render: (props) => (
+    <ColumnLayout {...props} s={[1, null]} m={[2, 1]} l={[null, 1]}>
+      <Text>{dummyText.long}</Text>
+      <Image src={dummyText.imageSrc} alt="" />
     </ColumnLayout>
   ),
 };
