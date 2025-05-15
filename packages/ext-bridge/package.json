@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/ext-bridge",
-  "version": "0.2.0-alpha.179",
+  "version": "0.2.0-alpha.185",
   "type": "module",
   "description": "Bridge for mStudio embedded frontend extensions",
   "homepage": "https://mittwald.github.io/flow",

@@ -10,6 +10,8 @@ import {
   storyBackgroundLight,
 } from "@/lib/dev/storyBackgrounds";
 import { ActionGroup } from "@/components/ActionGroup";
+import { ProgressBar } from "@/components/ProgressBar";
+import { Label } from "@/components/Label";
 
 const meta: Meta<typeof IllustratedMessage> = {
   title: "Content/Illustrated Message",
@@ -72,6 +74,25 @@ export const WithActionGroup: Story = {
         </Button>
         <Button>Create app</Button>
       </ActionGroup>
+    </IllustratedMessage>
+  ),
+};
+
+export const WithProgressBar: Story = {
+  render: (props) => (
+    <IllustratedMessage {...props}>
+      <IconApp />
+      <Heading>App is installing</Heading>
+      <Text>This can take a couple of minutes.</Text>
+      <ProgressBar
+        value={500}
+        maxValue={1000}
+        minValue={0}
+        formatOptions={{ style: "unit", unit: "gigabyte" }}
+        {...props}
+      >
+        <Label>Storage</Label>
+      </ProgressBar>
     </IllustratedMessage>
   ),
 };

@@ -28,7 +28,7 @@ export interface AreaProps
 export const Area: FC<AreaProps> = (props) => {
   const {
     color = "sea-green",
-    stackId = "1",
+    stackId = 1,
     fillOpacity = 1,
     onlyDots = true,
     ...rest

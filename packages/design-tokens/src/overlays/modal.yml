@@ -11,7 +11,7 @@ modal:
     m:
       value: 900px
     l:
-      value: 1400px
+      value: 1300px
   footer-background-color:
     value: "{neutral.color.300}"
   border-color:

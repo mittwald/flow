@@ -18,7 +18,11 @@ export interface IllustratedMessageProps
 export const IllustratedMessage: FC<IllustratedMessageProps> = (props) => {
   const { className, children, color = "primary", ...rest } = props;
 
-  const rootClassName = clsx(styles.illustratedMessageContainer, className);
+  const rootClassName = clsx(
+    styles.illustratedMessage,
+    className,
+    styles[color],
+  );
 
   const lightOrDarkColor =
     color === "dark" || color === "light" ? color : undefined;
@@ -41,15 +45,14 @@ export const IllustratedMessage: FC<IllustratedMessageProps> = (props) => {
     ActionGroup: {
       className: styles.actionGroup,
     },
+    ProgressBar: { className: styles.progressBar },
   };
 
   return (
     <div {...rest} className={rootClassName}>
-      <div className={clsx(styles.illustratedMessage, styles[color])}>
-        <PropsContextProvider props={propsContext}>
-          {children}
-        </PropsContextProvider>
-      </div>
+      <PropsContextProvider props={propsContext}>
+        {children}
+      </PropsContextProvider>
     </div>
   );
 };
