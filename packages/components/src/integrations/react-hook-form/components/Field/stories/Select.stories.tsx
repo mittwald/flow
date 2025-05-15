@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
 import { useForm } from "react-hook-form";
 import { action } from "@storybook/addon-actions";
 import { Label } from "@/components/Label";
@@ -72,6 +71,15 @@ const meta: Meta<typeof Field> = {
           </Field>
 
           <ActionGroup>
+            <Button
+              variant="soft"
+              color="secondary"
+              onPress={() => {
+                form.reset();
+              }}
+            >
+              Reset
+            </Button>
             <Button type="submit">Submit</Button>
           </ActionGroup>
         </Section>
