@@ -13,7 +13,9 @@ export type TooltipLineFormatter = (
   unit?: string | number,
 ) => string;
 
-export type TooltipHeadingFormatter = (title: string) => string;
+export type TooltipHeadingFormatter = (
+  title: string | number | undefined,
+) => string;
 
 export interface WithTooltipFormatters {
   /**
