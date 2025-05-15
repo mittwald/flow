@@ -97,6 +97,17 @@ export const ListItemViewContent = (props: ListItemViewContentProps) => {
     viewMode === "tiles" ? styles.tileView : styles.listView,
   );
 
+  const header = (
+    <div className={styles.header}>
+      <div className={styles.checkboxContainer}>{checkbox}</div>
+      {avatar}
+      <div className={styles.title}>
+        {title}
+        <div className={styles.subTitle}>{subTitle}</div>
+      </div>
+    </div>
+  );
+
   if ((s || m || l) && viewMode === "list") {
     return (
       <PropsContextProvider props={propsContext} mergeInParentContext>
@@ -108,14 +119,7 @@ export const ListItemViewContent = (props: ListItemViewContentProps) => {
               l={l}
               className={clsx(styles.content, styles.columnLayout)}
             >
-              <div className={styles.header}>
-                <div className={styles.checkboxContainer}>{checkbox}</div>
-                {avatar}
-                <div className={styles.title}>
-                  {title}
-                  <div className={styles.subTitle}>{subTitle}</div>
-                </div>
-              </div>
+              {header}
               {children}
             </ColumnLayout>
             {button}
@@ -132,18 +136,22 @@ export const ListItemViewContent = (props: ListItemViewContentProps) => {
         {viewMode === "list" && (
           <>
             <div className={styles.contentWrapper}>
-              <div className={styles.content}>
-                {children}
-
-                <div className={styles.header}>
-                  <div className={styles.checkboxContainer}>{checkbox}</div>
-                  {avatar}
-                  <div className={styles.title}>
-                    {title}
-                    <div className={styles.subTitle}>{subTitle}</div>
-                  </div>
+              {s || m || l ? (
+                <ColumnLayout
+                  s={s}
+                  m={m}
+                  l={l}
+                  className={clsx(styles.content, styles.columnLayout)}
+                >
+                  {header}
+                  {children}
+                </ColumnLayout>
+              ) : (
+                <div className={styles.content}>
+                  {header}
+                  {children}
                 </div>
-              </div>
+              )}
               {button}
             </div>
             {bottom}
