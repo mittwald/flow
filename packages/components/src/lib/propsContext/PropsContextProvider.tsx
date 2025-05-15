@@ -21,12 +21,14 @@ export const PropsContextProvider: FC<Props> = (props) => {
   } = props;
 
   const parentPropsContext = useContextProps();
+  const memoizedProps = useMemo(() => providedProps, dependencies);
+
   const propsWithParentPropsContext = useMemo(
     () =>
       mergeInParentContext
         ? mergePropsContext(parentPropsContext, providedProps)
         : providedProps,
-    [dependencies, mergeInParentContext],
+    [memoizedProps, parentPropsContext, mergeInParentContext],
   );
 
   /**
