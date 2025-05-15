@@ -11,6 +11,9 @@ export class RemoteListItemViewContentElement extends FlowRemoteElement<RemoteLi
 
   static override get remoteProperties() {
     return {
+      l: {},
+      m: {},
+      s: {},
       viewMode: {},
     };
   }

@@ -115,7 +115,7 @@ export const ColumnLayout = flowComponent("ColumnLayout", (props) => {
         aria-label={ariaLabel}
         className={clsx(styles.columnLayout, elementClassName)}
       >
-        <PropsContextProvider props={propsContext}>
+        <PropsContextProvider props={propsContext} mergeInParentContext>
           {children}
         </PropsContextProvider>
       </Element>

@@ -22,7 +22,6 @@ export type ListItemViewContentProps = PropsWithChildren &
     bottom?: ReactNode;
     checkbox?: ReactNode;
     viewMode?: ListViewMode;
-    columnLayout?: boolean;
   };
 
 const getStyleForContentSlot = (slot?: string) =>
@@ -43,7 +42,9 @@ export const ListItemViewContent = (props: ListItemViewContentProps) => {
     bottom,
     checkbox,
     viewMode,
-    columnLayout,
+    s,
+    m,
+    l,
   } = props;
 
   const contentProps: Record<string, ComponentProps<"div">> = {
@@ -89,24 +90,6 @@ export const ListItemViewContent = (props: ListItemViewContentProps) => {
     Link: {
       unstyled: true,
     },
-    ColumnLayout: {
-      className: styles.columnLayout,
-      Header: {
-        className: styles.header,
-        Avatar: {
-          className: styles.avatar,
-        },
-        Heading: {
-          className: styles.heading,
-          level: 5,
-          Badge: { className: styles.badge },
-          AlertBadge: { className: styles.badge },
-        },
-        Text: {
-          className: styles.text,
-        },
-      },
-    },
   };
 
   const className = clsx(
@@ -114,12 +97,27 @@ export const ListItemViewContent = (props: ListItemViewContentProps) => {
     viewMode === "tiles" ? styles.tileView : styles.listView,
   );
 
-  if (columnLayout && viewMode === "list") {
+  if ((s || m || l) && viewMode === "list") {
     return (
       <PropsContextProvider props={propsContext} mergeInParentContext>
         <div className={className}>
           <div className={styles.contentWrapper}>
-            <div className={styles.content}>{children}</div>
+            <ColumnLayout
+              s={s}
+              m={m}
+              l={l}
+              className={clsx(styles.content, styles.columnLayout)}
+            >
+              <div className={styles.header}>
+                <div className={styles.checkboxContainer}>{checkbox}</div>
+                {avatar}
+                <div className={styles.title}>
+                  {title}
+                  <div className={styles.subTitle}>{subTitle}</div>
+                </div>
+              </div>
+              {children}
+            </ColumnLayout>
             {button}
           </div>
           {bottom}

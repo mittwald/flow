@@ -18,8 +18,6 @@ import { ProgressBar } from "@/components/ProgressBar";
 import { Label } from "@/components/Label";
 import { Initials } from "@/components/Initials";
 import { Checkbox } from "@/components/Checkbox";
-import { ColumnLayout } from "@/components/ColumnLayout";
-import { Header } from "@/components/Header";
 
 const meta: Meta<typeof List> = {
   ...defaultMeta,
@@ -276,20 +274,18 @@ export const WithColumnLayout: Story = {
         />
         <List.Item textValue={(mail) => mail.mail}>
           {(mail) => (
-            <List.ItemView>
-              <ColumnLayout l={[1, 1]} m={[2, 1]} s={[1, null]}>
-                <Header>
-                  <Avatar>
-                    <IconEmail />
-                  </Avatar>
-                  <Heading>{mail.mail}</Heading>
-                </Header>
-                <Content>
-                  <ProgressBar value={50}>
-                    <Label>Storage</Label>
-                  </ProgressBar>
-                </Content>
-              </ColumnLayout>
+            <List.ItemView l={[1, 1]} m={[2, 1]} s={[1, null]}>
+              <Avatar>
+                <IconEmail />
+              </Avatar>
+              <Heading>{mail.mail}</Heading>
+
+              <Content>
+                <ProgressBar value={50}>
+                  <Label>Storage</Label>
+                </ProgressBar>
+              </Content>
+
               <ContextMenu>
                 <MenuItem>Show details</MenuItem>
               </ContextMenu>

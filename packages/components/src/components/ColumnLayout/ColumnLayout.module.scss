@@ -38,12 +38,12 @@
     }
   }
 
-  @container (min-width:851px) {
+  @container (min-width:850px) {
     grid-template-columns: var(--column-layout--columns-l);
     @include hide("l");
   }
 
-  @container (max-width: 850px) and (min-width:551px) {
+  @container (max-width: 850px) and (min-width:550px) {
     grid-template-columns: var(--column-layout--columns-m);
     @include hide("m");
   }

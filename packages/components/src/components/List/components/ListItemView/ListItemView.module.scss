@@ -60,6 +60,9 @@
 
     .columnLayout {
       flex-grow: 1;
+      > div {
+        flex-grow: 1;
+      }
     }
 
     .contentWrapper {
