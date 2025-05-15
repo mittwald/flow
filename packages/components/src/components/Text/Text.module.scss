@@ -31,6 +31,17 @@
     padding-left: var(--text--blockquote-padding);
   }
 
+  .icon {
+    vertical-align: text-bottom;
+  }
+
+  small {
+    .icon {
+      width: var(--line-height--s);
+      height: var(--line-height--s);
+    }
+  }
+
   &:where(.align-start) {
     text-align: start;
   }

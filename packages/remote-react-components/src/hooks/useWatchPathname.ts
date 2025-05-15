@@ -15,7 +15,7 @@ export const useWatchPathname = (callback: Callback) => {
       const href = location.href;
       if (href !== storedHref.current) {
         const url = new URL(href);
-        callback(url.pathname);
+        callback(url.pathname + url.search);
         storedHref.current = href;
       }
     }, 50);

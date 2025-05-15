@@ -1,17 +1,25 @@
 import * as Recharts from "recharts";
 import type { CategoricalChartProps } from "recharts/types/chart/generateCategoricalChart";
-import {
+import React, {
   Children,
   cloneElement,
+  useEffect,
+  useRef,
+  useState,
   type FC,
   type PropsWithChildren,
   type ReactElement,
+  type SVGProps,
 } from "react";
 import { Area, type AreaProps } from "./components/Area";
 import CartesianGrid from "../CartesianGrid";
 import clsx from "clsx";
 import styles from "./AreaChart.module.scss";
 import Wrap from "../Wrap";
+
+export interface AreaChartEmptyViewProps {
+  data?: CategoricalChartProps["data"];
+}
 
 export interface AreaChartProps
   extends Pick<
@@ -20,12 +28,26 @@ export interface AreaChartProps
     >,
     PropsWithChildren {
   height?: string;
+  /** View that is provided when data is empty/undefined */
+  emptyView?: React.ComponentType<AreaChartEmptyViewProps>;
+  /**
+   * Allow the height controlling container to set flex-grow: 1. Can only be
+   * used in combination with `height`
+   */
+  flexGrow?: boolean;
 }
 
 /** @flr-generate all */
 export const AreaChart: FC<AreaChartProps> = (props) => {
-  const { children, data, className, height, ...rest } = props;
-
+  const {
+    children,
+    data,
+    className,
+    height,
+    flexGrow,
+    emptyView: EmptyView,
+    ...rest
+  } = props;
   const rootClassName = clsx(styles.areaChart, className);
 
   // render order: grid, areas without dots, other children, areas with dots
@@ -59,15 +81,61 @@ export const AreaChart: FC<AreaChartProps> = (props) => {
     }
   });
 
+  const showEmptyView = (!data || data.length === 0) && EmptyView;
+
+  const chartContainerRef = useRef<HTMLDivElement>(null);
+  const [viewDimensions, setViewDimensions] = useState<Partial<
+    SVGProps<SVGForeignObjectElement>
+  > | null>(null);
+
+  // resizing the foreignObject for the EmptyView on size changes
+  useEffect(() => {
+    if (showEmptyView) {
+      const updateDimensions = () => {
+        const svg = chartContainerRef.current?.querySelector(
+          "svg",
+        ) as SVGSVGElement | null;
+        if (!svg) return;
+
+        const clip = svg.querySelector("clipPath rect");
+        if (clip) {
+          const x = parseFloat(clip.getAttribute("x") ?? "0");
+          const y = parseFloat(clip.getAttribute("y") ?? "0");
+          const width = parseFloat(clip.getAttribute("width") ?? "0");
+          const height = parseFloat(clip.getAttribute("height") ?? "0");
+          setViewDimensions({ x, y, width, height });
+        }
+      };
+
+      updateDimensions();
+
+      const container = chartContainerRef.current;
+      const observer = new ResizeObserver(updateDimensions);
+      if (container) observer.observe(container);
+
+      return () => {
+        observer.disconnect();
+      };
+    }
+  }, []);
+
   return (
     <Wrap if={height}>
-      <div style={{ height }}>
+      <div
+        style={{ height, flex: flexGrow ? 1 : undefined }}
+        ref={chartContainerRef}
+      >
         <Recharts.ResponsiveContainer>
           <Recharts.AreaChart data={data} className={rootClassName} {...rest}>
-            {gridChildren}
+            {!showEmptyView && gridChildren}
             {areasWithoutDots}
             {otherChildren}
             {areasWithDots}
+            {showEmptyView && viewDimensions && (
+              <foreignObject {...viewDimensions}>
+                <EmptyView data={data} />
+              </foreignObject>
+            )}
           </Recharts.AreaChart>
         </Recharts.ResponsiveContainer>
       </div>

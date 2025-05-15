@@ -7,6 +7,8 @@ import {
   storyBackgroundLight,
 } from "@/lib/dev/storyBackgrounds";
 import { InlineCode } from "@/components/InlineCode";
+import { IconStar } from "../../Icon/components/icons";
+import { dummyText } from "@/lib/dev/dummyText";
 
 const meta: Meta<typeof Text> = {
   title: "Content/Text",
@@ -115,4 +117,15 @@ export const WrapBalance: Story = {
   ),
 
   parameters: { viewport: { defaultViewport: "mobile2" } },
+};
+
+export const WithIcon: Story = {
+  render: (props) => (
+    <Text {...props}>
+      <IconStar /> {dummyText.medium}
+      <small>
+        {dummyText.short} <IconStar /> {dummyText.short}
+      </small>
+    </Text>
+  ),
 };
