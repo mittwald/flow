@@ -33,12 +33,12 @@ export default () => {
 
             <Content>
               <ProgressBar size="s" value={50}>
-                <Label>Storage</Label>
+                <Label>Speicherplatz</Label>
               </ProgressBar>
             </Content>
 
             <ContextMenu>
-              <MenuItem>Show details</MenuItem>
+              <MenuItem>Details anzeigen</MenuItem>
             </ContextMenu>
           </List.ItemView>
         )}
