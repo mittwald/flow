@@ -120,6 +120,7 @@ export const ListItemViewContent = (props: ListItemViewContentProps) => {
                   m={m}
                   l={l}
                   className={clsx(styles.content, styles.columnLayout)}
+                  mergeInParentContext
                 >
                   {header}
                   {children}
