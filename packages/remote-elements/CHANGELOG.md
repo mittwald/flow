@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.186](https://github.com/mittwald/flow/compare/0.2.0-alpha.185...0.2.0-alpha.186) (2025-05-16)
+
+### Features
+
+* **List:** support column layout in list item ([#1464](https://github.com/mittwald/flow/issues/1464)) ([7c7f603](https://github.com/mittwald/flow/commit/7c7f60370aae298546947e975e8649a938f7e71e))
+
 # [0.2.0-alpha.185](https://github.com/mittwald/flow/compare/0.2.0-alpha.184...0.2.0-alpha.185) (2025-05-15)
 
 ### Features
