@@ -166,7 +166,7 @@ export const Nested: Story = {
 
 export const HiddenColumns: Story = {
   render: (props) => (
-    <ColumnLayout {...props} s={[1, null]} m={[2, 1]} l={[null, 1]}>
+    <ColumnLayout {...props} s={[1, null]} m={[2, 1]} l={[3, 1]}>
       <Text>{dummyText.long}</Text>
       <Image src={dummyText.imageSrc} alt="" />
     </ColumnLayout>

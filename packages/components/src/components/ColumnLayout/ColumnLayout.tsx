@@ -60,7 +60,7 @@ export const ColumnLayout = flowComponent("ColumnLayout", (props) => {
     ref,
   } = props;
 
-  let elementClassName = "";
+  let elementClassName = styles.columnLayout;
 
   s?.map((v, i) => {
     if (v === null) {
@@ -105,7 +105,7 @@ export const ColumnLayout = flowComponent("ColumnLayout", (props) => {
       <Element
         ref={ref as never}
         aria-label={ariaLabel}
-        className={clsx(styles.columnLayout, elementClassName)}
+        className={elementClassName}
       >
         <PropsContextProvider props={propsContext} mergeInParentContext>
           {children}
