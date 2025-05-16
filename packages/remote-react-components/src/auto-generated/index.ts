@@ -77,6 +77,7 @@ export * from "./Notification";
 export * from "./NumberField";
 export * from "./Option";
 export * from "./OverlayContent";
+export * from "./PasswordCreationField";
 export * from "./PopoverContent";
 export * from "./ProgressBar";
 export * from "./Radio";

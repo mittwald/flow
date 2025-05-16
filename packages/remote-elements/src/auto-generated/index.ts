@@ -77,6 +77,7 @@ export * from "./RemoteNotificationElement";
 export * from "./RemoteNumberFieldElement";
 export * from "./RemoteOptionElement";
 export * from "./RemoteOverlayContentElement";
+export * from "./RemotePasswordCreationFieldElement";
 export * from "./RemotePopoverContentElement";
 export * from "./RemoteProgressBarElement";
 export * from "./RemoteRadioElement";
