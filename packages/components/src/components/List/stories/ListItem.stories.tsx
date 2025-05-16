@@ -259,3 +259,40 @@ export const WithCheckbox: Story = {
     );
   },
 };
+
+export const WithColumnLayout: Story = {
+  render: () => {
+    const List = typedList<{ mail: string }>();
+
+    return (
+      <List.List>
+        <List.StaticData
+          data={[
+            { mail: "john@doe.de" },
+            { mail: "johnWithAVeryVeryLongEmailAddress@doe.de" },
+          ]}
+        />
+        <List.Item textValue={(mail) => mail.mail}>
+          {(mail) => (
+            <List.ItemView l={[1, 1]} m={[2, 1]} s={[1, null]}>
+              <Avatar>
+                <IconEmail />
+              </Avatar>
+              <Heading>{mail.mail}</Heading>
+
+              <Content>
+                <ProgressBar value={50}>
+                  <Label>Storage</Label>
+                </ProgressBar>
+              </Content>
+
+              <ContextMenu>
+                <MenuItem>Show details</MenuItem>
+              </ContextMenu>
+            </List.ItemView>
+          )}
+        </List.Item>
+      </List.List>
+    );
+  },
+};

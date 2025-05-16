@@ -8,16 +8,21 @@ import {
 } from "@/lib/propsContext";
 import type { ListViewMode } from "@/components/List/model/types";
 import clsx from "clsx";
+import {
+  ColumnLayout,
+  type ColumnLayoutProps,
+} from "@/components/ColumnLayout";
 
-export type ListItemViewContentProps = PropsWithChildren & {
-  title?: ReactNode;
-  subTitle?: ReactNode;
-  avatar?: ReactNode;
-  button?: ReactNode;
-  bottom?: ReactNode;
-  checkbox?: ReactNode;
-  viewMode?: ListViewMode;
-};
+export type ListItemViewContentProps = PropsWithChildren &
+  Pick<ColumnLayoutProps, "s" | "m" | "l"> & {
+    title?: ReactNode;
+    subTitle?: ReactNode;
+    avatar?: ReactNode;
+    button?: ReactNode;
+    bottom?: ReactNode;
+    checkbox?: ReactNode;
+    viewMode?: ListViewMode;
+  };
 
 const getStyleForContentSlot = (slot?: string) =>
   slot === "top"
@@ -37,6 +42,9 @@ export const ListItemViewContent = (props: ListItemViewContentProps) => {
     bottom,
     checkbox,
     viewMode,
+    s,
+    m,
+    l,
   } = props;
 
   const contentProps: Record<string, ComponentProps<"div">> = {
@@ -89,23 +97,39 @@ export const ListItemViewContent = (props: ListItemViewContentProps) => {
     viewMode === "tiles" ? styles.tileView : styles.listView,
   );
 
+  const header = (
+    <div className={styles.header}>
+      <div className={styles.checkboxContainer}>{checkbox}</div>
+      {avatar}
+      <div className={styles.title}>
+        {title}
+        <div className={styles.subTitle}>{subTitle}</div>
+      </div>
+    </div>
+  );
+
   return (
     <PropsContextProvider props={propsContext} mergeInParentContext>
       <div className={className}>
         {viewMode === "list" && (
           <>
             <div className={styles.contentWrapper}>
-              <div className={styles.content}>
-                {children}
-                <div className={styles.header}>
-                  <div className={styles.checkboxContainer}>{checkbox}</div>
-                  {avatar}
-                  <div className={styles.title}>
-                    {title}
-                    <div className={styles.subTitle}>{subTitle}</div>
-                  </div>
+              {s || m || l ? (
+                <ColumnLayout
+                  s={s}
+                  m={m}
+                  l={l}
+                  className={clsx(styles.content, styles.columnLayout)}
+                >
+                  {header}
+                  {children}
+                </ColumnLayout>
+              ) : (
+                <div className={styles.content}>
+                  {header}
+                  {children}
                 </div>
-              </div>
+              )}
               {button}
             </div>
             {bottom}
