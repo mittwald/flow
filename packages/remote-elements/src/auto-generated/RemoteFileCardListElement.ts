@@ -97,6 +97,7 @@ export class RemoteFileCardListElement extends FlowRemoteElement<RemoteFileCardL
       l: {},
       lang: {},
       m: {},
+      mergeInParentContext: {},
       nonce: {},
       popover: {},
       popoverTarget: {},
