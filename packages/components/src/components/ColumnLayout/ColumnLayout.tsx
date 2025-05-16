@@ -39,6 +39,8 @@ export interface ColumnLayoutProps<
   rowGap?: GapSize;
   /** Size of the column gap between the content blocks inside the column layout. */
   columnGap?: GapSize;
+  /* @internal */
+  mergeInParentContext?: boolean;
 }
 
 /**
@@ -58,6 +60,7 @@ export const ColumnLayout = flowComponent("ColumnLayout", (props) => {
     elementType = "div",
     "aria-label": ariaLabel,
     ref,
+    mergeInParentContext,
   } = props;
 
   let elementClassName = styles.columnLayout;
@@ -107,7 +110,10 @@ export const ColumnLayout = flowComponent("ColumnLayout", (props) => {
         aria-label={ariaLabel}
         className={elementClassName}
       >
-        <PropsContextProvider props={propsContext} mergeInParentContext>
+        <PropsContextProvider
+          props={propsContext}
+          mergeInParentContext={mergeInParentContext}
+        >
           {children}
         </PropsContextProvider>
       </Element>
