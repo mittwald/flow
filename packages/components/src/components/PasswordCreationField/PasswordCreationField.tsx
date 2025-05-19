@@ -29,7 +29,7 @@ import getStatusTextFromPolicyValidationResult from "@/components/PasswordCreati
 import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 import generateValidationTranslation from "@/components/PasswordCreationField/lib/generateValidationTranslation";
-import { RuleType, SequenceType } from "@mittwald/password-tools-js/rules";
+import { RuleType } from "@mittwald/password-tools-js/rules";
 import { FieldError } from "@/components/FieldError";
 import FieldDescription from "@/components/FieldDescription";
 import ComplexityIndicator from "@/components/PasswordCreationField/components/ComplexityIndicator/ComplexityIndicator";
@@ -45,20 +45,8 @@ export const defaultPasswordCreationPolicy = Policy.fromDeclaration({
   minComplexity: 3,
   rules: [
     {
-      ruleType: RuleType.sequence,
-      sequences: [SequenceType.repeat],
-      maxLength: 2,
-    },
-    {
       ruleType: RuleType.length,
-      min: 8,
-      max: 12,
-    },
-    {
-      ruleType: RuleType.regex,
-      pattern: "aa",
-      min: 1,
-      max: 2,
+      min: 12,
     },
     {
       ruleType: RuleType.hibp,
@@ -67,20 +55,11 @@ export const defaultPasswordCreationPolicy = Policy.fromDeclaration({
       identifier: "special",
       ruleType: RuleType.charPool,
       charPools: ["special"],
-      min: 1,
-      max: 2,
     },
     {
       identifier: "numbers",
       ruleType: RuleType.charPool,
       charPools: ["numbers"],
-      min: 1,
-      max: 2,
-    },
-    {
-      ruleType: RuleType.blocklist,
-      blocklist: ["foo", "bar"],
-      substringMatch: true,
     },
   ],
 });
