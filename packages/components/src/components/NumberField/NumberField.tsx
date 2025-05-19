@@ -1,5 +1,4 @@
 import type { PropsWithChildren } from "react";
-import React from "react";
 import * as Aria from "react-aria-components";
 import formFieldStyles from "../FormField/FormField.module.scss";
 import styles from "./NumberField.module.scss";
@@ -17,6 +16,7 @@ import {
 } from "@/components/Icon/components/icons";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import { ReactAriaControlledValueFix } from "@/lib/react/ReactAriaControlledValueFix";
 
 export interface NumberFieldProps
   extends PropsWithChildren<Omit<Aria.NumberFieldProps, "children">>,
@@ -27,7 +27,14 @@ export interface NumberFieldProps
  * @flr-clear-props-context
  */
 export const NumberField = flowComponent("NumberField", (props) => {
-  const { children, className, ref, isWheelDisabled = true, ...rest } = props;
+  const {
+    children,
+    className,
+    ref,
+    defaultValue,
+    isWheelDisabled = true,
+    ...rest
+  } = props;
 
   const rootClassName = clsx(formFieldStyles.formField, className);
 
@@ -62,7 +69,16 @@ export const NumberField = flowComponent("NumberField", (props) => {
             <IconChevronDown />
             <IconMinus className={styles.coarsePointerIcon} />
           </Button>
-          <Aria.Input className={styles.input} ref={ref} />
+          <ReactAriaControlledValueFix
+            inputContext={Aria.InputContext}
+            props={props}
+          >
+            <Aria.Input
+              className={styles.input}
+              ref={ref}
+              defaultValue={defaultValue}
+            />
+          </ReactAriaControlledValueFix>
           <Button
             ariaSlot="increment"
             className={styles.incrementButton}

@@ -3,103 +3,104 @@ import type { PropsContext } from "@/lib/propsContext";
 import { dynamic, PropsContextProvider } from "@/lib/propsContext";
 import FieldErrorView from "@/views/FieldErrorView";
 import type { PropsWithChildren } from "react";
-import type {
-  ControllerProps,
-  FieldValues,
-  UseFormReturn,
+import {
+  useController,
+  type ControllerProps,
+  type FieldValues,
+  type UseFormReturn,
 } from "react-hook-form";
-import { Controller } from "react-hook-form";
 
 export interface FieldProps<T extends FieldValues>
-  extends Omit<ControllerProps<T>, "render">,
+  extends Omit<ControllerProps<T>, "render" | "control">,
     PropsWithChildren {}
 
 export function Field<T extends FieldValues>(props: FieldProps<T>) {
-  const { children, control, ...rest } = props;
+  const { children, name, defaultValue, ...rest } = props;
 
   const formContext = useFormContext<T>();
-  const controlFromContext = formContext.form?.control;
+  const form = formContext.form;
+
+  const uncontrolledField = {
+    field: form.register(name),
+    fieldState: form.getFieldState(name),
+  };
+  const controlledField = useController(props);
+
+  const buildFieldProps = (
+    field: typeof uncontrolledField | typeof controlledField,
+  ) => ({
+    ...field.field,
+    defaultValue,
+    name,
+    form: formContext.id,
+    isRequired: !!rest.rules?.required,
+    validationBehavior: "aria" as const,
+    isInvalid: field.fieldState.invalid,
+    onChange: (value: unknown) => {
+      field.field.onChange({
+        target: {
+          value,
+        },
+      });
+    },
+    children: dynamic((p) => (
+      <>
+        {p.children}
+        <FieldErrorView>{field.fieldState.error?.message}</FieldErrorView>
+      </>
+    )),
+  });
+
+  const uncontrolledProps = buildFieldProps(uncontrolledField);
+  const controlledProps = buildFieldProps(controlledField);
+  const controlledValue = controlledField.field.value;
+
+  const propsContext: PropsContext = {
+    SearchField: uncontrolledProps,
+    TextField: uncontrolledProps,
+    TextArea: uncontrolledProps,
+
+    Checkbox: {
+      ...controlledProps,
+      isSelected: controlledValue,
+    },
+    CheckboxGroup: controlledProps,
+    CheckboxButton: {
+      ...controlledProps,
+      isSelected: controlledValue,
+    },
+    FileField: controlledProps,
+    NumberField: controlledProps,
+    RadioGroup: controlledProps,
+    Switch: {
+      ...controlledProps,
+      isSelected: controlledValue,
+    },
+    Select: {
+      ...controlledProps,
+      selectedKey: controlledValue,
+    },
+    Slider: controlledProps,
+    DatePicker: controlledProps,
+    DateRangePicker: controlledProps,
+    TimeField: controlledProps,
+    SegmentedControl: controlledProps,
+    ComboBox: {
+      ...controlledProps,
+      defaultInputValue: controlledValue,
+    },
+  };
 
   return (
-    <Controller
-      {...rest}
-      control={control ?? controlFromContext}
-      render={(renderProps) => {
-        const {
-          field,
-          fieldState: { error, invalid },
-        } = renderProps;
-
-        const formControlProps = {
-          ...field,
-          form: formContext.id,
-          isRequired: !!rest.rules?.required,
-          isInvalid: invalid,
-          validationBehavior: "aria" as const,
-          children: dynamic((p) => (
-            <>
-              {p.children}
-              <FieldErrorView>{error?.message}</FieldErrorView>
-            </>
-          )),
-        };
-
-        const uncontrolledFormControlProps = {
-          ...formControlProps,
-          value: undefined,
-          defaultValue: field.value,
-        };
-
-        const propsContext: PropsContext = {
-          // uncontrolled fields – see https://github.com/mittwald/flow/issues/1341
-          SearchField: uncontrolledFormControlProps,
-          TextField: uncontrolledFormControlProps,
-          TextArea: uncontrolledFormControlProps,
-
-          Checkbox: {
-            ...formControlProps,
-            isSelected: formControlProps.value,
-          },
-          CheckboxGroup: formControlProps,
-          CheckboxButton: {
-            ...formControlProps,
-            isSelected: formControlProps.value,
-          },
-          FileField: formControlProps,
-          NumberField: formControlProps,
-          RadioGroup: formControlProps,
-          Switch: {
-            ...formControlProps,
-            isSelected: formControlProps.value,
-          },
-          Select: {
-            ...formControlProps,
-            selectedKey: formControlProps.value,
-          },
-          Slider: formControlProps,
-          DatePicker: formControlProps,
-          DateRangePicker: formControlProps,
-          TimeField: formControlProps,
-          SegmentedControl: formControlProps,
-          ComboBox: {
-            ...formControlProps,
-            defaultInputValue: formControlProps.value,
-          },
-        };
-
-        return (
-          <PropsContextProvider
-            props={propsContext}
-            dependencies={[renderProps]}
-          >
-            {children}
-          </PropsContextProvider>
-        );
-      }}
-    />
+    <PropsContextProvider
+      props={propsContext}
+      dependencies={[controlledField.fieldState, uncontrolledField.fieldState]}
+    >
+      {children}
+    </PropsContextProvider>
   );
 }
 
 export const typedField = <T extends FieldValues>(
-  ignoredForm: UseFormReturn<T>,
+  ignoredForm: UseFormReturn<T> | UseFormReturn<T>["control"],
 ): typeof Field<T> => Field;
