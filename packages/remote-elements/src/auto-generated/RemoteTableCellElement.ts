@@ -14,6 +14,7 @@ export class RemoteTableCellElement extends FlowRemoteElement<RemoteTableCellEle
       className: {},
       colSpan: {},
       horizontalAlign: {},
+      id: {},
       rowHeader: {},
       textValue: {},
     };

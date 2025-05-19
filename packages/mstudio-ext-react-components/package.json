@@ -29,21 +29,21 @@
   },
   "devDependencies": {
     "@mittwald/typescript-config": "workspace:*",
-    "@types/node": "^22.13.10",
-    "nx": "^20.5.0",
+    "@types/node": "^22.15.19",
+    "nx": "^20.8.2",
     "prettier": "^3.5.3",
-    "react": "^19",
+    "react": "^19.1.0",
     "rimraf": "^6.0.1",
     "rollup-plugin-auto-named-exports": "1.0.0-beta.3",
     "rollup-preserve-directives": "^1.1.3",
-    "typescript": "^5.8.2",
-    "vite": "^6.2.1",
-    "vite-plugin-banner": "^0.8.0",
-    "vite-plugin-checker": "^0.9.0",
-    "vite-plugin-dts": "^4.5.3",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5",
+    "vite-plugin-banner": "^0.8.1",
+    "vite-plugin-checker": "^0.9.3",
+    "vite-plugin-dts": "^4.5.4",
     "vite-plugin-externalize-deps": "^0.9.0"
   },
   "peerDependencies": {
-    "react": "^19"
+    "react": "^19.1.0"
   }
 }
