@@ -349,9 +349,6 @@ importers:
       '@internationalized/string-compiler':
         specifier: ^3.2.6
         version: 3.2.6
-      '@koale/useworker':
-        specifier: ^4.1.2
-        version: 4.1.2(react@19.1.0)
       '@mittwald/react-tunnel':
         specifier: workspace:*
         version: link:../react-tunnel
@@ -2242,11 +2239,6 @@ packages:
     engines: {node: '>=10.0'}
     peerDependencies:
       tslib: '2'
-
-  '@koale/useworker@4.1.2':
-    resolution: {integrity: sha512-rVS9qs5prEBBw1YnvBlIN/jc1MLbchtv54mI1OGH8rQrE1jYfXg2+1p+4O5vFcU96cy2dafosnwZw8HXDpY//w==}
-    peerDependencies:
-      react: ^19.1.0
 
   '@lerna-lite/cli@3.12.1':
     resolution: {integrity: sha512-bP082C2Tno3FSLy1zGyi8h98mlDvmek5CadubIXw+BTkS6O5ptYUXCGU0WtuG/ub6aaJI1ZsACEIVi2rFqHL5A==}
@@ -10528,11 +10520,6 @@ snapshots:
   '@jsonjoy.com/util@1.5.0(tslib@2.8.1)':
     dependencies:
       tslib: 2.8.1
-
-  '@koale/useworker@4.1.2(react@19.1.0)':
-    dependencies:
-      dequal: 2.0.3
-      react: 19.1.0
 
   '@lerna-lite/cli@3.12.1(@lerna-lite/publish@3.12.2(@types/node@22.13.10)(babel-plugin-macros@3.1.0)(typescript@5.8.2))(@lerna-lite/version@3.12.2(@lerna-lite/publish@3.12.2(@types/node@22.13.10)(babel-plugin-macros@3.1.0)(typescript@5.8.2))(@types/node@22.13.10)(babel-plugin-macros@3.1.0)(typescript@5.8.2))(@types/node@22.13.10)(babel-plugin-macros@3.1.0)(typescript@5.8.2)':
     dependencies:
