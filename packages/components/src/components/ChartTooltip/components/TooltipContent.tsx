@@ -35,7 +35,9 @@ export const TooltipContent = (props: TooltipContentProps) => {
         <PopoverTip className={styles.tip} />
         <div className={popoverStyles.content}>
           <Heading level={3}>
-            {headingFormatter ? headingFormatter(label) : label}
+            {headingFormatter && typeof label === "string"
+              ? headingFormatter(label)
+              : label}
           </Heading>
           {payload
             .filter((i) => i.fill !== "none")

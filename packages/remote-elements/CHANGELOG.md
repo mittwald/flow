@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.187](https://github.com/mittwald/flow/compare/0.2.0-alpha.186...0.2.0-alpha.187) (2025-05-16)
+
+### Bug Fixes
+
+* **ColumnLayout:** add mergeInParentContext prop ([#1466](https://github.com/mittwald/flow/issues/1466)) ([702e9a3](https://github.com/mittwald/flow/commit/702e9a35d7266a3d79ffb4a14f9194cfe5f44084))
+
+# [0.2.0-alpha.186](https://github.com/mittwald/flow/compare/0.2.0-alpha.185...0.2.0-alpha.186) (2025-05-16)
+
+### Features
+
+* **List:** support column layout in list item ([#1464](https://github.com/mittwald/flow/issues/1464)) ([7c7f603](https://github.com/mittwald/flow/commit/7c7f60370aae298546947e975e8649a938f7e71e))
+
 # [0.2.0-alpha.185](https://github.com/mittwald/flow/compare/0.2.0-alpha.184...0.2.0-alpha.185) (2025-05-15)
 
 ### Features

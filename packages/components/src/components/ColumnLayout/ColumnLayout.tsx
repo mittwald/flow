@@ -23,11 +23,11 @@ export interface ColumnLayoutProps<
     PropsWithClassName,
     FlowComponentProps<HTMLElementTagNameMap[T]> {
   /** Column layout for container size s. */
-  s?: number[];
+  s?: (number | null)[];
   /** Column layout for container size m. */
-  m?: number[];
+  m?: (number | null)[];
   /** Column layout for container size l. */
-  l?: number[];
+  l?: (number | null)[];
   /**
    * Size of the row and column gap between the content blocks inside the column
    * layout.
@@ -39,6 +39,8 @@ export interface ColumnLayoutProps<
   rowGap?: GapSize;
   /** Size of the column gap between the content blocks inside the column layout. */
   columnGap?: GapSize;
+  /* @internal */
+  mergeInParentContext?: boolean;
 }
 
 /**
@@ -58,7 +60,26 @@ export const ColumnLayout = flowComponent("ColumnLayout", (props) => {
     elementType = "div",
     "aria-label": ariaLabel,
     ref,
+    mergeInParentContext,
   } = props;
+
+  let elementClassName = styles.columnLayout;
+
+  s?.map((v, i) => {
+    if (v === null) {
+      elementClassName = clsx(elementClassName, styles[`hide-s-${i + 1}`]);
+    }
+  });
+  m?.map((v, i) => {
+    if (v === null) {
+      elementClassName = clsx(elementClassName, styles[`hide-m-${i + 1}`]);
+    }
+  });
+  l?.map((v, i) => {
+    if (v === null) {
+      elementClassName = clsx(elementClassName, styles[`hide-l-${i + 1}`]);
+    }
+  });
 
   const columnsS = s ? getColumns(s) : "1fr";
   const columnsM = m ? getColumns(m) : s ? columnsS : "1fr 1fr";
@@ -87,9 +108,12 @@ export const ColumnLayout = flowComponent("ColumnLayout", (props) => {
       <Element
         ref={ref as never}
         aria-label={ariaLabel}
-        className={styles.columnLayout}
+        className={elementClassName}
       >
-        <PropsContextProvider props={propsContext}>
+        <PropsContextProvider
+          props={propsContext}
+          mergeInParentContext={mergeInParentContext}
+        >
           {children}
         </PropsContextProvider>
       </Element>
