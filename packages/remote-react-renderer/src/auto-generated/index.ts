@@ -78,6 +78,7 @@ import { Notification as Notification } from "@mittwald/flow-react-components";
 import { NumberField as NumberField } from "@mittwald/flow-react-components";
 import { Option as Option } from "@mittwald/flow-react-components";
 import { OverlayContent as OverlayContent } from "@mittwald/flow-react-components";
+import { PasswordCreationField as PasswordCreationField } from "@mittwald/flow-react-components";
 import { PopoverContent as PopoverContent } from "@mittwald/flow-react-components";
 import { ProgressBar as ProgressBar } from "@mittwald/flow-react-components";
 import { Radio as Radio } from "@mittwald/flow-react-components";
@@ -110,6 +111,7 @@ import { TextField as TextField } from "@mittwald/flow-react-components";
 import { TimeField as TimeField } from "@mittwald/flow-react-components";
 import { Tooltip as Tooltip } from "@mittwald/flow-react-components";
 import { TooltipTrigger as TooltipTrigger } from "@mittwald/flow-react-components";
+import { TunnelEntry as TunnelEntry } from "@mittwald/flow-react-components";
 import { XAxis as XAxis } from "@mittwald/flow-react-components";
 import { YAxis as YAxis } from "@mittwald/flow-react-components";
 
@@ -317,6 +319,10 @@ export const flowComponents = {
     "OverlayContent",
     OverlayContent,
   ),
+  "flr-password-creation-field": createFlowRemoteComponentRenderer(
+    "PasswordCreationField",
+    PasswordCreationField,
+  ),
   "flr-popover-content": createFlowRemoteComponentRenderer(
     "PopoverContent",
     PopoverContent,
@@ -381,6 +387,10 @@ export const flowComponents = {
   "flr-tooltip-trigger": createFlowRemoteComponentRenderer(
     "TooltipTrigger",
     TooltipTrigger,
+  ),
+  "flr-tunnel-entry": createFlowRemoteComponentRenderer(
+    "TunnelEntry",
+    TunnelEntry,
   ),
   "flr-x-axis": createFlowRemoteComponentRenderer("XAxis", XAxis),
   "flr-y-axis": createFlowRemoteComponentRenderer("YAxis", YAxis),
