@@ -1,10 +1,14 @@
 # Playground
 
+Verwende `<Heading />`, um eine Überschrift darzustellen.
+
 <LiveCodeEditor />
 
 ---
 
 # Level
+
+Über das Property `level` kann die Hierarchie der Überschrift angepasst werden. Standardmäßig wird eine Heading mit dem Level `H2` erzeugt. Die Seite sollte eine sinnvolle Struktur mit verschiedenen Ebenen aufweisen.
 
 <LiveCodeEditor example="levels" editorCollapsed />
 
@@ -12,30 +16,46 @@
 
 # Size
 
-Über das Property `size` kann die schriftgröße einer Heading angepasst werden
+Über das Property `size` kann die Schriftgröße einer Heading manuell angepasst werden. Die Überschriften sollten dabei eine visuelle Hierarchie beibehalten.
 
 <LiveCodeEditor example="size" editorCollapsed />
 
 ---
 
-# Mit Icon
+# Color
 
-<LiveCodeEditor example="icon" editorCollapsed />
+Die Heading wird standardmäßig mit der Primärfarbe `primary` dargestellt.
 
----
+## Color Light und Dark
 
-# Color Light und Dark
-
-## Dark
+Zusätzlich zur Standardfarbe kann die Heading in den Varianten Light und Dark dargestellt werden. Diese Farbvarianten eignen sich, wenn die Standardfarbe auf farbigen oder dekorativen Hintergründen nicht gut funktioniert.
 
 <LiveCodeEditor example="dark" bgColor="light" editorCollapsed />
 
-## Light
-
 <LiveCodeEditor example="light" bgColor="dark" editorCollapsed />
+
+**Light:** Verwende die Light-Variante bei dunklen Hintergründen mit einem HSL-Lightness-Wert unter 50.
+
+**Dark:** Verwende die Dark-Variante bei hellen, farbigen Hintergründen mit einem HSL-Lightness-Wert über 50.
 
 ---
 
-# Mit Contextual Help
+# Kombiniere mit... 
+
+## Icon
+
+Verwende `<Icon />`, um die Überschrift mit einem dekorativen Icon zu unterstützen.
+
+<LiveCodeEditor example="icon" editorCollapsed />
+
+## Contextual Help
+
+Verwende `<ContextualHelp />`, um Usern zusätzliche Hilfestellungen zu geben (z. B. bei Fachbegriffen).
 
 <LiveCodeEditor example="contextualHelp" editorCollapsed />
+
+## Badge
+
+Verwende <Badge />, um wichtige Metainformationen zu einem Abschnitt hervorzuheben.
+
+<LiveCodeEditor example="badge" editorCollapsed />
