@@ -20,7 +20,7 @@ export default mergeConfig(
     test: {
       globals: true,
       globalSetup: "./dev/vitest/setupGlobal.ts",
-      setupFiles: ["@vitest/web-worker", "./dev/vitest/setupFiles.ts"],
+      setupFiles: ["./dev/vitest/setupFiles.ts"],
       environmentMatchGlobs: [
         ["dev/**", "node"],
         ["src/**", "happy-dom"],
