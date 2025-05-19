@@ -176,12 +176,15 @@ describe("Text field", () => {
     expect(screen.getByDisplayValue("default-value")).toBeInTheDocument();
   });
 
-  test("is not controlled by default", async () => {
+  test("updates its value (by ref) event if not controlled", async () => {
     const user = userEvent.setup();
     render(<TestForm />);
     const field = screen.getByLabelText("testUncontrolled");
     await user.type(field, "new name");
-    expect(screen.getByDisplayValue("new name")).toBeInTheDocument();
+    expect(screen.getByDisplayValue("NEW NAME")).toBeInTheDocument();
+    expect(screen.getByDisplayValue("NEW NAME").hasAttribute("value")).toBe(
+      false,
+    );
   });
 
   test("can be used as controlled input", async () => {
@@ -190,5 +193,32 @@ describe("Text field", () => {
     const field = screen.getByLabelText("testControlled");
     await user.type(field, "new name");
     expect(screen.getByDisplayValue("NEW NAME")).toBeInTheDocument();
+    expect(screen.getByDisplayValue("NEW NAME").getAttribute("value")).toBe(
+      "NEW NAME",
+    );
+  });
+
+  test("shows validation error", async () => {
+    const TestForm = () => {
+      const form = useForm();
+      const Field = typedField(form);
+      return (
+        <Form onSubmit={handleSubmit} form={form}>
+          <Field name="test" rules={{ required: "Is required!" }}>
+            <TextField aria-label="Test field" />
+          </Field>
+          <Button type="submit">Submit</Button>
+        </Form>
+      );
+    };
+
+    render(<TestForm />);
+    await act(() => fireEvent.submit(screen.getByText("Submit")));
+
+    screen.getByText("Is required!");
+    expect(screen.getByLabelText("Test field")).toHaveAttribute(
+      "aria-invalid",
+      "true",
+    );
   });
 });
