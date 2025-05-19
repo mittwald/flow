@@ -13,6 +13,10 @@ self.onmessage = async (e) => {
       self.postMessage([action, await generator.generatePassword()]);
     }
   } catch (error) {
-    self.postMessage(["error", error.message]);
+    if (error instanceof Error) {
+      self.postMessage(["error", error.message]);
+    } else {
+      self.postMessage(["error", error]);
+    }
   }
 };

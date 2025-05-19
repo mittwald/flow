@@ -29,7 +29,7 @@ import getStatusTextFromPolicyValidationResult from "@/components/PasswordCreati
 import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 import generateValidationTranslation from "@/components/PasswordCreationField/lib/generateValidationTranslation";
-import { RuleType } from "@mittwald/password-tools-js/rules";
+import { RuleType, SequenceType } from "@mittwald/password-tools-js/rules";
 import { FieldError } from "@/components/FieldError";
 import FieldDescription from "@/components/FieldDescription";
 import ComplexityIndicator from "@/components/PasswordCreationField/components/ComplexityIndicator/ComplexityIndicator";
@@ -37,7 +37,7 @@ import { type PolicyValidationResult } from "@mittwald/password-tools-js/policy"
 import { type RuleValidationResult } from "@mittwald/password-tools-js/rules";
 import { useDebounceValue } from "usehooks-ts";
 import { PromiseQueue } from "@/components/PasswordCreationField/lib/promiseQueue";
-import { generatePassword } from "@/components/PasswordCreationField/worker/generatePassword";
+import { useGeneratePassword } from "@/components/PasswordCreationField/worker/useGeneratePassword";
 
 const validationDebounceMilliseconds = 200;
 
@@ -45,8 +45,20 @@ export const defaultPasswordCreationPolicy = Policy.fromDeclaration({
   minComplexity: 3,
   rules: [
     {
+      ruleType: RuleType.sequence,
+      sequences: [SequenceType.repeat],
+      maxLength: 2,
+    },
+    {
       ruleType: RuleType.length,
-      min: 12,
+      min: 8,
+      max: 12,
+    },
+    {
+      ruleType: RuleType.regex,
+      pattern: "aa",
+      min: 1,
+      max: 2,
     },
     {
       ruleType: RuleType.hibp,
@@ -55,11 +67,20 @@ export const defaultPasswordCreationPolicy = Policy.fromDeclaration({
       identifier: "special",
       ruleType: RuleType.charPool,
       charPools: ["special"],
+      min: 1,
+      max: 2,
     },
     {
       identifier: "numbers",
       ruleType: RuleType.charPool,
       charPools: ["numbers"],
+      min: 1,
+      max: 2,
+    },
+    {
+      ruleType: RuleType.blocklist,
+      blocklist: ["foo", "bar"],
+      substringMatch: true,
     },
   ],
 });
@@ -124,6 +145,7 @@ export const PasswordCreationField = flowComponent(
 
     const [isPasswordRevealed, setIsPasswordRevealed] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const generatePassword = useGeneratePassword(validationPolicy);
 
     const initialRuleResult = useRef<RuleValidationResult[] | undefined>(
       undefined,
@@ -221,7 +243,7 @@ export const PasswordCreationField = flowComponent(
     };
 
     const onPasswordGenerateHandler: ActionFn = async () => {
-      const generatedPassword = await generatePassword(validationPolicy);
+      const generatedPassword = await generatePassword();
       setOptimisticPolicyValidationResult();
       setIsPasswordRevealed(true);
       onChangeValueHandler(generatedPassword);
