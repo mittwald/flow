@@ -1,6 +1,5 @@
 import React, {
   type PropsWithChildren,
-  startTransition,
   useEffect,
   useState,
   useRef,
@@ -20,8 +19,8 @@ import * as Aria from "react-aria-components";
 import formFieldStyles from "@/components/FormField/FormField.module.scss";
 import clsx from "clsx";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
+import type { ComplexityScore } from "@mittwald/password-tools-js/policy";
 import { Policy } from "@mittwald/password-tools-js/policy";
-import { Generator } from "@mittwald/password-tools-js/generator";
 import Button from "@/components/Button";
 import { Action, type ActionFn } from "@/components/Action";
 import FieldLabel from "@/components/PasswordCreationField/components/FieldLabel/FieldLabel";
@@ -33,11 +32,12 @@ import generateValidationTranslation from "@/components/PasswordCreationField/li
 import { RuleType } from "@mittwald/password-tools-js/rules";
 import { FieldError } from "@/components/FieldError";
 import FieldDescription from "@/components/FieldDescription";
-import PromiseQueue from "p-queue";
 import ComplexityIndicator from "@/components/PasswordCreationField/components/ComplexityIndicator/ComplexityIndicator";
 import { type PolicyValidationResult } from "@mittwald/password-tools-js/policy";
 import { type RuleValidationResult } from "@mittwald/password-tools-js/rules";
 import { useDebounceValue } from "usehooks-ts";
+import { PromiseQueue } from "@/components/PasswordCreationField/lib/promiseQueue";
+import { generatePassword } from "@/components/PasswordCreationField/worker/generatePassword";
 
 const validationDebounceMilliseconds = 200;
 
@@ -103,10 +103,7 @@ export const PasswordCreationField = flowComponent(
     } = props;
 
     const translate = useLocalizedStringFormatter(locales);
-
-    const promiseQueue = useRef(
-      new PromiseQueue({ autoStart: true, concurrency: 1 }),
-    ).current;
+    const promiseQueue = useRef(new PromiseQueue({ autoStart: true })).current;
 
     const valueControlType = useRef<"controlled" | "uncontrolled">(
       valueFromProps === undefined ? "uncontrolled" : "controlled",
@@ -128,6 +125,9 @@ export const PasswordCreationField = flowComponent(
     const [isPasswordRevealed, setIsPasswordRevealed] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
+    const initialRuleResult = useRef<RuleValidationResult[] | undefined>(
+      undefined,
+    );
     const initialValidationState: ResolvedPolicyValidationResult = {
       isEmptyValueValidation: true,
       isValid: false,
@@ -136,7 +136,7 @@ export const PasswordCreationField = flowComponent(
         actual: 4,
         warning: null,
       },
-      ruleResults: [],
+      ruleResults: initialRuleResult.current ?? [],
     };
 
     const [policyValidationResult, setPolicyValidationResult] = useState(
@@ -163,42 +163,42 @@ export const PasswordCreationField = flowComponent(
 
     useEffect(() => {
       setIsLoading(true);
-      void promiseQueue.add(async () => {
-        const validationResult = validationPolicy.validate(bouncedValue);
-        return Promise.all([
-          validationResult.isValid,
-          validationResult.complexity,
-          ...validationResult.ruleResults,
-        ]);
-      });
-    }, [bouncedValue, validationPolicy]);
-
-    promiseQueue.on("completed", ([isValid, complexity, ...ruleResults]) => {
-      if (promiseQueue.size === 0) {
-        startTransition(() => {
+      void promiseQueue
+        .add(async () => {
+          const validationResult = validationPolicy.validate(bouncedValue);
+          return Promise.all([
+            Promise.resolve(bouncedValue),
+            validationResult.isValid,
+            validationResult.complexity,
+            ...validationResult.ruleResults,
+          ]);
+        })
+        .then(([validatedValue, isValid, complexity, ...ruleResults]) => {
           setIsLoading(false);
-          setPolicyValidationResult(() => {
-            if (!value) {
+
+          if (!validatedValue) {
+            if (!initialRuleResult.current) {
+              initialRuleResult.current = ruleResults;
+            }
+            setPolicyValidationResult({
               // on empty values assume the state as valid but keep the single rule validations
               // to show the result in the info box without showing a complete failed validation
-              return {
-                ...initialValidationState,
-                ruleResults,
-              };
-            }
-
-            return {
-              isEmptyValueValidation: false,
-              isValid,
-              complexity,
+              ...initialValidationState,
               ruleResults,
-            };
+            });
+            return;
+          }
+
+          setPolicyValidationResult({
+            isEmptyValueValidation: false,
+            isValid,
+            complexity,
+            ruleResults,
           });
         });
-      }
-    });
+    }, [bouncedValue, validationPolicy]);
 
-    const setOptimisticSuccessResult = () => {
+    const setOptimisticPolicyValidationResult = () => {
       setPolicyValidationResult((old) => ({
         isEmptyValueValidation: false,
         ruleResults: old?.ruleResults ?? [],
@@ -206,36 +206,12 @@ export const PasswordCreationField = flowComponent(
         complexity: {
           warning: null,
           min: validationPolicy.minComplexity,
-          actual: 4,
+          actual: 4 as ComplexityScore,
         },
       }));
     };
 
-    const onPasswordGenerateHandler: ActionFn = async () => {
-      if (validationPolicy) {
-        const newValue = await new Generator(
-          validationPolicy,
-        ).generatePassword();
-
-        if (onChange) {
-          onChange(newValue);
-        }
-
-        // optimistic success since we generate
-        // a password from the same policy
-        setOptimisticSuccessResult();
-
-        startTransition(() => {
-          setIsPasswordRevealed(true);
-
-          if (valueControlType === "uncontrolled") {
-            setUncontrolledValue(newValue);
-          }
-        });
-      }
-    };
-
-    const onPasswordInputChangeHandler = (value: string) => {
+    const onChangeValueHandler = (value: string) => {
       if (onChange) {
         onChange(value);
       }
@@ -244,8 +220,19 @@ export const PasswordCreationField = flowComponent(
       }
     };
 
+    const onPasswordGenerateHandler: ActionFn = async () => {
+      const generatedPassword = await generatePassword(validationPolicy);
+      setOptimisticPolicyValidationResult();
+      setIsPasswordRevealed(true);
+      onChangeValueHandler(generatedPassword);
+    };
+
+    const onPasswordInputChangeHandler = (value: string) => {
+      onChangeValueHandler(value);
+    };
+
     const onPasswordPasteHandler = () => {
-      setOptimisticSuccessResult();
+      setOptimisticPolicyValidationResult();
     };
 
     const togglePasswordVisibilityHandler = () => {
