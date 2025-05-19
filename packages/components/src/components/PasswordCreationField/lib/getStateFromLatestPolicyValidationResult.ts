@@ -2,7 +2,7 @@ import { type RuleValidationResult } from "@mittwald/password-tools-js/rules";
 import type { ResolvedPolicyValidationResult } from "@/components/PasswordCreationField/PasswordCreationField";
 
 /** @internal */
-export const getStatusTextFromPolicyValidationResult = (
+export const getStateFromLatestPolicyValidationResult = (
   result?: ResolvedPolicyValidationResult,
 ): undefined | Partial<RuleValidationResult> => {
   if (result && !result.isValid && result.ruleResults.length >= 1) {
@@ -17,7 +17,7 @@ export const getStatusTextFromPolicyValidationResult = (
     return failingRule;
   }
 
-  if (result && result.complexity.actual < 4) {
+  if (result && result.complexity.actual <= result.complexity.min) {
     return {
       isValid: result.isValid,
       identifier: "optimizeComplexity",
@@ -34,4 +34,4 @@ export const getStatusTextFromPolicyValidationResult = (
   return undefined;
 };
 
-export default getStatusTextFromPolicyValidationResult;
+export default getStateFromLatestPolicyValidationResult;

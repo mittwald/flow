@@ -18,18 +18,18 @@ import ValidationResultEntry from "@/components/PasswordCreationField/components
 import { TunnelExit } from "@mittwald/react-tunnel";
 import clsx from "clsx";
 
-export type PasswordFieldLabelProps = {
+interface Props extends Pick<Aria.InputProps, "disabled"> {
   className?: string;
   policyValidationResult?: ResolvedPolicyValidationResult;
   onGeneratePasswordAction?: ActionFn;
-} & Pick<Aria.InputProps, "disabled">;
+}
 
 /** @internal */
-export const FieldLabel: FC<PasswordFieldLabelProps> = (props) => {
+export const FieldLabel: FC<Props> = (props) => {
   const {
     onGeneratePasswordAction,
     policyValidationResult,
-    disabled,
+    disabled: isDisabled,
     className,
   } = props;
   const translate = useLocalizedStringFormatter(locales);
@@ -53,7 +53,7 @@ export const FieldLabel: FC<PasswordFieldLabelProps> = (props) => {
       <ContextualHelpTrigger>
         <Button
           data-component="showPasswordRules"
-          isDisabled={disabled}
+          isDisabled={isDisabled}
           className={clsx(stylesFieldLabel.button, stylesFieldLabel.helpButton)}
         />
         <ContextualHelp>
@@ -65,7 +65,7 @@ export const FieldLabel: FC<PasswordFieldLabelProps> = (props) => {
         <Action action={onGeneratePasswordAction}>
           <Button
             data-component="generatePassword"
-            isDisabled={disabled}
+            isDisabled={isDisabled}
             className={clsx(
               stylesFieldLabel.button,
               stylesFieldLabel.generateButton,

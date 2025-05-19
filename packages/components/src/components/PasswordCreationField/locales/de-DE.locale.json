@@ -1,5 +1,7 @@
 {
   "button.generate": "Generieren",
+  "button.generate.tooltip.hide": "Passwort verbergen",
+  "button.generate.tooltip.show": "Passwort anzeigen",
   "password.requirements.heading": "Anforderungen an dein Passwort",
   "validation.blocklist": "{isValid, select, true {Das Passwort enthält keine verbotenen Wörter.} other {Das Passwort enthält ein verbotenes Wort \"{blockedSubstrings}\".}}",
   "validation.blocklist.short": "{isValid, select, true {Keine verbotenen Wörter} other {Verbotenes Wort \"{blockedSubstrings}\"}}",

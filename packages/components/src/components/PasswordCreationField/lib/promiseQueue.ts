@@ -1,3 +1,5 @@
+import { useRef } from "react";
+
 type Task<T> = () => Promise<T>;
 
 interface PromiseQueueOptions {
@@ -43,3 +45,6 @@ export class PromiseQueue {
     this.running = false;
   }
 }
+
+export const usePromiseQueue = () =>
+  useRef(new PromiseQueue({ autoStart: true })).current;

@@ -1,5 +1,7 @@
 {
   "button.generate": "Generate",
+  "button.generate.tooltip.hide": "Hide password",
+  "button.generate.tooltip.show": "Show password",
   "password.requirements.heading": "Requirements for your password",
   "validation.blocklist": "{isValid, select, true {The password does not contain any forbidden words.} other {The password contains a forbidden word \"{blockedSubstrings}\".}}",
   "validation.blocklist.short": "{isValid, select, true {No forbidden words} other {Forbidden word \"{blockedSubstrings}\"}}",

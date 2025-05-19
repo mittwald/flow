@@ -8,14 +8,12 @@ import locales from "./../../locales/*.locale.json";
 import styles from "./ValidationResultEntry.module.scss";
 import type { RuleValidationResult } from "@mittwald/password-tools-js/rules";
 
-export interface ValidationResultEntryProps {
+interface Props {
   result: RuleValidationResult;
 }
 
 /** @internal */
-export const ValidationResultEntry: FC<ValidationResultEntryProps> = (
-  props,
-) => {
+export const ValidationResultEntry: FC<Props> = (props) => {
   const { result } = props;
   const translate = useLocalizedStringFormatter(locales);
 
