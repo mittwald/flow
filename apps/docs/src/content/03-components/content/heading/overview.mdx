@@ -1,6 +1,6 @@
 # Playground
 
-Verwende `<Heading />`, um eine Überschrift darzustellen.
+Verwende `<Heading />`, um eine Heading darzustellen.
 
 <LiveCodeEditor />
 
@@ -8,7 +8,7 @@ Verwende `<Heading />`, um eine Überschrift darzustellen.
 
 # Level
 
-Über das Property `level` kann die Hierarchie der Überschrift angepasst werden.
+Über das Property `level` kann die Hierarchie der Heading angepasst werden.
 Standardmäßig wird eine Heading mit dem Level `H2` erzeugt. Die Seite sollte
 eine sinnvolle Struktur mit verschiedenen Ebenen aufweisen.
 
@@ -18,8 +18,8 @@ eine sinnvolle Struktur mit verschiedenen Ebenen aufweisen.
 
 # Size
 
-Über das Property `size` kann die Schriftgröße einer Heading manuell angepasst
-werden. Die Überschriften sollten dabei eine visuelle Hierarchie beibehalten.
+Über das Property `size` kann in Ausnahmefällen die Schriftgröße einer Heading manuell angepasst
+werden. Die Headings sollten dabei eine visuelle Hierarchie beibehalten.
 
 <LiveCodeEditor example="size" editorCollapsed />
 
@@ -27,22 +27,21 @@ werden. Die Überschriften sollten dabei eine visuelle Hierarchie beibehalten.
 
 # Color
 
-Die Heading wird standardmäßig mit der Primärfarbe `primary` dargestellt.
+Die Heading wird standardmäßig in der Color `Primary` dargestellt.
 
 ## Color Light und Dark
 
-Zusätzlich zur Standardfarbe kann die Heading in den Varianten Light und Dark
-dargestellt werden. Diese Farbvarianten eignen sich, wenn die Standardfarbe auf
-farbigen oder dekorativen Hintergründen nicht gut funktioniert.
+Zusätzlich zu der Standard-Color, kann die Heading in Light und Dark dargestellt werden. Beide Colors eigenen sich, wenn die Standardfarbe auf
+farbigen oder dekorativen Hintergründen nicht gut funktioniert. 
 
 <LiveCodeEditor example="dark" bgColor="light" editorCollapsed />
 
 <LiveCodeEditor example="light" bgColor="dark" editorCollapsed />
 
-**Light:** Verwende die Light-Variante bei dunklen Hintergründen mit einem
+**Light:** Verwende die Light-Color bei dunklen Hintergründen mit einem
 HSL-Lightness-Wert unter 50.
 
-**Dark:** Verwende die Dark-Variante bei hellen, farbigen Hintergründen mit
+**Dark:** Verwende die Dark-Color bei hellen, farbigen Hintergründen mit
 einem HSL-Lightness-Wert über 50.
 
 ---
@@ -51,21 +50,21 @@ einem HSL-Lightness-Wert über 50.
 
 ## Icon
 
-Verwende `<Icon />`, um die Überschrift mit einem dekorativen Icon zu
+Verwende `<Icon />`, um die Heading mit einem dekorativen Icon zu
 unterstützen.
 
 <LiveCodeEditor example="icon" editorCollapsed />
 
-## Contextual Help
+## ContextualHelp
 
 Verwende `<ContextualHelp />`, um Usern zusätzliche Hilfestellungen zu geben
 (z. B. bei Fachbegriffen).
 
 <LiveCodeEditor example="contextualHelp" editorCollapsed />
 
-## Badge
+## Badge oder AlertBadge
 
 Verwende `<Badge />`, um wichtige Metainformationen zu einem Abschnitt
-hervorzuheben.
+hervorzuheben oder eine `AlertBadge`, um einen Status anzuzeigen.
 
 <LiveCodeEditor example="badge" editorCollapsed />
