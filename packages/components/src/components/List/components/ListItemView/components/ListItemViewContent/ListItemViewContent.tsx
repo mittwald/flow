@@ -12,7 +12,6 @@ import {
   ColumnLayout,
   type ColumnLayoutProps,
 } from "@/components/ColumnLayout";
-import { useList } from "@/components/List";
 
 export type ListItemViewContentProps = PropsWithChildren &
   Pick<ColumnLayoutProps, "s" | "m" | "l"> & {
