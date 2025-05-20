@@ -4,7 +4,7 @@ list:
   block-to-block-spacing:
     value: "{size-px.m}"
   filter-to-search-spacing:
-    value: "{size-px.xxl}"
+    value: "{size-px.xl}"
 
 list-item:
   corner-radius:

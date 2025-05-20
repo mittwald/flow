@@ -1,4 +1,5 @@
 {
+  "list.filters": "Filters",
   "list.filters.clear": "Clear filters",
   "list.filters.reset": "Reset filters",
   "list.filters.store": "Store filters",

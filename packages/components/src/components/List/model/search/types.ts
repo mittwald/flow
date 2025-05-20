@@ -1,10 +1,7 @@
 import type { ComponentType } from "react";
 import type { SearchFieldProps } from "@/components/SearchField";
 
-type SupportedSearchFieldProps = Pick<
-  SearchFieldProps,
-  "className" | "autoFocus"
->;
+type SupportedSearchFieldProps = Pick<SearchFieldProps, "autoFocus">;
 
 interface SearchFieldRenderProps extends SupportedSearchFieldProps {
   onChange: (value: SearchValue) => unknown;

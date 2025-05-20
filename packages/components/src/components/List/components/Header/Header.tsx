@@ -1,16 +1,18 @@
 import type { FC } from "react";
 import React from "react";
-import { SortingPicker } from "@/components/List/components/Header/components/SortingPicker";
-import FilterPicker from "@/components/List/components/Header/components/FilterPicker";
 import styles from "./Header.module.css";
 import clsx from "clsx";
 import { ActiveFilters } from "@/components/List/components/Header/components/ActiveFilters";
 import { useList } from "@/components/List/hooks/useList";
 import type { PropsWithClassName } from "@/lib/types/props";
 import { SearchField } from "@/components/List/components/Header/components/SearchField/SearchField";
-import { ViewModeMenu } from "@/components/List/components/Header/components/ViewModeMenu/ViewModeMenu";
+import { ViewModeMenu } from "@/components/List/components/Header/components/Settings/ViewModeMenu";
 import { TunnelExit } from "@mittwald/react-tunnel";
 import DivView from "@/views/DivView";
+import { SettingsMenu } from "@/components/List/components/Header/components/Settings/SettingsMenu";
+import { SortingMenu } from "@/components/List/components/Header/components/Settings/SortingMenu";
+import { FilterMenuList } from "@/components/List/components/Header/components/Filters/FilterMenuList";
+import { CombinedFilterMenu } from "@/components/List/components/Header/components/Filters/CombinedFilterMenu";
 
 interface Props extends PropsWithClassName {
   hasActionGroup?: boolean;
@@ -31,23 +33,21 @@ export const Header: FC<Props> = (props) => {
     return null;
   }
 
-  const filterPickerList = list.filters.map((filter) => (
-    <FilterPicker key={filter.property} filter={filter} />
-  ));
-
   return (
     <DivView className={clsx(className, styles.header)}>
-      <DivView className={styles.pickerListAndSearch}>
-        <DivView className={styles.pickerList}>
+      <DivView className={styles.headerContent}>
+        <TunnelExit id="actions" />
+        <DivView className={styles.options}>
+          {/* Desktop */}
           <ViewModeMenu />
-          <SortingPicker />
-          {filterPickerList}
-        </DivView>
-        <DivView className={styles.searchAndActions}>
-          {list.search && (
-            <SearchField className={styles.searchField} search={list.search} />
-          )}
-          <TunnelExit id="actions" />
+          <SortingMenu />
+          <FilterMenuList />
+
+          {/* Mobile */}
+          <SettingsMenu />
+          <CombinedFilterMenu />
+
+          {list.search && <SearchField search={list.search} />}
         </DivView>
       </DivView>
       <ActiveFilters />

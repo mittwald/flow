@@ -14,7 +14,6 @@ import { getDomains, getTypes } from "../testData/domainApi";
 import { Section } from "@/components/Section";
 import { ListItemView, ListSummary, typedList } from "@/components/List";
 import { Button } from "@/components/Button";
-import IconDownload from "@/components/Icon/components/icons/IconDownload";
 import { ActionGroup } from "@/components/ActionGroup";
 import { Content } from "@/components/Content";
 import { Flex } from "@/components/Flex";
@@ -58,9 +57,9 @@ const meta: Meta<typeof List> = {
         >
           <ActionGroup>
             <Button color="secondary" variant="soft" slot="secondary">
-              <IconDownload />
+              Herunterladen
             </Button>
-            <Button color="accent">Anlegen</Button>
+            <Button color="accent">Anlegen </Button>
           </ActionGroup>
           <DomainList.LoaderAsync manualPagination manualSorting={false}>
             {loadDomains}
@@ -72,6 +71,7 @@ const meta: Meta<typeof List> = {
             name="Typ"
             defaultSelected={["Domain"]}
           />
+
           <DomainList.Search autoFocus autoSubmit />
           <DomainList.Sorting property="domain" name="A-Z" />
           <DomainList.Sorting property="domain" name="Z-A" direction="desc" />
