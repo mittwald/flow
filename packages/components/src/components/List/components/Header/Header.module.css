@@ -34,7 +34,7 @@
   }
 
   @container (max-width: 550px) {
-    .mobile {
+    .headerContent {
       flex-direction: column;
     }
     .actions {
