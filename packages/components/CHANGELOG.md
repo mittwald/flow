@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.192](https://github.com/mittwald/flow/compare/0.2.0-alpha.191...0.2.0-alpha.192) (2025-05-20)
+
+### Features
+
+* **List:** support context menu and action group in tile ([#1477](https://github.com/mittwald/flow/issues/1477)) ([ffa0c0f](https://github.com/mittwald/flow/commit/ffa0c0ffc293ce08b913597de561c52cb68ad41f))
+
 # [0.2.0-alpha.191](https://github.com/mittwald/flow/compare/0.2.0-alpha.190...0.2.0-alpha.191) (2025-05-20)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
