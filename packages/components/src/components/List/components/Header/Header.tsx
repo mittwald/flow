@@ -13,42 +13,38 @@ import { SettingsMenu } from "@/components/List/components/Header/components/Set
 import { SortingMenu } from "@/components/List/components/Header/components/Settings/SortingMenu";
 import { FilterMenuList } from "@/components/List/components/Header/components/Filters/FilterMenuList";
 import { CombinedFilterMenu } from "@/components/List/components/Header/components/Filters/CombinedFilterMenu";
+import { useAvailableViewModes } from "@/components/List/components/Header/lib";
 
-interface Props extends PropsWithClassName {
-  hasActionGroup?: boolean;
-}
-
-export const Header: FC<Props> = (props) => {
-  const { className, hasActionGroup } = props;
+export const Header: FC<PropsWithClassName> = (props) => {
+  const { className } = props;
   const list = useList();
 
-  if (
-    list.filters.length === 0 &&
-    list.visibleSorting.length === 0 &&
-    !list.search &&
-    !list.table &&
-    !(list.itemView?.showTiles && list.itemView?.showList) &&
-    !hasActionGroup
-  ) {
-    return null;
-  }
+  const availableViewModes = useAvailableViewModes();
+
+  const hasOptions =
+    list.filters.length > 0 ||
+    list.visibleSorting.length > 0 ||
+    list.search ||
+    availableViewModes.length > 1;
 
   return (
     <DivView className={clsx(className, styles.header)}>
       <DivView className={styles.headerContent}>
         <TunnelExit id="actions" />
-        <DivView className={styles.options}>
-          {/* Desktop */}
-          <ViewModeMenu />
-          <SortingMenu />
-          <FilterMenuList />
+        {hasOptions && (
+          <DivView className={styles.options}>
+            {/* Desktop */}
+            <ViewModeMenu />
+            <SortingMenu />
+            <FilterMenuList />
 
-          {/* Mobile */}
-          <SettingsMenu />
-          <CombinedFilterMenu />
+            {/* Mobile */}
+            <SettingsMenu />
+            <CombinedFilterMenu />
 
-          {list.search && <SearchField search={list.search} />}
-        </DivView>
+            {list.search && <SearchField search={list.search} />}
+          </DivView>
+        )}
       </DivView>
       <ActiveFilters />
     </DivView>

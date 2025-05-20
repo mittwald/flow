@@ -1,4 +1,3 @@
-import { ActionGroup } from "@/components/ActionGroup";
 import { DataLoader } from "@/components/List/components/DataLoader";
 import { Header } from "@/components/List/components/Header/Header";
 import headerStyles from "@/components/List/components/Header/Header.module.css";
@@ -26,7 +25,6 @@ import {
 } from "@/lib/componentFactory/flowComponent";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { deepFilterByType, deepFindOfType } from "@/lib/react/deepFindOfType";
-import { deepHas } from "@/lib/react/deepHas";
 import DivView from "@/views/DivView";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import type { PropsWithChildren } from "react";
@@ -165,8 +163,6 @@ export const List = flowComponent("List", (props) => {
     },
   };
 
-  const hasActionGroup = deepHas(children, ActionGroup);
-
   return (
     <PropsContextProvider props={propsContext}>
       <TunnelProvider>
@@ -178,7 +174,7 @@ export const List = flowComponent("List", (props) => {
           <DataLoader />
           <DivView className={styles.list} ref={ref}>
             {children}
-            <Header hasActionGroup={hasActionGroup} />
+            <Header />
 
             <DivView className={styles.listWrapper}>
               {listModel.items.entries.length > 0 && (

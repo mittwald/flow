@@ -4,6 +4,10 @@
   row-gap: var(--list--spacing);
   container-type: inline-size;
 
+  &:has(.headerContent:empty) {
+    display: none;
+  }
+
   .headerContent {
     display: flex;
     gap: var(--list--spacing);

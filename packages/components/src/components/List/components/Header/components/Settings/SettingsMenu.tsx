@@ -32,7 +32,7 @@ export const SettingsMenu: FC = () => {
 
   const stringFormatter = useLocalizedStringFormatter(locales);
 
-  if (sortingItems.length === 0 && viewModeItems.length === 0) {
+  if (sortingItems.length === 0 && viewModeItems.length <= 1) {
     return null;
   }
 
@@ -48,7 +48,7 @@ export const SettingsMenu: FC = () => {
       </ButtonView>
 
       <ContextMenu>
-        {viewModeItems.length > 0 && (
+        {viewModeItems.length > 1 && (
           <ContextMenuSection
             selectionMode="single"
             selectedKeys={[selectedViewMode]}
@@ -60,7 +60,7 @@ export const SettingsMenu: FC = () => {
           </ContextMenuSection>
         )}
 
-        {sortingItems.length > 0 && viewModeItems.length > 0 && <Separator />}
+        {sortingItems.length > 0 && viewModeItems.length > 1 && <Separator />}
 
         {sortingItems.length > 0 && (
           <ContextMenuSection
