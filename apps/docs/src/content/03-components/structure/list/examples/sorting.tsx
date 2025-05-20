@@ -1,4 +1,8 @@
 import {
+  type Domain,
+  domains,
+} from "@/content/03-components/structure/list/examples/domainApi";
+import {
   AlertBadge,
   Avatar,
   ContextMenu,
@@ -6,40 +10,98 @@ import {
   IconDomain,
   IconSubdomain,
   MenuItem,
+  type SortingFn,
+  SortingFunctions,
   Text,
   typedList,
 } from "@mittwald/flow-react-components";
-import {
-  type Domain,
-  domains,
-} from "@/content/03-components/structure/list/examples/domainApi";
+import { DateTime } from "luxon";
 
 export default () => {
-  const DomainList = typedList<Domain>();
+  type DomainWithBigIntId = Omit<Domain, "id"> & {
+    id: bigint;
+    createdAt: DateTime;
+  };
+
+  const domainsWithDateTime = domains.map(
+    (domain, index) => {
+      const daysAgo =
+        index * 3 + Math.floor(Math.random() * 5);
+
+      const bigIntId = BigInt(1000000000000 + index);
+
+      return {
+        ...domain,
+        id: bigIntId,
+        createdAt: DateTime.now().minus({ days: daysAgo }),
+      };
+    },
+  );
+
+  const DomainList = typedList<DomainWithBigIntId>();
+
+  const bigIntSorting =
+    SortingFunctions.bigInt as SortingFn<DomainWithBigIntId>;
+  const dateTimeSorting =
+    SortingFunctions.dateTime as SortingFn<DomainWithBigIntId>;
 
   return (
-    <DomainList.List batchSize={5}>
-      <DomainList.StaticData data={domains} />
+    <DomainList.List batchSize={5} aria-label="Domains">
+      <DomainList.StaticData data={domainsWithDateTime} />
+
       <DomainList.Sorting
         property="hostname"
-        name="Domain A bis Z"
+        name="Name A bis Z"
         direction="asc"
       />
       <DomainList.Sorting
         property="hostname"
-        name="Domain Z bis A"
+        name="Name Z bis A"
         direction="desc"
       />
+
       <DomainList.Sorting
-        property="type"
-        name="Type A bis Z"
+        property="id"
+        name="ID (aufsteigend)"
         direction="asc"
+        customSortingFn={bigIntSorting}
       />
       <DomainList.Sorting
-        property="type"
-        name="Type Z bis A"
+        property="id"
+        name="ID (absteigend)"
         direction="desc"
+        customSortingFn={bigIntSorting}
+        defaultEnabled
       />
+
+      <DomainList.Sorting
+        property="createdAt"
+        name="Erstellt am (älteste zuerst)"
+        direction="asc"
+        customSortingFn={dateTimeSorting}
+      />
+      <DomainList.Sorting
+        property="createdAt"
+        name="Erstellt am (neueste zuerst)"
+        direction="desc"
+        customSortingFn={dateTimeSorting}
+      />
+
+      <DomainList.Sorting
+        property="tld"
+        name="TLD-Länge (kürzeste zuerst)"
+        direction="asc"
+        customSortingFn={(rowA, rowB, columnId: string) => {
+          const tldA = String(
+            rowA.getValue(columnId) || "",
+          );
+          const tldB = String(
+            rowB.getValue(columnId) || "",
+          );
+          return tldA.length - tldB.length;
+        }}
+      />
+
       <DomainList.Item>
         {(domain) => (
           <DomainList.ItemView>
@@ -63,6 +125,12 @@ export default () => {
               )}
             </Heading>
             <Text>{domain.type}</Text>
+            <Text>ID: {domain.id}</Text>
+            <Text>TLD: {domain.tld}</Text>
+            <Text>
+              Erstellt am:{" "}
+              {domain.createdAt.toLocaleString()}
+            </Text>
 
             <ContextMenu>
               <MenuItem>Details anzeigen</MenuItem>

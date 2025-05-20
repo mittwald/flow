@@ -147,8 +147,8 @@ export const ListItemViewContent = (props: ListItemViewContentProps) => {
                   {title}
                   <div className={styles.subTitle}>{subTitle}</div>
                 </div>
+                {button}
               </div>
-              {button}
               {children}
               {bottom}
             </div>

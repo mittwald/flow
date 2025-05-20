@@ -18,7 +18,7 @@ import {
 } from "@/content/03-components/structure/list/examples/domainApi";
 
 <List batchSize={2}>
-  <ListStaticData data={domains} />
+  <ListStaticData data={domains} aria-label="Domains" />
   <ListItem<Domain>>
     {(domain) => (
       <ListItemView>

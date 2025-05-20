@@ -18,7 +18,11 @@ export default () => {
   const DomainList = typedList<Domain>();
 
   return (
-    <DomainList.List batchSize={6} defaultViewMode="tiles">
+    <DomainList.List
+      batchSize={6}
+      defaultViewMode="tiles"
+      aria-label="Domains"
+    >
       <DomainList.StaticData data={domains} />
       <DomainList.Item showTiles>
         {(domain) => (
