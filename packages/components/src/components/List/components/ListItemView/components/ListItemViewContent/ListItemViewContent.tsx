@@ -12,6 +12,7 @@ import {
   ColumnLayout,
   type ColumnLayoutProps,
 } from "@/components/ColumnLayout";
+import { useList } from "@/components/List";
 
 export type ListItemViewContentProps = PropsWithChildren &
   Pick<ColumnLayoutProps, "s" | "m" | "l"> & {
@@ -147,8 +148,8 @@ export const ListItemViewContent = (props: ListItemViewContentProps) => {
                   {title}
                   <div className={styles.subTitle}>{subTitle}</div>
                 </div>
+                {button}
               </div>
-              {button}
               {children}
               {bottom}
             </div>

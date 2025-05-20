@@ -146,10 +146,6 @@
       width: 100%;
     }
 
-    .action {
-      display: none;
-    }
-
     .avatarContainer {
       width: 100%;
       overflow: hidden;
@@ -198,6 +194,10 @@
     .topContent,
     .header {
       width: 100%;
+    }
+
+    .action {
+      align-self: start;
     }
   }
 }

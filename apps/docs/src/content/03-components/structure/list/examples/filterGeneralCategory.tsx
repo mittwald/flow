@@ -18,7 +18,7 @@ export default () => {
   const DomainList = typedList<Domain>();
 
   return (
-    <DomainList.List batchSize={2}>
+    <DomainList.List batchSize={2} aria-label="Domains">
       <DomainList.StaticData data={domains} />
       <DomainList.Filter
         property="verified"

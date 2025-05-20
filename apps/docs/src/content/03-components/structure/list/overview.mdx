@@ -8,12 +8,15 @@ Verwende `<List />`, um eine Liste darzustellen.
 
 # Kombiniere mit ...
 
-Die List kann um eine Sortierung, einen Filter, ein SearchField oder eine
-Kombination dieser Elemente erweitert werden.
-
 ## Sortierung
 
 Nutze `<List.Sorting />` innerhalb der List, um eine Sortiermethode anzulegen.
+
+Benutzerdefinierte Sortierfunktionen ermöglichen spezielle Sortierlogik für
+verschiedene Datentypen wie BigInt oder Datumsangaben mit luxon DateTime,
+inklusive Typprüfung und Fallback-Mechanismen für ungültige Eingaben. Außerdem
+können eigene Sortierfunktionen über die List.Sorting-Komponente mit dem
+Property `customSortingFn` hinzugefügt werden.
 
 <LiveCodeEditor example="sorting" editorCollapsed />
 
@@ -40,22 +43,6 @@ Aktionen definiert werden, die sich direkt auf die Liste beziehen.
 
 <LiveCodeEditor example="actionGroup" editorCollapsed />
 
-## Tabellen-Ansicht
-
-Die List kann als Liste oder als Tabelle dargestellt werden. Nutze
-`<List.Item />` für die Darstellung als Liste und `<List.Table />`, um sie als
-[Tabelle](/03-components/structure/table) anzuzeigen
-
-<LiveCodeEditor example="table" editorCollapsed />
-
-## Pagination
-
-Die Pagination wird standardmäßig bei jeder List aktiviert. Sie zeigt im
-Standard 10 Einträge an und lädt über einen Klick auf "Mehr anzeigen" jeweils 10
-Einträge nach. Diese Werte lassen sich über die `batchSize` Property anpassen.
-
-<LiveCodeEditor example="pagination" editorCollapsed />
-
 ## Summary
 
 Verwende eine `<ListSummary/>` um eine Zusammenfassung, wie beispielsweise die
@@ -72,7 +59,27 @@ dann in `<Content slot="bottom" />` enthalten sein.
 
 <LiveCodeEditor example="accordion" editorCollapsed />
 
-## Mit Kacheln
+## Pagination
+
+Die Pagination wird standardmäßig bei jeder List aktiviert. Sie zeigt im
+Standard 10 Einträge an und lädt über einen Klick auf "Mehr anzeigen" jeweils 10
+Einträge nach. Diese Werte lassen sich über die `batchSize` Property anpassen.
+
+<LiveCodeEditor example="pagination" editorCollapsed />
+
+---
+
+# Ansichten
+
+## Tabellen-Ansicht
+
+Die List kann als Liste oder als Tabelle dargestellt werden. Nutze
+`<List.Item />` für die Darstellung als Liste und `<List.Table />`, um sie als
+[Tabelle](/03-components/structure/table) anzuzeigen
+
+<LiveCodeEditor example="table" editorCollapsed />
+
+## Raster-Ansicht
 
 Im List.Item kann über die Properties `showTiles` und `showList` ausgewählt
 werden wie die List Items dargestellt werden. `showList` ist im default auf true
@@ -84,15 +91,9 @@ angepasst werden.
 
 <LiveCodeEditor example="tile" editorCollapsed />
 
-## Mit einer eigenen Sortierfunktion
+---
 
-Benutzerdefinierte Sortierfunktionen ermöglichen spezielle Sortierlogik für
-verschiedene Datentypen wie BigInt oder Datumsangaben mit luxon DateTime,
-inklusive Typprüfung und Fallback-Mechanismen für ungültige Eingaben. Außerdem
-können eigene Sortierfunktionen über die List.Sorting-Komponente mit dem
-Property `customSortingFn` hinzugefügt werden.
-
-<LiveCodeEditor example="customSorting" editorCollapsed />
+# List Items
 
 ## Mit Checkboxen
 
@@ -109,3 +110,10 @@ werden, um das Seitenverhältnis und Umbruchverhalten von Header und Content zu
 steuern.
 
 <LiveCodeEditor example="columnLayout" editorCollapsed />
+
+## Mit ActionGroup
+
+Verwende eine ActionGroup innerhalb des `<Content/>` um Buttons in deiner Liste
+zu platzieren
+
+<LiveCodeEditor example="itemActionGroup" editorCollapsed />
