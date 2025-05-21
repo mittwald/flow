@@ -1,7 +1,7 @@
 import { isFunction } from "remeda";
 import type { EventHandler } from "@mittwald/flow-remote-core";
 
-const defaultEventPropMatcher = /on[A-Z].*/;
+const defaultEventPropMatcher = /^on[A-Z][A-Za-z]+$/;
 
 export const isEventProp = (
   name: string,
