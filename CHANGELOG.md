@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.194](https://github.com/mittwald/flow/compare/0.2.0-alpha.193...0.2.0-alpha.194) (2025-05-21)
+
+### Features
+
+* support empty view in ComboBox ([#1476](https://github.com/mittwald/flow/issues/1476)) ([30f6d48](https://github.com/mittwald/flow/commit/30f6d487a2a46741774838f23706acb8c5e0de58))
+
 # [0.2.0-alpha.193](https://github.com/mittwald/flow/compare/0.2.0-alpha.192...0.2.0-alpha.193) (2025-05-21)
 
 **Note:** Version bump only for package @mittwald/flow-project
