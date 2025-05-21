@@ -5,6 +5,7 @@ import type { Search } from "@/components/List/model/search/Search";
 import type { SearchFieldRenderComponent } from "@/components/List/model/search/types";
 import { useOnChange } from "@/lib/hooks";
 import SearchFieldView from "@/views/SearchFieldView";
+import styles from "./SearchField.module.scss";
 
 interface Props extends PropsWithClassName {
   search: Search<never>;
@@ -13,7 +14,7 @@ interface Props extends PropsWithClassName {
 const autoSubmitTimeout = 800;
 
 const DefaultSearchFieldRender: SearchFieldRenderComponent = (props) => {
-  const { className, onChange, value, autoSubmit, ...searchFieldProps } = props;
+  const { onChange, value, autoSubmit, ...searchFieldProps } = props;
 
   const [searchString, setSearchString] = useState(value ?? "");
 
@@ -51,7 +52,7 @@ const DefaultSearchFieldRender: SearchFieldRenderComponent = (props) => {
 
   return (
     <SearchFieldView
-      className={className}
+      className={styles.searchField}
       value={searchString}
       onKeyUp={handleKeyPress}
       onChange={(value) => setSearchString(value)}
@@ -62,11 +63,10 @@ const DefaultSearchFieldRender: SearchFieldRenderComponent = (props) => {
 };
 
 export const SearchField: FC<Props> = (props) => {
-  const { className, search } = props;
+  const { search } = props;
   const render = search.render ?? DefaultSearchFieldRender;
 
   return createElement(render, {
-    className,
     value: search.value,
     onChange: search.setValue.bind(search),
     ...search.textFieldProps,

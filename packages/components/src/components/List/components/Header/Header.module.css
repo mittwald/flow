@@ -2,36 +2,50 @@
   display: flex;
   flex-direction: column;
   row-gap: var(--list--spacing);
+  container-type: inline-size;
 
-  .pickerListAndSearch {
-    display: flex;
-    row-gap: var(--list--block-to-block-spacing);
-    column-gap: var(--list--filter-to-search-spacing);
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap-reverse;
+  &:has(.headerContent:empty) {
+    display: none;
   }
 
-  .pickerList {
+  .headerContent {
     display: flex;
+    gap: var(--list--spacing);
     flex-wrap: wrap;
-    gap: var(--list--spacing);
+    flex-direction: row-reverse;
   }
 
-  .searchAndActions {
-    display: flex;
-    flex-grow: 1;
-    gap: var(--list--spacing);
-    flex-wrap: wrap-reverse;
-    justify-content: flex-end;
+  .actions {
+    flex-grow: 0;
+  }
 
-    > * {
-      flex-grow: 0;
+  .options {
+    display: flex;
+    column-gap: var(--list--spacing);
+    flex-grow: 1;
+  }
+
+  @container (min-width: 850px) {
+    .mobile {
+      display: none;
     }
   }
 
-  .searchField {
-    max-width: 500px;
-    flex-grow: 1;
+  @container (max-width: 850px) {
+    .desktop {
+      display: none;
+    }
+  }
+
+  @container (max-width: 550px) {
+    .headerContent {
+      flex-direction: column;
+    }
+    .actions {
+      flex-grow: 1;
+    }
+    .action {
+      flex: 1;
+    }
   }
 }

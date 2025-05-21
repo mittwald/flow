@@ -17,7 +17,10 @@ import type { MenuItemProps } from "@/components/MenuItem";
 
 export type ContextMenuSectionProps = PropsWithChildren &
   FlowComponentProps &
-  Pick<Aria.MenuSectionProps<MenuItemProps>, "defaultSelectedKeys"> & {
+  Pick<
+    Aria.MenuSectionProps<MenuItemProps>,
+    "defaultSelectedKeys" | "selectedKeys"
+  > & {
     selectionMode?: ContextMenuSelectionMode;
   };
 

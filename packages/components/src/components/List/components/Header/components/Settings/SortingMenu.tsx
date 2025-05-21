@@ -1,6 +1,5 @@
 import type { FC } from "react";
 import React from "react";
-import { SortingPickerItem } from "@/components/List/components/Header/components/SortingPickerItem";
 import { useList } from "@/components/List/hooks/useList";
 import ContextMenu, { ContextMenuTrigger } from "@/components/ContextMenu";
 import locales from "../../../../locales/*.locale.json";
@@ -8,24 +7,26 @@ import { Translate } from "@/lib/react/components/Translate";
 import TextView from "@/views/TextView";
 import ButtonView from "@/views/ButtonView";
 import { IconSorting } from "@/components/Icon/components/icons";
+import styles from "@/components/List/components/Header/Header.module.css";
+import { SortingMenuItem } from "@/components/List/components/Header/components/Settings/SortingMenuItem";
 
-export const SortingPicker: FC = () => {
+export const SortingMenu: FC = () => {
   const list = useList();
 
-  const pickerItems = list.visibleSorting.map((s) => (
-    <SortingPickerItem sorting={s} key={s.id} />
+  const sortingItems = list.visibleSorting.map((s) => (
+    <SortingMenuItem sorting={s} key={s.id} />
   ));
 
-  if (pickerItems.length === 0) {
+  if (sortingItems.length === 0) {
     return null;
   }
 
-  const pickerLabelSorting = list.visibleSorting.find((s) => s.isSorted());
+  const labelSorting = list.visibleSorting.find((s) => s.isSorted());
 
   const text = (
     <TextView>
-      {pickerLabelSorting ? (
-        <>{pickerLabelSorting.name ?? pickerLabelSorting.property}</>
+      {labelSorting ? (
+        <>{labelSorting.name ?? labelSorting.property}</>
       ) : (
         <Translate locales={locales}>list.sorting</Translate>
       )}
@@ -34,18 +35,19 @@ export const SortingPicker: FC = () => {
 
   return (
     <ContextMenuTrigger>
-      <ButtonView variant="outline" color="secondary">
+      <ButtonView
+        variant="outline"
+        color="secondary"
+        className={styles.desktop}
+      >
         {text}
         <IconSorting />
       </ButtonView>
       <ContextMenu
         selectionMode="single"
-        selectedKeys={pickerLabelSorting ? [pickerLabelSorting.id] : []}
-        onAction={(id) => {
-          list.getSorting(String(id)).enable();
-        }}
+        selectedKeys={labelSorting ? [labelSorting.id] : []}
       >
-        {pickerItems}
+        {sortingItems}
       </ContextMenu>
     </ContextMenuTrigger>
   );
