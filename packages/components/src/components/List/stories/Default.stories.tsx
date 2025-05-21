@@ -59,7 +59,7 @@ const meta: Meta<typeof List> = {
             <Button color="secondary" variant="soft" slot="secondary">
               Herunterladen
             </Button>
-            <Button color="accent">Anlegen </Button>
+            <Button color="accent">Anlegen</Button>
           </ActionGroup>
           <DomainList.LoaderAsync manualPagination manualSorting={false}>
             {loadDomains}
