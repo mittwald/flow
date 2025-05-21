@@ -26,6 +26,7 @@ export * from "./RemoteClearPropsContextContentElement";
 export * from "./RemoteCodeBlockElement";
 export * from "./RemoteColorElement";
 export * from "./RemoteColumnLayoutElement";
+export * from "./RemoteComboBoxElement";
 export * from "./RemoteContentElement";
 export * from "./RemoteContextMenuContentElement";
 export * from "./RemoteContextMenuSectionElement";
