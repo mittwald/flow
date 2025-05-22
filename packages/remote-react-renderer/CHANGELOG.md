@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.195](https://github.com/mittwald/flow/compare/0.2.0-alpha.194...0.2.0-alpha.195) (2025-05-22)
+
+### Features
+
+* **Remote:** add remote support to ComboBox ([#1484](https://github.com/mittwald/flow/issues/1484)) ([6c42869](https://github.com/mittwald/flow/commit/6c42869dfa694bd288ce3015628d62e3c2f4af36))
+
 # [0.2.0-alpha.194](https://github.com/mittwald/flow/compare/0.2.0-alpha.193...0.2.0-alpha.194) (2025-05-21)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-renderer
