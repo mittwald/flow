@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.196](https://github.com/mittwald/flow/compare/0.2.0-alpha.195...0.2.0-alpha.196) (2025-05-22)
+
+### Bug Fixes
+
+* **Remote:** wait for component received remote props before rendering ([#1481](https://github.com/mittwald/flow/issues/1481)) ([94e73da](https://github.com/mittwald/flow/commit/94e73da2d5df382e52f2b0e8302ca97ee2358f68))
+
+# [0.2.0-alpha.195](https://github.com/mittwald/flow/compare/0.2.0-alpha.194...0.2.0-alpha.195) (2025-05-22)
+
+### Features
+
+* **Remote:** add remote support to ComboBox ([#1484](https://github.com/mittwald/flow/issues/1484)) ([6c42869](https://github.com/mittwald/flow/commit/6c42869dfa694bd288ce3015628d62e3c2f4af36))
+
+# [0.2.0-alpha.194](https://github.com/mittwald/flow/compare/0.2.0-alpha.193...0.2.0-alpha.194) (2025-05-21)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.193](https://github.com/mittwald/flow/compare/0.2.0-alpha.192...0.2.0-alpha.193) (2025-05-21)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.192](https://github.com/mittwald/flow/compare/0.2.0-alpha.191...0.2.0-alpha.192) (2025-05-20)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.191](https://github.com/mittwald/flow/compare/0.2.0-alpha.190...0.2.0-alpha.191) (2025-05-20)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
+# [0.2.0-alpha.190](https://github.com/mittwald/flow/compare/0.2.0-alpha.189...0.2.0-alpha.190) (2025-05-20)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-components
+
 # [0.2.0-alpha.189](https://github.com/mittwald/flow/compare/0.2.0-alpha.188...0.2.0-alpha.189) (2025-05-19)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components

@@ -173,18 +173,16 @@ describe("Text field", () => {
 
   test("default value works", async () => {
     render(<TestForm />);
-    expect(screen.getByDisplayValue("default-value")).toBeInTheDocument();
+    const field = screen.getByLabelText("testDefaultValue");
+    expect(field).toHaveDisplayValue("default-value");
   });
 
-  test("updates its value (by ref) event if not controlled", async () => {
+  test("updates its value (by ref), even if not controlled", async () => {
     const user = userEvent.setup();
     render(<TestForm />);
     const field = screen.getByLabelText("testUncontrolled");
     await user.type(field, "new name");
-    expect(screen.getByDisplayValue("NEW NAME")).toBeInTheDocument();
-    expect(screen.getByDisplayValue("NEW NAME").hasAttribute("value")).toBe(
-      false,
-    );
+    expect(field).toHaveDisplayValue("NEW NAME");
   });
 
   test("can be used as controlled input", async () => {
@@ -192,10 +190,7 @@ describe("Text field", () => {
     render(<TestForm />);
     const field = screen.getByLabelText("testControlled");
     await user.type(field, "new name");
-    expect(screen.getByDisplayValue("NEW NAME")).toBeInTheDocument();
-    expect(screen.getByDisplayValue("NEW NAME").getAttribute("value")).toBe(
-      "NEW NAME",
-    );
+    expect(field).toHaveDisplayValue("NEW NAME");
   });
 
   test("shows validation error", async () => {

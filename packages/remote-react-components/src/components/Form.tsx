@@ -1,5 +1,5 @@
 "use client";
-import { createRemoteComponent } from "@mittwald/remote-dom-react";
+import { createRemoteComponent } from "@/lib/createRemoteComponent";
 import { RemoteFormElement } from "@mittwald/flow-remote-elements";
 import type { ComponentProps, FC } from "react";
 import { startTransition } from "react";

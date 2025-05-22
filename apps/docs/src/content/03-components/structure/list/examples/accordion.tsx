@@ -16,7 +16,7 @@ import {
   domains,
 } from "@/content/03-components/structure/list/examples/domainApi";
 
-<List batchSize={2} accordion>
+<List batchSize={2} accordion aria-label="Domains">
   <ListStaticData data={domains} />
   <ListItem<Domain>>
     {(domain) => (

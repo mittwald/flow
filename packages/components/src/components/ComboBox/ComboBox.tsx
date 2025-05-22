@@ -1,5 +1,4 @@
 import type { PropsWithChildren } from "react";
-import React from "react";
 import type { Key } from "react-aria-components";
 import * as Aria from "react-aria-components";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
@@ -16,16 +15,22 @@ import { useLocalizedStringFormatter } from "react-aria";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { type OverlayController, useOverlayController } from "@/lib/controller";
+import type { OptionsProps } from "@/components/Options/Options";
 
 export interface ComboBoxProps
   extends Omit<Aria.ComboBoxProps<never>, "children">,
     Pick<Aria.InputProps, "placeholder">,
+    Pick<OptionsProps, "renderEmptyState">,
     PropsWithChildren,
     FlowComponentProps {
   onChange?: (value: string) => void;
   controller?: OverlayController;
 }
 
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const ComboBox = flowComponent("ComboBox", (props) => {
   const {
     children,
@@ -40,6 +45,8 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
     controller: controllerFromProps,
     placeholder,
     ref,
+    renderEmptyState,
+
     ...rest
   } = props;
 
@@ -103,7 +110,7 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
 
           {children}
 
-          <Options controller={controller}>
+          <Options controller={controller} renderEmptyState={renderEmptyState}>
             <TunnelExit id="options" />
           </Options>
         </TunnelProvider>

@@ -17,91 +17,77 @@ export interface FieldProps<T extends FieldValues>
 export function Field<T extends FieldValues>(props: FieldProps<T>) {
   const { children, name, defaultValue, ...rest } = props;
 
+  const controller = useController(props);
   const formContext = useFormContext<T>();
-  const form = formContext.form;
+  const value = controller.field.value;
 
-  const uncontrolledField = {
-    field: form.register(name),
-    fieldState: form.getFieldState(name),
-  };
-  const controlledField = useController(props);
-
-  const buildFieldProps = (
-    field: typeof uncontrolledField | typeof controlledField,
-  ) => ({
-    ...field.field,
-    defaultValue,
+  const fieldProps = {
+    ...controller.field,
     name,
     form: formContext.id,
     isRequired: !!rest.rules?.required,
     validationBehavior: "aria" as const,
-    isInvalid: field.fieldState.invalid,
-    onChange: (value: unknown) => {
-      field.field.onChange({
-        target: {
-          value,
-        },
-      });
-    },
+    defaultValue,
+    isInvalid: controller.fieldState.invalid,
     children: dynamic((p) => {
-      if (field.fieldState.invalid) {
+      if (controller.fieldState.invalid) {
         return (
           <>
             {p.children}
-            <FieldErrorView>{field.fieldState.error?.message}</FieldErrorView>
+            <FieldErrorView>
+              {controller.fieldState.error?.message}
+            </FieldErrorView>
           </>
         );
       }
 
       return p.children;
     }),
-  });
+  };
 
-  const uncontrolledProps = buildFieldProps(uncontrolledField);
-  const controlledProps = buildFieldProps(controlledField);
-  const controlledValue = controlledField.field.value;
+  const { value: ignoredValue, ...fieldPropsWithoutValue } = fieldProps;
 
   const propsContext: PropsContext = {
-    SearchField: uncontrolledProps,
-    TextField: uncontrolledProps,
-    TextArea: uncontrolledProps,
+    SearchField: fieldProps,
+    TextField: fieldProps,
+    TextArea: fieldProps,
 
     Checkbox: {
-      ...controlledProps,
-      isSelected: controlledValue,
+      ...fieldProps,
+      isSelected: value,
     },
-    CheckboxGroup: controlledProps,
+    CheckboxGroup: fieldProps,
     CheckboxButton: {
-      ...controlledProps,
-      isSelected: controlledValue,
+      ...fieldProps,
+      isSelected: value,
     },
-    FileField: controlledProps,
-    NumberField: controlledProps,
-    RadioGroup: controlledProps,
+    FileField: fieldProps,
+    NumberField: fieldProps,
+    RadioGroup: fieldProps,
     Switch: {
-      ...controlledProps,
-      isSelected: controlledValue,
+      ...fieldProps,
+      isSelected: value,
     },
     Select: {
-      ...controlledProps,
-      selectedKey: controlledValue,
+      ...fieldProps,
+      selectedKey: value,
     },
-    Slider: controlledProps,
-    PasswordCreationField: controlledProps,
-    DatePicker: controlledProps,
-    DateRangePicker: controlledProps,
-    TimeField: controlledProps,
-    SegmentedControl: controlledProps,
+    Slider: fieldProps,
+    PasswordCreationField: fieldProps,
+    DatePicker: fieldProps,
+    DateRangePicker: fieldProps,
+    TimeField: fieldProps,
+    SegmentedControl: fieldProps,
     ComboBox: {
-      ...controlledProps,
-      defaultInputValue: controlledValue,
+      ...fieldPropsWithoutValue,
+      selectedKey: value,
     },
   };
 
   return (
     <PropsContextProvider
       props={propsContext}
-      dependencies={[controlledField.fieldState, uncontrolledField.fieldState]}
+      dependencies={[controller.fieldState, controller.field, value]}
     >
       {children}
     </PropsContextProvider>

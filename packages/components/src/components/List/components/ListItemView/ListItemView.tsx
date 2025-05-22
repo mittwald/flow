@@ -26,6 +26,7 @@ export const ListItemView = (props: ListItemViewProps) => {
     },
     Button: {
       tunnelId: "button",
+      size: dynamic(() => (useList().viewMode === "tiles" ? "s" : "m")),
     },
     ActionGroup: {
       tunnelId: "button",

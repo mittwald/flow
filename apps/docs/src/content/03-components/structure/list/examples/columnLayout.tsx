@@ -14,7 +14,7 @@ export default () => {
   const List = typedList<{ mail: string }>();
 
   return (
-    <List.List batchSize={6}>
+    <List.List batchSize={6} aria-label="Domains">
       <List.StaticData
         data={[
           { mail: "john@doe.de" },

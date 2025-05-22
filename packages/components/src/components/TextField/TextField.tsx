@@ -1,6 +1,8 @@
 import * as Aria from "react-aria-components";
-import type { TextFieldBaseProps } from "@/components/TextFieldBase";
-import { TextFieldBase } from "@/components/TextFieldBase";
+import {
+  TextFieldBase,
+  type TextFieldBaseProps,
+} from "@/components/TextFieldBase";
 import styles from "./TextField.module.scss";
 import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
@@ -19,7 +21,7 @@ export interface TextFieldProps
  * @flr-clear-props-context
  */
 export const TextField = flowComponent("TextField", (props) => {
-  const { children, defaultValue, placeholder, ref, form, ...rest } = props;
+  const { children, placeholder, ref, form, ...rest } = props;
 
   const input = (
     <ReactAriaControlledValueFix inputContext={Aria.InputContext} props={props}>
@@ -28,7 +30,6 @@ export const TextField = flowComponent("TextField", (props) => {
         placeholder={placeholder}
         className={styles.textField}
         ref={ref}
-        defaultValue={defaultValue}
       />
     </ReactAriaControlledValueFix>
   );

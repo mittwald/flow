@@ -21,7 +21,7 @@ export default () => {
   const DomainList = typedList<Domain>();
 
   return (
-    <DomainList.List batchSize={5}>
+    <DomainList.List batchSize={5} aria-label="Domains">
       <DomainList.StaticData data={domains} />
       <ActionGroup>
         <Button

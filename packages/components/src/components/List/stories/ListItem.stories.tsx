@@ -127,14 +127,16 @@ export const WithActionGroup: Story = {
               </Avatar>
               <Heading>{user.name}</Heading>
               <Text>Mittwald</Text>
-              <ActionGroup>
-                <Button color="secondary" variant="soft">
-                  Edit
-                </Button>
-                <Button color="danger" variant="soft">
-                  Delete
-                </Button>
-              </ActionGroup>
+              <Content>
+                <ActionGroup>
+                  <Button color="secondary" variant="soft" slot="secondary">
+                    Edit
+                  </Button>
+                  <Button color="danger" variant="soft">
+                    Delete
+                  </Button>
+                </ActionGroup>
+              </Content>
             </List.ItemView>
           )}
         </List.Item>

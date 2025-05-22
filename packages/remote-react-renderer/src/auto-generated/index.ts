@@ -27,6 +27,7 @@ import { ClearPropsContextContent as ClearPropsContextContent } from "@mittwald/
 import { CodeBlock as CodeBlock } from "@mittwald/flow-react-components";
 import { Color as Color } from "@mittwald/flow-react-components";
 import { ColumnLayout as ColumnLayout } from "@mittwald/flow-react-components";
+import { ComboBox as ComboBox } from "@mittwald/flow-react-components";
 import { Content as Content } from "@mittwald/flow-react-components";
 import { ContextMenuContent as ContextMenuContent } from "@mittwald/flow-react-components";
 import { ContextMenuSection as ContextMenuSection } from "@mittwald/flow-react-components";
@@ -172,6 +173,7 @@ export const flowComponents = {
     "ColumnLayout",
     ColumnLayout,
   ),
+  "flr-combo-box": createFlowRemoteComponentRenderer("ComboBox", ComboBox),
   "flr-content": createFlowRemoteComponentRenderer("Content", Content),
   "flr-context-menu-content": createFlowRemoteComponentRenderer(
     "ContextMenuContent",
