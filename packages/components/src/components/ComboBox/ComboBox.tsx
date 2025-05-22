@@ -27,6 +27,10 @@ export interface ComboBoxProps
   controller?: OverlayController;
 }
 
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const ComboBox = flowComponent("ComboBox", (props) => {
   const {
     children,
@@ -42,6 +46,7 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
     placeholder,
     ref,
     renderEmptyState,
+
     ...rest
   } = props;
 
