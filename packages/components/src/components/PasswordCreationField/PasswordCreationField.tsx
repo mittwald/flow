@@ -264,11 +264,6 @@ export const PasswordCreationField = flowComponent(
     return (
       <ClearPropsContext>
         <TunnelProvider>
-          <FieldLabel
-            disabled={isDisabled}
-            onGeneratePasswordAction={onPasswordGenerateHandler}
-            policyValidationResult={policyValidationResult}
-          />
           <Aria.TextField
             type={isPasswordRevealed ? "text" : "password"}
             value={value}
@@ -280,6 +275,11 @@ export const PasswordCreationField = flowComponent(
             isRequired={isRequired}
             {...rest}
           >
+            <FieldLabel
+              disabled={isDisabled}
+              onGeneratePasswordAction={onPasswordGenerateHandler}
+              policyValidationResult={policyValidationResult}
+            />
             <Aria.Group
               isDisabled={isDisabled}
               className={clsx(styles.inputGroup)}

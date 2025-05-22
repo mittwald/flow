@@ -3,6 +3,10 @@
   flex-grow: 1;
   column-gap: var(--label--spacing);
   margin-bottom: var(--form-control--label-to-control-spacing);
+
+  .helperContext {
+    order: 0;
+  }
 }
 
 .button {

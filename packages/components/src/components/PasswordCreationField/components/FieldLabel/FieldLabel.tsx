@@ -49,18 +49,25 @@ export const FieldLabel: FC<Props> = (props) => {
 
   return (
     <div className={clsx(className, stylesFieldLabel.passwordFieldLabel)}>
-      <TunnelExit id="label" />
-      <ContextualHelpTrigger>
-        <Button
-          data-component="showPasswordRules"
-          isDisabled={isDisabled}
-          className={clsx(stylesFieldLabel.button, stylesFieldLabel.helpButton)}
-        />
-        <ContextualHelp>
-          <Heading>{translate.format("password.requirements.heading")}</Heading>
-          {validationResultComponents}
-        </ContextualHelp>
-      </ContextualHelpTrigger>
+      <div className={clsx(stylesFieldLabel.helperContext)}>
+        <TunnelExit id="label" />
+        <ContextualHelpTrigger>
+          <Button
+            data-component="showPasswordRules"
+            isDisabled={isDisabled}
+            className={clsx(
+              stylesFieldLabel.button,
+              stylesFieldLabel.helpButton,
+            )}
+          />
+          <ContextualHelp>
+            <Heading>
+              {translate.format("password.requirements.heading")}
+            </Heading>
+            {validationResultComponents}
+          </ContextualHelp>
+        </ContextualHelpTrigger>
+      </div>
       {onGeneratePasswordAction && isCryptographicSecureRandom && (
         <Action action={onGeneratePasswordAction}>
           <Button
