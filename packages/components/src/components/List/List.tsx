@@ -47,10 +47,12 @@ export interface ListProps<T>
     > {
   /** The number of items to be displayed on one page. */
   batchSize?: number;
+  hidePagination?: boolean;
 }
 
 export const List = flowComponent("List", (props) => {
-  const { children, batchSize, onChange, ref, ...restProps } = props;
+  const { children, batchSize, onChange, ref, hidePagination, ...restProps } =
+    props;
 
   const listLoaderAsync = deepFindOfType(
     children,
@@ -184,7 +186,7 @@ export const List = flowComponent("List", (props) => {
                 listModel.viewMode === "tiles") && <Items />}
               {listModel.viewMode === "table" && <Table />}
             </DivView>
-            <Footer />
+            {!hidePagination && <Footer />}
           </DivView>
         </listContext.Provider>
       </TunnelProvider>

@@ -235,7 +235,12 @@ export const WithAccordion: Story = {
     return (
       <Section>
         <Heading>Invoices</Heading>
-        <InvoiceList.List batchSize={5} aria-label="Invoices" accordion>
+        <InvoiceList.List
+          hidePagination
+          batchSize={5}
+          aria-label="Invoices"
+          accordion
+        >
           <InvoiceList.StaticData
             data={[
               { id: "RG100000", date: "1.9.2024", amount: "25,00 €" },
