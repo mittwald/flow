@@ -6,6 +6,7 @@ import {
 import type { RemoteComponentRendererProps } from "@mittwald/remote-dom-react/host";
 import { createRemoteComponentRenderer } from "@mittwald/remote-dom-react/host";
 import { mapEventHandler } from "@mittwald/flow-remote-core";
+import { FlowRemoteElement } from "@mittwald/flow-remote-elements";
 import { type ComponentType } from "react";
 import { mapValues } from "remeda";
 
@@ -31,9 +32,18 @@ export const createFlowRemoteComponentRenderer = <P extends object>(
   function HostComponent(props: P) {
     const hostComponentProps = mapValues(props, (v, k) =>
       mapProperty(v, k),
-    ) as P;
+    ) as P & { [FlowRemoteElement.initializationPropertyName]?: boolean };
 
-    return <Component {...hostComponentProps} />;
+    const {
+      [FlowRemoteElement.initializationPropertyName]: initialized,
+      ...restProps
+    } = hostComponentProps;
+
+    if (!initialized) {
+      return null;
+    }
+
+    return <Component {...(restProps as P)} />;
   }
   HostComponent.displayName = `FlowRemoteRenderer(${name})`;
   return createRemoteComponentRenderer(HostComponent, {

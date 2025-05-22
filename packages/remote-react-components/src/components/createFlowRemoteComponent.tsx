@@ -2,7 +2,6 @@ import type {
   RemoteComponentOptions,
   RemoteComponentTypeFromElementConstructor,
 } from "@mittwald/remote-dom-react";
-import { createRemoteComponent } from "@mittwald/remote-dom-react";
 import {
   ClearPropsContextContent,
   flowComponent,
@@ -13,6 +12,7 @@ import type {
   RemoteElementConstructor,
 } from "@mittwald/flow-remote-core";
 import { createElement } from "react";
+import { createRemoteComponent } from "@/lib/createRemoteComponent";
 
 // eslint-disable-next-line  @typescript-eslint/no-explicit-any
 type AnyRecord = Record<string, any>;
