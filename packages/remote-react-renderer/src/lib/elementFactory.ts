@@ -9,10 +9,19 @@ type ElementTagNameMap = HTMLElementTagNameMap &
     Exclude<keyof SVGElementTagNameMap, keyof HTMLElementTagNameMap>
   >;
 
+interface Options {
+  isVoidElement?: boolean;
+}
+
 export const elementFactory =
-  <E extends keyof ElementTagNameMap>(element: E) =>
+  <E extends keyof ElementTagNameMap>(element: E, options: Options = {}) =>
   (props: Record<string, unknown>) => {
     const result = { ...props };
+    const { isVoidElement = false } = options;
+
+    if (isVoidElement) {
+      delete result["children"];
+    }
 
     // merge className and class
     result["className"] = clsx(
