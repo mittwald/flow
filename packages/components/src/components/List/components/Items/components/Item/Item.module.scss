@@ -20,6 +20,10 @@
     border-bottom-style: var(--list-item--border-style);
   }
 
+  &[data-href] {
+    cursor: pointer;
+  }
+
   &:where(.hasAction):not(
       &:has(:global(.flow--list--items--item--view--bottom-content):hover)
     ) {
