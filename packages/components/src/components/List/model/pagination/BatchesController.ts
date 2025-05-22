@@ -24,8 +24,8 @@ export class BatchesController<T> {
   }
 
   public hasNextBatch(): boolean {
-    const filtertRowCount = this.reactTable.getFilteredRowModel().rows.length;
-    if (filtertRowCount <= this.batchSize) {
+    const filteredRowCount = this.reactTable.getFilteredRowModel().rows.length;
+    if (filteredRowCount <= this.batchSize) {
       return false;
     }
     return this.reactTable.getCanNextPage();
