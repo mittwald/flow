@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.199](https://github.com/mittwald/flow/compare/0.2.0-alpha.198...0.2.0-alpha.199) (2025-05-22)
+
+### Bug Fixes
+
+* **ContextMenu:** avoid close on switch click ([#1492](https://github.com/mittwald/flow/issues/1492)) ([9654cc4](https://github.com/mittwald/flow/commit/9654cc4bd6678448e4607e5520a4e690e30a05e9))
+
 # [0.2.0-alpha.198](https://github.com/mittwald/flow/compare/0.2.0-alpha.197...0.2.0-alpha.198) (2025-05-22)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
