@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.197](https://github.com/mittwald/flow/compare/0.2.0-alpha.196...0.2.0-alpha.197) (2025-05-22)
+
+### Bug Fixes
+
+* **Form:** correct field reset handling ([#1482](https://github.com/mittwald/flow/issues/1482)) ([a7dd997](https://github.com/mittwald/flow/commit/a7dd997cfa122fe276cdc87875f7592eb6ca7634))
+
 # [0.2.0-alpha.196](https://github.com/mittwald/flow/compare/0.2.0-alpha.195...0.2.0-alpha.196) (2025-05-22)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
