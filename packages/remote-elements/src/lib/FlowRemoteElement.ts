@@ -20,6 +20,19 @@ export class FlowRemoteElement<
     EventListenerOrEventListenerObject
   >();
 
+  /**
+   * This property is used to check if the host component has received its
+   * remote props. If not, rendering the underlying component is skipped.
+   */
+  public static initializationPropertyName = "data-flr-initialized";
+
+  static override get remoteProperties() {
+    return {
+      ...super.remoteAttributes,
+      [FlowRemoteElement.initializationPropertyName]: {},
+    };
+  }
+
   public override addEventListener(
     type: string,
     listener: EventListenerOrEventListenerObject,
