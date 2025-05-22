@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.203](https://github.com/mittwald/flow/compare/0.2.0-alpha.202...0.2.0-alpha.203) (2025-05-22)
+
+### Features
+
+* **Remote:** add remote support for <br/> ([ad3372b](https://github.com/mittwald/flow/commit/ad3372b08e90fb70b1e2bc7a853341a643f42f11))
+
 # [0.2.0-alpha.202](https://github.com/mittwald/flow/compare/0.2.0-alpha.201...0.2.0-alpha.202) (2025-05-22)
 
 ### Bug Fixes
