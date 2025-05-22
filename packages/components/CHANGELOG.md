@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.202](https://github.com/mittwald/flow/compare/0.2.0-alpha.201...0.2.0-alpha.202) (2025-05-22)
+
+### Bug Fixes
+
+* **Checkbox:** fix alignment ([#1493](https://github.com/mittwald/flow/issues/1493)) ([a0ff663](https://github.com/mittwald/flow/commit/a0ff66348ae6c0ffd8aa75d0a8436c5fa52d0108))
+* **List:** use cursor pointer on linked list items ([#1494](https://github.com/mittwald/flow/issues/1494)) ([2a58e5a](https://github.com/mittwald/flow/commit/2a58e5a94ec8091bd25859d6f21b895341c9fcd7))
+
 # [0.2.0-alpha.201](https://github.com/mittwald/flow/compare/0.2.0-alpha.200...0.2.0-alpha.201) (2025-05-22)
 
 ### Bug Fixes
