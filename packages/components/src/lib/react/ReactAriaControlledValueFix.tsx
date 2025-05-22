@@ -1,12 +1,14 @@
 import * as Aria from "react-aria-components";
 import {
   Children,
+  cloneElement,
   isValidElement,
   type Context,
   type FC,
   type ForwardedRef,
   type PropsWithChildren,
 } from "react";
+import { mergeRefs } from "@react-aria/utils";
 
 export interface ReactAriaControlledValueFixProps extends PropsWithChildren {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -21,9 +23,9 @@ interface ChildProps {
 
 /**
  * React Aria (accidentally?!) enforces controlled inputs by always setting the
- * value prop on Inputs and TextAreas. This component uses React Arias context
- * prop API to only set the value prop, if it is present in the original
- * Input/TextArea component.
+ * value prop on Inputs and TextAreas with its context props API. This component
+ * also uses this API to only unset the value prop. Furthermore setting an input
+ * value is finally done by directly on the DOM element.
  *
  * https://github.com/adobe/react-spectrum/blob/main/packages/%40react-aria/textfield/src/useTextField.ts#L182
  * https://github.com/adobe/react-spectrum/blob/main/packages/%40react-aria/numberfield/src/useNumberField.ts#L206
@@ -31,7 +33,7 @@ interface ChildProps {
 export const ReactAriaControlledValueFix: FC<
   ReactAriaControlledValueFixProps
 > = (props) => {
-  const { inputContext: context, children, props: originalInputProps } = props;
+  const { inputContext: context, children } = props;
 
   const child = Children.only(children);
   if (!isValidElement<ChildProps>(child)) {
@@ -39,26 +41,35 @@ export const ReactAriaControlledValueFix: FC<
   }
 
   const inputProps = child.props;
-  const inputRef = inputProps["ref"];
+  const ref = inputProps["ref"];
 
   const [contextProps, contextRef] = Aria.useContextProps(
     inputProps,
-    inputRef,
+    ref,
     context,
   );
 
-  // Here does the workaround his job
-  if (
-    originalInputProps &&
-    typeof originalInputProps === "object" &&
-    !("value" in originalInputProps)
-  ) {
-    delete contextProps["value"];
-  }
+  const mergedRef = mergeRefs((el) => {
+    if (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement) {
+      el.value = String(contextProps.value ?? "");
+    }
+  }, contextRef);
+
+  const uncontrolledContextProps = {
+    ...contextProps,
+    value: undefined,
+    ref: mergedRef,
+  };
+
+  const uncontrolledInputProps = {
+    ...inputProps,
+    ref: undefined,
+    value: undefined,
+  };
 
   return (
-    <Aria.Provider values={[[context, { ...contextProps, ref: contextRef }]]}>
-      {child}
+    <Aria.Provider values={[[context, uncontrolledContextProps]]}>
+      {cloneElement(child, uncontrolledInputProps)}
     </Aria.Provider>
   );
 };
