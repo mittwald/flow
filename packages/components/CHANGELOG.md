@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.201](https://github.com/mittwald/flow/compare/0.2.0-alpha.200...0.2.0-alpha.201) (2025-05-22)
+
+### Bug Fixes
+
+* **List:** fix pagination ([#1491](https://github.com/mittwald/flow/issues/1491)) ([2772899](https://github.com/mittwald/flow/commit/277289938b800279677933f802fdc3728d931d73))
+
 # [0.2.0-alpha.200](https://github.com/mittwald/flow/compare/0.2.0-alpha.199...0.2.0-alpha.200) (2025-05-22)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
