@@ -1,5 +1,5 @@
 import { type FC, type PropsWithChildren, type ReactNode } from "react";
-import React, { useState } from "react";
+import { useState } from "react";
 import * as Aria from "react-aria-components";
 import styles from "../FormField/FormField.module.scss";
 import clsx from "clsx";
@@ -69,6 +69,8 @@ export const TextFieldBase: FC<TextFieldBaseProps> = (props) => {
         {...rest}
         className={rootClassName}
         onChange={handleOnChange}
+        /** Prevent weired reset behavior when value is 'undefined' */
+        value={rest.value ?? ""}
       >
         {input}
         <PropsContextProvider props={propsContext}>
