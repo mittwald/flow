@@ -25,5 +25,7 @@ export const getMenuItemSelectionVariant = (
 export const getCloseOverlayType = (
   selectionMode?: ContextMenuSelectionMode,
 ) => {
-  return selectionMode === "multiple" ? undefined : "ContextMenu";
+  return selectionMode === "multiple" || selectionMode === "switch"
+    ? undefined
+    : "ContextMenu";
 };
