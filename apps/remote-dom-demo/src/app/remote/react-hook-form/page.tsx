@@ -1,34 +1,104 @@
 "use client";
 
-import { Field } from "@mittwald/flow-react-components/react-hook-form";
-import { Button, TextField } from "@mittwald/flow-remote-react-components";
-import { Form } from "@mittwald/flow-remote-react-components/react-hook-form";
+import {
+  ActionGroup,
+  Button,
+  ComboBox,
+  Label,
+  Option,
+  Section,
+  Select,
+  TextArea,
+  TextField,
+} from "@mittwald/flow-remote-react-components";
+import {
+  Form,
+  typedField,
+} from "@mittwald/flow-remote-react-components/react-hook-form";
 import { useForm } from "react-hook-form";
 
 export default function Page() {
   const form = useForm({
     defaultValues: {
-      email: "foo",
-      password: "",
+      email: "foo.bar@",
+      confirm: false,
+      age: 20,
+      comment: "",
+      city: "Minden",
+      city2: "Minden",
     },
   });
 
+  const Field = typedField(form);
+
   return (
-    <Form form={form} onSubmit={(data) => console.log("here", data)}>
-      <Field
-        rules={{
-          validate: {
-            customRule: (val) => {
-              console.log("foo");
-              return val === "test" ? true : "Waaaa";
-            },
-          },
-        }}
-        name={"email"}
-      >
-        <TextField type="text" />
-      </Field>
-      <Button type={"submit"}>Login</Button>
-    </Form>
+    <Section>
+      <Form form={form} onSubmit={(data) => console.log("Submitted", data)}>
+        <Field
+          name="email"
+          rules={{
+            required: "Required!",
+          }}
+        >
+          <TextField>
+            <Label>Email</Label>
+          </TextField>
+        </Field>
+        <Field name="comment">
+          <TextArea maxLength={100}>
+            <Label>Comment</Label>
+          </TextArea>
+        </Field>
+        <Field name="city">
+          <ComboBox>
+            <Label>City</Label>
+            <Option value="Minden" textValue="Minden">
+              Minden
+            </Option>
+            <Option value="Espelkamp" textValue="Espelkamp">
+              Espelkamp
+            </Option>
+          </ComboBox>
+        </Field>
+        <Field name="city2">
+          <Select>
+            <Label>City</Label>
+            <Option value="Minden" textValue="Minden">
+              Minden
+            </Option>
+            <Option value="Espelkamp" textValue="Espelkamp">
+              Espelkamp
+            </Option>
+          </Select>
+        </Field>
+        <ActionGroup>
+          <Button type="submit">Login</Button>
+          <Button
+            onPress={() => {
+              form.setValue("email", "demo@test.de");
+            }}
+          >
+            Set value
+          </Button>
+          <Button
+            onPress={() => {
+              form.reset();
+            }}
+          >
+            Reset
+          </Button>
+          <Button
+            onPress={() => {
+              form.reset({
+                email: "resetted@test.de",
+              });
+            }}
+          >
+            Reset with value
+          </Button>
+          <Button type="reset">Native Reset</Button>
+        </ActionGroup>
+      </Form>
+    </Section>
   );
 }
