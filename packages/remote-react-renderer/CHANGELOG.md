@@ -3,6 +3,54 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.207](https://github.com/mittwald/flow/compare/0.2.0-alpha.206...0.2.0-alpha.207) (2025-05-23)
+
+### Bug Fixes
+
+* **Remote:** fix backwards incompatibility of RemoteRenderer ([41800d1](https://github.com/mittwald/flow/commit/41800d127300a0eccd13c52354ac081cc01fe8a0))
+
+# [0.2.0-alpha.206](https://github.com/mittwald/flow/compare/0.2.0-alpha.205...0.2.0-alpha.206) (2025-05-23)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-renderer
+
+# [0.2.0-alpha.205](https://github.com/mittwald/flow/compare/0.2.0-alpha.204...0.2.0-alpha.205) (2025-05-23)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-renderer
+
+# [0.2.0-alpha.204](https://github.com/mittwald/flow/compare/0.2.0-alpha.203...0.2.0-alpha.204) (2025-05-23)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-renderer
+
+# [0.2.0-alpha.203](https://github.com/mittwald/flow/compare/0.2.0-alpha.202...0.2.0-alpha.203) (2025-05-22)
+
+### Features
+
+* **Remote:** add remote support for <br/> ([ad3372b](https://github.com/mittwald/flow/commit/ad3372b08e90fb70b1e2bc7a853341a643f42f11))
+
+# [0.2.0-alpha.202](https://github.com/mittwald/flow/compare/0.2.0-alpha.201...0.2.0-alpha.202) (2025-05-22)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-renderer
+
+# [0.2.0-alpha.201](https://github.com/mittwald/flow/compare/0.2.0-alpha.200...0.2.0-alpha.201) (2025-05-22)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-renderer
+
+# [0.2.0-alpha.200](https://github.com/mittwald/flow/compare/0.2.0-alpha.199...0.2.0-alpha.200) (2025-05-22)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-renderer
+
+# [0.2.0-alpha.199](https://github.com/mittwald/flow/compare/0.2.0-alpha.198...0.2.0-alpha.199) (2025-05-22)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-renderer
+
+# [0.2.0-alpha.198](https://github.com/mittwald/flow/compare/0.2.0-alpha.197...0.2.0-alpha.198) (2025-05-22)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-renderer
+
+# [0.2.0-alpha.197](https://github.com/mittwald/flow/compare/0.2.0-alpha.196...0.2.0-alpha.197) (2025-05-22)
+
+**Note:** Version bump only for package @mittwald/flow-remote-react-renderer
+
 # [0.2.0-alpha.196](https://github.com/mittwald/flow/compare/0.2.0-alpha.195...0.2.0-alpha.196) (2025-05-22)
 
 ### Bug Fixes

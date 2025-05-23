@@ -62,6 +62,14 @@ export const TextFieldBase: FC<TextFieldBaseProps> = (props) => {
     },
   );
 
+  /** Prevent weird reset behavior when value is 'undefined' */
+  const propsWithOptionalStringValue =
+    "value" in props
+      ? {
+          value: props.value ?? "",
+        }
+      : {};
+
   return (
     <ClearPropsContext>
       <Aria.TextField
@@ -69,8 +77,7 @@ export const TextFieldBase: FC<TextFieldBaseProps> = (props) => {
         {...rest}
         className={rootClassName}
         onChange={handleOnChange}
-        /** Prevent weired reset behavior when value is 'undefined' */
-        value={rest.value ?? ""}
+        {...propsWithOptionalStringValue}
       >
         {input}
         <PropsContextProvider props={propsContext}>

@@ -9,6 +9,7 @@ import { mapEventHandler } from "@mittwald/flow-remote-core";
 import { FlowRemoteElement } from "@mittwald/flow-remote-elements";
 import { type ComponentType } from "react";
 import { mapValues } from "remeda";
+import { useRemoteRendererContext } from "@/context";
 
 const mapProperty = (val: unknown, key: string) => {
   if (isEventProp(key, val)) {
@@ -34,13 +35,22 @@ export const createFlowRemoteComponentRenderer = <P extends object>(
       mapProperty(v, k),
     ) as P & { [FlowRemoteElement.initializationPropertyName]?: boolean };
 
+    const rendererContext = useRemoteRendererContext();
+
     const {
       [FlowRemoteElement.initializationPropertyName]: initialized,
       ...restProps
     } = hostComponentProps;
 
-    if (!initialized) {
+    if (rendererContext === null) {
       return null;
+    }
+
+    if (rendererContext.remoteVersion >= 3) {
+      // "initialized" handling introduced in version 3
+      if (!initialized) {
+        return null;
+      }
     }
 
     return <Component {...(restProps as P)} />;

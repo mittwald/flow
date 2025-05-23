@@ -24,7 +24,7 @@ export type RemoteToHostConnection = ThreadNestedIframe<
 >;
 
 export interface HostToRemoteConnection {
-  version: number;
+  version: Version;
   thread: ThreadIframe<RemoteExports, HostExports>;
 }
 
@@ -32,4 +32,5 @@ export enum Version {
   vUnknown = 0,
   v1 = 1,
   v2 = 2,
+  v3 = 3,
 }
