@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.204](https://github.com/mittwald/flow/compare/0.2.0-alpha.203...0.2.0-alpha.204) (2025-05-23)
+
+### Bug Fixes
+
+* **TextField:** fix TextField loses value on blur ([#1499](https://github.com/mittwald/flow/issues/1499)) ([b0ca673](https://github.com/mittwald/flow/commit/b0ca6739e2af1d59c1198377d4eefd905a9eb196))
+
 # [0.2.0-alpha.203](https://github.com/mittwald/flow/compare/0.2.0-alpha.202...0.2.0-alpha.203) (2025-05-22)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
