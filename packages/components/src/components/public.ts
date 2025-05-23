@@ -71,6 +71,7 @@ export * from "@/components/NumberField";
 export * from "@/components/Option";
 export * from "@/components/Overlay";
 export * from "@/components/OverlayTrigger";
+export * from "@/components/PasswordCreationField";
 export * from "@/components/Popover";
 export * from "@/components/ProgressBar";
 export * from "@/components/RadioGroup";

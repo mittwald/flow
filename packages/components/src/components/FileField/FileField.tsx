@@ -2,7 +2,7 @@ import formFieldStyles from "@/components/FormField/FormField.module.scss";
 import { useFormValidation } from "@react-aria/form";
 import { useFormValidationState } from "@react-stately/form";
 import type { PropsWithChildren } from "react";
-import { useMemo, useRef } from "react";
+import React, { useMemo } from "react";
 import type * as Aria from "react-aria-components";
 import { FieldErrorContext, InputContext } from "react-aria-components";
 import type { FileInputOnChangeHandler } from "@/components/FileField/components/FileInput";
@@ -11,6 +11,7 @@ import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
+import { useObjectRef } from "@react-aria/utils";
 
 export interface FileFieldProps
   extends PropsWithChildren,
@@ -39,7 +40,7 @@ export const FileField = flowComponent("FileField", (props) => {
     onChange,
     ...restInputProps
   } = props;
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useObjectRef(ref);
 
   const formValidationState = useFormValidationState({
     value: undefined,

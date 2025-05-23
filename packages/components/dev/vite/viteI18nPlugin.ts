@@ -1,6 +1,6 @@
 import type { Plugin } from "vite";
 import path from "path";
-import * as fs from "fs";
+import { readdirSync, readFileSync } from "fs";
 import crypt from "crypto";
 import { compileStrings } from "@internationalized/string-compiler";
 
@@ -37,17 +37,17 @@ const generateComponentIntlContent = (
 
   if (languageKey === "*") {
     const fileDirectory = path.dirname(filePath);
-    fs.readdirSync(fileDirectory).forEach((file: string) => {
+    readdirSync(fileDirectory).forEach((file: string) => {
       const filePath = path.join(fileDirectory, file);
       const match = filePath.match(importPathInfosRegEx);
 
-      const fileContent = fs.readFileSync(filePath, "utf8");
+      const fileContent = readFileSync(filePath, "utf8");
       langObject.push(
         `"${match && match[3]}":${compileLocalString(fileContent)}`,
       );
     });
   } else {
-    const fileContent = fs.readFileSync(filePath, "utf8");
+    const fileContent = readFileSync(filePath, "utf8");
     langObject.push(`"${languageKey}":${compileLocalString(fileContent)}`);
   }
 
@@ -61,7 +61,7 @@ export const viteI18nPlugin: Plugin = {
     const localeMatch = file.match(importPathInfosRegEx);
     if (localeMatch) {
       const localDirectory = path.dirname(file);
-      fs.readdirSync(localDirectory)
+      readdirSync(localDirectory)
         .concat([`*${moduleSuffix}`])
         .forEach((file: string) => {
           const filePath = path.join(localDirectory, file);
