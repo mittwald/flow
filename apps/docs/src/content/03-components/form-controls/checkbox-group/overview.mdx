@@ -1,10 +1,14 @@
 # Playground
 
+Verwende `<CheckboxGroup />`zusammen mit mehreren `<Checkbox />` oder `<CheckboxButtons />`, um eine CheckboxGroup darzustellen. Über der CheckboxGroup kann ein beschreibendes [Label](/03-components/content/label) verwendet werden.
+
 <LiveCodeEditor />
 
 ---
 
-# Mit Checkbox Buttons
+# CheckboxButtons
+
+Eine CheckboxGroup kann mit [Checkboxen](/03-components/form-controls/checkbox) oder [CheckboxButtons](/03-components/form-controls/checkbox-button) gefüllt werden.
 
 <LiveCodeEditor example="buttons" editorCollapsed />
 
@@ -12,26 +16,23 @@
 
 # Mit benutzerdefinierten Spalten
 
-Die `CheckboxGroup` verwendet das `ColumnLayout` um eine Anpassung der Spalten
-zu ermöglichen.
+Die CheckboxGroup verwendet das [ColumnLayout](/03-components/structure/column-layout), um eine Anpassung der Spalten zu ermöglichen.
 
 <LiveCodeEditor example="customColumns" editorCollapsed />
 
 ---
 
-# Mit FieldDescription
+# Kombiniere mit ...
+
+## FieldDescription
+
+Um wichtige Hinweise zu den Auswahloptionen der CheckboxGroup bereitzustellen, kann unterhalb der Gruppe eine `<FieldDescription />`eingebaut werden.
 
 <LiveCodeEditor example="fieldDescription" editorCollapsed />
 
----
-
-# Kombiniere mit ...
-
 ## ContextualHelp
 
-Benutze die [ContextualHelp](/03-components/overlays/contextual-help)
-Komponente, wenn du weitere Informationen bereitstellen möchtest, und diese zu
-lang für die FieldDescription sind.
+Benutze das [ContextualHelp](/03-components/overlays/contextual-help), um weitere Informationen bereitstellen zu können. 
 
 <LiveCodeEditor example="contextualHelp" editorCollapsed />
 
