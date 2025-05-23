@@ -22,6 +22,7 @@ export class RemoteCountryOptionsElement extends FlowRemoteElement<RemoteCountry
       disabledKeys: {},
       disallowEmptySelection: {},
       dragAndDropHooks: {},
+      escapeKeyBehavior: {},
       filterBy: {},
       id: {},
       items: {},

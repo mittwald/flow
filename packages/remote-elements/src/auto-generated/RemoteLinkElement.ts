@@ -38,6 +38,7 @@ export class RemoteLinkElement extends FlowRemoteElement<RemoteLinkElementProps>
   static override get remoteEvents() {
     return {
       blur: {},
+      click: {},
       focus: {},
       focusChange: {},
       hoverChange: {},

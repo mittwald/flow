@@ -36,8 +36,8 @@ describe("resetting", () => {
 
     return (
       <Form form={form} onSubmit={(values) => handleSubmit(values)}>
-        <Field {...props.textField} name="test">
-          <TextField aria-label="test" />
+        <Field name="test">
+          <TextField aria-label="test" {...props.textField} />
         </Field>
         <Button
           onPress={() => {
@@ -64,11 +64,20 @@ describe("resetting", () => {
     [
       undefined,
       {
-        defaultValue: "initialProp",
+        defaultValue: "defaultValue",
       },
       "changed",
       undefined,
-      "initialProp",
+      "",
+    ],
+    [
+      "initial",
+      {
+        defaultValue: "defaultValue",
+      },
+      "changed",
+      undefined,
+      "initial",
     ],
     [undefined, {}, "changed", undefined, ""],
     [undefined, {}, "changed", "resetted", "resetted"],
@@ -84,11 +93,11 @@ describe("resetting", () => {
       const field = screen.getByLabelText("test");
       const resetButton = screen.getByText("Reset");
 
-      expect(field).toHaveDisplayValue(defaultValue ?? initial ?? "");
+      expect(field).toHaveDisplayValue(initial ?? defaultValue ?? "");
 
       await user.type(field, changedTo);
       expect(field).toHaveDisplayValue(
-        (defaultValue ?? initial ?? "") + (changedTo ?? ""),
+        (initial ?? defaultValue ?? "") + (changedTo ?? ""),
       );
 
       await user.click(resetButton);

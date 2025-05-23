@@ -13,7 +13,6 @@ export class RemoteTableBodyElement extends FlowRemoteElement<RemoteTableBodyEle
     return {
       className: {},
       dependencies: {},
-      disabledKeys: {},
       items: {},
       renderEmptyState: {},
     };

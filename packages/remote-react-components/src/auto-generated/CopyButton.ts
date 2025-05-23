@@ -18,6 +18,7 @@ export const CopyButton = createFlowRemoteComponent(
     },
     eventProps: {
       onBlur: { event: "blur" } as never,
+      onClick: { event: "click" } as never,
       onFocus: { event: "focus" } as never,
       onFocusChange: { event: "focusChange" } as never,
       onHoverChange: { event: "hoverChange" } as never,

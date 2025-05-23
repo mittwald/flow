@@ -51,6 +51,7 @@ export class RemoteButtonElement extends FlowRemoteElement<RemoteButtonElementPr
   static override get remoteEvents() {
     return {
       blur: {},
+      click: {},
       focus: {},
       focusChange: {},
       hoverChange: {},
