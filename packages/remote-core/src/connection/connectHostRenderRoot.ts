@@ -1,7 +1,8 @@
-import type {
-  HostExports,
-  RemoteExports,
-  RemoteToHostConnection,
+import {
+  Version,
+  type HostExports,
+  type RemoteExports,
+  type RemoteToHostConnection,
 } from "@/connection/types";
 import { RemoteError } from "@/error";
 import { type RemoteConnection } from "@mittwald/remote-dom-core/elements";
@@ -40,7 +41,7 @@ export const connectHostRenderRoot = async (
   }
 
   try {
-    await connection.imports.setIsReady(2);
+    await connection.imports.setIsReady(Version.v3);
 
     if (typeof mwExtBridge !== "undefined") {
       mwExtBridge.connection = connection.imports;
