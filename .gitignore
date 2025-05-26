@@ -17,3 +17,4 @@ coverage
 packages/components/out
 .nx/workspace-data
 coverage/*.json
+packages/remote-react-components/src/tests/__screenshots__

@@ -29,23 +29,38 @@
     "build": "vite build --config vite.build.config.ts",
     "clean": "rimraf dist",
     "test": "exit 0",
-    "test:compile": "tsc --noEmit"
+    "test:browser": "vitest run --workspace=dev/vitest/remote-test-server/vitest.workspace.ts --browser.headless",
+    "test:browser:prepare": "playwright install",
+    "test:compile": "tsc --noEmit",
+    "test:unit": "exit 0"
   },
   "dependencies": {
     "@mittwald/flow-react-components": "workspace:*",
     "@mittwald/flow-remote-core": "workspace:*",
     "@mittwald/flow-remote-elements": "workspace:*",
     "@mittwald/remote-dom-react": "1.2.2-mittwald.3",
+    "@testing-library/jest-dom": "6.6.3",
     "@types/react": "^19.1.6",
     "react-error-boundary": "^5.0.0"
   },
   "devDependencies": {
     "@mittwald/ext-bridge": "workspace:*",
+    "@mittwald/flow-remote-react-renderer": "workspace:*",
     "@mittwald/typescript-config": "workspace:*",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "6.6.3",
+    "@testing-library/react": "~16.2.0",
+    "@testing-library/user-event": "^14.6.1",
     "@types/node": "^22.15.23",
+    "@types/react-dom": "^19.1.5",
+    "@vitejs/plugin-react": "^4.5.0",
+    "@vitest/browser": "^3.1.4",
+    "@vitest/coverage-v8": "~3.0.9",
     "nx": "^20.8.2",
+    "playwright": "^1.52.0",
     "prettier": "^3.5.3",
     "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "react-hook-form": "^7.56.4",
     "rimraf": "^6.0.1",
     "rollup-plugin-auto-named-exports": "1.0.0-beta.3",
@@ -55,11 +70,13 @@
     "vite-plugin-banner": "^0.8.1",
     "vite-plugin-checker": "^0.9.3",
     "vite-plugin-dts": "^4.5.4",
-    "vite-plugin-externalize-deps": "^0.9.0"
+    "vite-plugin-externalize-deps": "^0.9.0",
+    "vitest": "~3.1.4",
+    "vitest-browser-react": "^0.2.0"
   },
   "peerDependencies": {
     "@mittwald/ext-bridge": "workspace:*",
-    "react": "^19",
+    "react": "^19.1.0",
     "react-hook-form": "*"
   },
   "peerDependenciesMeta": {
