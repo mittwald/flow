@@ -26,7 +26,10 @@ jobs:
       - uses: nrwl/nx-set-shas@v4
       - if: github.ref != 'refs/heads/main'
         run: git branch --track main origin/main
-      - run: pnpm lint
+      - name: Lint
+        run: pnpm lint
+      - name: Install Playwright
+        run: pnpm nx test:browser:prepare remote-react-components
       - run: pnpm nx affected -t test,lint --parallel=3
       # Check if working dir is clean after build
       - run: git diff --exit-code

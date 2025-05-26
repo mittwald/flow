@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "types": ["node"]
+    "types": ["@vitest/browser/providers/playwright", "node"]
   },
   "extends": "./tsconfig.json",
   "include": ["./vite.*.ts"]

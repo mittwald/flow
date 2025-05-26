@@ -35,6 +35,7 @@ export class FlowRemoteElement<
   static override get remoteProperties() {
     return {
       ...super.remoteAttributes,
+      "data-testid": {},
       [FlowRemoteElement.initializationPropertyName]: {},
       [FlowRemoteElement.versionPropertyName]: {},
     };
