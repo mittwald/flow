@@ -1,6 +1,8 @@
 /// <reference types="vite/client" />
 import type { JSX as Jsx } from "react/jsx-runtime";
 
+import "@vitest/browser/matchers.d.ts";
+
 declare global {
   declare module "*.locale.json" {
     import type { LocalizedStrings } from "react-aria";
