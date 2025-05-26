@@ -91,14 +91,14 @@ body:
     validations:
       required: true
 
- - type: input
-    id: browser-version
-    attributes:
-      label: Browser Version
-      description: What version of the browser are you using?
-      placeholder: e.g. Chrome 124.0.6367.91
-    validations:
-      required: false
+  - type: input
+      id: browser-version
+      attributes:
+        label: Browser Version
+        description: What version of the browser are you using?
+        placeholder: e.g. Chrome 124.0.6367.91
+      validations:
+        required: false
 
   - type: checkboxes
     id: checks
