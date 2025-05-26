@@ -1,9 +1,5 @@
 "use client";
 
-import {
-  RemoteRendererContextProvider,
-  type RemoteRendererContext,
-} from "@/context";
 import { useAwaiter } from "@/hooks/useAwaiter";
 import { useMergedComponents } from "@/hooks/useMergedComponents";
 import { useUpdateHostPathnameOnRemote } from "@/hooks/useUpdateHostPathnameOnRemote";
@@ -113,15 +109,9 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
     loaderId: src,
   });
 
-  const context: RemoteRendererContext | null = connection.current
-    ? { remoteVersion: connection.current.version }
-    : null;
-
   return (
     <>
-      <RemoteRendererContextProvider value={context}>
-        <RemoteRootRenderer components={remoteComponents} receiver={receiver} />
-      </RemoteRendererContextProvider>
+      <RemoteRootRenderer components={remoteComponents} receiver={receiver} />
       <iframe
         src={src}
         ref={(ref) => {
