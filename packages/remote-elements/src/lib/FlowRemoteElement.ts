@@ -1,5 +1,9 @@
 import { getObjectKeysIncludingProtoTypes } from "@/lib/getObjectKeysIncludingProtoTypes";
-import { RemoteElement, RemoteEvent } from "@mittwald/flow-remote-core";
+import {
+  RemoteElement,
+  RemoteEvent,
+  type Version,
+} from "@mittwald/flow-remote-core";
 import { isArray, isObjectType, omit } from "remeda";
 import type { EmptyObject } from "type-fest";
 
@@ -24,12 +28,15 @@ export class FlowRemoteElement<
    * This property is used to check if the host component has received its
    * remote props. If not, rendering the underlying component is skipped.
    */
-  public static initializationPropertyName = "data-flr-initialized";
+  public static initializationPropertyName = "data-flr-initialized" as const;
+
+  public static versionPropertyName = "data-flr-version" as const;
 
   static override get remoteProperties() {
     return {
       ...super.remoteAttributes,
       [FlowRemoteElement.initializationPropertyName]: {},
+      [FlowRemoteElement.versionPropertyName]: {},
     };
   }
 
@@ -76,4 +83,9 @@ export class FlowRemoteElement<
     this.eventListenerMap.delete(listener);
     super.removeEventListener(type, wrappedEventListener ?? listener, options);
   }
+}
+
+export interface FlowRemoteElementMetaData {
+  [FlowRemoteElement.initializationPropertyName]?: boolean;
+  [FlowRemoteElement.versionPropertyName]?: Version;
 }

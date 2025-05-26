@@ -5,11 +5,13 @@ import {
 } from "@/lib/propClassifiers";
 import type { RemoteComponentRendererProps } from "@mittwald/remote-dom-react/host";
 import { createRemoteComponentRenderer } from "@mittwald/remote-dom-react/host";
-import { mapEventHandler } from "@mittwald/flow-remote-core";
-import { FlowRemoteElement } from "@mittwald/flow-remote-elements";
+import { mapEventHandler, Version } from "@mittwald/flow-remote-core";
+import {
+  FlowRemoteElement,
+  type FlowRemoteElementMetaData,
+} from "@mittwald/flow-remote-elements";
 import { type ComponentType } from "react";
 import { mapValues } from "remeda";
-import { useRemoteRendererContext } from "@/context";
 
 const mapProperty = (val: unknown, key: string) => {
   if (isEventProp(key, val)) {
@@ -30,23 +32,18 @@ export const createFlowRemoteComponentRenderer = <P extends object>(
   name: string,
   Component: ComponentType<P>,
 ): ComponentType<RemoteComponentRendererProps> => {
-  function HostComponent(props: P) {
+  function HostComponent(props: P & FlowRemoteElementMetaData) {
     const hostComponentProps = mapValues(props, (v, k) =>
       mapProperty(v, k),
-    ) as P & { [FlowRemoteElement.initializationPropertyName]?: boolean };
-
-    const rendererContext = useRemoteRendererContext();
+    ) as P & FlowRemoteElementMetaData;
 
     const {
-      [FlowRemoteElement.initializationPropertyName]: initialized,
+      [FlowRemoteElement.versionPropertyName]: version = Version.v1,
+      [FlowRemoteElement.initializationPropertyName]: initialized = false,
       ...restProps
     } = hostComponentProps;
 
-    if (rendererContext === null) {
-      return null;
-    }
-
-    if (rendererContext.remoteVersion >= 3) {
+    if (version >= Version.v3) {
       // "initialized" handling introduced in version 3
       if (!initialized) {
         return null;
