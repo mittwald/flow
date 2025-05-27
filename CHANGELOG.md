@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.210](https://github.com/mittwald/flow/compare/0.2.0-alpha.209...0.2.0-alpha.210) (2025-05-27)
+
+### Bug Fixes
+
+* **Chat:** update control positions ([88cf6bf](https://github.com/mittwald/flow/commit/88cf6bf394f5b3234bac8172b0ef38c518e2a4af))
+* **List:** add missing keys ([057562c](https://github.com/mittwald/flow/commit/057562cb7dc2cb4ffd5be4564c8c411e5462e2e3))
+
 # [0.2.0-alpha.209](https://github.com/mittwald/flow/compare/0.2.0-alpha.208...0.2.0-alpha.209) (2025-05-26)
 
 **Note:** Version bump only for package @mittwald/flow-project
