@@ -3,7 +3,6 @@ import {
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
 import type { PropsWithChildren } from "react";
-import React from "react";
 import type { PropsWithClassName } from "@/lib/types/props";
 import { Overlay } from "@/components/Overlay/Overlay";
 import clsx from "clsx";
@@ -73,7 +72,7 @@ export const LightBox = flowComponent("LightBox", (props) => {
       <PropsContextProvider props={propsContext}>
         <TunnelProvider>
           <div className={styles.content}>{children}</div>
-          <div className={styles.actions} onClick={controller.close}>
+          <div className={styles.actions}>
             <Button color="light" variant="soft" onPress={controller.close}>
               <IconClose />
             </Button>
