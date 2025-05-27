@@ -17,6 +17,7 @@
 
   &:has(.switch) {
     justify-content: space-between;
+    flex-direction: row-reverse;
   }
 
   @include focus.focus;
