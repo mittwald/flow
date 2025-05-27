@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.212](https://github.com/mittwald/flow/compare/0.2.0-alpha.211...0.2.0-alpha.212) (2025-05-27)
+
+### Bug Fixes
+
+* **List:** hide unnecessary load more button ([f5a9a16](https://github.com/mittwald/flow/commit/f5a9a16fd17d3f20711eecd375062c8b7019ee52))
+* **List:** hide unnecessary load more button ([ff9ddd8](https://github.com/mittwald/flow/commit/ff9ddd87c05d8e91636b872955e6cf6a1ea7c6c6))
+
 # [0.2.0-alpha.211](https://github.com/mittwald/flow/compare/0.2.0-alpha.210...0.2.0-alpha.211) (2025-05-27)
 
 ### Bug Fixes
