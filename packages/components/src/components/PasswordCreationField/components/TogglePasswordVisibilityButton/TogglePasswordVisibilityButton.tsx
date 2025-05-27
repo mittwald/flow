@@ -5,8 +5,9 @@ import { IconHide, IconShow } from "@/components/Icon/components/icons";
 import { Action, type ActionFn } from "@/components/Action";
 import locales from "./../../locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
+import type { PropsWithClassName } from "@/lib/types/props";
 
-interface Props {
+interface Props extends PropsWithClassName {
   isDisabled?: boolean;
   isVisible: boolean;
   onPress: ActionFn;
@@ -17,6 +18,7 @@ export const TogglePasswordVisibilityButton: FC<Props> = ({
   isVisible,
   isDisabled = false,
   onPress,
+  className,
 }) => {
   const translate = useLocalizedStringFormatter(locales);
 
@@ -29,6 +31,7 @@ export const TogglePasswordVisibilityButton: FC<Props> = ({
     <Action action={onPress}>
       <TooltipTrigger>
         <Button
+          className={className}
           size="m"
           variant="plain"
           color="secondary"

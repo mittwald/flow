@@ -10,9 +10,10 @@ import { TunnelExit } from "@mittwald/react-tunnel";
 import clsx from "clsx";
 import { ValidationResultButton } from "@/components/PasswordCreationField/components/ValidationResultButton/ValidationResultButton";
 import { PasswordGenerateButton } from "@/components/PasswordCreationField/components/PasswordGenerateButton/PasswordGenerateButton";
+import type { PropsWithClassName } from "@/lib/types/props";
 
-interface Props extends Pick<Aria.InputProps, "disabled"> {
-  className?: string;
+interface Props extends Pick<Aria.InputProps, "disabled">, PropsWithClassName {
+  isEmptyValue: boolean;
   policyValidationResult?: ResolvedPolicyValidationResult;
   onGeneratePasswordAction?: ActionFn;
 }
@@ -23,6 +24,7 @@ export const FieldLabel: FC<Props> = (props) => {
     onGeneratePasswordAction,
     policyValidationResult,
     disabled: isDisabled,
+    isEmptyValue,
     className,
   } = props;
 
@@ -31,18 +33,16 @@ export const FieldLabel: FC<Props> = (props) => {
       <div className={clsx(stylesFieldLabel.container)}>
         <TunnelExit id="label" />
         <ValidationResultButton
+          isEmptyValue={isEmptyValue}
           isDisabled={isDisabled}
-          classNames={clsx(stylesFieldLabel.button, stylesFieldLabel.help)}
+          className={clsx(stylesFieldLabel.button, stylesFieldLabel.help)}
           policyValidationResult={policyValidationResult}
         />
       </div>
       {onGeneratePasswordAction && isCryptographicSecureRandom && (
         <Action action={onGeneratePasswordAction}>
           <PasswordGenerateButton
-            classNames={clsx(
-              stylesFieldLabel.button,
-              stylesFieldLabel.generate,
-            )}
+            className={clsx(stylesFieldLabel.button, stylesFieldLabel.generate)}
             isDisabled={isDisabled}
           />
         </Action>

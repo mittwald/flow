@@ -30,7 +30,7 @@ export const ValidationResultEntry: FC<Props> = (props) => {
 
   return (
     <Text
-      className={styles.rule}
+      className={styles.validationResultEntry}
       data-rule={result.ruleType}
       data-rule-valid={result.isValid}
       key={translationKey}

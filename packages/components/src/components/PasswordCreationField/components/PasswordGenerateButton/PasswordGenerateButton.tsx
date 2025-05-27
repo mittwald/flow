@@ -2,15 +2,14 @@ import React, { type FC } from "react";
 import { useLocalizedStringFormatter } from "react-aria";
 import locales from "./../../locales/*.locale.json";
 import { Button } from "@/components/Button";
-import clsx from "clsx";
+import type { PropsWithClassName } from "@/lib/types/props";
 
-interface Props {
+interface Props extends PropsWithClassName {
   isDisabled?: boolean;
-  classNames?: string;
 }
 
 export const PasswordGenerateButton: FC<Props> = (props) => {
-  const { classNames, isDisabled } = props;
+  const { className, isDisabled } = props;
 
   const translate = useLocalizedStringFormatter(locales);
 
@@ -18,7 +17,7 @@ export const PasswordGenerateButton: FC<Props> = (props) => {
     <Button
       data-component="generatePassword"
       isDisabled={isDisabled}
-      className={clsx(classNames)}
+      className={className}
       variant="plain"
       color="dark"
       size="s"

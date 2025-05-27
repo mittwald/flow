@@ -5,27 +5,27 @@ import locales from "./../../locales/*.locale.json";
 import type { ResolvedPolicyValidationResult } from "@/components/PasswordCreationField/PasswordCreationField";
 import ValidationResultEntry from "@/components/PasswordCreationField/components/ValidationResultEntry/ValidationResultEntry";
 import { Button } from "@/components/Button";
-import clsx from "clsx";
 import {
   ContextualHelp,
   ContextualHelpTrigger,
 } from "@/components/ContextualHelp";
 import { Heading } from "@/components/Heading";
+import type { PropsWithClassName } from "@/lib/types/props";
 
-interface Props {
+interface Props extends PropsWithClassName {
   policyValidationResult?: ResolvedPolicyValidationResult;
   isDisabled?: boolean;
-  classNames?: string;
+  isEmptyValue: boolean;
 }
 
 export const ValidationResultButton: FC<Props> = (props) => {
-  const { policyValidationResult, isDisabled, classNames } = props;
+  const { policyValidationResult, isDisabled, isEmptyValue, className } = props;
 
   const translate = useLocalizedStringFormatter(locales);
 
   const validationResultComponents = policyValidationResult?.ruleResults
     ?.filter((r) => {
-      return policyValidationResult?.isEmptyValueValidation ? !r.isValid : true;
+      return isEmptyValue ? !r.isValid : true;
     })
     .map((result, index) => {
       return (
@@ -41,7 +41,7 @@ export const ValidationResultButton: FC<Props> = (props) => {
       <Button
         data-component="showPasswordRules"
         isDisabled={isDisabled}
-        className={clsx(classNames)}
+        className={className}
       />
       <ContextualHelp>
         <Heading>{translate.format("password.requirements.heading")}</Heading>

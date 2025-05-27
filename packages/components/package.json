@@ -57,6 +57,7 @@
   "dependencies": {
     "@chakra-ui/live-region": "^2.1.0",
     "@internationalized/string-compiler": "^3.2.6",
+    "@mittwald/password-tools-js": "^2.1.4",
     "@mittwald/react-tunnel": "workspace:*",
     "@mittwald/react-use-promise": "^3.0.4",
     "@react-aria/form": "^3.0.14",
@@ -164,7 +165,6 @@
   },
   "peerDependencies": {
     "@internationalized/date": "^3.6.0",
-    "@mittwald/password-tools-js": "^2.1.4",
     "@mittwald/react-use-promise": "^2.3.12",
     "next": "*",
     "react": "^19",
@@ -172,9 +172,6 @@
     "react-hook-form": "*"
   },
   "peerDependenciesMeta": {
-    "@mittwald/password-tools-js": {
-      "optional": true
-    },
     "@internationalized/date": {
       "optional": true
     },

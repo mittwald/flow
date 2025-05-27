@@ -8,18 +8,18 @@
     display: flex;
     column-gap: var(--label--spacing);
   }
-}
 
-.button {
-  outline-offset: calc(var(--size-px--xxxs) * -1);
+  .button {
+    outline-offset: calc(var(--size-px--xxs) * -1);
 
-  &.help {
-    order: 2;
-    display: inline;
-    vertical-align: middle;
-  }
+    &.help {
+      order: 2;
+      display: inline;
+      vertical-align: middle;
+    }
 
-  &.generate {
-    margin-inline-start: auto;
+    &.generate {
+      margin-inline-start: auto;
+    }
   }
 }

@@ -197,37 +197,7 @@ describe("PasswordCreationField Tests", () => {
     expect(customButton).toBeInTheDocument();
   });
 
-  test("controlled component mode", async () => {
-    const onChangeHandler = vi.fn();
-
-    const renderResult = await act(() =>
-      render(
-        <I18nProvider locale="de">
-          <PasswordCreationField
-            value="foo"
-            onChange={onChangeHandler}
-            validationPolicy={policy}
-          >
-            <Label>Password</Label>
-          </PasswordCreationField>
-        </I18nProvider>,
-      ),
-    );
-
-    const inputElement = renderResult.container.querySelector("input");
-    assert(inputElement);
-    expect(inputElement).toHaveValue("foo");
-
-    await act(async () => {
-      fireEvent.input(inputElement, { target: { value: "invalid" } });
-      await sleep(250);
-    });
-
-    expect(onChangeHandler).toBeCalledWith("");
-    expect(inputElement).toHaveValue("invalid");
-  });
-
-  test("uncontrolled component mode", async () => {
+  test("emmit change", async () => {
     const onChangeHandler = vi.fn();
 
     const renderResult = await act(() =>
@@ -242,6 +212,7 @@ describe("PasswordCreationField Tests", () => {
         </I18nProvider>,
       ),
     );
+    expect(onChangeHandler).not.toBeCalled();
 
     const inputElement = renderResult.container.querySelector("input");
     assert(inputElement);
@@ -254,7 +225,16 @@ describe("PasswordCreationField Tests", () => {
       await sleep(250);
     });
 
-    expect(onChangeHandler).toBeCalledWith("");
+    expect(onChangeHandler).toHaveBeenLastCalledWith("");
     expect(inputElement).toHaveValue("invalid");
+
+    await act(async () => {
+      fireEvent.input(inputElement, {
+        target: { value: "d!iBCsc8(l~i" },
+      });
+      await sleep(250);
+    });
+    expect(onChangeHandler).toHaveBeenLastCalledWith("d!iBCsc8(l~i");
+    expect(inputElement).toHaveValue("d!iBCsc8(l~i");
   });
 });

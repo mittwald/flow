@@ -11,9 +11,7 @@ type AwaitedObject<T> =
 
 async function resolveNestedPromises<T>(input: T): Promise<AwaitedObject<T>> {
   if (input instanceof Promise) {
-    return (await resolveNestedPromises(await input)) as Promise<
-      AwaitedObject<T>
-    >;
+    return resolveNestedPromises(await input);
   }
 
   if (R.isArray(input)) {
@@ -36,7 +34,7 @@ async function resolveNestedPromises<T>(input: T): Promise<AwaitedObject<T>> {
     );
   }
 
-  return Promise.resolve(input as AwaitedObject<T>);
+  return input as AwaitedObject<T>;
 }
 
 export default resolveNestedPromises;

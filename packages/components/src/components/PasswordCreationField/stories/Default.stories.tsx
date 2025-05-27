@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { PasswordCreationField } from "../index";
-import React, { useState } from "react";
+import React from "react";
 import { Label } from "@/components/Label";
 import { action } from "@storybook/addon-actions";
 import type { PolicyDeclaration } from "@mittwald/password-tools-js/policy";
@@ -79,24 +79,8 @@ export const Required: Story = {
   args: { isRequired: true },
 };
 
-export const WithDefaultValue: Story = {
-  args: { defaultValue: "helloMoto" },
-};
-
-export const WithControlledValue: Story = {
-  render: (props) => {
-    const [value, setValue] = useState("defaultControlled");
-
-    return (
-      <PasswordCreationField
-        {...props}
-        value={value}
-        onChange={(val) => setValue(val)}
-      >
-        <Label>Password</Label>
-      </PasswordCreationField>
-    );
-  },
+export const WithPlaceholder: Story = {
+  args: { placeholder: "helloMoto" },
 };
 
 export const WithCustomButtons: Story = {
@@ -120,8 +104,6 @@ export const WithForm: Story = {
         password: "",
       },
     });
-
-    console.log(form.getValues());
 
     return (
       <Form form={form} onSubmit={async () => await sleep(2000)}>

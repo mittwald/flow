@@ -9,12 +9,13 @@ export type ComplexityStatus = Exclude<Status, "info"> | "indeterminate";
 
 export interface ComplexityIndicatorProps {
   isLoading: boolean;
-  policyValidationResult?: ResolvedPolicyValidationResult;
+  isEmptyValue: boolean;
+  policyValidationResult: ResolvedPolicyValidationResult;
 }
 
 /** @internal */
 export const ComplexityIndicator: FC<ComplexityIndicatorProps> = (props) => {
-  const { policyValidationResult, isLoading } = props;
+  const { policyValidationResult, isLoading, isEmptyValue } = props;
   const complexityScore = policyValidationResult?.complexity;
 
   const [state, setState] = useState<{
@@ -29,10 +30,7 @@ export const ComplexityIndicator: FC<ComplexityIndicatorProps> = (props) => {
     let complexityFulfilledPercentage = -1;
     if (policyValidationResult?.isValid === "indeterminate") {
       complexityFulfilledPercentage = 100;
-    } else if (
-      complexityScore &&
-      !policyValidationResult?.isEmptyValueValidation
-    ) {
+    } else if (complexityScore && !isEmptyValue) {
       complexityFulfilledPercentage = Math.min(
         (100 / (complexityScore.min + 1)) * (complexityScore.actual + 1),
         100,
@@ -47,7 +45,7 @@ export const ComplexityIndicator: FC<ComplexityIndicatorProps> = (props) => {
       status: policyValidationStatus,
       percentage: complexityFulfilledPercentage,
     });
-  }, [policyValidationResult]);
+  }, [policyValidationResult, isEmptyValue]);
 
   const complexityVisible = state.percentage !== -1;
   const complexityFulfilled = state.percentage === 100;

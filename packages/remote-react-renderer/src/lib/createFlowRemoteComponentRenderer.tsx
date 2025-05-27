@@ -19,14 +19,7 @@ import { mapValues } from "remeda";
 const customEventMappings: EventSerializationMap = {
   onPaste: (event: unknown) => {
     const clipEvent = event as ClipboardEvent satisfies ClipboardEvent;
-
-    const eventClipBoardData = clipEvent.clipboardData;
-    const windowClipBoardData =
-      (window as never) && "clipboardData" in window && window.clipboardData;
-
-    const pastedData: string = (
-      eventClipBoardData || windowClipBoardData
-    ).getData("text");
+    const pastedData: string = clipEvent.clipboardData?.getData("text") ?? "";
 
     return {
       ...(defaultEventSerializer(event) as object),

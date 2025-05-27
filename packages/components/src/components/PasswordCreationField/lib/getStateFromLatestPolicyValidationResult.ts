@@ -3,9 +3,9 @@ import type { ResolvedPolicyValidationResult } from "@/components/PasswordCreati
 
 /** @internal */
 export const getStateFromLatestPolicyValidationResult = (
-  result?: ResolvedPolicyValidationResult,
+  result: ResolvedPolicyValidationResult,
 ): undefined | Partial<RuleValidationResult> => {
-  if (result && !result.isValid && result.ruleResults.length >= 1) {
+  if (!result.isValid && result.ruleResults.length >= 1) {
     const failingRule = result.ruleResults.find((r) => !r.isValid);
     if (!failingRule) {
       return {
@@ -17,23 +17,20 @@ export const getStateFromLatestPolicyValidationResult = (
     return failingRule;
   }
 
-  if (result) {
-    if (result.isValid === "indeterminate") {
-      return undefined;
-    }
-    if (result.complexity.actual <= result.complexity.min) {
-      return {
-        isValid: result.isValid,
-        identifier: "optimizeComplexity",
-      };
-    }
-    return {
-      isValid: true,
-      identifier: "securePassword",
-    };
+  if (result.isValid === "indeterminate") {
+    return undefined;
   }
 
-  return undefined;
+  if (result.complexity.actual <= result.complexity.min) {
+    return {
+      isValid: result.isValid,
+      identifier: "optimizeComplexity",
+    };
+  }
+  return {
+    isValid: true,
+    identifier: "securePassword",
+  };
 };
 
 export default getStateFromLatestPolicyValidationResult;

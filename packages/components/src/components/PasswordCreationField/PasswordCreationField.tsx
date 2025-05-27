@@ -1,9 +1,7 @@
 import React, {
   type PropsWithChildren,
   useState,
-  useRef,
   type ClipboardEvent,
-  useLayoutEffect,
 } from "react";
 import {
   ClearPropsContext,
@@ -39,6 +37,8 @@ import { useAbortablePromise } from "@/lib/promises/useAbortablePromise";
 import { defaultPasswordCreationPolicy } from "@/components/PasswordCreationField/defaultPasswordCreationPolicy";
 import { FieldErrorContext } from "react-aria-components";
 import { Wrap } from "@/components/Wrap";
+import { ReactAriaControlledValueFix } from "@/lib/react/ReactAriaControlledValueFix";
+import { useIsMounted } from "@/lib/hooks";
 
 const validationDebounceMilliseconds = 200;
 
@@ -48,14 +48,14 @@ export interface PasswordCreationFieldProps
         Partial<Pick<Aria.FieldErrorRenderProps, "validationErrors">>
     >,
     FlowComponentProps<HTMLInputElement> {
-  value?: string;
-  defaultValue?: string;
+  value?: never;
+  defaultValue?: never;
+  placeholder?: string;
   validationPolicy?: Policy;
 }
 
 export interface ResolvedPolicyValidationResult
   extends Omit<PolicyValidationResult, "isValid"> {
-  isEmptyValueValidation: boolean;
   isValid: boolean | "indeterminate";
   ruleResults: RuleValidationResult[];
 }
@@ -69,8 +69,6 @@ export const PasswordCreationField = flowComponent(
   (props) => {
     const {
       children,
-      value: valueFromProps,
-      defaultValue,
       className,
       ref,
       isDisabled,
@@ -78,6 +76,8 @@ export const PasswordCreationField = flowComponent(
       isInvalid: invalidFromProps,
       validationPolicy = defaultPasswordCreationPolicy,
       isRequired,
+      value: ignoredValue,
+      defaultValue: ignoredDefaultValue,
       ...rest
     } = props;
 
@@ -87,7 +87,6 @@ export const PasswordCreationField = flowComponent(
     const [isLoading, setIsLoading] = useState(false);
 
     const initialPolicyValidationState: ResolvedPolicyValidationResult = {
-      isEmptyValueValidation: true,
       isValid: false,
       complexity: {
         min: validationPolicy.minComplexity,
@@ -115,32 +114,25 @@ export const PasswordCreationField = flowComponent(
       );
     }
 
+    const isMounted = useIsMounted();
+
+    const [value, setValue] = useState("");
+    const [bouncedValue, setDebouncedValue] = useDebounceValue<
+      string | undefined
+    >(undefined, validationDebounceMilliseconds);
+    const isEmptyValue = bouncedValue === undefined;
+
     const isValidFromValidationResult =
-      !policyValidationResult.isEmptyValueValidation &&
-      stateFromValidationResult?.isValid;
+      !isEmptyValue && stateFromValidationResult?.isValid;
 
     const isInvalidFromValidationResult =
-      !policyValidationResult.isEmptyValueValidation &&
-      !stateFromValidationResult?.isValid;
+      !isEmptyValue && !stateFromValidationResult?.isValid;
 
     const isInvalid = invalidFromProps || isInvalidFromValidationResult;
 
-    const valueControlType = useRef<"controlled" | "uncontrolled">(
-      valueFromProps === undefined ? "uncontrolled" : "controlled",
-    ).current;
-
-    const [value, setValue] = useState(
-      (valueControlType === "controlled" ? valueFromProps : defaultValue) ?? "",
-    );
-
-    const [bouncedValue, setDebouncedValue] = useDebounceValue(
-      value,
-      validationDebounceMilliseconds,
-    );
-
     const setUncontrolledValue = (value: string) => {
       setValue(value);
-      setDebouncedValue(value);
+      setDebouncedValue(value === "" ? undefined : value);
     };
 
     const setOptimisticPolicyValidationResult = (
@@ -148,62 +140,66 @@ export const PasswordCreationField = flowComponent(
     ) => {
       setPolicyValidationResult({
         ...initialPolicyValidationState,
-        isEmptyValueValidation: false,
         isValid,
       });
     };
 
-    useLayoutEffect(() => {
-      if (!policyValidationResult.isEmptyValueValidation && onChange) {
-        onChange(policyValidationResult.isValid ? value : "");
-      }
-    }, [policyValidationResult]);
-
     useAbortablePromise(
       async (signal) => {
-        const validationResult = validationPolicy.validate(bouncedValue);
+        if (signal.aborted) {
+          return;
+        }
+
+        const validationResult = validationPolicy.validate(value);
         if (typeof validationResult.isValid === "boolean") {
           setIsLoading(false);
           setPolicyValidationResult((old) => ({
             ...old,
-            isEmptyValueValidation: bouncedValue === "",
             isValid: validationResult.isValid as boolean,
             ruleResults: validationResult.ruleResults as RuleValidationResult[],
             complexity: validationResult.complexity,
           }));
-        } else {
-          const nonPromiseValidationsInvalid = validationResult.ruleResults
-            .filter((r): r is RuleValidationResult => !(r instanceof Promise))
-            .some((r) => !r.isValid);
 
-          if (!policyValidationResult.isEmptyValueValidation) {
-            setIsLoading(true);
+          if (onChange && isMounted) {
+            onChange(validationResult.isValid ? value : "");
           }
-          if (!nonPromiseValidationsInvalid) {
-            setOptimisticPolicyValidationResult();
-          }
-
-          void Promise.all([
-            Promise.resolve(bouncedValue),
-            ...validationResult.ruleResults,
-          ]).then(([value, ...validationResults]) => {
-            if (signal.aborted) {
-              return;
-            }
-
-            const isValid = !validationResults.some((r) => !r.isValid);
-
-            setIsLoading(false);
-            setPolicyValidationResult((old) => ({
-              ...old,
-              isEmptyValueValidation: value === "",
-              isValid,
-              ruleResults: validationResults,
-            }));
-          });
+          return;
         }
+
+        const nonPromiseValidationsInvalid = validationResult.ruleResults
+          .filter((r): r is RuleValidationResult => !(r instanceof Promise))
+          .some((r) => !r.isValid);
+
+        if (!isEmptyValue) {
+          setIsLoading(true);
+        }
+        if (!nonPromiseValidationsInvalid) {
+          setOptimisticPolicyValidationResult();
+        }
+
+        void Promise.all([
+          Promise.resolve(value),
+          ...validationResult.ruleResults,
+        ]).then(([resolvedValue, ...validationResults]) => {
+          if (signal.aborted) {
+            return;
+          }
+
+          const isValid = !validationResults.some((r) => !r.isValid);
+
+          setIsLoading(false);
+          setPolicyValidationResult((old) => ({
+            ...old,
+            isValid,
+            ruleResults: validationResults,
+          }));
+
+          if (onChange && isMounted) {
+            onChange(isValid ? resolvedValue : "");
+          }
+        });
       },
-      [bouncedValue, validationPolicy],
+      [bouncedValue],
     );
 
     const onChangeValueHandler = (value: string) => {
@@ -223,7 +219,7 @@ export const PasswordCreationField = flowComponent(
 
     const onPasswordPasteHandler = (event: ClipboardEvent) => {
       const pastedValue = event.clipboardData.getData("text");
-      if (pastedValue !== bouncedValue) {
+      if (pastedValue !== value) {
         setOptimisticPolicyValidationResult("indeterminate");
       }
     };
@@ -239,6 +235,7 @@ export const PasswordCreationField = flowComponent(
         variant: "plain",
         color: "secondary",
         isDisabled: isDisabled,
+        className: styles.button,
       },
       Label: {
         className: formFieldStyles.label,
@@ -263,6 +260,7 @@ export const PasswordCreationField = flowComponent(
       <ClearPropsContext>
         <TunnelProvider>
           <Aria.TextField
+            {...rest}
             type={isPasswordRevealed ? "text" : "password"}
             value={value}
             onChange={onPasswordInputChangeHandler}
@@ -271,9 +269,9 @@ export const PasswordCreationField = flowComponent(
             isDisabled={isDisabled}
             isInvalid={isInvalid}
             isRequired={isRequired}
-            {...rest}
           >
             <FieldLabel
+              isEmptyValue={isEmptyValue}
               disabled={isDisabled}
               onGeneratePasswordAction={onPasswordGenerateHandler}
               policyValidationResult={policyValidationResult}
@@ -282,9 +280,15 @@ export const PasswordCreationField = flowComponent(
               isDisabled={isDisabled}
               className={clsx(styles.inputGroup)}
             >
-              <Aria.Input className={styles.input} ref={ref} value={value} />
+              <ReactAriaControlledValueFix
+                inputContext={Aria.InputContext}
+                props={props}
+              >
+                <Aria.Input className={styles.input} ref={ref} />
+              </ReactAriaControlledValueFix>
               <Aria.Group className={styles.buttonContainer}>
                 <TogglePasswordVisibilityButton
+                  className={styles.button}
                   isVisible={isPasswordRevealed}
                   isDisabled={isDisabled}
                   onPress={togglePasswordVisibilityHandler}
@@ -292,6 +296,7 @@ export const PasswordCreationField = flowComponent(
                 <TunnelExit id="button" />
               </Aria.Group>
               <ComplexityIndicator
+                isEmptyValue={isEmptyValue}
                 isLoading={isLoading}
                 policyValidationResult={policyValidationResult}
               />

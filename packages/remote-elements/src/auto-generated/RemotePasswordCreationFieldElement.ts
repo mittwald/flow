@@ -37,6 +37,7 @@ export class RemotePasswordCreationFieldElement extends FlowRemoteElement<Remote
       minLength: {},
       name: {},
       pattern: {},
+      placeholder: {},
       slot: {},
       spellCheck: {},
       type: {},
