@@ -3,6 +3,7 @@ import React, {
   useState,
   useRef,
   type ClipboardEvent,
+  useLayoutEffect,
 } from "react";
 import {
   ClearPropsContext,
@@ -152,11 +153,11 @@ export const PasswordCreationField = flowComponent(
       });
     };
 
-    const emmitChange = (value: string, result: PolicyValidationResult) => {
+    useLayoutEffect(() => {
       if (!policyValidationResult.isEmptyValueValidation && onChange) {
-        onChange(result.isValid ? value : "");
+        onChange(policyValidationResult.isValid ? value : "");
       }
-    };
+    }, [policyValidationResult]);
 
     useAbortablePromise(
       async (signal) => {
@@ -170,7 +171,6 @@ export const PasswordCreationField = flowComponent(
             ruleResults: validationResult.ruleResults as RuleValidationResult[],
             complexity: validationResult.complexity,
           }));
-          emmitChange(bouncedValue, validationResult);
         } else {
           const nonPromiseValidationsInvalid = validationResult.ruleResults
             .filter((r): r is RuleValidationResult => !(r instanceof Promise))
@@ -200,8 +200,6 @@ export const PasswordCreationField = flowComponent(
               isValid,
               ruleResults: validationResults,
             }));
-
-            emmitChange(value, validationResult);
           });
         }
       },

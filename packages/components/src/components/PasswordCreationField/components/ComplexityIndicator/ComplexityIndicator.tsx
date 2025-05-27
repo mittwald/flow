@@ -26,7 +26,7 @@ export const ComplexityIndicator: FC<ComplexityIndicatorProps> = (props) => {
   });
 
   useLayoutEffect(() => {
-    let complexityFulfilledPercentage = 0;
+    let complexityFulfilledPercentage = -1;
     if (policyValidationResult?.isValid === "indeterminate") {
       complexityFulfilledPercentage = 100;
     } else if (
@@ -49,7 +49,7 @@ export const ComplexityIndicator: FC<ComplexityIndicatorProps> = (props) => {
     });
   }, [policyValidationResult]);
 
-  const complexityVisible = state.percentage !== 0;
+  const complexityVisible = state.percentage !== -1;
   const complexityFulfilled = state.percentage === 100;
 
   const percentageClassName = clsx(

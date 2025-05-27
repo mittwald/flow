@@ -12,6 +12,7 @@ import { Label } from "@/components/Label";
 import { I18nProvider } from "react-aria";
 import { IconPlus } from "@/components/Icon/components/icons";
 import Button from "@/components/Button";
+import { sleep } from "@/lib/promises/sleep";
 
 const policyDecl: PolicyDeclaration = {
   minComplexity: 3,
@@ -69,8 +70,9 @@ describe("PasswordCreationField Tests", () => {
       "false",
     );
 
-    await act(() => {
+    await act(async () => {
       fireEvent.input(inputElement, { target: { value: "123" } });
+      await sleep(250);
     });
 
     await waitFor(() =>
@@ -216,12 +218,13 @@ describe("PasswordCreationField Tests", () => {
     assert(inputElement);
     expect(inputElement).toHaveValue("foo");
 
-    await act(() =>
-      fireEvent.input(inputElement, { target: { value: "123" } }),
-    );
+    await act(async () => {
+      fireEvent.input(inputElement, { target: { value: "invalid" } });
+      await sleep(250);
+    });
 
-    expect(onChangeHandler).toBeCalledWith("123");
-    expect(inputElement).toHaveValue("foo");
+    expect(onChangeHandler).toBeCalledWith("");
+    expect(inputElement).toHaveValue("invalid");
   });
 
   test("uncontrolled component mode", async () => {
@@ -244,11 +247,14 @@ describe("PasswordCreationField Tests", () => {
     assert(inputElement);
     expect(inputElement).toHaveValue("");
 
-    await act(() =>
-      fireEvent.input(inputElement, { target: { value: "123" } }),
-    );
+    await act(async () => {
+      fireEvent.input(inputElement, {
+        target: { value: "invalid" },
+      });
+      await sleep(250);
+    });
 
-    expect(onChangeHandler).toBeCalledWith("123");
-    expect(inputElement).toHaveValue("123");
+    expect(onChangeHandler).toBeCalledWith("");
+    expect(inputElement).toHaveValue("invalid");
   });
 });
