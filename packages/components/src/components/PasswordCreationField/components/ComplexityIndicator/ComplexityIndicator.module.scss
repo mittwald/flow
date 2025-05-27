@@ -1,25 +1,26 @@
 @use "complexity";
 
-.complexityContainer {
+.complexityIndicator {
   width: 100%;
   position: absolute;
   bottom: 0;
   left: 0;
-  height: 6px;
+  height: var(--progress-bar--height--s);
   overflow: hidden;
-  border-top: 1px solid var(--progress-bar--border-color);
+  border-top: var(--form-control--border-width) solid
+    var(--progress-bar--border-color);
 
   @include complexity.animation-in("height");
   @include complexity.animation-in("border-top-color");
 
-  &.complexityContainerHide {
+  &.hide {
     transition-duration: #{complexity.$animation-out-duration};
     height: 0;
     border-top-color: transparent;
     overflow: hidden;
   }
 
-  & .complexity {
+  & .bar {
     position: relative;
     display: block;
     height: 100%;
@@ -32,20 +33,26 @@
       width #{complexity.$animation-width-responsiveness},
       background-color #{complexity.$animation-background-color-change};
 
-    &.complexityRunning {
+    &.running {
       border-bottom-right-radius: 0;
     }
 
-    &.complexity-background-status-danger {
+    &.bar-background-status-danger {
       background-color: var(--progress-bar--danger-fill-background-color);
     }
 
-    &.complexity-background-status-success {
+    &.bar-background-status-success {
       background-color: var(--progress-bar--success-fill-background-color);
     }
 
-    &.complexity-background-status-warning {
+    &.bar-background-status-warning {
       background-color: var(--progress-bar--warning-fill-background-color);
+    }
+
+    &.bar-background-status-indeterminate {
+      background-color: var(
+        --progress-bar--indeterminate-fill-background-color
+      );
     }
 
     &.loading {

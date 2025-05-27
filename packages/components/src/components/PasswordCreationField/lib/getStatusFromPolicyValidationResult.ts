@@ -1,5 +1,5 @@
-import type { Status } from "@/lib/types/props";
 import type { ResolvedPolicyValidationResult } from "@/components/PasswordCreationField/PasswordCreationField";
+import type { ComplexityStatus } from "@/components/PasswordCreationField/components/ComplexityIndicator/ComplexityIndicator";
 
 /**
  * @param result
@@ -7,17 +7,21 @@ import type { ResolvedPolicyValidationResult } from "@/components/PasswordCreati
  */
 export const getStatusFromPolicyValidationResult = (
   result?: ResolvedPolicyValidationResult,
-): Status => {
-  if (result && result.isValid) {
-    if (
-      result.complexity &&
-      result.complexity.actual === result.complexity.min &&
-      result.complexity.min !== 4
-    ) {
-      return "warning";
-    }
+): ComplexityStatus => {
+  if (result) {
+    if (result.isValid === true) {
+      if (
+        result.complexity &&
+        result.complexity.actual === result.complexity.min &&
+        result.complexity.min !== 4
+      ) {
+        return "warning";
+      }
 
-    return "success";
+      return "success";
+    } else if (result.isValid === "indeterminate") {
+      return "indeterminate";
+    }
   }
 
   return "danger";

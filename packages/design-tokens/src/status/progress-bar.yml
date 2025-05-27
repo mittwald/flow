@@ -43,3 +43,7 @@ progress-bar:
   # Danger
   danger-fill-background-color:
     value: "{danger-solid-background-color.default}"
+
+  # Indeterminate
+  indeterminate-fill-background-color:
+    value: "{neutral-solid-background-color.default}"

@@ -20,6 +20,11 @@ export const TogglePasswordVisibilityButton: FC<Props> = ({
 }) => {
   const translate = useLocalizedStringFormatter(locales);
 
+  const icon = isVisible ? <IconHide /> : <IconShow />;
+  const tooltipText = translate.format(
+    "button.generate.tooltip." + (isVisible ? "hide" : "show"),
+  );
+
   return (
     <Action action={onPress}>
       <TooltipTrigger>
@@ -30,21 +35,8 @@ export const TogglePasswordVisibilityButton: FC<Props> = ({
           isDisabled={isDisabled}
           data-component="toggleRevealPassword"
         >
-          {!isVisible ? (
-            <>
-              <IconShow />
-              <Tooltip>
-                {translate.format("button.generate.tooltip.show")}
-              </Tooltip>
-            </>
-          ) : (
-            <>
-              <IconHide />
-              <Tooltip>
-                {translate.format("button.generate.tooltip.hide")}
-              </Tooltip>
-            </>
-          )}
+          {icon}
+          <Tooltip>{tooltipText}</Tooltip>
         </Button>
       </TooltipTrigger>
     </Action>

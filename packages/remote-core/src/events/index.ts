@@ -14,7 +14,7 @@ export const mapEventHandler =
   ) =>
   (event: unknown) => {
     const serialize = eventSerialization[eventName] ?? standard;
-    const data = eventValueTransformer(serialize(event));
+    const data = eventValueTransformer(eventName, serialize(event));
 
     resolveNestedPromises(data).then(eventHandler);
     return null;

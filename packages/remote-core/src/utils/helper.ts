@@ -1,5 +1,4 @@
 import * as R from "remeda";
-import { isLikelyAPromise } from "@/utils/promise";
 
 export function deepMapValues(
   input: unknown,
@@ -7,7 +6,7 @@ export function deepMapValues(
 ): unknown {
   input = fn(input);
 
-  if (isLikelyAPromise(input)) {
+  if (R.isPromise(input)) {
     return input;
   }
 

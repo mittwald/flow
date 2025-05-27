@@ -3,7 +3,6 @@ import type { Preview } from "@storybook/react";
 import React from "react";
 
 const preview: Preview = {
-  tags: ["autodocs"],
   decorators: [
     (Story) => {
       document.body.classList.add("flow");

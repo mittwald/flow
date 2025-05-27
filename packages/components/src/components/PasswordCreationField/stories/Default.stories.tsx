@@ -91,7 +91,7 @@ export const WithControlledValue: Story = {
       <PasswordCreationField
         {...props}
         value={value}
-        onChange={(val) => setValue(val.toUpperCase())}
+        onChange={(val) => setValue(val)}
       >
         <Label>Password</Label>
       </PasswordCreationField>
@@ -120,6 +120,9 @@ export const WithForm: Story = {
         password: "",
       },
     });
+
+    console.log(form.getValues());
+
     return (
       <Form form={form} onSubmit={async () => await sleep(2000)}>
         <Field rules={{ required: true }} name="password">

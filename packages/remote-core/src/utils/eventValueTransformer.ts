@@ -1,18 +1,15 @@
 import { resolveFileContents } from "@/utils/file";
 import { deepMapValues } from "@/utils/helper";
 
-type EventObjectResolverMap = Record<
-  "File" | "FileList",
-  (event: unknown) => unknown
->;
-
-const eventObjectResolvers: EventObjectResolverMap = {
-  FileList: (event) =>
+const eventObjectResolvers = {
+  FileList: (event: unknown) =>
     Promise.all([...(event as FileList)].map(eventObjectResolvers.File)),
   File: resolveFileContents,
-};
+} as const;
 
-export const eventValueTransformer = (event: unknown) => {
+type EventObjectResolverMap = typeof eventObjectResolvers;
+
+export const eventValueTransformer = (eventName: string, event: unknown) => {
   const replaceMaybeObjectTypeWithPromise = (value: unknown) => {
     const constructorName = value?.constructor
       .name as keyof EventObjectResolverMap;

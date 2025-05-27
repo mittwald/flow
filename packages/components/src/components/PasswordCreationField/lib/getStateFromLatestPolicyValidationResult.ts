@@ -17,14 +17,16 @@ export const getStateFromLatestPolicyValidationResult = (
     return failingRule;
   }
 
-  if (result && result.complexity.actual <= result.complexity.min) {
-    return {
-      isValid: result.isValid,
-      identifier: "optimizeComplexity",
-    };
-  }
-
-  if (result && result.isValid) {
+  if (result) {
+    if (result.isValid === "indeterminate") {
+      return undefined;
+    }
+    if (result.complexity.actual <= result.complexity.min) {
+      return {
+        isValid: result.isValid,
+        identifier: "optimizeComplexity",
+      };
+    }
     return {
       isValid: true,
       identifier: "securePassword",

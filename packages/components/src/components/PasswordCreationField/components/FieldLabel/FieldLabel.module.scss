@@ -1,22 +1,25 @@
-.passwordFieldLabel {
+.fieldLabel {
   display: flex;
   flex-grow: 1;
   column-gap: var(--label--spacing);
   margin-bottom: var(--form-control--label-to-control-spacing);
 
-  .helperContext {
-    order: 0;
+  .container {
+    display: flex;
+    column-gap: var(--label--spacing);
   }
 }
 
 .button {
   outline-offset: calc(var(--size-px--xxxs) * -1);
-}
 
-.helpButton {
-  display: inline;
-}
+  &.help {
+    order: 2;
+    display: inline;
+    vertical-align: middle;
+  }
 
-.generateButton {
-  margin-inline-start: auto;
+  &.generate {
+    margin-inline-start: auto;
+  }
 }
