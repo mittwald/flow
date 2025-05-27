@@ -6,33 +6,36 @@ export const getFormDataObject = (
   Object.fromEntries(Array.from(formData.entries()));
 
 export const getFormDataObjectFromEvent = (
-  e: FormEvent<HTMLFormElement>,
+  element: FormEvent<HTMLFormElement>,
 ): Record<string, unknown> => {
-  const form = new FormData(e.currentTarget);
+  const form = new FormData(element.currentTarget);
   const formKeys = form.keys().toArray();
   const data: Record<string, unknown> = Object.fromEntries(form);
 
   // file and select elements with multiple values are not correctly returned
   // by getValues over FormData so we handle them by our self
-  [...e.currentTarget.elements]
+  [...element.currentTarget.elements]
     .filter(
-      (e) =>
-        e &&
-        "name" in e &&
-        typeof e.name === "string" &&
-        formKeys.includes(e.name),
+      (element) =>
+        element &&
+        "name" in element &&
+        typeof element.name === "string" &&
+        formKeys.includes(element.name),
     )
     .filter(
-      (element): element is HTMLInputElement | HTMLSelectElement =>
-        (element instanceof HTMLInputElement && element.type === "file") ||
-        element instanceof HTMLSelectElement,
+      (
+        matchingElement,
+      ): matchingElement is HTMLInputElement | HTMLSelectElement =>
+        (matchingElement instanceof HTMLInputElement &&
+          matchingElement.type === "file") ||
+        matchingElement instanceof HTMLSelectElement,
     )
-    .forEach((element) => {
-      const fieldName = element.name;
-      if (element instanceof HTMLInputElement) {
-        data[fieldName] = element.files ?? new FileList();
+    .forEach((matchingFileElement) => {
+      const fieldName = matchingFileElement.name;
+      if (matchingFileElement instanceof HTMLInputElement) {
+        data[fieldName] = matchingFileElement.files ?? new FileList();
       } else {
-        data[fieldName] = element.value;
+        data[fieldName] = matchingFileElement.value;
       }
     });
 

@@ -2,8 +2,11 @@ import {
   Label,
   PasswordCreationField,
 } from "@mittwald/flow-react-components";
-import { RuleType } from "@mittwald/password-tools-js/rules";
-import { Policy } from "@mittwald/password-tools-js/policy";
+
+import {
+  Policy,
+  RuleType,
+} from "@mittwald/flow-react-components/mittwald-password-tools-js";
 
 <PasswordCreationField
   validationPolicy={Policy.fromDeclaration({

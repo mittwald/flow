@@ -26,6 +26,10 @@
       "types": "./dist/types/integrations/react-hook-form/index.d.ts",
       "import": "./dist/js/react-hook-form.mjs"
     },
+    "./mittwald-password-tools-js": {
+      "types": "./dist/types/integrations/@mittwald/password-tools-js/index.d.ts",
+      "import": "./dist/js/@mittwald/password-tools-js.mjs"
+    },
     "./all.css": "./dist/css/all.css",
     "./doc-properties": "./dist/assets/doc-properties.json"
   },

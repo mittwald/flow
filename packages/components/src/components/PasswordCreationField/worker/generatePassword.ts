@@ -4,7 +4,7 @@ import { Generator } from "@mittwald/password-tools-js/generator";
 export const generatePassword = async (
   validationPolicy: Policy,
 ): Promise<string> => {
-  if (typeof Worker !== "undefined") {
+  if (typeof Worker === "undefined") {
     return new Generator(validationPolicy).generatePassword();
   }
 
