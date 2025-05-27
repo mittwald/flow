@@ -10,10 +10,11 @@ import type { OverlayController } from "@/lib/controller";
 import { useOverlayController } from "@/lib/controller";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
-import { Button } from "@/components/Button";
 import { IconClose } from "@/components/Icon/components/icons";
 import styles from "./LightBox.module.scss";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
+import DivView from "@/views/DivView";
+import ButtonView from "@/views/ButtonView";
 
 export interface LightBoxProps
   extends PropsWithChildren,
@@ -28,10 +29,6 @@ export interface LightBoxProps
   fitScreen?: boolean;
 }
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
 export const LightBox = flowComponent("LightBox", (props) => {
   const {
     controller: controllerFromProps,
@@ -71,13 +68,13 @@ export const LightBox = flowComponent("LightBox", (props) => {
     >
       <PropsContextProvider props={propsContext}>
         <TunnelProvider>
-          <div className={styles.content}>{children}</div>
-          <div className={styles.actions}>
-            <Button color="light" variant="soft" onPress={controller.close}>
+          <DivView className={styles.content}>{children}</DivView>
+          <DivView className={styles.actions}>
+            <ButtonView color="light" variant="soft" onPress={controller.close}>
               <IconClose />
-            </Button>
+            </ButtonView>
             <TunnelExit id="actionGroup" />
-          </div>
+          </DivView>
         </TunnelProvider>
       </PropsContextProvider>
     </Overlay>
