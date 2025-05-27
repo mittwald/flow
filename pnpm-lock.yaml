@@ -744,13 +744,13 @@ importers:
 
   packages/mstudio-ext-react-components:
     dependencies:
-      '@mittwald/flow-remote-react-components':
-        specifier: workspace:*
-        version: link:../remote-react-components
       '@types/react':
         specifier: ^19
         version: 19.0.10
     devDependencies:
+      '@mittwald/flow-remote-react-components':
+        specifier: workspace:*
+        version: link:../remote-react-components
       '@mittwald/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config

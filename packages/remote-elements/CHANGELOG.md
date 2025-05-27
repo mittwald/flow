@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.211](https://github.com/mittwald/flow/compare/0.2.0-alpha.210...0.2.0-alpha.211) (2025-05-27)
+
+### Performance Improvements
+
+* **Avatar:** fix performance issue with avatar ([#1527](https://github.com/mittwald/flow/issues/1527)) ([a0290ba](https://github.com/mittwald/flow/commit/a0290baee921ac7b35822dad6cd67329b6949e33))
+
+# [0.2.0-alpha.210](https://github.com/mittwald/flow/compare/0.2.0-alpha.209...0.2.0-alpha.210) (2025-05-27)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+# [0.2.0-alpha.209](https://github.com/mittwald/flow/compare/0.2.0-alpha.208...0.2.0-alpha.209) (2025-05-26)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+# [0.2.0-alpha.208](https://github.com/mittwald/flow/compare/0.2.0-alpha.207...0.2.0-alpha.208) (2025-05-26)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
 # [0.2.0-alpha.207](https://github.com/mittwald/flow/compare/0.2.0-alpha.206...0.2.0-alpha.207) (2025-05-23)
 
 **Note:** Version bump only for package @mittwald/flow-remote-elements

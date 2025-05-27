@@ -1,0 +1,96 @@
+name: 🐞 Bug Report
+description: Report a bug or unexpected behavior in mittwald/flow
+type: bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug! Please fill out this form as completely as possible so we can better understand and fix the issue.
+
+  - type: input
+    id: version
+    attributes:
+      label: Flow Version
+      description: What version of `mittwald/flow` are you using?
+      placeholder: e.g. 1.2.3
+    validations:
+      required: false
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: Clearly and concisely describe the issue.
+      placeholder: e.g. Running `flow up` results in an error…
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: What steps should we follow to reproduce the bug?
+      placeholder: |
+        1. …
+        2. …
+        3. …
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What did you expect to happen?
+      placeholder: e.g. The deployment should complete successfully.
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: What actually happened?
+    validations:
+      required: false
+
+  - type: dropdown
+    id: impact
+    attributes:
+      label: How much does this bug impact you?
+      description: Let us know how severe this issue is for your workflow.
+      options:
+        - 🔴 Critical – I’m blocked and cannot proceed
+        - 🟠 Major – It breaks important functionality
+        - 🟡 Moderate – It's annoying but there's a workaround
+        - 🟢 Minor – It doesn't really affect me
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant Logs or Error Output
+      description: Paste any relevant logs or error messages (use triple backticks ````` to format code).
+      render: shell
+    validations:
+      required: false
+
+  - type: input
+    id: browser-version
+    attributes:
+      label: Browser Version
+      description: What version of the browser are you using?
+      placeholder: e.g. Chrome 124.0.6367.91
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before Submitting
+      options:
+        - label: I have checked that this issue has not already been reported.
+          required: true
+        - label: I have provided all necessary information to reproduce the issue.
+          required: true
