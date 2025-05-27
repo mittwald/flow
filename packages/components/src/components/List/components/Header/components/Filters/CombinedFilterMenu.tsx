@@ -42,18 +42,18 @@ export const CombinedFilterMenu: FC = () => {
             .map((v) => v.id);
 
           return (
-            <>
+            <React.Fragment key={f.property}>
               <ContextMenuSection
                 selectionMode={f.mode === "one" ? "single" : "multiple"}
                 selectedKeys={activeFilterKeys}
               >
                 <HeadingView>{f.name ?? f.property}</HeadingView>
                 {f.values.map((v) => (
-                  <FilterMenuItem filterValue={v} />
+                  <FilterMenuItem key={v.id} filterValue={v} />
                 ))}
               </ContextMenuSection>
               {i + 1 < filters.length && <Separator />}
-            </>
+            </React.Fragment>
           );
         })}
       </ContextMenu>
