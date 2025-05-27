@@ -1,3 +1,4 @@
+import { version } from "@/version";
 import { FlowRemoteElement } from "@mittwald/flow-remote-elements";
 import { createRemoteComponent as libCreateRemoteComponent } from "@mittwald/remote-dom-react";
 import { createElement } from "react";
@@ -12,5 +13,6 @@ export const createRemoteComponent: typeof libCreateRemoteComponent = (
     createElement(RemoteComponent, {
       ...props,
       [FlowRemoteElement.initializationPropertyName]: true,
+      [FlowRemoteElement.versionPropertyName]: version,
     });
 };

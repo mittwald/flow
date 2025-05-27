@@ -1,7 +1,6 @@
 name: 🐞 Bug Report
 description: Report a bug or unexpected behavior in mittwald/flow
-title: "[Bug] "
-labels: ["bug"]
+type: bug
 body:
   - type: markdown
     attributes:
@@ -77,21 +76,7 @@ body:
     validations:
       required: false
 
-  - type: dropdown
-    id: browser
-    attributes:
-      label: Browser
-      description: In which browser are you experiencing the issue?
-      options:
-        - Chrome
-        - Firefox
-        - Safari
-        - Edge
-        - Other
-    validations:
-      required: true
-
- - type: input
+  - type: input
     id: browser-version
     attributes:
       label: Browser Version
