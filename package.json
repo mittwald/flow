@@ -60,7 +60,10 @@
   "pnpm": {
     "patchedDependencies": {
       "acorn": "patches/acorn.patch"
-    }
+    },
+    "onlyBuiltDependencies": [
+      "nx"
+    ]
   },
   "resolutions": {
     "react": "^19.1.0",
