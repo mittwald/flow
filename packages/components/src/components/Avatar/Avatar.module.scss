@@ -50,7 +50,7 @@
   /* Colors */
 
   @mixin color($color) {
-    &.dynamic-#{$color}:has(.initials),
+    &:has(.initials[data-dynamic-color="#{$color}"]),
     &.#{$color} {
       --background-color: var(--decorative--#{$color}-background-color);
       --content-color: var(--decorative--#{$color}-content-color);

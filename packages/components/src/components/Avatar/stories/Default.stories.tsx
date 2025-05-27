@@ -1,16 +1,16 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Avatar, { avatarColors } from "../Avatar";
-import React from "react";
+import Avatar from "../Avatar";
 import { Initials } from "@/components/Initials";
 import { Image } from "@/components/Image";
 import { dummyText } from "@/lib/dev/dummyText";
 import IconApp from "@/components/Icon/components/icons/IconApp";
+import { avatarColors } from "@/components/Avatar/avatarColors";
 
 const meta: Meta<typeof Avatar> = {
   title: "Content/Avatar",
   component: Avatar,
   render: (props) => (
-    <Avatar {...props}>
+    <Avatar {...props} color="teal">
       <Image alt="Gopher" src={dummyText.imageSrc} />
     </Avatar>
   ),

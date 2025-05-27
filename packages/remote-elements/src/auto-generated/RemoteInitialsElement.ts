@@ -13,6 +13,7 @@ export class RemoteInitialsElement extends FlowRemoteElement<RemoteInitialsEleme
     return {
       "aria-hidden": {},
       className: {},
+      useDynamicColor: {},
     };
   }
 
