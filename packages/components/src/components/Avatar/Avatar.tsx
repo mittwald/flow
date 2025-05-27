@@ -1,23 +1,15 @@
 import type { PropsWithChildren } from "react";
-import React from "react";
 import styles from "./Avatar.module.scss";
 import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
-import { getColorFromChildren } from "@/components/Avatar/lib/getColorFromChildren";
 import type { PropsWithClassName, Status } from "@/lib/types/props";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { AlertIcon } from "@/components/AlertIcon";
+import type { avatarColors } from "@/components/Avatar/avatarColors";
 
-export const avatarColors = [
-  "blue",
-  "teal",
-  "green",
-  "violet",
-  "lilac",
-] as const;
 export type AvatarColors = (typeof avatarColors)[number];
 
 export interface AvatarProps
@@ -48,12 +40,14 @@ export const Avatar = flowComponent("Avatar", (props) => {
     className,
     !status && styles[color ?? "blue"],
     status && styles[status],
-    !color && styles[`dynamic-${getColorFromChildren(children)}`],
   );
+
+  const useDynamicColor = color === undefined && status === undefined;
 
   const propsContext: PropsContext = {
     Initials: {
       className: styles.initials,
+      useDynamicColor,
     },
     Icon: {
       className: styles.icon,
