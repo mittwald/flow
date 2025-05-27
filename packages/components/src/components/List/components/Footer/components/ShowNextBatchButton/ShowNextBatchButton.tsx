@@ -14,10 +14,7 @@ export const ShowNextBatchButton: FC<ButtonProps> = (props) => {
   const pagination = list.batches;
   const canLoadMore = pagination.hasNextBatch();
 
-  const totalItemsCount = pagination.getTotalItemsCount();
-  const visibleItemsCount = pagination.getVisibleItemsCount();
-
-  if ((!canLoadMore || visibleItemsCount === totalItemsCount) && !isLoading) {
+  if (!canLoadMore && !isLoading) {
     return null;
   }
 
