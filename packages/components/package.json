@@ -99,7 +99,6 @@
     "@faker-js/faker": "^9.8.0",
     "@internationalized/date": "^3.8.1",
     "@mittwald/flow-design-tokens": "workspace:*",
-    "@mittwald/password-tools-js": "^2.1.4",
     "@mittwald/react-use-promise": "^3.0.4",
     "@mittwald/remote-dom-react": "1.2.2-mittwald.3",
     "@mittwald/typescript-config": "workspace:*",
