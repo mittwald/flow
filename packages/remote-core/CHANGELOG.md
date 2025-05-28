@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.225](https://github.com/mittwald/flow/compare/0.2.0-alpha.224...0.2.0-alpha.225) (2025-05-28)
+
+### Features
+
+* **PasswordCreationField:** introduce new component ([8fdb60e](https://github.com/mittwald/flow/commit/8fdb60e2b6219c5e0aedffcaa002806a7303282a))
+
 # [0.2.0-alpha.224](https://github.com/mittwald/flow/compare/0.2.0-alpha.223...0.2.0-alpha.224) (2025-05-28)
 
 **Note:** Version bump only for package @mittwald/flow-remote-core
