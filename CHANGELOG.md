@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.219](https://github.com/mittwald/flow/compare/0.2.0-alpha.218...0.2.0-alpha.219) (2025-05-28)
+
+### Bug Fixes
+
+* **Markdown:** fix not rendering in remote context ([#1531](https://github.com/mittwald/flow/issues/1531)) ([33b1a9e](https://github.com/mittwald/flow/commit/33b1a9e310fc3195367844c292624fddaa704f26))
+
 # [0.2.0-alpha.218](https://github.com/mittwald/flow/compare/0.2.0-alpha.217...0.2.0-alpha.218) (2025-05-28)
 
 **Note:** Version bump only for package @mittwald/flow-project
