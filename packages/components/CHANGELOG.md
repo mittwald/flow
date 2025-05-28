@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.226](https://github.com/mittwald/flow/compare/0.2.0-alpha.225...0.2.0-alpha.226) (2025-05-28)
+
+### Bug Fixes
+
+* **Accordion:** fix styling ([5559750](https://github.com/mittwald/flow/commit/5559750fb9047d0b26ee47647bb666aa38e462a8))
+* **PasswordCreationField:** fix styling issue ([f03004f](https://github.com/mittwald/flow/commit/f03004fe2215d4823316b0579e5118ad68e779ab))
+
 # [0.2.0-alpha.225](https://github.com/mittwald/flow/compare/0.2.0-alpha.224...0.2.0-alpha.225) (2025-05-28)
 
 ### Features
