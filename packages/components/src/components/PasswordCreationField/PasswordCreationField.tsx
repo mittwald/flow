@@ -20,7 +20,6 @@ import clsx from "clsx";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import type { Policy } from "@mittwald/password-tools-js/policy";
 import { type ActionFn } from "@/components/Action";
-import FieldLabel from "@/components/PasswordCreationField/components/FieldLabel/FieldLabel";
 import getStateFromLatestPolicyValidationResult from "@/components/PasswordCreationField/lib/getStateFromLatestPolicyValidationResult";
 import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
@@ -39,6 +38,8 @@ import { FieldErrorContext } from "react-aria-components";
 import { Wrap } from "@/components/Wrap";
 import { ReactAriaControlledValueFix } from "@/lib/react/ReactAriaControlledValueFix";
 import { useIsMounted } from "@/lib/hooks";
+import { ValidationResultButton } from "@/components/PasswordCreationField/components/ValidationResultButton/ValidationResultButton";
+import { PasswordGenerateButton } from "@/components/PasswordCreationField/components/PasswordGenerateButton/PasswordGenerateButton";
 
 const validationDebounceMilliseconds = 200;
 
@@ -242,6 +243,22 @@ export const PasswordCreationField = flowComponent(
         tunnelId: "label",
         optional: !isRequired,
         isDisabled: isDisabled,
+        children: dynamic((localProps) => {
+          return (
+            <>
+              {localProps.children}
+              <PasswordGenerateButton
+                isDisabled={isDisabled}
+                onGeneratePasswordAction={onPasswordGenerateHandler}
+              />
+              <ValidationResultButton
+                isEmptyValue={isEmptyValue}
+                isDisabled={isDisabled}
+                policyValidationResult={policyValidationResult}
+              />
+            </>
+          );
+        }),
       },
       FieldDescription: {
         className: formFieldStyles.fieldDescription,
@@ -270,12 +287,7 @@ export const PasswordCreationField = flowComponent(
             isInvalid={isInvalid}
             isRequired={isRequired}
           >
-            <FieldLabel
-              isEmptyValue={isEmptyValue}
-              disabled={isDisabled}
-              onGeneratePasswordAction={onPasswordGenerateHandler}
-              policyValidationResult={policyValidationResult}
-            />
+            <TunnelExit id="label" />
             <Aria.Group
               isDisabled={isDisabled}
               className={clsx(styles.inputGroup)}

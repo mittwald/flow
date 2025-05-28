@@ -6,6 +6,7 @@
   display: inline-flex;
   align-items: center;
   column-gap: var(--label--spacing);
+  flex-wrap: wrap;
 
   &.disabled {
     color: var(--label--color--disabled);
@@ -13,5 +14,9 @@
 
   & .optional {
     order: 0;
+  }
+
+  & .right {
+    margin-inline-start: auto;
   }
 }

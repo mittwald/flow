@@ -49,7 +49,9 @@ export const Label = flowComponent("Label", (props) => {
   );
 
   const propsContext: PropsContext = {
-    ContextualHelpTrigger: { tunnelId: "contextualHelp" },
+    ContextualHelpTrigger: {
+      tunnelId: "contextualHelp",
+    },
   };
 
   return (
@@ -58,7 +60,24 @@ export const Label = flowComponent("Label", (props) => {
         <Aria.Label {...rest} className={rootClassName} ref={ref}>
           {children}
           {optional && optionalMarker}
-          <TunnelExit id="contextualHelp" />
+          <TunnelExit id="contextualHelp">
+            {(children) => {
+              if (React.Children.count(children) >= 1) {
+                return children;
+              }
+
+              return undefined;
+            }}
+          </TunnelExit>
+          <TunnelExit id="right">
+            {(children) => {
+              if (React.Children.count(children) >= 1) {
+                return <div className={styles.right}>{children}</div>;
+              }
+
+              return undefined;
+            }}
+          </TunnelExit>
         </Aria.Label>
       </TunnelProvider>
     </PropsContextProvider>
