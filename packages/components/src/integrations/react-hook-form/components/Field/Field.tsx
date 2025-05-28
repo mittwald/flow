@@ -88,3 +88,5 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
 export const typedField = <T extends FieldValues>(
   ignoredForm: UseFormReturn<T> | UseFormReturn<T>["control"],
 ): typeof Field<T> => Field;
+
+export default Field;

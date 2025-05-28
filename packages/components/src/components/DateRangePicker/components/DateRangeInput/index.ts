@@ -1,4 +1,2 @@
-import { DateRangeInput } from "./DateRangeInput";
-
+export { default } from "./DateRangeInput";
 export { type DateInputProps, DateRangeInput } from "./DateRangeInput";
-export default DateRangeInput;

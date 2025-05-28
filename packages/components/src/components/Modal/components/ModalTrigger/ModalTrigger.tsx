@@ -1,5 +1,4 @@
 import type { FC } from "react";
-import React from "react";
 import type { OverlayTriggerProps } from "@/components/OverlayTrigger";
 import { OverlayTrigger } from "@/components/OverlayTrigger";
 import type { Simplify } from "type-fest";
@@ -21,3 +20,5 @@ export const ModalTrigger: FC<ModalTriggerProps> = (props) => {
     </OverlayTrigger>
   );
 };
+
+export default ModalTrigger;

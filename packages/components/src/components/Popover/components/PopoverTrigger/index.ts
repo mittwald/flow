@@ -1,4 +1,3 @@
-import { PopoverTrigger } from "./PopoverTrigger";
+export { default } from "./PopoverTrigger";
 
 export * from "./PopoverTrigger";
-export default PopoverTrigger;
