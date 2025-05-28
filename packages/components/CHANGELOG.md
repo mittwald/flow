@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.223](https://github.com/mittwald/flow/compare/0.2.0-alpha.222...0.2.0-alpha.223) (2025-05-28)
+
+### Bug Fixes
+
+* **List:** fix remote rendering throws error ([#1535](https://github.com/mittwald/flow/issues/1535)) ([3f8d5fe](https://github.com/mittwald/flow/commit/3f8d5fe625ba828aa0f19e943fb5476b5ad8c10d))
+
 # [0.2.0-alpha.222](https://github.com/mittwald/flow/compare/0.2.0-alpha.221...0.2.0-alpha.222) (2025-05-28)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
