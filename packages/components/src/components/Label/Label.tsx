@@ -51,6 +51,19 @@ export const Label = flowComponent("Label", (props) => {
   const propsContext: PropsContext = {
     ContextualHelpTrigger: {
       tunnelId: "contextualHelp",
+      Button: {
+        tunnelId: null,
+      },
+    },
+    Button: {
+      tunnelId: "right",
+      size: "s",
+    },
+    Action: {
+      tunnelId: "right",
+      Button: {
+        tunnelId: null,
+      },
     },
   };
 
