@@ -24,6 +24,7 @@ export class RemoteItemsGridListElement extends FlowRemoteElement<RemoteItemsGri
       disallowEmptySelection: {},
       disallowTypeAhead: {},
       dragAndDropHooks: {},
+      escapeKeyBehavior: {},
       id: {},
       items: {},
       keyboardNavigationBehavior: {},
@@ -32,6 +33,7 @@ export class RemoteItemsGridListElement extends FlowRemoteElement<RemoteItemsGri
       selectedKeys: {},
       selectionBehavior: {},
       selectionMode: {},
+      shouldSelectOnPressUp: {},
       slot: {},
     };
   }

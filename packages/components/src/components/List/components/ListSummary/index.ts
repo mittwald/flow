@@ -1,5 +1,4 @@
 export * from "./view";
-import { ListSummary } from "./ListSummary";
+export { default } from "./ListSummary";
 
 export { ListSummary, type ListSummaryProps } from "./ListSummary";
-export default ListSummary;

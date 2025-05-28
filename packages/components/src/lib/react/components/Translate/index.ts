@@ -1,3 +1,2 @@
-import Translate from "@/lib/react/components/Translate/Translate";
+export { default } from "@/lib/react/components/Translate/Translate";
 export * from "./Translate";
-export default Translate;

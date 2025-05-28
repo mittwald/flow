@@ -1,6 +1,5 @@
 import * as Aria from "react-aria-components";
 import type { PropsWithChildren } from "react";
-import React from "react";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
@@ -60,3 +59,5 @@ export const ContextMenuSection = flowComponent(
     );
   },
 );
+
+export default ContextMenuSection;

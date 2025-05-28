@@ -64,8 +64,12 @@ async function generate() {
     for (const component of components) {
       const remoteReactComponentFile =
         generateRemoteReactComponentFile(component);
+
+      const fullFilePath = `${dir}/${remoteComponentBaseNameOf(component)}.ts`;
+      console.log(" - " + fullFilePath);
+
       await jetpack.writeAsync(
-        `${dir}/${remoteComponentBaseNameOf(component)}.ts`,
+        fullFilePath,
         await prepareTypeScriptOutput(remoteReactComponentFile),
       );
     }
@@ -88,8 +92,12 @@ async function generate() {
 
     for (const component of components) {
       const remoteElementFile = generateRemoteElementFile(component);
+
+      const fullFilePath = `${dir}/${remoteComponentNameOf(component)}.ts`;
+      console.log(" - " + fullFilePath);
+
       await jetpack.writeAsync(
-        `${dir}/${remoteComponentNameOf(component)}.ts`,
+        fullFilePath,
         await prepareTypeScriptOutput(remoteElementFile),
       );
     }
@@ -127,8 +135,10 @@ async function generate() {
         ? ""
         : "packages/components/";
 
+      const fullFilePath = `${componentsPackagePath}${filePath}/view.ts`;
+      console.log(" - " + fullFilePath);
       await jetpack.writeAsync(
-        `${componentsPackagePath}${filePath}/view.ts`,
+        fullFilePath,
         await prepareTypeScriptOutput(content),
       );
     }
@@ -144,8 +154,12 @@ async function generate() {
     for (const component of components) {
       const viewFilename = remoteComponentBaseNameOf(component);
       const content = generateViewComponent(component);
+
+      const fullFilePath = `${dir}/${viewFilename}View.tsx`;
+      console.log(" - " + fullFilePath);
+
       await jetpack.writeAsync(
-        `${dir}/${viewFilename}View.tsx`,
+        fullFilePath,
         await prepareTypeScriptOutput(content),
       );
     }

@@ -77,3 +77,5 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
     </RhfFormContextProvider>
   );
 }
+
+export default Form;

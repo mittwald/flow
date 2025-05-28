@@ -17,3 +17,5 @@ export const LightBoxTrigger: FC<LightBoxTriggerProps> = (props) => {
     </OverlayTrigger>
   );
 };
+
+export default LightBoxTrigger;

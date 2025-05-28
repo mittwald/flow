@@ -1,4 +1,3 @@
-import React from "react";
 import type { OverlayTriggerProps } from "@/components/OverlayTrigger";
 import { OverlayTrigger } from "@/components/OverlayTrigger";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
@@ -18,3 +17,5 @@ export const PopoverTrigger = flowComponent("PopoverTrigger", (props) => {
     </OverlayTrigger>
   );
 });
+
+export default PopoverTrigger;
