@@ -10,6 +10,16 @@ describe("Resolves Nested Promises", () => {
     const resolved = await resolveNestedPromises(Promise.resolve(1));
     expect(resolved).toBe(1);
   });
+  test("resolves only native objects", async () => {
+    const resolved = await resolveNestedPromises({
+      foo: new ArrayBuffer(1337),
+      bar: Promise.resolve(2),
+    });
+    expect(resolved).toEqual({
+      foo: new ArrayBuffer(1337),
+      bar: 2,
+    });
+  });
   test("resolves array promise", async () => {
     const resolved = await resolveNestedPromises([
       Promise.resolve(1),
