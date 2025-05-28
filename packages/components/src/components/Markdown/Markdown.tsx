@@ -5,10 +5,11 @@ import { Link } from "@/components/Link";
 import { Separator } from "@/components/Separator";
 import { Text } from "@/components/Text";
 import type { FC, ReactNode } from "react";
-import { Children, isValidElement } from "react";
+import React, { Children, isValidElement } from "react";
 import type { Components, Options } from "react-markdown";
 import ReactMarkdown from "react-markdown";
 import styles from "./Markdown.module.scss";
+import { isRemoteTextRenderProps } from "@/lib/react/remote";
 
 export interface MarkdownProps extends Omit<Options, "components"> {
   /** The color schema of the markdown component. */
@@ -103,11 +104,18 @@ export const Markdown: FC<MarkdownProps> = (props) => {
     ),
   };
 
+  const firstChild = React.Children.toArray(children)[0];
+
+  const textContent =
+    typeof firstChild === "string"
+      ? firstChild
+      : isValidElement(firstChild) && isRemoteTextRenderProps(firstChild.props)
+        ? firstChild.props.remote.data
+        : "";
+
   return (
-    <div className={styles.markdown}>
-      <ReactMarkdown {...rest} components={components}>
-        {children}
-      </ReactMarkdown>
+    <div className={styles.markdown} {...rest}>
+      <ReactMarkdown components={components}>{textContent}</ReactMarkdown>
     </div>
   );
 };
