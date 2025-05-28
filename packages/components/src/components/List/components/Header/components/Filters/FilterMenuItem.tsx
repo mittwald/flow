@@ -1,5 +1,5 @@
 import MenuItemView from "@/views/MenuItemView";
-import React, { type FC } from "react";
+import { type FC } from "react";
 import type { FilterValue } from "@/components/List/model/filter/FilterValue";
 
 interface Props {
@@ -12,7 +12,6 @@ export const FilterMenuItem: FC<Props> = (props) => {
   return (
     <MenuItemView
       id={filterValue.id}
-      key={filterValue.id}
       onAction={() => {
         filterValue.toggle();
       }}
