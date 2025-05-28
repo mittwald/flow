@@ -20,11 +20,7 @@ async function resolveNestedPromises<T>(input: T): Promise<AwaitedObject<T>> {
     )) as AwaitedObject<T>;
   }
 
-  if (
-    input &&
-    typeof input === "object" &&
-    !(Object.getPrototypeOf(input).constructor !== Object)
-  ) {
+  if (input && typeof input === "object" && R.isPlainObject(input)) {
     const entries = Object.entries(input);
     const resolvedEntries = await Promise.all(
       entries.map(async ([key, value]) => [
