@@ -62,7 +62,10 @@
       "acorn": "patches/acorn.patch"
     },
     "onlyBuiltDependencies": [
-      "nx"
+      "msw",
+      "nx",
+      "sharp",
+      "style-dictionary"
     ]
   },
   "resolutions": {
