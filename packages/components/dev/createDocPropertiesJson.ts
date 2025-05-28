@@ -27,8 +27,9 @@ async function parse(): Promise<ComponentDoc[]> {
 
 async function createDocPropertiesJson() {
   const components = await parse();
+  const targetFile = "./dist/assets/doc-properties.json";
 
-  console.log("📝 Writing output file");
+  console.log("📝 Writing output file " + path.resolve(targetFile));
   if (!fsSync.existsSync("./dist/")) {
     await fs.mkdir("./dist/");
   }

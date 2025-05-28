@@ -1,5 +1,5 @@
 import type { FC, KeyboardEvent } from "react";
-import React, { createElement, useEffect, useState } from "react";
+import { createElement, useEffect, useState } from "react";
 import type { PropsWithClassName } from "@/lib/types/props";
 import type { Search } from "@/components/List/model/search/Search";
 import type { SearchFieldRenderComponent } from "@/components/List/model/search/types";
@@ -72,3 +72,5 @@ export const SearchField: FC<Props> = (props) => {
     ...search.textFieldProps,
   });
 };
+
+export default SearchField;

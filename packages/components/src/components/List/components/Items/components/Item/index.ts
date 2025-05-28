@@ -1,3 +1,2 @@
-import { Item } from "./Item";
+export { default } from "./Item";
 export { Item } from "./Item";
-export default Item;

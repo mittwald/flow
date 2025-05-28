@@ -1,4 +1,2 @@
-import { SearchField } from "./SearchField";
-
+export { default } from "./SearchField";
 export * from "./SearchField";
-export default SearchField;

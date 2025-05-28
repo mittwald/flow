@@ -2,17 +2,15 @@ import type { FC } from "react";
 import React from "react";
 import { IconFilter } from "@/components/Icon/components/icons";
 import ButtonView from "@/views/ButtonView";
-import ContextMenu, {
-  ContextMenuSection,
-  ContextMenuTrigger,
-} from "@/components/ContextMenu";
+import ContextMenu, { ContextMenuTrigger } from "@/components/ContextMenu";
 import { useList } from "@/components/List";
 import HeadingView from "@/views/HeadingView";
-import { Separator } from "@/components/Separator";
 import { FilterMenuItem } from "@/components/List/components/Header/components/Filters/FilterMenuItem";
 import styles from "@/components/List/components/Header/Header.module.css";
 import { useLocalizedStringFormatter } from "react-aria";
 import locales from "../../../../locales/*.locale.json";
+import ContextMenuSectionView from "@/views/ContextMenuSectionView";
+import SeparatorView from "@/views/SeparatorView";
 
 export const CombinedFilterMenu: FC = () => {
   const list = useList();
@@ -43,7 +41,7 @@ export const CombinedFilterMenu: FC = () => {
 
           return (
             <React.Fragment key={f.property}>
-              <ContextMenuSection
+              <ContextMenuSectionView
                 selectionMode={f.mode === "one" ? "single" : "multiple"}
                 selectedKeys={activeFilterKeys}
               >
@@ -51,8 +49,8 @@ export const CombinedFilterMenu: FC = () => {
                 {f.values.map((v) => (
                   <FilterMenuItem key={v.id} filterValue={v} />
                 ))}
-              </ContextMenuSection>
-              {i + 1 < filters.length && <Separator />}
+              </ContextMenuSectionView>
+              {i + 1 < filters.length && <SeparatorView />}
             </React.Fragment>
           );
         })}

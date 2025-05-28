@@ -1,3 +1,2 @@
-import { PaginationInfos } from "./PaginationInfos";
+export { default } from "./PaginationInfos";
 export { PaginationInfos } from "./PaginationInfos";
-export default PaginationInfos;

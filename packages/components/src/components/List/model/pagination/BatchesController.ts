@@ -24,11 +24,19 @@ export class BatchesController<T> {
   }
 
   public hasNextBatch(): boolean {
-    return this.reactTable.getCanNextPage();
+    if (this.list.loader.manualPagination) {
+      return this.reactTable.getCanNextPage();
+    }
+    return (
+      this.reactTable.getState().pagination.pageSize < this.getTotalItemsCount()
+    );
   }
 
   public getTotalItemsCount(): number {
-    return this.reactTable.getRowCount() ?? 0;
+    if (this.list.loader.manualPagination) {
+      return this.reactTable.getRowCount();
+    }
+    return this.reactTable.getFilteredRowModel().rows.length;
   }
 
   public getVisibleItemsCount(): number {

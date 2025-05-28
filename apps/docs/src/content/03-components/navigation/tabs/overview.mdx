@@ -1,21 +1,29 @@
 # Playground
 
+Verwende `<Tabs />`, um Tabs darzustellen. Jeder einzelne Tab wird mit `<Tab />` definiert und erhält seine Bezeichnung über `<TabTitle />`.
+
 <LiveCodeEditor example="content" />
 
 ---
 
 # Kollabierte Ansicht
 
+Wenn die verfügbare Breite nicht ausreicht, wechseln die Tabs automatisch in eine kollabierte Ansicht.
+
 <LiveCodeEditor example="collapsed" editorCollapsed />
 
 ---
 
-# Mit Status
+# Mit Status-Icon
+
+Wenn der Inhalt eines Tabs eine wichtige Information oder Warnung enthält (z. B. in Form eines [Alerts](/03-components/status/alert)), muss der entsprechende Tab ein Status-Icon erhalten.
 
 <LiveCodeEditor example="status" editorCollapsed />
 
 ---
 
 # Mit vorausgewähltem Tab
+
+Standardmäßig sollte der erste Tab vorausgewählt sein. Falls ein anderer Tab initial aktiv sein soll, kann dies über `defaultSelectedKey` festgelegt werden.
 
 <LiveCodeEditor example="default-selected" editorCollapsed />

@@ -4,8 +4,12 @@ import {
   ActionGroup,
   Button,
   Content,
+  Flex,
   Heading,
+  Image,
   Label,
+  LightBox,
+  LightBoxTrigger,
   Modal,
   ModalTrigger,
   Section,
@@ -15,7 +19,7 @@ import {
 
 export default function Page() {
   return (
-    <>
+    <Flex columnGap="s">
       <ModalTrigger>
         <Button>Modal trigger</Button>
         <Modal>
@@ -43,6 +47,12 @@ export default function Page() {
           </ActionGroup>
         </Modal>
       </ModalTrigger>
-    </>
+      <LightBoxTrigger>
+        <Button>Lightbox</Button>
+        <LightBox>
+          <Image src="https://mittwald.github.io/flow/assets/mittwald_logo_rgb.jpg" />
+        </LightBox>
+      </LightBoxTrigger>
+    </Flex>
   );
 }

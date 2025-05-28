@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import List from "../List";
-import React from "react";
 import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
 import { usePromise } from "@mittwald/react-use-promise";
@@ -75,7 +74,7 @@ const meta: Meta<typeof List> = {
           <DomainList.Search autoFocus autoSubmit />
           <DomainList.Sorting property="domain" name="A-Z" />
           <DomainList.Sorting property="domain" name="Z-A" direction="desc" />
-          <DomainList.Sorting property="type" name="Typ" defaultEnabled />
+          <DomainList.Sorting property="type" name="Typ" />
           <DomainList.Sorting property="tld" name="TLD" />
 
           <DomainList.Table>
@@ -235,17 +234,15 @@ export const WithAccordion: Story = {
     return (
       <Section>
         <Heading>Invoices</Heading>
-        <InvoiceList.List
-          hidePagination
-          batchSize={5}
-          aria-label="Invoices"
-          accordion
-        >
+        <InvoiceList.List batchSize={5} aria-label="Invoices" accordion>
           <InvoiceList.StaticData
             data={[
               { id: "RG100000", date: "1.9.2024", amount: "25,00 €" },
               { id: "RG100001", date: "12.9.2024", amount: "12,00 €" },
               { id: "RG100002", date: "3.10.2024", amount: "4,00 €" },
+              { id: "RD100000", date: "1.9.2024", amount: "25,00 €" },
+              { id: "RD100001", date: "12.9.2024", amount: "12,00 €" },
+              { id: "RD100002", date: "3.10.2024", amount: "4,00 €" },
             ]}
           />
           <InvoiceList.Item
@@ -262,6 +259,7 @@ export const WithAccordion: Story = {
               </ListItemView>
             )}
           </InvoiceList.Item>
+          <InvoiceList.Search />
         </InvoiceList.List>
       </Section>
     );

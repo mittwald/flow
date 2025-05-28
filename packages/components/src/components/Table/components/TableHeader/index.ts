@@ -1,5 +1,3 @@
 export * from "./view";
-import { TableHeader } from "./TableHeader";
-
+export { default } from "./TableHeader";
 export { type TableHeaderProps, TableHeader } from "./TableHeader";
-export default TableHeader;

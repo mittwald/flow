@@ -1,4 +1,4 @@
-import { AreaChart } from "./AreaChart";
+export { default } from "./AreaChart";
 
 export {
   type AreaChartProps,
@@ -6,4 +6,3 @@ export {
   type AreaChartEmptyViewProps,
 } from "./AreaChart";
 export * from "./components/Area";
-export default AreaChart;

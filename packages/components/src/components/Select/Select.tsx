@@ -1,5 +1,4 @@
 import type { PropsWithChildren } from "react";
-import React from "react";
 import type { Key } from "react-aria-components";
 import * as Aria from "react-aria-components";
 import type { PropsContext } from "@/lib/propsContext";
@@ -69,7 +68,7 @@ export const Select = flowComponent("Select", (props) => {
     },
   };
 
-  const handleOnSelectionChange = (id: Key) => {
+  const handleOnSelectionChange = (id: Key | null) => {
     onChange(String(id));
     onSelectionChange(id);
   };

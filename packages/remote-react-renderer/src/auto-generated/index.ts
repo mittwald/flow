@@ -60,8 +60,6 @@ import { Label as Label } from "@mittwald/flow-react-components";
 import { LabeledValue as LabeledValue } from "@mittwald/flow-react-components";
 import { LayoutCard as LayoutCard } from "@mittwald/flow-react-components";
 import { Legend as Legend } from "@mittwald/flow-react-components";
-import { LightBox as LightBox } from "@mittwald/flow-react-components";
-import { LightBoxTrigger as LightBoxTrigger } from "@mittwald/flow-react-components";
 import { Link as Link } from "@mittwald/flow-react-components";
 import { EmptyView as ListEmptyView } from "@mittwald/flow-react-components";
 import { ListItemViewContent as ListItemViewContent } from "@mittwald/flow-react-components";
@@ -266,11 +264,6 @@ export const flowComponents = {
     LayoutCard,
   ),
   "flr-legend": createFlowRemoteComponentRenderer("Legend", Legend),
-  "flr-light-box": createFlowRemoteComponentRenderer("LightBox", LightBox),
-  "flr-light-box-trigger": createFlowRemoteComponentRenderer(
-    "LightBoxTrigger",
-    LightBoxTrigger,
-  ),
   "flr-link": createFlowRemoteComponentRenderer("Link", Link),
   "flr-list-empty-view": createFlowRemoteComponentRenderer(
     "ListEmptyView",

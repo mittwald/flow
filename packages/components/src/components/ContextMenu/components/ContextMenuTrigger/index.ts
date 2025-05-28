@@ -1,4 +1,2 @@
-import { ContextMenuTrigger } from "./ContextMenuTrigger";
-
+export { default } from "./ContextMenuTrigger";
 export * from "./ContextMenuTrigger";
-export default ContextMenuTrigger;

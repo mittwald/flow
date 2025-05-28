@@ -20,7 +20,7 @@
       "cache": false
     },
     "test": {
-      "dependsOn": ["test:unit", "test:compile"],
+      "dependsOn": ["test:unit", "test:compile", "test:browser"],
       "cache": true
     },
     "test:compile": {
@@ -28,6 +28,10 @@
       "cache": true
     },
     "test:unit": {
+      "dependsOn": ["^build"],
+      "cache": true
+    },
+    "test:browser": {
       "dependsOn": ["^build"],
       "cache": true
     }
