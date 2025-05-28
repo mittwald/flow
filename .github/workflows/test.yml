@@ -30,6 +30,6 @@ jobs:
         run: pnpm lint
       - name: Install Playwright
         run: pnpm nx test:browser:prepare remote-react-components
-      - run: pnpm nx affected -t test,lint --parallel=3
+      - run: pnpm test
       # Check if working dir is clean after build
       - run: git diff --exit-code
