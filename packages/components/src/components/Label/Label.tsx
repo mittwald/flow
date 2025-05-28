@@ -42,10 +42,29 @@ export const Label = flowComponent("Label", (props) => {
     ? className
     : clsx(styles.label, isDisabled && styles.disabled, className);
 
-  const optionalMarker = " " + stringFormatter.format("label.optional");
+  const optionalMarker = (
+    <div className={styles.optional}>
+      {stringFormatter.format("label.optional")}
+    </div>
+  );
 
   const propsContext: PropsContext = {
-    ContextualHelpTrigger: { tunnelId: "contextualHelp" },
+    ContextualHelpTrigger: {
+      tunnelId: "contextualHelp",
+      Button: {
+        tunnelId: null,
+      },
+    },
+    Button: {
+      tunnelId: "right",
+      size: "s",
+    },
+    Action: {
+      tunnelId: "right",
+      Button: {
+        tunnelId: null,
+      },
+    },
   };
 
   return (
@@ -54,7 +73,24 @@ export const Label = flowComponent("Label", (props) => {
         <Aria.Label {...rest} className={rootClassName} ref={ref}>
           {children}
           {optional && optionalMarker}
-          <TunnelExit id="contextualHelp" />
+          <TunnelExit id="contextualHelp">
+            {(children) => {
+              if (React.Children.count(children) >= 1) {
+                return children;
+              }
+
+              return undefined;
+            }}
+          </TunnelExit>
+          <TunnelExit id="right">
+            {(children) => {
+              if (React.Children.count(children) >= 1) {
+                return <div className={styles.right}>{children}</div>;
+              }
+
+              return undefined;
+            }}
+          </TunnelExit>
         </Aria.Label>
       </TunnelProvider>
     </PropsContextProvider>

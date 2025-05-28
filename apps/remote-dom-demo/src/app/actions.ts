@@ -16,8 +16,12 @@ export async function login(formState: unknown | null, formData: FormData) {
   };
 }
 
-export async function formServerAction(prevState: number, formData: FormData) {
+export async function formServerAction(
+  prevState: number,
+  formData: Record<string, unknown>,
+) {
   console.log("Calling form server action with data: ", formData);
+  console.log("File: ", await (formData["certificate"] as File).arrayBuffer());
   await sleep();
   console.log("Done");
   return prevState + 1;

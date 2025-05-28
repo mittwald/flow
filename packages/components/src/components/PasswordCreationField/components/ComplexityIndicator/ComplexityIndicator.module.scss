@@ -1,0 +1,83 @@
+@use "complexity";
+
+.complexityIndicator {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: var(--progress-bar--height--s);
+  overflow: hidden;
+  border-top: var(--form-control--border-width) solid
+    var(--progress-bar--border-color);
+
+  @include complexity.animation-in("height");
+  @include complexity.animation-in("border-top-color");
+
+  &.hide {
+    transition-duration: #{complexity.$animation-out-duration};
+    height: 0;
+    border-top-color: transparent;
+    overflow: hidden;
+  }
+
+  & .bar {
+    position: relative;
+    display: block;
+    height: 100%;
+
+    border-radius: calc(var(--form-control--corner-radius) - 1px);
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+
+    transition:
+      width #{complexity.$animation-width-responsiveness},
+      background-color #{complexity.$animation-background-color-change};
+
+    &.running {
+      border-bottom-right-radius: 0;
+    }
+
+    &.bar-background-status-danger {
+      background-color: var(--progress-bar--danger-fill-background-color);
+    }
+
+    &.bar-background-status-success {
+      background-color: var(--progress-bar--success-fill-background-color);
+    }
+
+    &.bar-background-status-warning {
+      background-color: var(--progress-bar--warning-fill-background-color);
+    }
+
+    &.bar-background-status-indeterminate {
+      background-color: var(
+        --progress-bar--indeterminate-fill-background-color
+      );
+    }
+
+    &.loading {
+      &::after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        transform: translateX(-100%);
+        background-image: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0) 0,
+          rgba(255, 255, 255, 0.8) 20%,
+          rgba(255, 255, 255, 0) 40%
+        );
+        animation: shimmer 1s infinite;
+        content: "";
+      }
+    }
+  }
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}

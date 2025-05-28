@@ -26,6 +26,10 @@
       "types": "./dist/types/integrations/react-hook-form/index.d.ts",
       "import": "./dist/js/react-hook-form.mjs"
     },
+    "./mittwald-password-tools-js": {
+      "types": "./dist/types/integrations/@mittwald/password-tools-js/index.d.ts",
+      "import": "./dist/js/@mittwald/password-tools-js.mjs"
+    },
     "./all.css": "./dist/css/all.css",
     "./doc-properties": "./dist/assets/doc-properties.json"
   },
@@ -53,6 +57,7 @@
   "dependencies": {
     "@chakra-ui/live-region": "^2.1.0",
     "@internationalized/string-compiler": "^3.2.6",
+    "@mittwald/password-tools-js": "^2.1.4",
     "@mittwald/react-tunnel": "workspace:*",
     "@mittwald/react-use-promise": "^3.0.4",
     "@react-aria/form": "^3.0.16",
@@ -87,13 +92,14 @@
     "remeda": "^2.22.3",
     "type-fest": "^4.41.0",
     "use-callback-ref": "^1.3.3",
+    "usehooks-ts": "^3.1.1",
     "zod": "^3.25.32"
   },
   "devDependencies": {
     "@faker-js/faker": "^9.8.0",
     "@internationalized/date": "^3.8.1",
     "@mittwald/flow-design-tokens": "workspace:*",
-    "@mittwald/react-use-promise": "^2.6.0",
+    "@mittwald/react-use-promise": "^3.0.4",
     "@mittwald/remote-dom-react": "1.2.2-mittwald.3",
     "@mittwald/typescript-config": "workspace:*",
     "@nx/storybook": "^20.8.2",
@@ -150,6 +156,7 @@
     "vite-plugin-checker": "^0.9.3",
     "vite-plugin-dts": "^4.5.4",
     "vite-plugin-externalize-deps": "^0.9.0",
+    "vite-plugin-node-polyfills": "^0.23.0",
     "vitest": "~3.0.9",
     "vitest-browser-react": "^0.1.1",
     "yaml": "^2.8.0"

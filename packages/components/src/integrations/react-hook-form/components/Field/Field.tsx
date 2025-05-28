@@ -1,7 +1,6 @@
 import { useFormContext } from "@/integrations/react-hook-form/components/context/formContext";
 import type { PropsContext } from "@/lib/propsContext";
 import { dynamic, PropsContextProvider } from "@/lib/propsContext";
-import FieldErrorView from "@/views/FieldErrorView";
 import type { PropsWithChildren } from "react";
 import {
   useController,
@@ -9,6 +8,7 @@ import {
   type FieldValues,
   type UseFormReturn,
 } from "react-hook-form";
+import FieldErrorView from "@/views/FieldErrorView";
 
 export interface FieldProps<T extends FieldValues>
   extends Omit<ControllerProps<T>, "render" | "control">,
@@ -29,12 +29,20 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
     validationBehavior: "aria" as const,
     defaultValue,
     isInvalid: controller.fieldState.invalid,
-    children: dynamic((p) => (
-      <>
-        {p.children}
-        <FieldErrorView>{controller.fieldState.error?.message}</FieldErrorView>
-      </>
-    )),
+    children: dynamic((p) => {
+      if (controller.fieldState.invalid) {
+        return (
+          <>
+            {p.children}
+            <FieldErrorView>
+              {controller.fieldState.error?.message}
+            </FieldErrorView>
+          </>
+        );
+      }
+
+      return p.children;
+    }),
   };
 
   const { value: ignoredValue, ...fieldPropsWithoutValue } = fieldProps;
@@ -65,6 +73,7 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
       selectedKey: value,
     },
     Slider: fieldProps,
+    PasswordCreationField: fieldProps,
     DatePicker: fieldProps,
     DateRangePicker: fieldProps,
     TimeField: fieldProps,

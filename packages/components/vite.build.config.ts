@@ -3,6 +3,7 @@ import dts from "vite-plugin-dts";
 import baseConfig from "./vite.config";
 import { externalizeDeps } from "vite-plugin-externalize-deps";
 import { defineConfig, mergeConfig } from "vite";
+import { nodePolyfills as viteNodePolyfills } from "vite-plugin-node-polyfills";
 
 export default mergeConfig(
   baseConfig,
@@ -21,6 +22,8 @@ export default mergeConfig(
           "flr-universal": "./src/index/flr-universal.ts",
           nextjs: "./src/integrations/nextjs/index.ts",
           "react-hook-form": "./src/integrations/react-hook-form/index.ts",
+          "@mittwald/password-tools-js":
+            "./src/integrations/@mittwald/password-tools-js/index.ts",
           globals: "./src/styles/index.ts",
         },
         formats: ["es"],
@@ -44,6 +47,9 @@ export default mergeConfig(
       },
     },
     plugins: [
+      viteNodePolyfills({
+        protocolImports: true,
+      }),
       banner((filename) =>
         filename.endsWith(".mjs") && !filename.endsWith("index.mjs")
           ? '"use client"\r\n/* */'

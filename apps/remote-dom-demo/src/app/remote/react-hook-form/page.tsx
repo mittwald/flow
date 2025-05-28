@@ -4,12 +4,14 @@ import {
   ActionGroup,
   Button,
   ComboBox,
+  FileField,
   Label,
   Option,
   Section,
   Select,
   TextArea,
   TextField,
+  PasswordCreationField,
 } from "@mittwald/flow-remote-react-components";
 import {
   Form,
@@ -26,6 +28,8 @@ export default function Page() {
       comment: "",
       city: "Minden",
       city2: "Minden",
+      file: [],
+      password: "",
     },
   });
 
@@ -70,6 +74,19 @@ export default function Page() {
               Espelkamp
             </Option>
           </Select>
+        </Field>
+        <Field name="password" rules={{ required: true }}>
+          <PasswordCreationField>
+            <Label>Password</Label>
+          </PasswordCreationField>
+        </Field>
+        <Field name="file">
+          <FileField>
+            <Label>Zertifikat</Label>
+            <Button variant="outline" color="secondary">
+              Auswählen
+            </Button>
+          </FileField>
         </Field>
         <ActionGroup>
           <Button type="submit">Login</Button>
