@@ -1,5 +1,4 @@
 import type { FC } from "react";
-import React from "react";
 import type { Filter } from "@/components/List/model/filter/Filter";
 import { IconFilter } from "@/components/Icon/components/icons";
 import TextView from "@/views/TextView";
@@ -17,7 +16,9 @@ export const FilterMenu: FC<Props> = (props) => {
 
   const { values, mode, name, property } = filter;
 
-  const filterItems = values.map((v) => <FilterMenuItem filterValue={v} />);
+  const filterItems = values.map((v) => (
+    <FilterMenuItem filterValue={v} key={v.id} />
+  ));
 
   const activeFilterKeys = values.filter((v) => v.isActive).map((v) => v.id);
 

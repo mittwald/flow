@@ -1,5 +1,4 @@
 import type { FC } from "react";
-import React from "react";
 import locales from "../../../../locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 import { useList } from "@/components/List";
@@ -37,7 +36,7 @@ export const ViewModeMenu: FC = () => {
       </ButtonView>
       <ContextMenu selectionMode="single" selectedKeys={[selectedViewMode]}>
         {availableViewModes.map((viewMode) => (
-          <ViewModeMenuItem viewMode={viewMode} />
+          <ViewModeMenuItem viewMode={viewMode} key={viewMode} />
         ))}
       </ContextMenu>
     </ContextMenuTrigger>

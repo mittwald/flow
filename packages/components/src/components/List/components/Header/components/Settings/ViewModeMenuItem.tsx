@@ -1,4 +1,4 @@
-import React, { type FC } from "react";
+import { type FC } from "react";
 import MenuItemView from "@/views/MenuItemView";
 import type { ListViewMode } from "@/components/List/model/types";
 import { useList } from "@/components/List";
@@ -17,7 +17,6 @@ export const ViewModeMenuItem: FC<Props> = (props) => {
   return (
     <MenuItemView
       id={viewMode}
-      key={viewMode}
       onAction={() => {
         list.setViewMode(viewMode);
       }}
