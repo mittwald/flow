@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Label from "../Label";
-import React from "react";
 import { Button } from "@/components/Button";
 import {
   ContextualHelp,
@@ -22,6 +21,15 @@ type Story = StoryObj<typeof Label>;
 export const Default: Story = {};
 
 export const Optional: Story = { args: { optional: true } };
+
+export const WithButton: Story = {
+  render: (props) => (
+    <Label {...props}>
+      <Text>Label</Text>
+      <Button>Do stuff</Button>
+    </Label>
+  ),
+};
 
 export const WithContextualHelp: Story = {
   render: (props) => (

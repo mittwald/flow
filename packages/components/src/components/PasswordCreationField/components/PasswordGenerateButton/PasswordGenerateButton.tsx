@@ -1,4 +1,4 @@
-import React, { type FC } from "react";
+import { type FC } from "react";
 import { useLocalizedStringFormatter } from "react-aria";
 import locales from "./../../locales/*.locale.json";
 import { Button } from "@/components/Button";
@@ -15,14 +15,13 @@ export const PasswordGenerateButton: FC<Props> = (props) => {
   const translate = useLocalizedStringFormatter(locales);
 
   return (
-    <Action tunnelId={"right"} action={onGeneratePasswordAction}>
+    <Action action={onGeneratePasswordAction}>
       <Button
         data-component="generatePassword"
         isDisabled={isDisabled}
         className={className}
         variant="plain"
         color="dark"
-        size="s"
       >
         {translate.format("button.generate")}
       </Button>
