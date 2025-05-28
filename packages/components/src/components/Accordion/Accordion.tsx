@@ -1,5 +1,5 @@
 import type { ComponentProps, FC, PropsWithChildren, ReactNode } from "react";
-import React, { useId, useState } from "react";
+import { useId, useState } from "react";
 import clsx from "clsx";
 import styles from "./Accordion.module.scss";
 import type { PropsContext } from "@/lib/propsContext";
@@ -40,6 +40,7 @@ export const Accordion: FC<AccordionProps> = (props) => {
 
   const headerButton = (children: ReactNode) => (
     <Button
+      tunnelId={null}
       unstyled
       aria-expanded={expanded}
       className={styles.headerButton}
