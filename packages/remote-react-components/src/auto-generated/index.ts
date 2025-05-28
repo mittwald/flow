@@ -59,8 +59,6 @@ export * from "./Label";
 export * from "./LabeledValue";
 export * from "./LayoutCard";
 export * from "./Legend";
-export * from "./LightBox";
-export * from "./LightBoxTrigger";
 export * from "./Link";
 export * from "./ListEmptyView";
 export * from "./ListItemViewContent";
