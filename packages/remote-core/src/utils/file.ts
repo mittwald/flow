@@ -1,22 +1,18 @@
-export const resolveFileContents = (file: unknown) => {
+import { TRANSFERABLE } from "@quilted/threads";
+
+export const resolveFileContents = async (file: unknown) => {
   if (!(file instanceof File)) {
     return file;
   }
 
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const data = new Uint8Array((event.target?.result as ArrayBuffer) ?? 0);
+  const arrayBuffer = await file.arrayBuffer();
 
-      resolve({
-        name: file.name,
-        type: file.type,
-        lastModified: file.lastModified,
-        size: file.size,
-        content: [...data],
-      });
-    };
-    reader.onerror = reject;
-    reader.readAsArrayBuffer(file);
-  });
+  return {
+    name: file.name,
+    type: file.type,
+    lastModified: file.lastModified,
+    size: file.size,
+    content: arrayBuffer,
+    [TRANSFERABLE]: 1,
+  };
 };
