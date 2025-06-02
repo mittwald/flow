@@ -1,6 +1,5 @@
 import type { FC } from "react";
 import React from "react";
-import { SkeletonText } from "@/components/SkeletonText";
 import type { TableSupportedComponentProps } from "@/components/List/model/table/types";
 import TableView from "@/views/TableView";
 import TableColumnView from "@/views/TableColumnView";
@@ -15,7 +14,7 @@ export const TableLoadingView: FC<TableSupportedComponentProps> = (props) => {
     <TableView {...props}>
       <TableHeaderView>
         <TableColumnView>
-          <SkeletonText width="100%" />
+          <SkeletonTextView width="100%" />
         </TableColumnView>
       </TableHeaderView>
       <TableBodyView>
