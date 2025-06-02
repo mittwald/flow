@@ -2,7 +2,6 @@ import formFieldStyles from "@/components/FormField/FormField.module.scss";
 import { useFormValidation } from "@react-aria/form";
 import { useFormValidationState } from "@react-stately/form";
 import type { PropsWithChildren } from "react";
-import React, { useMemo } from "react";
 import type * as Aria from "react-aria-components";
 import { FieldErrorContext, InputContext } from "react-aria-components";
 import type { FileInputOnChangeHandler } from "@/components/FileField/components/FileInput";
@@ -12,7 +11,7 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import { useObjectRef } from "@react-aria/utils";
-
+import { addAwaitedArrayBuffer } from "@mittwald/flow-core";
 export interface FileFieldProps
   extends PropsWithChildren,
     FlowComponentProps<HTMLInputElement>,
@@ -50,15 +49,12 @@ export const FileField = flowComponent("FileField", (props) => {
 
   useFormValidation({ validationBehavior }, formValidationState, inputRef);
 
-  const inputProps = useMemo(
-    () => ({
-      ...restInputProps,
-      ref: inputRef,
-      "aria-invalid": formValidationState.displayValidation.isInvalid,
-      value: undefined,
-    }),
-    [formValidationState, isRequired, ...Object.values(restInputProps)],
-  );
+  const inputProps = {
+    ...restInputProps,
+    ref: inputRef,
+    "aria-invalid": formValidationState.displayValidation.isInvalid,
+    value: undefined,
+  };
 
   const propsContext: PropsContext = {
     Label: {
@@ -73,6 +69,14 @@ export const FileField = flowComponent("FileField", (props) => {
     },
   };
 
+  const handleOnChange: FileInputOnChangeHandler = (fileList) => {
+    if (fileList && onChange) {
+      Promise.all(Array.from(fileList).map(addAwaitedArrayBuffer)).then(() =>
+        onChange(fileList),
+      );
+    }
+  };
+
   return (
     <InputContext.Provider value={inputProps}>
       <FieldErrorContext.Provider value={formValidationState.displayValidation}>
@@ -84,7 +88,11 @@ export const FileField = flowComponent("FileField", (props) => {
             }
             className={formFieldStyles.formField}
           >
-            <FileInput ref={ref} onChange={onChange} isDisabled={isDisabled}>
+            <FileInput
+              ref={ref}
+              onChange={handleOnChange}
+              isDisabled={isDisabled}
+            >
               {children}
             </FileInput>
           </div>

@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "build:deps": "",
+    "clean": "rimraf .next",
     "dev": "next dev",
     "test:compile": "tsc --noEmit"
   },
@@ -35,6 +36,7 @@
     "@types/react-dom": "^19.1.5",
     "eslint": "^9.27.0",
     "nx": "^20.8.2",
+    "rimraf": "^6.0.1",
     "typescript": "^5.8.3"
   },
   "overrides": {

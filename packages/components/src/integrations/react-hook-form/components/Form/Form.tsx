@@ -3,6 +3,7 @@ import { FormContextProvider } from "@/integrations/react-hook-form/components/c
 import type {
   ComponentProps,
   ComponentType,
+  FormEvent,
   FormEventHandler,
   PropsWithChildren,
 } from "react";
@@ -16,7 +17,10 @@ export type FormOnSubmitHandler<F extends FieldValues> = Parameters<
 >[0];
 
 type FormComponentType = ComponentType<
-  PropsWithChildren<{ id: string; onSubmit?: FormEventHandler }>
+  PropsWithChildren<{
+    id: string;
+    onSubmit?: FormEventHandler | FormOnSubmitHandler<never>;
+  }>
 >;
 
 export interface FormProps<F extends FieldValues>
@@ -42,24 +46,26 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
   const isAsyncSubmit = useRef(false);
   const submitHandlerResultRef = useRef<unknown>(null);
 
-  const handleOnSubmit: FormEventHandler = (e) => {
+  const handleOnSubmit = (e: FormEvent<HTMLFormElement> | F) => {
     const { isSubmitting, isValidating } = form.control._formState;
+    const formEvent =
+      "nativeEvent" in e ? (e as FormEvent<HTMLFormElement>) : undefined;
 
-    e.stopPropagation();
+    formEvent?.stopPropagation();
 
     if (isSubmitting || isValidating) {
-      e.preventDefault();
+      formEvent?.preventDefault();
       return;
     }
 
     submitHandlerResultRef.current = undefined;
 
     form.handleSubmit((values) => {
-      const result = onSubmit(values, e);
+      const result = onSubmit(values, formEvent);
       isAsyncSubmit.current = result instanceof Promise;
       submitHandlerResultRef.current = result;
       return result;
-    })(e);
+    })(formEvent);
   };
 
   return (

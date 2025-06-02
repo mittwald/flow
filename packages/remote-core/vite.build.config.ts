@@ -9,7 +9,9 @@ export default mergeConfig(
   defineConfig({
     plugins: [
       preserveDirectives(),
-      externalizeDeps(),
+      externalizeDeps({
+        except: ["@mittwald/flow-core"],
+      }),
       dts({
         include: ["src"],
         outDir: "dist/types",

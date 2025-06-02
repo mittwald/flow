@@ -325,6 +325,9 @@ importers:
       nx:
         specifier: ^20.8.2
         version: 20.8.2
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
       typescript:
         specifier: ^5.8.3
         version: 5.8.3
@@ -467,6 +470,9 @@ importers:
       '@internationalized/date':
         specifier: ^3.8.1
         version: 3.8.1
+      '@mittwald/flow-core':
+        specifier: workspace:*
+        version: link:../core
       '@mittwald/flow-design-tokens':
         specifier: workspace:*
         version: link:../design-tokens
@@ -650,6 +656,19 @@ importers:
       yaml:
         specifier: ^2.8.0
         version: 2.8.0
+
+  packages/core:
+    dependencies:
+      '@types/invariant':
+        specifier: ^2.2.37
+        version: 2.2.37
+      invariant:
+        specifier: ^2.2.4
+        version: 2.2.4
+    devDependencies:
+      vite-plugin-node-polyfills:
+        specifier: ^0.23.0
+        version: 0.23.0(rollup@4.35.0)(vite@6.3.5(@types/node@22.15.23)(less@4.3.0)(sass@1.89.0)(stylus@0.62.0)(terser@5.40.0)(tsx@4.19.4)(yaml@2.8.0))
 
   packages/design-tokens:
     devDependencies:
@@ -875,13 +894,25 @@ importers:
       '@quilted/threads':
         specifier: ^3.1.3
         version: 3.1.3(@preact/signals-core@1.8.0)
+      '@types/invariant':
+        specifier: ^2.2.37
+        version: 2.2.37
+      invariant:
+        specifier: ^2.2.4
+        version: 2.2.4
       remeda:
         specifier: ^2.22.3
         version: 2.22.3
     devDependencies:
+      '@internationalized/date':
+        specifier: ^3.8.1
+        version: 3.8.1
       '@mittwald/ext-bridge':
         specifier: workspace:*
         version: link:../ext-bridge
+      '@mittwald/flow-core':
+        specifier: workspace:*
+        version: link:../core
       '@mittwald/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
@@ -992,6 +1023,9 @@ importers:
         specifier: ^5.0.0
         version: 5.0.0(react@19.1.0)
     devDependencies:
+      '@internationalized/date':
+        specifier: ^3.8.1
+        version: 3.8.1
       '@mittwald/ext-bridge':
         specifier: workspace:*
         version: link:../ext-bridge
@@ -19801,6 +19835,14 @@ snapshots:
       '@rollup/plugin-inject': 5.0.5(rollup@4.35.0)
       node-stdlib-browser: 1.3.1
       vite: 6.3.5(@types/node@22.13.10)(less@4.3.0)(sass@1.89.0)(stylus@0.62.0)(terser@5.40.0)(tsx@4.19.4)(yaml@2.8.0)
+    transitivePeerDependencies:
+      - rollup
+
+  vite-plugin-node-polyfills@0.23.0(rollup@4.35.0)(vite@6.3.5(@types/node@22.15.23)(less@4.3.0)(sass@1.89.0)(stylus@0.62.0)(terser@5.40.0)(tsx@4.19.4)(yaml@2.8.0)):
+    dependencies:
+      '@rollup/plugin-inject': 5.0.5(rollup@4.35.0)
+      node-stdlib-browser: 1.3.1
+      vite: 6.3.5(@types/node@22.15.23)(less@4.3.0)(sass@1.89.0)(stylus@0.62.0)(terser@5.40.0)(tsx@4.19.4)(yaml@2.8.0)
     transitivePeerDependencies:
       - rollup
 
