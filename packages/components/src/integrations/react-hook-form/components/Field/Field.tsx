@@ -11,7 +11,7 @@ import {
 import FieldErrorView from "@/views/FieldErrorView";
 
 export interface FieldProps<T extends FieldValues>
-  extends Omit<ControllerProps<T>, "render" | "control">,
+  extends Omit<ControllerProps<T>, "render">,
     PropsWithChildren {}
 
 export function Field<T extends FieldValues>(props: FieldProps<T>) {
@@ -62,15 +62,12 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
       isSelected: value,
     },
     FileField: fieldProps,
+    FileDropZone: fieldProps,
     NumberField: fieldProps,
     RadioGroup: fieldProps,
     Switch: {
       ...fieldProps,
       isSelected: value,
-    },
-    Select: {
-      ...fieldProps,
-      selectedKey: value,
     },
     Slider: fieldProps,
     PasswordCreationField: fieldProps,
@@ -78,6 +75,10 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
     DateRangePicker: fieldProps,
     TimeField: fieldProps,
     SegmentedControl: fieldProps,
+    Select: {
+      ...fieldProps,
+      selectedKey: value,
+    },
     ComboBox: {
       ...fieldPropsWithoutValue,
       selectedKey: value,
