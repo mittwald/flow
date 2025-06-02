@@ -21,7 +21,13 @@ export interface AccentBoxProps
 
 /** @flr-generate all */
 export const AccentBox = flowComponent("AccentBox", (props) => {
-  const { color = "blue", children, elementType = "div", className } = props;
+  const {
+    color = "blue",
+    children,
+    elementType = "div",
+    className,
+    ...rest
+  } = props;
 
   const rootClassName = clsx(styles.accentBox, className, styles[color]);
 
@@ -46,7 +52,9 @@ export const AccentBox = flowComponent("AccentBox", (props) => {
 
   return (
     <PropsContextProvider props={propsContext}>
-      <Element className={rootClassName}>{children}</Element>
+      <Element {...rest} className={rootClassName}>
+        {children}
+      </Element>
     </PropsContextProvider>
   );
 });
