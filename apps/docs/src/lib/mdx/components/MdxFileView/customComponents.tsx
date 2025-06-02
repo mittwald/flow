@@ -3,7 +3,6 @@ import { Heading } from "@mittwald/flow-react-components";
 import { Alert } from "@mittwald/flow-react-components";
 import { Content } from "@mittwald/flow-react-components";
 import type { PropsWithChildren } from "react";
-import React from "react";
 import { CopyButton } from "@mittwald/flow-react-components";
 import { Link } from "@mittwald/flow-react-components";
 import { Text } from "@mittwald/flow-react-components";
@@ -22,6 +21,7 @@ import {
   TableRow,
 } from "@mittwald/flow-react-components";
 import { Label } from "@mittwald/flow-react-components";
+import { onlyText } from "react-children-utilities";
 
 export const customComponents = {
   Content: Content,
@@ -38,7 +38,7 @@ export const customComponents = {
       <pre className={styles.pre}>{children}</pre>
       <CopyButton
         className={styles.preCopyButton}
-        text={children}
+        text={onlyText(children)}
         variant="plain"
         size="s"
       />

@@ -46,7 +46,7 @@ export const CodeBlock: FC<CodeBlockProps> = (props) => {
           className={styles.copyButton}
           size="s"
           color={color === "default" ? "dark" : color}
-          text={code}
+          text={Array.isArray(code) ? code.join("\r\n") : code}
         />
       )}
     </div>
