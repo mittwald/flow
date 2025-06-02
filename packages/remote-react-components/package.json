@@ -31,6 +31,7 @@
     "test": "exit 0",
     "test:browser": "vitest run --workspace=dev/vitest/remote-test-server/vitest.workspace.ts --browser.headless",
     "test:browser:prepare": "playwright install",
+    "test:browser-dev": "vitest dev --workspace=dev/vitest/remote-test-server/vitest.workspace.ts ",
     "test:compile": "tsc --noEmit",
     "test:unit": "exit 0"
   },
