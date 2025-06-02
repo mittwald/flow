@@ -2,7 +2,6 @@ import formFieldStyles from "@/components/FormField/FormField.module.scss";
 import { useFormValidation } from "@react-aria/form";
 import { useFormValidationState } from "@react-stately/form";
 import type { PropsWithChildren } from "react";
-import React, { useMemo } from "react";
 import type * as Aria from "react-aria-components";
 import { FieldErrorContext, InputContext } from "react-aria-components";
 import type { FileInputOnChangeHandler } from "@/components/FileField/components/FileInput";
@@ -50,15 +49,12 @@ export const FileField = flowComponent("FileField", (props) => {
 
   useFormValidation({ validationBehavior }, formValidationState, inputRef);
 
-  const inputProps = useMemo(
-    () => ({
-      ...restInputProps,
-      ref: inputRef,
-      "aria-invalid": formValidationState.displayValidation.isInvalid,
-      value: undefined,
-    }),
-    [formValidationState, isRequired, ...Object.values(restInputProps)],
-  );
+  const inputProps = {
+    ...restInputProps,
+    ref: inputRef,
+    "aria-invalid": formValidationState.displayValidation.isInvalid,
+    value: undefined,
+  };
 
   const propsContext: PropsContext = {
     Label: {

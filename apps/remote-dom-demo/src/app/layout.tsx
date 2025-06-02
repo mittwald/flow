@@ -61,6 +61,7 @@ export default function Layout(props: PropsWithChildren) {
                 <Link href="/host/simple-form">Simple Form</Link>
                 <Link href="/host/action-form">Action Form</Link>
                 <Link href="/host/react-hook-form">React Hook Form</Link>
+                <Link href="/host/files">Files</Link>
                 <Link href="/host/suspense">Suspense</Link>
                 <Link href="/host/tunnel">Tunnel</Link>
                 <Link href="/host/ext-bridge">Ext Bridge</Link>

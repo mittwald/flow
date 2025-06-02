@@ -44,6 +44,7 @@ import { FieldDescription as FieldDescription } from "@mittwald/flow-react-compo
 import { FieldError as FieldError } from "@mittwald/flow-react-components";
 import { FileCard as FileCard } from "@mittwald/flow-react-components";
 import { FileCardList as FileCardList } from "@mittwald/flow-react-components";
+import { FileDropZone as FileDropZone } from "@mittwald/flow-react-components";
 import { FileField as FileField } from "@mittwald/flow-react-components";
 import { Flex as Flex } from "@mittwald/flow-react-components";
 import { Header as Header } from "@mittwald/flow-react-components";
@@ -226,6 +227,10 @@ export const flowComponents = {
   "flr-file-card-list": createFlowRemoteComponentRenderer(
     "FileCardList",
     FileCardList,
+  ),
+  "flr-file-drop-zone": createFlowRemoteComponentRenderer(
+    "FileDropZone",
+    FileDropZone,
   ),
   "flr-file-field": createFlowRemoteComponentRenderer("FileField", FileField),
   "flr-flex": createFlowRemoteComponentRenderer("Flex", Flex),
