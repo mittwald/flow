@@ -182,6 +182,9 @@ importers:
       react:
         specifier: ^19.1.0
         version: 19.1.0
+      react-children-utilities:
+        specifier: ^2.10.0
+        version: 2.10.0(react@19.1.0)
       react-dom:
         specifier: ^19.1.0
         version: 19.1.0(react@19.1.0)

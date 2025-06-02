@@ -29,7 +29,7 @@
     "build": "vite build --config vite.build.config.ts",
     "clean": "rimraf dist",
     "test": "exit 0",
-    "test:browser": "vitest run --workspace=dev/vitest/remote-test-server/vitest.workspace.ts --browser.headless",
+    "test:browser": "vitest run --workspace=dev/vitest/remote-test-server/vitest.workspace.ts --browser.headless --no-file-parallelism",
     "test:browser:prepare": "playwright install",
     "test:compile": "tsc --noEmit",
     "test:unit": "exit 0"
