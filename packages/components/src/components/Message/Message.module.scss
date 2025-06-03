@@ -29,6 +29,13 @@
 
     .content {
       background-color: var(--message--background-color-sender);
+      border-top-right-radius: 0;
+    }
+  }
+
+  &.responder {
+    .content {
+      border-top-left-radius: 0;
     }
   }
 
