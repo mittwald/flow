@@ -97,9 +97,11 @@ angepasst werden.
 
 ## Mit Checkboxen
 
-Checkboxen die in einem ListItem platziert werden, werden automatisch vorne
+Checkboxen, die in einem ListItem platziert werden, werden automatisch vorne
 angeordnet. Die Funktionalität der Checkbox wird nicht von der Liste gesteuert
-und kann individuell implementiert werden.
+und muss individuell implementiert werden. Achte bei der Implementierung jedoch
+darauf, dass die gesamte Zeile genutzt werden kann, um das Element zu markieren.
+Nutze dafür `onAction` der List.
 
 <LiveCodeEditor example="checkbox" editorCollapsed />
 
