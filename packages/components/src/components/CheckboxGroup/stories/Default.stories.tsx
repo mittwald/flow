@@ -76,10 +76,10 @@ export const ColumnLayout: Story = {
       <Label>Options</Label>
       <Checkbox value="1">Option 1</Checkbox>
       <Checkbox value="2">Option 2</Checkbox>
-      <Checkbox value="1">Option 3</Checkbox>
-      <Checkbox value="2">Option 4</Checkbox>
-      <Checkbox value="1">Option 5</Checkbox>
-      <Checkbox value="2">Option 6</Checkbox>
+      <Checkbox value="3">Option 3</Checkbox>
+      <Checkbox value="4">Option 4</Checkbox>
+      <Checkbox value="5">Option 5</Checkbox>
+      <Checkbox value="6">Option 6</Checkbox>
     </CheckboxGroup>
   ),
 };
