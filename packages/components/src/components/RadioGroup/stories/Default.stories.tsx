@@ -113,3 +113,17 @@ export const WithFieldError: Story = {
     </RadioGroup>
   ),
 };
+
+export const ColumnLayout: Story = {
+  render: (props) => (
+    <RadioGroup m={[1, 1]} l={[1, 1, 1]} {...props} defaultValue="1">
+      <Label>Options</Label>
+      <Radio value="1">Option 1</Radio>
+      <Radio value="2">Option 2</Radio>
+      <Radio value="3">Option 3</Radio>
+      <Radio value="4">Option 4</Radio>
+      <Radio value="5">Option 5</Radio>
+      <Radio value="6">Option 6</Radio>
+    </RadioGroup>
+  ),
+};

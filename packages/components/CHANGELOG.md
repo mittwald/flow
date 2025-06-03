@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.233](https://github.com/mittwald/flow/compare/0.2.0-alpha.232...0.2.0-alpha.233) (2025-06-03)
+
+### Bug Fixes
+
+* **Message:** update border-radius ([#1561](https://github.com/mittwald/flow/issues/1561)) ([07a9745](https://github.com/mittwald/flow/commit/07a974510be9eef8e96b36aceb62d68a264ec045))
+
+# [0.2.0-alpha.232](https://github.com/mittwald/flow/compare/0.2.0-alpha.231...0.2.0-alpha.232) (2025-06-03)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.231](https://github.com/mittwald/flow/compare/0.2.0-alpha.230...0.2.0-alpha.231) (2025-06-03)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.230](https://github.com/mittwald/flow/compare/0.2.0-alpha.229...0.2.0-alpha.230) (2025-06-03)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.229](https://github.com/mittwald/flow/compare/0.2.0-alpha.228...0.2.0-alpha.229) (2025-06-03)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
 # [0.2.0-alpha.228](https://github.com/mittwald/flow/compare/0.2.0-alpha.227...0.2.0-alpha.228) (2025-06-02)
 
 ### Bug Fixes
