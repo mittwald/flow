@@ -56,9 +56,14 @@ export const CheckboxGroup = flowComponent("CheckboxGroup", (props) => {
             <TunnelExit id="checkboxButtons" />
           </ColumnLayout>
 
-          <div className={styles.checkboxGroup}>
+          <ColumnLayout
+            s={s ?? [1]}
+            m={m ?? [1]}
+            l={l ?? [1]}
+            className={styles.checkboxGroup}
+          >
             <TunnelExit id="checkboxes" />
-          </div>
+          </ColumnLayout>
 
           <TunnelExit id="fieldDescription" />
           <TunnelExit id="fieldError" />
