@@ -66,6 +66,7 @@ export const RadioGroup = flowComponent("RadioGroup", (props) => {
             s={s ?? [1]}
             m={m ?? [1]}
             l={l ?? [1]}
+            rowGap="s"
             className={styles.radioGroup}
           >
             <TunnelExit id="radios" />
