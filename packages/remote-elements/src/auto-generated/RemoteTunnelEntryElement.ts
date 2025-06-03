@@ -10,7 +10,10 @@ export class RemoteTunnelEntryElement extends FlowRemoteElement<RemoteTunnelEntr
   }
 
   static override get remoteProperties() {
-    return {};
+    return {
+      id: {},
+      staticEntryId: {},
+    };
   }
 
   static override get remoteEvents() {
