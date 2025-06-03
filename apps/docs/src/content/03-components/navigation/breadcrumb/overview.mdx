@@ -1,15 +1,22 @@
 # Playground
 
+Verwende `<Breadcrumb />`, um eine Breadcrumb darzustellen. Die einzelnen Navigationselemente werden dabei mit `<Link />` innerhalb der Component erstellt.
+
 <LiveCodeEditor />
 
 ---
 
-# Color Light und Dark
+# Color
 
-## Dark
+Je nach Bedarf stehen drei Breadcrumb-Color zur Auswahl: **Primary, Light** und **Dark**. Primary ist die Standard-Color und muss nicht explizit im Code angegeben werden.
 
-<LiveCodeEditor example="dark" bgColor="light" editorCollapsed />
+## Color Light und Dark
 
-## Light
+Light und Dark sind Alternativen zur Primary-Color, falls diese auf farbigen oder dekorativen Hintergründen keinen ausreichenden Kontrast bietet.
 
 <LiveCodeEditor example="light" bgColor="dark" editorCollapsed />
+<LiveCodeEditor example="dark" bgColor="light" editorCollapsed />
+
+**Light**: Verwende die Light-Color, bei dunklen Hintergründen mit einem HSL Lightness-Wert von weniger als 50.
+
+**Dark**: Verwende die Dark-Color, bei hellen, farbigen Hintergründen mit einem HSL Lightness-Wert von größer als 50.
