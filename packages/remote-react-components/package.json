@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-remote-react-components",
-  "version": "0.2.0-alpha.227",
+  "version": "0.2.0-alpha.228",
   "type": "module",
   "description": "React components that can be used in a remote environment",
   "homepage": "https://mittwald.github.io/flow",
@@ -29,8 +29,8 @@
     "build": "vite build --config vite.build.config.ts",
     "clean": "rimraf dist",
     "test": "exit 0",
+    "test:browser": "vitest run --workspace=dev/vitest/remote-test-server/vitest.workspace.ts --browser.headless --no-file-parallelism",
     "test:browser:prepare": "playwright install",
-    "test:browser-dev": "vitest dev --workspace=dev/vitest/remote-test-server/vitest.workspace.ts ",
     "test:compile": "tsc --noEmit",
     "test:unit": "exit 0"
   },

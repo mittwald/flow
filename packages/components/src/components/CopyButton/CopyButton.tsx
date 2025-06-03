@@ -1,5 +1,3 @@
-import type { ReactNode } from "react";
-import React from "react";
 import copy from "copy-to-clipboard";
 import type { ButtonProps } from "@/components/Button";
 import { Button } from "@/components/Button";
@@ -17,7 +15,7 @@ export interface CopyButtonProps
   extends Omit<ButtonProps, "onPress" | "aria-label" | "render">,
     FlowComponentProps<HTMLButtonElement> {
   /** The text to copy. */
-  text: ReactNode;
+  text: string;
 }
 
 /**

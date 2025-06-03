@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.228](https://github.com/mittwald/flow/compare/0.2.0-alpha.227...0.2.0-alpha.228) (2025-06-02)
+
+### Bug Fixes
+
+* **CopyButton:** fix not copied to clipboard in remote context ([#1550](https://github.com/mittwald/flow/issues/1550)) ([7aa03a5](https://github.com/mittwald/flow/commit/7aa03a5d7559bce6fcb834cd11411f4de6d6f8d0))
+
 # [0.2.0-alpha.227](https://github.com/mittwald/flow/compare/0.2.0-alpha.226...0.2.0-alpha.227) (2025-05-30)
 
 **Note:** Version bump only for package @mittwald/flow-remote-elements

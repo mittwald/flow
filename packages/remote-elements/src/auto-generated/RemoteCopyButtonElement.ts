@@ -40,6 +40,7 @@ export class RemoteCopyButtonElement extends FlowRemoteElement<RemoteCopyButtonE
       preventFocusOnPress: {},
       size: {},
       slot: {},
+      text: {},
       type: {},
       unstyled: {},
       value: {},
@@ -66,7 +67,7 @@ export class RemoteCopyButtonElement extends FlowRemoteElement<RemoteCopyButtonE
   }
 
   static override get remoteSlots() {
-    return ["text"];
+    return [];
   }
 }
 
