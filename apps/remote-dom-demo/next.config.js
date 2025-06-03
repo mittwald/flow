@@ -7,6 +7,16 @@ const nextConfig = {
       bodySizeLimit: "100mb",
     },
   },
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: [
+          { key: "Strict-Transport-Security", value: "max-age=15552000" },
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;
