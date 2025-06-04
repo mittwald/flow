@@ -13,6 +13,7 @@ import {
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
 import type { DropEvent, FocusableElement } from "@react-types/shared";
+import { addAwaitedArrayBuffer } from "@mittwald/flow-core";
 
 export interface FileDropZoneProps
   extends PropsWithClassName,
@@ -58,7 +59,9 @@ export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
         fileDropItems
           .filter((f) => !accept || accept?.includes(f.type))
           .map(async (f) => {
-            return await f.getFile();
+            const file = await f.getFile();
+            await addAwaitedArrayBuffer(file);
+            return file;
           }),
       );
 
