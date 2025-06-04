@@ -668,7 +668,7 @@ importers:
     devDependencies:
       vite-plugin-node-polyfills:
         specifier: ^0.23.0
-        version: 0.23.0(rollup@4.35.0)(vite@6.3.5(@types/node@22.15.23)(less@4.3.0)(sass@1.89.0)(stylus@0.62.0)(terser@5.40.0)(tsx@4.19.4)(yaml@2.8.0))
+        version: 0.23.0(rollup@4.35.0)(vite@6.3.5(@types/node@22.15.29)(less@4.3.0)(sass@1.89.0)(stylus@0.62.0)(terser@5.40.0)(tsx@4.19.4)(yaml@2.8.0))
 
   packages/design-tokens:
     devDependencies:
@@ -688,8 +688,8 @@ importers:
         specifier: ^6.0.1
         version: 6.0.1
       style-dictionary:
-        specifier: ^4.4.0
-        version: 4.4.0
+        specifier: ^5.0.0
+        version: 5.0.0
 
   packages/ext-bridge:
     dependencies:
@@ -4255,6 +4255,9 @@ packages:
 
   '@types/node@22.15.23':
     resolution: {integrity: sha512-7Ec1zaFPF4RJ0eXu1YT/xgiebqwqoJz8rYPDi/O2BcZ++Wpt0Kq9cl0eg6NN6bYbPnR67ZLo7St5Q3UK0SnARw==}
+
+  '@types/node@22.15.29':
+    resolution: {integrity: sha512-LNdjOkUDlU1RZb8e1kOIUpN1qQUlzGkEtbVNo53vbrwDg5om6oduhm4SiUaPW5ASTXhAiP0jInWG8Qx9fVlOeQ==}
 
   '@types/normalize-package-data@2.4.4':
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
@@ -8731,9 +8734,9 @@ packages:
     engines: {node: '>=4'}
     hasBin: true
 
-  style-dictionary@4.4.0:
-    resolution: {integrity: sha512-+xU0IA1StzqAqFs/QtXkK+XJa7wpS4X5H+JQccRKsRCElgeLGocFU1U/UMvMUylKFw6vwGV+Y/a2wb2pm5rFFQ==}
-    engines: {node: '>=18.0.0'}
+  style-dictionary@5.0.0:
+    resolution: {integrity: sha512-ORuqKamQe4nL2B9ASmmz5LxKBDuiqHvP8jj4lQ+5kE1XJyagJVvgSz5VpTAG3dRheqlqN5++vtVmK1S6ZZyy/A==}
+    engines: {node: '>=22.0.0'}
     hasBin: true
 
   style-to-js@1.1.16:
@@ -13547,6 +13550,10 @@ snapshots:
     dependencies:
       undici-types: 6.21.0
 
+  '@types/node@22.15.29':
+    dependencies:
+      undici-types: 6.21.0
+
   '@types/normalize-package-data@2.4.4': {}
 
   '@types/parse-author@2.0.3': {}
@@ -16178,7 +16185,7 @@ snapshots:
 
   jest-worker@27.5.1:
     dependencies:
-      '@types/node': 22.15.23
+      '@types/node': 22.15.29
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
@@ -19163,11 +19170,12 @@ snapshots:
       minimist: 1.2.8
       through: 2.3.8
 
-  style-dictionary@4.4.0:
+  style-dictionary@5.0.0:
     dependencies:
       '@bundled-es-modules/deepmerge': 4.3.1
       '@bundled-es-modules/glob': 10.4.2
       '@bundled-es-modules/memfs': 4.17.0
+      '@types/node': 22.15.29
       '@zip.js/zip.js': 2.7.62
       chalk: 5.4.1
       change-case: 5.4.4
@@ -19838,11 +19846,11 @@ snapshots:
     transitivePeerDependencies:
       - rollup
 
-  vite-plugin-node-polyfills@0.23.0(rollup@4.35.0)(vite@6.3.5(@types/node@22.15.23)(less@4.3.0)(sass@1.89.0)(stylus@0.62.0)(terser@5.40.0)(tsx@4.19.4)(yaml@2.8.0)):
+  vite-plugin-node-polyfills@0.23.0(rollup@4.35.0)(vite@6.3.5(@types/node@22.15.29)(less@4.3.0)(sass@1.89.0)(stylus@0.62.0)(terser@5.40.0)(tsx@4.19.4)(yaml@2.8.0)):
     dependencies:
       '@rollup/plugin-inject': 5.0.5(rollup@4.35.0)
       node-stdlib-browser: 1.3.1
-      vite: 6.3.5(@types/node@22.15.23)(less@4.3.0)(sass@1.89.0)(stylus@0.62.0)(terser@5.40.0)(tsx@4.19.4)(yaml@2.8.0)
+      vite: 6.3.5(@types/node@22.15.29)(less@4.3.0)(sass@1.89.0)(stylus@0.62.0)(terser@5.40.0)(tsx@4.19.4)(yaml@2.8.0)
     transitivePeerDependencies:
       - rollup
 
@@ -19874,6 +19882,24 @@ snapshots:
       tinyglobby: 0.2.14
     optionalDependencies:
       '@types/node': 22.15.23
+      fsevents: 2.3.3
+      less: 4.3.0
+      sass: 1.89.0
+      stylus: 0.62.0
+      terser: 5.40.0
+      tsx: 4.19.4
+      yaml: 2.8.0
+
+  vite@6.3.5(@types/node@22.15.29)(less@4.3.0)(sass@1.89.0)(stylus@0.62.0)(terser@5.40.0)(tsx@4.19.4)(yaml@2.8.0):
+    dependencies:
+      esbuild: 0.25.5
+      fdir: 6.4.5(picomatch@4.0.2)
+      picomatch: 4.0.2
+      postcss: 8.5.3
+      rollup: 4.35.0
+      tinyglobby: 0.2.14
+    optionalDependencies:
+      '@types/node': 22.15.29
       fsevents: 2.3.3
       less: 4.3.0
       sass: 1.89.0
