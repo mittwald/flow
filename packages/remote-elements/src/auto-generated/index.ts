@@ -43,6 +43,7 @@ export * from "./RemoteFieldDescriptionElement";
 export * from "./RemoteFieldErrorElement";
 export * from "./RemoteFileCardElement";
 export * from "./RemoteFileCardListElement";
+export * from "./RemoteFileDropZoneElement";
 export * from "./RemoteFileFieldElement";
 export * from "./RemoteFlexElement";
 export * from "./RemoteHeaderElement";

@@ -62,6 +62,7 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
       isSelected: value,
     },
     FileField: fieldProps,
+    FileDropZone: fieldProps,
     NumberField: fieldProps,
     RadioGroup: fieldProps,
     Switch: {
