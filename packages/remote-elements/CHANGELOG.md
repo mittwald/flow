@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.238](https://github.com/mittwald/flow/compare/0.2.0-alpha.237...0.2.0-alpha.238) (2025-06-04)
+
+### Features
+
+* **Remote:** refactor event serialization ([#1552](https://github.com/mittwald/flow/issues/1552)) ([e7b00ac](https://github.com/mittwald/flow/commit/e7b00ac7df6b1396b17c2574d0b82479192d1174))
+
 # [0.2.0-alpha.237](https://github.com/mittwald/flow/compare/0.2.0-alpha.236...0.2.0-alpha.237) (2025-06-04)
 
 **Note:** Version bump only for package @mittwald/flow-remote-elements
