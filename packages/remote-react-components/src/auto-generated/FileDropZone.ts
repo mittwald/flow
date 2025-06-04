@@ -9,7 +9,7 @@ export const FileDropZone = createFlowRemoteComponent(
   "flr-file-drop-zone",
   "FileDropZone",
   {
-    clearPropsContext: true,
+    clearPropsContext: false,
   },
   RemoteFileDropZoneElement,
   {

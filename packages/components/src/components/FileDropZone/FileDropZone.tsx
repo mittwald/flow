@@ -22,9 +22,7 @@ export interface FileDropZoneProps
   onChange?: FileInputOnChangeHandler;
 }
 
-/**
- * @flr-generate all
- */
+/** @flr-generate all */
 export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
   "FileDropZone",
   (props) => {
