@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.236](https://github.com/mittwald/flow/compare/0.2.0-alpha.235...0.2.0-alpha.236) (2025-06-04)
+
+### Bug Fixes
+
+* Allow control prop ([#1557](https://github.com/mittwald/flow/issues/1557)) ([c5ce6f0](https://github.com/mittwald/flow/commit/c5ce6f03d28500ae335067c70ac84e2632517567))
+* **Option:** use value for key to support remote rendering ([#1556](https://github.com/mittwald/flow/issues/1556)) ([3fea5c8](https://github.com/mittwald/flow/commit/3fea5c8b9a68f7d71740b8dfff399cb87413a048))
+
 # [0.2.0-alpha.235](https://github.com/mittwald/flow/compare/0.2.0-alpha.234...0.2.0-alpha.235) (2025-06-03)
 
 **Note:** Version bump only for package @mittwald/flow-project
