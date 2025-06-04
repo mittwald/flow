@@ -1,0 +1,17 @@
+{
+  "name": "@mittwald/flow-core",
+  "private": "true",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "src/index.ts",
+  "files": [
+    "src"
+  ],
+  "dependencies": {
+    "@types/invariant": "^2.2.37",
+    "invariant": "^2.2.4"
+  },
+  "devDependencies": {
+    "vite-plugin-node-polyfills": "^0.23.0"
+  }
+}

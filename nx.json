@@ -7,11 +7,11 @@
       "dependsOn": ["^build"],
       "cache": true
     },
-    "dev": {
+    "build:deps": {
       "dependsOn": ["^build"],
       "cache": false
     },
-    "build:deps": {
+    "dev": {
       "dependsOn": ["^build"],
       "cache": false
     },
@@ -23,15 +23,20 @@
       "dependsOn": ["test:unit", "test:compile", "test:browser"],
       "cache": true
     },
+    "test:browser": {
+      "dependsOn": ["^build"],
+      "cache": true
+    },
+    "test:browser:dev": {
+      "dependsOn": ["^build"],
+      "cache": true
+    },
+
     "test:compile": {
       "dependsOn": ["^build"],
       "cache": true
     },
     "test:unit": {
-      "dependsOn": ["^build"],
-      "cache": true
-    },
-    "test:browser": {
       "dependsOn": ["^build"],
       "cache": true
     }

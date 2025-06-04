@@ -98,6 +98,7 @@
   "devDependencies": {
     "@faker-js/faker": "^9.8.0",
     "@internationalized/date": "^3.8.1",
+    "@mittwald/flow-core": "workspace:*",
     "@mittwald/flow-design-tokens": "workspace:*",
     "@mittwald/react-use-promise": "^3.0.4",
     "@mittwald/remote-dom-react": "1.2.2-mittwald.3",
@@ -162,7 +163,7 @@
     "yaml": "^2.8.0"
   },
   "peerDependencies": {
-    "@internationalized/date": "^3.6.0",
+    "@internationalized/date": "^3.8.1",
     "@mittwald/react-use-promise": "^2.3.12",
     "next": "*",
     "react": "^19",
