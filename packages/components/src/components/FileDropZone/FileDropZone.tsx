@@ -12,7 +12,7 @@ import {
   flowComponent,
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
-import type { FocusableElement } from "@react-types/shared";
+import type { DropEvent, FocusableElement } from "@react-types/shared";
 
 export interface FileDropZoneProps
   extends PropsWithClassName,
@@ -49,37 +49,36 @@ export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
       },
     };
 
-    return (
-      <Aria.DropZone
-        className={rootClassName}
-        onDrop={async (e) => {
-          const fileDropItems = e.items.filter(
-            (file) => file.kind === "file",
-          ) as Aria.FileDropItem[];
+    const onDropHandler = async (event: DropEvent) => {
+      const fileDropItems = event.items.filter(
+        (file) => file.kind === "file",
+      ) as Aria.FileDropItem[];
 
-          const files = await Promise.all(
-            fileDropItems
-              .filter((f) => !accept || accept?.includes(f.type))
-              .map(async (f) => {
-                return await f.getFile();
-              }),
-          );
+      const files = await Promise.all(
+        fileDropItems
+          .filter((f) => !accept || accept?.includes(f.type))
+          .map(async (f) => {
+            return await f.getFile();
+          }),
+      );
 
-          if (files.length > 0) {
-            const fileTransfer = new DataTransfer();
-            for (const file of multiple ? files : [files[0]]) {
-              if (file) {
-                fileTransfer.items.add(file);
-              }
-            }
-
-            onChangeDropZone?.(fileTransfer.files);
-            if (fileFieldRef.current) {
-              fileFieldRef.current.files = fileTransfer.files;
-            }
+      if (files.length > 0) {
+        const fileTransfer = new DataTransfer();
+        for (const file of multiple ? files : [files[0]]) {
+          if (file) {
+            fileTransfer.items.add(file);
           }
-        }}
-      >
+        }
+
+        onChangeDropZone?.(fileTransfer.files);
+        if (fileFieldRef.current) {
+          fileFieldRef.current.files = fileTransfer.files;
+        }
+      }
+    };
+
+    return (
+      <Aria.DropZone className={rootClassName} onDrop={onDropHandler}>
         <IllustratedMessage color="dark">
           <PropsContextProvider props={propsContext} mergeInParentContext>
             {children}
