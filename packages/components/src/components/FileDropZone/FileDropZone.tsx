@@ -24,7 +24,6 @@ export interface FileDropZoneProps
 
 /**
  * @flr-generate all
- * @flr-clear-props-context
  */
 export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
   "FileDropZone",
@@ -84,7 +83,7 @@ export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
         }}
       >
         <IllustratedMessage color="dark">
-          <PropsContextProvider props={propsContext}>
+          <PropsContextProvider props={propsContext} mergeInParentContext>
             {children}
           </PropsContextProvider>
         </IllustratedMessage>
