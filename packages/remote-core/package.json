@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-remote-core",
-  "version": "0.2.0-alpha.227",
+  "version": "0.2.0-alpha.237",
   "type": "module",
   "description": "Core functionality to setup a remote/host environment",
   "homepage": "https://mittwald.github.io/flow",
@@ -23,16 +23,20 @@
     "clean": "rimraf dist",
     "test": "exit 0",
     "test:compile": "tsc --noEmit",
-    "test:unit": "vitest run"
+    "test:unit": "vitest run --passWithNoTests"
   },
   "dependencies": {
     "@lit-labs/ssr-dom-shim": "^1.3.0",
     "@mittwald/remote-dom-core": "1.7.0-mittwald.3",
     "@quilted/threads": "^3.1.3",
+    "@types/invariant": "^2.2.37",
+    "invariant": "^2.2.4",
     "remeda": "^2.22.3"
   },
   "devDependencies": {
+    "@internationalized/date": "^3.8.1",
     "@mittwald/ext-bridge": "workspace:*",
+    "@mittwald/flow-core": "workspace:*",
     "@mittwald/typescript-config": "workspace:*",
     "@types/node": "^22.15.23",
     "nx": "^20.8.2",
@@ -47,10 +51,14 @@
     "vitest": "^3.1.4"
   },
   "peerDependencies": {
+    "@internationalized/date": "^3.8.1",
     "@mittwald/ext-bridge": "workspace:*"
   },
   "peerDependenciesMeta": {
     "@mittwald/ext-bridge": {
+      "optional": true
+    },
+    "@internationalized/date": {
       "optional": true
     }
   }

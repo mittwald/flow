@@ -11,7 +11,7 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import { useObjectRef } from "@react-aria/utils";
-
+import { addAwaitedArrayBuffer } from "@mittwald/flow-core";
 export interface FileFieldProps
   extends PropsWithChildren,
     FlowComponentProps<HTMLInputElement>,
@@ -69,6 +69,14 @@ export const FileField = flowComponent("FileField", (props) => {
     },
   };
 
+  const handleOnChange: FileInputOnChangeHandler = (fileList) => {
+    if (fileList && onChange) {
+      Promise.all(Array.from(fileList).map(addAwaitedArrayBuffer)).then(() =>
+        onChange(fileList),
+      );
+    }
+  };
+
   return (
     <InputContext.Provider value={inputProps}>
       <FieldErrorContext.Provider value={formValidationState.displayValidation}>
@@ -80,7 +88,11 @@ export const FileField = flowComponent("FileField", (props) => {
             }
             className={formFieldStyles.formField}
           >
-            <FileInput ref={ref} onChange={onChange} isDisabled={isDisabled}>
+            <FileInput
+              ref={ref}
+              onChange={handleOnChange}
+              isDisabled={isDisabled}
+            >
               {children}
             </FileInput>
           </div>

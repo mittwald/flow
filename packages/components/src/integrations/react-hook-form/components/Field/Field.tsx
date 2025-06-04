@@ -11,7 +11,7 @@ import {
 import FieldErrorView from "@/views/FieldErrorView";
 
 export interface FieldProps<T extends FieldValues>
-  extends Omit<ControllerProps<T>, "render" | "control">,
+  extends Omit<ControllerProps<T>, "render">,
     PropsWithChildren {}
 
 export function Field<T extends FieldValues>(props: FieldProps<T>) {

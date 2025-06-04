@@ -62,9 +62,15 @@ export const RadioGroup = flowComponent("RadioGroup", (props) => {
             <TunnelExit id="radioButtons" />
           </ColumnLayout>
 
-          <div className={styles.radioGroup}>
+          <ColumnLayout
+            s={s ?? [1]}
+            m={m ?? [1]}
+            l={l ?? [1]}
+            rowGap="s"
+            className={styles.radioGroup}
+          >
             <TunnelExit id="radios" />
-          </div>
+          </ColumnLayout>
 
           <TunnelExit id="fieldDescription" />
           <TunnelExit id="fieldError" />

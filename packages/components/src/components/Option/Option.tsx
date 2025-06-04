@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from "react";
+import { type PropsWithChildren } from "react";
 import React from "react";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
@@ -20,7 +20,13 @@ export const Option = flowComponent("Option", (props) => {
   const rootClassName = clsx(styles.option, className);
 
   return (
-    <Aria.ListBoxItem className={rootClassName} ref={ref} {...rest} id={value}>
+    <Aria.ListBoxItem
+      className={rootClassName}
+      ref={ref}
+      {...rest}
+      id={value}
+      key={value}
+    >
       {children}
     </Aria.ListBoxItem>
   );
