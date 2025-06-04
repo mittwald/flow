@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.239](https://github.com/mittwald/flow/compare/0.2.0-alpha.238...0.2.0-alpha.239) (2025-06-04)
+
+### Features
+
+* **FileDropZone:** implement remote functionality ([ee3ed9f](https://github.com/mittwald/flow/commit/ee3ed9f89f70f1eb74d185b2ab2634fb1ed30798))
+
 # [0.2.0-alpha.238](https://github.com/mittwald/flow/compare/0.2.0-alpha.237...0.2.0-alpha.238) (2025-06-04)
 
 ### Features
