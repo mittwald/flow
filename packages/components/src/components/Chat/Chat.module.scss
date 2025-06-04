@@ -36,7 +36,7 @@
   .chat .controls {
     flex-wrap: wrap;
     .accentButton {
-      width: 100%;
+      flex-grow: 1;
     }
   }
 }
