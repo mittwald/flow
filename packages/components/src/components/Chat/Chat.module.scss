@@ -31,3 +31,12 @@
     }
   }
 }
+
+@media (max-width: 550px) {
+  .chat .controls {
+    flex-wrap: wrap;
+    .accentButton {
+      width: 100%;
+    }
+  }
+}
