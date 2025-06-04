@@ -84,7 +84,7 @@ export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
         }}
       >
         <IllustratedMessage color="dark">
-          <PropsContextProvider props={propsContext} mergeInParentContext>
+          <PropsContextProvider props={propsContext}>
             {children}
           </PropsContextProvider>
         </IllustratedMessage>
