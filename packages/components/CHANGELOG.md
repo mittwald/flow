@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.240](https://github.com/mittwald/flow/compare/0.2.0-alpha.239...0.2.0-alpha.240) (2025-06-04)
+
+### Bug Fixes
+
+* **FileDropZone:** add arraybuffer await ([60eeb4a](https://github.com/mittwald/flow/commit/60eeb4a299b621429237e153535e71714e235be1))
+
 # [0.2.0-alpha.239](https://github.com/mittwald/flow/compare/0.2.0-alpha.238...0.2.0-alpha.239) (2025-06-04)
 
 ### Features
