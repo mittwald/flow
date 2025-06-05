@@ -15,6 +15,7 @@
       grid-area: input;
       justify-self: end;
       margin: var(--form-control--border-width);
+
       padding: calc(
         var(--button--padding-icon-only) - var(--form-control--border-width)
       );
