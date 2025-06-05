@@ -3,6 +3,8 @@ import React from "react";
 
 export const standard = () => (
   <Alert data-testid="alert">
-    <Heading>Email address has been archived</Heading>
+    <Heading data-testid="alertHeading">
+      Email address has been archived
+    </Heading>
   </Alert>
 );
