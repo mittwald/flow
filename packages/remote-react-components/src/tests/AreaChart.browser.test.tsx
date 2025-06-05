@@ -9,11 +9,11 @@ test("AreaChart is rendered", async () => {
     <svg
       class="recharts-surface"
       data-testid="areaChart"
-      height="200"
+      height="400"
       role="application"
       style="width: 100%; height: 100%;"
       tabindex="0"
-      viewBox="0 0 414 200"
+      viewBox="0 0 414 400"
       width="414"
     >
       <title />
@@ -23,7 +23,7 @@ test("AreaChart is rendered", async () => {
           id="recharts1-clip"
         >
           <rect
-            height="160"
+            height="360"
             width="344"
             x="65"
             y="5"
@@ -38,7 +38,7 @@ test("AreaChart is rendered", async () => {
             id="clipPath-recharts-area-2"
           >
             <rect
-              height="160"
+              height="360"
               width="688"
               x="-107"
               y="5"
@@ -53,7 +53,7 @@ test("AreaChart is rendered", async () => {
               id="animationClipPath-recharts-area-2"
             >
               <rect
-                height="166"
+                height="366"
                 width="0"
                 x="65"
                 y="0"
@@ -70,10 +70,10 @@ test("AreaChart is rendered", async () => {
             >
               <path
                 class="recharts-curve recharts-area-area"
-                d="M65,-155L409,-75L409,165L65,165Z"
+                d="M65,-355L409,5L409,365L65,365Z"
                 fill="none"
                 fill-opacity="1"
-                height="160"
+                height="360"
                 stroke="none"
                 width="344"
               />
@@ -95,9 +95,9 @@ test("AreaChart is rendered", async () => {
           x="65"
           x1="65"
           x2="409"
-          y="165"
-          y1="165"
-          y2="165"
+          y="365"
+          y1="365"
+          y2="365"
         />
         <g
           class="recharts-cartesian-axis-ticks"
@@ -116,9 +116,9 @@ test("AreaChart is rendered", async () => {
               x="65"
               x1="65"
               x2="65"
-              y="165"
-              y1="173"
-              y2="165"
+              y="365"
+              y1="373"
+              y2="365"
             />
             <text
               class="recharts-text recharts-cartesian-axis-tick-value"
@@ -130,7 +130,7 @@ test("AreaChart is rendered", async () => {
               text-anchor="middle"
               width="344"
               x="65"
-              y="181"
+              y="381"
             >
               <tspan
                 dy="0.71em"
@@ -154,9 +154,9 @@ test("AreaChart is rendered", async () => {
               x="65"
               x1="409"
               x2="409"
-              y="165"
-              y1="173"
-              y2="165"
+              y="365"
+              y1="373"
+              y2="365"
             />
             <text
               class="recharts-text recharts-cartesian-axis-tick-value"
@@ -168,7 +168,7 @@ test("AreaChart is rendered", async () => {
               text-anchor="middle"
               width="344"
               x="397.859375"
-              y="181"
+              y="381"
             >
               <tspan
                 dy="0.71em"
@@ -187,7 +187,7 @@ test("AreaChart is rendered", async () => {
           class="recharts-cartesian-axis-line"
           fill="none"
           font-size="0.875rem"
-          height="160"
+          height="360"
           orientation="left"
           stroke="#666"
           width="60"
@@ -196,7 +196,7 @@ test("AreaChart is rendered", async () => {
           x2="65"
           y="5"
           y1="5"
-          y2="165"
+          y2="365"
         />
         <g
           class="recharts-cartesian-axis-ticks"
@@ -208,7 +208,7 @@ test("AreaChart is rendered", async () => {
               class="recharts-cartesian-axis-tick-line"
               fill="none"
               font-size="0.875rem"
-              height="160"
+              height="360"
               orientation="left"
               stroke="#666"
               width="60"
@@ -216,20 +216,20 @@ test("AreaChart is rendered", async () => {
               x1="57"
               x2="65"
               y="5"
-              y1="165"
-              y2="165"
+              y1="365"
+              y2="365"
             />
             <text
               class="recharts-text recharts-cartesian-axis-tick-value"
               fill="#222222"
               font-size="0.875rem"
-              height="160"
+              height="360"
               orientation="left"
               stroke="none"
               text-anchor="end"
               width="60"
               x="49"
-              y="165"
+              y="365"
             >
               <tspan
                 dy="0.355em"
@@ -246,7 +246,7 @@ test("AreaChart is rendered", async () => {
               class="recharts-cartesian-axis-tick-line"
               fill="none"
               font-size="0.875rem"
-              height="160"
+              height="360"
               orientation="left"
               stroke="#666"
               width="60"
@@ -254,20 +254,20 @@ test("AreaChart is rendered", async () => {
               x1="57"
               x2="65"
               y="5"
-              y1="125"
-              y2="125"
+              y1="275"
+              y2="275"
             />
             <text
               class="recharts-text recharts-cartesian-axis-tick-value"
               fill="#222222"
               font-size="0.875rem"
-              height="160"
+              height="360"
               orientation="left"
               stroke="none"
               text-anchor="end"
               width="60"
               x="49"
-              y="125"
+              y="275"
             >
               <tspan
                 dy="0.355em"
@@ -284,7 +284,7 @@ test("AreaChart is rendered", async () => {
               class="recharts-cartesian-axis-tick-line"
               fill="none"
               font-size="0.875rem"
-              height="160"
+              height="360"
               orientation="left"
               stroke="#666"
               width="60"
@@ -292,20 +292,20 @@ test("AreaChart is rendered", async () => {
               x1="57"
               x2="65"
               y="5"
-              y1="85"
-              y2="85"
+              y1="185"
+              y2="185"
             />
             <text
               class="recharts-text recharts-cartesian-axis-tick-value"
               fill="#222222"
               font-size="0.875rem"
-              height="160"
+              height="360"
               orientation="left"
               stroke="none"
               text-anchor="end"
               width="60"
               x="49"
-              y="85"
+              y="185"
             >
               <tspan
                 dy="0.355em"
@@ -322,7 +322,7 @@ test("AreaChart is rendered", async () => {
               class="recharts-cartesian-axis-tick-line"
               fill="none"
               font-size="0.875rem"
-              height="160"
+              height="360"
               orientation="left"
               stroke="#666"
               width="60"
@@ -330,20 +330,20 @@ test("AreaChart is rendered", async () => {
               x1="57"
               x2="65"
               y="5"
-              y1="45"
-              y2="45"
+              y1="95"
+              y2="95"
             />
             <text
               class="recharts-text recharts-cartesian-axis-tick-value"
               fill="#222222"
               font-size="0.875rem"
-              height="160"
+              height="360"
               orientation="left"
               stroke="none"
               text-anchor="end"
               width="60"
               x="49"
-              y="45"
+              y="95"
             >
               <tspan
                 dy="0.355em"
@@ -360,7 +360,7 @@ test("AreaChart is rendered", async () => {
               class="recharts-cartesian-axis-tick-line"
               fill="none"
               font-size="0.875rem"
-              height="160"
+              height="360"
               orientation="left"
               stroke="#666"
               width="60"
@@ -375,7 +375,7 @@ test("AreaChart is rendered", async () => {
               class="recharts-text recharts-cartesian-axis-tick-value"
               fill="#222222"
               font-size="0.875rem"
-              height="160"
+              height="360"
               orientation="left"
               stroke="none"
               text-anchor="end"
