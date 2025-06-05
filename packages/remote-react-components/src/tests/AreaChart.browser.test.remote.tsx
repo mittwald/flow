@@ -3,7 +3,7 @@ import React from "react";
 
 export const standard = () => (
   <AreaChart
-    height="200px"
+    height="400px"
     data={[
       {
         name: "Stat 1",
@@ -11,7 +11,7 @@ export const standard = () => (
       },
       {
         name: "Stat 2",
-        key: 30,
+        key: 20,
       },
     ]}
     data-testid="areaChart"
