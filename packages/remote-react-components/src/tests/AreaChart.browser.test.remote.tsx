@@ -1,4 +1,4 @@
-import { Area, AreaChart, XAxis, YAxis } from "@/auto-generated";
+import { Area, AreaChart } from "@/auto-generated";
 import React from "react";
 
 export const standard = () => (
@@ -17,7 +17,5 @@ export const standard = () => (
     data-testid="areaChart"
   >
     <Area dataKey="key" />
-    <XAxis dataKey="name" />
-    <YAxis />
   </AreaChart>
 );
