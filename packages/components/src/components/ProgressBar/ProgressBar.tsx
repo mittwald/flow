@@ -78,15 +78,15 @@ export const ProgressBar = flowComponent("ProgressBar", (props) => {
         maxValue={maxValue}
         {...rest}
       >
-        {({ percentage, valueText }) => (
+        {({ percentage }) => (
           <PropsContextProvider props={propsContext}>
             {children}
 
             <ProgressBarValue
               showMaxValue={showMaxValue}
               maxValue={maxValue}
-              valueText={valueText}
               formatOptions={formatOptions}
+              value={segmentsTotalValue ?? value}
             />
 
             <ProgressBarBar

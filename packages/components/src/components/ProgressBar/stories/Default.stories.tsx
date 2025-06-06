@@ -118,3 +118,18 @@ export const WithSegmentsAndWithoutLegend: Story = {
     </ProgressBar>
   ),
 };
+
+export const WithValueHigherThanMaxValue: Story = {
+  args: { showMaxValue: true },
+  render: (props) => (
+    <ProgressBar
+      value={2000}
+      maxValue={1000}
+      minValue={0}
+      formatOptions={{ style: "unit", unit: "gigabyte" }}
+      {...props}
+    >
+      <Label>Storage</Label>
+    </ProgressBar>
+  ),
+};

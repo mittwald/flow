@@ -9,23 +9,36 @@ interface Props
     ProgressBarProps,
     "showMaxValue" | "maxValue" | "formatOptions"
   > {
-  valueText?: string;
+  value?: number;
 }
 
 export const ProgressBarValue: FC<Props> = (props) => {
-  const { showMaxValue, maxValue, valueText, formatOptions } = props;
+  const { showMaxValue, maxValue, value, formatOptions } = props;
 
-  const formatter = useNumberFormatter(formatOptions);
+  const formatter = formatOptions
+    ? useNumberFormatter(formatOptions)
+    : undefined;
 
   const stringFormatter = useLocalizedStringFormatter(locales);
 
   const maxValueText =
-    showMaxValue && maxValue ? formatter.format(maxValue) : undefined;
+    showMaxValue && maxValue && formatter
+      ? formatter.format(maxValue)
+      : showMaxValue && maxValue
+        ? `${maxValue} %`
+        : undefined;
+
+  const valueText =
+    value && formatter
+      ? formatter.format(value)
+      : value
+        ? `${value} %`
+        : undefined;
 
   return (
     <span className={styles.value}>
       {maxValueText
-        ? `${valueText} ${stringFormatter.format("progressBar.of")} ${maxValueText}`
+        ? `${value} ${stringFormatter.format("progressBar.of")} ${maxValueText}`
         : valueText}
     </span>
   );
