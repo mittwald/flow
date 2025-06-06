@@ -39,7 +39,7 @@
     "@mittwald/flow-react-components": "workspace:*",
     "@mittwald/flow-remote-core": "workspace:*",
     "@mittwald/flow-remote-elements": "workspace:*",
-    "@mittwald/remote-dom-react": "1.2.2-mittwald.6",
+    "@mittwald/remote-dom-react": "1.2.2-mittwald.7",
     "@testing-library/jest-dom": "6.6.3",
     "@types/react": "^19.1.6",
     "react-error-boundary": "^5.0.0"
