@@ -48,6 +48,7 @@ export const ProgressBar = flowComponent("ProgressBar", (props) => {
     formatOptions,
     showLegend = true,
     maxValue,
+    valueLabel,
     ...rest
   } = props;
 
@@ -87,6 +88,7 @@ export const ProgressBar = flowComponent("ProgressBar", (props) => {
               maxValue={maxValue}
               formatOptions={formatOptions}
               value={segmentsTotalValue ?? value}
+              valueLabel={valueLabel}
             />
 
             <ProgressBarBar

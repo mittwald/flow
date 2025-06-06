@@ -133,3 +133,23 @@ export const WithValueHigherThanMaxValue: Story = {
     </ProgressBar>
   ),
 };
+
+export const WithValueLabel: Story = {
+  args: { showMaxValue: true },
+  render: (props) => {
+    const value = 500;
+    const maxValue = 1000;
+
+    return (
+      <ProgressBar
+        value={value}
+        maxValue={maxValue}
+        minValue={0}
+        valueLabel={`${value} / ${maxValue} GB`}
+        {...props}
+      >
+        <Label>Storage</Label>
+      </ProgressBar>
+    );
+  },
+};
