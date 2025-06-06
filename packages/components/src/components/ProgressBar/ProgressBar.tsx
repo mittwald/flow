@@ -28,7 +28,7 @@ export interface ProgressBarProps
     value: number;
     title: string;
     color?: CategoricalColors;
-    textValue?: string;
+    valueText?: string;
   }[];
   /**
    * Whether the legend component is shown when segments are used. @default:
