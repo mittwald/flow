@@ -24,7 +24,12 @@ export interface ProgressBarProps
   /** The size variant of the progress bar. @default "m" */
   size?: "s" | "m" | "l";
   /** Divides the fill of the progress bar into segments */
-  segments?: { value: number; title: string; color?: CategoricalColors }[];
+  segments?: {
+    value: number;
+    title: string;
+    color?: CategoricalColors;
+    textValue?: string;
+  }[];
   /**
    * Whether the legend component is shown when segments are used. @default:
    * true
