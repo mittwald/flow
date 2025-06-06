@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.246](https://github.com/mittwald/flow/compare/0.2.0-alpha.245...0.2.0-alpha.246) (2025-06-06)
+
+### Bug Fixes
+
+* **tests:** add remote test for onPaste ([#1572](https://github.com/mittwald/flow/issues/1572)) ([0c2089d](https://github.com/mittwald/flow/commit/0c2089deb607ec811fe2e81b3b3e166315c51b4b))
+
 # [0.2.0-alpha.245](https://github.com/mittwald/flow/compare/0.2.0-alpha.244...0.2.0-alpha.245) (2025-06-06)
 
 ### Bug Fixes
