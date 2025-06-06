@@ -32,7 +32,7 @@
     "@mittwald/flow-remote-core": "workspace:*",
     "@mittwald/flow-remote-elements": "workspace:*",
     "@mittwald/react-use-promise": "^3.0.4",
-    "@mittwald/remote-dom-react": "1.2.2-mittwald.3",
+    "@mittwald/remote-dom-react": "1.2.2-mittwald.5",
     "@types/react": "^19.1.6",
     "clsx": "^2.1.1",
     "react-children-utilities": "^2.10.0",
