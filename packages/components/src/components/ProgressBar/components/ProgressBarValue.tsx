@@ -23,25 +23,23 @@ export const ProgressBarValue: FC<Props> = (props) => {
   const stringFormatter = useLocalizedStringFormatter(locales);
 
   const maxValueText =
-    showMaxValue && maxValue && formatter
-      ? formatter.format(maxValue)
-      : showMaxValue && maxValue
-        ? `${maxValue} %`
-        : undefined;
+    !showMaxValue || !maxValue
+      ? undefined
+      : formatter
+        ? formatter.format(maxValue)
+        : `${maxValue} %`;
 
-  const valueText =
-    value && formatter
+  const valueText = !value
+    ? undefined
+    : formatter
       ? formatter.format(value)
-      : value
-        ? `${value} %`
-        : undefined;
+      : `${value} %`;
+
+  const textWithMaxValue = `${value} ${stringFormatter.format("progressBar.of")} ${maxValueText}`;
 
   return (
     <span className={styles.value}>
-      {valueLabel ??
-        (maxValueText
-          ? `${value} ${stringFormatter.format("progressBar.of")} ${maxValueText}`
-          : valueText)}
+      {valueLabel ?? (maxValueText ? textWithMaxValue : valueText)}
     </span>
   );
 };
