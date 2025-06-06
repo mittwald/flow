@@ -3,7 +3,7 @@ import {
   type ThreadSerializationOptions,
 } from "@quilted/threads";
 import * as serializerModules from "./serializers";
-import { isObjectType } from "remeda";
+import { isArray, isObjectType } from "remeda";
 
 const serializers = Object.values(serializerModules);
 
@@ -26,6 +26,9 @@ export class FlowThreadSerialization extends ThreadSerializationStructuredClone 
           }
           if (isObjectType(val)) {
             return serialize({ ...val });
+          }
+          if (isArray(val)) {
+            return serialize([...val]);
           }
         } catch (error) {
           console.error("Error while serializing", error);
