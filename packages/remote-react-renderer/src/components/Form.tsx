@@ -1,38 +1,54 @@
 import {
   type FC,
   type FormEvent,
-  type FormHTMLAttributes,
   type PropsWithChildren,
+  type RefObject,
 } from "react";
-import React, { forwardRef } from "react";
-import {
-  getFormDataObject,
-  getFormDataObjectFromEvent,
-} from "@/components/lib/getFormDataObject";
+import React from "react";
+import { useObjectRef } from "@/hooks/useObjectRef";
+import { getElementFormData } from "@/components/lib/getElementFormData";
 
-type FormProps = Pick<FormHTMLAttributes<HTMLFormElement>, "action"> & {
-  onSubmit?: (data: Record<string, unknown>) => void;
+type FormProps = {
+  action?: (data: FormData) => void | Promise<void>;
+  onSubmit?: (data: Record<string, unknown>) => void | Promise<void>;
+  ref?: RefObject<HTMLFormElement>;
 } & PropsWithChildren;
 
-export const Form: FC = forwardRef<HTMLFormElement, FormProps>((props, ref) => {
+export const Form: FC<FormProps> = (props) => {
   const {
-    action: actionFromProps,
+    action: onActionFromProps,
     onSubmit: onSubmitFromProps,
+    ref,
     ...rest
   } = props;
 
-  const action =
-    typeof actionFromProps === "function"
-      ? (formData: FormData) =>
-          actionFromProps(getFormDataObject(formData) as unknown as FormData)
-      : actionFromProps;
+  const formRef = useObjectRef(ref);
 
-  const onSubmit = onSubmitFromProps
-    ? (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        onSubmitFromProps(getFormDataObjectFromEvent(e));
-      }
-    : undefined;
+  const getFormData = async (): ReturnType<typeof getElementFormData> => {
+    if (!formRef.current) {
+      return { formData: new FormData(), object: {} };
+    }
+    return getElementFormData(formRef.current);
+  };
 
-  return <form ref={ref} {...rest} action={action} onSubmit={onSubmit} />;
-});
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const resolvedData = await getFormData();
+    await onSubmitFromProps?.(resolvedData.object);
+  };
+
+  const onAction = async () => {
+    const resolvedData = await getFormData();
+    await onActionFromProps?.(resolvedData.formData);
+    formRef.current?.reset();
+  };
+
+  return (
+    <form
+      {...rest}
+      ref={formRef}
+      action={onActionFromProps ? onAction : undefined}
+      onSubmit={onSubmitFromProps ? onSubmit : undefined}
+    />
+  );
+};
