@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-remote-core",
-  "version": "0.2.0-alpha.240",
+  "version": "0.2.0-alpha.246",
   "type": "module",
   "description": "Core functionality to setup a remote/host environment",
   "homepage": "https://mittwald.github.io/flow",
@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@lit-labs/ssr-dom-shim": "^1.3.0",
-    "@mittwald/remote-dom-core": "1.7.0-mittwald.3",
+    "@mittwald/remote-dom-core": "1.7.0-mittwald.9",
     "@quilted/threads": "^3.1.3",
     "@types/invariant": "^2.2.37",
     "invariant": "^2.2.4",

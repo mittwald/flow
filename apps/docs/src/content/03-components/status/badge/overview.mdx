@@ -1,41 +1,66 @@
 # Playground
 
+ Verwende `<Badge />`, um ein Badge darzustellen.
+
+
 <LiveCodeEditor />
 
 ---
 
 # Mit Scope
 
+Ein Scope ist wie eine Bezeichnung für das gesamte Badge. Ein Scope besitzt meistens mehrere Werte z. B. Priorität:hoch, Priorität:niedrig.
+
 <LiveCodeEditor example="scope" editorCollapsed />
 
 ---
 
-# Mit onPress
+# Badge Aktion
+
+Ein Badge kann optional mit `onPress` eine Aktion auslösen, sollte jedoch nicht so vielseitig wie ein Button verwendet werden.
+
 
 <LiveCodeEditor example="onPress" editorCollapsed />
 
 ---
 
-# Mit onClose
+# Badge entfernen
+
+Ein Badge kann optional vom User aus der Benutzeroberfläche entfernt werden.
 
 <LiveCodeEditor example="onClose" editorCollapsed />
 
 ---
 
-# Farben
+# Color
+
+Je nach Anwendungsfall stehen neun Badge-Color zur Auswahl: **Neutral, Blue, Navy, Violet, Teal, Lilac, Green, Orange** und **Red**.
 
 <LiveCodeEditor example="colors" editorCollapsed />
 
-## Dark
+**Neutral:** Nebenläufige Information (z. B. Archiviert, Gelöscht, Entwurf).
+
+**Blue:** Informativ (z.B. Aktiv, Live, Im Prozess).
+
+**Violet:** Ankündigung (z. B. Neu, Beta).
+
+**Green:** Positiv (z.B. Abgeschlossen, Genehmigt, Erfolg).
+
+**Orange, Red**: Negativ (z.B. Warnung, Fehler, Abgelehnt, Fehlgeschlagen).
+
+## Color Light und Dark
+
+Zusätzlich kann die Badge in Light und Dark dargestellt werden. Beide Varianten eigenen sich, wenn die Standardfarben auf farbigen oder dekorativen Hintergründen nicht gut funktionieren.
+
+<LiveCodeEditor example="light" bgColor="dark" editorCollapsed />
 
 <LiveCodeEditor example="dark" bgColor="light" editorCollapsed />
 
-## Light
-
-<LiveCodeEditor example="light" bgColor="dark" editorCollapsed />
 
 ---
 
 # Disabled
+
+In Ausnahmefällen können deaktivierte Badges verwendet werden, um eine Funktion temporär als nicht verfügbar darzustellen, ohne diese vollständig aus der Oberfläche zu entfernen.
 
 <LiveCodeEditor example="disabled" editorCollapsed />

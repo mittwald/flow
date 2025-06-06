@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.246](https://github.com/mittwald/flow/compare/0.2.0-alpha.245...0.2.0-alpha.246) (2025-06-06)
+
+**Note:** Version bump only for package @mittwald/flow-remote-core
+
+# [0.2.0-alpha.245](https://github.com/mittwald/flow/compare/0.2.0-alpha.244...0.2.0-alpha.245) (2025-06-06)
+
+### Bug Fixes
+
+* **Remote:** update packages ([301f597](https://github.com/mittwald/flow/commit/301f597b72c271b956144f4281cef1fa17ece356))
+
+# [0.2.0-alpha.244](https://github.com/mittwald/flow/compare/0.2.0-alpha.243...0.2.0-alpha.244) (2025-06-06)
+
+### Bug Fixes
+
+* **Remote:** update packages ([be68e91](https://github.com/mittwald/flow/commit/be68e910e68d1c400a264e5fa7a6ba1d12fb831f))
+
+# [0.2.0-alpha.243](https://github.com/mittwald/flow/compare/0.2.0-alpha.242...0.2.0-alpha.243) (2025-06-06)
+
+**Note:** Version bump only for package @mittwald/flow-remote-core
+
+# [0.2.0-alpha.242](https://github.com/mittwald/flow/compare/0.2.0-alpha.241...0.2.0-alpha.242) (2025-06-06)
+
+### Bug Fixes
+
+* **Remote:** update packages ([9e6d299](https://github.com/mittwald/flow/commit/9e6d299eecbb129bf488e2f3fa70adee3dbda304))
+
+# [0.2.0-alpha.241](https://github.com/mittwald/flow/compare/0.2.0-alpha.240...0.2.0-alpha.241) (2025-06-06)
+
+### Bug Fixes
+
+* **Remote:** update packages ([402013a](https://github.com/mittwald/flow/commit/402013a9cde85894d606f662c28de6e87a81e129))
+
 # [0.2.0-alpha.240](https://github.com/mittwald/flow/compare/0.2.0-alpha.239...0.2.0-alpha.240) (2025-06-04)
 
 **Note:** Version bump only for package @mittwald/flow-remote-core

@@ -889,8 +889,8 @@ importers:
         specifier: ^1.3.0
         version: 1.3.0
       '@mittwald/remote-dom-core':
-        specifier: 1.7.0-mittwald.3
-        version: 1.7.0-mittwald.3(@preact/signals-core@1.8.0)
+        specifier: 1.7.0-mittwald.9
+        version: 1.7.0-mittwald.9(@preact/signals-core@1.8.0)
       '@quilted/threads':
         specifier: ^3.1.3
         version: 3.1.3(@preact/signals-core@1.8.0)
@@ -1011,8 +1011,8 @@ importers:
         specifier: workspace:*
         version: link:../remote-elements
       '@mittwald/remote-dom-react':
-        specifier: 1.2.2-mittwald.3
-        version: 1.2.2-mittwald.3(@preact/signals-core@1.8.0)(react@19.1.0)
+        specifier: 1.2.2-mittwald.9
+        version: 1.2.2-mittwald.9(@preact/signals-core@1.8.0)(react@19.1.0)
       '@testing-library/jest-dom':
         specifier: 6.6.3
         version: 6.6.3
@@ -1129,8 +1129,8 @@ importers:
         specifier: ^3.0.4
         version: 3.0.4(axios@1.9.0)(react@19.1.0)
       '@mittwald/remote-dom-react':
-        specifier: 1.2.2-mittwald.3
-        version: 1.2.2-mittwald.3(@preact/signals-core@1.8.0)(react@19.1.0)
+        specifier: 1.2.2-mittwald.9
+        version: 1.2.2-mittwald.9(@preact/signals-core@1.8.0)(react@19.1.0)
       '@types/react':
         specifier: ^19
         version: 19.1.6
@@ -2538,8 +2538,29 @@ packages:
       preact:
         optional: true
 
+  '@mittwald/remote-dom-core@1.7.0-mittwald.9':
+    resolution: {integrity: sha512-X+ZgcqV7m7RBaBOj42ZdGf6qCp/uhM4AHqBAYxmsvHHKseKcoMA/s/HBIgBWQbCawkxJJZT0u2cvqsdlouxHRg==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      '@preact/signals-core': ^1.3.0
+      preact: '*'
+    peerDependenciesMeta:
+      '@preact/signals-core':
+        optional: true
+      preact:
+        optional: true
+
   '@mittwald/remote-dom-react@1.2.2-mittwald.3':
     resolution: {integrity: sha512-7nM3FQsgxbGgYUci8O4dS5/Ug7sVdcj0IcbKEDWp4vUAOK7m4Jwz+NIbbrd/gPuun1DhcFOuvFYddpLfcMOjmg==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      react: ^19.1.0
+    peerDependenciesMeta:
+      react:
+        optional: true
+
+  '@mittwald/remote-dom-react@1.2.2-mittwald.9':
+    resolution: {integrity: sha512-wYFkLtBHrwqCTQZ0zqKnhv64q0VCLqzxRF3xVbKJOdEw7UqM3VHD9CbNnOgzepPcjegoP55gRFCpYaj0fo0y/w==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       react: ^19.1.0
@@ -11262,9 +11283,27 @@ snapshots:
     optionalDependencies:
       '@preact/signals-core': 1.8.0
 
+  '@mittwald/remote-dom-core@1.7.0-mittwald.9(@preact/signals-core@1.8.0)':
+    dependencies:
+      '@remote-dom/polyfill': 1.4.3
+      htm: 3.1.1
+    optionalDependencies:
+      '@preact/signals-core': 1.8.0
+
   '@mittwald/remote-dom-react@1.2.2-mittwald.3(@preact/signals-core@1.8.0)(react@19.1.0)':
     dependencies:
       '@mittwald/remote-dom-core': 1.7.0-mittwald.3(@preact/signals-core@1.8.0)
+      '@types/react': 19.1.6
+      htm: 3.1.1
+    optionalDependencies:
+      react: 19.1.0
+    transitivePeerDependencies:
+      - '@preact/signals-core'
+      - preact
+
+  '@mittwald/remote-dom-react@1.2.2-mittwald.9(@preact/signals-core@1.8.0)(react@19.1.0)':
+    dependencies:
+      '@mittwald/remote-dom-core': 1.7.0-mittwald.9(@preact/signals-core@1.8.0)
       '@types/react': 19.1.6
       htm: 3.1.1
     optionalDependencies:

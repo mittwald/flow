@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-remote-react-components",
-  "version": "0.2.0-alpha.240",
+  "version": "0.2.0-alpha.246",
   "type": "module",
   "description": "React components that can be used in a remote environment",
   "homepage": "https://mittwald.github.io/flow",
@@ -39,7 +39,7 @@
     "@mittwald/flow-react-components": "workspace:*",
     "@mittwald/flow-remote-core": "workspace:*",
     "@mittwald/flow-remote-elements": "workspace:*",
-    "@mittwald/remote-dom-react": "1.2.2-mittwald.3",
+    "@mittwald/remote-dom-react": "1.2.2-mittwald.9",
     "@testing-library/jest-dom": "6.6.3",
     "@types/react": "^19.1.6",
     "react-error-boundary": "^5.0.0"
