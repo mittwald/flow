@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.241](https://github.com/mittwald/flow/compare/0.2.0-alpha.240...0.2.0-alpha.241) (2025-06-06)
+
+### Bug Fixes
+
+* **Remote:** update packages ([402013a](https://github.com/mittwald/flow/commit/402013a9cde85894d606f662c28de6e87a81e129))
+
 # [0.2.0-alpha.240](https://github.com/mittwald/flow/compare/0.2.0-alpha.239...0.2.0-alpha.240) (2025-06-04)
 
 ### Bug Fixes
