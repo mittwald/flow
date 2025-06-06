@@ -14,7 +14,13 @@ interface Props
 }
 
 export const ProgressBarValue: FC<Props> = (props) => {
-  const { showMaxValue, maxValue, value, formatOptions, valueLabel } = props;
+  const {
+    showMaxValue,
+    maxValue,
+    value = 0,
+    formatOptions,
+    valueLabel,
+  } = props;
 
   const formatter = formatOptions
     ? useNumberFormatter(formatOptions)
@@ -29,11 +35,7 @@ export const ProgressBarValue: FC<Props> = (props) => {
         ? formatter.format(maxValue)
         : `${maxValue} %`;
 
-  const valueText = !value
-    ? undefined
-    : formatter
-      ? formatter.format(value)
-      : `${value} %`;
+  const valueText = formatter ? formatter.format(value) : `${value} %`;
 
   const textWithMaxValue = `${value} ${stringFormatter.format("progressBar.of")} ${maxValueText}`;
 
