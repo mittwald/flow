@@ -1,5 +1,7 @@
 "use server";
 
+import type { ActionState } from "@/app/remote/action-form/page";
+
 const sleep = () => new Promise((res) => setTimeout(res, 2000));
 
 export async function getServerData() {
@@ -17,14 +19,13 @@ export async function login(formState: unknown | null, formData: FormData) {
 }
 
 export async function formServerAction(
-  prevState: number,
-  formData: Record<string, unknown>,
-) {
+  prevState: ActionState,
+  formData: FormData,
+): Promise<ActionState> {
   console.log("Calling form server action with data: ", formData);
-  console.log("File: ", await (formData["certificate"] as File).arrayBuffer());
   await sleep();
-  console.log("Done");
-  return prevState + 1;
+
+  return { increment: prevState.increment + 1 };
 }
 
 export async function formReactHookServerAction(
