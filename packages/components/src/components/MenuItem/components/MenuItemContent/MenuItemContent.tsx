@@ -29,9 +29,6 @@ export const MenuItemContent: FC<Props> = (props) => {
     Icon: {
       className: styles.icon,
     },
-    Text: {
-      className: styles.text,
-    },
     Avatar: {
       className: styles.avatar,
     },
@@ -48,11 +45,8 @@ export const MenuItemContent: FC<Props> = (props) => {
 
   const selectionIcon =
     selectionMode === "none" ||
-    selectionVariant === "navigation" ? null : selectionVariant === "switch" &&
-      isSelected ? (
-      <Switch isReadOnly isSelected />
-    ) : selectionVariant === "switch" && !isSelected ? (
-      <Switch isReadOnly />
+    selectionVariant === "navigation" ? null : selectionVariant === "switch" ? (
+      <Switch isReadOnly isSelected={isSelected} />
     ) : selectionMode === "single" && isSelected ? (
       <IconRadioOn />
     ) : selectionMode === "single" && !isSelected ? (
