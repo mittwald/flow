@@ -15,25 +15,21 @@ import {
 import { useState } from "react";
 
 export default function Page() {
-  const [event, setEvent] = useState<unknown>();
-
-  interface FormData {
-    check: string[];
-    text: string;
-    select: string;
-    certificates: FileList;
-  }
+  const [event, setEvent] = useState<Record<string, unknown>>();
 
   return (
     <Form
       onSubmit={async (data: FormData) => {
         setEvent({
-          ...data,
+          data: data.entries().toArray(),
           certificates: await Promise.all(
-            Array.from(data.certificates).map(async (file) => ({
-              name: file.name,
-              dataFromFileObject: (await file.arrayBuffer()).byteLength,
-            })),
+            Array.from(data.getAll("certificates") as File[]).map(
+              async (file: File) => ({
+                name: file.name,
+                resolvedDataLengthFromArrayBuffer: (await file.arrayBuffer())
+                  .byteLength,
+              }),
+            ),
           ),
         });
       }}

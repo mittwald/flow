@@ -10,7 +10,7 @@ import { getElementFormData } from "@/components/lib/getElementFormData";
 
 type FormProps = {
   action?: (data: FormData) => void | Promise<void>;
-  onSubmit?: (data: Record<string, unknown>) => void | Promise<void>;
+  onSubmit?: (data: FormData) => void | Promise<void>;
   ref?: RefObject<HTMLFormElement>;
 } & PropsWithChildren;
 
@@ -26,7 +26,7 @@ export const Form: FC<FormProps> = (props) => {
 
   const getFormData = async (): ReturnType<typeof getElementFormData> => {
     if (!formRef.current) {
-      return { formData: new FormData(), object: {} };
+      return new FormData();
     }
     return getElementFormData(formRef.current);
   };
@@ -34,12 +34,12 @@ export const Form: FC<FormProps> = (props) => {
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const resolvedData = await getFormData();
-    await onSubmitFromProps?.(resolvedData.object);
+    await onSubmitFromProps?.(resolvedData);
   };
 
   const onAction = async () => {
     const resolvedData = await getFormData();
-    await onActionFromProps?.(resolvedData.formData);
+    await onActionFromProps?.(resolvedData);
     formRef.current?.reset();
   };
 
