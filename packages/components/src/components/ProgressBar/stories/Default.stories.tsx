@@ -118,3 +118,38 @@ export const WithSegmentsAndWithoutLegend: Story = {
     </ProgressBar>
   ),
 };
+
+export const WithValueHigherThanMaxValue: Story = {
+  args: { showMaxValue: true },
+  render: (props) => (
+    <ProgressBar
+      value={2000}
+      maxValue={1000}
+      minValue={0}
+      formatOptions={{ style: "unit", unit: "gigabyte" }}
+      {...props}
+    >
+      <Label>Storage</Label>
+    </ProgressBar>
+  ),
+};
+
+export const WithValueLabel: Story = {
+  args: { showMaxValue: true },
+  render: (props) => {
+    const value = 500;
+    const maxValue = 1000;
+
+    return (
+      <ProgressBar
+        value={value}
+        maxValue={maxValue}
+        minValue={0}
+        valueLabel={`${value} / ${maxValue} GB`}
+        {...props}
+      >
+        <Label>Storage</Label>
+      </ProgressBar>
+    );
+  },
+};

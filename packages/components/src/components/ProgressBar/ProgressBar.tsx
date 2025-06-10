@@ -24,7 +24,12 @@ export interface ProgressBarProps
   /** The size variant of the progress bar. @default "m" */
   size?: "s" | "m" | "l";
   /** Divides the fill of the progress bar into segments */
-  segments?: { value: number; title: string; color?: CategoricalColors }[];
+  segments?: {
+    value: number;
+    title: string;
+    color?: CategoricalColors;
+    valueText?: string;
+  }[];
   /**
    * Whether the legend component is shown when segments are used. @default:
    * true
@@ -48,6 +53,7 @@ export const ProgressBar = flowComponent("ProgressBar", (props) => {
     formatOptions,
     showLegend = true,
     maxValue,
+    valueLabel,
     ...rest
   } = props;
 
@@ -78,15 +84,16 @@ export const ProgressBar = flowComponent("ProgressBar", (props) => {
         maxValue={maxValue}
         {...rest}
       >
-        {({ percentage, valueText }) => (
+        {({ percentage }) => (
           <PropsContextProvider props={propsContext}>
             {children}
 
             <ProgressBarValue
               showMaxValue={showMaxValue}
               maxValue={maxValue}
-              valueText={valueText}
               formatOptions={formatOptions}
+              value={segmentsTotalValue ?? value}
+              valueLabel={valueLabel}
             />
 
             <ProgressBarBar
