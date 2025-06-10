@@ -2,9 +2,9 @@ import type { FC } from "react";
 import { useContext } from "react";
 import tunnelContext from "@/context";
 import { observer } from "mobx-react-lite";
-import type { TunnelChildren, TunnelExitProps } from "@/types";
+import type { TunnelExitChildren, TunnelExitProps } from "@/types";
 
-const ChildrenRenderer: FC<{ children: TunnelChildren }> = (props) => {
+const ChildrenRenderer: FC<{ children: TunnelExitChildren }> = (props) => {
   const { children } = props;
   return typeof children === "function" ? children() : children;
 };
