@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.248](https://github.com/mittwald/flow/compare/0.2.0-alpha.247...0.2.0-alpha.248) (2025-06-10)
+
+### Bug Fixes
+
+* **MenuItem:** fix switch ([#1578](https://github.com/mittwald/flow/issues/1578)) ([203b83d](https://github.com/mittwald/flow/commit/203b83db89259ef931bc8e6ccd2a395ac925b267))
+* **ProgressBar:** fix value higher than max value ([#1579](https://github.com/mittwald/flow/issues/1579)) ([43c53b2](https://github.com/mittwald/flow/commit/43c53b26a58fb5d2423f0f62c0750ac06295de01))
+
 # [0.2.0-alpha.247](https://github.com/mittwald/flow/compare/0.2.0-alpha.246...0.2.0-alpha.247) (2025-06-06)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
