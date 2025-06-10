@@ -5,8 +5,7 @@ import {
   type RefObject,
 } from "react";
 import React from "react";
-import { useObjectRef } from "@/hooks/useObjectRef";
-import { getElementFormData } from "@/components/lib/getElementFormData";
+import { prepareFormData } from "@/components/lib/prepareFormData";
 
 type FormProps = {
   action?: (data: FormData) => void | Promise<void>;
@@ -22,31 +21,23 @@ export const Form: FC<FormProps> = (props) => {
     ...rest
   } = props;
 
-  const formRef = useObjectRef(ref);
-
-  const getFormData = async (): ReturnType<typeof getElementFormData> => {
-    if (!formRef.current) {
-      return new FormData();
-    }
-    return getElementFormData(formRef.current);
-  };
-
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const resolvedData = await getFormData();
+    const resolvedData = await prepareFormData(
+      new FormData(event.currentTarget),
+    );
     await onSubmitFromProps?.(resolvedData);
   };
 
-  const onAction = async () => {
-    const resolvedData = await getFormData();
-    await onActionFromProps?.(resolvedData);
-    formRef.current?.reset();
+  const onAction = async (formData: FormData) => {
+    const resolvedFormData = await prepareFormData(formData);
+    await onActionFromProps?.(resolvedFormData);
   };
 
   return (
     <form
       {...rest}
-      ref={formRef}
+      ref={ref}
       action={onActionFromProps ? onAction : undefined}
       onSubmit={onSubmitFromProps ? onSubmit : undefined}
     />
