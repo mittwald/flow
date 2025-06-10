@@ -1,12 +1,9 @@
-import type { FC, ReactNode } from "react";
+import type { FC } from "react";
 import { useContext } from "react";
 import tunnelContext from "@/context";
 import { observer } from "mobx-react-lite";
-
-export type TunnelExitChildren =
-  | ReactNode
-  | undefined
-  | ((tunnelChildren?: ReactNode | undefined) => ReactNode | undefined);
+import type { TunnelChildren } from "@/TunnelState";
+export type TunnelExitChildren = TunnelChildren;
 
 export interface TunnelExitProps {
   id?: string;
