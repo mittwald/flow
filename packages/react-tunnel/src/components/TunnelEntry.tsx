@@ -1,16 +1,9 @@
 import type { FC } from "react";
 import { useContext, useEffect, useId, useRef } from "react";
 import tunnelContext from "@/context";
-import type { TunnelChildren } from "@/types";
+import type { TunnelEntryProps } from "@/types";
 
-interface Props {
-  id?: string;
-  children?: TunnelChildren;
-  /** Static entry ID instead of generated ID by `useId` */
-  staticEntryId?: string;
-}
-
-export const TunnelEntry: FC<Props> = (props) => {
+export const TunnelEntry: FC<TunnelEntryProps> = (props) => {
   const { children, id, staticEntryId } = props;
   const tunnel = useContext(tunnelContext);
   const usedId = useId();
