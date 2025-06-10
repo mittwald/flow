@@ -9,6 +9,7 @@ test("SimpleForm is rendered", async () => {
 
   await dom.getByTestId("form-submit").click();
   const result = dom.getByTestId("form-result");
+  await expect.element(result).toBeInTheDocument();
   expect(JSON.parse(result.element().textContent ?? "")).toEqual({});
 });
 
@@ -19,6 +20,7 @@ test("ActionForm is rendered", async () => {
 
   await dom.getByTestId("form-submit").click();
   const result = dom.getByTestId("form-result");
+  await expect.element(result).toBeInTheDocument();
   expect(JSON.parse(result.element().textContent ?? "")).toEqual({});
 });
 
