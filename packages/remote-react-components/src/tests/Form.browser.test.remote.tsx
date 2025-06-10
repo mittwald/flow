@@ -10,13 +10,33 @@ import {
   CodeBlock,
 } from "@/auto-generated";
 import { Form } from "@/components/Form";
-import { useState } from "react";
+import { type FC, useState } from "react";
 
-const TestForm: typeof Form = (props) => {
-  const { children, ...restProps } = props;
+const TestForm: FC<{
+  onSubmit?: (data: FormData) => Promise<Record<string, unknown>> | null;
+  action?: (data: FormData) => Promise<Record<string, unknown>> | null;
+}> = (props) => {
+  const { action, onSubmit } = props;
+  const [event, setEvent] = useState<Record<string, unknown> | null>(null);
 
   return (
-    <Form {...restProps} data-testid="rendered-form">
+    <Form
+      action={
+        action
+          ? async (d) => {
+              setEvent(await action(d));
+            }
+          : undefined
+      }
+      onSubmit={
+        onSubmit
+          ? async (d) => {
+              setEvent(await onSubmit(d));
+            }
+          : undefined
+      }
+      data-testid="rendered-form"
+    >
       <Section>
         <CheckboxGroup name="check">
           <Checkbox data-testid="form-checkbox-group-option1" value="read">
@@ -47,21 +67,26 @@ const TestForm: typeof Form = (props) => {
         <Button data-testid="form-submit" type="submit">
           Submit
         </Button>
-        {children}
+        {event && (
+          <CodeBlock
+            data-testid="form-result"
+            code={JSON.stringify(event, undefined, 2)}
+          />
+        )}
       </Section>
     </Form>
   );
 };
 
-export const standard = () => <TestForm onSubmit={() => undefined} />;
+export const standard = () => {
+  return <TestForm onSubmit={() => Promise.resolve({})} />;
+};
 
 export const onSubmit = () => {
-  const [event, setEvent] = useState<unknown>();
-
   return (
     <TestForm
       onSubmit={async (data: FormData) => {
-        setEvent({
+        return {
           data: data.entries().toArray(),
           certificates: await Promise.all(
             Array.from(data.getAll("certificates") as File[]).map(
@@ -72,30 +97,19 @@ export const onSubmit = () => {
               }),
             ),
           ),
-        });
+        };
       }}
-    >
-      <>
-        {event && (
-          <CodeBlock
-            data-testid="form-result"
-            code={JSON.stringify(event, undefined, 2)}
-          />
-        )}
-      </>
-    </TestForm>
+    />
   );
 };
 
-export const action = () => <TestForm action={() => undefined} />;
+export const action = () => <TestForm action={() => Promise.resolve({})} />;
 
 export const onAction = () => {
-  const [event, setEvent] = useState<unknown>();
-
   return (
     <TestForm
       action={async (data: FormData) => {
-        setEvent({
+        return {
           data: data.entries().toArray(),
           certificates: await Promise.all(
             Array.from(data.getAll("certificates") as File[]).map(
@@ -106,17 +120,8 @@ export const onAction = () => {
               }),
             ),
           ),
-        });
+        };
       }}
-    >
-      <>
-        {event && (
-          <CodeBlock
-            data-testid="form-result"
-            code={JSON.stringify(event, undefined, 2)}
-          />
-        )}
-      </>
-    </TestForm>
+    />
   );
 };

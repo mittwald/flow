@@ -6,12 +6,20 @@ test("SimpleForm is rendered", async () => {
   const dom = renderRemoteTest("standard");
   const form = dom.getByTestId("rendered-form");
   await expect.element(form).toBeInTheDocument();
+
+  await dom.getByTestId("form-submit").click();
+  const result = dom.getByTestId("form-result");
+  expect(JSON.parse(result.element().textContent ?? "")).toEqual({});
 });
 
 test("ActionForm is rendered", async () => {
   const dom = renderRemoteTest("action");
   const form = dom.getByTestId("rendered-form");
   await expect.element(form).toBeInTheDocument();
+
+  await dom.getByTestId("form-submit").click();
+  const result = dom.getByTestId("form-result");
+  expect(JSON.parse(result.element().textContent ?? "")).toEqual({});
 });
 
 test("onSubmitHandler is triggered with FormData", async () => {
@@ -25,7 +33,7 @@ test("onSubmitHandler is triggered with FormData", async () => {
   await userEvent.click(select);
   await userEvent.keyboard("[Tab][ArrowDown][ArrowDown][Enter]");
 
-  await dom.getByTestId("form-filefield").upload("test.png");
+  await dom.getByTestId("form-filefield").upload(["test.png", "test2.png"]);
   await dom.getByTestId("form-submit").click();
 
   const result = dom.getByTestId("form-result");
@@ -38,11 +46,16 @@ test("onSubmitHandler is triggered with FormData", async () => {
       ["text", "textfieldExampleText"],
       ["select", "Bar"],
       ["certificates", {}],
+      ["certificates", {}],
     ],
     certificates: [
       {
         name: "test.png",
         resolvedDataLengthFromArrayBuffer: 86634,
+      },
+      {
+        name: "test2.png",
+        resolvedDataLengthFromArrayBuffer: 145461,
       },
     ],
   });
@@ -59,7 +72,7 @@ test("actionHandler is triggered with FormData", async () => {
   await userEvent.click(select);
   await userEvent.keyboard("[Tab][ArrowDown][ArrowDown][Enter]");
 
-  await dom.getByTestId("form-filefield").upload("test.png");
+  await dom.getByTestId("form-filefield").upload(["test.png", "test2.png"]);
   await dom.getByTestId("form-submit").click();
 
   const result = dom.getByTestId("form-result");
@@ -72,11 +85,16 @@ test("actionHandler is triggered with FormData", async () => {
       ["text", "textfieldExampleText"],
       ["select", "Bar"],
       ["certificates", {}],
+      ["certificates", {}],
     ],
     certificates: [
       {
         name: "test.png",
         resolvedDataLengthFromArrayBuffer: 86634,
+      },
+      {
+        name: "test2.png",
+        resolvedDataLengthFromArrayBuffer: 145461,
       },
     ],
   });
