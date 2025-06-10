@@ -1,7 +1,18 @@
-import type { FC } from "react";
+import type { FC, ReactNode } from "react";
 import { useContext, useEffect, useId, useRef } from "react";
 import tunnelContext from "@/context";
-import type { TunnelEntryProps } from "@/types";
+
+export type TunnelEntryChildren =
+  | ReactNode
+  | undefined
+  | (() => ReactNode | undefined);
+
+export interface TunnelEntryProps {
+  id?: string;
+  children?: TunnelEntryChildren;
+  /** Static entry ID instead of generated ID by `useId` */
+  staticEntryId?: string;
+}
 
 export const TunnelEntry: FC<TunnelEntryProps> = (props) => {
   const { children, id, staticEntryId } = props;
