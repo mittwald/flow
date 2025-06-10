@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.249](https://github.com/mittwald/flow/compare/0.2.0-alpha.248...0.2.0-alpha.249) (2025-06-10)
+
+### Bug Fixes
+
+* **ComboBox:** fix combo box height ([#1576](https://github.com/mittwald/flow/issues/1576)) ([481d048](https://github.com/mittwald/flow/commit/481d048df0e60b3fbc6d48544435bdc812729916))
+
 # [0.2.0-alpha.248](https://github.com/mittwald/flow/compare/0.2.0-alpha.247...0.2.0-alpha.248) (2025-06-10)
 
 ### Bug Fixes
