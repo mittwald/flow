@@ -1,5 +1,5 @@
-import { Text } from "@mittwald/flow-react-components";
+import { redirect } from "next/navigation";
 
 export default function Page() {
-  return <Text>Please select a demo</Text>;
+  redirect("/host");
 }

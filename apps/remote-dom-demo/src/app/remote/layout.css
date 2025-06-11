@@ -1,0 +1,11 @@
+body {
+  font-family: monospace;
+}
+
+body div * {
+  border: 1px dotted rgba(0, 0, 255, 0.2);
+  padding: 0.5em 0.5em 0.5em 1em;
+  display: block;
+  background: rgba(0, 0, 255, 0.1);
+  margin: 4px;
+}

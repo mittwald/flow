@@ -67,7 +67,8 @@ export const RemoteRoot: FC<RemoteRootProps> = (props) => {
             connectionRef.current = connection;
           })
           .catch((error) => {
-            setConnectionError(error);
+            console.error(error);
+            // setConnectionError(error);
           });
 
         if (renderErrorRef.current) {

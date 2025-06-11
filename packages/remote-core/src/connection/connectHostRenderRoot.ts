@@ -4,7 +4,6 @@ import {
   type RemoteExports,
   type RemoteToHostConnection,
 } from "@/connection/types";
-import { RemoteError } from "@/error";
 import { FlowThreadSerialization } from "@/serialization/FlowThreadSerialization";
 import { type RemoteConnection } from "@mittwald/remote-dom-core/elements";
 import { ThreadNestedIframe } from "@quilted/threads";
@@ -13,9 +12,6 @@ interface Options {
   root: HTMLDivElement;
   onPathnameChanged?: (pathname: string) => void;
 }
-
-const incompatibleParentFrameError = () =>
-  new RemoteError("Could not find any compatible parent frame");
 
 export const connectHostRenderRoot = async (
   options: Options,
@@ -39,27 +35,16 @@ export const connectHostRenderRoot = async (
   });
 
   if (connection.parent === window) {
-    throw incompatibleParentFrameError();
   }
 
-  try {
-    await connection.imports.setIsReady(Version.v3);
+  await connection.imports.setIsReady(Version.v3);
 
-    if (typeof mwExtBridge !== "undefined") {
-      mwExtBridge.connection = connection.imports;
-      await mwExtBridge.readiness.setIsReady();
-    }
-
-    return connection;
-  } catch (error) {
-    if (
-      error instanceof Error &&
-      /No '.*' method is exported from this thread/.test(error.message)
-    ) {
-      throw incompatibleParentFrameError();
-    }
-    throw error;
+  if (typeof mwExtBridge !== "undefined") {
+    mwExtBridge.connection = connection.imports;
+    await mwExtBridge.readiness.setIsReady();
   }
+
+  return connection;
 };
 
 export const connectHostRenderRootRef =
