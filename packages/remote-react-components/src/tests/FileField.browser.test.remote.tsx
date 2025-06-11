@@ -22,3 +22,27 @@ export const onChange = () => {
     </>
   );
 };
+
+export const onChangeMultiple = () => {
+  const [uploadedBytes, setUploadedBytes] = useState<number[]>([]);
+  return (
+    <>
+      {uploadedBytes.length >= 1 && (
+        <Text data-testid="uploaded-bytes">{uploadedBytes.join(",")}</Text>
+      )}
+      <FileField
+        multiple
+        data-testid="field"
+        onChange={async (fileList) => {
+          const resolvedBytes = await Promise.all(
+            Array.from(fileList ?? []).map(async (f) => {
+              const fileBuffer = await f.arrayBuffer();
+              return fileBuffer.byteLength;
+            }),
+          );
+          setUploadedBytes(resolvedBytes);
+        }}
+      />
+    </>
+  );
+};

@@ -6,13 +6,20 @@ import {
   Section,
   TextField,
   FileField,
+  Select,
+  Option,
   Label,
   CodeBlock,
+  CheckboxGroup,
+  Checkbox,
 } from "@mittwald/flow-remote-react-components";
 import { formServerAction } from "@/app/actions";
-import type { FC } from "react";
+import { type FC, useActionState } from "react";
 import { useFormStatus } from "react-dom";
-import { useActionState } from "react";
+
+export interface ActionState {
+  increment: number;
+}
 
 const FormStatus: FC = () => {
   const status = useFormStatus();
@@ -20,17 +27,35 @@ const FormStatus: FC = () => {
 };
 
 export default function Page() {
-  const [callCount, dispatchFormServerAction, isPending] = useActionState(
+  const [state, dispatchFormServerAction, isPending] = useActionState(
     formServerAction,
-    0,
+    {
+      increment: 0,
+    },
   );
 
   return (
     <Form action={dispatchFormServerAction}>
       <Section>
+        <CheckboxGroup name={"check"}>
+          <Label>Berechtigungen</Label>
+          <Checkbox value="read">Lesen</Checkbox>
+          <Checkbox value="write">Schreiben</Checkbox>
+        </CheckboxGroup>
+        <Select name="select" aria-label="Select">
+          <Option value="Foo" textValue="Foo">
+            Foo
+          </Option>
+          <Option value="Bar" textValue="Bar">
+            Bar
+          </Option>
+          <Option value="Baz" textValue="Baz">
+            Baz
+          </Option>
+        </Select>
         <TextField name="test" aria-label="Test" />
-        <FileField name="certificate">
-          <Label>Zertifikat</Label>
+        <FileField multiple name="certificates">
+          <Label>Zertifikate</Label>
           <Button variant="outline" color="secondary">
             Auswählen
           </Button>
@@ -38,9 +63,10 @@ export default function Page() {
         <Button type="submit" isPending={isPending}>
           Submit
         </Button>
-        <Text>Called {callCount} times</Text>
-        <FormStatus />
+        <Text>Called {state.increment} times</Text>
+        <CodeBlock code={JSON.stringify({ isPending }, undefined, 2)} />
       </Section>
+      <FormStatus />
     </Form>
   );
 }

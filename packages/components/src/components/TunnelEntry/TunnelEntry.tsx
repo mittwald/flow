@@ -1,7 +1,8 @@
-import type { ComponentProps, FC } from "react";
+import type { FC } from "react";
 import { TunnelEntry as ReactTunnelEntry } from "@mittwald/react-tunnel";
+import type { TunnelEntryProps } from "@mittwald/react-tunnel";
 
-export type TunnelEntryProps = ComponentProps<typeof ReactTunnelEntry>;
+export type { TunnelEntryProps } from "@mittwald/react-tunnel";
 
 /**
  * @flr-generate all

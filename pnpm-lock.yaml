@@ -1116,6 +1116,9 @@ importers:
       '@mittwald/ext-bridge':
         specifier: workspace:*
         version: link:../ext-bridge
+      '@mittwald/flow-core':
+        specifier: workspace:*
+        version: link:../core
       '@mittwald/flow-remote-core':
         specifier: workspace:*
         version: link:../remote-core
