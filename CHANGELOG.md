@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.255](https://github.com/mittwald/flow/compare/0.2.0-alpha.254...0.2.0-alpha.255) (2025-06-11)
+
+### Features
+
+* **Text:** support white-space and word-break ([#1593](https://github.com/mittwald/flow/issues/1593)) ([f2177ae](https://github.com/mittwald/flow/commit/f2177aef5753e5e70c8f39755de852ffe3aa5be8))
+
 # [0.2.0-alpha.254](https://github.com/mittwald/flow/compare/0.2.0-alpha.253...0.2.0-alpha.254) (2025-06-11)
 
 ### Bug Fixes
