@@ -1,4 +1,4 @@
-import { type FC, type PropsWithChildren } from "react";
+import type { FC, PropsWithChildren } from "react";
 import { RouterProvider as BaseRouterProvider } from "react-aria-components";
 import { useRouter } from "next/navigation";
 import { addBasePath } from "next/dist/client/add-base-path";
