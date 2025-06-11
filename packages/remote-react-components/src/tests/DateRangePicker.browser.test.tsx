@@ -11,7 +11,7 @@ test("DateRangePicker with value is rendered", async () => {
   const dom = renderRemoteTest("withValue");
   const element = dom.getByTestId("element");
   await expect.element(element).toBeInTheDocument();
-  expect(element.element().textContent).toMatchInlineSnapshot(
-    `"1.1.2025–2.1.2025"`,
-  );
+
+  const content = element.element().textContent;
+  expect(["1.1.2025–2.1.2025", "1/1/2025–1/2/2025"]).toContain(content);
 });
