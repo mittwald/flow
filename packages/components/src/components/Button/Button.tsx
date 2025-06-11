@@ -1,5 +1,4 @@
 import type { PropsWithChildren } from "react";
-import React from "react";
 import styles from "./Button.module.scss";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
@@ -13,6 +12,7 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 import { useAriaAnnounceActionState } from "@/components/Action/lib/ariaLive";
 import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
+import { useNumberFormatter } from "react-aria";
 
 export interface ButtonProps
   extends PropsWithChildren<Aria.ButtonProps>,
@@ -83,6 +83,7 @@ export const Button = flowComponent("Button", (props) => {
     ...restProps
   } = props;
 
+  useNumberFormatter().formatToParts();
   const rootClassName = unstyled
     ? className
     : clsx(

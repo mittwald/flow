@@ -27,14 +27,7 @@ export interface RemoteRendererBrowserProps {
   extBridgeImplementation?: ExtBridgeConnectionApi;
 }
 
-const hiddenIframeStyle: CSSProperties = {
-  visibility: "hidden",
-  height: 0,
-  width: 0,
-  border: "none",
-  position: "absolute",
-  marginLeft: "-9999px",
-};
+const hiddenIframeStyle: CSSProperties = {};
 
 export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
   props,
@@ -111,7 +104,9 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
 
   return (
     <>
-      <RemoteRootRenderer components={remoteComponents} receiver={receiver} />
+      <div>
+        <RemoteRootRenderer components={remoteComponents} receiver={receiver} />
+      </div>
       <iframe
         src={src}
         ref={(ref) => {

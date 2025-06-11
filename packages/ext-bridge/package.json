@@ -44,8 +44,8 @@
   "devDependencies": {
     "@mittwald/typescript-config": "workspace:*",
     "@types/node": "^22.15.23",
-    "@types/react": "^19.1.6",
-    "@types/react-dom": "^19.1.5",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
     "nx": "^20.8.2",
     "prettier": "^3.5.3",
     "react": "^19.1.0",
@@ -60,8 +60,8 @@
     "vitest": "^3.1.4"
   },
   "peerDependencies": {
-    "react": "^19",
-    "react-dom": "^19"
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
   },
   "peerDependenciesMeta": {
     "react": {

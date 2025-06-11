@@ -1,0 +1,30 @@
+.rootContainer {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.remote {
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+}
+
+.remote iframe {
+  border: 1px dotted #ccc;
+  background: #fff;
+  height: 0;
+  box-sizing: border-box;
+  opacity: 0;
+  padding: 1em;
+  transition:
+    height 0.3s ease-in-out,
+    opacity 0.3s ease-in-out;
+}
+
+.remote.showIFrame iframe {
+  opacity: 1;
+  height: 100px;
+}

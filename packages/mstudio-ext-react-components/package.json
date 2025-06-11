@@ -24,7 +24,7 @@
     "test:compile": "tsc --noEmit"
   },
   "dependencies": {
-    "@types/react": "^19.1.6"
+    "@types/react": "^19"
   },
   "devDependencies": {
     "@mittwald/flow-remote-react-components": "workspace:*",
@@ -45,6 +45,6 @@
   },
   "peerDependencies": {
     "@mittwald/flow-remote-react-components": "workspace:*",
-    "react": "^19"
+    "react": "^19.1.0"
   }
 }
