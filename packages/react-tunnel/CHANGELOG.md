@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.254](https://github.com/mittwald/flow/compare/0.2.0-alpha.253...0.2.0-alpha.254) (2025-06-11)
+
+### Bug Fixes
+
+* **Remote:** support native form data at remote side ([da96aa6](https://github.com/mittwald/flow/commit/da96aa6bb802e53aa40d5f919fb152eab7d52bb4))
+
 # [0.2.0-alpha.253](https://github.com/mittwald/flow/compare/0.2.0-alpha.252...0.2.0-alpha.253) (2025-06-11)
 
 **Note:** Version bump only for package @mittwald/react-tunnel
