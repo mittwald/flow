@@ -39,6 +39,7 @@ export * from "./RemoteDatePickerElement";
 export * from "./RemoteDateRangePickerElement";
 export * from "./RemoteDialogTriggerElement";
 export * from "./RemoteDivElement";
+export * from "./RemoteDonutChartElement";
 export * from "./RemoteFieldDescriptionElement";
 export * from "./RemoteFieldErrorElement";
 export * from "./RemoteFileCardElement";
