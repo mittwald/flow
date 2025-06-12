@@ -29,7 +29,6 @@
   },
   "dependencies": {
     "@mittwald/ext-bridge": "workspace:*",
-    "@mittwald/flow-core": "workspace:*",
     "@mittwald/flow-remote-core": "workspace:*",
     "@mittwald/flow-remote-elements": "workspace:*",
     "@mittwald/react-use-promise": "^3.0.4",
