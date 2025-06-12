@@ -13,6 +13,10 @@ function isFileWithAwaitedArrayBuffer(
 }
 
 export const addAwaitedArrayBuffer = async (file: File) => {
+  if (isFileWithAwaitedArrayBuffer(file)) {
+    return file;
+  }
+
   const arrayBuffer = await file.arrayBuffer();
   Object.assign(file, { [Key]: arrayBuffer });
 };

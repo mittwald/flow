@@ -1,23 +1,21 @@
-import type { FC, ReactNode } from "react";
+import type { FC } from "react";
 import { useContext } from "react";
 import tunnelContext from "@/context";
 import { observer } from "mobx-react-lite";
-import type { TunnelChildren } from "@/types";
+import type { TunnelChildren } from "@/TunnelState";
+export type TunnelExitChildren = TunnelChildren;
 
-interface Props {
+export interface TunnelExitProps {
   id?: string;
-  children?:
-    | ReactNode
-    | undefined
-    | ((tunnelChildren?: ReactNode | undefined) => ReactNode | undefined);
+  children?: TunnelExitChildren;
 }
 
-const ChildrenRenderer: FC<{ children: TunnelChildren }> = (props) => {
+const ChildrenRenderer: FC<{ children: TunnelExitChildren }> = (props) => {
   const { children } = props;
   return typeof children === "function" ? children() : children;
 };
 
-export const TunnelExit: FC<Props> = observer((props) => {
+export const TunnelExit: FC<TunnelExitProps> = observer((props) => {
   const { children, id } = props;
   const tunnelChildren = useContext(tunnelContext).getChildren(id);
 

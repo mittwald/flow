@@ -3,6 +3,46 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.256](https://github.com/mittwald/flow/compare/0.2.0-alpha.255...0.2.0-alpha.256) (2025-06-11)
+
+### Bug Fixes
+
+* **RouterProvider:** add basepath to href ([#1596](https://github.com/mittwald/flow/issues/1596)) ([b760e6a](https://github.com/mittwald/flow/commit/b760e6a6fe5b0ed5abfa274fba511c99b8410a09))
+
+# [0.2.0-alpha.255](https://github.com/mittwald/flow/compare/0.2.0-alpha.254...0.2.0-alpha.255) (2025-06-11)
+
+### Features
+
+* **Text:** support white-space and word-break ([#1593](https://github.com/mittwald/flow/issues/1593)) ([f2177ae](https://github.com/mittwald/flow/commit/f2177aef5753e5e70c8f39755de852ffe3aa5be8))
+
+# [0.2.0-alpha.254](https://github.com/mittwald/flow/compare/0.2.0-alpha.253...0.2.0-alpha.254) (2025-06-11)
+
+### Bug Fixes
+
+* **Remote:** support native form data at remote side ([da96aa6](https://github.com/mittwald/flow/commit/da96aa6bb802e53aa40d5f919fb152eab7d52bb4))
+
+# [0.2.0-alpha.253](https://github.com/mittwald/flow/compare/0.2.0-alpha.252...0.2.0-alpha.253) (2025-06-11)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.252](https://github.com/mittwald/flow/compare/0.2.0-alpha.251...0.2.0-alpha.252) (2025-06-11)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.251](https://github.com/mittwald/flow/compare/0.2.0-alpha.250...0.2.0-alpha.251) (2025-06-11)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.250](https://github.com/mittwald/flow/compare/0.2.0-alpha.249...0.2.0-alpha.250) (2025-06-11)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.249](https://github.com/mittwald/flow/compare/0.2.0-alpha.248...0.2.0-alpha.249) (2025-06-10)
+
+### Bug Fixes
+
+* **ComboBox:** fix combo box height ([#1576](https://github.com/mittwald/flow/issues/1576)) ([481d048](https://github.com/mittwald/flow/commit/481d048df0e60b3fbc6d48544435bdc812729916))
+
 # [0.2.0-alpha.248](https://github.com/mittwald/flow/compare/0.2.0-alpha.247...0.2.0-alpha.248) (2025-06-10)
 
 ### Bug Fixes

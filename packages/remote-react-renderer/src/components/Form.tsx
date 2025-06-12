@@ -1,38 +1,45 @@
 import {
   type FC,
   type FormEvent,
-  type FormHTMLAttributes,
   type PropsWithChildren,
+  type RefObject,
 } from "react";
-import React, { forwardRef } from "react";
-import {
-  getFormDataObject,
-  getFormDataObjectFromEvent,
-} from "@/components/lib/getFormDataObject";
+import React from "react";
+import { prepareFormData } from "@/components/lib/prepareFormData";
 
-type FormProps = Pick<FormHTMLAttributes<HTMLFormElement>, "action"> & {
-  onSubmit?: (data: Record<string, unknown>) => void;
+type FormProps = {
+  action?: (data: FormData) => void | Promise<void>;
+  onSubmit?: (data: FormData) => void | Promise<void>;
+  ref?: RefObject<HTMLFormElement>;
 } & PropsWithChildren;
 
-export const Form: FC = forwardRef<HTMLFormElement, FormProps>((props, ref) => {
+export const Form: FC<FormProps> = (props) => {
   const {
-    action: actionFromProps,
+    action: onActionFromProps,
     onSubmit: onSubmitFromProps,
+    ref,
     ...rest
   } = props;
 
-  const action =
-    typeof actionFromProps === "function"
-      ? (formData: FormData) =>
-          actionFromProps(getFormDataObject(formData) as unknown as FormData)
-      : actionFromProps;
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const resolvedData = await prepareFormData(
+      new FormData(event.currentTarget),
+    );
+    await onSubmitFromProps?.(resolvedData);
+  };
 
-  const onSubmit = onSubmitFromProps
-    ? (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        onSubmitFromProps(getFormDataObjectFromEvent(e));
-      }
-    : undefined;
+  const onAction = async (formData: FormData) => {
+    const resolvedFormData = await prepareFormData(formData);
+    await onActionFromProps?.(resolvedFormData);
+  };
 
-  return <form ref={ref} {...rest} action={action} onSubmit={onSubmit} />;
-});
+  return (
+    <form
+      {...rest}
+      ref={ref}
+      action={onActionFromProps ? onAction : undefined}
+      onSubmit={onSubmitFromProps ? onSubmit : undefined}
+    />
+  );
+};
