@@ -1116,9 +1116,6 @@ importers:
       '@mittwald/ext-bridge':
         specifier: workspace:*
         version: link:../ext-bridge
-      '@mittwald/flow-core':
-        specifier: workspace:*
-        version: link:../core
       '@mittwald/flow-remote-core':
         specifier: workspace:*
         version: link:../remote-core
@@ -1144,6 +1141,9 @@ importers:
         specifier: ^2.22.3
         version: 2.22.3
     devDependencies:
+      '@mittwald/flow-core':
+        specifier: workspace:*
+        version: link:../core
       '@mittwald/flow-react-components':
         specifier: workspace:*
         version: link:../components
