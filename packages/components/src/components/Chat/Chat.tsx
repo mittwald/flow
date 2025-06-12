@@ -2,7 +2,11 @@ import type { CSSProperties, FC, PropsWithChildren } from "react";
 import clsx from "clsx";
 import type { PropsWithClassName } from "@/lib/types/props";
 import styles from "./Chat.module.scss";
-import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import {
+  dynamic,
+  type PropsContext,
+  PropsContextProvider,
+} from "@/lib/propsContext";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 
 export interface ChatProps extends PropsWithChildren, PropsWithClassName {
@@ -21,6 +25,11 @@ export const Chat: FC<ChatProps> = (props) => {
       tunnelId: "messageThread",
     },
     FileCardList: { className: styles.fileCardList, tunnelId: "fileCardList" },
+    Button: {
+      className: dynamic((props) => {
+        return props.color === "accent" ? styles.accentButton : undefined;
+      }),
+    },
   };
 
   return (
