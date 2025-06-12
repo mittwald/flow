@@ -3,6 +3,118 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.256](https://github.com/mittwald/flow/compare/0.2.0-alpha.255...0.2.0-alpha.256) (2025-06-11)
+
+### Bug Fixes
+
+* **RouterProvider:** add basepath to href ([#1596](https://github.com/mittwald/flow/issues/1596)) ([b760e6a](https://github.com/mittwald/flow/commit/b760e6a6fe5b0ed5abfa274fba511c99b8410a09))
+
+# [0.2.0-alpha.255](https://github.com/mittwald/flow/compare/0.2.0-alpha.254...0.2.0-alpha.255) (2025-06-11)
+
+### Features
+
+* **Text:** support white-space and word-break ([#1593](https://github.com/mittwald/flow/issues/1593)) ([f2177ae](https://github.com/mittwald/flow/commit/f2177aef5753e5e70c8f39755de852ffe3aa5be8))
+
+# [0.2.0-alpha.254](https://github.com/mittwald/flow/compare/0.2.0-alpha.253...0.2.0-alpha.254) (2025-06-11)
+
+### Bug Fixes
+
+* **Remote:** support native form data at remote side ([da96aa6](https://github.com/mittwald/flow/commit/da96aa6bb802e53aa40d5f919fb152eab7d52bb4))
+
+# [0.2.0-alpha.253](https://github.com/mittwald/flow/compare/0.2.0-alpha.252...0.2.0-alpha.253) (2025-06-11)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.252](https://github.com/mittwald/flow/compare/0.2.0-alpha.251...0.2.0-alpha.252) (2025-06-11)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.251](https://github.com/mittwald/flow/compare/0.2.0-alpha.250...0.2.0-alpha.251) (2025-06-11)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.250](https://github.com/mittwald/flow/compare/0.2.0-alpha.249...0.2.0-alpha.250) (2025-06-11)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.249](https://github.com/mittwald/flow/compare/0.2.0-alpha.248...0.2.0-alpha.249) (2025-06-10)
+
+### Bug Fixes
+
+* **ComboBox:** fix combo box height ([#1576](https://github.com/mittwald/flow/issues/1576)) ([481d048](https://github.com/mittwald/flow/commit/481d048df0e60b3fbc6d48544435bdc812729916))
+
+# [0.2.0-alpha.248](https://github.com/mittwald/flow/compare/0.2.0-alpha.247...0.2.0-alpha.248) (2025-06-10)
+
+### Bug Fixes
+
+* **MenuItem:** fix switch ([#1578](https://github.com/mittwald/flow/issues/1578)) ([203b83d](https://github.com/mittwald/flow/commit/203b83db89259ef931bc8e6ccd2a395ac925b267))
+* **ProgressBar:** fix value higher than max value ([#1579](https://github.com/mittwald/flow/issues/1579)) ([43c53b2](https://github.com/mittwald/flow/commit/43c53b26a58fb5d2423f0f62c0750ac06295de01))
+
+# [0.2.0-alpha.247](https://github.com/mittwald/flow/compare/0.2.0-alpha.246...0.2.0-alpha.247) (2025-06-06)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.246](https://github.com/mittwald/flow/compare/0.2.0-alpha.245...0.2.0-alpha.246) (2025-06-06)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.245](https://github.com/mittwald/flow/compare/0.2.0-alpha.244...0.2.0-alpha.245) (2025-06-06)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.244](https://github.com/mittwald/flow/compare/0.2.0-alpha.243...0.2.0-alpha.244) (2025-06-06)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.243](https://github.com/mittwald/flow/compare/0.2.0-alpha.242...0.2.0-alpha.243) (2025-06-06)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.242](https://github.com/mittwald/flow/compare/0.2.0-alpha.241...0.2.0-alpha.242) (2025-06-06)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.241](https://github.com/mittwald/flow/compare/0.2.0-alpha.240...0.2.0-alpha.241) (2025-06-06)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.240](https://github.com/mittwald/flow/compare/0.2.0-alpha.239...0.2.0-alpha.240) (2025-06-04)
+
+### Bug Fixes
+
+* **FileDropZone:** add arraybuffer await ([60eeb4a](https://github.com/mittwald/flow/commit/60eeb4a299b621429237e153535e71714e235be1))
+
+# [0.2.0-alpha.239](https://github.com/mittwald/flow/compare/0.2.0-alpha.238...0.2.0-alpha.239) (2025-06-04)
+
+### Features
+
+* **FileDropZone:** implement remote functionality ([ee3ed9f](https://github.com/mittwald/flow/commit/ee3ed9f89f70f1eb74d185b2ab2634fb1ed30798))
+
+# [0.2.0-alpha.238](https://github.com/mittwald/flow/compare/0.2.0-alpha.237...0.2.0-alpha.238) (2025-06-04)
+
+### Features
+
+* **Remote:** refactor event serialization ([#1552](https://github.com/mittwald/flow/issues/1552)) ([e7b00ac](https://github.com/mittwald/flow/commit/e7b00ac7df6b1396b17c2574d0b82479192d1174))
+
+# [0.2.0-alpha.237](https://github.com/mittwald/flow/compare/0.2.0-alpha.236...0.2.0-alpha.237) (2025-06-04)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.236](https://github.com/mittwald/flow/compare/0.2.0-alpha.235...0.2.0-alpha.236) (2025-06-04)
+
+### Bug Fixes
+
+* Allow control prop ([#1557](https://github.com/mittwald/flow/issues/1557)) ([c5ce6f0](https://github.com/mittwald/flow/commit/c5ce6f03d28500ae335067c70ac84e2632517567))
+* **Option:** use value for key to support remote rendering ([#1556](https://github.com/mittwald/flow/issues/1556)) ([3fea5c8](https://github.com/mittwald/flow/commit/3fea5c8b9a68f7d71740b8dfff399cb87413a048))
+
+# [0.2.0-alpha.235](https://github.com/mittwald/flow/compare/0.2.0-alpha.234...0.2.0-alpha.235) (2025-06-03)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.234](https://github.com/mittwald/flow/compare/0.2.0-alpha.233...0.2.0-alpha.234) (2025-06-03)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
 # [0.2.0-alpha.233](https://github.com/mittwald/flow/compare/0.2.0-alpha.232...0.2.0-alpha.233) (2025-06-03)
 
 ### Bug Fixes

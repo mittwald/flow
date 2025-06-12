@@ -5,6 +5,7 @@ import type {
   RemoteExports,
 } from "@/connection/types";
 import { emptyImplementation } from "@/ext-bridge/implementation";
+import { FlowThreadSerialization } from "@/serialization/FlowThreadSerialization";
 import type { ExtBridgeConnectionApi } from "@mittwald/ext-bridge";
 import type { RemoteConnection } from "@mittwald/remote-dom-core/elements";
 import { ThreadIframe } from "@quilted/threads";
@@ -30,6 +31,7 @@ export const connectRemoteIframe = (opts: Options): HostToRemoteConnection => {
 
   const result = {
     thread: new ThreadIframe<RemoteExports, HostExports>(iframe, {
+      serialization: new FlowThreadSerialization(),
       exports: {
         ...extBridgeImplementation,
         setIsReady: async (version = 1) => {

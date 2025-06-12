@@ -26,6 +26,10 @@ export interface TextProps
   align?: "start" | "end" | "center";
   /* The text-wrap property of the text. @default undefined */
   wrap?: "wrap" | "balance" | "pretty";
+  /* The white-space property of the text. @default undefined */
+  whiteSpace?: React.CSSProperties["whiteSpace"];
+  /* The word-break property of the text. @default undefined */
+  wordBreak?: React.CSSProperties["wordBreak"];
 }
 
 /**
@@ -42,6 +46,9 @@ export const Text = flowComponent("Text", (props) => {
     color,
     align = "start",
     wrap,
+    style: styleFromProps,
+    whiteSpace,
+    wordBreak,
     ...rest
   } = props;
 
@@ -62,6 +69,8 @@ export const Text = flowComponent("Text", (props) => {
     Icon: { className: styles.icon },
   };
 
+  const style = { whiteSpace, wordBreak, ...styleFromProps };
+
   const childrenElement = (
     <PropsContextProvider props={propsContext}>
       <Wrap if={emulateBoldWidth}>
@@ -73,7 +82,7 @@ export const Text = flowComponent("Text", (props) => {
   if (!props.slot) {
     const Element = elementType;
     return (
-      <Element {...textProps} ref={ref}>
+      <Element style={style} {...textProps} ref={ref}>
         {childrenElement}
       </Element>
     );
@@ -86,7 +95,12 @@ export const Text = flowComponent("Text", (props) => {
 
   return (
     <ClearPropsContext>
-      <Aria.Text {...textProps} elementType={elementType} ref={ref}>
+      <Aria.Text
+        style={style}
+        {...textProps}
+        elementType={elementType}
+        ref={ref}
+      >
         {childrenElement}
       </Aria.Text>
     </ClearPropsContext>

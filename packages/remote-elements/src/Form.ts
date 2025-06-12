@@ -2,7 +2,7 @@ import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
 
 export type RemoteFormElementProps = {
   id?: string;
-  action?: string | ((payload: FormData) => void);
+  action?: string | ((payload: FormData) => void | Promise<void>);
   onSubmit?: (event: never) => void;
 } & Partial<Pick<HTMLFormElement, "enctype" | "method">>;
 

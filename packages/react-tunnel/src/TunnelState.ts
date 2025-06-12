@@ -1,9 +1,13 @@
-import { useState } from "react";
+import { type ReactNode, useState } from "react";
 import type { ObservableMap } from "mobx";
 import { action, makeObservable, observable } from "mobx";
-import type { TunnelChildren } from "@/types";
 
 const defaultId = "default";
+
+export type TunnelChildren =
+  | ReactNode
+  | undefined
+  | ((tunnelChildren?: ReactNode | undefined) => ReactNode | undefined);
 
 export class TunnelState {
   public readonly children = observable.map<

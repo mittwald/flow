@@ -43,6 +43,7 @@ export * from "./FieldDescription";
 export * from "./FieldError";
 export * from "./FileCard";
 export * from "./FileCardList";
+export * from "./FileDropZone";
 export * from "./FileField";
 export * from "./Flex";
 export * from "./Header";

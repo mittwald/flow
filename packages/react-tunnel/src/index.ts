@@ -1,3 +1,3 @@
-export { TunnelProvider } from "./components/TunnelProvider";
-export { TunnelEntry } from "./components/TunnelEntry";
-export { TunnelExit } from "./components/TunnelExit";
+export * from "./components/TunnelProvider";
+export * from "./components/TunnelEntry";
+export * from "./components/TunnelExit";

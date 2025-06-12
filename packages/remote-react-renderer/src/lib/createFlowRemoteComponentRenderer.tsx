@@ -1,37 +1,13 @@
-import {
-  isEventProp,
-  isReactSuspendedStyle,
-  isStyleProp,
-} from "@/lib/propClassifiers";
+import { isReactSuspendedStyle, isStyleProp } from "@/lib/propClassifiers";
 import type { RemoteComponentRendererProps } from "@mittwald/remote-dom-react/host";
 import { createRemoteComponentRenderer } from "@mittwald/remote-dom-react/host";
-import type { EventSerializationMap } from "@mittwald/flow-remote-core";
 import { FlowRemoteElement } from "@mittwald/flow-remote-elements";
 import type { FlowRemoteElementMetaData } from "@mittwald/flow-remote-elements";
-import {
-  mapEventHandler,
-  Version,
-  standard as defaultEventSerializer,
-} from "@mittwald/flow-remote-core";
+import { Version } from "@mittwald/flow-remote-core";
 import { type ComponentType } from "react";
 import { mapValues } from "remeda";
 
-const customEventMappings: EventSerializationMap = {
-  onPaste: (event: unknown) => {
-    const clipEvent = event as ClipboardEvent satisfies ClipboardEvent;
-    const pastedData: string = clipEvent.clipboardData?.getData("text") ?? "";
-
-    return {
-      ...(defaultEventSerializer(event) as object),
-      content: pastedData,
-    };
-  },
-};
-
 const mapProperty = (val: unknown, key: string) => {
-  if (isEventProp(key, val)) {
-    return mapEventHandler(val, key, customEventMappings);
-  }
   if (isStyleProp(key)) {
     if (isReactSuspendedStyle(val)) {
       return {

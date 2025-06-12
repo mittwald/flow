@@ -28,7 +28,7 @@
     "fs-jetpack": "^5.1.0",
     "humanize-string": "^3.0.0",
     "luxon": "^3.6.1",
-    "next": "~15.2.5",
+    "next": "^15.3.3",
     "next-mdx-remote": "^5.0.0",
     "parse-es-import": "^0.6.0",
     "prism-react-renderer": "^2.4.1",
@@ -48,7 +48,7 @@
   },
   "devDependencies": {
     "@mittwald/typescript-config": "workspace:*",
-    "@next/eslint-plugin-next": "^15.3.2",
+    "@next/eslint-plugin-next": "^15.3.3",
     "@types/node": "^22.15.23",
     "@types/react": "^19.1.6",
     "@types/react-dom": "^19.1.5",

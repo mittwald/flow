@@ -73,6 +73,7 @@ import type { AccentBoxProps } from "@/components/AccentBox";
 import type { ColumnLayoutProps } from "@/components/ColumnLayout";
 import type { MenuTriggerProps } from "@/components/OverlayTrigger";
 import type { ProgressBarProps } from "@/components/ProgressBar";
+import type { FileDropZoneProps } from "@/components/FileDropZone";
 
 export * from "./types";
 
@@ -108,6 +109,7 @@ export interface FlowComponentPropsTypes {
   FileCard: FileCardProps;
   FileCardList: FileCardListProps;
   FileField: FileFieldProps;
+  FileDropZone: FileDropZoneProps;
   Header: HeaderProps;
   Heading: HeadingProps;
   Icon: IconProps;
@@ -184,6 +186,7 @@ const propsContextSupportingComponentsMap: Record<
   FileCard: true,
   FileCardList: true,
   FileField: true,
+  FileDropZone: true,
   Header: true,
   Heading: true,
   Icon: true,

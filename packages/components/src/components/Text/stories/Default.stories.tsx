@@ -129,3 +129,11 @@ export const WithIcon: Story = {
     </Text>
   ),
 };
+
+export const WithWordBreak: Story = {
+  render: (props) => (
+    <Text {...props} wordBreak="break-word">
+      {dummyText.long.replace(/[^\p{L}\p{N}]/gu, "")}
+    </Text>
+  ),
+};

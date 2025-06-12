@@ -5,6 +5,7 @@ import {
   type RemoteToHostConnection,
 } from "@/connection/types";
 import { RemoteError } from "@/error";
+import { FlowThreadSerialization } from "@/serialization/FlowThreadSerialization";
 import { type RemoteConnection } from "@mittwald/remote-dom-core/elements";
 import { ThreadNestedIframe } from "@quilted/threads";
 
@@ -22,6 +23,7 @@ export const connectHostRenderRoot = async (
   const { root, onPathnameChanged } = options;
 
   const connection = new ThreadNestedIframe<HostExports, RemoteExports>({
+    serialization: new FlowThreadSerialization(),
     exports: {
       render: (connection: RemoteConnection) =>
         import("@mittwald/remote-dom-core/elements").then(

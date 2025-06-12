@@ -1,0 +1,38 @@
+# Grundlagen
+
+Ein Alert ist ein UI-Element zur Kommunikation wichtiger Informationen, die Aufmerksamkeit erfordern. Alerts sollten sparsam und gezielt eingesetzt werden, da sie visuell hervorgehoben sind und den Nutzerfluss unterbrechen können. Sie können informativ, warnend, kritisch  oder bestätigend sein.
+
+## Best practices
+Achte bei der Verwendung eines Alerts darauf, dass...
+- der Alert nur verwendet wird, wenn der Inhalt wirklich die Aufmerksamkeit des Users benötigt. Für rein informative Hinweise kann ein weniger auffälliges Element (z. B. ein Hinweistext) ausreichend sein.
+- der Schweregrad sinnvoll gewählt ist – `danger` für sofortigen Handlungsbedarf, `warning` für Handlungsbedarf, `info` für eine wichtige Information und `success` für einen Erfolg.
+- der Text klar, prägnant und lösungsorientiert formuliert ist. Vermeide technische Fachbegriffe oder Schuldzuweisungen. Beachte die Content Guidelines für [Fehlermeldungen](https://mittwald.github.io/flow/02-foundations/03-content-guidelines/02-fehlermeldungen).
+- er möglichst eine Handlungsmöglichkeit bietet.
+
+## Verwendung
+
+Verwende einen Alert, um...
+- dem User mitzuteilen, dass ein Fehler aufgetreten ist – verursacht durch sein Handeln oder durch das System.
+- vor einer möglichen Folge oder Auswirkung zu warnen.
+- wichtige Statusänderungen oder Systemereignisse mitzuteilen.
+- zusätzliche wichtige Informationen oder Hinweise in einem bestimmten Kontext bereitzustellen.
+
+## Alert vs AccentBox 
+
+Alerts und [AccentBoxen](https://mittwald.github.io/flow/03-components/structure/accent-box) dienen beide dazu, dem User zusätzliche Informationen bereitzustellen. Eine einfache Faustregel hilft bei der Entscheidung: Kann die Information ignoriert werden, ohne negative Folgen? Dann ist eine AccentBox die richtige Wahl. Wenn das Ignorieren hingegen zu Problemen führen könnte – etwa bei sicherheitsrelevanten Hinweisen oder wichtigen Systemmeldungen – sollte ein Alert mit entsprechendem Status verwendet werden.
+
+<DoAndDont>
+  <Plain heading="Verwende Alerts, um z. B. ...">
+    - den User auf sicherheits- oder funktionsrelevante Informationen hinzuweisen.
+    - vor möglichen Problemen oder Systemzuständen zu warnen.
+    - dringende oder aktionsrelevante Statusmeldungen zu kommunizieren.
+
+  </Plain>
+
+  <Plain heading="Verwende AccentBoxen, um z. B. ...">
+    - ergänzende, aber nicht kritische Hinweise anzuzeigen.
+    - kontextuelle Informationen oder Tipps zu geben.
+    - visuell strukturierende Inhalte einzubetten, ohne zu unterbrechen.
+  
+  </Plain>
+</DoAndDont>

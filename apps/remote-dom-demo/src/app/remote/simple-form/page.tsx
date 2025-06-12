@@ -8,26 +8,38 @@ import {
   Label,
   Form,
   TextField,
+  CheckboxGroup,
+  Checkbox,
   Button,
 } from "@mittwald/flow-remote-react-components";
 import { useState } from "react";
 
 export default function Page() {
-  const [event, setEvent] = useState<unknown>();
-
-  interface FormData {
-    text: string;
-    select: string;
-    certificate: [];
-  }
+  const [event, setEvent] = useState<Record<string, unknown>>();
 
   return (
     <Form
-      onSubmit={(data: FormData) => {
-        setEvent(data);
+      onSubmit={async (data: FormData) => {
+        setEvent({
+          data: data.entries().toArray(),
+          certificates: await Promise.all(
+            Array.from(data.getAll("certificates") as File[]).map(
+              async (file: File) => ({
+                name: file.name,
+                resolvedDataLengthFromArrayBuffer: (await file.arrayBuffer())
+                  .byteLength,
+              }),
+            ),
+          ),
+        });
       }}
     >
       <Section>
+        <CheckboxGroup name="check">
+          <Label>Berechtigungen</Label>
+          <Checkbox value="read">Lesen</Checkbox>
+          <Checkbox value="write">Schreiben</Checkbox>
+        </CheckboxGroup>
         <TextField name="text" aria-label="Text" />
         <Select name="select" aria-label="Select">
           <Option value="Foo" textValue="Foo">
@@ -40,8 +52,8 @@ export default function Page() {
             Baz
           </Option>
         </Select>
-        <FileField multiple name="certificate">
-          <Label>Zertifikat</Label>
+        <FileField multiple name="certificates">
+          <Label>Zertifikates</Label>
           <Button variant="outline" color="secondary">
             Auswählen
           </Button>

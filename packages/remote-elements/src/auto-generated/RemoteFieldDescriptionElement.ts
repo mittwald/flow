@@ -121,6 +121,8 @@ export class RemoteFieldDescriptionElement extends FlowRemoteElement<RemoteField
       typeof: {},
       unselectable: {},
       vocab: {},
+      whiteSpace: {},
+      wordBreak: {},
       wrap: {},
     };
   }

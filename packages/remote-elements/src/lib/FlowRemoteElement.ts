@@ -1,10 +1,8 @@
-import { getObjectKeysIncludingProtoTypes } from "@/lib/getObjectKeysIncludingProtoTypes";
 import {
   RemoteElement,
   RemoteEvent,
   type Version,
 } from "@mittwald/flow-remote-core";
-import { isArray, isObjectType, omit } from "remeda";
 import type { EmptyObject } from "type-fest";
 
 // eslint-disable-next-line
@@ -53,21 +51,10 @@ export class FlowRemoteElement<
       : null;
 
     const wrappedEventListener: EventListener = (event) => {
-      let finalEvent = event;
-
-      if (event instanceof RemoteEvent) {
-        if (!isArray(event.detail) && isObjectType(event.detail)) {
-          const propsToLiftUpFromDetails = omit(
-            event.detail,
-            getObjectKeysIncludingProtoTypes(event) as never,
-          );
-          Object.assign(event, propsToLiftUpFromDetails);
-        } else {
-          finalEvent = event.detail as never;
-        }
+      if (!finalListener) {
+        return;
       }
-
-      return finalListener?.(finalEvent);
+      return finalListener(event instanceof RemoteEvent ? event.detail : event);
     };
 
     this.eventListenerMap.set(listener, wrappedEventListener);

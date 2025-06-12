@@ -3,6 +3,112 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.256](https://github.com/mittwald/flow/compare/0.2.0-alpha.255...0.2.0-alpha.256) (2025-06-11)
+
+**Note:** Version bump only for package @mittwald/flow-remote-core
+
+# [0.2.0-alpha.255](https://github.com/mittwald/flow/compare/0.2.0-alpha.254...0.2.0-alpha.255) (2025-06-11)
+
+**Note:** Version bump only for package @mittwald/flow-remote-core
+
+# [0.2.0-alpha.254](https://github.com/mittwald/flow/compare/0.2.0-alpha.253...0.2.0-alpha.254) (2025-06-11)
+
+### Bug Fixes
+
+* **Remote:** support native form data at remote side ([da96aa6](https://github.com/mittwald/flow/commit/da96aa6bb802e53aa40d5f919fb152eab7d52bb4))
+
+# [0.2.0-alpha.253](https://github.com/mittwald/flow/compare/0.2.0-alpha.252...0.2.0-alpha.253) (2025-06-11)
+
+**Note:** Version bump only for package @mittwald/flow-remote-core
+
+# [0.2.0-alpha.252](https://github.com/mittwald/flow/compare/0.2.0-alpha.251...0.2.0-alpha.252) (2025-06-11)
+
+**Note:** Version bump only for package @mittwald/flow-remote-core
+
+# [0.2.0-alpha.251](https://github.com/mittwald/flow/compare/0.2.0-alpha.250...0.2.0-alpha.251) (2025-06-11)
+
+**Note:** Version bump only for package @mittwald/flow-remote-core
+
+# [0.2.0-alpha.250](https://github.com/mittwald/flow/compare/0.2.0-alpha.249...0.2.0-alpha.250) (2025-06-11)
+
+**Note:** Version bump only for package @mittwald/flow-remote-core
+
+# [0.2.0-alpha.249](https://github.com/mittwald/flow/compare/0.2.0-alpha.248...0.2.0-alpha.249) (2025-06-10)
+
+**Note:** Version bump only for package @mittwald/flow-remote-core
+
+# [0.2.0-alpha.248](https://github.com/mittwald/flow/compare/0.2.0-alpha.247...0.2.0-alpha.248) (2025-06-10)
+
+**Note:** Version bump only for package @mittwald/flow-remote-core
+
+# [0.2.0-alpha.247](https://github.com/mittwald/flow/compare/0.2.0-alpha.246...0.2.0-alpha.247) (2025-06-06)
+
+### Bug Fixes
+
+* **Remote:** update packages ([84e7040](https://github.com/mittwald/flow/commit/84e70403fd2af79976a5bc36e4bbee8a84fed403))
+
+# [0.2.0-alpha.246](https://github.com/mittwald/flow/compare/0.2.0-alpha.245...0.2.0-alpha.246) (2025-06-06)
+
+**Note:** Version bump only for package @mittwald/flow-remote-core
+
+# [0.2.0-alpha.245](https://github.com/mittwald/flow/compare/0.2.0-alpha.244...0.2.0-alpha.245) (2025-06-06)
+
+### Bug Fixes
+
+* **Remote:** update packages ([301f597](https://github.com/mittwald/flow/commit/301f597b72c271b956144f4281cef1fa17ece356))
+
+# [0.2.0-alpha.244](https://github.com/mittwald/flow/compare/0.2.0-alpha.243...0.2.0-alpha.244) (2025-06-06)
+
+### Bug Fixes
+
+* **Remote:** update packages ([be68e91](https://github.com/mittwald/flow/commit/be68e910e68d1c400a264e5fa7a6ba1d12fb831f))
+
+# [0.2.0-alpha.243](https://github.com/mittwald/flow/compare/0.2.0-alpha.242...0.2.0-alpha.243) (2025-06-06)
+
+**Note:** Version bump only for package @mittwald/flow-remote-core
+
+# [0.2.0-alpha.242](https://github.com/mittwald/flow/compare/0.2.0-alpha.241...0.2.0-alpha.242) (2025-06-06)
+
+### Bug Fixes
+
+* **Remote:** update packages ([9e6d299](https://github.com/mittwald/flow/commit/9e6d299eecbb129bf488e2f3fa70adee3dbda304))
+
+# [0.2.0-alpha.241](https://github.com/mittwald/flow/compare/0.2.0-alpha.240...0.2.0-alpha.241) (2025-06-06)
+
+### Bug Fixes
+
+* **Remote:** update packages ([402013a](https://github.com/mittwald/flow/commit/402013a9cde85894d606f662c28de6e87a81e129))
+
+# [0.2.0-alpha.240](https://github.com/mittwald/flow/compare/0.2.0-alpha.239...0.2.0-alpha.240) (2025-06-04)
+
+**Note:** Version bump only for package @mittwald/flow-remote-core
+
+# [0.2.0-alpha.239](https://github.com/mittwald/flow/compare/0.2.0-alpha.238...0.2.0-alpha.239) (2025-06-04)
+
+**Note:** Version bump only for package @mittwald/flow-remote-core
+
+# [0.2.0-alpha.238](https://github.com/mittwald/flow/compare/0.2.0-alpha.237...0.2.0-alpha.238) (2025-06-04)
+
+### Features
+
+* **Remote:** refactor event serialization ([#1552](https://github.com/mittwald/flow/issues/1552)) ([e7b00ac](https://github.com/mittwald/flow/commit/e7b00ac7df6b1396b17c2574d0b82479192d1174))
+
+# [0.2.0-alpha.237](https://github.com/mittwald/flow/compare/0.2.0-alpha.236...0.2.0-alpha.237) (2025-06-04)
+
+**Note:** Version bump only for package @mittwald/flow-remote-core
+
+# [0.2.0-alpha.236](https://github.com/mittwald/flow/compare/0.2.0-alpha.235...0.2.0-alpha.236) (2025-06-04)
+
+**Note:** Version bump only for package @mittwald/flow-remote-core
+
+# [0.2.0-alpha.235](https://github.com/mittwald/flow/compare/0.2.0-alpha.234...0.2.0-alpha.235) (2025-06-03)
+
+**Note:** Version bump only for package @mittwald/flow-remote-core
+
+# [0.2.0-alpha.234](https://github.com/mittwald/flow/compare/0.2.0-alpha.233...0.2.0-alpha.234) (2025-06-03)
+
+**Note:** Version bump only for package @mittwald/flow-remote-core
+
 # [0.2.0-alpha.233](https://github.com/mittwald/flow/compare/0.2.0-alpha.232...0.2.0-alpha.233) (2025-06-03)
 
 **Note:** Version bump only for package @mittwald/flow-remote-core

@@ -4,11 +4,13 @@ import { useState } from "react";
 export const standard = () => <Button data-testid="button">Click me</Button>;
 
 export const eventhandler = () => {
-  const [pressed, setPressed] = useState(false);
+  const [eventData, setEventData] = useState<unknown>();
   return (
     <>
-      <Text data-testid="event-data">{String(pressed)}</Text>
-      <Button data-testid="button" onPress={() => setPressed(true)}>
+      <Text data-testid="event-data">
+        {JSON.stringify(eventData, undefined, 2)}
+      </Text>
+      <Button data-testid="button" onPress={setEventData}>
         Click me
       </Button>
     </>
