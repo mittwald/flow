@@ -1,5 +1,5 @@
 import {
-  Button,
+  Link,
   Heading,
   IconDanger,
   IllustratedMessage,
@@ -13,5 +13,5 @@ import {
     Du hast keine Berechtigung, um auf diese Seite
     zuzugreifen.
   </Text>
-  <Button>Zum Dashboard</Button>
+  <Link>Zum Dashboard</Link>
 </IllustratedMessage>;
