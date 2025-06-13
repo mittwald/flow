@@ -76,41 +76,39 @@ export const ProgressBar = flowComponent("ProgressBar", (props) => {
     : undefined;
 
   return (
-    <>
-      <Aria.ProgressBar
-        className={rootClassName}
-        value={segmentsTotalValue ?? value}
-        formatOptions={formatOptions}
-        maxValue={maxValue}
-        {...rest}
-      >
-        {({ percentage }) => (
-          <PropsContextProvider props={propsContext}>
-            {children}
+    <Aria.ProgressBar
+      className={rootClassName}
+      value={segmentsTotalValue ?? value}
+      formatOptions={formatOptions}
+      maxValue={maxValue}
+      {...rest}
+    >
+      {({ percentage }) => (
+        <PropsContextProvider props={propsContext}>
+          {children}
 
-            <ProgressBarValue
-              showMaxValue={showMaxValue}
-              maxValue={maxValue}
-              formatOptions={formatOptions}
-              value={segmentsTotalValue ?? value}
-              valueLabel={valueLabel}
-            />
+          <ProgressBarValue
+            showMaxValue={showMaxValue}
+            maxValue={maxValue}
+            formatOptions={formatOptions}
+            value={segmentsTotalValue ?? value}
+            valueLabel={valueLabel}
+          />
 
-            <ProgressBarBar
-              percentage={percentage}
-              segmentsTotalValue={segmentsTotalValue}
-              segments={segments}
-            />
+          <ProgressBarBar
+            percentage={percentage}
+            segmentsTotalValue={segmentsTotalValue}
+            segments={segments}
+          />
 
-            <ProgressBarLegend
-              showLegend={showLegend}
-              segments={segments}
-              formatOptions={formatOptions}
-            />
-          </PropsContextProvider>
-        )}
-      </Aria.ProgressBar>
-    </>
+          <ProgressBarLegend
+            showLegend={showLegend}
+            segments={segments}
+            formatOptions={formatOptions}
+          />
+        </PropsContextProvider>
+      )}
+    </Aria.ProgressBar>
   );
 });
 

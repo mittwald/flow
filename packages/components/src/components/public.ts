@@ -34,6 +34,7 @@ export * from "@/components/CounterBadge";
 export * from "@/components/DatePicker";
 export * from "@/components/DateRangePicker";
 export * from "@/components/Div";
+export * from "@/components/DonutChart";
 export * from "@/components/FieldDescription";
 export * from "@/components/FieldError";
 export * from "@/components/FileCard";
