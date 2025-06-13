@@ -11,11 +11,15 @@ export const createTestServer = async () => {
       port: remoteTestServerPort,
       strictPort: true,
     },
+    optimizeDeps: {
+      force: true,
+    },
   });
 
   return {
     start: async () => {
       await server.listen();
+      await server.warmupRequest("./main.tsx");
       server.printUrls();
     },
     stop: async () => {
