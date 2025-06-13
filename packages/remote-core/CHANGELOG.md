@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.262](https://github.com/mittwald/flow/compare/0.2.0-alpha.261...0.2.0-alpha.262) (2025-06-13)
+
+### Bug Fixes
+
+* **Remote:** fix navigation may get lost ([11d7c57](https://github.com/mittwald/flow/commit/11d7c5788ab87c4cf4781f29e650b72359dc33f7))
+
 # [0.2.0-alpha.261](https://github.com/mittwald/flow/compare/0.2.0-alpha.260...0.2.0-alpha.261) (2025-06-13)
 
 **Note:** Version bump only for package @mittwald/flow-remote-core
