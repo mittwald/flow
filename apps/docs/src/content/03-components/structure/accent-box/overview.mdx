@@ -1,41 +1,40 @@
 # Playground
 
-In der AccentBox können Inhalte platziert werden, die sich vom übrigen Content
-abheben sollen. Die AccentBox sorgt hierbei für die Hintergrundfarbe und das
-Padding. Die Inhalte darin können über Struktur-Komponenten wie `Section` oder
-`Flex` angeordnet werden.
+In der `<AccentBox />` lassen sich Inhalte platzieren, die sich bewusst vom restlichen Content abheben sollen. Die Component sorgt dabei für die Hintergrundfarbe und das
+Padding. Die Inhalte innerhalb der Box können mithilfe von Struktur-Components wie [Section](/03-components/structure/section) oder [Flex](/03-components/structure/flex) angeordnet werden.
 
 <LiveCodeEditor />
 
 ---
 
-# Mit Gradient
+# Color
+
+Je nach Anwendungsfall stehen für die AccentBox die Colors **Blue, Green, Neutral** und **Gradient** zur Verfügung. Blue ist dabei als Standard definiert.
+
+## Green
+
+Bei Verwendung der Color Green erscheinen enthaltene Components automatisch in der Dark-Variante (siehe [Light und Dark Color](/02-foundations/01-design/02-colors)) dargestellt, um die nötigen Kontraste sicherzustellen.
+
+<LiveCodeEditor example="green" editorCollapsed />
+
+## Gradient
 
 <LiveCodeEditor example="gradient" editorCollapsed />
 
 ---
 
-# Mit Icon
+# Kombiniere mit...
 
-Platziere ein `Icon` direkt in der AccentBox, um es als Hintergrundbild
-anzuzeigen.
+## Mit Icon
+
+Ein direkt in der AccentBox platziertes [Icon](/03-components/content/icon) wird als dekoratives Hintergrundsbild angezeigt.
 
 <LiveCodeEditor example="icon" editorCollapsed />
 
----
 
-# Mit grünem Hintergrund
+## In LayoutCard
 
-Bei Verwendung des grünen Hintergrundes werden die Inhalte automatisch in der
-`dark` Variante dargestellt, um die nötigen Kontraste einzuhalten.
-
-<LiveCodeEditor example="green" editorCollapsed />
-
----
-
-# In LayoutCard
-
-Enthält eine `LayoutCard` eine AccentBox als einzigen Inhalt, wird diese über
+Befindet sich eine AccentBox als erstes Element innerhalb einer [LayoutCard](/03-components/structure/layout-card), wird sie über
 die gesamte Größe der LayoutCard gezogen.
 
 <LiveCodeEditor example="layoutCard" editorCollapsed />
