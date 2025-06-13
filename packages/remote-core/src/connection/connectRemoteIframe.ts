@@ -1,8 +1,9 @@
-import type {
-  HostExports,
-  HostToRemoteConnection,
-  NavigationState,
-  RemoteExports,
+import {
+  type HostExports,
+  type HostToRemoteConnection,
+  type NavigationState,
+  type RemoteExports,
+  Version,
 } from "@/connection/types";
 import { emptyImplementation } from "@/ext-bridge/implementation";
 import { FlowThreadSerialization } from "@/serialization/FlowThreadSerialization";
@@ -13,7 +14,7 @@ import { ThreadIframe } from "@quilted/threads";
 interface Options {
   connection: RemoteConnection;
   iframe: HTMLIFrameElement;
-  onReady?: () => void;
+  onReady?: (connection: HostToRemoteConnection) => void;
   onError?: (error: string) => void;
   onNavigationStateChanged?: (state: NavigationState) => void;
   extBridgeImplementation?: ExtBridgeConnectionApi;
@@ -36,7 +37,7 @@ export const connectRemoteIframe = (opts: Options): HostToRemoteConnection => {
         ...extBridgeImplementation,
         setIsReady: async (version = 1) => {
           result.version = version;
-          onReady?.();
+          onReady?.(result);
         },
         setError: async (error: string) => {
           onError?.(error);
@@ -47,6 +48,15 @@ export const connectRemoteIframe = (opts: Options): HostToRemoteConnection => {
       },
     }),
     version: 0,
+    updateHostPathname: (hostPathname?: string) => {
+      if (hostPathname === undefined) {
+        return;
+      }
+
+      if (result.version >= Version.v2) {
+        result.thread.imports.setPathname(hostPathname);
+      }
+    },
   };
 
   result.thread.imports.render(connection);

@@ -62,13 +62,15 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
 
   const remoteComponents = useMergedComponents(integrations);
 
-  const receiver = useMemo(() => {
+  const [receiver, rendererSubscriber] = useMemo(() => {
     const remoteReceiver = new RemoteReceiver();
+    const controller = new AbortController();
     remoteReceiver.subscribe(
       { id: remoteReceiver.root.id },
       renderAwaiter.resolve,
+      { signal: controller.signal },
     );
-    return remoteReceiver;
+    return [remoteReceiver, controller];
   }, [src]);
 
   useUpdateHostPathnameOnRemote(hostPathname, connection.current);
@@ -76,7 +78,10 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
   const connect = connectRemoteIframeRef({
     connection: receiver.connection,
     extBridgeImplementation: extBridgeImplementation,
-    onReady: connectionAwaiter.resolve,
+    onReady: (establishedConnection) => {
+      establishedConnection.updateHostPathname(hostPathname);
+      connectionAwaiter.resolve();
+    },
     onError: setRemoteError,
     onNavigationStateChanged,
   });
@@ -105,9 +110,16 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
     ]);
 
   const awaitLoadingPromise = connectedSrc === src;
-  usePromise(overallLoading, awaitLoadingPromise ? [] : null, {
-    loaderId: src,
-  });
+  usePromise(
+    async () => {
+      await overallLoading();
+      rendererSubscriber.abort();
+    },
+    awaitLoadingPromise ? [] : null,
+    {
+      loaderId: src,
+    },
+  );
 
   return (
     <>
