@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.266](https://github.com/mittwald/flow/compare/0.2.0-alpha.265...0.2.0-alpha.266) (2025-06-16)
+
+### Bug Fixes
+
+* **navigation:** make navigation flow comp with new tunnel provider ([#1616](https://github.com/mittwald/flow/issues/1616)) ([6bd0aac](https://github.com/mittwald/flow/commit/6bd0aacc51ccb1da3a2ac01a078b197e5e55319b))
+
 # [0.2.0-alpha.265](https://github.com/mittwald/flow/compare/0.2.0-alpha.264...0.2.0-alpha.265) (2025-06-16)
 
 **Note:** Version bump only for package @mittwald/flow-project
