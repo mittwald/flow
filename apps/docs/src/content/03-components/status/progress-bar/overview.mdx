@@ -8,7 +8,7 @@ Verwende `<ProgressBar />`, um eine ProgressBar darzustellen.
 
 # Mit Unit
 
-Im Standard wird die ProgressBar immer mit Prozentangabe angezeigt. Über das Property `formatOptions` können aber auch andere Einheiten gewählt werden. (s. [Intl.NumberFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat))
+Im Standard wird die ProgressBar immer mit Prozentangabe angezeigt. Über das Property `formatOptions` können aber auch andere Einheiten gewählt werden (s. [Intl.NumberFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat)).
 
 ## Gigabyte
 
@@ -22,7 +22,7 @@ Im Standard wird die ProgressBar immer mit Prozentangabe angezeigt. Über das Pr
 
 # Mit Max Value
 
-Der maximale Wert der ProgressBar lässt sich individuell festlegen, je nachdem, was dargestellt werden soll. Standardmäßig beträgt dieser Wert 100%.
+Der maximale Wert der ProgressBar lässt sich individuell festlegen, je nachdem, was dargestellt werden soll. Standardmäßig beträgt dieser Wert 100 %.
 
 <LiveCodeEditor example="maxValue" editorCollapsed />
 
@@ -31,7 +31,8 @@ Der maximale Wert der ProgressBar lässt sich individuell festlegen, je nachdem,
 # Sizes
 
 ProgressBars sind in drei verschiedenen Größen verfügbar: **Small**, **Medium** und **Large**.
-Die mittlere Größe **Medium** ist Standard und wird am häufigsten verwendet. Die verschieden Größen eigenen sich gut, um eine visuelle Hierarchie innerhalb der Seite zu erzeugen. So kann die größte Variante **Large** sehr gut alleinstehend eingesetzt werden, wenn die ProgressBar besondere Aufmerksamkeit auf sich ziehen soll.
+
+Die mittlere Größe **Medium** ist Standard und wird am häufigsten verwendet. Die verschieden Größen eignen sich gut, um eine visuelle Hierarchie innerhalb der Seite zu erzeugen. So kann die größte Variante **Large** sehr gut alleinstehend eingesetzt werden, wenn die ProgressBar besondere Aufmerksamkeit auf sich ziehen soll.
 
 <LiveCodeEditor example="size" editorCollapsed />
 
@@ -39,7 +40,7 @@ Die mittlere Größe **Medium** ist Standard und wird am häufigsten verwendet. 
 
 # Status
 
-Je nach Anwendungsfall stehen vier Status-Farben zur Auswahl: **Success**, **Info**, **Warning** und **Danger**. Diese Status helfen insbesondere bei der Darstellung von Speicherplatzauslastung, um Schwellenwerte visuell hervorzuheben. (z. B. Statuswechsel ab 80 % Auslastung zur Warning)
+Je nach Anwendungsfall stehen vier Status-Farben zur Auswahl: **Success**, **Info**, **Warning** und **Danger**. Diese Status helfen insbesondere bei der Darstellung von Speicherplatzauslastung, um Schwellenwerte visuell hervorzuheben (z. B. Statuswechsel ab 80 % Auslastung zur Warning).
 
 <LiveCodeEditor example="status" editorCollapsed />
 
@@ -49,13 +50,13 @@ Je nach Anwendungsfall stehen vier Status-Farben zur Auswahl: **Success**, **In
 
 Die Anzeige der ProgressBar kann über das `segments` Property um einzelne
 Abschnitte ergänzt werden. Der `value` ergibt sich in diesem Fall aus der Summe
-der Werte der einzelnen Segmente. Um die einzelnen Werte näher zu erläutern wird
-automatisch die `Legend` Component angezeigt. Über das `showLegend` Property
+der Werte der einzelnen Segmente. Um die einzelnen Werte näher zu erläutern, wird
+automatisch die [Legend-Component](https://mittwald.github.io/flow/03-components/content/legend) angezeigt. Über das `showLegend` Property
 kann diese ein- und ausgeblendet werden.
 
 Die Farben der Segmente werden automatisch festgelegt, können aber über das
 `color` Property überschrieben werden. Beim Überschreiben muss darauf geachtet
-werden, dass nebeneinander liegende Farben weiterhin einen ausreichenden
+werden, dass nebeneinanderliegende Farben weiterhin einen ausreichenden
 Kontrast zueinander haben.
 
 <LiveCodeEditor example="segments" editorCollapsed />
