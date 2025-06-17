@@ -44,6 +44,7 @@ export class List<T> {
   private readonly settingsStore?: SettingsStore;
   private readonly viewModeStorageKey?: string;
   private readonly filterSettingsStorageKey?: string;
+  private readonly sortingStorageKey?: string;
 
   public constructor(shape: ListShape<T>) {
     const {
@@ -70,6 +71,9 @@ export class List<T> {
       : undefined;
     this.viewModeStorageKey = settingStorageKey
       ? `${settingStorageKey}.viewMode`
+      : undefined;
+    this.sortingStorageKey = settingStorageKey
+      ? `${settingStorageKey}.sorting`
       : undefined;
     this.supportsSettingsStorage = !!this.settingStorageKey;
 
@@ -165,6 +169,27 @@ export class List<T> {
         "List",
         this.viewModeStorageKey,
         List.viewModeSettingsStorageSchema,
+      );
+    }
+  }
+
+  public storeSortingSettings(sorting: Sorting<T>) {
+    if (this.settingsStore && this.sortingStorageKey) {
+      this.settingsStore.set(
+        "List",
+        this.sortingStorageKey,
+        Sorting.storageSchema,
+        { direction: sorting.direction, property: sorting.property },
+      );
+    }
+  }
+
+  public getStoredSortingDefaultSetting() {
+    if (this.settingsStore && this.sortingStorageKey) {
+      return this.settingsStore.get(
+        "List",
+        this.sortingStorageKey,
+        Sorting.storageSchema,
       );
     }
   }
