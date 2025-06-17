@@ -16,7 +16,7 @@ export const LongValue: Story = {
   render: () => <DonutChart value={1000000000000} maxValue={1100000000000} />,
 };
 
-export const LongTextValue: Story = {
+export const LongChildrenContent: Story = {
   render: () => (
     <DonutChart value={10} size="l">
       {dummyText.short}
