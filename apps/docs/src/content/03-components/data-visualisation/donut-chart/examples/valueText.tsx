@@ -1,5 +1,4 @@
 import { DonutChart } from "@mittwald/flow-react-components";
-import React from "react";
 
 <DonutChart
   value={300}
