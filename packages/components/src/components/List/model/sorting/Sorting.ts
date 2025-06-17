@@ -32,8 +32,9 @@ export class Sorting<T> {
     this.property = shape.property;
     this.name = shape.name;
     this.direction = shape.direction ?? "asc";
-    this.defaultEnabled =
-      this.getStoredDefaultEnabled() ?? shape.defaultEnabled ?? false;
+    this.defaultEnabled = this.getStoredDefaultEnabled()
+      ? true
+      : (shape.defaultEnabled ?? false);
     this.customSortingFn = shape.customSortingFn;
   }
 
