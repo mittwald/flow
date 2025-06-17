@@ -18,11 +18,17 @@ export const DonutChartLegend: FC<Props> = (props) => {
 
   return (
     <Legend className={styles.legend}>
-      {segments.map((s, i) => (
-        <LegendItem
-          color={s.color ?? getCategoricalColorByIndex(i)}
-        >{`${s.title} (${s.valueText ?? (formatOptions ? formatter.format(s.value) : `${s.value} %`)})`}</LegendItem>
-      ))}
+      {segments.map((s, i) => {
+        const formattedValue = formatOptions
+          ? formatter.format(s.value)
+          : `${s.value} %`;
+
+        return (
+          <LegendItem
+            color={s.color ?? getCategoricalColorByIndex(i)}
+          >{`${s.title} (${s.valueText ?? formattedValue})`}</LegendItem>
+        );
+      })}
     </Legend>
   );
 };
