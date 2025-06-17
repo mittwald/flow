@@ -17,5 +17,9 @@ export const LongValue: Story = {
 };
 
 export const LongTextValue: Story = {
-  render: () => <DonutChart value={10} valueText={dummyText.short} size="l" />,
+  render: () => (
+    <DonutChart value={10} size="l">
+      {dummyText.short}
+    </DonutChart>
+  ),
 };
