@@ -36,11 +36,7 @@ export class Sorting<T> {
     this.defaultEnabled =
       shape.defaultEnabled === "hidden"
         ? "hidden"
-        : storedDefaultEnabled === true
-          ? true
-          : storedDefaultEnabled === false
-            ? false
-            : (shape.defaultEnabled ?? false);
+        : (storedDefaultEnabled ?? shape.defaultEnabled ?? false);
     this.customSortingFn = shape.customSortingFn;
   }
 
