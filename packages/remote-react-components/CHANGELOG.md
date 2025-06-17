@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.275](https://github.com/mittwald/flow/compare/0.2.0-alpha.274...0.2.0-alpha.275) (2025-06-17)
+
+### Features
+
+* **DonutChart:** add donut chart component ([#1599](https://github.com/mittwald/flow/issues/1599)) ([85e9e88](https://github.com/mittwald/flow/commit/85e9e8885d0a68ad072cbe431e7f4e904ea315c6))
+
 # [0.2.0-alpha.274](https://github.com/mittwald/flow/compare/0.2.0-alpha.273...0.2.0-alpha.274) (2025-06-17)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-components
