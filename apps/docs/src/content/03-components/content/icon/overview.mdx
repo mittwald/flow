@@ -1,22 +1,32 @@
 # Playground
 
+Für das Flow Design System werden [Tabler Icons](https://tabler.io/icons) verwendet. Unten in der Icon-Bibliothek ist eine Auflistung aller Icons zu finden, denen im Flow Design System eine Bedeutung zugeordnet ist.
+
+Um ein Icon einzufügen, muss innerhalb eines Tags „Icon“ gefolgt vom jeweiligen Icon-Namen aus der Auflistung verwendet werden. Beispiel: Für das Icon „Home“ sieht der Tag so aus: `<IconHome />`.
+
 <LiveCodeEditor />
 
 ---
 
-# Mit Tabler Icon
+# Tabler Icon
+
+Wenn kein passendes Icon in der Icon-Bibliothek vorhanden ist, kann alternativ ein Icon von [Tabler](https://tabler.io/icons) ausgewählt werden.
 
 <LiveCodeEditor example="tabler" editorCollapsed />
 
 ---
 
-# Mit SVG
+# SVG
+
+Zusätzlich können eigene SVGs als Icons eingesetzt werden. Dabei ist darauf zu achten, dass sie im Stil der übrigen Icons konsistent bleiben.
 
 <LiveCodeEditor example="svg" editorCollapsed />
 
 ---
 
-# Größen
+# Sizes
+
+Icons sind in den Größen **S, M** und **L** verfügbar.
 
 <LiveCodeEditor example="sizes" editorCollapsed />
 
@@ -26,23 +36,31 @@
 
 ## Align
 
-Benutze die [Align](/03-components/structure/align) Komponente, um dein Icon
+Benutze die [Align](/03-components/structure/align)-Component, um ein Icon
 neben einem Text zu platzieren.
 
 <LiveCodeEditor example="align" editorCollapsed />
 
 ---
 
-# Verfügbare Icons
+# Icon-Bibliothek
 
-## Decorative
-
-<LiveCodeEditor example="decorative" editorCollapsed />
+Im Flow Design System haben ausgewählte Icons eine festgelegte Bedeutung. Sie lassen sich drei Typen zuordnen: **Functional, Decorative** und **Status**.
 
 ## Functional
 
+Functional Icons besitzen eine eindeutige, allgemein verständliche Symbolik und müssen nicht neu erlernt werden. Sie unterstützen User bei Navigation und Interaktion und werden häufig in Actions wie [Icon-Buttons](/03-components/actions/button) eingesetzt.
+
 <LiveCodeEditor example="functional" editorCollapsed />
 
+## Decorative
+
+Decorative Icons tragen zur Ästhetik und zur emotionalen Wirkung der Benutzeroberfläche bei. Im Gegensatz zu den Functional Icons ist ihre Zuordnung jedoch oft nicht intuitiv erfassbar.
+
+<LiveCodeEditor example="decorative" editorCollapsed />
+
 ## Status
+
+Bestimmte Icons dienen der Anzeige des Status eines Elements. Eine verwandte Component ist das [AlertIcon](/03-components/status/alert-icon).
 
 <LiveCodeEditor example="states" editorCollapsed />
