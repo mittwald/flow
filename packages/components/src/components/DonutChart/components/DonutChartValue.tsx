@@ -1,11 +1,11 @@
 import styles from "../DonutChart.module.scss";
-import React, { type FC } from "react";
+import React, { type FC, type ReactNode } from "react";
 import { useNumberFormatter } from "react-aria";
 import type { DonutChartProps } from "@/components/DonutChart";
 
 interface Props extends Pick<DonutChartProps, "formatOptions"> {
   value?: number;
-  valueText?: string;
+  valueText?: ReactNode;
 }
 
 export const DonutChartValue: FC<Props> = (props) => {
@@ -13,28 +13,15 @@ export const DonutChartValue: FC<Props> = (props) => {
 
   const formatter = useNumberFormatter(formatOptions);
 
-  const formattedValue =
-    valueText ?? (formatOptions ? formatter.format(value) : `${value} %`);
-
-  const valueAndUnit = formattedValue.trim().match(/^([\d.,]+)\s*([a-zA-Z]+)$/);
-
-  if (
-    formattedValue.includes("%") ||
-    !valueAndUnit ||
-    !valueAndUnit[1] ||
-    !valueAndUnit[2]
-  ) {
-    return (
-      <span className={styles.value}>
-        <b>{formattedValue}</b>
-      </span>
-    );
+  if (valueText) {
+    return <span className={styles.value}>{valueText}</span>;
   }
+
+  const formattedValue = formatOptions ? formatter.format(value) : `${value} %`;
 
   return (
     <span className={styles.value}>
-      <b>{valueAndUnit[1]}</b>
-      <small>{valueAndUnit[2]}</small>
+      <b>{formattedValue}</b>
     </span>
   );
 };

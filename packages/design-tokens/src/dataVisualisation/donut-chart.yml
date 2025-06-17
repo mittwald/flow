@@ -8,6 +8,12 @@ donut-chart:
   spacing-x:
     value: "{size-rem.m}"
 
+  padding:
+    m:
+      value: "{size-px.l}"
+    l:
+      value: "{size-px.xl}"
+
   # Info
   info-fill-background-color:
     value: "{info-solid-background-color.default}"

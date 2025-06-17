@@ -1,26 +1,15 @@
 import type { FC } from "react";
 import styles from "@/components/DonutChart/DonutChart.module.scss";
 import { DonutChartFill } from "@/components/DonutChart/components/DonutChartFill";
-import { DonutChartValue } from "@/components/DonutChart/components/DonutChartValue";
 import type { DonutChartProps } from "@/components/DonutChart";
 
 interface Props
-  extends Pick<
-    DonutChartProps,
-    "segments" | "formatOptions" | "size" | "maxValue" | "valueText"
-  > {
+  extends Pick<DonutChartProps, "segments" | "size" | "maxValue"> {
   value?: number;
 }
 
 export const Donut: FC<Props> = (props) => {
-  const {
-    value = 0,
-    segments,
-    formatOptions,
-    size,
-    maxValue,
-    valueText,
-  } = props;
+  const { value = 0, segments, size, maxValue } = props;
 
   const strokeWidth = 0.5;
   const fillWidth = size === "m" ? 8 : 12;
@@ -66,11 +55,6 @@ export const Donut: FC<Props> = (props) => {
           maxValue={maxValue ?? 100}
         />
       </svg>
-      <DonutChartValue
-        value={value}
-        formatOptions={formatOptions}
-        valueText={valueText}
-      />
     </>
   );
 };

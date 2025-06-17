@@ -11,14 +11,7 @@ interface Props extends Pick<DonutChartProps, "segments"> {
 }
 
 export const DonutChartFill: FC<Props> = (props) => {
-  const {
-    center,
-    value = 0,
-    radius,
-    segments,
-
-    maxValue,
-  } = props;
+  const { center, value = 0, radius, segments, maxValue } = props;
 
   const circumference = 2 * radius * Math.PI;
 

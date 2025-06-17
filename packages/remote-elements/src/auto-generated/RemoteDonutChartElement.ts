@@ -19,6 +19,7 @@ export class RemoteDonutChartElement extends FlowRemoteElement<RemoteDonutChartE
       formatOptions: {},
       id: {},
       isIndeterminate: {},
+      legendPosition: {},
       maxValue: {},
       minValue: {},
       segments: {},
@@ -27,7 +28,6 @@ export class RemoteDonutChartElement extends FlowRemoteElement<RemoteDonutChartE
       slot: {},
       status: {},
       value: {},
-      valueText: {},
     };
   }
 
@@ -36,7 +36,7 @@ export class RemoteDonutChartElement extends FlowRemoteElement<RemoteDonutChartE
   }
 
   static override get remoteSlots() {
-    return [];
+    return ["valueText"];
   }
 }
 

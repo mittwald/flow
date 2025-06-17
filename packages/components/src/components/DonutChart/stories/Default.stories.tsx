@@ -15,9 +15,9 @@ const meta: Meta<typeof DonutChart> = {
       control: "inline-radio",
       options: ["m", "l"],
     },
-    showLegend: {
+    legendPosition: {
       control: "inline-radio",
-      options: ["top", "right", "bottom", "left", false],
+      options: ["top", "right", "bottom", "left"],
     },
   },
   parameters: {
@@ -63,7 +63,30 @@ export const WithLegend: Story = {
       { title: "Item 6", value: 6 },
     ],
     size: "l",
-    showLegend: "top",
+    showLegend: true,
+    legendPosition: "top",
   },
   render: (props) => <DonutChart aria-label="storage" {...props} />,
+};
+
+export const WithTextValue: Story = {
+  args: {
+    maxValue: 600,
+  },
+  render: (props) => {
+    const value = 300;
+
+    return (
+      <DonutChart
+        {...props}
+        value={value}
+        valueText={
+          <>
+            <b>{value}</b>
+            <small>GB</small>
+          </>
+        }
+      />
+    );
+  },
 };

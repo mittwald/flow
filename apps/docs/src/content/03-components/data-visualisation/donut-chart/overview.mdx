@@ -31,6 +31,15 @@ Standardgröße.
 
 ---
 
+# Mit alternativem Text
+
+Über das Property `valueText` kann der Text innerhalb des DonutCharts
+überschrieben werden
+
+<LiveCodeEditor example="valueText" editorCollapsed />
+
+---
+
 # Status
 
 Je nach Anwendungsfall stehen vier Status-Farben zur Auswahl: **Info**,
@@ -46,7 +55,8 @@ Die Anzeige des DonutCharts kann über das `segments` Property um einzelne
 Abschnitte ergänzt werden. Der `value` ergibt sich in diesem Fall aus der Summe
 der Werte der einzelnen Segmente. Um die einzelnen Werte näher zu erläutern wird
 automatisch die `Legend` Component angezeigt. Über das `showLegend` Property
-kann diese ein- und ausgeblendet werden.
+kann diese ein- und ausgeblendet werden. Die Position der Legende kann über das
+Property `legendPosition` bestimmt werden.
 
 Die Farben der Segmente werden automatisch festgelegt, können aber über das
 `color` Property überschrieben werden. Beim Überschreiben muss darauf geachtet

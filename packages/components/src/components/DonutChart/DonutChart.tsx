@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import type { FC, ReactNode } from "react";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import styles from "./DonutChart.module.scss";
@@ -24,12 +24,14 @@ export interface DonutChartProps
   /** Divides the fill of the donut chart into segments */
   segments?: DonutChartSegment[];
   /** An optional text to be displayed instead of the formatted value */
-  valueText?: string;
+  valueText?: ReactNode;
   /**
-   * The position of the legend, if set to false, the legend is hidden @default
-   * false
+   * Whether the legend component is shown when segments are used. @default:
+   * true
    */
-  showLegend?: "top" | "left" | "bottom" | "right" | false;
+  showLegend?: boolean;
+  /** The position of the legend. @default "right" */
+  legendPosition?: "top" | "left" | "bottom" | "right";
 }
 
 /** @flr-generate all */
@@ -43,7 +45,8 @@ export const DonutChart: FC<DonutChartProps> = (props) => {
     maxValue,
     formatOptions,
     valueText,
-    showLegend,
+    showLegend = true,
+    legendPosition = "right",
     ...rest
   } = props;
 
@@ -60,12 +63,7 @@ export const DonutChart: FC<DonutChartProps> = (props) => {
 
   return (
     <Wrap if={showLegend && segments}>
-      <div
-        className={clsx(
-          styles.donutChartContainer,
-          showLegend && styles[showLegend],
-        )}
-      >
+      <div className={clsx(styles.donutChartContainer, styles[legendPosition])}>
         <Aria.ProgressBar
           className={rootClassName}
           value={segmentsTotalValue ?? value}
@@ -73,11 +71,9 @@ export const DonutChart: FC<DonutChartProps> = (props) => {
         >
           <Donut
             value={segmentsTotalValue ?? value}
-            formatOptions={formatOptions}
             segments={segments}
             size={size}
             maxValue={maxValue}
-            valueText={valueText}
           />
           <DonutChartValue
             value={segmentsTotalValue ?? value}
