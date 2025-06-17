@@ -1,7 +1,6 @@
 import { DonutChart } from "@mittwald/flow-react-components";
 
 <DonutChart
-  showLegend="right"
   segments={[
     { title: "Item 1", value: 28 },
     { title: "Item 2", value: 24 },
