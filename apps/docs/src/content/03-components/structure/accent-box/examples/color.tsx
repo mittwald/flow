@@ -10,19 +10,20 @@ import {
   Rating,
   Text,
 } from "@mittwald/flow-react-components";
-import { 
+import {
   IconLeaf,
-  IconMoodSmileBeam
+  IconMoodSmileBeam,
 } from "@tabler/icons-react";
 
 <Section>
-  
   <AccentBox color="blue">
     <Icon>
       <IconMoodSmileBeam />
     </Icon>
     <Section>
-      <Heading>Hilf uns, Flow noch besser zu machen!</Heading>
+      <Heading>
+        Hilf uns, Flow noch besser zu machen!
+      </Heading>
       <Text>
         Fehlt dir eine bestimmte Component oder etwas anderes? Hast du Feedback? Dann teile es uns gerne auf GitHub mit.
       </Text>
@@ -31,7 +32,6 @@ import {
       </Link>
     </Section>
   </AccentBox>
-  
   <AccentBox color="green">
     <Icon>
       <IconLeaf />
