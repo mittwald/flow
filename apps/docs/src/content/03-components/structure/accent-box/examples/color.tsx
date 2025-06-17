@@ -10,8 +10,10 @@ import {
   Rating,
   Text,
 } from "@mittwald/flow-react-components";
-import { IconLeaf } from "@tabler/icons-react";
-import { IconMoodSmileBeam } from "@tabler/icons-react";
+import { 
+  IconLeaf,
+  IconMoodSmileBeam
+} from "@tabler/icons-react";
 
 <Section>
   
@@ -62,7 +64,7 @@ import { IconMoodSmileBeam } from "@tabler/icons-react";
       </Text>
     </Flex>
   </AccentBox>
-  <AccentBox "neutral">
+  <AccentBox color="neutral">
     <Flex direction="column" gap="xs" align="center">
       <BigNumber>
         <Text>100 ms</Text>
