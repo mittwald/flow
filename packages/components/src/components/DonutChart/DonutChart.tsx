@@ -1,4 +1,4 @@
-import type { FC, ReactNode } from "react";
+import type { FC, PropsWithChildren } from "react";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import styles from "./DonutChart.module.scss";
@@ -18,13 +18,12 @@ export interface DonutChartSegment {
 
 export interface DonutChartProps
   extends Omit<Aria.ProgressBarProps, "children" | "valueLabel">,
-    PropsWithStatus {
+    PropsWithStatus,
+    PropsWithChildren {
   /** The size variant of the donut chart. @default "m" */
   size?: "m" | "l";
   /** Divides the fill of the donut chart into segments */
   segments?: DonutChartSegment[];
-  /** An optional text to be displayed instead of the formatted value */
-  valueText?: ReactNode;
   /**
    * Whether the legend component is shown when segments are used. @default:
    * true
@@ -44,9 +43,9 @@ export const DonutChart: FC<DonutChartProps> = (props) => {
     segments,
     maxValue,
     formatOptions,
-    valueText,
     showLegend = true,
     legendPosition = "right",
+    children,
     ...rest
   } = props;
 
@@ -78,8 +77,9 @@ export const DonutChart: FC<DonutChartProps> = (props) => {
           <DonutChartValue
             value={segmentsTotalValue ?? value}
             formatOptions={formatOptions}
-            valueText={valueText}
-          />
+          >
+            {children}
+          </DonutChartValue>
         </Aria.ProgressBar>
 
         {showLegend && segments && (

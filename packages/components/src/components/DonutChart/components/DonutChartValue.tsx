@@ -1,20 +1,19 @@
 import styles from "../DonutChart.module.scss";
-import React, { type FC, type ReactNode } from "react";
+import React, { type FC } from "react";
 import { useNumberFormatter } from "react-aria";
 import type { DonutChartProps } from "@/components/DonutChart";
 
-interface Props extends Pick<DonutChartProps, "formatOptions"> {
+interface Props extends Pick<DonutChartProps, "formatOptions" | "children"> {
   value?: number;
-  valueText?: ReactNode;
 }
 
 export const DonutChartValue: FC<Props> = (props) => {
-  const { value = 0, formatOptions, valueText } = props;
+  const { value = 0, formatOptions, children } = props;
 
   const formatter = useNumberFormatter(formatOptions);
 
-  if (valueText) {
-    return <span className={styles.value}>{valueText}</span>;
+  if (children) {
+    return <span className={styles.value}>{children}</span>;
   }
 
   const formattedValue = formatOptions ? formatter.format(value) : `${value} %`;

@@ -77,16 +77,10 @@ export const WithTextValue: Story = {
     const value = 300;
 
     return (
-      <DonutChart
-        {...props}
-        value={value}
-        valueText={
-          <>
-            <b>{value}</b>
-            <small>GB</small>
-          </>
-        }
-      />
+      <DonutChart {...props} value={value}>
+        <b>{value}</b>
+        <small>GB</small>
+      </DonutChart>
     );
   },
 };

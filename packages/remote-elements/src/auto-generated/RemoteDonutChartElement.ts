@@ -36,7 +36,7 @@ export class RemoteDonutChartElement extends FlowRemoteElement<RemoteDonutChartE
   }
 
   static override get remoteSlots() {
-    return ["valueText"];
+    return [];
   }
 }
 
