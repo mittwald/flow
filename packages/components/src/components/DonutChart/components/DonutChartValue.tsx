@@ -18,7 +18,12 @@ export const DonutChartValue: FC<Props> = (props) => {
 
   const valueAndUnit = formattedValue.trim().match(/^([\d.,]+)\s*([a-zA-Z]+)$/);
 
-  if (formattedValue.includes("%") || !valueAndUnit) {
+  if (
+    formattedValue.includes("%") ||
+    !valueAndUnit ||
+    !valueAndUnit[1] ||
+    !valueAndUnit[2]
+  ) {
     return (
       <span className={styles.value}>
         <b>{formattedValue}</b>

@@ -9,18 +9,20 @@ import { Donut } from "@/components/DonutChart/components/Donut";
 import { Wrap } from "@/components/Wrap";
 import { DonutChartLegend } from "@/components/DonutChart/components/DonutChartLegend";
 
+export interface DonutChartSegment {
+  value: number;
+  title: string;
+  color?: CategoricalColors;
+  valueText?: string;
+}
+
 export interface DonutChartProps
   extends Omit<Aria.ProgressBarProps, "children" | "valueLabel">,
     PropsWithStatus {
   /** The size variant of the donut chart. @default "m" */
   size?: "m" | "l";
   /** Divides the fill of the donut chart into segments */
-  segments?: {
-    value: number;
-    title: string;
-    color?: CategoricalColors;
-    valueText?: string;
-  }[];
+  segments?: DonutChartSegment[];
   /** An optional text to be displayed instead of the formatted value */
   valueText?: string;
   /**
