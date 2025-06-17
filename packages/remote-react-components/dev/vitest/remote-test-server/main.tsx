@@ -11,6 +11,8 @@ if (!container) {
 const basePath = "../../../src/";
 const modules = import.meta.glob("../../../src/**/*.browser.test.remote.tsx");
 
+await Promise.all(Object.values(modules).map((module) => module()));
+
 const root = createRoot(container);
 
 const url = new URL(window.location.href);

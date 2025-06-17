@@ -13,5 +13,5 @@ test("DateRangePicker with value is rendered", async () => {
   await expect.element(element).toBeInTheDocument();
 
   const content = element.element().textContent;
-  expect(["1.1.2025–2.1.2025", "1/1/2025–1/2/2025"]).toContain(content);
+  expect(["1.1.2025–2.1.2025"]).toContain(content);
 });

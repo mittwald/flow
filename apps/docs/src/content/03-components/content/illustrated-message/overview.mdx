@@ -1,25 +1,37 @@
 # Playground
 
+Verwende `<IllustratedMessage />`, um einen IllustratedMessage darzustellen. Sie besteht in der Regel aus `<Icon />`, `<Heading />` und einem `<Text />`. Sie kann durch einen `<Button />` oder einen `<Link />` ergänzt werden.
+
 <LiveCodeEditor />
 
 ---
 
 # Colors
 
-## Negative
+## Danger
+
+Bei Fehlern oder unzulässigem Zugriff hilft die IllustratedMessage Usern dabei zu verstehen, was nicht funktioniert und warum. Zusätzlich kann sie eine mögliche Lösung anbieten. Im Vergleich zu einem [Alert](https://mittwald.github.io/flow/03-components/status/alert) wirkt sie freundlicher und gleicht fehlende Inhalte visuell besser aus.
 
 <LiveCodeEditor example="negative" editorCollapsed />
 
-## Dark
+## Light und Dark
 
-<LiveCodeEditor example="dark" bgColor="light" editorCollapsed />
-
-## Light
+Zusätzlich zu den Standard-Colors, kann die IllustratedMessage in Light und Dark dargestellt werden. Beide Colors sind Alternativen zu den herkömmlichen Farben, falls diese nicht auf farbigen oder dekorativen Hintergründen funktionieren.
 
 <LiveCodeEditor example="light" bgColor="dark" editorCollapsed />
 
+<LiveCodeEditor example="dark" bgColor="light" editorCollapsed />
+
+**Light:** Verwende die Light-Color, bei dunklen Hintergründen mit einem HSL Lightness-Wert von weniger als 50.
+
+**Dark:** Verwende die Dark-Color, bei hellen, farbigen Hintergründen mit einem HSL Lightness-Wert von größer als 50.
+
 ---
 
-# Mit ActionGroup
+#  Kombiniere mit ...
+
+## ActionGroup
+
+Wenn mehr als eine Action benötigt wird, kann die IllustratedMessage auch mit einer [ActionGroup](https://mittwald.github.io/flow/03-components/actions/action-group) kombiniert werden.
 
 <LiveCodeEditor example="actionGroup" />

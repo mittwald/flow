@@ -1,20 +1,24 @@
-import type { ComponentProps, FC, PropsWithChildren } from "react";
+import type { ComponentProps, PropsWithChildren } from "react";
 import React, { useId } from "react";
 import clsx from "clsx";
 import styles from "./NavigationGroup.module.scss";
-import type { PropsContext } from "@/lib/propsContext";
-import { PropsContextProvider } from "@/lib/propsContext";
+import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
 import { Accordion } from "@/components/Accordion";
 import { Content } from "@/components/Content";
+import {
+  flowComponent,
+  type FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
 
 export interface NavigationGroupProps
-  extends PropsWithChildren<ComponentProps<"section">> {
+  extends PropsWithChildren<ComponentProps<"section">>,
+    FlowComponentProps<HTMLElement> {
   collapsable?: boolean;
 }
 
 /** @flr-generate all */
-export const NavigationGroup: FC<NavigationGroupProps> = (props) => {
+export const NavigationGroup = flowComponent("NavigationGroup", (props) => {
   const { children, className, collapsable, ...rest } = props;
 
   const rootClassName = clsx(
@@ -72,6 +76,6 @@ export const NavigationGroup: FC<NavigationGroupProps> = (props) => {
       </TunnelProvider>
     </PropsContextProvider>
   );
-};
+});
 
 export default NavigationGroup;

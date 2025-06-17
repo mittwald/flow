@@ -1,7 +1,4 @@
-import {
-  Version,
-  type HostToRemoteConnection,
-} from "@mittwald/flow-remote-core";
+import { type HostToRemoteConnection } from "@mittwald/flow-remote-core";
 import { useLayoutEffect } from "react";
 
 /** Updates the host pathname in the remote connection. */
@@ -14,9 +11,7 @@ export const useUpdateHostPathnameOnRemote = (
       return;
     }
 
-    const { thread, version } = connection;
-    if (version >= Version.v2) {
-      thread.imports.setPathname(hostPathname);
-    }
+    const { updateHostPathname } = connection;
+    updateHostPathname(hostPathname);
   }, [hostPathname, connection]);
 };

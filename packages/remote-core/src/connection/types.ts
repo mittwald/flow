@@ -26,6 +26,7 @@ export type RemoteToHostConnection = ThreadNestedIframe<
 export interface HostToRemoteConnection {
   version: Version;
   thread: ThreadIframe<RemoteExports, HostExports>;
+  updateHostPathname: (hostPathname?: string) => void;
 }
 
 export enum Version {
