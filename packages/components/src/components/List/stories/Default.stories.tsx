@@ -56,6 +56,7 @@ const meta: Meta<typeof List> = {
             aria-label="Domains"
             onAction={(domain) => console.log(domain.hostname)}
             settingStorageKey="domains"
+            defaultViewMode="tiles"
           >
             <ActionGroup>
               <Button color="secondary" variant="soft" slot="secondary">

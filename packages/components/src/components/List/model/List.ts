@@ -96,7 +96,7 @@ export class List<T> {
     });
 
     const [viewMode, setViewMode] = useState(
-      defaultViewMode ?? this.getStoredViewModeDefaultSetting() ?? "list",
+      this.getStoredViewModeDefaultSetting() ?? defaultViewMode ?? "list",
     );
     this.viewMode = viewMode;
 
