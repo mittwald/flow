@@ -32,15 +32,21 @@ export class Sorting<T> {
     this.property = shape.property;
     this.name = shape.name;
     this.direction = shape.direction ?? "asc";
+    const storedDefaultEnabled = this.getStoredDefaultEnabled();
     this.defaultEnabled =
-      this.getStoredDefaultEnabled() ?? shape.defaultEnabled ?? false;
+      shape.defaultEnabled === "hidden"
+        ? "hidden"
+        : (storedDefaultEnabled ?? shape.defaultEnabled ?? false);
     this.customSortingFn = shape.customSortingFn;
   }
 
   private getStoredDefaultEnabled() {
     const storedSorting = this.list.getStoredSortingDefaultSetting();
+    if (!storedSorting) {
+      return undefined;
+    }
     return (
-      storedSorting?.property === this.property &&
+      storedSorting.property === this.property &&
       storedSorting.direction === this.direction
     );
   }
