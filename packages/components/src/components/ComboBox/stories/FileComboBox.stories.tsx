@@ -38,7 +38,7 @@ const checkIsPath = (path: string) => path.endsWith("/");
 const checkIsFile = (path: string) => !checkIsPath(path);
 
 const meta: Meta<typeof ComboBox> = {
-  title: "Form Controls/ComboBox/Examples/FilePicker",
+  title: "Form Controls/ComboBox/Examples/FileComboBox",
   component: ComboBox,
   render: (props) => {
     const [value, setValue] = useState("/");
@@ -95,11 +95,16 @@ const meta: Meta<typeof ComboBox> = {
         >
           <Label>Select file</Label>
           {checkIsPath(selectedPath) &&
-            loadedPaths.map((o) => (
-              <Option isDisabled={isLoading} value={o} key={o}>
-                {o}
-              </Option>
-            ))}
+            loadedPaths.map((o) => {
+              const trimmedPath = o.endsWith("/") ? o.slice(0, -1) : o;
+              const lastPathSegment = trimmedPath.split("/").pop();
+
+              return (
+                <Option textValue={o} isDisabled={isLoading} value={o} key={o}>
+                  {lastPathSegment}
+                </Option>
+              );
+            })}
         </ComboBox>
         <Text>
           Selected value: <InlineCode>{value}</InlineCode>

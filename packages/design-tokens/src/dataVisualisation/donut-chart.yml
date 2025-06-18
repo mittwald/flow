@@ -1,0 +1,31 @@
+donut-chart:
+  border-color:
+    value: "{neutral-outline-border-color}"
+  background-color:
+    value: "{neutral.color.300}"
+  spacing-y:
+    value: "{size-rem.s}"
+  spacing-x:
+    value: "{size-rem.m}"
+
+  padding:
+    m:
+      value: "{size-px.l}"
+    l:
+      value: "{size-px.xl}"
+
+  # Info
+  info-fill-background-color:
+    value: "{info-solid-background-color.default}"
+
+  # Success
+  success-fill-background-color:
+    value: "{success-solid-background-color.default}"
+
+  # Warning
+  warning-fill-background-color:
+    value: "{warning-solid-background-color.default}"
+
+  # Danger
+  danger-fill-background-color:
+    value: "{danger-solid-background-color.default}"

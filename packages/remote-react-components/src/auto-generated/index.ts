@@ -39,6 +39,7 @@ export * from "./DatePicker";
 export * from "./DateRangePicker";
 export * from "./DialogTrigger";
 export * from "./Div";
+export * from "./DonutChart";
 export * from "./FieldDescription";
 export * from "./FieldError";
 export * from "./FileCard";
