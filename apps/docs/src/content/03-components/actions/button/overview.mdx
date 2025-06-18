@@ -1,11 +1,27 @@
-# Playground
+# Grundlagen 
 
-Verwende `<Button />`, um einen Button darzustellen.
+Der Button wird verwendet, um Benutzerinteraktionen auszulösen. Sie kennzeichnet klar erkennbare Handlungsaufforderungen und leitet User durch Prozesse wie das Speichern, Löschen oder Öffnen von zusätzlichen Modals. Buttons sollten eindeutig, sichtbar und im Kontext ihrer Funktion sinnvoll eingesetzt werden.
 
-Benutze das `onPress` Property um die Interaktion mit Maus, Keyboard oder Touch
-zu ermöglichen.
+Benutze das `onPress` Property um die Interaktion mit Maus, Keyboard oder Touch zu ermöglichen.
 
 <LiveCodeEditor />
+
+## Best practices
+
+Achte bei der Verwendung eines Buttons darauf, dass...
+* die Beschriftung oder das Icon klar und verständlich ist.
+* der Text Kurz gehalten ist um mehrzeilig zu vermeiden und so die Funktion auf kleinen Bildschirmgrößen zu gewährleisten.
+* der visuelle Stil dem Zweck entspricht (z. B. primäre Aktionen deutlich hervorheben)
+* er für den User leicht zu finden ist. 
+* der Klick des Buttons dem User Feedback gibt (z. B. Bei asynchrone Aktionen die Action verwendet wird).
+
+## Verwendung
+
+Verwende einen Button, um...
+* eine primäre oder sekundäre Aktion auszulösen.
+* ein Formular abzusenden oder Änderungen zu bestätigen.
+* modale Dialoge zu öffnen, etwa zum Bearbeiten oder Anlegen von Inhalten.
+* eine Navigation oder einen Prozessschritt zu initiieren.
 
 ---
 
@@ -16,26 +32,19 @@ unterschieden.
 
 <LiveCodeEditor example="variants" editorCollapsed />
 
-**Solid:** Die Solid-Variant zeichnet sich durch ein flächiges und auffälliges
-Aussehen aus. Aus diesem Grund verbergen sich in der Regel die Hauptaktionen
-hinter einem Solid-Button.
+**Solid:** Für primäre Aktionen – auffällig, flächig und meist in Primary, Accent oder Danger. Pro Ansicht sollte es nur eine primäre Aktion geben.
 
-**Soft:** Die Soft-Variant verleiht dem Button einen softeren Touch und eignet
-sich daher gut für sekundäre Aktionen.
+**Soft:** Für sekundäre Aktionen – dezenter und mit weicherer Optik, z. B. für „Zurück“, „Schließen“ oder „Bearbeiten“.
 
-**Outline:** Die Outline-Variant wirkt durch den Verzicht auf eine
-Hintergrundfarbe dezent. Durch den Rahmen bleibt sie weiterhin präsent, ohne
-dominant zu erscheinen.
+**Outline:** Für sekundäre Aktionen – wirkt durch Transparenz zurückhaltend, bleibt durch die Outline als Button erkennbar. Wird seltener verwendet.
 
-**Plain:** Die Plain-Variant ist weniger auffällig als die anderen Variants und
-wird für weniger wichtige oder versteckte Aktionen verwendet.
+**Plain:** Für weniger wichtige Aktionen – minimal und unauffällig, geeignet für versteckte Funktionen.
 
 ---
 
 # Color
 
-Je nach Bedarf stehen vier Button-Color zur Auswahl: **Primary, Secondary,
-Accent** und **Danger**.
+Je nach Bedarf stehen die Farben **Primary, Secondary, Accent** und **Danger** zur Verfügung.
 
 <LiveCodeEditor example="colors" editorCollapsed />
 
@@ -79,36 +88,9 @@ Standardgröße und wird für die meisten Buttons verwendet.
 
 <LiveCodeEditor example="sizes" editorCollapsed />
 
----
-
-# Kombiniere mit ...
-
-Im Content-Bereich des Buttons kann entweder **Text**, ein **Icon** oder **Text
-mit einem Icon am Ende** beinhalten.
-
-## Icon
-
-Verwende `<Icon />` in einem `<Button />`, um ein Icon statt Text im Button
-anzuzeigen.
-
-<LiveCodeEditor example="icon" editorCollapsed />
-
-## Text und Icon
-
-Verwende `<Text />` und `<Icon />` zusammen, um sowohl Text als auch Icon im
-Button anzuzeigen. Achte darauf, dass das Icon dem User einen Mehrwert bietet
-und nicht nur einen dekorativen Zweck erfüllt. Zum Beispiel indiziert ein
-Chevron-Icon, dass der Button ein Dropdown öffnet. Ein Close-Icon zeigt an, dass
-der Button als Filterelement wieder entfernt werden kann.
-
-<LiveCodeEditor example="iconText" editorCollapsed />
-
-## Align
-
-Benutze die [Align](/03-components/structure/align) Komponente, um deinen Button
-neben Input Feldern zu platzieren.
-
-<LiveCodeEditor example="align" editorCollapsed />
+<Dont example="sizes-dont">
+  Verwende nie Buttons in den Sizes Medium und Small direkt nebeneinander.
+</Dont>
 
 ---
 
@@ -126,3 +108,35 @@ kein Ereignis auslösen soll.
 Nutzer signalisieren, dass im Hintergrund etwas passiert, wenn er auf einen
 Button geklickt hat. Verwende den Button zusammen mit der Komponente
 [Action](/03-components/actions/action), um die States zu steuern.
+
+---
+
+# Kombiniere mit ...
+
+Im Content-Bereich des Buttons kann entweder **Text**, ein **Icon** oder **Text
+mit einem Icon am Ende** beinhalten.
+
+## Icon
+
+Achte bei der Auswahl des Icon besonders darauf, dass die [Icon-Component](https://mittwald.github.io/flow/03-components/content/icon) verwendet und ein verständliches Icon gewählt wird.
+
+<LiveCodeEditor example="icon" editorCollapsed />
+
+## Text und Icon
+
+Bei einer Kombination von `<Text />` und `<Icon />` muss das Icon dem User einen Mehrwert bieten. Es darf keinem rein dekorativen Zweck dienen und sollte dem User stattdessen helfen, die Funktion des Buttons zu verstehen. Zum Beispiel indiziert ein Chevron-Icon, dass der Button ein Dropdown öffnet. 
+
+<LiveCodeEditor example="iconText" editorCollapsed />
+
+## ActionGroup
+
+Die ActionGroup sortiert die Buttons in ihrer Wichtigkeit.
+
+[Example]
+
+## Align
+
+Benutze die [Align](/03-components/structure/align) Komponente, um deinen Button
+neben Input Feldern zu platzieren.
+
+<LiveCodeEditor example="align" editorCollapsed />
