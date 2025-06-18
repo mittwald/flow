@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.276](https://github.com/mittwald/flow/compare/0.2.0-alpha.275...0.2.0-alpha.276) (2025-06-18)
+
+### Bug Fixes
+
+* **Align:** fix input to button alignment ([#1575](https://github.com/mittwald/flow/issues/1575)) ([c6766b1](https://github.com/mittwald/flow/commit/c6766b12924b530dfbb1d827fa66063d5b46a1fa))
+
 # [0.2.0-alpha.275](https://github.com/mittwald/flow/compare/0.2.0-alpha.274...0.2.0-alpha.275) (2025-06-17)
 
 ### Features
