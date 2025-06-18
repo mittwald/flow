@@ -55,3 +55,21 @@
     }
   }
 }
+
+@media (max-width: 550px) {
+  .align:has(:global(.flow--form-field)):has(.button) {
+    flex-direction: column;
+    row-gap: var(--section--spacing);
+    align-items: stretch;
+
+    .button {
+      width: 100%;
+    }
+
+    &:has(label) {
+      .button {
+        margin-top: 0;
+      }
+    }
+  }
+}

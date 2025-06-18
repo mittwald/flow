@@ -11,8 +11,15 @@ import type {
   SortDirection,
   SortingFn,
 } from "@tanstack/react-table";
+import z from "zod";
 
 export class Sorting<T> {
+  public static readonly storageSchema = z
+    .object({
+      direction: z.enum(["asc", "desc"]),
+      property: z.string().or(z.number()),
+    })
+    .optional();
   public readonly list: List<T>;
   public readonly property: PropertyName<T>;
   public readonly name?: string;
@@ -25,8 +32,23 @@ export class Sorting<T> {
     this.property = shape.property;
     this.name = shape.name;
     this.direction = shape.direction ?? "asc";
-    this.defaultEnabled = shape.defaultEnabled ?? false;
+    const storedDefaultEnabled = this.getStoredDefaultEnabled();
+    this.defaultEnabled =
+      shape.defaultEnabled === "hidden"
+        ? "hidden"
+        : (storedDefaultEnabled ?? shape.defaultEnabled ?? false);
     this.customSortingFn = shape.customSortingFn;
+  }
+
+  private getStoredDefaultEnabled() {
+    const storedSorting = this.list.getStoredSortingDefaultSetting();
+    if (!storedSorting) {
+      return undefined;
+    }
+    return (
+      storedSorting.property === this.property &&
+      storedSorting.direction === this.direction
+    );
   }
 
   public updateTableColumnDef(def: ColumnDef<T>): void {
@@ -56,6 +78,7 @@ export class Sorting<T> {
     this.list.reactTable
       .getTableColumn(this.property)
       .toggleSorting(this.direction === "desc", false);
+    this.list.storeSortingSettings(this);
   }
 
   public clear(): void {

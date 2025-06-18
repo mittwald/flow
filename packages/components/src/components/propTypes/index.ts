@@ -74,6 +74,8 @@ import type { ColumnLayoutProps } from "@/components/ColumnLayout";
 import type { MenuTriggerProps } from "@/components/OverlayTrigger";
 import type { ProgressBarProps } from "@/components/ProgressBar";
 import type { FileDropZoneProps } from "@/components/FileDropZone";
+import type { NavigationProps } from "@/components/Navigation";
+import type { NavigationGroupProps } from "@/components/Navigation/components/NavigationGroup";
 
 export * from "./types";
 
@@ -127,6 +129,8 @@ export interface FlowComponentPropsTypes {
   MessageThread: MessageThreadProps;
   Modal: ModalProps;
   ModalTrigger: ModalTriggerProps;
+  Navigation: NavigationProps;
+  NavigationGroup: NavigationGroupProps;
   NumberField: NumberFieldProps;
   Option: OptionProps;
   Popover: PopoverProps;
@@ -204,6 +208,8 @@ const propsContextSupportingComponentsMap: Record<
   MessageThread: true,
   Modal: true,
   ModalTrigger: true,
+  Navigation: true,
+  NavigationGroup: true,
   NumberField: true,
   Radio: true,
   Option: true,

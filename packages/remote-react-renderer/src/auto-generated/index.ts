@@ -40,6 +40,7 @@ import { DatePicker as DatePicker } from "@mittwald/flow-react-components";
 import { DateRangePicker as DateRangePicker } from "@mittwald/flow-react-components";
 import { DialogTrigger as DialogTrigger } from "@mittwald/flow-react-components";
 import { Div as Div } from "@mittwald/flow-react-components";
+import { DonutChart as DonutChart } from "@mittwald/flow-react-components";
 import { FieldDescription as FieldDescription } from "@mittwald/flow-react-components";
 import { FieldError as FieldError } from "@mittwald/flow-react-components";
 import { FileCard as FileCard } from "@mittwald/flow-react-components";
@@ -215,6 +216,10 @@ export const flowComponents = {
     DialogTrigger,
   ),
   "flr-div": createFlowRemoteComponentRenderer("Div", Div),
+  "flr-donut-chart": createFlowRemoteComponentRenderer(
+    "DonutChart",
+    DonutChart,
+  ),
   "flr-field-description": createFlowRemoteComponentRenderer(
     "FieldDescription",
     FieldDescription,

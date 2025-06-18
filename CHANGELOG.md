@@ -3,6 +3,95 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.278](https://github.com/mittwald/flow/compare/0.2.0-alpha.277...0.2.0-alpha.278) (2025-06-18)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.277](https://github.com/mittwald/flow/compare/0.2.0-alpha.276...0.2.0-alpha.277) (2025-06-18)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.276](https://github.com/mittwald/flow/compare/0.2.0-alpha.275...0.2.0-alpha.276) (2025-06-18)
+
+### Bug Fixes
+
+* **Align:** fix input to button alignment ([#1575](https://github.com/mittwald/flow/issues/1575)) ([c6766b1](https://github.com/mittwald/flow/commit/c6766b12924b530dfbb1d827fa66063d5b46a1fa))
+
+# [0.2.0-alpha.275](https://github.com/mittwald/flow/compare/0.2.0-alpha.274...0.2.0-alpha.275) (2025-06-17)
+
+### Features
+
+* **DonutChart:** add donut chart component ([#1599](https://github.com/mittwald/flow/issues/1599)) ([85e9e88](https://github.com/mittwald/flow/commit/85e9e8885d0a68ad072cbe431e7f4e904ea315c6))
+
+# [0.2.0-alpha.274](https://github.com/mittwald/flow/compare/0.2.0-alpha.273...0.2.0-alpha.274) (2025-06-17)
+
+### Bug Fixes
+
+* **List:** fix default sorting ([#1623](https://github.com/mittwald/flow/issues/1623)) ([d447a88](https://github.com/mittwald/flow/commit/d447a88b41d9ced070b94256676d78d07a90b9de))
+
+# [0.2.0-alpha.273](https://github.com/mittwald/flow/compare/0.2.0-alpha.272...0.2.0-alpha.273) (2025-06-17)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.272](https://github.com/mittwald/flow/compare/0.2.0-alpha.271...0.2.0-alpha.272) (2025-06-17)
+
+### Features
+
+* **List:** Fix stored view mode not used if default view mode enabled ([a9462d0](https://github.com/mittwald/flow/commit/a9462d05131eeeac00bb5b2f1d500dc415c734a9))
+* **List:** Store sorting ([5211ef7](https://github.com/mittwald/flow/commit/5211ef7ecd028d32d70a2cbb998958c8dbb601e9))
+
+# [0.2.0-alpha.271](https://github.com/mittwald/flow/compare/0.2.0-alpha.270...0.2.0-alpha.271) (2025-06-17)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.270](https://github.com/mittwald/flow/compare/0.2.0-alpha.269...0.2.0-alpha.270) (2025-06-17)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.269](https://github.com/mittwald/flow/compare/0.2.0-alpha.268...0.2.0-alpha.269) (2025-06-17)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.268](https://github.com/mittwald/flow/compare/0.2.0-alpha.267...0.2.0-alpha.268) (2025-06-17)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.267](https://github.com/mittwald/flow/compare/0.2.0-alpha.266...0.2.0-alpha.267) (2025-06-16)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.266](https://github.com/mittwald/flow/compare/0.2.0-alpha.265...0.2.0-alpha.266) (2025-06-16)
+
+### Bug Fixes
+
+* **navigation:** make navigation flow comp with new tunnel provider ([#1616](https://github.com/mittwald/flow/issues/1616)) ([6bd0aac](https://github.com/mittwald/flow/commit/6bd0aacc51ccb1da3a2ac01a078b197e5e55319b))
+
+# [0.2.0-alpha.265](https://github.com/mittwald/flow/compare/0.2.0-alpha.264...0.2.0-alpha.265) (2025-06-16)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.264](https://github.com/mittwald/flow/compare/0.2.0-alpha.263...0.2.0-alpha.264) (2025-06-16)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.263](https://github.com/mittwald/flow/compare/0.2.0-alpha.262...0.2.0-alpha.263) (2025-06-16)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.262](https://github.com/mittwald/flow/compare/0.2.0-alpha.261...0.2.0-alpha.262) (2025-06-13)
+
+### Bug Fixes
+
+* **Remote:** fix navigation may get lost ([11d7c57](https://github.com/mittwald/flow/commit/11d7c5788ab87c4cf4781f29e650b72359dc33f7))
+
+# [0.2.0-alpha.261](https://github.com/mittwald/flow/compare/0.2.0-alpha.260...0.2.0-alpha.261) (2025-06-13)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.260](https://github.com/mittwald/flow/compare/0.2.0-alpha.259...0.2.0-alpha.260) (2025-06-13)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
 # [0.2.0-alpha.259](https://github.com/mittwald/flow/compare/0.2.0-alpha.258...0.2.0-alpha.259) (2025-06-13)
 
 **Note:** Version bump only for package @mittwald/flow-project

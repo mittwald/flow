@@ -16,6 +16,7 @@ import { Button } from "@/components/Button";
 import { ActionGroup } from "@/components/ActionGroup";
 import { Content } from "@/components/Content";
 import { Flex } from "@/components/Flex";
+import { SettingsProvider } from "@/components/SettingsProvider";
 
 const loadDomains: AsyncDataLoader<Domain> = async (opts) => {
   const response = await getDomains({
@@ -47,89 +48,93 @@ const meta: Meta<typeof List> = {
     const availableTypes = usePromise(getTypes, []);
 
     return (
-      <Section>
-        <Heading>Domains</Heading>
-        <DomainList.List
-          batchSize={5}
-          aria-label="Domains"
-          onAction={(domain) => console.log(domain.hostname)}
-        >
-          <ActionGroup>
-            <Button color="secondary" variant="soft" slot="secondary">
-              Herunterladen
-            </Button>
-            <Button color="accent">Anlegen</Button>
-          </ActionGroup>
-          <DomainList.LoaderAsync manualPagination manualSorting={false}>
-            {loadDomains}
-          </DomainList.LoaderAsync>
-          <DomainList.Filter
-            values={availableTypes}
-            property="type"
-            mode="all"
-            name="Typ"
-            defaultSelected={["Domain"]}
-          />
+      <SettingsProvider type="localStorage" storageKey="listStory">
+        <Section>
+          <Heading>Domains</Heading>
+          <DomainList.List
+            batchSize={5}
+            aria-label="Domains"
+            onAction={(domain) => console.log(domain.hostname)}
+            settingStorageKey="domains"
+            defaultViewMode="tiles"
+          >
+            <ActionGroup>
+              <Button color="secondary" variant="soft" slot="secondary">
+                Herunterladen
+              </Button>
+              <Button color="accent">Anlegen</Button>
+            </ActionGroup>
+            <DomainList.LoaderAsync manualPagination manualSorting={false}>
+              {loadDomains}
+            </DomainList.LoaderAsync>
+            <DomainList.Filter
+              values={availableTypes}
+              property="type"
+              mode="all"
+              name="Typ"
+              defaultSelected={["Domain"]}
+            />
 
-          <DomainList.Search autoFocus autoSubmit />
-          <DomainList.Sorting property="domain" name="A-Z" />
-          <DomainList.Sorting property="domain" name="Z-A" direction="desc" />
-          <DomainList.Sorting property="type" name="Typ" />
-          <DomainList.Sorting property="tld" name="TLD" />
+            <DomainList.Search autoFocus autoSubmit />
+            <DomainList.Sorting property="domain" name="A-Z" defaultEnabled />
+            <DomainList.Sorting property="domain" name="Z-A" direction="desc" />
+            <DomainList.Sorting property="type" name="Typ" />
+            <DomainList.Sorting property="tld" name="TLD" />
 
-          <DomainList.Table>
-            <DomainList.TableHeader>
-              <DomainList.TableColumn>Name</DomainList.TableColumn>
-              <DomainList.TableColumn>Type</DomainList.TableColumn>
-              <DomainList.TableColumn>TLD</DomainList.TableColumn>
-              <DomainList.TableColumn>Hostname</DomainList.TableColumn>
-            </DomainList.TableHeader>
+            <DomainList.Table>
+              <DomainList.TableHeader>
+                <DomainList.TableColumn>Name</DomainList.TableColumn>
+                <DomainList.TableColumn>Type</DomainList.TableColumn>
+                <DomainList.TableColumn>TLD</DomainList.TableColumn>
+                <DomainList.TableColumn>Hostname</DomainList.TableColumn>
+              </DomainList.TableHeader>
 
-            <DomainList.TableBody>
-              <DomainList.TableRow>
-                <DomainList.TableCell>
-                  {(domain) => domain.domain}
-                </DomainList.TableCell>
-                <DomainList.TableCell>
-                  {(domain) => domain.type}
-                </DomainList.TableCell>
-                <DomainList.TableCell>
-                  {(domain) => domain.tld}
-                </DomainList.TableCell>
-                <DomainList.TableCell>
-                  {(domain) => domain.hostname}
-                </DomainList.TableCell>
-              </DomainList.TableRow>
-            </DomainList.TableBody>
-          </DomainList.Table>
+              <DomainList.TableBody>
+                <DomainList.TableRow>
+                  <DomainList.TableCell>
+                    {(domain) => domain.domain}
+                  </DomainList.TableCell>
+                  <DomainList.TableCell>
+                    {(domain) => domain.type}
+                  </DomainList.TableCell>
+                  <DomainList.TableCell>
+                    {(domain) => domain.tld}
+                  </DomainList.TableCell>
+                  <DomainList.TableCell>
+                    {(domain) => domain.hostname}
+                  </DomainList.TableCell>
+                </DomainList.TableRow>
+              </DomainList.TableBody>
+            </DomainList.Table>
 
-          <DomainList.Item showTiles textValue={(domain) => domain.hostname}>
-            {(domain) => (
-              <ListItemView>
-                <Avatar color={domain.type === "Domain" ? "blue" : "teal"}>
-                  {domain.type === "Domain" ? (
-                    <IconDomain />
-                  ) : (
-                    <IconSubdomain />
-                  )}
-                </Avatar>
-                <Heading>
-                  {domain.hostname}
-                  {!domain.verified && (
-                    <AlertBadge status="warning">Not verified</AlertBadge>
-                  )}
-                </Heading>
-                <Text>{domain.type}</Text>
+            <DomainList.Item showTiles textValue={(domain) => domain.hostname}>
+              {(domain) => (
+                <ListItemView>
+                  <Avatar color={domain.type === "Domain" ? "blue" : "teal"}>
+                    {domain.type === "Domain" ? (
+                      <IconDomain />
+                    ) : (
+                      <IconSubdomain />
+                    )}
+                  </Avatar>
+                  <Heading>
+                    {domain.hostname}
+                    {!domain.verified && (
+                      <AlertBadge status="warning">Not verified</AlertBadge>
+                    )}
+                  </Heading>
+                  <Text>{domain.type}</Text>
 
-                <ContextMenu>
-                  <MenuItem>Show details</MenuItem>
-                  <MenuItem>Delete</MenuItem>
-                </ContextMenu>
-              </ListItemView>
-            )}
-          </DomainList.Item>
-        </DomainList.List>
-      </Section>
+                  <ContextMenu>
+                    <MenuItem>Show details</MenuItem>
+                    <MenuItem>Delete</MenuItem>
+                  </ContextMenu>
+                </ListItemView>
+              )}
+            </DomainList.Item>
+          </DomainList.List>
+        </Section>
+      </SettingsProvider>
     );
   },
 };
