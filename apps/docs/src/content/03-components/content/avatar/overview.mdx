@@ -1,48 +1,51 @@
-# Mit Initialen
+# Playground
 
-Die Initialen werden automatisch aus dem Text generiert, welcher der
-`<Initials />` Komponente mitgegeben wird.
+Der `<Avatar />` kann mit drei verschiedenen Components befüllt werden: `<Image />`, `<Initials />` oder `<Icon />`. 
 
-<LiveCodeEditor />
-
----
-
-# Mit Bild
-
-Benutze ein `<Image />` im `<Avatar />` um ein Profilbild anzuzeigen.
+Im folgenden Code-Beispiel wird ein Avatar mit einem [Image](/03-components/content/image) kombiniert.
 
 <LiveCodeEditor example="image" editorCollapsed />
 
 ---
 
-# Mit Icon
+# Initials
 
-Ein `<Icon />` kann innerhalb eines `<Avatar />` verwendet werden.
+Die Initialen werden automatisch aus dem Text generiert, der innerhalb von `<Initials />` übergeben wird.
+
+<LiveCodeEditor />
+
+---
+
+# Icon
+
+Ein Avatar lässt sich mit einem beliebigen [Icon](/03-components/content/icon) kombinieren.
 
 <LiveCodeEditor example="icon" editorCollapsed />
 
 ---
 
-# Größen
+# Sizes
+
+Der Avatar unterstützt die Sizes **xs, s, m** oder **l**.
 
 <LiveCodeEditor example="sizes" editorCollapsed />
 
 ---
 
-# Farbvarianten
+# Color
 
-Die Farbe hängt von den jeweiligen Children der Komponente ab, kann aber über
-das Property `color` überschrieben werden um eine bestimmte Farbvariante zu
-erhalten. Sie dient dazu für Abwechslung in den angezeigten Avataren zu sorgen.
+Die Color bei der Kombiniation mit [Icon](/03-components/content/icon) oder Initialen richtet sich jeweils nach dem übergebenen Child der Componente. Für eine gezielte Wahl der Color kann das Property `color` verwendet werden.
+
+Folgende Colors stehen zur Verfügung: **Blue, Violet, Teal, Lilac** und **Green**.
 
 <LiveCodeEditor example="colors" editorCollapsed />
 
+---
+
 # Status
 
-Wird im Avatar das `status` Property gesetzt erhält der Avatar automatisch das
-passende Icon und die passende Farbe. Das Property darf nur verwendet werden,
-wenn der Status durch ein nahe gelegenes Element (z.B. Text, Label oder Legende)
-deutlich gemacht wird.
+Wird im Avatar das Property `status` gesetzt erhält der Avatar automatisch das
+passende Icon und die passende Color. Dieses Property darf nur verwendet werden, wenn der Status zusätzlich durch ein benachbartes Element (z. B. [Text](/03-components/content/text), [Label](/03-components/content/label) oder [Legende](/03-components/content/legend)) eindeutig kommuniziert wird.
 
 <LiveCodeEditor example="status" editorCollapsed />
 <LiveCodeEditor example="status-example" editorCollapsed />
@@ -53,7 +56,7 @@ deutlich gemacht wird.
 
 ## Align
 
-Benutze die [Align](/03-components/structure/align) Komponente, um Text neben
-deinem Avatar zu platzieren.
+Benutze die [Align](/03-components/structure/align)-Componente, um Text neben
+dem Avatar zu platzieren.
 
 <LiveCodeEditor example="align" editorCollapsed />
