@@ -1,22 +1,34 @@
 # Playground
 
+Verwende `<TextArea />`, um eine TextArea darzustellen. Platziere innerhalb davon ein `<Label />`, um die Eingabeanforderung kurz in einem [Label](/03-components/content/label) zu beschreiben. Zusätzlich Hinweise, etwa zur Formatierung, können über die `<FieldDescription />` ergänzt werden.
+
 <LiveCodeEditor />
 
 ---
 
 # Disabled
 
+Ist die TextArea **disabled**, ist keine Interaktion möglich. Sobald die Ursache behoben ist, kann sie wieder wie gewohnt verwendet werden.
+
 <LiveCodeEditor example="disabled" editorCollapsed />
 
 ---
 
-# Required
+# Validierung
+
+Um die TextArea zu validieren, stehen folgende Properties zur Verfügung:
+
+- `isRequired` für Pflichtfelder.
+- `validate` für eigene Validierungen.
+- HTML Input Properties wie `type=”email”`, `minLength`.
+
+Bei ungültiger Eingabe wird die TextArea invalidiert. Über `<FieldError />` kann eine entsprechende Fehlermeldung ausgegeben werden.
+
+## Required
 
 <LiveCodeEditor example="required" editorCollapsed />
 
----
-
-# Invalid
+## Invalid
 
 <LiveCodeEditor example="invalid" editorCollapsed />
 
@@ -24,9 +36,7 @@
 
 # Character Count
 
-Über das `showCharacterCount` Property wird eine FieldDescription hinzugefügt,
-die aktuelle Anzahl der Zeichen und, falls angegeben, die maximale Zeichenanzahl
-anzeigt.
+Mit der Property `showCharacterCount` wird automatisch eine `<FieldDescription />` ergänzt, die die aktuelle Zeichenanzahl und – sofern angegeben – die maximale Zeichenanzahl anzeigt.
 
 <LiveCodeEditor example="characterCount" editorCollapsed />
 
@@ -34,8 +44,7 @@ anzeigt.
 
 # Resizeable
 
-Gib der TextArea das property `autoResizeMaxRows` mit, um eine maximale Größe
-festzulegen, bis zu der die TextArea mit ihrem Content mitwächst.
+Verwende die Property `autoResizeMaxRows`, um eine maximale Höhe festzulegen, bis zu der sich die TextArea automatisch an ihren Inhalt anpasst.
 
 <LiveCodeEditor example="resizeable" editorCollapsed />
 
@@ -45,16 +54,13 @@ festzulegen, bis zu der die TextArea mit ihrem Content mitwächst.
 
 ## Align
 
-Benutze die [Align](/03-components/structure/align) Komponente, um einem Button
-neben deiner TextArea zu platzieren.
+Benutze die [Align](/03-components/structure/align)-Component, um andere Component wie einen [Button](/03-components/actions/button) neben der TextArea auszurichten.
 
 <LiveCodeEditor example="align" editorCollapsed />
 
 ## ContextualHelp
 
-Benutze die [ContextualHelp](/03-components/overlays/contextual-help)
-Komponente, wenn du weitere Informationen bereitstellen möchtest, und diese zu
-lang für die FieldDescription sind.
+Verwende [ContextualHelp](/03-components/overlays/contextual-help), um zusätzliche Informationen bereitzustellen, die über den Umfang der FieldDescription hinausgehen.
 
 <LiveCodeEditor example="contextualHelp" editorCollapsed />
 
