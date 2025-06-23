@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.290](https://github.com/mittwald/flow/compare/0.2.0-alpha.289...0.2.0-alpha.290) (2025-06-23)
+
+### Features
+
+* **PasswordCreationField:** add password rule translations ([#1645](https://github.com/mittwald/flow/issues/1645)) ([3e02633](https://github.com/mittwald/flow/commit/3e0263346021fa17f241ca20ea5d4ceb299fffb3))
+
 # [0.2.0-alpha.289](https://github.com/mittwald/flow/compare/0.2.0-alpha.288...0.2.0-alpha.289) (2025-06-23)
 
 ### Bug Fixes
