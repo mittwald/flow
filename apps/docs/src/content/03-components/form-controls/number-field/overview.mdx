@@ -1,38 +1,51 @@
 # Playground
 
+Verwende `<NumberField />`, um ein NumberField darzustellen. Platziere innerhalb davon ein `<Label />`, um die Eingabeanforderung kurz in einem [Label](/03-components/content/label) zu beschreiben.
+
 <LiveCodeEditor />
 
 ---
 
-# Disabled
+# Einheit
 
-<LiveCodeEditor example="disabled" editorCollapsed />
-
----
-
-# Required
-
-<LiveCodeEditor example="required" editorCollapsed />
-
----
-
-# Invalid
-
-<LiveCodeEditor example="invalid" editorCollapsed />
-
----
-
-# Mit Einheit
-
-Über das Property formatOptions können Einheiten für das NumberField gewählt
-werden. (s.
-[Intl.NumberFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat))
+Über das Property `formatOptions` lassen sich Einheiten für das NumberField definieren (s.
+[Intl.NumberFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat)).
 
 <LiveCodeEditor example="unit" editorCollapsed />
 
 ---
 
+# Disabled
+
+Ist das NumberField deaktiviert, ist keine Interaktion möglich. Sobald die Ursache behoben ist, kann es wieder wie gewohnt verwendet werden.
+
+<LiveCodeEditor example="disabled" editorCollapsed />
+
+---
+
+# Validierung
+
+Um das NumberField zu validieren, stehen folgende Properties zur Verfügung:
+
+- `isRequired` für Pflichtfelder.
+- `validate` für eigene Validierungen.
+
+Bei ungültiger Eingabe wird das NumberField invalidiert. Über `<FieldError />` kann eine entsprechende Fehlermeldung ausgegeben werden.
+
+## Required
+
+<LiveCodeEditor example="required" editorCollapsed />
+
+## Invalid
+
+<LiveCodeEditor example="invalid" editorCollapsed />
+
+
+---
+
 # Mit FieldDescription
+
+Unterhalb des NumberFields kann eine hilfreiche `<FieldDescription />` eingebaut werden.
 
 <LiveCodeEditor example="fieldDescription" editorCollapsed />
 
@@ -42,16 +55,13 @@ werden. (s.
 
 ## Align
 
-Benutze die [Align](/03-components/structure/align) Komponente, um einem Button
-neben deinem NumberField zu platzieren.
+Benutze die [Align](/03-components/structure/align)-Component, um andere Component wie einen [Button](/03-components/actions/button) neben dem NumberField auszurichten.
 
 <LiveCodeEditor example="align" editorCollapsed />
 
 ## ContextualHelp
 
-Benutze die [ContextualHelp](/03-components/overlays/contextual-help)
-Komponente, wenn du weitere Informationen bereitstellen möchtest, und diese zu
-lang für die FieldDescription sind.
+Verwende [ContextualHelp](/03-components/overlays/contextual-help), um zusätzliche Informationen bereitzustellen, die über den Umfang der FieldDescription hinausgehen.
 
 <LiveCodeEditor example="contextualHelp" editorCollapsed />
 
