@@ -8,7 +8,7 @@ const generateTranslationString = (
     return `validation.${rule.translationKey}`;
   }
   const translateString = `validation.${rule.ruleType ?? "general"}`;
-  let finalTranslationString: string;
+  let finalTranslationString = "";
 
   if ("min" in rule || "max" in rule) {
     const breakingBoundaryProperty = rule.failingBoundary
@@ -32,7 +32,7 @@ const generateTranslationString = (
 };
 
 export const generateValidationTranslation = (
-  r: Partial<RuleValidationResult> & { translationKey?: string },
+  r: Partial<RuleValidationResult>,
   shotVersion = false,
 ): [string, Record<string, string | number | boolean> | undefined] => {
   const translationKey = generateTranslationString(r, shotVersion);
