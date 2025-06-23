@@ -1,26 +1,28 @@
 # Playground
 
+Stelle [Avatare](/03-components/content/avatar) gruppiert in einer AvatarStack dar, indem mehrere `<Avatar />`-Components innerhalb von `<AvatarStack />` platziert werden. 
+
 <LiveCodeEditor />
 
 ---
 
-# Mit Total Count
+# totalCount
 
-Wenn die Liste an Avataren so lang ist, dass du nicht alle anzeigen möchtest
-(wir empfehlen höchstens 5 Avatare anzuzeigen), kannst du das `totalCount`
-Property verwenden. Sobald der totalCount größer ist als die Anzahl an Avataren,
-wird ein zusätzliches Element mit der übrigen Anzahl angezeigt
+Es wird empfohlen, gleichzeitig höchstens 5 [Avatare](/03-components/content/avatar) anzuzeigen. Weitere Avatare können über einen Counter dargestellt werden, indem die Property `totalCount` verwendet wird. Ist `totalCount` größer als die Anzahl der angezeigten Avatare, wird ein zusätzlicher Counter mit der verbleibenden Anzahl angezeigt.
 
 <LiveCodeEditor example="total-count" editorCollapsed />
 
 ---
 
-# Mit Klickbaren Elementen
+# Klickbar
+Mit `onPress` kkönnen die Avatare klickbar gemacht werden, sodass weitere Informationen zu den jeweiligen Avataren als [ContextualHelp](/03-components/overlays/contextual-help) angezeigt werden können.
 
 <LiveCodeEditor example="clickable" editorCollapsed />
 
 ---
 
-# Größen
+# Sizes
+
+AvatarStacks sind in den Sizes **xs, s, m** und **l** verfügbar.
 
 <LiveCodeEditor example="sizes" editorCollapsed />
