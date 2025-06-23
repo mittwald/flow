@@ -1,9 +1,12 @@
 import type { RuleValidationResult } from "@mittwald/password-tools-js/rules";
 
 const generateTranslationString = (
-  rule: Partial<RuleValidationResult>,
+  rule: Partial<RuleValidationResult> & { translationKey?: string },
   shortVersion = false,
 ): string => {
+  if (rule.translationKey) {
+    return `validation.${rule.translationKey}`;
+  }
   const translateString = `validation.${rule.ruleType ?? "general"}`;
   let finalTranslationString = "";
 
