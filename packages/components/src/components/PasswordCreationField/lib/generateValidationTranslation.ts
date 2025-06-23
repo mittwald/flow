@@ -1,11 +1,14 @@
 import type { RuleValidationResult } from "@mittwald/password-tools-js/rules";
 
 const generateTranslationString = (
-  rule: Partial<RuleValidationResult>,
+  rule: Partial<RuleValidationResult> & { translationKey?: string },
   shortVersion = false,
 ): string => {
+  if (rule.translationKey) {
+    return `validation.${rule.translationKey}`;
+  }
   const translateString = `validation.${rule.ruleType ?? "general"}`;
-  let finalTranslationString = "";
+  let finalTranslationString: string;
 
   if ("min" in rule || "max" in rule) {
     const breakingBoundaryProperty = rule.failingBoundary
@@ -29,7 +32,7 @@ const generateTranslationString = (
 };
 
 export const generateValidationTranslation = (
-  r: Partial<RuleValidationResult>,
+  r: Partial<RuleValidationResult> & { translationKey?: string },
   shotVersion = false,
 ): [string, Record<string, string | number | boolean> | undefined] => {
   const translationKey = generateTranslationString(r, shotVersion);
