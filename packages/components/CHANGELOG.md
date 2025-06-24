@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.294](https://github.com/mittwald/flow/compare/0.2.0-alpha.293...0.2.0-alpha.294) (2025-06-24)
+
+### Features
+
+* **PasswordCreationField:** add password rule translations ([#1657](https://github.com/mittwald/flow/issues/1657)) ([a673b70](https://github.com/mittwald/flow/commit/a673b70514f2c7123bbd12dc3a9a663ac178c2bf))
+
 # [0.2.0-alpha.293](https://github.com/mittwald/flow/compare/0.2.0-alpha.292...0.2.0-alpha.293) (2025-06-23)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
