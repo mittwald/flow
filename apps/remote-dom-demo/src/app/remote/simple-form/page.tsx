@@ -7,6 +7,8 @@ import {
   FileField,
   Label,
   Form,
+  RadioGroup,
+  Radio,
   TextField,
   CheckboxGroup,
   Checkbox,
@@ -40,6 +42,12 @@ export default function Page() {
           <Checkbox value="read">Lesen</Checkbox>
           <Checkbox value="write">Schreiben</Checkbox>
         </CheckboxGroup>
+        <RadioGroup name="role" defaultValue="admin">
+          <Label>Rolle</Label>
+          <Radio value="admin">Administrator</Radio>
+          <Radio value="member">Mitglied</Radio>
+          <Radio value="accountant">Buchhalter</Radio>
+        </RadioGroup>
         <TextField name="text" aria-label="Text" />
         <Select name="select" aria-label="Select">
           <Option value="Foo" textValue="Foo">

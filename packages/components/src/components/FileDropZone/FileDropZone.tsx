@@ -59,8 +59,8 @@ export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
         fileDropItems
           .filter((f) => !accept || accept?.includes(f.type))
           .map(async (f) => {
-            const file = await f.getFile();
-            await addAwaitedArrayBuffer(file);
+            let file = await f.getFile();
+            file = await addAwaitedArrayBuffer(file);
             return file;
           }),
       );

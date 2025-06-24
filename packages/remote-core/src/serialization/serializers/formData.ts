@@ -1,9 +1,10 @@
 import { Serializer } from "@/serialization/Serializer";
 
-type FormDataEntry = [string, unknown];
-type FormDataEntries = FormDataEntry[];
-
-export const formDataSerializer = new Serializer<FormData, FormDataEntries>({
+export const formDataSerializer = new Serializer<
+  FormData,
+  [string, FormDataEntryValue][],
+  FormData
+>({
   name: "FormData",
   serialize: {
     isApplicable: (val) => val instanceof FormData,
