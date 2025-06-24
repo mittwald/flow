@@ -1,8 +1,9 @@
 # Playground
 
-Gib über das `language` Property an um welche Programmiersprache es sich
-handelt, um das korrekte Syntax-Highlighting zu erhalten. (s.
-[unterstütze language imports](https://github.com/react-syntax-highlighter/react-syntax-highlighter/blob/HEAD/AVAILABLE_LANGUAGES_HLJS.MD))
+Verwende `<CodeBlock />`, um einen CodeBlock anzuzeigen. Gib den anzuzeigenden 
+Inhalt im `code` Property an. Nutze das `language` Property, um die Programmiersprache 
+(siehe [unterstütze language imports](https://github.com/react-syntax-highlighter/react-syntax-highlighter/blob/HEAD/AVAILABLE_LANGUAGES_HLJS.MD)) 
+zu definieren. So erhält der Code das korrekte Syntax-Highlighting.
 
 <LiveCodeEditor />
 
@@ -10,22 +11,27 @@ handelt, um das korrekte Syntax-Highlighting zu erhalten. (s.
 
 # Mit Zeilennummern
 
+Wird das `showLineNumbers` Property gesetzt, werden Zeilennummern angezeigt.
+
 <LiveCodeEditor example="lineNumbers" editorCollapsed />
 
 ---
 
-# Kopierbar
+# Mit Kopierfunktion
+
+Ergänzt man das Property `copyable`, so bekommt der CodeBlock eine Kopierfunktion.
+Dadurch kann der User den gesamte Inhalt des CodeBlocks in die Zwischenablage kopieren.
+Eventuelle Zeilennummern werden nicht mit kopiert.
 
 <LiveCodeEditor example="copyable" editorCollapsed />
 
 ---
 
-# Color Light und Dark
+# Colors Light und Dark
 
-## Dark
+Zusätzlich zur Standard-Color kann der CodeBlock auch in den Colors **Light** und **Dark** dargestellt werden. 
+Nutze diese, wenn die Standard-Color auf farbigen oder dekorativen Hintergründen keinen ausreichenden Kontrast (mind. 4,5:1) bietet.
 
 <LiveCodeEditor example="dark" bgColor="light" editorCollapsed />
-
-## Light
 
 <LiveCodeEditor example="light" bgColor="dark" editorCollapsed />
