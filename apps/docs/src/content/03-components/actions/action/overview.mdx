@@ -1,13 +1,14 @@
 # Playground
 
+Lege `<Action />`, um einen Button, um die States des Buttons zu steuern.
+
 <LiveCodeEditor />
 
 ---
 
 # Pending
 
-Wenn eine asynchrone Aktion länger als 1000 Millisekunden dauert wird der
-`pending` State angezeigt.
+Wenn eine asynchrone Aktion länger als 1000 Millisekunden dauert wird der **Pending** State angezeigt.
 
 <LiveCodeEditor example="longAction" editorCollapsed />
 
@@ -15,13 +16,22 @@ Wenn eine asynchrone Aktion länger als 1000 Millisekunden dauert wird der
 
 # Feedback
 
+Wenn ein visuelles Feedback nach einer Userintatktion angezeigt werden soll, kann das Property `showFeedback` genutzt werden. 
+
 <LiveCodeEditor example="feedback" editorCollapsed />
 
 ---
 
-# Bestätigungs-Dialog
+# Bestätigungsmodal 
 
-Beinhaltet eine Action ein Modal mit `slot="actionConfirm"`, wird dieses Modal
-für die Bestätigung der Action angezeigt.
+Um User vor unbeabsichtigten Aktionen zu schützen, kann ein Bestätigungsmodal angezeigt werden. Dafür muss innerhalb der Action ein Modal mit dem Attribut `slot="actionConfirm“` platziert werden.
 
 <LiveCodeEditor example="confirmation" editorCollapsed />
+
+---
+
+# Verschachtelte Actions
+
+Wenn mehrere Aktionen auf eine Userinteraktion folgen, können Actions auch ineinander verschachtelt werden.
+
+CodeBeispiel von Lisa

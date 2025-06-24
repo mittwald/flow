@@ -5,5 +5,5 @@ import {
 import { sleepLong } from "@/content/03-components/actions/action/examples/lib";
 
 <Action action={sleepLong}>
-  <Button>Speichern</Button>
+  <Button color="accent">Speichern</Button>
 </Action>;

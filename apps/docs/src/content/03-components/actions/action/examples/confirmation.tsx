@@ -12,20 +12,18 @@ import { sleepLong } from "@/content/03-components/actions/action/examples/lib";
   <Modal slot="actionConfirm">
     <Heading>Projekt löschen</Heading>
     <Content>
-      Das Löschen eines Projektes kann nicht rückgängig
-      gemacht werden. Möchtest Du das Projekt
-      &quot;Test&quot; dennoch löschen?
+      Wenn das Projekt &quot;Test&quot; einmal gelöscht ist, kann es nicht wiederhergestellt werden.
     </Content>
     <ActionGroup>
       <Button color="danger">
-        Unwiederbringlich löschen
+        Löschen
       </Button>
       <Button color="secondary" variant="soft">
         Abbrechen
       </Button>
     </ActionGroup>
   </Modal>
-  <Button color="secondary" variant="soft">
+  <Button color="danger">
     Projekt löschen
   </Button>
 </Action>;
