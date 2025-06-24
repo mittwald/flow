@@ -1,44 +1,53 @@
 # Playground
 
-Der `<Avatar />` kann mit drei verschiedenen Components befüllt werden: `<Image />`, `<Initials />` oder `<Icon />`. 
-
-Im folgenden Code-Beispiel wird ein Avatar mit einem [Image](/03-components/content/image) kombiniert.
+Der `<Avatar />` kann mit zwei verschiedenen Components befüllt werden: `<Image />` oder `<Icon />`. 
 
 <LiveCodeEditor example="image" editorCollapsed />
 
 ---
 
-# Initials
+# Color
 
-Die Initialen werden automatisch aus dem Text generiert, der innerhalb von `<Initials />` übergeben wird.
+Die Color bei der Kombiniation mit [Icon](/03-components/content/icon) oder Initials richtet sich jeweils nach dem übergebenen Child der Componente. Für eine gezielte Wahl der Color kann das Property `color` verwendet werden.
 
-<LiveCodeEditor />
+Folgende dekorative Colors stehen zur Verfügung: **Blue, Violet, Teal, Lilac** und **Green**.
 
----
-
-# Icon
-
-Ein Avatar lässt sich mit einem beliebigen [Icon](/03-components/content/icon) kombinieren.
-
-<LiveCodeEditor example="icon" editorCollapsed />
+<LiveCodeEditor example="colors" editorCollapsed />
 
 ---
 
 # Sizes
 
-Der Avatar unterstützt die Sizes **xs, s, m** oder **l**.
+Der Avatar unterstützt die Sizes **Extra Small, Small, Medium** oder **Large**.
 
 <LiveCodeEditor example="sizes" editorCollapsed />
 
 ---
 
-# Color
+# Kombiniere mit ...
 
-Die Color bei der Kombiniation mit [Icon](/03-components/content/icon) oder Initialen richtet sich jeweils nach dem übergebenen Child der Componente. Für eine gezielte Wahl der Color kann das Property `color` verwendet werden.
+## Image
 
-Folgende Colors stehen zur Verfügung: **Blue, Violet, Teal, Lilac** und **Green**.
+Im folgenden Code-Beispiel wird ein Avatar mit einem [Image](/03-components/content/image) kombiniert. Wenn kein Image vorhanden ist, sollten Initials angezeigt werden.
 
-<LiveCodeEditor example="colors" editorCollapsed />
+<LiveCodeEditor example="image" editorCollapsed />
+
+Die Initials werden automatisch aus dem Text generiert, der innerhalb von `<Initials />` übergeben wird.
+
+<LiveCodeEditor />
+
+## Icon
+
+Ein Avatar lässt sich mit einem beliebigen [Icon](/03-components/content/icon) kombinieren.
+
+<LiveCodeEditor example="icon" editorCollapsed />
+
+## Align
+
+Benutze die [Align](/03-components/structure/align)-Componente, um Text neben
+dem Avatar zu platzieren.
+
+<LiveCodeEditor example="align" editorCollapsed />
 
 ---
 
@@ -50,13 +59,3 @@ passende Icon und die passende Color. Dieses Property darf nur verwendet werden,
 <LiveCodeEditor example="status" editorCollapsed />
 <LiveCodeEditor example="status-example" editorCollapsed />
 
----
-
-# Kombiniere mit ...
-
-## Align
-
-Benutze die [Align](/03-components/structure/align)-Componente, um Text neben
-dem Avatar zu platzieren.
-
-<LiveCodeEditor example="align" editorCollapsed />
