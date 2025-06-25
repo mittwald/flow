@@ -1,6 +1,6 @@
 import { Serializer } from "@/serialization/Serializer";
 
-export const fileListSerializer = new Serializer<FileList, File[], FileList>({
+export const fileListSerializer = new Serializer<FileList, File[]>({
   name: "FileList",
   serialize: {
     isApplicable: (something) => something instanceof FileList,

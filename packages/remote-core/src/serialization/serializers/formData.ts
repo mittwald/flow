@@ -2,8 +2,7 @@ import { Serializer } from "@/serialization/Serializer";
 
 export const formDataSerializer = new Serializer<
   FormData,
-  [string, FormDataEntryValue][],
-  FormData
+  [string, FormDataEntryValue][]
 >({
   name: "FormData",
   serialize: {
