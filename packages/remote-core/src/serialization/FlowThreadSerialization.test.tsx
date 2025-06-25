@@ -1,6 +1,10 @@
 import { expect, test } from "vitest";
 import { FlowThreadSerialization } from "@/serialization/FlowThreadSerialization";
-import { type AnyThread, TRANSFERABLE } from "@quilted/threads";
+import {
+  type AnyThread,
+  markAsTransferable,
+  TRANSFERABLE,
+} from "@quilted/threads";
 import { addAwaitedArrayBuffer } from "@mittwald/flow-core";
 import { CalendarDate } from "@internationalized/date";
 import { createFileList } from "@/tests/utils";
@@ -98,8 +102,14 @@ test("will serialize and deserialize structures", async () => {
   );
 
   expect(transferable).toHaveLength(5);
-  expect(transferable).toEqual(
-    expect.arrayContaining([expect.any(ArrayBuffer)]),
+  expect(transferable).toStrictEqual(
+    expect.arrayContaining([
+      markAsTransferable(buff1),
+      markAsTransferable(buff2),
+      markAsTransferable(buff3),
+      markAsTransferable(buff4),
+      markAsTransferable(buff5),
+    ]),
   );
 
   // we can't check with toBe since the internal file arrayBuffer function will prevent this
