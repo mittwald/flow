@@ -1,6 +1,7 @@
 import {
   ThreadSerializationStructuredClone,
   type ThreadSerializationOptions,
+  TRANSFERABLE,
 } from "@quilted/threads";
 import * as serializerModules from "./serializers";
 import { isObjectType } from "remeda";
@@ -24,10 +25,13 @@ export class FlowThreadSerialization extends ThreadSerializationStructuredClone 
           for (const serializer of serializers) {
             const serialization = serializer.serialize(val);
             if (serialization.applied) {
-              return serialization.result;
+              return serialize(serialization.result);
             }
           }
           if (isObjectType(val)) {
+            if ((val as never)[TRANSFERABLE]) {
+              return serialize(val);
+            }
             return serialize({ ...val });
           }
         } catch (error) {

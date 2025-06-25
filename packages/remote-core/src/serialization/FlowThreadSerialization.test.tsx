@@ -81,6 +81,7 @@ test("will serialize and deserialize structures", async () => {
   dataTransfer.setData("text/plain", "test");
   Object.setPrototypeOf(dataTransfer, DataTransfer.prototype);
 
+  const transferable: ArrayBuffer[] = [];
   const serializeResult = serializer.serialize(
     {
       dataTransfer: dataTransfer,
@@ -92,7 +93,13 @@ test("will serialize and deserialize structures", async () => {
       event: new Event("asd"),
       form: formData,
     },
-    {} as never,
+    {} as AnyThread,
+    transferable,
+  );
+
+  expect(transferable).toHaveLength(5);
+  expect(transferable).toEqual(
+    expect.arrayContaining([expect.any(ArrayBuffer)]),
   );
 
   // we can't check with toBe since the internal file arrayBuffer function will prevent this
