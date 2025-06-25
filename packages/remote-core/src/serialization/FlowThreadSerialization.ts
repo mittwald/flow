@@ -1,147 +1,68 @@
 import {
-  type AnyThread,
-  TRANSFERABLE,
   ThreadSerializationStructuredClone,
+  type ThreadSerializationOptions,
 } from "@quilted/threads";
 import * as serializerModules from "./serializers";
-import { Key, Serializer } from "@/serialization/Serializer";
-import { isArray, isObjectType } from "remeda";
+import { isObjectType } from "remeda";
+import { Serializer } from "@/serialization/Serializer";
 
 const serializers = Object.values(serializerModules).filter(
   (val) => val instanceof Serializer,
 );
 
-const FUNCTION = "_@f";
-const ASYNC_ITERATOR = "_@i";
-
-function isBasicObject(value: unknown) {
-  if (value == null || typeof value !== "object") return false;
-
-  const prototype = Object.getPrototypeOf(value);
-  return prototype == null || prototype === Object.prototype;
-}
-
 export class FlowThreadSerialization extends ThreadSerializationStructuredClone {
-  constructor() {
-    super({
-      serialize: (
-        valueToSerialize: unknown,
-        defaultSerialize: CallableFunction,
-      ) => {
+  public constructor() {
+    const options: ThreadSerializationOptions = {
+      serialize: (val, serialize) => {
         try {
-          if (this.#omitSerialization(valueToSerialize)) {
+          if (this.isSerializableByBase(val)) {
+            return;
+          }
+          if (this.omitSerialization(val)) {
             return null;
           }
-
           for (const serializer of serializers) {
-            const serialization = serializer.serialize(valueToSerialize);
+            const serialization = serializer.serialize(val);
             if (serialization.applied) {
-              return {
-                [Key]: serialization.result[Key],
-                value: defaultSerialize(serialization.result.value),
-              };
+              return serialization.result;
             }
           }
-
-          if (isObjectType(valueToSerialize)) {
-            if ((valueToSerialize as never)[TRANSFERABLE]) {
-              return defaultSerialize(valueToSerialize);
-            }
-
-            if (isArray(valueToSerialize)) {
-              return defaultSerialize([...valueToSerialize]);
-            }
-
-            return defaultSerialize({ ...valueToSerialize });
+          if (isObjectType(val)) {
+            return serialize({ ...val });
           }
-
-          return defaultSerialize(valueToSerialize);
         } catch (error) {
           console.error("Error while serializing", error);
           throw error;
         }
       },
-    });
+      deserialize: (val, serialize) => {
+        try {
+          for (const serializer of serializers) {
+            const deserialization = serializer.deserialize(val);
+            if (deserialization.applied) {
+              return deserialization.result.value;
+            }
+          }
+          return serialize(val);
+        } catch (error) {
+          console.error("Error while deserializing", error);
+          throw error;
+        }
+      },
+    };
+    super(options);
   }
 
-  /** Deserializes a structured cloning-compatible value from another thread. */
-  override deserialize(value: unknown, thread: AnyThread) {
-    return this.#deserializeInternal(value, thread);
+  private isSerializableByBase(val: unknown) {
+    return (
+      val instanceof Map ||
+      val instanceof Set ||
+      Array.isArray(val) ||
+      typeof val === "function"
+    );
   }
 
-  #omitSerialization(val: unknown) {
+  private omitSerialization(val: unknown) {
     return val instanceof HTMLElement || val === window;
-  }
-
-  #deserializeStructure(value: unknown, thread: AnyThread) {
-    try {
-      for (const serializer of serializers) {
-        const deSerialization = serializer.deserialize(value);
-        if (deSerialization.applied) {
-          return this.#deserializeInternal(
-            deSerialization.result.value,
-            thread,
-          );
-        }
-      }
-
-      return value;
-    } catch (error) {
-      console.error("Error while deserializing", error);
-      throw error;
-    }
-  }
-
-  #deserializeInternal(value: unknown, thread: AnyThread): unknown {
-    if (value == null) return value;
-
-    if (typeof value === "object") {
-      if (Array.isArray(value)) {
-        return value.map((value) => this.#deserializeInternal(value, thread));
-      }
-
-      if (value instanceof Map) {
-        return new Map(
-          [...value].map(([key, value]) => [
-            this.#deserializeInternal(key, thread),
-            this.#deserializeInternal(value, thread),
-          ]),
-        );
-      }
-
-      if (value instanceof Set) {
-        return new Set(
-          [...value].map((entry) => this.#deserializeInternal(entry, thread)),
-        );
-      }
-
-      if (FUNCTION in value) {
-        return thread.functions.deserialize(
-          (value as { [FUNCTION]: never })[FUNCTION],
-          thread,
-        );
-      }
-
-      if (!isBasicObject(value)) {
-        return this.#deserializeStructure(value, thread);
-      }
-
-      const result: Record<string | symbol, unknown> = {};
-
-      for (const key of Object.keys(value)) {
-        if (key === ASYNC_ITERATOR) {
-          result[Symbol.asyncIterator] = () => result;
-        } else {
-          result[key] = this.#deserializeInternal(
-            (value as never)[key],
-            thread,
-          );
-        }
-      }
-
-      return this.#deserializeStructure(result, thread);
-    }
-
-    return this.#deserializeStructure(value, thread);
   }
 }

@@ -9,25 +9,40 @@ export interface SerializedFile {
   content: ArrayBuffer;
 }
 
+export const isSerializedFile = (value: unknown): value is SerializedFile => {
+  return !!(
+    value &&
+    typeof value === "object" &&
+    "name" in value &&
+    "type" in value &&
+    "lastModified" in value &&
+    "content" in value
+  );
+};
+
+export const fileSerialize = (file: File): SerializedFile => {
+  return {
+    name: file.name,
+    type: file.type,
+    lastModified: file.lastModified,
+    content: markAsTransferable(getAwaitArrayBuffer(file)),
+  };
+};
+
+export const fileDeSerialize = (file: SerializedFile) => {
+  return new File([file.content], file.name, {
+    lastModified: file.lastModified,
+    type: file.type,
+  });
+};
+
 export const fileSerializer = new Serializer<File, SerializedFile>({
   name: "File",
   serialize: {
     isApplicable: (something) => something instanceof File,
-    apply: (file: File) => {
-      return {
-        name: file.name,
-        type: file.type,
-        lastModified: file.lastModified,
-        content: markAsTransferable(getAwaitArrayBuffer(file)),
-      };
-    },
+    apply: fileSerialize,
   },
   deserialize: {
-    apply: (file: SerializedFile) => {
-      return new File([file.content], file.name, {
-        lastModified: file.lastModified,
-        type: file.type,
-      });
-    },
+    apply: fileDeSerialize,
   },
 });
