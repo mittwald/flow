@@ -32,6 +32,11 @@ const policyDecl: PolicyDeclaration = {
       max: 2,
     },
     {
+      ruleType: RuleType.regex,
+      pattern: "^[A-Za-z0-9]",
+      translationKey: "canNotStartWithSpecialCharacter",
+    },
+    {
       ruleType: RuleType.hibp,
     },
     {

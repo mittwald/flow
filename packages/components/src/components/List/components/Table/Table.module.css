@@ -13,7 +13,7 @@
   &:where(.hasAction) {
     cursor: default;
 
-    &:not(.isSelected) {
+    &:where(:not(.isSelected)) {
       &:hover {
         background-color: var(--list-item--background-color--hover);
       }
