@@ -1,8 +1,8 @@
 # Playground
 
-Der `<Avatar />` kann mit zwei verschiedenen Components befüllt werden: `<Image />` oder `<Icon />`. 
+Der `<Avatar />` kann mit drei verschiedenen Components befüllt werden: `<Image />`, `<Icon />` oder `<Initials />`.
 
-<LiveCodeEditor example="image" editorCollapsed />
+<LiveCodeEditor />
 
 ---
 
@@ -24,6 +24,16 @@ Der Avatar unterstützt die Sizes **Extra Small, Small, Medium** oder **Large**.
 
 ---
 
+# Status
+
+Wird im Avatar das Property `status` gesetzt erhält der Avatar automatisch das
+passende Icon und die passende Color. Dieses Property darf nur verwendet werden, wenn der Status zusätzlich durch ein benachbartes Element (z. B. [Text](/03-components/content/text), [Label](/03-components/content/label) oder [Legende](/03-components/content/legend)) eindeutig kommuniziert wird.
+
+<LiveCodeEditor example="status" editorCollapsed />
+<LiveCodeEditor example="status-example" editorCollapsed />
+
+---
+
 # Kombiniere mit ...
 
 ## Image
@@ -32,9 +42,9 @@ Im folgenden Code-Beispiel wird ein Avatar mit einem [Image](/03-components/cont
 
 <LiveCodeEditor example="image" editorCollapsed />
 
-Die Initials werden automatisch aus dem Text generiert, der innerhalb von `<Initials />` übergeben wird.
+Die Initials werden automatisch aus dem Text generiert, der innerhalb von `<Initials />` übergeben wird. Sie dienen ausschließlich als Platzhalter für ein [Image](/03-components/content/image).
 
-<LiveCodeEditor />
+<LiveCodeEditor example="initials" editorCollapsed />
 
 ## Icon
 
@@ -44,18 +54,7 @@ Ein Avatar lässt sich mit einem beliebigen [Icon](/03-components/content/icon) 
 
 ## Align
 
-Benutze die [Align](/03-components/structure/align)-Componente, um Text neben
+Benutze die [Align](/03-components/structure/align)-Component, um Text neben
 dem Avatar zu platzieren.
 
 <LiveCodeEditor example="align" editorCollapsed />
-
----
-
-# Status
-
-Wird im Avatar das Property `status` gesetzt erhält der Avatar automatisch das
-passende Icon und die passende Color. Dieses Property darf nur verwendet werden, wenn der Status zusätzlich durch ein benachbartes Element (z. B. [Text](/03-components/content/text), [Label](/03-components/content/label) oder [Legende](/03-components/content/legend)) eindeutig kommuniziert wird.
-
-<LiveCodeEditor example="status" editorCollapsed />
-<LiveCodeEditor example="status-example" editorCollapsed />
-
