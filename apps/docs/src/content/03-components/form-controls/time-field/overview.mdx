@@ -1,8 +1,6 @@
 # Playground
 
-Bei den Values des TimeFields handelt es sich um Objekte aus dem
-[@internationalized/date](https://react-spectrum.adobe.com/internationalized/date/)
-Package.
+Verwende `<TimeField />`, um ein TimeField darzustellen. Die Values des TimeFields sind Objekte aus dem [@internationalized/date Package](https://react-spectrum.adobe.com/internationalized/date/).
 
 <LiveCodeEditor />
 
@@ -10,8 +8,7 @@ Package.
 
 # Min- und Max-Values
 
-Der Bereich, aus dem die Uhrzeit gewählt wird, kann über `minValue` bzw
-`maxValue` eingeschränkt werden.
+Die wählbare Uhrzeit lässt sich über `minValue` und `maxValue` begrenzen.
 
 <LiveCodeEditor example="minMax" />
 
@@ -19,14 +16,15 @@ Der Bereich, aus dem die Uhrzeit gewählt wird, kann über `minValue` bzw
 
 # Granularity
 
-Über das `granularity` Property kann ausgewählt werden, ob nur Stunden oder auch
-Minuten oder sogar Sekunden ausgewählt werden können.
+Mit der `granularity` Property wird definiert, ob Stunden, Minuten und/oder Sekunden auswählbar sind.
 
 <LiveCodeEditor example="granularity" />
 
 ---
 
 # Disabled
+
+Ist das TimeField **disabled**, ist keine Interaktion möglich. Sobald die Ursache behoben ist, kann es wieder wie gewohnt verwendet werden.
 
 <LiveCodeEditor example="disabled" />
 
@@ -36,12 +34,12 @@ Minuten oder sogar Sekunden ausgewählt werden können.
 
 ## ContextualHelp
 
-Benutze die [ContextualHelp](/03-components/overlays/contextual-help)
-Komponente, wenn du weitere Informationen bereitstellen möchtest, und diese zu
-lang für die FieldDescription sind.
+Benutze die [ContextualHelp](/03-components/overlays/contextual-help)-Component, wenn zusätzliche Informationen bereitgestellt werden sollen, die zu umfangreich für die FieldDescription sind.
 
 <LiveCodeEditor example="contextualHelp" editorCollapsed />
 
 ## React Hook Form
+
+Weitere Details zur Formularlogik und -validierung sind in der Component [Form (React Hook Form)](/03-components/form-controls/form-react-hook-form) zu finden.
 
 <LiveCodeEditor example="form" editorCollapsed />
