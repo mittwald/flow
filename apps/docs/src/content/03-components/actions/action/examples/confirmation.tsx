@@ -12,18 +12,15 @@ import { sleepLong } from "@/content/03-components/actions/action/examples/lib";
   <Modal slot="actionConfirm">
     <Heading>Projekt löschen</Heading>
     <Content>
-      Wenn das Projekt &quot;Test&quot; einmal gelöscht ist, kann es nicht wiederhergestellt werden.
+      Wenn das Projekt &quot;Test&quot; einmal gelöscht ist,
+      kann es nicht wiederhergestellt werden.
     </Content>
     <ActionGroup>
-      <Button color="danger">
-        Löschen
-      </Button>
+      <Button color="danger">Löschen</Button>
       <Button color="secondary" variant="soft">
         Abbrechen
       </Button>
     </ActionGroup>
   </Modal>
-  <Button color="danger">
-    Projekt löschen
-  </Button>
+  <Button color="danger">Projekt löschen</Button>
 </Action>;
