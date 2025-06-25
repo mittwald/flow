@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.299](https://github.com/mittwald/flow/compare/0.2.0-alpha.298...0.2.0-alpha.299) (2025-06-25)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
 # [0.2.0-alpha.298](https://github.com/mittwald/flow/compare/0.2.0-alpha.297...0.2.0-alpha.298) (2025-06-25)
 
 **Note:** Version bump only for package @mittwald/ext-bridge
