@@ -3,7 +3,7 @@ interface SerializationStrategy<TIn, TOut> {
   apply: (val: TIn) => TOut;
 }
 
-const Key = "mittwald.flow-remote-core.serializer.name";
+export const Key = "mittwald.flow-remote-core.serializer.name";
 
 export interface SuccessfulSerializationResult<T> {
   value: T;
@@ -14,12 +14,12 @@ export type SerializationResult<T> =
   | { applied: true; result: SuccessfulSerializationResult<T> }
   | { applied: false };
 
-export class Serializer<TIn, TOut> {
+export class Serializer<TIn, TTransfer, TOut = TIn> {
   public constructor(
     private options: {
       name: string;
-      serialize: SerializationStrategy<TIn, TOut>;
-      deserialize: Pick<SerializationStrategy<TOut, TIn>, "apply">;
+      serialize: SerializationStrategy<TIn, TTransfer>;
+      deserialize: Pick<SerializationStrategy<TTransfer, TOut>, "apply">;
     },
   ) {}
 
@@ -41,20 +41,23 @@ export class Serializer<TIn, TOut> {
     };
   }
 
-  public serialize(val: unknown): SerializationResult<TOut> {
-    return this.apply<TIn, TOut>(val, this.options.serialize);
+  public serialize(val: unknown): SerializationResult<TTransfer> {
+    return this.apply<TIn, TTransfer>(val, this.options.serialize);
   }
 
-  public deserialize(val: unknown): SerializationResult<TIn> {
+  public deserialize(val: unknown): SerializationResult<TOut> {
     return this.apply(val, {
-      apply: (serialization: SuccessfulSerializationResult<TOut>) =>
-        this.options.deserialize.apply(serialization.value),
-
-      isApplicable: (val): val is SuccessfulSerializationResult<TOut> =>
-        !!val &&
-        typeof val === "object" &&
-        Key in val &&
-        val[Key] === this.options.name,
+      apply: (serialization: SuccessfulSerializationResult<TTransfer>) => {
+        return this.options.deserialize.apply(serialization.value);
+      },
+      isApplicable: (val): val is SuccessfulSerializationResult<TTransfer> => {
+        return (
+          !!val &&
+          typeof val === "object" &&
+          Key in val &&
+          val[Key] === this.options.name
+        );
+      },
     });
   }
 }

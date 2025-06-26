@@ -46,10 +46,10 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
   const isAsyncSubmit = useRef(false);
   const submitHandlerResultRef = useRef<unknown>(null);
 
-  const handleOnSubmit = (e: FormEvent<HTMLFormElement> | F) => {
+  const handleOnSubmit = (e?: FormEvent<HTMLFormElement> | F) => {
     const { isSubmitting, isValidating } = form.control._formState;
     const formEvent =
-      "nativeEvent" in e ? (e as FormEvent<HTMLFormElement>) : undefined;
+      e && "nativeEvent" in e ? (e as FormEvent<HTMLFormElement>) : undefined;
 
     formEvent?.stopPropagation();
 

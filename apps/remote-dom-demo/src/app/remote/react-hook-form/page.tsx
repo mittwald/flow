@@ -37,7 +37,18 @@ export default function Page() {
 
   return (
     <Section>
-      <Form form={form} onSubmit={(data) => console.log("Submitted", data)}>
+      <Form
+        form={form}
+        onSubmit={async (data) => {
+          const files = await Promise.all(
+            Array.from(data.file).map(async (f: File) => ({
+              name: f.name,
+              resolvedArrayBufferLength: (await f.arrayBuffer()).byteLength,
+            })),
+          );
+          console.log("Submitted:", data, "Files:", files);
+        }}
+      >
         <Field
           name="email"
           rules={{

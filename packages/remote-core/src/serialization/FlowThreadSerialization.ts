@@ -1,11 +1,15 @@
 import {
   ThreadSerializationStructuredClone,
   type ThreadSerializationOptions,
+  TRANSFERABLE,
 } from "@quilted/threads";
 import * as serializerModules from "./serializers";
 import { isObjectType } from "remeda";
+import { Serializer } from "@/serialization/Serializer";
 
-const serializers = Object.values(serializerModules);
+const serializers = Object.values(serializerModules).filter(
+  (val) => val instanceof Serializer,
+);
 
 export class FlowThreadSerialization extends ThreadSerializationStructuredClone {
   public constructor() {
@@ -19,12 +23,15 @@ export class FlowThreadSerialization extends ThreadSerializationStructuredClone 
             return null;
           }
           for (const serializer of serializers) {
-            const serialization = serializer.serialize(val as never);
+            const serialization = serializer.serialize(val);
             if (serialization.applied) {
-              return serialization.result;
+              return serialize(serialization.result);
             }
           }
           if (isObjectType(val)) {
+            if ((val as never)[TRANSFERABLE]) {
+              return serialize(val);
+            }
             return serialize({ ...val });
           }
         } catch (error) {
@@ -35,7 +42,7 @@ export class FlowThreadSerialization extends ThreadSerializationStructuredClone 
       deserialize: (val, serialize) => {
         try {
           for (const serializer of serializers) {
-            const deserialization = serializer.deserialize(val as never);
+            const deserialization = serializer.deserialize(val);
             if (deserialization.applied) {
               return deserialization.result.value;
             }
