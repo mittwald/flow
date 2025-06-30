@@ -119,6 +119,7 @@ export const WithForm: Story = {
           </PasswordCreationField>
         </Field>
         <br />
+        <Button onPress={() => form.reset()}>Reset</Button>
         <Button type="submit">Submit</Button>
       </Form>
     );
