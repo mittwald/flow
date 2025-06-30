@@ -9,6 +9,10 @@
     ".": {
       "types": "./dist/types/index.d.ts",
       "default": "./dist/js/index.mjs"
+    },
+    "./react-hook-form": {
+      "types": "./dist/types/integrations/react-hook-form/index.d.ts",
+      "import": "./dist/js/react-hook-form.mjs"
     }
   },
   "files": [
