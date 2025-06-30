@@ -11,6 +11,14 @@ type FormProps = {
   ref?: RefObject<HTMLFormElement>;
 } & PropsWithChildren;
 
+/**
+ * ReactHookForm won't send the data over onSubmit, the form state is
+ * transferred over onChange. To avoid sending unnecessary data, this RemoteForm
+ * sends only the onSubmit without any formData.
+ *
+ * @class
+ * @param props
+ */
 export const Form: FC<FormProps> = (props) => {
   const { onSubmit: onSubmitFromProps, ref, ...rest } = props;
 

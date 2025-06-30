@@ -29,9 +29,6 @@ export class FlowThreadSerialization extends ThreadSerializationStructuredClone 
             }
           }
           if (isObjectType(val)) {
-            if ((val as never)[TRANSFERABLE]) {
-              return serialize(val);
-            }
             return serialize({ ...val });
           }
         } catch (error) {
@@ -62,7 +59,8 @@ export class FlowThreadSerialization extends ThreadSerializationStructuredClone 
       val instanceof Map ||
       val instanceof Set ||
       Array.isArray(val) ||
-      typeof val === "function"
+      typeof val === "function" ||
+      (isObjectType(val) && TRANSFERABLE in val)
     );
   }
 

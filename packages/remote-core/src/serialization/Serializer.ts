@@ -3,7 +3,7 @@ interface SerializationStrategy<TIn, TOut> {
   apply: (val: TIn) => TOut;
 }
 
-export const Key = "mittwald.flow-remote-core.serializer.name";
+const Key = "mittwald.flow-remote-core.serializer.name";
 
 export interface SuccessfulSerializationResult<T> {
   value: T;
@@ -14,12 +14,12 @@ export type SerializationResult<T> =
   | { applied: true; result: SuccessfulSerializationResult<T> }
   | { applied: false };
 
-export class Serializer<TIn, TTransfer, TOut = TIn> {
+export class Serializer<TIn, TOut> {
   public constructor(
     private options: {
       name: string;
-      serialize: SerializationStrategy<TIn, TTransfer>;
-      deserialize: Pick<SerializationStrategy<TTransfer, TOut>, "apply">;
+      serialize: SerializationStrategy<TIn, TOut>;
+      deserialize: Pick<SerializationStrategy<TOut, TIn>, "apply">;
     },
   ) {}
 
@@ -41,16 +41,16 @@ export class Serializer<TIn, TTransfer, TOut = TIn> {
     };
   }
 
-  public serialize(val: unknown): SerializationResult<TTransfer> {
-    return this.apply<TIn, TTransfer>(val, this.options.serialize);
+  public serialize(val: unknown): SerializationResult<TOut> {
+    return this.apply<TIn, TOut>(val, this.options.serialize);
   }
 
-  public deserialize(val: unknown): SerializationResult<TOut> {
+  public deserialize(val: unknown): SerializationResult<TIn> {
     return this.apply(val, {
-      apply: (serialization: SuccessfulSerializationResult<TTransfer>) => {
+      apply: (serialization: SuccessfulSerializationResult<TOut>) => {
         return this.options.deserialize.apply(serialization.value);
       },
-      isApplicable: (val): val is SuccessfulSerializationResult<TTransfer> => {
+      isApplicable: (val): val is SuccessfulSerializationResult<TOut> => {
         return (
           !!val &&
           typeof val === "object" &&
