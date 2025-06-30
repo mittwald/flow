@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.309](https://github.com/mittwald/flow/compare/0.2.0-alpha.308...0.2.0-alpha.309) (2025-06-30)
+
+### Bug Fixes
+
+* **Remote:** fixes transferable datatypes and remote forms optimizations ([#1659](https://github.com/mittwald/flow/issues/1659)) ([cd5882c](https://github.com/mittwald/flow/commit/cd5882ce5db2e0347e8478b37be2de69c9b65d8d))
+
 # [0.2.0-alpha.308](https://github.com/mittwald/flow/compare/0.2.0-alpha.307...0.2.0-alpha.308) (2025-06-30)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-renderer
