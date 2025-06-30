@@ -1,19 +1,26 @@
 # Playground
 
-Wird für den Chat eine Höhe über das `height` Property festgelegt, wird der
-Bereich der Eingabe-Elemente ganz unten platziert, außerdem wird der
-MessageThread scrollbar, sobald der verfügbare Platz nicht mehr ausreicht.
+Verwendet `<Chat />`, um einen Chat darzustellen.
+
+Der Chat kombiniert dabei den [MessageThread](/03-components/chat/message-thread) mit einem Textinput, der mit Hilfe von [Align](/03-components/structure/align) einen [Button](/03-components/actions/button) und eine [TextArea](/03-components/form-controls/text-area) horizontal zu einander anordnet.  
+Mit der `height` Property lässt sich die Höhe des Chats festlegen. Gleichzeitig sorgt sie dafür, dass die Texteingabe am unteren Rand platziert wird.
 
 <LiveCodeEditor />
 
 ---
 
-# Mit Upload
+#Kombiniere mit ...
+
+## Upload
+
+Der Chat lässt sich durch einen Upload erweitern. Dazu kann ein [Button](/03-components/actions/button) in der Variante **Plain** ergänzt werden. Die hochgeladenen Files lassen sich mit der [FileCard](/03-components/upload/file-card) darstellen.
 
 <LiveCodeEditor example="upload" editorCollapsed />
 
 ---
 
-# Mit Form
+## React Hook Form
+
+Weitere Details zur Formularlogik und -validierung sind in der Component [Form (React Hook Form)](/03-components/form-controls/form-react-hook-form) zu finden.
 
 <LiveCodeEditor example="form" editorCollapsed />
