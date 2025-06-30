@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.308](https://github.com/mittwald/flow/compare/0.2.0-alpha.307...0.2.0-alpha.308) (2025-06-30)
+
+### Bug Fixes
+
+* **PasswordCreationField:** reset field on external reset ([#1687](https://github.com/mittwald/flow/issues/1687)) ([21a9b2e](https://github.com/mittwald/flow/commit/21a9b2ec63e5bdba389a9718b9d454bc045aecdf))
+
 # [0.2.0-alpha.307](https://github.com/mittwald/flow/compare/0.2.0-alpha.306...0.2.0-alpha.307) (2025-06-30)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
