@@ -65,6 +65,11 @@ export const Modal = flowComponent("Modal", (props) => {
         Heading: {
           level: 3,
         },
+        Header: {
+          Heading: {
+            level: 3,
+          },
+        },
       },
     },
     ColumnLayout: {
