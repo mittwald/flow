@@ -1,8 +1,8 @@
 # Playground
 
-Bei den Values des DatePickers handelt es sich um Objekte aus dem
-[@internationalized/date](https://react-spectrum.adobe.com/internationalized/date/)
-Package.
+Verwende `<DatePicker />`, um einen DatePicker darzustellen. Nutze ein `<Label />`, um Informationen zu vermitteln, die das Verständnis der Eingabeanforderungen erleichtern. 
+
+Die Values des DatePickers sind Objekte aus dem [@internationalized/date Package](https://react-spectrum.adobe.com/internationalized/date/).
 
 <LiveCodeEditor />
 
@@ -10,29 +10,31 @@ Package.
 
 # Min- und Max-Values
 
-Der Bereich, aus dem das Datum gewählt wird, kann über `minValue` bzw `maxValue`
-eingeschränkt werden.
+Das wählbare Datum lässt sich über `minValue` und `maxValue` begrenzen.
 
-<LiveCodeEditor example="future" />
+<LiveCodeEditor example="future" editorCollapsed />
 
 ---
 
-# Nicht verfügbare Daten
+# Verfügbare Daten
 
-Über das `isDateUnavailable` Property kann die Auswahl der Daten beschränkt
-werden.
+Über das `isDateUnavailable` Property kann die Datumsauswahl eingeschränkt werden.
 
-<LiveCodeEditor example="unavailable" />
+<LiveCodeEditor example="unavailable" editorCollapsed />
 
 ---
 
 # Disabled
 
-<LiveCodeEditor example="disabled" />
+Ist der DatePicker **disabled**, ist keine Interaktion möglich.
+
+<LiveCodeEditor example="disabled" editorCollapsed />
 
 ---
 
 # Mit FieldDescription
+
+Um wichtige Hinweise zum DatePicker bereitzustellen, kann unterhalb eine `<FieldDescription />` eingebaut werden.
 
 <LiveCodeEditor example="fieldDescription" editorCollapsed />
 
@@ -42,12 +44,12 @@ werden.
 
 ## ContextualHelp
 
-Benutze die [ContextualHelp](/03-components/overlays/contextual-help)
-Komponente, wenn du weitere Informationen bereitstellen möchtest, und diese zu
-lang für die FieldDescription sind.
+Benutze das [ContextualHelp](/03-components/overlays/contextual-help), wenn zusätzliche Informationen bereitgestellt werden sollen, die zu umfangreich für die FieldDescription sind.
 
 <LiveCodeEditor example="contextualHelp" editorCollapsed />
 
 ## React Hook Form
+
+Weitere Details zur Formularlogik und -validierung sind in der Component [Form (React Hook Form)](/03-components/form-controls/form-react-hook-form) zu finden.
 
 <LiveCodeEditor example="form" editorCollapsed />
