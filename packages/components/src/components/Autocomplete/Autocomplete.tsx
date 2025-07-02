@@ -1,8 +1,6 @@
 import React, {
   type KeyboardEventHandler,
   type PropsWithChildren,
-  useEffect,
-  useMemo,
   useRef,
 } from "react";
 import type { PropsWithClassName } from "@/lib/types/props";
@@ -36,6 +34,7 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
   const controllerIsOpen = controller.useIsOpen();
 
   const triggerRef = useRef<HTMLDivElement>(null);
+  const portalContainerRef = useRef<HTMLDivElement>(null);
 
   const { focusWithinProps } = useFocusWithin({
     onBlurWithin: () => controller.close(),
@@ -55,23 +54,6 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
     },
   };
 
-  const portalContainer = useMemo(() => document.createElement("div"), []);
-  const portalPlacement = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    if (portalPlacement.current) {
-      portalPlacement.current.appendChild(portalContainer);
-    }
-
-    return () => {
-      if (
-        portalPlacement.current &&
-        portalContainer.parentNode === portalPlacement.current
-      ) {
-        portalPlacement.current.removeChild(portalContainer);
-      }
-    };
-  }, []);
-
   const handleOnInputChange = (value: string) => {
     if (!value) {
       controller.close();
@@ -89,7 +71,7 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
   };
 
   return (
-    <UNSAFE_PortalProvider getContainer={() => portalContainer}>
+    <UNSAFE_PortalProvider getContainer={() => portalContainerRef.current}>
       <PropsContextProvider props={propsContext}>
         <div
           {...focusWithinProps}
@@ -104,7 +86,10 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
           >
             {children}
           </Aria.Autocomplete>
-          <div ref={portalPlacement} className={clsx(styles.portalContainer)} />
+          <div
+            ref={portalContainerRef}
+            className={clsx(styles.portalContainer)}
+          />
         </div>
       </PropsContextProvider>
     </UNSAFE_PortalProvider>

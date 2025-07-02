@@ -7,24 +7,24 @@ import { SearchField } from "@/components/SearchField";
 import { MenuItem } from "@/components/MenuItem";
 import { ContextMenu } from "@/components/ContextMenu";
 
-function generateFromString(value: string) {
-  return ["example.com", "test.org", "email.net", "mail.com"].map((d) => {
-    const email = `${value}@${d}`;
-    return (
-      <MenuItem id={email} textValue={email}>
-        {email}
-      </MenuItem>
-    );
-  });
-}
-
 const meta: Meta<typeof Chat> = {
-  title: "Autocomplete/Default",
+  title: "Form Controls/Autocomplete",
   component: Autocomplete,
   parameters: {
     controls: { exclude: ["className"] },
   },
   render: () => {
+    const suggestEmail = (value: string) => {
+      return ["example.com", "test.org", "email.net", "mail.com"].map((d) => {
+        const email = `${value.split("@")[0]}@${d}`;
+        return (
+          <MenuItem key={email} id={email} textValue={email}>
+            {email}
+          </MenuItem>
+        );
+      });
+    };
+
     const [input, setInput] = useState("");
 
     return (
@@ -32,7 +32,7 @@ const meta: Meta<typeof Chat> = {
         <SearchField>
           <Label>Test</Label>
         </SearchField>
-        <ContextMenu>{generateFromString(input)}</ContextMenu>
+        <ContextMenu>{suggestEmail(input)}</ContextMenu>
       </Autocomplete>
     );
   },
