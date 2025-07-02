@@ -9,6 +9,7 @@ export * from "./RemoteAlertIconElement";
 export * from "./RemoteAlignElement";
 export * from "./RemoteAreaElement";
 export * from "./RemoteAreaChartElement";
+export * from "./RemoteAutocompleteElement";
 export * from "./RemoteAvatarElement";
 export * from "./RemoteAvatarStackElement";
 export * from "./RemoteBadgeElement";

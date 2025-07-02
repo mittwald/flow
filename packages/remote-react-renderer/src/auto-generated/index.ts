@@ -10,6 +10,7 @@ import { AlertIcon as AlertIcon } from "@mittwald/flow-react-components";
 import { Align as Align } from "@mittwald/flow-react-components";
 import { Area as Area } from "@mittwald/flow-react-components";
 import { AreaChart as AreaChart } from "@mittwald/flow-react-components";
+import { Autocomplete as Autocomplete } from "@mittwald/flow-react-components";
 import { Avatar as Avatar } from "@mittwald/flow-react-components";
 import { AvatarStack as AvatarStack } from "@mittwald/flow-react-components";
 import { Badge as Badge } from "@mittwald/flow-react-components";
@@ -132,6 +133,10 @@ export const flowComponents = {
   "flr-align": createFlowRemoteComponentRenderer("Align", Align),
   "flr-area": createFlowRemoteComponentRenderer("Area", Area),
   "flr-area-chart": createFlowRemoteComponentRenderer("AreaChart", AreaChart),
+  "flr-autocomplete": createFlowRemoteComponentRenderer(
+    "Autocomplete",
+    Autocomplete,
+  ),
   "flr-avatar": createFlowRemoteComponentRenderer("Avatar", Avatar),
   "flr-avatar-stack": createFlowRemoteComponentRenderer(
     "AvatarStack",

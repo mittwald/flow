@@ -1,0 +1,114 @@
+import React, {
+  type KeyboardEventHandler,
+  type PropsWithChildren,
+  useEffect,
+  useMemo,
+  useRef,
+} from "react";
+import type { PropsWithClassName } from "@/lib/types/props";
+import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import * as Aria from "react-aria-components";
+import { useOverlayController } from "@/lib/controller";
+import {
+  flowComponent,
+  type FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
+import { UNSAFE_PortalProvider, useFocusWithin } from "react-aria";
+import styles from "./Autocomplete.module.scss";
+import clsx from "clsx";
+
+export interface AutocompleteProps
+  extends PropsWithChildren,
+    PropsWithClassName,
+    FlowComponentProps,
+    Omit<Aria.AutocompleteProps, "children" | "onInputChange" | "inputValue"> {
+  onChange?: Aria.AutocompleteProps["onInputChange"];
+  value?: Aria.AutocompleteProps["inputValue"];
+}
+
+/** @flr-generate all */
+export const Autocomplete = flowComponent("Autocomplete", (props) => {
+  const { children, onChange, value, ...rest } = props;
+
+  const { contains } = Aria.useFilter({ sensitivity: "base" });
+
+  const controller = useOverlayController("Autocomplete");
+  const controllerIsOpen = controller.useIsOpen();
+
+  const triggerRef = useRef<HTMLDivElement>(null);
+
+  const { focusWithinProps } = useFocusWithin({
+    onBlurWithin: () => controller.close(),
+  });
+
+  const propsContext: PropsContext = {
+    ContextMenu: {
+      controller,
+      triggerRef,
+      shouldUpdatePosition: false,
+      shouldCloseOnInteractOutside: () => false,
+      isNonModal: true,
+      renderEmptyState: () => <>EMPTY</>,
+      onAction: (key) => {
+        onChange?.(key.toString());
+      },
+    },
+  };
+
+  const portalContainer = useMemo(() => document.createElement("div"), []);
+  const portalPlacement = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (portalPlacement.current) {
+      portalPlacement.current.appendChild(portalContainer);
+    }
+
+    return () => {
+      if (
+        portalPlacement.current &&
+        portalContainer.parentNode === portalPlacement.current
+      ) {
+        portalPlacement.current.removeChild(portalContainer);
+      }
+    };
+  }, []);
+
+  const handleOnInputChange = (value: string) => {
+    if (!value) {
+      controller.close();
+    } else if (!controllerIsOpen) {
+      controller.open();
+    }
+
+    onChange?.(value);
+  };
+
+  const handleKeyDown: KeyboardEventHandler = (event) => {
+    if (event.key === "Enter" && controllerIsOpen) {
+      event.preventDefault();
+    }
+  };
+
+  return (
+    <UNSAFE_PortalProvider getContainer={() => portalContainer}>
+      <PropsContextProvider props={propsContext}>
+        <div
+          {...focusWithinProps}
+          className={clsx(styles.autocomplete)}
+          onKeyDownCapture={handleKeyDown}
+        >
+          <Aria.Autocomplete
+            onInputChange={handleOnInputChange}
+            filter={contains}
+            inputValue={value}
+            {...rest}
+          >
+            {children}
+          </Aria.Autocomplete>
+          <div ref={portalPlacement} className={clsx(styles.portalContainer)} />
+        </div>
+      </PropsContextProvider>
+    </UNSAFE_PortalProvider>
+  );
+});
+
+export default Autocomplete;
