@@ -885,6 +885,9 @@ importers:
 
   packages/remote-core:
     dependencies:
+      '@internationalized/date':
+        specifier: ^3.8.1
+        version: 3.8.1
       '@lit-labs/ssr-dom-shim':
         specifier: ^1.3.0
         version: 1.3.0
@@ -904,9 +907,6 @@ importers:
         specifier: ^2.22.3
         version: 2.22.3
     devDependencies:
-      '@internationalized/date':
-        specifier: ^3.8.1
-        version: 3.8.1
       '@mittwald/ext-bridge':
         specifier: workspace:*
         version: link:../ext-bridge

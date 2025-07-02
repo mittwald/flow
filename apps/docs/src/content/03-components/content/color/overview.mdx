@@ -1,15 +1,14 @@
 # Playground
 
-Die Color Komponente dient dazu Teile von Headings oder Texten hervorzuheben.
-Sie sollte nur in Ausnahmefällen verwendet werden, wie beispielsweise in
-Werbekacheln. Es muss darauf geachtet werden, dass der Kontrast zum Hintergrund
-hoch genug ist.
+Die Color-Component färbt Text, indem `<Color />` mit der passenden `color`-Property um Teile von [Text](/03-components/content/text) oder [Headings](/03-components/content/heading) gelegt wird. Sie kommt nur in Ausnahmefällen, beispielsweise bei Werbemaßnahmen, zum Einsatz.
 
 <LiveCodeEditor />
 
 ---
 
 # Colors
+
+Folgende `color`-Properties stehen bei der Color-Component zur Auswahl: **Blue, Violett, Lilac** und **Teal**. Dabei ist stets darauf zu achten, dass der Kontrast zwischen Schrift und Hintergrund ausreichend hoch ist.
 
 <LiveCodeEditor example="color" editorCollapsed />
 
@@ -19,12 +18,17 @@ hoch genug ist.
 
 ## Text
 
+Teile eines [Textes](/03-components/content/text) lassen sich mithilfe der Color-Component einfärben.
+
 <LiveCodeEditor editorCollapsed />
 
 ## Heading
 
+Mit der Color-Component lassen sich in [Headings](/03-components/content/heading) gezielt wichtige Wörter farblich hervorheben.
 <LiveCodeEditor example="heading" editorCollapsed />
 
 ## AccentBox
+
+Ein häufiges Einsatzgebiet der Color-Component ist die Hervorhebung von [Headings](/03-components/content/heading) in [AccentBoxen](/03-components/structure/accent-box) mit Werbeinhalten. Dabei ist besonders wichtig, dass die eingefärbte Schrift einen ausreichenden Kontrast zum Hintergrund aufweist.
 
 <LiveCodeEditor example="accent-box" editorCollapsed />

@@ -2,6 +2,7 @@ import React, {
   type PropsWithChildren,
   useState,
   type ClipboardEvent,
+  useEffect,
 } from "react";
 import {
   ClearPropsContext,
@@ -135,6 +136,12 @@ export const PasswordCreationField = flowComponent(
       setValue(value);
       setDebouncedValue(value === "" ? undefined : value);
     };
+
+    useEffect(() => {
+      if (!ignoredValue) {
+        setUncontrolledValue("");
+      }
+    }, [ignoredValue]);
 
     const setOptimisticPolicyValidationResult = (
       isValid: ResolvedPolicyValidationResult["isValid"] = true,
