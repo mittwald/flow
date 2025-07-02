@@ -3,6 +3,8 @@
   border-radius: var(--accent-box--corner-radius);
   isolation: isolate;
   position: relative;
+  display: flex;
+  flex-direction: column-reverse;
 
   > svg {
     position: absolute;
