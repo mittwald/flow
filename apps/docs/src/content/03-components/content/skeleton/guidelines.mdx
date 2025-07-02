@@ -1,13 +1,17 @@
 # Grundlagen
 
+Skeletons sind Platzhalter, die während des Ladens bereits die Struktur einer Seite andeuten. Sie vermitteln Usern eine Vorschau auf das Layout und verbessern so die wahrgenommene Performance. Gleichzeitig helfen sie, Layout-Sprünge zu vermeiden, bevor die eigentlichen Inhalte geladen sind.
+
 ## Best practices
 
 Achte bei der Verwendung von Skeletons darauf, dass...
 
-- sie den Inhalt der Benutzeroberfläche so gut widerspiegeln, dass der User erahnen kann, was sich dahinter verbirgt.
-- der Detailgrad und die Anzahl der Skeletons nicht zu unruhig oder überladen wirken.
-- auf der Benutzeroberfläche keine verwirrende Mischung aus Skeletons und Components im Disabled State entsteht.
+- sie das finale Layout der Benutzeroberfläche so gut wie möglich widerspiegeln, sodass User erkennen können, welche Inhalte zu erwarten sind. Verwende dafür vereinfachte Formen wie z. B. Platzhalter für Textblöcke, [Avatare](/03-components/content/avatar) oder [Images](/03-components/content/image).
+- Detailgrad und Anzahl der Skeletons nicht zu hoch sind – sie sollten eher an Wireframes erinnern und keine visuelle Unruhe erzeugen.
+- sie ausschließlich für das initiale und kurzzeitige Laden von Inhalten eingesetzt werden. Für andere Lade- oder Feedbackprozesse verwende beispielsweise stattdessen den [LoadingSpinner](/03-components/status/loading-spinner).
+- beim Laden kein Cumulative Layout Shift entsteht – das finale Layout sollte nahtlos den Skeleton-Content ersetzen.
+- sie nicht mit disabeled Components kombiniert werden. Zeige z. B. statt eines disabeld [Button](/03-components/actions/button) einen passenden Skeleton-Platzhalter.
 
 ## Verwendung
 
-Verwende Skeletons, um dem User bereits während des Ladezustands eine visuelle Orientierung zum Seitenaufbau zu geben. Skeletons eignen sich speziell für das initiale Laden der Seite. Für kurzfristige Ladezustände als Feedback, wie etwa der Pending State beim [Buttons](/03-components/actions/button), sollte hingegen ein [LoadingSpinner](/03-components/status/loading-spinner) verwendet werden.
+Verwende Skeletons, um visuell ansprechende Ladezustände für Inhalte wie [Listes](/03-components/structure/list), [Images](/03-components/content/image) oder [Texte](/03-components/content/text) darzustellen – sie bieten Orientierung, indem sie die spätere Struktur und Position der Inhalte andeuten.
