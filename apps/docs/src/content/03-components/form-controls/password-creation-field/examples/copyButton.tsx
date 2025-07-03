@@ -3,7 +3,7 @@ import {
   Label,
   PasswordCreationField,
 } from "@mittwald/flow-react-components";
-import React, { useState } from "react";
+import { useState } from "react";
 
 export default () => {
   const [password, setPassword] = useState<string>("");
