@@ -245,6 +245,14 @@ export const PasswordCreationField = flowComponent(
         isDisabled: isDisabled,
         className: styles.button,
       },
+      CopyButton: {
+        tunnelId: "button",
+        size: "m",
+        variant: "plain",
+        color: "secondary",
+        isDisabled: isDisabled,
+        className: styles.button,
+      },
       Label: {
         className: formFieldStyles.label,
         tunnelId: "label",

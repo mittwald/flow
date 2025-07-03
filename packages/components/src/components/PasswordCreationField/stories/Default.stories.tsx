@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { PasswordCreationField } from "../index";
-import React from "react";
+import React, { useState } from "react";
 import { Label } from "@/components/Label";
 import { action } from "@storybook/addon-actions";
 import type { PolicyDeclaration } from "@mittwald/password-tools-js/policy";
@@ -11,6 +11,7 @@ import { sleep } from "@/lib/promises/sleep";
 import { Button } from "@/components/Button";
 import { Field, Form } from "@/integrations/react-hook-form";
 import { IconDanger } from "@/components/Icon/components/icons";
+import { CopyButton } from "@/components/CopyButton";
 
 const policyDecl: PolicyDeclaration = {
   minComplexity: 3,
@@ -122,6 +123,19 @@ export const WithForm: Story = {
         <Button onPress={() => form.reset()}>Reset</Button>
         <Button type="submit">Submit</Button>
       </Form>
+    );
+  },
+};
+
+export const WithCopyButton: Story = {
+  render: (props) => {
+    const [password, setPassword] = useState<string>("");
+
+    return (
+      <PasswordCreationField onChange={(v) => setPassword(v)} {...props}>
+        <Label>Password</Label>
+        <CopyButton text={password} />
+      </PasswordCreationField>
     );
   },
 };
