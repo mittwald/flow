@@ -7,8 +7,9 @@ Um Text zu formatieren und zu gruppieren, schließe ihn mit dem `<Text>`-Tag ein
 ---
 
 # Size
-Neben der Default-Schriftgröße unterstützt Text auch die Size **Small**.
-Nutze das `<small>`-Tag, um sie zu verwenden.
+
+Neben der Default-Schriftgröße unterstützt Text auch die Size **Small**. Nutze
+das `<small>`-Tag, um sie zu verwenden.
 
 <LiveCodeEditor example="size" editorCollapsed />
 
@@ -19,21 +20,28 @@ Nutze das `<small>`-Tag, um sie zu verwenden.
 <Alert>
   <Heading>Kompatibilität mit Remote Components</Heading>
   <Content>
-    Bei der Verwendung von Text als Remote Component wird nicht jede HTML Formatierung unterstützt. 
-    Aktuell sind dies nur strong, ul, ol, li, small, br. 
-    Wenn dir etwas fehlt, sag uns gerne auf GitHub Bescheid. 
-    <Link href="https://github.com/mittwald/flow/issues/new?title=Feedback%20on%20Text%20component">Feedback geben</Link>
+    Bei der Verwendung von Text als Remote Component wird nicht jede HTML
+    Formatierung unterstützt. Aktuell sind dies nur strong, ul, ol, li, small,
+    br. Wenn dir etwas fehlt, sag uns gerne auf GitHub Bescheid.
+    <Link href="https://github.com/mittwald/flow/issues/new?title=Feedback%20on%20Text%20component">
+      Feedback geben
+    </Link>
   </Content>
 </Alert>
 
-Die Text-Component unterstützt alle gängigen Formatierungen und Elemente wie <strong>, <i>, <ul>, <ol> usw.
+Die Text-Component unterstützt alle gängigen Formatierungen und Elemente wie
+`<strong>`, `<i>`, `<ul>`, `<ol>` usw.
 
 <LiveCodeEditor example="html" editorCollapsed />
 
 ---
 
 # Mit elementType
-Verwende die `elementType`-Property, um festzulegen, welches HTML-Element die Text-Component rendern soll. Standardmäßig wird ein `<span>` erzeugt. Für Fließtexte, die als eigenständige Absätze erkennbar sein sollen, verwende stattdessen ein `<p>`-Element.
+
+Verwende die `elementType`-Property, um festzulegen, welches HTML-Element die
+Text-Component rendern soll. Standardmäßig wird ein `<span>` erzeugt. Für
+Fließtexte, die als eigenständige Absätze erkennbar sein sollen, verwende
+stattdessen ein `<p>`-Element.
 
 <LiveCodeEditor example="elementType" editorCollapsed />
 
@@ -41,9 +49,10 @@ Verwende die `elementType`-Property, um festzulegen, welches HTML-Element die Te
 
 # Mit emulateBoldWidth
 
-Mit der Property `emulateBoldWidth` erhält der Text immer die Breite, die er mit 
-`<strong>` oder `font-weight: bold` haben würde. Das ist z. B. wichtig, um ein Springen 
-der Menüpunkte zu vermeiden, wenn der aktive Menüpunkt einer Navigation in `bold` dargestellt wird.
+Mit der Property `emulateBoldWidth` erhält der Text immer die Breite, die er mit
+`<strong>` oder `font-weight: bold` haben würde. Das ist z. B. wichtig, um ein
+Springen der Menüpunkte zu vermeiden, wenn der aktive Menüpunkt einer Navigation
+in `bold` dargestellt wird.
 
 <LiveCodeEditor example="emulateBoldWidth" editorCollapsed />
 
@@ -51,9 +60,9 @@ der Menüpunkte zu vermeiden, wenn der aktive Menüpunkt einer Navigation in `bo
 
 # Colors Light und Dark
 
-Zusätzlich zur Standard-Color kann Text auch in den Colors **Light** und **Dark** 
-dargestellt werden. Beide Colors sind Alternativen zur Standard-Color, falls diese 
-nicht auf farbigen oder dekorativen Hintergründen funktioniert.
+Zusätzlich zur Standard-Color kann Text auch in den Colors **Light** und
+**Dark** dargestellt werden. Beide Colors sind Alternativen zur Standard-Color,
+falls diese nicht auf farbigen oder dekorativen Hintergründen funktioniert.
 
 ## Dark
 
@@ -63,8 +72,9 @@ nicht auf farbigen oder dekorativen Hintergründen funktioniert.
 
 <LiveCodeEditor example="light" bgColor="dark" editorCollapsed />
 
-**Light**: Verwende die Light-Color bei dunklen Hintergründen mit einem HSL Lightness-Wert von weniger als 50.
-**Dark**: Verwende die Dark-Color bei hellen, farbigen Hintergründen mit einem HSL Lightness-Wert von größer als 50.
+**Light**: Verwende die Light-Color bei dunklen Hintergründen mit einem HSL
+Lightness-Wert von weniger als 50. **Dark**: Verwende die Dark-Color bei hellen,
+farbigen Hintergründen mit einem HSL Lightness-Wert von größer als 50.
 
 ---
 
@@ -72,7 +82,7 @@ nicht auf farbigen oder dekorativen Hintergründen funktioniert.
 
 ## Align
 
-Benutze die [Align-Component](/03-components/structure/align), um neben dem Text z. B. ein Icon, einen CopyButton 
-oder ein ContextualHelp zu platzieren.
+Benutze die [Align-Component](/03-components/structure/align), um neben dem Text
+z. B. ein Icon, einen CopyButton oder ein ContextualHelp zu platzieren.
 
 <LiveCodeEditor example="align" editorCollapsed />
