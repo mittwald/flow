@@ -1,4 +1,7 @@
 .autocomplete {
+  .empty {
+    padding: var(--size-px--xs) var(--size-px--s);
+  }
   .portalContainer {
     padding-top: var(--size-px--s);
   }

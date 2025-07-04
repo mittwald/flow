@@ -19,6 +19,7 @@ import {
 import styles from "./Autocomplete.module.scss";
 import clsx from "clsx";
 import locales from "./locales/*.locale.json";
+import { Text } from "@/components/Text";
 
 export interface AutocompleteProps
   extends PropsWithChildren,
@@ -56,7 +57,9 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
       shouldCloseOnInteractOutside: () => false,
       isNonModal: true,
       renderEmptyState: () => (
-        <>{stringFormatter.format("autocomplete.empty")}</>
+        <Text className={styles.empty}>
+          {stringFormatter.format("autocomplete.empty")}
+        </Text>
       ),
       onAction: (key) => {
         onChange?.(key.toString());
