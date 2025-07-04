@@ -27,6 +27,7 @@ export interface ContextMenuProps
       | "defaultSelectedKeys"
       | "onSelectionChange"
       | "disabledKeys"
+      | "renderEmptyState"
     >,
     FlowComponentProps {
   /** The type of selection that is allowed in the context menu. */
@@ -44,6 +45,7 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
     defaultSelectedKeys,
     disabledKeys,
     onSelectionChange,
+    renderEmptyState,
     ref,
     controller: overlayControllerFromProps,
     ...rest
@@ -104,6 +106,7 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
             defaultSelectedKeys={defaultSelectedKeys}
             disabledKeys={disabledKeys}
             onSelectionChange={onSelectionChange}
+            renderEmptyState={renderEmptyState}
             ref={ref}
           >
             <PropsContextProvider props={propsContext}>
