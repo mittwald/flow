@@ -20,7 +20,7 @@ const generateFromString = (value: string) => {
   return ["example.com", "test.org", "email.net", "mail.com"].map((d) => {
     const email = `${value.split("@")[0]}@${d}`;
     return (
-      <MenuItem id={email} textValue={email}>
+      <MenuItem key={email} id={email} textValue={email}>
         {email}
       </MenuItem>
     );

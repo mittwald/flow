@@ -1,9 +1,9 @@
 import {
   ContextMenu,
   Label,
-  TextField,
   MenuItem,
   Autocomplete,
+  SearchField,
 } from "@mittwald/flow-react-components";
 import { useState } from "react";
 
@@ -28,9 +28,9 @@ export default () => {
 
   return (
     <Autocomplete value={input} onChange={setInput}>
-      <TextField>
+      <SearchField>
         <Label>Email</Label>
-      </TextField>
+      </SearchField>
       <ContextMenu>{generateSuggestItems()}</ContextMenu>
     </Autocomplete>
   );

@@ -11,9 +11,14 @@ import {
   flowComponent,
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
-import { UNSAFE_PortalProvider, useFocusWithin } from "react-aria";
+import {
+  UNSAFE_PortalProvider,
+  useFocusWithin,
+  useLocalizedStringFormatter,
+} from "react-aria";
 import styles from "./Autocomplete.module.scss";
 import clsx from "clsx";
+import locales from "./locales/*.locale.json";
 
 export interface AutocompleteProps
   extends PropsWithChildren,
@@ -27,10 +32,13 @@ export interface AutocompleteProps
 /** @flr-generate all */
 export const Autocomplete = flowComponent("Autocomplete", (props) => {
   const { children, onChange, value, ...rest } = props;
+  const stringFormatter = useLocalizedStringFormatter(locales);
 
   const { contains } = Aria.useFilter({ sensitivity: "base" });
 
-  const controller = useOverlayController("Autocomplete");
+  const controller = useOverlayController("Popover", {
+    reuseControllerFromContext: true,
+  });
   const controllerIsOpen = controller.useIsOpen();
 
   const triggerRef = useRef<HTMLDivElement>(null);
@@ -47,7 +55,9 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
       shouldUpdatePosition: false,
       shouldCloseOnInteractOutside: () => false,
       isNonModal: true,
-      renderEmptyState: () => <>EMPTY</>,
+      renderEmptyState: () => (
+        <>{stringFormatter.format("autocomplete.empty")}</>
+      ),
       onAction: (key) => {
         onChange?.(key.toString());
       },

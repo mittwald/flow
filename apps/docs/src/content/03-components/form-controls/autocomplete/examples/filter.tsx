@@ -26,8 +26,19 @@ export default () => {
     });
   };
 
+  const domainDotComFilter = (
+    textValue: string,
+    ignored_inputValue: string,
+  ) => {
+    return textValue.includes(".com");
+  };
+
   return (
-    <Autocomplete value={input} onChange={setInput}>
+    <Autocomplete
+      value={input}
+      onChange={setInput}
+      filter={domainDotComFilter}
+    >
       <TextField>
         <Label>Email</Label>
       </TextField>
