@@ -12,7 +12,7 @@ overrides:
 
 patchedDependencies:
   acorn:
-    hash: 58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f
+    hash: 6si3ktymthureqnmnpjiya5mwy
     path: patches/acorn.patch
 
 importers:
@@ -118,7 +118,7 @@ importers:
         version: 3.8.1
       '@mdx-js/loader':
         specifier: ^3.1.0
-        version: 3.1.0(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))(webpack@5.99.9)
+        version: 3.1.0(acorn@8.15.0(patch_hash=6si3ktymthureqnmnpjiya5mwy))(webpack@5.99.9)
       '@mdx-js/react':
         specifier: ^3.1.0
         version: 3.1.0(@types/react@19.1.6)(react@19.1.0)
@@ -133,7 +133,7 @@ importers:
         version: link:../../packages/components
       '@next/mdx':
         specifier: ^15.3.2
-        version: 15.3.2(@mdx-js/loader@3.1.0(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))(webpack@5.99.9))(@mdx-js/react@3.1.0(@types/react@19.1.6)(react@19.1.0))
+        version: 15.3.2(@mdx-js/loader@3.1.0(acorn@8.15.0(patch_hash=6si3ktymthureqnmnpjiya5mwy))(webpack@5.99.9))(@mdx-js/react@3.1.0(@types/react@19.1.6)(react@19.1.0))
       '@tabler/icons-react':
         specifier: ^3.33.0
         version: 3.33.0(react@19.1.0)
@@ -144,11 +144,11 @@ importers:
         specifier: ^2.0.13
         version: 2.0.13
       acorn:
-        specifier: 8.14.1
-        version: 8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+        specifier: 8.15.0
+        version: 8.15.0(patch_hash=6si3ktymthureqnmnpjiya5mwy)
       acorn-typescript:
         specifier: ^1.4.13
-        version: 1.4.13(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))
+        version: 1.4.13(acorn@8.15.0(patch_hash=6si3ktymthureqnmnpjiya5mwy))
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -169,7 +169,7 @@ importers:
         version: 15.3.3(babel-plugin-macros@3.1.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.89.0)
       next-mdx-remote:
         specifier: ^5.0.0
-        version: 5.0.0(@types/react@19.1.6)(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))(react@19.1.0)
+        version: 5.0.0(@types/react@19.1.6)(acorn@8.15.0(patch_hash=6si3ktymthureqnmnpjiya5mwy))(react@19.1.0)
       parse-es-import:
         specifier: ^0.6.0
         version: 0.6.0
@@ -2289,8 +2289,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@inquirer/confirm@5.1.12':
-    resolution: {integrity: sha512-dpq+ielV9/bqgXRUbNH//KsY6WEw9DrGPmipkpmgC1Y46cwuBTNx7PXFWTjc3MQ+urcc0QxoVHcMI0FW4Ok0hg==}
+  '@inquirer/confirm@5.1.13':
+    resolution: {integrity: sha512-EkCtvp67ICIVVzjsquUiVSd+V5HRGOGQfsqA4E4vMWhYnB7InUL0pa0TIWt1i+OfP16Gkds8CdIu6yGZwOM1Yw==}
     engines: {node: '>=18'}
     peerDependencies:
       '@types/node': '>=18'
@@ -2300,6 +2300,15 @@ packages:
 
   '@inquirer/core@10.1.13':
     resolution: {integrity: sha512-1viSxebkYN2nJULlzCxES6G9/stgHSepZ9LqqfdIGPHj5OHhiBUXVS0a6R0bEC2A+VL4D9w6QB66ebCr6HGllA==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      '@types/node': '>=18'
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+
+  '@inquirer/core@10.1.14':
+    resolution: {integrity: sha512-Ma+ZpOJPewtIYl6HZHZckeX1STvDnHTCB2GVINNUlSEn2Am6LddWwfPkIGY0IUFVjUUrr/93XlBwTK6mfLjf0A==}
     engines: {node: '>=18'}
     peerDependencies:
       '@types/node': '>=18'
@@ -4373,8 +4382,8 @@ packages:
   '@types/resolve@1.20.6':
     resolution: {integrity: sha512-A4STmOXPhMUtHH+S6ymgE2GiBSMqf4oTvcQZMcHzokuTLVYzXTB8ttjcgxOVaAp2lGwEdzZ0J+cRbbeevQj1UQ==}
 
-  '@types/statuses@2.0.5':
-    resolution: {integrity: sha512-jmIUGWrAiwu3dZpxntxieC+1n/5c3mjrImkmOSQ2NC5uP6cYO4aAZDdSmRcI5C1oiTmqlZGHC+/NmJrKogbP5A==}
+  '@types/statuses@2.0.6':
+    resolution: {integrity: sha512-xMAgYwceFhRA2zY+XbEA7mxYbA093wdiW8Vu6gZPGWy9cmOyU9XesH1tNcEWsKFd5Vzrqx5T3D38PWx1FIIXkA==}
 
   '@types/tough-cookie@4.0.5':
     resolution: {integrity: sha512-/Ad8+nIOV7Rl++6f1BdKxFSMgmoqEoYbHRpPcx3JEfv8VRsQe9Z4mCXeJBzxs7mbHY/XOZZuXlRNfhpVPbs6ZA==}
@@ -4711,8 +4720,8 @@ packages:
     resolution: {integrity: sha512-ueEepnujpqee2o5aIYnvHU6C0A42MNdsIDeqy5BydrkuC5R1ZuUFnm27EeFJGoEHJQgn3uleRvmTXaJgfXbt4g==}
     engines: {node: '>=0.4.0'}
 
-  acorn@8.14.1:
-    resolution: {integrity: sha512-OvQ/2pUDKmgfCg++xsTX1wGxfTaszcHVcTctW4UJB4hibJx2HXxxO5UmVgyjMa+ZDsiaf5wWLXYpRWMmBI0QHg==}
+  acorn@8.15.0:
+    resolution: {integrity: sha512-NZyJarBfL7nWwIq+FDL6Zp/yHEhePMNnnJ0y3qfieCrmNvYct8uvtiV41UvlSe6apAfk0fY1FbWx+NwfmpvtTg==}
     engines: {node: '>=0.4.0'}
     hasBin: true
 
@@ -8731,8 +8740,8 @@ packages:
   stackback@0.0.2:
     resolution: {integrity: sha512-1XMJE5fQo1jGH6Y/7ebnwPOBEkIEnT4QF32d5R1+VXdXveM0IBMJt8zfaxX1P3QhVwrYe+576+jkANtSS2mBbw==}
 
-  statuses@2.0.1:
-    resolution: {integrity: sha512-RwNA9Z/7PrK06rYLIzFMlaF+l73iwpzsqRIFgbMLbTcLD6cOao82TaWefPXQvB2fOC4AjuYSEndS7N/mTCbkdQ==}
+  statuses@2.0.2:
+    resolution: {integrity: sha512-DvEy55V3DB7uknRo+4iOGT5fP1slR8wQohVdknigZPMpMstaKJQWhwiYBACJE3Ul2pTnATihhBYnRhZQHGBiRw==}
     engines: {node: '>= 0.8'}
 
   std-env@3.9.0:
@@ -10504,7 +10513,7 @@ snapshots:
 
   '@bundled-es-modules/statuses@1.0.1':
     dependencies:
-      statuses: 2.0.1
+      statuses: 2.0.2
     optional: true
 
   '@bundled-es-modules/tough-cookie@0.1.6':
@@ -10860,34 +10869,20 @@ snapshots:
   '@img/sharp-win32-x64@0.34.2':
     optional: true
 
-  '@inquirer/confirm@5.1.12(@types/node@22.13.10)':
+  '@inquirer/confirm@5.1.13(@types/node@22.13.10)':
     dependencies:
-      '@inquirer/core': 10.1.13(@types/node@22.13.10)
+      '@inquirer/core': 10.1.14(@types/node@22.13.10)
       '@inquirer/type': 3.0.7(@types/node@22.13.10)
     optionalDependencies:
       '@types/node': 22.13.10
     optional: true
 
-  '@inquirer/confirm@5.1.12(@types/node@22.15.23)':
+  '@inquirer/confirm@5.1.13(@types/node@22.15.23)':
     dependencies:
-      '@inquirer/core': 10.1.13(@types/node@22.15.23)
+      '@inquirer/core': 10.1.14(@types/node@22.15.23)
       '@inquirer/type': 3.0.7(@types/node@22.15.23)
     optionalDependencies:
       '@types/node': 22.15.23
-    optional: true
-
-  '@inquirer/core@10.1.13(@types/node@22.13.10)':
-    dependencies:
-      '@inquirer/figures': 1.0.12
-      '@inquirer/type': 3.0.7(@types/node@22.13.10)
-      ansi-escapes: 4.3.2
-      cli-width: 4.1.0
-      mute-stream: 2.0.0
-      signal-exit: 4.1.0
-      wrap-ansi: 6.2.0
-      yoctocolors-cjs: 2.1.2
-    optionalDependencies:
-      '@types/node': 22.13.10
     optional: true
 
   '@inquirer/core@10.1.13(@types/node@22.15.23)':
@@ -10902,6 +10897,34 @@ snapshots:
       yoctocolors-cjs: 2.1.2
     optionalDependencies:
       '@types/node': 22.15.23
+
+  '@inquirer/core@10.1.14(@types/node@22.13.10)':
+    dependencies:
+      '@inquirer/figures': 1.0.12
+      '@inquirer/type': 3.0.7(@types/node@22.13.10)
+      ansi-escapes: 4.3.2
+      cli-width: 4.1.0
+      mute-stream: 2.0.0
+      signal-exit: 4.1.0
+      wrap-ansi: 6.2.0
+      yoctocolors-cjs: 2.1.2
+    optionalDependencies:
+      '@types/node': 22.13.10
+    optional: true
+
+  '@inquirer/core@10.1.14(@types/node@22.15.23)':
+    dependencies:
+      '@inquirer/figures': 1.0.12
+      '@inquirer/type': 3.0.7(@types/node@22.15.23)
+      ansi-escapes: 4.3.2
+      cli-width: 4.1.0
+      mute-stream: 2.0.0
+      signal-exit: 4.1.0
+      wrap-ansi: 6.2.0
+      yoctocolors-cjs: 2.1.2
+    optionalDependencies:
+      '@types/node': 22.15.23
+    optional: true
 
   '@inquirer/expand@4.0.15(@types/node@22.15.23)':
     dependencies:
@@ -11200,9 +11223,9 @@ snapshots:
 
   '@lit-labs/ssr-dom-shim@1.3.0': {}
 
-  '@mdx-js/loader@3.1.0(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))(webpack@5.99.9)':
+  '@mdx-js/loader@3.1.0(acorn@8.15.0(patch_hash=6si3ktymthureqnmnpjiya5mwy))(webpack@5.99.9)':
     dependencies:
-      '@mdx-js/mdx': 3.1.0(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))
+      '@mdx-js/mdx': 3.1.0(acorn@8.15.0(patch_hash=6si3ktymthureqnmnpjiya5mwy))
       source-map: 0.7.4
     optionalDependencies:
       webpack: 5.99.9
@@ -11210,7 +11233,7 @@ snapshots:
       - acorn
       - supports-color
 
-  '@mdx-js/mdx@3.1.0(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))':
+  '@mdx-js/mdx@3.1.0(acorn@8.15.0(patch_hash=6si3ktymthureqnmnpjiya5mwy))':
     dependencies:
       '@types/estree': 1.0.7
       '@types/estree-jsx': 1.0.5
@@ -11224,7 +11247,7 @@ snapshots:
       hast-util-to-jsx-runtime: 2.3.6
       markdown-extensions: 2.0.0
       recma-build-jsx: 1.0.0
-      recma-jsx: 1.0.0(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))
+      recma-jsx: 1.0.0(acorn@8.15.0(patch_hash=6si3ktymthureqnmnpjiya5mwy))
       recma-stringify: 1.0.0
       rehype-recma: 1.0.0
       remark-mdx: 3.1.0
@@ -11417,11 +11440,11 @@ snapshots:
     dependencies:
       fast-glob: 3.3.1
 
-  '@next/mdx@15.3.2(@mdx-js/loader@3.1.0(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))(webpack@5.99.9))(@mdx-js/react@3.1.0(@types/react@19.1.6)(react@19.1.0))':
+  '@next/mdx@15.3.2(@mdx-js/loader@3.1.0(acorn@8.15.0(patch_hash=6si3ktymthureqnmnpjiya5mwy))(webpack@5.99.9))(@mdx-js/react@3.1.0(@types/react@19.1.6)(react@19.1.0))':
     dependencies:
       source-map: 0.7.4
     optionalDependencies:
-      '@mdx-js/loader': 3.1.0(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))(webpack@5.99.9)
+      '@mdx-js/loader': 3.1.0(acorn@8.15.0(patch_hash=6si3ktymthureqnmnpjiya5mwy))(webpack@5.99.9)
       '@mdx-js/react': 3.1.0(@types/react@19.1.6)(react@19.1.0)
 
   '@next/swc-darwin-arm64@15.2.5':
@@ -13730,7 +13753,7 @@ snapshots:
 
   '@types/resolve@1.20.6': {}
 
-  '@types/statuses@2.0.5':
+  '@types/statuses@2.0.6':
     optional: true
 
   '@types/tough-cookie@4.0.5':
@@ -14263,19 +14286,19 @@ snapshots:
     dependencies:
       xtend: 3.0.0
 
-  acorn-jsx@5.3.2(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)):
+  acorn-jsx@5.3.2(acorn@8.15.0(patch_hash=6si3ktymthureqnmnpjiya5mwy)):
     dependencies:
-      acorn: 8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+      acorn: 8.15.0(patch_hash=6si3ktymthureqnmnpjiya5mwy)
 
-  acorn-typescript@1.4.13(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)):
+  acorn-typescript@1.4.13(acorn@8.15.0(patch_hash=6si3ktymthureqnmnpjiya5mwy)):
     dependencies:
-      acorn: 8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+      acorn: 8.15.0(patch_hash=6si3ktymthureqnmnpjiya5mwy)
 
   acorn-walk@8.3.4:
     dependencies:
-      acorn: 8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+      acorn: 8.15.0(patch_hash=6si3ktymthureqnmnpjiya5mwy)
 
-  acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f): {}
+  acorn@8.15.0(patch_hash=6si3ktymthureqnmnpjiya5mwy): {}
 
   add-stream@1.0.0: {}
 
@@ -15333,7 +15356,7 @@ snapshots:
   esast-util-from-js@2.0.1:
     dependencies:
       '@types/estree-jsx': 1.0.5
-      acorn: 8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+      acorn: 8.15.0(patch_hash=6si3ktymthureqnmnpjiya5mwy)
       esast-util-from-estree: 2.0.0
       vfile-message: 4.0.2
 
@@ -15455,8 +15478,8 @@ snapshots:
 
   espree@10.3.0:
     dependencies:
-      acorn: 8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
-      acorn-jsx: 5.3.2(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))
+      acorn: 8.15.0(patch_hash=6si3ktymthureqnmnpjiya5mwy)
+      acorn-jsx: 5.3.2(acorn@8.15.0(patch_hash=6si3ktymthureqnmnpjiya5mwy))
       eslint-visitor-keys: 4.2.0
 
   esprima@4.0.1: {}
@@ -17022,8 +17045,8 @@ snapshots:
 
   micromark-extension-mdxjs@3.0.0:
     dependencies:
-      acorn: 8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
-      acorn-jsx: 5.3.2(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))
+      acorn: 8.15.0(patch_hash=6si3ktymthureqnmnpjiya5mwy)
+      acorn-jsx: 5.3.2(acorn@8.15.0(patch_hash=6si3ktymthureqnmnpjiya5mwy))
       micromark-extension-mdx-expression: 3.0.1
       micromark-extension-mdx-jsx: 3.0.2
       micromark-extension-mdx-md: 2.0.0
@@ -17267,7 +17290,7 @@ snapshots:
 
   mlly@1.7.4:
     dependencies:
-      acorn: 8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+      acorn: 8.15.0(patch_hash=6si3ktymthureqnmnpjiya5mwy)
       pathe: 2.0.3
       pkg-types: 1.3.1
       ufo: 1.6.1
@@ -17297,12 +17320,12 @@ snapshots:
       '@bundled-es-modules/cookie': 2.0.1
       '@bundled-es-modules/statuses': 1.0.1
       '@bundled-es-modules/tough-cookie': 0.1.6
-      '@inquirer/confirm': 5.1.12(@types/node@22.13.10)
+      '@inquirer/confirm': 5.1.13(@types/node@22.13.10)
       '@mswjs/interceptors': 0.37.6
       '@open-draft/deferred-promise': 2.2.0
       '@open-draft/until': 2.1.0
       '@types/cookie': 0.6.0
-      '@types/statuses': 2.0.5
+      '@types/statuses': 2.0.6
       graphql: 16.11.0
       headers-polyfill: 4.0.3
       is-node-process: 1.2.0
@@ -17323,12 +17346,12 @@ snapshots:
       '@bundled-es-modules/cookie': 2.0.1
       '@bundled-es-modules/statuses': 1.0.1
       '@bundled-es-modules/tough-cookie': 0.1.6
-      '@inquirer/confirm': 5.1.12(@types/node@22.15.23)
+      '@inquirer/confirm': 5.1.13(@types/node@22.15.23)
       '@mswjs/interceptors': 0.37.6
       '@open-draft/deferred-promise': 2.2.0
       '@open-draft/until': 2.1.0
       '@types/cookie': 0.6.0
-      '@types/statuses': 2.0.5
+      '@types/statuses': 2.0.6
       graphql: 16.11.0
       headers-polyfill: 4.0.3
       is-node-process: 1.2.0
@@ -17386,10 +17409,10 @@ snapshots:
     dependencies:
       type-fest: 2.19.0
 
-  next-mdx-remote@5.0.0(@types/react@19.1.6)(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))(react@19.1.0):
+  next-mdx-remote@5.0.0(@types/react@19.1.6)(acorn@8.15.0(patch_hash=6si3ktymthureqnmnpjiya5mwy))(react@19.1.0):
     dependencies:
       '@babel/code-frame': 7.27.1
-      '@mdx-js/mdx': 3.1.0(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))
+      '@mdx-js/mdx': 3.1.0(acorn@8.15.0(patch_hash=6si3ktymthureqnmnpjiya5mwy))
       '@mdx-js/react': 3.1.0(@types/react@19.1.6)(react@19.1.0)
       react: 19.1.0
       unist-util-remove: 3.1.1
@@ -17938,8 +17961,8 @@ snapshots:
 
   parse-es-import@0.6.0:
     dependencies:
-      acorn: 8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
-      acorn-jsx: 5.3.2(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))
+      acorn: 8.15.0(patch_hash=6si3ktymthureqnmnpjiya5mwy)
+      acorn-jsx: 5.3.2(acorn@8.15.0(patch_hash=6si3ktymthureqnmnpjiya5mwy))
 
   parse-json@5.2.0:
     dependencies:
@@ -18669,9 +18692,9 @@ snapshots:
       estree-util-build-jsx: 3.0.1
       vfile: 6.0.3
 
-  recma-jsx@1.0.0(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)):
+  recma-jsx@1.0.0(acorn@8.15.0(patch_hash=6si3ktymthureqnmnpjiya5mwy)):
     dependencies:
-      acorn-jsx: 5.3.2(acorn@8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f))
+      acorn-jsx: 5.3.2(acorn@8.15.0(patch_hash=6si3ktymthureqnmnpjiya5mwy))
       estree-util-to-js: 2.0.0
       recma-parse: 1.0.0
       recma-stringify: 1.0.0
@@ -19233,7 +19256,7 @@ snapshots:
 
   stackback@0.0.2: {}
 
-  statuses@2.0.1:
+  statuses@2.0.2:
     optional: true
 
   std-env@3.9.0: {}
@@ -19435,7 +19458,7 @@ snapshots:
   terser@5.40.0:
     dependencies:
       '@jridgewell/source-map': 0.3.6
-      acorn: 8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+      acorn: 8.15.0(patch_hash=6si3ktymthureqnmnpjiya5mwy)
       commander: 2.20.3
       source-map-support: 0.5.21
 
@@ -19540,7 +19563,7 @@ snapshots:
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
       '@types/node': 16.18.126
-      acorn: 8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+      acorn: 8.15.0(patch_hash=6si3ktymthureqnmnpjiya5mwy)
       acorn-walk: 8.3.4
       arg: 4.1.3
       create-require: 1.1.1
@@ -19558,7 +19581,7 @@ snapshots:
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
       '@types/node': 22.13.10
-      acorn: 8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+      acorn: 8.15.0(patch_hash=6si3ktymthureqnmnpjiya5mwy)
       acorn-walk: 8.3.4
       arg: 4.1.3
       create-require: 1.1.1
@@ -19768,7 +19791,7 @@ snapshots:
 
   unplugin@1.16.1:
     dependencies:
-      acorn: 8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+      acorn: 8.15.0(patch_hash=6si3ktymthureqnmnpjiya5mwy)
       webpack-virtual-modules: 0.6.2
 
   update-browserslist-db@1.1.3(browserslist@4.24.5):
@@ -20203,7 +20226,7 @@ snapshots:
       '@webassemblyjs/ast': 1.14.1
       '@webassemblyjs/wasm-edit': 1.14.1
       '@webassemblyjs/wasm-parser': 1.14.1
-      acorn: 8.14.1(patch_hash=58efcb9f21acd585fce3c5eb984c015e7a1e052b0e1841ed2ac082540f7df40f)
+      acorn: 8.15.0(patch_hash=6si3ktymthureqnmnpjiya5mwy)
       browserslist: 4.24.5
       chrome-trace-event: 1.0.4
       enhanced-resolve: 5.18.1
