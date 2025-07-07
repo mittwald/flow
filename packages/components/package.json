@@ -101,7 +101,7 @@
     "@mittwald/flow-core": "workspace:*",
     "@mittwald/flow-design-tokens": "workspace:*",
     "@mittwald/react-use-promise": "^3.0.4",
-    "@mittwald/remote-dom-react": "1.2.2-mittwald.3",
+    "@mittwald/remote-dom-react": "1.2.2-mittwald.10",
     "@mittwald/typescript-config": "workspace:*",
     "@nx/storybook": "^20.8.2",
     "@storybook/addon-a11y": "^8.6.14",
