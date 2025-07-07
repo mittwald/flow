@@ -1,8 +1,4 @@
-import React, {
-  type KeyboardEventHandler,
-  type PropsWithChildren,
-  useRef,
-} from "react";
+import { useRef, type PropsWithChildren } from "react";
 import type { PropsWithClassName } from "@/lib/types/props";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 import * as Aria from "react-aria-components";
@@ -11,15 +7,12 @@ import {
   flowComponent,
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
-import {
-  UNSAFE_PortalProvider,
-  useFocusWithin,
-  useLocalizedStringFormatter,
-} from "react-aria";
+import { useLocalizedStringFormatter } from "react-aria";
 import styles from "./Autocomplete.module.scss";
-import clsx from "clsx";
 import locales from "./locales/*.locale.json";
 import { Text } from "@/components/Text";
+import type { SearchFieldProps } from "@/components/SearchField";
+import type { TextFieldProps } from "@/components/TextField";
 
 export interface AutocompleteProps
   extends PropsWithChildren,
@@ -37,24 +30,26 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
 
   const { contains } = Aria.useFilter({ sensitivity: "base" });
 
+  const triggerRef = useRef<HTMLInputElement>(null);
+
   const controller = useOverlayController("Popover", {
     reuseControllerFromContext: true,
   });
-  const controllerIsOpen = controller.useIsOpen();
+  const menuIsOpen = controller.useIsOpen();
 
-  const triggerRef = useRef<HTMLDivElement>(null);
-  const portalContainerRef = useRef<HTMLDivElement>(null);
-
-  const { focusWithinProps } = useFocusWithin({
-    onBlurWithin: () => controller.close(),
-  });
+  const inputProps: SearchFieldProps & TextFieldProps = {
+    onKeyDown: (e) => {
+      if (e.key === "Enter" && menuIsOpen) {
+        e.preventDefault();
+      }
+    },
+    ref: triggerRef,
+  };
 
   const propsContext: PropsContext = {
     ContextMenu: {
+      placement: "bottom start",
       controller,
-      triggerRef,
-      shouldUpdatePosition: false,
-      shouldCloseOnInteractOutside: () => false,
       isNonModal: true,
       renderEmptyState: () => (
         <Text className={styles.empty}>
@@ -64,48 +59,37 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
       onAction: (key) => {
         onChange?.(key.toString());
       },
+      triggerRef,
     },
+    SearchField: inputProps,
+    TextField: inputProps,
   };
 
   const handleOnInputChange = (value: string) => {
     if (!value) {
       controller.close();
-    } else if (!controllerIsOpen) {
+    } else if (!menuIsOpen) {
       controller.open();
     }
 
     onChange?.(value);
   };
 
-  const handleKeyDown: KeyboardEventHandler = (event) => {
-    if (event.key === "Enter" && controllerIsOpen) {
-      event.preventDefault();
-    }
-  };
-
   return (
-    <UNSAFE_PortalProvider getContainer={() => portalContainerRef.current}>
-      <PropsContextProvider props={propsContext}>
-        <div
-          {...focusWithinProps}
-          className={clsx(styles.autocomplete)}
-          onKeyDownCapture={handleKeyDown}
-        >
-          <Aria.Autocomplete
-            onInputChange={handleOnInputChange}
-            filter={contains}
-            inputValue={value}
-            {...rest}
-          >
-            {children}
-          </Aria.Autocomplete>
-          <div
-            ref={portalContainerRef}
-            className={clsx(styles.portalContainer)}
-          />
-        </div>
-      </PropsContextProvider>
-    </UNSAFE_PortalProvider>
+    <PropsContextProvider
+      props={propsContext}
+      mergeInParentContext
+      dependencies={[menuIsOpen, controller]}
+    >
+      <Aria.Autocomplete
+        onInputChange={handleOnInputChange}
+        filter={contains}
+        inputValue={value}
+        {...rest}
+      >
+        {children}
+      </Aria.Autocomplete>
+    </PropsContextProvider>
   );
 });
 
