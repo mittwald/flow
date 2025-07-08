@@ -12,6 +12,9 @@ import {
   TextArea,
   TextField,
   PasswordCreationField,
+  Autocomplete,
+  ContextMenu,
+  MenuItem,
 } from "@mittwald/flow-remote-react-components";
 import {
   Form,
@@ -55,9 +58,19 @@ export default function Page() {
             required: "Required!",
           }}
         >
-          <TextField>
-            <Label>Email</Label>
-          </TextField>
+          <Autocomplete>
+            <TextField>
+              <Label>Email</Label>
+            </TextField>
+            <ContextMenu>
+              <MenuItem textValue="Foo" id="Foo">
+                Foo
+              </MenuItem>
+              <MenuItem textValue="Bar" id="Bar">
+                Bar
+              </MenuItem>
+            </ContextMenu>
+          </Autocomplete>
         </Field>
         <Field name="comment">
           <TextArea maxLength={100}>
