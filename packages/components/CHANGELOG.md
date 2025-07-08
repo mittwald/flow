@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.327](https://github.com/mittwald/flow/compare/0.2.0-alpha.326...0.2.0-alpha.327) (2025-07-08)
+
+### Features
+
+* **Autocomplete:** Added new Autocomplete component ([#1699](https://github.com/mittwald/flow/issues/1699)) ([2aa82a9](https://github.com/mittwald/flow/commit/2aa82a916107fd2fbb283b89bd2e1274f3d11a5f))
+
 # [0.2.0-alpha.326](https://github.com/mittwald/flow/compare/0.2.0-alpha.325...0.2.0-alpha.326) (2025-07-08)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
