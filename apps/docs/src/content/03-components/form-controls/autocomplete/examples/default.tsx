@@ -27,8 +27,8 @@ export default () => {
   };
 
   return (
-    <Autocomplete value={input} onChange={setInput}>
-      <TextField>
+    <Autocomplete>
+      <TextField value={input} onChange={setInput}>
         <Label>Email</Label>
       </TextField>
       <ContextMenu>{generateSuggestItems()}</ContextMenu>

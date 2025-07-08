@@ -34,12 +34,8 @@ export default () => {
   };
 
   return (
-    <Autocomplete
-      value={input}
-      onChange={setInput}
-      filter={domainDotComFilter}
-    >
-      <TextField>
+    <Autocomplete filter={domainDotComFilter}>
+      <TextField value={input} onChange={setInput}>
         <Label>Email</Label>
       </TextField>
       <ContextMenu>{generateSuggestItems()}</ContextMenu>
