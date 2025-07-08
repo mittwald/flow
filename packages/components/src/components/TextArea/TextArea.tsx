@@ -28,7 +28,6 @@ export const TextArea = flowComponent("TextArea", (props) => {
   const {
     children,
     placeholder,
-    defaultValue,
     rows = 5,
     autoResizeMaxRows = rows,
     ref,
@@ -61,7 +60,6 @@ export const TextArea = flowComponent("TextArea", (props) => {
         className={styles.textArea}
         ref={mergeRefs(localRef, ref)}
         onChange={updateHeight}
-        defaultValue={defaultValue}
         style={{
           minHeight: getHeight(rows),
           maxHeight: getHeight(autoResizeMaxRows),
