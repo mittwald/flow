@@ -16,14 +16,11 @@ export class RemoteAutocompleteElement extends FlowRemoteElement<RemoteAutocompl
       disableAutoFocusFirst: {},
       filter: {},
       slot: {},
-      value: {},
     };
   }
 
   static override get remoteEvents() {
-    return {
-      change: {},
-    };
+    return {};
   }
 
   static override get remoteSlots() {

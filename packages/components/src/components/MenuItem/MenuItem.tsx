@@ -1,5 +1,4 @@
 import type { PropsWithChildren } from "react";
-import React from "react";
 import * as Aria from "react-aria-components";
 import styles from "./MenuItem.module.scss";
 import clsx from "clsx";

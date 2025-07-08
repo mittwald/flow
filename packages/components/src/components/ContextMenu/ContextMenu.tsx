@@ -36,6 +36,10 @@ export interface ContextMenuProps
   width?: string | number;
 }
 
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const ContextMenu = flowComponent("ContextMenu", (props) => {
   const {
     children,

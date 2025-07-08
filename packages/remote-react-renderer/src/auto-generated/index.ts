@@ -30,8 +30,10 @@ import { Color as Color } from "@mittwald/flow-react-components";
 import { ColumnLayout as ColumnLayout } from "@mittwald/flow-react-components";
 import { ComboBox as ComboBox } from "@mittwald/flow-react-components";
 import { Content as Content } from "@mittwald/flow-react-components";
+import { ContextMenu as ContextMenu } from "@mittwald/flow-react-components";
 import { ContextMenuContent as ContextMenuContent } from "@mittwald/flow-react-components";
 import { ContextMenuSection as ContextMenuSection } from "@mittwald/flow-react-components";
+import { ContextMenuTrigger as ContextMenuTrigger } from "@mittwald/flow-react-components";
 import { ContextualHelp as ContextualHelp } from "@mittwald/flow-react-components";
 import { ContextualHelpTrigger as ContextualHelpTrigger } from "@mittwald/flow-react-components";
 import { CopyButton as CopyButton } from "@mittwald/flow-react-components";
@@ -180,6 +182,10 @@ export const flowComponents = {
   ),
   "flr-combo-box": createFlowRemoteComponentRenderer("ComboBox", ComboBox),
   "flr-content": createFlowRemoteComponentRenderer("Content", Content),
+  "flr-context-menu": createFlowRemoteComponentRenderer(
+    "ContextMenu",
+    ContextMenu,
+  ),
   "flr-context-menu-content": createFlowRemoteComponentRenderer(
     "ContextMenuContent",
     ContextMenuContent,
@@ -187,6 +193,10 @@ export const flowComponents = {
   "flr-context-menu-section": createFlowRemoteComponentRenderer(
     "ContextMenuSection",
     ContextMenuSection,
+  ),
+  "flr-context-menu-trigger": createFlowRemoteComponentRenderer(
+    "ContextMenuTrigger",
+    ContextMenuTrigger,
   ),
   "flr-contextual-help": createFlowRemoteComponentRenderer(
     "ContextualHelp",

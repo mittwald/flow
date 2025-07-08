@@ -54,8 +54,12 @@ export default function Page() {
         <Autocomplete>
           <TextField name="text" aria-label="Text" />
           <ContextMenu>
-            <MenuItem>Foo</MenuItem>
-            <MenuItem>Bar</MenuItem>
+            <MenuItem textValue="Foo" id="Foo">
+              Foo
+            </MenuItem>
+            <MenuItem textValue="Bar" id="Bar">
+              Bar
+            </MenuItem>
           </ContextMenu>
         </Autocomplete>
 
