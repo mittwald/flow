@@ -18,14 +18,11 @@ export interface AutocompleteProps
   extends PropsWithChildren,
     PropsWithClassName,
     FlowComponentProps,
-    Omit<Aria.AutocompleteProps, "children" | "onInputChange" | "inputValue"> {
-  onChange?: Aria.AutocompleteProps["onInputChange"];
-  value?: Aria.AutocompleteProps["inputValue"];
-}
+    Omit<Aria.AutocompleteProps, "children" | "onInputChange" | "inputValue"> {}
 
 /** @flr-generate all */
 export const Autocomplete = flowComponent("Autocomplete", (props) => {
-  const { children, onChange, value, ...rest } = props;
+  const { children, ...rest } = props;
   const stringFormatter = useLocalizedStringFormatter(locales);
 
   const { contains } = Aria.useFilter({ sensitivity: "base" });
@@ -57,7 +54,16 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
         </Text>
       ),
       onAction: (key) => {
-        onChange?.(key.toString());
+        const input = triggerRef.current;
+        if (input) {
+          const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
+            window.HTMLInputElement.prototype,
+            "value",
+          )?.set;
+          nativeInputValueSetter?.call(input, String(key));
+          const event = new Event("input", { bubbles: true });
+          input.dispatchEvent(event);
+        }
       },
       triggerRef,
     },
@@ -71,8 +77,6 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
     } else if (!menuIsOpen) {
       controller.open();
     }
-
-    onChange?.(value);
   };
 
   return (
@@ -84,7 +88,6 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
       <Aria.Autocomplete
         onInputChange={handleOnInputChange}
         filter={contains}
-        inputValue={value}
         {...rest}
       >
         {children}

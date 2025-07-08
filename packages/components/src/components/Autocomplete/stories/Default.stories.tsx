@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React, { useState } from "react";
+import { useState } from "react";
 import type { Chat } from "@/components/Chat";
 import { Autocomplete } from "@/components/Autocomplete";
 import { Label } from "@/components/Label";
@@ -28,8 +28,8 @@ const meta: Meta<typeof Chat> = {
     const [input, setInput] = useState("");
 
     return (
-      <Autocomplete value={input} onChange={setInput}>
-        <SearchField>
+      <Autocomplete>
+        <SearchField onChange={setInput} value={input}>
           <Label>Test</Label>
         </SearchField>
         <ContextMenu>{suggestEmail(input)}</ContextMenu>
