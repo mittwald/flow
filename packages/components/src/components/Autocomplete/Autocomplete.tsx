@@ -32,8 +32,8 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
 
   const triggerRef = useRef<HTMLInputElement>(null);
 
-  const controller = useOverlayController("Popover", {
-    reuseControllerFromContext: true,
+  const controller = useOverlayController("ContextMenu", {
+    reuseControllerFromContext: false,
   });
   const menuIsOpen = controller.useIsOpen();
 
