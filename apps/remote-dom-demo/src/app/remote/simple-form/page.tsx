@@ -13,6 +13,9 @@ import {
   CheckboxGroup,
   Checkbox,
   Button,
+  ContextMenu,
+  MenuItem,
+  Autocomplete,
 } from "@mittwald/flow-remote-react-components";
 import { useState } from "react";
 
@@ -48,7 +51,14 @@ export default function Page() {
           <Radio value="member">Mitglied</Radio>
           <Radio value="accountant">Buchhalter</Radio>
         </RadioGroup>
-        <TextField name="text" aria-label="Text" />
+        <Autocomplete>
+          <TextField name="text" aria-label="Text" />
+          <ContextMenu>
+            <MenuItem>Foo</MenuItem>
+            <MenuItem>Bar</MenuItem>
+          </ContextMenu>
+        </Autocomplete>
+
         <Select name="select" aria-label="Select">
           <Option value="Foo" textValue="Foo">
             Foo
