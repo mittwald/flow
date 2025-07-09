@@ -88,6 +88,7 @@ export * from "@/components/SettingsProvider";
 export * from "@/components/Skeleton";
 export * from "@/components/SkeletonText";
 export * from "@/components/Slider";
+export * from "@/components/SuspenseTrigger";
 export * from "@/components/Switch";
 export * from "@/components/Table";
 export * from "@/components/Tabs";
