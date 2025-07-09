@@ -97,6 +97,7 @@ export * from "./Separator";
 export * from "./Skeleton";
 export * from "./SkeletonText";
 export * from "./Slider";
+export * from "./SuspenseTrigger";
 export * from "./Switch";
 export * from "./Tab";
 export * from "./TabTitle";
