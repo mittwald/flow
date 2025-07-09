@@ -26,7 +26,7 @@
     "dist"
   ],
   "engines": {
-    "node": ">=20.11"
+    "node": ">=20.19"
   },
   "scripts": {
     "build": "vite build --config vite.build.config.ts",
@@ -36,18 +36,18 @@
   },
   "dependencies": {
     "@mittwald/react-use-promise": "^3.0.4",
-    "axios": "^1.9.0",
+    "axios": "^1.10.0",
     "jose": "^6.0.11",
     "std-env": "^3.9.0",
-    "zod": "^3.25.32"
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@mittwald/typescript-config": "workspace:*",
-    "@types/node": "^22.15.23",
-    "@types/react": "^19.1.6",
-    "@types/react-dom": "^19.1.5",
+    "@types/node": "^22.16.2",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
     "nx": "^20.8.2",
-    "prettier": "^3.5.3",
+    "prettier": "^3.6.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "rimraf": "^6.0.1",
@@ -57,7 +57,7 @@
     "vite-plugin-checker": "^0.9.3",
     "vite-plugin-dts": "^4.5.4",
     "vite-plugin-externalize-deps": "^0.9.0",
-    "vitest": "^3.1.4"
+    "vitest": "^3.2.4"
   },
   "peerDependencies": {
     "react": "^19",
