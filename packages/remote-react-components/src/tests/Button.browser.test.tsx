@@ -15,7 +15,7 @@ test("onPress eventhandler is triggered", async () => {
   expect(eventData.element().textContent).toMatchInlineSnapshot(`
     "{
       "type": "press",
-      "pointerType": "virtual",
+      "pointerType": "mouse",
       "target": null,
       "shiftKey": false,
       "metaKey": false,

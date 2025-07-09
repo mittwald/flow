@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-remote-core",
-  "version": "0.2.0-alpha.325",
+  "version": "0.2.0-alpha.330",
   "type": "module",
   "description": "Core functionality to setup a remote/host environment",
   "homepage": "https://mittwald.github.io/flow",
@@ -32,7 +32,7 @@
     "@quilted/threads": "^3.3.1",
     "@types/invariant": "^2.2.37",
     "invariant": "^2.2.4",
-    "remeda": "^2.24.0"
+    "remeda": "^2.25.0"
   },
   "devDependencies": {
     "@mittwald/ext-bridge": "workspace:*",

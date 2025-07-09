@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.330](https://github.com/mittwald/flow/compare/0.2.0-alpha.329...0.2.0-alpha.330) (2025-07-09)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+# [0.2.0-alpha.329](https://github.com/mittwald/flow/compare/0.2.0-alpha.328...0.2.0-alpha.329) (2025-07-09)
+
+### Features
+
+* **SuspenseTrigger:** added remote suspense loading trigger ([#1722](https://github.com/mittwald/flow/issues/1722)) ([98e19ee](https://github.com/mittwald/flow/commit/98e19eef41cb66a0dcb5a6024eee33f1464f58d0))
+
+# [0.2.0-alpha.328](https://github.com/mittwald/flow/compare/0.2.0-alpha.327...0.2.0-alpha.328) (2025-07-09)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
+# [0.2.0-alpha.327](https://github.com/mittwald/flow/compare/0.2.0-alpha.326...0.2.0-alpha.327) (2025-07-08)
+
+### Features
+
+* **Autocomplete:** Added new Autocomplete component ([#1699](https://github.com/mittwald/flow/issues/1699)) ([2aa82a9](https://github.com/mittwald/flow/commit/2aa82a916107fd2fbb283b89bd2e1274f3d11a5f))
+
+# [0.2.0-alpha.326](https://github.com/mittwald/flow/compare/0.2.0-alpha.325...0.2.0-alpha.326) (2025-07-08)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
 # [0.2.0-alpha.325](https://github.com/mittwald/flow/compare/0.2.0-alpha.324...0.2.0-alpha.325) (2025-07-03)
 
 **Note:** Version bump only for package @mittwald/flow-remote-elements

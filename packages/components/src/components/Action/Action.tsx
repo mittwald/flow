@@ -1,4 +1,3 @@
-import React from "react";
 import { ActionModel as ActionModel } from "@/components/Action/models/ActionModel";
 import type { PropsContext } from "@/lib/propsContext";
 import { dynamic, PropsContextProvider } from "@/lib/propsContext";
@@ -22,18 +21,28 @@ const actionButtonContext: ComponentPropsContext<"Button"> = {
     return isConfirmationButton ? confirmAction.execute : action.execute;
   }),
 
-  isPending: dynamic((props) => useActionButtonState(props) === "isPending"),
+  isPending: dynamic((props) => {
+    const actionState = useActionButtonState(props);
+    return props.isPending ?? actionState === "isPending";
+  }),
 
-  isSucceeded: dynamic(
-    (props) => useActionButtonState(props) === "isSucceeded",
-  ),
+  isSucceeded: dynamic((props) => {
+    const actionState = useActionButtonState(props);
+    return props.isSucceeded ?? actionState === "isSucceeded";
+  }),
 
-  isFailed: dynamic((props) => useActionButtonState(props) === "isFailed"),
+  isFailed: dynamic((props) => {
+    const actionState = useActionButtonState(props);
+    return props.isFailed ?? actionState === "isFailed";
+  }),
 
   "aria-disabled": dynamic((props) => {
     const state = useActionButtonState(props);
     const someActionInContextIsBusy = useActionStateContext().useIsBusy();
-    return state === "isExecuting" || someActionInContextIsBusy;
+    return (
+      props["aria-disabled"] ??
+      (state === "isExecuting" || someActionInContextIsBusy)
+    );
   }),
 };
 

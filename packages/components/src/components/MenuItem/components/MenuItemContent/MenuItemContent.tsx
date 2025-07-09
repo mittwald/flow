@@ -1,5 +1,4 @@
 import type { FC, PropsWithChildren } from "react";
-import React from "react";
 import type * as Aria from "react-aria-components";
 import styles from "../../MenuItem.module.scss";
 import type { PropsContext } from "@/lib/propsContext";

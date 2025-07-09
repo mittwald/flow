@@ -10,6 +10,7 @@ import { AlertIcon as AlertIcon } from "@mittwald/flow-react-components";
 import { Align as Align } from "@mittwald/flow-react-components";
 import { Area as Area } from "@mittwald/flow-react-components";
 import { AreaChart as AreaChart } from "@mittwald/flow-react-components";
+import { Autocomplete as Autocomplete } from "@mittwald/flow-react-components";
 import { Avatar as Avatar } from "@mittwald/flow-react-components";
 import { AvatarStack as AvatarStack } from "@mittwald/flow-react-components";
 import { Badge as Badge } from "@mittwald/flow-react-components";
@@ -29,8 +30,10 @@ import { Color as Color } from "@mittwald/flow-react-components";
 import { ColumnLayout as ColumnLayout } from "@mittwald/flow-react-components";
 import { ComboBox as ComboBox } from "@mittwald/flow-react-components";
 import { Content as Content } from "@mittwald/flow-react-components";
+import { ContextMenu as ContextMenu } from "@mittwald/flow-react-components";
 import { ContextMenuContent as ContextMenuContent } from "@mittwald/flow-react-components";
 import { ContextMenuSection as ContextMenuSection } from "@mittwald/flow-react-components";
+import { ContextMenuTrigger as ContextMenuTrigger } from "@mittwald/flow-react-components";
 import { ContextualHelp as ContextualHelp } from "@mittwald/flow-react-components";
 import { ContextualHelpTrigger as ContextualHelpTrigger } from "@mittwald/flow-react-components";
 import { CopyButton as CopyButton } from "@mittwald/flow-react-components";
@@ -95,6 +98,7 @@ import { Separator as Separator } from "@mittwald/flow-react-components";
 import { Skeleton as Skeleton } from "@mittwald/flow-react-components";
 import { SkeletonText as SkeletonText } from "@mittwald/flow-react-components";
 import { Slider as Slider } from "@mittwald/flow-react-components";
+import { SuspenseTrigger as SuspenseTrigger } from "@mittwald/flow-react-components";
 import { Switch as Switch } from "@mittwald/flow-react-components";
 import { Tab as Tab } from "@mittwald/flow-react-components";
 import { TabTitle as TabTitle } from "@mittwald/flow-react-components";
@@ -132,6 +136,10 @@ export const flowComponents = {
   "flr-align": createFlowRemoteComponentRenderer("Align", Align),
   "flr-area": createFlowRemoteComponentRenderer("Area", Area),
   "flr-area-chart": createFlowRemoteComponentRenderer("AreaChart", AreaChart),
+  "flr-autocomplete": createFlowRemoteComponentRenderer(
+    "Autocomplete",
+    Autocomplete,
+  ),
   "flr-avatar": createFlowRemoteComponentRenderer("Avatar", Avatar),
   "flr-avatar-stack": createFlowRemoteComponentRenderer(
     "AvatarStack",
@@ -175,6 +183,10 @@ export const flowComponents = {
   ),
   "flr-combo-box": createFlowRemoteComponentRenderer("ComboBox", ComboBox),
   "flr-content": createFlowRemoteComponentRenderer("Content", Content),
+  "flr-context-menu": createFlowRemoteComponentRenderer(
+    "ContextMenu",
+    ContextMenu,
+  ),
   "flr-context-menu-content": createFlowRemoteComponentRenderer(
     "ContextMenuContent",
     ContextMenuContent,
@@ -182,6 +194,10 @@ export const flowComponents = {
   "flr-context-menu-section": createFlowRemoteComponentRenderer(
     "ContextMenuSection",
     ContextMenuSection,
+  ),
+  "flr-context-menu-trigger": createFlowRemoteComponentRenderer(
+    "ContextMenuTrigger",
+    ContextMenuTrigger,
   ),
   "flr-contextual-help": createFlowRemoteComponentRenderer(
     "ContextualHelp",
@@ -364,6 +380,10 @@ export const flowComponents = {
     SkeletonText,
   ),
   "flr-slider": createFlowRemoteComponentRenderer("Slider", Slider),
+  "flr-suspense-trigger": createFlowRemoteComponentRenderer(
+    "SuspenseTrigger",
+    SuspenseTrigger,
+  ),
   "flr-switch": createFlowRemoteComponentRenderer("Switch", Switch),
   "flr-tab": createFlowRemoteComponentRenderer("Tab", Tab),
   "flr-tab-title": createFlowRemoteComponentRenderer("TabTitle", TabTitle),

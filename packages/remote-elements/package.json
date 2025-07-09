@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-remote-elements",
-  "version": "0.2.0-alpha.325",
+  "version": "0.2.0-alpha.330",
   "type": "module",
   "description": "Flow compatible remote elements that can be used in a remote environment",
   "homepage": "https://mittwald.github.io/flow",
@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@mittwald/flow-remote-core": "workspace:*",
-    "remeda": "^2.24.0",
+    "remeda": "^2.25.0",
     "type-fest": "^4.41.0"
   },
   "devDependencies": {

@@ -1,11 +1,10 @@
 import type { FC, PropsWithChildren } from "react";
-import React from "react";
 import locales from "../../../../../../locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 import type { PropsWithClassName } from "@/lib/types/props";
 import { IconContextMenu } from "@/components/Icon/components/icons";
 import ButtonView from "@/views/ButtonView";
-import { ContextMenuTrigger } from "@/components/ContextMenu";
+import ContextMenuTriggerView from "@/views/ContextMenuTriggerView";
 
 interface Props extends PropsWithChildren, PropsWithClassName {}
 
@@ -14,7 +13,7 @@ export const OptionsButton: FC<Props> = (props) => {
   const stringFormatter = useLocalizedStringFormatter(locales);
 
   return (
-    <ContextMenuTrigger>
+    <ContextMenuTriggerView>
       <ButtonView
         variant="plain"
         color="secondary"
@@ -25,7 +24,7 @@ export const OptionsButton: FC<Props> = (props) => {
         <IconContextMenu />
       </ButtonView>
       {children}
-    </ContextMenuTrigger>
+    </ContextMenuTriggerView>
   );
 };
 

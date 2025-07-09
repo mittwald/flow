@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-remote-react-components",
-  "version": "0.2.0-alpha.325",
+  "version": "0.2.0-alpha.330",
   "type": "module",
   "description": "React components that can be used in a remote environment",
   "homepage": "https://mittwald.github.io/flow",
@@ -57,9 +57,9 @@
     "@types/react-dom": "^19",
     "@vitejs/plugin-react": "^4.6.0",
     "@vitest/browser": "^3.2.4",
-    "@vitest/coverage-v8": "~3.2.4",
+    "@vitest/coverage-v8": "^3.2.4",
     "nx": "^21.2.2",
-    "playwright": "^1.53.2",
+    "playwright": "~1.52.0",
     "prettier": "^3.6.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
@@ -74,7 +74,7 @@
     "vite-plugin-dts": "^4.5.4",
     "vite-plugin-externalize-deps": "^0.9.0",
     "vitest": "~3.2.4",
-    "vitest-browser-react": "^0.3.0"
+    "vitest-browser-react": "^1.0.0"
   },
   "peerDependencies": {
     "@internationalized/date": "^3.8.1",
