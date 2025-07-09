@@ -1,5 +1,6 @@
 "use client";
 import * as remoteComponents from "@/auto-generated";
+import { SuspenseTrigger } from "@/auto-generated";
 import * as customViewComponents from "@/views";
 import { useWatchPathname } from "@/hooks/useWatchPathname";
 import { stringifyError } from "@/lib/stringifyError";
@@ -81,7 +82,7 @@ export const RemoteRoot: FC<RemoteRootProps> = (props) => {
           return null;
         }}
       >
-        <Suspense>
+        <Suspense fallback={<SuspenseTrigger />}>
           <ViewComponentContextProvider components={viewComponents}>
             {children}
           </ViewComponentContextProvider>
