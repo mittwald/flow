@@ -1,6 +1,6 @@
-@use "@/styles/mixins/ellipsis";
-@use "@/styles/mixins/focus";
-@use "@/styles/mixins/avatarButton";
+@use "../../styles/mixins/ellipsis.scss";
+@use "../../styles/mixins/focus.scss";
+@use "../../styles/mixins/avatarButton.scss";
 
 .button {
   position: relative;

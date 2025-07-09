@@ -1,4 +1,4 @@
-@use "@/styles/mixins/menuItem";
+@use "../../styles/mixins/menuItem.scss";
 
 .option {
   @include menuItem.menuItem();
