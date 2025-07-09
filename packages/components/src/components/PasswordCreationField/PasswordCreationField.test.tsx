@@ -83,6 +83,63 @@ describe("PasswordCreationField Tests", () => {
     );
   });
 
+  test("shows correct password hint for max rule", async () => {
+    const maxNumberPolicy = Policy.fromDeclaration({
+      minComplexity: 3,
+      rules: [
+        {
+          identifier: "numbers",
+          ruleType: RuleType.charPool,
+          charPools: ["numbers"],
+          max: 2,
+        },
+      ],
+    });
+
+    const renderResult = await act(() =>
+      render(
+        <I18nProvider locale="de">
+          <PasswordCreationField validationPolicy={maxNumberPolicy}>
+            <Label>Password</Label>
+          </PasswordCreationField>
+        </I18nProvider>,
+      ),
+    );
+
+    const inputElement = renderResult.container.querySelector("input");
+    assert(inputElement);
+    expect(inputElement).toHaveValue("");
+
+    await act(async () => {
+      fireEvent.input(inputElement, {
+        target: { value: "12" },
+      });
+      await sleep(250);
+    });
+
+    const infoButton = renderResult.container.querySelector(
+      'button[data-component="showPasswordRules"]',
+    );
+    assert(infoButton);
+
+    await act(() => fireEvent.click(infoButton));
+
+    const rules = renderResult.baseElement.querySelectorAll("[data-rule]");
+    expect(rules).toHaveLength(1);
+    expect(rules[0]).toHaveAttribute("data-rule-valid", "true");
+    expect(rules[0]).toHaveTextContent("Maximal 2 Zahlen");
+
+    await act(async () => {
+      fireEvent.input(inputElement, {
+        target: { value: "123" },
+      });
+      await sleep(250);
+    });
+
+    expect(rules[0]).toHaveAttribute("data-rule-valid", "false");
+    expect(rules[0]).toHaveTextContent("Maximal 2 Zahlen");
+  });
+
   test("shows password hints when clicking on info", async () => {
     const renderResult = await act(() =>
       render(
