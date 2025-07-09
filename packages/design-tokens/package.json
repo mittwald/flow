@@ -19,8 +19,8 @@
   "devDependencies": {
     "@types/js-yaml": "^4.0.9",
     "js-yaml": "^4.1.0",
-    "nx": "^20.8.2",
-    "prettier": "^3.5.3",
+    "nx": "^21.2.2",
+    "prettier": "^3.6.2",
     "rimraf": "^6.0.1",
     "style-dictionary": "^4.4.0"
   }
