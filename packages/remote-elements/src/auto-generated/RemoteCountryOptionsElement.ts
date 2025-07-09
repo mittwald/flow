@@ -32,6 +32,7 @@ export class RemoteCountryOptionsElement extends FlowRemoteElement<RemoteCountry
       selectedKeys: {},
       selectionBehavior: {},
       selectionMode: {},
+      shouldFocusOnHover: {},
       shouldFocusWrap: {},
       shouldSelectOnPressUp: {},
       slot: {},

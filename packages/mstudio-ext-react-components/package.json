@@ -15,7 +15,7 @@
     "dist"
   ],
   "engines": {
-    "node": ">=20.11"
+    "node": ">=20.19"
   },
   "scripts": {
     "build": "vite build --config vite.build.config.ts",
@@ -24,14 +24,14 @@
     "test:compile": "tsc --noEmit"
   },
   "dependencies": {
-    "@types/react": "^19.1.6"
+    "@types/react": "^19.1.8"
   },
   "devDependencies": {
     "@mittwald/flow-remote-react-components": "workspace:*",
     "@mittwald/typescript-config": "workspace:*",
-    "@types/node": "^22.15.23",
+    "@types/node": "^22.16.2",
     "nx": "^20.8.2",
-    "prettier": "^3.5.3",
+    "prettier": "^3.6.2",
     "react": "^19.1.0",
     "rimraf": "^6.0.1",
     "rollup-plugin-auto-named-exports": "1.0.0-beta.3",
