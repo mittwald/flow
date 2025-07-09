@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Label } from "@/components/Label";
 import { action } from "@storybook/addon-actions";
 import type { PolicyDeclaration } from "@mittwald/password-tools-js/policy";
-import { RuleType, SequenceType } from "@mittwald/password-tools-js/rules";
+import { RuleType } from "@mittwald/password-tools-js/rules";
 import { Policy } from "@mittwald/password-tools-js/policy";
 import { useForm } from "react-hook-form";
 import { sleep } from "@/lib/promises/sleep";
@@ -16,48 +16,12 @@ import { CopyButton } from "@/components/CopyButton";
 const policyDecl: PolicyDeclaration = {
   minComplexity: 3,
   rules: [
-    {
-      ruleType: RuleType.length,
-      min: 8,
-      max: 12,
-    },
-    {
-      ruleType: RuleType.sequence,
-      sequences: [SequenceType.number],
-      maxLength: 2,
-    },
-    {
-      ruleType: RuleType.regex,
-      pattern: "[A-B]",
-      min: 1,
-      max: 2,
-    },
-    {
-      ruleType: RuleType.regex,
-      pattern: "^[A-Za-z0-9]",
-      translationKey: "canNotStartWithSpecialCharacter",
-    },
-    {
-      ruleType: RuleType.hibp,
-    },
-    {
-      identifier: "special",
-      ruleType: RuleType.charPool,
-      charPools: ["special"],
-      min: 1,
-      max: 2,
-    },
+    { ruleType: RuleType.char, chars: "ew", max: 2, min: 0 },
     {
       identifier: "numbers",
       ruleType: RuleType.charPool,
       charPools: ["numbers"],
-      min: 1,
-      max: 2,
-    },
-    {
-      ruleType: RuleType.blocklist,
-      blocklist: ["foo", "bar"],
-      substringMatch: true,
+      max: 1,
     },
   ],
 };
