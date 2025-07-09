@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.329](https://github.com/mittwald/flow/compare/0.2.0-alpha.328...0.2.0-alpha.329) (2025-07-09)
+
+### Features
+
+* **SuspenseTrigger:** added remote suspense loading trigger ([#1722](https://github.com/mittwald/flow/issues/1722)) ([98e19ee](https://github.com/mittwald/flow/commit/98e19eef41cb66a0dcb5a6024eee33f1464f58d0))
+
 # [0.2.0-alpha.328](https://github.com/mittwald/flow/compare/0.2.0-alpha.327...0.2.0-alpha.328) (2025-07-09)
 
 **Note:** Version bump only for package @mittwald/flow-remote-react-renderer
