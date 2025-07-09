@@ -1,6 +1,6 @@
 import { Button } from "@/components/Button";
 import React from "react";
-import { action } from "@storybook/addon-actions";
+import { action } from "storybook/actions";
 
 const sleep = () => new Promise((res) => window.setTimeout(res, 700));
 
