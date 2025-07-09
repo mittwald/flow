@@ -1,0 +1,34 @@
+# Grundlagen
+
+Autocomplete dient dazu, Usern beim Ausfüllen von Texteingabefeldern durch Vorschläge zu unterstützen. Während der Eingabe werden relevante Optionen angezeigt, aus denen ausgewählt werden kann. Die Auswahl eines Vorschlags ist optional, User können auch eigene Eingaben vornehmen. Autocomplete wird typischerweise in Kombination mit Komponenten wie [TextField](/03-components/form-controls/text-field) oder [SearchField](/03-components/form-controls/search-field) eingesetzt.
+
+## Best practices
+Achte bei der Verwendung einer Autocomplete darauf, dass…
+* die Vorschläge kontextbezogen und für die Aufgabe relevant sind.
+* die Vorschlagsliste bei Bedarf sinnvoll vorgefiltert werden kann (z. B. anhand von Kategorien oder Kontext)
+* bei leerem Eingabefeld zunächst keine Vorschläge angezeigt werden, sofern keine initialen Werte erforderlich sind.
+
+
+## Verwendung
+Verwende eine Autocomplete, um…
+* die Effizienz bei der Dateneingabe zu verbessern, insbesondere bei bekannten oder häufig genutzten Werten.
+* Tippfehler zu vermeiden und die Datenqualität zu erhöhen.
+* lange Auswahlmenüs zu vermeiden, indem Vorschläge dynamisch gefiltert werden.
+
+## Autocomplete vs. Combobox
+
+Autocomplete und [Comboboxen](/03-components/form-controls/combo-box) sehen oft ähnlich aus, erfüllen aber unterschiedliche Zwecke.
+<DoAndDont> 
+<Plain heading="Verwende Autocomplete, um z. B. …"> 
+- Benutzern zu ermöglichen, **freie Eingaben** zu machen, während Vorschläge zur Auswahl angezeigt werden. 
+- bei **langen oder dynamischen Datenlisten** (z. B. Städte, Benutzernamen, Tags). 
+- wenn **nicht zwingend ein vorgeschlagener Wert ausgewählt werden muss**. 
+- für Suchfelder mit intelligenter Vorschlagslogik. 
+</Plain>
+
+<Plain heading="Verwende Combobox, um z. B. …"> 
+- aus einer **vordefinierten Liste von Optionen** eine Auswahl zu treffen.
+- wenn der User entweder **auswählen oder eingeben** können soll.
+- bei bekannten, überschaubaren Werten (z. B. Sprachen, Kategorien, Geschlecht).
+</Plain>
+</DoAndDont>
