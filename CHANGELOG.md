@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.328](https://github.com/mittwald/flow/compare/0.2.0-alpha.327...0.2.0-alpha.328) (2025-07-09)
+
+### Bug Fixes
+
+* **Button:** state props should override Action state ([45f6106](https://github.com/mittwald/flow/commit/45f61062772142d482ec0c253b61cd801d78ebf4))
+
 # [0.2.0-alpha.327](https://github.com/mittwald/flow/compare/0.2.0-alpha.326...0.2.0-alpha.327) (2025-07-08)
 
 ### Features
