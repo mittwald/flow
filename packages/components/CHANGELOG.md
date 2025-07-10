@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.334](https://github.com/mittwald/flow/compare/0.2.0-alpha.333...0.2.0-alpha.334) (2025-07-10)
+
+### Bug Fixes
+
+* password rule translation for min and max of 0 ([#1735](https://github.com/mittwald/flow/issues/1735)) ([9636cf5](https://github.com/mittwald/flow/commit/9636cf5be1e4a1f2aee46b7303f938e658660bb1))
+
 # [0.2.0-alpha.333](https://github.com/mittwald/flow/compare/0.2.0-alpha.332...0.2.0-alpha.333) (2025-07-10)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
