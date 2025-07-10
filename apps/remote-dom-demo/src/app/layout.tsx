@@ -1,10 +1,7 @@
 "use client";
 import {
   HeaderNavigation,
-  Heading,
-  IllustratedMessage,
   Link,
-  LoadingSpinner,
   Notification,
   NotificationProvider,
   Render,
@@ -19,6 +16,7 @@ import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 import { type PropsWithChildren, Suspense } from "react";
 import styles from "./layout.module.css";
 import { TunnelExit } from "@mittwald/react-tunnel";
+import { LoadingMessage } from "@/app/_components/LoadingMessage";
 
 const Error: ErrorComponent = (props) => {
   return <>REMOTE RENDER ERROR: {props.error.message}</>;
@@ -77,14 +75,7 @@ export default function Layout(props: PropsWithChildren) {
               <main>
                 <div>
                   <ErrorBoundary errorComponent={Error}>
-                    <Suspense
-                      fallback={
-                        <IllustratedMessage>
-                          <LoadingSpinner />
-                          <Heading>Lade Demo</Heading>
-                        </IllustratedMessage>
-                      }
-                    >
+                    <Suspense fallback={<LoadingMessage />}>
                       {props.children}
                     </Suspense>
                   </ErrorBoundary>
