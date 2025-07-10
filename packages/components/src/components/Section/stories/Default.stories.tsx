@@ -27,7 +27,7 @@ import MenuItem from "@/components/MenuItem";
 import { FileField } from "@/components/FileField";
 import { Field, Form } from "@/integrations/react-hook-form";
 import { useForm } from "react-hook-form";
-import { action } from "@storybook/addon-actions";
+import { action } from "storybook/actions";
 
 const meta: Meta<typeof Section> = {
   title: "Structure/Section",

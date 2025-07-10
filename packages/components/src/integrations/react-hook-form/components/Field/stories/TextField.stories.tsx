@@ -5,7 +5,7 @@ import { Section } from "@/components/Section";
 import { TextField } from "@/components/TextField";
 import { Field, Form, typedField } from "@/integrations/react-hook-form";
 import { sleep } from "@/lib/promises/sleep";
-import { action } from "@storybook/addon-actions";
+import { action } from "storybook/actions";
 import type { Meta, StoryObj } from "@storybook/react";
 import { useForm } from "react-hook-form";
 

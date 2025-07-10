@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Link from "../Link";
-import { action } from "@storybook/addon-actions";
+import { action } from "storybook/actions";
 import React from "react";
 import { Text } from "@/components/Text";
 import {

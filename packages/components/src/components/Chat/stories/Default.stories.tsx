@@ -16,7 +16,7 @@ import IconAttachment from "@/components/Icon/components/icons/IconAttachment";
 import { FileCardList } from "@/components/FileCardList";
 import { FileCard } from "@/components/FileCard";
 import { Field, Form } from "@/integrations/react-hook-form";
-import { action } from "@storybook/addon-actions";
+import { action } from "storybook/actions";
 import { useForm } from "react-hook-form";
 
 const meta: Meta<typeof Chat> = {
