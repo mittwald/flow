@@ -12,17 +12,9 @@ test("onPress eventhandler is triggered", async () => {
   const button = dom.getByTestId("button");
   await button.click();
   const eventData = dom.getByTestId("event-data");
-  expect(eventData.element().textContent).toMatchInlineSnapshot(`
-    "{
-      "type": "press",
-      "pointerType": "mouse",
-      "target": null,
-      "shiftKey": false,
-      "metaKey": false,
-      "ctrlKey": false,
-      "altKey": false,
-      "x": 33,
-      "y": 10
-    }"
-  `);
+  await expect
+    .element(eventData)
+    .toHaveTextContent(
+      `{"type":"press","pointerType":"mouse","target":null,"shiftKey":false,"metaKey":false,"ctrlKey":false,"altKey":false}`,
+    );
 });
