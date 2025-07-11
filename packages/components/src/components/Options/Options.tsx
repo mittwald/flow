@@ -8,10 +8,7 @@ import type { OptionProps } from "@/components/Option";
 import { flowComponent } from "@/index/internal";
 
 export interface OptionsProps
-  extends Pick<
-      Aria.ListBoxProps<OptionProps>,
-      "renderEmptyState" | "onAction" | "dependencies"
-    >,
+  extends Pick<Aria.ListBoxProps<OptionProps>, "renderEmptyState" | "onAction">,
     PopoverProps {
   controller: OverlayController;
 }
@@ -23,7 +20,6 @@ export const Options: FC<OptionsProps> = flowComponent("Options", (props) => {
     controller,
     renderEmptyState,
     onAction,
-    dependencies,
     ...restPopoverProps
   } = props;
 
@@ -36,7 +32,6 @@ export const Options: FC<OptionsProps> = flowComponent("Options", (props) => {
       {...restPopoverProps}
     >
       <Aria.ListBox
-        dependencies={dependencies}
         onAction={onAction}
         className={rootClassName}
         renderEmptyState={renderEmptyState}
