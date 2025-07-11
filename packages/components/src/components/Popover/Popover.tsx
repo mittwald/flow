@@ -1,5 +1,4 @@
 import type { PropsWithChildren } from "react";
-import React from "react";
 import type * as Aria from "react-aria-components";
 import clsx from "clsx";
 import { type OverlayController, useOverlayController } from "@/lib/controller";
