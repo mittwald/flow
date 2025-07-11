@@ -13,7 +13,10 @@ const generateTranslationString = (
   const translateString = `validation.${rule.ruleType ?? "general"}`;
   let finalTranslationString = "";
 
-  if (("min" in rule && rule.min) || ("max" in rule && rule.max)) {
+  if (
+    ("min" in rule && rule.min !== undefined) ||
+    ("max" in rule && rule.max !== undefined)
+  ) {
     const breakingBoundaryProperty = rule.failingBoundary
       ? rule.failingBoundary
       : rule.min

@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.339](https://github.com/mittwald/flow/compare/0.2.0-alpha.338...0.2.0-alpha.339) (2025-07-11)
+
+### Reverts
+
+* Revert "refactor(Autocomplete)!: use Option component to define autocomplete …" (#1737) ([01563d2](https://github.com/mittwald/flow/commit/01563d279227641c042fc4619fbd50e1f55b091c)), closes [#1737](https://github.com/mittwald/flow/issues/1737)
+
+# [0.2.0-alpha.338](https://github.com/mittwald/flow/compare/0.2.0-alpha.337...0.2.0-alpha.338) (2025-07-11)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.337](https://github.com/mittwald/flow/compare/0.2.0-alpha.336...0.2.0-alpha.337) (2025-07-11)
+
+### Bug Fixes
+
+* **LoadingIndicator:** fix loading view stays forever ([#1732](https://github.com/mittwald/flow/issues/1732)) ([55032fb](https://github.com/mittwald/flow/commit/55032fbb6903a61a180157db74a7936b117c908c))
+
+# [0.2.0-alpha.336](https://github.com/mittwald/flow/compare/0.2.0-alpha.335...0.2.0-alpha.336) (2025-07-11)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.335](https://github.com/mittwald/flow/compare/0.2.0-alpha.334...0.2.0-alpha.335) (2025-07-11)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.334](https://github.com/mittwald/flow/compare/0.2.0-alpha.333...0.2.0-alpha.334) (2025-07-10)
+
+### Bug Fixes
+
+* password rule translation for min and max of 0 ([#1735](https://github.com/mittwald/flow/issues/1735)) ([9636cf5](https://github.com/mittwald/flow/commit/9636cf5be1e4a1f2aee46b7303f938e658660bb1))
+
+# [0.2.0-alpha.333](https://github.com/mittwald/flow/compare/0.2.0-alpha.332...0.2.0-alpha.333) (2025-07-10)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.332](https://github.com/mittwald/flow/compare/0.2.0-alpha.331...0.2.0-alpha.332) (2025-07-10)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
 # [0.2.0-alpha.331](https://github.com/mittwald/flow/compare/0.2.0-alpha.330...0.2.0-alpha.331) (2025-07-10)
 
 ### Bug Fixes

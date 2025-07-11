@@ -9,6 +9,7 @@ export interface NavigationState {
 
 export interface HostExports extends ExtBridgeConnectionApi {
   setIsReady: (version?: Version) => Promise<void>;
+  setIsLoading: (isLoading: boolean) => Promise<void>;
   setError: (error: string) => Promise<void>;
   setNavigationState: (state: NavigationState) => Promise<void>;
 }

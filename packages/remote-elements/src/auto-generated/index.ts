@@ -97,7 +97,6 @@ export * from "./RemoteSeparatorElement";
 export * from "./RemoteSkeletonElement";
 export * from "./RemoteSkeletonTextElement";
 export * from "./RemoteSliderElement";
-export * from "./RemoteSuspenseTriggerElement";
 export * from "./RemoteSwitchElement";
 export * from "./RemoteTabElement";
 export * from "./RemoteTabTitleElement";
