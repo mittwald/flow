@@ -1,6 +1,5 @@
 "use client";
 import * as remoteComponents from "@/auto-generated";
-import { SuspenseTrigger } from "@/auto-generated";
 import * as customViewComponents from "@/views";
 import { useWatchPathname } from "@/hooks/useWatchPathname";
 import { stringifyError } from "@/lib/stringifyError";
@@ -11,13 +10,16 @@ import {
 } from "@mittwald/flow-remote-core";
 import {
   Suspense,
+  useLayoutEffect,
   useRef,
   useState,
   useTransition,
   type FC,
   type PropsWithChildren,
 } from "react";
-import { ErrorBoundary } from "react-error-boundary";
+import { ErrorBoundary, type FallbackProps } from "react-error-boundary";
+import { RemoteContextProvider } from "@/components/RemoteContextProvider";
+import { LoadingFallbackTrigger } from "@/components/LoadingFallbackTrigger";
 
 const viewComponents = {
   ...remoteComponents,
@@ -26,13 +28,20 @@ const viewComponents = {
 
 export interface RemoteRootProps extends PropsWithChildren {
   onHostPathnameChanged?: (pathname: string) => void;
+  isLoading?: boolean;
 }
 
 export const RemoteRoot: FC<RemoteRootProps> = (props) => {
-  const { children, onHostPathnameChanged } = props;
+  const {
+    children,
+    onHostPathnameChanged,
+    isLoading: isLoadingFromProps,
+  } = props;
 
   const connectionRef = useRef<RemoteToHostConnection>(undefined);
+  const isConnectionInitialized = useRef(false);
   const [connectionError, setConnectionError] = useState(null);
+  const [isConnected, setIsConnected] = useState(false);
 
   const [pathnameChangedPending, startPathnameChangedTransition] =
     useTransition();
@@ -43,6 +52,16 @@ export const RemoteRoot: FC<RemoteRootProps> = (props) => {
     renderErrorRef.current = error;
     connectionRef.current?.imports.setError(stringifyError(error));
   };
+
+  const setIsLoadingFromProps = () => {
+    if (isLoadingFromProps !== undefined) {
+      connectionRef.current?.imports.setIsLoading(isLoadingFromProps);
+    }
+  };
+
+  useLayoutEffect(() => {
+    setIsLoadingFromProps();
+  }, [isLoadingFromProps]);
 
   useWatchPathname((pathname) =>
     connectionRef.current?.imports.setNavigationState({
@@ -60,33 +79,54 @@ export const RemoteRoot: FC<RemoteRootProps> = (props) => {
       startPathnameChangedTransition(() => onHostPathnameChanged?.(pathname)),
   });
 
-  return (
-    <div
-      ref={(div) => {
-        connect(div)
-          ?.then((connection) => {
-            connectionRef.current = connection;
-          })
-          .catch((error) => {
-            setConnectionError(error);
-          });
+  /** Is wrapped in Div to resolve render awaiter in <RemoteRenderer /> */
+  const loadingFallback = (
+    <remoteComponents.Div>
+      <LoadingFallbackTrigger />
+    </remoteComponents.Div>
+  );
 
-        if (renderErrorRef.current) {
-          handleRenderError(renderErrorRef.current);
-        }
-      }}
-    >
-      <ErrorBoundary
-        fallbackRender={({ error }) => {
-          handleRenderError(error);
-          return null;
-        }}
-      >
-        <Suspense fallback={<SuspenseTrigger />}>
-          <ViewComponentContextProvider components={viewComponents}>
-            {children}
-          </ViewComponentContextProvider>
-        </Suspense>
+  const connectDiv = (div: HTMLDivElement) => {
+    if (isConnectionInitialized.current) {
+      return;
+    }
+    isConnectionInitialized.current = true;
+    connect(div)
+      ?.then((connection) => {
+        connectionRef.current = connection;
+        setIsLoadingFromProps();
+        setIsConnected(true);
+      })
+      .catch((error) => {
+        setConnectionError(error);
+      });
+
+    if (renderErrorRef.current) {
+      handleRenderError(renderErrorRef.current);
+    }
+  };
+
+  const ErrorFallbackComponent: FC<FallbackProps> = (props) => {
+    handleRenderError(props.error);
+    return null;
+  };
+
+  return (
+    <div ref={connectDiv}>
+      <ErrorBoundary FallbackComponent={ErrorFallbackComponent}>
+        {isConnected && connectionRef.current && (
+          <RemoteContextProvider
+            value={{
+              connection: connectionRef.current,
+            }}
+          >
+            <Suspense fallback={loadingFallback}>
+              <ViewComponentContextProvider components={viewComponents}>
+                {children}
+              </ViewComponentContextProvider>
+            </Suspense>
+          </RemoteContextProvider>
+        )}
       </ErrorBoundary>
     </div>
   );

@@ -98,7 +98,6 @@ import { Separator as Separator } from "@mittwald/flow-react-components";
 import { Skeleton as Skeleton } from "@mittwald/flow-react-components";
 import { SkeletonText as SkeletonText } from "@mittwald/flow-react-components";
 import { Slider as Slider } from "@mittwald/flow-react-components";
-import { SuspenseTrigger as SuspenseTrigger } from "@mittwald/flow-react-components";
 import { Switch as Switch } from "@mittwald/flow-react-components";
 import { Tab as Tab } from "@mittwald/flow-react-components";
 import { TabTitle as TabTitle } from "@mittwald/flow-react-components";
@@ -380,10 +379,6 @@ export const flowComponents = {
     SkeletonText,
   ),
   "flr-slider": createFlowRemoteComponentRenderer("Slider", Slider),
-  "flr-suspense-trigger": createFlowRemoteComponentRenderer(
-    "SuspenseTrigger",
-    SuspenseTrigger,
-  ),
   "flr-switch": createFlowRemoteComponentRenderer("Switch", Switch),
   "flr-tab": createFlowRemoteComponentRenderer("Tab", Tab),
   "flr-tab-title": createFlowRemoteComponentRenderer("TabTitle", TabTitle),
