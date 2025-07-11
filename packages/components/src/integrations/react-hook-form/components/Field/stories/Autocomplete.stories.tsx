@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { action } from "@storybook/addon-actions";
 import type { Field } from "@/integrations/react-hook-form";
@@ -8,9 +9,10 @@ import { Section } from "@/components/Section";
 import { ActionGroup } from "@/components/ActionGroup";
 import { sleep } from "@/lib/promises/sleep";
 import { Autocomplete } from "@/components/Autocomplete";
+import { MenuItem } from "@/components/MenuItem";
 import { Label } from "@/components/Label";
+import { ContextMenu } from "@/components/ContextMenu";
 import { TextField } from "@/components/TextField";
-import Option from "@/components/Option";
 
 const submitAction = action("submit");
 
@@ -18,9 +20,9 @@ const generateFromString = (value: string) => {
   return ["example.com", "test.org", "email.net", "mail.com"].map((d) => {
     const email = `${value.split("@")[0]}@${d}`;
     return (
-      <Option key={email} value={email} textValue={email}>
+      <MenuItem key={email} id={email} textValue={email}>
         {email}
-      </Option>
+      </MenuItem>
     );
   });
 };
@@ -55,7 +57,7 @@ const meta: Meta<typeof Autocomplete> = {
               <TextField>
                 <Label>Test</Label>
               </TextField>
-              {generateFromString(email)}
+              <ContextMenu>{generateFromString(email)}</ContextMenu>
             </Autocomplete>
           </Field>
           <ActionGroup>
