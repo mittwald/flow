@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.339](https://github.com/mittwald/flow/compare/0.2.0-alpha.338...0.2.0-alpha.339) (2025-07-11)
+
+### Reverts
+
+* Revert "refactor(Autocomplete)!: use Option component to define autocomplete …" (#1737) ([01563d2](https://github.com/mittwald/flow/commit/01563d279227641c042fc4619fbd50e1f55b091c)), closes [#1737](https://github.com/mittwald/flow/issues/1737)
+
 # [0.2.0-alpha.338](https://github.com/mittwald/flow/compare/0.2.0-alpha.337...0.2.0-alpha.338) (2025-07-11)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
