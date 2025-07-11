@@ -4,7 +4,8 @@ import {
   Autocomplete,
   Section,
   TextField,
-  Option,
+  ContextMenu,
+  MenuItem,
 } from "@mittwald/flow-react-components";
 import { useForm } from "react-hook-form";
 import {
@@ -31,9 +32,9 @@ export default () => {
     ].map((d) => {
       const email = `${currentEmailValue.split("@")[0]}@${d}`;
       return (
-        <Option key={email} value={email} textValue={email}>
+        <MenuItem key={email} id={email} textValue={email}>
           {email}
-        </Option>
+        </MenuItem>
       );
     });
   };
@@ -51,7 +52,9 @@ export default () => {
             <TextField>
               <Label>Test</Label>
             </TextField>
-            {generateSuggestItems()}
+            <ContextMenu>
+              {generateSuggestItems()}
+            </ContextMenu>
           </Autocomplete>
         </Field>
         <Button type="submit">Speichern</Button>

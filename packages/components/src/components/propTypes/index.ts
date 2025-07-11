@@ -77,7 +77,6 @@ import type { FileDropZoneProps } from "@/components/FileDropZone";
 import type { NavigationProps } from "@/components/Navigation";
 import type { NavigationGroupProps } from "@/components/Navigation/components/NavigationGroup";
 import type { AutocompleteProps } from "@/components/Autocomplete/Autocomplete";
-import type { OptionsProps } from "@/components/Options/Options";
 
 export * from "./types";
 
@@ -136,7 +135,6 @@ export interface FlowComponentPropsTypes {
   NavigationGroup: NavigationGroupProps;
   NumberField: NumberFieldProps;
   Option: OptionProps;
-  Options: OptionsProps;
   Popover: PopoverProps;
   PopoverTrigger: PopoverTriggerProps;
   PasswordCreationField: PasswordCreationFieldProps;
@@ -218,7 +216,6 @@ const propsContextSupportingComponentsMap: Record<
   NumberField: true,
   Radio: true,
   Option: true,
-  Options: true,
   Popover: true,
   PopoverTrigger: true,
   PasswordCreationField: true,

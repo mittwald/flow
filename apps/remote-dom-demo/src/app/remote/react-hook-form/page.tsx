@@ -13,6 +13,8 @@ import {
   TextField,
   PasswordCreationField,
   Autocomplete,
+  ContextMenu,
+  MenuItem,
 } from "@mittwald/flow-remote-react-components";
 import {
   Form,
@@ -60,12 +62,14 @@ export default function Page() {
             <TextField>
               <Label>Email</Label>
             </TextField>
-            <Option textValue="Foo" value="Foo">
-              Foo
-            </Option>
-            <Option textValue="Bar" value="Bar">
-              Bar
-            </Option>
+            <ContextMenu>
+              <MenuItem textValue="Foo" id="Foo">
+                Foo
+              </MenuItem>
+              <MenuItem textValue="Bar" id="Bar">
+                Bar
+              </MenuItem>
+            </ContextMenu>
           </Autocomplete>
         </Field>
         <Field name="comment">

@@ -1,45 +1,28 @@
 import type { FC } from "react";
+import React from "react";
 import * as Aria from "react-aria-components";
-import { Popover, type PopoverProps } from "@/components/Popover/Popover";
+import { Popover } from "@/components/Popover/Popover";
 import clsx from "clsx";
 import styles from "./Options.module.scss";
 import type { OverlayController } from "@/lib/controller";
 import type { OptionProps } from "@/components/Option";
-import { flowComponent } from "@/index/internal";
 
-export interface OptionsProps
-  extends Pick<Aria.ListBoxProps<OptionProps>, "renderEmptyState" | "onAction">,
-    PopoverProps {
+export interface OptionsProps extends Aria.ListBoxProps<OptionProps> {
   controller: OverlayController;
 }
 
-export const Options: FC<OptionsProps> = flowComponent("Options", (props) => {
-  const {
-    className,
-    children,
-    controller,
-    renderEmptyState,
-    onAction,
-    ...restPopoverProps
-  } = props;
+export const Options: FC<OptionsProps> = (props) => {
+  const { className, children, controller, ...rest } = props;
 
   const rootClassName = clsx(styles.options, className);
 
   return (
-    <Popover
-      className={styles.popover}
-      controller={controller}
-      {...restPopoverProps}
-    >
-      <Aria.ListBox
-        onAction={onAction}
-        className={rootClassName}
-        renderEmptyState={renderEmptyState}
-      >
+    <Popover className={styles.popover} controller={controller}>
+      <Aria.ListBox className={rootClassName} {...rest}>
         {children}
       </Aria.ListBox>
     </Popover>
   );
-});
+};
 
 export default Options;
