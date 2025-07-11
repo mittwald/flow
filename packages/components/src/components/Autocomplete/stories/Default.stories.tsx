@@ -4,8 +4,7 @@ import type { Chat } from "@/components/Chat";
 import { Autocomplete } from "@/components/Autocomplete";
 import { Label } from "@/components/Label";
 import { SearchField } from "@/components/SearchField";
-import { MenuItem } from "@/components/MenuItem";
-import { ContextMenu } from "@/components/ContextMenu";
+import Option from "@/components/Option";
 
 const meta: Meta<typeof Chat> = {
   title: "Form Controls/Autocomplete",
@@ -18,9 +17,9 @@ const meta: Meta<typeof Chat> = {
       return ["example.com", "test.org", "email.net", "mail.com"].map((d) => {
         const email = `${value.split("@")[0]}@${d}`;
         return (
-          <MenuItem key={email} id={email} textValue={email}>
+          <Option key={email} value={email} textValue={email}>
             {email}
-          </MenuItem>
+          </Option>
         );
       });
     };
@@ -32,12 +31,25 @@ const meta: Meta<typeof Chat> = {
         <SearchField onChange={setInput} value={input}>
           <Label>Test</Label>
         </SearchField>
-        <ContextMenu>{suggestEmail(input)}</ContextMenu>
+        {suggestEmail(input)}
       </Autocomplete>
     );
   },
 };
 export default meta;
+
+export const FixedOptions: Story = {
+  render: () => (
+    <Autocomplete>
+      <SearchField>
+        <Label>Test</Label>
+      </SearchField>
+      <Option value="example.com">example.com</Option>
+      <Option value="domain.de">domain.de</Option>
+      <Option value="test.org">test.org</Option>
+    </Autocomplete>
+  ),
+};
 
 type Story = StoryObj<typeof Autocomplete>;
 
