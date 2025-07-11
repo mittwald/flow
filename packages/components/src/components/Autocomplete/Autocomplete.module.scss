@@ -2,6 +2,10 @@
   display: flex;
 }
 
+.popover {
+  width: auto;
+}
+
 .empty {
   padding: var(--size-px--xs) var(--size-px--s);
 }

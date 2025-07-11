@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import { type FC } from "react";
 import * as Aria from "react-aria-components";
 import { Popover, type PopoverProps } from "@/components/Popover/Popover";
 import clsx from "clsx";
@@ -8,7 +8,10 @@ import type { OptionProps } from "@/components/Option";
 import { flowComponent } from "@/index/internal";
 
 export interface OptionsProps
-  extends Pick<Aria.ListBoxProps<OptionProps>, "renderEmptyState" | "onAction">,
+  extends Pick<
+      Aria.ListBoxProps<OptionProps>,
+      "renderEmptyState" | "onAction" | "dependencies"
+    >,
     PopoverProps {
   controller: OverlayController;
 }
@@ -20,6 +23,7 @@ export const Options: FC<OptionsProps> = flowComponent("Options", (props) => {
     controller,
     renderEmptyState,
     onAction,
+    dependencies,
     ...restPopoverProps
   } = props;
 
@@ -32,6 +36,7 @@ export const Options: FC<OptionsProps> = flowComponent("Options", (props) => {
       {...restPopoverProps}
     >
       <Aria.ListBox
+        dependencies={dependencies}
         onAction={onAction}
         className={rootClassName}
         renderEmptyState={renderEmptyState}

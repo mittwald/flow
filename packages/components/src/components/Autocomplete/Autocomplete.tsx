@@ -64,6 +64,9 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
     Option: {
       tunnelId: "options",
     },
+    Popover: {
+      className: styles.popover,
+    },
   };
 
   const handleOnInputChange = (value: string) => {
