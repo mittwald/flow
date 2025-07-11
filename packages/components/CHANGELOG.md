@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.340](https://github.com/mittwald/flow/compare/0.2.0-alpha.339...0.2.0-alpha.340) (2025-07-11)
+
+### Bug Fixes
+
+* **Autocomplete:** fixes close on blur ([#1738](https://github.com/mittwald/flow/issues/1738)) ([ac34b7e](https://github.com/mittwald/flow/commit/ac34b7e687bf1b4afa61da6295acb684411472d4))
+
 # [0.2.0-alpha.339](https://github.com/mittwald/flow/compare/0.2.0-alpha.338...0.2.0-alpha.339) (2025-07-11)
 
 ### Reverts
