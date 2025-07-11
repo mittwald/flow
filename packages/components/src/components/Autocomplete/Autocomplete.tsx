@@ -7,7 +7,11 @@ import {
   flowComponent,
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
-import { useLocalizedStringFormatter } from "react-aria";
+import {
+  UNSAFE_PortalProvider,
+  useFocusWithin,
+  useLocalizedStringFormatter,
+} from "react-aria";
 import styles from "./Autocomplete.module.scss";
 import locales from "./locales/*.locale.json";
 import { Text } from "@/components/Text";
@@ -28,9 +32,13 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
   const { contains } = Aria.useFilter({ sensitivity: "base" });
 
   const triggerRef = useRef<HTMLInputElement>(null);
+  const container = useRef(null);
 
   const controller = useOverlayController("ContextMenu", {
     reuseControllerFromContext: false,
+  });
+  const focusWithin = useFocusWithin({
+    onBlurWithin: controller.close,
   });
   const menuIsOpen = controller.useIsOpen();
 
@@ -85,13 +93,17 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
       mergeInParentContext
       dependencies={[menuIsOpen, controller]}
     >
-      <Aria.Autocomplete
-        onInputChange={handleOnInputChange}
-        filter={contains}
-        {...rest}
-      >
-        {children}
-      </Aria.Autocomplete>
+      <div {...focusWithin.focusWithinProps} ref={container}>
+        <UNSAFE_PortalProvider getContainer={() => container.current}>
+          <Aria.Autocomplete
+            onInputChange={handleOnInputChange}
+            filter={contains}
+            {...rest}
+          >
+            {children}
+          </Aria.Autocomplete>
+        </UNSAFE_PortalProvider>
+      </div>
     </PropsContextProvider>
   );
 });
