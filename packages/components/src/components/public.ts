@@ -96,6 +96,7 @@ export * from "@/components/Text";
 export * from "@/components/TextArea";
 export * from "@/components/TextField";
 export * from "@/components/TimeField";
+export * from "@/components/TranslationProvider";
 export * from "@/components/Tooltip";
 export * from "@/components/TunnelEntry";
 export * from "@/components/Wrap";
