@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.341](https://github.com/mittwald/flow/compare/0.2.0-alpha.340...0.2.0-alpha.341) (2025-07-14)
+
+### Features
+
+* **PasswordCreationField:** implement context translations ([#1741](https://github.com/mittwald/flow/issues/1741)) ([95b5c66](https://github.com/mittwald/flow/commit/95b5c661100ed5bd717d166b6be756184296203c))
+
 # [0.2.0-alpha.340](https://github.com/mittwald/flow/compare/0.2.0-alpha.339...0.2.0-alpha.340) (2025-07-11)
 
 ### Bug Fixes
