@@ -1,16 +1,16 @@
 import type { FC, PropsWithChildren } from "react";
 import React, { createContext, useContext, useMemo } from "react";
 
-export interface TranslationContext {
+export interface Translations {
   "de-DE"?: Record<string, string>;
   "en-US"?: Record<string, string>;
 }
 
 type Props = PropsWithChildren & {
-  translations: TranslationContext;
+  translations: Translations;
 };
 
-const context = createContext<TranslationContext>({});
+const context = createContext<Translations>({});
 
 export const useTranslationProvider = () => useContext(context);
 
