@@ -33,7 +33,8 @@
 }
 
 @media (max-width: 550px) {
-  .chat .controls {
+  .controls:not(:has(form)),
+  .controls form {
     flex-wrap: wrap;
 
     .accentButton {
