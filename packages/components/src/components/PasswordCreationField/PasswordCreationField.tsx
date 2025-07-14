@@ -2,7 +2,6 @@ import React, {
   type PropsWithChildren,
   useState,
   type ClipboardEvent,
-  useEffect,
 } from "react";
 import {
   ClearPropsContext,
@@ -23,7 +22,6 @@ import type { Policy } from "@mittwald/password-tools-js/policy";
 import { type ActionFn } from "@/components/Action";
 import getStateFromLatestPolicyValidationResult from "@/components/PasswordCreationField/lib/getStateFromLatestPolicyValidationResult";
 import locales from "./locales/*.locale.json";
-import { useLocalizedStringFormatter } from "react-aria";
 import generateValidationTranslation from "@/components/PasswordCreationField/lib/generateValidationTranslation";
 import { FieldError } from "@/components/FieldError";
 import FieldDescription from "@/components/FieldDescription";
@@ -41,6 +39,7 @@ import { ReactAriaControlledValueFix } from "@/lib/react/ReactAriaControlledValu
 import { useIsMounted } from "@/lib/hooks";
 import { ValidationResultButton } from "@/components/PasswordCreationField/components/ValidationResultButton/ValidationResultButton";
 import { PasswordGenerateButton } from "@/components/PasswordCreationField/components/PasswordGenerateButton/PasswordGenerateButton";
+import { useLocalizedContextStringFormatter } from "@/components/TranslationProvider/useLocalizedContextStringFormatter";
 
 const validationDebounceMilliseconds = 200;
 
@@ -83,7 +82,7 @@ export const PasswordCreationField = flowComponent(
       ...rest
     } = props;
 
-    const translate = useLocalizedStringFormatter(locales);
+    const translate = useLocalizedContextStringFormatter(locales);
 
     const [isPasswordRevealed, setIsPasswordRevealed] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -136,12 +135,6 @@ export const PasswordCreationField = flowComponent(
       setValue(value);
       setDebouncedValue(value === "" ? undefined : value);
     };
-
-    useEffect(() => {
-      if (!ignoredValue) {
-        setUncontrolledValue("");
-      }
-    }, [ignoredValue]);
 
     const setOptimisticPolicyValidationResult = (
       isValid: ResolvedPolicyValidationResult["isValid"] = true,
