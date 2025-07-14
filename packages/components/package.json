@@ -103,7 +103,7 @@
     "@mittwald/react-use-promise": "^3.0.4",
     "@mittwald/remote-dom-react": "1.2.2-mittwald.3",
     "@mittwald/typescript-config": "workspace:*",
-    "@nx/storybook": "^20.8.2",
+    "@nx/storybook": "^21.2.3",
     "@storybook/addon-a11y": "^8.6.14",
     "@storybook/addon-actions": "^8.6.14",
     "@storybook/addon-essentials": "^8.6.14",
