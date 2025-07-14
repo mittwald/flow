@@ -6,10 +6,12 @@ import {
 import { useState } from "react";
 
 export default () => {
-  const [password, setPassword] = useState<string>("");
+  const [password, setPassword] = useState("");
 
   return (
-    <PasswordCreationField onChange={(v) => setPassword(v)}>
+    <PasswordCreationField
+      onChange={(password: string) => setPassword(password)}
+    >
       <Label>Password</Label>
       <CopyButton text={password} />
     </PasswordCreationField>
