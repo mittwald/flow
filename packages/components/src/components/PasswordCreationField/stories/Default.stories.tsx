@@ -12,6 +12,7 @@ import { Button } from "@/components/Button";
 import { Field, Form } from "@/integrations/react-hook-form";
 import { IconDanger } from "@/components/Icon/components/icons";
 import { CopyButton } from "@/components/CopyButton";
+import { generatePasswordCreationFieldValidation } from "@/components/PasswordCreationField/lib/generatePasswordCreationFieldValidation";
 
 const policyDecl: PolicyDeclaration = {
   minComplexity: 3,
@@ -48,16 +49,10 @@ const policyDecl: PolicyDeclaration = {
       max: 2,
     },
     {
-      identifier: "numbers",
-      ruleType: RuleType.charPool,
-      charPools: ["numbers"],
+      ruleType: RuleType.regex,
+      pattern: "[-_§$%&/=,;.#]",
+      translationKey: "asd",
       min: 1,
-      max: 2,
-    },
-    {
-      ruleType: RuleType.blocklist,
-      blocklist: ["foo", "bar"],
-      substringMatch: true,
     },
   ],
 };
@@ -66,8 +61,17 @@ const meta: Meta<typeof PasswordCreationField> = {
   title: "Form Controls/PasswordCreationField",
   component: PasswordCreationField,
   render: (props) => {
+    const [value, setValue] = useState("");
+
     return (
-      <PasswordCreationField onChange={action("onChange")} {...props}>
+      <PasswordCreationField
+        value={value}
+        onChange={(password) => {
+          action("onChange");
+          setValue(password);
+        }}
+        {...props}
+      >
         <Label>Password</Label>
       </PasswordCreationField>
     );
@@ -113,7 +117,13 @@ export const WithForm: Story = {
 
     return (
       <Form form={form} onSubmit={async () => await sleep(2000)}>
-        <Field rules={{ required: true }} name="password">
+        <Field
+          rules={{
+            required: true,
+            validate: generatePasswordCreationFieldValidation(),
+          }}
+          name="password"
+        >
           <PasswordCreationField validationPolicy={policy}>
             <Label>Password</Label>
             <Button>asd</Button>

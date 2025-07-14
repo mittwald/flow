@@ -2,6 +2,7 @@ import React, {
   type PropsWithChildren,
   useState,
   type ClipboardEvent,
+  useEffect,
 } from "react";
 import {
   ClearPropsContext,
@@ -49,8 +50,8 @@ export interface PasswordCreationFieldProps
         Partial<Pick<Aria.FieldErrorRenderProps, "validationErrors">>
     >,
     FlowComponentProps<HTMLInputElement> {
-  value?: never;
-  defaultValue?: never;
+  value?: string;
+  defaultValue?: string;
   placeholder?: string;
   validationPolicy?: Policy;
 }
@@ -77,8 +78,7 @@ export const PasswordCreationField = flowComponent(
       isInvalid: invalidFromProps,
       validationPolicy = defaultPasswordCreationPolicy,
       isRequired,
-      value: ignoredValue,
-      defaultValue: ignoredDefaultValue,
+      value,
       ...rest
     } = props;
 
@@ -115,13 +115,17 @@ export const PasswordCreationField = flowComponent(
       );
     }
 
-    const isMounted = useIsMounted();
+    const [bouncedValue, setDebouncedValue] = useDebounceValue(
+      "",
+      validationDebounceMilliseconds,
+    );
 
-    const [value, setValue] = useState("");
-    const [bouncedValue, setDebouncedValue] = useDebounceValue<
-      string | undefined
-    >(undefined, validationDebounceMilliseconds);
-    const isEmptyValue = bouncedValue === undefined;
+    useEffect(() => {
+      setDebouncedValue(value ?? "");
+    }, [value]);
+
+    const isMounted = useIsMounted();
+    const isEmptyValue = !value;
 
     const isValidFromValidationResult =
       !isEmptyValue && stateFromValidationResult?.isValid;
@@ -130,11 +134,6 @@ export const PasswordCreationField = flowComponent(
       !isEmptyValue && !stateFromValidationResult?.isValid;
 
     const isInvalid = invalidFromProps || isInvalidFromValidationResult;
-
-    const setUncontrolledValue = (value: string) => {
-      setValue(value);
-      setDebouncedValue(value === "" ? undefined : value);
-    };
 
     const setOptimisticPolicyValidationResult = (
       isValid: ResolvedPolicyValidationResult["isValid"] = true,
@@ -151,7 +150,7 @@ export const PasswordCreationField = flowComponent(
           return;
         }
 
-        const validationResult = validationPolicy.validate(value);
+        const validationResult = validationPolicy.validate(bouncedValue);
         if (typeof validationResult.isValid === "boolean") {
           setIsLoading(false);
           setPolicyValidationResult((old) => ({
@@ -162,7 +161,7 @@ export const PasswordCreationField = flowComponent(
           }));
 
           if (onChange && isMounted) {
-            onChange(validationResult.isValid ? value : "");
+            onChange(bouncedValue);
           }
           return;
         }
@@ -179,7 +178,7 @@ export const PasswordCreationField = flowComponent(
         }
 
         void Promise.all([
-          Promise.resolve(value),
+          Promise.resolve(bouncedValue),
           ...validationResult.ruleResults,
         ]).then(([resolvedValue, ...validationResults]) => {
           if (signal.aborted) {
@@ -196,7 +195,7 @@ export const PasswordCreationField = flowComponent(
           }));
 
           if (onChange && isMounted) {
-            onChange(isValid ? resolvedValue : "");
+            onChange(resolvedValue);
           }
         });
       },
@@ -204,7 +203,7 @@ export const PasswordCreationField = flowComponent(
     );
 
     const onChangeValueHandler = (value: string) => {
-      setUncontrolledValue(value);
+      onChange?.(value);
     };
 
     const onPasswordGenerateHandler: ActionFn = async () => {
@@ -212,10 +211,6 @@ export const PasswordCreationField = flowComponent(
       setOptimisticPolicyValidationResult();
       setIsPasswordRevealed(true);
       onChangeValueHandler(generatedPassword);
-    };
-
-    const onPasswordInputChangeHandler = (value: string) => {
-      onChangeValueHandler(value);
     };
 
     const onPasswordPasteHandler = (event: ClipboardEvent) => {
@@ -288,7 +283,7 @@ export const PasswordCreationField = flowComponent(
             {...rest}
             type={isPasswordRevealed ? "text" : "password"}
             value={value}
-            onChange={onPasswordInputChangeHandler}
+            onChange={onChangeValueHandler}
             onPaste={onPasswordPasteHandler}
             className={clsx(className, formFieldStyles.formField)}
             isDisabled={isDisabled}
