@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.342](https://github.com/mittwald/flow/compare/0.2.0-alpha.341...0.2.0-alpha.342) (2025-07-14)
+
+### Bug Fixes
+
+* **AvatarStack:** fix focus visibility ([#1748](https://github.com/mittwald/flow/issues/1748)) ([59efe34](https://github.com/mittwald/flow/commit/59efe342ea711636f110102997cd8a5f400b48f9))
+* **Chat:** fix responsive controls ([#1744](https://github.com/mittwald/flow/issues/1744)) ([c6c8979](https://github.com/mittwald/flow/commit/c6c897940c361a20fac3660ee9aa1a262f32b575))
+* **LabeledValue:** fix contextual help in label ([#1745](https://github.com/mittwald/flow/issues/1745)) ([25882b8](https://github.com/mittwald/flow/commit/25882b8db1dbbb06ad6724c9e073e20682216ad8))
+
 # [0.2.0-alpha.341](https://github.com/mittwald/flow/compare/0.2.0-alpha.340...0.2.0-alpha.341) (2025-07-14)
 
 ### Features
