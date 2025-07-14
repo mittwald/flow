@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.345](https://github.com/mittwald/flow/compare/0.2.0-alpha.344...0.2.0-alpha.345) (2025-07-14)
+
+### Bug Fixes
+
+* **TranslationProvider:** export translation provider ([#1755](https://github.com/mittwald/flow/issues/1755)) ([4b973c7](https://github.com/mittwald/flow/commit/4b973c75a731912965ea500059dea09886793598))
+
 # [0.2.0-alpha.344](https://github.com/mittwald/flow/compare/0.2.0-alpha.343...0.2.0-alpha.344) (2025-07-14)
 
 ### Bug Fixes
