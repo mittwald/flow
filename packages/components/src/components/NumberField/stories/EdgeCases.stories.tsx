@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { NumberField } from "../index";
 import React from "react";
 import { Label } from "@/components/Label";
-import { action } from "@storybook/addon-actions";
+import { action } from "storybook/actions";
 
 const meta: Meta<typeof NumberField> = {
   title: "Form Controls/NumberField/Edge Cases",

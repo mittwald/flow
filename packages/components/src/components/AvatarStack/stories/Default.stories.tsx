@@ -5,7 +5,7 @@ import { dummyText } from "@/lib/dev/dummyText";
 import { AvatarStack } from "@/components/AvatarStack";
 import { Avatar } from "@/components/Avatar";
 import { Button } from "@/components/Button";
-import { action } from "@storybook/addon-actions";
+import { action } from "storybook/actions";
 
 const meta: Meta<typeof AvatarStack> = {
   title: "Content/AvatarStack",

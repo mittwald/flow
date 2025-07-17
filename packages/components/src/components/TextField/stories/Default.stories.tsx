@@ -4,7 +4,7 @@ import { FieldError } from "@/components/FieldError";
 import { Label } from "@/components/Label";
 import { Form } from "@/integrations/react-hook-form";
 import { sleep } from "@/lib/promises/sleep";
-import { action } from "@storybook/addon-actions";
+import { action } from "storybook/actions";
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";

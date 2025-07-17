@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { Label } from "@/components/Label";
-import { action } from "@storybook/addon-actions";
+import { action } from "storybook/actions";
 import { TranslationProvider } from "@/components/TranslationProvider";
 import { I18nProvider } from "react-aria";
 import { PasswordCreationField } from "@/components/PasswordCreationField";

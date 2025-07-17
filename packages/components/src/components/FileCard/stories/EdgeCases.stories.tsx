@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import defaultMeta from "./Default.stories";
 import { FileCard } from "@/components/FileCard";
 import { dummyText } from "@/lib/dev/dummyText";
-import { action } from "@storybook/addon-actions";
+import { action } from "storybook/actions";
 
 const meta: Meta<typeof FileCard> = {
   ...defaultMeta,
