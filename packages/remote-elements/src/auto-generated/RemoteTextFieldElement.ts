@@ -32,6 +32,7 @@ export class RemoteTextFieldElement extends FlowRemoteElement<RemoteTextFieldEle
       inputMode: {},
       isDisabled: {},
       isInvalid: {},
+      isPasswordRevealed: {},
       isReadOnly: {},
       isRequired: {},
       maxLength: {},
