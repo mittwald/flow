@@ -5,6 +5,10 @@ import { isPromise } from "remeda";
 export const generatePasswordCreationFieldValidation =
   (validationPolicy: Policy = defaultPasswordCreationPolicy) =>
   async (value: string) => {
+    if (!value) {
+      return true;
+    }
+
     const validationResult = validationPolicy.validate(value);
 
     if (isPromise(validationResult.isValid)) {
