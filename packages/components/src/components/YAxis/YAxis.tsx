@@ -14,6 +14,7 @@ export type YAxisProps = Pick<
   | "type"
   | "domain"
   | "hide"
+  | "unit"
 >;
 
 /** @flr-generate all */

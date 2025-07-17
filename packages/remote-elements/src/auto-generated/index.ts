@@ -64,6 +64,7 @@ export * from "./RemoteLabelElement";
 export * from "./RemoteLabeledValueElement";
 export * from "./RemoteLayoutCardElement";
 export * from "./RemoteLegendElement";
+export * from "./RemoteLineElement";
 export * from "./RemoteLinkElement";
 export * from "./RemoteListEmptyViewElement";
 export * from "./RemoteListItemViewContentElement";
