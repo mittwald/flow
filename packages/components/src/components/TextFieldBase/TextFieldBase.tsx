@@ -19,11 +19,20 @@ export interface TextFieldBaseProps
   input: ReactNode;
   /** Whether a character count should be displayed inside the field description. */
   showCharacterCount?: boolean;
+  /** Whether the password is visible or not if the type is "password" */
+  isPasswordRevealed?: boolean;
 }
 
 export const TextFieldBase: FC<TextFieldBaseProps> = (props) => {
-  const { children, className, input, showCharacterCount, ref, ...rest } =
-    props;
+  const {
+    children,
+    className,
+    input,
+    showCharacterCount,
+    ref,
+    isPasswordRevealed,
+    ...rest
+  } = props;
   const [charactersCount, setCharactersCount] = useState(
     props.value?.length ?? 0,
   );
@@ -75,6 +84,7 @@ export const TextFieldBase: FC<TextFieldBaseProps> = (props) => {
       <Aria.TextField
         ref={ref}
         {...rest}
+        type={isPasswordRevealed ? "text" : "password"}
         className={rootClassName}
         onChange={handleOnChange}
         {...propsWithOptionalStringValue}

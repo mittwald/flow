@@ -3,3 +3,7 @@
 .textField {
   @include formControl.formControl();
 }
+
+#inputGroup {
+  padding-bottom: 0;
+}

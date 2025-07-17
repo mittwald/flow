@@ -83,6 +83,14 @@ export const WithFieldError: Story = {
   ),
 };
 
+export const WithTypePassword: Story = {
+  render: (props) => (
+    <TextField {...props} type="password" defaultValue="secretPassword">
+      <Label>Password</Label>
+    </TextField>
+  ),
+};
+
 export const WithForm: Story = {
   render: (props) => {
     const form = useForm();
