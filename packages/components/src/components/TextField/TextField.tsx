@@ -24,15 +24,7 @@ export interface TextFieldProps
  * @flr-clear-props-context
  */
 export const TextField = flowComponent("TextField", (props) => {
-  const {
-    children,
-    placeholder,
-    ref,
-    form,
-    type: typeFromProps,
-    isDisabled,
-    ...rest
-  } = props;
+  const { children, placeholder, ref, form, type, isDisabled, ...rest } = props;
 
   const [isPasswordRevealed, setIsPasswordRevealed] = useState(false);
 
@@ -41,7 +33,7 @@ export const TextField = flowComponent("TextField", (props) => {
   };
 
   const input =
-    typeFromProps === "password" ? (
+    type === "password" ? (
       <Aria.Group
         className={passwordFieldStyles.inputGroup}
         id={styles.inputGroup}
@@ -80,14 +72,15 @@ export const TextField = flowComponent("TextField", (props) => {
 
   return (
     <ClearPropsContext>
-      {typeFromProps === "password" && children}
+      {type === "password" && children}
       <TextFieldBase
         {...rest}
         input={input}
         isDisabled={isDisabled}
+        type={type}
         isPasswordRevealed={isPasswordRevealed}
       >
-        {typeFromProps !== "password" && children}
+        {type !== "password" && children}
       </TextFieldBase>
     </ClearPropsContext>
   );

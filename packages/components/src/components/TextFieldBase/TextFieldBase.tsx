@@ -31,6 +31,7 @@ export const TextFieldBase: FC<TextFieldBaseProps> = (props) => {
     showCharacterCount,
     ref,
     isPasswordRevealed,
+    type,
     ...rest
   } = props;
   const [charactersCount, setCharactersCount] = useState(
@@ -84,7 +85,7 @@ export const TextFieldBase: FC<TextFieldBaseProps> = (props) => {
       <Aria.TextField
         ref={ref}
         {...rest}
-        type={isPasswordRevealed ? "text" : "password"}
+        type={type === "password" && isPasswordRevealed ? "text" : type}
         className={rootClassName}
         onChange={handleOnChange}
         {...propsWithOptionalStringValue}
