@@ -6,7 +6,7 @@ import { FileCardList } from "@/components/FileCardList";
 import { FileCard } from "@/components/FileCard";
 import { Form, typedField } from "@/integrations/react-hook-form";
 import { useForm } from "react-hook-form";
-import { action } from "@storybook/addon-actions";
+import { action } from "storybook/actions";
 import { Button } from "@/components/Button";
 import { ActionGroup } from "@/components/ActionGroup";
 import { IconImage, IconUpload } from "@/components/Icon/components/icons";

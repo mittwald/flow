@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { PasswordCreationField } from "../index";
 import React, { useState } from "react";
 import { Label } from "@/components/Label";
-import { action } from "@storybook/addon-actions";
+import { action } from "storybook/actions";
 import type { PolicyDeclaration } from "@mittwald/password-tools-js/policy";
 import { RuleType, SequenceType } from "@mittwald/password-tools-js/rules";
 import { Policy } from "@mittwald/password-tools-js/policy";
