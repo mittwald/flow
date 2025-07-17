@@ -6,3 +6,4 @@ export {
   type AreaChartEmptyViewProps,
 } from "./AreaChart";
 export * from "./components/Area";
+export * from "./components/Line";
