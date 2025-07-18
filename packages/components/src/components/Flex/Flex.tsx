@@ -25,7 +25,7 @@ export interface FlexProps
   /** The flexDirection value of the element. @default "row" */
   direction?: CSSProperties["flexDirection"];
   /** The alignItems value of the element. @default "start" */
-  align?: "start" | "end" | "center";
+  align?: "start" | "end" | "center" | "stretch" | "baseline";
   /** The justifyContent value of the element. @default "start" */
   justify?: "start" | "end" | "center";
   /** The gap size of the element. */
