@@ -33,6 +33,8 @@ export interface ButtonProps
   isSucceeded?: boolean;
   /** Whether the button is in a failed state. */
   isFailed?: boolean;
+  /** Whether the button should stretch horizontally */
+  stretch?: boolean;
   /** @internal */
   unstyled?: boolean;
   /** @internal */
@@ -80,6 +82,7 @@ export const Button = flowComponent("Button", (props) => {
     slot: ignoredSlotProp,
     ariaSlot: slot,
     unstyled,
+    stretch,
     ...restProps
   } = props;
 
@@ -93,6 +96,7 @@ export const Button = flowComponent("Button", (props) => {
         styles[`size-${size}`],
         styles[color],
         styles[variant],
+        stretch && styles.stretch,
         className,
         /**
          * Workaround warning: The Aria.Button does not support "aria-disabled"

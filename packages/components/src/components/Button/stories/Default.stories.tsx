@@ -10,6 +10,8 @@ import { Tooltip } from "@/components/Tooltip";
 import TooltipTrigger from "@/components/Tooltip/components/TooltipTrigger";
 import { dummyText } from "@/lib/dev/dummyText";
 import { Image } from "@/components/Image";
+import { LayoutCard } from "@/components/LayoutCard";
+import { Section } from "@/components/Section";
 
 const meta: Meta<typeof Button> = {
   title: "Actions/Button",
@@ -105,4 +107,19 @@ export const WithAvatar: Story = {
       <Tooltip>Profilbild ändern</Tooltip>
     </TooltipTrigger>
   ),
+};
+
+export const WithGrow: Story = {
+  args: { stretch: true },
+  render: (props) => (
+    <div style={{ width: 300 }}>
+      <LayoutCard>
+        <Section>
+          <Text>{dummyText.long}</Text>
+          <Button {...props}>Action</Button>
+        </Section>
+      </LayoutCard>
+    </div>
+  ),
+  globals: { backgrounds: "dark" },
 };

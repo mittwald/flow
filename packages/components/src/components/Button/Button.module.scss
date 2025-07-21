@@ -72,6 +72,11 @@
     right: calc(var(--size-px--xxs) * -1);
   }
 
+  &:where(.stretch) {
+    flex-grow: 1;
+    width: 100%;
+  }
+
   /* States */
 
   &.isPending,
