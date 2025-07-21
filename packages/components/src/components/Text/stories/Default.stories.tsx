@@ -2,10 +2,6 @@ import type { Meta, StoryObj } from "@storybook/react";
 import Text from "../Text";
 import React from "react";
 import Section from "@/components/Section";
-import {
-  storyBackgroundDark,
-  storyBackgroundLight,
-} from "@/lib/dev/storyBackgrounds";
 import { InlineCode } from "@/components/InlineCode";
 import { IconStar } from "../../Icon/components/icons";
 import { dummyText } from "@/lib/dev/dummyText";
@@ -80,15 +76,15 @@ export const SmallText: Story = {
 
 export const Dark: Story = {
   args: { color: "dark" },
-  parameters: {
-    backgrounds: storyBackgroundLight,
+  globals: {
+    backgrounds: "light",
   },
 };
 
 export const Light: Story = {
   args: { color: "light" },
-  parameters: {
-    backgrounds: storyBackgroundDark,
+  globals: {
+    backgrounds: "dark",
   },
 };
 

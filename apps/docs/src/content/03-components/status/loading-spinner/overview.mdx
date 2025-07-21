@@ -1,3 +1,27 @@
 # Playground
 
+Verwende `<LoadingSpinner>`um einen LoadingSpinner darzustellen.
+
 <LiveCodeEditor />
+
+---
+
+# Color
+
+Zusätzlich zu der Standard-Color in **Default**, kann der LoadingSpinner in
+**Light** und **Dark** dargestellt werden. Beide Colors sind Alternativen zu der
+Standardfarbe, falls diese nicht auf farbigen oder dekorativen Hintergründen
+funktioniert.
+
+<LiveCodeEditor example="light" bgColor="dark" />
+
+<LiveCodeEditor example="dark" bgColor="light" />
+
+**Default:** Die Standardfarbe des LoadingSpinners ist neutral, um eine gute
+Sichtbarkeit sicherzustellen, ohne vom restlichen Interface abzulenken.
+
+**Light:** Verwende die Light-Color, bei dunklen Hintergründen mit einem HSL
+Lightness-Wert von weniger als 50.
+
+**Dark:** Verwende die Dark-Color, bei hellen, farbigen Hintergründen mit einem
+HSL Lightness-Wert von größer als 50.
