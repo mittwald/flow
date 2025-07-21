@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.351](https://github.com/mittwald/flow/compare/0.2.0-alpha.350...0.2.0-alpha.351) (2025-07-21)
+
+### Bug Fixes
+
+* **Accordion:** fix cut off focus outline ([#1769](https://github.com/mittwald/flow/issues/1769)) ([8ca3bf2](https://github.com/mittwald/flow/commit/8ca3bf2dc8705a9c7bd3dec078c073693be8924b))
+
 # [0.2.0-alpha.350](https://github.com/mittwald/flow/compare/0.2.0-alpha.349...0.2.0-alpha.350) (2025-07-21)
 
 ### Bug Fixes
