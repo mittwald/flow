@@ -2,10 +2,6 @@ import type { Meta, StoryObj } from "@storybook/react";
 import Button from "../Button";
 import defaultMeta from "./Default.stories";
 import React from "react";
-import {
-  storyBackgroundDark,
-  storyBackgroundLight,
-} from "@/lib/dev/storyBackgrounds";
 
 const meta: Meta<typeof Button> = {
   ...defaultMeta,
@@ -141,8 +137,8 @@ export const DarkSolid: Story = {
     color: "dark",
   },
   render: (props) => <Button {...props}>Delete/Terminate</Button>,
-  parameters: {
-    backgrounds: storyBackgroundLight,
+  globals: {
+    backgrounds: "light",
   },
 };
 
@@ -152,8 +148,8 @@ export const DarkPlain: Story = {
     variant: "plain",
   },
   render: (props) => <Button {...props}>Delete/Terminate</Button>,
-  parameters: {
-    backgrounds: storyBackgroundLight,
+  globals: {
+    backgrounds: "light",
   },
 };
 
@@ -163,8 +159,8 @@ export const DarkSoft: Story = {
     variant: "soft",
   },
   render: (props) => <Button {...props}>Delete/Terminate</Button>,
-  parameters: {
-    backgrounds: storyBackgroundLight,
+  globals: {
+    backgrounds: "light",
   },
 };
 
@@ -174,8 +170,8 @@ export const DarkOutline: Story = {
     variant: "outline",
   },
   render: (props) => <Button {...props}>Delete/Terminate</Button>,
-  parameters: {
-    backgrounds: storyBackgroundLight,
+  globals: {
+    backgrounds: "light",
   },
 };
 
@@ -184,8 +180,8 @@ export const LightSolid: Story = {
     color: "light",
   },
   render: (props) => <Button {...props}>Delete/Terminate</Button>,
-  parameters: {
-    backgrounds: storyBackgroundDark,
+  globals: {
+    backgrounds: "dark",
   },
 };
 
@@ -195,8 +191,8 @@ export const LightPlain: Story = {
     variant: "plain",
   },
   render: (props) => <Button {...props}>Delete/Terminate</Button>,
-  parameters: {
-    backgrounds: storyBackgroundDark,
+  globals: {
+    backgrounds: "dark",
   },
 };
 
@@ -206,8 +202,8 @@ export const LightSoft: Story = {
     variant: "soft",
   },
   render: (props) => <Button {...props}>Delete/Terminate</Button>,
-  parameters: {
-    backgrounds: storyBackgroundDark,
+  globals: {
+    backgrounds: "dark",
   },
 };
 
@@ -217,7 +213,7 @@ export const LightOutline: Story = {
     variant: "outline",
   },
   render: (props) => <Button {...props}>Delete/Terminate</Button>,
-  parameters: {
-    backgrounds: storyBackgroundDark,
+  globals: {
+    backgrounds: "dark",
   },
 };

@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Skeleton from "../Skeleton";
 import React from "react";
-import { storyBackgroundDark } from "@/lib/dev/storyBackgrounds";
 
 const meta: Meta<typeof Skeleton> = {
   title: "Content/Skeleton",
@@ -18,8 +17,8 @@ type Story = StoryObj<typeof Skeleton>;
 export const Default: Story = {};
 
 export const OnDarkBackground: Story = {
-  parameters: {
-    backgrounds: storyBackgroundDark,
+  globals: {
+    backgrounds: "dark",
   },
 };
 
