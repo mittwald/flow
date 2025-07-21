@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.350](https://github.com/mittwald/flow/compare/0.2.0-alpha.349...0.2.0-alpha.350) (2025-07-21)
+
+### Features
+
+* **LoadingSpinner:** support colors ([#1767](https://github.com/mittwald/flow/issues/1767)) ([f006e70](https://github.com/mittwald/flow/commit/f006e700994eb8b8d756f08bb16c6f2dba2753f3))
+
 # [0.2.0-alpha.349](https://github.com/mittwald/flow/compare/0.2.0-alpha.348...0.2.0-alpha.349) (2025-07-21)
 
 **Note:** Version bump only for package @mittwald/flow-design-tokens

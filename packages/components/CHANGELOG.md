@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.350](https://github.com/mittwald/flow/compare/0.2.0-alpha.349...0.2.0-alpha.350) (2025-07-21)
+
+### Bug Fixes
+
+* **ListHeader:** update list header without search ([#1763](https://github.com/mittwald/flow/issues/1763)) ([e4783a6](https://github.com/mittwald/flow/commit/e4783a67481cac754e46afb88a2642cea54c4f54))
+
+### Features
+
+* **LoadingSpinner:** support colors ([#1767](https://github.com/mittwald/flow/issues/1767)) ([f006e70](https://github.com/mittwald/flow/commit/f006e700994eb8b8d756f08bb16c6f2dba2753f3))
+
 # [0.2.0-alpha.349](https://github.com/mittwald/flow/compare/0.2.0-alpha.348...0.2.0-alpha.349) (2025-07-21)
 
 ### Features
