@@ -43,6 +43,6 @@ export const Light: Story = {
     color: "light",
   },
   globals: {
-    backgrounds: "light",
+    backgrounds: "dark",
   },
 };
