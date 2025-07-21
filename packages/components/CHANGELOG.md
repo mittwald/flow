@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.349](https://github.com/mittwald/flow/compare/0.2.0-alpha.348...0.2.0-alpha.349) (2025-07-21)
+
+### Features
+
+* **Flex:** allow alignItems stretch & baseline ([#1761](https://github.com/mittwald/flow/issues/1761)) ([eed0d30](https://github.com/mittwald/flow/commit/eed0d30a091819abc3ab75f05244ccd39b275b86))
+
 # [0.2.0-alpha.348](https://github.com/mittwald/flow/compare/0.2.0-alpha.347...0.2.0-alpha.348) (2025-07-17)
 
 ### Features
