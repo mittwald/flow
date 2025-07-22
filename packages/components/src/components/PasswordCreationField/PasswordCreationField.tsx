@@ -49,6 +49,7 @@ export interface PasswordCreationFieldProps
     >,
     FlowComponentProps<HTMLInputElement> {
   value?: string;
+  onValidationResult?: (password: string, isValid: boolean) => void;
   defaultValue?: string;
   placeholder?: string;
   validationPolicy?: Policy;
@@ -73,6 +74,7 @@ export const PasswordCreationField = flowComponent(
       ref,
       isDisabled,
       onChange: onChangeFromProps,
+      onValidationResult,
       isInvalid: invalidFromProps,
       validationPolicy = defaultPasswordCreationPolicy,
       isRequired,
@@ -100,7 +102,6 @@ export const PasswordCreationField = flowComponent(
     };
 
     const translate = useLocalizedContextStringFormatter(locales);
-
     const [isPasswordRevealed, setIsPasswordRevealed] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -153,16 +154,24 @@ export const PasswordCreationField = flowComponent(
     };
 
     useEffect(() => {
+      if (!deferredValue) {
+        return;
+      }
+
       startTransition(async () => {
         const validationResult = validationPolicy.validate(deferredValue);
         if (!isPromise(validationResult.isValid)) {
+          const isValid = validationResult.isValid as boolean;
+
           setIsLoading(() => false);
           setPolicyValidationResult((old) => ({
             ...old,
-            isValid: validationResult.isValid as boolean,
+            isValid,
             ruleResults: validationResult.ruleResults as RuleValidationResult[],
             complexity: validationResult.complexity,
           }));
+
+          onValidationResult?.(deferredValue, isValid);
           return;
         }
 
@@ -178,10 +187,11 @@ export const PasswordCreationField = flowComponent(
         }
 
         void Promise.all([
+          Promise.resolve(deferredValue),
           ...validationResult.ruleResults.map(async (r) => {
             return r;
           }),
-        ]).then(([...validationResults]) => {
+        ]).then(([resolvedValue, ...validationResults]) => {
           startTransition(() => {
             const isValid = !validationResults.some((r) => !r.isValid);
 
@@ -191,6 +201,7 @@ export const PasswordCreationField = flowComponent(
               isValid,
               ruleResults: validationResults,
             }));
+            onValidationResult?.(resolvedValue, isValid);
           });
         });
       });

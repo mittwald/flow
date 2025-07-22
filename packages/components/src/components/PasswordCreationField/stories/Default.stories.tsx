@@ -66,6 +66,7 @@ const meta: Meta<typeof PasswordCreationField> = {
     return (
       <PasswordCreationField
         value={value}
+        onValidationResult={action("onValidationResult")}
         onChange={(password) => {
           action("onChange");
           setValue(password);
