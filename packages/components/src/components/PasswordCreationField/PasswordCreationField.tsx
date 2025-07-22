@@ -98,9 +98,7 @@ export const PasswordCreationField = flowComponent(
         onChangeFromProps(value);
       }
 
-      if (!isControlled) {
-        setInternalValue(value);
-      }
+      setInternalValue(() => value);
     };
 
     const translate = useLocalizedContextStringFormatter(locales);

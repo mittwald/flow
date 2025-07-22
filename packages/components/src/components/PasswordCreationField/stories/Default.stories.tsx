@@ -108,7 +108,7 @@ export const WithCustomButtons: Story = {
 
 export const WithForm: Story = {
   render: () => {
-    const policy = Policy.fromDeclaration(policyDecl);
+    const customPolicy = Policy.fromDeclaration(policyDecl);
     const form = useForm({
       defaultValues: {
         password: "",
@@ -120,11 +120,11 @@ export const WithForm: Story = {
         <Field
           rules={{
             required: true,
-            validate: generatePasswordCreationFieldValidation(),
+            validate: generatePasswordCreationFieldValidation(customPolicy),
           }}
           name="password"
         >
-          <PasswordCreationField validationPolicy={policy}>
+          <PasswordCreationField validationPolicy={customPolicy}>
             <Label>Password</Label>
             <Button>asd</Button>
           </PasswordCreationField>
