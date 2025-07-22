@@ -3,6 +3,7 @@
 import {
   ActionGroup,
   Button,
+  CopyButton,
   ComboBox,
   FileField,
   Label,
@@ -18,13 +19,14 @@ import {
 } from "@mittwald/flow-remote-react-components";
 import {
   Form,
-  typedField,
+  Field,
 } from "@mittwald/flow-remote-react-components/react-hook-form";
 import { useForm } from "react-hook-form";
 
 export default function Page() {
   const form = useForm({
     defaultValues: {
+      name: "",
       email: "foo.bar@",
       confirm: false,
       age: 20,
@@ -35,8 +37,6 @@ export default function Page() {
       password: "",
     },
   });
-
-  const Field = typedField(form);
 
   return (
     <Section>
@@ -52,6 +52,16 @@ export default function Page() {
           console.log("Submitted:", data, "Files:", files);
         }}
       >
+        <Field
+          name="name"
+          rules={{
+            required: "Required!",
+          }}
+        >
+          <TextField>
+            <Label>Name</Label>
+          </TextField>
+        </Field>
         <Field
           name="email"
           rules={{
@@ -102,6 +112,7 @@ export default function Page() {
         <Field name="password" rules={{ required: true }}>
           <PasswordCreationField>
             <Label>Password</Label>
+            <CopyButton />
           </PasswordCreationField>
         </Field>
         <Field name="file">

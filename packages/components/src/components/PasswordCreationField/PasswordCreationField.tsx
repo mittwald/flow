@@ -2,7 +2,7 @@ import React, {
   type PropsWithChildren,
   useState,
   type ClipboardEvent,
-  useEffect,
+  useDeferredValue,
 } from "react";
 import {
   ClearPropsContext,
@@ -29,7 +29,6 @@ import FieldDescription from "@/components/FieldDescription";
 import ComplexityIndicator from "@/components/PasswordCreationField/components/ComplexityIndicator/ComplexityIndicator";
 import { type PolicyValidationResult } from "@mittwald/password-tools-js/policy";
 import { type RuleValidationResult } from "@mittwald/password-tools-js/rules";
-import { useDebounceValue } from "usehooks-ts";
 import { generatePassword } from "@/components/PasswordCreationField/worker/generatePassword";
 import TogglePasswordVisibilityButton from "@/components/PasswordCreationField/components/TogglePasswordVisibilityButton/TogglePasswordVisibilityButton";
 import { useAbortablePromise } from "@/lib/promises/useAbortablePromise";
@@ -41,8 +40,7 @@ import { useIsMounted } from "@/lib/hooks";
 import { ValidationResultButton } from "@/components/PasswordCreationField/components/ValidationResultButton/ValidationResultButton";
 import { PasswordGenerateButton } from "@/components/PasswordCreationField/components/PasswordGenerateButton/PasswordGenerateButton";
 import { useLocalizedContextStringFormatter } from "@/components/TranslationProvider/useLocalizedContextStringFormatter";
-
-const validationDebounceMilliseconds = 200;
+import { isPromise } from "remeda";
 
 export interface PasswordCreationFieldProps
   extends PropsWithChildren<
@@ -74,13 +72,34 @@ export const PasswordCreationField = flowComponent(
       className,
       ref,
       isDisabled,
-      onChange,
+      onChange: onChangeFromProps,
       isInvalid: invalidFromProps,
       validationPolicy = defaultPasswordCreationPolicy,
       isRequired,
-      value,
+      value: valueFromProps,
+      defaultValue,
       ...rest
     } = props;
+
+    const isControlled = typeof valueFromProps !== "undefined";
+    const hasDefaultValue = typeof defaultValue !== "undefined";
+    const [internalValue, setInternalValue] = useState(
+      hasDefaultValue ? defaultValue : "",
+    );
+    const deferredValue = useDeferredValue(
+      internalValue,
+      hasDefaultValue ? defaultValue : "",
+    );
+
+    const value = isControlled ? valueFromProps : internalValue;
+
+    const onChangeHandler = (value: string) => {
+      if (onChangeFromProps) {
+        onChangeFromProps(value);
+      }
+
+      setInternalValue(() => value);
+    };
 
     const translate = useLocalizedContextStringFormatter(locales);
 
@@ -115,15 +134,6 @@ export const PasswordCreationField = flowComponent(
       );
     }
 
-    const [bouncedValue, setDebouncedValue] = useDebounceValue(
-      "",
-      validationDebounceMilliseconds,
-    );
-
-    useEffect(() => {
-      setDebouncedValue(value ?? "");
-    }, [value]);
-
     const isMounted = useIsMounted();
     const isEmptyValue = !value;
 
@@ -138,10 +148,10 @@ export const PasswordCreationField = flowComponent(
     const setOptimisticPolicyValidationResult = (
       isValid: ResolvedPolicyValidationResult["isValid"] = true,
     ) => {
-      setPolicyValidationResult({
+      setPolicyValidationResult(() => ({
         ...initialPolicyValidationState,
         isValid,
-      });
+      }));
     };
 
     useAbortablePromise(
@@ -150,8 +160,8 @@ export const PasswordCreationField = flowComponent(
           return;
         }
 
-        const validationResult = validationPolicy.validate(bouncedValue);
-        if (typeof validationResult.isValid === "boolean") {
+        const validationResult = validationPolicy.validate(value);
+        if (!isPromise(validationResult.isValid)) {
           setIsLoading(false);
           setPolicyValidationResult((old) => ({
             ...old,
@@ -160,8 +170,8 @@ export const PasswordCreationField = flowComponent(
             complexity: validationResult.complexity,
           }));
 
-          if (onChange && isMounted) {
-            onChange(bouncedValue);
+          if (isMounted) {
+            onChangeHandler(value);
           }
           return;
         }
@@ -178,8 +188,14 @@ export const PasswordCreationField = flowComponent(
         }
 
         void Promise.all([
-          Promise.resolve(bouncedValue),
-          ...validationResult.ruleResults,
+          Promise.resolve(value),
+          ...validationResult.ruleResults.map(async (r) => {
+            if (signal.aborted) {
+              throw Error();
+            }
+
+            return r;
+          }),
         ]).then(([resolvedValue, ...validationResults]) => {
           if (signal.aborted) {
             return;
@@ -194,23 +210,19 @@ export const PasswordCreationField = flowComponent(
             ruleResults: validationResults,
           }));
 
-          if (onChange && isMounted) {
-            onChange(resolvedValue);
+          if (isMounted) {
+            onChangeHandler(resolvedValue);
           }
         });
       },
-      [bouncedValue],
+      [deferredValue],
     );
-
-    const onChangeValueHandler = (value: string) => {
-      onChange?.(value);
-    };
 
     const onPasswordGenerateHandler: ActionFn = async () => {
       const generatedPassword = await generatePassword(validationPolicy);
       setOptimisticPolicyValidationResult();
       setIsPasswordRevealed(true);
-      onChangeValueHandler(generatedPassword);
+      onChangeHandler(generatedPassword);
     };
 
     const onPasswordPasteHandler = (event: ClipboardEvent) => {
@@ -240,6 +252,7 @@ export const PasswordCreationField = flowComponent(
         color: "secondary",
         isDisabled: isDisabled,
         className: styles.button,
+        text: value,
       },
       Label: {
         className: formFieldStyles.label,
@@ -281,9 +294,9 @@ export const PasswordCreationField = flowComponent(
         <TunnelProvider>
           <Aria.TextField
             {...rest}
-            type={isPasswordRevealed ? "text" : "password"}
             value={value}
-            onChange={onChangeValueHandler}
+            type={isPasswordRevealed ? "text" : "password"}
+            onChange={onChangeHandler}
             onPaste={onPasswordPasteHandler}
             className={clsx(className, formFieldStyles.formField)}
             isDisabled={isDisabled}
@@ -297,9 +310,9 @@ export const PasswordCreationField = flowComponent(
             >
               <ReactAriaControlledValueFix
                 inputContext={Aria.InputContext}
-                props={props}
+                props={{ ...props, value }}
               >
-                <Aria.Input className={styles.input} ref={ref} />
+                <Aria.Input ref={ref} className={styles.input} />
               </ReactAriaControlledValueFix>
               <Aria.Group className={styles.buttonContainer}>
                 <TogglePasswordVisibilityButton
