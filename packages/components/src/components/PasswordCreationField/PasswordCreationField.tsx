@@ -3,6 +3,8 @@ import React, {
   useState,
   type ClipboardEvent,
   useDeferredValue,
+  startTransition,
+  useEffect,
 } from "react";
 import {
   ClearPropsContext,
@@ -31,12 +33,10 @@ import { type PolicyValidationResult } from "@mittwald/password-tools-js/policy"
 import { type RuleValidationResult } from "@mittwald/password-tools-js/rules";
 import { generatePassword } from "@/components/PasswordCreationField/worker/generatePassword";
 import TogglePasswordVisibilityButton from "@/components/PasswordCreationField/components/TogglePasswordVisibilityButton/TogglePasswordVisibilityButton";
-import { useAbortablePromise } from "@/lib/promises/useAbortablePromise";
 import { defaultPasswordCreationPolicy } from "@/components/PasswordCreationField/defaultPasswordCreationPolicy";
 import { FieldErrorContext } from "react-aria-components";
 import { Wrap } from "@/components/Wrap";
 import { ReactAriaControlledValueFix } from "@/lib/react/ReactAriaControlledValueFix";
-import { useIsMounted } from "@/lib/hooks";
 import { ValidationResultButton } from "@/components/PasswordCreationField/components/ValidationResultButton/ValidationResultButton";
 import { PasswordGenerateButton } from "@/components/PasswordCreationField/components/PasswordGenerateButton/PasswordGenerateButton";
 import { useLocalizedContextStringFormatter } from "@/components/TranslationProvider/useLocalizedContextStringFormatter";
@@ -86,19 +86,17 @@ export const PasswordCreationField = flowComponent(
     const [internalValue, setInternalValue] = useState(
       hasDefaultValue ? defaultValue : "",
     );
-    const deferredValue = useDeferredValue(
-      internalValue,
-      hasDefaultValue ? defaultValue : "",
-    );
-
     const value = isControlled ? valueFromProps : internalValue;
+    const deferredValue = useDeferredValue(value);
 
     const onChangeHandler = (value: string) => {
       if (onChangeFromProps) {
         onChangeFromProps(value);
       }
 
-      setInternalValue(() => value);
+      if (!isControlled) {
+        setInternalValue(() => value);
+      }
     };
 
     const translate = useLocalizedContextStringFormatter(locales);
@@ -134,7 +132,6 @@ export const PasswordCreationField = flowComponent(
       );
     }
 
-    const isMounted = useIsMounted();
     const isEmptyValue = !value;
 
     const isValidFromValidationResult =
@@ -146,33 +143,26 @@ export const PasswordCreationField = flowComponent(
     const isInvalid = invalidFromProps || isInvalidFromValidationResult;
 
     const setOptimisticPolicyValidationResult = (
-      isValid: ResolvedPolicyValidationResult["isValid"] = true,
+      state: Partial<ResolvedPolicyValidationResult> = {},
     ) => {
       setPolicyValidationResult(() => ({
         ...initialPolicyValidationState,
-        isValid,
+        ...state,
+        isValid: state.isValid ?? true,
       }));
     };
 
-    useAbortablePromise(
-      async (signal) => {
-        if (signal.aborted) {
-          return;
-        }
-
-        const validationResult = validationPolicy.validate(value);
+    useEffect(() => {
+      startTransition(async () => {
+        const validationResult = validationPolicy.validate(deferredValue);
         if (!isPromise(validationResult.isValid)) {
-          setIsLoading(false);
+          setIsLoading(() => false);
           setPolicyValidationResult((old) => ({
             ...old,
             isValid: validationResult.isValid as boolean,
             ruleResults: validationResult.ruleResults as RuleValidationResult[],
             complexity: validationResult.complexity,
           }));
-
-          if (isMounted) {
-            onChangeHandler(value);
-          }
           return;
         }
 
@@ -181,42 +171,30 @@ export const PasswordCreationField = flowComponent(
           .some((r) => !r.isValid);
 
         if (!isEmptyValue) {
-          setIsLoading(true);
+          setIsLoading(() => true);
         }
         if (!nonPromiseValidationsInvalid) {
           setOptimisticPolicyValidationResult();
         }
 
         void Promise.all([
-          Promise.resolve(value),
           ...validationResult.ruleResults.map(async (r) => {
-            if (signal.aborted) {
-              throw Error();
-            }
-
             return r;
           }),
-        ]).then(([resolvedValue, ...validationResults]) => {
-          if (signal.aborted) {
-            return;
-          }
+        ]).then(([...validationResults]) => {
+          startTransition(() => {
+            const isValid = !validationResults.some((r) => !r.isValid);
 
-          const isValid = !validationResults.some((r) => !r.isValid);
-
-          setIsLoading(false);
-          setPolicyValidationResult((old) => ({
-            ...old,
-            isValid,
-            ruleResults: validationResults,
-          }));
-
-          if (isMounted) {
-            onChangeHandler(resolvedValue);
-          }
+            setIsLoading(() => false);
+            setPolicyValidationResult((old) => ({
+              ...old,
+              isValid,
+              ruleResults: validationResults,
+            }));
+          });
         });
-      },
-      [deferredValue],
-    );
+      });
+    }, [deferredValue]);
 
     const onPasswordGenerateHandler: ActionFn = async () => {
       const generatedPassword = await generatePassword(validationPolicy);
@@ -228,7 +206,10 @@ export const PasswordCreationField = flowComponent(
     const onPasswordPasteHandler = (event: ClipboardEvent) => {
       const pastedValue = event.clipboardData.getData("text");
       if (pastedValue !== value) {
-        setOptimisticPolicyValidationResult("indeterminate");
+        setOptimisticPolicyValidationResult({
+          isValid: "indeterminate",
+        });
+        onChangeHandler(pastedValue);
       }
     };
 
