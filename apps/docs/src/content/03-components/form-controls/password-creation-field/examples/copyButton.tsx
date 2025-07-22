@@ -3,17 +3,12 @@ import {
   Label,
   PasswordCreationField,
 } from "@mittwald/flow-react-components";
-import { useState } from "react";
 
 export default () => {
-  const [password, setPassword] = useState("");
-
   return (
-    <PasswordCreationField
-      onChange={(password: string) => setPassword(password)}
-    >
+    <PasswordCreationField>
       <Label>Password</Label>
-      <CopyButton text={password} />
+      <CopyButton />
     </PasswordCreationField>
   );
 };
