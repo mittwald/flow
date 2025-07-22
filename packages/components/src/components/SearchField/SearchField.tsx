@@ -14,6 +14,7 @@ import { Button } from "@/components/Button";
 import { IconClose, IconSearch } from "@/components/Icon/components/icons";
 import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
+import { ReactAriaControlledValueFix } from "@/lib/react/ReactAriaControlledValueFix";
 
 export interface SearchFieldProps
   extends PropsWithChildren<Omit<Aria.SearchFieldProps, "children">>,
@@ -61,11 +62,16 @@ export const SearchField = flowComponent("SearchField", (props) => {
         </PropsContextProvider>
         <div className={styles.inputContainer}>
           <IconSearch className={styles.searchIcon} />
-          <Aria.Input
-            placeholder={searchText}
-            className={styles.input}
-            ref={ref}
-          />
+          <ReactAriaControlledValueFix
+            inputContext={Aria.InputContext}
+            props={props}
+          >
+            <Aria.Input
+              placeholder={searchText}
+              className={styles.input}
+              ref={ref}
+            />
+          </ReactAriaControlledValueFix>
           <Button
             className={styles.clearButton}
             variant="plain"

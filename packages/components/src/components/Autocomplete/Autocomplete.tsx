@@ -65,11 +65,11 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
         const input = triggerRef.current;
         if (input) {
           const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
-            window.HTMLInputElement.prototype,
+            Object.getPrototypeOf(input),
             "value",
           )?.set;
           nativeInputValueSetter?.call(input, String(key));
-          const event = new Event("input", { bubbles: true });
+          const event = new Event("change", { bubbles: true });
           input.dispatchEvent(event);
         }
       },

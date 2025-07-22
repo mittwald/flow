@@ -1,14 +1,13 @@
 import * as Aria from "react-aria-components";
 import {
   Children,
-  cloneElement,
   isValidElement,
   type Context,
   type FC,
   type ForwardedRef,
   type PropsWithChildren,
+  useLayoutEffect,
 } from "react";
-import { mergeRefs } from "@react-aria/utils";
 
 export interface ReactAriaControlledValueFixProps extends PropsWithChildren {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -40,36 +39,44 @@ export const ReactAriaControlledValueFix: FC<
     throw new Error("Expected valid element");
   }
 
-  const inputProps = child.props;
-  const ref = inputProps["ref"];
-
+  const { ref, ...inputProps } = child.props;
   const [contextProps, contextRef] = Aria.useContextProps(
     inputProps,
     ref,
     context,
   );
 
-  const mergedRef = mergeRefs((el) => {
-    if (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement) {
-      el.value = String(contextProps.value ?? "");
+  useLayoutEffect(() => {
+    const element = contextRef.current;
+
+    if (
+      element instanceof HTMLInputElement ||
+      element instanceof HTMLTextAreaElement
+    ) {
+      const newValue = String(contextProps.value ?? "");
+      try {
+        const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
+          Object.getPrototypeOf(element),
+          "value",
+        )?.set;
+        nativeInputValueSetter?.call(element, newValue);
+        const event = new Event("change", { bubbles: true });
+        element.dispatchEvent(event);
+      } catch (ignoredError) {
+        element.value = newValue;
+      }
     }
-  }, contextRef);
+  }, [contextProps.value]);
 
   const uncontrolledContextProps = {
     ...contextProps,
     value: undefined,
-    ref: mergedRef,
-  };
-
-  const uncontrolledInputProps = {
-    ...inputProps,
-    ref: undefined,
-    value: undefined,
+    ref: contextRef,
   };
 
   return (
     <Aria.Provider values={[[context, uncontrolledContextProps]]}>
-      {cloneElement(child, uncontrolledInputProps)}
+      {child}
     </Aria.Provider>
   );
 };

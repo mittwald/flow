@@ -16,6 +16,7 @@
     "@mittwald/flow-remote-react-renderer": "workspace:*",
     "@mittwald/flow-stylesheet": "workspace:*",
     "@mittwald/mstudio-ext-react-components": "workspace:*",
+    "@mittwald/password-tools-js": "^2.1.6",
     "@mittwald/react-tunnel": "workspace:*",
     "@mittwald/react-use-promise": "^3.0.4",
     "@tabler/icons-react": "^3.34.0",
