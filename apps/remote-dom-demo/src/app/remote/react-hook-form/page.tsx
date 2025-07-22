@@ -38,8 +38,6 @@ export default function Page() {
     },
   });
 
-  const password = form.watch("password");
-
   return (
     <Section>
       <Form
@@ -114,7 +112,7 @@ export default function Page() {
         <Field name="password" rules={{ required: true }}>
           <PasswordCreationField>
             <Label>Password</Label>
-            <CopyButton text={password} />
+            <CopyButton />
           </PasswordCreationField>
         </Field>
         <Field name="file">
