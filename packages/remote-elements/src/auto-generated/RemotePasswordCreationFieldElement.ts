@@ -66,6 +66,7 @@ export class RemotePasswordCreationFieldElement extends FlowRemoteElement<Remote
       keyUp: {},
       paste: {},
       select: {},
+      validationResult: {},
     };
   }
 

@@ -32,6 +32,7 @@ export const PasswordCreationField = createFlowRemoteComponent(
       onKeyUp: { event: "keyUp" } as never,
       onPaste: { event: "paste" } as never,
       onSelect: { event: "select" } as never,
+      onValidationResult: { event: "validationResult" } as never,
     },
   },
 );

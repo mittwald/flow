@@ -1,4 +1,4 @@
-import React, { type ComponentProps, useId, useMemo } from "react";
+import React, { type ComponentProps } from "react";
 import { Form as RhfForm } from "@mittwald/flow-react-components/react-hook-form";
 import type { FormProps } from "@mittwald/flow-react-components/react-hook-form";
 import type { FieldValues } from "react-hook-form";
@@ -14,14 +14,15 @@ const BaseForm = createRemoteComponent("flr-rhf-form", RemoteRhfFormElement, {
 
 export const Form = <F extends FieldValues>(props: FormProps<F>) => {
   const { ...rest } = props;
-  const id = useId();
 
-  const form = useMemo(
-    () => (props: ComponentProps<typeof BaseForm>) => <BaseForm {...props} />,
-    [id],
+  return (
+    <RhfForm
+      formComponent={(props: ComponentProps<typeof BaseForm>) => (
+        <BaseForm {...props} />
+      )}
+      {...rest}
+    />
   );
-
-  return <RhfForm key={id} {...rest} formComponent={form} />;
 };
 
 export default Form;

@@ -272,14 +272,16 @@ describe("PasswordCreationField Tests", () => {
     expect(customButton).toBeInTheDocument();
   });
 
-  test("emmit change", async () => {
+  test("emmit events", async () => {
     const onChangeHandler = vi.fn();
+    const onValidationResult = vi.fn();
 
     const renderResult = await act(() =>
       render(
         <I18nProvider locale="de">
           <PasswordCreationFieldTestComponent
             onChange={onChangeHandler}
+            onValidationResult={onValidationResult}
             validationPolicy={policy}
           >
             <Label>Password</Label>
@@ -301,6 +303,10 @@ describe("PasswordCreationField Tests", () => {
     });
 
     expect(onChangeHandler).toHaveBeenLastCalledWith("invalid");
+    expect(onValidationResult).toHaveBeenLastCalledWith({
+      password: "invalid",
+      isValid: false,
+    });
     expect(inputElement).toHaveValue("invalid");
 
     await act(async () => {
@@ -310,6 +316,10 @@ describe("PasswordCreationField Tests", () => {
       await sleep(250);
     });
     expect(onChangeHandler).toHaveBeenLastCalledWith("d!iBCsc8(l~i");
+    expect(onValidationResult).toHaveBeenLastCalledWith({
+      password: "d!iBCsc8(l~i",
+      isValid: true,
+    });
     expect(inputElement).toHaveValue("d!iBCsc8(l~i");
   });
 });
