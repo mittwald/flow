@@ -49,7 +49,7 @@ export interface PasswordCreationFieldProps
     >,
     FlowComponentProps<HTMLInputElement> {
   value?: string;
-  onValidationResult?: (password: string, isValid: boolean) => void;
+  onValidationResult?: (result: { password: string; isValid: boolean }) => void;
   defaultValue?: string;
   placeholder?: string;
   validationPolicy?: Policy;
@@ -57,6 +57,7 @@ export interface PasswordCreationFieldProps
 
 export interface ResolvedPolicyValidationResult
   extends Omit<PolicyValidationResult, "isValid"> {
+  initialValidate: boolean;
   isValid: boolean | "indeterminate";
   ruleResults: RuleValidationResult[];
 }
@@ -106,6 +107,7 @@ export const PasswordCreationField = flowComponent(
     const [isLoading, setIsLoading] = useState(false);
 
     const initialPolicyValidationState: ResolvedPolicyValidationResult = {
+      initialValidate: true,
       isValid: false,
       complexity: {
         min: validationPolicy.minComplexity,
@@ -134,13 +136,10 @@ export const PasswordCreationField = flowComponent(
     }
 
     const isEmptyValue = !value;
-
     const isValidFromValidationResult =
       !isEmptyValue && stateFromValidationResult?.isValid;
-
     const isInvalidFromValidationResult =
       !isEmptyValue && !stateFromValidationResult?.isValid;
-
     const isInvalid = invalidFromProps || isInvalidFromValidationResult;
 
     const setOptimisticPolicyValidationResult = (
@@ -154,24 +153,25 @@ export const PasswordCreationField = flowComponent(
     };
 
     useEffect(() => {
-      if (!deferredValue) {
-        return;
-      }
-
       startTransition(async () => {
         const validationResult = validationPolicy.validate(deferredValue);
         if (!isPromise(validationResult.isValid)) {
           const isValid = validationResult.isValid as boolean;
 
           setIsLoading(() => false);
-          setPolicyValidationResult((old) => ({
-            ...old,
-            isValid,
-            ruleResults: validationResult.ruleResults as RuleValidationResult[],
-            complexity: validationResult.complexity,
-          }));
+          setPolicyValidationResult((old) => {
+            if (!old.initialValidate) {
+              onValidationResult?.({ password: deferredValue, isValid });
+            }
 
-          onValidationResult?.(deferredValue, isValid);
+            return {
+              initialValidate: false,
+              isValid,
+              ruleResults:
+                validationResult.ruleResults as RuleValidationResult[],
+              complexity: validationResult.complexity,
+            };
+          });
           return;
         }
 
@@ -196,12 +196,17 @@ export const PasswordCreationField = flowComponent(
             const isValid = !validationResults.some((r) => !r.isValid);
 
             setIsLoading(() => false);
-            setPolicyValidationResult((old) => ({
-              ...old,
-              isValid,
-              ruleResults: validationResults,
-            }));
-            onValidationResult?.(resolvedValue, isValid);
+            setPolicyValidationResult((old) => {
+              if (!old.initialValidate) {
+                onValidationResult?.({ password: resolvedValue, isValid });
+              }
+
+              return {
+                ...old,
+                isValid,
+                ruleResults: validationResults,
+              };
+            });
           });
         });
       });

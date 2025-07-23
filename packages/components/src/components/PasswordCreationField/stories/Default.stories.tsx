@@ -12,7 +12,6 @@ import { Button } from "@/components/Button";
 import { Field, Form } from "@/integrations/react-hook-form";
 import { IconDanger } from "@/components/Icon/components/icons";
 import { CopyButton } from "@/components/CopyButton";
-import { generatePasswordCreationFieldValidation } from "@/components/PasswordCreationField/lib/generatePasswordCreationFieldValidation";
 
 const policyDecl: PolicyDeclaration = {
   minComplexity: 3,
@@ -121,7 +120,6 @@ export const WithForm: Story = {
         <Field
           rules={{
             required: true,
-            validate: generatePasswordCreationFieldValidation(customPolicy),
           }}
           name="password"
         >
