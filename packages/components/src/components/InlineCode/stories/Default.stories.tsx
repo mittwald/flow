@@ -3,10 +3,6 @@ import InlineCode from "../InlineCode";
 import React from "react";
 import { Text } from "@/components/Text";
 import Section from "@/components/Section";
-import {
-  storyBackgroundDark,
-  storyBackgroundLight,
-} from "@/lib/dev/storyBackgrounds";
 
 const meta: Meta<typeof InlineCode> = {
   title: "Content/InlineCode",
@@ -34,14 +30,14 @@ export const Default: Story = {};
 
 export const Dark: Story = {
   args: { color: "dark" },
-  parameters: {
-    backgrounds: storyBackgroundLight,
+  globals: {
+    backgrounds: "light",
   },
 };
 
 export const Light: Story = {
   args: { color: "light" },
-  parameters: {
-    backgrounds: storyBackgroundDark,
+  globals: {
+    backgrounds: "dark",
   },
 };

@@ -1,8 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { PasswordCreationField } from "../index";
-import React from "react";
+import {
+  generatePasswordCreationFieldValidation,
+  PasswordCreationField,
+} from "../index";
+import React, { useState } from "react";
 import { Label } from "@/components/Label";
-import { action } from "@storybook/addon-actions";
+import { action } from "storybook/actions";
 import type { PolicyDeclaration } from "@mittwald/password-tools-js/policy";
 import { RuleType, SequenceType } from "@mittwald/password-tools-js/rules";
 import { Policy } from "@mittwald/password-tools-js/policy";
@@ -11,6 +14,7 @@ import { sleep } from "@/lib/promises/sleep";
 import { Button } from "@/components/Button";
 import { Field, Form } from "@/integrations/react-hook-form";
 import { IconDanger } from "@/components/Icon/components/icons";
+import { CopyButton } from "@/components/CopyButton";
 
 const policyDecl: PolicyDeclaration = {
   minComplexity: 3,
@@ -32,6 +36,11 @@ const policyDecl: PolicyDeclaration = {
       max: 2,
     },
     {
+      ruleType: RuleType.regex,
+      pattern: "^[A-Za-z0-9]",
+      translationKey: "canNotStartWithSpecialCharacter",
+    },
+    {
       ruleType: RuleType.hibp,
     },
     {
@@ -42,16 +51,10 @@ const policyDecl: PolicyDeclaration = {
       max: 2,
     },
     {
-      identifier: "numbers",
-      ruleType: RuleType.charPool,
-      charPools: ["numbers"],
+      ruleType: RuleType.regex,
+      pattern: "[-_§$%&/=,;.#]",
+      translationKey: "asd",
       min: 1,
-      max: 2,
-    },
-    {
-      ruleType: RuleType.blocklist,
-      blocklist: ["foo", "bar"],
-      substringMatch: true,
     },
   ],
 };
@@ -60,8 +63,18 @@ const meta: Meta<typeof PasswordCreationField> = {
   title: "Form Controls/PasswordCreationField",
   component: PasswordCreationField,
   render: (props) => {
+    const [value, setValue] = useState("");
+
     return (
-      <PasswordCreationField onChange={action("onChange")} {...props}>
+      <PasswordCreationField
+        value={value}
+        onValidationResult={action("onValidationResult")}
+        onChange={(password) => {
+          action("onChange");
+          setValue(password);
+        }}
+        {...props}
+      >
         <Label>Password</Label>
       </PasswordCreationField>
     );
@@ -98,7 +111,7 @@ export const WithCustomButtons: Story = {
 
 export const WithForm: Story = {
   render: () => {
-    const policy = Policy.fromDeclaration(policyDecl);
+    const customPolicy = Policy.fromDeclaration(policyDecl);
     const form = useForm({
       defaultValues: {
         password: "",
@@ -106,16 +119,42 @@ export const WithForm: Story = {
     });
 
     return (
-      <Form form={form} onSubmit={async () => await sleep(2000)}>
-        <Field rules={{ required: true }} name="password">
-          <PasswordCreationField validationPolicy={policy}>
+      <Form
+        form={form}
+        onSubmit={async (values) => {
+          await sleep(2000);
+          console.log("submitted", values);
+        }}
+      >
+        <Field
+          rules={{
+            required: true,
+            validate: generatePasswordCreationFieldValidation(customPolicy),
+          }}
+          name="password"
+        >
+          <PasswordCreationField validationPolicy={customPolicy}>
             <Label>Password</Label>
             <Button>asd</Button>
           </PasswordCreationField>
         </Field>
         <br />
+        <Button onPress={() => form.reset()}>Reset</Button>
         <Button type="submit">Submit</Button>
       </Form>
+    );
+  },
+};
+
+export const WithCopyButton: Story = {
+  render: (props) => {
+    const [password, setPassword] = useState<string>("");
+
+    return (
+      <PasswordCreationField onChange={(v) => setPassword(v)} {...props}>
+        <Label>Password</Label>
+        <CopyButton text={password} />
+      </PasswordCreationField>
     );
   },
 };

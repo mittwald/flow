@@ -1,3 +1,9 @@
 loading-spinner:
   transition-duration:
     value: 2000ms
+  color:
+    value: "{icon.color}"
+  color-light:
+    value: "{light-plain-content-color}"
+  color-dark:
+    value: "{dark-plain-content-color}"

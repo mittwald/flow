@@ -15,6 +15,7 @@ export type XAxisProps = Pick<
   | "type"
   | "domain"
   | "hide"
+  | "unit"
 >;
 
 /** @flr-generate all */

@@ -3,6 +3,7 @@
 import {
   ActionGroup,
   Button,
+  CopyButton,
   ComboBox,
   FileField,
   Label,
@@ -12,16 +13,20 @@ import {
   TextArea,
   TextField,
   PasswordCreationField,
+  Autocomplete,
+  ContextMenu,
+  MenuItem,
 } from "@mittwald/flow-remote-react-components";
 import {
   Form,
-  typedField,
+  Field,
 } from "@mittwald/flow-remote-react-components/react-hook-form";
 import { useForm } from "react-hook-form";
 
 export default function Page() {
   const form = useForm({
     defaultValues: {
+      name: "",
       email: "foo.bar@",
       confirm: false,
       age: 20,
@@ -33,20 +38,49 @@ export default function Page() {
     },
   });
 
-  const Field = typedField(form);
-
   return (
     <Section>
-      <Form form={form} onSubmit={(data) => console.log("Submitted", data)}>
+      <Form
+        form={form}
+        onSubmit={async (data) => {
+          const files = await Promise.all(
+            Array.from(data.file).map(async (f: File) => ({
+              name: f.name,
+              resolvedArrayBufferLength: (await f.arrayBuffer()).byteLength,
+            })),
+          );
+          console.log("Submitted:", data, "Files:", files);
+        }}
+      >
+        <Field
+          name="name"
+          rules={{
+            required: "Required!",
+          }}
+        >
+          <TextField>
+            <Label>Name</Label>
+          </TextField>
+        </Field>
         <Field
           name="email"
           rules={{
             required: "Required!",
           }}
         >
-          <TextField>
-            <Label>Email</Label>
-          </TextField>
+          <Autocomplete>
+            <TextField>
+              <Label>Email</Label>
+            </TextField>
+            <ContextMenu>
+              <MenuItem textValue="Foo" id="Foo">
+                Foo
+              </MenuItem>
+              <MenuItem textValue="Bar" id="Bar">
+                Bar
+              </MenuItem>
+            </ContextMenu>
+          </Autocomplete>
         </Field>
         <Field name="comment">
           <TextArea maxLength={100}>
@@ -78,6 +112,7 @@ export default function Page() {
         <Field name="password" rules={{ required: true }}>
           <PasswordCreationField>
             <Label>Password</Label>
+            <CopyButton />
           </PasswordCreationField>
         </Field>
         <Field name="file">

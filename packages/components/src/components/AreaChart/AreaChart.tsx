@@ -133,7 +133,9 @@ export const AreaChart: FC<AreaChartProps> = (props) => {
             {areasWithDots}
             {showEmptyView && viewDimensions && (
               <foreignObject {...viewDimensions}>
-                <EmptyView data={data} />
+                <div className={styles.emptyViewContainer}>
+                  <EmptyView data={data} />
+                </div>
               </foreignObject>
             )}
           </Recharts.AreaChart>

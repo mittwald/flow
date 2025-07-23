@@ -28,7 +28,13 @@ export const Header: FC<PropsWithClassName> = (props) => {
     availableViewModes.length > 1;
 
   return (
-    <DivView className={clsx(className, styles.header)}>
+    <DivView
+      className={clsx(
+        className,
+        styles.header,
+        list.search && styles.withSearch,
+      )}
+    >
       <DivView className={styles.headerContent}>
         <TunnelExit id="actions" />
         {hasOptions && (

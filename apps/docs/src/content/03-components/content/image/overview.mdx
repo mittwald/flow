@@ -1,25 +1,28 @@
 # Playground
 
+In `<Image />` wird über die Property `src` die Bildquelle festgelegt. Mithilfe weiterer Properties wie `width` und `height` lässt sich dessen Größe individuell anpassen.
+
 <LiveCodeEditor />
 
 ---
 
 # Responsive Image Resolution
 
-Um unterschiedliche Bild-Auflösungen für diverse Bildschirmgrößen anzubieten
-eignet sich das `srcSet` Attribut. Für diverse Pixeldichten auf Nutzerseite
-können hiermit verschiedene niedrig- oder hochauflösende Varianten der
-Quelldatei hinterlegt werden. Näheres hierzu ist in folgendem Artikel einsehbar:
+Um Bilder in unterschiedlichen Auflösungen für verschiedene Bildschirmgrößen bereitzustellen, eignet sich das `srcSet`-Attribut. Damit lassen sich mehrere Varianten einer Bilddatei hinterlegen – sowohl in niedriger als auch in hoher Auflösung –, die je nach Pixeldichte des Endgeräts automatisch ausgewählt werden. Weitere Informationen dazu finden sich im folgenden Artikel:
 [Responsive Images](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images#resolution_switching_same_size_different_resolutions:~:text=Resolution%20switching%3A%20Same%20size%2C%20different%20resolutions).
 
 ---
 
-# Mit Border
+# Border
 
-<LiveCodeEditor example="border" />
+Mit der Property `withBorder` erhält die Image-Component eine Border. Dieser ist insbesondere bei Bildern mit geringem Kontrast zum Hintergrund von Vorteil, da er die visuelle Abgrenzung verbessert und die Bildwahrnehmung unterstützt.
+
+<LiveCodeEditor example="border" editorCollapsed />
 
 ---
 
-# Mit fixem Seitenverhältnis
+# Fixes Seitenverhältnis
 
-<LiveCodeEditor example="aspectRatio" />
+Die Property `aspectRatio` definiert das Seitenverhältnis der Image-Component. Weicht das Seitenverhältnis des eingebetteten Bildes ab – etwa durch eine größere Höhe oder Breite –, wird das Bild zentriert, und überstehende Bereiche außerhalb des festgelegten Verhältnisses werden ausgeblendet.
+
+<LiveCodeEditor example="aspectRatio" editorCollapsed />

@@ -5,10 +5,6 @@ import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
 import { Button } from "@/components/Button";
 import { IconApp, IconDanger } from "@/components/Icon/components/icons";
-import {
-  storyBackgroundDark,
-  storyBackgroundLight,
-} from "@/lib/dev/storyBackgrounds";
 import { ActionGroup } from "@/components/ActionGroup";
 import { ProgressBar } from "@/components/ProgressBar";
 import { Label } from "@/components/Label";
@@ -50,15 +46,15 @@ export const Danger: Story = {
 
 export const Dark: Story = {
   args: { color: "dark" },
-  parameters: {
-    backgrounds: storyBackgroundLight,
+  globals: {
+    backgrounds: "light",
   },
 };
 
 export const Light: Story = {
   args: { color: "light" },
-  parameters: {
-    backgrounds: storyBackgroundDark,
+  globals: {
+    backgrounds: "dark",
   },
 };
 

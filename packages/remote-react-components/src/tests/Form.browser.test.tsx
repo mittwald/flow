@@ -35,7 +35,9 @@ test("onSubmitHandler is triggered with FormData", async () => {
   await userEvent.click(select);
   await userEvent.keyboard("[Tab][ArrowDown][ArrowDown][Enter]");
 
-  await dom.getByTestId("form-filefield").upload(["test.png", "test2.png"]);
+  await dom
+    .getByTestId("form-filefield")
+    .upload(["src/tests/test.png", "src/tests/test2.png"]);
   await dom.getByTestId("form-submit").click();
 
   const result = dom.getByTestId("form-result");
@@ -74,7 +76,9 @@ test("actionHandler is triggered with FormData", async () => {
   await userEvent.click(select);
   await userEvent.keyboard("[Tab][ArrowDown][ArrowDown][Enter]");
 
-  await dom.getByTestId("form-filefield").upload(["test.png", "test2.png"]);
+  await dom
+    .getByTestId("form-filefield")
+    .upload(["src/tests/test.png", "src/tests/test2.png"]);
   await dom.getByTestId("form-submit").click();
 
   const result = dom.getByTestId("form-result");

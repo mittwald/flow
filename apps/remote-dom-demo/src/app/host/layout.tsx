@@ -1,10 +1,6 @@
 "use client";
+import { LoadingMessage } from "@/app/_components/LoadingMessage";
 import { getHostPath, getRemotePath } from "@/app/_lib/navigation";
-import {
-  Heading,
-  IllustratedMessage,
-  LoadingSpinner,
-} from "@mittwald/flow-react-components";
 import { RemoteRenderer } from "@mittwald/flow-remote-react-renderer";
 import { usePathname, useRouter } from "next/navigation";
 import { useRef, useState } from "react";
@@ -18,12 +14,7 @@ export default function HostPage() {
 
   return (
     <>
-      {isNavigating && (
-        <IllustratedMessage>
-          <LoadingSpinner />
-          <Heading>Lade Demo</Heading>
-        </IllustratedMessage>
-      )}
+      {isNavigating && <LoadingMessage />}
       <RemoteRenderer
         onNavigationStateChanged={(state) => {
           const { pathname, isPending } = state;

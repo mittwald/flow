@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { CheckboxGroup } from "../index";
 import React from "react";
 import { Label } from "@/components/Label";
-import { action } from "@storybook/addon-actions";
+import { action } from "storybook/actions";
 import { FieldError } from "@/components/FieldError";
 import { Checkbox } from "@/components/Checkbox";
 import { CheckboxButton } from "@/components/CheckboxButton";

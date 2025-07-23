@@ -1,5 +1,4 @@
 import type { PropsWithChildren } from "react";
-import React from "react";
 import * as Aria from "react-aria-components";
 import styles from "./MenuItem.module.scss";
 import clsx from "clsx";
@@ -16,12 +15,17 @@ export interface MenuItemProps
 
 /** @flr-generate all */
 export const MenuItem = flowComponent("MenuItem", (props) => {
-  const { children, className, selectionVariant, ref, ...rest } = props;
-
+  const { children, className, selectionVariant, id, ref, ...rest } = props;
   const rootClassName = clsx(styles.menuItem, className);
 
   return (
-    <Aria.MenuItem {...rest} className={rootClassName} ref={ref}>
+    <Aria.MenuItem
+      {...rest}
+      key={id}
+      id={id}
+      className={rootClassName}
+      ref={ref}
+    >
       {(props) => (
         <MenuItemContent {...props} selectionVariant={selectionVariant}>
           {children}

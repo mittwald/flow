@@ -8,6 +8,7 @@ import YAxis from "@/components/YAxis";
 import ChartLegend from "@/components/ChartLegend";
 import IllustratedMessage from "@/components/IllustratedMessage";
 import { Heading, IconMonitoring } from "@/components/public";
+import { Line } from "@/components/AreaChart/components/Line";
 
 const chartData = [
   {
@@ -134,4 +135,49 @@ export const WithEmptyView: Story = {
       </AreaChart>
     );
   },
+};
+
+const lineChartData = [
+  {
+    time: "00:00",
+    mean: 52,
+    max: 87,
+  },
+  {
+    time: "01:00",
+    mean: 30,
+    max: 35,
+  },
+  {
+    time: "02:00",
+    mean: 28,
+    max: 30,
+  },
+  {
+    time: "03:00",
+    mean: 40,
+    max: 58,
+  },
+  {
+    time: "04:00",
+    mean: 30,
+    max: 30,
+  },
+];
+
+export const WithLine: Story = {
+  args: {
+    data: lineChartData,
+  },
+  render: (props) => (
+    <AreaChart {...props} height="70vh">
+      <CartesianGrid />
+      <Area dataKey="mean" />
+      <Line dataKey="max" color="magenta" />
+      <XAxis dataKey="time" />
+      <YAxis interval="equidistantPreserveStart" unit="%" domain={[0, 100]} />
+      <ChartTooltip />
+      <ChartLegend />
+    </AreaChart>
+  ),
 };

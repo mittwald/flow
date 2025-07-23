@@ -1,4 +1,5 @@
 import { RemoteRenderer } from "@mittwald/flow-remote-react-renderer";
+import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { expect } from "vitest";
 import { render } from "vitest-browser-react";
@@ -15,7 +16,11 @@ export const renderRemoteTest = (testName: string) => {
 
   return render(
     <ErrorBoundary fallbackRender={({ error }) => "Error: " + String(error)}>
-      <RemoteRenderer src={url.toString()} />
+      <Suspense
+        fallback={<div data-testid="root-loading-view">Loading...</div>}
+      >
+        <RemoteRenderer src={url.toString()} />
+      </Suspense>
     </ErrorBoundary>,
   );
 };

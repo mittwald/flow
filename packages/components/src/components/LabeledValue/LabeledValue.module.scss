@@ -18,6 +18,7 @@
 
   .label {
     grid-area: label;
+    width: fit-content;
   }
 
   .button:not(:nth-child(2)) {

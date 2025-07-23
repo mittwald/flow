@@ -16,6 +16,7 @@
       );
       margin-right: var(--mask-offset);
     }
+    outline-offset: calc(var(--size-px--xxs) * -1);
   }
 
   /* Sizes */

@@ -15,7 +15,7 @@ export interface CopyButtonProps
   extends Omit<ButtonProps, "onPress" | "aria-label" | "render">,
     FlowComponentProps<HTMLButtonElement> {
   /** The text to copy. */
-  text: string;
+  text?: string;
 }
 
 /**
@@ -24,7 +24,7 @@ export interface CopyButtonProps
  */
 export const CopyButton = flowComponent("CopyButton", (props) => {
   const {
-    text,
+    text = "",
     ref,
     variant = "plain",
     color = "secondary",

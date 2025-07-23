@@ -35,14 +35,17 @@
   .content {
     display: grid;
     grid-template-rows: 0fr;
-    transition-property: grid-template-rows, visibility, padding;
+    transition-property: grid-template-rows, visibility;
     transition-duration: var(--transition--duration--slow);
-    padding-inline: var(--accordion--padding-x);
+
     visibility: hidden;
   }
 
   .contentInner {
     overflow: hidden;
+    padding-inline: var(--accordion--padding-x);
+    transition-property: padding;
+    transition-duration: var(--transition--duration--slow);
   }
 
   .chevron {
@@ -60,8 +63,11 @@
   &.expanded {
     .content {
       grid-template-rows: 1fr;
-      padding-block: var(--accordion--padding-y);
       visibility: visible;
+    }
+
+    .contentInner {
+      padding-block: var(--accordion--padding-y);
     }
 
     .chevron {

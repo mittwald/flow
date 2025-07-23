@@ -24,3 +24,21 @@ export default meta;
 type Story = StoryObj<typeof LoadingSpinner>;
 
 export const Default: Story = {};
+
+export const Dark: Story = {
+  args: {
+    color: "dark",
+  },
+  globals: {
+    backgrounds: "light",
+  },
+};
+
+export const Light: Story = {
+  args: {
+    color: "light",
+  },
+  globals: {
+    backgrounds: "dark",
+  },
+};

@@ -5,6 +5,7 @@ import MenuTriggerView from "@/views/MenuTriggerView";
 
 export type ContextMenuTriggerProps = OverlayTriggerProps;
 
+/** @flr-generate all */
 export const ContextMenuTrigger = flowComponent(
   "ContextMenuTrigger",
   (props) => {

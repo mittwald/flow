@@ -76,6 +76,7 @@ import type { ProgressBarProps } from "@/components/ProgressBar";
 import type { FileDropZoneProps } from "@/components/FileDropZone";
 import type { NavigationProps } from "@/components/Navigation";
 import type { NavigationGroupProps } from "@/components/Navigation/components/NavigationGroup";
+import type { AutocompleteProps } from "@/components/Autocomplete/Autocomplete";
 
 export * from "./types";
 
@@ -88,6 +89,7 @@ export interface FlowComponentPropsTypes {
   AlertIcon: AlertIconProps;
   Align: AlignProps;
   Avatar: AvatarProps;
+  Autocomplete: AutocompleteProps;
   Badge: BadgeProps;
   Button: ButtonProps;
   Checkbox: CheckboxProps;
@@ -163,6 +165,7 @@ const propsContextSupportingComponentsMap: Record<
   Action: true,
   ActionGroup: true,
   Avatar: true,
+  Autocomplete: true,
   Alert: true,
   AlertBadge: true,
   AlertIcon: true,

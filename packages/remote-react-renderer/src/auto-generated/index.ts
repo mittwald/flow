@@ -10,6 +10,7 @@ import { AlertIcon as AlertIcon } from "@mittwald/flow-react-components";
 import { Align as Align } from "@mittwald/flow-react-components";
 import { Area as Area } from "@mittwald/flow-react-components";
 import { AreaChart as AreaChart } from "@mittwald/flow-react-components";
+import { Autocomplete as Autocomplete } from "@mittwald/flow-react-components";
 import { Avatar as Avatar } from "@mittwald/flow-react-components";
 import { AvatarStack as AvatarStack } from "@mittwald/flow-react-components";
 import { Badge as Badge } from "@mittwald/flow-react-components";
@@ -29,8 +30,10 @@ import { Color as Color } from "@mittwald/flow-react-components";
 import { ColumnLayout as ColumnLayout } from "@mittwald/flow-react-components";
 import { ComboBox as ComboBox } from "@mittwald/flow-react-components";
 import { Content as Content } from "@mittwald/flow-react-components";
+import { ContextMenu as ContextMenu } from "@mittwald/flow-react-components";
 import { ContextMenuContent as ContextMenuContent } from "@mittwald/flow-react-components";
 import { ContextMenuSection as ContextMenuSection } from "@mittwald/flow-react-components";
+import { ContextMenuTrigger as ContextMenuTrigger } from "@mittwald/flow-react-components";
 import { ContextualHelp as ContextualHelp } from "@mittwald/flow-react-components";
 import { ContextualHelpTrigger as ContextualHelpTrigger } from "@mittwald/flow-react-components";
 import { CopyButton as CopyButton } from "@mittwald/flow-react-components";
@@ -62,6 +65,7 @@ import { Label as Label } from "@mittwald/flow-react-components";
 import { LabeledValue as LabeledValue } from "@mittwald/flow-react-components";
 import { LayoutCard as LayoutCard } from "@mittwald/flow-react-components";
 import { Legend as Legend } from "@mittwald/flow-react-components";
+import { Line as Line } from "@mittwald/flow-react-components";
 import { Link as Link } from "@mittwald/flow-react-components";
 import { EmptyView as ListEmptyView } from "@mittwald/flow-react-components";
 import { ListItemViewContent as ListItemViewContent } from "@mittwald/flow-react-components";
@@ -132,6 +136,10 @@ export const flowComponents = {
   "flr-align": createFlowRemoteComponentRenderer("Align", Align),
   "flr-area": createFlowRemoteComponentRenderer("Area", Area),
   "flr-area-chart": createFlowRemoteComponentRenderer("AreaChart", AreaChart),
+  "flr-autocomplete": createFlowRemoteComponentRenderer(
+    "Autocomplete",
+    Autocomplete,
+  ),
   "flr-avatar": createFlowRemoteComponentRenderer("Avatar", Avatar),
   "flr-avatar-stack": createFlowRemoteComponentRenderer(
     "AvatarStack",
@@ -175,6 +183,10 @@ export const flowComponents = {
   ),
   "flr-combo-box": createFlowRemoteComponentRenderer("ComboBox", ComboBox),
   "flr-content": createFlowRemoteComponentRenderer("Content", Content),
+  "flr-context-menu": createFlowRemoteComponentRenderer(
+    "ContextMenu",
+    ContextMenu,
+  ),
   "flr-context-menu-content": createFlowRemoteComponentRenderer(
     "ContextMenuContent",
     ContextMenuContent,
@@ -182,6 +194,10 @@ export const flowComponents = {
   "flr-context-menu-section": createFlowRemoteComponentRenderer(
     "ContextMenuSection",
     ContextMenuSection,
+  ),
+  "flr-context-menu-trigger": createFlowRemoteComponentRenderer(
+    "ContextMenuTrigger",
+    ContextMenuTrigger,
   ),
   "flr-contextual-help": createFlowRemoteComponentRenderer(
     "ContextualHelp",
@@ -274,6 +290,7 @@ export const flowComponents = {
     LayoutCard,
   ),
   "flr-legend": createFlowRemoteComponentRenderer("Legend", Legend),
+  "flr-line": createFlowRemoteComponentRenderer("Line", Line),
   "flr-link": createFlowRemoteComponentRenderer("Link", Link),
   "flr-list-empty-view": createFlowRemoteComponentRenderer(
     "ListEmptyView",

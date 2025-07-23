@@ -1,7 +1,7 @@
 "use client";
 
-import { useAwaiter } from "@/hooks/useAwaiter";
 import { useMergedComponents } from "@/hooks/useMergedComponents";
+import { useControllableSuspenseTrigger } from "@/hooks/useControllableSuspenseTrigger";
 import { useUpdateHostPathnameOnRemote } from "@/hooks/useUpdateHostPathnameOnRemote";
 import type { RemoteComponentsMap } from "@/lib/types";
 import type { ExtBridgeConnectionApi } from "@mittwald/ext-bridge";
@@ -48,13 +48,14 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
     hostPathname,
   } = props;
 
-  const renderAwaiter = useAwaiter([src]);
-  const connectionAwaiter = useAwaiter([src]);
-  const loadingAwaiter = useAwaiter([src]);
+  const renderPromise = useMemo(() => Promise.withResolvers<void>(), [src]);
+  const connectionPromise = useMemo(() => Promise.withResolvers<void>(), [src]);
+  const loadingPromise = useMemo(() => Promise.withResolvers<void>(), [src]);
+  const suspenseTrigger = useControllableSuspenseTrigger();
 
-  const [connectedSrc, setConnectedSrc] = useState<string | null>(null);
+  const [connectionSrc, setConnectionSrc] = useState<string | null>(null);
+  const connection = useRef<HostToRemoteConnection>(undefined);
   const [remoteError, setRemoteError] = useState<string | undefined>();
-  const connection = useRef<HostToRemoteConnection | undefined>(undefined);
 
   if (remoteError) {
     throw new RemoteError(`Remote rendering failed: ${remoteError}`);
@@ -67,7 +68,7 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
     const controller = new AbortController();
     remoteReceiver.subscribe(
       { id: remoteReceiver.root.id },
-      renderAwaiter.resolve,
+      () => renderPromise.resolve(),
       { signal: controller.signal },
     );
     return [remoteReceiver, controller];
@@ -80,7 +81,14 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
     extBridgeImplementation: extBridgeImplementation,
     onReady: (establishedConnection) => {
       establishedConnection.updateHostPathname(hostPathname);
-      connectionAwaiter.resolve();
+      connectionPromise.resolve();
+    },
+    onLoadingChanged: (isLoading) => {
+      if (isLoading) {
+        suspenseTrigger.start();
+      } else {
+        suspenseTrigger.stop();
+      }
     },
     onError: setRemoteError,
     onNavigationStateChanged,
@@ -96,20 +104,21 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
   const overallLoading = () =>
     Promise.all([
       Promise.race([
-        loadingAwaiter.promise,
+        loadingPromise.promise,
         timeoutPromise("Remote URL could not be loaded"),
       ]),
       Promise.race([
-        connectionAwaiter.promise,
+        connectionPromise.promise,
         timeoutPromise("Could not establish remote connection"),
       ]),
       Promise.race([
-        renderAwaiter.promise,
+        renderPromise.promise,
         timeoutPromise("Remote rendering failed"),
       ]),
     ]);
 
-  const awaitLoadingPromise = connectedSrc === src;
+  const awaitLoadingPromise = connectionSrc === src;
+
   usePromise(
     async () => {
       await overallLoading();
@@ -128,10 +137,10 @@ export const RemoteRendererBrowser: FC<RemoteRendererBrowserProps> = (
         src={src}
         ref={(ref) => {
           connection.current = connect(ref);
-          setConnectedSrc(src);
+          setConnectionSrc(src);
         }}
-        onLoad={loadingAwaiter.resolve}
-        onError={loadingAwaiter.reject}
+        onLoad={() => loadingPromise.resolve()}
+        onError={() => loadingPromise.reject()}
         style={hiddenIframeStyle}
       />
     </>

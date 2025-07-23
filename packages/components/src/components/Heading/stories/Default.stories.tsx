@@ -2,10 +2,6 @@ import type { Meta, StoryObj } from "@storybook/react";
 import Heading from "../Heading";
 import React from "react";
 import { IconMember } from "@/components/Icon/components/icons";
-import {
-  storyBackgroundDark,
-  storyBackgroundLight,
-} from "@/lib/dev/storyBackgrounds";
 import { Section } from "@/components/Section";
 
 const meta: Meta<typeof Heading> = {
@@ -57,15 +53,15 @@ export const WithCustomSize: Story = {
 
 export const Dark: Story = {
   args: { color: "dark" },
-  parameters: {
-    backgrounds: storyBackgroundLight,
+  globals: {
+    backgrounds: "light",
   },
 };
 
 export const Light: Story = {
   args: { color: "light" },
-  parameters: {
-    backgrounds: storyBackgroundDark,
+  globals: {
+    backgrounds: "dark",
   },
 };
 

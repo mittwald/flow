@@ -1,24 +1,42 @@
 import { Serializer } from "@/serialization/Serializer";
+import {
+  fileDeSerialize,
+  fileSerialize,
+  isSerializedFile,
+} from "@/serialization/serializers";
 
-type FormDataEntry = [string, unknown];
-type FormDataEntries = FormDataEntry[];
-
-export const formDataSerializer = new Serializer<FormData, FormDataEntries>({
+export const formDataSerializer = new Serializer<
+  FormData,
+  [string, FormDataEntryValue][]
+>({
   name: "FormData",
   serialize: {
     isApplicable: (val) => val instanceof FormData,
     apply: (formData) => {
-      return formData.entries().toArray();
+      return formData
+        .entries()
+        .toArray()
+        .map(([fieldName, fieldValue]) => {
+          if (fieldValue instanceof File) {
+            return [fieldName, fileSerialize(fieldValue)];
+          }
+
+          return [fieldName, fieldValue];
+        }) as [string, FormDataEntryValue][];
     },
   },
   deserialize: {
     apply: (array) => {
       const formData = new FormData();
       for (const [name, value] of array) {
+        const deserializedValue = isSerializedFile(value)
+          ? fileDeSerialize(value)
+          : value;
+
         if (!formData.has(name)) {
-          formData.set(name, value as never);
+          formData.set(name, deserializedValue);
         } else {
-          formData.append(name, value as never);
+          formData.append(name, deserializedValue);
         }
       }
       return formData;

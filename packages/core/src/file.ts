@@ -6,10 +6,10 @@ export type FileWithAwaitedArrayBuffer = File & {
   [Key]: ArrayBuffer;
 };
 
-function isFileWithAwaitedArrayBuffer(
+export function isFileWithAwaitedArrayBuffer(
   file: File | FileWithAwaitedArrayBuffer,
 ): file is FileWithAwaitedArrayBuffer {
-  return Key in file;
+  return Key in file && file[Key] instanceof ArrayBuffer && !file[Key].detached;
 }
 
 export const addAwaitedArrayBuffer = async (file: File) => {
@@ -19,6 +19,8 @@ export const addAwaitedArrayBuffer = async (file: File) => {
 
   const arrayBuffer = await file.arrayBuffer();
   Object.assign(file, { [Key]: arrayBuffer });
+
+  return file;
 };
 
 export const getAwaitArrayBuffer = (

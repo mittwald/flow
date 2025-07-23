@@ -9,7 +9,9 @@ export const dataTransferTextSerializer = new Serializer<DataTransfer, string>({
         val.types.every((type) => type === "text/plain")
       );
     },
-    apply: (dataTransfer) => dataTransfer.getData("text"),
+    apply: (dataTransfer) => {
+      return dataTransfer.getData("text") || dataTransfer.getData("text/plain");
+    },
   },
   deserialize: {
     apply: (asString) => {

@@ -47,14 +47,17 @@ export class Serializer<TIn, TOut> {
 
   public deserialize(val: unknown): SerializationResult<TIn> {
     return this.apply(val, {
-      apply: (serialization: SuccessfulSerializationResult<TOut>) =>
-        this.options.deserialize.apply(serialization.value),
-
-      isApplicable: (val): val is SuccessfulSerializationResult<TOut> =>
-        !!val &&
-        typeof val === "object" &&
-        Key in val &&
-        val[Key] === this.options.name,
+      apply: (serialization: SuccessfulSerializationResult<TOut>) => {
+        return this.options.deserialize.apply(serialization.value);
+      },
+      isApplicable: (val): val is SuccessfulSerializationResult<TOut> => {
+        return (
+          !!val &&
+          typeof val === "object" &&
+          Key in val &&
+          val[Key] === this.options.name
+        );
+      },
     });
   }
 }

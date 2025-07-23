@@ -1,5 +1,4 @@
-import type { FC, PropsWithChildren, Ref } from "react";
-import React from "react";
+import type { FC, PropsWithChildren, Ref, RefObject } from "react";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import styles from "../../Popover.module.scss";
@@ -15,6 +14,7 @@ export interface PopoverContentProps
   padding?: "s" | "m";
   onOpenChange: (isOpen: boolean) => void;
   ref?: Ref<HTMLElement>;
+  triggerRef?: RefObject<Element | null>;
 }
 
 /** @flr-generate all */

@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
-import React, { act } from "react";
+import { act, type FC } from "react";
 import Action from "@/components/Action";
-import { Button } from "@/components/Button";
+import { Button, type ButtonProps } from "@/components/Button";
 import type { Mock } from "vitest";
 import userEvent from "@/lib/dev/vitestUserEvent";
 
@@ -44,7 +44,10 @@ afterEach(() => {
   vitest.useRealTimers();
 });
 
-const button = <Button data-testid="button" />;
+const TestButton: FC<ButtonProps> = (p) => (
+  <Button data-testid="button" {...p} />
+);
+
 const getButton = () => screen.getByTestId("button");
 
 const clickTrigger = async () => {
@@ -56,18 +59,30 @@ const advanceTime = async (ms: number) => {
 };
 
 test("Sync Action is called when trigger is clicked", async () => {
-  render(<Action action={syncAction1}>{button}</Action>);
+  render(
+    <Action action={syncAction1}>
+      <TestButton />
+    </Action>,
+  );
   await clickTrigger();
   expect(syncAction1).toHaveBeenCalledOnce();
 });
 
 test("Action function is updated when action prop changes", async () => {
-  const r = render(<Action action={syncAction1}>{button}</Action>);
+  const r = render(
+    <Action action={syncAction1}>
+      <TestButton />
+    </Action>,
+  );
   await clickTrigger();
   expect(syncAction1).toHaveBeenCalledOnce();
   expect(syncAction2).not.toHaveBeenCalledOnce();
 
-  r.rerender(<Action action={syncAction2}>{button}</Action>);
+  r.rerender(
+    <Action action={syncAction2}>
+      <TestButton />
+    </Action>,
+  );
   await clickTrigger();
   expect(syncAction1).toHaveBeenCalledOnce();
   expect(syncAction2).toHaveBeenCalledOnce();
@@ -76,7 +91,9 @@ test("Action function is updated when action prop changes", async () => {
 test("Nested sync actions are called when trigger is clicked", async () => {
   render(
     <Action action={syncAction2}>
-      <Action action={syncAction1}>{button}</Action>
+      <Action action={syncAction1}>
+        <TestButton />
+      </Action>
     </Action>,
   );
   await clickTrigger();
@@ -88,7 +105,9 @@ test("Nested sync actions are not called when break action is used", async () =>
   render(
     <Action action={syncAction2}>
       <Action break>
-        <Action action={syncAction1}>{button}</Action>
+        <Action action={syncAction1}>
+          <TestButton />
+        </Action>
       </Action>
     </Action>,
   );
@@ -102,7 +121,9 @@ test("Nested sync actions are not called when skipped", async () => {
     <Action action={syncAction2}>
       <Action action={syncAction2}>
         <Action skip>
-          <Action action={syncAction1}>{button}</Action>
+          <Action action={syncAction1}>
+            <TestButton />
+          </Action>
         </Action>
       </Action>
     </Action>,
@@ -117,7 +138,9 @@ test("Nested sync actions are not called when multiple skipped", async () => {
     <Action action={syncAction2}>
       <Action action={syncAction2}>
         <Action skip={2}>
-          <Action action={syncAction1}>{button}</Action>
+          <Action action={syncAction1}>
+            <TestButton />
+          </Action>
         </Action>
       </Action>
     </Action>,
@@ -130,7 +153,9 @@ test("Nested sync actions are not called when multiple skipped", async () => {
 test("When nested sync actions, the inner action is called first", async () => {
   render(
     <Action action={syncAction2}>
-      <Action action={syncAction1}>{button}</Action>
+      <Action action={syncAction1}>
+        <TestButton />
+      </Action>
     </Action>,
   );
 
@@ -139,7 +164,11 @@ test("When nested sync actions, the inner action is called first", async () => {
 });
 
 test("Button is enabled again when async action has completed", async () => {
-  render(<Action action={asyncAction1}>{button}</Action>);
+  render(
+    <Action action={asyncAction1}>
+      <TestButton />
+    </Action>,
+  );
   await clickTrigger();
   await advanceTime(asyncActionDuration);
   expect(getButton()).not.toBeDisabled();
@@ -148,7 +177,9 @@ test("Button is enabled again when async action has completed", async () => {
 test("When nested async actions, the outer action is called after the first has completed", async () => {
   render(
     <Action action={asyncAction2}>
-      <Action action={asyncAction1}>{button}</Action>
+      <Action action={asyncAction1}>
+        <TestButton />
+      </Action>
     </Action>,
   );
   await clickTrigger();
@@ -181,11 +212,26 @@ describe("Feedback", () => {
   test("is shown when sync action succeeds", async () => {
     render(
       <Action action={syncAction1} showFeedback>
-        {button}
+        <TestButton />
       </Action>,
     );
     await clickTrigger();
     expectIconInDom("check");
+  });
+
+  test("is shown when set in props", async () => {
+    const dom = render(
+      <Action action={syncAction1} showFeedback>
+        <TestButton isSucceeded />
+      </Action>,
+    );
+    expectIconInDom("check");
+    dom.rerender(
+      <Action action={syncAction1} showFeedback>
+        <TestButton isFailed />
+      </Action>,
+    );
+    expectIconInDom("x");
   });
 
   test("is shown when sync action fails", async () => {
@@ -194,7 +240,7 @@ describe("Feedback", () => {
     });
     render(
       <Action action={syncAction1} showFeedback>
-        {button}
+        <TestButton />
       </Action>,
     );
     await clickTrigger();
@@ -204,7 +250,7 @@ describe("Feedback", () => {
   test("is hidden after some time", async () => {
     render(
       <Action action={syncAction1} showFeedback>
-        {button}
+        <TestButton />
       </Action>,
     );
     await clickTrigger();
@@ -222,14 +268,31 @@ describe("Pending state", () => {
   });
 
   test("is shown when async action is pending", async () => {
-    render(<Action action={asyncAction1}>{button}</Action>);
+    render(
+      <Action action={asyncAction1}>
+        <TestButton />
+      </Action>,
+    );
     await clickTrigger();
     await advanceTime(1000);
     expectIconInDom("loader-2");
   });
 
+  test("is shown when set in props", async () => {
+    render(
+      <Action action={asyncAction1}>
+        <TestButton isPending />
+      </Action>,
+    );
+    expectIconInDom("loader-2");
+  });
+
   test("is not shown when sync action is executed", async () => {
-    render(<Action action={syncAction1}>{button}</Action>);
+    render(
+      <Action action={syncAction1}>
+        <TestButton />
+      </Action>,
+    );
     await clickTrigger();
     await advanceTime(1000);
     expectNoIconInDom();
@@ -238,7 +301,7 @@ describe("Pending state", () => {
   test("is hidden after some time", async () => {
     render(
       <Action action={asyncAction1} showFeedback>
-        {button}
+        <TestButton />
       </Action>,
     );
     await clickTrigger();

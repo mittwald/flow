@@ -18,10 +18,6 @@ import ContextMenu, {
   ContextMenuTrigger,
   MenuItem,
 } from "@/components/ContextMenu";
-import {
-  storyBackgroundDark,
-  storyBackgroundLight,
-} from "@/lib/dev/storyBackgrounds";
 import { Modal, ModalTrigger } from "@/components/Modal";
 import { Heading } from "@/components/Heading";
 
@@ -96,14 +92,14 @@ export const WithContextMenu: Story = {
 
 export const Dark: Story = {
   args: { color: "dark" },
-  parameters: {
-    backgrounds: storyBackgroundLight,
+  globals: {
+    backgrounds: "light",
   },
 };
 
 export const Light: Story = {
   args: { color: "light" },
-  parameters: {
-    backgrounds: storyBackgroundDark,
+  globals: {
+    backgrounds: "dark",
   },
 };

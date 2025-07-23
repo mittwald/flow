@@ -15,6 +15,7 @@ interface Options {
   connection: RemoteConnection;
   iframe: HTMLIFrameElement;
   onReady?: (connection: HostToRemoteConnection) => void;
+  onLoadingChanged?: (isLoading: boolean) => void;
   onError?: (error: string) => void;
   onNavigationStateChanged?: (state: NavigationState) => void;
   extBridgeImplementation?: ExtBridgeConnectionApi;
@@ -25,6 +26,7 @@ export const connectRemoteIframe = (opts: Options): HostToRemoteConnection => {
     connection,
     iframe,
     onReady,
+    onLoadingChanged,
     onError,
     onNavigationStateChanged,
     extBridgeImplementation = emptyImplementation,
@@ -38,6 +40,9 @@ export const connectRemoteIframe = (opts: Options): HostToRemoteConnection => {
         setIsReady: async (version = 1) => {
           result.version = version;
           onReady?.(result);
+        },
+        setIsLoading: async (isLoading: boolean) => {
+          onLoadingChanged?.(isLoading);
         },
         setError: async (error: string) => {
           onError?.(error);
