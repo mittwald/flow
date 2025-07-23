@@ -70,18 +70,7 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
       isSelected: value,
     },
     Slider: fieldProps,
-    PasswordCreationField: {
-      ...fieldProps,
-      onValidationResult: ({ isValid }) => {
-        if (isValid) {
-          formContext.form.clearErrors(name);
-        } else {
-          formContext.form.setError(name, {
-            message: "displayedByCreationField",
-          });
-        }
-      },
-    },
+    PasswordCreationField: fieldProps,
     DatePicker: fieldProps,
     DateRangePicker: fieldProps,
     TimeField: fieldProps,

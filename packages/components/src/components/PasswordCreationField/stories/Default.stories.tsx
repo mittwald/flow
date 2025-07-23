@@ -1,5 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { PasswordCreationField } from "../index";
+import {
+  generatePasswordCreationFieldValidation,
+  PasswordCreationField,
+} from "../index";
 import React, { useState } from "react";
 import { Label } from "@/components/Label";
 import { action } from "storybook/actions";
@@ -116,10 +119,17 @@ export const WithForm: Story = {
     });
 
     return (
-      <Form form={form} onSubmit={async () => await sleep(2000)}>
+      <Form
+        form={form}
+        onSubmit={async (values) => {
+          await sleep(2000);
+          console.log("submitted", values);
+        }}
+      >
         <Field
           rules={{
             required: true,
+            validate: generatePasswordCreationFieldValidation(customPolicy),
           }}
           name="password"
         >
