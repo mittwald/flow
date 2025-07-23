@@ -51,7 +51,7 @@ export default () => {
           <PasswordCreationField
             validationPolicy={customPolicy}
           >
-            <Label>Password</Label>
+            <Label>Passwort</Label>
           </PasswordCreationField>
         </Field>
         <Button type="submit">Speichern</Button>
