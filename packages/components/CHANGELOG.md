@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.357](https://github.com/mittwald/flow/compare/0.2.0-alpha.356...0.2.0-alpha.357) (2025-07-23)
+
+### Bug Fixes
+
+* **PasswordCreationField:** Fix ButtonState on invalid field ([#1777](https://github.com/mittwald/flow/issues/1777)) ([6aa32bf](https://github.com/mittwald/flow/commit/6aa32bf20d146678801c24649f67d927518816a6))
+
 # [0.2.0-alpha.356](https://github.com/mittwald/flow/compare/0.2.0-alpha.355...0.2.0-alpha.356) (2025-07-23)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
