@@ -1,26 +1,29 @@
 # Playground
 
+Verwende `<LightBox />` um eine LightBox anzuzeigen und kombiniere `<LightBoxTrigger />` und `<Button />` um die LightBox in der Oberfläche aufrufbar zu machen. 
+
 <LiveCodeEditor />
 
 ---
 
 # Mit ActionGroup
 
+In der LightBox kann eine [ActionGroup](/03-components/actions/action-group) verwendet werden diese richtet sich automatisch vertikal am Bild aus. 
+
 <LiveCodeEditor example="actions" editorCollapsed />
-
----
-
-# FitScreen
-
-Im Default wird der Inhalt durch die Größe des Screens begrenzt. Wird das
-Property `fitScreen` auf `false` gesetzt, wird der Inhalt in seiner vollen Höhe
-dargestellt, und wenn nötig mit einer Scrollbar versehen. Das kann vorallem bei
-der Darstellung höherer Elemente, wie z.B. mehrseitiger PDFs hilfreich sein.
-
-<LiveCodeEditor example="fitScreenFalse" editorCollapsed />
 
 ---
 
 # Mit Image Trigger
 
+Als Trigger kann auch das [Image](/03-components/content/image) selbst verwendet werden. Kombiniere dazu `<Button />` mit `<Image />`.
+
 <LiveCodeEditor example="imageTrigger" editorCollapsed />
+
+---
+
+# FitScreen
+
+Standardmäßig passt sich der Inhalt der Lightbox an die Bildschirmgröße an. Wird die Property `fitScreen` auf `false` gesetzt, wird der Inhalt in seiner vollen Höhe dargestellt. Falls der verfügbare Platz nicht ausreicht, erscheint eine vertikale Scrollbar. Dieses Verhalten ist besonders hilfreich bei der Darstellung von Inhalten mit großer vertikaler Ausdehnung, wie z. B. mehrseitigen PDFs.
+
+<LiveCodeEditor example="fitScreenFalse" editorCollapsed />
