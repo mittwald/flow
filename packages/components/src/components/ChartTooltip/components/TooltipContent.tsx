@@ -1,7 +1,5 @@
 import clsx from "clsx";
-import styles from "../ChartTooltip.module.scss";
 import popoverStyles from "../../Popover/Popover.module.scss";
-import { PopoverTip } from "@/components/Popover/components/PopoverTip";
 import Heading from "@/components/Heading";
 import { LegendItem } from "@/components/Legend/components/LegendItem";
 import type * as Recharts from "recharts";
@@ -32,7 +30,6 @@ export const TooltipContent = (props: TooltipContentProps) => {
   if (active && payload && payload.length) {
     return (
       <div className={className}>
-        <PopoverTip className={styles.tip} />
         <div className={popoverStyles.content}>
           <Heading level={3}>
             {headingFormatter && typeof label === "string"
