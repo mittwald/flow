@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import * as Recharts from "recharts";
-import LegendContent from "./components/LegendContent/LegendContent";
+import LegendContent from "./LegendContent";
 
 export type ChartLegendFormatter = (text: string) => string;
 

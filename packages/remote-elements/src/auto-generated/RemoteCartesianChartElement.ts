@@ -1,10 +1,10 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import { FlowRemoteElement } from "@/lib/FlowRemoteElement";
-import type { AreaChartProps as RemoteAreaChartElementProps } from "@mittwald/flow-react-components";
-export type { AreaChartProps as RemoteAreaChartElementProps } from "@mittwald/flow-react-components";
+import type { CartesianChartProps as RemoteCartesianChartElementProps } from "@mittwald/flow-react-components";
+export type { CartesianChartProps as RemoteCartesianChartElementProps } from "@mittwald/flow-react-components";
 
-export class RemoteAreaChartElement extends FlowRemoteElement<RemoteAreaChartElementProps> {
+export class RemoteCartesianChartElement extends FlowRemoteElement<RemoteCartesianChartElementProps> {
   static override get remoteAttributes() {
     return ["style"];
   }
@@ -32,8 +32,8 @@ export class RemoteAreaChartElement extends FlowRemoteElement<RemoteAreaChartEle
 
 declare global {
   interface HTMLElementTagNameMap {
-    "flr-area-chart": InstanceType<typeof RemoteAreaChartElement>;
+    "flr-cartesian-chart": InstanceType<typeof RemoteCartesianChartElement>;
   }
 }
 
-customElements.define("flr-area-chart", RemoteAreaChartElement);
+customElements.define("flr-cartesian-chart", RemoteCartesianChartElement);

@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import popoverStyles from "../../Popover/Popover.module.scss";
+import popoverStyles from "../../../Popover/Popover.module.scss";
 import Heading from "@/components/Heading";
 import { LegendItem } from "@/components/Legend/components/LegendItem";
 import type * as Recharts from "recharts";
@@ -7,7 +7,7 @@ import type {
   NameType,
   ValueType,
 } from "recharts/types/component/DefaultTooltipContent";
-import type { WithTooltipFormatters } from "../ChartTooltip";
+import type { WithTooltipFormatters } from "./ChartTooltip";
 
 interface TooltipContentProps
   extends Pick<

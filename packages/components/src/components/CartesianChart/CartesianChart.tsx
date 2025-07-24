@@ -12,10 +12,10 @@ import React, {
   type SVGProps,
 } from "react";
 import { Area, type AreaProps } from "./components/Area";
-import CartesianGrid from "../CartesianGrid";
 import clsx from "clsx";
-import styles from "./AreaChart.module.scss";
+import styles from "./CartesianChart.module.scss";
 import Wrap from "../Wrap";
+import { CartesianGrid } from "@/components/CartesianChart/components/CartesianGrid";
 
 export interface AreaChartEmptyViewProps {
   data?: CategoricalChartProps["data"];
@@ -38,7 +38,7 @@ export interface AreaChartProps
 }
 
 /** @flr-generate all */
-export const AreaChart: FC<AreaChartProps> = (props) => {
+export const CartesianChart: FC<AreaChartProps> = (props) => {
   const {
     children,
     data,
@@ -145,4 +145,4 @@ export const AreaChart: FC<AreaChartProps> = (props) => {
   );
 };
 
-export default AreaChart;
+export default CartesianChart;

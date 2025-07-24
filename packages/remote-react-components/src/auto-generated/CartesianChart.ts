@@ -2,16 +2,16 @@
 /* This file is auto-generated with the remote-components-generator */
 "use client";
 import createFlowRemoteComponent from "@/components/createFlowRemoteComponent";
-import { RemoteAreaChartElement } from "@mittwald/flow-remote-elements";
-export { type RemoteAreaChartElement } from "@mittwald/flow-remote-elements";
+import { RemoteCartesianChartElement } from "@mittwald/flow-remote-elements";
+export { type RemoteCartesianChartElement } from "@mittwald/flow-remote-elements";
 
-export const AreaChart = createFlowRemoteComponent(
-  "flr-area-chart",
-  "AreaChart",
+export const CartesianChart = createFlowRemoteComponent(
+  "flr-cartesian-chart",
+  "CartesianChart",
   {
     clearPropsContext: false,
   },
-  RemoteAreaChartElement,
+  RemoteCartesianChartElement,
   {
     slotProps: {
       wrapper: "flr-slot-root-wrapper",

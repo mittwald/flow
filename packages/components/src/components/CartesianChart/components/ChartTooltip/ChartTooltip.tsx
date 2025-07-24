@@ -4,7 +4,7 @@ import type {
   NameType,
   ValueType,
 } from "recharts/types/component/DefaultTooltipContent";
-import { TooltipContent } from "./components";
+import { TooltipContent } from "./TooltipContent";
 
 export type TooltipLineFormatter = (
   value: ValueType,

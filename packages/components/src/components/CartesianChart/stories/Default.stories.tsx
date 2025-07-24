@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import AreaChart from "../AreaChart";
+import CartesianChart from "../CartesianChart";
 import Area from "../components/Area";
-import ChartTooltip from "@/components/ChartTooltip";
-import CartesianGrid from "@/components/CartesianGrid";
-import XAxis from "@/components/XAxis";
-import YAxis from "@/components/YAxis";
-import ChartLegend from "@/components/ChartLegend";
 import IllustratedMessage from "@/components/IllustratedMessage";
 import { Heading, IconMonitoring } from "@/components/public";
-import { Line } from "@/components/AreaChart/components/Line";
+import { Line } from "@/components/CartesianChart/components/Line";
+import ChartTooltip from "@/components/CartesianChart/components/ChartTooltip/ChartTooltip";
+import CartesianGrid from "@/components/CartesianChart/components/CartesianGrid/CartesianGrid";
+import YAxis from "@/components/CartesianChart/components/YAxis/YAxis";
+import XAxis from "@/components/CartesianChart/components/XAxis/XAxis";
+import ChartLegend from "@/components/CartesianChart/components/ChartLegend/ChartLegend";
 
 const chartData = [
   {
@@ -55,11 +55,11 @@ const chartData = [
   },
 ];
 
-type Story = StoryObj<typeof AreaChart>;
+type Story = StoryObj<typeof CartesianChart>;
 
-const meta: Meta<typeof AreaChart> = {
+const meta: Meta<typeof CartesianChart> = {
   title: "Data Visualisation/AreaChart",
-  component: AreaChart,
+  component: CartesianChart,
   parameters: {
     controls: { exclude: ["className"] },
   },
@@ -73,7 +73,7 @@ export default meta;
 
 export const Default: Story = {
   render: (props) => (
-    <AreaChart {...props} height="70vh">
+    <CartesianChart {...props} height="70vh">
       <CartesianGrid />
       <Area dataKey="firstKey" />
       <Area dataKey="secondKey" color="palatinate-blue" />
@@ -82,14 +82,14 @@ export const Default: Story = {
       <YAxis interval="equidistantPreserveStart" />
       <ChartTooltip />
       <ChartLegend />
-    </AreaChart>
+    </CartesianChart>
   ),
 };
 
 export const MultipleSynced: Story = {
   render: (props) => (
     <>
-      <AreaChart {...props} height="250px" syncId="syncedAreaCharts">
+      <CartesianChart {...props} height="250px" syncId="syncedAreaCharts">
         <CartesianGrid />
         <Area dataKey="firstKey" />
         <Area dataKey="secondKey" color="palatinate-blue" />
@@ -98,8 +98,8 @@ export const MultipleSynced: Story = {
         <YAxis />
         <ChartTooltip />
         <ChartLegend />
-      </AreaChart>
-      <AreaChart {...props} height="250px" syncId="syncedAreaCharts">
+      </CartesianChart>
+      <CartesianChart {...props} height="250px" syncId="syncedAreaCharts">
         <CartesianGrid />
         <Area dataKey="firstKey" color="magenta" />
         <Area dataKey="secondKey" color="tropical-indigo" />
@@ -108,7 +108,7 @@ export const MultipleSynced: Story = {
         <YAxis />
         <ChartTooltip />
         <ChartLegend />
-      </AreaChart>
+      </CartesianChart>
     </>
   ),
 };
@@ -123,7 +123,7 @@ export const WithEmptyView: Story = {
     );
 
     return (
-      <AreaChart emptyView={emptyView} height="70vh">
+      <CartesianChart emptyView={emptyView} height="70vh">
         <CartesianGrid />
         <Area dataKey="firstKey" />
         <Area dataKey="secondKey" color="palatinate-blue" />
@@ -132,7 +132,7 @@ export const WithEmptyView: Story = {
         <YAxis interval="equidistantPreserveStart" />
         <ChartTooltip />
         <ChartLegend />
-      </AreaChart>
+      </CartesianChart>
     );
   },
 };
@@ -170,7 +170,7 @@ export const WithLine: Story = {
     data: lineChartData,
   },
   render: (props) => (
-    <AreaChart {...props} height="70vh">
+    <CartesianChart {...props} height="70vh">
       <CartesianGrid />
       <Area dataKey="mean" />
       <Line dataKey="max" color="magenta" />
@@ -178,6 +178,6 @@ export const WithLine: Story = {
       <YAxis interval="equidistantPreserveStart" unit="%" domain={[0, 100]} />
       <ChartTooltip />
       <ChartLegend />
-    </AreaChart>
+    </CartesianChart>
   ),
 };
