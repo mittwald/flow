@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.358](https://github.com/mittwald/flow/compare/0.2.0-alpha.357...0.2.0-alpha.358) (2025-07-24)
+
+### Features
+
+* **ChartTooltip:** remove tip from chart tooltip ([#1779](https://github.com/mittwald/flow/issues/1779)) ([a4388db](https://github.com/mittwald/flow/commit/a4388dbcd60a2bd67894a9eb6c08bf3ea65d9055))
+
 # [0.2.0-alpha.357](https://github.com/mittwald/flow/compare/0.2.0-alpha.356...0.2.0-alpha.357) (2025-07-23)
 
 ### Bug Fixes
