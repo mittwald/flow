@@ -17,11 +17,11 @@ import styles from "./CartesianChart.module.scss";
 import Wrap from "../Wrap";
 import { CartesianGrid } from "@/components/CartesianChart/components/CartesianGrid";
 
-export interface AreaChartEmptyViewProps {
+export interface CartesianChartEmptyViewProps {
   data?: CategoricalChartProps["data"];
 }
 
-export interface AreaChartProps
+export interface CartesianChartProps
   extends Pick<
       CategoricalChartProps,
       "data" | "className" | "syncId" | "syncMethod"
@@ -29,7 +29,7 @@ export interface AreaChartProps
     PropsWithChildren {
   height?: string;
   /** View that is provided when data is empty/undefined */
-  emptyView?: React.ComponentType<AreaChartEmptyViewProps>;
+  emptyView?: React.ComponentType<CartesianChartEmptyViewProps>;
   /**
    * Allow the height controlling container to set flex-grow: 1. Can only be
    * used in combination with `height`
@@ -38,7 +38,7 @@ export interface AreaChartProps
 }
 
 /** @flr-generate all */
-export const CartesianChart: FC<AreaChartProps> = (props) => {
+export const CartesianChart: FC<CartesianChartProps> = (props) => {
   const {
     children,
     data,
@@ -48,7 +48,7 @@ export const CartesianChart: FC<AreaChartProps> = (props) => {
     emptyView: EmptyView,
     ...rest
   } = props;
-  const rootClassName = clsx(styles.areaChart, className);
+  const rootClassName = clsx(styles.cartesianChart, className);
 
   // render order: grid, areas without dots, other children, areas with dots
   // this is needed to ensure that the dots will always overlay the areas

@@ -58,7 +58,7 @@ const chartData = [
 type Story = StoryObj<typeof CartesianChart>;
 
 const meta: Meta<typeof CartesianChart> = {
-  title: "Data Visualisation/AreaChart",
+  title: "Data Visualisation/CartesianChart",
   component: CartesianChart,
   parameters: {
     controls: { exclude: ["className"] },
@@ -89,7 +89,7 @@ export const Default: Story = {
 export const MultipleSynced: Story = {
   render: (props) => (
     <>
-      <CartesianChart {...props} height="250px" syncId="syncedAreaCharts">
+      <CartesianChart {...props} height="250px" syncId="syncedCharts">
         <CartesianGrid />
         <Area dataKey="firstKey" />
         <Area dataKey="secondKey" color="palatinate-blue" />
@@ -99,7 +99,7 @@ export const MultipleSynced: Story = {
         <ChartTooltip />
         <ChartLegend />
       </CartesianChart>
-      <CartesianChart {...props} height="250px" syncId="syncedAreaCharts">
+      <CartesianChart {...props} height="250px" syncId="syncedCharts">
         <CartesianGrid />
         <Area dataKey="firstKey" color="magenta" />
         <Area dataKey="secondKey" color="tropical-indigo" />
