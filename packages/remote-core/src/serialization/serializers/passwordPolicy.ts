@@ -13,7 +13,6 @@ export const passwordPolicySerializer = new Serializer<
   name: "PasswordPolicy",
   serialize: {
     isApplicable: (val): val is Policy => {
-      console.log("check", val);
       return val instanceof Policy;
     },
     apply: (policy) => {
