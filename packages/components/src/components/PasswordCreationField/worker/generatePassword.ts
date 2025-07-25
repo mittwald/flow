@@ -1,5 +1,7 @@
-import type { Policy } from "@mittwald/password-tools-js/policy";
-import { Generator } from "@mittwald/password-tools-js/generator";
+import {
+  Generator,
+  type Policy,
+} from "@/integrations/@mittwald/password-tools-js";
 
 export const generatePassword = async (
   validationPolicy: Policy,

@@ -3,8 +3,7 @@ import React, {
   useState,
   type ClipboardEvent,
   useDeferredValue,
-  startTransition,
-  useEffect,
+  useMemo,
 } from "react";
 import {
   ClearPropsContext,
@@ -21,7 +20,6 @@ import * as Aria from "react-aria-components";
 import formFieldStyles from "@/components/FormField/FormField.module.scss";
 import clsx from "clsx";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
-import type { Policy } from "@mittwald/password-tools-js/policy";
 import { type ActionFn } from "@/components/Action";
 import getStateFromLatestPolicyValidationResult from "@/components/PasswordCreationField/lib/getStateFromLatestPolicyValidationResult";
 import locales from "./locales/*.locale.json";
@@ -29,8 +27,6 @@ import generateValidationTranslation from "@/components/PasswordCreationField/li
 import { FieldError } from "@/components/FieldError";
 import FieldDescription from "@/components/FieldDescription";
 import ComplexityIndicator from "@/components/PasswordCreationField/components/ComplexityIndicator/ComplexityIndicator";
-import { type PolicyValidationResult } from "@mittwald/password-tools-js/policy";
-import { type RuleValidationResult } from "@mittwald/password-tools-js/rules";
 import { generatePassword } from "@/components/PasswordCreationField/worker/generatePassword";
 import TogglePasswordVisibilityButton from "@/components/PasswordCreationField/components/TogglePasswordVisibilityButton/TogglePasswordVisibilityButton";
 import { defaultPasswordCreationPolicy } from "@/components/PasswordCreationField/defaultPasswordCreationPolicy";
@@ -40,7 +36,13 @@ import { ReactAriaControlledValueFix } from "@/lib/react/ReactAriaControlledValu
 import { ValidationResultButton } from "@/components/PasswordCreationField/components/ValidationResultButton/ValidationResultButton";
 import { PasswordGenerateButton } from "@/components/PasswordCreationField/components/PasswordGenerateButton/PasswordGenerateButton";
 import { useLocalizedContextStringFormatter } from "@/components/TranslationProvider/useLocalizedContextStringFormatter";
-import { isPromise } from "remeda";
+import type {
+  PolicyValidationResult,
+  PolicyGenericDeclaration,
+  RuleValidationResult,
+} from "@/integrations/@mittwald/password-tools-js";
+import { Policy } from "@/integrations/@mittwald/password-tools-js";
+import { usePolicyValidationResult } from "@/components/PasswordCreationField/lib/usePolicyValidationResult";
 
 export interface PasswordCreationFieldProps
   extends PropsWithChildren<
@@ -52,12 +54,11 @@ export interface PasswordCreationFieldProps
   onValidationResult?: (result: { password: string; isValid: boolean }) => void;
   defaultValue?: string;
   placeholder?: string;
-  validationPolicy?: Policy;
+  validationPolicy?: PolicyGenericDeclaration;
 }
 
 export interface ResolvedPolicyValidationResult
   extends Omit<PolicyValidationResult, "isValid"> {
-  initialValidate: boolean;
   isValid: boolean | "indeterminate";
   ruleResults: RuleValidationResult[];
 }
@@ -77,12 +78,20 @@ export const PasswordCreationField = flowComponent(
       onChange: onChangeFromProps,
       onValidationResult,
       isInvalid: invalidFromProps,
-      validationPolicy = defaultPasswordCreationPolicy,
+      validationPolicy:
+        validationPolicyFromProps = defaultPasswordCreationPolicy,
       isRequired,
       value: valueFromProps,
       defaultValue,
       ...rest
     } = props;
+
+    const [isLoading, setIsLoading] = useState(false);
+    const translate = useLocalizedContextStringFormatter(locales);
+    const validationPolicy = useMemo(
+      () => Policy.fromDeclaration(validationPolicyFromProps),
+      [validationPolicyFromProps],
+    );
 
     const isControlled = typeof valueFromProps !== "undefined";
     const hasDefaultValue = typeof defaultValue !== "undefined";
@@ -92,22 +101,8 @@ export const PasswordCreationField = flowComponent(
     const value = isControlled ? valueFromProps : internalValue;
     const deferredValue = useDeferredValue(value);
 
-    const onChangeHandler = (value: string) => {
-      if (onChangeFromProps) {
-        onChangeFromProps(value);
-      }
-
-      if (!isControlled) {
-        setInternalValue(() => value);
-      }
-    };
-
-    const translate = useLocalizedContextStringFormatter(locales);
     const [isPasswordRevealed, setIsPasswordRevealed] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
-
     const initialPolicyValidationState: ResolvedPolicyValidationResult = {
-      initialValidate: true,
       isValid: false,
       complexity: {
         min: validationPolicy.minComplexity,
@@ -119,6 +114,16 @@ export const PasswordCreationField = flowComponent(
 
     const [policyValidationResult, setPolicyValidationResult] = useState(
       initialPolicyValidationState,
+    );
+    usePolicyValidationResult(
+      validationPolicy,
+      deferredValue,
+      () => setIsLoading(() => true),
+      ({ password, isValid, results }) => {
+        setIsLoading(() => false);
+        setPolicyValidationResult(results);
+        onValidationResult?.({ password, isValid });
+      },
     );
 
     const stateFromValidationResult = getStateFromLatestPolicyValidationResult(
@@ -145,6 +150,7 @@ export const PasswordCreationField = flowComponent(
     const setOptimisticPolicyValidationResult = (
       state: Partial<ResolvedPolicyValidationResult> = {},
     ) => {
+      setIsLoading(() => false);
       setPolicyValidationResult(() => ({
         ...initialPolicyValidationState,
         ...state,
@@ -152,65 +158,15 @@ export const PasswordCreationField = flowComponent(
       }));
     };
 
-    useEffect(() => {
-      startTransition(async () => {
-        const validationResult = validationPolicy.validate(deferredValue);
-        if (!isPromise(validationResult.isValid)) {
-          const isValid = validationResult.isValid as boolean;
+    const onChangeHandler = (value: string) => {
+      if (onChangeFromProps) {
+        onChangeFromProps(value);
+      }
 
-          setIsLoading(() => false);
-          setPolicyValidationResult((old) => {
-            if (!old.initialValidate) {
-              onValidationResult?.({ password: deferredValue, isValid });
-            }
-
-            return {
-              initialValidate: false,
-              isValid,
-              ruleResults:
-                validationResult.ruleResults as RuleValidationResult[],
-              complexity: validationResult.complexity,
-            };
-          });
-          return;
-        }
-
-        const nonPromiseValidationsInvalid = validationResult.ruleResults
-          .filter((r): r is RuleValidationResult => !(r instanceof Promise))
-          .some((r) => !r.isValid);
-
-        if (!isEmptyValue) {
-          setIsLoading(() => true);
-        }
-        if (!nonPromiseValidationsInvalid) {
-          setOptimisticPolicyValidationResult();
-        }
-
-        void Promise.all([
-          Promise.resolve(deferredValue),
-          ...validationResult.ruleResults.map(async (r) => {
-            return r;
-          }),
-        ]).then(([resolvedValue, ...validationResults]) => {
-          startTransition(() => {
-            const isValid = !validationResults.some((r) => !r.isValid);
-
-            setIsLoading(() => false);
-            setPolicyValidationResult((old) => {
-              if (!old.initialValidate) {
-                onValidationResult?.({ password: resolvedValue, isValid });
-              }
-
-              return {
-                ...old,
-                isValid,
-                ruleResults: validationResults,
-              };
-            });
-          });
-        });
-      });
-    }, [deferredValue]);
+      if (!isControlled) {
+        setInternalValue(() => value);
+      }
+    };
 
     const onPasswordGenerateHandler: ActionFn = async () => {
       const generatedPassword = await generatePassword(validationPolicy);
