@@ -356,7 +356,7 @@ importers:
         specifier: ^3.2.6
         version: 3.2.6
       '@mittwald/password-tools-js':
-        specifier: ^3.0.0-alpha.6
+        specifier: 3.0.0-alpha.6
         version: 3.0.0-alpha.6
       '@mittwald/react-tunnel':
         specifier: workspace:*
@@ -890,7 +890,7 @@ importers:
         specifier: workspace:*
         version: link:../core
       '@mittwald/password-tools-js':
-        specifier: ^3.0.0-alpha.6
+        specifier: 3.0.0-alpha.6
         version: 3.0.0-alpha.6
       '@mittwald/typescript-config':
         specifier: workspace:*
