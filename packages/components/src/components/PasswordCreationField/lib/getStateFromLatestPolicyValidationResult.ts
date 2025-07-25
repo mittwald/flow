@@ -1,4 +1,4 @@
-import { type RuleValidationResult } from "@mittwald/password-tools-js/rules";
+import { type RuleValidationResult } from "@/integrations/@mittwald/password-tools-js";
 import type { ResolvedPolicyValidationResult } from "@/components/PasswordCreationField/PasswordCreationField";
 
 /** @internal */

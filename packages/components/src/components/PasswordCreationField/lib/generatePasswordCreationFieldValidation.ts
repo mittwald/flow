@@ -1,4 +1,4 @@
-import type { Policy } from "@mittwald/password-tools-js/policy";
+import type { Policy } from "@/integrations/@mittwald/password-tools-js";
 import { defaultPasswordCreationPolicy } from "@/components/PasswordCreationField/defaultPasswordCreationPolicy";
 import { isPromise } from "remeda";
 

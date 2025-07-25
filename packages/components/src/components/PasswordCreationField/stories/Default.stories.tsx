@@ -6,9 +6,12 @@ import {
 import React, { useState } from "react";
 import { Label } from "@/components/Label";
 import { action } from "storybook/actions";
-import type { PolicyDeclaration } from "@mittwald/password-tools-js/policy";
-import { RuleType, SequenceType } from "@mittwald/password-tools-js/rules";
-import { Policy } from "@mittwald/password-tools-js/policy";
+import type { PolicyDeclaration } from "@/integrations/@mittwald/password-tools-js";
+import {
+  Policy,
+  RuleType,
+  SequenceType,
+} from "@/integrations/@mittwald/password-tools-js";
 import { useForm } from "react-hook-form";
 import { sleep } from "@/lib/promises/sleep";
 import { Button } from "@/components/Button";
@@ -53,7 +56,6 @@ const policyDecl: PolicyDeclaration = {
     {
       ruleType: RuleType.regex,
       pattern: "[-_§$%&/=,;.#]",
-      translationKey: "asd",
       min: 1,
     },
   ],

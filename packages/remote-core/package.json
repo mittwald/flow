@@ -37,6 +37,7 @@
   "devDependencies": {
     "@mittwald/ext-bridge": "workspace:*",
     "@mittwald/flow-core": "workspace:*",
+    "@mittwald/password-tools-js": "^3.0.0-alpha.6",
     "@mittwald/typescript-config": "workspace:*",
     "@types/node": "^22.16.2",
     "nx": "^20.8.2",
@@ -51,7 +52,8 @@
     "vitest": "^3.2.4"
   },
   "peerDependencies": {
-    "@mittwald/ext-bridge": "workspace:*"
+    "@mittwald/ext-bridge": "workspace:*",
+    "@mittwald/password-tools-js": "^3.0.0-alpha.6"
   },
   "peerDependenciesMeta": {
     "@mittwald/ext-bridge": {
