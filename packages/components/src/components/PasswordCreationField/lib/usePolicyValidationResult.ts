@@ -55,5 +55,5 @@ export const usePolicyValidationResult = (
         },
       );
     });
-  }, [password]);
+  }, [password, validationPolicy]);
 };

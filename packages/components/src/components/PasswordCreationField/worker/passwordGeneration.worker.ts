@@ -1,5 +1,4 @@
-import { Generator } from "@/integrations/@mittwald/password-tools-js";
-import { Policy } from "@/integrations/@mittwald/password-tools-js";
+import { Generator, Policy } from "@/integrations/@mittwald/password-tools-js";
 
 self.onmessage = async (e) => {
   try {
