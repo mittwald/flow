@@ -1,7 +1,7 @@
 import type { Props } from "recharts/types/component/DefaultLegendContent";
 import type { WithChartLegendFormatters } from "./ChartLegend";
 import type { FC } from "react";
-import tokens from "../../../../../../design-tokens/dist/variables.json";
+import tokens from "@mittwald/flow-design-tokens/variables.json";
 import Legend, { LegendItem } from "@/components/Legend";
 
 type LegendContentType = Omit<Props, "formatter"> & WithChartLegendFormatters;
