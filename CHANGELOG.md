@@ -3,6 +3,46 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.365](https://github.com/mittwald/flow/compare/0.2.0-alpha.364...0.2.0-alpha.365) (2025-07-28)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.364](https://github.com/mittwald/flow/compare/0.2.0-alpha.363...0.2.0-alpha.364) (2025-07-28)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.363](https://github.com/mittwald/flow/compare/0.2.0-alpha.362...0.2.0-alpha.363) (2025-07-28)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.362](https://github.com/mittwald/flow/compare/0.2.0-alpha.361...0.2.0-alpha.362) (2025-07-28)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.361](https://github.com/mittwald/flow/compare/0.2.0-alpha.360...0.2.0-alpha.361) (2025-07-25)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.360](https://github.com/mittwald/flow/compare/0.2.0-alpha.359...0.2.0-alpha.360) (2025-07-24)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.359](https://github.com/mittwald/flow/compare/0.2.0-alpha.358...0.2.0-alpha.359) (2025-07-24)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.358](https://github.com/mittwald/flow/compare/0.2.0-alpha.357...0.2.0-alpha.358) (2025-07-24)
+
+### Features
+
+* **ChartTooltip:** remove tip from chart tooltip ([#1779](https://github.com/mittwald/flow/issues/1779)) ([a4388db](https://github.com/mittwald/flow/commit/a4388dbcd60a2bd67894a9eb6c08bf3ea65d9055))
+
+# [0.2.0-alpha.357](https://github.com/mittwald/flow/compare/0.2.0-alpha.356...0.2.0-alpha.357) (2025-07-23)
+
+### Bug Fixes
+
+* **PasswordCreationField:** Fix ButtonState on invalid field ([#1777](https://github.com/mittwald/flow/issues/1777)) ([6aa32bf](https://github.com/mittwald/flow/commit/6aa32bf20d146678801c24649f67d927518816a6))
+
 # [0.2.0-alpha.356](https://github.com/mittwald/flow/compare/0.2.0-alpha.355...0.2.0-alpha.356) (2025-07-23)
 
 **Note:** Version bump only for package @mittwald/flow-project

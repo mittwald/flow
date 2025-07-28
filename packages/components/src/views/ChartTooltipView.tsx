@@ -4,7 +4,7 @@ import React, { type FC, useContext } from "react";
 import {
   ChartTooltip,
   type ChartTooltipProps,
-} from "@/components/ChartTooltip";
+} from "@/components/CartesianChart";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const ChartTooltipView: FC<ChartTooltipProps> = (props) => {
