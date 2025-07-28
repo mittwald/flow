@@ -1,7 +1,8 @@
 import { createContext, useContext } from "react";
+import type { Key } from "react-aria";
 
 interface TabContext {
-  id: string;
+  id: Key;
 }
 
 const tabContext = createContext<TabContext>({
