@@ -22,6 +22,7 @@ export class RemoteXAxisElement extends FlowRemoteElement<RemoteXAxisElementProp
       orientation: {},
       scale: {},
       type: {},
+      unit: {},
     };
   }
 

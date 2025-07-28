@@ -1,10 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { CodeBlock } from "@/components/CodeBlock";
-import {
-  storyBackgroundDark,
-  storyBackgroundLight,
-} from "@/lib/dev/storyBackgrounds";
 
 const meta: Meta<typeof CodeBlock> = {
   title: "Content/CodeBlock",
@@ -37,8 +33,8 @@ export const Dark: Story = {
     color: "dark",
     copyable: true,
   },
-  parameters: {
-    backgrounds: storyBackgroundLight,
+  globals: {
+    backgrounds: "light",
   },
 };
 
@@ -47,7 +43,7 @@ export const Light: Story = {
     color: "light",
     copyable: true,
   },
-  parameters: {
-    backgrounds: storyBackgroundDark,
+  globals: {
+    backgrounds: "dark",
   },
 };

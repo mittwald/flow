@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useForm } from "react-hook-form";
-import { action } from "@storybook/addon-actions";
+import { action } from "storybook/actions";
 import type { Field } from "@/integrations/react-hook-form";
 import { Form, typedField } from "@/integrations/react-hook-form";
 import { Button } from "@/components/Button";

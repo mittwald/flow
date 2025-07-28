@@ -59,6 +59,29 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
   );
 
   const propsContext: PropsContext = {
+    ContextMenu: {
+      placement: "bottom start",
+      controller,
+      isNonModal: true,
+      renderEmptyState: () => (
+        <Text className={styles.empty}>
+          {stringFormatter.format("autocomplete.empty")}
+        </Text>
+      ),
+      onAction: (key) => {
+        const input = triggerRef.current;
+        if (input) {
+          const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
+            Object.getPrototypeOf(input),
+            "value",
+          )?.set;
+          nativeInputValueSetter?.call(input, String(key));
+          const event = new Event("change", { bubbles: true });
+          input.dispatchEvent(event);
+        }
+      },
+      triggerRef,
+    },
     SearchField: inputProps,
     TextField: inputProps,
     Option: {

@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/mstudio-ext-react-components",
-  "version": "0.2.0-alpha.340",
+  "version": "0.2.0-alpha.364",
   "type": "module",
   "description": "React components that can be used by mStudio extension developers",
   "homepage": "https://mittwald.github.io/flow",
@@ -29,7 +29,7 @@
   "devDependencies": {
     "@mittwald/flow-remote-react-components": "workspace:*",
     "@mittwald/typescript-config": "workspace:*",
-    "@types/node": "^22.16.2",
+    "@types/node": "^22.16.5",
     "nx": "^20.8.2",
     "prettier": "^3.6.2",
     "react": "^19.1.0",

@@ -1,0 +1,9 @@
+:global(.recharts-tooltip-wrapper-right) {
+  margin-left: calc(var(--popover--tip-height) + var(--chart-tooltip--spacing));
+}
+
+:global(.recharts-tooltip-wrapper-left) {
+  margin-left: calc(
+    calc(var(--popover--tip-height) + var(--chart-tooltip--spacing)) * -1
+  );
+}

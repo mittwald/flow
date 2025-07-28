@@ -10,7 +10,7 @@ import { TextField } from "@/components/TextField";
 import { typedField } from "@/integrations/react-hook-form/components/Field";
 import { Form } from "@/integrations/react-hook-form/components/Form/Form";
 import { sleep } from "@/lib/promises/sleep";
-import { action } from "@storybook/addon-actions";
+import { action } from "storybook/actions";
 import type { Meta, StoryObj } from "@storybook/react";
 import { useForm } from "react-hook-form";
 

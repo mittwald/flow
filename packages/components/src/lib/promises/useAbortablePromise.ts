@@ -1,18 +1,14 @@
-import { type DependencyList, useEffect } from "react";
-
-interface Signal {
-  aborted: boolean;
-}
+import { type DependencyList, useLayoutEffect } from "react";
 
 export const useAbortablePromise = (
-  asyncFn: (signal: Signal) => Promise<void>,
+  asyncFn: (signal: AbortSignal) => Promise<void>,
   dependencies: DependencyList,
 ) => {
-  useEffect(() => {
-    const signal = { aborted: false };
-    void asyncFn(signal);
+  useLayoutEffect(() => {
+    const controller = new AbortController();
+    void asyncFn(controller.signal);
     return () => {
-      signal.aborted = true;
+      controller.abort();
     };
   }, dependencies);
 };

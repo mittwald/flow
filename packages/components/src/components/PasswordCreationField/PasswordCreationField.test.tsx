@@ -1,5 +1,5 @@
 import { render, fireEvent, waitFor } from "@testing-library/react";
-import React from "react";
+import React, { useState } from "react";
 import { assert, expect, test } from "vitest";
 import { act } from "react";
 import PasswordCreationField from "@/components/PasswordCreationField/PasswordCreationField";
@@ -33,14 +33,30 @@ const policyDecl: PolicyDeclaration = {
 
 const policy = Policy.fromDeclaration(policyDecl);
 
+const PasswordCreationFieldTestComponent: typeof PasswordCreationField = (
+  props,
+) => {
+  const [password, setPassword] = useState("");
+  return (
+    <PasswordCreationField
+      {...props}
+      value={password}
+      onChange={(value) => {
+        setPassword(value);
+        props.onChange?.(value);
+      }}
+    />
+  );
+};
+
 describe("PasswordCreationField Tests", () => {
   test("renders empty list without errors", async () => {
     await act(() =>
       render(
         <I18nProvider locale="de">
-          <PasswordCreationField validationPolicy={policy}>
+          <PasswordCreationFieldTestComponent validationPolicy={policy}>
             <Label>Password</Label>
-          </PasswordCreationField>
+          </PasswordCreationFieldTestComponent>
         </I18nProvider>,
       ),
     );
@@ -50,9 +66,9 @@ describe("PasswordCreationField Tests", () => {
     const renderResult = await act(() =>
       render(
         <I18nProvider locale="de">
-          <PasswordCreationField validationPolicy={policy}>
+          <PasswordCreationFieldTestComponent validationPolicy={policy}>
             <Label>Password</Label>
-          </PasswordCreationField>
+          </PasswordCreationFieldTestComponent>
         </I18nProvider>,
       ),
     );
@@ -71,7 +87,7 @@ describe("PasswordCreationField Tests", () => {
     );
 
     await act(async () => {
-      fireEvent.input(inputElement, { target: { value: "123" } });
+      fireEvent.change(inputElement, { target: { value: "123" } });
       await sleep(250);
     });
 
@@ -99,9 +115,11 @@ describe("PasswordCreationField Tests", () => {
     const renderResult = await act(() =>
       render(
         <I18nProvider locale="de">
-          <PasswordCreationField validationPolicy={maxNumberPolicy}>
+          <PasswordCreationFieldTestComponent
+            validationPolicy={maxNumberPolicy}
+          >
             <Label>Password</Label>
-          </PasswordCreationField>
+          </PasswordCreationFieldTestComponent>
         </I18nProvider>,
       ),
     );
@@ -111,7 +129,7 @@ describe("PasswordCreationField Tests", () => {
     expect(inputElement).toHaveValue("");
 
     await act(async () => {
-      fireEvent.input(inputElement, {
+      fireEvent.change(inputElement, {
         target: { value: "12" },
       });
       await sleep(250);
@@ -130,7 +148,7 @@ describe("PasswordCreationField Tests", () => {
     expect(rules[0]).toHaveTextContent("Maximal 2 Zahlen");
 
     await act(async () => {
-      fireEvent.input(inputElement, {
+      fireEvent.change(inputElement, {
         target: { value: "123" },
       });
       await sleep(250);
@@ -144,9 +162,9 @@ describe("PasswordCreationField Tests", () => {
     const renderResult = await act(() =>
       render(
         <I18nProvider locale="de">
-          <PasswordCreationField validationPolicy={policy}>
+          <PasswordCreationFieldTestComponent validationPolicy={policy}>
             <Label>Password</Label>
-          </PasswordCreationField>
+          </PasswordCreationFieldTestComponent>
         </I18nProvider>,
       ),
     );
@@ -166,9 +184,9 @@ describe("PasswordCreationField Tests", () => {
     const renderResult = await act(() =>
       render(
         <I18nProvider locale="de">
-          <PasswordCreationField validationPolicy={policy}>
+          <PasswordCreationFieldTestComponent validationPolicy={policy}>
             <Label>Password</Label>
-          </PasswordCreationField>
+          </PasswordCreationFieldTestComponent>
         </I18nProvider>,
       ),
     );
@@ -193,9 +211,9 @@ describe("PasswordCreationField Tests", () => {
     const renderResult = await act(() =>
       render(
         <I18nProvider locale="de">
-          <PasswordCreationField validationPolicy={policy}>
+          <PasswordCreationFieldTestComponent validationPolicy={policy}>
             <Label>Password</Label>
-          </PasswordCreationField>
+          </PasswordCreationFieldTestComponent>
         </I18nProvider>,
       ),
     );
@@ -230,7 +248,7 @@ describe("PasswordCreationField Tests", () => {
     const renderResult = await act(() =>
       render(
         <I18nProvider locale="de">
-          <PasswordCreationField validationPolicy={policy}>
+          <PasswordCreationFieldTestComponent validationPolicy={policy}>
             <Label>Password</Label>
             <Button
               data-component="customButton"
@@ -239,7 +257,7 @@ describe("PasswordCreationField Tests", () => {
             >
               <IconPlus />
             </Button>
-          </PasswordCreationField>
+          </PasswordCreationFieldTestComponent>
         </I18nProvider>,
       ),
     );
@@ -254,18 +272,20 @@ describe("PasswordCreationField Tests", () => {
     expect(customButton).toBeInTheDocument();
   });
 
-  test("emmit change", async () => {
+  test("emmit events", async () => {
     const onChangeHandler = vi.fn();
+    const onValidationResult = vi.fn();
 
     const renderResult = await act(() =>
       render(
         <I18nProvider locale="de">
-          <PasswordCreationField
+          <PasswordCreationFieldTestComponent
             onChange={onChangeHandler}
+            onValidationResult={onValidationResult}
             validationPolicy={policy}
           >
             <Label>Password</Label>
-          </PasswordCreationField>
+          </PasswordCreationFieldTestComponent>
         </I18nProvider>,
       ),
     );
@@ -276,22 +296,30 @@ describe("PasswordCreationField Tests", () => {
     expect(inputElement).toHaveValue("");
 
     await act(async () => {
-      fireEvent.input(inputElement, {
+      fireEvent.change(inputElement, {
         target: { value: "invalid" },
       });
       await sleep(250);
     });
 
-    expect(onChangeHandler).toHaveBeenLastCalledWith("");
+    expect(onChangeHandler).toHaveBeenLastCalledWith("invalid");
+    expect(onValidationResult).toHaveBeenLastCalledWith({
+      password: "invalid",
+      isValid: false,
+    });
     expect(inputElement).toHaveValue("invalid");
 
     await act(async () => {
-      fireEvent.input(inputElement, {
+      fireEvent.change(inputElement, {
         target: { value: "d!iBCsc8(l~i" },
       });
       await sleep(250);
     });
     expect(onChangeHandler).toHaveBeenLastCalledWith("d!iBCsc8(l~i");
+    expect(onValidationResult).toHaveBeenLastCalledWith({
+      password: "d!iBCsc8(l~i",
+      isValid: true,
+    });
     expect(inputElement).toHaveValue("d!iBCsc8(l~i");
   });
 });

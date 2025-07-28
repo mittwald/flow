@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import Button from "../Button";
 import React from "react";
 import { IconCamera, IconPlus } from "@/components/Icon/components/icons";
-import { action } from "@storybook/addon-actions";
+import { action } from "storybook/actions";
 import { Text } from "@/components/Text";
 import IconChevronDown from "@/components/Icon/components/icons/IconChevronDown";
 import { Avatar } from "@/components/Avatar";

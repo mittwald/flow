@@ -3,6 +3,128 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.364](https://github.com/mittwald/flow/compare/0.2.0-alpha.363...0.2.0-alpha.364) (2025-07-28)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.363](https://github.com/mittwald/flow/compare/0.2.0-alpha.362...0.2.0-alpha.363) (2025-07-28)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.362](https://github.com/mittwald/flow/compare/0.2.0-alpha.361...0.2.0-alpha.362) (2025-07-28)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.361](https://github.com/mittwald/flow/compare/0.2.0-alpha.360...0.2.0-alpha.361) (2025-07-25)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.360](https://github.com/mittwald/flow/compare/0.2.0-alpha.359...0.2.0-alpha.360) (2025-07-24)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.359](https://github.com/mittwald/flow/compare/0.2.0-alpha.358...0.2.0-alpha.359) (2025-07-24)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.358](https://github.com/mittwald/flow/compare/0.2.0-alpha.357...0.2.0-alpha.358) (2025-07-24)
+
+### Features
+
+* **ChartTooltip:** remove tip from chart tooltip ([#1779](https://github.com/mittwald/flow/issues/1779)) ([a4388db](https://github.com/mittwald/flow/commit/a4388dbcd60a2bd67894a9eb6c08bf3ea65d9055))
+
+# [0.2.0-alpha.357](https://github.com/mittwald/flow/compare/0.2.0-alpha.356...0.2.0-alpha.357) (2025-07-23)
+
+### Bug Fixes
+
+* **PasswordCreationField:** Fix ButtonState on invalid field ([#1777](https://github.com/mittwald/flow/issues/1777)) ([6aa32bf](https://github.com/mittwald/flow/commit/6aa32bf20d146678801c24649f67d927518816a6))
+
+# [0.2.0-alpha.356](https://github.com/mittwald/flow/compare/0.2.0-alpha.355...0.2.0-alpha.356) (2025-07-23)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.355](https://github.com/mittwald/flow/compare/0.2.0-alpha.354...0.2.0-alpha.355) (2025-07-22)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.354](https://github.com/mittwald/flow/compare/0.2.0-alpha.353...0.2.0-alpha.354) (2025-07-22)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.353](https://github.com/mittwald/flow/compare/0.2.0-alpha.352...0.2.0-alpha.353) (2025-07-22)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.352](https://github.com/mittwald/flow/compare/0.2.0-alpha.351...0.2.0-alpha.352) (2025-07-21)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.351](https://github.com/mittwald/flow/compare/0.2.0-alpha.350...0.2.0-alpha.351) (2025-07-21)
+
+### Bug Fixes
+
+* **Accordion:** fix cut off focus outline ([#1769](https://github.com/mittwald/flow/issues/1769)) ([8ca3bf2](https://github.com/mittwald/flow/commit/8ca3bf2dc8705a9c7bd3dec078c073693be8924b))
+
+# [0.2.0-alpha.350](https://github.com/mittwald/flow/compare/0.2.0-alpha.349...0.2.0-alpha.350) (2025-07-21)
+
+### Bug Fixes
+
+* **ListHeader:** update list header without search ([#1763](https://github.com/mittwald/flow/issues/1763)) ([e4783a6](https://github.com/mittwald/flow/commit/e4783a67481cac754e46afb88a2642cea54c4f54))
+
+### Features
+
+* **LoadingSpinner:** support colors ([#1767](https://github.com/mittwald/flow/issues/1767)) ([f006e70](https://github.com/mittwald/flow/commit/f006e700994eb8b8d756f08bb16c6f2dba2753f3))
+
+# [0.2.0-alpha.349](https://github.com/mittwald/flow/compare/0.2.0-alpha.348...0.2.0-alpha.349) (2025-07-21)
+
+### Features
+
+* **Flex:** allow alignItems stretch & baseline ([#1761](https://github.com/mittwald/flow/issues/1761)) ([eed0d30](https://github.com/mittwald/flow/commit/eed0d30a091819abc3ab75f05244ccd39b275b86))
+
+# [0.2.0-alpha.348](https://github.com/mittwald/flow/compare/0.2.0-alpha.347...0.2.0-alpha.348) (2025-07-17)
+
+### Features
+
+* **AreaChart:** Add line component for area chart ([#1760](https://github.com/mittwald/flow/issues/1760)) ([0698228](https://github.com/mittwald/flow/commit/0698228b3f6c062015392c31b066c636777262e2))
+
+# [0.2.0-alpha.347](https://github.com/mittwald/flow/compare/0.2.0-alpha.346...0.2.0-alpha.347) (2025-07-17)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.346](https://github.com/mittwald/flow/compare/0.2.0-alpha.345...0.2.0-alpha.346) (2025-07-15)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.345](https://github.com/mittwald/flow/compare/0.2.0-alpha.344...0.2.0-alpha.345) (2025-07-14)
+
+### Bug Fixes
+
+* **TranslationProvider:** export translation provider ([#1755](https://github.com/mittwald/flow/issues/1755)) ([4b973c7](https://github.com/mittwald/flow/commit/4b973c75a731912965ea500059dea09886793598))
+
+# [0.2.0-alpha.344](https://github.com/mittwald/flow/compare/0.2.0-alpha.343...0.2.0-alpha.344) (2025-07-14)
+
+### Bug Fixes
+
+* **PasswordCreationField:** Export helper functions and default ruleset ([#1754](https://github.com/mittwald/flow/issues/1754)) ([9fc1925](https://github.com/mittwald/flow/commit/9fc1925737930358b7a055a5fa82994863d314c5))
+
+# [0.2.0-alpha.343](https://github.com/mittwald/flow/compare/0.2.0-alpha.342...0.2.0-alpha.343) (2025-07-14)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.342](https://github.com/mittwald/flow/compare/0.2.0-alpha.341...0.2.0-alpha.342) (2025-07-14)
+
+### Bug Fixes
+
+* **AvatarStack:** fix focus visibility ([#1748](https://github.com/mittwald/flow/issues/1748)) ([59efe34](https://github.com/mittwald/flow/commit/59efe342ea711636f110102997cd8a5f400b48f9))
+* **Chat:** fix responsive controls ([#1744](https://github.com/mittwald/flow/issues/1744)) ([c6c8979](https://github.com/mittwald/flow/commit/c6c897940c361a20fac3660ee9aa1a262f32b575))
+* **LabeledValue:** fix contextual help in label ([#1745](https://github.com/mittwald/flow/issues/1745)) ([25882b8](https://github.com/mittwald/flow/commit/25882b8db1dbbb06ad6724c9e073e20682216ad8))
+
+# [0.2.0-alpha.341](https://github.com/mittwald/flow/compare/0.2.0-alpha.340...0.2.0-alpha.341) (2025-07-14)
+
+### Features
+
+* **PasswordCreationField:** implement context translations ([#1741](https://github.com/mittwald/flow/issues/1741)) ([95b5c66](https://github.com/mittwald/flow/commit/95b5c661100ed5bd717d166b6be756184296203c))
+
 # [0.2.0-alpha.340](https://github.com/mittwald/flow/compare/0.2.0-alpha.339...0.2.0-alpha.340) (2025-07-11)
 
 ### Bug Fixes

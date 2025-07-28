@@ -9,7 +9,6 @@ import { AlertBadge as AlertBadge } from "@mittwald/flow-react-components";
 import { AlertIcon as AlertIcon } from "@mittwald/flow-react-components";
 import { Align as Align } from "@mittwald/flow-react-components";
 import { Area as Area } from "@mittwald/flow-react-components";
-import { AreaChart as AreaChart } from "@mittwald/flow-react-components";
 import { Autocomplete as Autocomplete } from "@mittwald/flow-react-components";
 import { Avatar as Avatar } from "@mittwald/flow-react-components";
 import { AvatarStack as AvatarStack } from "@mittwald/flow-react-components";
@@ -17,6 +16,7 @@ import { Badge as Badge } from "@mittwald/flow-react-components";
 import { BigNumber as BigNumber } from "@mittwald/flow-react-components";
 import { Breadcrumb as Breadcrumb } from "@mittwald/flow-react-components";
 import { Button as Button } from "@mittwald/flow-react-components";
+import { CartesianChart as CartesianChart } from "@mittwald/flow-react-components";
 import { CartesianGrid as CartesianGrid } from "@mittwald/flow-react-components";
 import { ChartLegend as ChartLegend } from "@mittwald/flow-react-components";
 import { ChartTooltip as ChartTooltip } from "@mittwald/flow-react-components";
@@ -65,6 +65,7 @@ import { Label as Label } from "@mittwald/flow-react-components";
 import { LabeledValue as LabeledValue } from "@mittwald/flow-react-components";
 import { LayoutCard as LayoutCard } from "@mittwald/flow-react-components";
 import { Legend as Legend } from "@mittwald/flow-react-components";
+import { Line as Line } from "@mittwald/flow-react-components";
 import { Link as Link } from "@mittwald/flow-react-components";
 import { EmptyView as ListEmptyView } from "@mittwald/flow-react-components";
 import { ListItemViewContent as ListItemViewContent } from "@mittwald/flow-react-components";
@@ -134,7 +135,6 @@ export const flowComponents = {
   "flr-alert-icon": createFlowRemoteComponentRenderer("AlertIcon", AlertIcon),
   "flr-align": createFlowRemoteComponentRenderer("Align", Align),
   "flr-area": createFlowRemoteComponentRenderer("Area", Area),
-  "flr-area-chart": createFlowRemoteComponentRenderer("AreaChart", AreaChart),
   "flr-autocomplete": createFlowRemoteComponentRenderer(
     "Autocomplete",
     Autocomplete,
@@ -148,6 +148,10 @@ export const flowComponents = {
   "flr-big-number": createFlowRemoteComponentRenderer("BigNumber", BigNumber),
   "flr-breadcrumb": createFlowRemoteComponentRenderer("Breadcrumb", Breadcrumb),
   "flr-button": createFlowRemoteComponentRenderer("Button", Button),
+  "flr-cartesian-chart": createFlowRemoteComponentRenderer(
+    "CartesianChart",
+    CartesianChart,
+  ),
   "flr-cartesian-grid": createFlowRemoteComponentRenderer(
     "CartesianGrid",
     CartesianGrid,
@@ -289,6 +293,7 @@ export const flowComponents = {
     LayoutCard,
   ),
   "flr-legend": createFlowRemoteComponentRenderer("Legend", Legend),
+  "flr-line": createFlowRemoteComponentRenderer("Line", Line),
   "flr-link": createFlowRemoteComponentRenderer("Link", Link),
   "flr-list-empty-view": createFlowRemoteComponentRenderer(
     "ListEmptyView",

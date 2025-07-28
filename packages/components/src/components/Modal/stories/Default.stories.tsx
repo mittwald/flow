@@ -12,7 +12,7 @@ import { ActionGroup } from "@/components/ActionGroup";
 import { asyncLongFunction } from "@/components/Button/stories/lib";
 import { Field, Form } from "@/integrations/react-hook-form";
 import { useForm } from "react-hook-form";
-import { action } from "@storybook/addon-actions";
+import { action } from "storybook/actions";
 import { Section } from "@/components/Section";
 import Align from "@/components/Align";
 import { ColumnLayout } from "@/components/ColumnLayout";

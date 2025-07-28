@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import * as Aria from "react-aria-components";
 import type { TextFieldBaseProps } from "@/components/TextFieldBase";
 import { TextFieldBase } from "@/components/TextFieldBase";
@@ -6,7 +5,7 @@ import styles from "./TextArea.module.scss";
 import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import { mergeRefs } from "@react-aria/utils";
+import { useObjectRef } from "@react-aria/utils";
 import { ReactAriaControlledValueFix } from "@/lib/react/ReactAriaControlledValueFix";
 
 export interface TextAreaProps
@@ -34,7 +33,7 @@ export const TextArea = flowComponent("TextArea", (props) => {
     ...rest
   } = props;
 
-  const localRef = useRef<HTMLTextAreaElement>(null);
+  const localRef = useObjectRef(ref);
 
   const getHeight = (rows: number) => {
     return `calc(var(--line-height--m) * ${rows} + (var(--form-control--padding-y) * 2))`;
@@ -58,7 +57,7 @@ export const TextArea = flowComponent("TextArea", (props) => {
         rows={rows}
         placeholder={placeholder}
         className={styles.textArea}
-        ref={mergeRefs(localRef, ref)}
+        ref={localRef}
         onChange={updateHeight}
         style={{
           minHeight: getHeight(rows),

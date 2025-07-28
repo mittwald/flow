@@ -10,7 +10,7 @@ import { IconPaperclip } from "@tabler/icons-react";
 import { Icon } from "@/components/Icon";
 import { useForm } from "react-hook-form";
 import { Form, typedField } from "@/integrations/react-hook-form";
-import { action } from "@storybook/addon-actions";
+import { action } from "storybook/actions";
 import { ActionGroup } from "@/components/ActionGroup";
 
 const meta: Meta<typeof FileField> = {
