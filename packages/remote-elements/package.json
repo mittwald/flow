@@ -29,13 +29,13 @@
   },
   "dependencies": {
     "@mittwald/flow-remote-core": "workspace:*",
-    "remeda": "^2.25.0",
+    "remeda": "^2.26.1",
     "type-fest": "^4.41.0"
   },
   "devDependencies": {
     "@mittwald/flow-react-components": "workspace:*",
     "@mittwald/typescript-config": "workspace:*",
-    "@types/node": "^22.16.2",
+    "@types/node": "^22.16.5",
     "nx": "^20.8.2",
     "prettier": "^3.6.2",
     "rimraf": "^6.0.1",

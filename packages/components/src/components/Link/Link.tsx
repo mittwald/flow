@@ -1,5 +1,5 @@
 import type { ComponentProps, ComponentType, PropsWithChildren } from "react";
-import React, { useContext } from "react";
+import { useContext } from "react";
 import * as Aria from "react-aria-components";
 import type { PropsContext } from "@/lib/propsContext";
 import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
@@ -50,9 +50,9 @@ export const Link = flowComponent("Link", (props) => {
 
   const { linkComponent: linkComponentFromContext } = useContext(linkContext);
   const Link = linkComponentFromProps
-    ? linkComponentFromProps
+    ? (linkComponentFromProps as typeof Aria.Link)
     : props.href && linkComponentFromContext
-      ? linkComponentFromContext
+      ? (linkComponentFromContext as typeof Aria.Link)
       : Aria.Link;
 
   const rootClassName = unstyled
