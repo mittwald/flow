@@ -2,14 +2,15 @@
 /* This file is auto-generated with the remote-components-generator */
 import React, { type FC, useContext } from "react";
 import {
-  ChartTooltip,
-  type ChartTooltipProps,
+  CartesianChart,
+  type CartesianChartProps,
 } from "@/components/CartesianChart";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
-const ChartTooltipView: FC<ChartTooltipProps> = (props) => {
-  const View = useContext(viewComponentContext)["ChartTooltip"] ?? ChartTooltip;
+const CartesianChartView: FC<CartesianChartProps> = (props) => {
+  const View =
+    useContext(viewComponentContext)["CartesianChart"] ?? CartesianChart;
   return <View {...props} />;
 };
 
-export default ChartTooltipView;
+export default CartesianChartView;
