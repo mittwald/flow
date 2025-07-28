@@ -1,7 +1,6 @@
 import {
   CartesianChart,
   type CartesianChartEmptyViewProps,
-  CartesianGrid,
   Flex,
   Heading,
   IconDanger,
@@ -42,9 +41,8 @@ export default () => {
         flexGrow
         {...props}
       >
-        <CartesianGrid />
-        <XAxis dataKey="Zeit" />
-        <YAxis domain={[0, 100]} unit=" %" />
+        <XAxis />
+        <YAxis />
       </CartesianChart>
     );
   };
