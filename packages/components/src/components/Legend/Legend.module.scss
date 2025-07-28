@@ -7,7 +7,7 @@
   gap: var(--legend--spacing-y) var(--legend--spacing-x);
 }
 
-:global(.flow--area-chart) {
+:global(.flow--cartesian-chart) {
   .legend {
     margin-top: var(--legend--spacing-y);
   }

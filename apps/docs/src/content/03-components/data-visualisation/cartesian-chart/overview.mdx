@@ -1,7 +1,7 @@
 # Playground
 
-Um das AreaChart zu rendern, benötigt es entweder einen Parent mit einer festen
-Höhe, oder das Chart selbst mit fester Höhe.
+Um das CartesianChart zu rendern, benötigt es entweder einen Parent mit einer
+festen Höhe, oder das Chart selbst mit fester Höhe.
 
 <LiveCodeEditor editorCollapsed />
 
@@ -13,7 +13,18 @@ Höhe, oder das Chart selbst mit fester Höhe.
 
 ---
 
-# Mit EmptyView
+# Kombiniere mit ...
+
+## Mit Lines und Areas
+
+Im Cartesian Chart können Lines, Areas oder eine Kombination aus beidem
+verwendet werden.
+
+<LiveCodeEditor example="types" editorCollapsed />
+
+---
+
+## Mit EmptyView
 
 Der EmptyView wird angezeigt, sobald die `data` des Charts entweder ein leeres
 Array enthält, oder komplett `undefined` ist. Somit kann sie für
@@ -21,4 +32,3 @@ Ausnahmezustände wie Ladefehler, Ladezustände oder leere Datenergebnisse genut
 werden.
 
 <LiveCodeEditor example="emptyView" editorCollapsed />
-

@@ -1,10 +1,7 @@
 import {
-  Area,
-  AreaChart,
-  type AreaChartEmptyViewProps,
+  CartesianChart,
+  type CartesianChartEmptyViewProps,
   CartesianGrid,
-  ChartLegend,
-  ChartTooltip,
   Flex,
   Heading,
   IconDanger,
@@ -16,7 +13,9 @@ import {
 } from "@mittwald/flow-react-components";
 
 export default () => {
-  const EmptyView = (props: AreaChartEmptyViewProps) => {
+  const EmptyView = (
+    props: CartesianChartEmptyViewProps,
+  ) => {
     if (props.data === undefined) {
       return (
         <IllustratedMessage color="danger">
@@ -35,23 +34,18 @@ export default () => {
     );
   };
 
-  const Chart = (props: AreaChartEmptyViewProps) => {
+  const Chart = (props: CartesianChartEmptyViewProps) => {
     return (
-      <AreaChart
+      <CartesianChart
         emptyView={EmptyView}
         height="300px"
         flexGrow
         {...props}
       >
         <CartesianGrid />
-        <Area dataKey="firstKey" />
-        <Area dataKey="secondKey" color="palatinate-blue" />
-        <Area dataKey="thirdKey" color="tangerine" />
-        <XAxis dataKey="name" />
-        <YAxis interval="equidistantPreserveStart" />
-        <ChartTooltip />
-        <ChartLegend />
-      </AreaChart>
+        <XAxis dataKey="Zeit" />
+        <YAxis domain={[0, 100]} unit=" %" />
+      </CartesianChart>
     );
   };
 
