@@ -5,11 +5,11 @@ import { getCategoricalColorByIndex } from "@/lib/tokens/getCategoricalColorByIn
 
 interface Props extends Pick<ProgressBarProps, "segments"> {
   percentage?: number;
-  segmentsTotalValue?: number;
+  segmentsTotalValue: number;
 }
 
 export const ProgressBarBar: FC<Props> = (props) => {
-  const { segments, segmentsTotalValue = 0, percentage } = props;
+  const { segments, segmentsTotalValue, percentage } = props;
 
   const segmentFill =
     segments?.map((s, i) => (
