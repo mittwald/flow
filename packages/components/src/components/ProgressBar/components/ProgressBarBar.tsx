@@ -14,19 +14,19 @@ export const ProgressBarBar: FC<Props> = (props) => {
   return (
     <div className={styles.bar}>
       <div className={styles.fill} style={{ width: percentage + "%" }}>
-        {segments &&
-          segmentsTotalValue &&
-          segments.map((s, i) => (
-            <div
-              key={s.title}
-              aria-hidden
-              style={{
-                backgroundColor: `var(--color--categorical--${s.color ?? getCategoricalColorByIndex(i)})`,
-                width: (100 / segmentsTotalValue) * s.value + "%",
-                height: "100%",
-              }}
-            />
-          ))}
+        {segments && segmentsTotalValue
+          ? segments.map((s, i) => (
+              <div
+                key={s.title}
+                aria-hidden
+                style={{
+                  backgroundColor: `var(--color--categorical--${s.color ?? getCategoricalColorByIndex(i)})`,
+                  width: (100 / segmentsTotalValue) * s.value + "%",
+                  height: "100%",
+                }}
+              />
+            ))
+          : null}
       </div>
     </div>
   );
