@@ -15,6 +15,7 @@ export type YAxisProps = Pick<
   | "domain"
   | "hide"
   | "unit"
+  | "tickFormatter"
 >;
 
 /** @flr-generate all */
