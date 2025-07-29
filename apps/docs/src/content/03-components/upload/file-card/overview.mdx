@@ -1,31 +1,33 @@
 # Playground
 
+Verwende  `<FileCard />`, um eine FileCard darzustellen. Diese kann auch als [FileCardList](/03-components/upload/file-card-list) erweitert werden.
+
 <LiveCodeEditor />
 
 ---
 
 # Mit Delete Button
-FileCards lassen sich mit `delete` unmittelbar entfernen.
+Verwende `delete`, um in der FileCard einen [Button](/03-components/actions/button) anzuzeigen, mit dem die Datei unmittelbar entfernt werden kann.
 
 <LiveCodeEditor example="delete" editorCollapsed />
 
 ---
 
 # Mit Link
-Die FileCard ermöglicht es, Dateien über einen Link zu öffnen, z. B. um ein Bild im neuen Tab darzustellen.
+Die FileCard ermöglicht es, Dateien über einen `href`-Link zu öffnen, z. B. um ein Bild in einem neuen Tab anzuzeigen.
 
 <LiveCodeEditor example="link" editorCollapsed />
 
 ---
 
 # Mit ContextMenu
-Im ContextMenu können wichtige Interaktionen aufgelistet werden.
+Nutze ein `<ContextMenu />` innerhalb der FileCard, um wichtige Interaktionen in einem [ContextMenu](/03-components/actions/context-menu) zu platzieren.
 
 <LiveCodeEditor example="contextMenu" editorCollapsed />
 
 ---
 
 # Mit Bild
-Statt einem passenden Icon, kann auch zur Vorschau ein Bild angezeigt werden.
+Statt einem passenden Icon, kann durch `imageSrc` zur Vorschau ein Bild angezeigt werden.
 
 <LiveCodeEditor example="image" editorCollapsed />
