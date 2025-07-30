@@ -79,8 +79,7 @@ export default () => {
           <TextField isRequired>
             <Label>Domain</Label>
           </TextField>
-        </Section>
-        <Section>
+
           <Header>
             <Heading>Domain-Inhaber</Heading>
             <Button
@@ -93,8 +92,7 @@ export default () => {
           <Text>
             Du hast noch keinen Domain-Inhaber angelegt.
           </Text>
-        </Section>
-        <Section>
+
           <Heading>Bestellübersicht</Heading>
           <ColumnLayout>
             <Align>
