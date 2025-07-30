@@ -48,7 +48,7 @@ export const LightBox = flowComponent("LightBox", (props) => {
   const propsContext: PropsContext = {
     ActionGroup: {
       className: styles.actionGroup,
-      Button: { variant: "soft", color: "light" },
+      Button: { variant: "solid", color: "light" },
       tunnelId: "actionGroup",
     },
   };
@@ -70,7 +70,11 @@ export const LightBox = flowComponent("LightBox", (props) => {
         <TunnelProvider>
           <DivView className={styles.content}>{children}</DivView>
           <DivView className={styles.actions}>
-            <ButtonView color="light" variant="soft" onPress={controller.close}>
+            <ButtonView
+              color="light"
+              variant="solid"
+              onPress={controller.close}
+            >
               <IconClose />
             </ButtonView>
             <TunnelExit id="actionGroup" />
