@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.374](https://github.com/mittwald/flow/compare/0.2.0-alpha.373...0.2.0-alpha.374) (2025-07-30)
+
+### Bug Fixes
+
+* **List:** remove datetime sorting ([#1804](https://github.com/mittwald/flow/issues/1804)) ([6ab0081](https://github.com/mittwald/flow/commit/6ab0081a20613cfa2029bc75788756cb670dbe6c))
+
 # [0.2.0-alpha.373](https://github.com/mittwald/flow/compare/0.2.0-alpha.372...0.2.0-alpha.373) (2025-07-30)
 
 ### Features
