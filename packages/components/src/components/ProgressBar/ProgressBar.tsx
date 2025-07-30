@@ -73,7 +73,7 @@ export const ProgressBar = flowComponent("ProgressBar", (props) => {
 
   const segmentsTotalValue = segments
     ? segments.map((s) => s.value).reduce((a, b) => a + b, 0)
-    : 0;
+    : undefined;
 
   return (
     <Aria.ProgressBar
