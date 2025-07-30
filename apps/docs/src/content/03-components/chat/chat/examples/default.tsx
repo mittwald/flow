@@ -69,7 +69,7 @@ import {
   <TextArea
     aria-label="Nachricht"
     rows={1}
-    autoResizeMaxRows={4}
+    autoResizeMaxRows={10}
   />
   <Button color="accent">Senden</Button>
 </Chat>;
