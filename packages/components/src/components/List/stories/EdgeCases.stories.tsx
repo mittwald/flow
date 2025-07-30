@@ -12,7 +12,6 @@ import { Render } from "@/lib/react/components/Render";
 import { usePromise } from "@mittwald/react-use-promise";
 import type { Meta, StoryObj } from "@storybook/react";
 import type { SortingFn } from "@tanstack/react-table";
-import { DateTime } from "luxon";
 import type List from "../List";
 import { domains } from "../testData/domainApi";
 import defaultMeta from "./Default.stories";
@@ -173,7 +172,6 @@ interface DomainWithBigIntId {
   tld: string;
   type: "Domain" | "Subdomain";
   verified: boolean;
-  createdAt: DateTime;
 }
 
 const tldLengthSortingFn: SortingFn<DomainWithBigIntId> = (
@@ -201,14 +199,12 @@ const domainTypeSortingFn: SortingFn<DomainWithBigIntId> = (
 };
 
 export const CustomSortingList = () => {
-  const domainsWithDateTime = domains.map((domain, index) => {
-    const daysAgo = index * 3 + Math.floor(Math.random() * 5);
+  const domainsWithBigInt = domains.map((domain, index) => {
     const bigIntId = BigInt(1000000000000 + index);
 
     return {
       ...domain,
       id: bigIntId,
-      createdAt: DateTime.now().minus({ days: daysAgo }),
     };
   });
 
@@ -216,13 +212,11 @@ export const CustomSortingList = () => {
 
   const bigIntSorting =
     SortingFunctions.bigInt as SortingFn<DomainWithBigIntId>;
-  const dateTimeSorting =
-    SortingFunctions.dateTime as SortingFn<DomainWithBigIntId>;
 
   return (
     <Section>
       <DomainList.List batchSize={10}>
-        <DomainList.StaticData data={domainsWithDateTime} />
+        <DomainList.StaticData data={domainsWithBigInt} />
 
         <DomainList.Sorting
           property="hostname"
@@ -246,21 +240,6 @@ export const CustomSortingList = () => {
           name="ID (absteigend)"
           direction="desc"
           customSortingFn={bigIntSorting}
-          defaultEnabled
-        />
-
-        <DomainList.Sorting
-          property="createdAt"
-          name="Erstelldatum (älteste zuerst)"
-          direction="asc"
-          customSortingFn={dateTimeSorting}
-        />
-
-        <DomainList.Sorting
-          property="createdAt"
-          name="Erstelldatum (neueste zuerst)"
-          direction="desc"
-          customSortingFn={dateTimeSorting}
           defaultEnabled
         />
 
@@ -299,7 +278,6 @@ export const CustomSortingList = () => {
               <Text>{domain.type}</Text>
               <Text>ID: {domain.id}</Text>
               <Text>TLD: {domain.tld}</Text>
-              <Text>Erstellt am: {domain.createdAt?.toLocaleString()}</Text>
               <ContextMenu>
                 <MenuItem>Details anzeigen</MenuItem>
                 <MenuItem>Löschen</MenuItem>
