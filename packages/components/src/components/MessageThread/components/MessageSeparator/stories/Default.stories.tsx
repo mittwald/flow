@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import { MessageSeparator } from "@/components/MessageSeparator/MessageSeparator";
 import {
   ContextualHelp,
   ContextualHelpTrigger,
@@ -8,6 +7,7 @@ import {
 import { Button } from "@/components/Button";
 import { Text } from "@/components/Text";
 import { Align } from "@/components/Align";
+import { MessageSeparator } from "@/components/MessageThread";
 
 const meta: Meta<typeof MessageSeparator> = {
   title: "Chat/MessageSeparator",
