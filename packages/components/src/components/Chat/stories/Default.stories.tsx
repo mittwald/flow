@@ -60,7 +60,7 @@ const meta: Meta<typeof Chat> = {
           </Content>
         </Message>
       </MessageThread>
-      <TextArea aria-label="message" rows={1} autoResizeMaxRows={4} />
+      <TextArea aria-label="message" rows={1} autoResizeMaxRows={10} />
       <Button color="accent">Submit</Button>
     </Chat>
   ),
@@ -94,7 +94,7 @@ export const WithUpload: Story = {
       <Button color="secondary" variant="plain" aria-label="file attachment">
         <IconAttachment />
       </Button>
-      <TextArea aria-label="message" rows={1} autoResizeMaxRows={4} />
+      <TextArea aria-label="message" rows={1} autoResizeMaxRows={10} />
       <Button color="accent">Submit</Button>
       <FileCardList>
         <FileCard name="Uploaded File 1" />
@@ -133,7 +133,7 @@ export const WithForm: Story = {
           }}
         >
           <Field name="message">
-            <TextArea aria-label="message" rows={1} autoResizeMaxRows={4} />
+            <TextArea aria-label="message" rows={1} autoResizeMaxRows={10} />
           </Field>
           <Button color="accent">Submit</Button>
         </Form>
