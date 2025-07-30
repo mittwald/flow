@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.371](https://github.com/mittwald/flow/compare/0.2.0-alpha.370...0.2.0-alpha.371) (2025-07-30)
+
+**Note:** Version bump only for package @mittwald/flow-remote-elements
+
 # [0.2.0-alpha.370](https://github.com/mittwald/flow/compare/0.2.0-alpha.369...0.2.0-alpha.370) (2025-07-30)
 
 **Note:** Version bump only for package @mittwald/flow-remote-elements
