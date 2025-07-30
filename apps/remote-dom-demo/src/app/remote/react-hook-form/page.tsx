@@ -19,7 +19,23 @@ import {
   Form,
   Field,
 } from "@mittwald/flow-remote-react-components/react-hook-form";
+import {
+  Policy,
+  RuleType,
+} from "@mittwald/flow-react-components/mittwald-password-tools-js";
+import { generatePasswordCreationFieldValidation } from "@mittwald/flow-react-components";
 import { useForm } from "react-hook-form";
+
+const customPolicy = Policy.fromDeclaration({
+  minComplexity: 1,
+  rules: [
+    {
+      ruleType: RuleType.length,
+      min: 2,
+      max: 5,
+    },
+  ],
+});
 
 export default function Page() {
   const form = useForm({
@@ -105,8 +121,14 @@ export default function Page() {
             </Option>
           </Select>
         </Field>
-        <Field name="password" rules={{ required: true }}>
-          <PasswordCreationField>
+        <Field
+          name="password"
+          rules={{
+            required: true,
+            validate: generatePasswordCreationFieldValidation(customPolicy),
+          }}
+        >
+          <PasswordCreationField validationPolicy={customPolicy}>
             <Label>Password</Label>
             <CopyButton />
           </PasswordCreationField>

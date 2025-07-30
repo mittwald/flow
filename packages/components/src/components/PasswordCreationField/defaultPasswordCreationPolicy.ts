@@ -1,5 +1,4 @@
-import { Policy } from "@mittwald/password-tools-js/policy";
-import { RuleType } from "@mittwald/password-tools-js/rules";
+import { Policy, RuleType } from "@/integrations/@mittwald/password-tools-js";
 
 export const defaultPasswordCreationPolicy = Policy.fromDeclaration({
   minComplexity: 3,

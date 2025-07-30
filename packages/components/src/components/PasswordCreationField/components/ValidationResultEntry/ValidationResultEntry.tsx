@@ -5,7 +5,7 @@ import { IconCircleCheck, IconCircleMinus } from "@tabler/icons-react";
 import generateValidationTranslation from "@/components/PasswordCreationField/lib/generateValidationTranslation";
 import locales from "./../../locales/*.locale.json";
 import styles from "./ValidationResultEntry.module.scss";
-import type { RuleValidationResult } from "@mittwald/password-tools-js/rules";
+import type { RuleValidationResult } from "@/integrations/@mittwald/password-tools-js";
 import { useLocalizedContextStringFormatter } from "@/components/TranslationProvider/useLocalizedContextStringFormatter";
 
 interface Props {

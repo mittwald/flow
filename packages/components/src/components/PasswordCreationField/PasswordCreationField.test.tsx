@@ -5,9 +5,9 @@ import { act } from "react";
 import PasswordCreationField from "@/components/PasswordCreationField/PasswordCreationField";
 import {
   Policy,
+  RuleType,
   type PolicyDeclaration,
-} from "@mittwald/password-tools-js/policy";
-import { RuleType } from "@mittwald/password-tools-js/rules";
+} from "@/integrations/@mittwald/password-tools-js";
 import { Label } from "@/components/Label";
 import { I18nProvider } from "react-aria";
 import { IconPlus } from "@/components/Icon/components/icons";
