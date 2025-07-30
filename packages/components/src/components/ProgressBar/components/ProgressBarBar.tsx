@@ -11,8 +11,6 @@ interface Props extends Pick<ProgressBarProps, "segments"> {
 export const ProgressBarBar: FC<Props> = (props) => {
   const { segments, segmentsTotalValue, percentage } = props;
 
-  console.log(percentage);
-
   const segmentFill =
     segmentsTotalValue && segments && segments?.length > 0
       ? segments.map((s, i) => (
