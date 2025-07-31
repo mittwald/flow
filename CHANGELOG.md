@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.375](https://github.com/mittwald/flow/compare/0.2.0-alpha.374...0.2.0-alpha.375) (2025-07-31)
+
+### Features
+
+* **Icon:** add KnowledgeHint icon ([#1805](https://github.com/mittwald/flow/issues/1805)) ([e670457](https://github.com/mittwald/flow/commit/e6704570b70b706b23dabeb25c84f0944b31a397))
+
 # [0.2.0-alpha.374](https://github.com/mittwald/flow/compare/0.2.0-alpha.373...0.2.0-alpha.374) (2025-07-30)
 
 ### Bug Fixes
