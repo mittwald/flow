@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.376](https://github.com/mittwald/flow/compare/0.2.0-alpha.375...0.2.0-alpha.376) (2025-07-31)
+
+### Bug Fixes
+
+* **Tunnel:** fix re-ordering issue in Tunnel children ([#1806](https://github.com/mittwald/flow/issues/1806)) ([c603260](https://github.com/mittwald/flow/commit/c6032601a316f9bae431a22867c83ddff7685dd8))
+
 # [0.2.0-alpha.375](https://github.com/mittwald/flow/compare/0.2.0-alpha.374...0.2.0-alpha.375) (2025-07-31)
 
 ### Features
