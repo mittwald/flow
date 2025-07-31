@@ -24,6 +24,7 @@ import {
   IconExtension,
   IconFile,
   IconForwardAddress,
+  IconKnowledgeHint,
   IconLeadFyndr,
   IconMainUser,
   IconMarketplace,
@@ -274,5 +275,9 @@ import {
   <LabeledValue>
     <Label>Ssh</Label>
     <IconSsh />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>KnowledgeHint</Label>
+    <IconKnowledgeHint />
   </LabeledValue>
 </ColumnLayout>;
