@@ -3,6 +3,7 @@ import TunnelExit from "./components/TunnelExit";
 import TunnelProvider from "./components/TunnelProvider";
 import { expect, test } from "vitest";
 import { render } from "@testing-library/react";
+import type { FC, PropsWithChildren } from "react";
 
 test("Exit is empty when no entry is set", async () => {
   const dom = render(
@@ -188,4 +189,34 @@ test("Render function in TunnelExit gets updated children from TunnelEntry", asy
     </TunnelProvider>,
   );
   expect(dom.getByTestId("exit").innerText).toBe("Hi Tunnel!");
+});
+
+test("Order of multiple children is preserved when entry is updated", async () => {
+  const ComponentWithEntry: FC<PropsWithChildren> = (props) => (
+    <TunnelEntry>{props.children}</TunnelEntry>
+  );
+
+  const dom = render(
+    <TunnelProvider>
+      <div data-testid="exit">
+        <TunnelExit />
+      </div>
+      <ComponentWithEntry>Hello </ComponentWithEntry>
+      <TunnelEntry>Tunnel!</TunnelEntry>
+    </TunnelProvider>,
+  );
+
+  expect(dom.getByTestId("exit").innerText).toBe("Hello Tunnel!");
+
+  dom.rerender(
+    <TunnelProvider>
+      <div data-testid="exit">
+        <TunnelExit />
+      </div>
+      <ComponentWithEntry>Bye </ComponentWithEntry>
+      <TunnelEntry>Tunnel!</TunnelEntry>
+    </TunnelProvider>,
+  );
+
+  expect(dom.getByTestId("exit").innerText).toBe("Bye Tunnel!");
 });

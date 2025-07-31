@@ -27,6 +27,7 @@
     "clean": "rimraf dist",
     "test": "exit 0",
     "test:compile": "tsc --noEmit",
+    "test:dev": "vitest dev",
     "test:unit": "vitest run"
   },
   "dependencies": {

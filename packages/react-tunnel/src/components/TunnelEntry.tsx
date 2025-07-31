@@ -29,10 +29,19 @@ export const TunnelEntry: FC<TunnelEntryProps> = (props) => {
   useEffect(() => {
     mounted.current = true;
     tunnel.setChildren(id, entryId, children);
+  }, [children, id, entryId]);
+
+  useEffect(() => {
+    /**
+     * Delete children only on ID changes. NOT if children itself changes,
+     * because this would delete the map entry with a subsequent re-insert. This
+     * changes the order of the map entries and thus the order of the children
+     * in the TunnelExit may be disrupted as well.
+     */
     return () => {
       tunnel.deleteChildren(id, entryId);
     };
-  }, [children, id, entryId]);
+  }, [id, entryId]);
 
   return null;
 };
