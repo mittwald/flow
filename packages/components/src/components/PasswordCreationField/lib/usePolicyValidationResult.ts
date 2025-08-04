@@ -48,7 +48,9 @@ export const usePolicyValidationResult = (
               setValidationResult(resolvedValue, {
                 complexity: resolvedValidationResult.complexity,
                 ruleResults: resolvedValidationRuleResults,
-                isValid: !resolvedValidationRuleResults.some((r) => !r.isValid),
+                isValid:
+                  resolvedValidationResult.isValid &&
+                  resolvedValidationRuleResults.every((r) => r.isValid),
               });
             });
           },

@@ -24,6 +24,7 @@
   "validation.general.failingComplexity": "Please increase the complexity of your password.",
   "validation.general.optimizeComplexity": "Your password meets the minimum requirements.",
   "validation.general.securePassword": "Awesome! Your password is secure.",
+  "validation.general.short.unspecified": "No specific requirements",
   "validation.hibp": "{isValid, select, true {The password is not compromised.} other {The password has been compromised. Please set a new one.}}",
   "validation.hibp.short": "{isValid, select, true {Not compromised} other {Compromised}}",
   "validation.length.max": "{max, plural, one {Please choose a password with a maximum of one character.} other {Please choose a password with a maximum of {max} characters.}}",

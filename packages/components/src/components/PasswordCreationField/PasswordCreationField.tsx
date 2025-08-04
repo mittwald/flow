@@ -121,7 +121,7 @@ export const PasswordCreationField = flowComponent(
       () => setIsLoading(() => true),
       ({ password, isValid, results }) => {
         setIsLoading(() => false);
-        setPolicyValidationResult(results);
+        setPolicyValidationResult(() => results);
         onValidationResult?.({ password, isValid });
       },
     );

@@ -9,12 +9,13 @@ import type { RuleValidationResult } from "@/integrations/@mittwald/password-too
 import { useLocalizedContextStringFormatter } from "@/components/TranslationProvider/useLocalizedContextStringFormatter";
 
 interface Props {
-  result: RuleValidationResult;
+  result: Partial<RuleValidationResult>;
+  unspecifiedRules?: boolean;
 }
 
 /** @internal */
 export const ValidationResultEntry: FC<Props> = (props) => {
-  const { result } = props;
+  const { result, unspecifiedRules = false } = props;
   const translate = useLocalizedContextStringFormatter(locales);
 
   const icon = result.isValid ? (
@@ -23,10 +24,15 @@ export const ValidationResultEntry: FC<Props> = (props) => {
     <IconCircleMinus color="red" />
   );
 
-  const [translationKey, translationValues] = generateValidationTranslation(
+  let [translationKey, translationValues] = generateValidationTranslation(
     result,
     true,
   );
+
+  if (unspecifiedRules) {
+    translationKey = `${translationKey}.unspecified`;
+    translationValues = {};
+  }
 
   return (
     <Text

@@ -21,7 +21,14 @@ export const getStateFromLatestPolicyValidationResult = (
     return undefined;
   }
 
-  if (result.complexity.actual <= result.complexity.min) {
+  if (result.complexity.actual < result.complexity.min) {
+    return {
+      isValid: false,
+      identifier: "failingComplexity",
+    };
+  }
+
+  if (result.complexity.actual === result.complexity.min) {
     return {
       isValid: result.isValid,
       identifier: "optimizeComplexity",

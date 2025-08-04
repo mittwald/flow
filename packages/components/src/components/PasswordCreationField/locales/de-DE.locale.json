@@ -24,6 +24,7 @@
   "validation.general.failingComplexity": "Bitte erhöhe die Komplexität deines Passwortes.",
   "validation.general.optimizeComplexity": "Dein Passwort erfüllt die Minimalanforderungen.",
   "validation.general.securePassword": "Sehr gut! Dein Passwort ist sicher.",
+  "validation.general.short.unspecified": "Keine spezifischen Anforderungen",
   "validation.hibp": "{isValid, select, true {Das Passwort ist nicht kompromittiert.} other {Das Passwort ist kompromittiert. Bitte vergib ein neues.}}",
   "validation.hibp.short": "{isValid, select, true {Nicht kompromittiert} other {Kompromittiert}}",
   "validation.length.max": "{max, plural, one {Bitte wähle ein Passwort mit maximal einem Zeichen.} other {Bitte wähle ein Passwort mit maximal {max} Zeichen.}}",
