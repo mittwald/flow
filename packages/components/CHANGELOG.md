@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.382](https://github.com/mittwald/flow/compare/0.2.0-alpha.381...0.2.0-alpha.382) (2025-08-04)
+
+### Bug Fixes
+
+* **NumberField:** fix incorrect defaultValue prop ([#1819](https://github.com/mittwald/flow/issues/1819)) ([0919c7b](https://github.com/mittwald/flow/commit/0919c7bc70f5e605a8c93b63bcabc5fe3dcb5bb6))
+
 # [0.2.0-alpha.381](https://github.com/mittwald/flow/compare/0.2.0-alpha.380...0.2.0-alpha.381) (2025-08-04)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
