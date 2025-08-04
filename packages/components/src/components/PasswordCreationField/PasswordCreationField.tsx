@@ -225,7 +225,6 @@ export const PasswordCreationField = flowComponent(
         setOptimisticPolicyValidationResult({
           isValid: "indeterminate",
         });
-        onChangeHandler(pastedValue);
       }
     };
 
