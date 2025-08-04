@@ -3,6 +3,42 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.365](https://github.com/mittwald/flow/compare/0.2.0-alpha.364...0.2.0-alpha.365) (2025-07-28)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.364](https://github.com/mittwald/flow/compare/0.2.0-alpha.363...0.2.0-alpha.364) (2025-07-28)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.363](https://github.com/mittwald/flow/compare/0.2.0-alpha.362...0.2.0-alpha.363) (2025-07-28)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.362](https://github.com/mittwald/flow/compare/0.2.0-alpha.361...0.2.0-alpha.362) (2025-07-28)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.361](https://github.com/mittwald/flow/compare/0.2.0-alpha.360...0.2.0-alpha.361) (2025-07-25)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.360](https://github.com/mittwald/flow/compare/0.2.0-alpha.359...0.2.0-alpha.360) (2025-07-24)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.359](https://github.com/mittwald/flow/compare/0.2.0-alpha.358...0.2.0-alpha.359) (2025-07-24)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.358](https://github.com/mittwald/flow/compare/0.2.0-alpha.357...0.2.0-alpha.358) (2025-07-24)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
+# [0.2.0-alpha.357](https://github.com/mittwald/flow/compare/0.2.0-alpha.356...0.2.0-alpha.357) (2025-07-23)
+
+**Note:** Version bump only for package @mittwald/ext-bridge
+
 # [0.2.0-alpha.356](https://github.com/mittwald/flow/compare/0.2.0-alpha.355...0.2.0-alpha.356) (2025-07-23)
 
 **Note:** Version bump only for package @mittwald/ext-bridge
