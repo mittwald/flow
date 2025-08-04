@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.379](https://github.com/mittwald/flow/compare/0.2.0-alpha.378...0.2.0-alpha.379) (2025-08-04)
+
+### Bug Fixes
+
+* **PasswordCreationField:** fix duplicate password insert ([#1813](https://github.com/mittwald/flow/issues/1813)) ([baae773](https://github.com/mittwald/flow/commit/baae773f5c4331dc1a683d0f2faf611eff086b5f))
+
 # [0.2.0-alpha.378](https://github.com/mittwald/flow/compare/0.2.0-alpha.377...0.2.0-alpha.378) (2025-08-01)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
