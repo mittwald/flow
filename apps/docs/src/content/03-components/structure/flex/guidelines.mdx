@@ -2,9 +2,7 @@
 Flex wurde eingeführt, um eine flexible Anordnung von Inhalten auf Basis 
 der CSS-Flexbox zu ermöglichen. So bleibt unser Designsystem offen genug, 
 um auch spezifische, schwer zu standardisierende Anforderungen und Layouts 
-abzubilden. Dadurch ergänzen wir bestehende Layout-Muster, die durch 
-[Align](/03-components/structure/align) abgebildet werden, um eine freiere 
-Layout-Möglichkeit. 
+abzubilden.
 
 
 ## Best practices
@@ -19,8 +17,25 @@ Designsystem bereits eine passende Lösung.
 
 ## Verwendung
 
-Verwende Flex, um …
+Verwende Flex, um freie Layouts zu gestalten, die nicht durch bestehende Patterns abgedeckt werden.
 
-- freie Layouts zu gestalten, die nicht durch bestehende Patterns abgedeckt werden.
-- Components in einem Flex-Container gezielt zu zentrieren, auszurichten oder zu verteilen.
+
+## Flex vs. Align
+
+Flex und [Align](/03-components/structure/align) sind sich als Layout-Components sehr ähnlich. 
+Um die beiden besser unterscheiden zu können, hier ein paar hilfreiche Anhaltspunkte.
+
+<DoAndDont>
+  <Plain heading="Verwende Flex, um ...">
+    - individuelle Layouts zu gestalten, die keinem festen UI Pattern folgen.
+    - bewusst vom Standard des Designsystems abzuweichen.
+
+  </Plain>
+
+  <Plain heading="Verwende Align, um ...">
+    - vorab definierte Components miteinander zu kombinieren und automatisch anzuordnen.
+    - wiederkehrende UI Patterns konsistent umzusetzen.
+
+  </Plain>
+</DoAndDont>
 
