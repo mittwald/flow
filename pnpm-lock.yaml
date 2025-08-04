@@ -356,8 +356,8 @@ importers:
         specifier: ^3.2.6
         version: 3.2.6
       '@mittwald/password-tools-js':
-        specifier: 3.0.0-alpha.6
-        version: 3.0.0-alpha.6
+        specifier: 3.0.0-alpha.12
+        version: 3.0.0-alpha.12
       '@mittwald/react-tunnel':
         specifier: workspace:*
         version: link:../react-tunnel
@@ -890,8 +890,8 @@ importers:
         specifier: workspace:*
         version: link:../core
       '@mittwald/password-tools-js':
-        specifier: 3.0.0-alpha.6
-        version: 3.0.0-alpha.6
+        specifier: 3.0.0-alpha.12
+        version: 3.0.0-alpha.12
       '@mittwald/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
@@ -2535,8 +2535,8 @@ packages:
   '@microsoft/tsdoc@0.15.1':
     resolution: {integrity: sha512-4aErSrCR/On/e5G2hDP0wjooqDdauzEbIq8hIkIe5pXV0rtWJZvdCEKL0ykZxex+IxIwBp0eGeV48hQN07dXtw==}
 
-  '@mittwald/password-tools-js@3.0.0-alpha.6':
-    resolution: {integrity: sha512-IoZ0H5mMnyeys3V25DYGydMluknJJqy66Q1ylu19GN2JpivbGAS9xhHcBKY0Z8UeDHhQkEnKW4yrjXKNADWR9A==}
+  '@mittwald/password-tools-js@3.0.0-alpha.12':
+    resolution: {integrity: sha512-MIX1yQJ9LfsCFQC1msDE6SRJOWUfPTpECeP1vdnzywXwc3UzHKX5JZ5cXN1LlGiZ7A7+Wxaxv/uiBSjEmUPM9g==}
     hasBin: true
 
   '@mittwald/react-use-promise@3.0.4':
@@ -5253,8 +5253,8 @@ packages:
   css-select@4.3.0:
     resolution: {integrity: sha512-wPpOYtnsVontu2mODhA19JrqWxNsfdatRKd64kmpRbQgh1KtItko5sTnEpPdpSaJszTOhEMlF/RPz28qj4HqhQ==}
 
-  css-what@6.1.0:
-    resolution: {integrity: sha512-HTUrgRJ7r4dsZKU6GjmpfRK1O76h97Z8MfS1G0FozR+oF2kG6Vfe8JE6zwrkbxigziPHinCJ+gCPjA9EaBDtRw==}
+  css-what@6.2.2:
+    resolution: {integrity: sha512-u/O3vwbptzhMs3L1fQE82ZSLHQQfto5gyZzwteVIEyeaY5Fc7R4dapF/BvRoSYFeqfBk4m0V1Vafq5Pjv25wvA==}
     engines: {node: '>= 6'}
 
   css.escape@1.5.1:
@@ -11766,7 +11766,7 @@ snapshots:
 
   '@microsoft/tsdoc@0.15.1': {}
 
-  '@mittwald/password-tools-js@3.0.0-alpha.6':
+  '@mittwald/password-tools-js@3.0.0-alpha.12':
     dependencies:
       '@zxcvbn-ts/core': 3.0.4
       '@zxcvbn-ts/language-common': 3.0.4
@@ -15220,12 +15220,12 @@ snapshots:
   css-select@4.3.0:
     dependencies:
       boolbase: 1.0.0
-      css-what: 6.1.0
+      css-what: 6.2.2
       domhandler: 4.3.1
       domutils: 2.8.0
       nth-check: 2.1.1
 
-  css-what@6.1.0: {}
+  css-what@6.2.2: {}
 
   css.escape@1.5.1: {}
 

@@ -16,44 +16,44 @@ export const usePolicyValidationResult = (
 ) => {
   useEffect(() => {
     onValidationStart?.();
-    const validationResult = validationPolicy.validate(password);
+    validationPolicy.validate(password).then((validationResult) => {
+      const setValidationResult = (
+        password: string,
+        policyValidationResult: PolicyValidationResult,
+      ) => {
+        const isValid = Boolean(policyValidationResult.isValid);
+        onValidationResult?.({
+          password,
+          isValid,
+          results: policyValidationResult as ResolvedPolicyValidationResult,
+        });
+      };
 
-    const setValidationResult = (
-      password: string,
-      policyValidationResult: PolicyValidationResult,
-    ) => {
-      const isValid = Boolean(policyValidationResult.isValid);
-      onValidationResult?.({
-        password,
-        isValid,
-        results: policyValidationResult as ResolvedPolicyValidationResult,
-      });
-    };
+      startTransition(async () => {
+        if (!isPromise(validationResult.isValid)) {
+          return setValidationResult(password, validationResult);
+        }
 
-    startTransition(async () => {
-      if (!isPromise(validationResult.isValid)) {
-        return setValidationResult(password, validationResult);
-      }
-
-      void Promise.all([
-        Promise.resolve(password),
-        Promise.resolve(validationResult),
-        ...validationResult.ruleResults,
-      ]).then(
-        ([
-          resolvedValue,
-          resolvedValidationResult,
-          ...resolvedValidationRuleResults
-        ]) => {
-          startTransition(() => {
-            setValidationResult(resolvedValue, {
-              complexity: resolvedValidationResult.complexity,
-              ruleResults: resolvedValidationRuleResults,
-              isValid: !resolvedValidationRuleResults.some((r) => !r.isValid),
+        void Promise.all([
+          Promise.resolve(password),
+          Promise.resolve(validationResult),
+          ...validationResult.ruleResults,
+        ]).then(
+          ([
+            resolvedValue,
+            resolvedValidationResult,
+            ...resolvedValidationRuleResults
+          ]) => {
+            startTransition(() => {
+              setValidationResult(resolvedValue, {
+                complexity: resolvedValidationResult.complexity,
+                ruleResults: resolvedValidationRuleResults,
+                isValid: !resolvedValidationRuleResults.some((r) => !r.isValid),
+              });
             });
-          });
-        },
-      );
+          },
+        );
+      });
     });
   }, [password, validationPolicy]);
 };

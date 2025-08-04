@@ -24,7 +24,7 @@ export default () => {
           },
           {
             ruleType: RuleType.regex,
-            pattern: "aa",
+            pattern: "^[0-9]",
             min: 1,
             max: 2,
           },

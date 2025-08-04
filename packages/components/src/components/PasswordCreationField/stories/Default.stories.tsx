@@ -34,7 +34,7 @@ const policyDecl: PolicyDeclaration = {
     },
     {
       ruleType: RuleType.regex,
-      pattern: "[A-B]",
+      pattern: "^[0-9]",
       min: 1,
       max: 2,
     },
@@ -54,9 +54,16 @@ const policyDecl: PolicyDeclaration = {
       max: 2,
     },
     {
-      ruleType: RuleType.regex,
-      pattern: "[-_§$%&/=,;.#]",
+      identifier: "numbers",
+      ruleType: RuleType.charPool,
+      charPools: ["numbers"],
       min: 1,
+      max: 2,
+    },
+    {
+      ruleType: RuleType.blocklist,
+      blocklist: ["foo", "bar"],
+      substringMatch: true,
     },
   ],
 };

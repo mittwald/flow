@@ -9,7 +9,7 @@ export const generatePasswordCreationFieldValidation =
       return true;
     }
 
-    const validationResult = validationPolicy.validate(value);
+    const validationResult = await validationPolicy.validate(value);
 
     if (isPromise(validationResult.isValid)) {
       return await validationResult.isValid;
