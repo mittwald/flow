@@ -1,4 +1,4 @@
-import type { Policy } from "@mittwald/password-tools-js/policy";
+import type { Policy } from "@/integrations/@mittwald/password-tools-js";
 import { defaultPasswordCreationPolicy } from "@/components/PasswordCreationField/defaultPasswordCreationPolicy";
 import { isPromise } from "remeda";
 
@@ -9,7 +9,7 @@ export const generatePasswordCreationFieldValidation =
       return true;
     }
 
-    const validationResult = validationPolicy.validate(value);
+    const validationResult = await validationPolicy.validate(value);
 
     if (isPromise(validationResult.isValid)) {
       return await validationResult.isValid;

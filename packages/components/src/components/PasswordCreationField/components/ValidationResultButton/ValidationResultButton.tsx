@@ -23,18 +23,23 @@ export const ValidationResultButton: FC<Props> = (props) => {
 
   const translate = useLocalizedStringFormatter(locales);
 
-  const validationResultComponents = policyValidationResult?.ruleResults
-    ?.filter((r) => {
-      return isEmptyValue ? !r.isValid : true;
-    })
-    .map((result, index) => {
+  let validationResults = policyValidationResult?.ruleResults?.filter((r) => {
+    return isEmptyValue ? !r.isValid : true;
+  });
+  if (validationResults && validationResults.length === 0 && isEmptyValue) {
+    // if we have no rules to show on first info - just list them all
+    validationResults = policyValidationResult?.ruleResults;
+  }
+
+  const validationResultComponents =
+    validationResults?.map((result, index) => {
       return (
         <ValidationResultEntry
           key={`${result.identifier}-${index}`}
           result={result}
         />
       );
-    });
+    }) ?? [];
 
   return (
     <ContextualHelpTrigger>
@@ -45,6 +50,9 @@ export const ValidationResultButton: FC<Props> = (props) => {
       />
       <ContextualHelp>
         <Heading>{translate.format("password.requirements.heading")}</Heading>
+        {validationResultComponents.length === 0 && (
+          <ValidationResultEntry result={{ isValid: true }} unspecifiedRules />
+        )}
         {validationResultComponents}
       </ContextualHelp>
     </ContextualHelpTrigger>

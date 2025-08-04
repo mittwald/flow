@@ -1,4 +1,4 @@
-import { type RuleValidationResult } from "@mittwald/password-tools-js/rules";
+import { type RuleValidationResult } from "@/integrations/@mittwald/password-tools-js";
 import type { ResolvedPolicyValidationResult } from "@/components/PasswordCreationField/PasswordCreationField";
 
 /** @internal */
@@ -21,7 +21,14 @@ export const getStateFromLatestPolicyValidationResult = (
     return undefined;
   }
 
-  if (result.complexity.actual <= result.complexity.min) {
+  if (result.complexity.actual < result.complexity.min) {
+    return {
+      isValid: false,
+      identifier: "failingComplexity",
+    };
+  }
+
+  if (result.complexity.actual === result.complexity.min) {
     return {
       isValid: result.isValid,
       identifier: "optimizeComplexity",

@@ -5,9 +5,9 @@ import { act } from "react";
 import PasswordCreationField from "@/components/PasswordCreationField/PasswordCreationField";
 import {
   Policy,
+  RuleType,
   type PolicyDeclaration,
-} from "@mittwald/password-tools-js/policy";
-import { RuleType } from "@mittwald/password-tools-js/rules";
+} from "@/integrations/@mittwald/password-tools-js";
 import { Label } from "@/components/Label";
 import { I18nProvider } from "react-aria";
 import { IconPlus } from "@/components/Icon/components/icons";
@@ -154,7 +154,9 @@ describe("PasswordCreationField Tests", () => {
       await sleep(250);
     });
 
-    expect(rules[0]).toHaveAttribute("data-rule-valid", "false");
+    await waitFor(() =>
+      expect(rules[0]).toHaveAttribute("data-rule-valid", "false"),
+    );
     expect(rules[0]).toHaveTextContent("Maximal 2 Zahlen");
   });
 
@@ -237,11 +239,13 @@ describe("PasswordCreationField Tests", () => {
     assert(generateButton);
 
     await act(() => fireEvent.click(generateButton));
-    expect(inputElement.value).toHaveLength(12);
-    expect(complexityElement).toHaveAttribute(
-      "data-complexity-status",
-      "success",
-    );
+    await waitFor(() => {
+      expect(inputElement.value).toHaveLength(12);
+      expect(complexityElement).toHaveAttribute(
+        "data-complexity-status",
+        "success",
+      );
+    });
   });
 
   test("will pass custom buttons to input area", async () => {
@@ -302,12 +306,14 @@ describe("PasswordCreationField Tests", () => {
       await sleep(250);
     });
 
-    expect(onChangeHandler).toHaveBeenLastCalledWith("invalid");
-    expect(onValidationResult).toHaveBeenLastCalledWith({
-      password: "invalid",
-      isValid: false,
+    await waitFor(() => {
+      expect(onChangeHandler).toHaveBeenLastCalledWith("invalid");
+      expect(onValidationResult).toHaveBeenLastCalledWith({
+        password: "invalid",
+        isValid: false,
+      });
+      expect(inputElement).toHaveValue("invalid");
     });
-    expect(inputElement).toHaveValue("invalid");
 
     await act(async () => {
       fireEvent.change(inputElement, {
@@ -315,11 +321,14 @@ describe("PasswordCreationField Tests", () => {
       });
       await sleep(250);
     });
-    expect(onChangeHandler).toHaveBeenLastCalledWith("d!iBCsc8(l~i");
-    expect(onValidationResult).toHaveBeenLastCalledWith({
-      password: "d!iBCsc8(l~i",
-      isValid: true,
+
+    await waitFor(() => {
+      expect(onChangeHandler).toHaveBeenLastCalledWith("d!iBCsc8(l~i");
+      expect(onValidationResult).toHaveBeenLastCalledWith({
+        password: "d!iBCsc8(l~i",
+        isValid: true,
+      });
+      expect(inputElement).toHaveValue("d!iBCsc8(l~i");
     });
-    expect(inputElement).toHaveValue("d!iBCsc8(l~i");
   });
 });

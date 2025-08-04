@@ -1,7 +1,7 @@
 import {
   RuleType,
   type RuleValidationResult,
-} from "@mittwald/password-tools-js/rules";
+} from "@/integrations/@mittwald/password-tools-js";
 
 const generateTranslationString = (
   rule: Partial<RuleValidationResult> & { translationKey?: string },
