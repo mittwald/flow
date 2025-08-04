@@ -74,6 +74,7 @@ const meta: Meta<typeof Field> = {
           </Field>
 
           <ActionGroup>
+            <Button onPress={() => form.reset()}>Reset</Button>
             <Button type="submit">Submit</Button>
           </ActionGroup>
         </Section>
