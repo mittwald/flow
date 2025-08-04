@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/react-tunnel",
-  "version": "0.2.0-alpha.365",
+  "version": "0.2.0-alpha.379",
   "type": "module",
   "description": "It's like a Portal – but with React components",
   "keywords": [
@@ -27,6 +27,7 @@
     "clean": "rimraf dist",
     "test": "exit 0",
     "test:compile": "tsc --noEmit",
+    "test:dev": "vitest dev",
     "test:unit": "vitest run"
   },
   "dependencies": {

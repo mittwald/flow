@@ -23,6 +23,7 @@ export const ProgressBarLegend: FC<Props> = (props) => {
     <Legend className={styles.legend}>
       {segments.map((s, i) => (
         <LegendItem
+          key={s.title}
           color={s.color ?? getCategoricalColorByIndex(i)}
         >{`${s.title} (${s.valueText ?? (formatOptions ? formatter.format(s.value) : `${s.value} %`)})`}</LegendItem>
       ))}

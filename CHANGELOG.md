@@ -3,6 +3,76 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.379](https://github.com/mittwald/flow/compare/0.2.0-alpha.378...0.2.0-alpha.379) (2025-08-04)
+
+### Bug Fixes
+
+* **PasswordCreationField:** fix duplicate password insert ([#1813](https://github.com/mittwald/flow/issues/1813)) ([baae773](https://github.com/mittwald/flow/commit/baae773f5c4331dc1a683d0f2faf611eff086b5f))
+
+# [0.2.0-alpha.378](https://github.com/mittwald/flow/compare/0.2.0-alpha.377...0.2.0-alpha.378) (2025-08-01)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.377](https://github.com/mittwald/flow/compare/0.2.0-alpha.376...0.2.0-alpha.377) (2025-07-31)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.376](https://github.com/mittwald/flow/compare/0.2.0-alpha.375...0.2.0-alpha.376) (2025-07-31)
+
+### Bug Fixes
+
+* **Tunnel:** fix re-ordering issue in Tunnel children ([#1806](https://github.com/mittwald/flow/issues/1806)) ([c603260](https://github.com/mittwald/flow/commit/c6032601a316f9bae431a22867c83ddff7685dd8))
+
+# [0.2.0-alpha.375](https://github.com/mittwald/flow/compare/0.2.0-alpha.374...0.2.0-alpha.375) (2025-07-31)
+
+### Features
+
+* **Icon:** add KnowledgeHint icon ([#1805](https://github.com/mittwald/flow/issues/1805)) ([e670457](https://github.com/mittwald/flow/commit/e6704570b70b706b23dabeb25c84f0944b31a397))
+
+# [0.2.0-alpha.374](https://github.com/mittwald/flow/compare/0.2.0-alpha.373...0.2.0-alpha.374) (2025-07-30)
+
+### Bug Fixes
+
+* **List:** remove datetime sorting ([#1804](https://github.com/mittwald/flow/issues/1804)) ([6ab0081](https://github.com/mittwald/flow/commit/6ab0081a20613cfa2029bc75788756cb670dbe6c))
+
+# [0.2.0-alpha.373](https://github.com/mittwald/flow/compare/0.2.0-alpha.372...0.2.0-alpha.373) (2025-07-30)
+
+### Features
+
+* **LightBox:** use solid buttons ([#1803](https://github.com/mittwald/flow/issues/1803)) ([51dbea6](https://github.com/mittwald/flow/commit/51dbea660740f280668925f931ff6f13d1492d07))
+
+# [0.2.0-alpha.372](https://github.com/mittwald/flow/compare/0.2.0-alpha.371...0.2.0-alpha.372) (2025-07-30)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.371](https://github.com/mittwald/flow/compare/0.2.0-alpha.370...0.2.0-alpha.371) (2025-07-30)
+
+### Bug Fixes
+
+* **ProgressBar:** fix empty progress bar ([#1799](https://github.com/mittwald/flow/issues/1799)) ([387c784](https://github.com/mittwald/flow/commit/387c7841d2229071708cc6c8bf09b0dd3403e0c6))
+
+# [0.2.0-alpha.370](https://github.com/mittwald/flow/compare/0.2.0-alpha.369...0.2.0-alpha.370) (2025-07-30)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.369](https://github.com/mittwald/flow/compare/0.2.0-alpha.368...0.2.0-alpha.369) (2025-07-29)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.368](https://github.com/mittwald/flow/compare/0.2.0-alpha.367...0.2.0-alpha.368) (2025-07-29)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.367](https://github.com/mittwald/flow/compare/0.2.0-alpha.366...0.2.0-alpha.367) (2025-07-29)
+
+### Features
+
+* **CartesianChart:** support tick formatter ([#1797](https://github.com/mittwald/flow/issues/1797)) ([1530577](https://github.com/mittwald/flow/commit/15305779ec0dbefdfee6b03bda1973a0fa4b4091))
+
+# [0.2.0-alpha.366](https://github.com/mittwald/flow/compare/0.2.0-alpha.365...0.2.0-alpha.366) (2025-07-29)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
 # [0.2.0-alpha.365](https://github.com/mittwald/flow/compare/0.2.0-alpha.364...0.2.0-alpha.365) (2025-07-28)
 
 **Note:** Version bump only for package @mittwald/flow-project

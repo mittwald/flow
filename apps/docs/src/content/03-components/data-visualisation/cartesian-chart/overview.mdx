@@ -1,34 +1,29 @@
 # Playground
 
-Um das CartesianChart zu rendern, benötigt es entweder einen Parent mit einer
-festen Höhe, oder das Chart selbst mit fester Höhe.
+Verwende `<CartesianChart />`, um ein CartesianChart darzustellen. Beachte dabei, dass zum Rendern entweder das übergeordnete Parent eine feste Höhe vorgeben muss oder das Chart selbst über die Property `height` eine eigene Höhe erhalten muss.
 
 <LiveCodeEditor editorCollapsed />
 
 ---
 
-# Synchronisierte Charts
+# Darstellungstypen
 
-<LiveCodeEditor example="synced" editorCollapsed />
-
----
-
-# Kombiniere mit ...
-
-## Mit Lines und Areas
-
-Im Cartesian Chart können Lines, Areas oder eine Kombination aus beidem
-verwendet werden.
+Im CartesianChart können unterschiedliche Darstellungstypen wie `<Area />`, `<Line />` oder eine Kombination aus beiden verwendet werden.
 
 <LiveCodeEditor example="types" editorCollapsed />
 
 ---
 
+# Synchronisierte Charts
+
+Zwei CartesianCharts können synchronisiert werden, um den gleichen Zeitraum darzustellen. Dadurch lassen sich verschiedene Metriken zeitlich exakt vergleichen.
+
+<LiveCodeEditor example="synced" editorCollapsed />
+
+---
+
 ## Mit EmptyView
 
-Der EmptyView wird angezeigt, sobald die `data` des Charts entweder ein leeres
-Array enthält, oder komplett `undefined` ist. Somit kann sie für
-Ausnahmezustände wie Ladefehler, Ladezustände oder leere Datenergebnisse genutzt
-werden.
+Der EmptyView wird angezeigt, sobald die Property `data` des Charts entweder ein leeres Array enthält oder `undefined` ist. Er dient dazu, leere Zustände visuell zu kennzeichnen und bietet Orientierung bei Ausnahmefällen wie Ladefehlern, fehlgeschlagenen Datenabfragen oder nicht vorhandenen Ergebnissen.
 
 <LiveCodeEditor example="emptyView" editorCollapsed />

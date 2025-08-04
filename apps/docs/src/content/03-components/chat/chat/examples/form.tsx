@@ -61,7 +61,7 @@ export default () => {
           <TextArea
             aria-label="message"
             rows={1}
-            autoResizeMaxRows={4}
+            autoResizeMaxRows={10}
           />
         </Field>
         <Button color="accent" type="submit">

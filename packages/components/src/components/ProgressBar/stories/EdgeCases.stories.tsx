@@ -51,3 +51,17 @@ export const WithManySegments: Story = {
     </ProgressBar>
   ),
 };
+
+export const WithZeroValueSegments: Story = {
+  args: {
+    segments: [
+      { title: "Item 1", value: 0 },
+      { title: "Item 2", value: 0 },
+    ],
+  },
+  render: (props) => (
+    <ProgressBar {...props}>
+      <Label>Storage</Label>
+    </ProgressBar>
+  ),
+};

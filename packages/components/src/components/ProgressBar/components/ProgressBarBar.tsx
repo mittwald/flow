@@ -11,22 +11,25 @@ interface Props extends Pick<ProgressBarProps, "segments"> {
 export const ProgressBarBar: FC<Props> = (props) => {
   const { segments, segmentsTotalValue, percentage } = props;
 
+  const segmentFill =
+    segmentsTotalValue && segments && segments?.length > 0
+      ? segments.map((s, i) => (
+          <div
+            key={s.title}
+            aria-hidden
+            style={{
+              backgroundColor: `var(--color--categorical--${s.color ?? getCategoricalColorByIndex(i)})`,
+              width: (100 / segmentsTotalValue) * s.value + "%",
+              height: "100%",
+            }}
+          />
+        ))
+      : null;
+
   return (
     <div className={styles.bar}>
       <div className={styles.fill} style={{ width: percentage + "%" }}>
-        {segments &&
-          segmentsTotalValue &&
-          segments.map((s, i) => (
-            <div
-              key={s.title}
-              aria-hidden
-              style={{
-                backgroundColor: `var(--color--categorical--${s.color ?? getCategoricalColorByIndex(i)})`,
-                width: (100 / segmentsTotalValue) * s.value + "%",
-                height: "100%",
-              }}
-            />
-          ))}
+        {segmentFill}
       </div>
     </div>
   );
