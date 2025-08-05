@@ -9,7 +9,7 @@ import React, { Children, isValidElement } from "react";
 import type { Components, Options } from "react-markdown";
 import ReactMarkdown from "react-markdown";
 import styles from "./Markdown.module.scss";
-import { isRemoteTextRenderProps } from "@/lib/react/remote";
+import { extractTextFromFirstChild } from "@/lib/react/remote";
 
 export interface MarkdownProps extends Omit<Options, "components"> {
   /** The color schema of the markdown component. */
@@ -104,14 +104,7 @@ export const Markdown: FC<MarkdownProps> = (props) => {
     ),
   };
 
-  const firstChild = React.Children.toArray(children)[0];
-
-  const textContent =
-    typeof firstChild === "string"
-      ? firstChild
-      : isValidElement(firstChild) && isRemoteTextRenderProps(firstChild.props)
-        ? firstChild.props.remote.data
-        : "";
+  const textContent = extractTextFromFirstChild(children);
 
   return (
     <div className={styles.markdown} {...rest}>
