@@ -116,11 +116,7 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
   };
 
   return (
-    <PropsContextProvider
-      props={propsContext}
-      mergeInParentContext
-      dependencies={[menuIsOpen, controller]}
-    >
+    <PropsContextProvider props={propsContext} mergeInParentContext>
       <div {...focusWithin.focusWithinProps} ref={container}>
         <UNSAFE_PortalProvider getContainer={() => container.current}>
           <Aria.Autocomplete
