@@ -37,7 +37,6 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
   const controller = useOverlayController("Popover", {
     reuseControllerFromContext: false,
   });
-  const menuIsOpen = controller.useIsOpen();
 
   const focusWithin = useFocusWithin({
     onBlurWithin: controller.close,
@@ -45,7 +44,7 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
 
   const inputProps: SearchFieldProps & TextFieldProps = {
     onKeyDown: (e) => {
-      if (e.key === "Enter" && menuIsOpen) {
+      if (e.key === "Enter" && controller.isOpen) {
         e.preventDefault();
       }
     },
@@ -95,7 +94,7 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
   const handleOnInputChange = (value: string) => {
     if (!value) {
       controller.close();
-    } else if (!menuIsOpen) {
+    } else if (!controller.isOpen) {
       controller.open();
     }
   };

@@ -3,6 +3,7 @@ import type {
   RemoteTextRendererProps,
 } from "@mittwald/remote-dom-react/host";
 import { isObjectType, isString } from "remeda";
+import { Children, isValidElement, type ReactNode } from "react";
 
 export function isRemoteComponentRendererProps(
   props: unknown,
@@ -14,6 +15,15 @@ export function isRemoteComponentRendererProps(
     "receiver" in props
   );
 }
+
+export const extractTextFromFirstChild = (children: ReactNode) => {
+  const firstChild = Children.toArray(children)[0];
+  return typeof firstChild === "string"
+    ? firstChild
+    : isValidElement(firstChild) && isRemoteTextRenderProps(firstChild.props)
+      ? firstChild.props.remote.data
+      : undefined;
+};
 
 export function isRemoteTextRenderProps(
   props: unknown,

@@ -41,7 +41,7 @@ export default function Page() {
   const form = useForm({
     defaultValues: {
       name: "",
-      email: "foo.bar@",
+      email: "foo",
       confirm: false,
       age: 20,
       comment: "",
@@ -86,12 +86,8 @@ export default function Page() {
             <TextField>
               <Label>Email</Label>
             </TextField>
-            <Option textValue="Foo" value="Foo">
-              Foo
-            </Option>
-            <Option textValue="Bar" value="Bar">
-              Bar
-            </Option>
+            <Option>Foo</Option>
+            <Option>Bar</Option>
           </Autocomplete>
         </Field>
         <Field name="comment">
@@ -102,23 +98,15 @@ export default function Page() {
         <Field name="city">
           <ComboBox>
             <Label>City</Label>
-            <Option value="Minden" textValue="Minden">
-              Minden
-            </Option>
-            <Option value="Espelkamp" textValue="Espelkamp">
-              Espelkamp
-            </Option>
+            <Option>Minden</Option>
+            <Option>Espelkamp</Option>
           </ComboBox>
         </Field>
         <Field name="city2">
           <Select>
             <Label>City</Label>
-            <Option value="Minden" textValue="Minden">
-              Minden
-            </Option>
-            <Option value="Espelkamp" textValue="Espelkamp">
-              Espelkamp
-            </Option>
+            <Option>Minden</Option>
+            <Option>Espelkamp</Option>
           </Select>
         </Field>
         <Field
