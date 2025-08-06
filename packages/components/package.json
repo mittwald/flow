@@ -57,7 +57,7 @@
   "dependencies": {
     "@chakra-ui/live-region": "^2.1.0",
     "@internationalized/string-compiler": "^3.2.6",
-    "@mittwald/password-tools-js": "3.0.0-alpha.13",
+    "@mittwald/password-tools-js": "3.0.0-alpha.14",
     "@mittwald/react-tunnel": "workspace:*",
     "@mittwald/react-use-promise": "^3.0.4",
     "@react-aria/form": "^3.1.0",
