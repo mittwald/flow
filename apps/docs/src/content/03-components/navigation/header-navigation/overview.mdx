@@ -1,21 +1,32 @@
 # Playground
 
+Verwende `<HeaderNavigation />`, um eine HeaderNavigation darzustellen. Enthaltene [Buttons](/03-components/actions/button) und [Links](/03-components/navigation/link) werden automatisch im passenden Stil formatiert.
+
 <LiveCodeEditor />
 
 ---
 
 # Mit Avatar und ContextMenu
 
+[Buttons](/03-components/actions/button) und der [Avatare](/03-components/content/avatar) können als Trigger für [ContextMenus](/03-components/actions/context-menu) verwendet werden.
+
 <LiveCodeEditor example="contextMenu" editorCollapsed />
 
 ---
 
-# Color Light und Dark
+# Colors 
 
-## Dark
+## Light und Dark
+
+Zusätzlich zu der Standard-Color, kann die HeaderNavigation in Light und Dark dargestellt werden. Beide Colors sind Alternativen zur `Primary` Farbe, falls diese nicht auf farbigen oder dekorativen Hintergründen funktionieren.
+
+<LiveCodeEditor example="light" bgColor="dark" editorCollapsed />
 
 <LiveCodeEditor example="dark" bgColor="light" editorCollapsed />
 
-## Light
+**Light:** Verwende die Light-Color, bei dunklen Hintergründen mit einem HSL Lightness-Wert von weniger als 50.
 
-<LiveCodeEditor example="light" bgColor="dark" editorCollapsed />
+**Dark:** Verwende die Dark-Color, bei hellen, farbigen Hintergründen mit einem HSL Lightness-Wert von größer als 50.
+
+
+
