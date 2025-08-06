@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.386](https://github.com/mittwald/flow/compare/0.2.0-alpha.385...0.2.0-alpha.386) (2025-08-06)
+
+### Bug Fixes
+
+* **Option:** fixes plain text childs in option ([#1822](https://github.com/mittwald/flow/issues/1822)) ([0a1f7a3](https://github.com/mittwald/flow/commit/0a1f7a31ee08d476f42168a9d6f5060b76d27dd9))
+
+# [0.2.0-alpha.385](https://github.com/mittwald/flow/compare/0.2.0-alpha.384...0.2.0-alpha.385) (2025-08-05)
+
+### Bug Fixes
+
+* **AutoComplete:** fix endless loop when using multiple AutoComplete components ([#1821](https://github.com/mittwald/flow/issues/1821)) ([9c9e1a3](https://github.com/mittwald/flow/commit/9c9e1a38fc4e43642b076d84ac43a72e019e878e))
+
 # [0.2.0-alpha.384](https://github.com/mittwald/flow/compare/0.2.0-alpha.383...0.2.0-alpha.384) (2025-08-05)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
