@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.388](https://github.com/mittwald/flow/compare/0.2.0-alpha.387...0.2.0-alpha.388) (2025-08-07)
+
+### Bug Fixes
+
+* **TextField:** fixes missing onChange when a controlled input value changes from something to empty ([#1827](https://github.com/mittwald/flow/issues/1827)) ([a8d12ba](https://github.com/mittwald/flow/commit/a8d12ba9230fe3670e8dab33bd5d3855f66ac96f))
+
 # [0.2.0-alpha.387](https://github.com/mittwald/flow/compare/0.2.0-alpha.386...0.2.0-alpha.387) (2025-08-06)
 
 **Note:** Version bump only for package @mittwald/flow-project
