@@ -229,8 +229,8 @@ describe("PasswordCreationField Tests", () => {
     );
     assert(complexityElement);
     expect(complexityElement).toHaveAttribute(
-      "data-complexity-status",
-      "danger",
+      "data-complexity-visible",
+      "false",
     );
 
     const generateButton = renderResult.container.querySelector(
@@ -241,6 +241,10 @@ describe("PasswordCreationField Tests", () => {
     await act(() => fireEvent.click(generateButton));
     await waitFor(() => {
       expect(inputElement.value).toHaveLength(12);
+      expect(complexityElement).toHaveAttribute(
+        "data-complexity-visible",
+        "true",
+      );
       expect(complexityElement).toHaveAttribute(
         "data-complexity-status",
         "success",
