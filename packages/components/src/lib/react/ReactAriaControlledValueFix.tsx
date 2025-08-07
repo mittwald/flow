@@ -60,6 +60,8 @@ export const ReactAriaControlledValueFix: FC<
           "value",
         )?.set;
         nativeInputValueSetter?.call(element, newValue);
+        const event = new Event("input", { bubbles: true });
+        element.dispatchEvent(event);
       } catch (ignoredError) {
         element.value = newValue;
       }
