@@ -4,29 +4,44 @@ import { getStatusFromPolicyValidationResult } from "@/components/PasswordCreati
 import clsx from "clsx";
 import type { ResolvedPolicyValidationResult } from "@/components/PasswordCreationField/PasswordCreationField";
 import { type Status } from "@/lib/types/props";
+import type { StateFromLatestPolicyValidationResult } from "@/components/PasswordCreationField/lib/getStateFromLatestPolicyValidationResult";
 
 export type ComplexityStatus = Exclude<Status, "info"> | "indeterminate";
 
 export interface ComplexityIndicatorProps {
   isLoading: boolean;
   isEmptyValue: boolean;
+  validationResultState: StateFromLatestPolicyValidationResult;
   policyValidationResult: ResolvedPolicyValidationResult;
 }
 
 /** @internal */
 export const ComplexityIndicator: FC<ComplexityIndicatorProps> = (props) => {
-  const { policyValidationResult, isLoading, isEmptyValue } = props;
+  const {
+    policyValidationResult,
+    validationResultState,
+    isLoading,
+    isEmptyValue,
+  } = props;
   const complexityScore = policyValidationResult?.complexity;
 
   const [state, setState] = useState<{
     status: ComplexityStatus;
     percentage: number;
   }>({
-    percentage: 0,
+    percentage: -1,
     status: "success",
   });
 
   useLayoutEffect(() => {
+    if (isEmptyValue) {
+      setState({
+        status: "success",
+        percentage: -1,
+      });
+      return;
+    }
+
     let complexityFulfilledPercentage = -1;
     if (policyValidationResult?.isValid === "indeterminate") {
       complexityFulfilledPercentage = 100;
@@ -38,6 +53,7 @@ export const ComplexityIndicator: FC<ComplexityIndicatorProps> = (props) => {
     }
 
     const policyValidationStatus = getStatusFromPolicyValidationResult(
+      validationResultState?.isValid ?? policyValidationResult.isValid,
       policyValidationResult,
     );
 
@@ -52,7 +68,7 @@ export const ComplexityIndicator: FC<ComplexityIndicatorProps> = (props) => {
 
   const percentageClassName = clsx(
     styles.bar,
-    styles[`bar-background-status-${state.status}`],
+    isEmptyValue ? undefined : styles[`bar-background-status-${state.status}`],
     {
       [styles.loading as string]: isLoading,
       [styles.running as string]: !complexityFulfilled,
