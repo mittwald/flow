@@ -1,14 +1,11 @@
 import type { ResolvedPolicyValidationResult } from "@/components/PasswordCreationField/PasswordCreationField";
 import type { ComplexityStatus } from "@/components/PasswordCreationField/components/ComplexityIndicator/ComplexityIndicator";
 
-/**
- * @param result
- * @internal
- */
 export const getStatusFromPolicyValidationResult = (
+  isValid: ResolvedPolicyValidationResult["isValid"],
   result: ResolvedPolicyValidationResult,
 ): ComplexityStatus => {
-  if (result.isValid === true) {
+  if (isValid === true) {
     if (
       result.complexity &&
       result.complexity.actual === result.complexity.min &&
@@ -18,7 +15,7 @@ export const getStatusFromPolicyValidationResult = (
     }
 
     return "success";
-  } else if (result.isValid === "indeterminate") {
+  } else if (isValid === "indeterminate") {
     return "indeterminate";
   }
 

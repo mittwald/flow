@@ -19,6 +19,7 @@ import {
   useFocusWithin,
   useLocalizedStringFormatter,
 } from "react-aria";
+import { emitElementValueChange } from "@/lib/react/emitElementValueChange";
 export interface AutocompleteProps
   extends PropsWithChildren,
     PropsWithClassName,
@@ -70,13 +71,7 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
       onAction: (key) => {
         const input = triggerRef.current;
         if (input) {
-          const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
-            Object.getPrototypeOf(input),
-            "value",
-          )?.set;
-          nativeInputValueSetter?.call(input, String(key));
-          const event = new Event("change", { bubbles: true });
-          input.dispatchEvent(event);
+          emitElementValueChange(input, String(key));
         }
       },
       triggerRef,
@@ -103,13 +98,7 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
     const inputElement = triggerRef.current;
     if (inputElement) {
       // Set value on input element and trigger change event
-      const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
-        window.HTMLInputElement.prototype,
-        "value",
-      )?.set;
-      nativeInputValueSetter?.call(inputElement, String(key));
-      const event = new Event("change", { bubbles: true });
-      inputElement.dispatchEvent(event);
+      emitElementValueChange(inputElement, String(key));
     }
     controller.close();
   };

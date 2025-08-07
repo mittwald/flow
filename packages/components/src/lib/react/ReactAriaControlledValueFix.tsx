@@ -8,6 +8,7 @@ import {
   type PropsWithChildren,
   useLayoutEffect,
 } from "react";
+import { emitElementValueChange } from "@/lib/react/emitElementValueChange";
 
 export interface ReactAriaControlledValueFixProps extends PropsWithChildren {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -54,15 +55,11 @@ export const ReactAriaControlledValueFix: FC<
       element instanceof HTMLTextAreaElement
     ) {
       const newValue = String(contextProps.value ?? "");
-      try {
-        const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
-          Object.getPrototypeOf(element),
-          "value",
-        )?.set;
-        nativeInputValueSetter?.call(element, newValue);
-      } catch (ignoredError) {
-        element.value = newValue;
-      }
+      emitElementValueChange(
+        element,
+        newValue,
+        new Event("input", { bubbles: true }),
+      );
     }
   }, [contextProps.value]);
 

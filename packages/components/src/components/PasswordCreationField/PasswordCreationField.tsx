@@ -103,7 +103,7 @@ export const PasswordCreationField = flowComponent(
 
     const [isPasswordRevealed, setIsPasswordRevealed] = useState(false);
     const initialPolicyValidationState: ResolvedPolicyValidationResult = {
-      isValid: false,
+      isValid: true,
       complexity: {
         min: validationPolicy.minComplexity,
         actual: 4,
@@ -118,15 +118,31 @@ export const PasswordCreationField = flowComponent(
     usePolicyValidationResult(
       validationPolicy,
       deferredValue,
-      () => setIsLoading(() => true),
+      () => {
+        if (isEmptyValue) {
+          return;
+        }
+
+        setIsLoading(() => true);
+      },
       ({ password, isValid, results }) => {
+        if (isEmptyValue) {
+          setPolicyValidationResult(() => ({
+            ...results,
+            isValid: true,
+          }));
+          return;
+        }
+
         setIsLoading(() => false);
         setPolicyValidationResult(() => results);
         onValidationResult?.({ password, isValid });
       },
     );
 
+    const isEmptyValue = !value;
     const stateFromValidationResult = getStateFromLatestPolicyValidationResult(
+      isEmptyValue,
       policyValidationResult,
     );
     let latestValidationErrorText = undefined;
@@ -140,7 +156,6 @@ export const PasswordCreationField = flowComponent(
       );
     }
 
-    const isEmptyValue = !value;
     const isValidFromValidationResult =
       !isEmptyValue && stateFromValidationResult?.isValid;
     const isInvalidFromValidationResult =
@@ -154,7 +169,7 @@ export const PasswordCreationField = flowComponent(
       setPolicyValidationResult(() => ({
         ...initialPolicyValidationState,
         ...state,
-        isValid: state.isValid ?? true,
+        isValid: true,
       }));
     };
 
@@ -279,6 +294,7 @@ export const PasswordCreationField = flowComponent(
                 isEmptyValue={isEmptyValue}
                 isLoading={isLoading}
                 policyValidationResult={policyValidationResult}
+                validationResultState={stateFromValidationResult}
               />
             </Aria.Group>
             <PropsContextProvider props={propsContext}>

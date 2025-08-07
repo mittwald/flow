@@ -4,30 +4,48 @@ import { getStatusFromPolicyValidationResult } from "@/components/PasswordCreati
 import clsx from "clsx";
 import type { ResolvedPolicyValidationResult } from "@/components/PasswordCreationField/PasswordCreationField";
 import { type Status } from "@/lib/types/props";
+import type { StateFromLatestPolicyValidationResult } from "@/components/PasswordCreationField/lib/getStateFromLatestPolicyValidationResult";
 
 export type ComplexityStatus = Exclude<Status, "info"> | "indeterminate";
 
 export interface ComplexityIndicatorProps {
   isLoading: boolean;
   isEmptyValue: boolean;
+  validationResultState: StateFromLatestPolicyValidationResult;
   policyValidationResult: ResolvedPolicyValidationResult;
 }
 
 /** @internal */
 export const ComplexityIndicator: FC<ComplexityIndicatorProps> = (props) => {
-  const { policyValidationResult, isLoading, isEmptyValue } = props;
+  const {
+    policyValidationResult,
+    validationResultState,
+    isLoading,
+    isEmptyValue,
+  } = props;
   const complexityScore = policyValidationResult?.complexity;
 
   const [state, setState] = useState<{
     status: ComplexityStatus;
     percentage: number;
+    visible: boolean;
   }>({
     percentage: 0,
     status: "success",
+    visible: false,
   });
 
   useLayoutEffect(() => {
-    let complexityFulfilledPercentage = -1;
+    if (isEmptyValue) {
+      setState({
+        status: "success",
+        percentage: 0,
+        visible: false,
+      });
+      return;
+    }
+
+    let complexityFulfilledPercentage = 0;
     if (policyValidationResult?.isValid === "indeterminate") {
       complexityFulfilledPercentage = 100;
     } else if (complexityScore && !isEmptyValue) {
@@ -38,21 +56,23 @@ export const ComplexityIndicator: FC<ComplexityIndicatorProps> = (props) => {
     }
 
     const policyValidationStatus = getStatusFromPolicyValidationResult(
+      validationResultState?.isValid ?? policyValidationResult.isValid,
       policyValidationResult,
     );
 
     setState({
       status: policyValidationStatus,
       percentage: complexityFulfilledPercentage,
+      visible: true,
     });
   }, [policyValidationResult, isEmptyValue]);
 
-  const complexityVisible = state.percentage !== -1;
+  const complexityVisible = state.visible;
   const complexityFulfilled = state.percentage === 100;
 
   const percentageClassName = clsx(
     styles.bar,
-    styles[`bar-background-status-${state.status}`],
+    !isEmptyValue && styles[`bar-background-status-${state.status}`],
     {
       [styles.loading as string]: isLoading,
       [styles.running as string]: !complexityFulfilled,
