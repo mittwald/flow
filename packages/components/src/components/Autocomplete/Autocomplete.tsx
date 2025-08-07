@@ -59,23 +59,6 @@ export const Autocomplete = flowComponent("Autocomplete", (props) => {
   );
 
   const propsContext: PropsContext = {
-    ContextMenu: {
-      placement: "bottom start",
-      controller,
-      isNonModal: true,
-      renderEmptyState: () => (
-        <Text className={styles.empty}>
-          {stringFormatter.format("autocomplete.empty")}
-        </Text>
-      ),
-      onAction: (key) => {
-        const input = triggerRef.current;
-        if (input) {
-          emitElementValueChange(input, String(key));
-        }
-      },
-      triggerRef,
-    },
     SearchField: inputProps,
     TextField: inputProps,
     Option: {
