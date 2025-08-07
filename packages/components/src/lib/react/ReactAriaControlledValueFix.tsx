@@ -55,15 +55,11 @@ export const ReactAriaControlledValueFix: FC<
       element instanceof HTMLTextAreaElement
     ) {
       const newValue = String(contextProps.value ?? "");
-      try {
-        emitElementValueChange(
-          element,
-          newValue,
-          new Event("input", { bubbles: true }),
-        );
-      } catch (ignoredError) {
-        element.value = newValue;
-      }
+      emitElementValueChange(
+        element,
+        newValue,
+        new Event("input", { bubbles: true }),
+      );
     }
   }, [contextProps.value]);
 
