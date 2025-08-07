@@ -1,14 +1,11 @@
 import Text from "@/components/Text";
 import type { FC, PropsWithChildren } from "react";
 import styles from "./LegendItem.module.scss";
-import {
-  categoricalColors,
-  type CategoricalColors,
-} from "@/lib/tokens/CategoricalColors";
-import { getCategoricalColorValue } from "@/lib/tokens/getCategoricalColorValue";
+import type { CategoricalColor } from "@/lib/tokens/CategoricalColors";
+import clsx from "clsx";
 
 export interface LegendItemProps extends PropsWithChildren {
-  color?: CategoricalColors | string;
+  color?: CategoricalColor;
 }
 
 export const LegendItem: FC<LegendItemProps> = (props) => {
@@ -17,14 +14,7 @@ export const LegendItem: FC<LegendItemProps> = (props) => {
   return (
     <li className={styles.legendItem}>
       <div
-        className={styles.colorSquare}
-        style={{
-          backgroundColor: categoricalColors.includes(
-            color as CategoricalColors,
-          )
-            ? getCategoricalColorValue(color as CategoricalColors)
-            : color,
-        }}
+        className={clsx(styles.colorSquare, color && styles[`color-${color}`])}
       />
       <Text>
         <small>{children}</small>

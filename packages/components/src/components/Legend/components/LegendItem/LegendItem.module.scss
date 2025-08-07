@@ -9,4 +9,23 @@
     width: var(--legend-item--marker--size);
     border-radius: var(--legend-item--marker--corner-radius);
   }
+
+  @mixin variant($color) {
+    .color-#{$color} {
+      background-color: var(--color--categorical--#{$color});
+    }
+  }
+
+  @include variant("sea-green");
+  @include variant("palatinate-blue");
+  @include variant("tangerine");
+  @include variant("magenta");
+  @include variant("tropical-indigo");
+  @include variant("malachite");
+  @include variant("azure");
+  @include variant("violet");
+  @include variant("yellow");
+  @include variant("alloy-orange");
+  @include variant("green");
+  @include variant("lime");
 }
