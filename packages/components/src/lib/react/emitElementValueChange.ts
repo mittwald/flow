@@ -1,10 +1,6 @@
 /**
  * Triggers a Value Update for an Element that also fires the React onChange
  * routine
- *
- * @param element
- * @param value
- * @param event
  */
 export const emitElementValueChange = (
   element: HTMLElement,
