@@ -71,4 +71,10 @@ test("onChange is emitted", async () => {
 
   expect(input).toHaveAttribute("aria-labelledby");
   expect(onChangeHandler).toHaveBeenLastCalledWith("123");
+
+  await act(async () => {
+    fireEvent.change(input, { target: { value: "" } });
+    await sleep(250);
+  });
+  expect(onChangeHandler).toHaveBeenLastCalledWith("");
 });
