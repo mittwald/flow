@@ -6,7 +6,7 @@ import {
   TextField,
   Option,
 } from "@mittwald/flow-react-components";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import {
   Form,
   typedField,
@@ -19,6 +19,10 @@ export default () => {
       email: "",
     },
   });
+  const currentEmail = useWatch({
+    name: "email",
+    control: form.control,
+  });
   const Field = typedField(form);
 
   const currentEmailValue = form.watch("email");
@@ -28,14 +32,20 @@ export default () => {
       "test.org",
       "email.net",
       "mail.com",
-    ].map((d) => {
-      const email = `${currentEmailValue.split("@")[0]}@${d}`;
-      return (
-        <Option key={email} value={email} textValue={email}>
-          {email}
-        </Option>
-      );
-    });
+    ]
+      .map((d) => {
+        const email = `${currentEmailValue.split("@")[0]}@${d}`;
+        return (
+          <Option
+            key={email}
+            value={email}
+            textValue={email}
+          >
+            {email}
+          </Option>
+        );
+      })
+      .filter(() => currentEmail);
   };
 
   return (
