@@ -1,4 +1,4 @@
-import { type FC, type JSX } from "react";
+import type { FC, JSX } from "react";
 import React, { useState } from "react";
 import {
   LiveEditor,
@@ -24,12 +24,11 @@ export interface LiveCodeEditorProps {
   mobile?: boolean;
 }
 
-const transformCode = (code: string) => {
-  try {
-    return extractDefaultExport(code);
-  } catch (error) {
-    return `<p><em>Example could not be parsed:</em> ${String(error)}</p>`;
-  }
+// Waiting for https://github.com/FormidableLabs/react-live/issues/339
+const error = console.error;
+console.error = (...args) => {
+  if (/defaultProps/.test(args[0])) return;
+  error(...args);
 };
 
 const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
@@ -52,6 +51,15 @@ const LiveCodeEditor: FC<LiveCodeEditorProps> = (props) => {
   }
 
   const scope = extractEditorScope(code);
+
+  const transformCode = (code: string) => {
+    try {
+      return extractDefaultExport(code);
+    } catch (error) {
+      return `<p><em>Example could not be parsed:</em> ${String(error)}</p>`;
+    }
+  };
+
   const codeToDisplay = code.replace(/;\r?\n$/, "");
 
   return (
