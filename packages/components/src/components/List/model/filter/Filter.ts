@@ -48,7 +48,7 @@ export class Filter<T, TProp extends PropertyName<T>, TMatchValue> {
   public constructor(list: List<T>, shape: FilterShape<T, TProp, TMatchValue>) {
     this.list = list;
     this.property = shape.property;
-    this.mode = shape.mode ?? "one";
+    this.mode = shape.mode ?? "some";
     this._values = shape.values?.map((v) => FilterValue.create(this, v));
     this.matcher = shape.matcher ?? equalsPropertyMatcher;
     this.renderItem = shape.renderItem ?? stringCastRenderMethod;
