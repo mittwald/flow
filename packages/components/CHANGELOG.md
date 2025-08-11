@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.394](https://github.com/mittwald/flow/compare/0.2.0-alpha.393...0.2.0-alpha.394) (2025-08-11)
+
+### Bug Fixes
+
+* **AutoComplete:** fixes infinity loop in docs ([#1861](https://github.com/mittwald/flow/issues/1861)) ([9aed97b](https://github.com/mittwald/flow/commit/9aed97b29d9c0f5ddf89a037a09f209657a6a505))
+
 # [0.2.0-alpha.393](https://github.com/mittwald/flow/compare/0.2.0-alpha.392...0.2.0-alpha.393) (2025-08-11)
 
 ### Bug Fixes
