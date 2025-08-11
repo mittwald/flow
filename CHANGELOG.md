@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.393](https://github.com/mittwald/flow/compare/0.2.0-alpha.392...0.2.0-alpha.393) (2025-08-11)
+
+### Bug Fixes
+
+* **ComboBox:** fix null used as string in combo box ([#1850](https://github.com/mittwald/flow/issues/1850)) ([00d6a5f](https://github.com/mittwald/flow/commit/00d6a5fc1b781fb2c0c5aca51b8b59e7791ca2bc))
+
 # [0.2.0-alpha.392](https://github.com/mittwald/flow/compare/0.2.0-alpha.391...0.2.0-alpha.392) (2025-08-08)
 
 ### Bug Fixes
