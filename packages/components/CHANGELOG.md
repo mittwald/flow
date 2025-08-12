@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.395](https://github.com/mittwald/flow/compare/0.2.0-alpha.394...0.2.0-alpha.395) (2025-08-11)
+
+### Bug Fixes
+
+* **CodeBlock:** fix missing remote props ([#1860](https://github.com/mittwald/flow/issues/1860)) ([92db99a](https://github.com/mittwald/flow/commit/92db99ab1432db223cc32e0334259c7ec5bca8fd))
+
+# [0.2.0-alpha.394](https://github.com/mittwald/flow/compare/0.2.0-alpha.393...0.2.0-alpha.394) (2025-08-11)
+
+### Bug Fixes
+
+* **AutoComplete:** fixes infinity loop in docs ([#1861](https://github.com/mittwald/flow/issues/1861)) ([9aed97b](https://github.com/mittwald/flow/commit/9aed97b29d9c0f5ddf89a037a09f209657a6a505))
+
+# [0.2.0-alpha.393](https://github.com/mittwald/flow/compare/0.2.0-alpha.392...0.2.0-alpha.393) (2025-08-11)
+
+### Bug Fixes
+
+* **ComboBox:** fix null used as string in combo box ([#1850](https://github.com/mittwald/flow/issues/1850)) ([00d6a5f](https://github.com/mittwald/flow/commit/00d6a5fc1b781fb2c0c5aca51b8b59e7791ca2bc))
+
+# [0.2.0-alpha.392](https://github.com/mittwald/flow/compare/0.2.0-alpha.391...0.2.0-alpha.392) (2025-08-08)
+
+### Bug Fixes
+
+* **List:** update top content styles ([#1826](https://github.com/mittwald/flow/issues/1826)) ([183ef08](https://github.com/mittwald/flow/commit/183ef08acf0e9c7923c1a8de60e1e10b4cfff890))
+
 # [0.2.0-alpha.391](https://github.com/mittwald/flow/compare/0.2.0-alpha.390...0.2.0-alpha.391) (2025-08-08)
 
 **Note:** Version bump only for package @mittwald/flow-react-components

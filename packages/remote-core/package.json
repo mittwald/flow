@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-remote-core",
-  "version": "0.2.0-alpha.391",
+  "version": "0.2.0-alpha.395",
   "type": "module",
   "description": "Core functionality to setup a remote/host environment",
   "homepage": "https://mittwald.github.io/flow",
@@ -37,7 +37,7 @@
   "devDependencies": {
     "@mittwald/ext-bridge": "workspace:*",
     "@mittwald/flow-core": "workspace:*",
-    "@mittwald/password-tools-js": "3.0.0-alpha.14",
+    "@mittwald/password-tools-js": "3.0.0-alpha.15",
     "@mittwald/typescript-config": "workspace:*",
     "@types/node": "^22.16.5",
     "nx": "^20.8.2",
@@ -53,7 +53,7 @@
   },
   "peerDependencies": {
     "@mittwald/ext-bridge": "workspace:*",
-    "@mittwald/password-tools-js": "3.0.0-alpha.14"
+    "@mittwald/password-tools-js": "3.0.0-alpha.15"
   },
   "peerDependenciesMeta": {
     "@mittwald/ext-bridge": {

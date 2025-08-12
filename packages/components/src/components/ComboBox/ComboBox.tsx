@@ -75,6 +75,9 @@ export const ComboBox = flowComponent("ComboBox", (props) => {
   };
 
   const handleOnSelectionChange = (key: Key | null) => {
+    if (key === null) {
+      return;
+    }
     onChange(String(key));
     onSelectionChange(key);
   };
