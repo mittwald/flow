@@ -100,7 +100,7 @@ export const Failed: Story = {
   ),
 };
 
-export const WithActionGroup: Story = {
+export const WithButtons: Story = {
   args: {
     onDelete: () => {
       action("onDelete");
