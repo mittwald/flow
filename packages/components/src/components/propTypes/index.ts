@@ -63,7 +63,7 @@ import type { SegmentProps } from "@/components/SegmentedControl/components/Segm
 import type { FileCardProps } from "@/components/FileCard";
 import type { FileFieldProps } from "@/components/FileField";
 import type { AlignProps } from "@/components/Align";
-import type { CountryOptionsProps } from "@/components/Select/components/CountryOptions";
+import type { CountryOptionsProps } from "src/components/CountryOptions";
 import type { ComboBoxProps } from "@/components/ComboBox";
 import type { OptionProps } from "@/components/Option";
 import type { MessageProps } from "@/components/Message";

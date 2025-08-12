@@ -1,4 +1,4 @@
-import type { CountrySortFn } from "@/components/Select/components/CountryOptions/CountryOptions";
+import type { CountrySortFn } from "@/components/CountryOptions/CountryOptions";
 
 const dachCountries = ["DE", "AT", "CH"];
 

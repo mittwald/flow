@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Select, { sortByDachFirst } from "../index";
+import Select from "../index";
 import React from "react";
 import { Label } from "@/components/Label";
 import FieldDescription from "@/components/FieldDescription";
 import { FieldError } from "@/components/FieldError";
-import { CountryOptions } from "@/components/Select/components/CountryOptions";
+import { CountryOptions, sortByDachFirst } from "@/components/CountryOptions";
 import { Option } from "@/components/Option";
 import {
   ContextualHelp,
