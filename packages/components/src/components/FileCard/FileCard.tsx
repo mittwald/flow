@@ -34,6 +34,8 @@ export interface FileCardProps
   sizeInBytes?: number;
   /** The source of an image file. */
   imageSrc?: string;
+  /** Whether the file card is in a failed state. */
+  isFailed?: boolean;
 }
 
 /** @flr-generate all */
@@ -52,19 +54,30 @@ export const FileCard = flowComponent("FileCard", (props) => {
     download,
     imageSrc,
     children,
+    isFailed,
   } = props;
 
-  const rootClassName = clsx(styles.fileCard, className);
+  const rootClassName = clsx(
+    styles.fileCard,
+    isFailed && styles["failed"],
+    className,
+  );
 
   const propsContext: PropsContext = {
     ContextMenu: {
       wrapWith: <OptionsButton />,
       placement: "bottom right",
     },
+    Text: {
+      elementType: "span",
+      className: styles.subTitle,
+      tunnelId: "subTitle",
+    },
     ProgressBar: {
       size: "s",
       tunnelId: "progressBar",
     },
+    Button: { variant: "plain", color: "secondary" },
   };
 
   const Element = elementType;
@@ -73,7 +86,7 @@ export const FileCard = flowComponent("FileCard", (props) => {
     <PropsContextProvider props={propsContext} mergeInParentContext>
       <TunnelProvider>
         <Element ref={ref as never} className={rootClassName}>
-          <Wrap if={href || onPress}>
+          <Wrap if={(href || onPress) && !isFailed}>
             <Link
               className={styles.link}
               unstyled
@@ -82,7 +95,7 @@ export const FileCard = flowComponent("FileCard", (props) => {
               target={target}
               download={download}
             >
-              <Avatar type={type} imageSrc={imageSrc} />
+              <Avatar type={type} imageSrc={imageSrc} isFailed={isFailed} />
 
               <span className={styles.text}>
                 {name && (
@@ -91,6 +104,7 @@ export const FileCard = flowComponent("FileCard", (props) => {
                   </Text>
                 )}
                 {sizeInBytes && <FileSizeText sizeInBytes={sizeInBytes} />}
+                <TunnelExit id="subTitle" />
                 <TunnelExit id="progressBar" />
               </span>
             </Link>

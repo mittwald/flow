@@ -1,6 +1,6 @@
 # Playground
 
-Verwende  `<FileCard />`, um eine FileCard darzustellen. Diese kann auch als
+Verwende `<FileCard />`, um eine FileCard darzustellen. Diese kann auch als
 [FileCardList](/03-components/upload/file-card-list) erweitert werden.
 
 <LiveCodeEditor />
@@ -35,6 +35,15 @@ einem [ContextMenu](/03-components/actions/context-menu) zu platzieren.
 
 ---
 
+# Mit Bild
+
+Statt eines passenden Icons kann durch `imageSrc` zur Vorschau ein Bild
+angezeigt werden.
+
+<LiveCodeEditor example="image" editorCollapsed />
+
+---
+
 # Mit ProgressBar
 
 Nutze eine `<ProgressBar />` innerhalb der FileCard, um beispielsweise einen
@@ -44,9 +53,19 @@ Upload Fortschritt anzuzeigen.
 
 ---
 
-# Mit Bild
+# Mit zusätzlichen Buttons
 
-Statt einem passenden Icon, kann durch `imageSrc` zur Vorschau ein Bild
-angezeigt werden.
+Platziere einen oder mehrere `<Button />` innerhalb der FileCard, um zusätzliche
+Optionen anzubieten.
 
-<LiveCodeEditor example="image" editorCollapsed />
+<LiveCodeEditor example="buttons" editorCollapsed />
+
+---
+
+# Mit Failed State
+
+Über das Property `isFailed` kann die FileCard im Failed State angezeigt werden,
+um beispielsweise einen fehlgeschlagenen Upload anzuzeigen. Weitere
+Informationen können im Subtitle der FileCard angezeigt werden.
+
+<LiveCodeEditor example="failed" editorCollapsed />

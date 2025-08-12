@@ -1,5 +1,5 @@
 .fileCard {
-  border-color: var(--file-card--border-color);
+  border-color: var(--file-card--border-color--default);
   border-width: var(--file-card--border-width);
   border-style: var(--file-card--border-style);
   border-radius: var(--file-card--corner-radius);
@@ -69,5 +69,10 @@
       justify-self: end;
       align-self: center;
     }
+  }
+
+  &.failed {
+    border-color: var(--file-card--border-color--error);
+    background-color: var(--file-card--background-color--error);
   }
 }

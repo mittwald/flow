@@ -9,10 +9,15 @@ import { IconPhoto } from "@tabler/icons-react";
 interface Props {
   type?: string;
   imageSrc?: string;
+  isFailed?: boolean;
 }
 
 export const Avatar: FC<Props> = (props) => {
-  const { type, imageSrc } = props;
+  const { type, imageSrc, isFailed } = props;
+
+  if (isFailed) {
+    return <AvatarComponent status="danger" />;
+  }
 
   if (imageSrc) {
     return (
