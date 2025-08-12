@@ -102,9 +102,8 @@ export const Failed: Story = {
 
 export const WithButtons: Story = {
   args: {
-    onDelete: () => {
-      action("onDelete");
-    },
+    onDelete: () => action("onDelete"),
+    onPress: () => action("onPress"),
   },
   render: (props) => (
     <FileCard {...props}>
