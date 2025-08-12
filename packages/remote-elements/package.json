@@ -35,7 +35,7 @@
   "devDependencies": {
     "@mittwald/flow-react-components": "workspace:*",
     "@mittwald/typescript-config": "workspace:*",
-    "@types/node": "^22.17.1",
+    "@types/node": "^24.2.1",
     "nx": "^21.3.11",
     "prettier": "^3.6.2",
     "rimraf": "^6.0.1",

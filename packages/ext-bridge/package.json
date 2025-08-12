@@ -35,15 +35,15 @@
     "test:compile": "tsc --noEmit"
   },
   "dependencies": {
-    "@mittwald/react-use-promise": "^3.0.4",
+    "@mittwald/react-use-promise": "^4.0.0",
     "axios": "^1.11.0",
     "jose": "^6.0.12",
     "std-env": "^3.9.0",
-    "zod": "^3.25.76"
+    "zod": "^4.0.17"
   },
   "devDependencies": {
     "@mittwald/typescript-config": "workspace:*",
-    "@types/node": "^22.17.1",
+    "@types/node": "^24.2.1",
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",
     "nx": "^21.3.11",

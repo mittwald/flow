@@ -21,7 +21,7 @@
     "@tabler/icons-react": "^3.34.1",
     "@types/luxon": "^3.7.1",
     "@types/mdx": "^2.0.13",
-    "acorn": "8.14.1",
+    "acorn": "8.15.0",
     "acorn-typescript": "^1.4.13",
     "clsx": "^2.1.1",
     "dot-prop": "^9.0.0",
@@ -49,7 +49,7 @@
   "devDependencies": {
     "@mittwald/typescript-config": "workspace:*",
     "@next/eslint-plugin-next": "^15.4.6",
-    "@types/node": "^22.17.1",
+    "@types/node": "^24.2.1",
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",
     "eslint": "^9.33.0",

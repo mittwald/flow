@@ -28,8 +28,8 @@
   "dependencies": {
     "@internationalized/date": "^3.8.2",
     "@lit-labs/ssr-dom-shim": "^1.4.0",
-    "@mittwald/remote-dom-core": "1.7.0-mittwald.10",
-    "@quilted/threads": "^3.3.1",
+    "@mittwald/remote-dom-core": "1.7.0-mittwald-3",
+    "@quilted/threads": "^4.0.1",
     "@types/invariant": "^2.2.37",
     "invariant": "^2.2.4",
     "remeda": "^2.30.0"
@@ -39,7 +39,7 @@
     "@mittwald/flow-core": "workspace:*",
     "@mittwald/password-tools-js": "3.0.0-alpha.15",
     "@mittwald/typescript-config": "workspace:*",
-    "@types/node": "^22.17.1",
+    "@types/node": "^24.2.1",
     "nx": "^21.3.11",
     "prettier": "^3.6.2",
     "rimraf": "^6.0.1",

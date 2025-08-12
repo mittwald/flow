@@ -26,7 +26,7 @@
   "devDependencies": {
     "@mittwald/flow-remote-react-components": "workspace:*",
     "@mittwald/typescript-config": "workspace:*",
-    "@types/node": "^22.17.1",
+    "@types/node": "^24.2.1",
     "@types/react": "^19.1.10",
     "nx": "^21.3.11",
     "prettier": "^3.6.2",
