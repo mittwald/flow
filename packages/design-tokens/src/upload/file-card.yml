@@ -12,7 +12,10 @@ file-card:
   border-style:
     value: "{border-style.default}"
   border-color:
-    value: "{neutral-outline-border-color}"
+    default:
+      value: "{neutral-outline-border-color}"
+    error:
+      value: "{danger-outline-border-color}"
   sub-title-font-size:
     value: "{font-size-text.s}"
   background-color:
@@ -22,3 +25,5 @@ file-card:
       value: "{neutral-outline-background-color.hover}"
     pressed:
       value: "{neutral-outline-background-color.pressed}"
+    error:
+      value: "{danger.color.100}"
