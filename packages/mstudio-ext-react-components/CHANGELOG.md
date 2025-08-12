@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.402](https://github.com/mittwald/flow/compare/0.2.0-alpha.401...0.2.0-alpha.402) (2025-08-12)
+
+**Note:** Version bump only for package @mittwald/mstudio-ext-react-components
+
 # [0.2.0-alpha.401](https://github.com/mittwald/flow/compare/0.2.0-alpha.400...0.2.0-alpha.401) (2025-08-12)
 
 **Note:** Version bump only for package @mittwald/mstudio-ext-react-components
