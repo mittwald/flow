@@ -1,9 +1,8 @@
 import {
-  ContextMenu,
   Label,
-  MenuItem,
   Autocomplete,
   SearchField,
+  Option,
 } from "@mittwald/flow-react-components";
 import { useState } from "react";
 
@@ -16,14 +15,20 @@ export default () => {
       "test.org",
       "email.net",
       "mail.com",
-    ].map((d) => {
-      const email = `${input.split("@")[0]}@${d}`;
-      return (
-        <MenuItem key={email} id={email} textValue={email}>
-          {email}
-        </MenuItem>
-      );
-    });
+    ]
+      .map((d) => {
+        const email = `${input.split("@")[0]}@${d}`;
+        return (
+          <Option
+            key={email}
+            value={email}
+            textValue={email}
+          >
+            {email}
+          </Option>
+        );
+      })
+      .filter(() => input);
   };
 
   return (
@@ -31,7 +36,7 @@ export default () => {
       <SearchField value={input} onChange={setInput}>
         <Label>Email</Label>
       </SearchField>
-      <ContextMenu>{generateSuggestItems()}</ContextMenu>
+      {generateSuggestItems()}
     </Autocomplete>
   );
 };

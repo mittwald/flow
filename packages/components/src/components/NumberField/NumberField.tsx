@@ -54,8 +54,9 @@ export const NumberField = flowComponent("NumberField", (props) => {
   return (
     <ClearPropsContext>
       <Aria.NumberField
-        isWheelDisabled={isWheelDisabled}
         {...rest}
+        isWheelDisabled={isWheelDisabled}
+        defaultValue={defaultValue}
         className={rootClassName}
       >
         <Aria.Group className={styles.group}>
@@ -73,11 +74,7 @@ export const NumberField = flowComponent("NumberField", (props) => {
             inputContext={Aria.InputContext}
             props={props}
           >
-            <Aria.Input
-              className={styles.input}
-              ref={ref}
-              defaultValue={defaultValue}
-            />
+            <Aria.Input className={styles.input} ref={ref} />
           </ReactAriaControlledValueFix>
           <Button
             ariaSlot="increment"

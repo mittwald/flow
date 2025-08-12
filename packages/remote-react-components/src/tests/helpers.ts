@@ -1,12 +1,17 @@
 import type { Locator } from "@vitest/browser/context";
-import { expect, type ExpectPollOptions } from "vitest";
+import { expect } from "vitest";
 
-export const expectNeverBeInTheDocument = (
+export const expectNotToBeInTheDocumentFor = (
   locator: Locator,
-  opts: ExpectPollOptions = {},
+  forMs = 1000,
 ) => {
-  const { timeout = 1000 } = opts;
   return expect(() =>
-    expect.element(locator, { ...opts, timeout }).toBeInTheDocument(),
+    expect.element(locator, { timeout: forMs }).toBeInTheDocument(),
+  ).rejects.toBeDefined();
+};
+
+export const expectNotVisibleFor = (locator: Locator, forMs = 1000) => {
+  return expect(() =>
+    expect.element(locator, { timeout: forMs }).toBeVisible(),
   ).rejects.toBeDefined();
 };

@@ -1,10 +1,10 @@
-import type { FC, MutableRefObject, PropsWithChildren } from "react";
+import type { FC, PropsWithChildren, RefObject } from "react";
 import { useEffect, useState } from "react";
 import { ActionStateContext } from "@/components/Action/ActionStateContext";
 import { useFormContext } from "@/integrations/react-hook-form/components/context/formContext";
 
 interface Props extends PropsWithChildren {
-  isAsyncSubmit: MutableRefObject<boolean>;
+  isAsyncSubmit: RefObject<boolean>;
 }
 
 const ActionStateContextWrapper: FC<Props> = (props) => {
@@ -36,7 +36,13 @@ const ActionStateContextWrapper: FC<Props> = (props) => {
     );
     setHasSucceeded(isSubmitted && isSubmitSuccessful);
     setIsStarted(isSubmitting && isAsyncSubmit.current);
-  }, [form.formState, isAsyncSubmit.current]);
+  }, [
+    form.formState.isSubmitted,
+    form.formState.isSubmitting,
+    form.formState.isSubmitSuccessful,
+    form.formState.errors,
+    isAsyncSubmit.current,
+  ]);
 
   return (
     <ActionStateContext

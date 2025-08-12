@@ -6,10 +6,6 @@ import { Label } from "@/components/Label";
 import { ContextMenu } from "@/components/ContextMenu";
 import MenuItem from "@/components/MenuItem";
 import { useOverlayController } from "@/lib/controller";
-import {
-  storyBackgroundDark,
-  storyBackgroundLight,
-} from "@/lib/dev/storyBackgrounds";
 
 const meta: Meta<typeof Badge> = {
   title: "Status/Badge",
@@ -137,8 +133,8 @@ export const Light: Story = {
       <Text>Value</Text>
     </Badge>
   ),
-  parameters: {
-    backgrounds: storyBackgroundDark,
+  globals: {
+    backgrounds: "dark",
   },
 };
 
@@ -157,7 +153,7 @@ export const Dark: Story = {
       <Text>Value</Text>
     </Badge>
   ),
-  parameters: {
-    backgrounds: storyBackgroundLight,
+  globals: {
+    backgrounds: "light",
   },
 };

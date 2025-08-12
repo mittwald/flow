@@ -14,6 +14,7 @@
   }
 
   .content {
+    min-width: 0;
     display: flex;
     gap: var(--list-item--spacing);
     flex-grow: 1;
@@ -22,11 +23,14 @@
 
   .topContent {
     word-break: break-word;
+    display: flex;
   }
 
   .bottomContent {
     width: 100%;
     word-break: break-word;
+    display: flex;
+    flex-direction: column;
   }
 
   .heading {

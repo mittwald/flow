@@ -38,7 +38,7 @@ describe("Filter", () => {
   test("Items are initially filtered", async () => {
     renderTest(
       [42, 43],
-      <ListFilter<Data> property="num" defaultSelected={[42]} />,
+      <ListFilter<Data> property="num" mode="one" defaultSelected={[42]} />,
     );
     expect(screen.queryAllByText(42)).toHaveLength(1);
     expect(screen.queryAllByText(43)).toHaveLength(0);

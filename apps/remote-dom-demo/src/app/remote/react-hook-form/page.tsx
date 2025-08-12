@@ -3,6 +3,7 @@
 import {
   ActionGroup,
   Button,
+  CopyButton,
   ComboBox,
   FileField,
   Label,
@@ -13,19 +14,34 @@ import {
   TextField,
   PasswordCreationField,
   Autocomplete,
-  ContextMenu,
-  MenuItem,
 } from "@mittwald/flow-remote-react-components";
 import {
   Form,
-  typedField,
+  Field,
 } from "@mittwald/flow-remote-react-components/react-hook-form";
+import {
+  Policy,
+  RuleType,
+} from "@mittwald/flow-react-components/mittwald-password-tools-js";
+import { generatePasswordCreationFieldValidation } from "@mittwald/flow-react-components";
 import { useForm } from "react-hook-form";
+
+const customPolicy = Policy.fromDeclaration({
+  minComplexity: 1,
+  rules: [
+    {
+      ruleType: RuleType.length,
+      min: 2,
+      max: 5,
+    },
+  ],
+});
 
 export default function Page() {
   const form = useForm({
     defaultValues: {
-      email: "foo.bar@",
+      name: "",
+      email: "foo",
       confirm: false,
       age: 20,
       comment: "",
@@ -35,8 +51,6 @@ export default function Page() {
       password: "",
     },
   });
-
-  const Field = typedField(form);
 
   return (
     <Section>
@@ -53,6 +67,16 @@ export default function Page() {
         }}
       >
         <Field
+          name="name"
+          rules={{
+            required: "Required!",
+          }}
+        >
+          <TextField>
+            <Label>Name</Label>
+          </TextField>
+        </Field>
+        <Field
           name="email"
           rules={{
             required: "Required!",
@@ -62,14 +86,8 @@ export default function Page() {
             <TextField>
               <Label>Email</Label>
             </TextField>
-            <ContextMenu>
-              <MenuItem textValue="Foo" id="Foo">
-                Foo
-              </MenuItem>
-              <MenuItem textValue="Bar" id="Bar">
-                Bar
-              </MenuItem>
-            </ContextMenu>
+            <Option>Foo</Option>
+            <Option>Bar</Option>
           </Autocomplete>
         </Field>
         <Field name="comment">
@@ -80,28 +98,27 @@ export default function Page() {
         <Field name="city">
           <ComboBox>
             <Label>City</Label>
-            <Option value="Minden" textValue="Minden">
-              Minden
-            </Option>
-            <Option value="Espelkamp" textValue="Espelkamp">
-              Espelkamp
-            </Option>
+            <Option>Minden</Option>
+            <Option>Espelkamp</Option>
           </ComboBox>
         </Field>
         <Field name="city2">
           <Select>
             <Label>City</Label>
-            <Option value="Minden" textValue="Minden">
-              Minden
-            </Option>
-            <Option value="Espelkamp" textValue="Espelkamp">
-              Espelkamp
-            </Option>
+            <Option>Minden</Option>
+            <Option>Espelkamp</Option>
           </Select>
         </Field>
-        <Field name="password" rules={{ required: true }}>
-          <PasswordCreationField>
+        <Field
+          name="password"
+          rules={{
+            required: true,
+            validate: generatePasswordCreationFieldValidation(customPolicy),
+          }}
+        >
+          <PasswordCreationField validationPolicy={customPolicy}>
             <Label>Password</Label>
+            <CopyButton />
           </PasswordCreationField>
         </Field>
         <Field name="file">

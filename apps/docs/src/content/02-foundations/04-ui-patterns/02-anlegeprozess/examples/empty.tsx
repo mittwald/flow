@@ -59,8 +59,7 @@ import {
             <TextField isRequired>
               <Label>Domain</Label>
             </TextField>
-          </Section>
-          <Section>
+
             <Header>
               <Heading>Domain-Inhaber</Heading>
               <Button
@@ -73,8 +72,7 @@ import {
             <Text>
               Du hast noch keinen Domain-Inhaber angelegt.
             </Text>
-          </Section>
-          <Section>
+
             <Heading>Bestellübersicht</Heading>
             <ColumnLayout>
               <Align>

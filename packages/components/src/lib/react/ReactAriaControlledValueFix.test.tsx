@@ -1,6 +1,7 @@
 import { ReactAriaControlledValueFix } from "@/lib/react/ReactAriaControlledValueFix";
-import { render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import { Input, InputContext, Label, TextField } from "react-aria-components";
+import { sleep } from "@/lib/promises/sleep";
 
 beforeEach(() => {
   vitest.resetAllMocks();
@@ -49,4 +50,31 @@ test("other aria attributes are set", () => {
 
   const input = screen.getByTestId("input");
   expect(input).toHaveAttribute("aria-labelledby");
+});
+
+test("onChange is emitted", async () => {
+  const onChangeHandler = vi.fn();
+  render(
+    <TextField onChange={onChangeHandler}>
+      <Label>Test</Label>
+      <ReactAriaControlledValueFix inputContext={InputContext} props={{}}>
+        <Input data-testid="input" />
+      </ReactAriaControlledValueFix>
+    </TextField>,
+  );
+
+  const input = screen.getByTestId("input");
+  await act(async () => {
+    fireEvent.change(input, { target: { value: "123" } });
+    await sleep(250);
+  });
+
+  expect(input).toHaveAttribute("aria-labelledby");
+  expect(onChangeHandler).toHaveBeenLastCalledWith("123");
+
+  await act(async () => {
+    fireEvent.change(input, { target: { value: "" } });
+    await sleep(250);
+  });
+  expect(onChangeHandler).toHaveBeenLastCalledWith("");
 });

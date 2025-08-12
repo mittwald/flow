@@ -3,7 +3,7 @@ import type { FC } from "react";
 import React from "react";
 import type { MessageProps } from "@/components/Message";
 import { Message } from "@/components/Message";
-import { MessageThread } from "@/components/MessageThread";
+import { MessageSeparator, MessageThread } from "@/components/MessageThread";
 import { Header } from "@/components/Header";
 import { Align } from "@/components/Align";
 import { Avatar } from "@/components/Avatar";
@@ -11,7 +11,6 @@ import { Initials } from "@/components/Initials";
 import { Text } from "@/components/Text";
 import { Content } from "@/components/Content";
 import { dummyText } from "@/lib/dev/dummyText";
-import { MessageSeparator } from "@/components/MessageSeparator";
 
 interface ExampleMessageProps extends Pick<MessageProps, "type"> {
   name: string;

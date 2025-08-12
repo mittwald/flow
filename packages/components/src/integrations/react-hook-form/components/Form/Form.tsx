@@ -1,11 +1,12 @@
 import { SubmitButtonStateProvider } from "@/integrations/react-hook-form/components/ActionGroupWrapper/SubmitButtonStateProvider";
 import { FormContextProvider } from "@/integrations/react-hook-form/components/context/formContext";
-import type {
-  ComponentProps,
-  ComponentType,
-  FormEvent,
-  FormEventHandler,
-  PropsWithChildren,
+import {
+  type ComponentProps,
+  type ComponentType,
+  type FormEvent,
+  type FormEventHandler,
+  type PropsWithChildren,
+  useMemo,
 } from "react";
 import { useId, useRef } from "react";
 import type { FieldValues, UseFormReturn } from "react-hook-form";
@@ -45,6 +46,7 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
   const formId = useId();
   const isAsyncSubmit = useRef(false);
   const submitHandlerResultRef = useRef<unknown>(null);
+  const FormViewComponent = useMemo(() => FormView, [formId]);
 
   const handleOnSubmit = (e?: FormEvent<HTMLFormElement> | F) => {
     const { isSubmitting, isValidating } = form.control._formState;
@@ -72,9 +74,13 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
     <RhfFormContextProvider {...form}>
       <FormContextProvider value={{ form, id: formId }}>
         <SubmitButtonStateProvider isAsyncSubmit={isAsyncSubmit}>
-          <FormView {...formProps} id={formId} onSubmit={handleOnSubmit}>
+          <FormViewComponent
+            {...formProps}
+            id={formId}
+            onSubmit={handleOnSubmit}
+          >
             {children}
-          </FormView>
+          </FormViewComponent>
         </SubmitButtonStateProvider>
         <AfterFormSubmitEffect
           submitHandlerResultRef={submitHandlerResultRef}

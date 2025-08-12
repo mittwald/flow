@@ -1,13 +1,13 @@
 import { render, fireEvent, waitFor } from "@testing-library/react";
-import React from "react";
+import React, { useState } from "react";
 import { assert, expect, test } from "vitest";
 import { act } from "react";
 import PasswordCreationField from "@/components/PasswordCreationField/PasswordCreationField";
 import {
   Policy,
+  RuleType,
   type PolicyDeclaration,
-} from "@mittwald/password-tools-js/policy";
-import { RuleType } from "@mittwald/password-tools-js/rules";
+} from "@/integrations/@mittwald/password-tools-js";
 import { Label } from "@/components/Label";
 import { I18nProvider } from "react-aria";
 import { IconPlus } from "@/components/Icon/components/icons";
@@ -33,14 +33,30 @@ const policyDecl: PolicyDeclaration = {
 
 const policy = Policy.fromDeclaration(policyDecl);
 
+const PasswordCreationFieldTestComponent: typeof PasswordCreationField = (
+  props,
+) => {
+  const [password, setPassword] = useState("");
+  return (
+    <PasswordCreationField
+      {...props}
+      value={password}
+      onChange={(value) => {
+        setPassword(value);
+        props.onChange?.(value);
+      }}
+    />
+  );
+};
+
 describe("PasswordCreationField Tests", () => {
   test("renders empty list without errors", async () => {
     await act(() =>
       render(
         <I18nProvider locale="de">
-          <PasswordCreationField validationPolicy={policy}>
+          <PasswordCreationFieldTestComponent validationPolicy={policy}>
             <Label>Password</Label>
-          </PasswordCreationField>
+          </PasswordCreationFieldTestComponent>
         </I18nProvider>,
       ),
     );
@@ -50,9 +66,9 @@ describe("PasswordCreationField Tests", () => {
     const renderResult = await act(() =>
       render(
         <I18nProvider locale="de">
-          <PasswordCreationField validationPolicy={policy}>
+          <PasswordCreationFieldTestComponent validationPolicy={policy}>
             <Label>Password</Label>
-          </PasswordCreationField>
+          </PasswordCreationFieldTestComponent>
         </I18nProvider>,
       ),
     );
@@ -71,7 +87,7 @@ describe("PasswordCreationField Tests", () => {
     );
 
     await act(async () => {
-      fireEvent.input(inputElement, { target: { value: "123" } });
+      fireEvent.change(inputElement, { target: { value: "123" } });
       await sleep(250);
     });
 
@@ -83,13 +99,74 @@ describe("PasswordCreationField Tests", () => {
     );
   });
 
+  test("shows correct password hint for max rule", async () => {
+    const maxNumberPolicy = Policy.fromDeclaration({
+      minComplexity: 3,
+      rules: [
+        {
+          identifier: "numbers",
+          ruleType: RuleType.charPool,
+          charPools: ["numbers"],
+          max: 2,
+        },
+      ],
+    });
+
+    const renderResult = await act(() =>
+      render(
+        <I18nProvider locale="de">
+          <PasswordCreationFieldTestComponent
+            validationPolicy={maxNumberPolicy}
+          >
+            <Label>Password</Label>
+          </PasswordCreationFieldTestComponent>
+        </I18nProvider>,
+      ),
+    );
+
+    const inputElement = renderResult.container.querySelector("input");
+    assert(inputElement);
+    expect(inputElement).toHaveValue("");
+
+    await act(async () => {
+      fireEvent.change(inputElement, {
+        target: { value: "12" },
+      });
+      await sleep(250);
+    });
+
+    const infoButton = renderResult.container.querySelector(
+      'button[data-component="showPasswordRules"]',
+    );
+    assert(infoButton);
+
+    await act(() => fireEvent.click(infoButton));
+
+    const rules = renderResult.baseElement.querySelectorAll("[data-rule]");
+    expect(rules).toHaveLength(1);
+    expect(rules[0]).toHaveAttribute("data-rule-valid", "true");
+    expect(rules[0]).toHaveTextContent("Maximal 2 Zahlen");
+
+    await act(async () => {
+      fireEvent.change(inputElement, {
+        target: { value: "123" },
+      });
+      await sleep(250);
+    });
+
+    await waitFor(() =>
+      expect(rules[0]).toHaveAttribute("data-rule-valid", "false"),
+    );
+    expect(rules[0]).toHaveTextContent("Maximal 2 Zahlen");
+  });
+
   test("shows password hints when clicking on info", async () => {
     const renderResult = await act(() =>
       render(
         <I18nProvider locale="de">
-          <PasswordCreationField validationPolicy={policy}>
+          <PasswordCreationFieldTestComponent validationPolicy={policy}>
             <Label>Password</Label>
-          </PasswordCreationField>
+          </PasswordCreationFieldTestComponent>
         </I18nProvider>,
       ),
     );
@@ -109,9 +186,9 @@ describe("PasswordCreationField Tests", () => {
     const renderResult = await act(() =>
       render(
         <I18nProvider locale="de">
-          <PasswordCreationField validationPolicy={policy}>
+          <PasswordCreationFieldTestComponent validationPolicy={policy}>
             <Label>Password</Label>
-          </PasswordCreationField>
+          </PasswordCreationFieldTestComponent>
         </I18nProvider>,
       ),
     );
@@ -136,9 +213,9 @@ describe("PasswordCreationField Tests", () => {
     const renderResult = await act(() =>
       render(
         <I18nProvider locale="de">
-          <PasswordCreationField validationPolicy={policy}>
+          <PasswordCreationFieldTestComponent validationPolicy={policy}>
             <Label>Password</Label>
-          </PasswordCreationField>
+          </PasswordCreationFieldTestComponent>
         </I18nProvider>,
       ),
     );
@@ -152,8 +229,8 @@ describe("PasswordCreationField Tests", () => {
     );
     assert(complexityElement);
     expect(complexityElement).toHaveAttribute(
-      "data-complexity-status",
-      "danger",
+      "data-complexity-visible",
+      "false",
     );
 
     const generateButton = renderResult.container.querySelector(
@@ -162,18 +239,24 @@ describe("PasswordCreationField Tests", () => {
     assert(generateButton);
 
     await act(() => fireEvent.click(generateButton));
-    expect(inputElement.value).toHaveLength(12);
-    expect(complexityElement).toHaveAttribute(
-      "data-complexity-status",
-      "success",
-    );
+    await waitFor(() => {
+      expect(inputElement.value).toHaveLength(12);
+      expect(complexityElement).toHaveAttribute(
+        "data-complexity-visible",
+        "true",
+      );
+      expect(complexityElement).toHaveAttribute(
+        "data-complexity-status",
+        "success",
+      );
+    });
   });
 
   test("will pass custom buttons to input area", async () => {
     const renderResult = await act(() =>
       render(
         <I18nProvider locale="de">
-          <PasswordCreationField validationPolicy={policy}>
+          <PasswordCreationFieldTestComponent validationPolicy={policy}>
             <Label>Password</Label>
             <Button
               data-component="customButton"
@@ -182,7 +265,7 @@ describe("PasswordCreationField Tests", () => {
             >
               <IconPlus />
             </Button>
-          </PasswordCreationField>
+          </PasswordCreationFieldTestComponent>
         </I18nProvider>,
       ),
     );
@@ -197,18 +280,20 @@ describe("PasswordCreationField Tests", () => {
     expect(customButton).toBeInTheDocument();
   });
 
-  test("emmit change", async () => {
+  test("emmit events", async () => {
     const onChangeHandler = vi.fn();
+    const onValidationResult = vi.fn();
 
     const renderResult = await act(() =>
       render(
         <I18nProvider locale="de">
-          <PasswordCreationField
+          <PasswordCreationFieldTestComponent
             onChange={onChangeHandler}
+            onValidationResult={onValidationResult}
             validationPolicy={policy}
           >
             <Label>Password</Label>
-          </PasswordCreationField>
+          </PasswordCreationFieldTestComponent>
         </I18nProvider>,
       ),
     );
@@ -219,22 +304,35 @@ describe("PasswordCreationField Tests", () => {
     expect(inputElement).toHaveValue("");
 
     await act(async () => {
-      fireEvent.input(inputElement, {
+      fireEvent.change(inputElement, {
         target: { value: "invalid" },
       });
       await sleep(250);
     });
 
-    expect(onChangeHandler).toHaveBeenLastCalledWith("");
-    expect(inputElement).toHaveValue("invalid");
+    await waitFor(() => {
+      expect(onChangeHandler).toHaveBeenLastCalledWith("invalid");
+      expect(onValidationResult).toHaveBeenLastCalledWith({
+        password: "invalid",
+        isValid: false,
+      });
+      expect(inputElement).toHaveValue("invalid");
+    });
 
     await act(async () => {
-      fireEvent.input(inputElement, {
+      fireEvent.change(inputElement, {
         target: { value: "d!iBCsc8(l~i" },
       });
       await sleep(250);
     });
-    expect(onChangeHandler).toHaveBeenLastCalledWith("d!iBCsc8(l~i");
-    expect(inputElement).toHaveValue("d!iBCsc8(l~i");
+
+    await waitFor(() => {
+      expect(onChangeHandler).toHaveBeenLastCalledWith("d!iBCsc8(l~i");
+      expect(onValidationResult).toHaveBeenLastCalledWith({
+        password: "d!iBCsc8(l~i",
+        isValid: true,
+      });
+      expect(inputElement).toHaveValue("d!iBCsc8(l~i");
+    });
   });
 });

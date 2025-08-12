@@ -2,22 +2,27 @@
 
 import { Heading, Section, Text } from "@mittwald/flow-remote-react-components";
 import { LoadingIndicator } from "@mittwald/mstudio-ext-react-components";
-import { useState } from "react";
-import { useTimeout } from "usehooks-ts";
+import { useEffect, useState } from "react";
 
 export default function Page() {
-  const [loading, setIsLoading] = useState(true);
-  const hideLoading = () => {
-    setIsLoading(false);
-  };
-  useTimeout(hideLoading, 3000);
-  console.log("Is loading?", loading);
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIsReady((r) => {
+        console.log("App is ready?", !r);
+        return !r;
+      });
+    }, 5000);
+
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <Section>
       <Heading>Demo</Heading>
       <Text>Some text</Text>
-      <LoadingIndicator show={loading} />
+      <LoadingIndicator show={!isReady} />
     </Section>
   );
 }

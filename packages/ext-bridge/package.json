@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/ext-bridge",
-  "version": "0.2.0-alpha.330",
+  "version": "0.2.0-alpha.404",
   "type": "module",
   "description": "Bridge for mStudio embedded frontend extensions",
   "homepage": "https://mittwald.github.io/flow",
@@ -36,8 +36,8 @@
   },
   "dependencies": {
     "@mittwald/react-use-promise": "^3.0.4",
-    "axios": "^1.10.0",
-    "jose": "^6.0.11",
+    "axios": "^1.11.0",
+    "jose": "^6.0.12",
     "std-env": "^3.9.0",
     "zod": "^3.25.76"
   },

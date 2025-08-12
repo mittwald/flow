@@ -5,6 +5,7 @@
       <project name="components" file="file://$PROJECT_DIR$/packages/components/project.json" />
       <project name="docs" file="file://$PROJECT_DIR$/apps/docs/project.json" />
       <project name="ext-bridge" file="file://$PROJECT_DIR$/packages/ext-bridge/project.json" />
+      <project name="mstudio-ext-react-components" file="file://$PROJECT_DIR$/packages/mstudio-ext-react-components/project.json" />
       <project name="react-tunnel" file="file://$PROJECT_DIR$/packages/react-tunnel/project.json" />
       <project name="remote-core" file="file://$PROJECT_DIR$/packages/remote-core/project.json" />
       <project name="remote-dom-demo" file="file://$PROJECT_DIR$/apps/remote-dom-demo/project.json" />

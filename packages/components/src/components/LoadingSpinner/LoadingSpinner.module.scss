@@ -1,5 +1,14 @@
 .loadingSpinner {
   animation: spin var(--loading-spinner--transition-duration) linear infinite;
+  color: var(--loading-spinner--color);
+
+  &.dark {
+    color: var(--loading-spinner--color-dark);
+  }
+
+  &.light {
+    color: var(--loading-spinner--color-light);
+  }
 }
 
 @keyframes spin {

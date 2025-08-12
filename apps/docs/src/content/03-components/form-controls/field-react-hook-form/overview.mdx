@@ -1,7 +1,4 @@
-Die Field Komponente verwendet die gleichen Properties (ausschließlich `render`)
-wie die
-[Controller Komponente](https://www.react-hook-form.com/api/usecontroller/controller/)
-von React Hook Form.
+Die Field-Component nutzt dieselben Properties wie die [Controller-Component](https://www.react-hook-form.com/api/usecontroller/controller/) von React Hook Form – mit Ausnahme von `render`.
 
 # Playground
 
@@ -9,10 +6,8 @@ von React Hook Form.
 
 ---
 
-# Typed Field
+# typedField
 
-Die `typedField(form)` Factory erzeugt eine auf den Type der jeweilige Form
-angepasste Field Komponente. So führen z.B. unbekannte Feld-Namen zu einem
-TypeScript-Fehler.
+Die `typedField(form)`-Factory erzeugt eine Field-Component, die an den Typ des jeweiligen Forms angepasst ist. Dadurch führen beispielsweise unbekannte Field-Namen zu einem TypeScript-Fehler.
 
 <LiveCodeEditor example="typed-field" />

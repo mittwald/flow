@@ -1,11 +1,17 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { PasswordCreationField } from "../index";
+import {
+  generatePasswordCreationFieldValidation,
+  PasswordCreationField,
+} from "../index";
 import React, { useState } from "react";
 import { Label } from "@/components/Label";
 import { action } from "storybook/actions";
-import type { PolicyDeclaration } from "@mittwald/password-tools-js/policy";
-import { RuleType, SequenceType } from "@mittwald/password-tools-js/rules";
-import { Policy } from "@mittwald/password-tools-js/policy";
+import type { PolicyDeclaration } from "@/integrations/@mittwald/password-tools-js";
+import {
+  Policy,
+  RuleType,
+  SequenceType,
+} from "@/integrations/@mittwald/password-tools-js";
 import { useForm } from "react-hook-form";
 import { sleep } from "@/lib/promises/sleep";
 import { Button } from "@/components/Button";
@@ -28,7 +34,7 @@ const policyDecl: PolicyDeclaration = {
     },
     {
       ruleType: RuleType.regex,
-      pattern: "[A-B]",
+      pattern: "^[0-9]",
       min: 1,
       max: 2,
     },
@@ -66,8 +72,18 @@ const meta: Meta<typeof PasswordCreationField> = {
   title: "Form Controls/PasswordCreationField",
   component: PasswordCreationField,
   render: (props) => {
+    const [value, setValue] = useState("");
+
     return (
-      <PasswordCreationField onChange={action("onChange")} {...props}>
+      <PasswordCreationField
+        value={value}
+        onValidationResult={action("onValidationResult")}
+        onChange={(password) => {
+          action("onChange");
+          setValue(password);
+        }}
+        {...props}
+      >
         <Label>Password</Label>
       </PasswordCreationField>
     );
@@ -104,7 +120,7 @@ export const WithCustomButtons: Story = {
 
 export const WithForm: Story = {
   render: () => {
-    const policy = Policy.fromDeclaration(policyDecl);
+    const customPolicy = Policy.fromDeclaration(policyDecl);
     const form = useForm({
       defaultValues: {
         password: "",
@@ -112,9 +128,21 @@ export const WithForm: Story = {
     });
 
     return (
-      <Form form={form} onSubmit={async () => await sleep(2000)}>
-        <Field rules={{ required: true }} name="password">
-          <PasswordCreationField validationPolicy={policy}>
+      <Form
+        form={form}
+        onSubmit={async (values) => {
+          await sleep(2000);
+          console.log("submitted", values);
+        }}
+      >
+        <Field
+          rules={{
+            required: true,
+            validate: generatePasswordCreationFieldValidation(customPolicy),
+          }}
+          name="password"
+        >
+          <PasswordCreationField validationPolicy={customPolicy}>
             <Label>Password</Label>
             <Button>asd</Button>
           </PasswordCreationField>

@@ -1,4 +1,7 @@
-import type { RuleValidationResult } from "@mittwald/password-tools-js/rules";
+import {
+  RuleType,
+  type RuleValidationResult,
+} from "@/integrations/@mittwald/password-tools-js";
 
 const generateTranslationString = (
   rule: Partial<RuleValidationResult> & { translationKey?: string },
@@ -10,10 +13,15 @@ const generateTranslationString = (
   const translateString = `validation.${rule.ruleType ?? "general"}`;
   let finalTranslationString = "";
 
-  if ("min" in rule || "max" in rule) {
+  if (
+    ("min" in rule && rule.min !== undefined) ||
+    ("max" in rule && rule.max !== undefined)
+  ) {
     const breakingBoundaryProperty = rule.failingBoundary
       ? rule.failingBoundary
-      : "min";
+      : rule.min
+        ? "min"
+        : "max";
 
     if (rule.identifier) {
       finalTranslationString = `${translateString}.${rule.identifier}.${breakingBoundaryProperty}`;
@@ -36,6 +44,13 @@ export const generateValidationTranslation = (
   shotVersion = false,
 ): [string, Record<string, string | number | boolean> | undefined] => {
   const translationKey = generateTranslationString(r, shotVersion);
+
+  if (r.ruleType === RuleType.char && r.chars) {
+    return [
+      translationKey,
+      { ...r, chars: r.chars.map((c) => c.char).join("") },
+    ];
+  }
 
   return [
     translationKey,
