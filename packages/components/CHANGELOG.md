@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.403](https://github.com/mittwald/flow/compare/0.2.0-alpha.402...0.2.0-alpha.403) (2025-08-12)
+
+### Bug Fixes
+
+* **FileCard:** layout with buttons and action ([#1869](https://github.com/mittwald/flow/issues/1869)) ([f27c62f](https://github.com/mittwald/flow/commit/f27c62ff10d884bdc019ad4f639618a6111ded28))
+
 # [0.2.0-alpha.402](https://github.com/mittwald/flow/compare/0.2.0-alpha.401...0.2.0-alpha.402) (2025-08-12)
 
 ### Features
