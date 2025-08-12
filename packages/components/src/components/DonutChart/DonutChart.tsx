@@ -3,7 +3,7 @@ import * as Aria from "react-aria-components";
 import clsx from "clsx";
 import styles from "./DonutChart.module.scss";
 import type { PropsWithStatus } from "@/lib/types/props";
-import type { CategoricalColors } from "@/lib/tokens/CategoricalColors";
+import type { CategoricalColor } from "@/lib/tokens/CategoricalColors";
 import { DonutChartValue } from "@/components/DonutChart/components/DonutChartValue";
 import { Donut } from "@/components/DonutChart/components/Donut";
 import { Wrap } from "@/components/Wrap";
@@ -12,7 +12,7 @@ import { DonutChartLegend } from "@/components/DonutChart/components/DonutChartL
 export interface DonutChartSegment {
   value: number;
   title: string;
-  color?: CategoricalColors;
+  color?: CategoricalColor;
   valueText?: string;
 }
 
