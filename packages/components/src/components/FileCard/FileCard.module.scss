@@ -7,14 +7,21 @@
   overflow: hidden;
   position: relative;
   background-color: var(--file-card--background-color--default);
+  align-items: center;
+  display: flex;
+  padding-inline: var(--file-card--padding-x);
+  padding-block: var(--file-card--padding-y);
+  gap: var(--file-card--spacing);
 
-  &:not(:has(.link)),
   .link {
     display: flex;
     align-items: center;
-    padding-inline: var(--file-card--padding-x);
+    padding-inline-start: var(--file-card--padding-x);
     padding-block: var(--file-card--padding-y);
+    margin-inline-start: calc(var(--file-card--padding-x) * -1);
+    margin-block: calc(var(--file-card--padding-y) * -1);
     gap: var(--file-card--spacing);
+    flex-grow: 1;
   }
 
   .text {
@@ -36,39 +43,11 @@
     }
   }
 
-  &:has(.link) {
-    display: grid;
-    grid-template-areas: "content";
-
-    .link {
-      flex-grow: 1;
-      grid-area: content;
-      overflow: hidden;
-
-      &:hover {
-        background-color: var(--file-card--background-color--hover);
-      }
-
-      &[data-pressed] {
-        background-color: var(--file-card--background-color--pressed);
-      }
-    }
-
-    &:has(.deleteButton) {
-      .text {
-        --button-width: calc(
-          var(--icon--size--m) + var(--button--padding-icon-only) * 2
-        );
-        padding-right: calc(var(--file-card--spacing) + var(--button-width));
-      }
-    }
-
-    .deleteButton {
-      grid-area: content;
-      margin-right: var(--file-card--padding-x);
-      justify-self: end;
-      align-self: center;
-    }
+  &:has(.link:hover) {
+    background-color: var(--file-card--background-color--hover);
+  }
+  &:has(.link[data-pressed]) {
+    background-color: var(--file-card--background-color--pressed);
   }
 
   &.failed {
