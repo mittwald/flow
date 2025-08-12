@@ -92,6 +92,7 @@ export class RemoteFileCardElement extends FlowRemoteElement<RemoteFileCardEleme
       inlist: {},
       inputMode: {},
       is: {},
+      isFailed: {},
       itemID: {},
       itemProp: {},
       itemRef: {},

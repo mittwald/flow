@@ -1,5 +1,5 @@
 .fileCard {
-  border-color: var(--file-card--border-color);
+  border-color: var(--file-card--border-color--default);
   border-width: var(--file-card--border-width);
   border-style: var(--file-card--border-style);
   border-radius: var(--file-card--corner-radius);
@@ -57,7 +57,7 @@
     &:has(.deleteButton) {
       .text {
         --button-width: calc(
-          var(--icon--size--s) + var(--button--padding-s-icon-only) * 2
+          var(--icon--size--m) + var(--button--padding-icon-only) * 2
         );
         padding-right: calc(var(--file-card--spacing) + var(--button-width));
       }
@@ -69,5 +69,10 @@
       justify-self: end;
       align-self: center;
     }
+  }
+
+  &.failed {
+    border-color: var(--file-card--border-color--error);
+    background-color: var(--file-card--background-color--error);
   }
 }

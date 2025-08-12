@@ -29,6 +29,7 @@ export * from "@/components/ContextMenu";
 export * from "@/components/ContextualHelp";
 export * from "@/components/CopyButton";
 export * from "@/components/CounterBadge";
+export * from "@/components/CountryOptions";
 export * from "@/components/DatePicker";
 export * from "@/components/DateRangePicker";
 export * from "@/components/Div";
