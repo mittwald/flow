@@ -12,6 +12,7 @@
   padding-inline: var(--file-card--padding-x);
   padding-block: var(--file-card--padding-y);
   gap: var(--file-card--spacing);
+  flex-grow: 1;
 
   .link {
     display: flex;
