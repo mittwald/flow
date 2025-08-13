@@ -22,11 +22,11 @@ export interface CartesianChartEmptyViewProps {
 }
 
 export interface CartesianChartProps
-  extends Pick<
-      CategoricalChartProps,
-      "data" | "className" | "syncId" | "syncMethod"
-    >,
+  extends Pick<CategoricalChartProps, "data">,
     PropsWithChildren {
+  className?: string;
+  syncId?: string;
+  syncMethod?: "index" | "value";
   height?: string;
   /** View that is provided when data is empty/undefined */
   emptyView?: React.ComponentType<CartesianChartEmptyViewProps>;
