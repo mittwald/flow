@@ -1,10 +1,12 @@
-import type { PropsWithChildren } from "react";
+import type { PropsWithChildren, ReactNode } from "react";
 import React from "react";
 import styles from "./Modal.module.scss";
 import clsx from "clsx";
-import type { PropsContext } from "@/lib/propsContext";
-import { PropsContextProvider } from "@/lib/propsContext";
-import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
+import {
+  dynamic,
+  type PropsContext,
+  PropsContextProvider,
+} from "@/lib/propsContext";
 import type { OverlayController } from "@/lib/controller/overlay";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
@@ -12,7 +14,6 @@ import { Overlay } from "@/components/Overlay/Overlay";
 import { Action } from "@/components/Action";
 import { IconClose } from "@/components/Icon/components/icons";
 import type { PropsWithClassName } from "@/lib/types/props";
-import HeaderView from "@/views/HeaderView";
 import ButtonView from "@/views/ButtonView";
 
 export interface ModalProps
@@ -54,8 +55,23 @@ export const Modal = flowComponent("Modal", (props) => {
   const rootClassName = clsx(
     offCanvas ? styles.offCanvas : styles.modal,
     styles[`size-${size}`],
-    styles[offCanvasOrientation],
+    offCanvasOrientation === "left" && styles["left"],
     className,
+  );
+
+  const header = (children: ReactNode) => (
+    <>
+      {children}
+      <Action closeOverlay="Modal">
+        <ButtonView
+          variant="plain"
+          color="secondary"
+          onPress={controller?.close}
+        >
+          <IconClose />
+        </ButtonView>
+      </Action>
+    </>
   );
 
   const propsContext: PropsContext = {
@@ -84,9 +100,10 @@ export const Modal = flowComponent("Modal", (props) => {
       AccentBox: { className: styles.accentBox, color: "neutral" },
     },
     Heading: {
+      className: styles.header,
       level: 2,
       slot: "title",
-      tunnelId: "heading",
+      children: dynamic((props) => header(props.children)),
     },
     ActionGroup: {
       className: styles.actionGroup,
@@ -102,22 +119,7 @@ export const Modal = flowComponent("Modal", (props) => {
       {...rest}
     >
       <PropsContextProvider props={propsContext}>
-        <TunnelProvider>
-          <HeaderView className={styles.header}>
-            <TunnelExit id="heading" />
-            <Action closeOverlay="Modal">
-              <ButtonView
-                variant="plain"
-                color="secondary"
-                className={styles.closeButton}
-                onPress={controller?.close}
-              >
-                <IconClose />
-              </ButtonView>
-            </Action>
-          </HeaderView>
-          {children}
-        </TunnelProvider>
+        {children}
       </PropsContextProvider>
     </Overlay>
   );

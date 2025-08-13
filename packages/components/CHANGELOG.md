@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.408](https://github.com/mittwald/flow/compare/0.2.0-alpha.407...0.2.0-alpha.408) (2025-08-13)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.407](https://github.com/mittwald/flow/compare/0.2.0-alpha.406...0.2.0-alpha.407) (2025-08-13)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.406](https://github.com/mittwald/flow/compare/0.2.0-alpha.405...0.2.0-alpha.406) (2025-08-13)
+
+### Bug Fixes
+
+* **Modal:** fix modal header with form ([#1876](https://github.com/mittwald/flow/issues/1876)) ([6e76eb8](https://github.com/mittwald/flow/commit/6e76eb87511ecfcbea55dc1f97cff0afa9c48232))
+
+# [0.2.0-alpha.405](https://github.com/mittwald/flow/compare/0.2.0-alpha.404...0.2.0-alpha.405) (2025-08-13)
+
+### Bug Fixes
+
+* **Modal:** fix missing slot attribute ([#1873](https://github.com/mittwald/flow/issues/1873)) ([2389ad0](https://github.com/mittwald/flow/commit/2389ad0d2d719dd6b0f0ab01f1a062e90378b764))
+
 # [0.2.0-alpha.404](https://github.com/mittwald/flow/compare/0.2.0-alpha.403...0.2.0-alpha.404) (2025-08-12)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
