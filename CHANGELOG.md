@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.405](https://github.com/mittwald/flow/compare/0.2.0-alpha.404...0.2.0-alpha.405) (2025-08-13)
+
+### Bug Fixes
+
+* **Modal:** fix missing slot attribute ([#1873](https://github.com/mittwald/flow/issues/1873)) ([2389ad0](https://github.com/mittwald/flow/commit/2389ad0d2d719dd6b0f0ab01f1a062e90378b764))
+
 # [0.2.0-alpha.404](https://github.com/mittwald/flow/compare/0.2.0-alpha.403...0.2.0-alpha.404) (2025-08-12)
 
 **Note:** Version bump only for package @mittwald/flow-project
