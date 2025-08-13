@@ -72,6 +72,7 @@
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "@types/react-syntax-highlighter": "^15.5.13",
+    "@uiw/react-md-editor": "^4.0.8",
     "clsx": "^2.1.1",
     "copy-to-clipboard": "^3.3.3",
     "dot-prop": "^9.0.0",
