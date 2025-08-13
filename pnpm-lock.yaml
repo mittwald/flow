@@ -600,7 +600,7 @@ importers:
         specifier: ^4.20.4
         version: 4.20.4
       typescript:
-        specifier: ^5.9.2
+        specifier: ^5.8.3
         version: 5.9.2
       typescript-plugin-css-modules:
         specifier: ^5.2.0
