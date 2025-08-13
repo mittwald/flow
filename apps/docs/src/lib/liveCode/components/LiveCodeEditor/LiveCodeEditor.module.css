@@ -41,7 +41,6 @@
 
   .editor pre {
     white-space: pre !important;
-    overflow: hidden;
     padding: 0 !important;
     background-color: var(--neutral--color--300) !important;
   }
@@ -97,6 +96,7 @@
     grid-template-rows: 0fr;
     visibility: hidden;
     padding-block: 0;
+    height: 0;
   }
 }
 
