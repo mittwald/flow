@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.406](https://github.com/mittwald/flow/compare/0.2.0-alpha.405...0.2.0-alpha.406) (2025-08-13)
+
+### Bug Fixes
+
+* **Modal:** fix modal header with form ([#1876](https://github.com/mittwald/flow/issues/1876)) ([6e76eb8](https://github.com/mittwald/flow/commit/6e76eb87511ecfcbea55dc1f97cff0afa9c48232))
+
 # [0.2.0-alpha.405](https://github.com/mittwald/flow/compare/0.2.0-alpha.404...0.2.0-alpha.405) (2025-08-13)
 
 ### Bug Fixes
