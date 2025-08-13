@@ -14,7 +14,6 @@ import { Overlay } from "@/components/Overlay/Overlay";
 import { Action } from "@/components/Action";
 import { IconClose } from "@/components/Icon/components/icons";
 import type { PropsWithClassName } from "@/lib/types/props";
-import HeaderView from "@/views/HeaderView";
 import ButtonView from "@/views/ButtonView";
 
 export interface ModalProps
@@ -61,7 +60,7 @@ export const Modal = flowComponent("Modal", (props) => {
   );
 
   const header = (children: ReactNode) => (
-    <HeaderView className={styles.header}>
+    <>
       {children}
       <Action closeOverlay="Modal">
         <ButtonView
@@ -72,7 +71,7 @@ export const Modal = flowComponent("Modal", (props) => {
           <IconClose />
         </ButtonView>
       </Action>
-    </HeaderView>
+    </>
   );
 
   const propsContext: PropsContext = {
@@ -101,6 +100,7 @@ export const Modal = flowComponent("Modal", (props) => {
       AccentBox: { className: styles.accentBox, color: "neutral" },
     },
     Heading: {
+      className: styles.header,
       level: 2,
       slot: "title",
       children: dynamic((props) => header(props.children)),
