@@ -2,10 +2,12 @@ import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { MarkdownEditor } from "@/components/MarkdownEditor";
 import { Label } from "@/components/Label";
+import { FieldError } from "@/components/FieldError";
 
 const meta: Meta<typeof MarkdownEditor> = {
   title: "Form Controls/MarkdownEditor",
   component: MarkdownEditor,
+  args: { placeholder: "Write a message..." },
   render: (props) => <MarkdownEditor {...props} />,
 };
 export default meta;
@@ -26,4 +28,16 @@ export const WithLabel: Story = {
 
 export const ShowCharacterCount: Story = {
   args: { showCharacterCount: true, maxLength: 100 },
+};
+
+export const WithFieldError: Story = {
+  render: (props) => (
+    <MarkdownEditor {...props} isInvalid defaultValue="hello">
+      <FieldError>Invalid message</FieldError>
+    </MarkdownEditor>
+  ),
+};
+
+export const Resizeable: Story = {
+  args: { rows: 1, autoResizeMaxRows: 5 },
 };

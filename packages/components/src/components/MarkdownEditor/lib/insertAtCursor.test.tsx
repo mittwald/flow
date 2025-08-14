@@ -62,12 +62,12 @@ describe("insertAtCursor", () => {
   });
 
   test("inserts quote syntax correctly", () => {
-    const { getByText } = render(
+    const { getByText, container } = render(
       <TestComponent markdown="Hello world" type="quote" />,
     );
 
     fireEvent.click(getByText("Insert"));
-    expect(getByText(">Hello world")).toBeDefined();
+    expect(container).toContainHTML("&gt; Hello world");
   });
 
   test("inserts code syntax correctly", () => {

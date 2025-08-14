@@ -1,9 +1,4 @@
-import React, {
-  type FC,
-  type PropsWithChildren,
-  useRef,
-  useState,
-} from "react";
+import React, { type FC, useRef, useState } from "react";
 import styles from "./MarkdownEditor.module.scss";
 import { Markdown } from "@/components/Markdown";
 import { TextArea, type TextAreaProps } from "@/components/TextArea";
@@ -12,7 +7,7 @@ import clsx from "clsx";
 
 export type MarkdownEditorMode = "editor" | "preview";
 
-export interface MarkdownEditorProps extends PropsWithChildren, TextAreaProps {}
+export type MarkdownEditorProps = TextAreaProps;
 
 export const MarkdownEditor: FC<MarkdownEditorProps> = (props) => {
   const { isDisabled, children, ...rest } = props;

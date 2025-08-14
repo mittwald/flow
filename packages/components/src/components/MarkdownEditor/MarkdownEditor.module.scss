@@ -67,7 +67,8 @@
     background-color: var(--form-control--background-color--hover);
   }
 
-  &[data-invalid] .toolbar {
+  &:has(textarea[data-invalid]) .toolbar,
+  &:has(textarea[data-invalid]) .markdown {
     background-color: var(--form-control--background-color--invalid);
     border-color: var(--form-control--border-color--invalid);
   }
