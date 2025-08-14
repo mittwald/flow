@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import styles from "./MarkdownEditor.module.scss";
 import { Markdown } from "@/components/Markdown";
 import { TextArea, type TextAreaProps } from "@/components/TextArea";
@@ -24,7 +24,7 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
 
   const [markdown, setMarkdown] = useState(value ?? "");
   const [mode, setMode] = useState<MarkdownEditorMode>("editor");
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
   const rootClassName = clsx(
     styles.markdownEditor,
@@ -32,18 +32,12 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
     styles[`mode-${mode}`],
   );
 
-  useEffect(() => {
-    if (onChange) {
-      onChange(markdown);
-    }
-  }, [markdown]);
-
   return (
     <TextArea
       {...rest}
       isDisabled={isDisabled}
       className={rootClassName}
-      ref={textareaRef}
+      ref={textAreaRef}
       value={markdown}
       rows={rows}
       autoResizeMaxRows={autoResizeMaxRows}
@@ -52,10 +46,11 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
       <Toolbar
         markdown={markdown}
         setMarkdown={setMarkdown}
-        textareaRef={textareaRef}
+        textAreaRef={textAreaRef}
         setMode={setMode}
         mode={mode}
         isDisabled={isDisabled}
+        onChange={onChange}
       />
 
       <Markdown

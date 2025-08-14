@@ -29,6 +29,7 @@ export const insertAtCursor = (
   setMarkdown: (markdown: string) => void,
   textareaRef: RefObject<HTMLTextAreaElement | null>,
   type: InsertType,
+  onChange?: (markdown: string) => void,
 ) => {
   const textarea = textareaRef.current;
   if (!textarea) return;
@@ -83,6 +84,10 @@ export const insertAtCursor = (
   }
 
   setMarkdown(newText);
+
+  if (onChange) {
+    onChange(newText);
+  }
 
   setTimeout(() => {
     textarea.setSelectionRange(cursorPosition, cursorPosition);

@@ -10,14 +10,22 @@ import locales from "../locales/*.locale.json";
 interface Props extends PropsWithChildren {
   markdown: string;
   setMarkdown: (markdown: string) => void;
-  textareaRef: RefObject<HTMLTextAreaElement | null>;
+  textAreaRef: RefObject<HTMLTextAreaElement | null>;
   isDisabled?: boolean;
   type: InsertType;
+  onChange?: (markdown: string) => void;
 }
 
 export const ToolbarButton: FC<Props> = (props) => {
-  const { markdown, setMarkdown, textareaRef, children, isDisabled, type } =
-    props;
+  const {
+    markdown,
+    setMarkdown,
+    textAreaRef,
+    children,
+    isDisabled,
+    type,
+    onChange,
+  } = props;
 
   const stringFormatter = useLocalizedStringFormatter(locales);
 
@@ -28,7 +36,9 @@ export const ToolbarButton: FC<Props> = (props) => {
       size="s"
       variant="plain"
       color="dark"
-      onPress={() => insertAtCursor(markdown, setMarkdown, textareaRef, type)}
+      onPress={() =>
+        insertAtCursor(markdown, setMarkdown, textAreaRef, type, onChange)
+      }
     >
       {children}
     </Button>

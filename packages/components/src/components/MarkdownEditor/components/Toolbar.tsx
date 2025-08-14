@@ -17,10 +17,11 @@ import { ModeButton } from "@/components/MarkdownEditor/components/ModeButton";
 interface Props {
   markdown: string;
   setMarkdown: (markdown: string) => void;
-  textareaRef: RefObject<HTMLTextAreaElement | null>;
+  textAreaRef: RefObject<HTMLTextAreaElement | null>;
   setMode: (mode: MarkdownEditorMode) => void;
   mode: MarkdownEditorMode;
   isDisabled?: boolean;
+  onChange?: (markdown: string) => void;
 }
 
 export const Toolbar: FC<Props> = (props) => {
