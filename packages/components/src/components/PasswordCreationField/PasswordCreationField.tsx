@@ -39,9 +39,11 @@ import type {
   PolicyValidationResult,
   PolicyGenericDeclaration,
   RuleValidationResult,
-  defaultPasswordCreationPolicy,
 } from "@/integrations/@mittwald/password-tools-js";
-import { Policy } from "@/integrations/@mittwald/password-tools-js";
+import {
+  defaultPasswordCreationPolicy,
+  Policy,
+} from "@/integrations/@mittwald/password-tools-js";
 import { usePolicyValidationResult } from "@/components/PasswordCreationField/lib/usePolicyValidationResult";
 
 export interface PasswordCreationFieldProps
