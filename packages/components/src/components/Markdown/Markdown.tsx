@@ -4,7 +4,7 @@ import { InlineCode } from "@/components/InlineCode";
 import { Link } from "@/components/Link";
 import { Separator } from "@/components/Separator";
 import { Text } from "@/components/Text";
-import type { FC, ReactNode } from "react";
+import type { CSSProperties, FC, ReactNode } from "react";
 import React, { Children, isValidElement } from "react";
 import type { Components, Options } from "react-markdown";
 import ReactMarkdown from "react-markdown";
@@ -12,12 +12,15 @@ import styles from "./Markdown.module.scss";
 import { extractTextFromFirstChild } from "@/lib/react/remote";
 import type { PropsWithClassName } from "@/lib/types/props";
 import clsx from "clsx";
+import remarkGfm from "remark-gfm";
 
 export interface MarkdownProps
   extends PropsWithClassName,
     Omit<Options, "components"> {
   /** The color schema of the markdown component. */
   color?: "dark" | "light" | "default";
+  /** @internal */
+  style?: CSSProperties;
 }
 
 /** @flr-generate all */
@@ -112,7 +115,9 @@ export const Markdown: FC<MarkdownProps> = (props) => {
 
   return (
     <div className={clsx(styles.markdown, className)} {...rest}>
-      <ReactMarkdown components={components}>{textContent}</ReactMarkdown>
+      <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
+        {textContent}
+      </ReactMarkdown>
     </div>
   );
 };

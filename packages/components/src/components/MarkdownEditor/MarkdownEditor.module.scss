@@ -1,13 +1,16 @@
 @use "@/styles/mixins/formControl";
 
 .markdownEditor {
-  display: grid !important;
   grid-template-areas:
     "label"
     "toolbar"
     "content"
     "fieldDescription";
-  position: relative;
+
+  &.mode-editor,
+  &.mode-preview {
+    display: grid;
+  }
 
   .toolbar {
     grid-area: toolbar;
@@ -35,6 +38,7 @@
   }
 
   .markdown {
+    overflow-y: auto;
     @include formControl.formBorder;
     @include formControl.formColor;
   }

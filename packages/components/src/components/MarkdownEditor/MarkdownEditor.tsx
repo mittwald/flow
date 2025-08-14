@@ -11,7 +11,16 @@ export type MarkdownEditorMode = "editor" | "preview";
 export type MarkdownEditorProps = TextAreaProps;
 
 export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
-  const { isDisabled, children, className, value, onChange, ...rest } = props;
+  const {
+    isDisabled,
+    children,
+    className,
+    value,
+    onChange,
+    rows,
+    autoResizeMaxRows,
+    ...rest
+  } = props;
 
   const [markdown, setMarkdown] = useState(value ?? "");
   const [mode, setMode] = useState<MarkdownEditorMode>("editor");
@@ -36,6 +45,8 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
       className={rootClassName}
       ref={textareaRef}
       value={markdown}
+      rows={rows}
+      autoResizeMaxRows={autoResizeMaxRows}
       onChange={(v) => setMarkdown(v)}
     >
       <Toolbar
@@ -47,7 +58,14 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
         isDisabled={isDisabled}
       />
 
-      <Markdown className={styles.markdown}>{markdown}</Markdown>
+      <Markdown
+        className={styles.markdown}
+        style={{
+          maxHeight: `calc(var(--line-height--m) * ${autoResizeMaxRows ?? rows} + (var(--form-control--padding-y) * 2))`,
+        }}
+      >
+        {markdown}
+      </Markdown>
 
       {children}
     </TextArea>
