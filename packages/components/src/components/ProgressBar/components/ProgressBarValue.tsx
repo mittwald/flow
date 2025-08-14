@@ -35,7 +35,7 @@ export const ProgressBarValue: FC<Props> = (props) => {
 
   const valueText = formatOptions ? formatter.format(value) : `${value} %`;
 
-  const textWithMaxValue = `${value} ${stringFormatter.format("progressBar.of")} ${maxValueText}`;
+  const textWithMaxValue = `${valueText} ${stringFormatter.format("progressBar.of")} ${maxValueText}`;
 
   return (
     <span className={styles.value}>

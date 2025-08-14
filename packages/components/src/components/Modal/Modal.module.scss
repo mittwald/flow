@@ -9,50 +9,34 @@
   [role="dialog"] > form {
     overflow: hidden;
     outline: none;
-    display: grid;
+    display: flex;
+    flex-direction: column;
     height: 100%;
     max-height: inherit;
   }
 
-  [role="dialog"]:not(:has(> form)) {
-    grid-template-areas:
-      "header"
-      "content"
-      "actionGroup";
-    grid-template-rows: auto 1fr auto;
-  }
-
-  [role="dialog"]:has(> form) {
-    grid-template-areas:
-      "header"
-      "content";
-    grid-template-rows: auto 1fr;
-  }
-
-  [role="dialog"] > form {
-    grid-area: content;
-    grid-template-areas:
-      "content"
-      "actionGroup";
-    grid-template-rows: 1fr auto;
-  }
-
   .header {
-    grid-area: header;
     padding-inline: var(--modal--padding);
     padding-block: var(--modal--header-padding-y);
     border-bottom-width: var(--modal--border-width);
     border-bottom-style: var(--modal--border-style);
     border-bottom-color: var(--modal--border-color);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: var(--section-header--heading-to-action-spacing);
+
+    > span {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-grow: 1;
+      gap: var(--section-header--heading-to-action-spacing);
+    }
+  }
+
+  .content {
+    flex-grow: 1;
   }
 
   .content,
   .columnLayout {
-    grid-area: content;
     overflow-x: hidden;
     overflow-y: auto;
     display: flex;
@@ -62,12 +46,12 @@
   }
 
   .actionGroup {
-    grid-area: actionGroup;
     padding: var(--modal--padding);
     background-color: var(--modal--footer-background-color);
     border-top-width: var(--modal--border-width);
     border-top-style: var(--modal--border-style);
     border-top-color: var(--modal--border-color);
+    flex-grow: 0;
   }
 
   .columnLayout {

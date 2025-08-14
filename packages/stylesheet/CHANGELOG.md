@@ -3,6 +3,54 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.412](https://github.com/mittwald/flow/compare/0.2.0-alpha.411...0.2.0-alpha.412) (2025-08-14)
+
+**Note:** Version bump only for package @mittwald/flow-stylesheet
+
+# [0.2.0-alpha.411](https://github.com/mittwald/flow/compare/0.2.0-alpha.410...0.2.0-alpha.411) (2025-08-13)
+
+**Note:** Version bump only for package @mittwald/flow-stylesheet
+
+# [0.2.0-alpha.410](https://github.com/mittwald/flow/compare/0.2.0-alpha.409...0.2.0-alpha.410) (2025-08-13)
+
+**Note:** Version bump only for package @mittwald/flow-stylesheet
+
+# [0.2.0-alpha.409](https://github.com/mittwald/flow/compare/0.2.0-alpha.408...0.2.0-alpha.409) (2025-08-13)
+
+**Note:** Version bump only for package @mittwald/flow-stylesheet
+
+# [0.2.0-alpha.408](https://github.com/mittwald/flow/compare/0.2.0-alpha.407...0.2.0-alpha.408) (2025-08-13)
+
+**Note:** Version bump only for package @mittwald/flow-stylesheet
+
+# [0.2.0-alpha.407](https://github.com/mittwald/flow/compare/0.2.0-alpha.406...0.2.0-alpha.407) (2025-08-13)
+
+**Note:** Version bump only for package @mittwald/flow-stylesheet
+
+# [0.2.0-alpha.406](https://github.com/mittwald/flow/compare/0.2.0-alpha.405...0.2.0-alpha.406) (2025-08-13)
+
+**Note:** Version bump only for package @mittwald/flow-stylesheet
+
+# [0.2.0-alpha.405](https://github.com/mittwald/flow/compare/0.2.0-alpha.404...0.2.0-alpha.405) (2025-08-13)
+
+**Note:** Version bump only for package @mittwald/flow-stylesheet
+
+# [0.2.0-alpha.404](https://github.com/mittwald/flow/compare/0.2.0-alpha.403...0.2.0-alpha.404) (2025-08-12)
+
+**Note:** Version bump only for package @mittwald/flow-stylesheet
+
+# [0.2.0-alpha.403](https://github.com/mittwald/flow/compare/0.2.0-alpha.402...0.2.0-alpha.403) (2025-08-12)
+
+**Note:** Version bump only for package @mittwald/flow-stylesheet
+
+# [0.2.0-alpha.402](https://github.com/mittwald/flow/compare/0.2.0-alpha.401...0.2.0-alpha.402) (2025-08-12)
+
+**Note:** Version bump only for package @mittwald/flow-stylesheet
+
+# [0.2.0-alpha.401](https://github.com/mittwald/flow/compare/0.2.0-alpha.400...0.2.0-alpha.401) (2025-08-12)
+
+**Note:** Version bump only for package @mittwald/flow-stylesheet
+
 # [0.2.0-alpha.400](https://github.com/mittwald/flow/compare/0.2.0-alpha.399...0.2.0-alpha.400) (2025-08-12)
 
 **Note:** Version bump only for package @mittwald/flow-stylesheet
