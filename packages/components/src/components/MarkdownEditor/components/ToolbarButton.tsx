@@ -11,16 +11,19 @@ interface Props extends PropsWithChildren {
   markdown: string;
   setMarkdown: (markdown: string) => void;
   textareaRef: RefObject<HTMLTextAreaElement | null>;
+  isDisabled?: boolean;
   type: InsertType;
 }
 
 export const ToolbarButton: FC<Props> = (props) => {
-  const { markdown, setMarkdown, textareaRef, children, type } = props;
+  const { markdown, setMarkdown, textareaRef, children, isDisabled, type } =
+    props;
 
   const stringFormatter = useLocalizedStringFormatter(locales);
 
   return (
     <Button
+      isDisabled={isDisabled}
       aria-label={stringFormatter.format(`toolbar.${type}`)}
       size="s"
       variant="plain"

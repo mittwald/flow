@@ -20,6 +20,10 @@
     column-gap: var(--form-control--padding-y);
   }
 
+  .modeButton {
+    margin-inline-start: auto;
+  }
+
   .content {
     position: relative;
   }
@@ -56,26 +60,26 @@
   }
 
   &:has(.textArea[data-invalid]) {
+    background-color: var(--form-control--background-color--invalid);
     &,
     .toolbar {
       border-color: var(--form-control--border-color--invalid);
     }
-    background-color: var(--form-control--background-color--invalid);
   }
 
   &:has(.textArea:focus-within) {
+    background-color: var(--form-control--background-color--focused);
     &,
     .toolbar {
       border-color: var(--form-control--border-color--focused);
     }
-    background-color: var(--form-control--background-color--focused);
   }
 
   &[aria-disabled] {
     &,
     .toolbar {
+      background-color: var(--form-control--background-color--disabled);
       border-color: var(--form-control--border-color--disabled);
     }
-    background-color: var(--form-control--background-color--disabled);
   }
 }

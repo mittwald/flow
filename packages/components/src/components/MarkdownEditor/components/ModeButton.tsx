@@ -3,14 +3,16 @@ import { Button } from "@/components/Button";
 import { useLocalizedStringFormatter } from "react-aria";
 import locales from "../locales/*.locale.json";
 import type { MarkdownEditorMode } from "@/components/MarkdownEditor/MarkdownEditor";
+import styles from "../MarkdownEditor.module.scss";
 
 interface Props {
   mode: MarkdownEditorMode;
   setMode: (mode: MarkdownEditorMode) => void;
+  isDisabled?: boolean;
 }
 
 export const ModeButton: FC<Props> = (props) => {
-  const { setMode, mode } = props;
+  const { setMode, mode, isDisabled } = props;
 
   const stringFormatter = useLocalizedStringFormatter(locales);
 
@@ -18,6 +20,8 @@ export const ModeButton: FC<Props> = (props) => {
 
   return (
     <Button
+      isDisabled={isDisabled}
+      className={styles.modeButton}
       size="s"
       variant="plain"
       color="dark"

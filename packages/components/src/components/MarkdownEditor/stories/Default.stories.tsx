@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import type { Markdown } from "@/components/Markdown";
 import { MarkdownEditor } from "@/components/MarkdownEditor";
 
 const meta: Meta<typeof MarkdownEditor> = {
@@ -10,6 +9,8 @@ const meta: Meta<typeof MarkdownEditor> = {
 };
 export default meta;
 
-type Story = StoryObj<typeof Markdown>;
+type Story = StoryObj<typeof MarkdownEditor>;
 
 export const Default: Story = {};
+
+export const Disabled: Story = { args: { isDisabled: true } };
