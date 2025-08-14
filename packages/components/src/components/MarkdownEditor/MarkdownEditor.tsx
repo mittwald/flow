@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./MarkdownEditor.module.scss";
 import { Markdown } from "@/components/Markdown";
 import { TextArea, type TextAreaProps } from "@/components/TextArea";
@@ -11,9 +11,9 @@ export type MarkdownEditorMode = "editor" | "preview";
 export type MarkdownEditorProps = TextAreaProps;
 
 export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
-  const { isDisabled, children, className, ...rest } = props;
+  const { isDisabled, children, className, value, onChange, ...rest } = props;
 
-  const [markdown, setMarkdown] = useState("");
+  const [markdown, setMarkdown] = useState(value ?? "");
   const [mode, setMode] = useState<MarkdownEditorMode>("editor");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -22,6 +22,12 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
     className,
     styles[`mode-${mode}`],
   );
+
+  useEffect(() => {
+    if (onChange) {
+      onChange(markdown);
+    }
+  }, [markdown]);
 
   return (
     <TextArea
