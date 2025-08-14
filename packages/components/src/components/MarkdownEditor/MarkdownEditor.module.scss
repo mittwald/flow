@@ -1,18 +1,28 @@
 @use "@/styles/mixins/formControl";
 
 .markdownEditor {
-  @include formControl.formBorder;
-  @include formControl.formColor;
-  @include formControl.formAnimation;
+  display: grid !important;
+  grid-template-areas:
+    "label"
+    "toolbar"
+    "content"
+    "fieldDescription";
+  position: relative;
 
   .toolbar {
+    grid-area: toolbar;
     display: flex;
     justify-content: space-between;
     padding: var(--form-control--padding-y);
     column-gap: var(--form-control--padding-y);
-    border-bottom-width: var(--form-control--border-width);
-    border-bottom-style: var(--form-control--border-style);
-    border-color: var(--form-control--border-color--default);
+    @include formControl.formBorder;
+    @include formControl.formColor;
+    @include formControl.formAnimation;
+    & {
+      border-bottom: none;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
   }
 
   .toolbarButtons {
@@ -24,21 +34,18 @@
     margin-inline-start: auto;
   }
 
-  .content {
-    position: relative;
-  }
-
-  .textArea textarea {
-    padding-block: var(--form-control--padding-y);
-    padding-inline: var(--form-control--padding-x);
-    border: none;
-  }
-
   .markdown {
-    position: absolute;
-    inset: 0;
+    @include formControl.formBorder;
+    @include formControl.formColor;
+  }
+
+  textarea,
+  .markdown {
+    grid-area: content;
     padding-block: var(--form-control--padding-y);
     padding-inline: var(--form-control--padding-x);
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
   }
 
   &.mode-editor {
@@ -48,38 +55,30 @@
   }
 
   &.mode-preview {
-    .textArea {
+    textarea {
       opacity: 0;
+      pointer-events: none;
     }
   }
 
   /* States */
 
-  &:has(.textArea:hover) {
+  &:has(textarea:hover) .toolbar {
     background-color: var(--form-control--background-color--hover);
   }
 
-  &:has(.textArea[data-invalid]) {
+  &[data-invalid] .toolbar {
     background-color: var(--form-control--background-color--invalid);
-    &,
-    .toolbar {
-      border-color: var(--form-control--border-color--invalid);
-    }
+    border-color: var(--form-control--border-color--invalid);
   }
 
-  &:has(.textArea:focus-within) {
+  &:has(textarea[data-focused="true"]) .toolbar {
     background-color: var(--form-control--background-color--focused);
-    &,
-    .toolbar {
-      border-color: var(--form-control--border-color--focused);
-    }
+    border-color: var(--form-control--border-color--focused);
   }
 
-  &[aria-disabled] {
-    &,
-    .toolbar {
-      background-color: var(--form-control--background-color--disabled);
-      border-color: var(--form-control--border-color--disabled);
-    }
+  &:has(textarea[data-disabled]) .toolbar {
+    background-color: var(--form-control--background-color--disabled);
+    border-color: var(--form-control--border-color--disabled);
   }
 }
