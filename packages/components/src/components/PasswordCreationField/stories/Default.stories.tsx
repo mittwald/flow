@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import {
-  generatePasswordCreationFieldValidation,
-  PasswordCreationField,
-} from "../index";
+import { PasswordCreationField } from "../index";
 import React, { useState } from "react";
 import { Label } from "@/components/Label";
 import { action } from "storybook/actions";
-import type { PolicyDeclaration } from "@/integrations/@mittwald/password-tools-js";
+import {
+  type PolicyDeclaration,
+  generatePasswordCreationFieldValidation,
+} from "@/integrations/@mittwald/password-tools-js";
 import {
   Policy,
   RuleType,

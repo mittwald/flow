@@ -9,9 +9,9 @@ import {
   Label,
   Section,
   PasswordCreationField,
-  generatePasswordCreationFieldValidation,
 } from "@mittwald/flow-react-components";
 import {
+  generatePasswordCreationFieldValidation,
   Policy,
   RuleType,
 } from "@mittwald/flow-react-components/mittwald-password-tools-js";
