@@ -3,6 +3,9 @@ import React from "react";
 import { MarkdownEditor } from "@/components/MarkdownEditor";
 import { Label } from "@/components/Label";
 import { FieldError } from "@/components/FieldError";
+import { useForm } from "react-hook-form";
+import { Field, Form } from "@/integrations/react-hook-form";
+import { Button } from "@/components/Button";
 
 const meta: Meta<typeof MarkdownEditor> = {
   title: "Form Controls/MarkdownEditor",
@@ -40,4 +43,21 @@ export const WithFieldError: Story = {
 
 export const Resizeable: Story = {
   args: { rows: 1, autoResizeMaxRows: 5 },
+};
+
+export const WithForm: Story = {
+  render: (props) => {
+    const form = useForm({ defaultValues: { message: "Hello!" } });
+    return (
+      <Form form={form} onSubmit={async (v) => console.log(v)}>
+        <Field name="message" rules={{ required: "Please enter a message" }}>
+          <MarkdownEditor {...props}>
+            <Label>Message</Label>
+          </MarkdownEditor>
+        </Field>
+        <br />
+        <Button type="submit">Submit</Button>
+      </Form>
+    );
+  },
 };
