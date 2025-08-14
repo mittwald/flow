@@ -20,13 +20,13 @@ import {
   Field,
 } from "@mittwald/flow-remote-react-components/react-hook-form";
 import {
-  Policy,
+  type PolicyDeclaration,
+  generatePasswordCreationFieldValidation,
   RuleType,
 } from "@mittwald/flow-react-components/mittwald-password-tools-js";
-import { generatePasswordCreationFieldValidation } from "@mittwald/flow-react-components";
 import { useForm } from "react-hook-form";
 
-const customPolicy = Policy.fromDeclaration({
+const customPolicy: PolicyDeclaration = {
   minComplexity: 1,
   rules: [
     {
@@ -35,7 +35,7 @@ const customPolicy = Policy.fromDeclaration({
       max: 5,
     },
   ],
-});
+};
 
 export default function Page() {
   const form = useForm({

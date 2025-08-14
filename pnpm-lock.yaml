@@ -356,8 +356,8 @@ importers:
         specifier: ^3.2.6
         version: 3.2.6
       '@mittwald/password-tools-js':
-        specifier: 3.0.0-alpha.15
-        version: 3.0.0-alpha.15
+        specifier: 3.0.0-alpha.17
+        version: 3.0.0-alpha.17
       '@mittwald/react-tunnel':
         specifier: workspace:*
         version: link:../react-tunnel
@@ -889,9 +889,9 @@ importers:
       '@mittwald/flow-core':
         specifier: workspace:*
         version: link:../core
-      '@mittwald/password-tools-js':
-        specifier: 3.0.0-alpha.15
-        version: 3.0.0-alpha.15
+      '@mittwald/flow-react-components':
+        specifier: workspace:*
+        version: link:../components
       '@mittwald/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
@@ -2529,8 +2529,8 @@ packages:
   '@microsoft/tsdoc@0.15.1':
     resolution: {integrity: sha512-4aErSrCR/On/e5G2hDP0wjooqDdauzEbIq8hIkIe5pXV0rtWJZvdCEKL0ykZxex+IxIwBp0eGeV48hQN07dXtw==}
 
-  '@mittwald/password-tools-js@3.0.0-alpha.15':
-    resolution: {integrity: sha512-r4OQqIDU3dYjsr33TgnQiaUojsBF7K7lfxrspyVZ4XhWCMt+aSltQ1I1F5sEDEdtaiQrOvrxwyT68xrFl0g2aA==}
+  '@mittwald/password-tools-js@3.0.0-alpha.17':
+    resolution: {integrity: sha512-zb+3xkQVYQa3x9rvBOjYkNyOhg8aUMdWtOIjDKXnN5QXbiy50u/kGzpVsC18aah9hkadtaMtWMNToWR6gVtdWA==}
     hasBin: true
 
   '@mittwald/react-use-promise@3.0.4':
@@ -11132,7 +11132,7 @@ snapshots:
 
   '@microsoft/tsdoc@0.15.1': {}
 
-  '@mittwald/password-tools-js@3.0.0-alpha.15':
+  '@mittwald/password-tools-js@3.0.0-alpha.17':
     dependencies:
       '@zxcvbn-ts/core': 3.0.4
       '@zxcvbn-ts/language-common': 3.0.4

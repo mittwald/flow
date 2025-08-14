@@ -1,27 +1,19 @@
 import { Serializer } from "@/serialization/Serializer";
-import type { ComplexityScore } from "@mittwald/password-tools-js/policy";
-import { Policy } from "@mittwald/password-tools-js/policy";
-import type { AnyRuleDeclaration } from "@mittwald/password-tools-js/rules";
+import {
+  Policy,
+  type PolicyDeclaration,
+} from "@mittwald/flow-react-components/mittwald-password-tools-js";
 
 export const passwordPolicySerializer = new Serializer<
   Policy,
-  {
-    minComplexity: ComplexityScore;
-    rules: AnyRuleDeclaration[];
-  }
+  PolicyDeclaration
 >({
   name: "PasswordPolicy",
   serialize: {
-    isApplicable: (val): val is Policy => {
-      return val instanceof Policy;
-    },
-    apply: (policy) => {
-      return policy.toTransferable();
-    },
+    isApplicable: (val) => Policy.isPolicy(val),
+    apply: (policy) => policy.toDeclaration(),
   },
   deserialize: {
-    apply: (policyDeclaration) => {
-      return Policy.fromDeclaration(policyDeclaration);
-    },
+    apply: (policyDeclaration) => Policy.fromDeclaration(policyDeclaration),
   },
 });

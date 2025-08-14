@@ -1,3 +1,4 @@
+export * from "./generatePasswordCreationFieldValidation";
 export type * from "@mittwald/password-tools-js/policy";
 export { Policy } from "@mittwald/password-tools-js/policy";
 
