@@ -10,15 +10,19 @@ import type { Components, Options } from "react-markdown";
 import ReactMarkdown from "react-markdown";
 import styles from "./Markdown.module.scss";
 import { extractTextFromFirstChild } from "@/lib/react/remote";
+import type { PropsWithClassName } from "@/lib/types/props";
+import clsx from "clsx";
 
-export interface MarkdownProps extends Omit<Options, "components"> {
+export interface MarkdownProps
+  extends PropsWithClassName,
+    Omit<Options, "components"> {
   /** The color schema of the markdown component. */
   color?: "dark" | "light" | "default";
 }
 
 /** @flr-generate all */
 export const Markdown: FC<MarkdownProps> = (props) => {
-  const { children, color = "default", ...rest } = props;
+  const { children, color = "default", className, ...rest } = props;
 
   const headingAndLinkColor = color === "default" ? "primary" : color;
   const textColor = color === "default" ? undefined : color;
@@ -107,7 +111,7 @@ export const Markdown: FC<MarkdownProps> = (props) => {
   const textContent = extractTextFromFirstChild(children);
 
   return (
-    <div className={styles.markdown} {...rest}>
+    <div className={clsx(styles.markdown, className)} {...rest}>
       <ReactMarkdown components={components}>{textContent}</ReactMarkdown>
     </div>
   );

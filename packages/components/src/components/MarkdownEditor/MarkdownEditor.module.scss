@@ -1,0 +1,81 @@
+@use "@/styles/mixins/formControl";
+
+.markdownEditor {
+  @include formControl.formBorder;
+  @include formControl.formColor;
+  @include formControl.formAnimation;
+
+  .toolbar {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--form-control--padding-y);
+    column-gap: var(--form-control--padding-y);
+    border-bottom-width: var(--form-control--border-width);
+    border-bottom-style: var(--form-control--border-style);
+    border-color: var(--form-control--border-color--default);
+  }
+
+  .toolbarButtons {
+    display: flex;
+    column-gap: var(--form-control--padding-y);
+  }
+
+  .content {
+    position: relative;
+  }
+
+  .textArea textarea {
+    padding-block: var(--form-control--padding-y);
+    padding-inline: var(--form-control--padding-x);
+    border: none;
+  }
+
+  .markdown {
+    position: absolute;
+    inset: 0;
+    padding-block: var(--form-control--padding-y);
+    padding-inline: var(--form-control--padding-x);
+  }
+
+  &.mode-editor {
+    .markdown {
+      display: none;
+    }
+  }
+
+  &.mode-preview {
+    .textArea {
+      opacity: 0;
+    }
+  }
+
+  /* States */
+
+  &:has(.textArea:hover) {
+    background-color: var(--form-control--background-color--hover);
+  }
+
+  &:has(.textArea[data-invalid]) {
+    &,
+    .toolbar {
+      border-color: var(--form-control--border-color--invalid);
+    }
+    background-color: var(--form-control--background-color--invalid);
+  }
+
+  &:has(.textArea:focus-within) {
+    &,
+    .toolbar {
+      border-color: var(--form-control--border-color--focused);
+    }
+    background-color: var(--form-control--background-color--focused);
+  }
+
+  &[aria-disabled] {
+    &,
+    .toolbar {
+      border-color: var(--form-control--border-color--disabled);
+    }
+    background-color: var(--form-control--background-color--disabled);
+  }
+}
