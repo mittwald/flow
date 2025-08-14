@@ -1,6 +1,6 @@
-import type { PolicyGenericDeclaration } from "@/integrations/@mittwald/password-tools-js";
-import { Policy } from "@/integrations/@mittwald/password-tools-js";
-import { defaultPasswordCreationPolicy } from "@/components/PasswordCreationField/defaultPasswordCreationPolicy";
+import type { PolicyGenericDeclaration } from "@mittwald/password-tools-js/policy";
+import { Policy } from "@mittwald/password-tools-js/policy";
+import { defaultPasswordCreationPolicy } from "./";
 import { isPromise } from "remeda";
 
 export const generatePasswordCreationFieldValidation =
