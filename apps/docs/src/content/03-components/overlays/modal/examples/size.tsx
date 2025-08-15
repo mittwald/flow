@@ -7,9 +7,6 @@ import {
   DatePicker,
   FieldDescription,
   Heading,
-  IconBackup,
-  IconSettings,
-  IconSshSftp,
   Label,
   Link,
   Modal,
@@ -63,7 +60,6 @@ export default () => {
         <Button>Modal M</Button>
         <Modal size="m">
           <Heading>
-            <IconBackup />
             <Text>Backup anlegen</Text>
           </Heading>
           <Content>
@@ -107,10 +103,7 @@ export default () => {
       <ModalTrigger>
         <Button>OffCanvas S</Button>
         <Modal size="s" offCanvas>
-          <Heading>
-            <IconSettings />
-            Dashboard-Einstellungen
-          </Heading>
+          <Heading>Dashboard-Einstellungen</Heading>
           <Content>
             <Section>
               <Heading>Widget-Sichtbarkeit</Heading>
@@ -201,10 +194,7 @@ export default () => {
       <ModalTrigger>
         <Button>OffCanvas M</Button>
         <Modal size="m" offCanvas>
-          <Heading>
-            <IconSshSftp />
-            SFTP-Benutzer anlegen
-          </Heading>
+          <Heading>SFTP-Benutzer anlegen</Heading>
           <Content>
             <Section>
               <Heading>Beschreibung</Heading>

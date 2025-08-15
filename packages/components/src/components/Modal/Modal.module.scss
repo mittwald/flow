@@ -15,6 +15,11 @@
     max-height: inherit;
   }
 
+  header {
+    display: flex;
+    justify-content: space-between;
+  }
+
   .header {
     padding-inline: var(--modal--padding);
     padding-block: var(--modal--header-padding-y);
