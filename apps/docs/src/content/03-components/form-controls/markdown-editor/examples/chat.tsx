@@ -10,7 +10,7 @@ import {
   MessageSeparator,
   MessageThread,
   Text,
-  TextArea,
+  MarkdownEditor,
 } from "@mittwald/flow-react-components";
 
 <Chat height={400}>
@@ -66,6 +66,10 @@ import {
       </Content>
     </Message>
   </MessageThread>
-  <TextArea aria-label="Nachricht" />
+  <MarkdownEditor
+    aria-label="Nachricht"
+    rows={1}
+    autoResizeMaxRows={10}
+  />
   <Button color="accent">Senden</Button>
 </Chat>;

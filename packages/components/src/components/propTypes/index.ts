@@ -158,7 +158,7 @@ export interface FlowComponentPropsTypes {
   Text: TextProps;
   TextArea: TextAreaProps;
   TextField: TextFieldProps;
-  TimeField: TimeFieldProps<Aria.TimeValue>;
+  TimeField: TimeFieldProps;
 }
 
 const propsContextSupportingComponentsMap: Record<

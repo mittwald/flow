@@ -6,6 +6,7 @@ import { FieldError } from "@/components/FieldError";
 import { useForm } from "react-hook-form";
 import { Field, Form } from "@/integrations/react-hook-form";
 import { Button } from "@/components/Button";
+import { action } from "storybook/actions";
 
 const meta: Meta<typeof MarkdownEditor> = {
   title: "Form Controls/MarkdownEditor",
@@ -51,7 +52,7 @@ export const WithForm: Story = {
       defaultValues: { message: "Hello!" },
     });
     return (
-      <Form form={form} onSubmit={async (v) => console.log(v)}>
+      <Form form={form} onSubmit={async (v) => action(v.message)}>
         <Field name="message" rules={{ required: "Please enter a message" }}>
           <MarkdownEditor {...props}>
             <Label>Message</Label>
