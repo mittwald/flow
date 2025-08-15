@@ -66,6 +66,10 @@ import {
       </Content>
     </Message>
   </MessageThread>
-  <TextArea aria-label="Nachricht" />
+  <TextArea
+    aria-label="Nachricht"
+    rows={1}
+    autoResizeMaxRows={10}
+  />
   <Button color="accent">Senden</Button>
 </Chat>;

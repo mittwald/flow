@@ -66,10 +66,6 @@ import {
       </Content>
     </Message>
   </MessageThread>
-  <MarkdownEditor
-    aria-label="Nachricht"
-    rows={1}
-    autoResizeMaxRows={10}
-  />
+  <MarkdownEditor aria-label="Nachricht" />
   <Button color="accent">Senden</Button>
 </Chat>;
