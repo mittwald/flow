@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.415](https://github.com/mittwald/flow/compare/0.2.0-alpha.414...0.2.0-alpha.415) (2025-08-15)
+
+### Bug Fixes
+
+* **Popover:** fix padding ([#1866](https://github.com/mittwald/flow/issues/1866)) ([8ffad62](https://github.com/mittwald/flow/commit/8ffad62665e6fba33901bf79f2189b2f72c9ddf9))
+
 # [0.2.0-alpha.414](https://github.com/mittwald/flow/compare/0.2.0-alpha.413...0.2.0-alpha.414) (2025-08-14)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
