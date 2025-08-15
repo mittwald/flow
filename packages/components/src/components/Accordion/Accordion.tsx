@@ -60,6 +60,7 @@ export const Accordion: FC<AccordionProps> = (props) => {
     Heading: {
       className: styles.header,
       level: 4,
+      size: "xs",
       children: dynamic((props) => headerButton(props.children)),
     },
     Label: {
