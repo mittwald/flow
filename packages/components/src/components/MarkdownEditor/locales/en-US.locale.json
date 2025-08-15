@@ -1,0 +1,12 @@
+{
+  "mode.editor": "Editor",
+  "mode.preview": "Preview",
+  "toolbar.bold": "Bold",
+  "toolbar.code": "Code",
+  "toolbar.italic": "Italic",
+  "toolbar.link": "Link",
+  "toolbar.orderedList": "Ordered List",
+  "toolbar.quote": "Quote",
+  "toolbar.strikeThrough": "Strike through",
+  "toolbar.unorderedList": "List"
+}

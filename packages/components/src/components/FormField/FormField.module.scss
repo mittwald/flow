@@ -6,6 +6,7 @@
   /* Elements */
   .label {
     order: 1;
+    grid-area: label;
     margin-bottom: var(--form-control--label-to-control-spacing);
   }
 
@@ -13,6 +14,7 @@
   .customFieldError,
   .fieldDescription {
     order: 3;
+    grid-area: fieldDescription;
     margin-top: var(--form-control--control-to-info-spacing);
   }
 
