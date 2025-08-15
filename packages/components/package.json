@@ -55,12 +55,12 @@
     "test:unit": "vitest run"
   },
   "dependencies": {
-    "@chakra-ui/live-region": "^2.1.0",
     "@internationalized/string-compiler": "^3.2.6",
     "@mittwald/password-tools-js": "3.0.0-alpha.15",
     "@mittwald/react-tunnel": "workspace:*",
     "@mittwald/react-use-promise": "^3.0.4",
     "@react-aria/form": "^3.1.0",
+    "@react-aria/live-announcer": "^3.4.4",
     "@react-aria/utils": "^3.30.0",
     "@react-stately/form": "^3.2.0",
     "@react-types/shared": "^3.31.0",
