@@ -24,8 +24,6 @@ export interface PopoverProps
   controller?: OverlayController;
   /** A fixed width for the popover. */
   width?: string | number;
-  /** The popovers padding. @default "m" */
-  padding?: "s" | "m";
 }
 
 export const Popover = flowComponent("Popover", (props) => {

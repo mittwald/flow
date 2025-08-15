@@ -92,12 +92,7 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
 
   return (
     <ClearPropsContext>
-      <Popover
-        {...rest}
-        controller={overlayController}
-        isDialogContent={false}
-        padding="s"
-      >
+      <Popover {...rest} controller={overlayController} isDialogContent={false}>
         <OverlayContextProvider
           type="ContextMenu"
           controller={overlayController}

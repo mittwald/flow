@@ -3,4 +3,5 @@
   display: flex;
   flex-direction: column;
   max-width: var(--contextual-help--max-width);
+  padding: var(--popover--padding--m);
 }

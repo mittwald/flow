@@ -34,7 +34,6 @@ export class RemoteContextualHelpElement extends FlowRemoteElement<RemoteContext
       lang: {},
       maxHeight: {},
       offset: {},
-      padding: {},
       placement: {},
       scrollRef: {},
       shouldCloseOnInteractOutside: {},

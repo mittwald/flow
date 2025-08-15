@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   row-gap: var(--menu--item-to-item-spacing);
+  padding: var(--popover--padding--s);
 
   &:focus-visible {
     outline: none;
