@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.416](https://github.com/mittwald/flow/compare/0.2.0-alpha.415...0.2.0-alpha.416) (2025-08-15)
+
+### Bug Fixes
+
+* **Accordion:** update accordion size ([#1883](https://github.com/mittwald/flow/issues/1883)) ([0c1607e](https://github.com/mittwald/flow/commit/0c1607e34b651768583e57edb7cae580797b368a))
+
 # [0.2.0-alpha.415](https://github.com/mittwald/flow/compare/0.2.0-alpha.414...0.2.0-alpha.415) (2025-08-15)
 
 ### Bug Fixes
