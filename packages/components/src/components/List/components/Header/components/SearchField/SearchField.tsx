@@ -6,6 +6,7 @@ import type { SearchFieldRenderComponent } from "@/components/List/model/search/
 import { useOnChange } from "@/lib/hooks";
 import SearchFieldView from "@/views/SearchFieldView";
 import styles from "./SearchField.module.scss";
+import { useAriaAnnounceSearchState } from "@/components/List/hooks/useAriaAnnounceSearchState";
 
 interface Props extends PropsWithClassName {
   search: Search<never>;
@@ -32,6 +33,8 @@ const DefaultSearchFieldRender: SearchFieldRenderComponent = (props) => {
       return () => clearTimeout(timeout);
     }
   }, [searchString, autoSubmit]);
+
+  useAriaAnnounceSearchState();
 
   useOnChange(value, () => {
     setSearchString(value ?? "");
