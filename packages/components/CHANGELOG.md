@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.418](https://github.com/mittwald/flow/compare/0.2.0-alpha.417...0.2.0-alpha.418) (2025-08-15)
+
+### Bug Fixes
+
+* **Modal:** fix modal with column layout ([#1885](https://github.com/mittwald/flow/issues/1885)) ([e5fa0bc](https://github.com/mittwald/flow/commit/e5fa0bcbe3330f6739262a530cfb80b545c6052a))
+
 # [0.2.0-alpha.417](https://github.com/mittwald/flow/compare/0.2.0-alpha.416...0.2.0-alpha.417) (2025-08-15)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
