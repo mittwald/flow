@@ -15,7 +15,7 @@ interface Props extends PropsWithClassName {
 const autoSubmitTimeout = 800;
 
 const DefaultSearchFieldRender: SearchFieldRenderComponent = (props) => {
-  const { onChange, value, autoSubmit, ...searchFieldProps } = props;
+  const { onChange, value, autoSubmit = true, ...searchFieldProps } = props;
 
   const [searchString, setSearchString] = useState(value ?? "");
 
