@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.419](https://github.com/mittwald/flow/compare/0.2.0-alpha.418...0.2.0-alpha.419) (2025-08-15)
+
+### Bug Fixes
+
+* **Modal:** fix modal for remote components with older version ([#1886](https://github.com/mittwald/flow/issues/1886)) ([16c3903](https://github.com/mittwald/flow/commit/16c390310a0d10a7b18590c482ddb6eea274c4d7))
+
 # [0.2.0-alpha.418](https://github.com/mittwald/flow/compare/0.2.0-alpha.417...0.2.0-alpha.418) (2025-08-15)
 
 ### Bug Fixes
