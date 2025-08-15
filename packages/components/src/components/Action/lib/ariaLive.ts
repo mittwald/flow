@@ -1,8 +1,8 @@
 import { useLocalizedStringFormatter } from "react-aria";
 import locales from "../locales/*.locale.json";
 import { useEffect } from "react";
-import { useLiveRegion } from "@chakra-ui/live-region";
 import type { ActionStateValue } from "@/components/Action/models/ActionState";
+import { announce } from "@react-aria/live-announcer";
 
 interface Options {
   isPendingText?: string;
@@ -22,20 +22,13 @@ export const useAriaAnnounceActionState = (
     isFailedText = formater.format("action.isFailed"),
   } = options;
 
-  const liveRegion = useLiveRegion({
-    "aria-live": "polite",
-    "aria-atomic": false,
-    "aria-relevant": "text additions",
-    role: "status",
-  });
-
   useEffect(() => {
     if (actionState === "isPending") {
-      liveRegion.speak(isPendingText);
+      announce(isPendingText, "polite");
     } else if (actionState === "isSucceeded") {
-      liveRegion.speak(isSucceededText);
+      announce(isSucceededText, "polite");
     } else if (actionState === "isFailed") {
-      liveRegion.speak(isFailedText);
+      announce(isFailedText, "polite");
     }
   }, [actionState]);
 };
