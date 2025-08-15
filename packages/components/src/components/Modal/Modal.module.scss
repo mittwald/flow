@@ -31,10 +31,6 @@
     }
   }
 
-  .content {
-    flex-grow: 1;
-  }
-
   .content,
   .columnLayout {
     overflow-x: hidden;
@@ -43,6 +39,7 @@
     flex-direction: column;
     padding: var(--modal--padding);
     min-height: var(--modal--content-min-height);
+    flex-grow: 1;
   }
 
   .actionGroup {
