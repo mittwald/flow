@@ -14,6 +14,7 @@
     justify-content: center;
     column-gap: var(--slider--spacing-x);
     padding: 0 calc(var(--button-size) + var(--slider--spacing-x));
+    min-height: calc(var(--button-size) - var(--slider--spacing-y) / 2);
 
     .value {
       font-weight: var(--slider--value-font-weight);
