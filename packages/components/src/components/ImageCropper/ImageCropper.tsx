@@ -1,19 +1,20 @@
 import { type FC, useEffect, useState } from "react";
-import Cropper, { type Area } from "react-easy-crop";
+import Cropper, { type Area, type CropperProps } from "react-easy-crop";
 import type { PropsWithClassName } from "@/lib/types/props";
 import clsx from "clsx";
 import styles from "./ImageCropper.module.scss";
 import { Slider } from "@/components/Slider";
-import { getCroppedImage } from "@/components/ImageCropper/lib/getCroppedImage";
+import { getCroppedImageFile } from "@/components/ImageCropper/lib/getCroppedImageFile";
 
-interface Props extends PropsWithClassName {
+interface Props
+  extends PropsWithClassName,
+    Pick<CropperProps, "aspect" | "cropShape"> {
   image?: File | string;
-  aspect?: number;
-  onCropComplete?: (croppedImage: string) => void;
+  onCropComplete?: (croppedImage: File) => void;
 }
 
 export const ImageCropper: FC<Props> = (props) => {
-  const { image, className, aspect = 1, onCropComplete } = props;
+  const { image, className, onCropComplete, ...rest } = props;
   const [imageSrc, setImageSrc] = useState<string>("");
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
@@ -41,10 +42,12 @@ export const ImageCropper: FC<Props> = (props) => {
     async function crop() {
       if (croppedAreaPixels) {
         try {
-          const croppedImg = await getCroppedImage(imageSrc, croppedAreaPixels);
+          const croppedImageFile = await getCroppedImageFile(
+            imageSrc,
+            croppedAreaPixels,
+          );
           if (onCropComplete) {
-            console.log(croppedImg);
-            onCropComplete(croppedImg);
+            onCropComplete(croppedImageFile);
           }
         } catch (e) {
           console.error(e);
@@ -63,10 +66,10 @@ export const ImageCropper: FC<Props> = (props) => {
           onCropChange={setCrop}
           zoom={zoom}
           onZoomChange={setZoom}
-          aspect={aspect}
           onCropComplete={(_, croppedAreaPixels) =>
             setCroppedAreaPixels(croppedAreaPixels)
           }
+          {...rest}
         />
       </div>
       <Slider

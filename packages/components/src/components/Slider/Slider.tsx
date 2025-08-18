@@ -31,6 +31,7 @@ export const Slider = flowComponent("Slider", (props) => {
     isDisabled,
     defaultValue,
     showInitialMarker,
+    step,
     ...rest
   } = props;
 
@@ -53,6 +54,7 @@ export const Slider = flowComponent("Slider", (props) => {
       className={rootClassName}
       isDisabled={isDisabled}
       defaultValue={defaultValue}
+      step={step}
       {...rest}
     >
       <div className={styles.text}>
@@ -67,7 +69,7 @@ export const Slider = flowComponent("Slider", (props) => {
         {({ state }) => (
           <>
             <Button
-              onPress={() => state.decrementThumb(0)}
+              onPress={() => state.decrementThumb(0, step)}
               aria-label={stringFormatter.format("slider.decrement")}
               variant="plain"
               color="secondary"
@@ -79,7 +81,7 @@ export const Slider = flowComponent("Slider", (props) => {
             </Button>
 
             <Button
-              onPress={() => state.incrementThumb(0)}
+              onPress={() => state.incrementThumb(0, step)}
               aria-label={stringFormatter.format("slider.increment")}
               variant="plain"
               color="secondary"
