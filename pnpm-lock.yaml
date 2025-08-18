@@ -349,9 +349,6 @@ importers:
 
   packages/components:
     dependencies:
-      '@chakra-ui/live-region':
-        specifier: ^2.1.0
-        version: 2.1.0(react@19.1.0)
       '@internationalized/string-compiler':
         specifier: ^3.2.6
         version: 3.2.6
@@ -367,6 +364,9 @@ importers:
       '@react-aria/form':
         specifier: ^3.1.0
         version: 3.1.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@react-aria/live-announcer':
+        specifier: ^3.4.4
+        version: 3.4.4
       '@react-aria/utils':
         specifier: ^3.30.0
         version: 3.30.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -1795,11 +1795,6 @@ packages:
 
   '@bundled-es-modules/tough-cookie@0.1.6':
     resolution: {integrity: sha512-dvMHbL464C0zI+Yqxbz6kZ5TOEp7GLW+pry/RWndAR8MJQAXZ2rPmIs8tziTZjeIyhSNZgZbCePtfSbdWqStJw==}
-
-  '@chakra-ui/live-region@2.1.0':
-    resolution: {integrity: sha512-ZOxFXwtaLIsXjqnszYYrVuswBhnIHHP+XIgK1vC6DePKtyK590Wg+0J0slDwThUAd4MSSIUa/nNX84x1GMphWw==}
-    peerDependencies:
-      react: ^19.1.0
 
   '@cspotcode/source-map-support@0.8.1':
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
@@ -10308,10 +10303,6 @@ snapshots:
       '@types/tough-cookie': 4.0.5
       tough-cookie: 4.1.4
     optional: true
-
-  '@chakra-ui/live-region@2.1.0(react@19.1.0)':
-    dependencies:
-      react: 19.1.0
 
   '@cspotcode/source-map-support@0.8.1':
     dependencies:
