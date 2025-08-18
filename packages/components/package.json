@@ -85,6 +85,7 @@
     "react-aria": "^3.42.0",
     "react-aria-components": "^1.11.0",
     "react-children-utilities": "^2.10.0",
+    "react-easy-crop": "^5.5.0",
     "react-markdown": "^10.1.0",
     "react-stately": "^3.40.0",
     "react-syntax-highlighter": "^15.6.1",
