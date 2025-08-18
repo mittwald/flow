@@ -27,11 +27,11 @@ const markdownSyntax: Record<
 export const insertAtCursor = (
   markdown: string,
   setMarkdown: (markdown: string) => void,
-  textareaRef: RefObject<HTMLTextAreaElement | null>,
+  textAreaRef: RefObject<HTMLTextAreaElement | null>,
   type: InsertType,
   onChange?: (markdown: string) => void,
 ) => {
-  const textarea = textareaRef.current;
+  const textarea = textAreaRef.current;
   if (!textarea) return;
 
   const { before, after = "", toggleable = false } = markdownSyntax[type];
@@ -89,8 +89,8 @@ export const insertAtCursor = (
     onChange(newText);
   }
 
-  setTimeout(() => {
+  requestAnimationFrame(() => {
     textarea.setSelectionRange(cursorPosition, cursorPosition);
     textarea.focus();
-  }, 0);
+  });
 };

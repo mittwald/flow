@@ -5,6 +5,7 @@ import { TextArea, type TextAreaProps } from "@/components/TextArea";
 import { Toolbar } from "@/components/MarkdownEditor/components/Toolbar";
 import clsx from "clsx";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import { handleKeyDown } from "@/components/MarkdownEditor/lib/handleKeyDown";
 
 export type MarkdownEditorMode = "editor" | "preview";
 
@@ -43,6 +44,7 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
       rows={rows}
       autoResizeMaxRows={autoResizeMaxRows}
       onChange={(v) => setMarkdown(v)}
+      onKeyDown={(e) => handleKeyDown(e, textAreaRef, setMarkdown, onChange)}
     >
       <Toolbar
         markdown={markdown}
