@@ -11,10 +11,19 @@ interface Props
     Pick<CropperProps, "aspect" | "cropShape"> {
   image?: File | string;
   onCropComplete?: (croppedImage: File) => void;
+  width?: number;
+  height?: number;
 }
 
 export const ImageCropper: FC<Props> = (props) => {
-  const { image, className, onCropComplete, ...rest } = props;
+  const {
+    image,
+    className,
+    onCropComplete,
+    width = 300,
+    height = 300,
+    ...rest
+  } = props;
   const [imageSrc, setImageSrc] = useState<string>("");
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
@@ -58,8 +67,8 @@ export const ImageCropper: FC<Props> = (props) => {
   }, [croppedAreaPixels]);
 
   return (
-    <div className={rootClassName}>
-      <div className={styles.cropperContainer}>
+    <div className={rootClassName} style={{ maxWidth: width }}>
+      <div className={styles.cropperContainer} style={{ height }}>
         <Cropper
           crop={crop}
           image={imageSrc}

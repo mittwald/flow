@@ -22,6 +22,8 @@ export const Default: Story = {};
 
 export const CustomAspect: Story = { args: { aspect: 16 / 9 } };
 
+export const CustomDimensions: Story = { args: { width: 400, height: 200 } };
+
 export const RoundShape: Story = { args: { aspect: 1, cropShape: "round" } };
 
 export const WithForm: Story = {
