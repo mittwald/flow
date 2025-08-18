@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.420](https://github.com/mittwald/flow/compare/0.2.0-alpha.419...0.2.0-alpha.420) (2025-08-18)
+
+### Bug Fixes
+
+* **List:** fix list header wrap ([#1890](https://github.com/mittwald/flow/issues/1890)) ([4e282c2](https://github.com/mittwald/flow/commit/4e282c2fdddff26b0dd8d346d9f32d24691e2528))
+
 # [0.2.0-alpha.419](https://github.com/mittwald/flow/compare/0.2.0-alpha.418...0.2.0-alpha.419) (2025-08-15)
 
 ### Bug Fixes
