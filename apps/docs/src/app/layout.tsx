@@ -6,7 +6,7 @@ import HeaderNavigation from "@/app/_components/layout/HeaderNavigation/HeaderNa
 import clsx from "clsx";
 import styles from "./layout.module.scss";
 import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
-import logoMittwald from "../../assets/m-flow_logo.svg";
+import logoMittwald from "../../assets/flow-logo.svg";
 import MainNavigation from "@/app/_components/layout/MainNavigation";
 import MobileNavigation from "@/app/_components/layout/MobileNavigation/MobileNavigation";
 import {
@@ -17,6 +17,7 @@ import {
 import Footer from "@/app/_components/layout/Footer/Footer";
 import { Matomo } from "@/app/_components/Matomo";
 import { RouterProvider } from "@mittwald/flow-react-components/nextjs";
+import wave from "../../assets/flow-wave.svg";
 
 export const metadata: Metadata = {
   title: "Flow – mittwald Design System",
@@ -33,6 +34,7 @@ const RootLayout: FC<PropsWithChildren> = async (props) => {
           <Matomo />
           <NotificationProvider>
             <header className={styles.header}>
+              <Image src={wave.src} className={styles.wave} />
               <Link href="/" className={styles.homeLink}>
                 <Image src={logoMittwald.src} alt="mittwald Flow Logo" />
               </Link>
