@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.422](https://github.com/mittwald/flow/compare/0.2.0-alpha.421...0.2.0-alpha.422) (2025-08-18)
+
+### Bug Fixes
+
+* **Remote:** <ColumnLayout/> is not hidden when suspended ([#1893](https://github.com/mittwald/flow/issues/1893)) ([7d49d63](https://github.com/mittwald/flow/commit/7d49d630aa15d690fc697b105c6e6a3a5b74b009))
+
 # [0.2.0-alpha.421](https://github.com/mittwald/flow/compare/0.2.0-alpha.420...0.2.0-alpha.421) (2025-08-18)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
