@@ -40,7 +40,7 @@
     "@mittwald/flow-remote-core": "workspace:*",
     "@mittwald/flow-remote-elements": "workspace:*",
     "@mittwald/remote-dom-react": "1.2.2-mittwald.10",
-    "@testing-library/jest-dom": "6.6.3",
+    "@testing-library/jest-dom": "6.7.0",
     "@types/react": "^19.1.8",
     "react-error-boundary": "^5.0.0"
   },
@@ -50,7 +50,7 @@
     "@mittwald/flow-remote-react-renderer": "workspace:*",
     "@mittwald/typescript-config": "workspace:*",
     "@testing-library/dom": "^10.4.1",
-    "@testing-library/jest-dom": "6.6.3",
+    "@testing-library/jest-dom": "6.7.0",
     "@testing-library/react": "~16.2.0",
     "@testing-library/user-event": "^14.6.1",
     "@types/node": "^22.16.5",
