@@ -10,6 +10,7 @@ export type MarkdownEditorMode = "editor" | "preview";
 
 export type MarkdownEditorProps = TextAreaProps;
 
+/** @flr-generate all */
 export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
   const {
     isDisabled,
