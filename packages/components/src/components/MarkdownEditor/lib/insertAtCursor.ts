@@ -18,7 +18,7 @@ const markdownSyntax: Record<
   italic: { before: "_", after: "_", toggleable: true },
   strikeThrough: { before: "~~", after: "~~", toggleable: true },
   quote: { before: "> " },
-  code: { before: "`", after: "`" },
+  code: { before: "`", after: "`", toggleable: true },
   link: { before: "[", after: "](https://)" },
   unorderedList: { before: "- " },
   orderedList: { before: "1. " },
