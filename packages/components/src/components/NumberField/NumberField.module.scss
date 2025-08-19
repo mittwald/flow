@@ -49,6 +49,12 @@
       border-color: var(--form-control--border-color--disabled);
     }
   }
+  &:has(input:read-only) {
+    .decrementButton,
+    .incrementButton {
+      border-color: var(--form-control--border-color--default);
+    }
+  }
 }
 
 @media (pointer: fine) {

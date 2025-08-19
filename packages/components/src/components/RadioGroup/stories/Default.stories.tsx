@@ -32,11 +32,9 @@ type Story = StoryObj<typeof RadioGroup>;
 
 export const Default: Story = {};
 
-export const RadioGroupDisabled: Story = {
-  args: {
-    isDisabled: true,
-  },
-};
+export const RadioGroupDisabled: Story = { args: { isDisabled: true } };
+
+export const ReadOnly: Story = { args: { isReadOnly: true } };
 
 export const RadioDisabled: Story = {
   render: (props) => (
@@ -52,6 +50,18 @@ export const RadioDisabled: Story = {
 };
 
 export const RadioButtons: Story = {
+  render: (props) => (
+    <RadioGroup {...props} defaultValue="admin">
+      <Label>Role</Label>
+      <RadioButton value="admin">Admin</RadioButton>
+      <RadioButton value="member">Member</RadioButton>
+      <RadioButton value="accountant">Accountant</RadioButton>
+    </RadioGroup>
+  ),
+};
+
+export const RadioButtonsReadOnly: Story = {
+  args: { isReadOnly: true },
   render: (props) => (
     <RadioGroup {...props} defaultValue="admin">
       <Label>Role</Label>
