@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.429](https://github.com/mittwald/flow/compare/0.2.0-alpha.428...0.2.0-alpha.429) (2025-08-19)
+
+### Features
+
+* add read only styling to form fields ([#1903](https://github.com/mittwald/flow/issues/1903)) ([817a3ac](https://github.com/mittwald/flow/commit/817a3acb70fc6a48d66892f8905328b67d8abd52))
+
 # [0.2.0-alpha.428](https://github.com/mittwald/flow/compare/0.2.0-alpha.427...0.2.0-alpha.428) (2025-08-19)
 
 ### Bug Fixes
