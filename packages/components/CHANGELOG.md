@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.425](https://github.com/mittwald/flow/compare/0.2.0-alpha.424...0.2.0-alpha.425) (2025-08-19)
+
+### Features
+
+* **Icon:** add IconPath ([#1898](https://github.com/mittwald/flow/issues/1898)) ([0e99baa](https://github.com/mittwald/flow/commit/0e99baadf627cd371e9f9b70e8f4612bcb9e915d))
+
 # [0.2.0-alpha.424](https://github.com/mittwald/flow/compare/0.2.0-alpha.423...0.2.0-alpha.424) (2025-08-18)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
