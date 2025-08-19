@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.428](https://github.com/mittwald/flow/compare/0.2.0-alpha.427...0.2.0-alpha.428) (2025-08-19)
+
+### Bug Fixes
+
+* **Docs:** add target blank to external links ([#1900](https://github.com/mittwald/flow/issues/1900)) ([c846c4c](https://github.com/mittwald/flow/commit/c846c4ce3381002fb7265547b23509d41598ffef))
+
 # [0.2.0-alpha.427](https://github.com/mittwald/flow/compare/0.2.0-alpha.426...0.2.0-alpha.427) (2025-08-19)
 
 **Note:** Version bump only for package @mittwald/flow-project
