@@ -41,7 +41,7 @@
   }
 
   /* Hovered */
-  &:hover {
+  &:hover:not([data-readonly="true"]) {
     background-color: var(--form-control--background-color--hover);
   }
 
