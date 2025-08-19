@@ -73,6 +73,38 @@ export const insertAtCursor = (
     newText =
       markdown.substring(0, start) + unwrapped + markdown.substring(end);
     cursorPosition = start + unwrapped.length;
+  } else if (type === "link") {
+    let linkText = "";
+    let linkUrl = "";
+    let inserted = "";
+    let cursorOffsetStart = 0;
+
+    const isValidUrl = (str: string): boolean => {
+      try {
+        new URL(str);
+        return true;
+      } catch {
+        return false;
+      }
+    };
+
+    if (selectedText) {
+      if (isValidUrl(selectedText)) {
+        linkUrl = selectedText;
+        inserted = `[](${linkUrl})`;
+        cursorOffsetStart = start + 1;
+      } else {
+        linkText = selectedText;
+        inserted = `[${linkText}]()`;
+        cursorOffsetStart = start + inserted.indexOf("](") + 2;
+      }
+    } else {
+      inserted = `[](https://)`;
+      cursorOffsetStart = start + 1;
+    }
+
+    newText = markdown.substring(0, start) + inserted + markdown.substring(end);
+    cursorPosition = cursorOffsetStart;
   } else {
     newText =
       markdown.substring(0, start) +

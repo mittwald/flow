@@ -79,13 +79,22 @@ describe("insertAtCursor", () => {
     expect(getByText("`Hello world`")).toBeDefined();
   });
 
-  test("inserts link syntax correctly", () => {
+  test("inserts link syntax correctly for marked text", () => {
     const { getByText } = render(
       <TestComponent markdown="Hello world" type="link" />,
     );
 
     fireEvent.click(getByText("Insert"));
-    expect(getByText("[Hello world](https://)")).toBeDefined();
+    expect(getByText("[Hello world]()")).toBeDefined();
+  });
+
+  test("inserts link syntax correctly for marked link", () => {
+    const { getByText } = render(
+      <TestComponent markdown="https://mittwald.github.io/flow/" type="link" />,
+    );
+
+    fireEvent.click(getByText("Insert"));
+    expect(getByText("[](https://mittwald.github.io/flow/)")).toBeDefined();
   });
 
   test("inserts unordered list syntax correctly", () => {
