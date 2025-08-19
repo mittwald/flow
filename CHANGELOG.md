@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.426](https://github.com/mittwald/flow/compare/0.2.0-alpha.425...0.2.0-alpha.426) (2025-08-19)
+
+### Features
+
+* **Link:** support whiteSpace property in link ([#1899](https://github.com/mittwald/flow/issues/1899)) ([dba2513](https://github.com/mittwald/flow/commit/dba25135200d09f43058f1590aac25182724344d))
+
 # [0.2.0-alpha.425](https://github.com/mittwald/flow/compare/0.2.0-alpha.424...0.2.0-alpha.425) (2025-08-19)
 
 ### Features
