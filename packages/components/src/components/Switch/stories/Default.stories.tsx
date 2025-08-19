@@ -31,3 +31,4 @@ export const Default: Story = {};
 export const LabelLeading: Story = { args: { labelPosition: "leading" } };
 
 export const Disabled: Story = { args: { isDisabled: true } };
+export const ReadOnly: Story = { args: { isReadOnly: true } };
