@@ -55,6 +55,7 @@ import {
   IconUser,
   IconVhost,
   IconVolume,
+  IconPath,
   Label,
   LabeledValue,
 } from "@mittwald/flow-react-components";
@@ -115,6 +116,10 @@ import {
   <LabeledValue>
     <Label>Subdomain</Label>
     <IconSubdomain />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Domainpfad</Label>
+    <IconPath />
   </LabeledValue>
   <LabeledValue>
     <Label>Certificate</Label>

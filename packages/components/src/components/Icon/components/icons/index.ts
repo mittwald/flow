@@ -69,6 +69,7 @@ export { IconNotification } from "./IconNotification";
 export { IconNumber } from "./IconNumber";
 export { IconOrder } from "./IconOrder";
 export { IconPassword } from "./IconPassword";
+export { IconPath } from "./IconPath";
 export { IconPause } from "./IconPause";
 export { IconPayment } from "./IconPayment";
 export { IconPending } from "./IconPending";

@@ -68,6 +68,7 @@ Notification: Bell
 Number: Hash
 Order: ShoppingCart
 Password: Lock
+Path: Sitemap
 Pause: PlayerPause
 Payment: CreditCard
 Pending: Loader2
