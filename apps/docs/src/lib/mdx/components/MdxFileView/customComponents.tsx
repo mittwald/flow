@@ -89,12 +89,14 @@ export const customComponents = {
 
   a: ({ children, href }: PropsWithChildren<{ href?: string }>) => {
     if (href?.startsWith("http")) {
+      const url = new URL(href);
+
       return (
         <Link
           href={href}
           inline
           target={
-            href?.includes("mittwald.github.io/flow") ? undefined : "_blank"
+            url.origin === "https://mittwald.github.io" ? undefined : "_blank"
           }
         >
           {children}
