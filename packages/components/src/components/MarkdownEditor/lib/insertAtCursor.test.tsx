@@ -49,7 +49,7 @@ describe("insertAtCursor", () => {
     );
 
     fireEvent.click(getByText("Insert"));
-    expect(getByText("*Hello world*")).toBeDefined();
+    expect(getByText("_Hello world_")).toBeDefined();
   });
 
   test("inserts strikethrough syntax correctly", () => {

@@ -15,7 +15,7 @@ const markdownSyntax: Record<
   { before: string; after?: string; toggleable?: boolean }
 > = {
   bold: { before: "**", after: "**", toggleable: true },
-  italic: { before: "*", after: "*", toggleable: true },
+  italic: { before: "_", after: "_", toggleable: true },
   strikeThrough: { before: "~~", after: "~~", toggleable: true },
   quote: { before: "> " },
   code: { before: "`", after: "`" },
@@ -39,11 +39,10 @@ export const insertAtCursor = (
   const end = textarea.selectionEnd;
   const selectedText = markdown.substring(start, end);
   const lines = selectedText.split("\n");
-  const isWrapped =
-    selectedText.startsWith(before) && selectedText.endsWith(after);
 
-  let newText: string;
-  let cursorPosition = 0;
+  let newText = markdown;
+  let selectionStart = start;
+  let selectionEnd = end;
 
   if (type === "code" && selectedText.includes("\n")) {
     newText =
@@ -52,27 +51,65 @@ export const insertAtCursor = (
       selectedText +
       "\n```\n" +
       markdown.substring(end);
-    cursorPosition = start + 4 + selectedText.length;
+    selectionStart = start + 4;
+    selectionEnd = selectionStart + selectedText.length;
   } else if (type === "orderedList") {
     const numbered = lines.map((line, i) => `${i + 1}. ${line}`).join("\n");
     newText = markdown.substring(0, start) + numbered + markdown.substring(end);
-    cursorPosition = start + numbered.length;
+    selectionStart = start;
+    selectionEnd = start + numbered.length;
   } else if (type === "unorderedList") {
     const bulleted = lines.map((line) => `- ${line}`).join("\n");
     newText = markdown.substring(0, start) + bulleted + markdown.substring(end);
-    cursorPosition = start + bulleted.length;
+    selectionStart = start;
+    selectionEnd = start + bulleted.length;
   } else if (type === "quote") {
     const quoted = lines.map((line) => `> ${line}`).join("\n");
     newText = markdown.substring(0, start) + quoted + markdown.substring(end);
-    cursorPosition = start + quoted.length;
-  } else if (toggleable && isWrapped) {
-    const unwrapped = selectedText.slice(
-      before.length,
-      selectedText.length - after.length,
-    );
-    newText =
-      markdown.substring(0, start) + unwrapped + markdown.substring(end);
-    cursorPosition = start + unwrapped.length;
+    selectionStart = start;
+    selectionEnd = start + quoted.length;
+  } else if (toggleable) {
+    const prefix = markdown.substring(start - before.length, start);
+    const suffix = markdown.substring(end, end + after.length);
+    const isSurrounded = prefix === before && suffix === after;
+    const isWrappedInside =
+      selectedText.startsWith(before) && selectedText.endsWith(after);
+
+    if (isSurrounded) {
+      // Remove external wrapping (not selected)
+      newText =
+        markdown.substring(0, start - before.length) +
+        selectedText +
+        markdown.substring(end + after.length);
+      selectionStart = start - before.length;
+      selectionEnd = selectionStart + selectedText.length;
+    } else if (isWrappedInside) {
+      // Remove internal wrapping (selected)
+      const unwrapped = selectedText.slice(
+        before.length,
+        selectedText.length - after.length,
+      );
+      newText =
+        markdown.substring(0, start) + unwrapped + markdown.substring(end);
+      selectionStart = start;
+      selectionEnd = start + unwrapped.length;
+    } else {
+      // Add wrapping
+      newText =
+        markdown.substring(0, start) +
+        before +
+        selectedText +
+        after +
+        markdown.substring(end);
+
+      if (selectedText.length === 0) {
+        selectionStart = start + before.length;
+        selectionEnd = selectionStart;
+      } else {
+        selectionStart = start + before.length;
+        selectionEnd = selectionStart + selectedText.length;
+      }
+    }
   } else if (type === "link") {
     let linkText = "";
     let linkUrl = "";
@@ -104,25 +141,32 @@ export const insertAtCursor = (
     }
 
     newText = markdown.substring(0, start) + inserted + markdown.substring(end);
-    cursorPosition = cursorOffsetStart;
+    selectionStart = selectionEnd = cursorOffsetStart;
   } else {
+    // Fallback for non-toggleable, inline syntax
     newText =
       markdown.substring(0, start) +
       before +
       selectedText +
       after +
       markdown.substring(end);
-    cursorPosition = start + before.length + selectedText.length + after.length;
+
+    if (selectedText.length === 0) {
+      // No text selected – place cursor between syntax
+      selectionStart = start + before.length;
+      selectionEnd = selectionStart;
+    } else {
+      // Keep selection
+      selectionStart = start + before.length;
+      selectionEnd = selectionStart + selectedText.length;
+    }
   }
 
   setMarkdown(newText);
-
-  if (onChange) {
-    onChange(newText);
-  }
+  if (onChange) onChange(newText);
 
   requestAnimationFrame(() => {
-    textarea.setSelectionRange(cursorPosition, cursorPosition);
+    textarea.setSelectionRange(selectionStart, selectionEnd);
     textarea.focus();
   });
 };
