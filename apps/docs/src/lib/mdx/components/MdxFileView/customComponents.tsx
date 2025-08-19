@@ -95,9 +95,7 @@ export const customComponents = {
         <Link
           href={href}
           inline
-          target={
-            url.origin === "https://mittwald.github.io" ? undefined : "_blank"
-          }
+          target={url.hostname === "mittwald.github.io" ? undefined : "_blank"}
         >
           {children}
         </Link>
