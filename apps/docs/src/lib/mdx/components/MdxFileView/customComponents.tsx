@@ -6,7 +6,7 @@ import type { PropsWithChildren } from "react";
 import { CopyButton } from "@mittwald/flow-react-components";
 import { Link } from "@mittwald/flow-react-components";
 import { Text } from "@mittwald/flow-react-components";
-import { LinkProvider } from "@mittwald/flow-react-components/nextjs";
+import { RouterProvider } from "@mittwald/flow-react-components/nextjs";
 import ExamplesContainer from "@/lib/mdx/components/DoAndDont/ExamplesContainer";
 import { ColumnLayout } from "@mittwald/flow-react-components";
 import { InlineCode } from "@mittwald/flow-react-components";
@@ -90,18 +90,24 @@ export const customComponents = {
   a: ({ children, href }: PropsWithChildren<{ href?: string }>) => {
     if (href?.startsWith("http")) {
       return (
-        <Link href={href} inline>
+        <Link
+          href={href}
+          inline
+          target={
+            href?.includes("mittwald.github.io/flow") ? undefined : "_blank"
+          }
+        >
           {children}
         </Link>
       );
     }
 
     return (
-      <LinkProvider>
+      <RouterProvider>
         <Link inline href={href}>
           {children}
         </Link>
-      </LinkProvider>
+      </RouterProvider>
     );
   },
 
