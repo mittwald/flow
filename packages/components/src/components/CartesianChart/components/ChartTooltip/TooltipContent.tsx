@@ -44,7 +44,7 @@ export const TooltipContent = (props: TooltipContentProps) => {
             >
               {formatter
                 ? formatter(i.value, i.dataKey, index, i.unit)
-                : `${i.dataKey}: ${i.value}${i.unit ? ` ${i.unit}` : ""}`}
+                : `${i.dataKey}: ${i.value} ${i.unit ? ` ${i.unit}` : ""}`}
             </LegendItem>
           ))}
       </div>
