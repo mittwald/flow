@@ -7,3 +7,13 @@
     calc(var(--popover--tip-height) + var(--chart-tooltip--spacing)) * -1
   );
 }
+
+.tooltip {
+  background-color: var(--popover--background-color);
+  box-shadow: var(--popover--box-shadow);
+  border-radius: var(--popover--corner-radius);
+  border-width: var(--popover--border-width);
+  border-style: var(--popover--border-style);
+  border-color: var(--popover--border-color);
+  padding: var(--popover--padding--m);
+}
