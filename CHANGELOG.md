@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.430](https://github.com/mittwald/flow/compare/0.2.0-alpha.429...0.2.0-alpha.430) (2025-08-20)
+
+### Bug Fixes
+
+* **ChartTooltip:** fix styling ([#1905](https://github.com/mittwald/flow/issues/1905)) ([ad9577d](https://github.com/mittwald/flow/commit/ad9577d52b614be9053d408ac9e1f39c669f6769))
+
 # [0.2.0-alpha.429](https://github.com/mittwald/flow/compare/0.2.0-alpha.428...0.2.0-alpha.429) (2025-08-19)
 
 ### Features
