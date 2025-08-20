@@ -1,5 +1,4 @@
 import clsx from "clsx";
-import popoverStyles from "../../../Popover/Popover.module.scss";
 import Heading from "@/components/Heading";
 import { LegendItem } from "@/components/Legend/components/LegendItem";
 import type * as Recharts from "recharts";
@@ -8,6 +7,7 @@ import type {
   ValueType,
 } from "recharts/types/component/DefaultTooltipContent";
 import type { WithTooltipFormatters } from "./ChartTooltip";
+import styles from "./ChartTooltip.module.scss";
 
 interface TooltipContentProps
   extends Pick<
@@ -25,25 +25,28 @@ export const TooltipContent = (props: TooltipContentProps) => {
     label,
     wrapperClassName,
   } = props;
-  const className = clsx(wrapperClassName, popoverStyles.popover);
+  const className = clsx(wrapperClassName, styles.tooltip);
 
   if (active && payload && payload.length) {
     return (
       <div className={className}>
-        <div className={popoverStyles.content}>
-          <Heading level={3}>
-            {headingFormatter ? headingFormatter(label) : label}
-          </Heading>
-          {payload
-            .filter((i) => i.fill !== "none")
-            .map((i, index) => (
-              <LegendItem color={i.fill} key={i.dataKey}>
-                {formatter
-                  ? formatter(i.value, i.dataKey, index, i.unit)
-                  : `${i.dataKey} ${i.value}${i.unit ? ` ${i.unit}` : ""}`}
-              </LegendItem>
-            ))}
-        </div>
+        <Heading level={4}>
+          {headingFormatter ? headingFormatter(label) : label}
+        </Heading>
+        {payload
+          .filter((i) => i.fill !== "none")
+          .map((i, index) => (
+            <LegendItem
+              color={i.fill
+                .replace("var(--color--categorical--", "")
+                .replace(")", "")}
+              key={i.dataKey}
+            >
+              {formatter
+                ? formatter(i.value, i.dataKey, index, i.unit)
+                : `${i.dataKey}: ${i.value}${i.unit ? ` ${i.unit}` : ""}`}
+            </LegendItem>
+          ))}
       </div>
     );
   }
