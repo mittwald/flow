@@ -84,7 +84,7 @@ export const insertAtCursor = (
     }
   } else if (type === "unorderedList") {
     if (selectedText) {
-      const bulleted = lines.map((line) => `${before} ${line}`).join("\n");
+      const bulleted = lines.map((line) => `${before}${line}`).join("\n");
       newText =
         markdown.substring(0, start) + bulleted + markdown.substring(end);
       selectionStart = start;
@@ -103,7 +103,7 @@ export const insertAtCursor = (
     }
   } else if (type === "quote") {
     if (selectedText) {
-      const quoted = lines.map((line) => `${before} ${line}`).join("\n");
+      const quoted = lines.map((line) => `${before}${line}`).join("\n");
       newText = markdown.substring(0, start) + quoted + markdown.substring(end);
       selectionStart = start;
       selectionEnd = start + quoted.length;

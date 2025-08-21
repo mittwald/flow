@@ -62,12 +62,14 @@ describe("insertAtCursor", () => {
   });
 
   test("inserts quote syntax correctly", () => {
-    const { getByText, container } = render(
+    const { getByText, getByRole } = render(
       <TestComponent markdown="Hello world" type="quote" />,
     );
 
     fireEvent.click(getByText("Insert"));
-    expect(container).toContainHTML("&gt; Hello world");
+
+    const textarea = getByRole("textbox") as HTMLTextAreaElement;
+    expect(textarea.value).toBe("> Hello world");
   });
 
   test("inserts code syntax correctly", () => {
@@ -98,21 +100,25 @@ describe("insertAtCursor", () => {
   });
 
   test("inserts unordered list syntax correctly", () => {
-    const { getByText, container } = render(
+    const { getByText, getByRole } = render(
       <TestComponent markdown={"Hello\nWorld"} type="unorderedList" />,
     );
 
     fireEvent.click(getByText("Insert"));
-    expect(container).toContainHTML("- Hello\n- World");
+
+    const textarea = getByRole("textbox") as HTMLTextAreaElement;
+    expect(textarea.value).toBe("- Hello\n- World");
   });
 
   test("inserts ordered list syntax correctly", () => {
-    const { getByText, container } = render(
+    const { getByText, getByRole } = render(
       <TestComponent markdown={"Hello\nWorld"} type="orderedList" />,
     );
 
     fireEvent.click(getByText("Insert"));
-    expect(container).toContainHTML("1. Hello\n2. World");
+
+    const textarea = getByRole("textbox") as HTMLTextAreaElement;
+    expect(textarea.value).toBe("1. Hello\n2. World");
   });
 
   test("toggles bold syntax when text is already wrapped", () => {
