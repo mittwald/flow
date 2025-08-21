@@ -79,10 +79,10 @@ export const TextFieldBase: FC<TextFieldBaseProps> = (props) => {
         onChange={handleOnChange}
         {...propsWithOptionalStringValue}
       >
-        {input}
         <PropsContextProvider props={propsContext}>
           {children}
         </PropsContextProvider>
+        {input}
         {showCharacterCount && (
           <FieldDescription className={styles.fieldDescription}>
             {charactersCountDescription}
