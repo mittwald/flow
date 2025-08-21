@@ -1,5 +1,15 @@
 import type { KeyboardEvent, RefObject } from "react";
 
+const scrollToCursor = (textarea: HTMLTextAreaElement) => {
+  const { selectionStart } = textarea;
+  const lineHeight = parseInt(
+    getComputedStyle(textarea).lineHeight || "20",
+    10,
+  );
+  const lines = textarea.value.slice(0, selectionStart).split("\n").length;
+  textarea.scrollTop = (lines - 1) * lineHeight;
+};
+
 export const handleKeyDown = (
   e: KeyboardEvent,
   textAreaRef: RefObject<HTMLTextAreaElement | null>,
@@ -39,6 +49,7 @@ export const handleKeyDown = (
 
     requestAnimationFrame(() => {
       textarea.selectionStart = textarea.selectionEnd = lineStart + 1;
+      scrollToCursor(textarea);
     });
     return;
   }
@@ -59,6 +70,7 @@ export const handleKeyDown = (
 
     requestAnimationFrame(() => {
       textarea.selectionStart = textarea.selectionEnd = start + insert.length;
+      scrollToCursor(textarea);
     });
   } else if (unorderedMatch) {
     e.preventDefault();
@@ -76,6 +88,7 @@ export const handleKeyDown = (
 
     requestAnimationFrame(() => {
       textarea.selectionStart = textarea.selectionEnd = start + insert.length;
+      scrollToCursor(textarea);
     });
   }
 };

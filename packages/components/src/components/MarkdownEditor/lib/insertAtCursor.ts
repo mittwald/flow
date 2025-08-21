@@ -24,6 +24,16 @@ const markdownSyntax: Record<
   orderedList: { before: "1. " },
 };
 
+const getLineStart = (text: string, pos: number) => {
+  const lastNewline = text.lastIndexOf("\n", pos - 1);
+  return lastNewline === -1 ? 0 : lastNewline + 1;
+};
+
+const getLineEnd = (text: string, pos: number) => {
+  const nextNewline = text.indexOf("\n", pos);
+  return nextNewline === -1 ? text.length : nextNewline;
+};
+
 export const insertAtCursor = (
   markdown: string,
   setMarkdown: (markdown: string) => void,
@@ -54,20 +64,56 @@ export const insertAtCursor = (
     selectionStart = start + 4;
     selectionEnd = selectionStart + selectedText.length;
   } else if (type === "orderedList") {
-    const numbered = lines.map((line, i) => `${i + 1}. ${line}`).join("\n");
-    newText = markdown.substring(0, start) + numbered + markdown.substring(end);
-    selectionStart = start;
-    selectionEnd = start + numbered.length;
+    if (selectedText) {
+      const numbered = lines.map((line, i) => `${i + 1}. ${line}`).join("\n");
+      newText =
+        markdown.substring(0, start) + numbered + markdown.substring(end);
+      selectionStart = start;
+      selectionEnd = start + numbered.length;
+    } else {
+      const lineStart = getLineStart(markdown, start);
+      const lineEnd = getLineEnd(markdown, start);
+      const bulletedLine = `- ${markdown.substring(lineStart, lineEnd)}`;
+
+      newText =
+        markdown.substring(0, lineStart) +
+        before +
+        markdown.substring(lineStart);
+      selectionStart = lineStart + bulletedLine.length;
+      selectionEnd = selectionStart;
+    }
   } else if (type === "unorderedList") {
-    const bulleted = lines.map((line) => `- ${line}`).join("\n");
-    newText = markdown.substring(0, start) + bulleted + markdown.substring(end);
-    selectionStart = start;
-    selectionEnd = start + bulleted.length;
+    if (selectedText) {
+      const bulleted = lines.map((line) => `${before} ${line}`).join("\n");
+      newText =
+        markdown.substring(0, start) + bulleted + markdown.substring(end);
+      selectionStart = start;
+      selectionEnd = start + bulleted.length;
+    } else {
+      const lineStart = getLineStart(markdown, start);
+      const lineEnd = getLineEnd(markdown, start);
+      const bulletedLine = `- ${markdown.substring(lineStart, lineEnd)}`;
+
+      newText =
+        markdown.substring(0, lineStart) +
+        before +
+        markdown.substring(lineStart);
+      selectionStart = lineStart + bulletedLine.length;
+      selectionEnd = selectionStart;
+    }
   } else if (type === "quote") {
-    const quoted = lines.map((line) => `> ${line}`).join("\n");
-    newText = markdown.substring(0, start) + quoted + markdown.substring(end);
-    selectionStart = start;
-    selectionEnd = start + quoted.length;
+    if (selectedText) {
+      const quoted = lines.map((line) => `${before} ${line}`).join("\n");
+      newText = markdown.substring(0, start) + quoted + markdown.substring(end);
+      selectionStart = start;
+      selectionEnd = start + quoted.length;
+    } else {
+      const quoteLine = `\n${before} `;
+      newText =
+        markdown.substring(0, start) + quoteLine + markdown.substring(end);
+      selectionStart = start + quoteLine.length;
+      selectionEnd = selectionStart;
+    }
   } else if (toggleable) {
     const prefix = markdown.substring(start - before.length, start);
     const suffix = markdown.substring(end, end + after.length);
