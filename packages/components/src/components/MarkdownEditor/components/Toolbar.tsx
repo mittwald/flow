@@ -28,7 +28,7 @@ export const Toolbar: FC<Props> = (props) => {
   const { setMode, mode, ...rest } = props;
 
   return (
-    <header className={styles.toolbar}>
+    <header className={styles.toolbar} role="toolbar">
       {mode === "editor" && (
         <div className={styles.toolbarButtons}>
           <ToolbarButton {...rest} type="bold">
