@@ -1,17 +1,24 @@
 # Grundlagen
 
+Slider ermöglichen es Usern, einen Wert innerhalb eines definierten Zahlenbereichs auszuwählen.
+Die Bedienung wirkt intuitiv, da die Kombination aus Interaktivität und visuellem Feedback an vertraute physische Bedienelemente erinnert (z. B. Regler oder Schiebeschalter).
+
+Slider eignen sich besonders, wenn ungefähre Werte ausreichend sind. Soll ein exakter Zahlenwert gewählt werden, ist ein [NumberField](/03-components/form-controls/number-field) die bessere Wahl. 
+
 ## Best practices
 
 Achte bei der Verwendung eines Sliders darauf, dass...
 
 - Min-, Max- und Default-Werte logisch für die User gewählt sind.
-- die Schritte (`step`) eine angemessene Größe haben.
+- die Skala und die Schrittweite (`step`) sinnvoll gewählt werden, um eine präzise Eingabe zu ermöglichen.
 - das beschreibende Label (neben der Unit) kurz und verständlich ist.
 - bei Bedarf ein InitialMarker (durch `showInitialMarker`) gesetzt wird, damit User den Startwert erkennen können.
+- bei mehreren Slidern ausreichend vertikaler Abstand eingehalten wird, um Interaktionsfehler zu vermeiden.
 
 ## Verwendung
 
 Verwende einen Slider, um...
 
 - Werte eines definierten Bereichs schnell anzupassen.
-- Einstellungen visuell und interaktiv zu steuern
+- Einstellungen zu justieren, die ein direktes Feedback erfordern, wie etwa Lautstärke, Helligkeit oder Zoomstufen.
+- einen Bereich darzustellen, der sich durch visuelles Ausprobieren leichter erfassen lässt als durch direkte Eingabe in ein [NumberField](/03-components/form-controls/number-field).
