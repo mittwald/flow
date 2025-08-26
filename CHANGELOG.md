@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.437](https://github.com/mittwald/flow/compare/0.2.0-alpha.436...0.2.0-alpha.437) (2025-08-26)
+
+### Features
+
+* **Icon:** add IconDnsZone and IconEmailArchive ([#1921](https://github.com/mittwald/flow/issues/1921)) ([9c8fd3e](https://github.com/mittwald/flow/commit/9c8fd3e5e65f71e95a4c615d88faa2cedc9e5d85))
+
 # [0.2.0-alpha.436](https://github.com/mittwald/flow/compare/0.2.0-alpha.435...0.2.0-alpha.436) (2025-08-26)
 
 **Note:** Version bump only for package @mittwald/flow-project
