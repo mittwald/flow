@@ -8,17 +8,9 @@ Verwende `<FileField />`, um ein FileField darzustellen. Innerhalb des FileField
 
 # Disabled
 
-Ist das FileField **disabled**, ist keine Interaktion möglich. Sobald die Ursache behoben ist, kann sie wieder wie gewohnt verwendet werden.
+Ist das FileField **disabled**, ist keine Interaktion möglich. Sobald die Ursache behoben ist, kann es wieder wie gewohnt verwendet werden.
 
 <LiveCodeEditor example="disabled" editorCollapsed />
-
----
-
-# Invalid
-
-Bei ungültiger Eingabe wird das FileField invalidiert. Über `<FieldError />` kann eine entsprechende [Fehlermeldung](/02-foundations/03-content-guidelines/02-fehlermeldungen) ausgegeben werden.
-
-<LiveCodeEditor example="invalid" editorCollapsed />
 
 ---
 
@@ -30,11 +22,19 @@ Um wichtige Hinweise zum FileField bereitzustellen, kann unterhalb eine `<Field
 
 ---
 
+# Invalid
+
+Bei ungültiger Eingabe wird das FileField invalidiert. Über `<FieldError />` kann eine entsprechende [Fehlermeldung](/02-foundations/03-content-guidelines/02-fehlermeldungen) ausgegeben werden.
+
+<LiveCodeEditor example="invalid" editorCollapsed />
+
+---
+
 # Kombiniere mit ...
 
 ## ContextualHelp
 
-Verwende [ContextualHelp](/03-components/overlays/contextual-help), um zusätzliche Informationen bereitzustellen, die über den Umfang der FieldDescription hinausgehen.
+Verwende [ContextualHelp](/03-components/overlays/contextual-help), um zusätzliche Informationen bereitzustellen.
 
 <LiveCodeEditor example="contextualHelp" editorCollapsed />
 
