@@ -10,5 +10,8 @@ import {
   <Button variant="outline" color="secondary">
     Auswählen
   </Button>
-  <FieldError>Wir konnten die Datei nicht hochladen. Bitte verwende eine .png-Datei.</FieldError>
+  <FieldError>
+    Wir konnten die Datei nicht hochladen. Bitte verwende
+     eine .png-Datei.
+  </FieldError>
 </FileField>;
