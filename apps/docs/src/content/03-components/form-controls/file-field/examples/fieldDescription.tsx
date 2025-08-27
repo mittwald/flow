@@ -11,6 +11,6 @@ import {
     Auswählen
   </Button>
   <FieldDescription>
-    Erlaubte sind .jpeg und .png
+    Erlaubte Dateitypen sind .jpeg und .png
   </FieldDescription>
 </FileField>;
