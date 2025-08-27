@@ -11,7 +11,7 @@ import {
     Auswählen
   </Button>
   <FieldError>
-    Wir konnten das Zertifikat nicht hochladen. Bitte 
+    Wir konnten das Zertifikat nicht hochladen. Bitte
     verwende eine .txt-Datei.
   </FieldError>
 </FileField>;
