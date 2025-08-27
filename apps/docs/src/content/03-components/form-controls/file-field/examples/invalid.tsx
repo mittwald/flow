@@ -12,6 +12,6 @@ import {
   </Button>
   <FieldError>
     Wir konnten die Datei nicht hochladen. Bitte verwende
-     eine .png-Datei.
+    eine .png-Datei.
   </FieldError>
 </FileField>;
