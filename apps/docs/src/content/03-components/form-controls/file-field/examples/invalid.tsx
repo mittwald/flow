@@ -10,5 +10,5 @@ import {
   <Button variant="outline" color="secondary">
     Auswählen
   </Button>
-  <FieldError>Die Datei ist zu groß</FieldError>
+  <FieldError>Wir konnten die Datei nicht hochladen. Bitte verwende eine .png-Datei.</FieldError>
 </FileField>;
