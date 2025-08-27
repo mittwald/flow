@@ -46,7 +46,7 @@ const Home: FC = () => {
                 Frontend-Entwicklungsprozesse.
               </li>
               <li>
-                State-of-the-Art: Wir halten uns an Best Practices für
+                State-of-the-Art: Wir halten uns an Best practices für
                 leistungsfähige und nutzerzentrierte Benutzeroberflächen.
               </li>
               <li>
