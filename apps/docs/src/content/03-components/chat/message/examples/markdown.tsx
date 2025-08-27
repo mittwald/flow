@@ -44,4 +44,4 @@ import {
       takimata sanctus est Lorem ipsum ***dolor sit amet***.
     </Markdown>
   </Content>
-</Message>
+</Message>;
