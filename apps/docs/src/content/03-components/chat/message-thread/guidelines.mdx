@@ -1,6 +1,6 @@
 # Grundlagen
 
-Der MessageThread gruppiert einzelne Nachrichten übersichtlich und macht so 
+Der MessageThread gruppiert einzelne [Messages](/03-components/chat/message) übersichtlich und macht so 
 Gesprächsverläufe besser verständlich. Typischerweise wird er in einem 
 [Chat](/03-components/chat/chat) eingesetzt
 
@@ -10,7 +10,7 @@ Gesprächsverläufe besser verständlich. Typischerweise wird er in einem
 Achte bei der Verwendung des MessageThread darauf, dass …
 
 * die zeitliche Abfolge der Messages konsistent ist.
-* Absender und Antwortender in einer [Message](/03-components/chat/message) über das `Type`-Property korrekt als `sender` bzw. `responder` ausgezeichnet werden.
+* Absender und Antwortender in einer [Message](/03-components/chat/message) über das `type`-Property korrekt als `sender` bzw. `responder` ausgezeichnet werden.
 * wichtige Ereignisse (z. B. Statusänderungen oder der Eintritt neuer Teilnehmer) mittels
 `<MessageSeparator />` hervorgehoben werden.
 
