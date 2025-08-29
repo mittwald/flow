@@ -5,11 +5,12 @@ Gesprächsverläufe besser verständlich. Typischerweise wird er in einem
 [Chat](/03-components/chat/chat) eingesetzt
 
 
-## Best Practices
+## Best practices
 
 Achte bei der Verwendung des MessageThread darauf, dass …
 
 * die zeitliche Abfolge der Messages konsistent ist.
+* Absender und Antwortender in einer [Message](/03-components/chat/message) über das `Type`-Property korrekt als `sender` bzw. `responder` ausgezeichnet werden.
 * wichtige Ereignisse (z. B. Statusänderungen oder der Eintritt neuer Teilnehmer) mittels
 `<MessageSeparator />` hervorgehoben werden.
 
