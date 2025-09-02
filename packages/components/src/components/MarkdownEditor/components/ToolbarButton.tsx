@@ -6,6 +6,7 @@ import {
 import { Button } from "@/components/Button";
 import { useLocalizedStringFormatter } from "react-aria";
 import locales from "../locales/*.locale.json";
+import type { MarkdownEditorMode } from "@/components/MarkdownEditor/MarkdownEditor";
 
 interface Props extends PropsWithChildren {
   markdown: string;
@@ -14,6 +15,7 @@ interface Props extends PropsWithChildren {
   isDisabled?: boolean;
   type: InsertType;
   onChange?: (markdown: string) => void;
+  mode: MarkdownEditorMode;
 }
 
 export const ToolbarButton: FC<Props> = (props) => {
@@ -25,13 +27,14 @@ export const ToolbarButton: FC<Props> = (props) => {
     isDisabled,
     type,
     onChange,
+    mode,
   } = props;
 
   const stringFormatter = useLocalizedStringFormatter(locales);
 
   return (
     <Button
-      isDisabled={isDisabled}
+      isDisabled={isDisabled || mode === "preview"}
       aria-label={stringFormatter.format(`toolbar.${type}`)}
       size="s"
       variant="plain"

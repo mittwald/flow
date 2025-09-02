@@ -82,7 +82,7 @@
     border-color: var(--form-control--border-color--focused);
   }
 
-  &:has(textarea[data-disabled]) .toolbar {
+  &:has(textarea[data-disabled]).mode-editor .toolbar {
     background-color: var(--form-control--background-color--disabled);
     border-color: var(--form-control--border-color--disabled);
   }

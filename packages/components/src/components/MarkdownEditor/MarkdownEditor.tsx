@@ -37,7 +37,7 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
   return (
     <TextArea
       {...rest}
-      isDisabled={isDisabled}
+      isDisabled={isDisabled || mode === "preview"}
       className={rootClassName}
       ref={textAreaRef}
       value={markdown}

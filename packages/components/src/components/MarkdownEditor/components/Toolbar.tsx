@@ -25,59 +25,61 @@ interface Props {
 }
 
 export const Toolbar: FC<Props> = (props) => {
-  const { setMode, mode, ...rest } = props;
+  const { setMode, ...rest } = props;
 
   return (
     <header className={styles.toolbar} role="toolbar">
-      {mode === "editor" && (
-        <div className={styles.toolbarButtons}>
-          <ToolbarButton {...rest} type="bold">
-            <Icon>
-              <IconBold />
-            </Icon>
-          </ToolbarButton>
+      <div className={styles.toolbarButtons}>
+        <ToolbarButton {...rest} type="bold">
+          <Icon>
+            <IconBold />
+          </Icon>
+        </ToolbarButton>
 
-          <ToolbarButton {...rest} type="italic">
-            <Icon>
-              <IconItalic />
-            </Icon>
-          </ToolbarButton>
+        <ToolbarButton {...rest} type="italic">
+          <Icon>
+            <IconItalic />
+          </Icon>
+        </ToolbarButton>
 
-          <ToolbarButton {...rest} type="strikeThrough">
-            <Icon>
-              <IconStrikethrough />
-            </Icon>
-          </ToolbarButton>
+        <ToolbarButton {...rest} type="strikeThrough">
+          <Icon>
+            <IconStrikethrough />
+          </Icon>
+        </ToolbarButton>
 
-          <ToolbarButton {...rest} type="quote">
-            <Icon>
-              <IconQuoteFilled />
-            </Icon>
-          </ToolbarButton>
+        <ToolbarButton {...rest} type="quote">
+          <Icon>
+            <IconQuoteFilled />
+          </Icon>
+        </ToolbarButton>
 
-          <ToolbarButton {...rest} type="code">
-            <IconCode />
-          </ToolbarButton>
+        <ToolbarButton {...rest} type="code">
+          <IconCode />
+        </ToolbarButton>
 
-          <ToolbarButton {...rest} type="link">
-            <IconLink />
-          </ToolbarButton>
+        <ToolbarButton {...rest} type="link">
+          <IconLink />
+        </ToolbarButton>
 
-          <ToolbarButton {...rest} type="unorderedList">
-            <Icon>
-              <IconList />
-            </Icon>
-          </ToolbarButton>
+        <ToolbarButton {...rest} type="unorderedList">
+          <Icon>
+            <IconList />
+          </Icon>
+        </ToolbarButton>
 
-          <ToolbarButton {...rest} type="orderedList">
-            <Icon>
-              <IconListNumbers />
-            </Icon>
-          </ToolbarButton>
-        </div>
-      )}
+        <ToolbarButton {...rest} type="orderedList">
+          <Icon>
+            <IconListNumbers />
+          </Icon>
+        </ToolbarButton>
+      </div>
 
-      <ModeButton setMode={setMode} mode={mode} isDisabled={props.isDisabled} />
+      <ModeButton
+        setMode={setMode}
+        mode={props.mode}
+        isDisabled={props.isDisabled}
+      />
     </header>
   );
 };
