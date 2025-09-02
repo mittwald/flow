@@ -34,6 +34,7 @@ export const IllustratedMessage: FC<IllustratedMessageProps> = (props) => {
     },
     Heading: {
       className: styles.heading,
+      color: lightOrDarkColor,
     },
     Text: {
       className: styles.text,
