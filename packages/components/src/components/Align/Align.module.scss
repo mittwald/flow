@@ -3,7 +3,7 @@
     display: flex;
     gap: var(--align--avatar-text--spacing);
     height: fit-content;
-    --first-two-lines-height: calc(var(--line-height--m) * 2);
+    --first-two-lines-height: calc(var(--line-height--s) * 2);
     min-height: var(--first-two-lines-height);
 
     .text {
@@ -11,6 +11,7 @@
       display: flex;
       flex-direction: column;
       align-self: center;
+      font-size: var(--font-size-text--s);
     }
 
     .avatar {
