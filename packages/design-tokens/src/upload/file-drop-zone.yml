@@ -27,6 +27,3 @@ file-drop-zone:
       value: "{primary.color.800}"
     disabled:
       value: "{disabled-outline-border-color}"
-
-      --dropzone-content-color-disabled: var(--disabled-outline-content-color);
-      --dropzone-border-color-disabled: var(--disabled-outline-border-color);
