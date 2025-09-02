@@ -19,7 +19,8 @@ export interface FileDropZoneProps
   extends PropsWithClassName,
     FlowComponentProps<FocusableElement>,
     PropsWithChildren,
-    Pick<Aria.InputProps, "accept" | "multiple" | "name"> {
+    Pick<Aria.InputProps, "accept" | "multiple" | "name">,
+    Pick<Aria.DropZoneProps, "isDisabled"> {
   onChange?: FileInputOnChangeHandler;
 }
 
@@ -34,10 +35,15 @@ export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
       onChange: onChangeDropZone,
       children,
       name,
+      isDisabled,
     } = props;
 
     const fileFieldRef = useRef<HTMLInputElement>(null);
-    const rootClassName = clsx(styles.fileDropZone, className);
+    const rootClassName = clsx(
+      styles.fileDropZone,
+      isDisabled && styles.disabled,
+      className,
+    );
 
     const propsContext: PropsContext = {
       FileField: {
@@ -47,7 +53,13 @@ export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
         accept: accept,
         multiple: multiple,
         Button: { variant: "outline", color: "dark" },
+        isDisabled,
       },
+      Heading: {
+        className: styles.heading,
+      },
+      Icon: { className: styles.icon },
+      Text: { className: styles.text },
     };
 
     const onDropHandler = async (event: DropEvent) => {
@@ -80,7 +92,11 @@ export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
     };
 
     return (
-      <Aria.DropZone className={rootClassName} onDrop={onDropHandler}>
+      <Aria.DropZone
+        className={rootClassName}
+        onDrop={onDropHandler}
+        isDisabled={isDisabled}
+      >
         <IllustratedMessage color="dark">
           <PropsContextProvider props={propsContext} mergeInParentContext>
             {children}
