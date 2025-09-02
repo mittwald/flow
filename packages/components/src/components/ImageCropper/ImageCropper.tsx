@@ -86,9 +86,10 @@ export const ImageCropper: FC<Props> = (props) => {
         maxValue={3}
         step={0.1}
         value={zoom}
+        unit="×"
         onChange={(zoom) => setZoom(zoom as number)}
       >
-        x Zoom
+        Zoom
       </Slider>
     </div>
   );

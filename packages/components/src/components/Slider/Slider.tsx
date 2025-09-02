@@ -13,10 +13,13 @@ import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 
 export interface SliderProps
-  extends FlowComponentProps<HTMLDivElement>,
+  extends FlowComponentProps,
     PropsWithChildren<Aria.SliderProps>,
     Pick<Aria.SliderThumbProps, "name"> {
+  /** Whether the marker for the initial value should be visible */
   showInitialMarker?: boolean;
+  /** Unit suffix appended to the displayed value */
+  unit?: string;
 }
 
 /**
@@ -32,6 +35,7 @@ export const Slider = flowComponent("Slider", (props) => {
     defaultValue,
     showInitialMarker,
     step,
+    unit,
     ...rest
   } = props;
 
@@ -58,8 +62,10 @@ export const Slider = flowComponent("Slider", (props) => {
       {...rest}
     >
       <div className={styles.text}>
-        <Aria.SliderOutput className={styles.value} />
-
+        <span>
+          <Aria.SliderOutput className={styles.value} />
+          {unit && <b>{unit}</b>}
+        </span>
         <PropsContextProvider props={propsContext}>
           {children}
         </PropsContextProvider>

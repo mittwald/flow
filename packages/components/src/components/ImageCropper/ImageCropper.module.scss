@@ -2,11 +2,26 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: var(--size-px--m);
+  gap: var(--image-cropper--spacing);
 
   .cropperContainer {
     position: relative;
     width: 100%;
     height: 300px;
+    border-radius: var(--image-cropper--corner-radius);
+    border-color: var(--image-cropper--border-color);
+    border-style: var(--image-cropper--border-style);
+    border-width: var(--image-cropper--border-width);
+  }
+
+  :global(.reactEasyCrop_CropArea) {
+    color: var(--image-cropper--mask-color);
+    border-color: var(--image-cropper--mask-border-color);
+    box-sizing: content-box;
+  }
+
+  :global(.reactEasyCrop_CropAreaGrid::before) {
+    border-color: var(--image-cropper--grid-color);
+    border-width: var(--image-cropper--grid-width);
   }
 }
