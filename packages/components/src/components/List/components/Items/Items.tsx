@@ -39,7 +39,7 @@ export const Items: FC = () => {
         }}
         layout={list.viewMode === "tiles" ? "grid" : "stack"}
       >
-        {items.length === 0 && isLoading ? <FallbackItems /> : items}
+        {items.length === 0 && isInitiallyLoading ? <FallbackItems /> : items}
       </ItemsGridListView>
     </DivView>
   );
