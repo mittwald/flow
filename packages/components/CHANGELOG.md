@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.449](https://github.com/mittwald/flow/compare/0.2.0-alpha.448...0.2.0-alpha.449) (2025-09-02)
+
+### Bug Fixes
+
+* **List:** flickering loading view ([#1939](https://github.com/mittwald/flow/issues/1939)) ([bd1c028](https://github.com/mittwald/flow/commit/bd1c0284ead0cd5e486193f72d796576acbd46e2))
+
 # [0.2.0-alpha.448](https://github.com/mittwald/flow/compare/0.2.0-alpha.447...0.2.0-alpha.448) (2025-09-02)
 
 ### Bug Fixes
