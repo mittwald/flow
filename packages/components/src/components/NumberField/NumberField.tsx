@@ -59,6 +59,9 @@ export const NumberField = flowComponent("NumberField", (props) => {
         defaultValue={defaultValue}
         className={rootClassName}
       >
+        <PropsContextProvider props={propsContext}>
+          {children}
+        </PropsContextProvider>
         <Aria.Group className={styles.group}>
           <Button
             ariaSlot="decrement"
@@ -87,9 +90,6 @@ export const NumberField = flowComponent("NumberField", (props) => {
             <IconPlus className={styles.coarsePointerIcon} />
           </Button>
         </Aria.Group>
-        <PropsContextProvider props={propsContext}>
-          {children}
-        </PropsContextProvider>
         <FieldError className={formFieldStyles.fieldError} />
       </Aria.NumberField>
     </ClearPropsContext>
