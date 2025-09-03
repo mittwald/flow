@@ -44,13 +44,8 @@
 }
 
 @media (max-width: 550px) {
-  .controls:not(:has(form)),
-  .controls form {
-    flex-wrap: wrap;
-
-    .accentButton,
-    .button {
-      flex-grow: 1;
-    }
+  .accentButton,
+  .button {
+    flex-grow: 1;
   }
 }
