@@ -13,10 +13,13 @@ import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 
 export interface SliderProps
-  extends FlowComponentProps<HTMLDivElement>,
+  extends FlowComponentProps,
     PropsWithChildren<Aria.SliderProps>,
     Pick<Aria.SliderThumbProps, "name"> {
+  /** Whether the marker for the initial value should be visible */
   showInitialMarker?: boolean;
+  /** Unit suffix appended to the displayed value */
+  unit?: string;
 }
 
 /**
@@ -31,6 +34,8 @@ export const Slider = flowComponent("Slider", (props) => {
     isDisabled,
     defaultValue,
     showInitialMarker,
+    step,
+    unit,
     ...rest
   } = props;
 
@@ -53,11 +58,14 @@ export const Slider = flowComponent("Slider", (props) => {
       className={rootClassName}
       isDisabled={isDisabled}
       defaultValue={defaultValue}
+      step={step}
       {...rest}
     >
       <div className={styles.text}>
-        <Aria.SliderOutput className={styles.value} />
-
+        <span>
+          <Aria.SliderOutput className={styles.value} />
+          {unit && <b>{unit}</b>}
+        </span>
         <PropsContextProvider props={propsContext}>
           {children}
         </PropsContextProvider>
@@ -67,7 +75,7 @@ export const Slider = flowComponent("Slider", (props) => {
         {({ state }) => (
           <>
             <Button
-              onPress={() => state.decrementThumb(0)}
+              onPress={() => state.decrementThumb(0, step)}
               aria-label={stringFormatter.format("slider.decrement")}
               variant="plain"
               color="secondary"
@@ -79,7 +87,7 @@ export const Slider = flowComponent("Slider", (props) => {
             </Button>
 
             <Button
-              onPress={() => state.incrementThumb(0)}
+              onPress={() => state.incrementThumb(0, step)}
               aria-label={stringFormatter.format("slider.increment")}
               variant="plain"
               color="secondary"
