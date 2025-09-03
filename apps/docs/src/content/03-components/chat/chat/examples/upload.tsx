@@ -38,18 +38,15 @@ import {
       </Content>
     </Message>
   </MessageThread>
-  <Button
-    color="secondary"
-    variant="plain"
-    aria-label="Datei anhängen"
-  >
-    <IconAttachment />
-  </Button>
+
   <TextArea
     aria-label="Nachricht"
-    rows={1}
+    rows={3}
     autoResizeMaxRows={10}
   />
+  <Button color="secondary" variant="outline">
+    Datei anhängen
+  </Button>
   <Button color="accent">Senden</Button>
   <FileCardList>
     <FileCard name="Hochgeladene Datei 1" />
