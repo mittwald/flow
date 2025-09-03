@@ -19,4 +19,15 @@
   :global(.flow--form-field) {
     align-items: center;
   }
+
+  &.disabled {
+    background-color: var(--file-drop-zone--background-color--disabled);
+    border-color: var(--file-drop-zone--border-color--disabled);
+
+    .icon,
+    .heading,
+    .text {
+      color: var(--file-drop-zone--content-color--disabled);
+    }
+  }
 }

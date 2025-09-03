@@ -112,13 +112,7 @@ export default () => {
                 du wirklich benötigst. So bestimmst du
                 selbst, wie dein Dashboard aussehen soll.
               </Text>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "32px",
-                }}
-              >
+              <ColumnLayout s={[1]} gap="xl">
                 <ColumnLayout s={[1]} gap="s">
                   <Switch>Erste Schritte</Switch>
                   <Text>
@@ -178,7 +172,7 @@ export default () => {
                     Lastschrift zu bezahlen.
                   </Text>
                 </ColumnLayout>
-              </div>
+              </ColumnLayout>
             </Section>
           </Content>
           <ActionGroup>

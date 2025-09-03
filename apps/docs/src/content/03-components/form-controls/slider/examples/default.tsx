@@ -8,10 +8,10 @@ import {
     style: "unit",
     unit: "gigabyte",
   }}
-  minValue={20}
-  maxValue={2000}
-  defaultValue={200}
-  step={20}
+  minValue={50}
+  maxValue={750}
+  defaultValue={150}
+  step={50}
   showInitialMarker
 >
   <Label>Speicherplatz</Label>

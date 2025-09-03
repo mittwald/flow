@@ -10,5 +10,8 @@ import {
   <Button variant="outline" color="secondary">
     Auswählen
   </Button>
-  <FieldError>Die Datei ist zu groß</FieldError>
+  <FieldError>
+    Wir konnten das Zertifikat nicht hochladen. Bitte
+    verwende eine .txt-Datei.
+  </FieldError>
 </FileField>;

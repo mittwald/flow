@@ -29,14 +29,10 @@
   flex-wrap: wrap;
   gap: var(--size-rem--m);
 
-  &:before {
-    content: "";
-    display: block;
+  .wave {
     top: 0;
     left: 0;
-    right: 0;
-    height: 250px;
-    background: var(--color--hosting-blue--200);
+    width: 100dvw;
     position: absolute;
     z-index: -1;
   }

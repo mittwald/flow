@@ -1,24 +1,32 @@
 # Playground
 
+Verwende `<FileField />`, um ein FileField darzustellen. Innerhalb des FileFields kommen die Components [Label](/03-components/content/label) und [Button](/03-components/actions/button) zum Einsatz.
+
 <LiveCodeEditor />
 
 ---
 
 # Disabled
 
+Ist das FileField **disabled**, ist keine Interaktion möglich. Sobald die Ursache behoben ist, kann es wieder wie gewohnt verwendet werden.
+
 <LiveCodeEditor example="disabled" editorCollapsed />
-
----
-
-# Invalid
-
-<LiveCodeEditor example="invalid" editorCollapsed />
 
 ---
 
 # Mit FieldDescription
 
+Um wichtige Hinweise zum FileField bereitzustellen, kann unterhalb eine `<FieldDescription />` eingebaut werden. In vielen Fällen empfiehlt es sich, die erlaubten Dateitypen dort anzugeben.
+
 <LiveCodeEditor example="fieldDescription" editorCollapsed />
+
+---
+
+# Invalid
+
+Bei ungültiger Eingabe wird das FileField invalidiert. Über `<FieldError />` kann eine entsprechende [Fehlermeldung](/02-foundations/03-content-guidelines/02-fehlermeldungen) ausgegeben werden.
+
+<LiveCodeEditor example="invalid" editorCollapsed />
 
 ---
 
@@ -26,12 +34,12 @@
 
 ## ContextualHelp
 
-Benutze die [ContextualHelp](/03-components/overlays/contextual-help)
-Komponente, wenn du weitere Informationen bereitstellen möchtest, und diese zu
-lang für die FieldDescription sind.
+Verwende [ContextualHelp](/03-components/overlays/contextual-help), um zusätzliche Informationen bereitzustellen.
 
 <LiveCodeEditor example="contextualHelp" editorCollapsed />
 
 ## React Hook Form
+
+Weitere Details zur Formularlogik und -validierung ist in der Component [Form (React Hook Form)](/03-components/form-controls/form-react-hook-form) zu finden.
 
 <LiveCodeEditor example="form" editorCollapsed />

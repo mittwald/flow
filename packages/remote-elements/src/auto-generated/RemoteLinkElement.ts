@@ -37,6 +37,7 @@ export class RemoteLinkElement extends FlowRemoteElement<RemoteLinkElementProps>
       target: {},
       translate: {},
       unstyled: {},
+      whiteSpace: {},
     };
   }
 
