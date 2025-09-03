@@ -16,7 +16,7 @@ export type FileCardListProps = Omit<ColumnLayoutProps, "elementType"> &
  * @flr-clear-props-context
  */
 export const FileCardList = flowComponent("FileCardList", (props) => {
-  const { className, ref, ...rest } = props;
+  const { className, ref, children, ...rest } = props;
 
   const propsContext: PropsContext = {
     FileCard: { elementType: "li" },
@@ -24,12 +24,9 @@ export const FileCardList = flowComponent("FileCardList", (props) => {
 
   return (
     <PropsContextProvider props={propsContext}>
-      <ColumnLayout
-        ref={ref}
-        elementType="ul"
-        className={className}
-        {...rest}
-      />
+      <ColumnLayout ref={ref} elementType="ul" className={className} {...rest}>
+        {children}
+      </ColumnLayout>
     </PropsContextProvider>
   );
 });
