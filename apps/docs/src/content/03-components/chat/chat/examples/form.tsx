@@ -60,7 +60,7 @@ export default () => {
         <Field name="message">
           <TextArea
             aria-label="message"
-            rows={1}
+            rows={3}
             autoResizeMaxRows={10}
           />
         </Field>

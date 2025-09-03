@@ -49,10 +49,16 @@ export const Resizeable: Story = {
 export const WithForm: Story = {
   render: (props) => {
     const form = useForm({
-      defaultValues: { message: "Hello!" },
+      defaultValues: { message: "" },
     });
     return (
-      <Form form={form} onSubmit={async (v) => action(v.message)}>
+      <Form
+        form={form}
+        onSubmit={async (v) => {
+          action(v.message);
+          form.reset();
+        }}
+      >
         <Field name="message" rules={{ required: "Please enter a message" }}>
           <MarkdownEditor {...props}>
             <Label>Message</Label>

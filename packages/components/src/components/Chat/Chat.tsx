@@ -27,7 +27,7 @@ export const Chat: FC<ChatProps> = (props) => {
     FileCardList: { className: styles.fileCardList, tunnelId: "fileCardList" },
     Button: {
       className: dynamic((props) => {
-        return props.color === "accent" ? styles.accentButton : undefined;
+        return props.color === "accent" ? styles.accentButton : styles.button;
       }),
     },
   };

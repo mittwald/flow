@@ -25,20 +25,27 @@
     border-top-style: var(--border-style--default);
     gap: var(--chat--spacing);
     padding-top: var(--chat--spacing);
+    flex-wrap: wrap;
 
     :global(.flow--form-field) {
-      flex-grow: 1;
+      order: 0;
+      width: 100%;
+    }
+
+    .accentButton,
+    .button {
+      order: 1;
+    }
+
+    .accentButton {
+      margin-inline-start: auto;
     }
   }
 }
 
 @media (max-width: 550px) {
-  .controls:not(:has(form)),
-  .controls form {
-    flex-wrap: wrap;
-
-    .accentButton {
-      flex-grow: 1;
-    }
+  .accentButton,
+  .button {
+    flex-grow: 1;
   }
 }

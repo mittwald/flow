@@ -40,7 +40,7 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
       isDisabled={isDisabled || mode === "preview"}
       className={rootClassName}
       ref={textAreaRef}
-      value={markdown}
+      value={value !== undefined ? value : markdown}
       rows={rows}
       autoResizeMaxRows={autoResizeMaxRows}
       onChange={(v) => setMarkdown(v)}
