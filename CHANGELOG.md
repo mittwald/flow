@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.454](https://github.com/mittwald/flow/compare/0.2.0-alpha.453...0.2.0-alpha.454) (2025-09-03)
+
+### Bug Fixes
+
+* **ColumnLayout:** fixes an issue that children are not rendered ([#1947](https://github.com/mittwald/flow/issues/1947)) ([894063c](https://github.com/mittwald/flow/commit/894063cafff531e2d64796c295c18950d5a4baf2))
+
 # [0.2.0-alpha.453](https://github.com/mittwald/flow/compare/0.2.0-alpha.452...0.2.0-alpha.453) (2025-09-03)
 
 **Note:** Version bump only for package @mittwald/flow-project
