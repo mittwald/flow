@@ -8,7 +8,8 @@ Verwende `<Skeleton />`, um ein Skeleton anzuzeigen.
 
 # Benutzerdefinierte Größe
 
-Skeletons können mit dem `style`-Attribut angepasst werden, um die grobe Ladevorschau an die Benutzeroberfläche anzupassen.
+Skeletons können mit dem `width`- oder `height`-Attribut angepasst werden, um
+die grobe Ladevorschau an die Benutzeroberfläche anzupassen.
 
 <LiveCodeEditor example="custom-size" editorCollapsed />
 
@@ -16,9 +17,13 @@ Skeletons können mit dem `style`-Attribut angepasst werden, um die grobe Ladevo
 
 # Accessibility
 
-Das Skeleton verwendet das Property `aria-hidden`, damit es vom Screenreader ignoriert wird. 
+Das Skeleton verwendet das Property `aria-hidden`, damit es vom Screenreader
+ignoriert wird.
 
-Die Accessibility eines Ladezustands soll **nicht** vom Skeleton geregelt werden.
+Die Accessibility eines Ladezustands soll **nicht** vom Skeleton geregelt
+werden.
 
-Um Screenreadern mitzuteilen, dass Inhalte noch geladen werden, sollte das Property `aria-busy` verwendet werden. Dieses wird auf `false` gesetzt, sobald der Ladevorgang abgeschlossen ist (s.
+Um Screenreadern mitzuteilen, dass Inhalte noch geladen werden, sollte das
+Property `aria-busy` verwendet werden. Dieses wird auf `false` gesetzt, sobald
+der Ladevorgang abgeschlossen ist (s.
 [MDN](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-busy)).

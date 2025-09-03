@@ -1,4 +1,9 @@
-import type { ComponentProps, ComponentType, PropsWithChildren } from "react";
+import type {
+  ComponentProps,
+  ComponentType,
+  CSSProperties,
+  PropsWithChildren,
+} from "react";
 import { useContext } from "react";
 import * as Aria from "react-aria-components";
 import type { PropsContext } from "@/lib/propsContext";
@@ -26,6 +31,8 @@ export interface LinkProps
   color?: "primary" | "dark" | "light";
   "aria-current"?: string;
   slot?: string;
+  /** The whiteSpace css value of the element. */
+  whiteSpace?: CSSProperties["whiteSpace"];
   /** @internal */
   unstyled?: boolean;
 }
@@ -45,6 +52,8 @@ export const Link = flowComponent("Link", (props) => {
     "aria-current": ariaCurrent,
     ref,
     slot: ignoredSlotProp,
+    style,
+    whiteSpace,
     ...rest
   } = props;
 
@@ -84,6 +93,7 @@ export const Link = flowComponent("Link", (props) => {
         {...rest}
         className={rootClassName}
         ref={ref}
+        style={{ ...style, whiteSpace }}
       >
         <PropsContextProvider props={propsContext}>
           {children}

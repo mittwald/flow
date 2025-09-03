@@ -1,4 +1,3 @@
-export * from "@/components/PasswordCreationField/lib/generatePasswordCreationFieldValidation";
 export * from "./view";
 
 export {

@@ -29,7 +29,6 @@ import FieldDescription from "@/components/FieldDescription";
 import ComplexityIndicator from "@/components/PasswordCreationField/components/ComplexityIndicator/ComplexityIndicator";
 import { generatePassword } from "@/components/PasswordCreationField/worker/generatePassword";
 import TogglePasswordVisibilityButton from "@/components/PasswordCreationField/components/TogglePasswordVisibilityButton/TogglePasswordVisibilityButton";
-import { defaultPasswordCreationPolicy } from "@/components/PasswordCreationField/defaultPasswordCreationPolicy";
 import { FieldErrorContext } from "react-aria-components";
 import { Wrap } from "@/components/Wrap";
 import { ReactAriaControlledValueFix } from "@/lib/react/ReactAriaControlledValueFix";
@@ -41,7 +40,10 @@ import type {
   PolicyGenericDeclaration,
   RuleValidationResult,
 } from "@/integrations/@mittwald/password-tools-js";
-import { Policy } from "@/integrations/@mittwald/password-tools-js";
+import {
+  defaultPasswordCreationPolicy,
+  Policy,
+} from "@/integrations/@mittwald/password-tools-js";
 import { usePolicyValidationResult } from "@/components/PasswordCreationField/lib/usePolicyValidationResult";
 
 export interface PasswordCreationFieldProps

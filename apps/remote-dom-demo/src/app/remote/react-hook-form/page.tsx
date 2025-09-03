@@ -21,9 +21,9 @@ import {
 } from "@mittwald/flow-remote-react-components/react-hook-form";
 import {
   Policy,
+  generatePasswordCreationFieldValidation,
   RuleType,
 } from "@mittwald/flow-react-components/mittwald-password-tools-js";
-import { generatePasswordCreationFieldValidation } from "@mittwald/flow-react-components";
 import { useForm } from "react-hook-form";
 
 const customPolicy = Policy.fromDeclaration({

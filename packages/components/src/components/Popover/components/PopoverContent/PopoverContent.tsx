@@ -1,6 +1,5 @@
 import type { FC, PropsWithChildren, Ref, RefObject } from "react";
 import * as Aria from "react-aria-components";
-import clsx from "clsx";
 import styles from "../../Popover.module.scss";
 import type { PropsWithClassName } from "@/lib/types/props";
 
@@ -11,7 +10,6 @@ export interface PopoverContentProps
   isDialogContent?: boolean;
   isOpen?: boolean;
   width?: string | number;
-  padding?: "s" | "m";
   onOpenChange: (isOpen: boolean) => void;
   ref?: Ref<HTMLElement>;
   triggerRef?: RefObject<Element | null>;
@@ -28,7 +26,6 @@ export const PopoverContent: FC<PopoverContentProps> = (props) => {
     ref,
     isOpen,
     width,
-    padding = "m",
     ...rest
   } = props;
 
@@ -51,14 +48,7 @@ export const PopoverContent: FC<PopoverContentProps> = (props) => {
           </svg>
         </Aria.OverlayArrow>
       )}
-      <ContentComponent
-        className={clsx(
-          styles.content,
-          padding && styles[`padding-${padding}`],
-        )}
-      >
-        {children}
-      </ContentComponent>
+      <ContentComponent className={styles.content}>{children}</ContentComponent>
     </Aria.Popover>
   );
 };

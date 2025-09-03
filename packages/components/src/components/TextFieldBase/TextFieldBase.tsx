@@ -24,6 +24,7 @@ export interface TextFieldBaseProps
 export const TextFieldBase: FC<TextFieldBaseProps> = (props) => {
   const { children, className, input, showCharacterCount, ref, ...rest } =
     props;
+
   const [charactersCount, setCharactersCount] = useState(
     props.value?.length ?? 0,
   );

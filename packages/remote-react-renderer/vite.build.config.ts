@@ -23,6 +23,7 @@ export default mergeConfig(
       minify: false,
       sourcemap: true,
       outDir: "dist/js",
+      target: "esnext",
       emptyOutDir: false,
       lib: {
         entry: {

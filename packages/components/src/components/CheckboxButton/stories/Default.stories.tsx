@@ -26,6 +26,7 @@ type Story = StoryObj<typeof CheckboxButton>;
 export const Default: Story = {};
 
 export const Disabled: Story = { args: { isDisabled: true } };
+export const ReadOnly: Story = { args: { isReadOnly: true } };
 
 export const Indeterminate: Story = { args: { isIndeterminate: true } };
 

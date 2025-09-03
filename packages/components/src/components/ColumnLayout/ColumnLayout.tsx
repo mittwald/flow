@@ -61,6 +61,7 @@ export const ColumnLayout = flowComponent("ColumnLayout", (props) => {
     "aria-label": ariaLabel,
     ref,
     mergeInParentContext,
+    style: styleFromProps,
   } = props;
 
   let elementClassName = styles.columnLayout;
@@ -86,6 +87,7 @@ export const ColumnLayout = flowComponent("ColumnLayout", (props) => {
   const columnsL = l ? getColumns(l) : m || s ? columnsM : "1fr 1fr 1fr";
 
   const style = {
+    ...styleFromProps,
     "--column-layout--columns-s": columnsS,
     "--column-layout--columns-m": columnsM,
     "--column-layout--columns-l": columnsL,

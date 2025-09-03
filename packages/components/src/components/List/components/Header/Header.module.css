@@ -21,8 +21,9 @@
 
   .options {
     display: flex;
-    column-gap: var(--list--spacing);
+    gap: var(--list--spacing);
     flex-grow: 1;
+    flex-wrap: wrap;
   }
 
   @container (min-width: 850px) {
