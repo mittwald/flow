@@ -8,7 +8,7 @@ import { getCroppedImageFile } from "@/components/ImageCropper/lib/getCroppedIma
 import { Label } from "react-aria-components";
 import { ClearPropsContext } from "@/components/ClearPropsContext";
 
-interface Props
+export interface ImageCropperProps
   extends PropsWithClassName,
     Partial<Pick<CropperProps, "aspect" | "cropShape">> {
   image?: File | string;
@@ -21,7 +21,7 @@ interface Props
  * @flr-generate all
  * @flr-clear-props-context
  */
-export const ImageCropper: FC<Props> = (props) => {
+export const ImageCropper: FC<ImageCropperProps> = (props) => {
   const {
     image,
     className,
