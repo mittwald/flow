@@ -6,8 +6,9 @@ on:
       - closed
 
 env:
-  TARGET_DOCS_PATH: "/docs/${{ github.event.pull_request.id }}/merge"
-  TARGET_STORYBOOK_PATH: "/storybook/${{ github.event.pull_request.id }}/merge"
+  TARGET_DOCS_PATH: "/docs/${{ github.event.pull_request.number }}/merge"
+  TARGET_STORYBOOK_PATH:
+    "/storybook/${{ github.event.pull_request.number }}/merge"
 
 jobs:
   cleanup_previews:
