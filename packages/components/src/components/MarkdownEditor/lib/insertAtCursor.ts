@@ -73,13 +73,13 @@ export const insertAtCursor = (
     } else {
       const lineStart = getLineStart(markdown, start);
       const lineEnd = getLineEnd(markdown, start);
-      const bulletedLine = `- ${markdown.substring(lineStart, lineEnd)}`;
+      const numberedLine = `1. ${markdown.substring(lineStart, lineEnd)}`;
 
       newText =
         markdown.substring(0, lineStart) +
         before +
         markdown.substring(lineStart);
-      selectionStart = lineStart + bulletedLine.length;
+      selectionStart = lineStart + numberedLine.length;
       selectionEnd = selectionStart;
     }
   } else if (type === "unorderedList") {
