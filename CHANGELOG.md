@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.452](https://github.com/mittwald/flow/compare/0.2.0-alpha.451...0.2.0-alpha.452) (2025-09-03)
+
+### Bug Fixes
+
+* **Markdown:** update CodeBlock color to 'dark' ([#1945](https://github.com/mittwald/flow/issues/1945)) ([eb4787e](https://github.com/mittwald/flow/commit/eb4787e0f34835b5f568a573da337c5d64c3c4c7))
+
 # [0.2.0-alpha.451](https://github.com/mittwald/flow/compare/0.2.0-alpha.450...0.2.0-alpha.451) (2025-09-03)
 
 **Note:** Version bump only for package @mittwald/flow-project
