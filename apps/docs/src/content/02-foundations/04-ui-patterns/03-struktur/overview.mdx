@@ -1,13 +1,43 @@
-# Detailseite
-
-Detailseiten zeigen dem User die Inhalte eines bestimmten Elements. Diese können
-über eine [Tab](/03-components/navigation/tabs)-Navigation in verschiedene
-Bereiche aufgeteilt werden. Innerhalb des Content-Bereichs wird der Inhalt
-vertikal durch [Sections](/03-components/structure/section) gegliedert.
-Horizontal sorgt das [ColumnLayout](/03-components/structure/column-layout) für
-eine übersichtliche Anordnung. Wichtig ist, dass die wichtigsten Informationen
-möglichst oben im Content-Bereich stehen. Eine gut strukturierte
-[Heading](/03-components/content/heading)-Hierarchie hilft zudem, den Inhalt
-klar und logisch zu ordnen.
+# Code-Beispiel
 
 <LiveCodeEditor example="detail-page" editorCollapsed bgColor="dark" />
+
+# ContentHeader
+
+Der ContentHeader enthält Orientierungselemente wie PageTitle und Breadcrumb sowie Schnellzugriffe im ActionMenu.
+
+
+## PageTitle
+
+Der PageTitle wird als [Heading](/03-components/content/heading) mit H1 dargestellt. Er gibt den Usern eine klare Orientierung darüber, in welchem Bereich sie sich befinden. Der Titel steht in direktem Bezug zum Inhalt der Detailseite.
+
+## Breadcrumb
+
+Die [Breadcrumb](/03-components/navigation/breadcrumb) ergänzt die Orientierung. Sie ermöglicht die Navigation innerhalb des Seitenbaums und bietet eine schnelle Rückkehr zu übergeordneten Ebenen. Die Bezeichnungen der Einträge sind möglichst generisch gehalten, um Platz zu sparen und unterschiedlich lange Namen konsistent abzubilden.
+
+## ActionMenu
+
+Das ActionMenu stellt zentrale Aktionen, sogennante QuickActions bereit. QuickActions spiegeln wichtige Funktionen wider, die innerhalb des Contents vorhanden sind, und hier zusätzlich als Schnellzugriff zur Verfügung stehen. Außerdem werden die Funktionen „Umbenennen“ oder „Löschen“ hier platziert.
+
+---
+
+# Content
+
+Der Content selbst basiert auf der LayoutCard, die den Container für Sections bildet und mit Tabs ergänzt werden kann.
+
+## LayoutCard
+
+Die [LayoutCard](/03-components/structure/layout-card) ist die Grundlage jeder Detailseite. Sie bildet den äußeren Container für den Inhalt und stellt Hintergrund, Schatten und Padding bereit. 
+
+## Sections
+
+[Sections](/03-components/structure/section) strukturieren die Inhalte in Themenblöcke. Jede Section beginnt dabei mit einer H2-Überschrift. Weitere Unterteilungen erfolgen über verschachtelte Sections mit den Überschriften H3 bis H5 (Siehe [Heading](/03-components/content/heading)).
+Neben der Heading, können auch Actions platziziert werden. Die sogenannten Section Actions bietet Platz für Elemente wie [Buttons](/03-components/actions/button), [Links](/03-components/navigation/link) oder [Switches](/03-components/form-controls/switch). Diese stehen in direktem Zusammenhang mit der jeweiligen Section. Über Buttons können beispielsweise Bearbeitungs- und Anlegeprozesse gestartet werden. 
+
+## Tabs
+
+[Tabs](/03-components/navigation/tabs) schaffen Übersicht bei komplexen Inhalten. Sie teilen den Content in kleinere thematische Einheiten auf. Lassen sich mehrere Sections sinnvoll gruppieren, können sie in einem Tab ausgelagert werden. User können so zwischen verschiedenen Ansichten wechseln, ohne den Kontext zu verlieren.
+
+## ColumnLayout
+
+Das [ColumnLayout](/03-components/structure/column-layout) organisiert Inhalte innerhalb einer Section in Spalten. Anzahl und Breite der Spalten sind flexibel und passen sich an unterschiedliche Breakpoints an.
