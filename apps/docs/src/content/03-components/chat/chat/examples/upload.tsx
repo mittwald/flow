@@ -1,18 +1,17 @@
 import {
-  FileCard,
-  FileCardList,
   Align,
   Avatar,
   Button,
   Chat,
   Content,
+  FileCard,
+  FileCardList,
   Header,
   Initials,
   Message,
   MessageThread,
   Text,
   TextArea,
-  IconAttachment,
 } from "@mittwald/flow-react-components";
 
 <Chat>
