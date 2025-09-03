@@ -5,16 +5,22 @@ import clsx from "clsx";
 import styles from "./ImageCropper.module.scss";
 import { Slider } from "@/components/Slider";
 import { getCroppedImageFile } from "@/components/ImageCropper/lib/getCroppedImageFile";
+import { Label } from "react-aria-components";
+import { ClearPropsContext } from "@/components/ClearPropsContext";
 
 interface Props
   extends PropsWithClassName,
-    Pick<CropperProps, "aspect" | "cropShape"> {
+    Partial<Pick<CropperProps, "aspect" | "cropShape">> {
   image?: File | string;
   onCropComplete?: (croppedImage: File) => void;
   width?: number;
   height?: number;
 }
 
+/**
+ * @flr-generate all
+ * @flr-clear-props-context
+ */
 export const ImageCropper: FC<Props> = (props) => {
   const {
     image,
@@ -67,31 +73,33 @@ export const ImageCropper: FC<Props> = (props) => {
   }, [croppedAreaPixels]);
 
   return (
-    <div className={rootClassName} style={{ maxWidth: width }}>
-      <div className={styles.cropperContainer} style={{ height }}>
-        <Cropper
-          crop={crop}
-          image={imageSrc}
-          onCropChange={setCrop}
-          zoom={zoom}
-          onZoomChange={setZoom}
-          onCropComplete={(_, croppedAreaPixels) =>
-            setCroppedAreaPixels(croppedAreaPixels)
-          }
-          {...rest}
-        />
+    <ClearPropsContext>
+      <div className={rootClassName} style={{ maxWidth: width }}>
+        <div className={styles.cropperContainer} style={{ height }}>
+          <Cropper
+            crop={crop}
+            image={imageSrc}
+            onCropChange={setCrop}
+            zoom={zoom}
+            onZoomChange={setZoom}
+            onCropComplete={(_, croppedAreaPixels) =>
+              setCroppedAreaPixels(croppedAreaPixels)
+            }
+            {...rest}
+          />
+        </div>
+        <Slider
+          minValue={1}
+          maxValue={3}
+          step={0.1}
+          value={zoom}
+          unit="×"
+          onChange={(zoom) => setZoom(zoom as number)}
+        >
+          <Label>Zoom</Label>
+        </Slider>
       </div>
-      <Slider
-        minValue={1}
-        maxValue={3}
-        step={0.1}
-        value={zoom}
-        unit="×"
-        onChange={(zoom) => setZoom(zoom as number)}
-      >
-        Zoom
-      </Slider>
-    </div>
+    </ClearPropsContext>
   );
 };
 

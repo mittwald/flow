@@ -34,7 +34,6 @@ export function getCroppedImageFile(
 
       canvas.toBlob((blob) => {
         if (!blob) {
-          reject(new Error("Canvas is empty"));
           return;
         }
 
