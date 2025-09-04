@@ -5,6 +5,8 @@
   background-color: var(--file-drop-zone--background-color--default);
   border-radius: var(--file-drop-zone--corner-radius);
   padding: var(--file-drop-zone--padding);
+  transition-property: background-color, border-color;
+  transition-duration: var(--transition--duration--default);
 
   &[data-focus-visible],
   &[data-drop-target] {
