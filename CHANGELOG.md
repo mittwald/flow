@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.459](https://github.com/mittwald/flow/compare/0.2.0-alpha.458...0.2.0-alpha.459) (2025-09-04)
+
+### Bug Fixes
+
+* **chat:** fix css ([#1953](https://github.com/mittwald/flow/issues/1953)) ([1ed449a](https://github.com/mittwald/flow/commit/1ed449a3700fb07b9a37c54bb03cc518fe1d5429))
+
 # [0.2.0-alpha.458](https://github.com/mittwald/flow/compare/0.2.0-alpha.457...0.2.0-alpha.458) (2025-09-04)
 
 ### Bug Fixes
