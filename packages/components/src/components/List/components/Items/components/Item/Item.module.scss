@@ -3,6 +3,8 @@
 .item {
   cursor: default;
   background-color: var(--list-item--background-color--default);
+  transition-property: background-color;
+  transition-duration: var(--transition--duration--default);
 
   @include focus.focus;
 
@@ -36,6 +38,11 @@
     &[data-pressed] {
       background-color: var(--list-item--background-color--pressed);
     }
+  }
+
+  :global(.flow--avatar) {
+    transition-property: filter;
+    transition-duration: var(--transition--duration--default);
   }
 
   &.tile {

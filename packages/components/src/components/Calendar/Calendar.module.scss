@@ -30,6 +30,8 @@
     cursor: default;
     border-radius: var(--calendar--cell-corner-radius);
     font-size: var(--calendar--cell-font-size);
+    transition-property: background-color;
+    transition-duration: var(--transition--duration--default);
 
     @include focus.focus;
 
@@ -63,6 +65,7 @@
     :global(.react-aria-CalendarCell) {
       position: relative;
       isolation: isolate;
+      transition-duration: 0s;
 
       &[data-selected] {
         &:before {
