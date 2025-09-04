@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.458](https://github.com/mittwald/flow/compare/0.2.0-alpha.457...0.2.0-alpha.458) (2025-09-04)
+
+### Bug Fixes
+
+* **chat:** support file field usage ([#1952](https://github.com/mittwald/flow/issues/1952)) ([b41a524](https://github.com/mittwald/flow/commit/b41a524dc23fcf897caf6ea601584e676c4c794e))
+
 # [0.2.0-alpha.457](https://github.com/mittwald/flow/compare/0.2.0-alpha.456...0.2.0-alpha.457) (2025-09-04)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
