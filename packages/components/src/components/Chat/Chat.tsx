@@ -30,6 +30,8 @@ export const Chat: FC<ChatProps> = (props) => {
         return props.color === "accent" ? styles.accentButton : styles.button;
       }),
     },
+    TextArea: { className: styles.textInput },
+    TextField: { className: styles.textInput },
   };
 
   return (

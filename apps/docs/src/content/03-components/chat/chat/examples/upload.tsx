@@ -6,6 +6,7 @@ import {
   Content,
   FileCard,
   FileCardList,
+  FileField,
   Header,
   Initials,
   Message,
@@ -13,6 +14,7 @@ import {
   Text,
   TextArea,
 } from "@mittwald/flow-react-components";
+import React from "react";
 
 <Chat>
   <MessageThread>
@@ -43,9 +45,12 @@ import {
     rows={3}
     autoResizeMaxRows={10}
   />
-  <Button color="secondary" variant="outline">
-    Datei anhängen
-  </Button>
+
+  <FileField>
+    <Button variant="outline" color="secondary">
+      Datei anhängen
+    </Button>
+  </FileField>
   <Button color="accent">Senden</Button>
   <FileCardList>
     <FileCard name="Hochgeladene Datei 1" />

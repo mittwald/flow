@@ -18,6 +18,7 @@ import { Field, Form } from "@/integrations/react-hook-form";
 import { action } from "storybook/actions";
 import { useForm } from "react-hook-form";
 import { MarkdownEditor } from "@/components/MarkdownEditor";
+import { FileField } from "@/components/FileField";
 
 const meta: Meta<typeof Chat> = {
   title: "Chat/Chat",
@@ -92,9 +93,11 @@ export const WithUpload: Story = {
         </Message>
       </MessageThread>
       <TextArea aria-label="message" rows={3} autoResizeMaxRows={10} />
-      <Button color="secondary" variant="outline">
-        Attach file
-      </Button>
+      <FileField>
+        <Button variant="outline" color="secondary">
+          Attach file
+        </Button>
+      </FileField>
       <Button color="accent">Submit</Button>
       <FileCardList>
         <FileCard name="Uploaded File 1" />
