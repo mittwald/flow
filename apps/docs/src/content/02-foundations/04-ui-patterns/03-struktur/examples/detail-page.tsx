@@ -59,7 +59,7 @@ export default () => {
               <Text>Aktionen</Text>
               <IconChevronDown />
             </Button>
-            <ContextMenu>
+            <ContextMenu placement="bottom end">
               <MenuItem>
                 <IconEdit />
                 <Text>E-Mail-Adresse bearbeiten</Text>
