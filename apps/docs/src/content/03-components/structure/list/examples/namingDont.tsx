@@ -47,7 +47,9 @@ export default () => {
           "Verifizierung Unverifiziert",
         ]}
       />
-      <DomainList.Item>
+      <DomainList.Item
+        textValue={(domain) => domain.domain}
+      >
         {(domain) => (
           <DomainList.ItemView>
             <Avatar

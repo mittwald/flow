@@ -1,39 +1,122 @@
 # Playground
 
-Verwende `<List />`, um eine Liste darzustellen.
+Verwende `typedList<T>` um eine Liste mit deinem gewünschten Datentyp zu
+erstellen.
 
 <LiveCodeEditor />
 
 ---
 
-# Kombiniere mit ...
+# Ansichten
+
+Die Liste unterstützt die Ansichten Liste, Raster und Tabelle. Wird mehr als
+eine Ansicht verwendet kann über ein Menü zwischen den Ansichten gewechselt
+werden. Die Default-Ansicht wird über das Property `defaultViewMode` festgelegt.
+
+## Listen-Ansicht
+
+Nutze `<List.Item />` um die Liste in der Listen-Ansicht anzuzeigen.
+
+<LiveCodeEditor example="mode-list" editorCollapsed />
+
+## Raster-Ansicht
+
+Für die Rasteransicht wird ebenfalls das `<List.Item />` verwendet. Nutze
+`showTiles` um diese Ansicht zu aktivieren. Die Listen-Ansicht kann deaktiviert
+werden indem `showList` auf false gesetzt wird.
+
+Über das `maxTileWidth` Property kann die maximale Breite der Kacheln angepasst
+werden.
+
+<LiveCodeEditor example="mode-tile" editorCollapsed />
+
+## Tabellen-Ansicht
+
+Nutze `<List.Table />` um die Liste als Tabelle darzustellen.
+
+<LiveCodeEditor example="mode-table" editorCollapsed />
+
+---
+
+# List Items
+
+## Mit Link
+
+Das ListItem bietet ein `href` Property an um die Liste zur Navigation zu
+nutzen.
+
+<LiveCodeEditor example="item-link" editorCollapsed />
+
+## Mit Accordion
+
+Aktiviere das Accordion-Verhalten über die `accordion` Property. So lässt sich
+ein Listen-Element durch Klick ein- bzw. ausklappen. Der erweiterte Inhalt muss
+dann in `<Content slot="bottom" />` enthalten sein.
+
+<LiveCodeEditor example="item-accordion" editorCollapsed />
+
+## Mit Checkboxen
+
+Checkboxen, die in einem ListItem platziert werden, werden automatisch vorne
+angeordnet. Die Funktionalität der Checkbox wird nicht von der Liste gesteuert
+und muss individuell implementiert werden. Achte bei der Implementierung jedoch
+darauf, dass die gesamte Zeile genutzt werden kann, um das Element zu markieren.
+Nutze dafür `onAction` der List.
+
+<LiveCodeEditor example="item-checkbox" editorCollapsed />
+
+## Content Slots
+
+Im ListItem kann zusätzlicher `<Content/>` platziert werden. Über das `slot`
+Property wird die Position gesteuert.
+
+<LiveCodeEditor example="item-content" editorCollapsed />
+
+## Mit ColumnLayout
+
+Dem ListItem können die ColumnLayout Properties `s`, `m` und `l` mitgegeben
+werden, um das Seitenverhältnis und Umbruchverhalten von Header und Content zu
+steuern.
+
+<LiveCodeEditor example="item-column-layout" editorCollapsed />
+
+## Mit ActionGroup
+
+Verwende eine ActionGroup innerhalb des `<Content/>` um Buttons in deiner Liste
+zu platzieren
+
+<LiveCodeEditor example="item-action-group" editorCollapsed />
+
+---
+
+# Einstellmöglichkeiten
 
 ## Sortierung
 
 Nutze `<List.Sorting />` innerhalb der List, um eine Sortiermethode anzulegen.
 
-Benutzerdefinierte Sortierfunktionen ermöglichen spezielle Sortierlogik für
-verschiedene Datentypen wie BigInt, inklusive Typprüfung und
-Fallback-Mechanismen für ungültige Eingaben. Außerdem können eigene
-Sortierfunktionen über die List.Sorting-Komponente mit dem Property
-`customSortingFn` hinzugefügt werden.
-
-<LiveCodeEditor example="sorting" editorCollapsed />
-
 ## Filter
 
 Über `<List.Filter />` lassen sich Filtermöglichkeiten anlegen.
-
-<LiveCodeEditor example="filter" editorCollapsed />
 
 ## Suche
 
 Verwende `<List.Search />` innerhalb der List, um ein
 [SearchField](/03-components/form-controls/search-field) anzuzeigen.
-Standardmäßig wird die Suche bei Klick auf Enter gestartet. Um die Suche
-automatisch zu starten, kann das Property `autoSubmit` gesetzt werden.
+Standardmäßig wird die Suche automatisch gestartet. Um die Suche nur bei Klick
+auf Enter, kann das Property `autoSubmit` auf false gesetzt werden.
 
-<LiveCodeEditor example="search" editorCollapsed />
+## Pagination
+
+Die Pagination wird standardmäßig bei jeder List aktiviert, kann aber über
+`hidePagination`deaktiviert werden. Über die `batchSize` Property kann
+festgelegt werden wie viele Einträge auf einmal angezeigt werden sollen.
+
+<LiveCodeEditor editorCollapsed />
+
+---
+
+# Kombiniere mit ...
 
 ## ActionGroup
 
@@ -50,72 +133,3 @@ Summe der Beträge, anzuzeigen. Über das `position` Property kannst du bestimme
 ob die Summary oberhalb oder unterhalb der Liste angezeigt werden soll.
 
 <LiveCodeEditor example="summary" editorCollapsed />
-
-## Mit Accordion
-
-Aktiviere das Accordion-Verhalten über die `accordion` Property. So lässt sich
-ein Listen-Element durch Klick ein- bzw. ausklappen. Der erweiterte Inhalt muss
-dann in `<Content slot="bottom" />` enthalten sein.
-
-<LiveCodeEditor example="accordion" editorCollapsed />
-
-## Pagination
-
-Die Pagination wird standardmäßig bei jeder List aktiviert. Sie zeigt im
-Standard 10 Einträge an und lädt über einen Klick auf "Mehr anzeigen" jeweils 10
-Einträge nach. Diese Werte lassen sich über die `batchSize` Property anpassen.
-
-<LiveCodeEditor example="pagination" editorCollapsed />
-
----
-
-# Ansichten
-
-## Tabellen-Ansicht
-
-Die List kann als Liste oder als Tabelle dargestellt werden. Nutze
-`<List.Item />` für die Darstellung als Liste und `<List.Table />`, um sie als
-[Tabelle](/03-components/structure/table) anzuzeigen
-
-<LiveCodeEditor example="table" editorCollapsed />
-
-## Raster-Ansicht
-
-Im List.Item kann über die Properties `showTiles` und `showList` ausgewählt
-werden wie die List Items dargestellt werden. `showList` ist im default auf true
-gesetzt. Sind beide Werte gesetzt, kann über das Ansichts-Menü zwischen den
-beiden Darstellungen gewechselt werden.
-
-Über das optionale `maxTileWidth` Property kann die maximale Breite der Kacheln
-angepasst werden.
-
-<LiveCodeEditor example="tile" editorCollapsed />
-
----
-
-# List Items
-
-## Mit Checkboxen
-
-Checkboxen, die in einem ListItem platziert werden, werden automatisch vorne
-angeordnet. Die Funktionalität der Checkbox wird nicht von der Liste gesteuert
-und muss individuell implementiert werden. Achte bei der Implementierung jedoch
-darauf, dass die gesamte Zeile genutzt werden kann, um das Element zu markieren.
-Nutze dafür `onAction` der List.
-
-<LiveCodeEditor example="checkbox" editorCollapsed />
-
-## Mit ColumnLayout
-
-Dem ListItem können die ColumnLayout Properties `s`,`m` und `l` mitgegeben
-werden, um das Seitenverhältnis und Umbruchverhalten von Header und Content zu
-steuern.
-
-<LiveCodeEditor example="columnLayout" editorCollapsed />
-
-## Mit ActionGroup
-
-Verwende eine ActionGroup innerhalb des `<Content/>` um Buttons in deiner Liste
-zu platzieren
-
-<LiveCodeEditor example="itemActionGroup" editorCollapsed />
