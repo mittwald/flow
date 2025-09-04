@@ -1,148 +1,210 @@
 import {
-  Action,
-  Alert,
-  Button,
-  ColumnLayout,
-  Content,
-  ContextMenu,
-  ContextMenuTrigger,
-  Header,
+  Breadcrumb,
+  Flex,
   Heading,
-  IconContextMenu,
-  Label,
-  LabeledValue,
   LayoutCard,
-  MenuItem,
+  Link,
   Section,
-  Tab,
-  Tabs,
-  TabTitle,
+  Button,
   Text,
+  IconChevronDown,
+  Tabs,
+  Tab,
+  TabTitle,
+  ContextMenuTrigger,
+  ContextMenu,
+  MenuItem,
+  Header,
+  Modal,
+  ModalTrigger,
+  Content,
+  LabeledValue,
+  ColumnLayout,
+  Label,
+  ProgressBar,
+  SegmentedControl,
+  Segment,
+  Table,
+  TableHeader,
+  TableColumn,
+  TableBody,
+  TableCell,
+  TableRow,
+  Switch,
 } from "@mittwald/flow-react-components";
+import { useState } from "react";
 
 export default () => {
-  const domain = {
-    id: "4",
-    hostname: "example.de",
-    domain: "example.de",
-    type: "Domain",
-    ssl: undefined,
-    owner: {
-      firstName: "Franz",
-      lastName: "Müller",
-      street: "Jackenweg",
-      houseNumber: "44a",
-      zip: "12893",
-      city: "Lanzhausen",
-      email: "f.mueller@mittwald.de",
-    },
-  };
-
-  const domainDetailsSection = (
-    <Section>
-      <Header>
-        <Heading>Domain-Details</Heading>
-        <ContextMenuTrigger>
-          <Button color="secondary" variant="soft">
-            <IconContextMenu />
-          </Button>
-          <ContextMenu>
-            <MenuItem
-              onAction={() => alert("not implemented")}
-            >
-              Domain umziehen
-            </MenuItem>
-            <MenuItem
-              onAction={() => alert("not implemented")}
-            >
-              Domain entfernen
-            </MenuItem>
-          </ContextMenu>
-        </ContextMenuTrigger>
-
-        <Button onPress={() => alert("not implemented")}>
-          Domain-Ziel ändern
-        </Button>
-      </Header>
-      <Alert status="danger">
-        <Heading>
-          Es konnte kein SSL-Zertifikat ausgestellt werden
-        </Heading>
-        <Content>
-          <Text>
-            Für diese Domain konnte kein SSL-Zertifikat
-            ausgestellt werden, da {domain.hostname} nicht
-            per DNS auf deine Server-IP zeigt. Ändere den
-            A-Record oder CNAME auf die Server-IP zeigen. Es
-            kann einige Minuten dauern, bis das Zertifikat
-            bei korrekten Einstellungen ausgestellt ist.
-          </Text>
-          <Action showFeedback>
-            <Button>SSL-Zertifikat ausstellen</Button>
-          </Action>
-        </Content>
-      </Alert>
-      <ColumnLayout s={[1, 1]}>
-        <LabeledValue>
-          <Label>Domain-Ziel</Label>
-          <Text>{domain.hostname}</Text>
-        </LabeledValue>
-        <LabeledValue>
-          <Label>Zertifikat</Label>
-          <Text>{domain.ssl ? domain.ssl : "-"}</Text>
-        </LabeledValue>
-      </ColumnLayout>
-    </Section>
-  );
-
-  const domainOwnerSection = (
-    <Section>
-      <Header>
-        <Heading>Domain-Inhaber</Heading>
-        <Button
-          color="secondary"
-          variant="soft"
-          onPress={() => alert("not implemented")}
-        >
-          Bearbeiten
-        </Button>
-      </Header>
-      <ColumnLayout>
-        <LabeledValue>
-          <Label>Inhaber</Label>
-          <Text>
-            {domain.owner.firstName} {domain.owner.lastName}
-            <br />
-            {domain.owner.street} {domain.owner.houseNumber}
-            <br />
-            {domain.owner.zip} {domain.owner.city}
-          </Text>
-        </LabeledValue>
-        <LabeledValue>
-          <Label>E-Mail-Adresse</Label>
-          <Text>{domain.owner.email}</Text>
-        </LabeledValue>
-      </ColumnLayout>
-    </Section>
-  );
-
+  const [connectionType, setConnectionType] =
+    useState("IMAP");
   return (
-    <LayoutCard>
-      <Tabs>
-        <Tab>
-          <TabTitle>Allgemein</TabTitle>
-          {domainDetailsSection}
-          {domainOwnerSection}
-        </Tab>
-        <Tab>
-          <TabTitle>DNS</TabTitle>
-          <Text>not implemented</Text>
-        </Tab>
-        <Tab>
-          <TabTitle>Pfade</TabTitle>
-          <Text>not implemented</Text>
-        </Tab>
-      </Tabs>
-    </LayoutCard>
+    <Flex direction="column" gap="m">
+      <Flex direction="column">
+        <Breadcrumb color="light">
+          <Link>Projekt</Link>
+          <Link>E-Mails</Link>
+          <Link>E-Mail-Details</Link>
+        </Breadcrumb>
+        <Flex justify="space-between">
+          <Heading color="light" level={1}>
+            max@mustermann.de
+          </Heading>
+          <ContextMenuTrigger>
+            <Button variant="outline" color="light">
+              <Text>Aktionen</Text>
+              <IconChevronDown />
+            </Button>
+            <ContextMenu>
+              <MenuItem>...</MenuItem>
+            </ContextMenu>
+          </ContextMenuTrigger>
+        </Flex>
+      </Flex>
+      <LayoutCard>
+        <Tabs>
+          <Tab>
+            <TabTitle>Allgemein</TabTitle>
+            <Section>
+              <Header>
+                <Heading>E-Mail-Adresse</Heading>
+                <ModalTrigger>
+                  <Button variant="soft" color="secondary">
+                    Passwort ändern
+                  </Button>
+                  <Modal>
+                    <Heading>Passwort ändern</Heading>
+                    <Content>
+                      <Text>...</Text>
+                    </Content>
+                  </Modal>
+                </ModalTrigger>
+                <ModalTrigger>
+                  <Button>E-Mail-Adresse bearbeiten</Button>
+                  <Modal>
+                    <Heading>
+                      E-Mail-Adresse bearbeiten
+                    </Heading>
+                    <Content>
+                      <Text>...</Text>
+                    </Content>
+                  </Modal>
+                </ModalTrigger>
+              </Header>
+              <ColumnLayout>
+                <LabeledValue>
+                  <Label>E-Mail-Adresse</Label>
+                  <Text>max@mustermann.de</Text>
+                </LabeledValue>
+                <LabeledValue>
+                  <Label>Webmailer</Label>
+                  <Link target="_blank">
+                    mittwald Webmailer
+                  </Link>
+                </LabeledValue>
+              </ColumnLayout>
+            </Section>
+            <Section>
+              <Header>
+                <Heading>Speicherplatz</Heading>
+                <ModalTrigger>
+                  <Button variant="soft" color="secondary">
+                    Bearbeiten
+                  </Button>
+                  <Modal>
+                    <Heading>
+                      Speicherplatz bearbeiten
+                    </Heading>
+                    <Content>
+                      <Text>...</Text>
+                    </Content>
+                  </Modal>
+                </ModalTrigger>
+              </Header>
+              <Text>
+                Die E-Mail-Adresse verfügt über einen
+                Speicherplatz zum Empfangen und Speichern
+                von E-Mails. Wir empfehlen dir, mindestens 2
+                GB zu reservieren.
+              </Text>
+              <ProgressBar
+                formatOptions={{
+                  style: "unit",
+                  unit: "gigabyte",
+                }}
+                size="l"
+                showMaxValue
+                maxValue={2}
+                value={1}
+                status="success"
+              >
+                <Label>Speicherplatz</Label>
+              </ProgressBar>
+            </Section>
+            <Section>
+              <Heading>Verbindungsinformationen</Heading>
+              <SegmentedControl
+                defaultValue={connectionType}
+                onChange={setConnectionType}
+                aria-label="Verbindungsart"
+              >
+                <Segment value="IMAP">IMAP</Segment>
+                <Segment value="POP3">POP3</Segment>
+                <Segment value="SMTP">SMTP</Segment>
+              </SegmentedControl>
+              <Table aria-label="Verbindungsinformationen">
+                <TableHeader>
+                  <TableColumn></TableColumn>
+                  <TableColumn></TableColumn>
+                </TableHeader>
+                <TableBody>
+                  <TableRow>
+                    <TableCell rowHeader>
+                      Benutzername
+                    </TableCell>
+                    <TableCell>max@mustermann.de</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell rowHeader>
+                      {connectionType} Port
+                    </TableCell>
+                    <TableCell>...</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell rowHeader>
+                      {connectionType} Postausgang
+                    </TableCell>
+                    <TableCell>...</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </Section>
+            <Section>
+              <Header>
+                <Heading>Spamschutz</Heading>
+                <Switch defaultSelected>Aktivieren</Switch>
+              </Header>
+              <Text>
+                Der Spamfilter schützt dich vor ungewollten
+                E-Mails. Niemand will Müll in seinem
+                Postfach, daher empfehlen wir den Spamschutz
+                immer aktiviert zu lassen.
+              </Text>
+            </Section>
+          </Tab>
+          <Tab>
+            <TabTitle>Weiterleitungen</TabTitle>
+            <Section>
+              <Text>...</Text>
+            </Section>
+          </Tab>
+          <Tab>
+            <TabTitle>Autoresponder</TabTitle>
+            <Section>
+              <Text>...</Text>
+            </Section>
+          </Tab>
+        </Tabs>
+      </LayoutCard>
+    </Flex>
   );
 };
