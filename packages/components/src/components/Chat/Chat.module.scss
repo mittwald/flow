@@ -27,7 +27,7 @@
     padding-top: var(--chat--spacing);
     flex-wrap: wrap;
 
-    :first-child {
+    > :first-child {
       order: 0;
       width: 100%;
     }
