@@ -3,7 +3,6 @@ import {
   Content,
   Heading,
   IconDomain,
-  List,
   ListItemView,
   Text,
   typedList,
