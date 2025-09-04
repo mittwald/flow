@@ -4,31 +4,35 @@ import {
   Button,
   Content,
   Heading,
-  IconEmail,
+  IconDomain,
   typedList,
 } from "@mittwald/flow-react-components";
+import {
+  type Domain,
+  domains,
+} from "@/content/03-components/structure/list/examples/domainApi";
 
 export default () => {
-  const List = typedList<{ mail: string }>();
+  const List = typedList<Domain>();
 
   return (
-    <List.List batchSize={6} aria-label="Domains">
-      <List.StaticData data={[{ mail: "john@doe.de" }]} />
-      <List.Item showTiles textValue={(mail) => mail.mail}>
-        {(mail) => (
+    <List.List
+      batchSize={2}
+      hidePagination
+      aria-label="Domains"
+    >
+      <List.StaticData data={domains} />
+      <List.Item textValue={(domain) => domain.domain}>
+        {(domain) => (
           <List.ItemView>
             <Avatar>
-              <IconEmail />
+              <IconDomain />
             </Avatar>
-            <Heading>{mail.mail}</Heading>
+            <Heading>{domain.hostname}</Heading>
 
             <Content>
               <ActionGroup>
-                <Button
-                  variant="soft"
-                  color="secondary"
-                  slot="secondary"
-                >
+                <Button variant="soft" color="secondary">
                   Bearbeiten
                 </Button>
                 <Button variant="soft" color="danger">

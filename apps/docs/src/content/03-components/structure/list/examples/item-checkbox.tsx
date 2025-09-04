@@ -41,7 +41,8 @@ export default () => {
 
   return (
     <List.List
-      batchSize={4}
+      hidePagination
+      batchSize={2}
       aria-label="Domains"
       onAction={(domain) => {
         onSelected(domain, !isSelected(domain));
