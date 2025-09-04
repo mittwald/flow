@@ -1,42 +1,47 @@
 import {
   Breadcrumb,
+  Button,
+  ColumnLayout,
+  Content,
+  ContextMenu,
+  ContextMenuTrigger,
   Flex,
+  Header,
   Heading,
+  IconChevronDown,
+  IconDelete,
+  IconEdit,
+  IconPassword,
+  Label,
+  LabeledValue,
   LayoutCard,
   Link,
-  Section,
-  Button,
-  Text,
-  IconChevronDown,
-  Tabs,
-  Tab,
-  TabTitle,
-  ContextMenuTrigger,
-  ContextMenu,
   MenuItem,
-  Header,
   Modal,
   ModalTrigger,
-  Content,
-  LabeledValue,
-  ColumnLayout,
-  Label,
   ProgressBar,
-  SegmentedControl,
+  Section,
   Segment,
+  SegmentedControl,
+  Switch,
+  Tab,
   Table,
-  TableHeader,
-  TableColumn,
   TableBody,
   TableCell,
+  TableColumn,
+  TableHeader,
   TableRow,
-  Switch,
+  Tabs,
+  TabTitle,
+  Text,
+  IconExternalLink,
 } from "@mittwald/flow-react-components";
 import { useState } from "react";
 
 export default () => {
   const [connectionType, setConnectionType] =
     useState("IMAP");
+
   return (
     <Flex direction="column" gap="m">
       <Flex direction="column">
@@ -55,7 +60,22 @@ export default () => {
               <IconChevronDown />
             </Button>
             <ContextMenu>
-              <MenuItem>...</MenuItem>
+              <MenuItem>
+                <IconEdit />
+                <Text>E-Mail-Adresse bearbeiten</Text>
+              </MenuItem>
+              <MenuItem>
+                <IconPassword />
+                <Text>Passwort ändern</Text>
+              </MenuItem>
+              <MenuItem>
+                <IconExternalLink />
+                <Text>mittwald Webmailer</Text>
+              </MenuItem>
+              <MenuItem>
+                <IconDelete />
+                <Text>Löschen</Text>
+              </MenuItem>
             </ContextMenu>
           </ContextMenuTrigger>
         </Flex>
