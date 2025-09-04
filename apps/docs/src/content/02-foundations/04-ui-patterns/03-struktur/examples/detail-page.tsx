@@ -11,6 +11,7 @@ import {
   IconChevronDown,
   IconDelete,
   IconEdit,
+  IconExternalLink,
   IconPassword,
   Label,
   LabeledValue,
@@ -34,7 +35,6 @@ import {
   Tabs,
   TabTitle,
   Text,
-  IconExternalLink,
 } from "@mittwald/flow-react-components";
 import { useState } from "react";
 
