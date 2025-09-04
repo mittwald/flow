@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.455](https://github.com/mittwald/flow/compare/0.2.0-alpha.454...0.2.0-alpha.455) (2025-09-04)
+
+### Bug Fixes
+
+* **CI:** preview cleanup ([#1948](https://github.com/mittwald/flow/issues/1948)) ([6d63d71](https://github.com/mittwald/flow/commit/6d63d71e3ac82a2be43a83ac685fc980bc7c4a8b))
+
 # [0.2.0-alpha.454](https://github.com/mittwald/flow/compare/0.2.0-alpha.453...0.2.0-alpha.454) (2025-09-03)
 
 ### Bug Fixes
