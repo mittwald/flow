@@ -14,7 +14,6 @@ import {
   Text,
   TextArea,
 } from "@mittwald/flow-react-components";
-import React from "react";
 
 <Chat>
   <MessageThread>
