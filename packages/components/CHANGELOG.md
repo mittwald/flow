@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.456](https://github.com/mittwald/flow/compare/0.2.0-alpha.455...0.2.0-alpha.456) (2025-09-04)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
 # [0.2.0-alpha.455](https://github.com/mittwald/flow/compare/0.2.0-alpha.454...0.2.0-alpha.455) (2025-09-04)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
