@@ -3,6 +3,8 @@
   > div {
     background-color: var(--modal--background-color);
     overflow: hidden;
+    transition-property: width;
+    transition-duration: var(--transition--duration--fast);
   }
 
   [role="dialog"],
