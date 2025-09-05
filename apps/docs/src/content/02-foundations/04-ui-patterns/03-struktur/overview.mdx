@@ -1,6 +1,10 @@
 # Code-Beispiel
 
+Das folgende Code-Beispiel zeigt den Aufbau einer typischen Detailseite in mStudio. Es veranschaulicht, wie Inhalte strukturiert und dargestellt werden.
+
 <LiveCodeEditor example="detail-page" editorCollapsed bgColor="dark" />
+
+---
 
 # ContentHeader
 
@@ -17,27 +21,27 @@ Die [Breadcrumb](/03-components/navigation/breadcrumb) ergänzt die Orientierung
 
 ## ActionMenu
 
-Das ActionMenu stellt zentrale Aktionen, sogennante QuickActions bereit. QuickActions spiegeln wichtige Funktionen wider, die innerhalb des Contents vorhanden sind, und hier zusätzlich als Schnellzugriff zur Verfügung stehen. Außerdem werden die Funktionen „Umbenennen“ oder „Löschen“ hier platziert.
+Das ActionMenu besteht aus einem [Button](/03-components/actions/button) als Trigger und einem [ContextMenu](/03-components/actions/context-menu). Es bietet zentrale Aktionen, sogenannte QuickActions, an. QuickActions spiegeln wichtige Funktionen wider, die zwar innerhalb des Contents vorhanden sind und hier zusätzlich als Schnellzugriff zur Verfügung stehen. Außerdem werden die Funktionen „Umbenennen“ oder „Löschen“ hier platziert.
 
 ---
 
 # Content
 
-Der Content selbst basiert auf der LayoutCard, die den Container für Sections bildet und mit Tabs ergänzt werden kann.
+Im Content-Bereich werden die für den User relevanten Informationen dargestellt und Bearbeitungs- sowie Anlageprozesse ermöglicht. Damit Seiten einheitlich wirken, sollten die Inhalte nach einem wiederkehrenden Muster aufgebaut werden. Grundlage ist die LayoutCard als Container für Sections, die bei Bedarf mit Tabs ergänzt werden können.
 
 ## LayoutCard
 
-Die [LayoutCard](/03-components/structure/layout-card) ist die Grundlage jeder Detailseite. Sie bildet den äußeren Container für den Inhalt und stellt Hintergrund, Schatten und Padding bereit. 
-
-## Sections
-
-[Sections](/03-components/structure/section) strukturieren die Inhalte in Themenblöcke. Jede Section beginnt dabei mit einer H2-Überschrift. Weitere Unterteilungen erfolgen über verschachtelte Sections mit den Überschriften H3 bis H5 (Siehe [Heading](/03-components/content/heading)).
-Neben der Heading, können auch Actions platziziert werden. Die sogenannten Section Actions bietet Platz für Elemente wie [Buttons](/03-components/actions/button), [Links](/03-components/navigation/link) oder [Switches](/03-components/form-controls/switch). Diese stehen in direktem Zusammenhang mit der jeweiligen Section. Über Buttons können beispielsweise Bearbeitungs- und Anlegeprozesse gestartet werden. 
+Die [LayoutCard](/03-components/structure/layout-card) ist die Grundlage jeder Detailseite. Sie bildet den äußeren Container für den Inhalt und stellt Hintergrund und Padding bereit. 
 
 ## Tabs
 
-[Tabs](/03-components/navigation/tabs) schaffen Übersicht bei komplexen Inhalten. Sie teilen den Content in kleinere thematische Einheiten auf. Lassen sich mehrere Sections sinnvoll gruppieren, können sie in einem Tab ausgelagert werden. User können so zwischen verschiedenen Ansichten wechseln, ohne den Kontext zu verlieren.
+[Tabs](/03-components/navigation/tabs) schaffen Übersicht bei komplexen Inhalten. Sie teilen den Content in kleinere thematische Einheiten auf. Wenn sich mehrere Sections sinnvoll gruppieren lassen, können sie in einem Tab ausgelagert werden. User können so zwischen verschiedenen Ansichten wechseln, ohne den Kontext zu verlieren.
+
+## Sections
+
+[Sections](/03-components/structure/section) strukturieren die Inhalte in Themenblöcke. Jede Section beginnt dabei mit einer H2-Überschrift. Weitere Unterteilungen erfolgen über verschachtelte Sections mit den Überschriften H3 bis H5 (siehe [Heading](/03-components/content/heading)).
+Neben der Heading können auch Actions platziert werden. Die sogenannten SectionAction im Section-Header bietet Platz für Elemente wie [Buttons](/03-components/actions/button), [Links](/03-components/navigation/link) oder [Switches](/03-components/form-controls/switch). Diese stehen in direktem Zusammenhang mit der jeweiligen Section. Über Buttons können beispielsweise Bearbeitungs- und Anlegeprozesse gestartet werden. 
 
 ## ColumnLayout
 
-Das [ColumnLayout](/03-components/structure/column-layout) organisiert Inhalte innerhalb einer Section in Spalten. Anzahl und Breite der Spalten sind flexibel und passen sich an unterschiedliche Breakpoints an.
+Das [ColumnLayout](/03-components/structure/column-layout) organisiert Inhalte in Spalten. Anzahl und Breite der Spalten sind flexibel und passen sich an unterschiedliche Breakpoints an.
