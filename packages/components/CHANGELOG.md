@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.460](https://github.com/mittwald/flow/compare/0.2.0-alpha.459...0.2.0-alpha.460) (2025-09-05)
+
+### Bug Fixes
+
+* **segment:** add focus outline ([#1954](https://github.com/mittwald/flow/issues/1954)) ([ade4db8](https://github.com/mittwald/flow/commit/ade4db8c8e4f7bdc53a009159888c644d5001634))
+
 # [0.2.0-alpha.459](https://github.com/mittwald/flow/compare/0.2.0-alpha.458...0.2.0-alpha.459) (2025-09-04)
 
 ### Bug Fixes
