@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import styles from "./MarkdownEditor.module.scss";
-import { Markdown } from "@/components/Markdown";
+import { Markdown, type MarkdownProps } from "@/components/Markdown";
 import { TextArea, type TextAreaProps } from "@/components/TextArea";
 import { Toolbar } from "@/components/MarkdownEditor/components/Toolbar";
 import clsx from "clsx";
@@ -9,7 +9,8 @@ import { handleKeyDown } from "@/components/MarkdownEditor/lib/handleKeyDown";
 
 export type MarkdownEditorMode = "editor" | "preview";
 
-export type MarkdownEditorProps = TextAreaProps;
+export type MarkdownEditorProps = TextAreaProps &
+  Pick<MarkdownProps, "headingOffset">;
 
 /** @flr-generate all */
 export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
@@ -21,6 +22,7 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
     onChange,
     rows,
     autoResizeMaxRows,
+    headingOffset,
     ...rest
   } = props;
 
@@ -62,6 +64,7 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
       />
 
       <Markdown
+        headingOffset={headingOffset}
         className={styles.markdown}
         style={{
           maxHeight: `calc(var(--line-height--m) * ${autoResizeMaxRows ?? rows} + (var(--form-control--padding-y) * 2))`,
