@@ -117,6 +117,10 @@
     &[data-entering] {
       animation: modal-slide-in-from-right var(--transition--duration--slow);
     }
+    &[data-exiting] {
+      animation: modal-slide-in-from-right var(--transition--duration--default)
+        reverse;
+    }
   }
 
   &.left {
@@ -126,6 +130,10 @@
 
       &[data-entering] {
         animation: modal-slide-in-from-left var(--transition--duration--slow);
+      }
+      &[data-exiting] {
+        animation: modal-slide-in-from-left var(--transition--duration--default)
+          reverse;
       }
     }
   }
