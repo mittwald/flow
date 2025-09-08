@@ -20,7 +20,7 @@ export interface MarkdownProps
     Omit<Options, "components"> {
   /** The color schema of the markdown component. */
   color?: "dark" | "light" | "default";
-  /** Shifts all Markdown heading levels by the given offset. @default 0 */
+  /** Shifts all heading levels by the given offset. @default 0 */
   headingOffset?: number;
   /** @internal */
   style?: CSSProperties;
