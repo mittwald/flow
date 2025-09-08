@@ -16,6 +16,7 @@ export class RemoteMarkdownElement extends FlowRemoteElement<RemoteMarkdownEleme
       className: {},
       color: {},
       disallowedElements: {},
+      headingOffset: {},
       rehypePlugins: {},
       remarkPlugins: {},
       remarkRehypeOptions: {},
