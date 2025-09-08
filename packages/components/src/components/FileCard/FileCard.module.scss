@@ -25,6 +25,7 @@
     margin-block: calc(var(--file-card--padding-y) * -1);
     gap: var(--file-card--spacing);
     flex-grow: 1;
+    min-width: 0;
   }
 
   .text {
