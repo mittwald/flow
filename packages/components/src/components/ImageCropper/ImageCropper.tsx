@@ -7,6 +7,8 @@ import { Slider } from "@/components/Slider";
 import { getCroppedImageFile } from "@/components/ImageCropper/lib/getCroppedImageFile";
 import { Label } from "react-aria-components";
 import { ClearPropsContext } from "@/components/ClearPropsContext";
+import { useLocalizedStringFormatter } from "react-aria";
+import locales from "./locales/*.locale.json";
 
 export interface ImageCropperProps
   extends PropsWithClassName,
@@ -36,6 +38,8 @@ export const ImageCropper: FC<ImageCropperProps> = (props) => {
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area>();
 
   const rootClassName = clsx(styles.imageCropper, className);
+
+  const stringFormatter = useLocalizedStringFormatter(locales);
 
   useEffect(() => {
     if (image) {
@@ -96,7 +100,7 @@ export const ImageCropper: FC<ImageCropperProps> = (props) => {
           unit="×"
           onChange={(zoom) => setZoom(zoom as number)}
         >
-          <Label>Zoom</Label>
+          <Label>{stringFormatter.format("zoom")}</Label>
         </Slider>
       </div>
     </ClearPropsContext>
