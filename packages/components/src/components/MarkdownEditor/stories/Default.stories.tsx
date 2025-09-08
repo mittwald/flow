@@ -70,3 +70,13 @@ export const WithForm: Story = {
     );
   },
 };
+
+export const WithOnChange: Story = {
+  render: (props) => {
+    return (
+      <MarkdownEditor {...props} onChange={(v) => console.log(v)}>
+        <Label>Message</Label>
+      </MarkdownEditor>
+    );
+  },
+};

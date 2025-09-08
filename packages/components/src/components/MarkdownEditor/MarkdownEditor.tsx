@@ -43,7 +43,12 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
       value={value !== undefined ? value : markdown}
       rows={rows}
       autoResizeMaxRows={autoResizeMaxRows}
-      onChange={(v) => setMarkdown(v)}
+      onChange={(v) => {
+        if (onChange) {
+          onChange(v);
+        }
+        setMarkdown(v);
+      }}
       onKeyDown={(e) => handleKeyDown(e, textAreaRef, setMarkdown, onChange)}
     >
       <Toolbar
