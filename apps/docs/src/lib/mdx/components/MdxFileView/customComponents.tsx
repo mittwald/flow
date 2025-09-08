@@ -64,19 +64,19 @@ export const customComponents = {
   ),
 
   h1: ({ children }: PropsWithChildren) => (
-    <Heading level={2} size="l" className={styles.heading2}>
+    <Heading level={2} className={styles.heading2}>
       {children}
     </Heading>
   ),
 
   h2: ({ children }: PropsWithChildren) => (
-    <Heading level={3} size="m" className={styles.heading}>
+    <Heading level={3} className={styles.heading}>
       {children}
     </Heading>
   ),
 
   h3: ({ children }: PropsWithChildren) => (
-    <Heading level={4} size="s" className={styles.heading}>
+    <Heading level={4} className={styles.heading}>
       {children}
     </Heading>
   ),
