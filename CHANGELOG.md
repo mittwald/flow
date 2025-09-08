@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.461](https://github.com/mittwald/flow/compare/0.2.0-alpha.460...0.2.0-alpha.461) (2025-09-08)
+
+### Bug Fixes
+
+* **MarkdownEditor:** fix remote ([#1957](https://github.com/mittwald/flow/issues/1957)) ([adc4a1a](https://github.com/mittwald/flow/commit/adc4a1a9cdf08acd8eab2b27b8f679e3b8755107))
+
 # [0.2.0-alpha.460](https://github.com/mittwald/flow/compare/0.2.0-alpha.459...0.2.0-alpha.460) (2025-09-05)
 
 ### Bug Fixes
