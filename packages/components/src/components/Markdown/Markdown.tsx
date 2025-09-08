@@ -13,7 +13,7 @@ import { extractTextFromFirstChild } from "@/lib/react/remote";
 import type { PropsWithClassName } from "@/lib/types/props";
 import clsx from "clsx";
 import remarkGfm from "remark-gfm";
-import { getHeadingLevelWithOffset } from "@/components/Markdown/lib/getHeadingLevelWithOffset.test";
+import { getHeadingLevelWithOffset } from "@/components/Markdown/lib/getHeadingLevelWithOffset";
 
 export interface MarkdownProps
   extends PropsWithClassName,
