@@ -11,6 +11,7 @@
   z-index: 1;
 
   @include formControl.formControl();
+  @include focus.focus();
 
   & {
     border-radius: 0;

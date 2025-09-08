@@ -31,7 +31,9 @@ export default () => {
             : !verified;
         }}
       />
-      <DomainList.Item>
+      <DomainList.Item
+        textValue={(domain) => domain.domain}
+      >
         {(domain) => (
           <DomainList.ItemView>
             <Avatar

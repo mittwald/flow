@@ -1,14 +1,4 @@
-import {
-  AlertBadge,
-  Avatar,
-  ContextMenu,
-  Heading,
-  IconDomain,
-  IconSubdomain,
-  MenuItem,
-  Text,
-  typedList,
-} from "@mittwald/flow-react-components";
+import { typedList } from "@mittwald/flow-react-components";
 import {
   type Domain,
   domains,
@@ -19,9 +9,10 @@ export default () => {
 
   return (
     <DomainList.List
-      batchSize={5}
+      batchSize={4}
       defaultViewMode="table"
       aria-label="Domains"
+      hidePagination
     >
       <DomainList.StaticData data={domains} />
       <DomainList.Table>
@@ -57,37 +48,6 @@ export default () => {
           </DomainList.TableRow>
         </DomainList.TableBody>
       </DomainList.Table>
-      <DomainList.Item>
-        {(domain) => (
-          <DomainList.ItemView>
-            <Avatar
-              color={
-                domain.type === "Domain" ? "blue" : "teal"
-              }
-            >
-              {domain.type === "Domain" ? (
-                <IconDomain />
-              ) : (
-                <IconSubdomain />
-              )}
-            </Avatar>
-            <Heading>
-              {domain.hostname}
-              {!domain.verified && (
-                <AlertBadge status="warning">
-                  Unverifiziert
-                </AlertBadge>
-              )}
-            </Heading>
-            <Text>{domain.type}</Text>
-
-            <ContextMenu>
-              <MenuItem>Details anzeigen</MenuItem>
-              <MenuItem>Löschen</MenuItem>
-            </ContextMenu>
-          </DomainList.ItemView>
-        )}
-      </DomainList.Item>
     </DomainList.List>
   );
 };

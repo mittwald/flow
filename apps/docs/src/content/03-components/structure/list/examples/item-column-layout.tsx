@@ -14,13 +14,15 @@ export default () => {
   const List = typedList<{ mail: string }>();
 
   return (
-    <List.List batchSize={6} aria-label="Domains">
+    <List.List
+      batchSize={2}
+      aria-label="E-Mail-Adressen"
+      hidePagination
+    >
       <List.StaticData
         data={[
-          { mail: "john@doe.de" },
-          {
-            mail: "johnWithAVeryVeryLongEmailAddress@doe.de",
-          },
+          { mail: "john@doe.com" },
+          { mail: "max@mustermann.de" },
         ]}
       />
       <List.Item textValue={(mail) => mail.mail}>

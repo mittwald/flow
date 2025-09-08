@@ -73,6 +73,7 @@ import { ListItemViewContent as ListItemViewContent } from "@mittwald/flow-react
 import { ListSummary as ListSummary } from "@mittwald/flow-react-components";
 import { LoadingSpinner as LoadingSpinner } from "@mittwald/flow-react-components";
 import { Markdown as Markdown } from "@mittwald/flow-react-components";
+import { MarkdownEditor as MarkdownEditor } from "@mittwald/flow-react-components";
 import { MenuItem as MenuItem } from "@mittwald/flow-react-components";
 import { MenuTrigger as MenuTrigger } from "@mittwald/flow-react-components";
 import { Message as Message } from "@mittwald/flow-react-components";
@@ -317,6 +318,10 @@ export const flowComponents = {
     LoadingSpinner,
   ),
   "flr-markdown": createFlowRemoteComponentRenderer("Markdown", Markdown),
+  "flr-markdown-editor": createFlowRemoteComponentRenderer(
+    "MarkdownEditor",
+    MarkdownEditor,
+  ),
   "flr-menu-item": createFlowRemoteComponentRenderer("MenuItem", MenuItem),
   "flr-menu-trigger": createFlowRemoteComponentRenderer(
     "MenuTrigger",

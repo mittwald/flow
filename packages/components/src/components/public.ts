@@ -60,6 +60,7 @@ export * from "@/components/Link";
 export * from "@/components/List";
 export * from "@/components/LoadingSpinner";
 export * from "@/components/Markdown";
+export * from "@/components/MarkdownEditor";
 export * from "@/components/MenuItem";
 export * from "@/components/Message";
 export * from "@/components/MessageThread";

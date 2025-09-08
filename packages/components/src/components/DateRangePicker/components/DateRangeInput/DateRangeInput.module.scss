@@ -17,6 +17,8 @@
 
   :global(.react-aria-DateSegment) {
     border-radius: var(--date-picker--date-segment-corner-radius);
+    transition-property: background-color;
+    transition-duration: var(--transition--duration--default);
 
     &:focus {
       background: var(--date-picker--date-segment-background-color--focused);

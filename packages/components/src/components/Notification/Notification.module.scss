@@ -20,6 +20,8 @@
     flex-direction: column;
     row-gap: var(--notification--heading-to-text-spacing);
     cursor: default;
+    transition-property: background-color;
+    transition-duration: var(--transition--duration--default);
 
     @include focus.focus;
   }

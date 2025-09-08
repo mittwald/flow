@@ -66,6 +66,8 @@
     border-color: var(--slider--color--default);
     forced-color-adjust: none;
     top: 50%;
+    transition-property: background-color;
+    transition-duration: var(--transition--duration--default);
 
     &[data-dragging],
     &[data-focus-visible] {

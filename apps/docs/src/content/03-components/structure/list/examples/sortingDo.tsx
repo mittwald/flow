@@ -41,7 +41,9 @@ export default () => {
         name="TLD Z bis A"
         direction="desc"
       />
-      <DomainList.Item>
+      <DomainList.Item
+        textValue={(domain) => domain.domain}
+      >
         {(domain) => (
           <DomainList.ItemView>
             <Avatar

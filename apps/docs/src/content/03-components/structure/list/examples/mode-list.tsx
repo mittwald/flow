@@ -19,12 +19,15 @@ export default () => {
 
   return (
     <DomainList.List
-      batchSize={6}
-      defaultViewMode="tiles"
+      batchSize={4}
       aria-label="Domains"
+      hidePagination
     >
       <DomainList.StaticData data={domains} />
-      <DomainList.Item showTiles>
+
+      <DomainList.Item
+        textValue={(domain) => domain.domain}
+      >
         {(domain) => (
           <DomainList.ItemView>
             <Avatar

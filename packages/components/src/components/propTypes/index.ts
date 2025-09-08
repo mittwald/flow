@@ -78,6 +78,7 @@ import type { NavigationProps } from "@/components/Navigation";
 import type { NavigationGroupProps } from "@/components/Navigation/components/NavigationGroup";
 import type { AutocompleteProps } from "@/components/Autocomplete/Autocomplete";
 import type { OptionsProps } from "@/components/Options/Options";
+import type { MarkdownEditorProps } from "@/components/MarkdownEditor";
 
 export * from "./types";
 
@@ -126,6 +127,7 @@ export interface FlowComponentPropsTypes {
   Link: LinkProps;
   List: ListProps<never>;
   ListSummary: ListSummaryProps;
+  MarkdownEditor: MarkdownEditorProps;
   MenuItem: MenuItemProps;
   MenuTrigger: MenuTriggerProps;
   Message: MessageProps;
@@ -156,7 +158,7 @@ export interface FlowComponentPropsTypes {
   Text: TextProps;
   TextArea: TextAreaProps;
   TextField: TextFieldProps;
-  TimeField: TimeFieldProps<Aria.TimeValue>;
+  TimeField: TimeFieldProps;
 }
 
 const propsContextSupportingComponentsMap: Record<
@@ -207,6 +209,7 @@ const propsContextSupportingComponentsMap: Record<
   Link: true,
   List: true,
   ListSummary: true,
+  MarkdownEditor: true,
   MenuItem: true,
   MenuTrigger: true,
   Message: true,

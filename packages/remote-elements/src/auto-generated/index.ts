@@ -72,6 +72,7 @@ export * from "./RemoteListItemViewContentElement";
 export * from "./RemoteListSummaryElement";
 export * from "./RemoteLoadingSpinnerElement";
 export * from "./RemoteMarkdownElement";
+export * from "./RemoteMarkdownEditorElement";
 export * from "./RemoteMenuItemElement";
 export * from "./RemoteMenuTriggerElement";
 export * from "./RemoteMessageElement";

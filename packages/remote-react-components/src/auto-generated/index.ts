@@ -72,6 +72,7 @@ export * from "./ListItemViewContent";
 export * from "./ListSummary";
 export * from "./LoadingSpinner";
 export * from "./Markdown";
+export * from "./MarkdownEditor";
 export * from "./MenuItem";
 export * from "./MenuTrigger";
 export * from "./Message";

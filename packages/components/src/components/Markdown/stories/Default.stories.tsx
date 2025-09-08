@@ -7,7 +7,8 @@ const meta: Meta<typeof Markdown> = {
   component: Markdown,
   render: (props) => (
     <Markdown {...props}>
-      {"# Heading\n" +
+      {"# Heading 1\n" +
+        "## Heading 2\n" +
         "Lorem ipsum dolor sit amet **consectetur adipisicing** elit. Cumque eius `quam quas vel voluptas` ullam aliquid fugit.\n" +
         "```json\n" +
         "{\n" +
@@ -46,3 +47,5 @@ export const Light: Story = {
     backgrounds: "dark",
   },
 };
+
+export const WithOffset: Story = { args: { headingOffset: 2 } };

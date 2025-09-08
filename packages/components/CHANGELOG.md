@@ -3,6 +3,72 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.463](https://github.com/mittwald/flow/compare/0.2.0-alpha.462...0.2.0-alpha.463) (2025-09-08)
+
+### Bug Fixes
+
+* **FileCard:** fix link with long text ([#1959](https://github.com/mittwald/flow/issues/1959)) ([5815f23](https://github.com/mittwald/flow/commit/5815f2316a2bd287610e4a3917d9f29f9c63c382))
+
+# [0.2.0-alpha.462](https://github.com/mittwald/flow/compare/0.2.0-alpha.461...0.2.0-alpha.462) (2025-09-08)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.461](https://github.com/mittwald/flow/compare/0.2.0-alpha.460...0.2.0-alpha.461) (2025-09-08)
+
+### Bug Fixes
+
+* **MarkdownEditor:** fix remote ([#1957](https://github.com/mittwald/flow/issues/1957)) ([adc4a1a](https://github.com/mittwald/flow/commit/adc4a1a9cdf08acd8eab2b27b8f679e3b8755107))
+
+# [0.2.0-alpha.460](https://github.com/mittwald/flow/compare/0.2.0-alpha.459...0.2.0-alpha.460) (2025-09-05)
+
+### Bug Fixes
+
+* **segment:** add focus outline ([#1954](https://github.com/mittwald/flow/issues/1954)) ([ade4db8](https://github.com/mittwald/flow/commit/ade4db8c8e4f7bdc53a009159888c644d5001634))
+
+# [0.2.0-alpha.459](https://github.com/mittwald/flow/compare/0.2.0-alpha.458...0.2.0-alpha.459) (2025-09-04)
+
+### Bug Fixes
+
+* **chat:** fix css ([#1953](https://github.com/mittwald/flow/issues/1953)) ([1ed449a](https://github.com/mittwald/flow/commit/1ed449a3700fb07b9a37c54bb03cc518fe1d5429))
+
+# [0.2.0-alpha.458](https://github.com/mittwald/flow/compare/0.2.0-alpha.457...0.2.0-alpha.458) (2025-09-04)
+
+### Bug Fixes
+
+* **chat:** support file field usage ([#1952](https://github.com/mittwald/flow/issues/1952)) ([b41a524](https://github.com/mittwald/flow/commit/b41a524dc23fcf897caf6ea601584e676c4c794e))
+
+# [0.2.0-alpha.457](https://github.com/mittwald/flow/compare/0.2.0-alpha.456...0.2.0-alpha.457) (2025-09-04)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.456](https://github.com/mittwald/flow/compare/0.2.0-alpha.455...0.2.0-alpha.456) (2025-09-04)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.455](https://github.com/mittwald/flow/compare/0.2.0-alpha.454...0.2.0-alpha.455) (2025-09-04)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.454](https://github.com/mittwald/flow/compare/0.2.0-alpha.453...0.2.0-alpha.454) (2025-09-03)
+
+### Bug Fixes
+
+* **ColumnLayout:** fixes an issue that children are not rendered ([#1947](https://github.com/mittwald/flow/issues/1947)) ([894063c](https://github.com/mittwald/flow/commit/894063cafff531e2d64796c295c18950d5a4baf2))
+
+# [0.2.0-alpha.453](https://github.com/mittwald/flow/compare/0.2.0-alpha.452...0.2.0-alpha.453) (2025-09-03)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.452](https://github.com/mittwald/flow/compare/0.2.0-alpha.451...0.2.0-alpha.452) (2025-09-03)
+
+### Bug Fixes
+
+* **Markdown:** update CodeBlock color to 'dark' ([#1945](https://github.com/mittwald/flow/issues/1945)) ([eb4787e](https://github.com/mittwald/flow/commit/eb4787e0f34835b5f568a573da337c5d64c3c4c7))
+
+# [0.2.0-alpha.451](https://github.com/mittwald/flow/compare/0.2.0-alpha.450...0.2.0-alpha.451) (2025-09-03)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
 # [0.2.0-alpha.450](https://github.com/mittwald/flow/compare/0.2.0-alpha.449...0.2.0-alpha.450) (2025-09-02)
 
 **Note:** Version bump only for package @mittwald/flow-react-components

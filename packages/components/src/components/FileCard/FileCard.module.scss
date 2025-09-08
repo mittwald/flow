@@ -13,6 +13,8 @@
   padding-block: var(--file-card--padding-y);
   gap: var(--file-card--spacing);
   flex-grow: 1;
+  transition-property: background-color;
+  transition-duration: var(--transition--duration--default);
 
   .link {
     display: flex;
@@ -23,6 +25,7 @@
     margin-block: calc(var(--file-card--padding-y) * -1);
     gap: var(--file-card--spacing);
     flex-grow: 1;
+    min-width: 0;
   }
 
   .text {

@@ -10,6 +10,8 @@
   padding: var(--menu-item--padding-y) var(--menu-item--padding-x);
   align-items: center;
   column-gap: var(--menu-item--spacing);
+  transition-property: background-color;
+  transition-duration: var(--transition--duration--default);
 
   &:not(a) {
     cursor: default;
@@ -29,6 +31,8 @@
   /* Elements */
   .icon {
     color: var(--menu-item--icon-color--default);
+    transition-property: background-color;
+    transition-duration: var(--transition--duration--default);
   }
 
   &:hover {
