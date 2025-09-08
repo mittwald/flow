@@ -4,8 +4,21 @@
   flex-direction: column;
   row-gap: var(--form-control--spacing-y);
 
-  :global(.flow--checkbox-button) {
+  .checkboxButton {
     width: auto;
+    &[data-invalid]:not([data-selected]) {
+      border-color: var(--form-control--border-color--default);
+      background-color: var(--form-control--background-color--default);
+    }
+  }
+
+  .checkbox,
+  .checkboxButton {
+    &[data-invalid]:not([data-selected]) {
+      svg {
+        color: var(--form-control--border-color--default);
+      }
+    }
   }
 
   &:empty {
