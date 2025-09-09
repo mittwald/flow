@@ -6,6 +6,7 @@ import { Toolbar } from "@/components/MarkdownEditor/components/Toolbar";
 import clsx from "clsx";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { handleKeyDown } from "@/components/MarkdownEditor/lib/handleKeyDown";
+import { mergeRefs } from "@react-aria/utils";
 
 export type MarkdownEditorMode = "editor" | "preview";
 
@@ -23,6 +24,7 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
     rows,
     autoResizeMaxRows,
     headingOffset,
+    ref,
     ...rest
   } = props;
 
@@ -41,7 +43,7 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
       {...rest}
       isDisabled={isDisabled || mode === "preview"}
       className={rootClassName}
-      ref={textAreaRef}
+      ref={mergeRefs(textAreaRef, ref)}
       value={value !== undefined ? value : markdown}
       rows={rows}
       autoResizeMaxRows={autoResizeMaxRows}

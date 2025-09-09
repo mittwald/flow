@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
+import React, { useRef } from "react";
 import { MarkdownEditor } from "@/components/MarkdownEditor";
 import { Label } from "@/components/Label";
 import { FieldError } from "@/components/FieldError";
@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { Field, Form } from "@/integrations/react-hook-form";
 import { Button } from "@/components/Button";
 import { action } from "storybook/actions";
+import { Section } from "@/components/Section";
 
 const meta: Meta<typeof MarkdownEditor> = {
   title: "Form Controls/MarkdownEditor",
@@ -77,6 +78,29 @@ export const WithOnChange: Story = {
       <MarkdownEditor {...props} onChange={(v) => console.log(v)}>
         <Label>Message</Label>
       </MarkdownEditor>
+    );
+  },
+};
+
+export const WithRef: StoryObj = {
+  render: (props) => {
+    const editorRef = useRef<HTMLTextAreaElement | null>(null);
+
+    const handleFocus = () => {
+      if (editorRef.current) {
+        editorRef.current.focus();
+      }
+    };
+
+    return (
+      <Section>
+        <MarkdownEditor {...props} ref={editorRef}>
+          <Label>Message</Label>
+        </MarkdownEditor>
+        <Button type="button" onClick={handleFocus}>
+          Set focus
+        </Button>
+      </Section>
     );
   },
 };
