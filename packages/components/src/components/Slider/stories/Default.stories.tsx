@@ -22,7 +22,7 @@ type Story = StoryObj<typeof Slider>;
 
 export const Default: Story = {};
 
-export const WithUnit: Story = {
+export const WithFormatOptions: Story = {
   render: (props) => (
     <Slider
       {...props}
@@ -36,6 +36,21 @@ export const WithUnit: Story = {
       step={20}
     >
       <Label>Storage</Label>
+    </Slider>
+  ),
+};
+
+export const WithUnit: Story = {
+  render: (props) => (
+    <Slider
+      {...props}
+      unit="×"
+      minValue={1}
+      maxValue={3}
+      defaultValue={2.5}
+      step={0.5}
+    >
+      <Label>Zoom</Label>
     </Slider>
   ),
 };
