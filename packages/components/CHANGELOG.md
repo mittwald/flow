@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.465](https://github.com/mittwald/flow/compare/0.2.0-alpha.464...0.2.0-alpha.465) (2025-09-09)
+
+### Bug Fixes
+
+* **CheckboxGroup:** update error styles ([#1962](https://github.com/mittwald/flow/issues/1962)) ([9d85d02](https://github.com/mittwald/flow/commit/9d85d0258f80624cce700327c5652938e5553bc7))
+
 # [0.2.0-alpha.464](https://github.com/mittwald/flow/compare/0.2.0-alpha.463...0.2.0-alpha.464) (2025-09-08)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
