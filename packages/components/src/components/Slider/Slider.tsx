@@ -56,7 +56,6 @@ export const Slider = flowComponent("Slider", (props) => {
       className={rootClassName}
       isDisabled={isDisabled}
       defaultValue={defaultValue}
-      data-readOnly={isReadOnly}
       {...rest}
     >
       <div className={styles.text}>
@@ -112,7 +111,11 @@ export const Slider = flowComponent("Slider", (props) => {
                 />
               )}
 
-            <Aria.SliderThumb name={name} className={styles.handle} />
+            <Aria.SliderThumb
+              name={name}
+              className={styles.handle}
+              isDisabled={isReadOnly}
+            />
           </>
         )}
       </Aria.SliderTrack>
