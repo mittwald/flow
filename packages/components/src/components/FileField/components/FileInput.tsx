@@ -13,11 +13,12 @@ export interface FileInputProps extends PropsWithChildren {
   onChange?: FileInputOnChangeHandler;
   isDisabled?: boolean;
   ref?: Ref<HTMLInputElement>;
+  isReadOnly?: boolean;
 }
 
 /** @internal */
 export const FileInput: FC<FileInputProps> = (props) => {
-  const { children, isDisabled, onChange, ref } = props;
+  const { children, isDisabled, onChange, isReadOnly, ref } = props;
   const inputRef = useObjectRef(ref);
 
   const handlePress = () => {
@@ -37,6 +38,7 @@ export const FileInput: FC<FileInputProps> = (props) => {
       onPress: handlePress,
       className: styles.trigger,
       isDisabled,
+      isReadOnly,
     },
   };
 

@@ -33,6 +33,8 @@ export interface ButtonProps
   isSucceeded?: boolean;
   /** Whether the button is in a failed state. */
   isFailed?: boolean;
+  /** Whether the button is in a read only state. */
+  isReadOnly?: boolean;
   /** @internal */
   unstyled?: boolean;
   /** @internal */
@@ -44,7 +46,8 @@ const disablePendingProps = (props: ButtonProps) => {
     props.isPending ||
     props.isSucceeded ||
     props.isFailed ||
-    props["aria-disabled"]
+    props["aria-disabled"] ||
+    props.isReadOnly
   ) {
     props = { ...props };
     props.onPress = undefined;
@@ -80,6 +83,7 @@ export const Button = flowComponent("Button", (props) => {
     slot: ignoredSlotProp,
     ariaSlot: slot,
     unstyled,
+    isReadOnly,
     ...restProps
   } = props;
 
@@ -155,6 +159,7 @@ export const Button = flowComponent("Button", (props) => {
         className={rootClassName}
         ref={ref}
         slot={slot}
+        data-readOnly={isReadOnly}
         {...restProps}
       >
         <PropsContextProvider props={propsContext}>

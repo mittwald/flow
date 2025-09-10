@@ -7,10 +7,6 @@
   row-gap: var(--slider--spacing-y);
   --button-size: calc(var(--line-height--m) + var(--button--padding-y) * 2);
 
-  &[data-readOnly] {
-    pointer-events: none;
-  }
-
   .text {
     display: flex;
     flex-wrap: wrap;

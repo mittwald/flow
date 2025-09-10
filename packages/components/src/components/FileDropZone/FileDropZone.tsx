@@ -57,6 +57,7 @@ export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
         multiple: multiple,
         Button: { variant: "outline", color: "dark" },
         isDisabled,
+        isReadOnly,
       },
       Heading: {
         className: styles.heading,

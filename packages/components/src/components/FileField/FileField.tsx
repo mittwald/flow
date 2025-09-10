@@ -12,8 +12,6 @@ import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import { useObjectRef } from "@react-aria/utils";
 import { addAwaitedArrayBuffer } from "@mittwald/flow-core";
-import clsx from "clsx";
-import styles from "./FileField.module.scss";
 
 export interface FileFieldProps
   extends PropsWithChildren,
@@ -93,11 +91,12 @@ export const FileField = flowComponent("FileField", (props) => {
             data-invalid={
               formValidationState.displayValidation.isInvalid || undefined
             }
-            className={clsx(formFieldStyles.formField, styles.fileField)}
+            className={formFieldStyles.formField}
           >
             <FileInput
               ref={ref}
-              onChange={handleOnChange}
+              isReadOnly={isReadOnly}
+              onChange={isReadOnly ? undefined : handleOnChange}
               isDisabled={isDisabled}
             >
               {children}
