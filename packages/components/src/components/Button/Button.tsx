@@ -159,7 +159,7 @@ export const Button = flowComponent("Button", (props) => {
         className={rootClassName}
         ref={ref}
         slot={slot}
-        data-readOnly={isReadOnly}
+        data-readonly={isReadOnly}
         {...restProps}
       >
         <PropsContextProvider props={propsContext}>

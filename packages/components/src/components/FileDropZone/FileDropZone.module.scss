@@ -33,7 +33,7 @@
     }
   }
 
-  &[data-readOnly] {
+  &[data-readonly] {
     pointer-events: none;
   }
 }

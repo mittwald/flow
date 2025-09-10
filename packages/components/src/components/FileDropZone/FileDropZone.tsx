@@ -100,7 +100,7 @@ export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
         className={rootClassName}
         onDrop={onDropHandler}
         isDisabled={isDisabled}
-        data-readOnly={isReadOnly}
+        data-readonly={isReadOnly}
       >
         <IllustratedMessage color="dark">
           <PropsContextProvider props={propsContext} mergeInParentContext>

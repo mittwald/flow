@@ -132,11 +132,11 @@
     background: none;
     height: fit-content;
 
-    &:hover:where(:not([data-readOnly])) .image {
+    &:hover:where(:not([data-readonly])) .image {
       filter: brightness(var(--image-button--brightness--hover));
     }
 
-    &[data-pressed]:where(:not([data-readOnly])) .image {
+    &[data-pressed]:where(:not([data-readonly])) .image {
       filter: brightness(var(--image-button--brightness--pressed));
     }
   }
@@ -157,7 +157,7 @@
         );
       }
 
-      &:hover:where(:not([data-readOnly])) {
+      &:hover:where(:not([data-readonly])) {
         background-color: var(
           --button--#{$color}-#{$variant}-background-color--hover
         );
@@ -165,7 +165,7 @@
         color: var(--button--#{$color}-#{$variant}-content-color--hover);
       }
 
-      &[data-pressed]:where(:not([data-readOnly])) {
+      &[data-pressed]:where(:not([data-readonly])) {
         background-color: var(
           --button--#{$color}-#{$variant}-background-color--pressed
         );

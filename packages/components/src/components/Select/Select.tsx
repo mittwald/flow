@@ -92,11 +92,11 @@ export const Select = flowComponent("Select", (props) => {
       onSelectionChange={isReadOnly ? undefined : handleOnSelectionChange}
       onOpenChange={(isOpen) => !isReadOnly && controller.setOpen(isOpen)}
       isOpen={isOpen}
-      data-readOnly={isReadOnly}
+      data-readonly={isReadOnly}
     >
       <PropsContextProvider props={propsContext}>
         <TunnelProvider>
-          <Aria.Button data-readOnly={isReadOnly} className={styles.toggle}>
+          <Aria.Button data-readonly={isReadOnly} className={styles.toggle}>
             <Aria.SelectValue />
             <IconChevronDown />
           </Aria.Button>

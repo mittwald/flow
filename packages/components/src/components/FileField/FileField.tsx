@@ -86,7 +86,7 @@ export const FileField = flowComponent("FileField", (props) => {
       <FieldErrorContext.Provider value={formValidationState.displayValidation}>
         <PropsContextProvider props={propsContext}>
           <div
-            data-readOnly={isReadOnly}
+            data-readonly={isReadOnly}
             data-required={!!isRequired || undefined}
             data-invalid={
               formValidationState.displayValidation.isInvalid || undefined
