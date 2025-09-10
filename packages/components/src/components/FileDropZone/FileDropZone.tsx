@@ -67,6 +67,10 @@ export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
     };
 
     const onDropHandler = async (event: DropEvent) => {
+      if (isReadOnly) {
+        return;
+      }
+
       const fileDropItems = event.items.filter(
         (file) => file.kind === "file",
       ) as Aria.FileDropItem[];
