@@ -25,6 +25,8 @@ export interface SelectProps
   onChange?: (value: string | number) => void;
   /** An overlay controller to control the select option popover state. */
   controller?: OverlayController;
+  /** Whether the component is read only. */
+  isReadOnly?: boolean;
 }
 
 /**
@@ -43,6 +45,7 @@ export const Select = flowComponent("Select", (props) => {
     },
     controller: controllerFromProps,
     ref,
+    isReadOnly,
     ...rest
   } = props;
 
@@ -89,6 +92,7 @@ export const Select = flowComponent("Select", (props) => {
       onSelectionChange={handleOnSelectionChange}
       onOpenChange={(isOpen) => controller.setOpen(isOpen)}
       isOpen={isOpen}
+      data-readOnly={isReadOnly}
     >
       <PropsContextProvider props={propsContext}>
         <TunnelProvider>

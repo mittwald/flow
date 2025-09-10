@@ -88,6 +88,7 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
 
   return (
     <PropsContextProvider
+      mergeInParentContext
       props={propsContext}
       dependencies={[controller.fieldState, controller.field, value]}
     >

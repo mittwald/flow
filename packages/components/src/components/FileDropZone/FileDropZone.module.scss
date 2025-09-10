@@ -32,4 +32,8 @@
       color: var(--file-drop-zone--content-color--disabled);
     }
   }
+
+  &[data-readOnly] {
+    pointer-events: none;
+  }
 }

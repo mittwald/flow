@@ -25,20 +25,16 @@ export const Content = flowComponent("Content", (props) => {
     children,
     elementType = "div",
     ref,
-    clearPropsContext = true,
+
     ...rest
   } = props;
 
   const Element = elementType;
 
   return (
-    <Wrap if={clearPropsContext}>
-      <ClearPropsContext>
-        <Element ref={ref} {...rest}>
-          {children}
-        </Element>
-      </ClearPropsContext>
-    </Wrap>
+    <Element ref={ref} {...rest}>
+      {children}
+    </Element>
   );
 });
 

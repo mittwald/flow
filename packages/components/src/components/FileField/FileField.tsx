@@ -12,6 +12,9 @@ import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import { useObjectRef } from "@react-aria/utils";
 import { addAwaitedArrayBuffer } from "@mittwald/flow-core";
+import clsx from "clsx";
+import styles from "./FileField.module.scss";
+
 export interface FileFieldProps
   extends PropsWithChildren,
     FlowComponentProps<HTMLInputElement>,
@@ -22,6 +25,8 @@ export interface FileFieldProps
     > {
   /** Handler that is called when the file input changes. */
   onChange?: FileInputOnChangeHandler;
+  /** Whether the component is read only. */
+  isReadOnly?: boolean;
 }
 
 /**
@@ -37,6 +42,7 @@ export const FileField = flowComponent("FileField", (props) => {
     isDisabled,
     validationBehavior,
     onChange,
+    isReadOnly,
     ...restInputProps
   } = props;
   const inputRef = useObjectRef(ref);
@@ -82,11 +88,12 @@ export const FileField = flowComponent("FileField", (props) => {
       <FieldErrorContext.Provider value={formValidationState.displayValidation}>
         <PropsContextProvider props={propsContext}>
           <div
+            data-readOnly={isReadOnly}
             data-required={!!isRequired || undefined}
             data-invalid={
               formValidationState.displayValidation.isInvalid || undefined
             }
-            className={formFieldStyles.formField}
+            className={clsx(formFieldStyles.formField, styles.fileField)}
           >
             <FileInput
               ref={ref}

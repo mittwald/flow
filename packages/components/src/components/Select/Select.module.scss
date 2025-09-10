@@ -19,6 +19,10 @@
     }
   }
 
+  &[data-readOnly] {
+    pointer-events: none;
+  }
+
   :global(.react-aria-SelectValue) {
     overflow: hidden;
     text-overflow: ellipsis;

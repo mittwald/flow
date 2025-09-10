@@ -1,0 +1,5 @@
+.fileField {
+  &[data-readOnly] {
+    pointer-events: none;
+  }
+}

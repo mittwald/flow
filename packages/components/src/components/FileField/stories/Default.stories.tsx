@@ -34,6 +34,10 @@ const submitAction = action("submit");
 
 export const Default: Story = {};
 
+export const ReadOnly: Story = {
+  args: { isReadOnly: true },
+};
+
 export const WithDescription: Story = {
   render: (props) => (
     <FileField {...props}>

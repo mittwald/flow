@@ -17,6 +17,8 @@ export interface SliderProps
     PropsWithChildren<Aria.SliderProps>,
     Pick<Aria.SliderThumbProps, "name"> {
   showInitialMarker?: boolean;
+  /** Whether the component is read only. */
+  isReadOnly?: boolean;
 }
 
 /**
@@ -31,6 +33,7 @@ export const Slider = flowComponent("Slider", (props) => {
     isDisabled,
     defaultValue,
     showInitialMarker,
+    isReadOnly,
     ...rest
   } = props;
 
@@ -53,6 +56,7 @@ export const Slider = flowComponent("Slider", (props) => {
       className={rootClassName}
       isDisabled={isDisabled}
       defaultValue={defaultValue}
+      data-readOnly={isReadOnly}
       {...rest}
     >
       <div className={styles.text}>
