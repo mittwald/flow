@@ -46,7 +46,7 @@ export const NavigationGroup = flowComponent("NavigationGroup", (props) => {
         <TunnelProvider>
           <Accordion defaultExpanded className={rootClassName}>
             {children}
-            <Content clearPropsContext={false}>
+            <Content>
               <ul>
                 <TunnelExit id="groupLinks" />
               </ul>

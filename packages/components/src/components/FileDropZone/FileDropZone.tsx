@@ -22,6 +22,8 @@ export interface FileDropZoneProps
     Pick<Aria.InputProps, "accept" | "multiple" | "name">,
     Pick<Aria.DropZoneProps, "isDisabled"> {
   onChange?: FileInputOnChangeHandler;
+  /** Whether the component is read only. */
+  isReadOnly?: boolean;
 }
 
 /** @flr-generate all */
@@ -36,6 +38,7 @@ export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
       children,
       name,
       isDisabled,
+      isReadOnly,
     } = props;
 
     const fileFieldRef = useRef<HTMLInputElement>(null);
@@ -54,6 +57,7 @@ export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
         multiple: multiple,
         Button: { variant: "outline", color: "dark" },
         isDisabled,
+        isReadOnly,
       },
       Heading: {
         className: styles.heading,
@@ -63,6 +67,10 @@ export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
     };
 
     const onDropHandler = async (event: DropEvent) => {
+      if (isReadOnly) {
+        return;
+      }
+
       const fileDropItems = event.items.filter(
         (file) => file.kind === "file",
       ) as Aria.FileDropItem[];
@@ -96,6 +104,7 @@ export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
         className={rootClassName}
         onDrop={onDropHandler}
         isDisabled={isDisabled}
+        data-readonly={isReadOnly}
       >
         <IllustratedMessage color="dark">
           <PropsContextProvider props={propsContext} mergeInParentContext>

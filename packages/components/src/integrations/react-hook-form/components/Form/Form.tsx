@@ -6,12 +6,14 @@ import {
   type FormEvent,
   type FormEventHandler,
   type PropsWithChildren,
+  useId,
   useMemo,
+  useRef,
 } from "react";
-import { useId, useRef } from "react";
 import type { FieldValues, UseFormReturn } from "react-hook-form";
 import { FormProvider as RhfFormContextProvider } from "react-hook-form";
 import { AfterFormSubmitEffect } from "../AfterFormSubmitEffect/AfterFormSubmitEffect";
+import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
 
 export type FormOnSubmitHandler<F extends FieldValues> = Parameters<
   UseFormReturn<F>["handleSubmit"]
@@ -30,6 +32,7 @@ export interface FormProps<F extends FieldValues>
   form: UseFormReturn<F>;
   onSubmit: FormOnSubmitHandler<F>;
   formComponent?: FormComponentType;
+  isReadOnly?: boolean;
 }
 
 const DefaultFormComponent: FormComponentType = (p) => <form {...p} />;
@@ -40,6 +43,7 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
     children,
     onSubmit,
     formComponent: FormView = DefaultFormComponent,
+    isReadOnly,
     ...formProps
   } = props;
 
@@ -70,23 +74,51 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
     })(formEvent);
   };
 
+  const propsContext: PropsContext = {
+    SearchField: { isReadOnly: true },
+    TextField: { isReadOnly: true },
+    TextArea: { isReadOnly: true },
+    MarkdownEditor: { isReadOnly: true },
+    Checkbox: { isReadOnly: true },
+    CheckboxGroup: { isReadOnly: true },
+    CheckboxButton: { isReadOnly: true },
+    FileField: { isReadOnly: true },
+    FileDropZone: { isReadOnly: true },
+    NumberField: { isReadOnly: true },
+    RadioGroup: { isReadOnly: true },
+    Switch: { isReadOnly: true },
+    Slider: { isReadOnly: true },
+    PasswordCreationField: { isReadOnly: true },
+    DatePicker: { isReadOnly: true },
+    DateRangePicker: { isReadOnly: true },
+    TimeField: { isReadOnly: true },
+    SegmentedControl: { isReadOnly: true },
+    Select: { isReadOnly: true },
+    ComboBox: { isReadOnly: true },
+  };
+
   return (
-    <RhfFormContextProvider {...form}>
-      <FormContextProvider value={{ form, id: formId }}>
-        <SubmitButtonStateProvider isAsyncSubmit={isAsyncSubmit}>
-          <FormViewComponent
-            {...formProps}
-            id={formId}
-            onSubmit={handleOnSubmit}
-          >
-            {children}
-          </FormViewComponent>
-        </SubmitButtonStateProvider>
-        <AfterFormSubmitEffect
-          submitHandlerResultRef={submitHandlerResultRef}
-        />
-      </FormContextProvider>
-    </RhfFormContextProvider>
+    <PropsContextProvider
+      props={isReadOnly ? propsContext : {}}
+      mergeInParentContext
+    >
+      <RhfFormContextProvider {...form}>
+        <FormContextProvider value={{ form, id: formId }}>
+          <SubmitButtonStateProvider isAsyncSubmit={isAsyncSubmit}>
+            <FormViewComponent
+              {...formProps}
+              id={formId}
+              onSubmit={handleOnSubmit}
+            >
+              {children}
+            </FormViewComponent>
+          </SubmitButtonStateProvider>
+          <AfterFormSubmitEffect
+            submitHandlerResultRef={submitHandlerResultRef}
+          />
+        </FormContextProvider>
+      </RhfFormContextProvider>
+    </PropsContextProvider>
   );
 }
 

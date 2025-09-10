@@ -39,6 +39,7 @@ export class RemoteButtonElement extends FlowRemoteElement<RemoteButtonElementPr
       isDisabled: {},
       isFailed: {},
       isPending: {},
+      isReadOnly: {},
       isSucceeded: {},
       lang: {},
       name: {},
