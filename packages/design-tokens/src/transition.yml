@@ -1,5 +1,7 @@
 transition:
   duration:
+    fast:
+      value: 200ms
     default:
       value: 300ms
     slow:
