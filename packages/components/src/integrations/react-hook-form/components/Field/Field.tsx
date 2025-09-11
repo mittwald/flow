@@ -19,10 +19,22 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
 
   const controller = useController(props);
   const formContext = useFormContext<T>();
-  const value = controller.field.value;
+  /**
+   * We don't use controller.field.value here, because it doesn't update when
+   * the form value is updated outside of this field (e.g. when setting values
+   * with form.setValue or resetting the form), and the Field unmounts in
+   * between. This is generally a feature of React Hook Form, but this breaks
+   * dynamic forms where fields are conditionally rendered.
+   *
+   * By using formContext.form.watch(name), we ensure that the field value is
+   * always in sync with the form state. See:
+   * https://react-hook-form.com/api/usecontroller/controller/
+   */
+  const value = formContext.form.watch(name) ?? controller.field.value;
 
   const fieldProps = {
     ...controller.field,
+    value,
     name,
     form: formContext.id,
     isRequired: !!rest.rules?.required,
