@@ -76,6 +76,7 @@ export const Modal = flowComponent("Modal", (props) => {
 
   const propsContext: PropsContext = {
     Content: {
+      clearPropsContext: true,
       className: styles.content,
       Section: {
         Heading: {
