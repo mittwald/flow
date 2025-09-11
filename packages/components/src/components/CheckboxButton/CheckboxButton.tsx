@@ -27,6 +27,7 @@ export const CheckboxButton = flowComponent("CheckboxButton", (props) => {
       className: styles.label,
     },
     Content: {
+      clearPropsContext: true,
       className: styles.content,
     },
   };
