@@ -124,7 +124,6 @@ const meta: Meta<typeof List> = {
                     )}
                   </Heading>
                   <Text>{domain.type}</Text>
-
                   <ContextMenu>
                     <MenuItem>Show details</MenuItem>
                     <MenuItem>Delete</MenuItem>

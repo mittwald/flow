@@ -69,6 +69,7 @@ export const ListItemViewContent = (props: ListItemViewContentProps) => {
       className: styles.action,
     },
     Content: {
+      clearPropsContext: true,
       className: dynamic((p) => getStyleForContentSlot(p.slot)),
       onMouseDown: dynamic((p) => contentProps[p.slot ?? "top"]?.onMouseDown),
       onPointerDown: dynamic(
