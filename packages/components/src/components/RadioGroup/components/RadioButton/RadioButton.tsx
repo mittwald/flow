@@ -24,6 +24,7 @@ export const RadioButton = flowComponent("RadioButton", (props) => {
       className: styles.label,
     },
     Content: {
+      clearPropsContext: true,
       className: styles.content,
     },
   };
