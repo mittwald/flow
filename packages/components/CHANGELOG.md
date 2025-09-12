@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.473](https://github.com/mittwald/flow/compare/0.2.0-alpha.472...0.2.0-alpha.473) (2025-09-12)
+
+### Bug Fixes
+
+* **Field:** fix issue with undefined field values ([cc5a7bf](https://github.com/mittwald/flow/commit/cc5a7bf3e96c0371f760fc1b6fd1a2253b84f40d))
+
 # [0.2.0-alpha.472](https://github.com/mittwald/flow/compare/0.2.0-alpha.471...0.2.0-alpha.472) (2025-09-11)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
