@@ -2,6 +2,7 @@
   "name": "@mittwald/flow-project",
   "private": true,
   "version": "0.0.0",
+  "packageManager": "pnpm@10.16.1",
   "type": "module",
   "license": "MIT",
   "engines": {
