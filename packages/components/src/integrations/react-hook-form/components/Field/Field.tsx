@@ -21,30 +21,7 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
 
   const stringFormatter = useLocalizedStringFormatter(locales);
 
-  const controller = useController({
-    ...props,
-    rules: {
-      ...props.rules,
-      minLength:
-        typeof rest.rules?.minLength === "number"
-          ? {
-              value: rest.rules.minLength,
-              message: stringFormatter.format("minLength", {
-                number: rest.rules.minLength,
-              }),
-            }
-          : rest.rules?.minLength,
-      maxLength:
-        typeof rest.rules?.maxLength === "number"
-          ? {
-              value: rest.rules.maxLength,
-              message: stringFormatter.format("maxLength", {
-                number: rest.rules.maxLength,
-              }),
-            }
-          : rest.rules?.maxLength,
-    },
-  });
+  const controller = useController(props);
   const formContext = useFormContext<T>();
   const value = controller.field.value;
 
