@@ -3,14 +3,12 @@ import type { PropsContext } from "@/lib/propsContext";
 import { dynamic, PropsContextProvider } from "@/lib/propsContext";
 import type { PropsWithChildren } from "react";
 import {
-  useController,
   type ControllerProps,
   type FieldValues,
+  useController,
   type UseFormReturn,
 } from "react-hook-form";
 import FieldErrorView from "@/views/FieldErrorView";
-import { useLocalizedStringFormatter } from "react-aria";
-import locales from "./locales/*.locale.json";
 
 export interface FieldProps<T extends FieldValues>
   extends Omit<ControllerProps<T>, "render">,
@@ -18,8 +16,6 @@ export interface FieldProps<T extends FieldValues>
 
 export function Field<T extends FieldValues>(props: FieldProps<T>) {
   const { children, name, defaultValue, ...rest } = props;
-
-  const stringFormatter = useLocalizedStringFormatter(locales);
 
   const controller = useController(props);
   const formContext = useFormContext<T>();
