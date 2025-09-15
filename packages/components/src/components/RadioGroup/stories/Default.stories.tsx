@@ -145,6 +145,8 @@ export const RadioButtonsWithTextInContent: Story = {
         <Text>2 vCPU</Text>
         <Content>
           <Text>4 GiB RAM</Text>
+          <br />
+          <Text>Bis zu 10 Projekte</Text>
         </Content>
       </RadioButton>
     </RadioGroup>
