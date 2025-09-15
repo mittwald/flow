@@ -137,3 +137,16 @@ export const ColumnLayout: Story = {
     </RadioGroup>
   ),
 };
+
+export const RadioButtonsWithTextInContent: Story = {
+  render: (props) => (
+    <RadioGroup {...props} defaultValue="domain" aria-label="Domain">
+      <RadioButton value="domain">
+        <Text>2 vCPU</Text>
+        <Content>
+          <Text>4 GiB RAM</Text>
+        </Content>
+      </RadioButton>
+    </RadioGroup>
+  ),
+};
