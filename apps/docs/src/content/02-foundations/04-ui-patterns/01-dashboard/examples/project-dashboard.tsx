@@ -1,24 +1,17 @@
 import {
-  AlertBadge,
-  Avatar,
   Breadcrumb,
-  Button,
   ColumnLayout,
-  Content,
   DonutChart,
   Flex,
   Header,
   Heading,
-  IconCheck,
-  IconEmail,
-  Image,
   Label,
   LabeledValue,
   LayoutCard,
   Link,
+  ProgressBar,
   Section,
   Text,
-  typedList,
 } from "@mittwald/flow-react-components";
 
 export default () => {
@@ -67,7 +60,7 @@ export default () => {
                 status="success"
                 value={43}
               >
-                43 %
+                <b>43 %</b>
               </DonutChart>
               <Flex direction="column" grow rowGap="m">
                 <LabeledValue>
@@ -82,9 +75,61 @@ export default () => {
             </Flex>
           </Section>
         </LayoutCard>
-        <LayoutCard></LayoutCard>
+        <LayoutCard>
+          <Section>
+            <Header>
+              <Heading>RAM Auslastung</Heading>
+              <Link href="#">Details</Link>
+            </Header>
+            <Flex
+              columnGap="l"
+              grow
+              justify="center"
+              rowGap="m"
+              wrap="wrap"
+            >
+              <DonutChart
+                aria-label="RAM Auslastung"
+                status="success"
+                value={12}
+              >
+                <b>12 %</b>
+              </DonutChart>
+              <Flex direction="column" grow rowGap="m">
+                <LabeledValue>
+                  <Label>Messzeitpunkt</Label>
+                  <Text>05.09.2025, 07:30 Uhr</Text>
+                </LabeledValue>
+                <LabeledValue>
+                  <Label>Maximum (Letzte 7 Tage)</Label>
+                  <Text>24 %</Text>
+                </LabeledValue>
+              </Flex>
+            </Flex>
+          </Section>
+        </LayoutCard>
       </ColumnLayout>
-      <LayoutCard></LayoutCard>
+      <LayoutCard>
+        <Section>
+          <Header>
+            <Heading>Speicherplatz</Heading>
+            <Link href="#">Details</Link>
+          </Header>
+          <ProgressBar
+            value={2.3}
+            maxValue={5}
+            formatOptions={{
+              style: "unit",
+              unit: "gigabyte",
+            }}
+            showMaxValue
+            size="l"
+            status="success"
+          >
+            <Label>Speicherplatz</Label>
+          </ProgressBar>
+        </Section>
+      </LayoutCard>
     </ColumnLayout>
   );
 };
