@@ -1,0 +1,4 @@
+{
+  "maxLength": "Please enter at most {number} characters",
+  "minLength": "Please enter at least {number} characters"
+}

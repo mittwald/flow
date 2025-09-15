@@ -20,6 +20,7 @@ const meta: Meta<typeof Field> = {
       nameDefaultValue: string;
       nameRequired: string;
       nameMaxLength: string;
+      nameMinLength: string;
       controlledName: string;
     }
 
@@ -57,7 +58,9 @@ const meta: Meta<typeof Field> = {
 
           <Field
             name="nameRequired"
-            rules={{ required: "Please enter your name" }}
+            rules={{
+              required: "Please enter your name",
+            }}
           >
             <TextField>
               <Label>Name</Label>
@@ -72,6 +75,18 @@ const meta: Meta<typeof Field> = {
 
           <Field name="controlledName">
             <TextField value={form.watch("controlledName").toUpperCase()}>
+              <Label>Name</Label>
+            </TextField>
+          </Field>
+
+          <Field
+            name="nameMinLength"
+            rules={{
+              required: "Please enter your name",
+              minLength: 2,
+            }}
+          >
+            <TextField>
               <Label>Name</Label>
             </TextField>
           </Field>
