@@ -334,19 +334,6 @@ export const WithSubHeadings: Story = {
               </ColumnLayout>
             </Section>
             <Section>
-              <Heading>Authentication</Heading>
-              <Text>Choose between password or SSH key authentication.</Text>
-              <SegmentedControl defaultValue="password">
-                <Segment value="password">Password</Segment>
-                <Segment value="ssh">SSH Key</Segment>
-              </SegmentedControl>
-              <ColumnLayout s={[1, 1]}>
-                <TextField isRequired>
-                  <Label>Password</Label>
-                </TextField>
-              </ColumnLayout>
-            </Section>
-            <Section>
               <Heading>Permissions</Heading>
               <Text>Select the permissions the SFTP user should have.</Text>
               <RadioGroup s={[1, 1]} defaultValue="read&write">
