@@ -60,6 +60,7 @@ import {
   LabeledValue,
   IconDnsZone,
   IconEmailArchive,
+  IconInvite,
 } from "@mittwald/flow-react-components";
 
 <ColumnLayout l={[1, 1, 1, 1, 1]} m={[1, 1, 1]} s={[1, 1]}>
@@ -294,5 +295,9 @@ import {
   <LabeledValue>
     <Label>KnowledgeHint</Label>
     <IconKnowledgeHint />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Invite</Label>
+    <IconInvite />
   </LabeledValue>
 </ColumnLayout>;
