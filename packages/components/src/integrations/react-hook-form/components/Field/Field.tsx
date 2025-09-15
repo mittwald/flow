@@ -9,6 +9,8 @@ import {
   type UseFormReturn,
 } from "react-hook-form";
 import FieldErrorView from "@/views/FieldErrorView";
+import { useLocalizedStringFormatter } from "react-aria";
+import locales from "./locales/*.locale.json";
 
 export interface FieldProps<T extends FieldValues>
   extends Omit<ControllerProps<T>, "render">,
@@ -17,7 +19,32 @@ export interface FieldProps<T extends FieldValues>
 export function Field<T extends FieldValues>(props: FieldProps<T>) {
   const { children, name, defaultValue, ...rest } = props;
 
-  const controller = useController(props);
+  const stringFormatter = useLocalizedStringFormatter(locales);
+
+  const controller = useController({
+    ...props,
+    rules: {
+      ...props.rules,
+      minLength:
+        typeof rest.rules?.minLength === "number"
+          ? {
+              value: rest.rules.minLength,
+              message: stringFormatter.format("minLength", {
+                number: rest.rules.minLength,
+              }),
+            }
+          : rest.rules?.minLength,
+      maxLength:
+        typeof rest.rules?.maxLength === "number"
+          ? {
+              value: rest.rules.maxLength,
+              message: stringFormatter.format("maxLength", {
+                number: rest.rules.maxLength,
+              }),
+            }
+          : rest.rules?.maxLength,
+    },
+  });
   const formContext = useFormContext<T>();
   /**
    * We don't use controller.field.value here, because it doesn't update when
