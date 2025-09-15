@@ -1,9 +1,63 @@
-# Beispiel Dashboard
+# Zentrale Merkmale
 
-Um eine Dashboard-Struktur zu erstellen, nutze
-[LayoutCards](/03-components/structure/layout-card) in verschiedenen
-[ColumnLayouts](/03-components/structure/column-layout). Zur Unterteilung
-innerhalb der LayoutCards sollten [Sections](/03-components/structure/section)
-eingesetzt werden.
+Ein Dashboard bündelt relevante Informationen auf einer kachelartigen
+Oberfläche. Damit es den größtmöglichen Nutzen bietet, sollten folgende
+Prinzipien berücksichtigt werden:
+
+- **Übersichtlichkeit:** Klar strukturiert und kompakt.
+- **Relevanz:** Daten die einem Mehrwert bieten.
+- **Erfassbarkeit:** Kennzahlen und Trends sofort erkennbar (z. B. Diagrammen).
+- **Aktualität und Interaktivität:** Aktuelle Daten, oft mit Filtern oder
+  Anpassungsmöglichkeiten.
+
+---
+
+# Aufbau
+
+Ein Dashboard besteht aus mehreren
+[LayoutCards](/03-components/structure/layout-card), die jeweils ein Thema
+abbilden. Mithilfe von [ColumnLayouts](/03-components/structure/column-layout)
+entsteht die kachelartige Struktur. Innerhalb einer LayoutCard sorgen
+[Sections](/03-components/structure/section) für die Gliederung in die drei
+Bereiche Header, Content und Footer.
+
+---
+
+# Willkommens-Dashboard
+
+Ein Willkommens-Dashboard auf der Startseite bietet einen schnellen Überblick
+über zentrale Informationen und Funktionen. Es erleichtert den Einstieg, schafft
+Orientierung und dient als klarer Ausgangspunkt für den Zugriff auf weitere
+Bereiche.
 
 <LiveCodeEditor example="dashboard" editorCollapsed bgColor="dark" />
+
+Dashboards sollen nicht nur funktional, sondern auch visuell ansprechend
+gestaltet sein. Dies kann durch den Einsatz eines
+[Images](/03-components/content/image) oder mithilfe der
+[AccentBox](/03-components/structure/accent-box) erfolgen.
+
+---
+
+# Detail-Dashboard
+
+Detail-Dashboards geben Usern einen schnellen Einblick in ein Objekt. Sie können
+den aktuellen Status, relevante Kennzahlen und wichtige Zusammenhänge zeigen –
+oft anschaulich visualisiert durch Diagramme.
+
+<LiveCodeEditor example="project-dashboard" editorCollapsed bgColor="dark" />
+
+Für die Datenvisualisierung in Dashboards eignen sich unter anderem folgende
+Components: [ProgressBar](/03-components/status/progress-bar),
+[DonutChart](/03-components/data-visualisation/donut-chart),
+[BigNumber](/03-components/data-visualisation/big-number),
+[CartesianChart](/03-components/data-visualisation/cartesian-chart).
+
+## LayoutCard kombiniert mit AccentBox
+
+[AccentBoxen](/03-components/structure/accent-box) eignen sich, um gezielt
+farbliche Akzente zu setzen – insbesondere bei Werbemaßnahmen. Dabei sollte
+jedoch sparsam vorgegangen werden, damit das Gesamtbild stimmig bleibt. In der
+Regel genügt bereits eine farbige Box.
+
+<LiveCodeEditor example="customer-dashboard" editorCollapsed bgColor="dark" />

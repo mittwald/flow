@@ -57,7 +57,9 @@ const meta: Meta<typeof Field> = {
 
           <Field
             name="nameRequired"
-            rules={{ required: "Please enter your name" }}
+            rules={{
+              required: "Please enter your name",
+            }}
           >
             <TextField>
               <Label>Name</Label>

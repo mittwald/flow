@@ -3,9 +3,9 @@ import type { PropsContext } from "@/lib/propsContext";
 import { dynamic, PropsContextProvider } from "@/lib/propsContext";
 import type { PropsWithChildren } from "react";
 import {
-  useController,
   type ControllerProps,
   type FieldValues,
+  useController,
   type UseFormReturn,
 } from "react-hook-form";
 import FieldErrorView from "@/views/FieldErrorView";
@@ -64,7 +64,6 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
     TextField: fieldProps,
     TextArea: fieldProps,
     MarkdownEditor: fieldProps,
-
     Checkbox: {
       ...fieldProps,
       isSelected: value,
