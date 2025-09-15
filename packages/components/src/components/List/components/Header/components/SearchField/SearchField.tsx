@@ -18,8 +18,14 @@ const DefaultSearchFieldRender: SearchFieldRenderComponent = (props) => {
   const { onChange, value, autoSubmit = true, ...searchFieldProps } = props;
 
   const [searchString, setSearchString] = useState(value ?? "");
+  const [submittedValue, setSubmittedValue] = useState("");
 
   const submitSearch = () => {
+    if (searchString === submittedValue) {
+      return;
+    }
+    setSubmittedValue(searchString);
+
     if (searchString.trim() === "") {
       onChange(undefined);
     } else {
@@ -46,7 +52,7 @@ const DefaultSearchFieldRender: SearchFieldRenderComponent = (props) => {
   };
 
   const handleKeyPress = (e: KeyboardEvent) => {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && !autoSubmit) {
       submitSearch();
     } else if (e.key === "Escape") {
       clearSearch();
