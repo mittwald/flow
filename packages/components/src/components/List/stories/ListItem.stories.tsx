@@ -100,7 +100,9 @@ export const WithBottomContent: Story = {
               </Avatar>
               <Heading>{user.name}</Heading>
               <Text>Mittwald</Text>
-              <Content slot="bottom">{dummyText.long}</Content>
+              <Content slot="bottom">
+                <Text>{dummyText.long}</Text>
+              </Content>
               <ContextMenu>
                 <MenuItem>Show details</MenuItem>
               </ContextMenu>

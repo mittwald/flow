@@ -18,6 +18,9 @@ import Align from "@/components/Align";
 import { ColumnLayout } from "@/components/ColumnLayout";
 import { AccentBox } from "@/components/AccentBox";
 import { dummyText } from "@/lib/dev/dummyText";
+import { RadioButton, RadioGroup } from "@/components/RadioGroup";
+import { DatePicker } from "@/components/DatePicker";
+import { FieldDescription } from "@/components/FieldDescription";
 
 const meta: Meta<typeof Modal> = {
   title: "Overlays/Modal",
@@ -293,6 +296,73 @@ export const LargeOffCanvas: Story = {
             <Action closeOverlay="Modal">
               <Button variant="soft" color="secondary">
                 Abort
+              </Button>
+            </Action>
+          </ActionGroup>
+        </Modal>
+      </ModalTrigger>
+    );
+  },
+};
+
+export const WithSubHeadings: Story = {
+  args: { size: "l", offCanvas: true },
+  render: (props) => {
+    return (
+      <ModalTrigger {...props}>
+        <Button>Add SFTP user</Button>
+        <Modal size="m" offCanvas>
+          <Heading>Add SFTP user</Heading>
+          <Content>
+            <Section>
+              <Heading>Description</Heading>
+              <Text>
+                An SFTP user allows you to connect to your project, for example
+                to upload files.
+              </Text>
+              <ColumnLayout m={[1, 1]}>
+                <TextField isRequired>
+                  <Label>Name</Label>
+                </TextField>
+                <DatePicker>
+                  <Label>Expiration Date</Label>
+                  <FieldDescription>
+                    After this date, the SFTP user will be deleted.
+                  </FieldDescription>
+                </DatePicker>
+              </ColumnLayout>
+            </Section>
+            <Section>
+              <Heading>Permissions</Heading>
+              <Text>Select the permissions the SFTP user should have.</Text>
+              <RadioGroup s={[1, 1]} defaultValue="read&write">
+                <RadioButton value="write">
+                  <Text>Read Access</Text>
+                  <Content>The SFTP user can view and download files.</Content>
+                </RadioButton>
+                <RadioButton value="read&write">
+                  <Text>Read and Write Access</Text>
+                  <Content>
+                    The SFTP user can view, edit, upload, and download files.
+                  </Content>
+                </RadioButton>
+              </RadioGroup>
+            </Section>
+            <Section>
+              <Heading>Directory Selection</Heading>
+              <Text>
+                Specify the directory the SFTP user should have access to.
+              </Text>
+              <TextField isRequired>
+                <Label>Path</Label>
+              </TextField>
+            </Section>
+          </Content>
+          <ActionGroup>
+            <Action closeOverlay="Modal">
+              <Button color="accent">Create SFTP User</Button>
+              <Button variant="soft" color="secondary">
+                Cancel
               </Button>
             </Action>
           </ActionGroup>
