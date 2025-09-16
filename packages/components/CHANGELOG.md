@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.478](https://github.com/mittwald/flow/compare/0.2.0-alpha.477...0.2.0-alpha.478) (2025-09-16)
+
+### Bug Fixes
+
+* **PasswordCreationField:** don't show success feedback on generate button ([#1985](https://github.com/mittwald/flow/issues/1985)) ([ca866a6](https://github.com/mittwald/flow/commit/ca866a63ad31df6b1d245ef3ca8121a57add67bf))
+
 # [0.2.0-alpha.477](https://github.com/mittwald/flow/compare/0.2.0-alpha.476...0.2.0-alpha.477) (2025-09-16)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
