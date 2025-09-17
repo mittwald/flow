@@ -24,8 +24,11 @@ interface Props
     Pick<ToolBarButtonProps, "onToolPressed" | "isDisabled"> {}
 
 export const Toolbar: FC<Props> = (props) => {
-  const sharedToolButtonProps = {
-    onPress: props.onToolPressed,
+  const sharedToolButtonProps: Pick<
+    ToolBarButtonProps,
+    "onToolPressed" | "isDisabled"
+  > = {
+    onToolPressed: props.onToolPressed,
     isDisabled: props.isDisabled || props.currentMode === "preview",
   };
 
