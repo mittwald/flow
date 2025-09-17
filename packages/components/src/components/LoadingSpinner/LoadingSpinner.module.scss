@@ -2,6 +2,10 @@
   animation: spin var(--loading-spinner--transition-duration) linear infinite;
   color: var(--loading-spinner--color);
 
+  @media (prefers-reduced-motion: reduce) {
+    animation-duration: calc(var(--loading-spinner--transition-duration) * 2.5);
+  }
+
   &.dark {
     color: var(--loading-spinner--color-dark);
   }
