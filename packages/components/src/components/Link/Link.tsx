@@ -7,7 +7,6 @@ import type {
 import { useContext } from "react";
 import * as Aria from "react-aria-components";
 import type { PropsContext } from "@/lib/propsContext";
-import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import styles from "./Link.module.scss";
 import clsx from "clsx";
@@ -37,10 +36,7 @@ export interface LinkProps
   unstyled?: boolean;
 }
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const Link = flowComponent("Link", (props) => {
   const {
     children,
@@ -87,20 +83,18 @@ export const Link = flowComponent("Link", (props) => {
     : {};
 
   return (
-    <ClearPropsContext>
-      <Link
-        {...unsupportedTypingsLinkProps}
-        {...rest}
-        className={rootClassName}
-        ref={ref}
-        style={{ ...style, whiteSpace }}
-      >
-        <PropsContextProvider props={propsContext}>
-          {children}
-          <LinkIcon {...props} />
-        </PropsContextProvider>
-      </Link>
-    </ClearPropsContext>
+    <Link
+      {...unsupportedTypingsLinkProps}
+      {...rest}
+      className={rootClassName}
+      ref={ref}
+      style={{ ...style, whiteSpace }}
+    >
+      <PropsContextProvider props={propsContext}>
+        {children}
+        <LinkIcon {...props} />
+      </PropsContextProvider>
+    </Link>
   );
 });
 

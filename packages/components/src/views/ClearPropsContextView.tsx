@@ -2,15 +2,15 @@
 /* This file is auto-generated with the remote-components-generator */
 import React, { type FC, useContext } from "react";
 import {
-  CountryOptions,
-  type CountryOptionsProps,
-} from "@/components/CountryOptions";
+  ClearPropsContext,
+  type ClearPropsContextProps,
+} from "@/components/ClearPropsContext";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
-const CountryOptionsView: FC<CountryOptionsProps> = (props) => {
+const ClearPropsContextView: FC<ClearPropsContextProps> = (props) => {
   const View =
-    useContext(viewComponentContext)["CountryOptions"] ?? CountryOptions;
+    useContext(viewComponentContext)["ClearPropsContext"] ?? ClearPropsContext;
   return <View {...props} />;
 };
 
-export default CountryOptionsView;
+export default ClearPropsContextView;

@@ -37,7 +37,7 @@ import type { CheckboxGroupProps } from "@/components/CheckboxGroup";
 import type { CheckboxProps } from "@/components/Checkbox";
 import type { CheckboxButtonProps } from "@/components/CheckboxButton";
 import type { TabsProps } from "@/components/Tabs";
-import type { ModalProps, ModalTriggerProps } from "@/components/Modal";
+import type { ModalProps } from "@/components/Modal";
 import type { SectionProps } from "@/components/Section";
 import type { SliderProps } from "@/components/Slider";
 import type { CounterBadgeProps } from "@/components/CounterBadge";
@@ -133,7 +133,6 @@ export interface FlowComponentPropsTypes {
   Message: MessageProps;
   MessageThread: MessageThreadProps;
   Modal: ModalProps;
-  ModalTrigger: ModalTriggerProps;
   Navigation: NavigationProps;
   NavigationGroup: NavigationGroupProps;
   NumberField: NumberFieldProps;
@@ -215,7 +214,6 @@ const propsContextSupportingComponentsMap: Record<
   Message: true,
   MessageThread: true,
   Modal: true,
-  ModalTrigger: true,
   Navigation: true,
   NavigationGroup: true,
   NumberField: true,

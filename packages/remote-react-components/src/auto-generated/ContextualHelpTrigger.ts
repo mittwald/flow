@@ -8,9 +8,6 @@ export { type RemoteContextualHelpTriggerElement } from "@mittwald/flow-remote-e
 export const ContextualHelpTrigger = createFlowRemoteComponent(
   "flr-contextual-help-trigger",
   "ContextualHelpTrigger",
-  {
-    clearPropsContext: false,
-  },
   RemoteContextualHelpTriggerElement,
   {
     slotProps: {

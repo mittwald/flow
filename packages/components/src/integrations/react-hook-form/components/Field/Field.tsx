@@ -60,6 +60,7 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
   const value = formContext.form.watch(name) ?? controller.field.value;
 
   const fieldProps = {
+    ____inherit: true,
     ...controller.field,
     value,
     name,
@@ -126,7 +127,6 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
 
   return (
     <PropsContextProvider
-      mergeInParentContext
       props={propsContext}
       dependencies={[controller.fieldState, controller.field, value]}
     >

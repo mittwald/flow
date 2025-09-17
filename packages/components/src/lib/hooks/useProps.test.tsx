@@ -5,33 +5,36 @@ import type {
   PropsWithChildren,
 } from "react";
 import { cloneElement, isValidElement, useEffect, useState } from "react";
-import useProps from "@/lib/hooks/useProps";
 import { render, screen } from "@testing-library/react";
-import PropsContextProvider from "@/lib/propsContext/PropsContextProvider";
+import PropsContextProvider from "@/lib/propsContext/components/PropsContextProvider";
 import dynamic from "@/lib/propsContext/dynamicProps/dynamic";
 import type { PropsContext } from "@/lib/propsContext/types";
 import type { TestComponentProps } from "@/lib/propsContext/test";
 import { beforeEach, describe, expect, test } from "vitest";
+import { flowComponent } from "@/index/internal";
 
 let renderCount: number;
 let renderedPropHistory: (string | undefined)[];
 
-const TestComponent: FC<PropsWithChildren<TestComponentProps>> = (props) => {
-  const { children, testProp } = useProps("TestComponent", props);
-  renderCount++;
-  renderedPropHistory.push(testProp);
-  return (
-    <>
-      <span data-testid="prop-value">{testProp ?? "undefined"}</span>
-      {isValidElement<Record<string, unknown>>(children)
-        ? cloneElement(children, {
-            ...children.props,
-            "data-additional-prop": true,
-          })
-        : children}
-    </>
-  );
-};
+const TestComponent: FC<PropsWithChildren<TestComponentProps>> = flowComponent(
+  "TestComponent",
+  (props) => {
+    const { children, testProp } = props;
+    renderCount++;
+    renderedPropHistory.push(testProp);
+    return (
+      <>
+        <span data-testid="prop-value">{testProp ?? "undefined"}</span>
+        {isValidElement<Record<string, unknown>>(children)
+          ? cloneElement(children, {
+              ...children.props,
+              "data-additional-prop": true,
+            })
+          : children}
+      </>
+    );
+  },
+);
 
 const expectPropertyToBe = (expected: string): void =>
   expect(screen.getByTestId("prop-value").innerHTML).toBe(expected);
@@ -73,7 +76,7 @@ test("The context property is returned, if property is in context but not local"
 test("The parent context property is returned, if property is in parent context but not local", () => {
   render(
     <PropsContextProvider props={contextProps}>
-      <PropsContextProvider props={{}} mergeInParentContext>
+      <PropsContextProvider props={{}}>
         <TestComponent />
       </PropsContextProvider>
     </PropsContextProvider>,
