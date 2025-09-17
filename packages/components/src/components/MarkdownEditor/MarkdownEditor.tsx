@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import styles from "./MarkdownEditor.module.scss";
 import { Markdown, type MarkdownProps } from "@/components/Markdown";
 import { TextArea, type TextAreaProps } from "@/components/TextArea";
@@ -6,7 +6,9 @@ import { Toolbar } from "@/components/MarkdownEditor/components/Toolbar";
 import clsx from "clsx";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { handleKeyDown } from "@/components/MarkdownEditor/lib/handleKeyDown";
-import { mergeRefs } from "@react-aria/utils";
+import { useObjectRef } from "@react-aria/utils";
+import { useManagedValue } from "@/lib/hooks/useManagedValue";
+import { insertAtCursor } from "@/components/MarkdownEditor/lib/insertAtCursor";
 
 export type MarkdownEditorMode = "editor" | "preview";
 
@@ -19,8 +21,6 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
     isDisabled,
     children,
     className,
-    value,
-    onChange,
     rows,
     autoResizeMaxRows,
     headingOffset,
@@ -28,9 +28,9 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
     ...rest
   } = props;
 
-  const [markdown, setMarkdown] = useState(value ?? "");
   const [mode, setMode] = useState<MarkdownEditorMode>("editor");
-  const textAreaRef = useRef<HTMLTextAreaElement>(null);
+  const { value, handleOnChange } = useManagedValue(props);
+  const textAreaRef = useObjectRef<HTMLTextAreaElement>(ref);
 
   const rootClassName = clsx(
     styles.markdownEditor,
@@ -43,26 +43,22 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
       {...rest}
       isDisabled={isDisabled || mode === "preview"}
       className={rootClassName}
-      ref={mergeRefs(textAreaRef, ref)}
-      value={value !== undefined ? value : markdown}
+      ref={textAreaRef}
+      value={value}
       rows={rows}
       autoResizeMaxRows={autoResizeMaxRows}
       onChange={(v) => {
-        if (onChange) {
-          onChange(v);
-        }
-        setMarkdown(v);
+        handleOnChange(v);
       }}
-      onKeyDown={(e) => handleKeyDown(e, textAreaRef, setMarkdown, onChange)}
+      onKeyDown={(e) => handleKeyDown(e, textAreaRef, handleOnChange)}
     >
       <Toolbar
-        markdown={markdown}
-        setMarkdown={setMarkdown}
-        textAreaRef={textAreaRef}
-        setMode={setMode}
-        mode={mode}
+        currentMode={mode}
         isDisabled={isDisabled}
-        onChange={onChange}
+        onModeChange={(newMode) => setMode(newMode)}
+        onToolPressed={(type) => {
+          insertAtCursor(value, handleOnChange, textAreaRef, type);
+        }}
       />
 
       <Markdown
@@ -72,7 +68,7 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
           maxHeight: `calc(var(--line-height--m) * ${autoResizeMaxRows ?? rows} + (var(--form-control--padding-y) * 2))`,
         }}
       >
-        {markdown}
+        {value}
       </Markdown>
 
       {children}

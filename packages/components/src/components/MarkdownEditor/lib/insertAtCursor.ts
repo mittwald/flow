@@ -39,10 +39,11 @@ export const insertAtCursor = (
   setMarkdown: (markdown: string) => void,
   textAreaRef: RefObject<HTMLTextAreaElement | null>,
   type: InsertType,
-  onChange?: (markdown: string) => void,
 ) => {
   const textarea = textAreaRef.current;
-  if (!textarea) return;
+  if (!textarea) {
+    return;
+  }
 
   const { before, after = "", toggleable = false } = markdownSyntax[type];
   const start = textarea.selectionStart;
@@ -209,8 +210,6 @@ export const insertAtCursor = (
   }
 
   setMarkdown(newText);
-  if (onChange) onChange(newText);
-
   requestAnimationFrame(() => {
     textarea.setSelectionRange(selectionStart, selectionEnd);
     textarea.focus();

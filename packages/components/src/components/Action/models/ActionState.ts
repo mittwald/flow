@@ -69,7 +69,7 @@ export class ActionState {
     await this.onDone();
   }
 
-  public async onFailed(error: unknown): Promise<void> {
+  public async onFailed(error?: unknown): Promise<void> {
     this.error = error ?? new Error("Unknown error");
     await this.onDone();
   }
