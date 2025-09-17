@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.479](https://github.com/mittwald/flow/compare/0.2.0-alpha.478...0.2.0-alpha.479) (2025-09-17)
+
+### Bug Fixes
+
+* **Markdown/Form:** fix markdown form support + fix form onSubmit return handler ([#1992](https://github.com/mittwald/flow/issues/1992)) ([1cd4477](https://github.com/mittwald/flow/commit/1cd4477a3a9d5072e7f9980ae01c7bde86303e69))
+
 # [0.2.0-alpha.478](https://github.com/mittwald/flow/compare/0.2.0-alpha.477...0.2.0-alpha.478) (2025-09-16)
 
 ### Bug Fixes
