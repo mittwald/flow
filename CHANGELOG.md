@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.480](https://github.com/mittwald/flow/compare/0.2.0-alpha.479...0.2.0-alpha.480) (2025-09-17)
+
+### Features
+
+* add prefers-reduced-motion support ([cd4b586](https://github.com/mittwald/flow/commit/cd4b58657d8debf62c43c5469c0fcfd52fc5e9c1))
+
 # [0.2.0-alpha.479](https://github.com/mittwald/flow/compare/0.2.0-alpha.478...0.2.0-alpha.479) (2025-09-17)
 
 ### Bug Fixes
