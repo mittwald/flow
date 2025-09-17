@@ -4,7 +4,6 @@ import {
 } from "@/lib/componentFactory/flowComponent";
 import type { PropsWithContainerBreakpointSize } from "@/lib/types/props";
 import type { PropsWithChildren } from "react";
-import React from "react";
 import * as Aria from "react-aria-components";
 import formFieldStyles from "@/components/FormField/FormField.module.scss";
 import styles from "./SegmentedControl.module.scss";
@@ -57,12 +56,8 @@ export const SegmentedControl = flowComponent("SegmentedControl", (props) => {
 
   return (
     <Aria.RadioGroup {...rest} className={rootClassName} ref={ref}>
-      <TunnelProvider>
-        <PropsContextProvider
-          dependencies={["segment"]}
-          props={propsContext}
-          mergeInParentContext
-        >
+      <PropsContextProvider dependencies={["segment"]} props={propsContext}>
+        <TunnelProvider>
           {children}
 
           <div className={styles.segmentedControl}>
@@ -73,8 +68,8 @@ export const SegmentedControl = flowComponent("SegmentedControl", (props) => {
 
           <TunnelExit id="fieldDescription" />
           <TunnelExit id="fieldError" />
-        </PropsContextProvider>
-      </TunnelProvider>
+        </TunnelProvider>
+      </PropsContextProvider>
       <FieldError className={formFieldStyles.fieldError} />
     </Aria.RadioGroup>
   );

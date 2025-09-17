@@ -32,9 +32,16 @@ export const AccentBox = flowComponent("AccentBox", (props) => {
   const propsContext: PropsContext = {
     Link: {
       color: contentColor,
+      ___inherit: true,
     },
-    Text: { color: contentColor },
-    Heading: { color: contentColor },
+    Text: {
+      color: contentColor,
+      ___inherit: true,
+    },
+    Heading: {
+      color: contentColor,
+      ___inherit: true,
+    },
   };
 
   return (

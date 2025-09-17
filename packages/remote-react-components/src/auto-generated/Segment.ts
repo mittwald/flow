@@ -8,9 +8,6 @@ export { type RemoteSegmentElement } from "@mittwald/flow-remote-elements";
 export const Segment = createFlowRemoteComponent(
   "flr-segment",
   "Segment",
-  {
-    clearPropsContext: true,
-  },
   RemoteSegmentElement,
   {
     slotProps: {

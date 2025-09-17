@@ -5,17 +5,21 @@ import DialogTriggerView from "@/views/DialogTriggerView";
 
 export type PopoverTriggerProps = OverlayTriggerProps;
 
-export const PopoverTrigger = flowComponent("PopoverTrigger", (props) => {
-  const { children, ...triggerProps } = props;
-  return (
-    <OverlayTrigger
-      overlayType="Popover"
-      {...triggerProps}
-      component={DialogTriggerView}
-    >
-      {children}
-    </OverlayTrigger>
-  );
-});
+export const PopoverTrigger = flowComponent(
+  "PopoverTrigger",
+  (props) => {
+    const { children, ...triggerProps } = props;
+    return (
+      <OverlayTrigger
+        overlayType="Popover"
+        {...triggerProps}
+        component={DialogTriggerView}
+      >
+        {children}
+      </OverlayTrigger>
+    );
+  },
+  { type: "provider" },
+);
 
 export default PopoverTrigger;

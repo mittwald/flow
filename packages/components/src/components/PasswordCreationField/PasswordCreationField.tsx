@@ -1,4 +1,4 @@
-import React, {
+import {
   type PropsWithChildren,
   useState,
   type ClipboardEvent,
@@ -6,7 +6,6 @@ import React, {
   useMemo,
 } from "react";
 import {
-  ClearPropsContext,
   dynamic,
   type PropsContext,
   PropsContextProvider,
@@ -66,10 +65,7 @@ export interface ResolvedPolicyValidationResult
   ruleResults: RuleValidationResult[];
 }
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const PasswordCreationField = flowComponent(
   "PasswordCreationField",
   (props) => {
@@ -242,7 +238,10 @@ export const PasswordCreationField = flowComponent(
     };
 
     return (
-      <ClearPropsContext>
+      <PropsContextProvider
+        props={propsContext}
+        dependencies={[isDisabled, isRequired, value, policyValidationResult]}
+      >
         <TunnelProvider>
           <Aria.TextField
             {...rest}
@@ -282,41 +281,39 @@ export const PasswordCreationField = flowComponent(
                 validationResultState={stateFromValidationResult}
               />
             </Aria.Group>
-            <PropsContextProvider props={propsContext}>
-              {isValidFromValidationResult && (
-                <FieldDescription>{latestValidationErrorText}</FieldDescription>
+            {isValidFromValidationResult && (
+              <FieldDescription>{latestValidationErrorText}</FieldDescription>
+            )}
+            {isInvalidFromValidationResult &&
+              policyValidationResult.isValid !== "indeterminate" && (
+                <FieldError>{latestValidationErrorText}</FieldError>
               )}
-              {isInvalidFromValidationResult &&
-                policyValidationResult.isValid !== "indeterminate" && (
-                  <FieldError>{latestValidationErrorText}</FieldError>
-                )}
-              <Wrap if={isInvalidFromValidationResult}>
-                <FieldErrorContext.Provider
-                  value={{
-                    isInvalid: false,
-                    validationErrors: [],
-                    validationDetails: {
-                      customError: false,
-                      valid: true,
-                      typeMismatch: false,
-                      stepMismatch: false,
-                      valueMissing: false,
-                      tooShort: false,
-                      tooLong: false,
-                      rangeUnderflow: false,
-                      patternMismatch: false,
-                      badInput: false,
-                      rangeOverflow: false,
-                    },
-                  }}
-                >
-                  {children}
-                </FieldErrorContext.Provider>
-              </Wrap>
-            </PropsContextProvider>
+            <Wrap if={isInvalidFromValidationResult}>
+              <FieldErrorContext.Provider
+                value={{
+                  isInvalid: false,
+                  validationErrors: [],
+                  validationDetails: {
+                    customError: false,
+                    valid: true,
+                    typeMismatch: false,
+                    stepMismatch: false,
+                    valueMissing: false,
+                    tooShort: false,
+                    tooLong: false,
+                    rangeUnderflow: false,
+                    patternMismatch: false,
+                    badInput: false,
+                    rangeOverflow: false,
+                  },
+                }}
+              >
+                {children}
+              </FieldErrorContext.Provider>
+            </Wrap>
           </Aria.TextField>
         </TunnelProvider>
-      </ClearPropsContext>
+      </PropsContextProvider>
     );
   },
 );

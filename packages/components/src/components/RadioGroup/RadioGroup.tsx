@@ -1,5 +1,4 @@
 import type { PropsWithChildren } from "react";
-import React from "react";
 import styles from "./RadioGroup.module.scss";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
@@ -50,12 +49,8 @@ export const RadioGroup = flowComponent("RadioGroup", (props) => {
 
   return (
     <Aria.RadioGroup {...rest} className={rootClassName} ref={ref}>
-      <TunnelProvider>
-        <PropsContextProvider
-          dependencies={["radio"]}
-          props={propsContext}
-          mergeInParentContext
-        >
+      <PropsContextProvider dependencies={["radio"]} props={propsContext}>
+        <TunnelProvider>
           {children}
 
           <ColumnLayout s={s} m={m} l={l} className={styles.radioGroup}>
@@ -74,8 +69,8 @@ export const RadioGroup = flowComponent("RadioGroup", (props) => {
 
           <TunnelExit id="fieldDescription" />
           <TunnelExit id="fieldError" />
-        </PropsContextProvider>
-      </TunnelProvider>
+        </TunnelProvider>
+      </PropsContextProvider>
       <FieldError className={formFieldStyles.fieldError} />
     </Aria.RadioGroup>
   );
