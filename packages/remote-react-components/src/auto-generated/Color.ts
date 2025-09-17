@@ -8,9 +8,6 @@ export { type RemoteColorElement } from "@mittwald/flow-remote-elements";
 export const Color = createFlowRemoteComponent(
   "flr-color",
   "Color",
-  {
-    clearPropsContext: false,
-  },
   RemoteColorElement,
   {
     slotProps: {

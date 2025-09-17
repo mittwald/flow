@@ -16,6 +16,10 @@ import { TunnelEntry } from "@mittwald/react-tunnel";
 import SlotContextProvider from "@/lib/slotContext/SlotContextProvider";
 import { useProps } from "@/lib/hooks/useProps";
 import { mergeRefs } from "@react-aria/utils";
+import { useComponentPropsContext } from "@/lib/propsContext/propsContext";
+import { increaseNestingLevel } from "@/lib/propsContext/nestedPropsContext/lib";
+import ComponentPropsContextProviderView from "@/views/ComponentPropsContextProviderView";
+import { ComponentPropsContextProvider } from "@/components/ComponentPropsContextProvider";
 
 type RefType<T> = T extends RefAttributes<infer R> ? R : undefined;
 
@@ -39,12 +43,23 @@ type FlowComponentType<C extends FlowComponentName> = FunctionComponent<
     RefAttributes<RefType<FlowComponentPropsOfName<C>>>
 >;
 
+type FlowComponentProvisionType = "provider" | "ui";
+
+interface Options {
+  type?: FlowComponentProvisionType;
+  isRemoteComponent?: boolean;
+}
+
 export function flowComponent<C extends FlowComponentName>(
   componentName: C,
   ImplementationComponentType: FlowComponentImplementationType<C>,
+  options: Options = {},
 ): FlowComponentType<C> {
   type Props = FlowComponentPropsOfName<C> &
     RefAttributes<RefType<FlowComponentPropsOfName<C>>>;
+
+  const { type = "ui", isRemoteComponent = false } = options;
+  const incrementPropsContextLevel = type === "ui";
 
   function Component(propsFromArgument: Props) {
     const { ref: refFromProps = null, ...props } = propsFromArgument;
@@ -63,6 +78,9 @@ export function flowComponent<C extends FlowComponentName>(
       typeof ImplementationComponentType
     >;
 
+    const componentProps = useComponentPropsContext(componentName) ?? {};
+    increaseNestingLevel(componentProps);
+
     const mergedRef = mergeRefs(refFromProps, refFromContext);
     const propsWithRef = {
       ...implementationTypeProps,
@@ -72,6 +90,31 @@ export function flowComponent<C extends FlowComponentName>(
     ImplementationComponentType.displayName = `FlowComponentImpl(${componentName})`;
 
     let element: ReactNode = <ImplementationComponentType {...propsWithRef} />;
+
+    if (isRemoteComponent) {
+      element = (
+        <ComponentPropsContextProvider
+          componentProps={componentProps}
+          incrementPropsContextLevel={incrementPropsContextLevel}
+        >
+          {element}
+        </ComponentPropsContextProvider>
+      );
+    } else {
+      /**
+       * In case of a Flow component that does not have a remote counterpart
+       * (like the List component), the ComponentPropsContext must be applied on
+       * the host side, so that nesting and inheritance is working correctly.
+       */
+      element = (
+        <ComponentPropsContextProviderView
+          componentProps={componentProps}
+          incrementPropsContextLevel={incrementPropsContextLevel}
+        >
+          {element}
+        </ComponentPropsContextProviderView>
+      );
+    }
 
     if ("slot" in props && !!props.slot && typeof props.slot === "string") {
       element = (

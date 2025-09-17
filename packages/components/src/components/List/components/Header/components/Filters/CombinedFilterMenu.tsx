@@ -2,7 +2,6 @@ import type { FC } from "react";
 import React from "react";
 import { IconFilter } from "@/components/Icon/components/icons";
 import ButtonView from "@/views/ButtonView";
-import ContextMenu, { ContextMenuTrigger } from "@/components/ContextMenu";
 import { useList } from "@/components/List";
 import HeadingView from "@/views/HeadingView";
 import { FilterMenuItem } from "@/components/List/components/Header/components/Filters/FilterMenuItem";
@@ -11,6 +10,8 @@ import { useLocalizedStringFormatter } from "react-aria";
 import locales from "../../../../locales/*.locale.json";
 import ContextMenuSectionView from "@/views/ContextMenuSectionView";
 import SeparatorView from "@/views/SeparatorView";
+import ContextMenuTriggerView from "@/views/ContextMenuTriggerView";
+import ContextMenuView from "@/views/ContextMenuView";
 
 export const CombinedFilterMenu: FC = () => {
   const list = useList();
@@ -24,7 +25,7 @@ export const CombinedFilterMenu: FC = () => {
   }
 
   return (
-    <ContextMenuTrigger>
+    <ContextMenuTriggerView>
       <ButtonView
         className={styles.mobile}
         variant="outline"
@@ -33,7 +34,7 @@ export const CombinedFilterMenu: FC = () => {
       >
         <IconFilter />
       </ButtonView>
-      <ContextMenu>
+      <ContextMenuView>
         {filters.map((f, i) => {
           const activeFilterKeys = f.values
             .filter((v) => v.isActive)
@@ -54,7 +55,7 @@ export const CombinedFilterMenu: FC = () => {
             </React.Fragment>
           );
         })}
-      </ContextMenu>
-    </ContextMenuTrigger>
+      </ContextMenuView>
+    </ContextMenuTriggerView>
   );
 };

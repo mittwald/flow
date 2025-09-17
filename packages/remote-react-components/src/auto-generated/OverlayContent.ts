@@ -8,9 +8,6 @@ export { type RemoteOverlayContentElement } from "@mittwald/flow-remote-elements
 export const OverlayContent = createFlowRemoteComponent(
   "flr-overlay-content",
   "OverlayContent",
-  {
-    clearPropsContext: false,
-  },
   RemoteOverlayContentElement,
   {
     slotProps: {

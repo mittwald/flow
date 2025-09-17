@@ -12,7 +12,6 @@ import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { useOverlayController } from "@/lib/controller";
 import { OverlayContextProvider } from "@/lib/controller/overlay/OverlayContextProvider";
 import type { PropsContext } from "@/lib/propsContext";
-import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import ContextMenuContentView from "@/views/ContextMenuContentView";
 import type * as Aria from "react-aria-components";
@@ -36,10 +35,7 @@ export interface ContextMenuProps
   width?: string | number;
 }
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const ContextMenu = flowComponent("ContextMenu", (props) => {
   const {
     children,
@@ -91,32 +87,27 @@ export const ContextMenu = flowComponent("ContextMenu", (props) => {
   };
 
   return (
-    <ClearPropsContext>
-      <Popover {...rest} controller={overlayController} isDialogContent={false}>
-        <OverlayContextProvider
-          type="ContextMenu"
-          controller={overlayController}
+    <Popover {...rest} controller={overlayController} isDialogContent={false}>
+      <OverlayContextProvider type="ContextMenu" controller={overlayController}>
+        <ContextMenuContentView
+          className={styles.contextMenu}
+          onAction={onAction}
+          selectionMode={getAriaSelectionMode(selectionMode)}
+          selectedKeys={selectedKeys}
+          defaultSelectedKeys={defaultSelectedKeys}
+          disabledKeys={disabledKeys}
+          onSelectionChange={onSelectionChange}
+          renderEmptyState={renderEmptyState}
+          ref={ref}
         >
-          <ContextMenuContentView
-            className={styles.contextMenu}
-            onAction={onAction}
-            selectionMode={getAriaSelectionMode(selectionMode)}
-            selectedKeys={selectedKeys}
-            defaultSelectedKeys={defaultSelectedKeys}
-            disabledKeys={disabledKeys}
-            onSelectionChange={onSelectionChange}
-            renderEmptyState={renderEmptyState}
-            ref={ref}
-          >
-            <PropsContextProvider props={propsContext}>
-              <Action closeOverlay={getCloseOverlayType(selectionMode)}>
-                {children}
-              </Action>
-            </PropsContextProvider>
-          </ContextMenuContentView>
-        </OverlayContextProvider>
-      </Popover>
-    </ClearPropsContext>
+          <PropsContextProvider props={propsContext}>
+            <Action closeOverlay={getCloseOverlayType(selectionMode)}>
+              {children}
+            </Action>
+          </PropsContextProvider>
+        </ContextMenuContentView>
+      </OverlayContextProvider>
+    </Popover>
   );
 });
 

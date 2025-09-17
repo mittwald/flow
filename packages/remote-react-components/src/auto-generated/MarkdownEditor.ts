@@ -8,9 +8,6 @@ export { type RemoteMarkdownEditorElement } from "@mittwald/flow-remote-elements
 export const MarkdownEditor = createFlowRemoteComponent(
   "flr-markdown-editor",
   "MarkdownEditor",
-  {
-    clearPropsContext: false,
-  },
   RemoteMarkdownEditorElement,
   {
     slotProps: {

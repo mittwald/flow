@@ -1,4 +1,3 @@
-import React from "react";
 import type { ColumnLayoutProps } from "@/components/ColumnLayout";
 import { ColumnLayout } from "@/components/ColumnLayout";
 import type { PropsContext } from "@/lib/propsContext";
@@ -11,10 +10,7 @@ import {
 export type FileCardListProps = Omit<ColumnLayoutProps, "elementType"> &
   FlowComponentProps<HTMLUListElement>;
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const FileCardList = flowComponent("FileCardList", (props) => {
   const { className, ref, children, ...rest } = props;
 

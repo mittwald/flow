@@ -8,9 +8,6 @@ export { type RemoteAlertElement } from "@mittwald/flow-remote-elements";
 export const Alert = createFlowRemoteComponent(
   "flr-alert",
   "Alert",
-  {
-    clearPropsContext: true,
-  },
   RemoteAlertElement,
   {
     slotProps: {

@@ -24,11 +24,12 @@ import { Chat as Chat } from "@mittwald/flow-react-components";
 import { Checkbox as Checkbox } from "@mittwald/flow-react-components";
 import { CheckboxButton as CheckboxButton } from "@mittwald/flow-react-components";
 import { CheckboxGroup as CheckboxGroup } from "@mittwald/flow-react-components";
-import { ClearPropsContextContent as ClearPropsContextContent } from "@mittwald/flow-react-components";
+import { ClearPropsContext as ClearPropsContext } from "@mittwald/flow-react-components";
 import { CodeBlock as CodeBlock } from "@mittwald/flow-react-components";
 import { Color as Color } from "@mittwald/flow-react-components";
 import { ColumnLayout as ColumnLayout } from "@mittwald/flow-react-components";
 import { ComboBox as ComboBox } from "@mittwald/flow-react-components";
+import { ComponentPropsContextProvider as ComponentPropsContextProvider } from "@mittwald/flow-react-components";
 import { Content as Content } from "@mittwald/flow-react-components";
 import { ContextMenu as ContextMenu } from "@mittwald/flow-react-components";
 import { ContextMenuContent as ContextMenuContent } from "@mittwald/flow-react-components";
@@ -175,9 +176,9 @@ export const flowComponents = {
     "CheckboxGroup",
     CheckboxGroup,
   ),
-  "flr-clear-props-context-content": createFlowRemoteComponentRenderer(
-    "ClearPropsContextContent",
-    ClearPropsContextContent,
+  "flr-clear-props-context": createFlowRemoteComponentRenderer(
+    "ClearPropsContext",
+    ClearPropsContext,
   ),
   "flr-code-block": createFlowRemoteComponentRenderer("CodeBlock", CodeBlock),
   "flr-color": createFlowRemoteComponentRenderer("Color", Color),
@@ -186,6 +187,10 @@ export const flowComponents = {
     ColumnLayout,
   ),
   "flr-combo-box": createFlowRemoteComponentRenderer("ComboBox", ComboBox),
+  "flr-component-props-context-provider": createFlowRemoteComponentRenderer(
+    "ComponentPropsContextProvider",
+    ComponentPropsContextProvider,
+  ),
   "flr-content": createFlowRemoteComponentRenderer("Content", Content),
   "flr-context-menu": createFlowRemoteComponentRenderer(
     "ContextMenu",

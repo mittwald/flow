@@ -29,10 +29,7 @@ export interface SelectProps
   isReadOnly?: boolean;
 }
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const Select = flowComponent("Select", (props) => {
   const {
     children,

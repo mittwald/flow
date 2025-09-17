@@ -8,9 +8,6 @@ export { type RemoteLineElement } from "@mittwald/flow-remote-elements";
 export const Line = createFlowRemoteComponent(
   "flr-line",
   "Line",
-  {
-    clearPropsContext: false,
-  },
   RemoteLineElement,
   {
     slotProps: {

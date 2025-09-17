@@ -8,9 +8,6 @@ export { type RemoteAvatarStackElement } from "@mittwald/flow-remote-elements";
 export const AvatarStack = createFlowRemoteComponent(
   "flr-avatar-stack",
   "AvatarStack",
-  {
-    clearPropsContext: false,
-  },
   RemoteAvatarStackElement,
   {
     slotProps: {

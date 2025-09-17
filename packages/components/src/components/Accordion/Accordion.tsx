@@ -71,11 +71,7 @@ export const Accordion: FC<AccordionProps> = (props) => {
 
   return (
     <div {...rest} className={rootClassName}>
-      <PropsContextProvider
-        mergeInParentContext
-        props={propsContext}
-        dependencies={[expanded]}
-      >
+      <PropsContextProvider props={propsContext} dependencies={[expanded]}>
         <TunnelProvider>
           {children}
           <div

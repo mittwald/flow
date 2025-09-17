@@ -1,7 +1,5 @@
 import type { FC } from "react";
-import React from "react";
 import { useList } from "@/components/List/hooks/useList";
-import ContextMenu, { ContextMenuTrigger } from "@/components/ContextMenu";
 import locales from "../../../../locales/*.locale.json";
 import { Translate } from "@/lib/react/components/Translate";
 import TextView from "@/views/TextView";
@@ -9,6 +7,8 @@ import ButtonView from "@/views/ButtonView";
 import { IconSorting } from "@/components/Icon/components/icons";
 import styles from "@/components/List/components/Header/Header.module.css";
 import { SortingMenuItem } from "@/components/List/components/Header/components/Settings/SortingMenuItem";
+import ContextMenuTriggerView from "@/views/ContextMenuTriggerView";
+import ContextMenuView from "@/views/ContextMenuView";
 
 export const SortingMenu: FC = () => {
   const list = useList();
@@ -34,7 +34,7 @@ export const SortingMenu: FC = () => {
   );
 
   return (
-    <ContextMenuTrigger>
+    <ContextMenuTriggerView>
       <ButtonView
         variant="outline"
         color="secondary"
@@ -43,12 +43,12 @@ export const SortingMenu: FC = () => {
         {text}
         <IconSorting />
       </ButtonView>
-      <ContextMenu
+      <ContextMenuView
         selectionMode="single"
         selectedKeys={labelSorting ? [labelSorting.id] : []}
       >
         {sortingItems}
-      </ContextMenu>
-    </ContextMenuTrigger>
+      </ContextMenuView>
+    </ContextMenuTriggerView>
   );
 };

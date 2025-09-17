@@ -99,7 +99,6 @@ export class RemoteColumnLayoutElement extends FlowRemoteElement<RemoteColumnLay
       l: {},
       lang: {},
       m: {},
-      mergeInParentContext: {},
       nonce: {},
       part: {},
       popover: {},

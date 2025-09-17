@@ -8,9 +8,6 @@ export { type RemoteContextMenuTriggerElement } from "@mittwald/flow-remote-elem
 export const ContextMenuTrigger = createFlowRemoteComponent(
   "flr-context-menu-trigger",
   "ContextMenuTrigger",
-  {
-    clearPropsContext: false,
-  },
   RemoteContextMenuTriggerElement,
   {
     slotProps: {

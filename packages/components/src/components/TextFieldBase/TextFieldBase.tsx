@@ -4,7 +4,6 @@ import * as Aria from "react-aria-components";
 import styles from "../FormField/FormField.module.scss";
 import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
-import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import { FieldError } from "@/components/FieldError";
 import { FieldDescription } from "@/components/FieldDescription";
@@ -72,26 +71,24 @@ export const TextFieldBase: FC<TextFieldBaseProps> = (props) => {
       : {};
 
   return (
-    <ClearPropsContext>
-      <Aria.TextField
-        ref={ref}
-        {...rest}
-        className={rootClassName}
-        onChange={handleOnChange}
-        {...propsWithOptionalStringValue}
-      >
-        <PropsContextProvider props={propsContext}>
-          {children}
-        </PropsContextProvider>
-        {input}
-        {showCharacterCount && (
-          <FieldDescription className={styles.fieldDescription}>
-            {charactersCountDescription}
-          </FieldDescription>
-        )}
-        <FieldError className={styles.fieldError} />
-      </Aria.TextField>
-    </ClearPropsContext>
+    <Aria.TextField
+      ref={ref}
+      {...rest}
+      className={rootClassName}
+      onChange={handleOnChange}
+      {...propsWithOptionalStringValue}
+    >
+      <PropsContextProvider props={propsContext}>
+        {children}
+      </PropsContextProvider>
+      {input}
+      {showCharacterCount && (
+        <FieldDescription className={styles.fieldDescription}>
+          {charactersCountDescription}
+        </FieldDescription>
+      )}
+      <FieldError className={styles.fieldError} />
+    </Aria.TextField>
   );
 };
 

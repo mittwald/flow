@@ -8,9 +8,6 @@ export { type RemoteXAxisElement } from "@mittwald/flow-remote-elements";
 export const XAxis = createFlowRemoteComponent(
   "flr-x-axis",
   "XAxis",
-  {
-    clearPropsContext: false,
-  },
   RemoteXAxisElement,
   {
     slotProps: {

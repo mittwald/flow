@@ -1,5 +1,4 @@
 import type { PropsWithChildren, ReactNode } from "react";
-import React from "react";
 import * as Aria from "react-aria-components";
 import {
   flowComponent,
@@ -19,10 +18,7 @@ export interface TimeFieldProps<T extends Aria.TimeValue = Aria.TimeValue>
   errorMessage?: ReactNode;
 }
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const TimeField = flowComponent("TimeField", (props) => {
   const { children, errorMessage, className, ref, ...rest } = props;
 

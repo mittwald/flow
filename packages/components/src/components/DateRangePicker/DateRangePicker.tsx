@@ -1,5 +1,4 @@
 import type { PropsWithChildren, ReactNode } from "react";
-import React from "react";
 import styles from "../FormField/FormField.module.scss";
 import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
@@ -22,10 +21,7 @@ export interface DateRangePickerProps<T extends Aria.DateValue = Aria.DateValue>
   errorMessage?: ReactNode;
 }
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const DateRangePicker = flowComponent("DateRangePicker", (props) => {
   const { children, className, errorMessage, onChange, ref, ...rest } = props;
 

@@ -11,6 +11,7 @@ export const MenuTrigger: FC<MenuTriggerProps> = flowComponent(
   (props) => {
     return <Aria.MenuTrigger {...props} />;
   },
+  { type: "provider" },
 );
 
 export default MenuTrigger;

@@ -1,6 +1,2 @@
-export {
-  ClearPropsContext,
-  type ClearPropsContextProps,
-} from "./ClearPropsContext";
-export * from "./components/ClearPropsContextContent";
-export { default } from "./ClearPropsContext";
+export * from "./ClearPropsContext";
+export * from "./view";

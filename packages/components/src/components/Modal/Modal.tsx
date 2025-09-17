@@ -1,5 +1,4 @@
 import type { PropsWithChildren, ReactNode } from "react";
-import React from "react";
 import styles from "./Modal.module.scss";
 import clsx from "clsx";
 import {
@@ -74,30 +73,23 @@ export const Modal = flowComponent("Modal", (props) => {
     </>
   );
 
+  const nestedHeadingLevel = 3;
+
+  const nestedHeadingProps: PropsContext = {
+    Heading: { level: nestedHeadingLevel },
+    Section: { Heading: { level: nestedHeadingLevel } },
+  };
+
   const propsContext: PropsContext = {
     Content: {
-      clearPropsContext: true,
+      ...nestedHeadingProps,
       className: styles.content,
-      Section: {
-        Heading: {
-          level: 3,
-        },
-        Header: {
-          Heading: {
-            level: 3,
-          },
-        },
-      },
     },
     ColumnLayout: {
+      ...nestedHeadingProps,
       l: [2, 1],
       m: [1],
       className: styles.columnLayout,
-      Section: {
-        Heading: {
-          level: 3,
-        },
-      },
       AccentBox: { className: styles.accentBox, color: "neutral" },
     },
     Heading: {

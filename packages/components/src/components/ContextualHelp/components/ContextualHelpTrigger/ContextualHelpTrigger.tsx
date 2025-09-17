@@ -35,12 +35,13 @@ export const ContextualHelpTrigger = flowComponent(
         {...triggerProps}
         component={Aria.DialogTrigger}
       >
-        <PropsContextProvider props={propsContext} mergeInParentContext>
+        <PropsContextProvider props={propsContext}>
           {children}
         </PropsContextProvider>
       </OverlayTrigger>
     );
   },
+  { type: "provider" },
 );
 
 export default ContextualHelpTrigger;
