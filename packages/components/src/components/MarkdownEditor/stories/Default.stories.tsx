@@ -67,6 +67,7 @@ export const WithForm: Story = {
         </Field>
         <br />
         <Button type="submit">Submit</Button>
+        <Button onPress={() => form.reset()}>Reset</Button>
       </Form>
     );
   },

@@ -45,6 +45,7 @@ import {
   Policy,
 } from "@/integrations/@mittwald/password-tools-js";
 import { usePolicyValidationResult } from "@/components/PasswordCreationField/lib/usePolicyValidationResult";
+import { useManagedValue } from "@/lib/hooks/useManagedValue";
 
 export interface PasswordCreationFieldProps
   extends PropsWithChildren<
@@ -77,14 +78,11 @@ export const PasswordCreationField = flowComponent(
       className,
       ref,
       isDisabled,
-      onChange: onChangeFromProps,
       onValidationResult,
       isInvalid: invalidFromProps,
       validationPolicy:
         validationPolicyFromProps = defaultPasswordCreationPolicy,
       isRequired,
-      value: valueFromProps,
-      defaultValue,
       ...rest
     } = props;
 
@@ -95,12 +93,7 @@ export const PasswordCreationField = flowComponent(
       [validationPolicyFromProps],
     );
 
-    const isControlled = typeof valueFromProps !== "undefined";
-    const hasDefaultValue = typeof defaultValue !== "undefined";
-    const [internalValue, setInternalValue] = useState(
-      hasDefaultValue ? defaultValue : "",
-    );
-    const value = isControlled ? valueFromProps : internalValue;
+    const { value, handleOnChange } = useManagedValue(props);
     const deferredValue = useDeferredValue(value);
 
     const [isPasswordRevealed, setIsPasswordRevealed] = useState(false);
@@ -175,21 +168,11 @@ export const PasswordCreationField = flowComponent(
       }));
     };
 
-    const onChangeHandler = (value: string) => {
-      if (onChangeFromProps) {
-        onChangeFromProps(value);
-      }
-
-      if (!isControlled) {
-        setInternalValue(() => value);
-      }
-    };
-
     const onPasswordGenerateHandler: ActionFn = async () => {
       const generatedPassword = await generatePassword(validationPolicy);
       setOptimisticPolicyValidationResult();
       setIsPasswordRevealed(true);
-      onChangeHandler(generatedPassword);
+      handleOnChange(generatedPassword);
     };
 
     const onPasswordPasteHandler = (event: ClipboardEvent) => {
@@ -265,7 +248,7 @@ export const PasswordCreationField = flowComponent(
             {...rest}
             value={value}
             type={isPasswordRevealed ? "text" : "password"}
-            onChange={onChangeHandler}
+            onChange={handleOnChange}
             onPaste={onPasswordPasteHandler}
             className={clsx(className, formFieldStyles.formField)}
             isDisabled={isDisabled}
