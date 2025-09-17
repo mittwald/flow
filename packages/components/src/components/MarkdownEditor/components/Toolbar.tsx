@@ -18,17 +18,17 @@ import {
   ModeButton,
   type ModeButtonProps,
 } from "@/components/MarkdownEditor/components/ModeButton";
+import type { ButtonProps } from "@/components/Button";
 
-interface Props
-  extends ModeButtonProps,
-    Pick<ToolBarButtonProps, "onToolPressed" | "isDisabled"> {}
+interface ToolbarProps extends Pick<ButtonProps, "isDisabled"> {
+  currentMode: ModeButtonProps["currentMode"];
+  onModeChange: ModeButtonProps["onChange"];
+  onToolPressed: ToolBarButtonProps["onPress"];
+}
 
-export const Toolbar: FC<Props> = (props) => {
-  const sharedToolButtonProps: Pick<
-    ToolBarButtonProps,
-    "onToolPressed" | "isDisabled"
-  > = {
-    onToolPressed: props.onToolPressed,
+export const Toolbar: FC<ToolbarProps> = (props) => {
+  const sharedToolButtonProps: Partial<ToolBarButtonProps> = {
+    onPress: props.onToolPressed,
     isDisabled: props.isDisabled || props.currentMode === "preview",
   };
 
@@ -81,7 +81,7 @@ export const Toolbar: FC<Props> = (props) => {
       </div>
 
       <ModeButton
-        onModeChange={props.onModeChange}
+        onChange={props.onModeChange}
         currentMode={props.currentMode}
         isDisabled={props.isDisabled}
       />

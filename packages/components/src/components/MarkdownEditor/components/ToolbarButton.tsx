@@ -7,11 +7,11 @@ import locales from "../locales/*.locale.json";
 export interface ToolBarButtonProps
   extends Pick<ButtonProps, "isDisabled" | "children"> {
   type: InsertType;
-  onToolPressed?: (type: InsertType) => void;
+  onPress?: (type: InsertType) => void;
 }
 
 export const ToolbarButton: FC<ToolBarButtonProps> = (props) => {
-  const { children, type, onToolPressed, ...rest } = props;
+  const { children, type, onPress, ...rest } = props;
 
   const stringFormatter = useLocalizedStringFormatter(locales);
 
@@ -22,7 +22,7 @@ export const ToolbarButton: FC<ToolBarButtonProps> = (props) => {
       size="s"
       variant="plain"
       color="dark"
-      onPress={() => onToolPressed?.(type)}
+      onPress={() => onPress?.(type)}
     >
       {children}
     </Button>

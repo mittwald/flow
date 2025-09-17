@@ -7,11 +7,11 @@ import styles from "../MarkdownEditor.module.scss";
 
 export interface ModeButtonProps extends Pick<ButtonProps, "isDisabled"> {
   currentMode: MarkdownEditorMode;
-  onModeChange?: (newMode: MarkdownEditorMode) => void;
+  onChange?: (newMode: MarkdownEditorMode) => void;
 }
 
 export const ModeButton: FC<ModeButtonProps> = (props) => {
-  const { currentMode, onModeChange, ...rest } = props;
+  const { currentMode, onChange, ...rest } = props;
 
   const stringFormatter = useLocalizedStringFormatter(locales);
   const otherMode = currentMode === "editor" ? "preview" : "editor";
@@ -23,7 +23,7 @@ export const ModeButton: FC<ModeButtonProps> = (props) => {
       variant="plain"
       color="dark"
       onPress={() => {
-        onModeChange?.(otherMode);
+        onChange?.(otherMode);
       }}
       {...rest}
     >
