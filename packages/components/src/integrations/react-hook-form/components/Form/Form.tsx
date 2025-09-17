@@ -1,4 +1,3 @@
-import { SubmitButtonStateProvider } from "@/integrations/react-hook-form/components/ActionGroupWrapper/SubmitButtonStateProvider";
 import { FormContextProvider } from "@/integrations/react-hook-form/components/context/formContext";
 import {
   type ComponentProps,
@@ -8,16 +7,18 @@ import {
   type PropsWithChildren,
   useId,
   useMemo,
-  useRef,
 } from "react";
-import type { FieldValues, UseFormReturn } from "react-hook-form";
+import type {
+  FieldValues,
+  SubmitHandler,
+  UseFormReturn,
+} from "react-hook-form";
 import { FormProvider as RhfFormContextProvider } from "react-hook-form";
-import { AfterFormSubmitEffect } from "../AfterFormSubmitEffect/AfterFormSubmitEffect";
 import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import { Action } from "@/components/Action";
+import { useRegisterActionStateContext } from "@/integrations/react-hook-form/components/Form/lib/useRegisterActionStateContext";
 
-export type FormOnSubmitHandler<F extends FieldValues> = Parameters<
-  UseFormReturn<F>["handleSubmit"]
->[0];
+export type FormOnSubmitHandler<F extends FieldValues> = SubmitHandler<F>;
 
 type FormComponentType = ComponentType<
   PropsWithChildren<{
@@ -48,9 +49,8 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
   } = props;
 
   const formId = useId();
-  const isAsyncSubmit = useRef(false);
-  const submitHandlerResultRef = useRef<unknown>(null);
   const FormViewComponent = useMemo(() => FormView, [formId]);
+  const { action, registerSubmitResult } = useRegisterActionStateContext(form);
 
   const handleOnSubmit = (e?: FormEvent<HTMLFormElement> | F) => {
     const { isSubmitting, isValidating } = form.control._formState;
@@ -64,12 +64,9 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
       return;
     }
 
-    submitHandlerResultRef.current = undefined;
-
     form.handleSubmit((values) => {
       const result = onSubmit(values, formEvent);
-      isAsyncSubmit.current = result instanceof Promise;
-      submitHandlerResultRef.current = result;
+      registerSubmitResult(result);
       return result;
     })(formEvent);
   };
@@ -104,7 +101,7 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
     >
       <RhfFormContextProvider {...form}>
         <FormContextProvider value={{ form, id: formId }}>
-          <SubmitButtonStateProvider isAsyncSubmit={isAsyncSubmit}>
+          <Action actionModel={action}>
             <FormViewComponent
               {...formProps}
               id={formId}
@@ -112,10 +109,7 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
             >
               {children}
             </FormViewComponent>
-          </SubmitButtonStateProvider>
-          <AfterFormSubmitEffect
-            submitHandlerResultRef={submitHandlerResultRef}
-          />
+          </Action>
         </FormContextProvider>
       </RhfFormContextProvider>
     </PropsContextProvider>
