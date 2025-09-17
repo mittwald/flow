@@ -1,6 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { CodeBlock } from "@/components/CodeBlock";
+import { Text } from "@/components/Text";
+import { dummyText } from "@/lib/dev/dummyText";
+import { Color } from "@/components/Color";
 
 const meta: Meta<typeof CodeBlock> = {
   title: "Content/CodeBlock",
@@ -46,4 +49,19 @@ export const Light: Story = {
   globals: {
     backgrounds: "dark",
   },
+};
+
+export const WithChildren: Story = {
+  render: (props) => (
+    <CodeBlock {...props}>
+      <Text>{dummyText.short}</Text>
+      <br />
+      <Text>
+        <Color color="lilac">{dummyText.short}</Color>
+      </Text>
+      <br />
+      <Text>{dummyText.short}</Text>
+      <br />
+    </CodeBlock>
+  ),
 };
