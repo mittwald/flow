@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import type { FC, PropsWithChildren } from "react";
 import React from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import type { PropsWithClassName } from "@/lib/types/props";
@@ -6,7 +6,7 @@ import clsx from "clsx";
 import { CopyButton } from "@/components/CopyButton";
 import styles from "./CodeBlock.module.scss";
 
-export interface CodeBlockProps extends PropsWithClassName {
+export interface CodeBlockProps extends PropsWithClassName, PropsWithChildren {
   /** Adds a copy icon to the code block to copy its content. */
   copyable?: boolean;
   /** The color of the code block. @default "default" */
@@ -50,23 +50,35 @@ export interface CodeBlockProps extends PropsWithClassName {
 
 /** @flr-generate all */
 export const CodeBlock: FC<CodeBlockProps> = (props) => {
-  const { code, className, copyable, color = "default", ...rest } = props;
+  const {
+    code,
+    className,
+    copyable,
+    color = "default",
+    children,
+    ...rest
+  } = props;
 
   const rootClassName = clsx(styles.codeBlock, styles[color], className);
 
   return (
     <div className={rootClassName}>
-      <SyntaxHighlighter
-        customStyle={{
-          background: "none",
-          padding: "none",
-          margin: "none",
-        }}
-        useInlineStyles={false}
-        {...rest}
-      >
-        {code}
-      </SyntaxHighlighter>
+      {children && <pre>{children}</pre>}
+
+      {!children && (
+        <SyntaxHighlighter
+          customStyle={{
+            background: "none",
+            padding: "none",
+            margin: "none",
+          }}
+          useInlineStyles={false}
+          {...rest}
+        >
+          {code}
+        </SyntaxHighlighter>
+      )}
+
       {copyable && (
         <CopyButton
           className={styles.copyButton}
