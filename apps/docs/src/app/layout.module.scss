@@ -18,10 +18,6 @@
   }
 
   .header {
-    position: sticky;
-    top: 0;
-    left: 0;
-    right: 0;
     padding-block: var(--layout-card--padding);
   }
 
@@ -53,11 +49,11 @@
 
   .mainNavigation {
     position: sticky;
-    top: var(--header-height);
+    top: var(--size-px--l);
     width: 300px;
     flex-shrink: 0;
     overflow: auto !important;
-    max-height: calc(100dvh - (var(--header-height) + var(--size-px--l)));
+    max-height: calc(100dvh - (var(--size-px--l) * 2));
   }
 
   .mainWrapper {
