@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "@mittwald/react-use-promise": "^3.0.4",
-    "axios": "^1.11.0",
+    "axios": "^1.12.2",
     "jose": "^6.0.12",
     "std-env": "^3.9.0",
     "zod": "^3.25.76"
