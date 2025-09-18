@@ -5,6 +5,7 @@ const baseConfig = z.object({
   userId: z.string(),
   extensionId: z.string(),
   extensionInstanceId: z.string(),
+  variantKey: z.string().optional(),
 });
 
 const contextParameters = z
