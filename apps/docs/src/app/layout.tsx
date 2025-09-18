@@ -18,6 +18,7 @@ import Footer from "@/app/_components/layout/Footer/Footer";
 import { Matomo } from "@/app/_components/Matomo";
 import { RouterProvider } from "@mittwald/flow-react-components/nextjs";
 import wave from "../../assets/flow-wave.svg";
+import Header from "@/app/_components/layout/Header";
 
 export const metadata: Metadata = {
   title: "Flow – mittwald Design System",
@@ -25,6 +26,7 @@ export const metadata: Metadata = {
 
 const RootLayout: FC<PropsWithChildren> = async (props) => {
   const bodyClassName = clsx("flow", styles.body);
+
   const docs = await MdxFileFactory.fromDir("src/content");
 
   return (
@@ -33,25 +35,16 @@ const RootLayout: FC<PropsWithChildren> = async (props) => {
         <RouterProvider>
           <Matomo />
           <NotificationProvider>
-            <header className={styles.header}>
-              <Image src={wave.src} className={styles.wave} />
-              <Link href="/" className={styles.homeLink}>
-                <Image src={logoMittwald.src} alt="mittwald Flow Logo" />
-              </Link>
-              <HeaderNavigation
-                className={styles.headerNavigation}
-                docs={docs.map((mdx) => mdx.serialize())}
-              />
-              <MobileNavigation
-                docs={docs.map((mdx) => mdx.serialize())}
-                className={styles.mobileNavigation}
-              />
-            </header>
-            <div className={styles.center}>
+            <Image src={wave.src} className={styles.wave} />
+
+            <Header docs={docs.map((mdx) => mdx.serialize())} />
+            <div className={styles.wrapper}>
               <MainNavigation docs={docs.map((mdx) => mdx.serialize())} />
-              <main className={styles.main}>{props.children}</main>
+              <div className={styles.mainWrapper}>
+                <main className={styles.main}>{props.children}</main>
+                <Footer />
+              </div>
             </div>
-            <Footer />
           </NotificationProvider>
         </RouterProvider>
       </body>
