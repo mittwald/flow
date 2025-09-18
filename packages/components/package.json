@@ -52,7 +52,8 @@
     "test": "exit 0",
     "test:browser": "exit 0",
     "test:compile": "tsc --noEmit",
-    "test:unit": "vitest run"
+    "test:unit": "vitest run",
+    "test:unit:dev": "vitest dev"
   },
   "dependencies": {
     "@internationalized/string-compiler": "^3.2.6",
