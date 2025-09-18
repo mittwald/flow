@@ -32,7 +32,15 @@ export interface AvatarProps
  * @flr-clear-props-context
  */
 export const Avatar = flowComponent("Avatar", (props) => {
-  const { children, className, color, size = "m", status, ref } = props;
+  const {
+    children,
+    className,
+    color,
+    size = "m",
+    status,
+    ref,
+    ...rest
+  } = props;
 
   const rootClassName = clsx(
     styles.avatar,
@@ -56,7 +64,7 @@ export const Avatar = flowComponent("Avatar", (props) => {
 
   return (
     <ClearPropsContext>
-      <div className={rootClassName} ref={ref}>
+      <div className={rootClassName} ref={ref} {...rest}>
         <PropsContextProvider props={propsContext}>
           {!status && children}
           {status && <AlertIcon className={styles.icon} status={status} />}
