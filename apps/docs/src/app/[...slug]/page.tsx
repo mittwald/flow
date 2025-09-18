@@ -1,12 +1,9 @@
 import TopContent from "@/app/_components/layout/TopContent/TopContent";
 import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
 import type { StaticParams } from "@/lib/mdx/MdxFile";
-import { LayoutCard } from "@mittwald/flow-react-components";
-import { Tabs } from "@mittwald/flow-react-components";
+import { LayoutCard, Tabs } from "@mittwald/flow-react-components";
 import React from "react";
 import MainContent from "@/app/_components/layout/MainContent/MainContent";
-import { Link } from "@mittwald/flow-react-components";
-import { IconExternalLink } from "@mittwald/flow-react-components";
 
 const contentFolder = "src/content";
 
@@ -50,7 +47,6 @@ export default async function Page(props: Props) {
     "guidelines",
   );
 
-  const component = indexMdxFile?.mdxSource.frontmatter.component;
   const showTabs = !!developMdxFile || !!guidelinesMdxFile;
 
   return (
@@ -63,7 +59,7 @@ export default async function Page(props: Props) {
         </LayoutCard>
       )}
       {overviewMdxFile && showTabs && (
-        <LayoutCard>
+        <LayoutCard style={{ flexGrow: 1 }}>
           <Tabs>
             {overviewMdxFile && (
               <MainContent
@@ -88,13 +84,6 @@ export default async function Page(props: Props) {
             )}
           </Tabs>
         </LayoutCard>
-      )}
-      {component && (
-        <Link
-          href={`https://github.com/mittwald/flow/issues/new?title=Feedback%20on%20${component}%20component`}
-        >
-          Feedback geben <IconExternalLink />
-        </Link>
       )}
     </>
   );
