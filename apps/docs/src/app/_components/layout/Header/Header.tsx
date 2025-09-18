@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import styles from "../../../layout.module.scss";
-import { LayoutCard, Link, Image } from "@mittwald/flow-react-components";
+import { Image, Link } from "@mittwald/flow-react-components";
 import logoMittwald from "../../../../../assets/flow-logo.svg";
 import HeaderNavigation from "@/app/_components/layout/HeaderNavigation";
 import { MdxFile, type SerializedMdxFile } from "@/lib/mdx/MdxFile";

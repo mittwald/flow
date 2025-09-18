@@ -2,18 +2,11 @@ import "@mittwald/flow-react-components/all.css";
 import "./global.scss";
 import type { Metadata } from "next";
 import { type FC, type PropsWithChildren } from "react";
-import HeaderNavigation from "@/app/_components/layout/HeaderNavigation/HeaderNavigation";
 import clsx from "clsx";
 import styles from "./layout.module.scss";
 import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
-import logoMittwald from "../../assets/flow-logo.svg";
 import MainNavigation from "@/app/_components/layout/MainNavigation";
-import MobileNavigation from "@/app/_components/layout/MobileNavigation/MobileNavigation";
-import {
-  Image,
-  Link,
-  NotificationProvider,
-} from "@mittwald/flow-react-components";
+import { Image, NotificationProvider } from "@mittwald/flow-react-components";
 import Footer from "@/app/_components/layout/Footer/Footer";
 import { Matomo } from "@/app/_components/Matomo";
 import { RouterProvider } from "@mittwald/flow-react-components/nextjs";
