@@ -8,9 +8,6 @@ export { type RemoteCopyButtonElement } from "@mittwald/flow-remote-elements";
 export const CopyButton = createFlowRemoteComponent(
   "flr-copy-button",
   "CopyButton",
-  {
-    clearPropsContext: true,
-  },
   RemoteCopyButtonElement,
   {
     slotProps: {

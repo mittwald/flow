@@ -71,34 +71,36 @@ export function Form<F extends FieldValues>(props: FormProps<F>) {
     })(formEvent);
   };
 
+  const readonlyPropsContext = {
+    isReadOnly: true,
+  } as const;
+
   const propsContext: PropsContext = {
-    SearchField: { isReadOnly: true },
-    TextField: { isReadOnly: true },
-    TextArea: { isReadOnly: true },
-    MarkdownEditor: { isReadOnly: true },
-    Checkbox: { isReadOnly: true },
-    CheckboxGroup: { isReadOnly: true },
-    CheckboxButton: { isReadOnly: true },
-    FileField: { isReadOnly: true },
-    FileDropZone: { isReadOnly: true },
-    NumberField: { isReadOnly: true },
-    RadioGroup: { isReadOnly: true },
-    Switch: { isReadOnly: true },
-    Slider: { isReadOnly: true },
-    PasswordCreationField: { isReadOnly: true },
-    DatePicker: { isReadOnly: true },
-    DateRangePicker: { isReadOnly: true },
-    TimeField: { isReadOnly: true },
-    SegmentedControl: { isReadOnly: true },
-    Select: { isReadOnly: true },
-    ComboBox: { isReadOnly: true },
+    SearchField: readonlyPropsContext,
+    TextField: readonlyPropsContext,
+    TextArea: readonlyPropsContext,
+    MarkdownEditor: readonlyPropsContext,
+    Checkbox: readonlyPropsContext,
+    CheckboxGroup: readonlyPropsContext,
+    CheckboxButton: readonlyPropsContext,
+    FileField: readonlyPropsContext,
+    FileDropZone: readonlyPropsContext,
+    NumberField: readonlyPropsContext,
+    RadioGroup: readonlyPropsContext,
+    Switch: readonlyPropsContext,
+    Slider: readonlyPropsContext,
+    PasswordCreationField: readonlyPropsContext,
+    DatePicker: readonlyPropsContext,
+    DateRangePicker: readonlyPropsContext,
+    TimeField: readonlyPropsContext,
+    SegmentedControl: readonlyPropsContext,
+    Select: readonlyPropsContext,
+    ComboBox: readonlyPropsContext,
+    Button: readonlyPropsContext,
   };
 
   return (
-    <PropsContextProvider
-      props={isReadOnly ? propsContext : {}}
-      mergeInParentContext
-    >
+    <PropsContextProvider props={isReadOnly ? propsContext : {}}>
       <RhfFormContextProvider {...form}>
         <FormContextProvider value={{ form, id: formId }}>
           <Action actionModel={action}>

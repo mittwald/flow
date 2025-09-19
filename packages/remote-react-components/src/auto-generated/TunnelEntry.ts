@@ -8,9 +8,6 @@ export { type RemoteTunnelEntryElement } from "@mittwald/flow-remote-elements";
 export const TunnelEntry = createFlowRemoteComponent(
   "flr-tunnel-entry",
   "TunnelEntry",
-  {
-    clearPropsContext: true,
-  },
   RemoteTunnelEntryElement,
   {
     slotProps: {

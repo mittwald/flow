@@ -8,9 +8,6 @@ export { type RemotePasswordCreationFieldElement } from "@mittwald/flow-remote-e
 export const PasswordCreationField = createFlowRemoteComponent(
   "flr-password-creation-field",
   "PasswordCreationField",
-  {
-    clearPropsContext: true,
-  },
   RemotePasswordCreationFieldElement,
   {
     slotProps: {

@@ -4,12 +4,12 @@ import {
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
 import type { ComponentType, PropsWithChildren } from "react";
-import React from "react";
 import { render } from "@testing-library/react";
 import { HTMLDivElement as HappyHTMLDivElement } from "happy-dom";
 import type { FlowComponentName } from "@/components/propTypes";
 import { propsContextSupportingComponents } from "@/components/propTypes";
 import { PropsContextProvider } from "@/lib/propsContext";
+import { ClearPropsContext } from "@/components/ClearPropsContext";
 
 const getComponentName = (name: string): FlowComponentName => {
   propsContextSupportingComponents.push(name as FlowComponentName);
@@ -117,7 +117,6 @@ describe("propsContext", () => {
                 prop: "bar",
               },
             }}
-            mergeInParentContext
           >
             <TestComponent2 />
           </PropsContextProvider>
@@ -138,17 +137,18 @@ describe("propsContext", () => {
     expect(actual).toBe(expected);
   });
 
-  test("prop is taken from outer context when 'mergeInParentContext' is enabled", () => {
+  test("prop is taken from outer context when ___inherit is true", () => {
     const actual = render(
       <PropsContextProvider
         props={{
           [testComponent2Name]: {
             prop: "foo",
+            ___inherit: true,
           },
         }}
       >
         <TestComponent1>
-          <PropsContextProvider props={{}} mergeInParentContext>
+          <PropsContextProvider props={{}}>
             <TestComponent2 />
           </PropsContextProvider>
         </TestComponent1>
@@ -168,7 +168,7 @@ describe("propsContext", () => {
     expect(actual).toBe(expected);
   });
 
-  test("prop is NOT taken from outer context when 'mergeInParentContext' is disabled", () => {
+  test("prop is NOT taken from outer context when ___inherit is NOT true", () => {
     const actual = render(
       <PropsContextProvider
         props={{
@@ -181,6 +181,37 @@ describe("propsContext", () => {
           <PropsContextProvider props={{}}>
             <TestComponent2 />
           </PropsContextProvider>
+        </TestComponent1>
+      </PropsContextProvider>,
+    ).container.innerHTML;
+
+    const expected = render(
+      <div data-testid="test1">
+        <div data-testid="children1">
+          <div data-testid="test2" />
+        </div>
+      </div>,
+    ).container.innerHTML;
+
+    expect(actual).toBe(expected);
+  });
+
+  test("prop is NOT taken from outer context when ___inherit is true but ClearPropsContext is used", () => {
+    const actual = render(
+      <PropsContextProvider
+        props={{
+          [testComponent2Name]: {
+            prop: "foo",
+            ___inherit: true,
+          },
+        }}
+      >
+        <TestComponent1>
+          <ClearPropsContext>
+            <PropsContextProvider props={{}}>
+              <TestComponent2 />
+            </PropsContextProvider>
+          </ClearPropsContext>
         </TestComponent1>
       </PropsContextProvider>,
     ).container.innerHTML;
@@ -226,7 +257,7 @@ describe("propsContext", () => {
     expect(actual).toBe(expected);
   });
 
-  test("child component context can be overridden by inner context", () => {
+  test("parent context with higher nesting level overrides child context", () => {
     const actual = render(
       <PropsContextProvider
         props={{
@@ -244,7 +275,6 @@ describe("propsContext", () => {
                 prop: "bar",
               },
             }}
-            mergeInParentContext
           >
             <TestComponent2 />
           </PropsContextProvider>
@@ -256,7 +286,7 @@ describe("propsContext", () => {
       <div data-testid="test1">
         <div data-testid="children1">
           <div data-testid="test2">
-            <div data-testid="prop">bar</div>
+            <div data-testid="prop">foo</div>
           </div>
         </div>
       </div>,

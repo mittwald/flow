@@ -8,9 +8,6 @@ export { type RemoteImageElement } from "@mittwald/flow-remote-elements";
 export const Image = createFlowRemoteComponent(
   "flr-image",
   "Image",
-  {
-    clearPropsContext: true,
-  },
   RemoteImageElement,
   {
     slotProps: {

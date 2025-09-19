@@ -8,9 +8,6 @@ export { type RemoteChartTooltipElement } from "@mittwald/flow-remote-elements";
 export const ChartTooltip = createFlowRemoteComponent(
   "flr-chart-tooltip",
   "ChartTooltip",
-  {
-    clearPropsContext: false,
-  },
   RemoteChartTooltipElement,
   {
     slotProps: {

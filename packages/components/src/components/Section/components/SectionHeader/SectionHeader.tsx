@@ -37,12 +37,6 @@ export const SectionHeader: FC<SectionHeaderProps> = (props) => {
         tunnelId: null,
       },
     },
-    ModalTrigger: {
-      tunnelId: "actions",
-      Button: {
-        tunnelId: null,
-      },
-    },
     ContextualHelpTrigger: {
       tunnelId: "actions",
       Button: {

@@ -1,5 +1,5 @@
 import type { FC, PropsWithChildren, Ref } from "react";
-import React, { type ChangeEvent } from "react";
+import { type ChangeEvent } from "react";
 import * as Aria from "react-aria-components";
 import { useObjectRef } from "@react-aria/utils";
 import type { PropsContext } from "@/lib/propsContext";
@@ -43,7 +43,7 @@ export const FileInput: FC<FileInputProps> = (props) => {
   };
 
   return (
-    <PropsContextProvider props={propsContext} mergeInParentContext>
+    <PropsContextProvider props={propsContext}>
       {children}
       <Aria.Input
         style={{ display: "none" }}

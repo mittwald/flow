@@ -33,7 +33,7 @@ export const Chat: FC<ChatProps> = (props) => {
   };
 
   return (
-    <PropsContextProvider props={propsContext} mergeInParentContext>
+    <PropsContextProvider props={propsContext}>
       <div style={{ height }} className={rootClassName}>
         <TunnelProvider>
           <div className={styles.messageThreadContainer}>

@@ -1,8 +1,6 @@
 import type { ComponentProps, PropsWithChildren } from "react";
-import React from "react";
 import styles from "./Navigation.module.scss";
 import clsx from "clsx";
-import { type PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import type { PropsWithClassName } from "@/lib/types/props";
 import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
@@ -10,7 +8,7 @@ import {
   flowComponent,
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
-import ClearPropsContext from "@/components/ClearPropsContext";
+import type { ComponentPropsContext } from "@/lib/propsContext/types";
 
 export interface NavigationProps
   extends PropsWithChildren<ComponentProps<"nav">>,
@@ -23,34 +21,39 @@ export const Navigation = flowComponent("Navigation", (props) => {
 
   const rootClassName = clsx(styles.navigation, className);
 
-  const propsContext: PropsContext = {
-    Link: {
-      wrapWith: <li />,
-      className: styles.item,
-      unstyled: true,
-      Text: {
-        className: styles.text,
-      },
-      Icon: {
-        className: styles.icon,
-      },
-      tunnelId: "links",
+  const linkPropsContext: ComponentPropsContext<"Link"> = {
+    wrapWith: <li />,
+    className: styles.item,
+    unstyled: true,
+    Text: {
+      className: styles.text,
+    },
+    Icon: {
+      className: styles.icon,
     },
   };
 
   return (
-    <ClearPropsContext>
+    <PropsContextProvider
+      props={{
+        Link: {
+          ...linkPropsContext,
+          tunnelId: "links",
+        },
+        NavigationGroup: {
+          Link: linkPropsContext,
+        },
+      }}
+    >
       <TunnelProvider>
         <nav className={rootClassName} role="navigation" {...rest} ref={ref}>
-          <PropsContextProvider props={propsContext} mergeInParentContext>
-            <ul>
-              <TunnelExit id="links" />
-            </ul>
-            {children}
-          </PropsContextProvider>
+          <ul>
+            <TunnelExit id="links" />
+          </ul>
+          {children}
         </nav>
       </TunnelProvider>
-    </ClearPropsContext>
+    </PropsContextProvider>
   );
 });
 

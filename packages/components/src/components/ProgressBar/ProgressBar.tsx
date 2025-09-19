@@ -1,6 +1,5 @@
 import * as Aria from "react-aria-components";
 import type { PropsWithChildren } from "react";
-import React from "react";
 import styles from "./ProgressBar.module.scss";
 import clsx from "clsx";
 import type { PropsWithStatus } from "@/lib/types/props";
@@ -37,10 +36,7 @@ export interface ProgressBarProps
   showLegend?: boolean;
 }
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const ProgressBar = flowComponent("ProgressBar", (props) => {
   const {
     children,

@@ -8,9 +8,6 @@ export { type RemoteSearchFieldElement } from "@mittwald/flow-remote-elements";
 export const SearchField = createFlowRemoteComponent(
   "flr-search-field",
   "SearchField",
-  {
-    clearPropsContext: true,
-  },
   RemoteSearchFieldElement,
   {
     slotProps: {

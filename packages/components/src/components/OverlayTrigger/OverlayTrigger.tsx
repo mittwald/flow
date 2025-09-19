@@ -1,5 +1,4 @@
 import type { ComponentType, FC, PropsWithChildren, ReactNode } from "react";
-import React from "react";
 import { OverlayController } from "@/lib/controller";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
@@ -47,7 +46,7 @@ export const OverlayTrigger: FC<Props> = (props) => {
 
   return (
     <OverlayContextProvider type={overlayType} controller={overlayController}>
-      <PropsContextProvider props={propsContext} mergeInParentContext>
+      <PropsContextProvider props={propsContext}>
         <AriaOverlayTrigger isOpen={isOpen}>{children}</AriaOverlayTrigger>
       </PropsContextProvider>
     </OverlayContextProvider>

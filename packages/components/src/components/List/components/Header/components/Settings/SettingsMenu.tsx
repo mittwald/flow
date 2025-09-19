@@ -1,6 +1,5 @@
 import type { FC } from "react";
 import { useList } from "@/components/List/hooks/useList";
-import ContextMenu, { ContextMenuTrigger } from "@/components/ContextMenu";
 import locales from "../../../../locales/*.locale.json";
 import ButtonView from "@/views/ButtonView";
 import { IconSettings } from "@/components/Icon/components/icons";
@@ -12,6 +11,8 @@ import { useAvailableViewModes } from "@/components/List/components/Header/lib";
 import { SortingMenuItem } from "@/components/List/components/Header/components/Settings/SortingMenuItem";
 import SeparatorView from "@/views/SeparatorView";
 import ContextMenuSectionView from "@/views/ContextMenuSectionView";
+import ContextMenuTriggerView from "@/views/ContextMenuTriggerView";
+import ContextMenuView from "@/views/ContextMenuView";
 
 export const SettingsMenu: FC = () => {
   const list = useList();
@@ -34,7 +35,7 @@ export const SettingsMenu: FC = () => {
   }
 
   return (
-    <ContextMenuTrigger>
+    <ContextMenuTriggerView>
       <ButtonView
         className={styles.mobile}
         variant="outline"
@@ -44,7 +45,7 @@ export const SettingsMenu: FC = () => {
         <IconSettings />
       </ButtonView>
 
-      <ContextMenu>
+      <ContextMenuView>
         {viewModeItems.length > 1 && (
           <ContextMenuSectionView
             selectionMode="single"
@@ -70,7 +71,7 @@ export const SettingsMenu: FC = () => {
             {sortingItems}
           </ContextMenuSectionView>
         )}
-      </ContextMenu>
-    </ContextMenuTrigger>
+      </ContextMenuView>
+    </ContextMenuTriggerView>
   );
 };

@@ -1,7 +1,7 @@
-import Wrap from "@/components/Wrap";
-import { ClearPropsContext } from "@/index/internal";
+import { usePropsContextLevel } from "@/lib/propsContext/inherit/propsContextLevel";
+import { PropsContextLevelProvider } from "@/lib/propsContext/inherit/PropsContextLevelProvider";
 import mergePropsContext from "@/lib/propsContext/mergePropsContext";
-import { propsContext, useContextProps } from "@/lib/propsContext/propsContext";
+import { propsContext, usePropsContext } from "@/lib/propsContext/propsContext";
 import type { PropsContext as PropsContextShape } from "@/lib/propsContext/types";
 import type { DependencyList, FC, PropsWithChildren } from "react";
 import { useMemo } from "react";
@@ -9,42 +9,47 @@ import { useMemo } from "react";
 interface Props extends PropsWithChildren {
   props: PropsContextShape;
   dependencies?: DependencyList;
-  mergeInParentContext?: boolean;
+  resetPropsContextLevel?: boolean;
 }
 
 export const PropsContextProvider: FC<Props> = (props) => {
   const {
     props: providedProps,
     dependencies = [],
-    mergeInParentContext = false,
+    resetPropsContextLevel = true,
     children,
   } = props;
 
-  const parentPropsContext = useContextProps();
+  const parentPropsContext = usePropsContext();
   const memoizedProps = useMemo(() => providedProps, dependencies);
+  const propsContextLevel = usePropsContextLevel();
+  const propsContextLevelToUse = resetPropsContextLevel ? 0 : propsContextLevel;
 
   const propsWithParentPropsContext = useMemo(
     () =>
-      mergeInParentContext
-        ? mergePropsContext(parentPropsContext, providedProps)
-        : providedProps,
-    [memoizedProps, parentPropsContext, mergeInParentContext],
+      mergePropsContext(
+        parentPropsContext,
+        memoizedProps,
+        propsContextLevelToUse,
+      ),
+    [memoizedProps, parentPropsContext, propsContextLevelToUse],
   );
 
-  /**
-   * <ClearPropsContext> is used here, because it has remote support, and
-   * clearing context (!mergeInParentContext) is also applied while rendering on
-   * host side.
-   */
-  return (
-    <Wrap if={!mergeInParentContext}>
-      <ClearPropsContext>
-        <propsContext.Provider value={propsWithParentPropsContext}>
-          {children}
-        </propsContext.Provider>
-      </ClearPropsContext>
-    </Wrap>
+  let component = (
+    <propsContext.Provider value={propsWithParentPropsContext}>
+      {children}
+    </propsContext.Provider>
   );
+
+  if (resetPropsContextLevel) {
+    component = (
+      <PropsContextLevelProvider mode="reset">
+        {component}
+      </PropsContextLevelProvider>
+    );
+  }
+
+  return component;
 };
 
 export default PropsContextProvider;

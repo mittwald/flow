@@ -8,9 +8,6 @@ export { type RemoteAutocompleteElement } from "@mittwald/flow-remote-elements";
 export const Autocomplete = createFlowRemoteComponent(
   "flr-autocomplete",
   "Autocomplete",
-  {
-    clearPropsContext: false,
-  },
   RemoteAutocompleteElement,
   {
     slotProps: {

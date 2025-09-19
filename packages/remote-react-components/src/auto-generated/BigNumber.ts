@@ -8,9 +8,6 @@ export { type RemoteBigNumberElement } from "@mittwald/flow-remote-elements";
 export const BigNumber = createFlowRemoteComponent(
   "flr-big-number",
   "BigNumber",
-  {
-    clearPropsContext: false,
-  },
   RemoteBigNumberElement,
   {
     slotProps: {

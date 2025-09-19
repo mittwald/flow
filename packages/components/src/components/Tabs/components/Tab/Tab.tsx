@@ -1,5 +1,5 @@
 import type { FC, PropsWithChildren, ReactNode } from "react";
-import React, { useId } from "react";
+import { useId } from "react";
 import type { TabPanelRenderProps } from "react-aria-components";
 import * as Aria from "react-aria-components";
 import styles from "./Tab.module.scss";
@@ -14,10 +14,7 @@ export interface TabProps
   extends Omit<Aria.TabPanelProps, "children">,
     PropsWithChildren {}
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const Tab: FC<TabProps> = (props) => {
   const { children, className, id: idFromProps, ...rest } = props;
 

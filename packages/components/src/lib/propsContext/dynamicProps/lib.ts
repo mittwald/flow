@@ -1,4 +1,7 @@
-import type { DynamicProp } from "@/lib/propsContext/dynamicProps/types";
+import {
+  dynamicPropKey,
+  type DynamicProp,
+} from "@/lib/propsContext/dynamicProps/types";
 import type {
   FlowComponentName,
   FlowComponentPropName,
@@ -9,7 +12,7 @@ export function isDynamicProp<
   P extends FlowComponentPropName<C>,
 >(something: unknown): something is DynamicProp<C, P> {
   return (
-    !!something && typeof something === "object" && "__dynamicProp" in something
+    !!something && typeof something === "object" && dynamicPropKey in something
   );
 }
 

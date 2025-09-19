@@ -1,5 +1,4 @@
 import type { PropsWithChildren, ReactNode } from "react";
-import React from "react";
 import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
@@ -22,10 +21,7 @@ export interface DatePickerProps<T extends Aria.DateValue = Aria.DateValue>
   errorMessage?: ReactNode;
 }
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const DatePicker = flowComponent("DatePicker", (props) => {
   const { children, className, errorMessage, onChange, ref, ...rest } = props;
 

@@ -8,9 +8,6 @@ export { type RemoteComboBoxElement } from "@mittwald/flow-remote-elements";
 export const ComboBox = createFlowRemoteComponent(
   "flr-combo-box",
   "ComboBox",
-  {
-    clearPropsContext: true,
-  },
   RemoteComboBoxElement,
   {
     slotProps: {

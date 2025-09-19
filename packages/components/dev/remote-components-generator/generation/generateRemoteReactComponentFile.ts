@@ -1,5 +1,4 @@
 import type { ComponentDoc } from "react-docgen-typescript";
-import { checkTagIsSet } from "../lib/docTags";
 import { remoteComponentBaseNameOf } from "../lib/remoteComponentBaseNameOf";
 import { remoteComponentNameOf } from "../lib/remoteComponentNameOf";
 import { remoteElementTagNameOf } from "../lib/remoteElementTagNameOf";
@@ -10,7 +9,6 @@ export function generateRemoteReactComponentFile(c: ComponentDoc) {
   const t = {
     remoteComponentName: remoteComponentNameOf(c),
     name: remoteComponentBaseNameOf(c),
-    clearPropsContext: checkTagIsSet(c.tags, "clear-props-context"),
     events: Object.keys(componentProps)
       .sort()
       .filter((propName) => propName.startsWith("on"))
@@ -30,9 +28,6 @@ export function generateRemoteReactComponentFile(c: ComponentDoc) {
     export const ${t.name} = createFlowRemoteComponent(
       "${remoteElementTagNameOf(c)}", 
       "${t.name}", 
-      {
-        clearPropsContext: ${t.clearPropsContext ? "true" : "false"},
-      },
       ${t.remoteComponentName}, {
       slotProps: {
         wrapper: "flr-slot-root-wrapper",
