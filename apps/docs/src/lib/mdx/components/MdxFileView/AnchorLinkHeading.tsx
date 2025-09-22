@@ -5,22 +5,25 @@ import {
   Heading,
   IconLink,
 } from "@mittwald/flow-react-components";
-import type { FC, PropsWithChildren } from "react";
+import { type FC, type PropsWithChildren, useEffect, useState } from "react";
 import styles from "@/lib/mdx/components/MdxFileView/customComponents.module.css";
 import { onlyText } from "react-children-utilities";
-import copy from "copy-to-clipboard";
 
 export const AnchorLinkHeading: FC<PropsWithChildren> = (props) => {
   const { children } = props;
 
-  const url = window.location;
+  const [url, setUrl] = useState<string>("");
+
+  useEffect(() => {
+    setUrl(window.location.origin + window.location.pathname);
+  }, []);
 
   const slug = onlyText(children)
     .replace(/[^a-zA-Z]/g, "")
     .toLowerCase();
 
   const copyValue = () => {
-    copy(`${url.origin + url.pathname}#${slug}`);
+    navigator.clipboard.writeText(`${url}#${slug}`);
   };
 
   return (
