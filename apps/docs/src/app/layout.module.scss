@@ -54,6 +54,7 @@
     flex-shrink: 0;
     overflow: auto !important;
     max-height: calc(100dvh - (var(--size-px--l) * 2));
+    margin-bottom: var(--size-px--l);
   }
 
   .mainWrapper {
