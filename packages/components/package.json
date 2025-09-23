@@ -161,7 +161,7 @@
     "next": "*",
     "react": "^19",
     "react-dom": "^19",
-    "react-hook-form": "*"
+    "react-hook-form": "^7.55.0"
   },
   "peerDependenciesMeta": {
     "@internationalized/date": {
