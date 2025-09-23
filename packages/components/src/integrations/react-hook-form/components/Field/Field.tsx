@@ -11,6 +11,7 @@ import {
 import FieldErrorView from "@/views/FieldErrorView";
 import { useLocalizedStringFormatter } from "react-aria";
 import locales from "./locales/*.locale.json";
+import { inheritProps } from "@/lib/propsContext/inherit/types";
 
 export interface FieldProps<T extends FieldValues>
   extends Omit<ControllerProps<T>, "render">,
@@ -60,7 +61,7 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
   const value = formContext.form.watch(name) ?? controller.field.value;
 
   const fieldProps = {
-    ____inherit: true,
+    ...inheritProps,
     ...controller.field,
     value,
     name,
