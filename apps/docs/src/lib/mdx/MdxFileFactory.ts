@@ -29,20 +29,31 @@ export class MdxFileFactory {
     fileName?: string,
   ): Promise<MdxFile | undefined> {
     const all = await MdxFileFactory.fromDir(dir, fileName);
-    const matching = all.find((mdx) => mdx.matchesSlugs(params.slug));
+
+    const matching = all.find((mdx) =>
+      mdx.matchesSlugs(
+        "slug" in params ? params.slug : [params.group, params.component],
+      ),
+    );
     if (!matching) {
       return undefined;
     }
     return matching;
   }
 
-  public static async generateStaticParams(
-    contentFolder: string,
-  ): Promise<StaticParams[]> {
+  public static async generateStaticParams(contentFolder: string) {
     const mdxFiles = await MdxFileFactory.fromDir(contentFolder);
-    return mdxFiles.map((mdx) => ({
-      slug: mdx.slugs,
-    }));
+
+    return mdxFiles.map((mdx) =>
+      contentFolder.includes("03-components")
+        ? {
+            group: mdx.slugs[0],
+            component: mdx.slugs[1],
+          }
+        : {
+            slug: mdx.slugs,
+          },
+    );
   }
 
   public static async generateMetadata(
@@ -63,9 +74,23 @@ export class MdxFileFactory {
     const slugs = relativeFilename.split("/").slice(0, -1);
 
     const mdxSource = await MdxFileFactory.getMdxSource(filename);
+
+    const anchors = MdxFileFactory.getAnchors(filename);
+
     const examples = MdxFileFactory.getExamples(filename);
 
-    return new MdxFile(relativeFilename, slugs, mdxSource, examples);
+    return new MdxFile(relativeFilename, slugs, mdxSource, examples, anchors);
+  }
+
+  private static getAnchors(filename: string) {
+    const fileContent = jetpack.read(filename);
+    if (!fileContent) {
+      throw new Error(`Could not read file: ${filename}`);
+    }
+    return fileContent
+      .split("\n")
+      .filter((line) => line.startsWith("# ") && !line.startsWith("##"))
+      .map((line) => line.substring(2).trim());
   }
 
   private static async getMdxSource(

@@ -3,6 +3,7 @@
 .tabPanel {
   opacity: 0;
   height: 0;
+  overflow: hidden;
 
   &[id] {
     padding: var(--layout-card--padding);

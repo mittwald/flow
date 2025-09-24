@@ -19,6 +19,7 @@ export const Tabs = flowComponent("Tabs", (props) => {
     children,
     className,
     defaultSelectedKey,
+    selectedKey,
     disabledKeys,
     ref,
     onSelectionChange,
@@ -27,7 +28,7 @@ export const Tabs = flowComponent("Tabs", (props) => {
 
   const rootClassName = clsx(styles.tabs, className);
   const [selection, setSelection] = useState<Aria.Key | undefined>(
-    defaultSelectedKey,
+    selectedKey ?? defaultSelectedKey,
   );
 
   return (

@@ -44,8 +44,8 @@
   align-items: flex-end;
 }
 
-.mainNavigation {
-  padding-inline: var(--size-px--l);
+.mainNavigation,
+.anchorNavigation {
   width: 285px;
   flex-shrink: 0;
 }
@@ -68,7 +68,7 @@
   min-width: 0;
 }
 
-.tabContent {
+.mainContent {
   display: flex;
   flex-direction: column;
   row-gap: var(--section--spacing);
@@ -88,7 +88,8 @@
   }
 
   .mainNavigation.mainNavigation,
-  .headerNavigation {
+  .headerNavigation,
+  .anchorNavigation {
     display: none;
   }
 
