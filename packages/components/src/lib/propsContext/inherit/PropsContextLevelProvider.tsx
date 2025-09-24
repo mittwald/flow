@@ -3,26 +3,28 @@ import {
   usePropsContextLevel,
 } from "@/lib/propsContext/inherit/propsContextLevel";
 import type { PropsContextLevelMode } from "@/lib/propsContext/inherit/types";
-import { type FC, type PropsWithChildren } from "react";
+import { memo, type FC, type PropsWithChildren } from "react";
 
 export interface PropsContextLevelProviderProps extends PropsWithChildren {
   mode: PropsContextLevelMode;
 }
 
-export const PropsContextLevelProvider: FC<PropsContextLevelProviderProps> = (
-  props,
-) => {
-  const { mode, children } = props;
+const Provider = memo(propsContextLevelContext.Provider);
+Provider.displayName = "PropsContextLevelContextProviderInner";
 
-  const newLevel = usePropsContextLevel(mode);
+export const PropsContextLevelProvider: FC<PropsContextLevelProviderProps> =
+  memo((props) => {
+    const { mode, children } = props;
 
-  if (mode === "keep") {
-    return children;
-  }
+    const newLevel = usePropsContextLevel(mode);
 
-  return (
-    <propsContextLevelContext.Provider value={newLevel}>
-      {children}
-    </propsContextLevelContext.Provider>
-  );
-};
+    if (mode === "keep") {
+      return children;
+    }
+
+    return <Provider value={newLevel}>{children}</Provider>;
+  });
+
+PropsContextLevelProvider.displayName = "PropsContextLevelProvider";
+
+export default PropsContextLevelProvider;

@@ -7,6 +7,7 @@ import {
   type FieldValues,
   useController,
   type UseFormReturn,
+  useWatch,
 } from "react-hook-form";
 import FieldErrorView from "@/views/FieldErrorView";
 import { useLocalizedStringFormatter } from "react-aria";
@@ -58,7 +59,11 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
    * always in sync with the form state. See:
    * https://react-hook-form.com/api/usecontroller/controller/
    */
-  const value = formContext.form.watch(name) ?? controller.field.value;
+  const value =
+    useWatch({
+      control: formContext.form.control,
+      name,
+    }) ?? controller.field.value;
 
   const fieldProps = {
     ...inheritProps,
