@@ -8,8 +8,6 @@ import {
   Tab,
   Tabs,
   TabTitle,
-  Link,
-  Navigation,
 } from "@mittwald/flow-react-components";
 import AnchorNavigation from "@/app/_components/layout/AnchorNavigation";
 
