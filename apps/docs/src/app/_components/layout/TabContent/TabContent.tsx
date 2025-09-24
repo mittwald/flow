@@ -12,7 +12,7 @@ import {
 import AnchorNavigation from "@/app/_components/layout/AnchorNavigation";
 
 interface Props {
-  mdxFile?: MdxFile;
+  mdxFile: MdxFile;
   activeTab: "overview" | "develop" | "guidelines";
 }
 
@@ -25,7 +25,7 @@ export const TabContent: FC<Props> = (props) => {
     </div>
   );
 
-  const path = `/03-components/${mdxFile?.slugs[0]}/${mdxFile?.slugs[1]}`;
+  const path = `/03-components/${mdxFile.slugs[0]}/${mdxFile.slugs[1]}`;
 
   return (
     <Flex columnGap="m">
@@ -45,12 +45,11 @@ export const TabContent: FC<Props> = (props) => {
           </Tab>
         </Tabs>
       </LayoutCard>
-      {mdxFile?.anchors && (
-        <AnchorNavigation
-          anchors={mdxFile.anchors}
-          title={activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
-        />
-      )}
+
+      <AnchorNavigation
+        anchors={mdxFile.anchors}
+        title={activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
+      />
     </Flex>
   );
 };

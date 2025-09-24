@@ -33,7 +33,9 @@ export default async function Page(props: Props) {
     <>
       {indexMdxFile && <TopContent mdxFile={indexMdxFile} />}
 
-      <TabContent mdxFile={developMdxFile} activeTab="develop" />
+      {developMdxFile && (
+        <TabContent mdxFile={developMdxFile} activeTab="develop" />
+      )}
     </>
   );
 }
