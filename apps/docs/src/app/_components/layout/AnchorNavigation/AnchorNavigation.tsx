@@ -1,8 +1,8 @@
 import {
-  LayoutCard,
-  Navigation,
-  Link,
   Heading,
+  LayoutCard,
+  Link,
+  Navigation,
   Section,
 } from "@mittwald/flow-react-components";
 import React, { type FC } from "react";
@@ -11,10 +11,11 @@ import styles from "../../../layout.module.scss";
 interface Props {
   anchors: string[];
   title: string;
+  currentPath: string;
 }
 
 export const AnchorNavigation: FC<Props> = (props) => {
-  const { anchors, title } = props;
+  const { anchors, title, currentPath } = props;
 
   if (anchors.length === 0) {
     return null;
@@ -25,9 +26,15 @@ export const AnchorNavigation: FC<Props> = (props) => {
       <Section>
         <Heading level={4}>{title}</Heading>
         <Navigation>
-          {anchors.map((a) => (
-            <Link key={a}>{a}</Link>
-          ))}
+          {anchors.map((a) => {
+            const slug = a.replace(/[^a-zA-Z]/g, "").toLowerCase();
+
+            return (
+              <Link href={`${currentPath}#${slug}`} key={a}>
+                {a}
+              </Link>
+            );
+          })}
         </Navigation>
       </Section>
     </LayoutCard>

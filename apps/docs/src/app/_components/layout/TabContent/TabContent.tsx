@@ -47,6 +47,7 @@ export const TabContent: FC<Props> = (props) => {
       </LayoutCard>
 
       <AnchorNavigation
+        currentPath={`${path}/${activeTab}`}
         anchors={mdxFile.anchors}
         title={activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
       />
