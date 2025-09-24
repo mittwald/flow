@@ -51,7 +51,7 @@
   .anchorNavigation {
     position: sticky;
     top: var(--size-px--l);
-    width: 300px;
+    width: 280px;
     flex-shrink: 0;
     overflow: auto !important;
     max-height: calc(100dvh - (var(--size-px--l) * 2));
