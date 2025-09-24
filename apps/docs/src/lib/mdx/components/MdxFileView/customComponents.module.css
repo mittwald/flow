@@ -13,7 +13,7 @@
 }
 
 .preCopyButton {
-  position: absolute;
+  position: absolute !important;
   top: var(--size-px--s);
   right: var(--size-px--s);
 }
