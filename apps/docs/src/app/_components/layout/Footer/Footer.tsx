@@ -1,12 +1,6 @@
 "use client";
-import {
-  ColumnLayout,
-  Image,
-  LayoutCard,
-  Link,
-} from "@mittwald/flow-react-components";
+import { ColumnLayout, Image, Link } from "@mittwald/flow-react-components";
 import type { FC } from "react";
-import feedback from "../../../../../assets/Styleguide-Footer_Feedback.svg";
 import logoMittwald from "../../../../../assets/mittwald-logo-footer.svg";
 import { FooterSection } from "./components/FooterSection";
 import styles from "./footer.module.scss";
