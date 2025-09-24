@@ -1,16 +1,88 @@
 .rating {
-  display: flex;
-
-  .star {
-    color: var(--rating--star-color);
+  .ratingSegments {
+    display: flex;
+    width: fit-content;
+    order: 2;
   }
-  .starFilled {
-    color: var(--rating--star-filled-color);
+
+  .ratingSegment {
+    display: grid;
+    grid-template-areas: "star";
+
+    .star,
+    .starFilled {
+      grid-area: star;
+      transition-property: opacity, transform;
+      transition-duration: var(--transition--duration--default);
+    }
+
+    .star {
+      opacity: 0;
+      color: var(--rating--star-color);
+    }
+    .starFilled {
+      opacity: 1;
+      color: var(--rating--star-filled-color);
+    }
+  }
+
+  &:not(:has(.ratingSegments:hover)),
+  &[data-readonly] {
+    .ratingSegment {
+      &.current {
+        ~ .ratingSegment {
+          .star {
+            opacity: 1;
+          }
+          .starFilled {
+            opacity: 0;
+          }
+        }
+      }
+    }
+    &:not(:has(.current)) {
+      .ratingSegment {
+        .star {
+          opacity: 1;
+        }
+        .starFilled {
+          opacity: 0;
+        }
+      }
+    }
+  }
+
+  &:not([data-readonly]) {
+    &.ratingSegments:hover {
+      .ratingSegment {
+        .star {
+          opacity: 0;
+        }
+
+        .starFilled {
+          opacity: 1;
+        }
+      }
+    }
+    .ratingSegment:hover {
+      transform: scale(1.2);
+      transform-origin: center;
+
+      ~ .ratingSegment {
+        .star {
+          opacity: 1;
+        }
+
+        .starFilled {
+          opacity: 0;
+        }
+      }
+    }
   }
 
   @mixin size($size) {
-    &.size-#{$size} {
-      column-gap: var(--rating--spacing--#{$size});
+    &.size-#{$size} .ratingSegment {
+      padding: var(--rating--spacing--#{$size});
     }
   }
 

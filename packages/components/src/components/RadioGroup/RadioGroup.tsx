@@ -21,11 +21,7 @@ export interface RadioGroupProps
 export const RadioGroup = flowComponent("RadioGroup", (props) => {
   const { children, className, s, m, l, ref, ...rest } = props;
 
-  const rootClassName = clsx(
-    formFieldStyles.formField,
-    styles.radioGroupContainer,
-    className,
-  );
+  const rootClassName = clsx(formFieldStyles.formField, className);
 
   const propsContext: PropsContext = {
     Label: {

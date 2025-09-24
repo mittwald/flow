@@ -123,6 +123,7 @@ export function Field<T extends FieldValues>(props: FieldProps<T>) {
       ...fieldPropsWithoutValue,
       selectedKey: value,
     },
+    Rating: fieldProps,
   };
 
   return (

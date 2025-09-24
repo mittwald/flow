@@ -1,44 +1,91 @@
-import React, { type FC } from "react";
-import { IconStar, IconStarFilled } from "@/components/Icon/components/icons";
+import React, { type PropsWithChildren } from "react";
 import styles from "./Rating.module.scss";
-import type { PropsWithClassName } from "@/lib/types/props";
 import clsx from "clsx";
-import { useLocalizedStringFormatter } from "react-aria";
-import locales from "./locales/*.locale.json";
+import * as Aria from "react-aria-components";
+import { RatingSegment } from "@/components/Rating/components/RatingSegment";
+import {
+  flowComponent,
+  type FlowComponentProps,
+} from "@/lib/componentFactory/flowComponent";
+import { type PropsContext, PropsContextProvider } from "@/lib/propsContext";
+import formFieldStyles from "@/components/FormField/FormField.module.scss";
+import { useForm } from "react-hook-form";
+import { Form } from "@/integrations/react-hook-form";
+import { sleep } from "@/lib/promises/sleep";
+import { TextField } from "@/components/TextField";
+import { Label } from "@/components/Label";
+import { Button } from "@/components/Button";
 
-export interface RatingProps extends PropsWithClassName {
+export interface RatingProps
+  extends FlowComponentProps,
+    PropsWithChildren,
+    Omit<Aria.RadioGroupProps, "children" | "value" | "defaultValue"> {
   /** The value sets the amount of filled stars. @default: 0 */
-  value?: 0 | 1 | 2 | 3 | 4 | 5;
+  value?: number;
+  /** The defaultValue sets the amount of default filled stars. @default: 0 */
+  defaultValue?: number;
   /** The size of the component. @default: "m" */
   size?: "s" | "m";
 }
 
 /** @flr-generate all */
-export const Rating: FC<RatingProps> = (props) => {
-  const { value = 0, size = "m" } = props;
+export const Rating = flowComponent("Rating", (props) => {
+  const {
+    value,
+    defaultValue = 0,
+    size = "m",
+    className,
+    children,
+    ...rest
+  } = props;
 
-  const rootClassName = clsx(styles.rating, styles[`size-${size}`]);
+  const rootClassName = clsx(
+    styles.rating,
+    formFieldStyles.formField,
+    styles[`size-${size}`],
+    className,
+  );
 
-  const stringFormatter = useLocalizedStringFormatter(locales);
-
-  const stars = Array(5)
-    .fill("")
-    .map((_, index) =>
-      index < value ? (
-        <IconStarFilled aria-hidden size={size} className={styles.starFilled} />
-      ) : (
-        <IconStar aria-hidden size={size} className={styles.star} />
-      ),
-    );
+  const propsContext: PropsContext = {
+    Label: {
+      className: formFieldStyles.label,
+    },
+    FieldDescription: {
+      className: formFieldStyles.fieldDescription,
+    },
+    FieldError: {
+      className: formFieldStyles.customFieldError,
+    },
+  };
 
   return (
-    <div
-      aria-label={stringFormatter.format(`rating.${value}`)}
+    <Aria.RadioGroup
       className={rootClassName}
+      defaultValue={defaultValue.toString()}
+      value={value || value === 0 ? value.toString() : undefined}
+      {...rest}
     >
-      {stars}
-    </div>
+      {(renderProps) => (
+        <PropsContextProvider props={propsContext}>
+          {children}
+          <div className={styles.ratingSegments}>
+            {Array(5)
+              .fill("")
+              .map((_, index) => (
+                <RatingSegment
+                  key={index}
+                  index={index}
+                  selectedValue={parseInt(
+                    renderProps.state.selectedValue ?? "0",
+                  )}
+                  size={size}
+                />
+              ))}
+          </div>
+        </PropsContextProvider>
+      )}
+    </Aria.RadioGroup>
   );
-};
+});
 
 export default Rating;

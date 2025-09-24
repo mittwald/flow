@@ -79,6 +79,7 @@ import type { NavigationGroupProps } from "@/components/Navigation/components/Na
 import type { AutocompleteProps } from "@/components/Autocomplete/Autocomplete";
 import type { OptionsProps } from "@/components/Options/Options";
 import type { MarkdownEditorProps } from "@/components/MarkdownEditor";
+import type { RatingProps } from "@/components/Rating";
 
 export * from "./types";
 
@@ -145,6 +146,7 @@ export interface FlowComponentPropsTypes {
   Radio: RadioProps;
   RadioButton: RadioButtonProps;
   RadioGroup: RadioGroupProps;
+  Rating: RatingProps;
   SearchField: SearchFieldProps;
   Section: SectionProps;
   Segment: SegmentProps;
@@ -226,6 +228,7 @@ const propsContextSupportingComponentsMap: Record<
   ProgressBar: true,
   RadioButton: true,
   RadioGroup: true,
+  Rating: true,
   SearchField: true,
   Section: true,
   Segment: true,
