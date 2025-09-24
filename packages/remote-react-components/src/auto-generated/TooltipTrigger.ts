@@ -8,9 +8,6 @@ export { type RemoteTooltipTriggerElement } from "@mittwald/flow-remote-elements
 export const TooltipTrigger = createFlowRemoteComponent(
   "flr-tooltip-trigger",
   "TooltipTrigger",
-  {
-    clearPropsContext: false,
-  },
   RemoteTooltipTriggerElement,
   {
     slotProps: {

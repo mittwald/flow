@@ -1,15 +1,15 @@
 import type { FC } from "react";
-import React, { useId } from "react";
+import { useId } from "react";
 import * as Aria from "react-aria-components";
 import styles from "./TabList.module.scss";
 import { TunnelExit } from "@mittwald/react-tunnel";
 import { useObserveOverflow } from "@/lib/hooks/dom/useObserveOverflow";
-import { ContextMenu } from "@/components/ContextMenu/ContextMenu";
-import { ContextMenuTrigger } from "@/components/ContextMenu/components/ContextMenuTrigger";
 import { Button } from "@/components/Button";
 import { IconContextMenu } from "@/components/Icon/components/icons";
 import clsx from "clsx";
 import TabTitleCollapsed from "@/components/Tabs/components/TabTitle/TabTitleCollapsed";
+import ContextMenuTriggerView from "@/views/ContextMenuTriggerView";
+import ContextMenuView from "@/views/ContextMenuView";
 
 interface Props {
   selection: Aria.Key | undefined;
@@ -40,7 +40,7 @@ export const TabList: FC<Props> = (props) => {
   );
 
   const contextMenuWhenCollapsed = isCollapsed && (
-    <ContextMenuTrigger>
+    <ContextMenuTriggerView>
       <Button
         variant="soft"
         className={styles.contextMenuButton}
@@ -50,15 +50,15 @@ export const TabList: FC<Props> = (props) => {
         <IconContextMenu />
       </Button>
 
-      <ContextMenu
+      <ContextMenuView
         disabledKeys={disabledKeys}
         selectedKeys={selection ? [selection] : undefined}
         selectionMode="navigation"
         onAction={(key) => handleContextMenuSelectionChange(key)}
       >
         <TunnelExit id="ContextMenuItems" />
-      </ContextMenu>
-    </ContextMenuTrigger>
+      </ContextMenuView>
+    </ContextMenuTriggerView>
   );
 
   return (

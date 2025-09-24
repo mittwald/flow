@@ -8,9 +8,6 @@ export { type RemoteCartesianChartElement } from "@mittwald/flow-remote-elements
 export const CartesianChart = createFlowRemoteComponent(
   "flr-cartesian-chart",
   "CartesianChart",
-  {
-    clearPropsContext: false,
-  },
   RemoteCartesianChartElement,
   {
     slotProps: {

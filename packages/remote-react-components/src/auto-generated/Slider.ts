@@ -8,9 +8,6 @@ export { type RemoteSliderElement } from "@mittwald/flow-remote-elements";
 export const Slider = createFlowRemoteComponent(
   "flr-slider",
   "Slider",
-  {
-    clearPropsContext: true,
-  },
   RemoteSliderElement,
   {
     slotProps: {

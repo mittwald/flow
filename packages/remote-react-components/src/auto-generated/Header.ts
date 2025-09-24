@@ -8,9 +8,6 @@ export { type RemoteHeaderElement } from "@mittwald/flow-remote-elements";
 export const Header = createFlowRemoteComponent(
   "flr-header",
   "Header",
-  {
-    clearPropsContext: false,
-  },
   RemoteHeaderElement,
   {
     slotProps: {

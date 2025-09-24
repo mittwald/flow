@@ -3,9 +3,10 @@ import type { Filter } from "@/components/List/model/filter/Filter";
 import { IconFilter } from "@/components/Icon/components/icons";
 import TextView from "@/views/TextView";
 import ButtonView from "@/views/ButtonView";
-import ContextMenu, { ContextMenuTrigger } from "@/components/ContextMenu";
 import { FilterMenuItem } from "@/components/List/components/Header/components/Filters/FilterMenuItem";
 import styles from "@/components/List/components/Header/Header.module.css";
+import ContextMenuTriggerView from "@/views/ContextMenuTriggerView";
+import ContextMenuView from "@/views/ContextMenuView";
 
 interface Props {
   filter: Filter<never, never, never>;
@@ -23,7 +24,7 @@ export const FilterMenu: FC<Props> = (props) => {
   const activeFilterKeys = values.filter((v) => v.isActive).map((v) => v.id);
 
   return (
-    <ContextMenuTrigger>
+    <ContextMenuTriggerView>
       <ButtonView
         className={styles.desktop}
         variant="outline"
@@ -32,12 +33,12 @@ export const FilterMenu: FC<Props> = (props) => {
         <TextView>{name ?? property}</TextView>
         <IconFilter />
       </ButtonView>
-      <ContextMenu
+      <ContextMenuView
         selectionMode={mode === "one" ? "single" : "multiple"}
         selectedKeys={activeFilterKeys}
       >
         {filterItems}
-      </ContextMenu>
-    </ContextMenuTrigger>
+      </ContextMenuView>
+    </ContextMenuTriggerView>
   );
 };

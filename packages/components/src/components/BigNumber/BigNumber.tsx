@@ -19,7 +19,7 @@ export const BigNumber: FC<BigNumberProps> = (props) => {
   };
 
   return (
-    <PropsContextProvider props={propsContext} mergeInParentContext>
+    <PropsContextProvider props={propsContext}>
       <span className={rootClassName}>{children}</span>
     </PropsContextProvider>
   );

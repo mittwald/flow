@@ -1,5 +1,4 @@
 import type { PropsWithChildren } from "react";
-import React from "react";
 import styles from "./Button.module.scss";
 import * as Aria from "react-aria-components";
 import clsx from "clsx";
@@ -12,7 +11,6 @@ import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 import { useAriaAnnounceActionState } from "@/components/Action/lib/ariaLive";
-import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
 
 export interface ButtonProps
   extends PropsWithChildren<Aria.ButtonProps>,
@@ -57,15 +55,13 @@ const disablePendingProps = (props: ButtonProps) => {
     props.onPressUp = undefined;
     props.onKeyDown = undefined;
     props.onKeyUp = undefined;
+    props.type = "button";
   }
 
   return props;
 };
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const Button = flowComponent("Button", (props) => {
   props = disablePendingProps(props);
 
@@ -154,26 +150,24 @@ export const Button = flowComponent("Button", (props) => {
   const isStringContent = typeof children === "string";
 
   return (
-    <ClearPropsContext>
-      <Aria.Button
-        className={rootClassName}
-        ref={ref}
-        slot={slot}
-        data-readonly={isReadOnly}
-        {...restProps}
-      >
-        <PropsContextProvider props={propsContext}>
-          <Wrap if={!unstyled}>
-            <span className={styles.content}>
-              <Wrap if={isStringContent}>
-                <Text className={styles.text}>{children}</Text>
-              </Wrap>
-            </span>
-          </Wrap>
-        </PropsContextProvider>
-        {stateIcon}
-      </Aria.Button>
-    </ClearPropsContext>
+    <Aria.Button
+      className={rootClassName}
+      ref={ref}
+      slot={slot}
+      data-readonly={isReadOnly}
+      {...restProps}
+    >
+      <PropsContextProvider props={propsContext}>
+        <Wrap if={!unstyled}>
+          <span className={styles.content}>
+            <Wrap if={isStringContent}>
+              <Text className={styles.text}>{children}</Text>
+            </Wrap>
+          </span>
+        </Wrap>
+      </PropsContextProvider>
+      {stateIcon}
+    </Aria.Button>
   );
 });
 

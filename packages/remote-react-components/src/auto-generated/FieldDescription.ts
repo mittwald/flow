@@ -8,9 +8,6 @@ export { type RemoteFieldDescriptionElement } from "@mittwald/flow-remote-elemen
 export const FieldDescription = createFlowRemoteComponent(
   "flr-field-description",
   "FieldDescription",
-  {
-    clearPropsContext: true,
-  },
   RemoteFieldDescriptionElement,
   {
     slotProps: {

@@ -1,5 +1,4 @@
 import { type FC, type PropsWithChildren, useRef } from "react";
-import React from "react";
 import * as Aria from "react-aria-components";
 import { IllustratedMessage } from "@/components/IllustratedMessage";
 import type { PropsWithClassName } from "@/lib/types/props";
@@ -107,7 +106,7 @@ export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
         data-readonly={isReadOnly}
       >
         <IllustratedMessage color="dark">
-          <PropsContextProvider props={propsContext} mergeInParentContext>
+          <PropsContextProvider props={propsContext}>
             {children}
           </PropsContextProvider>
         </IllustratedMessage>

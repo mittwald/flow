@@ -8,9 +8,6 @@ export { type RemoteDonutChartElement } from "@mittwald/flow-remote-elements";
 export const DonutChart = createFlowRemoteComponent(
   "flr-donut-chart",
   "DonutChart",
-  {
-    clearPropsContext: false,
-  },
   RemoteDonutChartElement,
   {
     slotProps: {

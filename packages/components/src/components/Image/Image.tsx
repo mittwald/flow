@@ -1,6 +1,5 @@
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
-import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
 import clsx from "clsx";
 import type { ComponentProps } from "react";
 import styles from "./Image.module.scss";
@@ -17,10 +16,7 @@ export interface ImageProps
   aspectRatio?: number;
 }
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const Image = flowComponent("Image", (props) => {
   const {
     className,
@@ -41,14 +37,12 @@ export const Image = flowComponent("Image", (props) => {
   );
 
   return (
-    <ClearPropsContext>
-      <img
-        ref={ref}
-        className={rootClassName}
-        style={{ ...style, aspectRatio, width, height }}
-        {...rest}
-      />
-    </ClearPropsContext>
+    <img
+      ref={ref}
+      className={rootClassName}
+      style={{ ...style, aspectRatio, width, height }}
+      {...rest}
+    />
   );
 });
 

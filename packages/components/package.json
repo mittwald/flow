@@ -1,6 +1,6 @@
 {
   "name": "@mittwald/flow-react-components",
-  "version": "0.2.0-alpha.481",
+  "version": "0.2.0-alpha.485",
   "type": "module",
   "description": "A React implementation of Flow, mittwald’s design system",
   "homepage": "https://mittwald.github.io/flow",
@@ -161,7 +161,7 @@
     "next": "*",
     "react": "^19",
     "react-dom": "^19",
-    "react-hook-form": "*"
+    "react-hook-form": "^7.55.0"
   },
   "peerDependenciesMeta": {
     "@internationalized/date": {

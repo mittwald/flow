@@ -27,10 +27,7 @@ export interface FileFieldProps
   isReadOnly?: boolean;
 }
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const FileField = flowComponent("FileField", (props) => {
   const {
     children,

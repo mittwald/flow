@@ -6,7 +6,6 @@ import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 import { Tooltip, TooltipTrigger } from "@/components/Tooltip";
 import { onlyText } from "react-children-utilities";
-import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { Action } from "@/components/Action";
@@ -18,10 +17,7 @@ export interface CopyButtonProps
   text?: string;
 }
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const CopyButton = flowComponent("CopyButton", (props) => {
   const {
     text = "",
@@ -40,22 +36,20 @@ export const CopyButton = flowComponent("CopyButton", (props) => {
   };
 
   return (
-    <ClearPropsContext>
-      <TooltipTrigger>
-        <Action action={copyValue} showFeedback>
-          <Button
-            aria-label={tooltip}
-            {...buttonProps}
-            ref={ref}
-            variant={variant}
-            color={color}
-          >
-            <IconCopy />
-          </Button>
-        </Action>
-        <Tooltip>{tooltip}</Tooltip>
-      </TooltipTrigger>
-    </ClearPropsContext>
+    <TooltipTrigger>
+      <Action action={copyValue} showFeedback>
+        <Button
+          aria-label={tooltip}
+          {...buttonProps}
+          ref={ref}
+          variant={variant}
+          color={color}
+        >
+          <IconCopy />
+        </Button>
+      </Action>
+      <Tooltip>{tooltip}</Tooltip>
+    </TooltipTrigger>
   );
 });
 
