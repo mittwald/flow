@@ -1,12 +1,17 @@
 import type { StaticParams } from "@/lib/mdx/MdxFile";
 import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
 import TopContent from "@/app/_components/layout/TopContent/TopContent";
-import { LayoutCard } from "@mittwald/flow-react-components";
 import MainContent from "@/app/_components/layout/MainContent";
+import type { Metadata } from "next";
 
 const contentFolder = "src/content/02-foundations";
 export const generateStaticParams = async () => {
   return await MdxFileFactory.generateStaticParams(contentFolder);
+};
+
+export const generateMetadata = async (props: Props): Promise<Metadata> => {
+  const params = await props.params;
+  return await MdxFileFactory.generateMetadata(contentFolder, params);
 };
 
 interface Props {
