@@ -27,6 +27,25 @@
   margin-block: var(--size-px--m);
 }
 
+.anchorLinkHeading {
+  width: fit-content;
+  > span {
+    display: flex;
+    align-items: center;
+    column-gap: var(--size-rem--s);
+  }
+  .anchorButton {
+    opacity: 0;
+    transition-property: opacity;
+    transition-duration: var(--transition--duration--fast);
+  }
+  &:hover {
+    .anchorButton {
+      opacity: 1;
+    }
+  }
+}
+
 .doAndDontCode {
   margin-bottom: calc(var(--size-px--m) * -1);
   border-bottom: none;
