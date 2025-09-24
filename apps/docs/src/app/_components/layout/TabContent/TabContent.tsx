@@ -29,7 +29,7 @@ export const TabContent: FC<Props> = (props) => {
 
   return (
     <Flex columnGap="m">
-      <LayoutCard>
+      <LayoutCard className={styles.tabs}>
         <Tabs selectedKey={activeTab}>
           <Tab id="overview">
             <TabTitle href="/03-components/actions/action-group/overview">

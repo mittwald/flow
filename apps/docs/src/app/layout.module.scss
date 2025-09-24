@@ -68,6 +68,11 @@
   min-width: 0;
 }
 
+.tabs {
+  flex-grow: 1;
+  min-width: 0;
+}
+
 .mainContent {
   display: flex;
   flex-direction: column;
