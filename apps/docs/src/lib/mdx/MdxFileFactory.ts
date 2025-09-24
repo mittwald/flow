@@ -89,7 +89,7 @@ export class MdxFileFactory {
     }
     return fileContent
       .split("\n")
-      .filter((line) => line.startsWith("# ") && !line.startsWith("##"))
+      .filter((line) => line.startsWith("# "))
       .map((line) => line.substring(2).trim());
   }
 
