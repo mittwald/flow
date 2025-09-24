@@ -25,26 +25,22 @@ export const TabContent: FC<Props> = (props) => {
     </div>
   );
 
+  const path = `/03-components/${mdxFile?.slugs[0]}/${mdxFile?.slugs[1]}`;
+
   return (
     <Flex columnGap="m">
       <LayoutCard className={styles.tabs}>
         <Tabs selectedKey={activeTab}>
           <Tab id="overview">
-            <TabTitle href="/03-components/actions/action-group/overview">
-              Overview
-            </TabTitle>
+            <TabTitle href={`${path}/overview`}>Overview</TabTitle>
             {activeTab === "overview" && tabContent}
           </Tab>
           <Tab id="develop">
-            <TabTitle href="/03-components/actions/action-group/develop">
-              Develop
-            </TabTitle>
+            <TabTitle href={`${path}/develop`}>Develop</TabTitle>
             {activeTab === "develop" && tabContent}
           </Tab>
           <Tab id="guidelines">
-            <TabTitle href="/03-components/actions/action-group/guidelines">
-              Guidelines
-            </TabTitle>
+            <TabTitle href={`${path}/guidelines`}>Guidelines</TabTitle>
             {activeTab === "guidelines" && tabContent}
           </Tab>
         </Tabs>

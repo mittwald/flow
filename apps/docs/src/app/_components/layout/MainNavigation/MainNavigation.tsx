@@ -46,8 +46,14 @@ const NavigationLink: FC<NavigationLinkProps> = (props) => {
 
   return (
     <Link
-      href={treeItem.pathname}
-      aria-current={treeItem.pathname === currentPathname ? "page" : undefined}
+      href={
+        treeItem.pathname.includes("03-components")
+          ? `${treeItem.pathname}/overview`
+          : treeItem.pathname
+      }
+      aria-current={
+        currentPathname.includes(treeItem.pathname) ? "page" : undefined
+      }
     >
       {treeItem.getNavTitle()}
     </Link>
