@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.485](https://github.com/mittwald/flow/compare/0.2.0-alpha.484...0.2.0-alpha.485) (2025-09-24)
+
+**Note:** Version bump only for package @mittwald/flow-stylesheet
+
+# [0.2.0-alpha.484](https://github.com/mittwald/flow/compare/0.2.0-alpha.483...0.2.0-alpha.484) (2025-09-24)
+
+**Note:** Version bump only for package @mittwald/flow-stylesheet
+
 # [0.2.0-alpha.483](https://github.com/mittwald/flow/compare/0.2.0-alpha.482...0.2.0-alpha.483) (2025-09-23)
 
 **Note:** Version bump only for package @mittwald/flow-stylesheet

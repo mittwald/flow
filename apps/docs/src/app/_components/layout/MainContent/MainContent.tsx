@@ -1,5 +1,4 @@
-import type { FC } from "react";
-import React from "react";
+import React, { type FC } from "react";
 import type { MdxFile } from "@/lib/mdx/MdxFile";
 import MdxFileView from "@/lib/mdx/components/MdxFileView";
 import styles from "../../../layout.module.scss";

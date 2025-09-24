@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.485](https://github.com/mittwald/flow/compare/0.2.0-alpha.484...0.2.0-alpha.485) (2025-09-24)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.484](https://github.com/mittwald/flow/compare/0.2.0-alpha.483...0.2.0-alpha.484) (2025-09-24)
+
+### Bug Fixes
+
+* **PropsContext:** fixes props context not correctly merged ([#2003](https://github.com/mittwald/flow/issues/2003)) ([4d2a103](https://github.com/mittwald/flow/commit/4d2a1036937c7ca03589f54b3752f3904ed3e4bb))
+
 # [0.2.0-alpha.483](https://github.com/mittwald/flow/compare/0.2.0-alpha.482...0.2.0-alpha.483) (2025-09-23)
 
 **Note:** Version bump only for package @mittwald/flow-project

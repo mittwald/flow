@@ -15,7 +15,6 @@ import type { PropsWithTunnel } from "@/lib/types/props";
 import { TunnelEntry } from "@mittwald/react-tunnel";
 import SlotContextProvider from "@/lib/slotContext/SlotContextProvider";
 import { useProps } from "@/lib/hooks/useProps";
-import { mergeRefs } from "@react-aria/utils";
 import { useComponentPropsContext } from "@/lib/propsContext/propsContext";
 import { increaseNestingLevel } from "@/lib/propsContext/nestedPropsContext/lib";
 import ComponentPropsContextProviderView from "@/views/ComponentPropsContextProviderView";
@@ -64,15 +63,8 @@ export function flowComponent<C extends FlowComponentName>(
   const propsContextLevelMode: PropsContextLevelMode =
     type === "ui" ? "increment" : "keep";
 
-  function Component(propsFromArgument: Props) {
-    const { ref: refFromProps = null, ...props } = propsFromArgument;
-
-    const {
-      ref: refFromContext = null,
-      tunnelId,
-      wrapWith,
-      ...propsWithContext
-    } = useProps(
+  function Component(props: Props) {
+    const { tunnelId, wrapWith, ...propsWithContext } = useProps(
       componentName,
       props as FlowComponentPropsOfName<C>,
     ) as FlowComponentProps<RefType<FlowComponentPropsOfName<C>>>;
@@ -84,15 +76,11 @@ export function flowComponent<C extends FlowComponentName>(
     const componentProps = useComponentPropsContext(componentName) ?? {};
     increaseNestingLevel(componentProps);
 
-    const mergedRef = mergeRefs(refFromProps, refFromContext);
-    const propsWithRef = {
-      ...implementationTypeProps,
-      ref: mergedRef,
-    };
-
     ImplementationComponentType.displayName = `FlowComponentImpl(${componentName})`;
 
-    let element: ReactNode = <ImplementationComponentType {...propsWithRef} />;
+    let element: ReactNode = (
+      <ImplementationComponentType {...implementationTypeProps} />
+    );
 
     if (isRemoteComponent) {
       element = (
