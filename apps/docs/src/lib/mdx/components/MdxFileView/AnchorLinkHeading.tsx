@@ -8,6 +8,7 @@ import {
 import { type FC, type PropsWithChildren, useEffect, useState } from "react";
 import styles from "@/lib/mdx/components/MdxFileView/customComponents.module.css";
 import { onlyText } from "react-children-utilities";
+import slugify from "slugify";
 
 export const AnchorLinkHeading: FC<PropsWithChildren> = (props) => {
   const { children } = props;
@@ -18,9 +19,7 @@ export const AnchorLinkHeading: FC<PropsWithChildren> = (props) => {
     setUrl(window.location.origin + window.location.pathname);
   }, []);
 
-  const slug = onlyText(children)
-    .replace(/[^a-zA-Z]/g, "")
-    .toLowerCase();
+  const slug = slugify(onlyText(children), { lower: true, strict: true });
 
   const copyValue = () => {
     navigator.clipboard.writeText(`${url}#${slug}`);
