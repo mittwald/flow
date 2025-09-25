@@ -19,6 +19,7 @@ export type MarkdownEditorProps = TextAreaProps &
 export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
   const {
     isDisabled,
+    isReadOnly,
     children,
     className,
     rows,
@@ -41,7 +42,8 @@ export const MarkdownEditor = flowComponent("MarkdownEditor", (props) => {
   return (
     <TextArea
       {...rest}
-      isDisabled={isDisabled || mode === "preview"}
+      isReadOnly={isReadOnly || mode === "preview"}
+      isDisabled={isDisabled}
       className={rootClassName}
       ref={textAreaRef}
       value={value}
