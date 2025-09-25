@@ -65,22 +65,12 @@
   height: fit-content;
 }
 
-.mainWrapper {
-  display: flex;
-  flex-direction: column;
-  row-gap: var(--size-px--l);
-  flex-grow: 1;
-  min-width: 0;
-  width: 100%;
-  min-height: calc(100dvh - (var(--header-height) + var(--size-px--l)));
-  padding-bottom: var(--size-px--l);
-}
-
 .main {
   display: flex;
   flex-direction: column;
   row-gap: var(--size-px--m);
   flex-grow: 1;
+  min-width: 0;
 }
 
 .tabsContainer {
