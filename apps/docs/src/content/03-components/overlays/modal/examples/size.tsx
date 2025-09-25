@@ -192,7 +192,7 @@ export default () => {
               <Heading>Beschreibung</Heading>
               <Text>
                 Mit einem SFTP-Benutzer kannst du dich mit
-                deinem Projekt verbinden, um z. B. Dateien
+                deinem Projekt verbinden, um z. B. Dateien
                 hochzuladen.
               </Text>
               <ColumnLayout m={[1, 1]}>
