@@ -5,6 +5,7 @@
   padding: var(--layout-card--padding);
   display: flex;
   flex-direction: column;
+  min-width: 0;
 
   > .tabs {
     margin: calc(var(--layout-card--padding) * -1);
