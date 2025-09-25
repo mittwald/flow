@@ -42,6 +42,7 @@ export const DonutChartFill: FC<Props> = (props) => {
 
     return (
       <circle
+        key={i}
         cx={center}
         cy={center}
         r={radius}
