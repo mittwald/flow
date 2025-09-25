@@ -3,7 +3,7 @@
 Die List bildet den strukturierten Rahmen für sogenannte **ListItems**. Alternativ können in der List Elemente in 
 einer [Table](/03-components/structure/table) dargestellt werden, wenn eine tabellarische Ansicht mit Spalten sinnvoll ist.
 
-Jedes ListItem repräsentiert ein spezifisches Element einer übergeordneten Kategorie 
+Ein ListItem ist ein Eintrag in der List und repräsentiert ein spezifisches Element einer übergeordneten Kategorie
 (z. B. Domains, E-Mail-Adressen, Projekte …). Dabei werden nur die Informationen angezeigt, 
 die notwendig sind, um das jeweilige Element zu verstehen.
 
@@ -16,7 +16,7 @@ Die List fasst alle ListItems bzw. Tabelleneinträge zusammen und stellt Funktio
 Achte bei der Verwendung einer List darauf, dass...
 
 - eine passende Ansicht angeboten wird. Eine Raster-Ansicht ist z. B. sinnvoll, wenn das Bild eines ListItems 
-für den Nutzerflow entscheidend ist. Gibt es mehrere Anwendungsfälle, sollte der User zwischen verschiedenen 
+für den Userflow entscheidend ist. Gibt es mehrere Anwendungsfälle, sollte der User zwischen verschiedenen 
 Ansichten wechseln können.
 - eine Standardsortierung gewählt wird, die dem häufigsten Anwendungsfall entspricht 
 (z. B. „Neueste zuerst“ bei einer Änderungshistorie).
@@ -51,7 +51,7 @@ Verwende eine List, um ...
 
 Die List unterstützt drei verschiedene Ansichten: **Liste, Raster** und **Tabelle**. 
 
-In der Listen- und Rasteransicht werden unterschiedliche Varianten des ListItems dargestellt. In der Tabellen-Ansicht verwendet die List
+In der Listen- und Rasteransicht werden unterschiedliche Varianten des ListItems dargestellt. In der Tabellenansicht verwendet die List
 die [Table](/03-components/structure/table)-Component.
 Sind mehrere Ansichten verfügbar, können User über den Ansichts-[Button](/03-components/actions/button) zwischen ihnen wechseln.
 
@@ -94,8 +94,8 @@ werden. Filter ohne Kategorie können unter einem allgemeinen „Filter“-Butto
 
 ## Pagination
 
-Standardmäßig werden maximal 10 Einträge/ListItems angezeigt. Mit der Option `batchSize` kann die Anzahl der anfänglichen Einträge 
-angepasst werden. Über den "Mehr anzeigen"-[Button](/03-components/actions/button) können bei Bedarf weitere Einträge nachgeladen werden.
+Standardmäßig werden maximal 10 ListItems angezeigt. Mit der Option `batchSize` kann die Anzahl der anfänglichen ListItems 
+angepasst werden. Über den "Mehr anzeigen"-[Button](/03-components/actions/button) können bei Bedarf weitere ListItems nachgeladen werden.
 
 Beachte bei der Anpassung der Pagination, dass ...
 
@@ -116,24 +116,22 @@ in einer Listen- oder Rasteransicht dargestellt werden.
 
 In der **Listenansicht** besteht ein ListItem typischerweise aus:
 
-- **Avatar**: Der [Avatar](/03-components/content/avatar) steht am Anfang eines ListItems. Wird ein [Icon](/03-components/content/icon) verwendet, 
-sollte es die Oberkategorie des dargestellten Elements widerspiegeln. Falls der User für das Element ein [Image](/03-components/content/image) 
-hochladen kann, wird dieses angezeigt. Ist kein Bild vorhanden, sollten stattdessen Initials erscheinen.
-- **Benennung**: Die Benennung gibt den vergebenen Namen des Elements wieder. 
-- **Untertitel**: Unterhalb der Benennung können weitere Informationen ergänzt werden. Der Aufbau folgt einem festen Muster: 
-Das erste Wort bildet den eigentlichen Untertitel. Danach können bis zu zwei weitere Angaben folgen, die jeweils durch 
-Gedankenstriche voneinander getrennt sind.
-- **Top Content und Bottom Content**: Neben den Basisinformationen verfügt ein ListItem über zusätzliche Bereiche, die flexibel 
+- **Avatar:** Der [Avatar](/03-components/content/avatar) steht am Anfang eines ListItems. Wird ein [Icon](/03-components/content/icon) verwendet, 
+sollte es die Kategorie des dargestellten Elements widerspiegeln (z. B. ein Domain-Icon bei der Kategorie Domain). Falls der User für das Element ein [Image](/03-components/content/image) 
+hochladen kann, wird dieses angezeigt. Ist kein Image vorhanden, sollten stattdessen Initialen erscheinen.
+- **Titel:** Der Titel gibt den vergebenen Namen wieder. 
+- **Untertitel:** Unterhalb der Benennung können weitere Informationen ergänzt werden. Der Aufbau folgt einem festen Muster: Beschreibender Untertitel  –  1. Information  –  2. Information
+- **Top Content und Bottom Content:** Neben den Basisinformationen verfügt ein ListItem über zusätzliche Bereiche, die flexibel 
 befüllt werden können (siehe Overview: Content Slots).
-- **Aktionen:** Für Interaktionen mit dem Element stehen zwei Varianten zur Verfügung. Entweder werden Aktionen über ein 
+- **Aktionen:** Für Interaktionen mit dem ListItem stehen zwei Varianten zur Verfügung. Entweder werden Aktionen über ein 
 [ContextMenu](/03-components/actions/context-menu) angeboten, oder sie erscheinen direkt als [Buttons](/03-components/actions/button) innerhalb des ListItems.
 - **Accordion-Funktion:** Optional kann ein ListItem eine Accordion-Funktion besitzen.
 
-In der Rasteransicht ist die Darstellung kompakter und stärker visuell ausgerichtet. Der Avatar wird hier größer und in eckiger Form angezeigt. 
+In der **Rasteransicht** ist die Darstellung kompakter und stärker visuell ausgerichtet. Der [Avatar](/03-components/content/avatar) wird hier größer und in eckiger Form angezeigt. 
 Die grundlegenden Funktionen sind vergleichbar mit denen der Listenansicht, allerdings entfällt in diesem Modus der Top Content sowie die 
 Accordion-Funktion.
 
-## Tabelleneinträge
+## Tabellenansicht
 
 Wird eine List mit einer Tabellenansicht verwendet, sind die Guidelines der [Table](/03-components/structure/table)
 zu beachten.
@@ -172,8 +170,7 @@ ersichtlich ist, nach welchem Kriterium und in welcher Reihenfolge sortiert wird
 
 Aktive Filter werden als [Badges](/03-components/status/badge) dargestellt.
 Diese sollten selbsterklärend sein. Bei mehrdeutigen Begriffen empfiehlt es sich, 
-zusätzlichen Kontext anzugeben. Ist ein Filter hingegen intuitiv einer bestimmten
-Kategorie zuordenbar, ist zusätzlicher Kontext nicht erforderlich.
+zusätzlichen Kontext anzugeben.
 
 <Do example="namingDo">
   Intuitiv verständliche Filter benötigen keinen zusätzlichen Kontext.
@@ -181,7 +178,7 @@ Kategorie zuordenbar, ist zusätzlicher Kontext nicht erforderlich.
 </Do>
 
 <Dont example="namingDont">
-  Bei intuitiven Filtern ist zusätzlicher beschreibender Text nicht erforderlich.
+  Bei intuitiven Filtern sollte auf zusätzlichen Text verzichtet werden. Meist genügt da ein einzelnes beschreibendes Wort.
 </Dont>
 
 ---
