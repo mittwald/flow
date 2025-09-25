@@ -10,6 +10,7 @@ import {
   TabTitle,
 } from "@mittwald/flow-react-components";
 import AnchorNavigation from "@/app/_components/layout/AnchorNavigation";
+import Footer from "@/app/_components/layout/Footer";
 
 interface Props {
   mdxFile: MdxFile;
@@ -28,23 +29,26 @@ export const TabContent: FC<Props> = (props) => {
   const path = `/03-components/${mdxFile.slugs[0]}/${mdxFile.slugs[1]}`;
 
   return (
-    <Flex columnGap="m">
-      <LayoutCard className={styles.tabs}>
-        <Tabs selectedKey={activeTab}>
-          <Tab id="overview">
-            <TabTitle href={`${path}/overview`}>Overview</TabTitle>
-            {activeTab === "overview" && tabContent}
-          </Tab>
-          <Tab id="develop">
-            <TabTitle href={`${path}/develop`}>Develop</TabTitle>
-            {activeTab === "develop" && tabContent}
-          </Tab>
-          <Tab id="guidelines">
-            <TabTitle href={`${path}/guidelines`}>Guidelines</TabTitle>
-            {activeTab === "guidelines" && tabContent}
-          </Tab>
-        </Tabs>
-      </LayoutCard>
+    <Flex columnGap="m" className={styles.tabsContainer}>
+      <Flex direction="column" rowGap="m" className={styles.tabsContainer}>
+        <LayoutCard className={styles.tabs}>
+          <Tabs selectedKey={activeTab}>
+            <Tab id="overview">
+              <TabTitle href={`${path}/overview`}>Overview</TabTitle>
+              {activeTab === "overview" && tabContent}
+            </Tab>
+            <Tab id="develop">
+              <TabTitle href={`${path}/develop`}>Develop</TabTitle>
+              {activeTab === "develop" && tabContent}
+            </Tab>
+            <Tab id="guidelines">
+              <TabTitle href={`${path}/guidelines`}>Guidelines</TabTitle>
+              {activeTab === "guidelines" && tabContent}
+            </Tab>
+          </Tabs>
+        </LayoutCard>
+        <Footer />
+      </Flex>
 
       <AnchorNavigation
         currentPath={`${path}/${activeTab}`}

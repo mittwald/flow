@@ -35,7 +35,6 @@ const RootLayout: FC<PropsWithChildren> = async (props) => {
               <MainNavigation docs={docs.map((mdx) => mdx.serialize())} />
               <div className={styles.mainWrapper}>
                 <main className={styles.main}>{props.children}</main>
-                <Footer />
               </div>
             </div>
           </NotificationProvider>

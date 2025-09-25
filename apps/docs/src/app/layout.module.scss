@@ -83,6 +83,10 @@
   flex-grow: 1;
 }
 
+.tabsContainer {
+  min-width: 0;
+}
+
 .tabs {
   flex-grow: 1;
   min-width: 0;
@@ -112,7 +116,7 @@
   }
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1400px) {
   .mainNavigation,
   .headerNavigation,
   .anchorNavigation {

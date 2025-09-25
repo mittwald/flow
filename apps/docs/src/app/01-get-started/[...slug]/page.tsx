@@ -2,6 +2,7 @@ import type { StaticParams } from "@/lib/mdx/MdxFile";
 import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
 import TopContent from "@/app/_components/layout/TopContent";
 import type { Metadata } from "next";
+import Footer from "@/app/_components/layout/Footer";
 
 const contentFolder = "src/content/01-get-started";
 
@@ -31,5 +32,10 @@ export default async function Page(props: Props) {
     throw new Error("Could not find index.mdx");
   }
 
-  return <TopContent mdxFile={indexMdxFile} />;
+  return (
+    <>
+      <TopContent mdxFile={indexMdxFile} />
+      <Footer />
+    </>
+  );
 }

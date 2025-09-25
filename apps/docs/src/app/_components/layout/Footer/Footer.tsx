@@ -8,7 +8,7 @@ import styles from "./footer.module.scss";
 const Footer: FC = () => {
   return (
     <footer className={styles.footer}>
-      <ColumnLayout gap="xl" m={[1, 1, 2]} l={[1, 1, 2]}>
+      <ColumnLayout gap="xl" m={[1, 1, 2]} l={[1, 1, 2]} s={[1]}>
         <FooterSection title="Ressourcen">
           <Link
             color="dark"
@@ -53,11 +53,11 @@ const Footer: FC = () => {
             Feedback zu Flow geben
           </Link>
         </FooterSection>
-        <div className={styles.mittwaldLogo}>
-          <Image src={logoMittwald.src} alt="mittwald Logo" />© 2024 Mittwald
-          CM Service GmbH & Co. KG
-        </div>
       </ColumnLayout>
+      <div className={styles.mittwaldLogo}>
+        <Image src={logoMittwald.src} alt="mittwald Logo" />© 2024 Mittwald CM
+        Service GmbH & Co. KG
+      </div>
     </footer>
   );
 };
