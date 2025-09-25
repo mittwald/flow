@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.489](https://github.com/mittwald/flow/compare/0.2.0-alpha.488...0.2.0-alpha.489) (2025-09-25)
+
+### Bug Fixes
+
+* **MarkdownEditor:** fix disabled label in preview mode ([#2006](https://github.com/mittwald/flow/issues/2006)) ([0d60424](https://github.com/mittwald/flow/commit/0d604246fb39c02d726c8580cb323e4ac7edc9bf))
+
 # [0.2.0-alpha.488](https://github.com/mittwald/flow/compare/0.2.0-alpha.487...0.2.0-alpha.488) (2025-09-24)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
