@@ -192,7 +192,7 @@ export default () => {
               <Heading>Beschreibung</Heading>
               <Text>
                 Mit einem SFTP-Benutzer kannst du dich mit
-                deinem Projekt verbinden, um z.B. Dateien
+                deinem Projekt verbinden, um z. B. Dateien
                 hochzuladen.
               </Text>
               <ColumnLayout m={[1, 1]}>
@@ -207,14 +207,16 @@ export default () => {
                   </FieldDescription>
                 </DatePicker>
               </ColumnLayout>
-            </Section>
-            <Section>
+
               <Heading>Authentifizierung</Heading>
               <Text>
                 Wähle zwischen der Authentifikation per
                 Passwort oder über einen SSH-Key.
               </Text>
-              <SegmentedControl value="password">
+              <SegmentedControl
+                value="password"
+                aria-label="Authentifizierung"
+              >
                 <Segment value="password">Passwort</Segment>
                 <Segment value="ssh">SSH-Key</Segment>
               </SegmentedControl>
@@ -223,8 +225,7 @@ export default () => {
                   <Label>Passwort</Label>
                 </TextField>
               </ColumnLayout>
-            </Section>
-            <Section>
+
               <Heading>Berechtigungen</Heading>
               <Text>
                 Wähle hier die Berechtigungen aus, mit denen
@@ -233,6 +234,7 @@ export default () => {
               <RadioGroup
                 s={[1, 1]}
                 defaultValue="read&write"
+                aria-label="Berechtigungen"
               >
                 <RadioButton value="write">
                   <Text>Lesezugriff</Text>
@@ -249,8 +251,7 @@ export default () => {
                   </Content>
                 </RadioButton>
               </RadioGroup>
-            </Section>
-            <Section>
+
               <Heading>Verzeichnisauswahl</Heading>
               <Text>
                 Hier legst du das Verzeichnis fest, auf das

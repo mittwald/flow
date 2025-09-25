@@ -8,16 +8,16 @@ import {
   <Text>
     <Badge color="teal">Context</Badge>
     Einordnung <br />
-    <small>z. B. Farbe, Component</small>
+    <small>z. B. Farbe, Component</small>
   </Text>
   <Text>
     <Badge color="orange">Common Unit</Badge>
     Kategorie <br />
-    <small>z. B. Variante, Sizing, Styling</small>
+    <small>z. B. Variante, Sizing, Styling</small>
   </Text>
   <Text>
     <Badge color="lilac">Clarification</Badge>
     Spezifizierung <br />
-    <small>z. B. Farbwert, State</small>
+    <small>z. B. Farbwert, State</small>
   </Text>
 </ColumnLayout>;

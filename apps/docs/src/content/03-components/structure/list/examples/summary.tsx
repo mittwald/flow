@@ -17,7 +17,7 @@ export default () => {
     <InvoiceList.List
       batchSize={2}
       hidePagination
-      aria-label="Invoices"
+      aria-label="Rechnungen"
     >
       <ListSummary position="bottom">
         <Flex justify="end">
