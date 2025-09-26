@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.491](https://github.com/mittwald/flow/compare/0.2.0-alpha.490...0.2.0-alpha.491) (2025-09-26)
+
+### Bug Fixes
+
+* **Test:** no concurrency in remote tests ([f8c190f](https://github.com/mittwald/flow/commit/f8c190f21cf7f58591006620e714c5930c139c79))
+
 # [0.2.0-alpha.490](https://github.com/mittwald/flow/compare/0.2.0-alpha.489...0.2.0-alpha.490) (2025-09-25)
 
 ### Bug Fixes
