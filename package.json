@@ -68,7 +68,9 @@
       "nx",
       "sharp",
       "simple-git-hooks",
-      "style-dictionary"
+      "style-dictionary",
+      "@bundled-es-modules/glob",
+      "@parcel/watcher"
     ]
   },
   "resolutions": {
