@@ -9,9 +9,9 @@ if (!container) {
 }
 
 const basePath = "../../../src/";
-const modules = import.meta.glob("../../../src/**/*.browser.test.remote.tsx");
-
-await Promise.all(Object.values(modules).map((module) => module()));
+const modules = import.meta.glob("../../../src/**/*.browser.test.remote.tsx", {
+  eager: true,
+});
 
 const root = createRoot(container);
 
@@ -31,8 +31,6 @@ if (!foundFile) {
   throw new Error(`File "${file}" not found`);
 }
 
-const module = modules[foundFile];
-const moduleContent = (await module()) as Record<string, ComponentType>;
-const TestComponent = moduleContent[test];
-
+const module = modules[foundFile] as Record<string, ComponentType>;
+const TestComponent = module[test];
 root.render(<RemoteRoot>{createElement(TestComponent)}</RemoteRoot>);

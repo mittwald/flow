@@ -34,16 +34,16 @@ importers:
         version: 9.36.0
       '@lerna-lite/cli':
         specifier: ^3.12.3
-        version: 3.12.3(@lerna-lite/publish@3.12.3(@types/node@22.18.6)(babel-plugin-macros@3.1.0)(typescript@5.9.2))(@lerna-lite/version@3.12.3(@lerna-lite/publish@3.12.3(@types/node@22.18.6)(babel-plugin-macros@3.1.0)(typescript@5.9.2))(@types/node@22.18.6)(babel-plugin-macros@3.1.0)(typescript@5.9.2))(@types/node@22.18.6)(babel-plugin-macros@3.1.0)(typescript@5.9.2)
+        version: 3.12.3(@lerna-lite/publish@3.12.3(@types/node@24.5.2)(babel-plugin-macros@3.1.0)(typescript@5.9.2))(@lerna-lite/version@3.12.3(@lerna-lite/publish@3.12.3(@types/node@24.5.2)(babel-plugin-macros@3.1.0)(typescript@5.9.2))(@types/node@24.5.2)(babel-plugin-macros@3.1.0)(typescript@5.9.2))(@types/node@24.5.2)(babel-plugin-macros@3.1.0)(typescript@5.9.2)
       '@lerna-lite/publish':
         specifier: ^3.12.3
-        version: 3.12.3(@types/node@22.18.6)(babel-plugin-macros@3.1.0)(typescript@5.9.2)
+        version: 3.12.3(@types/node@24.5.2)(babel-plugin-macros@3.1.0)(typescript@5.9.2)
       '@nx/devkit':
         specifier: 20.8.1
-        version: 20.8.1(nx@20.8.2)
+        version: 20.8.1(nx@20.8.1)
       '@types/node':
-        specifier: ^22.18.6
-        version: 22.18.6
+        specifier: ^24
+        version: 24.5.2
       '@types/verror':
         specifier: ^1.10.11
         version: 1.10.11
@@ -75,8 +75,8 @@ importers:
         specifier: ^5.1.0
         version: 5.1.0
       nx:
-        specifier: ^20
-        version: 20.8.2
+        specifier: 20.8.1
+        version: 20.8.1
       prettier:
         specifier: ^3.6.2
         version: 3.6.2
@@ -166,7 +166,7 @@ importers:
         version: 3.7.2
       next:
         specifier: ^15.5.4
-        version: 15.5.4(@babel/core@7.28.4)(babel-plugin-macros@3.1.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.93.2)
+        version: 15.5.4(@babel/core@7.28.4)(@playwright/test@1.55.1)(babel-plugin-macros@3.1.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.93.2)
       next-mdx-remote:
         specifier: ^5.0.0
         version: 5.0.0(@types/react@19.1.13)(react@19.1.1)
@@ -284,7 +284,7 @@ importers:
         version: 2.1.1
       next:
         specifier: ~15.2.5
-        version: 15.2.5(babel-plugin-macros@3.1.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.93.2)
+        version: 15.2.5(@playwright/test@1.55.1)(babel-plugin-macros@3.1.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.93.2)
       react:
         specifier: ^19.1.0
         version: 19.1.1
@@ -422,11 +422,11 @@ importers:
         specifier: ^3.7.2
         version: 3.7.2
       mobx:
-        specifier: ^6.13.7
-        version: 6.13.7
+        specifier: ^6.15.0
+        version: 6.15.0
       mobx-react-lite:
         specifier: ^4.1.0
-        version: 4.1.0(mobx@6.13.7)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        version: 4.1.0(mobx@6.15.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       object-code:
         specifier: ^1.3.4
         version: 1.3.4
@@ -547,7 +547,7 @@ importers:
         version: 17.6.3
       next:
         specifier: ^15.5.4
-        version: 15.5.4(@babel/core@7.28.4)(babel-plugin-macros@3.1.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.93.2)
+        version: 15.5.4(@babel/core@7.28.4)(@playwright/test@1.55.1)(babel-plugin-macros@3.1.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.93.2)
       nx:
         specifier: ^20.8.2
         version: 20.8.2
@@ -647,7 +647,7 @@ importers:
     devDependencies:
       vite-plugin-node-polyfills:
         specifier: ^0.23.0
-        version: 0.23.0(rollup@4.35.0)(vite@6.3.6(@types/node@22.18.6)(less@4.4.1)(sass@1.93.2)(stylus@0.62.0)(terser@5.44.0)(tsx@4.20.6)(yaml@2.8.1))
+        version: 0.23.0(rollup@4.35.0)(vite@6.3.6(@types/node@24.5.2)(less@4.4.1)(sass@1.93.2)(stylus@0.62.0)(terser@5.44.0)(tsx@4.20.6)(yaml@2.8.1))
 
   packages/design-tokens:
     devDependencies:
@@ -792,11 +792,11 @@ importers:
   packages/react-tunnel:
     dependencies:
       mobx:
-        specifier: ^6.13.7
-        version: 6.13.7
+        specifier: ^6.15.0
+        version: 6.15.0
       mobx-react-lite:
         specifier: ^4.1.0
-        version: 4.1.0(mobx@6.13.7)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        version: 4.1.0(mobx@6.15.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
     devDependencies:
       '@mittwald/typescript-config':
         specifier: workspace:*
@@ -1017,6 +1017,9 @@ importers:
       '@mittwald/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
+      '@playwright/test':
+        specifier: ^1.55.1
+        version: 1.55.1
       '@testing-library/dom':
         specifier: ^10.4.1
         version: 10.4.1
@@ -1044,9 +1047,6 @@ importers:
       nx:
         specifier: ^20.8.2
         version: 20.8.2
-      playwright:
-        specifier: ^1.55.1
-        version: 1.55.1
       prettier:
         specifier: ^3.6.2
         version: 3.6.2
@@ -2835,6 +2835,12 @@ packages:
       verdaccio:
         optional: true
 
+  '@nx/nx-darwin-arm64@20.8.1':
+    resolution: {integrity: sha512-Gat4Io66cV70Oa1CjrMJPsEx5ICpAGayv9hejOtBUEDb6XjR12L2e4wV+4EHliF0UbEcuZAr8/lTROEPk0RGWQ==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [darwin]
+
   '@nx/nx-darwin-arm64@20.8.2':
     resolution: {integrity: sha512-t+bmCn6sRPNGU6hnSyWNvbQYA/KgsxGZKYlaCLRwkNhI2akModcBUqtktJzCKd1XHDqs6EkEFBWjFr8/kBEkSg==}
     engines: {node: '>= 10'}
@@ -2844,6 +2850,12 @@ packages:
   '@nx/nx-darwin-arm64@21.5.3':
     resolution: {integrity: sha512-XKOaBpkBzPd5l9in1ax7KQrAiqm4hi46pzQ/qq4Jo20/RKTpc2ZZSFujjuI8wF75oZ6+iV+cvuxSbwbuX6AxQQ==}
     cpu: [arm64]
+    os: [darwin]
+
+  '@nx/nx-darwin-x64@20.8.1':
+    resolution: {integrity: sha512-TB9mZk7neGFKgBr2wSBgY6c4kFF9vvChNSp3TrEeXR3FppFcYG5eK4AaKfzWCpYb0wMtseAm7NMX1Lu74utClQ==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
     os: [darwin]
 
   '@nx/nx-darwin-x64@20.8.2':
@@ -2857,6 +2869,12 @@ packages:
     cpu: [x64]
     os: [darwin]
 
+  '@nx/nx-freebsd-x64@20.8.1':
+    resolution: {integrity: sha512-7UQu0/Afna5Af2GagEQ6rbKfUh75NfUn+g66wsoQoUGBvDW0U7B8P3Ph5Bk4Urub0BSfMVcNg2X7CgfypLFN/g==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [freebsd]
+
   '@nx/nx-freebsd-x64@20.8.2':
     resolution: {integrity: sha512-joZxFbgJfkHkB9uMIJr73Gpnm9pnpvr0XKGbWC409/d2x7q1qK77tKdyhGm+A3+kaZFwstNVPmCUtUwJYyU6LA==}
     engines: {node: '>= 10'}
@@ -2867,6 +2885,12 @@ packages:
     resolution: {integrity: sha512-IsPCC8CpIRd7dzcRQ+j1zAEZObKVkSLQ3GI7rqybEf0/vWZz6T7UbxGHNtFB7AlaecCbHshZ3Mg5mPVXYSR+iA==}
     cpu: [x64]
     os: [freebsd]
+
+  '@nx/nx-linux-arm-gnueabihf@20.8.1':
+    resolution: {integrity: sha512-Tjh8JkTP+x1jSrzx+ofx1pKpkhIbXd7bi0bPdpYt6NI1lZz2HB/dv8vtdzP80jXEDztHf0AeGnEJVgJKsgI6yg==}
+    engines: {node: '>= 10'}
+    cpu: [arm]
+    os: [linux]
 
   '@nx/nx-linux-arm-gnueabihf@20.8.2':
     resolution: {integrity: sha512-98O/qsxn4vIMPY/FyzvmVrl7C5yFhCUVk0/4PF+PA2SvtQ051L1eMRY6bq/lb69qfN6szJPZ41PG5mPx0NeLZw==}
@@ -2879,6 +2903,12 @@ packages:
     cpu: [arm]
     os: [linux]
 
+  '@nx/nx-linux-arm64-gnu@20.8.1':
+    resolution: {integrity: sha512-2+qPIwav2vrytH6pe7fukBe8+yN5JGbEDCnDO8wKQsHeeZMLAQJiZ7EJH/+vynRkI7oWf87mihIKNQME19+w6A==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [linux]
+
   '@nx/nx-linux-arm64-gnu@20.8.2':
     resolution: {integrity: sha512-h6a+HxwfSpxsi4KpxGgPh9GDBmD2E+XqGCdfYpobabxqEBvlnIlJyuDhlRR06cTWpuNXHpRdrVogmV6m/YbtDg==}
     engines: {node: '>= 10'}
@@ -2887,6 +2917,12 @@ packages:
 
   '@nx/nx-linux-arm64-gnu@21.5.3':
     resolution: {integrity: sha512-GQF/xjGeqt4tYWf9jT1D0GRPrcAjajTB1QpSavUaiT1jDkByuN11WvuWeTfBdPJpYWFxvH887+r+uMEg8zRE4A==}
+    cpu: [arm64]
+    os: [linux]
+
+  '@nx/nx-linux-arm64-musl@20.8.1':
+    resolution: {integrity: sha512-DsKc+DiMsuHqpBWchUUUg6zv4OaexRqpFXys6auZlrpFpn80kSqLQ3S4zZ5AUu+26wxZqEVJs+uxHGwFbhEssQ==}
+    engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
 
@@ -2901,6 +2937,12 @@ packages:
     cpu: [arm64]
     os: [linux]
 
+  '@nx/nx-linux-x64-gnu@20.8.1':
+    resolution: {integrity: sha512-Kzru44beVKAmSG84ShuMIIfyu2Uu5r8gsHdtiQPBIOGkZa0Z/e6YtUxcN3w1UZ7yvvzoQ4pQLvqU6UZRSWZtEg==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [linux]
+
   '@nx/nx-linux-x64-gnu@20.8.2':
     resolution: {integrity: sha512-nR0ev+wxu+nQYRd7bhqggOxK7UfkV6h+Ko1mumUFyrM5GvPpz/ELhjJFSnMcOkOMcvH0b6G5uTBJvN1XWCkbmg==}
     engines: {node: '>= 10'}
@@ -2909,6 +2951,12 @@ packages:
 
   '@nx/nx-linux-x64-gnu@21.5.3':
     resolution: {integrity: sha512-HI+tdkvzFcnJQpU9m1FjvlxW7ZsJeF4os8OG4HSLRTQfFT8HCXXzp6b9sojTr+4Nfvp5r3T/J/UJM9tOJXW9Aw==}
+    cpu: [x64]
+    os: [linux]
+
+  '@nx/nx-linux-x64-musl@20.8.1':
+    resolution: {integrity: sha512-cSVVb7DVMhrxCaj/n55okBZS6lZoP5a5vynOBGIV4z3/OJLev+xI9A+3imn/aXnBl8iS69HogYyrW0YTXv4Xaw==}
+    engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
 
@@ -2923,6 +2971,12 @@ packages:
     cpu: [x64]
     os: [linux]
 
+  '@nx/nx-win32-arm64-msvc@20.8.1':
+    resolution: {integrity: sha512-gte5HcvI24CN6b9I6IYTXh/A0CtRfnlAFaJomPpfT8Wcq637aOZzS0arAEZVoU8QZty1350hj6sfu+wSIjoP7A==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [win32]
+
   '@nx/nx-win32-arm64-msvc@20.8.2':
     resolution: {integrity: sha512-0SEOqT/daBG5WtM9vOGilrYaAuf1tiALdrFavY62+/arXYxXemUKmRI5qoKDTnvoLMBGkJs6kxhMO5b7aUXIvQ==}
     engines: {node: '>= 10'}
@@ -2932,6 +2986,12 @@ packages:
   '@nx/nx-win32-arm64-msvc@21.5.3':
     resolution: {integrity: sha512-VgX1VnKDRgWcjIMJ0V3zZ6OPuYkvA7rzgn8wbZWyBh2/1GFFffypJJsGeXRPCZBFHjF3UFYcwjzCMoStZ35b5g==}
     cpu: [arm64]
+    os: [win32]
+
+  '@nx/nx-win32-x64-msvc@20.8.1':
+    resolution: {integrity: sha512-6c2fVEPdPwJdnRbckBatRDF/g6JAp6p3Mfl90DpuaEF2DZC5pmCXKOsXE0aSIZ+gODom2JIchM++2KmDZPJUoA==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
     os: [win32]
 
   '@nx/nx-win32-x64-msvc@20.8.2':
@@ -3117,6 +3177,11 @@ packages:
   '@pkgr/core@0.2.9':
     resolution: {integrity: sha512-QNqXyfVS2wm9hweSYD2O7F0G06uurj9kZ96TRQE5Y9hU7+tgdZwIkbAKc5Ocy1HxEY2kuDQa6cQ1WRs/O5LFKA==}
     engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
+
+  '@playwright/test@1.55.1':
+    resolution: {integrity: sha512-IVAh/nOJaw6W9g+RJVlIQJ6gSiER+ae6mKQ5CX1bERzQgbC1VSeBlwdvczT7pxb0GWiyrxH4TGKbMfDb4Sq/ig==}
+    engines: {node: '>=18'}
+    hasBin: true
 
   '@polka/url@1.0.0-next.29':
     resolution: {integrity: sha512-wwQAWhWSuHaag8c4q/KN/vCoeOJYshAIvMQwD4GpSb3OiZklFfvAgmj0VCBBImRpuF/aFgIRzllXlVX93Jevww==}
@@ -4185,6 +4250,9 @@ packages:
 
   '@types/node@22.18.6':
     resolution: {integrity: sha512-r8uszLPpeIWbNKtvWRt/DbVi5zbqZyj1PTmhRMqBMvDnaz1QpmSKujUtJLrqGZeoM8v72MfYggDceY4K1itzWQ==}
+
+  '@types/node@24.5.2':
+    resolution: {integrity: sha512-FYxk1I7wPv3K2XBaoyH2cTnocQEu8AOZ60hPbsyukMPLv5/5qr7V1i8PLHdl6Zf87I+xZXFvPCXYjiTFq+YSDQ==}
 
   '@types/normalize-package-data@2.4.4':
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
@@ -7115,8 +7183,8 @@ packages:
       react-native:
         optional: true
 
-  mobx@6.13.7:
-    resolution: {integrity: sha512-aChaVU/DO5aRPmk1GX8L+whocagUUpBQqoPtJk+cm7UOXUk87J4PeWCh6nNmTTIfEhiR9DI/+FnA8dln/hTK7g==}
+  mobx@6.15.0:
+    resolution: {integrity: sha512-UczzB+0nnwGotYSgllfARAqWCJ5e/skuV2K/l+Zyck/H6pJIhLXuBnz+6vn2i211o7DtbE78HQtsYEKICHGI+g==}
 
   motion-dom@12.23.21:
     resolution: {integrity: sha512-5xDXx/AbhrfgsQmSE7YESMn4Dpo6x5/DTZ4Iyy4xqDvVHWvFVoV+V2Ri2S/ksx+D40wrZ7gPYiMWshkdoqNgNQ==}
@@ -7317,6 +7385,18 @@ packages:
 
   nth-check@2.1.1:
     resolution: {integrity: sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w==}
+
+  nx@20.8.1:
+    resolution: {integrity: sha512-73Uw8YXpsjeLqHSl7NMCmGdCs+8ynPzoNJFWAqVanPETEY9zPd5wevVQmeyzYtNNQU35uj6Os4iUzYunmwnFaA==}
+    hasBin: true
+    peerDependencies:
+      '@swc-node/register': ^1.8.0
+      '@swc/core': ^1.3.85
+    peerDependenciesMeta:
+      '@swc-node/register':
+        optional: true
+      '@swc/core':
+        optional: true
 
   nx@20.8.2:
     resolution: {integrity: sha512-mDKpbH3vEpUFDx0rrLh+tTqLq1PYU8KiD/R7OVZGd1FxQxghx2HOl32MiqNsfPcw6AvKlXhslbwIESV+N55FLQ==}
@@ -8899,6 +8979,9 @@ packages:
 
   undici-types@6.21.0:
     resolution: {integrity: sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==}
+
+  undici-types@7.12.0:
+    resolution: {integrity: sha512-goOacqME2GYyOZZfb5Lgtu+1IDmAlAEu5xnD3+xTzS10hT0vzpf0SPjkXwAw9Jm+4n/mQGDP3LO8CPbYROeBfQ==}
 
   unicode-canonical-property-names-ecmascript@2.0.1:
     resolution: {integrity: sha512-dA8WbNeb2a6oQzAQ55YlT5vQAWGV9WXOsi3SskE3bcCdM0P4SDd+24zS/OCacdRq5BkdsRj9q3Pg6YyQoxIGqg==}
@@ -10643,33 +10726,47 @@ snapshots:
       yoctocolors-cjs: 2.1.3
     optionalDependencies:
       '@types/node': 22.18.6
+    optional: true
 
-  '@inquirer/expand@4.0.20(@types/node@22.18.6)':
+  '@inquirer/core@10.2.2(@types/node@24.5.2)':
     dependencies:
-      '@inquirer/core': 10.2.2(@types/node@22.18.6)
-      '@inquirer/type': 3.0.8(@types/node@22.18.6)
+      '@inquirer/ansi': 1.0.0
+      '@inquirer/figures': 1.0.13
+      '@inquirer/type': 3.0.8(@types/node@24.5.2)
+      cli-width: 4.1.0
+      mute-stream: 2.0.0
+      signal-exit: 4.1.0
+      wrap-ansi: 6.2.0
       yoctocolors-cjs: 2.1.3
     optionalDependencies:
-      '@types/node': 22.18.6
+      '@types/node': 24.5.2
+
+  '@inquirer/expand@4.0.20(@types/node@24.5.2)':
+    dependencies:
+      '@inquirer/core': 10.2.2(@types/node@24.5.2)
+      '@inquirer/type': 3.0.8(@types/node@24.5.2)
+      yoctocolors-cjs: 2.1.3
+    optionalDependencies:
+      '@types/node': 24.5.2
 
   '@inquirer/figures@1.0.13': {}
 
-  '@inquirer/input@4.2.4(@types/node@22.18.6)':
+  '@inquirer/input@4.2.4(@types/node@24.5.2)':
     dependencies:
-      '@inquirer/core': 10.2.2(@types/node@22.18.6)
-      '@inquirer/type': 3.0.8(@types/node@22.18.6)
+      '@inquirer/core': 10.2.2(@types/node@24.5.2)
+      '@inquirer/type': 3.0.8(@types/node@24.5.2)
     optionalDependencies:
-      '@types/node': 22.18.6
+      '@types/node': 24.5.2
 
-  '@inquirer/select@4.3.4(@types/node@22.18.6)':
+  '@inquirer/select@4.3.4(@types/node@24.5.2)':
     dependencies:
       '@inquirer/ansi': 1.0.0
-      '@inquirer/core': 10.2.2(@types/node@22.18.6)
+      '@inquirer/core': 10.2.2(@types/node@24.5.2)
       '@inquirer/figures': 1.0.13
-      '@inquirer/type': 3.0.8(@types/node@22.18.6)
+      '@inquirer/type': 3.0.8(@types/node@24.5.2)
       yoctocolors-cjs: 2.1.3
     optionalDependencies:
-      '@types/node': 22.18.6
+      '@types/node': 24.5.2
 
   '@inquirer/type@3.0.8(@types/node@22.13.10)':
     optionalDependencies:
@@ -10679,6 +10776,11 @@ snapshots:
   '@inquirer/type@3.0.8(@types/node@22.18.6)':
     optionalDependencies:
       '@types/node': 22.18.6
+    optional: true
+
+  '@inquirer/type@3.0.8(@types/node@24.5.2)':
+    optionalDependencies:
+      '@types/node': 24.5.2
 
   '@internationalized/date@3.9.0':
     dependencies:
@@ -10806,10 +10908,10 @@ snapshots:
       '@jsonjoy.com/codegen': 1.0.0(tslib@2.8.1)
       tslib: 2.8.1
 
-  '@lerna-lite/cli@3.12.3(@lerna-lite/publish@3.12.3(@types/node@22.18.6)(babel-plugin-macros@3.1.0)(typescript@5.9.2))(@lerna-lite/version@3.12.3(@lerna-lite/publish@3.12.3(@types/node@22.18.6)(babel-plugin-macros@3.1.0)(typescript@5.9.2))(@types/node@22.18.6)(babel-plugin-macros@3.1.0)(typescript@5.9.2))(@types/node@22.18.6)(babel-plugin-macros@3.1.0)(typescript@5.9.2)':
+  '@lerna-lite/cli@3.12.3(@lerna-lite/publish@3.12.3(@types/node@24.5.2)(babel-plugin-macros@3.1.0)(typescript@5.9.2))(@lerna-lite/version@3.12.3(@lerna-lite/publish@3.12.3(@types/node@24.5.2)(babel-plugin-macros@3.1.0)(typescript@5.9.2))(@types/node@24.5.2)(babel-plugin-macros@3.1.0)(typescript@5.9.2))(@types/node@24.5.2)(babel-plugin-macros@3.1.0)(typescript@5.9.2)':
     dependencies:
-      '@lerna-lite/core': 3.12.3(@types/node@22.18.6)(babel-plugin-macros@3.1.0)(typescript@5.9.2)
-      '@lerna-lite/init': 3.12.3(@types/node@22.18.6)(babel-plugin-macros@3.1.0)(typescript@5.9.2)
+      '@lerna-lite/core': 3.12.3(@types/node@24.5.2)(babel-plugin-macros@3.1.0)(typescript@5.9.2)
+      '@lerna-lite/init': 3.12.3(@types/node@24.5.2)(babel-plugin-macros@3.1.0)(typescript@5.9.2)
       '@lerna-lite/npmlog': 3.12.1
       dedent: 1.7.0(babel-plugin-macros@3.1.0)
       dotenv: 16.6.1
@@ -10817,8 +10919,8 @@ snapshots:
       load-json-file: 7.0.1
       yargs: 17.7.2
     optionalDependencies:
-      '@lerna-lite/publish': 3.12.3(@types/node@22.18.6)(babel-plugin-macros@3.1.0)(typescript@5.9.2)
-      '@lerna-lite/version': 3.12.3(@lerna-lite/publish@3.12.3(@types/node@22.18.6)(babel-plugin-macros@3.1.0)(typescript@5.9.2))(@types/node@22.18.6)(babel-plugin-macros@3.1.0)(typescript@5.9.2)
+      '@lerna-lite/publish': 3.12.3(@types/node@24.5.2)(babel-plugin-macros@3.1.0)(typescript@5.9.2)
+      '@lerna-lite/version': 3.12.3(@lerna-lite/publish@3.12.3(@types/node@24.5.2)(babel-plugin-macros@3.1.0)(typescript@5.9.2))(@types/node@24.5.2)(babel-plugin-macros@3.1.0)(typescript@5.9.2)
     transitivePeerDependencies:
       - '@types/node'
       - babel-plugin-macros
@@ -10826,11 +10928,11 @@ snapshots:
       - supports-color
       - typescript
 
-  '@lerna-lite/core@3.12.3(@types/node@22.18.6)(babel-plugin-macros@3.1.0)(typescript@5.9.2)':
+  '@lerna-lite/core@3.12.3(@types/node@24.5.2)(babel-plugin-macros@3.1.0)(typescript@5.9.2)':
     dependencies:
-      '@inquirer/expand': 4.0.20(@types/node@22.18.6)
-      '@inquirer/input': 4.2.4(@types/node@22.18.6)
-      '@inquirer/select': 4.3.4(@types/node@22.18.6)
+      '@inquirer/expand': 4.0.20(@types/node@24.5.2)
+      '@inquirer/input': 4.2.4(@types/node@24.5.2)
+      '@inquirer/select': 4.3.4(@types/node@24.5.2)
       '@lerna-lite/npmlog': 3.12.1
       '@npmcli/run-script': 8.1.0
       clone-deep: 4.0.1
@@ -10865,9 +10967,9 @@ snapshots:
       - supports-color
       - typescript
 
-  '@lerna-lite/init@3.12.3(@types/node@22.18.6)(babel-plugin-macros@3.1.0)(typescript@5.9.2)':
+  '@lerna-lite/init@3.12.3(@types/node@24.5.2)(babel-plugin-macros@3.1.0)(typescript@5.9.2)':
     dependencies:
-      '@lerna-lite/core': 3.12.3(@types/node@22.18.6)(babel-plugin-macros@3.1.0)(typescript@5.9.2)
+      '@lerna-lite/core': 3.12.3(@types/node@24.5.2)(babel-plugin-macros@3.1.0)(typescript@5.9.2)
       fs-extra: 11.3.2
       p-map: 7.0.3
       write-json-file: 6.0.0
@@ -10889,12 +10991,12 @@ snapshots:
       string-width: 7.2.0
       wide-align: 1.1.5
 
-  '@lerna-lite/publish@3.12.3(@types/node@22.18.6)(babel-plugin-macros@3.1.0)(typescript@5.9.2)':
+  '@lerna-lite/publish@3.12.3(@types/node@24.5.2)(babel-plugin-macros@3.1.0)(typescript@5.9.2)':
     dependencies:
-      '@lerna-lite/cli': 3.12.3(@lerna-lite/publish@3.12.3(@types/node@22.18.6)(babel-plugin-macros@3.1.0)(typescript@5.9.2))(@lerna-lite/version@3.12.3(@lerna-lite/publish@3.12.3(@types/node@22.18.6)(babel-plugin-macros@3.1.0)(typescript@5.9.2))(@types/node@22.18.6)(babel-plugin-macros@3.1.0)(typescript@5.9.2))(@types/node@22.18.6)(babel-plugin-macros@3.1.0)(typescript@5.9.2)
-      '@lerna-lite/core': 3.12.3(@types/node@22.18.6)(babel-plugin-macros@3.1.0)(typescript@5.9.2)
+      '@lerna-lite/cli': 3.12.3(@lerna-lite/publish@3.12.3(@types/node@24.5.2)(babel-plugin-macros@3.1.0)(typescript@5.9.2))(@lerna-lite/version@3.12.3(@lerna-lite/publish@3.12.3(@types/node@24.5.2)(babel-plugin-macros@3.1.0)(typescript@5.9.2))(@types/node@24.5.2)(babel-plugin-macros@3.1.0)(typescript@5.9.2))(@types/node@24.5.2)(babel-plugin-macros@3.1.0)(typescript@5.9.2)
+      '@lerna-lite/core': 3.12.3(@types/node@24.5.2)(babel-plugin-macros@3.1.0)(typescript@5.9.2)
       '@lerna-lite/npmlog': 3.12.1
-      '@lerna-lite/version': 3.12.3(@lerna-lite/publish@3.12.3(@types/node@22.18.6)(babel-plugin-macros@3.1.0)(typescript@5.9.2))(@types/node@22.18.6)(babel-plugin-macros@3.1.0)(typescript@5.9.2)
+      '@lerna-lite/version': 3.12.3(@lerna-lite/publish@3.12.3(@types/node@24.5.2)(babel-plugin-macros@3.1.0)(typescript@5.9.2))(@types/node@24.5.2)(babel-plugin-macros@3.1.0)(typescript@5.9.2)
       '@npmcli/arborist': 7.5.4
       '@npmcli/package-json': 5.2.1
       byte-size: 9.0.1
@@ -10928,10 +11030,10 @@ snapshots:
       - supports-color
       - typescript
 
-  '@lerna-lite/version@3.12.3(@lerna-lite/publish@3.12.3(@types/node@22.18.6)(babel-plugin-macros@3.1.0)(typescript@5.9.2))(@types/node@22.18.6)(babel-plugin-macros@3.1.0)(typescript@5.9.2)':
+  '@lerna-lite/version@3.12.3(@lerna-lite/publish@3.12.3(@types/node@24.5.2)(babel-plugin-macros@3.1.0)(typescript@5.9.2))(@types/node@24.5.2)(babel-plugin-macros@3.1.0)(typescript@5.9.2)':
     dependencies:
-      '@lerna-lite/cli': 3.12.3(@lerna-lite/publish@3.12.3(@types/node@22.18.6)(babel-plugin-macros@3.1.0)(typescript@5.9.2))(@lerna-lite/version@3.12.3(@lerna-lite/publish@3.12.3(@types/node@22.18.6)(babel-plugin-macros@3.1.0)(typescript@5.9.2))(@types/node@22.18.6)(babel-plugin-macros@3.1.0)(typescript@5.9.2))(@types/node@22.18.6)(babel-plugin-macros@3.1.0)(typescript@5.9.2)
-      '@lerna-lite/core': 3.12.3(@types/node@22.18.6)(babel-plugin-macros@3.1.0)(typescript@5.9.2)
+      '@lerna-lite/cli': 3.12.3(@lerna-lite/publish@3.12.3(@types/node@24.5.2)(babel-plugin-macros@3.1.0)(typescript@5.9.2))(@lerna-lite/version@3.12.3(@lerna-lite/publish@3.12.3(@types/node@24.5.2)(babel-plugin-macros@3.1.0)(typescript@5.9.2))(@types/node@24.5.2)(babel-plugin-macros@3.1.0)(typescript@5.9.2))(@types/node@24.5.2)(babel-plugin-macros@3.1.0)(typescript@5.9.2)
+      '@lerna-lite/core': 3.12.3(@types/node@24.5.2)(babel-plugin-macros@3.1.0)(typescript@5.9.2)
       '@lerna-lite/npmlog': 3.12.1
       '@octokit/plugin-enterprise-rest': 6.0.1
       '@octokit/rest': 21.1.1
@@ -11402,13 +11504,13 @@ snapshots:
       - typescript
       - verdaccio
 
-  '@nx/devkit@20.8.1(nx@20.8.2)':
+  '@nx/devkit@20.8.1(nx@20.8.1)':
     dependencies:
       ejs: 3.1.10
       enquirer: 2.3.6
       ignore: 5.3.2
       minimatch: 9.0.3
-      nx: 20.8.2
+      nx: 20.8.1
       semver: 7.7.2
       tmp: 0.2.5
       tslib: 2.8.1
@@ -11496,10 +11598,16 @@ snapshots:
       - nx
       - supports-color
 
+  '@nx/nx-darwin-arm64@20.8.1':
+    optional: true
+
   '@nx/nx-darwin-arm64@20.8.2':
     optional: true
 
   '@nx/nx-darwin-arm64@21.5.3':
+    optional: true
+
+  '@nx/nx-darwin-x64@20.8.1':
     optional: true
 
   '@nx/nx-darwin-x64@20.8.2':
@@ -11508,10 +11616,16 @@ snapshots:
   '@nx/nx-darwin-x64@21.5.3':
     optional: true
 
+  '@nx/nx-freebsd-x64@20.8.1':
+    optional: true
+
   '@nx/nx-freebsd-x64@20.8.2':
     optional: true
 
   '@nx/nx-freebsd-x64@21.5.3':
+    optional: true
+
+  '@nx/nx-linux-arm-gnueabihf@20.8.1':
     optional: true
 
   '@nx/nx-linux-arm-gnueabihf@20.8.2':
@@ -11520,10 +11634,16 @@ snapshots:
   '@nx/nx-linux-arm-gnueabihf@21.5.3':
     optional: true
 
+  '@nx/nx-linux-arm64-gnu@20.8.1':
+    optional: true
+
   '@nx/nx-linux-arm64-gnu@20.8.2':
     optional: true
 
   '@nx/nx-linux-arm64-gnu@21.5.3':
+    optional: true
+
+  '@nx/nx-linux-arm64-musl@20.8.1':
     optional: true
 
   '@nx/nx-linux-arm64-musl@20.8.2':
@@ -11532,10 +11652,16 @@ snapshots:
   '@nx/nx-linux-arm64-musl@21.5.3':
     optional: true
 
+  '@nx/nx-linux-x64-gnu@20.8.1':
+    optional: true
+
   '@nx/nx-linux-x64-gnu@20.8.2':
     optional: true
 
   '@nx/nx-linux-x64-gnu@21.5.3':
+    optional: true
+
+  '@nx/nx-linux-x64-musl@20.8.1':
     optional: true
 
   '@nx/nx-linux-x64-musl@20.8.2':
@@ -11544,10 +11670,16 @@ snapshots:
   '@nx/nx-linux-x64-musl@21.5.3':
     optional: true
 
+  '@nx/nx-win32-arm64-msvc@20.8.1':
+    optional: true
+
   '@nx/nx-win32-arm64-msvc@20.8.2':
     optional: true
 
   '@nx/nx-win32-arm64-msvc@21.5.3':
+    optional: true
+
+  '@nx/nx-win32-x64-msvc@20.8.1':
     optional: true
 
   '@nx/nx-win32-x64-msvc@20.8.2':
@@ -11747,6 +11879,10 @@ snapshots:
     optional: true
 
   '@pkgr/core@0.2.9': {}
+
+  '@playwright/test@1.55.1':
+    dependencies:
+      playwright: 1.55.1
 
   '@polka/url@1.0.0-next.29': {}
 
@@ -13278,6 +13414,10 @@ snapshots:
   '@types/node@22.18.6':
     dependencies:
       undici-types: 6.21.0
+
+  '@types/node@24.5.2':
+    dependencies:
+      undici-types: 7.12.0
 
   '@types/normalize-package-data@2.4.4': {}
 
@@ -16755,15 +16895,15 @@ snapshots:
       pkg-types: 1.3.1
       ufo: 1.6.1
 
-  mobx-react-lite@4.1.0(mobx@6.13.7)(react-dom@19.1.1(react@19.1.1))(react@19.1.1):
+  mobx-react-lite@4.1.0(mobx@6.15.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1):
     dependencies:
-      mobx: 6.13.7
+      mobx: 6.15.0
       react: 19.1.1
       use-sync-external-store: 1.5.0(react@19.1.1)
     optionalDependencies:
       react-dom: 19.1.1(react@19.1.1)
 
-  mobx@6.13.7: {}
+  mobx@6.15.0: {}
 
   motion-dom@12.23.21:
     dependencies:
@@ -16882,7 +17022,7 @@ snapshots:
       - '@types/react'
       - supports-color
 
-  next@15.2.5(babel-plugin-macros@3.1.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.93.2):
+  next@15.2.5(@playwright/test@1.55.1)(babel-plugin-macros@3.1.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.93.2):
     dependencies:
       '@next/env': 15.2.5
       '@swc/counter': 0.1.3
@@ -16902,13 +17042,14 @@ snapshots:
       '@next/swc-linux-x64-musl': 15.2.5
       '@next/swc-win32-arm64-msvc': 15.2.5
       '@next/swc-win32-x64-msvc': 15.2.5
+      '@playwright/test': 1.55.1
       sass: 1.93.2
       sharp: 0.33.5
     transitivePeerDependencies:
       - '@babel/core'
       - babel-plugin-macros
 
-  next@15.5.4(@babel/core@7.28.4)(babel-plugin-macros@3.1.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.93.2):
+  next@15.5.4(@babel/core@7.28.4)(@playwright/test@1.55.1)(babel-plugin-macros@3.1.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.93.2):
     dependencies:
       '@next/env': 15.5.4
       '@swc/helpers': 0.5.15
@@ -16926,6 +17067,7 @@ snapshots:
       '@next/swc-linux-x64-musl': 15.5.4
       '@next/swc-win32-arm64-msvc': 15.5.4
       '@next/swc-win32-x64-msvc': 15.5.4
+      '@playwright/test': 1.55.1
       sass: 1.93.2
       sharp: 0.34.4
     transitivePeerDependencies:
@@ -17068,6 +17210,56 @@ snapshots:
   nth-check@2.1.1:
     dependencies:
       boolbase: 1.0.0
+
+  nx@20.8.1:
+    dependencies:
+      '@napi-rs/wasm-runtime': 0.2.4
+      '@yarnpkg/lockfile': 1.1.0
+      '@yarnpkg/parsers': 3.0.2
+      '@zkochan/js-yaml': 0.0.7
+      axios: 1.12.2(debug@4.4.3)
+      chalk: 4.1.2
+      cli-cursor: 3.1.0
+      cli-spinners: 2.6.1
+      cliui: 8.0.1
+      dotenv: 16.4.7
+      dotenv-expand: 11.0.7
+      enquirer: 2.3.6
+      figures: 3.2.0
+      flat: 5.0.2
+      front-matter: 4.0.2
+      ignore: 5.3.2
+      jest-diff: 29.7.0
+      jsonc-parser: 3.2.0
+      lines-and-columns: 2.0.3
+      minimatch: 9.0.3
+      node-machine-id: 1.1.12
+      npm-run-path: 4.0.1
+      open: 8.4.2
+      ora: 5.3.0
+      resolve.exports: 2.0.3
+      semver: 7.7.2
+      string-width: 4.2.3
+      tar-stream: 2.2.0
+      tmp: 0.2.5
+      tsconfig-paths: 4.2.0
+      tslib: 2.8.1
+      yaml: 2.8.1
+      yargs: 17.7.2
+      yargs-parser: 21.1.1
+    optionalDependencies:
+      '@nx/nx-darwin-arm64': 20.8.1
+      '@nx/nx-darwin-x64': 20.8.1
+      '@nx/nx-freebsd-x64': 20.8.1
+      '@nx/nx-linux-arm-gnueabihf': 20.8.1
+      '@nx/nx-linux-arm64-gnu': 20.8.1
+      '@nx/nx-linux-arm64-musl': 20.8.1
+      '@nx/nx-linux-x64-gnu': 20.8.1
+      '@nx/nx-linux-x64-musl': 20.8.1
+      '@nx/nx-win32-arm64-msvc': 20.8.1
+      '@nx/nx-win32-x64-msvc': 20.8.1
+    transitivePeerDependencies:
+      - debug
 
   nx@20.8.2:
     dependencies:
@@ -17243,7 +17435,7 @@ snapshots:
       bl: 4.1.0
       chalk: 4.1.2
       cli-cursor: 3.1.0
-      cli-spinners: 2.6.1
+      cli-spinners: 2.9.2
       is-interactive: 1.0.0
       log-symbols: 4.1.0
       strip-ansi: 6.0.1
@@ -19090,6 +19282,8 @@ snapshots:
 
   undici-types@6.21.0: {}
 
+  undici-types@7.12.0: {}
+
   unicode-canonical-property-names-ecmascript@2.0.1: {}
 
   unicode-match-property-ecmascript@2.0.0:
@@ -19426,11 +19620,11 @@ snapshots:
     transitivePeerDependencies:
       - rollup
 
-  vite-plugin-node-polyfills@0.23.0(rollup@4.35.0)(vite@6.3.6(@types/node@22.18.6)(less@4.4.1)(sass@1.93.2)(stylus@0.62.0)(terser@5.44.0)(tsx@4.20.6)(yaml@2.8.1)):
+  vite-plugin-node-polyfills@0.23.0(rollup@4.35.0)(vite@6.3.6(@types/node@24.5.2)(less@4.4.1)(sass@1.93.2)(stylus@0.62.0)(terser@5.44.0)(tsx@4.20.6)(yaml@2.8.1)):
     dependencies:
       '@rollup/plugin-inject': 5.0.5(rollup@4.35.0)
       node-stdlib-browser: 1.3.1
-      vite: 6.3.6(@types/node@22.18.6)(less@4.4.1)(sass@1.93.2)(stylus@0.62.0)(terser@5.44.0)(tsx@4.20.6)(yaml@2.8.1)
+      vite: 6.3.6(@types/node@24.5.2)(less@4.4.1)(sass@1.93.2)(stylus@0.62.0)(terser@5.44.0)(tsx@4.20.6)(yaml@2.8.1)
     transitivePeerDependencies:
       - rollup
 
@@ -19462,6 +19656,24 @@ snapshots:
       tinyglobby: 0.2.15
     optionalDependencies:
       '@types/node': 22.18.6
+      fsevents: 2.3.3
+      less: 4.4.1
+      sass: 1.93.2
+      stylus: 0.62.0
+      terser: 5.44.0
+      tsx: 4.20.6
+      yaml: 2.8.1
+
+  vite@6.3.6(@types/node@24.5.2)(less@4.4.1)(sass@1.93.2)(stylus@0.62.0)(terser@5.44.0)(tsx@4.20.6)(yaml@2.8.1):
+    dependencies:
+      esbuild: 0.25.10
+      fdir: 6.5.0(picomatch@4.0.3)
+      picomatch: 4.0.3
+      postcss: 8.5.6
+      rollup: 4.35.0
+      tinyglobby: 0.2.15
+    optionalDependencies:
+      '@types/node': 24.5.2
       fsevents: 2.3.3
       less: 4.4.1
       sass: 1.93.2
