@@ -63,6 +63,9 @@
       "acorn": "patches/acorn.patch"
     },
     "onlyBuiltDependencies": [
+      "@bundled-es-modules/glob",
+      "@parcel/watcher",
+      "esbuild",
       "msw",
       "nx",
       "sharp",
