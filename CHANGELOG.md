@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.492](https://github.com/mittwald/flow/compare/0.2.0-alpha.491...0.2.0-alpha.492) (2025-09-26)
+
+### Performance Improvements
+
+* use memo in provider components ([6edc252](https://github.com/mittwald/flow/commit/6edc25282f59eea06457c0be59cb57bf7adc1a23))
+
 # [0.2.0-alpha.491](https://github.com/mittwald/flow/compare/0.2.0-alpha.490...0.2.0-alpha.491) (2025-09-26)
 
 ### Bug Fixes
