@@ -43,7 +43,11 @@ export default () => {
               },
             ]}
           />
-          <NotificationList.Item>
+          <NotificationList.Item
+            textValue={(notification) =>
+              notification.content
+            }
+          >
             {(notification) => (
               <NotificationList.ItemView>
                 <Avatar status={notification.status} />
@@ -72,7 +76,9 @@ export default () => {
               },
             ]}
           />
-          <EmailList.Item>
+          <EmailList.Item
+            textValue={(email) => email.address}
+          >
             {(email) => (
               <EmailList.ItemView>
                 <Avatar>

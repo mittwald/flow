@@ -15,7 +15,7 @@ import { IconAt } from "@tabler/icons-react";
     <Text>E-Mail-Addresse anlegen</Text>
     <IconChevronDown />
   </Button>
-  <ContextMenu>
+  <ContextMenu aria-label="E-Mail-Addresse anlegen">
     <MenuItem id="1">
       <Icon>
         <IconAt />

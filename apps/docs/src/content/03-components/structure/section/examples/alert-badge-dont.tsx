@@ -23,7 +23,11 @@ import {
         Fehlende Vertragspartnerdaten
       </AlertBadge>
     </Heading>
-    <Button variant="soft" color="secondary">
+    <Button
+      variant="soft"
+      color="secondary"
+      aria-label="Weitere Aktionen anzeigen"
+    >
       <IconContextMenu />
     </Button>
     <Button variant="soft" color="secondary">

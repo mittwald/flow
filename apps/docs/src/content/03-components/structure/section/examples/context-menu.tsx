@@ -22,7 +22,11 @@ import {
     <Heading>Mein Projekt</Heading>
 
     <ContextMenuTrigger>
-      <Button variant="soft" color="secondary">
+      <Button
+        variant="soft"
+        color="secondary"
+        aria-label="Weitere Aktionen anzeigen"
+      >
         <IconContextMenu />
       </Button>
       <ContextMenu aria-label="Weitere Aktionen">

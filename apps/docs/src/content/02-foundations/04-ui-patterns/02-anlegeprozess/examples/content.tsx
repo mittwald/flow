@@ -144,7 +144,7 @@ export default () => {
           </Table>
           <CheckboxButton isRequired>
             Ich verstehe, dass ein Klick auf
-            “Kostenpflichtig buchen” keinerlei Auswirkungen
+            „Kostenpflichtig buchen“ keinerlei Auswirkungen
             hat, da es sich um einen rein fiktiven
             Bestellprozess handelt. Es wird keine Bestellung
             ausgelöst und wir speichern keine Daten. Hier
@@ -197,7 +197,9 @@ export default () => {
               property="type"
             />
 
-            <DomainList.Item>
+            <DomainList.Item
+              textValue={(domain) => domain.hostname}
+            >
               {(domain) => (
                 <ListItemView>
                   <Avatar
