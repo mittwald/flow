@@ -26,7 +26,7 @@ export const createTestServer = async () => {
           server.warmupRequest(
             "./main.tsx?file=tests/Warmup.browser.test.remote.tsx&test=default",
           ),
-          timeout(5_000),
+          timeout(10_000),
         ]);
 
       await server.listen();
