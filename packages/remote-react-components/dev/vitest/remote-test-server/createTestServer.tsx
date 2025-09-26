@@ -14,11 +14,15 @@ export const createTestServer = async () => {
     optimizeDeps: {
       force: true,
     },
+    mode: "production",
+    appType: "spa",
+    logLevel: "info",
   });
 
   return {
     start: async () => {
       await server.listen();
+      await server.transformRequest("./main.tsx");
       await server.warmupRequest("./main.tsx");
       server.printUrls();
     },

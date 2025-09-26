@@ -25,11 +25,11 @@
     },
     "test:browser": {
       "dependsOn": ["^build"],
-      "cache": true
+      "cache": false
     },
     "test:browser:dev": {
       "dependsOn": ["^build"],
-      "cache": true
+      "cache": false
     },
 
     "test:compile": {

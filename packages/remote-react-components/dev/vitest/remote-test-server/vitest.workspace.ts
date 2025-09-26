@@ -13,6 +13,8 @@ export default defineWorkspace([
       include: ["src/**/*.browser.test.{ts,tsx}"],
       browser: {
         enabled: true,
+        fileParallelism: false,
+        screenshotFailures: false,
         provider: "playwright",
         instances: [
           {
