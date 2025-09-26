@@ -2,6 +2,9 @@ import { createServer } from "vite";
 
 const remoteTestServerPort = 6022;
 
+const timeout = (ms: number) =>
+  new Promise((ignored, reject) => setTimeout(() => reject("Timeout"), ms));
+
 export const createTestServer = async () => {
   const server = await createServer({
     configFile: "dev/vitest/remote-test-server/vite.config.ts",
@@ -18,8 +21,17 @@ export const createTestServer = async () => {
 
   return {
     start: async () => {
+      const startWarmupWithTimeout = () =>
+        Promise.race([
+          server.warmupRequest(
+            "./main.tsx?file=tests/Warmup.browser.test.remote.tsx&test=default",
+          ),
+          timeout(5_000),
+        ]);
+
       await server.listen();
-      await server.warmupRequest("./main.tsx");
+      await startWarmupWithTimeout().catch(startWarmupWithTimeout);
+
       server.printUrls();
     },
     stop: async () => {

@@ -29,8 +29,8 @@
     "build": "vite build --config vite.build.config.ts",
     "clean": "rimraf dist",
     "test": "exit 0",
-    "test:browser": "vitest run --workspace=dev/vitest/remote-test-server/vitest.workspace.ts --browser.headless --no-file-parallelism --sequence.shuffle --maxConcurrency 1",
-    "test:browser:dev": "vitest dev --workspace=dev/vitest/remote-test-server/vitest.workspace.ts --no-file-parallelism --sequence.shuffle --maxConcurrency 1",
+    "test:browser": "vitest run --workspace=dev/vitest/remote-test-server/vitest.workspace.ts --browser.headless",
+    "test:browser:dev": "vitest dev --workspace=dev/vitest/remote-test-server/vitest.workspace.ts",
     "test:browser:prepare": "playwright install chromium",
     "test:compile": "tsc --noEmit",
     "test:unit": "exit 0"

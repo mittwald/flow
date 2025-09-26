@@ -12,6 +12,9 @@ export default defineWorkspace([
       setupFiles: "dev/vitest/setupFiles.ts",
       include: ["src/**/*.browser.test.{ts,tsx}"],
       browser: {
+        fileParallelism: false,
+        screenshotFailures: false,
+        isolate: true,
         enabled: true,
         provider: "playwright",
         instances: [
