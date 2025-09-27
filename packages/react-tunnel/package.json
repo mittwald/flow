@@ -31,7 +31,7 @@
     "test:unit": "vitest run"
   },
   "dependencies": {
-    "mobx": "^6.13.7",
+    "mobx": "^6.15.0",
     "mobx-react-lite": "^4.1.0"
   },
   "devDependencies": {
