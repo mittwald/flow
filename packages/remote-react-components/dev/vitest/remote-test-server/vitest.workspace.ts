@@ -8,13 +8,9 @@ export default defineWorkspace([
     },
     test: {
       globals: true,
-      retry: 1,
       globalSetup: "dev/vitest/remote-test-server/setupGlobal.ts",
       setupFiles: "dev/vitest/setupFiles.ts",
       include: ["src/**/*.browser.test.{ts,tsx}"],
-      sequence: {
-        shuffle: true,
-      },
       browser: {
         fileParallelism: false,
         screenshotFailures: false,

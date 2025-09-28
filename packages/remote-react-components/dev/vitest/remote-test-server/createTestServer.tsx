@@ -4,15 +4,20 @@ const remoteTestServerPort = 6022;
 
 export const createTestServer = async () => {
   const server = await createServer({
-    logLevel: "info",
-    configFile: "dev/vitest/remote-test-server/vite.config.ts",
     cacheDir: "node_modules/.vitest-remote-test-server",
+    logLevel: "info",
     root: "dev/vitest/remote-test-server",
+    optimizeDeps: {
+      force: true,
+    },
     server: {
       port: remoteTestServerPort,
       strictPort: true,
       hmr: false,
       watch: null,
+      warmup: {
+        clientFiles: ["../../../src/**/*.browser.test.remote.tsx"],
+      },
     },
   });
 
