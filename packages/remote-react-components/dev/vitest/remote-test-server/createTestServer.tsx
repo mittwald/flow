@@ -10,6 +10,11 @@ export const createTestServer = async () => {
     server: {
       port: remoteTestServerPort,
       strictPort: true,
+      hmr: false,
+      watch: null,
+      warmup: {
+        clientFiles: ["../../../src/**/*.browser.test.remote.tsx"],
+      },
     },
     optimizeDeps: {
       force: true,
@@ -19,12 +24,10 @@ export const createTestServer = async () => {
   return {
     start: async () => {
       await server.listen();
-      await server.warmupRequest("./main.tsx");
       server.printUrls();
     },
     stop: async () => {
       await server.close();
-      console.log("Remote test server stopped");
     },
   };
 };
