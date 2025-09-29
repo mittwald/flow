@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { useState } from "react";
+import React, { useState } from "react";
 import type { Chat } from "@/components/Chat";
 import { Autocomplete } from "@/components/Autocomplete";
 import { Label } from "@/components/Label";

@@ -145,3 +145,34 @@ export const WithTransformedValue: Story = {
     );
   },
 };
+
+export const WithFocusAndError: Story = {
+  render: (props) => {
+    const form = useForm();
+    return (
+      <Form form={form} onSubmit={async () => await sleep(2000)}>
+        <Field name={"email"}>
+          <TextField {...props} type="email" inputMode="email">
+            <Label>Email</Label>
+          </TextField>
+        </Field>
+        <div style={{ marginBottom: "2200px" }} />
+        <Button
+          onPress={() =>
+            form.setError(
+              "email",
+              { type: "required", message: "oh no" },
+              { shouldFocus: true },
+            )
+          }
+        >
+          err through form
+        </Button>
+        <Button onPress={() => form.setFocus("email")}>
+          focus through form
+        </Button>
+        <Button type="submit">Submit</Button>
+      </Form>
+    );
+  },
+};
