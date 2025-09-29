@@ -4,7 +4,7 @@ import React, { memo, type FC, useContext } from "react";
 import {
   MessageThread,
   type MessageThreadProps,
-} from "@/components/MessageThread";
+} from "@/components/MessageThread/MessageThread";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const MessageThreadView: FC<MessageThreadProps> = memo((props) => {

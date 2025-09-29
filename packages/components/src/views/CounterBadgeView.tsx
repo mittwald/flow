@@ -4,7 +4,7 @@ import React, { memo, type FC, useContext } from "react";
 import {
   CounterBadge,
   type CounterBadgeProps,
-} from "@/components/CounterBadge";
+} from "@/components/CounterBadge/CounterBadge";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const CounterBadgeView: FC<CounterBadgeProps> = memo((props) => {

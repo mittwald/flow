@@ -4,7 +4,7 @@ import React, { memo, type FC, useContext } from "react";
 import {
   MarkdownEditor,
   type MarkdownEditorProps,
-} from "@/components/MarkdownEditor";
+} from "@/components/MarkdownEditor/MarkdownEditor";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const MarkdownEditorView: FC<MarkdownEditorProps> = memo((props) => {

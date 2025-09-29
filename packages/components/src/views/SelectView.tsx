@@ -1,7 +1,7 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import React, { memo, type FC, useContext } from "react";
-import { Select, type SelectProps } from "@/components/Select";
+import { Select, type SelectProps } from "@/components/Select/Select";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const SelectView: FC<SelectProps> = memo((props) => {

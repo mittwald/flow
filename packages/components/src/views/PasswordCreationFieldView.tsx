@@ -4,7 +4,7 @@ import React, { memo, type FC, useContext } from "react";
 import {
   PasswordCreationField,
   type PasswordCreationFieldProps,
-} from "@/components/PasswordCreationField";
+} from "@/components/PasswordCreationField/PasswordCreationField";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const PasswordCreationFieldView: FC<PasswordCreationFieldProps> = memo(

@@ -4,7 +4,7 @@ import React, { memo, type FC, useContext } from "react";
 import {
   CheckboxGroup,
   type CheckboxGroupProps,
-} from "@/components/CheckboxGroup";
+} from "@/components/CheckboxGroup/CheckboxGroup";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const CheckboxGroupView: FC<CheckboxGroupProps> = memo((props) => {
