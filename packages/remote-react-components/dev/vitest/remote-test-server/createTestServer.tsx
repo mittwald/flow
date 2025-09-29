@@ -8,8 +8,8 @@ export const createTestServer = async () => {
     cacheDir: "node_modules/.vitest-browser",
     root: "dev/vitest/remote-test-server",
     server: {
-      // hmr: false,
-      // watch: null,
+      hmr: false,
+      watch: null,
       port: remoteTestServerPort,
       strictPort: true,
       warmup: {
@@ -24,11 +24,9 @@ export const createTestServer = async () => {
   return {
     start: async () => {
       await server.listen();
-      server.printUrls();
     },
     stop: async () => {
       await server.close();
-      console.log("Remote test server stopped");
     },
   };
 };

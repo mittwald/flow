@@ -14,6 +14,7 @@ export default defineWorkspace([
       browser: {
         enabled: true,
         provider: "playwright",
+        fileParallelism: false,
         instances: [
           {
             browser: "chromium",

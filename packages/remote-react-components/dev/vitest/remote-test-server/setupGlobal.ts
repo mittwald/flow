@@ -3,7 +3,7 @@ import { createTestServer } from "./createTestServer";
 const testServer = await createTestServer();
 
 export async function setup() {
-  await testServer.start();
+  void testServer.start();
 }
 
 export async function teardown() {
