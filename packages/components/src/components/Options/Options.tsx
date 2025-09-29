@@ -5,7 +5,7 @@ import clsx from "clsx";
 import styles from "./Options.module.scss";
 import type { OverlayController } from "@/lib/controller";
 import type { OptionProps } from "@/components/Option";
-import { flowComponent } from "@/index/internal";
+import { flowComponent } from "@/lib/componentFactory/flowComponent";
 
 export interface OptionsProps
   extends Pick<Aria.ListBoxProps<OptionProps>, "renderEmptyState" | "onAction">,
