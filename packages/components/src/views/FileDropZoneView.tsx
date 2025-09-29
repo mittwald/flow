@@ -4,7 +4,7 @@ import React, { memo, type FC, useContext } from "react";
 import {
   FileDropZone,
   type FileDropZoneProps,
-} from "@/components/FileDropZone";
+} from "@/components/FileDropZone/FileDropZone";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const FileDropZoneView: FC<FileDropZoneProps> = memo((props) => {

@@ -1,4 +1,4 @@
-import { isFlowComponentName } from "@/index/internal";
+import { isFlowComponentName } from "@/lib/propsContext/isFlowComponentName";
 import { getMaxRecursionLevel } from "@/lib/propsContext/inherit/lib";
 import { getNestingLevel } from "@/lib/propsContext/nestedPropsContext/lib";
 import { nestingLevelKey } from "@/lib/propsContext/nestedPropsContext/types";

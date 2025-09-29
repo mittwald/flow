@@ -4,7 +4,7 @@ import React, { memo, type FC, useContext } from "react";
 import {
   SegmentedControl,
   type SegmentedControlProps,
-} from "@/components/SegmentedControl";
+} from "@/components/SegmentedControl/SegmentedControl";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const SegmentedControlView: FC<SegmentedControlProps> = memo((props) => {

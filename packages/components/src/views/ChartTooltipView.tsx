@@ -4,7 +4,7 @@ import React, { memo, type FC, useContext } from "react";
 import {
   ChartTooltip,
   type ChartTooltipProps,
-} from "@/components/CartesianChart";
+} from "@/components/CartesianChart/components/ChartTooltip/ChartTooltip";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const ChartTooltipView: FC<ChartTooltipProps> = memo((props) => {

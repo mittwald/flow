@@ -4,7 +4,7 @@ import React, { memo, type FC, useContext } from "react";
 import {
   ContextMenuTrigger,
   type ContextMenuTriggerProps,
-} from "@/components/ContextMenu";
+} from "@/components/ContextMenu/components/ContextMenuTrigger/ContextMenuTrigger";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const ContextMenuTriggerView: FC<ContextMenuTriggerProps> = memo((props) => {

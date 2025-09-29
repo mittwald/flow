@@ -4,7 +4,7 @@ import React, { memo, type FC, useContext } from "react";
 import {
   LabeledValue,
   type LabeledValueProps,
-} from "@/components/LabeledValue";
+} from "@/components/LabeledValue/LabeledValue";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const LabeledValueView: FC<LabeledValueProps> = memo((props) => {

@@ -4,7 +4,7 @@ import React, { memo, type FC, useContext } from "react";
 import {
   DialogTrigger,
   type DialogTriggerProps,
-} from "@/components/OverlayTrigger";
+} from "@/components/OverlayTrigger/components/DialogTrigger/DialogTrigger";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const DialogTriggerView: FC<DialogTriggerProps> = memo((props) => {

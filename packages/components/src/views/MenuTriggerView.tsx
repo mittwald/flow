@@ -4,7 +4,7 @@ import React, { memo, type FC, useContext } from "react";
 import {
   MenuTrigger,
   type MenuTriggerProps,
-} from "@/components/OverlayTrigger";
+} from "@/components/OverlayTrigger/components/MenuTrigger/MenuTrigger";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const MenuTriggerView: FC<MenuTriggerProps> = memo((props) => {

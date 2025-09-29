@@ -4,7 +4,7 @@ import React, { memo, type FC, useContext } from "react";
 import {
   FieldDescription,
   type FieldDescriptionProps,
-} from "@/components/FieldDescription";
+} from "@/components/FieldDescription/FieldDescription";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const FieldDescriptionView: FC<FieldDescriptionProps> = memo((props) => {

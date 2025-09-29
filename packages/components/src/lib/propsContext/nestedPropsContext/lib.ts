@@ -1,4 +1,4 @@
-import type { PropsContext } from "@/index/internal";
+import type { PropsContext } from "@/lib/propsContext/types";
 import {
   nestingLevelKey,
   type NestingLevelProps,

@@ -7,7 +7,7 @@ import { resolveDynamicProps } from "@/lib/propsContext/dynamicProps/resolveDyna
 import { useComponentPropsContext } from "@/lib/propsContext/propsContext";
 import { omitBy } from "remeda";
 import isDynamicProp from "@/lib/propsContext/dynamicProps/lib";
-import { isFlowComponentName } from "@/index/internal";
+import { isFlowComponentName } from "@/lib/propsContext/isFlowComponentName";
 import { isInheritedPropsContextKey } from "@/lib/propsContext/inherit/lib";
 import { areChildrenEmpty } from "@/lib/react/areChildrenEmpty";
 import { isNestingLevelKey } from "@/lib/propsContext/nestedPropsContext/lib";
