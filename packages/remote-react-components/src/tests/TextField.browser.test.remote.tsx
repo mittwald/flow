@@ -1,4 +1,4 @@
-import { Text, TextField } from "@/auto-generated";
+import { Div, Text, TextField } from "@/auto-generated";
 import { useState } from "react";
 
 export const standard = () => <TextField placeholder="field" />;
@@ -6,7 +6,7 @@ export const standard = () => <TextField placeholder="field" />;
 export const onPaste = () => {
   const [pastedText, setPastedText] = useState("");
   return (
-    <>
+    <Div>
       {pastedText && <Text data-testid="pasted-text">{pastedText}</Text>}
       <TextField placeholder="copy-me" value="FOO" />
       <TextField
@@ -15,6 +15,6 @@ export const onPaste = () => {
           setPastedText(event.clipboardData.getData("text"));
         }}
       />
-    </>
+    </Div>
   );
 };

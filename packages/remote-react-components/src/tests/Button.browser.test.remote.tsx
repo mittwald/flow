@@ -1,4 +1,4 @@
-import { Button, Text } from "@/auto-generated";
+import { Button, Div, Text } from "@/auto-generated";
 import { useState } from "react";
 
 export const standard = () => <Button data-testid="button">Click me</Button>;
@@ -6,7 +6,7 @@ export const standard = () => <Button data-testid="button">Click me</Button>;
 export const eventhandler = () => {
   const [eventData, setEventData] = useState<object>({});
   return (
-    <>
+    <Div>
       <Text data-testid="event-data">
         {JSON.stringify({
           ...eventData,
@@ -18,6 +18,6 @@ export const eventhandler = () => {
       <Button data-testid="button" onPress={setEventData}>
         Click me
       </Button>
-    </>
+    </Div>
   );
 };

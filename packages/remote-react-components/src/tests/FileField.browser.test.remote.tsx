@@ -1,4 +1,4 @@
-import { FileField, Text } from "@/auto-generated";
+import { Div, FileField, Text } from "@/auto-generated";
 import { useState } from "react";
 
 export const standard = () => <FileField data-testid="field" />;
@@ -6,7 +6,7 @@ export const standard = () => <FileField data-testid="field" />;
 export const onChange = () => {
   const [uploadedBytes, setUploadedBytes] = useState(0);
   return (
-    <>
+    <Div>
       {uploadedBytes > 0 && (
         <Text data-testid="uploaded-bytes">{uploadedBytes}</Text>
       )}
@@ -19,14 +19,14 @@ export const onChange = () => {
             .then((buffer) => setUploadedBytes(buffer.byteLength));
         }}
       />
-    </>
+    </Div>
   );
 };
 
 export const onChangeMultiple = () => {
   const [uploadedBytes, setUploadedBytes] = useState<number[]>([]);
   return (
-    <>
+    <Div>
       {uploadedBytes.length >= 1 && (
         <Text data-testid="uploaded-bytes">{uploadedBytes.join(",")}</Text>
       )}
@@ -43,6 +43,6 @@ export const onChangeMultiple = () => {
           setUploadedBytes(resolvedBytes);
         }}
       />
-    </>
+    </Div>
   );
 };
