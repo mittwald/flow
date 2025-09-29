@@ -12,6 +12,7 @@ export default tseslint.config(
       "**/*.cjs",
       ".next/**/*",
       ".nx",
+      "**/.vitest/**/*",
     ],
   },
   {
