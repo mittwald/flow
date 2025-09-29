@@ -4,7 +4,11 @@ export default defineWorkspace([
   {
     extends: "vite.config.ts",
     optimizeDeps: {
-      include: ["react/jsx-dev-runtime"],
+      include: [
+        "react/jsx-dev-runtime",
+        "react-error-boundary",
+        "react-dom/client",
+      ],
     },
     // do not cache in node_modules - important for CI
     cacheDir: ".vitest/test",
