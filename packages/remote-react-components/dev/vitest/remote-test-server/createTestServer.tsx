@@ -16,7 +16,10 @@ export const createTestServer = async () => {
       hmr: false,
       watch: null,
       warmup: {
-        clientFiles: ["../../../src/tests/Warmup.browser.test.remote.tsx"],
+        clientFiles: [
+          "../../../src/tests/Warmup.browser.test.remote.tsx",
+          "./main.tsx",
+        ],
       },
     },
   });
