@@ -1,7 +1,10 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import React, { memo, type FC, useContext } from "react";
-import { Area, type AreaProps } from "@/components/CartesianChart";
+import {
+  Area,
+  type AreaProps,
+} from "@/components/CartesianChart/components/Area/Area";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const AreaView: FC<AreaProps> = memo((props) => {

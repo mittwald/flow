@@ -1,7 +1,7 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import React, { memo, type FC, useContext } from "react";
-import { FileCard, type FileCardProps } from "@/components/FileCard";
+import { FileCard, type FileCardProps } from "@/components/FileCard/FileCard";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const FileCardView: FC<FileCardProps> = memo((props) => {

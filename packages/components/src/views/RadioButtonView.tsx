@@ -1,7 +1,10 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import React, { memo, type FC, useContext } from "react";
-import { RadioButton, type RadioButtonProps } from "@/components/RadioGroup";
+import {
+  RadioButton,
+  type RadioButtonProps,
+} from "@/components/RadioGroup/components/RadioButton/RadioButton";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const RadioButtonView: FC<RadioButtonProps> = memo((props) => {

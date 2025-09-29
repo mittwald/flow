@@ -1,7 +1,7 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import React, { memo, type FC, useContext } from "react";
-import { Heading, type HeadingProps } from "@/components/Heading";
+import { Heading, type HeadingProps } from "@/components/Heading/Heading";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const HeadingView: FC<HeadingProps> = memo((props) => {

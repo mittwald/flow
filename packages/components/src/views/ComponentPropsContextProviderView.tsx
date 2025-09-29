@@ -4,7 +4,7 @@ import React, { memo, type FC, useContext } from "react";
 import {
   ComponentPropsContextProvider,
   type ComponentPropsContextProviderProps,
-} from "@/components/ComponentPropsContextProvider";
+} from "@/components/ComponentPropsContextProvider/ComponentPropsContextProvider";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const ComponentPropsContextProviderView: FC<ComponentPropsContextProviderProps> =

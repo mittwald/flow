@@ -1,7 +1,7 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import React, { memo, type FC, useContext } from "react";
-import { Icon, type IconProps } from "@/components/Icon";
+import { Icon, type IconProps } from "@/components/Icon/Icon";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const IconView: FC<IconProps> = memo((props) => {
