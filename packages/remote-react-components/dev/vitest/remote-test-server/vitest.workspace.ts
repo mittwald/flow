@@ -6,6 +6,7 @@ export default defineWorkspace([
     optimizeDeps: {
       include: ["react/jsx-dev-runtime"],
     },
+    cacheDir: "node_modules/.vitest-workspace",
     test: {
       globals: true,
       globalSetup: "dev/vitest/remote-test-server/setupGlobal.ts",
