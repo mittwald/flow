@@ -1,3 +1,4 @@
+import { Div } from "@/auto-generated/Div";
 import RemoteRoot from "@/components/RemoteRoot";
 import { createElement, type ComponentType } from "react";
 import { createRoot } from "react-dom/client";
@@ -33,4 +34,8 @@ if (!foundFile) {
 
 const module = modules[foundFile] as Record<string, ComponentType>;
 const TestComponent = module[test];
-root.render(<RemoteRoot>{createElement(TestComponent)}</RemoteRoot>);
+root.render(
+  <RemoteRoot>
+    <Div>{createElement(TestComponent)}</Div>
+  </RemoteRoot>,
+);
