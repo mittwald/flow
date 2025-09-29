@@ -43,8 +43,10 @@ abgeschlossen werden, wenn bereits ein Vertragspartner existiert.
 **Beispiel**: Eine Extension kann nur installiert werden, wenn in der gewählten
 Organisation bereits ein Vertragspartner existiert. Fehlt dieser, erscheint ein
 [Alert](/03-components/status/alert) mit einer Erklärung und der Möglichkeit,
-direkt in den “Vertragspartner anlegen”-Prozess zu starten – ohne den aktuellen
+direkt in den „Vertragspartner anlegen“-Prozess zu starten – ohne den aktuellen
 Kontext zu verlassen.
+
+<LiveCodeEditor example="install-extension" editorCollapsed />
 
 **Vorhandene Informationen**: In anderen Prozessen können bestehende Inhalte
 direkt genutzt werden – mit der Option, bei Bedarf neue anzulegen.
@@ -52,6 +54,8 @@ direkt genutzt werden – mit der Option, bei Bedarf neue anzulegen.
 **Beispiel**: Bei der Installation einer App wählt der User eine vorhandene
 Domain aus. Falls nötig, kann er an dieser Stelle auch eine neue Subdomain
 anlegen.
+
+<LiveCodeEditor example="install-app" editorCollapsed />
 
 ## Komplexe Prozesse
 
@@ -64,6 +68,8 @@ erledigen.
 **Beispiel**: Das Anlegen eines Containers ist ein umfangreicher Prozess.
 Sections im OffCanvas sorgen dafür, dass der Ablauf trotzdem strukturiert und
 übersichtlich bleibt.
+
+<LiveCodeEditor example="create-container" editorCollapsed />
 
 ---
 
@@ -84,12 +90,20 @@ bietet einen großen CTA zum Anlegen des ersten Elements.
 **Beispiel**: Sind noch keine Projekte angelegt, wird in der Projektübersicht
 eine [IllustratedMessage](/03-components/content/illustrated-message) angezeigt.
 
+<LiveCodeEditor
+  example="project-illustrated-message"
+  editorCollapsed
+  bgColor="dark"
+/>
+
 Sobald Inhalte vorhanden sind, rückt die Navigation über die
 [List](/03-components/structure/list) in den Vordergrund. Die
 [ActionGroup](/03-components/actions/action-group) im Header der List übernimmt
 dann die Funktion, den Anlegeprozess für neue Elemente zu starten.
 
 **Beispiel**: Sind Projekte angelegt, werden diese in einer List dargestellt.
+
+<LiveCodeEditor example="project-list" editorCollapsed bgColor="dark" />
 
 ## Gleiche und unterschiedliche Elemente
 
@@ -105,6 +119,8 @@ gewünschten Typ auswählt. Danach startet der passende Prozess.
 **Beispiel**: Beim Anlegen einer Domain wird über ein ContextMenu zunächst
 abgefragt, um welche Art von Domain es sich handelt.
 
+<LiveCodeEditor example="domain-list" editorCollapsed bgColor="dark" />
+
 ## Mehr als 5 oder erklärungsbedürftige Elemente
 
 Viele oder erklärungsbedürftige Optionen gibt es z. B. beim Installieren einer
@@ -116,6 +132,12 @@ Klick auf das gewünschte Element, um den Prozess zu starten.
 
 **Beispiel**: Beim Anlegen einer App öffnet sich zunächst ein OffCanvas, um alle
 zur Verfügung stehenden Optionen übersichtlich darzustellen.
+
+<LiveCodeEditor
+  example="app-illustrated-message"
+  editorCollapsed
+  bgColor="dark"
+/>
 
 ---
 
@@ -133,3 +155,5 @@ der User Inhalte direkt dort ändern kann, wo sie angezeigt werden.
 Section stellt Informationen oder Konfigurationen zu einem bestimmten Inhalt
 dar. Über die SectionAction lassen sich die angezeigten Inhalte bearbeiten oder
 neue Prozesse starten.
+
+<LiveCodeEditor example="app-details" editorCollapsed bgColor="dark" />
