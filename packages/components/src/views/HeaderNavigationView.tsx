@@ -4,7 +4,7 @@ import React, { memo, type FC, useContext } from "react";
 import {
   HeaderNavigation,
   type HeaderNavigationProps,
-} from "@/components/HeaderNavigation";
+} from "@/components/HeaderNavigation/HeaderNavigation";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const HeaderNavigationView: FC<HeaderNavigationProps> = memo((props) => {

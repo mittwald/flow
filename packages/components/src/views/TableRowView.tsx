@@ -1,7 +1,10 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import React, { memo, type FC, useContext } from "react";
-import { TableRow, type TableRowProps } from "@/components/Table";
+import {
+  TableRow,
+  type TableRowProps,
+} from "@/components/Table/components/TableRow/TableRow";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const TableRowView: FC<TableRowProps> = memo((props) => {
