@@ -1,7 +1,7 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import React, { memo, type FC, useContext } from "react";
-import { Section, type SectionProps } from "@/components/Section";
+import { Section, type SectionProps } from "@/components/Section/Section";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const SectionView: FC<SectionProps> = memo((props) => {

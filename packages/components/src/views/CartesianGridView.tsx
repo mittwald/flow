@@ -4,7 +4,7 @@ import React, { memo, type FC, useContext } from "react";
 import {
   CartesianGrid,
   type CartesianGridProps,
-} from "@/components/CartesianChart";
+} from "@/components/CartesianChart/components/CartesianGrid/CartesianGrid";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const CartesianGridView: FC<CartesianGridProps> = memo((props) => {

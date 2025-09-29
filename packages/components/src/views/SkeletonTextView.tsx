@@ -4,7 +4,7 @@ import React, { memo, type FC, useContext } from "react";
 import {
   SkeletonText,
   type SkeletonTextProps,
-} from "@/components/SkeletonText";
+} from "@/components/SkeletonText/SkeletonText";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const SkeletonTextView: FC<SkeletonTextProps> = memo((props) => {
