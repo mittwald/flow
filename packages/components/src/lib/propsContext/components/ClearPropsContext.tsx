@@ -1,4 +1,4 @@
-import { propsContext } from "@/index/internal";
+import { propsContext } from "@/lib/propsContext/propsContext";
 import { PropsContextLevelProvider } from "@/lib/propsContext/inherit/PropsContextLevelProvider";
 import type { FC, PropsWithChildren } from "react";
 
