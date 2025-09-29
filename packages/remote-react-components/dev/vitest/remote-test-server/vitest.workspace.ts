@@ -3,6 +3,7 @@ import { defineWorkspace } from "vitest/config";
 export default defineWorkspace([
   {
     extends: "vite.config.ts",
+    cacheDir: "dev/vitest/remote-test-server/.vitest/cache/test-browser",
     test: {
       globals: true,
       globalSetup: "dev/vitest/remote-test-server/setupGlobal.ts",
