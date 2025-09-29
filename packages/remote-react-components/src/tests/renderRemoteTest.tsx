@@ -15,7 +15,11 @@ export const renderRemoteTest = (testName: string) => {
   url.searchParams.set("file", testFilePath.replace(".test.", ".test.remote."));
 
   return render(
-    <ErrorBoundary fallbackRender={({ error }) => "Error: " + String(error)}>
+    <ErrorBoundary
+      fallbackRender={({ error }) =>
+        `${url.toString()}: Error: ${String(error)}`
+      }
+    >
       <Suspense
         fallback={<div data-testid="root-loading-view">Loading...</div>}
       >
