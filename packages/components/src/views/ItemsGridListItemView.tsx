@@ -1,7 +1,10 @@
 /* prettier-ignore */
 /* This file is auto-generated with the remote-components-generator */
 import React, { memo, type FC, useContext } from "react";
-import { GridListItem, type GridListItemProps } from "@/components/List";
+import {
+  GridListItem,
+  type GridListItemProps,
+} from "@/components/List/components/Items/views/GridListItem/GridListItem";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const ItemsGridListItemView: FC<GridListItemProps> = memo((props) => {

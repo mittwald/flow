@@ -4,7 +4,7 @@ import React, { memo, type FC, useContext } from "react";
 import {
   CheckboxButton,
   type CheckboxButtonProps,
-} from "@/components/CheckboxButton";
+} from "@/components/CheckboxButton/CheckboxButton";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const CheckboxButtonView: FC<CheckboxButtonProps> = memo((props) => {

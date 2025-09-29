@@ -4,7 +4,7 @@ import React, { memo, type FC, useContext } from "react";
 import {
   Autocomplete,
   type AutocompleteProps,
-} from "@/components/Autocomplete";
+} from "@/components/Autocomplete/Autocomplete";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const AutocompleteView: FC<AutocompleteProps> = memo((props) => {

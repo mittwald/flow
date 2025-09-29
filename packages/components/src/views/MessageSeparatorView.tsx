@@ -4,7 +4,7 @@ import React, { memo, type FC, useContext } from "react";
 import {
   MessageSeparator,
   type MessageSeparatorProps,
-} from "@/components/MessageThread";
+} from "@/components/MessageThread/components/MessageSeparator/MessageSeparator";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const MessageSeparatorView: FC<MessageSeparatorProps> = memo((props) => {
