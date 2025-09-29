@@ -8,7 +8,7 @@ import { render } from "@testing-library/react";
 import { HTMLDivElement as HappyHTMLDivElement } from "happy-dom";
 import type { FlowComponentName } from "@/components/propTypes";
 import { propsContextSupportingComponents } from "@/components/propTypes";
-import { PropsContextProvider } from "@/lib/propsContext";
+import { PropsContextProvider } from "@/lib/propsContext/components/PropsContextProvider";
 import { ClearPropsContext } from "@/components/ClearPropsContext";
 
 const getComponentName = (name: string): FlowComponentName => {
