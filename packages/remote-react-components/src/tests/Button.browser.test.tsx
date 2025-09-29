@@ -8,6 +8,13 @@ test("Button is rendered", async () => {
 });
 
 test("onPress eventhandler is triggered", async () => {
-  renderRemoteTest("eventhandler");
-  expect(true).toBe(true);
+  const dom = renderRemoteTest("eventhandler");
+  const button = dom.getByTestId("button");
+  await button.click();
+  const eventData = dom.getByTestId("event-data");
+  await expect
+    .element(eventData)
+    .toHaveTextContent(
+      `{"type":"press","pointerType":"mouse","target":null,"shiftKey":false,"metaKey":false,"ctrlKey":false,"altKey":false}`,
+    );
 });
