@@ -20,7 +20,7 @@ test("Alert is rendered", async () => {
           <svg
             aria-hidden="false"
             aria-label="Status Information"
-            class="tabler-icon tabler-icon-info-circle flow--icon flow--alert--icon flow--icon--size-m flow--icon--info"
+            class="tabler-icon tabler-icon-info-circle flow--icon flow--heading--icon flow--alert--icon flow--icon--size-m flow--icon--info"
             fill="none"
             focusable="false"
             height="24"

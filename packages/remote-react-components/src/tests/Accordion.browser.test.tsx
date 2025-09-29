@@ -11,18 +11,18 @@ test("Accordion is rendered", async () => {
       data-testid="accordion"
     >
       <h4
-        class="flow--heading flow--accordion--header"
+        class="flow--heading flow--heading--xs flow--accordion--header"
       >
         <span
           class="flow--heading--heading-text"
         >
           <button
-            aria-controls="«r1»"
+            aria-controls="«r3»"
             aria-expanded="false"
             class="flow--accordion--header-button"
             data-rac=""
             data-react-aria-pressable="true"
-            id="react-aria-«r2»"
+            id="react-aria-«r4»"
             tabindex="0"
             type="button"
           >
@@ -53,10 +53,10 @@ test("Accordion is rendered", async () => {
         />
       </h4>
       <div
-        aria-labelledby="«r0»"
+        aria-labelledby="«r2»"
         class="flow--accordion--content"
         hidden=""
-        id="«r1»"
+        id="«r3»"
         role="region"
       />
     </div>

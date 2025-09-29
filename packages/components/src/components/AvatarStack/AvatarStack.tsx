@@ -31,6 +31,7 @@ export const AvatarStack: FC<AvatarStackProps> = (props) => {
     totalCount = 0,
     size = "m",
     onCountPress,
+    ...rest
   } = props;
 
   const avatarCount = Children.count(children);
@@ -52,7 +53,7 @@ export const AvatarStack: FC<AvatarStackProps> = (props) => {
 
   return (
     <PropsContextProvider props={propsContext}>
-      <div className={rootClassName}>
+      <div className={rootClassName} {...rest}>
         {children}
         {additionalItemsCount > 0 && (
           <Wrap if={onCountPress}>
