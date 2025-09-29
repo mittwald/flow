@@ -4,7 +4,7 @@ import React, { memo, type FC, useContext } from "react";
 import {
   DateRangePicker,
   type DateRangePickerProps,
-} from "@/components/DateRangePicker";
+} from "@/components/DateRangePicker/DateRangePicker";
 import { viewComponentContext } from "@/lib/viewComponentContext/viewComponentContext";
 
 const DateRangePickerView: FC<DateRangePickerProps> = memo((props) => {
