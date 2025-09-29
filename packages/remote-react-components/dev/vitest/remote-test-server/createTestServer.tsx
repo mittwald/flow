@@ -15,12 +15,6 @@ export const createTestServer = async () => {
       strictPort: true,
       hmr: false,
       watch: null,
-      warmup: {
-        clientFiles: [
-          "../../../src/tests/Warmup.browser.test.remote.tsx",
-          "./main.tsx",
-        ],
-      },
     },
   });
 
