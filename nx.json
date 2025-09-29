@@ -24,7 +24,7 @@
       "cache": true
     },
     "test:browser": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["^build", "test:browser:prepare"],
       "cache": true
     },
     "test:browser:dev": {
