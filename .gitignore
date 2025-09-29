@@ -18,4 +18,4 @@ packages/components/out
 .nx/workspace-data
 coverage/*.json
 packages/remote-react-components/src/tests/__screenshots__
-packages/remote-react-components/dev/vitest/remote-test-server/cache
+.vitest

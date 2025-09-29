@@ -6,21 +6,22 @@ export const createTestServer = async () => {
   const server = await createServer({
     configFile: "dev/vitest/remote-test-server/vite.config.ts",
     // do not cache in node_modules - important for CI
-    cacheDir: "cache/.vitest/test-browser",
+    cacheDir: "../../../.vitest/test-browser",
     root: "dev/vitest/remote-test-server",
     server: {
+      hmr: false,
+      watch: null,
       port: remoteTestServerPort,
       strictPort: true,
-    },
-    optimizeDeps: {
-      force: true,
+      warmup: {
+        clientFiles: ["../../../src/tests/*.browser.test.remote.tsx"],
+      },
     },
   });
 
   return {
     start: async () => {
       await server.listen();
-      await server.warmupRequest("./main.tsx");
       server.printUrls();
     },
     stop: async () => {
