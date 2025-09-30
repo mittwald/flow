@@ -21,20 +21,25 @@ const HeaderNavigation: FC<Props> = (props) => {
 
   const currentPathname = usePathname();
 
-  const navigationItems = Object.entries(navGroups).map(([group, mdxFiles]) => (
-    <Link
-      href={mdxFiles[0].pathname}
-      key={mdxFiles[0].pathname}
-      aria-current={currentPathname.includes(group) ? "page" : undefined}
-    >
-      <GroupText>{group}</GroupText>
-    </Link>
-  ));
+  const navigationItems = Object.entries(navGroups).map(([group, mdxFiles]) => {
+    const pathname = mdxFiles[0].pathname;
+    const isComponent = pathname.includes("03-components");
+
+    return (
+      <Link
+        href={`${pathname}${isComponent ? "/overview" : ""}`}
+        key={pathname}
+        aria-current={currentPathname.includes(group) ? "page" : undefined}
+      >
+        <GroupText>{group}</GroupText>
+      </Link>
+    );
+  });
 
   return (
     <HeaderNavigationComponent
       className={props.className}
-      aria-label="Header navigation"
+      aria-label="Header Navigation"
     >
       {navigationItems}
     </HeaderNavigationComponent>

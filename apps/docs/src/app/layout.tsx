@@ -7,7 +7,6 @@ import styles from "./layout.module.scss";
 import { MdxFileFactory } from "@/lib/mdx/MdxFileFactory";
 import MainNavigation from "@/app/_components/layout/MainNavigation";
 import { Image, NotificationProvider } from "@mittwald/flow-react-components";
-import Footer from "@/app/_components/layout/Footer/Footer";
 import { Matomo } from "@/app/_components/Matomo";
 import { RouterProvider } from "@mittwald/flow-react-components/nextjs";
 import wave from "../../assets/flow-wave.svg";
@@ -33,10 +32,8 @@ const RootLayout: FC<PropsWithChildren> = async (props) => {
             <Header docs={docs.map((mdx) => mdx.serialize())} />
             <div className={styles.wrapper}>
               <MainNavigation docs={docs.map((mdx) => mdx.serialize())} />
-              <div className={styles.mainWrapper}>
-                <main className={styles.main}>{props.children}</main>
-                <Footer />
-              </div>
+
+              <main className={styles.main}>{props.children}</main>
             </div>
           </NotificationProvider>
         </RouterProvider>
