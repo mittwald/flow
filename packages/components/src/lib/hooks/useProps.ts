@@ -2,7 +2,6 @@ import {
   type FlowComponentName,
   type FlowComponentProps,
 } from "@/components/propTypes";
-import { mergeProps } from "@react-aria/utils";
 import { resolveDynamicProps } from "@/lib/propsContext/dynamicProps/resolveDynamicProps";
 import { useComponentPropsContext } from "@/lib/propsContext/propsContext";
 import { omitBy } from "remeda";
@@ -11,6 +10,7 @@ import { isFlowComponentName } from "@/lib/propsContext/isFlowComponentName";
 import { isInheritedPropsContextKey } from "@/lib/propsContext/inherit/lib";
 import { areChildrenEmpty } from "@/lib/react/areChildrenEmpty";
 import { isNestingLevelKey } from "@/lib/propsContext/nestedPropsContext/lib";
+import { getPropsMerger } from "@/lib/react/getPropsMerger";
 
 const withoutChildren = <C extends FlowComponentName>(
   props: FlowComponentProps<C>,
@@ -23,6 +23,10 @@ const withoutChildren = <C extends FlowComponentName>(
   }
   return props;
 };
+
+const merger = getPropsMerger({
+  mergeRefs: true,
+});
 
 export const useProps = <C extends FlowComponentName>(
   component: C,
@@ -47,7 +51,7 @@ export const useProps = <C extends FlowComponentName>(
       )
     : undefined;
 
-  return mergeProps(
+  return merger(
     withoutInternalProps,
     localProps,
     withResolvedDynamicProps,

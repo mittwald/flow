@@ -8,30 +8,26 @@ import { Button } from "@/components/Button";
 import { Section } from "@/components/Section";
 import { ActionGroup } from "@/components/ActionGroup";
 import { sleep } from "@/lib/promises/sleep";
-import { NumberField } from "@/components/NumberField";
-import { FieldDescription } from "@/components/FieldDescription";
+import { Switch } from "@/components/Switch";
 
 const submitAction = action("submit");
 
 const meta: Meta<typeof Field> = {
-  title: "Integrations/React Hook Form/NumberField",
+  title: "Integrations/React Hook Form/Switch",
   component: Field,
   render: () => {
     interface Values {
-      age: number;
-      ageDefaultValue: number;
-      ageRequired: number;
-      ageMinValue: number;
+      isEnabled: boolean;
     }
 
     const handleOnSubmit = async (values: Values) => {
-      await sleep(1500);
+      await sleep(5000);
       submitAction(values);
     };
 
     const form = useForm<Values>({
       defaultValues: {
-        ageDefaultValue: 36,
+        isEnabled: false,
       },
     });
 
@@ -40,41 +36,13 @@ const meta: Meta<typeof Field> = {
     return (
       <Form form={form} onSubmit={handleOnSubmit}>
         <Section>
-          <Field name="age">
-            <NumberField>
-              <Label>Age</Label>
-            </NumberField>
-          </Field>
-
-          <Field name="ageDefaultValue">
-            <NumberField>
-              <Label>Age</Label>
-            </NumberField>
-          </Field>
-
-          <Field
-            name="ageRequired"
-            rules={{ required: "Please enter your age" }}
-          >
-            <NumberField>
-              <Label>Age</Label>
-            </NumberField>
-          </Field>
-
-          <Field
-            name="ageMinValue"
-            rules={{ required: "Please enter your age" }}
-          >
-            <NumberField minValue={18}>
-              <Label>Age</Label>
-              <FieldDescription>
-                You have to be at least 18 years old
-              </FieldDescription>
-            </NumberField>
+          <Field name="isEnabled">
+            <Switch>
+              <Label>Text</Label>
+            </Switch>
           </Field>
 
           <ActionGroup>
-            <Button onPress={() => form.reset()}>Reset</Button>
             <Button type="submit">Submit</Button>
           </ActionGroup>
         </Section>
@@ -91,19 +59,18 @@ export const Default: Story = {};
 export const WithFocusAndError: Story = {
   render: () => {
     const form = useForm();
-
     return (
       <Form form={form} onSubmit={async () => await sleep(2000)}>
-        <Field name={"text"} rules={{ required: true }}>
-          <NumberField>
-            <Label>Age</Label>
-          </NumberField>
+        <Field name={"email"}>
+          <Switch>
+            <Label>Text</Label>
+          </Switch>
         </Field>
         <div style={{ marginBottom: "2200px" }} />
         <Button
           onPress={() =>
             form.setError(
-              "text",
+              "email",
               { type: "required", message: "oh no" },
               { shouldFocus: true },
             )
@@ -111,7 +78,7 @@ export const WithFocusAndError: Story = {
         >
           err through form
         </Button>
-        <Button onPress={() => form.setFocus("text")}>
+        <Button onPress={() => form.setFocus("email")}>
           focus through form
         </Button>
         <Button type="submit">Submit</Button>

@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { CheckboxButton } from "../index";
-import React from "react";
 import { action } from "storybook/actions";
 import Content from "@/components/Content";
 import Text from "@/components/Text";
