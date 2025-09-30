@@ -77,7 +77,8 @@
     border-color: var(--form-control--border-color--invalid);
   }
 
-  &:has(textarea[data-focused="true"]) .toolbar {
+  &:has(textarea[data-focused="true"]) .toolbar,
+  &:has(textarea[data-focused="true"]) .markdown {
     background-color: var(--form-control--background-color--focused);
     border-color: var(--form-control--border-color--focused);
   }
