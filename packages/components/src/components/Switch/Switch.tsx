@@ -33,7 +33,7 @@ export const Switch = flowComponent("Switch", (props) => {
 
   const rootClassName = clsx(
     styles.switch,
-    styles[`label-${labelPosition}` as keyof typeof styles],
+    styles[`label-${labelPosition}`],
     className,
   );
 

@@ -1,4 +1,4 @@
-import type { PropsWithChildren, RefObject } from "react";
+import { type PropsWithChildren, useRef } from "react";
 import type { Key } from "react-aria-components";
 import * as Aria from "react-aria-components";
 import type { PropsContext } from "@/lib/propsContext";
@@ -27,8 +27,6 @@ export interface SelectProps
   controller?: OverlayController;
   /** Whether the component is read only. */
   isReadOnly?: boolean;
-
-  inputRef?: RefObject<HTMLButtonElement>;
 }
 
 /** @flr-generate all */
@@ -44,7 +42,6 @@ export const Select = flowComponent("Select", (props) => {
     },
     controller: controllerFromProps,
     ref,
-    inputRef,
     isReadOnly,
     ...rest
   } = props;
@@ -81,7 +78,7 @@ export const Select = flowComponent("Select", (props) => {
   });
 
   const localSelectRef = useObjectRef(ref);
-  const localButtonRef = useObjectRef(inputRef);
+  const localButtonRef = useRef<HTMLButtonElement>(null);
 
   useMakeFocusable(localSelectRef, () => {
     localButtonRef.current?.focus();

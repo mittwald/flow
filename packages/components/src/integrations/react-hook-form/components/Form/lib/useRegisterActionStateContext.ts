@@ -69,9 +69,9 @@ export const useRegisterActionStateContext = <T extends FieldValues>(
   const registerSubmitResult = (result: unknown) => {
     if (isPromise(result)) {
       void action.state.onAsyncStart();
-      result.then(
-        (submitResult) => (submitHandlerResultRef.current = submitResult),
-      );
+      result.then((submitResult) => {
+        submitHandlerResultRef.current = submitResult;
+      });
     } else {
       submitHandlerResultRef.current = result;
     }
