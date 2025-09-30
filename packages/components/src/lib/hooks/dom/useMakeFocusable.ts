@@ -3,9 +3,6 @@ import { type RefObject, useEffect } from "react";
 /**
  * A hook that makes an element focusable and calls a callback when it receives
  * focus.
- *
- * @param ref
- * @param onFocus
  */
 export const useMakeFocusable = (
   ref: RefObject<unknown>,
@@ -34,5 +31,5 @@ export const useMakeFocusable = (
         element.removeAttribute("tabIndex");
       }
     };
-  }, [ref.current]);
+  }, [ref.current, onFocus]);
 };
