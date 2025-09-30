@@ -10,16 +10,16 @@ import type {
   RefAttributes,
   FunctionComponent,
 } from "react";
-import { cloneElement } from "react";
+import { cloneElement, memo, useMemo } from "react";
 import type { PropsWithTunnel } from "@/lib/types/props";
 import { TunnelEntry } from "@mittwald/react-tunnel";
 import SlotContextProvider from "@/lib/slotContext/SlotContextProvider";
 import { useProps } from "@/lib/hooks/useProps";
 import { useComponentPropsContext } from "@/lib/propsContext/propsContext";
 import { increaseNestingLevel } from "@/lib/propsContext/nestedPropsContext/lib";
-import ComponentPropsContextProviderView from "@/views/ComponentPropsContextProviderView";
 import { ComponentPropsContextProvider } from "@/components/ComponentPropsContextProvider";
 import type { PropsContextLevelMode } from "@/lib/propsContext/inherit/types";
+import ComponentPropsContextProviderView from "@/views/ComponentPropsContextProviderView";
 
 type RefType<T> = T extends RefAttributes<infer R> ? R : undefined;
 
@@ -63,6 +63,8 @@ export function flowComponent<C extends FlowComponentName>(
   const propsContextLevelMode: PropsContextLevelMode =
     type === "ui" ? "increment" : "keep";
 
+  const MemoizedImplementationComponentType = memo(ImplementationComponentType);
+
   function Component(props: Props) {
     const { tunnelId, wrapWith, ...propsWithContext } = useProps(
       componentName,
@@ -73,13 +75,15 @@ export function flowComponent<C extends FlowComponentName>(
       typeof ImplementationComponentType
     >;
 
-    const componentProps = useComponentPropsContext(componentName) ?? {};
+    const emptyProps = useMemo(() => ({}), []);
+    const componentProps =
+      useComponentPropsContext(componentName) ?? emptyProps;
     increaseNestingLevel(componentProps);
 
     ImplementationComponentType.displayName = `FlowComponentImpl(${componentName})`;
 
     let element: ReactNode = (
-      <ImplementationComponentType {...implementationTypeProps} />
+      <MemoizedImplementationComponentType {...implementationTypeProps} />
     );
 
     if (isRemoteComponent) {
@@ -122,10 +126,9 @@ export function flowComponent<C extends FlowComponentName>(
     if (tunnelId) {
       element = <TunnelEntry id={tunnelId}>{element}</TunnelEntry>;
     }
-
     return element;
   }
 
   Component.displayName = `FlowComponent(${componentName})`;
-  return Component;
+  return memo(Component);
 }

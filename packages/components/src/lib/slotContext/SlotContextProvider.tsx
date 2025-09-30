@@ -1,5 +1,5 @@
 import type { FC, PropsWithChildren } from "react";
-import React from "react";
+import { memo } from "react";
 import type { FlowComponentName } from "@/components/propTypes";
 import { slotContext, useSlotContext } from "@/lib/slotContext/slotContext";
 
@@ -8,7 +8,10 @@ interface Props extends PropsWithChildren {
   component: FlowComponentName;
 }
 
-export const SlotContextProvider: FC<Props> = (props) => {
+const Provider = memo(slotContext.Provider);
+Provider.displayName = "SlotContextProviderInner";
+
+export const SlotContextProvider: FC<Props> = memo((props) => {
   const { slot, component, children } = props;
   const parentContext = useSlotContext();
 
@@ -17,11 +20,8 @@ export const SlotContextProvider: FC<Props> = (props) => {
     [component]: slot,
   };
 
-  return (
-    <slotContext.Provider value={mergedContext}>
-      {children}
-    </slotContext.Provider>
-  );
-};
+  return <Provider value={mergedContext}>{children}</Provider>;
+});
+SlotContextProvider.displayName = "SlotContextProvider";
 
 export default SlotContextProvider;

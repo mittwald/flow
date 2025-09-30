@@ -5,7 +5,7 @@ import mergePropsContext from "@/lib/propsContext/mergePropsContext";
 import { propsContext, usePropsContext } from "@/lib/propsContext/propsContext";
 import type { PropsContext as PropsContextShape } from "@/lib/propsContext/types";
 import type { DependencyList, FC, PropsWithChildren } from "react";
-import { useMemo } from "react";
+import { memo, useMemo } from "react";
 
 interface Props extends PropsWithChildren {
   props: PropsContextShape;
@@ -14,7 +14,10 @@ interface Props extends PropsWithChildren {
   levelMode?: PropsContextLevelMode;
 }
 
-export const PropsContextProvider: FC<Props> = (props) => {
+const Provider = memo(propsContext.Provider);
+Provider.displayName = "PropsContextProviderInner";
+
+export const PropsContextProvider: FC<Props> = memo((props) => {
   const {
     props: providedProps,
     dependencies = [],
@@ -40,11 +43,11 @@ export const PropsContextProvider: FC<Props> = (props) => {
 
   return (
     <PropsContextLevelProvider mode={levelMode}>
-      <propsContext.Provider value={propsWithParentPropsContext}>
-        {children}
-      </propsContext.Provider>
+      <Provider value={propsWithParentPropsContext}>{children}</Provider>
     </PropsContextLevelProvider>
   );
-};
+});
+
+PropsContextProvider.displayName = "PropsContextProvider";
 
 export default PropsContextProvider;
