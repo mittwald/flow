@@ -356,8 +356,8 @@ importers:
         specifier: ^3.2.6
         version: 3.2.6
       '@mittwald/password-tools-js':
-        specifier: 3.0.0-alpha.18
-        version: 3.0.0-alpha.18
+        specifier: 3.0.0-alpha.20
+        version: 3.0.0-alpha.20
       '@mittwald/react-tunnel':
         specifier: workspace:*
         version: link:../react-tunnel
@@ -2555,8 +2555,8 @@ packages:
   '@microsoft/tsdoc@0.15.1':
     resolution: {integrity: sha512-4aErSrCR/On/e5G2hDP0wjooqDdauzEbIq8hIkIe5pXV0rtWJZvdCEKL0ykZxex+IxIwBp0eGeV48hQN07dXtw==}
 
-  '@mittwald/password-tools-js@3.0.0-alpha.18':
-    resolution: {integrity: sha512-qp5BZ4mielqxx7oFWfFF9C5azH9Ki/KteAxR/naAwmA2gSts4/e43TGJwGAclczuHbnO/tHL6cBIlIGX4drvwQ==}
+  '@mittwald/password-tools-js@3.0.0-alpha.20':
+    resolution: {integrity: sha512-9TkQDnyHANk8/iYc4HHU27rdu2aZxlFqp6wbIQNfnYqeVlDVgR+/MJ9f702wydBNiTem0vIDGqZ/k7CVV6BAEQ==}
     hasBin: true
 
   '@mittwald/react-use-promise@3.0.4':
@@ -6521,9 +6521,6 @@ packages:
   jose@6.1.0:
     resolution: {integrity: sha512-TTQJyoEoKcC1lscpVDCSsVgYzUDg/0Bt3WE//WiTPK6uOCQC2KZS4MpugbMWt/zyjkopgZoXhZuCi00gLudfUA==}
 
-  js-sha1@0.7.0:
-    resolution: {integrity: sha512-oQZ1Mo7440BfLSv9TX87VNEyU52pXPVG19F9PL3gTgNt0tVxlZ8F4O6yze3CLuLx28TxotxvlyepCNaaV0ZjMw==}
-
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
 
@@ -8338,9 +8335,6 @@ packages:
     resolution: {integrity: sha512-8LzC5+bvI45BjpfXU8V5fdU2mfeKiQe1D1gIMn7XUlF3OTUrpdJpPPH4EMAnF0DsHHdSZqCdSss5qCmJKuiO3w==}
     engines: {node: '>= 0.10'}
     hasBin: true
-
-  sha1-uint8array@0.10.7:
-    resolution: {integrity: sha512-COJRCUOuTgEEPyhcRncHlf3Z2/Nik0PGZ60/tA9Ni2jlwYJ2g/WgP8TV19gbllmZDs/DGV5YklZxreyMHFX8ww==}
 
   shallow-clone@3.0.1:
     resolution: {integrity: sha512-/6KqX+GVUdqPuPPd2LxDDxzX6CAbjJehAAOKlNpqqUpAqPM6HeL8f+o3a+JsyGjn2lv0WY8UsTgUJjU9Ok55NA==}
@@ -11098,7 +11092,7 @@ snapshots:
 
   '@microsoft/tsdoc@0.15.1': {}
 
-  '@mittwald/password-tools-js@3.0.0-alpha.18':
+  '@mittwald/password-tools-js@3.0.0-alpha.20':
     dependencies:
       '@zxcvbn-ts/core': 3.0.4
       '@zxcvbn-ts/language-common': 3.0.4
@@ -11108,10 +11102,8 @@ snapshots:
       axios: 1.12.2(debug@4.4.3)
       debug: 4.4.3
       fs-jetpack: 5.1.0
-      js-sha1: 0.7.0
       ora: 8.2.0
       pretty-error: 4.0.0
-      sha1-uint8array: 0.10.7
       verror: 1.10.1
       yaml: 2.8.1
       yargs: 17.7.2
@@ -15855,8 +15847,6 @@ snapshots:
 
   jose@6.1.0: {}
 
-  js-sha1@0.7.0: {}
-
   js-tokens@4.0.0: {}
 
   js-tokens@9.0.1: {}
@@ -18456,8 +18446,6 @@ snapshots:
       inherits: 2.0.4
       safe-buffer: 5.2.1
       to-buffer: 1.2.2
-
-  sha1-uint8array@0.10.7: {}
 
   shallow-clone@3.0.1:
     dependencies:
