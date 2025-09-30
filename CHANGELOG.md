@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.499](https://github.com/mittwald/flow/compare/0.2.0-alpha.498...0.2.0-alpha.499) (2025-09-30)
+
+### Bug Fixes
+
+* **FormControls:** make control fields focusable ([#2036](https://github.com/mittwald/flow/issues/2036)) ([a4d6be3](https://github.com/mittwald/flow/commit/a4d6be346c2c91c85d8a92aeab33d51c5c677f9e))
+
 # [0.2.0-alpha.498](https://github.com/mittwald/flow/compare/0.2.0-alpha.497...0.2.0-alpha.498) (2025-09-30)
 
 **Note:** Version bump only for package @mittwald/flow-project
