@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.500](https://github.com/mittwald/flow/compare/0.2.0-alpha.499...0.2.0-alpha.500) (2025-09-30)
+
+### Bug Fixes
+
+* **List:** fix missing max width in tile remote view ([15a04b3](https://github.com/mittwald/flow/commit/15a04b3b63e1f9e1c12eb1bb802e00cb20153e9f))
+
 # [0.2.0-alpha.499](https://github.com/mittwald/flow/compare/0.2.0-alpha.498...0.2.0-alpha.499) (2025-09-30)
 
 ### Bug Fixes
