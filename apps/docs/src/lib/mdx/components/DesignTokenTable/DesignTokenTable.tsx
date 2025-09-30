@@ -61,7 +61,7 @@ export const DesignTokenTable: FC<Props> = (props) => {
   });
 
   return (
-    <Table>
+    <Table aria-label="Design Tokens">
       <TableHeader>
         <TableColumn>Beispiel</TableColumn>
         <TableColumn>Token-Name</TableColumn>
