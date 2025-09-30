@@ -1,5 +1,4 @@
 import type { ComponentProps, FC, PropsWithChildren } from "react";
-import React from "react";
 import {
   dynamic,
   type PropsContext,
@@ -17,10 +16,7 @@ export interface HeaderNavigationProps
   color?: "primary" | "dark" | "light";
 }
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const HeaderNavigation: FC<HeaderNavigationProps> = (props) => {
   const { children, className, color = "primary", ...rest } = props;
 

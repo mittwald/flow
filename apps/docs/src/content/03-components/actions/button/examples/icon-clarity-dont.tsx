@@ -6,18 +6,18 @@ import {
 import { IconCat, IconDog } from "@tabler/icons-react";
 
 <Row>
-  <TextField value="Suche" />
-  <Button variant="plain">
+  <TextField value="Suche" aria-label="Suche" />
+  <Button variant="plain" aria-label="Katze">
     <Icon>
       <IconCat />
     </Icon>
   </Button>
-  <Button variant="plain">
+  <Button variant="plain" aria-label="Hund">
     <Icon>
       <IconDog />
     </Icon>
   </Button>
-  <Button variant="outline">
+  <Button variant="outline" aria-label="Hund">
     <Icon>
       <IconDog />
     </Icon>

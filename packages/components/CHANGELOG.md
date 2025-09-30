@@ -3,6 +3,88 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.498](https://github.com/mittwald/flow/compare/0.2.0-alpha.497...0.2.0-alpha.498) (2025-09-30)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.497](https://github.com/mittwald/flow/compare/0.2.0-alpha.496...0.2.0-alpha.497) (2025-09-30)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.496](https://github.com/mittwald/flow/compare/0.2.0-alpha.495...0.2.0-alpha.496) (2025-09-30)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.495](https://github.com/mittwald/flow/compare/0.2.0-alpha.494...0.2.0-alpha.495) (2025-09-30)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.494](https://github.com/mittwald/flow/compare/0.2.0-alpha.493...0.2.0-alpha.494) (2025-09-29)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.493](https://github.com/mittwald/flow/compare/0.2.0-alpha.492...0.2.0-alpha.493) (2025-09-26)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.492](https://github.com/mittwald/flow/compare/0.2.0-alpha.491...0.2.0-alpha.492) (2025-09-26)
+
+### Performance Improvements
+
+* use memo in provider components ([6edc252](https://github.com/mittwald/flow/commit/6edc25282f59eea06457c0be59cb57bf7adc1a23))
+
+# [0.2.0-alpha.491](https://github.com/mittwald/flow/compare/0.2.0-alpha.490...0.2.0-alpha.491) (2025-09-26)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.490](https://github.com/mittwald/flow/compare/0.2.0-alpha.489...0.2.0-alpha.490) (2025-09-25)
+
+### Bug Fixes
+
+* **LayoutCard:** fix width ([efe0ca3](https://github.com/mittwald/flow/commit/efe0ca321c47f8e65d74a70d2361e5b02a769c76))
+
+# [0.2.0-alpha.489](https://github.com/mittwald/flow/compare/0.2.0-alpha.488...0.2.0-alpha.489) (2025-09-25)
+
+### Bug Fixes
+
+* **MarkdownEditor:** fix disabled label in preview mode ([#2006](https://github.com/mittwald/flow/issues/2006)) ([0d60424](https://github.com/mittwald/flow/commit/0d604246fb39c02d726c8580cb323e4ac7edc9bf))
+
+# [0.2.0-alpha.488](https://github.com/mittwald/flow/compare/0.2.0-alpha.487...0.2.0-alpha.488) (2025-09-24)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.487](https://github.com/mittwald/flow/compare/0.2.0-alpha.486...0.2.0-alpha.487) (2025-09-24)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.486](https://github.com/mittwald/flow/compare/0.2.0-alpha.485...0.2.0-alpha.486) (2025-09-24)
+
+### Bug Fixes
+
+* **Autocomplete:** fix width not updating ([36acf4b](https://github.com/mittwald/flow/commit/36acf4b01c4bb3290440474f54399d60aaf835de))
+
+# [0.2.0-alpha.485](https://github.com/mittwald/flow/compare/0.2.0-alpha.484...0.2.0-alpha.485) (2025-09-24)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.484](https://github.com/mittwald/flow/compare/0.2.0-alpha.483...0.2.0-alpha.484) (2025-09-24)
+
+### Bug Fixes
+
+* **PropsContext:** fixes props context not correctly merged ([#2003](https://github.com/mittwald/flow/issues/2003)) ([4d2a103](https://github.com/mittwald/flow/commit/4d2a1036937c7ca03589f54b3752f3904ed3e4bb))
+
+# [0.2.0-alpha.483](https://github.com/mittwald/flow/compare/0.2.0-alpha.482...0.2.0-alpha.483) (2025-09-23)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.482](https://github.com/mittwald/flow/compare/0.2.0-alpha.481...0.2.0-alpha.482) (2025-09-23)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
+# [0.2.0-alpha.481](https://github.com/mittwald/flow/compare/0.2.0-alpha.480...0.2.0-alpha.481) (2025-09-18)
+
+**Note:** Version bump only for package @mittwald/flow-react-components
+
 # [0.2.0-alpha.480](https://github.com/mittwald/flow/compare/0.2.0-alpha.479...0.2.0-alpha.480) (2025-09-17)
 
 ### Features

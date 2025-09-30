@@ -1,9 +1,8 @@
 import type { PropsWithChildren } from "react";
-import React from "react";
 import styles from "./Align.module.scss";
 import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
-import PropsContextProvider from "@/lib/propsContext/PropsContextProvider";
+import { PropsContextProvider } from "@/lib/propsContext";
 import type { PropsWithClassName } from "@/lib/types/props";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
@@ -13,10 +12,7 @@ export interface AlignProps
     PropsWithClassName,
     FlowComponentProps {}
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const Align = flowComponent("Align", (props) => {
   const { children, className } = props;
 
@@ -36,7 +32,7 @@ export const Align = flowComponent("Align", (props) => {
   };
 
   return (
-    <PropsContextProvider props={propsContext} mergeInParentContext>
+    <PropsContextProvider props={propsContext}>
       <div className={rootClassName}>{children}</div>
     </PropsContextProvider>
   );

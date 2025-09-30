@@ -1,5 +1,4 @@
 import type { PropsWithChildren } from "react";
-import React from "react";
 import styles from "./LayoutCard.module.scss";
 import clsx from "clsx";
 import type { PropsWithElementType } from "@/lib/types/props";
@@ -13,10 +12,7 @@ export interface LayoutCardProps
     PropsWithElementType<"div" | "main" | "footer" | "header">,
     FlowComponentProps {}
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const LayoutCard = flowComponent("LayoutCard", (props) => {
   const { children, className, elementType = "div", ref, ...rest } = props;
 

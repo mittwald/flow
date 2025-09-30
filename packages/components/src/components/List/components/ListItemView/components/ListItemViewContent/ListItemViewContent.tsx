@@ -1,5 +1,4 @@
 import type { ComponentProps, PropsWithChildren, ReactNode } from "react";
-import React from "react";
 import styles from "../../ListItemView.module.scss";
 import {
   dynamic,
@@ -69,7 +68,6 @@ export const ListItemViewContent = (props: ListItemViewContentProps) => {
       className: styles.action,
     },
     Content: {
-      clearPropsContext: true,
       className: dynamic((p) => getStyleForContentSlot(p.slot)),
       onMouseDown: dynamic((p) => contentProps[p.slot ?? "top"]?.onMouseDown),
       onPointerDown: dynamic(
@@ -109,54 +107,54 @@ export const ListItemViewContent = (props: ListItemViewContentProps) => {
     </div>
   );
 
+  const innerListContent = (
+    <PropsContextProvider props={propsContext}>
+      {header}
+      {children}
+    </PropsContextProvider>
+  );
+
   return (
-    <PropsContextProvider props={propsContext} mergeInParentContext>
-      <div className={className}>
-        {viewMode === "list" && (
-          <>
-            <div className={styles.contentWrapper}>
-              {s || m || l ? (
-                <ColumnLayout
-                  s={s}
-                  m={m}
-                  l={l}
-                  className={clsx(styles.content, styles.columnLayout)}
-                  mergeInParentContext
-                >
-                  {header}
-                  {children}
-                </ColumnLayout>
-              ) : (
-                <div className={styles.content}>
-                  {header}
-                  {children}
-                </div>
-              )}
+    <div className={className}>
+      {viewMode === "list" && (
+        <>
+          <div className={styles.contentWrapper}>
+            {s || m || l ? (
+              <ColumnLayout
+                s={s}
+                m={m}
+                l={l}
+                className={clsx(styles.content, styles.columnLayout)}
+              >
+                {innerListContent}
+              </ColumnLayout>
+            ) : (
+              <div className={styles.content}>{innerListContent}</div>
+            )}
+            {button}
+          </div>
+          {bottom}
+        </>
+      )}
+
+      {viewMode === "tiles" && (
+        <PropsContextProvider props={propsContext}>
+          <div className={styles.avatarContainer}>{avatar}</div>
+          <div className={styles.content}>
+            <div className={styles.header}>
+              <div className={styles.checkboxContainer}>{checkbox}</div>
+              <div className={styles.title}>
+                {title}
+                <div className={styles.subTitle}>{subTitle}</div>
+              </div>
               {button}
             </div>
+            {children}
             {bottom}
-          </>
-        )}
-
-        {viewMode === "tiles" && (
-          <>
-            <div className={styles.avatarContainer}>{avatar}</div>
-            <div className={styles.content}>
-              <div className={styles.header}>
-                <div className={styles.checkboxContainer}>{checkbox}</div>
-                <div className={styles.title}>
-                  {title}
-                  <div className={styles.subTitle}>{subTitle}</div>
-                </div>
-                {button}
-              </div>
-              {children}
-              {bottom}
-            </div>
-          </>
-        )}
-      </div>
-    </PropsContextProvider>
+          </div>
+        </PropsContextProvider>
+      )}
+    </div>
   );
 };
 

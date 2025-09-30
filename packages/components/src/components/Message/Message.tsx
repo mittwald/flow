@@ -1,11 +1,10 @@
 import type { PropsWithChildren } from "react";
-import React from "react";
 import clsx from "clsx";
 import styles from "./Message.module.scss";
 import type { PropsWithClassName } from "@/lib/types/props";
 import type { PropsContext } from "@/lib/propsContext";
 import { IconContextMenu } from "@/components/Icon/components/icons";
-import PropsContextProvider from "@/lib/propsContext/PropsContextProvider";
+import { PropsContextProvider } from "@/lib/propsContext";
 import {
   flowComponent,
   type FlowComponentProps,
@@ -18,10 +17,7 @@ export interface MessageProps
   type?: "responder" | "sender";
 }
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const Message = flowComponent("Message", (props) => {
   const { type = "responder", children, className } = props;
 

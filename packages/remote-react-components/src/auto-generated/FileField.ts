@@ -8,9 +8,6 @@ export { type RemoteFileFieldElement } from "@mittwald/flow-remote-elements";
 export const FileField = createFlowRemoteComponent(
   "flr-file-field",
   "FileField",
-  {
-    clearPropsContext: true,
-  },
   RemoteFileFieldElement,
   {
     slotProps: {

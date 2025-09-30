@@ -44,10 +44,17 @@ const NavigationLink: FC<NavigationLinkProps> = (props) => {
     overlay.close();
   }, [overlay]);
 
+  const pathname = treeItem.pathname;
+  const isComponent = pathname.includes("03-components");
+  const lastSlashIndex = currentPathname.lastIndexOf("/");
+  const currentPage = isComponent
+    ? currentPathname.substring(0, lastSlashIndex)
+    : currentPathname;
+
   return (
     <Link
-      href={treeItem.pathname}
-      aria-current={treeItem.pathname === currentPathname ? "page" : undefined}
+      href={`${pathname}${isComponent ? "/overview" : ""}`}
+      aria-current={pathname === currentPage ? "page" : undefined}
     >
       {treeItem.getNavTitle()}
     </Link>

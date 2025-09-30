@@ -1,6 +1,8 @@
 "use client";
 import {
   Alert,
+  Button,
+  Content,
   Heading,
   Label,
   Text,
@@ -9,14 +11,15 @@ import {
 
 export default function Page() {
   return (
-    <>
-      <Alert status="danger">
-        <Heading>Alert title</Heading>
-        <Text>Alert text</Text>
-        <TextField>
-          <Label>Name</Label>
-        </TextField>
-      </Alert>
-    </>
+    <Alert status="danger">
+      <Heading>Alert title</Heading>
+      <Text>Alert text</Text>
+      <TextField>
+        <Label>Name</Label>
+      </TextField>
+      <Content>
+        <Button>Test</Button>
+      </Content>
+    </Alert>
   );
 }

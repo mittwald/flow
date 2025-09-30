@@ -1,7 +1,7 @@
 # Grundlagen
 
 Die List bildet den **strukturierten Rahmen** der ListItems. ListItems stellen
-Elemente (z. B. Domains, E-Mail-Adressen, Projekte, ...) dar. Die List gruppiert
+Elemente (z. B. Domains, E-Mail-Adressen, Projekte, ...) dar. Die List gruppiert
 diese Elemente und bietet Funktionen wie eine **Sortierung**, **Filterung** und
 **Suche**. Zusätzlich kann der User die Anzahl der angezeigten ListItems über
 einen „Mehr anzeigen“-Button steuern.
@@ -9,16 +9,16 @@ einen „Mehr anzeigen“-Button steuern.
 ## Best practices
 
 - Wähle eine Standardsortierung, die dem häufigsten Anwendungsfall entspricht
-  (z. B. "Neueste zuerst" für eine Änderungshistorie).
+  (z. B. „Neueste zuerst“ für eine Änderungshistorie).
 - Biete nur Sortiermöglichkeiten an, die dem User einen Mehrwert bieten.
 - Verwende bei Listen mit vielen Einträgen einen Filter. Gruppiere
-  Filterkategorien sinnvoll, z. B. nach Typ, Größe, Status.
+  Filterkategorien sinnvoll, z. B. nach Typ, Größe, Status.
 
 ## Verwendung
 
 Verwende eine List, um ...
 
-- viele Elemente (z.B. Domains, Projekte, Rechnungspositionen ...) in Form von
+- viele Elemente (z. B. Domains, Projekte, Rechnungspositionen ...) in Form von
   ListItems kompakt darzustellen.
 - einen einfachen Weg zu schaffen, ein spezifisches ListItem über Filter,
   Sortierung oder Suche zu finden.
@@ -30,13 +30,13 @@ Verwende eine List, um ...
 
 ## Position
 
-- Die List wird oft auf Übersichtsseiten verwendet, um z. B. einen Überblick
+- Die List wird oft auf Übersichtsseiten verwendet, um z. B. einen Überblick
   über alle Domains zu bekommen. Von dort aus kann dann in tieferliegende
   Detailseiten navigiert werden.
 - Sie füllt immer die gesamte Breite des Content-Bereichs aus.
 - Wenn neben der List weiterer Inhalt auf der Seite existiert, sollte dieser
-  über ihr stehen. Layout-Verschiebungen durch das Nachladen über den "Mehr
-  anzeigen"-Button werden so vermieden.
+  über ihr stehen. Layout-Verschiebungen durch das Nachladen über den „Mehr
+  anzeigen“-Button werden so vermieden.
 
 ---
 
@@ -46,10 +46,10 @@ Verwende eine List, um ...
 
 - Der [Button](/03-components/actions/button) zur Sortierung steht immer links
   neben allen Filtern.
-- Wähle die Standardsortierung nach dem häufigsten Anwendungsfall, z. B.
-  “Neueste zuerst” bei einer Änderungshistorie.
-- Die aktive Sortierung steht im Sortierungs-Button, z. B. “Sortierung: Neueste
-  zuerst”.
+- Wähle die Standardsortierung nach dem häufigsten Anwendungsfall, z. B.
+  „Neueste zuerst“ bei einer Änderungshistorie.
+- Die aktive Sortierung steht im Sortierungs-Button, z. B. „Sortierung: Neueste
+  zuerst“.
 
 ## Filter
 
@@ -61,11 +61,11 @@ Verwende eine List, um ...
   [RadioGroup](/03-components/form-controls/radio-group) dargestellt.
 - Jeder aktive Filter setzt einen [Badge](/03-components/status/badge), der per
   Klick einzeln wieder abgewählt werden kann. Sind mindestens zwei Filter aktiv,
-  erscheint ein “Filter zurücksetzen”-Button.
-- Lassen sich mehrere Filter zu einer Gruppe zusammenfassen (z. B. Status, Art,
+  erscheint ein „Filter zurücksetzen“-Button.
+- Lassen sich mehrere Filter zu einer Gruppe zusammenfassen (z. B. Status, Art,
   Größe, Abteilung, ...), platziere diese in einem eigenen Filter-Button.
   Filter, die keiner Kategorie zugewiesen werden können, können unter einem
-  allgemeinen “Filter”-Button zusammengefasst werden.
+  allgemeinen „Filter“-Button zusammengefasst werden.
 
 <DoAndDont>
   <Do example="filterCategory">
@@ -92,7 +92,7 @@ Verwende eine List, um ...
 ## Pagination
 
 Standardmäßig werden 10 Einträge angezeigt. Verwende `batchSize`, um die Anzahl
-der Einträge anzupassen. Über den "Mehr anzeigen"-Button können bei Bedarf
+der Einträge anzupassen. Über den „Mehr anzeigen“-Button können bei Bedarf
 weitere Einträge nachgeladen werden.
 
 Beachte bei der Anpassung der Pagination, dass ...
@@ -102,7 +102,7 @@ Beachte bei der Anpassung der Pagination, dass ...
   suchen.
 - eine List, die beim initialen Seitenaufruf schon viele Einträge darstellen
   soll, die Performance beeinträchtigt. Gleiches gilt, wenn durch einen Klick
-  auf den “Mehr Anzeigen”-Button viele Einträge auf einmal nachgeladen werden
+  auf den „Mehr Anzeigen“-Button viele Einträge auf einmal nachgeladen werden
   sollen.
 
 ---
@@ -112,7 +112,7 @@ Beachte bei der Anpassung der Pagination, dass ...
 ## Sortierung
 
 Ist die Standardsortierung aktiv, steht auf dem Sortierungs-Button nur
-“Sortierung”. Wählt der User eine spezifische Sortierung aus, so wird diese
+„Sortierung“. Wählt der User eine spezifische Sortierung aus, so wird diese
 hinten angehängt. Daher solltest du die Sortiermethode so benennen, dass direkt
 ersichtlich ist, wonach und in welcher Reihenfolge sie sortiert.
 
@@ -159,7 +159,7 @@ Property `autoFocus`, wenn sich die List in einem Modal öffnet.
 
 Auf kleinen Bildschirmen (unter 551px) bricht der Header um, sodass die Suche
 unterhalb der Sortierung und des Filters dargestellt wird. Achte auf das
-Umbruchverhalten des ListItem's.
+Umbruchverhalten des ListItems.
 
 <Info heading="Mobile Variante" mobile example="mobile" />
 

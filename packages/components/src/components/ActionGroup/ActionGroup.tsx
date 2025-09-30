@@ -1,5 +1,4 @@
 import type { PropsWithChildren } from "react";
-import React from "react";
 import styles from "./ActionGroup.module.scss";
 import type { PropsContext } from "@/lib/propsContext";
 import { dynamic, PropsContextProvider } from "@/lib/propsContext";
@@ -55,7 +54,7 @@ export const ActionGroup = flowComponent("ActionGroup", (props) => {
 
   return (
     <ActionStateContextProvider>
-      <PropsContextProvider props={propsContext} mergeInParentContext>
+      <PropsContextProvider props={propsContext}>
         <TunnelProvider>
           <div {...rest} className={rootClassName} ref={ref} role="group">
             {children}
