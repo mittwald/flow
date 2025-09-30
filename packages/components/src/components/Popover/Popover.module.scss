@@ -13,11 +13,6 @@
 
   :where(.content) {
     overflow-y: auto;
-    padding: var(--popover--padding--m);
-
-    &.padding-s {
-      padding: var(--popover--padding--s);
-    }
 
     &:focus-visible {
       outline: none;

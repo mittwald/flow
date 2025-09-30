@@ -1,9 +1,7 @@
-import React from "react";
 import styles from "./CheckboxButton.module.scss";
 import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
-import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
 import type { CheckboxProps } from "@/components/Checkbox";
 import { Checkbox } from "@/components/Checkbox";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
@@ -13,10 +11,7 @@ export interface CheckboxButtonProps
   extends CheckboxProps,
     FlowComponentProps<HTMLLabelElement> {}
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const CheckboxButton = flowComponent("CheckboxButton", (props) => {
   const { children, className, ref, ...rest } = props;
 
@@ -32,13 +27,11 @@ export const CheckboxButton = flowComponent("CheckboxButton", (props) => {
   };
 
   return (
-    <ClearPropsContext>
-      <Checkbox {...rest} className={rootClassName} ref={ref}>
-        <PropsContextProvider props={propsContext}>
-          {children}
-        </PropsContextProvider>
-      </Checkbox>
-    </ClearPropsContext>
+    <Checkbox {...rest} className={rootClassName} ref={ref}>
+      <PropsContextProvider props={propsContext}>
+        {children}
+      </PropsContextProvider>
+    </Checkbox>
   );
 });
 

@@ -1,12 +1,25 @@
 # Playground
 
+Verwende `<Message />`, um eine Message darzustellen.
+
 <LiveCodeEditor />
 
 ---
 
 # Type
 
-Im default ist der Type der Message `responder`, wird er auf `sender` geändert,
-ändert sich die Hintergrundfarbe und Anordnung der Message.
+Eine Message hat im Default den Type `responder`. Stellt man diese Property
+auf `sender`, ändert sich die Hintergrundfarbe und Anordnung der Message.
 
 <LiveCodeEditor example="sender" editorCollapsed />
+
+---
+
+# Kombiniere mit ...
+
+## Markdown
+
+Um eine Texteingabe innerhalb der Message als [Markdown](/03-components/content/markdown) 
+zu rendern, kann die `<Markdown />`-Component verwendet werden.
+
+<LiveCodeEditor example="markdown" editorCollapsed />

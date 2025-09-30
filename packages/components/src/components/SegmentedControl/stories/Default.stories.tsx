@@ -30,6 +30,8 @@ type Story = StoryObj<typeof SegmentedControl>;
 
 export const Default: Story = {};
 
+export const ReadOnly: Story = { args: { isReadOnly: true } };
+
 export const CustomContainerBreakpoint: Story = {
   render: (props) => (
     <SegmentedControl

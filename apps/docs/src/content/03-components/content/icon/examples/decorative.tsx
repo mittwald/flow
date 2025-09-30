@@ -55,8 +55,12 @@ import {
   IconUser,
   IconVhost,
   IconVolume,
+  IconPath,
   Label,
   LabeledValue,
+  IconDnsZone,
+  IconEmailArchive,
+  IconInvite,
 } from "@mittwald/flow-react-components";
 
 <ColumnLayout l={[1, 1, 1, 1, 1]} m={[1, 1, 1]} s={[1, 1]}>
@@ -101,6 +105,10 @@ import {
     <IconDeliveryBox />
   </LabeledValue>
   <LabeledValue>
+    <Label>EmailArchive</Label>
+    <IconEmailArchive />
+  </LabeledValue>
+  <LabeledValue>
     <Label>App</Label>
     <IconApp />
   </LabeledValue>
@@ -117,8 +125,16 @@ import {
     <IconSubdomain />
   </LabeledValue>
   <LabeledValue>
+    <Label>Domainpfad</Label>
+    <IconPath />
+  </LabeledValue>
+  <LabeledValue>
     <Label>Certificate</Label>
     <IconCertificate />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>DnsZone</Label>
+    <IconDnsZone />
   </LabeledValue>
   <LabeledValue>
     <Label>Move</Label>
@@ -279,5 +295,9 @@ import {
   <LabeledValue>
     <Label>KnowledgeHint</Label>
     <IconKnowledgeHint />
+  </LabeledValue>
+  <LabeledValue>
+    <Label>Invite</Label>
+    <IconInvite />
   </LabeledValue>
 </ColumnLayout>;

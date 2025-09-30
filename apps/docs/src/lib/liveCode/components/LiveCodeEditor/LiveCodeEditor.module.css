@@ -41,9 +41,9 @@
 
   .editor pre {
     white-space: pre !important;
-    overflow: hidden;
     padding: 0 !important;
-    background-color: var(--neutral--color--300) !important;
+    background-color: var(--code--default-background-color) !important;
+    font-size: var(--font-size-text--s);
   }
 
   .staticModal {
@@ -91,20 +91,23 @@
   transition-property: grid-template-rows, visibility, padding;
   transition-duration: var(--transition--duration--slow);
   padding: var(--size-px--m);
-  background-color: var(--neutral--color--300) !important;
+  background-color: var(--code--default-background-color) !important;
 
   &.collapsed {
     grid-template-rows: 0fr;
     visibility: hidden;
     padding-block: 0;
+    height: 0;
   }
 }
 
 .actions {
-  padding: var(--size-px--xs);
   margin-block-start: auto;
-  background-color: var(--neutral--color--300);
+  background-color: var(--neutral--color--200);
   border-top: 1px solid var(--border-color);
   display: flex;
   justify-content: center;
+  button {
+    padding-block: var(--size-px--s);
+  }
 }

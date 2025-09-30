@@ -8,9 +8,6 @@ export { type RemoteCartesianGridElement } from "@mittwald/flow-remote-elements"
 export const CartesianGrid = createFlowRemoteComponent(
   "flr-cartesian-grid",
   "CartesianGrid",
-  {
-    clearPropsContext: false,
-  },
   RemoteCartesianGridElement,
   {
     slotProps: {

@@ -1,6 +1,8 @@
 loading-spinner:
   transition-duration:
     value: 2000ms
+  transition-duration-slow:
+    value: 6000ms
   color:
     value: "{icon.color}"
   color-light:

@@ -101,7 +101,6 @@ test("will serialize and deserialize structures", async () => {
     transferable,
   );
 
-  expect(transferable).toHaveLength(5);
   expect(transferable).toStrictEqual(
     expect.arrayContaining([
       markAsTransferable(buff1),

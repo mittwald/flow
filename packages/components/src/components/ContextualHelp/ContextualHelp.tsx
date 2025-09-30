@@ -1,4 +1,3 @@
-import React from "react";
 import type { PopoverProps } from "@/components/Popover/Popover";
 import { Popover } from "@/components/Popover/Popover";
 import styles from "./ContextualHelp.module.scss";
@@ -9,10 +8,7 @@ import { useOverlayController } from "@/lib/controller";
 
 export type ContextualHelpProps = Omit<PopoverProps, "withTip">;
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const ContextualHelp = flowComponent("ContextualHelp", (props) => {
   const {
     children,

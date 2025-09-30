@@ -20,6 +20,7 @@ const meta: Meta<typeof Field> = {
       nameDefaultValue: string;
       nameRequired: string;
       nameMaxLength: string;
+      nameMinLength: string;
       controlledName: string;
     }
 
@@ -57,7 +58,9 @@ const meta: Meta<typeof Field> = {
 
           <Field
             name="nameRequired"
-            rules={{ required: "Please enter your name" }}
+            rules={{
+              required: "Please enter your name",
+            }}
           >
             <TextField>
               <Label>Name</Label>
@@ -72,6 +75,18 @@ const meta: Meta<typeof Field> = {
 
           <Field name="controlledName">
             <TextField value={form.watch("controlledName").toUpperCase()}>
+              <Label>Name</Label>
+            </TextField>
+          </Field>
+
+          <Field
+            name="nameMinLength"
+            rules={{
+              required: "Please enter your name",
+              minLength: 2,
+            }}
+          >
+            <TextField>
               <Label>Name</Label>
             </TextField>
           </Field>
@@ -126,6 +141,37 @@ export const WithTransformedValue: Story = {
             <Button type="submit">Submit</Button>
           </ActionGroup>
         </Section>
+      </Form>
+    );
+  },
+};
+
+export const WithFocusAndError: Story = {
+  render: (props) => {
+    const form = useForm();
+    return (
+      <Form form={form} onSubmit={async () => await sleep(2000)}>
+        <Field name={"email"}>
+          <TextField {...props} type="email" inputMode="email">
+            <Label>Email</Label>
+          </TextField>
+        </Field>
+        <div style={{ marginBottom: "2200px" }} />
+        <Button
+          onPress={() =>
+            form.setError(
+              "email",
+              { type: "required", message: "oh no" },
+              { shouldFocus: true },
+            )
+          }
+        >
+          err through form
+        </Button>
+        <Button onPress={() => form.setFocus("email")}>
+          focus through form
+        </Button>
+        <Button type="submit">Submit</Button>
       </Form>
     );
   },

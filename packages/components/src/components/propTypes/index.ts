@@ -37,7 +37,7 @@ import type { CheckboxGroupProps } from "@/components/CheckboxGroup";
 import type { CheckboxProps } from "@/components/Checkbox";
 import type { CheckboxButtonProps } from "@/components/CheckboxButton";
 import type { TabsProps } from "@/components/Tabs";
-import type { ModalProps, ModalTriggerProps } from "@/components/Modal";
+import type { ModalProps } from "@/components/Modal";
 import type { SectionProps } from "@/components/Section";
 import type { SliderProps } from "@/components/Slider";
 import type { CounterBadgeProps } from "@/components/CounterBadge";
@@ -63,7 +63,7 @@ import type { SegmentProps } from "@/components/SegmentedControl/components/Segm
 import type { FileCardProps } from "@/components/FileCard";
 import type { FileFieldProps } from "@/components/FileField";
 import type { AlignProps } from "@/components/Align";
-import type { CountryOptionsProps } from "@/components/Select/components/CountryOptions";
+import type { CountryOptionsProps } from "src/components/CountryOptions";
 import type { ComboBoxProps } from "@/components/ComboBox";
 import type { OptionProps } from "@/components/Option";
 import type { MessageProps } from "@/components/Message";
@@ -78,6 +78,7 @@ import type { NavigationProps } from "@/components/Navigation";
 import type { NavigationGroupProps } from "@/components/Navigation/components/NavigationGroup";
 import type { AutocompleteProps } from "@/components/Autocomplete/Autocomplete";
 import type { OptionsProps } from "@/components/Options/Options";
+import type { MarkdownEditorProps } from "@/components/MarkdownEditor";
 
 export * from "./types";
 
@@ -126,12 +127,12 @@ export interface FlowComponentPropsTypes {
   Link: LinkProps;
   List: ListProps<never>;
   ListSummary: ListSummaryProps;
+  MarkdownEditor: MarkdownEditorProps;
   MenuItem: MenuItemProps;
   MenuTrigger: MenuTriggerProps;
   Message: MessageProps;
   MessageThread: MessageThreadProps;
   Modal: ModalProps;
-  ModalTrigger: ModalTriggerProps;
   Navigation: NavigationProps;
   NavigationGroup: NavigationGroupProps;
   NumberField: NumberFieldProps;
@@ -156,7 +157,7 @@ export interface FlowComponentPropsTypes {
   Text: TextProps;
   TextArea: TextAreaProps;
   TextField: TextFieldProps;
-  TimeField: TimeFieldProps<Aria.TimeValue>;
+  TimeField: TimeFieldProps;
 }
 
 const propsContextSupportingComponentsMap: Record<
@@ -207,12 +208,12 @@ const propsContextSupportingComponentsMap: Record<
   Link: true,
   List: true,
   ListSummary: true,
+  MarkdownEditor: true,
   MenuItem: true,
   MenuTrigger: true,
   Message: true,
   MessageThread: true,
   Modal: true,
-  ModalTrigger: true,
   Navigation: true,
   NavigationGroup: true,
   NumberField: true,

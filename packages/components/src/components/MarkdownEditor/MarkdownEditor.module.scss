@@ -1,0 +1,90 @@
+@use "@/styles/mixins/formControl";
+
+.markdownEditor {
+  grid-template-areas:
+    "label"
+    "toolbar"
+    "content"
+    "fieldDescription";
+
+  &.mode-editor,
+  &.mode-preview {
+    display: grid;
+  }
+
+  .toolbar {
+    grid-area: toolbar;
+    display: flex;
+    justify-content: space-between;
+    padding: var(--form-control--padding-y);
+    column-gap: var(--form-control--padding-y);
+    @include formControl.formBorder;
+    @include formControl.formColor;
+    @include formControl.formAnimation;
+    & {
+      border-bottom: none;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+
+  .toolbarButtons {
+    display: flex;
+    column-gap: var(--form-control--padding-y);
+  }
+
+  .modeButton {
+    margin-inline-start: auto;
+  }
+
+  .markdown {
+    overflow-y: auto;
+    @include formControl.formBorder;
+    @include formControl.formColor;
+  }
+
+  textarea,
+  .markdown {
+    grid-area: content;
+    padding-block: var(--form-control--padding-y);
+    padding-inline: var(--form-control--padding-x);
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  &.mode-editor {
+    .markdown {
+      display: none;
+    }
+  }
+
+  &.mode-preview {
+    textarea {
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
+
+  /* States */
+
+  &:has(textarea:hover) .toolbar {
+    background-color: var(--form-control--background-color--hover);
+  }
+
+  &:has(textarea[data-invalid]) .toolbar,
+  &:has(textarea[data-invalid]) .markdown {
+    background-color: var(--form-control--background-color--invalid);
+    border-color: var(--form-control--border-color--invalid);
+  }
+
+  &:has(textarea[data-focused="true"]) .toolbar,
+  &:has(textarea[data-focused="true"]) .markdown {
+    background-color: var(--form-control--background-color--focused);
+    border-color: var(--form-control--border-color--focused);
+  }
+
+  &:has(textarea[data-disabled]).mode-editor .toolbar {
+    background-color: var(--form-control--background-color--disabled);
+    border-color: var(--form-control--border-color--disabled);
+  }
+}

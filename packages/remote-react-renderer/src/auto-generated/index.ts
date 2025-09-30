@@ -24,11 +24,12 @@ import { Chat as Chat } from "@mittwald/flow-react-components";
 import { Checkbox as Checkbox } from "@mittwald/flow-react-components";
 import { CheckboxButton as CheckboxButton } from "@mittwald/flow-react-components";
 import { CheckboxGroup as CheckboxGroup } from "@mittwald/flow-react-components";
-import { ClearPropsContextContent as ClearPropsContextContent } from "@mittwald/flow-react-components";
+import { ClearPropsContext as ClearPropsContext } from "@mittwald/flow-react-components";
 import { CodeBlock as CodeBlock } from "@mittwald/flow-react-components";
 import { Color as Color } from "@mittwald/flow-react-components";
 import { ColumnLayout as ColumnLayout } from "@mittwald/flow-react-components";
 import { ComboBox as ComboBox } from "@mittwald/flow-react-components";
+import { ComponentPropsContextProvider as ComponentPropsContextProvider } from "@mittwald/flow-react-components";
 import { Content as Content } from "@mittwald/flow-react-components";
 import { ContextMenu as ContextMenu } from "@mittwald/flow-react-components";
 import { ContextMenuContent as ContextMenuContent } from "@mittwald/flow-react-components";
@@ -38,7 +39,6 @@ import { ContextualHelp as ContextualHelp } from "@mittwald/flow-react-component
 import { ContextualHelpTrigger as ContextualHelpTrigger } from "@mittwald/flow-react-components";
 import { CopyButton as CopyButton } from "@mittwald/flow-react-components";
 import { CounterBadge as CounterBadge } from "@mittwald/flow-react-components";
-import { CountryOptions as CountryOptions } from "@mittwald/flow-react-components";
 import { DatePicker as DatePicker } from "@mittwald/flow-react-components";
 import { DateRangePicker as DateRangePicker } from "@mittwald/flow-react-components";
 import { DialogTrigger as DialogTrigger } from "@mittwald/flow-react-components";
@@ -72,6 +72,7 @@ import { ListItemViewContent as ListItemViewContent } from "@mittwald/flow-react
 import { ListSummary as ListSummary } from "@mittwald/flow-react-components";
 import { LoadingSpinner as LoadingSpinner } from "@mittwald/flow-react-components";
 import { Markdown as Markdown } from "@mittwald/flow-react-components";
+import { MarkdownEditor as MarkdownEditor } from "@mittwald/flow-react-components";
 import { MenuItem as MenuItem } from "@mittwald/flow-react-components";
 import { MenuTrigger as MenuTrigger } from "@mittwald/flow-react-components";
 import { Message as Message } from "@mittwald/flow-react-components";
@@ -174,9 +175,9 @@ export const flowComponents = {
     "CheckboxGroup",
     CheckboxGroup,
   ),
-  "flr-clear-props-context-content": createFlowRemoteComponentRenderer(
-    "ClearPropsContextContent",
-    ClearPropsContextContent,
+  "flr-clear-props-context": createFlowRemoteComponentRenderer(
+    "ClearPropsContext",
+    ClearPropsContext,
   ),
   "flr-code-block": createFlowRemoteComponentRenderer("CodeBlock", CodeBlock),
   "flr-color": createFlowRemoteComponentRenderer("Color", Color),
@@ -185,6 +186,10 @@ export const flowComponents = {
     ColumnLayout,
   ),
   "flr-combo-box": createFlowRemoteComponentRenderer("ComboBox", ComboBox),
+  "flr-component-props-context-provider": createFlowRemoteComponentRenderer(
+    "ComponentPropsContextProvider",
+    ComponentPropsContextProvider,
+  ),
   "flr-content": createFlowRemoteComponentRenderer("Content", Content),
   "flr-context-menu": createFlowRemoteComponentRenderer(
     "ContextMenu",
@@ -217,10 +222,6 @@ export const flowComponents = {
   "flr-counter-badge": createFlowRemoteComponentRenderer(
     "CounterBadge",
     CounterBadge,
-  ),
-  "flr-country-options": createFlowRemoteComponentRenderer(
-    "CountryOptions",
-    CountryOptions,
   ),
   "flr-date-picker": createFlowRemoteComponentRenderer(
     "DatePicker",
@@ -312,6 +313,10 @@ export const flowComponents = {
     LoadingSpinner,
   ),
   "flr-markdown": createFlowRemoteComponentRenderer("Markdown", Markdown),
+  "flr-markdown-editor": createFlowRemoteComponentRenderer(
+    "MarkdownEditor",
+    MarkdownEditor,
+  ),
   "flr-menu-item": createFlowRemoteComponentRenderer("MenuItem", MenuItem),
   "flr-menu-trigger": createFlowRemoteComponentRenderer(
     "MenuTrigger",

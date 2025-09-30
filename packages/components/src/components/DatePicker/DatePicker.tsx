@@ -1,5 +1,4 @@
-import type { PropsWithChildren, ReactNode } from "react";
-import React from "react";
+import { type PropsWithChildren, type ReactNode } from "react";
 import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
@@ -14,6 +13,8 @@ import {
   type FlowComponentProps,
 } from "@/lib/componentFactory/flowComponent";
 import { Calendar } from "@/components/Calendar";
+import { useObjectRef } from "@react-aria/utils";
+import { useMakeFocusable } from "@/lib/hooks/dom/useMakeFocusable";
 
 export interface DatePickerProps<T extends Aria.DateValue = Aria.DateValue>
   extends PropsWithChildren<Omit<Aria.DatePickerProps<T>, "children">>,
@@ -22,10 +23,7 @@ export interface DatePickerProps<T extends Aria.DateValue = Aria.DateValue>
   errorMessage?: ReactNode;
 }
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const DatePicker = flowComponent("DatePicker", (props) => {
   const { children, className, errorMessage, onChange, ref, ...rest } = props;
 
@@ -44,11 +42,14 @@ export const DatePicker = flowComponent("DatePicker", (props) => {
     },
   };
 
+  const localRef = useObjectRef(ref);
+  useMakeFocusable(localRef);
+
   const popoverController = useOverlayController("Popover");
 
   return (
     <Aria.DatePicker
-      ref={ref}
+      ref={localRef}
       {...rest}
       className={rootClassName}
       onOpenChange={(v) => popoverController.setOpen(v)}

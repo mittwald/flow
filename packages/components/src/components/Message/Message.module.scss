@@ -43,9 +43,8 @@
     display: flex;
     column-gap: var(--message--spacing-x);
     row-gap: var(--message--spacing-y);
-    align-items: center;
+    align-items: end;
     flex-wrap: wrap;
-    font-size: var(--font-size-text--s);
 
     .user {
       order: 1;

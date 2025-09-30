@@ -1,9 +1,7 @@
 import type { FC, PropsWithChildren } from "react";
-import React from "react";
 import styles from "./LabeledValue.module.scss";
 import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
-import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
 import type { PropsWithClassName } from "@/lib/types/props";
 
@@ -11,10 +9,7 @@ export interface LabeledValueProps
   extends PropsWithChildren,
     PropsWithClassName {}
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const LabeledValue: FC<LabeledValueProps> = (props) => {
   const { children, className } = props;
 
@@ -40,13 +35,11 @@ export const LabeledValue: FC<LabeledValueProps> = (props) => {
   };
 
   return (
-    <ClearPropsContext>
-      <div className={rootClassName}>
-        <PropsContextProvider props={propsContext}>
-          {children}
-        </PropsContextProvider>
-      </div>
-    </ClearPropsContext>
+    <div className={rootClassName}>
+      <PropsContextProvider props={propsContext}>
+        {children}
+      </PropsContextProvider>
+    </div>
   );
 };
 

@@ -24,9 +24,9 @@ export const Default: Story = {};
 
 export const Disabled: Story = { args: { isDisabled: true } };
 
-export const Required: Story = {
-  args: { isRequired: true },
-};
+export const ReadOnly: Story = { args: { isReadOnly: true } };
+
+export const Required: Story = { args: { isRequired: true } };
 
 export const WithFieldDescription: Story = {
   render: (props) => (

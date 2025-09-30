@@ -2,7 +2,6 @@ import * as Aria from "react-aria-components";
 import type { TextFieldBaseProps } from "@/components/TextFieldBase";
 import { TextFieldBase } from "@/components/TextFieldBase";
 import styles from "./TextArea.module.scss";
-import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { useObjectRef } from "@react-aria/utils";
@@ -19,10 +18,7 @@ export interface TextAreaProps
   autoResizeMaxRows?: number;
 }
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const TextArea = flowComponent("TextArea", (props) => {
   const {
     children,
@@ -68,11 +64,9 @@ export const TextArea = flowComponent("TextArea", (props) => {
   );
 
   return (
-    <ClearPropsContext>
-      <TextFieldBase {...rest} input={input}>
-        {children}
-      </TextFieldBase>
-    </ClearPropsContext>
+    <TextFieldBase {...rest} input={input}>
+      {children}
+    </TextFieldBase>
   );
 });
 

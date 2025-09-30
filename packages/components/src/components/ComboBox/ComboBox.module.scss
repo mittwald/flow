@@ -30,8 +30,8 @@
   }
 
   &:not([data-disabled="true"]):hover {
-    input,
-    .toggle {
+    input:not(:read-only),
+    .toggle:not([data-disabled="true"]) {
       background-color: var(--form-control--background-color--hover);
     }
   }

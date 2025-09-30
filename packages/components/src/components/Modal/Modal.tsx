@@ -1,10 +1,11 @@
-import type { PropsWithChildren } from "react";
-import React from "react";
+import type { PropsWithChildren, ReactNode } from "react";
 import styles from "./Modal.module.scss";
 import clsx from "clsx";
-import type { PropsContext } from "@/lib/propsContext";
-import { PropsContextProvider } from "@/lib/propsContext";
-import { TunnelExit, TunnelProvider } from "@mittwald/react-tunnel";
+import {
+  dynamic,
+  type PropsContext,
+  PropsContextProvider,
+} from "@/lib/propsContext";
 import type { OverlayController } from "@/lib/controller/overlay";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
@@ -12,7 +13,6 @@ import { Overlay } from "@/components/Overlay/Overlay";
 import { Action } from "@/components/Action";
 import { IconClose } from "@/components/Icon/components/icons";
 import type { PropsWithClassName } from "@/lib/types/props";
-import HeaderView from "@/views/HeaderView";
 import ButtonView from "@/views/ButtonView";
 
 export interface ModalProps
@@ -39,88 +39,89 @@ export interface ModalProps
   isDismissable?: boolean;
 }
 
-export const Modal = flowComponent("Modal", (props) => {
-  const {
-    size = "s",
-    offCanvas,
-    controller,
-    children,
-    ref,
-    className,
-    offCanvasOrientation = "right",
-    ...rest
-  } = props;
+export const Modal = flowComponent(
+  "Modal",
+  (props) => {
+    const {
+      size = "s",
+      offCanvas,
+      controller,
+      children,
+      ref,
+      className,
+      offCanvasOrientation = "right",
+      ...rest
+    } = props;
 
-  const rootClassName = clsx(
-    offCanvas ? styles.offCanvas : styles.modal,
-    styles[`size-${size}`],
-    styles[offCanvasOrientation],
-    className,
-  );
+    const rootClassName = clsx(
+      offCanvas ? styles.offCanvas : styles.modal,
+      styles[`size-${size}`],
+      offCanvasOrientation === "left" && styles["left"],
+      className,
+    );
 
-  const propsContext: PropsContext = {
-    Content: {
-      className: styles.content,
-      Section: {
-        Heading: {
-          level: 3,
-        },
-        Header: {
-          Heading: {
-            level: 3,
-          },
-        },
+    const header = (children: ReactNode) => (
+      <>
+        {children}
+        <Action closeOverlay="Modal">
+          <ButtonView
+            variant="plain"
+            color="secondary"
+            onPress={controller?.close}
+          >
+            <IconClose />
+          </ButtonView>
+        </Action>
+      </>
+    );
+
+    const nestedHeadingLevel = 3;
+
+    const nestedHeadingProps: PropsContext = {
+      Heading: { level: nestedHeadingLevel },
+      Section: { Heading: { level: nestedHeadingLevel } },
+    };
+
+    const propsContext: PropsContext = {
+      Content: {
+        ...nestedHeadingProps,
+        className: styles.content,
       },
-    },
-    ColumnLayout: {
-      l: [2, 1],
-      m: [1],
-      className: styles.columnLayout,
-      Section: {
-        Heading: {
-          level: 3,
-        },
+      ColumnLayout: {
+        ...nestedHeadingProps,
+        l: [2, 1],
+        m: [1],
+        className: styles.columnLayout,
+        AccentBox: { className: styles.accentBox, color: "neutral" },
       },
-      AccentBox: { className: styles.accentBox, color: "neutral" },
-    },
-    Heading: {
-      level: 2,
-      slot: "title",
-      tunnelId: "heading",
-    },
-    ActionGroup: {
-      className: styles.actionGroup,
-      spacing: "m",
-    },
-  };
+      Heading: {
+        className: styles.header,
+        level: 2,
+        slot: "title",
+        children: dynamic((props) => header(props.children)),
+      },
+      ActionGroup: {
+        className: styles.actionGroup,
+        spacing: "m",
+      },
+    };
 
-  return (
-    <Overlay
-      className={rootClassName}
-      controller={controller}
-      ref={ref}
-      {...rest}
-    >
-      <PropsContextProvider props={propsContext}>
-        <TunnelProvider>
-          <HeaderView className={styles.header}>
-            <TunnelExit id="heading" />
-            <Action closeOverlay="Modal">
-              <ButtonView
-                variant="plain"
-                color="secondary"
-                className={styles.closeButton}
-                onPress={controller?.close}
-              >
-                <IconClose />
-              </ButtonView>
-            </Action>
-          </HeaderView>
+    return (
+      <Overlay
+        className={rootClassName}
+        controller={controller}
+        ref={ref}
+        {...rest}
+      >
+        <PropsContextProvider props={propsContext}>
           {children}
-        </TunnelProvider>
-      </PropsContextProvider>
-    </Overlay>
-  );
-});
+        </PropsContextProvider>
+      </Overlay>
+    );
+  },
+  {
+    type: "provider",
+  },
+);
 
 export default Modal;

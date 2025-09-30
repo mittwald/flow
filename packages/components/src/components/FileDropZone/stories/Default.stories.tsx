@@ -49,6 +49,10 @@ const submitAction = action("submit");
 
 export const Default: Story = {};
 
+export const Disabled: Story = { args: { isDisabled: true } };
+
+export const ReadOnly: Story = { args: { isReadOnly: true } };
+
 export const WithAcceptedTypes: Story = {
   args: { accept: "image/png" },
   render: (props) => {

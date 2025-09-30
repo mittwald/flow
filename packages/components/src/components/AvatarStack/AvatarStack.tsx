@@ -1,5 +1,5 @@
 import type { FC, PropsWithChildren } from "react";
-import React, { Children } from "react";
+import { Children } from "react";
 import clsx from "clsx";
 import type { PropsWithClassName } from "@/lib/types/props";
 import styles from "./AvatarStack.module.scss";
@@ -51,7 +51,7 @@ export const AvatarStack: FC<AvatarStackProps> = (props) => {
   };
 
   return (
-    <PropsContextProvider props={propsContext} mergeInParentContext>
+    <PropsContextProvider props={propsContext}>
       <div className={rootClassName}>
         {children}
         {additionalItemsCount > 0 && (

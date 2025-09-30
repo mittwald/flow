@@ -9,7 +9,6 @@ import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 import type { PropsWithStatus, Status } from "@/lib/types/props";
 import type { IconProps } from "@/components/Icon";
-import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
 
 export interface AlertIconProps extends PropsWithStatus, IconProps {}
 
@@ -20,10 +19,7 @@ const icons: Record<Status, ComponentType> = {
   warning: IconWarning,
 };
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const AlertIcon: FC<AlertIconProps> = (props) => {
   const { status = "info", ...rest } = props;
 
@@ -37,11 +33,7 @@ export const AlertIcon: FC<AlertIconProps> = (props) => {
     ...rest,
   };
 
-  return (
-    <ClearPropsContext>
-      <Icon {...iconProps} />
-    </ClearPropsContext>
-  );
+  return <Icon {...iconProps} />;
 };
 
 export default AlertIcon;

@@ -3,7 +3,6 @@ import {
   ActionGroup,
   Button,
   Heading,
-  IconEmail,
   Label,
   Text,
   TextField,
@@ -11,10 +10,7 @@ import {
 
 <StaticModal>
   <div className="flow--modal--content">
-    <Heading>
-      <IconEmail />
-      E-Mail-Adresse anlegen
-    </Heading>
+    <Heading>E-Mail-Adresse anlegen</Heading>
     <Text>
       Erstelle dir eine E-Mail-Adresse mit Postfach
       Speicherplatz.

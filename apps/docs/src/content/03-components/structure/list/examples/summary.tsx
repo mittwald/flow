@@ -10,46 +10,40 @@ import {
 export default () => {
   const InvoiceList = typedList<{
     id: string;
-    date: string;
     amount: string;
   }>();
 
   return (
-    <InvoiceList.List batchSize={5} aria-label="Invoices">
-      <ListSummary>
+    <InvoiceList.List
+      batchSize={2}
+      hidePagination
+      aria-label="Rechnungen"
+    >
+      <ListSummary position="bottom">
         <Flex justify="end">
           <Text>
-            <b>Gesamt: 41,00 €</b>
+            <b>Gesamt: 37,00 €</b>
           </Text>
         </Flex>
       </ListSummary>
       <InvoiceList.StaticData
         data={[
           {
-            id: "RG100000",
-            date: "1.9.2024",
+            id: "Rechnung 1",
             amount: "25,00 €",
           },
           {
-            id: "RG100001",
-            date: "12.9.2024",
+            id: "Rechnung 2",
             amount: "12,00 €",
-          },
-          {
-            id: "RG100002",
-            date: "3.10.2024",
-            amount: "4,00 €",
           },
         ]}
       />
 
-      <InvoiceList.Item>
+      <InvoiceList.Item textValue={(invoice) => invoice.id}>
         {(invoice) => (
           <ListItemView>
             <Heading>{invoice.id}</Heading>
-            <Text>
-              {invoice.date} - {invoice.amount}
-            </Text>
+            <Text>{invoice.amount}</Text>
           </ListItemView>
         )}
       </InvoiceList.Item>

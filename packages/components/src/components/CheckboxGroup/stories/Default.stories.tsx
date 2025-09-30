@@ -32,9 +32,11 @@ type Story = StoryObj<typeof CheckboxGroup>;
 export const Default: Story = {};
 
 export const CheckboxGroupDisabled: Story = {
-  args: {
-    isDisabled: true,
-  },
+  args: { isDisabled: true },
+};
+
+export const ReadOnly: Story = {
+  args: { isReadOnly: true },
 };
 
 export const CheckboxDisabled: Story = {

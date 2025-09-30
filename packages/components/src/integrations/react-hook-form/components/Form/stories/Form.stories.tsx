@@ -19,7 +19,7 @@ const submitAction = action("submit");
 const meta: Meta<typeof Form> = {
   title: "Integrations/React Hook Form/Form",
   component: Form,
-  render: () => {
+  render: (props) => {
     interface Values {
       name: string;
     }
@@ -41,7 +41,7 @@ const meta: Meta<typeof Form> = {
       <ModalTrigger>
         <Button>Open modal</Button>
         <Modal>
-          <Form form={form} onSubmit={handleOnSubmit}>
+          <Form {...props} form={form} onSubmit={handleOnSubmit}>
             <Heading>Modal</Heading>
             <Content>
               <Section>
@@ -70,3 +70,5 @@ export default meta;
 type Story = StoryObj<typeof Form>;
 
 export const Default: Story = {};
+
+export const ReadOnly: Story = { args: { isReadOnly: true } };

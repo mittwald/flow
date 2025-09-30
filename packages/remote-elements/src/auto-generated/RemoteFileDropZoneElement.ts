@@ -13,6 +13,8 @@ export class RemoteFileDropZoneElement extends FlowRemoteElement<RemoteFileDropZ
     return {
       accept: {},
       className: {},
+      isDisabled: {},
+      isReadOnly: {},
       multiple: {},
       name: {},
     };

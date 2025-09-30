@@ -8,9 +8,6 @@ export { type RemoteLegendElement } from "@mittwald/flow-remote-elements";
 export const Legend = createFlowRemoteComponent(
   "flr-legend",
   "Legend",
-  {
-    clearPropsContext: false,
-  },
   RemoteLegendElement,
   {
     slotProps: {

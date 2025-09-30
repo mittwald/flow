@@ -9,7 +9,7 @@ import {
   generateRemoteElementIndexFile,
 } from "./generation/generateRemoteElementFile";
 import { config } from "./config";
-import { checkTagIsSet } from "./lib/docTags";
+import { checkTagIsSet, checkTagListIncludes } from "./lib/docTags";
 import type { ComponentDoc } from "react-docgen-typescript";
 import { remoteComponentNameOf } from "./lib/remoteComponentNameOf";
 import { generateRemoteReactRendererComponentsFile } from "./generation/generateRemoteReactRendererComponentsFile";
@@ -46,11 +46,20 @@ async function generate() {
 
   console.log("🛠 Applying config");
   for (const ignoredProp of config.ignoreProps) {
-    console.log(` .. removing "${ignoredProp}" prop`);
+    console.log(` ... removing "${ignoredProp}" prop`);
     components.forEach((c) => {
       delete c.props[ignoredProp];
     });
   }
+
+  components.forEach((c) => {
+    Object.keys(c.props).forEach((prop) => {
+      if (checkTagListIncludes(c.tags, "ignore-props", prop)) {
+        console.log(` ... removing "${prop}" prop from ${c.displayName}`);
+        delete c.props[prop];
+      }
+    });
+  });
 
   console.log("✅  Done");
   console.log("");

@@ -6,13 +6,12 @@ on:
       - closed
 
 env:
-  TARGET_DOCS_PATH: "/docs/${{ github.event.pull_request.head.ref }}"
-  TARGET_STORYBOOK_PATH: "/storybook/${{ github.event.pull_request.head.ref }}"
+  TARGET_DOCS_PATH: "/docs/${{ github.event.pull_request.number }}/merge"
+  TARGET_STORYBOOK_PATH:
+    "/storybook/${{ github.event.pull_request.number }}/merge"
 
 jobs:
   cleanup_previews:
-    if: github.event.pull_request.merged == true
-
     runs-on: ubuntu-latest
 
     env:

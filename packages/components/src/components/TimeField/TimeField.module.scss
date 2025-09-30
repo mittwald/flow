@@ -9,6 +9,8 @@
   :global(.react-aria-DateSegment) {
     border-radius: var(--time-field--date-segment-corner-radius);
     letter-spacing: var(--size-rem--xxxs);
+    transition-property: background-color;
+    transition-duration: var(--transition--duration--default);
 
     &:focus {
       background: var(--time-field--date-segment-background-color--focused);

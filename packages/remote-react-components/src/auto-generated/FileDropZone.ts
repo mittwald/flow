@@ -8,9 +8,6 @@ export { type RemoteFileDropZoneElement } from "@mittwald/flow-remote-elements";
 export const FileDropZone = createFlowRemoteComponent(
   "flr-file-drop-zone",
   "FileDropZone",
-  {
-    clearPropsContext: false,
-  },
   RemoteFileDropZoneElement,
   {
     slotProps: {

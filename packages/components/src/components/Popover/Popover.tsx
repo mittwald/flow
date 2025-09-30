@@ -9,6 +9,7 @@ import {
 import OverlayContextProvider from "@/lib/controller/overlay/OverlayContextProvider";
 import styles from "./Popover.module.scss";
 import PopoverContentView from "@/views/PopoverContentView";
+import ClearPropsContextView from "@/views/ClearPropsContextView";
 
 export interface PopoverProps
   extends PropsWithChildren<Omit<Aria.PopoverProps, "children">>,
@@ -24,8 +25,6 @@ export interface PopoverProps
   controller?: OverlayController;
   /** A fixed width for the popover. */
   width?: string | number;
-  /** The popovers padding. @default "m" */
-  padding?: "s" | "m";
 }
 
 export const Popover = flowComponent("Popover", (props) => {
@@ -49,17 +48,19 @@ export const Popover = flowComponent("Popover", (props) => {
   const rootClassName = clsx(styles.popover, className);
 
   return (
-    <PopoverContentView
-      {...contentProps}
-      className={rootClassName}
-      isOpen={isOpen}
-      onOpenChange={(isOpen) => controller.setOpen(isOpen)}
-      ref={ref}
-    >
-      <OverlayContextProvider type="Popover" controller={controller}>
-        {children}
-      </OverlayContextProvider>
-    </PopoverContentView>
+    <ClearPropsContextView>
+      <PopoverContentView
+        {...contentProps}
+        className={rootClassName}
+        isOpen={isOpen}
+        onOpenChange={(isOpen) => controller.setOpen(isOpen)}
+        ref={ref}
+      >
+        <OverlayContextProvider type="Popover" controller={controller}>
+          {children}
+        </OverlayContextProvider>
+      </PopoverContentView>
+    </ClearPropsContextView>
   );
 });
 

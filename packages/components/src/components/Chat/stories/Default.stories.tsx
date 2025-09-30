@@ -12,12 +12,13 @@ import { MessageThread } from "@/components/MessageThread";
 import { Chat } from "@/components/Chat";
 import { dummyText } from "@/lib/dev/dummyText";
 import { TextArea } from "@/components/TextArea";
-import IconAttachment from "@/components/Icon/components/icons/IconAttachment";
 import { FileCardList } from "@/components/FileCardList";
 import { FileCard } from "@/components/FileCard";
 import { Field, Form } from "@/integrations/react-hook-form";
 import { action } from "storybook/actions";
 import { useForm } from "react-hook-form";
+import { MarkdownEditor } from "@/components/MarkdownEditor";
+import { FileField } from "@/components/FileField";
 
 const meta: Meta<typeof Chat> = {
   title: "Chat/Chat",
@@ -60,7 +61,7 @@ const meta: Meta<typeof Chat> = {
           </Content>
         </Message>
       </MessageThread>
-      <TextArea aria-label="message" rows={1} autoResizeMaxRows={10} />
+      <TextArea aria-label="message" rows={3} autoResizeMaxRows={10} />
       <Button color="accent">Submit</Button>
     </Chat>
   ),
@@ -91,10 +92,12 @@ export const WithUpload: Story = {
           </Content>
         </Message>
       </MessageThread>
-      <Button color="secondary" variant="plain" aria-label="file attachment">
-        <IconAttachment />
-      </Button>
-      <TextArea aria-label="message" rows={1} autoResizeMaxRows={10} />
+      <TextArea aria-label="message" rows={3} autoResizeMaxRows={10} />
+      <FileField>
+        <Button variant="outline" color="secondary">
+          Attach file
+        </Button>
+      </FileField>
       <Button color="accent">Submit</Button>
       <FileCardList>
         <FileCard name="Uploaded File 1" />
@@ -133,11 +136,37 @@ export const WithForm: Story = {
           }}
         >
           <Field name="message">
-            <TextArea aria-label="message" rows={1} autoResizeMaxRows={10} />
+            <TextArea aria-label="message" rows={3} autoResizeMaxRows={10} />
           </Field>
           <Button color="accent">Submit</Button>
         </Form>
       </Chat>
     );
   },
+};
+
+export const WithMarkdownEditor: Story = {
+  render: (props) => (
+    <Chat {...props}>
+      <MessageThread>
+        <Message>
+          <Header>
+            <Align>
+              <Avatar>
+                <Initials>Max Mustermann</Initials>
+              </Avatar>
+              <Text>
+                <b>Max Mustermann</b>
+              </Text>
+            </Align>
+          </Header>
+          <Content>
+            <Text>{dummyText.long}</Text>
+          </Content>
+        </Message>
+      </MessageThread>
+      <MarkdownEditor aria-label="message" rows={3} autoResizeMaxRows={10} />
+      <Button color="accent">Submit</Button>
+    </Chat>
+  ),
 };

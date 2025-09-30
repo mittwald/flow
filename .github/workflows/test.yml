@@ -9,14 +9,12 @@ jobs:
   main:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: 10
 
       - uses: actions/setup-node@v4
         with:
@@ -28,8 +26,6 @@ jobs:
         run: git branch --track main origin/main
       - name: Lint
         run: pnpm lint
-      - name: Install Playwright
-        run: pnpm nx test:browser:prepare remote-react-components
       - run: pnpm test
       # Check if working dir is clean after build
       - run: git diff --exit-code

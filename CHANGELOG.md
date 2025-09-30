@@ -3,6 +3,508 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.498](https://github.com/mittwald/flow/compare/0.2.0-alpha.497...0.2.0-alpha.498) (2025-09-30)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.497](https://github.com/mittwald/flow/compare/0.2.0-alpha.496...0.2.0-alpha.497) (2025-09-30)
+
+### Features
+
+* **Ext-Bridge:** add variant key to session token ([#1987](https://github.com/mittwald/flow/issues/1987)) ([42afb06](https://github.com/mittwald/flow/commit/42afb06d21cff2c85c1017d420908e1ee5b67979))
+
+# [0.2.0-alpha.496](https://github.com/mittwald/flow/compare/0.2.0-alpha.495...0.2.0-alpha.496) (2025-09-30)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.495](https://github.com/mittwald/flow/compare/0.2.0-alpha.494...0.2.0-alpha.495) (2025-09-30)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.494](https://github.com/mittwald/flow/compare/0.2.0-alpha.493...0.2.0-alpha.494) (2025-09-29)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.493](https://github.com/mittwald/flow/compare/0.2.0-alpha.492...0.2.0-alpha.493) (2025-09-26)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.492](https://github.com/mittwald/flow/compare/0.2.0-alpha.491...0.2.0-alpha.492) (2025-09-26)
+
+### Performance Improvements
+
+* use memo in provider components ([6edc252](https://github.com/mittwald/flow/commit/6edc25282f59eea06457c0be59cb57bf7adc1a23))
+
+# [0.2.0-alpha.491](https://github.com/mittwald/flow/compare/0.2.0-alpha.490...0.2.0-alpha.491) (2025-09-26)
+
+### Bug Fixes
+
+* **Test:** no concurrency in remote tests ([f8c190f](https://github.com/mittwald/flow/commit/f8c190f21cf7f58591006620e714c5930c139c79))
+
+# [0.2.0-alpha.490](https://github.com/mittwald/flow/compare/0.2.0-alpha.489...0.2.0-alpha.490) (2025-09-25)
+
+### Bug Fixes
+
+* **LayoutCard:** fix width ([efe0ca3](https://github.com/mittwald/flow/commit/efe0ca321c47f8e65d74a70d2361e5b02a769c76))
+
+# [0.2.0-alpha.489](https://github.com/mittwald/flow/compare/0.2.0-alpha.488...0.2.0-alpha.489) (2025-09-25)
+
+### Bug Fixes
+
+* **MarkdownEditor:** fix disabled label in preview mode ([#2006](https://github.com/mittwald/flow/issues/2006)) ([0d60424](https://github.com/mittwald/flow/commit/0d604246fb39c02d726c8580cb323e4ac7edc9bf))
+
+# [0.2.0-alpha.488](https://github.com/mittwald/flow/compare/0.2.0-alpha.487...0.2.0-alpha.488) (2025-09-24)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.487](https://github.com/mittwald/flow/compare/0.2.0-alpha.486...0.2.0-alpha.487) (2025-09-24)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.486](https://github.com/mittwald/flow/compare/0.2.0-alpha.485...0.2.0-alpha.486) (2025-09-24)
+
+### Bug Fixes
+
+* **Autocomplete:** fix width not updating ([36acf4b](https://github.com/mittwald/flow/commit/36acf4b01c4bb3290440474f54399d60aaf835de))
+
+# [0.2.0-alpha.485](https://github.com/mittwald/flow/compare/0.2.0-alpha.484...0.2.0-alpha.485) (2025-09-24)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.484](https://github.com/mittwald/flow/compare/0.2.0-alpha.483...0.2.0-alpha.484) (2025-09-24)
+
+### Bug Fixes
+
+* **PropsContext:** fixes props context not correctly merged ([#2003](https://github.com/mittwald/flow/issues/2003)) ([4d2a103](https://github.com/mittwald/flow/commit/4d2a1036937c7ca03589f54b3752f3904ed3e4bb))
+
+# [0.2.0-alpha.483](https://github.com/mittwald/flow/compare/0.2.0-alpha.482...0.2.0-alpha.483) (2025-09-23)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.482](https://github.com/mittwald/flow/compare/0.2.0-alpha.481...0.2.0-alpha.482) (2025-09-23)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.481](https://github.com/mittwald/flow/compare/0.2.0-alpha.480...0.2.0-alpha.481) (2025-09-18)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.480](https://github.com/mittwald/flow/compare/0.2.0-alpha.479...0.2.0-alpha.480) (2025-09-17)
+
+### Features
+
+* add prefers-reduced-motion support ([cd4b586](https://github.com/mittwald/flow/commit/cd4b58657d8debf62c43c5469c0fcfd52fc5e9c1))
+
+# [0.2.0-alpha.479](https://github.com/mittwald/flow/compare/0.2.0-alpha.478...0.2.0-alpha.479) (2025-09-17)
+
+### Bug Fixes
+
+* **Markdown/Form:** fix markdown form support + fix form onSubmit return handler ([#1992](https://github.com/mittwald/flow/issues/1992)) ([1cd4477](https://github.com/mittwald/flow/commit/1cd4477a3a9d5072e7f9980ae01c7bde86303e69))
+
+# [0.2.0-alpha.478](https://github.com/mittwald/flow/compare/0.2.0-alpha.477...0.2.0-alpha.478) (2025-09-16)
+
+### Bug Fixes
+
+* **PasswordCreationField:** don't show success feedback on generate button ([#1985](https://github.com/mittwald/flow/issues/1985)) ([ca866a6](https://github.com/mittwald/flow/commit/ca866a63ad31df6b1d245ef3ca8121a57add67bf))
+
+# [0.2.0-alpha.477](https://github.com/mittwald/flow/compare/0.2.0-alpha.476...0.2.0-alpha.477) (2025-09-16)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.476](https://github.com/mittwald/flow/compare/0.2.0-alpha.475...0.2.0-alpha.476) (2025-09-15)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.475](https://github.com/mittwald/flow/compare/0.2.0-alpha.474...0.2.0-alpha.475) (2025-09-15)
+
+### Bug Fixes
+
+* **Field:** show message for max and min length ([#1982](https://github.com/mittwald/flow/issues/1982)) ([c97346e](https://github.com/mittwald/flow/commit/c97346edb1ebc382bd6b355ac4bd0a7c808523c7))
+
+# [0.2.0-alpha.474](https://github.com/mittwald/flow/compare/0.2.0-alpha.473...0.2.0-alpha.474) (2025-09-15)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.473](https://github.com/mittwald/flow/compare/0.2.0-alpha.472...0.2.0-alpha.473) (2025-09-12)
+
+### Bug Fixes
+
+* **Field:** fix issue with undefined field values ([cc5a7bf](https://github.com/mittwald/flow/commit/cc5a7bf3e96c0371f760fc1b6fd1a2253b84f40d))
+
+# [0.2.0-alpha.472](https://github.com/mittwald/flow/compare/0.2.0-alpha.471...0.2.0-alpha.472) (2025-09-11)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.471](https://github.com/mittwald/flow/compare/0.2.0-alpha.470...0.2.0-alpha.471) (2025-09-11)
+
+### Bug Fixes
+
+* **List:** clear content props context ([1899558](https://github.com/mittwald/flow/commit/1899558538b7fb8404b116d792f033fb49f843be))
+
+# [0.2.0-alpha.470](https://github.com/mittwald/flow/compare/0.2.0-alpha.469...0.2.0-alpha.470) (2025-09-11)
+
+### Bug Fixes
+
+* **Modal:** clear content props context ([#1970](https://github.com/mittwald/flow/issues/1970)) ([ed1da9a](https://github.com/mittwald/flow/commit/ed1da9a2b3efde65a05ac2a4e40e2977e916e788))
+
+# [0.2.0-alpha.469](https://github.com/mittwald/flow/compare/0.2.0-alpha.468...0.2.0-alpha.469) (2025-09-10)
+
+### Features
+
+* **Form:** add read only property ([#1969](https://github.com/mittwald/flow/issues/1969)) ([194009e](https://github.com/mittwald/flow/commit/194009e556e07c1624cd4ea2a747dde65348133a))
+
+# [0.2.0-alpha.468](https://github.com/mittwald/flow/compare/0.2.0-alpha.467...0.2.0-alpha.468) (2025-09-10)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.467](https://github.com/mittwald/flow/compare/0.2.0-alpha.466...0.2.0-alpha.467) (2025-09-09)
+
+### Bug Fixes
+
+* **MarkdownEditor:** fix ref from props ([#1965](https://github.com/mittwald/flow/issues/1965)) ([efdda5e](https://github.com/mittwald/flow/commit/efdda5e34c9a76d31bd452c44a98d29d7c64eb97))
+
+# [0.2.0-alpha.466](https://github.com/mittwald/flow/compare/0.2.0-alpha.465...0.2.0-alpha.466) (2025-09-09)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.465](https://github.com/mittwald/flow/compare/0.2.0-alpha.464...0.2.0-alpha.465) (2025-09-09)
+
+### Bug Fixes
+
+* **CheckboxGroup:** update error styles ([#1962](https://github.com/mittwald/flow/issues/1962)) ([9d85d02](https://github.com/mittwald/flow/commit/9d85d0258f80624cce700327c5652938e5553bc7))
+
+# [0.2.0-alpha.464](https://github.com/mittwald/flow/compare/0.2.0-alpha.463...0.2.0-alpha.464) (2025-09-08)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.463](https://github.com/mittwald/flow/compare/0.2.0-alpha.462...0.2.0-alpha.463) (2025-09-08)
+
+### Bug Fixes
+
+* **FileCard:** fix link with long text ([#1959](https://github.com/mittwald/flow/issues/1959)) ([5815f23](https://github.com/mittwald/flow/commit/5815f2316a2bd287610e4a3917d9f29f9c63c382))
+
+# [0.2.0-alpha.462](https://github.com/mittwald/flow/compare/0.2.0-alpha.461...0.2.0-alpha.462) (2025-09-08)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.461](https://github.com/mittwald/flow/compare/0.2.0-alpha.460...0.2.0-alpha.461) (2025-09-08)
+
+### Bug Fixes
+
+* **MarkdownEditor:** fix remote ([#1957](https://github.com/mittwald/flow/issues/1957)) ([adc4a1a](https://github.com/mittwald/flow/commit/adc4a1a9cdf08acd8eab2b27b8f679e3b8755107))
+
+# [0.2.0-alpha.460](https://github.com/mittwald/flow/compare/0.2.0-alpha.459...0.2.0-alpha.460) (2025-09-05)
+
+### Bug Fixes
+
+* **segment:** add focus outline ([#1954](https://github.com/mittwald/flow/issues/1954)) ([ade4db8](https://github.com/mittwald/flow/commit/ade4db8c8e4f7bdc53a009159888c644d5001634))
+
+# [0.2.0-alpha.459](https://github.com/mittwald/flow/compare/0.2.0-alpha.458...0.2.0-alpha.459) (2025-09-04)
+
+### Bug Fixes
+
+* **chat:** fix css ([#1953](https://github.com/mittwald/flow/issues/1953)) ([1ed449a](https://github.com/mittwald/flow/commit/1ed449a3700fb07b9a37c54bb03cc518fe1d5429))
+
+# [0.2.0-alpha.458](https://github.com/mittwald/flow/compare/0.2.0-alpha.457...0.2.0-alpha.458) (2025-09-04)
+
+### Bug Fixes
+
+* **chat:** support file field usage ([#1952](https://github.com/mittwald/flow/issues/1952)) ([b41a524](https://github.com/mittwald/flow/commit/b41a524dc23fcf897caf6ea601584e676c4c794e))
+
+# [0.2.0-alpha.457](https://github.com/mittwald/flow/compare/0.2.0-alpha.456...0.2.0-alpha.457) (2025-09-04)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.456](https://github.com/mittwald/flow/compare/0.2.0-alpha.455...0.2.0-alpha.456) (2025-09-04)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.455](https://github.com/mittwald/flow/compare/0.2.0-alpha.454...0.2.0-alpha.455) (2025-09-04)
+
+### Bug Fixes
+
+* **CI:** preview cleanup ([#1948](https://github.com/mittwald/flow/issues/1948)) ([6d63d71](https://github.com/mittwald/flow/commit/6d63d71e3ac82a2be43a83ac685fc980bc7c4a8b))
+
+# [0.2.0-alpha.454](https://github.com/mittwald/flow/compare/0.2.0-alpha.453...0.2.0-alpha.454) (2025-09-03)
+
+### Bug Fixes
+
+* **ColumnLayout:** fixes an issue that children are not rendered ([#1947](https://github.com/mittwald/flow/issues/1947)) ([894063c](https://github.com/mittwald/flow/commit/894063cafff531e2d64796c295c18950d5a4baf2))
+
+# [0.2.0-alpha.453](https://github.com/mittwald/flow/compare/0.2.0-alpha.452...0.2.0-alpha.453) (2025-09-03)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.452](https://github.com/mittwald/flow/compare/0.2.0-alpha.451...0.2.0-alpha.452) (2025-09-03)
+
+### Bug Fixes
+
+* **Markdown:** update CodeBlock color to 'dark' ([#1945](https://github.com/mittwald/flow/issues/1945)) ([eb4787e](https://github.com/mittwald/flow/commit/eb4787e0f34835b5f568a573da337c5d64c3c4c7))
+
+# [0.2.0-alpha.451](https://github.com/mittwald/flow/compare/0.2.0-alpha.450...0.2.0-alpha.451) (2025-09-03)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.450](https://github.com/mittwald/flow/compare/0.2.0-alpha.449...0.2.0-alpha.450) (2025-09-02)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.449](https://github.com/mittwald/flow/compare/0.2.0-alpha.448...0.2.0-alpha.449) (2025-09-02)
+
+### Bug Fixes
+
+* **List:** flickering loading view ([#1939](https://github.com/mittwald/flow/issues/1939)) ([bd1c028](https://github.com/mittwald/flow/commit/bd1c0284ead0cd5e486193f72d796576acbd46e2))
+
+# [0.2.0-alpha.448](https://github.com/mittwald/flow/compare/0.2.0-alpha.447...0.2.0-alpha.448) (2025-09-02)
+
+### Bug Fixes
+
+* **Message:** fix message header alignment ([#1938](https://github.com/mittwald/flow/issues/1938)) ([7c8081f](https://github.com/mittwald/flow/commit/7c8081f1fbb674933ef75ec95cc15149ad591f8d))
+
+# [0.2.0-alpha.447](https://github.com/mittwald/flow/compare/0.2.0-alpha.446...0.2.0-alpha.447) (2025-09-02)
+
+### Bug Fixes
+
+* **Modal:** fix modal heading position ([#1936](https://github.com/mittwald/flow/issues/1936)) ([7ca44e8](https://github.com/mittwald/flow/commit/7ca44e80c9ec118b2824ac8272b95835b406572f))
+
+# [0.2.0-alpha.446](https://github.com/mittwald/flow/compare/0.2.0-alpha.445...0.2.0-alpha.446) (2025-08-29)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.445](https://github.com/mittwald/flow/compare/0.2.0-alpha.444...0.2.0-alpha.445) (2025-08-28)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.444](https://github.com/mittwald/flow/compare/0.2.0-alpha.443...0.2.0-alpha.444) (2025-08-27)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.443](https://github.com/mittwald/flow/compare/0.2.0-alpha.442...0.2.0-alpha.443) (2025-08-27)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.442](https://github.com/mittwald/flow/compare/0.2.0-alpha.441...0.2.0-alpha.442) (2025-08-27)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.441](https://github.com/mittwald/flow/compare/0.2.0-alpha.440...0.2.0-alpha.441) (2025-08-27)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.440](https://github.com/mittwald/flow/compare/0.2.0-alpha.439...0.2.0-alpha.440) (2025-08-27)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.439](https://github.com/mittwald/flow/compare/0.2.0-alpha.438...0.2.0-alpha.439) (2025-08-26)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.438](https://github.com/mittwald/flow/compare/0.2.0-alpha.437...0.2.0-alpha.438) (2025-08-26)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.437](https://github.com/mittwald/flow/compare/0.2.0-alpha.436...0.2.0-alpha.437) (2025-08-26)
+
+### Features
+
+* **Icon:** add IconDnsZone and IconEmailArchive ([#1921](https://github.com/mittwald/flow/issues/1921)) ([9c8fd3e](https://github.com/mittwald/flow/commit/9c8fd3e5e65f71e95a4c615d88faa2cedc9e5d85))
+
+# [0.2.0-alpha.436](https://github.com/mittwald/flow/compare/0.2.0-alpha.435...0.2.0-alpha.436) (2025-08-26)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.435](https://github.com/mittwald/flow/compare/0.2.0-alpha.434...0.2.0-alpha.435) (2025-08-26)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.434](https://github.com/mittwald/flow/compare/0.2.0-alpha.433...0.2.0-alpha.434) (2025-08-26)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.433](https://github.com/mittwald/flow/compare/0.2.0-alpha.432...0.2.0-alpha.433) (2025-08-25)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.432](https://github.com/mittwald/flow/compare/0.2.0-alpha.431...0.2.0-alpha.432) (2025-08-25)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.431](https://github.com/mittwald/flow/compare/0.2.0-alpha.430...0.2.0-alpha.431) (2025-08-22)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.430](https://github.com/mittwald/flow/compare/0.2.0-alpha.429...0.2.0-alpha.430) (2025-08-20)
+
+### Bug Fixes
+
+* **ChartTooltip:** fix styling ([#1905](https://github.com/mittwald/flow/issues/1905)) ([ad9577d](https://github.com/mittwald/flow/commit/ad9577d52b614be9053d408ac9e1f39c669f6769))
+
+# [0.2.0-alpha.429](https://github.com/mittwald/flow/compare/0.2.0-alpha.428...0.2.0-alpha.429) (2025-08-19)
+
+### Features
+
+* add read only styling to form fields ([#1903](https://github.com/mittwald/flow/issues/1903)) ([817a3ac](https://github.com/mittwald/flow/commit/817a3acb70fc6a48d66892f8905328b67d8abd52))
+
+# [0.2.0-alpha.428](https://github.com/mittwald/flow/compare/0.2.0-alpha.427...0.2.0-alpha.428) (2025-08-19)
+
+### Bug Fixes
+
+* **Docs:** add target blank to external links ([#1900](https://github.com/mittwald/flow/issues/1900)) ([c846c4c](https://github.com/mittwald/flow/commit/c846c4ce3381002fb7265547b23509d41598ffef))
+
+# [0.2.0-alpha.427](https://github.com/mittwald/flow/compare/0.2.0-alpha.426...0.2.0-alpha.427) (2025-08-19)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.426](https://github.com/mittwald/flow/compare/0.2.0-alpha.425...0.2.0-alpha.426) (2025-08-19)
+
+### Features
+
+* **Link:** support whiteSpace property in link ([#1899](https://github.com/mittwald/flow/issues/1899)) ([dba2513](https://github.com/mittwald/flow/commit/dba25135200d09f43058f1590aac25182724344d))
+
+# [0.2.0-alpha.425](https://github.com/mittwald/flow/compare/0.2.0-alpha.424...0.2.0-alpha.425) (2025-08-19)
+
+### Features
+
+* **Icon:** add IconPath ([#1898](https://github.com/mittwald/flow/issues/1898)) ([0e99baa](https://github.com/mittwald/flow/commit/0e99baadf627cd371e9f9b70e8f4612bcb9e915d))
+
+# [0.2.0-alpha.424](https://github.com/mittwald/flow/compare/0.2.0-alpha.423...0.2.0-alpha.424) (2025-08-18)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.423](https://github.com/mittwald/flow/compare/0.2.0-alpha.422...0.2.0-alpha.423) (2025-08-18)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.422](https://github.com/mittwald/flow/compare/0.2.0-alpha.421...0.2.0-alpha.422) (2025-08-18)
+
+### Bug Fixes
+
+* **Remote:** <ColumnLayout/> is not hidden when suspended ([#1893](https://github.com/mittwald/flow/issues/1893)) ([7d49d63](https://github.com/mittwald/flow/commit/7d49d630aa15d690fc697b105c6e6a3a5b74b009))
+
+# [0.2.0-alpha.421](https://github.com/mittwald/flow/compare/0.2.0-alpha.420...0.2.0-alpha.421) (2025-08-18)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.420](https://github.com/mittwald/flow/compare/0.2.0-alpha.419...0.2.0-alpha.420) (2025-08-18)
+
+### Bug Fixes
+
+* **List:** fix list header wrap ([#1890](https://github.com/mittwald/flow/issues/1890)) ([4e282c2](https://github.com/mittwald/flow/commit/4e282c2fdddff26b0dd8d346d9f32d24691e2528))
+
+# [0.2.0-alpha.419](https://github.com/mittwald/flow/compare/0.2.0-alpha.418...0.2.0-alpha.419) (2025-08-15)
+
+### Bug Fixes
+
+* **Modal:** fix modal for remote components with older version ([#1886](https://github.com/mittwald/flow/issues/1886)) ([16c3903](https://github.com/mittwald/flow/commit/16c390310a0d10a7b18590c482ddb6eea274c4d7))
+
+# [0.2.0-alpha.418](https://github.com/mittwald/flow/compare/0.2.0-alpha.417...0.2.0-alpha.418) (2025-08-15)
+
+### Bug Fixes
+
+* **Modal:** fix modal with column layout ([#1885](https://github.com/mittwald/flow/issues/1885)) ([e5fa0bc](https://github.com/mittwald/flow/commit/e5fa0bcbe3330f6739262a530cfb80b545c6052a))
+
+# [0.2.0-alpha.417](https://github.com/mittwald/flow/compare/0.2.0-alpha.416...0.2.0-alpha.417) (2025-08-15)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.416](https://github.com/mittwald/flow/compare/0.2.0-alpha.415...0.2.0-alpha.416) (2025-08-15)
+
+### Bug Fixes
+
+* **Accordion:** update accordion size ([#1883](https://github.com/mittwald/flow/issues/1883)) ([0c1607e](https://github.com/mittwald/flow/commit/0c1607e34b651768583e57edb7cae580797b368a))
+
+# [0.2.0-alpha.415](https://github.com/mittwald/flow/compare/0.2.0-alpha.414...0.2.0-alpha.415) (2025-08-15)
+
+### Bug Fixes
+
+* **Popover:** fix padding ([#1866](https://github.com/mittwald/flow/issues/1866)) ([8ffad62](https://github.com/mittwald/flow/commit/8ffad62665e6fba33901bf79f2189b2f72c9ddf9))
+
+# [0.2.0-alpha.414](https://github.com/mittwald/flow/compare/0.2.0-alpha.413...0.2.0-alpha.414) (2025-08-14)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.413](https://github.com/mittwald/flow/compare/0.2.0-alpha.412...0.2.0-alpha.413) (2025-08-14)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.412](https://github.com/mittwald/flow/compare/0.2.0-alpha.411...0.2.0-alpha.412) (2025-08-14)
+
+### Bug Fixes
+
+* **PasswordCreationField:** fixes policy not working in remote context ([#1879](https://github.com/mittwald/flow/issues/1879)) ([0165437](https://github.com/mittwald/flow/commit/0165437cc7b611d1f5e2fd7363d50813281c418a))
+
+# [0.2.0-alpha.411](https://github.com/mittwald/flow/compare/0.2.0-alpha.410...0.2.0-alpha.411) (2025-08-13)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.410](https://github.com/mittwald/flow/compare/0.2.0-alpha.409...0.2.0-alpha.410) (2025-08-13)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.409](https://github.com/mittwald/flow/compare/0.2.0-alpha.408...0.2.0-alpha.409) (2025-08-13)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.408](https://github.com/mittwald/flow/compare/0.2.0-alpha.407...0.2.0-alpha.408) (2025-08-13)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.407](https://github.com/mittwald/flow/compare/0.2.0-alpha.406...0.2.0-alpha.407) (2025-08-13)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.406](https://github.com/mittwald/flow/compare/0.2.0-alpha.405...0.2.0-alpha.406) (2025-08-13)
+
+### Bug Fixes
+
+* **Modal:** fix modal header with form ([#1876](https://github.com/mittwald/flow/issues/1876)) ([6e76eb8](https://github.com/mittwald/flow/commit/6e76eb87511ecfcbea55dc1f97cff0afa9c48232))
+
+# [0.2.0-alpha.405](https://github.com/mittwald/flow/compare/0.2.0-alpha.404...0.2.0-alpha.405) (2025-08-13)
+
+### Bug Fixes
+
+* **Modal:** fix missing slot attribute ([#1873](https://github.com/mittwald/flow/issues/1873)) ([2389ad0](https://github.com/mittwald/flow/commit/2389ad0d2d719dd6b0f0ab01f1a062e90378b764))
+
+# [0.2.0-alpha.404](https://github.com/mittwald/flow/compare/0.2.0-alpha.403...0.2.0-alpha.404) (2025-08-12)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.403](https://github.com/mittwald/flow/compare/0.2.0-alpha.402...0.2.0-alpha.403) (2025-08-12)
+
+### Bug Fixes
+
+* **FileCard:** layout with buttons and action ([#1869](https://github.com/mittwald/flow/issues/1869)) ([f27c62f](https://github.com/mittwald/flow/commit/f27c62ff10d884bdc019ad4f639618a6111ded28))
+
+# [0.2.0-alpha.402](https://github.com/mittwald/flow/compare/0.2.0-alpha.401...0.2.0-alpha.402) (2025-08-12)
+
+### Features
+
+* **FileCard:** support ProgressBar and Buttons in FileCard ([#1865](https://github.com/mittwald/flow/issues/1865)) ([1450355](https://github.com/mittwald/flow/commit/1450355b8b5a38fcf7c7bf43f41b09bd0e006c02))
+
+# [0.2.0-alpha.401](https://github.com/mittwald/flow/compare/0.2.0-alpha.400...0.2.0-alpha.401) (2025-08-12)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.400](https://github.com/mittwald/flow/compare/0.2.0-alpha.399...0.2.0-alpha.400) (2025-08-12)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.399](https://github.com/mittwald/flow/compare/0.2.0-alpha.398...0.2.0-alpha.399) (2025-08-12)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.398](https://github.com/mittwald/flow/compare/0.2.0-alpha.397...0.2.0-alpha.398) (2025-08-12)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.397](https://github.com/mittwald/flow/compare/0.2.0-alpha.396...0.2.0-alpha.397) (2025-08-12)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
+# [0.2.0-alpha.396](https://github.com/mittwald/flow/compare/0.2.0-alpha.395...0.2.0-alpha.396) (2025-08-12)
+
+**Note:** Version bump only for package @mittwald/flow-project
+
 # [0.2.0-alpha.395](https://github.com/mittwald/flow/compare/0.2.0-alpha.394...0.2.0-alpha.395) (2025-08-11)
 
 ### Bug Fixes

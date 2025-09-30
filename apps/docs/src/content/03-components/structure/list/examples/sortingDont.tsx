@@ -26,7 +26,9 @@ export default () => {
         defaultEnabled
       />
       <DomainList.Sorting property="tld" name="TLD" />
-      <DomainList.Item>
+      <DomainList.Item
+        textValue={(domain) => domain.domain}
+      >
         {(domain) => (
           <DomainList.ItemView>
             <Avatar

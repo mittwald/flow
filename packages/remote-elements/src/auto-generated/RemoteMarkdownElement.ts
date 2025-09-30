@@ -13,8 +13,10 @@ export class RemoteMarkdownElement extends FlowRemoteElement<RemoteMarkdownEleme
     return {
       allowElement: {},
       allowedElements: {},
+      className: {},
       color: {},
       disallowedElements: {},
+      headingOffset: {},
       rehypePlugins: {},
       remarkPlugins: {},
       remarkRehypeOptions: {},

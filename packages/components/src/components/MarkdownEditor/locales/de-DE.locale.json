@@ -1,0 +1,12 @@
+{
+  "mode.editor": "Editor",
+  "mode.preview": "Vorschau",
+  "toolbar.bold": "Fett",
+  "toolbar.code": "Code",
+  "toolbar.italic": "Kursiv",
+  "toolbar.link": "Link",
+  "toolbar.orderedList": "Sortierte Liste",
+  "toolbar.quote": "Zitat",
+  "toolbar.strikeThrough": "Durchgestrichen",
+  "toolbar.unorderedList": "Liste"
+}

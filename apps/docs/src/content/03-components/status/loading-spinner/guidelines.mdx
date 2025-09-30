@@ -1,0 +1,37 @@
+# Grundlagen
+
+Der LoadingSpinner ist ein animiertes Element, das dem User visuelles Feedback
+gibt, während im Hintergrund Inhalte geladen werden. Er wird eingesetzt, wenn
+die Dauer des Ladevorgangs unbestimmt ist und der Fortschritt nicht konkret
+dargestellt werden kann (siehe
+[ProgressBar](/03-components/status/progress-bar)).
+
+Handelt es sich hingegen um ein kurzzeitiges, initiales Laden von Inhalten mit
+bekannter Layout-Struktur, ist der Einsatz eines
+[Skeletons](/03-components/content/skeleton) vorzuziehen.
+
+## Best practices
+
+Achte bei der Verwendung eines LoadingSpinners darauf, dass ...
+
+- er nur bei relevanter Ladezeit eingesetzt wird. Setze ihn nur ein, wenn der
+  Ladevorgang länger als 1 Sekunde dauert. Bei sehr kurzen Ladezeiten lohnt sich
+  visuelles Feedback meist nicht.
+- User möglichst früh visuelles Feedback erhalten, dass auf der Seite etwas
+  passiert.
+- bei längeren Ladezeiten der LoadingSpinner mit einer
+  [IllustratedMessage](/03-components/content/illustrated-message) kombiniert
+  werden kann, um Usern zusätzliche Informationen zu geben.
+- er gezielt Aufmerksamkeit lenkt. Platziere ihn an der Stelle, wo der User nach
+  dem Laden hinschauen soll. Das unterstützt die Orientierung.
+- nicht zu viele gleichzeitig erscheinen. Mehrere LoadingSpinner auf einmal
+  wirken schnell unruhig oder überfordernd.
+
+## Verwendung
+
+Verwende einen LoadingSpinner, um ...
+
+- die Benutzererwartung zu steuern und zu signalisieren, dass in Kürze neue
+  Inhalte erscheinen.
+- dem User nach einer Aktion visuelles Feedback zu geben, dass im Hintergrund
+  Systemaktivität stattfindet.

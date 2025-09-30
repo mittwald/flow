@@ -4,21 +4,37 @@ import { InlineCode } from "@/components/InlineCode";
 import { Link } from "@/components/Link";
 import { Separator } from "@/components/Separator";
 import { Text } from "@/components/Text";
-import type { FC, ReactNode } from "react";
+import type { CSSProperties, FC, ReactNode } from "react";
 import React, { Children, isValidElement } from "react";
 import type { Components, Options } from "react-markdown";
 import ReactMarkdown from "react-markdown";
 import styles from "./Markdown.module.scss";
 import { extractTextFromFirstChild } from "@/lib/react/remote";
+import type { PropsWithClassName } from "@/lib/types/props";
+import clsx from "clsx";
+import remarkGfm from "remark-gfm";
+import { getHeadingLevelWithOffset } from "@/components/Markdown/lib/getHeadingLevelWithOffset";
 
-export interface MarkdownProps extends Omit<Options, "components"> {
+export interface MarkdownProps
+  extends PropsWithClassName,
+    Omit<Options, "components"> {
   /** The color schema of the markdown component. */
   color?: "dark" | "light" | "default";
+  /** Shifts all heading levels by the given offset. @default 0 */
+  headingOffset?: number;
+  /** @internal */
+  style?: CSSProperties;
 }
 
 /** @flr-generate all */
 export const Markdown: FC<MarkdownProps> = (props) => {
-  const { children, color = "default", ...rest } = props;
+  const {
+    children,
+    color = "default",
+    className,
+    headingOffset = 0,
+    ...rest
+  } = props;
 
   const headingAndLinkColor = color === "default" ? "primary" : color;
   const textColor = color === "default" ? undefined : color;
@@ -36,32 +52,50 @@ export const Markdown: FC<MarkdownProps> = (props) => {
     ),
     code: (props) => <InlineCode color={color}>{props.children}</InlineCode>,
     h1: (props) => (
-      <Heading level={1} color={headingAndLinkColor}>
+      <Heading
+        level={getHeadingLevelWithOffset(1, headingOffset)}
+        color={headingAndLinkColor}
+      >
         {props.children}
       </Heading>
     ),
     h2: (props) => (
-      <Heading level={2} color={headingAndLinkColor}>
+      <Heading
+        level={getHeadingLevelWithOffset(2, headingOffset)}
+        color={headingAndLinkColor}
+      >
         {props.children}
       </Heading>
     ),
     h3: (props) => (
-      <Heading level={3} color={headingAndLinkColor}>
+      <Heading
+        level={getHeadingLevelWithOffset(3, headingOffset)}
+        color={headingAndLinkColor}
+      >
         {props.children}
       </Heading>
     ),
     h4: (props) => (
-      <Heading level={4} color={headingAndLinkColor}>
+      <Heading
+        level={getHeadingLevelWithOffset(4, headingOffset)}
+        color={headingAndLinkColor}
+      >
         {props.children}
       </Heading>
     ),
     h5: (props) => (
-      <Heading level={5} color={headingAndLinkColor}>
+      <Heading
+        level={getHeadingLevelWithOffset(5, headingOffset)}
+        color={headingAndLinkColor}
+      >
         {props.children}
       </Heading>
     ),
     h6: (props) => (
-      <Heading level={6} color={headingAndLinkColor}>
+      <Heading
+        level={getHeadingLevelWithOffset(6, headingOffset)}
+        color={headingAndLinkColor}
+      >
         {props.children}
       </Heading>
     ),
@@ -72,7 +106,7 @@ export const Markdown: FC<MarkdownProps> = (props) => {
       return (
         <CodeBlock
           copyable={false}
-          color={color}
+          color="dark"
           language={
             isValidElement<{ className?: string }>(preElementContent) &&
             preElementContent.props.className
@@ -107,8 +141,10 @@ export const Markdown: FC<MarkdownProps> = (props) => {
   const textContent = extractTextFromFirstChild(children);
 
   return (
-    <div className={styles.markdown} {...rest}>
-      <ReactMarkdown components={components}>{textContent}</ReactMarkdown>
+    <div className={clsx(styles.markdown, className)} {...rest}>
+      <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
+        {textContent}
+      </ReactMarkdown>
     </div>
   );
 };

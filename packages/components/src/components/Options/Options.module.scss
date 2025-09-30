@@ -1,4 +1,5 @@
-.popover {
+.popover[data-trigger="ComboBox"],
+.popover[data-trigger="Select"] {
   width: var(--trigger-width);
 }
 
@@ -7,4 +8,5 @@
   flex-direction: column;
   row-gap: var(--menu--item-to-item-spacing);
   outline: none;
+  padding: var(--popover--padding--m);
 }

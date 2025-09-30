@@ -34,10 +34,12 @@ Desktop: DeviceImac
 Directory: Folder
 Delete: Trash
 DeliveryBox: MailShare
+DnsZone: Network
 Domain: World
 Download: Download
 Edit: Edit
 Email: Mail
+EmailArchive: CloudLock
 Extension: Puzzle
 ExternalLink: ExternalLink
 Failed: X
@@ -48,6 +50,7 @@ Hide: EyeOff
 Home: Home
 Image: Photo
 Info: InfoCircle
+Invite: MailOpened
 KnowledgeHint: Bulb
 LeadFyndr: Radar2
 Link: Link
@@ -68,6 +71,7 @@ Notification: Bell
 Number: Hash
 Order: ShoppingCart
 Password: Lock
+Path: Sitemap
 Pause: PlayerPause
 Payment: CreditCard
 Pending: Loader2

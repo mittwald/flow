@@ -1,104 +1,190 @@
 import {
+  AlertBadge,
+  Avatar,
   Button,
   ColumnLayout,
-  ContextMenu,
-  ContextMenuTrigger,
-  CopyButton,
+  Content,
+  Flex,
   Header,
   Heading,
-  IconContextMenu,
-  Label,
-  LabeledValue,
+  IconCheck,
+  IconEmail,
+  Image,
   LayoutCard,
   Link,
-  MenuItem,
   Section,
   Text,
+  typedList,
 } from "@mittwald/flow-react-components";
 
-<ColumnLayout m={[1]} l={[1]}>
-  <LayoutCard>
-    <Section>
-      <Header>
-        <Heading>Projektübersicht</Heading>
-        <ContextMenuTrigger>
-          <Button color="secondary" variant="soft">
-            <IconContextMenu />
-          </Button>
-          <ContextMenu>
-            <MenuItem
-              onAction={() => alert("not implemented")}
-            >
-              Domain umziehen
-            </MenuItem>
-            <MenuItem
-              onAction={() => alert("not implemented")}
-            >
-              Domain entfernen
-            </MenuItem>
-          </ContextMenu>
-        </ContextMenuTrigger>
-        <Button onPress={() => alert("not implemented")}>
-          Tarif anpassen
-        </Button>
-      </Header>
-      <ColumnLayout l={[1, 1, 1]} m={[1, 1]}>
-        <LabeledValue>
-          <Label>Projektname</Label>
-          <Text>Mein Projekt</Text>
-        </LabeledValue>
-        <LabeledValue>
-          <Label>Server</Label>
-          <Link href="#">MeinServer-01</Link>
-        </LabeledValue>
-        <LabeledValue>
-          <Label>Projektdomain</Label>
-          <Link href="#" target="_blank">
-            p-lis5uw.project.space
-          </Link>
-          <CopyButton text="p-lis5uw.project.space" />
-        </LabeledValue>
-        <LabeledValue>
-          <Label>Erstelldatum</Label>
-          <Text>06.12.2023 um 11:40 Uhr</Text>
-        </LabeledValue>
-        <LabeledValue>
-          <Label>A-Record</Label>
-          <Text>45.225.312.55</Text>
-          <CopyButton text="45.225.312.55" />
-        </LabeledValue>
-        <LabeledValue>
-          <Label>Shoert-ID</Label>
-          <Text>p-lis5uw</Text>
-          <CopyButton text="p-lis5uw" />
-        </LabeledValue>
+export default () => {
+  const List = typedList<{
+    title: string;
+    date: string;
+    status?: "info" | "warning" | "danger";
+    isInvite?: boolean;
+  }>();
+
+  return (
+    <ColumnLayout l={[1]} m={[1]}>
+      <Heading color="light" level={1}>
+        Hey Max!
+      </Heading>
+      <ColumnLayout m={[1]} l={[3, 2]}>
+        <ColumnLayout l={[1]} m={[1]}>
+          <LayoutCard>
+            <Section>
+              <Header>
+                <Heading>Benachrichtigungen</Heading>
+                <Button
+                  onPress={() => alert("not implemented")}
+                  variant="soft"
+                  color="secondary"
+                >
+                  Alle anzeigen
+                </Button>
+              </Header>
+              <List.List
+                hidePagination
+                onAction={() => alert("not implemented")}
+              >
+                <List.StaticData
+                  data={[
+                    {
+                      title:
+                        "Projekteinladung: „Mein Projekt“",
+                      date: "10.03.2025, 09:42 Uhr",
+                      isInvite: true,
+                    },
+                    {
+                      title:
+                        "E-Mail-Empfang wurde deaktiviert",
+                      date: "15.05.2025, 10:33 Uhr",
+                      status: "danger",
+                    },
+                    {
+                      title:
+                        "E-Mail-Versand wurde gesperrt",
+                      date: "15.05.2025, 10:33 Uhr",
+                      status: "warning",
+                    },
+                    {
+                      title: "Ticket wurde beantwortet",
+                      date: "16.05.2025, 16:33 Uhr",
+                      status: "info",
+                    },
+                  ]}
+                />
+                <List.Item textValue={(i) => i.title}>
+                  {(i) => (
+                    <List.ItemView>
+                      {i.isInvite ? (
+                        <Avatar>
+                          <IconEmail />
+                        </Avatar>
+                      ) : (
+                        <Avatar status={i.status} />
+                      )}
+                      <Heading>{i.title}</Heading>
+                      <Text>{i.date}</Text>
+                      <Content>
+                        {i.isInvite ? (
+                          <Button
+                            onPress={() =>
+                              alert("not implemented")
+                            }
+                            variant="soft"
+                            color="secondary"
+                          >
+                            Öffnen
+                          </Button>
+                        ) : (
+                          <Button
+                            onPress={() =>
+                              alert("not implemented")
+                            }
+                            aria-label="Erledigt"
+                            variant="plain"
+                            color="secondary"
+                          >
+                            <IconCheck />
+                          </Button>
+                        )}
+                      </Content>
+                    </List.ItemView>
+                  )}
+                </List.Item>
+              </List.List>
+            </Section>
+          </LayoutCard>
+
+          <LayoutCard>
+            <ColumnLayout m={[1, 3]} s={[null, 1]}>
+              <Flex align="center" grow>
+                <Image
+                  src="https://mittwald.github.io/flow/assets/onboarding.png"
+                  alt=""
+                  aria-hidden
+                />
+              </Flex>
+              <Section>
+                <Heading>mStudio entdecken</Heading>
+                <Text>
+                  Du willst das Beste aus deinen Projekten
+                  herausholen? Unsere{" "}
+                  <Link href="#">Wissensdatenbank</Link>{" "}
+                  hilft dir dabei, das mStudio und seine
+                  Möglichkeiten besser kennenzulernen.
+                </Text>
+              </Section>
+            </ColumnLayout>
+          </LayoutCard>
+        </ColumnLayout>
+
+        <ColumnLayout l={[1]} m={[1]}>
+          <LayoutCard>
+            <Section>
+              <Heading>
+                Status
+                <AlertBadge status="success">
+                  Alle Systeme funktionieren
+                </AlertBadge>
+              </Heading>
+              <Text>
+                Das mStudio und alle dazugehörenden Systeme
+                laufen einwandfrei.
+              </Text>
+              <Link target="_blank" href="#">
+                Zur Statusseite
+              </Link>
+            </Section>
+          </LayoutCard>
+
+          <LayoutCard>
+            <Section>
+              <Heading>Neues aus dem Blog</Heading>
+              <Image
+                src="https://mittwald.github.io/flow/assets/blog.png"
+                alt=""
+                aria-hidden
+              />
+
+              <Heading level={3}>
+                Zukunft pflanzen – mittwald unterstützt 8000
+                m² Aufforstung für den Klimaschutz
+              </Heading>
+              <Text>
+                Nachhaltigkeitsmanager Marvin von mittwald
+                berichtet über ein regionales
+                Aufforstungsprojekt mit 8.000 m² neuem Wald.
+              </Text>
+              <Link href="#" target="_blank">
+                Zum Blogartikel
+              </Link>
+            </Section>
+          </LayoutCard>
+        </ColumnLayout>
       </ColumnLayout>
-    </Section>
-  </LayoutCard>
-
-  <ColumnLayout l={[1, 1]}>
-    <LayoutCard>
-      <Section>
-        <Heading>Lerne mehr über Flow</Heading>
-        <Text>
-          Nutze unseren Styleguide, um mehr über das Design
-          System Flow zu erfahren.
-        </Text>
-        <Link href="#">Zum Styleguide</Link>
-      </Section>
-    </LayoutCard>
-
-    <LayoutCard>
-      <Section>
-        <Heading>Gib uns Feedback</Heading>
-        <Text>
-          Wir freuen uns auf deine Anmerkungen und Wünsche
-          zu Flow.
-        </Text>
-        <Link href="https://github.com/mittwald/flow">
-          Zum GitHub Repository
-        </Link>
-      </Section>
-    </LayoutCard>
-  </ColumnLayout>
-</ColumnLayout>;
+    </ColumnLayout>
+  );
+};

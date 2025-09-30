@@ -2,7 +2,6 @@ import { useMemo, type PropsWithChildren } from "react";
 import { getInitialsFromString } from "./lib/getInitialsFromString";
 import styles from "./Initials.module.scss";
 import clsx from "clsx";
-import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
 import { onlyText } from "react-children-utilities";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
@@ -18,10 +17,7 @@ export interface InitialsProps
   useDynamicColor?: boolean;
 }
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const Initials = flowComponent("Initials", (props) => {
   const {
     children,
@@ -45,17 +41,15 @@ export const Initials = flowComponent("Initials", (props) => {
   ));
 
   return (
-    <ClearPropsContext>
-      <div
-        data-dynamic-color={dynamicColor}
-        aria-hidden={ariaHidden}
-        aria-label={textContent}
-        className={rootClassName}
-        ref={ref}
-      >
-        {initialsElements}
-      </div>
-    </ClearPropsContext>
+    <div
+      data-dynamic-color={dynamicColor}
+      aria-hidden={ariaHidden}
+      aria-label={textContent}
+      className={rootClassName}
+      ref={ref}
+    >
+      {initialsElements}
+    </div>
   );
 });
 

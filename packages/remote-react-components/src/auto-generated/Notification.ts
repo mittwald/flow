@@ -8,9 +8,6 @@ export { type RemoteNotificationElement } from "@mittwald/flow-remote-elements";
 export const Notification = createFlowRemoteComponent(
   "flr-notification",
   "Notification",
-  {
-    clearPropsContext: true,
-  },
   RemoteNotificationElement,
   {
     slotProps: {

@@ -52,6 +52,14 @@
     background-color: var(--form-control--background-color--invalid);
   }
 
+  /* Read Only */
+  &[readonly],
+  &[data-readonly],
+  [data-readonly] & {
+    background-color: var(--form-control--background-color--default);
+    border-color: var(--form-control--border-color--default);
+  }
+
   /* Focused */
   &:focus-within {
     border-color: var(--form-control--border-color--focused);

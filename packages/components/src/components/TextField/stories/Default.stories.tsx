@@ -1,13 +1,9 @@
-import { Button } from "@/components/Button";
 import FieldDescription from "@/components/FieldDescription/FieldDescription";
 import { FieldError } from "@/components/FieldError";
 import { Label } from "@/components/Label";
-import { Form } from "@/integrations/react-hook-form";
-import { sleep } from "@/lib/promises/sleep";
 import { action } from "storybook/actions";
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
 import { TextField } from "../index";
 
 const meta: Meta<typeof TextField> = {
@@ -27,10 +23,9 @@ type Story = StoryObj<typeof TextField>;
 export const Default: Story = {};
 
 export const Disabled: Story = { args: { isDisabled: true } };
+export const ReadOnly: Story = { args: { isReadOnly: true } };
 
-export const Required: Story = {
-  args: { isRequired: true },
-};
+export const Required: Story = { args: { isRequired: true } };
 
 export const WithFieldDescription: Story = {
   render: (props) => (
@@ -81,21 +76,6 @@ export const WithFieldError: Story = {
       <FieldDescription>Start with "https://"</FieldDescription>
     </TextField>
   ),
-};
-
-export const WithForm: Story = {
-  render: (props) => {
-    const form = useForm();
-    return (
-      <Form form={form} onSubmit={async () => await sleep(2000)}>
-        <TextField {...props} type="email" inputMode="email" isRequired>
-          <Label>Email</Label>
-        </TextField>
-        <br />
-        <Button type="submit">Submit</Button>
-      </Form>
-    );
-  },
 };
 
 export const ShowCharacterCount: Story = {

@@ -3,7 +3,6 @@ import styles from "./Avatar.module.scss";
 import clsx from "clsx";
 import type { PropsContext } from "@/lib/propsContext";
 import { PropsContextProvider } from "@/lib/propsContext";
-import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
 import type { PropsWithClassName, Status } from "@/lib/types/props";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
@@ -27,10 +26,7 @@ export interface AvatarProps
   status?: Status;
 }
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const Avatar = flowComponent("Avatar", (props) => {
   const { children, className, color, size = "m", status, ref } = props;
 
@@ -55,14 +51,12 @@ export const Avatar = flowComponent("Avatar", (props) => {
   };
 
   return (
-    <ClearPropsContext>
-      <div className={rootClassName} ref={ref}>
-        <PropsContextProvider props={propsContext}>
-          {!status && children}
-          {status && <AlertIcon className={styles.icon} status={status} />}
-        </PropsContextProvider>
-      </div>
-    </ClearPropsContext>
+    <div className={rootClassName} ref={ref}>
+      <PropsContextProvider props={propsContext}>
+        {!status && children}
+        {status && <AlertIcon className={styles.icon} status={status} />}
+      </PropsContextProvider>
+    </div>
   );
 });
 

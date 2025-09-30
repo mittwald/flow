@@ -7,9 +7,6 @@ import {
   DatePicker,
   FieldDescription,
   Heading,
-  IconBackup,
-  IconSettings,
-  IconSshSftp,
   Label,
   Link,
   Modal,
@@ -62,10 +59,7 @@ export default () => {
       <ModalTrigger>
         <Button>Modal M</Button>
         <Modal size="m">
-          <Heading>
-            <IconBackup />
-            <Text>Backup anlegen</Text>
-          </Heading>
+          <Heading>Backup anlegen</Heading>
           <Content>
             <Section>
               <Text>
@@ -107,10 +101,7 @@ export default () => {
       <ModalTrigger>
         <Button>OffCanvas S</Button>
         <Modal size="s" offCanvas>
-          <Heading>
-            <IconSettings />
-            Dashboard-Einstellungen
-          </Heading>
+          <Heading>Dashboard-Einstellungen</Heading>
           <Content>
             <Section>
               <Heading>Widget-Sichtbarkeit</Heading>
@@ -119,13 +110,7 @@ export default () => {
                 du wirklich benötigst. So bestimmst du
                 selbst, wie dein Dashboard aussehen soll.
               </Text>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "32px",
-                }}
-              >
+              <ColumnLayout s={[1]} gap="xl">
                 <ColumnLayout s={[1]} gap="s">
                   <Switch>Erste Schritte</Switch>
                   <Text>
@@ -185,7 +170,7 @@ export default () => {
                     Lastschrift zu bezahlen.
                   </Text>
                 </ColumnLayout>
-              </div>
+              </ColumnLayout>
             </Section>
           </Content>
           <ActionGroup>
@@ -201,16 +186,13 @@ export default () => {
       <ModalTrigger>
         <Button>OffCanvas M</Button>
         <Modal size="m" offCanvas>
-          <Heading>
-            <IconSshSftp />
-            SFTP-Benutzer anlegen
-          </Heading>
+          <Heading>SFTP-Benutzer anlegen</Heading>
           <Content>
             <Section>
               <Heading>Beschreibung</Heading>
               <Text>
                 Mit einem SFTP-Benutzer kannst du dich mit
-                deinem Projekt verbinden, um z.B. Dateien
+                deinem Projekt verbinden, um z. B. Dateien
                 hochzuladen.
               </Text>
               <ColumnLayout m={[1, 1]}>
@@ -225,14 +207,16 @@ export default () => {
                   </FieldDescription>
                 </DatePicker>
               </ColumnLayout>
-            </Section>
-            <Section>
+
               <Heading>Authentifizierung</Heading>
               <Text>
                 Wähle zwischen der Authentifikation per
                 Passwort oder über einen SSH-Key.
               </Text>
-              <SegmentedControl value="password">
+              <SegmentedControl
+                value="password"
+                aria-label="Authentifizierung"
+              >
                 <Segment value="password">Passwort</Segment>
                 <Segment value="ssh">SSH-Key</Segment>
               </SegmentedControl>
@@ -241,8 +225,7 @@ export default () => {
                   <Label>Passwort</Label>
                 </TextField>
               </ColumnLayout>
-            </Section>
-            <Section>
+
               <Heading>Berechtigungen</Heading>
               <Text>
                 Wähle hier die Berechtigungen aus, mit denen
@@ -251,6 +234,7 @@ export default () => {
               <RadioGroup
                 s={[1, 1]}
                 defaultValue="read&write"
+                aria-label="Berechtigungen"
               >
                 <RadioButton value="write">
                   <Text>Lesezugriff</Text>
@@ -267,8 +251,7 @@ export default () => {
                   </Content>
                 </RadioButton>
               </RadioGroup>
-            </Section>
-            <Section>
+
               <Heading>Verzeichnisauswahl</Heading>
               <Text>
                 Hier legst du das Verzeichnis fest, auf das

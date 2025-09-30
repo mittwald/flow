@@ -1,5 +1,4 @@
 import { type FC, type PropsWithChildren, useRef } from "react";
-import React from "react";
 import * as Aria from "react-aria-components";
 import { IllustratedMessage } from "@/components/IllustratedMessage";
 import type { PropsWithClassName } from "@/lib/types/props";
@@ -19,8 +18,11 @@ export interface FileDropZoneProps
   extends PropsWithClassName,
     FlowComponentProps<FocusableElement>,
     PropsWithChildren,
-    Pick<Aria.InputProps, "accept" | "multiple" | "name"> {
+    Pick<Aria.InputProps, "accept" | "multiple" | "name">,
+    Pick<Aria.DropZoneProps, "isDisabled"> {
   onChange?: FileInputOnChangeHandler;
+  /** Whether the component is read only. */
+  isReadOnly?: boolean;
 }
 
 /** @flr-generate all */
@@ -34,10 +36,16 @@ export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
       onChange: onChangeDropZone,
       children,
       name,
+      isDisabled,
+      isReadOnly,
     } = props;
 
     const fileFieldRef = useRef<HTMLInputElement>(null);
-    const rootClassName = clsx(styles.fileDropZone, className);
+    const rootClassName = clsx(
+      styles.fileDropZone,
+      isDisabled && styles.disabled,
+      className,
+    );
 
     const propsContext: PropsContext = {
       FileField: {
@@ -47,10 +55,21 @@ export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
         accept: accept,
         multiple: multiple,
         Button: { variant: "outline", color: "dark" },
+        isDisabled,
+        isReadOnly,
       },
+      Heading: {
+        className: styles.heading,
+      },
+      Icon: { className: styles.icon },
+      Text: { className: styles.text },
     };
 
     const onDropHandler = async (event: DropEvent) => {
+      if (isReadOnly) {
+        return;
+      }
+
       const fileDropItems = event.items.filter(
         (file) => file.kind === "file",
       ) as Aria.FileDropItem[];
@@ -80,9 +99,14 @@ export const FileDropZone: FC<FileDropZoneProps> = flowComponent(
     };
 
     return (
-      <Aria.DropZone className={rootClassName} onDrop={onDropHandler}>
+      <Aria.DropZone
+        className={rootClassName}
+        onDrop={onDropHandler}
+        isDisabled={isDisabled}
+        data-readonly={isReadOnly}
+      >
         <IllustratedMessage color="dark">
-          <PropsContextProvider props={propsContext} mergeInParentContext>
+          <PropsContextProvider props={propsContext}>
             {children}
           </PropsContextProvider>
         </IllustratedMessage>

@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { CheckboxButton } from "../index";
-import React from "react";
 import { action } from "storybook/actions";
 import Content from "@/components/Content";
 import Text from "@/components/Text";
@@ -26,6 +25,7 @@ type Story = StoryObj<typeof CheckboxButton>;
 export const Default: Story = {};
 
 export const Disabled: Story = { args: { isDisabled: true } };
+export const ReadOnly: Story = { args: { isReadOnly: true } };
 
 export const Indeterminate: Story = { args: { isIndeterminate: true } };
 

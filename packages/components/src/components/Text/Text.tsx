@@ -11,7 +11,6 @@ import { EmulatedBoldText } from "@/components/EmulatedBoldText";
 import { Wrap } from "@/components/Wrap";
 import clsx from "clsx";
 import styles from "./Text.module.scss";
-import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
 
 export interface TextProps
   extends PropsWithChildren,
@@ -32,10 +31,7 @@ export interface TextProps
   wordBreak?: React.CSSProperties["wordBreak"];
 }
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const Text = flowComponent("Text", (props) => {
   const {
     children,
@@ -94,16 +90,9 @@ export const Text = flowComponent("Text", (props) => {
   );
 
   return (
-    <ClearPropsContext>
-      <Aria.Text
-        style={style}
-        {...textProps}
-        elementType={elementType}
-        ref={ref}
-      >
-        {childrenElement}
-      </Aria.Text>
-    </ClearPropsContext>
+    <Aria.Text style={style} {...textProps} elementType={elementType} ref={ref}>
+      {childrenElement}
+    </Aria.Text>
   );
 });
 

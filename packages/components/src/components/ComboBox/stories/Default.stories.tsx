@@ -13,6 +13,7 @@ import {
 import { Button } from "@/components/Button";
 import { Text } from "@/components/Text";
 import { dummyText } from "@/lib/dev/dummyText";
+import { CountryOptions } from "@/components/CountryOptions";
 
 const meta: Meta<typeof ComboBox> = {
   title: "Form Controls/ComboBox",
@@ -38,6 +39,8 @@ type Story = StoryObj<typeof ComboBox>;
 export const Default: Story = {};
 
 export const Disabled: Story = { args: { isDisabled: true } };
+
+export const ReadOnly: Story = { args: { isReadOnly: true } };
 
 export const Required: Story = {
   args: { isRequired: true },
@@ -160,6 +163,15 @@ export const WithContextualHelp: Story = {
       <Option>anotherdomain.com/blog</Option>
       <Option>onemoredomain.de</Option>
       <Option>www.onemoredomain.de</Option>
+    </ComboBox>
+  ),
+};
+
+export const WithCountryOptions: Story = {
+  render: (props) => (
+    <ComboBox {...props}>
+      <Label>Country</Label>
+      <CountryOptions />
     </ComboBox>
   ),
 };

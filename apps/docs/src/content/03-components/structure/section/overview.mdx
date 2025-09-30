@@ -1,7 +1,7 @@
 # Playground
 
-Verwende `<Section />`, um eine Section darzustellen. Eine Section erzeugt
-automatisch feste Abstände zwischen den Elementen, die in ihr platziert werden.
+Verwende `<Section />`, um eine Section darzustellen. Sie sorgt automatisch für
+feste Abstände zwischen den darin platzierten Elementen.
 
 <LiveCodeEditor />
 
@@ -9,51 +9,53 @@ automatisch feste Abstände zwischen den Elementen, die in ihr platziert werden.
 
 # Mehrere Sections
 
-Wenn du mehrere Sections untereinander platzierst, werden sie automatisch durch
-einen [Separator](/03-components/structure/separator) getrennt.
+Wenn mehrere Sections untereinander platziert werden, werden sie automatisch
+durch einen [Separator](/03-components/structure/separator) getrennt.
 
 <LiveCodeEditor example="multiple" editorCollapsed />
 
+## Sub-Headings
+
+Sections beginnen in der Regel mit einer
+H2-[Heading](/03-components/content/heading). Wenn eine feinere Unterteilung
+nötig ist, können Headings auf niedrigerem Level direkt in der Section platziert
+werden. Zur optischen Verdeutlichung erhalten Sub-Headings in der Größe H3
+automatisch einen größeren Abstand zum darüberliegenden Content.
+
+<LiveCodeEditor example="sub-heading" editorCollapsed />
+
 ---
 
-# Kombiniere mit ...
+# SectionAction
 
-## Actions
-
-Die Section unterstützt in der rechten oberen Ecke einen Bereich, der für
-Actions reserviert ist. Dort kann ein [Link](/03-components/navigation/link),
-[Switch](/03-components/form-controls/switch),
-[Button](/03-components/actions/button) oder eine Kombination dieser Components
+Die Section verfügt in der rechten oberen Ecke über einen Bereich für Actions –
+die sogenannte SectionAction. Dort können ein
+[Link](/03-components/navigation/link), ein
+[Switch](/03-components/form-controls/switch), ein oder zwei
+[Buttons](/03-components/actions/button) oder eine Kombination dieser Components
 verwendet werden.
 
 <LiveCodeEditor example="link" editorCollapsed />
 
 <LiveCodeEditor example="switch" editorCollapsed />
 
-Es können maximal zwei Buttons nebeneinander dargestellt werden. Gibt es mehr
-als zwei Buttons, sollte nur die Hauptaktion sichtbar sein. Alle anderen Buttons
-müssen in ein [ContextMenu](/03-components/actions/context-menu).
+Es können maximal zwei [Buttons](/03-components/actions/button) nebeneinander
+angezeigt werden. Werden mehr als zwei Aktionen benötigt, erhält die Hauptaktion
+einen eigenen Button, während alle weiteren in ein
+[ContextMenu](/03-components/actions/context-menu) verschoben werden.
 
 <LiveCodeEditor example="context-menu" editorCollapsed />
 
 ---
 
-# AlertBadge
+# Kombiniere mit ...
+
+## AlertBadge und Badge
 
 Die [Heading](/03-components/content/heading) kann mit einem
-[AlertBadge](/03-components/status/alert-badge) erweitert werden. So wird der
-[AlertBadge](/03-components/status/alert-badge) erweitert werden. So wird der
-User schnell über den Status des Inhaltes einer Section informiert.
+[AlertBadge](/03-components/status/alert-badge) oder einem
+[Badge](/03-components/status/badge) ergänzt werden. Dadurch wird der User
+schnell über den Status oder über Metadaten des Inhalts einer Section
+informiert.
 
 <LiveCodeEditor example="alert-badge" editorCollapsed />
-
----
-
-# Sub-Headings
-
-Um deine Section noch weiter zu unterteilen, kannst du weitere Headings
-hinzufügen, diese sollten ein niedrigeres Level als die Haupt-Heading (H2) der
-Section haben. Um die Unterteilung optisch zu verdeutlichen, erhalten die
-Sub-Headings automatisch einen größeren Abstand zum darüberliegenden Content
-
-<LiveCodeEditor example="sub-heading" editorCollapsed />

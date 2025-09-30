@@ -3,7 +3,6 @@ import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import type { PropsContext } from "@/lib/propsContext";
 import { dynamic, PropsContextProvider } from "@/lib/propsContext";
-import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
 import type { PropsWithStatus } from "@/lib/types/props";
 import clsx from "clsx";
 import type { ComponentProps, PropsWithChildren } from "react";
@@ -14,10 +13,7 @@ export interface AlertProps
     PropsWithStatus,
     FlowComponentProps<HTMLElement> {}
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const Alert = flowComponent("Alert", (props) => {
   const { children, className, status = "info", ref, ...rest } = props;
 
@@ -44,13 +40,11 @@ export const Alert = flowComponent("Alert", (props) => {
   };
 
   return (
-    <ClearPropsContext>
-      <aside {...rest} className={rootClassName} ref={ref}>
-        <PropsContextProvider props={propsContext}>
-          {children}
-        </PropsContextProvider>
-      </aside>
-    </ClearPropsContext>
+    <aside {...rest} className={rootClassName} ref={ref}>
+      <PropsContextProvider props={propsContext}>
+        {children}
+      </PropsContextProvider>
+    </aside>
   );
 });
 

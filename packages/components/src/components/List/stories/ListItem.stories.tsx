@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import type List from "../List";
-import React from "react";
 import { Heading } from "@/components/Heading";
 import { Text } from "@/components/Text";
 import { ContextMenu, MenuItem } from "@/components/ContextMenu";
@@ -18,6 +17,7 @@ import { ProgressBar } from "@/components/ProgressBar";
 import { Label } from "@/components/Label";
 import { Initials } from "@/components/Initials";
 import { Checkbox } from "@/components/Checkbox";
+import Section from "@/components/Section";
 
 const meta: Meta<typeof List> = {
   ...defaultMeta,
@@ -26,25 +26,27 @@ const meta: Meta<typeof List> = {
     const List = typedList<{ name: string }>();
 
     return (
-      <List.List>
-        <List.StaticData data={[{ name: "John Doe" }]} />
-        <List.Item showTiles textValue={(user) => user.name}>
-          {(user) => (
-            <List.ItemView>
-              <Avatar>
-                <Image alt={user.name} src={dummyText.imageSrc} />
-              </Avatar>
-              <Heading>
-                {user.name} <AlertBadge status="danger">Gesperrt</AlertBadge>
-              </Heading>
-              <Text>Mittwald</Text>
-              <ContextMenu>
-                <MenuItem>Show details</MenuItem>
-              </ContextMenu>
-            </List.ItemView>
-          )}
-        </List.Item>
-      </List.List>
+      <Section>
+        <List.List>
+          <List.StaticData data={[{ name: "John Doe" }]} />
+          <List.Item showTiles textValue={(user) => user.name}>
+            {(user) => (
+              <List.ItemView>
+                <Avatar>
+                  <Image alt={user.name} src={dummyText.imageSrc} />
+                </Avatar>
+                <Heading>
+                  {user.name} <AlertBadge status="danger">Gesperrt</AlertBadge>
+                </Heading>
+                <Text>Mittwald</Text>
+                <ContextMenu>
+                  <MenuItem>Show details</MenuItem>
+                </ContextMenu>
+              </List.ItemView>
+            )}
+          </List.Item>
+        </List.List>
+      </Section>
     );
   },
 };
@@ -100,7 +102,9 @@ export const WithBottomContent: Story = {
               </Avatar>
               <Heading>{user.name}</Heading>
               <Text>Mittwald</Text>
-              <Content slot="bottom">{dummyText.long}</Content>
+              <Content slot="bottom">
+                <Text>{dummyText.long}</Text>
+              </Content>
               <ContextMenu>
                 <MenuItem>Show details</MenuItem>
               </ContextMenu>
@@ -291,6 +295,32 @@ export const WithColumnLayout: Story = {
               <ContextMenu>
                 <MenuItem>Show details</MenuItem>
               </ContextMenu>
+            </List.ItemView>
+          )}
+        </List.Item>
+      </List.List>
+    );
+  },
+};
+
+export const WithAccordion: Story = {
+  render: () => {
+    const List = typedList<{ name: string }>();
+
+    return (
+      <List.List accordion>
+        <List.StaticData data={[{ name: "John Doe" }]} />
+        <List.Item showTiles textValue={(user) => user.name}>
+          {(user) => (
+            <List.ItemView>
+              <Avatar>
+                <Image alt={user.name} src={dummyText.imageSrc} />
+              </Avatar>
+              <Heading>{user.name}</Heading>
+              <Text>Mittwald</Text>
+              <Content slot="bottom">
+                <Text>{dummyText.long}</Text>
+              </Content>
             </List.ItemView>
           )}
         </List.Item>

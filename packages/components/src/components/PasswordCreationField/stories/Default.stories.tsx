@@ -1,72 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import {
-  generatePasswordCreationFieldValidation,
-  PasswordCreationField,
-} from "../index";
+import { PasswordCreationField } from "../index";
 import React, { useState } from "react";
 import { Label } from "@/components/Label";
 import { action } from "storybook/actions";
-import type { PolicyDeclaration } from "@/integrations/@mittwald/password-tools-js";
-import {
-  Policy,
-  RuleType,
-  SequenceType,
-} from "@/integrations/@mittwald/password-tools-js";
-import { useForm } from "react-hook-form";
-import { sleep } from "@/lib/promises/sleep";
 import { Button } from "@/components/Button";
-import { Field, Form } from "@/integrations/react-hook-form";
 import { IconDanger } from "@/components/Icon/components/icons";
 import { CopyButton } from "@/components/CopyButton";
-
-const policyDecl: PolicyDeclaration = {
-  minComplexity: 3,
-  rules: [
-    {
-      ruleType: RuleType.length,
-      min: 8,
-      max: 12,
-    },
-    {
-      ruleType: RuleType.sequence,
-      sequences: [SequenceType.number],
-      maxLength: 2,
-    },
-    {
-      ruleType: RuleType.regex,
-      pattern: "^[0-9]",
-      min: 1,
-      max: 2,
-    },
-    {
-      ruleType: RuleType.regex,
-      pattern: "^[A-Za-z0-9]",
-      translationKey: "canNotStartWithSpecialCharacter",
-    },
-    {
-      ruleType: RuleType.hibp,
-    },
-    {
-      identifier: "special",
-      ruleType: RuleType.charPool,
-      charPools: ["special"],
-      min: 1,
-      max: 2,
-    },
-    {
-      identifier: "numbers",
-      ruleType: RuleType.charPool,
-      charPools: ["numbers"],
-      min: 1,
-      max: 2,
-    },
-    {
-      ruleType: RuleType.blocklist,
-      blocklist: ["foo", "bar"],
-      substringMatch: true,
-    },
-  ],
-};
 
 const meta: Meta<typeof PasswordCreationField> = {
   title: "Form Controls/PasswordCreationField",
@@ -114,43 +53,6 @@ export const WithCustomButtons: Story = {
           <IconDanger />
         </Button>
       </PasswordCreationField>
-    );
-  },
-};
-
-export const WithForm: Story = {
-  render: () => {
-    const customPolicy = Policy.fromDeclaration(policyDecl);
-    const form = useForm({
-      defaultValues: {
-        password: "",
-      },
-    });
-
-    return (
-      <Form
-        form={form}
-        onSubmit={async (values) => {
-          await sleep(2000);
-          console.log("submitted", values);
-        }}
-      >
-        <Field
-          rules={{
-            required: true,
-            validate: generatePasswordCreationFieldValidation(customPolicy),
-          }}
-          name="password"
-        >
-          <PasswordCreationField validationPolicy={customPolicy}>
-            <Label>Password</Label>
-            <Button>asd</Button>
-          </PasswordCreationField>
-        </Field>
-        <br />
-        <Button onPress={() => form.reset()}>Reset</Button>
-        <Button type="submit">Submit</Button>
-      </Form>
     );
   },
 };
