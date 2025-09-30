@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.497](https://github.com/mittwald/flow/compare/0.2.0-alpha.496...0.2.0-alpha.497) (2025-09-30)
+
+### Features
+
+* **Ext-Bridge:** add variant key to session token ([#1987](https://github.com/mittwald/flow/issues/1987)) ([42afb06](https://github.com/mittwald/flow/commit/42afb06d21cff2c85c1017d420908e1ee5b67979))
+
 # [0.2.0-alpha.496](https://github.com/mittwald/flow/compare/0.2.0-alpha.495...0.2.0-alpha.496) (2025-09-30)
 
 **Note:** Version bump only for package @mittwald/ext-bridge
