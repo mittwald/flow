@@ -27,6 +27,7 @@ export class RemoteSelectElement extends FlowRemoteElement<RemoteSelectElementPr
       hidden: {},
       id: {},
       inert: {},
+      inputRef: {},
       isDisabled: {},
       isInvalid: {},
       isOpen: {},
