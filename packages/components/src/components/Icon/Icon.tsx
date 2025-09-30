@@ -6,7 +6,6 @@ import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import { cloneElement } from "@/lib/react/cloneElement";
 import type { PropsWithStatus } from "@/lib/types/props";
-import ClearPropsContext from "@/components/ClearPropsContext/ClearPropsContext";
 
 type SvgAttributeProps = SVGAttributes<SVGSVGElement>;
 
@@ -18,10 +17,7 @@ export interface IconProps
   size?: "s" | "m" | "l";
 }
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const Icon = flowComponent("Icon", (props) => {
   const {
     className,
@@ -57,11 +53,7 @@ export const Icon = flowComponent("Icon", (props) => {
     );
   }
 
-  return (
-    <ClearPropsContext>
-      {cloneElement(iconElement, iconProps)}
-    </ClearPropsContext>
-  );
+  return cloneElement(iconElement, iconProps);
 });
 
 export default Icon;

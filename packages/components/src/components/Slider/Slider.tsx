@@ -1,5 +1,4 @@
 import type { PropsWithChildren } from "react";
-import React from "react";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
 import * as Aria from "react-aria-components";
@@ -17,12 +16,11 @@ export interface SliderProps
     PropsWithChildren<Aria.SliderProps>,
     Pick<Aria.SliderThumbProps, "name"> {
   showInitialMarker?: boolean;
+  /** Whether the component is read only. */
+  isReadOnly?: boolean;
 }
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const Slider = flowComponent("Slider", (props) => {
   const {
     className,
@@ -31,6 +29,7 @@ export const Slider = flowComponent("Slider", (props) => {
     isDisabled,
     defaultValue,
     showInitialMarker,
+    isReadOnly,
     ...rest
   } = props;
 
@@ -74,6 +73,7 @@ export const Slider = flowComponent("Slider", (props) => {
               className={styles.decrement}
               isDisabled={isDisabled}
               excludeFromTabOrder
+              isReadOnly={isReadOnly}
             >
               <IconMinus />
             </Button>
@@ -86,6 +86,7 @@ export const Slider = flowComponent("Slider", (props) => {
               className={styles.increment}
               isDisabled={isDisabled}
               excludeFromTabOrder
+              isReadOnly={isReadOnly}
             >
               <IconPlus />
             </Button>
@@ -106,7 +107,11 @@ export const Slider = flowComponent("Slider", (props) => {
                 />
               )}
 
-            <Aria.SliderThumb name={name} className={styles.handle} />
+            <Aria.SliderThumb
+              name={name}
+              className={styles.handle}
+              isDisabled={isReadOnly}
+            />
           </>
         )}
       </Aria.SliderTrack>

@@ -8,9 +8,6 @@ export { type RemoteAccentBoxElement } from "@mittwald/flow-remote-elements";
 export const AccentBox = createFlowRemoteComponent(
   "flr-accent-box",
   "AccentBox",
-  {
-    clearPropsContext: false,
-  },
   RemoteAccentBoxElement,
   {
     slotProps: {

@@ -51,6 +51,7 @@ export { IconHide } from "./IconHide";
 export { IconHome } from "./IconHome";
 export { IconImage } from "./IconImage";
 export { IconInfo } from "./IconInfo";
+export { IconInvite } from "./IconInvite";
 export { IconKnowledgeHint } from "./IconKnowledgeHint";
 export { IconLeadFyndr } from "./IconLeadFyndr";
 export { IconLink } from "./IconLink";

@@ -59,9 +59,7 @@ export default () => {
       <ModalTrigger>
         <Button>Modal M</Button>
         <Modal size="m">
-          <Heading>
-            <Text>Backup anlegen</Text>
-          </Heading>
+          <Heading>Backup anlegen</Heading>
           <Content>
             <Section>
               <Text>

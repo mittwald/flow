@@ -5,10 +5,11 @@ import { useList } from "@/components/List";
 import { IconView } from "@/components/Icon/components/icons";
 import ButtonView from "@/views/ButtonView";
 import TextView from "@/views/TextView";
-import ContextMenu, { ContextMenuTrigger } from "@/components/ContextMenu";
 import { ViewModeMenuItem } from "@/components/List/components/Header/components/Settings/ViewModeMenuItem";
 import { useAvailableViewModes } from "@/components/List/components/Header/lib";
 import styles from "@/components/List/components/Header/Header.module.css";
+import ContextMenuTriggerView from "@/views/ContextMenuTriggerView";
+import ContextMenuView from "@/views/ContextMenuView";
 
 export const ViewModeMenu: FC = () => {
   const stringFormatter = useLocalizedStringFormatter(locales);
@@ -22,7 +23,7 @@ export const ViewModeMenu: FC = () => {
   }
 
   return (
-    <ContextMenuTrigger>
+    <ContextMenuTriggerView>
       <ButtonView
         variant="outline"
         color="secondary"
@@ -34,11 +35,11 @@ export const ViewModeMenu: FC = () => {
         </TextView>
         <IconView />
       </ButtonView>
-      <ContextMenu selectionMode="single" selectedKeys={[selectedViewMode]}>
+      <ContextMenuView selectionMode="single" selectedKeys={[selectedViewMode]}>
         {availableViewModes.map((viewMode) => (
           <ViewModeMenuItem viewMode={viewMode} key={viewMode} />
         ))}
-      </ContextMenu>
-    </ContextMenuTrigger>
+      </ContextMenuView>
+    </ContextMenuTriggerView>
   );
 };

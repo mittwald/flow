@@ -39,6 +39,10 @@
     "test:unit": {
       "dependsOn": ["^build"],
       "cache": true
+    },
+    "test:dev": {
+      "dependsOn": ["^build"],
+      "cache": true
     }
   }
 }

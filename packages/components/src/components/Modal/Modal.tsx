@@ -1,5 +1,4 @@
 import type { PropsWithChildren, ReactNode } from "react";
-import React from "react";
 import styles from "./Modal.module.scss";
 import clsx from "clsx";
 import {
@@ -40,89 +39,89 @@ export interface ModalProps
   isDismissable?: boolean;
 }
 
-export const Modal = flowComponent("Modal", (props) => {
-  const {
-    size = "s",
-    offCanvas,
-    controller,
-    children,
-    ref,
-    className,
-    offCanvasOrientation = "right",
-    ...rest
-  } = props;
+export const Modal = flowComponent(
+  "Modal",
+  (props) => {
+    const {
+      size = "s",
+      offCanvas,
+      controller,
+      children,
+      ref,
+      className,
+      offCanvasOrientation = "right",
+      ...rest
+    } = props;
 
-  const rootClassName = clsx(
-    offCanvas ? styles.offCanvas : styles.modal,
-    styles[`size-${size}`],
-    offCanvasOrientation === "left" && styles["left"],
-    className,
-  );
+    const rootClassName = clsx(
+      offCanvas ? styles.offCanvas : styles.modal,
+      styles[`size-${size}`],
+      offCanvasOrientation === "left" && styles["left"],
+      className,
+    );
 
-  const header = (children: ReactNode) => (
-    <>
-      {children}
-      <Action closeOverlay="Modal">
-        <ButtonView
-          variant="plain"
-          color="secondary"
-          onPress={controller?.close}
-        >
-          <IconClose />
-        </ButtonView>
-      </Action>
-    </>
-  );
-
-  const propsContext: PropsContext = {
-    Content: {
-      className: styles.content,
-      Section: {
-        Heading: {
-          level: 3,
-        },
-        Header: {
-          Heading: {
-            level: 3,
-          },
-        },
-      },
-    },
-    ColumnLayout: {
-      l: [2, 1],
-      m: [1],
-      className: styles.columnLayout,
-      Section: {
-        Heading: {
-          level: 3,
-        },
-      },
-      AccentBox: { className: styles.accentBox, color: "neutral" },
-    },
-    Heading: {
-      className: styles.header,
-      level: 2,
-      slot: "title",
-      children: dynamic((props) => header(props.children)),
-    },
-    ActionGroup: {
-      className: styles.actionGroup,
-      spacing: "m",
-    },
-  };
-
-  return (
-    <Overlay
-      className={rootClassName}
-      controller={controller}
-      ref={ref}
-      {...rest}
-    >
-      <PropsContextProvider props={propsContext}>
+    const header = (children: ReactNode) => (
+      <>
         {children}
-      </PropsContextProvider>
-    </Overlay>
-  );
-});
+        <Action closeOverlay="Modal">
+          <ButtonView
+            variant="plain"
+            color="secondary"
+            onPress={controller?.close}
+          >
+            <IconClose />
+          </ButtonView>
+        </Action>
+      </>
+    );
+
+    const nestedHeadingLevel = 3;
+
+    const nestedHeadingProps: PropsContext = {
+      Heading: { level: nestedHeadingLevel },
+      Section: { Heading: { level: nestedHeadingLevel } },
+    };
+
+    const propsContext: PropsContext = {
+      Content: {
+        ...nestedHeadingProps,
+        className: styles.content,
+      },
+      ColumnLayout: {
+        ...nestedHeadingProps,
+        l: [2, 1],
+        m: [1],
+        className: styles.columnLayout,
+        AccentBox: { className: styles.accentBox, color: "neutral" },
+      },
+      Heading: {
+        className: styles.header,
+        level: 2,
+        slot: "title",
+        children: dynamic((props) => header(props.children)),
+      },
+      ActionGroup: {
+        className: styles.actionGroup,
+        spacing: "m",
+      },
+    };
+
+    return (
+      <Overlay
+        className={rootClassName}
+        controller={controller}
+        ref={ref}
+        {...rest}
+      >
+        <PropsContextProvider props={propsContext}>
+          {children}
+        </PropsContextProvider>
+      </Overlay>
+    );
+  },
+  {
+    type: "provider",
+  },
+);
 
 export default Modal;

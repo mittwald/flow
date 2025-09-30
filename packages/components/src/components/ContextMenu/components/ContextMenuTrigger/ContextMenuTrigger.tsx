@@ -20,6 +20,7 @@ export const ContextMenuTrigger = flowComponent(
       </OverlayTrigger>
     );
   },
+  { type: "provider" },
 );
 
 export default ContextMenuTrigger;

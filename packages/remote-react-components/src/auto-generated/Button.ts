@@ -8,9 +8,6 @@ export { type RemoteButtonElement } from "@mittwald/flow-remote-elements";
 export const Button = createFlowRemoteComponent(
   "flr-button",
   "Button",
-  {
-    clearPropsContext: true,
-  },
   RemoteButtonElement,
   {
     slotProps: {

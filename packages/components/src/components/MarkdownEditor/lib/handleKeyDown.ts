@@ -14,13 +14,15 @@ export const handleKeyDown = (
   e: KeyboardEvent,
   textAreaRef: RefObject<HTMLTextAreaElement | null>,
   setMarkdown: (markdown: string) => void,
-  onChange?: (markdown: string) => void,
 ) => {
-  if (e.key !== "Enter") return;
+  if (e.key !== "Enter") {
+    return;
+  }
 
   const textarea = textAreaRef.current;
-
-  if (!textarea) return;
+  if (!textarea) {
+    return;
+  }
 
   const start = textarea.selectionStart;
   const end = textarea.selectionEnd;
@@ -39,34 +41,27 @@ export const handleKeyDown = (
     currentLine.trim().match(/^([-*+]|\d+\.)$/)
   ) {
     e.preventDefault();
+
     const newText = value.slice(0, lineStart) + "\n" + after;
-
     setMarkdown(newText);
-
-    if (onChange) {
-      onChange(newText);
-    }
 
     requestAnimationFrame(() => {
       textarea.selectionStart = textarea.selectionEnd = lineStart + 1;
       scrollToCursor(textarea);
     });
+
     return;
   }
 
   if (orderedMatch) {
     e.preventDefault();
+
     const indent = orderedMatch[1];
     const nextNum = parseInt(orderedMatch[2] ?? "", 10) + 1;
     const insert = `\n${indent}${nextNum}. `;
 
     const newText = before + insert + after;
-
     setMarkdown(newText);
-
-    if (onChange) {
-      onChange(newText);
-    }
 
     requestAnimationFrame(() => {
       textarea.selectionStart = textarea.selectionEnd = start + insert.length;
@@ -74,17 +69,13 @@ export const handleKeyDown = (
     });
   } else if (unorderedMatch) {
     e.preventDefault();
+
     const indent = unorderedMatch[1];
     const bullet = unorderedMatch[2];
     const insert = `\n${indent}${bullet} `;
 
     const newText = before + insert + after;
-
     setMarkdown(newText);
-
-    if (onChange) {
-      onChange(newText);
-    }
 
     requestAnimationFrame(() => {
       textarea.selectionStart = textarea.selectionEnd = start + insert.length;

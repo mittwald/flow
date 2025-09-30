@@ -8,9 +8,6 @@ export { type RemoteTextFieldElement } from "@mittwald/flow-remote-elements";
 export const TextField = createFlowRemoteComponent(
   "flr-text-field",
   "TextField",
-  {
-    clearPropsContext: true,
-  },
   RemoteTextFieldElement,
   {
     slotProps: {

@@ -25,12 +25,11 @@ export interface SelectProps
   onChange?: (value: string | number) => void;
   /** An overlay controller to control the select option popover state. */
   controller?: OverlayController;
+  /** Whether the component is read only. */
+  isReadOnly?: boolean;
 }
 
-/**
- * @flr-generate all
- * @flr-clear-props-context
- */
+/** @flr-generate all */
 export const Select = flowComponent("Select", (props) => {
   const {
     children,
@@ -43,6 +42,7 @@ export const Select = flowComponent("Select", (props) => {
     },
     controller: controllerFromProps,
     ref,
+    isReadOnly,
     ...rest
   } = props;
 
@@ -86,13 +86,14 @@ export const Select = flowComponent("Select", (props) => {
       {...rest}
       className={rootClassName}
       ref={ref}
-      onSelectionChange={handleOnSelectionChange}
-      onOpenChange={(isOpen) => controller.setOpen(isOpen)}
+      onSelectionChange={isReadOnly ? undefined : handleOnSelectionChange}
+      onOpenChange={(isOpen) => !isReadOnly && controller.setOpen(isOpen)}
       isOpen={isOpen}
+      data-readonly={isReadOnly}
     >
       <PropsContextProvider props={propsContext}>
         <TunnelProvider>
-          <Aria.Button className={styles.toggle}>
+          <Aria.Button data-readonly={isReadOnly} className={styles.toggle}>
             <Aria.SelectValue />
             <IconChevronDown />
           </Aria.Button>
