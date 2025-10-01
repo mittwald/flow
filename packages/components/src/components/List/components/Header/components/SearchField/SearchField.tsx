@@ -46,7 +46,7 @@ const DefaultSearchFieldRender: SearchFieldRenderComponent = (props) => {
   };
 
   const handleKeyPress = (e: KeyboardEvent) => {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && !autoSubmit) {
       submitSearch();
     } else if (e.key === "Escape") {
       clearSearch();
