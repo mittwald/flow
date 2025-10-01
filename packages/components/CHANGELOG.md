@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.502](https://github.com/mittwald/flow/compare/0.2.0-alpha.501...0.2.0-alpha.502) (2025-10-01)
+
+### Bug Fixes
+
+* **InlineCode:** fix overflow ([#2047](https://github.com/mittwald/flow/issues/2047)) ([27e2863](https://github.com/mittwald/flow/commit/27e286364808eac83f4e3e0e0533eb8dda0745e6))
+
 # [0.2.0-alpha.501](https://github.com/mittwald/flow/compare/0.2.0-alpha.500...0.2.0-alpha.501) (2025-09-30)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
