@@ -35,7 +35,7 @@ export const AnchorNavigation: FC<Props> = (props) => {
         });
       },
       {
-        rootMargin: "0px 0px -70% 0px",
+        rootMargin: "0px 0px -60% 0px",
         threshold: 0.1,
       },
     );
