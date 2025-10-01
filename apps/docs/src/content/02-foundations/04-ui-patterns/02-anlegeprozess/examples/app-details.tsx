@@ -65,27 +65,12 @@ import {
     </ColumnLayout>
   </Section>
   <Section>
-    <Header>
-      <Heading>Appkopie</Heading>
-      <Button color="secondary" variant="soft">
-        App kopieren
-      </Button>
-    </Header>
-    <Text>
-      Lorem ipsum dolor sit amet, consetetur sadipscing
-      elitr, sed diam nonumy eirmod tempor invidunt ut
-      labore et dolore magna aliquyam erat, sed diam
-      voluptua. At vero eos et accusam et justo duo dolores
-      et ea rebum. Stet clita kasd gu
-    </Text>
-  </Section>
-  <Section>
     <Heading>SSH-Zugangsdaten</Heading>
     <ColumnLayout l={[2, 1]} m={[2, 1]}>
       <Select defaultSelectedKey="1">
         <Label>SSH-Benutzer</Label>
         <Option value="1">
-          mStudio Benutzer (j.eimertenbrink@mittwald.de)
+          mStudio Benutzer (m.muster@mittwald.de)
         </Option>
       </Select>
     </ColumnLayout>
@@ -100,7 +85,7 @@ import {
           <TableCell>
             <Align>
               <Text>j.eimertenbrink</Text>
-              <CopyButton value="j.eimertenbrink" />
+              <CopyButton value="m.muster" />
             </Align>
           </TableCell>
         </TableRow>
@@ -118,7 +103,7 @@ import {
           <TableCell>
             <Align>
               <Text>j.eimertenbrink@ssh.mittwald.host</Text>
-              <CopyButton value="j.eimertenbrink@ssh.mittwald.host" />
+              <CopyButton value="m.muster@ssh.mittwald.host" />
             </Align>
           </TableCell>
         </TableRow>
