@@ -1,7 +1,7 @@
 # Best Practices
 
 - Anlegen und Bearbeiten finden immer in einem
-  [Modal](/03-components/overlays/modal) oder OffCanvas statt - so können User
+  [Modal](/03-components/overlays/modal) oder OffCanvas statt – so können User
   Prozesse überall starten, ohne den Workflow zu unterbrechen.
 - Halte den Anlegeprozess schlank und versuche, auf Defaults zu setzen. Details
   können vom User später auf der Detailseite angepasst werden.
@@ -22,29 +22,30 @@
 Anlege- und Bearbeitungsprozesse werden im mStudio grundsätzlich in einem
 [Modal](/03-components/overlays/modal) ausgeführt. So kann der User jederzeit
 den passenden Prozess starten, ohne seinen Workflow zu unterbrechen. Das Modal
-gibt es in der klassischen Modal Darstellung und als OffCanvas-Variant:
+gibt es in der klassischen Modal Darstellung und als
+[Off-Canvas](/03-components/overlays/modal/overview#variants)-Variant:
 
 - Modal: Für kurze, fokussierte Prozesse – etwa einfache Formulare oder schnelle
   Einstellungen, die der User direkt erledigt.
 - OffCanvas: Für komplexere Abläufe mit mehreren Schritten oder umfangreichen
-  Eingaben. Eine flexible Breite sowie die Möglichkeit, zu scrollen, sorgt für
+  Eingaben. Eine flexible Breite sowie die Möglichkeit, zu scrollen, sorgen für
   Übersichtlichkeit und bessere Orientierung.
 
 ## Abhängige Information
 
 Viele Anlege- bzw. Bearbeitungsprozesse benötigen Informationen aus anderen
-anderen Prozessen. Diese Informationen können entweder fehlen oder bereits
-vorhanden sein:
+Prozessen. Diese Informationen können entweder fehlen oder bereits vorhanden
+sein:
 
 **Fehlende Informationen**: Manche Prozesse lassen sich erst abschließen, wenn
 bestimmte Voraussetzungen erfüllt sind. So können z. B. Buchungsprozesse nur
-abgeschlossen werden, wenn bereits ein Vertragspartner existiert.
+abgeschlossen werden, wenn bereits ein Vertragspartner existiert. Zum Beispiel:
 
-**Beispiel**: Eine Extension kann nur installiert werden, wenn in der gewählten
-Organisation bereits ein Vertragspartner existiert. Fehlt dieser, erscheint ein
-[Alert](/03-components/status/alert) mit einer Erklärung und der Möglichkeit,
-direkt in den „Vertragspartner anlegen“-Prozess zu starten – ohne den aktuellen
-Kontext zu verlassen.
+- Eine Extension kann nur installiert werden, wenn in der gewählten Organisation
+  bereits ein Vertragspartner existiert. Fehlt dieser, erscheint ein
+  [Alert](/03-components/status/alert) mit einer Erklärung und der Möglichkeit,
+  direkt in den „Vertragspartner anlegen“-Prozess zu starten – ohne den
+  aktuellen Kontext zu verlassen.
 
 <LiveCodeEditor example="install-extension" editorCollapsed />
 
@@ -84,8 +85,9 @@ lassen sich nach dem Anlegen jederzeit auf der Detailseite anpassen.
 
 Ein leerer Zustand bedeutet: Es wurden noch keine Elemente angelegt. In diesem
 Fall ersetzt die
-[IllustratedMessage](/03-components/content/illustrated-message) die List und
-bietet einen großen CTA zum Anlegen des ersten Elements.
+[IllustratedMessage](/03-components/content/illustrated-message) die
+[List](/03-components/structure/list/overview) und bietet einen großen CTA zum
+Anlegen des ersten Elements.
 
 **Beispiel**: Sind noch keine Projekte angelegt, wird in der Projektübersicht
 eine [IllustratedMessage](/03-components/content/illustrated-message) angezeigt.
@@ -123,8 +125,8 @@ abgefragt, um welche Art von Domain es sich handelt.
 
 ## Mehr als 5 oder erklärungsbedürftige Elemente
 
-Viele oder erklärungsbedürftige Optionen gibt es z. B. beim Installieren einer
-App. Um den User in einer solchen Situation gut zu leiten, öffnet der
+Viele oder erklärungsbedürftige Optionen gibt es z. B. beim Installieren eines
+CMS. Um den User in einer solchen Situation gut zu leiten, öffnet der
 Anlege-[Button](/03-components/actions/button) zunächst ein
 Auswahl-[Modal](/03-components/overlays/modal) im OffCanvas. Dort kann der User
 filtern, suchen und sich über jedes Element kurz informieren. Danach genügt ein
