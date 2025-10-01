@@ -18,11 +18,13 @@ const DefaultSearchFieldRender: SearchFieldRenderComponent = (props) => {
   const { onChange, value, autoSubmit = true, ...searchFieldProps } = props;
 
   const [searchString, setSearchString] = useState(value ?? "");
+  const [previousSearchString, setPreviousSearchString] = useState("");
 
   const submitSearch = () => {
     if (searchString.trim() === "") {
       onChange(undefined);
-    } else {
+    } else if (previousSearchString !== searchString) {
+      setPreviousSearchString(searchString);
       onChange(searchString);
     }
   };
