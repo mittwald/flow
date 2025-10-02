@@ -9,7 +9,7 @@ import {
 import { getPropsMerger } from "@/lib/react/getPropsMerger";
 
 const merger = getPropsMerger({
-  mergeClassNames: false,
+  mergeClassNames: true,
   mergeEventHandler: false,
 });
 

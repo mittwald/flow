@@ -1,19 +1,16 @@
 import { type FC, type PropsWithChildren, type ReactNode } from "react";
 import { useState } from "react";
 import * as Aria from "react-aria-components";
-import styles from "../FormField/FormField.module.scss";
-import clsx from "clsx";
-import type { PropsContext } from "@/lib/propsContext";
-import { PropsContextProvider } from "@/lib/propsContext";
-import { FieldError } from "@/components/FieldError";
 import { FieldDescription } from "@/components/FieldDescription";
 import locales from "./locales/*.locale.json";
 import { useLocalizedStringFormatter } from "react-aria";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
+import type { UseFieldComponent } from "@/lib/hooks/useFieldComponent";
 
 export interface TextFieldBaseProps
   extends PropsWithChildren<Omit<Aria.TextFieldProps, "children">>,
-    Pick<FlowComponentProps<HTMLInputElement>, "ref"> {
+    Pick<FlowComponentProps<HTMLInputElement>, "ref">,
+    Pick<UseFieldComponent, "FieldErrorView"> {
   /** The input element */
   input: ReactNode;
   /** Whether a character count should be displayed inside the field description. */
@@ -21,29 +18,21 @@ export interface TextFieldBaseProps
 }
 
 export const TextFieldBase: FC<TextFieldBaseProps> = (props) => {
-  const { children, className, input, showCharacterCount, ref, ...rest } =
-    props;
+  const {
+    children,
+    className,
+    input,
+    showCharacterCount,
+    ref,
+    FieldErrorView,
+    ...rest
+  } = props;
 
   const [charactersCount, setCharactersCount] = useState(
     props.value?.length ?? 0,
   );
 
-  const rootClassName = clsx(styles.formField, className);
-
   const translation = useLocalizedStringFormatter(locales);
-
-  const propsContext: PropsContext = {
-    Label: {
-      className: styles.label,
-      optional: !props.isRequired,
-    },
-    FieldDescription: {
-      className: styles.fieldDescription,
-    },
-    FieldError: {
-      className: styles.customFieldError,
-    },
-  };
 
   const handleOnChange = (v: string) => {
     if (showCharacterCount) {
@@ -74,20 +63,16 @@ export const TextFieldBase: FC<TextFieldBaseProps> = (props) => {
     <Aria.TextField
       ref={ref}
       {...rest}
-      className={rootClassName}
+      className={className}
       onChange={handleOnChange}
       {...propsWithOptionalStringValue}
     >
-      <PropsContextProvider props={propsContext}>
-        {children}
-      </PropsContextProvider>
+      {children}
       {input}
       {showCharacterCount && (
-        <FieldDescription className={styles.fieldDescription}>
-          {charactersCountDescription}
-        </FieldDescription>
+        <FieldDescription>{charactersCountDescription}</FieldDescription>
       )}
-      <FieldError className={styles.fieldError} />
+      <FieldErrorView />
     </Aria.TextField>
   );
 };

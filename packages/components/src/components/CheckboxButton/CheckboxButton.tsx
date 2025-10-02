@@ -6,6 +6,7 @@ import type { CheckboxProps } from "@/components/Checkbox";
 import { Checkbox } from "@/components/Checkbox";
 import type { FlowComponentProps } from "@/lib/componentFactory/flowComponent";
 import { flowComponent } from "@/lib/componentFactory/flowComponent";
+import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
 
 export interface CheckboxButtonProps
   extends CheckboxProps,
@@ -16,19 +17,24 @@ export const CheckboxButton = flowComponent("CheckboxButton", (props) => {
   const { children, className, ref, ...rest } = props;
 
   const rootClassName = clsx(styles.checkboxButton, className);
+  const { propsContext, mergedRootClassName } = useFieldComponent(
+    props,
+    rootClassName,
+  );
 
-  const propsContext: PropsContext = {
+  const mergedPropsContext: PropsContext = {
     Text: {
       className: styles.label,
     },
     Content: {
       className: styles.content,
     },
+    ...propsContext,
   };
 
   return (
-    <Checkbox {...rest} className={rootClassName} ref={ref}>
-      <PropsContextProvider props={propsContext}>
+    <Checkbox {...rest} className={mergedRootClassName} ref={ref}>
+      <PropsContextProvider props={mergedPropsContext}>
         {children}
       </PropsContextProvider>
     </Checkbox>
