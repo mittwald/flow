@@ -19,7 +19,7 @@
   object-fit: cover;
 }
 
-.header {
+.headerNavigation {
   padding-block: var(--layout-card--padding);
 }
 
@@ -38,7 +38,6 @@
 
 .logo {
   height: var(--size-px--xl);
-  margin-block: calc(var(--size-px--s) * -1);
 }
 
 .wrapper {
@@ -75,6 +74,7 @@
 
 .tabsContainer {
   min-width: 0;
+  flex-grow: 1;
 }
 
 .tabs {
@@ -108,6 +108,7 @@
 
 @media (max-width: 1400px) {
   .mainNavigation,
+  .mainNavigation,
   .headerNavigation,
   .anchorNavigation {
     display: none !important;
@@ -115,15 +116,12 @@
 
   .mobileNavigation {
     display: flex;
+    padding-block: var(--size-px--m);
   }
   .mobileNavigationOffCanvas {
     h3 {
       display: none;
     }
-  }
-
-  .header {
-    padding-block: var(--size-px--m);
   }
 
   .headerContent {

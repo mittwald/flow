@@ -25,9 +25,6 @@ export const Navigation = flowComponent("Navigation", (props) => {
     wrapWith: <li />,
     className: styles.item,
     unstyled: true,
-    Text: {
-      className: styles.text,
-    },
     Icon: {
       className: styles.icon,
     },
