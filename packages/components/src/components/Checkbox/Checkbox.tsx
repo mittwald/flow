@@ -9,6 +9,8 @@ import clsx from "clsx";
 import type { PropsWithChildren } from "react";
 import * as Aria from "react-aria-components";
 import styles from "./Checkbox.module.scss";
+import { useFieldComponent } from "@/lib/hooks/useFieldComponent";
+import { PropsContextProvider } from "@/lib/propsContext";
 
 export interface CheckboxProps
   extends PropsWithChildren<Omit<Aria.CheckboxProps, "children">>,
@@ -20,21 +22,27 @@ export const Checkbox = flowComponent("Checkbox", (props) => {
 
   const rootClassName = clsx(styles.checkbox, className);
 
+  const { FieldErrorView, propsContext, mergedRootClassName } =
+    useFieldComponent(props);
+
   return (
-    <Aria.Checkbox {...rest} className={rootClassName} ref={ref}>
-      {({ isSelected, isIndeterminate }) => (
-        <>
-          {isSelected ? (
-            <IconCheckboxChecked className={styles.icon} />
-          ) : isIndeterminate ? (
-            <IconCheckboxIndeterminate className={styles.icon} />
-          ) : (
-            <IconCheckboxEmpty className={styles.icon} />
-          )}
-          {children}
-        </>
-      )}
-    </Aria.Checkbox>
+    <div className={mergedRootClassName}>
+      <Aria.Checkbox {...rest} className={rootClassName} ref={ref}>
+        {({ isSelected, isIndeterminate }) => (
+          <PropsContextProvider props={propsContext}>
+            {isSelected ? (
+              <IconCheckboxChecked className={styles.icon} />
+            ) : isIndeterminate ? (
+              <IconCheckboxIndeterminate className={styles.icon} />
+            ) : (
+              <IconCheckboxEmpty className={styles.icon} />
+            )}
+            {children}
+          </PropsContextProvider>
+        )}
+      </Aria.Checkbox>
+      <FieldErrorView />
+    </div>
   );
 });
 
