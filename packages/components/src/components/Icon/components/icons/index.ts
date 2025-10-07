@@ -36,6 +36,7 @@ export { IconDirectory } from "./IconDirectory";
 export { IconDelete } from "./IconDelete";
 export { IconDeliveryBox } from "./IconDeliveryBox";
 export { IconDnsZone } from "./IconDnsZone";
+export { IconDnsSubZone } from "./IconDnsSubZone";
 export { IconDomain } from "./IconDomain";
 export { IconDownload } from "./IconDownload";
 export { IconEdit } from "./IconEdit";
