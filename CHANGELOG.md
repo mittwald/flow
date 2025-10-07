@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.506](https://github.com/mittwald/flow/compare/0.2.0-alpha.505...0.2.0-alpha.506) (2025-10-07)
+
+### Bug Fixes
+
+* **Action:** fix confirmation modal not working ([09edaf9](https://github.com/mittwald/flow/commit/09edaf9a885446bf1a90db37611f29b154dc2f23))
+
 # [0.2.0-alpha.505](https://github.com/mittwald/flow/compare/0.2.0-alpha.504...0.2.0-alpha.505) (2025-10-07)
 
 ### Features
