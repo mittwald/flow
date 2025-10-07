@@ -13,5 +13,5 @@ export const sessionTokenPayload = z.object({
   scopes: extensionScopes,
   authenticatableWithoutSecret: z.boolean(),
   publicKeySerial: z.string(),
-  variantKey: z.string().optional(),
+  variantKey: z.string().optional().nullable(),
 });
