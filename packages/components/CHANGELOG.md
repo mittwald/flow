@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.505](https://github.com/mittwald/flow/compare/0.2.0-alpha.504...0.2.0-alpha.505) (2025-10-07)
+
+### Features
+
+* **Icon:** add IconDnsSubZone ([#2058](https://github.com/mittwald/flow/issues/2058)) ([38e0198](https://github.com/mittwald/flow/commit/38e0198df9886dca9e961f604d3d881bd8c19415))
+
 # [0.2.0-alpha.504](https://github.com/mittwald/flow/compare/0.2.0-alpha.503...0.2.0-alpha.504) (2025-10-01)
 
 **Note:** Version bump only for package @mittwald/flow-react-components
