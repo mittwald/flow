@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-alpha.507](https://github.com/mittwald/flow/compare/0.2.0-alpha.506...0.2.0-alpha.507) (2025-10-07)
+
+### Bug Fixes
+
+* **Ext-Bridge:** fix validation issue in session token ([b288441](https://github.com/mittwald/flow/commit/b2884417048e0f1be1b22da48b4e2c14404f28d2))
+
 # [0.2.0-alpha.506](https://github.com/mittwald/flow/compare/0.2.0-alpha.505...0.2.0-alpha.506) (2025-10-07)
 
 ### Bug Fixes
